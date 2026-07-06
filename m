@@ -1,68 +1,67 @@
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A1673DCD99
-	for <mfd@lists.linux.dev>; Mon,  6 Jul 2026 23:08:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FB6C3E5A23
+	for <mfd@lists.linux.dev>; Mon,  6 Jul 2026 23:08:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783379294; cv=none; b=DQ1Ai+m2lLyI0BHnkkI+8HF8mwgKkOuH4YZG2RuYnnSYm2zH5ZGQgm0ljgHT7m+lDf8Uoe6t8X9DS+CQBUsS8m4BPvgLeOD6LsyZyUQjrJxj1XAxIpYD/1iBc6f70cNcyv97YiNJdq800TYLJkQhY0+8HnaHSQsnTH9JESujBxc=
+	t=1783379298; cv=none; b=UUUJg/+p6+ByWc6EK9KXoh5YHin0v8FyNklQlHU+pa1yOMKhtMbuO+n9tqWmrtoli/8aQMT1KPYB6kfDq1nHbtvymFby+hd072cZPJ/GduZRq1AWAZMILjTvuhLLytNLtiuvRQDOZKGDJOFD0QcqYBB43X+1GsZuDjJq8NROT2I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783379294; c=relaxed/simple;
-	bh=ZsH2mhoTn+4LyIOxcWmlTMcbwZtvd4wkXs7IPubdVhY=;
+	s=arc-20240116; t=1783379298; c=relaxed/simple;
+	bh=b2ZnvjmYlxdAut7fgGOR0UlhnXhDVQEmivV9lwo3aig=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=YfX7VttvynowxY7bJlF3GMcYQngvUsR2Ehx82NB3WFgbWOjc5tqSsWrUE5UBq3Pe1CfMw26uVM8FBCUq2sVTeIl+dpYm/lIxVDfwReVCCn2CUBF6EapbuosTXq1AiRE/aNceE4qY2/oDPLzJESvMjcr7O8NjIOOZxzmjssSt8iM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=qZ3a8y3g; arc=none smtp.client-ip=209.85.216.45
+	 In-Reply-To:To:Cc; b=pOnmLjv7Z44Up+NZtdNxA94DJqhbk+DFaiSeBj5lToEBxj6SRdLMr9AiIV/Rv90WpITuVeY0rCO2j80K7P8cgRr9uF6H33tLg0mn7gPfZVthZLgezq1ZvfaRxbWPCWy0npgTULUZ3fiUYv/CxWt5nEvtnE85K0jnPi+Y1c0xSX0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LhUMsUvj; arc=none smtp.client-ip=209.85.214.179
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="qZ3a8y3g"
-Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-381018b9375so3643032a91.0
-        for <mfd@lists.linux.dev>; Mon, 06 Jul 2026 16:08:12 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LhUMsUvj"
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2cc97653887so18906705ad.1
+        for <mfd@lists.linux.dev>; Mon, 06 Jul 2026 16:08:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783379292; x=1783984092; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1783379295; x=1783984095; darn=lists.linux.dev;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=6iHyWK1AiRinQ8FOJrMNctgRje0UcauACIBMIEEqVRg=;
-        b=qZ3a8y3gbYANuV2xUWm4hD2m7zfGEQlT6Jol2UnKqvxr7yE/tGtOIyFr6twYDY1sWt
-         CcdARFR3HZYxY1eyKqh2/wDlvYPGKUzTQHatHMG5pEv4NEPxah7sqmWniKrobEerNB6E
-         U052jLvGG2iVN9t2kZErBE7SXmF9s976DexLcdaIpfh1xPNKTaqdq+Xg64VtzGWi/4bC
-         St6YiY9POK0tFsTenjQjBLjm82+VszqKwIm9TAvaBSDfbpjvUC/2mx0V2pANdCIIYKEn
-         BL8nLjPYDMUI9GpLVol6jzhMfobwE+1L2ZkzibnQCafl84IA1MazhjjIBBXm9H8ZZH5V
-         3n0A==
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=3lfb1RxD9aMb85dYSn2fxKU1JInUShVKDODq6tQ/OzQ=;
+        b=LhUMsUvjFQ2CyXm/2B5z0J11u2tn4iScMvfngWS2JYjiBY7TazBbcJ83Jrwec15G6C
+         WvN44mY/kli+GtXjszWu3krdXZ+eZZ68YJ488OcIf3YuLHtQVFY5KEbh7t2OaSB3jqIT
+         VBYCIit7qloX3XsthFdnjvdx3L8AOMBZG7/WmHUO7ER7+a6vWxBtvg4G9KOPAheSLh/C
+         eqFvGviTYv1Oa7UzY8IMAP1SbxUjV0A6ZvCcd4Zsn9onK2dowcKwJffPYE0cORFrZXlD
+         Xhj8MO2RMGVwfx7jIZ8WP+ljfAVPVr9IpYYZk5ih7lXakWzqAmoGq2p4hYaInsjyzkkg
+         nG2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783379292; x=1783984092;
+        d=1e100.net; s=20251104; t=1783379295; x=1783984095;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=6iHyWK1AiRinQ8FOJrMNctgRje0UcauACIBMIEEqVRg=;
-        b=ryp5s9iZ8l8DYrAUYGnz2VVAKV1JQRWexpf0RMy5R9Age9laOEm6Q+DlDyBtFJkW4A
-         3yHKAyYJfZH6OWkdf8VEaI3mooMNXwWEqBQXtPhKr82m79Ntci+NjMKi9m5tDAKh2XyB
-         wqhNC6H0uO5eQo4dm4u8+ehXQo3BMSjPYjNutl7knAkMDlkwF5TLhSf3JXlAUVkAz+B+
-         gYvsqYScRjK7ntP9DC8bKOUA2odQMVMyOMOL47zas0hbZOzLRhc5KMIje2D+U2KSNcHN
-         7yYXCPV4G0Q6oVkuBryaw3ETTR0GDzscy+dSETPZ6vptChTBlxVvRrNEAYOVYByuSK8t
-         1/2g==
-X-Gm-Message-State: AOJu0YxFOsiAk69CkoWuE439M74ougU33lOiyN7BfT1/jsShADJIogEX
-	OVeMitKcuprDLYw7JsyEmi9CJkhunS6UQRqGRAcThAIKUHKCXRlgXm6KRjp5ag==
-X-Gm-Gg: AfdE7cmyqgLCC6km2Ofr0ypUv30nal+t06w+ob0qxVoAhLOiOtouyUgUuvrKEy6yPRD
-	bIdBBWScbIcC5SCWBZ+pgtS6TClZ6tXb/xq2nr21BL1ABU0hJyrJtE/Demxq8wWzGkI3dDQR6IZ
-	6ZegM+DtExT25F67yj+pR6Vyc2SCk9+TdX/4SMXYgfSqyf2WyU9mmZx/DuwlDYLQT2evq4Mw04V
-	zqUD1E9QabOIWX7oiEb9J3TJTHK7DFxqXlKSnM7EUz997R48qWQfO4kB06upYrg3Fl6+4v0hRt6
-	11zvRznitZ7qEp5R1Sg0OJgy2JLev4jEpUD8pizLJZ0p0Fhqn6BxrQnyQH8lu4vqlLD0LID7GKz
-	mZ6Fp/iUHkDblAsNsRpnV4TLCHmP+lur59UatQ1KHZUsNJXVdm4m/pbP7xSxMctY/GiPbV0FRwW
-	8bgMWGbYwH2XDVC+OMCQACVn90VQzfJ3xF7S1uD1SWng4k8gaZRtjNkdNaj715tEQWm54cPAtpb
-	kQU
-X-Received: by 2002:a17:90b:586d:b0:37f:9ce1:cdb3 with SMTP id 98e67ed59e1d1-3875a1ba886mr2628524a91.33.1783379292456;
-        Mon, 06 Jul 2026 16:08:12 -0700 (PDT)
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=3lfb1RxD9aMb85dYSn2fxKU1JInUShVKDODq6tQ/OzQ=;
+        b=D9E/rq/1w6auOpM4XxFu13ZOhaMl6WHGVeIOdccB3sLkvG064sCZ9UyJm6jZuUPRB+
+         iq1ffFQ/N+FqyC/fKmzOQZwxh90ZkA8oZGgQqFO0doZdDymyoNTk1oaTjDCqt6QoxSb/
+         NY/sWr5/6VJhgoly0rFyWr0HHOAxfpfAg0G6KVFOLblDThwmIP/WX9fELUebAFUIUn+v
+         BwuomnGlOO3QRgj0WTAWKGirDGmm54/DyOpHeKG/oBH+2tqgnFURnmvsWSMJxQvTsxxc
+         U//ZiaItXE+CVc09PQ7cnzuGwX+wMY0p3IERk2RNi4H7yMIETQfovEAIEClfWFKaZ79D
+         e4Mg==
+X-Gm-Message-State: AOJu0YzE7KuNpQBehdqcBjn5cNlT91B8EEr00l/i88kMy2qgIic9dqIV
+	3gAzGPXpAaPMYDl0qBtZaKN7kzajyGoqWD0KxRMDyER9ncKGpZk0IC4x
+X-Gm-Gg: AfdE7cnobm2wHkMCPDNDYWnMkmUku7D5rzD8twk3vlnlNprGBgh+kD+6E64xtUNiFuc
+	eFWnsqQdEfbDiYlxGtSzwjD5BWJuo9AcaGspvlwNA3pktiqZ/D2zo079CxnvMuGQbmLgY9liRXo
+	qTBxINgQzyW7K5rBfz6sfusVaXdMIOKrcKydvc+G6gOdJiZ7SQCKfaK2DNvUnu5FLKZnwGlc/1t
+	pKy2q8r+WRPXsehT6/nUGambnv0Ic8XNFp4Azkmp9+SFjaUxV69V4arg+F/3s1T5t/EjG1GbIhi
+	pAQxSvlHDLJBQbwnOwyqESGlDYzJa3pyW0FSZ38Oe2ukv+mDFVj38kE2h24FKfL7Uxddyhoh6hQ
+	353X4wFFG5aYIvIWpAHJ29yRylvZrgatTXI5hwRYADgNE3o2dV2cdKWc9JwafPtWISMb0Qf5p5m
+	ALNGJCiZuJVKc3nPlftAFkJivN6rGLGSqofMS0Y5Qsj66THQn5IuQCt1WD5R3939GNbwpJ3qdIk
+	Dnh
+X-Received: by 2002:a17:90a:dfcc:b0:37f:c69d:ce69 with SMTP id 98e67ed59e1d1-3875595ae02mr2657273a91.10.1783379294261;
+        Mon, 06 Jul 2026 16:08:14 -0700 (PDT)
 Received: from dtor-ws.sjc.corp.google.com ([2a00:79e0:2ebe:8:d89b:1fdd:a8f2:dbeb])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-311747f598dsm1259148eec.6.2026.07.06.16.08.10
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-311747f598dsm1259148eec.6.2026.07.06.16.08.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Jul 2026 16:08:11 -0700 (PDT)
+        Mon, 06 Jul 2026 16:08:13 -0700 (PDT)
 From: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-Date: Mon, 06 Jul 2026 16:08:04 -0700
-Subject: [PATCH 1/2] mfd: ucb1x00: register software node for GPIO
- controller
+Date: Mon, 06 Jul 2026 16:08:05 -0700
+Subject: [PATCH 2/2] mfd: ucb1x00: convert Assabet gpio-keys to use
+ software nodes
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -71,7 +70,7 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260706-ucb1x00-assabet-swnode-v1-1-6102eabd31d0@gmail.com>
+Message-Id: <20260706-ucb1x00-assabet-swnode-v1-2-6102eabd31d0@gmail.com>
 References: <20260706-ucb1x00-assabet-swnode-v1-0-6102eabd31d0@gmail.com>
 In-Reply-To: <20260706-ucb1x00-assabet-swnode-v1-0-6102eabd31d0@gmail.com>
 To: Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
@@ -79,83 +78,148 @@ To: Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
 Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org
 X-Mailer: b4 0.16-dev-b242f
 
-Define a static software node for the UCB1x00 GPIO controller and attach
-it to the core MFD device in ucb1x00_probe(). This node will also be
-used by the created GPIO chip.
+Convert the legacy gpio-keys platform device on the StrongARM SA-1100
+Assabet evaluation board to use software nodes and device properties.
+This allows describing the buttons and their GPIO bindings via software
+nodes so that platform data support can eventually be removed from the
+gpio-keys driver.
 
-This allows machine subdrivers (such as Assabet evaluation board
-support) to reference the UCB1x00 GPIO controller in property entries
-when converting legacy platform data to software nodes, resolving pin
-bindings directly via the attached firmware node without relying on
-name matching.
+Define static software nodes for the gpio-keys device and the six button
+child nodes at file scope using relative pin indexing on the UCB1x00 GPIO
+controller node. In ucb1x00_assabet_add(), register the software node
+group and use platform_device_register_full() to register the device.
 
 Assisted-by: Antigravity:gemini-3.5-flash
 Signed-off-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
 ---
- drivers/mfd/ucb1x00-core.c  | 12 ++++++++++++
- include/linux/mfd/ucb1x00.h |  3 +++
- 2 files changed, 15 insertions(+)
+ drivers/mfd/ucb1x00-assabet.c | 88 ++++++++++++++++++++++++++++++++-----------
+ 1 file changed, 66 insertions(+), 22 deletions(-)
 
-diff --git a/drivers/mfd/ucb1x00-core.c b/drivers/mfd/ucb1x00-core.c
-index 16f64e2b2f77..8d1c34c53955 100644
---- a/drivers/mfd/ucb1x00-core.c
-+++ b/drivers/mfd/ucb1x00-core.c
-@@ -25,8 +25,13 @@
- #include <linux/mutex.h>
- #include <linux/mfd/ucb1x00.h>
- #include <linux/pm.h>
+diff --git a/drivers/mfd/ucb1x00-assabet.c b/drivers/mfd/ucb1x00-assabet.c
+index 6a389737c615..c11fe96f767d 100644
+--- a/drivers/mfd/ucb1x00-assabet.c
++++ b/drivers/mfd/ucb1x00-assabet.c
+@@ -6,15 +6,17 @@
+  *
+  *  We handle the machine-specific bits of the UCB1x00 driver here.
+  */
+-#include <linux/module.h>
+-#include <linux/init.h>
+ #include <linux/device.h>
+ #include <linux/err.h>
+ #include <linux/fs.h>
+-#include <linux/gpio_keys.h>
++#include <linux/gpio/machine.h>
++#include <linux/gpio/property.h>
++#include <linux/init.h>
+ #include <linux/input.h>
++#include <linux/module.h>
+ #include <linux/platform_device.h>
+ #include <linux/proc_fs.h>
 +#include <linux/property.h>
- #include <linux/gpio/driver.h>
+ #include <linux/mfd/ucb1x00.h>
  
-+const struct software_node ucb1x00_gpiochip_node = {
-+	.name = "ucb1x00-gpio",
+ #define UCB1X00_ATTR(name,input)\
+@@ -34,31 +36,71 @@ UCB1X00_ATTR(vbatt, UCB_ADC_INP_AD1);
+ UCB1X00_ATTR(vcharger, UCB_ADC_INP_AD0);
+ UCB1X00_ATTR(batt_temp, UCB_ADC_INP_AD2);
+ 
++static const struct property_entry ucb1x00_gpio_keys_props[] = {
++	PROPERTY_ENTRY_STRING("label", "ucb1x00"),
++	PROPERTY_ENTRY_U32("poll-interval", 50),
++	{ }
 +};
 +
- static DEFINE_MUTEX(ucb1x00_mutex);
- static LIST_HEAD(ucb1x00_drivers);
- static LIST_HEAD(ucb1x00_devices);
-@@ -530,6 +535,10 @@ static int ucb1x00_probe(struct mcp *mcp)
- 	ucb->id  = id;
- 	ucb->mcp = mcp;
++static const struct software_node ucb1x00_gpio_keys_node = {
++	.name = "ucb1x00-gpio-keys",
++	.properties = ucb1x00_gpio_keys_props,
++};
++
++#define UCB1X00_BTN_PROPS(_idx)						\
++static const struct property_entry ucb1x00_btn##_idx##_props[] = {	\
++	PROPERTY_ENTRY_U32("linux,code", BTN_0 + (_idx)),		\
++	PROPERTY_ENTRY_GPIO("gpios", &ucb1x00_gpiochip_node,		\
++			    _idx, GPIO_ACTIVE_HIGH),			\
++	PROPERTY_ENTRY_STRING("label", "btn" #_idx),			\
++	PROPERTY_ENTRY_BOOL("linux,can-disable"),			\
++	{ }								\
++};									\
++static const struct software_node ucb1x00_btn##_idx##_node = {		\
++	.parent = &ucb1x00_gpio_keys_node,				\
++	.properties = ucb1x00_btn##_idx##_props,			\
++}
++
++UCB1X00_BTN_PROPS(0);
++UCB1X00_BTN_PROPS(1);
++UCB1X00_BTN_PROPS(2);
++UCB1X00_BTN_PROPS(3);
++UCB1X00_BTN_PROPS(4);
++UCB1X00_BTN_PROPS(5);
++
++static const struct software_node * const ucb1x00_assabet_swnodes[] = {
++	&ucb1x00_gpio_keys_node,
++	&ucb1x00_btn0_node,
++	&ucb1x00_btn1_node,
++	&ucb1x00_btn2_node,
++	&ucb1x00_btn3_node,
++	&ucb1x00_btn4_node,
++	&ucb1x00_btn5_node,
++	NULL
++};
++
+ static int ucb1x00_assabet_add(struct ucb1x00_dev *dev)
+ {
+ 	struct ucb1x00 *ucb = dev->ucb;
++	struct platform_device_info pdevinfo = {
++		.name = "gpio-keys",
++		.id = PLATFORM_DEVID_NONE,
++		.parent = &ucb->dev,
++		.swnode = &ucb1x00_gpio_keys_node,
++	};
+ 	struct platform_device *pdev;
+-	struct gpio_keys_platform_data keys;
+-	static struct gpio_keys_button buttons[6];
+-	unsigned i;
+-
+-	memset(buttons, 0, sizeof(buttons));
+-	memset(&keys, 0, sizeof(keys));
+-
+-	for (i = 0; i < ARRAY_SIZE(buttons); i++) {
+-		buttons[i].code = BTN_0 + i;
+-		buttons[i].gpio = ucb->gpio.base + i;
+-		buttons[i].type = EV_KEY;
+-		buttons[i].can_disable = true;
+-	}
++	int ret;
  
-+	ret = device_add_software_node(&ucb->dev, &ucb1x00_gpiochip_node);
+-	keys.buttons = buttons;
+-	keys.nbuttons = ARRAY_SIZE(buttons);
+-	keys.poll_interval = 50;
+-	keys.name = "ucb1x00";
++	ret = software_node_register_node_group(ucb1x00_assabet_swnodes);
 +	if (ret)
-+		goto err_swnode_add;
++		return ret;
+ 
+-	pdev = platform_device_register_data(&ucb->dev, "gpio-keys", -1,
+-		&keys, sizeof(keys));
++	pdev = platform_device_register_full(&pdevinfo);
++	ret = PTR_ERR_OR_ZERO(pdev);
++	if (ret) {
++		software_node_unregister_node_group(ucb1x00_assabet_swnodes);
++		return ret;
++	}
+ 
+ 	device_create_file(&ucb->dev, &dev_attr_vbatt);
+ 	device_create_file(&ucb->dev, &dev_attr_vcharger);
+@@ -75,6 +117,8 @@ static void ucb1x00_assabet_remove(struct ucb1x00_dev *dev)
+ 	if (!IS_ERR(pdev))
+ 		platform_device_unregister(pdev);
+ 
++	software_node_unregister_node_group(ucb1x00_assabet_swnodes);
 +
- 	ret = device_add(&ucb->dev);
- 	if (ret)
- 		goto err_dev_add;
-@@ -604,6 +613,8 @@ static int ucb1x00_probe(struct mcp *mcp)
-  err_no_irq:
- 	device_del(&ucb->dev);
-  err_dev_add:
-+	device_remove_software_node(&ucb->dev);
-+ err_swnode_add:
- 	put_device(&ucb->dev);
-  out:
- 	if (pdata && pdata->reset)
-@@ -630,6 +641,7 @@ static void ucb1x00_remove(struct mcp *mcp)
- 
- 	irq_set_chained_handler(ucb->irq, NULL);
- 	irq_free_descs(ucb->irq_base, 16);
-+	device_remove_software_node(&ucb->dev);
- 	device_unregister(&ucb->dev);
- 
- 	if (pdata && pdata->reset)
-diff --git a/include/linux/mfd/ucb1x00.h b/include/linux/mfd/ucb1x00.h
-index ede237384723..214c71a12e84 100644
---- a/include/linux/mfd/ucb1x00.h
-+++ b/include/linux/mfd/ucb1x00.h
-@@ -103,6 +103,9 @@
- #define UCB_MODE_DYN_VFLAG_ENA	(1 << 12)
- #define UCB_MODE_AUD_OFF_CAN	(1 << 13)
- 
-+struct software_node;
-+extern const struct software_node ucb1x00_gpiochip_node;
-+
- enum ucb1x00_reset {
- 	UCB_RST_PROBE,
- 	UCB_RST_RESUME,
+ 	device_remove_file(&dev->ucb->dev, &dev_attr_batt_temp);
+ 	device_remove_file(&dev->ucb->dev, &dev_attr_vcharger);
+ 	device_remove_file(&dev->ucb->dev, &dev_attr_vbatt);
 
 -- 
 2.55.0.rc2.803.g1fd1e6609c-goog
