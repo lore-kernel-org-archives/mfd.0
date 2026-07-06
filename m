@@ -1,106 +1,130 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from cstnet.cn (smtp21.cstnet.cn [159.226.251.21])
+	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C10854E3763
-	for <mfd@lists.linux.dev>; Mon,  6 Jul 2026 09:20:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC5673148BF
+	for <mfd@lists.linux.dev>; Mon,  6 Jul 2026 09:23:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.226.251.21
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783329630; cv=none; b=dlIgyouv1AHPeInGShSu5ElxLrn29bog3SggyfbQpuTp/wJi9B0mWRDyoW/1P6osCwrbRJoGlwJurBhlyc1CmuXOoKfxd5909v+EYVe1hnlOn9+ec14pyLflRbEDCxHncDv1jlC5c4+mn7ZuT1oNNzHA6UgOhH9CKItBGL9ni0E=
+	t=1783329829; cv=none; b=e576/MHn8Nj88t/22O2cq/Kca/CsjNWr9NBhvStHo0qOgnzv2rQpRQagatTBt08qrHtTsKZ28rzubSzWbRMFX4pubT+QIXV9FDmrkgQ/KDj21pb6/Wf8ZwaDxg3ejAMKG4AnSCBDXfESV/2QIApL0LaRUxH4AW6qaXMlL8KGG64=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783329630; c=relaxed/simple;
-	bh=eF3WiwG/OO85RPuQqYrJL54HCQRdPZWGCE5wN6kt1CU=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=OkS5mTXGIO4pVVfsc3mpVOZH2qsKKCws8aMdMLCnioVncegAXUYI9V7131zOWmy23p9aHoNPHLoGzP/gF4p29AfXkB3eWSKVZCt5ugN9kWaSxAShqBqmXdJQQN3Gufn2bqngTS6KCe85WL59ZALiOCKH6uz4JO4PcnouEf02NHs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dNWDna8E; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dNWDna8E"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B03601F000E9;
-	Mon,  6 Jul 2026 09:20:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783329626;
-	bh=3QEnH2JQLZu02SFrmHsxRUDdDludMX6VBT8DUsJ4dms=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=dNWDna8Eu6SkcwreHkCRnUu250t5BjPg+m+AjFMI7uPQfuPGw2QufTc0LUpZaq8g0
-	 YzX0EqpKLO8Jz2ue7DPA6wESm/t+qqE4zpqiGC32A9gJ3wQRWKesBtt4PVlyk5ZmKM
-	 GQbXTkdMDg15cHchoEGYs1HII5YysAkv+T5n+qkqn+81pW18fMWdh8knKhuBl1dTmi
-	 ytTeHzThUTUXtQlZucNk32S27DKkDXvv9OG2OaUSY/UWjkGvw2z3KiXbXIrlCvY3DK
-	 uEuacvFSfsX2X3dh+eOCDCNFQVCaicLgreCQfW/Y+o1JzUdoshM305BP5RYwjecqJP
-	 mhlBE7XvoOJiw==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH] mfd: iqs62x: reject zero-length firmware records
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Pengpeng Hou" <pengpeng@iscas.ac.cn>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260706091034.75865-1-pengpeng@iscas.ac.cn>
-References: <20260706091034.75865-1-pengpeng@iscas.ac.cn>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 06 Jul 2026 09:20:24 +0000
-Message-Id: <20260706092026.B03601F000E9@smtp.kernel.org>
+	s=arc-20240116; t=1783329829; c=relaxed/simple;
+	bh=uf6iWYkBJPdl0xn669kP97vlXuaacTKOSMiQ6MKVP+0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=DZtOPcjJArGaqzVN3My546yWJ5ycPFUNcod37cpHdCSGK7eUTTCSK8olcgW5eNuM2nnTIHVtBOI35Kh5SYAZDMGYZZluJOgG+N1LvEhfMip4F1RadWKPjdtg/MQ4wENAqhM25+3U0Pwi63trhrg/YFUPJ3y8ygJ9K+9hwl537IM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.21
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iscas.ac.cn
+Received: from localhost.localdomain (unknown [111.196.245.140])
+	by APP-01 (Coremail) with SMTP id qwCowAAnxs4fdEtq6kLxBA--.35266S2;
+	Mon, 06 Jul 2026 17:23:43 +0800 (CST)
+From: Pengpeng Hou <pengpeng@iscas.ac.cn>
+To: Lee Jones <lee@kernel.org>
+Cc: Pengpeng Hou <pengpeng@iscas.ac.cn>,
+	mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] mfd: rave-sp: validate received frame lengths
+Date: Mon,  6 Jul 2026 17:23:37 +0800
+Message-ID: <20260706092337.78754-1-pengpeng@iscas.ac.cn>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:qwCowAAnxs4fdEtq6kLxBA--.35266S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7uFyxGr43AF47Ww17KFWxWFg_yoW8tF4Dpa
+	saq34Yyr45Jr4fX3y3J3yrXas0krWxKw4xtFnxJa4furnFq3WDGFWxGFy0qay0qwn3Ca42
+	kr4Yq3y5Ka1DArJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUyG14x267AKxVWUJVW8JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+	1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
+	JVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
+	CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+	2Ix0cI8IcVAFwI0_Jw0_WrylYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJV
+	W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42xK82IYc2Ij64vI
+	r41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8Gjc
+	xK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0
+	cI8IcVAFwI0_Gr0_Xr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw2
+	0EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x02
+	67AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUjTKZJUUUUU==
+X-CM-SenderInfo: pshqw1xhqjqxpvfd2hldfou0/
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
+The RAVE SP receive path derives event, reply and checksum
+fields from variable-length frames.
 
-Pre-existing issues:
-- [High] Copying from single-byte struct member `fw_rec->data` can trigger =
-a FORTIFY_SOURCE runtime panic when `len > 1`.
---
+Validate event and reply minimum lengths before reading their fixed
+fields, and derive the checksum payload pointer only after checking the
+frame length.
 
-commit 6a318070f0257b9e2c17486973e153120eee9929
-Author: Pengpeng <pengpeng@iscas.ac.cn>
-mfd: iqs62x: reject zero-length firmware records
+Signed-off-by: Pengpeng Hou <pengpeng@iscas.ac.cn>
+---
+ drivers/mfd/rave-sp.c | 28 +++++++++++++++++++++-------
+ 1 file changed, 21 insertions(+), 7 deletions(-)
 
-This commit prevents underflows when parsing IQS62x firmware by explicitly
-rejecting zero-length records and securely comparing the declared tail
-length against the remaining firmware bytes.
+diff --git a/drivers/mfd/rave-sp.c b/drivers/mfd/rave-sp.c
+index c1b78d127a26..0057fbfa1abf 100644
+--- a/drivers/mfd/rave-sp.c
++++ b/drivers/mfd/rave-sp.c
+@@ -388,10 +388,15 @@ EXPORT_SYMBOL_GPL(rave_sp_exec);
+ static void rave_sp_receive_event(struct rave_sp *sp,
+ 				  const unsigned char *data, size_t length)
+ {
+-	u8 cmd[] = {
+-		[0] = rave_sp_reply_code(data[0]),
+-		[1] = data[1],
+-	};
++	u8 cmd[2];
++
++	if (length < 3) {
++		dev_warn(&sp->serdev->dev, "Dropping short event\n");
++		return;
++	}
++
++	cmd[0] = rave_sp_reply_code(data[0]);
++	cmd[1] = data[1];
+ 
+ 	rave_sp_write(sp, cmd, sizeof(cmd));
+ 
+@@ -405,8 +410,14 @@ static void rave_sp_receive_reply(struct rave_sp *sp,
+ {
+ 	struct device *dev = &sp->serdev->dev;
+ 	struct rave_sp_reply *reply;
+-	const  size_t payload_length = length - 2;
++	size_t payload_length;
+ 
++	if (length < 2) {
++		dev_warn(dev, "Dropping short reply\n");
++		return;
++	}
++
++	payload_length = length - 2;
+ 	mutex_lock(&sp->reply_lock);
+ 	reply = sp->reply;
+ 
+@@ -439,10 +450,10 @@ static void rave_sp_receive_frame(struct rave_sp *sp,
+ 				  size_t length)
+ {
+ 	const size_t checksum_length = sp->variant->checksum->length;
+-	const size_t payload_length  = length - checksum_length;
+-	const u8 *crc_reported       = &data[payload_length];
+ 	struct device *dev           = &sp->serdev->dev;
+ 	u8 crc_calculated[RAVE_SP_CHECKSUM_SIZE];
++	size_t payload_length;
++	const u8 *crc_reported;
+ 
+ 	if (unlikely(checksum_length > sizeof(crc_calculated))) {
+ 		dev_warn(dev, "Checksum too long, dropping\n");
+@@ -457,6 +468,9 @@ static void rave_sp_receive_frame(struct rave_sp *sp,
+ 		return;
+ 	}
+ 
++	payload_length = length - checksum_length;
++	crc_reported = &data[payload_length];
++
+ 	sp->variant->checksum->subroutine(data, payload_length,
+ 					  crc_calculated);
+ 
+-- 
+2.43.0
 
-> diff --git a/drivers/mfd/iqs62x.c b/drivers/mfd/iqs62x.c
-> index ee017617d1d1b..412ae7777f729 100644
-> --- a/drivers/mfd/iqs62x.c
-> +++ b/drivers/mfd/iqs62x.c
-> @@ -237,7 +237,7 @@ static int iqs62x_firmware_parse(struct iqs62x_core *=
-iqs62x,
->  		fw_rec =3D (struct iqs62x_fw_rec *)(fw->data + pos);
->  		pos +=3D sizeof(*fw_rec);
-> =20
-> -		if (pos + fw_rec->len - 1 > fw->size) {
-> +		if (!fw_rec->len || fw_rec->len - 1 > fw->size - pos) {
-
-[Severity: High]
-This is a pre-existing issue, but since this modifies the firmware record
-parsing, does using fw_rec->data as a source for memcpy() trigger a
-FORTIFY_SOURCE panic when the length is greater than 1?
-
-Looking at struct iqs62x_fw_rec, the data field is declared as a single-byte
-member rather than a flexible array:
-
-struct iqs62x_fw_rec {
-	u8 type;
-	u8 addr;
-	u8 len;
-	u8 data;
-} __packed;
-
-Later in iqs62x_firmware_parse(), when handling IQS62X_FW_REC_TYPE_DATA,
-the code takes a pointer to this single byte and copies len bytes from it:
-
-data =3D &fw_rec->data;
-...
-memcpy(fw_blk->data, data, len);
-
-If the firmware payload contains a data record larger than 1 byte, will the
-bounds checking mechanism see the source object size as 1 byte and trigger a
-kernel panic? Should data be converted to a proper flexible array member?
-
->  			ret =3D -EINVAL;
->  			break;
->  		}
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260706091034.7586=
-5-1-pengpeng@iscas.ac.cn?part=3D1
