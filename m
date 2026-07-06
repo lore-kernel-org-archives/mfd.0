@@ -1,164 +1,224 @@
-Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7DBA537C90F;
-	Mon,  6 Jul 2026 02:19:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7837637CD28
+	for <mfd@lists.linux.dev>; Mon,  6 Jul 2026 02:27:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783304377; cv=none; b=q0lqgZg3WnIFRQa2DRvcG/fT/EdqEB8mSQvpTp60welklm2EcQhg+9AVlxstyB4kAbf499R+3phoygjlhQpcAefiGPL75ZcM3KCZGX3g2zeS8i9AiVOfyqwJgFxxkcV8vkcB4VbEnM1TKRv1U0WqYmi43KOWjtSvDf5g3gatxqw=
+	t=1783304826; cv=none; b=ZLDttriQWZ8GImB2IECOANAa6Fqrh1WLIr1tsfyDKvENU+Zy5HTp/h209NWE8lgDXZehLPFgvr5ZziYlfgxxP7hVZW3LCF1Pfh5m7rux+dNqLU54bIKVS/Ir4SBjjlgtrsZ+kZlF3n/ykLO+e919uXwOo4BO8XZ5GqA1Z4BpoNw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783304377; c=relaxed/simple;
-	bh=IobvKxkbFJ5qT7MyauMU1AGgh84gAbCRuxoVLRGQ5cU=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=o74beV5i3EvOSgig5MnMDv4WW+1D0735sg8zj+JReSNCCpXKANCqEw5Vi4ifoeGcJbCcwoi+K4+BbjEbh5UtKjc+2gtoLjnEk3j+Xf2HLZL4ApCq8WuKpIjf4GDylVMktzhuJLWQm4Esmhwpd9BkygseOUC3D6wsTnWvU8LukaQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
-Received: from loongson.cn (unknown [223.64.68.155])
-	by gateway (Coremail) with SMTP id _____8Cx5+qzEEtqOj8AAA--.1204S3;
-	Mon, 06 Jul 2026 10:19:31 +0800 (CST)
-Received: from kernelserver (unknown [223.64.68.155])
-	by front1 (Coremail) with SMTP id qMiowJCxIuSlEEtqqqYBAA--.10129S2;
-	Mon, 06 Jul 2026 10:19:18 +0800 (CST)
-From: Binbin Zhou <zhoubinbin@loongson.cn>
-To: Binbin Zhou <zhoubb.aaron@gmail.com>,
-	Huacai Chen <chenhuacai@loongson.cn>,
-	Lee Jones <lee@kernel.org>,
-	Corey Minyard <minyard@acm.org>,
-	Chong Qiao <qiaochong@loongson.cn>
-Cc: Huacai Chen <chenhuacai@kernel.org>,
-	Xuerui Wang <kernel@xen0n.name>,
-	loongarch@lists.linux.dev,
-	mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	openipmi-developer@lists.sourceforge.net,
-	jeffbai@aosc.io,
-	zhuyunfei@loongson.cn,
-	Binbin Zhou <zhoubinbin@loongson.cn>,
-	stable@vger.kernel.org,
-	kernel test robot <lkp@intel.com>
-Subject: [PATCH v3] mfd: ls2kbmc: mfd: ls2kbmc: Fix iomem pointer handling in video mode parsing
-Date: Mon,  6 Jul 2026 10:19:09 +0800
-Message-ID: <20260706021909.2346535-1-zhoubinbin@loongson.cn>
-X-Mailer: git-send-email 2.52.0
+	s=arc-20240116; t=1783304826; c=relaxed/simple;
+	bh=eJnrpldktT722qo7yMpqV9rJfWEdBVTW8r7E1Wpw4pE=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=fypH/DmjriFN+cgntj94SSJx6l1n2ug4HSTIaybzJq9/Ll5zmMqdbLUYLYFo/YjbE6vCdPl0l+hLNLh9SHDBSF9C7pwQDFNwXAZNBKRbaH3obK0sgf47v4rQ31zwFmOpdJp+T4rksJE9n6l6BtStpukOrl6kqdWR8oRQzvTvejw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JHWkLWKe; arc=none smtp.client-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JHWkLWKe"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CA3481F000E9;
+	Mon,  6 Jul 2026 02:27:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783304825;
+	bh=azMOYbVzZE6/Gl8Q7df6AJ2dN0eqbd7bf72b9LKiIxQ=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=JHWkLWKer6rJNuyIyY4wTQgWXFh3Itx/gT2cNecIBU83SsMFOgnp47/Yn7UHt2/qk
+	 yNdHoigdJQ4j4NoiKrzKqNaeawIPMvP0igNic9i0WUvAJJjM8rqx4tpTljda/wFapD
+	 YYBRvff5s3RzBVcMhTBsloIfKbIrUC6TjtDZVEzYZUB1VrzUZrodowI/KiQ4MbATfp
+	 UZEw3cjesNxL2KFSfSshvqT1Tqpm82JlstvX89kHftWsjYtTKYfa2vWw90pbuGlR0A
+	 oJrvTBPa2hRtVYvjhOx0y9T3wFFS7oeStS4k/qnONMMQqF/tC8yKnjRyik1nI0a05R
+	 rk4AL8FSWchtQ==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v3] mfd: ls2kbmc: mfd: ls2kbmc: Fix iomem pointer
+ handling in video mode parsing
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Binbin Zhou" <zhoubinbin@loongson.cn>
+Cc: lee@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20260706021909.2346535-1-zhoubinbin@loongson.cn>
+References: <20260706021909.2346535-1-zhoubinbin@loongson.cn>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Mon, 06 Jul 2026 02:27:03 +0000
+Message-Id: <20260706022704.CA3481F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:qMiowJCxIuSlEEtqqqYBAA--.10129S2
-X-CM-SenderInfo: p2kr3uplqex0o6or00hjvr0hdfq/1tbiAQEACGpJ200Q5wAAsK
-X-Coremail-Antispam: 1Uk129KBj93XoWxZFy5Aw13Wr1UXryfAFy7urX_yoW5ur4kpa
-	yrZ34Y9ry5tFWxXa9ayr4fuF9Yyw1FqrWUGF4fAwn8Zwn8uayjyw1Skan8XF90gFykKFy5
-	trs5JF1I9a45ZFcCm3ZEXasCq-sJn29KB7ZKAUJUUUUr529EdanIXcx71UUUUU7KY7ZEXa
-	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
-	0xBIdaVrnRJUUUvEb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
-	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
-	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
-	0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_
-	Gr0_Gr1UM2kKe7AKxVWUXVWUAwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07AIYI
-	kI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUXVWU
-	AwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI4
-	8JMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMxCIbckI1I0E14v26r1Y
-	6r17MI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7
-	AF67AKxVW8ZVWrXwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE
-	2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcV
-	C2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73
-	UjIFyTuYvjxU2MKZDUUUU
 
-Use pointers annotated with the __iomem marker for all iomem map calls,
-and creates a local copy of the mapped IO memory for future access in
-the code. memcpy_fromio() and memcpy_toio() are used to read/write data
-from/to mapped IO memory
+Thank you for your contribution! Sashiko AI review found 6 potential issue(=
+s) to consider:
 
-Cc: stable@vger.kernel.org # v6.18+
-Fixes: 0d64f6d1ffe9 ("mfd: ls2kbmc: Introduce Loongson-2K BMC core driver")
-Reported-by: kernel test robot <lkp@intel.com>
-Closes: https://lore.kernel.org/oe-kbuild-all/202603021730.Yy3QXYTw-lkp@intel.com/
-Closes: https://lore.kernel.org/oe-kbuild-all/202606120639.WG6eb8VU-lkp@intel.com/
-Reviewed-by: Huacai Chen <chenhuacai@loongson.cn>
-Signed-off-by: Binbin Zhou <zhoubinbin@loongson.cn>
----
-V3:
- - Reduce the range of `ioremap` from `SZ_16M` to `SZ_64`;
- - Define a new variable `pos` to iterate through the string;
- - Add failure handling for `strncmp()`.
+New issues:
+- [High] Out-of-bounds read and write due to missing null termination on km=
+alloc buffer.
+- [Medium] Implicit breakage of backwards compatibility by strictly requiri=
+ng 'video=3D' prefix.
 
-Link to V2:
-https://lore.kernel.org/all/20260624085550.1508771-1-zhoubinbin@loongson.cn/
+Pre-existing issues:
+- [High] NULL pointer dereference in resolution string parsing.
+- [High] 10-second busy-wait inside stop_machine() callback.
+- [High] Use-after-free of ddata on probe failure or device unbind.
+- [High] Shared interrupt handler unconditionally returns IRQ_HANDLED.
+--
 
-V2:
- - Add the missing memcpy_fromio();
- - Drop the unnecessary `buf` variable.
+commit 6f5ec8b16462761d3de782394ef96b6a09a36913
+Author: Binbin Zhou <zhoubinbin@loongson.cn>
 
-Link to V1:
-https://lore.kernel.org/all/20260616115530.4012675-1-zhoubinbin@loongson.cn/
+mfd: ls2kbmc: mfd: ls2kbmc: Fix iomem pointer handling in video mode parsing
 
- drivers/mfd/ls2k-bmc-core.c | 29 ++++++++++++++++++++++-------
- 1 file changed, 22 insertions(+), 7 deletions(-)
+This commit fixes iomem pointer handling in the video mode parsing logic.
+It uses __iomem annotated pointers for all iomem map calls and creates a
+local copy of the mapped IO memory using memcpy_fromio() and memcpy_toio().
 
-diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-index 408056bfb2fe..a2aee2131529 100644
---- a/drivers/mfd/ls2k-bmc-core.c
-+++ b/drivers/mfd/ls2k-bmc-core.c
-@@ -66,6 +66,9 @@
- /* Maximum time to wait for U-Boot and DDR to be ready with ms. */
- #define LS2K_BMC_RESET_WAIT_TIME	10000
- 
-+/* The length of the LS2K BMC display resolution string stored in PCI BAR0 */
-+#define LS2K_RESOLUTION_STR_LEN		SZ_64
-+
- /* It's an experience value */
- #define LS7A_BAR0_CHECK_MAX_TIMES	2000
- 
-@@ -427,27 +430,39 @@ static int ls2k_bmc_init(struct ls2k_bmc_ddata *ddata)
-  */
- static int ls2k_bmc_parse_mode(struct pci_dev *pdev, struct simplefb_platform_data *pd)
- {
--	char *mode;
-+	char *mode __free(kfree) = NULL;
-+	void __iomem *base;
-+	char *pos = NULL;
- 	int depth, ret;
- 
- 	/* The last 16M of PCI BAR0 is used to store the resolution string. */
--	mode = devm_ioremap(&pdev->dev, pci_resource_start(pdev, 0) + SZ_16M, SZ_16M);
-+	base = devm_ioremap(&pdev->dev, pci_resource_start(pdev, 0) + SZ_16M,
-+			    LS2K_RESOLUTION_STR_LEN);
-+	if (!base)
-+		return -ENOMEM;
-+
-+	mode = kmalloc(LS2K_RESOLUTION_STR_LEN, GFP_KERNEL);
- 	if (!mode)
- 		return -ENOMEM;
- 
-+	memcpy_fromio(mode, base, LS2K_RESOLUTION_STR_LEN);
-+
- 	/* The resolution field starts with the flag "video=". */
--	if (!strncmp(mode, "video=", 6))
--		mode = mode + 6;
-+	if (strncmp(mode, "video=", 6)) {
-+		dev_err(&pdev->dev, "Simpledrm resolution missing or corrupt!\n");
-+		return -EINVAL;
-+	}
- 
--	ret = kstrtoint(strsep(&mode, "x"), 10, &pd->width);
-+	pos = mode + 6;
-+	ret = kstrtoint(strsep(&pos, "x"), 10, &pd->width);
- 	if (ret)
- 		return ret;
- 
--	ret = kstrtoint(strsep(&mode, "-"), 10, &pd->height);
-+	ret = kstrtoint(strsep(&pos, "-"), 10, &pd->height);
- 	if (ret)
- 		return ret;
- 
--	ret = kstrtoint(strsep(&mode, "@"), 10, &depth);
-+	ret = kstrtoint(strsep(&pos, "@"), 10, &depth);
- 	if (ret)
- 		return ret;
- 
+Closes: https://lore.kernel.org/oe-kbuild-all/202603021730.Yy3QXYTw-lkp@int=
+el.com/
+Closes: https://lore.kernel.org/oe-kbuild-all/202606120639.WG6eb8VU-lkp@int=
+el.com/
 
-base-commit: d5d2d7a8d8be18681a0864f58e3875f1c639e11c
--- 
-2.52.0
+> diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
+> index 408056bfb2fe7..a2aee21315292 100644
+> --- a/drivers/mfd/ls2k-bmc-core.c
+> +++ b/drivers/mfd/ls2k-bmc-core.c
+[ ... ]
+> @@ -427,27 +430,39 @@ static int ls2k_bmc_init(struct ls2k_bmc_ddata *dda=
+ta)
+>   */
+>  static int ls2k_bmc_parse_mode(struct pci_dev *pdev, struct simplefb_pla=
+tform_data *pd)
+>  {
+> -	char *mode;
+> +	char *mode __free(kfree) =3D NULL;
+> +	void __iomem *base;
+> +	char *pos =3D NULL;
+>  	int depth, ret;
+> =20
+>  	/* The last 16M of PCI BAR0 is used to store the resolution string. */
+> -	mode =3D devm_ioremap(&pdev->dev, pci_resource_start(pdev, 0) + SZ_16M,=
+ SZ_16M);
+> +	base =3D devm_ioremap(&pdev->dev, pci_resource_start(pdev, 0) + SZ_16M,
+> +			    LS2K_RESOLUTION_STR_LEN);
+> +	if (!base)
+> +		return -ENOMEM;
+> +
+> +	mode =3D kmalloc(LS2K_RESOLUTION_STR_LEN, GFP_KERNEL);
+>  	if (!mode)
+>  		return -ENOMEM;
+> =20
+> +	memcpy_fromio(mode, base, LS2K_RESOLUTION_STR_LEN);
+> +
+>  	/* The resolution field starts with the flag "video=3D". */
+> -	if (!strncmp(mode, "video=3D", 6))
+> -		mode =3D mode + 6;
+> +	if (strncmp(mode, "video=3D", 6)) {
+> +		dev_err(&pdev->dev, "Simpledrm resolution missing or corrupt!\n");
+> +		return -EINVAL;
+> +	}
 
+[Severity: Medium]
+Does this explicit failure break compatibility with older firmware?
+
+Previously, the code bypassed advancing the pointer but didn't return -EINV=
+AL
+if the raw resolution string was provided without the "video=3D" prefix.
+
+> =20
+> -	ret =3D kstrtoint(strsep(&mode, "x"), 10, &pd->width);
+> +	pos =3D mode + 6;
+> +	ret =3D kstrtoint(strsep(&pos, "x"), 10, &pd->width);
+
+[Severity: High]
+Since mode is allocated via kmalloc() and not zeroed, and memcpy_fromio()
+doesn't guarantee a null terminator, could strsep() scan past the end of the
+allocation if the hardware string lacks delimiters?
+
+>  	if (ret)
+>  		return ret;
+> =20
+> -	ret =3D kstrtoint(strsep(&mode, "-"), 10, &pd->height);
+> +	ret =3D kstrtoint(strsep(&pos, "-"), 10, &pd->height);
+
+[Severity: High]
+This is a pre-existing issue, but if the resolution string lacks an expected
+delimiter (like "x"), strsep() will return the remaining string and set pos
+to NULL.
+
+Will the subsequent call to strsep(&pos, "-") then return NULL, causing
+kstrtoint() to unconditionally dereference a NULL pointer?
+
+
+I also noticed a few other pre-existing issues in this driver that might ne=
+ed
+attention:
+
+[Severity: High]
+This isn't a bug introduced by this patch, but is it safe to execute a 10
+second mdelay() in ls2k_bmc_recover_pci_data()?
+
+drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_recover_pci_data() {
+    ...
+    /* Waiting for U-Boot and DDR ready */
+    mdelay(LS2K_BMC_RESET_WAIT_TIME);
+    if (!ls2k_bmc_bar0_addr_is_set(parent))
+        return false;
+    ...
+}
+
+Because this is called from a stop_machine() callback, does this freeze the
+entire system for 10 seconds with interrupts globally disabled on all CPUs,
+potentially triggering hardware watchdogs and soft lockups?
+
+
+[Severity: High]
+This is a pre-existing issue, but does probe failure or device unbind leave=
+ a
+use-after-free window for the ddata structure?
+
+In ls2k_bmc_probe(), if ls2k_bmc_parse_mode() fails after ls2k_bmc_init() h=
+as
+already requested the IRQ:
+
+drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_probe() {
+    ...
+    ret =3D ls2k_bmc_init(ddata);
+    if (ret)
+        return ret;
+
+    ret =3D ls2k_bmc_parse_mode(dev, &pd);
+    if (ret)
+        return ret;
+    ...
+}
+
+If the IRQ fires and schedules bmc_reset_work, devres will free the IRQ and=
+ the
+ddata structure on failure, but the workqueue is not canceled.
+
+Will ls2k_bmc_events_fn() then execute and access the freed ddata?
+
+
+[Severity: High]
+This isn't a bug introduced by this patch, but does the shared interrupt
+handler mask spurious interrupts or break other devices sharing the same PCI
+IRQ line?
+
+drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_interrupt() {
+    ...
+    /* Skip interrupt in LS2K_BMC_INT_INTERVAL */
+    if (time_after(jiffies, last_jiffies + LS2K_BMC_INT_INTERVAL)) {
+        schedule_work(&ddata->bmc_reset_work);
+        last_jiffies =3D jiffies;
+    }
+
+    return IRQ_HANDLED;
+}
+
+Since this handler is registered with IRQF_SHARED, unconditionally returning
+IRQ_HANDLED without checking hardware registers tricks the kernel into assu=
+ming
+the interrupt was successfully handled.
+
+Does this deprive other devices on the shared line from processing their
+interrupts?
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260706021909.2346=
+535-1-zhoubinbin@loongson.cn?part=3D1
