@@ -1,123 +1,122 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A11133A05F2
-	for <mfd@lists.linux.dev>; Mon,  6 Jul 2026 23:23:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8893378D77
+	for <mfd@lists.linux.dev>; Tue,  7 Jul 2026 05:01:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783380195; cv=none; b=NX8apbGjazE0MBiLhnXSWYnsZ24xV83VP9z4NxEv6JBcCib/vMp8aPdOhVjL6OtXwYNaqrAKYbQ5YS3IrL0yaE+zftA1ZWHK4pdfi0VRB2VTPl4DWUKJHV/5PSaA1fhAJGZioCaDgFZ4nu7IKK8sTa8JFCWPDXo6qeoAX+VSWDs=
+	t=1783400497; cv=none; b=FJm0AHMM65hJAbQxPQCJazqB5Rl3bEz3ZtfQgspmSGKOy3RB2TwPgNyn4ErQRetdEBpVCGI2UlwjnXs27w/uYV157G2W25fvTGwb+qfVShjOpOpFgDY2CgSRuCP6EzmsiAtdnhciYRyLnAhnT01tz6HrC9CR4cdDImBU1uWyJT8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783380195; c=relaxed/simple;
-	bh=yfXDSJR1yTocaGyfWvtHJJAsHzm7akwdlhpW3fBDu7k=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=tGzZNKrE+tjiyXcf/NBSV5yJwjljrsxq56M85XknNqEpKJ2W4btWsxorhpU2Fn7aDtdszULadxlMHyI9lP6cG7hnwYZP5k4AmM8o5/lAoiDNS9FolUSWv7zV9UPA+0+Ztggrbbx/wodixA2ZyoHTBweYs42dFJtP3I9YTiK9jlo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Y9JlU0k5; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783400497; c=relaxed/simple;
+	bh=uQvWHHf5fxkHGu4P30JW0G490P2gB+0/OgEKX7/Op7E=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=sihAnFdWfvH9ipjYceCEPpA09fYORJhBTdN6efgvg6tWRnAWot6Ot3l63lfgfB4zJ0lD0X1VEbOg4eGVhuaaLNe9pPNdU08zzAvpxRwJPcTG5UqKTZuEnKKT5lBLLRyoB72w8ZnJooF4TEAuWphUB2ip8am9Sf9wjqHIq6UY5QQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=GkXTRMIg; arc=none smtp.client-ip=209.85.215.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Y9JlU0k5"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4640B1F000E9;
-	Mon,  6 Jul 2026 23:23:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783380194;
-	bh=DlhJeuPvhUzxAsn/byGP+B1Kf4cK+mNem4Pwv6ugXfM=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Y9JlU0k54m0M2Sg/mGbCADSAKoQ2zBSWmaZgjoHjBT3NN3pMzIkx5ccsqqocANc1U
-	 1l5mM8DzgiB+3F0N5if7IcX9fwzSnQAxYiVjaUHbwcK8ybFkb8taEisyjhp6MWW5ye
-	 hU677QNOicnd+bMhRjmlQMpzzbld03xMcVzrlUoGx2RaQhB9+EhKLIrO98VaizH0z7
-	 Uzq9nYrTnYwaTqYJ0Llca3pnApJ2xL8/wKuMRlSvTXYJWkBvsnJnObGClbm1hcTiUW
-	 EyQeW/4yiPNSnfZvTnBCo2dozkdLO2o/jt/cq4qhd17BmT62CyeMDb4j6Z4oJJPts0
-	 O5qMvP3d24MNA==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 1/2] mfd: ucb1x00: register software node for GPIO
- controller
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Dmitry Torokhov" <dmitry.torokhov@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260706-ucb1x00-assabet-swnode-v1-1-6102eabd31d0@gmail.com>
-References: <20260706-ucb1x00-assabet-swnode-v1-0-6102eabd31d0@gmail.com>
- <20260706-ucb1x00-assabet-swnode-v1-1-6102eabd31d0@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 06 Jul 2026 23:23:13 +0000
-Message-Id: <20260706232314.4640B1F000E9@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GkXTRMIg"
+Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-c8894387780so1972294a12.2
+        for <mfd@lists.linux.dev>; Mon, 06 Jul 2026 22:01:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1783400495; x=1784005295; darn=lists.linux.dev;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=2Q9NmG0AJd6uTA8Y7Qk5XL3+maDcBfw0qPJsNnXKIuE=;
+        b=GkXTRMIgBT2PO11bnbGC6EgiKp1rl/LlEjcnyU3vKJqzoabP65JyXh1fKw+o68TnE7
+         l+wjry0Gqp5AOI6F8bQWG52A8x4x6RWrgralC68BUceE23sAffR+vCm2aRT/W7onpFN+
+         uw12+NnNRxNA4QDZMTr1YItlU778JofLXnb1y60Sn4mJjbW7MYrD+PDWcRiPJjYtFFhQ
+         owKJCAWl6M//SVTvvmuahQDfYGB5eOrkVrmbfcEl8iwTIEIH1ivzXheuUU9/Aztthj1l
+         qXCICfy5WC6NAsK9obDrhEfDMLgL3SdyoGCTjIxCmcJzNaWq/6hYpLmzxZn8fvCbLRDK
+         BgDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783400495; x=1784005295;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=2Q9NmG0AJd6uTA8Y7Qk5XL3+maDcBfw0qPJsNnXKIuE=;
+        b=QNydflxXUAo5/Zj4EZs+NQ1YOzuo5O9CqLU8G7o8vPCKrM++LZKymjdS77rrE8kqmP
+         vSq4PeDrQlt/RmTZ3S+FWXFQGLiq7vZEHfr53rBVD664ZEwuDbrrWvYV6594ypIei29t
+         dMButfruKpRPVb832jmX3xT3Q+lmdlSRcHEP5LJ222MNOcHHxMZX1Ze3je2mqamStq8T
+         QlVounC51yo85e8d07VY5VPJrfzTD1Ja4XSCAHSPIpLDMcVcP8a/hzh/UpjdDd9S0s8w
+         I3i3b7tN2cMbITCwjzvUQkV5pVr9G2EMrjQIR0EUfbTKcRehy7w88Q9L+KIsdYpajHWL
+         qGiA==
+X-Gm-Message-State: AOJu0YxJ6ZhNCTtSZ7GajwZXWPeMe06og6iQ3p0K3CP3XVpLhUTxnN5H
+	qX+OaftaEm+paOrdo8HsXLBUow4R2y3IM329tvr2R9zazbFjV4j9hIebviO41Q==
+X-Gm-Gg: AfdE7cmC0keWG0K6ODmk9J1pkcOeKU5WXh1YwMfKcUyGbp5L2eplabJy/r8ImaaIRUI
+	/WbE/nMWBX8KbyQ03j+HTgaEu3KH46ixHUZxp+EFytTZRHCC7Ki7mX0p08jjotdXyMmGoayzrmK
+	P3Mf4BVY1GhZJLxvJE7TO/zZ2fRQFmlsHcKN24nsCTZu4th3Ku+Od1ZVoxnZNjeiLJc6ZPyv4OB
+	zn6smync0RmCrqKjR0pf2fYRsj9Exh4BWXZSFqersnVv5nD/ULmsiSfHBjtcs2oER3pyFpqeETR
+	916Sh52ZoPYKBzDvTf+aZL0qdnAPoitcDcwgoIrdX30AD1cBUZ11fpWPFXO5hQDgo4zxjxzlpnt
+	+6bJVGSJC5TfxD/fx159Rygnj4Bka1E6WHuj7axRdtpk2sOivKvXObzA+RxkkY4XQE3/B+QO63K
+	sLo8MZANVWmBX3o0EBNvTByAKrKhWA/VOlmWoijyGEvl5lw2hCrGrjAh856MaDA1LmZk5MgwUvc
+	VCH
+X-Received: by 2002:a05:6a21:a92:b0:3bf:ab4b:2d34 with SMTP id adf61e73a8af0-3c08ef268b5mr4423586637.53.1783400494899;
+        Mon, 06 Jul 2026 22:01:34 -0700 (PDT)
+Received: from dtor-ws.sjc.corp.google.com ([2a00:79e0:2ebe:8:d89b:1fdd:a8f2:dbeb])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13b658a99afsm3906462c88.0.2026.07.06.22.01.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 06 Jul 2026 22:01:33 -0700 (PDT)
+From: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+Subject: [PATCH v2 0/2] mfd: ucb1x00: Convert Assabet gpio-keys to software
+ nodes
+Date: Mon, 06 Jul 2026 22:01:29 -0700
+Message-Id: <20260706-ucb1x00-assabet-swnode-v2-0-e6271ea3d3dc@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACmITGoC/3WNyw6CMBBFf4V0bc20jRVd+R+GRR8j1Ag1nYIYw
+ r8LGJcuT3LvORMjTAGJnYuJJRwChdgtIHcFc43pauTBL8wkSA1HOPDeWTECcENkLGZOry565Lp
+ UzqpSeXUq2XJ+JryFcRNfqy9Tb+/o8mpbF02gHNN7Kw9i3f0i+l9kEBy4FiDRWK+Eh0vdmvDYu
+ 9iyap7nD86YxkDOAAAA
+X-Change-ID: 20260705-ucb1x00-assabet-swnode-683cb383d398
+To: Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
+ Bartosz Golaszewski <brgl@kernel.org>
+Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org
+X-Mailer: b4 0.16-dev-b242f
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
-s) to consider:
-- [High] Incorrect teardown ordering of software node causes Use-After-Free.
-- [Low] Missing EXPORT_SYMBOL for statically defined software_node breaks m=
-odule builds.
---
+This patch series converts the legacy gpio-keys platform device on the
+StrongARM SA-1100 Assabet evaluation board from platform data to software
+nodes and device properties.
 
---- Patch [1]: [PATCH 1/2] mfd: ucb1x00: register software node for GPIO co=
-ntroller ---
-commit a75c0eafc8aaa7b47d15759a689939988f9c92b0
-Author: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+The first patch registers a shared software node for the UCB1x00 GPIO
+controller in drivers/mfd/ucb1x00-core.c, attaching its firmware node
+directly to the GPIO chip prior to registration. The second patch
+converts the Assabet machine subdriver to define dynamically allocated
+software nodes referencing the UCB1x00 GPIO controller directly, allowing
+pin bindings to be resolved via the attached firmware node without relying
+on name matching.
 
-mfd: ucb1x00: register software node for GPIO controller
-   =20
-Define a static software node for the UCB1x00 GPIO controller and attach
-it to the core MFD device in ucb1x00_probe(). This allows machine
-subdrivers to reference the UCB1x00 GPIO controller in property entries
-when converting legacy platform data to software nodes.
+Signed-off-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+---
+Changes in v2:
+- Export ucb1x00_gpiochip_node to fix link errors when built as module.
+- Fix teardown order in core driver to avoid software node use-after-free.
+- Convert Assabet subdriver to use dynamically allocated software nodes
+  to avoid use-after-free on module unload.
+- Factor out button node removal logic into a helper.
+- Link to v1: https://patch.msgid.link/20260706-ucb1x00-assabet-swnode-v1-0-6102eabd31d0@gmail.com
 
-> diff --git a/drivers/mfd/ucb1x00-core.c b/drivers/mfd/ucb1x00-core.c
-> index 16f64e2b2f77c..8d1c34c53955a 100644
-> --- a/drivers/mfd/ucb1x00-core.c
-> +++ b/drivers/mfd/ucb1x00-core.c
-> @@ -25,8 +25,13 @@
->  #include <linux/mutex.h>
->  #include <linux/mfd/ucb1x00.h>
->  #include <linux/pm.h>
-> +#include <linux/property.h>
->  #include <linux/gpio/driver.h>
-> =20
-> +const struct software_node ucb1x00_gpiochip_node =3D {
-> +	.name =3D "ucb1x00-gpio",
-> +};
-> +
+---
+Dmitry Torokhov (2):
+      mfd: ucb1x00: Register software node for GPIO controller
+      mfd: ucb1x00: Convert Assabet gpio-keys to use software nodes
 
-[Severity: Low]
-Since ucb1x00_gpiochip_node is declared as extern in the header for use by
-machine subdrivers, should it be exported with EXPORT_SYMBOL_GPL()? Without
-an export, will subdrivers fail to link if ucb1x00-core is built as a modul=
-e?
+ drivers/mfd/ucb1x00-assabet.c | 124 +++++++++++++++++++++++++++++++++---------
+ drivers/mfd/ucb1x00-core.c    |  16 +++++-
+ include/linux/mfd/ucb1x00.h   |   3 +
+ 3 files changed, 116 insertions(+), 27 deletions(-)
+---
+base-commit: 8e9685d3c41c35dd1b37df70d854137abcb2fbac
+change-id: 20260705-ucb1x00-assabet-swnode-683cb383d398
 
-[ ... ]
+Thanks.
 
-> @@ -630,6 +641,7 @@ static void ucb1x00_remove(struct mcp *mcp)
-> =20
->  	irq_set_chained_handler(ucb->irq, NULL);
->  	irq_free_descs(ucb->irq_base, 16);
-> +	device_remove_software_node(&ucb->dev);
->  	device_unregister(&ucb->dev);
-> =20
+-- 
+Dmitry
 
-[Severity: High]
-Does removing the software node before unregistering the device create a
-use-after-free risk?
-
-If device_remove_software_node() is called first, it clears dev->fwnode.
-Then device_unregister() calls device_del(), which skips its back-pointer
-cleanup because dev->fwnode is already NULL:
-
-drivers/base/core.c:device_del() {
-    ...
-	if (dev->fwnode && dev->fwnode->dev =3D=3D dev)
-		dev->fwnode->dev =3D NULL;
-    ...
-}
-
-If the software node outlives the device (e.g. if multiple devices share the
-node, or if sysfs holds a reference), its fwnode->dev pointer will continue
-to point at the freed ucb device struct.=20
-
-Should device_unregister() be called before device_remove_software_node()
-to ensure the fwnode->dev back-pointer is safely cleared?
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260706-ucb1x00-as=
-sabet-swnode-v1-0-6102eabd31d0@gmail.com?part=3D1
