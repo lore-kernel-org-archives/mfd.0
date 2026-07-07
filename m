@@ -1,191 +1,165 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEC95238D27
-	for <mfd@lists.linux.dev>; Tue,  7 Jul 2026 19:36:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BF43238D27
+	for <mfd@lists.linux.dev>; Tue,  7 Jul 2026 19:36:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783452963; cv=none; b=AfvAHuQLfHPbp6+6vUs5KIW/5P5xsFosabNd+VVvB45A9azVbOLa2ZI9X3/KfB+aD6pPd4XhB2ATa3nfB9J6IM7giEjrFPG0m3Xfs0oyCbQpC4WTLeK8keBQ6DGQmaTqKX6qrtR0w908raTNUIeQwpLVrmZusL+AltSQQyQo9zc=
+	t=1783453006; cv=none; b=nYRD2nwRyr9oLIkHMOIwJ+dCzuBFnZLSNI+Z6nl6DWYKnH/yv9u/Qha2KLMMbNZz8XARHnwFVkU62Qw1QnS1xzgZprBqnz+zBThgIlW2QbYiP2pFvqcAgkNngmALZe/8yfMILfs+jGkUMulQ6Ys0JneSzhu7G92czEufw62ehBM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783452963; c=relaxed/simple;
-	bh=UHUhWTdWdzcATAzhubq2f8LxS4jB44PEnVWhtRUF1/w=;
+	s=arc-20240116; t=1783453006; c=relaxed/simple;
+	bh=0SY6R1WaV1tiXCXzWVF6E5ywNeo3EKExoBVvsMsTGnY=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=Fd06jWX/vkgJou2DPFsGQC5SBq9+ZSecfaCRARmQQdnsE+JPJY82NL4AUSH+s6mZQAu8i90vowogdFsQmM3Lx3Hpd1UDvcT+Jf1w3JGngvT5zGPaTg2V6o9sIqu89rasZ7HWGRdgQijbws0ui67Zgiw4h9ny9GydC0wFXtdZKI4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nV88bjCj; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=QUyikc2msUTCKl+cPFkN1o122TimMAZjxnIcowk/+XG34SHHortwmYk+4MpyOmJwCNDAu39jYMy/6/c3bFJUHdozfEk+1yYtmPuEXklhd5jFSguaL8zsj5zIfl5IiSmFgSvjfZiiuwzh9vuatD2PaWgG3ZWEwJr1YZcg2AO8O5E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=b2NyKw9q; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nV88bjCj"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A9EB51F000E9;
-	Tue,  7 Jul 2026 19:36:00 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="b2NyKw9q"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7AE331F000E9;
+	Tue,  7 Jul 2026 19:36:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783452961;
-	bh=T7RycLEC9n9oeDO09vRBlajOlfy+6juv8YqXZ8DmRxo=;
+	s=k20260515; t=1783453004;
+	bh=6Q6qJwLmZhJVJrMZnTs3N35LGdvlk/wZzY8Iwngq5ng=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=nV88bjCjFe1GqsrfZ2bxOjpaRJcj5S5E1H4eI38FafXVaWVNYoP3mnewCEODaAySh
-	 sRHqXkaFcr5DEM4S0Zb6vMuUvyGHqofnx/u2ujFDs+j5WPpJctURdylUfi6XD2tuvl
-	 BooCm6KRxzYxjobeILLT8qZmLPw12oiRcJ4zLbuyO9+4RM0U0MGN0A89KXWqZ7AKAZ
-	 QXiIiCzo9mh1ea1IfvVJ+DAIyBtzhkF6wrojR/Sxp3/ES6hQ56k1IJ99WFftq3a9pQ
-	 DieFONxGiSmdFAxaA6RaWZvYGqTPC9E06uCI9oVZJsctoR3cwof2Sc3S9+YWZ5xMqd
-	 5odTkQiLITmqQ==
+	b=b2NyKw9qiOV2umVRkyLfpuLXtuhizc2DiWQeuwGzQ4861Wc5hSX9P9iUrH16X0qlI
+	 /pZka0MuhyTxZKiZxMvEk82lR8at0SDIYkEyYWcUopDiHEZYcT/NN+AztaJK6PfoVQ
+	 XiT36rWh/KUfCXY5vVLEGoxu112sh1sehuQzMdsWX+R5fXW0DObYpCNQDKlh1c+Obo
+	 ToescdRkhGTuHPuzF/2FxTb9NVML2ZXZ48gD8msTIeiqAWPqXT/gVZbl1iw2630QfM
+	 VRkRTn2dcs6w1tjRQYLjeclgNJDssofH1KANCXrAU1zjbGUfrvprWL42BQsrPOhmtl
+	 vVZ/eXo1Dqesw==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RFC 3/5] mfd: ls2kbmc: redraw using exported functions
+Subject: Re: [PATCH RFC 4/5] mfd: ls2kbmc: able to compile as a module
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Miao Wang" <shankerwangmiao@gmail.com>
 Cc: lee@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260708-ls2kbmc-mod-v1-3-c344bf5defa3@gmail.com>
+In-Reply-To: <20260708-ls2kbmc-mod-v1-4-c344bf5defa3@gmail.com>
 References: <20260708-ls2kbmc-mod-v1-0-c344bf5defa3@gmail.com>
- <20260708-ls2kbmc-mod-v1-3-c344bf5defa3@gmail.com>
+ <20260708-ls2kbmc-mod-v1-4-c344bf5defa3@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 07 Jul 2026 19:36:00 +0000
-Message-Id: <20260707193600.A9EB51F000E9@smtp.kernel.org>
+Date: Tue, 07 Jul 2026 19:36:43 +0000
+Message-Id: <20260707193644.7AE331F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 5 potential issue(=
+Thank you for your contribution! Sashiko AI review found 6 potential issue(=
 s) to consider:
 
+New issues:
+- [Medium] A dependent boolean Kconfig symbol silently forces this driver b=
+ack to built-in, defeating the patch's purpose.
+- [Low] The commit message fails to follow the mandatory MFD subsystem capi=
+talization rules.
+
 Pre-existing issues:
-- [High] A 10-second busy-wait is executed inside a `stop_machine` callback=
-, causing an uninterruptible system freeze that will trigger hardware locku=
-p watchdogs.
-- [High] The scheduled work item is never canceled upon device unbind, lead=
-ing to a use-after-free vulnerability.
-- [High] The probe function assigns a stack variable pointer to a globally =
-shared, dynamically mutated `mfd_cell` array.
-- [High] The recovery callback returns 0 (false) on failure, and the caller=
- ignores the return value, leading to unchecked PCIe errors and system pani=
-cs.
-- [High] Unconditional `IRQ_HANDLED` return in a shared interrupt handler w=
-ithout source validation.
+- [High] Missing Module Cleanup / Use-After-Free
+- [High] Global mfd_cells array is mutated dynamically with stack pointers
+- [High] Immediate unregistering of GSI mapping breaks the GPIO interrupt.
+- [High] Direct use of memcpy() on __iomem pointers instead of memcpy_fromi=
+o().
 --
 
---- Patch [3]: [PATCH RFC 3/5] mfd: ls2kbmc: redraw using exported function=
-s ---
-commit 2d719e1f4433582637922b9095dc176ee03b5768
+--- Patch [4]: [PATCH RFC 4/5] mfd: ls2kbmc: able to compile as a module ---
+commit 06b671aceea4e266ddc107c8d7f73d19e48b4e8a
 Author: Miao Wang <shankerwangmiao@gmail.com>
 
-mfd: ls2kbmc: redraw using exported functions
+mfd: ls2kbmc: able to compile as a module
+   =20
+Make ls2kmc able to be compiled as a module
 
-This commit modifies ls2k_bmc_events_fn to use update_screen to trigger
-a redraw of the current vt, replacing set_console. This aims to safely
-restore the display state after a PCIe loss.
+> mfd: ls2kbmc: able to compile as a module
 
-> diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-> --- a/drivers/mfd/ls2k-bmc-core.c
-> +++ b/drivers/mfd/ls2k-bmc-core.c
-> @@ -310,7 +311,9 @@ static void ls2k_bmc_events_fn(struct work_struct *wo=
-rk)
+[Severity: Low]
+The MFD subsystem rules require the description after the prefix to be
+capitalized. Could the subject be updated to capitalize "able" (e.g.,
+"mfd: ls2kbmc: Able to compile as a module")?
+
+> diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
+> index 763ce6a34782b..a7a9f97af248c 100644
+> --- a/drivers/mfd/Kconfig
+> +++ b/drivers/mfd/Kconfig
+> @@ -2494,7 +2494,7 @@ config MFD_LOONGSON_SE
+>  	  which will forward them to the corresponding engine.
 > =20
->  	if (IS_ENABLED(CONFIG_VT)) {
->  		/* Re-push the display due to previous PCI-E loss. */
-> +		console_lock();
-> +		update_screen(vc_cons[fg_console].d);
+>  config MFD_LS2K_BMC_CORE
+> -	bool "Loongson-2K Board Management Controller Support"
+> +	tristate "Loongson-2K Board Management Controller Support"
+
+[Severity: Medium]
+Does this achieve the intended goal if IPMI_LS2K is enabled?
+
+IPMI_LS2K in drivers/char/ipmi/Kconfig is a boolean config that selects
+MFD_LS2K_BMC_CORE. If a user enables IPMI_LS2K=3Dy, Kconfig will silently f=
+orce
+MFD_LS2K_BMC_CORE to be built-in, ignoring the choice to compile as a modul=
+e.
 
 [Severity: High]
-This isn't a bug introduced by this patch, but earlier in this function
-stop_machine is called to execute ls2k_bmc_recover_pci_data:
+This is a pre-existing issue, but enabling module compilation exposes a mis=
+sing
+cleanup path. Looking at drivers/mfd/ls2k-bmc-core.c, ls2k_bmc_init()
+initializes a work item:
 
-stop_machine(ls2k_bmc_recover_pci_data, ddata, NULL);
+INIT_WORK(&ddata->bmc_reset_work, ls2k_bmc_events_fn);
 
-Inside ls2k_bmc_recover_pci_data, the code calls
-mdelay(LS2K_BMC_RESET_WAIT_TIME) which delays for 10 seconds.
+However, the driver struct ls2k_bmc_driver lacks a .remove callback, and th=
+ere
+is no devm action added to cancel this work.
 
-Because stop_machine executes its callback with local interrupts disabled
-on the executing CPU while all other CPUs spin with interrupts disabled, a
-10-second delay is executed in this state.
-
-Could this uninterruptible freeze trigger the kernel's NMI hard lockup
-watchdog or RCU stall detectors, leading to a panic?
-
-
-[Severity: High]
-This isn't a bug introduced by this patch, but the return value of
-stop_machine is ignored here before unconditionally calling
-update_screen.
-
-In ls2k_bmc_recover_pci_data, failure paths return false, which evaluates
-to 0 (success). If the PCIe link fails to retrain and the failure is ignore=
-d,
-update_screen will still attempt to perform PCIe MMIO reads/writes.
-
-Can accessing MMIO on a down PCIe link cause severe hardware exceptions like
-an asynchronous external abort or AER panic?=20
-
-Should we verify the PCIe link is actually recovered before updating the
-screen?
-
-> +		console_unlock();
->  	}
->  }
+If the module is unloaded while the work is scheduled, will this result in a
+use-after-free when the work executes and attempts to jump to unmapped modu=
+le
+memory?
 
 [Severity: High]
-This is a pre-existing issue, but I noticed the bmc_reset_work work item
-(which executes ls2k_bmc_events_fn) is never canceled on driver unbind.
+This is a pre-existing issue, but the MFD subsystem requires cell arrays to=
+ be
+static const. In drivers/mfd/ls2k-bmc-core.c, the global array ls2k_bmc_cel=
+ls
+is mutated dynamically with stack pointers during ls2k_bmc_probe():
 
-In ls2k_bmc_probe, the driver dynamically allocates ddata via devm_kzalloc
-and initializes the work:
+static struct mfd_cell ls2k_bmc_cells[] =3D {
+...
+ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data =3D &pd;
+ls2k_bmc_cells[LS2K_BMC_DISPLAY].pdata_size =3D sizeof(pd);
 
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_init() {
-    ...
-    INIT_WORK(&ddata->bmc_reset_work, ls2k_bmc_events_fn);
-    ...
-}
-
-The driver lacks a .remove callback or a devm action to call
-cancel_work_sync.
-
-When the device is unbound via sysfs, devres automatically frees the ddata
-structure.=20
-
-If the work was scheduled right before unbind, will the workqueue
-dereference the freed ddata pointer when it executes ls2k_bmc_events_fn,
-causing a use-after-free?
-
+Since pd is allocated on the stack, doesn't this leave a dangling pointer in
+the global array once the probe function returns, potentially leading to me=
+mory
+corruption or data races if multiple devices are probed?
 
 [Severity: High]
-This is a pre-existing issue, but looking at how the device is initialized
-in ls2k_bmc_probe, a stack variable pointer is assigned to the globally
-shared ls2k_bmc_cells array:
+This is a pre-existing issue, but does immediate unregistering of the GSI
+mapping break the GPIO interrupt? In drivers/mfd/ls2k-bmc-core.c,
+ls2k_bmc_init() calls:
 
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_probe() {
-    struct simplefb_platform_data pd;
-    ...
-    ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data =3D &pd;
-    ...
-}
+acpi_unregister_gsi(LS2K_BMC_RESET_GPIO_GSI);
+return ret;
 
-Because ls2k_bmc_cells is not declared as static const (which violates MFD
-subsystem rules), the global array permanently retains a dangling pointer
-to the pd stack frame after probe returns.
-
-If another instance of the device probes, or if the driver unbinds and
-rebounds, won't this read unmapped or corrupted stack memory?
-
+Since this is called immediately after requesting the IRQ, wouldn't it disp=
+ose
+of the IRQ mapping and cause hardware interrupts to be ignored?
 
 [Severity: High]
-This is a pre-existing issue, but the shared interrupt handler for the BMC
-unconditionally returns IRQ_HANDLED:
+This is a pre-existing issue, but is it safe to use standard memcpy() direc=
+tly
+on an __iomem pointer? In drivers/mfd/ls2k-bmc-core.c, ls2k_bmc_parse_mode()
+does:
 
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_interrupt() {
-    ...
-    if (time_after(jiffies, last_jiffies + LS2K_BMC_INT_INTERVAL)) {
-        schedule_work(&ddata->bmc_reset_work);
-        last_jiffies =3D jiffies;
-    }
+const void __iomem *mode_base;
+...
+memcpy(mode_buf, mode_base, sizeof(mode_buf) - 1);
 
-    return IRQ_HANDLED;
-}
+Standard C library routines do not perform hardware-specific I/O barriers.
 
-Without checking hardware status registers to verify if this specific device
-generated the interrupt, any other device sharing the IRQ line will cause
-this handler to falsely claim the interrupt.
+Should this use memcpy_fromio() instead to prevent I/O access violations?
 
-Does this behavior starve unrelated devices on the same line and incorrectly
-schedule the 10-second BMC reset sequence?
+>  	depends on PCI && ACPI_GENERIC_GSI
+>  	select MFD_CORE
+>  	help
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260708-ls2kbmc-mo=
-d-v1-0-c344bf5defa3@gmail.com?part=3D3
+d-v1-0-c344bf5defa3@gmail.com?part=3D4
