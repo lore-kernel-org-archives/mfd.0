@@ -1,214 +1,145 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E97430FF1D
-	for <mfd@lists.linux.dev>; Tue,  7 Jul 2026 21:27:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DFEE21ABBD
+	for <mfd@lists.linux.dev>; Tue,  7 Jul 2026 21:31:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783459655; cv=none; b=JWXkXm5QjzexUOdNTTgdeGQiVwHxh+E2SYprI8DVpUP/apy/rOA9VtiXXjfZmEWdY2Yu7rNADVfzLivXgJ6KGvsE857ukVAqATmI/a5uVL+6KJzX0sYUHKAJee0NL6K187/kKTc1djNUn5QTU6Lmj+VkmLy75ZFx2t/9rXWXxso=
+	t=1783459895; cv=none; b=fVeGuNfKClGX7+DMufXL369tP3qFh8KEEPahMG4NIA250bso9DboeJ8Ez6KrzsDKbOyEJqRiz/6pvoxIvl09mwzQwxZYqO8FXd507ifLGdTRF3RhH5ySl92sS/ocOUgMkO7mcRQCxRT/g0QEfv9KgIIKTceo57BEaBnHEa8cN/w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783459655; c=relaxed/simple;
-	bh=lcxMpex3/76GsMC05gSy6Sj5pulUagJGxridp0qbK3c=;
+	s=arc-20240116; t=1783459895; c=relaxed/simple;
+	bh=yQm1Z0S/bKXn+Y8bKc4mpLWpk9pnjNpVuSGhFko3B90=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=m/W+O7XYrDYXzQzUkXTYibMH75qE69YRSZTbVnB6fJsyu9MOyzAb8p6ELXaNasHuwWhrlIh95Dd58xoEH9Y2r8UIlaSrhrLrosU9X7MFujlVt+V+JKuozSdc9X6Zqwj+SIbzllKrZNUoo6ADPr+9j5+lZS8uzIdCf70Ns2VJE5Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hk9Zz9IG; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=bPP9OBpU75gTz1dWz5FesgYLM1Z+c1ZDMO7emnE+x5QXcZVui+IJGZ4VMgPE5yJC4JaALMIOieW4eVQWku5WFsY96i/9pNR9kqYCUJc5R2c1BpmGPKG+phHP5Rf+obA2RWwSNPT1C2NVAuVZJtWMFng+KnYAnudp6K1KKcxxkqM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bFIwdxPN; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hk9Zz9IG"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 86E591F000E9;
-	Tue,  7 Jul 2026 21:27:33 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bFIwdxPN"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B16FE1F000E9;
+	Tue,  7 Jul 2026 21:31:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783459653;
-	bh=2yNBTpm+AdgjQ6moec0yd/FHzkaTbFC/sNd5DqjWsn0=;
+	s=k20260515; t=1783459894;
+	bh=25Xj7d2C3HA6kWDj0tDvEIdzBBCcpznbH5SWdl68mjI=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=hk9Zz9IGKyMG4cds4U5X9UasSDVS+n5eOoXK91EnJAS7eep0cHrqs8NyIOBS4iQHN
-	 PR75PVSEHhVnDIS6wnak+AcenJmeK+Ia4a5bfaQKnYOAaOdOcw79FSlTklTgyxrJWB
-	 vxGYyOgFMg5lBciZ5sCFAJIHfonPWFNKrE6+5zRVlrpFZbiLe5M0BMiGHHHh+hGh2A
-	 nQC58MOyrE/ZhsDCrRgvMhtyTg5x74bDQIzhZEFblemOjbVRKrUkzkcI+zyl31gh6V
-	 I4wbWneRuxKf0tkEnOTQfBvq6oB4dloeMF50AxcGFXXFphwIXMHmtEcxvfw7xYUSCn
-	 jymqdeL/BiHDA==
+	b=bFIwdxPNks6myTRl3IXg9AlIEgbCE6Gv0HzMxCSxNjkL45AfbWeklgJ8GbKb0ogA2
+	 8hg8CSH+oPjnHOa+chUgf+hJpB2AhZxvhegRylvxeWX35L7uCe3DMqTFGpLiQ+mSnN
+	 U3GNT+493y5qxvsWhNx37mSUfsOyBlar4vzdoD/ormWkwAGurc4GhGgW6gxvNAJbTX
+	 dMV5kNmcfNDt3+iHFNIQ7JnDXKJxDOBxD6seAmNsWtrUg7KNQklqFKA0owgYY7fSwy
+	 9RuDUmK0XVmqNBgjwd9F6eXYbtHBr/eSwSb3sJGiIc9+42qzimSDbTRif/PHFDXRLR
+	 l2f3/zRqdJ1kg==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RFC v2 3/7] mfd: ls2kbmc: Redraw using exported
- functions
+Subject: Re: [PATCH RFC v2 7/7] mfd: ls2kbmc: Capture the reset event of BMC
+ through GPIO
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Miao Wang" <shankerwangmiao@gmail.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260708-ls2kbmc-mod-v2-3-2afdd1741766@gmail.com>
+In-Reply-To: <20260708-ls2kbmc-mod-v2-7-2afdd1741766@gmail.com>
 References: <20260708-ls2kbmc-mod-v2-0-2afdd1741766@gmail.com>
- <20260708-ls2kbmc-mod-v2-3-2afdd1741766@gmail.com>
+ <20260708-ls2kbmc-mod-v2-7-2afdd1741766@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 07 Jul 2026 21:27:33 +0000
-Message-Id: <20260707212733.86E591F000E9@smtp.kernel.org>
+Date: Tue, 07 Jul 2026 21:31:33 +0000
+Message-Id: <20260707213133.B16FE1F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 5 potential issue(=
+Thank you for your contribution! Sashiko AI review found 4 potential issue(=
 s) to consider:
 
+New issues:
+- [High] TOCTOU race and API misuse in edge-triggered GPIO interrupt handle=
+r.
+
 Pre-existing issues:
-- [Critical] The driver executes a massive 10-second busy-wait loop (`mdela=
-y(10000)`) inside a `stop_machine` execution, causing a hard lockup.
-- [High] The driver initializes and schedules a work item but does not prov=
-ide a `.remove` callback or devres action to cancel it on unbind, leading t=
-o a potential use-after-free.
-- [High] The probe function dynamically mutates the global static `ls2k_bmc=
-_cells` array using a stack-allocated pointer, violating MFD rules and risk=
-ing a data race condition.
-- [High] The driver unconditionally unregisters an ACPI GSI immediately aft=
-er successfully requesting its IRQ, breaking the interrupt routing.
-- [High] The shared interrupt handler lacks source verification, causing an=
-y shared IRQ to spuriously trigger a 10-second system stall.
+- [High] Unconditional return of IRQ_HANDLED in shared PCI interrupt handle=
+r breaks interrupt sharing.
+- [High] Executing a 10-second busy-wait inside a stop_machine() callback t=
+riggers hard lockups.
+- [High] jiffies wraparound bug in rate-limiting ignores interrupts for the=
+ first 6 minutes of uptime.
 --
 
---- Patch [3]: [PATCH RFC v2 3/7] mfd: ls2kbmc: Redraw using exported funct=
-ions ---
-commit 262b4b899dbe26d6f3d0f812e42256a7beea8a22
+--- Patch [7]: [PATCH RFC v2 7/7] mfd: ls2kbmc: Capture the reset event of =
+BMC through GPIO ---
+commit 4fddebf5ba83cb02d076dd7162e7b2b6d2116f26
 Author: Miao Wang <shankerwangmiao@gmail.com>
-Subject: mfd: ls2kbmc: Redraw using exported functions
 
-This commit modifies the redraw trigger for the current VT. It switches
-from using set_console(vt_move_to_console(...)) to using console_lock()
-and update_screen() directly.
+mfd: ls2kbmc: Capture the reset event of BMC through GPIO
+
+This patch updates the driver to capture BMC reset events using the standard
+GPIO framework rather than directly accessing fixed memory-mapped registers.
+It attempts to find the GPIO from ACPI _CRS resources and falls back to a
+fixed address if unavailable.
 
 > diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-> index b02e4955e9b04..a5465c42a77b8 100644
+> index f87224105b372..7187b2dfddc3a 100644
 > --- a/drivers/mfd/ls2k-bmc-core.c
 > +++ b/drivers/mfd/ls2k-bmc-core.c
 [ ... ]
-> @@ -310,7 +311,9 @@ static void ls2k_bmc_events_fn(struct work_struct *wo=
-rk)
-> =20
->  	if (IS_ENABLED(CONFIG_VT)) {
->  		/* Re-push the display due to previous PCI-E loss. */
-> -		set_console(vt_move_to_console(MAX_NR_CONSOLES - 1, 1));
-> +		console_lock();
-> +		update_screen(vc_cons[fg_console].d);
-> +		console_unlock();
->  	}
+> @@ -334,6 +326,22 @@ static irqreturn_t ls2k_bmc_interrupt(int irq, void =
+*arg)
+>  	return IRQ_HANDLED;
 >  }
 
 [Severity: High]
-This is a pre-existing issue, but does this missing remove callback cause a
-use-after-free?
+This is a pre-existing issue, but does ls2k_bmc_interrupt unconditionally
+return IRQ_HANDLED without checking hardware registers?
 
-The work structure is initialized inside devres-managed memory:
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_init() {
-    ...
-    INIT_WORK(&ddata->bmc_reset_work, ls2k_bmc_events_fn);
-    ...
-}
-
-But there is no remove callback to cancel it:
-
-drivers/mfd/ls2k-bmc-core.c:
-static struct pci_driver ls2k_bmc_driver =3D {
-    .name =3D "ls2k-bmc",
-    .id_table =3D ls2k_bmc_devices,
-    .probe =3D ls2k_bmc_probe,
-};
-
-If the driver is unbound via sysfs while bmc_reset_work is queued or runnin=
-g,
-the devres framework will unregister the IRQ and free the ddata structure.
-Without a remove function executing cancel_work_sync(), will the workqueue
-execute ls2k_bmc_events_fn() and access the freed memory?
+The PCI interrupt is requested with IRQF_SHARED. If another device sharing
+the IRQ line fires an interrupt, will this unconditionally claim it and fal=
+sely
+trigger the BMC recovery process?
 
 [Severity: High]
-This isn't a bug introduced by this patch, but does the probe function muta=
-te a
-shared global array?
+This is a pre-existing issue, but does the rate-limiting in
+ls2k_bmc_interrupt drop interrupts during the first 6 minutes of uptime?
 
-The global array is defined as non-const:
-
-drivers/mfd/ls2k-bmc-core.c:
-static struct mfd_cell ls2k_bmc_cells[] =3D {
-
-And the probe function dynamically assigns a stack-allocated pointer to it:
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_probe() {
-    ...
-    ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data =3D &pd;
-    ls2k_bmc_cells[LS2K_BMC_DISPLAY].pdata_size =3D sizeof(pd);
-    ...
-}
-
-Although devm_mfd_add_devices() creates a copy of the data, the global array
-retains the dangling stack pointer after probe() returns. If multiple insta=
-nces
-of this driver probe concurrently, could this cause a data race by overwrit=
-ing
-this shared global pointer?
-
-[Severity: Critical]
-This is a pre-existing issue, but does this stop_machine() call lock up the
-system?
-
-The recovery function executes a massive 10-second busy-wait loop:
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_recover_pci_data() {
-    ...
-    /* Waiting for U-Boot and DDR ready */
-    mdelay(LS2K_BMC_RESET_WAIT_TIME);
-    ...
-}
-
-And this function is executed via stop_machine():
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_events_fn() {
-    ...
-    stop_machine(ls2k_bmc_recover_pci_data, ddata, NULL);
-    ...
-}
-
-The stop_machine() mechanism disables local interrupts and halts all CPUs in
-the system to safely execute the callback. Does halting all CPUs with inter=
-rupts
-globally disabled for 10-12 seconds fatally hang the system and trigger NMI
-watchdogs?
+Because last_jiffies is statically initialized to 0, and jiffies starts at
+INITIAL_JIFFIES (typically -300 * HZ), time_after(jiffies, last_jiffies +
+LS2K_BMC_INT_INTERVAL) evaluates to false until jiffies wraps around zero.
 
 [Severity: High]
-This isn't a bug introduced by this patch, but is the GSI mapping destroyed
-while the IRQ is actively requested?
+This is a pre-existing issue, but will ls2k_bmc_events_fn trigger a hard
+lockup by calling stop_machine()?
 
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_init() {
-    ...
-    acpi_unregister_gsi(LS2K_BMC_RESET_GPIO_GSI);
-    ...
-}
+ls2k_bmc_events_fn registers ls2k_bmc_recover_pci_data to run under
+stop_machine, where it executes a 10-second busy wait
+(mdelay(LS2K_BMC_RESET_WAIT_TIME)) with local interrupts disabled on all CP=
+Us.
 
-In ls2k_bmc_init(), the driver allocates an IRQ from a GSI using
-acpi_register_gsi() and then claims it via devm_request_irq(). Does
-unconditionally calling acpi_unregister_gsi() immediately after requesting =
-it
-dispose of the IRQ domain mapping and break the interrupt routing?
+> +static irqreturn_t ls2k_bmc_gpio_interrupt(int irq, void *arg)
+> +{
+> +	struct ls2k_bmc_ddata *ddata =3D arg;
+> +
+> +	int val =3D gpiod_get_raw_value(ddata->reset_gpio);
+> +
+> +	/*
+> +	 * The GPIO is active low, so when the value is 0,
+> +	 * it indicates a reset event.
+> +	 */
+> +	if (val =3D=3D 0)
+> +		return ls2k_bmc_interrupt(irq, arg);
 
 [Severity: High]
-This is a pre-existing issue, but does the shared interrupt handler properly
-verify its source?
+Is there a race condition here that might miss reset events?
 
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_interrupt() {
-    ...
-    /* Skip interrupt in LS2K_BMC_INT_INTERVAL */
-    if (time_after(jiffies, last_jiffies + LS2K_BMC_INT_INTERVAL)) {
-        schedule_work(&ddata->bmc_reset_work);
-        last_jiffies =3D jiffies;
-    }
-    ...
-}
+Since the interrupt is requested as edge-triggered (IRQF_TRIGGER_FALLING),
+could the physical line have already returned to a high state by the time
+this handler executes? If gpiod_get_raw_value sees a high level, the
+handler returns IRQ_NONE, which could cause the spurious interrupt
+detector to permanently disable the shared IRQ line.
 
-The handler schedules hardware reset work unconditionally without reading a=
-ny
-hardware status register to verify if the BMC actually asserted the interru=
-pt.
-Since the PCIe and GPIO interrupts are registered with IRQF_SHARED, if any
-other device shares this IRQ line, will its interrupts spuriously trigger t=
-he
-BMC reset sequence and repeatedly stall the system in stop_machine()?
+Also, does using gpiod_get_raw_value instead of gpiod_get_value
+bypass gpiolib logical polarity abstractions (like ActiveLow from ACPI),
+potentially breaking active-high reset configurations?
+
+> +
+> +	return IRQ_NONE;
+> +}
+[ ... ]
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260708-ls2kbmc-mo=
-d-v2-0-2afdd1741766@gmail.com?part=3D3
+d-v2-0-2afdd1741766@gmail.com?part=3D7
