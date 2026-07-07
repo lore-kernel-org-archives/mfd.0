@@ -1,44 +1,44 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0AEB437472F
-	for <mfd@lists.linux.dev>; Tue,  7 Jul 2026 21:26:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 39F0237647E
+	for <mfd@lists.linux.dev>; Tue,  7 Jul 2026 21:26:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783459578; cv=none; b=BOVXoIj7cYlD3dYjejSrzuAHT3dMoQM3IRKMzAAuWxHNQGcQfQZEpNK22g0JHl+bxjw1bzeIKRV8UfBrg/r7YjNxMnHC5WURme7fYg0NO9+czK1Axnh3wkuz7lVsrznAfinF25h2Pm8bIIsCe5lQ5ZujQLfzWlNTBxnWQ8tJP5k=
+	t=1783459598; cv=none; b=Im6sMaSUm/k4xAvzLtDUt2gp/x3g0rCht5sc+PUS4Vc4mOOE7ZyPicm9LFlcpeEssMa4cLFt3YPDgiO3uh3YTRTqdAhI2JCMLSjOtzdnPaPOHGiMClDjWS6JN0iK7U2DR0rgKQACCFEud97uildTY5NUgcNnQUCv7+Ye2rXWoCk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783459578; c=relaxed/simple;
-	bh=udVg06eCI4PPBMtc/PonDKQ7kKCUkqUeCJuiTK+c8S4=;
+	s=arc-20240116; t=1783459598; c=relaxed/simple;
+	bh=tUe91ESfmXstSIEwJbnYaWTkujpnfOtt/BffjIf6h2A=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=a9MBndNTQRLvBGI8oy0L/M1mjr3oKbyTgWUSKNZ5nN0xX3+0alD1hQjmfeLrv7VGWAGaLK2NqNcxYu8P4nuQCL/6iXNqICI6JS1R+HI6Q2FMQ+kTx2n2Ni2Ic/hRb96766dKolD+9KNo/riep02X/YucoEo//sKdkA6bG/8B1FM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=noyA73iy; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=DnwIyuotqk/ws4Zjm8DOHwXaRrDZTANxARDlD1oVj25pJ7l/5KnUsu56S+WLaZ6gkXX+XmjsUcENT7sIj/xT46ZfwWL/UjKYEWKA0Lv7JRlUPQLV2xLxY0Cr7q7FCtAeWJlTl3/Iz14xYkORk9csafwQBU0WXg4l1UJe3pKOp14=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fl/cHtz6; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="noyA73iy"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 14EAF1F000E9;
-	Tue,  7 Jul 2026 21:26:16 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fl/cHtz6"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E576A1F000E9;
+	Tue,  7 Jul 2026 21:26:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783459576;
-	bh=c3RuO5oI7RiO2wC1wIY3RbUJ0SNPwZ0cvzP/rrBdeUU=;
+	s=k20260515; t=1783459597;
+	bh=2G+KcDdvN2sQExbv4pXUtpBTr+pKLhgjuHLSdd8GY6g=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=noyA73iyiG5vZvgK3yUkwpeea2g+YmbZEigtfeqW27S0cldrGviDAQHTQBXB5pHKB
-	 nHSsHnjNSbQEgoz6XMv4KaO6lKP5pT7JrNjin942s3ld1DO5pzoLdMzGSfNpoL+r7Y
-	 +6J1kjzqU3Vh5T1oBIqD4lB+tHUpOUZu5+Qtj+AL26fXnuoUU/pTiWceL8Sdd7bIQq
-	 vtWVXbK18QpUEAhP1zSYW8KuBp//NlM2FzBAR27EUHswcwkKaVG7eoWBUvaqC8Y9w7
-	 qVRtMUHtRdQuzbeiuMYcy3Hg+ohqI/Bb9//bFGq3ecTbwM2ujzedEVwN5Ysvw8zRMs
-	 c1Vwkwv/ca3sw==
+	b=fl/cHtz6gD/Jnh4jPS8l6bHvbA3RAHLefnEQr7m24FtOxLZXBiCCy0tTp5St1iAVa
+	 euq+qdIpBpx9gBcV/odAijTbdFV0IgwDi6bXowtjcstcDZe+8KQivTDcFqzpCw3oBA
+	 ccqBuuTSQf8/m4g+nw/KWOTToHssgaqB/MpCtDZNUfmno5h3KeyDKjDFtwu8RIt9d6
+	 L0De5SAkm85wYVi4pwDoU6DRAFjHi+NJcnhm10TaIZfc+bHEbQO6AQ3TOxDBeBM25G
+	 zBNBiUS6RwNj7u7iVuWJ1ROVOoS38TzYo8ezVvXpwEUcULYgcBHXYIqlpkCJedE7/X
+	 ldtxf/AyAnLjg==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RFC v2 2/7] mfd: ls2kbmc: Sanity check for the connected
- pci port
+Subject: Re: [PATCH RFC v2 6/7] mfd: ls2kbmc: Able to be compiled as a
+ module
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Miao Wang" <shankerwangmiao@gmail.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260708-ls2kbmc-mod-v2-2-2afdd1741766@gmail.com>
+In-Reply-To: <20260708-ls2kbmc-mod-v2-6-2afdd1741766@gmail.com>
 References: <20260708-ls2kbmc-mod-v2-0-2afdd1741766@gmail.com>
- <20260708-ls2kbmc-mod-v2-2-2afdd1741766@gmail.com>
+ <20260708-ls2kbmc-mod-v2-6-2afdd1741766@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 07 Jul 2026 21:26:15 +0000
-Message-Id: <20260707212616.14EAF1F000E9@smtp.kernel.org>
+Date: Tue, 07 Jul 2026 21:26:36 +0000
+Message-Id: <20260707212636.E576A1F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -49,150 +49,141 @@ Thank you for your contribution! Sashiko AI review found 4 potential issue(=
 s) to consider:
 
 Pre-existing issues:
-- [Critical] This problem wasn't introduced by this patch, but the driver e=
-xecutes a 10-second `mdelay()` inside a `stop_machine()` context, severely =
-freezing the system and risking NMI watchdog panics.
-- [High] This problem wasn't introduced by this patch, but the driver dynam=
-ically modifies a global, non-const `mfd_cell` array during `probe()`, viol=
-ating MFD subsystem guidelines and creating a concurrency data race.
-- [High] This problem wasn't introduced by this patch, but the shared inter=
-rupt handler unconditionally returns `IRQ_HANDLED` without checking hardwar=
-e registers, breaking shared IRQ lines.
-- [High] This problem wasn't introduced by this patch, but the driver uncon=
-ditionally unregisters the ACPI GSI immediately after successfully requesti=
-ng the GPIO IRQ.
+- [Critical] Executing an unbounded and extremely long busy-wait (10+ secon=
+ds) inside a `stop_machine` callback, which will cause a hard lockup.
+- [High] Dynamically modifying a global static `mfd_cell` array with a poin=
+ter to a stack-allocated variable, causing a data race and leaving a dangli=
+ng pointer.
+- [High] The GPIO GSI-to-IRQ mapping is unconditionally unregistered immedi=
+ately after being successfully requested, breaking the interrupt handler.
+- [High] The IRQ handler uses a static rate-limiting variable that drops in=
+terrupts during the first ~5 minutes of system uptime and improperly shares=
+ state across device instances.
 --
 
---- Patch [2]: [PATCH RFC v2 2/7] mfd: ls2kbmc: Sanity check for the connec=
-ted pci port ---
-commit 196295bb9b62c28a067b90bc276ab4463c9f9b51
+--- Patch [6]: [PATCH RFC v2 6/7] mfd: ls2kbmc: Able to be compiled as a mo=
+dule ---
+commit f6dafc2cbabb3cc03d44c55be366eadc27bca60c
 Author: Miao Wang <shankerwangmiao@gmail.com>
 
-mfd: ls2kbmc: Sanity check for the connected pci port
+mfd: ls2kbmc: Able to be compiled as a module
+   =20
+Make ls2kmc able to be compiled as a module
 
-This commit adds a sanity check to the ls2k_bmc_probe() function to ensure
-the device is connected to a supported LS7A PCI-E port. This prevents the
-driver from accidentally operating on non-LS7A ports when the BMC resets
-and requires parent device reconfiguration.
+> diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
+> index 763ce6a34782b..a7a9f97af248c 100644
+> --- a/drivers/mfd/Kconfig
+> +++ b/drivers/mfd/Kconfig
+> @@ -2494,7 +2494,7 @@ config MFD_LOONGSON_SE
+>  	  which will forward them to the corresponding engine.
+> =20
+>  config MFD_LS2K_BMC_CORE
+> -	bool "Loongson-2K Board Management Controller Support"
+> +	tristate "Loongson-2K Board Management Controller Support"
+>  	depends on PCI && ACPI_GENERIC_GSI
+>  	select MFD_CORE
+>  	help
 
-> diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-> index 27f6e096404d6..b02e4955e9b04 100644
+This isn't a bug introduced by this patch, but while reviewing this I notic=
+ed a few pre-existing issues in drivers/mfd/ls2k-bmc-core.c:
+
 > --- a/drivers/mfd/ls2k-bmc-core.c
 > +++ b/drivers/mfd/ls2k-bmc-core.c
 
 [ ... ]
 
-> @@ -488,6 +515,11 @@ static int ls2k_bmc_probe(struct pci_dev *dev, const=
- struct pci_device_id *id)
->  	if (ret)
->  		return ret;
-> =20
-> +	if (!ls2k_check_parent(dev)) {
-> +		dev_err(&dev->dev, "Expected to be connected to LS7A PCI-E port\n");
-> +		return -ENODEV;
-> +	}
-> +
->  	ddata =3D devm_kzalloc(&dev->dev, sizeof(*ddata), GFP_KERNEL);
->  	if (!ddata)
->  		return -ENOMEM;
+> static struct mfd_cell ls2k_bmc_cells[] =3D {
 
 [Severity: High]
-This isn't a bug introduced by this patch, but I noticed a potential data
-race when assigning a stack address to a global array later in the probe
-function:
+This is a pre-existing issue, but shouldn't this array be defined as
+static const to comply with MFD subsystem guidelines?
 
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_probe() {
-    ...
-    ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data =3D &pd;
-    ls2k_bmc_cells[LS2K_BMC_DISPLAY].pdata_size =3D sizeof(pd);
-    ...
-}
+[ ... ]
 
-Does this create a race condition if multiple instances of this device are
-probed simultaneously?
+> static int ls2k_bmc_probe(struct pci_dev *dev, const struct pci_device_id=
+ *id)
+> {
+> 	struct simplefb_platform_data pd;
+[ ... ]
+> 	ret =3D ls2k_bmc_parse_mode(dev, &pd);
+> 	if (ret)
+> 		return ret;
+>=20
+> 	ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data =3D &pd;
 
-Since ls2k_bmc_cells is not marked as const:
+[Severity: High]
+This is a pre-existing issue, but does this leave a dangling pointer to
+the local stack variable pd in the global array?  Could this also cause
+a data race if multiple instances of this driver probe concurrently?
 
-drivers/mfd/ls2k-bmc-core.c:
-static struct mfd_cell ls2k_bmc_cells[] =3D {
+[ ... ]
 
-Could multiple probes overwrite this shared pointer with their own stack
-addresses, violating the MFD subsystem guidelines that require mfd_cell arr=
-ays
-to be static const?
+> static void ls2k_bmc_events_fn(struct work_struct *work)
+> {
+[ ... ]
+> 	/*
+> 	 * The PCI-E is lost when the BMC resets, at which point access to the P=
+CI-E
+> 	 * from other CPUs is suspended to prevent a crash.
+> 	 */
+> 	stop_machine(ls2k_bmc_recover_pci_data, ddata, NULL);
 
-After probe() completes, does this leave a dangling pointer to popped stack
-memory in the global array?
+[ ... ]
 
+> static int ls2k_bmc_recover_pci_data(void *data)
+> {
+[ ... ]
+> 	/* Waiting for U-Boot and DDR ready */
+> 	mdelay(LS2K_BMC_RESET_WAIT_TIME);
 
 [Severity: Critical]
-This is a pre-existing issue, but I noticed a potentially severe problem wi=
-th
-how delays are handled during the reset work:
+This is a pre-existing issue, but does this execute a 10 second busy-wait
+while running in the stop_machine() callback?  Since stop_machine() halts
+all other CPUs with local interrupts disabled, will this cause a hard
+lockup?
 
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_events_fn() {
-    ...
-    stop_machine(ls2k_bmc_recover_pci_data, ddata, NULL);
-    ...
-}
+[ ... ]
 
-Inside the callback:
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_recover_pci_data() {
-    ...
-    mdelay(LS2K_BMC_RESET_WAIT_TIME);
-    ...
-}
-
-Since stop_machine() pauses execution on all other CPUs with interrupts
-disabled, does delaying for 10,000 milliseconds inside
-ls2k_bmc_recover_pci_data() completely freeze the system?
-
-Could this trigger hardware or software NMI watchdogs and lead to a panic?
-
+> static int ls2k_bmc_init(struct ls2k_bmc_ddata *ddata)
+> {
+[ ... ]
+> 	ret =3D devm_request_irq(ddata->dev, gpio_irq, ls2k_bmc_interrupt,
+> 			       IRQF_SHARED | IRQF_TRIGGER_FALLING, "ls2kbmc gpio", ddata);
+> 	if (ret)
+> 		dev_err(ddata->dev, "Failed to request LS2KBMC GPIO IRQ %d.\n", gpio_ir=
+q);
+>=20
+> 	acpi_unregister_gsi(LS2K_BMC_RESET_GPIO_GSI);
 
 [Severity: High]
-This isn't a bug introduced by this patch, but there seems to be an issue
-with how the shared interrupt is handled:
+This is a pre-existing issue, but does this unconditionally unregister and
+dispose of the IRQ mapping immediately after it was successfully requested?
+Could this leave an orphaned irqaction and break the GPIO interrupts?
 
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_init() {
-    ...
-    ret =3D devm_request_irq(&pdev->dev, pdev->irq, ls2k_bmc_interrupt,
-                           IRQF_SHARED | IRQF_TRIGGER_FALLING, "ls2kbmc pci=
-e", ddata);
-    ...
-}
+[ ... ]
 
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_interrupt() {
-    ...
-    return IRQ_HANDLED;
-}
-
-Since the interrupt is requested with IRQF_SHARED, is it safe for
-ls2k_bmc_interrupt() to unconditionally return IRQ_HANDLED without checking
-hardware registers?
-
-If another device sharing the IRQ line fires an interrupt, does this falsely
-claim the interrupt and break the IRQ core's spurious interrupt detection?
-
+> static irqreturn_t ls2k_bmc_interrupt(int irq, void *arg)
+> {
+> 	struct ls2k_bmc_ddata *ddata =3D arg;
+> 	static unsigned long last_jiffies;
 
 [Severity: High]
-This is a pre-existing issue, but the GPIO IRQ cleanup path looks problemat=
-ic
-on successful initialization:
+This is a pre-existing issue, but does this improperly share the rate
+limiting state across all device instances?
 
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_init() {
-    ...
-    acpi_unregister_gsi(LS2K_BMC_RESET_GPIO_GSI);
-    return ret;
-}
+>=20
+> 	if (system_state !=3D SYSTEM_RUNNING)
+> 		return IRQ_HANDLED;
+>=20
+> 	/* Skip interrupt in LS2K_BMC_INT_INTERVAL */
+> 	if (time_after(jiffies, last_jiffies + LS2K_BMC_INT_INTERVAL)) {
 
-Does this code unconditionally unregister the ACPI GSI immediately after
-successfully requesting the GPIO IRQ?
-
-Could destroying the mapping while the requested interrupt handler is still
-active break the interrupt routing and prevent it from firing?
+[Severity: High]
+This is a pre-existing issue, but because last_jiffies initializes to 0 and
+jiffies starts at INITIAL_JIFFIES (usually a large unsigned value near wrap
+around), will this block all valid hardware interrupts for the first ~5
+minutes of system uptime?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260708-ls2kbmc-mo=
-d-v2-0-2afdd1741766@gmail.com?part=3D2
+d-v2-0-2afdd1741766@gmail.com?part=3D6
