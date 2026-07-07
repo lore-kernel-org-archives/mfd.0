@@ -1,215 +1,154 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2DA42EEE85
-	for <mfd@lists.linux.dev>; Tue,  7 Jul 2026 19:35:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEC95238D27
+	for <mfd@lists.linux.dev>; Tue,  7 Jul 2026 19:36:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783452910; cv=none; b=O73gkf38XEdacNp3/3UHcBc17wTLiY9SwiwVf/dRi1X5ywMkkl5/0FtdREJAdiWB0PZ7Uq6W9ELSEh+Re4qK2sHR+K4iAPhhlgAka1teg+R+986+5Rtd+ugeUIAmU1vBz6f43+3GbVGfZAfSMGmIdmG7UzXMitlbiHwzdcafnLY=
+	t=1783452963; cv=none; b=AfvAHuQLfHPbp6+6vUs5KIW/5P5xsFosabNd+VVvB45A9azVbOLa2ZI9X3/KfB+aD6pPd4XhB2ATa3nfB9J6IM7giEjrFPG0m3Xfs0oyCbQpC4WTLeK8keBQ6DGQmaTqKX6qrtR0w908raTNUIeQwpLVrmZusL+AltSQQyQo9zc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783452910; c=relaxed/simple;
-	bh=/EuqnfDm7hFY+GzLz4ntlQ5J1lf9ct2nqKQIjO3Ov5o=;
+	s=arc-20240116; t=1783452963; c=relaxed/simple;
+	bh=UHUhWTdWdzcATAzhubq2f8LxS4jB44PEnVWhtRUF1/w=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=H81mOvIJ/uAzmdjGRz3L+oBF/sxRn+C/bTQmZrqOz8dESiyh9qsZTY+rbfMIrekwqIuxgqJG5FrsscHV/PaAfvFERb3JvryDaTCbCetMQtvxUd3zYgcPPb6HvdlQTTYiOieCmJXQ8EbuuaiDbdlQIDiKKusZm1cjmk8/KaQgnmM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PyQxBdiH; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=Fd06jWX/vkgJou2DPFsGQC5SBq9+ZSecfaCRARmQQdnsE+JPJY82NL4AUSH+s6mZQAu8i90vowogdFsQmM3Lx3Hpd1UDvcT+Jf1w3JGngvT5zGPaTg2V6o9sIqu89rasZ7HWGRdgQijbws0ui67Zgiw4h9ny9GydC0wFXtdZKI4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nV88bjCj; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PyQxBdiH"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 43EF11F000E9;
-	Tue,  7 Jul 2026 19:35:08 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nV88bjCj"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A9EB51F000E9;
+	Tue,  7 Jul 2026 19:36:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783452908;
-	bh=pBEieUapSINQQrMpQBhwnHkSvLTZiyt7rQ/2MdUc1eY=;
+	s=k20260515; t=1783452961;
+	bh=T7RycLEC9n9oeDO09vRBlajOlfy+6juv8YqXZ8DmRxo=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=PyQxBdiHC6Dm2ifDuovbsQ/+ZvpZgMGdNKUYCRjwBhOyDWgSmqc9N0vHq1rBq0mo9
-	 POlMy11ooO9XAs+8U6wn9ZPwRb7EJzFXu+5yHlbHhXM+Fnsn3kNhR5W2AoEEAjQ6ON
-	 Fs3faXcYV71Ha38KkxhFhzq4w2ZsPhrivVogqYL2Ip4NmdqaLKbOLNqIdAw/okM/O/
-	 3rtLDnDwoE+l+YbCQeUIq3EuptOd25sS3tgaeRYpxChMKeIqkDQ2pnGmBw1jPfhu/I
-	 IwIdtkU5+ZpNn6GPH7+PkqaLBgqdj8dkvJC4/q+7nSOD8n0kHz+mRnwUWZVP0r83ao
-	 AdcbUF+jB4krQ==
+	b=nV88bjCjFe1GqsrfZ2bxOjpaRJcj5S5E1H4eI38FafXVaWVNYoP3mnewCEODaAySh
+	 sRHqXkaFcr5DEM4S0Zb6vMuUvyGHqofnx/u2ujFDs+j5WPpJctURdylUfi6XD2tuvl
+	 BooCm6KRxzYxjobeILLT8qZmLPw12oiRcJ4zLbuyO9+4RM0U0MGN0A89KXWqZ7AKAZ
+	 QXiIiCzo9mh1ea1IfvVJ+DAIyBtzhkF6wrojR/Sxp3/ES6hQ56k1IJ99WFftq3a9pQ
+	 DieFONxGiSmdFAxaA6RaWZvYGqTPC9E06uCI9oVZJsctoR3cwof2Sc3S9+YWZ5xMqd
+	 5odTkQiLITmqQ==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RFC 1/5] mfd: ls2kbmc: make a copy when parsing mode
- string
+Subject: Re: [PATCH RFC 3/5] mfd: ls2kbmc: redraw using exported functions
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Miao Wang" <shankerwangmiao@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260708-ls2kbmc-mod-v1-1-c344bf5defa3@gmail.com>
+Cc: lee@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20260708-ls2kbmc-mod-v1-3-c344bf5defa3@gmail.com>
 References: <20260708-ls2kbmc-mod-v1-0-c344bf5defa3@gmail.com>
- <20260708-ls2kbmc-mod-v1-1-c344bf5defa3@gmail.com>
+ <20260708-ls2kbmc-mod-v1-3-c344bf5defa3@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 07 Jul 2026 19:35:07 +0000
-Message-Id: <20260707193508.43EF11F000E9@smtp.kernel.org>
+Date: Tue, 07 Jul 2026 19:36:00 +0000
+Message-Id: <20260707193600.A9EB51F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 9 potential issue(=
+Thank you for your contribution! Sashiko AI review found 5 potential issue(=
 s) to consider:
 
-New issues:
-- [High] The new mode parsing logic incorrectly rejects valid resolution st=
-rings that lack a trailing refresh rate (e.g. strings without an '@').
-- [High] Standard `memcpy` is used to read from I/O memory instead of the r=
-equired `memcpy_fromio`.
-- [Low] Allocating a 1024-byte array on the kernel stack is wasteful and in=
-creases the risk of stack overflow.
-- [Low] The patch abuses managed `devm_ioremap` and `devm_iounmap` for a te=
-mporary, short-lived memory mapping.
-- [Low] The newly introduced error log prints a truncated and misleading st=
-ring due to in-place modifications by `strsep()`.
-- [Low] Printing raw, untrusted memory directly to the kernel log allows fo=
-r terminal escape sequence injection.
-
 Pre-existing issues:
-- [High] The driver dynamically modifies a shared static `mfd_cell` array a=
-nd stores a local stack pointer into it, violating MFD core guidelines.
-- [High] The `bmc_reset_work` workqueue is not explicitly cancelled during =
-probe failure or device unbind, leading to a potential Use-After-Free.
-- [High] Invalid use of `kstrtoint` on `u32` variables combined with untrus=
-ted input can lead to an integer overflow when calculating the framebuffer =
-stride.
+- [High] A 10-second busy-wait is executed inside a `stop_machine` callback=
+, causing an uninterruptible system freeze that will trigger hardware locku=
+p watchdogs.
+- [High] The scheduled work item is never canceled upon device unbind, lead=
+ing to a use-after-free vulnerability.
+- [High] The probe function assigns a stack variable pointer to a globally =
+shared, dynamically mutated `mfd_cell` array.
+- [High] The recovery callback returns 0 (false) on failure, and the caller=
+ ignores the return value, leading to unchecked PCIe errors and system pani=
+cs.
+- [High] Unconditional `IRQ_HANDLED` return in a shared interrupt handler w=
+ithout source validation.
 --
 
---- Patch [1]: [PATCH RFC 1/5] mfd: ls2kbmc: make a copy when parsing mode =
-string ---
-commit 50370b4ef23f8df41c25e8399d557676642d9cdc
+--- Patch [3]: [PATCH RFC 3/5] mfd: ls2kbmc: redraw using exported function=
+s ---
+commit 2d719e1f4433582637922b9095dc176ee03b5768
 Author: Miao Wang <shankerwangmiao@gmail.com>
 
-mfd: ls2kbmc: make a copy when parsing mode string
+mfd: ls2kbmc: redraw using exported functions
 
-This patch modifies the mode string parsing logic to copy the BMC memory
-into a local buffer instead of parsing it in-place. This prevents the
-original memory from being modified by strsep().
+This commit modifies ls2k_bmc_events_fn to use update_screen to trigger
+a redraw of the current vt, replacing set_console. This aims to safely
+restore the display state after a PCIe loss.
 
 > diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-> index 408056bfb2fe7..30b275bc48794 100644
 > --- a/drivers/mfd/ls2k-bmc-core.c
 > +++ b/drivers/mfd/ls2k-bmc-core.c
-> @@ -427,34 +427,53 @@ static int ls2k_bmc_init(struct ls2k_bmc_ddata *dda=
-ta)
->   */
->  static int ls2k_bmc_parse_mode(struct pci_dev *pdev, struct simplefb_pla=
-tform_data *pd)
->  {
-> -	char *mode;
-> +	/* Assume 1024 bytes is enough for the resolution string */
-> +	char mode_buf[1024];
-
-[Severity: Low]
-Is allocating a 1024-byte array on the kernel stack necessary here? Standard
-video mode strings are usually well under 64 bytes. Large stack allocations
-consume limited stack space and can increase the risk of stack overflows.
-
-> +	char *mode =3D mode_buf;
-> +	const void __iomem *mode_base;
->  	int depth, ret;
+> @@ -310,7 +311,9 @@ static void ls2k_bmc_events_fn(struct work_struct *wo=
+rk)
 > =20
->  	/* The last 16M of PCI BAR0 is used to store the resolution string. */
-> -	mode =3D devm_ioremap(&pdev->dev, pci_resource_start(pdev, 0) + SZ_16M,=
- SZ_16M);
-> -	if (!mode)
-> +	mode_base =3D devm_ioremap(&pdev->dev, pci_resource_start(pdev, 0) + SZ=
-_16M,
-> +				 sizeof(mode_buf));
-
-[Severity: Low]
-Since this mapping is temporary and is unmapped immediately after copying,
-does it make sense to use the managed devres APIs (devm_ioremap)? Using
-standard ioremap() and iounmap() avoids allocating unnecessary tracking nod=
-es
-for a short-lived mapping.
-
-> +	if (!mode_base)
->  		return -ENOMEM;
-> +	memcpy(mode_buf, mode_base, sizeof(mode_buf) - 1);
+>  	if (IS_ENABLED(CONFIG_VT)) {
+>  		/* Re-push the display due to previous PCI-E loss. */
+> +		console_lock();
+> +		update_screen(vc_cons[fg_console].d);
 
 [Severity: High]
-Can we safely use standard memcpy() on an I/O mapped pointer (__iomem)? On
-architectures like LoongArch and MIPS, accessing memory-mapped I/O with
-standard string functions can lead to unaligned access exceptions or kernel
-panics. Should this be using memcpy_fromio() instead?
+This isn't a bug introduced by this patch, but earlier in this function
+stop_machine is called to execute ls2k_bmc_recover_pci_data:
 
-> +	mode_buf[sizeof(mode_buf) - 1] =3D '\0';
-> +	devm_iounmap(&pdev->dev, (void __iomem *)mode_base);
-> =20
->  	/* The resolution field starts with the flag "video=3D". */
->  	if (!strncmp(mode, "video=3D", 6))
->  		mode =3D mode + 6;
-> +	else
-> +		goto invalid_mode;
-> =20
->  	ret =3D kstrtoint(strsep(&mode, "x"), 10, &pd->width);
+stop_machine(ls2k_bmc_recover_pci_data, ddata, NULL);
 
-[Severity: High]
-This is a pre-existing issue, but could passing a negative value in the mode
-string bypass the kstrtoint() check?=20
+Inside ls2k_bmc_recover_pci_data, the code calls
+mdelay(LS2K_BMC_RESET_WAIT_TIME) which delays for 10 seconds.
 
-Since pd->width and pd->height are u32, a maliciously constructed string li=
-ke
-"video=3D-1x1080-32" would be parsed successfully by kstrtoint(), cast to a=
- huge
-u32 value, and cause a silent integer overflow later when calculating the
-framebuffer stride.
+Because stop_machine executes its callback with local interrupts disabled
+on the executing CPU while all other CPUs spin with interrupts disabled, a
+10-second delay is executed in this state.
 
->  	if (ret)
->  		return ret;
-> +	if (mode =3D=3D NULL)
-> +		goto invalid_mode;
-> =20
->  	ret =3D kstrtoint(strsep(&mode, "-"), 10, &pd->height);
->  	if (ret)
->  		return ret;
-> +	if (mode =3D=3D NULL)
-> +		goto invalid_mode;
-> =20
->  	ret =3D kstrtoint(strsep(&mode, "@"), 10, &depth);
->  	if (ret)
->  		return ret;
-> +	if (mode =3D=3D NULL)
-> +		goto invalid_mode;
+Could this uninterruptible freeze trigger the kernel's NMI hard lockup
+watchdog or RCU stall detectors, leading to a panic?
+
 
 [Severity: High]
-Does this new check erroneously reject valid resolution strings?=20
+This isn't a bug introduced by this patch, but the return value of
+stop_machine is ignored here before unconditionally calling
+update_screen.
 
-If the mode string does not contain a refresh rate (for example,
-"video=3D1920x1080-32" with no '@' character), strsep(&mode, "@") will set =
-mode
-to NULL. This check will then abort the probe, even though the width, heigh=
-t,
-and depth were successfully parsed.
+In ls2k_bmc_recover_pci_data, failure paths return false, which evaluates
+to 0 (success). If the PCIe link fails to retrain and the failure is ignore=
+d,
+update_screen will still attempt to perform PCIe MMIO reads/writes.
 
-> =20
->  	pd->stride =3D pd->width * depth / 8;
->  	pd->format =3D depth =3D=3D 32 ? "a8r8g8b8" : "r5g6b5";
-> =20
->  	return 0;
-> +
-> +invalid_mode:
-> +	dev_err(&pdev->dev, "Invalid resolution string: %s\n", mode_buf);
+Can accessing MMIO on a down PCIe link cause severe hardware exceptions like
+an asynchronous external abort or AER panic?=20
 
-[Severity: Low]
-Does printing the modified mode_buf obscure the actual error? Because the
-preceding strsep() calls modify the string in-place by replacing delimiters
-with NUL bytes, this log message will terminate early and only print a
-truncated portion of the string.
+Should we verify the PCIe link is actually recovered before updating the
+screen?
 
-[Severity: Low]
-Additionally, is it safe to print raw, untrusted hardware memory directly to
-the kernel log? Embedding non-printable characters or ANSI terminal escape
-sequences could spoof log entries or exploit terminal emulator vulnerabilit=
-ies.
-
-> +	return -EINVAL;
+> +		console_unlock();
+>  	}
 >  }
-> =20
->  static int ls2k_bmc_probe(struct pci_dev *dev, const struct pci_device_i=
-d *id)
 
 [Severity: High]
-This is a pre-existing issue, but I noticed that during probe, the
-ls2k_bmc_cells array is dynamically modified:
+This is a pre-existing issue, but I noticed the bmc_reset_work work item
+(which executes ls2k_bmc_events_fn) is never canceled on driver unbind.
+
+In ls2k_bmc_probe, the driver dynamically allocates ddata via devm_kzalloc
+and initializes the work:
+
+drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_init() {
+    ...
+    INIT_WORK(&ddata->bmc_reset_work, ls2k_bmc_events_fn);
+    ...
+}
+
+The driver lacks a .remove callback or a devm action to call
+cancel_work_sync.
+
+When the device is unbound via sysfs, devres automatically frees the ddata
+structure.=20
+
+If the work was scheduled right before unbind, will the workqueue
+dereference the freed ddata pointer when it executes ls2k_bmc_events_fn,
+causing a use-after-free?
+
+
+[Severity: High]
+This is a pre-existing issue, but looking at how the device is initialized
+in ls2k_bmc_probe, a stack variable pointer is assigned to the globally
+shared ls2k_bmc_cells array:
 
 drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_probe() {
     struct simplefb_platform_data pd;
@@ -218,29 +157,35 @@ drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_probe() {
     ...
 }
 
-Is it safe to store a local stack pointer (&pd) into a global non-const
-mfd_cell array? The MFD guidelines explicitly forbid this pattern as it lea=
-ves
-a dangling stack pointer after the probe function returns and causes a data
-race if multiple devices probe concurrently.
+Because ls2k_bmc_cells is not declared as static const (which violates MFD
+subsystem rules), the global array permanently retains a dangling pointer
+to the pd stack frame after probe returns.
+
+If another instance of the device probes, or if the driver unbinds and
+rebounds, won't this read unmapped or corrupted stack memory?
+
 
 [Severity: High]
-This is another pre-existing issue, but if ls2k_bmc_parse_mode() fails and
-causes the probe to abort, does the driver leave the bmc_reset_work active?
+This is a pre-existing issue, but the shared interrupt handler for the BMC
+unconditionally returns IRQ_HANDLED:
 
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_init() {
+drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_interrupt() {
     ...
-    INIT_WORK(&ddata->bmc_reset_work, ls2k_bmc_events_fn);
-    ret =3D devm_request_irq(&pdev->dev, pdev->irq, ls2k_bmc_interrupt, ...=
-);
-    ...
+    if (time_after(jiffies, last_jiffies + LS2K_BMC_INT_INTERVAL)) {
+        schedule_work(&ddata->bmc_reset_work);
+        last_jiffies =3D jiffies;
+    }
+
+    return IRQ_HANDLED;
 }
 
-If the IRQ is requested and schedules the work, but a later step in probe
-fails, the devres cleanup will free the data structure without synchronously
-cancelling the workqueue via cancel_work_sync(). Could this lead to a
-use-after-free if the worker thread runs after the data is freed?
+Without checking hardware status registers to verify if this specific device
+generated the interrupt, any other device sharing the IRQ line will cause
+this handler to falsely claim the interrupt.
+
+Does this behavior starve unrelated devices on the same line and incorrectly
+schedule the 10-second BMC reset sequence?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260708-ls2kbmc-mo=
-d-v1-0-c344bf5defa3@gmail.com?part=3D1
+d-v1-0-c344bf5defa3@gmail.com?part=3D3
