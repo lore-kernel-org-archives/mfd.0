@@ -1,105 +1,149 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9260B2D3733
-	for <mfd@lists.linux.dev>; Tue,  7 Jul 2026 08:07:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B9442EA173
+	for <mfd@lists.linux.dev>; Tue,  7 Jul 2026 08:12:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783411636; cv=none; b=FlcWlnMfzhwo1hwvr9MuKwsbbjj0jwoEv1xS3zR0XmIlzVZ1aaP4qanoSM/ruU2oIAX3qiIofYKfY3MSl8JacW0XI1wUlxcVoxd4taQeAF+YjFg220ByvPEG1ISJXiWPKQ6W7EsSLheV1vk0C9okhV/y+phigZcF5wsgcB7ZNzQ=
+	t=1783411970; cv=none; b=AaUfyL/JWIAkpc6htZqn2snFFk581puccghtf2HjpILPywGIgrAqgQ2ZRNtLaSycJ/DEx5pMoHIjuEGPQcrcVbX/SngQJgFB8XKiFrl9ZTUS6w6iSRsK38zpi8dDKWYCSAJz3bCPHhFXdLqXh/ywyu7owwHTQEVBJhvrUoU/TXE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783411636; c=relaxed/simple;
-	bh=0onb/3COqcUVjahsVuRBGHGA3Y8K8LvEp2vOYnW3fZo=;
+	s=arc-20240116; t=1783411970; c=relaxed/simple;
+	bh=3/6Jl/KEuHkZgDKmIRWarfdKkNEmWgX+wMgzG7MxDOg=;
 	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ppQ1bXwdSXEaSGGT7BzFjpOuwvj6pw3xYVXO0DfNJBkkimTZ7g0o6NsUTCKRLl6cYkEGtY6giU0OMFTcMMQ4QxjC8U6Kol/Qnx70Ya/mDOQ6CcP0USZw/PnJJG8CLXeMBd9H8rh6CRKcLb2eorVzGHou8OqPt7zOvkUcj/+7Q48=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AoJMY+Ht; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=AB7i7ZxYLlPoutmHEd/2ak1130nUHuC5ZpLMEPD/DhMHXaq8uxaeK6d5EL8aHp2v99ylETd8xpACpU2inzamEl5HwOvfYfEOUz27hi6zl9jp12QfHU8diaTHTP/y+mWxsv0nh1kUE6Y4K1ezBUa8xo1mEhA36+WKsuz+Wkmcs4k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Uvm67YDs; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AoJMY+Ht"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 797411F00A3F
-	for <mfd@lists.linux.dev>; Tue,  7 Jul 2026 08:07:15 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Uvm67YDs"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4DE541F00A3D
+	for <mfd@lists.linux.dev>; Tue,  7 Jul 2026 08:12:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783411635;
-	bh=RyAFwPvt0UCPJw5HNHDqE2phbRG8pp+Cebb/gUhycAo=;
+	s=k20260515; t=1783411969;
+	bh=qyXhAoha/AZcU7nsd7YHmCPypIPBLtZX2DVEc9k2wao=;
 	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=AoJMY+HtiBzCjaO9dyfq9fQ+5jVkaTcn6Q4Ueb1XXAZr9TkDbXwj/6Rv82QHO4lMO
-	 jobWO/VqyQSIRlCRnWFfpzdfh9ljCTyLgiR9VdIRtHNX304RY3NEaIe5CAcA849hZw
-	 BTMKtjfR+utwSaFV49g261AHQmIzRcLWkDoGuvpOnVJ2P/3Fevc+521t+lUlJcPTVZ
-	 4zAJc1C68CFfXxOAok+9b8DuehO+2N3vRbuu3yx3jCGgEcMTx3DHTPvCDBe2VFGj75
-	 mV1HkXxir16cqjqTN4BkOCDGAQvnir5ftwNfOALjwzl/kmGuPmz9ZFnTqve5tlXnXx
-	 UcO6YEkOJLvgQ==
-Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-39b1eb7bd9bso34068101fa.2
-        for <mfd@lists.linux.dev>; Tue, 07 Jul 2026 01:07:15 -0700 (PDT)
-X-Gm-Message-State: AOJu0Yw+yqYpzFbrzcFxBzFRdA4MaRclvfd+9p3soo88ALdyokU4Q3W9
-	7fqA3C9WQu8syGUXRcOFv/tPDttjBqGC93H930/pKPHEcz7gNvVT5yeRdBqf1MFHmRMOVMqTRpq
-	ceIKJhKEo5syFb2wmadeRb/ZLQPgz22/j543D8zIwhw==
-X-Received: by 2002:a05:651c:895:b0:39c:6754:1cab with SMTP id
- 38308e7fff4ca-39c67541e26mr5030291fa.5.1783411634141; Tue, 07 Jul 2026
- 01:07:14 -0700 (PDT)
+	b=Uvm67YDsKFwLhJslmiHQtoLpZthdfYQt9LK1ANDZBC81hsiWNecwGptq0lC6Ls8or
+	 +avNGDnnNjICc3BqME4VL8O2s5DTv00GW7Zk6X5PzWimGYshXRRIvgXtb7FxBiwBft
+	 iIRo0vNOA2EWMRHWYEw6XO5yHJIBWAB6j7aPWYvr6GFftjTM3zJ6X9NHnVOz7m1w9m
+	 GHgQ9mgturzmqweDrvzlghCG2ueE6swrwzYlTGgDDaMvAyWo6N23hRGsvmDbqFnser
+	 Nf0Ken/nWmmCsJdhMKZOL9wr/39j78F6DCHHGfsLM8sBRCuhb9V8sSFjIKwcOhG7im
+	 voh3S1lpxEqfw==
+Received: by mail-lj1-f175.google.com with SMTP id 38308e7fff4ca-39b237fb695so34131791fa.2
+        for <mfd@lists.linux.dev>; Tue, 07 Jul 2026 01:12:49 -0700 (PDT)
+X-Gm-Message-State: AOJu0Ywhy7AIsKiKr4ITpbhWKXzMeQIc9TicGsWc8Z9k4IAqiOs9P48e
+	mB6YzJMXhxbYNOkLP1gg8KfyjURlnR/aIAQpm08fOelCbGbR+13Q+Pfq8gXe8zAfmrXSYCFrY5M
+	ZiBTnk4QhHlvoxDDFJG0EsF2SgmgW9f7JjL3LQFuAMA==
+X-Received: by 2002:a2e:908b:0:b0:396:7a05:6eb0 with SMTP id
+ 38308e7fff4ca-39c5fd7ddb0mr7500621fa.2.1783411968026; Tue, 07 Jul 2026
+ 01:12:48 -0700 (PDT)
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 7 Jul 2026 01:07:13 -0700
+ HTTPREST; Tue, 7 Jul 2026 01:12:46 -0700
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 7 Jul 2026 01:07:13 -0700
+ HTTPREST; Tue, 7 Jul 2026 01:12:46 -0700
 From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260706-ucb1x00-assabet-swnode-v2-0-e6271ea3d3dc@gmail.com>
+In-Reply-To: <20260706-ucb1x00-assabet-swnode-v1-1-6102eabd31d0@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260706-ucb1x00-assabet-swnode-v2-0-e6271ea3d3dc@gmail.com>
-Date: Tue, 7 Jul 2026 01:07:13 -0700
-X-Gmail-Original-Message-ID: <CAMRc=MeK6vMQsHFEyVkmdVessCXXYvEL+=oYqXi3Lb4yhjbh3w@mail.gmail.com>
-X-Gm-Features: AVVi8CdUrtZqeiGusTl4bwafoirX7JwcQN2tKR-UvqHU_38IZQh3tXPFy4r1jnQ
-Message-ID: <CAMRc=MeK6vMQsHFEyVkmdVessCXXYvEL+=oYqXi3Lb4yhjbh3w@mail.gmail.com>
-Subject: Re: [PATCH v2 0/2] mfd: ucb1x00: Convert Assabet gpio-keys to
- software nodes
+References: <20260706-ucb1x00-assabet-swnode-v1-0-6102eabd31d0@gmail.com> <20260706-ucb1x00-assabet-swnode-v1-1-6102eabd31d0@gmail.com>
+Date: Tue, 7 Jul 2026 01:12:46 -0700
+X-Gmail-Original-Message-ID: <CAMRc=MdQQ_-wPPNQ+e02HweKvAhzDjev7++SH2ud82s6EDNVqg@mail.gmail.com>
+X-Gm-Features: AVVi8Ceof5tDW-3znf6zSsPV4rYjwPUC03l_urY8Kk8u_JJUjKQEEDOsGWQjqf8
+Message-ID: <CAMRc=MdQQ_-wPPNQ+e02HweKvAhzDjev7++SH2ud82s6EDNVqg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] mfd: ucb1x00: register software node for GPIO controller
 To: Dmitry Torokhov <dmitry.torokhov@gmail.com>
 Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
 	Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>, Bartosz Golaszewski <brgl@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, 7 Jul 2026 07:01:29 +0200, Dmitry Torokhov
+On Tue, 7 Jul 2026 01:08:04 +0200, Dmitry Torokhov
 <dmitry.torokhov@gmail.com> said:
-> This patch series converts the legacy gpio-keys platform device on the
-> StrongARM SA-1100 Assabet evaluation board from platform data to software
-> nodes and device properties.
+> Define a static software node for the UCB1x00 GPIO controller and attach
+> it to the core MFD device in ucb1x00_probe(). This node will also be
+> used by the created GPIO chip.
 >
-> The first patch registers a shared software node for the UCB1x00 GPIO
-> controller in drivers/mfd/ucb1x00-core.c, attaching its firmware node
-> directly to the GPIO chip prior to registration. The second patch
-> converts the Assabet machine subdriver to define dynamically allocated
-> software nodes referencing the UCB1x00 GPIO controller directly, allowing
-> pin bindings to be resolved via the attached firmware node without relying
-> on name matching.
+> This allows machine subdrivers (such as Assabet evaluation board
+> support) to reference the UCB1x00 GPIO controller in property entries
+> when converting legacy platform data to software nodes, resolving pin
+> bindings directly via the attached firmware node without relying on
+> name matching.
 >
+> Assisted-by: Antigravity:gemini-3.5-flash
 > Signed-off-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
 > ---
-> Changes in v2:
-> - Export ucb1x00_gpiochip_node to fix link errors when built as module.
-> - Fix teardown order in core driver to avoid software node use-after-free.
-> - Convert Assabet subdriver to use dynamically allocated software nodes
->   to avoid use-after-free on module unload.
-> - Factor out button node removal logic into a helper.
-> - Link to v1: https://patch.msgid.link/20260706-ucb1x00-assabet-swnode-v1-0-6102eabd31d0@gmail.com
+>  drivers/mfd/ucb1x00-core.c  | 12 ++++++++++++
+>  include/linux/mfd/ucb1x00.h |  3 +++
+>  2 files changed, 15 insertions(+)
 >
-> ---
-> Dmitry Torokhov (2):
->       mfd: ucb1x00: Register software node for GPIO controller
->       mfd: ucb1x00: Convert Assabet gpio-keys to use software nodes
+> diff --git a/drivers/mfd/ucb1x00-core.c b/drivers/mfd/ucb1x00-core.c
+> index 16f64e2b2f77..8d1c34c53955 100644
+> --- a/drivers/mfd/ucb1x00-core.c
+> +++ b/drivers/mfd/ucb1x00-core.c
+> @@ -25,8 +25,13 @@
+>  #include <linux/mutex.h>
+>  #include <linux/mfd/ucb1x00.h>
+>  #include <linux/pm.h>
+> +#include <linux/property.h>
+>  #include <linux/gpio/driver.h>
 >
->  drivers/mfd/ucb1x00-assabet.c | 124 +++++++++++++++++++++++++++++++++---------
->  drivers/mfd/ucb1x00-core.c    |  16 +++++-
->  include/linux/mfd/ucb1x00.h   |   3 +
->  3 files changed, 116 insertions(+), 27 deletions(-)
-> ---
-> base-commit: 8e9685d3c41c35dd1b37df70d854137abcb2fbac
-> change-id: 20260705-ucb1x00-assabet-swnode-683cb383d398
+> +const struct software_node ucb1x00_gpiochip_node = {
+> +	.name = "ucb1x00-gpio",
+> +};
+> +
+>  static DEFINE_MUTEX(ucb1x00_mutex);
+>  static LIST_HEAD(ucb1x00_drivers);
+>  static LIST_HEAD(ucb1x00_devices);
+> @@ -530,6 +535,10 @@ static int ucb1x00_probe(struct mcp *mcp)
+>  	ucb->id  = id;
+>  	ucb->mcp = mcp;
 >
-> Thanks.
+> +	ret = device_add_software_node(&ucb->dev, &ucb1x00_gpiochip_node);
+> +	if (ret)
+> +		goto err_swnode_add;
+> +
+>  	ret = device_add(&ucb->dev);
+>  	if (ret)
+>  		goto err_dev_add;
+> @@ -604,6 +613,8 @@ static int ucb1x00_probe(struct mcp *mcp)
+>   err_no_irq:
+>  	device_del(&ucb->dev);
+>   err_dev_add:
+> +	device_remove_software_node(&ucb->dev);
+> + err_swnode_add:
+>  	put_device(&ucb->dev);
+>   out:
+>  	if (pdata && pdata->reset)
+> @@ -630,6 +641,7 @@ static void ucb1x00_remove(struct mcp *mcp)
+>
+>  	irq_set_chained_handler(ucb->irq, NULL);
+>  	irq_free_descs(ucb->irq_base, 16);
+> +	device_remove_software_node(&ucb->dev);
+>  	device_unregister(&ucb->dev);
+>
+>  	if (pdata && pdata->reset)
+> diff --git a/include/linux/mfd/ucb1x00.h b/include/linux/mfd/ucb1x00.h
+> index ede237384723..214c71a12e84 100644
+> --- a/include/linux/mfd/ucb1x00.h
+> +++ b/include/linux/mfd/ucb1x00.h
+> @@ -103,6 +103,9 @@
+>  #define UCB_MODE_DYN_VFLAG_ENA	(1 << 12)
+>  #define UCB_MODE_AUD_OFF_CAN	(1 << 13)
+>
+> +struct software_node;
+
+Like I commented elsewhere, my preference for forward declarations is to have
+them right under the includes but I won't die on that hill.
+
+Bart
+
+> +extern const struct software_node ucb1x00_gpiochip_node;
+> +
+>  enum ucb1x00_reset {
+>  	UCB_RST_PROBE,
+>  	UCB_RST_RESUME,
 >
 > --
-> Dmitry
+> 2.55.0.rc2.803.g1fd1e6609c-goog
 >
 >
-
-Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
