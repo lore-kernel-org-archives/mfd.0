@@ -1,72 +1,76 @@
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 742EE43DA38
-	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 11:16:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A8AE433BB1
+	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 11:16:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783509409; cv=none; b=OGunzHnAwpUG3Pgbjj1N9+09lX2stJ2bLIaSQz94GTUUGBR2S1NlpaQ3teyB4kXK3qSYl2At7omO2FHoakxQO7fikzehSNVq52cxSAQZRYY8Z0TZ0NHWDush6c6Fq5a+jDIxgoZt3mnwLHlONnMOB5FzbIeqcs969nM5kVSTrb8=
+	t=1783509409; cv=none; b=PMyBES4gu4pdQ3gNAtbDgSMYrB94dbzfYedZXjCpLxniQQMm+r1gs0sthL/HqX0KLuxczOhNN9AArbgB21ovod6RMkuSIp8Jp/C6OPXCiioK5SQ95fJLLTSISX+cXNXX68v+qW64UL6i76URT+YGHuMYW/hROtw3Ur1vMs6J8Ew=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1783509409; c=relaxed/simple;
-	bh=Yu1IpyuYYUzbf+7marfaBTnzx8BbEm2oTotGiN4NhcE=;
+	bh=RMStdZg/15uHp9XX3CRWrZzbzmqyNCoBwi5HiHoruCA=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=thgn63HBTjX9kjppGGgRIMKc38LRnSFe5KWZ8vuLGlLFOkn4qBMbZs0vXpTPM1bds+2Bbnp6/BYUuAT4iwzkIZ/waPS5fIm0280fEKrtMYaPkqinrWdKMXQG5lPHFl4IiYSFyTbowmRXOYeyd/KGpKaGW6TJEDcmUJL/nj79qyc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=UafxNtZt; arc=none smtp.client-ip=209.85.128.53
+	 MIME-Version:Content-Type; b=kIYtcdoyZyHmF9YZ8LVprKy6ZszOiy9yko1nsOXBHvqMtw/onz9Q/3gynTjONt1eof9He89fk1irXmy6WvI8FlctW60JUY/o3Z5EclT/3XCIlhNRvh7UPomoMeEbzbtFXtXJW4h3coLGVKD2PByLZjSZiKU4J0EEFmD+IXyQPT0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=FXIY1gry; arc=none smtp.client-ip=209.85.221.44
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="UafxNtZt"
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-493b27c7451so19088115e9.0
-        for <mfd@lists.linux.dev>; Wed, 08 Jul 2026 04:16:44 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="FXIY1gry"
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-472326ca506so370681f8f.2
+        for <mfd@lists.linux.dev>; Wed, 08 Jul 2026 04:16:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1783509402; x=1784114202; darn=lists.linux.dev;
+        d=baylibre.com; s=google; t=1783509404; x=1784114204; darn=lists.linux.dev;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=MG3FU7CU4B5nmUNJ9cOdrHELZIlUEf3pKuMQh8F7+AE=;
-        b=UafxNtZt94EDXlnIDx9GILtSkjNNzp+zwHCtxnYGWMZVNKXN5cR/b1Yp0bcPSb/BkG
-         KoMMGqRyqQzATAnQsgyrZ4+9DaokCTkpLk9IiJlD8TwReT06AOPVal3cBDMHQWWevKhD
-         O//5TNXH6ta5q4apDkze4tf0yfnwa6OrYPzLXNslasMdMz8GWTDbi9YnEVHTRahUfryG
-         9Q1N2MnGSpsHoDK7Pk9S6RKLT5eEMgpy06n2PSjoXeNGL2lFtPn8Yao3CvkO1dRuAmpo
-         4mSQJL6s9jd6bPsR62rb54llAlGjUAIaJBCJk8y3BjHB1NDZlOf0iT74XrBzXEjkKdg6
-         Tafg==
+        bh=Zr96JgiP4egzaGIJKICX4lchZUuxQ9WiGvVqK3+0YdM=;
+        b=FXIY1gry475kzuWB1MYQ5j2PuaSLnyQKZantEZd3JY7fw/fM7RAhmtbtL5B2lViqLZ
+         l7cGtFgZ4GXHFKpWDcMeo7nJM/WxxcdQUb+atXenb7UUVy5YKFJ6ngCkeucMY7Q5cNLq
+         38jp43aTZ+11hqUcxqrD8evgMFl1FJHvTSe+rHUIE+23X6PZTv7Xp5/FPMuzRaQf7+eR
+         5vqfrU+Xag6mVJBvLBXDMcBe5tDiYqw5pgeCbExuCqSrP57tS8p4bhQAflyXqKDf3SP4
+         bX3WwSGxIv/AcSKSigwlLxzzSJ6fC1klrThRjVZPMP5nd815JUrJP3WZ1OHPjA9tPLwU
+         MErQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783509402; x=1784114202;
+        d=1e100.net; s=20251104; t=1783509404; x=1784114204;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=MG3FU7CU4B5nmUNJ9cOdrHELZIlUEf3pKuMQh8F7+AE=;
-        b=GDURbYNf005g7TrRIEDxDvOleQrjL2gvYhtTj0OIzC5ur1ko8ArvNwJXzJp/YL2xk2
-         /hBYntmUhPVefsEjSBeaR6GTzc+GX4aWclAtbJQUWw6kChLo61tCqucGRQgJbNVWG0ws
-         JTgYEdQHkRtXe+8H68Q27llLol27c44oCrcNNH2E8tgYMYeBBnMQiw/G1BH0fsI4Enb3
-         NaMe1Vrp+3eZbx/BqCToXtj31s/L2YGFySmq8Gkb++85mV0ifdtD79rgFoPdZCemeh4t
-         egIW2UB/PVwBByhHUfYE0IYKIrS1CXsVoDaRYKfMC5Cibl0Vl5hkK71bu55T7npJ1x44
-         8y7Q==
-X-Gm-Message-State: AOJu0YyecvTNBT7j79BEuPTjLIEHoy7qaYX0nVC4qJtc1aO9bgV034Tj
-	V8CMZ8ke0wAKQLQouWm+QgJcXVNq+bc9D39sy0sKe2IEXWdFyyuRg/bXRf4uFyL9vwpEkFH5RLW
-	pIp1z
-X-Gm-Gg: AfdE7cmYiLxUVoKIk0eIrSExvcsMvQG6QGlNLTFv74CUd0z2L7vmxkUvmZKoC3ldUVf
-	o5pcyppVNZ0n3Ry3obFb6RD2L7Md84wwtTj5E/jtbLk8/018BN0bAsZh4uN+DigaQPF0E3MV2fP
-	oXb3QbpIgqA3iBYRX2Q8O3pwWeM+NMIyWCerUXJrsm1rc9DGyYysruaZUFD7fJPPSb6kxqnTJUV
-	YJaj7i3QM7pqsio4OC1pyjO2dK2qhsJMyaeSbCTE9z4BR5anZI3gD/yYANgLHZlfLwt9O5KwTHZ
-	jiPR041NODdA3O3xcma24tPzjuoPOzeADj9rA6eO9IUEPuWXOprTQjp/HKQfwxlvVZUH4K6pJYK
-	SuRLzIUzukkk8/Dw7c9wOLt/K+M9Vr4LJe8g4kqQgW9QtJS3uliV5csZefN4s2bsu2++bI3u3+1
-	ek/hX0EfzUsm+ZdcW3tPYkzYdpaMeZjlXiHCUeal3g6DbSMP4nIZd9XwMChwrCf+PJJ/oR3QIds
-	dJy4P4aUe0J/BM=
-X-Received: by 2002:a05:600c:3f0f:b0:493:b698:9247 with SMTP id 5b1f17b1804b1-493e639ac57mr22213845e9.14.1783509402127;
-        Wed, 08 Jul 2026 04:16:42 -0700 (PDT)
+        bh=Zr96JgiP4egzaGIJKICX4lchZUuxQ9WiGvVqK3+0YdM=;
+        b=DfL5bbuC/05ZnI3K8lUPP0GVkVrngduPakFWeVZRTF8hcS3lPR62UrPs/LHX2vAMzW
+         trr7bzSN4w+ajpMFYwYCmCQcM64Kz/z5Us7H50quHYwL5WFciLLhnbux1Jx2AZMuFg4v
+         on65wM4Pzl1c5x8UXUbuLvozo7mIKsaD8kAP2P0FvsFC/yyesezVeOnZCSwEUGIGpDIB
+         hyyMo2mXPDvjHltU9pwydxPqKs9EXMYl14X0wCgL+IEAIWqxqXR3xH0DwdhyNmwo8ctz
+         PNmCrAcoRJxisFTdONMRT3G/TMDJc9G3p/bSlt0zHjGG5sK/CB995sX7CQ7zmaPL/oBd
+         gHxg==
+X-Forwarded-Encrypted: i=1; AHgh+RoPV5W2sh4cwbGzZ7KCbBCF1gM5gywlnBFxt1JmQ5fOQE2LaqG8T+yw/JEXGW4hynIMDIE=@lists.linux.dev
+X-Gm-Message-State: AOJu0YwQt/kte1zjNxdHUDxLxg99f97gDxOboGTFKYalHIgxXTZUiuoZ
+	J61ctZ2d3hW3vqZmRRwGJl6FnfO2ut+UnsbHmycw+eEkCuv7NVUtIPsu+zxyJTwojJs=
+X-Gm-Gg: AfdE7cmjqC6iNxfa99IGsrriIl20wRhUtAuknCGov8vk/sfl6sGe8TRiP6Afi+jOyO+
+	TYmLg08D2qN8AfuGUO7FpG5TphWsYebKnMkrmbWls2jX9WZVc1MQGHSSB/SnWY2x6FBqNk0nukw
+	4iqzTqMVgQRWHuIKLvx/1He/VY+5G+UF+vCnU9MoZLq+McjiUu8dyz6iDdPQfnY/6cb42Iy7VCG
+	2Y3df9W7bfvjec3C/XpLnK6UMNAcyjM47rZWwf6VP+cbWaBt62N7MwsCLxeBRbX/ijbAx4joAhF
+	o82MY89g98Py1csr1ir+X8Dq4SRL6gyUhGQkFOtrHbnAtahFavVGw3AfzD8BMleSFQtt/bRzKTC
+	TFF5/XW7Gg42pM/3panIN1oshM4i8tbab4OYef8WYWHT5ivcFuEmjCVWh6Dy639hrepOedmmrWO
+	7y6HP98G2uba42NLq1CT+5QaLddi3M/K9HV9QGTaiO2pGILCtfluVRjZq0pR2YvRSID7yk5rMDF
+	UAw
+X-Received: by 2002:a05:6000:41fe:b0:473:3241:26a4 with SMTP id ffacd0b85a97d-47df071e158mr2025123f8f.12.1783509403913;
+        Wed, 08 Jul 2026 04:16:43 -0700 (PDT)
 Received: from localhost (p200300f65f47db04930dc5bd4534e1e5.dip0.t-ipconnect.de. [2003:f6:5f47:db04:930d:c5bd:4534:e1e5])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-493e0f3677asm117598505e9.4.2026.07.08.04.16.41
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-47aa0f2186bsm40991938f8f.36.2026.07.08.04.16.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Jul 2026 04:16:41 -0700 (PDT)
+        Wed, 08 Jul 2026 04:16:43 -0700 (PDT)
 From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>
 To: Lee Jones <lee@kernel.org>
-Cc: mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 04/23] mfd: lp87565: Explicitly set driver data for the generic dt compatible
-Date: Wed,  8 Jul 2026 13:15:11 +0200
-Message-ID:  <1e596fe18a6bd2ea363be3615eb512dff9bd18a2.1783507945.git.u.kleine-koenig@baylibre.com>
+Cc: Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-mediatek@lists.infradead.org
+Subject: [PATCH v2 05/23] mfd: mt6360: Drop irrelevant __maybe_unused
+Date: Wed,  8 Jul 2026 13:15:12 +0200
+Message-ID:  <f4ea197a16a6345018db79896ac9af4fa0567ac1.1783507945.git.u.kleine-koenig@baylibre.com>
 X-Mailer: git-send-email 2.55.0.11.g153666a7d9bb
 In-Reply-To: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
 References: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
@@ -77,63 +81,33 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1832; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=Yu1IpyuYYUzbf+7marfaBTnzx8BbEm2oTotGiN4NhcE=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBqTjFHXlx4zbiyHUGpu54qoXkdQvA4zDSLokcFY YZ8zdDsYEiJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCak4xRwAKCRCPgPtYfRL+ Tia7B/4xXw75inKIMzDsPHwdqaJzz+1U/mpy8zjSpa6b7AJX8VvWZSLnP5VwNdpKapxrbFydSav E53QSn1pY0SyGOJFdYgWgYV+ZVyWB1a7FHeOGkqdOx2nsa+hsXS3ppy49Qt3hUYSckUx2AWxunc YMbuuqAqeyzTEN9ES1E/ZfOr2aBtDpvmAWQ7h6x7yuYJe5doGVX/ZQF3VVSCMezOUoA09bna9io FiWwtJ8lZbc3AnlrvA4NVZpMQhtgrSAHJvkjb9HSvdQk4wOj6SSBLmujuvova+mqU1W+wL6GfCa zASHiQXM4n3pUUtefd/fF9Mv60SnxVh5OD6w0FiW52NZQAHk
+X-Developer-Signature: v=1; a=openpgp-sha256; l=992; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=RMStdZg/15uHp9XX3CRWrZzbzmqyNCoBwi5HiHoruCA=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBqTjFKVe3Rk3+DT5D9qv2Ke/Xmv8u1/SSXaZ6sQ KvzRDDj37WJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCak4xSgAKCRCPgPtYfRL+ TrVTB/9U9NSx7cQnxDfiSL9uHTLoz+ZKQsJ9WOve4lpf0a3lxAHplLM93LtJHZvDEnioO68Beui D4qHHssA3c8cAIlbwOqfO/KS8wMt1mXGuipK6H6bK5uYV5G+9zdCZe2ZIIRc/QDgKs7RPuHz13f e4+5Xf7F3CgdYBLHCsmwxqlq4rFXX2OQqFNqKm+Qz4X8dlHDCVns0FrMPgjMn8zx8sSVJ37PNC6 lxrpFfJwxAGDkbedGWE1DPVl+RJGAhXbOOC5DyZqIyI8sbs14I69wN6O4ZarIBILvC0yQZkDTga xVuNjVWo8BWwvEZvfDbGDVyzggvFMFvndlS9/uw6frz9c6B8
 X-Developer-Key: i=u.kleine-koenig@baylibre.com; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
 Content-Transfer-Encoding: 8bit
 
-The driver relies on .data being (void *)LP87565_DEVICE_TYPE_UNKNOWN
-(i.e. NULL) for the generic device tree compatible. Make this explicit.
+Since commit 5ab23c7923a1 ("modpost: Create modalias for builtin
+modules") MODULE_DEVICE_TABLE() is enough to reference a device id array
+even if the driver is built-in. So mt6360_of_id[] is always used and the
+__maybe_unused marker serves no purpose and can be dropped.
 
 Signed-off-by: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
 ---
-Hello,
+ drivers/mfd/mt6360-core.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-while I'm sure that the driver is improved by this patch, I'm unsure
-about the handling of the generic dt compatible. E.g.
-drivers/regulator/lp87565-regulator.c has:
-
-        switch (lp87565->dev_type) {
-        case LP87565_DEVICE_TYPE_LP87565_Q1:
-                min_idx = LP87565_BUCK_10;
-                max_idx = LP87565_BUCK_23;
-                break;
-        case LP87565_DEVICE_TYPE_LP87561_Q1:
-                min_idx = LP87565_BUCK_3210;
-                max_idx = LP87565_BUCK_3210;
-                break;
-        default:
-                min_idx = LP87565_BUCK_0;
-                max_idx = LP87565_BUCK_3;
-                break;
-        }
-
-so if "ti,lp87565" is used for a one of the explicitly handled types
-above, wrong/surprising things happen. I don't know enough about this
-driver and hardware to suggest a better handling (apart from maybe just
-dropping the generic compatible handling).
-
-Best regards
-Uwe
----
- drivers/mfd/lp87565.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/mfd/lp87565.c b/drivers/mfd/lp87565.c
-index b78ae79df5fa..efea1ba82811 100644
---- a/drivers/mfd/lp87565.c
-+++ b/drivers/mfd/lp87565.c
-@@ -26,7 +26,10 @@ static const struct mfd_cell lp87565_cells[] = {
- };
+diff --git a/drivers/mfd/mt6360-core.c b/drivers/mfd/mt6360-core.c
+index b9b1036c8ff4..254b00c905b7 100644
+--- a/drivers/mfd/mt6360-core.c
++++ b/drivers/mfd/mt6360-core.c
+@@ -606,7 +606,7 @@ static int __maybe_unused mt6360_resume(struct device *dev)
  
- static const struct of_device_id of_lp87565_match_table[] = {
--	{ .compatible = "ti,lp87565", },
-+	{
-+		.compatible = "ti,lp87565",
-+		.data = (void *)LP87565_DEVICE_TYPE_UNKNOWN,
-+	},
- 	{
- 		.compatible = "ti,lp87524-q1",
- 		.data = (void *)LP87565_DEVICE_TYPE_LP87524_Q1,
+ static SIMPLE_DEV_PM_OPS(mt6360_pm_ops, mt6360_suspend, mt6360_resume);
+ 
+-static const struct of_device_id __maybe_unused mt6360_of_id[] = {
++static const struct of_device_id mt6360_of_id[] = {
+ 	{ .compatible = "mediatek,mt6360", },
+ 	{},
+ };
 -- 
 2.55.0.11.g153666a7d9bb
 
