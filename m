@@ -1,121 +1,165 @@
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E79E451064
-	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 12:54:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0771444E055
+	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 12:55:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783515296; cv=none; b=urWh05qGawhA3RgTcfwFR482KOFy7+rwcgvdl+GFl1dYuA4mbXGNc8G6MG9YCmLNXMRL6f8IGBnxZbhsZ7liB49fSlHFSytuPt3DwIBAq2ybp24qrad2RPZTw7Z26jhtbCQlDj1P1vPHceCC8Whu9d8FE3yK+VSUPN0PcTlbfA4=
+	t=1783515319; cv=none; b=WvUKhc50kUwLdh2aU/QbmH1Ynhp5YyTbjVjdP9i3AQTrfBWCLQh8hL4GDXHf9M6DU3e0o1cayahKQ0ezPu8jjMKUDmx4EExJCgUoMxcTgTqr1DsdkC7UdM1g/lopILqFfaSKMVS+FcCNKhJqtDybb9EwAQGvnVAOShru5jlUHtY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783515296; c=relaxed/simple;
-	bh=NqIdz9eEaKfnjtFoMaD9625M1qr2VdseCv1Uqzseygc=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=t7uTgLMcX8zRWHiXBzVUMMK9Ou8ZLGQtPhrz6JjeyfdC6QMi7v1QdMDrow0l+pj5dJc8J5E9zCWJgYBCu90Onk9mQNbEQSc3QhBEsi1LyzBKJm1EWgor5Zo1R4JGwNv1ogcSoDdku3br43v5rO/+3T/lXS2agab/9nomWF1JTEk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=mC0yvDm8; arc=none smtp.client-ip=209.85.208.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1783515319; c=relaxed/simple;
+	bh=+TMFHwBKZ8krcoCMZCLGxgHx7kx8SNd+ZsBZADGdDMs=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=VRK8EGNoTUlnnzGunu2Hiw1lgSXAWNLCKOh7FqyENnm31xxwAAEyAveIEEzSG1SAs4u9ZUS3Dwuv5A73B0mXpsOlqVVhzxXHs/3UoTZMHT9J7UkCSWQyNrRphRc3qmCOuJgoFYXoVMSEfmUOxVay2FvUppevP7QPysor3Btgdog=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PsVYGQCs; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="mC0yvDm8"
-Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-6976b0c5adbso1280847a12.2
-        for <mfd@lists.linux.dev>; Wed, 08 Jul 2026 05:54:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1783515293; x=1784120093; darn=lists.linux.dev;
-        h=mime-version:user-agent:content-transfer-encoding:content-type
-         :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=NqIdz9eEaKfnjtFoMaD9625M1qr2VdseCv1Uqzseygc=;
-        b=mC0yvDm8GVNbpg5bEzFju7NmnsJ3d6tlJO8bST/XBhp6BIN3qEY2HKB95qHjDbK6C1
-         Q9Cu/vVP0eLVMk32XBJOUTL0qPgED8x03+eGhUKCndr4cyBtS3H+SICRIqhqq1vD54za
-         fB2jPDrGidTAVgcwSnlJwirlxtwGTtCl5TCyQV/f8E35VwVJWLSuvDrNxdkxPegY2Bbw
-         1QsVtyrkSaP3NJoq1L0fLXNGog5Cx1pjAQTxl6I2mWiXTA5WdqUZN+k9rlABr58hlXpd
-         KCiPPTKDM078zFc0n8NXyNxicU/zTuDfb1tMHFhmtxOrA1ZWsAa3zm6IaR5HicXqjfJ3
-         xS9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783515293; x=1784120093;
-        h=mime-version:user-agent:content-transfer-encoding:content-type
-         :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=NqIdz9eEaKfnjtFoMaD9625M1qr2VdseCv1Uqzseygc=;
-        b=RIpmn41aQ2+Z1z+kaOLGzqLDpU07Z89AWhdY7rZHf+6zl7XLTQ2Pb+PMuOTxz/YAoU
-         cwgOVcxj454uFHHjHmpvz9UX4KKZY3l9ooPLKqctfEZyTIF81sIjnYj7kMxot8woIWFu
-         yel1gvjeSra+J2gFoHVlarqKRWnsz4282H/6TRZX3hp47aORYM5qNbBnrGWLMeKMbzGV
-         k3+kv+XWIQ/Tvak/uaSFMYDRIwbSIlMFDk5A+6Vs1hAPia5ZJh5UHCF5jT/+HUgcq9Py
-         0RkwNCegwXkpm8ai20+62TOw2eBhBJI5J5ONQiMIdaBBKUZcDMrZeI9XSRhr+AixtGwN
-         snoQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrEtAFOjMzcZBkgtlaCDCn8nHbtqKpI97pdrUdR6U8IShkcQOtSRV7LY9yNL09BXRsaUhc=@lists.linux.dev
-X-Gm-Message-State: AOJu0YzlyKmERbS4QIbg7y9dXpZVZZbqqaCPfyLrbR+yRLbA0fCMmCSK
-	xwS4rhm88qrELYgsWD4o9NKBQZlegEqXxzcb+OY6YQCslM+rlUdQcZnUClDGkZ4PNgY=
-X-Gm-Gg: AfdE7ckYmdoSQmNIrcSnykBBFmJo9l6wPDfdr33WEWbZK5MhRfkO6jf5EGnd7MUOlZm
-	5wwOZsi5G30Ipi1J7i/O9pR9aSKFgAxMrJq6X1Yqku78s8U14MrgpN6/AkMlUWGLSeAzAG7JQ5P
-	HAYmvc9U0fQsRrrQAkIRD6/vP+Rmq6vd2cf+J5WuN/0h2IksQWjSyv/fXeXNXKY/arC56GyY4uN
-	bqbhCcJKuRMFAneA1WEHWMLYY/YmWjKMgklbGq+61i3/YmRYu5ORDh5zrW01XaVZHW7DMVLcxrl
-	w8gbanEzWPGTqcd+cFyQXAxRFVnjbnbKMDTk0K8HWmuWBhSJ+hfxbxuXYSBFmBjWHbihzZSStr7
-	J75VnSsxZBf9Wk0tvVPLnElSgGAJAPj1PhUz3wLCQ8lxtbaTX4YCE4y8sbGiS1VpSjLAxpJnMs3
-	owKw3fCjTBss8LWrTxE/Y=
-X-Received: by 2002:a05:6402:1906:b0:698:b60b:aac2 with SMTP id 4fb4d7f45d1cf-69ab4453d30mr1054344a12.4.1783515292855;
-        Wed, 08 Jul 2026 05:54:52 -0700 (PDT)
-Received: from draszik.lan ([212.129.81.171])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-69aa613d4e2sm2000319a12.24.2026.07.08.05.54.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Jul 2026 05:54:52 -0700 (PDT)
-Message-ID: <4a5a09fd68fe45939bdcec4a3c5a781d664eb34c.camel@linaro.org>
-Subject: Re: [PATCH v2 13/23] mfd: Use named initializers for arrays of
- i2c_device_id
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>
-To: Uwe =?ISO-8859-1?Q?Kleine-K=F6nig?= "(The Capable Hub)"
-	 <u.kleine-koenig@baylibre.com>
-Cc: Lee Jones <lee@kernel.org>, Michael Hennerich
- <michael.hennerich@analog.com>,  Chen-Yu Tsai <wens@kernel.org>, Marek
- Vasut <marek.vasut+renesas@gmail.com>, James Ogletree	
- <jogletre@opensource.cirrus.com>, Fred Treven <fred.treven@cirrus.com>, Ben
- Bright <ben.bright@cirrus.com>, Support Opensource
- <support.opensource@diasemi.com>, Andy Shevchenko <andy@kernel.org>,
- Charles Keepax <ckeepax@opensource.cirrus.com>, Richard Fitzgerald	
- <rf@opensource.cirrus.com>, Chanwoo Choi <cw00.choi@samsung.com>, Krzysztof
- Kozlowski <krzk@kernel.org>, Aaro Koskinen <aaro.koskinen@iki.fi>, Andreas
- Kemnade	 <andreas@kemnade.info>, Kevin Hilman <khilman@baylibre.com>, Roger
- Quadros	 <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>, Andreas
- Werner	 <andreas.werner@men.de>, Samuel Kayode <samkay014@gmail.com>,
- Maxime Coquelin	 <mcoquelin.stm32@gmail.com>, Alexandre Torgue
- <alexandre.torgue@foss.st.com>, 	mfd@lists.linux.dev,
- linux-kernel@vger.kernel.org, patches@opensource.cirrus.com, 
-	linux-renesas-soc@vger.kernel.org, linux-sound@vger.kernel.org, 
-	linux-omap@vger.kernel.org, imx@lists.linux.dev, 
-	linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org
-Date: Wed, 08 Jul 2026 13:55:06 +0100
-In-Reply-To: <5aec0fc2ac0cd1d2e27027ad0c180e2647bd494e.1783507945.git.u.kleine-koenig@baylibre.com>
-References: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
-	 <5aec0fc2ac0cd1d2e27027ad0c180e2647bd494e.1783507945.git.u.kleine-koenig@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2-8+build1 
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PsVYGQCs"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A6F8E1F00A3F
+	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 12:55:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783515317;
+	bh=kikzu5yHjCHrYI+CpYYUdbBjsN4WJ34ORiqQtKuS/QI=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=PsVYGQCsaygkbYDUX8ClsdQd4ClXV4vvKASakMNhoeX2O/aMcCNUPpx/zE39zrZbI
+	 SKspeoqb8xsJNsZz/GYsVYvkTPq+bTrr3zyjxZtMoGw0LzznWWMUfj44cEBrrj4tyd
+	 gfFSgCZ8NbTGDuINWaGQ/bLX/DPtKQ8TVP7He8H3Pk9b+ilqUpRyCI4hvYqLs2rYSz
+	 Hd0v2fsFSAb8Z2R7lAUy13eC5EI+lCKeoNpR5oELnEymHndaHD+Qh+xCDxw4uhIAf/
+	 T1IWsQpV5hRqVcl8p4KWQQ9o5otQ1B9yeOFRejYHeyBXeB+kFgDtBZpxNvzPhTT2RZ
+	 ny7JBC7iSn4Jw==
+Received: by mail-lj1-f181.google.com with SMTP id 38308e7fff4ca-39b268e608eso6249481fa.1
+        for <mfd@lists.linux.dev>; Wed, 08 Jul 2026 05:55:17 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+Rp7+Sm/ju86eSWeG/XoZY+uE0jL4MkvAJL0USdmQVBiBBzgKhZ4RvX7X2k5BWhAl06Fum0=@lists.linux.dev
+X-Gm-Message-State: AOJu0YzACMJoL2L/LrSi6q/Vs/V3fmx+fOPgbDR15FoK77CJACL34BY4
+	a+RTIfDiN8o+FHjLUDKS3xG5d5ybIvtBH0tt0lJ9CeitLyqKbVAOsjH8VUhrqpSBdNh4EtYBSCQ
+	ZxBkrlRMdjafGCKPeWlOawk/17cDqVx/jBdbchX2EpA==
+X-Received: by 2002:a2e:82d0:0:b0:39a:ec7b:6cc7 with SMTP id
+ 38308e7fff4ca-39c79a171d8mr4780281fa.24.1783515316229; Wed, 08 Jul 2026
+ 05:55:16 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 8 Jul 2026 05:55:14 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 8 Jul 2026 05:55:14 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <C8B03257-3909-4323-B183-331F7CB1DA3E@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
+References: <20260708-ls2kbmc-mod-v2-0-2afdd1741766@gmail.com>
+ <20260708-ls2kbmc-mod-v2-7-2afdd1741766@gmail.com> <CAMRc=MeDq6=u66hc+ChmJA9iKRhsYFhg7rKkCGh2BA=--VGkcw@mail.gmail.com>
+ <C8B03257-3909-4323-B183-331F7CB1DA3E@gmail.com>
+Date: Wed, 8 Jul 2026 05:55:14 -0700
+X-Gmail-Original-Message-ID: <CAMRc=MfbbQfzquf5tT-3an-EVtO_gkgh8To61Q=OAGbf=u3Xpg@mail.gmail.com>
+X-Gm-Features: AVVi8Cf-b0wpzureZ5LYsD1gEyfLZXYdTpNSMQ2jjZOcsYfx4W8ngNITiPKXzoY
+Message-ID: <CAMRc=MfbbQfzquf5tT-3an-EVtO_gkgh8To61Q=OAGbf=u3Xpg@mail.gmail.com>
+Subject: Re: [PATCH RFC v2 7/7] mfd: ls2kbmc: Capture the reset event of BMC
+ through GPIO
+To: Miao Wang <shankerwangmiao@gmail.com>
+Cc: Miao Wang via B4 Relay <devnull+shankerwangmiao.gmail.com@kernel.org>, 
+	Xi Ruoyao <xry111@xry111.site>, WANG Xuerui <kernel@xen0n.name>, Yinbo Zhu <zhuyinbo@loongson.cn>, 
+	Jiaxun Yang <jiaxun.yang@flygoat.com>, mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
+	linux-gpio@vger.kernel.org, openipmi-developer@lists.sourceforge.net, 
+	Binbin Zhou <zhoubinbin@loongson.cn>, Chong Qiao <qiaochong@loongson.cn>, 
+	Lee Jones <lee@kernel.org>, Huacai Chen <chenhuacai@kernel.org>, 
+	Corey Minyard <corey@minyard.net>, Linus Walleij <linusw@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 2026-07-08 at 13:15 +0200, Uwe Kleine-K=C3=B6nig (The Capable Hub) =
-wrote:
-> While being less compact, using named initializers allows to more easily
-> see which members of the structs are assigned which value without having
-> to lookup the declaration of the struct. And it's also more robust
-> against changes to the struct definition.
->=20
-> The mentioned robustness is relevant for a planned change to struct
-> i2c_device_id that replaces .driver_data by an anonymous union.
->=20
-> This patch doesn't modify the compiled arrays, only their representation
-> in source form benefits.
->=20
-> Signed-off-by: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@b=
-aylibre.com>
-> ---
-> =C2=A0drivers/mfd/max77759.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 |=C2=A0 2 +-
+On Wed, 8 Jul 2026 14:15:55 +0200, Miao Wang <shankerwangmiao@gmail.com> sa=
+id:
+> Hi
+>
+>> 2026=E5=B9=B47=E6=9C=888=E6=97=A5 19:36=EF=BC=8CBartosz Golaszewski <brg=
+l@kernel.org> =E5=86=99=E9=81=93=EF=BC=9A
+>>
+>> On Tue, 7 Jul 2026 23:16:31 +0200, Miao Wang via B4 Relay
+>> <devnull+shankerwangmiao.gmail.com@kernel.org> said:
+>>> From: Miao Wang <shankerwangmiao@gmail.com>
+>>>
+>>> The reset event of BMC is captured through GPIO. However, this driver
+>>> bypasses the GPIO framework and directly accesses the GPIO controller
+>>> through the fixed address. When the same GPIO controller is also
+>>> exposed through ACPI and probed by the corresponding GPIO driver,
+>>> there would be a conflict between the two drivers.
+>>>
+>>> This patch will try to find the GPIO through declared GPIO pin in the
+>>> _CRS resources of the ACPI node. If no such delaration is found, the
+>>> driver will fall back to search for the correct GPIO controller and pin
+>>> according to the fixed address and pin number. A possible DSDT
+>>> declaration for the GPIO pin might be as follows:
+>>>
+>>>    Device (BMC0) {
+>>>        Name (_ADR, ...) // Match the PCI address of the BMC device
+>>>        // \_SB.GPO1 is the ACPI path of the GPIO controller
+>>>        Name (_CRS, ResourceTemplate () {
+>>>            GpioInt (Edge, ActiveLow, Exclusive, PullNone, 0,
+>>>                     "\\_SB.GPO1", 0) {
+>>>                14 // 14 is the GPIO pin number
+>>>            }
+>>>    }
+>>>
+>>> Signed-off-by: Miao Wang <shankerwangmiao@gmail.com>
+>>> ---
+>>> drivers/mfd/ls2k-bmc-core.c | 162 +++++++++++++++++++++++++++++++------=
+-------
+>>> 1 file changed, 115 insertions(+), 47 deletions(-)
+>>>
+>>> diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
+>>> index f87224105b3720cca97dcef089dad63fe57bc8c2..7187b2dfddc3acfb9fdf3cb=
+3b4675299928dd03a 100644
+>>> --- a/drivers/mfd/ls2k-bmc-core.c
+>>> +++ b/drivers/mfd/ls2k-bmc-core.c
+>>> @@ -26,6 +26,9 @@
+>>> #include <linux/stop_machine.h>
+>>> #include <linux/vt_kern.h>
+>>> #include <linux/console.h>
+>>> +#include <linux/gpio/consumer.h>
+>>> +#include <linux/gpio/driver.h>
+>>> +#include <linux/gpio.h>
+>>
+>> I've stopped here because this is a legacy header that must not be inclu=
+ded
+>> and none of the interfaces in it must be used, as per the - very loud - =
+comment
+>> at the top of that file.
+>
+> I fully understand using the legacy interface is deprecated. However, the=
+re
+> seems no other way to obtain a gpio line description after a gpio device
+> is found using gpio_device_find(). As the comment shows in the code below=
+,
+> the only place I use the legacy interface is:
+>
+> gdev =3D gpio_device_find(...);
+> desc =3D gpio_device_get_desc(gdev, LS2K_BMC_RESET_GPIO);
+>
 
-Reviewed-by: Andr=C3=A9 Draszik <andre.draszik@linaro.org> # for Maxim MAX7=
-7759
+No, new code using legacy API is *not* acceptable. That's an official NAK.
+
+> // XXX: might be better to use gpiod_request()
+> legacy_gpio =3D desc_to_gpio(desc);
+> devm_gpio_request_one(..., legacy_gpio, ...);
+> return gpio_to_desc(legacy_gpio);
+>
+> I just borrowed the legacy gpio interface to request the irq description.=
+ I
+> think that gpiod_request() should be better to be used here, but it is no=
+t
+> an interface that is exposed. As a result, I post this patch as a PoC her=
+e
+> to discuss and find a better way to achieve this.
+>
+
+If the firmware doesn't describe the GPIO, you have at least two alternativ=
+es.
+Please look at Documentation/driver-api/gpio/legacy-boards.rst. You should =
+be
+able to use either software nodes or GPIO lookup tables. This document
+describes the conversion from the latter to the former but - while software
+nodes are preferred - lookup tables are not deprecated so feel free to use
+it to set up the descriptors.
+
+Bart
