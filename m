@@ -1,226 +1,125 @@
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7EA91A9FBA
-	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 11:17:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.54
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783509443; cv=none; b=BRVvuH9r7P4EDFMma9p5aQIoHp4wtV8NHZ1i49tHeIMwbzNyfhd+EE5mKjtRxoslNvutn2V6Apqm+5koQ1ZMxsaN6gbUE3WipoYKBIVCVarnEEVeRIk/TvewqdI/jAeIZyeFCKCoJDwIvbXbHoBPaScNHzHyjhaxJUM53S2WWho=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783509443; c=relaxed/simple;
-	bh=AUH0QEL8dJYUHkKEyP1+Wnxmr6TzUPNptUL9kgsC+mI=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=YdAEJ8dR9qCsCP168jJ/hx2sd0yUTiK341ArEApKgUHgIGq7SGM2TZnDvhfi2YW0OT5EWO5gU3Dy1RHkLOLS/rGxGJZIUylAv4Ts2ZxXo4K+egdz9pnwPxt87V8Ga8VqeSWfyjbyHE8KX91OJznunQzfCSjxc8T22pJ/uqGcfwc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=Bk+6JIi3; arc=none smtp.client-ip=209.85.128.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE90047D920
+	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 11:21:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.218.49
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783509674; cv=pass; b=YdHQLPwBJR4ScqKfe+PUAi9p5ELqXUGza3XdrbyAfJbe9X/HYEEf70h7LLA1IZoXrp6bo6fTECs3a28rXuuh5gLnigWHPw1jn+q71hUx+6j1hZd9aWq+4ZlTFxU37mJ0BVMoGzzvzlPxhve51mgMYZkumbBfNYDXY1CywUfrF6o=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783509674; c=relaxed/simple;
+	bh=sxTm1fV0wN8yufOFAAA23WvJefkJ/ggYcteJQQdtpw4=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=lqOnUba0U3D54HsJKRufW+EEpDaDrivVLud7QqGyWCZYql1Di880uivnmcIPXvVTZ4HG1iidH9kK24GAyWzhkWF8lIr/8W3SFTJ/ejUPPjCUXaK4hOwoM8IAhp5Ss8S5ZGaUXNxS1nGbwjmide9B5CxwKaT51tmrqdKonL4Gfz0=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Jzem5mnx; arc=pass smtp.client-ip=209.85.218.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="Bk+6JIi3"
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4921eed3fa2so3524535e9.0
-        for <mfd@lists.linux.dev>; Wed, 08 Jul 2026 04:17:19 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Jzem5mnx"
+Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-c12614b81c9so102295666b.3
+        for <mfd@lists.linux.dev>; Wed, 08 Jul 2026 04:21:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783509671; cv=none;
+        d=google.com; s=arc-20260327;
+        b=OBgxBgFTbp96LpcFdCuYVUFO9yOXOa60X0ce3+aJWuziC2RMIJkcoR9WFqSD/g2A7k
+         MZ3yiAiIchuRjlU2p6HIyP1QbbA/Vn8KVD//kxQRG0/M7YS0qDQ16r/T6R06hijnk6ZS
+         JaJbBk6kFe02ZWrL+83+MveQ4R3QD0dWBgvifNwRuNuXTu3DnSMaLyVd3cyexYqg6NQ0
+         PigSjh9TdJtqxsOgb7ZC/9H4ieyVbQN0DifolwTtm7BzU4By4peApkPj2KrUXWu1YbTz
+         RoGigoSqwgC6dHb0zV+/EGwnWWFlTCr1SheWvc7L/GGTCquVzV3VrCbhxS/rUEM292H0
+         p93A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=Wg1Pltfpu5Izl1NFsHhM5RN0Y8llAXCSZAgh063DTEc=;
+        fh=esLxoh2xtGO1pQUxv3HQbwvHqeLZahj2KIz0dkikixg=;
+        b=F5Tk97y+uCnNeV6CRD8u+dsp9/Od09NB30SxD9Q0XFC22S0oDi67H9uGhGdlP8xfXS
+         RKPK69ym2Ghwl61GMRFHGWjN3g5sjD8L2LRX9bX25DBCfa4dD/ejFjWWGYmzjYX8QV65
+         GWlWQGrL1mX5kf5p+0czGVidFJ4WYwd+mYgkMdQiTOokLBoIs02ORC1ErRxyBepQ9Su1
+         SDl2yvGP8pr5Vxs1OE0UpZ8/dgl03YksEcbsPFk1t8wvuhY/9Dh7neGlpsotuOgGCNM/
+         RkH5+A3QqROipwOz/6m3cotBlrOdlsSS/XcNO9ZP6uZaIVyZR55PDhnQJtrbKiy0mmtI
+         SkFA==;
+        darn=lists.linux.dev
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1783509437; x=1784114237; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=VS/xmPf3JVe5KLxw0JrGYq5kvVh31xyr4Kg5yxM4aT8=;
-        b=Bk+6JIi3pRffu4zQQz+9yqY26oMTqeXrcz5CMtVzc/ks7wNfkeRtzPpj6p3k9G975S
-         6w43yVS2n3dsQC79nsxKvw4TKJlNl67N5Th1Ft3c2fJIQsjQgMiWIPSjtd29icxbiguO
-         ZqtagP1dQ4qYulIV5LnC3DaiN7y3SRWJ9Q2dN4eB/vuGkB8A3SNLnRfFEznkyuaz3p4l
-         4yvrev49Kinbzqiw72XtijLZ2WBkhtn3PAQ6sdkm3MgDy4iipXyj/koOSW6U6tln5SXw
-         GRVGjllUsGW4ghbki2iLv4KMFhwEKsk0/7usl4DavoJON3EBTCsugMWDaIgig9D5ucNW
-         9bmw==
+        d=gmail.com; s=20251104; t=1783509671; x=1784114471; darn=lists.linux.dev;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Wg1Pltfpu5Izl1NFsHhM5RN0Y8llAXCSZAgh063DTEc=;
+        b=Jzem5mnxmlaK77RGd4MuGUnS5rA5tQyQR28G2v0JNi4WczhUzJeReb2YiF7EaoQ1+x
+         lYtQE6/Uifn8HXgJkyN5U7ZxPt3Kp5wUb7V2QI4O4rbZIG0D/6lGnE0QxwUwZbskItEs
+         qy5XTaOh0h/byDgDf+T11cKY6Sp2W11tvNPRBOlcdFEG+rJH+AsCFsfzQwXYv5CWAWxp
+         qd965ZZ5QFez0AhKaSQWVUTUIt5vU3+ILCqQOz0eT5CIlQVIC6CofanYna92g2DbSb7V
+         ZS+vvNqSpf4TK14HKe9duba0PvDNJsG/Cj+tKkZMaDhH59Msg8Ee7XEAiwfyWGtN9DVR
+         g+1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783509437; x=1784114237;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=VS/xmPf3JVe5KLxw0JrGYq5kvVh31xyr4Kg5yxM4aT8=;
-        b=UFFJaeGNJ/ZXpayNuDx9BE+inbSvQOasTO3hWMYqXgCBfK3m4OvycCjDLCMvxZxqV0
-         96G4c5Nbs9SSMYygpcn4K1Q82B9nnTfENHGt+QdGhQJ6s2lfVn12xlXE6mlP1pIGuMWD
-         YkXYiQ39Mi2iIE1x88GfhW9WqCqOsUUtX+7kTjswxO8C1/uuGwWvwGiqXgzftrRduWwF
-         u0P61qZqgDy2hg/fikOG/wY6HM9CSXul6nPI0kD94wwPwsw4Png3KIE4o/enYBFzVVU9
-         MhvAbV6djaNhpdCDMHIlzOaxTzF2CFpU774O04bP/+PtFS+WAVlKXnTqCrgnukyU2w7+
-         BEZw==
-X-Forwarded-Encrypted: i=1; AHgh+RqD+OJ4EemJj0Y5oj9/Qx5aHSkk3wi+L7HmweKPhYVK4ymLqwCYADbjuNJUSNYrHjVdzRc=@lists.linux.dev
-X-Gm-Message-State: AOJu0YzXs8y2u1XoOpjU9uVhhczZm96NN8JbQ/s7fyWJ+ltApLHLvdA2
-	KkMmZS986D63Dr2Vj7+vOZ0t6yBTGAHFetYTEduvkakDXE9VkLpSgbo4JscQYYivGAc=
-X-Gm-Gg: AfdE7clcXEDY4ATmQIFtUrGDrlRjVsdEesizj5NGHNGhEZ3cOhXSwczw8w7UDwl6Dr1
-	nVjEp4KAoBATE4WfRM7TMzVTi3/gJ80EFp3NinlWt+WzLUVGgDk8EaMbV24hmjLFFhsXNQwZHvo
-	8YnxRl+8OpiVDIbRPmQ5M2DoTYFUdkXrVeEEYamxRHOeA0g/d5RDmaGBN8i0twUY2X6KEgq8D+w
-	4uaLDDcvVv5HR02ILykNCSlFxE7eioNEWDfJStVFto0jPh0CdhH3dEWOz2Dmsn9/zt/rTcQKVHY
-	7Tg+gDsJs0U33/U2IoSJjYK8JWqLycp2P6MiPkJFPT6bX+XJbZh2zCNllwZctLXtxUe+q4r7USR
-	/tuPfsxpEYWSDk1bonUwxDjMj6esRusUzqQAMOPHQy1XxwH6mhuIP/+9SjIlkvcezmgPqis3+/a
-	07ZlXUstcpCE/p4B2JU954UAZlZEx7bDdiEUHiYC1nOt7hQ0OKNecCeoAKLPGjdcjHVmwenoYf4
-	kCw
-X-Received: by 2002:a05:600c:e54a:20b0:493:bf88:edbe with SMTP id 5b1f17b1804b1-493e68df961mr13540905e9.19.1783509437649;
-        Wed, 08 Jul 2026 04:17:17 -0700 (PDT)
-Received: from localhost (p200300f65f47db04930dc5bd4534e1e5.dip0.t-ipconnect.de. [2003:f6:5f47:db04:930d:c5bd:4534:e1e5])
-        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-47aa039b0cesm42042425f8f.22.2026.07.08.04.17.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Jul 2026 04:17:17 -0700 (PDT)
-From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>
-To: Lee Jones <lee@kernel.org>
-Cc: James Ogletree <jogletre@opensource.cirrus.com>,
-	Fred Treven <fred.treven@cirrus.com>,
-	Ben Bright <ben.bright@cirrus.com>,
-	Support Opensource <support.opensource@diasemi.com>,
-	Orson Zhai <orsonzhai@gmail.com>,
-	Baolin Wang <baolin.wang@linux.alibaba.com>,
-	Chunyan Zhang <zhang.lyra@gmail.com>,
-	mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	patches@opensource.cirrus.com
-Subject: [PATCH v2 23/23] mfd: Unify style of spi_device_id arrays
-Date: Wed,  8 Jul 2026 13:15:30 +0200
-Message-ID:  <13f1c0ae1697c6e3a342250e25fabdbf1499d642.1783507945.git.u.kleine-koenig@baylibre.com>
-X-Mailer: git-send-email 2.55.0.11.g153666a7d9bb
-In-Reply-To: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
-References: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
+        d=1e100.net; s=20251104; t=1783509671; x=1784114471;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=Wg1Pltfpu5Izl1NFsHhM5RN0Y8llAXCSZAgh063DTEc=;
+        b=BoGztKxIyr14h/x64isLVHdEOvkVQ4YFZw7OMtvd2O9R/+aXq5nNUJPpblYYnIXwsM
+         kcQfFeXigTaF4Z3LrzBNrR6Hr636uVw1nQlEWcCyaToHTGtUfmRb47RPrjJQgOYm0CAl
+         vHFR8IOrsNEkW+gyIBiHRoQPjWTz2tx523p8UO3ttdqgtJNGWr0ktgWOYykw728/xUhI
+         POtoRdzTa+BYmjOjBPwjFggA5kqluj3zvOIktVmP7FG9mOfOSo/j02WdMMwST9OHaezT
+         d7jX5LHPxpVNWIbm1FzrPHw/+AYYagHM3CALDu1JqWM+jTjd4KDZrMwDkZeiBzksSyr8
+         udqg==
+X-Forwarded-Encrypted: i=1; AHgh+RrlxxNMym99zI2tbiPpvOOn6ArU6hncd+wsXMra4t0y6kqIbCZJimQAIRJBDsOoaNT+9Ns=@lists.linux.dev
+X-Gm-Message-State: AOJu0YznB4EKg3f1HWAVHJY1wySO4nbsOS9mqd69kfSulFwTydGVbL/N
+	KV/77I++egJ9/4yL/RXrpDbdCAiojzWA+fSeiT2dSt9zHzqJGzh4/QE+bvyhWOLdbijHMVAuf3L
+	2utL4sURP19rNjKWbf/ejHE9JpfLudQg=
+X-Gm-Gg: AfdE7cnxtsucSgLFpU+ohdMYDwzd2qDupUbOINFBGUIhysRuUp99HTh/fY2ci2g7/SK
+	lne7m/t5mpuianPmGcKvb9LlFc2c0KTjvzEubcxO1eoiiUDlqZhKh40uF1sO4yYMMyJOAJ9EXBD
+	rEmdOB75o8s5s5SExNFBTCEMs4jnCMRZLLrWtBvdo4Pv6yknKkDY7BwmVgyG7NJIT2Jc17pMvAp
+	LrqDmJZ9JMuJOd5HhpAyaSWOGy72ItCLHyJDRE5Ws8PtmSNQJ3aaCzwB0Nrkp/5YDC3gprip2UP
+	wz2BVWj8qquyRANBZLubyhCnvpi9afiaQa6kMdZDqgxwXYeX9duqRe7k7+kFvLUaNx6BqFdcg+a
+	6YTGQAKFHaJ8lVWPwDH1rqxfJxBMjm/Kvxn07/OrkGCWIBEinE0mW1nKXpoJ9+IiMB991
+X-Received: by 2002:a17:907:a286:b0:c12:a5fb:ff22 with SMTP id
+ a640c23a62f3a-c15ce1e13b4mr91075966b.50.1783509671143; Wed, 08 Jul 2026
+ 04:21:11 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4606; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=AUH0QEL8dJYUHkKEyP1+Wnxmr6TzUPNptUL9kgsC+mI=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBqTjGMTjh3m3lcDCxC0y4ZIhqpOh7zHGwBvs3DY LCfJjNA+b+JATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCak4xjAAKCRCPgPtYfRL+ TvwcB/0V9JbnAT2bSNI2eEfjYVmEsc8s4TNstUfRkoxykJLa7jFSHQmS/mhstC5s9lbLyoFE7cx lmMBG7pRcA0mSS/KdlmiJ7/0m11s+eKEPVYr3SB1Zryy1JPrRi7A6hLWFfK5Y3hdBH5YUGMnpHg jmgdWrQyK75Ox5pYy5AXa8oZmH/Q4xa7Zt8/b59C+jm3rl3NvNcdYCX0Iat4PiSob5LnmafLfmy sgFCfU/auuPKB0oAdzs71xB7J94dMAdN1GA14RdUFiEnCHx98vuYVGdIMIjR4rHZNNksg+/o7DY DTROggwDLfWVYRe5DHAmY8PUN0VpKmtXJ2VSaXG+MLSYs/td
-X-Developer-Key: i=u.kleine-koenig@baylibre.com; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
-Content-Transfer-Encoding: 8bit
+References: <cover.1783507945.git.u.kleine-koenig@baylibre.com> <ac8389353ee128d3841cf91c27ef84a8cfa3b5ca.1783507945.git.u.kleine-koenig@baylibre.com>
+In-Reply-To: <ac8389353ee128d3841cf91c27ef84a8cfa3b5ca.1783507945.git.u.kleine-koenig@baylibre.com>
+From: Andy Shevchenko <andy.shevchenko@gmail.com>
+Date: Wed, 8 Jul 2026 14:20:34 +0300
+X-Gm-Features: AVVi8CdHZRQ8JDdQAY9urGf77kybIGx_VhFVrRtDnRlB9kd2FPJpqh-iIUTt6R8
+Message-ID: <CAHp75VenO8ZirZt1DPsrX4LVhFe4cBtbJ8QNN98BRqeuQDSs8g@mail.gmail.com>
+Subject: Re: [PATCH v2 18/23] mfd: Unify style of acpi_device_id arrays
+To: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>
+Cc: Lee Jones <lee@kernel.org>, Chen-Yu Tsai <wens@kernel.org>, 
+	David Rhodes <david.rhodes@cirrus.com>, Richard Fitzgerald <rf@opensource.cirrus.com>, 
+	Andy Shevchenko <andy@kernel.org>, Thomas Richard <thomas.richard@bootlin.com>, mfd@lists.linux.dev, 
+	linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org, 
+	patches@opensource.cirrus.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-These arrays already mostly match the most used and generally
-recommended coding style. That is:
+On Wed, Jul 8, 2026 at 2:17=E2=80=AFPM Uwe Kleine-K=C3=B6nig (The Capable H=
+ub)
+<u.kleine-koenig@baylibre.com> wrote:
+>
+> Update the various acpi_device_id arrays to conform to the most used and
+> generally recommended coding style. That is:
+>
+>  - no comma after the list terminator;
+>  - a comma after an initializer if (and only if) the closing } is not
+>    directly following;
+>  - no explicit zeros in the list terminator;
+>  - a space after an opening { and before a closing }, a single space in
+>    the list terminator;
+>
+> Adapt the few offenders accordingly.
 
- - no comma after the list terminator;
- - a comma after an initializer if (and only if) the closing } is not
-   directly following;
- - no explicit zeros in the list terminator;
- - a space after an opening { and before a closing }, a single space in
-   the list terminator;
+You combined different type of drivers into one patch. I don't care
+much about this, but personally I would prefer PMICs to be in a
+separate patch, and the rest perhaps per driver. In any case,
+Reviewed-by: Andy Shevchenko <andy@kernel.org>
+it's up to Lee.
 
-Adapt the offenders accordingly.
-
-Signed-off-by: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
----
- drivers/mfd/altera-a10sr.c    | 2 +-
- drivers/mfd/arizona-spi.c     | 2 +-
- drivers/mfd/cs40l50-spi.c     | 2 +-
- drivers/mfd/da9052-spi.c      | 2 +-
- drivers/mfd/motorola-cpcap.c  | 6 +++---
- drivers/mfd/rsmu_spi.c        | 2 +-
- drivers/mfd/sprd-sc27xx-spi.c | 2 +-
- drivers/mfd/wm831x-spi.c      | 2 +-
- 8 files changed, 10 insertions(+), 10 deletions(-)
-
-diff --git a/drivers/mfd/altera-a10sr.c b/drivers/mfd/altera-a10sr.c
-index 260e590b87b1..6ce20c764e30 100644
---- a/drivers/mfd/altera-a10sr.c
-+++ b/drivers/mfd/altera-a10sr.c
-@@ -155,7 +155,7 @@ MODULE_DEVICE_TABLE(of, altr_a10sr_spi_of_match);
- 
- static const struct spi_device_id altr_a10sr_spi_ids[] = {
- 	{ .name = "a10sr" },
--	{ },
-+	{ }
- };
- MODULE_DEVICE_TABLE(spi, altr_a10sr_spi_ids);
- 
-diff --git a/drivers/mfd/arizona-spi.c b/drivers/mfd/arizona-spi.c
-index c4ee5b499fce..c02b291574a6 100644
---- a/drivers/mfd/arizona-spi.c
-+++ b/drivers/mfd/arizona-spi.c
-@@ -260,7 +260,7 @@ static const struct spi_device_id arizona_spi_ids[] = {
- 	{ .name = "wm8280", .driver_data = WM8280 },
- 	{ .name = "wm1831", .driver_data = WM1831 },
- 	{ .name = "cs47l24", .driver_data = CS47L24 },
--	{ },
-+	{ }
- };
- MODULE_DEVICE_TABLE(spi, arizona_spi_ids);
- 
-diff --git a/drivers/mfd/cs40l50-spi.c b/drivers/mfd/cs40l50-spi.c
-index c273bc98e7f8..902a6c324d83 100644
---- a/drivers/mfd/cs40l50-spi.c
-+++ b/drivers/mfd/cs40l50-spi.c
-@@ -41,7 +41,7 @@ static void cs40l50_spi_remove(struct spi_device *spi)
- 
- static const struct spi_device_id cs40l50_id_spi[] = {
- 	{ .name = "cs40l50" },
--	{}
-+	{ }
- };
- MODULE_DEVICE_TABLE(spi, cs40l50_id_spi);
- 
-diff --git a/drivers/mfd/da9052-spi.c b/drivers/mfd/da9052-spi.c
-index 2a08481432e3..29cf2c17fde1 100644
---- a/drivers/mfd/da9052-spi.c
-+++ b/drivers/mfd/da9052-spi.c
-@@ -68,7 +68,7 @@ static const struct spi_device_id da9052_spi_id[] = {
- 	{ .name = "da9053-ba", .driver_data = DA9053_BA },
- 	{ .name = "da9053-bb", .driver_data = DA9053_BB },
- 	{ .name = "da9053-bc", .driver_data = DA9053_BC },
--	{}
-+	{ }
- };
- 
- static struct spi_driver da9052_spi_driver = {
-diff --git a/drivers/mfd/motorola-cpcap.c b/drivers/mfd/motorola-cpcap.c
-index eab96299bc72..3d7aa4b0895f 100644
---- a/drivers/mfd/motorola-cpcap.c
-+++ b/drivers/mfd/motorola-cpcap.c
-@@ -202,9 +202,9 @@ static const struct of_device_id cpcap_of_match[] = {
- MODULE_DEVICE_TABLE(of, cpcap_of_match);
- 
- static const struct spi_device_id cpcap_spi_ids[] = {
--	{ .name = "cpcap", },
--	{ .name = "6556002", },
--	{},
-+	{ .name = "cpcap" },
-+	{ .name = "6556002" },
-+	{ }
- };
- MODULE_DEVICE_TABLE(spi, cpcap_spi_ids);
- 
-diff --git a/drivers/mfd/rsmu_spi.c b/drivers/mfd/rsmu_spi.c
-index 8b2e7cb401b5..3fc1135c24be 100644
---- a/drivers/mfd/rsmu_spi.c
-+++ b/drivers/mfd/rsmu_spi.c
-@@ -244,7 +244,7 @@ static const struct spi_device_id rsmu_spi_id[] = {
- 	{ .name = "8a34002",  .driver_data = RSMU_CM },
- 	{ .name = "82p33810", .driver_data = RSMU_SABRE },
- 	{ .name = "82p33811", .driver_data = RSMU_SABRE },
--	{}
-+	{ }
- };
- MODULE_DEVICE_TABLE(spi, rsmu_spi_id);
- 
-diff --git a/drivers/mfd/sprd-sc27xx-spi.c b/drivers/mfd/sprd-sc27xx-spi.c
-index 11d4aed1d43f..3d7d896e11df 100644
---- a/drivers/mfd/sprd-sc27xx-spi.c
-+++ b/drivers/mfd/sprd-sc27xx-spi.c
-@@ -294,7 +294,7 @@ MODULE_DEVICE_TABLE(of, sprd_pmic_match);
- static const struct spi_device_id sprd_pmic_spi_ids[] = {
- 	{ .name = "sc2730", .driver_data = PMIC_TYPE_SC2730 },
- 	{ .name = "sc2731", .driver_data = PMIC_TYPE_SC2731 },
--	{},
-+	{ }
- };
- MODULE_DEVICE_TABLE(spi, sprd_pmic_spi_ids);
- 
-diff --git a/drivers/mfd/wm831x-spi.c b/drivers/mfd/wm831x-spi.c
-index 4cdb6e0734c4..1e519fd9a9e1 100644
---- a/drivers/mfd/wm831x-spi.c
-+++ b/drivers/mfd/wm831x-spi.c
-@@ -84,7 +84,7 @@ static const struct spi_device_id wm831x_spi_ids[] = {
- 	{ .name = "wm8321", .driver_data = WM8321 },
- 	{ .name = "wm8325", .driver_data = WM8325 },
- 	{ .name = "wm8326", .driver_data = WM8326 },
--	{ },
-+	{ }
- };
- 
- static struct spi_driver wm831x_spi_driver = {
--- 
-2.55.0.11.g153666a7d9bb
-
+--=20
+With Best Regards,
+Andy Shevchenko
