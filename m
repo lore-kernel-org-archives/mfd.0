@@ -1,184 +1,141 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A90933C3437
-	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 11:25:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B75C941DEF0
+	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 11:25:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783509928; cv=none; b=Za4/berYjLqKmU/ZNu0FLNK4q8bo3EuZMs8tmMtZstfsVRuj709KggEQ/b2PnpYGMEYP3XYlXbCzbrY2L+Dj6cpdk5nD3Qk++R7ZUheVfCQhrpuPUQkEydyYOyvDWXnvE0ZvZZ9yCW2U7PbCJUjxfAOvgsjTkq9ff6ZDCnnGF7E=
+	t=1783509929; cv=none; b=aiK7yTB0KJxY8CTNMDaCRAQsvKKvCbtuUtIy37rvvkf8Us+8NR6qwWWJsBqH+KOycybcPEsG6joGZp0Cy0fkVV6BS7sp+wSXp59oqVHdwsdMTwmtGdoWyuKMvYOeVUaEOvoLfTs63bGd7MW6juslvdG9YAwVjL+XSQPJ0ZV1928=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783509928; c=relaxed/simple;
-	bh=2opxawMQcBSeTSi1pA6ccAFIFbPYqCZPoi4sQ7wrzUI=;
+	s=arc-20240116; t=1783509929; c=relaxed/simple;
+	bh=Uyirwt38ZwWBFPglcA+gE5dHheUgIrd30ML3+9ixRlA=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=rsNLoAeHHVfivfEo0VKn2yA8rV1QMEoZTjzicAq6/XynmK95EHoaoAxWrTea+TQ1pF+7E4PchjHCeHUGuuO78XmeaGKmkdVlhVlSQMldygtR0XpHevKDNQB4ZT9lh/YLNdq/dTfrvT2r8YIxLWV/Hzv/65k2SxqdUipTKSnleVQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eIDoif79; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=ATeXOnbxpkx85+w9s6YKG/YXOrOovQADyVvCs22EQQfxPcYSHPUTeAAeQzDv/bxJa6GKxle2VKityZiHfBphpYQNohG0+khmyJa9gIC2A3owBnTVII3212qnJgX20FYd4mHgaegHOGt0nQBiR8xCmO29l1zYjxSQKA7rPZDhAdE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gyJ6UROt; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eIDoif79"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3ACE11F00A3A;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gyJ6UROt"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E92821F00A3E;
 	Wed,  8 Jul 2026 11:25:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783509926;
-	bh=OTLI1FGIaI5nTzfrV3LidnNntJJDaEz5V2lhhtCwgDQ=;
+	s=k20260515; t=1783509927;
+	bh=kT/VtVY4qj4cZlOB577yPxFJkiB5rWSz89PuY6Dbeek=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=eIDoif79kcIGFvAZqIgSkUBDX2Mbtgv3NPJrcV4Bb6nL7IwZjZpMixUjd+PKJar7E
-	 SlXNiqvWcGxIWK4+9fKIdBXnhUfFbWuKuLdy+sMkMR+PgW9/xruY9LWik6SW4sQUfM
-	 AoJX/glPDGBsJxMtcWiMgLdgl0YWiuQVnN0uDpnFLq9Ie3Im0JQKcbQk98REOf38Tc
-	 75wnYykYA8nkUbEBnwMGCWvfV4aNEaMAomkKtefJWcsy8tO0wzIZhnomeRfbbwk8aP
-	 YrTfK9WZ1y0p+0uL4zyZTemygbuObB0RqJfYmSsxxVBG5q1XaDPikwOLuz7gRvGmrl
-	 7q3iFuvtUfm7w==
+	b=gyJ6UROtRuhkgehFZl3lTlDbiVRkguh6n+EXMOKQ/88KvLQRIXzcYS6UgNnG0G+Dg
+	 /RUqsFTTnKav1AzFzxeTmhOAdD76hJZHGQNpxKX/CPxwprM+QsUhfj+QYsRZM+W1Hs
+	 uQNoArTTbwHAlVLPqH0947gesGOug5/dEAogDsF+u4/5cJL/qCHtZ3oyx107rJCXqZ
+	 dZ3CJfBS//svD4EPUGv9pzMDz5FOoBYpjxETlGmQjefZcV194Pi5Q6uumDJUlYIVI2
+	 G5Ldo7iMP4+djS8SdO6ToZE/ZZVmmJoj/pB+LIJBxCyM19UWf3p18AirTUS00RrvHv
+	 TQNYw4duWLOGg==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 09/23] mfd: Drop unused assignment of
- platform_device_id driver data
+Subject: Re: [PATCH v2 03/23] mfd: kempld: Simplify device abstraction
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?VXdlIEtsZWluZS1Lw7ZuaWcgKFRoZSBDYXBhYmxlIEh1Yik=?= <u.kleine-koenig@baylibre.com>
-Cc: lee@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <6cdb070a4e773c2c8b84bd2c2dd3628545d7e7bd.1783507945.git.u.kleine-koenig@baylibre.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <6a306ad0f1cbecd50332fe52f8f3eb089d8df2a5.1783507945.git.u.kleine-koenig@baylibre.com>
 References: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
- <6cdb070a4e773c2c8b84bd2c2dd3628545d7e7bd.1783507945.git.u.kleine-koenig@baylibre.com>
+ <6a306ad0f1cbecd50332fe52f8f3eb089d8df2a5.1783507945.git.u.kleine-koenig@baylibre.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 08 Jul 2026 11:25:25 +0000
-Message-Id: <20260708112526.3ACE11F00A3A@smtp.kernel.org>
+Date: Wed, 08 Jul 2026 11:25:26 +0000
+Message-Id: <20260708112526.E92821F00A3E@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
+Thank you for your contribution! Sashiko AI review found 2 potential issue(=
 s) to consider:
 
+New issues:
+- [Critical] The local pointer `pdata` is left uninitialized in the ACPI pr=
+obe path of `kempld_probe()`, leading to a critical uninitialized memory de=
+reference.
+
 Pre-existing issues:
-- [High] Global PM notifier registered in irq init is never unregistered, l=
-eading to a use-after-free on probe failure or module unload.
-- [Medium] The driver incorrectly passes platform data containing `mfd_cell=
-` arrays directly via the `.data` field of the `of_device_id` match table.
-- [Medium] The driver fails to unwind and remove registered child devices w=
-hen a subsequent child device fails to register during the probe sequence.
+- [High] The fallback DMI matching loop in `kempld_init()` breaks on failur=
+e instead of success due to an inverted condition.
 --
 
---- Patch [9]: [PATCH v2 09/23] mfd: Drop unused assignment of platform_dev=
-ice_id driver data ---
-commit 3723bdf6f78114270ad724f7a7a9017e2dfaa8b5
+--- Patch [3]: [PATCH v2 03/23] mfd: kempld: Simplify device abstraction ---
+commit d573a2c98e6eca131a75d3abab38caed905aae33
 Author: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@baylibre.c=
 om>
 
-mfd: Drop unused assignment of platform_device_id driver data
+mfd: kempld: Simplify device abstraction
 
-The drivers explicitly set the driver_data member of struct
-platform_device_id to zero without relying on that value. Drop these
-unused assignments. This patch doesn't modify the compiled arrays, only
-their representation in source form benefits.
+This commit simplifies the driver by hardcoding the platform data instead
+of using the ACPI abstraction for multi-variant support. It also removes
+the unused ioresource member from the kempld_platform_data struct.
 
-> diff --git a/drivers/mfd/cros_ec_dev.c b/drivers/mfd/cros_ec_dev.c
-> index e253c753beb6d..a933cb936da6a 100644
-> --- a/drivers/mfd/cros_ec_dev.c
-> +++ b/drivers/mfd/cros_ec_dev.c
-> @@ -375,7 +375,7 @@ static void ec_device_remove(struct platform_device *=
-pdev)
->  }
-> =20
->  static const struct platform_device_id cros_ec_id[] =3D {
-> -	{ DRV_NAME, 0 },
-> +	{ DRV_NAME },
+> diff --git a/drivers/mfd/kempld-core.c b/drivers/mfd/kempld-core.c
+> index b64729918dfd3..e60736380cfe5 100644
+> --- a/drivers/mfd/kempld-core.c
+> +++ b/drivers/mfd/kempld-core.c
 
-[Severity: Medium]
-This is a pre-existing issue, but does this driver fail to unwind and
-remove registered child devices when a subsequent child device fails to
-register during the probe sequence?
+[ ... ]
 
-In ec_device_probe(), the code iterates through multiple=20
-mfd_add_hotplug_devices() calls and logs an error without failing the
-probe or unwinding:
+> @@ -415,11 +414,9 @@ static int kempld_probe(struct platform_device *pdev)
+>  		 * No kempld_pdev device has been registered in kempld_init,
+>  		 * so we seem to be probing an ACPI platform device.
+>  		 */
+> -		pdata =3D device_get_match_data(dev);
+> -		if (!pdata)
+> -			return -ENODEV;
+> -
+> -		ret =3D platform_device_add_data(pdev, pdata, sizeof(*pdata));
+> +		ret =3D platform_device_add_data(pdev,
+> +					       &kempld_platform_data_generic,
+> +					       sizeof(kempld_platform_data_generic));
 
-drivers/mfd/cros_ec_dev.c:ec_device_probe() {
-    ...
-    retval =3D mfd_add_hotplug_devices(ec->dev,
-                cros_subdevices[i].mfd_cells,
-                cros_subdevices[i].num_cells);
-    if (retval)
-        dev_err(ec->dev,
-                "failed to add %s subdevice: %d\n",
-                cros_subdevices[i].mfd_cells->name,
-                retval);
-    ...
-}
+[Severity: Critical]
+By removing the pdata assignment here, doesn't pdata remain uninitialized in
+the ACPI path?
 
-Should the error path call mfd_remove_devices() and fail the probe?
+Later in kempld_probe() the driver unconditionally dereferences it:
 
->  	{ /* sentinel */ }
->  };
->  MODULE_DEVICE_TABLE(platform, cros_ec_id);
-> diff --git a/drivers/mfd/mt6397-core.c b/drivers/mfd/mt6397-core.c
-> index ea1d039477e30..7987583afc600 100644
-> --- a/drivers/mfd/mt6397-core.c
-> +++ b/drivers/mfd/mt6397-core.c
-> @@ -429,7 +429,7 @@ static const struct of_device_id mt6397_of_match[] =
-=3D {
->  MODULE_DEVICE_TABLE(of, mt6397_of_match);
+	pld->pld_clock =3D pdata->pld_clock;
 
-[Severity: Medium]
-This is a pre-existing issue, but does the driver incorrectly pass platform
-data containing mfd_cell arrays directly via the data field of the
-of_device_id match table?
+Will this cause a kernel panic due to an uninitialized stack pointer
+dereference when booting on hardware using the ACPI path?
 
-The match table populates the data field with pointers to struct chip_data:
+>  		if (ret)
+>  			return ret;
+>  	} else if (kempld_pdev =3D=3D pdev) {
 
-drivers/mfd/mt6397-core.c:mt6397_of_match[] =3D {
-    {
-        .compatible =3D "mediatek,mt6323",
-        .data =3D &mt6323_core,
-    },
-    ...
-};
+[ ... ]
 
-And mt6397_probe() retrieves it and passes its mfd_cell arrays directly
-to devm_mfd_add_devices():
-
-drivers/mfd/mt6397-core.c:mt6397_probe() {
-    ...
-    ret =3D devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_NONE,
-                               pmic_core->cells, pmic_core->cell_size,
-                               NULL, 0, pmic->irq_domain);
-    ...
-}
-
-Should this driver store an ID enum in the match table data field and
-select the static const mfd_cell array during probe instead?
+> @@ -787,13 +784,13 @@ static int __init kempld_init(void)
+>  	if (force_device_id[0]) {
+>  		for (id =3D kempld_dmi_table; id->matches[0].slot !=3D DMI_NONE; id++)
+>  			if (strstr(id->ident, force_device_id))
+> -				if (!kempld_create_platform_device(&kempld_platform_data_generic))
+> +				if (!kempld_create_platform_device())
+>  					break;
+>  		if (id->matches[0].slot =3D=3D DMI_NONE)
+>  			return -ENODEV;
+>  	} else {
+>  		for (id =3D dmi_first_match(kempld_dmi_table); id; id =3D dmi_first_ma=
+tch(id+1))
+> -			if (kempld_create_platform_device(&kempld_platform_data_generic))
+> +			if (kempld_create_platform_device())
 
 [Severity: High]
-This is a pre-existing issue, but does the global PM notifier registered
-in mt6397_irq_init() ever get unregistered?
+This is a pre-existing issue, but should this if statement have a '!' like
+the force_device_id loop above it?
 
-If devm_mfd_add_devices() fails in mt6397_probe() or if the driver is
-unbound via sysfs, devm_kzalloc frees pmic, which includes pm_nb:
+Since kempld_create_platform_device() returns 0 on success, this currently
+breaks out of the loop on failure instead of success.
 
-drivers/mfd/mt6397-core.c:mt6397_probe() {
-    ...
-    ret =3D devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_NONE,
-                               pmic_core->cells, pmic_core->cell_size,
-                               NULL, 0, pmic->irq_domain);
-    if (ret) {
-        irq_domain_remove(pmic->irq_domain);
-        dev_err(&pdev->dev, "failed to add child devices: %d\n", ret);
-    }
-    return ret;
-}
+If multiple DMI entries match the hardware, a successful registration
+evaluates to false causing the loop to continue. It then fails on the next
+iteration with -EEXIST and overwrites the global kempld_pdev with an error
+pointer, which forces the driver into the ACPI fallback path.
 
-Since mt6397_irq_init() calls register_pm_notifier(&chip->pm_nb), returning
-an error frees the memory while the PM notifier chain retains a pointer
-to the freed pm_nb structure.=20
-
-Can this lead to a use-after-free during a subsequent system suspend?
-
-> =20
->  static const struct platform_device_id mt6397_id[] =3D {
-> -	{ "mt6397", 0 },
-> +	{ "mt6397" },
->  	{ },
->  };
->  MODULE_DEVICE_TABLE(platform, mt6397_id);
+>  				break;
+>  	}
+>  	return platform_driver_register(&kempld_driver);
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/cover.1783507945.gi=
-t.u.kleine-koenig@baylibre.com?part=3D9
+t.u.kleine-koenig@baylibre.com?part=3D3
