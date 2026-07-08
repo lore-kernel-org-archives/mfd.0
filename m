@@ -1,53 +1,56 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D07AE434E3D
-	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 11:21:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D72CA435A95
+	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 11:22:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783509695; cv=none; b=RswM1fWyo1WFbVgsZCe6uCyktQrLGGnJTlpg5W9ZN1i3EeXVEVBT41En4ryMUERMLRiVW9WzamM1O1h/nrotwBpd55b7Ts+w5aceT0Il0hDGlVnP9RW8eEjg5lGDAodL+hqFa8cDPEUrr8n4w8L2b4XFiFCJgDXrYsVVAVjT2M8=
+	t=1783509768; cv=none; b=Zb5oR92+Z9oST2aur6BuQeGEFfH9bGaqtFCBEoGsKPs0YAw583YE5Z2kKB9wcs+Yt8X32Zcni54aev+dkOUl0xCzkp5YCIX+ejMQS2xQLEDmET3i3KOJ6rSeXlTGyimMIIvuLZL9R6kxj1rcS2FpVW+HzqKRFvVk8XMjfPONVQA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783509695; c=relaxed/simple;
-	bh=OQkajenRuZSDGpegfFInBCObTQfKg1higwde+ARVad8=;
+	s=arc-20240116; t=1783509768; c=relaxed/simple;
+	bh=4BaSXsPzEudC/Zp4xSyMBJNseEARKQn9r/VRcNA32g0=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=u21kmo+ve2tLVapuHvzPdY3q5+my8IDyjMce03skrWsgdunuHco/C+4++WuQJyI0q9Qp9Sz6yWaQT8c22f7hKYx31CYhO/m5lf2R830vq0Zu8a6SRjp3P+2esaHdNPXiRKB8pmxjaCpqk2cc1T+Co8GVX47HK51B8zCs+BjerGc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PaswB2SG; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=hoiZq8iT91niYVYoNE2cLBorjo99XxUzfO/eHF44cUFkftgcwp/LW3BBWBzuP7ku3WDxPZGpccInCTzYV/fDerxgKOFosmwXvT9SoYGuIPFDN8B98CkvTWtfIcWtCXPZkKbJXHykbQzhmgm3/FNtwRQVR4ewzfi6/LFZ2QEaQBI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aPsSHywP; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PaswB2SG"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1D1C11F000E9;
-	Wed,  8 Jul 2026 11:21:34 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="aPsSHywP"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 421C21F00A3A;
+	Wed,  8 Jul 2026 11:22:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783509694;
-	bh=OQkajenRuZSDGpegfFInBCObTQfKg1higwde+ARVad8=;
+	s=k20260515; t=1783509767;
+	bh=4BaSXsPzEudC/Zp4xSyMBJNseEARKQn9r/VRcNA32g0=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=PaswB2SGxjpcyCAaqLroQx9UGO9nMIAeSX5YppEA1CcPJQ2lvbescb1NXg5LMwd1W
-	 DcMoOJVMn6Mw97ayySHnfnrl8kRB6cx/5qnXZIZpBi7kaFjA4/6ZkMqFEw2wQdfJsD
-	 bU6OVtSrplX9++gUL3i14H6g7UXcGqOnoDVApiG8hljBr8+4EO0kPSwX7GNtbVUlSY
-	 FlkFACjFoB9ncQ7NxTyTgVyL9SqcPlbkxnlxR4cXa3AOok9glhFxSGRZoOsYaJSf+u
-	 NvfoUelRUmwvlaJwSQtjUEQn8zNwbo7lnc8aBlRd3cseGNpP7uGMk3SGuis5m7eDim
-	 Lreo0FLa6L30A==
+	b=aPsSHywPeYCOCMM4ESg57oDuy8ugPpPGfUOAW4vKcsgWZxGyidqVmIZ5h8QzWPMAF
+	 fiY85HHYFzBBj6+Rj5BMHSrxYeMcRrbjoeM4JO2bJQ7Je010i5oG8E0XDe0BFYdiim
+	 fm3uwop0fUlgjZs4wufX7bV6kwJ3liQStMIYIZozlHMeirBp56pVEe2PeQpDgGUFkb
+	 5XMcV4d7PoHlCrgfM8ucjyfMP9+HcAbzDfDcins9nt3IoK2ICDyJ3C2GyvfdZGli9U
+	 RZ19MxRMTL+BWZoFatMBbej9Ae1vjRpYMAliFnR7fZUgjr5SxsZlLzGY6yeASiZNWs
+	 bxAqWomc/6vbg==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 05/23] mfd: mt6360: Drop irrelevant __maybe_unused
+Subject: Re: [PATCH v2 10/23] mfd: Drop unused assignment of spi_device_id
+ driver data
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?VXdlIEtsZWluZS1Lw7ZuaWcgKFRoZSBDYXBhYmxlIEh1Yik=?= <u.kleine-koenig@baylibre.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <f4ea197a16a6345018db79896ac9af4fa0567ac1.1783507945.git.u.kleine-koenig@baylibre.com>
+In-Reply-To: <9569d4523b0d87d2249a087e760f3eaba231b4d9.1783507945.git.u.kleine-koenig@baylibre.com>
 References: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
- <f4ea197a16a6345018db79896ac9af4fa0567ac1.1783507945.git.u.kleine-koenig@baylibre.com>
+ <9569d4523b0d87d2249a087e760f3eaba231b4d9.1783507945.git.u.kleine-koenig@baylibre.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 08 Jul 2026 11:21:33 +0000
-Message-Id: <20260708112134.1D1C11F000E9@smtp.kernel.org>
+Date: Wed, 08 Jul 2026 11:22:46 +0000
+Message-Id: <20260708112247.421C21F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-> Since commit 5ab23c7923a1 ("modpost: Create modalias for builtin
-> modules") MODULE_DEVICE_TABLE() is enough to reference a device id array
-> even if the driver is built-in. So mt6360_of_id[] is always used and the
-> __maybe_unused marker serves no purpose and can be dropped.
+> The drivers explicitly set the .driver_data member of struct
+> spi_device_id to zero without relying on that value. Drop these unused
+> assignments.
+>=20
+> This patch doesn't modify the compiled arrays, only their representation
+> in source form benefits.
 >=20
 > Signed-off-by: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@b=
 aylibre.com>
@@ -56,5 +59,5 @@ Sashiko has reviewed this patch and found no issues. It looks great!
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/cover.1783507945.gi=
-t.u.kleine-koenig@baylibre.com?part=3D5
+t.u.kleine-koenig@baylibre.com?part=3D10
 
