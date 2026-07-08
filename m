@@ -1,139 +1,117 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 005633AC0C1;
-	Wed,  8 Jul 2026 11:12:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.21
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F23B543C7CB
+	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 11:16:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.54
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783509136; cv=none; b=jPykNzg+2BHAzKfffm4/r4V0kBaDeYODapjHybpZlQc/EQGBctMxgxXGcxzmW1U5RWKXbNi9nZb/N+q272A+1rf161mh/5l6dBV3ty1I2W6icrSzxM38hML9437kp5xQaugwCRsg8PoPvD2SZhDTzulUBDFlOlk+quSYhm0diQI=
+	t=1783509406; cv=none; b=cZMMJpA4TMbRvhOc0tyJSbsfSFabDi3QnkU32qEs8CqjpnHnuYazawlcT0f4gV0IWG2+vAB+hIhLUQqIcdChhReGg/2K/LMpxLi9neslX/0XwCmhw5lEloZad4vGNEhAPsAM9bBpRU5zUfrjNul2rhHv3DoStpssqWaHMm68zPM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783509136; c=relaxed/simple;
-	bh=dXbZA1E6z2cbPpn5lXVwUbC3y8RJZe9PuV/6K4qA1zI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=BiF3qR7rJBWbNmlFriBx6WniD58XQNt58kyh0Zl5TMaCh8AK6D9gKK7Jy9JLhDW1doGywyM1Q2jE3uZXVl3dxr7KLHFTiwqROst+wcS4IiNial7Vxvx7N5A16lXhOPP8xDX5PX/K0Igub6V6+d7tbDOcI6EHjY1pLqR7mThKQ/o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=NKaLLLgY; arc=none smtp.client-ip=198.175.65.21
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1783509406; c=relaxed/simple;
+	bh=duMJOMhRMJ7vzwyjzXHRpzbNOKXgwFM5i7qlyVVPaOw=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=U7qab9bUG1ChBsEIQ29wbrW6ljVsQyfugH0d3p6kLD8Mx7e1saNJQ0npBrrLfgpGtm+8XaM9Yl/YGg3HBDnpNHeE+HUhoB6VBVhg/tUrtnH5hGtS83quiTU2pvQZGk2LqSvPJv8SLgg6UmC0O89T9qPqJ0BSm4vzgp+IL4qmzM0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=jpQUrxmE; arc=none smtp.client-ip=209.85.221.54
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="NKaLLLgY"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1783509135; x=1815045135;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=dXbZA1E6z2cbPpn5lXVwUbC3y8RJZe9PuV/6K4qA1zI=;
-  b=NKaLLLgYSGwRbFEUPZ4WXfWAkQLZfXhRPviQaSCCWKxzP1Hwd/RZVyI5
-   qhXuK+dXM700naBdhd5VjHzf3fB68yRX1rwFVdBb5K4tRooC+h47nZN0b
-   HqlzRyvi3i/kegVxXwlN1Q9bFbd81z5OdScYJJbrEMHBh9n2zirrfivj3
-   BLmv97jfpG4CZUhQ06zO8jXEDpEWV04IHrUTpZ4Y4IibitKa+7JaNke2V
-   eeZ2GZkWMVMW7okGFl4bSqx3udTAk2pzQVKxjuOZ7hAoPkOtFqIPD9PMt
-   rUuZBYfnUwPvVhb5PmwwjRrhP3ahd79YDWKu/qN+x7cMdQsrVi6vnYScE
-   A==;
-X-CSE-ConnectionGUID: t+LfzDDcQdq0C18vyL+efg==
-X-CSE-MsgGUID: dJZFJx+mTge7Lrlfjtm2qg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11840"; a="84025153"
-X-IronPort-AV: E=Sophos;i="6.25,153,1779174000"; 
-   d="scan'208";a="84025153"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
-  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Jul 2026 04:12:14 -0700
-X-CSE-ConnectionGUID: xnTXU7N2RFKFpJyFUzPznA==
-X-CSE-MsgGUID: WXa6o+4tR/u+kKLX2b+3mA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,153,1779174000"; 
-   d="scan'208";a="252523743"
-Received: from klitkey1-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.100])
-  by orviesa006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Jul 2026 04:12:00 -0700
-Date: Wed, 8 Jul 2026 14:11:58 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Bartosz Golaszewski <brgl@kernel.org>
-Cc: Lee Jones <lee@kernel.org>,
-	Mark Brown <broonie@opensource.wolfsonmicro.com>,
-	Thierry Reding <thierry.reding@avionic-design.de>,
-	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Vinod Koul <vkoul@kernel.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Danilo Krummrich <dakr@kernel.org>, Rob Herring <robh@kernel.org>,
-	Saravana Kannan <saravanak@kernel.org>,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
-	Andi Shyti <andi.shyti@kernel.org>, Joerg Roedel <joro@8bytes.org>,
-	Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
-	Doug Berger <opendmb@gmail.com>,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="jpQUrxmE"
+Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-47de008b020so302075f8f.1
+        for <mfd@lists.linux.dev>; Wed, 08 Jul 2026 04:16:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1783509399; x=1784114199; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=kZz5dHOpX+Erat31ZHODxdGoH83h4CoVFtEy/HlH4rY=;
+        b=jpQUrxmECC4SduY+GLL4Rex3QQ7zxaHboeK59nwEzbiZRLdKugf3nZ3jsZgDjRjdMV
+         hQYcTC2vwGDgedMI131Hkpe7AEmq7drbh3vSLeZecg2fsAVFlDaTX+2wmNtNZTl3kDX9
+         hIHW6ETmiXhxENh9vzz+PJWA862S2tEg1voIMZmR4FGSjjr5yE/fwR+Cm/tefJ/h0InV
+         v02xNZ03S+kjzP22/yfqN9Mh9pyfu4mijnPjovRkzM2lb2ODDUZNU2FffK4Vea3ha2ri
+         6erdhLQ86dQFsdJr3CpDr/TXT0bM0U7Wtxx2wt86rhD4qy4og5blCRAmZ31KjWRNcjOL
+         cj8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783509399; x=1784114199;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=kZz5dHOpX+Erat31ZHODxdGoH83h4CoVFtEy/HlH4rY=;
+        b=YtvGmRVewnkKuGByhBRjJyhHeA7jRUqClz3klIicdWRaheBBZZ6LOzzOsQ4yGECbay
+         8PwgS6roVqm6nlMj7y1E/DN1C8etlcy4kdjH9qcf685pM5y+xnDSATdHGsHdlm1Wp/5B
+         GjXsua3d14T/Yt/k2hKhvPs3uCOBPlODyE77wtR60oarljv6O1kMlPX/OcP5TwIdM5Iz
+         odW4LqDjQobLxCsJ3RU6uJ1ysWgMYEmi8bl8pwx88fC6XcIi0H9mVVMq16AynFmnfQ0r
+         1LWtqn9sXyWfAGv0N22VJsbl3YNeORmRpFSjA/ndY/0Ew4RbwEcVPX61F17VPVRbTwZc
+         re0Q==
+X-Forwarded-Encrypted: i=1; AHgh+Rqn9BqPmwNgEq+e95VcbNTLJNjD3U98DmgAstqd+7opOdQOiNr7ArvnqiauxjMaIvGmbEs=@lists.linux.dev
+X-Gm-Message-State: AOJu0YxW4to7cKgVn0VzzxjSar0Q1PhoAuExGfTUe5Lqc0pcJNNPtJQv
+	whOUC+UA66xWV6+wQB219veSTe7PCxz4O+2gGqV/V5DuccaT2pRhOdyMVMOn9Pw2ij4=
+X-Gm-Gg: AfdE7cnVtsxal3udXYoFZyKTG6VyjnnFY4TTHod6GIZ68BAN4g8ri1Aw+5O+UJD/F8c
+	AYCi1q0+99ayP2EgR7iBHwiJOmky9xaTDK/UCpzTHUjeMC+xhHA1EjhhfukQPYi4NtXSWW8hF+X
+	Erxx9qtBcubmxvmxdLQ8nIXEhadRvfyXCM9I8aydXOitI7wLlvbXKZBk+Oklo77yYqL+IvBtkqb
+	9jEf1F/kh0HQKG1mSrJ2UrOMCp3bf0niJJdPl6bPz6w3biUqV+Prh7VCmjCHUCeS50WyCT5NAN/
+	2xiw7C1D1JlhNgOXy6qmwGSQQIZSpTvRb/3TC00X7DTQ5wRCL4utD9Ksenj76WrTLKiRgBLpnKI
+	I5rQlWYEdG+G5yyRWkTrkrfsJaHvytNhFV5XoPmdmtTHP8ZFkLIDRYwaSBiqhVUA9M+K9/OflFD
+	8ZoL6eDNKv817WLzH2C/AfZwGHz/OoF5tb7joIGPlVHfv1ZTo0G7makfmbH//4HlKnkV1AtV6Zn
+	1pU
+X-Received: by 2002:a05:6000:4916:b0:474:88ef:cdec with SMTP id ffacd0b85a97d-47df0245d73mr2621597f8f.6.1783509398941;
+        Wed, 08 Jul 2026 04:16:38 -0700 (PDT)
+Received: from localhost (p200300f65f47db04930dc5bd4534e1e5.dip0.t-ipconnect.de. [2003:f6:5f47:db04:930d:c5bd:4534:e1e5])
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-47aa039ae4fsm43122869f8f.18.2026.07.08.04.16.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 08 Jul 2026 04:16:38 -0700 (PDT)
+From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>
+To: Lee Jones <lee@kernel.org>
+Cc: Florian Fainelli <florian.fainelli@broadcom.com>,
+	Ray Jui <rjui@broadcom.com>,
+	Scott Branden <sbranden@broadcom.com>,
 	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Ulf Hansson <ulfh@kernel.org>, Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	Matthew Brost <matthew.brost@intel.com>,
-	Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Peter Chen <peter.chen@kernel.org>,
-	Paul Cercueil <paul@crapouillou.net>, Bin Liu <b-liu@ti.com>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Maximilian Luz <luzmaximilian@gmail.com>,
-	Hans de Goede <hansg@kernel.org>,
-	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-	linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org,
-	driver-core@lists.linux.dev, devicetree@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org, linux-i2c@vger.kernel.org,
-	iommu@lists.linux.dev, linux-pm@vger.kernel.org,
-	imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
-	intel-xe@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
-	linux-usb@vger.kernel.org, linux-mips@vger.kernel.org,
-	platform-driver-x86@vger.kernel.org, mfd@lists.linux.dev,
-	Manuel Ebner <manuelebner@mailbox.org>,
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Subject: Re: [PATCH v3 05/20] driver core: update kerneldoc for
- platform_device_alloc()
-Message-ID: <ak4wfuYxO2serrQt@ashevche-desk.local>
-References: <20260706-pdev-fwnode-ref-v3-0-1ff028e33779@oss.qualcomm.com>
- <20260706-pdev-fwnode-ref-v3-5-1ff028e33779@oss.qualcomm.com>
- <ak0jyUbNonSRiP_g@ashevche-desk.local>
- <CAMRc=Md7-XMBKpdPuZ4=epfTn6F-PXKJBZNPGuz5xbVy58BHsg@mail.gmail.com>
+	mfd@lists.linux.dev,
+	linux-rpi-kernel@lists.infradead.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v2 02/23] mfd: bcm2835-pm: Drop unused header
+Date: Wed,  8 Jul 2026 13:15:09 +0200
+Message-ID:  <d31a5092ef0e9f1ef9f53979f2c5b22a83e9f697.1783507945.git.u.kleine-koenig@baylibre.com>
+X-Mailer: git-send-email 2.55.0.11.g153666a7d9bb
+In-Reply-To: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
+References: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAMRc=Md7-XMBKpdPuZ4=epfTn6F-PXKJBZNPGuz5xbVy58BHsg@mail.gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Content-Type: text/plain; charset=UTF-8
+X-Developer-Signature: v=1; a=openpgp-sha256; l=830; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=duMJOMhRMJ7vzwyjzXHRpzbNOKXgwFM5i7qlyVVPaOw=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBqTjFCTv0TFdgVKMIjyLAKa+ZhG9Uj6OIm1KDV4 xVdwvHzvCaJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCak4xQgAKCRCPgPtYfRL+ TtQBB/9yw2y+rrwbKmgisWs8vAKTeVbqbDnz5sBNUasP4KfNNYNy+8h5AiJO3Rw2PWgynngOxgQ i0lcjPjKQ4dCNt8OhhlkEP4h32gCDQqYTK8CLdgs/HSPrk+khDLKnFACXrBjR6eMlNsQQk/NxmB 9KFevHmHVA3/cn4jxFdYWXDjBvR2JhfmlHc+PQMW7FWYg886C8GqagvNHaq6xza7hiGAWrYvq82 CANOM/YBLjqHdQgh2AClmSbFnCxSDPt7o6qgXKf6Q7tZAIwyvljqEkS+zM/JLCAqLVoJXlBu1nr O0aTkfSzIKmMLU+thKJoqgg7W95CIiiNz0J4nD0IkFak4Zog
+X-Developer-Key: i=u.kleine-koenig@baylibre.com; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
+Content-Transfer-Encoding: 8bit
 
-On Wed, Jul 08, 2026 at 12:42:58AM -0700, Bartosz Golaszewski wrote:
-> On Tue, 7 Jul 2026 18:05:29 +0200, Andy Shevchenko
-> <andriy.shevchenko@linux.intel.com> said:
-> > On Mon, Jul 06, 2026 at 02:44:17PM +0200, Bartosz Golaszewski wrote:
-> >> Users of platform_device_alloc() + platform_device_add() must not modify
-> >> certain fields of the dynamically created platform device object. Update
-> >> the kernel doc to say which fields are affected and which functions to
-> >> use.
-> >
-> > Consider using __private checker attribute for them as well. It will make
-> > sparse scream.
-> 
-> Sure but let's leave it for another series.
+<linux/mfd/bcm2835-pm.h> doesn't use any symbols provided by
+<linux/regmap.h>, and neither does any of its users (i.e.
+drivers/mfd/bcm2835-pm.c, drivers/pmdomain/bcm/bcm2835-power.c,
+drivers/watchdog/bcm2835_wdt.c).
 
-Sure, just a side note comment that you know that we have some facilities for
-that type of problems.
+So the header is unused and can be dropped.
 
+Signed-off-by: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
+---
+ include/linux/mfd/bcm2835-pm.h | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/include/linux/mfd/bcm2835-pm.h b/include/linux/mfd/bcm2835-pm.h
+index f70a810c55f7..12bb6bc2c07f 100644
+--- a/include/linux/mfd/bcm2835-pm.h
++++ b/include/linux/mfd/bcm2835-pm.h
+@@ -3,8 +3,6 @@
+ #ifndef BCM2835_MFD_PM_H
+ #define BCM2835_MFD_PM_H
+ 
+-#include <linux/regmap.h>
+-
+ struct bcm2835_pm {
+ 	struct device *dev;
+ 	void __iomem *base;
 -- 
-With Best Regards,
-Andy Shevchenko
-
+2.55.0.11.g153666a7d9bb
 
