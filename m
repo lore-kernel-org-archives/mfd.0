@@ -1,180 +1,182 @@
-Received: from mx0b-001ae601.pphosted.com (mx0b-001ae601.pphosted.com [67.231.152.168])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEC5D40586A
-	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 12:15:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=67.231.152.168
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783512955; cv=fail; b=oWWti+3eFDhau7NyI92wfKoDP9KaqngklMcmQLJZeXhcOnHbEa0uPmviv++8D6M5WuEooFQyuGrnLf51iPqrCNAa1BzA6axxMZAt+8RhzMJszD8N4asDv8MwHCYJ0uJXU1Ju5SY8f9au1hIgPweZl0+DU1XUMoilnlSNPSJeY2E=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783512955; c=relaxed/simple;
-	bh=WadGoo/z8M3xoV0WEaR4Im4A5Ig7zsryQjibUau7Ia4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=JIWMvlZKefrA48RgtdCTNvyolGgA85ba6xPJLYuXegAiFr6o0vjGFBjYJmEoGMDuWgVsOhLGb12HwKPADghXovNuwdfJvG9a7hapIUx0ontAmbAc0t+9QbouJT0qQJAne1dVRwpamLUdqhudcMR0W2mT2ksNvXdc7IdGNi1HUtc=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com; spf=pass smtp.mailfrom=opensource.cirrus.com; dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b=RXgnr3gU; dkim=fail (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b=COvSP91u reason="signature verification failed"; arc=fail smtp.client-ip=67.231.152.168
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=opensource.cirrus.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8BFAF42087C
+	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 12:16:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.176
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783512977; cv=none; b=OQpwvkJ0V/SwpJLH4druGxR4CvYH2lCeioykm5sk4RGHycaIiJqypO1bmExwEufVzMGK0Y2EXCCyolTziEpjmQr269z3XJ14UR/SG815njxAm0/pR1u+UvNotRmPApP51Rh6ftsrPFlfdDnX+wVdXoQrSwBuaoNZTGmnxCs0JGk=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783512977; c=relaxed/simple;
+	bh=89j/Vg+mxUc+a6GV2Yklth3BpvuokAtPW5SuG5t75Mg=;
+	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
+	 Message-Id:References:To; b=uvCTZa3mp5rd077ftIUh2v84RRulBMeTdHHW78ZRiGLxWPhIXmXkR+UyfWzAFG3Mb6v95glRCFagSbEPEhjX4HVU1yC1I4qAfGkmpB9l72/avlse8y1+t+yEvQb4J+vXxhGhuOJSfnzaLqABKT+mIMDl9r6ntKWk0zqf9U+jJ4A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=CWqAyyY8; arc=none smtp.client-ip=209.85.214.176
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b="RXgnr3gU";
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b="COvSP91u"
-Received: from pps.filterd (m0077474.ppops.net [127.0.0.1])
-	by mx0b-001ae601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6684m76x1629049;
-	Wed, 8 Jul 2026 07:15:38 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	PODMain02222019; bh=UyzSKOh33z0Xb6QBUNhSpEuixH3Bke9MJC14m5KKS9A=; b=
-	RXgnr3gU2xTMaynK+3RVHT9prWhWLb1yilil10GY+YGH1Yk8ZhPwwbFqLrTIIxg7
-	oGnfPDTNwJSitRs+KUIZcHmg4P04CkwYjjWQV8TIqqANTmruthamXqYGUCeuND1h
-	pwAx+T5mxPlKXknAoaVzjHK3DxeKLR1R2RQCVYenyS7WLbFQRHkuhN8Ug8sKvfli
-	CfsVvuEOJxXZx+v+jG+hsGLUPBr7WnnTG7jiljIIKT9USTWXc+Ofu5ri1QIRQuHI
-	MRf9jm1wvH4BXKYUyjrUXRWvZ7GJ4P0vqk55cSKzcsy8xgWdZltjb5UdHBaPy1wL
-	oa3XgzSA9wcO4kH8lMFfXg==
-Received: from sa9pr02cu001.outbound.protection.outlook.com (mail-southcentralusazon11023089.outbound.protection.outlook.com [40.93.196.89])
-	by mx0b-001ae601.pphosted.com (PPS) with ESMTPS id 4f6xkjp6bk-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Wed, 08 Jul 2026 07:15:38 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=q8peVUPNjDHW97J4YtK9jVS0njYdJwcspJmanSFTQzLlDI3SYBItG3cXi1/b6fKxw0t2ltihqPoPlepHR46iIRrDGIZiZ/p8T/KzCFkYshrjVq1I1pU0nc288tsDd6Pm2jfdryqbiId+f22YQWyQmRrjTgjSay+2qmjX/TlPrG2epG9iZitKoF++sBjpcSxdb7UbRoNdvnVIis5PkPYTEewMmTDeF3yO+dgeHHayjtfKShfFjtYEaXYhhm5yXpTqVN4X8xJrk/NmMELfc6LmwseRgzenruQqiI32w7Qjch6gGURgxIR1hMdCcuiUqzJnyFvU2vLo9tpmejSWua/1ew==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OBTT5l/zKJZRxmEBtniorPLqmXm4GmYCcfKW+0cfZfw=;
- b=R1fEnjhaWb2AU6r5qTU+fJkAldjq0m59y6gde70/HcVM8P+9gBv0vem+0miZfB+Wd3Liwzxv+8DQAQ+AM9zqV2JEkjpLYBybC4ZSEg5busaWUqt5S3zPA2Abr1ugyjVp6mXfB8kOM4PMPsKNFY/e+62FwGKR/baaiacrkhGtAm5s9OwS4lMSpXBGMzQCtbmBQGieJ4j72degGx0w88VHqW2Wz8lnoTuAGkbd0wyRnkU0Tn+U+F+T77G359qlLPz5TRqJ6hgGdg0Pw1oghXaN1arZAsCXATiwqnqx1EDw4Xk0WDRsjqYHBLK+8n/9fs5bkvW8at99EioW5hBca5zFEQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 84.19.233.75) smtp.rcpttodomain=atomide.com
- smtp.mailfrom=opensource.cirrus.com; dmarc=fail (p=reject sp=reject pct=100)
- action=oreject header.from=opensource.cirrus.com; dkim=none (message not
- signed); arc=none (0)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="CWqAyyY8"
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2cac39b729dso1124575ad.3
+        for <mfd@lists.linux.dev>; Wed, 08 Jul 2026 05:16:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cirrus4.onmicrosoft.com; s=selector2-cirrus4-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OBTT5l/zKJZRxmEBtniorPLqmXm4GmYCcfKW+0cfZfw=;
- b=COvSP91uNmAhs1SDIoLt/X/ocu1XLMaEcOvg9fQqJ420EkhZ+fHVUAyFsCYCpYnWUzDcWUxK0bGdIwrS+PsvWP1agcGg03PUCfps5UT2UGwsygFFeCpjpy/QfW9et4t3t0Bsi2UZgtmCSuQioR3LD1KSFdlj+m1Xg1PbP/6beeU=
-Received: from CH5PR02CA0016.namprd02.prod.outlook.com (2603:10b6:610:1ed::13)
- by PH0PR19MB4758.namprd19.prod.outlook.com (2603:10b6:510:20::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.15; Wed, 8 Jul
- 2026 12:15:35 +0000
-Received: from CH3PEPF0000000F.namprd04.prod.outlook.com
- (2603:10b6:610:1ed:cafe::1b) by CH5PR02CA0016.outlook.office365.com
- (2603:10b6:610:1ed::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.10 via Frontend Transport; Wed, 8
- Jul 2026 12:15:35 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 84.19.233.75)
- smtp.mailfrom=opensource.cirrus.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=oreject header.from=opensource.cirrus.com;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- opensource.cirrus.com discourages use of 84.19.233.75 as permitted sender)
-Received: from edirelay1.ad.cirrus.com (84.19.233.75) by
- CH3PEPF0000000F.mail.protection.outlook.com (10.167.244.40) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.6
- via Frontend Transport; Wed, 8 Jul 2026 12:15:34 +0000
-Received: from ediswmail9.ad.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
-	by edirelay1.ad.cirrus.com (Postfix) with ESMTPS id 39EC9406541;
-	Wed,  8 Jul 2026 12:15:33 +0000 (UTC)
-Received: from opensource.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
-	by ediswmail9.ad.cirrus.com (Postfix) with ESMTPSA id 28F3A82025A;
-	Wed,  8 Jul 2026 12:15:33 +0000 (UTC)
-Date: Wed, 8 Jul 2026 13:15:32 +0100
-From: Charles Keepax <ckeepax@opensource.cirrus.com>
-To: Uwe =?iso-8859-1?Q?Kleine-K=F6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>
-Cc: Lee Jones <lee@kernel.org>,
-        James Ogletree <jogletre@opensource.cirrus.com>,
-        Fred Treven <fred.treven@cirrus.com>,
-        Ben Bright <ben.bright@cirrus.com>,
-        Support Opensource <support.opensource@diasemi.com>,
-        Chanwoo Choi <cw00.choi@samsung.com>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Aaro Koskinen <aaro.koskinen@iki.fi>,
-        Andreas Kemnade <andreas@kemnade.info>,
-        Kevin Hilman <khilman@baylibre.com>, Roger Quadros <rogerq@kernel.org>,
-        Tony Lindgren <tony@atomide.com>, mfd@lists.linux.dev,
-        linux-kernel@vger.kernel.org, patches@opensource.cirrus.com,
-        linux-omap@vger.kernel.org
-Subject: Re: [PATCH v2 20/23] mfd: Unify style of i2c_device_id arrays
-Message-ID: <ak4/ZDSvc4bz/Lg9@opensource.cirrus.com>
-References: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
- <9c8fe48a1f971d75191c636f2b6d3ef1c68a26e2.1783507945.git.u.kleine-koenig@baylibre.com>
+        d=gmail.com; s=20251104; t=1783512975; x=1784117775; darn=lists.linux.dev;
+        h=to:references:message-id:content-transfer-encoding:cc:date
+         :in-reply-to:from:subject:mime-version:content-type:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=WtPxIe9ZDXTB4bAnWWhC43OWYPlhSUNmRAB3alNpo8Q=;
+        b=CWqAyyY8618AQ9sWh4rczqbst75f3qSy1n76vdLYjRJ0yNzgeJoJqrvW3M/w8DMROB
+         bVejNJCnaguoLWnTnnxflx8zZ0wpF1Z3MACAlaYQrk9eXPLl5XMsje8DZd0uGL4jz2xp
+         4tl3qXNtLXArk05kpYNo2jBZp0nt4dWHnwXG9iiKCIpi7/bI4mXEZBol3uyh96tGS1xN
+         D1boSbOZ1TYhqkSe3HWOvLvd2jmkaZ0J4DOT2s3NLg9A0QPdxjg2sI/UG1wI1NT9zGFT
+         bQuoL64slhu9RBt06B96tu9H1Sjf3/brvTaoiUUD4AWlj6yRcDJhn5AMk2UYoURfdV91
+         PPJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783512975; x=1784117775;
+        h=to:references:message-id:content-transfer-encoding:cc:date
+         :in-reply-to:from:subject:mime-version:content-type:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=WtPxIe9ZDXTB4bAnWWhC43OWYPlhSUNmRAB3alNpo8Q=;
+        b=dy0m+xKWXbDXclheFlonAMMQzqrirx7ICv7/foCUr93e7SjVrT0dZTG6ZIwofvvqLR
+         bH5dc+M2cch1Mg3EPiOGd/SsozgLaGGc8VnmihuwN69LlkO3Ukeaz/K4UmLVsyqSFc10
+         AJAVRG4ej9Dyi4mh5eqRzQKySZaMDicFpufyQL8feubPfNM0nrQE1hKHl8D32Ad4Ut8E
+         WA4d0ULzjKos8na2eSCq1PDmcxLa3M8eZToIZJx9IubSb1Qd1GrCGveLvKs4qs7dziTq
+         ipHW04PfcZnyHca0DJUwhd418//D9GUIshMGfw4QIc3JlBJRiieZEWIyIolF7p8IdzGx
+         vJ+Q==
+X-Forwarded-Encrypted: i=1; AHgh+RqUucx4A2FpOFuMFtsuhgkRdVDXDerru2JnSpQM8/9W7oJYVmbXIUeEcZ/4C+5pwD5RP7Q=@lists.linux.dev
+X-Gm-Message-State: AOJu0YwTsp2rg6fhAPH1ZBx+DyXsH8a7Cqxcmq8AIaziglb0DFXxcig+
+	kkYW3sITvCRqwSHw1TtAy0re5ZQpEvH3cFsjBIt1EpoAIafgfaKtrCOn
+X-Gm-Gg: AfdE7cnc8LbSvtwMGmGBcXZfC8xVbTzift005nasAZcTXE2n/b/24dUGK3OaLaMLJYV
+	mtCQj/cDZlgkLnzHwruB3sUyNfxELEv89Rlrn5sK+kmJfR1FQ5tOZt9dey5XbHHdTJFOlUAHFdg
+	b14DOvaRpuS4vzC5MXV6Uf4p/TpkwWPtPZ1Rs0JPMlF++KoMnzh4GwoK2/MQxCCvtmP+anxXGWa
+	Y7tubPkgdHThGTUDZhEHNflYMQUjA/xs3kqTLGueRuf5nvCCJNUaixXERZIQBoCZelfrlvh2Ww6
+	XyaSI2TEGaYIdd1bY8G9HcNmgO/ZW9YrwhlJ3EceUpJCcPSpIdbf6wtif5OmNS00baL1h97A9qO
+	A0kZX7rOj69Z/QX7ZhiicMd9eJYSHlLpc6Gq4UJ8ATCdWEHZJiQWWCNTwXWhJR/CslzgRRJYURB
+	Cbi5Or92eWdwGumqKaMc4c5gn5LfceJGPtq1pq8v5gcnJMMg==
+X-Received: by 2002:a17:902:d585:b0:2c0:db23:4a6 with SMTP id d9443c01a7336-2ccea33a741mr19490865ad.1.1783512974833;
+        Wed, 08 Jul 2026 05:16:14 -0700 (PDT)
+Received: from smtpclient.apple ([23.247.139.92])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ccc9d1e284sm27267735ad.40.2026.07.08.05.16.08
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 08 Jul 2026 05:16:14 -0700 (PDT)
+Content-Type: text/plain;
+	charset=utf-8
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <9c8fe48a1f971d75191c636f2b6d3ef1c68a26e2.1783507945.git.u.kleine-koenig@baylibre.com>
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF0000000F:EE_|PH0PR19MB4758:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9e4ffe70-9fdd-4dc8-10c5-08dedcea9d1b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|61400799027|7416014|82310400026|376014|23010399003|18002099003|22082099003|16102099003|56012099006|4143699003|11063799006|5023799004;
-X-Microsoft-Antispam-Message-Info:
-	Y5fq1pj1Eaaujzq8ViJNTsbnyenC27/+rDblm2+x87a/+v2jPkHsWVQnCOLA/OEO+ERrPtEanMylC1xMA9hg9JJ/KZp28J4BRMFFx14x4mQDgifpT9b+wIcUZBD0ScS7rPBeEueFnpH4r3RnWktvMvCOU/uGpPie/0c1a0DOncb1Zu374dAJ2GeBDg3yXck1PFQ34U0Ztek5Cml2oAIdpzEzQjLrCRh3Bu2aYOAmsLU/WHLXAUy+eFW7A5qgtyOimmbDJBlWpIJKY34zQKBGT/bPwmMpqE89XCUOU3VCcWIFgket03C4KIabPd1W3jFluzCXH3x4OEgrNDM+V6ZIkXmWatTnarYRcYavr1h5dg6U/z4aZNIYLvTwuUUVq2tEpcs6gaqb3F1VGWmywNXqA4dEyDx7w6LSQipe0+iA87lzwwrvF8eCQjugpyK1PPR0pE8cRu8SxhoJwgJzr3/eXSzSAWcDb6xLn9SAi/Tc3hpWnepdlXzEqBGgxCla+1C3bO1XbnQvK8DZd5OMdpVuuqzvJrBHK9f6/S74REc5SvXSMdVEbnzyjzXzNMV9837yGZSCXvMUE9ypfrX7t5lbLc77doUHtBSDApLWP/JHliHPBLcbV8Jy3qcFVh1KLbl5DjpMkFBQ/SXCcItpUguzuM5Qy6OOOQTd/g88LxHV0B4PnksvdcN/Q8XjOyw48TNMbwH1C8cDLJ2v/LX97Jwv4Q==
-X-Forefront-Antispam-Report:
-	CIP:84.19.233.75;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:edirelay1.ad.cirrus.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(61400799027)(7416014)(82310400026)(376014)(23010399003)(18002099003)(22082099003)(16102099003)(56012099006)(4143699003)(11063799006)(5023799004);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	TTCtH1eTVjZLwGhHz/VwhHQxmcfZHSxF92RPv4YWNzg163NltUVnlBcNK2fbH17Y6L32h9yTvRP66ORblXDfLooHMtgnb6aQKX6Dls6EZhECk+p37HN+WpMyew6b/5P1HsR/JwtboCIGt98zWjMA+3A6t5X9esBxvvlS4pVcss7ePMDMDqnGnNxpO1gvEq2GfSa7m1Dbn99FznnVO0B5y50CmowJw7cdSZd9QbPVqY6IHnlEQ5Gv3IANL7m1rVaFvydF314yvcviyKWwi5MU42ZhnIUvfSKfCXlLce0Xn/bjctSykkO8+MEoIe0NwUIa2tDsLG5JISR+uIVDdPCqtKeLUPG/OhUoOB20P9TKAlKd4KdHM8h4DL6k1popGlhGZK2gVN1ywkb6Qabgu9K+6xufWhW+79agLfW8hZONN4Ta/CiDgTNihM6OTOLnfyiB
-X-Exchange-RoutingPolicyChecked:
-	W/gkv3bT0bbBaC7V9zGbggoxvI8oyPnIWKDqKmcBtaHTF7TFsiFS60YqMD9w/5ArwspzFVr7gbxRaAsDsJPjwXx8QivQLe9Evls144HMsd0TBd4zg9dF1JQcfzFY2pULdVZF2ztUyCzET87tkeZ7bYLpovmtqEjAqWecGIyv6ZVhZ6AhEa32zvhsfxM/wuNvrWPGkY+GkWmV9Ds/xwjzFafi+7Qdt0svM1Uktjm6dC/AfJNR5flAT85J2Fh9oAuStieQY4N7qaODKiuUW92gKEItZbF3VOI+U/cnCBv5OcVJITUK0JcVe9+qAb3PoB0u/d3v1THRQTpWmoPwwNI9pw==
-X-OriginatorOrg: opensource.cirrus.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2026 12:15:34.7084
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9e4ffe70-9fdd-4dc8-10c5-08dedcea9d1b
-X-MS-Exchange-CrossTenant-Id: bec09025-e5bc-40d1-a355-8e955c307de8
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bec09025-e5bc-40d1-a355-8e955c307de8;Ip=[84.19.233.75];Helo=[edirelay1.ad.cirrus.com]
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-CH3PEPF0000000F.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR19MB4758
-X-Proofpoint-ORIG-GUID: 62pfYdDdD8pXj-NUICWwMRfX2hE6MXez
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA4MDExOSBTYWx0ZWRfX+BjbrzguE/+M
- dsPY930dSPuplxSI1+Qd/FulvKDU0nwvolpTf+sBAfLj9Cp0Dcu4hnnozlITYkp0+SpwK7zhDpx
- zcSXKw1HBGhZNkzXoMj3tOC/8v3FRxk=
-X-Authority-Analysis: v=2.4 cv=YYiNIQRf c=1 sm=1 tr=0 ts=6a4e3f6a cx=c_pps
- a=M4UlfGjtkVVPzxF0Cn8jVA==:117 a=h1hSm8JtM9GN1ddwPAif2w==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
- a=8nJEP1OIZ-IA:10 a=RAioF0-LDSMA:10 a=s63m1ICgrNkA:10 a=RWc_ulEos4gA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=iX4cTi3TZMoOKdANLEfx:22 a=KfkQE9S9VqCBgivYGm0O:22
- a=IpJZQVW2AAAA:8 a=w1d2syhTAAAA:8 a=F4wxPZVc1jiR1BN_hbcA:9 a=3ZKOabzyN94A:10
- a=wPNLvfGTeEIA:10 a=IawgGOuG5U0WyFbmm1f5:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA4MDExOSBTYWx0ZWRfX2c6Ell5+j0Zb
- lHxh+rdTwkZkO5iyeFr8Q8dyshBcol/IVEjGYvknhmW0d9lEvE0TcAA5iHdFXs2W+Bqt26OvG/z
- n8z9F3MyMJRNzDV//VUR+kJzTDdjGjJKvw4O0npisEAbXsLEhxrYStJCcOuAU/7oP3aGMIdVtHI
- C6HrciXoJLP8pQI1yFdD6thtF7rFTObqklW73Ck+BrzBE2FcMzdkwrOd/H/fm4bA9ys2cVzUDl5
- djnvKK1IulaGsLlSaj9r4WOoPVvvrqeM4UaBl6XgVc5/0xOavFtGSFCTRDau/juSvF1v6YlEiIp
- 1w0rv/CewNeFwHpOi/9TbuX1Sp7ST21344/EPCwx+FO6kZYp9fHYFHAkhM9XRlAcvzc4+54Mf0A
- Sbc9u2eY02Pl8PFCYP11qhCBc1mLhuelWsBHAxnNKtGzB4IvbjHXLVSkcdN8q4WNKkyAUmCB82W
- pn0TrfdaJXwsBPSpFYQ==
-X-Proofpoint-GUID: 62pfYdDdD8pXj-NUICWwMRfX2hE6MXez
-X-Proofpoint-Spam-Reason: safe
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81.1.8\))
+Subject: Re: [PATCH RFC v2 7/7] mfd: ls2kbmc: Capture the reset event of BMC
+ through GPIO
+From: Miao Wang <shankerwangmiao@gmail.com>
+In-Reply-To: <CAMRc=MeDq6=u66hc+ChmJA9iKRhsYFhg7rKkCGh2BA=--VGkcw@mail.gmail.com>
+Date: Wed, 8 Jul 2026 20:15:55 +0800
+Cc: Miao Wang via B4 Relay <devnull+shankerwangmiao.gmail.com@kernel.org>,
+ Xi Ruoyao <xry111@xry111.site>,
+ WANG Xuerui <kernel@xen0n.name>,
+ Yinbo Zhu <zhuyinbo@loongson.cn>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ mfd@lists.linux.dev,
+ linux-kernel@vger.kernel.org,
+ linux-gpio@vger.kernel.org,
+ openipmi-developer@lists.sourceforge.net,
+ Binbin Zhou <zhoubinbin@loongson.cn>,
+ Chong Qiao <qiaochong@loongson.cn>,
+ Lee Jones <lee@kernel.org>,
+ Huacai Chen <chenhuacai@kernel.org>,
+ Corey Minyard <corey@minyard.net>,
+ Linus Walleij <linusw@kernel.org>
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <C8B03257-3909-4323-B183-331F7CB1DA3E@gmail.com>
+References: <20260708-ls2kbmc-mod-v2-0-2afdd1741766@gmail.com>
+ <20260708-ls2kbmc-mod-v2-7-2afdd1741766@gmail.com>
+ <CAMRc=MeDq6=u66hc+ChmJA9iKRhsYFhg7rKkCGh2BA=--VGkcw@mail.gmail.com>
+To: Bartosz Golaszewski <brgl@kernel.org>
+X-Mailer: Apple Mail (2.3826.700.81.1.8)
 
-On Wed, Jul 08, 2026 at 01:15:27PM +0200, Uwe Kleine-König (The Capable Hub) wrote:
-> Most of these arrays already mostly match the most used and
-> generally recommended coding style. That is:
-> 
->  - no comma after the list terminator;
->  - a comma after an initializer if (and only if) the closing } is not
->    directly following;
->  - no explicit zeros in the list terminator;
->  - a space after an opening { and before a closing }, a single space in
->    the list terminator;
-> 
-> Adapt the few offenders accordingly and also use tabs for indention for
-> two drivers.
-> 
-> Signed-off-by: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
-> ---
->  drivers/mfd/cs40l50-i2c.c   | 2 +-
->  drivers/mfd/wm8400-core.c   | 4 ++--
+Hi
 
-Reviewed-by: Charles Keepax <ckeepax@opensource.cirrus.com>
+> 2026=E5=B9=B47=E6=9C=888=E6=97=A5 19:36=EF=BC=8CBartosz Golaszewski =
+<brgl@kernel.org> =E5=86=99=E9=81=93=EF=BC=9A
+>=20
+> On Tue, 7 Jul 2026 23:16:31 +0200, Miao Wang via B4 Relay
+> <devnull+shankerwangmiao.gmail.com@kernel.org> said:
+>> From: Miao Wang <shankerwangmiao@gmail.com>
+>>=20
+>> The reset event of BMC is captured through GPIO. However, this driver
+>> bypasses the GPIO framework and directly accesses the GPIO controller
+>> through the fixed address. When the same GPIO controller is also
+>> exposed through ACPI and probed by the corresponding GPIO driver,
+>> there would be a conflict between the two drivers.
+>>=20
+>> This patch will try to find the GPIO through declared GPIO pin in the
+>> _CRS resources of the ACPI node. If no such delaration is found, the
+>> driver will fall back to search for the correct GPIO controller and =
+pin
+>> according to the fixed address and pin number. A possible DSDT
+>> declaration for the GPIO pin might be as follows:
+>>=20
+>>    Device (BMC0) {
+>>        Name (_ADR, ...) // Match the PCI address of the BMC device
+>>        // \_SB.GPO1 is the ACPI path of the GPIO controller
+>>        Name (_CRS, ResourceTemplate () {
+>>            GpioInt (Edge, ActiveLow, Exclusive, PullNone, 0,
+>>                     "\\_SB.GPO1", 0) {
+>>                14 // 14 is the GPIO pin number
+>>            }
+>>    }
+>>=20
+>> Signed-off-by: Miao Wang <shankerwangmiao@gmail.com>
+>> ---
+>> drivers/mfd/ls2k-bmc-core.c | 162 =
++++++++++++++++++++++++++++++++-------------
+>> 1 file changed, 115 insertions(+), 47 deletions(-)
+>>=20
+>> diff --git a/drivers/mfd/ls2k-bmc-core.c =
+b/drivers/mfd/ls2k-bmc-core.c
+>> index =
+f87224105b3720cca97dcef089dad63fe57bc8c2..7187b2dfddc3acfb9fdf3cb3b4675299=
+928dd03a 100644
+>> --- a/drivers/mfd/ls2k-bmc-core.c
+>> +++ b/drivers/mfd/ls2k-bmc-core.c
+>> @@ -26,6 +26,9 @@
+>> #include <linux/stop_machine.h>
+>> #include <linux/vt_kern.h>
+>> #include <linux/console.h>
+>> +#include <linux/gpio/consumer.h>
+>> +#include <linux/gpio/driver.h>
+>> +#include <linux/gpio.h>
+>=20
+> I've stopped here because this is a legacy header that must not be =
+included
+> and none of the interfaces in it must be used, as per the - very loud =
+- comment
+> at the top of that file.
 
-Thanks,
-Charles
+I fully understand using the legacy interface is deprecated. However, =
+there
+seems no other way to obtain a gpio line description after a gpio device
+is found using gpio_device_find(). As the comment shows in the code =
+below,
+the only place I use the legacy interface is:
+
+gdev =3D gpio_device_find(...);
+desc =3D gpio_device_get_desc(gdev, LS2K_BMC_RESET_GPIO);
+
+// XXX: might be better to use gpiod_request()
+legacy_gpio =3D desc_to_gpio(desc);
+devm_gpio_request_one(..., legacy_gpio, ...);
+return gpio_to_desc(legacy_gpio);
+
+I just borrowed the legacy gpio interface to request the irq =
+description. I
+think that gpiod_request() should be better to be used here, but it is =
+not
+an interface that is exposed. As a result, I post this patch as a PoC =
+here
+to discuss and find a better way to achieve this.
+
+Cheers,
+
+Miao Wang=
