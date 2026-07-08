@@ -1,165 +1,148 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0771444E055
-	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 12:55:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D94F46AEEF
+	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 12:58:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783515319; cv=none; b=WvUKhc50kUwLdh2aU/QbmH1Ynhp5YyTbjVjdP9i3AQTrfBWCLQh8hL4GDXHf9M6DU3e0o1cayahKQ0ezPu8jjMKUDmx4EExJCgUoMxcTgTqr1DsdkC7UdM1g/lopILqFfaSKMVS+FcCNKhJqtDybb9EwAQGvnVAOShru5jlUHtY=
+	t=1783515491; cv=none; b=hU5LWX85w6DnF6Zkjxd5B8kVxwakD8zP4Ge0YCCCaQXsEJWTKrRenI/WRL2sX8W2KCAbJuRNf+Hx8Kn3Iv/d62kppZk3Y5x0h7qtR8DarvQIUrreqawvLFzv8sAmPprQo+7ERLCtZUhS5CKRBuvJofi4pL4EnECQVwC8hqlgObc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783515319; c=relaxed/simple;
-	bh=+TMFHwBKZ8krcoCMZCLGxgHx7kx8SNd+ZsBZADGdDMs=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=VRK8EGNoTUlnnzGunu2Hiw1lgSXAWNLCKOh7FqyENnm31xxwAAEyAveIEEzSG1SAs4u9ZUS3Dwuv5A73B0mXpsOlqVVhzxXHs/3UoTZMHT9J7UkCSWQyNrRphRc3qmCOuJgoFYXoVMSEfmUOxVay2FvUppevP7QPysor3Btgdog=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PsVYGQCs; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783515491; c=relaxed/simple;
+	bh=rcoRsbC0BO6uVEMaG71BCowfWGAxbSpWO+tIQGO84C8=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=Cnf7qGLTFwl8YqkHdrf62Hn4XAUSp7Vkh3TgOcTtDbCGJoHXNoXlMlb+0a1wMiWpAcdjfwqzeBZKe7pSFT2gplIZL0dLmp/Jr6slmJUPmSSSW6uWHhiK15jPVVBFoSfNckHJgPagXvtZHxuTnrEi8kmOMWqOEXpTUF+BT3eA5BA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=tRmGR0hn; arc=none smtp.client-ip=209.85.218.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PsVYGQCs"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A6F8E1F00A3F
-	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 12:55:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783515317;
-	bh=kikzu5yHjCHrYI+CpYYUdbBjsN4WJ34ORiqQtKuS/QI=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=PsVYGQCsaygkbYDUX8ClsdQd4ClXV4vvKASakMNhoeX2O/aMcCNUPpx/zE39zrZbI
-	 SKspeoqb8xsJNsZz/GYsVYvkTPq+bTrr3zyjxZtMoGw0LzznWWMUfj44cEBrrj4tyd
-	 gfFSgCZ8NbTGDuINWaGQ/bLX/DPtKQ8TVP7He8H3Pk9b+ilqUpRyCI4hvYqLs2rYSz
-	 Hd0v2fsFSAb8Z2R7lAUy13eC5EI+lCKeoNpR5oELnEymHndaHD+Qh+xCDxw4uhIAf/
-	 T1IWsQpV5hRqVcl8p4KWQQ9o5otQ1B9yeOFRejYHeyBXeB+kFgDtBZpxNvzPhTT2RZ
-	 ny7JBC7iSn4Jw==
-Received: by mail-lj1-f181.google.com with SMTP id 38308e7fff4ca-39b268e608eso6249481fa.1
-        for <mfd@lists.linux.dev>; Wed, 08 Jul 2026 05:55:17 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rp7+Sm/ju86eSWeG/XoZY+uE0jL4MkvAJL0USdmQVBiBBzgKhZ4RvX7X2k5BWhAl06Fum0=@lists.linux.dev
-X-Gm-Message-State: AOJu0YzACMJoL2L/LrSi6q/Vs/V3fmx+fOPgbDR15FoK77CJACL34BY4
-	a+RTIfDiN8o+FHjLUDKS3xG5d5ybIvtBH0tt0lJ9CeitLyqKbVAOsjH8VUhrqpSBdNh4EtYBSCQ
-	ZxBkrlRMdjafGCKPeWlOawk/17cDqVx/jBdbchX2EpA==
-X-Received: by 2002:a2e:82d0:0:b0:39a:ec7b:6cc7 with SMTP id
- 38308e7fff4ca-39c79a171d8mr4780281fa.24.1783515316229; Wed, 08 Jul 2026
- 05:55:16 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 8 Jul 2026 05:55:14 -0700
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 8 Jul 2026 05:55:14 -0700
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <C8B03257-3909-4323-B183-331F7CB1DA3E@gmail.com>
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="tRmGR0hn"
+Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-c126b8118afso89860766b.2
+        for <mfd@lists.linux.dev>; Wed, 08 Jul 2026 05:58:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1783515487; x=1784120287; darn=lists.linux.dev;
+        h=mime-version:user-agent:content-transfer-encoding:content-type
+         :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=rcoRsbC0BO6uVEMaG71BCowfWGAxbSpWO+tIQGO84C8=;
+        b=tRmGR0hnzx3h8i35q2KhxyUqUCiQE3npDyQHch+cMdVDPuG0vP4eEC3zHPSYYH/Lsx
+         N42OFGdZXA67Exnl0i2L5aHepF32QNXxXCvMsyGIZKjdagMUxuLGHCNstTC2cdQYyCdJ
+         +3oOuy1oCP2w0p8ZQuGlIawJRaJ1JPns82se4naTzG5pqknU6fmsZx+ecTa/48yQIpzn
+         Xrb+Df0tbt0jyqixjAG8AzFLE94H9DpzIbM+ztl/WRVp81+GKkwx9W4noY2WpWMJVNL1
+         hOMSc8+sxG4NW9hnTlLxMp+H40RsTndV1PuMvAWZZZ4icfkGDXs0ECnn8q+gwjiAzjh2
+         sOfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783515487; x=1784120287;
+        h=mime-version:user-agent:content-transfer-encoding:content-type
+         :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=rcoRsbC0BO6uVEMaG71BCowfWGAxbSpWO+tIQGO84C8=;
+        b=b3RaJDloRiu+R7zcJesbdWD14wGtNLU6BlljV6lPUFHHyJLWX2a8IC5b6CgbTOgTei
+         UBNtNTxfuaK55IyGDbJI5GRl+/fsmQjjtLmnNl426sgYmJqImAWGUmYfF/2J1EJ+WjER
+         ssfSWmYUHspqbwscyxSUsyRSlQmHY1WGenSfEn42KMoyXx5caTBh1PxFd5xKJawesQyD
+         MzA2m6PFl2F2cr+hCBQtALotkiGhmcFK3g9/99io+GGhz9jtgHm0UlUZHm4kaoAlVDHb
+         evnlHwC+tq/RxmDZVuzMwJlX/AB8zOxm0YK+e2r2ZtGVIRtdxM6UtkJ9KRfB+gckuUrK
+         p7og==
+X-Forwarded-Encrypted: i=1; AHgh+RrgYOhI7U0ykqEnensgi4kqLMxfQ38N1+IcWHroHlvfx7Nq1G9pNjcmfKFjOCSv6DYS28s=@lists.linux.dev
+X-Gm-Message-State: AOJu0Yy6Uc8eYYYb93Hv8QsVUERtfZFMO32IVqsvx1hqUFtQt5iHHtlJ
+	/Oofj7BuEj4hNC4uCNR9gNl9MRp5GdD/l+hbp3nBql8TKD1ey8DM0hKEsEeLqr2thV0=
+X-Gm-Gg: AfdE7clqRqbAx03lTRFgTIzxxOjI1yT4h2mveqFITZoGVFhg5DhUESeguKwCYaDd/CM
+	oC66ublHPM9cOBiUXasHpa4rHBvnV0eUM108K7uxfi/g86DdLQwEla8IIVwDyPIBxX54hLyGTFx
+	cq0047pXF+eLWKPi8Q6qFj2iG8aesa+9FtN94FZwImBkK4koY2uKhq1l5ohE1lAbJTNdpNCSuY8
+	zCNQPiyIAhb/e+FqlZVSmRh74QvDOquAdTnxbK+8tRIndWHc88KNMTgpaI85u8y6rBvPzCVD6XX
+	gjdsQFM/Exs3BG+U5dlisfPym4k10EsZz1h0yDmr7bAb5EEB6SqGjdP60zqIWSxn01iDelN8rOE
+	1aTjLbjxr1g6q5eFgUYNkYD18Ck9xvX5RdFsnkqoTWDmCdc2sOERhK0VT/EMjhAorsaNwPrjHGV
+	ul8/gS3UjUXQla9an3zM4=
+X-Received: by 2002:a17:907:7211:b0:c12:4597:601f with SMTP id a640c23a62f3a-c15ce131902mr120160066b.53.1783515486648;
+        Wed, 08 Jul 2026 05:58:06 -0700 (PDT)
+Received: from draszik.lan ([212.129.81.171])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c15ad84c636sm324005266b.22.2026.07.08.05.58.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 08 Jul 2026 05:58:06 -0700 (PDT)
+Message-ID: <eed86cadd335597d7c7a4278a9a09706913ba6a3.camel@linaro.org>
+Subject: Re: [PATCH v2 21/23] mfd: Unify style of of_device_id arrays
+From: =?ISO-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>
+To: Uwe =?ISO-8859-1?Q?Kleine-K=F6nig?= "(The Capable Hub)"
+	 <u.kleine-koenig@baylibre.com>
+Cc: Lee Jones <lee@kernel.org>, Linus Walleij <linusw@kernel.org>, Nicolas
+ Ferre <nicolas.ferre@microchip.com>, Alexandre Belloni
+ <alexandre.belloni@bootlin.com>,  Claudiu Beznea
+ <claudiu.beznea@tuxon.dev>, Chen-Yu Tsai <wens@kernel.org>, Florian
+ Fainelli	 <florian.fainelli@broadcom.com>, Broadcom internal kernel review
+ list	 <bcm-kernel-feedback-list@broadcom.com>, Ray Jui <rjui@broadcom.com>,
+ Scott Branden <sbranden@broadcom.com>, Marek Vasut
+ <marek.vasut+renesas@gmail.com>, James Ogletree	
+ <jogletre@opensource.cirrus.com>, Fred Treven <fred.treven@cirrus.com>, Ben
+ Bright <ben.bright@cirrus.com>, David Rhodes <david.rhodes@cirrus.com>,
+ Richard Fitzgerald	 <rf@opensource.cirrus.com>, Support Opensource
+ <support.opensource@diasemi.com>,  Krzysztof Kozlowski	 <krzk@kernel.org>,
+ Peter Griffin <peter.griffin@linaro.org>, Alim Akhtar	
+ <alim.akhtar@samsung.com>, Tim Harvey <tharvey@gateworks.com>, Neil
+ Armstrong	 <neil.armstrong@linaro.org>, Charles Keepax
+ <ckeepax@opensource.cirrus.com>,  Sven Peter <sven@kernel.org>, Janne
+ Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>, Mathieu Dubois-Briand
+ <mathieu.dubois-briand@bootlin.com>, Chanwoo Choi <cw00.choi@samsung.com>,
+ Luca Ceresoli	 <luca.ceresoli@bootlin.com>, Saravanan Sekar
+ <sravanhome@gmail.com>,  Matthias Brugger <matthias.bgg@gmail.com>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
+ Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
+ Pengutronix Kernel Team	 <kernel@pengutronix.de>, Fabio Estevam
+ <festevam@gmail.com>, Jonathan =?ISO-8859-1?Q?Neusch=E4fer?=	
+ <j.neuschaefer@gmx.net>, Aaro Koskinen <aaro.koskinen@iki.fi>, Andreas
+ Kemnade	 <andreas@kemnade.info>, Kevin Hilman <khilman@baylibre.com>, Roger
+ Quadros	 <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>, Matti
+ Vaittinen	 <mazziesaccount@gmail.com>, Orson Zhai <orsonzhai@gmail.com>,
+ Baolin Wang	 <baolin.wang@linux.alibaba.com>, Chunyan Zhang
+ <zhang.lyra@gmail.com>,  Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue	
+ <alexandre.torgue@foss.st.com>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Samuel Holland <samuel@sholland.org>, Liviu Dudau <liviu.dudau@arm.com>,
+ Sudeep Holla <sudeep.holla@kernel.org>,  Lorenzo Pieralisi
+ <lpieralisi@kernel.org>, Geert Uytterhoeven <geert+renesas@glider.be>,
+ Magnus Damm	 <magnus.damm@gmail.com>, mfd@lists.linux.dev,
+ linux-kernel@vger.kernel.org, 	linux-arm-kernel@lists.infradead.org,
+ patches@opensource.cirrus.com, 	linux-rpi-kernel@lists.infradead.org,
+ linux-renesas-soc@vger.kernel.org, 	linux-sound@vger.kernel.org,
+ linux-samsung-soc@vger.kernel.org, 	linux-amlogic@lists.infradead.org,
+ asahi@lists.linux.dev, 	linux-mediatek@lists.infradead.org,
+ imx@lists.linux.dev, 	linux-omap@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, 	linux-stm32@st-md-mailman.stormreply.com,
+ linux-sunxi@lists.linux.dev
+Date: Wed, 08 Jul 2026 13:58:20 +0100
+In-Reply-To: <ce43f6ec640a7835d64d3d696ff09229c3d31075.1783507945.git.u.kleine-koenig@baylibre.com>
+References: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
+	 <ce43f6ec640a7835d64d3d696ff09229c3d31075.1783507945.git.u.kleine-koenig@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.56.2-8+build1 
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260708-ls2kbmc-mod-v2-0-2afdd1741766@gmail.com>
- <20260708-ls2kbmc-mod-v2-7-2afdd1741766@gmail.com> <CAMRc=MeDq6=u66hc+ChmJA9iKRhsYFhg7rKkCGh2BA=--VGkcw@mail.gmail.com>
- <C8B03257-3909-4323-B183-331F7CB1DA3E@gmail.com>
-Date: Wed, 8 Jul 2026 05:55:14 -0700
-X-Gmail-Original-Message-ID: <CAMRc=MfbbQfzquf5tT-3an-EVtO_gkgh8To61Q=OAGbf=u3Xpg@mail.gmail.com>
-X-Gm-Features: AVVi8Cf-b0wpzureZ5LYsD1gEyfLZXYdTpNSMQ2jjZOcsYfx4W8ngNITiPKXzoY
-Message-ID: <CAMRc=MfbbQfzquf5tT-3an-EVtO_gkgh8To61Q=OAGbf=u3Xpg@mail.gmail.com>
-Subject: Re: [PATCH RFC v2 7/7] mfd: ls2kbmc: Capture the reset event of BMC
- through GPIO
-To: Miao Wang <shankerwangmiao@gmail.com>
-Cc: Miao Wang via B4 Relay <devnull+shankerwangmiao.gmail.com@kernel.org>, 
-	Xi Ruoyao <xry111@xry111.site>, WANG Xuerui <kernel@xen0n.name>, Yinbo Zhu <zhuyinbo@loongson.cn>, 
-	Jiaxun Yang <jiaxun.yang@flygoat.com>, mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	linux-gpio@vger.kernel.org, openipmi-developer@lists.sourceforge.net, 
-	Binbin Zhou <zhoubinbin@loongson.cn>, Chong Qiao <qiaochong@loongson.cn>, 
-	Lee Jones <lee@kernel.org>, Huacai Chen <chenhuacai@kernel.org>, 
-	Corey Minyard <corey@minyard.net>, Linus Walleij <linusw@kernel.org>, 
-	Bartosz Golaszewski <brgl@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, 8 Jul 2026 14:15:55 +0200, Miao Wang <shankerwangmiao@gmail.com> sa=
-id:
-> Hi
->
->> 2026=E5=B9=B47=E6=9C=888=E6=97=A5 19:36=EF=BC=8CBartosz Golaszewski <brg=
-l@kernel.org> =E5=86=99=E9=81=93=EF=BC=9A
->>
->> On Tue, 7 Jul 2026 23:16:31 +0200, Miao Wang via B4 Relay
->> <devnull+shankerwangmiao.gmail.com@kernel.org> said:
->>> From: Miao Wang <shankerwangmiao@gmail.com>
->>>
->>> The reset event of BMC is captured through GPIO. However, this driver
->>> bypasses the GPIO framework and directly accesses the GPIO controller
->>> through the fixed address. When the same GPIO controller is also
->>> exposed through ACPI and probed by the corresponding GPIO driver,
->>> there would be a conflict between the two drivers.
->>>
->>> This patch will try to find the GPIO through declared GPIO pin in the
->>> _CRS resources of the ACPI node. If no such delaration is found, the
->>> driver will fall back to search for the correct GPIO controller and pin
->>> according to the fixed address and pin number. A possible DSDT
->>> declaration for the GPIO pin might be as follows:
->>>
->>>    Device (BMC0) {
->>>        Name (_ADR, ...) // Match the PCI address of the BMC device
->>>        // \_SB.GPO1 is the ACPI path of the GPIO controller
->>>        Name (_CRS, ResourceTemplate () {
->>>            GpioInt (Edge, ActiveLow, Exclusive, PullNone, 0,
->>>                     "\\_SB.GPO1", 0) {
->>>                14 // 14 is the GPIO pin number
->>>            }
->>>    }
->>>
->>> Signed-off-by: Miao Wang <shankerwangmiao@gmail.com>
->>> ---
->>> drivers/mfd/ls2k-bmc-core.c | 162 +++++++++++++++++++++++++++++++------=
--------
->>> 1 file changed, 115 insertions(+), 47 deletions(-)
->>>
->>> diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
->>> index f87224105b3720cca97dcef089dad63fe57bc8c2..7187b2dfddc3acfb9fdf3cb=
-3b4675299928dd03a 100644
->>> --- a/drivers/mfd/ls2k-bmc-core.c
->>> +++ b/drivers/mfd/ls2k-bmc-core.c
->>> @@ -26,6 +26,9 @@
->>> #include <linux/stop_machine.h>
->>> #include <linux/vt_kern.h>
->>> #include <linux/console.h>
->>> +#include <linux/gpio/consumer.h>
->>> +#include <linux/gpio/driver.h>
->>> +#include <linux/gpio.h>
->>
->> I've stopped here because this is a legacy header that must not be inclu=
-ded
->> and none of the interfaces in it must be used, as per the - very loud - =
-comment
->> at the top of that file.
->
-> I fully understand using the legacy interface is deprecated. However, the=
-re
-> seems no other way to obtain a gpio line description after a gpio device
-> is found using gpio_device_find(). As the comment shows in the code below=
-,
-> the only place I use the legacy interface is:
->
-> gdev =3D gpio_device_find(...);
-> desc =3D gpio_device_get_desc(gdev, LS2K_BMC_RESET_GPIO);
->
-
-No, new code using legacy API is *not* acceptable. That's an official NAK.
-
-> // XXX: might be better to use gpiod_request()
-> legacy_gpio =3D desc_to_gpio(desc);
-> devm_gpio_request_one(..., legacy_gpio, ...);
-> return gpio_to_desc(legacy_gpio);
->
-> I just borrowed the legacy gpio interface to request the irq description.=
- I
-> think that gpiod_request() should be better to be used here, but it is no=
+On Wed, 2026-07-08 at 13:15 +0200, Uwe Kleine-K=C3=B6nig (The Capable Hub) =
+wrote:
+> These arrays already mostly match the most used and generally
+> recommended coding style. That is:
+>=20
+> =C2=A0- no comma after the list terminator;
+> =C2=A0- a comma after an initializer if (and only if) the closing } is no=
 t
-> an interface that is exposed. As a result, I post this patch as a PoC her=
-e
-> to discuss and find a better way to achieve this.
->
+> =C2=A0=C2=A0 directly following;
+> =C2=A0- no explicit zeros in the list terminator;
+> =C2=A0- a space after an opening { and before a closing }, a single space=
+ in
+> =C2=A0=C2=A0 the list terminator;
+>=20
+> Adapt the offenders accordingly.
+>=20
+> Signed-off-by: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@b=
+aylibre.com>
+> ---
+> =C2=A0drivers/mfd/max77759.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 |=C2=A0 2 +-
 
-If the firmware doesn't describe the GPIO, you have at least two alternativ=
-es.
-Please look at Documentation/driver-api/gpio/legacy-boards.rst. You should =
-be
-able to use either software nodes or GPIO lookup tables. This document
-describes the conversion from the latter to the former but - while software
-nodes are preferred - lookup tables are not deprecated so feel free to use
-it to set up the descriptors.
-
-Bart
+Reviewed-by: Andr=C3=A9 Draszik <andre.draszik@linaro.org> # for Maxim MAX7=
+7759
