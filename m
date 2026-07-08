@@ -1,236 +1,197 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-001ae601.pphosted.com (mx0b-001ae601.pphosted.com [67.231.152.168])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C88EA3AC0FE
-	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 11:36:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783510619; cv=none; b=mcQGwAysYcowIZwqrSCgLq/RbvOM/GPz9gMyCfNe1GSi227E8Hm8VYs/YOli6KniKW/mizEPk5FEQIBgK3K7n4WnxlWmQUjGy17QJeXFSfk+aeAWF8DQMXKx3fPIOgE5PgF+5ik19nooZFT7TEAGCxQZg0Djg7RyaGFsWWmbDJU=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783510619; c=relaxed/simple;
-	bh=wF9JmPAYGL5usJ0FFarxPuDkHLXTNK+VXwRP9Bk0SbI=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=lVeAAKQBdaBJ2G1e7W0e6+Av3hL4doZ/rxbKfewDER8NG28yJlfJiggsLTzfjPtzzACLT9GXOi8BnCdrY1/rBvJTHTLN8TDOvda8MQsSDKBdITwa0HfH397go7k++GZvMX9dUOA8SPqX81YS8SS+Kw4cYcHlllmGCHFYBDzJhoI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cbPFzpWo; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 809CC43C7BE;
+	Wed,  8 Jul 2026 12:13:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=67.231.152.168
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783512790; cv=fail; b=qjo0ZFO4Qdkaw7O4Vf8bkhf4HY+l7Kl7ARikFy3oGMzI3d+MlWC3oWp+HSa/EwWTIAZqGErpytbCQcDeleb+aP5VTdcAHrqFMraBLA90qGScF7aHT7YvaA/EJjSUOrkLcnLfRbs70VMIYN7P8vZ7g/ssuF2YurSoG+dU5Rjjh3Y=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783512790; c=relaxed/simple;
+	bh=S6Pv5GXsatl2O3YU54DzDA3CMML/bxjpitNktgHGnnM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=jmNNwY4HCoYdA2y1piBA5bxChf66M7J8JikIKxdZNAFO71awdZN1Pghf6dGl+enWZe4mQd5wceGZGauTTw73+ifmpl5uf19DySAE+Rck3amEI2NO2EwqSbOH/LDBQ2dOG3siomf4G5dG6gY5FbwnjR5iS+6roaBUVC5wsHSm2Zs=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com; spf=pass smtp.mailfrom=opensource.cirrus.com; dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b=NEeqBsNi; dkim=fail (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b=SC5LDbjA reason="signature verification failed"; arc=fail smtp.client-ip=67.231.152.168
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=opensource.cirrus.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cbPFzpWo"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 12CD21F00A3A;
-	Wed,  8 Jul 2026 11:36:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783510617;
-	bh=w2HskxtdXbY0NkLwOi2auY+I0VD8NNfnKLQlC+hYEms=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=cbPFzpWoTbnFnET//CHPZrTiyD5+1ziDAitgKjpcaeekkx725sUUMaysHoaj45m7l
-	 8v++bP9G2lKhPZveIC27MteJRfEArA6UR+bVFOFFXkziQXi9rngiS2HDFFoG2kl+fE
-	 RiqMTtN5yYpXOyfpsF3myeCAHh4Vtyw6ktIqxIU3YbEfcaZnOvnXGg7GH+1pzJcVgC
-	 8UPioJL/93wQ7L+hib+YyrRTBvejxQ9RpFj9qu0X73i5mIe/ZXh6K7njuy5gJp/jUw
-	 Ewg+WGnWa2NWcbFrJbA+sNCPIYfXz4Lb9IONrp1ugKQvUVQzRJqBtCW7nNypifiWQx
-	 VqACRTLF5tFPQ==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 20/23] mfd: Unify style of i2c_device_id arrays
-Reply-To: sashiko-reviews@lists.linux.dev
-To: =?utf-8?b?VXdlIEtsZWluZS1Lw7ZuaWcgKFRoZSBDYXBhYmxlIEh1Yik=?= <u.kleine-koenig@baylibre.com>
-Cc: lee@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <9c8fe48a1f971d75191c636f2b6d3ef1c68a26e2.1783507945.git.u.kleine-koenig@baylibre.com>
+	dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b="NEeqBsNi";
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b="SC5LDbjA"
+Received: from pps.filterd (m0077474.ppops.net [127.0.0.1])
+	by mx0b-001ae601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6684m76q1629049;
+	Wed, 8 Jul 2026 07:12:43 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	PODMain02222019; bh=mPiJLzDy5wCVrssyWPG+1Q+mzAwuM5/ksgfu6bEPf+Q=; b=
+	NEeqBsNipzyb92BkIy1K9L0W7uL0itG3v4/ltelKXmSPjKM741zhz8erdjdhWU9s
+	WxhzOC3sdLMTsXJA3AsPYifNqOkgEpwh+uNSaDFYHeNuIARZxEKJzowOs+i/D5OD
+	d/IOQY7yeVCMKYFYtY9jND8+q+vjoLpNBNDrhg458Iar54KCnH3KaJ4b5v8PzjL3
+	WYMU6XDa3nm0LtdAe9OiWtlhUL/FYMe94jOlaXOtkZRd6ZAbCrhb53g9djLus6c+
+	yYxt4uvHwdepK4ihWhFgCyAlRUkFTfU8xaUbz3xVHWa4ysGCdXZB4LP4r9tF73E/
+	m6iFO9JFwhT1Q8U8Vr5G1Q==
+Received: from ch4pr04cu002.outbound.protection.outlook.com (mail-northcentralusazon11023090.outbound.protection.outlook.com [40.107.201.90])
+	by mx0b-001ae601.pphosted.com (PPS) with ESMTPS id 4f6xkjp699-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Wed, 08 Jul 2026 07:12:42 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rkbYx7GfrIvnFfmhxG6J1LuNxKracKPBjr4ROUv8TJ15JPl6tGZWJ6A8TfkhqbcLtH6CvvK8npET+44vsJZuEUUgebvr9YEnSAApIqMl5+e//IB4RcRpPENE1ZaZhxWdrJ29FUVsQheEhZrG1fU4b662g1PU6QVegT3YfQB7ppLTC8tGZQuK/f22CtqVkaHxEBIZGN8/KU+H1/2BkriMYMvKV3zmuCkSc+to61g/7KwtKpFMg0JP9pzCub86ZasRoeI+IsuP4guPsYRIssG1YpuFDwEDYvMC2iF0UUZe5woykH/GoX4MdokidauztJ1Jw1Z2GAQY1vmEv8e2dXw2ow==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xt+HEVbiRucuRSlUuND8Ll0TzQMdxcMD5FWInv8pXMk=;
+ b=BUQR19ucS40HaNufg9S+CxlUj0IYZUOi+RzQ4Jv7tpnlQv5nhq5yMpD5APs4/zSpsNZerWaeLPyajHdOsSAgzfpv4jkhFsSIaqyB3a6dAmdn0fViw7vVVlAD3KSXIiEUQA4guuiZ4Hal4YI26XaIy2m62vKc+vIcXNS/p5s5qg7wbd7zQyizaph4EiYo1XX4qv5ZD/Vlrc9rAB3SnhVBvBbfGjW05YoQITm//H5xWegO1XizdsLSqHmBwt68CuXpIn3x9tYZSFWOsg2LRjdXyizjPf+oRYRb8gzLdMkuJcgqTRDmgRuOvndk5hLCBP4OtquosFbvfEF3sw0l4N7/xQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 84.19.233.75) smtp.rcpttodomain=analog.com
+ smtp.mailfrom=opensource.cirrus.com; dmarc=fail (p=reject sp=reject pct=100)
+ action=oreject header.from=opensource.cirrus.com; dkim=none (message not
+ signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=cirrus4.onmicrosoft.com; s=selector2-cirrus4-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xt+HEVbiRucuRSlUuND8Ll0TzQMdxcMD5FWInv8pXMk=;
+ b=SC5LDbjAZtkk8oFLT6F+rUNb5XPpPvTl4y/gDVhb/XWfT+3VE3YhJBX+//r38Z5ld9+14YxxqOUSPcSgHmPbBiyqL6oL+1Ch9HWPh1yrQ+8W3LHDmzdEUbXvHLHgBvc5uobhLoWQW82XEiDu6kYwB6DueBCpknEYhGVcYosEneU=
+Received: from BLAPR03CA0063.namprd03.prod.outlook.com (2603:10b6:208:329::8)
+ by BL1PPF75D1B5ED6.namprd19.prod.outlook.com (2603:10b6:20f:fc04::eb8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.14; Wed, 8 Jul
+ 2026 12:12:38 +0000
+Received: from BL6PEPF0001AB73.namprd02.prod.outlook.com
+ (2603:10b6:208:329:cafe::36) by BLAPR03CA0063.outlook.office365.com
+ (2603:10b6:208:329::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.10 via Frontend Transport; Wed, 8
+ Jul 2026 12:12:38 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 84.19.233.75)
+ smtp.mailfrom=opensource.cirrus.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=oreject header.from=opensource.cirrus.com;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ opensource.cirrus.com discourages use of 84.19.233.75 as permitted sender)
+Received: from edirelay1.ad.cirrus.com (84.19.233.75) by
+ BL6PEPF0001AB73.mail.protection.outlook.com (10.167.242.166) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.6
+ via Frontend Transport; Wed, 8 Jul 2026 12:12:38 +0000
+Received: from ediswmail9.ad.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
+	by edirelay1.ad.cirrus.com (Postfix) with ESMTPS id B1736406541;
+	Wed,  8 Jul 2026 12:12:37 +0000 (UTC)
+Received: from opensource.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
+	by ediswmail9.ad.cirrus.com (Postfix) with ESMTPSA id 8EC9D82025A;
+	Wed,  8 Jul 2026 12:12:37 +0000 (UTC)
+Date: Wed, 8 Jul 2026 13:12:36 +0100
+From: Charles Keepax <ckeepax@opensource.cirrus.com>
+To: Uwe =?iso-8859-1?Q?Kleine-K=F6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>
+Cc: Lee Jones <lee@kernel.org>,
+        Michael Hennerich <michael.hennerich@analog.com>,
+        Chen-Yu Tsai <wens@kernel.org>,
+        Marek Vasut <marek.vasut+renesas@gmail.com>,
+        James Ogletree <jogletre@opensource.cirrus.com>,
+        Fred Treven <fred.treven@cirrus.com>,
+        Ben Bright <ben.bright@cirrus.com>,
+        Support Opensource <support.opensource@diasemi.com>,
+        Andy Shevchenko <andy@kernel.org>,
+        Richard Fitzgerald <rf@opensource.cirrus.com>,
+        Chanwoo Choi <cw00.choi@samsung.com>,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        =?iso-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>,
+        Aaro Koskinen <aaro.koskinen@iki.fi>,
+        Andreas Kemnade <andreas@kemnade.info>,
+        Kevin Hilman <khilman@baylibre.com>, Roger Quadros <rogerq@kernel.org>,
+        Tony Lindgren <tony@atomide.com>,
+        Andreas Werner <andreas.werner@men.de>,
+        Samuel Kayode <samkay014@gmail.com>,
+        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+        Alexandre Torgue <alexandre.torgue@foss.st.com>, mfd@lists.linux.dev,
+        linux-kernel@vger.kernel.org, patches@opensource.cirrus.com,
+        linux-renesas-soc@vger.kernel.org, linux-sound@vger.kernel.org,
+        linux-omap@vger.kernel.org, imx@lists.linux.dev,
+        linux-stm32@st-md-mailman.stormreply.com,
+        linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH v2 13/23] mfd: Use named initializers for arrays of
+ i2c_device_id
+Message-ID: <ak4+tEBnZAhohI1n@opensource.cirrus.com>
 References: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
- <9c8fe48a1f971d75191c636f2b6d3ef1c68a26e2.1783507945.git.u.kleine-koenig@baylibre.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 08 Jul 2026 11:36:56 +0000
-Message-Id: <20260708113657.12CD21F00A3A@smtp.kernel.org>
+ <5aec0fc2ac0cd1d2e27027ad0c180e2647bd494e.1783507945.git.u.kleine-koenig@baylibre.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <5aec0fc2ac0cd1d2e27027ad0c180e2647bd494e.1783507945.git.u.kleine-koenig@baylibre.com>
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB73:EE_|BL1PPF75D1B5ED6:EE_
+X-MS-Office365-Filtering-Correlation-Id: 978338dc-3f64-42a4-dcb4-08dedcea33fd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|7416014|376014|36860700016|82310400026|23010399003|61400799027|18002099003|16102099003|22082099003|11063799006|56012099006|5023799004|4143699003;
+X-Microsoft-Antispam-Message-Info:
+	NaHGl+PDpkkXJtvjKW41PH/jE0ylBuu5v/uCUrioZ2uwn+H+DJgGiVncFP4nHB9XqOa0JIIfVa0jY6skzCvqfnzDdOdPtF5vzC8DHEqPLRBB7+0aSSXzSe791hZtryCgmNw3g1ZENUjm9wukFkSOUcW3Z9ZP/7GVDhdUrFIeuiDJly6xNSe4cLwqGLBqCWL3UQygXFz8L7rOJUIs5oJZzG5CKRrQHgiwRm08CUCFa1yGkUxqY2UznlouuZUJ88ZWQk+RvTOwZTTXMpo6cHlhYhmj8Dga6ohGjbCQtZJM2/wwubUtGauIiHS5HX8r1gL9ZRAlfRdorUxv8jjBSs/nczh9cZUVH/hbStADP++anL5cNISh0RZC4BQ+qKZR6iSmchQj0OKFI7K1gOtVWp1c0uTS1BK9ZumTH699gL9lPvNJmqWuUUo5qdqTsY5gELCQgc3WlUHIvaBTvQAEAQWbvLb96+x65Xdwq25je1h8h0DTzwIVjl+l8kNrSrLy+VGi8xF5OGEzIoS6uLfy0Wx7OUTjnf1Uaxn6lhJdmRPXhU5mavle/aOh3IKf580MJ1rGV4zVIFyLYbvL7ncPvgV3HC2AKy88W83iIO1bL9ew7K5XE4USu2icK1O7KFsdeHmT71XOGjC2FYUKDkFeqOSKmMdh/I7DYTtBFNrJ8vWv6Qu6aDHolz0NjiIl3rayX7wXh6qXVA2NuUtsNE7pCaw46g==
+X-Forefront-Antispam-Report:
+	CIP:84.19.233.75;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:edirelay1.ad.cirrus.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(7416014)(376014)(36860700016)(82310400026)(23010399003)(61400799027)(18002099003)(16102099003)(22082099003)(11063799006)(56012099006)(5023799004)(4143699003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	MiZb7vDO8Nf/eMjB72nqvyGIORwPxiuVvOIFGaQeXNt4WP4xCrYiwagyREoMq4xX854orAI9QNvndnHGbv+lQC1tYivzy36tQ2TKgEKDyBUR2tYWBf9DSFX4+NTgeu5+C0mz9LxLp4IJ+ontXrmvP7qvfw5ZETwSWymt8Md5wGVD+PTwftNTWuF0D754X39/SQITRh0IISP2O6aovvpnAvX5u8yTquQfn2TsSe0B2j2+RG/7p6xv3Q2sNteyY4Xn/O7FUUCuuBnGNHyt14SCP+QasHcQzxK2NFRWjoQVoUOYC7ttHA0gUzKkCjasOITP6QN3Qaak110LzUYv3FUAp+EPgJ+eIiZOa7WLwN150I+Jk+pP/XWFAOwaXjQiUF8gj9yNNKmLHfvIMIn0fDlLMuXoGd2zRj9RpileDTAERmPCtkzAdmcndnj1J5ubhvM1
+X-Exchange-RoutingPolicyChecked:
+	ZeJrDXOm8A0kX2L8jdcEpaMhqbjpseueAkrkrB6ljFQwAUq5OLwYO6q5YjylwEJbeWuAXTBFsrR42nHzocsRwO90CKze1RJp7lWFnKbJzAMqYTw/lWOiJJeFoMN0u0QSY+q9aqeUCcSmxGxwGvAoVo/Jsjn2i5TX210fJKNo4ulWW8nP0zMUnW2lTto8gpKuQ5sLqmbtb3li5XfQE3jABZSFH+71725ymtpamFpzax5nrr7s3i2sUsd8iJhTKAZhI77X3I529ihUPrtysOb/SxcE1e7+Fdf1Sh+NoF4eB6Na31KkdNEB5FAqwDqhG94JC6CM+lIPylfQ0H20ao8EtA==
+X-OriginatorOrg: opensource.cirrus.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2026 12:12:38.4962
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 978338dc-3f64-42a4-dcb4-08dedcea33fd
+X-MS-Exchange-CrossTenant-Id: bec09025-e5bc-40d1-a355-8e955c307de8
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bec09025-e5bc-40d1-a355-8e955c307de8;Ip=[84.19.233.75];Helo=[edirelay1.ad.cirrus.com]
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-BL6PEPF0001AB73.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PPF75D1B5ED6
+X-Proofpoint-ORIG-GUID: EhiErDDWciTEN6GeePdQU2jPXppFnCu3
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA4MDExOSBTYWx0ZWRfX+L+BMz3bhoEx
+ xM8ccIClQWqyk8gK7CkR3+3gkRkyP3pXiPTeuL5/2BCPYpn+ShmLeyuFnEb+ZHkG4vNm6RmYOkh
+ CirH6i7ocESmpPqts81nZP5DUsE8nm4=
+X-Authority-Analysis: v=2.4 cv=YYiNIQRf c=1 sm=1 tr=0 ts=6a4e3eba cx=c_pps
+ a=1es5Iy7n+cWvltLRflzOuA==:117 a=h1hSm8JtM9GN1ddwPAif2w==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=8nJEP1OIZ-IA:10 a=RAioF0-LDSMA:10 a=s63m1ICgrNkA:10 a=RWc_ulEos4gA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=iX4cTi3TZMoOKdANLEfx:22 a=KfkQE9S9VqCBgivYGm0O:22
+ a=IpJZQVW2AAAA:8 a=w1d2syhTAAAA:8 a=iIrBw4RlzRzBrTmksMcA:9 a=3ZKOabzyN94A:10
+ a=wPNLvfGTeEIA:10 a=IawgGOuG5U0WyFbmm1f5:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA4MDExOSBTYWx0ZWRfX8xJ8JhG8nVuE
+ Y8t8utLiRoAp/OcoyE1CfbYK0uwsqSjgXGM37+s81htqHmhqYQl50IEuBymUPloxvdkMzAb5Dxe
+ wZQRnHUlOrr9LQhTIWsDU/8dB9ZE1lcNJhMiqk8euRvESHcvjZvBKX04TZesESNHjogJlDttH8M
+ b2O2qWkeny96ptzGgycsWpl6En/47V1/8MADiJCwHdrNTQY8DdjoG7iSNA6naAIqHymO868p1Nr
+ 4DsdRxZMUEKdnM2btWgEMeBC6osY/yLEeYpCsebnYwm5GTLX7yqrzLlxjc7HjlaKTBvY1ZYtEHd
+ wrVG5dfJBEAds1AfN0+wWslJFYeW9bVKaz977D+jfOV1EtGul70ZytEkW2px4GcUVs49Hopu35F
+ QAoKgAF+yKkZbfYK/TPNIXWsQWeflgZSJwqHkDZTu7mw2BZgfkMA6QxvE8n8vatcCrg99HlkFuU
+ rNOrJqJ/emZZ9spo47w==
+X-Proofpoint-GUID: EhiErDDWciTEN6GeePdQU2jPXppFnCu3
+X-Proofpoint-Spam-Reason: safe
 
-Thank you for your contribution! Sashiko AI review found 5 potential issue(=
-s) to consider:
+On Wed, Jul 08, 2026 at 01:15:20PM +0200, Uwe Kleine-König (The Capable Hub) wrote:
+> While being less compact, using named initializers allows to more easily
+> see which members of the structs are assigned which value without having
+> to lookup the declaration of the struct. And it's also more robust
+> against changes to the struct definition.
+> 
+> The mentioned robustness is relevant for a planned change to struct
+> i2c_device_id that replaces .driver_data by an anonymous union.
+> 
+> This patch doesn't modify the compiled arrays, only their representation
+> in source form benefits.
+> 
+> Signed-off-by: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
+> ---
+>  drivers/mfd/arizona-i2c.c        | 12 ++++++------
+>  drivers/mfd/cs40l50-i2c.c        |  2 +-
+>  drivers/mfd/madera-i2c.c         | 18 +++++++++---------
+>  drivers/mfd/wm831x-i2c.c         | 14 +++++++-------
+>  drivers/mfd/wm8350-i2c.c         |  6 +++---
+>  drivers/mfd/wm8400-core.c        |  2 +-
+>  drivers/mfd/wm8994-core.c        |  8 ++++----
 
-Pre-existing issues:
-- [High] Shallow copying of the entire parent context via platform_data in =
-wm8400_register_codec.
-- [High] Potential NULL pointer dereference of I2C device ID during probe.
-- [Medium] Local/stack-allocated mfd_cell structure in wm8400_register_code=
-c.
-- [Medium] Dynamic amendment of mfd_cell arrays in si476x_core_probe.
-- [Medium] Manual cell ID mapping instead of using PLATFORM_DEVID_AUTO in s=
-i476x_core_probe.
---
+Reviewed-by: Charles Keepax <ckeepax@opensource.cirrus.com>
 
---- Patch [20]: [PATCH v2 20/23] mfd: Unify style of i2c_device_id arrays -=
---
-commit 6a5d15234f3fcc68bbda3db02225f521d1961fe2
-Author: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@baylibre.c=
-om>
-
-mfd: Unify style of i2c_device_id arrays
-
-Most of these arrays already mostly match the most used and
-generally recommended coding style. That is:
- - no comma after the list terminator;
- - a comma after an initializer if (and only if) the closing } is not
-   directly following;
- - no explicit zeros in the list terminator;
- - a space after an opening { and before a closing }, a single space in
-   the list terminator;
-
-> diff --git a/drivers/mfd/si476x-i2c.c b/drivers/mfd/si476x-i2c.c
-> index f25a4b60071bf..30e545cd08896 100644
-> --- a/drivers/mfd/si476x-i2c.c
-> +++ b/drivers/mfd/si476x-i2c.c
-[ ... ]
-> @@ -844,7 +844,7 @@ static const struct i2c_device_id si476x_id[] =3D {
->  	{ .name =3D "si4761", .driver_data =3D SI476X_CHIP_SI4761 },
->  	{ .name =3D "si4764", .driver_data =3D SI476X_CHIP_SI4764 },
->  	{ .name =3D "si4768", .driver_data =3D SI476X_CHIP_SI4768 },
-> -	{ },
-> +	{ }
->  };
->  MODULE_DEVICE_TABLE(i2c, si476x_id);
-
-[Severity: High]
-This is a pre-existing issue, but since we are looking at this driver, coul=
-d a
-user-space process force-binding the driver trigger a NULL dereference?
-
-In si476x_core_probe(), the driver immediately dereferences the ID without
-checking if it is NULL:
-
-si476x-i2c.c:si476x_core_probe() {
-    ...
-    const struct i2c_device_id *id =3D i2c_client_get_device_id(client);
-    ...
-    core->chip_id =3D id->driver_data;
-    ...
-}
-
-If force-bound to a device using sysfs (e.g. driver_override),
-i2c_client_get_device_id() will return NULL, causing a panic.
-
-[Severity: Medium]
-This isn't a bug introduced by this patch, but does the dynamic amendment of
-the mfd_cell array in si476x_core_probe() violate MFD subsystem guidelines?
-
-si476x-i2c.c:si476x_core_probe() {
-    ...
-    cell =3D &core->cells[SI476X_RADIO_CELL];
-    cell->name =3D "si476x-radio";
-    ...
-}
-
-The guidelines state: "Define mfd_cell arrays as static const. For mfd_cell=
-s,
-do not create local copies for dynamic amendments; always use static
-references."
-
-[Severity: Medium]
-This is also a pre-existing issue, but is it safe to use a manually calcula=
-ted
-cell ID in si476x_core_probe()?
-
-si476x-i2c.c:si476x_core_probe() {
-    ...
-    err =3D mfd_add_devices(&client->dev,
-                          (client->adapter->nr << 8) + client->addr,
-                          core->cells, cell_num,
-                          ...);
-    ...
-}
-
-The MFD guidelines recommend using PLATFORM_DEVID_AUTO instead of hard-coded
-or mathematically mapped IDs, as they can lead to device naming collisions =
-in
-sysfs.
-
-> diff --git a/drivers/mfd/tps65910.c b/drivers/mfd/tps65910.c
-> index b0dbee3e6ea2f..d19bd3643591e 100644
-> --- a/drivers/mfd/tps65910.c
-> +++ b/drivers/mfd/tps65910.c
-[ ... ]
-> @@ -532,9 +532,9 @@ static int tps65910_i2c_probe(struct i2c_client *i2c)
->  }
-> =20
->  static const struct i2c_device_id tps65910_i2c_id[] =3D {
-> -       { .name =3D "tps65910", .driver_data =3D TPS65910 },
-> -       { .name =3D "tps65911", .driver_data =3D TPS65911 },
-> -       { }
-> +	{ .name =3D "tps65910", .driver_data =3D TPS65910 },
-> +	{ .name =3D "tps65911", .driver_data =3D TPS65911 },
-> +	{ }
->  };
-
-[Severity: High]
-This is a pre-existing issue, but does tps65910_i2c_probe() have the same
-potential NULL pointer dereference risk?
-
-tps65910.c:tps65910_i2c_probe() {
-    ...
-    const struct i2c_device_id *id =3D i2c_client_get_device_id(i2c);
-    ...
-    unsigned long chip_id =3D id->driver_data;
-    ...
-}
-
-If a privileged user force-binds the driver via sysfs, id will be NULL, whi=
-ch
-results in an immediate crash upon dereference.
-
-> diff --git a/drivers/mfd/wm8400-core.c b/drivers/mfd/wm8400-core.c
-> index 1c0ba450ef9b6..d3180aa44e1a1 100644
-> --- a/drivers/mfd/wm8400-core.c
-> +++ b/drivers/mfd/wm8400-core.c
-[ ... ]
-> @@ -135,8 +135,8 @@ static int wm8400_i2c_probe(struct i2c_client *i2c)
->  }
-> =20
->  static const struct i2c_device_id wm8400_i2c_id[] =3D {
-> -       { .name =3D "wm8400" },
-> -       { }
-> +	{ .name =3D "wm8400" },
-> +	{ }
->  };
-
-[Severity: High]
-This isn't a bug introduced by this patch, but does the shallow copying of =
-the
-entire parent context via platform_data in wm8400_register_codec() pose a
-memory safety hazard?
-
-wm8400-core.c:wm8400_register_codec() {
-    ...
-    const struct mfd_cell cell =3D {
-        .name =3D "wm8400-codec",
-        .platform_data =3D wm8400,
-        .pdata_size =3D sizeof(*wm8400),
-    };
-    ...
-}
-
-By passing the entire parent struct wm8400 by value, mfd_add_devices() copi=
-es
-the embedded structures (like struct device, containing kobject and mutex).
-Duplicating embedded struct devices by value usually leads to duplicate loc=
-ks
-and undefined behavior. MFD rules require child drivers to retrieve parent
-data using standard APIs like dev_get_drvdata(pdev->dev.parent) instead.
-
-[Severity: Medium]
-This is also a pre-existing issue, but does the stack-allocated local
-mfd_cell in wm8400_register_codec() violate MFD guidelines?
-
-wm8400-core.c:wm8400_register_codec() {
-    ...
-    const struct mfd_cell cell =3D {
-        .name =3D "wm8400-codec",
-        ...
-    };
-    ...
-}
-
-The MFD guidelines require that mfd_cell arrays are defined as static const,
-and explicitly state not to create local copies for dynamic amendments.
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/cover.1783507945.gi=
-t.u.kleine-koenig@baylibre.com?part=3D20
+Thanks,
+Charles
