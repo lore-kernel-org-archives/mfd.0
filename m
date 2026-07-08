@@ -1,113 +1,67 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 145081F5437
-	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 11:28:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E5F93CB2E0
+	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 11:28:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783510084; cv=none; b=QpS+jy2lSwOXB/il9chp6znd+A1c7ShnNDcLgupI46N3qkztg1d2gmDH4yHTesGCCTFxLyggWJKqFVHJfs4C/KOhPO9R18TxCCoTHLn2Wb698lLdJ22TLfMxFlH39nFvtvst2McfcZHAHuP+BWlxzNgTGujM2Y1RKXrd8mcFKdo=
+	t=1783510100; cv=none; b=iyQo1vdaGay7gM347FwWzLVVZDD6X3Ye60ujbOu5q1sskIikWDLEU0gxvqVM3bwsGZa1YaCJ0cxG0glyU1zOgNxeAmHJ9ehB1KVlLwNVhCweq5SS3JcwjghODb0ot290hN3erOmyD0CKAiJJDHNWEwKSNlS9QZVZA88zTpbVKM0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783510084; c=relaxed/simple;
-	bh=pNeJqgY5Zf2Oifqu8VxUg1ndKVFvssOwXW2COckYtZ0=;
+	s=arc-20240116; t=1783510100; c=relaxed/simple;
+	bh=c5wp973SILZXYfNrCmheS9si/h9leONgD9GD/VPI9pE=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=R0SH4S4vB3/Mhy04XfD9zhNb3wT1cMxFZGXSN4KNUKeX490R6mC8BQbUFNbyw0FzeDu56HM/oCTVkPthxqKK93zQyYdzNPHrzMc5Mdzv3//UCmMfHfvxonrl1E849l43+WXHgWzFLFPgg74zj5y7RyvnCKAVzmF1jU5D+8d7Zgw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JsEEpoHY; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=Pn1y87lBfzH9PlnD509nPEzVPHcvzGWfFjn9HK6y4voe+t6ZqiwRAYJk3XVVf1xgdzUvxPIj00ICbNADXHo/8K7xZubNhBVu/CxqR/uAad38k3KoFUmuabIvWUM66E//LpnTr7rwBdDtxKM+vB45doqJj2atBUg6BiKWSNRWTNM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IpMnfxPW; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JsEEpoHY"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A99DE1F00A3A;
-	Wed,  8 Jul 2026 11:28:02 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IpMnfxPW"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ACF091F000E9;
+	Wed,  8 Jul 2026 11:28:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783510082;
-	bh=1KQjDPpCp2HLWDBdoy8owzs99j4aU7XFKXtPnqHEaFY=;
+	s=k20260515; t=1783510099;
+	bh=QRM9qLCCwxkp0lP8eAatmOuGr/3wYWtOWyymeqMTmTc=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=JsEEpoHYocG1EOXpRA8QcVRtXuL8sLDrUlpNmLVSlP2akVaOxEg65dx/lDpgbA1pv
-	 Rlonijr2iOd4a9u9f1hlgA+w46KNieJPMf0k7y8jF4dpHl1M6gACVLJmx6LGv6Yu5J
-	 Q1Rcn7mQRWYmMEr+8LyD7jaO/u9mXlqxQsnzVNFMblfozA5M5OyPGec35/cdhnTy9O
-	 fJj3mXG5iBgUVDi4R9j2FpDe5jb+AInPQ1wtqbtG3AUh7RTS1a+wNE8uVEkIdQrf7H
-	 CbX3RdBpb5TG82QXbkiITtV/umFRTQLrE9YMhPp+ByTFKlYMZTlIX8fQ0/4gqggdnR
-	 rjvZqM+I/eYjQ==
+	b=IpMnfxPWzm8l3eLFjCXIcSU01Z/xmiS3i7khvGY3Mlrh1cLwjyC4dfDp3ptzU9sX2
+	 HutvsHyK0GlBzONa7aYd/j0S648exgxhJtiebCWJFhsYmrUcjfBPJOMs3B0gCbSWqg
+	 Hcb7DtLw9/GsSQ4UIVIxlMZ+Wx/6WTef5q0rFiYwyc30b99KrWOQ6O3zSv9EEuzmRk
+	 qGQmuFWQlx0mfCkGL5eoJwSzrZZPtfGgLqFwLaZgr4g+F1YfbzUC3ycUbQmISiQSx5
+	 oyu0IiWss8ps55qMGVFP7tj8nDxrEnus//uXcEQrxW0aLMAj3snRhKjXufRFKzRgG8
+	 oMsKqD+oz2tmQ==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 17/23] mfd: Use named initializers for arrays of
- spi_device_id
+Subject: Re: [PATCH v2 18/23] mfd: Unify style of acpi_device_id arrays
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?VXdlIEtsZWluZS1Lw7ZuaWcgKFRoZSBDYXBhYmxlIEh1Yik=?= <u.kleine-koenig@baylibre.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <005f42dc5bbbd8879edd7fb3cbd62d6ebe38f39f.1783507945.git.u.kleine-koenig@baylibre.com>
+Cc: lee@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <ac8389353ee128d3841cf91c27ef84a8cfa3b5ca.1783507945.git.u.kleine-koenig@baylibre.com>
 References: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
- <005f42dc5bbbd8879edd7fb3cbd62d6ebe38f39f.1783507945.git.u.kleine-koenig@baylibre.com>
+ <ac8389353ee128d3841cf91c27ef84a8cfa3b5ca.1783507945.git.u.kleine-koenig@baylibre.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 08 Jul 2026 11:28:02 +0000
-Message-Id: <20260708112802.A99DE1F00A3A@smtp.kernel.org>
+Date: Wed, 08 Jul 2026 11:28:18 +0000
+Message-Id: <20260708112818.ACF091F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
+> Update the various acpi_device_id arrays to conform to the most used and
+> generally recommended coding style. That is:
+>=20
+>  - no comma after the list terminator;
+>  - a comma after an initializer if (and only if) the closing } is not
+>    directly following;
+>  - no explicit zeros in the list terminator;
+>  - a space after an opening { and before a closing }, a single space in
+>    the list terminator;
+>=20
+> Adapt the few offenders accordingly.
+>=20
+> Signed-off-by: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@b=
+aylibre.com>
 
-Pre-existing issues:
-- [High] The intel-m10-bmc-spi driver improperly passes pointers to structu=
-res containing mfd_cells via the spi_device_id match table's driver_data fi=
-eld, and the mfd_cell arrays are not declared as static const.
---
-
---- Patch [17]: [PATCH v2 17/23] mfd: Use named initializers for arrays of =
-spi_device_id ---
-commit cfa932dab5cca9437ebac2bf23f56766068cfb6b
-Author: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@baylibre.c=
-om>
-
-mfd: Use named initializers for arrays of spi_device_id
-
-This patch modifies arrays of spi_device_id across various MFD drivers to
-use named initializers. This improves readability and prepares for a planned
-change to struct spi_device_id where .driver_data becomes an anonymous unio=
-n.
-
-> diff --git a/drivers/mfd/intel-m10-bmc-spi.c b/drivers/mfd/intel-m10-bmc-=
-spi.c
-> index cfa620f0c70e1..94b9c99bb4f86 100644
-> --- a/drivers/mfd/intel-m10-bmc-spi.c
-> +++ b/drivers/mfd/intel-m10-bmc-spi.c
-> @@ -160,9 +160,9 @@ static const struct intel_m10bmc_platform_info m10bmc=
-_spi_n5010 =3D {
->  };
-> =20
->  static const struct spi_device_id m10bmc_spi_id[] =3D {
-> -	{ "m10-n3000", (kernel_ulong_t)&m10bmc_spi_n3000 },
-> -	{ "m10-d5005", (kernel_ulong_t)&m10bmc_spi_d5005 },
-> -	{ "m10-n5010", (kernel_ulong_t)&m10bmc_spi_n5010 },
-> +	{ .name =3D "m10-n3000", .driver_data =3D (kernel_ulong_t)&m10bmc_spi_n=
-3000 },
-> +	{ .name =3D "m10-d5005", .driver_data =3D (kernel_ulong_t)&m10bmc_spi_d=
-5005 },
-> +	{ .name =3D "m10-n5010", .driver_data =3D (kernel_ulong_t)&m10bmc_spi_n=
-5010 },
-
-[Severity: High]
-This isn't a bug introduced by this patch, but should this driver be
-refactored to avoid passing complex pointers through the match table?
-
-The MFD architectural guidelines state that passing complex pointers, such =
-as
-platform data and mfd_cell arrays, through match data tables can cause memo=
-ry
-safety hazards and initialization ordering races during device probing.
-
-Would it be better to store an enum or integer ID in the .driver_data field
-of m10bmc_spi_id, and use a switch statement in the probe function to select
-the correct static const mfd_cell array instead?
-
-Additionally, looking at the structures referenced here, such as
-m10bmc_d5005_subdevs, it appears the mfd_cell arrays are missing the
-mandatory const modifier. Could those arrays be updated to static const?
-
->  	{ }
->  };
+Sashiko has reviewed this patch and found no issues. It looks great!
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/cover.1783507945.gi=
-t.u.kleine-koenig@baylibre.com?part=3D17
+t.u.kleine-koenig@baylibre.com?part=3D18
+
