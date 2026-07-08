@@ -1,71 +1,74 @@
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE7E743B6EB
-	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 11:16:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CAEB43C075
+	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 11:16:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783509412; cv=none; b=NjK1C4tpgdLJm+TMtizSBIOPL7EyrLK4X6CItRp8yFad2AhR2Zyz1j3B9lHma1Uxqw6zBfB0yVXjuzv+Q88YM+JZHjLjEat0DvRZQ4aaoWf6wpk5K18dsgCVYVszVvzuO2BrBHDF2QLaN/X8SEfu8nZ+Y9z+IU48EdeFBiyZ9fI=
+	t=1783509413; cv=none; b=Jo39zcGJjWIxKJ/IByIur7imgot5GcpZ6NyGncjyQsvGvrgalF4R6STxgxsdO/mXA4iNCk3y2TKhRYj2C8pYwn9QR6GkX+MVZtg6bxu3lP+s339a961/N2DVn0Dr8UvHMm0GhAgYTtvyasB3LFbLEZUpH2WOyYEQcAPQwA72Sv4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783509412; c=relaxed/simple;
-	bh=XgzeRkwHCtgLE8cDPcpkh+fRSLRZc3sMAzqjruWfXXc=;
+	s=arc-20240116; t=1783509413; c=relaxed/simple;
+	bh=6qbdlzxZyZLMBPwj2Zmz1sZXp72LcZLMsWmZZfgKkIw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=iY6I+pAwJ66YqzCzV31S2tX3Vx2srkOYs4IXAiI3KTGIED5N9QiLriVESVdp5aeKrXOr/3KeranHdAlyYtQfocOwNaBtMbCLAmBLfCMxwe90H1jpxSCWfe48YYn5k8+iSnooaNiU4i9OamHo/1lfiEDZzktk9vaQ3h0XlqHRcyI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=bSz4+uEa; arc=none smtp.client-ip=209.85.221.44
+	 MIME-Version:Content-Type; b=ZloUXKKc0GGs7s0iq9YlhoiRLW0uAgZNO/SaiLNNx22yyKcX7bT+nj0S70OjcdIW5meGsC9OsH3nTINLpAHSU/tcNXzbCMktsq+DqZbHvGo/n1nGKbKLEA6WWW7mPMd6WYKtoK2oBxgqfZM6X7xSPglwqySFHlTmy+zCtlHJxyw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=ms3s/5Ba; arc=none smtp.client-ip=209.85.128.47
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="bSz4+uEa"
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-474303f3c72so365802f8f.0
-        for <mfd@lists.linux.dev>; Wed, 08 Jul 2026 04:16:48 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="ms3s/5Ba"
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-493b61b52b6so5140235e9.1
+        for <mfd@lists.linux.dev>; Wed, 08 Jul 2026 04:16:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1783509406; x=1784114206; darn=lists.linux.dev;
+        d=baylibre.com; s=google; t=1783509407; x=1784114207; darn=lists.linux.dev;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=1CXdimNtV+8iKOc+nx9ux4G2sDnokhnNrrDBoO3UNEo=;
-        b=bSz4+uEa56HBYX0AVvlWslUbPNJ3V4sjdSO4eXC9Guz6GBkX6I8z182zTWC0QiuZGR
-         NaC+S9tqg/KsB8Jc2jSv4HE7Ft0ri4ED5dFOd2ggH7QfjUmatchp0VdknbmRsP6iOc6S
-         v0jmWh446m9xco+F79p/U8vvHMZ2oOEfNCsPerFha8c7M7oPD1nSF8MJyQwpfgEKNGYx
-         ptVJkNy8cL0T3l2YNs0Sv7FLhNRYAX7BNJpKs/Px6BA/Sz/IGoWu8+FMcz3wKqmoxB2h
-         OfkV2JeI5YSEJ8Qt3lAPQ07SEHrptGnKMlssZlaWSzA1Z5OnbOPIHwh7dipkdo9AilzD
-         Bshw==
+        bh=TaCMfmYh26EG6vWNYZX/3pfm5a0Em0kXW/5DfKVSZ90=;
+        b=ms3s/5BayHUlsGSX1abni35WPSY238HzfSA/daH7g1rOJmLZZe5T0FEc1KOLPbAEin
+         fyjNDKzk377b6JhJRpFBIQqaFzY+0V8AL6gyhIzdnZ8YbOQYYU/jMWTiR/xe5TlMoFvy
+         WhJuSo37MZ+N5vXhxpFOiuZQS6Otc3K370a3Nwl6B1uEjWdwcRmeelRNThipC9OwX9DF
+         W/Q73SOuiVSjbJAVF2vWab3mgKiO6avMulvDWakUvZ5nl9nEJ4JIamEm9QFg4WExNoc5
+         9owRx7RzjYoZFIAiZ3sElZzDR/v4lOJVR8oTvnmY+75dgK/Se6IXGXFcXD3qpWf1prT+
+         B/8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783509406; x=1784114206;
+        d=1e100.net; s=20251104; t=1783509407; x=1784114207;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=1CXdimNtV+8iKOc+nx9ux4G2sDnokhnNrrDBoO3UNEo=;
-        b=VkRsUuGmN/jN9IwEfsayjDJkv05J+k+kb+JK2ZU9NL0iDMPnJliBfChG17bYS9FNUZ
-         BPgHu7oqisgEsQLta4CXCPshnZPxrwP1Qjehu0XRo4Ao/KMBpfMvWVVE5OuWTaDyBG2c
-         3vhiNDAcOX9lRIIXAg0E1VVAsYUom5Rh0xZ5lMtjGFxgFcWO2txLZx/aWNba1BPoL1NL
-         rFKsN6efqeApLW8TwcwMcX0r4fKBQe6d6kedh15lnkCM32VESAWr0ISC+1EkuhARgQOA
-         ZxEoAXHJzll6es49Bo6I7YAkqn+FGJuL6XXyludmauanmywRB/K4cT/pZRDR2oIhbBHw
-         UENw==
-X-Gm-Message-State: AOJu0YzmVoXxLLuQOc1Mqd04mq7hctpb0dQVrVnI8TJIc48FtKWeazsN
-	8+TkUMVRLZrGw2Lxc6JOqQ5sYzuMFEqt8MzaP88bTZkrvMVpFWXNtwklFA49Q1qbFJE=
-X-Gm-Gg: AfdE7clmEVeA2BXjL/lkr+pl6J8v/GEf7RpLTbyB578u5klAKr1y6lfzCGP2lAEWVbC
-	fLoC5p3ij2qz+7f2zlSQJO3YbG4yP9cvktdm99o23MaqpV2bdnDJGnckj6ViRk8H5hGjDiE+Oc4
-	IJtyIiuRNQuRiuIQRPAQb3nKZomEkV6Eq9WgAZzP14+UkqpFw95AJ9/Zmi5CO9+N3ZEKLBO2bf2
-	XV77eowalLWLG8/bYlb99fCLwnaceF6kpH+O+QyTPDcDarBMEoO0inCuDWFRzuUqgf75+EKUbWl
-	8GXyfVbLVcNMiQANkE9WP0dLFEY8SMADVMk6PuoQO/QK6WYEbYhet7OIGOyA3lgXyYiga5lOJTv
-	VvnWpi7xgoVx2WO+UPWFup9IrXz+NP7xum31aIuL+y4wavs+NNe9PXbPnwr3qbAi4OU0N0bEJsW
-	FQ0kHsBudRZqL9xGPybktg0JpS1wY3ABA9LFgQecItTudeloqhc1IAxqjY3XRwFMfcMFg2i6b2X
-	SQ3
-X-Received: by 2002:a05:6000:4007:b0:441:1e1e:a050 with SMTP id ffacd0b85a97d-47df07b5c38mr1946499f8f.16.1783509406045;
-        Wed, 08 Jul 2026 04:16:46 -0700 (PDT)
+        bh=TaCMfmYh26EG6vWNYZX/3pfm5a0Em0kXW/5DfKVSZ90=;
+        b=pn9Lvbu386HwfoesRSbzD7rQpNMRcmV5pFfH8GXkOzc9+Ov/tYi9pgk+/8DDTL0xSe
+         xAH3kFaCeppDY+91oGs+NiYmyTEpxD3cMFzUEL5hzEgkPj3K4jSyDCPjUVpjPbbmYLR5
+         pZI/4ylnmuvJj9ylpQGc4AadBNW1fna7EW16hVVLnRmjKjjhxtF03dJJKb/HlO9NnT4M
+         D0MHmXYn1AG69f1xGYi+leuTaq+odxOqN4RaQC758JqmRuQ6wRrbu7RmiNuz49aPBo8k
+         Qo1XjpCD6xvUAZlAeTUGLx1AwbDbbxKOao/2mHBBnkKEnMYWfZSF9MlgGZceFHuz0rQN
+         uQxw==
+X-Forwarded-Encrypted: i=1; AHgh+RrV7dq+SQI/ms75BNXymy7Orv1iL3C9ua9D5s0gT724h5UVryOHVTpZmi8BbDcx5/SSBvo=@lists.linux.dev
+X-Gm-Message-State: AOJu0YzjhNzOVdb0SXThvX8NV+EkFAykIm13Y5HzfCnTUXVSIDfbwkEK
+	ZkFC1q+zjn/R7+S6ZYFjgaa2krRlYsfaRN/PB1WwkCkM8GJ5TNQP4CjYhvf7mjfxPZ8=
+X-Gm-Gg: AfdE7cnjmbOvQz3b8kCdy+qe+0LKvhF/ZlJRyoUv37vUzBgH5Pin8bp7JZ2tlMi7kxm
+	m0CDaVRXobIMvGmZ5sw2yEktLA297wRo6t3Y30PMlySXBN2v/KJ4KpX2YEhhARBgbCZ6RIZoQ7b
+	AYk8t6PYsrNDyf/w/5BOaCQnOQCjm2gQMZQfIa+LMIgmblQ0OVwe8PngScHGDNh2tb++gq/vUlk
+	R71E6bGmbEd9O3g8wT2mzrLfTzZRSnDdoRpagI6dFhaujx4HolWLcmYqmNQ/13n43E7s4KeHkV3
+	onLb0Jwl3/cDcfq0q8RXpH9sCaJ8i6aXBEIoQVoBpgpP3T3hLE/dtQNieDB3TvxNvr5cQM77x8S
+	LQTPBX0e+Hpz07D4w1idaaQK6XyJnIA2bydztMbCoPa9pHiN1ayDt1eEkF6uOfONmz+Zfbi5hW4
+	dprv8RzkVmxVCjjU9XN/iBSQtpPkvEVl2I9sH28a0fycH5Iad+EUjhaetdD1qdwVSVDzXmyrOL7
+	NwL
+X-Received: by 2002:a05:600c:6992:b0:493:bb0:3b43 with SMTP id 5b1f17b1804b1-493e6d1702emr16184795e9.2.1783509407586;
+        Wed, 08 Jul 2026 04:16:47 -0700 (PDT)
 Received: from localhost (p200300f65f47db04930dc5bd4534e1e5.dip0.t-ipconnect.de. [2003:f6:5f47:db04:930d:c5bd:4534:e1e5])
-        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-47aa0a55be4sm37859697f8f.31.2026.07.08.04.16.44
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-493e0f43912sm151033615e9.7.2026.07.08.04.16.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Jul 2026 04:16:45 -0700 (PDT)
+        Wed, 08 Jul 2026 04:16:47 -0700 (PDT)
 From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>
 To: Lee Jones <lee@kernel.org>
-Cc: mfd@lists.linux.dev,
+Cc: Qunqin Zhao <zhaoqunqin@loongson.cn>,
+	linux-crypto@vger.kernel.org,
+	mfd@lists.linux.dev,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 06/23] mfd: rt4831: Drop irrelevant __maybe_unused
-Date: Wed,  8 Jul 2026 13:15:13 +0200
-Message-ID:  <0cc39229d2521b37b7bcf9b984512284df7c15ac.1783507945.git.u.kleine-koenig@baylibre.com>
+Subject: [PATCH v2 07/23] mfd: loongson-se: Drop unused assignment of acpi_device_id driver data
+Date: Wed,  8 Jul 2026 13:15:14 +0200
+Message-ID:  <52d02d74d8c7589731ee0f0805123cfbf2f992d3.1783507945.git.u.kleine-koenig@baylibre.com>
 X-Mailer: git-send-email 2.55.0.11.g153666a7d9bb
 In-Reply-To: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
 References: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
@@ -76,33 +79,35 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-X-Developer-Signature: v=1; a=openpgp-sha256; l=971; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=XgzeRkwHCtgLE8cDPcpkh+fRSLRZc3sMAzqjruWfXXc=; b=owGbwMvMwMXY3/A7olbonx/jabUkhiw/Qx9bVpfG5HkqLyrY23cp1u5LSe418W1Zmhu5qPdyb 81yWc5ORmMWBkYuBlkxRRb7xjWZVlVykZ1r/12GGcTKBDKFgYtTACay4TH7fxftgC3aC3eJHsnW Y+Vewb91jl0l33KGo2sWHGcL2M0gyRXcePCRcaZgx63HsxR/LVt6au9Onc2FE7pyFYq3HlVXLJr 4W/bUbXZzV9c9LtFB/xW3XcyXXCrRG7fk8HSn0yddvjEpm8Y9CxK0sLnLLBLxQFDBpfnHb+FJj7 tid/ulmM/h1VzpUH67fItb9trUpSacu3rFPZwMCvZW+RVedFSLNeiLmfbwnG6CeRvXFWvDX37tK Q11LEUCe65cdwj4W7WwkVHccu22qI6XOdUqtbOM1/1cxnjb2kBwU3TK7Yoph3/PSzZ7+Xy92uS0 7+qiUrGHphn4PnN69WcL28qJ9Uf+c2yKfHM1M8lp7dFSAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=884; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=6qbdlzxZyZLMBPwj2Zmz1sZXp72LcZLMsWmZZfgKkIw=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBqTjFPPm0q2sX6r6XfARwoVd2skEs5VWoujN4Ud vzHvIn7q0yJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCak4xTwAKCRCPgPtYfRL+ TubsCACTTwl3FBbqji9gTFIlLTGwskOG7AMEO/JNLuTUuUjQbDjrOaRx4RBnzS1QSWiwvrppY/I sXi6ufnyXqLXQN01yDrJIEC+nynzVhvLvQe0GJ5BO/k5TKjsEFQIrbyo1wly7I8Bz2rKdf8m/tx mhib8ir8vuJRFy6NHOYM3agc0ndS+QpslK0fVkWY00CzVS4js4sDjt5z6Syv3Mvddp3mwBhU2QR yicc4eEHDtVnzvg4KD7hvS0RziNA929vjMSegWodsBJfkv9P2BjMkIciiEqqAi/rNpGMMcSSA2Q TtUd7iXvjeC1yHAuowD5pgObwNKE4S/OJqIva6rqpiE4hhy7
 X-Developer-Key: i=u.kleine-koenig@baylibre.com; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
 Content-Transfer-Encoding: 8bit
 
-Since commit 5ab23c7923a1 ("modpost: Create modalias for builtin
-modules") MODULE_DEVICE_TABLE() is enough to reference a device id array
-even if the driver is built-in. So rt4831_of_match[] is always used and the
-__maybe_unused marker serves no purpose and can be dropped.
+The driver explicitly set the .driver_data member of struct
+acpi_device_id to zero without relying on that value. Drop this unused
+assignment.
+
+This patch doesn't modify the compiled array, only its representation in
+source form benefits.
 
 Signed-off-by: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
 ---
- drivers/mfd/rt4831.c | 2 +-
+ drivers/mfd/loongson-se.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/mfd/rt4831.c b/drivers/mfd/rt4831.c
-index 1ab8870e4ebf..2b3f84b81c65 100644
---- a/drivers/mfd/rt4831.c
-+++ b/drivers/mfd/rt4831.c
-@@ -98,7 +98,7 @@ static void rt4831_remove(struct i2c_client *client)
- 		dev_warn(&client->dev, "Failed to disable outputs (%pe)\n", ERR_PTR(ret));
+diff --git a/drivers/mfd/loongson-se.c b/drivers/mfd/loongson-se.c
+index 3902ba377d69..4c668e2d2241 100644
+--- a/drivers/mfd/loongson-se.c
++++ b/drivers/mfd/loongson-se.c
+@@ -233,7 +233,7 @@ static int loongson_se_probe(struct platform_device *pdev)
  }
  
--static const struct of_device_id __maybe_unused rt4831_of_match[] = {
-+static const struct of_device_id rt4831_of_match[] = {
- 	{ .compatible = "richtek,rt4831", },
- 	{}
+ static const struct acpi_device_id loongson_se_acpi_match[] = {
+-	{ "LOON0011", 0 },
++	{ "LOON0011" },
+ 	{ }
  };
+ MODULE_DEVICE_TABLE(acpi, loongson_se_acpi_match);
 -- 
 2.55.0.11.g153666a7d9bb
 
