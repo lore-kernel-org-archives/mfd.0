@@ -1,167 +1,187 @@
-Received: from mx0b-001ae601.pphosted.com (mx0a-001ae601.pphosted.com [67.231.149.25])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56D0044B67F;
-	Wed,  8 Jul 2026 14:01:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=67.231.149.25
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783519261; cv=fail; b=V5SRaW6WeO9pHBYxREp7IYaJRHRmwtRe/iqcqPFMKRwmc3LRvMaOBhG5HfAJ6Ebl2hUI1vczcE96/q44/M9navq+dDxxnZkaOBAykdNVSMlivmwBBZ3BwWucI/uDLPPYKuLcwi6+AeUm8cF+M7PmJT9coim9S7qpa4kCeSvuUsc=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783519261; c=relaxed/simple;
-	bh=MQ5DKJdm4XEpafuRD+YtUC7Gyyn/1Y0SGKvSkWOOz0k=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=q4rGh+r+2IwK7Z7ER4LliSFUMsDJAjvqnVzR6l3381VywxCQPFoiVf6WxzPMYXZIlaFDSPcY4JMyAXJdSD935/NfUpa0iWOJSbF6TpB6VZgJoSdm4k0MYnijZLBqm0irMihTZKr/Q0/H5/wblsNL311ES/zZEiOIGCPUepo9KVA=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com; spf=pass smtp.mailfrom=opensource.cirrus.com; dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b=U2pEZsGu; dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b=U7LL1RSK; arc=fail smtp.client-ip=67.231.149.25
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=opensource.cirrus.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E80CF409629
+	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 14:17:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.177
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783520232; cv=none; b=VY+YDJVhuo2/aXvYIToythXl55ZChIaK6KGNokAlPh5TX515iAhEF/FbiiC5EeA6GfFpsZO8vheByVT31BNL0f25JFkxI4uRPTZ7FT3Ect0HQbPL8FFUbm7J9FILgE/Havgp3eqgtX0HyVg9sXMLZczp0qC8U6vA8PFoOVB1bHw=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783520232; c=relaxed/simple;
+	bh=KytUjyWbmgxMPWGG2wJePUNjrnm6PwIYazV5AliXqU0=;
+	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
+	 Message-Id:References:To; b=h9TBjOvd2FU0CjH8MRwZXRojIcjwk9CdD0jMYN6+PAykJGZ2tj3NPjECOwy+PBPYa+txCExwYKnwSAczsKT1rjK6KB7CXGuwHeVRws2jJyd5DHcq6Y9kJGl8vKLq+yp6uxPlx0EpH96so8sk6bg87YQid0Go8V/hZRgfhWfpiAk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=jp63qJ4x; arc=none smtp.client-ip=209.85.214.177
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b="U2pEZsGu";
-	dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b="U7LL1RSK"
-Received: from pps.filterd (m0077473.ppops.net [127.0.0.1])
-	by mx0a-001ae601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 668CnL3v1464492;
-	Wed, 8 Jul 2026 09:00:57 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	PODMain02222019; bh=7YMbie5ybP/XnTR0gfHSDYoUJk7pfVzQ8bfjgWtOvhI=; b=
-	U2pEZsGu/I1aNSrLe+0HKhhaqMzlSPECTfLqXlcoUQuoBCHM5Ots+29gVxxKIcii
-	1+kLHla5+KimiuwNEBGq2QsCnPTSL70g3qntyZid3/VLajp79mzNZSO1AECAr/S1
-	Noj50pJ8TG9ODaoiiIwhRFSqyRHKUdCYEkJdZPlKtmrUaTTwI8cQFYsh9UrjpjjV
-	SiuqQZw7evuGzoic8AbPVOJ4HtCVkXZ1EVJCBwvBK/84TT7Qbt/0Jn7lpmGBRNPf
-	zSPW8JOQNT/fcij2gy0JyM1E07QR5QMc8m60eyLXki8eVIPgmbjG4cwdYURYvrKQ
-	TBUZewliyuMGOdguVyWlhw==
-Received: from ph0pr06cu001.outbound.protection.outlook.com (mail-westus3azon11021090.outbound.protection.outlook.com [40.107.208.90])
-	by mx0a-001ae601.pphosted.com (PPS) with ESMTPS id 4f6yjxpaeg-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Wed, 08 Jul 2026 09:00:52 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Sp1+whGwv62nkNoRPEczZZcd94RLYpxSu8zPxEA53XhyViQX6bhjnrxPY5u2CFJkGIpTleeynAbmPAhaAq7sqJ7/xRVrWB7HLWxcAwBLb5HUweOYDchEop5XnYCJx4nIUQPdhh3muwP6Xsyn0AD4bgdWwiqMKNt4N6b+8Cz9m0z/wHXPhbRjvrwsM/73rnrSgDd7S5mEt4AnPBMlbtGbFOHlzE5HSuisbJTDWm3O/IWJNNwdeQKSXw2Exe9Sxfte/NNLKlhDSxulODdHTuRUgqoXanAqfHwlGX555Sz1vaZPg20CTx+iZ3vHtO6Uf9FHZHrLK2wQ3z1Alk3c7P0FfQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7YMbie5ybP/XnTR0gfHSDYoUJk7pfVzQ8bfjgWtOvhI=;
- b=pkCf17J1b83QKCr0oCOQnaRybE5sRNdeFNiorGbNL1j/6ZO1MM9sgiCf1/MG5y0RL6Qs3AIRrY5QkdAsr1zcNg7IljZBYvlbcbOqfJq0EHMwsAtG9aTYtYrI/RaqpJEDRy9Q5ifkeEXha/p828xP+u9JWY9Ui+XbT4R568ZpVF9J0KL0XA0Rh3bXaqJ45cU2vd9Rzg3TjJetxmbeaVU1d0qkq8iVb3ioD4UeRz7Kva3htil6PjYXHwSeYQSPj1virteu/gxlynRf+Uln34tkHTbQlEY3MkZPzBCqEWtW72dNzpDTq94+0cvFgMDHs/QwLFWWLE0OqWcRnaHEyWxtFA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 84.19.233.75) smtp.rcpttodomain=cirrus.com
- smtp.mailfrom=opensource.cirrus.com; dmarc=fail (p=reject sp=reject pct=100)
- action=oreject header.from=opensource.cirrus.com; dkim=none (message not
- signed); arc=none (0)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jp63qJ4x"
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2cad68425a7so968265ad.1
+        for <mfd@lists.linux.dev>; Wed, 08 Jul 2026 07:17:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cirrus4.onmicrosoft.com; s=selector2-cirrus4-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7YMbie5ybP/XnTR0gfHSDYoUJk7pfVzQ8bfjgWtOvhI=;
- b=U7LL1RSKUWbL5GPA5zxdbjvxohSvQzevbCpkh+TLtNKmRW1kKwLskKmy7UNhhMMjN+b/dmPpcrZJ2/D8mVSA8pDi9aelQ8voYg8ZqCoFzvna5XzsX60JqpjyXxkbp5dfFkk9JnwHbGSkO6L9uTnu9cHU8sj4Un7ZNf19Kuyqki0=
-Received: from SJ0PR03CA0344.namprd03.prod.outlook.com (2603:10b6:a03:39c::19)
- by DM6PR19MB4310.namprd19.prod.outlook.com (2603:10b6:5:294::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.159.13; Wed, 8 Jul
- 2026 14:00:47 +0000
-Received: from SJ5PEPF000001F7.namprd05.prod.outlook.com
- (2603:10b6:a03:39c:cafe::8d) by SJ0PR03CA0344.outlook.office365.com
- (2603:10b6:a03:39c::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.10 via Frontend Transport; Wed, 8
- Jul 2026 14:00:45 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 84.19.233.75)
- smtp.mailfrom=opensource.cirrus.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=oreject header.from=opensource.cirrus.com;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- opensource.cirrus.com discourages use of 84.19.233.75 as permitted sender)
-Received: from edirelay1.ad.cirrus.com (84.19.233.75) by
- SJ5PEPF000001F7.mail.protection.outlook.com (10.167.242.75) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.6
- via Frontend Transport; Wed, 8 Jul 2026 14:00:44 +0000
-Received: from ediswmail9.ad.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
-	by edirelay1.ad.cirrus.com (Postfix) with ESMTPS id 6364B406542;
-	Wed,  8 Jul 2026 14:00:43 +0000 (UTC)
-Received: from ediswws07.ad.cirrus.com (ediswws07.ad.cirrus.com [198.90.208.12])
-	by ediswmail9.ad.cirrus.com (Postfix) with ESMTPSA id 4F4CF82026C;
-	Wed,  8 Jul 2026 14:00:43 +0000 (UTC)
-From: Charles Keepax <ckeepax@opensource.cirrus.com>
-To: lee@kernel.org, broonie@kernel.org, robh@kernel.org, krzk+dt@kernel.org
-Cc: conor+dt@kernel.org, lgirdwood@gmail.com, linux-sound@vger.kernel.org,
-        devicetree@vger.kernel.org, mfd@lists.linux.dev,
-        linux-kernel@vger.kernel.org, patches@opensource.cirrus.com
-Subject: [PATCH 1/3] ASoC: dt-bindings: cirrus,cs42l43: Add CS42L44 variant
-Date: Wed,  8 Jul 2026 15:00:37 +0100
-Message-ID: <20260708140039.1993489-2-ckeepax@opensource.cirrus.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260708140039.1993489-1-ckeepax@opensource.cirrus.com>
-References: <20260708140039.1993489-1-ckeepax@opensource.cirrus.com>
+        d=gmail.com; s=20251104; t=1783520230; x=1784125030; darn=lists.linux.dev;
+        h=to:references:message-id:content-transfer-encoding:cc:date
+         :in-reply-to:from:subject:mime-version:content-type:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=d4xgsEpJa1JkMfAC5lrqnM5nTtBq2Z6cq/mQ8FHTkeQ=;
+        b=jp63qJ4xS9lgmek6PWg2yPJk78MMNB5BYCcAzMVvvlt2FsjJ80k5m3jPkuAdhNILnv
+         WbcvQRATXT2/v/nLEVPRv110EERezewJgFrYpUD+q1U5JadOpdVC9KdCe77CqWJFrUS7
+         NXUwuqAXrjvRaTvUzYkTuhyfgc+1F55qxIgmH5iK+NgwTDkaG13dL75o3YsEGvEJMetT
+         TW8eW2Ezlos96nl6J3OZ+UwrQnEkelYQWKdpcfo+9rxSj8BhUKsA3djPvR/rvtFrqYFl
+         zJMkYxeOeTVRpfDxLN+3cv2ZGpK/AH8KkrLx4358t332vVqieO4yBkUTZVMaERb5Dcze
+         Gg+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783520230; x=1784125030;
+        h=to:references:message-id:content-transfer-encoding:cc:date
+         :in-reply-to:from:subject:mime-version:content-type:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=d4xgsEpJa1JkMfAC5lrqnM5nTtBq2Z6cq/mQ8FHTkeQ=;
+        b=EyQ6Sfk1fJhAimCgspnXiODbUWY/pC9YhAPxmS5BBO6qcTdC0YpDQC0Vrh6jETLJHC
+         zcMDn8Tiz+4d8EWMMEVR5ukeGxWG+rUyduXis1rvaQv12w0RTbHr4HSDNyFjlQ5OpLdo
+         J/TsBPJBSw4MXAUoM0s2FkmDREpHaEW1bgCmTosU0rZ1Ftn+5hr5EO4Jl9e8mOJiRH2B
+         rLQ2W9mLa2dt/Nfa+F6fftg6792efchEdDqtvS12UpUu6TC1A8KqHRA67zCfVtpTXIqa
+         xYMNrs6SFbQesfyXey1/CC8FQVYh4CssFqQEliOgHFVqfLA9rUgZYnO6T5pYE8uFMYqS
+         zsPg==
+X-Forwarded-Encrypted: i=1; AHgh+Rr26AqpN5/yGtVMORh/e5LmS0qHf9/RJG9KXMdlEEkldRYjYnX280ltih5hT6HksOeKh6k=@lists.linux.dev
+X-Gm-Message-State: AOJu0Yzqww5CBfrgK2fj7tNMlfvg4cUBQQNcdwt8L7ovV6v6gSGzjLNY
+	CPwzUN/bEfjJZj16RV1Jnhl5WlhGSPgdxePdxA6e9/dLUWf3RUaIZ11Z
+X-Gm-Gg: AfdE7cnhxp53KxoSu/39Ks2hmr2xlAmn9TU/3zVOS7mFC2vAj4l1xBF4hT0SZKsUeuN
+	5+/UY/b9Oa/0PyDYF7AjduNLZutAzbJ7izK52WPNfXmtNERlNznDMF2IWxlv6Ofk3PuhvAU7L7c
+	Btr8ytJUHnIaHQlJUhiJYHGHEtrEwUYzw4yxD59p8uqHryeo2VeyDetOEAEVPyubSgvIKyIqsj2
+	gyFp5q3iP+U6Nmk4oBYVfleR+l32iPbs4NogYjs+zA+WclT0YXgVjhQZGLC2rz4/vffirJ9bUOh
+	UYQ6hr3cqGhoXh0CadsNUhqxVXmLkTPL5lU6p0R9SpjiRDmBcD/FuatoWXY3zJi4nF2LLkVHuAj
+	GL/cw77i7uxCtui8zIJCUtUcIj5xSzmWnlKWy2ty0c64bFTUAK9OZtMAoKUcIuK3MIIfQnH/qSY
+	P/KjdNeKaGxzHGtn6xR7tODRNJ63vnLSPm4e6VhrhU/L8xnA==
+X-Received: by 2002:a17:903:2352:b0:2c9:d298:6c0a with SMTP id d9443c01a7336-2ccea2af751mr20982635ad.2.1783520230041;
+        Wed, 08 Jul 2026 07:17:10 -0700 (PDT)
+Received: from smtpclient.apple ([23.247.139.92])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ccc9d1e29asm28773865ad.52.2026.07.08.07.17.03
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 08 Jul 2026 07:17:09 -0700 (PDT)
+Content-Type: text/plain;
+	charset=utf-8
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001F7:EE_|DM6PR19MB4310:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: e3354d2e-c072-49a4-4fea-08dedcf94e5a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|82310400026|61400799027|23010399003|36860700016|16102099003|18002099003|22082099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info:
-	GOKgzoVAu9pVyOOlgSZ9Qt9F7J5h+fk3UnsQZw0kHE+9/siK19rgmtVaUJgJclgPScVG/BNrGx9cv9W1L9v9y4OQJHWlV0IxG9I1a2JGG2DjRJVjuWwBWpqCcLCk/A/3rU2CsKgRPRXAIjY7T2j/nFFGQ8U0F1VfJaLnsLX+GZdTpmYzCAPRlAhhfZLt2Olhf8YfZd4prd5hphtL3gF4GOWtpOOZ0pFoiAQuoCQ5cscODCnC8r+moy0XSZUVDZ9zm7Qjum5Kn/1UqwUCC0AVRh2PNq94QmztK88BQ/EDykLw8Y360cZFwAnX0UR5ZT1RjUh+qswU2kQVBDhaO18F0XPTUUxYN0yB/0FDR2Wqmzo4Z5XmhYS6nLM+650nAlaacwa0vDkWCWttFlEr0oYyeCDB1HMGWSdwbVWYPi3ouDUaaLjz6lHas1Wb07vr2YheCSaz/k9kpR849EulNdKUd4zj2/tH42EkjYhYf6C3cpanP7yVByVvIh3/o9mDzhuJfwcnv3xYdy8ES605T0Lhjxi1FdkGmOCmFzoNHhz2XgdeI+CUwiWo2pSKjUqqVrttKA52V2Hin8wCdhffsFIyfRP0wAXqQYwZEV0Pjntkv3Z26ewNr0GqniwQguLQ03w/uqBZZrnxV4GS7UPzJBKD91yhjr/mSv3nZfHOaJYzYW3m+1+8+xJCFH4EcI4PlPy5Q3rbkDWauXVzjb3sdTpLrg==
-X-Forefront-Antispam-Report:
-	CIP:84.19.233.75;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:edirelay1.ad.cirrus.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(7416014)(82310400026)(61400799027)(23010399003)(36860700016)(16102099003)(18002099003)(22082099003)(56012099006)(11063799006);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	QAWUm5/LVeQPcaZOTzhGuybqmW8VZaJ0Heom+/C70Zd2ywioh/Mn4Erd7hAXO8WV8sZ088JZroi1fsIPXf5Jsx89CrrFck5IAINZQa1g7wmxg823YwkB9nteGoJuXkOP3e7CQdIW6uf7Z6mbzUIBCzZ4sn1Czd0I6VkYKlpshEbP2m8OAIJSb3rzzijz7xzXQJCbfUT/7bt2lnl5MMxUFpFexw3c12Pelvn/2DLUwRClpYUxFtKtgwwy8uSF8RspFMsS1s1GVFwy+zaJjpsC14FJYiaFp2ptueQYlpzaYbu4z7F0+WdaS6L2XzwpsgbSSw/gHm6PHlccLY484TMgT4VnrGa9AGP9dICaA8LKSNe+xJHKwzFpOBU7JmHqioBtLmD6ZYFKVW4+PfiXurHo+U7j4JpQnggLQFMUVi+Zo1RTdR4CGV2znkmcnuWQotee
-X-Exchange-RoutingPolicyChecked:
-	XbsTWuIuVYnXQkyDWKZd+ZX8EPRpHp76K2qFnUBhB7RuOvQs5UW9YBAz+ei8LgmK5L+hbJN6bEBeVmZgerrVWbEmETs6Rrj+2/UcM1iveY5gBJOm0LsVTrQETm848K5R7siLi+8bfU33n2Meks5hbjKtHYaIvgtlBJt78BGbp1nL4ipYGqeogm+6E8GCQS6lDzCjZIlmlRaiM8J5lk9kI1cDjeLP6QhHh3Wrr6vWeDE9ZNQmkIj1BkjmGj1VJZ9GdXh3XIx3CGgwZiFkbbmOKvmdwBOXfhu6B7cHk0tPYUR50cbGHhCEXGgCTQsr+LsFnRNtYldu7d5g9v0o/VMeRw==
-X-OriginatorOrg: opensource.cirrus.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2026 14:00:44.9397
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e3354d2e-c072-49a4-4fea-08dedcf94e5a
-X-MS-Exchange-CrossTenant-Id: bec09025-e5bc-40d1-a355-8e955c307de8
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bec09025-e5bc-40d1-a355-8e955c307de8;Ip=[84.19.233.75];Helo=[edirelay1.ad.cirrus.com]
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-SJ5PEPF000001F7.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR19MB4310
-X-Authority-Analysis: v=2.4 cv=Fo81OWrq c=1 sm=1 tr=0 ts=6a4e5814 cx=c_pps
- a=AOb1yOGEV8Ho27kyBPrkwg==:117 a=h1hSm8JtM9GN1ddwPAif2w==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
- a=RAioF0-LDSMA:10 a=s63m1ICgrNkA:10 a=RWc_ulEos4gA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=iX4cTi3TZMoOKdANLEfx:22 a=Dj2-6B8FqX4mGL0U3gbX:22
- a=w1d2syhTAAAA:8 a=G9XpSyhw2w38GRvjO_IA:9
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA4MDEzNyBTYWx0ZWRfX+muxq3cIOlgb
- WSQaj8TyM43TGPDQSc/ODQisWm7u+qNA+mn4tpmoc6XU+a7s1vosJZQsfHX4+PbY29mMrxvoiVd
- Cu6LlHHLS7cCKuW8SwuPoummYCFTv8c=
-X-Proofpoint-GUID: EE4E-_EG59X84FsaUEubmyqGutb9XEcZ
-X-Proofpoint-ORIG-GUID: EE4E-_EG59X84FsaUEubmyqGutb9XEcZ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA4MDEzNyBTYWx0ZWRfX+bsnjj5mHbmm
- Dvu8n2CX6vrlgln/PLhIR8r3VhPzcUM3kUijL6WuNOoA+z1v1zbrmf/t9ZfDa0vBQUZi8qIvWxB
- PPicMFIEySZ1vlyj00PAtQVCHy3etuYgE8j4+lGln2M0CIywdbQIVCfhdPYd+n842ch/+xkrs1t
- oL2NASMyN34JS33vLISNceUTMxCMCZ+A1ddxHHJEDURfc0ito867HgmybEwhR/2GKV0GEmmettf
- RDvgygsMca66v9llyaZww6BjlpDhv3tK06WAt0TG/5tTqPdPVilKmAUo5JS3hTXRMiqVH0gby+e
- MGoqelPCIby9o7kPwNF/CHWqT8lNAtpUZprqAieqxTmwbTbp+KOwkCdnPANA8AkDCNLv5M5wyfk
- fr94xm0vqOp9rVt4qYfSd7I8tocHtADNmpRe25yK5iR3/RPmD2Cp4NMz6c4Uxz7f00TONCfft71
- 6IHXCkO4RGlYRlrYDAg==
-X-Proofpoint-Spam-Reason: safe
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81.1.8\))
+Subject: Re: [PATCH RFC v2 7/7] mfd: ls2kbmc: Capture the reset event of BMC
+ through GPIO
+From: Miao Wang <shankerwangmiao@gmail.com>
+In-Reply-To: <5d6ea500e983035a2e5748e1bbf8ed6c26ac6f4b.camel@xry111.site>
+Date: Wed, 8 Jul 2026 22:16:49 +0800
+Cc: Binbin Zhou <zhoubinbin@loongson.cn>,
+ Chong Qiao <qiaochong@loongson.cn>,
+ Lee Jones <lee@kernel.org>,
+ Huacai Chen <chenhuacai@kernel.org>,
+ Corey Minyard <corey@minyard.net>,
+ Linus Walleij <linusw@kernel.org>,
+ Bartosz Golaszewski <brgl@kernel.org>,
+ WANG Xuerui <kernel@xen0n.name>,
+ Yinbo Zhu <zhuyinbo@loongson.cn>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ mfd@lists.linux.dev,
+ linux-kernel@vger.kernel.org,
+ linux-gpio@vger.kernel.org,
+ openipmi-developer@lists.sourceforge.net
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <D141EDD3-BEC0-458B-B477-9227B3FB93AC@gmail.com>
+References: <20260708-ls2kbmc-mod-v2-0-2afdd1741766@gmail.com>
+ <20260708-ls2kbmc-mod-v2-7-2afdd1741766@gmail.com>
+ <5d6ea500e983035a2e5748e1bbf8ed6c26ac6f4b.camel@xry111.site>
+To: Xi Ruoyao <xry111@xry111.site>
+X-Mailer: Apple Mail (2.3826.700.81.1.8)
 
-The cs42l44 is a cost optimised variant of cs42l43b.
+Hi,
 
-Signed-off-by: Charles Keepax <ckeepax@opensource.cirrus.com>
----
- Documentation/devicetree/bindings/sound/cirrus,cs42l43.yaml | 1 +
- 1 file changed, 1 insertion(+)
+> 2026=E5=B9=B47=E6=9C=888=E6=97=A5 21:14=EF=BC=8CXi Ruoyao =
+<xry111@xry111.site> =E5=86=99=E9=81=93=EF=BC=9A
+>=20
+> On Wed, 2026-07-08 at 05:16 +0800, Miao Wang via B4 Relay wrote:
+>> From: Miao Wang <shankerwangmiao@gmail.com>
+>>=20
+>> The reset event of BMC is captured through GPIO. However, this driver
+>> bypasses the GPIO framework and directly accesses the GPIO controller
+>> through the fixed address. When the same GPIO controller is also
+>> exposed through ACPI and probed by the corresponding GPIO driver,
+>> there would be a conflict between the two drivers.
+>>=20
+>> This patch will try to find the GPIO through declared GPIO pin in the
+>> _CRS resources of the ACPI node. If no such delaration is found, the
+>> driver will fall back to search for the correct GPIO controller and =
+pin
+>> according to the fixed address and pin number. A possible DSDT
+>> declaration for the GPIO pin might be as follows:
+>>=20
+>>     Device (BMC0) {
+>>         Name (_ADR, ...) // Match the PCI address of the BMC device
+>>         // \_SB.GPO1 is the ACPI path of the GPIO controller
+>>         Name (_CRS, ResourceTemplate () {
+>>             GpioInt (Edge, ActiveLow, Exclusive, PullNone, 0,
+>>                      "\\_SB.GPO1", 0) {
+>>                 14 // 14 is the GPIO pin number
+>>             }
+>>     }
+>=20
+> I think this is a proposal without real implementation yet?  If so...
+>=20
+> /* snip */
+>=20
+>> + adev =3D to_acpi_device_node(fwnode);
+>> + if (!adev)
+>> + goto out;
+>> +
+>> + INIT_LIST_HEAD(&resource_list);
+>> +
+>> + ret =3D acpi_dev_get_memory_resources(adev, &resource_list);
+>> + if (ret < 0)
+>> + goto out;
+>> + rentry =3D list_first_entry_or_null(&resource_list, struct =
+resource_entry, node);
+>> + if (!rentry)
+>> + goto free_resource_list;
+>> + if (rentry->res->start =3D=3D start_addr)
+>> + found =3D 1;
+>> +
+>> +free_resource_list:
+>> + acpi_dev_free_resource_list(&resource_list);
+>=20
+> ... consider adding a _DSD method to label (like "bmc-reset") the GPIO
+> for the proposed BMC0 device so you can use devm_gpiod_get to get the
+> GPIO, instead of using the hand-brew code to parse the ACPI node.=20
+> See =
+https://www.kernel.org/doc/html/latest/firmware-guide/acpi/gpio-properties=
+.html.
 
-diff --git a/Documentation/devicetree/bindings/sound/cirrus,cs42l43.yaml b/Documentation/devicetree/bindings/sound/cirrus,cs42l43.yaml
-index 376928d1f64bf..c1ef9f3083962 100644
---- a/Documentation/devicetree/bindings/sound/cirrus,cs42l43.yaml
-+++ b/Documentation/devicetree/bindings/sound/cirrus,cs42l43.yaml
-@@ -27,6 +27,7 @@ properties:
-     enum:
-       - cirrus,cs42l43
-       - cirrus,cs42l43b
-+      - cirrus,cs42l44
- 
-   reg:
-     maxItems: 1
--- 
-2.47.3
+Yes, it is a proposal. GpioInt() in the _CRS() should be at least
+required to associate the BMC device to the GPIO pin. Having a _DSD
+might be better to label the gpio pin with human readable label. I
+however don't think _DSD is important because there is only one pin
+needed, and devm_gpiod_get_index can be used to obtain the gpio line
+description using the index in _CRS()
+
+>=20
+> Combining this with Bartosz's comment, the logic would be like:
+>=20
+>  if (missing the ACPI node)
+>    assign a swnode to label "gpio14" as "bmc-reset";
+
+I'll further look into whether swnode can be used.
+
+>  gpio_desc =3D devm_gpiod_get(&dev, "bmc-reset", GPIOD_IN);
+>=20
+> And such a proposal will need to be discussed with Loongson.  Yes I =
+know
+> people may hate the "control" from the vendor, but having some
+> effectively dead code (i.e. supporting some non-exist firmware) in the
+> kernel is worse.
+
+I'm open with such discussions.
+
+Cheers,
+
+Miao Wang
+
 
