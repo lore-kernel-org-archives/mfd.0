@@ -1,175 +1,192 @@
-Received: from mx0b-001ae601.pphosted.com (mx0b-001ae601.pphosted.com [67.231.152.168])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80A7F43D4EE
-	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 12:20:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=67.231.152.168
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783513206; cv=fail; b=UQtxrGANQt5E9nx5Bz0jXx1GFMibWDmPoWoTUg6lC7oy6onqT1n4JtCWyTPT+DXjwm1ocmpkjd+0Itk9B4PgMYDUnWOAZSh9q8kMmE3aarTdIETEyIK08xgaJzeQsNVT2ARS5Q3fsbcAqTAO1fJgkfZVCteoobBcMcvKQ+34whM=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783513206; c=relaxed/simple;
-	bh=yOg2s7X4d6dJCDi4FTYkNRrtRJOi2DD0Ml1fOplB370=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=FwmonHtWr+GdkBMrB6eJBSfMqeGgcpLCK/fAyD7UoqLNgiE7m8a1DiQhFwWa/MATw0DJxgGXI9R33puQdfolC7+Q1cAQvgmPigA55cfbcyGyE7DPMGKdd3UrwmkuVULqcv3LKQOod4Ta5biQiTGjrLNsYzG7AdcF5lPQ0U1GfVM=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com; spf=pass smtp.mailfrom=opensource.cirrus.com; dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b=EiqEYPoh; dkim=fail (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b=AHjH9fwK reason="signature verification failed"; arc=fail smtp.client-ip=67.231.152.168
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=opensource.cirrus.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7EB6243E9CD
+	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 12:33:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.54
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783514016; cv=none; b=RJmJ/7rc1KPMnJguthtDz+bQo7PbnuWMHaDqrxt90l6KxgJPArB9JV+3VbZzdNYA1oztZruUWujf9vSWVt3pvfHYogYAOHn+eb+NYWjwrLuFPl4ABm0g+kvBJAiUaIS0lAK74v0wBy07HKlqqVry+vSTmcdg2bS55RWcURQb7WI=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783514016; c=relaxed/simple;
+	bh=X80VD+BeEDWgeBkAHdnE1UoBvmAMEG2lTMJ/lNSBay0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=PFIWIURhiZ9amOoDew05Y3m/V1YriUrtnV5qSekSHRqi/NPUtC+z5Pfm4QRJhYYHjH2MteOAgvRHeprGHeU8l5PU6YO0E+xBEP2r6cSThXvz2zOTAX+cQ0A3/B02i7NPlryiZjx0tWkt1Q6yOA4oOtimBaE2aQGQmvOhHvgVq1w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Lkrkbmbo; arc=none smtp.client-ip=209.85.128.54
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b="EiqEYPoh";
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b="AHjH9fwK"
-Received: from pps.filterd (m0077474.ppops.net [127.0.0.1])
-	by mx0b-001ae601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6683v2oi1543079;
-	Wed, 8 Jul 2026 07:07:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	PODMain02222019; bh=6ccdm1YDNcespNeVb2kQcObvB7smQJg73d8bgCk2blk=; b=
-	EiqEYPohh/hWqKsniz8daa5+Fdn/33GnaJfKInRKaap0swhWoay92JZDriCyZs6U
-	+xbf/fpmvf3jm1/G1CGbsnCv9DU2V1S0z5JR+94N8gfBPo12EL2JppcoaiM8J1zL
-	Vo28+9fqP4FMgo0WIARp3krftienIF717EUnbKK60I1+6o1pn1gH4EZOjTMV9Wxu
-	M04kD9GDmc/oDFXjmolzY0EMMDR+xav3GPCh854Lu1oP2JtzrjeT0O5SWfVO94Gj
-	xSOBDw/VC0FgvfrafVaauImzqndhVf6pJSA2gqM1hfM0W6wM3pjqCJ4Uq5vueCjp
-	jhnpRt9z0l5OwIJqKk4rXA==
-Received: from cy3pr05cu001.outbound.protection.outlook.com (mail-westcentralusazon11023124.outbound.protection.outlook.com [40.93.201.124])
-	by mx0b-001ae601.pphosted.com (PPS) with ESMTPS id 4f6xkjp649-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Wed, 08 Jul 2026 07:07:32 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GW76LlC1qe5THWzTqxcaw9qe5JqwShRpiY1DdbfZ24sPZsAIVGle/gCG25OeT3jkU/TOvjeSQlaUH8DhR7LSIqLygtFAr4o2dKEEkCCYmy2zeJI7Tm9n63pUcL0qoAPspxb1gJtDQquoXQJ3LQJbnTnX1bcKOSwB22JLFXSLgtsngLr5Kl08r/wMlUekjUxVaFFJlTPUf6wiUHYuPCBWXidhGasZBdtm5WdCdOk2WclXkrDhADMe4oOwlA5swSZO0BydJD6N3fd2bmfZsAq8REpsXxKGn9h5mHd+Ep9wPtw5nZKuMSky9NnzY6eg6HdScP+ti+ubI/wSRXIuCvuz2Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CPSKBAoTdHt4QbJ2ucgvcyvRIer1qdoXPvlPKPR88n0=;
- b=a0kxeIx4NLh2dCmyr3HAFVi+nd6kb6bigUU2ww+m42/XSYfJD6/KMtn5MWJO/lI7sLYnmTLODDsdBbnZb0OyK/o+wrFyX+lvkF9xreZbOk4zSuDirE7axdJ4BwjB3LxU1t4PxRAeXHGikpgtCAfp6GgoN2wGcVv85bki120JGyzEfcHOuzVuUIbCUFtpTzc9g5kVa+y+NjWZVl7ShRLcoPeauDYsxnDwHdCKL7BViDLXptZMDg2wthoRkjVbGDB1mfq10Sn4ejOhfwld7N8mh6pmcpXulzgXOjthgX1H2e3th097j+h2dGs4GQ907tJ9vyeWmnRzEkwznc+kKHQUww==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 84.19.233.75) smtp.rcpttodomain=baylibre.com
- smtp.mailfrom=opensource.cirrus.com; dmarc=fail (p=reject sp=reject pct=100)
- action=oreject header.from=opensource.cirrus.com; dkim=none (message not
- signed); arc=none (0)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Lkrkbmbo"
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-493c00f74baso4158555e9.0
+        for <mfd@lists.linux.dev>; Wed, 08 Jul 2026 05:33:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cirrus4.onmicrosoft.com; s=selector2-cirrus4-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CPSKBAoTdHt4QbJ2ucgvcyvRIer1qdoXPvlPKPR88n0=;
- b=AHjH9fwKhPNobiju/SqkLoSCUksMmCn9glUc323P9roHmF/dQ218KUxQ4q1vA+VBqSGh8Ztq4tFQJRA+SdKVlLdqySMKdtFqd80+ikFUiI5YbDNshksn7JhAjNrNM6Ypa3cD0eP2nGk5bK5JNwwGMnfjfiqBh1m0MXdLRyz6BUg=
-Received: from PH8P220CA0009.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:345::15)
- by CH8PR19MB200841.namprd19.prod.outlook.com (2603:10b6:610:31c::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.181.10; Wed, 8 Jul
- 2026 12:07:28 +0000
-Received: from SA2PEPF00001507.namprd04.prod.outlook.com
- (2603:10b6:510:345:cafe::e) by PH8P220CA0009.outlook.office365.com
- (2603:10b6:510:345::15) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.202.10 via Frontend Transport; Wed, 8
- Jul 2026 12:07:28 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 84.19.233.75)
- smtp.mailfrom=opensource.cirrus.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=oreject header.from=opensource.cirrus.com;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- opensource.cirrus.com discourages use of 84.19.233.75 as permitted sender)
-Received: from edirelay1.ad.cirrus.com (84.19.233.75) by
- SA2PEPF00001507.mail.protection.outlook.com (10.167.242.39) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.181.6
- via Frontend Transport; Wed, 8 Jul 2026 12:07:27 +0000
-Received: from ediswmail9.ad.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
-	by edirelay1.ad.cirrus.com (Postfix) with ESMTPS id 754EF406541;
-	Wed,  8 Jul 2026 12:07:25 +0000 (UTC)
-Received: from opensource.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
-	by ediswmail9.ad.cirrus.com (Postfix) with ESMTPSA id 5A7B082025A;
-	Wed,  8 Jul 2026 12:07:25 +0000 (UTC)
-Date: Wed, 8 Jul 2026 13:07:24 +0100
-From: Charles Keepax <ckeepax@opensource.cirrus.com>
-To: Uwe =?iso-8859-1?Q?Kleine-K=F6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>
-Cc: Lee Jones <lee@kernel.org>, David Rhodes <david.rhodes@cirrus.com>,
-        Richard Fitzgerald <rf@opensource.cirrus.com>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Mika Westerberg <mika.westerberg@linux.intel.com>,
-        Zha Qipeng <qipeng.zha@intel.com>,
-        Qunqin Zhao <zhaoqunqin@loongson.cn>,
-        Thomas Richard <thomas.richard@bootlin.com>,
-        linux-sound@vger.kernel.org, patches@opensource.cirrus.com,
-        mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
-        linux-crypto@vger.kernel.org
-Subject: Re: [PATCH v2 11/23] mfd: Use named initializers for acpi_device_id
- arrays
-Message-ID: <ak49fJVODX01wgYs@opensource.cirrus.com>
-References: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
- <8c8ffcd41b59446ebac377341971d6572f79c842.1783507945.git.u.kleine-koenig@baylibre.com>
+        d=gmail.com; s=20251104; t=1783514013; x=1784118813; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ltAZgPc2qTBdTDCtOOXVslMk/0yCzQbFFc7sQVr1uZQ=;
+        b=LkrkbmbodeB7KRLozx4cJp4/X6IS4fQdjGi74hJ9n6WO6k2ickik7VKgAR4B3b+VkB
+         8zMzgPnXl2Wcbn8yi5SXqnLRlUXYm1TJs6mjHwj5tyFUl3n0l4Nk51LxhEU5lKMolT2V
+         t6aITo91tZhqIN992EC/kTcWsY/h0XiOsHz2kSro2KRHHGXik4cY1tj/V6BsK1icaC97
+         O+6PQ7ffX2SYFBVgNeLJOnGmRiNpS3RSJyK6Sf5707h4tWkKVtcTb22twwdrrISgkguS
+         tlYLlhrGl+qD15cilz0eE4xX/BPbEUkJLNaLJXeEn3GGk++ehEjL3pihEaYC40DtVT70
+         1imQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783514013; x=1784118813;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ltAZgPc2qTBdTDCtOOXVslMk/0yCzQbFFc7sQVr1uZQ=;
+        b=S4vH1vqVDA+zlu+nQEI3ugZ6ZpyFGsh2mWl9Kky8yX+Zw4043fFfI1CTwiaAJZA/Qo
+         Cd/kBnQZ8C0E6dOrQ08P8VziBmkD6ETED3avmMvWnkofTKKVpRzi/mmZZgV/c93eytml
+         4ObGN79FTokJ7CGQDIH7reAhGHzN1Mb9QFxwIeP7LW16rCkUOZKH/oht0ZWHYPinXeQb
+         XNqIfKC57NtAi7/9/lHcWhexzUnF9IFZ3Sh8j43Xx5LvnaY+fYQU3vl96On6hI39CS7b
+         MLdVIhBev2rQDOZwA7t9UXuoA4oRlRxL9gsnuK9eZedr+Z2bY1+yEzBBA8B3FCKdOw+k
+         6yPw==
+X-Forwarded-Encrypted: i=1; AHgh+Rr0qbC0cTY5675kTOt6CC7U/oOWOtmSHEtN5HGWumPmMpP7BC+kTD/jTYjidA+6qgh3UxY=@lists.linux.dev
+X-Gm-Message-State: AOJu0YzCQiXUJJH0K/i+lsnXXC6fCfUoEAlULgVTFWaGaTuwR/fZw2Mi
+	lI+Vk9P5aT2M/1iRzAVd34M4cIdsodm1EJ9kPx6J+TfwdVO6Y7QfLo9R
+X-Gm-Gg: AfdE7cnFvX/VhZyN4l1PbFaml7EPxnOfkUbzAwj3lWM0ZFi5DrF85V+v8XE+LT92bqy
+	dL8fzGN6CV1jzDKt3TloCWUNUBhDDjUht70Lg5elPeTXPnCv6KMnHdLgwRksxNYr6hpkYuXkyx5
+	WSgfFCW0TGUX7zRopjGJWTXXDsRLpqGJqZ9Bl/hXhJoPwDz8K9AQJEBT8+hZ9w2FLBAiMc8CU6/
+	g5JwjDZ4zmniCTmFiHklYhcTx1W00B4vCqRar8BUJE3yg40EcbIHRaK9iW6GxagMo61PP2hLaMi
+	QNAXKeoZt7WnG9FmHWq7xWf1u1Xr0xJYQAB+WIydx4S9nDNR5q9GmJNhsibI7auvoyOsB8sMhzv
+	mV0/0sqD+4xAmeLIWGAc/U7oknQGcO2Qe6TbD2cesQtnWb1KgWoTDuT3RSMQtG1gL8G2TRDtLC1
+	KCHmlA8EbzHkTXJq9QMFuP/bjHYM4y47l5P08byOiUqXc4qU3ZRL7gVwI=
+X-Received: by 2002:a05:600c:8711:b0:493:c816:4b64 with SMTP id 5b1f17b1804b1-493e6892f76mr24414505e9.1.1783514012740;
+        Wed, 08 Jul 2026 05:33:32 -0700 (PDT)
+Received: from localhost.localdomain ([188.26.50.173])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-493e0f5b811sm222873515e9.13.2026.07.08.05.33.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 08 Jul 2026 05:33:32 -0700 (PDT)
+From: Eduard Bostina <egbostina@gmail.com>
+To: Conor Dooley <conor+dt@kernel.org>,
+	devicetree@vger.kernel.org,
+	Eduard Bostina <egbostina@gmail.com>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Lee Jones <lee@kernel.org>,
+	linux-kernel@vger.kernel.org,
+	mfd@lists.linux.dev,
+	Rob Herring <robh@kernel.org>
+Cc: daniel.baluta@nxp.com,
+	simona.toaca@nxp.com,
+	goledhruva@gmail.com,
+	m-chawdhry@ti.com
+Subject: [PATCH] dt-bindings: mfd: Convert OMAP USB TLL to DT schema
+Date: Wed,  8 Jul 2026 12:33:28 +0000
+Message-ID: <20260708123328.1768794-1-egbostina@gmail.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <8c8ffcd41b59446ebac377341971d6572f79c842.1783507945.git.u.kleine-koenig@baylibre.com>
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00001507:EE_|CH8PR19MB200841:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2ae62544-e2d2-4449-4a22-08dedce97a74
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|61400799027|23010399003|7416014|376014|36860700016|4143699003|11063799006|18002099003|5023799004|22082099003|56012099006|16102099003;
-X-Microsoft-Antispam-Message-Info:
-	GqIB5tMI4a8O449tcn7MtGSytJxayFYAhsSCpHFza7xkuL3tgICDSq89jSyPL5U2tq60u5EDe4fyPKaHAedUpvlFRd9Vv3z2sIS3MFLD9PfqCdUEfxgjfml9daBRghSzgHE1opLQHyXNnScPb3DhSU1PuUhamtWm9J/cy7AEL/mSNiPrp5gJEfoCrxqHoJghIyz8BmCKeknPw8DVAF8aTw5XOcKoNVpYbKB0xsu+diMqhBD6yVhgqZ9RbbQeizHC1zGfz6Dy2FDjhbS+ezzpIQKeWgtHcYBwIJoxaDx3evpBE7QQGGWsv5YV4mMqc2WYlaHIUxKArFICuI3QHgWr5T4VhEZzpbRu5Df3iajkznd5WvnGCXUXD9kjjwHTtpVmF8V7pWB3SbcN5jjG8WlkkQ/y+/k0wHctFomLXN1FqLNrDKuxTEfZFOX2SpKNoJYbjbSHt+bCEi6ddzV6DJbD1dkgs09qHJEQID5AA/3kSIF88FyWTk6BYW7o20/CufFkARxNGykBZ1vCkhc+KuG2O/nS41s/ZhLcnIjYbAaIoG3BNDLyX3lolXvgR5JZVbt5oppCFbPcNK/utmoqyNVxWhV6JjRQZi0pL7mwgLli9iYHQkm4hz+6a9BP+GBdhrS36WM/4Sf+oZLJVENlCURokNa7gXNFnKHipRF1N5iYiNMaTOtmDLyidsCqzeHuvUzSEyim8mt6rzQhTqKZ7/YzRA==
-X-Forefront-Antispam-Report:
-	CIP:84.19.233.75;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:edirelay1.ad.cirrus.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(61400799027)(23010399003)(7416014)(376014)(36860700016)(4143699003)(11063799006)(18002099003)(5023799004)(22082099003)(56012099006)(16102099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	HrR1QQKsrNyCwSLr2aWhmdQjL70MotCEntQ0hsUTKAWSPd3aHggTJmf7AwD+XIrDn9rLIfUkBnGXDVDv0nuW7LGpG+jlEloXYAjhpjGavdmLe2W0SFaywESzzPug1BFfqVXkkCrNe+kyI+79ZJN0/9GFjS8fU59hsSLx83xod+maBbGUU08llbxD7sXFEkkXlwT7wqNn/whqaNpdhRSXPQLLaqCbqgaC/TMdQlLWpzNkO7w6vBOILDrY4ZyQUsOzmvgZQbsXcerdDlR1FLogDuIoex+zeCaAKPes2FP5RNbLi/mIU7UGP3zULVB9MnyKaxa2A1O86uiFm32ldpbe4S3IQ72/rb+oiW4z2VMXcRJs38638N7v19S3tzOUNB4dkRDMn/El0aIy7m6enk9cYWUmhik4d57xryIF9fTNyyV4l2YcUP2bGvaQhAYeyHu2
-X-Exchange-RoutingPolicyChecked:
-	eqVnHs3y5xDgk4oCTbIjjqXvJN1ldjDl3eICNnPlLrWUjRlMxD4gPNpDurGB8mZ3f8dIb8LdbE57hn3GsZqURm2Hxv+XmbofYnyTz7oAnXVYjL5//6ZcTI6gEzgXYxoDvdwU/SFGw8UKHzErKBYpcRZ/UIdWg8X5JnPqHQyLRDSp8h4HdTjeaWS4QF06czykaAObC7sXvy1mKS6fecCYdn1ehzrKjuee3vnGlhR2jZtfpoN7B0P+prYmD8OhRJCkOcttC8eOzkVQifsPYcXca0FoA/WRSmmzy0p0yJu38Rl+oZ4Jqq7yk49d+zzRb62NXpIUr/JqDrvMYy0eldVHVw==
-X-OriginatorOrg: opensource.cirrus.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2026 12:07:27.0368
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2ae62544-e2d2-4449-4a22-08dedce97a74
-X-MS-Exchange-CrossTenant-Id: bec09025-e5bc-40d1-a355-8e955c307de8
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bec09025-e5bc-40d1-a355-8e955c307de8;Ip=[84.19.233.75];Helo=[edirelay1.ad.cirrus.com]
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-SA2PEPF00001507.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH8PR19MB200841
-X-Proofpoint-ORIG-GUID: WNc0zRNJwd7YkTz_cb-_c7b3aeRPm-FQ
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA4MDExNyBTYWx0ZWRfX4PL5ZNDGw0IE
- JsNY8mebnARLUQtfl/slMzWbvzA7aNBr3hdA51Wm47AVsIkN4sLgBbp9D64ZqthgnlMIZnLLK64
- jZ8h8ypoP676w/xEZMeCv6d+Oy73HnE=
-X-Authority-Analysis: v=2.4 cv=YYiNIQRf c=1 sm=1 tr=0 ts=6a4e3d84 cx=c_pps
- a=3zFA2TB6y+4Z7TVRdmCe4w==:117 a=h1hSm8JtM9GN1ddwPAif2w==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
- a=8nJEP1OIZ-IA:10 a=RAioF0-LDSMA:10 a=s63m1ICgrNkA:10 a=RWc_ulEos4gA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=iX4cTi3TZMoOKdANLEfx:22 a=KfkQE9S9VqCBgivYGm0O:22
- a=IpJZQVW2AAAA:8 a=w1d2syhTAAAA:8 a=V9wza0oogtZu883x4ccA:9 a=3ZKOabzyN94A:10
- a=wPNLvfGTeEIA:10 a=IawgGOuG5U0WyFbmm1f5:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA4MDExNyBTYWx0ZWRfX00Nc+w9+6EZJ
- xFgTs6Fy3gU6aHbKVkZ7ggmR146dQhnKNBKEh5GcGsQT0ZcHLjeRnOF/dZUpn4FTbrBqGW/IAM4
- c8QiCzQrgJ9enDPDpSyWujRTyez+KtIsF31gx8JHCCjX7mfjYDuYhmPCEsZ++GmMT9xGhtvd84w
- XNaiB4fmMqd/uvYguxoOugQPk6FNjHK3NaAy8VMBKf5yfhRSetNifVI3UkKe+gucgI3donfjmG5
- zokVGkUFB32T1pSS2oKaYU2cpEoOlJ439DDpW8LcklDEfhL1fi+b8P/vyatKdhdLU77CkMBavJa
- K3F9IigrIW2+agbBJnGxUwiZLQUtsxNDMElIC6Re20YnO/3zNTRJY2lGCuN5HmOnqGtNkm7LDmi
- sfyAuhmihNeXm5wXbm+GQBAOETvEDXyW6DhpSb0qim6c0zGDbYoj1yPG4cFswVf+V7936obTu/4
- tPupsRPUKIH55obOiWA==
-X-Proofpoint-GUID: WNc0zRNJwd7YkTz_cb-_c7b3aeRPm-FQ
-X-Proofpoint-Spam-Reason: safe
 
-On Wed, Jul 08, 2026 at 01:15:18PM +0200, Uwe Kleine-König (The Capable Hub) wrote:
-> While being less compact, using named initializers allows to more easily
-> see which members of the structs are assigned which value without having
-> to lookup the declaration of the struct. And it's also more robust
-> against changes to the struct definition.
-> 
-> The mentioned robustness is relevant for a planned change to struct
-> acpi_device_id that replaces .driver_data by an anonymous union.
-> 
-> This patch doesn't modify the compiled arrays, only their representation
-> in source form benefits.
-> 
-> Signed-off-by: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
-> ---
->  drivers/mfd/cs42l43-i2c.c             |  4 +-
+Convert the OMAP HS USB Host TLL bindings to DT schema.
 
-Reviewed-by: Charles Keepax <ckeepax@opensource.cirrus.com>
+During the conversion, ti,hwmods has been made optional to resolve
+dtbs_check warnings. Modern OMAP platforms do not require this
+property, but it is still required for older platforms.
 
-Thanks,
-Charles
+Signed-off-by: Eduard Bostina <egbostina@gmail.com>
+---
+ .../devicetree/bindings/mfd/omap-usb-tll.txt  | 27 ----------
+ .../devicetree/bindings/mfd/ti,usbhs-tll.yaml | 53 +++++++++++++++++++
+ 2 files changed, 53 insertions(+), 27 deletions(-)
+ delete mode 100644 Documentation/devicetree/bindings/mfd/omap-usb-tll.txt
+ create mode 100644 Documentation/devicetree/bindings/mfd/ti,usbhs-tll.yaml
+
+diff --git a/Documentation/devicetree/bindings/mfd/omap-usb-tll.txt b/Documentation/devicetree/bindings/mfd/omap-usb-tll.txt
+deleted file mode 100644
+index c58d70437fce..000000000000
+--- a/Documentation/devicetree/bindings/mfd/omap-usb-tll.txt
++++ /dev/null
+@@ -1,27 +0,0 @@
+-OMAP HS USB Host TLL (Transceiver-Less Interface)
+-
+-Required properties:
+-
+-- compatible : should be "ti,usbhs-tll"
+-- reg : should contain one register range i.e. start and length
+-- interrupts : should contain the TLL module's interrupt
+-- ti,hwmod : must contain "usb_tll_hs"
+-
+-Optional properties:
+-
+-- clocks: a list of phandles and clock-specifier pairs, one for each entry in
+-  clock-names.
+-
+-- clock-names: should include:
+-  * "usb_tll_hs_usb_ch0_clk" - USB TLL channel 0 clock
+-  * "usb_tll_hs_usb_ch1_clk" - USB TLL channel 1 clock
+-  * "usb_tll_hs_usb_ch2_clk" - USB TLL channel 2 clock
+-
+-Example:
+-
+-	usbhstll: usbhstll@4a062000 {
+-		compatible = "ti,usbhs-tll";
+-		reg = <0x4a062000 0x1000>;
+-		interrupts = <78>;
+-		ti,hwmods = "usb_tll_hs";
+-	  };
+diff --git a/Documentation/devicetree/bindings/mfd/ti,usbhs-tll.yaml b/Documentation/devicetree/bindings/mfd/ti,usbhs-tll.yaml
+new file mode 100644
+index 000000000000..78f7a109392c
+--- /dev/null
++++ b/Documentation/devicetree/bindings/mfd/ti,usbhs-tll.yaml
+@@ -0,0 +1,53 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/mfd/ti,usbhs-tll.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: OMAP HS USB Host TLL (Transceiver-Less Interface)
++
++maintainers:
++  - Eduard Bostina <egbostina@gmail.com>
++
++properties:
++  compatible:
++    const: ti,usbhs-tll
++
++  reg:
++    maxItems: 1
++
++  interrupts:
++    maxItems: 1
++
++  ti,hwmods:
++    description: Name of the hwmod associated with the USB TLL.
++    $ref: /schemas/types.yaml#/definitions/string
++    const: usb_tll_hs
++
++  clocks:
++    minItems: 1
++    maxItems: 3
++    description: A list of phandles and clock-specifier pairs.
++
++  clock-names:
++    minItems: 1
++    items:
++      - const: usb_tll_hs_usb_ch0_clk
++      - const: usb_tll_hs_usb_ch1_clk
++      - const: usb_tll_hs_usb_ch2_clk
++
++required:
++  - compatible
++  - reg
++  - interrupts
++
++additionalProperties: false
++
++examples:
++  - |
++    usb-tll@4a062000 {
++        compatible = "ti,usbhs-tll";
++        reg = <0x4a062000 0x1000>;
++        interrupts = <78>;
++        ti,hwmods = "usb_tll_hs";
++    };
+-- 
+2.43.0
+
