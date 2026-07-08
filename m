@@ -1,145 +1,108 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DFEE21ABBD
-	for <mfd@lists.linux.dev>; Tue,  7 Jul 2026 21:31:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56DF03F86F3
+	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 07:43:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783459895; cv=none; b=fVeGuNfKClGX7+DMufXL369tP3qFh8KEEPahMG4NIA250bso9DboeJ8Ez6KrzsDKbOyEJqRiz/6pvoxIvl09mwzQwxZYqO8FXd507ifLGdTRF3RhH5ySl92sS/ocOUgMkO7mcRQCxRT/g0QEfv9KgIIKTceo57BEaBnHEa8cN/w=
+	t=1783496618; cv=none; b=MQB8xkIdIuVFkbnD7jh0rArY1fqcQbWoNpxHSMJVi3+Scahv8SITXlpFOWv7oYZ8TaHkpp5vSbxD6DAFb8A36GazyuSJKc5ScWE+jtKOZUKyMfEu9mCezLXuZ+NwGJmQ+HZWjwEtWb9VRVhtYFHZNAtCe28+LUXoyGT3etk3RIk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783459895; c=relaxed/simple;
-	bh=yQm1Z0S/bKXn+Y8bKc4mpLWpk9pnjNpVuSGhFko3B90=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=bPP9OBpU75gTz1dWz5FesgYLM1Z+c1ZDMO7emnE+x5QXcZVui+IJGZ4VMgPE5yJC4JaALMIOieW4eVQWku5WFsY96i/9pNR9kqYCUJc5R2c1BpmGPKG+phHP5Rf+obA2RWwSNPT1C2NVAuVZJtWMFng+KnYAnudp6K1KKcxxkqM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bFIwdxPN; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783496618; c=relaxed/simple;
+	bh=wqspe9peDUDf7Lj0Ckvg+Ou41duj870AZXBlowe/bLA=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=KJuVNRZrTu4tTfHcrgy7nuYz4U5PR00dzrv1MJc87lCeDrj16/qsnOA6W+utLUdHR3WxLNX+NOttDGVMp0Zy1rZ/vjZ4mZUmGd7qBX7nMYPUnx/Jhetg6T4H1rlpZrTcFSxC9Q2KUHUbuyQAJKQtgfEjToWsBAFM/hjdgZJX9f0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UdVixJQY; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bFIwdxPN"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B16FE1F000E9;
-	Tue,  7 Jul 2026 21:31:33 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UdVixJQY"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A81CA1F00AC4
+	for <mfd@lists.linux.dev>; Wed,  8 Jul 2026 07:43:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783459894;
-	bh=25Xj7d2C3HA6kWDj0tDvEIdzBBCcpznbH5SWdl68mjI=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=bFIwdxPNks6myTRl3IXg9AlIEgbCE6Gv0HzMxCSxNjkL45AfbWeklgJ8GbKb0ogA2
-	 8hg8CSH+oPjnHOa+chUgf+hJpB2AhZxvhegRylvxeWX35L7uCe3DMqTFGpLiQ+mSnN
-	 U3GNT+493y5qxvsWhNx37mSUfsOyBlar4vzdoD/ormWkwAGurc4GhGgW6gxvNAJbTX
-	 dMV5kNmcfNDt3+iHFNIQ7JnDXKJxDOBxD6seAmNsWtrUg7KNQklqFKA0owgYY7fSwy
-	 9RuDUmK0XVmqNBgjwd9F6eXYbtHBr/eSwSb3sJGiIc9+42qzimSDbTRif/PHFDXRLR
-	 l2f3/zRqdJ1kg==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RFC v2 7/7] mfd: ls2kbmc: Capture the reset event of BMC
- through GPIO
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Miao Wang" <shankerwangmiao@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260708-ls2kbmc-mod-v2-7-2afdd1741766@gmail.com>
-References: <20260708-ls2kbmc-mod-v2-0-2afdd1741766@gmail.com>
- <20260708-ls2kbmc-mod-v2-7-2afdd1741766@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 07 Jul 2026 21:31:33 +0000
-Message-Id: <20260707213133.B16FE1F000E9@smtp.kernel.org>
+	s=k20260515; t=1783496582;
+	bh=wqspe9peDUDf7Lj0Ckvg+Ou41duj870AZXBlowe/bLA=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=UdVixJQYfC8sGwm2LkLtOuhdj8rGXYZvhM/nEvj78/GfwKlgApbA2mM7v4TKCDBtM
+	 TkD+j6IdxnEthYn0jShnTGRcHvUl3uWT0ZDhmk6v26dbgga280PtMUZDwzHv6zk6w9
+	 Yi8sszDGyw24AvoZisXpI7QNHqYDfzKTPKFdZGUiCUBuP3uOnWP2zicuVvIaA40jxJ
+	 EVB46mt6atPqufA0m9s4aa5bEOsisUWJKTjqkHfv44JLBSqWrvCACa81iSvV/e8lQX
+	 OTmHzverjKM3OU5lQEPWgn0fZKvlavTlsO4QonPQHPIENoNkOtr3nIiF1feGEE3W9d
+	 dt2lpEp1ZXFPw==
+Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-5aeae771c49so466636e87.3
+        for <mfd@lists.linux.dev>; Wed, 08 Jul 2026 00:43:02 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RpnIulcVbHN8Wjo7BFzuKGHvu1uGqQpoy0QAvQg5XIgngPdYiQgP1xDsV46dzozl+vU+oQ=@lists.linux.dev
+X-Gm-Message-State: AOJu0Yygxn7H3Ox45zyyVSidEBahB3S8Ijwy4zx0P3nCYPo8vmG9vXjY
+	eapt0YN/mvDZRBs7FTETiODqJ1DzQaWmGE3kSh83yCXjFsES/xkSC58RvHbxiGzP+DAFb7TIGhs
+	+qqBNjRqKo9ECElWhCXq/lhdHyp48IBM7mRqPn/SCzQ==
+X-Received: by 2002:a05:6512:3a8:b0:5ae:a9eb:c5c3 with SMTP id
+ 2adb3069b0e04-5b011478162mr274920e87.61.1783496580641; Wed, 08 Jul 2026
+ 00:43:00 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 8 Jul 2026 00:42:58 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 8 Jul 2026 00:42:58 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <ak0jyUbNonSRiP_g@ashevche-desk.local>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+References: <20260706-pdev-fwnode-ref-v3-0-1ff028e33779@oss.qualcomm.com>
+ <20260706-pdev-fwnode-ref-v3-5-1ff028e33779@oss.qualcomm.com> <ak0jyUbNonSRiP_g@ashevche-desk.local>
+Date: Wed, 8 Jul 2026 00:42:58 -0700
+X-Gmail-Original-Message-ID: <CAMRc=Md7-XMBKpdPuZ4=epfTn6F-PXKJBZNPGuz5xbVy58BHsg@mail.gmail.com>
+X-Gm-Features: AVVi8Cc97SNnhCE85729H_fOi3Wx8wY1APMX-PhjHPSFVtKB-jxewFEQvchpN2c
+Message-ID: <CAMRc=Md7-XMBKpdPuZ4=epfTn6F-PXKJBZNPGuz5xbVy58BHsg@mail.gmail.com>
+Subject: Re: [PATCH v3 05/20] driver core: update kerneldoc for platform_device_alloc()
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Lee Jones <lee@kernel.org>, Mark Brown <broonie@opensource.wolfsonmicro.com>, 
+	Thierry Reding <thierry.reding@avionic-design.de>, 
+	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>, Andrew Lunn <andrew+netdev@lunn.ch>, 
+	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+	Srinivas Kandagatla <srini@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Vinod Koul <vkoul@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>, Danilo Krummrich <dakr@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@kernel.org>, 
+	Madhavan Srinivasan <maddy@linux.ibm.com>, Michael Ellerman <mpe@ellerman.id.au>, 
+	Nicholas Piggin <npiggin@gmail.com>, "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, 
+	Andi Shyti <andi.shyti@kernel.org>, Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, 
+	Robin Murphy <robin.murphy@arm.com>, Doug Berger <opendmb@gmail.com>, 
+	Florian Fainelli <florian.fainelli@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Ulf Hansson <ulfh@kernel.org>, 
+	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, 
+	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
+	Matthew Brost <matthew.brost@intel.com>, 
+	=?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, 
+	Rodrigo Vivi <rodrigo.vivi@intel.com>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, Peter Chen <peter.chen@kernel.org>, 
+	Paul Cercueil <paul@crapouillou.net>, Bin Liu <b-liu@ti.com>, 
+	Philipp Zabel <p.zabel@pengutronix.de>, Maximilian Luz <luzmaximilian@gmail.com>, 
+	Hans de Goede <hansg@kernel.org>, =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
+	Krzysztof Kozlowski <krzk@kernel.org>, Benjamin Herrenschmidt <benh@kernel.crashing.org>, brgl@kernel.org, 
+	linux-kernel@vger.kernel.org, netdev@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org, 
+	driver-core@lists.linux.dev, devicetree@vger.kernel.org, 
+	linuxppc-dev@lists.ozlabs.org, linux-i2c@vger.kernel.org, 
+	iommu@lists.linux.dev, linux-pm@vger.kernel.org, imx@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, intel-xe@lists.freedesktop.org, 
+	dri-devel@lists.freedesktop.org, linux-usb@vger.kernel.org, 
+	linux-mips@vger.kernel.org, platform-driver-x86@vger.kernel.org, 
+	mfd@lists.linux.dev, Manuel Ebner <manuelebner@mailbox.org>, 
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
 
-Thank you for your contribution! Sashiko AI review found 4 potential issue(=
-s) to consider:
+On Tue, 7 Jul 2026 18:05:29 +0200, Andy Shevchenko
+<andriy.shevchenko@linux.intel.com> said:
+> On Mon, Jul 06, 2026 at 02:44:17PM +0200, Bartosz Golaszewski wrote:
+>> Users of platform_device_alloc() + platform_device_add() must not modify
+>> certain fields of the dynamically created platform device object. Update
+>> the kernel doc to say which fields are affected and which functions to
+>> use.
+>
+> Consider using __private checker attribute for them as well. It will make
+> sparse scream.
+>
 
-New issues:
-- [High] TOCTOU race and API misuse in edge-triggered GPIO interrupt handle=
-r.
+Sure but let's leave it for another series.
 
-Pre-existing issues:
-- [High] Unconditional return of IRQ_HANDLED in shared PCI interrupt handle=
-r breaks interrupt sharing.
-- [High] Executing a 10-second busy-wait inside a stop_machine() callback t=
-riggers hard lockups.
-- [High] jiffies wraparound bug in rate-limiting ignores interrupts for the=
- first 6 minutes of uptime.
---
-
---- Patch [7]: [PATCH RFC v2 7/7] mfd: ls2kbmc: Capture the reset event of =
-BMC through GPIO ---
-commit 4fddebf5ba83cb02d076dd7162e7b2b6d2116f26
-Author: Miao Wang <shankerwangmiao@gmail.com>
-
-mfd: ls2kbmc: Capture the reset event of BMC through GPIO
-
-This patch updates the driver to capture BMC reset events using the standard
-GPIO framework rather than directly accessing fixed memory-mapped registers.
-It attempts to find the GPIO from ACPI _CRS resources and falls back to a
-fixed address if unavailable.
-
-> diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-> index f87224105b372..7187b2dfddc3a 100644
-> --- a/drivers/mfd/ls2k-bmc-core.c
-> +++ b/drivers/mfd/ls2k-bmc-core.c
-[ ... ]
-> @@ -334,6 +326,22 @@ static irqreturn_t ls2k_bmc_interrupt(int irq, void =
-*arg)
->  	return IRQ_HANDLED;
->  }
-
-[Severity: High]
-This is a pre-existing issue, but does ls2k_bmc_interrupt unconditionally
-return IRQ_HANDLED without checking hardware registers?
-
-The PCI interrupt is requested with IRQF_SHARED. If another device sharing
-the IRQ line fires an interrupt, will this unconditionally claim it and fal=
-sely
-trigger the BMC recovery process?
-
-[Severity: High]
-This is a pre-existing issue, but does the rate-limiting in
-ls2k_bmc_interrupt drop interrupts during the first 6 minutes of uptime?
-
-Because last_jiffies is statically initialized to 0, and jiffies starts at
-INITIAL_JIFFIES (typically -300 * HZ), time_after(jiffies, last_jiffies +
-LS2K_BMC_INT_INTERVAL) evaluates to false until jiffies wraps around zero.
-
-[Severity: High]
-This is a pre-existing issue, but will ls2k_bmc_events_fn trigger a hard
-lockup by calling stop_machine()?
-
-ls2k_bmc_events_fn registers ls2k_bmc_recover_pci_data to run under
-stop_machine, where it executes a 10-second busy wait
-(mdelay(LS2K_BMC_RESET_WAIT_TIME)) with local interrupts disabled on all CP=
-Us.
-
-> +static irqreturn_t ls2k_bmc_gpio_interrupt(int irq, void *arg)
-> +{
-> +	struct ls2k_bmc_ddata *ddata =3D arg;
-> +
-> +	int val =3D gpiod_get_raw_value(ddata->reset_gpio);
-> +
-> +	/*
-> +	 * The GPIO is active low, so when the value is 0,
-> +	 * it indicates a reset event.
-> +	 */
-> +	if (val =3D=3D 0)
-> +		return ls2k_bmc_interrupt(irq, arg);
-
-[Severity: High]
-Is there a race condition here that might miss reset events?
-
-Since the interrupt is requested as edge-triggered (IRQF_TRIGGER_FALLING),
-could the physical line have already returned to a high state by the time
-this handler executes? If gpiod_get_raw_value sees a high level, the
-handler returns IRQ_NONE, which could cause the spurious interrupt
-detector to permanently disable the shared IRQ line.
-
-Also, does using gpiod_get_raw_value instead of gpiod_get_value
-bypass gpiolib logical polarity abstractions (like ActiveLow from ACPI),
-potentially breaking active-high reset configurations?
-
-> +
-> +	return IRQ_NONE;
-> +}
-[ ... ]
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260708-ls2kbmc-mo=
-d-v2-0-2afdd1741766@gmail.com?part=3D7
+Bart
