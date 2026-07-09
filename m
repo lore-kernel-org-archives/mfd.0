@@ -1,72 +1,73 @@
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29D1D3CF022
-	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 20:33:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 170844499BD
+	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 20:40:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783629186; cv=none; b=g2grRysGdXDj0cIXFRe2yShcIKdFTiaDjYuI24Qd0wvshJhEr0ygTP/y3aCW4tAycYg3CYa0xlW3I2FlHx1kS4b5DU+qUApJYiCiaNb6z7w4CsUNmc1PZ2oPsihjFGqh9q2N/wV2rUHVp0WZrPxtaRZ5MUrDNg83W2wuwNh0EDY=
+	t=1783629643; cv=none; b=GwRWKXTOm/DdOkkVaJ6/loUSwDHaqBE/ABt0j5okWuXt8Ru4XK0/Q7rZpxc2YvNukKbD8gamYRnv4vOdjubkAMxIzsw2oODYUBjH1B8wOKjfD2UvGgcOw/wd1+hHDJd7dkigeuEpjJgzURTjArhIf6L1tl40ih241WYVca2mqPk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783629186; c=relaxed/simple;
-	bh=Z3GPFTtIXUelD1/kL+jl53B7oaCT5o/N6J9wMMT+u6Y=;
+	s=arc-20240116; t=1783629643; c=relaxed/simple;
+	bh=s3/Onw72S9dk93eCRqLYcz1O1NY3X9ekRePWFirb7LE=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=gFToee2jk9EzaFrKyvefOqWLyw/SKm4gbMe57cmb0MCUJaBJ3hTwMlPb7WZYJBJz3MsTaACqkeplfE8zodvM5INf8LzRrMi8a9pozoVhYOt8KuCWdWE2pblHWW+wTOok1xpdJvy6ySsgfrCxe/WHBDm5lOYvZ2lu6qXiCHGvWnI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=S9bJ54BX; arc=none smtp.client-ip=209.85.128.42
+	 Content-Type:Content-Disposition:In-Reply-To; b=lZGrPuE+TEfjy/vbJcICusVG2QpWMkjHIObcuqNMfX14WZCNCugq2N5IocNGW7rQ6yAKThJrMpdX5XYcp66FhVn+ZFWOoAgZmIYgidaNaDg20lWkabcg7Wryx40MpOvAGfGlyzP8uD+NSi+QNMKaIuLwB7/14QKuOgl/HnLIjVI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=L53K0oat; arc=none smtp.client-ip=209.85.221.52
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="S9bJ54BX"
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-493b7612475so1733085e9.3
-        for <mfd@lists.linux.dev>; Thu, 09 Jul 2026 13:33:03 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="L53K0oat"
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-476d8e647e9so346504f8f.0
+        for <mfd@lists.linux.dev>; Thu, 09 Jul 2026 13:40:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1783629182; x=1784233982; darn=lists.linux.dev;
+        d=baylibre.com; s=google; t=1783629640; x=1784234440; darn=lists.linux.dev;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=BXSrYaUOJbvG4vQ0zkspsYCVmoDgSY1e9GfRz4gqWps=;
-        b=S9bJ54BXRxbIHG8M7qDIVxNk0JsbjTSYVZhAu1CShY5tCzRObtRtg11NfW2/1yQoHb
-         cmZ76qsjeYUjgk9L0cLdf4p2DR2bXsNyhYkejx8buL+gnUM/MavFoK+Wr0l5u/iwe/ZE
-         v8Z+RQ2hBuQ2tPAVtY9zR96byW+5YjCMwWGHZN8D6+j+gNbrFxlxa5TAhZ4zw67yt/GI
-         Y5cWWZaYRhtNfB2oxIsDiYK+D0WPj6zO6g1seF/ZJWf9yiMhjSVyLNJzWi0zoAOhiOMO
-         pe2xblvAyGLQIRTcHTTfBv5AhKZV/KZf3MU4WEAR+MhZBZSlBT5iojdkMXgvhSVUEUI9
-         7Zog==
+        bh=s3/Onw72S9dk93eCRqLYcz1O1NY3X9ekRePWFirb7LE=;
+        b=L53K0oat8Q4tERwNe0h9IhMYYxA9qAAEoHJis/mQc1jXW5dmwxOTaDbIxL3/kv+wzH
+         +Am+0a6Jelm6RuE/sCqpU2L5MBEVKuVbaKjsp2MA496yCT5G/F1oULWKKVRr/+fnHX/0
+         NF3MxGOUPKX8yWBiNSncoY8ALAbEgN54tDnllsH7lyNxWGs6GlqZp1r2Gy5IQQCNEb/H
+         ZzbPcfO4mogsl6tDXdxtgmka+CbgD6HP9Pzus3WU7YrWtinBQI3Tc7UsWOH15FuiCqio
+         ZZg/gT5/7jDGn8doAGInQVYznC1ACjJ0tBdKtLV3kwcPC26s5/jlr7ygEarim7hJFICr
+         2iBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783629182; x=1784233982;
+        d=1e100.net; s=20251104; t=1783629640; x=1784234440;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=BXSrYaUOJbvG4vQ0zkspsYCVmoDgSY1e9GfRz4gqWps=;
-        b=LijlH4ASK21bz0sGo9yWmcacHogkEcyq9bdMx5/BnAEwWhBPb5paGPEY4Zptfjgr2L
-         UKcZ1hSHOI2QTJpcvotOxlL3/VSWJmUptw6xA6vpI8CQ3G4jLwGOziV7vzwY1OEPDwkT
-         7u78CX63BMBfSeGPXn1fIrsMPuti6BVnEd9P/bAAo9oWmFaHsGyezpoQ6OnB/W+lu8Ix
-         8t6dyuZeT1MeQLRd/Znwn396thEif8aw4p1xJGcSNwQ2m2VCEbJ1G4YsPhTAdAQl53fa
-         P1BSV2DluXszOWRsSwr/HcerhDqFGkQVGLFtiq2DoPyRqRghB5JuejF0rfslNPk841Fe
-         xP5g==
-X-Gm-Message-State: AOJu0Yyo9X7ov6sgXOsAVIReUQRZ0QAwZTFvvNgg5M3OuaZj/O7dM4ui
-	9eUWHBrm+hZXRMDi0H1hf89DzIFz9N9a7QgMkgzO36EaatMrKrX+MSug53pdR+UPMqk=
-X-Gm-Gg: AfdE7clqfgXT9qNrxZTvysMCKtjSgQ+96e9snoVJBm3s+m4GvxFR2o4t6ouWbcQdccC
-	BfglVpadGa4rHhMaP21R52kZUs4haUlZBJouBL0w/jFtmDnr0BHXuvClCGOPHiKme5BopuMORBx
-	CDzXKHgk0l0KzY3QJKO+gfjq1JKTdMnz2d52+sRBLg84h65DfdkGmFmAWxAAQoiwCR1cYUS15TW
-	y78ArQb/Bw1HYA+ZWlFG6HCH8paI7y8CpoOcKE1d2zipLRnGCH0IAa67QoO+zITOk3GfZ+QgxTW
-	8s2MPQeJl6UboBFw0eXfgk22DJoJmD11HgfWUETqXtN574PY7UO/1Mk8eX6ILF8pk8+tn1fhChK
-	jlht/p5De22EsYqpG62GMhmoOF1LL9jd70Bz7udTgRDlR2IEZ1LaBA3V3+LbKv9GQtmdsADe9ls
-	VfehocLdIA1gcuvHn88Z94vstBKaps/fVoSRV4oChoO1DLap3KUWNsggdEVw==
-X-Received: by 2002:a05:600d:4452:10b0:493:ee2d:d221 with SMTP id 5b1f17b1804b1-493f22748eemr10766375e9.31.1783629182474;
-        Thu, 09 Jul 2026 13:33:02 -0700 (PDT)
-Received: from localhost (ip-091-089-005-024.um28.pools.vodafone-ip.de. [91.89.5.24])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-493eb742a49sm83267725e9.12.2026.07.09.13.33.00
+        bh=s3/Onw72S9dk93eCRqLYcz1O1NY3X9ekRePWFirb7LE=;
+        b=BEs7bT9rXQhrcYCL0v1nlJa8dUMmlUTuQg0yNl5evVR1YGe0gBb/aMzT6VSQ94yHCS
+         1uoSh90cN6WkrVBw8Lv5HOjuWIMBFOnwPHKn48RrKqSC6KNNRmgVd8ddee7fbBK0iNaZ
+         NqofOI3VH+BbWPj3yuexGob5jeZF6m1bQd+d/RbV6FWx1tbFepkD2Q8JS0KVcTHqX45A
+         Lariz8vdD+Q2dGGsiCtTkZbBQlSR1rNAytEkUQ40RQFk7lwHZNvNmxaKteCecJoxbSTd
+         Y+0Mb0WNYkw2AjaWHQ3T8HVlXCMopy52lKiKOK80vLlsYhIcKHSk9THFw8I7a5zBl5Uy
+         lDQA==
+X-Gm-Message-State: AOJu0YwuQbr66EHKn3TnG0WorlwlNZeGMXgIE+fsKHv/16Y55m5P7qI6
+	kicfPT9exVgBdOfs/7/hzsw0fMIb24NlVuTiNeKHCqhefmxgbzCvBMgVFMHz6boZOso=
+X-Gm-Gg: AfdE7cmC1DB0X9S2psJ/dxGH1eRqN3U65/Pp4Fxv7J+IobL9GHrXQmkXBCITPHRux2g
+	St8woeAzWHBgmC1KXdFh5WV0o8AITb9aJyj5NAm6DW8F2CddC4iKmMDHroPOxw/RY1DZD0q9e19
+	VM8aUOhPDOFBgv4YF1CvBRXZXGZ1Pe41hS5bI0h3ajzH9EJc/v2FhNLxyP8aNQWV3XQii4+GR75
+	kZdn3au0oKKJEzS97zcW6sRGPczoVpFi/eDx2AChjT3ncY/M6xCQU+EpYbKrtOS94HsD9i9xHQw
+	RZFsPBSZ6xamLIWrN50F429N6VPWmaA7B4x0fsmcbPNrmhAGtpjBVq52DQqA7maYl6VtAysuWDv
+	7T8KfUrsh9RxFnQrPIhAafBl3B3Gqrh09cTowcjtEfrv3fbs2rL2NZGei8uZEq64QQrB2vzZq2I
+	7Ppmq+d6P8f5iWeLzBow==
+X-Received: by 2002:a05:6000:4b04:b0:47e:9f03:e542 with SMTP id ffacd0b85a97d-47e9f03e597mr1591471f8f.45.1783629640468;
+        Thu, 09 Jul 2026 13:40:40 -0700 (PDT)
+Received: from localhost ([2a02:8071:56d1:2de0:1d24:d58d:2b65:c291])
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-47aa039ae44sm51629344f8f.23.2026.07.09.13.40.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Jul 2026 13:33:01 -0700 (PDT)
-Date: Thu, 9 Jul 2026 22:32:58 +0200
+        Thu, 09 Jul 2026 13:40:39 -0700 (PDT)
+Date: Thu, 9 Jul 2026 22:40:38 +0200
 From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>
 To: sashiko-reviews@lists.linux.dev
 Cc: mfd@lists.linux.dev, lee@kernel.org
-Subject: Re: [PATCH v3 03/23] mfd: kempld: Simplify device abstraction
-Message-ID: <alAFPoJkhMKP13FO@monoceros>
+Subject: Re: [PATCH v3 10/23] mfd: Drop unused assignment of spi_device_id
+ driver data
+Message-ID: <alAGbQ3y3oO5L8av@monoceros>
 References: <cover.1783615311.git.u.kleine-koenig@baylibre.com>
- <03fa806b7c0fa6a68d34384f694cbe83a17fba90.1783615311.git.u.kleine-koenig@baylibre.com>
- <20260709170704.2D2A21F000E9@smtp.kernel.org>
+ <0f1fd857e1b34e69f83fbc784b10d2dc608b2494.1783615311.git.u.kleine-koenig@baylibre.com>
+ <20260709170902.5BD381F00A3D@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -74,59 +75,44 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="zoixihdx2dhnejiw"
+	protocol="application/pgp-signature"; boundary="tlslylt5cxycfent"
 Content-Disposition: inline
-In-Reply-To: <20260709170704.2D2A21F000E9@smtp.kernel.org>
+In-Reply-To: <20260709170902.5BD381F00A3D@smtp.kernel.org>
 
 
---zoixihdx2dhnejiw
+--tlslylt5cxycfent
 Content-Type: text/plain; protected-headers=v1; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v3 03/23] mfd: kempld: Simplify device abstraction
+Subject: Re: [PATCH v3 10/23] mfd: Drop unused assignment of spi_device_id
+ driver data
 MIME-Version: 1.0
 
 Hello,
 
-On Thu, Jul 09, 2026 at 05:07:03PM +0000, sashiko-bot@kernel.org wrote:
-> > -		ret =3D platform_device_add_data(pdev, pdata, sizeof(*pdata));
-> > +		ret =3D platform_device_add_data(pdev, pdata, sizeof(pdata));
->=20
-> [Severity: High]
-> Does this code pass the size of the pointer instead of the size of the
-> struct?
->=20
-> Looking at kempld_probe(), pdata is a pointer to the static
-> kempld_platform_data_generic structure. After the changes in this patch, =
-the
-> struct only contains a single int.
->=20
-> Since sizeof(pdata) evaluates to the pointer size (typically 8 bytes), co=
-uld
-> this cause kmemdup() inside platform_device_add_data() to read past the e=
-nd
-> of the structure and trigger a KASAN global-out-of-bounds read during ACPI
-> platform device probe?
+On Thu, Jul 09, 2026 at 05:09:01PM +0000, sashiko-bot@kernel.org wrote:
+> [Severity: Low]
+> This isn't a bug, but does the commit message subject omit the mandatory
+> driver name component?
 
-This is a real issue. Will address in v4. But I wait a bit before
-sending that.
+As before, I think this isn't justified. The patch touches three drivers
+below drivers/mfd, so there is no unique driver name component.
 
 Best regards
 Uwe
 
---zoixihdx2dhnejiw
+--tlslylt5cxycfent
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmpQBXgACgkQj4D7WH0S
-/k4RPwgAmYVSgTTgDqfIit7NF7lQ6cM1mSeCrDBWa9q+UuB4LP3DQ5/zoTuBZjk5
-S06QoOT4Agdw49etj5uFfmfYWq4zKB7NNygAkQqTwyxFUYPIzWjtOd0apVK3ijLL
-2Z+p/aPPM1o0vhZFp6t106aHJlhhzrkFI88X0GDEWBnQgL2TVgzdxKiRzeXlqNxU
-+iJVJBZb2IFMvwtj59wxIB7+q0RZwDJN7yTR/sGGn8Rv5bEZYbwUT2ecBouJJKNU
-E1R0RJfw3N2SjPW5Rs7sYfgrgio/3Y41yimbNgHyz1rWVuyhmWHo8d9i6Wdma3Dk
-ljXknnLpm1glQOjEnqc3n8F3bIsXIg==
-=FjBW
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmpQB0MACgkQj4D7WH0S
+/k6kpAf9EeakYkLHNwsQ+OLp7eYfuwMapxmCF989pKRpwo9r3VMjEXsRzM0ybBty
++c+Hr7yDhElPZt5JbaaZv0dtc11y3Ostnl0Em/05QDWCoW+bQLpqPvD0ZFoPtGuR
+Neebp6Ddjg331srQiKNWyQoVFMfk/c4lMoGwBeObZ1fm+vLVr35Nb5njP1ba0M6X
+Y7adP1KR5ejsmU8o6hlgjrilSFM/TfuOuW/gR+DOiPTNORBIJllLYExHc1IbDu4t
+x7r8s3DKD3l0loqeDAXgzrTwUAjoQoBepKN73bnxolObcrj4pQSXfYRMN4cTSkzO
+o3L/kJCCeFivOORca7CRhM/bCw/Fbw==
+=Xn5u
 -----END PGP SIGNATURE-----
 
---zoixihdx2dhnejiw--
+--tlslylt5cxycfent--
