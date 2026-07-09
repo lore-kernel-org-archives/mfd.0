@@ -1,80 +1,87 @@
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D526C435EDC
-	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 17:00:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F37E43847F
+	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 17:00:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783616431; cv=none; b=fUkiAPU+irigYS24go6jJxUr/krQ5Ny2HWVS1z3J9BddY8SQaizQr9b/jLxZ/PvdTtwN7E+HSaGzixg5lb60XuOm5aBYcW1gEF6+kfr/YQe0bF8S0tucNWj5E8SzKh3Lt4Zws/ZdMDcGWvWCop+gEyDSqPMwNcTJqoVB2JD5PuI=
+	t=1783616433; cv=none; b=GkM4iQHRw/AUh8jtr+E2ZxPsVorgOOw+O9Ef6hLVwZSCvmYt6izjy5cKptcF+xDcff5u8ZH+sxakWUU6mi+wPM8G7MfKCrBROJEhfgF8PiHR1sJG1In1gyhejSfVNE9Z++T0cXy+2n9eWX3Gw2q5ZqrqijfFOATgoP7ZFfCSyNk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783616431; c=relaxed/simple;
-	bh=Yocslbbh2Ly5jl9ltyhoSfTRYYTxd9v0B/P+M4FNVM8=;
+	s=arc-20240116; t=1783616433; c=relaxed/simple;
+	bh=fHu8p1/UogKtizmJccP+7S56UMfTT1qzheFADHKU4CQ=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=DoIGtZb8Ug2SaMOCeR7LfJMS57QI2IgmCdMBPSUubfCECcNYt0xvv/mRo7nAI0iIWGWP9kM7eFZiZJdIQPW7uNAm8jP5NPlGmUxmB06U7yAowtK9RxFrVyEiyfIYRf+Q+UiRU/6+tKLRyIWqlDyBWuw6WKJkMj7CPwwwmi65yPE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=GhwMX81N; arc=none smtp.client-ip=209.85.128.45
+	 MIME-Version:Content-Type; b=UmDH3Ze/u2NVuOGkeUyGTjkd2/ZgNIZarL4vg5fUb0FluqEHAEf0Q90RJJZZp8frPKcKHCFPI8J4Ie2I9sr17FpU4EpTqY3FxP1PvIBh7IPwW+foDAlLpK1JQ98PinFMPgKhttr1iZH9asAWAscPDgYU8NPqfoRkoFoLC+JJn4Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=pw2a0OXq; arc=none smtp.client-ip=209.85.128.52
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="GhwMX81N"
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-493c83474ddso195235e9.3
-        for <mfd@lists.linux.dev>; Thu, 09 Jul 2026 10:00:29 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="pw2a0OXq"
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-493ece78b0cso319045e9.0
+        for <mfd@lists.linux.dev>; Thu, 09 Jul 2026 10:00:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1783616428; x=1784221228; darn=lists.linux.dev;
+        d=baylibre.com; s=google; t=1783616430; x=1784221230; darn=lists.linux.dev;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=4cwjDj+7KzBcAXPoTLJ3JC9JSJmT9wQOrir5TeBiIjs=;
-        b=GhwMX81NaDs/vH+e0sIRf74Ekt9ke2AOLRXriqrrqwabMtnvdomDpNUCfjIoPT7mi6
-         B8qvpj6mFeNaSZmWWMBAawLBoUdZEEsaHapYGabfkmxlAmls46LUwg6ngM/WdMybkB+B
-         0G6UES8nJpxcqhbPhxFWnp+UMQZw0Z6MGKEw4bdQ8/kV9JK/mqYrtcYtnHgN+RCmv/h+
-         FDF+kKM7cKkVeqpRGBtQGUaInTkAv0KogkT1Kl59GwhYaWWIO2nLNGeAQ8xtQl9avQCh
-         /E471thShgom/8kZ5tJmguWoQWAB7wn7hIcauhjtPbPKT4CAeCinT3c13hqqT+KisNfa
-         LYug==
+        bh=q5tm53Wh5ljVEJMF/yE7yx8lvckk6MSR3QTqJKQvyQU=;
+        b=pw2a0OXqE8stYrt/rVPCrmzbSO/M2W+HVKgNmo8AOGCe2MyiVFPDTYED5+TTHa2GRc
+         xA3ej2zZiMMVwVIqQOwnz95MgP3tCPyR6T75Ofxbifwugryc//0bnf+t/gX9E+1CBBdd
+         uKTt404sBRVWvEq+byG3Y2zOkuTn1bjMU2tyx9IRAdAaYCHfoJV9SyDBlN9G5stdkUEM
+         ly/tg3lNUIwquCHojKp+2kuOB8W0+jMxL/ihzKLmXGg1EmPh9Kud87syWLUxf8gTUMs9
+         3kMsKB6LFi4KcKhJ0wZtCS7rmno9j6Yo/BxCd8mXlTNOqHijdhWTIOTewIGiL1YfaMLo
+         hlZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783616428; x=1784221228;
+        d=1e100.net; s=20251104; t=1783616430; x=1784221230;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=4cwjDj+7KzBcAXPoTLJ3JC9JSJmT9wQOrir5TeBiIjs=;
-        b=aUXSmAxicEsF5qAWzJOujwareZ5Qa7UtiyYme50DXkdvGvG2Zlv324uyAF7hrKWSAz
-         BpPm+H/iV23NNdzQQntvPZiYN4m4Hv+YIpqriJPruIaMS74F9yScFqELFT6rGoDrsp8+
-         /xShKiHwLRg0+OKHfPK3U1UQ+xzbz6Rhyk/xNRi3ey7dqlBCTGFh49ZTVa3tj7Ftm4A/
-         jtnHxQn+stGPukCu5Nve6EtAACk1kmv+QckW+SdDvpO6yuxSgJXltxR0DgVYfWxee8t+
-         w1C63t3hXMn217OU6N/jwXGTo4AVjb7iTAZKwMyIX9lhpmPUGZszW2vd6KFC3FZwPdi2
-         Dhwg==
-X-Forwarded-Encrypted: i=1; AHgh+Rp6ktCTSPrMk58fxZp5KkfQhi6WQaVXd9q73dquMlKIeR2P9WLuxZIQQ5bwX7lgpo4wvsM=@lists.linux.dev
-X-Gm-Message-State: AOJu0YzqgNlixMaSUmguCbQZfjs8hWRXwfwGELtzpYXQydO8/GiPgWpe
-	Cw7et+vmmNK7lLnAu3SQihK88tmhc7CB9AlqNsgQNqkk+dIR/5oGFUj9Tc5l7POZBQY=
-X-Gm-Gg: AfdE7clED+eJDGup1/g0mBGQdhRZE1DsoCiIeCQUPRdi5ud6JzEcMxgzwehkm345dZ9
-	60nI8FqCdW0AI6mZDbnkdS2tP1b8+GGSmvFZsCZM1hbC1M/ZPe2yoALf4AtZpSci0B5/unB+dJp
-	ZtIy8stvSo/wwhhNzpmx9sqwDzZ+tHwsEpe4Q7PdgwYXy8VP9RdpC0Vmy3ZuyzhW3CJiEbAC6X9
-	9161hFbWoPShkBaUyKNrriB2ki/cRnU3o4LvuFnxg0vk+oUyhgZcyuViDWu+nkTTzOlx5w5WzSW
-	0LSCmHzudIlmOTlDKxV7CGfhFMXCS0p1NrsbG2fbahJ3mJXHkErYDnkxVoWDQzHgRK8AKKDCOu7
-	tjIbUg5kXmjqCfBA2Z82RzO+eTLNKOPi8o5wNlXdkoP9YQ300jr9wYE+Pa5J06vJe9FzwJe8ePF
-	susaBOnt68R4i8m36H1czLjMpHT1WW5HsXq6RgfK3+T2XVqgxTSy2OOXz+fkdXMo9aoc1JD0Qs8
-	OaK
-X-Received: by 2002:a05:600c:3b28:b0:493:bb2e:11a5 with SMTP id 5b1f17b1804b1-493e68c689bmr85633925e9.15.1783616428141;
-        Thu, 09 Jul 2026 10:00:28 -0700 (PDT)
+        bh=q5tm53Wh5ljVEJMF/yE7yx8lvckk6MSR3QTqJKQvyQU=;
+        b=lyk1KyCJ3pO4+J7NWIKGXJ4cxJiQNlowktQ/urR40JhOFPRqZeK8CIYxFT71kmUq4g
+         wgUDrEAoE0uWKxtRoQvvbaxDkuh37tjTNR7qHkFRCYnwrgYXWQChQbQnIADznHS/Z6FF
+         tSUPAs59lyEB5c8PnYMtvNPXGqBoF3enST51gr8XwGN/0hlHSrZiRCZJG8omozWsi1iw
+         GGCMWWDWevYjifIx3yq/itiqpKZU8kZI1vSa7j85kpvsYzYabER0cIqkIXjso/Mrg230
+         jczZrsijHtHQCMH+VMP4busmmXb+fQAE8NSGXIkdm01/cmtkv044CcaRrpOZGWH/Rsw6
+         PdFQ==
+X-Forwarded-Encrypted: i=1; AHgh+RqD5Y2gU1WTCZah56lld9SSe45Hp8T5q09M3iP/K/4WVUvSdEjwk4sBrGccoa1ag4K4FmU=@lists.linux.dev
+X-Gm-Message-State: AOJu0YzRVwMxR5c47OqJcz3Uzr+/fStBUy94bV8q2YZPWqbJxR7XVHtH
+	xp/jSagVhQ+P0mr4tn4kuXyD6dDvH6zjmpMEmDj/iQIIH4yx0MJZ3bRZ6R57NuXsqbY=
+X-Gm-Gg: AfdE7ck/hwYugYT4X9nhCGN8KhSKnsjGewVbUIkEwYvCkOtDbEvsC0yPg6C9hxolZ0f
+	OH7cioaKHf0BWKpy3R+lEntLJqFprimeLBWHB+Fy+f7bo8n27Ls32dejzImD7ni7e0HnVKzw55n
+	hwEUc5dZ9uqC1Hzr/eug96/wOhtwt+ebS1U5RUVXb2XGVizykIIsYrdgzTNgeSnkma2U+BBl93d
+	ANl1eVq4glDl0j3Q+lGqLTmE23KM5DsmWeOVdPnJdMpJHdkIHBXhwMrMVqX2TAyqL9PnWY6bz2W
+	0gor0nYRALd8xP03Bm3oH7O8h6BZNO+073RRkWoyIegpnsfSa/ehfG4+iDiBh1HlPVovxXkzZxV
+	uZrwUfTP4WYUbGaQVmDfVdcOuPeXAi6bQ1169TqJ+gd3g3ZFJDqxDwcbVKdt0N8YtVQEWJNNEMq
+	w2jisqNc9EKEAt/8x2iv+nk8p+Ez6LfkcU+Ik2p01KRgKTsBVLGsMkDRCVeYvb73vi+J3U32oqH
+	xYI
+X-Received: by 2002:a05:600c:6286:b0:493:e53a:8982 with SMTP id 5b1f17b1804b1-493e68643ebmr79528625e9.23.1783616429757;
+        Thu, 09 Jul 2026 10:00:29 -0700 (PDT)
 Received: from localhost (p200300f65f47db043de98c19b374aa68.dip0.t-ipconnect.de. [2003:f6:5f47:db04:3de9:8c19:b374:aa68])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-493f2a2e499sm2548325e9.0.2026.07.09.10.00.27
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-493e582d4f7sm130150785e9.2.2026.07.09.10.00.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Jul 2026 10:00:27 -0700 (PDT)
+        Thu, 09 Jul 2026 10:00:29 -0700 (PDT)
 From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>
 To: Lee Jones <lee@kernel.org>
-Cc: Linus Walleij <linusw@kernel.org>,
-	Benson Leung <bleung@chromium.org>,
-	Guenter Roeck <groeck@chromium.org>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	linux-arm-kernel@lists.infradead.org,
+Cc: James Ogletree <jogletre@opensource.cirrus.com>,
+	Fred Treven <fred.treven@cirrus.com>,
+	Ben Bright <ben.bright@cirrus.com>,
+	Support Opensource <support.opensource@diasemi.com>,
+	Xu Yilun <yilun.xu@intel.com>,
+	Tom Rix <trix@redhat.com>,
+	Charles Keepax <ckeepax@opensource.cirrus.com>,
+	Richard Fitzgerald <rf@opensource.cirrus.com>,
+	Colin Foster <colin.foster@in-advantage.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	patches@opensource.cirrus.com,
 	mfd@lists.linux.dev,
 	linux-kernel@vger.kernel.org,
-	chrome-platform@lists.linux.dev,
-	linux-mediatek@lists.infradead.org
-Subject: [PATCH v3 16/23] mfd: Use named initializers for platform_device_id array
-Date: Thu,  9 Jul 2026 18:58:35 +0200
-Message-ID:  <c7390ea19a88cbfe80e86b7ff308664a2eec27a2.1783615311.git.u.kleine-koenig@baylibre.com>
+	linux-sound@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-arm-kernel@lists.infradead.org
+Subject: [PATCH v3 17/23] mfd: Use named initializers for arrays of spi_device_id
+Date: Thu,  9 Jul 2026 18:58:36 +0200
+Message-ID:  <d758f5b2b861fad11a3e90ef2d44e8aa3c817ec8.1783615311.git.u.kleine-koenig@baylibre.com>
 X-Mailer: git-send-email 2.55.0.11.g153666a7d9bb
 In-Reply-To: <cover.1783615311.git.u.kleine-koenig@baylibre.com>
 References: <cover.1783615311.git.u.kleine-koenig@baylibre.com>
@@ -85,7 +92,7 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2575; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=Yocslbbh2Ly5jl9ltyhoSfTRYYTxd9v0B/P+M4FNVM8=; b=owGbwMvMwMXY3/A7olbonx/jabUkhiz/y5FP8p6Y/xAWruic5Prv2/Jq9oNxS7qtlldzHWtpr jLl3GHSyWjMwsDIxSArpshi37gm06pKLrJz7b/LMINYmUCmMHBxCsBE7tSy/xW/zaVm6TOH4X4O a7V8Fvd/6ULDU0ZMRy+ziwQkJov8+f3ocouBw6b3OSdvsiW8fJ+5Xzlq47cuobVF/yXWv5dIvGy o2fddfJPewfAH9wtKMx1NjBVqH/r/nHnQJe3z+cA7HNLSCt9fnolg8/v4g/m6+aJOrbm7TF696Z y168zJM2t71JKX/k9mtDpeOCXKI9XN469wQLGacbWs1OVfYnxMZ05eWVSccM7uSRyLiLT7rCuN3 lLZe64yXq2RaGJO2sRS+/jllddvXWeIiVV8P628uTbrvGoXk96PpEqzfD/rFvWZMsEPzh6Vr73H wCRfd6X6XUXt9q99NtcqJhnNm2v9JtlbadUBsdsh7NvNAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9158; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=fHu8p1/UogKtizmJccP+7S56UMfTT1qzheFADHKU4CQ=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBqT9NcadZ3btNANNe2nvN3xJL+QYVE+XEMtZHIx buHCvrVosyJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCak/TXAAKCRCPgPtYfRL+ TteqCACnDDlWupdwa60CmVg/Fp209eIroh/t13VAvis2RhW6NTstBrI0UTzX7Xq094Ddud6lyMM gokMOZ2m2KN2RQQDHRcfOsYBYlwtiuI+mkUZYj3S+/PTSG/Gh3t+TPIFZ3xY6dtiYgMKkvppXOQ BQT4p5Qx7kjhP1zoIB8qAWUMqfCRmxYrCdRaGNxfZadl0NUcxUZ5CJRKXxf0+wijgdEnKEu9Hna H1npxOYKAKAWJm98uwYXk1w4nzaDlxznvLH4tJyBUQ1gEps/KKKvtuwJfTnPxMfCT4Y6QSVTCxF fanZ2gjAOUJz6YQiBwTv6fD8pTtn3X7jDtBH7wytLgOE6yT8
 X-Developer-Key: i=u.kleine-koenig@baylibre.com; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
 Content-Transfer-Encoding: 8bit
 
@@ -95,67 +102,244 @@ to lookup the declaration of the struct. And it's also more robust
 against changes to the struct definition.
 
 The mentioned robustness is relevant for a planned change to struct
-platform_device_id that replaces .driver_data by an anonymous union.
+spi_device_id that replaces .driver_data by an anonymous union.
 
 This patch doesn't modify the compiled arrays, only their representation
 in source form benefits.
 
-Also drop a tailing comma after a list terminator to match the common
-style for these device-id arrays.
-
+Reviewed-by: Charles Keepax <ckeepax@opensource.cirrus.com>
 Signed-off-by: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
 ---
- drivers/mfd/ab8500-core.c | 8 ++++----
- drivers/mfd/cros_ec_dev.c | 2 +-
- drivers/mfd/mt6397-core.c | 4 ++--
- 3 files changed, 7 insertions(+), 7 deletions(-)
+ drivers/mfd/arizona-spi.c       | 10 +++++-----
+ drivers/mfd/cs40l50-spi.c       |  2 +-
+ drivers/mfd/da9052-spi.c        | 10 +++++-----
+ drivers/mfd/intel-m10-bmc-spi.c |  6 +++---
+ drivers/mfd/madera-spi.c        | 18 +++++++++---------
+ drivers/mfd/ocelot-spi.c        |  2 +-
+ drivers/mfd/rk8xx-spi.c         |  2 +-
+ drivers/mfd/rsmu_spi.c          | 12 ++++++------
+ drivers/mfd/stmpe-spi.c         | 12 ++++++------
+ drivers/mfd/tps65912-spi.c      |  2 +-
+ drivers/mfd/wm831x-spi.c        | 14 +++++++-------
+ 11 files changed, 45 insertions(+), 45 deletions(-)
 
-diff --git a/drivers/mfd/ab8500-core.c b/drivers/mfd/ab8500-core.c
-index f0bc0b5a6f4a..7c00c71ca4ba 100644
---- a/drivers/mfd/ab8500-core.c
-+++ b/drivers/mfd/ab8500-core.c
-@@ -1250,10 +1250,10 @@ static int ab8500_probe(struct platform_device *pdev)
+diff --git a/drivers/mfd/arizona-spi.c b/drivers/mfd/arizona-spi.c
+index eaa2b2bc5dd0..bbf520bd2eda 100644
+--- a/drivers/mfd/arizona-spi.c
++++ b/drivers/mfd/arizona-spi.c
+@@ -255,11 +255,11 @@ static void arizona_spi_remove(struct spi_device *spi)
  }
  
- static const struct platform_device_id ab8500_id[] = {
--	{ "ab8500-core", AB8500_VERSION_AB8500 },
--	{ "ab8505-core", AB8500_VERSION_AB8505 },
--	{ "ab9540-i2c", AB8500_VERSION_AB9540 },
--	{ "ab8540-i2c", AB8500_VERSION_AB8540 },
-+	{ .name = "ab8500-core", .driver_data = AB8500_VERSION_AB8500 },
-+	{ .name = "ab8505-core", .driver_data = AB8500_VERSION_AB8505 },
-+	{ .name = "ab9540-i2c", .driver_data = AB8500_VERSION_AB9540 },
-+	{ .name = "ab8540-i2c", .driver_data = AB8500_VERSION_AB8540 },
+ static const struct spi_device_id arizona_spi_ids[] = {
+-	{ "wm5102", WM5102 },
+-	{ "wm5110", WM5110 },
+-	{ "wm8280", WM8280 },
+-	{ "wm1831", WM1831 },
+-	{ "cs47l24", CS47L24 },
++	{ .name = "wm5102", .driver_data = WM5102 },
++	{ .name = "wm5110", .driver_data = WM5110 },
++	{ .name = "wm8280", .driver_data = WM8280 },
++	{ .name = "wm1831", .driver_data = WM1831 },
++	{ .name = "cs47l24", .driver_data = CS47L24 },
+ 	{ },
+ };
+ MODULE_DEVICE_TABLE(spi, arizona_spi_ids);
+diff --git a/drivers/mfd/cs40l50-spi.c b/drivers/mfd/cs40l50-spi.c
+index 53526b595a0d..2d8f0dce3494 100644
+--- a/drivers/mfd/cs40l50-spi.c
++++ b/drivers/mfd/cs40l50-spi.c
+@@ -40,7 +40,7 @@ static void cs40l50_spi_remove(struct spi_device *spi)
+ }
+ 
+ static const struct spi_device_id cs40l50_id_spi[] = {
+-	{ "cs40l50" },
++	{ .name = "cs40l50" },
+ 	{}
+ };
+ MODULE_DEVICE_TABLE(spi, cs40l50_id_spi);
+diff --git a/drivers/mfd/da9052-spi.c b/drivers/mfd/da9052-spi.c
+index be5f2b34e18a..2a08481432e3 100644
+--- a/drivers/mfd/da9052-spi.c
++++ b/drivers/mfd/da9052-spi.c
+@@ -63,11 +63,11 @@ static void da9052_spi_remove(struct spi_device *spi)
+ }
+ 
+ static const struct spi_device_id da9052_spi_id[] = {
+-	{"da9052", DA9052},
+-	{"da9053-aa", DA9053_AA},
+-	{"da9053-ba", DA9053_BA},
+-	{"da9053-bb", DA9053_BB},
+-	{"da9053-bc", DA9053_BC},
++	{ .name = "da9052", .driver_data = DA9052 },
++	{ .name = "da9053-aa", .driver_data = DA9053_AA },
++	{ .name = "da9053-ba", .driver_data = DA9053_BA },
++	{ .name = "da9053-bb", .driver_data = DA9053_BB },
++	{ .name = "da9053-bc", .driver_data = DA9053_BC },
+ 	{}
+ };
+ 
+diff --git a/drivers/mfd/intel-m10-bmc-spi.c b/drivers/mfd/intel-m10-bmc-spi.c
+index cfa620f0c70e..94b9c99bb4f8 100644
+--- a/drivers/mfd/intel-m10-bmc-spi.c
++++ b/drivers/mfd/intel-m10-bmc-spi.c
+@@ -160,9 +160,9 @@ static const struct intel_m10bmc_platform_info m10bmc_spi_n5010 = {
+ };
+ 
+ static const struct spi_device_id m10bmc_spi_id[] = {
+-	{ "m10-n3000", (kernel_ulong_t)&m10bmc_spi_n3000 },
+-	{ "m10-d5005", (kernel_ulong_t)&m10bmc_spi_d5005 },
+-	{ "m10-n5010", (kernel_ulong_t)&m10bmc_spi_n5010 },
++	{ .name = "m10-n3000", .driver_data = (kernel_ulong_t)&m10bmc_spi_n3000 },
++	{ .name = "m10-d5005", .driver_data = (kernel_ulong_t)&m10bmc_spi_d5005 },
++	{ .name = "m10-n5010", .driver_data = (kernel_ulong_t)&m10bmc_spi_n5010 },
  	{ }
  };
- 
-diff --git a/drivers/mfd/cros_ec_dev.c b/drivers/mfd/cros_ec_dev.c
-index a933cb936da6..baa6487abf9e 100644
---- a/drivers/mfd/cros_ec_dev.c
-+++ b/drivers/mfd/cros_ec_dev.c
-@@ -375,7 +375,7 @@ static void ec_device_remove(struct platform_device *pdev)
+ MODULE_DEVICE_TABLE(spi, m10bmc_spi_id);
+diff --git a/drivers/mfd/madera-spi.c b/drivers/mfd/madera-spi.c
+index ce9e90322c9c..3fffa21ceadc 100644
+--- a/drivers/mfd/madera-spi.c
++++ b/drivers/mfd/madera-spi.c
+@@ -112,15 +112,15 @@ static void madera_spi_remove(struct spi_device *spi)
  }
  
- static const struct platform_device_id cros_ec_id[] = {
--	{ DRV_NAME },
-+	{ .name = DRV_NAME },
- 	{ /* sentinel */ }
+ static const struct spi_device_id madera_spi_ids[] = {
+-	{ "cs47l15", CS47L15 },
+-	{ "cs47l35", CS47L35 },
+-	{ "cs47l85", CS47L85 },
+-	{ "cs47l90", CS47L90 },
+-	{ "cs47l91", CS47L91 },
+-	{ "cs42l92", CS42L92 },
+-	{ "cs47l92", CS47L92 },
+-	{ "cs47l93", CS47L93 },
+-	{ "wm1840", WM1840 },
++	{ .name = "cs47l15", .driver_data = CS47L15 },
++	{ .name = "cs47l35", .driver_data = CS47L35 },
++	{ .name = "cs47l85", .driver_data = CS47L85 },
++	{ .name = "cs47l90", .driver_data = CS47L90 },
++	{ .name = "cs47l91", .driver_data = CS47L91 },
++	{ .name = "cs42l92", .driver_data = CS42L92 },
++	{ .name = "cs47l92", .driver_data = CS47L92 },
++	{ .name = "cs47l93", .driver_data = CS47L93 },
++	{ .name = "wm1840", .driver_data = WM1840 },
+ 	{ }
  };
- MODULE_DEVICE_TABLE(platform, cros_ec_id);
-diff --git a/drivers/mfd/mt6397-core.c b/drivers/mfd/mt6397-core.c
-index 7987583afc60..7bbd9b730b75 100644
---- a/drivers/mfd/mt6397-core.c
-+++ b/drivers/mfd/mt6397-core.c
-@@ -429,8 +429,8 @@ static const struct of_device_id mt6397_of_match[] = {
- MODULE_DEVICE_TABLE(of, mt6397_of_match);
+ MODULE_DEVICE_TABLE(spi, madera_spi_ids);
+diff --git a/drivers/mfd/ocelot-spi.c b/drivers/mfd/ocelot-spi.c
+index 3c8260c7f8fb..d3ab4868a523 100644
+--- a/drivers/mfd/ocelot-spi.c
++++ b/drivers/mfd/ocelot-spi.c
+@@ -270,7 +270,7 @@ static int ocelot_spi_probe(struct spi_device *spi)
+ }
  
- static const struct platform_device_id mt6397_id[] = {
--	{ "mt6397" },
--	{ },
-+	{ .name = "mt6397" },
+ static const struct spi_device_id ocelot_spi_ids[] = {
+-	{ "vsc7512" },
++	{ .name = "vsc7512" },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(spi, ocelot_spi_ids);
+diff --git a/drivers/mfd/rk8xx-spi.c b/drivers/mfd/rk8xx-spi.c
+index 95749a89f092..bb85fe60518f 100644
+--- a/drivers/mfd/rk8xx-spi.c
++++ b/drivers/mfd/rk8xx-spi.c
+@@ -104,7 +104,7 @@ static const struct of_device_id rk8xx_spi_of_match[] = {
+ MODULE_DEVICE_TABLE(of, rk8xx_spi_of_match);
+ 
+ static const struct spi_device_id rk8xx_spi_id_table[] = {
+-	{ "rk806" },
++	{ .name = "rk806" },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(spi, rk8xx_spi_id_table);
+diff --git a/drivers/mfd/rsmu_spi.c b/drivers/mfd/rsmu_spi.c
+index e07f21482439..8b2e7cb401b5 100644
+--- a/drivers/mfd/rsmu_spi.c
++++ b/drivers/mfd/rsmu_spi.c
+@@ -239,11 +239,11 @@ static void rsmu_spi_remove(struct spi_device *client)
+ }
+ 
+ static const struct spi_device_id rsmu_spi_id[] = {
+-	{ "8a34000",  RSMU_CM },
+-	{ "8a34001",  RSMU_CM },
+-	{ "8a34002",  RSMU_CM },
+-	{ "82p33810", RSMU_SABRE },
+-	{ "82p33811", RSMU_SABRE },
++	{ .name = "8a34000",  .driver_data = RSMU_CM },
++	{ .name = "8a34001",  .driver_data = RSMU_CM },
++	{ .name = "8a34002",  .driver_data = RSMU_CM },
++	{ .name = "82p33810", .driver_data = RSMU_SABRE },
++	{ .name = "82p33811", .driver_data = RSMU_SABRE },
+ 	{}
+ };
+ MODULE_DEVICE_TABLE(spi, rsmu_spi_id);
+@@ -254,7 +254,7 @@ static const struct of_device_id rsmu_spi_of_match[] = {
+ 	{ .compatible = "idt,8a34002",  .data = (void *)RSMU_CM },
+ 	{ .compatible = "idt,82p33810", .data = (void *)RSMU_SABRE },
+ 	{ .compatible = "idt,82p33811", .data = (void *)RSMU_SABRE },
+-	{}
 +	{ }
  };
- MODULE_DEVICE_TABLE(platform, mt6397_id);
+ MODULE_DEVICE_TABLE(of, rsmu_spi_of_match);
+ 
+diff --git a/drivers/mfd/stmpe-spi.c b/drivers/mfd/stmpe-spi.c
+index dea31efface6..22a3da062dee 100644
+--- a/drivers/mfd/stmpe-spi.c
++++ b/drivers/mfd/stmpe-spi.c
+@@ -121,12 +121,12 @@ static const struct of_device_id stmpe_spi_of_match[] = {
+ MODULE_DEVICE_TABLE(of, stmpe_spi_of_match);
+ 
+ static const struct spi_device_id stmpe_spi_id[] = {
+-	{ "stmpe610", STMPE610 },
+-	{ "stmpe801", STMPE801 },
+-	{ "stmpe811", STMPE811 },
+-	{ "stmpe1601", STMPE1601 },
+-	{ "stmpe2401", STMPE2401 },
+-	{ "stmpe2403", STMPE2403 },
++	{ .name = "stmpe610", .driver_data = STMPE610 },
++	{ .name = "stmpe801", .driver_data = STMPE801 },
++	{ .name = "stmpe811", .driver_data = STMPE811 },
++	{ .name = "stmpe1601", .driver_data = STMPE1601 },
++	{ .name = "stmpe2401", .driver_data = STMPE2401 },
++	{ .name = "stmpe2403", .driver_data = STMPE2403 },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(spi, stmpe_spi_id);
+diff --git a/drivers/mfd/tps65912-spi.c b/drivers/mfd/tps65912-spi.c
+index 78f9b6015902..2442a2e67d67 100644
+--- a/drivers/mfd/tps65912-spi.c
++++ b/drivers/mfd/tps65912-spi.c
+@@ -43,7 +43,7 @@ static int tps65912_spi_probe(struct spi_device *spi)
+ }
+ 
+ static const struct spi_device_id tps65912_spi_id_table[] = {
+-	{ "tps65912" },
++	{ .name = "tps65912" },
+ 	{ /* sentinel */ }
+ };
+ MODULE_DEVICE_TABLE(spi, tps65912_spi_id_table);
+diff --git a/drivers/mfd/wm831x-spi.c b/drivers/mfd/wm831x-spi.c
+index 54c87267917b..4cdb6e0734c4 100644
+--- a/drivers/mfd/wm831x-spi.c
++++ b/drivers/mfd/wm831x-spi.c
+@@ -77,13 +77,13 @@ static const struct dev_pm_ops wm831x_spi_pm = {
+ };
+ 
+ static const struct spi_device_id wm831x_spi_ids[] = {
+-	{ "wm8310", WM8310 },
+-	{ "wm8311", WM8311 },
+-	{ "wm8312", WM8312 },
+-	{ "wm8320", WM8320 },
+-	{ "wm8321", WM8321 },
+-	{ "wm8325", WM8325 },
+-	{ "wm8326", WM8326 },
++	{ .name = "wm8310", .driver_data = WM8310 },
++	{ .name = "wm8311", .driver_data = WM8311 },
++	{ .name = "wm8312", .driver_data = WM8312 },
++	{ .name = "wm8320", .driver_data = WM8320 },
++	{ .name = "wm8321", .driver_data = WM8321 },
++	{ .name = "wm8325", .driver_data = WM8325 },
++	{ .name = "wm8326", .driver_data = WM8326 },
+ 	{ },
+ };
  
 -- 
 2.55.0.11.g153666a7d9bb
