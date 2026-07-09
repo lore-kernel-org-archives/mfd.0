@@ -1,193 +1,87 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 258124195CC
-	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 17:40:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5CE023B8D40
+	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 19:36:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783618857; cv=none; b=G+jgKxRFd1MTVF6eqoYBTov/a/qAJ1JvL2NvE5NscbYEm+1/JXytpSyK6E1seb/Wg/7bNnh/a604aroNWyQ2DVe7Pib/lrMGS30aTd3+DqYx+3BGjubAOkdpftbVZmRByvXMI6G0xsATD/4GillJ9ZRMihXeH4ymWByATPwmZU8=
+	t=1783625765; cv=none; b=oiWAr412n/T1J1eel1OYbDspHo7i/aXvoMbywxGoI85CwI3BEc5xNsmXy8ql31RPaK1zT2iTLBUuaXHh95wQcuam+3cgkOa6uP4u0FRNo9KVxqNWz0BWH+CEyfwqx8QZbSwBkfx6/PFCCJ6ZVv3WFPoEKHDHQpgaGRH3/Y/JgbU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783618857; c=relaxed/simple;
-	bh=RxPXG4DKCJu3tWF18jXolKdkJYfSanWO/OBCCSreoMY=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=GfUnmg6Yj/SpguRwTxldtYyjY3MmAK2G4EV3hSpTHC9hKl9l9R2/JFi8eQod5QA292rqt3RB/BQWiA7eHfbX1v3ztRTD3BehnWourKPaT6mX7uyOxpTHw8pVn9M6aJ1EafL3WGgmacsIlR8evriH5FnfHtYn2/aSM89b1cct+8o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aNwhYP5n; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783625765; c=relaxed/simple;
+	bh=dly2a8f3IW/oWjPBuL8fZv6s8UgI5PKrdR1UMnyqqeQ=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=GOz9JTsNgvdXydef9ZHak9meI65hIvH4dKXksMmGGqWBc6DBk0O44SSE61NTFA/jmeeETBcRg7x5/MdPJDADa1M8CejxcXISrItCKw0SKNlW1EJFYRKE0Ven6JcLRGuQMuerxnu8Bl9MxWXJZDNESVOp/CZhtDGUnQd5mJ2l/6c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=i8q+Jr2o; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="aNwhYP5n"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D25E71F00A3A;
-	Thu,  9 Jul 2026 17:40:55 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="i8q+Jr2o"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 127CC1F00A3F
+	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 19:36:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783618856;
-	bh=d2dOahwfKd/vCKc2IJKhjbryQjdqYetVxF2Z51Z5nN8=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=aNwhYP5ng5d3lcAm+JKFzqW3H+/h0j0xKFpOx0Vb0jwiNejTgUI1RwPLH3xKI1x/y
-	 I2Iy4V4UK6oAsBEbQ/VrlhHoZaNgTsz4pWMEhi/R/sJtexomJ//sQO3uYkMuKYt111
-	 f7gdrdo8QCmRoysqs6lBlWehzAGLoZ+e/OFPNbAlF76hk/oGnOLj1uUPRqXA7wEBbm
-	 V9S5x7fZL+WZYdnNfwaAguADC3naJnJXHtBuG+dQXa51ye8slcDf3fmrQgyzHHlZqA
-	 OvIxhJBrV4LYBSjOvDAvqew1VZb2mbnFC5ke/82LemBaUotgZfhT3HoCiNFtxnq8L9
-	 PTqjpe+ifmrEg==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RFC v3 7/7] mfd: ls2kbmc: Capture the reset event of BMC
- through GPIO
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Miao Wang" <shankerwangmiao@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260710-ls2kbmc-mod-v3-7-ef718636e78e@gmail.com>
-References: <20260710-ls2kbmc-mod-v3-0-ef718636e78e@gmail.com>
- <20260710-ls2kbmc-mod-v3-7-ef718636e78e@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 09 Jul 2026 17:40:55 +0000
-Message-Id: <20260709174055.D25E71F00A3A@smtp.kernel.org>
+	s=k20260515; t=1783625764;
+	bh=dly2a8f3IW/oWjPBuL8fZv6s8UgI5PKrdR1UMnyqqeQ=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=i8q+Jr2oLcdULQBrmuesody31HxF1nJz5bSx0ZDJh95xbWIg0fV/ibc1kqMHdT+6J
+	 KYH7vUp/Ydb4+0gLZ8H8fA1v6PIiQ8/HV33019e/WMXJCKNOpZt7NrGupuceOrIXK0
+	 5uEetFiXybR5uOwb1UB+OTn16d7D5ZLxacjOzMn2Wh7zo39PY7t1qyDy/VbPYVfPMf
+	 fbS9DDdchzR8Bv0ewBX+wy1cmRcruZBJfz+iy+xENZ7vPJoML8UMZWzpeVGsk7YFbZ
+	 A+acBD+5H/KhFa5hx3nuWEXN+9HC7xVf6yBXG0SprqIMFoFjr3MzdFQ8xgIRlgyHpM
+	 K7mSS0IGkd7jg==
+Received: by mail-lf1-f50.google.com with SMTP id 2adb3069b0e04-5b01cb18515so73547e87.2
+        for <mfd@lists.linux.dev>; Thu, 09 Jul 2026 12:36:03 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+Rpqx2aOFZ5rT5q0ngQuZcF9ZStfpV0xtA0wjRWGV45JEtgwswyBl5Zvv17tvQYdxv3tO74=@lists.linux.dev
+X-Gm-Message-State: AOJu0YxQk+K0K7CjDBYTIKewx5hbFR6OW1Okw/lU8bJXDbwInjEssQPH
+	/XoYi9HqwkEoGn9f/ap8g3BL9b2c05FDfNuHT9n99yKK8OWftXs6iDCfwlcgn0tU+1AUGckw8HG
+	n6b9RY1K6IZqOChCj+NRrI50sX8eI+Pc=
+X-Received: by 2002:a05:6512:4287:b0:5ae:befc:97ac with SMTP id
+ 2adb3069b0e04-5b01147358bmr1837128e87.55.1783625762855; Thu, 09 Jul 2026
+ 12:36:02 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+References: <cover.1783507945.git.u.kleine-koenig@baylibre.com> <1bc763b0de24d50e83972b5f0dd31ae52dc558b0.1783507945.git.u.kleine-koenig@baylibre.com>
+In-Reply-To: <1bc763b0de24d50e83972b5f0dd31ae52dc558b0.1783507945.git.u.kleine-koenig@baylibre.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Thu, 9 Jul 2026 21:35:49 +0200
+X-Gmail-Original-Message-ID: <CAD++jL=5A+qcU4FQYzBPOVK8t+9xPRX5p9ycijkwOa4Oh1XJcQ@mail.gmail.com>
+X-Gm-Features: AUfX_mwiwakv_8MfFTK61QSlgw1o70cNyg-w0pnD1Pyj-FexX_pcKllaNbNT9oU
+Message-ID: <CAD++jL=5A+qcU4FQYzBPOVK8t+9xPRX5p9ycijkwOa4Oh1XJcQ@mail.gmail.com>
+Subject: Re: [PATCH v2 16/23] mfd: Use named initializers for
+ platform_device_id array
+To: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>
+Cc: Lee Jones <lee@kernel.org>, Benson Leung <bleung@chromium.org>, 
+	Guenter Roeck <groeck@chromium.org>, Matthias Brugger <matthias.bgg@gmail.com>, 
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
+	linux-arm-kernel@lists.infradead.org, mfd@lists.linux.dev, 
+	linux-kernel@vger.kernel.org, chrome-platform@lists.linux.dev, 
+	linux-mediatek@lists.infradead.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
-s) to consider:
+On Wed, Jul 8, 2026 at 1:17=E2=80=AFPM Uwe Kleine-K=C3=B6nig (The Capable H=
+ub)
+<u.kleine-koenig@baylibre.com> wrote:
 
-New issues:
-- [High] Unprotected access to `gpio_chip` without a NULL check leads to a =
-potential NULL pointer dereference or use-after-free.
-- [Medium] The ACPI memory resource search for the GPIO controller only che=
-cks the first memory descriptor, ignoring any subsequent ones.
+> While being less compact, using named initializers allows to more easily
+> see which members of the structs are assigned which value without having
+> to lookup the declaration of the struct. And it's also more robust
+> against changes to the struct definition.
+>
+> The mentioned robustness is relevant for a planned change to struct
+> platform_device_id that replaces .driver_data by an anonymous union.
+>
+> This patch doesn't modify the compiled arrays, only their representation
+> in source form benefits.
+>
+> Also drop a tailing comma after a list terminator to match the common
+> style for these device-id arrays.
+>
+> Signed-off-by: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@b=
+aylibre.com>
 
-Pre-existing issues:
-- [High] The shared interrupt handler unconditionally returns IRQ_HANDLED w=
-ithout checking the hardware status, violating shared IRQ semantics.
---
+Reviewed-by: Linus Walleij <linusw@kernel.org>
 
---- Patch [7]: [PATCH RFC v3 7/7] mfd: ls2kbmc: Capture the reset event of =
-BMC through GPIO ---
-commit a2c13d408a04d53aa90ec63a2b31ea6450fb493e
-Author: Miao Wang <shankerwangmiao@gmail.com>
-
-mfd: ls2kbmc: Capture the reset event of BMC through GPIO
-   =20
-This patch modifies the driver to find its reset GPIO via ACPI or a fallbac=
-k=20
-software node, rather than directly accessing the GPIO registers.
-
-> diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-> index 1466b314fc4e5..5a2644ff07fee 100644
-> --- a/drivers/mfd/ls2k-bmc-core.c
-> +++ b/drivers/mfd/ls2k-bmc-core.c
-
-[ ... ]
-
-> +static int ls2k_bmc_gpiochip_find(struct gpio_chip *gc, const void *data)
-> +{
-> +	struct acpi_device *adev;
-> +	struct list_head resource_list;
-> +	struct resource_entry *rentry;
-> +	struct fwnode_handle *fwnode =3D gpio_chip_get_fwnode(gc);
-> +	phys_addr_t start_addr =3D (phys_addr_t) data;
-> +	int ret, found =3D 0;
-> +
-> +	if (!is_acpi_node(fwnode))
-> +		goto out;
-> +
-> +	adev =3D to_acpi_device_node(fwnode);
-> +	if (!adev)
-> +		goto out;
-> +
-> +	INIT_LIST_HEAD(&resource_list);
-> +
-> +	ret =3D acpi_dev_get_memory_resources(adev, &resource_list);
-> +	if (ret < 0)
-> +		goto out;
-> +	rentry =3D list_first_entry_or_null(&resource_list, struct resource_ent=
-ry, node);
-> +	if (!rentry)
-> +		goto free_resource_list;
-> +	if (rentry->res->start =3D=3D start_addr)
-> +		found =3D 1;
-
-[Severity: Medium]
-Will this correctly identify the GPIO controller if the register base is
-defined as the second or later memory resource in the ACPI DSDT?
-
-The list of memory resources is queried, but only the first element is
-evaluated with list_first_entry_or_null() instead of iterating through the
-entire list with list_for_each_entry().
-
-> +
-> +free_resource_list:
-> +	acpi_dev_free_resource_list(&resource_list);
-> +out:
-> +	return found;
-> +}
-> +
-> +static struct gpio_desc *ls2k_bmc_find_gpio(struct ls2k_bmc_ddata *ddata)
-> +{
-
-[ ... ]
-
-> +	gc =3D gpio_device_get_chip(gdev);
-> +
-> +	ls2k_bmc_swnode_properties[0] =3D PROPERTY_ENTRY_GPIO("gpio",
-> +		gpio_chip_get_fwnode(gc), LS2K_BMC_RESET_GPIO, GPIO_ACTIVE_HIGH);
-
-[Severity: High]
-Does this code risk a NULL pointer dereference?
-
-gpio_device_get_chip() can return NULL if the underlying GPIO controller is
-concurrently unregistered.
-
-Passing this potentially NULL gc pointer to gpio_chip_get_fwnode() results =
-in
-an immediate unconditional dereference of chip->fwnode inside that function.
-
-> +
-> +	ret =3D device_create_managed_software_node(ddata->dev, ls2k_bmc_swnode=
-_properties, NULL);
-> +	if (ret) {
-> +		dev_err(ddata->dev, "Failed to create software node for GPIO reset: %d=
-\n", ret);
-> +		return ERR_PTR(ret);
-> +	}
-> +
-> +	return devm_gpiod_get_index(ddata->dev, NULL, 0, GPIOD_IN);
-> +}
-
-[ ... ]
-
-> @@ -402,44 +478,32 @@ static int ls2k_bmc_init(struct ls2k_bmc_ddata *dda=
-ta)
-
-[ ... ]
-
-> -	ret =3D devm_request_irq(ddata->dev, gpio_irq, ls2k_bmc_interrupt,
-> -			       IRQF_SHARED | IRQF_TRIGGER_FALLING, "ls2kbmc gpio", ddata);
-> -	if (ret)
-> -		dev_err(ddata->dev, "Failed to request LS2KBMC GPIO IRQ %d.\n", gpio_i=
-rq);
-> +	ret =3D devm_request_irq(&pdev->dev, gpio_irq, ls2k_bmc_interrupt,
-> +			       IRQF_SHARED | IRQF_TRIGGER_FALLING, "ls2kbmc reset", ddata);
-
-[Severity: High]
-This is a pre-existing issue, but does ls2k_bmc_interrupt() properly handle
-being shared?
-
-The interrupt is requested with IRQF_SHARED, but ls2k_bmc_interrupt()
-unconditionally returns IRQ_HANDLED and schedules its work without reading
-a hardware register to verify it was the actual source of the interrupt.
-
-When another device sharing this IRQ line fires an interrupt, wouldn't this
-erroneously reset the BMC and suppress spurious interrupt detection for the
-other devices?
-
-> +
-> +	if (ret !=3D 0)
-> +		return dev_err_probe(ddata->dev, ret, "Failed to request IRQ %d for GP=
-IO reset signal input.\n", gpio_irq);
-> =20
-> -	acpi_unregister_gsi(LS2K_BMC_RESET_GPIO_GSI);
->  	return ret;
->  }
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260710-ls2kbmc-mo=
-d-v3-0-ef718636e78e@gmail.com?part=3D7
+Yours,
+Linus Walleij
