@@ -1,129 +1,113 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B64F23A16BA
-	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 17:12:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C12D39A04B
+	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 17:14:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783617174; cv=none; b=EazS4EsZJLni4arSijRFw+29gxQH6HtKcimaiRRt0V7+sSRsmZlFuS+s8UHD3MgQxULMdavI8Kmi12ivm0EhX70Nh6+V2AxyVIHVTMsGIQhZBxR5p7TG67XiRlDyCSoEWRKoUPpzf9jPNkXqOtJNXR/a5RyOoTF++SoQhampBIA=
+	t=1783617243; cv=none; b=ZLZrbTY8r17qdvgJYoGFnQy3Nwh9OLbKQ681P+BNhldkZyMLXmZybJXgo4cigxc0+1nRLLB0DFkwjYr0B2/7drv3is7Jy1SMLj2SaBC7Yyyh8iG2hQ7Z1j5yNT5ONVLtMzURwWsaqlMptLmBkQ+5XVEKx1v7ktozxM+KaZAN1gM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783617174; c=relaxed/simple;
-	bh=TvAPjM0fWdiX4HetDuvoU+61bxxOxGeNm3pQEtxakkg=;
+	s=arc-20240116; t=1783617243; c=relaxed/simple;
+	bh=OpgRhxX7FzNHx8bbaHDi6ORs+Bvk/gXpZEgfGO0dr6k=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=E2kgDlvRrA6S11H6L3851GsTgeoQdBOVFo77y0JbbAGCO3dA96pL1GwFp1+fGPmopQLbyT39J8ZH1daRN5dfHFmdt4eqj3nQ/H881VACOpXfbAy/CVCY/CEgSw2etgBJF5Gr2baRf5XBaNtvL5z7Iwx4kPni7TYfP2MWb0dK3wY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HkGOVl1H; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=UFaEzZjVcyWb43eQXhcF/R06lqjAPVz3UUZYy2xEGFDrf+s82snX4oAnzzO+a3W2fAxnCKaXXVBB4ucxvw6CMqBoJVj1ec9YmoN8Jj0iQTDr8QDYd4ZrNIAcZ8flIbuushQFnzE85trgJE6yV1G4DUwWqy8KSlhwstepgjnPZ+Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lRftpjc7; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HkGOVl1H"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6777C1F00A3E;
-	Thu,  9 Jul 2026 17:12:52 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lRftpjc7"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F6711F00A3D;
+	Thu,  9 Jul 2026 17:14:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783617173;
-	bh=rLDqPI/SPDuu3gSI/1owwXfl8Xw0i6ScQiEXkTn0lE0=;
+	s=k20260515; t=1783617242;
+	bh=EWQzPeqOc05W+ERGTP8rcpNMj1mjig4iJntU4vPvGUg=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=HkGOVl1H9th+csLap8kxx0376j48SfrfbaaIfTE0O7Sk7bnH+lViFm9Mqr1XW1gay
-	 B8oRjFy2QsB4YGhQlTNeM+lsU5Te4ohDAWpZvueEJ8I78YT6UVna0WpuvjfMRZwV9f
-	 mZMIY1QZ9sjDVUYBkEEemoBuMfX1Ib4Dp63m5Xs1z5gpVjBDY3zTkPg04WzvLpCYhF
-	 5OP08KD96ZfIWOvkV2lDrSGWCU1q9zxCoVJqPGnY6hmEa/MkMdvwb2cm8fN4SWCRh3
-	 1zAWb82YPrkjtHQVMVN54nE/mDGKUvX1z9KZhNeJwDbCnTIwqrmfuq3stXLTbIk10a
-	 GHCQI7vNg93HA==
+	b=lRftpjc7Y3KTWcF1P1fCbevkAlbreayG81OEUyLNQfzAzXQo7zkh9hW4NIc7tTjsA
+	 yXtm7WT1+NimqtEatmqa0yEx6xhEjSgIhwfZcwoCiD01snKqYHMTUlR36OBZy8xVK8
+	 6IXkIcVlKy/Db4xdl9DLBmc+Km2u6HiTk80NuZFk55bilADAheWkOJH/xBZmab6Tbj
+	 Px1KyIrxRq5HSfyVW+79rZI5JCD7PFYd1/ZYG/HNHJdv3T9q2NGXyD5BlJZ1lfIV2Y
+	 ElA0H2XHMyAzphGcmGMPYu5iv/szAGqYOqMVNDKmf/cnqquppfv2+HngOTykUui/WS
+	 iT4B22/mLnf+A==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 14/23] mfd: twl6030: Use named initializers for
- of_device_id
+Subject: Re: [PATCH v3 16/23] mfd: Use named initializers for
+ platform_device_id array
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?VXdlIEtsZWluZS1Lw7ZuaWcgKFRoZSBDYXBhYmxlIEh1Yik=?= <u.kleine-koenig@baylibre.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <7be6ef143f760ef6ccec4d6427a471d3b4c0a71e.1783615311.git.u.kleine-koenig@baylibre.com>
+Cc: lee@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <c7390ea19a88cbfe80e86b7ff308664a2eec27a2.1783615311.git.u.kleine-koenig@baylibre.com>
 References: <cover.1783615311.git.u.kleine-koenig@baylibre.com>
- <7be6ef143f760ef6ccec4d6427a471d3b4c0a71e.1783615311.git.u.kleine-koenig@baylibre.com>
+ <c7390ea19a88cbfe80e86b7ff308664a2eec27a2.1783615311.git.u.kleine-koenig@baylibre.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 09 Jul 2026 17:12:52 +0000
-Message-Id: <20260709171253.6777C1F00A3E@smtp.kernel.org>
+Date: Thu, 09 Jul 2026 17:14:01 +0000
+Message-Id: <20260709171402.1F6711F00A3D@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
 
 Pre-existing issues:
-- [High] free_irq() is called with NULL for dev_id, failing to free the int=
-errupt handler and causing a use-after-free on device unbind.
-- [High] Error path in `twl_probe()` bypasses cleanup of IRQs and dummy I2C=
- devices.
+- [High] Missing unwind on probe failure leaves MFD child devices registere=
+d after parent devm resources are freed.
 --
 
---- Patch [14]: [PATCH v3 14/23] mfd: twl6030: Use named initializers for o=
-f_device_id ---
-commit 037bf4f703042ace1a5e538197548013f6508c96
+--- Patch [16]: [PATCH v3 16/23] mfd: Use named initializers for platform_d=
+evice_id array ---
+commit ec581d08b9548572f0688e2c43ff55f2b791a8ca
 Author: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@baylibre.c=
 om>
 
-mfd: twl6030: Use named initializers for of_device_id
+mfd: Use named initializers for platform_device_id array
 
-This commit updates the twl6030_of_match array to use named initializers
-for the .data member. This matches the style of the .compatible member
-and improves robustness for future struct changes.
+This commit updates platform_device_id arrays across multiple MFD drivers
+to use named initializers for improved readability and robustness. It also
+removes trailing commas from the terminator elements.
 
-> diff --git a/drivers/mfd/twl6030-irq.c b/drivers/mfd/twl6030-irq.c
-> index 0ca00f618d4d4..4303fb288dd5a 100644
-> --- a/drivers/mfd/twl6030-irq.c
-> +++ b/drivers/mfd/twl6030-irq.c
-> @@ -283,8 +283,8 @@ static const struct irq_domain_ops twl6030_irq_domain=
-_ops =3D {
->  };
+> diff --git a/drivers/mfd/ab8500-core.c b/drivers/mfd/ab8500-core.c
+> index f0bc0b5a6f4ad..7c00c71ca4ba0 100644
+> --- a/drivers/mfd/ab8500-core.c
+> +++ b/drivers/mfd/ab8500-core.c
+
+[ ... ]
+
+> @@ -1250,10 +1250,10 @@ static int ab8500_probe(struct platform_device *p=
+dev)
+>  }
 > =20
->  static const struct of_device_id twl6030_of_match[] __maybe_unused =3D {
-> -	{.compatible =3D "ti,twl6030", &twl6030_interrupt_mapping},
-> -	{.compatible =3D "ti,twl6032", &twl6032_interrupt_mapping},
-> +	{ .compatible =3D "ti,twl6030", .data =3D &twl6030_interrupt_mapping },
-> +	{ .compatible =3D "ti,twl6032", .data =3D &twl6032_interrupt_mapping },
->  	{ },
+
+[Severity: High]
+This is a pre-existing issue, but I noticed a potential problem in the
+error paths of ab8500_probe() right above this array.
+
+In ab8500_probe(), mfd_add_devices() is called manually multiple
+times during probe. If an intermediate call fails, for example when
+registering ab8540_cut1_devs, or if the subsequent sysfs_create_group()
+call fails, the function returns a non-zero error code without calling
+mfd_remove_devices() to unwind the already registered children.
+
+Since the parent probe fails, the driver core cleans up the parent's
+devm managed resources and clears the driver data. Does this leave the MFD
+child devices registered and orphaned?
+
+If drivers for these child devices subsequently bind, could they encounter
+a use-after-free or null pointer dereference when retrieving parent data
+via dev_get_drvdata(pdev->dev.parent)?
+
+>  static const struct platform_device_id ab8500_id[] =3D {
+> -	{ "ab8500-core", AB8500_VERSION_AB8500 },
+> -	{ "ab8505-core", AB8500_VERSION_AB8505 },
+> -	{ "ab9540-i2c", AB8500_VERSION_AB9540 },
+> -	{ "ab8540-i2c", AB8500_VERSION_AB8540 },
+> +	{ .name =3D "ab8500-core", .driver_data =3D AB8500_VERSION_AB8500 },
+> +	{ .name =3D "ab8505-core", .driver_data =3D AB8500_VERSION_AB8505 },
+> +	{ .name =3D "ab9540-i2c", .driver_data =3D AB8500_VERSION_AB9540 },
+> +	{ .name =3D "ab8540-i2c", .driver_data =3D AB8500_VERSION_AB8540 },
+>  	{ }
 >  };
-
-[Severity: High]
-This isn't a bug introduced by this patch, but while reviewing this file,
-I noticed a potential issue in twl6030_exit_irq(). Does this function fail
-to deregister the interrupt handler?
-
-In twl6030_init_irq(), the IRQ is requested with twl6030_irq as the dev_id:
-
-    status =3D request_threaded_irq(irq_num, NULL, twl6030_irq_thread,
-                                  IRQF_ONESHOT, "TWL6030-PIH",
-                                  twl6030_irq);
-
-However, twl6030_exit_irq() passes NULL as the dev_id:
-
-    free_irq(twl6030_irq->twl_irq, NULL);
-
-Since free_irq() requires the exact cookie to find and remove the action,
-passing NULL causes it to return without freeing the handler. Because
-twl6030_irq is managed via devm_kzalloc(), it will be freed on unbind.
-Could this lead to a use-after-free if the interrupt fires after the device
-unbinds?
-
-[Severity: High]
-This is also a pre-existing issue, but in the related drivers/mfd/twl-core.c
-file, does the error path in twl_probe() bypass cleanup of IRQs and dummy
-devices?
-
-If probe fails during devm_mfd_add_devices(), the code takes this path:
-
-    if (status)
-        goto free;
-
-Jumping to the free label bypasses twl_remove(), which would normally be
-called if it jumped to fail. Does this skip deregistering the PM notifiers
-and dummy I2C devices?=20
-
-Since probe failure automatically triggers devm cleanup, any active notifie=
-rs
-and handlers pointing to devm-allocated memory might trigger a use-after-fr=
-ee
-later on.
+>
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/cover.1783615311.gi=
-t.u.kleine-koenig@baylibre.com?part=3D14
+t.u.kleine-koenig@baylibre.com?part=3D16
