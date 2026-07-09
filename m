@@ -1,147 +1,196 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D532396D14
-	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 17:18:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5C5D2FD1B3;
+	Thu,  9 Jul 2026 17:19:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783617498; cv=none; b=e8VgF24b1IYIHgjZXWWcaPMEsqeoJ7EJ+sa8DpCqGSdx2gLKZkhWYWMXtUqRnrJmpB18QtvydgNV6MBZ/qJ8nkeGWu69sWpQ33/UmEtGLZIYKxeA6OQNEcEF1Jg4zyW6EAOWsETCCQA1vq61tneux2lW/bZqTGmmN6aExRh8BGs=
+	t=1783617565; cv=none; b=B+f4aomDbkrMsOwCZArnHgoquJOoPnoYN0W8cLVxeLpOTNY1MlfvvPRn+7YmhgFIAIx5LOrgp3CmmvkdH90dgTHDkwzvSCVwsiUYeAemabyp7O09AEfkzNdVs4kWOnjVA9gu4HkEqs5fIhKIvnPnaVolzrSLpZpSAUMqvsgONlk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783617498; c=relaxed/simple;
-	bh=vKiD02uFQx09704sQEDdzQxL8tL6ynOcfa+5DxBvftU=;
+	s=arc-20240116; t=1783617565; c=relaxed/simple;
+	bh=0nHkn/5OroKaJJXmYKfkhRK2Blfe7GwZ6bV2Lasn1ZY=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=f8Sae7dXnjH45lGq+5UZtIGCeGY6icCbDGGM6FRHEc4/7h+3RiyBPSCiAddIc2mukSCFsFv2pqJ5lAFBpwOMTh3mkhuMHu9Knh4bQaAKfbfzQdk37vqpbxX9YURYzE05Bb9tG+ADcLTwiMERAADQKCZfHCEGe1cTfNg84Mx9OnY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QT+jOZm2; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=mV0YsJwskjq6ivAkw7lTCiiONSlNa4GICVdx3f37ZIi6kI2tlkDZMxlAw+UgZXiUhHRb5fzFZVo+90e+VUmf3QlPr2Oz20cSkRhWESJSlQsLrQXd4TGxnjbpiZDMYg8SksqXEUrbqD0r7n71WcH8+WcoVWOXxhhJCoGr/BOuyjg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XpJA2Kdm; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QT+jOZm2"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF1B21F00A3A;
-	Thu,  9 Jul 2026 17:18:16 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XpJA2Kdm"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 325291F00A3A;
+	Thu,  9 Jul 2026 17:19:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783617497;
-	bh=WTN+/dbg70lMK2WhvOAWiKpdTWWaTRXmBsAZxlckC6M=;
+	s=k20260515; t=1783617563;
+	bh=I/APwcgRGdwy4hkrXbtaBGQerUWhJgbrlnQXqsjEeX0=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=QT+jOZm23eNEQzck6WyBPZ6peymxv/icA6Eb2IaA2Btklbmcf5IuSr6RRRfuF5oJz
-	 XCpfX/ln5j7R/IGsmLYz40IhEbCOcyFwu3XMp81XDCaZAcRHU84iNMhMa9NzeqOQ5X
-	 5yLGs6pUqUkA3ytLprKigx4nMkEUCHI0xME1aosh1FWDR1Dm6zOQV8wAB/gZUXQ5S8
-	 97AlI2r1TaR36VLXMl7g1tXjKrrgqSiJPVSs7/4ycQ5A+JQWJZ7XtJWhu/ST48/kwJ
-	 cnc2CEX+yd8c/ZWw9siZDMr0ns+HBNmJH+k/Uk36IsJETNX3PmgOoeD5aW+Qlcdyuj
-	 X8btB6PI9/9tQ==
+	b=XpJA2KdmM6cHjeabRitYF0Sol+y+db66eipHSpa7xqLzMz0c7BWcyi5BNcgN2wCP4
+	 ph3nCp4A4CBCaEh3dlqNZ4WuGgZIfqsdHmtE9BkZQWSvYEpxyJB0HaaYajiTRG7nKz
+	 fFxsssG5vO/s9TzzRKiUffq6KbZiFBOJP5vDLz7kphqZO0ikl0q6W9gVipOLydb0Yx
+	 l5ZDBDs+pyWshmOZy8SR2O4N/4aBMmQ4imEbnChPcr1bCIu1kl7ah26u1p5LEGidjl
+	 anZfi8n+m1SE37cXbvrKW+FzB8JfGuPT4GBUiPp5gPvC5ZJZYlxOu2AEj1HNE8HGEp
+	 yAsaqRs5O9kyg==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 18/23] mfd: Unify style of acpi_device_id arrays
+Subject: Re: [PATCH v3 21/23] mfd: Unify style of of_device_id arrays
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?VXdlIEtsZWluZS1Lw7ZuaWcgKFRoZSBDYXBhYmxlIEh1Yik=?= <u.kleine-koenig@baylibre.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <5b32d03de8e0e3293f625e9886e0ee849ed4e511.1783615311.git.u.kleine-koenig@baylibre.com>
+Cc: linux-sunxi@lists.linux.dev, lee@kernel.org, mfd@lists.linux.dev, imx@lists.linux.dev, Frank.Li@kernel.org, neil.armstrong@linaro.org, wsa+renesas@sang-engineering.com, linux-amlogic@lists.infradead.org
+In-Reply-To: <e5cc82aa51da5f545f745b126923fdd6085a68a0.1783615311.git.u.kleine-koenig@baylibre.com>
 References: <cover.1783615311.git.u.kleine-koenig@baylibre.com>
- <5b32d03de8e0e3293f625e9886e0ee849ed4e511.1783615311.git.u.kleine-koenig@baylibre.com>
+ <e5cc82aa51da5f545f745b126923fdd6085a68a0.1783615311.git.u.kleine-koenig@baylibre.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 09 Jul 2026 17:18:16 +0000
-Message-Id: <20260709171816.CF1B21F00A3A@smtp.kernel.org>
+Date: Thu, 09 Jul 2026 17:19:22 +0000
+Message-Id: <20260709171923.325291F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
+Thank you for your contribution! Sashiko AI review found 4 potential issue(=
 s) to consider:
 
 Pre-existing issues:
-- [High] MFD subsystem guideline violation: Passing complex pointers throug=
-h match data tables.
-- [High] MFD subsystem guideline violation: Dynamically building mfd_cell a=
-rray on the stack.
-- [High] Out-of-bounds read due to using sizeof() on a pointer instead of t=
-he struct.
+- [High] Complex platform data and child device structures passed via match=
+ data
+- [High] Dynamic modification of global mfd_cell arrays introduces data rac=
+es
+- [High] Data race on global da9063_regmap_config struct during probe
+- [High] IRQ handler leak and subsequent Use-After-Free in twl6030_exit_irq
 --
 
---- Patch [18]: [PATCH v3 18/23] mfd: Unify style of acpi_device_id arrays =
----
-commit 72f79bce0303bfad96f182c30e01fadb7cbc3793
+--- Patch [21]: [PATCH v3 21/23] mfd: Unify style of of_device_id arrays ---
+commit 99f4911da67f8c43f41d211ea0ad4e7a3a4972cd
 Author: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@baylibre.c=
 om>
 
-mfd: Unify style of acpi_device_id arrays
+mfd: Unify style of of_device_id arrays
 
-This commit updates various acpi_device_id arrays across MFD drivers to use
-a consistent styling. It ensures no comma after the list terminator and a
-single space inside the terminator braces.
+This commit unifies the coding style of of_device_id arrays across multiple
+MFD drivers. It removes trailing commas after list terminators, adds spaces
+before closing braces, and ensures consistent formatting.
 
+> diff --git a/drivers/mfd/da9063-i2c.c b/drivers/mfd/da9063-i2c.c
+> --- a/drivers/mfd/da9063-i2c.c
+> +++ b/drivers/mfd/da9063-i2c.c
 [ ... ]
+> @@ -361,11 +361,12 @@ static struct regmap_config da9063_regmap_config =
+=3D {
+>  };
+> =20
+>  static const struct of_device_id da9063_dt_ids[] =3D {
+> -	{ .compatible =3D "dlg,da9063", },
+> -	{ .compatible =3D "dlg,da9063l", },
+> +	{ .compatible =3D "dlg,da9063" },
+> +	{ .compatible =3D "dlg,da9063l" },
+>  	{ }
+>  };
+>  MODULE_DEVICE_TABLE(of, da9063_dt_ids);
+> +
+>  static int da9063_i2c_probe(struct i2c_client *i2c)
+>  {
+>  	const struct i2c_device_id *id =3D i2c_client_get_device_id(i2c);
 
-> diff --git a/drivers/mfd/kempld-core.c b/drivers/mfd/kempld-core.c
-> index 3370a13d581b1..4c1e7a0ab0ee1 100644
-> --- a/drivers/mfd/kempld-core.c
-> +++ b/drivers/mfd/kempld-core.c
-> @@ -440,7 +440,7 @@ static void kempld_remove(struct platform_device *pde=
-v)
->  static const struct acpi_device_id kempld_acpi_table[] =3D {
->  	{ .id =3D "KEM0000" },
->  	{ .id =3D "KEM0001" },
+[Severity: High]
+This is a pre-existing issue, but does da9063_i2c_probe() mutate the shared
+global da9063_regmap_config struct during probe?
+
+Depending on the device variant, the probe function dynamically assigns
+different tables:
+
+    da9063_regmap_config.rd_table =3D &da9063_ad_readable_table;
+
+Could this lead to a data race causing incorrect configuration if multiple
+instances of the device (or different variants) are probed at the same time?
+
+> diff --git a/drivers/mfd/rohm-bd9576.c b/drivers/mfd/rohm-bd9576.c
+> --- a/drivers/mfd/rohm-bd9576.c
+> +++ b/drivers/mfd/rohm-bd9576.c
+[ ... ]
+> @@ -167,9 +167,9 @@ static int bd957x_i2c_probe(struct i2c_client *i2c)
+>  }
+> =20
+>  static const struct of_device_id bd957x_of_match[] =3D {
+> -	{ .compatible =3D "rohm,bd9576", .data =3D (void *)ROHM_CHIP_TYPE_BD957=
+6, },
+> -	{ .compatible =3D "rohm,bd9573", .data =3D (void *)ROHM_CHIP_TYPE_BD957=
+3, },
+> -	{ },
+> +	{ .compatible =3D "rohm,bd9576", .data =3D (void *)ROHM_CHIP_TYPE_BD957=
+6 },
+> +	{ .compatible =3D "rohm,bd9573", .data =3D (void *)ROHM_CHIP_TYPE_BD957=
+3 },
+> +	{ }
+>  };
+
+[Severity: High]
+This isn't a bug introduced by this patch, but does the probe function for
+this device dynamically modify a shared global mfd_cell array?
+
+bd957x_i2c_probe() contains:
+
+    regulators =3D &bd9576_mfd_cells[BD957X_REGULATOR_CELL];
+    regulators->resources =3D bd9576_regulator_irqs;
+
+If multiple instances of this device are probed concurrently, could they ra=
+ce
+to modify the same global array? A similar issue also seems to exist in
+88pm860x-core.c and as3711.c.
+
+> diff --git a/drivers/mfd/simple-mfd-i2c.c b/drivers/mfd/simple-mfd-i2c.c
+> --- a/drivers/mfd/simple-mfd-i2c.c
+> +++ b/drivers/mfd/simple-mfd-i2c.c
+[ ... ]
+> @@ -126,7 +126,7 @@ static const struct of_device_id simple_mfd_i2c_of_ma=
+tch[] =3D {
+>  	{ .compatible =3D "maxim,max77705-battery", .data =3D &maxim_mon_max777=
+05 },
+>  	{ .compatible =3D "silergy,sy7636a", .data =3D &silergy_sy7636a },
+>  	{ .compatible =3D "spacemit,p1", .data =3D &spacemit_p1 },
 > -	{}
 > +	{ }
 >  };
 
 [Severity: High]
-This is a pre-existing issue, but does kempld_register_cells_generic()
-dynamically allocate its mfd_cell array on the stack?
+This is a pre-existing issue, but does passing complex struct pointers
+through the match data violate the MFD subsystem guidelines? The
+documentation recommends using an integer or enum ID instead to avoid memory
+safety hazards and initialization ordering races.
 
-drivers/mfd/kempld-core.c:kempld_register_cells_generic() {
-    struct mfd_cell devs[KEMPLD_MAX_DEVS] =3D {};
-    int i =3D 0;
+This pattern appears here as well as in mc13xxx-spi.c, rk8xx-i2c.c,
+sec-acpm.c, sec-i2c.c, and sun6i-prcm.c.
 
-    if (pld->feature_mask & KEMPLD_FEATURE_BIT_I2C)
-        devs[i++].name =3D kempld_dev_names[KEMPLD_I2C];
-    ...
-}
-
-The MFD subsystem guidelines state that mfd_cell arrays must be static
-references. Dynamically allocating these arrays on the stack can lead
-to memory safety hazards if the subsystem core retains references.
-
-[Severity: High]
-This is another pre-existing issue in this file, but does kempld_probe()
-contain an out-of-bounds read?
-
-drivers/mfd/kempld-core.c:kempld_probe() {
-    ...
-    ret =3D platform_device_add_data(pdev, pdata, sizeof(pdata));
-    ...
-}
-
-Using sizeof(pdata) evaluates to the size of the pointer rather than the
-size of the struct it points to, which can cause an out-of-bounds read
-during kmemdup.
-
+> diff --git a/drivers/mfd/twl6030-irq.c b/drivers/mfd/twl6030-irq.c
+> --- a/drivers/mfd/twl6030-irq.c
+> +++ b/drivers/mfd/twl6030-irq.c
 [ ... ]
-
-> diff --git a/drivers/mfd/upboard-fpga.c b/drivers/mfd/upboard-fpga.c
-> index 6674f4a1d2fe5..37c3c50aa6e47 100644
-> --- a/drivers/mfd/upboard-fpga.c
-> +++ b/drivers/mfd/upboard-fpga.c
-> @@ -302,7 +302,7 @@ static int upboard_fpga_probe(struct platform_device =
-*pdev)
->  static const struct acpi_device_id upboard_fpga_acpi_match[] =3D {
->  	{ .id =3D "AANT0F01", .driver_data =3D (kernel_ulong_t)&upboard_up2_fpg=
-a_data },
->  	{ .id =3D "AANT0F04", .driver_data =3D (kernel_ulong_t)&upboard_up_fpga=
-_data },
-
-[Severity: High]
-This isn't a bug introduced by this patch, but does this ACPI match table
-violate MFD subsystem guidelines by passing complex pointers in the
-.driver_data field?
-
-The guidelines explicitly prohibit passing complex pointers through match
-data tables because it can cause memory safety hazards and initialization
-ordering races. They recommend storing an enum or integer ID instead.
-
-> -	{}
+> @@ -285,7 +285,7 @@ static const struct irq_domain_ops twl6030_irq_domain=
+_ops =3D {
+>  static const struct of_device_id twl6030_of_match[] __maybe_unused =3D {
+>  	{ .compatible =3D "ti,twl6030", .data =3D &twl6030_interrupt_mapping },
+>  	{ .compatible =3D "ti,twl6032", .data =3D &twl6032_interrupt_mapping },
+> -	{ },
 > +	{ }
 >  };
->  MODULE_DEVICE_TABLE(acpi, upboard_fpga_acpi_match);
+> =20
+>  int twl6030_init_irq(struct device *dev, int irq_num)
+
+[Severity: High]
+This is a pre-existing issue, but is there an IRQ handler leak and potential
+use-after-free during device removal here?
+
+In twl6030_init_irq(), the interrupt is requested with twl6030_irq as the
+dev_id:
+
+    status =3D request_threaded_irq(irq_num, NULL, twl6030_irq_thread,
+                                  IRQF_ONESHOT, "TWL6030-PIH", twl6030_irq);
+
+However, in twl6030_exit_irq(), it appears NULL is passed to free_irq()
+instead of twl6030_irq:
+
+    free_irq(twl6030_irq->twl_irq, NULL);
+
+Will free_irq() silently fail to remove the handler due to the mismatched
+dev_id, leaving the handler registered after the twl6030_irq struct is free=
+d?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/cover.1783615311.gi=
-t.u.kleine-koenig@baylibre.com?part=3D18
+t.u.kleine-koenig@baylibre.com?part=3D21
