@@ -1,74 +1,116 @@
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1047E35975
-	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 15:47:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44075434414
+	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 16:08:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783612049; cv=none; b=MH9KYcwwWEPeX259VinLPrdQui8pH38B+MlWL0sv5stmR3UJEUujbhE4DSEKMEuLA9s8Y0ryuNJA2cmx3Ge3bPlHt+ZGhg9LSSLHqEA5/DsmzLXZFS5DJ45xGdhvYgWKoRy+X+rY+XtqzBhf6sydrDcIMQ9RdXC+WKbwMw20qMY=
+	t=1783613329; cv=none; b=haN7LAJXSCS7MvWdoW1+GG8c8ugNxcbaSx0YD3m+PTdqw6S+tfalkwEXnjEc2ogX66sC/ai8Jy2rKIBWkqZjHQ0FMcRODQCL+4JVzsTgFACdUiJn/+oa3SUXi2W1onDQMZQnLHckhm9tLCdB9X5utGdrIRzG03NiwZqSHpMfbFs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783612049; c=relaxed/simple;
-	bh=EA7L7caIXI2XAV/oDH4j4Pgo/dJQkGiWu8U2J5PGXRM=;
+	s=arc-20240116; t=1783613329; c=relaxed/simple;
+	bh=LdoEID+mftfieJuREjeHFGnl1pSH4i3KPMTl65rvBKc=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=h3xjz2rVLlXWPLCCgID8wmmHrCVJZwpxEMzB9kqML0cpqr7EcpaMw/TMEmMT+/nVYBOEtOLK+Ssw2itHIEizXPA6DO2chVzfE0s6PQ+Hft1X+xSnsvMho2CY+ZI+nVAlgLCtE2KJpoYxVl9AuiJRC4F2zrj74alDQzvPy9GhbFk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=kEh7G2k0; arc=none smtp.client-ip=209.85.128.46
+	 Content-Type:Content-Disposition:In-Reply-To; b=UQo0k3Lp6uhvwJ9zQ9ZzSDsxFI31epXfYq4Cm6k7clDka3BCm97hsL1fpRWOhl5xvQf1i7hAMeFoC4vz2bZ2lQqwYTagJ2cMQxR88oJTnHd1y1zkhQg7wxZb7a1dSgIv1acOFn63Odty74pwkIpa90lpVm3Ns6HdRtXUfLDALqM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=OlaXl+Dq; arc=none smtp.client-ip=209.85.221.51
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="kEh7G2k0"
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-493ed9d8c5cso4874625e9.1
-        for <mfd@lists.linux.dev>; Thu, 09 Jul 2026 08:47:27 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="OlaXl+Dq"
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-4758bd3731bso23496f8f.0
+        for <mfd@lists.linux.dev>; Thu, 09 Jul 2026 09:08:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1783612046; x=1784216846; darn=lists.linux.dev;
+        d=baylibre.com; s=google; t=1783613326; x=1784218126; darn=lists.linux.dev;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=EA7L7caIXI2XAV/oDH4j4Pgo/dJQkGiWu8U2J5PGXRM=;
-        b=kEh7G2k0zx6BuxgNgvQ2mU3a0QJUAioyXKclgmAbO7TgtzNbQQ9NCXStIuccTYvJzn
-         utKWiHY6HmNjBJxjz9lLHXi2NVENibRm/CvJlMk3id+EM+PUo6eVC6pCST4vivFJ4xRq
-         Tmp3cBEZroBPzOeq4oeTT2xb2mttAC0+834pTdlKYZc5UpUqyMLVxTCpB7ABomg+Ial5
-         csBg/Z3bPAQ8GOl7k5WDHAQzchZMI4B8UBi09c4bpnrEkJtYW6Azq/tc6GADAggE7oD9
-         ET0yGeFcQinDdykvAywpEFFv7MjvVjenFOAZ8/zt6DHcrwJUKQYHIy+p/A2HWg4ACdxV
-         graQ==
+        bh=Gov176wXURlzSR3dUDxqqJ+JUc69jBkAANSG0MToDuM=;
+        b=OlaXl+DqVUYjmvG6NAStY4tSM729WeXdVYHYvehgyyNS3UFOcQe3Bkvmc+PAcJwJqy
+         3PH80vdK4EtH6FiMArgeFh9rUzwf+7eONeMESnzq3M80Qct28P52E+OvWkCUgWIDlPLa
+         Ek9B43PNYf493kNsgX8YdUQ+Y5rxd+clfUWoguE+7ctQEIC7bSUAJq19820VGpTtSj7X
+         gG3Nzptbl03Y4Q0uNAI2XlmzI5YLBIKSLbyiSkcKkV4+5B5eh129FAMsPAhbs+mwDA0Y
+         tZK/QhqHaAKiBfDprQUw9C3QT7PqIgRYJO7ANV+kQQ5fpKph9BegGEeabXMOD+AwLlnY
+         RpWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783612046; x=1784216846;
+        d=1e100.net; s=20251104; t=1783613326; x=1784218126;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=EA7L7caIXI2XAV/oDH4j4Pgo/dJQkGiWu8U2J5PGXRM=;
-        b=fTHb93HdEdoyeACaqW96zx0eRNfzngHtv4nxcXcUrAwJ6VXuCYMED/Ft8bqVYQB46n
-         YAK6UQoEWEYMtra0hPFxugewaCWa/4zJ/x+aoq5mSGFgRNIFBaE/ZucsN1inF8aD5ABc
-         FOkSaLyBzQikhap7I7+9Qk9wFBsOZY7ijGC2SWnaxzAAPiel7k1U+sgcpMH/qQ5y6Ud/
-         NPrE+TCMY+NV0fCpMKIgRPLUQN8ZYW5aEWCffkXHEb2awGi9LIjfoFuhucxGkf/49rjf
-         8avLA/8ltYU2eEzSQmlxsAkNbStpmGTQo8E8T7uDNJXeYH2niSngH1+KwKJESzG/SzZs
-         2l3w==
-X-Gm-Message-State: AOJu0YyY9cPUTfSZZ0VdkLox1QEMysKzgESkH8HoDbX9Nd1YxD7UkDH/
-	p6LWUR8syc1J/+JqyGiLK6cCiAlXFZCINI1noOj+aL/ejE6LpPGfqz4oMchKK984MRI=
-X-Gm-Gg: AfdE7cmniCg8cFL/NUb9/3A31RvCRNcuGKswGQ4G4KpcRBlGps5Z3IY4OXiVVZMn3bp
-	sGgL5iyHFkOhTN/Hss5RljjKf6kComxMB8Pw0pCVyQ3nwqQjaLty06U06OzhHlpLRYRlIuv3s/m
-	uh+hEBF+BknHlYaae3pCdOmp1i4ADa0eUCA0j7/AJ2gkZctXqieiaszZtTCkvvEYBdh0aVMHiMc
-	R2SXbk8fPd/GnPU5QOKSA4O3IbB/v1WtA7M8yLtkfpanN90fbEtwQQZB7YLEWQ70zoUUoqzEaAV
-	bvvwmrkg93ZBOew4g3vUTOtxRvg4uN8fhHUv1eg8r/30gDOb1QRfCtovW64PyzsnZZY2k1t99GO
-	w6HvfvfLaYEbn67xGHU33MdJ0hz8dB4J9T8uJTdvfvGWSzrNXe/NW8ITCftOYwHBmIzA8qmBEcn
-	omAoaE9ra2xHshTij+cp2bi+qJ+ZgXmd/DqrGfCn/X2NHA6TdpFY5AGjxwA3It8NrqbANojij8j
-	WM9
-X-Received: by 2002:a05:600c:3e88:b0:493:efcd:b809 with SMTP id 5b1f17b1804b1-493efcdb895mr16436325e9.6.1783612046460;
-        Thu, 09 Jul 2026 08:47:26 -0700 (PDT)
+        bh=Gov176wXURlzSR3dUDxqqJ+JUc69jBkAANSG0MToDuM=;
+        b=ekAyUdYz0P4Mf6UwOFW20rkQHexjNEVrnTWV2bmTby1XUlb2vE7iCbGZEsYdJF0+No
+         st/z8ks8g+7iL1IIOb3GKdQR9yGxAcLKVo2SrlkroOk5T2m3pTjJUzkmavGN+4sSAitG
+         l8vSSimEL3bo2FjRpMo1VpnyKRoWaA4UoyVXCHOdzAp0Sia1vg7OMAliSw8A68rZ2Jdt
+         Mp1O9joCXlk+pVqTJQUnsnhlE/iPlZ2zkVWvWZxOqBhnBRC2qxzVZepljpR+MlLLOD0n
+         egpYBjqjJtskjkaXP9YAJzYLrg3u+AnJes7GT4119fFWeP5eyWlPXC7F83oMrSHC+YGw
+         ZDzg==
+X-Forwarded-Encrypted: i=1; AHgh+Rq0D1nLrioz48YBMTeBJ918skVyo2r/oajdb0TlQ624XpXn4HMMCoGH1ThmlNYVYbB+oQw=@lists.linux.dev
+X-Gm-Message-State: AOJu0Ywp2E1qbEFBmUEqyYXKtAyYaDw26ugfW9GLbXgcI+GmLN+HXY6B
+	nIeAsCCQN6VPOvB/39EKnwsyHNnkHTB6oQmEBbvB1KxEgnGqJw0lEqz49rKySJKbmHA=
+X-Gm-Gg: AfdE7cm3v5RIvJ4OhWF9Us5rfu6PHyLZP4D50jZbA6EigDRFRpuW5awrX47cfUKs/hJ
+	0F73ZLNG1Olu/e9cQ3bS1TwxH5fw9f2q0eHUIjVOISrBciPvXWg795MlronUe4eGewseOSwuO0l
+	p77YBnGlZ/P2HX7E6uYODtFlG71aLA003kdxKGFImxhhrdHFq2fiDRAya7C4BSTUvTGIlaqs+Su
+	z5nNx6zMcAjwcD/DAf7SGVfFqADS0HCu9+m0ywgxx/pDxDUQVroq+NAaz0ckSgNT3KXwBdTOlog
+	yAXcqfQbuh5aMFUBttGPwfqyfKBoMXT05/7HxyNOzRM8Rfx5n/oXcIbEtuISuoVvljaaXdgSGgd
+	G78UE7Jlr1sx3vnBj//7N0n3yimnY3/C3Dv9u1H00IpVn0vDNTeNePLol3i+kFb+oVZkHnp+YSV
+	E3mDob3n69PKO77NeuGqryDcvAp5qnqPQ8L4gPHgiyCs8QCTHJasXGfftFkK/nmYz+fH54nt6gi
+	dgF
+X-Received: by 2002:a05:6000:230b:b0:46d:f979:1827 with SMTP id ffacd0b85a97d-47df757026bmr3824909f8f.23.1783613325532;
+        Thu, 09 Jul 2026 09:08:45 -0700 (PDT)
 Received: from localhost (p200300f65f47db043de98c19b374aa68.dip0.t-ipconnect.de. [2003:f6:5f47:db04:3de9:8c19:b374:aa68])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-493eb6ccaf1sm124528725e9.2.2026.07.09.08.47.24
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-47aa0960816sm50486350f8f.29.2026.07.09.09.08.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Jul 2026 08:47:25 -0700 (PDT)
-Date: Thu, 9 Jul 2026 17:47:23 +0200
+        Thu, 09 Jul 2026 09:08:43 -0700 (PDT)
+Date: Thu, 9 Jul 2026 18:08:42 +0200
 From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>
-To: sashiko-reviews@lists.linux.dev
-Cc: mfd@lists.linux.dev, lee@kernel.org
-Subject: Re: [PATCH v2 15/23] mfd: Use PCI_DEVICE* macros to initialize
- pci_device_id arrays
-Message-ID: <ak_CNIdQ1QvF5TKM@monoceros>
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Lee Jones <lee@kernel.org>, 
+	Florian Fainelli <florian.fainelli@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Ray Jui <rjui@broadcom.com>, 
+	Scott Branden <sbranden@broadcom.com>, mfd@lists.linux.dev, linux-rpi-kernel@lists.infradead.org, 
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, 
+	Matthias Brugger <matthias.bgg@gmail.com>, 
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, linux-mediatek@lists.infradead.org, 
+	Qunqin Zhao <zhaoqunqin@loongson.cn>, linux-crypto@vger.kernel.org, Benson Leung <bleung@chromium.org>, 
+	Guenter Roeck <groeck@chromium.org>, chrome-platform@lists.linux.dev, 
+	Colin Foster <colin.foster@in-advantage.com>, David Rhodes <david.rhodes@cirrus.com>, 
+	Richard Fitzgerald <rf@opensource.cirrus.com>, Mika Westerberg <mika.westerberg@linux.intel.com>, 
+	Zha Qipeng <qipeng.zha@intel.com>, Thomas Richard <thomas.richard@bootlin.com>, 
+	linux-sound@vger.kernel.org, patches@opensource.cirrus.com, Xu Yilun <yilun.xu@intel.com>, 
+	Tom Rix <trix@redhat.com>, Michael Hennerich <michael.hennerich@analog.com>, 
+	Chen-Yu Tsai <wens@kernel.org>, Marek Vasut <marek.vasut+renesas@gmail.com>, 
+	James Ogletree <jogletre@opensource.cirrus.com>, Fred Treven <fred.treven@cirrus.com>, 
+	Ben Bright <ben.bright@cirrus.com>, Support Opensource <support.opensource@diasemi.com>, 
+	Andy Shevchenko <andy@kernel.org>, Charles Keepax <ckeepax@opensource.cirrus.com>, 
+	Chanwoo Choi <cw00.choi@samsung.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
+	=?utf-8?B?QW5kcsOp?= Draszik <andre.draszik@linaro.org>, Aaro Koskinen <aaro.koskinen@iki.fi>, 
+	Andreas Kemnade <andreas@kemnade.info>, Kevin Hilman <khilman@baylibre.com>, 
+	Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>, 
+	Samuel Kayode <samkay014@gmail.com>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+	Alexandre Torgue <alexandre.torgue@foss.st.com>, linux-renesas-soc@vger.kernel.org, linux-omap@vger.kernel.org, 
+	imx@lists.linux.dev, linux-stm32@st-md-mailman.stormreply.com, 
+	Linus Walleij <linusw@kernel.org>, linux@ew.tq-group.com, 
+	Nicolas Ferre <nicolas.ferre@microchip.com>, Alexandre Belloni <alexandre.belloni@bootlin.com>, 
+	Claudiu Beznea <claudiu.beznea@tuxon.dev>, Peter Griffin <peter.griffin@linaro.org>, 
+	Alim Akhtar <alim.akhtar@samsung.com>, Tim Harvey <tharvey@gateworks.com>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Sven Peter <sven@kernel.org>, Janne Grunau <j@jannau.net>, 
+	Neal Gompa <neal@gompa.dev>, Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>, 
+	Luca Ceresoli <luca.ceresoli@bootlin.com>, Saravanan Sekar <sravanhome@gmail.com>, 
+	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, 
+	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
+	Jonathan =?utf-8?Q?Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>, Matti Vaittinen <mazziesaccount@gmail.com>, 
+	Orson Zhai <orsonzhai@gmail.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
+	Chunyan Zhang <zhang.lyra@gmail.com>, Fabrice Gasnier <fabrice.gasnier@foss.st.com>, 
+	Jernej Skrabec <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>, 
+	Liviu Dudau <liviu.dudau@arm.com>, Sudeep Holla <sudeep.holla@kernel.org>, 
+	Lorenzo Pieralisi <lpieralisi@kernel.org>, Geert Uytterhoeven <geert+renesas@glider.be>, 
+	Magnus Damm <magnus.damm@gmail.com>, linux-samsung-soc@vger.kernel.org, 
+	linux-amlogic@lists.infradead.org, asahi@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
+	linux-sunxi@lists.linux.dev, Peter Tyser <ptyser@xes-inc.com>
+Subject: Re: [PATCH v2 00/23] mfd: Use named initializers for arrays of
+ *_device_data
+Message-ID: <ak_DIUQI9MX5aB8e@monoceros>
 References: <cover.1783507945.git.u.kleine-koenig@baylibre.com>
- <afa9a60627dcc211c8d975c6a90708d421ead8e5.1783507945.git.u.kleine-koenig@baylibre.com>
- <20260708112723.080911F000E9@smtp.kernel.org>
+ <ak41yQp3x78s4Fmx@ashevche-desk.local>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -76,64 +118,86 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="2nh437hk5opgvhwa"
+	protocol="application/pgp-signature"; boundary="ka4fpqo6ejmxfupn"
 Content-Disposition: inline
-In-Reply-To: <20260708112723.080911F000E9@smtp.kernel.org>
+In-Reply-To: <ak41yQp3x78s4Fmx@ashevche-desk.local>
 
 
---2nh437hk5opgvhwa
+--ka4fpqo6ejmxfupn
 Content-Type: text/plain; protected-headers=v1; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v2 15/23] mfd: Use PCI_DEVICE* macros to initialize
- pci_device_id arrays
+Subject: Re: [PATCH v2 00/23] mfd: Use named initializers for arrays of
+ *_device_data
 MIME-Version: 1.0
 
-On Wed, Jul 08, 2026 at 11:27:22AM +0000, sashiko-bot@kernel.org wrote:
-> Thank you for your contribution! Sashiko AI review found 1 potential issu=
-e(s) to consider:
-> - [Low] Non-standard commit message prefix omitting the driver name.
-> --
->=20
-> --- Patch [15]: [PATCH v2 15/23] mfd: Use PCI_DEVICE* macros to initializ=
-e pci_device_id arrays ---
-> commit 01daeb728dc1ab5baf28174c28473f068ecb03ae
-> Author: Uwe Kleine-K=F6nig (The Capable Hub) <u.kleine-koenig@baylibre.co=
-m>
->=20
-> mfd: Use PCI_DEVICE* macros to initialize pci_device_id arrays
->=20
-> pci_device_id entries are usually initialized using these PCI_DEVICE*
-> macros. Adapt to this more usual style.
->=20
-> > mfd: Use PCI_DEVICE* macros to initialize pci_device_id arrays
->=20
-> [Severity: Low]
-> This isn't a bug, but does this commit message subject violate the MFD
-> subsystem guidelines? The guidelines require the prefix to follow the for=
-mat
-> "mfd: <Driver>: <Capitalized description>". The driver name appears to be
-> missing from the subject line.
+Hello,
 
-The patch adapts two drivers. I guess mentioning both in the shortlog
-isn't the right thing to do?
+On Wed, Jul 08, 2026 at 02:34:33PM +0300, Andy Shevchenko wrote:
+> On Wed, Jul 08, 2026 at 01:15:07PM +0200, Uwe Kleine-K=F6nig (The Capable=
+ Hub) wrote:
+> > Hello,
+> >=20
+> > this series superseeds my previous patch "[PATCH v1] mfd: Use named
+> > initializers for arrays of i2c_device_data"
+> > (https://lore.kernel.org/lkml/20260515095839.4005460-2-u.kleine-koenig@=
+baylibre.com)
+> > that Lee asked me to rebase and also the series "[PATCH v1 0/3] mfd:
+> > Initialize spi_device_id arrays using member names"
+> > (https://lore.kernel.org/lkml/cover.1783003256.git.u.kleine-koenig@bayl=
+ibre.com).
+> >=20
+> > The objective for this series is to prepare mfd for changing
+> > of_device_id etc to make driver_data a union, see
+> > https://lore.kernel.org/all/cover.1780048925.git.u.kleine-koenig@baylib=
+re.com/
+> > for the idea behind it.
+> >=20
+> > This series is based on yesterday's next/master and it does the
+> > restructuring not only for i2c and spi (as the two series mentioned
+> > above), but for all *_device_id structures that I intend to modify with
+> > a union that affect mfd. So (I hope) this is the only patch series
+> > affecting mfd for this quest.
+> >=20
+> > I don't care much about the last few patches unifying the coding style.
+> > I think it's a good opportunity to do that, but if you don't like them,
+> > just don't apply these.
+>=20
+> The patches bring inconsistency (or still leave it) with the terminator s=
+tyle
+> in both I=B2C and ACPI ID tables. Can you revisit that?
+
+I found a few inconstencies for of_device_id, but not for acpi and i2c.
+I have a script for the acpi and i2c (and now also for the of) changes
+and don't spot inconsistencys in the terminator style for acpi and i2c
+devices apart from comments.
+
+(I looked at the output of:
+
+	git grep -lE '(i2c|acpi)_device_id [a-z0-9_]*\[\]' drivers/mfd | xargs -r =
+sed -rn '/(i2c|acpi)_device_id [a-zA-Z0-9_]*\[/,/^};/p' | grep -B1 ^\} | so=
+rt | uniq -c
+
+)
+
+Do you mean to unify the comments, too?
 
 Best regards
 Uwe
 
---2nh437hk5opgvhwa
+--ka4fpqo6ejmxfupn
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmpPwocACgkQj4D7WH0S
-/k6+Zgf/e2P3Jm49aEWhJ3uv95ltjPYkZ+KJNBdK6Y9AVMqXklrF9ZwuMcVKFl+t
-A+QvKKSQZFV28xhELbE2W45eFDeCNRN9fwqyPzjIXRTWsLHODclxYFlrczsj3vkh
-5eIEZmmyiMxKk6scUpYFYQEODV/H79yEOuSKo0P1rRDCkHONCn2N+WmHVJvjhGUY
-Y3tENhB1MP/n5Nw6HfLRg/BfLqQxz9zcl3reovvJha1dX1a27SDpb8citLmu4uIA
-1fYLArHPSeBMAHZpZocMncfVRQsYc4Q38IynIggoQDggAcvJ2toNV5hhyRRR9zPr
-vNeMHyvlQpg4VNes4oXJjgTwjmWTMA==
-=3WMp
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmpPx4cACgkQj4D7WH0S
+/k624gf/dzy2q/+UDcko+3qRC/vjduntKV5JaImo1jv66pbGa0vVyVdYDHS/QwvV
+X+Jr6jTMyEZcw6O1onRP1ZIcKU6MTkl/wvtqeLkFJ4PXv/hKftTSkP/IHkLuekNm
+Cn37LNIalY7gpr1gfPvcL5Q/BN1qqXCUggmW0xXf+Gi9W5bwWuTaRsJ9ehVptA3+
+rMp5HAYJ1isaiiqfMZJ/TqtNWHN6aVh8ZS6YU5b2iDitwtnRCQD1pOcYCYaXgfrt
+fbXqb+xpQvMfRgK+MLErhmJUfHf2tKi1s5OKoG1T9fiLCmp0VzTkB4+o4AgpQgeE
+pUTRSN5jhrCLDAt7v6B6b4XHPcYmTQ==
+=tSBk
 -----END PGP SIGNATURE-----
 
---2nh437hk5opgvhwa--
+--ka4fpqo6ejmxfupn--
