@@ -1,127 +1,119 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45CFC347DD
-	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 17:08:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2947139A075
+	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 17:08:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783616899; cv=none; b=mv+VSVAQYy0ivRnDOjwWL8PNMvF8BH+KNXjziMHgwAa2rrQmzvYi7c6rqH13EXN2i5hTYT6K4jbJKnQ6KhWQFBx+78PeT9xOzJvhUVmi5lt1a638gxxJSqrn0yi45qMAm+AWweNwHuJzey3bhtxizN3yDZusPtyFh/g5j2/BrEw=
+	t=1783616905; cv=none; b=LJDnd1QxkC6+6zgTCGEo73QXHd/XbUv47p/xixjtFhI1Hk7PCxVbYPIHEzRopWOg5SbdPjNKojxdFX/tUblKmT8LOX5cjbph2Mu1uQUQ0oDaOaf1lMyu0yly2uiuGoIqYLbzxwDCx1RnMVaR6oWfRj4VV/e9CqmqiOFW9hT7ovE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783616899; c=relaxed/simple;
-	bh=txxicC9DmeXmEavNy8MfCCsV3F5R8Osz4+gnlfq67Vo=;
+	s=arc-20240116; t=1783616905; c=relaxed/simple;
+	bh=8fJYSf+cAalvx1wpVVFU4vRLRWNUpRthZLaqVXRY6zs=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=opBZyGF4uwpXtlc5OMxSQ9NmVwBEGLQcApxmTXJ4rs3IrbYYNA9E+IgngjuN99LPtDUR1ORwo1x8uxQcqoED77nvfCLcOJWtnmLeL9j+AzEpAWRcLvmRdvU69O1/aZP5qf1HxBM60p6UKDLx8JncejEzTuDdquaSlRmc7Fsar+0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=M0cvY7Jk; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=SCEZy6Dv8oLpyszsZZxKi9RHUIHvoxafUXMfQNmmWMdHOsf5SlxEInHZt4jCS1hPg8Le+eUhuDHG2zih+DrSTKNHkCmnyo+oUNqYxwETy/OxMdTVnZD/9xsQ9/Fsvn85OUzTyYXfkW0wjmpXXzYXN35Q8NUYYPfnaAvHLbT++Hw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fku1Ppnj; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="M0cvY7Jk"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B039B1F000E9;
-	Thu,  9 Jul 2026 17:08:17 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fku1Ppnj"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B1EC1F000E9;
+	Thu,  9 Jul 2026 17:08:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783616897;
-	bh=U+4N7MEZZZmDdn+rXlfjwjFUNSX2F3NvgIEnCk+ZUNg=;
+	s=k20260515; t=1783616903;
+	bh=9AmaCAFEaoUrwsXO5ewqEK5LJSjjC//AGvJHTukYlYE=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=M0cvY7Jk+VGZPsbb0C9wvEYBZOipYqpBftVubkr/8I0QF1hqZAn9GI11yjua7x8fe
-	 /kcVhUyhQM+f6kTdNzkwFZS3+dQm7KDrgbD4xoQsa1AhGUMxwXgKb1tQHx1pgGX6VZ
-	 XgptXTIL75RSn/JhoW4A/xptphAaa+SmzykYLmfu4FDOrGt69SAu/0eUV9dMR0aGiM
-	 lWCZwyQc8qlgxUoJCoXhnQn4e6/LoaGCmpticw0+Rm3smgQbd6HGDXwUf+T55D4zCi
-	 SVYGY0nG5YXnH432i3bYQ3kerRwG3wubKpz0O4cFEIcr02Mrpo2PcJOKBaenNVeHbq
-	 vi5nJugkAGnzQ==
+	b=fku1PpnjPw1p23+sZtSpdEvtHhvsx0fQx5bEdY1cQNGKtYNMswnvH6z/Gl02fUBB9
+	 fUN4ntU2I1eB+Ao6S9cAPNMplTPVuIU58rK86rzhjBfJGYPrhT9Xw6LZJsf/Zz6yxa
+	 qvQOIEgSaMDoZfzuBdrMFY90o1+tlIJpUneb2oRKAW1Ve3kbqBQF3RLIPj9lWxS0vb
+	 CYYOgjj5JNo1GFQ+bXUt7TYJ/uR6Nu1Z3cqq6jJ2DXHUtQqqh9nk5szRoHLekIUte2
+	 x84EzW8i8qvsfxgvn5AmD3KNPENLLN8Sl2F/FfazzuUNBXQUyKDnrTCfym4yV/hMeS
+	 I0FvQKIlklfCw==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 11/23] mfd: Use named initializers for acpi_device_id
- arrays
+Subject: Re: [PATCH v3 08/23] mfd: Drop unused assignment of i2c_device_id
+ driver data
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?VXdlIEtsZWluZS1Lw7ZuaWcgKFRoZSBDYXBhYmxlIEh1Yik=?= <u.kleine-koenig@baylibre.com>
-Cc: lee@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <84158ad2bfe67169913c42fe132307362330a6d9.1783615311.git.u.kleine-koenig@baylibre.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <cc23a3c4436796135633ca14f325f5d13c804afc.1783615311.git.u.kleine-koenig@baylibre.com>
 References: <cover.1783615311.git.u.kleine-koenig@baylibre.com>
- <84158ad2bfe67169913c42fe132307362330a6d9.1783615311.git.u.kleine-koenig@baylibre.com>
+ <cc23a3c4436796135633ca14f325f5d13c804afc.1783615311.git.u.kleine-koenig@baylibre.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 09 Jul 2026 17:08:17 +0000
-Message-Id: <20260709170817.B039B1F000E9@smtp.kernel.org>
+Date: Thu, 09 Jul 2026 17:08:23 +0000
+Message-Id: <20260709170823.7B1EC1F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
+Thank you for your contribution! Sashiko AI review found 2 potential issue(=
 s) to consider:
 
+New issues:
+- [Low] The commit message prefix does not comply with MFD subsystem naming=
+ conventions.
+
 Pre-existing issues:
-- [High] Missing mfd_remove_devices() on the probe error path leaves a succ=
-essfully registered child device dangling if a subsequent mfd_add_devices()=
- call fails.
+- [High] The MFD cell array `as3711_subdevs` is declared as a non-const sta=
+tic array and dynamically modified during probe, violating MFD subsystem gu=
+idelines and creating a data race.
 --
 
---- Patch [11]: [PATCH v3 11/23] mfd: Use named initializers for acpi_devic=
-e_id arrays ---
-commit f4fe216ebf71baeca7bb6a54cbffad4936018a53
+--- Patch [8]: [PATCH v3 08/23] mfd: Drop unused assignment of i2c_device_i=
+d driver data ---
+commit c6d9af1e80d9ed1bea412fcd5336aa29d46114e0
 Author: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@baylibre.c=
 om>
 
-mfd: Use named initializers for acpi_device_id arrays
+mfd: Drop unused assignment of i2c_device_id driver data
 
-While being less compact, using named initializers allows to more easily
-see which members of the structs are assigned which value without having
-to lookup the declaration of the struct. And it's also more robust
-against changes to the struct definition.
+This commit removes explicit zero assignments to the driver_data
+member of struct i2c_device_id in the as3711 and rc5t583 drivers.
+The explicit assignments are dropped since the fields default to zero.
 
-The mentioned robustness is relevant for a planned change to struct
-acpi_device_id that replaces .driver_data by an anonymous union.
+> mfd: Drop unused assignment of i2c_device_id driver data
 
-This patch doesn't modify the compiled arrays, only their representation
-in source form benefits.
+[Severity: Low]
+This isn't a bug, but the commit message prefix does not seem to comply
+with MFD subsystem naming conventions. Does it need to include the driver
+identifiers (e.g., "mfd: as3711, rc5t583: Drop...") to follow the standard
+capitalized description format?
 
-> diff --git a/drivers/mfd/intel-lpss-acpi.c b/drivers/mfd/intel-lpss-acpi.c
-> index d4b24a7178484..19fc36164d890 100644
-> --- a/drivers/mfd/intel-lpss-acpi.c
-> +++ b/drivers/mfd/intel-lpss-acpi.c
+> diff --git a/drivers/mfd/as3711.c b/drivers/mfd/as3711.c
+> index 9741977031df0..eb03b813d58f0 100644
+> --- a/drivers/mfd/as3711.c
+> +++ b/drivers/mfd/as3711.c
+> @@ -192,7 +192,7 @@ static int as3711_i2c_probe(struct i2c_client *client)
+>  }
 
-[ ... ]
+[Severity: High]
+This is a pre-existing issue, but does the dynamic modification of
+as3711_subdevs in as3711_i2c_probe() create a data race if multiple
+as3711 devices are probed concurrently?
 
-drivers/mfd/intel-lpss.c:intel_lpss_probe() {
+Looking at the code just above this hunk in as3711_i2c_probe():
+
+drivers/mfd/as3711.c:as3711_i2c_probe() {
     ...
-	if (intel_lpss_has_idma(lpss)) {
-		info =3D &lpss->info->dma_info;
-		ret =3D mfd_add_devices(dev, lpss->devid, info->cell,
-				      1, info->mem, info->irq, NULL);
-		if (ret)
-			dev_warn(dev, "Failed to register %s device\n",
-				 LPSS_IDMA64_DRIVER_NAME);
-	}
-
-	ret =3D mfd_add_devices(dev, lpss->devid, lpss->cell,
-			      1, info->mem, info->irq, NULL);
-	if (ret)
-		goto err_remove_ltr;
-    ...
-err_remove_ltr:
-	intel_lpss_debugfs_remove(lpss);
-	intel_lpss_ltr_hide(lpss);
-	intel_lpss_unregister_clock(lpss);
+    if (pdata) {
+        as3711_subdevs[AS3711_REGULATOR].platform_data =3D
+            &pdata->regulator;
     ...
 }
 
-[Severity: High]
-This is a pre-existing issue, but I noticed a potential missing cleanup in =
-the
-intel-lpss probe error path.
+Since as3711_subdevs is a shared, non-const static array, could one
+probe overwrite the platform_data pointer of another before
+devm_mfd_add_devices() completes? Should this be modified to use
+static const mfd_cell arrays in accordance with MFD subsystem rules?
 
-If the first mfd_add_devices() successfully registers the IDMA64 child, and=
- the
-second mfd_add_devices() for lpss->cell fails, the code jumps to
-err_remove_ltr.
+> =20
+>  static const struct i2c_device_id as3711_i2c_id[] =3D {
+> -	{.name =3D "as3711", .driver_data =3D 0},
+> +	{ .name =3D "as3711" },
+>  	{}
+>  };
 
-Since mfd_remove_devices() is not called on this error path, does this leave
-the successfully registered IDMA64 cell active but orphaned?
-
-Because the parent probe fails here, devres will free the parent's resource=
-s.
-Could this lead to a use-after-free and a potential crash if the active chi=
-ld
-device attempts to access the freed devres memory?
+[ ... ]
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/cover.1783615311.gi=
-t.u.kleine-koenig@baylibre.com?part=3D11
+t.u.kleine-koenig@baylibre.com?part=3D8
