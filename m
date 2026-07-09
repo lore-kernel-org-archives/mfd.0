@@ -1,220 +1,220 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 475A530B517
-	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 17:15:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F347434166B
+	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 17:16:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783617342; cv=none; b=UZ9JrhZ/F82YPxr8iUpr7hd/JCyYWsfkqYx07A8uTZBwWJmn0i8K0ie9L1alwE9gWUUMK0rtUG1W4xvVEib4U6UqADp09/EQw39SfJNu09GrsX/1xCLYkjdBq/9zVYABUcVkGGD0VSbjPH7PleR5gzpOVEJQ7QtP1T1efQVOIMs=
+	t=1783617373; cv=none; b=HziFLtwxlM6nQVlaBrhNKdruimcsFVghLjRmbVD4AbCu8bjBbhCLDyEg95NjDgPwzwggcVUkCI+JXtfyFiUWPQ5e/T6LP85w4L2DXNZg2WFiQeUDrr/vFBmW4Hr0XdlDuux1vWGnWLZg2FRVaDJNI2fYiQN33WfNhoq+CjqEFTg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783617342; c=relaxed/simple;
-	bh=eHAyVvPx7rCje2c9pEVrD+U8PDdabERRMQnFp7sR+e8=;
+	s=arc-20240116; t=1783617373; c=relaxed/simple;
+	bh=PoyLykgQGwylMCz4cVOwFx/4449mFyWGhivLc5eIL5o=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=VVxny8yrUohrVIUYSSmCFsxwfwXXNM/7tecTBZGzlrl0TZwT3Yd+IwS3wCduWkOGVrQisorBW4AyXzXc02Fdra7wNguPvHltQCPk1wJG2ttPsxokGOk2MZo+fABWKFPSuxM6GClGLo+p2aNywd5XVA9QkIgBKQ0cq/LeC6xiVns=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hLFc8VMz; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=EhUjP/mPjahdjZUIqYFw8eaWkC7qdmX0nKRbsEeyy9S1/AAEitO2LryHIEzqnuu712L1lf82DoazO5PC9DibLINbKGK/e6zG8rox2KDmqRuE22CrnEXCliFPlaMPO3BAvUyNvn9dP3ZWbU6ie89IFIzh9DXcHGd/BXfWQLtR/ZE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HUAyirTT; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hLFc8VMz"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B8B891F000E9;
-	Thu,  9 Jul 2026 17:15:40 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HUAyirTT"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A4B5F1F000E9;
+	Thu,  9 Jul 2026 17:16:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783617341;
-	bh=gAyjBJyeyxs7TiW578gS9C8/LIYsCY+Ee8EzyL7MPGM=;
+	s=k20260515; t=1783617371;
+	bh=GpCVMXzY5WANS4MVAvTfiGnBA9JdwLmMym04L/Va4/A=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=hLFc8VMz0uNd2K0I0G1Gat+/TN5aTLW1k04xyE89/my6iWVgUUZ23bqVXNu9cDT/N
-	 Zf/y6f4lZLVsDX0r70AGeMesCUCaqhX1PlFOGBHKQXTcECzsHSEbSFB6ddrjkGxmrp
-	 9YsanQIAehPCUfyFyBgDQthqlbkhyMMGS4ly3CzcaN1DsIqZX/NGmVtMP/8FzRS75T
-	 SgnBEvS8tXgFP8zgDYRXXM01DwO94T+v/l4Xeh/4K+iI3sSK49IWLmLnIiw0aQKUCo
-	 3aIoi/yb6Y8NWOu+YHv76iNIMGv+fexCDv0rHlUPe0DSEd8aSRfR2MzB/FKV7YlHLg
-	 JJtwJ/ScKua5w==
+	b=HUAyirTTnaJD4Sati/kyjPwbW/cxNuQ8myn2QWpGT3nVQqfsO4vsTIVM7TqA6xHPr
+	 sBwez8ykNmX7tJz8/F1aZfdBoNQWmqacGfyhq+ETUpta7Y//K0uR12wcgmKXbzezur
+	 GueVFO+XqBbyijxeHT/Kj9GqACT5cxvxmMk0UL/N6zqyPxmAlodXTDcBbUpcyQXqbD
+	 xFn5grlnhhCvDoJIuTUASv/+OspEmVXOpecFvlEJ0cqoTl0biqJcCbPHRqWtyj01Yq
+	 lVNVngAH1AID0H0xVzP5saGSnPP7vgt593PLkdCmm1ZcFBnetwbqS8V3bq+97fVXwC
+	 gf5t4MVUt6Z1w==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 20/23] mfd: Unify style of i2c_device_id arrays
+Subject: Re: [PATCH v3 19/23] mfd: Unify style of dmi_system_id arrays
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?VXdlIEtsZWluZS1Lw7ZuaWcgKFRoZSBDYXBhYmxlIEh1Yik=?= <u.kleine-koenig@baylibre.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <a2a2ece7d82cfe644c5c588f84379917790dc923.1783615311.git.u.kleine-koenig@baylibre.com>
+In-Reply-To: <605877cac2c3cad03658e742ebd6b02f4f2ad9ea.1783615311.git.u.kleine-koenig@baylibre.com>
 References: <cover.1783615311.git.u.kleine-koenig@baylibre.com>
- <a2a2ece7d82cfe644c5c588f84379917790dc923.1783615311.git.u.kleine-koenig@baylibre.com>
+ <605877cac2c3cad03658e742ebd6b02f4f2ad9ea.1783615311.git.u.kleine-koenig@baylibre.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 09 Jul 2026 17:15:40 +0000
-Message-Id: <20260709171540.B8B891F000E9@smtp.kernel.org>
+Date: Thu, 09 Jul 2026 17:16:11 +0000
+Message-Id: <20260709171611.A4B5F1F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
+Thank you for your contribution! Sashiko AI review found 5 potential issue(=
 s) to consider:
 
 Pre-existing issues:
-- [High] Global pm_power_off function pointer is left dangling on probe fai=
-lure.
-- [High] Unchecked platform data leads to NULL pointer dereference.
-- [High] Modifying static global `mfd_cell` arrays causes race conditions d=
-uring concurrent probes.
+- [High] Incorrect teardown ordering in `cgbc_remove` leads to use-after-fr=
+ee or invalid session access.
+- [High] Dynamic amendment of global static data (`mfd_cell` and resources)=
+ during probe prevents multi-instantiation.
+- [High] Passing complex pointers via match table `driver_data`.
+- [Medium] Creation of local dynamic copies of `mfd_cell` arrays on the sta=
+ck.
+- [Low] Missing `const` qualifier for `mfd_cell` array.
 --
 
---- Patch [20]: [PATCH v3 20/23] mfd: Unify style of i2c_device_id arrays -=
+--- Patch [19]: [PATCH v3 19/23] mfd: Unify style of dmi_system_id arrays -=
 --
-commit ed27c4e578b835bc9b4235fcb8ff1d9a5f055852
+commit a57b1f29e87685cdf177ac96af51385f6529a9cf
 Author: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@baylibre.c=
 om>
 
-mfd: Unify style of i2c_device_id arrays
+mfd: Unify style of dmi_system_id arrays
 
-The patch adapts the styling of i2c_device_id arrays in various MFD drivers=
- to
-match the recommended coding style. It ensures consistent spacing and forma=
-tting
-for list terminators.
+This commit standardizes the coding style of dmi_system_id arrays across
+several MFD drivers. It specifically ensures that list terminators use a
+single space between the braces instead of being empty.
 
-> diff --git a/drivers/mfd/88pm800.c b/drivers/mfd/88pm800.c
-> index 74dc419402f96..fe1017c6234bf 100644
-> --- a/drivers/mfd/88pm800.c
-> +++ b/drivers/mfd/88pm800.c
-
-[Severity: High]
-This is a pre-existing issue, but modifying static global mfd_cell arrays c=
-an
-cause race conditions during concurrent probes. In device_rtc_init(), the
-driver dynamically modifies the fields of a globally defined static struct
-mfd_cell array:
-
-drivers/mfd/88pm800.c:device_rtc_init() {
-    ...
-    rtc_devs[0].platform_data =3D pdata->rtc;
-    ...
-}
-
-Modifying shared global state without locks could mean that if two identical
-MFD ICs are probed concurrently, their platform data pointers will overwrite
-each other. Can we define mfd_cell arrays as static const and avoid local
-copies for dynamic amendments?
-
-> @@ -117,7 +117,7 @@ enum {
-> =20
->  static const struct i2c_device_id pm80x_id_table[] =3D {
->  	{ .name =3D "88PM800" },
-> -	{} /* NULL terminated */
-> +	{ } /* NULL terminated */
->  };
->  MODULE_DEVICE_TABLE(i2c, pm80x_id_table);
-> =20
-
-[ ... ]
-
-> diff --git a/drivers/mfd/as3711.c b/drivers/mfd/as3711.c
-> index eb03b813d58f0..6d2fa63e7f4b1 100644
-> --- a/drivers/mfd/as3711.c
-> +++ b/drivers/mfd/as3711.c
-
-[Severity: High]
-This is a pre-existing issue, but there is a similar data race in
-as3711_i2c_probe(). The global as3711_subdevs array is modified directly:
-
-drivers/mfd/as3711.c:as3711_i2c_probe() {
-    ...
-    as3711_subdevs[AS3711_REGULATOR].platform_data =3D
-        &pdata->regulator;
-    ...
-}
-
-Does this pose a risk of data corruption if two instances are probed at the
-same time?
-
-> @@ -193,7 +193,7 @@ static int as3711_i2c_probe(struct i2c_client *client)
-> =20
->  static const struct i2c_device_id as3711_i2c_id[] =3D {
->  	{ .name =3D "as3711" },
+> diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
+> index 10bb4b414c34d..b568722cc8b76 100644
+> --- a/drivers/mfd/cgbc-core.c
+> +++ b/drivers/mfd/cgbc-core.c
+> @@ -393,7 +393,7 @@ static const struct dmi_system_id cgbc_dmi_table[] __=
+initconst =3D {
+>  			DMI_MATCH(DMI_BOARD_NAME, "conga-SA8"),
+>  		},
+>  	},
 > -	{}
 > +	{ }
 >  };
-> =20
-
-[ ... ]
-
-> diff --git a/drivers/mfd/da903x.c b/drivers/mfd/da903x.c
-> index c949ebc57b182..46d9d823414af 100644
-> --- a/drivers/mfd/da903x.c
-> +++ b/drivers/mfd/da903x.c
 
 [Severity: High]
-This is a pre-existing issue, but does unchecked platform data lead to a NU=
-LL
-pointer dereference here? In da903x_probe(), dev_get_platdata() is called to
-retrieve pdata, which is passed to da903x_add_subdevs() without being check=
-ed
-for NULL:
+This isn't a bug introduced by this patch, but there is an incorrect teardo=
+wn
+ordering in cgbc_remove() that can lead to a use-after-free or invalid sess=
+ion
+access.
 
-drivers/mfd/da903x.c:da903x_add_subdevs() {
-    ...
-    for (i =3D 0; i < pdata->num_subdevs; i++) {
-    ...
+The session is released before the MFD child devices are removed:
+
+drivers/mfd/cgbc-core.c:cgbc_remove() {
+	...
+	cgbc_session_release(cgbc);
+
+	mfd_remove_devices(&pdev->dev);
+	...
 }
 
-If the device is instantiated without platform data (e.g., manually via the
-I2C sysfs new_device interface), pdata will be NULL. Could this cause an
-immediate crash?
+When mfd_remove_devices() eventually calls i2c_del_adapter(), attached I2C
+clients may initiate final I2C transfers during their teardown, accessing t=
+he
+invalidated session.
 
-> @@ -441,7 +441,7 @@ static const struct da903x_chip_ops da903x_ops[] =3D {
->  static const struct i2c_device_id da903x_id_table[] =3D {
->  	{ .name =3D "da9030", .driver_data =3D 0 },
->  	{ .name =3D "da9034", .driver_data =3D 1 },
-> -	{ },
+Does the teardown order need to be reversed here?
+
+[Severity: Low]
+This is a pre-existing issue, but the cgbc_devs array is missing the const
+qualifier:
+
+drivers/mfd/cgbc-core.c:
+static struct mfd_cell cgbc_devs[] =3D {
+
+The MFD guidelines require defining mfd_cell arrays as static const to
+enforce immutability. Should this be updated?
+
+> diff --git a/drivers/mfd/intel_quark_i2c_gpio.c b/drivers/mfd/intel_quark=
+_i2c_gpio.c
+> index 9b9c76bd067b8..87dbe1a94247e 100644
+> --- a/drivers/mfd/intel_quark_i2c_gpio.c
+> +++ b/drivers/mfd/intel_quark_i2c_gpio.c
+> @@ -79,7 +79,7 @@ static const struct dmi_system_id dmi_platform_info[] =
+=3D {
+>  		},
+>  		.driver_data =3D (void *)&intel_quark_i2c_controller_fast_node,
+>  	},
+> -	{}
 > +	{ }
 >  };
->  MODULE_DEVICE_TABLE(i2c, da903x_id_table);
-> =20
-
-[ ... ]
-
-> diff --git a/drivers/mfd/tps65910.c b/drivers/mfd/tps65910.c
-> index b0dbee3e6ea2f..d19bd3643591e 100644
-> --- a/drivers/mfd/tps65910.c
-> +++ b/drivers/mfd/tps65910.c
-> @@ -532,9 +532,9 @@ static int tps65910_i2c_probe(struct i2c_client *i2c)
 
 [Severity: High]
-This is a pre-existing issue, but is the global pm_power_off function point=
-er
-left dangling on probe failure? If devm_mfd_add_devices() fails during
-tps65910_i2c_probe():
+This isn't a bug introduced by this patch, but complex pointers are being
+passed via the match table driver_data field:
 
-drivers/mfd/tps65910.c:tps65910_i2c_probe() {
-    ...
-    if (pmic_plat_data->pm_off && !pm_power_off) {
-        ...
-        tps65910_i2c_client =3D i2c;
-        pm_power_off =3D tps65910_power_off;
-    }
-
-    ret =3D devm_mfd_add_devices(...);
-    if (ret < 0) {
-        dev_err(&i2c->dev, "mfd_add_devices failed: %d\n", ret);
-        return ret;
-    }
-    ...
+drivers/mfd/intel_quark_i2c_gpio.c:dmi_platform_info[] {
+	...
+		.driver_data =3D (void *)&intel_quark_i2c_controller_standard_node,
+	...
 }
 
-The driver core will release all devm-managed resources, but pm_power_off a=
-nd
-tps65910_i2c_client remain set. During shutdown, pm_power_off() invokes
-tps65910_power_off(), which retrieves the freed tps65910 struct via
-dev_get_drvdata() and dereferences it. Could this lead to a use-after-free
-and kernel panic?
+The MFD guidelines explicitly prohibit passing dynamic platform data via the
+.data field of match tables, recommending integer IDs instead. Can this cau=
+se
+initialization ordering races or memory safety hazards?
 
->  }
-> =20
->  static const struct i2c_device_id tps65910_i2c_id[] =3D {
-> -       { .name =3D "tps65910", .driver_data =3D TPS65910 },
-> -       { .name =3D "tps65911", .driver_data =3D TPS65911 },
-> -       { }
-> +	{ .name =3D "tps65910", .driver_data =3D TPS65910 },
-> +	{ .name =3D "tps65911", .driver_data =3D TPS65911 },
+[Severity: High]
+This is a pre-existing issue, but global static resource structures are bei=
+ng
+dynamically amended during probe:
+
+drivers/mfd/intel_quark_i2c_gpio.c:intel_quark_i2c_setup() {
+	...
+	res[INTEL_QUARK_IORES_MEM].start =3D pci_resource_start(pdev, MFD_I2C_BAR);
+	...
+}
+
+Directly modifying global static variables like intel_quark_i2c_res prevents
+multi-instantiation and can cause data corruption if multiple instances are
+probed. Does this need to be addressed?
+
+> diff --git a/drivers/mfd/kempld-core.c b/drivers/mfd/kempld-core.c
+> index 4c1e7a0ab0ee1..104a07dc8f16f 100644
+> --- a/drivers/mfd/kempld-core.c
+> +++ b/drivers/mfd/kempld-core.c
+> @@ -737,7 +737,7 @@ static const struct dmi_system_id kempld_dmi_table[] =
+__initconst =3D {
+>  			DMI_MATCH(DMI_BOARD_NAME, "Qseven-Q7AL"),
+>  		},
+>  	},
+> -	{}
 > +	{ }
 >  };
+
+[Severity: Medium]
+This isn't a bug introduced by this patch, but local dynamic copies of
+mfd_cell arrays are being created on the stack:
+
+drivers/mfd/kempld-core.c:kempld_register_cells_generic() {
+	...
+	struct mfd_cell devs[KEMPLD_MAX_DEVS] =3D {};
+	...
+}
+
+The MFD subsystem explicitly states: "For mfd_cells, do not create local
+copies for dynamic amendments; always use static references." Does this
+implementation need to be changed to use static references instead?
+
+> diff --git a/drivers/mfd/tqmx86.c b/drivers/mfd/tqmx86.c
+> index 1c2fe3f912389..16f47566cf3c8 100644
+> --- a/drivers/mfd/tqmx86.c
+> +++ b/drivers/mfd/tqmx86.c
+> @@ -338,7 +338,7 @@ static const struct dmi_system_id tqmx86_dmi_table[] =
+__initconst =3D {
+>  		},
+>  		.callback =3D tqmx86_create_platform_device,
+>  	},
+> -	{}
+> +	{ }
+>  };
+
+[Severity: High]
+This isn't a bug introduced by this patch, but global static resource
+structures are being dynamically amended during probe:
+
+drivers/mfd/tqmx86.c:tqmx86_probe() {
+	...
+			tqmx_gpio_resources[TQMX86_GPIO_IRQ] =3D DEFINE_RES_IRQ(gpio_irq);
+	...
+}
+
+Directly modifying global static variables like tqmx_gpio_resources prevents
+multi-instantiation and can cause data corruption if multiple instances are
+probed. Should this be updated to avoid modifying global static data?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/cover.1783615311.gi=
-t.u.kleine-koenig@baylibre.com?part=3D20
+t.u.kleine-koenig@baylibre.com?part=3D19
