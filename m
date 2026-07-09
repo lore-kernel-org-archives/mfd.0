@@ -1,196 +1,159 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5C5D2FD1B3;
-	Thu,  9 Jul 2026 17:19:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8624839DBE5;
+	Thu,  9 Jul 2026 17:24:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783617565; cv=none; b=B+f4aomDbkrMsOwCZArnHgoquJOoPnoYN0W8cLVxeLpOTNY1MlfvvPRn+7YmhgFIAIx5LOrgp3CmmvkdH90dgTHDkwzvSCVwsiUYeAemabyp7O09AEfkzNdVs4kWOnjVA9gu4HkEqs5fIhKIvnPnaVolzrSLpZpSAUMqvsgONlk=
+	t=1783617885; cv=none; b=cAEfxKZvkxylM+wdE3tzsfuEOA4ik38wVK7EqYcRDetzHEwXlVybCQx+bOLqJXhL2v+hzI43KWVGpa8rZEZ/8R8nZ6/e9CV2tZId5wnao8weuR5F8ApbgcwTncyfwY9INxg+2dpcKwgEWFsPoCBhPpOSixG2DK6lh0Fl5xDY1/g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783617565; c=relaxed/simple;
-	bh=0nHkn/5OroKaJJXmYKfkhRK2Blfe7GwZ6bV2Lasn1ZY=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=mV0YsJwskjq6ivAkw7lTCiiONSlNa4GICVdx3f37ZIi6kI2tlkDZMxlAw+UgZXiUhHRb5fzFZVo+90e+VUmf3QlPr2Oz20cSkRhWESJSlQsLrQXd4TGxnjbpiZDMYg8SksqXEUrbqD0r7n71WcH8+WcoVWOXxhhJCoGr/BOuyjg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XpJA2Kdm; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783617885; c=relaxed/simple;
+	bh=oqo324D+x08yTMlxbQ9JZAmvzprnFd+aGHg0th0+FuU=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=k+wG5iEcN7B1EqWxmAkiNtJ0MhANzicWzhFlhR1XKD1ST/njrmwomBFuRbc6D0bY/kXXmhVbSuW1B7xFG1aaW0Sd5wTJ21s5p4JIGegBMcRiVuxIMR21raRJFV3PWAbHHjuDShaKgX8TsIDx1aL5HmP6WSO2321gk14Rhq8XLuU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dk3iUo6v; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XpJA2Kdm"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 325291F00A3A;
-	Thu,  9 Jul 2026 17:19:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783617563;
-	bh=I/APwcgRGdwy4hkrXbtaBGQerUWhJgbrlnQXqsjEeX0=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=XpJA2KdmM6cHjeabRitYF0Sol+y+db66eipHSpa7xqLzMz0c7BWcyi5BNcgN2wCP4
-	 ph3nCp4A4CBCaEh3dlqNZ4WuGgZIfqsdHmtE9BkZQWSvYEpxyJB0HaaYajiTRG7nKz
-	 fFxsssG5vO/s9TzzRKiUffq6KbZiFBOJP5vDLz7kphqZO0ikl0q6W9gVipOLydb0Yx
-	 l5ZDBDs+pyWshmOZy8SR2O4N/4aBMmQ4imEbnChPcr1bCIu1kl7ah26u1p5LEGidjl
-	 anZfi8n+m1SE37cXbvrKW+FzB8JfGuPT4GBUiPp5gPvC5ZJZYlxOu2AEj1HNE8HGEp
-	 yAsaqRs5O9kyg==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 21/23] mfd: Unify style of of_device_id arrays
-Reply-To: sashiko-reviews@lists.linux.dev
-To: =?utf-8?b?VXdlIEtsZWluZS1Lw7ZuaWcgKFRoZSBDYXBhYmxlIEh1Yik=?= <u.kleine-koenig@baylibre.com>
-Cc: linux-sunxi@lists.linux.dev, lee@kernel.org, mfd@lists.linux.dev, imx@lists.linux.dev, Frank.Li@kernel.org, neil.armstrong@linaro.org, wsa+renesas@sang-engineering.com, linux-amlogic@lists.infradead.org
-In-Reply-To: <e5cc82aa51da5f545f745b126923fdd6085a68a0.1783615311.git.u.kleine-koenig@baylibre.com>
-References: <cover.1783615311.git.u.kleine-koenig@baylibre.com>
- <e5cc82aa51da5f545f745b126923fdd6085a68a0.1783615311.git.u.kleine-koenig@baylibre.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 09 Jul 2026 17:19:22 +0000
-Message-Id: <20260709171923.325291F00A3A@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dk3iUo6v"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 1D42BC2BCC6;
+	Thu,  9 Jul 2026 17:24:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1783617885;
+	bh=oqo324D+x08yTMlxbQ9JZAmvzprnFd+aGHg0th0+FuU=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=dk3iUo6vMCGkbTLkxjdL+tGFTpfPvduhdZbAmE8o5bb9p2HpVz9WxDIVIIgdrW40Q
+	 ofRENFzzbksDuDMSmekLtAGa/d22t03qyYwPHnHr7S3mSge0PspYL5nJDtk0yzsYPo
+	 nDRBfvvj03zjyL3Fv/x31y/jyJB/GfmOOJ3oTgF7XMPhCumnymijH7E6haNdg3TC2T
+	 0aBo77dxdrDWO6cwz4szIOZyI/LQRU4rsxaBdmDybFDYHxWxMxyMh9GyzpGwjCmUVw
+	 3FGJImFfjnDO8T80v6Jp71674aqvdjdxQ7g73A3D7igoiYc1p5i2nzqj7HC6nrHEw5
+	 RBoKfAfySJLMg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F220DC44501;
+	Thu,  9 Jul 2026 17:24:44 +0000 (UTC)
+From: Miao Wang via B4 Relay <devnull+shankerwangmiao.gmail.com@kernel.org>
+Date: Fri, 10 Jul 2026 01:24:17 +0800
+Subject: [PATCH RFC v3 1/7] mfd: ls2kbmc: Make a copy when parsing mode
+ string
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260710-ls2kbmc-mod-v3-1-ef718636e78e@gmail.com>
+References: <20260710-ls2kbmc-mod-v3-0-ef718636e78e@gmail.com>
+In-Reply-To: <20260710-ls2kbmc-mod-v3-0-ef718636e78e@gmail.com>
+To: Binbin Zhou <zhoubinbin@loongson.cn>, 
+ Chong Qiao <qiaochong@loongson.cn>, Lee Jones <lee@kernel.org>, 
+ Huacai Chen <chenhuacai@kernel.org>, Corey Minyard <corey@minyard.net>, 
+ Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>
+Cc: Xi Ruoyao <xry111@xry111.site>, WANG Xuerui <kernel@xen0n.name>, 
+ Yinbo Zhu <zhuyinbo@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
+ linux-gpio@vger.kernel.org, openipmi-developer@lists.sourceforge.net, 
+ Miao Wang <shankerwangmiao@gmail.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2561;
+ i=shankerwangmiao@gmail.com; s=20250715; h=from:subject:message-id;
+ bh=6DIyNM6vk8kNUgYv2UMACNnAgWrwjVEMmwrMrjQaG1w=;
+ b=owEBbQKS/ZANAwAKAbAx48p7/tluAcsmYgBqT9laQoS/W1TgxTSN1SCglMJJtjwj2YT8MECtB
+ oRP5hv9IeOJAjMEAAEKAB0WIQREqPWPgPJBxluezBOwMePKe/7ZbgUCak/ZWgAKCRCwMePKe/7Z
+ blCUD/9pNvN8gSSS6a3VjlnLiQ8jP85Fe7Hb/JJFzVyUFgn96iGrh6fbAidCx4W7POD8znirXWd
+ iyTd56KCOwMlZ3v113ZCLokJI3lAX/ANUIdFwLEXyvs/9XVyxASiMwt5kBorDzel5QzH2X3wsPT
+ JkQstDtAN+A1LBywfj5FIv1PFWv1BbykR+xxd/p+kK25XiT9jyHnsv+F33x98JuJBO6nM8HLHrl
+ rVIaDWPlDsAZNhPZbqeW/fiC7wjh2PdYFmWaS5RXqyrio+CPBuqPf/XSxAvcPEyXn2Af3LH4JaK
+ VKlCjo2AZbcba+/TuuyQdysm5UlKhgoIT6OoFJirJFsodH/6iUjAlqObX4scH7Y1thsKuNrOFph
+ zLQ4zSbPdnDyvI7t9cXKpzOa+cuC0w82fYHtoSfRoBzeKgkHZcKSwSSjn6KUFOv7Z4rc5rOAWkK
+ Blruq/sWI5oLoJz5sTW1M1D2aJB4E7MfUCG36Tyw7xaOFJeU5/tFrp2FG17FVOdVTQ9VPz6XhI2
+ F31khTacQxdP54yl4Dqg9BvMXs7a1dCKQ2dbw7D2qbkzWRJv8oozuLByjvyx5rh9ozafRSXbuHa
+ 1hnvmpwD3zCAxswr+FAENbawu32dtU8+Pxn4jIBYtXeOHss+BI5wzrwpqlngGn6k8Cd99MW8Diz
+ oeLohfmqbib5YmA==
+X-Developer-Key: i=shankerwangmiao@gmail.com; a=openpgp;
+ fpr=6FAEFF06B7D212A774C60BFDFA0D166D6632EF4A
+X-Endpoint-Received: by B4 Relay for shankerwangmiao@gmail.com/20250715
+ with auth_id=462
+X-Original-From: Miao Wang <shankerwangmiao@gmail.com>
+Reply-To: shankerwangmiao@gmail.com
 
-Thank you for your contribution! Sashiko AI review found 4 potential issue(=
-s) to consider:
+From: Miao Wang <shankerwangmiao@gmail.com>
 
-Pre-existing issues:
-- [High] Complex platform data and child device structures passed via match=
- data
-- [High] Dynamic modification of global mfd_cell arrays introduces data rac=
-es
-- [High] Data race on global da9063_regmap_config struct during probe
-- [High] IRQ handler leak and subsequent Use-After-Free in twl6030_exit_irq
---
+When parsing the mode string from BMC, the string is manipulated
+in-place with strsep(), preventing from parsing it again. Make a copy of
+the original string and manipulate the copy instead to fix this.
 
---- Patch [21]: [PATCH v3 21/23] mfd: Unify style of of_device_id arrays ---
-commit 99f4911da67f8c43f41d211ea0ad4e7a3a4972cd
-Author: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@baylibre.c=
-om>
+Fixes: 0d64f6d1ffe9 ("mfd: ls2kbmc: Introduce Loongson-2K BMC core driver")
+Signed-off-by: Miao Wang <shankerwangmiao@gmail.com>
+---
+ drivers/mfd/ls2k-bmc-core.c | 30 +++++++++++++++++++++++++-----
+ 1 file changed, 25 insertions(+), 5 deletions(-)
 
-mfd: Unify style of of_device_id arrays
+diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
+index 408056bfb2fe757a5bde43775a483a48352e706d..27f6e096404d67459038a0607378057ec7ef69ab 100644
+--- a/drivers/mfd/ls2k-bmc-core.c
++++ b/drivers/mfd/ls2k-bmc-core.c
+@@ -427,34 +427,54 @@ static int ls2k_bmc_init(struct ls2k_bmc_ddata *ddata)
+  */
+ static int ls2k_bmc_parse_mode(struct pci_dev *pdev, struct simplefb_platform_data *pd)
+ {
+-	char *mode;
++	/* Assume 64 bytes is enough for the resolution string */
++	char mode_buf[64], mode_buf_orig[64];
++	char *mode = mode_buf;
++	const void __iomem *mode_base;
+ 	int depth, ret;
+ 
+ 	/* The last 16M of PCI BAR0 is used to store the resolution string. */
+-	mode = devm_ioremap(&pdev->dev, pci_resource_start(pdev, 0) + SZ_16M, SZ_16M);
+-	if (!mode)
++	mode_base = ioremap(pci_resource_start(pdev, 0) + SZ_16M,
++			    sizeof(mode_buf));
++	if (!mode_base)
+ 		return -ENOMEM;
++	memcpy_fromio(mode_buf, mode_base, sizeof(mode_buf) - 1);
++	mode_buf[sizeof(mode_buf) - 1] = '\0';
++	iounmap((void __iomem *)mode_base);
++	memcpy(mode_buf_orig, mode_buf, sizeof(mode_buf_orig));
+ 
+ 	/* The resolution field starts with the flag "video=". */
+ 	if (!strncmp(mode, "video=", 6))
+ 		mode = mode + 6;
++	else
++		goto invalid_mode;
+ 
+-	ret = kstrtoint(strsep(&mode, "x"), 10, &pd->width);
++	ret = kstrtouint(strsep(&mode, "x"), 10, &pd->width);
+ 	if (ret)
+ 		return ret;
++	if (mode == NULL)
++		goto invalid_mode;
+ 
+-	ret = kstrtoint(strsep(&mode, "-"), 10, &pd->height);
++	ret = kstrtouint(strsep(&mode, "-"), 10, &pd->height);
+ 	if (ret)
+ 		return ret;
++	if (mode == NULL)
++		goto invalid_mode;
+ 
+ 	ret = kstrtoint(strsep(&mode, "@"), 10, &depth);
+ 	if (ret)
+ 		return ret;
++	if (mode == NULL)
++		goto invalid_mode;
+ 
+ 	pd->stride = pd->width * depth / 8;
+ 	pd->format = depth == 32 ? "a8r8g8b8" : "r5g6b5";
+ 
+ 	return 0;
++
++invalid_mode:
++	dev_err(&pdev->dev, "Invalid resolution string: %s\n", mode_buf_orig);
++	return -EINVAL;
+ }
+ 
+ static int ls2k_bmc_probe(struct pci_dev *dev, const struct pci_device_id *id)
 
-This commit unifies the coding style of of_device_id arrays across multiple
-MFD drivers. It removes trailing commas after list terminators, adds spaces
-before closing braces, and ensures consistent formatting.
+-- 
+2.49.0
 
-> diff --git a/drivers/mfd/da9063-i2c.c b/drivers/mfd/da9063-i2c.c
-> --- a/drivers/mfd/da9063-i2c.c
-> +++ b/drivers/mfd/da9063-i2c.c
-[ ... ]
-> @@ -361,11 +361,12 @@ static struct regmap_config da9063_regmap_config =
-=3D {
->  };
-> =20
->  static const struct of_device_id da9063_dt_ids[] =3D {
-> -	{ .compatible =3D "dlg,da9063", },
-> -	{ .compatible =3D "dlg,da9063l", },
-> +	{ .compatible =3D "dlg,da9063" },
-> +	{ .compatible =3D "dlg,da9063l" },
->  	{ }
->  };
->  MODULE_DEVICE_TABLE(of, da9063_dt_ids);
-> +
->  static int da9063_i2c_probe(struct i2c_client *i2c)
->  {
->  	const struct i2c_device_id *id =3D i2c_client_get_device_id(i2c);
 
-[Severity: High]
-This is a pre-existing issue, but does da9063_i2c_probe() mutate the shared
-global da9063_regmap_config struct during probe?
-
-Depending on the device variant, the probe function dynamically assigns
-different tables:
-
-    da9063_regmap_config.rd_table =3D &da9063_ad_readable_table;
-
-Could this lead to a data race causing incorrect configuration if multiple
-instances of the device (or different variants) are probed at the same time?
-
-> diff --git a/drivers/mfd/rohm-bd9576.c b/drivers/mfd/rohm-bd9576.c
-> --- a/drivers/mfd/rohm-bd9576.c
-> +++ b/drivers/mfd/rohm-bd9576.c
-[ ... ]
-> @@ -167,9 +167,9 @@ static int bd957x_i2c_probe(struct i2c_client *i2c)
->  }
-> =20
->  static const struct of_device_id bd957x_of_match[] =3D {
-> -	{ .compatible =3D "rohm,bd9576", .data =3D (void *)ROHM_CHIP_TYPE_BD957=
-6, },
-> -	{ .compatible =3D "rohm,bd9573", .data =3D (void *)ROHM_CHIP_TYPE_BD957=
-3, },
-> -	{ },
-> +	{ .compatible =3D "rohm,bd9576", .data =3D (void *)ROHM_CHIP_TYPE_BD957=
-6 },
-> +	{ .compatible =3D "rohm,bd9573", .data =3D (void *)ROHM_CHIP_TYPE_BD957=
-3 },
-> +	{ }
->  };
-
-[Severity: High]
-This isn't a bug introduced by this patch, but does the probe function for
-this device dynamically modify a shared global mfd_cell array?
-
-bd957x_i2c_probe() contains:
-
-    regulators =3D &bd9576_mfd_cells[BD957X_REGULATOR_CELL];
-    regulators->resources =3D bd9576_regulator_irqs;
-
-If multiple instances of this device are probed concurrently, could they ra=
-ce
-to modify the same global array? A similar issue also seems to exist in
-88pm860x-core.c and as3711.c.
-
-> diff --git a/drivers/mfd/simple-mfd-i2c.c b/drivers/mfd/simple-mfd-i2c.c
-> --- a/drivers/mfd/simple-mfd-i2c.c
-> +++ b/drivers/mfd/simple-mfd-i2c.c
-[ ... ]
-> @@ -126,7 +126,7 @@ static const struct of_device_id simple_mfd_i2c_of_ma=
-tch[] =3D {
->  	{ .compatible =3D "maxim,max77705-battery", .data =3D &maxim_mon_max777=
-05 },
->  	{ .compatible =3D "silergy,sy7636a", .data =3D &silergy_sy7636a },
->  	{ .compatible =3D "spacemit,p1", .data =3D &spacemit_p1 },
-> -	{}
-> +	{ }
->  };
-
-[Severity: High]
-This is a pre-existing issue, but does passing complex struct pointers
-through the match data violate the MFD subsystem guidelines? The
-documentation recommends using an integer or enum ID instead to avoid memory
-safety hazards and initialization ordering races.
-
-This pattern appears here as well as in mc13xxx-spi.c, rk8xx-i2c.c,
-sec-acpm.c, sec-i2c.c, and sun6i-prcm.c.
-
-> diff --git a/drivers/mfd/twl6030-irq.c b/drivers/mfd/twl6030-irq.c
-> --- a/drivers/mfd/twl6030-irq.c
-> +++ b/drivers/mfd/twl6030-irq.c
-[ ... ]
-> @@ -285,7 +285,7 @@ static const struct irq_domain_ops twl6030_irq_domain=
-_ops =3D {
->  static const struct of_device_id twl6030_of_match[] __maybe_unused =3D {
->  	{ .compatible =3D "ti,twl6030", .data =3D &twl6030_interrupt_mapping },
->  	{ .compatible =3D "ti,twl6032", .data =3D &twl6032_interrupt_mapping },
-> -	{ },
-> +	{ }
->  };
-> =20
->  int twl6030_init_irq(struct device *dev, int irq_num)
-
-[Severity: High]
-This is a pre-existing issue, but is there an IRQ handler leak and potential
-use-after-free during device removal here?
-
-In twl6030_init_irq(), the interrupt is requested with twl6030_irq as the
-dev_id:
-
-    status =3D request_threaded_irq(irq_num, NULL, twl6030_irq_thread,
-                                  IRQF_ONESHOT, "TWL6030-PIH", twl6030_irq);
-
-However, in twl6030_exit_irq(), it appears NULL is passed to free_irq()
-instead of twl6030_irq:
-
-    free_irq(twl6030_irq->twl_irq, NULL);
-
-Will free_irq() silently fail to remove the handler due to the mismatched
-dev_id, leaving the handler registered after the twl6030_irq struct is free=
-d?
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/cover.1783615311.gi=
-t.u.kleine-koenig@baylibre.com?part=3D21
