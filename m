@@ -1,200 +1,135 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA4DC399889
-	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 17:09:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73E65399889
+	for <mfd@lists.linux.dev>; Thu,  9 Jul 2026 17:10:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783616986; cv=none; b=o/AKbFDP31nWayGD+2cuMuWYwtbfmkhnsv0nWLYN9hjrZB/DobndoldhcTlehSQ2LQBa0iY9LgQC+ohwUMwCLFzStopd2UdJkjRqZXH2vbQCw84KVcdxvJFlBF8DT/+tTGB9Wg8D51jO/NQtzjORLUiLgO/Np1+coaa2KsUQ5Jg=
+	t=1783617003; cv=none; b=lT4VSNV2VFlnKJw48PmqG3GWtJHHhjSVWOZriCe44cb+3wNSg4xzKqDu0kCZNgiqhHbKV5ILC8rmPqC52o7REO/QwiS5xUqnPzXSDsKk97ERjEUPqpSZ1pFnjeOgTfFmItdXsGCkmRRW9zpUrDQfLoXyZSPVShfCWqUCIb2hL2o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783616986; c=relaxed/simple;
-	bh=hBH7s5tZlSOCTAUE/68W9AsGsBVu9wnvy+GbGEhDlAg=;
+	s=arc-20240116; t=1783617003; c=relaxed/simple;
+	bh=A85IekBpoNAtVhjBiUTNQP8II/bfbFh1aDSsQCsxzQg=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=YAFDEJ+GaDf1w8tRR1/pdCDJRuw1sCdXYGFw9HCL/oikychGPgS48c4pKipQ7r2ttS2BxMUe3KGni4gHEdf/Qs0GIJiLsEcrNNt211tDgjo49nawrlvkl36dHr+hE61Gt5MTjNCHk7lsEDysqjHrJGDE44GyOzdfXKLmQ/TtV7o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Nd4AV2yK; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=S/F4LsvwgiqfR4PUd3TNlaU6ffG3OuOniSZuwP5vFRKWN6bjYOpGtsKNO4L5foL69tQ7cBOifpgZb11njvd5tB1KvKIYmJprudu5NJgwim/VnzAkJciMyGpb7cIzot5pwIkhnEy2JSlUrjYv9+KwvDmx5tKqVDNRnGiiVF8yoFw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jLgTo6X6; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Nd4AV2yK"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5B3271F000E9;
-	Thu,  9 Jul 2026 17:09:45 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jLgTo6X6"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 219421F00A3D;
+	Thu,  9 Jul 2026 17:10:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783616985;
-	bh=6CgojAYYnLhS2V63wygyw6u1o15zhbYiIjMVCC93bso=;
+	s=k20260515; t=1783617002;
+	bh=u3hqbcNgQvxsRmx6XslBGA7fudJOo8/PKTXiqDnLsH8=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Nd4AV2yKLRVfHGQdK+AbewBwuM6mVaRLXzzKE7ku69aEqx6BsWcXIO1BhP0pkWpV8
-	 Ranj/r2CPHmJXWX9Evw4KYrz3lfvzAwdcCvTG7de32FHlfwv6pxC2o+j4OdrMYvG0p
-	 3/eHZ3KA1Iz6cU7i+YPAi0xG2DvoWkP+yqHw2itQdBMAZQOPgCL0v95/0s6PCkgK8V
-	 RR528INeZRFRq+sN4Qj0P/hpSmDbiRP+SDfjtAciXaGQ4/ZUuylUPOXbOpyudlUaqs
-	 EgEcJMPHenneSdG9zbafzk1qSx6sqNIOnhiUZKig0LJBi6l/0jSKnlghQsFjft0t3x
-	 Xah2elbCkNIaQ==
+	b=jLgTo6X6z4Ow+oQCtOl2kA6/DP/n+hVnRtOJtpPG/FrYyVRvxIPNyoNbkNf/OCZl/
+	 Z9JnWpv7lvliH7GbHhG3eu4JZR7a6hfro2Yc8y0CMLVXIF3bZEsg8+pPXACPe7K6QI
+	 VILx5bYc8r7JqxY2npCW5BiWK3HGQxuR6bGVC+2d1fR8td+SNKM8oWn2i1FoFfDAoE
+	 wPqsimGJEIkDj27uJOqFa5yvdFNlggYgrwWyRibND/Jwd0t2qVEvTzbCd8PBltnZdD
+	 jMBa1gLAuEM237BtQfzBYzJX2XjivHvPD147txsoQ/cVhsVmwrZe/oQ+Pt5bMgss01
+	 GllcAEYHFnozA==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 07/23] mfd: loongson-se: Drop unused assignment of
- acpi_device_id driver data
+Subject: Re: [PATCH v3 12/23] mfd: intel-m10-bmc-pmci: Use named
+ initializers for dfl_device_id array
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?VXdlIEtsZWluZS1Lw7ZuaWcgKFRoZSBDYXBhYmxlIEh1Yik=?= <u.kleine-koenig@baylibre.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <8eedf9c9d52ac6a6924655218cd65b4021ce90da.1783615311.git.u.kleine-koenig@baylibre.com>
+Cc: lee@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <33ec4337624f50d718499d77a8481a6010fe7a7f.1783615311.git.u.kleine-koenig@baylibre.com>
 References: <cover.1783615311.git.u.kleine-koenig@baylibre.com>
- <8eedf9c9d52ac6a6924655218cd65b4021ce90da.1783615311.git.u.kleine-koenig@baylibre.com>
+ <33ec4337624f50d718499d77a8481a6010fe7a7f.1783615311.git.u.kleine-koenig@baylibre.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 09 Jul 2026 17:09:44 +0000
-Message-Id: <20260709170945.5B3271F000E9@smtp.kernel.org>
+Date: Thu, 09 Jul 2026 17:10:01 +0000
+Message-Id: <20260709171002.219421F00A3D@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 5 potential issue(=
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
 
 Pre-existing issues:
-- [High] loongson_se_probe ignores failures when acquiring and requesting I=
-RQs, leading to a permanent hang during probe.
-- [High] The driver blindly trusts dmam_size from ACPI and performs no boun=
-ds checking before calculating engine command buffer offsets.
-- [High] Missing reinit_completion() leads to synchronization loss if wait_=
-for_completion_interruptible() is interrupted.
-- [High] The interrupt handler calculates an array index from a hardware re=
-gister without bounds checking, leading to out-of-bounds memory corruption.
-- [High] The driver is missing a `.remove` callback to cleanly shut down th=
-e hardware and disable device interrupts upon module unload.
+- [High] Silent data truncation in flash bulk read and write functions when=
+ size is not a multiple of the FIFO word size.
 --
 
---- Patch [7]: [PATCH v3 07/23] mfd: loongson-se: Drop unused assignment of=
- acpi_device_id driver data ---
-commit 4b61d5aca25b81bb580341e9657861de846add5b
+--- Patch [12]: [PATCH v3 12/23] mfd: intel-m10-bmc-pmci: Use named initial=
+izers for dfl_device_id array ---
+commit c4097d9e7190ea25ca27dcc35181e73867cc426b
 Author: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@baylibre.c=
 om>
 
-mfd: loongson-se: Drop unused assignment of acpi_device_id driver data
-   =20
-The driver explicitly set the .driver_data member of struct
-acpi_device_id to zero without relying on that value. Drop this unused
-assignment.
+mfd: intel-m10-bmc-pmci: Use named initializers for dfl_device_id array
 
-> diff --git a/drivers/mfd/loongson-se.c b/drivers/mfd/loongson-se.c
-> index 3902ba377d690..4c668e2d22412 100644
-> --- a/drivers/mfd/loongson-se.c
-> +++ b/drivers/mfd/loongson-se.c
-> @@ -233,7 +233,7 @@ static int loongson_se_probe(struct platform_device *=
-pdev)
->  }
+While being less compact, using named initializers allows to more easily
+see which members of the structs are assigned which value without having
+to lookup the declaration of the struct. And it's also more robust
+against changes to the struct definition.
+
+The mentioned robustness is relevant for a planned change to struct
+dfl_device_id that replaces .driver_data by an anonymous union.
+
+This patch doesn't modify the compiled array, only its representation
+in source form benefits.
+
+> diff --git a/drivers/mfd/intel-m10-bmc-pmci.c b/drivers/mfd/intel-m10-bmc=
+-pmci.c
+> index d213c6ec04bad..f78309bbabfdb 100644
+> --- a/drivers/mfd/intel-m10-bmc-pmci.c
+> +++ b/drivers/mfd/intel-m10-bmc-pmci.c
+> @@ -434,7 +434,7 @@ static void m10bmc_pmci_remove(struct dfl_device *dde=
+v)
+>  #define FME_FEATURE_ID_M10BMC_PMCI	0x12
 > =20
->  static const struct acpi_device_id loongson_se_acpi_match[] =3D {
-> -	{ "LOON0011", 0 },
-> +	{ "LOON0011" },
+>  static const struct dfl_device_id m10bmc_pmci_ids[] =3D {
+> -	{ FME_ID, FME_FEATURE_ID_M10BMC_PMCI },
+> +	{ .type =3D FME_ID, .feature_id =3D FME_FEATURE_ID_M10BMC_PMCI },
 >  	{ }
 >  };
->  MODULE_DEVICE_TABLE(acpi, loongson_se_acpi_match);
+>  MODULE_DEVICE_TABLE(dfl, m10bmc_pmci_ids);
 
 [Severity: High]
-This is a pre-existing issue, but looking at loongson_se_probe() in the same
-file:
+This is a pre-existing issue, but does pmci_flash_bulk_write() silently
+truncate data when the size is not a multiple of the FIFO word size?
 
-drivers/mfd/loongson-se.c:loongson_se_probe() {
-    ...
-    for (i =3D 0; i < nr_irq; i++) {
-        irq =3D platform_get_irq(pdev, i);
-        err =3D devm_request_irq(dev, irq, se_irq_handler, 0, "loongson-se"=
-, se);
-        if (err)
-            dev_err(dev, "failed to request IRQ: %d\n", irq);
-    }
+Looking at pmci_flash_bulk_write() in drivers/mfd/intel-m10-bmc-pmci.c:
 
-    err =3D loongson_se_init(se, paddr, se->dmam_size);
-    ...
-}
+	while (size) {
+		blk_size =3D min(pmci_get_write_space(pmci), size);
+		...
+		write_count =3D blk_size / M10BMC_N6000_FIFO_WORD_SIZE;
+		pmci_write_fifo(pmci->base + M10BMC_N6000_FLASH_FIFO,
+				(u32 *)(buf + offset), write_count);
 
-If devm_request_irq() fails and returns an error, the error is merely logge=
-d=20
-and the loop continues.=20
+		size -=3D blk_size;
+		offset +=3D blk_size;
+	}
 
-When loongson_se_init() subsequently sends a start command and waits via
-wait_for_completion_interruptible(), could this result in a permanent deadl=
-ock=20
-since no IRQ handler is registered to call complete()?
+	/* Handle remainder (less than M10BMC_N6000_FIFO_WORD_SIZE bytes) */
+	if (size) {
+		...
+	}
 
-[Severity: High]
-This isn't a bug introduced by this patch, but reviewing the initialization
-path:
+If size is not a multiple of M10BMC_N6000_FIFO_WORD_SIZE, blk_size will be
+subtracted from size, causing size to prematurely drop to zero. Will this
+bypass the remainder block handling entirely and skip writing the trailing
+bytes?
 
-drivers/mfd/loongson-se.c:loongson_se_init_engine() {
-    ...
-    engine->command =3D se->dmam_base + id * (2 * SE_ENGINE_CMD_SIZE);
-    engine->command_ret =3D engine->command + SE_ENGINE_CMD_SIZE;
-    ...
-}
+A similar truncation appears to happen in pmci_flash_bulk_read():
 
-The driver appears to read dmam_size from ACPI and calculate pointer offset=
-s=20
-without any bounds checking.=20
+		pmci_read_fifo(pmci->base + M10BMC_N6000_FLASH_FIFO,
+			       (u32 *)(buf + offset), full_read_count);
 
-If a modified or broken ACPI table provides an unexpectedly small dmam_size=
-,=20
-does this sequence calculate out-of-bounds pointers that will corrupt memor=
-y=20
-when child drivers write commands?
+		size -=3D blk_size;
+		offset +=3D blk_size;
 
-[Severity: High]
-This is a pre-existing issue, but examining the command wait functions:
+		if (full_read_count < read_count)
+			break;
 
-drivers/mfd/loongson-se.c:loongson_se_send_controller_cmd() {
-    ...
-    return wait_for_completion_interruptible(&se->cmd_completion);
-}
-
-These functions wait for hardware commands using=20
-wait_for_completion_interruptible(). If this wait is interrupted by a signa=
-l,=20
-it returns early while the hardware continues processing.=20
-
-When the hardware finishes later, the IRQ handler will call complete() and=
-=20
-increment the completion done counter.=20
-
-Because reinit_completion() is not called before sending the next command,=
-=20
-could a subsequent wait return immediately and cause the driver to read=20
-incomplete DMA data?
-
-[Severity: High]
-This isn't a bug introduced by this patch, but looking at the interrupt=20
-handler:
-
-drivers/mfd/loongson-se.c:se_irq_handler() {
-    ...
-    id =3D __ffs(int_status);
-    complete(&se->engines[id].completion);
-    ...
-}
-
-The interrupt handler calculates an array index directly from a hardware=20
-register.=20
-
-If a PCIe surprise removal or hardware error occurs and the register read=20
-returns 0xFFFFFFFF, could this loop process bits 16-31 and cause an=20
-out-of-bounds write past the end of the engines array?
-
-[Severity: High]
-This is a pre-existing issue, but I noticed the platform driver definition:
-
-drivers/mfd/loongson-se.c:loongson_se_driver
-static struct platform_driver loongson_se_driver =3D {
-    .probe   =3D loongson_se_probe,
-    .driver  =3D {
-        ...
-    },
-};
-
-The driver lacks a .remove callback to cleanly shut down the hardware.=20
-
-When the module is removed, devres will automatically free the IRQ handler=
-=20
-and unmap the DMA memory. Since the hardware is never instructed to stop,=20
-will it continue performing DMA writes into the freed memory region and=20
-trigger an unhandled IRQ storm?
+Since size -=3D blk_size reduces size to zero before breaking from the loop,
+does it cause the remainder logic at the end of the function to be bypassed
+as well?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/cover.1783615311.gi=
-t.u.kleine-koenig@baylibre.com?part=3D7
+t.u.kleine-koenig@baylibre.com?part=3D12
