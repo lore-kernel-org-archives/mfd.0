@@ -1,70 +1,70 @@
-Received: from mo4-p04-ob.smtp.rzone.de (mo4-p04-ob.smtp.rzone.de [81.169.146.177])
+Received: from mo4-p04-ob.smtp.rzone.de (mo4-p04-ob.smtp.rzone.de [85.215.255.121])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF93A31A576
-	for <mfd@lists.linux.dev>; Sat, 11 Jul 2026 06:02:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=81.169.146.177
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F7A9136358
+	for <mfd@lists.linux.dev>; Sat, 11 Jul 2026 06:02:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=85.215.255.121
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783749753; cv=pass; b=Cfj+6siR8LSNz2uGQ923miTHXJQncU/UXHRR/MtBPYEn3liEJWKSuhBV5vC5AdQJeemFhlONyHH3SKSoIyBhhcMlKqLvunN3LDTCGH9UrKNiCCFnZxtJjPDWJt7KIXY7qWTx/L2u5UaZm1vMu3mRBsusl2J3CpE53r2HHeQqo0g=
+	t=1783749754; cv=pass; b=ozzP1cw7vgsq70Zf5qNXa3oN9jCEkqyHR0x7cLGjVFUx+wfmw/Ic0xelRkvsn4YBUZQL6AjHpqPKf99b6Jp680/6ip5YEI62ooKUl3tckjfUmi7Hw5y4Y6fIIk2ynkkNihupresHpVfkIODtQ7e/Lgpp2Fk+pyXKfAUGfm8ogD8=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783749753; c=relaxed/simple;
-	bh=8U83B9LRk1dKj2Jnju2tX3sgdInfkKSVyP3e6vEm7A8=;
+	s=arc-20240116; t=1783749754; c=relaxed/simple;
+	bh=k8TcFAtq5OzJ3ShLEbgL/dHs7mnwdxGIlUgLItpZfJw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=l6e6bg8Jihq1cQgz7Xfsm6OoABascsBtTGgCrg1FIsESpMZuB8lU0f2cmFarWRxzfTBLWhVbv3K9+FeCfVhcL5ix9Nw3IB+hixCxIAKZqJZSGx1san2dTgxW8bOpyb5Kuh5OMoaxrDTI9ApkS7zhF8YESZOG8epTY3WtvtZEylY=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=goldelico.com; spf=pass smtp.mailfrom=goldelico.com; dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=H0E6fUOI; dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=o0YSAyo+; arc=pass smtp.client-ip=81.169.146.177
+	 MIME-Version:Content-Type; b=euMfrLMT/ydHGzxHMCLf2qxSxixvXrIgTAFfN+77dbLK5343/4XRMlNsacO1EoDx0smTicghT9WfuZ+8Wf6RGCDRDezXa2Z+1Glti5hTEtL6P+gWxnO0jU63VwE+Wi5XOHYBYzy6+ruvrqHe5yWNxfiR2V10I5CsbNY/0DxNmiE=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=goldelico.com; spf=pass smtp.mailfrom=goldelico.com; dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=rz1xcUgX; dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=8fCXSY9c; arc=pass smtp.client-ip=85.215.255.121
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=goldelico.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=goldelico.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="H0E6fUOI";
-	dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="o0YSAyo+"
-ARC-Seal: i=1; a=rsa-sha256; t=1783749746; cv=none;
+	dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="rz1xcUgX";
+	dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="8fCXSY9c"
+ARC-Seal: i=1; a=rsa-sha256; t=1783749748; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=g9M4gqJl1SHWv2ddnj27JmqGZPXr91e/K/2pnJNAEchnkCkPExHpVQbpPBr5hRQ3g8
-    qDuN4k5maOCku7toQYWBo2QVzxOA+YZfM72g+2P0xzZtUcvR3YUHFAXrVfUmc6JMRfG3
-    IuIM/Kehz89pN9CWDPSVVXQgxzS7m8dAPmawcyfonIwhV451+MtVxPLmtoHjFe01NwEs
-    qibE+4iPhbm0R4HVd4pCw5ccdtYqGo/f59KKFGPh65gpg1arm8BfHk3QPfH4/4HKGomF
-    JNz4hiKa9fUn5bQL8iQBbjN+iQEnIs4RMO9c+iiiU7e1joKaaSMrKBSiEhttavkXjUMh
-    CPQw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1783749746;
+    b=TwQnfT3mm1kEvuObLqPH26UYG9JlnWXuJEm4kkLExiYeF2ITQRRyvAmjz+RFzYzbz8
+    oH7pXl9wIj6nyfDIWt3eZ2QFING/+AaK0StdVkNmVaK8U+cmolfy12LLsyVFXmi2zWEy
+    Sm+NE5bmhhExGCcEuv3tSK9L2okCTrAVccjj9PiwWI9mKP5EPW0E3m2jFo8yBmSb4TVB
+    HsqoS9B27maxZmSIxSRIxOw/q0tMEEJnt48uD3HiItjJQ9Do6sNXw52+jQkMDVAMIlho
+    IXJbOvmTVvEupOus0KUL0UfQQGuKYN2651qlUKTibpnBArkwXNEN85V4IgeLOVDPJnKy
+    hcpg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1783749748;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=7pA0TFC7UkEDXI5FUk59zdzYhP+mOINP0O+fHg17PO8=;
-    b=FozWwp/sAiNBb0Vi3waIgup6pPUUKBANGqkq1yFyQATClVwnivdeT+iujS+w41DceP
-    KmcbvodJ8dz085DHhYjYmLFmEoPj0/H42iM1pHoNSPh1R8G7ZbZ+yRItLikSL2MfhGff
-    1Rhy8/5f3T1e5TxT1iuDyo9zQkm+KxA4nWqkPGiXeQd/P9QbOXCbO/pRBs/towBV62FH
-    d55CLgTFTB1JqL2NRuXJIApZX2F7dSRuU/jZG1RFTYPKU6Ua9VkCeyaA8NEU90du6kJc
-    nikb4byzkE2gxIG0DNwaEVpBfMczzxJIpg62ag8yBeWvPNGnAcdcwLv6hAlhatjtISa5
-    PmiQ==
+    bh=cPc+/CQe6kjMaEdJWNjK4a7APvXUbTuseVN/eSOqRFw=;
+    b=sAKoWEC1jnAcNNC298HRqiXR+voHv8x7alycw5gAyhMegt7Xt2kJfxJL5Lg8nzhq1L
+    ElvUJu031bdmnfcPnetnKM9ceKPC6zziCrB7ZYa0aWK6d9ylI8zGW563Mmm6Lw6BKA33
+    WxG9/yXUnWWQWcx+xY6lu0PLEYgVy7H/FnvumgKtvjtqXxe4nOqq751gJkTyySOxCMKC
+    h5Yb6wupre4S8JXFis+eeX9DhUEKvysdBKQMMoCIvwnyOHOmWQ9It5qk6TnfTOUJdEVv
+    6J+Rt0W0MjDbchKj5kj3Q4+cKZYBsqOowKXs0XrOdojj3POZruK1MLcdRynitqZX/aSm
+    qM+Q==
 ARC-Authentication-Results: i=1; strato.com;
     arc=none;
     dkim=none
 X-RZG-CLASS-ID: mo04
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1783749746;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1783749748;
     s=strato-dkim-0002; d=goldelico.com;
     h=References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=7pA0TFC7UkEDXI5FUk59zdzYhP+mOINP0O+fHg17PO8=;
-    b=H0E6fUOI+kXtvl2A2BrQrKmQMA7wJAlkBsexcdVWxwz2btf0WN9fY+v+U2YaSltr2W
-    XLMTszlt7IJ3CY4YmdBUAyrJI/zz18XDsb7IddVY6Kn3lHm9JnFsDj50UB982jC/7HAr
-    xCe2Wrp5bVtJD1BIn+z4wJLeQrBWihUu+p7LvCOUr2OlpBVZyr/VnacHDLUbkca7px/r
-    9sBZdwK/vaSRmNEQrbWzLgVW+AKObAWBooN5BaNpBZfLaJnQvPJBouuOV35cdp94iXuG
-    QaaqBiHzhakev6bvUronTMahQDRfBdXXMDfMCPY6MFEOIMIuWg1Ve45pbkAAdmqLQkD7
-    CWgw==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1783749746;
+    bh=cPc+/CQe6kjMaEdJWNjK4a7APvXUbTuseVN/eSOqRFw=;
+    b=rz1xcUgXG3oRwXWGuBq9YszLtX8ZK6SlaG17IH5YGrw3A7mrDOpTZAdcMhUxTxwCvZ
+    WG24sV2w6GG8tUs96rLlTJfrmcyA0C2442CcDjyZktLAwPHJH1x+wKLxwSlx+KaUFfeb
+    x3g3P4XCuqDy1XuDP3zt/c0SWmxoEWs8KzDG+upus9n0ArC9U2XaRsvNtZY+bQx1StBd
+    sArlVmTF3cwaIvzb34IbieodXXRUo0W2iz0QW5I8RvLUw4uD/RUdY52Jntd187lkRE6i
+    NFiy+im6XC1ahh5DJAQDthZDJk7cHrI53Tn69al0UEzzoAhG688PZB1f/hQkzCGNSOQF
+    mmGw==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1783749748;
     s=strato-dkim-0003; d=goldelico.com;
     h=References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=7pA0TFC7UkEDXI5FUk59zdzYhP+mOINP0O+fHg17PO8=;
-    b=o0YSAyo+ZlRrYAUyXkQ2aUg8Awuw7E4YNwmC7YQ62b8sLgqlZ/QhLRRf48RMtbtKsg
-    43T3NehK34SoQdLmktBg==
+    bh=cPc+/CQe6kjMaEdJWNjK4a7APvXUbTuseVN/eSOqRFw=;
+    b=8fCXSY9c1lXBeUHph8ovftMufel8JVUOdBANz0/iwCW3aXTxsZf4vEfOCYgOzusoqD
+    OHE3a0UTXw2vRS3huIAg==
 X-RZG-AUTH: ":JGIXVUS7cutRB/49FwqZ7WcJeFKiMhflhwDubTJ9qVpwcQVkPW4I1HrT35oLmciNszeF4HOToVDOd6S1gdjuILE2MKVd"
 Received: from iMac.fritz.box
     by smtp.strato.de (RZmta 55.5.6 AUTH)
-    with ESMTPSA id Q4b76426B62PGi1
+    with ESMTPSA id Q4b76426B62QGi2
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
 	(Client did not present a certificate);
-    Sat, 11 Jul 2026 08:02:25 +0200 (CEST)
+    Sat, 11 Jul 2026 08:02:26 +0200 (CEST)
 From: "H. Nikolaus Schaller" <hns@goldelico.com>
 To: Grond <grond66@riseup.net>,
 	Stefan Leichter <sle85276@gmx.de>,
@@ -107,9 +107,9 @@ Cc: letux-kernel@openphoenux.org,
 	linux-fbdev@vger.kernel.org,
 	kernel@pyra-handheld.com,
 	mfd@lists.linux.dev
-Subject: [PATCH 15/16] backlight: remove pandora_bl
-Date: Sat, 11 Jul 2026 08:02:02 +0200
-Message-ID: <f897f695c0e1e128d7ebb41be8dfdce4d634f552.1783749722.git.hns@goldelico.com>
+Subject: [PATCH 16/16] arm: omap2: remove remaining pdata-quirks for pandora legacy devices
+Date: Sat, 11 Jul 2026 08:02:03 +0200
+Message-ID: <d380941287c655a3d205ee8b08516d364c0ddec9.1783749722.git.hns@goldelico.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <cover.1783749722.git.hns@goldelico.com>
 References: <cover.1783749722.git.hns@goldelico.com>
@@ -119,215 +119,59 @@ List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
 
-Retire the platform specific pandora backlight driver since
-it can now be replaced by twl_pm and device tree.
+After updating the pandora-backligt setup and removing the omap3pandora
+sound system and defining related gpios by device tree, we can remove
+omap3_pandora_legacy_init() and the related legacy devices completely.
 
 Signed-off-by: H. Nikolaus Schaller <hns@goldelico.com>
 ---
- drivers/video/backlight/Kconfig      |   7 --
- drivers/video/backlight/Makefile     |   1 -
- drivers/video/backlight/pandora_bl.c | 159 ---------------------------
- 3 files changed, 167 deletions(-)
- delete mode 100644 drivers/video/backlight/pandora_bl.c
+ arch/arm/mach-omap2/pdata-quirks.c | 23 -----------------------
+ 1 file changed, 23 deletions(-)
 
-diff --git a/drivers/video/backlight/Kconfig b/drivers/video/backlight/Kconfig
-index 7aa1c4b21111f..a250b3edc152c 100644
---- a/drivers/video/backlight/Kconfig
-+++ b/drivers/video/backlight/Kconfig
-@@ -451,13 +451,6 @@ config BACKLIGHT_MP3309C
- 	  To compile this driver as a module, choose M here: the module will
- 	  be called mp3309c.
+diff --git a/arch/arm/mach-omap2/pdata-quirks.c b/arch/arm/mach-omap2/pdata-quirks.c
+index b947bacf23a37..aca7097a692ed 100644
+--- a/arch/arm/mach-omap2/pdata-quirks.c
++++ b/arch/arm/mach-omap2/pdata-quirks.c
+@@ -268,27 +268,6 @@ static void __init omap3_logicpd_torpedo_init(void)
+ 	omap3_gpio126_127_129();
+ }
  
--config BACKLIGHT_PANDORA
--	tristate "Backlight driver for Pandora console"
--	depends on TWL4030_CORE
--	help
--	  If you have a Pandora console, say Y to enable the
--	  backlight driver.
+-/* omap3pandora legacy devices */
 -
- config BACKLIGHT_SKY81452
- 	tristate "Backlight driver for SKY81452"
- 	depends on MFD_SKY81452
-diff --git a/drivers/video/backlight/Makefile b/drivers/video/backlight/Makefile
-index 21c8313cfb121..f97ab8ba85807 100644
---- a/drivers/video/backlight/Makefile
-+++ b/drivers/video/backlight/Makefile
-@@ -52,7 +52,6 @@ obj-$(CONFIG_BACKLIGHT_MAX8925)		+= max8925_bl.o
- obj-$(CONFIG_BACKLIGHT_MP3309C)		+= mp3309c.o
- obj-$(CONFIG_BACKLIGHT_MT6370)		+= mt6370-backlight.o
- obj-$(CONFIG_BACKLIGHT_OMAP1)		+= omap1_bl.o
--obj-$(CONFIG_BACKLIGHT_PANDORA)		+= pandora_bl.o
- obj-$(CONFIG_BACKLIGHT_PWM)		+= pwm_bl.o
- obj-$(CONFIG_BACKLIGHT_QCOM_WLED)	+= qcom-wled.o
- obj-$(CONFIG_BACKLIGHT_RT4831)		+= rt4831-backlight.o
-diff --git a/drivers/video/backlight/pandora_bl.c b/drivers/video/backlight/pandora_bl.c
-deleted file mode 100644
-index 8a63ded0fa90f..0000000000000
---- a/drivers/video/backlight/pandora_bl.c
-+++ /dev/null
-@@ -1,159 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-only
--/*
-- * Backlight driver for Pandora handheld.
-- * Pandora uses TWL4030 PWM0 -> TPS61161 combo for control backlight.
-- * Based on pwm_bl.c
-- *
-- * Copyright 2009,2012 Gražvydas Ignotas <notasas@gmail.com>
-- */
--
--#include <linux/module.h>
--#include <linux/kernel.h>
--#include <linux/platform_device.h>
--#include <linux/delay.h>
--#include <linux/backlight.h>
--#include <linux/mfd/twl.h>
--#include <linux/err.h>
--
--#define TWL_PWM0_ON		0x00
--#define TWL_PWM0_OFF		0x01
--
--#define TWL_INTBR_GPBR1		0x0c
--#define TWL_INTBR_PMBR1		0x0d
--
--#define TWL_PMBR1_PWM0_MUXMASK	0x0c
--#define TWL_PMBR1_PWM0		0x04
--#define PWM0_CLK_ENABLE		BIT(0)
--#define PWM0_ENABLE		BIT(2)
--
--/* range accepted by hardware */
--#define MIN_VALUE 9
--#define MAX_VALUE 63
--#define MAX_USER_VALUE (MAX_VALUE - MIN_VALUE)
--
--struct pandora_private {
--	unsigned old_state;
--#define PANDORABL_WAS_OFF 1
+-static struct platform_device pandora_backlight = {
+-	.name	= "pandora-backlight",
+-	.id	= -1,
 -};
 -
--static int pandora_backlight_update_status(struct backlight_device *bl)
--{
--	int brightness = bl->props.brightness;
--	struct pandora_private *priv = bl_get_data(bl);
--	u8 r;
--
--	if (bl->props.power != BACKLIGHT_POWER_ON)
--		brightness = 0;
--	if (bl->props.state & BL_CORE_FBBLANK)
--		brightness = 0;
--	if (bl->props.state & BL_CORE_SUSPENDED)
--		brightness = 0;
--
--	if ((unsigned int)brightness > MAX_USER_VALUE)
--		brightness = MAX_USER_VALUE;
--
--	if (brightness == 0) {
--		if (priv->old_state == PANDORABL_WAS_OFF)
--			goto done;
--
--		/* first disable PWM0 output, then clock */
--		twl_i2c_read_u8(TWL4030_MODULE_INTBR, &r, TWL_INTBR_GPBR1);
--		r &= ~PWM0_ENABLE;
--		twl_i2c_write_u8(TWL4030_MODULE_INTBR, r, TWL_INTBR_GPBR1);
--		r &= ~PWM0_CLK_ENABLE;
--		twl_i2c_write_u8(TWL4030_MODULE_INTBR, r, TWL_INTBR_GPBR1);
--
--		goto done;
--	}
--
--	if (priv->old_state == PANDORABL_WAS_OFF) {
--		/*
--		 * set PWM duty cycle to max. TPS61161 seems to use this
--		 * to calibrate it's PWM sensitivity when it starts.
--		 */
--		twl_i2c_write_u8(TWL_MODULE_PWM, MAX_VALUE, TWL_PWM0_OFF);
--
--		/* first enable clock, then PWM0 out */
--		twl_i2c_read_u8(TWL4030_MODULE_INTBR, &r, TWL_INTBR_GPBR1);
--		r &= ~PWM0_ENABLE;
--		r |= PWM0_CLK_ENABLE;
--		twl_i2c_write_u8(TWL4030_MODULE_INTBR, r, TWL_INTBR_GPBR1);
--		r |= PWM0_ENABLE;
--		twl_i2c_write_u8(TWL4030_MODULE_INTBR, r, TWL_INTBR_GPBR1);
--
--		/*
--		 * TI made it very easy to enable digital control, so easy that
--		 * it often triggers unintentionally and disabes PWM control,
--		 * so wait until 1 wire mode detection window ends.
--		 */
--		usleep_range(2000, 10000);
--	}
--
--	twl_i2c_write_u8(TWL_MODULE_PWM, MIN_VALUE + brightness, TWL_PWM0_OFF);
--
--done:
--	if (brightness != 0)
--		priv->old_state = 0;
--	else
--		priv->old_state = PANDORABL_WAS_OFF;
--
--	return 0;
--}
--
--static const struct backlight_ops pandora_backlight_ops = {
--	.options	= BL_CORE_SUSPENDRESUME,
--	.update_status	= pandora_backlight_update_status,
--};
--
--static int pandora_backlight_probe(struct platform_device *pdev)
--{
--	struct backlight_properties props;
--	struct backlight_device *bl;
--	struct pandora_private *priv;
--	u8 r;
--
--	priv = devm_kmalloc(&pdev->dev, sizeof(*priv), GFP_KERNEL);
--	if (!priv)
--		return -ENOMEM;
--
--	memset(&props, 0, sizeof(props));
--	props.max_brightness = MAX_USER_VALUE;
--	props.type = BACKLIGHT_RAW;
--	bl = devm_backlight_device_register(&pdev->dev, pdev->name, &pdev->dev,
--					priv, &pandora_backlight_ops, &props);
--	if (IS_ERR(bl)) {
--		dev_err(&pdev->dev, "failed to register backlight\n");
--		return PTR_ERR(bl);
--	}
--
--	platform_set_drvdata(pdev, bl);
--
--	/* 64 cycle period, ON position 0 */
--	twl_i2c_write_u8(TWL_MODULE_PWM, 0x80, TWL_PWM0_ON);
--
--	priv->old_state = PANDORABL_WAS_OFF;
--	bl->props.brightness = MAX_USER_VALUE;
--	backlight_update_status(bl);
--
--	/* enable PWM function in pin mux */
--	twl_i2c_read_u8(TWL4030_MODULE_INTBR, &r, TWL_INTBR_PMBR1);
--	r &= ~TWL_PMBR1_PWM0_MUXMASK;
--	r |= TWL_PMBR1_PWM0;
--	twl_i2c_write_u8(TWL4030_MODULE_INTBR, r, TWL_INTBR_PMBR1);
--
--	return 0;
--}
--
--static struct platform_driver pandora_backlight_driver = {
--	.driver		= {
--		.name	= "pandora-backlight",
+-static struct gpiod_lookup_table pandora_soc_audio_gpios = {
+-	.dev_id = "soc-audio",
+-	.table = {
+-		GPIO_LOOKUP("gpio-112-127", 6, "dac", GPIO_ACTIVE_HIGH),
+-		GPIO_LOOKUP("gpio-0-15", 14, "amp", GPIO_ACTIVE_HIGH),
+-		{ }
 -	},
--	.probe		= pandora_backlight_probe,
 -};
 -
--module_platform_driver(pandora_backlight_driver);
--
--MODULE_AUTHOR("Gražvydas Ignotas <notasas@gmail.com>");
--MODULE_DESCRIPTION("Pandora Backlight Driver");
--MODULE_LICENSE("GPL");
--MODULE_ALIAS("platform:pandora-backlight");
+-static void __init omap3_pandora_legacy_init(void)
+-{
+-	platform_device_register(&pandora_backlight);
+-	gpiod_add_lookup_table(&pandora_soc_audio_gpios);
+-}
+ #endif /* CONFIG_ARCH_OMAP3 */
+ 
+ #ifdef CONFIG_SOC_DRA7XX
+@@ -514,8 +493,6 @@ static struct pdata_init pdata_quirks[] __initdata = {
+ 	{ "ti,omap3-evm-37xx", omap3_evm_legacy_init, },
+ 	{ "ti,am3517-evm", am3517_evm_legacy_init, },
+ 	{ "technexion,omap3-tao3530", omap3_tao3530_legacy_init, },
+-	{ "openpandora,omap3-pandora-600mhz", omap3_pandora_legacy_init, },
+-	{ "openpandora,omap3-pandora-1ghz", omap3_pandora_legacy_init, },
+ #endif
+ 	{ /* sentinel */ },
+ };
 -- 
 2.50.1 (Apple Git-155)
 
