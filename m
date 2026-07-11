@@ -1,70 +1,70 @@
-Received: from mo4-p04-ob.smtp.rzone.de (mo4-p04-ob.smtp.rzone.de [81.169.146.223])
+Received: from mo4-p03-ob.smtp.rzone.de (mo4-p03-ob.smtp.rzone.de [85.215.255.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B62B318EC1
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7945E31A065
 	for <mfd@lists.linux.dev>; Sat, 11 Jul 2026 06:05:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=81.169.146.223
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=85.215.255.101
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783749908; cv=pass; b=XvyN2mMzoLMeMNOGJ4t9+JmVvID9OoNWCYygOB9LItQGLnjf0cCVPf7k1G/jvomFDLV2WMWU/WcjW/2uNlUhPBxrzVAqVJukYSagpjyewmzTxkPlH0jBnVFxjWx6jfO2p1EGYeZiRUD/NiTcRu42/LHUJL0I8tpaAA8TcJxvN6Q=
+	t=1783749908; cv=pass; b=OHJoCLJywHGi3BqnsMEJZd3FjQNeknbkY0iD1bi+M9sn5QpGBHl1L1AFAJiUoZU5mHRB53tX6EU6J9wxH8LnGEs1/lT1Op6V0l8la6OubFBevaeYBPgqwY8JL87L2JovTK3C6wnxGbBaU8/MA4xdgWw8zclMbc6lDKBQl096Sys=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1783749908; c=relaxed/simple;
-	bh=gVLH3Gll/lrNoxOu6XuDqu7piiCuHfi0FO3rxwyky1U=;
+	bh=Q8ShPXJJbkie1XZ9aPxZP9g7/79FhXw3B/IJX9O5rLw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=GcusX1zW59a7DBWL+HvadJy9ok9qLOR2GVU437PWHPyL+y4OH0T/9RIgFf1Od/RYtRni9YbyK5TsI33CTJkAACGnGGbvXyE9+nW/lYMwudEB2pKOLopq4FFdxK3mdUHif/LT80IXO+HZVuNy+sOirwn737CxsERIPVP4NCLluv0=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=goldelico.com; spf=pass smtp.mailfrom=goldelico.com; dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=ODAdJdCE; dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=WlvwVONf; arc=pass smtp.client-ip=81.169.146.223
+	 MIME-Version:Content-Type; b=Dny71rRXORjts4s5Htpd1XEXAFUHcD8fMZOkQcKoAdOOMKELTGM4FjvtnxmNGVUvfCGq5AvMgO+ggYEVm/lJViw8uJfYwe0OloLe33tRGottah56m54mRhG5RY5YbkLDFTUQ9ypx9WkyFqGb+mzVR3f7jlj6G6Fjwu9JVJadfPU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=goldelico.com; spf=pass smtp.mailfrom=goldelico.com; dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=p/xvyqSZ; dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=m+5PvXgf; arc=pass smtp.client-ip=85.215.255.101
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=goldelico.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=goldelico.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="ODAdJdCE";
-	dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="WlvwVONf"
-ARC-Seal: i=1; a=rsa-sha256; t=1783749732; cv=none;
+	dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="p/xvyqSZ";
+	dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="m+5PvXgf"
+ARC-Seal: i=1; a=rsa-sha256; t=1783749728; cv=none;
     d=strato.com; s=strato-dkim-0002;
-    b=AxOWz8SVP1S6FOK1V10S8ZhkMMYVS2OCMbs43ygVVAZ8CKNTz01G+E3cIfvQLEayR6
-    jqyYAvoq2G+wAzR3Y9G2O6B3vpvqzN7aWO5PeobQF/x4Qg/4UqngcKGHDZz1iAUWQSZK
-    2FKFXSduwAjPkkH3efcWc3DC7W4DUiCw4vDoHTrplsQJQQ0s9hBhwZj5kD70BtXIx4yX
-    8LI631cCp4Y9We/AlbQATRmQJBg2lgpwj/v/ZfPUjiuKZzSJSZWkW+B7GHZXDD5jw2Od
-    IsV5QOIecP+lMoIdQQkgriOw7q9E/5T9Gn+VJnSwrq0RuTfzc4di9SiGICN0dz32q2z4
-    f55w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1783749732;
+    b=AcgG7Rib40rrNR3mFEY7DHvrOLVXjaSkOl6m849kJGle8CqgRcZynCqA1SRsWzAiw+
+    pszbceXN9Y3FXgq/c91kxei9DQmp+LE6ioeyRXyabhOacofEJDlyMTxCFLrq7mmXEHHj
+    Un3ADiU0rP3Zwo7V6Da86nlA2btM4+jxs2M7+HXbRAH7be79vJG0NkmdRhlLCmDuhPQD
+    hmgBD94cBn922nD9xVPftDJUUQyg5LPiEjIEKK2xgCaXLOBSXRHWx2Rw6cSgwheP2fFi
+    I+pgzLr6nZexennFQWkczJfo3UHn9AetGsnNz4CtURE2bkX7ZzdxwehDXl5H/LB83Sl6
+    lPmQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1783749728;
     s=strato-dkim-0002; d=strato.com;
     h=References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=ZB4drwZeCzFntaUbA8UcFyakx9+hGBaPBgbS+EjwmC4=;
-    b=l4WFSASvq/2zX/sPgvqRYr3ZmbRO0tbYaWlwn3hAPdh5QAMzl5Bip0rZ6L/TFNBp0l
-    TaUCmVp7x5ZGPbWZ0rYDrNP15p8CE8CplFPplOb6GZ3UzvCAGit4ib3smILsxNtRdH6c
-    3vT/P2UFJqj3MjHisc/o3b1qmT+GjhTzHONnYELCNQrTh3Jh0d3UBM0wKFy7ZSYn5cdi
-    eY4b+2WFoYQDlV8ug/6EagyXBB5GbUET+T0lsB/3PluXtEYIfhu8ES1f7a5uRFq8JiW/
-    R+o2At4b65nilUOCHtC+NyPD5b3GmnbMtLPXMuGTyVIRU4xwb70gpa0i7Bc0Pjlyt4OI
-    ybzQ==
+    bh=QXR5Qg49Kg9ruecbogfudI2YBbpJhxt31ZHIrx9WnZU=;
+    b=cyR07WQYwivBNVI5PZc7/pMiuxlrC5ioHhl0kQ4PkTYddWwoYbJvOYfhlP3Rbm27c9
+    tlumJkt5ZSI3aHnYoUv62PDVHM4kO0LkAatG3uBaF9JOYN+RVXaLHQYJH5NA5VUNFihg
+    k0MtSVDLZAOq3DA7rh0/jbBElYEEAp08eVjaOYCfDQbw3p70qZj22RzGXYxbhKju4lXu
+    R26dYUGKB6UiJz8rmSWX/2jhxRTcO4nbgY1zdReulfWLd+ymsSTGhUUnzMyXtGkmebxq
+    sWPfOb9ApIz5ukpCrJTGc8SUAOtBbMz3Vvc9974wjEqb65ICmDXohyFAJxbI7WnMi2gY
+    fx7w==
 ARC-Authentication-Results: i=1; strato.com;
     arc=none;
     dkim=none
-X-RZG-CLASS-ID: mo04
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1783749732;
+X-RZG-CLASS-ID: mo03
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1783749728;
     s=strato-dkim-0002; d=goldelico.com;
     h=References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=ZB4drwZeCzFntaUbA8UcFyakx9+hGBaPBgbS+EjwmC4=;
-    b=ODAdJdCE+yCfnSBSmGovKKmGSNhHP8ROyYNBa7qHxAeLe4Ooqbr6zwQ7rK7ATdSRks
-    MWFBNA53+Jmcv190NNht1gEYaUcx1W95J3OKKfagSGVyu8bNwkgJLLLjNGEZxZWFB70g
-    Uo+GUi1We4MHyZB4s143zxxkm2bd7gtoMEdiqtVSpfRx8LIhKNrs3RUqdPJ4X5eUzRrR
-    65BeDX1BHjfgpPU3LXI8va8kFDUcSEMbKK3gp2PnhXTBvnDO34J8zDKqMSVu3WSrm66K
-    FNQRj9XTqM2cKPvZ/hNLKbCGTB16GfwLT8Vin6pbrGXxXRFy+jf3OjuLpKWsKkY1Czdy
-    JJ2Q==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1783749732;
+    bh=QXR5Qg49Kg9ruecbogfudI2YBbpJhxt31ZHIrx9WnZU=;
+    b=p/xvyqSZp5epJfPeBZNYTZOluSU9uGqiRFNq+G8iHffcdGif+9CipG4pS8TBQ0SXyw
+    z3gq8dto40k92lPZS1n/vmYDZJkrLsiYwF5k54z6akd8ugdCR2XcCIJTVbgCfl3rp8z7
+    WsK5EfMemVpC+zIrXaop5PHLYyP2kq+lcms5V7Aq5snurT2neHZMOuRCkp/BBSop6F0R
+    hUcuY01PYjgfkaQTlV1Tbr2Pltu+oRcNjn4VVR2Yr/Ic+rLXpfBUTqHKTUeWtccBDCZF
+    wNkVRdJ2OMZ7sIrJQ0085dmOl0svaNIrrwG3diECs/p7r5YcoGmO8sh7DuRezaT2/TXJ
+    KNTQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1783749728;
     s=strato-dkim-0003; d=goldelico.com;
     h=References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Cc:Date:
     From:Subject:Sender;
-    bh=ZB4drwZeCzFntaUbA8UcFyakx9+hGBaPBgbS+EjwmC4=;
-    b=WlvwVONf4WYr92wgA8G3MKGSSueqLjRrbW6fKtwcUtkCLnHy0dflC3i5XWSwwIh9MT
-    onJo+t8VZVmM0oApg7Bw==
+    bh=QXR5Qg49Kg9ruecbogfudI2YBbpJhxt31ZHIrx9WnZU=;
+    b=m+5PvXgf0ms6g80KPOtqTg3UPfv+ARI8gG/NdH8CV7b/IdiiyD7Vs+YFaOfvGiO5dE
+    a2xAtOZLGBXI7S4KZaCQ==
 X-RZG-AUTH: ":JGIXVUS7cutRB/49FwqZ7WcJeFKiMhflhwDubTJ9qVpwcQVkPW4I1HrT35oLmciNszeF4HOToVDOd6S1gdjuILE2MKVd"
 Received: from iMac.fritz.box
     by smtp.strato.de (RZmta 55.5.6 AUTH)
-    with ESMTPSA id Q4b76426B62AGhp
+    with ESMTPSA id Q4b76426B626Ghl
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
 	(Client did not present a certificate);
-    Sat, 11 Jul 2026 08:02:10 +0200 (CEST)
+    Sat, 11 Jul 2026 08:02:06 +0200 (CEST)
 From: "H. Nikolaus Schaller" <hns@goldelico.com>
 To: Grond <grond66@riseup.net>,
 	Stefan Leichter <sle85276@gmx.de>,
@@ -107,9 +107,9 @@ Cc: letux-kernel@openphoenux.org,
 	linux-fbdev@vger.kernel.org,
 	kernel@pyra-handheld.com,
 	mfd@lists.linux.dev
-Subject: [PATCH 04/16] arm: dts: omap3pandora: Populate DT data for the TWL4030's REGEN regulator
-Date: Sat, 11 Jul 2026 08:01:51 +0200
-Message-ID: <d0b2a73c7c208f33784eae4219ff3981800ae6f9.1783749722.git.hns@goldelico.com>
+Subject: [PATCH 01/16] dt-bindings: twl-regulator: Add bindings for exposing ti,twl4030-regen
+Date: Sat, 11 Jul 2026 08:01:48 +0200
+Message-ID: <00718b18253a764c2a7c9a2b95c3b8c411796583.1783749722.git.hns@goldelico.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <cover.1783749722.git.hns@goldelico.com>
 References: <cover.1783749722.git.hns@goldelico.com>
@@ -124,40 +124,37 @@ Content-Type: text/plain; charset="us-ascii"
 
 From: Grond <grond66@riseup.net>
 
-On the Pandora, REGEN is used to enable TPS61029DRC external regulator
-which runs a 5V power rail. The 5ms startup delay is taken from Pandora's
-3.2 kernel, where it is labeled as a "guess". So it may be possible to
-activate the regulator faster.
+FIXME: not reflected in the bindings
 
-On Pandora CC units, this regulator is used as the input to the LCD power
-supply. Therefore, problems are likely to arise if the regulator is ever
-disabled, so we add the regulator-always-on property to compensate.
++Reguired properties:
++For twl3040 REGEN signal:
++ - regulator-min-microvolt:
++  - Same meaning as in bindings/regulator/regulator.yaml, but must match
++    regulator-max-microvolt.
++ - regulator-max-microvolt:
++  - Same meaning as in bindings/regulator/regulator.yaml, but must match
++    regulator-min-microvolt.
++ - startup-delay-us:
++  - Same meaning as in bindings/regulator/fixed-regulator.yaml.
 
 Signed-off-by: Grond <grond66@riseup.net>
 Signed-off-by: H. Nikolaus Schaller <hns@goldelico.com>
 ---
- arch/arm/boot/dts/ti/omap/omap3-pandora-common.dtsi | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ Documentation/devicetree/bindings/mfd/ti,twl.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/boot/dts/ti/omap/omap3-pandora-common.dtsi b/arch/arm/boot/dts/ti/omap/omap3-pandora-common.dtsi
-index 06c5b23589991..a0116823ffdef 100644
---- a/arch/arm/boot/dts/ti/omap/omap3-pandora-common.dtsi
-+++ b/arch/arm/boot/dts/ti/omap/omap3-pandora-common.dtsi
-@@ -486,6 +486,14 @@ &vsim {
- 	regulator-always-on;
- };
+diff --git a/Documentation/devicetree/bindings/mfd/ti,twl.yaml b/Documentation/devicetree/bindings/mfd/ti,twl.yaml
+index 9cc3e4721612e..183fc015e40ad 100644
+--- a/Documentation/devicetree/bindings/mfd/ti,twl.yaml
++++ b/Documentation/devicetree/bindings/mfd/ti,twl.yaml
+@@ -46,6 +46,7 @@ allOf:
+                 - ti,twl4030-vusb1v5
+                 - ti,twl4030-vusb1v8
+                 - ti,twl4030-vusb3v1
++                - ti,twl4030-regen
+             ti,retain-on-reset: false
  
-+&regen {
-+	regulator-min-microvolt = <5000000>;
-+	regulator-max-microvolt = <5000000>;
-+	startup-delay-us = <5000>;
-+	regulator-always-on;
-+	status = "okay";
-+};
-+
- &i2c2 {
- 	clock-frequency = <100000>;
- 	/* no clients so we should disable clock */
+       properties:
 -- 
 2.50.1 (Apple Git-155)
 
