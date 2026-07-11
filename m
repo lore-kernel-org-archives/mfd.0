@@ -1,118 +1,157 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mo4-p04-ob.smtp.rzone.de (mo4-p04-ob.smtp.rzone.de [81.169.146.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E620B331ED8
-	for <mfd@lists.linux.dev>; Fri, 10 Jul 2026 19:46:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783712768; cv=none; b=a1Tl7o7rutX03aw9g2JQxTbrvXc4nj5WbrpvB22pZXOmQ6i/B5qPpboUFmRxXd4Ib8cQO8iG7Psg7oKFlMSdRt6QapTKM8T1PuviDkKxFeLe5oeZCCBR+cU3O4O03IkT/2Gn3jgSHMfBRwwtRZW1xcOFq4xOiXtCYGbQ/KuC+Es=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783712768; c=relaxed/simple;
-	bh=sZDwGaUkGBLrMyNSIpb3kLYEJV1iPNS+5Pn9t9xv6aE=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Z5CerGp9Qe+MZfPmNAT0N5WMzwqt/+U6D8yeLXg0UrR3jZ1BX7upSiY4t549BKf2w+Dl+9qhcbSevvArDoAqEdCW728aab1UncBf+0cJjrvLf5p5ur1wIIEp1rH6jNCNZStpOrXszA78qAuwn97xv9LYt8gEnSAdu1HbIBsDE5o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eQ5prH05; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC49E31AF1B
+	for <mfd@lists.linux.dev>; Sat, 11 Jul 2026 06:02:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=81.169.146.179
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783749747; cv=pass; b=T4IHXzR13ktUhfgj8SPVQN5og2jODVxOSaHp3E828uyCW89UwNpxWJ2l2Skli9JvOkkidg4wl28Jhnt7mTgtL3qmDXLVFMS53cBIfylCrOA6ftJx15Dw+K4qkqcuvs3RB5E3INdbnKL8Op72elpCiCFwh6v76t78czRil0oe60k=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783749747; c=relaxed/simple;
+	bh=ei8tTzxx2NWR0dqgcfVWSy/9nOD7csfapjKERc1nNY0=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=WM/f/qViLOfz/XvjpT230vZIcWo5e5e8KjA3DNRnMQOp8msZzmRGos/vZc1fQavFLicO+c4CkuTMzy4KIRgcyvjn6E8911ylJy9irrSq6O09MViBAOaQwBoNjSiT3WGKo1Juy55G26QWG/HteO0kWga0hQPw9YqqPhhaoLZ9OmY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=goldelico.com; spf=pass smtp.mailfrom=goldelico.com; dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=kCyPgNlE; dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=iEfMC90x; arc=pass smtp.client-ip=81.169.146.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=goldelico.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=goldelico.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eQ5prH05"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7DB031F00A3A
-	for <mfd@lists.linux.dev>; Fri, 10 Jul 2026 19:46:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783712765;
-	bh=sZDwGaUkGBLrMyNSIpb3kLYEJV1iPNS+5Pn9t9xv6aE=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=eQ5prH05UmMQ5nGzy2ipeXY4lkQKyESaExDjUsgSfLeW4Exvc2X3hmxZBp+HDDnwh
-	 gy5xn0rCrTfjNjQPuHqcu0FzPQaJ1YAZQhahxV6T71deZYeziM3pxHW7W2QMq7y6oo
-	 FhrHfQwcIy8kJ5vfpHKHkPBPGkAXF61R0T/lZ2ElQ2NH5ERxyQsy7VX/rtQZXyubbl
-	 A2sLjBzEZvP7c6oEza0bh+NHkyjHOxBrmO5f6L+sHKF4PsUJlyZudG5MyYb+SAYa+Q
-	 NxdYQYovNbSqCC+VoYxV741dZW8VrYV1dSt2xDZrMn+OppxGaWxi3KV0Oc/ks13nm6
-	 ThnjUYcTxcrQg==
-Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-5aebd52488cso1366742e87.2
-        for <mfd@lists.linux.dev>; Fri, 10 Jul 2026 12:46:05 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rp1Lc1NSkTTvDCwZEJxlyk94OrZUHumlVdy7DaiAzk7aRJ/vTHi7tRfN+DViM/ZPW+98TY=@lists.linux.dev
-X-Gm-Message-State: AOJu0YwBLtn81/SdfARAZQdg44qfMe3ZIgsAiUhIV+IGxge+jcEv4h9H
-	GKSaS55d09FJUfRigATcGmbt0nvVSf4SIYylBG0FVLZKDk8W3XPvgOld5ehgAeemPzWBTqQsUW0
-	Xmb/z+dkB4ZiITwNm1VyzEpbZiy0V5fQ=
-X-Received: by 2002:a05:6512:32cf:b0:5ae:b792:7f1e with SMTP id
- 2adb3069b0e04-5b0236a3891mr89821e87.30.1783712764308; Fri, 10 Jul 2026
- 12:46:04 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="kCyPgNlE";
+	dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="iEfMC90x"
+ARC-Seal: i=1; a=rsa-sha256; t=1783749741; cv=none;
+    d=strato.com; s=strato-dkim-0002;
+    b=cbHhs1G/UB8S4rKpy+eTavrMAOsuDePdX6s96nPH2HHTTPdY0K5V7VMRv2YltrLVoN
+    sae4VTf9/3We3uaCL81xymPMAEy3gUDZaFhZZSxOCl0ZXWYSSoiSnDC9JxoeaD6rQFPS
+    enVYxcwemHQxj59LUXohlY3jaB+6R6B4SR96khHLocwZ3DEGG39mMI9Xpnm6Rg1pg50C
+    5mVjQH2pZGJ1Tf+yrOa2+H9GBN0yyFNci76bPcjsPt7aM4K9Da0nZfo7ZbTqRIjWGfio
+    cOd0+dfMUqdlNhyrxNirroMC2kEOPUPSyDQb6MwF5yYf0sUgm6CGOmwEDv5dgVmyFnnE
+    6GGA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1783749741;
+    s=strato-dkim-0002; d=strato.com;
+    h=References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Cc:Date:
+    From:Subject:Sender;
+    bh=HENgLEtB9pue7a+OzTC29B2VMtoMvD6SFjJxTuZhfas=;
+    b=p/pEPqImHou+Mlwh+eAFeS0DZK5pnqKcoNMimQVpJw3SvlVwT9jmZQcJ7AJs+ZJLnp
+    Vt6XHfDEREsyWvMIXCXD3cqUMgoLZAiWCPBy6K+zTIaKd7Hq8rI85JMA9uH/8ZrIaOW1
+    0KQOW3s099HgsShU8rlBTsNbHv+3FRXGzN/KHfxOchLJVCdmG+NVtzbu0tkHQfv0zHVi
+    rp0mmqUlack9CnXpOlja/VTAiYscGx71l2ne/YtYxikQUcxKVpX1BHzpOEZqNrgPdW8E
+    teS0p8NZH09q5XBrJPnKfuS/otgzI78ccJzsKBMt8Gui5Gm8IGMyEc4VMRIEdClEUHHf
+    yXWQ==
+ARC-Authentication-Results: i=1; strato.com;
+    arc=none;
+    dkim=none
+X-RZG-CLASS-ID: mo04
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1783749741;
+    s=strato-dkim-0002; d=goldelico.com;
+    h=References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Cc:Date:
+    From:Subject:Sender;
+    bh=HENgLEtB9pue7a+OzTC29B2VMtoMvD6SFjJxTuZhfas=;
+    b=kCyPgNlEM4WxjjWOyGgAWA0z8pH8EXo4zD3PLR4gCoHpQUxskyHxbRfxwSnBZ5PfnN
+    i2EKNtSit5uobsCV2mOs3V+ZdkXkxaQqh5MZLMlSvaqqIBg/vqaPMLlYp/nk14eUOnhX
+    tKw3hrjG6ciaYgOwMpyMleFu2Pqd6y4jb9KjIoEkI0DvbqLqQ6H6PKhqgPxU7XHPjX6t
+    ci2HjVu9xo3nDuPzHhPfW45G1xTzgxZJ1JqiuYdXgeXJD0Tk4ECwVmQjo+LZIyeknYiE
+    orZG0RFseD3G5ZfzviqbdxLrF8BDy8a4ulOxScM2j3m2dN7/hYoqJ8B3oaxnGSndxma0
+    puqg==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1783749741;
+    s=strato-dkim-0003; d=goldelico.com;
+    h=References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Cc:Date:
+    From:Subject:Sender;
+    bh=HENgLEtB9pue7a+OzTC29B2VMtoMvD6SFjJxTuZhfas=;
+    b=iEfMC90x31GwXTvNm+0LH5NqByU4WTMnLsdbXDP+vKKABTETSi+XsdwbCwVM3GWC0d
+    FIlCftVoxFOwv2STJqDA==
+X-RZG-AUTH: ":JGIXVUS7cutRB/49FwqZ7WcJeFKiMhflhwDubTJ9qVpwcQVkPW4I1HrT35oLmciNszeF4HOToVDOd6S1gdjuILE2MKVd"
+Received: from iMac.fritz.box
+    by smtp.strato.de (RZmta 55.5.6 AUTH)
+    with ESMTPSA id Q4b76426B62KGhw
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+	(Client did not present a certificate);
+    Sat, 11 Jul 2026 08:02:20 +0200 (CEST)
+From: "H. Nikolaus Schaller" <hns@goldelico.com>
+To: Grond <grond66@riseup.net>,
+	Stefan Leichter <sle85276@gmx.de>,
+	"H . Nikolaus Schaller" <hns@goldelico.com>,
+	Grazvydas Ignotas <notasas@gmail.com>,
+	Tony Lindgren <tony@atomide.com>,
+	Ethan Nelson-Moore <enelsonmoore@gmail.com>,
+	Jarkko Nikula <jarkko.nikula@bitmer.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	Lee Jones <lee@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Roger Quadros <rogerq@kernel.org>,
+	Russell King <linux@armlinux.org.uk>,
+	Daniel Thompson <danielt@kernel.org>,
+	Jingoo Han <jingoohan1@gmail.com>,
+	Helge Deller <deller@gmx.de>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	Sen Wang <sen@ti.com>,
+	Richard Fitzgerald <rf@opensource.cirrus.com>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+	Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+	Charles Keepax <ckeepax@opensource.cirrus.com>,
+	Niranjan H Y <niranjan.hy@ti.com>
+Cc: letux-kernel@openphoenux.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-sound@vger.kernel.org,
+	linux-omap@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	dri-devel@lists.freedesktop.org,
+	linux-fbdev@vger.kernel.org,
+	kernel@pyra-handheld.com,
+	mfd@lists.linux.dev
+Subject: [PATCH 11/16] ARM: dts: omap3-pandora-common: Enable audio in/out (mcbsp4/2)
+Date: Sat, 11 Jul 2026 08:01:58 +0200
+Message-ID: <88d0a95b354b27aff5ba548d3829ae7c31838119.1783749722.git.hns@goldelico.com>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <cover.1783749722.git.hns@goldelico.com>
+References: <cover.1783749722.git.hns@goldelico.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <cover.1783615311.git.u.kleine-koenig@baylibre.com>
-In-Reply-To: <cover.1783615311.git.u.kleine-koenig@baylibre.com>
-From: Linus Walleij <linusw@kernel.org>
-Date: Fri, 10 Jul 2026 21:45:51 +0200
-X-Gmail-Original-Message-ID: <CAD++jLkJthrzmVCDE=BopUDMECBpMtPOpCJ9S0CKWRg--Zfz3A@mail.gmail.com>
-X-Gm-Features: AUfX_mx_vh7ziiGHTkkaiMBQb1TjjZ8vahBxzqeJira0tID9YqDdR27A_6wUme0
-Message-ID: <CAD++jLkJthrzmVCDE=BopUDMECBpMtPOpCJ9S0CKWRg--Zfz3A@mail.gmail.com>
-Subject: Re: [PATCH v3 00/23] mfd: Use named initializers for arrays of *_device_data
-To: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>
-Cc: Lee Jones <lee@kernel.org>, Florian Fainelli <florian.fainelli@broadcom.com>, 
-	Ray Jui <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, mfd@lists.linux.dev, 
-	linux-rpi-kernel@lists.infradead.org, linux-arm-kernel@lists.infradead.org, 
-	linux-kernel@vger.kernel.org, Matthias Brugger <matthias.bgg@gmail.com>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
-	linux-mediatek@lists.infradead.org, Qunqin Zhao <zhaoqunqin@loongson.cn>, 
-	linux-crypto@vger.kernel.org, Benson Leung <bleung@chromium.org>, 
-	Guenter Roeck <groeck@chromium.org>, chrome-platform@lists.linux.dev, 
-	Colin Foster <colin.foster@in-advantage.com>, David Rhodes <david.rhodes@cirrus.com>, 
-	Richard Fitzgerald <rf@opensource.cirrus.com>, 
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
-	Mika Westerberg <mika.westerberg@linux.intel.com>, Zha Qipeng <qipeng.zha@intel.com>, 
-	Thomas Richard <thomas.richard@bootlin.com>, linux-sound@vger.kernel.org, 
-	patches@opensource.cirrus.com, Xu Yilun <yilun.xu@intel.com>, 
-	Tom Rix <trix@redhat.com>, Michael Hennerich <michael.hennerich@analog.com>, 
-	Chen-Yu Tsai <wens@kernel.org>, Marek Vasut <marek.vasut+renesas@gmail.com>, 
-	James Ogletree <jogletre@opensource.cirrus.com>, Fred Treven <fred.treven@cirrus.com>, 
-	Ben Bright <ben.bright@cirrus.com>, Support Opensource <support.opensource@diasemi.com>, 
-	Andy Shevchenko <andy@kernel.org>, Charles Keepax <ckeepax@opensource.cirrus.com>, 
-	Chanwoo Choi <cw00.choi@samsung.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
-	=?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>, 
-	Aaro Koskinen <aaro.koskinen@iki.fi>, Andreas Kemnade <andreas@kemnade.info>, 
-	Kevin Hilman <khilman@baylibre.com>, Roger Quadros <rogerq@kernel.org>, 
-	Tony Lindgren <tony@atomide.com>, Samuel Kayode <samkay014@gmail.com>, 
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
-	linux-renesas-soc@vger.kernel.org, linux-omap@vger.kernel.org, 
-	imx@lists.linux.dev, linux-stm32@st-md-mailman.stormreply.com, 
-	linux@ew.tq-group.com, Nicolas Ferre <nicolas.ferre@microchip.com>, 
-	Alexandre Belloni <alexandre.belloni@bootlin.com>, Claudiu Beznea <claudiu.beznea@tuxon.dev>, 
-	Peter Griffin <peter.griffin@linaro.org>, Alim Akhtar <alim.akhtar@samsung.com>, 
-	Tim Harvey <tharvey@gateworks.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Sven Peter <sven@kernel.org>, Janne Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>, 
-	Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>, 
-	Luca Ceresoli <luca.ceresoli@bootlin.com>, Saravanan Sekar <sravanhome@gmail.com>, 
-	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, 
-	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
-	=?UTF-8?Q?Jonathan_Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>, 
-	Matti Vaittinen <mazziesaccount@gmail.com>, Orson Zhai <orsonzhai@gmail.com>, 
-	Baolin Wang <baolin.wang@linux.alibaba.com>, Chunyan Zhang <zhang.lyra@gmail.com>, 
-	Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
-	Samuel Holland <samuel@sholland.org>, Liviu Dudau <liviu.dudau@arm.com>, 
-	Sudeep Holla <sudeep.holla@kernel.org>, Lorenzo Pieralisi <lpieralisi@kernel.org>, 
-	Geert Uytterhoeven <geert+renesas@glider.be>, Magnus Damm <magnus.damm@gmail.com>, 
-	Heiko Stuebner <heiko@sntech.de>, linux-samsung-soc@vger.kernel.org, 
-	linux-amlogic@lists.infradead.org, asahi@lists.linux.dev, 
-	linux-arm-msm@vger.kernel.org, linux-sunxi@lists.linux.dev, 
-	linux-rockchip@lists.infradead.org, Peter Tyser <ptyser@xes-inc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Thu, Jul 9, 2026 at 6:59=E2=80=AFPM Uwe Kleine-K=C3=B6nig (The Capable H=
-ub)
-<u.kleine-koenig@baylibre.com> wrote:
+From: Stefan Leichter <sle85276@gmx.de>
 
-> The objective for this series is to prepare mfd for changing
-> of_device_id and the others to make driver_data a union, see
-> https://lore.kernel.org/all/cover.1780048925.git.u.kleine-koenig@baylibre=
-.com/
-> for the idea behind it.
+enable mcbsp2 and mcbsp4.
 
-The series:
-Reviewed-by: Linus Walleij <linusw@kernel.org>
+Signed-off-by: Stefan Leichter <sle85276@gmx.de>
+Signed-off-by: H. Nikolaus Schaller <hns@goldelico.com>
+---
+ arch/arm/boot/dts/ti/omap/omap3-pandora-common.dtsi | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Yours,
-Linus Walleij
+diff --git a/arch/arm/boot/dts/ti/omap/omap3-pandora-common.dtsi b/arch/arm/boot/dts/ti/omap/omap3-pandora-common.dtsi
+index b4acab1625212..5907b2455f75b 100644
+--- a/arch/arm/boot/dts/ti/omap/omap3-pandora-common.dtsi
++++ b/arch/arm/boot/dts/ti/omap/omap3-pandora-common.dtsi
+@@ -716,6 +716,7 @@ &mcbsp1 {
+ 
+ /* audio DAC */
+ &mcbsp2 {
++	status = "okay";
+ };
+ 
+ /* bluetooth */
+@@ -724,6 +725,7 @@ &mcbsp3 {
+ 
+ /* to twl4030*/
+ &mcbsp4 {
++	status = "okay";
+ };
+ 
+ &venc {
+-- 
+2.50.1 (Apple Git-155)
+
