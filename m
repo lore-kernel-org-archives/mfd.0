@@ -1,209 +1,93 @@
-Received: from mo4-p02-ob.smtp.rzone.de (mo4-p02-ob.smtp.rzone.de [85.215.255.84])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E601D386C17
-	for <mfd@lists.linux.dev>; Mon, 13 Jul 2026 11:53:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=85.215.255.84
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783943636; cv=pass; b=q5RbnKqlnzeo/2tcggmFPfgnTsP4me0o9aqfwQanByhJrLMcPgdW66O3kavkNaDOm51k1teCAdPxF4u2gF5YkPV+vftG4FqaMC+oATSf553otn1Quf5pealgv4iFEVIoXTLUizW+mS7vacqsPmALmG5Pf7brTBhrdBFR62aGq2o=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783943636; c=relaxed/simple;
-	bh=i3ds+ZfPgSmMxk9w62eeDN6HWFjTVsxsr0xp5kuGCo0=;
-	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
-	 Message-Id:References:To; b=FjTwHt669VvYO8traqXHqFhrst6oIPwCotdreW89St4VibFp+1kKwGrvazNH1VbfbXycQEJqx55N6C1U7IVTduHwrbro6lL7cHr5YTVuZBPw7BKFys05foEbSt/7aWgZtwe1ahdHrUYKOAiSqnsY3gCNgNFHNjKIAUZiO22Jsyk=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=goldelico.com; spf=pass smtp.mailfrom=goldelico.com; dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=Y+mVFkcz; dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=s5oUxzPz; arc=pass smtp.client-ip=85.215.255.84
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=goldelico.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=goldelico.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BDF62E717B
+	for <mfd@lists.linux.dev>; Mon, 13 Jul 2026 14:43:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783953836; cv=none; b=FLGTmoNI5ydE0LwsdLGs6tT3M0gbcDTvuVYjnS2UxCVMeb9Ny+lJlCtvTVrCSaV+4kRlv2mnd82ZskotLg+w3xaYJQGMtlnRvavDJuP80c9kbKKSHQ6Cxus1qYd69VL9EAbhAGwy1VosH0M6V6FfM0eyMaNtoIZBfSLJL4U9bwQ=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783953836; c=relaxed/simple;
+	bh=QFScjVTqoh4F0Ect2GX8qD5z7jKyTtnc9qxCnA67yGw=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=bjfE4bxRTijh545G5/EC+PQR8tkTE5uBYZnKFE4mfI8FnkKifE3chsU/mNrgRj02LDP2P5o0r4CPzNbLLRtp7veWIepk5SEedjByqdaG6/7UFaJZIv3CX/0aFrzCYe/1xq97wf+UEyo8Ot8B7spDO5dEe12IXpw2a4MaRdc3Ci4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=D5WpgTSH; arc=none smtp.client-ip=185.246.85.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="Y+mVFkcz";
-	dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="s5oUxzPz"
-ARC-Seal: i=1; a=rsa-sha256; t=1783943621; cv=none;
-    d=strato.com; s=strato-dkim-0002;
-    b=Kx1wuMGhNx1H1qyfH20/px3rarhlIIZQ+JjJo0CEpux60nBDZPSSrKgs9Rl3tQiiv6
-    0l0dKIVzgcjkdC3daT6DTHReUrAge2lS4LW7dM4khoLYId08yYBqLVzE1l5J6wBWMpH8
-    Z9EKVYSrbNd1ti3fQ8QLOb3Gv+e+XkFK96rSLufhJeeYCIRWK65kErEhJA2uI4N64NjH
-    JYSz8Sn6nZ5H52RQdUFyCUCbhgdybWcihOBibDK90RNM5bcsxZ71wwF406c4ytvZT3In
-    Jmfs6IOFCUNNXe4kTJbT6bMATZ+WUR8O3jLEfZRx5UHgEo1lrh2NyIzmi2jqKLw22ZXr
-    uAgQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1783943620;
-    s=strato-dkim-0002; d=strato.com;
-    h=To:References:Message-Id:Cc:Date:In-Reply-To:From:Subject:Cc:Date:
-    From:Subject:Sender;
-    bh=i3ds+ZfPgSmMxk9w62eeDN6HWFjTVsxsr0xp5kuGCo0=;
-    b=BGXfZQIZ3SaQrA5X07mjvAtyo/KMJXmohUec/pZZWOecujXRZ34ILOkWUzK+DTpm19
-    DnpguzbL1Z0SCC3Hpgm/18BSBg1BUOyrgDyO7vWh76TBoIxvViomlPgRdOZ2QVUU4HYJ
-    9MnaMHd5KOuuqTngGz2RsP1yw3WZXZYIMWeZ4mFAuJqNK8eiiCW8p7lsgvjwiESjK51O
-    CPH9DVJh5ImrcAWh/khAd7tG3GbgFouS5hc5XVRw9jo2Ln5FSuy0ML7nLcdmYFGdvT3r
-    R43lS5IAIwKYUfF7w6e/7VOy2rLBLnJm7Ve0Od7qnIVFb2QhXsSPXw8SkmrsjC/GoGeM
-    QLOw==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo02
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1783943620;
-    s=strato-dkim-0002; d=goldelico.com;
-    h=To:References:Message-Id:Cc:Date:In-Reply-To:From:Subject:Cc:Date:
-    From:Subject:Sender;
-    bh=i3ds+ZfPgSmMxk9w62eeDN6HWFjTVsxsr0xp5kuGCo0=;
-    b=Y+mVFkczigTwHh07i5RU3dZ4pxUtVVhWXaI+p5c5AuX4Ed3wFswQZy7pu7aGlrJMG1
-    FBOO2pYQMlDx3CJBFf33GdHpPyDq1MlQdZiKOkP9d3deI3MUqXWAt7ei92bTojyXs1W1
-    +luDZjQbt02BL4qKEod75NByenN/O2d9h78LoyQmDKJg1cmhUNdKVrH18UxMrNgsE3qU
-    lxDmX3AeDOyw33C7ZsKCdbNSFmDJB481hWSDhvS9ew4kZtFwMWys2mWiY8aV3XJ1eMh5
-    Z44CypUzRk/gNuUvXICD9kW/AkreJKPPPMJr1hGp01t11GWAMRgt5E0gycK3VwVa6b97
-    Muyg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1783943620;
-    s=strato-dkim-0003; d=goldelico.com;
-    h=To:References:Message-Id:Cc:Date:In-Reply-To:From:Subject:Cc:Date:
-    From:Subject:Sender;
-    bh=i3ds+ZfPgSmMxk9w62eeDN6HWFjTVsxsr0xp5kuGCo0=;
-    b=s5oUxzPzsKSduKARr3lcDfEnRpESmipObP6NRDu3IJDlm6uuVQYxwV1+P6l65C1tdO
-    QuCLZy3VdSu64X4cJwCw==
-X-RZG-AUTH: ":JGIXVUS7cutRB/49FwqZ7WcJeFKiMhflhwDubTJ9qVpwcQVkPW4I1HrQi5pZlciNgDl2kEp5oHJ2/c57N2Mc49IfXTKd"
-Received: from smtpclient.apple
-    by smtp.strato.de (RZmta 55.5.6 AUTH)
-    with ESMTPSA id Q4b76426DBrcOAG
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve X9_62_prime256v1 with 256 ECDH bits, eq. 3072 bits RSA))
-	(Client did not present a certificate);
-    Mon, 13 Jul 2026 13:53:38 +0200 (CEST)
-Content-Type: text/plain;
-	charset=us-ascii
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="D5WpgTSH"
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 1AE004E40D8A;
+	Mon, 13 Jul 2026 14:43:52 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id C763E60345;
+	Mon, 13 Jul 2026 14:43:51 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 1393411BD05B6;
+	Mon, 13 Jul 2026 16:43:49 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1783953831; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding; bh=mgoRmfCNtNFVeeYwLQYefomCmpA70gvR/bkP8iy2YoI=;
+	b=D5WpgTSH/+zxYt0fMiG8fUyIRa92WBF0B/56UVukU+YWHH5IgOsCpJPm/FS4b/ETVcM3Xw
+	ITl/b84y54UNQ89WbObtUz6AeOEj/gDJFVexg5uw+A3AWqK8S6od9poK/beIXK05foNU80
+	nZ7GS0B1Ss28OQysXqPEQVGgBeUOZhydKh7n7x75HKJh2lxhT9BCp2B2ZL4LRgaDZBJcAC
+	y09MZ6rgM9MtvKf8oaaYClsuK/tp1Gv3sBlLDiWs76fH6dIvvISuM84rk5moINhzXokuLQ
+	kktd2MoiGp7bFNYjkmzM1ygGqm+r03YMP8MILC0kZARXPkVBGxo79Pmgn3jwdA==
+From: Thomas Richard <thomas.richard@bootlin.com>
+Date: Mon, 13 Jul 2026 16:43:43 +0200
+Subject: [PATCH] mfd: cgbc: Fix teardown ordering in cgbc_remove()
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81.1.8\))
-Subject: Re: [PATCH 09/16] ASoC: dt-bindings: add OpenPandora Sound Card
-From: "H. Nikolaus Schaller" <hns@goldelico.com>
-In-Reply-To: <741706c6-e6ff-4bc2-8ea1-28ebada6032c@kernel.org>
-Date: Mon, 13 Jul 2026 13:53:28 +0200
-Cc: Grond <grond66@riseup.net>,
- Stefan Leichter <sle85276@gmx.de>,
- Grazvydas Ignotas <notasas@gmail.com>,
- Tony Lindgren <tony@atomide.com>,
- Ethan Nelson-Moore <enelsonmoore@gmail.com>,
- Jarkko Nikula <jarkko.nikula@bitmer.com>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Andreas Kemnade <andreas@kemnade.info>,
- Lee Jones <lee@kernel.org>,
- Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Liam Girdwood <lgirdwood@gmail.com>,
- Mark Brown <broonie@kernel.org>,
- Aaro Koskinen <aaro.koskinen@iki.fi>,
- Kevin Hilman <khilman@baylibre.com>,
- Roger Quadros <rogerq@kernel.org>,
- Russell King <linux@armlinux.org.uk>,
- Daniel Thompson <danielt@kernel.org>,
- Jingoo Han <jingoohan1@gmail.com>,
- Helge Deller <deller@gmx.de>,
- Jaroslav Kysela <perex@perex.cz>,
- Takashi Iwai <tiwai@suse.com>,
- Sen Wang <sen@ti.com>,
- Richard Fitzgerald <rf@opensource.cirrus.com>,
- Arnd Bergmann <arnd@arndb.de>,
- Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
- Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
- Charles Keepax <ckeepax@opensource.cirrus.com>,
- Niranjan H Y <niranjan.hy@ti.com>,
- letux-kernel@openphoenux.org,
- devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org,
- linux-sound@vger.kernel.org,
- linux-omap@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org,
- dri-devel@lists.freedesktop.org,
- linux-fbdev@vger.kernel.org,
- kernel@pyra-handheld.com,
- mfd@lists.linux.dev
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <9E796FCB-F393-48F9-A8D4-6E433EFB6876@goldelico.com>
-References: <cover.1783749722.git.hns@goldelico.com>
- <7989e699de400c0fe3f0cb7af77a54077784df78.1783749722.git.hns@goldelico.com>
- <20260713-infallible-capable-dormouse-aaaebe@quoll>
- <BF2B6C4A-A4CC-48D7-9854-DC014950184B@goldelico.com>
- <5667350d-cc3f-421d-899f-f353b05c5ea1@kernel.org>
- <8A0C119B-7885-4538-8D4F-AC60E5C91B7E@goldelico.com>
- <741706c6-e6ff-4bc2-8ea1-28ebada6032c@kernel.org>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-X-Mailer: Apple Mail (2.3826.700.81.1.8)
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260713-cgbc-core-fix-cgbc-remove-v1-1-79274ad62b3a@bootlin.com>
+X-B4-Tracking: v=1; b=H4sIAJ75VGoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDc0MD3eT0pGTd5PyiVN20zAoIryg1N78sVdfUIDnJKNXSwigpMUkJqL+
+ gKBWoBGx2dGxtLQCxK7IWawAAAA==
+X-Change-ID: 20260710-cgbc-core-fix-cgbc-remove-50cb2e982bab
+To: Lee Jones <lee@kernel.org>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, mfd@lists.linux.dev, 
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
+ Sashiko <sashiko-bot@kernel.org>, 
+ Thomas Richard <thomas.richard@bootlin.com>
+X-Mailer: b4 0.14.3
+X-Last-TLS-Session-Version: TLSv1.3
 
+Release Board Controller session once children are removed by the core.
 
+Cc: stable@vger.kernel.org
+Reported-by: Sashiko <sashiko-bot@kernel.org>
+Closes: https://sashiko.dev/#/patchset/cover.1783507945.git.u.kleine-koenig%40baylibre.com?part=19
+Fixes: 6f1067cfbee7 ("mfd: Add Congatec Board Controller driver")
+Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
+---
+ drivers/mfd/cgbc-core.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> Am 13.07.2026 um 11:42 schrieb Krzysztof Kozlowski <krzk@kernel.org>:
->=20
-> On 13/07/2026 11:38, H. Nikolaus Schaller wrote:
->>=20
->>=20
->>> Am 13.07.2026 um 11:21 schrieb Krzysztof Kozlowski =
-<krzk@kernel.org>:
->>>=20
->>> On 13/07/2026 10:27, H. Nikolaus Schaller wrote:
->>>> Hi Krzysztof,
->>>>=20
->>>> Thank you for the feedback.
->>>>=20
->>>>=20
->>>> It does not emit any C compiler issues or runtime problems so it =
-remained unnoticed.
->>>=20
->>> I do not believe.
->>>=20
->>> There is a clear warning from Rob's bot.
->>>=20
->>> You just did not follow the process of building the code (compiler =
-has
->>> nothing to do here). Read submitting patches in DT dir and then =
-writing
->>> schema for further instructions. This is ABSOLUTE MINIMUM. We are =
-not
->>> your build test service.
->>>=20
->>>>=20
->>>> It was notified by the sahiko-bot and will be fixed in v2.
->>>=20
->>> Sashiko has nothing to do with that.
->>>=20
->>> You DID NOT BUILD the code.
->>=20
->> Hm. You are confusing me. I did "make" and did not get any errors...
->> And the resulting code works as intended.
->=20
-> 'make' alone does not build that, just like other pieces of code they
-> have own - well documented and always expected - build processes.
->=20
-> I don't know what is confusing in my message, since I pointed you to
-> SPECIFIC guide telling you EXACTLY what to do (and which you did not =
-do).
+diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
+index 10bb4b414c34..2becaf797646 100644
+--- a/drivers/mfd/cgbc-core.c
++++ b/drivers/mfd/cgbc-core.c
+@@ -364,9 +364,9 @@ static void cgbc_remove(struct platform_device *pdev)
+ {
+ 	struct cgbc_device_data *cgbc = platform_get_drvdata(pdev);
+ 
+-	cgbc_session_release(cgbc);
+-
+ 	mfd_remove_devices(&pdev->dev);
++
++	cgbc_session_release(cgbc);
+ }
+ 
+ static struct platform_driver cgbc_driver = {
 
-Confusing was the phrase "building the code". For my understanding
-"building the code" is the process of building ("translating the code")
-to get vmlinux or similar and a DTB and kernel modules.
+---
+base-commit: 8cdeaa50eae8dad34885515f62559ee83e7e8dda
+change-id: 20260710-cgbc-core-fix-cgbc-remove-50cb2e982bab
 
-As far as I understand the bindings they are used to check the DTS =
-source
-files against. So here is no translation of bindings into a real DTB =
-that
-finaly runs on a device. So I had assumed that schemas are "validated"
-(not "built") by dt_binding_check.
-
-This made me confused.
-
-Back to topic:
-
-It finally turned out that our script to run the required checks =
-automatically
-was no longer operational and silently ignored the validations. =
-Therefore
-nobody noticed before the bots did. Good to have a second and =
-independent
-check.
-
-So sorry for the confusion we have introduced...
-
-v2 will be checked as it previously was.
-
-BR and thanks,
-Nikolaus
+Best regards,
+-- 
+Thomas Richard <thomas.richard@bootlin.com>
 
