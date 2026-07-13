@@ -1,93 +1,129 @@
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BDF62E717B
-	for <mfd@lists.linux.dev>; Mon, 13 Jul 2026 14:43:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E05843746C
+	for <mfd@lists.linux.dev>; Mon, 13 Jul 2026 14:54:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783953836; cv=none; b=FLGTmoNI5ydE0LwsdLGs6tT3M0gbcDTvuVYjnS2UxCVMeb9Ny+lJlCtvTVrCSaV+4kRlv2mnd82ZskotLg+w3xaYJQGMtlnRvavDJuP80c9kbKKSHQ6Cxus1qYd69VL9EAbhAGwy1VosH0M6V6FfM0eyMaNtoIZBfSLJL4U9bwQ=
+	t=1783954446; cv=none; b=UkjslOF6O/QgE81TuIz256EbMkWhlnCYA/U6UyTGwieaEUbhRRwvayLqwtIMldjNVA6Zmsh3VYME9VVQO+JsBIN5bBDtp1GwZN9WQSAZLOxPyhLVH6aTsINEXPDttJ6FTpjqfa9z6jC4QxnXPxVXaoVjI6Cx6mWHwv/1cMXgBH0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783953836; c=relaxed/simple;
-	bh=QFScjVTqoh4F0Ect2GX8qD5z7jKyTtnc9qxCnA67yGw=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=bjfE4bxRTijh545G5/EC+PQR8tkTE5uBYZnKFE4mfI8FnkKifE3chsU/mNrgRj02LDP2P5o0r4CPzNbLLRtp7veWIepk5SEedjByqdaG6/7UFaJZIv3CX/0aFrzCYe/1xq97wf+UEyo8Ot8B7spDO5dEe12IXpw2a4MaRdc3Ci4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=D5WpgTSH; arc=none smtp.client-ip=185.246.85.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	s=arc-20240116; t=1783954446; c=relaxed/simple;
+	bh=XYVAOQ1BiWmUStDoGw8+T7a/vS7v22C9lWjgrSvE2q8=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=C+92SZBOfTb8I0GJzMy2wu0GuzSiLEuWmlb+KAYvkQ8JRyaPqDwV0IhX3eq7OnpBOxtmluzzjXbnsw+6DK7MHQ6CoMt7cF8z/JsDG2apOF3a0zZV0N6qlWuDanJlKyfNG0ZfdO/Kjh3L95e11Q5ohvwx2a3LDIFkYcpZc1bwkZI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HgPOjlVw; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="D5WpgTSH"
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 1AE004E40D8A;
-	Mon, 13 Jul 2026 14:43:52 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id C763E60345;
-	Mon, 13 Jul 2026 14:43:51 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 1393411BD05B6;
-	Mon, 13 Jul 2026 16:43:49 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1783953831; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding; bh=mgoRmfCNtNFVeeYwLQYefomCmpA70gvR/bkP8iy2YoI=;
-	b=D5WpgTSH/+zxYt0fMiG8fUyIRa92WBF0B/56UVukU+YWHH5IgOsCpJPm/FS4b/ETVcM3Xw
-	ITl/b84y54UNQ89WbObtUz6AeOEj/gDJFVexg5uw+A3AWqK8S6od9poK/beIXK05foNU80
-	nZ7GS0B1Ss28OQysXqPEQVGgBeUOZhydKh7n7x75HKJh2lxhT9BCp2B2ZL4LRgaDZBJcAC
-	y09MZ6rgM9MtvKf8oaaYClsuK/tp1Gv3sBlLDiWs76fH6dIvvISuM84rk5moINhzXokuLQ
-	kktd2MoiGp7bFNYjkmzM1ygGqm+r03YMP8MILC0kZARXPkVBGxo79Pmgn3jwdA==
-From: Thomas Richard <thomas.richard@bootlin.com>
-Date: Mon, 13 Jul 2026 16:43:43 +0200
-Subject: [PATCH] mfd: cgbc: Fix teardown ordering in cgbc_remove()
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HgPOjlVw"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6B9A1F00A3A;
+	Mon, 13 Jul 2026 14:54:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783954443;
+	bh=hRc04UT9+P5Z5ckYK6O4zT4TNj9gqSNhCPnHeIKfH1M=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=HgPOjlVwgs9mNABBUEbQkC9viJvL/vFOJXTmgzR4n8c7535SHH9OeVIH31+aXS/+Q
+	 NLUdc+v91zBiHxurCGYvlXj7EQWRqrhYmh5q2yk20UW5ULdEFRhy7+aZQbSRyyIqYp
+	 oBJKIlVSU2ghBpHDfJvnMPWeLE6SzOwkMcTIFbAh7SEPQPajR7vWBD65yYQdaKqfTD
+	 dYgUJPS6BgNuGDhj/bHSd70yClHsZW867WQbL+BzYZI6O5R75VgVe/5RuRY3KtOMIQ
+	 /h0x9nVMhjEtrEvXIh4A4YP/JP9A8ZfVKsspo0JLjSHaMMepXKkipgpj+zZancbdGW
+	 L7VWKLF3Li3og==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH] mfd: cgbc: Fix teardown ordering in cgbc_remove()
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Thomas Richard" <thomas.richard@bootlin.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20260713-cgbc-core-fix-cgbc-remove-v1-1-79274ad62b3a@bootlin.com>
+References: <20260713-cgbc-core-fix-cgbc-remove-v1-1-79274ad62b3a@bootlin.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Mon, 13 Jul 2026 14:54:02 +0000
+Message-Id: <20260713145402.D6B9A1F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260713-cgbc-core-fix-cgbc-remove-v1-1-79274ad62b3a@bootlin.com>
-X-B4-Tracking: v=1; b=H4sIAJ75VGoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDc0MD3eT0pGTd5PyiVN20zAoIryg1N78sVdfUIDnJKNXSwigpMUkJqL+
- gKBWoBGx2dGxtLQCxK7IWawAAAA==
-X-Change-ID: 20260710-cgbc-core-fix-cgbc-remove-50cb2e982bab
-To: Lee Jones <lee@kernel.org>
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, mfd@lists.linux.dev, 
- linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
- Sashiko <sashiko-bot@kernel.org>, 
- Thomas Richard <thomas.richard@bootlin.com>
-X-Mailer: b4 0.14.3
-X-Last-TLS-Session-Version: TLSv1.3
+
+Thank you for your contribution! Sashiko AI review found 2 potential issue(=
+s) to consider:
+
+Pre-existing issues:
+- [High] Truncation of error code from `cgbc_session_command` masks timeout=
+ errors.
+- [High] Uninitialized kernel stack memory disclosure in `cgbc_get_version`.
+--
+
+--- Patch [1]: [PATCH] mfd: cgbc: Fix teardown ordering in cgbc_remove() ---
+commit 59b97a15c94c66064a1c8f30345e941eb2fcf28f
+Author: Thomas Richard <thomas.richard@bootlin.com>
+
+mfd: cgbc: Fix teardown ordering in cgbc_remove()
 
 Release Board Controller session once children are removed by the core.
 
-Cc: stable@vger.kernel.org
-Reported-by: Sashiko <sashiko-bot@kernel.org>
-Closes: https://sashiko.dev/#/patchset/cover.1783507945.git.u.kleine-koenig%40baylibre.com?part=19
-Fixes: 6f1067cfbee7 ("mfd: Add Congatec Board Controller driver")
-Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
----
- drivers/mfd/cgbc-core.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Closes: https://sashiko.dev/#/patchset/cover.1783507945.git.u.kleine-koenig=
+%40baylibre.com?part=3D19
 
-diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
-index 10bb4b414c34..2becaf797646 100644
---- a/drivers/mfd/cgbc-core.c
-+++ b/drivers/mfd/cgbc-core.c
-@@ -364,9 +364,9 @@ static void cgbc_remove(struct platform_device *pdev)
- {
- 	struct cgbc_device_data *cgbc = platform_get_drvdata(pdev);
- 
--	cgbc_session_release(cgbc);
--
- 	mfd_remove_devices(&pdev->dev);
-+
-+	cgbc_session_release(cgbc);
- }
- 
- static struct platform_driver cgbc_driver = {
+> diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
+> index 10bb4b414c34d..2becaf797646d 100644
+> --- a/drivers/mfd/cgbc-core.c
+> +++ b/drivers/mfd/cgbc-core.c
+> @@ -364,9 +364,9 @@ static void cgbc_remove(struct platform_device *pdev)
+>  {
+>  	struct cgbc_device_data *cgbc =3D platform_get_drvdata(pdev);
+> =20
+> -	cgbc_session_release(cgbc);
+> -
+>  	mfd_remove_devices(&pdev->dev);
+> +
+> +	cgbc_session_release(cgbc);
+>  }
 
----
-base-commit: 8cdeaa50eae8dad34885515f62559ee83e7e8dda
-change-id: 20260710-cgbc-core-fix-cgbc-remove-50cb2e982bab
+[Severity: High]
+This isn't a bug introduced by this patch, but does the truncation of the e=
+rror
+code in cgbc_session_request() mask timeout errors?
 
-Best regards,
--- 
-Thomas Richard <thomas.richard@bootlin.com>
+In drivers/mfd/cgbc-core.c:cgbc_session_request():
 
+    cgbc->session =3D cgbc_session_command(cgbc, CGBC_SESSION_CMD_REQUEST);
+
+If cgbc_session_command() returns -ETIMEDOUT (-110) during device polling,
+assigning this negative int to the u8 cgbc->session truncates it to 146.
+
+The subsequent bounds check evaluates to false for 146, completely masking =
+the
+timeout error and allowing initialization to proceed with an invalid sessio=
+n:
+
+    if (cgbc->session < CGBC_SESSION_VALID_MIN || cgbc->session > CGBC_SESS=
+ION_VALID_MAX)
+        return dev_err_probe(cgbc->dev, -ECONNREFUSED, ...);
+
+[Severity: High]
+This is a pre-existing issue, but does cgbc_get_version() leak uninitialized
+stack memory to userspace?
+
+In drivers/mfd/cgbc-core.c:cgbc_get_version(), the data array is allocated =
+on
+the stack without initialization:
+
+    u8 data[4];
+    ...
+    ret =3D cgbc_command(cgbc, &cmd, 1, &data, sizeof(data), NULL);
+
+If the hardware returns a successful status but with a payload length less
+than 3 bytes, cgbc_command() will write only those bytes into data and
+return 0.
+
+Then, cgbc_get_version() unconditionally copies the bytes:
+
+    cgbc->version.feature =3D data[0];
+    cgbc->version.major =3D data[1];
+    cgbc->version.minor =3D data[2];
+
+This copies potentially uninitialized kernel stack memory into the device
+version structure, which is subsequently exposed to userspace.
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260713-cgbc-core-=
+fix-cgbc-remove-v1-1-79274ad62b3a@bootlin.com?part=3D1
