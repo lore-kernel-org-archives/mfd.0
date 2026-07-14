@@ -1,37 +1,37 @@
 Received: from mail2.andi.de1.cc (vmd64148.contaboserver.net [161.97.139.27])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 688111AA797
-	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 08:00:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3C07235358
+	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 08:01:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=161.97.139.27
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784102440; cv=none; b=Bn9MBISpw3ozeLKWdgqh7GmGB8AvZlEFufdW7yj/FCSfx5/dchuebVW9bW+ofjY7gOHnoIdzvpxpHkTGbzNw5ZaLuE7ArsgCYEKZxmd1NO5sYzi3xWvYtMZ4LIxvP/gvdG74pSgSkkwijcNhACHfGBAc8Dt81jyuFz0KkXf376M=
+	t=1784102481; cv=none; b=DrTv3SrEFSkRaW0V+BtOBq3tgO4p3hEgvnn8edRWZmTQ7LBV2AB885urf+4qG77BKJCoy6eQViyXANq7/RzZegV0k8/dk6I2NWH85FafJAvNzCPttN+5zRaPxSQekczcwtmyRwjh7Cd/BjjnXTQ9q86RG+S9fTZ6lWYXV24J0K8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784102440; c=relaxed/simple;
-	bh=0puFGrZ1bzugF2iwQzkqWYUclPV3sCgyrEBkPyJ2SgE=;
+	s=arc-20240116; t=1784102481; c=relaxed/simple;
+	bh=HSrqo3rPcHBi8CgB9LxOsFM4lZo+LcatZQj6Ixlc4p4=;
 	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ZuKVLhq+0OEku+WzX6rsNMZrIHng2xtiIWR7DZ+afU/Lw2VvIgLjXA1tvwpNFhhyLfDmkbrJkx9aCqCVQ04Zgwk2SLs050+ONfImVY5Ku2TiRh3xWDCzagVjkjM3OO/n/x8wqx7ipOreX9LNMrDxQp2/uzKGrrn/wdakbkDXX5Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info; spf=pass smtp.mailfrom=kemnade.info; dkim=pass (2048-bit key) header.d=kemnade.info header.i=@kemnade.info header.b=RsyFXgIv; arc=none smtp.client-ip=161.97.139.27
+	 MIME-Version:Content-Type; b=HYutG5ZCgysJdR/34vSAlgeIi2oDhe/XK79n5qyybd9Y9Q+fOPJRby24QwKQ1DgpAZYaEW14HGkM3KQYyF6TbfzAnGsw2ZaxI6FthLZJMLJOrJjSqPKMwINo45G0kB34QL3AqvNwbPWA2Suq7DA4qX/XEVsVk/LL3xuJLn7PSQQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info; spf=pass smtp.mailfrom=kemnade.info; dkim=pass (2048-bit key) header.d=kemnade.info header.i=@kemnade.info header.b=Mblw/snt; arc=none smtp.client-ip=161.97.139.27
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kemnade.info
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kemnade.info header.i=@kemnade.info header.b="RsyFXgIv"
+	dkim=pass (2048-bit key) header.d=kemnade.info header.i=@kemnade.info header.b="Mblw/snt"
 Received: from mail.andi.de1.cc ([2a02:c205:3004:2154::1])
 	by mail2.andi.de1.cc with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
 	(Exim 4.98.2)
 	(envelope-from <andreas@kemnade.info>)
-	id 1wjuXj-00000000JAp-3RfE;
-	Wed, 15 Jul 2026 10:00:36 +0200
+	id 1wjuX7-00000000JAi-38v1;
+	Wed, 15 Jul 2026 09:59:58 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=kemnade.info; s=20220719; h=References:In-Reply-To:Subject:Cc:To:From:
 	Reply-To:Content-ID:Content-Description;
-	bh=87clj23hFfpt9QBNepHjfZoYycZtPvLMabqLFhkG2z0=; t=1784102436; x=1785312036; 
-	b=RsyFXgIvGOTCX/yqiNcaBjqIj+fCdVGWcTb/kL2Y92Ur6flwfGY4hY1Ejb0rXsx3ux7iF4qSkKJ
-	KV8MvDC2aI9qEELZmO8GZrhOeFKtG+RYg30wm9Cs2DBhIuLAdrtlHmPZWJZpObrJS9WUcupLO92yF
-	kvj7SQqLSxUf5GMgZAJ5eC+LQpuEmt/kxmAv6urE7uBHEsfJ0cvQbo4VuMcSnqIu2XEVC2bsEgD0z
-	ijBNJoQFdW+h1xl4eQRrXAhD+y43O91tyluUH2lFECbl24Ai34/x0+LgOIgYTL5RNcgOhGa9mX661
-	60XHN7VHKBtS/Pmhyj+Drn4jKpso0ZeV6jFg==;
-Date: Tue, 14 Jul 2026 20:46:36 +0200
+	bh=N3CkAi0NhBu7kRLp3iC2P9Ehn1eHefsaOWNM8LYTF4k=; t=1784102398; x=1785311998; 
+	b=Mblw/sntslM5ewVGvUMkeJKlsTp0Tc0bXkkkNMbH1e28W9w3ctO4CTng8nPHJhvRdwSMgHgs/tp
+	SGFt/ng3dSqEwrjzgso+UjhLerR1aXmd+Hs7hE+3iJF0iVHZhLgKj/2TO/Hfs2YwlJ+EPhGSrum1k
+	5fP5GnUJ5ontKmMlnWy1ULDILcqXFiYx6Np7rcesGHmE0uZVW6xRfuo3kRJwWtv1WUzM7/qcLmxTQ
+	f7zVzsm7GgfDKHlV+OBcl5GPen3joiiDL9m1FhyBCbf/8ZjByt4lqKpmwlp4wpHrWN7PzfmrgT4Uw
+	8KjoUv1dS2xV0wFxtY3cXR5brJSJeZW7SQEQ==;
+Date: Tue, 14 Jul 2026 20:36:04 +0200
 From: Andreas Kemnade <andreas@kemnade.info>
 To: "H. Nikolaus Schaller" <hns@goldelico.com>
 Cc: Grond <grond66@riseup.net>, Stefan Leichter <sle85276@gmx.de>, Grazvydas
@@ -55,12 +55,12 @@ Cc: Grond <grond66@riseup.net>, Stefan Leichter <sle85276@gmx.de>, Grazvydas
  linux-omap@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
  dri-devel@lists.freedesktop.org, linux-fbdev@vger.kernel.org,
  kernel@pyra-handheld.com, mfd@lists.linux.dev
-Subject: Re: [PATCH 16/16] arm: omap2: remove remaining pdata-quirks for
- pandora legacy devices
-Message-ID: <20260714204630.0fd6bcb1@kemnade.info>
-In-Reply-To: <d380941287c655a3d205ee8b08516d364c0ddec9.1783749722.git.hns@goldelico.com>
+Subject: Re: [PATCH 06/16] ASoC: twl4030-codec: Allow setting APLL rate
+ through the .set_sysclk() interface
+Message-ID: <20260714203549.4b070f72@kemnade.info>
+In-Reply-To: <7ea589f951baf1e217c7169ae21c0bf510672ecf.1783749722.git.hns@goldelico.com>
 References: <cover.1783749722.git.hns@goldelico.com>
-	<d380941287c655a3d205ee8b08516d364c0ddec9.1783749722.git.hns@goldelico.com>
+	<7ea589f951baf1e217c7169ae21c0bf510672ecf.1783749722.git.hns@goldelico.com>
 X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; arm-unknown-linux-gnueabihf)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
@@ -71,73 +71,23 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On Sat, 11 Jul 2026 08:02:03 +0200
+On Sat, 11 Jul 2026 08:01:53 +0200
 "H. Nikolaus Schaller" <hns@goldelico.com> wrote:
 
-> After updating the pandora-backligt setup and removing the
-> omap3pandora sound system and defining related gpios by device tree,
-> we can remove omap3_pandora_legacy_init() and the related legacy
-> devices completely.
+> From: Grond <grond66@riseup.net>
 > 
+> On the Pandora, the APLL is actually what drives all of the audio
+> clocks on the board. Since the TWL4030 is only used for capture, we
+> need some way of setting the correct rate for playback streams, since
+> they will not go through the TWL4030's .hw_params() code path (which
+> is normally how APLL rate is set).
+> 
+> Signed-off-by: Grond <grond66@riseup.net>
 > Signed-off-by: H. Nikolaus Schaller <hns@goldelico.com>
 
-regarding bisectabily: Do we create mess, if the platform devices via
-quirks are disabled?
-
-I am wondering how we handle this. If this patch goes together with the
-removal of the legacy drivers, then there might be a situation where
-neither the new one nor the old one is available? Split this all up?
-
-If sound discussion takes longer, maybe do the backlight thing alone?
+As a general comment: might we model this as clock provider (and maybe
+that enables the usage of a generic audio-graph-card)?
 
 Regards,
 Andreas
-> ---
->  arch/arm/mach-omap2/pdata-quirks.c | 23 -----------------------
->  1 file changed, 23 deletions(-)
-> 
-> diff --git a/arch/arm/mach-omap2/pdata-quirks.c
-> b/arch/arm/mach-omap2/pdata-quirks.c index
-> b947bacf23a37..aca7097a692ed 100644 ---
-> a/arch/arm/mach-omap2/pdata-quirks.c +++
-> b/arch/arm/mach-omap2/pdata-quirks.c @@ -268,27 +268,6 @@ static void
-> __init omap3_logicpd_torpedo_init(void) omap3_gpio126_127_129();
->  }
->  
-> -/* omap3pandora legacy devices */
-> -
-> -static struct platform_device pandora_backlight = {
-> -	.name	= "pandora-backlight",
-> -	.id	= -1,
-> -};
-> -
-> -static struct gpiod_lookup_table pandora_soc_audio_gpios = {
-> -	.dev_id = "soc-audio",
-> -	.table = {
-> -		GPIO_LOOKUP("gpio-112-127", 6, "dac",
-> GPIO_ACTIVE_HIGH),
-> -		GPIO_LOOKUP("gpio-0-15", 14, "amp",
-> GPIO_ACTIVE_HIGH),
-> -		{ }
-> -	},
-> -};
-> -
-> -static void __init omap3_pandora_legacy_init(void)
-> -{
-> -	platform_device_register(&pandora_backlight);
-> -	gpiod_add_lookup_table(&pandora_soc_audio_gpios);
-> -}
->  #endif /* CONFIG_ARCH_OMAP3 */
->  
->  #ifdef CONFIG_SOC_DRA7XX
-> @@ -514,8 +493,6 @@ static struct pdata_init pdata_quirks[]
-> __initdata = { { "ti,omap3-evm-37xx", omap3_evm_legacy_init, },
->  	{ "ti,am3517-evm", am3517_evm_legacy_init, },
->  	{ "technexion,omap3-tao3530", omap3_tao3530_legacy_init, },
-> -	{ "openpandora,omap3-pandora-600mhz",
-> omap3_pandora_legacy_init, },
-> -	{ "openpandora,omap3-pandora-1ghz",
-> omap3_pandora_legacy_init, }, #endif
->  	{ /* sentinel */ },
->  };
 
