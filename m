@@ -1,209 +1,159 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from luna.linkmauve.fr (82-65-109-163.subs.proxad.net [82.65.109.163])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3ECCD4611CF
-	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 15:09:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCDA14A2E01;
+	Wed, 15 Jul 2026 17:52:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.65.109.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784128184; cv=none; b=Fo/jTFHJQKFZkxtgaCzvmgO6OUCLPpsD42G0bcM4nL0l4TLTkyK20S9JbC3D61HEFb89iHu52l4c6KHTcx7ziXTFIVJBhFyWdSfm0AOkvRt43rPfg3LyJc/pOB19DJtxXUQ8JAgwkxPj+SP8qNCA7Of8lsorrzWIrSH6m4lBp74=
+	t=1784137980; cv=none; b=P9sL+xZndEoo5Por/5G6uh7Ug6Tvw5TdixiDKaU5gbyEbYV5YbA9imx1gn78ksGiTRKWxMW26X2G/fQ90I2BjF+0xaQK6h/E9zmQp6U7ObAQ+xNsNzAUmdWhb5KVheVVi5xHOLyCbGShsecLmisttSDCFG6D0/nNMREXvUcjWNE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784128184; c=relaxed/simple;
-	bh=QQn18HGKmKoptkUzNngAk/MXzSubPEJ0sXhkvzEN+kw=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=u8fWAiH8FYvzxO059JhSUr5jqqfCXgjMew+3H8lCZ1o3kSCi2BNA4KvBx2qtPijjixNFthbhsitZfZq2K+KAj2UwwqYrnTomRnGpiAoziBHs1saOoIO92K8AnfxC674M7c8Il73eOntpaKqHzt3dA7WLMy1TV+JKA6N6jxm1b58=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IGLBMg9Z; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IGLBMg9Z"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C568E1F000E9;
-	Wed, 15 Jul 2026 15:09:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784128183;
-	bh=tiDb+9Z2SktqZLKIcE+xe//O9azwBffvd6LQ0dfdU+Y=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=IGLBMg9Z1q1a4FEU+7/ZRlXP+vXUDPm7V6U1ZBmilSVsurT89bCzQhQJ2LBwMKCyi
-	 4jOU7hiWspDwS3+uaoYimTy/aNcL4QkBL7jJYI5Ay9M+3tO2y3zL/RV84W8Lni4RxT
-	 RWOasBmIapjtxr6kbVkb5kGcwNFIEmitJ1cbl/JlK/fsjP9FYgDACqL2k46lO+Il/Z
-	 jn1Y/twZuQtTjcvoqUjC+BJNl6x0mjS5VRQ0tWblZlGpjqdZWCx0/aqOXXQBiCHRo6
-	 v7WVU7p+6YPdBQtuD/UvfOgdZz8tUsMfXrC8g+HmSOSkF+mBVnojF/JvHemf63knWM
-	 a0UlYB+wmn84A==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v1] mfd: viperboard: fix native fields type in
- structures as little-endiand
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Mikhail Lukianchikov" <avermoal@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260715145243.461827-2-avermoal@gmail.com>
-References: <20260715145243.461827-2-avermoal@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 15 Jul 2026 15:09:42 +0000
-Message-Id: <20260715150942.C568E1F000E9@smtp.kernel.org>
+	s=arc-20240116; t=1784137980; c=relaxed/simple;
+	bh=7FuVrxLlVZ79zrxiJeyoTlMtEeJsoZeEAs4xb+NIL9I=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=P+LxxhnHOODBNmk2ryKIDmZLt3IUhZcWc+fj2Nwk327Y2GxdxbaP9kO/rM4rqmC7FVZqQelS95/ffJaq+GLlfRjqLvLBngdkAQXdDlE9S2pJg5/+X08/sutJ9zu8T8jxvwhRFgGUOiwbfUNEc21fQ3+/L8PkGN6uzr/DJf02Qso=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linkmauve.fr; spf=pass smtp.mailfrom=linkmauve.fr; arc=none smtp.client-ip=82.65.109.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linkmauve.fr
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linkmauve.fr
+Received: by luna.linkmauve.fr (Postfix, from userid 1000)
+	id 989A4F40ABC; Wed, 15 Jul 2026 19:52:35 +0200 (CEST)
+From: Link Mauve <linkmauve@linkmauve.fr>
+To: Srinivas Kandagatla <srini@kernel.org>
+Cc: Link Mauve <linkmauve@linkmauve.fr>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Jerome Brunet <jbrunet@baylibre.com>,
+	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+	Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
+	Andy Shevchenko <andy@kernel.org>,
+	Sakari Ailus <sakari.ailus@linux.intel.com>,
+	Tianshu Qiu <tian.shu.qiu@intel.com>,
+	Bingbu Cao <bingbu.cao@intel.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	Roger Quadros <rogerq@kernel.org>,
+	Tony Lindgren <tony@atomide.com>,
+	Lee Jones <lee@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	"Vaibhaav Ram T.L" <vaibhaavram.tl@microchip.com>,
+	Kumaravel Thiagarajan <kumaravel.thiagarajan@microchip.com>,
+	Frank Li <Frank.Li@nxp.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Vladimir Zapolskiy <vz@mleia.com>,
+	=?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@linaro.org>,
+	Orson Zhai <orsonzhai@gmail.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Chunyan Zhang <zhang.lyra@gmail.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Praveen Teja Kundanala <praveen.teja.kundanala@amd.com>,
+	Kalyani Akula <kalyani.akula@amd.com>,
+	Michal Simek <michal.simek@amd.com>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Joshua Kinard <linux@kumba.dev>,
+	Antoniu Miclaus <antoniu.miclaus@analog.com>,
+	Chen-Yu Tsai <wens@kernel.org>,
+	Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Samuel Holland <samuel@sholland.org>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	Boqun Feng <boqun@kernel.org>,
+	Gary Guo <gary@garyguo.net>,
+	=?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
+	Benno Lossin <lossin@kernel.org>,
+	Andreas Hindborg <a.hindborg@kernel.org>,
+	Alice Ryhl <aliceryhl@google.com>,
+	Trevor Gross <tmgross@umich.edu>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Daniel Almeida <daniel.almeida@collabora.com>,
+	Tamir Duberstein <tamird@kernel.org>,
+	Alexandre Courbot <acourbot@nvidia.com>,
+	=?UTF-8?q?Onur=20=C3=96zkan?= <work@onurozkan.dev>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Johan Hovold <johan@kernel.org>,
+	Ronald Claveau <linux-kernel-dev@aliel.fr>,
+	Salah Triki <salah.triki@gmail.com>,
+	Yury Norov <ynorov@nvidia.com>,
+	David Carlier <devnexen@gmail.com>,
+	Achim Gratz <Achim.Gratz@Stromeko.DE>,
+	Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+	Patrick Wicki <patrick.wicki@siemens.com>,
+	Markus Heidelberg <m.heidelberg@cab.de>,
+	Markus Perkins <markus@notsyncing.net>,
+	=?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Abd-Alrhman Masalkhi <abd.masalkhi@gmail.com>,
+	Chen Ni <nichen@iscas.ac.cn>,
+	Kees Cook <kees@kernel.org>,
+	linux-arm-kernel@lists.infradead.org,
+	linux-amlogic@lists.infradead.org,
+	linux-kernel@vger.kernel.org,
+	linux-iio@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	linux-omap@vger.kernel.org,
+	mfd@lists.linux.dev,
+	linux-i2c@vger.kernel.org,
+	linux-gpio@vger.kernel.org,
+	imx@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-rtc@vger.kernel.org,
+	linux-sunxi@lists.linux.dev,
+	rust-for-linux@vger.kernel.org
+Subject: [PATCH 1/8] nvmem: core: make reg_write() take a const void *
+Date: Wed, 15 Jul 2026 19:52:17 +0200
+Message-ID: <20260715175229.24672-2-linkmauve@linkmauve.fr>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260715175229.24672-1-linkmauve@linkmauve.fr>
+References: <20260715175229.24672-1-linkmauve@linkmauve.fr>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Thank you for your contribution! Sashiko AI review found 7 potential issue(=
-s) to consider:
+This callback used to take a mutable void * for no reason, this was
+found while drafting the Rust abstraction.
 
-New issues:
-- [Medium] Incomplete fix: vprbrd_i2c_write_hdr was not updated as claimed =
-by the commit message.
-- [Low] Commit message violates MFD subsystem capitalization guidelines.
+Signed-off-by: Link Mauve <linkmauve@linkmauve.fr>
+---
+ drivers/nvmem/core.c           | 2 +-
+ include/linux/nvmem-provider.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-Pre-existing issues:
-- [High] vprbrd_probe() hard-codes PLATFORM_DEVID_NONE (-1), preventing mul=
-tiple devices from probing.
-- [High] vprbrd_i2c_xfer() incorrectly returns 0 on success instead of the =
-number of transferred messages.
-- [High] Ignored return value of i2c_add_adapter() can lead to kernel crash=
- on module removal.
-- [High] Buffer overwrite during large I2C reads causes corrupted USB comma=
-nd headers to be sent.
-- [High] DMA buffer shares a cacheline with a mutex, causing data corruptio=
-n on non-coherent architectures.
---
+diff --git a/drivers/nvmem/core.c b/drivers/nvmem/core.c
+index e871181751f3..202607013054 100644
+--- a/drivers/nvmem/core.c
++++ b/drivers/nvmem/core.c
+@@ -62,7 +62,7 @@ static int __nvmem_reg_read(struct nvmem_device *nvmem, unsigned int offset,
+ }
+ 
+ static int __nvmem_reg_write(struct nvmem_device *nvmem, unsigned int offset,
+-			     void *val, size_t bytes)
++			     const void *val, size_t bytes)
+ {
+ 	int ret;
+ 
+diff --git a/include/linux/nvmem-provider.h b/include/linux/nvmem-provider.h
+index f3b13da78aac..e62285836cbb 100644
+--- a/include/linux/nvmem-provider.h
++++ b/include/linux/nvmem-provider.h
+@@ -19,7 +19,7 @@ struct nvmem_device;
+ typedef int (*nvmem_reg_read_t)(void *priv, unsigned int offset,
+ 				void *val, size_t bytes);
+ typedef int (*nvmem_reg_write_t)(void *priv, unsigned int offset,
+-				 void *val, size_t bytes);
++				 const void *val, size_t bytes);
+ /* used for vendor specific post processing of cell data */
+ typedef int (*nvmem_cell_post_process_t)(void *priv, const char *id, int index,
+ 					 unsigned int offset, void *buf,
+-- 
+2.55.0
 
---- Patch [1]: [PATCH v1] mfd: viperboard: fix native fields type in struct=
-ures as little-endiand ---
-commit cb2959fa53e5e3eb2ffeb7ffb3dcd0156c7fb289
-Author: Mikhail Lukianchikov <avermoal@gmail.com>
-
-> mfd: viperboard: fix native fields type in structures as little-endiand
-
-[Severity: Low]
-This isn't a bug, but does the commit message violate the MFD subsystem
-capitalization guidelines? The word 'fix' is lowercase, but the guidelines
-request capitalizing the description after the subsystem prefix.
-
-This commit updates 16-bit fields in raw USB packet structures to use
-__le16 instead of u16 to fix sparse warnings about endianness mismatches.
-
-> diff --git a/include/linux/mfd/viperboard.h b/include/linux/mfd/viperboar=
-d.h
-> index 193452848c047..3e700cce5cb4d 100644
-> --- a/include/linux/mfd/viperboard.h
-> +++ b/include/linux/mfd/viperboard.h
-> @@ -62,15 +62,15 @@ struct vprbrd_i2c_write_hdr {
-
-[Severity: Medium]
-Was struct vprbrd_i2c_write_hdr intended to be updated in this patch?
-
-The commit message states that the fields in this structure require
-Little-Endian byte-order, but the structure remains unpatched as u16,
-leaving the sparse warning unresolved for the write path.
-
-> =20
->  struct vprbrd_i2c_read_hdr {
->  	u8 cmd;
-> -	u16 addr;
-> +	__le16 addr;
-
-[ ... ]
-
-[Severity: High]
-This isn't a bug introduced by this patch, but does vprbrd_probe() prevent
-multiple devices from probing by forcing static naming?
-
-drivers/mfd/viperboard.c:vprbrd_probe() {
-    ...
-	ret =3D mfd_add_devices(&interface->dev, -1, vprbrd_devs,
-				ARRAY_SIZE(vprbrd_devs), NULL, 0, NULL);
-    ...
-}
-
-Passing PLATFORM_DEVID_NONE (-1) instead of PLATFORM_DEVID_AUTO assigns sta=
-tic
-names to the subdevices. If a second device is connected, won't this cause a
-sysfs collision and probe failure?
-
-[Severity: High]
-This isn't a bug introduced by this patch, but does vprbrd_i2c_xfer() retur=
-n the
-correct value on success?
-
-drivers/i2c/busses/i2c-viperboard.c:vprbrd_i2c_xfer() {
-    ...
-		mutex_unlock(&vb->lock);
-	}
-	return 0;
-error:
-	mutex_unlock(&vb->lock);
-	return error;
-}
-
-The I2C subsystem requires the master_xfer callback to return the number of
-successfully processed messages on success. Will returning 0 cause the I2C =
-core
-and client drivers to erroneously believe the transfer failed?
-
-[Severity: High]
-This isn't a bug introduced by this patch, but can the ignored return value=
- of
-i2c_add_adapter() lead to a kernel crash on module removal?
-
-drivers/i2c/busses/i2c-viperboard.c:vprbrd_i2c_probe() {
-    ...
-	/* attach to i2c layer */
-	i2c_add_adapter(&vb_i2c->i2c);
-
-	platform_set_drvdata(pdev, vb_i2c);
-
-	return 0;
-}
-
-If registration fails, the driver probe still succeeds. Upon device removal,
-vprbrd_i2c_remove() will unconditionally call i2c_del_adapter(). Does this
-attempt to unregister a device that was never fully added, leading to list
-corruption or a crash?
-
-[Severity: High]
-This isn't a bug introduced by this patch, but is there a buffer overwrite
-during large I2C reads that causes corrupted USB command headers to be sent?
-
-drivers/i2c/busses/i2c-viperboard.c:vprbrd_i2c_read() {
-    ...
-		/* second read transfer if neccessary */
-		if (len2 > 0) {
-			ret =3D vprbrd_i2c_receive(vb->usb_dev, rmsg, len2);
-			if (ret < 0)
-				return ret;
-			/* copy the received data */
-			memcpy(msg->buf + start + 512, rmsg, len2);
-		}
-    ...
-}
-
-The rmsg buffer is used to send the read command header and receive the pay=
-load.
-The first USB IN transfer overwrites the command header with incoming I2C d=
-ata.
-For reads requiring a second chunk, is the overwritten garbage data sent as=
- a
-command header to the device?
-
-[Severity: High]
-This isn't a bug introduced by this patch, but does the DMA buffer share a
-cacheline with a mutex, risking memory corruption on non-coherent architect=
-ures?
-
-include/linux/mfd/viperboard.h:struct vprbrd {
-    ...
-	struct usb_device *usb_dev; /* the usb device for this device */
-	struct mutex lock;
-	u8 buf[sizeof(struct vprbrd_i2c_write_msg)];
-	struct platform_device pdev;
-};
-
-The buf array is mapped for USB DMA and placed immediately after the lock m=
-utex.
-If the mutex is accessed while DMA is active, will the cacheline be dirtied=
- by
-the CPU and overwrite the DMA data, or conversely, will DMA cache invalidat=
-ion
-destroy the CPU's modifications to the mutex waitqueue?
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260715145243.4618=
-27-2-avermoal@gmail.com?part=3D1
