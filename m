@@ -1,427 +1,205 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEA0044C65F
-	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 12:24:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 961C444C67C
+	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 12:25:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784118273; cv=none; b=nR97vAXxfoa+nMSs+EAfj8dXVXYpau6nMy3QWBnCFd5BPFs6w+8QiBZSxR27qdtK5248rI1xH/xe8oWgiSbBz6xZc9hKwTrFwOEXKVpW+je7v3nJETpT6x/RrDM/4UJChaolvJGCQbhyaGWFO4eDE9ycuAj50I0aaxvG0Her65Y=
+	t=1784118325; cv=none; b=NheD3N/ImCPc53MlnPPC22F6O2qRdRk5sd4vxSb818xLPPxz+VItTrXBO2W653Pwxa0ht1rY9yoOY72PC5Bjes1xQ78tNJSNWHOqw1VFPvQ51yt02Qr0heA+PH7OPgM+k5KLtCro7LOVkx35VD1V2AH0llBXSVL7lb0AXoNr00E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784118273; c=relaxed/simple;
-	bh=WjkkhX8AE55jsgJgX1FzkMHLBoKDh6l6Q8k1teC3sDk=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=LhM+ng4zXkqTP6g3BWDTyX2XTLg+QZO774vJfhQO1hJr+iLalGJEmg37N3haUfabSNybAgrYrSS3I9GbHrZsQWQutlD1GNd/Bm7yIOvb2Rxkx0enrRc0TEzOwGEudfBHQS21PQLpS3mkpDtTdvHk53OO1sOm23IVCbQHAa9CY6M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LAgfM15h; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784118325; c=relaxed/simple;
+	bh=LemhIJNoxz1ueRDJoKpSFvwPciOjqddo6VJZFndA1jo=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Qo2UdKvDGuvCQcjU2ct8N2wV4z8NiKxJKXC9V/LoYncnpI/rmx84qf4b8CD+Qs0LY7ofGZi5TrVvgrWvhJdjHqTfKNiXZD7i2DHFQSJgKCY0yyClAqQsuLvRkDuWVHfYGQuck2w6JenOhvxgdKO8bKTV2Tp/fOEcHj7CiqVeFKg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NsfasX80; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=i7DHgiTk; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LAgfM15h"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 972921F0155A
-	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 12:24:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784118271;
-	bh=PclXy2Uq7OPMyI+t/qU2+B3wDB55fTcxu4iOX0BaM3I=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=LAgfM15hhVaC15vSj8XQxsRNvGquqsgUOdks7kt343R7a1N5g9nUkhGh/uXHD9xfk
-	 nHuL0dFcxgvuhWFebeKG/ml37YscroM+LGpmg6vTy/NYhLFGJkXcxF49V5NileYc42
-	 yFcBl+s67bzQ7PDTJyhysHWIH3tWgPuHTNtr9YG4smlEOxhmeOTfhh5daJaeq0q4VC
-	 dVM8Wgqjwvx9UaMSkun0m/2IJKP0e4vLDNXe4PMhRzEKFuvISWLu21N/04zi2Ia3kf
-	 EMfQpJbcuN8aNGEmfLMx1xjXLy5cpYICzJI1CA7lIsIjNYsegE++dezSLCFahJvia/
-	 vzzxugae/c9Fg==
-Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-5aec6360133so4116326e87.1
-        for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 05:24:31 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RpjYOGc/Br9L1jG7mH1lVLdER3LTcKIpxE93gBQFlhmc5R/6UA3LHsd6U2avTzcGxqL7MU=@lists.linux.dev
-X-Gm-Message-State: AOJu0YzbpHvW014SHbvHe30AFt/hLgz+KBekeZ6sD8Uy6VscikjH+J2Z
-	7tEcDQv+4nCIWqSsaWb3D38x+1moEglDs1oX/bHMSMhS3YQTe0sAxFy3UBEBx7f3PAgpQ2PNnXY
-	Ff1RoyBB/L/Oznm0Nh4hkq8oaN8jhGdUAi7txMAgjTQ==
-X-Received: by 2002:a05:6512:3a87:b0:5b0:12e1:4879 with SMTP id
- 2adb3069b0e04-5b1582c715emr2068822e87.60.1784118270190; Wed, 15 Jul 2026
- 05:24:30 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 15 Jul 2026 05:24:27 -0700
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 15 Jul 2026 05:24:27 -0700
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260714-upstream-v2-v2-2-76e5e41026db@advantech.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NsfasX80";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="i7DHgiTk"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66FBcv2Q3479847
+	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 12:25:23 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	cwU6AfJQ14gS30JYZ/HeTNqrS6D8pmjen3Sdckg1osQ=; b=NsfasX80ru7B4YHv
+	8uib49PEwXRTI90eTMTO63SWRjQ2S8oCDAkM/nu02ZMbuiaLSxvPTNCOtDZRU/dK
+	c/CbVqsfRwybM3kLno79KtnrI7mlpC8kNzuaULE0BTE3cyyOcWHZODhiAHpsOikA
+	YYo7tLpjhTlkKve5c6SwEJVjl5bpLWL3w+oo4T0seYs2rHQsct2C1luZ/AhMqRPj
+	Yhudlp3Z2M7IgdKE/X4Ywsf9lY24zQBHB7Ty6oDQJ1blOzupdK40wl5QWkyaY5FP
+	KLeqvwMrg2wLqUcaInd+R6TDgHRE/8N5g0+91SnsyWTr7x0L7o/BYfWCK86uxoyC
+	FXY2Tg==
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fds9g3kss-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 12:25:23 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2cacf17c7e0so29809065ad.0
+        for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 05:25:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784118322; x=1784723122; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=cwU6AfJQ14gS30JYZ/HeTNqrS6D8pmjen3Sdckg1osQ=;
+        b=i7DHgiTk96Zh7d3CjZ9fuJdoXGR2re6yYESGvsntZ5Vn5dewnzAIs/VzIpTU4ddamF
+         o+0tW3SmC35oIBa4pPuuVlGwxtKn/uBdPuQlEBM9Uk71LkPzvG4YsK+wXVmE8x9YaKlV
+         LWGxmEMWhHN8Sfz3alAxzzqNlbjnH8GffkQDpUQrXXBKOp77ohkhTgJyei7xGv75Md3I
+         B4OFypxnBj2w+c1uzJ7qytxm4VZkMK9P6gHAKW57YxKVULDfWHqh35FHmBb35ZmrqyTu
+         H7uYvLl6hhi/gGLCfK08SCFaVXdiS4ATJdbBKot3SChpP2lx/Ad76U9L1nRqnNQkH3i4
+         3XwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784118322; x=1784723122;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=cwU6AfJQ14gS30JYZ/HeTNqrS6D8pmjen3Sdckg1osQ=;
+        b=EB+ud0jCSEwMieA0cCtgHWveCotN3YB0cqBC+uShR9PVuwbZW3LV6nE4pCguDg/mv2
+         OLiKbQMafvS1ZUl+HqupkFdPi9g2b4hiLUMXL4uTi8zUtxjqoUKlftyIsJ/dQpQIB0ed
+         5gMl3Les54rbBpiKJAquCObGjSUnvWNNZD1QtlGZBUM601CO4uU373d9c28DMgDhee6a
+         l0wzXnZ/T2Oai35LvtEFfUj/Lhd/FCAnD30EloYarrk0TxiHIh0i+1mFpMuiI5THlQ6Y
+         5dnw300Pxd/6h6t6W89X1BANNwynCvyrBkhJiIQStG+FrLZy4NhJ7RXd2EAVP0I2Z4uD
+         6ZmA==
+X-Gm-Message-State: AOJu0YzOpKwwN6CtgniPI2hSpbAUJJhKNBiHZnf56WczMuVcHFV17/Si
+	J+sfllakITifuojzWeuHhbdK49SBWyVa6ZFx5/6oqqk91K1qplBzn+8yjSiWKtaZlNv55Dxum//
+	ZCCej4ECeCyIbdjo+7YCEAUKADo6GHO3q7/gG1GauZyrwVB11Xtnukvk=
+X-Gm-Gg: AfdE7cm+IEnLGsF6rl7g+7wkI4a3Ev9Jx7gbrvK3AiXhosK5YGql0IXlnzkHLaKBrW5
+	eVzwCsGx5MCql/smrXHpOY0IrZnVSLNj6sb+/6BHHPlzcUl6Qb848TPx5FH6g/2t0QELNiEGFZ6
+	sadIqS1LzFUtANPNM7kYXWvRl+SsKCvsxutdgpvhUgME/1N5yDNgbnJsyMMKGaz2sACAnyzWl8n
+	WF1GYBjvwY7J/kl2jWmo6CZ5iepMTJ4EY00mzydbJytQvOx0mwRYdVTRP7bniBeI+/dVHMDPEBO
+	a6faVo3jYzwatD0KD2eoOb67l5o0RtJoJqnd4vtBw7rbE80j3jJ7JZupqjMBjH2MAH4g92pSVLK
+	QCB87UbcjNzd1rNyWTnEDsLofpUwzfsy3JizS4FzZTCQswQ==
+X-Received: by 2002:a17:903:2a88:b0:2c9:8f4a:90b with SMTP id d9443c01a7336-2ce9e5a3c11mr165508145ad.3.1784118322492;
+        Wed, 15 Jul 2026 05:25:22 -0700 (PDT)
+X-Received: by 2002:a17:903:2a88:b0:2c9:8f4a:90b with SMTP id d9443c01a7336-2ce9e5a3c11mr165507855ad.3.1784118321992;
+        Wed, 15 Jul 2026 05:25:21 -0700 (PDT)
+Received: from [10.219.57.229] ([202.46.23.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13cd4365b0dsm1729961c88.15.2026.07.15.05.25.19
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 15 Jul 2026 05:25:21 -0700 (PDT)
+Message-ID: <afe3c1aa-081d-4eda-ac61-5b9be10f1990@oss.qualcomm.com>
+Date: Wed, 15 Jul 2026 17:55:18 +0530
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260714-upstream-v2-v2-0-76e5e41026db@advantech.com> <20260714-upstream-v2-v2-2-76e5e41026db@advantech.com>
-Date: Wed, 15 Jul 2026 05:24:27 -0700
-X-Gmail-Original-Message-ID: <CAMRc=Mcnbv++YhPvocyiv9m_vuy2hWeuJ2sk9BNH=j7U3-dBFQ@mail.gmail.com>
-X-Gm-Features: AUfX_mzXdlShUuByf9jSWwdYpIzB9dN3xsnMMdNBfJC8EmPDXbPafGgehOl5DxQ
-Message-ID: <CAMRc=Mcnbv++YhPvocyiv9m_vuy2hWeuJ2sk9BNH=j7U3-dBFQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/8] Add Advantech EIO GPIO driver
-To: Ramiro Oliveira <ramiro.oliveira@advantech.com>
-Cc: linux-kernel@vger.kernel.org, mfd@lists.linux.dev, 
-	linux-gpio@vger.kernel.org, linux-hwmon@vger.kernel.org, 
-	linux-i2c@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	linux-fbdev@vger.kernel.org, linux-watchdog@vger.kernel.org, 
-	linux-pm@vger.kernel.org, Wenkai Chung <wenkai.chung@advantech.com.tw>, 
-	Francisco Aragon-Trivino <francisco.aragon-trivino@advantech.com>, 
-	Hongzhi Wang <hongzhi.wang@advantech.com>, 
-	Mikhail Tsukerman <mikhail.tsukerman@advantech.com>, 
-	Thomas Kastner <thomas.kastner@advantech.com>, Lee Jones <lee@kernel.org>, 
-	Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, Guenter Roeck <linux@roeck-us.net>, 
-	Andi Shyti <andi.shyti@kernel.org>, Daniel Thompson <danielt@kernel.org>, 
-	Jingoo Han <jingoohan1@gmail.com>, Helge Deller <deller@gmx.de>, 
-	Wim Van Sebroeck <wim@linux-watchdog.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
-	Lukasz Luba <lukasz.luba@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v23 09/13] mfd: psci-mfd: Add psci-reboot-mode child cell
+To: sashiko-reviews@lists.linux.dev
+Cc: mfd@lists.linux.dev, lee@kernel.org, robh@kernel.org, conor+dt@kernel.org,
+        devicetree@vger.kernel.org
+References: <20260714-arm-psci-system_reset2-vendor-reboots-v23-0-e7453c548c21@oss.qualcomm.com>
+ <20260714-arm-psci-system_reset2-vendor-reboots-v23-9-e7453c548c21@oss.qualcomm.com>
+ <20260714172443.080241F00A3D@smtp.kernel.org>
+Content-Language: en-US
+From: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+In-Reply-To: <20260714172443.080241F00A3D@smtp.kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE1MDEyMyBTYWx0ZWRfXzyrIVszwct/Z
+ yo5PjdMHLy451zaWTqdIhVDqTodgFTEp3XOh7v//3m+jbQmGck//BXXEAMZ06nU/S+rGoRGSlFU
+ 1TQ0Vt2uwd7RC27AwBsl8tQMitrhD0Q=
+X-Proofpoint-ORIG-GUID: cXiatgcy0kYiUp12IXuqemBFq2c6dByR
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE1MDEyMyBTYWx0ZWRfX81tmi3yAcLss
+ A9ryizudNm4oRrzR4lRO0egJe/H/mwUgXWSIvoNgQDP+YUYBfEmrcURCnRH+NOxSJ2+gFfnt/Fu
+ DHmBXCErM5BwLfQP/7eUVC/X/Hkxl9NlB3rXLCP0fuHJohofWPD+EZo8bmc/VKwQW/jYBG/qaKa
+ 6XeA3x+XijAhFNrm5nmGKLDl2g7ikHKnRQLMQTKUnHYdhjXn2GmyMhpLpJ8YaiyYuv/8VKdN1qA
+ JDcpR7X1i1xhQvgQZMlN2xH/0pflIFoLbEpZaGv2dT9DOHJqpcBYSOyvKGlbWz7grqz1hl7HXt9
+ tulrkpbQ2sVDZynsHdFbRLGvgJBGmlt9JikMtGVIHK67rmnRCssGY9PArZ8c/MnW/rsvwzuNuih
+ 9tvuZ/Bs8tATXoAZbSC+b+Kebxmo075kR4LcT2KkmUtYLzipkw1kvsNEN5wTz+yafAa3AaLLv+S
+ zSlwGbOSZ6oJzs2qJqg==
+X-Proofpoint-GUID: cXiatgcy0kYiUp12IXuqemBFq2c6dByR
+X-Authority-Analysis: v=2.4 cv=VoATxe2n c=1 sm=1 tr=0 ts=6a577c33 cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=yevAzQFRF-SW-JHV9rgA:9 a=QEXdDO2ut3YA:10
+ a=324X-CrmTo6CU4MGRt3R:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-15_02,2026-07-15_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 spamscore=0 bulkscore=0 clxscore=1015 lowpriorityscore=0
+ priorityscore=1501 impostorscore=0 suspectscore=0 adultscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607150123
 
-On Tue, 14 Jul 2026 17:54:16 +0200, Ramiro Oliveira
-<ramiro.oliveira@advantech.com> said:
-> This driver controls the GPIO component of the Advantech EIO chip.
->
 
-The subject should be: "gpio: add a driver for the Advantech EIO GPIO
-controller"
-or similar.
 
-> Signed-off-by: Ramiro Oliveira <ramiro.oliveira@advantech.com>
-> ---
->  MAINTAINERS             |   7 ++
->  drivers/gpio/Kconfig    |   6 ++
->  drivers/gpio/Makefile   |   1 +
->  drivers/gpio/gpio-eio.c | 252 ++++++++++++++++++++++++++++++++++++++++++++++++
->  4 files changed, 266 insertions(+)
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 53b5f7412966..a7da47393815 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -609,6 +609,13 @@ S:	Maintained
->  F:	Documentation/scsi/advansys.rst
->  F:	drivers/scsi/advansys.c
->
-> +ADVANTECH EIO DRIVER
-> +M:	Ramiro Oliveira <ramiro.oliveira@advantech.com>
-> +S:	Maintained
-> +F:	drivers/gpio/gpio-eio.c
-> +F:	drivers/mfd/eio_core.c
-> +F:	include/linux/mfd/eio.h
-
-Shouldn't this be part of the MFD entry?
-
-> +
->  ADVANTECH SWBTN DRIVER
->  M:	Andrea Ho <Andrea.Ho@advantech.com.tw>
->  L:	platform-driver-x86@vger.kernel.org
-> diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-> index f03c05288376..696065d77235 100644
-> --- a/drivers/gpio/Kconfig
-> +++ b/drivers/gpio/Kconfig
-> @@ -295,6 +295,12 @@ config GPIO_DWAPB
->  	  Say Y or M here to build support for the Synopsys DesignWare APB
->  	  GPIO block.
->
-> +config GPIO_EIO
-> +	tristate "Advantech EIO GPIO"
-> +	depends on MFD_EIO
-> +	help
-> +	  Say Y or M to build support for Advantech EIO GPIO block.
-> +
->  config GPIO_EIC_SPRD
->  	tristate "Spreadtrum EIC support"
->  	depends on ARCH_SPRD || COMPILE_TEST
-> diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
-> index fa14581e3995..628596705c21 100644
-> --- a/drivers/gpio/Makefile
-> +++ b/drivers/gpio/Makefile
-> @@ -64,6 +64,7 @@ obj-$(CONFIG_GPIO_DLN2)			+= gpio-dln2.o
->  obj-$(CONFIG_GPIO_DS4520)		+= gpio-ds4520.o
->  obj-$(CONFIG_GPIO_DWAPB)		+= gpio-dwapb.o
->  obj-$(CONFIG_GPIO_EIC_SPRD)		+= gpio-eic-sprd.o
-> +obj-$(CONFIG_GPIO_EIO)			+= gpio-eio.o
->  obj-$(CONFIG_GPIO_ELKHARTLAKE)		+= gpio-elkhartlake.o
->  obj-$(CONFIG_GPIO_EM)			+= gpio-em.o
->  obj-$(CONFIG_GPIO_EN7523)		+= gpio-en7523.o
-> diff --git a/drivers/gpio/gpio-eio.c b/drivers/gpio/gpio-eio.c
-> new file mode 100644
-> index 000000000000..34e1aefd0716
-> --- /dev/null
-> +++ b/drivers/gpio/gpio-eio.c
-> @@ -0,0 +1,252 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * GPIO driver for Advantech EIO Embedded controller.
-> + *
-> + * Copyright (C) 2025 Advantech Corporation. All rights reserved.
-> + */
-> +
-> +#include <linux/errno.h>
-> +#include <linux/gpio/driver.h>
-> +#include <linux/mfd/core.h>
-> +#include <linux/mfd/eio.h>
-> +#include <linux/module.h>
-> +
-> +#define EIO_GPIO_MAX_PINS	48
-> +#define EIO_GPIO_WRITE		0x18
-> +#define EIO_GPIO_READ		0x19
-> +
-> +struct eio_gpio_dev {
-> +	u64 avail;
-> +	int max;
-> +	struct gpio_chip chip;
-> +	struct device *dev;
-> +};
-> +
-> +static struct {
-> +	int size;
-> +	bool write;
-> +} ctrl_para[] = {
-
-Please use a common prefix for all symbols. "eio_gpio" like above is fine.
-
-> +	{ 0x01, false }, { 0x00, false }, { 0x00, false }, { 0x02, false },
-> +	{ 0x01, false }, { 0x00, false }, { 0x00, false }, { 0x00, false },
-> +	{ 0x00, false }, { 0x00, false }, { 0x00, false }, { 0x00, false },
-> +	{ 0x00, false }, { 0x00, false }, { 0x00, false }, { 0x00, false },
-> +	{ 0x01, true  }, { 0x01, true  }, { 0x02, true  }, { 0x02, true  },
-> +	{ 0x02, false }, { 0x10, false }
-> +};
-> +
-> +enum gpio_ctrl {
-> +	EIO_GPIO_STATUS = 0x0,
-> +	EIO_GPIO_GROUP_AVAIL = 0x3,
-> +	EIO_GPIO_ERROR = 0x04,
-> +	EIO_GPIO_PIN_DIR = 0x10,
-> +	EIO_GPIO_PIN_LEVEL = 0x11,
-> +	EIO_GPIO_GROUP_DIR = 0x12,
-> +	EIO_GPIO_GROUP_LEVEL = 0x13,
-> +	EIO_GPIO_MAPPING = 0x14,
-> +	EIO_GPIO_NAME = 0x15
-> +};
-> +
-> +static struct {
-> +	int group;
-> +	int port;
-> +} group_map[] = {
-> +	{ 0, 0 }, { 0, 1 },
-> +	{ 1, 0 }, { 1, 1 },
-> +	{ 2, 0 }, { 2, 1 },
-> +	{ 3, 0 }, { 3, 1 },
-> +	{ 3, 2 }, { 3, 3 },
-> +	{ 3, 4 }, { 3, 5 },
-> +	{ 3, 6 }, { 3, 7 }
-> +};
-> +
-> +static int pmc_write(struct device *mfd_dev, u8 ctrl, u8 dev_id, void *data)
-> +{
-> +	struct pmc_op op = {
-> +		 .cmd       = EIO_GPIO_WRITE,
-> +		 .control   = ctrl,
-> +		 .device_id = dev_id,
-> +		 .payload   = (u8 *)data,
-> +	};
-> +
-> +	if (ctrl >= ARRAY_SIZE(ctrl_para))
-> +		return -ENOMEM;
-> +
-> +	if (!ctrl_para[ctrl].write)
-> +		return -EINVAL;
-> +
-> +	op.size = ctrl_para[ctrl].size;
-> +
-> +	return eio_core_pmc_operation(mfd_dev, &op);
-> +}
-> +
-> +static int pmc_read(struct device *mfd_dev, u8 ctrl, u8 dev_id, void *data)
-> +{
-> +	struct pmc_op op = {
-> +		 .cmd       = EIO_GPIO_READ,
-> +		 .control   = ctrl,
-> +		 .device_id = dev_id,
-> +		 .payload   = (u8 *)data,
-> +	};
-> +
-> +	if (ctrl > ARRAY_SIZE(ctrl_para))
-> +		return -ENOMEM;
-> +
-> +	op.size = ctrl_para[ctrl].size;
-> +
-> +	return eio_core_pmc_operation(mfd_dev, &op);
-> +}
-> +
-> +static int get_dir(struct gpio_chip *chip, unsigned int offset)
-> +{
-> +	u8 dir;
-> +	int ret;
-> +
-> +	ret = pmc_read(chip->parent, EIO_GPIO_PIN_DIR, offset, &dir);
-> +	if (ret)
-> +		return ret;
-> +
-> +	return dir ? 0 : 1;
-> +}
-> +
-> +static int dir_input(struct gpio_chip *chip, unsigned int offset)
-> +{
-> +	u8 dir = 0;
-> +
-> +	return pmc_write(chip->parent, EIO_GPIO_PIN_DIR, offset, &dir);
-> +}
-> +
-> +static int dir_output(struct gpio_chip *chip, unsigned int offset, int value)
-> +{
-> +	u8 dir = 1;
-> +	u8 val = value;
-> +
-> +	pmc_write(chip->parent, EIO_GPIO_PIN_DIR, offset, &dir);
-> +
-> +	return pmc_write(chip->parent, EIO_GPIO_PIN_LEVEL, offset, &val);
-> +}
-> +
-> +static int gpio_get(struct gpio_chip *chip, unsigned int offset)
-> +{
-> +	u8 level;
-> +	int ret;
-> +
-> +	ret = pmc_read(chip->parent, EIO_GPIO_PIN_LEVEL, offset, &level);
-> +	if (ret)
-> +		return ret;
-> +
-> +	return level;
-> +}
-> +
-> +static int gpio_set(struct gpio_chip *chip, unsigned int offset, int value)
-> +{
-> +	u8 val = value;
-> +
-> +	return pmc_write(chip->parent, EIO_GPIO_PIN_LEVEL, offset, &val);
-> +}
-> +
-> +static int check_support(struct device *dev)
-> +{
-> +	u8  data;
-> +	int ret;
-> +
-> +	ret = pmc_read(dev, EIO_GPIO_STATUS, 0, &data);
-> +	if (ret)
-> +		return ret;
-> +
-> +	if ((data & 0x01) == 0)
-> +		return -EOPNOTSUPP;
-> +
-> +	return 0;
-> +}
-> +
-> +static int check_pin(struct device *dev, int pin)
-> +{
-> +	int ret;
-> +	int group, bit;
-
-Why not put all ints on the same line? Same elsewhere.
-
-> +	u16 data;
-> +
-> +	/* Get pin mapping */
-> +	ret = pmc_read(dev, EIO_GPIO_MAPPING, pin, &data);
-> +	if (ret)
-> +		return ret;
-> +
-> +	if ((data & 0xFF) > ARRAY_SIZE(group_map))
-> +		return -EINVAL;
-> +
-> +	group = group_map[data & 0xFF].group;
-> +	bit   = data >> 8;
-> +
-> +	/* Check mapped pin */
-> +	ret = pmc_read(dev, EIO_GPIO_GROUP_AVAIL, group, &data);
-> +	if (ret)
-> +		return ret;
-> +
-> +	return data & BIT(bit) ? 0 : -EOPNOTSUPP;
-> +}
-> +
-> +static int gpio_init(struct device *mfd, struct eio_gpio_dev *eio_gpio)
-> +{
-> +	int ret, i;
-> +
-> +	ret = check_support(mfd);
-> +	if (ret)
-
-This warrants an -ENODEV. We don't want to retry probe here, do we?
-
-> +		return dev_err_probe(eio_gpio->dev, ret, "GPIO not supported\n");
-> +
-> +	eio_gpio->avail = 0;
-> +
-> +	for (i = 0 ; i < EIO_GPIO_MAX_PINS ; i++) {
-> +		ret = check_pin(mfd, i);
-> +		if (ret)
-> +			continue;
-> +
-> +		eio_gpio->avail |= BIT(i);
-> +		eio_gpio->max = i + 1;
-> +	}
-> +
-> +	return eio_gpio->max ? 0 : -EOPNOTSUPP;
-> +}
-> +
-> +static int gpio_probe(struct platform_device *pdev)
-> +{
-> +	struct device *dev = &pdev->dev;
-> +	struct eio_gpio_dev *eio_gpio;
-> +	struct eio_dev *eio_dev = dev_get_drvdata(dev->parent);
-> +
-> +	if (!eio_dev)
-> +		return dev_err_probe(dev, -ENODEV, "Error contact eio_core\n");
-
--ENODEV is used for silently bailing out of probe and telling the driver core
-to not defer. Basically it means: this device cannot be enabled on this system
-or is not present at all. This means: don't use dev_err_probe() and don't emit
-any logs. Just return -ENODEV.
-
-Though it makes me think - can this even happen at all? MFD cells won't get
-created if parent's probe() failed.
-
-> +
-> +	eio_gpio = devm_kzalloc(dev, sizeof(*eio_gpio), GFP_KERNEL);
-> +	if (!eio_gpio)
-> +		return -ENOMEM;
-> +
-> +	eio_gpio->dev = dev;
-> +
-> +	if (gpio_init(dev->parent, eio_gpio))
-
-Can you use the ret = gpio_init() pattern for consistency with the rest of the
-code?
-
-> +		return -EIO;
-> +
-> +	eio_gpio->chip.parent = dev->parent;
-> +	eio_gpio->chip.ngpio = eio_gpio->max;
-> +	eio_gpio->chip.label = KBUILD_MODNAME;
-> +	eio_gpio->chip.owner = THIS_MODULE;
-> +	eio_gpio->chip.direction_input = dir_input;
-> +	eio_gpio->chip.get = gpio_get;
-> +	eio_gpio->chip.direction_output = dir_output;
-> +	eio_gpio->chip.set = gpio_set;
-> +	eio_gpio->chip.get_direction = get_dir;
-> +	eio_gpio->chip.base = -1;
-> +	eio_gpio->chip.can_sleep = true;
-> +
-> +	return devm_gpiochip_add_data(dev, &eio_gpio->chip, eio_gpio);
-> +}
-> +
-> +static struct platform_driver gpio_driver = {
-> +	.probe  = gpio_probe,
-> +	.driver = { .name = KBUILD_MODNAME, },
-> +};
-> +
-> +module_platform_driver(gpio_driver);
-> +
-> +MODULE_AUTHOR("Wenkai Chung <wenkai.chung@advantech.com.tw>");
-> +MODULE_AUTHOR("Ramiro Oliveira <ramiro.oliveira@advantech.com>");
-> +MODULE_DESCRIPTION("GPIO driver for Advantech EIO embedded controller");
-> +MODULE_LICENSE("GPL");
->
+On 14-07-2026 22:54, sashiko-bot@kernel.org wrote:
+> Thank you for your contribution! Sashiko AI review found 1 potential issue(s) to consider:
+> - [High] The probe function `psci_mfd_probe` ignores the return value of `devm_mfd_add_devices()` for the `psci_reboot_mode_cell` child device, violating the MFD subsystem guideline requiring probe failures to be propagated and unwound.
 > --
-> 2.43.0
->
->
+> 
+> --- Patch [9]: [PATCH v23 09/13] mfd: psci-mfd: Add psci-reboot-mode child cell ---
+> commit 73724460c58fad980d9dd8ef39b9485acffad30e
+> Author: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+> 
+> mfd: psci-mfd: Add psci-reboot-mode child cell
+> 
+> This commit adds the psci-reboot-mode child cell to the psci-mfd driver.
+> It retrieves the reboot-mode firmware node and registers the new cell
+> using devm_mfd_add_devices if the node is present.
+> 
+>> diff --git a/drivers/mfd/psci-mfd.c b/drivers/mfd/psci-mfd.c
+>> index 7affd6bb09dd8..8c6b78ac471bf 100644
+>> --- a/drivers/mfd/psci-mfd.c
+>> +++ b/drivers/mfd/psci-mfd.c
+> 
+> [ ... ]
+> 
+>> @@ -14,10 +15,37 @@ static const struct mfd_cell psci_cells[] = {
+>>   	},
+>>   };
+>>   
+>> +static const struct mfd_cell psci_reboot_mode_cell[] = {
+>> +	{
+>> +		.name = "psci-reboot-mode",
+>> +		.named_fwnode = "reboot-mode",
+>> +	},
+>> +};
+>> +
+>>   static int psci_mfd_probe(struct platform_device *pdev)
+>>   {
+>> -	return devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO, psci_cells,
+>> +	struct fwnode_handle *fwnode;
+>> +	int ret;
+>> +
+>> +	ret = devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO, psci_cells,
+>>   				   ARRAY_SIZE(psci_cells), NULL, 0, NULL);
+>> +	if (ret)
+>> +		return ret;
+>> +
+>> +	fwnode = device_get_named_child_node(&pdev->dev, "reboot-mode");
+>> +	if (!fwnode)
+>> +		return 0;
+>> +
+>> +	fwnode_handle_put(fwnode);
+>> +
+>> +	ret = devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO,
+>> +				   psci_reboot_mode_cell,
+>> +				   ARRAY_SIZE(psci_reboot_mode_cell),
+>> +				   NULL, 0, NULL);
+>> +	if (ret)
+>> +		dev_warn(&pdev->dev, "reboot-mode child cell failed to add: %d\n", ret);
+>> +
+>> +	return 0;
+> 
+> [Severity: High]
+> Should this propagate the error code instead of returning 0?
+> 
+> The MFD subsystem guidelines specify that if a child device fails to register
+> during probe, the entire probe must fail and unwind previously registered
+> children. By returning 0 here, the MFD device is left in a partially
+> initialized state if the psci-reboot-mode cell fails to register.
 
-Bart
+the cpu-idle-domain is a mandatory driver. We do not want to fail 
+psci-mfd for any probe failures in reboot-mode probe and unwind the 
+cpu-idle-domain driver. Have documented in commit text.
+
+thanks,
+Shivendra
