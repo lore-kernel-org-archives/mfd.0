@@ -1,259 +1,427 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5929C436BC0
-	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 12:21:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEA0044C65F
+	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 12:24:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784118099; cv=none; b=ZpCdcILJPShznwfihP/SHX/Z6oxRx+hjTXO+MxkZbDBzYt+GWwv4P9f1/p8PausvvOHU8Tlgc+dE7UnskWLzwJNSJgf6jqsnhUqQ98cHu3Qp73WUUfDCbH9Vmb0oSr6GChpOyaS7/vk3TWhhXYOa/90adeZRVoKXocFucfCs5P8=
+	t=1784118273; cv=none; b=nR97vAXxfoa+nMSs+EAfj8dXVXYpau6nMy3QWBnCFd5BPFs6w+8QiBZSxR27qdtK5248rI1xH/xe8oWgiSbBz6xZc9hKwTrFwOEXKVpW+je7v3nJETpT6x/RrDM/4UJChaolvJGCQbhyaGWFO4eDE9ycuAj50I0aaxvG0Her65Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784118099; c=relaxed/simple;
-	bh=0zuX5DJNZKHp/nca1largxbOdKJ+mhgJHK9PZiNSHG4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fH0NzcIWWJEPg35xVK4ypKyMRtwfsetwXsFW8ze8kfYPk/qzAplvg3LcLTjctSV6yxV83Ccuz27/H2vE5WGDOWXYLf489PIGsrxReN+izy+r1/61cU/mTCvPLATfu7mfDVdG7+0DyzxYKks+KQjrQ6byMEu4KDXGgjttjGmPHdY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hl5TGG4P; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bIWckHBU; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1784118273; c=relaxed/simple;
+	bh=WjkkhX8AE55jsgJgX1FzkMHLBoKDh6l6Q8k1teC3sDk=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=LhM+ng4zXkqTP6g3BWDTyX2XTLg+QZO774vJfhQO1hJr+iLalGJEmg37N3haUfabSNybAgrYrSS3I9GbHrZsQWQutlD1GNd/Bm7yIOvb2Rxkx0enrRc0TEzOwGEudfBHQS21PQLpS3mkpDtTdvHk53OO1sOm23IVCbQHAa9CY6M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LAgfM15h; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hl5TGG4P";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bIWckHBU"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66FBceJu3599397
-	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 12:21:37 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	r99kkd6fP/ic3KdRsaZChhsJWWU2ou3THrOWDdyMrlM=; b=hl5TGG4PZhUlgo7Z
-	HT3WPYFf0997UP2SUZrwH/9wuu16nZ9nqptthTRfv6KYjxhrrQwkvhl1PEp3mVQF
-	mY1mwrkFf6TQGHFABos1FUTDFjJPv4Y076jIzt5IXn4O28dHyV9M/IEcnMacsTCT
-	uZx9yIeRzlENlsW2pmfmgEoQji5mx4YPeT98aBMPctOIBX4QfSDw4m1H6eaJKFXB
-	/j4Q+QBPRpqNRsPG5DVFQBHc5N7rpXAxaSw+26Fjgace7c8WuLAOe+p1dB4QFugO
-	y92Lt1yGczVFcE89Gbrqemi46o63LSpNyjwPgSiuOdvjeH6Uqf3M+BFM+A5nqL6o
-	1rdalg==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fe7q60m83-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 12:21:37 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38e095fd889so4198727a91.2
-        for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 05:21:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784118096; x=1784722896; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=r99kkd6fP/ic3KdRsaZChhsJWWU2ou3THrOWDdyMrlM=;
-        b=bIWckHBUTp9NsNs3m5RTFhrS/n/Jqyl7VdhXBwBEdyf8lpIbcTilYJJabCyycyGE0p
-         njRmgkfEB3q9DEz0Rfdiixv1JVm+HUpsltQ+snTygAjNf8FiwiGPMCVirhMQOqMuCJwe
-         f36JqSCFMb/8AGyIfE4noJHwF3KYf2gZgUUS5rbAhbUBh2wpcTkGaV2jswTJWiymHz0z
-         yoKos/veyVTzt/QgyNB5jyij1a9CyEesG6rsMoxlabaq+v0AYyQ2hB+ncLeeqsrR728B
-         JwLY6UbSKH6i04jYAhmxw4OmLEvlx+kC+kAZG1LNonpKg9t8Zj9ZgikqXXnyv909+JdB
-         zTbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784118096; x=1784722896;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=r99kkd6fP/ic3KdRsaZChhsJWWU2ou3THrOWDdyMrlM=;
-        b=FY+2zA8lIjkcAlEqvqytVp6Ras/xp3zZ/Oz5qb4UAPfq+HlbkNw+SEIDoE1LlV7i+z
-         eTjQtHwyZm2Dt2YwM6U/wDcbLTX7+3pQ74k00ccwEaItM5GcfRUMwt1q3XZVtTSGVgP4
-         AWj7TvORaiPSF9Nbq34WuhiK8Ukmri8ayzeCjdJ7XorXB8VZatC0Q77LiXcy7tDh6Dnu
-         vQ3CSBmeL0EwWqxW3D52EVWDsjnTHYk8RySEoEwODQgvc+em+sLsxdDzPrTUsGjaTbDu
-         sHeopZqeZq9gKhOKIA5B11jn2ujAPzyU3NJB4x6nE1qcoQJdkisgFaNz5H9z1qAn+MU9
-         El5g==
-X-Gm-Message-State: AOJu0YzSxmABS6WJd8QbY7mFY4+9C3td1f6bYKtDwyPdXn7VtVms6VHQ
-	O9sp1MFx8p9TZjtggl3MkhZXCIaeZo61C1rsoQHTJ1GjImlxdCAX9C1z4Y9cRohfWrMhcGBZjjh
-	dHLaqR5eKkR8teHMSa/LOHtCzJx6T3FcnPQ9LCnr2xcPtc6XG6wjkcb4=
-X-Gm-Gg: AfdE7cmYY7UM2rO+Bk7NS6kAESb8OxeomG9kWmqRS5DTWt7mEZKu72haRoT7gRa0Yd7
-	BYZmBN2UzHJ0Lz5k4aA4Ym5YKvFAhHWMWJuM/K+4Hgr3/BuD4jv7yuyH5k/3itFoPBad65pvlN8
-	sgOPdmmLvTONgFx6R+9vh9kC62hjYTUKyJyUUtyHVFInEMqco22DpGKVAiRkBvOa6pVILf417Cd
-	cu0MXjqk0yX87JcTtoXBXN0uGPQZJdrO53TznQn2XQau4dnVhShMMbP8MQU5OXC4orBRq/U42RH
-	AZPx55Tnjruxhs7Ihl37JKafzeIIzLaYGWwcu6JYxr4iAcaXv/QqBGzo3URHi2qiOSchF5FABAm
-	sjyqg6TeMCi57VeBOX+3sbjhvsQH6IQiYrt8Wyt6raDcjKg==
-X-Received: by 2002:a05:6a20:3d0c:b0:3c0:9c1b:d0bf with SMTP id adf61e73a8af0-3c110a50703mr19971635637.74.1784118096160;
-        Wed, 15 Jul 2026 05:21:36 -0700 (PDT)
-X-Received: by 2002:a05:6a20:3d0c:b0:3c0:9c1b:d0bf with SMTP id adf61e73a8af0-3c110a50703mr19971605637.74.1784118095674;
-        Wed, 15 Jul 2026 05:21:35 -0700 (PDT)
-Received: from [10.219.57.229] ([202.46.23.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3140e6a5174sm1122535eec.15.2026.07.15.05.21.33
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 15 Jul 2026 05:21:35 -0700 (PDT)
-Message-ID: <a0450bcb-330e-4842-a9a6-1dc5fd83617f@oss.qualcomm.com>
-Date: Wed, 15 Jul 2026 17:51:31 +0530
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LAgfM15h"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 972921F0155A
+	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 12:24:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784118271;
+	bh=PclXy2Uq7OPMyI+t/qU2+B3wDB55fTcxu4iOX0BaM3I=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=LAgfM15hhVaC15vSj8XQxsRNvGquqsgUOdks7kt343R7a1N5g9nUkhGh/uXHD9xfk
+	 nHuL0dFcxgvuhWFebeKG/ml37YscroM+LGpmg6vTy/NYhLFGJkXcxF49V5NileYc42
+	 yFcBl+s67bzQ7PDTJyhysHWIH3tWgPuHTNtr9YG4smlEOxhmeOTfhh5daJaeq0q4VC
+	 dVM8Wgqjwvx9UaMSkun0m/2IJKP0e4vLDNXe4PMhRzEKFuvISWLu21N/04zi2Ia3kf
+	 EMfQpJbcuN8aNGEmfLMx1xjXLy5cpYICzJI1CA7lIsIjNYsegE++dezSLCFahJvia/
+	 vzzxugae/c9Fg==
+Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-5aec6360133so4116326e87.1
+        for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 05:24:31 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RpjYOGc/Br9L1jG7mH1lVLdER3LTcKIpxE93gBQFlhmc5R/6UA3LHsd6U2avTzcGxqL7MU=@lists.linux.dev
+X-Gm-Message-State: AOJu0YzbpHvW014SHbvHe30AFt/hLgz+KBekeZ6sD8Uy6VscikjH+J2Z
+	7tEcDQv+4nCIWqSsaWb3D38x+1moEglDs1oX/bHMSMhS3YQTe0sAxFy3UBEBx7f3PAgpQ2PNnXY
+	Ff1RoyBB/L/Oznm0Nh4hkq8oaN8jhGdUAi7txMAgjTQ==
+X-Received: by 2002:a05:6512:3a87:b0:5b0:12e1:4879 with SMTP id
+ 2adb3069b0e04-5b1582c715emr2068822e87.60.1784118270190; Wed, 15 Jul 2026
+ 05:24:30 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 15 Jul 2026 05:24:27 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 15 Jul 2026 05:24:27 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260714-upstream-v2-v2-2-76e5e41026db@advantech.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v23 07/13] power: reset: Add psci-reboot-mode driver
-To: sashiko-reviews@lists.linux.dev
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, robh@kernel.org,
-        conor+dt@kernel.org, lee@kernel.org
-References: <20260714-arm-psci-system_reset2-vendor-reboots-v23-0-e7453c548c21@oss.qualcomm.com>
- <20260714-arm-psci-system_reset2-vendor-reboots-v23-7-e7453c548c21@oss.qualcomm.com>
- <20260714173038.50B121F00A3A@smtp.kernel.org>
-Content-Language: en-US
-From: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-In-Reply-To: <20260714173038.50B121F00A3A@smtp.kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE1MDEyMiBTYWx0ZWRfX+yziZxXba7EZ
- KM04dmUKPJ+zuncH/6b9aDxdJQOWtq/jEHowEUTJaXkP3gcV3dkcyMpQFA9MIHXV+zCI3o/x2Ry
- tZZSB1viqfnSjTX/XNkvGcskBUbplmc=
-X-Proofpoint-ORIG-GUID: fQ5RZ3KogzHYnm3JhhUTP9Fr8UWCkuEa
-X-Proofpoint-GUID: fQ5RZ3KogzHYnm3JhhUTP9Fr8UWCkuEa
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE1MDEyMiBTYWx0ZWRfXxCrkA/XwiU04
- pS5DidCmCWZNfbKhKvZoO46PwQF7E2ZuZYXXbGEjCbmMVJkBPM8thTwwXEOCRpbmOmmu7X5MFkO
- DM89wTZhnf+/rwmBiHaoDdZDYYlxmg01BER+0CTrW3UChlEkVeIM+9oLxfJNTTxNNukg0FWdhM8
- ox9zDzK+HihlWf5ke22XIglhJRlZpXAiG31dGyCCULy1RSmJJv6aE2hFAMbYgVAxXNDkVChZXkl
- CMev5vXRrZskEXQIAcDRKXKsTI7kGI7VIhC7ZTtNdHKgkyeoSkmeSQVFu2YyacoZA2vrFThk+Vv
- tPkYXIgcmFjjNu16FVz/6S43vW+PvtAO4dNCqrYspkHTTNIldB5Hx49pD9M2VVPjz1aN3eDyHfS
- 1YXhx6HizwUuN+EVIfPebuKMQDJT5hd9U6P4u/IOdk9t6Zqnoq+2aq/62O6ypcXHS7qAWR8Zo3A
- n8segEvs1fUyMgSsVdQ==
-X-Authority-Analysis: v=2.4 cv=BajoFLt2 c=1 sm=1 tr=0 ts=6a577b51 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=c1Io3eFXDdE26PNcJJ8A:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-15_02,2026-07-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 malwarescore=0 clxscore=1015 bulkscore=0
- impostorscore=0 adultscore=0 spamscore=0 priorityscore=1501
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607150122
+References: <20260714-upstream-v2-v2-0-76e5e41026db@advantech.com> <20260714-upstream-v2-v2-2-76e5e41026db@advantech.com>
+Date: Wed, 15 Jul 2026 05:24:27 -0700
+X-Gmail-Original-Message-ID: <CAMRc=Mcnbv++YhPvocyiv9m_vuy2hWeuJ2sk9BNH=j7U3-dBFQ@mail.gmail.com>
+X-Gm-Features: AUfX_mzXdlShUuByf9jSWwdYpIzB9dN3xsnMMdNBfJC8EmPDXbPafGgehOl5DxQ
+Message-ID: <CAMRc=Mcnbv++YhPvocyiv9m_vuy2hWeuJ2sk9BNH=j7U3-dBFQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/8] Add Advantech EIO GPIO driver
+To: Ramiro Oliveira <ramiro.oliveira@advantech.com>
+Cc: linux-kernel@vger.kernel.org, mfd@lists.linux.dev, 
+	linux-gpio@vger.kernel.org, linux-hwmon@vger.kernel.org, 
+	linux-i2c@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	linux-fbdev@vger.kernel.org, linux-watchdog@vger.kernel.org, 
+	linux-pm@vger.kernel.org, Wenkai Chung <wenkai.chung@advantech.com.tw>, 
+	Francisco Aragon-Trivino <francisco.aragon-trivino@advantech.com>, 
+	Hongzhi Wang <hongzhi.wang@advantech.com>, 
+	Mikhail Tsukerman <mikhail.tsukerman@advantech.com>, 
+	Thomas Kastner <thomas.kastner@advantech.com>, Lee Jones <lee@kernel.org>, 
+	Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, Guenter Roeck <linux@roeck-us.net>, 
+	Andi Shyti <andi.shyti@kernel.org>, Daniel Thompson <danielt@kernel.org>, 
+	Jingoo Han <jingoohan1@gmail.com>, Helge Deller <deller@gmx.de>, 
+	Wim Van Sebroeck <wim@linux-watchdog.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
+	Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
+	Lukasz Luba <lukasz.luba@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 
+On Tue, 14 Jul 2026 17:54:16 +0200, Ramiro Oliveira
+<ramiro.oliveira@advantech.com> said:
+> This driver controls the GPIO component of the Advantech EIO chip.
+>
 
+The subject should be: "gpio: add a driver for the Advantech EIO GPIO
+controller"
+or similar.
 
-On 14-07-2026 23:00, sashiko-bot@kernel.org wrote:
-> Thank you for your contribution! Sashiko AI review found 3 potential issue(s) to consider:
-> - [High] The `psci-reboot-mode` platform driver is completely unreachable dead code because it lacks an `of_match_table` and is never instantiated as a child device by the parent PSCI or MFD driver.
-> - [High] Lockless read of `reset_cmd` in `psci_sys_reset()` can race with concurrent updates via `psci_set_reset_cmd()`.
-> - [Medium] The `PSCI_REBOOT_MODE` config is set to `bool`, which forces the `REBOOT_MODE` framework to be built-in.
+> Signed-off-by: Ramiro Oliveira <ramiro.oliveira@advantech.com>
+> ---
+>  MAINTAINERS             |   7 ++
+>  drivers/gpio/Kconfig    |   6 ++
+>  drivers/gpio/Makefile   |   1 +
+>  drivers/gpio/gpio-eio.c | 252 ++++++++++++++++++++++++++++++++++++++++++++++++
+>  4 files changed, 266 insertions(+)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 53b5f7412966..a7da47393815 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -609,6 +609,13 @@ S:	Maintained
+>  F:	Documentation/scsi/advansys.rst
+>  F:	drivers/scsi/advansys.c
+>
+> +ADVANTECH EIO DRIVER
+> +M:	Ramiro Oliveira <ramiro.oliveira@advantech.com>
+> +S:	Maintained
+> +F:	drivers/gpio/gpio-eio.c
+> +F:	drivers/mfd/eio_core.c
+> +F:	include/linux/mfd/eio.h
+
+Shouldn't this be part of the MFD entry?
+
+> +
+>  ADVANTECH SWBTN DRIVER
+>  M:	Andrea Ho <Andrea.Ho@advantech.com.tw>
+>  L:	platform-driver-x86@vger.kernel.org
+> diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
+> index f03c05288376..696065d77235 100644
+> --- a/drivers/gpio/Kconfig
+> +++ b/drivers/gpio/Kconfig
+> @@ -295,6 +295,12 @@ config GPIO_DWAPB
+>  	  Say Y or M here to build support for the Synopsys DesignWare APB
+>  	  GPIO block.
+>
+> +config GPIO_EIO
+> +	tristate "Advantech EIO GPIO"
+> +	depends on MFD_EIO
+> +	help
+> +	  Say Y or M to build support for Advantech EIO GPIO block.
+> +
+>  config GPIO_EIC_SPRD
+>  	tristate "Spreadtrum EIC support"
+>  	depends on ARCH_SPRD || COMPILE_TEST
+> diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
+> index fa14581e3995..628596705c21 100644
+> --- a/drivers/gpio/Makefile
+> +++ b/drivers/gpio/Makefile
+> @@ -64,6 +64,7 @@ obj-$(CONFIG_GPIO_DLN2)			+= gpio-dln2.o
+>  obj-$(CONFIG_GPIO_DS4520)		+= gpio-ds4520.o
+>  obj-$(CONFIG_GPIO_DWAPB)		+= gpio-dwapb.o
+>  obj-$(CONFIG_GPIO_EIC_SPRD)		+= gpio-eic-sprd.o
+> +obj-$(CONFIG_GPIO_EIO)			+= gpio-eio.o
+>  obj-$(CONFIG_GPIO_ELKHARTLAKE)		+= gpio-elkhartlake.o
+>  obj-$(CONFIG_GPIO_EM)			+= gpio-em.o
+>  obj-$(CONFIG_GPIO_EN7523)		+= gpio-en7523.o
+> diff --git a/drivers/gpio/gpio-eio.c b/drivers/gpio/gpio-eio.c
+> new file mode 100644
+> index 000000000000..34e1aefd0716
+> --- /dev/null
+> +++ b/drivers/gpio/gpio-eio.c
+> @@ -0,0 +1,252 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * GPIO driver for Advantech EIO Embedded controller.
+> + *
+> + * Copyright (C) 2025 Advantech Corporation. All rights reserved.
+> + */
+> +
+> +#include <linux/errno.h>
+> +#include <linux/gpio/driver.h>
+> +#include <linux/mfd/core.h>
+> +#include <linux/mfd/eio.h>
+> +#include <linux/module.h>
+> +
+> +#define EIO_GPIO_MAX_PINS	48
+> +#define EIO_GPIO_WRITE		0x18
+> +#define EIO_GPIO_READ		0x19
+> +
+> +struct eio_gpio_dev {
+> +	u64 avail;
+> +	int max;
+> +	struct gpio_chip chip;
+> +	struct device *dev;
+> +};
+> +
+> +static struct {
+> +	int size;
+> +	bool write;
+> +} ctrl_para[] = {
+
+Please use a common prefix for all symbols. "eio_gpio" like above is fine.
+
+> +	{ 0x01, false }, { 0x00, false }, { 0x00, false }, { 0x02, false },
+> +	{ 0x01, false }, { 0x00, false }, { 0x00, false }, { 0x00, false },
+> +	{ 0x00, false }, { 0x00, false }, { 0x00, false }, { 0x00, false },
+> +	{ 0x00, false }, { 0x00, false }, { 0x00, false }, { 0x00, false },
+> +	{ 0x01, true  }, { 0x01, true  }, { 0x02, true  }, { 0x02, true  },
+> +	{ 0x02, false }, { 0x10, false }
+> +};
+> +
+> +enum gpio_ctrl {
+> +	EIO_GPIO_STATUS = 0x0,
+> +	EIO_GPIO_GROUP_AVAIL = 0x3,
+> +	EIO_GPIO_ERROR = 0x04,
+> +	EIO_GPIO_PIN_DIR = 0x10,
+> +	EIO_GPIO_PIN_LEVEL = 0x11,
+> +	EIO_GPIO_GROUP_DIR = 0x12,
+> +	EIO_GPIO_GROUP_LEVEL = 0x13,
+> +	EIO_GPIO_MAPPING = 0x14,
+> +	EIO_GPIO_NAME = 0x15
+> +};
+> +
+> +static struct {
+> +	int group;
+> +	int port;
+> +} group_map[] = {
+> +	{ 0, 0 }, { 0, 1 },
+> +	{ 1, 0 }, { 1, 1 },
+> +	{ 2, 0 }, { 2, 1 },
+> +	{ 3, 0 }, { 3, 1 },
+> +	{ 3, 2 }, { 3, 3 },
+> +	{ 3, 4 }, { 3, 5 },
+> +	{ 3, 6 }, { 3, 7 }
+> +};
+> +
+> +static int pmc_write(struct device *mfd_dev, u8 ctrl, u8 dev_id, void *data)
+> +{
+> +	struct pmc_op op = {
+> +		 .cmd       = EIO_GPIO_WRITE,
+> +		 .control   = ctrl,
+> +		 .device_id = dev_id,
+> +		 .payload   = (u8 *)data,
+> +	};
+> +
+> +	if (ctrl >= ARRAY_SIZE(ctrl_para))
+> +		return -ENOMEM;
+> +
+> +	if (!ctrl_para[ctrl].write)
+> +		return -EINVAL;
+> +
+> +	op.size = ctrl_para[ctrl].size;
+> +
+> +	return eio_core_pmc_operation(mfd_dev, &op);
+> +}
+> +
+> +static int pmc_read(struct device *mfd_dev, u8 ctrl, u8 dev_id, void *data)
+> +{
+> +	struct pmc_op op = {
+> +		 .cmd       = EIO_GPIO_READ,
+> +		 .control   = ctrl,
+> +		 .device_id = dev_id,
+> +		 .payload   = (u8 *)data,
+> +	};
+> +
+> +	if (ctrl > ARRAY_SIZE(ctrl_para))
+> +		return -ENOMEM;
+> +
+> +	op.size = ctrl_para[ctrl].size;
+> +
+> +	return eio_core_pmc_operation(mfd_dev, &op);
+> +}
+> +
+> +static int get_dir(struct gpio_chip *chip, unsigned int offset)
+> +{
+> +	u8 dir;
+> +	int ret;
+> +
+> +	ret = pmc_read(chip->parent, EIO_GPIO_PIN_DIR, offset, &dir);
+> +	if (ret)
+> +		return ret;
+> +
+> +	return dir ? 0 : 1;
+> +}
+> +
+> +static int dir_input(struct gpio_chip *chip, unsigned int offset)
+> +{
+> +	u8 dir = 0;
+> +
+> +	return pmc_write(chip->parent, EIO_GPIO_PIN_DIR, offset, &dir);
+> +}
+> +
+> +static int dir_output(struct gpio_chip *chip, unsigned int offset, int value)
+> +{
+> +	u8 dir = 1;
+> +	u8 val = value;
+> +
+> +	pmc_write(chip->parent, EIO_GPIO_PIN_DIR, offset, &dir);
+> +
+> +	return pmc_write(chip->parent, EIO_GPIO_PIN_LEVEL, offset, &val);
+> +}
+> +
+> +static int gpio_get(struct gpio_chip *chip, unsigned int offset)
+> +{
+> +	u8 level;
+> +	int ret;
+> +
+> +	ret = pmc_read(chip->parent, EIO_GPIO_PIN_LEVEL, offset, &level);
+> +	if (ret)
+> +		return ret;
+> +
+> +	return level;
+> +}
+> +
+> +static int gpio_set(struct gpio_chip *chip, unsigned int offset, int value)
+> +{
+> +	u8 val = value;
+> +
+> +	return pmc_write(chip->parent, EIO_GPIO_PIN_LEVEL, offset, &val);
+> +}
+> +
+> +static int check_support(struct device *dev)
+> +{
+> +	u8  data;
+> +	int ret;
+> +
+> +	ret = pmc_read(dev, EIO_GPIO_STATUS, 0, &data);
+> +	if (ret)
+> +		return ret;
+> +
+> +	if ((data & 0x01) == 0)
+> +		return -EOPNOTSUPP;
+> +
+> +	return 0;
+> +}
+> +
+> +static int check_pin(struct device *dev, int pin)
+> +{
+> +	int ret;
+> +	int group, bit;
+
+Why not put all ints on the same line? Same elsewhere.
+
+> +	u16 data;
+> +
+> +	/* Get pin mapping */
+> +	ret = pmc_read(dev, EIO_GPIO_MAPPING, pin, &data);
+> +	if (ret)
+> +		return ret;
+> +
+> +	if ((data & 0xFF) > ARRAY_SIZE(group_map))
+> +		return -EINVAL;
+> +
+> +	group = group_map[data & 0xFF].group;
+> +	bit   = data >> 8;
+> +
+> +	/* Check mapped pin */
+> +	ret = pmc_read(dev, EIO_GPIO_GROUP_AVAIL, group, &data);
+> +	if (ret)
+> +		return ret;
+> +
+> +	return data & BIT(bit) ? 0 : -EOPNOTSUPP;
+> +}
+> +
+> +static int gpio_init(struct device *mfd, struct eio_gpio_dev *eio_gpio)
+> +{
+> +	int ret, i;
+> +
+> +	ret = check_support(mfd);
+> +	if (ret)
+
+This warrants an -ENODEV. We don't want to retry probe here, do we?
+
+> +		return dev_err_probe(eio_gpio->dev, ret, "GPIO not supported\n");
+> +
+> +	eio_gpio->avail = 0;
+> +
+> +	for (i = 0 ; i < EIO_GPIO_MAX_PINS ; i++) {
+> +		ret = check_pin(mfd, i);
+> +		if (ret)
+> +			continue;
+> +
+> +		eio_gpio->avail |= BIT(i);
+> +		eio_gpio->max = i + 1;
+> +	}
+> +
+> +	return eio_gpio->max ? 0 : -EOPNOTSUPP;
+> +}
+> +
+> +static int gpio_probe(struct platform_device *pdev)
+> +{
+> +	struct device *dev = &pdev->dev;
+> +	struct eio_gpio_dev *eio_gpio;
+> +	struct eio_dev *eio_dev = dev_get_drvdata(dev->parent);
+> +
+> +	if (!eio_dev)
+> +		return dev_err_probe(dev, -ENODEV, "Error contact eio_core\n");
+
+-ENODEV is used for silently bailing out of probe and telling the driver core
+to not defer. Basically it means: this device cannot be enabled on this system
+or is not present at all. This means: don't use dev_err_probe() and don't emit
+any logs. Just return -ENODEV.
+
+Though it makes me think - can this even happen at all? MFD cells won't get
+created if parent's probe() failed.
+
+> +
+> +	eio_gpio = devm_kzalloc(dev, sizeof(*eio_gpio), GFP_KERNEL);
+> +	if (!eio_gpio)
+> +		return -ENOMEM;
+> +
+> +	eio_gpio->dev = dev;
+> +
+> +	if (gpio_init(dev->parent, eio_gpio))
+
+Can you use the ret = gpio_init() pattern for consistency with the rest of the
+code?
+
+> +		return -EIO;
+> +
+> +	eio_gpio->chip.parent = dev->parent;
+> +	eio_gpio->chip.ngpio = eio_gpio->max;
+> +	eio_gpio->chip.label = KBUILD_MODNAME;
+> +	eio_gpio->chip.owner = THIS_MODULE;
+> +	eio_gpio->chip.direction_input = dir_input;
+> +	eio_gpio->chip.get = gpio_get;
+> +	eio_gpio->chip.direction_output = dir_output;
+> +	eio_gpio->chip.set = gpio_set;
+> +	eio_gpio->chip.get_direction = get_dir;
+> +	eio_gpio->chip.base = -1;
+> +	eio_gpio->chip.can_sleep = true;
+> +
+> +	return devm_gpiochip_add_data(dev, &eio_gpio->chip, eio_gpio);
+> +}
+> +
+> +static struct platform_driver gpio_driver = {
+> +	.probe  = gpio_probe,
+> +	.driver = { .name = KBUILD_MODNAME, },
+> +};
+> +
+> +module_platform_driver(gpio_driver);
+> +
+> +MODULE_AUTHOR("Wenkai Chung <wenkai.chung@advantech.com.tw>");
+> +MODULE_AUTHOR("Ramiro Oliveira <ramiro.oliveira@advantech.com>");
+> +MODULE_DESCRIPTION("GPIO driver for Advantech EIO embedded controller");
+> +MODULE_LICENSE("GPL");
+>
 > --
-> 
-> --- Patch [7]: [PATCH v23 07/13] power: reset: Add psci-reboot-mode driver ---
-> commit 05cd2956034a357b1e7d5eab96bdce4575604285
-> Author: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-> 
-> power: reset: Add psci-reboot-mode driver
-> 
-> Add a psci-reboot-mode driver to handle different types of PSCI resets,
-> including predefined and vendor-specific resets, at one place. It registers
-> with the reboot-mode framework to interface these resets to userspace and
-> passes arguments to the PSCI driver for command-based reset.
-> 
->> diff --git a/drivers/power/reset/Kconfig b/drivers/power/reset/Kconfig
->> index 124afb99febe9..93e4029d95060 100644
->> --- a/drivers/power/reset/Kconfig
->> +++ b/drivers/power/reset/Kconfig
->> @@ -348,6 +348,16 @@ config NVMEM_REBOOT_MODE
->>   	  then the bootloader can read it and take different
->>   	  action according to the mode.
->>   
->> +config PSCI_REBOOT_MODE
->> +	bool "PSCI reboot mode driver"
->> +	depends on OF && (ARM_PSCI_FW || COMPILE_TEST)
->> +	select REBOOT_MODE
-> 
-> [Severity: Medium]
-> Will this force the REBOOT_MODE framework to always be built-in?
-> 
-> Since PSCI_REBOOT_MODE is defined as a bool, selecting the REBOOT_MODE
-> tristate will forcefully upgrade the entire reboot-mode framework to built-in
-> (=y), which overrides user configurations that might prefer it as a module.
-> 
-> Also, since the driver source uses module_platform_driver and MODULE_LICENSE,
-> it appears designed to be built as a module. Should this be a tristate instead?
+> 2.43.0
+>
+>
 
-kept it boot by design.
-
-> 
->> +	help
->> +	  Say y here will enable PSCI reboot mode driver. This gets
->> +	  the PSCI reboot mode arguments and passes them to psci
->> +	  driver. psci driver uses these arguments for issuing
->> +	  device reset into different boot states.
->> +
->>   config POWER_MLXBF
->>   	tristate "Mellanox BlueField power handling driver"
->>   	depends on (GPIO_MLXBF2 || GPIO_MLXBF3) && ACPI
-> 
-> [ ... ]
-> 
->> diff --git a/drivers/power/reset/psci-reboot-mode.c b/drivers/power/reset/psci-reboot-mode.c
->> new file mode 100644
->> index 0000000000000..955ed68f14026
->> --- /dev/null
->> +++ b/drivers/power/reset/psci-reboot-mode.c
-> 
-> [ ... ]
-> 
->> +static int psci_reboot_mode_write(struct reboot_mode_driver *reboot,
->> +				  u32 *magic, int count)
->> +{
->> +	if (count < 1 || count > 3)
->> +		return -EINVAL;
->> +
->> +	return psci_set_reset_cmd(magic[0], psci_reboot_mode_get_cookie(magic, count));
-> 
-> [Severity: High]
-> Can this call to psci_set_reset_cmd() race with the atomic restart handler?
-> 
-> Looking at drivers/firmware/psci/psci.c, psci_sys_reset() evaluates reset_cmd
-> locklessly:
-> 
-> 	if ((reset_cmd.reset_type || reset_cmd.cookie) && !panic_in_progress())
-> 		psci_handle_reset_cmd();
-> 
-> And psci_set_reset_cmd() protects writes using a mutex:
-> 
-> 	reset_cmd.reset_type = reset_type;
-> 	reset_cmd.cookie = cookie;
-> 
-> If an atomic restart handler like psci_sys_reset() executes during a SysRq-B
-> emergency restart and interrupts a CPU executing psci_set_reset_cmd(), it could
-> observe a partially updated state.
-> 
-> Since the 64-bit cookie may be written via multiple instructions on 32-bit ARM,
-> could this lead to torn reads and mismatched reset types, causing the system to
-> hang during emergency restarts?
-
-Will evaluate this.
-
-> 
->> +}
-> 
-> [ ... ]
-> 
->> +static struct platform_driver psci_reboot_mode_driver = {
->> +	.probe  = psci_reboot_mode_probe,
->> +	.driver = {
->> +		.name	= "psci-reboot-mode",
->> +	},
->> +};
-> 
-> [Severity: High]
-> Is this platform driver able to probe?
-> 
-> The driver lacks an of_match_table and is not instantiated as a child device
-> by any parent PSCI or MFD driver.
-> 
-> A platform driver without an of_match_table must be manually instantiated
-> (e.g., via mfd_add_devices in an MFD parent like psci-mfd.c). However,
-> psci_reboot_mode is not listed in psci_cells in drivers/mfd/psci-mfd.c, nor
-> does any code call of_platform_populate() on the PSCI node.
-> 
-> Does this make the newly introduced psci-reboot-mode functionality unreachable
-> dead code?
-
-This driver probes via psci-mfd.
-
-thanks,
-Shivendra
+Bart
