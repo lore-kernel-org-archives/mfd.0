@@ -1,205 +1,103 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 961C444C67C
-	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 12:25:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69D2642BC5C
+	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 12:26:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784118325; cv=none; b=NheD3N/ImCPc53MlnPPC22F6O2qRdRk5sd4vxSb818xLPPxz+VItTrXBO2W653Pwxa0ht1rY9yoOY72PC5Bjes1xQ78tNJSNWHOqw1VFPvQ51yt02Qr0heA+PH7OPgM+k5KLtCro7LOVkx35VD1V2AH0llBXSVL7lb0AXoNr00E=
+	t=1784118407; cv=none; b=Dn5B9CqjMdf/8j4SBjgdSKplQQbvcCpP7c6QvaTQxKbCsKfaXApw6EHXMlNacZfqIu2Pu3pb7xR54TUBYSIONq1MuqDZ2FFoo4Xrf+jsUK43IePeDXev3xyeJ4vjZanioVi7Pypu7WaD88T58Gzw9TxyCpSjR8E5i77wUoRRbHM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784118325; c=relaxed/simple;
-	bh=LemhIJNoxz1ueRDJoKpSFvwPciOjqddo6VJZFndA1jo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Qo2UdKvDGuvCQcjU2ct8N2wV4z8NiKxJKXC9V/LoYncnpI/rmx84qf4b8CD+Qs0LY7ofGZi5TrVvgrWvhJdjHqTfKNiXZD7i2DHFQSJgKCY0yyClAqQsuLvRkDuWVHfYGQuck2w6JenOhvxgdKO8bKTV2Tp/fOEcHj7CiqVeFKg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NsfasX80; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=i7DHgiTk; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1784118407; c=relaxed/simple;
+	bh=TF12o4kxmUhjvdA6ouORMbeT1BJf7UjZuwxQoUAEn0g=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=HaiENMS9kvaLy93zMeh6JVMNW90RvYk0cTv0+2qkDGMPMt19DRqjgCzR00gnlNl3rMFFDRrZPRTdtM68YDitKJg9UcLkQDi36EsdJ5bJVQEa3DwtU5y4xTyOcSlKyDfq4EFJjF2EoLGXR9ZK8tBOaW9uxSCT0OB6cwmINp+X/Fw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QKykeVV+; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NsfasX80";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="i7DHgiTk"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66FBcv2Q3479847
-	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 12:25:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	cwU6AfJQ14gS30JYZ/HeTNqrS6D8pmjen3Sdckg1osQ=; b=NsfasX80ru7B4YHv
-	8uib49PEwXRTI90eTMTO63SWRjQ2S8oCDAkM/nu02ZMbuiaLSxvPTNCOtDZRU/dK
-	c/CbVqsfRwybM3kLno79KtnrI7mlpC8kNzuaULE0BTE3cyyOcWHZODhiAHpsOikA
-	YYo7tLpjhTlkKve5c6SwEJVjl5bpLWL3w+oo4T0seYs2rHQsct2C1luZ/AhMqRPj
-	Yhudlp3Z2M7IgdKE/X4Ywsf9lY24zQBHB7Ty6oDQJ1blOzupdK40wl5QWkyaY5FP
-	KLeqvwMrg2wLqUcaInd+R6TDgHRE/8N5g0+91SnsyWTr7x0L7o/BYfWCK86uxoyC
-	FXY2Tg==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fds9g3kss-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 12:25:23 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2cacf17c7e0so29809065ad.0
-        for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 05:25:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784118322; x=1784723122; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=cwU6AfJQ14gS30JYZ/HeTNqrS6D8pmjen3Sdckg1osQ=;
-        b=i7DHgiTk96Zh7d3CjZ9fuJdoXGR2re6yYESGvsntZ5Vn5dewnzAIs/VzIpTU4ddamF
-         o+0tW3SmC35oIBa4pPuuVlGwxtKn/uBdPuQlEBM9Uk71LkPzvG4YsK+wXVmE8x9YaKlV
-         LWGxmEMWhHN8Sfz3alAxzzqNlbjnH8GffkQDpUQrXXBKOp77ohkhTgJyei7xGv75Md3I
-         B4OFypxnBj2w+c1uzJ7qytxm4VZkMK9P6gHAKW57YxKVULDfWHqh35FHmBb35ZmrqyTu
-         H7uYvLl6hhi/gGLCfK08SCFaVXdiS4ATJdbBKot3SChpP2lx/Ad76U9L1nRqnNQkH3i4
-         3XwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784118322; x=1784723122;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=cwU6AfJQ14gS30JYZ/HeTNqrS6D8pmjen3Sdckg1osQ=;
-        b=EB+ud0jCSEwMieA0cCtgHWveCotN3YB0cqBC+uShR9PVuwbZW3LV6nE4pCguDg/mv2
-         OLiKbQMafvS1ZUl+HqupkFdPi9g2b4hiLUMXL4uTi8zUtxjqoUKlftyIsJ/dQpQIB0ed
-         5gMl3Les54rbBpiKJAquCObGjSUnvWNNZD1QtlGZBUM601CO4uU373d9c28DMgDhee6a
-         l0wzXnZ/T2Oai35LvtEFfUj/Lhd/FCAnD30EloYarrk0TxiHIh0i+1mFpMuiI5THlQ6Y
-         5dnw300Pxd/6h6t6W89X1BANNwynCvyrBkhJiIQStG+FrLZy4NhJ7RXd2EAVP0I2Z4uD
-         6ZmA==
-X-Gm-Message-State: AOJu0YzOpKwwN6CtgniPI2hSpbAUJJhKNBiHZnf56WczMuVcHFV17/Si
-	J+sfllakITifuojzWeuHhbdK49SBWyVa6ZFx5/6oqqk91K1qplBzn+8yjSiWKtaZlNv55Dxum//
-	ZCCej4ECeCyIbdjo+7YCEAUKADo6GHO3q7/gG1GauZyrwVB11Xtnukvk=
-X-Gm-Gg: AfdE7cm+IEnLGsF6rl7g+7wkI4a3Ev9Jx7gbrvK3AiXhosK5YGql0IXlnzkHLaKBrW5
-	eVzwCsGx5MCql/smrXHpOY0IrZnVSLNj6sb+/6BHHPlzcUl6Qb848TPx5FH6g/2t0QELNiEGFZ6
-	sadIqS1LzFUtANPNM7kYXWvRl+SsKCvsxutdgpvhUgME/1N5yDNgbnJsyMMKGaz2sACAnyzWl8n
-	WF1GYBjvwY7J/kl2jWmo6CZ5iepMTJ4EY00mzydbJytQvOx0mwRYdVTRP7bniBeI+/dVHMDPEBO
-	a6faVo3jYzwatD0KD2eoOb67l5o0RtJoJqnd4vtBw7rbE80j3jJ7JZupqjMBjH2MAH4g92pSVLK
-	QCB87UbcjNzd1rNyWTnEDsLofpUwzfsy3JizS4FzZTCQswQ==
-X-Received: by 2002:a17:903:2a88:b0:2c9:8f4a:90b with SMTP id d9443c01a7336-2ce9e5a3c11mr165508145ad.3.1784118322492;
-        Wed, 15 Jul 2026 05:25:22 -0700 (PDT)
-X-Received: by 2002:a17:903:2a88:b0:2c9:8f4a:90b with SMTP id d9443c01a7336-2ce9e5a3c11mr165507855ad.3.1784118321992;
-        Wed, 15 Jul 2026 05:25:21 -0700 (PDT)
-Received: from [10.219.57.229] ([202.46.23.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13cd4365b0dsm1729961c88.15.2026.07.15.05.25.19
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 15 Jul 2026 05:25:21 -0700 (PDT)
-Message-ID: <afe3c1aa-081d-4eda-ac61-5b9be10f1990@oss.qualcomm.com>
-Date: Wed, 15 Jul 2026 17:55:18 +0530
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QKykeVV+"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A4611F0156F
+	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 12:26:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784118406;
+	bh=ufSU06HSFFf/HF9xxtT6zNddSL0W/3RadTy6uo0f3pw=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=QKykeVV+vjB0vBKkxzt1G8Vl5kKWhAKrI3T18ni2Hmw7Ye9vGMPmHsQOOafa6Rkz8
+	 Ms0JYatvX30UIvmhmwHhmdX9yRaau4XM7UMuftPm2YrvDgVpRTT9y0EvcfS+iJMopa
+	 wn5EvKEKra8RnO1k8aY6zl3W8kTP7P1IlnB4/LKGhKGxEg2xEMFyvVePT3Jcft61ug
+	 gLoOZQLE17mfUgB/wOuZnmcyg2/bXhPTd+ObHBKZgp4ncS4UOBn+dwfyO9BIdDE/Ik
+	 iVS87KexyX8aSDr2Cs39sUkAux0k+DNAdUQG8yS15R4tPMKJ4Ufu/ntoSvaqilpRBT
+	 Qrj1mAGszI78g==
+Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-39b3931e259so48884201fa.2
+        for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 05:26:46 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RqoA7bruouI8x8NW3MrVhIsy3HclMmNoHOtQvqG469s50p0QDb9Ne6aFa/13NaKDKimu94=@lists.linux.dev
+X-Gm-Message-State: AOJu0Yzon29UjUEsmbrb885XdtM+0vrwFipNdW46NRUnJmFI8kU1eTkU
+	ppm/OGNWx0Bdb1sAqki1VlDSdFMZhgJckiI2SgDMtSPoR6FaqFkw9dWX4EG5KU2iNK7HYW9rLgU
+	1r3K4MFwj1OwTVM6c0eqiVxBlUpzVIWSb9cqwPXpftQ==
+X-Received: by 2002:a05:651c:23db:20b0:39c:6e2c:23c3 with SMTP id
+ 38308e7fff4ca-39db6ba5ea7mr4965071fa.5.1784118404814; Wed, 15 Jul 2026
+ 05:26:44 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 15 Jul 2026 05:26:43 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 15 Jul 2026 05:26:42 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260714-arm-psci-system_reset2-vendor-reboots-v23-2-e7453c548c21@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v23 09/13] mfd: psci-mfd: Add psci-reboot-mode child cell
-To: sashiko-reviews@lists.linux.dev
-Cc: mfd@lists.linux.dev, lee@kernel.org, robh@kernel.org, conor+dt@kernel.org,
-        devicetree@vger.kernel.org
 References: <20260714-arm-psci-system_reset2-vendor-reboots-v23-0-e7453c548c21@oss.qualcomm.com>
- <20260714-arm-psci-system_reset2-vendor-reboots-v23-9-e7453c548c21@oss.qualcomm.com>
- <20260714172443.080241F00A3D@smtp.kernel.org>
-Content-Language: en-US
-From: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-In-Reply-To: <20260714172443.080241F00A3D@smtp.kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE1MDEyMyBTYWx0ZWRfXzyrIVszwct/Z
- yo5PjdMHLy451zaWTqdIhVDqTodgFTEp3XOh7v//3m+jbQmGck//BXXEAMZ06nU/S+rGoRGSlFU
- 1TQ0Vt2uwd7RC27AwBsl8tQMitrhD0Q=
-X-Proofpoint-ORIG-GUID: cXiatgcy0kYiUp12IXuqemBFq2c6dByR
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE1MDEyMyBTYWx0ZWRfX81tmi3yAcLss
- A9ryizudNm4oRrzR4lRO0egJe/H/mwUgXWSIvoNgQDP+YUYBfEmrcURCnRH+NOxSJ2+gFfnt/Fu
- DHmBXCErM5BwLfQP/7eUVC/X/Hkxl9NlB3rXLCP0fuHJohofWPD+EZo8bmc/VKwQW/jYBG/qaKa
- 6XeA3x+XijAhFNrm5nmGKLDl2g7ikHKnRQLMQTKUnHYdhjXn2GmyMhpLpJ8YaiyYuv/8VKdN1qA
- JDcpR7X1i1xhQvgQZMlN2xH/0pflIFoLbEpZaGv2dT9DOHJqpcBYSOyvKGlbWz7grqz1hl7HXt9
- tulrkpbQ2sVDZynsHdFbRLGvgJBGmlt9JikMtGVIHK67rmnRCssGY9PArZ8c/MnW/rsvwzuNuih
- 9tvuZ/Bs8tATXoAZbSC+b+Kebxmo075kR4LcT2KkmUtYLzipkw1kvsNEN5wTz+yafAa3AaLLv+S
- zSlwGbOSZ6oJzs2qJqg==
-X-Proofpoint-GUID: cXiatgcy0kYiUp12IXuqemBFq2c6dByR
-X-Authority-Analysis: v=2.4 cv=VoATxe2n c=1 sm=1 tr=0 ts=6a577c33 cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=yevAzQFRF-SW-JHV9rgA:9 a=QEXdDO2ut3YA:10
- a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-15_02,2026-07-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 bulkscore=0 clxscore=1015 lowpriorityscore=0
- priorityscore=1501 impostorscore=0 suspectscore=0 adultscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607150123
+ <20260714-arm-psci-system_reset2-vendor-reboots-v23-2-e7453c548c21@oss.qualcomm.com>
+Date: Wed, 15 Jul 2026 05:26:42 -0700
+X-Gmail-Original-Message-ID: <CAMRc=McKp4WsOY-EQ21n2wbqCp5V0Lr1Cbub5geEhz-LZvVkZw@mail.gmail.com>
+X-Gm-Features: AUfX_mylt-DYfwtCtULeZMicFYpxh50vEHg7XonNMSy71MZwRMycF3EtBgUVrSQ
+Message-ID: <CAMRc=McKp4WsOY-EQ21n2wbqCp5V0Lr1Cbub5geEhz-LZvVkZw@mail.gmail.com>
+Subject: Re: [PATCH v23 02/13] power: reset: reboot-mode: Support up to 3
+ magic values per mode
+To: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+Cc: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	devicetree@vger.kernel.org, Florian Fainelli <florian.fainelli@broadcom.com>, 
+	Krzysztof Kozlowski <krzk@kernel.org>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, Andre Draszik <andre.draszik@linaro.org>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>, mfd@lists.linux.dev, 
+	Srinivas Kandagatla <srini@kernel.org>, Sebastian Reichel <sre@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
+	Lorenzo Pieralisi <lpieralisi@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
+	Daniel Lezcano <daniel.lezcano@kernel.org>, Christian Loehle <christian.loehle@arm.com>, 
+	Ulf Hansson <ulfh@kernel.org>, Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Arnd Bergmann <arnd@arndb.de>, Souvik Chakravarty <Souvik.Chakravarty@arm.com>, 
+	Andy Yan <andy.yan@rock-chips.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
+	John Stultz <john.stultz@linaro.org>, Moritz Fischer <moritz.fischer@ettus.com>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Sudeep Holla <sudeep.holla@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 
+On Tue, 14 Jul 2026 19:16:30 +0200, Shivendra Pratap
+<shivendra.pratap@oss.qualcomm.com> said:
+> ARM PSCI vendor-specific resets, require a 32-bit reset_type and a 64-bit
+> cookie as arguments. This cannot be implemented via the reboot-mode
+> framework, which supports a single 32-bit argument as magic value.
+>
+> Extend the reboot-mode framework to support up to three 32-bit arguments
+> as magic, per reboot-mode.
+>
+> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+> ---
+>  drivers/power/reset/nvmem-reboot-mode.c  | 10 ++++----
+>  drivers/power/reset/qcom-pon.c           |  8 ++++---
+>  drivers/power/reset/reboot-mode.c        | 41 +++++++++++++++++++++-----------
+>  drivers/power/reset/syscon-reboot-mode.c |  8 ++++---
+>  include/linux/reboot-mode.h              |  4 +++-
 
+Could we avoid having to modify multiple files here by just providing a new
+function:
 
-On 14-07-2026 22:54, sashiko-bot@kernel.org wrote:
-> Thank you for your contribution! Sashiko AI review found 1 potential issue(s) to consider:
-> - [High] The probe function `psci_mfd_probe` ignores the return value of `devm_mfd_add_devices()` for the `psci_reboot_mode_cell` child device, violating the MFD subsystem guideline requiring probe failures to be propagated and unwound.
-> --
-> 
-> --- Patch [9]: [PATCH v23 09/13] mfd: psci-mfd: Add psci-reboot-mode child cell ---
-> commit 73724460c58fad980d9dd8ef39b9485acffad30e
-> Author: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-> 
-> mfd: psci-mfd: Add psci-reboot-mode child cell
-> 
-> This commit adds the psci-reboot-mode child cell to the psci-mfd driver.
-> It retrieves the reboot-mode firmware node and registers the new cell
-> using devm_mfd_add_devices if the node is present.
-> 
->> diff --git a/drivers/mfd/psci-mfd.c b/drivers/mfd/psci-mfd.c
->> index 7affd6bb09dd8..8c6b78ac471bf 100644
->> --- a/drivers/mfd/psci-mfd.c
->> +++ b/drivers/mfd/psci-mfd.c
-> 
-> [ ... ]
-> 
->> @@ -14,10 +15,37 @@ static const struct mfd_cell psci_cells[] = {
->>   	},
->>   };
->>   
->> +static const struct mfd_cell psci_reboot_mode_cell[] = {
->> +	{
->> +		.name = "psci-reboot-mode",
->> +		.named_fwnode = "reboot-mode",
->> +	},
->> +};
->> +
->>   static int psci_mfd_probe(struct platform_device *pdev)
->>   {
->> -	return devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO, psci_cells,
->> +	struct fwnode_handle *fwnode;
->> +	int ret;
->> +
->> +	ret = devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO, psci_cells,
->>   				   ARRAY_SIZE(psci_cells), NULL, 0, NULL);
->> +	if (ret)
->> +		return ret;
->> +
->> +	fwnode = device_get_named_child_node(&pdev->dev, "reboot-mode");
->> +	if (!fwnode)
->> +		return 0;
->> +
->> +	fwnode_handle_put(fwnode);
->> +
->> +	ret = devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO,
->> +				   psci_reboot_mode_cell,
->> +				   ARRAY_SIZE(psci_reboot_mode_cell),
->> +				   NULL, 0, NULL);
->> +	if (ret)
->> +		dev_warn(&pdev->dev, "reboot-mode child cell failed to add: %d\n", ret);
->> +
->> +	return 0;
-> 
-> [Severity: High]
-> Should this propagate the error code instead of returning 0?
-> 
-> The MFD subsystem guidelines specify that if a child device fails to register
-> during probe, the entire probe must fail and unwind previously registered
-> children. By returning 0 here, the MFD device is left in a partially
-> initialized state if the psci-reboot-mode cell fails to register.
+    nvmem_reboot_mode_write_full()
 
-the cpu-idle-domain is a mandatory driver. We do not want to fail 
-psci-mfd for any probe failures in reboot-mode probe and unwind the 
-cpu-idle-domain driver. Have documented in commit text.
+with the prototype you proposed and making the existing
+nvmem_reboot_mode_write() a thin wrapper around it?
 
-thanks,
-Shivendra
+Bart
