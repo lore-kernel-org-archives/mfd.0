@@ -1,129 +1,209 @@
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 295E239935E
-	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 14:56:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3ECCD4611CF
+	for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 15:09:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784127392; cv=none; b=dm/oCW8p88xSoMDr8bwsyKZ2FnvfBA3/wYgz8PaBaSK9ztCBmj5hwiK9AxoP+rwn3f0EExXRmEkE6uTazUwlk+dJ71+6EBiOgWvePWzdrELCMWdSfIcbdse2butYjUOOzVG70KxXhdzLykdoUlkoR4gzzwXoQcSMf6lXZVo1q/Q=
+	t=1784128184; cv=none; b=Fo/jTFHJQKFZkxtgaCzvmgO6OUCLPpsD42G0bcM4nL0l4TLTkyK20S9JbC3D61HEFb89iHu52l4c6KHTcx7ziXTFIVJBhFyWdSfm0AOkvRt43rPfg3LyJc/pOB19DJtxXUQ8JAgwkxPj+SP8qNCA7Of8lsorrzWIrSH6m4lBp74=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784127392; c=relaxed/simple;
-	bh=p5KuDeusVEoCUg38XXhv4wSbGDVLdalEOTq5OJM3HGI=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=MZcyXApAV5PgOfVTJ8gVyWWWo4ZH/knqHjVEfbHoM7d20eZCLLFb5/lMhlskyL4wTdtUdr5vb0A9+Gz3Yb+iXGRMKP4qQTi/kykyUdtQJfvhLjqfLR9oY74svJwGFE2s/wcoaNgBTwR22qOL7UVo1Ji977MMRStCr6akUUSK7wE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EBFJN4y6; arc=none smtp.client-ip=209.85.128.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1784128184; c=relaxed/simple;
+	bh=QQn18HGKmKoptkUzNngAk/MXzSubPEJ0sXhkvzEN+kw=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=u8fWAiH8FYvzxO059JhSUr5jqqfCXgjMew+3H8lCZ1o3kSCi2BNA4KvBx2qtPijjixNFthbhsitZfZq2K+KAj2UwwqYrnTomRnGpiAoziBHs1saOoIO92K8AnfxC674M7c8Il73eOntpaKqHzt3dA7WLMy1TV+JKA6N6jxm1b58=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IGLBMg9Z; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EBFJN4y6"
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-493b779003fso24129905e9.3
-        for <mfd@lists.linux.dev>; Wed, 15 Jul 2026 07:56:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784127389; x=1784732189; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=RblpppZAMmnU5omlXvpMP24NqfykpV279MnhnwwEblY=;
-        b=EBFJN4y63EZUW6rjQJEW1H6Xqs/FsA22OJTArgieiyTApKFkKYhwqkJ1IoKqwH6Dpb
-         HNYOUeuI06P6O4NxB8P+tTFaa46Vt6N9d6gttbChDPcnS4JnMzgCaP4i29OrkQTGQi7P
-         Q4ule8xQ8OAgcp1QUC2WAYRZnhtiprNswtsyTmao8lyGHFe0Yw7rs410Eh8GBL6onijY
-         6HEabL0yQHzWw8kIw3+ZKEAYAu85+zJrep0uFdgrgZCRgYcNoqSy/OXY0yWbe2tYgVQc
-         WDruVw6H8Q9iatkEfvgGd1BV7VS65FztW3t7KwAV7o+Z1y9hDryR6ys48TQrwKXADvMt
-         9v6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784127389; x=1784732189;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=RblpppZAMmnU5omlXvpMP24NqfykpV279MnhnwwEblY=;
-        b=EfERY2VeSKUb/JMTk3k/H0cfIhd+Emm74xZ8NFssvlRNDL//oMnvDCCm8v026LAcJg
-         J+YerfaLZT4Q2Ecj09g/dsmb1O9QlcC+dfFyXrOIDcPgObI5Nx4JODaueBE4rtgKuu3r
-         croGnUvgWinvlEEeid9uWZUWH2jSjzuelbRAzOirWR1e+v53GH9kE+GAvwChgi26pFiu
-         QChx3NfAIGx6kQmLl1pAGffr013UAjdXfWK1Bjo3OgayJ1wbTH4d/9f0cPeSXJd56dBa
-         2eaG45Pocd8hxwZS/5TueEXamDuXMJOZ6hsrENR0QCkA0VGcaSKOnZqkeR26c8h94NAM
-         n3gA==
-X-Forwarded-Encrypted: i=1; AHgh+RqfVS/nCxspFELTQ5g58FFM5JbLA7VqvYQLcqf/c7kKDHefm8dsg8wkdI5aHQoAGQ1i0F4=@lists.linux.dev
-X-Gm-Message-State: AOJu0YyElvzZamKFDt4I2FgZVdLI4rsZ5aAqF0N3e/Sg/MQay5aXf3LP
-	IkBU0nwEF8gHVT8BLXJmwJLSmguN2CVZHjElJiRUbZgcmH/0elLSPa8I
-X-Gm-Gg: AfdE7clU+W/RrrlCaIJXOUXgN5lZRIZY4Yvl4dmtM6e12r9d7ovluRCbLT7akfvZbFV
-	Lpa0N4E5uicKP0CoiWCDm77XzpZZvrkdz140LkFxrvDV/OXzcFSTFFFJey4fQD+JElM9OKRIrLO
-	baYd6DPWmNAPdYofAtodQ2JehLuMGD9y3wY547CmM41o78O9HqB75ZAbsVcF+fM26vRmng7DmGn
-	ZgyLrWOPpVocsTziPX8ObZEAJxjnP3VibuUdWh9Lbj6galYxfJio+Nqn+NSku3/1gx9zygs8cyJ
-	drzlDS/Wwxuz+aJkvtfsf9QUnsw4FNxE13vi0S2v5HO0B+f9cYgH9DiwhhDaJHPelSxZoLPb2iK
-	hvnge6/bNLlUL7EageSSLia3GYIQauSOoR/L3uUj2gEwB1g/TtNOK806toe1F+n/zxylV4csZnU
-	2o583OSg==
-X-Received: by 2002:a7b:c8d3:0:b0:492:6113:d4fc with SMTP id 5b1f17b1804b1-4953899c37bmr54386175e9.17.1784127389264;
-        Wed, 15 Jul 2026 07:56:29 -0700 (PDT)
-Received: from avermoal ([185.13.179.173])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4950a322c86sm145746985e9.11.2026.07.15.07.56.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 15 Jul 2026 07:56:28 -0700 (PDT)
-From: Mikhail Lukianchikov <avermoal@gmail.com>
-To: lee@kernel.org
-Cc: avermoal@gmail.com,
-	mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v1] mfd: viperboard: fix native fields type in structures as little-endiand
-Date: Wed, 15 Jul 2026 20:52:44 +0600
-Message-ID: <20260715145243.461827-2-avermoal@gmail.com>
-X-Mailer: git-send-email 2.55.0
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IGLBMg9Z"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C568E1F000E9;
+	Wed, 15 Jul 2026 15:09:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784128183;
+	bh=tiDb+9Z2SktqZLKIcE+xe//O9azwBffvd6LQ0dfdU+Y=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=IGLBMg9Z1q1a4FEU+7/ZRlXP+vXUDPm7V6U1ZBmilSVsurT89bCzQhQJ2LBwMKCyi
+	 4jOU7hiWspDwS3+uaoYimTy/aNcL4QkBL7jJYI5Ay9M+3tO2y3zL/RV84W8Lni4RxT
+	 RWOasBmIapjtxr6kbVkb5kGcwNFIEmitJ1cbl/JlK/fsjP9FYgDACqL2k46lO+Il/Z
+	 jn1Y/twZuQtTjcvoqUjC+BJNl6x0mjS5VRQ0tWblZlGpjqdZWCx0/aqOXXQBiCHRo6
+	 v7WVU7p+6YPdBQtuD/UvfOgdZz8tUsMfXrC8g+HmSOSkF+mBVnojF/JvHemf63knWM
+	 a0UlYB+wmn84A==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v1] mfd: viperboard: fix native fields type in
+ structures as little-endiand
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Mikhail Lukianchikov" <avermoal@gmail.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20260715145243.461827-2-avermoal@gmail.com>
+References: <20260715145243.461827-2-avermoal@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Wed, 15 Jul 2026 15:09:42 +0000
+Message-Id: <20260715150942.C568E1F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 
-Sparse reports several warnings about incorrect type in assignment
-(different base types) when building the i2c-viperboard.c driver:
+Thank you for your contribution! Sashiko AI review found 7 potential issue(=
+s) to consider:
 
-  warning: incorrect type in assignment (different base types)
-     expected unsigned short [usertype] addr
-     got restricted __le16 [usertype]
+New issues:
+- [Medium] Incomplete fix: vprbrd_i2c_write_hdr was not updated as claimed =
+by the commit message.
+- [Low] Commit message violates MFD subsystem capitalization guidelines.
 
-The structures vprbrd_i2c_write_hdr, vprbrd_i2c_read_hdr, and
-vprbrd_i2c_addr_msg describe raw USB packets and, as I understand it,
-require Little-Endian byte-order. Therefore, 16-bit field in these
-structures were annotated as __le16, not native unsigned short.
-This satisfies Sparse and ensures correct behavior on
-Big-Endian architectures.
+Pre-existing issues:
+- [High] vprbrd_probe() hard-codes PLATFORM_DEVID_NONE (-1), preventing mul=
+tiple devices from probing.
+- [High] vprbrd_i2c_xfer() incorrectly returns 0 on success instead of the =
+number of transferred messages.
+- [High] Ignored return value of i2c_add_adapter() can lead to kernel crash=
+ on module removal.
+- [High] Buffer overwrite during large I2C reads causes corrupted USB comma=
+nd headers to be sent.
+- [High] DMA buffer shares a cacheline with a mutex, causing data corruptio=
+n on non-coherent architectures.
+--
 
-Signed-off-by: Mikhail Lukianchikov <avermoal@gmail.com>
----
- include/linux/mfd/viperboard.h | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+--- Patch [1]: [PATCH v1] mfd: viperboard: fix native fields type in struct=
+ures as little-endiand ---
+commit cb2959fa53e5e3eb2ffeb7ffb3dcd0156c7fb289
+Author: Mikhail Lukianchikov <avermoal@gmail.com>
 
-diff --git a/include/linux/mfd/viperboard.h b/include/linux/mfd/viperboard.h
-index 46287a1f6bf6..5761ebdc81b3 100644
---- a/include/linux/mfd/viperboard.h
-+++ b/include/linux/mfd/viperboard.h
-@@ -57,15 +57,15 @@ struct vprbrd_i2c_write_hdr {
- 
- struct vprbrd_i2c_read_hdr {
- 	u8 cmd;
--	u16 addr;
-+	__le16 addr;
- 	u8 len0;
- 	u8 len1;
- 	u8 len2;
- 	u8 len3;
- 	u8 len4;
- 	u8 len5;
--	u16 tf1;                        /* transfer 1 length */
--	u16 tf2;                        /* transfer 2 length */
-+	__le16 tf1;                        /* transfer 1 length */
-+	__le16 tf2;                        /* transfer 2 length */
- } __packed;
- 
- struct vprbrd_i2c_status {
-@@ -89,7 +89,7 @@ struct vprbrd_i2c_addr_msg {
- 	u8 cmd;
- 	u8 addr;
- 	u8 unknown1;
--	u16 len;
-+	__le16 len;
- 	u8 unknown2;
- 	u8 unknown3;
- } __packed;
--- 
-2.55.0
+> mfd: viperboard: fix native fields type in structures as little-endiand
 
+[Severity: Low]
+This isn't a bug, but does the commit message violate the MFD subsystem
+capitalization guidelines? The word 'fix' is lowercase, but the guidelines
+request capitalizing the description after the subsystem prefix.
+
+This commit updates 16-bit fields in raw USB packet structures to use
+__le16 instead of u16 to fix sparse warnings about endianness mismatches.
+
+> diff --git a/include/linux/mfd/viperboard.h b/include/linux/mfd/viperboar=
+d.h
+> index 193452848c047..3e700cce5cb4d 100644
+> --- a/include/linux/mfd/viperboard.h
+> +++ b/include/linux/mfd/viperboard.h
+> @@ -62,15 +62,15 @@ struct vprbrd_i2c_write_hdr {
+
+[Severity: Medium]
+Was struct vprbrd_i2c_write_hdr intended to be updated in this patch?
+
+The commit message states that the fields in this structure require
+Little-Endian byte-order, but the structure remains unpatched as u16,
+leaving the sparse warning unresolved for the write path.
+
+> =20
+>  struct vprbrd_i2c_read_hdr {
+>  	u8 cmd;
+> -	u16 addr;
+> +	__le16 addr;
+
+[ ... ]
+
+[Severity: High]
+This isn't a bug introduced by this patch, but does vprbrd_probe() prevent
+multiple devices from probing by forcing static naming?
+
+drivers/mfd/viperboard.c:vprbrd_probe() {
+    ...
+	ret =3D mfd_add_devices(&interface->dev, -1, vprbrd_devs,
+				ARRAY_SIZE(vprbrd_devs), NULL, 0, NULL);
+    ...
+}
+
+Passing PLATFORM_DEVID_NONE (-1) instead of PLATFORM_DEVID_AUTO assigns sta=
+tic
+names to the subdevices. If a second device is connected, won't this cause a
+sysfs collision and probe failure?
+
+[Severity: High]
+This isn't a bug introduced by this patch, but does vprbrd_i2c_xfer() retur=
+n the
+correct value on success?
+
+drivers/i2c/busses/i2c-viperboard.c:vprbrd_i2c_xfer() {
+    ...
+		mutex_unlock(&vb->lock);
+	}
+	return 0;
+error:
+	mutex_unlock(&vb->lock);
+	return error;
+}
+
+The I2C subsystem requires the master_xfer callback to return the number of
+successfully processed messages on success. Will returning 0 cause the I2C =
+core
+and client drivers to erroneously believe the transfer failed?
+
+[Severity: High]
+This isn't a bug introduced by this patch, but can the ignored return value=
+ of
+i2c_add_adapter() lead to a kernel crash on module removal?
+
+drivers/i2c/busses/i2c-viperboard.c:vprbrd_i2c_probe() {
+    ...
+	/* attach to i2c layer */
+	i2c_add_adapter(&vb_i2c->i2c);
+
+	platform_set_drvdata(pdev, vb_i2c);
+
+	return 0;
+}
+
+If registration fails, the driver probe still succeeds. Upon device removal,
+vprbrd_i2c_remove() will unconditionally call i2c_del_adapter(). Does this
+attempt to unregister a device that was never fully added, leading to list
+corruption or a crash?
+
+[Severity: High]
+This isn't a bug introduced by this patch, but is there a buffer overwrite
+during large I2C reads that causes corrupted USB command headers to be sent?
+
+drivers/i2c/busses/i2c-viperboard.c:vprbrd_i2c_read() {
+    ...
+		/* second read transfer if neccessary */
+		if (len2 > 0) {
+			ret =3D vprbrd_i2c_receive(vb->usb_dev, rmsg, len2);
+			if (ret < 0)
+				return ret;
+			/* copy the received data */
+			memcpy(msg->buf + start + 512, rmsg, len2);
+		}
+    ...
+}
+
+The rmsg buffer is used to send the read command header and receive the pay=
+load.
+The first USB IN transfer overwrites the command header with incoming I2C d=
+ata.
+For reads requiring a second chunk, is the overwritten garbage data sent as=
+ a
+command header to the device?
+
+[Severity: High]
+This isn't a bug introduced by this patch, but does the DMA buffer share a
+cacheline with a mutex, risking memory corruption on non-coherent architect=
+ures?
+
+include/linux/mfd/viperboard.h:struct vprbrd {
+    ...
+	struct usb_device *usb_dev; /* the usb device for this device */
+	struct mutex lock;
+	u8 buf[sizeof(struct vprbrd_i2c_write_msg)];
+	struct platform_device pdev;
+};
+
+The buf array is mapped for USB DMA and placed immediately after the lock m=
+utex.
+If the mutex is accessed while DMA is active, will the cacheline be dirtied=
+ by
+the CPU and overwrite the DMA data, or conversely, will DMA cache invalidat=
+ion
+destroy the CPU's modifications to the mutex waitqueue?
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260715145243.4618=
+27-2-avermoal@gmail.com?part=3D1
