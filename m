@@ -1,97 +1,61 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E836330D35;
-	Thu, 16 Jul 2026 14:00:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8AC4F430CDF;
+	Thu, 16 Jul 2026 14:46:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784210432; cv=none; b=YYSfroLg+6ZTnWBmPcTomaXerYH64GFcoIr5+8d20EAOU53FxghueZgXrpmnSCo7XXyvo7Vl8kmiobJ7tm5fUwlZfeqQrse6BnoyYY5iYlvr0xxUcqaFff+RABy1wPFXIIMcmGQGXd0ZooPQgnJEMchQxD6Ghq+T647zIo3qfOk=
+	t=1784213185; cv=none; b=f+MO51FqB+JGgyrvpLI8igLe/J61bh8qOikPiCulOjHK0K7n7VO3xchk4f93WipjP6feZtmdoPyNgN2gstkpCzj4FoFfLupMvR0ElJz/BnSCdLV0BzFupnqHah2GbJAiFSpGjo7LlEFJM4n/lk9PQf5/+CpImy8KDqbSm5O//2g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784210432; c=relaxed/simple;
-	bh=KuRYcXNJoaLMUabvdbYfGmupsU9ecbKcZH6ee+inj4o=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=n4OIf/TYGLsRWHsIxahGf5BZV24qL2w1MXHI9dtFWm3BxQ3zvxe/zN5GtiAUIrbA0LiICXNem0k/XxCo6nxrc46VqeiTB23fnDn9NS5OMHXzPh29EXh1iqlsNvWQu/84miAz88LQyMHGMqetY7rYcx639VEKRSpP+fIDVkfU7mM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GBMXDQLP; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784213185; c=relaxed/simple;
+	bh=CEPF0co2gDoU/qOeK2eYWBpdRWHtmjYaDQgSjflsQTQ=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=ZYXd6YFYy84py7HBvjqfo2fhLckzP/uk6w5ayUQiLfIijeJKtiCdCd1IJhCrkxN4f+6R/sIylSXIzVI786TCcndO2NFEUEQQxVl/p7pYvDhIHbFg5PycEWayJ/qPN4XE7xxSoSw4hnnpcM2TRBTK9tngfIMVSBVqrRNF8z4iJUU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=m5rhOfrA; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GBMXDQLP"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C79A21F00A3A;
-	Thu, 16 Jul 2026 14:00:29 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="m5rhOfrA"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC6471F00A3D;
+	Thu, 16 Jul 2026 14:46:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784210431;
-	bh=cVOwgk0OZrLKgnZBHlbFxaHq6jr/CSfUmUI6y50DrXM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=GBMXDQLPjLmrIPJzC+tyeMx0qnyiaFwnw/z46hL6ydbDQLIKuVcAzpLvansOXmC7N
-	 GycTU4Za2RhYHP89fzMgMzs8a4WCqpGG6wg1Jk37Bg39vxmGfYff8Q7J4c7haStwLJ
-	 7A6qGLX56soykwo97QVuNYwTlRcK3+FrVhVzbleEyNV+ms1gSSkglZS1FJJeDXKApy
-	 yCBuHwMt7AGV1iFu0XFJLNIC/IpdWvFHPyLtZHhpzALdgalRPmwdux/6TKOwBT2YfU
-	 ngIU6Hu13e4qdlW4ZI15wuSRuPqc3g1HK3o79kTje/JAqKBSBbVRoonn5DtYM+LC5s
-	 bg8cwQ9F9IXCg==
-Date: Thu, 16 Jul 2026 15:00:27 +0100
+	s=k20260515; t=1784213176;
+	bh=PIoDrNA5PUO7Z/o7Q3RuYuHeSW9+gp5w+RdpsnYd008=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=m5rhOfrAsnr2ow6C/3bGm+COWQEZ3UbTWmJJOFG+smYGMeWAuXVVXkAGVzJgfPORp
+	 TFhqVegrpkV0RqEuIkbGIj24V7oTLVwoqlVAv6RHds9w/nnYUbVMCX1lnSXCC/WWJ7
+	 mrYYYqr1HVFGmYJstP13XtCLtIM9O8/Gh3iGrzhCC/plM7WyGp9W7VF75ifZy3Hy+a
+	 N3ShaRg5w2+IrE2B4CgxepeI2UcY/z3+tGKG3cY/MqKkW5w+QNPgfQl0VU0cOuvnMo
+	 8Dsb4B0bP7nFO0pWBoSyqoapZXFwcuK33nikgMejrAbDjb9YgKYOJa5ios8SivG3L8
+	 w3KhraK+1fhWA==
 From: Lee Jones <lee@kernel.org>
-To: Arnd Bergmann <arnd@arndb.de>
-Cc: Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-	Bartosz Golaszewski <brgl@kernel.org>, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 1/2] mfd: ucb1x00: Register software node for GPIO
- controller
-Message-ID: <20260716140027.GK1260374@google.com>
-References: <20260706-ucb1x00-assabet-swnode-v2-0-e6271ea3d3dc@gmail.com>
- <20260706-ucb1x00-assabet-swnode-v2-1-e6271ea3d3dc@gmail.com>
- <48adc770-9d55-47a7-a779-cad73b587b83@app.fastmail.com>
- <20260716124052.GH1260374@google.com>
- <6dbf2f49-c1b9-448a-909c-7675ffdc928f@app.fastmail.com>
+To: lee@kernel.org, Charles Keepax <ckeepax@opensource.cirrus.com>
+Cc: linux-sound@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ patches@opensource.cirrus.com, mfd@lists.linux.dev
+In-Reply-To: <20260708100914.1298080-1-ckeepax@opensource.cirrus.com>
+References: <20260708100914.1298080-1-ckeepax@opensource.cirrus.com>
+Subject: Re: (subset) [PATCH] mfd: cs42l43: Remove redundant NULL checks on
+ SoundWire
+Message-Id: <178421317465.1402976.13294596875099339460.b4-ty@b4>
+Date: Thu, 16 Jul 2026 15:46:14 +0100
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <6dbf2f49-c1b9-448a-909c-7675ffdc928f@app.fastmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
 
-On Thu, 16 Jul 2026, Arnd Bergmann wrote:
+On Wed, 08 Jul 2026 11:09:14 +0100, Charles Keepax wrote:
+> The SoundWire core helpers now check for NULL on the SoundWire
+> peripheral so there is no need to do so locally, remove the
+> duplicate checks.
 
-> On Thu, Jul 16, 2026, at 14:40, Lee Jones wrote:
-> > On Tue, 07 Jul 2026, Arnd Bergmann wrote:
-> >
-> >> On Tue, Jul 7, 2026, at 07:01, Dmitry Torokhov wrote:
-> >> > Define a static software node for the UCB1x00 GPIO controller and attach
-> >> > it to the core MFD device in ucb1x00_probe(). This node will also be
-> >> > used by the created GPIO chip.
-> >> >
-> >> > This allows machine subdrivers (such as Assabet evaluation board
-> >> > support) to reference the UCB1x00 GPIO controller in property entries
-> >> > when converting legacy platform data to software nodes, resolving pin
-> >> > bindings directly via the attached firmware node without relying on
-> >> > name matching.
-> >> >
-> >> > Assisted-by: Antigravity:gemini-3.5-flash
-> >> > Signed-off-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-> >> 
-> >> Acked-by: Arnd Bergmann <arnd@arndb.de>
-> >> 
-> >> Assabet should be going away soon, so it really doesn't
-> >> matter much.
-> 
-> >> > +EXPORT_SYMBOL_GPL(ucb1x00_gpiochip_node);
-> >> 
-> >> It does feel a bit counterproductive if you have to add more
-> >> exported symbols.
->  
-> >> No need for the seperate declaration of the struct tag,
-> >> you only need this if the first user is in the argument
-> >> list of a function, but not for a global variable.
-> >
-> > Are you planning on fixing these review comments, Dmitry?
-> 
-> Just to clarify, I was not asking for anything to be changed
-> in this patch, just observing. I'm fine with this version
-> getting applied as-is. As I said, the file is probably
-> going away soon, so let's just make sure it's not getting
-> in the way until then.
+Applied, thanks!
 
-The 2 comments above sure look like review comments.
+[1/1] mfd: cs42l43: Remove redundant NULL checks on SoundWire
+      commit: aa6e7336a9cae7a4c90c74e302fd38f7da93ffc3
 
--- 
-Lee Jones
+--
+Lee Jones [李琼斯]
+
