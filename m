@@ -1,38 +1,43 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35B52330B2D;
-	Thu, 16 Jul 2026 12:24:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF94F414A0F;
+	Thu, 16 Jul 2026 12:40:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784204655; cv=none; b=CPaSs8jUDWAxz7C5xvx2Im0zfA1pxBe46yjHSAkpkMChJJcC5VogfRchbjcXkBl4oVDhtRSyDoKEcTaVZjIDI3BE04fIyywiY7hack5D5plyZlXZGPfliYv4V4JFWeZdAU1AleQE3JtOHwQEAknY4z1rrdpbuvcetgp6QRMUGAY=
+	t=1784205657; cv=none; b=P7/h5w8miZqKWRs8vNVq8JINTSbX9r8QZIr2NhyAZauL/FycogKp3nDs1qkWFt+3V0/NU951UvI6xxu+F8qJXc8CzRM+IgGRxLCwXns+5hhwiI2DB1NKNXUYXwrp3h8PNa8hgcZ8VA9NVfHV+3njG0MyzZM48eSzMzqNwKgljIc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784204655; c=relaxed/simple;
-	bh=4QdE5MJ3dKWMJnXVWguBaKFyJ6UNjkWHahjOLLra/A4=;
+	s=arc-20240116; t=1784205657; c=relaxed/simple;
+	bh=OYZLvJs0n6wg/Kc0wlWfBbv4Eb5wbOIoz+ru3Whoymc=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=A/Vffx23rcChYyOmxeKYvg8G7wWYZ7oLXvC+T0MgUAsVU8pg4lxuO48qiijxpcS6/ldFYOPwKXF1NEYvRz7BYc4ugRZtWAJJQceB0CdgprZl5EdTUJKNQvlqCNFj0F2cR3LyerqGVWAgs1W13RhvE0FH3b6gurE/aKK3KEuMMD4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HoYHvv9u; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=JailxPJr6qf4Qd/xLeeaxAr5B7Z0x6q/lJIn3C1CbbyG/WV4c7pbFN2UGGp0ngVbs/loR5hXGvoHWgsjE9Mv9bqmm1xCkZFVs89ZpIxuySVFL+eP8MrUB6VWQM1dMU8XrYooCiUUYEnIoet89CHhCsUuHS5flxlXarV+Fvm4Q+k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=F4T2vNdH; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HoYHvv9u"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EC81D1F000E9;
-	Thu, 16 Jul 2026 12:24:12 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="F4T2vNdH"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 661131F00A3A;
+	Thu, 16 Jul 2026 12:40:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784204653;
-	bh=PbSeomxFR9wJbrGm5B/wd1YzWmOMC3gsFPeiu91mm8Q=;
+	s=k20260515; t=1784205656;
+	bh=88Pw/52c6xXP3vps3LZ3oRxuj2Nb9tLMwYYxzxQCzh0=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=HoYHvv9u8kYzlaamNYAxBRsSxnqaAG3IO/bpoHqbUV6mJtKcx4cy6taLl2WlwCrMI
-	 AmuQrpKszyVNT/7cVvFktrcd5FBerqv+H0fuSAzBTy42xsweBaxvLatyPCKzeR03Rm
-	 FU7SIOkHyeDqA7EJ70TL4LLwFMD78rs+3w0fNEHUoUs0H5+gH0HSrgVlw6vdeUDlrh
-	 Jgr1hREGLJfJlMSMNbhG47EOhLCZezaUoY4Q5FXE14LhsQ6aje9Cd8MzWL4A9+EFjm
-	 8cRCdsjomxYyvl0E+PZSX3QQ1QHiVZVPXUHsd3HDNoYvnZvFBI/nb4MD2LPlhjJsHe
-	 ZfD+0vT2VuwBA==
-Date: Thu, 16 Jul 2026 13:24:10 +0100
+	b=F4T2vNdHo05V3OCMkQQI6xLW/Nzq9mZvK8vzKAUjm0dqHf+3qyQahqIl7Wi6/h2d0
+	 K8kqEH7wIqZ1yoNCoVn0bOKXUoOHWeYtQrz6u/J++nE56wBxPmh4cuqjZv8u80oPu6
+	 tiigZXSO5vJVA5qFNmXioysUysMLmTpDpeEKLGG/Bu3Lo9y1GgK9I5CP2oZaBJ9b2T
+	 Nw/0WcsJDD65Nk4jc6svS9f1whr9cH/z7cOSWz74U4NOcsWl5koAPotcEwVT7dTWg8
+	 feHZLEFjHdq0ApxZT+jqHuWlKb6ex+Q5mSVr0JxtQ+8nd1SvQZ8H37wOhDkoFVwP+0
+	 TzyzDqI8IotxQ==
+Date: Thu, 16 Jul 2026 13:40:52 +0100
 From: Lee Jones <lee@kernel.org>
-To: Pengpeng Hou <pengpeng@iscas.ac.cn>
-Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] mfd: rave-sp: validate received frame lengths
-Message-ID: <20260716122410.GD1260374@google.com>
-References: <20260706092337.78754-1-pengpeng@iscas.ac.cn>
+To: Arnd Bergmann <arnd@arndb.de>
+Cc: Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+	Bartosz Golaszewski <brgl@kernel.org>, mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 1/2] mfd: ucb1x00: Register software node for GPIO
+ controller
+Message-ID: <20260716124052.GH1260374@google.com>
+References: <20260706-ucb1x00-assabet-swnode-v2-0-e6271ea3d3dc@gmail.com>
+ <20260706-ucb1x00-assabet-swnode-v2-1-e6271ea3d3dc@gmail.com>
+ <48adc770-9d55-47a7-a779-cad73b587b83@app.fastmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -41,83 +46,52 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260706092337.78754-1-pengpeng@iscas.ac.cn>
+In-Reply-To: <48adc770-9d55-47a7-a779-cad73b587b83@app.fastmail.com>
 
-On Mon, 06 Jul 2026, Pengpeng Hou wrote:
+On Tue, 07 Jul 2026, Arnd Bergmann wrote:
 
-> The RAVE SP receive path derives event, reply and checksum
-> fields from variable-length frames.
+> On Tue, Jul 7, 2026, at 07:01, Dmitry Torokhov wrote:
+> > Define a static software node for the UCB1x00 GPIO controller and attach
+> > it to the core MFD device in ucb1x00_probe(). This node will also be
+> > used by the created GPIO chip.
+> >
+> > This allows machine subdrivers (such as Assabet evaluation board
+> > support) to reference the UCB1x00 GPIO controller in property entries
+> > when converting legacy platform data to software nodes, resolving pin
+> > bindings directly via the attached firmware node without relying on
+> > name matching.
+> >
+> > Assisted-by: Antigravity:gemini-3.5-flash
+> > Signed-off-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
 > 
-> Validate event and reply minimum lengths before reading their fixed
-> fields, and derive the checksum payload pointer only after checking the
-> frame length.
+> Acked-by: Arnd Bergmann <arnd@arndb.de>
 > 
-> Signed-off-by: Pengpeng Hou <pengpeng@iscas.ac.cn>
-> ---
->  drivers/mfd/rave-sp.c | 28 +++++++++++++++++++++-------
->  1 file changed, 21 insertions(+), 7 deletions(-)
+> Assabet should be going away soon, so it really doesn't
+> matter much.
 > 
-> diff --git a/drivers/mfd/rave-sp.c b/drivers/mfd/rave-sp.c
-> index c1b78d127a26..0057fbfa1abf 100644
-> --- a/drivers/mfd/rave-sp.c
-> +++ b/drivers/mfd/rave-sp.c
-> @@ -388,10 +388,15 @@ EXPORT_SYMBOL_GPL(rave_sp_exec);
->  static void rave_sp_receive_event(struct rave_sp *sp,
->  				  const unsigned char *data, size_t length)
->  {
-> -	u8 cmd[] = {
-> -		[0] = rave_sp_reply_code(data[0]),
-> -		[1] = data[1],
-> -	};
-> +	u8 cmd[2];
-> +
-> +	if (length < 3) {
-
-What's in data[2]?
-
-> +		dev_warn(&sp->serdev->dev, "Dropping short event\n");
-> +		return;
-> +	}
-> +
-> +	cmd[0] = rave_sp_reply_code(data[0]);
-> +	cmd[1] = data[1];
-
-Come to think of it, what's in 0 and 1 as well?  Defines?
-
->  	rave_sp_write(sp, cmd, sizeof(cmd));
->  
-> @@ -405,8 +410,14 @@ static void rave_sp_receive_reply(struct rave_sp *sp,
->  {
->  	struct device *dev = &sp->serdev->dev;
->  	struct rave_sp_reply *reply;
-> -	const  size_t payload_length = length - 2;
-> +	size_t payload_length;
->  
-> +	if (length < 2) {
-> +		dev_warn(dev, "Dropping short reply\n");
-> +		return;
-> +	}
-> +
-> +	payload_length = length - 2;
->  	mutex_lock(&sp->reply_lock);
->  	reply = sp->reply;
->  
-> @@ -439,10 +450,10 @@ static void rave_sp_receive_frame(struct rave_sp *sp,
->  				  size_t length)
->  {
->  	const size_t checksum_length = sp->variant->checksum->length;
-> -	const size_t payload_length  = length - checksum_length;
-> -	const u8 *crc_reported       = &data[payload_length];
->  	struct device *dev           = &sp->serdev->dev;
->  	u8 crc_calculated[RAVE_SP_CHECKSUM_SIZE];
-> +	size_t payload_length;
-> +	const u8 *crc_reported;
->  
->  	if (unlikely(checksum_length > sizeof(crc_calculated))) {
->  		dev_warn(dev, "Checksum too long, dropping\n");
-> -- 
-> 2.43.0
+> > +const struct software_node ucb1x00_gpiochip_node = {
+> > +	.name = "ucb1x00-gpio",
+> > +};
+> > +EXPORT_SYMBOL_GPL(ucb1x00_gpiochip_node);
 > 
+> It does feel a bit counterproductive if you have to add more
+> exported symbols.
+> 
+> > index ede237384723..214c71a12e84 100644
+> > --- a/include/linux/mfd/ucb1x00.h
+> > +++ b/include/linux/mfd/ucb1x00.h
+> > @@ -103,6 +103,9 @@
+> >  #define UCB_MODE_DYN_VFLAG_ENA	(1 << 12)
+> >  #define UCB_MODE_AUD_OFF_CAN	(1 << 13)
+> > 
+> > +struct software_node;
+> > +extern const struct software_node ucb1x00_gpiochip_node;
+> 
+> No need for the seperate declaration of the struct tag,
+> you only need this if the first user is in the argument
+> list of a function, but not for a global variable.
+
+Are you planning on fixing these review comments, Dmitry?
 
 -- 
 Lee Jones
