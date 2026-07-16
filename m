@@ -1,63 +1,63 @@
 Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FF4B43E9FE
-	for <mfd@lists.linux.dev>; Thu, 16 Jul 2026 17:18:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C9F643E070
+	for <mfd@lists.linux.dev>; Thu, 16 Jul 2026 17:18:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.175
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784222287; cv=none; b=rqA4uFJ/aw2aDX0lNyXesm54unT5X8HjqM/dJCnR2/5GQTWov777R4JUSYgnKSrbXdqmMDd6ekFCeVA+QziC6HbgxMPdQv6JOwD4bVzl1n8pTP30eokxVqyPZFs2foGLPgGXVnwFU766jb08B7+vdD57fT7j93+5WYwa+PO30XQ=
+	t=1784222288; cv=none; b=B5zo7Jx3MxMmW/7UY1uc2TwubPNbJxs3BXZB6Pswo7ccPFT9GrSiqDYzFeRiVfZGCNGv2d8PYaHVkx6hcvmgEjD1i1tKw94kK7j0LPS6o/Fj6nf4FFVQ6lm46l1v0dPcYX5kingiJnEdMBRPM3TVFfJQEzFUBCSDMTDHyQqoEUc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784222287; c=relaxed/simple;
-	bh=Y8Yhg9LDZgOOn4IYBYFpDiXxdAtcDCdbUesWkE9/tns=;
+	s=arc-20240116; t=1784222288; c=relaxed/simple;
+	bh=iLUDkY4SFCq9gFI8/CTxjIMroozhOs4ZSJ3zk3UDbiw=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=ukVbnjj0/V78xApwYjM2A13B1WQ36culnmIIRXMyW7NN4GUCtb4Ryxr6cFnYDi9PIxNKsvBKVIxcR/w/n8f0+VJtHGsaaaGHemt4XcS29BQdHtN+ZZGkm7SU+cd00f1wOGzFFtJkrgAzNoHHPebznrU95CSuR809lvGsrkIuDXM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YNwFW5xk; arc=none smtp.client-ip=209.85.214.175
+	 MIME-Version; b=dSXGaD+eNXLLYJ7/IzAPzTwvtRYsZY/FFdKAFi0VN4yeTawtAjLtPeQZvOZXZTMkMptLIuw0v6LXkNalr7LTL2OEfOksmTIk7VcKOaG+mODFNz7iM/wqau5N1oiWcz1t/OW+5X6EHtyvaRRa1FCOZ4EBi58Mgq43Yzuv6sq1s84=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=DNlPlPxd; arc=none smtp.client-ip=209.85.214.175
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YNwFW5xk"
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2cac59f8b64so80970275ad.0
-        for <mfd@lists.linux.dev>; Thu, 16 Jul 2026 10:17:59 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="DNlPlPxd"
+Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2caf228a910so54075035ad.2
+        for <mfd@lists.linux.dev>; Thu, 16 Jul 2026 10:18:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784222277; x=1784827077; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1784222281; x=1784827081; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=x+VQUfT4E2jpzaVYfn1xTQo+PWwjs/hsb3t7kl1meuo=;
-        b=YNwFW5xk0j9DQN9cfVmangkzwa2gz4RxsaYylJ6ft2fKBbPBzsg3fTvlo+XhArJYug
-         UpavfFSWHuE2gevH0sG0aoT3iAAF3EXwIxwx8EBmS12HvBDPKjegwZb4hp6AAfKDW/ui
-         qhkv7cNk6ROd+eAaHjASEB12D08ICL/g+iiHJKnqwomSuX6LHh6/53+yo0cdHiceMQXT
-         yXzw7KnmIFp9pFJmKimgaxVl4YGdVU09yMDxa2fMtHIdPwxu/AGByW6e+STn7UEB5DAK
-         z7Xl+HqjsKWu9gVb2MxeuaLhn4abh6q2q+QpNCpnYMUFfXnFVwCS4/ZORsx7fP7DWzq2
-         A5bg==
+        bh=HFJ+p81BjdB00DrwvkVTq99s5PhB9C18F6cOkBhmFnM=;
+        b=DNlPlPxd7dRsTxWAPOnJFNbTZ1+V+ynfiOQJhf4W0jnm46Y3JS7Ke4Oxg9T959X+qw
+         W6wivDp6SrxGC2QoESPdnLula7qwDql38v3NPJi611iUEatcjPcSqJ0goTtjTxbT7h60
+         6yQk/CgHQEfVitW1vnBXnYYELvnXt1K+N90Z6oSLc1XnoEPIbqu5wRqTSVkIkGJXZG78
+         G30GwjIQ0s5wkUKxI8bu6L8OaQ0C19ECgf/xbTaXtX4/SHqIHUyyanQZtcsSramq4+vD
+         cOquc6iKha/PeY0eJcB+GL+lORfMrIZCntC+dkN7tG8O87V93z+kWBqNUcwG8qOiU2Kw
+         QIrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784222277; x=1784827077;
+        d=1e100.net; s=20251104; t=1784222281; x=1784827081;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=x+VQUfT4E2jpzaVYfn1xTQo+PWwjs/hsb3t7kl1meuo=;
-        b=pi331f/golK0uPXFpVGD1RNlm7EfK1CuxoYnjxGoiJGQ9goNP/If0rX8w4i1syv2Lz
-         8K5+ky5E2XWhs0jmNN4oiZiB3T+YDbe+m/SXiuwfPuJnLdWTiPn1BPhfgaThL9GHoGeD
-         9iBV1V6ZeTjKvx38jI8+WfyApkj+8NpxU3v/xBPXYmqtRQ/057ydZQrvk/ojiC67e7I+
-         TrPmGw2wKWg59S6U95yf1JdY/TsqimrUvsd+6VoLnPYOz6iUpSKsk3GigGIgK+eAm2br
-         v+fAVzpOv6wcEWYLVfjZveiMRO4DJ2H09kxOVMecf/6Syeyoqcgt8hlDya44NpZkDqWm
-         ADsA==
-X-Forwarded-Encrypted: i=1; AHgh+Rpgctr0cUjaj8RoV/BFJMJPxEiSGBujMZAk2J4Z2auDz5+kCL8jBFQVi0dYXfXiglGxuiI=@lists.linux.dev
-X-Gm-Message-State: AOJu0YyU1oj2Jgnot6qxZ/xCNClEVLPqZ0yuShkvSykWW7dlc+EMEP6f
-	FSqTJUsEdQWZgWvtQ82vVGMs6P31oyGdbotKyGvQi5D+jLDh+xkL9yTB
-X-Gm-Gg: AfdE7clS8mP6R43XzP+fWOG882gOeF6Af+S7gm2FeuHqjnH1b9EGN4pQv4rflBsmDBP
-	r8nvCVi9iAhUppGcZEEbWbIwWGcC6atZyNDKR8NBhBl0F7lYZM+vIuhcPIh1nfaZdtRs5PRrYUf
-	HxcsVy2XEciImlWlH1F4H44+gmdlEuzOiGKDq6ETpZehd1zmKAXA2stsyj7tHtbxcd/vX33SsPj
-	IprwMYuoGHL9MLVrfygmsaOEXhgFSQbAQfFpiEzxVuWq1GpEQGIqU+fBC436vVSS326qIbsqN9m
-	91VldQeIwsCVAB9WgRa0QEru5i90Za+0NTNuawo6VCAaXlpDF27Tbs9b4dmlJCQjUomcJWRKLW4
-	KQuViXhao7aqSXopPPLPL2r1usMBNA0hrGQgxLaMW5PSn/zqxrZH8n0ThrIAOdkbEW3FovP2g+j
-	plqh70DzzNUXySs8pieuZx+KmzTT+9R2fNXw==
-X-Received: by 2002:a17:902:da81:b0:2ca:e19c:986 with SMTP id d9443c01a7336-2cf03c7c756mr75109205ad.1.1784222276928;
-        Thu, 16 Jul 2026 10:17:56 -0700 (PDT)
+        bh=HFJ+p81BjdB00DrwvkVTq99s5PhB9C18F6cOkBhmFnM=;
+        b=DXBB4AaaTv2Iqb1E2B4HhM78WOr/bQ3tcD1l9b2wCDBTkZJ9bRL2mJVUgUjo3qQ4Bb
+         5k9yJF5MnIfAE8VddXGEAkZshZnWPBjn3XuRNJk2ciMD+0F1SE/1OLw6SFbS0s5xClDF
+         HEgPWKVQWWXy0ZhK8EeeOr/hFpmakX7xE2Tx+qEVyhSVvAWNqHVA4+jW7aZPjohM+bmJ
+         advVFBhHMQjmiB4dX68XEAiEJkNjuJhyyYnR0lRoUv+LkHXEMrJ8+dERw3ug/sUubgYS
+         FIqmDV9XBuAUW7XATvlLe9Pp3SYI4m4qzObLKKVCIpVcWhNhzIbEFomA09eGWW5DuA+5
+         UPpQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rquvev7UUbi4+G/Yq4n3wW3kCUuay3fyvq3n4U3H7CFHVcnCULXeZDM3KHZIn7o8+Qd6Vw=@lists.linux.dev
+X-Gm-Message-State: AOJu0Yx5mI3eysXOz7SdTFVZbnRnPMxM0mKjb4KL64O6r++xm5LVSpvu
+	02fbqoCx24rlTY1X7I1CDnDJSjn7+6qbGu1BDrVGsCGHcoI6//efqbWZ
+X-Gm-Gg: AfdE7clWsaVUw3v3E097u3mXUwR/XibDeHRIlUGpJ42BhgWHhrXD+xH8RT0hnE89U4V
+	f18XfArb1lRUgLLN00KbJiTzKFqX5EXLKLLONpbsrXKhSZ2gmfWWfQmycnCa3EJOfhro+Z2yXR1
+	mNw3J7QgF3XNLz3KQnL7wSuejMxfrpeAJiavfEjgAG/ElZzqGzqte/mchKa4JQd3XgaKSLcaSHM
+	YzU0ryf1qnPGovYXjPLiDAzygQ4Qr+T9gvmuJqSeWRR1rwrBVElD0lvIt6HBAwWj0vwHuFOmnzT
+	LvNs6H0Iz6oKcRWGaiLhQBIHBidRBgH1KN95lPYWe8VFkDcJG/TuJqqPZ+RcIuW0YYXYC9vF7Qi
+	Jgxcn3nGKWTEDnGFdJxrAr1N2AbU0hIDe09T2DXpvPCRlQIyr1JRvagI5varlW6EDJ7ADEUx/B+
+	CX0Q7R/bSRGDW32MqM9iG1hPPry6I9AGrQNQ==
+X-Received: by 2002:a17:903:19ec:b0:2c2:be43:39bc with SMTP id d9443c01a7336-2cf03cef84dmr84481775ad.22.1784222280297;
+        Thu, 16 Jul 2026 10:18:00 -0700 (PDT)
 Received: from buffalo-ssd (M014013071096.v4.enabler.ne.jp. [14.13.71.96])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf1055de44sm22917255ad.51.2026.07.16.10.17.53
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf1055de44sm22917255ad.51.2026.07.16.10.17.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Jul 2026 10:17:56 -0700 (PDT)
+        Thu, 16 Jul 2026 10:17:59 -0700 (PDT)
 From: Akari Tsuyukusa <akkun11.open@gmail.com>
 To: Sen Chu <sen.chu@mediatek.com>,
 	Sean Wang <sean.wang@mediatek.com>,
@@ -77,9 +77,9 @@ Cc: linux-pm@vger.kernel.org (open list:MEDIATEK BOARD LEVEL SHUTDOWN DRIVERS),
 	linux-kernel@vger.kernel.org (open list:ARM/Mediatek SoC support),
 	linux-arm-kernel@lists.infradead.org (moderated list:ARM/Mediatek SoC support),
 	linux-mediatek@lists.infradead.org (moderated list:ARM/Mediatek SoC support)
-Subject: [PATCH 2/3] dt-bindings: mfd: mediatek: mt6397: add MT6320 compatible string
-Date: Fri, 17 Jul 2026 02:17:32 +0900
-Message-ID: <20260716171733.300885-3-akkun11.open@gmail.com>
+Subject: [PATCH 3/3] soc: mediatek: pwrap: add MT6589 PWARP and MT6320 PMIC support
+Date: Fri, 17 Jul 2026 02:17:33 +0900
+Message-ID: <20260716171733.300885-4-akkun11.open@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260716171733.300885-1-akkun11.open@gmail.com>
 References: <20260716171733.300885-1-akkun11.open@gmail.com>
@@ -91,25 +91,454 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add compatible string for the MT6320 PMIC.
+Add support for MediaTek MT6589 PWRAP and MT6320 PMIC which are used
+together.
+
+Since the PWRAP Bridge hardware on MT6589 is identical to the one on
+MT8135, refactor the existing register definitions:
+- Rename the MT8135-specific "PWRAP_MT8135_BRIDGE_" prefix to a generic
+  "PWRAP_BRIDGE_" prefix to reflect that they are shared across SoCs.
+- Add the full set of PWRAP Bridge registers to match the hardware
+  specification, rather than defining only a subset of them.
 
 Signed-off-by: Akari Tsuyukusa <akkun11.open@gmail.com>
 ---
- Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/soc/mediatek/mtk-pmic-wrap.c | 292 +++++++++++++++++++++------
+ 1 file changed, 235 insertions(+), 57 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml b/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml
-index 3cbc0dc12c31..f2823338cccd 100644
---- a/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml
-+++ b/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml
-@@ -34,6 +34,7 @@ properties:
-   compatible:
-     oneOf:
-       - enum:
-+          - mediatek,mt6320
-           - mediatek,mt6323
-           - mediatek,mt6331 # "mediatek,mt6331" for PMIC MT6331 and MT6332.
-           - mediatek,mt6328
+diff --git a/drivers/soc/mediatek/mtk-pmic-wrap.c b/drivers/soc/mediatek/mtk-pmic-wrap.c
+index 0bcd85826375..3a5b007d60f5 100644
+--- a/drivers/soc/mediatek/mtk-pmic-wrap.c
++++ b/drivers/soc/mediatek/mtk-pmic-wrap.c
+@@ -17,15 +17,31 @@
+ #define PWRAP_POLL_DELAY_US	10
+ #define PWRAP_POLL_TIMEOUT_US	10000
+ 
+-#define PWRAP_MT8135_BRIDGE_IORD_ARB_EN		0x4
+-#define PWRAP_MT8135_BRIDGE_WACS3_EN		0x10
+-#define PWRAP_MT8135_BRIDGE_INIT_DONE3		0x14
+-#define PWRAP_MT8135_BRIDGE_WACS4_EN		0x24
+-#define PWRAP_MT8135_BRIDGE_INIT_DONE4		0x28
+-#define PWRAP_MT8135_BRIDGE_INT_EN		0x38
+-#define PWRAP_MT8135_BRIDGE_TIMER_EN		0x48
+-#define PWRAP_MT8135_BRIDGE_WDT_UNIT		0x50
+-#define PWRAP_MT8135_BRIDGE_WDT_SRC_EN		0x54
++/* MT6589 and MT8135 specific PWARP Bridge registers */
++#define PWRAP_BRIDGE_IARB_INIT		0x0
++#define PWRAP_BRIDGE_IORD_ARB_EN	0x4
++#define PWRAP_BRIDGE_IARB_STA0		0x8
++#define PWRAP_BRIDGE_IARB_STA1		0xc
++#define PWRAP_BRIDGE_WACS3_EN		0x10
++#define PWRAP_BRIDGE_INIT_DONE3		0x14
++#define PWRAP_BRIDGE_WACS3_CMD		0x18
++#define PWRAP_BRIDGE_WACS3_RDATA	0x1c
++#define PWRAP_BRIDGE_WACS3_VLDCLR	0x20
++#define PWRAP_BRIDGE_WACS4_EN		0x24
++#define PWRAP_BRIDGE_INIT_DONE4		0x28
++#define PWRAP_BRIDGE_WACS4_CMD		0x2c
++#define PWRAP_BRIDGE_WACS4_RDATA	0x30
++#define PWRAP_BRIDGE_WACS4_VLDCLR	0x34
++#define PWRAP_BRIDGE_INT_EN		0x38
++#define PWRAP_BRIDGE_INT_FLG_RAW	0x3c
++#define PWRAP_BRIDGE_INT_FLG		0x40
++#define PWRAP_BRIDGE_INT_CLR		0x44
++#define PWRAP_BRIDGE_TIMER_EN		0x48
++#define PWRAP_BRIDGE_TIMER_STA		0x4c
++#define PWRAP_BRIDGE_WDT_UNIT		0x50
++#define PWRAP_BRIDGE_WDT_SRC_EN		0x54
++#define PWRAP_BRIDGE_WDT_FLG		0x58
++#define PWRAP_BRIDGE_DEBUG_INT_SEL	0x5c
+ 
+ /* macro for wrapper status */
+ #define PWRAP_GET_WACS_RDATA(x)		(((x) >> 0) & 0x0000ffff)
+@@ -100,6 +116,24 @@ enum dew_regs {
+ 	PWRAP_DEW_CIPHER_MODE,
+ 	PWRAP_DEW_CIPHER_SWRST,
+ 
++	/* MT6320 only regs */
++	PWRAP_DEW_CIPHER_IV0,
++	PWRAP_DEW_CIPHER_IV1,
++	PWRAP_DEW_CIPHER_IV2,
++	PWRAP_DEW_CIPHER_IV3,
++	PWRAP_DEW_CIPHER_IV4,
++	PWRAP_DEW_CIPHER_IV5,
++
++	/* MT6320 and MT6397 only regs */
++	PWRAP_DEW_EVENT_OUT_EN,
++	PWRAP_DEW_EVENT_SRC_EN,
++	PWRAP_DEW_EVENT_SRC,
++	PWRAP_DEW_EVENT_FLAG,
++	PWRAP_DEW_MON_FLAG_SEL,
++	PWRAP_DEW_EVENT_TEST,
++	PWRAP_DEW_CIPHER_LOAD,
++	PWRAP_DEW_CIPHER_START,
++
+ 	/* MT6323 only regs */
+ 	PWRAP_DEW_CIPHER_EN,
+ 	PWRAP_DEW_RDDMY_NO,
+@@ -142,16 +176,34 @@ enum dew_regs {
+ 	PWRAP_DEW_RG_WDATA_MASK,
+ 	PWRAP_DEW_RG_SPI_RECORD_CLR,
+ 	PWRAP_DEW_RG_CMD_ALERT_CLR,
++};
+ 
+-	/* MT6397 only regs */
+-	PWRAP_DEW_EVENT_OUT_EN,
+-	PWRAP_DEW_EVENT_SRC_EN,
+-	PWRAP_DEW_EVENT_SRC,
+-	PWRAP_DEW_EVENT_FLAG,
+-	PWRAP_DEW_MON_FLAG_SEL,
+-	PWRAP_DEW_EVENT_TEST,
+-	PWRAP_DEW_CIPHER_LOAD,
+-	PWRAP_DEW_CIPHER_START,
++static const u32 mt6320_regs[] = {
++	[PWRAP_DEW_EVENT_OUT_EN] =	0x0000,
++	[PWRAP_DEW_DIO_EN] =		0x0002,
++	[PWRAP_DEW_EVENT_SRC_EN] =	0x0004,
++	[PWRAP_DEW_EVENT_SRC] =		0x0006,
++	[PWRAP_DEW_EVENT_FLAG] =	0x0008,
++	[PWRAP_DEW_READ_TEST] =		0x000a,
++	[PWRAP_DEW_WRITE_TEST] =	0x000c,
++	[PWRAP_DEW_CRC_EN] =		0x000e,
++	[PWRAP_DEW_CRC_VAL] =		0x0010,
++	[PWRAP_DEW_MON_GRP_SEL] =	0x0012,
++	[PWRAP_DEW_MON_FLAG_SEL] =	0x0014,
++	[PWRAP_DEW_EVENT_TEST] =	0x0016,
++	[PWRAP_DEW_CIPHER_KEY_SEL] =	0x0018,
++	[PWRAP_DEW_CIPHER_IV_SEL] =	0x001a,
++	[PWRAP_DEW_CIPHER_LOAD] =	0x001c,
++	[PWRAP_DEW_CIPHER_START] =	0x001e,
++	[PWRAP_DEW_CIPHER_RDY] =	0x0020,
++	[PWRAP_DEW_CIPHER_MODE] =	0x0022,
++	[PWRAP_DEW_CIPHER_SWRST] =	0x0024,
++	[PWRAP_DEW_CIPHER_IV0] =	0x0026,
++	[PWRAP_DEW_CIPHER_IV1] =	0x0028,
++	[PWRAP_DEW_CIPHER_IV2] =	0x002a,
++	[PWRAP_DEW_CIPHER_IV3] =	0x002c,
++	[PWRAP_DEW_CIPHER_IV4] =	0x002e,
++	[PWRAP_DEW_CIPHER_IV5] =	0x0030,
+ };
+ 
+ static const u32 mt6323_regs[] = {
+@@ -386,6 +438,22 @@ enum pwrap_regs {
+ 	PWRAP_EINT_STA1_ADR,
+ 	PWRAP_SWINF_2_WDATA_31_0,
+ 	PWRAP_SWINF_2_RDATA_31_0,
++	PWRAP_DVFS_ADR0,
++	PWRAP_DVFS_WDATA0,
++	PWRAP_DVFS_ADR1,
++	PWRAP_DVFS_WDATA1,
++	PWRAP_DVFS_ADR2,
++	PWRAP_DVFS_WDATA2,
++	PWRAP_DVFS_ADR3,
++	PWRAP_DVFS_WDATA3,
++	PWRAP_DVFS_ADR4,
++	PWRAP_DVFS_WDATA4,
++	PWRAP_DVFS_ADR5,
++	PWRAP_DVFS_WDATA5,
++	PWRAP_DVFS_ADR6,
++	PWRAP_DVFS_WDATA6,
++	PWRAP_DVFS_ADR7,
++	PWRAP_DVFS_WDATA7,
+ 
+ 	/* MT2701 only regs */
+ 	PWRAP_ADC_CMD_ADDR,
+@@ -394,6 +462,24 @@ enum pwrap_regs {
+ 	PWRAP_ADC_RDATA_ADDR1,
+ 	PWRAP_ADC_RDATA_ADDR2,
+ 
++	/* MT6589 only regs */
++	PWRAP_CIPHER_IV0,
++	PWRAP_CIPHER_IV1,
++	PWRAP_CIPHER_IV2,
++
++	/* MT6589 and MT8135 only regs */
++	PWRAP_CSHEXT,
++	PWRAP_EVENT_IN_EN,
++	PWRAP_EVENT_DST_EN,
++	PWRAP_RRARB_INIT,
++	PWRAP_RRARB_EN,
++	PWRAP_RRARB_STA0,
++	PWRAP_RRARB_STA1,
++	PWRAP_EVENT_STA,
++	PWRAP_EVENT_STACLR,
++	PWRAP_CIPHER_LOAD,
++	PWRAP_CIPHER_START,
++
+ 	/* MT7622 only regs */
+ 	PWRAP_STA,
+ 	PWRAP_CLR,
+@@ -422,38 +508,9 @@ enum pwrap_regs {
+ 	PWRAP_DVFS_STEP_CTRL2,
+ 	PWRAP_SPI2_CTRL,
+ 
+-	/* MT8135 only regs */
+-	PWRAP_CSHEXT,
+-	PWRAP_EVENT_IN_EN,
+-	PWRAP_EVENT_DST_EN,
+-	PWRAP_RRARB_INIT,
+-	PWRAP_RRARB_EN,
+-	PWRAP_RRARB_STA0,
+-	PWRAP_RRARB_STA1,
+-	PWRAP_EVENT_STA,
+-	PWRAP_EVENT_STACLR,
+-	PWRAP_CIPHER_LOAD,
+-	PWRAP_CIPHER_START,
+-
+ 	/* MT8173 only regs */
+ 	PWRAP_RDDMY,
+ 	PWRAP_SI_CK_CON,
+-	PWRAP_DVFS_ADR0,
+-	PWRAP_DVFS_WDATA0,
+-	PWRAP_DVFS_ADR1,
+-	PWRAP_DVFS_WDATA1,
+-	PWRAP_DVFS_ADR2,
+-	PWRAP_DVFS_WDATA2,
+-	PWRAP_DVFS_ADR3,
+-	PWRAP_DVFS_WDATA3,
+-	PWRAP_DVFS_ADR4,
+-	PWRAP_DVFS_WDATA4,
+-	PWRAP_DVFS_ADR5,
+-	PWRAP_DVFS_WDATA5,
+-	PWRAP_DVFS_ADR6,
+-	PWRAP_DVFS_WDATA6,
+-	PWRAP_DVFS_ADR7,
+-	PWRAP_DVFS_WDATA7,
+ 	PWRAP_SPMINF_STA,
+ 	PWRAP_CIPHER_EN,
+ 
+@@ -569,6 +626,98 @@ static const int mt2701_regs[] = {
+ 	[PWRAP_ADC_RDATA_ADDR2] =	0x154,
+ };
+ 
++static const int mt6589_regs[] = {
++	[PWRAP_MUX_SEL] =		0x0,
++	[PWRAP_WRAP_EN] =		0x4,
++	[PWRAP_DIO_EN] =		0x8,
++	[PWRAP_SIDLY] =			0xc,
++	[PWRAP_CSHEXT] =		0x10,
++	[PWRAP_CSHEXT_WRITE] =		0x14,
++	[PWRAP_CSHEXT_READ] =		0x18,
++	[PWRAP_CSLEXT_START] =		0x1c,
++	[PWRAP_CSLEXT_END] =		0x20,
++	[PWRAP_STAUPD_PRD] =		0x24,
++	[PWRAP_STAUPD_GRPEN] =		0x28,
++	[PWRAP_STAUPD_MAN_TRIG] =	0x2c,
++	[PWRAP_STAUPD_STA] =		0x30,
++	[PWRAP_EVENT_IN_EN] =		0x34,
++	[PWRAP_EVENT_DST_EN] =		0x38,
++	[PWRAP_WRAP_STA] =		0x3c,
++	[PWRAP_RRARB_INIT] =		0x40,
++	[PWRAP_RRARB_EN] =		0x44,
++	[PWRAP_RRARB_STA0] =		0x48,
++	[PWRAP_RRARB_STA1] =		0x4c,
++	[PWRAP_HARB_INIT] =		0x50,
++	[PWRAP_HARB_HPRIO] =		0x54,
++	[PWRAP_HIPRIO_ARB_EN] =		0x58,
++	[PWRAP_HARB_STA0] =		0x5c,
++	[PWRAP_HARB_STA1] =		0x60,
++	[PWRAP_MAN_EN] =		0x64,
++	[PWRAP_MAN_CMD] =		0x68,
++	[PWRAP_MAN_RDATA] =		0x6c,
++	[PWRAP_MAN_VLDCLR] =		0x70,
++	[PWRAP_WACS0_EN] =		0x74,
++	[PWRAP_INIT_DONE0] =		0x78,
++	[PWRAP_WACS0_CMD] =		0x7c,
++	[PWRAP_WACS0_RDATA] =		0x80,
++	[PWRAP_WACS0_VLDCLR] =		0x84,
++	[PWRAP_WACS1_EN] =		0x88,
++	[PWRAP_INIT_DONE1] =		0x8c,
++	[PWRAP_WACS1_CMD] =		0x90,
++	[PWRAP_WACS1_RDATA] =		0x94,
++	[PWRAP_WACS1_VLDCLR] =		0x98,
++	[PWRAP_WACS2_EN] =		0x9c,
++	[PWRAP_INIT_DONE2] =		0xa0,
++	[PWRAP_WACS2_CMD] =		0xa4,
++	[PWRAP_WACS2_RDATA] =		0xa8,
++	[PWRAP_WACS2_VLDCLR] =		0xac,
++	[PWRAP_INT_EN] =		0xb0,
++	[PWRAP_INT_FLG_RAW] =		0xb4,
++	[PWRAP_INT_FLG] =		0xb8,
++	[PWRAP_INT_CLR] =		0xbc,
++	[PWRAP_SIG_ADR] =		0xc0,
++	[PWRAP_SIG_MODE] =		0xc4,
++	[PWRAP_SIG_VALUE] =		0xc8,
++	[PWRAP_SIG_ERRVAL] =		0xcc,
++	[PWRAP_CRC_EN] =		0xd0,
++	[PWRAP_EVENT_STA] =		0xd4,
++	[PWRAP_EVENT_STACLR] =		0xd8,
++	[PWRAP_TIMER_EN] =		0xdc,
++	[PWRAP_TIMER_STA] =		0xe0,
++	[PWRAP_WDT_UNIT] =		0xe4,
++	[PWRAP_WDT_SRC_EN] =		0xe8,
++	[PWRAP_WDT_FLG] =		0xec,
++	[PWRAP_DEBUG_INT_SEL] =		0xf0,
++	[PWRAP_DVFS_ADR0] =		0xf4,
++	[PWRAP_DVFS_WDATA0] =		0xf8,
++	[PWRAP_DVFS_ADR1] =		0xfc,
++	[PWRAP_DVFS_WDATA1] =		0x100,
++	[PWRAP_DVFS_ADR2] =		0x104,
++	[PWRAP_DVFS_WDATA2] =		0x108,
++	[PWRAP_DVFS_ADR3] =		0x10c,
++	[PWRAP_DVFS_WDATA3] =		0x110,
++	[PWRAP_DVFS_ADR4] =		0x114,
++	[PWRAP_DVFS_WDATA4] =		0x118,
++	[PWRAP_DVFS_ADR5] =		0x11c,
++	[PWRAP_DVFS_WDATA5] =		0x120,
++	[PWRAP_DVFS_ADR6] =		0x124,
++	[PWRAP_DVFS_WDATA6] =		0x128,
++	[PWRAP_DVFS_ADR7] =		0x12c,
++	[PWRAP_DVFS_WDATA7] =		0x130,
++	[PWRAP_CIPHER_KEY_SEL] =	0x134,
++	[PWRAP_CIPHER_IV_SEL] =		0x138,
++	[PWRAP_CIPHER_LOAD] =		0x13c,
++	[PWRAP_CIPHER_START] =		0x140,
++	[PWRAP_CIPHER_RDY] =		0x144,
++	[PWRAP_CIPHER_MODE] =		0x148,
++	[PWRAP_CIPHER_SWRST] =		0x14c,
++	[PWRAP_CIPHER_IV0] =		0x150,
++	[PWRAP_CIPHER_IV1] =		0x154,
++	[PWRAP_CIPHER_IV2] =		0x158,
++	[PWRAP_DCM_EN] =		0x15c,
++	[PWRAP_DCM_DBC_PRD] =		0x160,
++};
++
+ static const int mt6765_regs[] = {
+ 	[PWRAP_MUX_SEL] =		0x0,
+ 	[PWRAP_WRAP_EN] =		0x4,
+@@ -1301,6 +1450,7 @@ static const int mt8186_regs[] = {
+ };
+ 
+ enum pmic_type {
++	PMIC_MT6320,
+ 	PMIC_MT6323,
+ 	PMIC_MT6331,
+ 	PMIC_MT6332,
+@@ -1314,6 +1464,7 @@ enum pmic_type {
+ 
+ enum pwrap_type {
+ 	PWRAP_MT2701,
++	PWRAP_MT6589,
+ 	PWRAP_MT6765,
+ 	PWRAP_MT6779,
+ 	PWRAP_MT6795,
+@@ -1750,6 +1901,7 @@ static int pwrap_common_init_reg_clock(struct pmic_wrapper *wrp)
+ 	case PWRAP_MT8173:
+ 		pwrap_init_chip_select_ext(wrp, 0, 4, 2, 2);
+ 		break;
++	case PWRAP_MT6589:
+ 	case PWRAP_MT8135:
+ 		pwrap_writel(wrp, 0x4, PWRAP_CSHEXT);
+ 		pwrap_init_chip_select_ext(wrp, 0, 4, 0, 0);
+@@ -1834,6 +1986,7 @@ static int pwrap_init_cipher(struct pmic_wrapper *wrp)
+ 	pwrap_writel(wrp, 0x2, PWRAP_CIPHER_IV_SEL);
+ 
+ 	switch (wrp->master->type) {
++	case PWRAP_MT6589:
+ 	case PWRAP_MT8135:
+ 		pwrap_writel(wrp, 1, PWRAP_CIPHER_LOAD);
+ 		pwrap_writel(wrp, 1, PWRAP_CIPHER_START);
+@@ -1866,6 +2019,7 @@ static int pwrap_init_cipher(struct pmic_wrapper *wrp)
+ 		pwrap_config_cipher(wrp, wrp->slave->comp_dew_regs);
+ 
+ 	switch (wrp->slave->type) {
++	case PMIC_MT6320:
+ 	case PMIC_MT6397:
+ 		pwrap_write(wrp, wrp->slave->dew_regs[PWRAP_DEW_CIPHER_LOAD],
+ 			    0x1);
+@@ -1960,13 +2114,13 @@ static int pwrap_mt8135_init_soc_specific(struct pmic_wrapper *wrp)
+ 	/* enable pwrap events and pwrap bridge in AP side */
+ 	pwrap_writel(wrp, 0x1, PWRAP_EVENT_IN_EN);
+ 	pwrap_writel(wrp, 0xffff, PWRAP_EVENT_DST_EN);
+-	writel(0x7f, wrp->bridge_base + PWRAP_MT8135_BRIDGE_IORD_ARB_EN);
+-	writel(0x1, wrp->bridge_base + PWRAP_MT8135_BRIDGE_WACS3_EN);
+-	writel(0x1, wrp->bridge_base + PWRAP_MT8135_BRIDGE_WACS4_EN);
+-	writel(0x1, wrp->bridge_base + PWRAP_MT8135_BRIDGE_WDT_UNIT);
+-	writel(0xffff, wrp->bridge_base + PWRAP_MT8135_BRIDGE_WDT_SRC_EN);
+-	writel(0x1, wrp->bridge_base + PWRAP_MT8135_BRIDGE_TIMER_EN);
+-	writel(0x7ff, wrp->bridge_base + PWRAP_MT8135_BRIDGE_INT_EN);
++	writel(0x7f, wrp->bridge_base + PWRAP_BRIDGE_IORD_ARB_EN);
++	writel(0x1, wrp->bridge_base + PWRAP_BRIDGE_WACS3_EN);
++	writel(0x1, wrp->bridge_base + PWRAP_BRIDGE_WACS4_EN);
++	writel(0x1, wrp->bridge_base + PWRAP_BRIDGE_WDT_UNIT);
++	writel(0xffff, wrp->bridge_base + PWRAP_BRIDGE_WDT_SRC_EN);
++	writel(0x1, wrp->bridge_base + PWRAP_BRIDGE_TIMER_EN);
++	writel(0x7ff, wrp->bridge_base + PWRAP_BRIDGE_INT_EN);
+ 
+ 	/* enable PMIC event out and sources */
+ 	if (pwrap_write(wrp, wrp->slave->dew_regs[PWRAP_DEW_EVENT_OUT_EN],
+@@ -2110,7 +2264,8 @@ static int pwrap_init(struct pmic_wrapper *wrp)
+ 			return ret;
+ 	}
+ 
+-	if (wrp->master->type == PWRAP_MT8135)
++	if (wrp->master->type == PWRAP_MT8135 ||
++		wrp->master->type == PWRAP_MT6589)
+ 		pwrap_writel(wrp, 0x7, PWRAP_RRARB_EN);
+ 
+ 	pwrap_writel(wrp, 0x1, PWRAP_WACS0_EN);
+@@ -2131,8 +2286,8 @@ static int pwrap_init(struct pmic_wrapper *wrp)
+ 	pwrap_writel(wrp, 1, PWRAP_INIT_DONE1);
+ 
+ 	if (HAS_CAP(wrp->master->caps, PWRAP_CAP_BRIDGE)) {
+-		writel(1, wrp->bridge_base + PWRAP_MT8135_BRIDGE_INIT_DONE3);
+-		writel(1, wrp->bridge_base + PWRAP_MT8135_BRIDGE_INIT_DONE4);
++		writel(1, wrp->bridge_base + PWRAP_BRIDGE_INIT_DONE3);
++		writel(1, wrp->bridge_base + PWRAP_BRIDGE_INIT_DONE4);
+ 	}
+ 
+ 	return 0;
+@@ -2186,6 +2341,14 @@ static const struct pwrap_slv_regops pwrap_regops32 = {
+ 	.regmap = &pwrap_regmap_config32,
+ };
+ 
++static const struct pwrap_slv_type pmic_mt6320 = {
++	.dew_regs = mt6320_regs,
++	.type = PMIC_MT6320,
++	.regops = &pwrap_regops16,
++	.caps = PWRAP_SLV_CAP_SPI | PWRAP_DEW_DIO_EN |
++		PWRAP_SLV_CAP_SECURITY,
++};
++
+ static const struct pwrap_slv_type pmic_mt6323 = {
+ 	.dew_regs = mt6323_regs,
+ 	.type = PMIC_MT6323,
+@@ -2248,6 +2411,7 @@ static const struct pwrap_slv_type pmic_mt6397 = {
+ };
+ 
+ static const struct of_device_id of_slave_match_tbl[] = {
++	{ .compatible = "mediatek,mt6320", .data = &pmic_mt6320 },
+ 	{ .compatible = "mediatek,mt6323", .data = &pmic_mt6323 },
+ 	{ .compatible = "mediatek,mt6331", .data = &pmic_mt6331 },
+ 	{ .compatible = "mediatek,mt6351", .data = &pmic_mt6351 },
+@@ -2277,6 +2441,19 @@ static const struct pmic_wrapper_type pwrap_mt2701 = {
+ 	.init_soc_specific = pwrap_mt2701_init_soc_specific,
+ };
+ 
++static const struct pmic_wrapper_type pwrap_mt6589 = {
++	.regs = mt6589_regs,
++	.type = PWRAP_MT6589,
++	.arb_en_all = 0x1ff,
++	.int_en_all = 0x7ffffffd,
++	.int1_en_all = 0,
++	.spi_w = PWRAP_MAN_CMD_SPI_WRITE,
++	.wdt_src = PWRAP_WDT_SRC_MASK_ALL,
++	.caps = PWRAP_CAP_BRIDGE | PWRAP_CAP_RESET | PWRAP_CAP_DCM,
++	.init_reg_clock = pwrap_common_init_reg_clock,
++	.init_soc_specific = pwrap_mt8135_init_soc_specific,
++};
++
+ static const struct pmic_wrapper_type pwrap_mt6765 = {
+ 	.regs = mt6765_regs,
+ 	.type = PWRAP_MT6765,
+@@ -2446,6 +2623,7 @@ static const struct pmic_wrapper_type pwrap_mt8186 = {
+ 
+ static const struct of_device_id of_pwrap_match_tbl[] = {
+ 	{ .compatible = "mediatek,mt2701-pwrap", .data = &pwrap_mt2701 },
++	{ .compatible = "mediatek,mt6589-pwrap", .data = &pwrap_mt6589 },
+ 	{ .compatible = "mediatek,mt6765-pwrap", .data = &pwrap_mt6765 },
+ 	{ .compatible = "mediatek,mt6779-pwrap", .data = &pwrap_mt6779 },
+ 	{ .compatible = "mediatek,mt6795-pwrap", .data = &pwrap_mt6795 },
 -- 
 2.54.0
 
