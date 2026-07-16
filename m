@@ -1,63 +1,63 @@
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A92143E079
-	for <mfd@lists.linux.dev>; Thu, 16 Jul 2026 17:17:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.180
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FF4B43E9FE
+	for <mfd@lists.linux.dev>; Thu, 16 Jul 2026 17:18:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.175
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784222281; cv=none; b=E0W8XgGC1mEt0EJm9/GHiNf5ck5a0MEBwWG7H5NYV4dNnz6NW935QmGH6Erz8QO4yARijhCwBUenep/OTYcayKYS60ZWpnC14ICKak74b+VJkKpY+/ZMNRO6aRX+fwCV68ylhlDPVD6gJ9lJP34BM+JM8DuY9UvzrX7Ydh+vB6M=
+	t=1784222287; cv=none; b=rqA4uFJ/aw2aDX0lNyXesm54unT5X8HjqM/dJCnR2/5GQTWov777R4JUSYgnKSrbXdqmMDd6ekFCeVA+QziC6HbgxMPdQv6JOwD4bVzl1n8pTP30eokxVqyPZFs2foGLPgGXVnwFU766jb08B7+vdD57fT7j93+5WYwa+PO30XQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784222281; c=relaxed/simple;
-	bh=J0ZsmPYEowQMOMxEQ5XSmmwU88gF6MVEkonHVpC3RRs=;
+	s=arc-20240116; t=1784222287; c=relaxed/simple;
+	bh=Y8Yhg9LDZgOOn4IYBYFpDiXxdAtcDCdbUesWkE9/tns=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=DrgbvMISEtBG5w6kOMQHGitcNAArckEvZxMgyjF1mfzruCFmRXoxfJUC2Qq70EkTAa6kPqsFpUW5AI3/61Z0yCFRglbZXC1E4PsFnZ0TKMP21m7td4kX8yZHxrDtuynxjPhS8NN7kU2aZw+pLi4YRUq0b6pA3d0ivccailBUQCE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=kyZ1oXhi; arc=none smtp.client-ip=209.85.214.180
+	 MIME-Version; b=ukVbnjj0/V78xApwYjM2A13B1WQ36culnmIIRXMyW7NN4GUCtb4Ryxr6cFnYDi9PIxNKsvBKVIxcR/w/n8f0+VJtHGsaaaGHemt4XcS29BQdHtN+ZZGkm7SU+cd00f1wOGzFFtJkrgAzNoHHPebznrU95CSuR809lvGsrkIuDXM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YNwFW5xk; arc=none smtp.client-ip=209.85.214.175
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kyZ1oXhi"
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2caf228a910so54073955ad.2
-        for <mfd@lists.linux.dev>; Thu, 16 Jul 2026 10:17:56 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YNwFW5xk"
+Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2cac59f8b64so80970275ad.0
+        for <mfd@lists.linux.dev>; Thu, 16 Jul 2026 10:17:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784222274; x=1784827074; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1784222277; x=1784827077; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8YOzE4Dspd5jzvIIg5G/ODj4WmBPO1vOc7GQ0jrswag=;
-        b=kyZ1oXhi9ztrxacW8ldvz5+DfBDpjVQAB1GatrvrKfvLu3xbxZ9+jnE+GQkifv/6xr
-         ebuzXorX5zNx0BCjvNiZEv5O6GHIpHxSvlLCSnwtqjjnyJ1pjgiKBLaeNB5x+IShSXaJ
-         Hh0mYlMkvTpvo60G5qhX8CqeIrcNVdZei2LrftkftvLlYY1e2cfcQyeXLz7ehUOD0Xr8
-         c8Jog5R5r4Ocb+3o69w3eAD/VhB+pZaOcSDvyK5uD2GDm0PGa1CqzuU0JcCdiv9pjjh0
-         wJ/XKRLAmdrdUqkXKKEbiSWI43KA2anEwNO2JEuawYZpOdQlVUj58xR6WraO12xJpc7q
-         61LQ==
+        bh=x+VQUfT4E2jpzaVYfn1xTQo+PWwjs/hsb3t7kl1meuo=;
+        b=YNwFW5xk0j9DQN9cfVmangkzwa2gz4RxsaYylJ6ft2fKBbPBzsg3fTvlo+XhArJYug
+         UpavfFSWHuE2gevH0sG0aoT3iAAF3EXwIxwx8EBmS12HvBDPKjegwZb4hp6AAfKDW/ui
+         qhkv7cNk6ROd+eAaHjASEB12D08ICL/g+iiHJKnqwomSuX6LHh6/53+yo0cdHiceMQXT
+         yXzw7KnmIFp9pFJmKimgaxVl4YGdVU09yMDxa2fMtHIdPwxu/AGByW6e+STn7UEB5DAK
+         z7Xl+HqjsKWu9gVb2MxeuaLhn4abh6q2q+QpNCpnYMUFfXnFVwCS4/ZORsx7fP7DWzq2
+         A5bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784222274; x=1784827074;
+        d=1e100.net; s=20251104; t=1784222277; x=1784827077;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8YOzE4Dspd5jzvIIg5G/ODj4WmBPO1vOc7GQ0jrswag=;
-        b=jjfKLCy+LN68hL4tk9FqmP4QZLdiaOC53ys7Fx/jnYf+lC7jP9yRFdYJNcQKoLEEtL
-         RrdSIJJZ7UmYxFKHM52PLLx8q+/Tfq/2ykMXffgN9jYgziqMxULy+udkBwB4kYJd9jMa
-         47IG0SD6ZQGwNwH5d/4w9COfAhybpHpOoLCAzg8sLa6IA04SGa/ocNe3BDhInq1pgHme
-         jlbf2az8tWq6LqfsJFwnne2q/u/TuaGeGxj52KIW2B7TRIMbPcz4/Xes9ZJaq+7TVudV
-         TS7PHBwLFyJoPJjTwaTLYNNJT3GpTwEsQPQBzitxwTz8LcoW72PxhXZcdLPWkPd+kldp
-         c5EQ==
-X-Forwarded-Encrypted: i=1; AHgh+RpI40mKymbIcltHs1+XVgJi2ebXCwAHmUsA+wUP6xt8U85BHrsgYwVzWClgMhEjQVOtP/I=@lists.linux.dev
-X-Gm-Message-State: AOJu0YwW7Y4To5wO5T6J25ho9XjGWsCIHpeKNdNNws/6oNsyqgeD9HQR
-	xXaK7wQHuCde2U2IzYV01YSCZnMptTBJD5aA1+Xjzw6FLRF6FpDg4DeG
-X-Gm-Gg: AfdE7cnxPo2+HmF+F5Fyx9rM2i6WkS6xpniwOeyZwWQ/VQcX2bUsrfxVDMgrqajiB0r
-	HvFkkXU9QHNkIpdhRs7AuEjzn25DGUfb0bL9m3BL5Rm5HfqhkRXm8XPFmXJ6RBJ4doSAGANnBIp
-	Omk8q5lK6wFkpYm1KJKDuaDdMJp8VHqGMtUo9xTuRkeqx6tY1eMzyL07MpT6+VVECH2x/hZ2ief
-	95TdFCm38ETqjVaIC/L/TgU5a7K9nf5B2TehaDaEVsnBJdQmXKhGFe8CaionEowQGnp7OBYAlLO
-	qeQxXjYpFpXQXzKCJOXpQz8hWmorOALcL5dqRAzuI22MNOKfoLo8Jc4e1KWqw1etdxB01N2Oww1
-	bDhZG0UGFNNRqARl7aY9PBTf6zNP4uD/Nfg42LpzEkgkhtbhox2DjRCgBRkvvd5SdwBgWwbHRbz
-	8kxBjMFMFBj3CleT1chKztvdiv8q76T4mYtQ==
-X-Received: by 2002:a17:903:1cb:b0:2cc:1452:a014 with SMTP id d9443c01a7336-2cf03c36420mr81705655ad.18.1784222273587;
-        Thu, 16 Jul 2026 10:17:53 -0700 (PDT)
+        bh=x+VQUfT4E2jpzaVYfn1xTQo+PWwjs/hsb3t7kl1meuo=;
+        b=pi331f/golK0uPXFpVGD1RNlm7EfK1CuxoYnjxGoiJGQ9goNP/If0rX8w4i1syv2Lz
+         8K5+ky5E2XWhs0jmNN4oiZiB3T+YDbe+m/SXiuwfPuJnLdWTiPn1BPhfgaThL9GHoGeD
+         9iBV1V6ZeTjKvx38jI8+WfyApkj+8NpxU3v/xBPXYmqtRQ/057ydZQrvk/ojiC67e7I+
+         TrPmGw2wKWg59S6U95yf1JdY/TsqimrUvsd+6VoLnPYOz6iUpSKsk3GigGIgK+eAm2br
+         v+fAVzpOv6wcEWYLVfjZveiMRO4DJ2H09kxOVMecf/6Syeyoqcgt8hlDya44NpZkDqWm
+         ADsA==
+X-Forwarded-Encrypted: i=1; AHgh+Rpgctr0cUjaj8RoV/BFJMJPxEiSGBujMZAk2J4Z2auDz5+kCL8jBFQVi0dYXfXiglGxuiI=@lists.linux.dev
+X-Gm-Message-State: AOJu0YyU1oj2Jgnot6qxZ/xCNClEVLPqZ0yuShkvSykWW7dlc+EMEP6f
+	FSqTJUsEdQWZgWvtQ82vVGMs6P31oyGdbotKyGvQi5D+jLDh+xkL9yTB
+X-Gm-Gg: AfdE7clS8mP6R43XzP+fWOG882gOeF6Af+S7gm2FeuHqjnH1b9EGN4pQv4rflBsmDBP
+	r8nvCVi9iAhUppGcZEEbWbIwWGcC6atZyNDKR8NBhBl0F7lYZM+vIuhcPIh1nfaZdtRs5PRrYUf
+	HxcsVy2XEciImlWlH1F4H44+gmdlEuzOiGKDq6ETpZehd1zmKAXA2stsyj7tHtbxcd/vX33SsPj
+	IprwMYuoGHL9MLVrfygmsaOEXhgFSQbAQfFpiEzxVuWq1GpEQGIqU+fBC436vVSS326qIbsqN9m
+	91VldQeIwsCVAB9WgRa0QEru5i90Za+0NTNuawo6VCAaXlpDF27Tbs9b4dmlJCQjUomcJWRKLW4
+	KQuViXhao7aqSXopPPLPL2r1usMBNA0hrGQgxLaMW5PSn/zqxrZH8n0ThrIAOdkbEW3FovP2g+j
+	plqh70DzzNUXySs8pieuZx+KmzTT+9R2fNXw==
+X-Received: by 2002:a17:902:da81:b0:2ca:e19c:986 with SMTP id d9443c01a7336-2cf03c7c756mr75109205ad.1.1784222276928;
+        Thu, 16 Jul 2026 10:17:56 -0700 (PDT)
 Received: from buffalo-ssd (M014013071096.v4.enabler.ne.jp. [14.13.71.96])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf1055de44sm22917255ad.51.2026.07.16.10.17.50
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf1055de44sm22917255ad.51.2026.07.16.10.17.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Jul 2026 10:17:53 -0700 (PDT)
+        Thu, 16 Jul 2026 10:17:56 -0700 (PDT)
 From: Akari Tsuyukusa <akkun11.open@gmail.com>
 To: Sen Chu <sen.chu@mediatek.com>,
 	Sean Wang <sean.wang@mediatek.com>,
@@ -77,9 +77,9 @@ Cc: linux-pm@vger.kernel.org (open list:MEDIATEK BOARD LEVEL SHUTDOWN DRIVERS),
 	linux-kernel@vger.kernel.org (open list:ARM/Mediatek SoC support),
 	linux-arm-kernel@lists.infradead.org (moderated list:ARM/Mediatek SoC support),
 	linux-mediatek@lists.infradead.org (moderated list:ARM/Mediatek SoC support)
-Subject: [PATCH 1/3] dt-bindings: soc: mediatek: pwrap: Add compatible for MT6589 SoC
-Date: Fri, 17 Jul 2026 02:17:31 +0900
-Message-ID: <20260716171733.300885-2-akkun11.open@gmail.com>
+Subject: [PATCH 2/3] dt-bindings: mfd: mediatek: mt6397: add MT6320 compatible string
+Date: Fri, 17 Jul 2026 02:17:32 +0900
+Message-ID: <20260716171733.300885-3-akkun11.open@gmail.com>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260716171733.300885-1-akkun11.open@gmail.com>
 References: <20260716171733.300885-1-akkun11.open@gmail.com>
@@ -91,37 +91,25 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add compatible string for MediaTek MT6589 PWRAP.
-Also update the description since MT6589 has pwrap bridge.
+Add compatible string for the MT6320 PMIC.
 
 Signed-off-by: Akari Tsuyukusa <akkun11.open@gmail.com>
 ---
- .../devicetree/bindings/soc/mediatek/mediatek,pwrap.yaml     | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/Documentation/devicetree/bindings/soc/mediatek/mediatek,pwrap.yaml b/Documentation/devicetree/bindings/soc/mediatek/mediatek,pwrap.yaml
-index e7c4a3984c60..a487ed39e6cb 100644
---- a/Documentation/devicetree/bindings/soc/mediatek/mediatek,pwrap.yaml
-+++ b/Documentation/devicetree/bindings/soc/mediatek/mediatek,pwrap.yaml
-@@ -19,8 +19,8 @@ description:
- 
-   IP Pairing
- 
--  On MT8135 the pins of some SoC internal peripherals can be on the PMIC.
--  The signals of these pins are routed over the SPI bus using the pwrap
-+  On MT6589 and MT8135, the pins of some SoC internal peripherals can be on the
-+  PMIC. The signals of these pins are routed over the SPI bus using the pwrap
-   bridge. In the binding description below the properties needed for bridging
-   are marked with "IP Pairing". These are optional on SoCs which do not support
-   IP Pairing
-@@ -31,6 +31,7 @@ properties:
-       - items:
-           - enum:
-               - mediatek,mt2701-pwrap
-+              - mediatek,mt6589-pwrap
-               - mediatek,mt6765-pwrap
-               - mediatek,mt6779-pwrap
-               - mediatek,mt6795-pwrap
+diff --git a/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml b/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml
+index 3cbc0dc12c31..f2823338cccd 100644
+--- a/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml
++++ b/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml
+@@ -34,6 +34,7 @@ properties:
+   compatible:
+     oneOf:
+       - enum:
++          - mediatek,mt6320
+           - mediatek,mt6323
+           - mediatek,mt6331 # "mediatek,mt6331" for PMIC MT6331 and MT6332.
+           - mediatek,mt6328
 -- 
 2.54.0
 
