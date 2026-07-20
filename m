@@ -1,198 +1,175 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E64E43D47C2
-	for <mfd@lists.linux.dev>; Mon, 20 Jul 2026 09:25:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 575833A9624;
+	Mon, 20 Jul 2026 09:39:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.9
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784539563; cv=none; b=Q/wFDJBmvHWFwVGqrbOtBc1pKcSyAtBxizPanSDU1TeI7vweCZkrmuqXRwTKlBn1whR3KkbNIVbROsFdaB0cXTwpl+9LcczqNi7Ot5clXyOZGD7W6vb9102hZhaFslTc+9E4gVaZWhhln4+zY+wL3pDf6ckSXQDRITz8aDnTDCE=
+	t=1784540366; cv=none; b=G6sTuK8NvLczUcEVrC1fZa0yJAGTBY2no4lUPbhJqvVv35AASvNsHlBatYGDBfgQlxEJsFBSo7Rqb/eALsfnn6wmowtZ+sA+m6WCrmL9JkG5mW+VMFI+mXtEshqeueZGuhSfikKHayRYSHiHFOJgJ8C6OIBCJTHZvjyS9gtIKzk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784539563; c=relaxed/simple;
-	bh=5dZucFiY5F1RZ51PQHBmBTY1Q9tlwcM2jWxPuS3OYck=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=QKLMNtxusdHhjDllOol+h6kBshdhMJAnckF08Su4fHVUQ1agXxvXLLc72GJt5WNxqwVuB7QcemvPTgbeUSu67DiV9BQ523XnJZiiSriBfRqVBfpvvCSGdW2988EbHUYcORrRnk+s/kkNmcpSESZmyyJownCeIW/tfke267dsqQg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hQU8ohY7; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RF3lXuVB; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1784540366; c=relaxed/simple;
+	bh=8yvWTYbYBGZHHcLjIbER34ILyGhNaja8leys0MdkVFQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=GRqN56aBbFpcJ1Ly8v1GS3Vst3HkeR2PoRKaSJnosADW+jMKdreJOK4QWzEcn0iH6311RirkfvOcfG+fz4bG7WzZA8UCt+fFgIAYhtZpmV1FmsMj7NlSXTkIEQUPau19cxoWWUHqLxiXrcipAI4KPlLiKeb1kMiPdItLDDx8NoI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=KTS/WRn4; arc=none smtp.client-ip=198.175.65.9
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hQU8ohY7";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RF3lXuVB"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66K6RWsH1420216
-	for <mfd@lists.linux.dev>; Mon, 20 Jul 2026 09:25:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	LRiqxWscnzoXzK5RzWgNrb1z34B4tTlhuTiV6c1388Y=; b=hQU8ohY7JoqMaw2o
-	gJQ8ERonvZCbG53rd6f9Hj6Cy0YgpXa0kbaTI5/QqqOon0C02V4LNJ2+EsdouW+d
-	TTdw5/a4an0Mxixvb4u7sUgDtxyyaoLg4OGI+V4czR5cPkZVb0VZK2oZ8NKRrKYN
-	HaV/bbPfTsJmJJOWjOy0oW6uywW1yCdiBV3uKsuJMdUsS5/OwiAbrrLMkLjl8pCw
-	6PkjRX/plQV5ge+glDz88N4CyiChe2nKkBfMigG7FqSutZKY+CKqclYBBWtNiH3n
-	aIzeYqIjbaH+v1wG+u5THy8VWCAsa18Pi8ZjeTQ4HFBwVptu8nrxT1cEE4jW/2xB
-	ba8Jjw==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fg2s7wjsy-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <mfd@lists.linux.dev>; Mon, 20 Jul 2026 09:25:54 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51c26012cd0so175976181cf.0
-        for <mfd@lists.linux.dev>; Mon, 20 Jul 2026 02:25:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784539553; x=1785144353; darn=lists.linux.dev;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=LRiqxWscnzoXzK5RzWgNrb1z34B4tTlhuTiV6c1388Y=;
-        b=RF3lXuVBpbhcaC0l2uK9ssUnPwYINKuk/tm6wr4DpHmQYWW4gsT6tXCqsZslbkRK+1
-         MGjlDpXYkDGVFiyOFBap/TPDfoFhKczco+IS8Kmyzmv6oxeW5SKHjesB4Uj5v6Rs8/Tr
-         QZWwEH9yMi+qR1kEsVHdSzFagsV5+o575MlnNrQolGFuceR02Ec2E0lsZN4CONeJXPQJ
-         jCt89zyRzGOC/8rGs0Z/eAfd0IO6c1tSkqFHbcWPTs1TGJO08PD6ew3dUnFJFflOd4R/
-         BjjIo/YDXDqOGy+3u5M5TXHDC2g6MqRrGeQzauwA8TAmMG1krIYQ6WwWNRtVYiDhnjBw
-         fVSw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784539553; x=1785144353;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=LRiqxWscnzoXzK5RzWgNrb1z34B4tTlhuTiV6c1388Y=;
-        b=eMBBA0uL7K3VCaUwXpYizOEyPSwvTCHUD0y+N0wYzcbLZ/f7wM2PpqHkwhgrzFGquJ
-         9VtZl4Qg3sFh+/Oz1oZMLdwXOoEO5TsfQPW6eAsJI3esx59w7gDogj4wMZXaDHn3KLn7
-         6PP5Limrxu7FmvaN4oto7Y66Y5eq6Jk4hzkkaJbKnO6qI2vPt2Yk/r+FBFsZnBP1RbZF
-         7JMkuhftDfBVPti86qNxaJ3+aE8javSVo5dMLUSS1ZKnpHWhTzMOKQZLsz9rSC9ucL0n
-         TwjUan/6Q4w8+b9t9Z7vQ5uuDF+GTgky96iRjWqzs61XDRXxo32nCLN+CYHDZMG0+Nb3
-         GVUQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rpu/HWtVjtpxC67cvXrguK26Qogci6bM34naPBOvBcQs8jQLBM1gUKgXEocgOuwGFkzTnY=@lists.linux.dev
-X-Gm-Message-State: AOJu0YwcRBvy/yXKbuFcCrK1yHUZW3yQHlVsact57dYrL8tx2tMnoWBh
-	TuY+/WEKY8lxiWrIhs8eRpdUCsaIBX6lkp4G4e1GpHOa4nDzUltmBuT/wqAYGOA5uXXdb0C8IER
-	GvITK5YqRhCgctY2meHmStEIIVS8vwiib8+lrGdSs5lLUWCnk83apAfs=
-X-Gm-Gg: AfdE7cknylSaAbfMfxXtfhsm1Rv2bta/foaQKwtwn4qKkYgq3YCNATIcpZ7iR1kcuPm
-	WniupUau07vZEwaqLpL8FkImt+/fQRE1E1lwV/lB1gXpxn6+CYYpTMBE0X5f5+9aluHUHEPsSST
-	BrRkFqcKq2R620wiqDyKZXy5G4vgabuHzRRmdXZ5PfH0e6OGcX1iKsBxxMWkpUVb8MTXJn56l9y
-	lRq/WDU/azOpNGt+KDMP4b85qHMezuOeg9NBm+mqnlwG1K5qa10WAX/hxdU0rRbFBAv5IZ31Trw
-	nn+v1fEkDtHeDQHxw2tdDB3of9gLFwM4vhmXL6bxK6cx6SpJk9xnOjsgXpH42TfRSr9yDEiXbjB
-	6kw4ICmlWASIctceFxm2YYRxMmVbVqQ==
-X-Received: by 2002:ac8:7f83:0:b0:516:e062:1a83 with SMTP id d75a77b69052e-5213daa20eemr117920921cf.51.1784539553334;
-        Mon, 20 Jul 2026 02:25:53 -0700 (PDT)
-X-Received: by 2002:ac8:7f83:0:b0:516:e062:1a83 with SMTP id d75a77b69052e-5213daa20eemr117920471cf.51.1784539552960;
-        Mon, 20 Jul 2026 02:25:52 -0700 (PDT)
-Received: from brgl-qcom.local ([2a01:cb1d:dc:7e00:65fa:60cb:c205:d511])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4955de88951sm62228205e9.3.2026.07.20.02.25.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Jul 2026 02:25:52 -0700 (PDT)
-From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Date: Mon, 20 Jul 2026 11:24:55 +0200
-Subject: [PATCH 8/8] slimbus: qcom-ngd-ctrl: use
- platform_device_set_fwnode()
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="KTS/WRn4"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1784540364; x=1816076364;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=8yvWTYbYBGZHHcLjIbER34ILyGhNaja8leys0MdkVFQ=;
+  b=KTS/WRn4hC64SXomcj8OZDgv1c/75sr512hJ3ZZFOcn/Hz2j9Y9jUoL5
+   F2e+OqhVszGdUTiQ8gFa21IWsAwRL5NL4agOEdBKXNXj2/5XleLx2segL
+   Dk4x4iOBE2N/2Ois/Ww1kLHTyw2za1XN+80oavKfNGr+HKHwjVMBVuWAo
+   ieR3UZ5XBhpm7Zj7akq7FaZFCS9NSIbDOMwrO25uQDKI0WMShkt0G+f9M
+   25PvW79ouLpjIBPXpFkB88q1yZQVg2V/olRE0dNbotb9btcIBQM1VJEkm
+   ms64R1mv8sTuuOBGo4/IM41QgQy1HQET/Z3FsZmraa/F+L6x5Weqg2HY+
+   A==;
+X-CSE-ConnectionGUID: dHUsRHp3TceEVKddeQOEIQ==
+X-CSE-MsgGUID: g/z0cQV3SySR/zWDfGTqJw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11851"; a="107904614"
+X-IronPort-AV: E=Sophos;i="6.25,174,1779174000"; 
+   d="scan'208";a="107904614"
+Received: from orviesa007.jf.intel.com ([10.64.159.147])
+  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jul 2026 02:39:23 -0700
+X-CSE-ConnectionGUID: nA9+Vz6sSKmkO0mDbOt0pw==
+X-CSE-MsgGUID: jJmd9OFtSVWnkAUWymXgRA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.25,174,1779174000"; 
+   d="scan'208";a="257477511"
+Received: from kniemiec-mobl1.ger.corp.intel.com (HELO kekkonen.fi.intel.com) ([10.245.244.94])
+  by orviesa007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jul 2026 02:39:14 -0700
+Received: from kekkonen.localdomain (localhost [IPv6:::1])
+	by kekkonen.fi.intel.com (Postfix) with SMTP id 96736121C07;
+	Mon, 20 Jul 2026 12:39:16 +0300 (EEST)
+Date: Mon, 20 Jul 2026 12:39:16 +0300
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6 krs, Bertel Jungin Aukio 5, 02600 Espoo
+From: Sakari Ailus <sakari.ailus@linux.intel.com>
+To: Link Mauve <linkmauve@linkmauve.fr>
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Jerome Brunet <jbrunet@baylibre.com>,
+	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+	Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	Andy Shevchenko <andy@kernel.org>,
+	Tianshu Qiu <tian.shu.qiu@intel.com>,
+	Bingbu Cao <bingbu.cao@intel.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>,
+	Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	"Vaibhaav Ram T.L" <vaibhaavram.tl@microchip.com>,
+	Kumaravel Thiagarajan <kumaravel.thiagarajan@microchip.com>,
+	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Vladimir Zapolskiy <vz@mleia.com>,
+	=?iso-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>,
+	Orson Zhai <orsonzhai@gmail.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Chunyan Zhang <zhang.lyra@gmail.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Praveen Teja Kundanala <praveen.teja.kundanala@amd.com>,
+	Kalyani Akula <kalyani.akula@amd.com>,
+	Michal Simek <michal.simek@amd.com>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Joshua Kinard <linux@kumba.dev>,
+	Antoniu Miclaus <antoniu.miclaus@analog.com>,
+	Chen-Yu Tsai <wens@kernel.org>,
+	Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Samuel Holland <samuel@sholland.org>,
+	Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
+	Gary Guo <gary@garyguo.net>,
+	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+	Benno Lossin <lossin@kernel.org>,
+	Andreas Hindborg <a.hindborg@kernel.org>,
+	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Daniel Almeida <daniel.almeida@collabora.com>,
+	Tamir Duberstein <tamird@kernel.org>,
+	Alexandre Courbot <acourbot@nvidia.com>,
+	Onur =?iso-8859-1?Q?=D6zkan?= <work@onurozkan.dev>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Johan Hovold <johan@kernel.org>,
+	Ronald Claveau <linux-kernel-dev@aliel.fr>,
+	Salah Triki <salah.triki@gmail.com>, Yury Norov <ynorov@nvidia.com>,
+	David Carlier <devnexen@gmail.com>,
+	Achim Gratz <Achim.Gratz@stromeko.de>,
+	Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+	Patrick Wicki <patrick.wicki@siemens.com>,
+	Markus Heidelberg <m.heidelberg@cab.de>,
+	Markus Perkins <markus@notsyncing.net>,
+	Uwe =?iso-8859-1?Q?Kleine-K=F6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Abd-Alrhman Masalkhi <abd.masalkhi@gmail.com>,
+	Chen Ni <nichen@iscas.ac.cn>, Kees Cook <kees@kernel.org>,
+	linux-arm-kernel@lists.infradead.org,
+	linux-amlogic@lists.infradead.org, linux-kernel@vger.kernel.org,
+	linux-iio@vger.kernel.org, linux-media@vger.kernel.org,
+	linux-omap@vger.kernel.org, mfd@lists.linux.dev,
+	linux-i2c@vger.kernel.org, linux-gpio@vger.kernel.org,
+	imx@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com, linux-rtc@vger.kernel.org,
+	linux-sunxi@lists.linux.dev, rust-for-linux@vger.kernel.org
+Subject: Re: [PATCH 8/8] media: ov2740: remove NULL reg_write callback
+Message-ID: <al3sxMUgeK49dwNs@kekkonen.localdomain>
+References: <20260715175229.24672-1-linkmauve@linkmauve.fr>
+ <20260715175229.24672-9-linkmauve@linkmauve.fr>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260720-pdev-set-fwnode-instead-of-of-node-v1-8-2dee93f42c54@oss.qualcomm.com>
-References: <20260720-pdev-set-fwnode-instead-of-of-node-v1-0-2dee93f42c54@oss.qualcomm.com>
-In-Reply-To: <20260720-pdev-set-fwnode-instead-of-of-node-v1-0-2dee93f42c54@oss.qualcomm.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Danilo Krummrich <dakr@kernel.org>,
-        Madhavan Srinivasan <maddy@linux.ibm.com>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
-        Andi Shyti <andi.shyti@kernel.org>,
-        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
-        Robin Murphy <robin.murphy@arm.com>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Doug Berger <opendmb@gmail.com>,
-        Florian Fainelli <florian.fainelli@broadcom.com>,
-        Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-        Andrew Lunn <andrew+netdev@lunn.ch>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Ulf Hansson <ulfh@kernel.org>,
-        Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
-        Pengutronix Kernel Team <kernel@pengutronix.de>,
-        Fabio Estevam <festevam@gmail.com>, Lee Jones <lee@kernel.org>,
-        Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
-        Srinivas Kandagatla <srini@kernel.org>
-Cc: brgl@kernel.org, driver-core@lists.linux.dev,
-        linuxppc-dev@lists.ozlabs.org, linux-kernel@vger.kernel.org,
-        linux-i2c@vger.kernel.org, iommu@lists.linux.dev,
-        netdev@vger.kernel.org, linux-pm@vger.kernel.org, imx@lists.linux.dev,
-        linux-arm-kernel@lists.infradead.org, mfd@lists.linux.dev,
-        linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=900;
- i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
- bh=5dZucFiY5F1RZ51PQHBmBTY1Q9tlwcM2jWxPuS3OYck=;
- b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBqXemASNLxq4W2lq91kA9NcZIXQVZtNYnprewvw
- 3yHlCsy3VqJAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCal3pgAAKCRAFnS7L/zaE
- w2uCD/wOU3cBVw4EUJf0UYoXTg1HPMi8P/ZsqqsWmYAwjo7fxHcTqJbrn0eiqRL4DGI4WMyvG60
- V+0SsJlynCdNE7f5EUlwizOq84HOSgkOFhWcy1qO9QHvA5ZUn3pD4p5P/apWnvlfSjMrCgfW6Cv
- j3f/kuCfwhE3zvoQiwbJKsw3Z5I4ZvzyAAKpuw1L2UnIz0c4PF3F3aM8KSrOJAkVj5uvCqWv1ec
- B/AYzpNDdlNiIKEr5nlz5onmZgVYEc488RYdR8D6I/WNggYPzyNFLoESaH43Vxxig+CyAwrsjzZ
- o8d6pZtIyZAaJbH+7hGLtVAdr8JNHyKtv2MeIkWDsOK5t4odmeepq+uGt4Z+wLL5txrMInQNa9i
- CpwMS1b5MsZ2Zzub7p1c+hjtTrFLAtSCsLnDpuZeM0kspndYPXH+9aJ1ikuDaIY8rYYY45PmfVl
- 5IPBo0aXvFJ1cF+N5N/gFPL8eHrOSWBGQ4E+1GkdbYVljaIC1z2a0evNxWVYWUlYGAIygMAktf6
- EdLDOWEg9v5RX8qWkht3mSA1zTTRpZyQ2jiUBxOl5UDbZBOGIvc4w71t3cYV6WAk3qn92NyUB+W
- zTJ+U4R83omht6v8g6JVuiBdRHrh1ZIIR1GZDI77FyHqG14uso7dcBQnQYs2bVz/YkOSo5imubp
- GZ+Ni2cPpMJ3VIw==
-X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
- fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDEwNCBTYWx0ZWRfXxG3IYYIjhHlr
- fL9FHw4MHZE30vTxBXg5GNxcnG4MnhbecXj0d4Wj962RAHkvIpnqhQ7NpAVml7rd6l3za3nhNJ9
- 7FuwBzOAWJo4E+FHIG09VXL26m4SWIlaKTKF265sJ9o9id6+8VpTaJ7eNq+mBlbgIziPsgNUHCI
- worISzFMXk1PQp0eA+wlFQOwQMIZWvDfJDWpcl/p9Work9aGw3N1e3oK/y2d0W36FP+ygBjYz1Y
- ABhNWYt4VDscjijEECkSpjNMwYx7HkVkRnYvRV4asTEKE3rXqnL9HpI1r537I21+7KBRnw+cQF1
- hThoRg3kcaXIUSH1k2OXFKRbEh3UiHgbjhXP4GxPKnyMdnWJ51eN1V3oyrdLwlq33XNekeZ0rFI
- 6A6EAk5Uy4prmYET8uXa81QWEeyp+Bs4DwP6haBDLPEU6caSf5jLpuPeRgCWz5Ggw8Us6DCcGsZ
- BvdqD3b+OX2oRAi4gSQ==
-X-Authority-Analysis: v=2.4 cv=eKsjSnp1 c=1 sm=1 tr=0 ts=6a5de9a2 cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
- a=Dy7njVIJoQnLZkscNskA:9 a=QEXdDO2ut3YA:10 a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-ORIG-GUID: ptupBvPsdH3kBJ1G3WUiiQ5vtcYtKd03
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDEwNCBTYWx0ZWRfX/gQRV0cHTxAU
- xElQHUK+w37o+iNbmLR6inHq5fXKN5SRj6Pp9CQIKwGEonGBPmW8H2vBaQ0uOtduLpXEhicSmuu
- B2rIzbcC3jTPt4se5TjgLjwrpTd9zj0=
-X-Proofpoint-GUID: ptupBvPsdH3kBJ1G3WUiiQ5vtcYtKd03
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-20_01,2026-07-17_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 impostorscore=0 malwarescore=0
- clxscore=1015 phishscore=0 lowpriorityscore=0 bulkscore=0 spamscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607200104
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260715175229.24672-9-linkmauve@linkmauve.fr>
 
-Prefer the higher-level platform_device_set_fwnode() over the
-OF-specific platform_device_set_of_node() for dynamically allocated
-platform devices.
+Hi,
 
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
----
- drivers/slimbus/qcom-ngd-ctrl.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Wed, Jul 15, 2026 at 07:52:24PM +0200, Link Mauve wrote:
+> This field is already initialized to NULL, so there is no reason to
+> write it again.
+> 
+> This prevents it from appearing while grepping for reg_write in the
+> future.
+> 
+> Signed-off-by: Link Mauve <linkmauve@linkmauve.fr>
 
-diff --git a/drivers/slimbus/qcom-ngd-ctrl.c b/drivers/slimbus/qcom-ngd-ctrl.c
-index 934c44c5bc1a92fae98f52bccd12ed849379dca8..bf077f47c9ddd484c11f98b47d2d8d4daf78dcb7 100644
---- a/drivers/slimbus/qcom-ngd-ctrl.c
-+++ b/drivers/slimbus/qcom-ngd-ctrl.c
-@@ -1538,7 +1538,7 @@ static int of_qcom_slim_ngd_register(struct device *parent,
- 			kfree(ngd);
- 			return ret;
- 		}
--		platform_device_set_of_node(ngd->pdev, node);
-+		platform_device_set_fwnode(ngd->pdev, of_fwnode_handle(node));
- 		ctrl->ngd = ngd;
- 
- 		ret = platform_device_add(ngd->pdev);
+I believe we need a real name here.
+
+> ---
+>  drivers/media/i2c/ov2740.c | 1 -
+>  1 file changed, 1 deletion(-)
+> 
+> diff --git a/drivers/media/i2c/ov2740.c b/drivers/media/i2c/ov2740.c
+> index fb590dfadda1..799eca4023da 100644
+> --- a/drivers/media/i2c/ov2740.c
+> +++ b/drivers/media/i2c/ov2740.c
+> @@ -1271,7 +1271,6 @@ static int ov2740_register_nvmem(struct i2c_client *client,
+>  	nvmem_config.compat = true;
+>  	nvmem_config.base_dev = dev;
+>  	nvmem_config.reg_read = ov2740_nvmem_read;
+> -	nvmem_config.reg_write = NULL;
+>  	nvmem_config.priv = nvm;
+>  	nvmem_config.stride = 1;
+>  	nvmem_config.word_size = 1;
+
+I think it'd be nicer to do the initialisation in variable declaration --
+all the information is available already there.
 
 -- 
-2.47.3
+Regards,
 
+Sakari Ailus
