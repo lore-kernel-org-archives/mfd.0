@@ -1,131 +1,109 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96DF740BCCF
-	for <mfd@lists.linux.dev>; Mon, 20 Jul 2026 12:05:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0611941B358;
+	Mon, 20 Jul 2026 12:59:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784549119; cv=none; b=rMN00q39AExu/LGXo7TfBDHaMCm9QC+R0e3KWlsSt3OQcP11FKO+unjKogZjIHwDJPBG0cOCgPd9DYj7c80CA306xVT8hap2I4UxmTqdEtPRDEwaF8BRuMNaNm/txqSMotQrG2cR1xVs5rQK+3eYpP3P+fn2FzVae5inqKusXlg=
+	t=1784552347; cv=none; b=UNyoewOa9kEed1t1SUbo0f+bCff5BFr7dsZDK1oSj9/EU5pcXA6uncOJ08xo9og3hRrAfkUSBpFELiFHvWkrjPL0OE0qfPSpSeQ48RLnkZ1RVRGT7/T654vNBR2Ngs5QK2Jv37UJVcnBdgj8KwqaMM/xI7IALH0GALcZfCT5Cug=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784549119; c=relaxed/simple;
-	bh=lBlCHnqNPHw+sdBQRoy0mxfEOl+Fs1CJ+TqLbAEEoso=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=EM/IQ/P+ZKWnjoAFcR1ykXDp6SgX2mynVobWXOu2kGA/+1wFpfLrcbrjmLTNs1ImdhzIqWf70vaQ7130y1opeAd2sNuf3tJGYS+QGHN1oqwgXZsQvH27QjbaNuKk/jSaajZ5W1tT5DOVZOJYbRCoYvl40wAVSRz33i8GgRBqQbI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=B9HQO2OK; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784552347; c=relaxed/simple;
+	bh=tj7DETiWrYqcYhPQBV0lQIQF5ojnhC7kaKJUMMnBNUs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=uGppQ2KRZX+kqr+alDOlU7LkR7DipqQLs24YCHKHCNSgZH6k9hDLDyzmXwb1RUWwz9NHqQyYU/4cdrs70cjxLmCsot4k+x11lnFlJnSpG16UGSAPzRbO0EfTtLLhmWjH0wPnhx1aYutwk4QroSyKAC3AT0ktGSuNWogtnVEHUWM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=dKmABXHE; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="B9HQO2OK"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 467DA1F000E9;
-	Mon, 20 Jul 2026 12:05:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784549118;
-	bh=6kB8cgXjUlvK4DFqK6tOCVa24MLFlKujaHR/AlWS8XA=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=B9HQO2OKKrQfI8RCxarM1R2NFwJJA/Y9I59/SJMG7QeNh2z1/tAPofCPmFz/OJBb+
-	 vJgaNQnjZYHJsIj6hiKtDUrb384M3XSqA8v30brg8ksqqF7bQQt+JD99xsWXOaOy5+
-	 zzZOb6M2wazeSJUBZ6jyN6Qcd80313W36w+c/J5IpHLO4NnExg9sN4ro/RBnuSi4XJ
-	 mmaEjxbY9Mo4PT7CjHr5fb7BHj+R/jHP9NLZfbLmbQLhHd4GWcWowwkBBQqP87Qlh2
-	 BBzSUacggiqThmIc10L+igxUcWYienlz06lvZkBo/zfhk5Us3eZA9l2eC83Izz5Qbb
-	 xm9ekvevZBA2A==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2] mfd: iqs62x: reject zero-length firmware records
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Pengpeng Hou" <pengpeng@iscas.ac.cn>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260720115423.94994-1-pengpeng@iscas.ac.cn>
-References: <20260720115423.94994-1-pengpeng@iscas.ac.cn>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 20 Jul 2026 12:05:17 +0000
-Message-Id: <20260720120518.467DA1F000E9@smtp.kernel.org>
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="dKmABXHE"
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2F0EC2B;
+	Mon, 20 Jul 2026 05:59:01 -0700 (PDT)
+Received: from [10.2.212.23] (e121345-lin.cambridge.arm.com [10.2.212.23])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B928E3F99C;
+	Mon, 20 Jul 2026 05:58:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1784552345; bh=tj7DETiWrYqcYhPQBV0lQIQF5ojnhC7kaKJUMMnBNUs=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=dKmABXHEllSGT7FeFg6oxaG2ujJktWVxIXZ3hFzKw45EJWrXdCv86Cdi8Lk3ybb+P
+	 2eyzZw9sSqz4kKd+F7OoRuZNUZsH093wu+fiiSmVRvRLMFKAt3uEPGr18dcBdv9V/F
+	 kKFNdv+XlRp4DjEuV/4GCCvpzaekEZeXf66xmNSY=
+Message-ID: <e4f9b266-8d9e-48fe-99c0-58b61e02c9bd@arm.com>
+Date: Mon, 20 Jul 2026 13:58:27 +0100
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/8] iommu/fsl: use platform_device_set_fwnode()
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, Danilo Krummrich <dakr@kernel.org>,
+ Madhavan Srinivasan <maddy@linux.ibm.com>,
+ Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>,
+ "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+ Andi Shyti <andi.shyti@kernel.org>, "Joerg Roedel (AMD)" <joro@8bytes.org>,
+ Will Deacon <will@kernel.org>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Doug Berger <opendmb@gmail.com>,
+ Florian Fainelli <florian.fainelli@broadcom.com>,
+ Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>, Andrew Lunn
+ <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>,
+ Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>, Ulf Hansson <ulfh@kernel.org>,
+ Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, Lee Jones <lee@kernel.org>,
+ Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
+ Srinivas Kandagatla <srini@kernel.org>
+Cc: brgl@kernel.org, driver-core@lists.linux.dev,
+ linuxppc-dev@lists.ozlabs.org, linux-kernel@vger.kernel.org,
+ linux-i2c@vger.kernel.org, iommu@lists.linux.dev, netdev@vger.kernel.org,
+ linux-pm@vger.kernel.org, imx@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org, mfd@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org
+References: <20260720-pdev-set-fwnode-instead-of-of-node-v1-0-2dee93f42c54@oss.qualcomm.com>
+ <20260720-pdev-set-fwnode-instead-of-of-node-v1-3-2dee93f42c54@oss.qualcomm.com>
+From: Robin Murphy <robin.murphy@arm.com>
+Content-Language: en-GB
+In-Reply-To: <20260720-pdev-set-fwnode-instead-of-of-node-v1-3-2dee93f42c54@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
-s) to consider:
+On 20/07/2026 10:24 am, Bartosz Golaszewski wrote:
+> Prefer the higher-level platform_device_set_fwnode() over the
+> OF-specific platform_device_set_of_node() for dynamically allocated
+> platform devices.
 
-New issues:
-- [Low] The commit message description prefix is not capitalized.
+This is very much non-portable code specific to OF-only platforms, but 
+if the intention is to remove platform_device_set_of_node() again 
+already, then FWIW,
 
-Pre-existing issues:
-- [High] Using a scalar `u8` field as a flexible array triggers `CONFIG_FOR=
-TIFY_SOURCE` panics during `memcpy` due to a strict field-spanning read che=
-ck.
---
+Acked-by: Robin Murphy <robin.murphy@arm.com>
 
---- Patch [1]: [PATCH v2] mfd: iqs62x: reject zero-length firmware records =
----
-commit 73503c1abf73dab697ccffa04ef0c4a85ba0c685
-Author: Pengpeng Hou <pengpeng@iscas.ac.cn>
+(Although I'm slightly puzzled by the cover letter - AFAICS in -next, 
+platform_device_set_of_node() is itself very much a user of 
+platform_device_set_fwnode(), however in terms of symbol exports, 
+perhaps the former could now just be a static inline wrapper?)
 
-mfd: iqs62x: reject zero-length firmware records
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> ---
+>   drivers/iommu/fsl_pamu.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/iommu/fsl_pamu.c b/drivers/iommu/fsl_pamu.c
+> index c83bbc3faad56d6ee1c89b0a7f74028af02c81e9..268a1f752fbceab4fd24013aeea5df1b6982fbb1 100644
+> --- a/drivers/iommu/fsl_pamu.c
+> +++ b/drivers/iommu/fsl_pamu.c
+> @@ -975,7 +975,7 @@ static __init int fsl_pamu_init(void)
+>   		goto error_device_alloc;
+>   	}
+>   
+> -	platform_device_set_of_node(pdev, np);
+> +	platform_device_set_fwnode(pdev, of_fwnode_handle(np));
+>   
+>   	ret = pamu_domain_init();
+>   	if (ret)
+> 
 
-This commit fixes a vulnerability in the iqs62x firmware parser where a=20
-zero-length record could cause the size cursor to move backwards. The patch=
-=20
-adds a check to reject zero-length records and rewrites the remaining-size=
-=20
-check to avoid an offset addition.
-
-Link: https://lore.kernel.org/all/20260706091034.75865-1-pengpeng@iscas.ac.=
-cn/
-
-> mfd: iqs62x: reject zero-length firmware records
-
-[Severity: Low]
-This isn't a bug, but the commit message description after the subsystem=20
-prefix is not capitalized. Should it be formatted as "mfd: iqs62x: Reject=20
-zero-length firmware records" to match the subsystem conventions?
-
-> diff --git a/drivers/mfd/iqs62x.c b/drivers/mfd/iqs62x.c
-> index ee017617d1d1b..412ae7777f729 100644
-> --- a/drivers/mfd/iqs62x.c
-> +++ b/drivers/mfd/iqs62x.c
-> @@ -237,7 +237,7 @@ static int iqs62x_firmware_parse(struct iqs62x_core *=
-iqs62x,
->  		fw_rec =3D (struct iqs62x_fw_rec *)(fw->data + pos);
->  		pos +=3D sizeof(*fw_rec);
-> =20
-> -		if (pos + fw_rec->len - 1 > fw->size) {
-> +		if (!fw_rec->len || fw_rec->len - 1 > fw->size - pos) {
->  			ret =3D -EINVAL;
->  			break;
->  		}
-
-[Severity: High]
-This is a pre-existing issue, but does using a scalar u8 field as a variable
-length array trigger a CONFIG_FORTIFY_SOURCE panic further down in this
-function?
-
-The data field is declared as a 1-byte scalar:
-
-struct iqs62x_fw_rec {
-	u8 type;
-	u8 addr;
-	u8 len;
-	u8 data;
-} __packed;
-
-During parsing, a pointer to this 1-byte field is taken and passed as the=20
-source for memcpy:
-
-drivers/mfd/iqs62x.c:iqs62x_firmware_parse() {
-	...
-	case IQS62X_FW_REC_TYPE_DATA:
-		mask =3D 0;
-		data =3D &fw_rec->data;
-		len =3D fw_rec->len;
-		break;
-	...
-	memcpy(fw_blk->data, data, len);
-}
-
-If the firmware contains an IQS62X_FW_REC_TYPE_DATA record with a length=20
-greater than 1, will memcpy abort and trigger a kernel panic due to the=20
-strict field-spanning read check?
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260720115423.9499=
-4-1-pengpeng@iscas.ac.cn?part=3D1
