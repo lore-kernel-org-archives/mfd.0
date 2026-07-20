@@ -1,174 +1,110 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C5AD3F0ABC;
-	Mon, 20 Jul 2026 11:05:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.19
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4942C349CCF
+	for <mfd@lists.linux.dev>; Mon, 20 Jul 2026 11:25:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784545519; cv=none; b=JplNr59x6nKEdRBJTmSJTEDqj/UnvWXnDbKW4eKMUk97nQ3JHhYxRG7rbLuaPHRoMdqKr3DtvA6cb3u2oArEcyqtQIiP/eTgHi+CpkSZ9bvuyg4/AQRbmUx0wY8QMVQJP0RyOjJeQwB2oXsCz6+hkVZADVeeLy87jj8HWf34RZ8=
+	t=1784546760; cv=none; b=rhcf4PLCqsOkUMhp6L4+7QBEaLwTRZ3YHltlpjgm5ryyl1wVK3cFMq9r9/HSJhW9LR3bvKnbfAhnGckMHGIzPaJUXr0XCJScgoszvByfJd99YBh50aEkk70vg7yuA2/LYn6AnUydnmP1n+eFru13uXjzWWUfcBEzKDBEKIvpYsE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784545519; c=relaxed/simple;
-	bh=cgrVbqvHirhm8/ft9p1L7cLcou2SKIvhDcqiCnRwQmo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=eWU//lFhyQtrEzl4KDe8hC13jl1M5Vbku9Ar3NpJlyXPd5K3WxHucaql96QuGCss2OqCrMBVjI6rNkiItwTmXInZ+22lW4gqYQM419cBwtSj0Tfp2lmUHHNBYiCqS64DKuPoHrYoQ4E7VewrmX0PtTWc84JpHZMVoad5isNMKGI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=jvOtQpBq; arc=none smtp.client-ip=192.198.163.19
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1784546760; c=relaxed/simple;
+	bh=MK/EvtItOpT/zgPL5nusrcrvyqvBtj5dEqAmbXtdchU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=bG6yWtEUgnJsesweTMdfuC1TlUK4HleqJtWlLhD2RNpJPzpOPw2Q2oabB9YiR+3wgSe0kW2VUNVJNVW0dpH+kMqq43277rkYOdGra8uf0t0iIT8Clzt9MIMEJwYXw62aCmzxy2aUXSBGVmEAZORPujLp9DpGwp++fPu4ApEjrpE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cse.iitm.ac.in; spf=pass smtp.mailfrom=cse.iitm.ac.in; dkim=pass (2048-bit key) header.d=cse-iitm-ac-in.20251104.gappssmtp.com header.i=@cse-iitm-ac-in.20251104.gappssmtp.com header.b=z2o14kCG; arc=none smtp.client-ip=209.85.216.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cse.iitm.ac.in
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cse.iitm.ac.in
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="jvOtQpBq"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1784545513; x=1816081513;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=cgrVbqvHirhm8/ft9p1L7cLcou2SKIvhDcqiCnRwQmo=;
-  b=jvOtQpBqPev0RqW686ijzWihxJ56VZ8NcAK4CeuLfQsl4GLL4jNn3xtl
-   i6/AsFyALBwnvKK9vQJNscHpCGIWOnXLqlSATA32MizgXMrL7JYhaVTbt
-   +TNI0QBqmzdopZhbXePxv+EJIxM6hz1eWa+inec8gWs9Q9+LfBNduGOXK
-   VWI8caHsXiLY3g73Hg+noVz3/yEvuBZBHVK6J7zSnGCkI4p9FaCSzi6Ne
-   vGQHa+0tExQjPs2fv7Su2mWyL2E2fPV/+jkyDm334cmy26RvhoMQNJmPX
-   POamLj4aCFIhPysPf02U4aE2DApqhpsyNjMSHfV7Xh5wTuqI6d2o6fItz
-   w==;
-X-CSE-ConnectionGUID: I+RyvlkvT/ymHSjBsMGXjQ==
-X-CSE-MsgGUID: +Y3jqVKdQ8iZ41wtxjme1A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11851"; a="84106769"
-X-IronPort-AV: E=Sophos;i="6.25,174,1779174000"; 
-   d="scan'208";a="84106769"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
-  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jul 2026 04:05:09 -0700
-X-CSE-ConnectionGUID: b65oAi9yQSiq7NfKO+hA7Q==
-X-CSE-MsgGUID: BER5zIsIRdezir+MK+zDWw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,174,1779174000"; 
-   d="scan'208";a="254815588"
-Received: from kniemiec-mobl1.ger.corp.intel.com (HELO kekkonen.fi.intel.com) ([10.245.244.94])
-  by fmviesa008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jul 2026 04:05:01 -0700
-Received: from kekkonen.localdomain (localhost [IPv6:::1])
-	by kekkonen.fi.intel.com (Postfix) with SMTP id D5319121C2B;
-	Mon, 20 Jul 2026 14:05:03 +0300 (EEST)
-Date: Mon, 20 Jul 2026 14:05:03 +0300
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6 krs, Bertel Jungin Aukio 5, 02600 Espoo
-From: Sakari Ailus <sakari.ailus@linux.intel.com>
-To: johannes.goede@oss.qualcomm.com
-Cc: Link Mauve <linkmauve@linkmauve.fr>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Kevin Hilman <khilman@baylibre.com>,
-	Jerome Brunet <jbrunet@baylibre.com>,
-	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
-	Andy Shevchenko <andy@kernel.org>,
-	Tianshu Qiu <tian.shu.qiu@intel.com>,
-	Bingbu Cao <bingbu.cao@intel.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Aaro Koskinen <aaro.koskinen@iki.fi>,
-	Andreas Kemnade <andreas@kemnade.info>,
-	Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>,
-	Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	"Vaibhaav Ram T.L" <vaibhaavram.tl@microchip.com>,
-	Kumaravel Thiagarajan <kumaravel.thiagarajan@microchip.com>,
-	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	Vladimir Zapolskiy <vz@mleia.com>,
-	=?iso-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>,
-	Orson Zhai <orsonzhai@gmail.com>,
-	Baolin Wang <baolin.wang@linux.alibaba.com>,
-	Chunyan Zhang <zhang.lyra@gmail.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Praveen Teja Kundanala <praveen.teja.kundanala@amd.com>,
-	Kalyani Akula <kalyani.akula@amd.com>,
-	Michal Simek <michal.simek@amd.com>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	Joshua Kinard <linux@kumba.dev>,
-	Antoniu Miclaus <antoniu.miclaus@analog.com>,
-	Chen-Yu Tsai <wens@kernel.org>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Samuel Holland <samuel@sholland.org>,
-	Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
-	Gary Guo <gary@garyguo.net>,
-	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
-	Benno Lossin <lossin@kernel.org>,
-	Andreas Hindborg <a.hindborg@kernel.org>,
-	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Daniel Almeida <daniel.almeida@collabora.com>,
-	Tamir Duberstein <tamird@kernel.org>,
-	Alexandre Courbot <acourbot@nvidia.com>,
-	Onur =?iso-8859-1?Q?=D6zkan?= <work@onurozkan.dev>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Johan Hovold <johan@kernel.org>,
-	Ronald Claveau <linux-kernel-dev@aliel.fr>,
-	Salah Triki <salah.triki@gmail.com>, Yury Norov <ynorov@nvidia.com>,
-	David Carlier <devnexen@gmail.com>,
-	Achim Gratz <Achim.Gratz@stromeko.de>,
-	Alexander Sverdlin <alexander.sverdlin@siemens.com>,
-	Patrick Wicki <patrick.wicki@siemens.com>,
-	Markus Heidelberg <m.heidelberg@cab.de>,
-	Markus Perkins <markus@notsyncing.net>,
-	Uwe =?iso-8859-1?Q?Kleine-K=F6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Abd-Alrhman Masalkhi <abd.masalkhi@gmail.com>,
-	Chen Ni <nichen@iscas.ac.cn>, Kees Cook <kees@kernel.org>,
-	linux-arm-kernel@lists.infradead.org,
-	linux-amlogic@lists.infradead.org, linux-kernel@vger.kernel.org,
-	linux-iio@vger.kernel.org, linux-media@vger.kernel.org,
-	linux-omap@vger.kernel.org, mfd@lists.linux.dev,
-	linux-i2c@vger.kernel.org, linux-gpio@vger.kernel.org,
-	imx@lists.linux.dev, linux-arm-msm@vger.kernel.org,
-	linux-stm32@st-md-mailman.stormreply.com, linux-rtc@vger.kernel.org,
-	linux-sunxi@lists.linux.dev, rust-for-linux@vger.kernel.org
-Subject: Re: [PATCH 8/8] media: ov2740: remove NULL reg_write callback
-Message-ID: <al4A3wmBCrCy_HDs@kekkonen.localdomain>
-References: <20260715175229.24672-1-linkmauve@linkmauve.fr>
- <20260715175229.24672-9-linkmauve@linkmauve.fr>
- <al3sxMUgeK49dwNs@kekkonen.localdomain>
- <8d86ca46-d329-4e65-a7bf-2b79fccddf05@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=cse-iitm-ac-in.20251104.gappssmtp.com header.i=@cse-iitm-ac-in.20251104.gappssmtp.com header.b="z2o14kCG"
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-381216921aaso9679353a91.1
+        for <mfd@lists.linux.dev>; Mon, 20 Jul 2026 04:25:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cse-iitm-ac-in.20251104.gappssmtp.com; s=20251104; t=1784546755; x=1785151555; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=/f8DL2vIooznsDdQVfwxZs99v9VD407+Uz6ZGQECJlg=;
+        b=z2o14kCGLf9ZIDmE+bL1WTFBOGS+t6fqbTvE4pDrpjZ20ZBXoiRSVBv4LXKvJkChhq
+         JmaiDSKmoPV06ZHR1VCRUIslYYbqFMqUamBaEluFRhX6Y4/ZtCmCfQfQudXh5+8VihBg
+         dLWA30ugN3cm6RMqGu5a7qspTI544XSSg2gctDSdup0zOEUcWQjuz3Jq+fm2Eac/+F5p
+         zosbek4Xor4lYDdy6NMxdBS7/OFueUKu7bXU5vcjQCZsImfDcfVz71vwOPOxjCtbR7iq
+         AYuLzYVje1PPcOKP9NsELgY8ybXPYCCgyI96/FwbkOEP1Rp8ghgjJ0pEymQH/JK5iP3v
+         KUbA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784546755; x=1785151555;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=/f8DL2vIooznsDdQVfwxZs99v9VD407+Uz6ZGQECJlg=;
+        b=b9hGcisaujCwQjY65mxzZ+sGY5nE3VUd647KkKzeeKHUNyezDhDFADaT3WMsHit7xj
+         ZL7mGaJQS/qBDYKGvFLXZRsYdxMWXLxXsC8o8eQhugPkiX0LzWoxfO8aCgOM017tyaJY
+         UZvA2kIPzDyShWhSlhJ5QNT7g35KwHtj7Yr2u00Jfp5hZ7eDk7K6mKd+JpXkXIrlYXMH
+         x725zpRj4z8YMDBLodlG9qrqcmak1haEPmU/tiQWt2dOtKmi9A0wZC3ile8EiEp+W/TJ
+         GihzGkQXXZ5O5hunfMG0HOvFAgVC3FcNffntnQmpB+S8PqQ3Mr3+/WHfEjblopi0EcFg
+         CEAQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrgRWtdQ2hZw6Gbpo3FCgRL7xVIGcYCseG+TgjtfXbtca5KZqjH2Jm66PLAgWWYnNYCz4o=@lists.linux.dev
+X-Gm-Message-State: AOJu0YwCoY5KIhPreli2gflIZNSHoVPtoKTIGy92Xnh3ryJ7nTShh+Oh
+	0XN0jPVaTE/JLzVzqi8PFHd1C6wp7AaQ2EGQMct/gt+5nget+DDtmvwgUKPC3kcyBrs=
+X-Gm-Gg: AR+sD12Kw5Hd5ooFRMGlO0HvM+QRyWPLrrwij+hXH8Kie8Jl7o5kZTn4c8VQ6z6cSFa
+	3FzMg5nd/7zpW0ugnE2jiITa7LfFcLBJ6QVeM7AHUZ253ktV/EC0c2BQ0+lLdZYzMbMWgYRC2oV
+	T2aMXCdz5tBYBikhJl1Jx1Ig8LGm77Bgk02nFR9uS4q1WgaXgtobAe4xXzSqANEtbseJBpyRzc1
+	M8vJ8j3Nfogz9DKl9OHicgSjHAyMe3fnG2xQAKO8Nt1KzxsjwLK1XCiXFjOnwJQQxB2kL35Nj+5
+	VxiAuH/hRNt4ruijY5fYZzoyOvqqKlP81B1V3olNfE1yZslg/qu1mMn5vYlZANjBxkzIHmHqH00
+	/qRE3XhS41Eaza9lMlROPaVpaI+PjhE2oN4q6fEfak9vTDmKINg9t7KpidD1OkZJ3ztlIkUOWWA
+	atoEboe1QKQqsg/5X+B6UysODQS89gdAS+4EyRhNYIlf0BTwtrhy6PD3a4NSngocU/nFtrMFr3+
+	KX55s2QNywbYr50Egac05H6qJXfSsay
+X-Received: by 2002:a17:90b:4a08:b0:380:9157:d6c with SMTP id 98e67ed59e1d1-38e4b41043cmr15033493a91.10.1784546755329;
+        Mon, 20 Jul 2026 04:25:55 -0700 (PDT)
+Received: from Metius.iitm.ac.in ([103.158.43.43])
+        by smtp.googlemail.com with ESMTPSA id a92af1059eb24-13ce2de31a7sm30620268c88.15.2026.07.20.04.25.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 20 Jul 2026 04:25:54 -0700 (PDT)
+From: Abdun Nihaal <nihaal@cse.iitm.ac.in>
+To: lee@kernel.org
+Cc: Abdun Nihaal <nihaal@cse.iitm.ac.in>,
+	mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	gustavo@embeddedor.com,
+	stable@vger.kernel.org
+Subject: [PATCH] mfd: sm501: Fix potential memory leak in sm501_register_gpio_i2c_instance()
+Date: Mon, 20 Jul 2026 16:55:31 +0530
+Message-ID: <20260720112533.70538-1-nihaal@cse.iitm.ac.in>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <8d86ca46-d329-4e65-a7bf-2b79fccddf05@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
 
-Hi Hans,
+The memory allocated for pdev in sm501_create_subdev() is not freed in
+an error path in sm501_register_gpio_i2c_instance(). Fix that by
+releasing the platform dev in the error path.
 
-On Mon, Jul 20, 2026 at 12:34:10PM +0200, johannes.goede@oss.qualcomm.com wrote:
-> Hi Sakari,
-> 
-> On 20-Jul-26 11:39, Sakari Ailus wrote:
-> > Hi,
-> > 
-> > On Wed, Jul 15, 2026 at 07:52:24PM +0200, Link Mauve wrote:
-> >> This field is already initialized to NULL, so there is no reason to
-> >> write it again.
-> >>
-> >> This prevents it from appearing while grepping for reg_write in the
-> >> future.
-> >>
-> >> Signed-off-by: Link Mauve <linkmauve@linkmauve.fr>
-> > 
-> > I believe we need a real name here.
-> 
-> We don't need a real name / official name here, just a "known identity",
-> IOW not "anonoymous1234" since Link has clearly is using Link Mauve as
-> their internet identity (given they went through the trouble of
-> registering it as a domain) I believe the S-o-b here is fine as is.
-> 
-> See: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=d4563201f33a022fc0353033d9dfeb1606a88330
-> where the "real name" policy was weakened to "known identity".
+Fixes: ae7b8eda27b3 ("mfd: sm501: Fix potential NULL pointer dereference")
+Cc: stable@vger.kernel.org
+Signed-off-by: Abdun Nihaal <nihaal@cse.iitm.ac.in>
+---
+Compile tested only. Issue found using static analysis.
 
-Ack, thanks for pointing that out!
+ drivers/mfd/sm501.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
+diff --git a/drivers/mfd/sm501.c b/drivers/mfd/sm501.c
+index b5bda477ebfc..49c6b21a44e8 100644
+--- a/drivers/mfd/sm501.c
++++ b/drivers/mfd/sm501.c
+@@ -1103,8 +1103,10 @@ static int sm501_register_gpio_i2c_instance(struct sm501_devdata *sm,
+ 	/* Create a gpiod lookup using gpiochip-local offsets */
+ 	lookup = devm_kzalloc(&pdev->dev, struct_size(lookup, table, 3),
+ 			      GFP_KERNEL);
+-	if (!lookup)
++	if (!lookup) {
++		platform_device_put(pdev);
+ 		return -ENOMEM;
++	}
+ 
+ 	lookup->dev_id = "i2c-gpio";
+ 	lookup->table[0] = (struct gpiod_lookup)
 -- 
-Regards,
+2.43.0
 
-Sakari Ailus
