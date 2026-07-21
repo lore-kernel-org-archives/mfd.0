@@ -1,355 +1,124 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6347443308
-	for <mfd@lists.linux.dev>; Tue, 21 Jul 2026 09:29:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 492A324E4C4;
+	Tue, 21 Jul 2026 12:25:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784626155; cv=none; b=O2Itbwm1SV0Chec+2oE0zWTMYpiiQo1hdVvl4+/L8ewgAqFev3Lc11OnZ9wG9yyuBnsvfCdvJ45L5lhhHkSqmTlTtzyCwc1p5b63qlCEQa5ZDblyjQS4z11Acy4Gf9ef6tQT63UEHZHobTDoaAq62JTQbMNCCKV6QIUxf8lY9cQ=
+	t=1784636703; cv=none; b=DgnpjR6sPfC5ZNO40Ua2tgaEGUo1ya8WKBPUy7bw9PBILfDQimanIJC4Qt14cXsPMdAQhQVuf7UDogCtWE0li9Isqmw+L8KXN3Q6kZLvbcgsn8yOjNXyDiJyLjpZs/RpUYIqd28opjsjsPkIIF6gDKPq72ywOMwmHW7+vDtuN4o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784626155; c=relaxed/simple;
-	bh=/4X0t21/O4+G9aKODvcsjfWhNZ6g+1ps49Del/TMlEA=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=JV8YP3CX22/JGTRJhQK1arXGx1vTJ9Bzjo9A3Q/uFNOfKxhb7vOm6IT3CuxC22xrv5zR7sfE2CkrNeXfRw0IqpqA/+BygfaWrczU5lHwjM6soyu/PqEMCW02j1qZI17LkRRMUAcGGsD+gq1h9gVP+hCM+LibjxmrbxVXTqyJhIU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dwNzD8SM; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dwNzD8SM"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84DA71F00ADF
-	for <mfd@lists.linux.dev>; Tue, 21 Jul 2026 09:29:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784626153;
-	bh=CDJLucVT4R47Wn7AWbEmW80xVYNcqomm0n8kCgC52XU=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=dwNzD8SMh2MvQuc5sqz/UiAJTf62dy5g1tNLKvIcNpR92JwKHLAbZnKG9zCBN8eWq
-	 MrMH8Tz5rckp13IJsdjv8FCdR/wCh0SvhD1tRPvykWBRuB9Kny3MJE6D5tXUvYHLHt
-	 e9gTI02n1YSCvtA0u1kXTJ3kd2eHnzpDLAfSEvOfMaZZI/B4hx/ZyaRIOYW86JlTiQ
-	 IPv6esWtjqeIdRSL8wUW7vbywDMIugP2XsNzIUDt6tdWpkHynX0moFyZVGQRbxPn39
-	 hFvVMs6Q2rXSSoFf/d9HonPzb2zIyNObWSCt1AOf3fTGHn+Iu2f840V/wstBPCrnNf
-	 wVnpoyAQ5kJ8A==
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5b011edaf7dso9732344e87.2
-        for <mfd@lists.linux.dev>; Tue, 21 Jul 2026 02:29:13 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rp0WqK3KPi0TU6RsSIfQVq/hNU6n99nPgIE6EYcKg1WHcNfUeU8lfNjBrHsdyT3p6YxMcA=@lists.linux.dev
-X-Gm-Message-State: AOJu0YzESFmZFg8/L2SRQKQm4fYvq87qxaHAh6yt70Yd4yIdnTmdydVo
-	U5xUt8vMgVcJTqZ6qdEZvlsNWU/Xg3pvfD0iQbfjc4SpIc0x/xsRUDcRZrHRMkQpblKIUWRCTki
-	W9Br6Z66+FEHva7SzgTO+CUBNN/MIDAm9fEuUUbwbKw==
-X-Received: by 2002:a05:6512:1328:b0:5b0:eda:de2a with SMTP id
- 2adb3069b0e04-5b28f998d04mr3384385e87.35.1784626152102; Tue, 21 Jul 2026
- 02:29:12 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 21 Jul 2026 09:29:11 +0000
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 21 Jul 2026 09:29:10 +0000
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260714-arm-psci-system_reset2-vendor-reboots-v23-8-e7453c548c21@oss.qualcomm.com>
+	s=arc-20240116; t=1784636703; c=relaxed/simple;
+	bh=4hN4hmPKPUnTu7oC1iEny9YOmWeIwosCRJq4ublZ9nU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=jtGlBCljpLHkNJVfUQ23kfUE8gZnFe1f6Ld7MRwc+4lEtggy7wlJw304md1XvtmAc29cXih2dnEO86X10vHyxAEo+kkduToqwVhtOqFEGTFFMdOtOA1zS+TpvSff993BrqJmB8AvaamSyAJcm/WdjPLFhzGDiBKG6JXxBDmh3RY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
+Received: from loongson.cn (unknown [223.64.68.205])
+	by gateway (Coremail) with SMTP id _____8BxWesaZV9qyaAFAA--.21838S3;
+	Tue, 21 Jul 2026 20:24:58 +0800 (CST)
+Received: from kernelserver (unknown [223.64.68.205])
+	by front1 (Coremail) with SMTP id qMiowJCxq8QRZV9qRfsTAA--.52432S2;
+	Tue, 21 Jul 2026 20:24:55 +0800 (CST)
+From: Binbin Zhou <zhoubinbin@loongson.cn>
+To: Binbin Zhou <zhoubb.aaron@gmail.com>,
+	Huacai Chen <chenhuacai@loongson.cn>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Lee Jones <lee@kernel.org>,
+	Yinbo Zhu <zhuyinbo@loongson.cn>,
+	zhanghongchen <zhanghongchen@loongson.cn>,
+	"Rafael J . Wysocki" <rafael@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@linaro.org>,
+	Zhang Rui <rui.zhang@intel.com>,
+	Lukasz Luba <lukasz.luba@arm.com>
+Cc: Huacai Chen <chenhuacai@kernel.org>,
+	Xuerui Wang <kernel@xen0n.name>,
+	loongarch@lists.linux.dev,
+	devicetree@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	mfd@lists.linux.dev,
+	Binbin Zhou <zhoubinbin@loongson.cn>
+Subject: [PATCH v2 0/4] thermal: loongson2: Add support for Loongson-2K0300 SoC
+Date: Tue, 21 Jul 2026 20:24:19 +0800
+Message-ID: <cover.1784619512.git.zhoubinbin@loongson.cn>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260714-arm-psci-system_reset2-vendor-reboots-v23-0-e7453c548c21@oss.qualcomm.com>
- <20260714-arm-psci-system_reset2-vendor-reboots-v23-8-e7453c548c21@oss.qualcomm.com>
-Date: Tue, 21 Jul 2026 09:29:10 +0000
-X-Gmail-Original-Message-ID: <CAMRc=McxoC6711rmXmPb9t21bBsTeBMJ3ieZ1XhyTqMLaMS-4Q@mail.gmail.com>
-X-Gm-Features: AUfX_my1mbfO1VN9YoJGd-EpwSTRR3Y3NySq4UuDtatqCVxMuFBT8FxEQjVt8Jo
-Message-ID: <CAMRc=McxoC6711rmXmPb9t21bBsTeBMJ3ieZ1XhyTqMLaMS-4Q@mail.gmail.com>
-Subject: Re: [PATCH v23 08/13] mfd: core: Add firmware-node support to MFD cells
-To: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-Cc: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	devicetree@vger.kernel.org, Florian Fainelli <florian.fainelli@broadcom.com>, 
-	Krzysztof Kozlowski <krzk@kernel.org>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
-	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, Andre Draszik <andre.draszik@linaro.org>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>, mfd@lists.linux.dev, 
-	Srinivas Kandagatla <srini@kernel.org>, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, Sebastian Reichel <sre@kernel.org>, 
-	Mark Rutland <mark.rutland@arm.com>, Lorenzo Pieralisi <lpieralisi@kernel.org>, 
-	"Rafael J. Wysocki" <rafael@kernel.org>, Daniel Lezcano <daniel.lezcano@kernel.org>, 
-	Christian Loehle <christian.loehle@arm.com>, Ulf Hansson <ulfh@kernel.org>, Lee Jones <lee@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Arnd Bergmann <arnd@arndb.de>, Souvik Chakravarty <Souvik.Chakravarty@arm.com>, 
-	Andy Yan <andy.yan@rock-chips.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
-	John Stultz <john.stultz@linaro.org>, Moritz Fischer <moritz.fischer@ettus.com>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Sudeep Holla <sudeep.holla@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:qMiowJCxq8QRZV9qRfsTAA--.52432S2
+X-CM-SenderInfo: p2kr3uplqex0o6or00hjvr0hdfq/1tbiAgEPCGpe+S4IbAAAsD
+X-Coremail-Antispam: 1Uk129KBj93XoWxJrW5CFy7JFy5Kr48GF13Jrc_yoW8Aw4kpa
+	y5u3sxCF1DGFyUAws3Jw47AF4YvrnYqa9rXF4fGwn8uwn8GFyayrWUta15ZryxCrW09FW2
+	vr1vkrWDCF4kuFXCm3ZEXasCq-sJn29KB7ZKAUJUUUUr529EdanIXcx71UUUUU7KY7ZEXa
+	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+	0xBIdaVrnRJUUUBIb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
+	xVW8Jr0_Cr1UM2kKe7AKxVWUXVWUAwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07
+	AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWU
+	XVWUAwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7V
+	AKI48JMxkF7I0En4kS14v26r126r1DMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY
+	6r1j6r4UMxCIbckI1I0E14v26r1Y6r17MI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7
+	xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVW8ZVWrXwCIc40Y0x0EwIxGrwCI42IY6xII
+	jxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw2
+	0EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x02
+	67AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU0Urc3UUUUU==
 
-On Tue, 14 Jul 2026 19:16:36 +0200, Shivendra Pratap
-<shivendra.pratap@oss.qualcomm.com> said:
-> MFD core has no way to register a child device using an explicit firmware
-> node. This prevents drivers from registering child nodes when those nodes
-> do not define a compatible string. One such example is the PSCI
-> "reboot-mode" node, which omits a compatible string as it describes
-> boot-states provided by the underlying firmware.
->
-> Extend struct mfd_cell with a named firmware-node field to identify a
-> child node under the MFD parent. The node is added to the MFD child
-> device during registration when none is assigned by device tree, ACPI,
-> or software matching.
->
-> Suggested-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-> ---
->  drivers/mfd/mfd-core.c   | 142 ++++++++++++++++++++++++++++++++++++++++-------
->  include/linux/mfd/core.h |  10 ++++
->  2 files changed, 131 insertions(+), 21 deletions(-)
->
-> diff --git a/drivers/mfd/mfd-core.c b/drivers/mfd/mfd-core.c
-> index 7aa32b90cf1e..ba9682ead2ca 100644
-> --- a/drivers/mfd/mfd-core.c
-> +++ b/drivers/mfd/mfd-core.c
-> @@ -10,6 +10,7 @@
->  #include <linux/kernel.h>
->  #include <linux/platform_device.h>
->  #include <linux/acpi.h>
-> +#include <linux/fwnode.h>
->  #include <linux/list.h>
->  #include <linux/property.h>
->  #include <linux/mfd/core.h>
-> @@ -22,6 +23,7 @@
->  #include <linux/regulator/consumer.h>
->
->  static LIST_HEAD(mfd_of_node_list);
-> +static LIST_HEAD(mfd_named_fwnode_list);
->  static DEFINE_MUTEX(mfd_of_node_mutex);
->
->  struct mfd_of_node_entry {
-> @@ -30,10 +32,91 @@ struct mfd_of_node_entry {
->  	struct device_node *np;
->  };
->
-> +struct mfd_named_fwnode_entry {
-> +	struct list_head list;
-> +	struct device *dev;
-> +	struct fwnode_handle *fwnode;
-> +};
-> +
->  static const struct device_type mfd_dev_type = {
->  	.name	= "mfd_device",
->  };
->
-> +static int mfd_claim_named_fwnode(struct platform_device *pdev,
-> +				  struct fwnode_handle *fwnode)
-> +{
-> +	struct mfd_named_fwnode_entry *entry, *iter;
-> +
-> +	entry = kzalloc_obj(*entry, GFP_KERNEL);
-> +	if (!entry)
-> +		return -ENOMEM;
-> +
-> +	entry->dev = &pdev->dev;
-> +	entry->fwnode = fwnode_handle_get(fwnode);
-> +
-> +	scoped_guard(mutex, &mfd_of_node_mutex) {
-> +		list_for_each_entry(iter, &mfd_named_fwnode_list, list)
-> +			if (iter->fwnode == fwnode) {
-> +				fwnode_handle_put(entry->fwnode);
-> +				kfree(entry);
-> +				return -EAGAIN;
-> +			}
-> +
-> +		list_add_tail(&entry->list, &mfd_named_fwnode_list);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +/*
-> + * Temporary MFD-local cleanup for named non-OF child fwnodes.
-> + * Remove/rework this when platform core starts owning and dropping
-> + * dev->fwnode references for these devices.
-> + */
-> +static void mfd_release_named_fwnode(struct platform_device *pdev)
-> +{
-> +	struct mfd_named_fwnode_entry *entry, *tmp;
-> +
-> +	scoped_guard(mutex, &mfd_of_node_mutex) {
-> +		list_for_each_entry_safe(entry, tmp, &mfd_named_fwnode_list, list)
-> +			if (entry->dev == &pdev->dev) {
-> +				if (dev_fwnode(&pdev->dev) == entry->fwnode)
-> +					device_set_node(&pdev->dev, NULL);
-> +				fwnode_handle_put(entry->fwnode);
-> +				list_del(&entry->list);
-> +				kfree(entry);
-> +			}
-> +	}
-> +}
-> +
-> +static int mfd_claim_of_node_to_dev(struct platform_device *pdev,
-> +				    struct device_node *np)
-> +{
-> +	struct mfd_of_node_entry *of_entry, *iter;
-> +
-> +	of_entry = kzalloc_obj(*of_entry, GFP_KERNEL);
-> +	if (!of_entry)
-> +		return -ENOMEM;
-> +
-> +	of_entry->dev = &pdev->dev;
-> +	of_entry->np = of_node_get(np);
-> +
-> +	/* Skip if OF node has previously been allocated to a device */
-> +	scoped_guard(mutex, &mfd_of_node_mutex) {
-> +		list_for_each_entry(iter, &mfd_of_node_list, list)
-> +			if (iter->np == np) {
-> +				of_node_put(of_entry->np);
-> +				kfree(of_entry);
-> +				return -EAGAIN;
-> +			}
-> +
-> +		list_add_tail(&of_entry->list, &mfd_of_node_list);
-> +	}
-> +
-> +	device_set_node(&pdev->dev, of_fwnode_handle(np));
-> +	return 0;
-> +}
-> +
->  #if IS_ENABLED(CONFIG_ACPI)
->  struct match_ids_walk_data {
->  	struct acpi_device_id *ids;
-> @@ -111,19 +194,11 @@ static int mfd_match_of_node_to_dev(struct platform_device *pdev,
->  				    struct device_node *np,
->  				    const struct mfd_cell *cell)
->  {
-> -	struct mfd_of_node_entry *of_entry;
->  	u64 of_node_addr;
->
-> -	/* Skip if OF node has previously been allocated to a device */
-> -	scoped_guard(mutex, &mfd_of_node_mutex) {
-> -		list_for_each_entry(of_entry, &mfd_of_node_list, list)
-> -			if (of_entry->np == np)
-> -				return -EAGAIN;
-> -	}
-> -
->  	if (!cell->use_of_reg)
->  		/* No of_reg defined - allocate first free compatible match */
-> -		goto allocate_of_node;
-> +		return mfd_claim_of_node_to_dev(pdev, np);
->
->  	/* We only care about each node's first defined address */
->  	if (of_property_read_reg(np, 0, &of_node_addr, NULL))
-> @@ -134,18 +209,7 @@ static int mfd_match_of_node_to_dev(struct platform_device *pdev,
->  		/* No match */
->  		return -EAGAIN;
->
-> -allocate_of_node:
-> -	of_entry = kzalloc(sizeof(*of_entry), GFP_KERNEL);
-> -	if (!of_entry)
-> -		return -ENOMEM;
-> -
-> -	of_entry->dev = &pdev->dev;
-> -	of_entry->np = of_node_get(np);
-> -	scoped_guard(mutex, &mfd_of_node_mutex)
-> -		list_add_tail(&of_entry->list, &mfd_of_node_list);
-> -
-> -	device_set_node(&pdev->dev, of_fwnode_handle(np));
-> -	return 0;
-> +	return mfd_claim_of_node_to_dev(pdev, np);
->  }
->
->  static int mfd_add_device(struct device *parent, int id,
-> @@ -156,6 +220,7 @@ static int mfd_add_device(struct device *parent, int id,
->  	struct resource *res;
->  	struct platform_device *pdev;
->  	struct mfd_of_node_entry *of_entry, *tmp;
-> +	struct fwnode_handle *fwnode;
->  	bool disabled = false;
->  	int ret = -ENOMEM;
->  	int platform_id;
-> @@ -224,6 +289,37 @@ static int mfd_add_device(struct device *parent, int id,
->
->  	mfd_acpi_add_device(cell, pdev);
->
-> +	/* named_fwnode is a fallback only when no OF/ACPI match and no swnode */
-> +	if (!pdev->dev.fwnode && !cell->swnode && cell->named_fwnode) {
+Hi all:
 
-Use dev_fwnode() instead of pdev->dev.fwnode.
+This patch series adds thermal zone support for the Loongson-2K0300 SoC.
 
-> +		struct device_node *named_np;
-> +
-> +		fwnode = device_get_named_child_node(parent, cell->named_fwnode);
-> +		if (!fwnode) {
-> +			ret = -ENODEV;
-> +			goto fail_alias;
-> +		}
-> +
-> +		named_np = to_of_node(fwnode);
-> +		if (named_np) {
-> +			ret = mfd_claim_of_node_to_dev(pdev, named_np);
-> +			fwnode_handle_put(fwnode);
-> +			if (ret == -EAGAIN)
-> +				ret = -EBUSY;
-> +			if (ret)
-> +				goto fail_alias;
-> +		} else {
-> +			ret = mfd_claim_named_fwnode(pdev, fwnode);
-> +			if (ret) {
-> +				fwnode_handle_put(fwnode);
-> +				if (ret == -EAGAIN)
-> +					ret = -EBUSY;
-> +				goto fail_alias;
-> +			}
-> +			device_set_node(&pdev->dev, fwnode);
-> +			fwnode_handle_put(fwnode);
-> +		}
+The Loongson-2K0300's thermal sensor is generally compatible with the
+existing Loongson-2K series, but it features several key differences:
+1. It has an independent CPU ID register for reading chip version
+information.
+2. The raw temperature output field has been extended from 8 bits to 11
+bits.
+3. The temperature calculation formula has been updated to incorporate a
+correction factor based on the version information.
 
-What is the reason to have this split into OF and fwnode functions? I don't
-really see why you would need to do it twice, isn't fwnode sufficient for the
-OF node case too?
+To ensure robustness on older hardware revisions, a fallback mechanism
+is included: if the calculated temperature falls outside the valid range
+(-55 TO 125),  the driver falls back to a simpler calculation and prints
+a warning.
 
-> +	}
-> +
->  	if (cell->pdata_size) {
->  		ret = platform_device_add_data(pdev,
->  					cell->platform_data, cell->pdata_size);
-> @@ -295,6 +391,7 @@ static int mfd_add_device(struct device *parent, int id,
->  	if (cell->swnode)
->  		device_remove_software_node(&pdev->dev);
->  fail_of_entry:
-> +	mfd_release_named_fwnode(pdev);
->  	scoped_guard(mutex, &mfd_of_node_mutex) {
->  		list_for_each_entry_safe(of_entry, tmp, &mfd_of_node_list, list)
->  			if (of_entry->dev == &pdev->dev) {
-> @@ -382,7 +479,10 @@ static int mfd_remove_devices_fn(struct device *dev, void *data)
->  	regulator_bulk_unregister_supply_alias(dev, cell->parent_supplies,
->  					       cell->num_parent_supplies);
->
-> +	get_device(&pdev->dev);
->  	platform_device_unregister(pdev);
-> +	mfd_release_named_fwnode(pdev);
-> +	put_device(&pdev->dev);
->  	return 0;
->  }
->
-> diff --git a/include/linux/mfd/core.h b/include/linux/mfd/core.h
-> index faeea7abd688..8daa83dd31ea 100644
-> --- a/include/linux/mfd/core.h
-> +++ b/include/linux/mfd/core.h
-> @@ -80,6 +80,16 @@ struct mfd_cell {
->
->  	/* Software node for the device. */
->  	const struct software_node *swnode;
-> +	/*
-> +	 * Name of a child firmware node under the MFD parent device.
-> +	 *
-> +	 * Used only as a fallback when no firmware node is assigned to MFD
-> +	 * child and no software node is provided.
-> +	 *
-> +	 * For Device Tree parents, lookup is by base node name only
-> +	 * (the part before '@'). Unit-addresses are not matched.
-> +	 */
+The patches have been validated on the Loongson-2K0300 development board.
 
-Side note: struct mfd_cell could really use a proper kernel doc but that's out
-of scope of this series.
+Thanks.
+Binbin
 
-> +	const char *named_fwnode;
->
->  	/*
->  	 * Device Tree compatible string
->
-> --
-> 2.34.1
->
->
+=========
+V2:
+Patch (1/4):
+ - New patch form Sashiko;
+Patch (2/4):
+ - New patch for adding chipid syscon compatible;
+Patch (3/4):
+ - Use `loongson,chipid` phandle replace chipid reg property;
+Patch (3/4):
+ - Refact `calib_offset` calculate routing;
+ - Add LS2K0300_OLD_FUSE_FLAG flag.
 
-Bartosz
+Link to V1:
+https://lore.kernel.org/all/cover.1783670011.git.zhoubinbin@loongson.cn/
+
+Binbin Zhou (4):
+  thermal/drivers/loongson2: Correct thermal sensor registration loop
+  dt-bindings: mfd: syscon: Allow syscon compatible for Loongson-2K0300
+    chip id
+  dt-bindings: thermal: loongson,ls2k-thermal: Add compatible for
+    Loongson-2K0300
+  thermal/drivers/loongson2: Add support for Loongson-2K0300
+
+ .../devicetree/bindings/mfd/syscon.yaml       |   2 +
+ .../thermal/loongson,ls2k-thermal.yaml        |  73 ++++++++---
+ drivers/thermal/loongson2_thermal.c           | 120 +++++++++++++++---
+ 3 files changed, 162 insertions(+), 33 deletions(-)
+
+-- 
+2.52.0
+
