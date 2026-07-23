@@ -1,44 +1,42 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0A674746DB;
-	Thu, 23 Jul 2026 11:47:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CE11370ADC;
+	Thu, 23 Jul 2026 11:51:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784807281; cv=none; b=HlIouizAaadwTpu2p7K+6sVb6O+onHF1RufQaHs/8Asv/GOjsRKa4P19stpEktI3WehiQSAYga/rdSjF5Hvh9QBDd5aNd4OH0gNNzu3+rwfUbaVRZjFQBw3n0312XDLYwh5kCo/14xIoYoaBIeHP8qjO9PAU0XFZmxCDVoS2gQg=
+	t=1784807504; cv=none; b=Dvn544LOjXVsrCYHXOxjBnQDNqFc0Wk1SQzOaGjUVpQFFG5wpOfNhOjzcnUYbhFPDltL0VN+rKbx4yWz0o1E+dGdWbu14R44aosyh4frk5FKofFU8zuW+NysmeJk2jAMLPwp9lDGZt6pFU0MRb2zj1X85NykBrJyhHrdcQoePKc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784807281; c=relaxed/simple;
-	bh=2HAvzQGrqD07VEjwEcNFLP/YKtrXeZ1beHHWENP3RFo=;
+	s=arc-20240116; t=1784807504; c=relaxed/simple;
+	bh=Z3nb6HVG1GTUdoXT7hOsIu8xTLWpsZZuFYESu05qzlM=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=F9fMqT5XN4V5JFzMFfh6pem0RwuiLblLZjb6dO/ncqrX+GiEOF8lq8CF3ew79fzLqU9YxHnUeyQxlCitK7aOXuHrkt5Ag4G5BsLz/fojH769Mk54WYfEeiaRpdSa07Tf6VlkmUCbsbE7Ir3pOtJ9w/eMoY+MQWRWXvkAoLMbYI8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=opVoIbSJ; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=so9o54Km0l/DjcUxK/h7mn1kMBa8RxzlxPf7Mf0A2zQUT1lyAAOuoG5xBduXQMgfpv6ezXGBR9M+qBe+F2onvSjwhWYVhepnSTJw7mbs5iYH8yHVY+hFDrWylWbcIjOC2s6kTrHKV0v8DwGV14WuVyTsQkpwe/EmzTBNJw+ky8c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KGt85kU5; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="opVoIbSJ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 629441F000E9;
-	Thu, 23 Jul 2026 11:47:43 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KGt85kU5"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E79B1F00A3A;
+	Thu, 23 Jul 2026 11:51:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784807265;
-	bh=Ow2XPwZ3YNPTJe7csNdht/Pq2Y/yki9zWGHeSHHGR20=;
+	s=k20260515; t=1784807493;
+	bh=dKFI4P9SHqECxGCF0p5S46UhsYNl4tqIC3o9YbTl8nk=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=opVoIbSJ+gP/NqoQ7GfhZ79+VyKYOQhiGITsvpbMDWc2YjJDGh172OnqT6dXBL63D
-	 5DOIWLghHVak3OKiXAkpunL72eEmjcBXzp0Kys8SSm/6t2KMFaF+m20EhxhXwJqT8M
-	 yQQyY6h87rgJzO26+ZGGSnb+iAOYdQ8Eet0nWsZcnTCwQyC5S7F/8FwkTddykyCup1
-	 1Z6AH/9pTZS1ykoPZWnqKmXe4WBYrc5da75AW2rBZXnl9k9G4cW7Pn6Tp/XE35BJFw
-	 SMhVbzpzDqv27VE8Kl0Yw5vp5d5AgFgc8UvXcOg0T7A89Eg9QKT218vlD47m4azlfB
-	 IF9WwYJyhWrQw==
+	b=KGt85kU555tXyZxukvUGi9xRw/I+dC+VNoe7i/XuB0ATlzPdQOWAJPlDANWjRG6zZ
+	 VdsblW0zV01pWHKQwN9DZgyQrgMdyShJLP7m4BnxiXau7edcXmwYXvb+KQ4IBti7WL
+	 Xx+Vreoq6l+YlEYwftqw6b7vpZy2YMAiMEVhPW9T+9DEUTajXgeG6QYibVrMZtrAw7
+	 FaO85V+hhuxmcCIZyBXzedWLlj62yQ0gfUXnq/jcOJepo+cw6gxO3rGwl9tVYmybho
+	 JJmfJfSYkHNLCAl+zSu4f5IhZbf6Dp9PbWVGF0Ge/+eicTFFzuw1WYavi//Fjt8MI/
+	 k32Gh+oECihcw==
 From: Lee Jones <lee@kernel.org>
-To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, mfd@lists.linux.dev, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-In-Reply-To: <20260710192737.1689453-1-mukesh.ojha@oss.qualcomm.com>
-References: <20260710192737.1689453-1-mukesh.ojha@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH] dt-bindings: mfd: qcom,tcsr: Add compatible
- for Hawi and Maili SoCs
-Message-Id: <178480726312.3379667.17255236799309866218.b4-ty@b4>
-Date: Thu, 23 Jul 2026 12:47:43 +0100
+To: Lee Jones <lee@kernel.org>, Thomas Richard <thomas.richard@bootlin.com>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, mfd@lists.linux.dev, 
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
+ Sashiko <sashiko-bot@kernel.org>
+In-Reply-To: <20260713-cgbc-core-fix-cgbc-remove-v1-1-79274ad62b3a@bootlin.com>
+References: <20260713-cgbc-core-fix-cgbc-remove-v1-1-79274ad62b3a@bootlin.com>
+Subject: Re: (subset) [PATCH] mfd: cgbc: Fix teardown ordering in
+ cgbc_remove()
+Message-Id: <178480749205.3382441.5364233727433592490.b4-ty@b4>
+Date: Thu, 23 Jul 2026 12:51:32 +0100
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -49,14 +47,13 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-Mailer: b4 0.16-dev-ad80c
 
-On Sat, 11 Jul 2026 00:57:37 +0530, Mukesh Ojha wrote:
-> Document Top Control and Status Register (TCSR) controller for
-> Qualcomm Hawi and Maili SoCs.
+On Mon, 13 Jul 2026 16:43:43 +0200, Thomas Richard wrote:
+> Release Board Controller session once children are removed by the core.
 
 Applied, thanks!
 
-[1/1] dt-bindings: mfd: qcom,tcsr: Add compatible for Hawi and Maili SoCs
-      commit: 74d90f4f3cb5046e362f0635a7469e2522241a31
+[1/1] mfd: cgbc: Fix teardown ordering in cgbc_remove()
+      commit: adfe19688536f8f6d2bfd84c33b5af8f26e1e4f8
 
 --
 Lee Jones [李琼斯]
