@@ -1,42 +1,43 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CB334C77BE;
-	Thu, 23 Jul 2026 13:10:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DD0049251F
+	for <mfd@lists.linux.dev>; Thu, 23 Jul 2026 13:11:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784812219; cv=none; b=TN2JE/jCJWJeHJPRD7aKjZKi5Ka4GHXl7iHBCg5Aahhc04NSTqHtC917KHv92WQLVF2/qJ1S4Smw8J38GG7QFKwyFS+didemWYnqp/c4TnPrifAZz2HFvM8Jai3HqX97f7b/WnzfRtgNV+ttSJrBgmdk7f6anPwynflkqOTAvPk=
+	t=1784812285; cv=none; b=B9t05v9v3ce325qr/zYQYd3VDym8Ab8T0jJJHToMDhbpDsBgnl8GHwvndJf2nQjCTrbDqPwW7t0AUJUTCD87LRg+96m3dQ312AVG+ZOkI3PY3Xriio50kvax+y1GTlt7KLT588CbYUUuzaHHuq/6UqeAqHiEqZgIfInuYsDOCZ0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784812219; c=relaxed/simple;
-	bh=pOvxQOpYtUtLAYxIH+6d6cOe14toLz5qDMDQSHER2WY=;
+	s=arc-20240116; t=1784812285; c=relaxed/simple;
+	bh=6PQXJnZxutX7RFrEAdY2fMB5cxTsqQ6Nt60OZUrOFtA=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=KQXZunGi/RWCZwEp1Q0eARB5Jvc9MTRmM+PknQ5jnTTfFR/pBCr04HroT1GVRjeUT0Wnr+KxQIrvX9GHnTA+9DD9u3nM6psfMLB9glxU4IX8tMQ6A+8p4oMK8PUCsBjhyNG3c3mNiHPMDWcy+4PAmlCWiISRfU2b4tGfGJwuI5g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2DA671F00A3A;
-	Thu, 23 Jul 2026 13:10:12 +0000 (UTC)
-Date: Thu, 23 Jul 2026 14:10:08 +0100
+	 Content-Type:Content-Disposition:In-Reply-To; b=CtfK64vUdkg7UfPW1YI+gIqLV73f+zKryYyg15xKNV0Sxd57jwZJMNXwCxcceNE4cJg6Vf5oGrw696mRWpzXfqGqmmOdX6hdcqFHDOC+Oc1vUqMOEIK/fzOvXUx1I7qehYjkPkxFWmsv+wUWtD2eEUH2qYHS8ME6ErGjpBu1g7Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OXqdwSll; arc=none smtp.client-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OXqdwSll"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4C0C31F000E9;
+	Thu, 23 Jul 2026 13:11:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784812284;
+	bh=DF88iCS2fxLZtG7VmYmHms6eQ0BytnPCqUw4pg3UOUU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=OXqdwSllfThlfnf1z+RwLYiOItg2Et5KsHp8Vem6RZ85bR/bYZTTeVuJJIE0GArGc
+	 adTq/Nd0Tn4hHPOe8hC6/QTOYLgE4aqrVYs5qQF22UiNu9ZRbQI+d1OIiMFf9UPxlA
+	 WEItu8P1Lzow/F0Ya0z4YOlgaBDtUmjegkklV3ykiR+VwKU0o+RctnwKolZ1U7iFkF
+	 589xSghXVKsbSyQXUQgl1//KQaQip9Z7x4wI37FBESEHn2m/lYdSBtEzCC+lg/3LNF
+	 IS+LY7MWpbGRlIWSxnxMCcH3ig1Cp2Bdx/nyebTLSow+rLH5LOSu5tY6Dv53B2Tyws
+	 Lkk1SL1kXRzhw==
+Date: Thu, 23 Jul 2026 14:11:20 +0100
 From: Lee Jones <lee@kernel.org>
 To: Miao Wang <shankerwangmiao@gmail.com>
-Cc: Miao Wang via B4 Relay <devnull+shankerwangmiao.gmail.com@kernel.org>,
-	Binbin Zhou <zhoubinbin@loongson.cn>,
-	Chong Qiao <qiaochong@loongson.cn>,
-	Huacai Chen <chenhuacai@kernel.org>,
-	Corey Minyard <corey@minyard.net>,
-	Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Xi Ruoyao <xry111@xry111.site>, WANG Xuerui <kernel@xen0n.name>,
-	Yinbo Zhu <zhuyinbo@loongson.cn>,
-	Jiaxun Yang <jiaxun.yang@flygoat.com>, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org, linux-gpio@vger.kernel.org,
-	openipmi-developer@lists.sourceforge.net
-Subject: Re: [PATCH RFC v3 1/7] mfd: ls2kbmc: Make a copy when parsing mode
- string
-Message-ID: <20260723131008.GK3363113@google.com>
+Cc: mfd@lists.linux.dev
+Subject: Re: [PATCH RFC v3 7/7] mfd: ls2kbmc: Capture the reset event of BMC
+ through GPIO
+Message-ID: <20260723131120.GL3363113@google.com>
 References: <20260710-ls2kbmc-mod-v3-0-ef718636e78e@gmail.com>
- <20260710-ls2kbmc-mod-v3-1-ef718636e78e@gmail.com>
- <20260723112940.GC3363113@google.com>
- <034E7CC0-47AA-40A3-BCB8-B9BEA2190DCA@gmail.com>
- <2FF2A15C-6170-49A3-9E9F-F5CAAEC67AE4@gmail.com>
+ <20260710-ls2kbmc-mod-v3-7-ef718636e78e@gmail.com>
+ <20260709174055.D25E71F00A3A@smtp.kernel.org>
+ <20260723112903.GB3363113@google.com>
+ <E1909632-6D06-4648-986C-6B7867D231DB@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -46,43 +47,36 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <2FF2A15C-6170-49A3-9E9F-F5CAAEC67AE4@gmail.com>
+In-Reply-To: <E1909632-6D06-4648-986C-6B7867D231DB@gmail.com>
 
 On Thu, 23 Jul 2026, Miao Wang wrote:
 
+> Hi,
 > 
-> 
-> > 2026年7月23日 20:02，Miao Wang <shankerwangmiao@gmail.com> 写道：
+> > 2026年7月23日 19:29，Lee Jones <lee@kernel.org> 写道：
 > > 
-> > Hi,
+> > On Thu, 09 Jul 2026, sashiko-bot@kernel.org wrote:
 > > 
-> >> 2026年7月23日 19:29，Lee Jones <lee@kernel.org> 写道：
+> >> Thank you for your contribution! Sashiko AI review found 3 potential issue(s) to consider:
 > >> 
-> >> Why is this v3 set still RFC?  What comment are you requesting?
+> >> New issues:
+> >> - [High] Unprotected access to `gpio_chip` without a NULL check leads to a potential NULL pointer dereference or use-after-free.
+> >> - [Medium] The ACPI memory resource search for the GPIO controller only checks the first memory descriptor, ignoring any subsequent ones.
 > > 
-> > The reason why this is still in RFC is that I am still waiting
-> > for response and discussion from Loongson personals on the
-> > proposal that adding a DSDT entry for the ls2kbmc device that
-> > describes the GPIO pin associated with the device to signal
-> > the reset event of that BMC device. As pointed by Ruoyao,
-> > such a proposal will need to be discussed with Loongson. I have
-> > CC-ed the patch to the relevant maintainers from Loongson but
-> > failed to receive any response.
-> > 
-> > Moreover, I am also in need of comments on the backup method
-> > of searching the GPIO device and pin when such a DSDT entry
-> > is not available.
-> > 
+> > Looks like there are a few of these to consider.
 > 
-> To complement, the part that I'm in need of comments is the
-> 7-th patch of this series. The first 6 patches are focusing on
-> fixing the existing issues in this driver. I thought that they
-> could be managed to be applied altogether so that the driver
-> would become a good, ready-to-use state. If the first 6 patches
-> are good to be applied and we still receive no response from
-> Loongson personnels, can I split the series into 2 parts?
+> Many thanks for your response. I was preparing a v4 to fix the first issue
+> found by the bot. However, I believe that the second issue is false positive,
+> since the memory descriptors (if more than one) in _CRS are ordered and the
+> position is meaningful for the driver. As a result, only checking the first
+> descriptor is acceptable.
+> 
+> > 
+> > I'm unmarking this for review for now.
+> 
+> I still want review for other improvement suggestions. Thanks in advance.
 
-I don't see any reason why not.
+Due to extreme workload, I need a clean or justified Sashiko pass first.
 
 -- 
 Lee Jones
