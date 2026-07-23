@@ -1,257 +1,195 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D749F466AF7
-	for <mfd@lists.linux.dev>; Thu, 23 Jul 2026 13:33:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B50314DB549;
+	Thu, 23 Jul 2026 13:37:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784813609; cv=none; b=PWpqDQ6/A5JLw4jZr0Vz/aL3ZYRSAXpNrTz2TY2xGG0qpQsOlKnOPxf4+INiIHERT+o2NOIdbd65ubd4oeEx9nujGGXl1ZWPMSO3icQBkPEnbpbqKP62cr6MOg8HjGSvh7m/tbxLKQgJVTSeDVbmodUxMsPai5L9EIHmkWDz/vU=
+	t=1784813842; cv=none; b=h2hzWHHW6QjTwTB2L3NEfg3+/B4LHSZz9KRTSxRPtxBBVaKgEPmmdHmrPaF1deOEJIH+OhzdpYib63n4EtwowQiWmwCYlblfWSvaj0RKSmQ07U1PpcBmYyOj7c0bWjlIcwUTGYczL6KpWNKolkVb5URTZ/waDNMbX2tlK1d29Xc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784813609; c=relaxed/simple;
-	bh=pWsZFrbNUS6eEaXbQAM66UZCQPvicce1zTVxzu/L6nM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=iWJ9pkicCmsriV/8nH7ihhebBLAe0qoVpucsQvYRFJh1wuNcGOLE5/4S663p6g+J0l9fL9CHKaSwlfv9G5qggjAjSDcPW1fA5lfpsnPvxpI371xzVCg4MQhnZ5AfvyR0rtd9cAO1xf8FPWRUGwB3XlwCAVw7jdxtZuNrsIEY3cE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=d5itg1F0; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=JPAELp40; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1784813842; c=relaxed/simple;
+	bh=ux96JHRvVVpout67821Hsu/xYkq+I8zUWvKumxd41PU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=J9FEbKyw/Ud0wUCNfMig5AnKrlPdoacm6XU0t21LNJtzo2hJmD6/uLQ/GSZcdhqiYeLzgRFxKR9/QSwzTCCz2AUlsnJA6mGXZ+DDq5a8lcefE2MPh+2gccdb1Yj+htOHFwMN4374RskjjKphSs3/Q+IiJv7RFh5kdpExeOvyXbo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=D4CM9y+I; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="d5itg1F0";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JPAELp40"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66NCvU2F3819807
-	for <mfd@lists.linux.dev>; Thu, 23 Jul 2026 13:33:27 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	AAJ92+dVKkhStldqu20Psdf6IGjmApe60MPX/QGCFWI=; b=d5itg1F0Kk0mU1DI
-	fimuZV/3TiUVVzE8yLSvIflcj1ApAf2/HjRwb7DE9KCmAND+kTWLsTmaE1tMl4Q2
-	NZbjavDKoY3MQaNgufXBodHRUpggkEEVDXCTtYAoGY1+4MC+hSGfkiuFEf/438I5
-	+J471LtDsPK/R+svfiWFa13EYwD3nFw+/P1iyCuIpBFgSptn9UBlyGeOFZFbMrK3
-	BXikjjCnAB0eQDgE7eB8b6iAw/6DCAIlpavYu0qrj3AqwwvWk5xBdPnxIWlHXYDj
-	qeFuxIKnk2wFpmY3bocGO7H0uFlVwSiQYr+voyuhZnPeJHTmLDXYSM14Z5hfn04i
-	k6Jong==
-Received: from mail-ot1-f70.google.com (mail-ot1-f70.google.com [209.85.210.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkafw2e2v-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <mfd@lists.linux.dev>; Thu, 23 Jul 2026 13:33:27 +0000 (GMT)
-Received: by mail-ot1-f70.google.com with SMTP id 46e09a7af769-7ec54966bedso424869a34.0
-        for <mfd@lists.linux.dev>; Thu, 23 Jul 2026 06:33:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784813606; x=1785418406; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=AAJ92+dVKkhStldqu20Psdf6IGjmApe60MPX/QGCFWI=;
-        b=JPAELp40dLzEJlzUax0HYQl+mGOQx5ce+YsrsnjEfj0+p12JkzBr92UeoMFf2WyBIe
-         xKmpFDnSwYFEqr5Bp5KzwgRmPsCyrHk3hjhP1kV5JGNMX9s99wV6HZabc2t+1SoqYYBR
-         aezF/lOlt+JyvHIyIb/ZpBWR3evQ62EDzXCFlXHk6FecsnxtVKL6JgoRwOp8VOBKinAE
-         lnF6cG7CL40BoF5SVpFYzGXkNUNpdHnPeiwKQn9vYulMAac6mGCBxstgP8oflzuoljFB
-         34FQmqsQ0lb+3t2ehyLtMTSEJr9RvtTs1JJtEVt6MT9oUBqLCYFR/D2tGMyMQ0Yb+b3D
-         9KuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784813606; x=1785418406;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=AAJ92+dVKkhStldqu20Psdf6IGjmApe60MPX/QGCFWI=;
-        b=Pulbb/ZTBrPuM8V6qWCZ0Z2krEFWQEmRNusKGFNfCROOtjMrQ1E+ieo1ZiFI6nisa6
-         yhftP3NfL75VSlKg8f8/GaIcNGolti1huZv151nmqj+smcHseSlZrpsHB/BMQLJ+C5J7
-         +sQnhU/T9T+rN9n7BkpIc2JHCUHE5/PKn2TEInA/bys46loF3afaWTLjff3MVqsMEOu9
-         fhlkib2++A8Viu6gkvKwFFZS6RgOEwcB2D7PNkIfLdZWtVTysMqtlWhHWP/8/cLdH+vB
-         1mRcs/qJGsE7I9rzoEr1LfZxVAqy/zFKSTIeTJFLguyp6eO9PROkHTDol+XcL5nbtaKL
-         HX7Q==
-X-Forwarded-Encrypted: i=1; AHgh+RoFyHybFr96k0IKusRSFDfWR55i1d/TP382b2dqY7BMiVznvrK6NClFUe4lkzOgoScBgsE=@lists.linux.dev
-X-Gm-Message-State: AOJu0YwPH+g0N+SSoChnML68AsZJLl0Z2BB2hOamYZOHOeP24gTMcteY
-	oEYoupcoT/956l8YGg+3lkFnj5m50gPIF+HkJt9Sb7vzjxJiv8Qzr3fHTdnt7D/jz3YqbECNo2b
-	iB8MqCbnFW2fHRErdi6ScPDXmbYwlicSPZr16iPSAB60hDUfKes1ia4I=
-X-Gm-Gg: AR+sD11CDNr8Nk+ZSGNyXTsgCcoKWsX5HdgYhzq6fX1rn/k4W79dtJXrn9nhnYUBIUU
-	T0wPSGQBHnNPfaBHugd+dIXdfUo7MFrFcQbF48Yx271ZdiTbsDZptxVPSYf6M95vpHwwnKmnFez
-	iKTfYABwbX9BaQQG1GF6q0L++77Y7zM6EYdSCQSyuRa5B62QQEmiX06ZDXUvipoxUCv/THfh9t7
-	xVAOO7tb1Oel8L01W1ihv/p7dqLSxR7FZ4fnhKOejYrTXS2NUupPlDMAnPgy6SB/YDZhSVRcxdV
-	BnT+6/+J2WhFgffSar8a2Y5OCRKiTj75vuUH8ypx1ZL8iI1RjLaJhWpVJz7NMWIar4NezIISaaT
-	uuuoN/5QUma+enGijiwdb2y1LbUhhLynTCFE=
-X-Received: by 2002:a9d:7d8c:0:b0:7e9:dd46:b9f8 with SMTP id 46e09a7af769-7ee471926ebmr889180a34.15.1784813606315;
-        Thu, 23 Jul 2026 06:33:26 -0700 (PDT)
-X-Received: by 2002:a9d:7d8c:0:b0:7e9:dd46:b9f8 with SMTP id 46e09a7af769-7ee471926ebmr889159a34.15.1784813605732;
-        Thu, 23 Jul 2026 06:33:25 -0700 (PDT)
-Received: from [10.219.57.229] ([202.46.23.19])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7ee2a0b3803sm3569083a34.21.2026.07.23.06.33.14
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 23 Jul 2026 06:33:25 -0700 (PDT)
-Message-ID: <0ee2667f-db43-4e5a-9b4d-2c2404d4ae5b@oss.qualcomm.com>
-Date: Thu, 23 Jul 2026 19:03:12 +0530
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="D4CM9y+I"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 02D1D1F00A3A;
+	Thu, 23 Jul 2026 13:37:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784813836;
+	bh=t/KFcynf/k9c8mZW4LGu8D4kjq0zTk/109tsCS8SqKQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=D4CM9y+In3+nzlP2NeBxy5pUW+2v3MRmetmRSB0ebBYfSSG2yJYCCNQdK34UVVAjU
+	 PtEPUVAiNcR1MAeseQ3n/p38g/LFXkExP3OXeQdyJ046JiWVWLuC9Bx54cRdBccxro
+	 Ay/2OYIEKZKpa/l8t65qSmoNOMVm20T1dUPK13Xb2uGzGbCppwG00ed30N9L1WBZ8z
+	 ps99t00h43WeH0KEBemf25BSo/DNswU91R91IYg7t3SZKF/t80MOlyIJAV54RJVyn4
+	 WJ/t5jJO53LwXEuDgWKjMo0RzicFfz44FcMfVKQkp85TeMCNjW8IeBhK1GyDxQNgvA
+	 H5cMEOqEfNCIA==
+Date: Thu, 23 Jul 2026 14:37:11 +0100
+From: Lee Jones <lee@kernel.org>
+To: sashiko-reviews@lists.linux.dev
+Cc: "Ionut Nechita (Wind River)" <ionut.nechita@windriver.com>,
+	mfd@lists.linux.dev
+Subject: Re: [PATCH v1 1/1] fpga: m10bmc-sec: add image_load sysfs for N3000
+ and D5005
+Message-ID: <20260723133711.GM3363113@google.com>
+References: <20260715073854.26117-1-ionut.nechita@windriver.com>
+ <20260715073854.26117-2-ionut.nechita@windriver.com>
+ <20260715075504.3B2FB1F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v23 06/13] dt-bindings: arm: Document reboot mode magic
-To: Rob Herring <robh@kernel.org>
-Cc: Sebastian Reichel <sre@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Christian Loehle <christian.loehle@arm.com>,
-        Ulf Hansson <ulfh@kernel.org>, Lee Jones <lee@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-        Souvik Chakravarty <Souvik.Chakravarty@arm.com>,
-        Andy Yan <andy.yan@rock-chips.com>,
-        Matthias Brugger
- <matthias.bgg@gmail.com>,
-        John Stultz <john.stultz@linaro.org>,
-        Moritz Fischer <moritz.fischer@ettus.com>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Sudeep Holla
- <sudeep.holla@kernel.org>, linux-pm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
-        Florian Fainelli <florian.fainelli@broadcom.com>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
-        Andre Draszik <andre.draszik@linaro.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
-        mfd@lists.linux.dev, Srinivas Kandagatla <srini@kernel.org>
-References: <20260714-arm-psci-system_reset2-vendor-reboots-v23-0-e7453c548c21@oss.qualcomm.com>
- <20260714-arm-psci-system_reset2-vendor-reboots-v23-6-e7453c548c21@oss.qualcomm.com>
- <20260722171108.GA1097879-robh@kernel.org>
-Content-Language: en-US
-From: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-In-Reply-To: <20260722171108.GA1097879-robh@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=XNkAjwhE c=1 sm=1 tr=0 ts=6a621827 cx=c_pps
- a=7uPEO8VhqeOX8vTJ3z8K6Q==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=PV7ZYYKFBiq-RxTmBQMA:9 a=QEXdDO2ut3YA:10
- a=EXS-LbY8YePsIyqnH6vw:22
-X-Proofpoint-ORIG-GUID: i0IJDT3h8MrVfRx57kDP2PnO5VM9sY8j
-X-Proofpoint-GUID: i0IJDT3h8MrVfRx57kDP2PnO5VM9sY8j
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDEzMyBTYWx0ZWRfX22cYyUGaZQAq
- U1wHIOkmFx6CrI0ZqcrMNaw4JiifOqEO7Z+msV31hLwkzA2zhsJL17/pzgHg1o0A2f1DXfjQhEF
- IpZeeiZgEr3xnaKMp6Jg6eXJliZMyns=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDEzMyBTYWx0ZWRfX+r+cvs1h6kK/
- mcQT5Lz+yIPuzGHlqaFJtqKiVGy5hTtD8/Ft6Tn/GlnXbf0quBu5tt+JEKFqbZc9GGtRDQniKza
- fLNyHYz0l55MHbN3HzXxFv/nWmaAFCzsKB8zei4JrgU+OdExCET2UgEKzZjLF+sDARNiwnj0/vt
- q2V7LsdRE6jNc/0T18PVwwipXf2kfHNsjcUqLw65JPVfFALFUUl6UEqwgcJsrDyEhgWn/Hhl6Zd
- EtO2CD7VShgdLo119jvKdTE9yrfE1JF7YjBs1Intn0XxurkHJSIyZywzpS78/jCsC3mHgqVY1x4
- UJTA4TIGzK5gGlPWCcn7ejq7OiW0j3cSNcYuMfULqrtrPQ9W3fZh6q8jURgW255H3TxBUOw912s
- LkCRrnpPnrLyXrLxdUNe2ctTz4RgnB4h2onLkKqoNxFMvnYP9ICrdtmPwSGlsKqwQ11VX2ktFBW
- GeiIZN9mx/sA4QxyZ6g==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-23_04,2026-07-22_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 impostorscore=0 suspectscore=0 bulkscore=0 clxscore=1015
- lowpriorityscore=0 phishscore=0 priorityscore=1501 malwarescore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230133
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260715075504.3B2FB1F000E9@smtp.kernel.org>
 
+On Wed, 15 Jul 2026, sashiko-bot@kernel.org wrote:
 
+> Thank you for your contribution! Sashiko AI review found 3 potential issue(s) to consider:
+> - [High] Lack of synchronization in the `image_load` sysfs handler allows concurrent firmware reloads and races with ongoing secure firmware uploads.
+> - [Medium] The 'control' sysfs group creates an empty directory even when the device does not support image loading, failing to completely hide the group.
+> - [Low] The image load handler arrays and their pointer in `m10bmc_sec_ops` are not declared as `const`, storing function pointers in mutable memory.
 
-On 22-07-2026 22:41, Rob Herring wrote:
-> On Tue, Jul 14, 2026 at 10:46:34PM +0530, Shivendra Pratap wrote:
->> Add bindings to describe vendor-specific reboot modes. Values here
->> correspond to valid parameters to vendor-specific reset types in PSCI
->> SYSTEM_RESET2 call.
->>
->> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
->> ---
->>   Documentation/devicetree/bindings/arm/psci.yaml | 54 +++++++++++++++++++++++++
->>   1 file changed, 54 insertions(+)
->>
->> diff --git a/Documentation/devicetree/bindings/arm/psci.yaml b/Documentation/devicetree/bindings/arm/psci.yaml
->> index 6e2e0c551841..11b90e8affb3 100644
->> --- a/Documentation/devicetree/bindings/arm/psci.yaml
->> +++ b/Documentation/devicetree/bindings/arm/psci.yaml
->> @@ -98,6 +98,37 @@ properties:
->>         [1] Kernel documentation - ARM idle states bindings
->>           Documentation/devicetree/bindings/cpu/idle-states.yaml
->>   
->> +  reboot-mode:
->> +    type: object
->> +    $ref: /schemas/power/reset/reboot-mode.yaml#
->> +    additionalProperties: false
->> +    properties:
->> +      # "mode-normal" is just SYSTEM_RESET
->> +      mode-normal: false
->> +    patternProperties:
->> +      "^mode-.*$":
+Please show that you have at least considered these, or better mitigated them.
+
+> --
 > 
-> Since your example violates naming rules:
+> --- Patch [1]: [PATCH v1 1/1] fpga: m10bmc-sec: add image_load sysfs for N3000 and D5005 ---
+> commit d97d9214f834756bd204bc187982a995a0b7658d
+> Author: Ionut Nechita <ionut.nechita@windriver.com>
 > 
-> "^mode-[a-z0-9]+$"
+> fpga: m10bmc-sec: add image_load sysfs for N3000 and D5005
 > 
->> +        minItems: 1
->> +        maxItems: 3
->> +        items:
->> +          - description: arg1 (vendor-specific SYSTEM_RESET2 reset_type)
->> +            minimum: 0x80000000
->> +          - description: arg2 (cookie_lo in 2-cell form, cookie_hi in 3-cell form)
->> +          - description: arg3 (cookie_lo in 3-cell form)
->> +        description: |
->> +          Describes a PSCI SYSTEM_RESET2 vendor-specific reset type. The string
->> +          after "mode-" maps a reboot mode to a vendor-specific reset.
->> +          A vendor-specific reset takes two arguments, a 32-bit reset_type and a
->> +          64-bit cookie. The arguments are encoded as up to three 32-bit cells.
->> +          Each mode property is encoded as mode-xxx = <arg1[, arg2[, arg3]]>,
->> +          where:
->> +          - arg1 is reset_type and must be >= 0x80000000.
->> +          - In 2-cell form, arg2 is lower 32 bits of cookie.
->> +          - In 3-cell form, arg2 is high 32 bits of cookie
->> +            and arg3 is low 32 bits of cookie.
->> +
->> +          All values should be provided as per the PSCI SYSTEM_RESET2
->> +          specification.
->> +
->>   patternProperties:
->>     "^power-domain-":
->>       $ref: /schemas/power/power-domain.yaml#
->> @@ -137,6 +168,15 @@ allOf:
->>         required:
->>           - cpu_off
->>           - cpu_on
->> +  - if:
->> +      not:
->> +        properties:
->> +          compatible:
->> +            contains:
->> +              const: arm,psci-1.0
->> +    then:
->> +      properties:
->> +        reboot-mode: false
->>   
->>   additionalProperties: false
->>   
->> @@ -260,4 +300,18 @@ examples:
->>           domain-idle-states = <&cluster_ret>, <&cluster_pwrdn>;
->>         };
->>       };
->> +
->> +  - |+
->> +
->> +    // Case 5: SYSTEM_RESET2 vendor resets
->> +    psci {
->> +      compatible = "arm,psci-1.0";
->> +      method = "smc";
->> +
->> +      reboot-mode {
->> +        mode-edl = <0x80000000 0x00000001>;
->> +        mode-bootloader = <0x80010001 0x00000002>;
->> +        mode-needscookie_64 = <0x80000000 0x00000001 0x00000002>;
+> This commit adds the control/available_images and control/image_load
+> sysfs attributes to trigger a reload of a BMC or PKVL retimer firmware
+> image. It handles device-specific configuration for N3000 and D5005 cards.
+> The control group is intended to be hidden when not supported.
 > 
-> Don't use '_' in property names. This is a W=2 warning.
+> > diff --git a/drivers/fpga/intel-m10-bmc-sec-update.c b/drivers/fpga/intel-m10-bmc-sec-update.c
+> > index 7d23d914df3f2..7a390cd705161 100644
+> > --- a/drivers/fpga/intel-m10-bmc-sec-update.c
+> > +++ b/drivers/fpga/intel-m10-bmc-sec-update.c
+> > @@ -15,8 +15,14 @@
+> >  
+> >  struct m10bmc_sec;
+> >  
+> > +struct image_load {
+> > +	const char *name;
+> > +	int (*load_image)(struct m10bmc_sec *sec);
+> > +};
+> > +
+> >  struct m10bmc_sec_ops {
+> >  	int (*rsu_status)(struct m10bmc_sec *sec);
+> > +	struct image_load *image_load;		/* terminated with { } member */
+> 
+> [Severity: Low]
+> Should this pointer be declared as const struct image_load * to ensure the
+> function pointers remain in read-only memory?
+> 
+> >  };
+> 
+> [ ... ]
+> 
+> > +static struct image_load n3000_image_load_hndlrs[] = {
+> > +	{
+> > +		.name = "bmc_factory",
+> > +		.load_image = m10bmc_sec_bmc_image_load_1,
+> > +	},
+> > +	{
+> > +		.name = "bmc_user",
+> > +		.load_image = m10bmc_sec_bmc_image_load_0,
+> > +	},
+> > +	{
+> > +		.name = "retimer_fw",
+> > +		.load_image = m10bmc_sec_retimer_eeprom_load,
+> > +	},
+> > +	{}
+> > +};
+> > +
+> > +static struct image_load d5005_image_load_hndlrs[] = {
+> > +	{
+> > +		.name = "bmc_factory",
+> > +		.load_image = m10bmc_sec_bmc_image_load_0,
+> > +	},
+> > +	{
+> > +		.name = "bmc_user",
+> > +		.load_image = m10bmc_sec_bmc_image_load_1,
+> > +	},
+> > +	{}
+> > +};
+> 
+> [Severity: Low]
+> Would it be better to mark these arrays as const? Placing executable
+> function targets in mutable memory increases the kernel's attack surface.
+> 
+> [ ... ]
+> 
+> > +static ssize_t image_load_store(struct device *dev,
+> > +				struct device_attribute *attr,
+> > +				const char *buf, size_t count)
+> > +{
+> > +	struct m10bmc_sec *sec = dev_get_drvdata(dev);
+> > +	const struct image_load *hndlr;
+> > +	int ret = -EINVAL;
+> > +
+> > +	for (hndlr = sec->ops->image_load; hndlr->name; hndlr++) {
+> > +		if (sysfs_streq(buf, hndlr->name)) {
+> > +			ret = hndlr->load_image(sec);
+> > +			break;
+> > +		}
+> > +	}
+> > +
+> > +	return ret ? : count;
+> > +}
+> > +static DEVICE_ATTR_WO(image_load);
+> 
+> [Severity: High]
+> Does this sysfs handler need synchronization (such as acquiring bmcfw_lock)?
+> 
+> Without driver-level locking, concurrent writes to the image_load attribute
+> could cause multi-step hardware operations to race. This might also race
+> with ongoing secure firmware uploads in the background.
+> 
+> For example, m10bmc_sec_retimer_eeprom_load() performs a check-then-act
+> sequence:
+> 
+> m10bmc_sec_retimer_eeprom_load()
+>     retimer_check_idle(sec);
+>     trigger_retimer_eeprom_load(sec);
+>     poll_retimer_eeprom_load_done(sec);
+> 
+> Could concurrent executions silently corrupt the hardware doorbell state?
+> 
+> > +
+> > +static umode_t
+> > +m10bmc_control_visible(struct kobject *kobj, struct attribute *attr, int n)
+> > +{
+> > +	struct m10bmc_sec *sec = dev_get_drvdata(kobj_to_dev(kobj));
+> > +
+> > +	if (!sec->ops->image_load)
+> > +		return 0;
+> > +
+> > +	return attr->mode;
+> > +}
+> 
+> [Severity: Medium]
+> The commit message states the control group is hidden for the N6000:
+> "The control group is hidden via its is_visible() callback whenever the
+> device ops do not provide an image_load table, so N6000 ... is unaffected."
+> 
+> However, does returning 0 here actually hide the group directory?
+> 
+> As per the sysfs API, returning 0 for a named group only suppresses its
+> internal attributes, leaving an empty directory visible. Should this
+> return SYSFS_GROUP_INVISIBLE to completely hide the control/ directory?
+> 
+> -- 
+> Sashiko AI review · https://sashiko.dev/#/patchset/20260715073854.26117-2-ionut.nechita@windriver.com?part=1
 
-sure thanks. Will fix this.
-
-thanks,
-Shivendra
+-- 
+Lee Jones
