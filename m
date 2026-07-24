@@ -1,162 +1,184 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52E30376BE0
-	for <mfd@lists.linux.dev>; Fri, 24 Jul 2026 19:33:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 668CD3EDE56
+	for <mfd@lists.linux.dev>; Fri, 24 Jul 2026 21:31:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784921626; cv=none; b=PX6h3d9CYq4pJ0cyYJ0FemCiIXBsqCScnmiihqHdD45F2vZxo3T2/2/FWREel1qcVg3GZ9vAOVLfEL8riqlOAoCLfEu1ag+Bu5keQA9HstsTOFqxqUVwusPEoYW9TLyui4U8IfTmwKv5onaRmCxc4+Wqe97MQ0ddo6hckl1cVtE=
+	t=1784928705; cv=none; b=WSMdfzrw6eL1GBoj8G8RyKDiqqomkDi9w246ClfYpy1LPWbO3UMyi/nbznw8MvOhW+zwz24mmlZsJlrV80spSbkfswQe2G6Ot6SVb+Qwe1nR6ilMJnC4GIDEdsKx6Z/KikD/WxSyJjgJyUSrGzYJPzZXBQJ+E8WZuohNs2dZTJ4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784921626; c=relaxed/simple;
-	bh=IlS+BY3NWCkLm3Ydm0/CJDaOYm47Ppq0anudGwnatB8=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=gB9obnWZ2OD6rXMqbZkSGkd8ZwtEIwYFNoQmqRwyUfLIVlJaKScullZYAeQz0gKqkRyfumwJClkZM/5WzUJDIlNU/s+CyAL+UTNt3uYJbMXZfRpIwO1pqRmg6Q+eW8JuPfHbV91pW8hiAUzIaIEO5IKDAONCCsnGZs5L7JRE6Jw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SYniMtyu; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784928705; c=relaxed/simple;
+	bh=3BXWnD402hSfrfyEk+w77kbuQrHpzt9R/PGME+Cz84g=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=JZXfN/aAtg8fazBkbrWBLymEMy3GAtXbGXKLqXKSWTaWgvCzwazUXVVuoY5G3D0b9719/hFb7+/sPo1tQLDI8zi5qObzZmsKD4xdOPmRF6YKC+9NsFHtpLHhmgm2uP2qrDyIwRUHlE4N4Gw21tg7MoYU8IzbM0M47l7OHJAGUmw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OCoFx7j2; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SYniMtyu"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 026861F000E9;
-	Fri, 24 Jul 2026 19:33:44 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OCoFx7j2"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 80AC91F0155D
+	for <mfd@lists.linux.dev>; Fri, 24 Jul 2026 21:31:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784921625;
-	bh=clX8UOBgG1nq604gq2V71FYOg8vr5HLvZmUTSuWfNEo=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=SYniMtyuLGBUX9EvX9dyqJXwJfHUS0Hp5jH0rghgC7p5jBE0uJhwSAZ2krzEPlups
-	 Ffx099AR971OEQCrkdjxZQ2YziFbClYBEEroNPLyxEXbxbwbs1EeI9YyeXZ3mwuc33
-	 0i01MX3gTyD4wnVVwPP2efPrAjlQzA7WAcGKBKEk6TYsFMut+33q04JGTU+qUpGDo9
-	 7mw5YVOPQOl2XlSdZJon5T4VJSGJxuCphrDT+/2Gk7RznywvT/4w5yaYFXN2jf9LHj
-	 TjP/nL+IDRbChGeLDRz5/y28fAXk/IHXs2UuWodE7CVMUGuY37gDtSkiTunP/OVxoX
-	 RoghTBopthc3w==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2] fpga: m10bmc-sec: add image_load sysfs for N3000 and
- D5005
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Ionut Nechita" <ionut.nechita@windriver.com>
-Cc: lee@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260724192117.60493-1-ionut.nechita@windriver.com>
-References: <20260724192117.60493-1-ionut.nechita@windriver.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Fri, 24 Jul 2026 19:33:44 +0000
-Message-Id: <20260724193345.026861F000E9@smtp.kernel.org>
+	s=k20260515; t=1784928703;
+	bh=1lyKPNn2+QBheUHLLKeFUz3rZkaxAhPd6rt5QtwoqWY=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=OCoFx7j2pIEMeh9nhRSL8q/TYgVfqJjt4dtbiICKctHvcakmeRD09WLrhX6nKPJu0
+	 dVndMg9nCsYBR6MLTXYiH2aATB7R79iQp0JN9vuhmWubEnXHCytzsVrVdCNdffdJmU
+	 dpYnFt1ZYDI2GJPyp452rcXEi8stnsMn/HpGFR9LcatN7nAVjuHJa7tztCCtmLXET0
+	 hmUCtkuP5lUKHcvJhw1IWPuOnRHoHurSUf354KkaNVSGR39tW7IZtGtDh2UQvuoV+f
+	 rFz0D08y4+BuGwd69jzb0XhxjEVtAPJ7NvGUNXzAFkKnqRrRBNTKBtom0VsTmxqLjT
+	 esqUfx3aGyY2g==
+Received: by mail-lj1-f175.google.com with SMTP id 38308e7fff4ca-39c7fd45465so7998301fa.1
+        for <mfd@lists.linux.dev>; Fri, 24 Jul 2026 14:31:43 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RpkM1tDLW3iRk0UKucohr8tSe0BMrc+Q7W4aR1pXM0NhrlAQl9xQ7p3NsMtc5bPNaqZUTA=@lists.linux.dev
+X-Gm-Message-State: AOJu0YyW8aluzGbWPh811QgAwVA9rwtOHFfunF+zS7B2Zbxaz9pWm2IC
+	tS96NJykg7neZHa36nga5tJqXAlTePZjBvlDYf0x20tvvl3QG5x9/lCksx3nzi9HN3Exo5ssWZX
+	3/evPZuwqAVmTk/1X1DLT2W4+ycSWWPE=
+X-Received: by 2002:a05:6512:368e:b0:5ae:b584:562b with SMTP id
+ 2adb3069b0e04-5b2b2f76626mr1381067e87.48.1784928701837; Fri, 24 Jul 2026
+ 14:31:41 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+References: <20260714-upstream-v2-v2-0-76e5e41026db@advantech.com> <20260714-upstream-v2-v2-2-76e5e41026db@advantech.com>
+In-Reply-To: <20260714-upstream-v2-v2-2-76e5e41026db@advantech.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Fri, 24 Jul 2026 23:31:29 +0200
+X-Gmail-Original-Message-ID: <CAD++jLn9VMq5RcGQy-1TB=SdgkynSDbjeeKoNQ7Z4ZArw-AGFw@mail.gmail.com>
+X-Gm-Features: AUfX_mx-62JQQDBcTKutXOrN-Q2fNr59laJWx5ddo44mrkoC0a-8lhzFzZvvk98
+Message-ID: <CAD++jLn9VMq5RcGQy-1TB=SdgkynSDbjeeKoNQ7Z4ZArw-AGFw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/8] Add Advantech EIO GPIO driver
+To: Ramiro Oliveira <ramiro.oliveira@advantech.com>
+Cc: Lee Jones <lee@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, Guenter Roeck <linux@roeck-us.net>, 
+	Andi Shyti <andi.shyti@kernel.org>, Daniel Thompson <danielt@kernel.org>, 
+	Jingoo Han <jingoohan1@gmail.com>, Helge Deller <deller@gmx.de>, 
+	Wim Van Sebroeck <wim@linux-watchdog.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
+	Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
+	Lukasz Luba <lukasz.luba@arm.com>, linux-kernel@vger.kernel.org, mfd@lists.linux.dev, 
+	linux-gpio@vger.kernel.org, linux-hwmon@vger.kernel.org, 
+	linux-i2c@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	linux-fbdev@vger.kernel.org, linux-watchdog@vger.kernel.org, 
+	linux-pm@vger.kernel.org, Wenkai Chung <wenkai.chung@advantech.com.tw>, 
+	Francisco Aragon-Trivino <francisco.aragon-trivino@advantech.com>, 
+	Hongzhi Wang <hongzhi.wang@advantech.com>, 
+	Mikhail Tsukerman <mikhail.tsukerman@advantech.com>, 
+	Thomas Kastner <thomas.kastner@advantech.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
-s) to consider:
-- [High] The `cancel_request` flag is erroneously cleared after acquiring `=
-sec->lock` in `m10bmc_sec_prepare()`, causing valid firmware update cancell=
-ations to be silently ignored.
-- [Medium] The `is_visible` callback for the `control` group returns `0` in=
-stead of `SYSFS_GROUP_INVISIBLE` when the device does not support image rel=
-oading, leaving an empty directory in sysfs.
---
+Hi Ramiro,
 
---- Patch [1]: [PATCH v2] fpga: m10bmc-sec: add image_load sysfs for N3000 =
-and D5005 ---
-commit d8e9e7daf1e274b64b2638b22b26c8f13aa35b4d
-Author: Ionut Nechita <ionut.nechita@windriver.com>
+thanks for your patch!
 
-fpga: m10bmc-sec: add image_load sysfs for N3000 and D5005
+On Tue, Jul 14, 2026 at 5:54=E2=80=AFPM Ramiro Oliveira
+<ramiro.oliveira@advantech.com> wrote:
 
-This commit adds the control/available_images and control/image_load sysfs
-attributes for the N3000 and D5005 cards to allow triggering a reload of an
-image already present in FLASH or EEPROM. It also introduces a mutex to
-serialize image reloads against firmware uploads.
 
-Link: https://lore.kernel.org/lkml/20260715073854.26117-1-ionut.nechita@win=
-driver.com/
-Link: https://lore.kernel.org/linux-fpga/amGYhCKpesGH%2FyLB@yilunxu-OptiPle=
-x-7050/
-
-> diff --git a/drivers/fpga/intel-m10-bmc-sec-update.c b/drivers/fpga/intel=
--m10-bmc-sec-update.c
-> index 7d23d914df3f2..06c9f9130c580 100644
-> --- a/drivers/fpga/intel-m10-bmc-sec-update.c
-> +++ b/drivers/fpga/intel-m10-bmc-sec-update.c
-[ ... ]
-> +static umode_t
-> +m10bmc_control_visible(struct kobject *kobj, struct attribute *attr, int=
- n)
+> +static int get_dir(struct gpio_chip *chip, unsigned int offset)
 > +{
-> +	struct m10bmc_sec *sec =3D dev_get_drvdata(kobj_to_dev(kobj));
+> +       u8 dir;
+> +       int ret;
 > +
-> +	if (!sec->ops->image_load)
-> +		return 0;
-
-[Severity: Medium]
-Will returning 0 here for named groups leave an empty control directory in
-sysfs?
-
-If the device does not support image reloading (like N6000), returning 0 hi=
-des
-the individual attributes but still creates the named group directory. Shou=
-ld
-this return SYSFS_GROUP_INVISIBLE instead to suppress the entire directory?
-
+> +       ret =3D pmc_read(chip->parent, EIO_GPIO_PIN_DIR, offset, &dir);
+> +       if (ret)
+> +               return ret;
 > +
-> +	return attr->mode;
+> +       return dir ? 0 : 1;
+
+Please use:
+return dir ? GPIO_LINE_DIRECTION_OUT : GPIO_LINE_DIRECTION_IN;
+
+> +static int dir_input(struct gpio_chip *chip, unsigned int offset)
+> +{
+> +       u8 dir =3D 0;
+
+Use some local define for this stuff like:
+
+#define EIO_GPIO_DIR_IN 0
+#define EIO_GPIO_DIR_OUT 1
+
+> +static int dir_output(struct gpio_chip *chip, unsigned int offset, int v=
+alue)
+> +{
+> +       u8 dir =3D 1;
+
+Also here.
+
+> +       u8 val =3D value;
+> +
+> +       pmc_write(chip->parent, EIO_GPIO_PIN_DIR, offset, &dir);
+> +
+> +       return pmc_write(chip->parent, EIO_GPIO_PIN_LEVEL, offset, &val);
 > +}
 > +
-> +static struct attribute *m10bmc_control_attrs[] =3D {
-> +	&dev_attr_available_images.attr,
-> +	&dev_attr_image_load.attr,
-> +	NULL,
-> +};
-> +
-> +static struct attribute_group m10bmc_control_attr_group =3D {
-> +	.name =3D "control",
-> +	.attrs =3D m10bmc_control_attrs,
-> +	.is_visible =3D m10bmc_control_visible,
-> +};
-[ ... ]
-> -static enum fw_upload_err m10bmc_sec_prepare(struct fw_upload *fwl,
-> -					     const u8 *data, u32 size)
-> +static enum fw_upload_err m10bmc_sec_do_prepare(struct fw_upload *fwl,
-> +						const u8 *data, u32 size)
->  {
->  	struct m10bmc_sec *sec =3D fwl->dd_handle;
->  	const struct m10bmc_csr_map *csr_map =3D sec->m10bmc->info->csr_map;
-[ ... ]
-> +static enum fw_upload_err m10bmc_sec_prepare(struct fw_upload *fwl,
-> +					     const u8 *data, u32 size)
+> +static int gpio_get(struct gpio_chip *chip, unsigned int offset)
 > +{
-> +	struct m10bmc_sec *sec =3D fwl->dd_handle;
-> +	enum fw_upload_err ret;
+> +       u8 level;
+> +       int ret;
 > +
-> +	mutex_lock(&sec->lock);
+> +       ret =3D pmc_read(chip->parent, EIO_GPIO_PIN_LEVEL, offset, &level=
+);
+> +       if (ret)
+> +               return ret;
 > +
-> +	ret =3D m10bmc_sec_do_prepare(fwl, data, size);
+> +       return level;
 
-[Severity: High]
-Does calling m10bmc_sec_do_prepare() overwrite a cancellation requested whi=
-le
-waiting for the lock?
+return !!level;
 
-If a firmware upload starts while an image reload is holding sec->lock,
-m10bmc_sec_prepare() blocks. If a user tries to cancel the upload during th=
-is
-time, it sets sec->cancel_request =3D true asynchronously.
+so you clamp this to [0, 1]
 
-When the lock is finally acquired, m10bmc_sec_do_prepare() unconditionally
-sets the flag to false:
+> +static int check_support(struct device *dev)
 
-static enum fw_upload_err m10bmc_sec_do_prepare(...)
-{
-    ...
-    sec->cancel_request =3D false;
+Check support for what? Spell it out.
 
-Will this erase the abort state and proceed to flash the device despite the
-cancellation request?
-
-> +	if (ret !=3D FW_UPLOAD_ERR_NONE)
-> +		mutex_unlock(&sec->lock);
+> +{
+> +       u8  data;
+> +       int ret;
 > +
-> +	return ret;
+> +       ret =3D pmc_read(dev, EIO_GPIO_STATUS, 0, &data);
+> +       if (ret)
+> +               return ret;
+> +
+> +       if ((data & 0x01) =3D=3D 0)
+> +               return -EOPNOTSUPP;
+
+Use:
+
+#define EIO_GPIO_HAS_SUPPORT_FOR_X BIT(0)
+
+if (!(data & EIO_GPIO_HAS_SUPPORT_FOR_X))
+        return -EOPNOTSUPP;
+
+> +static int check_pin(struct device *dev, int pin)
+> +{
+> +       int ret;
+> +       int group, bit;
+> +       u16 data;
+> +
+> +       /* Get pin mapping */
+> +       ret =3D pmc_read(dev, EIO_GPIO_MAPPING, pin, &data);
+> +       if (ret)
+> +               return ret;
+> +
+> +       if ((data & 0xFF) > ARRAY_SIZE(group_map))
+> +               return -EINVAL;
+> +
+> +       group =3D group_map[data & 0xFF].group;
+> +       bit   =3D data >> 8;
+> +
+> +       /* Check mapped pin */
+> +       ret =3D pmc_read(dev, EIO_GPIO_GROUP_AVAIL, group, &data);
+> +       if (ret)
+> +               return ret;
+> +
+> +       return data & BIT(bit) ? 0 : -EOPNOTSUPP;
 > +}
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260724192117.6049=
-3-1-ionut.nechita@windriver.com?part=3D1
+So there is some pin muxing going on here. If that should be made dynamic
+at some point this should make use of the pin control subsystem, but I gues=
+s
+it is currently hard-coded?
+
+Yours,
+Linus Walleij
