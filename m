@@ -1,44 +1,44 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 254A44322F5;
-	Mon, 27 Jul 2026 18:41:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89F401EF091;
+	Mon, 27 Jul 2026 18:52:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785177717; cv=none; b=Ybp2KUtEtLybVzt0l72gCgc3aGAIi1qFwM27zj4p5PmcGvlzlq4aJkK3sHLSTNSFr6uVjp/9cwSIDd4xssLo4GIm/PV6MwWdG6RZhdUaWLy6k8cG68BKhuilB99xyuLdZxVQn0dkEAXoyJ6jK5Bo249O6u9kF7tS1laTZ8WLIPU=
+	t=1785178377; cv=none; b=DTBofftdCm9lnt+Y8OiAc+BYHqPQeKDi7r9TRXaBOZfSUFKoLNrZ9GZ8bjdR24O8o5fVEboJIg66e1oeAw/oKA9moZPyQBPhyRR5Z7/E3ylPpItpToYdxWnzb/20En2zeWk7Ox40I3SAm6LUGkxudtx9x0gsndvLQgK8PqFOZg0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785177717; c=relaxed/simple;
-	bh=0waXHSCkdc6qGkQn0Rfbge2g3yHCPz5zX/LnQCiCMu4=;
+	s=arc-20240116; t=1785178377; c=relaxed/simple;
+	bh=QHxBWrl+2NySFNWWGPBQAg2dWNBtfw3TMi22+kefX2k=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=WFbZ9ItJKkSbHg/Gm60ygZZUmDx/74xxr2wZzIC6mpARfHn6lKNGc+4v0Dj5lY/qbl6u1GW8rr8E9pbtmaLv1VLHJ0e7olRCXj7N58bUToDNGaD1pGD8H8r/IYefK/GXaxDmeLMcr6Lz/h2wK806S+4lsg4iIPwzAQAf7cphvNs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bxsBMgah; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=BlA6Joci7q/BgM9xrw2VbJvguPxGq6+GGCUE5dmuPhyuFRZNuplCNokMgXOJtRPaRDoVQlMqC/so/NNubuytRtXjTIY7Y4RSd3s79UaT45PGybB3Gq9nzB1/KTBo0Uml25QZ0VcVjFyHYIWs2JWXJNlmveTLyQ0pY2UMe2BQBNU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I4aWaWfC; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bxsBMgah"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2F0A61F000E9;
-	Mon, 27 Jul 2026 18:41:55 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I4aWaWfC"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 60FD51F000E9;
+	Mon, 27 Jul 2026 18:52:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785177715;
-	bh=TSVobNmrXXu+kac7ZH9ObOxx67WPbQQXF2FB/eSluCQ=;
+	s=k20260515; t=1785178375;
+	bh=TrMTw9dkljkOMikaGC9bKlvRQ+dvyW6FxMJ4sJKjlUs=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=bxsBMgahd0Kr4buxlH0w4fb3Tetr+pDy2p9gwZgD/3pEIvy6xss5qY1XFPCxupI0O
-	 nWOuYiUyTXzz00DZCGJSMSNmLU1p06Lt8DGPWKcsqy9ImxHtLm6odTUwHxUlS62jr3
-	 qt5JHkMLHyLn74XWh0o1ly5vsdQkKckJFElnChhfcr8bk6DzyLeHIhI7qHKeKIrVk8
-	 8uAMi+rRMSbIJyN9JLJmicbvuTf40euklLQ5Ta1Bp81ZNhoRLAfOriY6A1qSf18Szg
-	 lzrYTXz/f95GN+Lvro+8atnof/f4s8Tfh5vA5jOA6hOizwKFpVzpvkIvMaaPw7Ye9e
-	 shFKn4xpjeybg==
+	b=I4aWaWfCmPLGl5ChgyfGxwzFTYAq3PZuRaa1r/zbQYzrT92Miu988DPXsQWcriaX0
+	 gmR5jCMDQmArmL2+RS9F/KlIQFISxAtkHbtphGFZ38StjVP0V3zEN19WnOGZcWdMv8
+	 m0CLOxvEXAC7H37GzfH3EPBHzqTcwqPKkIQYF6JXLV9/JEstsl8T8V3t6O7KPuBGO3
+	 N6OS3p+lrmIQf2nlZKsULa70aL3QZGbj7b4+qLo+s0SFy9M95ZnnCW+Evl1PH4pfMx
+	 z7l8QKSAEt48BNzf+hLBWj6LBcvUIfqLL1QPDbFPxDaldwVFh3+zzONtHX3OkMSVHP
+	 4wEAN2tBPv2KA==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v8 04/12] mfd: zx297520v3: Add a clock and reset MFD
- driver
+Subject: Re: [PATCH v8 05/12] clk: zte: Add Clock registration
+ infrastructure
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?U3RlZmFuIETDtnNpbmdlcg==?= <stefandoesinger@gmail.com>
-Cc: vkoul@kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev, olteanv@gmail.com, conor+dt@kernel.org, lee@kernel.org, neil.armstrong@linaro.org, linux-phy@lists.infradead.org, robh@kernel.org
-In-Reply-To: <20260727-zx29clk-v8-4-7a107b00f1dd@gmail.com>
+Cc: devicetree@vger.kernel.org, robh@kernel.org, lee@kernel.org, conor+dt@kernel.org, neil.armstrong@linaro.org, linux-phy@lists.infradead.org, vkoul@kernel.org, olteanv@gmail.com, mfd@lists.linux.dev
+In-Reply-To: <20260727-zx29clk-v8-5-7a107b00f1dd@gmail.com>
 References: <20260727-zx29clk-v8-0-7a107b00f1dd@gmail.com>
- <20260727-zx29clk-v8-4-7a107b00f1dd@gmail.com>
+ <20260727-zx29clk-v8-5-7a107b00f1dd@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Mon, 27 Jul 2026 18:41:54 +0000
-Message-Id: <20260727184155.2F0A61F000E9@smtp.kernel.org>
+Date: Mon, 27 Jul 2026 18:52:54 +0000
+Message-Id: <20260727185255.60FD51F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -47,65 +47,70 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
 Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
-- [Medium] Platform data for child devices (`mfd_cell` arrays) is improperl=
-y passed as complex pointers via the `.data` field of the `of_device_id` ma=
-tch table.
+- [Medium] The ID sanity check incorrectly triggers a WARN_ON and fails the=
+ probe if the driver does not export any clocks.
 --
 
---- Patch [4]: [PATCH v8 04/12] mfd: zx297520v3: Add a clock and reset MFD =
-driver ---
-commit 997b3ee44abc6ec239c36327d1c3fd90393542dd
+--- Patch [5]: [PATCH v8 05/12] clk: zte: Add Clock registration infrastruc=
+ture ---
+commit a84018498091df350796aad9d7173588a10fa7ef
 Author: Stefan D=C3=B6singer <stefandoesinger@gmail.com>
 
-mfd: zx297520v3: Add a clock and reset MFD driver
+clk: zte: Add Clock registration infrastructure
 
-This driver registers child devices for the zx297520v3 clock and reset
-controllers. The clk-zx297520v3 and reset-zte-zx297520v3 submitted in
-the next patches will drive the respective functionalities.
+This commit adds common clock registration infrastructure and helpers for
+ZTE SoCs. It includes support for registering PLLs, muxes, dividers, and
+gates, handling both exported and internal clocks.
 
-> diff --git a/drivers/mfd/zte-zx297520v3-crm.c b/drivers/mfd/zte-zx297520v=
-3-crm.c
+> diff --git a/drivers/clk/zte/clk-zx.c b/drivers/clk/zte/clk-zx.c
 > new file mode 100644
-> index 0000000000000..3a4f6cd0756e3
+> index 0000000000000..c9e9048d3ade3
 > --- /dev/null
-> +++ b/drivers/mfd/zte-zx297520v3-crm.c
-
+> +++ b/drivers/clk/zte/clk-zx.c
 [ ... ]
-
-> +static int zx297520v3_crm_probe(struct platform_device *pdev)
+> +int zx_clk_common_probe(struct device *dev, struct device_node *of_node,
+> +			const struct zx_clk_data *data)
 > +{
-> +	const struct zx297520v3_crm_data *data;
+> +	unsigned int public_clk_count =3D 0, highest_id =3D 0;
+> +	struct clk_hw_onecell_data *clocks;
+> +	struct regmap *map;
+> +	struct clk *clk;
+> +	unsigned int i;
+> +	int res;
 > +
-> +	data =3D of_device_get_match_data(&pdev->dev);
-> +	if (!data)
-> +		return -ENODEV;
+> +	map =3D device_node_to_regmap(of_node);
+> +	if (IS_ERR(map))
+> +		return PTR_ERR(map);
 > +
-> +	return devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO, data->cell=
-s,
-> +				    data->num_cells, NULL, 0, NULL);
-> +}
+> +	for (i =3D 0; i < data->num_muxes; ++i) {
+> +		if (data->muxes[i].id !=3D ZX297520V3_CLK_NO_EXPORT) {
+> +			if (data->muxes[i].id > highest_id)
+> +				highest_id =3D data->muxes[i].id;
+> +			public_clk_count++;
+> +		}
+> +	}
+> +	for (i =3D 0; i < data->num_gates; ++i) {
+> +		if (data->gates[i].id !=3D ZX297520V3_CLK_NO_EXPORT) {
+> +			if (data->gates[i].id > highest_id)
+> +				highest_id =3D data->gates[i].id;
+> +			public_clk_count++;
+> +		}
+> +	}
 > +
-> +static const struct of_device_id of_match_zx297520v3_crm[] =3D {
-> +	{ .compatible =3D "zte,zx297520v3-topcrm", .data =3D &zx297520v3_topcrm=
-_data },
-> +	{ .compatible =3D "zte,zx297520v3-matrixcrm", .data =3D &zx297520v3_mat=
-rixcrm_data },
-> +	{ .compatible =3D "zte,zx297520v3-lspcrm", .data =3D &zx297520v3_lspcrm=
-_data },
+> +	if (WARN_ON(public_clk_count !=3D highest_id + 1))
+> +		return -EINVAL;
 
 [Severity: Medium]
-Does passing platform data for child devices via the .data field as complex
-pointers violate MFD subsystem architecture guidelines?
+Does this check unintentionally fail the probe if a driver doesn't export
+any clocks?
 
-Instead of mapping compatible strings directly to zx297520v3_crm_data point=
-ers
-via the .data field, should this use an ID enum or integer ID, and have
-zx297520v3_crm_probe() switch on the ID to select the correct static const
-mfd_cell array?
+Since highest_id is initialized to 0, if there are no exported clocks
+public_clk_count will be 0. The check (0 !=3D 0 + 1) evaluates to true,
+triggering the WARN_ON and returning -EINVAL.
 
-> +	{ }
-> +};
+Perhaps highest_id could be initialized to ~0U instead, or a check could be
+added to bypass this when public_clk_count is 0?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260727-zx29clk-v8=
--0-7a107b00f1dd@gmail.com?part=3D4
+-0-7a107b00f1dd@gmail.com?part=3D5
