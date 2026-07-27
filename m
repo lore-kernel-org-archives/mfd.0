@@ -1,171 +1,68 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 859E0426693;
-	Mon, 27 Jul 2026 18:32:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22F1743636A;
+	Mon, 27 Jul 2026 18:34:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785177123; cv=none; b=niCqDhrPeSXvmNMRb+G0Rj2drSdjyb17DJcPWkBgm/SNGEhnN6fXD9Kav0Y4ODt+Tb1/JUcK3/cMLcBEdua0/p3AcM+c9DHKygLQQtXu6Y+L09mgHq5CR9l33xmrrG9q0ZGTaOfgrbiSMBYFRVboDhw8Gs1/yiTVNVeIDgzFhtk=
+	t=1785177262; cv=none; b=MMdMMW5i5uRTwmYWmg9EyIYP2FZZMUV2VwNSGP5jgxNJBZ+8p5ASXoAacoxxdzr/V9aB48d455yQoUx1KeIyxyAWWET/PVzs19+PKKVmlivqkZmkokcIFrBOKelosyuV+sAlrNU1br5D14WvC12iTUqo+dh6B3jOPtjv+e8ytIE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785177123; c=relaxed/simple;
-	bh=dlNlQLtQA7Eu1LpHNaYDErrnqTratFykeZk4pRryKf4=;
+	s=arc-20240116; t=1785177262; c=relaxed/simple;
+	bh=P303M9fopkExUNwoiCPNBpRuNtM2ZkRvRpmWqj+7fXE=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=rWGYaJlYpU9/apM1bxTXxspRC0Tnla8ud9uuIs7/HTvX5Wur98UsFkdtHzEK0XnQplehDVlbHAjN5HUou6jhV4BV5NXSIugTYnVyb2OAc5k9zhpxsicdy4vbHx7oNbmNPlevikNmHbJjkwxU2D4sWXTZcMr9lhwm3THL9t1CjiM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=V9G4Noc+; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=P7KkFC6Swr/2DiKb6aA+uLEQpylNDIYb4pG9Pp/DJYHlXoclmWhyYHjnCaRBzJHgeUv2mm/g5dRk42w0H2s/GRt6ydt1c9d2cJ1YW+WB4KJT941V52whJkoCa+6ZdBhghTPvJFiwGFS7bG6hK/1opRB6MtYIsfLARkVOinWlU/4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OBDqq6tQ; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="V9G4Noc+"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 916701F000E9;
-	Mon, 27 Jul 2026 18:32:00 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OBDqq6tQ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E4A2D1F000E9;
+	Mon, 27 Jul 2026 18:34:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785177121;
-	bh=7Udjanb1H9DVNjKGgmxcH/tjWmgiPuzp3pwFGTaMhmU=;
+	s=k20260515; t=1785177259;
+	bh=P303M9fopkExUNwoiCPNBpRuNtM2ZkRvRpmWqj+7fXE=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=V9G4Noc+EdYO6HXq/u9R/BuAP0uSG4ZBc/3n3gX4o5R3wJJpvc5TSnMTAe8fXULcS
-	 k7OX9b5EtBI95nurFYaG4A6VhmK+1UK3xifrZ3s0DI30GBiehwlC0NoUkpQ50pu8/m
-	 MM30UitdJqqW5hDGuQIBRY4xu0daTsVaOEW17MFt9a5azBWx83DgFllt2PKRB5T7vm
-	 wZ+FusNoBku8WXJMCvQ1tZKz2clcYFLxzxilrwTVJ74f1Dq+p/GveOiZpBL3S4vBhh
-	 SshkrHvaxXe3MZcqIOZOLFaeUEuzaD5rJkpcwFJLbZLvOWvVi9Yqdo2AXeDc71zKSv
-	 Br0nePmae/PzQ==
+	b=OBDqq6tQUhIpAO/x8lw+JqDqz6LUXulhDJlcdUhYtu0hXpfR54R3Stq1pOzqr+xNq
+	 lO60Jnb0QldGU3VycAp/DLGYHoalFunvsUpohSZiWzw2r63DJ6zW7c9oULnb/6L13U
+	 MF13feEWKDq4yaF1Lqi/1q+RJZmdACtl/o5+huralCDt5pmGPROtzyNUeAA8HhwjIX
+	 J73HEscR0zpAjR8macUvlGSv9ZHTriFtCBuerpGujca8IwuAtbxJvS49qKNVR79yni
+	 D0VVGNlLAxz+a+aUznsbFL3YiOdFOfz4xugC1U8wGOSSV+cCGpOpy5erk/jJWMaU0b
+	 /4w4mc5tFKi3A==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v8 01/12] dt-bindings: clk: zte: Add zx297520v3 top
+Subject: Re: [PATCH v8 02/12] dt-bindings: clk: zte: Add zx297520v3 matrix
  clock and reset controller
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?U3RlZmFuIETDtnNpbmdlcg==?= <stefandoesinger@gmail.com>
-Cc: neil.armstrong@linaro.org, linux-phy@lists.infradead.org, robh@kernel.org, mfd@lists.linux.dev, vkoul@kernel.org, conor+dt@kernel.org, lee@kernel.org, olteanv@gmail.com, devicetree@vger.kernel.org
-In-Reply-To: <20260727-zx29clk-v8-1-7a107b00f1dd@gmail.com>
+Cc: vkoul@kernel.org, mfd@lists.linux.dev, conor+dt@kernel.org, robh@kernel.org, neil.armstrong@linaro.org, linux-phy@lists.infradead.org, devicetree@vger.kernel.org, lee@kernel.org, olteanv@gmail.com
+In-Reply-To: <20260727-zx29clk-v8-2-7a107b00f1dd@gmail.com>
 References: <20260727-zx29clk-v8-0-7a107b00f1dd@gmail.com>
- <20260727-zx29clk-v8-1-7a107b00f1dd@gmail.com>
+ <20260727-zx29clk-v8-2-7a107b00f1dd@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Mon, 27 Jul 2026 18:32:00 +0000
-Message-Id: <20260727183200.916701F000E9@smtp.kernel.org>
+Date: Mon, 27 Jul 2026 18:34:18 +0000
+Message-Id: <20260727183418.E4A2D1F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
-- [Medium] Self-referencing cyclic dependency enforced by required `resets`=
- property on the reset provider itself.
---
+> This controller contains clocks and resets for high speed devices on the
+> zx297520v3 board and hardware spinlocks that I expect will be necessary
+> to communicate correctly with the LTE DSP firmware blob.
+>=20
+> I don't know much about the hwlocks yet other than that they exist, so
+> there is no header yet adding meaning to their indices. Presumably that
+> meaning doesn't exist in hardware and is de facto defined by ZTE's
+> firmware blobs running on the rprocs.
+>=20
+> The zte-zx297520v3-crm driver will instantiate separate MFD children for
+> clocks and resets, which are handled by separate clock and reset
+> drivers.
+>=20
+> Signed-off-by: Stefan D=C3=B6singer <stefandoesinger@gmail.com>
 
---- Patch [1]: [PATCH v8 01/12] dt-bindings: clk: zte: Add zx297520v3 top c=
-lock and reset controller ---
-commit bd10e0d2ede4b7523e3aa201c9dc948ccee1e352
-Author: Stefan D=C3=B6singer <stefandoesinger@gmail.com>
-Subject: dt-bindings: clk: zte: Add zx297520v3 top clock and reset controll=
-er
-
-This commit adds a new device tree binding for the ZTE zx297520v3 top clock
-and reset controller. It describes the clock inputs, PLL outputs, and reset
-controls for various peripherals. The binding also exposes USB and HSIC PHY=
-s,
-and a syscon-reboot method.
-
-> diff --git a/Documentation/devicetree/bindings/clock/zte,zx297520v3-topcr=
-m.yaml b/Documentation/devicetree/bindings/clock/zte,zx297520v3-topcrm.yaml
-> new file mode 100644
-> index 0000000000000..9dbca49871a0e
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/clock/zte,zx297520v3-topcrm.yaml
-[ ... ]
-> +  interrupt-names:
-> +    items:
-> +      - const: usb-up
-> +      - const: usb-down
-> +      - const: hsic-up
-> +      - const: hsic-down
-> +
-> +  resets:
-> +    items:
-> +      - description: USB phy reset
-> +      - description: HSIC phy reset
-> +
-> +  reset-names:
-> +    items:
-> +      - const: usb
-> +      - const: hsic
-> +
-> +  "#clock-cells":
-> +    const: 1
-> +
-> +  "#phy-cells":
-> +    const: 1
-> +
-> +  "#reset-cells":
-> +    const: 1
-> +
-> +  syscon-reboot:
-> +    type: object
-> +    $ref: /schemas/power/reset/syscon-reboot.yaml#
-> +    description:
-> +      Reboot method for the SoC.
-> +
-> +required:
-> +  - compatible
-> +  - reg
-> +  - clocks
-> +  - clock-names
-> +  - interrupts
-> +  - interrupt-names
-> +  - resets
-> +  - reset-names
-
-[Severity: Medium]
-Is it necessary to make the resets property required here?
-
-Since this node is also the reset provider (indicated by #reset-cells),
-requiring it to consume its own resets creates a self-referencing cyclic
-dependency during device tree probing.=20
-
-Could the driver interact with its own registers directly to handle these
-resets, rather than acting as a reset consumer of itself?
-
-> +  - syscon-reboot
-> +  - "#clock-cells"
-> +  - "#phy-cells"
-> +  - "#reset-cells"
-> +
-> +unevaluatedProperties: false
-> +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
-> +    #include <dt-bindings/reset/zte,zx297520v3-reset.h>
-> +    #include <dt-bindings/phy/zte,zx297520v3-topcrm.h>
-> +    #include <dt-bindings/clock/zte,zx297520v3-clk.h>
-> +
-> +    topcrm: clock-controller@13b000 {
-> +        compatible =3D "zte,zx297520v3-topcrm", "syscon";
-> +        reg =3D <0x0013b000 0x400>;
-> +        clocks =3D <&osc26m>, <&osc32k>;
-> +        clock-names =3D "osc26m", "osc32k";
-> +        interrupts =3D <GIC_SPI 42 IRQ_TYPE_EDGE_RISING>,
-> +                     <GIC_SPI 43 IRQ_TYPE_EDGE_RISING>,
-> +                     <GIC_SPI 45 IRQ_TYPE_EDGE_RISING>,
-> +                     <GIC_SPI 46 IRQ_TYPE_EDGE_RISING>;
-> +        interrupt-names =3D "usb-up", "usb-down", "hsic-up", "hsic-down";
-> +        resets =3D <&topcrm ZX297520V3_USB_PHY_RESET>,
-> +                 <&topcrm ZX297520V3_HSIC_PHY_RESET>;
-
-[Severity: Medium]
-Does modeling the internal register operations as external consumer
-dependencies artificially create the dependency cycles mentioned in the com=
-mit
-message?
-
-The example explicitly demonstrates the self-referencing cyclic dependency
-back to the topcrm phandle. Typically, it is an anti-pattern for a reset
-provider to model its own internal signal lines as external dependencies
-pointing back to itself.
-
-If the driver handled its own internal reset logic directly, this cyclic
-dependency could be avoided without relying on fw_devlink to forcefully bre=
-ak
-it.
+Sashiko has reviewed this patch and found no issues. It looks great!
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260727-zx29clk-v8=
--0-7a107b00f1dd@gmail.com?part=3D1
+-0-7a107b00f1dd@gmail.com?part=3D2
+
