@@ -1,185 +1,155 @@
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1CAE3C3C08
-	for <mfd@lists.linux.dev>; Tue, 28 Jul 2026 18:10:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 90899429CE9
+	for <mfd@lists.linux.dev>; Tue, 28 Jul 2026 21:25:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.54
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785262230; cv=none; b=CIEMEHyrCQvRCfAKFyUfoxqGUzDICoi7Zqx9yjxwWvZXzDORvY+wsoABPB+Ge+nAKtcJJeKLIHQgrsXNjR1pqmStWyeDti58EGEJvDm6pXznrm7YJ/cqFet+W+zrqlhGrktorsZdlgj8OTGQCgjtnnh2vo4TTm2k4DB90068uA0=
+	t=1785273950; cv=none; b=NCwZa8ZOd0o3yq00uZI5MVm92rSfkVX1asB5kHYN0R5rkip6WzgfdMte69+ajNX8J8poB+jLhHvCS+EBq7lpdlpQGQ75bRst/unLJBLtFIQ6RRM+fGIQaibU1k8HIwysEcWf9hv7VLgkR+lQ0x4CwRXykNYlCqD8nHjIOI1LDRM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785262230; c=relaxed/simple;
-	bh=SoZTNrUCUMJsjQyOeEB+XQ25B/C7AybQKj1Imbqx0xE=;
-	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
-	 Message-Id:References:To; b=hds8zhuOJwDtYS9Y3IERAjjlX/Xz/gdYGQBiEqklKCO88aog8OUtHLZUyLTxkZg0mSh8qfhU4TzqcpRsd/Ha3YECwsd7SnvJkzdZyLB2M+1B2B+OQ/P0t59tAdlkUyhGiacqOFfQnkrn8pjMBvEUD3BHf2gyU9K2zwr0OTjMhfs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Yj2WIlh9; arc=none smtp.client-ip=209.85.221.47
+	s=arc-20240116; t=1785273950; c=relaxed/simple;
+	bh=APWk0uOj8/6LVjgqEtJk1b6uSGlDci9M7cPzBIGfdF8=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=c18S4rNYd28qPdgtiArhq9YZnU5adIA/PIS9FPlhr8ND+1uoaL7JTERa11UINzlMqX8/BAPphgV+rGICqnHKYmwHYYW5MSQEj3SZnxBpX11joIt7JegwiYjz9/HZH+wYxhlG/lSbY0etv670VIseepyTfjvXbOHTer28B9tnvUA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=gvfXxU1E; arc=none smtp.client-ip=209.85.128.54
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Yj2WIlh9"
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-47f3b39f2a1so169612f8f.2
-        for <mfd@lists.linux.dev>; Tue, 28 Jul 2026 11:10:28 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="gvfXxU1E"
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4954df200ddso1698205e9.0
+        for <mfd@lists.linux.dev>; Tue, 28 Jul 2026 14:25:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785262227; x=1785867027; darn=lists.linux.dev;
-        h=to:references:message-id:cc:date:in-reply-to:from:subject
-         :mime-version:content-type:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=zRqEh40r0PnAAxBC6Ehpg1QR1kIM64rXG8fPCVXya6U=;
-        b=Yj2WIlh9GvD1sAbuMtDMD6NsyiFX/IQoWXXsYTOQW8algCC2sroFLsaOTKkmPVNHSq
-         avPJ15pXmUUWqnXPKZkIo2Qxmp+KhZ5YztxnoIvxEHZaaVonfD73uv0xRp6w82mqqYYq
-         sh3AxjCUeG/S/u5ZG/EYGaW39ybPHVRCY/2/P23IrBntMrbRK1eP5K8CqsudFljoBBPF
-         /ipAjBaHyx4FDbWiLt/RTvU+RxqfLNUXpgFrOS6XF4b5vw5eSzbi/s2pqpMnJBGXXaqK
-         UtE7xyoRjN2iNHuNxaGy7TDp3u5lHmA5HVtq4JC36YEHrvKG0eFSbnXU4jl4re8KyoD6
-         S1ew==
+        d=gmail.com; s=20251104; t=1785273947; x=1785878747; darn=lists.linux.dev;
+        h=content-type:mime-version:references:in-reply-to:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=1dUKZYq5xkF+c+j8L2UCzb9nPYl48cxNMgRgY7fYgmE=;
+        b=gvfXxU1Er6PKQAjG0W3stCi8+Jc7q3PikkDwT+AqZ1ZudMfmxSetUfoj2I3BHcxa8b
+         pWNaLiTCD6xpx2SPWElbL3CjZdj+/48fCCUKl0ATTSFwk3tSVBBb51oyKT2uzChoybny
+         auEM51MrQSOYP+rPLVrh2j7kHxNpFBWW+WIoWW7J0J8Wy9tA0s0apBenEhpoLfm8pphM
+         VlDF7mW/rhPhRQWUf1Z2BoEzrJZIiU9aj35iV0q/9/XoPocIR+t0zm8HW9cIwMoCSbXY
+         JgPZ8WcscyXTjKbEkh5y71nxjHWoNfl5DrgCZhx60fclBF30LPwI/3VC9AO0PNDoLrJm
+         7ZXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785262227; x=1785867027;
-        h=to:references:message-id:cc:date:in-reply-to:from:subject
-         :mime-version:content-type:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=zRqEh40r0PnAAxBC6Ehpg1QR1kIM64rXG8fPCVXya6U=;
-        b=HJiu2RFTrKOqicoIzOG4ghfn3xCl8ncdgRDahYLpgB+PRojiIcNBrVmM3c9MWzARLg
-         FYD3vqYpN2fhOWQuv7ThmWIEk25woipCZrVFoGSkLbxIa6rGUam4DmPQMC2hPwWlO3ze
-         yyS0gcNKvmaLaxMZvj2fRrltSJZZ2SBJzI3+fnRhDZhInK6kJDldvxMynH1Q3V/vx3FM
-         yCDzTaSaYJfahLw7UwAoS1x90/Lqp9DbIeBgQKoQ+C1wzgSiJNXbWjJ/G3c6gcg8n2Ir
-         sPRRPPHgBQ9Dq0wAVsugj8OvtJHVepZZMlZNtOQwigT9Sdd97tRdLxEkXtFM79VgzbQp
-         6Vgg==
-X-Forwarded-Encrypted: i=1; AHgh+RoD55GEOeJA3KpkoXsVAvimFJNzO4eopBPBRnjzUz5QZFefAeq1X3dUdBN1BMCT5X4EVLU=@lists.linux.dev
-X-Gm-Message-State: AOJu0YwEGC2IpnKooLPPbtyaG8ooQ0BCGDOtcA4Kgot/VRpwmXWljnSg
-	Dpw2s5M1YZzJFkzI9Z5VsI+u1P8gKMhVo5kDcaAIKwR3cXywiNChpkr+
-X-Gm-Gg: AR+sD113Fo0MK+aQgJui6Z1aP5kZJV3aQGbw7P/LcQghVI+ulVTDN2lAKxVXTlpAfp4
-	uNVIOdOI/i/9piUpLUzs+o0BY9GkcGoClILT3z+Saoz1FDa/+rsin+l10avGqGtX6+pK4A37XsZ
-	RYTwW+SfzJwTgTcwvCIB8WtiLf12PiVEDzZkm5/+3Ryy2buvRnvXD/pJMWpkoj1rl0OcIa8qkFO
-	B4cJ/6BhLRsXWXcfSMTJcCKe7JAHKhYVZUDE7UYhJDp7adHjl0jRPciIZQJEF75HOY0Ldx0sM8r
-	rMOELy7UgvwoK190qohQf0WoPeqwl8nCdK4Jax0KDSNRnwJWEyleEszZ4yCy7vM8GhambZN2RK0
-	d7gGvwJ4mfJcqU2NhyryqlAfhiX89Bij1T+DMGvX1S98KLA0jpPOFciN+cjGXF2dUf3vl6sUtxC
-	UVROYlX9ZW0wjtl6LmDi5NZwsCmjD8YWg=
-X-Received: by 2002:a05:6000:230e:b0:47f:9720:4740 with SMTP id ffacd0b85a97d-47fb1e9f82amr4362694f8f.37.1785262226606;
-        Tue, 28 Jul 2026 11:10:26 -0700 (PDT)
-Received: from smtpclient.apple ([197.250.51.166])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47fb6abd0a6sm800035f8f.10.2026.07.28.11.10.19
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Tue, 28 Jul 2026 11:10:25 -0700 (PDT)
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_74B8EE53-C8E5-442D-8CD5-A08FCBF83C61";
-	protocol="application/pgp-signature";
-	micalg=pgp-sha256
+        d=1e100.net; s=20251104; t=1785273947; x=1785878747;
+        h=content-type:mime-version:references:in-reply-to:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=1dUKZYq5xkF+c+j8L2UCzb9nPYl48cxNMgRgY7fYgmE=;
+        b=FuXPprNw0MIRymSf1QayZ8yTIQ1QITqozYLeEz0d8YbTnRJe2R+veZ9So7O+B9RDg5
+         NZWzr72FT8hdCG4H+/oiIHHpcESF9Pw6FCzopwXEal3+9geWS3NB9kh2KXc4UkrkzTvw
+         7hiMD3L1IkReqpvJRXmH6dFdw7Msmes0agJaDSDnys62TEjH/vIDmfGXq8NrjSFlHyWC
+         9DX93s2Rxsdv+M27Fmc+z831E8SAVTqdf7UEWgmSF1oCws+tWpj5EoC0AzAB4PyshIOZ
+         rbg5njclDrB7yAB3tKFJWEzjGEZheBiOFbWp0w+93TNnsDd9XtPx+bhZ0cyh449Vf9ru
+         eWFw==
+X-Forwarded-Encrypted: i=1; AHgh+RqowQdFTpki4Kwgyf3LTs9vxRbwusqU5Nv40Ypx4Iy1tr1b3ZWNqQJvKsoqVeaUpD8QxpA=@lists.linux.dev
+X-Gm-Message-State: AOJu0Yy/M9GhoiZYwclgB9HSj5UO0pdKSSHRiQlTexOFKQBmHK3JnLVK
+	n7k4l49eAs70Q0HwvD2wb4gpSzq85s5nkVxuseawv3RcwYK9tYt3oT6U
+X-Gm-Gg: AR+sD134OOomQASAVJrKMMa+pUmygTCKAnbBJMSx2ZI44fbHYdm1egYJfgoIparGhGi
+	cHZh+l2Wo6ly99JQ4ZeZIc2RSH8G1s5fJQm6fjaf5gflCK93fXf4wgiOsNy+xy11UZ0XTfuE+Gh
+	ZbSh8KRqMpJSFu8HFjKxcQlsgMhYn7t5IrO6NTj9zHwtz+/XXTfsEBttkAC5TT55wG4/9E0BWtv
+	/GZGLwSxzZSo0QZo199O15y3rEiHD/uRTN5lX33MN8CxENb5Xzg3ZQHeJu6Y8m2RC1KyYnPH9VR
+	5YViOZnj73y/C2hIvqjI2XfERMdnNJJLEzptN0Ggn75Pf4sPYRaUNVDoU3K5LjBI0I1iTyFe4uA
+	sznKmOttRqGqHSJoDFmY6t6yTyJPkaSyWR/5ZuWSDoj2nvpavwfAskrvk76NsxKKyhV/hzgRkzV
+	OsPKUnT6tcDWKcxnx/cuVTpzADtkM6z99THF63+BwGa3hibWQekoRRCudRhQaofA4J/egpze8=
+X-Received: by 2002:a05:600d:844e:20b0:495:5375:2510 with SMTP id 5b1f17b1804b1-496c6568a37mr33118015e9.24.1785273946598;
+        Tue, 28 Jul 2026 14:25:46 -0700 (PDT)
+Received: from grey.localnet ([197.250.51.166])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-496c45c297dsm103054375e9.7.2026.07.28.14.25.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 28 Jul 2026 14:25:45 -0700 (PDT)
+From: Stefan =?UTF-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>
+To: Brian Masney <bmasney@redhat.com>
+Cc: Michael Turquette <mturquette@baylibre.com>,
+ Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+ Philipp Zabel <p.zabel@pengutronix.de>, Vinod Koul <vkoul@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Russell King <linux@armlinux.org.uk>, Lee Jones <lee@kernel.org>,
+ linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-phy@lists.infradead.org, mfd@lists.linux.dev
+Subject: Re: [PATCH v8 05/12] clk: zte: Add Clock registration infrastructure
+Date: Wed, 29 Jul 2026 00:25:34 +0300
+Message-ID: <MwDLqBgXR7G6dGkTtCaRrQ@gmail.com>
+In-Reply-To: <ami0TaY84IslWZyo@redhat.com>
+References:
+ <20260727-zx29clk-v8-0-7a107b00f1dd@gmail.com> <amiw7mfPfSPjLHLH@redhat.com>
+ <ami0TaY84IslWZyo@redhat.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.600.51.1.1\))
-Subject: Re: [PATCH v8 01/12] dt-bindings: clk: zte: Add zx297520v3 top clock
- and reset controller
-From: =?utf-8?Q?Stefan_D=C3=B6singer?= <stefandoesinger@gmail.com>
-In-Reply-To: <20260728-proficient-boobook-of-will-2cc94a@quoll>
-Date: Tue, 28 Jul 2026 21:10:03 +0300
-Cc: Michael Turquette <mturquette@baylibre.com>,
- Stephen Boyd <sboyd@kernel.org>,
- Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Philipp Zabel <p.zabel@pengutronix.de>,
- Brian Masney <bmasney@redhat.com>,
- Vinod Koul <vkoul@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Russell King <linux@armlinux.org.uk>,
- Lee Jones <lee@kernel.org>,
- linux-clk@vger.kernel.org,
- devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org,
- linux-phy@lists.infradead.org,
- mfd@lists.linux.dev
-Message-Id: <3A3A0D17-7A80-40FE-AB89-DDE8E9A7F72B@gmail.com>
-References: <20260727-zx29clk-v8-0-7a107b00f1dd@gmail.com>
- <20260727-zx29clk-v8-1-7a107b00f1dd@gmail.com>
- <20260728-proficient-boobook-of-will-2cc94a@quoll>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-X-Mailer: Apple Mail (2.3864.600.51.1.1)
+MIME-Version: 1.0
+Content-Type: multipart/signed; boundary="nextPartYxrm5NhARqO7C27MMFWz9g";
+ micalg="pgp-sha256"; protocol="application/pgp-signature"
 
+--nextPartYxrm5NhARqO7C27MMFWz9g
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="utf-8"; protected-headers="v1"
+From: Stefan =?UTF-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>
+To: Brian Masney <bmasney@redhat.com>
+Subject: Re: [PATCH v8 05/12] clk: zte: Add Clock registration infrastructure
+Date: Wed, 29 Jul 2026 00:25:34 +0300
+Message-ID: <MwDLqBgXR7G6dGkTtCaRrQ@gmail.com>
+In-Reply-To: <ami0TaY84IslWZyo@redhat.com>
+MIME-Version: 1.0
 
---Apple-Mail=_74B8EE53-C8E5-442D-8CD5-A08FCBF83C61
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+Hi Brian,
 
-Hi Krzysztof,
+Thanks for the review!
 
-Thanks for the prompt review!
+Am Dienstag, 28. Juli 2026, 16:53:17 Ostafrikanische Zeit schrieben Sie:
+> Looking into the other patches. There's more mixing of the clk provider
+> calling the clk consumer APIs here. It looks like this just takes a
+> reference and holds them. Would moving to parent_data address this?
 
-> Am 28.07.2026 um 09:27 schrieb Krzysztof Kozlowski <krzk@kernel.org>:
->=20
->>=20
->> +  resets:
->> +    items:
->> +      - description: USB phy reset
->> +      - description: HSIC phy reset
->> +
->> +  reset-names:
->> +    items:
->> +      - const: usb
->> +      - const: hsic
->=20
-> You do not need these two. It's one device and DT does not represent
-> internal device wirings because they are redundant (deducible from the
-> compatible).
+I think so. parent_data::fw_name is indeed something I have been looking for 
+and didn't stumble across myself. And I suspect when you say "use 
+parent_data", you don't mean "use parent_data.name everywhere".
 
-Just to make sure I understand the implications: Remove the PHY resets =
-from the reset header (and driver) and have the PHY driver control them =
-directly via regmap instead of going through its reset sibling? That way =
-no self-consumption is necessary. At least that's the idea Sashiko put =
-into my head with "Could the driver interact with its own registers =
-directly?".
+But it raises the question of how to handle internal clocks, e.g. foo_gate-
+>foo_div->foo_mux->clock-26m. Only "clock-26m" is passed through the DT and 
+found via fw_name, and only foo_gate is exported.
 
-The PHY driver would take exclusive ownership of the resets anyhow, so I =
-don't see anything in the way of just making it own the respective bits =
-in the 0x80 register through the shared regmap.
+For the other clocks I currently rely on the string matching to resolve the 
+parent named in the static init data to an actual registered clk_hw. The 
+alternative I see is storing the struct clk_hw * in a table by index and pass 
+it in parent_data.hw, but that'd require managing the extra indices. Or build 
+a clock-local name->clk_hw lookup, but then I am just reinventing the old name 
+matching.
 
->> +required:
->> +  - compatible
->> +  - reg
->> +  - clocks
->> +  - clock-names
->> +  - interrupts
->> +  - interrupt-names
->> +  - resets
->> +  - reset-names
->> +  - syscon-reboot
->> +  - "#clock-cells"
->> +  - "#phy-cells"
->> +  - "#reset-cells"
->> +
->> +unevaluatedProperties: false
->=20
-> This was different last time and previous code was correct.
+Am I missing something obvious? Is there a canonical implementation somewhere 
+that implements modern best practices? I learned that looking at existing 
+drivers isn't always a reliable guide.
 
-Ok, I'll keep #phy-cells and ints optional and also make it possible to =
-provide only USB or HSIC ints.
-
-
---Apple-Mail=_74B8EE53-C8E5-442D-8CD5-A08FCBF83C61
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP
+Cheers,
+Stefan
+--nextPartYxrm5NhARqO7C27MMFWz9g
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part.
+Content-Transfer-Encoding: 7Bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEQxb0tqoFWyeVMl1sPRO8yFRPGiIFAmpo8HsACgkQPRO8yFRP
-GiLPTA//VT+BJ+4K6QWEatqxIi67Rfy+A3mhALsMoPStAPoN8KELPVr+JoqLoFD8
-lz9s0uj1PXWN1CmBArx6Hzm1N35owUoP46VLnwqrIAR0gaor+PQPHJ9In5L6E6Lm
-SdUs0QfxWMV75E2IM1tTRf8MKa6SnCvEp72OAYdMgRzEd7f0vp9fV9716yb0Ej7q
-ZXG85U4f/1++S5XHoPxqFxrxunsJoX4GgVEmKyeB9N3spWjS7KykKo2UYFZEctFg
-RUiai7lO1I2X9DuFGkuVZcouCIcpB1eJHx7r3UOTwIG6kbTKHBjWoq32L2tjUY4B
-nSkU7vMfwUA387n/zdeisN6smcf0C8uH3g8PSozuzaojYQzAr5MjbmgDue2R1LQi
-wVfHBdREUJL1WHt25UgiE5EcBcrQhwxccqDuWbkXH9toxP0HUEpTn9gdB8yNdGQx
-HSLsQCaqOew5/9nPEnwn0X7q7FnnBSOYv6AQ5g96xPeuNDNQ2n8f80X8iBmy3qup
-tWM+cCViEhEkoLl0x+/XTO6vfljHztZCpv2Xey9PGs7HDtyJbBMTkcHdcCTFV9yo
-RKzQMdJgqmIfycOlUGL+eHCI1X9SGEZc7hcENPBn666TnnWf3XrsCKZNHFBCU85e
-HUylGFuzN2pdc1MzYxgwFIJhKLtsVV8pLrnR3WfCD/2F6XYb36g=
-=Oh+I
+iQJPBAABCAA5FiEEQxb0tqoFWyeVMl1sPRO8yFRPGiIFAmppHk4bFIAAAAAABAAO
+bWFudTIsMi41KzEuMTIsMiwyAAoJED0TvMhUTxoirHYQAJP3CdwusoH3pkXKfPo4
+IsHXR5HpSkcfs8UCWKbXUiLjzTOXi23M6YRSjmwFG3d1x7/tF3zuRiRB7UoTbPxi
+Dpcjy4P38mBhhj5ViTMPZEDb1+yGlH/55A3Q13yyGUZAYrWBvjlF1+CeyejwGj3i
+MVs7cQGfnjS5eKxnSlMeu6YES3/GMT1FEr87RSiK1tIR7l5Ly+ZlVUeFL6j/QR5c
+0fRWrLVaRuf40Z+Br0mTqVYameqPi3Y2txNe/WB5/6G3h+Pwgr8fa18n7kss1CR4
+PLy4xOCkdwBhFr3V1XAwmLR903mrts0OzyiU2WEgelU4aIvO0g+IY/QpVCb4Tc28
+sIFnx1o9RB82nrHOGyZ+tE3Td9Z8jdagf7NCcynDF9OBNO8d2p2VHrytuTO05BU0
+6WTcRZf3HNTRavdGicG0D+UZLTrVSeATG7Gn84xOtEcqnNQgqGw+7FFrbYL3uvnB
+zJpQ0g3TxhaSjw9l5WYghaypuxgBUI3vsXsNBCFUi9/LHutvv7c2UFoB9pGMO+0F
+agh+s3+qnrEIuyCa6gMNO0ARQMjjfVWPCMn+QO0W6LDHLm9V862PI8/fSAHIJtBw
+8YniFVm03EcJNgSelHRlZO20sDNBbjjcJdMzKez23UwFsD+debYrdpQOo4Z1MVqr
+o4X7ofieFY9lg1CnhuLk+OK+
+=e+iT
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_74B8EE53-C8E5-442D-8CD5-A08FCBF83C61--
+--nextPartYxrm5NhARqO7C27MMFWz9g--
+
+
+
