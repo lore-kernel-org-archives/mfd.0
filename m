@@ -1,75 +1,154 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13547244687;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC04830EF63;
 	Wed, 29 Jul 2026 17:16:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785345399; cv=none; b=aTD2ezmYAJfAOAli80y+HQNaIB7NWhgblcKU6GdrJQmpXtE1WSBdhuY+pLQlDyezwjCdkxCru/oLqVKWeojK5VdbXTkuzbkMpkHDAyx6rETTtvDR9fcyz0u21l7QIGN7awGZrkvOq2moQT/8UG0bBhTvkUymMbuW7YanJgZWMvg=
+	t=1785345400; cv=none; b=iiVNo3PgHiRKL+8Y/qPY8ZgRP5zpzSzyIybG6dF4iPi7BII4FE0oxsjSb/Jmz9kgotkb8fTh609AFLyfM5ACRGv2ROVfHW5RT379LPCg30R22jTnaGzAfWuyFlJtWX24TLmr75VFGp46VFwPLvGlik7JsMp1vYdxaeLQ7CPbS3E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785345399; c=relaxed/simple;
-	bh=B5D87pMs0qROF5iU4sO2JwVH+y8ZhgRtnKGKsdhWgZc=;
+	s=arc-20240116; t=1785345400; c=relaxed/simple;
+	bh=LGYQuuIxdyRZDkB2P2HWw374/HFpv1t46AltT/peMfI=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=N+b53sWtiTW3gkoGqRH1UfCVsyaB6IscEV8Bfg55SMIbNkIIym/qKQzgpXWlDOobQzV1Y0sheCrvtQvHY8MHQbb9WE08NkfjmRrKnWn5Jz0pK7br01erWCxBdwbGJAD8SXYBgwuGU7mBSiPas8lf/YVRmgFQN+B7bYKMPaIkXhs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dTIZ1Iml; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=WVFxpEy9F+EhOl3K8r3BdiLAXL6d4Norr8oE3NzYzcj8rMjUNgXnylE8zeQsJt7FfpiZIOcSHTjtRdt9Ob7sESrU6mB0oTmSmE6cZ6LNEOWhCG0Wue1oIQQvvi4ICX8chhP0kQ594y3Yx2y7tHEyf2vBas+MMEvQJzjuBrfRxrY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nJHInE0W; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dTIZ1Iml"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A0A111F00A3D;
-	Wed, 29 Jul 2026 17:16:37 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nJHInE0W"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7CD821F000E9;
+	Wed, 29 Jul 2026 17:16:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
 	s=k20260515; t=1785345398;
-	bh=RpBPAcTnPM7QPcrdtmSZacGemqNzN+8DVJjMTz2Lohc=;
+	bh=LGYQuuIxdyRZDkB2P2HWw374/HFpv1t46AltT/peMfI=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=dTIZ1Iml4GjRNlvEmbej+eBuSmNC/B7qe2Cy/2N4LTWPxJ7sPQGov5fmUiD5Sr7qF
-	 xTxFBn2w0EPIApp48zQ1A9wveCY47LMyZbIIAdDOuilHGdoX4Uf/hzCVNSLUm+nqJM
-	 vvR+g2nKd0ARmoESdi9E8EhRVc5GvgUCxKWt2X00tIKWEyeqqHkfaEFWNhliaOL+r5
-	 MPTjkYBSRN0nzcUEFunpjg6iUB2IlZsFssxyDvI8eRd/rgbpCsFCndI2LbIQ53qrle
-	 lyKb2/I5qjBK22MRxouI5PPwnqIhC1/e2DBP5V40v7hG2IkGSjKf5XKGeoJyhgBu/0
-	 Mptw97ScC7Wpw==
+	b=nJHInE0W6KthhYtwJFfVGh3jH29NKJxTMA4KpN1DFH8krxMudbd3WHjBsNf5VFdBL
+	 fmPWT3tCTeRXP3HeciNkafYybLEF4A7g7pCbOsIfTPL6wvs0a/axo30ypIDrTIkZz1
+	 Dpd614Bqyzl3OvnJrc3K6s0H3u5W7VGLsz3DoJkuH1TgzBzfphf8LhVGullUkWooAV
+	 TxWwumux/PILr7QIJntcI/8kWzn0YkePRbo7Xw443DZnNQuo8+WluawhU0UU85IC8E
+	 e/D3uG0uToB9eZ1s5ntGPsRuvJ2ed1fozPXmxo9KqZj/Mt8U62OBkiY6VngrvIWpvi
+	 avYNBLDL3UbkQ==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH net-next v19 08/10] net: dsa: mt7530: move MDIO bus
- locking into regmap
+Subject: Re: [PATCH net-next v19 04/10] mfd: an8855: Add support for Airoha
+ AN8855 Switch MFD
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Christian Marangi" <ansuelsmth@gmail.com>
-Cc: lee@kernel.org, conor+dt@kernel.org, robh@kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260728154846.1828945-9-ansuelsmth@gmail.com>
+Cc: lee@kernel.org, robh@kernel.org, mfd@lists.linux.dev, conor+dt@kernel.org, devicetree@vger.kernel.org
+In-Reply-To: <20260728154846.1828945-5-ansuelsmth@gmail.com>
 References: <20260728154846.1828945-1-ansuelsmth@gmail.com>
- <20260728154846.1828945-9-ansuelsmth@gmail.com>
+ <20260728154846.1828945-5-ansuelsmth@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 29 Jul 2026 17:16:37 +0000
-Message-Id: <20260729171637.A0A111F00A3D@smtp.kernel.org>
+Date: Wed, 29 Jul 2026 17:16:38 +0000
+Message-Id: <20260729171638.7CD821F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-> From: Daniel Golle <daniel@makrotopia.org>
->=20
-> The switch register regmap was created with .disable_locking =3D true,
-> relying on callers to manually lock the MDIO bus. Move the locking
-> into the regmap using .lock/.unlock callbacks, matching the PCS
-> regmaps that already do this. This allows any code path reaching the
-> regmap to be automatically protected.
->=20
-> With regmap handling bus locking, the manual mt7530_mutex_lock/unlock
-> wrappers in mt7530_write(), _mt7530_read(), mt7530_rmw() and
-> mt7530_port_change_mtu() become redundant and are removed.
->=20
-> The MT7531 indirect PHY access functions need serialization of their
-> multi-step register sequences, but no longer need to hold bus->mdio_lock
-> across the whole operation. Switch them to reg_mutex.
-> [ ... ]
-> -	mt7530_mutex_unlock(priv);
-> +	mutex_unlock(&priv->reg_mutex);
->=20
-> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
-> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+Thank you for your contribution! Sashiko AI review found 6 potential issue(=
+s) to consider:
+- [High] Concurrent accesses by the switch regmap and the PHY driver on the=
+ shared MDIO address corrupt the PHY's hardware page state, causing arbitra=
+ry out-of-bounds PHY register reads/writes.
+- [High] MDIO child buses and PHYs are registered before the switch is take=
+n out of reset and initialized, causing PHY probe failures.
+- [High] The reset GPIO sequence incorrectly leaves the switch held in rese=
+t, and the subsequent poll loop is vulnerable to false successes.
+- [High] `an8855_regmap_update_bits` fails to mask `write_val`, risking mod=
+ification of adjacent bits.
+- [Medium] The driver assumes the hardware page register is 0 at boot witho=
+ut synchronizing this assumption, potentially causing MDIO reads from the w=
+rong page.
+- [Low] The patch violates multiple MFD subsystem guidelines regarding nami=
+ng conventions and commit message formatting.
+--
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+--- Patch [4]: [PATCH net-next v19 04/10] mfd: an8855: Add support for Airo=
+ha AN8855 Switch MFD ---
+Please note that due to mailing list constraints on quoting large blocks of=
+=20
+code, this review is provided as a free-form summary without direct patch=20
+quotes.
+
+commit 9fc0a25ce584ed2b0b637f4a623a857dd535edcc
+Author: Christian Marangi <ansuelsmth@gmail.com>
+mfd: an8855: Add support for Airoha AN8855 Switch MFD
+
+This patch adds support for the Airoha AN8855 Switch MFD, providing a DSA
+switch and an NVMEM provider. It introduces a regmap over MDIO for switch
+and PHY accesses.
+
+[Severity: High]
+In an8855_regmap_read(), the switch regmap acquires the parent lock and sets
+the hardware page to EXTENDED_4. Does this interleave dangerously with the
+PHY driver's paged operations?
+
+Since the PHY driver paged operations hold the child MDIO bus lock, the
+parent lock is acquired and released for each transaction (page write, data
+read, restore). Can a switch regmap operation interleave between the PHY's
+page write and data read, changing the hardware page?
+
+Furthermore, when the PHY driver resumes, an855_regmap_phy_reset_page()
+resets the page to STANDARD (0), ignoring the PHY driver's intended page.
+Also, an8855_regmap_phy_write() writes the page without updating the cached
+priv->current_page state. Will this lead to arbitrary out-of-bounds PHY
+register reads and writes?
+
+[Severity: High]
+In an8855_core_probe(), the driver calls an855_mdio_register() before
+toggling the reset GPIO and clearing the global PHY power-down.
+
+Since fwnode_mdiobus_register_phy() triggers the MDIO subsystem to read
+the PHY ID registers to detect devices, won't these accesses fail or time
+out if the switch is still in reset and powered down? Should the MDIO and
+PHY registration be moved after the hardware initialization sequence is
+complete?
+
+[Severity: High]
+Looking at the reset sequence in an8855_core_probe(), the code calls
+gpiod_set_value_cansleep(reset_gpio, 1) at the end. Since the gpiod API
+treats a logical 1 as asserted regardless of polarity, does this permanently
+hold the switch in reset?
+
+Immediately after this, regmap_read_poll_timeout() waits for the HWTRAP
+register to be non-zero. Since the device is in reset, won't the 32-bit
+MDIO read reconstruct 0xffffffff (as __mdiobus_read returns 0xffff on error=
+),
+causing the poll loop to instantly and falsely succeed?
+
+[Severity: High]
+In an8855_regmap_update_bits(), the implementation performs
+val &=3D ~mask followed by val |=3D write_val.
+
+Since the regmap core does not guarantee that write_val is already pre-mask=
+ed
+by the caller, could this unintentionally corrupt adjacent bits in the swit=
+ch
+registers if write_val contains bits outside the mask? Would it be safer to
+explicitly mask it using val |=3D (write_val & mask)?
+
+[Severity: Medium]
+In an855_regmap_phy_reset_page(), the function skips restoring the page
+if priv->current_page is 0. Since priv is allocated with kzalloc(), this
+assumes the hardware page is also 0 at boot.
+
+If the bootloader or a previous kernel execution left the hardware in a
+different page, such as EXTENDED_4, will subsequent PHY reads access the
+wrong hardware page because the software state does not match? Should the
+page register be explicitly initialized during probe?
+
+[Severity: Low]
+This isn't a bug, but there are a few MFD subsystem style and naming
+guideline violations.
+
+Does the commit message description unnecessarily include the string "MFD"?
+Also, the private structure is named struct an8855_core_priv with an
+instance variable named priv. The MFD guidelines prefer using the device
+name for the structure, such as struct an8855, and ddata for the instance.
+
+Finally, are there typos in the function names an855_mdio_register and
+an855_regmap_phy_reset_page, missing the second 8 in AN8855?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260728154846.1828=
-945-1-ansuelsmth@gmail.com?part=3D8
-
+945-1-ansuelsmth@gmail.com?part=3D4
