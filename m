@@ -1,62 +1,64 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C49A3244687;
-	Wed, 29 Jul 2026 17:16:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CBCC30EF63;
+	Wed, 29 Jul 2026 17:16:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785345395; cv=none; b=ObzywRHQ1lkOfQjsm4RmmNe0ly1dQtPOWTGRV3qU+inGEOTn71tfdIbx8Qp/chTiNXUGZXZQA4IgcMWYQy0VCqJ+C7vNHCSTeBtOgIwZc1lNKl0zaj2GsH+NBkyw/T776mUg7fGgMt7EAtUzk3JRQMQOfjKTHRk/atk1Set8aac=
+	t=1785345396; cv=none; b=kqFLvDIuPNzWNXNgOMXE6iTZLYlXyZTqjrjR1Kvb61nEQ8ygSZCV9ZIAftyTSr0ZJ+7HcWILg3hjHXvLkv07/5RWuIaDVDAIi9YkPj/1Gg2FzyAB1wlNCxXeGatrMMgMmgRHXcSYyjOChlsZaKZEg3QE1FEZQNCd7hYfjumdtuY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785345395; c=relaxed/simple;
-	bh=a2oJG9F8XBNemB1+erxEo8wd6inmHsgk96W5ZEEtKk0=;
+	s=arc-20240116; t=1785345396; c=relaxed/simple;
+	bh=r6vzkDoeWi5qg+sgoONDH7joLwFrcq+gbKtV+WuJNgg=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=mibFDlN0b8wDATXmpzyfwSdR5FqozF7fTTtQFXFvmK8XTI00RcfG1MVZWLjezkGpc3kiFh2sQuSWPwRnVgritRtEdGVJYRhYYUhytfhd5XsnI5FuCOYSjYFzqz8SjxMKKRv2JCrPEbZw0JZVPbS4GQTGaFWmqcFG6phZBN9dCqE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Cw/L7igb; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=i9kUJKeX7Iu/Jx6GPSJqnsu9asWmvQ1zwDuNjf+Rj5fFID7prRRYxbt2xlQnwIqzXSThl4Q/NQ/iTTF88wj7L9EznckTedBTlYvyv5YtZRa+mwO5HVYJWKXUtm0pfxVMZa0/AjUfH/tncsw/nQCvjUjCU9jWH9KDeOeuB/L/HAM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AXt9J63a; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Cw/L7igb"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0B3491F00A3A;
-	Wed, 29 Jul 2026 17:16:33 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AXt9J63a"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E63821F00A3D;
+	Wed, 29 Jul 2026 17:16:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785345394;
-	bh=a2oJG9F8XBNemB1+erxEo8wd6inmHsgk96W5ZEEtKk0=;
+	s=k20260515; t=1785345395;
+	bh=r6vzkDoeWi5qg+sgoONDH7joLwFrcq+gbKtV+WuJNgg=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Cw/L7igbBNP9KQc3aPSd+YaSwrT5qParEsCwPJ3H+GRB+s3mM8VffAnkROOqMiL0s
-	 bJZwZHMUDJ3/9Jc6mMAxHvwxmnZX5P7mRYLInv/qvjKDNiYTsenPKz6UgpUFeQ1T3O
-	 AZEeL8M21VH/zdT6OMBeCORhcJc/R0/FLYpIkpQhddU6LZ3QCGexgL0Vsgtqc6XwFc
-	 fv6Sv+dIExoSEEBCc3dXtZQJL+qskViKA499CWr6ydJGW+oVE7lBxAeZUJEcz7js2T
-	 x5I85tHxSdHlfJCG5EjAzGKcVuiin0eeHYz5+ktfyXjZWvKMh8BpO5AE59ocNWkYIE
-	 HlOB+pxONIKYg==
+	b=AXt9J63aUkPSB69c//vjhN2TGcHpHqYziDhsJcokmSEIxNZvPVgf7b2TbUB4n7iS1
+	 2ZzAwIBSE7aROtTId6mkK5x9u8uo2Fkigiifp8+zIpNX+b0Q2sWOinADN+dPR+Wr6Y
+	 NAjo/fwRqLU4BB7qCoTAZOKe56WIMoDDXC9lAPxxDr4B+VDMWu3b5RtV5AY4bwXlQc
+	 99yAJaKe1ysSmEQAKO5vgerLTwJzSl4G8dV2ShZNK0T5PHaZq5mdziMEuRirP8GOnu
+	 AkT4mzuKeGFPrUf0ahKp0C45xpdlMfpXV/ciYpFUCdjuAeQ0XOTHiA3axhFQvRPrFN
+	 TlZ/CgkXpzaIQ==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH net-next v19 01/10] dt-bindings: net: dsa: Document
- support for Airoha AN8855 DSA Switch
+Subject: Re: [PATCH net-next v19 02/10] dt-bindings: net: Document support
+ for AN8855 Switch Internal PHY
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Christian Marangi" <ansuelsmth@gmail.com>
-Cc: mfd@lists.linux.dev, robh@kernel.org, lee@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org
-In-Reply-To: <20260728154846.1828945-2-ansuelsmth@gmail.com>
+Cc: devicetree@vger.kernel.org, lee@kernel.org, mfd@lists.linux.dev, robh@kernel.org, conor+dt@kernel.org
+In-Reply-To: <20260728154846.1828945-3-ansuelsmth@gmail.com>
 References: <20260728154846.1828945-1-ansuelsmth@gmail.com>
- <20260728154846.1828945-2-ansuelsmth@gmail.com>
+ <20260728154846.1828945-3-ansuelsmth@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 29 Jul 2026 17:16:33 +0000
-Message-Id: <20260729171634.0B3491F00A3A@smtp.kernel.org>
+Date: Wed, 29 Jul 2026 17:16:34 +0000
+Message-Id: <20260729171634.E63821F00A3D@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-> Document support for Airoha AN8855 5-port Gigabit Switch.
+> Document support for AN8855 Switch Internal PHY.
 >=20
-> It does expose the 5 Internal PHYs on the MDIO bus and each port
-> can access the Switch register space by configuring the PHY page.
+> Airoha AN8855 is a 5-port Gigabit Switch that expose the Internal
+> PHYs on the MDIO bus.
 >=20
-> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
+> Each PHY might need to be calibrated to correctly work with the
+> use of the eFUSE provided by the Switch SoC. This can be enabled by
+> defining in the PHY node the NVMEM cell properties.
+>=20
 > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 
 Sashiko has reviewed this patch and found no issues. It looks great!
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260728154846.1828=
-945-1-ansuelsmth@gmail.com?part=3D1
+945-1-ansuelsmth@gmail.com?part=3D2
 
