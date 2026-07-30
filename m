@@ -1,87 +1,69 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E46A3E3145
-	for <mfd@lists.linux.dev>; Thu, 30 Jul 2026 11:48:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7A703B05A2
+	for <mfd@lists.linux.dev>; Thu, 30 Jul 2026 15:17:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785412089; cv=none; b=I4vPLpXJS3+VpXxnGsqm6jW1OlvS9K8ctccBulecxmKSzQF/HEGNU35XSoeWWJLcxg3BZCJtThwA7cjeZEFzqiCjJOYob3iPzoZUuZBbtphUdvpwY+tgAo03pIfpGgt8+rXouo3O4s0uCeSxzRp5MV5JLfGVG3egpSDy25VjwdQ=
+	t=1785424654; cv=none; b=NC95aPUXKzolzebWQRFKoDedCopaoU0o+GPA57rLQdTborrqrXiXmkfJK+r80vatRMaGIwSrOVgfWrgDttC+9YX8I/8QXzdBs8OCqzyCmDYOL8jvJOR9FCUq7yGWr6XSAZ06dZVNBk05bT9NG423RVwJsHrbxU3BPiQcJI7QfR0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785412089; c=relaxed/simple;
-	bh=ZTCUJnQcX4xxiOEuuREEDYYRsXwuOcI/mHgyUCcOAsI=;
+	s=arc-20240116; t=1785424654; c=relaxed/simple;
+	bh=/tmLYh3mf9l6G0ZCyOuo7Psg6GSm8tsRf5oCW1AHMC4=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=WRhJV060Lx6kUp9dUZj4C1ORE8J2udU9q0AeOpEHuOk4NWtySHxvTYSx9zMUf/HcoBXQ7pDVzvI8I4w394KPF3aV7zhW7RCatOTUcTM/r57PcHdRXvXZ5HcTQJ8z3NEnT/uzgQYLYOChjt+nvXAfPFa14hBuekJfAWR5qLOOn7g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=YAFfNMet; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=IyK2/yfl; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=ZNgloiyvYoZ3pDq1R7QykYhpQz+PzV5rlNhacqJfyPqvVLodNcZw0AFfle9OeR5cqShI6RLvtlaZI3x1Qkf0ZOsawKSkFfvZOVp103Q8OPrcksnlz/wJQIAhLaAal/VhszmfFqJOG2qlcH8JP7ZGQZqo/6xqZ3xfeHSq7i8VzI4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Lr/QmujU; arc=none smtp.client-ip=209.85.216.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="YAFfNMet";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IyK2/yfl"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66UA2PKm4191190
-	for <mfd@lists.linux.dev>; Thu, 30 Jul 2026 11:48:07 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	wQ7v3R4RUFHEkfA1ob1O7Jo8Ig0/QehHvZfl+zCElQ8=; b=YAFfNMetBPtOhvhF
-	uJWAfrktmzeHiBJ67zGGtiVtkNRP0r6T9hdWpomxRgQyNl0yMJqxJtDZcVzPQLz9
-	OcQWUiXm3FOhbAJS4d5vcaga7i4t+dkevS1CWh7ea9mtOtwlHw+ju4hfmAd6SY63
-	1xyjSOgpLg0bcjqgOU4zo8tW2v32xCEjOsZRmMeCaKgEfhrE+Eg1OyP8K2Xgk/Ye
-	dGJjLdHYUVjemh+I9h5VpxHKS4UUAmoVj2JlOckbCz8q8UXV7ueSA3rtRzyVqMsh
-	GpjVr5GT9g36SvToDSmxdcbSTXWei+uPbExnahXvW1thkZ2oCZbXt9h3Gx31NaLU
-	k/yxtA==
-Received: from mail-yx1-f70.google.com (mail-yx1-f70.google.com [74.125.224.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fr3tygkw5-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <mfd@lists.linux.dev>; Thu, 30 Jul 2026 11:48:07 +0000 (GMT)
-Received: by mail-yx1-f70.google.com with SMTP id 956f58d0204a3-66927fd3998so2344093d50.1
-        for <mfd@lists.linux.dev>; Thu, 30 Jul 2026 04:48:07 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Lr/QmujU"
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-38d489b6b71so2274201a91.0
+        for <mfd@lists.linux.dev>; Thu, 30 Jul 2026 08:17:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785412086; x=1786016886; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:from
+        d=gmail.com; s=20251104; t=1785424652; x=1786029452; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=wQ7v3R4RUFHEkfA1ob1O7Jo8Ig0/QehHvZfl+zCElQ8=;
-        b=IyK2/yflVKRei8tTcFZ79KbTqNoZIUMCidpj+J/RIEBUf2ujMQ7DVf+WCdVcTa2IZc
-         xKRrsgJ4VMW5vRVzGjGWsoRZoOzOb8qHBDAGHgtSb8jnWf8P4nt2pfPzf9+MX8XpFwP+
-         lNKhCnO71oQ3X9fbhEgVw1ok1+CTvypdd7ypiRVp/aiK9CEq7jfNbgZhzmK/V7E3b2V7
-         xKtP0HGSjz3ivb0JnJJEAZk6izibBIOPL0yZqu7L3mwTPLbU1uxf+Jd4XBY8ShChCDeQ
-         QKQP1DBK1gVv/ujZ34XqsvH53rNVOhoEYah3xDxkEQfL7++FjOl85QfG/htR7DyT/G+T
-         iqlg==
+        bh=o7Nf7T9c7X544T/agor4qYZ5LZRNgnGl7LJPSJPQukk=;
+        b=Lr/QmujUHgb8I1+RnkTSqErcJzR1FT//jS5+UHP4vF/3HZOEVo1qGQ4iOijADs/Gkh
+         6+2WdrpMxfksvA7WkszRR8Sq6771PrW5+t+VF6EQ/T7FisUv0M+RUJOSb1/WLcVvh1CY
+         ffFzZ3yBH856yEuaKRqes/0gZCaWA2d7qusO5ecW3rf6cOSgTWNg6IJwMmEzQingLyBq
+         srNzP6czdOEfwoGrNG71VTZ8QC+WC43hdovXAlxniDcgOh85GAzvMm9xIR8oBcp8dTiI
+         YE0MGkxGHHfOoDKUjShN3we5WFuywIc2HCLJux2TPW7Xc/k11POATYAvCAaYUCUk7emD
+         2NFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785412086; x=1786016886;
-        h=content-transfer-encoding:content-type:in-reply-to:from
+        d=1e100.net; s=20251104; t=1785424652; x=1786029452;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=wQ7v3R4RUFHEkfA1ob1O7Jo8Ig0/QehHvZfl+zCElQ8=;
-        b=TpRqsZjNy/2MHMOsBWl0h4rP8yQLxu0P1c+L0Vywy7wauh6MyIqQUNww8ywc0H5l06
-         hglTWQ3tiIlmhD55Aq7CTSU/SXOWNP47m/a6fbGx550R/qLIrqsPDmB2pJxUIJOsd3tN
-         vicvfhn7UA005we5bbvYajkGu7+g1wOoJbGi18NK26ExDSpWLktvIxJSycraglYN0ReT
-         sI4kAiMBxLZzU8sW5X7NQ+stEe3S3me9Koc9EwzrA1SDEi2lFCjp+rO575vBAzqSqRV6
-         8tjD5Ybs3YyEe6D7zDxkIE8y3SGFr+HfdBw32UnsYnv9+xFHLkorsWKFJISDQKVlnygD
-         axSw==
-X-Forwarded-Encrypted: i=1; AHgh+Rpxhkh6peSesByZ5/zpLAY3IiRTPRXo5k/lCDKEVnYCnwpQgK+kphnwFdXWOexGdX9JLXk=@lists.linux.dev
-X-Gm-Message-State: AOJu0Yyfig0B6NCcpixbZ5+wblD635aWTw79iw59LyCl68del6BBGejh
-	jutNRicBNRuPm3zyHocdv3xqcaWQBpYqpFBOw0d89pEEp8iLqT9yrRkg44rXPHj83wf1bOL1WWf
-	/YlrkYUHF3VLsCol4ejHJ8XDHcqg7juiScQFcyM74En17Ld7hK+8H7WM=
-X-Gm-Gg: AR+sD13wjL964oNBgvE36bSoEd+4B/eCBgCej9ZZJKtI22tWpdTD2/5Nj7LafI+a2nT
-	EN0CbOmTvBNajEawPzONAnbQmvDcbzrE69JqMTL5v78CH5W7wfu1oqb/ttPYusNB/qQ8Lm1GLSa
-	0L9Bg6ZavPZYwo1gAzB6TEU1Xn6YXuphMGv69YqTY7E2byrpiQlASsok8/4P94uaBEFRL2atjLb
-	21x2ahWlk+NEjXazWCl6xqixYeBipaows3c7Vk3UvK0hU3U/2Eqcw7c/6JNV6L2oa6TOTxjcUVS
-	P3ocVzu5DBhI6WeTzs2e1C39K1NmSpFcvAvfekNLqQxp8yQ0yA2gFTDDcbA7Q21cUyRo7EpCTzl
-	ifL1P783GmvZ8UpzwcOPDZl673yVSyYSUuJFBgFApVcv9SCJxwyyzadT7Yf+ufWzrCg==
-X-Received: by 2002:a05:690e:4811:b0:667:8a32:fb04 with SMTP id 956f58d0204a3-66939ae94fdmr7974d50.5.1785412086331;
-        Thu, 30 Jul 2026 04:48:06 -0700 (PDT)
-X-Received: by 2002:a05:690e:4811:b0:667:8a32:fb04 with SMTP id 956f58d0204a3-66939ae94fdmr7947d50.5.1785412085691;
-        Thu, 30 Jul 2026 04:48:05 -0700 (PDT)
-Received: from ?IPV6:2a01:cde0:108:24ed:2206:62e9:bbc4:c360? ([2a01:cde0:108:24ed:2206:62e9:bbc4:c360])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-6692c6e9bbcsm1106293d50.2.2026.07.30.04.48.03
+         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=o7Nf7T9c7X544T/agor4qYZ5LZRNgnGl7LJPSJPQukk=;
+        b=O5OuNJZS9lnKbehEgNMH6H0L4pkUBJKN+w6xkGvqZMJWwUFzLQ1GPKQeg2YLwTtHfX
+         PIE/z566fEuPb8I5yAJt/jHAISFVys9nuwzSzXbXLc5zoaC8WEnLnOXvxj4Op8W2gzdr
+         0Vqbh7+bsQJz1UHtXeuU6Il+wXZT5GobfeG+xfU0dQTIXVUrOBJFauSWB5U2oAq6cvjz
+         NvK1x+NnPuuqD5DPvXKyVT3/MFnaPezaw3kaFQgstuSfSupLSyxp4Pp2WQcMSCxsFn7y
+         OEXRphxoDMuqPvVS0CK9NK6JSY1s9t73WDbcGLZ35/8aRzzi7pgHeJSUOMLQwb50S2oo
+         Va1Q==
+X-Forwarded-Encrypted: i=1; AHgh+Rr+J2WtuEz6hpjgia3TMjSJN7MVvNcTljkn7iDbEICw2Zh1KsMp2H9t5eu9hceUZ3lMtq8=@lists.linux.dev
+X-Gm-Message-State: AOJu0YzbPFmfYWxCV3BMM+VElesqmEk7Lr10zJJy7zPmqtAJQ+5R99Ly
+	uUGkoLihIBgnq23PCoSNHyGpWOOOXNiH6cMmH5lbBn+//fa/TM5kP3fe
+X-Gm-Gg: AR+sD12RNGFVoaf+6FmvVBmAoWpFk4so3Jb3WomlzvRWRGKWiBXAZEUuiFzQd6JSeHi
+	Y4UVO34/Lsl9YYmlwslCGf8CqPn0TLxzfY0lgxeW6LEavJPYGFeF6BlTaaaH3qLtfxh8elPrKP+
+	BVIeYCXwkgTH6AHjiz7s+zUtvBMaxL+k2gH5qXkCmvH4RfzJ+rQ6ShSPouFkC8io7UgV03XUFis
+	/2nANFyGzP6NW8CWUd0eE1Wf118NO/udZWvWrKZrgay8ekAJpFes/sdJWJ1MQDgw9EwCJvJZMnG
+	8+JklZ/ir0ZD0P5Imc9jEwt6FShzHUIopbyL2vn+z0/UkWVOwQa4YhApzhu9PVpPi2PRgfxR9mS
+	6WFk0a1uZdKeYhy7XV254DeNFez1HLh2Px7sPwsgChYR6esQG/kM1SZNjPhlYkgMe7kTH1fZtRe
+	ad056dNGa6Jxp4o3xKTEEjwPbaHojd1mq9Nn8HOV1f7VGn/bghRvK3pU8vHGvSCXRiwgPWfXA9o
+	XY2OWpAXDXBx7P8K0rcLbrcimXVpgghU80xtA==
+X-Received: by 2002:a17:90b:164f:b0:38e:76f8:fcc6 with SMTP id 98e67ed59e1d1-38fa7f545d0mr362212a91.32.1785424651858;
+        Thu, 30 Jul 2026 08:17:31 -0700 (PDT)
+Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38f9aee9958sm589230a91.1.2026.07.30.08.17.30
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Jul 2026 04:48:05 -0700 (PDT)
-Message-ID: <5861906e-2969-4849-b9ec-ff6c7df65dad@oss.qualcomm.com>
-Date: Thu, 30 Jul 2026 13:48:02 +0200
+        Thu, 30 Jul 2026 08:17:31 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <66979a1d-d92c-43b2-892d-cd73b6585509@roeck-us.net>
+Date: Thu, 30 Jul 2026 08:17:29 -0700
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -90,17 +72,15 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 02/10] hwmon: Add Qualcomm PMIC BCL driver
-To: Guenter Roeck <linux@roeck-us.net>,
-        Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
+To: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
+ Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
+ Stephen Boyd <sboyd@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>
 Cc: linux-hwmon@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        mfd@lists.linux.dev, Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ mfd@lists.linux.dev, Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
 References: <20260722-qcom-bcl-hwmon-v2-0-febe2805e17b@oss.qualcomm.com>
  <20260722-qcom-bcl-hwmon-v2-2-febe2805e17b@oss.qualcomm.com>
  <373bd00e-bfcd-4f6c-b64e-a707af01417c@roeck-us.net>
@@ -110,122 +90,119 @@ References: <20260722-qcom-bcl-hwmon-v2-0-febe2805e17b@oss.qualcomm.com>
  <3635cd34-4c11-40fe-a9ff-48b752fb5150@roeck-us.net>
  <c1db2ca4-ad1c-440f-bff8-eb7660af8021@oss.qualcomm.com>
  <df2f8d63-4972-4b59-883f-0a919e7cb409@roeck-us.net>
+ <5861906e-2969-4849-b9ec-ff6c7df65dad@oss.qualcomm.com>
 Content-Language: en-US
-From: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
-In-Reply-To: <df2f8d63-4972-4b59-883f-0a919e7cb409@roeck-us.net>
+From: Guenter Roeck <linux@roeck-us.net>
+Autocrypt: addr=linux@roeck-us.net; keydata=
+ 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
+ np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
+In-Reply-To: <5861906e-2969-4849-b9ec-ff6c7df65dad@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: YhV-E1pBadGFlhpoTTBPwT0h5UUiaZn_
-X-Authority-Analysis: v=2.4 cv=JZOMa0KV c=1 sm=1 tr=0 ts=6a6b39f7 cx=c_pps
- a=S/uc88zpIJVNbziUnJ6G4Q==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=VwQbUJbxAAAA:8
- a=_jlGtV7tAAAA:8 a=_0oT8-qNcuQ5ffpwqqMA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=nd2WpGr1bMy9NW-iytEl:22 a=nlm17XC03S6CtCLSeiRr:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDA4OCBTYWx0ZWRfX4SrXm7fFMDB9
- 4raN64+mBzsfD7+KczGhzcFYDFh5mZrMsXbcPXlFsmhJ7AmJO99mAMVR24vi1BU7TDMuW0f/dA7
- ZAbaGR/khll/ZNhkV2MV/6XIFP3X/WOI4BXulu2Df23EpNVwAHrfJ7yAnasF5bNLtdc/blum707
- wZwDdbptL9rWGBD8tvkH5gVGs0FcNjlixjLxpYoQ7jkZYhDR6pqr9IzxmDROhqApGZgvIG7gVnm
- jo1ZpBVXgqz8XvgBRUhvhRUsA5uQxBWOMvn0mdPrKcDYgS4BQmbLQJq7jVBd64K856ejpNVY6vA
- 5EgUxBm147NMtXfu7K4H0t2zFhRf7soWHb+BiaFqGAJ2ZZHym5KNB6R9IOGQEDcXAVdEa07zZC4
- rG9hfhnpKDv0MjeLlT6wUzkA1RFvFop5MmsCK99h8g2XC7WyS784DU83UngXJrQm+LdCZ/ZUzqm
- fm2NVLqX3fbhUnR0/3w==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDA4OCBTYWx0ZWRfX6IPZ7wq2Kegl
- yGupI156ymSPYhazpkHa2+oQx2c+y2wqx6yG09soAEkxxGWRuJImAsImz/M1vbaspCMzUlyiZ5O
- 1s0xuuVe1aeZCaTbx9UE5S1JhEbLUCQ=
-X-Proofpoint-ORIG-GUID: YhV-E1pBadGFlhpoTTBPwT0h5UUiaZn_
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-30_03,2026-07-29_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 lowpriorityscore=0 bulkscore=0 adultscore=0
- phishscore=0 clxscore=1015 malwarescore=0 impostorscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607300088
 
-On 7/24/26 02:04, Guenter Roeck wrote:
-> On 7/23/26 12:16, Manaf Meethalavalappu Pallikunhi wrote:
->> Hi Guenter,
->>
->> On 7/23/2026 12:29 AM, Guenter Roeck wrote:
->>> On 7/22/26 11:19, Manaf Meethalavalappu Pallikunhi wrote:
->>>> Hi Guenter,
->>>>
->>>> On 7/22/2026 11:16 PM, Guenter Roeck wrote:
->>>>> On 7/22/26 10:38, Manaf Meethalavalappu Pallikunhi wrote:
->>>>> ...
->>>>>>>
->>>>>>> I am curious: Why not use static initialization and use the 
->>>>>>> is_visible
->>>>>>> function to determine if an attribute is visible or not ?
->>>>>>
->>>>>> ACK. There is already a comment in v1 suggesting the use of 
->>>>>> dynamic allocation based on the available attributes rather than 
->>>>>> static initialization. The intent is to avoid having to perform 
->>>>>> enable flag checks in multiple places.
->>>>>> . >
->>>>>
->>>>> You lost me, sorry. There is only a single is_visible function,
->>>>> and its intent is exactly to handle situations where some sensors
->>>>> are not always available.
->>>>>
->>>>> What would be those "multiple places" ?
->>>>
->>>> Understood, thanks for the clarification. I'll revert to static 
->>>> attribute initialization in the next revision and use is_visible() 
->>>> to control attribute visibility where needed.
->>>>
->>>>>
->>>>>>>  From the earlier exchange I had the impression that there is a 
->>>>>>> large
->>>>>>> number of current and voltage channels, but it looks like there 
->>>>>>> is only
->>>>>>> one each. That doesn't really warrant or need all this dynamic code
->>>>>>
->>>>>> Yes, this hardware only supports one or two channels (voltage and 
->>>>>> current). What we discussed earlier was that each channel can have 
->>>>>> up to three threshold alarms (warning, critical, and emergency). 
->>>>>> However, the hwmon framework currently supports only two limit 
->>>>>> alarms for these sensor types. I have not added support for the 
->>>>>> third alarm threshold in this series to keep the initial driver 
->>>>>> support aligned with the existing hwmon capabilities. Once the 
->>>>>> basic driver support is accepted, I can queue a follow-up series 
->>>>>> to add support for the third limit alarm.
->>>>>>
->>>>>
->>>>> What does that have to do with attribute visibility ?
->>>>
->>>> I was only clarifying that the channel count has always been small 
->>>> (maximum of two channels) and has not changed since v1. The earlier 
->>>> discussion was primarily around the limit alarm attributes. That 
->>>> said, you're right that this is unrelated to attribute visibility.
->>>>
+On 7/30/26 04:48, Daniel Lezcano wrote:
+> On 7/24/26 02:04, Guenter Roeck wrote:
+>> On 7/23/26 12:16, Manaf Meethalavalappu Pallikunhi wrote:
+>>> Hi Guenter,
 >>>
->>> Feel free to use (and test)
->>> https://lore.kernel.org/linux-hwmon/20260722185749.2313572-1- 
->>> linux@roeck-us.net/T/#u
+>>> On 7/23/2026 12:29 AM, Guenter Roeck wrote:
+>>>> On 7/22/26 11:19, Manaf Meethalavalappu Pallikunhi wrote:
+>>>>> Hi Guenter,
+>>>>>
+>>>>> On 7/22/2026 11:16 PM, Guenter Roeck wrote:
+>>>>>> On 7/22/26 10:38, Manaf Meethalavalappu Pallikunhi wrote:
+>>>>>> ...
+>>>>>>>>
+>>>>>>>> I am curious: Why not use static initialization and use the is_visible
+>>>>>>>> function to determine if an attribute is visible or not ?
+>>>>>>>
+>>>>>>> ACK. There is already a comment in v1 suggesting the use of dynamic allocation based on the available attributes rather than static initialization. The intent is to avoid having to perform enable flag checks in multiple places.
+>>>>>>> . >
+>>>>>>
+>>>>>> You lost me, sorry. There is only a single is_visible function,
+>>>>>> and its intent is exactly to handle situations where some sensors
+>>>>>> are not always available.
+>>>>>>
+>>>>>> What would be those "multiple places" ?
+>>>>>
+>>>>> Understood, thanks for the clarification. I'll revert to static attribute initialization in the next revision and use is_visible() to control attribute visibility where needed.
+>>>>>
+>>>>>>
+>>>>>>>>  From the earlier exchange I had the impression that there is a large
+>>>>>>>> number of current and voltage channels, but it looks like there is only
+>>>>>>>> one each. That doesn't really warrant or need all this dynamic code
+>>>>>>>
+>>>>>>> Yes, this hardware only supports one or two channels (voltage and current). What we discussed earlier was that each channel can have up to three threshold alarms (warning, critical, and emergency). However, the hwmon framework currently supports only two limit alarms for these sensor types. I have not added support for the third alarm threshold in this series to keep the initial driver support aligned with the existing hwmon capabilities. Once the basic driver support is accepted, I can queue a follow-up series to add support for the third limit alarm.
+>>>>>>>
+>>>>>>
+>>>>>> What does that have to do with attribute visibility ?
+>>>>>
+>>>>> I was only clarifying that the channel count has always been small (maximum of two channels) and has not changed since v1. The earlier discussion was primarily around the limit alarm attributes. That said, you're right that this is unrelated to attribute visibility.
+>>>>>
+>>>>
+>>>> Feel free to use (and test)
+>>>> https://lore.kernel.org/linux-hwmon/20260722185749.2313572-1- linux@roeck-us.net/T/#u
+>>>
+>>> Thanks for working on this. I'll use that change as the base, rebase my series on top of it, and add support for the third alarm level.
+>>> By the way, for the voltage channel, the hardware monitors undervoltage conditions and provides three threshold levels. At the moment, I am mapping:
+>>>
+>>> LVL0 → min
+>>> LVL1 → lcrit
+>>>
+>>> For LVL2, would it be possible to introduce a corresponding low- voltage emergency threshold, such as lemergency (or another more appropriate name), to represent the third alarm level for voltage sensors ?
+>>>
 >>
->> Thanks for working on this. I'll use that change as the base, rebase 
->> my series on top of it, and add support for the third alarm level.
->> By the way, for the voltage channel, the hardware monitors 
->> undervoltage conditions and provides three threshold levels. At the 
->> moment, I am mapping:
->>
->> LVL0 → min
->> LVL1 → lcrit
->>
->> For LVL2, would it be possible to introduce a corresponding low- 
->> voltage emergency threshold, such as lemergency (or another more 
->> appropriate name), to represent the third alarm level for voltage 
->> sensors ?
->>
+>> We can, but I really have no idea how to name it. lcrit is bad enough,
+>> but lemergency is even worse (or at least I think so). "lemerg" would
+>> be almost as bad, but at least it would kind of match "lcrit".
+>> I tried to ask Google AI, but it didn't give me any useful ideas.
+>> Any other suggestions or ideas ?
 > 
-> We can, but I really have no idea how to name it. lcrit is bad enough,
-> but lemergency is even worse (or at least I think so). "lemerg" would
-> be almost as bad, but at least it would kind of match "lcrit".
-> I tried to ask Google AI, but it didn't give me any useful ideas.
-> Any other suggestions or ideas ?
+> 'lfatal' ?
+> After thinking about it, I'll stick with "lemergency", reason being that
+it matches
+	crit -> lcrit
+	emergency -> lemergency
 
-'lfatal' ?
-
+Guenter
 
