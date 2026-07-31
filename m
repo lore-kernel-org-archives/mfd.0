@@ -1,183 +1,142 @@
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0195B3C1F41
-	for <mfd@lists.linux.dev>; Fri, 31 Jul 2026 08:24:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.173
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 850913A1E92
+	for <mfd@lists.linux.dev>; Fri, 31 Jul 2026 09:42:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785486297; cv=none; b=plZ9vwJ27lE0BvTrt2mk1La26o+xfki+oLOQ3EIMfsFAzgcAi1Z+xI8GIuLzeHIFDFbMRsibbgaPsXalxCbKXvqulfx74dQyAo5stawu4qkrgseiB+dAygdsBD/4fatW+jQ6ood7VmJlrpjszztQ2ef/K9kUUVc32cmxVEI1lAc=
+	t=1785490979; cv=none; b=b7STpndEMZuVFKYR7V3iZG66i0JHGZG2WEBlbecDeYbfPp7+QqBXtFi4jLGqryx7Cl4MY9WMvQwxBT6Ljh6DpY0wxTw0G73RUixxharIvV/u0FiU9H/dTT4Y2/oWmgibXRa7NgXZu8whtLtBE6UFKQatIL4sWYSm8Sk5HaD7NH8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785486297; c=relaxed/simple;
-	bh=0cRWJ4eKnZR83IAvPi9vpmww2wPNWwtloX3nTeIN+Fg=;
-	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
-	 Message-Id:References:To; b=XlIItLme/XqesQk3wN23WZkqm0rdISfVJLAnApVoMcC+icLy7g8DAm0FMpfwFL57vY8blrmZbvbbqA757pFdhUFqVkkfFI671iPcMO1djv2r+JTXAGbjzHcrMIFkgvihAVa/60RWzKFqs+ZG4yiakKgScsI7gV1bdSNVWL26HHM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Dq6LExKD; arc=none smtp.client-ip=209.85.215.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Dq6LExKD"
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-ca5b707b78aso49650a12.0
-        for <mfd@lists.linux.dev>; Fri, 31 Jul 2026 01:24:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785486292; x=1786091092; darn=lists.linux.dev;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:content-type:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=0cRWJ4eKnZR83IAvPi9vpmww2wPNWwtloX3nTeIN+Fg=;
-        b=Dq6LExKDOjuQg3anuKI3zUyu9xowWgwNpf6B0a2S++ulZ7d6M2FQ6z3aINFJxpPIX4
-         VkxsUHHZqu16jbtKoqbpT4bpypAETiPoSlfItl5B+gtkULHB7ON5vgzm9JsOtoDh7YrE
-         mqxM0+EcQXAVODnBYuJ2UhlpGHS4veQVagPUzdnm29NBbYr5tB7zx5gqPcy0MdT+cC1C
-         fg93upYrUmWZS1ig6xqorPQZjp1xjxnZhGaLLpUcU0zxkTchON4jFQQaQKEV4Ri1VvFY
-         Zf1IRmbKQ9yeHfnwgUCR4fIqSHvSHkwxBcVfvelfYXK85Dqa7aA/K+O10HFXlfsCzViy
-         SJ7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785486292; x=1786091092;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:content-type:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=0cRWJ4eKnZR83IAvPi9vpmww2wPNWwtloX3nTeIN+Fg=;
-        b=c0/Vf0MS8SHr/GEWymOq1i+1Al71ITqDCdLtzhehfi/VznBVbfO8LYw7fYIseSTs0l
-         wKZ2f277XCSKb91Bfsxpq1ohqSdg7qmeAKPmzqKVP5rSQcgn7iUN4UTlpmePR7M8rj9n
-         HtuLEXk5wT/suyQ9/nmKZ/ob9y8u6IcyXhGKiIuF+N+HAtmfAh1NgD9/MsAKgLna7i+J
-         mY5Nq2vXcVTzOtqi3R06X8iYgA8lXORQ5nXuwJ3dqB8xyJ3K5WJC6LjHk0le2MOMjRNT
-         4ZdNg8+Kls38qw/BM/nqcS8PeN541VxIyRnc37e0eZtBqno+QNhK7WNxnK8amd8Mt2YX
-         D5Qg==
-X-Forwarded-Encrypted: i=1; AHgh+RpARRnAB/qFekyBaz7DG/RFh+rhbKZvErRhl1WC4nyemq5Mr6CBhDrx7QfOEm5qLv4UEv0=@lists.linux.dev
-X-Gm-Message-State: AOJu0YxgrfUR671jHi3DilbcZDmnli3PhJmP/FkuvC4wOn2gkfrsYLMG
-	SIDyV6VCNJNekaCO8jcQH5K6lbay45t3eRmQXu+f+QG1/o4uUnEXfQLF
-X-Gm-Gg: AR+sD10/rD/ISgYBkkySTXDqPtyadwONU9vOoakSOocHvQvJgrbGSS2OvW5Fu0qHRKp
-	sWOKUCZqIbat9VCprXT083K75o9nbmtKOOamYj2jLjcz8Cj+FUywKxYGQ2oncMCmO/W49QOsq63
-	aYmy5jNwbHRIi70O9Wm0+x1tILDkijldOa6pg/yOYcW8cFQtwmS9eXcck6SA2VmlXv8X48L1hGF
-	wp4hhw/6gOStuq6NO+i538Ol44ODizhePja/5utX7iQI1KYTEAdwd5BrZiYoh39QDzPx8SiCswf
-	OuP+FFW+mHXrTR6vnL+ybJQBC2vjO4xMBvScWEpDBcs0QjE38zGqW7iqgHx/rRtt3tw9D/YxkuE
-	Zubf/N4rU7gaopqUaN1vUZDCcWLErqsiyDUcCK6W8RUAQuUyzDg/IN+x1EBZ3mbhGZdVJhNCLSM
-	0gtlKsS7+QwgOlN1W9juO+ksg5U3gWS2Db4iqhVZCUs0YAf5RHaKIpvV1MtqzPn2zwNHgYKKtm/
-	ujfyh0HuJIH3w==
-X-Received: by 2002:a05:6a20:12c8:b0:3bf:99ea:aeb2 with SMTP id adf61e73a8af0-3c91b63a5fdmr1209603637.4.1785486291673;
-        Fri, 31 Jul 2026 01:24:51 -0700 (PDT)
-Received: from smtpclient.apple ([23.247.139.92])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cbe3963ddc3sm276125a12.7.2026.07.31.01.24.46
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Fri, 31 Jul 2026 01:24:50 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
+	s=arc-20240116; t=1785490979; c=relaxed/simple;
+	bh=9PO/MiE851ATe1MubOIc99IKFY0BFwh9qQCCPBrXsuE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=iGJEtcT7kmCEhfEoGvfkbmeqXLtpI7Td2tIkP8MKEQQ3DMnha/JqQtD6wk8xi3IOrI0SRIDKrVSjdnZN2GIp9nGXCvjGUrX77SvjVUL0oHcnh94UORwjs29ylsthXfbbgt/pOQXVIHBh/T2bEjrvkqH55QEaG5F3GGYdY/5CUYM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
+Received: from loongson.cn (unknown [223.64.68.205])
+	by gateway (Coremail) with SMTP id _____8Bx0+kYbmxqgiwJAA--.7621S3;
+	Fri, 31 Jul 2026 17:42:48 +0800 (CST)
+Received: from kernelserver (unknown [223.64.68.205])
+	by front1 (Coremail) with SMTP id qMiowJDxu8QPbmxqHvYeAA--.48910S2;
+	Fri, 31 Jul 2026 17:42:40 +0800 (CST)
+From: Binbin Zhou <zhoubinbin@loongson.cn>
+To: Binbin Zhou <zhoubb.aaron@gmail.com>,
+	Huacai Chen <chenhuacai@loongson.cn>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Yinbo Zhu <zhuyinbo@loongson.cn>,
+	zhanghongchen <zhanghongchen@loongson.cn>,
+	"Rafael J . Wysocki" <rafael@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@linaro.org>,
+	Zhang Rui <rui.zhang@intel.com>,
+	Lukasz Luba <lukasz.luba@arm.com>,
+	Lee Jones <lee@kernel.org>
+Cc: Huacai Chen <chenhuacai@kernel.org>,
+	devicetree@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	mfd@lists.linux.dev,
+	Binbin Zhou <zhoubinbin@loongson.cn>
+Subject: [PATCH v3 0/5] thermal: loongson2: Add support for Loongson-2K0300 SoC
+Date: Fri, 31 Jul 2026 17:42:16 +0800
+Message-ID: <cover.1785480242.git.zhoubinbin@loongson.cn>
+X-Mailer: git-send-email 2.52.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81.1.8\))
-Subject: Re: [PATCH RFC v3 0/7] mfd: ls2kbmc: multiple fixes for this driver
-From: Miao Wang <shankerwangmiao@gmail.com>
-In-Reply-To: <CAAhV-H5wFZHN2jD-vGgNLuMqugGxwfyfq2TnK=HKyZXxZR7iRA@mail.gmail.com>
-Date: Fri, 31 Jul 2026 16:24:33 +0800
-Cc: Binbin Zhou <zhoubinbin@loongson.cn>,
- Chong Qiao <qiaochong@loongson.cn>,
- Lee Jones <lee@kernel.org>,
- Corey Minyard <corey@minyard.net>,
- Linus Walleij <linusw@kernel.org>,
- Bartosz Golaszewski <brgl@kernel.org>,
- Xi Ruoyao <xry111@xry111.site>,
- WANG Xuerui <kernel@xen0n.name>,
- Yinbo Zhu <zhuyinbo@loongson.cn>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- mfd@lists.linux.dev,
- linux-kernel@vger.kernel.org,
- linux-gpio@vger.kernel.org,
- openipmi-developer@lists.sourceforge.net
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <64E79496-E66E-45A0-B1D6-DB5466C35D46@gmail.com>
-References: <20260710-ls2kbmc-mod-v3-0-ef718636e78e@gmail.com>
- <CAAhV-H6kqN1+ZiTqyvXfPEtQJfvFhp_964AB9C00o0O6pigZmQ@mail.gmail.com>
- <8FCFD614-FEA4-475C-9E0C-50E075B49453@gmail.com>
- <CAAhV-H5wFZHN2jD-vGgNLuMqugGxwfyfq2TnK=HKyZXxZR7iRA@mail.gmail.com>
-To: Huacai Chen <chenhuacai@kernel.org>
-X-Mailer: Apple Mail (2.3826.700.81.1.8)
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:qMiowJDxu8QPbmxqHvYeAA--.48910S2
+X-CM-SenderInfo: p2kr3uplqex0o6or00hjvr0hdfq/1tbiAgEFCGpsKC8E-gAAs1
+X-Coremail-Antispam: 1Uk129KBj93XoWxJrW5CFy7JFy5Kr48GF13Jrc_yoW8Kw17pa
+	yY93sxCr1UGF4UAws3J3yxZr4Yvrn5ta9xZFs3Gw1ruwn8KFyay3y8ta15ZFyxCr45WFW2
+	vryvkrWkCF1DuFXCm3ZEXasCq-sJn29KB7ZKAUJUUUU7529EdanIXcx71UUUUU7KY7ZEXa
+	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+	0xBIdaVrnRJUUUB2b4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
+	xVW8Jr0_Cr1UM2kKe7AKxVWUXVWUAwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07
+	AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWU
+	AVWUtwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7V
+	AKI48JMxkF7I0En4kS14v26r1q6r43MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY
+	6r1j6r4UMxCIbckI1I0E14v26r1Y6r17MI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7
+	xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVW8ZVWrXwCIc40Y0x0EwIxGrwCI42IY6xII
+	jxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw2
+	0EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x02
+	67AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjxUceOJUUUUU
 
-Hi,
+Hi all:
 
-> 2026=E5=B9=B47=E6=9C=8831=E6=97=A5 16:07=EF=BC=8CHuacai Chen =
-<chenhuacai@kernel.org> =E5=86=99=E9=81=93=EF=BC=9A
->=20
-> On Fri, Jul 24, 2026 at 5:28=E2=80=AFPM Miao Wang =
-<shankerwangmiao@gmail.com> wrote:
->>=20
->> Hi,
->>=20
->>> 2026=E5=B9=B47=E6=9C=8824=E6=97=A5 16:55=EF=BC=8CHuacai Chen =
-<chenhuacai@kernel.org> =E5=86=99=E9=81=93=EF=BC=9A
->>>=20
->>> Hi, Miao,
->>>=20
->>> On Fri, Jul 10, 2026 at 1:24=E2=80=AFAM Miao Wang via B4 Relay
->>> <devnull+shankerwangmiao.gmail.com@kernel.org> wrote:
->>>>=20
->>>> Previously, the driver has been introduced to support the Loongson =
-2K
->>>> BMC running on the Loongson Servers, which is essential to prevent
->>>> the system from hanging when the BMC is being reset and the default
->>>> efi-framebuffer is being used. However, there are some drawbacks in =
-the
->>>> driver.
->>>>=20
->>>> Firstly, the driver tries to read and write to the connected PCI-E =
-host
->>>> controller registers, assuming that the BMC is connected to LS7A =
-PCI-E
->>>> host controller. This assumption should be true for real products, =
-but
->>>> to prevent from accidentally reading and writing to the wrong PCI-E =
-host
->>>> controller, this driver should be modified to check this before
->>>> accessing the registers.
->>>>=20
->>>> Secondly, the driver uses non-exported functions to tell the vt
->>>> subsystem to redraw the screen, preventing the driver from being
->>>> compiling as a module. This can be fixed by using the exported
->>>> functions instead.
->>> You can replace the redraw function, but I don't think it is =
-necessary
->>> to make the bmc driver modular.
->>>=20
->>> BMC core, IPMI and simpledrm display are usually (if not always)
->>> supposed to work as early as possible.
->>=20
->> I believe that it should be the user's decision to choose whether to
->> compile a module into the kernel or as a module and it would be =
-better
->> if we can provide the possibilities for the user to choose from.
->> Additionally, I don't think these modules are supposed to work that
->> early. The mfd module provide two functions, the display and the ipmi
->> device. In the aspect of graphical display, without this module, the
->> user can still see the output during booting on their monitors, since
->> efifb is working, providing a basic display function. In the aspect =
-of
->> the ipmi device, I don't think the lack of such device will influence
->> the boot of the system, since it is a common practice to compile ipmi
->> device drivers as modules on other architectures. As a result, =
-neither
->> of the two functions are required to be loaded that early and it is
->> reasonable to at lease leave the choice to compile it as a module
->> to the user.
-> Flexibility is not always useful, if a config doesn't provide good
-> effect, then it just increases complexity and makes maintenance more
-> difficult.
+This patch series adds thermal zone support for the Loongson-2K0300 SoC.
 
-I should emphasize that to allow this driver to be a module, there is
-no such increase on maintenance. Moreover, not all loongarch machines
-are requiring this driver. Especially only a part of the server models
-are quipped with this BMC. Comparing with other architectures, the
-driver for BMC are normally compiled as a module, such as mgag200 for
-iLO from HPE and iDRAC from DELL, hibmc_drm for Kunpeng server from
-Huawei. None of these BMC drivers requiring to be compiled into the
-kernel. I cannot see there is any reason keeping the driver from being
-allowed to be compiled as a module. I also do not think it will bring
-any significant maintenance burden. Implementing correct cleanup code
-should be necessary instead of burden.
+The Loongson-2K0300's thermal sensor is generally compatible with the
+existing Loongson-2K series, but it features several key differences:
+1. It has an independent CPU ID register for reading chip version
+information.
+2. The raw temperature output field has been extended from 8 bits to 11
+bits.
+3. The temperature calculation formula has been updated to incorporate a
+correction factor based on the version information.
 
-Cheers,
+To ensure robustness on older hardware revisions, a fallback mechanism
+is included: if the calculated temperature falls outside the valid range
+(-55 TO 125),  the driver falls back to a simpler calculation and prints
+a warning.
 
-Miao Wang
+The patches have been validated on the Loongson-2K0300 development board.
 
+Thanks.
+Binbin
+
+=========
+V3:
+Patch (2/5):
+ - New patch for moving thermal_ops to chip_data;
+Patch (3/5):
+ - Correct spelling errors;
+Patch (4/5):
+ - Add Acked-by from Conor, thanks;
+Patch (5/5):
+ - Keep loongson2_thermal_data->chip_data as const, and use
+   data->flags as the private data.
+ - Renmae LOONGSON2_THSENS_OUT_10B_MASK ->
+   LOONGSON2_THSENS_OUT_11B_MASK;
+
+Link to V2:
+https://lore.kernel.org/all/cover.1784619512.git.zhoubinbin@loongson.cn/
+
+V2:
+Patch (1/4):
+ - New patch form Sashiko;
+Patch (2/4):
+ - New patch for adding chipid syscon compatible;
+Patch (3/4):
+ - Use `loongson,chipid` phandle replace reg property;
+Patch (3/4):
+ - Refact `calib_offset` calculate routing;
+ - Add LS2K0300_OLD_FUSE_FLAG flag.
+
+Link to V1:
+https://lore.kernel.org/all/cover.1783670011.git.zhoubinbin@loongson.cn/
+
+Binbin Zhou (5):
+  thermal/drivers/loongson2: Correct thermal sensor registration loop
+  thermal/drivers/loongson2: Move thermal_ops to chip_data for SoC
+    scalability
+  dt-bindings: mfd: syscon: Allow syscon compatible for Loongson-2K0300
+    chip id
+  dt-bindings: thermal: loongson,ls2k-thermal: Add compatible for
+    Loongson-2K0300
+  thermal/drivers/loongson2: Add support for Loongson-2K0300
+
+ .../devicetree/bindings/mfd/syscon.yaml       |   2 +
+ .../thermal/loongson,ls2k-thermal.yaml        |  73 +++++++++---
+ drivers/thermal/loongson2_thermal.c           | 110 ++++++++++++++++--
+ 3 files changed, 157 insertions(+), 28 deletions(-)
+
+
+base-commit: 795f1b1a91ae13ebc012a364075e42f486a1cafe
+-- 
+2.52.0
 
