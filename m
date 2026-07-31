@@ -1,64 +1,64 @@
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E72EF40B0ED
-	for <mfd@lists.linux.dev>; Fri, 31 Jul 2026 11:37:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7421040B106
+	for <mfd@lists.linux.dev>; Fri, 31 Jul 2026 11:37:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785497837; cv=none; b=TTISl9lk8kXK0VEMkxcQyiVOVlCxELP2kPDBPoNKSP+ZrgCjKLBLHpiUUJqJMI92S/ASys55ZFA7WujIfnCE9Rydp1/ugWJ1MtoUvAgoPG47WCHdIWvc8C3KWfFx5MpQLskB1kU9iK7vc5MrthlKsujz2j3zd0+tT46ISVKbIj4=
+	t=1785497839; cv=none; b=AsWQ82liYztZU55i5Pl8dIEZ/Zqj+j4IndtrwS6wRBnpGrcKxzAybvwZ806M/e1+3QHYx6Xn0zo9ESNZyx2rjya/w+mpMVTqCrKlV9nAD441RJLTjVCi5jbyxCv4j/1KDaI0Uui3sCWvSbhDkfX8cNL5rZ+KMeuOMLxH8AR7pd0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785497837; c=relaxed/simple;
-	bh=gH1MwkraHhLfFwOqdDKSV36nn6k8A8hcoTG61D+huFc=;
+	s=arc-20240116; t=1785497839; c=relaxed/simple;
+	bh=Fsi9naHLvq24ntJl8U1aGARdwDxfue5n7pfYhUOdjEs=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=UJNWBmYgPPA1PmhqJIEdpEU+IynmDLH8ayiGxdKXhxTQGj06NaZ/MlYrXwE/T1nBLW7ZTUypWwD3hz99A/YKGHoY3tRC3W7oBiHSzUJsaoPsQzY9bA/uRk7xgBp+ESCIK105l9m16tTnubVLWIq49MIS15uTBskggSj8XUnjx/w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=XIkYu7iE; arc=none smtp.client-ip=209.85.221.42
+	 MIME-Version; b=AqLeNgHmbWtjjSutd15UfUIyDPf1CEY4skDIhdRiBI+Uni/4cfwkntJb92ZgyZch/GrGEZXO49twzDCuyY8IEWdPd2cjjmDcK3pbPX6YIAXWLE1JjW9W0eCUoxVqipC0wE6XfP16LPrP8pXarq1qo5NJ9ahdQOLkHxWPe51kfuw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=oK/KYxk1; arc=none smtp.client-ip=209.85.218.49
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="XIkYu7iE"
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-47f752b3423so765608f8f.3
-        for <mfd@lists.linux.dev>; Fri, 31 Jul 2026 04:37:10 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="oK/KYxk1"
+Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-c1f7666a90bso131155866b.3
+        for <mfd@lists.linux.dev>; Fri, 31 Jul 2026 04:37:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785497829; x=1786102629; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1785497832; x=1786102632; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=nQpRLsiZTXEgYfwQoFR1dQZo4ZR06hyl1wIfqvII+so=;
-        b=XIkYu7iECOK15Tr8PLpgerrcVjAfXDYo+8PF0ccOJqFMKXrsnqvoLDgs58d4bkC7kY
-         AK/C7Wzn6L7eFGXCqtUmXVePZSXhZ2/Y+RbZ3RmjxqKNNjgPBkUiNlgbr+vgb1oK1+2c
-         rJ7MzW83sv5PMkBf4sneO15O3SiNRIf/YANWGQxQ1UkaXKwXEJRsJGxXG/yHWu472KjE
-         OHfVD551V5dzKHzuDhCnxRsFaR0hhGXezC8Zfx6GvkAwEf2SnfWLlvR6df7fXbyXS3Dc
-         DJqs/qHMJAxcPqgV34eglNkw59pz7rKlFAmnSFHlD/pZAcLrL9y1CdpGPc6owIGnruhw
-         WzCA==
+        bh=HoJ5QEzgIc1R//Ldk+eAj0/fHRhzYHI0+TPDQsoclNc=;
+        b=oK/KYxk120MrdLPU3a7ELEmOcOPbgyZ9j8d+l8NBCVJPacI3tpGErKp1xX+1ykXUnO
+         rvHNEwzAxinZhGZKKzwzgO61pw6iD1JZ95jOb6lfryi+Y7jpIgnzp8kNbw+suSq1yeAI
+         v1BIE6fF2BnpI6ZBa+TcP3Td83CsfHGnjjM7/EYnbKW0OYoLveYaDZyJdZeIXUNvlu8b
+         9/XPjiliaZ0y4RfrRSpSkwC4AC7NiiKUOrNvhhPSMAsfRBXgRTu4OiIZc7xP8//qxXQA
+         poBKPE22K0R4JG5rRHB5eGdXzDKuajWUEWALoz1R6EhGbzBY4MyevwxVpYoYzeyy47mG
+         7JDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785497829; x=1786102629;
+        d=1e100.net; s=20251104; t=1785497832; x=1786102632;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=nQpRLsiZTXEgYfwQoFR1dQZo4ZR06hyl1wIfqvII+so=;
-        b=BJ7zpbxHPoQvIcjtuZM3CdgiRX+Lk8oy9qiYW6qQhhIXbz1A/2s0Z7ZN67c+CdVRlN
-         tP+ZrRrm7ZH0jk0Kv2AoCqqlRLkOLswG5rNXsinqVMO0ATe6u2t4eqpch29cIjedEa5g
-         eSA2+23ream8pXKcb+rO3PLqS4vF++eOPssy0JJM8ctItKEu65xO9evYYiIOzM9VMM7L
-         pzIK8wn1ialH3MUmNU/QXKRUECx+YmoUgV1GLkXr2j4LO6LIn+jbFW0VwSHX+GDCBmFT
-         3WT/CnbY8TzO9ut+Ug0uT8RHAZNgQZNjE3hZp7/WRqd44hWq+Ot3kEQUMWorYll0FTqq
-         H4CQ==
-X-Forwarded-Encrypted: i=1; AHgh+RpOIym6asyYVaCC+CRjQkclgDiu2C4Zd/wZz/chKAMtys/VRgGgSVZAz9Eo804QzRtoI18=@lists.linux.dev
-X-Gm-Message-State: AOJu0YyHhobbRYTi4IaSd5dmU1YOnprqne069AgMZlcYNdilYC617Vkk
-	wqLtAXfgAGBNfKi2F2okKFDHZo7q7EROhfIFD4hIewfkXabHcnGXYiAg
-X-Gm-Gg: AR+sD12gf3pofSyz/kgBiumsomvx/jAR5i+5JjlUdjs40DV1OxLWXl3i/iY5QPYC/Q0
-	3QxvsC4QjQl91ncAoQzGL9e9ROA3pLdH+man1VY+P6u//nZz3ucKpHi9UXwvKXO9aVK6z/6GTUu
-	6olDyo7tgCyK5XCQ3zMULVP07O0eCnKQvtaM9HMH4cE7toP9dbgGjH6WiCdehGGRBlm6XWmjLGn
-	oZeJlyqbbfSIc1kZXISKbQ8x0kMaM25id8HWxVcpO+BZ9vDoLHLmocHnBc27brvEYGPgOYLdyYe
-	s1Hnok5xdjmxvyea60zghcgv32VkB8PMQbxFYmJwTdFZ9IVRmstQLxRAkoL7IjETDk7Eju/rpkt
-	v1jqu8sRtbGleswQSAtzGHb1lbJHAkpbD0RzobLVKyNc1tGgprv8EPagO6F7dh+h7K0jYmAfUwk
-	i/SDyA+Ui5FhnHFCiOneupOXqP7Gqjeot3UDMAH71cKHnTemsdd/T+6ZRqrSDT0eqgt15OmRTmf
-	aDt2QgfcQYUdOtKJph9
-X-Received: by 2002:adf:e00e:0:10b0:47f:9557:8daf with SMTP id ffacd0b85a97d-47fd2b73700mr2928004f8f.61.1785497828358;
-        Fri, 31 Jul 2026 04:37:08 -0700 (PDT)
+        bh=HoJ5QEzgIc1R//Ldk+eAj0/fHRhzYHI0+TPDQsoclNc=;
+        b=IPdzcn3QXjdphfrui10Svzjf89AM4wdkBSLC/W1Cu1RGpT++1yDBRddSs7koubLlV2
+         R0ZssHtzgPGDorul6eQ43hEOk+jWDPTO7vD1KVocQdeoUd0enKSuIEZ3rHSavH8HxPwH
+         3RMD67N5Y/ZQMW6/SC/3+ZK7UETGsQB3qxNCFBfuY8KIb4I6GPnP+OFNceZHL4z+G/Hz
+         KBCgcZ2U/pqlMhp3Kuo8A8Xd9TCVqIS5QAjbJvU2Cy5allkm1ohbPa5D7V8bYHeJ8HJi
+         MHspQhz/ZipQ29ExO7Zb0MEyPfi4xmIl+TUaId6DDTQRn0NhDA2DzZ7SIAfwWx5QlkpW
+         guLA==
+X-Forwarded-Encrypted: i=1; AHgh+Rpd90VuPa2u96TL6VwTsI2TLJ8BLnGzOloY+MLs69831ueXiLFJYIqvyJdzxzmsak/C3aA=@lists.linux.dev
+X-Gm-Message-State: AOJu0Ywx2yhQIOSuLOGl/11GHCYFDH86DaAW5q+S6OGnGW1rL9Fnp2TW
+	/R6YVuvjbqa+BbwKahdXkSEHzNntltZHif/odmtPQlxARY0FeMLCOiKW
+X-Gm-Gg: AR+sD11M5M08t8EcPVx4B9kBvagy8/VUYGBiNH7OMBCzYfKpEVJj+zaGOLg7YBJ5ioF
+	YxEo6BHPLjpshv/62DHtTNWpaoN/gAW6WTDUhWr94nNj33REk11iHtaoFRPsS6C+jK57xadj+iX
+	QcRCi01R1SKkMlSFlmPtLaeJKq3uGIQm/6z5cma8cfxgdvJ/4fimRNGZVVRYGLkayZMDGHfNw6L
+	fcn1HBkoeSctXRUl7YA8Umphy4bg1VGi4ms1wkekcHS5tgXV4SyBPH/BGcYc4gBzV5LJVwE8h4o
+	v8OmzvLp5TBwbWUFxK+sYKfVogKzVTviPsOo1bRieiNAMg17z8VHwhfIBaDWrDNVumRzVJ+kokH
+	FTMn59IjeDSnAGO0Fs4YWaHTmqWmVEEAdKE7KSTdTWhQExvL9UkqyloYRd8V9aleREoyDjUW61b
+	UkX5hF167NaufsACwhegiHCZyCyVCBfCwTj6PT5+h4sJEDjRkW9jz1ntGpQ6PNJ6i+FUIXBVOrn
+	2OpzG5S2w==
+X-Received: by 2002:a17:907:c78e:b0:c12:7934:52fd with SMTP id a640c23a62f3a-c1fd250eeb8mr91901366b.32.1785497831684;
+        Fri, 31 Jul 2026 04:37:11 -0700 (PDT)
 Received: from xeon ([188.163.112.51])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47fd45a0c8bsm3670646f8f.34.2026.07.31.04.37.04
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47fd45a0c8bsm3670646f8f.34.2026.07.31.04.37.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 31 Jul 2026 04:37:05 -0700 (PDT)
+        Fri, 31 Jul 2026 04:37:10 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Lee Jones <lee@kernel.org>,
 	Daniel Thompson <danielt@kernel.org>,
@@ -81,9 +81,9 @@ Cc: Johan Hovold <johan@kernel.org>,
 	linux-iio@vger.kernel.org,
 	mfd@lists.linux.dev,
 	linux-fbdev@vger.kernel.org
-Subject: [PATCH v6 08/14] mfd: lm3533: Convert to use OF bindings
-Date: Fri, 31 Jul 2026 14:36:26 +0300
-Message-ID: <20260731113632.158440-9-clamor95@gmail.com>
+Subject: [PATCH v6 09/14] mfd: lm3533: Add support for VIN power supply
+Date: Fri, 31 Jul 2026 14:36:27 +0300
+Message-ID: <20260731113632.158440-10-clamor95@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260731113632.158440-1-clamor95@gmail.com>
 References: <20260731113632.158440-1-clamor95@gmail.com>
@@ -95,885 +95,96 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Since there are no users of this driver via platform data, remove the
-platform data support and switch to using Device Tree bindings.
-
-Previously, all cell devices were linked to the parent device. This could
-cause problems further down the line because the LM3533 has multiple cells
-of the same type. Using a single phandle to the parent could cause
-confusion when attempting to reference or call the correct child node.
-Since this commit adds a dedicated node for every cell, remove linking of
-the cell to the parent node.
+Add support for 2.7V-5.5V VIN power supply.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-Reviewed-by: Daniel Thompson (RISCstar) <danielt@kernel.org> #for backlight
 ---
- drivers/iio/light/lm3533-als.c      |  66 +++++---
- drivers/leds/leds-lm3533.c          |  47 ++++--
- drivers/mfd/lm3533-core.c           | 237 ++++++++++++----------------
- drivers/mfd/lm3533-ctrlbank.c       |   5 -
- drivers/video/backlight/lm3533_bl.c |  54 +++++--
- include/linux/mfd/lm3533.h          |  52 +-----
- 6 files changed, 217 insertions(+), 244 deletions(-)
+ drivers/mfd/lm3533-core.c  | 23 +++++++++++++++++++++--
+ include/linux/mfd/lm3533.h |  2 ++
+ 2 files changed, 23 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/iio/light/lm3533-als.c b/drivers/iio/light/lm3533-als.c
-index 55c35018704c8..4870e8050088b 100644
---- a/drivers/iio/light/lm3533-als.c
-+++ b/drivers/iio/light/lm3533-als.c
-@@ -17,15 +17,17 @@
- #include <linux/mutex.h>
- #include <linux/mfd/core.h>
- #include <linux/platform_device.h>
-+#include <linux/property.h>
- #include <linux/regmap.h>
- #include <linux/slab.h>
- #include <linux/uaccess.h>
-+#include <linux/units.h>
- 
- #include <linux/mfd/lm3533.h>
- 
- 
--#define LM3533_ALS_RESISTOR_MIN			1
--#define LM3533_ALS_RESISTOR_MAX			127
-+#define LM3533_ALS_RESISTOR_MIN_OHMS		1575
-+#define LM3533_ALS_RESISTOR_MAX_OHMS		200000
- #define LM3533_ALS_CHANNEL_CURRENT_MAX		2
- #define LM3533_ALS_THRESH_MAX			3
- #define LM3533_ALS_ZONE_MAX			4
-@@ -57,6 +59,9 @@ struct lm3533_als {
- 
- 	atomic_t zone;
- 	struct mutex thresh_mutex;
-+
-+	u32 r_select;
-+	bool pwm_mode;
- };
- 
- 
-@@ -403,7 +408,7 @@ static ssize_t show_thresh_either_en(struct device *dev,
- 	int enable;
- 	int ret;
- 
--	if (als->irq) {
-+	if (als->irq > 0) {
- 		ret = lm3533_als_get_int_mode(indio_dev, &enable);
- 		if (ret)
- 			return ret;
-@@ -425,7 +430,7 @@ static ssize_t store_thresh_either_en(struct device *dev,
- 	u8 zone;
- 	int ret;
- 
--	if (!als->irq)
-+	if (als->irq <= 0)
- 		return -EBUSY;
- 
- 	if (kstrtoul(buf, 0, &enable))
-@@ -708,29 +713,38 @@ static const struct attribute_group lm3533_als_attribute_group = {
- 	.attrs = lm3533_als_attributes
- };
- 
--static int lm3533_als_setup(struct lm3533_als *als,
--			    const struct lm3533_als_platform_data *pdata)
-+static int lm3533_als_setup(struct lm3533_als *als)
- {
- 	struct device *dev = &als->pdev->dev;
- 	int ret;
- 
-+	als->pwm_mode = device_property_read_bool(dev, "ti,pwm-mode");
-+
- 	ret = regmap_assign_bits(als->regmap, LM3533_REG_ALS_CONF,
--				 LM3533_ALS_INPUT_MODE_MASK, pdata->pwm_mode);
-+				 LM3533_ALS_INPUT_MODE_MASK, als->pwm_mode);
- 	if (ret)
- 		return dev_err_probe(dev, ret, "failed to set input mode %d\n",
--				     pdata->pwm_mode);
-+				     als->pwm_mode);
- 
- 	/* ALS input is always high impedance in PWM-mode. */
--	if (pdata->pwm_mode)
-+	if (als->pwm_mode)
- 		return 0;
- 
--	if (pdata->r_select < LM3533_ALS_RESISTOR_MIN ||
--	    pdata->r_select > LM3533_ALS_RESISTOR_MAX)
-+	ret = device_property_read_u32(dev, "ti,resistor-ohms",
-+				       &als->r_select);
-+	if (ret)
-+		return dev_err_probe(dev, ret,
-+				     "failed to ger resistor value\n");
-+
-+	if (als->r_select < LM3533_ALS_RESISTOR_MIN_OHMS ||
-+	    als->r_select > LM3533_ALS_RESISTOR_MAX_OHMS)
- 		return dev_err_probe(dev, -EINVAL,
- 				     "invalid resistor value\n");
- 
-+	als->r_select = DIV_ROUND_UP(2 * MICRO, 10 * als->r_select);
-+
- 	ret = regmap_write(als->regmap, LM3533_REG_ALS_RESISTOR_SELECT,
--			   pdata->r_select);
-+			   als->r_select);
- 	if (ret)
- 		return dev_err_probe(dev, ret, "failed to set resistor\n");
- 
-@@ -793,7 +807,6 @@ static const struct iio_info lm3533_als_info = {
- 
- static int lm3533_als_probe(struct platform_device *pdev)
- {
--	const struct lm3533_als_platform_data *pdata;
- 	struct lm3533 *lm3533;
- 	struct lm3533_als *als;
- 	struct iio_dev *indio_dev;
-@@ -803,12 +816,6 @@ static int lm3533_als_probe(struct platform_device *pdev)
- 	if (!lm3533)
- 		return -EINVAL;
- 
--	pdata = dev_get_platdata(&pdev->dev);
--	if (!pdata) {
--		dev_err(&pdev->dev, "no platform data\n");
--		return -EINVAL;
--	}
--
- 	indio_dev = devm_iio_device_alloc(&pdev->dev, sizeof(*als));
- 	if (!indio_dev)
- 		return -ENOMEM;
-@@ -817,25 +824,27 @@ static int lm3533_als_probe(struct platform_device *pdev)
- 	indio_dev->channels = lm3533_als_channels;
- 	indio_dev->num_channels = ARRAY_SIZE(lm3533_als_channels);
- 	indio_dev->name = dev_name(&pdev->dev);
--	iio_device_set_parent(indio_dev, pdev->dev.parent);
- 	indio_dev->modes = INDIO_DIRECT_MODE;
- 
- 	als = iio_priv(indio_dev);
- 	als->regmap = lm3533->regmap;
- 	als->pdev = pdev;
--	als->irq = lm3533->irq;
-+	als->irq = platform_get_irq_optional(pdev, 0);
-+	if (als->irq == -EPROBE_DEFER)
-+		return -EPROBE_DEFER;
-+
- 	atomic_set(&als->zone, 0);
- 	mutex_init(&als->thresh_mutex);
- 
- 	platform_set_drvdata(pdev, indio_dev);
- 
--	if (als->irq) {
-+	if (als->irq > 0) {
- 		ret = lm3533_als_setup_irq(als, indio_dev);
- 		if (ret)
- 			return ret;
- 	}
- 
--	ret = lm3533_als_setup(als, pdata);
-+	ret = lm3533_als_setup(als);
- 	if (ret)
- 		goto err_free_irq;
- 
-@@ -854,7 +863,7 @@ static int lm3533_als_probe(struct platform_device *pdev)
- err_disable:
- 	lm3533_als_disable(als);
- err_free_irq:
--	if (als->irq)
-+	if (als->irq > 0)
- 		free_irq(als->irq, indio_dev);
- 
- 	return ret;
-@@ -868,13 +877,20 @@ static void lm3533_als_remove(struct platform_device *pdev)
- 	lm3533_als_set_int_mode(indio_dev, false);
- 	iio_device_unregister(indio_dev);
- 	lm3533_als_disable(als);
--	if (als->irq)
-+	if (als->irq > 0)
- 		free_irq(als->irq, indio_dev);
- }
- 
-+static const struct of_device_id lm3533_als_match_table[] = {
-+	{ .compatible = "ti,lm3533-als" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, lm3533_als_match_table);
-+
- static struct platform_driver lm3533_als_driver = {
- 	.driver	= {
- 		.name	= "lm3533-als",
-+		.of_match_table = lm3533_als_match_table,
- 	},
- 	.probe		= lm3533_als_probe,
- 	.remove		= lm3533_als_remove,
-diff --git a/drivers/leds/leds-lm3533.c b/drivers/leds/leds-lm3533.c
-index 0cb0585eb9600..7259097bd6a71 100644
---- a/drivers/leds/leds-lm3533.c
-+++ b/drivers/leds/leds-lm3533.c
-@@ -12,6 +12,7 @@
- #include <linux/mfd/core.h>
- #include <linux/mutex.h>
- #include <linux/platform_device.h>
-+#include <linux/property.h>
- #include <linux/regmap.h>
- #include <linux/slab.h>
- 
-@@ -50,6 +51,9 @@ struct lm3533_led {
- 	struct mutex mutex;
- 	unsigned long flags;
- 
-+	u32 max_current;
-+	u32 pwm;
-+
- 	bool have_als;
- };
- 
-@@ -616,22 +620,20 @@ static const struct attribute_group *lm3533_led_attribute_groups[] = {
- 	NULL
- };
- 
--static int lm3533_led_setup(struct lm3533_led *led,
--					struct lm3533_led_platform_data *pdata)
-+static int lm3533_led_setup(struct lm3533_led *led)
- {
- 	int ret;
- 
--	ret = lm3533_ctrlbank_set_max_current(&led->cb, pdata->max_current);
-+	ret = lm3533_ctrlbank_set_max_current(&led->cb, led->max_current);
- 	if (ret)
- 		return ret;
- 
--	return lm3533_ctrlbank_set_pwm(&led->cb, pdata->pwm);
-+	return lm3533_ctrlbank_set_pwm(&led->cb, led->pwm);
- }
- 
- static int lm3533_led_probe(struct platform_device *pdev)
- {
- 	struct lm3533 *lm3533;
--	struct lm3533_led_platform_data *pdata;
- 	struct lm3533_led *led;
- 	int ret;
- 
-@@ -641,12 +643,6 @@ static int lm3533_led_probe(struct platform_device *pdev)
- 	if (!lm3533)
- 		return -EINVAL;
- 
--	pdata = dev_get_platdata(&pdev->dev);
--	if (!pdata) {
--		dev_err(&pdev->dev, "no platform data\n");
--		return -EINVAL;
--	}
--
- 	if (pdev->id < 0 || pdev->id >= LM3533_LVCTRLBANK_COUNT) {
- 		dev_err(&pdev->dev, "illegal LED id %d\n", pdev->id);
- 		return -EINVAL;
-@@ -659,8 +655,6 @@ static int lm3533_led_probe(struct platform_device *pdev)
- 	led->regmap = lm3533->regmap;
- 	led->have_als = lm3533->have_als;
- 
--	led->cdev.name = pdata->name;
--	led->cdev.default_trigger = pdata->default_trigger;
- 	led->cdev.brightness_set_blocking = lm3533_led_set;
- 	led->cdev.brightness_get = lm3533_led_get;
- 	led->cdev.blink_set = lm3533_led_blink_set;
-@@ -668,6 +662,15 @@ static int lm3533_led_probe(struct platform_device *pdev)
- 	led->cdev.groups = lm3533_led_attribute_groups;
- 	led->id = pdev->id;
- 
-+	led->cdev.name = devm_kasprintf(&pdev->dev, GFP_KERNEL, "%s-%d",
-+					pdev->name, led->id);
-+	if (!led->cdev.name)
-+		return -ENOMEM;
-+
-+	led->cdev.default_trigger = "none";
-+	device_property_read_string(&pdev->dev, "linux,default-trigger",
-+				    &led->cdev.default_trigger);
-+
- 	mutex_init(&led->mutex);
- 
- 	/* The class framework makes a callback to get brightness during
-@@ -680,7 +683,7 @@ static int lm3533_led_probe(struct platform_device *pdev)
- 
- 	platform_set_drvdata(pdev, led);
- 
--	ret = led_classdev_register(pdev->dev.parent, &led->cdev);
-+	ret = led_classdev_register(&pdev->dev, &led->cdev);
- 	if (ret) {
- 		dev_err(&pdev->dev, "failed to register LED %d\n", pdev->id);
- 		return ret;
-@@ -688,7 +691,14 @@ static int lm3533_led_probe(struct platform_device *pdev)
- 
- 	led->cb.dev = led->cdev.dev;
- 
--	ret = lm3533_led_setup(led, pdata);
-+	device_property_read_u32(&pdev->dev, "led-max-microamp",
-+				 &led->max_current);
-+	led->max_current = clamp(led->max_current, LM3533_MAX_CURRENT_MIN,
-+				 LM3533_MAX_CURRENT_MAX);
-+
-+	device_property_read_u32(&pdev->dev, "ti,pwm-config-mask", &led->pwm);
-+
-+	ret = lm3533_led_setup(led);
- 	if (ret)
- 		goto err_deregister;
- 
-@@ -725,9 +735,16 @@ static void lm3533_led_shutdown(struct platform_device *pdev)
- 	lm3533_led_set(&led->cdev, LED_OFF);		/* disable blink */
- }
- 
-+static const struct of_device_id lm3533_led_match_table[] = {
-+	{ .compatible = "ti,lm3533-leds" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, lm3533_led_match_table);
-+
- static struct platform_driver lm3533_led_driver = {
- 	.driver = {
- 		.name = "lm3533-leds",
-+		.of_match_table = lm3533_led_match_table,
- 	},
- 	.probe		= lm3533_led_probe,
- 	.remove		= lm3533_led_remove,
 diff --git a/drivers/mfd/lm3533-core.c b/drivers/mfd/lm3533-core.c
-index 53b87958c2c68..c7c7e71719ae0 100644
+index c7c7e71719ae0..2a63df034171e 100644
 --- a/drivers/mfd/lm3533-core.c
 +++ b/drivers/mfd/lm3533-core.c
-@@ -15,16 +15,23 @@
- #include <linux/gpio/consumer.h>
- #include <linux/i2c.h>
+@@ -17,6 +17,7 @@
  #include <linux/mfd/core.h>
-+#include <linux/property.h>
+ #include <linux/property.h>
  #include <linux/regmap.h>
++#include <linux/regulator/consumer.h>
  #include <linux/seq_file.h>
  #include <linux/slab.h>
  #include <linux/uaccess.h>
-+#include <linux/units.h>
+@@ -111,14 +112,25 @@ static int lm3533_set_lvled_config(struct lm3533 *lm3533, u8 lvled, u8 led)
+ 	return ret;
+ }
  
- #include <linux/mfd/lm3533.h>
- 
- 
- #define LM3533_BOOST_OVP_MASK		0x06
-+#define LM3533_BOOST_OVP_MIN		(16 * MICRO)
-+#define LM3533_BOOST_OVP_MAX		(40 * MICRO)
-+
- #define LM3533_BOOST_FREQ_MASK		0x01
-+#define LM3533_BOOST_FREQ_MIN		(500 * HZ_PER_KHZ)
-+#define LM3533_BOOST_FREQ_MAX		(1000 * HZ_PER_KHZ)
- 
- #define LM3533_BL_ID_MASK		1
- #define LM3533_LED_ID_MASK		3
-@@ -33,6 +40,7 @@
- 
- #define LM3533_HVLED_ID_MAX		2
- #define LM3533_LVLED_ID_MAX		5
-+#define LM3533_CELLS_MAX		7
- 
- #define LM3533_REG_OUTPUT_CONF1		0x10
- #define LM3533_REG_OUTPUT_CONF2		0x11
-@@ -40,44 +48,6 @@
- 
- #define LM3533_REG_MAX			0xb2
- 
--
--static struct mfd_cell lm3533_als_devs[] = {
--	{
--		.name	= "lm3533-als",
--		.id	= -1,
--	},
--};
--
--static struct mfd_cell lm3533_bl_devs[] = {
--	{
--		.name	= "lm3533-backlight",
--		.id	= 0,
--	},
--	{
--		.name	= "lm3533-backlight",
--		.id	= 1,
--	},
--};
--
--static struct mfd_cell lm3533_led_devs[] = {
--	{
--		.name	= "lm3533-leds",
--		.id	= 0,
--	},
--	{
--		.name	= "lm3533-leds",
--		.id	= 1,
--	},
--	{
--		.name	= "lm3533-leds",
--		.id	= 2,
--	},
--	{
--		.name	= "lm3533-leds",
--		.id	= 3,
--	},
--};
--
- /*
-  * HVLED output config -- output hvled controlled by backlight bl
-  */
-@@ -299,125 +269,92 @@ static const struct attribute_group *lm3533_attribute_groups[] = {
- 	NULL,
- };
- 
--static int lm3533_device_als_init(struct lm3533 *lm3533)
--{
--	struct lm3533_platform_data *pdata = dev_get_platdata(lm3533->dev);
--	int ret;
--
--	if (!pdata->als)
--		return 0;
--
--	lm3533_als_devs[0].platform_data = pdata->als;
--	lm3533_als_devs[0].pdata_size = sizeof(*pdata->als);
--
--	ret = mfd_add_devices(lm3533->dev, 0, lm3533_als_devs, 1, NULL,
--			      0, NULL);
--	if (ret) {
--		dev_err(lm3533->dev, "failed to add ALS device\n");
--		return ret;
--	}
--
--	lm3533->have_als = 1;
--
--	return 0;
--}
--
--static int lm3533_device_bl_init(struct lm3533 *lm3533)
--{
--	struct lm3533_platform_data *pdata = dev_get_platdata(lm3533->dev);
--	int i;
--	int ret;
--
--	if (!pdata->backlights || pdata->num_backlights == 0)
--		return 0;
--
--	if (pdata->num_backlights > ARRAY_SIZE(lm3533_bl_devs))
--		pdata->num_backlights = ARRAY_SIZE(lm3533_bl_devs);
--
--	for (i = 0; i < pdata->num_backlights; ++i) {
--		lm3533_bl_devs[i].platform_data = &pdata->backlights[i];
--		lm3533_bl_devs[i].pdata_size = sizeof(pdata->backlights[i]);
--	}
--
--	ret = mfd_add_devices(lm3533->dev, 0, lm3533_bl_devs,
--			      pdata->num_backlights, NULL, 0, NULL);
--	if (ret) {
--		dev_err(lm3533->dev, "failed to add backlight devices\n");
--		return ret;
--	}
--
--	lm3533->have_backlights = 1;
--
--	return 0;
--}
--
--static int lm3533_device_led_init(struct lm3533 *lm3533)
--{
--	struct lm3533_platform_data *pdata = dev_get_platdata(lm3533->dev);
--	int i;
--	int ret;
--
--	if (!pdata->leds || pdata->num_leds == 0)
--		return 0;
--
--	if (pdata->num_leds > ARRAY_SIZE(lm3533_led_devs))
--		pdata->num_leds = ARRAY_SIZE(lm3533_led_devs);
--
--	for (i = 0; i < pdata->num_leds; ++i) {
--		lm3533_led_devs[i].platform_data = &pdata->leds[i];
--		lm3533_led_devs[i].pdata_size = sizeof(pdata->leds[i]);
--	}
--
--	ret = mfd_add_devices(lm3533->dev, 0, lm3533_led_devs,
--			      pdata->num_leds, NULL, 0, NULL);
--	if (ret) {
--		dev_err(lm3533->dev, "failed to add LED devices\n");
--		return ret;
--	}
--
--	lm3533->have_leds = 1;
--
--	return 0;
--}
--
- static int lm3533_device_init(struct lm3533 *lm3533)
+-static void lm3533_enable(struct lm3533 *lm3533)
++static int lm3533_enable(struct lm3533 *lm3533)
  {
--	struct lm3533_platform_data *pdata = dev_get_platdata(lm3533->dev);
-+	struct device *dev = lm3533->dev;
-+	struct mfd_cell *lm3533_devices;
-+	u32 reg, nchilds;
-+	u32 count = 0;
- 	int ret;
- 
--	dev_dbg(lm3533->dev, "%s\n", __func__);
-+	nchilds = device_get_child_node_count(dev);
-+	if (!nchilds || nchilds > LM3533_CELLS_MAX)
-+		return dev_err_probe(dev, -ENODEV,
-+				     "num of child nodes is not supported\n");
- 
--	if (!pdata) {
--		dev_err(lm3533->dev, "no platform data\n");
--		return -EINVAL;
--	}
-+	lm3533_devices = devm_kcalloc(dev, nchilds, sizeof(*lm3533_devices),
-+				      GFP_KERNEL);
-+	if (!lm3533_devices)
-+		return -ENOMEM;
- 
--	lm3533->hwen = devm_gpiod_get(lm3533->dev, NULL, GPIOD_OUT_LOW);
--	if (IS_ERR(lm3533->hwen))
--		return dev_err_probe(lm3533->dev, PTR_ERR(lm3533->hwen), "failed to request HWEN GPIO\n");
--	gpiod_set_consumer_name(lm3533->hwen, "lm3533-hwen");
-+	device_for_each_child_node_scoped(dev, child) {
-+		if (count >= nchilds)
-+			break;
++	int ret;
 +
-+		if (fwnode_device_is_compatible(child, "ti,lm3533-als")) {
-+			lm3533_devices[count].name = "lm3533-als";
-+			lm3533_devices[count].of_compatible = "ti,lm3533-als";
-+			lm3533_devices[count].id = PLATFORM_DEVID_NONE;
-+
-+			lm3533->have_als = true;
-+			count++;
-+		} else if (fwnode_device_is_compatible(child, "ti,lm3533-backlight")) {
-+			ret = fwnode_property_read_u32(child, "reg", &reg);
-+			if (ret || reg >= LM3533_HVLED_ID_MAX) {
-+				dev_err(dev, "invalid backlight node %pfw\n", child);
-+				continue;
-+			}
-+
-+			lm3533_devices[count].name = "lm3533-backlight";
-+			lm3533_devices[count].of_compatible = "ti,lm3533-backlight";
-+			lm3533_devices[count].id = reg;
-+			lm3533_devices[count].of_reg = reg;
-+			lm3533_devices[count].use_of_reg = true;
-+
-+			lm3533->have_backlights = true;
-+			count++;
-+		} else if (fwnode_device_is_compatible(child, "ti,lm3533-leds")) {
-+			ret = fwnode_property_read_u32(child, "reg", &reg);
-+			if (ret || reg < LM3533_HVLED_ID_MAX ||
-+			    reg > LM3533_LVLED_ID_MAX) {
-+				dev_err(dev, "invalid LED node %pfw\n", child);
-+				continue;
-+			}
-+
-+			lm3533_devices[count].name = "lm3533-leds";
-+			lm3533_devices[count].of_compatible = "ti,lm3533-leds";
-+			lm3533_devices[count].id = reg - LM3533_HVLED_ID_MAX;
-+			lm3533_devices[count].of_reg = reg;
-+			lm3533_devices[count].use_of_reg = true;
-+
-+			lm3533->have_leds = true;
-+			count++;
-+		}
++	ret = regulator_enable(lm3533->vin_supply);
++	if (ret) {
++		dev_err(lm3533->dev, "failed to enable vin power supply\n");
++		return ret;
 +	}
++
+ 	gpiod_set_value(lm3533->hwen, 1);
++
++	return 0;
+ }
  
- 	lm3533_enable(lm3533);
+ static void lm3533_disable(struct lm3533 *lm3533)
+ {
+ 	gpiod_set_value(lm3533->hwen, 0);
++	regulator_disable(lm3533->vin_supply);
+ }
+ 
+ enum lm3533_attribute_type {
+@@ -332,7 +344,9 @@ static int lm3533_device_init(struct lm3533 *lm3533)
+ 		}
+ 	}
+ 
+-	lm3533_enable(lm3533);
++	ret = lm3533_enable(lm3533);
++	if (ret)
++		return ret;
  
  	ret = regmap_update_bits(lm3533->regmap, LM3533_REG_BOOST_PWM,
  				 LM3533_BOOST_FREQ_MASK,
--				 FIELD_PREP(LM3533_BOOST_FREQ_MASK, pdata->boost_freq));
-+				 FIELD_PREP(LM3533_BOOST_FREQ_MASK, lm3533->boost_freq));
- 	if (ret) {
--		dev_err(lm3533->dev, "failed to set boost frequency\n");
-+		dev_err(dev, "failed to set boost frequency\n");
- 		goto err_disable;
- 	}
+@@ -446,6 +460,11 @@ static int lm3533_i2c_probe(struct i2c_client *i2c)
+ 		return dev_err_probe(lm3533->dev, PTR_ERR(lm3533->hwen),
+ 				     "failed to get HWEN GPIO\n");
  
- 	ret = regmap_update_bits(lm3533->regmap, LM3533_REG_BOOST_PWM,
- 				 LM3533_BOOST_OVP_MASK,
--				 FIELD_PREP(LM3533_BOOST_OVP_MASK, pdata->boost_ovp));
-+				 FIELD_PREP(LM3533_BOOST_OVP_MASK, lm3533->boost_ovp));
- 	if (ret) {
--		dev_err(lm3533->dev, "failed to set boost ovp\n");
-+		dev_err(dev, "failed to set boost ovp\n");
- 		goto err_disable;
- 	}
- 
--	lm3533_device_als_init(lm3533);
--	lm3533_device_bl_init(lm3533);
--	lm3533_device_led_init(lm3533);
-+	ret = mfd_add_devices(dev, 0, lm3533_devices, count, NULL, 0, NULL);
-+	if (ret) {
-+		dev_err(dev, "failed to add MFD devices: %d\n", ret);
-+		goto err_disable;
-+	}
- 
- 	return 0;
- 
-@@ -502,7 +439,26 @@ static int lm3533_i2c_probe(struct i2c_client *i2c)
- 		return PTR_ERR(lm3533->regmap);
- 
- 	lm3533->dev = &i2c->dev;
--	lm3533->irq = i2c->irq;
++	lm3533->vin_supply = devm_regulator_get(lm3533->dev, "vin");
++	if (IS_ERR(lm3533->vin_supply))
++		return dev_err_probe(lm3533->dev, PTR_ERR(lm3533->vin_supply),
++				     "failed to get vin-supply\n");
 +
-+	lm3533->hwen = devm_gpiod_get_optional(lm3533->dev, "enable",
-+					       GPIOD_OUT_LOW);
-+	if (IS_ERR(lm3533->hwen))
-+		return dev_err_probe(lm3533->dev, PTR_ERR(lm3533->hwen),
-+				     "failed to get HWEN GPIO\n");
-+
-+	device_property_read_u32(lm3533->dev, "ti,boost-ovp-microvolt",
-+				 &lm3533->boost_ovp);
-+
-+	lm3533->boost_ovp = clamp(lm3533->boost_ovp, LM3533_BOOST_OVP_MIN,
-+				  LM3533_BOOST_OVP_MAX);
-+	lm3533->boost_ovp = lm3533->boost_ovp / (8 * MICRO) - 2;
-+
-+	device_property_read_u32(lm3533->dev, "ti,boost-freq-hz",
-+				 &lm3533->boost_freq);
-+
-+	lm3533->boost_freq = clamp(lm3533->boost_freq, LM3533_BOOST_FREQ_MIN,
-+				   LM3533_BOOST_FREQ_MAX);
-+	lm3533->boost_freq = lm3533->boost_freq / (500 * KILO) - 1;
+ 	device_property_read_u32(lm3533->dev, "ti,boost-ovp-microvolt",
+ 				 &lm3533->boost_ovp);
  
- 	return lm3533_device_init(lm3533);
- }
-@@ -516,6 +472,12 @@ static void lm3533_i2c_remove(struct i2c_client *i2c)
- 	lm3533_device_exit(lm3533);
- }
- 
-+static const struct of_device_id lm3533_match_table[] = {
-+	{ .compatible = "ti,lm3533" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, lm3533_match_table);
-+
- static const struct i2c_device_id lm3533_i2c_ids[] = {
- 	{ "lm3533" },
- 	{ }
-@@ -526,6 +488,7 @@ static struct i2c_driver lm3533_i2c_driver = {
- 	.driver = {
- 		   .name = "lm3533",
- 		   .dev_groups = lm3533_attribute_groups,
-+		   .of_match_table = lm3533_match_table,
- 	},
- 	.id_table	= lm3533_i2c_ids,
- 	.probe		= lm3533_i2c_probe,
-diff --git a/drivers/mfd/lm3533-ctrlbank.c b/drivers/mfd/lm3533-ctrlbank.c
-index 91e13cfa3cf04..3aab8ece4e8cb 100644
---- a/drivers/mfd/lm3533-ctrlbank.c
-+++ b/drivers/mfd/lm3533-ctrlbank.c
-@@ -13,11 +13,6 @@
- 
- #include <linux/mfd/lm3533.h>
- 
--
--#define LM3533_MAX_CURRENT_MIN		5000
--#define LM3533_MAX_CURRENT_MAX		29800
--#define LM3533_MAX_CURRENT_STEP		800
--
- #define LM3533_PWM_MAX			0x3f
- 
- #define LM3533_REG_PWM_BASE		0x14
-diff --git a/drivers/video/backlight/lm3533_bl.c b/drivers/video/backlight/lm3533_bl.c
-index 9ef171d3aaeab..5ce237cb42190 100644
---- a/drivers/video/backlight/lm3533_bl.c
-+++ b/drivers/video/backlight/lm3533_bl.c
-@@ -10,6 +10,7 @@
- #include <linux/module.h>
- #include <linux/init.h>
- #include <linux/platform_device.h>
-+#include <linux/property.h>
- #include <linux/backlight.h>
- #include <linux/regmap.h>
- #include <linux/slab.h>
-@@ -29,6 +30,9 @@ struct lm3533_bl {
- 	struct backlight_device *bd;
- 	int id;
- 
-+	u32 max_current;
-+	u32 pwm;
-+
- 	bool have_als;
- };
- 
-@@ -242,25 +246,25 @@ static const struct attribute_group *lm3533_bl_attribute_groups[] = {
- 	NULL,
- };
- 
--static int lm3533_bl_setup(struct lm3533_bl *bl,
--					struct lm3533_bl_platform_data *pdata)
-+static int lm3533_bl_setup(struct lm3533_bl *bl)
- {
- 	int ret;
- 
--	ret = lm3533_ctrlbank_set_max_current(&bl->cb, pdata->max_current);
-+	ret = lm3533_ctrlbank_set_max_current(&bl->cb, bl->max_current);
- 	if (ret)
- 		return ret;
- 
--	return lm3533_ctrlbank_set_pwm(&bl->cb, pdata->pwm);
-+	return lm3533_ctrlbank_set_pwm(&bl->cb, bl->pwm);
- }
- 
- static int lm3533_bl_probe(struct platform_device *pdev)
- {
- 	struct lm3533 *lm3533;
--	struct lm3533_bl_platform_data *pdata;
- 	struct lm3533_bl *bl;
- 	struct backlight_device *bd;
- 	struct backlight_properties props;
-+	char *name = NULL;
-+	u32 default_brightness = LM3533_BL_MAX_BRIGHTNESS;
- 	int ret;
- 
- 	dev_dbg(&pdev->dev, "%s\n", __func__);
-@@ -269,12 +273,6 @@ static int lm3533_bl_probe(struct platform_device *pdev)
- 	if (!lm3533)
- 		return -EINVAL;
- 
--	pdata = dev_get_platdata(&pdev->dev);
--	if (!pdata) {
--		dev_err(&pdev->dev, "no platform data\n");
--		return -EINVAL;
--	}
--
- 	if (pdev->id < 0 || pdev->id >= LM3533_HVCTRLBANK_COUNT) {
- 		dev_err(&pdev->dev, "illegal backlight id %d\n", pdev->id);
- 		return -EINVAL;
-@@ -292,13 +290,21 @@ static int lm3533_bl_probe(struct platform_device *pdev)
- 	bl->cb.id = lm3533_bl_get_ctrlbank_id(bl);
- 	bl->cb.dev = NULL;			/* until registered */
- 
-+	name = devm_kasprintf(&pdev->dev, GFP_KERNEL, "%s-%d",
-+			      pdev->name, pdev->id);
-+	if (!name)
-+		return -ENOMEM;
-+
-+	device_property_read_u32(&pdev->dev, "default-brightness",
-+				 &default_brightness);
-+
- 	memset(&props, 0, sizeof(props));
- 	props.type = BACKLIGHT_RAW;
- 	props.max_brightness = LM3533_BL_MAX_BRIGHTNESS;
--	props.brightness = pdata->default_brightness;
--	bd = devm_backlight_device_register(&pdev->dev, pdata->name,
--					pdev->dev.parent, bl, &lm3533_bl_ops,
--					&props);
-+	props.brightness = default_brightness;
-+
-+	bd = devm_backlight_device_register(&pdev->dev, name, &pdev->dev,
-+					    bl, &lm3533_bl_ops, &props);
- 	if (IS_ERR(bd)) {
- 		dev_err(&pdev->dev, "failed to register backlight device\n");
- 		return PTR_ERR(bd);
-@@ -309,12 +315,19 @@ static int lm3533_bl_probe(struct platform_device *pdev)
- 
- 	platform_set_drvdata(pdev, bl);
- 
--	backlight_update_status(bd);
-+	device_property_read_u32(&pdev->dev, "led-max-microamp",
-+				 &bl->max_current);
-+	bl->max_current = clamp(bl->max_current, LM3533_MAX_CURRENT_MIN,
-+				LM3533_MAX_CURRENT_MAX);
- 
--	ret = lm3533_bl_setup(bl, pdata);
-+	device_property_read_u32(&pdev->dev, "ti,pwm-config-mask", &bl->pwm);
-+
-+	ret = lm3533_bl_setup(bl);
- 	if (ret)
- 		return ret;
- 
-+	backlight_update_status(bd);
-+
- 	ret = lm3533_ctrlbank_enable(&bl->cb);
- 	if (ret)
- 		return ret;
-@@ -366,11 +379,18 @@ static void lm3533_bl_shutdown(struct platform_device *pdev)
- 	lm3533_ctrlbank_disable(&bl->cb);
- }
- 
-+static const struct of_device_id lm3533_bl_match_table[] = {
-+	{ .compatible = "ti,lm3533-backlight" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, lm3533_bl_match_table);
-+
- static struct platform_driver lm3533_bl_driver = {
- 	.driver = {
- 		.name	= "lm3533-backlight",
- 		.pm	= &lm3533_bl_pm_ops,
- 		.dev_groups = lm3533_bl_attribute_groups,
-+		.of_match_table = lm3533_bl_match_table,
- 	},
- 	.probe		= lm3533_bl_probe,
- 	.remove		= lm3533_bl_remove,
 diff --git a/include/linux/mfd/lm3533.h b/include/linux/mfd/lm3533.h
-index 74cfb52c3bd17..5710e88da45d2 100644
+index 5710e88da45d2..8f72dd41e8f02 100644
 --- a/include/linux/mfd/lm3533.h
 +++ b/include/linux/mfd/lm3533.h
-@@ -15,6 +15,10 @@
- #define LM3533_ATTR_RW(_name) \
- 	DEVICE_ATTR(_name, S_IRUGO | S_IWUSR , show_##_name, store_##_name)
- 
-+#define LM3533_MAX_CURRENT_MIN		5000
-+#define LM3533_MAX_CURRENT_MAX		29800
-+#define LM3533_MAX_CURRENT_STEP		800
-+
+@@ -22,6 +22,7 @@
  struct device;
  struct gpio_desc;
  struct regmap;
-@@ -25,7 +29,9 @@ struct lm3533 {
++struct regulator;
+ 
+ struct lm3533 {
+ 	struct device *dev;
+@@ -29,6 +30,7 @@ struct lm3533 {
  	struct regmap *regmap;
  
  	struct gpio_desc *hwen;
--	int irq;
-+
-+	u32 boost_ovp;
-+	u32 boost_freq;
++	struct regulator *vin_supply;
  
- 	unsigned have_als:1;
- 	unsigned have_backlights:1;
-@@ -38,50 +44,6 @@ struct lm3533_ctrlbank {
- 	int id;
- };
- 
--struct lm3533_als_platform_data {
--	unsigned pwm_mode:1;		/* PWM input mode (default analog) */
--	u8 r_select;			/* 1 - 127 (ignored in PWM-mode) */
--};
--
--struct lm3533_bl_platform_data {
--	char *name;
--	u16 max_current;		/* 5000 - 29800 uA (800 uA step) */
--	u8 default_brightness;		/* 0 - 255 */
--	u8 pwm;				/* 0 - 0x3f */
--};
--
--struct lm3533_led_platform_data {
--	char *name;
--	const char *default_trigger;
--	u16 max_current;		/* 5000 - 29800 uA (800 uA step) */
--	u8 pwm;				/* 0 - 0x3f */
--};
--
--enum lm3533_boost_freq {
--	LM3533_BOOST_FREQ_500KHZ,
--	LM3533_BOOST_FREQ_1000KHZ,
--};
--
--enum lm3533_boost_ovp {
--	LM3533_BOOST_OVP_16V,
--	LM3533_BOOST_OVP_24V,
--	LM3533_BOOST_OVP_32V,
--	LM3533_BOOST_OVP_40V,
--};
--
--struct lm3533_platform_data {
--	enum lm3533_boost_ovp boost_ovp;
--	enum lm3533_boost_freq boost_freq;
--
--	struct lm3533_als_platform_data *als;
--
--	struct lm3533_bl_platform_data *backlights;
--	int num_backlights;
--
--	struct lm3533_led_platform_data *leds;
--	int num_leds;
--};
--
- int lm3533_ctrlbank_enable(struct lm3533_ctrlbank *cb);
- int lm3533_ctrlbank_disable(struct lm3533_ctrlbank *cb);
- 
+ 	u32 boost_ovp;
+ 	u32 boost_freq;
 -- 
 2.53.0
 
