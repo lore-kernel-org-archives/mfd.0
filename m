@@ -1,22 +1,23 @@
 Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 850913A1E92
-	for <mfd@lists.linux.dev>; Fri, 31 Jul 2026 09:42:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 51C573B14D0
+	for <mfd@lists.linux.dev>; Fri, 31 Jul 2026 09:42:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785490979; cv=none; b=b7STpndEMZuVFKYR7V3iZG66i0JHGZG2WEBlbecDeYbfPp7+QqBXtFi4jLGqryx7Cl4MY9WMvQwxBT6Ljh6DpY0wxTw0G73RUixxharIvV/u0FiU9H/dTT4Y2/oWmgibXRa7NgXZu8whtLtBE6UFKQatIL4sWYSm8Sk5HaD7NH8=
+	t=1785490981; cv=none; b=cqkWXHCtcrFK2ak/DgPFDJGiSJdc2R4Hpo8g0nnC9bC8UISU/ds0tyutZuPhcO8SrEUpZqS+hSz/Tr8PgNKcqBVscjKH2EfLTrO3HsyN75qYJHGXN0A9e+ORRoyjw7zoYqPFG6/gUfrsYvLcm8FJVjgcAS4ALe6lgkbJS4Yu4J4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785490979; c=relaxed/simple;
-	bh=9PO/MiE851ATe1MubOIc99IKFY0BFwh9qQCCPBrXsuE=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=iGJEtcT7kmCEhfEoGvfkbmeqXLtpI7Td2tIkP8MKEQQ3DMnha/JqQtD6wk8xi3IOrI0SRIDKrVSjdnZN2GIp9nGXCvjGUrX77SvjVUL0oHcnh94UORwjs29ylsthXfbbgt/pOQXVIHBh/T2bEjrvkqH55QEaG5F3GGYdY/5CUYM=
+	s=arc-20240116; t=1785490981; c=relaxed/simple;
+	bh=0gUPrTmhHOp52s9Pu0zyrXD7X152vyvBUl6mpb2YIx4=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=NYTGwZS+1XA63jC/dpbCAMLINMtk4kVeBBiFMeVXEixp2Ekv/fYvLu/zNOrKgncArfH/jhOhC0/cd+GWSX8mA/rcnPE3l81yML6M0m3wfU8IzscIWgyrcv0ojSyI3TvpDwvUdJTQx1yQgqyfbpCHuvkEXygnJ5SiFaG049L4YcE=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
 Received: from loongson.cn (unknown [223.64.68.205])
-	by gateway (Coremail) with SMTP id _____8Bx0+kYbmxqgiwJAA--.7621S3;
-	Fri, 31 Jul 2026 17:42:48 +0800 (CST)
+	by gateway (Coremail) with SMTP id _____8Cxh6AdbmxqjSwJAA--.7598S3;
+	Fri, 31 Jul 2026 17:42:53 +0800 (CST)
 Received: from kernelserver (unknown [223.64.68.205])
-	by front1 (Coremail) with SMTP id qMiowJDxu8QPbmxqHvYeAA--.48910S2;
-	Fri, 31 Jul 2026 17:42:40 +0800 (CST)
+	by front1 (Coremail) with SMTP id qMiowJDxu8QPbmxqHvYeAA--.48910S4;
+	Fri, 31 Jul 2026 17:42:52 +0800 (CST)
 From: Binbin Zhou <zhoubinbin@loongson.cn>
 To: Binbin Zhou <zhoubb.aaron@gmail.com>,
 	Huacai Chen <chenhuacai@loongson.cn>,
@@ -35,10 +36,12 @@ Cc: Huacai Chen <chenhuacai@kernel.org>,
 	linux-pm@vger.kernel.org,
 	mfd@lists.linux.dev,
 	Binbin Zhou <zhoubinbin@loongson.cn>
-Subject: [PATCH v3 0/5] thermal: loongson2: Add support for Loongson-2K0300 SoC
-Date: Fri, 31 Jul 2026 17:42:16 +0800
-Message-ID: <cover.1785480242.git.zhoubinbin@loongson.cn>
+Subject: [PATCH v3 2/5] thermal/drivers/loongson2: Move thermal_ops to chip_data for SoC scalability
+Date: Fri, 31 Jul 2026 17:42:18 +0800
+Message-ID: <d2305c5bf895ac1ad4990947269a6c1b69440662.1785480242.git.zhoubinbin@loongson.cn>
 X-Mailer: git-send-email 2.52.0
+In-Reply-To: <cover.1785480242.git.zhoubinbin@loongson.cn>
+References: <cover.1785480242.git.zhoubinbin@loongson.cn>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -46,97 +49,94 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:qMiowJDxu8QPbmxqHvYeAA--.48910S2
-X-CM-SenderInfo: p2kr3uplqex0o6or00hjvr0hdfq/1tbiAgEFCGpsKC8E-gAAs1
-X-Coremail-Antispam: 1Uk129KBj93XoWxJrW5CFy7JFy5Kr48GF13Jrc_yoW8Kw17pa
-	yY93sxCr1UGF4UAws3J3yxZr4Yvrn5ta9xZFs3Gw1ruwn8KFyay3y8ta15ZFyxCr45WFW2
-	vryvkrWkCF1DuFXCm3ZEXasCq-sJn29KB7ZKAUJUUUU7529EdanIXcx71UUUUU7KY7ZEXa
+X-CM-TRANSID:qMiowJDxu8QPbmxqHvYeAA--.48910S4
+X-CM-SenderInfo: p2kr3uplqex0o6or00hjvr0hdfq/1tbiAQEFCGpsIlAFgAAAs8
+X-Coremail-Antispam: 1Uk129KBj93XoWxCw13Kr1UCr15Gr1rCFyUurX_yoW5XF4rpa
+	yfAw15KFs7Gr4Du3Wqyr18Zr4qyry3ta9xXF4xGw13W398X3sIgFy8JFy0vFWfCFyrAF1U
+	ZFyDtFWDAF1DW3gCm3ZEXasCq-sJn29KB7ZKAUJUUUU7529EdanIXcx71UUUUU7KY7ZEXa
 	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
-	0xBIdaVrnRJUUUB2b4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
-	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
-	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0xBIdaVrnRJUUUBIb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1a6r1DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
 	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
 	xVW8Jr0_Cr1UM2kKe7AKxVWUXVWUAwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07
 	AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWU
-	AVWUtwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7V
+	tVWrXwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7V
 	AKI48JMxkF7I0En4kS14v26r1q6r43MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY
 	6r1j6r4UMxCIbckI1I0E14v26r1Y6r17MI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7
 	xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVW8ZVWrXwCIc40Y0x0EwIxGrwCI42IY6xII
-	jxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw2
-	0EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x02
-	67AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjxUceOJUUUUU
+	jxv20xvE14v26r4j6ryUMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw2
+	0EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x02
+	67AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU1IJPtUUUUU==
 
-Hi all:
+In preparation for supporting additional Loongson SoCs, relocate the
+thermal zone device operations pointer (thermal_ops) from the probe
+routine to the per-SoC chip_data structure. This eliminates the need
+to add conditional branches in probe() when a new SoC is introduced;
+instead, the appropriate ops can be statically assigned in the match
+data.
 
-This patch series adds thermal zone support for the Loongson-2K0300 SoC.
+No functional change intended.
 
-The Loongson-2K0300's thermal sensor is generally compatible with the
-existing Loongson-2K series, but it features several key differences:
-1. It has an independent CPU ID register for reading chip version
-information.
-2. The raw temperature output field has been extended from 8 bits to 11
-bits.
-3. The temperature calculation formula has been updated to incorporate a
-correction factor based on the version information.
+Signed-off-by: Binbin Zhou <zhoubinbin@loongson.cn>
+---
+ drivers/thermal/loongson2_thermal.c | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
 
-To ensure robustness on older hardware revisions, a fallback mechanism
-is included: if the calculated temperature falls outside the valid range
-(-55 TO 125),  the driver falls back to a simpler calculation and prints
-a warning.
-
-The patches have been validated on the Loongson-2K0300 development board.
-
-Thanks.
-Binbin
-
-=========
-V3:
-Patch (2/5):
- - New patch for moving thermal_ops to chip_data;
-Patch (3/5):
- - Correct spelling errors;
-Patch (4/5):
- - Add Acked-by from Conor, thanks;
-Patch (5/5):
- - Keep loongson2_thermal_data->chip_data as const, and use
-   data->flags as the private data.
- - Renmae LOONGSON2_THSENS_OUT_10B_MASK ->
-   LOONGSON2_THSENS_OUT_11B_MASK;
-
-Link to V2:
-https://lore.kernel.org/all/cover.1784619512.git.zhoubinbin@loongson.cn/
-
-V2:
-Patch (1/4):
- - New patch form Sashiko;
-Patch (2/4):
- - New patch for adding chipid syscon compatible;
-Patch (3/4):
- - Use `loongson,chipid` phandle replace reg property;
-Patch (3/4):
- - Refact `calib_offset` calculate routing;
- - Add LS2K0300_OLD_FUSE_FLAG flag.
-
-Link to V1:
-https://lore.kernel.org/all/cover.1783670011.git.zhoubinbin@loongson.cn/
-
-Binbin Zhou (5):
-  thermal/drivers/loongson2: Correct thermal sensor registration loop
-  thermal/drivers/loongson2: Move thermal_ops to chip_data for SoC
-    scalability
-  dt-bindings: mfd: syscon: Allow syscon compatible for Loongson-2K0300
-    chip id
-  dt-bindings: thermal: loongson,ls2k-thermal: Add compatible for
-    Loongson-2K0300
-  thermal/drivers/loongson2: Add support for Loongson-2K0300
-
- .../devicetree/bindings/mfd/syscon.yaml       |   2 +
- .../thermal/loongson,ls2k-thermal.yaml        |  73 +++++++++---
- drivers/thermal/loongson2_thermal.c           | 110 ++++++++++++++++--
- 3 files changed, 157 insertions(+), 28 deletions(-)
-
-
-base-commit: 795f1b1a91ae13ebc012a364075e42f486a1cafe
+diff --git a/drivers/thermal/loongson2_thermal.c b/drivers/thermal/loongson2_thermal.c
+index 5f47fa51fb90..1a8ca2cd06f1 100644
+--- a/drivers/thermal/loongson2_thermal.c
++++ b/drivers/thermal/loongson2_thermal.c
+@@ -39,6 +39,7 @@
+ struct loongson2_thermal_chip_data {
+ 	unsigned int thermal_sensor_sel;
+ 	unsigned int flags;
++	const struct thermal_zone_device_ops *thermal_ops;
+ };
+ 
+ struct loongson2_thermal_data {
+@@ -124,7 +125,6 @@ static const struct thermal_zone_device_ops loongson2_2k2000_of_thermal_ops = {
+ 
+ static int loongson2_thermal_probe(struct platform_device *pdev)
+ {
+-	const struct thermal_zone_device_ops *thermal_ops;
+ 	struct device *dev = &pdev->dev;
+ 	struct loongson2_thermal_data *data;
+ 	struct thermal_zone_device *tzd;
+@@ -145,10 +145,6 @@ static int loongson2_thermal_probe(struct platform_device *pdev)
+ 		data->temp_reg = devm_platform_ioremap_resource(pdev, 1);
+ 		if (IS_ERR(data->temp_reg))
+ 			return PTR_ERR(data->temp_reg);
+-
+-		thermal_ops = &loongson2_2k2000_of_thermal_ops;
+-	} else {
+-		thermal_ops = &loongson2_2k1000_of_thermal_ops;
+ 	}
+ 
+ 	irq = platform_get_irq(pdev, 0);
+@@ -160,7 +156,7 @@ static int loongson2_thermal_probe(struct platform_device *pdev)
+ 	loongson2_thermal_set(data, 0, 0, false);
+ 
+ 	for (i = 0; i <= LOONGSON2_MAX_SENSOR_SEL_NUM; i++) {
+-		tzd = devm_thermal_of_zone_register(dev, i, data, thermal_ops);
++		tzd = devm_thermal_of_zone_register(dev, i, data, data->chip_data->thermal_ops);
+ 		if (!IS_ERR(tzd))
+ 			break;
+ 
+@@ -186,11 +182,13 @@ static int loongson2_thermal_probe(struct platform_device *pdev)
+ static const struct loongson2_thermal_chip_data loongson2_thermal_ls2k1000_data = {
+ 	.thermal_sensor_sel = 0,
+ 	.flags = 0,
++	.thermal_ops = &loongson2_2k1000_of_thermal_ops,
+ };
+ 
+ static const struct loongson2_thermal_chip_data loongson2_thermal_ls2k2000_data = {
+ 	.thermal_sensor_sel = 0,
+ 	.flags = LS2K2000_THSENS_OUT_FLAG,
++	.thermal_ops = &loongson2_2k2000_of_thermal_ops,
+ };
+ 
+ static const struct of_device_id of_loongson2_thermal_match[] = {
 -- 
 2.52.0
 
