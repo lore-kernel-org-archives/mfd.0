@@ -1,194 +1,141 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B513436195C
-	for <mfd@lists.linux.dev>; Sun,  2 Aug 2026 14:05:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E45C237180;
+	Sun,  2 Aug 2026 19:04:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785679528; cv=none; b=mcYeeKvzLWMJ2VaBpIax0j4MmS9mVc5IDG0w/1LE/h9S8TiA6mVDheHeNr71+WNqVjDcSzkUWBGgXTEK4VKPl0kqb5iz/+Imw6Bxlk9tzws8vSSY0zoPIIRaHSzVDmkB1Nje2h3X5gKtCPmrj7MqOWfnho0C23mU1XQ7KuCbokc=
+	t=1785697468; cv=none; b=EN/chCVZCxs+UH8jjeCLTdradhlrNL8eQB2SZ0IUBGKdzTCp7gBJ86bZyFpoywI0GPm7w4Su6Hpi7QUJVEC2mJQa+TqoNzL8zLYp84d16dDwE7tiuXrrKVy6frABJReJdnrdHOzn8fVIK4H5UVcOOurKEEJZuAYka5n+rCxa0b0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785679528; c=relaxed/simple;
-	bh=9/Rs5u38yVdcywd3I/A2NIxS31KFTHHhT7GpwpOyc7c=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=Bc78ays8so0lOQ6rUCVPgY+gojPeKRVGAPKeyMVJf4MCzIrBQdKN3F6hSt05C35P5J/sFxHrklfAR62a9M3tOhhJVHkH61DTl43meB/oTGe4qXotL1FPCmPsSO3ucbp3YnETFf3qS/z2j7CKsu4I1lbT3fQG0ddl1DXTnASZhdQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=O1y3+W0B; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785697468; c=relaxed/simple;
+	bh=zugU8+y0Yoj+/w5PM+oZxznMMbVN70TW1KMWzz2DKy8=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=ngkCGl8ktUPvIqH+RfUEvUsg6W4jrlzmXVJW3+67sxZPpQgUuRIn99HK+KPioceaIeejNhN2qQI5+HiP/VauAoZlP3wUKZ6rlML/M0/re+CtlKWjrX3Kvu3UGhAr+1XlrqgVBhM0BeHbFd+XCjsJSabou5ZLC0YDu28NkPQFD4A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=sED3JR35; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="O1y3+W0B"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1FCBB1F000E9;
-	Sun,  2 Aug 2026 14:05:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785679527;
-	bh=8Uz1ZkVtu5guH/nmXrz/F9RlhOgqGS4H3LMx+EchrPE=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=O1y3+W0BJDM3W/sPVYZypSApYhq9eRFNDwUtalNI4kEitCt/+Izynvyx2edd7tC+z
-	 xBMq8BYEwEHWw4OpjhXVYjgF+yr5ds0JXht8heZIRGhE6n6YP4XuqQHrWUX9rGtOZh
-	 dzTHpaBZ1K821jO/Qwcj3whm6DiFuCpPxVC0qiW19zpk1sIg1nIQCQMVZnMyjnrsDr
-	 Awyvo7Z9kmVIvZV5m7BNUyPzgHKGlbU+lXzVMxX9RG2fGOcUFl5LmqWj0m2ZQLzi/A
-	 j3Ial4rqH0TifB+o2Dv+ZWVPOjAjFvXZgYnr3jO1Cug9sdCrSsgye+RAwiusCPcX1H
-	 WamwzJCDFEauQ==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2] mfd: qnap-mcu: keep the reply buffer alive past a
- command timeout
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Ali Ahmet Memis" <ali@iusegentoo.com>
-Cc: lee@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260802135307.31380-1-ali@iusegentoo.com>
-References: <20260802135307.31380-1-ali@iusegentoo.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Sun, 02 Aug 2026 14:05:25 +0000
-Message-Id: <20260802140527.1FCBB1F000E9@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="sED3JR35"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id BDF14C2BCFA;
+	Sun,  2 Aug 2026 19:04:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1785697467;
+	bh=zugU8+y0Yoj+/w5PM+oZxznMMbVN70TW1KMWzz2DKy8=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=sED3JR35f336Mg0/IJItKKeYkafWzDNFiQ9BKc78RY2BlR5sv4dYLbV6cVEQtM1xU
+	 5Dt40y1GUAGZO1gc3WWLM/WOkpkGdcF7NIMK1mcRu08qYoS8LEbAO5UHmD6NpabxF4
+	 pap6Tcq1gnDgEFXure5MkQLJDI7Z8HvirBMyuoA93lNPFyC7XhokQfdAdKKht9TZFQ
+	 RtHTTlEmUiQDXVl/06p1cfPpmPOkO2nFEQrol0VTTUMN9IVoCzs24J/5f8iUiGHQao
+	 AXqy/QvfQzZ2d5vFSHiVYkmipWG+ADUVzKkL2VLaKNw/38hPV3VJrRu1LtSOTLEhfo
+	 p3ezOuwbpzhww==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F8E8C55174;
+	Sun,  2 Aug 2026 19:04:27 +0000 (UTC)
+From: Antony Kurniawan Soemardi via B4 Relay <devnull+linux.smankusors.com@kernel.org>
+Date: Mon, 03 Aug 2026 02:03:46 +0700
+Subject: [PATCH v4 2/7] ARM: dts: qcom: msm8960: add RPM clock controller
+ and fix USB clocks
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260803-msm8960-wifi-v4-2-5ffa27aea39d@smankusors.com>
+References: <20260803-msm8960-wifi-v4-0-5ffa27aea39d@smankusors.com>
+In-Reply-To: <20260803-msm8960-wifi-v4-0-5ffa27aea39d@smankusors.com>
+To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: phone-devel@vger.kernel.org, Rudraksha Gupta <guptarud@gmail.com>, 
+ mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ Antony Kurniawan Soemardi <linux@smankusors.com>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+X-Mailer: b4 0.15.1
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785697465; l=2459;
+ i=linux@smankusors.com; s=20250609; h=from:subject:message-id;
+ bh=iIYYtM55Tx+Y0Xs653xyUTxfQMeNNj1lUSNegdYpWt4=;
+ b=vhmy5EWuy52VWKTM+23+rq5IxxrPW3ijYnpDNdMWD3ZDLn6GIt24GLVbTaTZ8kh1dpa+Q+Z3p
+ QhVfplEhsy9A1zR0jIQ+trRD6suZV+jfMnYPTf5q36RWPZ7Lh4KeB8m
+X-Developer-Key: i=linux@smankusors.com; a=ed25519;
+ pk=65wTy06fJl2/h/EJwjr704YG+yjHFhZObJBWzzK+N00=
+X-Endpoint-Received: by B4 Relay for linux@smankusors.com/20250609 with
+ auth_id=733
+X-Original-From: Antony Kurniawan Soemardi <linux@smankusors.com>
+Reply-To: linux@smankusors.com
 
-Thank you for your contribution! Sashiko AI review found 4 potential issue(=
-s) to consider:
+From: Antony Kurniawan Soemardi <linux@smankusors.com>
 
-New issues:
-- [Low] The commit message description is not capitalized, violating MFD su=
-bsystem formatting rules.
+The RPM clock controller manages clocks shared between the application
+processor and the RPM firmware, including fabric and bus clocks required
+by several peripherals.
 
-Pre-existing issues:
-- [Critical] A data race between `qnap_mcu_exec()` and `qnap_mcu_receive_bu=
-f()` on `reply->length` and `reply->received` bypasses the loop exit condit=
-ion, leading to a severe heap buffer overflow.
-- [High] Late UART replies from timed-out or failed commands can be written=
- into the active buffer of the next command, causing data cross-talk and sp=
-urious early completion.
-- [High] A data race can cause `qnap_mcu_verify_checksum()` to be called wi=
-th `reply->received =3D=3D 0`, leading to an integer underflow and a determ=
-inistic kernel panic.
---
+With the RPM clock controller now available in the device tree, the USB
+controller must explicitly declare its dependency on
+RPM_DAYTONA_FABRIC_CLK. Without this declaration, the clock framework
+would consider it unused and disable it, breaking USB functionality.
 
---- Patch [1]: [PATCH v2] mfd: qnap-mcu: keep the reply buffer alive past a=
- command timeout ---
-commit 876c0f2fd3f8e4b677ad50b82d00f3dcfe4a3283
-Author: Ali Ahmet Memis <ali@iusegentoo.com>
+This also corrects the previous misuse of USB_HS1_XCVR_CLK as the core
+clock. The XCVR clock is in fact used for PHY/reset handling rather than
+as the main core clock.
 
-mfd: qnap-mcu: keep the reply buffer alive past a command timeout
+A similar issue has been observed on APQ8064, where missing the RPM
+fabric clock dependency leads to broken USB.
 
-This patch moves the receive buffer from the stack in qnap_mcu_exec() to
-the qnap_mcu structure. This prevents stack corruption when late replies
-arrive after a command has timed out.
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Signed-off-by: Antony Kurniawan Soemardi <linux@smankusors.com>
+---
+ arch/arm/boot/dts/qcom/qcom-msm8960.dtsi | 19 +++++++++++++++++--
+ 1 file changed, 17 insertions(+), 2 deletions(-)
 
-Link: https://lore.kernel.org/all/20260802132012.537B81F000E9@smtp.kernel.o=
-rg/
+diff --git a/arch/arm/boot/dts/qcom/qcom-msm8960.dtsi b/arch/arm/boot/dts/qcom/qcom-msm8960.dtsi
+index fd28401cebb5..6ead9fec557a 100644
+--- a/arch/arm/boot/dts/qcom/qcom-msm8960.dtsi
++++ b/arch/arm/boot/dts/qcom/qcom-msm8960.dtsi
+@@ -5,6 +5,7 @@
+ #include <dt-bindings/clock/qcom,gcc-msm8960.h>
+ #include <dt-bindings/reset/qcom,gcc-msm8960.h>
+ #include <dt-bindings/clock/qcom,lcc-msm8960.h>
++#include <dt-bindings/clock/qcom,rpmcc.h>
+ #include <dt-bindings/mfd/qcom-rpm.h>
+ #include <dt-bindings/soc/qcom,gsbi.h>
+ 
+@@ -98,6 +99,16 @@ rpm: rpm@108000 {
+ 			interrupt-names = "ack",
+ 					  "err",
+ 					  "wakeup";
++
++			rpmcc: clock-controller {
++				compatible = "qcom,rpmcc-apq8064",
++					     "qcom,rpmcc";
++				#clock-cells = <1>;
++				clocks = <&pxo_board>,
++					 <&cxo_board>;
++				clock-names = "pxo",
++					      "cxo";
++			};
+ 		};
+ 
+ 		ssbi: ssbi@500000 {
+@@ -507,8 +518,12 @@ usb1: usb@12500000 {
+ 			reg = <0x12500000 0x200>,
+ 			      <0x12500200 0x200>;
+ 			interrupts = <GIC_SPI 100 IRQ_TYPE_LEVEL_HIGH>;
+-			clocks = <&gcc USB_HS1_XCVR_CLK>, <&gcc USB_HS1_H_CLK>;
+-			clock-names = "core", "iface";
++			clocks = <&rpmcc RPM_DAYTONA_FABRIC_CLK>,
++				 <&gcc USB_HS1_H_CLK>,
++				 <&gcc USB_HS1_XCVR_CLK>;
++			clock-names = "iface",
++				      "core",
++				      "fs";
+ 			assigned-clocks = <&gcc USB_HS1_XCVR_CLK>;
+ 			assigned-clock-rates = <60000000>;
+ 			resets = <&gcc USB_HS1_RESET>;
 
-> mfd: qnap-mcu: keep the reply buffer alive past a command timeout
+-- 
+2.34.1
 
-[Severity: Low]
-Is there a capitalization typo in the subject line? Should "keep" be "Keep"?
 
-> diff --git a/drivers/mfd/qnap-mcu.c b/drivers/mfd/qnap-mcu.c
-> index 8de974ddac3e7..93a3dd93404dd 100644
-> --- a/drivers/mfd/qnap-mcu.c
-> +++ b/drivers/mfd/qnap-mcu.c
-
-[ ... ]
-
-> @@ -214,19 +216,18 @@ int qnap_mcu_exec(struct qnap_mcu *mcu,
->  		  const u8 *cmd_data, size_t cmd_data_size,
->  		  u8 *reply_data, size_t reply_data_size)
->  {
-> -	unsigned char rx[QNAP_MCU_RX_BUFFER_SIZE];
->  	size_t length =3D reply_data_size + QNAP_MCU_CHECKSUM_SIZE;
->  	struct qnap_mcu_reply *reply =3D &mcu->reply;
->  	int ret =3D 0;
-> =20
-> -	if (length > sizeof(rx)) {
-> +	if (length > sizeof(mcu->rx)) {
->  		dev_err(&mcu->serdev->dev, "expected data too big for receive buffer");
->  		return -EINVAL;
->  	}
-> =20
->  	guard(mutex)(&mcu->bus_lock);
-> =20
-> -	reply->data =3D rx;
-> +	reply->data =3D mcu->rx;
->  	reply->length =3D length;
->  	reply->received =3D 0;
-
-[Severity: Critical]
-This is a pre-existing issue, but can this reset race with an active receive
-loop and cause a heap buffer overflow?
-
-If the receive thread is running in qnap_mcu_receive_buf() and we reset
-reply->received to 0 here without synchronization, the exact equality check
-in the receive thread could be bypassed:
-
-drivers/mfd/qnap-mcu.c:qnap_mcu_receive_buf()
-	reply->received++;
-	if (reply->received =3D=3D reply->length) {
-		...
-
-If the equality check is bypassed, the receive loop could write unbounded
-bytes into reply->data (which now points to mcu->rx on the heap), causing
-a heap buffer overflow.
-
->  	reinit_completion(&reply->done);
-
-[Severity: High]
-This isn't a bug introduced by this patch, but can resetting the completion
-here allow late replies to corrupt the new command?
-
-If a previous command times out, its receive thread is still active.
-
-If we just reset the completion and start a new command, could a concurrent=
-ly
-arriving late response from the previous command be written into mcu->rx by
-qnap_mcu_receive_buf()?
-
-Since the old response is well-formed, it could pass the simple XOR checksu=
-m,
-triggering a spurious complete() and causing the new command to instantly
-return with stale data.
-
-> =20
->  	ret =3D qnap_mcu_write(mcu, cmd_data, cmd_data_size);
->  	if (ret < 0)
->  		return ret;
-> =20
->  	serdev_device_wait_until_sent(mcu->serdev, msecs_to_jiffies(QNAP_MCU_TI=
-MEOUT_MS));
-> =20
->  	if (!wait_for_completion_timeout(&reply->done, msecs_to_jiffies(QNAP_MC=
-U_TIMEOUT_MS))) {
->  		dev_err(&mcu->serdev->dev, "Command timeout\n");
->  		return -ETIMEDOUT;
->  	}
-> =20
-> -	if (!qnap_mcu_verify_checksum(rx, reply->received)) {
-> +	if (!qnap_mcu_verify_checksum(mcu->rx, reply->received)) {
-
-[Severity: High]
-This is a pre-existing issue, but could this cause an integer underflow and=
- a
-kernel panic if reply->received is 0?
-
-If qnap_mcu_receive_buf() evaluates reply->received =3D=3D reply->length and
-zeroes reply->length, but is preempted before calling complete(), the
-original command can time out.=20
-
-A new command could then call qnap_mcu_exec(), setting reply->received to 0.
-
-If the preempted receive thread then resumes and calls complete(), the new
-command will wake up and call qnap_mcu_verify_checksum() with
-reply->received =3D=3D 0:
-
-drivers/mfd/qnap-mcu.c:qnap_mcu_verify_checksum()
-	u8 crc =3D qnap_mcu_csum(buf, size - QNAP_MCU_CHECKSUM_SIZE);
-
-If size is 0, this underflows to the maximum size value, and qnap_mcu_csum()
-will loop reading sequentially out of bounds until it hits an unmapped page.
-
->  		dev_err(&mcu->serdev->dev, "Invalid Checksum received from controller\=
-n");
->  		return -EPROTO;
->  	}
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260802135307.3138=
-0-1-ali@iusegentoo.com?part=3D1
