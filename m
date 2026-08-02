@@ -1,128 +1,134 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from sender-of-o58.zoho.eu (sender-of-o58.zoho.eu [136.143.169.58])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C25733938C;
-	Sun,  2 Aug 2026 12:29:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785673760; cv=none; b=qO/rcRAFnXWUWQa341URwKoj+uLscP9GrkSPKxZkoNdwcmCN8pkW95QJdsliHDIbo0P3HGI7oI04CspwLrYFILyJ22H4SgRPshtdSN+8kcwkiGC09DKA2Fb+earvHYjBTHHZBGm9whHuiv5uGKdmGySmAQAx99ydDsYeP2ipHp4=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785673760; c=relaxed/simple;
-	bh=Oc+Pf6P+wet7UHezAuJRNaKASH+UQW2bFsWGp3UkczE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=mf6Fm0hvQAAJI/h04j0SzTVXjWRPswwTU27YOyhlujQ7ZrDNjgplkL+GDpzp9b6k+m4xH/0IQuJl8+yhfwf4G8iWpdan3u1w46NCn+rwFND3hL21/ucXdoIw6hOSUu1VmJTdFK211Wbo9aCInysHqXes8SmoV6c62l1WL3IOzWc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=H2OmZJER; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B52292C11E2
+	for <mfd@lists.linux.dev>; Sun,  2 Aug 2026 13:07:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.169.58
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785676051; cv=pass; b=mz3sNSM9UgZtD48SmEYbjwL04AhBnVZ03WUvem2/SJg5kvllWkT1gj2bAiZWjmTZMiFnSgeDE1yf2ZMAOUk4D1N5ze6w8O/nlLIUsR9NZnmcPcQHHYQaZXb/g7x5kqG2zzHejpGYvXwQ/HvKiKje14oNyVXHZnbZCoeGy1N8USQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785676051; c=relaxed/simple;
+	bh=TX86fR2kjDQY5i3Dd06f3nI/vOSbCU2+EpKdMQgw8ug=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=mv8deY+0B8/R4WyavVMN3LC4XX9fH6MGCd4z+wFx9pKTIefI8H2POKJmsRNvzBBqLk8bwxi4jqUFqMhxn247KUz2xeDmyFJrq+zwOF9MCZHXFuRnVFdxPzB8CgCpYnBbI7paW6lmC812fIyPTDXhlda/apN7kq2ij8rLXVVAyAA=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=iusegentoo.com; spf=pass smtp.mailfrom=iusegentoo.com; dkim=pass (1024-bit key) header.d=iusegentoo.com header.i=ali@iusegentoo.com header.b=Ct7n1TUH; arc=pass smtp.client-ip=136.143.169.58
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=iusegentoo.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iusegentoo.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="H2OmZJER"
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id C46541F000E9;
-	Sun,  2 Aug 2026 12:29:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785673758;
-	bh=SHSGsM0vu6t3zdEJHGFOqvnDDQ/hs9cDuA8s50LeKfA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=H2OmZJERCYxtrOOph6nrStzZdf9Px2+Qu52EKRUMyRnmj4QfSbClOGXvOwLQl/4aA
-	 QXrUGppcGBhRWhY9tW992RTQ83AkGGQJozNyGViEgllW7DJ8ayJ1pfg/mDZfKLYM+O
-	 iaCJu9ozHHoC9OJbqbp8GE2FXVc48vGCq9wTtZKsOYsPdu40/jveDStEa4FnAS8dvh
-	 eBwmazAysE+S1N5/1Od2as8vkHZiBiRzJzW/3NReG/Vr6BQSlyRO9SCgOFK91LoO0Z
-	 4Wat2UmYU94tkzX5l86TF3Srukt7Yi+4nQ/P5F5pqFRu3Ol3LaLh9TJ1K2EelnS/lt
-	 PpuVHx/cRwcTg==
-Date: Sun, 2 Aug 2026 14:29:15 +0200
-From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <ukleinek@kernel.org>
-To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Cc: Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Mark Rutland <mark.rutland@arm.com>, Lorenzo Pieralisi <lpieralisi@kernel.org>, 
-	Suzuki K Poulose <suzuki.poulose@arm.com>, Mike Leach <mike.leach@arm.com>, 
-	James Clark <james.clark@linaro.org>, Leo Yan <leo.yan@arm.com>, Damien Le Moal <dlemoal@kernel.org>, 
-	Niklas Cassel <cassel@kernel.org>, Jyri Sarha <jyri.sarha@iki.fi>, 
-	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, David Airlie <airlied@gmail.com>, 
-	Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	Matthias Brugger <matthias.bgg@gmail.com>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Linus Walleij <linusw@kernel.org>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Patrice Chotard <patrice.chotard@foss.st.com>, 
-	Andi Shyti <andi.shyti@kernel.org>, Jassi Brar <jassisinghbrar@gmail.com>, 
-	Lee Jones <lee@kernel.org>, Johannes Berg <johannes@sipsolutions.net>, 
-	Jeff Johnson <jjohnson@kernel.org>, Viresh Kumar <vireshk@kernel.org>, Nishanth Menon <nm@ti.com>, 
-	Stephen Boyd <sboyd@kernel.org>, Yangbo Lu <yangbo.lu@nxp.com>, Paul Walmsley <pjw@kernel.org>, 
-	Samuel Holland <samuel.holland@sifive.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Richard Cochran <richardcochran@gmail.com>, Jens Wiklander <jenswi@kernel.org>, 
-	Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>, YC Hung <yc.hung@mediatek.com>, 
-	Svyatoslav Ryhel <clamor95@gmail.com>, Sean Wang <sean.wang@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
-	Peter Ujfalusi <peter.ujfalusi@gmail.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, coresight@lists.linaro.org, linux-arm-msm@vger.kernel.org, 
-	linux-ide@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	linux-mediatek@lists.infradead.org, linux-gpio@vger.kernel.org, linux-i2c@vger.kernel.org, 
-	mfd@lists.linux.dev, linux-wireless@vger.kernel.org, ath10k@lists.infradead.org, 
-	linux-pm@vger.kernel.org, netdev@vger.kernel.org, linux-pwm@vger.kernel.org, 
-	linux-riscv@lists.infradead.org, linux-usb@vger.kernel.org
-Subject: Re: [PATCH] dt-bindings: Correct white-space style
-Message-ID: <am83ac93gyowUgSQ@monoceros>
-References: <20260801195613.235430-2-krzysztof.kozlowski@oss.qualcomm.com>
+	dkim=pass (1024-bit key) header.d=iusegentoo.com header.i=ali@iusegentoo.com header.b="Ct7n1TUH"
+ARC-Seal: i=1; a=rsa-sha256; t=1785676035; cv=none; 
+	d=zohomail.eu; s=zohoarc; 
+	b=D7tzayY67s+d/Q1L4qjVR3mXYfFF4ugVDLW5pE99zsX0Y73b2uMVVn3WVzEdAXN5c33Vpadzh2RqxFUjUUtK3AhncPykWF0fcyPWKN9I0Zy4TswSE37sXnFjhmW0/EQiWwf0V268rMajcobuA48oDZRVqN84MXFuGeWmQyEubmE=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.eu; s=zohoarc; 
+	t=1785676035; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=qXxi1bQRsm1+bpdGGhQN4aVMuJcOjF/XXMNCUshziLI=; 
+	b=HpSjWY/mKdIXiPV6EFR5oUiKOZSAVJKPlLihaQ1E5f9w/C6a+d90KqloEJZZ1mFcLTuNhovElNEEy94kw7WI8sEBzWvnb5xrUsVKBzl4/rjfFEvv6FcK1j2DcJnJO9fCJl9hKOVOhCiIAIx8Wbkn+301fDZiWyVK4njA+lnzo3o=
+ARC-Authentication-Results: i=1; mx.zohomail.eu;
+	dkim=pass  header.i=iusegentoo.com;
+	spf=pass  smtp.mailfrom=ali@iusegentoo.com;
+	dmarc=pass header.from=<ali@iusegentoo.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1785676035;
+	s=zmail; d=iusegentoo.com; i=ali@iusegentoo.com;
+	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=qXxi1bQRsm1+bpdGGhQN4aVMuJcOjF/XXMNCUshziLI=;
+	b=Ct7n1TUHNwjj5JOlfRHUn3tXFw3LDnBjkGIpTTcItFuJlw3PRHHFhY35yCXcvhgQ
+	MVk8vYv4VKrH6pK4iUee9ViehXaAHsu6JGctMjsvx3P5BnE6/f7LuFgpnughKhfw70r
+	i0rRyfypzOPcIemvXT7fcY36X4eMtNLXx3U3Kz4Q=
+Received: by mx.zoho.eu with SMTPS id 1785676033102608.5762035175266;
+	Sun, 2 Aug 2026 15:07:13 +0200 (CEST)
+From: Ali Ahmet Memis <ali@iusegentoo.com>
+To: Heiko Stuebner <heiko@sntech.de>,
+	Lee Jones <lee@kernel.org>
+Cc: mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: [PATCH] mfd: qnap-mcu: clear the reply state when a command times out
+Date: Sun,  2 Aug 2026 13:07:01 +0000
+Message-ID: <20260802130701.25702-1-ali@iusegentoo.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="ynduf7ixmtnk7fvw"
-Content-Disposition: inline
-In-Reply-To: <20260801195613.235430-2-krzysztof.kozlowski@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+X-ZohoMailClient: External
 
+qnap_mcu_exec() puts the address of an on-stack buffer into the shared
+reply state before sending a command:
 
---ynduf7ixmtnk7fvw
-Content-Type: text/plain; protected-headers=v1; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH] dt-bindings: Correct white-space style
-MIME-Version: 1.0
+	unsigned char rx[QNAP_MCU_RX_BUFFER_SIZE];
+	...
+	reply->data = rx;
+	reply->length = length;
+	reply->received = 0;
 
-On Sat, Aug 01, 2026 at 09:56:14PM +0200, Krzysztof Kozlowski wrote:
-> Correct a few white-space issues, like double space after '=3D' or before
-> bracket '{' characters, which will be flagged by dt-check-style.  No
-> functional changes.
->=20
-> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-> [...]
-> diff --git a/Documentation/devicetree/bindings/pwm/pwm-sifive.yaml b/Docu=
-mentation/devicetree/bindings/pwm/pwm-sifive.yaml
-> index bae993128981..40397bdf2d69 100644
-> --- a/Documentation/devicetree/bindings/pwm/pwm-sifive.yaml
-> +++ b/Documentation/devicetree/bindings/pwm/pwm-sifive.yaml
-> @@ -62,7 +62,7 @@ additionalProperties: false
-> =20
->  examples:
->    - |
-> -    pwm:  pwm@10020000 {
-> +    pwm@10020000 {
->        compatible =3D "sifive,fu540-c000-pwm", "sifive,pwm0";
->        reg =3D <0x10020000 0x1000>;
->        clocks =3D <&tlclk>;
+qnap_mcu_receive_buf() clears reply->length once a full reply or a
+recognised error reply has arrived, and refuses to touch anything while
+it is zero:
 
-I'm ok with this change (as &pwm is unused in the example), I also don't
-care much about this not being a whitespace only change and thus not
-really matching the commit log.
+	if (!reply->length) {
+		dev_warn(dev, "Received %zu bytes, we were not waiting for\n", size);
+		return size;
+	}
 
-Acked-by: Uwe Kleine-K=F6nig <ukleinek@kernel.org> # for Documentation/devi=
-cetree/bindings/pwm
+	while (src < end) {
+		reply->data[reply->received] = *src++;
 
-Best regards
-Uwe
+The timeout path in qnap_mcu_exec() returns without clearing any of it.
+reply->data then keeps pointing into a stack frame that is gone, and
+because reply->length is still set the guard in the receive callback
+does not fire, so a reply that turns up after the timeout is written
+over whatever is using that stack now. bus_lock does not help: the write
+comes from the serdev receive callback, not from another caller of
+qnap_mcu_exec().
 
---ynduf7ixmtnk7fvw
-Content-Type: application/pgp-signature; name="signature.asc"
+The write stays within QNAP_MCU_RX_BUFFER_SIZE bytes, since the entry
+check rejects longer replies and the loop stops at reply->length, so
+this is a bounded write to a dead frame rather than an unbounded one.
 
------BEGIN PGP SIGNATURE-----
+Clear the length and the pointer on the timeout path, so a late reply is
+dropped by the check that is already there.
 
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmpvOBgACgkQj4D7WH0S
-/k5+WQf8CivH89faKCp48CBlupnrahHpA3qdaBm48BnUdJduo4BaximYlTqDGSxO
-NXL529LwysgvuiHkOxrg9bUdk/Lx68V5xZboTmO5BFwMGnqiXaazc9iWfyHrau7M
-YVderOTLj5yWcB/0FkMdHb59nmaH6H3DTA7lTyzhEH2rK1e56Xe0bWxXn5wPx//K
-Fg6BzFpjoO28RLKp88OCsgzFiu3Y6yaJNenCx2MeV0T15/L721ZmHJDKsQqu5iDJ
-iXzPSntzwtR7HAs/3NUW1jSaAV2Jq41LUqlqjX4CeZDwSDaX6iquowVSJDhJvYuK
-ZtKTkgqchOdbv2qhQEqje3UkwK9pWQ==
-=9CRH
------END PGP SIGNATURE-----
+Fixes: 998f70d1806b ("mfd: Add base driver for qnap-mcu devices")
+Cc: stable@vger.kernel.org
+Signed-off-by: Ali Ahmet Memis <ali@iusegentoo.com>
+---
+Found by reading the driver, not from a reported failure; I have no QNAP
+NAS to test on. What I checked in the tree: reply->length is only set
+back to zero in qnap_mcu_receive_buf(), at the two points where a reply
+is complete, and reply->data, reply->length and reply->received are only
+set again at the top of the next qnap_mcu_exec(). So between a timeout
+returning and the next command there is a window where the state still
+describes a frame that has been left.
 
---ynduf7ixmtnk7fvw--
+This is the minimal version. It does not close the window completely:
+qnap_mcu_receive_buf() runs without bus_lock, so a reply can still
+arrive between the check and the two stores. Closing that properly means
+either stopping serdev receive around the timeout or protecting the
+reply state with a lock the receive callback can also take, and which of
+those fits the driver is your call rather than mine. I went with the
+small fix because it removes the stale pointer without changing how the
+driver is serialized.
+
+ drivers/mfd/qnap-mcu.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/mfd/qnap-mcu.c b/drivers/mfd/qnap-mcu.c
+index 8de974ddac3e..f810cb4ff2ab 100644
+--- a/drivers/mfd/qnap-mcu.c
++++ b/drivers/mfd/qnap-mcu.c
+@@ -239,6 +239,8 @@ int qnap_mcu_exec(struct qnap_mcu *mcu,
+ 
+ 	if (!wait_for_completion_timeout(&reply->done, msecs_to_jiffies(QNAP_MCU_TIMEOUT_MS))) {
+ 		dev_err(&mcu->serdev->dev, "Command timeout\n");
++		reply->length = 0;
++		reply->data = NULL;
+ 		return -ETIMEDOUT;
+ 	}
+ 
+
+base-commit: 2d2338c93da79b3bfe4b6099a931d9468d539952
+-- 
+2.55.0
+
