@@ -1,57 +1,280 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07FAB320393;
-	Sun,  2 Aug 2026 19:57:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B1802931FE
+	for <mfd@lists.linux.dev>; Sun,  2 Aug 2026 20:34:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785700658; cv=none; b=q24T4ZILMsm3WvyvCdDgJsvOqOFH/Gs3fB36Csjkm2iT8F8OPNI6wJR71lzJcHRBrd2amYDQIKgfnRZbUU1yZwldzWLx767KPCiH3FlVJFo1TNK+SYpWzh+tPuTopf3EbKblWCgg+EQRj7OTBQ0stqtpzPM+AXEgxx5WcqC5M9I=
+	t=1785702845; cv=none; b=uFL/rIyP2ck8BAEVbY+nHHYtLebmDWwvwlivm4J5mWyJoGcQOJ7686t5C02nMyTABA8acklxq/kuekDYQFEDH448B5jv/xbz641s65FLObIQSpMgi2jtajKNVi5dlRuotGLKLxbTnW9S0wLNGarH9yGJemzKYmfN0vpdtQM/5Tw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785700658; c=relaxed/simple;
-	bh=NBki2fPqAF3R2oubXThTUCCPv5CPCuWt3NszO2YLnfI=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=Cu+fx+huATF5eg6IxMVX1iPJUq/HLyzGDuLO2tImuocRN2XmuSsJIc+HHrRhfcUeuOnaIIE7g13egWeQ4oV3b9yNrDlU7It/B/Wv5uLwTmHWtF+L5z0PpNGmZqo77oz6Hb852qxStaULxxYisHlMenDT0zlpyTHoKstklQuro/8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IGVicfUI; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785702845; c=relaxed/simple;
+	bh=ytkVlGWPC4ZaFYhCIySoL2e+Zt6OCP0DIB5EwOX97uk=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Knzv6qwAiupzyd6qDWGA6TIVthstYJEYJ86PrP2zsRFoELn1o95qC7Kqcu0mdveTb5fNRnS8pOiwZoePkgHDlutPW7X8RuNDbhbQz47GIkP2kTlaFcJ3b5hyiL5Lr9cDxHudzicSMSgUnNB5THARXLmt+LijEgGGzgg2dQk8nsQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ST0wDd9A; arc=none smtp.client-ip=209.85.128.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IGVicfUI"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 325651F000E9;
-	Sun,  2 Aug 2026 19:57:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785700656;
-	bh=2FBnVorze0mGUMFhKixNlw0OLeUgjg1WcovYGQUNhYc=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=IGVicfUI034aLZprr4H9yVgrVI4h7PadJhcG7/gUz84EjmB4LnuUI8SFdKrubjxKb
-	 slSeoEP0N0VyQwV0wt8dxozRxL5Q0ghXKWshBGKSw6XjzOQUjzMQp0rUIsgrldDDzz
-	 Yq+c4ZZz5qG0VfvgNJWjqF+O05zUs9gezi5rX92nIV1rDoF0zWKmoM4/314D8ZKwjJ
-	 HixQsGdkdSWgzSMWG84bbcVBwWKwBy5nmA91SE4gOLl9oXeptqOdbTkealwCduUC7d
-	 NV0dnqxjheTjivV7j0qAlYEFRdyKicKSM1kpVv9CdY8244Ssr3WOPNNNMzdGoJInUt
-	 Wym4Ya/zT/KFg==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH] dt-bindings: Correct white-space style
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Krzysztof Kozlowski" <krzysztof.kozlowski@oss.qualcomm.com>
-Cc: dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, dlemoal@kernel.org, linux-ide@vger.kernel.org, robh@kernel.org, mfd@lists.linux.dev, conor+dt@kernel.org, lee@kernel.org, cassel@kernel.org
-In-Reply-To: <20260801195613.235430-2-krzysztof.kozlowski@oss.qualcomm.com>
-References: <20260801195613.235430-2-krzysztof.kozlowski@oss.qualcomm.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Sun, 02 Aug 2026 19:57:35 +0000
-Message-Id: <20260802195736.325651F000E9@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ST0wDd9A"
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-49545ba3d4eso5800825e9.3
+        for <mfd@lists.linux.dev>; Sun, 02 Aug 2026 13:34:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1785702842; x=1786307642; darn=lists.linux.dev;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=tXBqjlY2f6bYpFJSuXlfBIwEMNbQe6Xjdd649Bgo4nA=;
+        b=ST0wDd9AHJgLmwjfVuyAFyT4HtaBpPHEOaDdExlydPoDvKZs5EGCx50h9A+yemaf+s
+         WX8yLdOZ0+X6rqLHLVs24TUnff/DbaO+16Kx6hy749aahJqaRfvgICWzUHcQHTfko8RN
+         GxkgSiuPwJhowUj3EHIXsknEq8NVvr+v1lVWpMWMXbj978JsJEtAfPfEDAvd1TmpK62z
+         J5MDjWrg+ARRVgQ6Mi/iThF1d89CEDz6Ad2BzTmRhjenRzDBTJx9gGHDn0Dl4CtbGF4Z
+         AhRaSFTY6K4yK6cYUxVbicTbD+vtoyFV3C+1Ca7jai933soq8J9xUa9OQ1dqYjYQ5kEX
+         YDsg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785702842; x=1786307642;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=tXBqjlY2f6bYpFJSuXlfBIwEMNbQe6Xjdd649Bgo4nA=;
+        b=H4259yuEzbHYI+jeAlSUorHywmgT4ITy9t2QG5M/jdv47FLhBlIBeKpYpKLi6cctHR
+         qHIxfNj1capVLjcQT6/lApTSIDmVty/UbVajnZw64c6u7VL/GhjFZ35MH6PQ2w6nq1ci
+         W7r35kiimGF/I0sDsSZ1IokFpQkPRn/y8zXCNgaveO9DlnZBKwx82huxbVdE760okLiK
+         vZpD2E5SoZ9wjenYwKylEx8XCdOxGBP+xmk8uNVea2pB9mPUcJ7rNUabzdFkafJYU+NC
+         aYacboeEP4C7zgd7yzuFurzWAFLMVxj7XjBHNtuggss+S0KW1JvN+GYEx4ZiUTMCF+dX
+         WyJg==
+X-Forwarded-Encrypted: i=1; AHgh+RoUuHGLhHaTlwpP0YApalO6g6VAJiRp7VKzqnkDe61P6EBup8MsQKWrhgCazeTU6gbLYm4=@lists.linux.dev
+X-Gm-Message-State: AOJu0Yx5nQf3h8jRgMkQqiKrYKF6wa3jttl0a3IbFREiru2pH0oLM/RO
+	aDVASzTUZmJ7IR4UGZ9xtsC8Hho/zb/WyQ3w5+LFqDPaEf6ge6gSKywY
+X-Gm-Gg: AR+sD10o3V/jSH7rfaRJREyEfMxPyCK/QoIBZh8XcQ36rZTEbG9WgrlYtpromSdy9Z1
+	2arS+UxUt2h+CeQtE+szdkMXy/zmk49D35Zg9eSwaHZAXD/pDo/CdTZRCcQlIw5Q+mz4X0wgLdD
+	B0xGLJip2C9fOp660arK7nWArSQsCbo2ZTw/NQ7VeiO6JfUFNdSr/q490woJcj4FDFgEO4g8vgx
+	SJAGocJY2r+4Be6/tQ84OySz3gjLPsm8YSbHW4xWh/dmaVic8N7G/BXHGmQAQLdqszvli40Gen8
+	cgzqODFFSzGmjKL+px6JDQ0oVnFtW5bOMnHaWvoSFSSIgsY3aEhZON/73ZtYslVt0nvdB2T/AZs
+	3imltIEBdyn5Fze680WK7hT1cPXtk3SPXT+wns49WT4+SWojBv7WcZLA4UxOIJpL46WTqj70sxm
+	i/e6xOPCknTMA/J12qQZJUBHFo3M3FKmrSref76ul141r46ptOFcWLTyYKN1oYcqsVjnwVPfmOz
+	XlRaqiePls=
+X-Received: by 2002:a05:600c:811b:b0:495:6934:414c with SMTP id 5b1f17b1804b1-4980c696c7emr154090745e9.19.1785702842254;
+        Sun, 02 Aug 2026 13:34:02 -0700 (PDT)
+Received: from [192.168.0.2] ([197.250.226.155])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49807bb45ebsm118499905e9.4.2026.08.02.13.33.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 02 Aug 2026 13:34:00 -0700 (PDT)
+From: =?utf-8?q?Stefan_D=C3=B6singer?= <stefandoesinger@gmail.com>
+Subject: [PATCH v9 00/12] ZTE zx297520v3 clock bindings and driver
+Date: Sun, 02 Aug 2026 23:33:32 +0300
+Message-Id: <20260802-zx29clk-v9-0-d05530d85d28@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/2XQy07DMBAF0F+pvCbIM3b86Ir/QCz8mGkt+oCkR
+ IWq/47bLhzCciyf6zu+iJGGQqNYry5ioKmM5Xiog39aibQNhw11JddZoEQje5Ddzxl92r13SDo
+ rTwrQJVFvfwzE5XxPen17zAN9ftXA0+NQxDBSl477fTmtV5HIGpV7Vhqi94m1xcAUe+my9s6xw
+ WBSAHHL2pbxdBy+7yUnuIf96zNBJzuCGBIzkzf2ZbMPZfdcH7xnTDh30BxWh54l5aSk5H7p1My
+ hb05VlyxTrymoWnjpdHMGTHP65oL3OmZE8nnp+plD11xfnfXMUmvS4HHpTHNWYnOmOmVttFKzk
+ 0kvnZ05sM3Z6rR0GiBxYmWWzs0czpy79Qwgbay/CfnPftfr9RdFFtOHcgIAAA==
+X-Change-ID: 20260510-zx29clk-2e4d39e3128c
+To: Michael Turquette <mturquette@baylibre.com>, 
+ Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>, 
+ Brian Masney <bmasney@redhat.com>, Vinod Koul <vkoul@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Russell King <linux@armlinux.org.uk>, Lee Jones <lee@kernel.org>
+Cc: linux-clk@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ linux-phy@lists.infradead.org, mfd@lists.linux.dev, 
+ =?utf-8?q?Stefan_D=C3=B6singer?= <stefandoesinger@gmail.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7558;
+ i=stefandoesinger@gmail.com; h=from:subject:message-id;
+ bh=ytkVlGWPC4ZaFYhCIySoL2e+Zt6OCP0DIB5EwOX97uk=;
+ b=owEBiQJ2/ZANAwAIAT0TvMhUTxoiAcsmYgBqb6modbMmWTEjfJLS3Z6rWqgIE4+olimQZbU63
+ SKtgKVYwimJAk8EAAEIADkWIQRDFvS2qgVbJ5UyXWw9E7zIVE8aIgUCam+pqBsUgAAAAAAEAA5t
+ YW51MiwyLjUrMS4xMiwyLDIACgkQPRO8yFRPGiKAphAApm5Me2guqbkgXD/SWGOTxtNV/dl2exj
+ Jeqdx6EpnTWGJwnww9aM9S7eL0OtPfNKAZarMRAKhMhqNPB/FLr5ApZSlGhWG2ZC7eaBLnmcbpt
+ VJC3+YWYPzqLt+87KUD+qbYJgm2FnLqDkG900TWF7TXJeCm7gn/5snqFpxc6epqiyggr1YJ5SbA
+ Rx5YelP9xjPSlItbiIT3yCrt33LD8A7yqb5czo80VdHLGyx8ogkNBQSUK2XVXpK37uvo6SvWs8y
+ pCVEOLBxoBJJ81uku2HXLrNNwcR8UmrbR7RZSz9VfhEw1c/4uQZl/7ZbIRyugm0FoebYD33quxo
+ pDEiT1ocU/M4zroec8ehe4a0b/LAeKcvn8t2zBDa+6RTzK1KY8MqKuXBfSuS7B12/Iv0wZ5S0m3
+ Ne0LNFFOH7BaqSzz5REOR1TXL05Sh98G1ePeV6AiMczrv6J/cJ4dZ9VxV4eOz78wCQ8WNT3ZNom
+ gNwWeZ8q8XR+ucu3FHU2i9hSYRGFzAcCVCCPR6yR84l3VA/adE6PdDYySgVxOshcknUY9yaI37v
+ QNtYr4vpIs5NOFHSCX5FxMbwwUyFnWZ3H34JELxiDrsx/owPhBr9ivZgNkZg+uhaF1n3ULK2nVb
+ QmAueSe4wRQEhk6er4ExNgtkMBUf/lO1VyuNaxdjwxDWxV71dexI=
+X-Developer-Key: i=stefandoesinger@gmail.com; a=openpgp;
+ fpr=4F9C2C8728019633893EBBB98CB81F9A72BBA155
 
-> Correct a few white-space issues, like double space after '=3D' or before
-> bracket '{' characters, which will be flagged by dt-check-style.  No
-> functional changes.
->=20
-> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Hi,
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+I am sending version 9 of my zx297520v3 clock patch. The main change vs 
+v8 is that the clock driver uses parent_data.hw instead of global names 
+for parent matching.
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260801195613.2354=
-30-2-krzysztof.kozlowski@oss.qualcomm.com?part=3D1
+I think the list of clocks in my driver is fairly complete; It is 
+certainly a lot better than what the downstream ZTE drivers have. I 
+deduced a lot of it by trial and error. I am sure there are some clocks 
+missing that will need to be added to the binding later. AFAIU adding 
+clocks is not an issue, but removing or reordering them is an ABI break.
+
+Merge dependencies: The binding patches (1, 2, 3) and DT patch (12) in 
+order. The MFD parent (4) is independent, although changing the ordering 
+likely needs trivial adjustments in MAINTAINERS. The clock driver 
+patches depend on the headers added by 1-3 and apply in order 
+(5-10). Reset needs headers (1-3), but it is independent of clock.
+
+Though in practice mfd, clock and reset drivers are dead code until 
+patch 12 adds the DT nodes. Clock and reset drivers won't be 
+instantiated without the MFD parent.
+
+Signed-off-by: Stefan Dösinger <stefandoesinger@gmail.com>
+---
+Changes in v9:
+*) Use parent_data in the clock driver instead of parent_names. That 
+required some infrastructure to keep track of registered clocks rather 
+than devm-and-forget. A nice side effect is that it uncovered a missing 
+top->matrix clock link. (Brian)
+
+*) Remove the self-referencing USB PHY reset in topcrm (Krzysztof)
+
+*) (Hopefully) get unevaluatedProperties and additionalProperties right 
+in topcrm (Krzysztof)
+
+*) GMAC and SDIO on the matrixcrm controller need topcrm's ahb clock as 
+parent. It is added to Matrix's binding and fixed in the driver
+
+*) LSP reset and pclk handling moved from clock child to mfd parent 
+driver
+
+- Link to v8: https://lore.kernel.org/r/20260727-zx29clk-v8-0-7a107b00f1dd@gmail.com
+
+Changes in v8:
+*) Put #phy-cells into topcrm. The mfd child will have to assign itself 
+the MFD parent's of_node to satisfy the check in phy-core.c's
+__of_phy_provider_register().
+
+*) Added another register to matrixclk that controls in-controller 
+distribution gates. No functional change, but it nicely confirms the 
+top->matrix interface
+
+*) Changed clock indices to start at 0, adjusted driver to not use 0 as 
+"do not export" marker.
+
+*) Rename DT fixed clock nodes from osc26m -> clock-26m and osc32k -> 
+clock-32k
+
+*) Fixed more issues pointed out by Sashiko
+
+- Link to v7: https://lore.kernel.org/r/20260717-zx29clk-v7-0-408411cfcf36@gmail.com
+
+Changes in v7:
+
+*) Moved DT bindings back to clock/ (Krzysztof)
+*) Added a usb-phy child node to top to expose the USB status register
+*) Add clock gates that control input of PLL clocks into topcrm and 
+forward to matrixcrm. Strip down matrixcrm inputs in the bindings to the 
+known clocks in this register
+*) Add DDR clocks and resets, arm arch timer clock. They are marked 
+critical and tell CCF not to gate off the aforementioned input/forward 
+gates
+*) Remove syscon from matrixcrm (Krzysztof). The DDR mailbox system is 
+on a different controller (soc_sys at 0x140000). ZTE's code merely 
+controlled clocks in matrixcrm, which doesn't require syscon on this 
+controller.
+*) Consistently use double quotes in bindings and full include paths 
+(Krzysztof)
+
+The individual patches call out changes in more detail.
+
+- Link to v6: https://lore.kernel.org/r/20260702-zx29clk-v6-0-377b704f80c4@gmail.com
+
+Changes in v6:
+*) Use MFD for all 3 controllers - I hope both Conor and Philipp will 
+agree. I kept top and matrix bindings in soc/zte and lsp in clock/ 
+though.
+
+*) Clean up issues found by Sashiko. I pointed them out in the individual 
+patches. They are localized fixes and don't affect the overall design
+
+*) Small code consistency: Changed "zx297520v3_lsp" to use "-" , "rst" 
+in driver names to "reset"
+
+Changes in v5:
+*) Use MFD instead of aux bus for top and matrix clocks
+*) Move top and matrix bindings to soc/zte
+*) Give USB PHY its own resets
+*) Other localized changes are noted in the individual patches
+- Link to v4: https://lore.kernel.org/r/20260616-zx29clk-v4-0-ca994bd22e9d@gmail.com
+
+Changes in v4:
+*) Use syscon and regmap instead of raw IO
+*) Move reset to its own driver on the aux bus, but keep reset and clk 
+in the same binding as it matches the way the hardware works
+*) Go back to having matrixclk in its own device because syscon deals 
+poorly with multi io reg devices. List all PLL outputs from topclk as 
+inputs to matrixclk
+*) Some more hardware research: Figure out the parents of the 4 possible
+GPIO clock outputs and declare them in the driver. They are unused on 
+the hardware I have, but they show that all PLLs can be used.
+
+- Link to v3: https://lore.kernel.org/r/20260529-zx29clk-v3-0-c7fe54ea388f@gmail.com
+
+Changes in v3:
+Model top and matrix clocks as one device
+Add PLL driver
+Fixed a few issues found by Sashiko: register lock, some missing devm_, 
+error handling
+
+v2: Fix build issues introduced by checkpatch.pl fixes that I didn't 
+spot earlier.
+
+---
+Stefan Dösinger (12):
+      dt-bindings: clk: zte: Add zx297520v3 top clock and reset controller
+      dt-bindings: clk: zte: Add zx297520v3 matrix clock and reset controller
+      dt-bindings: clk: zte: Add zx297520v3 LSP clock and reset controller
+      mfd: zx297520v3: Add a clock and reset MFD driver
+      clk: zte: Add Clock registration infrastructure
+      clk: zte: Add regmap-based clocks
+      clk: zte: Add zx PLL support infrastructure
+      clk: zte: Introduce a driver for zx297520v3 top clocks
+      clk: zte: Introduce a driver for zx297520v3 matrix clocks
+      clk: zte: Introduce a driver for zx297520v3 LSP clocks
+      reset: zte: Add a zx297520v3 reset driver
+      ARM: dts: zte: Declare zx297520v3 CRM device nodes
+
+ .../bindings/clock/zte,zx297520v3-lspcrm.yaml      |  101 ++
+ .../bindings/clock/zte,zx297520v3-matrixcrm.yaml   |   98 ++
+ .../bindings/clock/zte,zx297520v3-topcrm.yaml      |  122 ++
+ MAINTAINERS                                        |    9 +
+ arch/arm/boot/dts/zte/zx297520v3.dtsi              |   81 +-
+ drivers/clk/Kconfig                                |    1 +
+ drivers/clk/Makefile                               |    1 +
+ drivers/clk/zte/Kconfig                            |   28 +
+ drivers/clk/zte/Makefile                           |    6 +
+ drivers/clk/zte/clk-regmap.c                       |  237 +++
+ drivers/clk/zte/clk-zx.c                           |  189 +++
+ drivers/clk/zte/clk-zx.h                           |  142 ++
+ drivers/clk/zte/clk-zx297520v3.c                   | 1571 ++++++++++++++++++++
+ drivers/clk/zte/pll-zx.c                           |  580 ++++++++
+ drivers/mfd/Kconfig                                |   11 +
+ drivers/mfd/Makefile                               |    2 +
+ drivers/mfd/zte-zx297520v3-crm.c                   |  117 ++
+ drivers/reset/Kconfig                              |   13 +
+ drivers/reset/Makefile                             |    1 +
+ drivers/reset/reset-zte-zx297520v3.c               |  236 +++
+ include/dt-bindings/clock/zte,zx297520v3-clk.h     |  144 ++
+ include/dt-bindings/phy/zte,zx297520v3-topcrm.h    |   12 +
+ include/dt-bindings/reset/zte,zx297520v3-reset.h   |   61 +
+ 23 files changed, 3755 insertions(+), 8 deletions(-)
+---
+base-commit: bee763d5f341b99cf472afeb508d4988f62a6ca1
+change-id: 20260510-zx29clk-2e4d39e3128c
+
+Best regards,
+-- 
+Stefan Dösinger <stefandoesinger@gmail.com>
 
