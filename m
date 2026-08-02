@@ -1,159 +1,136 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5361533F8C6;
-	Sun,  2 Aug 2026 20:45:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43BF3244667;
+	Sun,  2 Aug 2026 20:49:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785703523; cv=none; b=K2oz0D1NC7rdWvi9x7LxB/4eax5woO2jE7lhdNFfSgXkEyuK9eI7kUKARzxjCNn6DbfJJUA+/2Ki+UgbnFoW0E2llUuWFcpW008Z7mpm6CUU+uhdQ42ITcXUo5he5IZMkqBh0uO1M7NP5zDoaT28b+8JagxcytvX9dWxyy6ceug=
+	t=1785703789; cv=none; b=oxBOwP2o8dKgZNE6TqXerBdpsfRy9wq1Jwtajg0+Eu/w5U5vVc2YAdfmD+5eCzVnwpu5Sc7xIFEiWycofAHIbomtLYv1VuMSG4iznFXzACrMW2R4/CUW3Ii0++oVHVBiKHnsIjkgZuR1zZ6Sgi7WQsOznawvE6gGQHxt0SRyqBA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785703523; c=relaxed/simple;
-	bh=/FP6rpzQVvRkl1yE0K7t9u77FbiZ/exOycxhy1ZF5nc=;
+	s=arc-20240116; t=1785703789; c=relaxed/simple;
+	bh=Lud+J/j3Gddxw0FWi902iWsX2xS4qAPVEhQ7KrovZpY=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=c7THDgS3k4+CCT+ioePd8iLBpFrHZS10AKj4SBUPW8g9WEYvZBrPmPMyG/9RrkDistfVwb91ALFbx34MVOSS4AcjbP1mFR50Lw2rhGQd1rlDNtK0G9x+iGoin/I2T1ZIrQWHw7Iqa0s9g6ZsBNBpeCY/OjItncZO+3gy2x4HTAw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VoVBFDOd; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=WYioeRh0jPE6rE6XW/bH/CV7QLGnY9GOSMZGymH1uMcof5+7wP6/Gdl9QxsnXIHDRUBkxGvkQDAcqa/YlDqfZi+qFa0t8EL30uuutIXjietFevYYcTMw1il0ULQBxOMd6wPvkyHYkPmJv9HTgnIYWHarEExeWzj1juNFmYofy6g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=P+WoHi1J; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VoVBFDOd"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5126D1F000E9;
-	Sun,  2 Aug 2026 20:45:17 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="P+WoHi1J"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 442E41F000E9;
+	Sun,  2 Aug 2026 20:49:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785703517;
-	bh=Ska9k1keGD7n27PxzLEF7PrmAwsraD0YY5Ir1wmOqns=;
+	s=k20260515; t=1785703787;
+	bh=WUH9MSJOOosyMvV3xlQjw9fjUnK1TOQByKO3MzHfpRs=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=VoVBFDOdFYEUgmLi8R4PjLkv30MBNx0uv9RPRgYIpzpy8LrwnvfEtWW1kacvkgva7
-	 CPUKf7pWyogJbewdo9HQiAAjNPv2s52t4p0pOJwJarx5VuCH3kGOLvA5ACmzHs4IR/
-	 Lcd7Au7N1OR+xO8/omwJMk0m2t/XZ6HTLh79HHqMNYDKBdDrMXeY8D44b5y1TW23Jr
-	 tBTCgJxr2I0CycUKOM7+JUH3PD+j/IHYOLG5nIj5qXKr0QnPtVdB0fvbdKfxw/A2q7
-	 xsbw8UQiKm1cQ2HkKd/z+FiPzO5aHVNk1/AFFY0vsxapvc7HfNiSCNoijcg6ef1scp
-	 qRbtUzDy9neHQ==
+	b=P+WoHi1J0/XBVDlfGfIcGNVL2Jfd6knBX4aQIUM6hYjYXJFAuD/rtIZRgp/C6q/iC
+	 eD9qRtuljW9FovX0owsjb/984VR1tE4VDgIOScXIA7+y+LWBmSz6v1JZAE3roUKHJa
+	 3HFLKzzGPYLANiROtrYMFjAvI0PwF2N3yBDY3xMwit274km45W4BlqfiSLVkHAR7Rm
+	 c4C9dXChWgnkIRZg931f2Lbs+dju32VGMfCiPnU8qcbJZY6wpKRZVIJIDe/LklSqMO
+	 pYCfR13zB/akDw9572Zg7cvdUaYcpJnWOipGYOt644w+5+k7hooZa1iBwSzCj0YCmG
+	 1G4/RjltdReWw==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v9 04/12] mfd: zx297520v3: Add a clock and reset MFD
- driver
+Subject: Re: [PATCH v9 05/12] clk: zte: Add Clock registration
+ infrastructure
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?U3RlZmFuIETDtnNpbmdlcg==?= <stefandoesinger@gmail.com>
-Cc: vkoul@kernel.org, linux-phy@lists.infradead.org, robh@kernel.org, olteanv@gmail.com, lee@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org, neil.armstrong@linaro.org, mfd@lists.linux.dev
-In-Reply-To: <20260802-zx29clk-v9-4-d05530d85d28@gmail.com>
+Cc: olteanv@gmail.com, lee@kernel.org, linux-phy@lists.infradead.org, devicetree@vger.kernel.org, vkoul@kernel.org, neil.armstrong@linaro.org, conor+dt@kernel.org, robh@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20260802-zx29clk-v9-5-d05530d85d28@gmail.com>
 References: <20260802-zx29clk-v9-0-d05530d85d28@gmail.com>
- <20260802-zx29clk-v9-4-d05530d85d28@gmail.com>
+ <20260802-zx29clk-v9-5-d05530d85d28@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Sun, 02 Aug 2026 20:45:16 +0000
-Message-Id: <20260802204517.5126D1F000E9@smtp.kernel.org>
+Date: Sun, 02 Aug 2026 20:49:46 +0000
+Message-Id: <20260802204947.442E41F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
-- [Low] Direct cast from `const void *` to an `enum` triggers a `-Wpointer-=
-to-int-cast` compiler warning on 64-bit architectures.
-- [Low] The Kconfig symbol `MFD_ZTE_ZX297520V3_CRM` lacks an architecture-s=
-pecific dependency, unconditionally exposing a highly SoC-specific driver t=
-o all architectures.
-- [Low] The enum `zx297520v3_mfd_type` includes the string 'mfd', violating=
- the MFD subsystem naming conventions.
+- [Medium] Incomplete refactoring of clock exports causing missing const, d=
+ead code, and unsafe aliasing for sparse DT IDs
 --
 
---- Patch [4]: [PATCH v9 04/12] mfd: zx297520v3: Add a clock and reset MFD =
-driver ---
-commit 39c5ccee8d6ebff3fee809871f3a8191107ab75b
+--- Patch [5]: [PATCH v9 05/12] clk: zte: Add Clock registration infrastruc=
+ture ---
+commit c095bc91f84da44c659bbf8482a8f9e0d8e6f977
 Author: Stefan D=C3=B6singer <stefandoesinger@gmail.com>
 
-mfd: zx297520v3: Add a clock and reset MFD driver
+clk: zte: Add Clock registration infrastructure
 
-This driver registers child devices for the zx297520v3 clock and reset
-controllers. The clk-zx297520v3 and reset-zte-zx297520v3 submitted in
-the next patches will drive the respective functionalities.
+This commit introduces the common clock registration infrastructure for ZTE
+SoCs. It implements clock validation, initialization, and MFD child
+integration.
 
-> diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
-> index 35f6e9b76d056..c0c7e83487f40 100644
-> --- a/drivers/mfd/Kconfig
-> +++ b/drivers/mfd/Kconfig
-[ ... ]
-> @@ -2572,5 +2572,16 @@ config MFD_MAX7360
->  	  additional drivers must be enabled in order to use the functionality
->  	  of the device.
-> =20
-> +config MFD_ZTE_ZX297520V3_CRM
-> +	tristate "ZTE zx297520v3 Clock and Reset Manager"
-> +	select MFD_CORE
-> +	default SOC_ZX297520V3
-
-[Severity: Low]
-Should this include an architecture dependency, such as
-depends on ARCH_ZTE || COMPILE_TEST? Without it, this highly SoC-specific
-driver will be presented in the configuration options for all architectures.
-
-> +	help
-> +	  Say yes here to enable the driver for the ZTE zx297520v3 clock and
-> +	  reset manager MFD driver. This driver provides the host device for
-> +	  the clock and reset drivers and is required to boot the SoC. You
-> +	  will also need to enable CLK_ZTE_ZX297520V3 and RESET_ZTE_ZX297520V3
-> +	  to build the actual clock and reset child drivers.
-> +
->  endmenu
->  endif
-> diff --git a/drivers/mfd/zte-zx297520v3-crm.c b/drivers/mfd/zte-zx297520v=
-3-crm.c
-> new file mode 100644
-> index 0000000000000..37cd0c14680eb
+> diff --git a/drivers/clk/zte/clk-zx.c b/drivers/clk/zte/clk-zx.c
 > --- /dev/null
-> +++ b/drivers/mfd/zte-zx297520v3-crm.c
-> @@ -0,0 +1,117 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (C) 2026 Stefan D=C3=B6singer
-> + */
+> +++ b/drivers/clk/zte/clk-zx.c
+[ ... ]
+> +	exports =3D devm_kzalloc(dev, struct_size(exports, hws, data->num_expor=
+ts), GFP_KERNEL);
+> +	if (!exports)
+> +		return -ENOMEM;
+> +	exports->num =3D data->num_exports;
 > +
-> +#include <linux/clk.h>
-> +#include <linux/err.h>
-> +#include <linux/errno.h>
-> +#include <linux/mfd/core.h>
-> +#include <linux/module.h>
-> +#include <linux/of.h>
-> +#include <linux/platform_device.h>
-> +#include <linux/reset.h>
+> +	for (i =3D 0; i < data->num_exports; ++i) {
+> +		if (data->exports[i] >=3D data->num_clocks)
+> +			return dev_err_probe(dev, -EINVAL,
+> +					     "Export %u points to out of range clock %u\n",
+> +					     i, data->exports[i]);
 > +
-> +enum zx297520v3_mfd_type {
-> +	ZX297520V3_MFD_INVALID =3D 0,
-> +	ZX297520V3_MFD_TOPCRM,
-> +	ZX297520V3_MFD_MATRIXCRM,
-> +	ZX297520V3_MFD_LSPCRM,
+> +		exports->hws[i] =3D clocks[data->exports[i]];
+
+[Severity: Medium]
+If the DT binding IDs are sparse, won't the gaps in the static exports array
+default to 0? This would cause the uninitialized gaps to improperly alias to
+the first internal clock (clocks[0]) instead of returning an error when
+consumer drivers request an unused clock ID.
+
+> +	}
+> +
+> +	devm_kfree(dev, clocks);
+> +
+> +	return devm_of_clk_add_hw_provider(dev, of_clk_hw_onecell_get, exports);
+> +}
+[ ... ]
+> diff --git a/drivers/clk/zte/clk-zx.h b/drivers/clk/zte/clk-zx.h
+> --- /dev/null
+> +++ b/drivers/clk/zte/clk-zx.h
+[ ... ]
+> +struct clk_hw *zx_clk_register_gate(struct device *dev, struct regmap *r=
+egmap,
+> +				    const struct zx_gate_desc *desc,
+> +				    struct clk_hw * const *clocks);
+> +
+> +struct zx_clk_export {
+> +	unsigned int priv;
+> +	unsigned int binding;
 > +};
 
-[Severity: Low]
-This isn't a bug, but does including the string mfd in the enum name violate
-the MFD subsystem naming conventions? The guidelines suggest avoiding
-hard-coding implementation details like mfd in driver, struct, or device
-names.
+[Severity: Medium]
+Is struct zx_clk_export still needed? It appears to be unused dead code,
+perhaps left over from an earlier iteration of the clock exports refactorin=
+g.
 
-[ ... ]
-
-> +static int zx297520v3_crm_probe(struct platform_device *pdev)
-> +{
-> +	struct device *dev =3D &pdev->dev;
-> +	enum zx297520v3_mfd_type type;
-> +	const struct mfd_cell *cells;
-> +	struct reset_control *rst;
-> +	unsigned int num_cells;
-> +	struct clk *pclk;
 > +
-> +	type =3D (enum zx297520v3_mfd_type)of_device_get_match_data(dev);
+> +struct zx_clk_data {
+> +	int (*init)(struct regmap *map);
+> +	const struct zx_clock *clocks;
+> +	unsigned int num_clocks;
+> +	unsigned int *exports;
 
-[Severity: Low]
-Could this direct cast from a const void * pointer to an enum trigger a
--Wpointer-to-int-cast compiler warning on 64-bit architectures? Often an
-intermediate cast to uintptr_t or kernel_ulong_t is used to safely preserve
-the size before casting to the enum type.
+[Severity: Medium]
+Could the exports array pointer be marked as const? Without the const
+qualifier, it prevents the static clock data from being placed in .rodata.
 
-> +	switch (type) {
-> +	case ZX297520V3_MFD_TOPCRM:
-> +		cells =3D zx297520v3_topcrm_cells;
-> +		num_cells =3D ARRAY_SIZE(zx297520v3_topcrm_cells);
-> +		break;
+> +	unsigned int num_exports;
+> +};
+> +
+> +int zx_clk_common_probe(struct device *dev, struct device_node *of_node,
+> +			const struct zx_clk_data *data);
+> +
+> +#endif /* __DRV_CLK_ZX_H */
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260802-zx29clk-v9=
--0-d05530d85d28@gmail.com?part=3D4
+-0-d05530d85d28@gmail.com?part=3D5
