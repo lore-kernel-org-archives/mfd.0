@@ -1,200 +1,194 @@
-Received: from sender-of-o58.zoho.eu (sender-of-o58.zoho.eu [136.143.169.58])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2376D3ACA5B
-	for <mfd@lists.linux.dev>; Sun,  2 Aug 2026 13:53:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.169.58
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785678825; cv=pass; b=Ql7z4Umw+QycakF/Kv2FgKTr7wLfo06IvozqqrIZojVW4EgYg4dnWvTrBLKglFJl18UURsR95ObJv8oq9GZbMEzyaeNM0tZlaTL10QcGCDT6palylN2PMxC2WQCBubE3f3WUA1Yxb8bwbX8MWnJ5hMpN7c4jszaZpQ5JXJxIiz0=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785678825; c=relaxed/simple;
-	bh=8LnF5ffux6+AGVmnLZWNQnzyj+FhzZbozWboYiTLSbE=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=gHiwuSyFV47Zr8IDyCdtPbaqztsjF0PkuIm64rOvHBeaf59Vgv8uJ75+v5xHpjjtbXlPcTWgFXnFxY9Rppzso/acda2vbY8XU2Yanc4E7xVwlr6A3+XMeZQbQUlPF8r7KZoh02y39+6oBSwcAEIyfBUZ6GepA6P9AfMzOLb1TsA=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=iusegentoo.com; spf=pass smtp.mailfrom=iusegentoo.com; dkim=pass (1024-bit key) header.d=iusegentoo.com header.i=ali@iusegentoo.com header.b=FAlLkGr1; arc=pass smtp.client-ip=136.143.169.58
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=iusegentoo.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iusegentoo.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B513436195C
+	for <mfd@lists.linux.dev>; Sun,  2 Aug 2026 14:05:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785679528; cv=none; b=mcYeeKvzLWMJ2VaBpIax0j4MmS9mVc5IDG0w/1LE/h9S8TiA6mVDheHeNr71+WNqVjDcSzkUWBGgXTEK4VKPl0kqb5iz/+Imw6Bxlk9tzws8vSSY0zoPIIRaHSzVDmkB1Nje2h3X5gKtCPmrj7MqOWfnho0C23mU1XQ7KuCbokc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785679528; c=relaxed/simple;
+	bh=9/Rs5u38yVdcywd3I/A2NIxS31KFTHHhT7GpwpOyc7c=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=Bc78ays8so0lOQ6rUCVPgY+gojPeKRVGAPKeyMVJf4MCzIrBQdKN3F6hSt05C35P5J/sFxHrklfAR62a9M3tOhhJVHkH61DTl43meB/oTGe4qXotL1FPCmPsSO3ucbp3YnETFf3qS/z2j7CKsu4I1lbT3fQG0ddl1DXTnASZhdQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=O1y3+W0B; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=iusegentoo.com header.i=ali@iusegentoo.com header.b="FAlLkGr1"
-ARC-Seal: i=1; a=rsa-sha256; t=1785678800; cv=none; 
-	d=zohomail.eu; s=zohoarc; 
-	b=MkXhCojgLF4zgsAmAcB5E3H8sQnriDYGA/5GkNDBKAmc7a8JfdoSd7uuCqE8iPEVXBGB3hNmEuDWYj7D7c2ogbZfrhU2B3XMxOrSkGQQCF1szMApwX0AeVMfMhLRfolMUsCT/VdvqbN9LFbyWLk5kspsrYSaVERD9OYlgVwL8/M=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.eu; s=zohoarc; 
-	t=1785678800; h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=tPDUMVhdRwUTaaGEfDcv30DZhrsJ+20oD7Px6MCdUpU=; 
-	b=HtZT/05AlUbSq+LouKpvfkKxSdiANAGvYhuWE8xozS2lwKw+pcdd0NfmnubYsaDxuiPaolY/CZbR3UzuBiw99Hxa0szyMA1EVKV1lxNLd53/xUrbBrCxGkJ8xZX0rjBUHLyXXErc2LuRf6LnzcxeDHw5HKxnnJV9lDHsHOZzJvI=
-ARC-Authentication-Results: i=1; mx.zohomail.eu;
-	dkim=pass  header.i=iusegentoo.com;
-	spf=pass  smtp.mailfrom=ali@iusegentoo.com;
-	dmarc=pass header.from=<ali@iusegentoo.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1785678800;
-	s=zmail; d=iusegentoo.com; i=ali@iusegentoo.com;
-	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=tPDUMVhdRwUTaaGEfDcv30DZhrsJ+20oD7Px6MCdUpU=;
-	b=FAlLkGr1MvTJ2CEpjEU+KlSbBOdHHw/186ErpisyQ/Vo/dlg5yNV0KntYKiy1jeZ
-	M3WJNRQbXcGXMT8Gsu9yeed5ljzyuHuFuIug1oEoSXGLlW4b7XicwMZVVwvhiT2CjfL
-	Aqa9aV+ssqx17OevjuTgIN+6ckNJMJMaJgSOk61Y=
-Received: by mx.zoho.eu with SMTPS id 1785678797901270.71141046914715;
-	Sun, 2 Aug 2026 15:53:17 +0200 (CEST)
-From: Ali Ahmet Memis <ali@iusegentoo.com>
-To: Heiko Stuebner <heiko@sntech.de>,
-	Lee Jones <lee@kernel.org>
-Cc: mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH v2] mfd: qnap-mcu: keep the reply buffer alive past a command timeout
-Date: Sun,  2 Aug 2026 13:53:07 +0000
-Message-ID: <20260802135307.31380-1-ali@iusegentoo.com>
-X-Mailer: git-send-email 2.55.0
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="O1y3+W0B"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1FCBB1F000E9;
+	Sun,  2 Aug 2026 14:05:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785679527;
+	bh=8Uz1ZkVtu5guH/nmXrz/F9RlhOgqGS4H3LMx+EchrPE=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=O1y3+W0BJDM3W/sPVYZypSApYhq9eRFNDwUtalNI4kEitCt/+Izynvyx2edd7tC+z
+	 xBMq8BYEwEHWw4OpjhXVYjgF+yr5ds0JXht8heZIRGhE6n6YP4XuqQHrWUX9rGtOZh
+	 dzTHpaBZ1K821jO/Qwcj3whm6DiFuCpPxVC0qiW19zpk1sIg1nIQCQMVZnMyjnrsDr
+	 Awyvo7Z9kmVIvZV5m7BNUyPzgHKGlbU+lXzVMxX9RG2fGOcUFl5LmqWj0m2ZQLzi/A
+	 j3Ial4rqH0TifB+o2Dv+ZWVPOjAjFvXZgYnr3jO1Cug9sdCrSsgye+RAwiusCPcX1H
+	 WamwzJCDFEauQ==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v2] mfd: qnap-mcu: keep the reply buffer alive past a
+ command timeout
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Ali Ahmet Memis" <ali@iusegentoo.com>
+Cc: lee@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20260802135307.31380-1-ali@iusegentoo.com>
+References: <20260802135307.31380-1-ali@iusegentoo.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Sun, 02 Aug 2026 14:05:25 +0000
+Message-Id: <20260802140527.1FCBB1F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
 
-qnap_mcu_exec() publishes an on-stack buffer to the receive path:
+Thank you for your contribution! Sashiko AI review found 4 potential issue(=
+s) to consider:
 
-	unsigned char rx[QNAP_MCU_RX_BUFFER_SIZE];
-	...
-	reply->data = rx;
-	reply->length = length;
+New issues:
+- [Low] The commit message description is not capitalized, violating MFD su=
+bsystem formatting rules.
 
-and qnap_mcu_receive_buf() writes into it from the serdev receive path,
-which runs out of flush_to_ldisc() and is not serialized against
-qnap_mcu_exec() at all. bus_lock cannot cover it, because qnap_mcu_exec()
-holds that mutex across wait_for_completion_timeout().
+Pre-existing issues:
+- [Critical] A data race between `qnap_mcu_exec()` and `qnap_mcu_receive_bu=
+f()` on `reply->length` and `reply->received` bypasses the loop exit condit=
+ion, leading to a severe heap buffer overflow.
+- [High] Late UART replies from timed-out or failed commands can be written=
+ into the active buffer of the next command, causing data cross-talk and sp=
+urious early completion.
+- [High] A data race can cause `qnap_mcu_verify_checksum()` to be called wi=
+th `reply->received =3D=3D 0`, leading to an integer underflow and a determ=
+inistic kernel panic.
+--
 
-On a timeout qnap_mcu_exec() returns with reply->data still pointing at
-its own frame. A reply that arrives late, or an unsolicited message from
-the MCU, is then written into a stack frame that has been left, corrupting
-whatever runs next on that stack. The same applies when qnap_mcu_write()
-fails, since that path returns without touching the reply state either.
+--- Patch [1]: [PATCH v2] mfd: qnap-mcu: keep the reply buffer alive past a=
+ command timeout ---
+commit 876c0f2fd3f8e4b677ad50b82d00f3dcfe4a3283
+Author: Ali Ahmet Memis <ali@iusegentoo.com>
 
-Move the receive buffer into struct qnap_mcu. It is 37 bytes and the
-structure is devm_kzalloc()ed, so it lives as long as the driver, and a
-late write lands in memory that is still valid and is reinitialized by the
-next command. bus_lock keeps commands from sharing it.
+mfd: qnap-mcu: keep the reply buffer alive past a command timeout
 
-This deliberately does not clear reply->data or reply->length on the
-timeout path. Doing so races with qnap_mcu_receive_buf(), which reads both
-after its
+This patch moves the receive buffer from the stack in qnap_mcu_exec() to
+the qnap_mcu structure. This prevents stack corruption when late replies
+arrive after a command has timed out.
 
-	if (!reply->length)
-		return size;
+Link: https://lore.kernel.org/all/20260802132012.537B81F000E9@smtp.kernel.o=
+rg/
 
-check: clearing reply->data gives a NULL dereference, and clearing
-reply->length alone removes the reply->received == reply->length exit
-condition, so the copy loop runs until the uart chunk is consumed and
-overruns the buffer. Leaving both set keeps the write bounded by
-reply->length, which qnap_mcu_exec() has already checked against
-sizeof(mcu->rx).
+> mfd: qnap-mcu: keep the reply buffer alive past a command timeout
 
-Fixes: 998f70d1806b ("mfd: Add base driver for qnap-mcu devices")
-Cc: stable@vger.kernel.org
-Signed-off-by: Ali Ahmet Memis <ali@iusegentoo.com>
----
-v1 cleared reply->length and reply->data on the timeout path. That was
-wrong: it races with qnap_mcu_receive_buf() and, as sashiko-bot pointed
-out on that thread, can give a NULL dereference or drop the copy loop's
-exit condition and overrun the buffer. It made one failure mode worse than
-the one it fixed. Thanks to the bot for catching it.
+[Severity: Low]
+Is there a capitalization typo in the subject line? Should "keep" be "Keep"?
 
-  https://lore.kernel.org/all/20260802132012.537B81F000E9@smtp.kernel.org/
+> diff --git a/drivers/mfd/qnap-mcu.c b/drivers/mfd/qnap-mcu.c
+> index 8de974ddac3e7..93a3dd93404dd 100644
+> --- a/drivers/mfd/qnap-mcu.c
+> +++ b/drivers/mfd/qnap-mcu.c
 
-v2 leaves the reply state alone and gives the buffer a lifetime instead,
-so there is nothing to tear down and no new race.
+[ ... ]
 
-What this does not fix, and what I am not proposing to fix here: a late
-reply can still be written into the buffer while the next command is using
-it, so it can corrupt that command's data or complete it early. The
-checksum test turns most of that into -EPROTO rather than bad data
-reaching the caller. Fixing it properly means serializing reply setup and
-teardown against qnap_mcu_receive_buf(), which is a change to the driver's
-synchronisation model and not something I want to fold into a fix. Same
-for the unprotected reply->received accesses, which KCSAN would flag.
+> @@ -214,19 +216,18 @@ int qnap_mcu_exec(struct qnap_mcu *mcu,
+>  		  const u8 *cmd_data, size_t cmd_data_size,
+>  		  u8 *reply_data, size_t reply_data_size)
+>  {
+> -	unsigned char rx[QNAP_MCU_RX_BUFFER_SIZE];
+>  	size_t length =3D reply_data_size + QNAP_MCU_CHECKSUM_SIZE;
+>  	struct qnap_mcu_reply *reply =3D &mcu->reply;
+>  	int ret =3D 0;
+> =20
+> -	if (length > sizeof(rx)) {
+> +	if (length > sizeof(mcu->rx)) {
+>  		dev_err(&mcu->serdev->dev, "expected data too big for receive buffer");
+>  		return -EINVAL;
+>  	}
+> =20
+>  	guard(mutex)(&mcu->bus_lock);
+> =20
+> -	reply->data =3D rx;
+> +	reply->data =3D mcu->rx;
+>  	reply->length =3D length;
+>  	reply->received =3D 0;
 
-I have no QNAP hardware, so this is from reading the driver rather than
-from an observed corruption. What I checked:
+[Severity: Critical]
+This is a pre-existing issue, but can this reset race with an active receive
+loop and cause a heap buffer overflow?
 
-  - flush_to_ldisc() calls receive_buf() from a workqueue, so it is
-    process context and genuinely concurrent with qnap_mcu_exec()
-  - bus_lock is held across wait_for_completion_timeout(), so
-    qnap_mcu_receive_buf() cannot take it
-  - struct qnap_mcu comes from devm_kzalloc() in qnap_mcu_probe()
-  - length is checked against sizeof(mcu->rx) before it is published,
-    so the bounded write stays inside the buffer
-  - the u8 rx[14] in qnap_mcu_get_version() is a caller buffer, filled by
-    memcpy() under bus_lock after the reply is complete, so it is not
-    exposed to the receive path and is left alone
+If the receive thread is running in qnap_mcu_receive_buf() and we reset
+reply->received to 0 here without synchronization, the exact equality check
+in the receive thread could be bypassed:
 
- drivers/mfd/qnap-mcu.c | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
+drivers/mfd/qnap-mcu.c:qnap_mcu_receive_buf()
+	reply->received++;
+	if (reply->received =3D=3D reply->length) {
+		...
 
-diff --git a/drivers/mfd/qnap-mcu.c b/drivers/mfd/qnap-mcu.c
-index 8de974ddac3e..93a3dd93404d 100644
---- a/drivers/mfd/qnap-mcu.c
-+++ b/drivers/mfd/qnap-mcu.c
-@@ -56,6 +56,7 @@ struct qnap_mcu_reply {
-  * @reply:	Reply data structure
-  * @variant:	Device variant specific information
-  * @version:	MCU firmware version
-+ * @rx:		Receive buffer the reply is assembled in
-  */
- struct qnap_mcu {
- 	struct serdev_device *serdev;
-@@ -63,6 +64,7 @@ struct qnap_mcu {
- 	struct qnap_mcu_reply reply;
- 	const struct qnap_mcu_variant *variant;
- 	u8 version[QNAP_MCU_VERSION_LEN];
-+	u8 rx[QNAP_MCU_RX_BUFFER_SIZE];
- };
- 
- /*
-@@ -214,19 +216,18 @@ int qnap_mcu_exec(struct qnap_mcu *mcu,
- 		  const u8 *cmd_data, size_t cmd_data_size,
- 		  u8 *reply_data, size_t reply_data_size)
- {
--	unsigned char rx[QNAP_MCU_RX_BUFFER_SIZE];
- 	size_t length = reply_data_size + QNAP_MCU_CHECKSUM_SIZE;
- 	struct qnap_mcu_reply *reply = &mcu->reply;
- 	int ret = 0;
- 
--	if (length > sizeof(rx)) {
-+	if (length > sizeof(mcu->rx)) {
- 		dev_err(&mcu->serdev->dev, "expected data too big for receive buffer");
- 		return -EINVAL;
- 	}
- 
- 	guard(mutex)(&mcu->bus_lock);
- 
--	reply->data = rx;
-+	reply->data = mcu->rx;
- 	reply->length = length;
- 	reply->received = 0;
- 	reinit_completion(&reply->done);
-@@ -242,15 +243,15 @@ int qnap_mcu_exec(struct qnap_mcu *mcu,
- 		return -ETIMEDOUT;
- 	}
- 
--	if (!qnap_mcu_verify_checksum(rx, reply->received)) {
-+	if (!qnap_mcu_verify_checksum(mcu->rx, reply->received)) {
- 		dev_err(&mcu->serdev->dev, "Invalid Checksum received from controller\n");
- 		return -EPROTO;
- 	}
- 
--	if (qnap_mcu_reply_is_any_error(mcu, rx, reply->received))
-+	if (qnap_mcu_reply_is_any_error(mcu, mcu->rx, reply->received))
- 		return -EPROTO;
- 
--	memcpy(reply_data, rx, reply_data_size);
-+	memcpy(reply_data, mcu->rx, reply_data_size);
- 
- 	return 0;
- }
+If the equality check is bypassed, the receive loop could write unbounded
+bytes into reply->data (which now points to mcu->rx on the heap), causing
+a heap buffer overflow.
 
-base-commit: 2d2338c93da79b3bfe4b6099a931d9468d539952
--- 
-2.55.0
+>  	reinit_completion(&reply->done);
 
+[Severity: High]
+This isn't a bug introduced by this patch, but can resetting the completion
+here allow late replies to corrupt the new command?
+
+If a previous command times out, its receive thread is still active.
+
+If we just reset the completion and start a new command, could a concurrent=
+ly
+arriving late response from the previous command be written into mcu->rx by
+qnap_mcu_receive_buf()?
+
+Since the old response is well-formed, it could pass the simple XOR checksu=
+m,
+triggering a spurious complete() and causing the new command to instantly
+return with stale data.
+
+> =20
+>  	ret =3D qnap_mcu_write(mcu, cmd_data, cmd_data_size);
+>  	if (ret < 0)
+>  		return ret;
+> =20
+>  	serdev_device_wait_until_sent(mcu->serdev, msecs_to_jiffies(QNAP_MCU_TI=
+MEOUT_MS));
+> =20
+>  	if (!wait_for_completion_timeout(&reply->done, msecs_to_jiffies(QNAP_MC=
+U_TIMEOUT_MS))) {
+>  		dev_err(&mcu->serdev->dev, "Command timeout\n");
+>  		return -ETIMEDOUT;
+>  	}
+> =20
+> -	if (!qnap_mcu_verify_checksum(rx, reply->received)) {
+> +	if (!qnap_mcu_verify_checksum(mcu->rx, reply->received)) {
+
+[Severity: High]
+This is a pre-existing issue, but could this cause an integer underflow and=
+ a
+kernel panic if reply->received is 0?
+
+If qnap_mcu_receive_buf() evaluates reply->received =3D=3D reply->length and
+zeroes reply->length, but is preempted before calling complete(), the
+original command can time out.=20
+
+A new command could then call qnap_mcu_exec(), setting reply->received to 0.
+
+If the preempted receive thread then resumes and calls complete(), the new
+command will wake up and call qnap_mcu_verify_checksum() with
+reply->received =3D=3D 0:
+
+drivers/mfd/qnap-mcu.c:qnap_mcu_verify_checksum()
+	u8 crc =3D qnap_mcu_csum(buf, size - QNAP_MCU_CHECKSUM_SIZE);
+
+If size is 0, this underflows to the maximum size value, and qnap_mcu_csum()
+will loop reading sequentially out of bounds until it hits an unmapped page.
+
+>  		dev_err(&mcu->serdev->dev, "Invalid Checksum received from controller\=
+n");
+>  		return -EPROTO;
+>  	}
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260802135307.3138=
+0-1-ali@iusegentoo.com?part=3D1
