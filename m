@@ -1,70 +1,70 @@
-Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com [209.85.210.49])
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 027E83A75A8
-	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 05:15:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A95B13932FF
+	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 05:15:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.175
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785734156; cv=none; b=dfSTpL+rxDQ4E31Z/eANneDGkiVDXSbzJO7H4IRM/u3LUKMMZIumtIGwdTHneeVtVhqopr8xteXotLorbTDUAIV72XyD9po88m4z0hzi7n2p9g4TI036nm/TfbkL4wP8qvr25m9DMiIC3wi5mheRMq5rvKyevLdVwQZFPfHs15o=
+	t=1785734156; cv=none; b=X06F2m5OPa7Zo61DmeRHMYsQcn+xP1Wu/WrYJ1JaJHm6V57quJAumqznLoCVPMNwA/2LUV6LLcu4kpcVeLXq7JPfTAWsE06v4gwO4FSZDsbJqSYyYEmGPvWLGdGvLYn3JNfSFIzBosbKf1REAvIz/09QY4D94oSI4CbLuJzXNIo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1785734156; c=relaxed/simple;
-	bh=gC2dTirWRvmFzKHVs4SyB39x7wyh/gb+c26PdnYQrvQ=;
+	bh=6ziM+f30xkSte3zlDzpBhj7lMZ8ieILh8cGDDWCvnhA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=brJsJ0eQaRBtNGFEalNPYADEsBtDBgydvM0NMW3RYACeOFbkvSySuis4c34oSP835My/BGJ4WPzpfW6QVwJevWJDu3MGmHUMz2MxUEU8DSK5gJuLCD/HeAKLKFyazq7DcpQCKuPS0uGtVvqD3CrqzyC6/6LCZTKJuhzGYf6kbi8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RNwVs8AL; arc=none smtp.client-ip=209.85.210.49
+	 In-Reply-To:To:Cc; b=LA97v0XalKhoHc311EP1WH97fEILkF78k7h9oq6YDvM6f7ZDOQReMGvyrKkFO/fcxyMH1eGDzYrUKO68v/vCKv48Hekqon9/PZiXqB5i64gmML+jplpJi3dDS19JPgrz4nGuCR7Xa7zdI9xtT+RMx4GQccaAe4t6iBgfsftXhyU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VPHjWEgi; arc=none smtp.client-ip=209.85.167.175
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RNwVs8AL"
-Received: by mail-ot1-f49.google.com with SMTP id 46e09a7af769-7e6b554044fso2627379a34.0
-        for <mfd@lists.linux.dev>; Sun, 02 Aug 2026 22:15:53 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VPHjWEgi"
+Received: by mail-oi1-f175.google.com with SMTP id 5614622812f47-497d3e4460aso3200694b6e.1
+        for <mfd@lists.linux.dev>; Sun, 02 Aug 2026 22:15:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785734153; x=1786338953; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1785734151; x=1786338951; darn=lists.linux.dev;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=1CvTLJea6zWTpGRaWOgZzRKuhjdqcAVM/Zr8VD5aTmI=;
-        b=RNwVs8AL1R8eaFTmYHqUyOSZePPd345MyOTaJJ9iF4YcvbUR52fpVFgUqy8J71MStf
-         00uo6HZqLpcxt1DtwaG4FbvngYJHIrMDpYuSvFk3Ce/0Ay3mpqkr2jqP2vc7JDNM3gxx
-         ZksOVdWZ7Xqx9CbGDxzrxUyle7coyfjCt73iGZDz+/ZpTa89vOgH3wBT2p/wocNYfmwt
-         NS/R65KzQ/dwtLTN/NjdBGyHHGYMuTaIFUf/5it26sOLrcRYsWRNbSAJSCFnbyffzeUQ
-         Ekua+S3vLw8VXHz6tmzzlfjv76atTfalxtuHPyNspJuaetwhoKaHCnt+brGm/fiyAnus
-         seQw==
+        bh=e9FeknYPclzv16XYXDkTzfHxoN/DCYzLCAYv6oC+ejo=;
+        b=VPHjWEgiiLRJYJE2xhv3ovGySiPueX8vJt2KNfKMi7iHnvep++xlNRLsTHH1TWFOjK
+         b6sgdHxUttTEl7oU/PajYc4YCrVFeoQdOLOBOBDQsZCc5Ir7w17sUbuosHB27jkdimoc
+         Upqsl/oanKcHBGUKqsS7NN5F3hvjfR6/LoOxBOCOi7Bw1u60ZBPYRXhdCvOmJytd9D5w
+         ixxEkUbEeflkNWDaAR1rTClUuUAtA6qWBllD4mUaVmAbV7i1YcXVlUZT7tl2UmMAWL/6
+         kRJU7gdrdbeHTWA3VYq1RrKsRZGSKGAW63OOOAEKjYNheiD7r/2zHblsa/mUB+VM01Zv
+         1exA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785734153; x=1786338953;
+        d=1e100.net; s=20251104; t=1785734151; x=1786338951;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=1CvTLJea6zWTpGRaWOgZzRKuhjdqcAVM/Zr8VD5aTmI=;
-        b=h0o2akx5Oe6PVqgw68oiOj9lI91a44rgW6nPMDDnBF2eY7LSuqMxQY/+J0C/W8qACJ
-         6CjbQULCaKD7g06Ha7OtMcBrTjSMfzMg6TaGC+i9zXgeFnqvhvjKEaLF5TFtwc9iothW
-         32A8nzwFBuzK0zPKOZdgtuRCGWh1VYcJr0vm2SaTD92KvwvzPESm7wh3Rl2tbDYhfEwE
-         Y2DautCVht1HsL1j+tn9KKYg0Rmfioh2Cd21qX3zTIK6Tj4uApskXn9NUYVJr/e8+OP6
-         iTsTl9wLFZR595cwt4MEqWXBFGxOcH+XR8PLViUcuyOgUH5qB+8JDl99o+NRouWBKJhF
-         hYGQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rob59XseUPZGt+0T0m4TblmfgkmWsHFTiEhtp6G2RR7BhIYjjW2ai+tHz2R6g9GIJTAND0=@lists.linux.dev
-X-Gm-Message-State: AOJu0YxEm+9H3hDD5k1ox7RkIYQfBkOBIpi4N9YqsHcQ1lw1JwJBcbKa
-	AxkZOT1mdI1m+gaG8ABaUMeb4k2ojOALue36wvblKS5SKLt8o/5Noqsf
-X-Gm-Gg: AR+sD11KVjGQ+UyRDLK2KVjHYhwQsHmuVdHY3JE+wNT7ebN8TX2G1RbC1O7LBOB4ybf
-	cCPW9vh7ZPDQmVMKdZPVFUSKuaiGAbBau6xtcTHpSPSRjmsogXV35yk+A/MHaaCFc/icVK3bPAy
-	RwRWMBRGrO/5rew71JK/uUPTDTGWD+mNQ/3wYsCtps719SQfJBeNrSfIn4/IFnBSTc+6x9gfOk3
-	5HGcsgBEujLqTgl/qoEPbElIbeGsqXjTpP5SOKM3ZHCOAABJuHaBd2gs6DRp2+LJ1WqYke3Ga1D
-	w0tcQQCr84byGJ7yIj9KnBLi28O4kfQ/F/kMqO2PwMKfupyix1x5WMoeID3g4K7wgxoUBBONi10
-	D8RIO3QmBkWriB4tkWvKpx2vguVTR/yl5nwKb4VgXQ6ZjLDVeS0F9z5n55KE+Z24/sVGGagJC1s
-	IUh+SobX//QsgPvgqbgVqzroi9Vl1iC8wQnhvq1Mc31hWEbdCvU6yINSKwT3kOwwj8QH3Nfug3j
-	+Y63ly8H2VFw53YTUlwA9cDDxLgWMA8DPlnyz+mmeY4WkeNewlWxQCWvJptUFhvbEewLUUm8S9M
-	dYJ0PAy9EY58U9u5o15Ss4Zla1smSHZhotD9C+n9OqXQF0nNdUwgrR7m3UU42Pysx82SQtN2H+o
-	CfzTryKGa9F3URaAk
-X-Received: by 2002:a05:6830:398d:b0:7dc:e090:68a with SMTP id 46e09a7af769-7f1969181f7mr14873339a34.0.1785734152850;
-        Sun, 02 Aug 2026 22:15:52 -0700 (PDT)
+        bh=e9FeknYPclzv16XYXDkTzfHxoN/DCYzLCAYv6oC+ejo=;
+        b=jerjrHWvMKyjv5BXgUn8sUvQSMo1f/QvSTh+hgv5JAH7DAKwQ4iPoupE2o/Pi458GE
+         8rbSP8DJIpAcUdOXBwB7XHVHi2ND8B4ksAtmosTrPvjMIZSN6426uI7hJDywYQyEdHfI
+         pkjkO5mnnWpEj2mwF0gaLOaN0n+DMwITt9cdHMMBTnJ6NPKrqyDtYAMhor6uyANEFcQL
+         zqo82mLQj/zOATHo984T8L89Jh+0dR04MmzcwCnWuKS2lfiFWLe5DB5aiQ9KvxZQTyWi
+         LV87eU8QZWUdCzyUXAV+9OhVI1ZIx7GtXiqpYc/cCAt0xT9yxeRxJrG01ZVh86lreEo5
+         cv+w==
+X-Forwarded-Encrypted: i=1; AHgh+RrfNLVeTkxTXqtY9sv06Lif7xCgfV4m08qWptk1/FFdwDtdQJGf/lCzPQgTHuRyKFZj+ME=@lists.linux.dev
+X-Gm-Message-State: AOJu0YyIVHMlTYyM9iIxOkLDhV/GZA8Gv9xZ8KBYzP5ZFO5lWVujOo7h
+	9PBFPdUuANV7//fqQ/G9mY37+tR17pDNPFfA7dLImuJxXIXZkbb45MOZ
+X-Gm-Gg: AR+sD12RKhVM8Rei7hJlDrqfQAquGDY0erk5EYh3UfsaZZJZBM3QhqjpvDksJSHuil+
+	ysUGeoyCn5qPQX6IoYVliUPbnDZQl9UTT3yyf9I0/Sz46rVwRG+Z04kEzRioud/TSFLLtXLvleP
+	YohaHgheahDRAW7BuhwM8fYetKRsuZWIAWJOHZPUTNTCaPzKjRPpLZtllziNSRmE1FLYRJB6Bmq
+	lDfVvRucqWg8bYAMldhB0sCS4M/A6dxCKnNk+dEei83upQbyQLRIsHOTLFbZVVTfPtVRxw8EoFq
+	FpylxrGl6hkAPK+lFr0V3130dZGoDzC3udBkvp0rmk+BucFJiyUOH3GdsXNhDb4eN0IFsJhXP8D
+	/VdYzqEvdEMXD9fKXrv6o3JKDotumr8/2Fg2ykWFRERAQJ+NsCUgIdgxaGP9wYG27ynpxK0INPm
+	Ru7nHfZkx6xatbMHbbVeNB6TT7J7v7uYV/lwp/50ZLrDrxlIsIAESkAlC4Pr2MiIVq4ml2EPKoo
+	cq85ednkZ9Mgsgk92rh9BQqELQHyZrJgTMXVDIWV8pqJEsrB9/KxEAybun+IQQzaWfVdccsLqfC
+	CG53uN8fAy1WIj6x7z7AF97JKjF/cw7obMgMNMhqiOKpC4xsqcd+C52/k3P09Oq0p/hKV5Nb+dv
+	A/kkO88Cl7dlyLbJX
+X-Received: by 2002:a05:6808:1797:b0:495:f697:92d9 with SMTP id 5614622812f47-4ae3188b02dmr15246163b6e.7.1785734151556;
+        Sun, 02 Aug 2026 22:15:51 -0700 (PDT)
 Received: from [127.0.1.1] (184-96-154-59.hlrn.qwest.net. [184.96.154.59])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7f18f07a5e3sm6787108a34.15.2026.08.02.22.15.51
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7f18f07a5e3sm6787108a34.15.2026.08.02.22.15.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 02 Aug 2026 22:15:52 -0700 (PDT)
+        Sun, 02 Aug 2026 22:15:51 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Sun, 02 Aug 2026 23:14:30 -0600
-Subject: [PATCH 20/21] arm64: dts: allwinner: h6: tanix: enable AC200 EPHY
+Date: Sun, 02 Aug 2026 23:14:29 -0600
+Subject: [PATCH 19/21] arm64: dts: allwinner: h6: add AC200 EPHY resources
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -73,7 +73,7 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260802-submit-acx00-of-dynamic-v1-v1-20-0a53cd9e21cc@gmail.com>
+Message-Id: <20260802-submit-acx00-of-dynamic-v1-v1-19-0a53cd9e21cc@gmail.com>
 References: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
 In-Reply-To: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
 To: Andrew Lunn <andrew+netdev@lunn.ch>, 
@@ -102,104 +102,138 @@ Cc: netdev@vger.kernel.org, devicetree@vger.kernel.org,
  James Hilliard <james.hilliard1@gmail.com>
 X-Mailer: b4 0.15.2
 
-Enable the AC200 control path and RMII Ethernet link on the Tanix TX6
-family, and provide the board's 3.3 V rail to the AC200 function supplies.
+Add the H6 I2C3 controller and pinmux, the PWM-derived 24 MHz AC200
+clock, SID calibration cells, RMII pinmux, and the AC200 MFD and EPHY
+control nodes.
 
-Route the PHY interrupt through the AC200 interrupt controller and mark
-it as a wakeup source for link interrupts and magic-packet wake.
+Describe the co-packaged AC200 INTB output on PB20. Keep both reusable
+AC200 nodes disabled so boards must explicitly enable the parent and its
+EPHY control function when the companion is present.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- arch/arm64/boot/dts/allwinner/sun50i-h6-tanix.dtsi | 45 ++++++++++++++++++++++
- 1 file changed, 45 insertions(+)
+ arch/arm64/boot/dts/allwinner/sun50i-h6.dtsi | 73 ++++++++++++++++++++++++++++
+ 1 file changed, 73 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/allwinner/sun50i-h6-tanix.dtsi b/arch/arm64/boot/dts/allwinner/sun50i-h6-tanix.dtsi
-index bb7de37c0d58..6cd75961e3cc 100644
---- a/arch/arm64/boot/dts/allwinner/sun50i-h6-tanix.dtsi
-+++ b/arch/arm64/boot/dts/allwinner/sun50i-h6-tanix.dtsi
-@@ -7,9 +7,11 @@
- #include "sun50i-h6-cpu-opp.dtsi"
+diff --git a/arch/arm64/boot/dts/allwinner/sun50i-h6.dtsi b/arch/arm64/boot/dts/allwinner/sun50i-h6.dtsi
+index 72ce1a75647b..55e6e185a4e5 100644
+--- a/arch/arm64/boot/dts/allwinner/sun50i-h6.dtsi
++++ b/arch/arm64/boot/dts/allwinner/sun50i-h6.dtsi
+@@ -17,6 +17,16 @@ / {
+ 	#address-cells = <1>;
+ 	#size-cells = <1>;
  
- #include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/mfd/x-powers,ac200.h>
- 
- / {
- 	aliases {
-+		ethernet0 = &emac;
- 		serial0 = &uart0;
- 	};
- 
-@@ -84,6 +86,22 @@ wifi_pwrseq: wifi-pwrseq {
- 	};
- };
- 
-+&ac200 {
-+	ac-ldoin-supply = <&reg_vcc3v3>;
-+	ephy-vcc-supply = <&reg_vcc3v3>;
-+	rtc-vcc-supply = <&reg_vcc3v3>;
-+	tv-vcc-supply = <&reg_vcc3v3>;
-+	status = "okay";
-+};
-+
-+&ac200_ephy_ctl {
-+	status = "okay";
-+};
-+
-+&ac200_pwm_clk {
-+	status = "okay";
-+};
-+
- &cpu0 {
- 	cpu-supply = <&reg_vdd_cpu_gpu>;
- };
-@@ -104,6 +122,14 @@ &ehci3 {
- 	status = "okay";
- };
- 
-+&emac {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&ext_rmii_pins>;
-+	phy-mode = "rmii";
-+	phy-handle = <&ac200_ephy>;
-+	status = "okay";
-+};
-+
- &gpu {
- 	mali-supply = <&reg_vdd_cpu_gpu>;
- 	status = "okay";
-@@ -119,6 +145,21 @@ hdmi_out_con: endpoint {
- 	};
- };
- 
-+&i2c3 {
-+	status = "okay";
-+};
-+
-+&mdio {
-+	ac200_ephy: ethernet-phy@1 {
-+		compatible = "ethernet-phy-id0044.1400";
-+		reg = <1>;
-+		interrupts-extended = <&ac200 AC200_IRQ_EPHY>;
-+		wakeup-source;
-+		x-powers,ac200-control = <&ac200_ephy_ctl>;
-+		x-powers,xmii-rx-clock-inverted;
++	ac200_pwm_clk: ac200-clock {
++		compatible = "pwm-clock";
++		#clock-cells = <0>;
++		clock-frequency = <24000000>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&pwm1_pin>;
++		pwms = <&pwm 1 42 0>;
++		status = "disabled";
 +	};
-+};
 +
- &mmc0 {
- 	pinctrl-names = "default";
- 	pinctrl-0 = <&mmc0_pins>;
-@@ -162,6 +203,10 @@ &pio {
- 	vcc-pg-supply = <&reg_vcc1v8>;
- };
+ 	cpus {
+ 		#address-cells = <1>;
+ 		#size-cells = <0>;
+@@ -314,6 +324,15 @@ ths_calibration: thermal-sensor-calibration@14 {
+ 			cpu_speed_grade: cpu-speed-grade@1c {
+ 				reg = <0x1c 0x4>;
+ 			};
++
++			ephy_calibration: ethernet-phy-calibration@2c,0 {
++				reg = <0x2c 1>;
++				bits = <0 4>;
++			};
++
++			ac200_bandgap: bandgap@30 {
++				reg = <0x30 2>;
++			};
+ 		};
  
-+&pwm {
-+	status = "okay";
-+};
+ 		timer@3009000 {
+@@ -368,6 +387,13 @@ ext_rgmii_pins: rgmii-pins {
+ 				drive-strength = <40>;
+ 			};
+ 
++			ext_rmii_pins: rmii-pins {
++				pins = "PA0", "PA1", "PA2", "PA3", "PA4",
++				       "PA5", "PA6", "PA7", "PA8", "PA9";
++				function = "emac";
++				drive-strength = <40>;
++			};
 +
- &r_ir {
- 	status = "okay";
- };
+ 			hdmi_pins: hdmi-pins {
+ 				pins = "PH8", "PH9", "PH10";
+ 				function = "hdmi";
+@@ -388,6 +414,12 @@ i2c2_pins: i2c2-pins {
+ 				function = "i2c2";
+ 			};
+ 
++			i2c3_pins: i2c3-pins {
++				pins = "PB17", "PB18";
++				function = "i2c3";
++				bias-pull-up;
++			};
++
+ 			mmc0_pins: mmc0-pins {
+ 				pins = "PF0", "PF1", "PF2", "PF3",
+ 				       "PF4", "PF5";
+@@ -414,6 +446,11 @@ mmc2_pins: mmc2-pins {
+ 				bias-pull-up;
+ 			};
+ 
++			pwm1_pin: pwm1-pin {
++				pins = "PB19";
++				function = "pwm1";
++			};
++
+ 			/omit-if-no-ref/
+ 			spi0_pins: spi0-pins {
+ 				pins = "PC0", "PC2", "PC3";
+@@ -626,6 +663,42 @@ i2c2: i2c@5002800 {
+ 			#size-cells = <0>;
+ 		};
+ 
++		i2c3: i2c@5002c00 {
++			compatible = "allwinner,sun50i-h6-i2c",
++				     "allwinner,sun6i-a31-i2c";
++			reg = <0x05002c00 0x400>;
++			interrupts = <GIC_SPI 7 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&ccu CLK_BUS_I2C3>;
++			resets = <&ccu RST_BUS_I2C3>;
++			pinctrl-names = "default";
++			pinctrl-0 = <&i2c3_pins>;
++			clock-frequency = <400000>;
++			status = "disabled";
++			#address-cells = <1>;
++			#size-cells = <0>;
++
++			ac200: mixed-signal@10 {
++				compatible = "x-powers,ac200";
++				reg = <0x10>;
++				clocks = <&ac200_pwm_clk>;
++				interrupt-parent = <&pio>;
++				interrupts = <1 20 IRQ_TYPE_LEVEL_LOW>;
++				interrupt-controller;
++				#interrupt-cells = <1>;
++				nvmem-cells = <&ac200_bandgap>;
++				nvmem-cell-names = "bandgap";
++				status = "disabled";
++
++				ac200_ephy_ctl: ethernet-phy-control {
++					compatible = "x-powers,ac200-ephy-ctl";
++					nvmem-cells = <&ephy_calibration>;
++					nvmem-cell-names = "calibration";
++					phy-mode = "rmii";
++					status = "disabled";
++				};
++			};
++		};
++
+ 		spi0: spi@5010000 {
+ 			compatible = "allwinner,sun50i-h6-spi",
+ 				     "allwinner,sun8i-h3-spi";
 
 -- 
 2.53.0
