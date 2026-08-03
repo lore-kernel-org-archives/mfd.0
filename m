@@ -1,59 +1,98 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C293C175A9D;
-	Sun,  2 Aug 2026 21:26:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40C303128D9
+	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 02:41:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.8
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785705965; cv=none; b=fZxiTQ6OGneatJ6jr9B15OpxyJdLL0gERu7It+sOh8Ny40maCbDLMnqVi0rwyqqZT55lE83ivCw+YKkTxr2r27kO1pBX1fXdNkgDVQtBfJPB0IOmdiT6Fppg5rFpB0NjNtgjwCXL02MDVQxSLYzP1YDmljPDKGP9mJBZvUv/coE=
+	t=1785724884; cv=none; b=df5UO9Qkkp47sE5nizU9Qp4Vva2GHGLKZHUbbsCGKhyg4T/Rr5lBnImR97oPxhGnOCEIOb4sxns1oeffMKycMMmb+X81+sEDxc0a1UkDJFYAj6csQpLCJgpjZVUNI2oPaXoJyeH/+5GzwpDIUTNm55F4NyMLYo2EI0APAUiE3Sk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785705965; c=relaxed/simple;
-	bh=0gkFw9OMVdRNv6WvW4l3U8SpNesPnDmt+Ie557rJdLQ=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=OyYHK3OuI8VVaa3zol2SiGPR++4VfbV3PDBUOIZGiyq40MVwqJUSkDjHymlB9X5QPsPKaVCCNrmLeJ2XrcIa2GtlTeIpfIGadYafqPOgvZOcff5kC3LVIDN/KQcohSI85koxhpYeUTwH2hrNMOI0ycSuFdRWHevHCQSgl2ewqGQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WPvM84SC; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785724884; c=relaxed/simple;
+	bh=nnBV8pcGhykxzgKZkuQgsbVei/LCOv2yV4ZSpmm0jq0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=FVLIy/MXXFy8NMzbRCPPPyVkhEa7CWNWxcSLZFWU8eT5TMmw7zi2KXwGsfiDnh2x+KIxoffsTVgFr8XxrND5w04JEZULDhCrmkqbLbLVZXV9iUIXzMlBdC1MAkDVdWi0QV4n1dReuVkvOeF3tEgRM91goLnqZ6ELolmIKPTV3JY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=mXg9ZMph; arc=none smtp.client-ip=192.198.163.8
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WPvM84SC"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D401F1F000E9;
-	Sun,  2 Aug 2026 21:26:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785705964;
-	bh=0gkFw9OMVdRNv6WvW4l3U8SpNesPnDmt+Ie557rJdLQ=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=WPvM84SCAwFKe9STRRdRIJfLGMyHg154aNpjSRXWjs2RLwBXAX9reYD9FBaYtpG7R
-	 S/BmTwMLMmg7zHL5yKDBvN4FpAAMQzOZ/O/GgcIBajUUjxiXI4w5iykWWF8Rtnzj0m
-	 Fqq08nXxKfi6N7mRni7NV4LF914GN+F1QioMIAYS7r5xzBy8YbtQCV8m09abL5wpbe
-	 voO3UyCf8JKenmd0dSjltzL3mo+jK6bBdRGa4NV+HMlfoGObviztcf/zcBqt36F6Zy
-	 ZUhRQCmVUWrUtd0jMJE3A9JbJguvMBCsjcXph0gjkhIFYK8XDlx1/IxUUNWoc1MV1W
-	 JUxEdt1Zkj83g==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v9 09/12] clk: zte: Introduce a driver for zx297520v3
- matrix clocks
-Reply-To: sashiko-reviews@lists.linux.dev
-To: =?utf-8?b?U3RlZmFuIETDtnNpbmdlcg==?= <stefandoesinger@gmail.com>
-Cc: mfd@lists.linux.dev, olteanv@gmail.com, linux-phy@lists.infradead.org, conor+dt@kernel.org, vkoul@kernel.org, neil.armstrong@linaro.org, robh@kernel.org, lee@kernel.org, devicetree@vger.kernel.org
-In-Reply-To: <20260802-zx29clk-v9-9-d05530d85d28@gmail.com>
-References: <20260802-zx29clk-v9-0-d05530d85d28@gmail.com>
- <20260802-zx29clk-v9-9-d05530d85d28@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Sun, 02 Aug 2026 21:26:03 +0000
-Message-Id: <20260802212603.D401F1F000E9@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="mXg9ZMph"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1785724882; x=1817260882;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=nnBV8pcGhykxzgKZkuQgsbVei/LCOv2yV4ZSpmm0jq0=;
+  b=mXg9ZMph3ubqm0cFvTZ85FoioAPdvU0w2ZDZ8pyZShIOz+ePeN73BpjO
+   p6ik/TCWjWSgHu+40Yj8OX0ZdTsoXIs3mAMswJw+bdp/lvyt9VKj8+2dx
+   iaSsqniBOQWJHiiGKPdHLuwb7ouB9NAbOpeaDBIuqlE9zJiycRqN4fOl2
+   XthZfrTEpY9IKS66Df4y8K7EAU6SbZBDLmC3aS9dObJlWHQgT4Ddiq1M0
+   TMWkZq8z9ONEVCIah8sDyF1+/rjr0BTfPG2PZJv9qgvcHkKpbDJH8/wfZ
+   WzmIIOjLQSsPGpodoBWtjn91wrdOF5Ya1X1PEEhBdGBkiUkXHExc2lXRh
+   A==;
+X-CSE-ConnectionGUID: JhwtsgNeTBmp31z4O82OOQ==
+X-CSE-MsgGUID: de6FaE9bTnaUHwTkBihDng==
+X-IronPort-AV: E=McAfee;i="6800,10657,11863"; a="103796919"
+X-IronPort-AV: E=Sophos;i="6.25,201,1779174000"; 
+   d="scan'208";a="103796919"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Aug 2026 19:41:21 -0700
+X-CSE-ConnectionGUID: +RkGUIIBRQ+ge/gYQzYg1Q==
+X-CSE-MsgGUID: k4rOMK/8RxiUjOdiM2WXSg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.25,201,1779174000"; 
+   d="scan'208";a="256769761"
+Received: from yilunxu-optiplex-7050.sh.intel.com (HELO localhost) ([10.239.159.165])
+  by fmviesa006.fm.intel.com with ESMTP; 02 Aug 2026 19:41:19 -0700
+Date: Mon, 3 Aug 2026 10:41:18 +0800
+From: Xu Yilun <yilun.xu@linux.intel.com>
+To: Ionut Nechita <ionut.nechita@windriver.com>
+Cc: Xu Yilun <yilun.xu@intel.com>, Tom Rix <trix@redhat.com>,
+	Moritz Fischer <mdf@kernel.org>, Lee Jones <lee@kernel.org>,
+	linux-fpga@vger.kernel.org, mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	Russ Weight <russell.h.weight@intel.com>,
+	Tianfei Zhang <tianfei.zhang@intel.com>,
+	Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>
+Subject: Re: [PATCH v2] fpga: m10bmc-sec: add image_load sysfs for N3000 and
+ D5005
+Message-ID: <am//znBXTh9eV5CC@yilunxu-OptiPlex-7050>
+References: <20260724192117.60493-1-ionut.nechita@windriver.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260724192117.60493-1-ionut.nechita@windriver.com>
 
-> This clock controller controls high speed devices: CPU, DMA, RAM, SDIO,
-> Ethernet. The only non-clock, non-reset registers I have spotted here
-> are hardware spinlocks.
->=20
-> Signed-off-by: Stefan D=C3=B6singer <stefandoesinger@gmail.com>
+> on N3000 that reboot also resets the FPGA and drops the PCIe link, so the card
+> leaves the bus and re-enumeration is left to userspace. Nothing is quiesced on
+> the kernel side first. That is documented in the ABI file rather than handled,
+> because I do not think it can be handled meaningfully inside a single driver:
+> the blast radius reaches the other functions of the card, and where it has to
+> be dealt with is the bus layer, not here.
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+Yeah, so what I've got from your description is that the user API is located at
+the wrong place. It should be located in a place that can properly
+quiesce and unregister all affected devices before the reload.
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260802-zx29clk-v9=
--0-d05530d85d28@gmail.com?part=3D9
+[...]
 
+> For the generic side I would propose, and can post as an RFC if you agree with
+> the direction, an fpga_image_slot class: one device per reloadable slot, with
+
+We had quite a lot of discussions about the uAPI for fpga region
+reprogramming before and WIP. Although the reprograming from nvram doesn't
+require a user input binary blob, the main concern is the same - how to
+gracefully quiesce the affected devices, and how to re-enumerate the new
+programmed devices.
+
+> the slot name and a "disruption" attribute reading none, device_reset or
+> bus_reprobe, so that userspace knows what it is about to trigger before it
+> triggers it, while drivers keep only their load callback. One detail worth
+> flagging early: a reload triggered from a sysfs store handler runs with the
+> kernfs active reference held, so any slot whose reset removes the device needs
+> sysfs_break_active_protection() or device_remove_file_self(), or the store
+> deadlocks against its own removal.
