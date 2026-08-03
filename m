@@ -1,153 +1,112 @@
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0BA42423A66
-	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 17:20:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EEF23955D8;
+	Mon,  3 Aug 2026 17:48:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785777652; cv=none; b=JT3pHQijOwHEWeTizHPml9pfv38cwmI63vVnclvlwbfi/IqzM34ZESdFgPcbBRpaeacTT0W+UgIiXGJRxmIHCOyf4pZRwACRPMotgl501BzjxrdYqioitC6iTm09IRlel3IoEPKvWTnrV+VQC/FiiEmY+/YldLFSaNxobvZH9Q4=
+	t=1785779307; cv=none; b=QB4Ia2mxElafoTfDh4eVVw+EwpCZrctHURt6oqr4dP//Y1lEUhpOygLOHwlWYXmjCGFDaj8nU8OBNf8o/g6GyRrfp4BNVVOI9+bCsuitspByZM+gel/17kVOB5qzmnvqSBzzuqQu6bUHjdTedvemIIHHoTaL/ALjo3BvhLQ6RVI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785777652; c=relaxed/simple;
-	bh=zyYG03tMhaObC+0HIHVJK8kKJMjB519sRgHuPqlpedo=;
-	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
-	 Message-Id:References:To; b=I/rn2FwPpyInNLmKNiyZPhrCcIPPztZqvpGMSUJC0Jm/tq4mEAa+GEC7DPAMo9Y6YCwQfaf27uuyLBGnAOQqBwvA6mbaYCsFklKMa8HFmfxuirsiJrKWX6smIEfKmCuxPTkBhpIwxV3ulg92TobdnYpNrcl7QB9qiFHefquldUQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VKExgmcm; arc=none smtp.client-ip=209.85.210.171
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1785779307; c=relaxed/simple;
+	bh=65cb7UEHUvs9af0Ej+kL97qAT27LpOyQMo8mrY/QLik=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=uO2kGNc8vHV1ucw58dFTTopdo0OO7+N9InqvqsBoC6OH7zAZAVkcuBN8k6OusrQ7WF0XZhKucuUyBcW42Yl26MvcIAatKvXFpd9XMja4ShLLeJPvByg/ZlVpwIIl8HUKLsmVtf5DxYUB570KyqcSu8fGOVgAuOJP1FKnzJgtTMk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=u1kXI2+R; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VKExgmcm"
-Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-848c995c29dso295890b3a.3
-        for <mfd@lists.linux.dev>; Mon, 03 Aug 2026 10:20:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785777648; x=1786382448; darn=lists.linux.dev;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:content-type:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=zyYG03tMhaObC+0HIHVJK8kKJMjB519sRgHuPqlpedo=;
-        b=VKExgmcm55JpD9aZnpW5r3PtCf19z4hmXvf75hEhs2NLWgC0j70rCXIHvO3ecx+kLr
-         JXpFyuxyLmj567Nd7++DZzG+U+BmjkrfIncVVU6x5laOifcVN4LkfOuc75JV0+qtlv2P
-         1BF+r6OQH4ALh1gzQ+Ky4aLT+NpOOjrbX3I1cFe7FyxlbORKoonKc+4mg0+Pq+rSuPKT
-         jTMGxSGmXMBz91sml2YyE/id9+k3T078gix92Fb+cbJbZ/mmwaIZlXroeAO4RnnmvdKC
-         8QQsMUGFAQ8JYVVJhVR1k66+ZR6TC6p7GuE/hivDaloT46TMyMjVKYFXwRyuxhC6XA6j
-         Z6YA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785777648; x=1786382448;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:content-type:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=zyYG03tMhaObC+0HIHVJK8kKJMjB519sRgHuPqlpedo=;
-        b=W/onxxiSjDrbQx8DsnF+48MxndFL1E+Wc9Ir0vfOF9uO0aZ9N2gnYTrU8/DrqfBXuo
-         zQTYMlhR1jVUbipCZbM5t2JgjGqzDMkJdsWVN7AK6cBtA92+23DMPfTmQXlt8DGZGcG+
-         nmAIghhAgjP+wRFuIFXo5nV8IzsWxYyhJcHuzxXhowVfk1WPujEqJtkLUAsGrzR+470Y
-         2KWlvManmnwmOo3IQd/3mbjdc3n2aOxWNzIv5YbLCv/cb+kxbLoX/V9aFnnAfE6PuYEQ
-         I1Lhe98voBZ/jlWjCK89hlwd66Je8IQaDGKbajksPj86wWemYp4jjxlrajBVXOu3HufO
-         rozw==
-X-Gm-Message-State: AOJu0YxryzpT6Yu479jxHzMhCtpzEfYhX1zEebD5x0Jjw9YzIcsHUD5r
-	hDbO+Y/gyc5Cyym26K2iiTWxKd8Ju26FUKe7eDIy/kMzjd9DevQ6av6pEAY7TX+v1roKIw==
-X-Gm-Gg: AR+sD106MeesOssg0dcxuptz5aXXMODKTy7tteiRPub7VStuy9YZ4EGaOkWiUnYhHnM
-	Fl6xynq6Vq3NeLSjHjcMv2kdCI7PzfroF5CXj625Tp9FE6/PopoLIOLn6E512gbQJW8/w+jW4/j
-	KwKPseIxgWNLwBf+jWs90CW4jLendjhFsljxiP1h32vS6+tmnwn64thuvfcSyCBQllA4EsMuyJI
-	YA4gXN+9jEM6IWpwF82WXeJz1xRtIWGJuvs0dzZZhGpv92FiuzPniW2nKi3w9JCvxXIDX7noYaS
-	OQyCKj9d74UG9yGdFeqiY+8CS3ORqwWczhKjEWzPuo4/hEd1SkuPqKWXchDD+KLItLopwRLcVZz
-	AxN+D8sNwYoHTzEMscgHFlyMrjCiYIgXC3u/8uzCyY1DsfIt3sRTWMae2Dh6HzuWKwm3Zwwp/8E
-	q9q7m2Bk6PqXYKVat+HGFiAOrujScEYSrdHHf3lIbNGA2tTLPVz9tovhaU646a7ATf9iZ5fnOt0
-	H5MIuD/u2o=
-X-Received: by 2002:a05:6a00:420e:b0:848:5451:cfa8 with SMTP id d2e1a72fcca58-84ee45ad582mr14064936b3a.0.1785777648119;
-        Mon, 03 Aug 2026 10:20:48 -0700 (PDT)
-Received: from smtpclient.apple ([23.247.139.92])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84edbe7a243sm3996750b3a.24.2026.08.03.10.20.46
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Mon, 03 Aug 2026 10:20:47 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="u1kXI2+R"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Transfer-Encoding:Content-Disposition:
+	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:From:
+	Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
+	Content-Transfer-Encoding:Content-ID:Content-Description:Content-Disposition:
+	In-Reply-To:References; bh=cSyyM7BUXIDF3kJhgyCmgOwoW98OlpC1I9i3DPZMz2s=; b=u1
+	kXI2+R12w43beaPSCbM1HCJtvorD9d3Ebq53sQZR3ik4voCij2lPlW5oXM+0wRshrRMCr87mcUHo7
+	XN23BeKdWZNVXSS4v3jExOreZBR9tOxH6d4xKQfMcUyCUx/18N/JTdJBnEYVUqcMnpK/q5TYssUsX
+	zXFXTFEDjez0ehA=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1wqwlg-00Fn1q-LQ; Mon, 03 Aug 2026 19:48:04 +0200
+Date: Mon, 3 Aug 2026 19:48:04 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: James Hilliard <james.hilliard1@gmail.com>
+Cc: Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Chen-Yu Tsai <wens@kernel.org>,
+	Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Samuel Holland <samuel@sholland.org>,
+	Andre Przywara <andre.przywara@arm.com>,
+	Richard Genoud <richard.genoud@bootlin.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Giuseppe Cavallaro <peppe.cavallaro@st.com>,
+	Jose Abreu <joabreu@synopsys.com>,
+	Maxime Chevallier <maxime.chevallier@bootlin.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Saravana Kannan <saravanak@kernel.org>, Lee Jones <lee@kernel.org>,
+	Heiko Stuebner <heiko@sntech.de>, netdev@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	linux-sunxi@lists.linux.dev, linux-kernel@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com, mfd@lists.linux.dev,
+	linux-rockchip@lists.infradead.org
+Subject: Re: [PATCH 10/21] net: phy: add X-Powers AC200 EPHY control driver
+Message-ID: <9b8be475-1fde-409c-a82e-be4b2e402650@lunn.ch>
+References: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
+ <20260802-submit-acx00-of-dynamic-v1-v1-10-0a53cd9e21cc@gmail.com>
+ <05b1e6a2-725e-4b8e-8629-249637bbcb81@lunn.ch>
+ <CADvTj4o0JdjoO+FC4pO=qnjEQ8MRyzQdKp2Hxy9NsPU-gym5OQ@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81.1.8\))
-Subject: Re: [PATCH RFC v3 7/7] mfd: ls2kbmc: Capture the reset event of BMC
- through GPIO
-From: Miao Wang <shankerwangmiao@gmail.com>
-In-Reply-To: <20260725211039.GF3526803@google.com>
-Date: Tue, 4 Aug 2026 01:20:33 +0800
-Cc: mfd@lists.linux.dev
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <040B2A9C-4411-48B3-8FCF-46623B85F532@gmail.com>
-References: <20260710-ls2kbmc-mod-v3-0-ef718636e78e@gmail.com>
- <20260710-ls2kbmc-mod-v3-7-ef718636e78e@gmail.com>
- <20260709174055.D25E71F00A3A@smtp.kernel.org>
- <20260723112903.GB3363113@google.com>
- <E1909632-6D06-4648-986C-6B7867D231DB@gmail.com>
- <20260723131120.GL3363113@google.com>
- <73FED0CE-3263-4853-9402-5D0E081EF780@gmail.com>
- <20260725211039.GF3526803@google.com>
-To: Lee Jones <lee@kernel.org>
-X-Mailer: Apple Mail (2.3826.700.81.1.8)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CADvTj4o0JdjoO+FC4pO=qnjEQ8MRyzQdKp2Hxy9NsPU-gym5OQ@mail.gmail.com>
 
-Hi, Jones
+On Mon, Aug 03, 2026 at 10:09:01AM -0600, James Hilliard wrote:
+> On Mon, Aug 3, 2026 at 7:51 AM Andrew Lunn <andrew@lunn.ch> wrote:
+> >
+> > > +static int
+> > > +ac200_ephy_ctl_set_led_outputs(struct acx00_ephy_control *control,
+> > > +                            unsigned long outputs)
+> > > +{
+> > > +}
+> >
+> > > +static int
+> > > +ac200_ephy_ctl_set_led_polarity(struct acx00_ephy_control *control,
+> > > +                             bool active_low)
+> > > +{
+> > > +}
+> >
+> > I've not looked into the details, but these look like pinmux. Does
+> > this I2C device have a GPIO controller? Can these pins be used for
+> > other things than LEDs? Maybe you should be implementing a GPIO and
+> > pinmux driver. The Ethernet PHY driver can then just select the
+> > correct pinmux configuration.
+> 
+> These do not appear to be GPIO or muxable pins. The AC200
+> documentation describes them as three dedicated EPHY LED
+> outputs: link/activity, speed, and duplex. The bits in SYS_EPHY_CTL1
+> enable those output pads, while EPHY_CTL provides their shared
+> polarity setting. I have not found any documented GPIO data
+> registers or alternative functions for these pins.
 
-> 2026=E5=B9=B47=E6=9C=8826=E6=97=A5 05:10=EF=BC=8CLee Jones =
-<lee@kernel.org> =E5=86=99=E9=81=93=EF=BC=9A
->=20
-> On Thu, 23 Jul 2026, Miao Wang wrote:
->=20
->> Hi,
->>=20
->>> 2026=E5=B9=B47=E6=9C=8823=E6=97=A5 21:11=EF=BC=8CLee Jones =
-<lee@kernel.org> =E5=86=99=E9=81=93=EF=BC=9A
->>>=20
->>> On Thu, 23 Jul 2026, Miao Wang wrote:
->>>=20
->>>> Hi,
->>>>=20
->>>>> 2026=E5=B9=B47=E6=9C=8823=E6=97=A5 19:29=EF=BC=8CLee Jones =
-<lee@kernel.org> =E5=86=99=E9=81=93=EF=BC=9A
->>>>>=20
->>>>> On Thu, 09 Jul 2026, sashiko-bot@kernel.org wrote:
->>>>>=20
->>>>>> Thank you for your contribution! Sashiko AI review found 3 =
-potential issue(s) to consider:
->>>>>>=20
->>>>>> New issues:
->>>>>> - [High] Unprotected access to `gpio_chip` without a NULL check =
-leads to a potential NULL pointer dereference or use-after-free.
->>>>>> - [Medium] The ACPI memory resource search for the GPIO =
-controller only checks the first memory descriptor, ignoring any =
-subsequent ones.
->>>>>=20
->>>>> Looks like there are a few of these to consider.
->>>>=20
->>>> Many thanks for your response. I was preparing a v4 to fix the =
-first issue
->>>> found by the bot. However, I believe that the second issue is false =
-positive,
->>>> since the memory descriptors (if more than one) in _CRS are ordered =
-and the
->>>> position is meaningful for the driver. As a result, only checking =
-the first
->>>> descriptor is acceptable.
->>>>=20
->>>>>=20
->>>>> I'm unmarking this for review for now.
->>>>=20
->>>> I still want review for other improvement suggestions. Thanks in =
-advance.
->>>=20
->>> Due to extreme workload, I need a clean or justified Sashiko pass =
-first.
->>>=20
->> So is there any guides that I can refer to to mark for false =
-positives?
->=20
-> Most people reply to the feedback and state the fact, with a little
-> background or additional information of course.
+So what i'm trying to do with both of these is make it look more like
+standard Linux building blocks.
 
-I have successfully made the V5 pass the review from Sashiko.
+If that is not possible, i would actually put all this code into the
+PHY driver. You then have a regmap property to gain access to the I2C
+registers.
 
-Cheers,
-
-Miao Wang
-
+       Andrew
 
