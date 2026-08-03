@@ -1,185 +1,149 @@
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+Received: from mail-vs1-f43.google.com (mail-vs1-f43.google.com [209.85.217.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9BC240A940
-	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 17:48:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785779318; cv=none; b=iLTxsmJSCw42zLxjhAY64QY8w9+vzsYwF5zHoSdD7MsWE8Kev7zlmDFfsILgCVKi1OMidE8AbUyeCoCanRUZqH2q2v/li24H/3ViC1DcE0J3WvSgrBdiNq+u3cnoahwUIScoepk1DYrr2W+ZREsZfcxhswK6WnyOOzE1Ed7Gph0=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785779318; c=relaxed/simple;
-	bh=qz7YCBMeFmwfqIQRWfN+FmRZ72NOsmo/ZZAIld/ipvQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=HBxrfIh+8goSYcJ1oh3Zdfh34wrCyjVmy9A3/slVo4kNXhtcseQjnMJMe/RvmMJqTt4W9PxCwK6VxqRnoJhRNSuQsHYhkvEtols6HHihaAFEurHd2yIxXuXRXY9Vj/WqgatGvwyXvJ7f0D5EzCHSzxlD1fEQkgFGhD0mBUZOk04=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=UubzTdZB; arc=none smtp.client-ip=209.85.128.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CDE342BC5E
+	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 18:03:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.217.43
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785780221; cv=pass; b=DCMGMVRrTa30oSz81Hkt8d5P7gcGmZyspT1ANOt43n3ZDcdrE4PPZgX/DUJxNfSZgd/drwrExAwUa0rQmp2uLeurD0ryJ05t/Y/obIwv2Puj/4BKViE8tbuh/zxuLLkpdRHoRtalDNrJowq09bvkuhmUPVu365bXBFFwgSDxBOU=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785780221; c=relaxed/simple;
+	bh=ACfuI3AX9kRQ1+CBBBf5za/2rVC3FsYXI8omco7jK4w=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=a/K16t8cykR6VXhIhckYQIrxiqNyvPvKjltdyYivEkp6gBcR9KqWtcCbpJ9b+22bFaEmEq338AtY+S5uzDq23Rt80U/x3TzOrrAGXhST6Et2Na3zLVrGpC0Eg33nzkM/zfFo+QEaL7Eh17u12B6Lq5di+jX1Duz79P+QsbzjGoc=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VCp/Bzwl; arc=pass smtp.client-ip=209.85.217.43
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UubzTdZB"
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-49554ebb87dso20210905e9.3
-        for <mfd@lists.linux.dev>; Mon, 03 Aug 2026 10:48:36 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VCp/Bzwl"
+Received: by mail-vs1-f43.google.com with SMTP id ada2fe7eead31-73b909fbb6bso2642466137.2
+        for <mfd@lists.linux.dev>; Mon, 03 Aug 2026 11:03:39 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785780218; cv=none;
+        d=google.com; s=arc-20260327;
+        b=QAhWtwCaO290oukAcmRZLsTZVWcGggbE7AqhBrQuS1amI3QpWx7Hi6vU/Q9rlzlUZn
+         DBI1lvwKYusqPTOV/EXv1j2TNCvtNHdMwGUc7e8ngPe2RLrsW32NEYBT8wjXMMYflhzQ
+         wX15cBU6h+8DJsoDQAjTcBzJafVfm+AURsakXqe64CWM/0LSfuDTUvk20ZlEqrwVnpBW
+         TjynBWqHsGc1aThofLjJo/PoGO1EK07Z30CyUd8Ott9qEshmFcUq8VLW4KRuv8w6j7Ib
+         VSXbPpPlzXrVT3kZ3RE7mePMVQTvL3K/AX8ICLh2D1WFHKOiUvfUFxDGRxDZv8ZJ4Yhl
+         7k2A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=2r8t0fZLO1G1B7jNQrzEMX2EdERqWbCFEmueS3AzIlQ=;
+        fh=WkDTp6ji7o3JvHCK/mF4njXAoPnKsFsgXWI8KIAVEqU=;
+        b=hkN4ethNbpGaMUWc8ve3U854ftqo5NCgfKbag2pvk9kig9EO5SmDc2SBCftOeWqcCq
+         QaRkZMc6YDtPlo/Y6HjrSYzBcjqFR3VLY0qUQVxboKygzIV9zdZyVVOoW1OWRAf4VzIp
+         tprs4uoAlxreUzHYYogcnRzh6+x3OuoVRXGeiRgcqv3gZo4R3jlp037zKhr06yZjEe8F
+         IJRERfQ3K0oC1YtaYGBapsXVdJ07N1jjQTKAVaVHIJYuA4Uud4/aTt14I4tf/Bsifrn5
+         UWesFXFJavT1iYDpYM2tLEpnw1vAVr94s5Cb9Ys79A/XecAFJxavSY8kklELNbhECdGC
+         gLcQ==;
+        darn=lists.linux.dev
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785779315; x=1786384115; darn=lists.linux.dev;
-        h=content-type:mime-version:references:in-reply-to:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=HnDKjAsExIlIO6cGLAGlNzQp1IiRGZFjDF5mAKUFBPE=;
-        b=UubzTdZBwfbbJpeWd+vhACYFp7zXm0+Ab+MkyJnWDIC0vzUG5vTFrJA1nzCXXued42
-         4H+JDI+uxXbZSdZx8VIBbJ7CwBYUD9Qk4D4CujULp+sNOmkVU/yetYT1ypzQh6Cxmi2A
-         y1I8MGP2YKm49RXUdrmtaso/NMpo+t+f+RzS2xWepvKTMa8poFq7006NdTHiKubniXtg
-         BG8SK7N/aHVhQfkiTz7Rb12ys7B+0c1QYnP2/XpnpvvzsUDzEkXrqQuYXVr8aJOxZWqV
-         D0V9j6fha29UJlpdnIPYUgj6V3I1E25uM5zVGlxizwB++zJJ0zDUMMeJxkKXRIeVcz90
-         EtOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785779315; x=1786384115;
-        h=content-type:mime-version:references:in-reply-to:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+        d=gmail.com; s=20251104; t=1785780218; x=1786385018; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=HnDKjAsExIlIO6cGLAGlNzQp1IiRGZFjDF5mAKUFBPE=;
-        b=VHvlFtyc3u+SwHWUKr6m9/OQdiJ0RO7fjXWOWqmsD9MFjiECGDrbY1+9gjlWHBba8w
-         2fOfuQSW2LwzncgoXwS8TZ9xzEcG2QAieoGNmUU0lfdpZJfLjJedCTRw7FVz5T6ifHvX
-         TmaFYxbMm22zmmEIjOi3LCKZk51s9on1x2tLJdwBQXYwYReEJTGLhZd9KpcswxnV4Tol
-         Jj3oLGLOhVbE7JJNs6naSEHuw+mpT3YXkXq/pJ8RGIFgUUoJNPUrGgi/rSjA5cHVgFbm
-         tCiFXdyc1LKk5SftvRJcKjiXO2X6Yta2duvg0P+w4QIK8wof7oTKOMCmw5CPpoxbyet4
-         zddg==
-X-Forwarded-Encrypted: i=1; AHgh+RoOZxY8YJxWzr+D8T+fNJbDv16oNiHWU7M+hFn1DEov6TcYMEhNzrp4aS90lTvFjg4sxkM=@lists.linux.dev
-X-Gm-Message-State: AOJu0Yzk03ef2s1fn63itT7F4LO04sEdQkF1FDIl6d7kZ0OG3ZfOb0dU
-	1IrZRE9ho4tPzsTGGSgaCv28N8l3NBb577zZbYD0aBErvTPM1QiIhOjT
-X-Gm-Gg: AR+sD11D10Z1cMrByeAAdH1UanOhqgpTQ6iKcoCBvoR/VBu2TjRC8/z955+0HyHG0fW
-	AOwupQrg78fNIcN7f2M3gTOQP+Yt9WkixwDBo+ReGnOOYSjsNLCSYv1frMGZKhmgmnu0ZdeshCm
-	Ev8wzhbZJJKfrzT2uc1++HdaEF1Khg9q7f65jJl6qG9HyapqirnVJX88VM0gCx6IBG4POoIHr0C
-	UcXPqv75M8K2/tMNntOk+NDoodwepv270tREq7YYL7bzOKVzn97RyZwZ8N1J+dyYj0ucgZ8+IFE
-	61EHR54TLqXXCiGXCb88Vs2LM855YMrpl7DJXPoEJuH6njpd+Ud3eL32SOcDzFE2YuFw24Rd8LD
-	tA71e0zzMt5Bv4gPlI81wJa7AbEkp2JAqavTBOGjAdMX8IfBNR4ir6AhtqeIWWZQZiCxSUbVP+B
-	2b0NytK+GTxH2QSqzHjUL+kUKQEisvo3FETcJ7uQaa64zLsSgVhAmgY6e6UXTF0hf0LSjqeYKI9
-	w==
-X-Received: by 2002:a05:600c:314f:b0:495:4572:21af with SMTP id 5b1f17b1804b1-4980c673252mr206970055e9.9.1785779314611;
-        Mon, 03 Aug 2026 10:48:34 -0700 (PDT)
-Received: from strix.localnet ([197.250.226.155])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49807b5b4a2sm295532795e9.1.2026.08.03.10.48.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Aug 2026 10:48:33 -0700 (PDT)
-From: Stefan =?UTF-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>
-To: Brian Masney <bmasney@redhat.com>
-Cc: Michael Turquette <mturquette@baylibre.com>,
- Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
- Philipp Zabel <p.zabel@pengutronix.de>, Vinod Koul <vkoul@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Russell King <linux@armlinux.org.uk>, Lee Jones <lee@kernel.org>,
- linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-phy@lists.infradead.org, mfd@lists.linux.dev
-Subject: Re: [PATCH v9 05/12] clk: zte: Add Clock registration infrastructure
-Date: Mon, 03 Aug 2026 20:48:18 +0300
-Message-ID: <ky2t5IqOTfWMdfZsXE91Gg@gmail.com>
-In-Reply-To: <anC72Cf1zKcLYWlC@redhat.com>
-References:
- <20260802-zx29clk-v9-0-d05530d85d28@gmail.com>
- <20260802-zx29clk-v9-5-d05530d85d28@gmail.com> <anC72Cf1zKcLYWlC@redhat.com>
+        bh=2r8t0fZLO1G1B7jNQrzEMX2EdERqWbCFEmueS3AzIlQ=;
+        b=VCp/BzwlGln4VGDvZpnsQSPp9/OiY9dy5zhxeVjUtPSfOF9+fGXnUYaenCGyEXf8Wq
+         XArLCoFO6vl0R8xT7BQYbiON5GPFI3UjkgcJ3xOaXNCEbWclv6CWgeOugkfERO9ffeF0
+         9rtVGrTOHb9OjJVbQxy5A3BNdbQ17FHq6gtaMEFiaW9gRbo4iHDmTmz5j+PsLi6p/cy1
+         e3beH56Q3yOEbZACBYUha/B1bgCQrsJWDwjqaYmxs9EiaXUIJWyOHm0cfoc6PxPFRgwv
+         L6XaJedGbrx0okJNRqOT0lMNqSGTQMgZHOm5LvKi/50hfe96xFIzXRxeppMPSX0lU6Ji
+         L0Qw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785780218; x=1786385018;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=2r8t0fZLO1G1B7jNQrzEMX2EdERqWbCFEmueS3AzIlQ=;
+        b=aflPqHLD0S9nS9cwzf1aQTwZ9WLQaxf6qbeRqwUoQCIWfBIbsjjKmaB6KyCEprcVHY
+         LU3EIJ5saImIjfVzhtvEv+DyDInsTKHmQqeETCgApeofXXL2s2C4aa48yUYW7u8+qtqT
+         bgpkfC5bc37+dUk29I8CdNkqJ1SrVZnDLQN+7gGEW57j1o06Qlt0qh+/+ngZIWy6BIRx
+         8KSWkmtywnpo6MfxkQaGxBg5rjnNroks4165spg7dKzAxx3Sn9C0PCnb1euzQneREhHI
+         zJThbQTnVWiTtTXsuf3jbBJCo9/ngAyfOCCR7LU1n0UNNN9u1+3/OhgD5tC+bO18Oavy
+         iH3Q==
+X-Forwarded-Encrypted: i=1; AHgh+RrpPALhuJI17iSWWPpDuOhKAAHCVjQT/H0ocIPtWXJlECXZ2acTWABivY1Tq1gF5KHN7cI=@lists.linux.dev
+X-Gm-Message-State: AOJu0YyDi3WySwm/DQiIdBHLBMMW5GL1hgJS6hpfTNYXF3gmL5YA6e6Y
+	E6TiRXfNlWmBO87pLz85Lr8oJwUlgTs3zP0VX122oIdcSb25fGnHsKxLfMQrJ0pIvHJXgpMTL/c
+	So+DQfcvbwRaB8sq8Jd/iuxCpwDTuisc=
+X-Gm-Gg: AR+sD13QnoVDIFucIKlT0/2vaFXj2DVypZ+qa3w2S5XQr7NoPRbFbCqLhGoG5+f5Olr
+	9KxTgsqk0nCHuopGgSb03z3TP3oW6r+kMjfyN8vezi8Nex/dCnlFX1B5vQQLvA7rLMcLRNVVI50
+	TScKMtxfF5hdqIIwFlOK8QFO2ORIMOFTLRahN6090KbxYP71m/+EXL2vdyjWAPeDoi0VsfAF3XK
+	ZjOY+hEn6OqEySMzTVddQat2whkcH745Mn7wy7uayNlpMSlD/n+DiQMkSmrmAXbrs9olRUC09z7
+	tV75SASQYt1qWPFKyvxN/bRtqQ5et7HhT6iVt7/9WCHcWYgo/0swRqMiqYyQRjJwzlxiLsqQizz
+	UM+onzD5GoTppmkNVpogEM/sftQ/6vwqlBj2bGFqPWwGDIXvNVhBgGHqzx+PvVoctfSiQQq2NMD
+	5nUt6CcTaG7JF3/nGUZCF1sKYfZOCyFfPh/yCWiIEImO9xGDSb
+X-Received: by 2002:a05:6102:6899:b0:726:8813:2085 with SMTP id
+ ada2fe7eead31-75b23d6e2d3mr8230898137.13.1785780218392; Mon, 03 Aug 2026
+ 11:03:38 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="nextPartnWZPMUIwR7W-Gw2dYxPvgg";
- micalg="pgp-sha256"; protocol="application/pgp-signature"
+References: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
+ <20260802-submit-acx00-of-dynamic-v1-v1-7-0a53cd9e21cc@gmail.com> <2979768f-4f83-4f28-ace3-826f4b4c6844@lunn.ch>
+In-Reply-To: <2979768f-4f83-4f28-ace3-826f4b4c6844@lunn.ch>
+From: James Hilliard <james.hilliard1@gmail.com>
+Date: Mon, 3 Aug 2026 12:03:27 -0600
+X-Gm-Features: AUfX_mybO2gp37G6C7TCuAPmk0gNUYqtWf9KEEokxzjK6lix8AMcIQeuj4MOO0w
+Message-ID: <CADvTj4prV688JDR-QAuNd+jTVFyE9aicRaciqq0M6sB0V2GiXQ@mail.gmail.com>
+Subject: Re: [PATCH 07/21] dt-bindings: net: x-powers: add AC200 EPHY control
+To: Andrew Lunn <andrew@lunn.ch>
+Cc: Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, 
+	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Chen-Yu Tsai <wens@kernel.org>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+	Samuel Holland <samuel@sholland.org>, Andre Przywara <andre.przywara@arm.com>, 
+	Richard Genoud <richard.genoud@bootlin.com>, Maxime Ripard <mripard@kernel.org>, 
+	Alexandre Torgue <alexandre.torgue@foss.st.com>, Giuseppe Cavallaro <peppe.cavallaro@st.com>, 
+	Jose Abreu <joabreu@synopsys.com>, Maxime Chevallier <maxime.chevallier@bootlin.com>, 
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Heiner Kallweit <hkallweit1@gmail.com>, 
+	Russell King <linux@armlinux.org.uk>, Saravana Kannan <saravanak@kernel.org>, Lee Jones <lee@kernel.org>, 
+	Heiko Stuebner <heiko@sntech.de>, netdev@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev, 
+	linux-kernel@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, 
+	mfd@lists.linux.dev, linux-rockchip@lists.infradead.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
---nextPartnWZPMUIwR7W-Gw2dYxPvgg
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="utf-8"; protected-headers="v1"
-From: Stefan =?UTF-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>
-To: Brian Masney <bmasney@redhat.com>
-Subject: Re: [PATCH v9 05/12] clk: zte: Add Clock registration infrastructure
-Date: Mon, 03 Aug 2026 20:48:18 +0300
-Message-ID: <ky2t5IqOTfWMdfZsXE91Gg@gmail.com>
-In-Reply-To: <anC72Cf1zKcLYWlC@redhat.com>
-MIME-Version: 1.0
-
-Hi Brian,
-
-Thanks again for the review!
-
-Am Montag, 3. August 2026, 19:03:36 Ostafrikanische Zeit schrieb Brian Masney:
-> > +	/*
-> > +	 * Sanity check: Make sure all parents are there and write a clear
-> > message rather than +	 * leave potential orphans.
-> > +	 */
-> 
-> It's not common for clk drivers to have a validate function like this.
-> That said, I know you are reverse engineering what's in the downstream
-> BSP without documentation, and there is value in having this. I think
-> it'd be useful to clarify that in the comments because code usually gets
-> copied and pasted between drivers over time.
+On Mon, Aug 3, 2026 at 7:40=E2=80=AFAM Andrew Lunn <andrew@lunn.ch> wrote:
 >
-> That said, once it's verified that the clock tree is correct, can these
-> checks be eventually dropped so that this validation logic isn't ran on
-> every boot?
+> > +  phy-mode:
+> > +    enum:
+> > +      - mii
+> > +      - rmii
+>
+> Despite the phy- bit, phy-mode is a MAC property, it defines the MII
+> the MAC uses. I would not expect to see this anywhere else.
+>
+> The PHY driver is told what MII to use, phydev->interface, which takes
+> the values PHY_INTERFACE_MODE_RMII, PHY_INTERFACE_MODE_MII etc.
+>
+> Please explain why you need this here, why is the MAC nodes phy-mode
+> property not sufficient.
 
-Yes, I plan to remove it eventually when support for the SoC is more mature. 
-It has saved me some head-scratching as I have been working and re-working the 
-clock tree. I'll clarify its driver specific role in the next submission.
+I have reworked this for v2. The phy-mode properties will be removed from
+both control bindings and their DT nodes, leaving the MAC node as the sole
+source of the interface mode. The PHY driver instead passes
+phydev->interface to the selected control provider.
 
-Another option I contemplated is wrapping it in #ifdef DEBUG. What do you 
-think about that?
+There is one ordering complication: the control block must be powered befor=
+e
+the Clause 22 PHY identification registers become accessible, which happens
+before a MAC has attached. Early discovery therefore uses the hardware's
+reset-default MII mode.
 
-> > +struct zx_clk_export {
-> > +	unsigned int priv;
-> > +	unsigned int binding;
-> > +};
-> 
-> Sashiko flagged this as unused.
+For v2, I split the provider interface into separate power_on() and
+set_interface() operations. Once the MAC has supplied phydev->interface, th=
+e
+PHY reset path calls set_interface(). If the provider is already powered,
+this changes only the RMII_SEL bit; the normal phylib soft reset then
+completes the handoff. It does not repeat the full control-block power and
+reset sequence.
 
-Indeed, that is a leftover from earlier - before I realized a simple unsigned 
-int[] does the job fine.
-
----
-
-I have a long-standing question about tristate/module support for drivers like 
-this: I don't think the driver can realistically be unloaded. I have been 
-testing driver unloading by removing the UART clocks from the DT (otherwise 
-the clock driver is busy) and marking all clocks critical (otherwise 
-unloading/unbinding will shut down the UART (and more) and lock me out of the 
-system).
-
-I have made it tristate because from early research into clock driver state of 
-the art I gathered it was desired, even for drivers necessary for fundamental 
-operation [0]. Did I understand this correctly? It also uncovered some linking 
-errors that weren't obvious when compiling the driver into the kernel.
-
-That said, I'd prefer to mark my init tables discardable with __initdata and 
-think the module load support is going to go untested and bitrot over time.
-
-Cheers,
-Stefan
-
-0: Chen-Yu Tsai's tak here mostly: https://www.youtube.com/watch?v=d1VIAnVb3hI
-
---nextPartnWZPMUIwR7W-Gw2dYxPvgg
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
-
------BEGIN PGP SIGNATURE-----
-
-iQJPBAABCAA5FiEEQxb0tqoFWyeVMl1sPRO8yFRPGiIFAmpw1GIbFIAAAAAABAAO
-bWFudTIsMi41KzEuMTIsMiwyAAoJED0TvMhUTxoi7TkP/05WuGUn0opY7QQ8sZB6
-OuKTG5SinWEzjuroAKgG/nD8WOveL+GRtp0cJ8+CUdvw0WpzZQeuRnSX/zDbSvXa
-2G3pIBOvMcd0MOBBaEHUAtOHArZybsIuoFTVTzsaAYyHf2B7cc7KVbJZWRztmYSH
-Z/OUYaxPHYoD6cHC4FlSNHyJplDqLj0LpgZOwY4zP0jaWLbEJpkCTK9Izl+ZIB4N
-Q15I4WFfnyUi+J+3/mM3Rl4UYrS0U55ydarl5Io0PUsY/ORocxQY7jhXTvFyVmGV
-xEythQnLVsvYici8F6d1tA/VcdG5jbo/JxRgrG53yGGuZX7x31CampUCrUOJRJ7t
-bMsQwZz/VwpxL11Pg92G9bI3mzCHb+CZDRLT5zh+DN8cOkF5u4GBnI0CPKaqFAdw
-deFt0WVnrrosFn0Vf0p17OrTiycj+f72S3L97DLCiH+0A02LR5XC6rxe5ia0xsFj
-zXVl/z67OSLLN+g00eH/Gm7t6wSmRHdNY8QYBxaoIfY7NSPC4sfAm0BPcRfOtHEe
-aN2QkZlUqy6LOPzLMKJXsVo1oXp94QXx5YgJpObLC1OH2GasPwX+teqCVXGyJZpt
-we0fT64SnRaq5A4TfIcEcb2QJZUmH6znzcgROxCXZIJ1Dla1nW0ASQlNw2z5btj/
-bbygfsidb6/n+WxVmEd5JJI+
-=Lf/s
------END PGP SIGNATURE-----
-
---nextPartnWZPMUIwR7W-Gw2dYxPvgg--
-
-
-
+>
+>     Andrew
