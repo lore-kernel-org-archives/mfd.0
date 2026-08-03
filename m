@@ -1,156 +1,110 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A7BB429CC2
-	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 13:45:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 62439376A08;
+	Mon,  3 Aug 2026 13:51:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785764752; cv=none; b=CHS7JNiUWTbuCXRBRW4sqoPBSaYL5UBV7j++b57XvPjaeUDgJGHEj7IITlnGBO/bdTM6yZTMCi+kzgkkEcC3wsmUGsk7zmg2r45gp+ex2QYKteuzorjFCySMP0SNj7rgRxkXf+00rN/LyfsXj2ESs3E+DbiBwQzMuIGspxvvd8w=
+	t=1785765076; cv=none; b=KHg5LzqiMl3tST8Ksu+biBtNPFQi/zrbb6gPy7rI2ecx39FXBPUg24X+F3/F++J1yWpPoazWFWk1/+kDB0rFXLND5p/JXPedSx3WOAOQeFiefDCV1Ju2DhJd8zvQnpJvsjvxiQ6IaT8htxDc5qkipQkguUcwbCbQUSmkQqxho9w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785764752; c=relaxed/simple;
-	bh=6VB/5XDZcG4nxJkXWLXnXZ5ouQKsEVwa3yihjHoIPZw=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=iNEjHZCikwIG9OnERKGReME4BZvwRkqFCuI0V7L67ZeqpnPYfABGoE9qA8T5+ohZ0ZESoDSWYROOyl1qghpRt2cvhrEnZOKpWiyLbR35ncDUOSq+ZmQBSve/HFbt3l864VqYNYcY3pTvfDAcZDm+EB3pmjpK0QcG41Hf5rYEhFY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lTEBaJ/E; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785765076; c=relaxed/simple;
+	bh=inaStIkU+iRlGjgIk7MdyPxRRaE/xD71ClVr2QxRYYk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=K0U4ZqsPqfpR+Vba8vrqfQ4FR4NfFJsQK887uEH8bBz/SO+7lq8P3bVnaOJ8IZHhDdW9mUMNtMalXkGPFQtcqFjZPcfQqq6oUwYofohJJvd4Xnzdota2hF+punsdF6B62wASerfrp2T8L1qDfluEx1YiqDZ6DgSfXkpYNmkwDWA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=M1H1iu/p; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lTEBaJ/E"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 643341F00A3F
-	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 13:45:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785764751;
-	bh=6VB/5XDZcG4nxJkXWLXnXZ5ouQKsEVwa3yihjHoIPZw=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=lTEBaJ/EyRKyfoWUtq4J45dViS4VC6N9S1wysYwoVSDhoq6/oFnzfzpKlg7k/Lwna
-	 24qnT6Lf1C0/wCS6YL+qPfmB+ftUtRw6HN+4O2ATVD4lBu622fTT+L+8ea0CzlRAuQ
-	 Xy5pTHyAVc/OtDqbvOgOVADFRc5q5vFUKJOx9z9izZKjvR1bqp2eQp1z6ZWz4IWXAX
-	 bdUUGmM2DLsPtLGx5pB3tVpwl3j46lWrV5oPGX69SEKixno0VqoOkDILFOBCM0IbIJ
-	 oxxO/VME2FaRkNiLIigWGCvEHxAnmtudLuvZNXfU2/kRjRdbslbcaXfUPCHLxhlwpN
-	 t1v0KD/u9kklg==
-Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-6a0ed8a10ceso1790915a12.3
-        for <mfd@lists.linux.dev>; Mon, 03 Aug 2026 06:45:51 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rr3OKMHaXsBhfAq8mISHJ8feK1PmIpDAovR6hBAMct+tZW16QTQygiGPfY+n4S51pju3AI=@lists.linux.dev
-X-Gm-Message-State: AOJu0YydoTARVwiBX2YnASaXjkqW8kN86hhjpO59d4k87TJONtRdSoT7
-	Uj0SSqr6LhS7XcO9c09DKJrVJS0qkSdbMviwUctqHRr++GtwFG0eKwS/N85onHg8KXFKP84VjhJ
-	jNBvQShDlbiWpRsAkIRvaLASmIK+Jpvo=
-X-Received: by 2002:a05:6402:3608:b0:69e:2d56:690a with SMTP id
- 4fb4d7f45d1cf-6a0a7c6b775mr6984378a12.8.1785764750026; Mon, 03 Aug 2026
- 06:45:50 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="M1H1iu/p"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=uqpuCmGbDC7MQgqg4rNwLa59ffLN5tM7+k6xoxCEPxg=; b=M1H1iu/pjR8kYw7PfRwEcrhdUG
+	Mmpf5DE9eGVvhtIB6rk06xkB1BWps31tCUziHtFIcdGiQHcjdPICgwrIDeT7j82klQNqStFTs3Khx
+	gokx13xO1aev3e48O2pDastt4vTy37tA5ANceoV4o3b7dHqudb6h8H6N8brmXzWgq65o=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1wqt46-00FjZz-CF; Mon, 03 Aug 2026 15:50:50 +0200
+Date: Mon, 3 Aug 2026 15:50:50 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: James Hilliard <james.hilliard1@gmail.com>
+Cc: Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Chen-Yu Tsai <wens@kernel.org>,
+	Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Samuel Holland <samuel@sholland.org>,
+	Andre Przywara <andre.przywara@arm.com>,
+	Richard Genoud <richard.genoud@bootlin.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Giuseppe Cavallaro <peppe.cavallaro@st.com>,
+	Jose Abreu <joabreu@synopsys.com>,
+	Maxime Chevallier <maxime.chevallier@bootlin.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Saravana Kannan <saravanak@kernel.org>, Lee Jones <lee@kernel.org>,
+	Heiko Stuebner <heiko@sntech.de>, netdev@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	linux-sunxi@lists.linux.dev, linux-kernel@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com, mfd@lists.linux.dev,
+	linux-rockchip@lists.infradead.org
+Subject: Re: [PATCH 10/21] net: phy: add X-Powers AC200 EPHY control driver
+Message-ID: <05b1e6a2-725e-4b8e-8629-249637bbcb81@lunn.ch>
+References: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
+ <20260802-submit-acx00-of-dynamic-v1-v1-10-0a53cd9e21cc@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260710-ls2kbmc-mod-v3-0-ef718636e78e@gmail.com>
- <CAAhV-H6kqN1+ZiTqyvXfPEtQJfvFhp_964AB9C00o0O6pigZmQ@mail.gmail.com>
- <8FCFD614-FEA4-475C-9E0C-50E075B49453@gmail.com> <CAAhV-H5wFZHN2jD-vGgNLuMqugGxwfyfq2TnK=HKyZXxZR7iRA@mail.gmail.com>
- <64E79496-E66E-45A0-B1D6-DB5466C35D46@gmail.com>
-In-Reply-To: <64E79496-E66E-45A0-B1D6-DB5466C35D46@gmail.com>
-From: Huacai Chen <chenhuacai@kernel.org>
-Date: Mon, 3 Aug 2026 21:45:39 +0800
-X-Gmail-Original-Message-ID: <CAAhV-H6EN3K_QCd6pJ755PH7t5uUS0g-+BbRKjWr7oq7vX9ZTA@mail.gmail.com>
-X-Gm-Features: AUfX_mxZa_kW556MbPU7RtyeHU8jvtHv1WPI2WaH47CV5_TRvcQTmtsF6hyI33g
-Message-ID: <CAAhV-H6EN3K_QCd6pJ755PH7t5uUS0g-+BbRKjWr7oq7vX9ZTA@mail.gmail.com>
-Subject: Re: [PATCH RFC v3 0/7] mfd: ls2kbmc: multiple fixes for this driver
-To: Miao Wang <shankerwangmiao@gmail.com>
-Cc: Binbin Zhou <zhoubinbin@loongson.cn>, Chong Qiao <qiaochong@loongson.cn>, 
-	Lee Jones <lee@kernel.org>, Corey Minyard <corey@minyard.net>, Linus Walleij <linusw@kernel.org>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Xi Ruoyao <xry111@xry111.site>, WANG Xuerui <kernel@xen0n.name>, 
-	Yinbo Zhu <zhuyinbo@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>, mfd@lists.linux.dev, 
-	linux-kernel@vger.kernel.org, linux-gpio@vger.kernel.org, 
-	openipmi-developer@lists.sourceforge.net
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260802-submit-acx00-of-dynamic-v1-v1-10-0a53cd9e21cc@gmail.com>
 
-On Fri, Jul 31, 2026 at 4:24=E2=80=AFPM Miao Wang <shankerwangmiao@gmail.co=
-m> wrote:
->
-> Hi,
->
-> > 2026=E5=B9=B47=E6=9C=8831=E6=97=A5 16:07=EF=BC=8CHuacai Chen <chenhuaca=
-i@kernel.org> =E5=86=99=E9=81=93=EF=BC=9A
-> >
-> > On Fri, Jul 24, 2026 at 5:28=E2=80=AFPM Miao Wang <shankerwangmiao@gmai=
-l.com> wrote:
-> >>
-> >> Hi,
-> >>
-> >>> 2026=E5=B9=B47=E6=9C=8824=E6=97=A5 16:55=EF=BC=8CHuacai Chen <chenhua=
-cai@kernel.org> =E5=86=99=E9=81=93=EF=BC=9A
-> >>>
-> >>> Hi, Miao,
-> >>>
-> >>> On Fri, Jul 10, 2026 at 1:24=E2=80=AFAM Miao Wang via B4 Relay
-> >>> <devnull+shankerwangmiao.gmail.com@kernel.org> wrote:
-> >>>>
-> >>>> Previously, the driver has been introduced to support the Loongson 2=
-K
-> >>>> BMC running on the Loongson Servers, which is essential to prevent
-> >>>> the system from hanging when the BMC is being reset and the default
-> >>>> efi-framebuffer is being used. However, there are some drawbacks in =
-the
-> >>>> driver.
-> >>>>
-> >>>> Firstly, the driver tries to read and write to the connected PCI-E h=
-ost
-> >>>> controller registers, assuming that the BMC is connected to LS7A PCI=
--E
-> >>>> host controller. This assumption should be true for real products, b=
-ut
-> >>>> to prevent from accidentally reading and writing to the wrong PCI-E =
-host
-> >>>> controller, this driver should be modified to check this before
-> >>>> accessing the registers.
-> >>>>
-> >>>> Secondly, the driver uses non-exported functions to tell the vt
-> >>>> subsystem to redraw the screen, preventing the driver from being
-> >>>> compiling as a module. This can be fixed by using the exported
-> >>>> functions instead.
-> >>> You can replace the redraw function, but I don't think it is necessar=
-y
-> >>> to make the bmc driver modular.
-> >>>
-> >>> BMC core, IPMI and simpledrm display are usually (if not always)
-> >>> supposed to work as early as possible.
-> >>
-> >> I believe that it should be the user's decision to choose whether to
-> >> compile a module into the kernel or as a module and it would be better
-> >> if we can provide the possibilities for the user to choose from.
-> >> Additionally, I don't think these modules are supposed to work that
-> >> early. The mfd module provide two functions, the display and the ipmi
-> >> device. In the aspect of graphical display, without this module, the
-> >> user can still see the output during booting on their monitors, since
-> >> efifb is working, providing a basic display function. In the aspect of
-> >> the ipmi device, I don't think the lack of such device will influence
-> >> the boot of the system, since it is a common practice to compile ipmi
-> >> device drivers as modules on other architectures. As a result, neither
-> >> of the two functions are required to be loaded that early and it is
-> >> reasonable to at lease leave the choice to compile it as a module
-> >> to the user.
-> > Flexibility is not always useful, if a config doesn't provide good
-> > effect, then it just increases complexity and makes maintenance more
-> > difficult.
->
-> I should emphasize that to allow this driver to be a module, there is
-> no such increase on maintenance. Moreover, not all loongarch machines
-> are requiring this driver. Especially only a part of the server models
-> are quipped with this BMC. Comparing with other architectures, the
-> driver for BMC are normally compiled as a module, such as mgag200 for
-> iLO from HPE and iDRAC from DELL, hibmc_drm for Kunpeng server from
-> Huawei. None of these BMC drivers requiring to be compiled into the
-> kernel. I cannot see there is any reason keeping the driver from being
-> allowed to be compiled as a module. I also do not think it will bring
-> any significant maintenance burden. Implementing correct cleanup code
-> should be necessary instead of burden.
-Can we split into two series, one fix bugs and the others make bmc modular?
+> +static int
+> +ac200_ephy_ctl_set_led_outputs(struct acx00_ephy_control *control,
+> +			       unsigned long outputs)
+> +{
+> +}
 
-Otherwise I don't think we can reach a consensus in the near future.
+> +static int
+> +ac200_ephy_ctl_set_led_polarity(struct acx00_ephy_control *control,
+> +				bool active_low)
+> +{
+> +}
 
-Huacai
+I've not looked into the details, but these look like pinmux. Does
+this I2C device have a GPIO controller? Can these pins be used for
+other things than LEDs? Maybe you should be implementing a GPIO and
+pinmux driver. The Ethernet PHY driver can then just select the
+correct pinmux configuration.
 
->
-> Cheers,
->
-> Miao Wang
->
->
+> +static int ac200_ephy_ctl_power_off_locked(struct ac200_ephy_ctl *priv)
+> +{
+> +}
+> +
+> +static int ac200_ephy_ctl_power_off(struct acx00_ephy_control *control)
+> +{
+
+> +}
+> +
+> +static int ac200_ephy_ctl_power_on(struct acx00_ephy_control *control,
+> +				   unsigned int phy_addr)
+> +{
+> +}
+
+These look like a regulator? The phylib core has support for
+regulators.
+
+Maybe take a step back and look at the overall architecture, and how
+Linux can represent these blocks.
+
+	Andrew
