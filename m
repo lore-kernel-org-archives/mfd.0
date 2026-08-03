@@ -1,70 +1,70 @@
-Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com [209.85.210.44])
+Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com [209.85.210.53])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2EA839902D
-	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 05:15:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1DEE39D6FF
+	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 05:15:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785734142; cv=none; b=ipqCZx6MWi8kOm6h3Ay0OzMZFvRPAjcG58918HtD74qhqxsstQLbrzMLUmyv2URFqnn/S6rM51JtzpHL55QgRyl1sa8SS3PisF2yybXF25V5AIuj2dQg8k0vnqE+kedKqGKS3IiCySc81f5R4PbP9xdwL0n3M1kq2PP7FqWb2/E=
+	t=1785734147; cv=none; b=DaM0BZVKDphiZOXYW2w9Np8/OIeWlfQH766veSVacIgvCRoZfAFBGmWKeVbaDgFuRjL1DILFj6fOaoxOCne0oJxsn3LtEmez7utoC/nvlnPfiGEif337eCzxo5UkbpVWR0MOGPYdpVT05fNCzk4KWm/lcQtg/5YUnI/1ek225R0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785734142; c=relaxed/simple;
-	bh=FJxa6pnlwH8NOKl4g0tgsIa3AWI3yPSDz31JZnSznJk=;
+	s=arc-20240116; t=1785734147; c=relaxed/simple;
+	bh=z1D09xijThRsRnsDX/ozKwmhi7sR7kyQDCuYiAXqUqg=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=fN5TeGzPS3/kzGqSTWQbtbeYCSSoDiacSf6boaC+KrNCXuTJ4/k1WIQ+NRmLrLHOwfCarhdQo8lILA8UukdBkDrYGFQDt5LTpyYIvpXhVIz05zMMLRvcBwyaNTMtvhLTVIAxr0oEPkykRq9hAB0k3KPalNIdW82a7WzIC633QsQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=BpeYstte; arc=none smtp.client-ip=209.85.210.44
+	 In-Reply-To:To:Cc; b=YGkVLxubUw2TqM2Cw+wlHNTYFcYjI3zNxxXn97NG5AEvbzV64rntS+mAIc6HESnnf5f3e4hwSRcN+1HiKrJh9Au9wwGBGKk0Yj/ZVN7nY5+Svvr6T45JOLNor59A8VPscm7Bjlgm3+X7z1u49NIhYAMRGIeCD7/ZCerzEnfpJu8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nueuBIvO; arc=none smtp.client-ip=209.85.210.53
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BpeYstte"
-Received: by mail-ot1-f44.google.com with SMTP id 46e09a7af769-7f18c0e03e3so1152305a34.2
-        for <mfd@lists.linux.dev>; Sun, 02 Aug 2026 22:15:39 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nueuBIvO"
+Received: by mail-ot1-f53.google.com with SMTP id 46e09a7af769-7ee4399c423so1835983a34.0
+        for <mfd@lists.linux.dev>; Sun, 02 Aug 2026 22:15:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785734136; x=1786338936; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1785734143; x=1786338943; darn=lists.linux.dev;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=DdvS6JgS1wsN4XXB/DPlHPE/KXR5tqJa5L67sBE8VSE=;
-        b=BpeYstte3yr/Uf+GnrQXSnysX7Qiq/rKna6h6U0U6NonE9fGZuDwE9N/0ARcrs7jv+
-         eTXH7Qq3FHR/G0CgoaQexQznayVc905LR0+b9OMqbS+/q/0X7ivfSYQrT5bSwNm4HPB1
-         Hz+snwoS2iN4TwzbL5j0DVpJC5pafDtZqDGGjWaTprOqY4zqr1+we8Nc0bOz/XEB/xYj
-         WlXcf+eAfAp46Z5WSctqYY1g6yqwfYyctI3kmanhvVrO6ieXZFP92sHZ2L2+G8B68tuP
-         oZCyR9WB04uV9N5HgGqvNSGFYYWX69lcS7N+vvhvi6poLDmkViFiipZLrw9GZuEcD8FT
-         lvbg==
+        bh=S/5/uq1wl03WMsz5ualIqMKCury9OUeuYtebMNsXO2w=;
+        b=nueuBIvOgLEPeqQ3Vt0Q6TBxQfOd4bZQGdc7ZKku/U9WOmMRW5ZFTwC2/CeyYDUArV
+         BfLgfw6oiwMUNaHyUMV8tMsLZV9FWKJpjcVOi9FwRA9OJ4gNbVFDCpKmPFoG806NN9zF
+         yW1LECQqC3MN3feRj9Nees/AhCFXwug0PVz3Xy4Q5MC2oYCQ0Iqgt2JMvkSA1kMzQa2h
+         bvDrLJ5Rpl8lWGlcco32H9srHsiz4rKccm8xQ3V2q6O6oDfVfCkNJ6025GymuCimtAjS
+         LLcg1j/7qnRFSBP2j9ZVpp/bQbiGim58yoNY5qY7zP5Mlrh5XqkEhnU64JfjhsLpH1Dg
+         NnlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785734136; x=1786338936;
+        d=1e100.net; s=20251104; t=1785734143; x=1786338943;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=DdvS6JgS1wsN4XXB/DPlHPE/KXR5tqJa5L67sBE8VSE=;
-        b=PB5sbMxceSGiXpP4D6QYvVJKfRqVkJqfWHZGwD7Pc1qVG2ybsFrAFhr5WCoWLD18h4
-         Sy7xLmVfeFBhV4cZmbX0u1F1RAuF2pnv8MUtT+S4ZhURjaIV7RgqqxM7gXpc3Xc9FatP
-         4yAvAyAyvsF1kmVljI0eo+rU7W7jsKOIiQ2re5x0ge0Zd+SgmK3fMtNlCJE876dAZSLc
-         ebACTEPmBqs78Diuv7wxMkiF9Ancb0BJKqP3Bf5JPjeQIjq1PQ7lN+dEIpnvUI0Afzmq
-         /GwlQS8l4SubKXsn24fi05j7/G4sKpvdfQYU2IafiIbxT6j7l4OToaKR3QgcorrLizVM
-         Py1g==
-X-Forwarded-Encrypted: i=1; AHgh+RrwP9k80Td+H+kABuMynHgYilRdpK5SLZZhB0j9PZFNfDktRRamy/w4HFdaOmcswRB04Cs=@lists.linux.dev
-X-Gm-Message-State: AOJu0YzGpbNihA2SSMYV0guFZApwgAnMlNDcFpOER/GK+NSsyHKgoTme
-	kV2ZOWSJGzr48fDcnrFM96m7K+4AImwdKpMGHcnikO7AohPwPnchUc9H
-X-Gm-Gg: AR+sD12H6lKLLlITJB8qHplszfWlA5KK6D8qskmTpKFvte0At389O0hj9WL4bZVN4Oq
-	7lCToUKlU4iEfpQWfstNqGcc6TyyBJHA6/URn/dqqpsxwRpYMzxIFjhwQ1ei5/COVuYXFFD3zkH
-	lABW2rmz8a070JHoAcauGFL3ckStLmUjKizWrxC8Ja3TuaXpfxgq8kJqbPRDyrUo79MQf2nQWWN
-	U4Evf1psVBYfTMT4knYEsfCa+WKCDVXzk5yIZroPqAX72V2aD2cDHmABeRhy9f1AMjqTPDm0lAD
-	b9oFXAteLclPsfRVi3BrVS1+GYvf4aZTW1SzyHKugpZCK96XmspwF/3WkaVQuanxWvGau9iN3Mh
-	cPFeEm4Jbhd14R/40slbw5Ns1W+7URczyRcUj7LIcN4knREjUIVCdePCWSgNlICepaJ46PALeTD
-	wcZyKVdxkZBF9tfZFyqikHE8OTEw48cVSYydLqISB9oJcn0+VxZ1lsqhqDZTGxpYwnT4BGZvGqX
-	Q68jsukxr5mwhz+rY02fAmMdyen2BIzsMpQz1+fvdSY0AuWV9et7uOVAcoJCa+9NOlGjIh+18a+
-	G7Jne/xmIgUCsX7D4uNNyqZ5iPOQzLrydK8lTxztHq5ySnoqL9Tn2NicoJf9zSn2y8a4RMtZ1An
-	D/D+o0doCJodMdheV
-X-Received: by 2002:a05:6830:3814:b0:7e6:ca29:9609 with SMTP id 46e09a7af769-7f196d82b85mr13995078a34.13.1785734136211;
-        Sun, 02 Aug 2026 22:15:36 -0700 (PDT)
+        bh=S/5/uq1wl03WMsz5ualIqMKCury9OUeuYtebMNsXO2w=;
+        b=oq1uN3IgjVmrGTQpmgb4Jq02ieGJrfCfaKiHe5DmhTk3WhYv9fSYr3fkuMFJ9V1F8i
+         KKU7ks0MImGi4roxrNBTBZpKUaNchU/yOiVx44uqgifFVSFtZfDz7biCBtirUDF3coMJ
+         /H/8pKkuPShVP2NdmDSysRP9gN3hKNp5xTd3IN9CY4OjLlQj8ELuH5KWry3LzBysVdE1
+         Rze6sUjP6iIGhrkB2ZHM95V4aR396m7kKm1hVW9long98BhV6ZOVxS2hVSFhEEa25Q5Q
+         G0ieYJ639QE6ptWuMIXSj8v2gmWhgYVbWK55LXEIyFcm1uQF8qbwAFkr0aOXbV7rFFU6
+         NCCw==
+X-Forwarded-Encrypted: i=1; AHgh+Rqm3yqSgUDs/MiDiawCetFQbZYnCJS/gllGk17UJRVsi/HbG2N2OZNKBhGE0gce68+82qc=@lists.linux.dev
+X-Gm-Message-State: AOJu0YxZuAGNDWv+Ik7vXfyGNKk2NqsyXloCFHMeyfScnInf7XAQG2pw
+	kjXpIzUyoW2/+HvgqevYvxeGjJVv2ysfYadB/5sGZfVCShZ/H8qUAKMY
+X-Gm-Gg: AR+sD13j4lfgp8uKKqwBvO8R/1vvst+0XfyaQzrgSwyW4YE1qe0rK7TRvbkYsCXOvEM
+	Ky9iXxAyunaNWFoy9Rn2QhJGQAHVKp2SDprbFkgVV4PijzvHgQqfRZWCLpNtnXB2In1N08C5DJb
+	stUt/3d+so5WZLXl63cIbSeczubDJy9cjZA7ZXfFsNtMFoCEGj31mjmthsQaUZtzFnsa8GosKFB
+	cr0uYAwaKjXp35QudH9pezpdTSjKLUj/e/1lyVeJ/sNNQtBY6GiC2KDkXjLZ0ithKaWV4sOfA7+
+	Q532O8GyOdfcY0FBlcGMbgzhUxy1B8JnTmwW8vNf4tM7KDr6lIo9+CmnXXyfi+gQwUlAXcvcBnK
+	v3dvxQVJAqUqrEWx6Jp83+n6OAUxoPaeL+OCp9N45+HTsxMsPRPbbsmzvoBKfOXR31eAZFZ4lco
+	3RiLfJli6lKEexRxFDY18MgPt2GAprm5ShZLZw4OHmLSEmkvjWXMMrUt/ciAfhhquSr5rST9U/Y
+	+GyMfu7rY6VyKQLPxWcBucEyRDyY0uC0gt6aayE3jZrmuvZ3CTFAmFjZpvSFhqnj8UYhuh5Aglg
+	3iWq51LpQOGrvPfk4/W/OCf9PzjnSDpXB/QvCM1yBZJWJK7LvohoqiVntKL9YTlFXHYH8rT8Dy/
+	HouB7lkdbiB0WJ8OT
+X-Received: by 2002:a05:6830:4114:b0:7e9:bd00:c6ad with SMTP id 46e09a7af769-7f196f29291mr14805744a34.16.1785734143562;
+        Sun, 02 Aug 2026 22:15:43 -0700 (PDT)
 Received: from [127.0.1.1] (184-96-154-59.hlrn.qwest.net. [184.96.154.59])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7f18f07a5e3sm6787108a34.15.2026.08.02.22.15.34
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7f18f07a5e3sm6787108a34.15.2026.08.02.22.15.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 02 Aug 2026 22:15:35 -0700 (PDT)
+        Sun, 02 Aug 2026 22:15:42 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Sun, 02 Aug 2026 23:14:20 -0600
-Subject: [PATCH 10/21] net: phy: add X-Powers AC200 EPHY control driver
+Date: Sun, 02 Aug 2026 23:14:24 -0600
+Subject: [PATCH 14/21] net: phy: support configuring PHY-autonomous Tx LPI
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -73,7 +73,7 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260802-submit-acx00-of-dynamic-v1-v1-10-0a53cd9e21cc@gmail.com>
+Message-Id: <20260802-submit-acx00-of-dynamic-v1-v1-14-0a53cd9e21cc@gmail.com>
 References: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
 In-Reply-To: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
 To: Andrew Lunn <andrew+netdev@lunn.ch>, 
@@ -102,433 +102,168 @@ Cc: netdev@vger.kernel.org, devicetree@vger.kernel.org,
  James Hilliard <james.hilliard1@gmail.com>
 X-Mailer: b4 0.15.2
 
-The AC200 Fast Ethernet PHY is powered and configured through registers
-in the parent I2C regmap before its Clause 22 link registers become usable.
+The ethtool Tx LPI fields currently update phylib software state and
+notify an attached MAC, but they do not configure PHYs which generate LPI
+autonomously. This can make a successful ethtool request leave the PHY
+hardware unchanged.
 
-Add a control driver that prepares the calibration value and vendor
-offset, interface mode and input-clock selection. Use an optional SoC SID
-cell when supplied, otherwise read the AC200's internal calibration eFuse.
-Derive the documented 24 or 27 MHz selector from the actual locked clock
-rate. Although the feature summary also mentions 25 MHz, EPHY_CTL provides
-no encoding for it, so reject that rate rather than silently selecting
-27 MHz.
+Add a PHY driver callback for applying the Tx LPI enable state and timer.
+Call it before updating EEE advertisement, and attempt to restore the old
+hardware state if either the callback itself or the advertisement update
+fails. Use the callback to disable autonomous LPI when phy_support_eee()
+hands LPI control to the MAC, and reapply that state after PHY reset.
 
-Program the link PHY MDIO address into EPHY_CTL.PHY_ADDR before bringing
-the PHY out of its disabled state using the vendor initialization sequence.
-
-Expose serialized, idempotent power-on and power-off operations so the
-link-PHY driver can sequence the control block across resets and system
-sleep. Also expose operations for the global LED polarity and package pad
-enables. Initialize all three outputs active-low as in the vendor kernel,
-while allowing an explicit link-PHY LED topology to replace that fallback.
-Quiesce the block during probe failures, driver removal and system
-shutdown.
+Drivers without the new callback retain the existing behavior in which
+the Tx LPI fields configure phylib and the attached MAC. Existing drivers
+which only implement disable_autonomous_eee() therefore need no changes.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- drivers/net/phy/Kconfig             |   9 +
- drivers/net/phy/Makefile            |   1 +
- drivers/net/phy/xpowers-ac200-ctl.c | 330 ++++++++++++++++++++++++++++++++++++
- drivers/net/phy/xpowers-acx00.h     |  25 +++
- 4 files changed, 365 insertions(+)
+ drivers/net/phy/phy.c        | 35 +++++++++++++++++++++++++++++++++--
+ drivers/net/phy/phy_device.c | 25 ++++++++++++++++++++-----
+ include/linux/phy.h          | 18 ++++++++++++++++++
+ 3 files changed, 71 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
-index 099f25dceabb..e059bd6c5eda 100644
---- a/drivers/net/phy/Kconfig
-+++ b/drivers/net/phy/Kconfig
-@@ -469,6 +469,15 @@ config VITESSE_PHY
- 	help
- 	  Currently supports the vsc8244
+diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
+index fce9bc7be330..c76d5baa1f84 100644
+--- a/drivers/net/phy/phy.c
++++ b/drivers/net/phy/phy.c
+@@ -1996,6 +1996,8 @@ static void phy_ethtool_set_eee_noneg(struct phy_device *phydev,
+ int phy_ethtool_set_eee(struct phy_device *phydev, struct ethtool_keee *data)
+ {
+ 	struct eee_config old_cfg;
++	bool tx_lpi_cfg_attempted = false;
++	bool tx_lpi_cfg_changed;
+ 	int ret;
  
-+config XPOWERS_AC200_PHY_CTL
-+	tristate "X-Powers AC200 Ethernet PHY control"
-+	depends on MFD_AC200
-+	help
-+	  Enable the control driver for the Fast Ethernet PHY function in
-+	  the X-Powers AC200 mixed-signal companion IC. It programs the PHY
-+	  address, interface mode, calibration and I/O controls through the
-+	  parent AC200 I2C regmap.
+ 	if (!phydev->drv)
+@@ -2005,16 +2007,45 @@ int phy_ethtool_set_eee(struct phy_device *phydev, struct ethtool_keee *data)
+ 
+ 	old_cfg = phydev->eee_cfg;
+ 	eee_to_eeecfg(&phydev->eee_cfg, data);
++	tx_lpi_cfg_changed = phydev->eee_cfg.tx_lpi_enabled !=
++			     old_cfg.tx_lpi_enabled ||
++			     phydev->eee_cfg.tx_lpi_timer !=
++			     old_cfg.tx_lpi_timer;
 +
- config XILINX_GMII2RGMII
- 	tristate "Xilinx GMII2RGMII converter driver"
- 	help
-diff --git a/drivers/net/phy/Makefile b/drivers/net/phy/Makefile
-index de660ae94945..e53ca319f9c4 100644
---- a/drivers/net/phy/Makefile
-+++ b/drivers/net/phy/Makefile
-@@ -99,4 +99,5 @@ obj-$(CONFIG_SMSC_PHY)		+= smsc.o
- obj-$(CONFIG_STE10XP)		+= ste10Xp.o
- obj-$(CONFIG_TERANETICS_PHY)	+= teranetics.o
- obj-$(CONFIG_VITESSE_PHY)	+= vitesse.o
-+obj-$(CONFIG_XPOWERS_AC200_PHY_CTL) += xpowers-ac200-ctl.o
- obj-$(CONFIG_XILINX_GMII2RGMII) += xilinx_gmii2rgmii.o
-diff --git a/drivers/net/phy/xpowers-ac200-ctl.c b/drivers/net/phy/xpowers-ac200-ctl.c
-new file mode 100644
-index 000000000000..c2a37f958565
---- /dev/null
-+++ b/drivers/net/phy/xpowers-ac200-ctl.c
-@@ -0,0 +1,330 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * X-Powers AC200 Ethernet PHY control driver
-+ *
-+ * Copyright (C) 2026 James Hilliard <james.hilliard1@gmail.com>
-+ */
-+
-+#include <linux/bitfield.h>
-+#include <linux/clk.h>
-+#include <linux/delay.h>
-+#include <linux/module.h>
-+#include <linux/mutex.h>
-+#include <linux/nvmem-consumer.h>
-+#include <linux/phy.h>
-+#include <linux/platform_device.h>
-+#include <linux/property.h>
-+#include <linux/regmap.h>
-+
-+#include "xpowers-acx00.h"
-+
-+#define AC200_EPHY_BPS_EFFUSE_OFFSET	3
-+
-+#define AC200_SYS_EPHY_CTL0_REG			0x0014
-+#define AC200_EPHY_RESET_DEASSERT		BIT(0)
-+#define AC200_EPHY_SYSCLK_ENABLE			BIT(1)
-+
-+#define AC200_SYS_EPHY_CTL1_REG			0x0016
-+#define AC200_EPHY_MII_IO_ENABLE			BIT(0)
-+#define AC200_EPHY_LINK_LED_IO_ENABLE		BIT(1)
-+#define AC200_EPHY_SPEED_LED_IO_ENABLE		BIT(2)
-+#define AC200_EPHY_DUPLEX_LED_IO_ENABLE		BIT(3)
-+#define AC200_EPHY_LED_IO_ENABLE_MASK \
-+	(AC200_EPHY_LINK_LED_IO_ENABLE | AC200_EPHY_SPEED_LED_IO_ENABLE | \
-+	 AC200_EPHY_DUPLEX_LED_IO_ENABLE)
-+
-+/* AC200-internal copy of the Ethernet PHY calibration eFuse. */
-+#define AC200_EFUSE_EPHY_REG			0x8004
-+
-+#define AC200_EPHY_CTL_REG			0x6000
-+#define AC200_EPHY_SHUTDOWN			BIT(0)
-+#define AC200_EPHY_LED_ACTIVE_LOW		BIT(1)
-+#define AC200_EPHY_CLK_SEL_24_MHZ		BIT(2)
-+#define AC200_EPHY_PHY_ADDR_MASK			GENMASK(8, 4)
-+#define AC200_EPHY_RMII_SEL			BIT(11)
-+#define AC200_EPHY_BPS_EFFUSE_MASK		GENMASK(15, 12)
-+
-+struct ac200_ephy_ctl {
-+	struct acx00_ephy_control control;
-+	struct regmap *regmap;
-+	struct mutex lock; /* Serializes power sequencing and state. */
-+	u16 ephy_ctl;
-+	u16 led_io_enable;
-+	unsigned int phy_addr;
-+	bool powered;
-+};
-+
-+static int
-+ac200_ephy_ctl_set_led_outputs(struct acx00_ephy_control *control,
-+			       unsigned long outputs)
-+{
-+	struct ac200_ephy_ctl *priv =
-+		container_of(control, struct ac200_ephy_ctl, control);
-+	u16 led_io_enable;
-+	int ret = 0;
-+
-+	if (outputs & ~GENMASK(ACX00_EPHY_LED_COUNT - 1, 0))
-+		return -EINVAL;
-+
-+	led_io_enable = (outputs << 1) & AC200_EPHY_LED_IO_ENABLE_MASK;
-+
-+	mutex_lock(&priv->lock);
-+	if (priv->powered)
-+		ret = regmap_update_bits(priv->regmap, AC200_SYS_EPHY_CTL1_REG,
-+					 AC200_EPHY_LED_IO_ENABLE_MASK,
-+					 led_io_enable);
-+	if (!ret)
-+		priv->led_io_enable = led_io_enable;
-+	mutex_unlock(&priv->lock);
-+
-+	return ret;
-+}
-+
-+static int
-+ac200_ephy_ctl_set_led_polarity(struct acx00_ephy_control *control,
-+				bool active_low)
-+{
-+	struct ac200_ephy_ctl *priv =
-+		container_of(control, struct ac200_ephy_ctl, control);
-+	u16 value = active_low ? AC200_EPHY_LED_ACTIVE_LOW : 0;
-+	int ret = 0;
-+
-+	mutex_lock(&priv->lock);
-+	if (priv->powered)
-+		ret = regmap_update_bits(priv->regmap, AC200_EPHY_CTL_REG,
-+					 AC200_EPHY_LED_ACTIVE_LOW, value);
-+	if (!ret) {
-+		priv->ephy_ctl &= ~AC200_EPHY_LED_ACTIVE_LOW;
-+		priv->ephy_ctl |= value;
-+	}
-+	mutex_unlock(&priv->lock);
-+
-+	return ret;
-+}
-+
-+static int ac200_ephy_ctl_power_off_locked(struct ac200_ephy_ctl *priv)
-+{
-+	int err;
-+	int ret;
-+
-+	if (!priv->powered)
-+		return 0;
-+
-+	ret = regmap_write(priv->regmap, AC200_EPHY_CTL_REG,
-+			   priv->ephy_ctl |
-+			   FIELD_PREP(AC200_EPHY_PHY_ADDR_MASK,
-+				      priv->phy_addr) |
-+			   AC200_EPHY_SHUTDOWN);
-+	err = regmap_write(priv->regmap, AC200_SYS_EPHY_CTL1_REG, 0);
-+	if (!ret)
-+		ret = err;
-+	err = regmap_write(priv->regmap, AC200_SYS_EPHY_CTL0_REG, 0);
-+	if (!ret)
-+		ret = err;
-+
-+	priv->powered = false;
-+
-+	return ret;
-+}
-+
-+static int ac200_ephy_ctl_power_off(struct acx00_ephy_control *control)
-+{
-+	struct ac200_ephy_ctl *priv =
-+		container_of(control, struct ac200_ephy_ctl, control);
-+	int ret;
-+
-+	mutex_lock(&priv->lock);
-+	ret = ac200_ephy_ctl_power_off_locked(priv);
-+	mutex_unlock(&priv->lock);
-+
-+	return ret;
-+}
-+
-+static int ac200_ephy_ctl_power_on(struct acx00_ephy_control *control,
-+				   unsigned int phy_addr)
-+{
-+	struct ac200_ephy_ctl *priv =
-+		container_of(control, struct ac200_ephy_ctl, control);
-+	u16 ephy_ctl;
-+	int ret;
-+
-+	if (phy_addr > FIELD_MAX(AC200_EPHY_PHY_ADDR_MASK))
-+		return -EINVAL;
-+
-+	mutex_lock(&priv->lock);
-+	if (priv->powered && priv->phy_addr == phy_addr) {
-+		ret = 0;
-+		goto out_unlock;
-+	}
-+	if (priv->powered) {
-+		ret = ac200_ephy_ctl_power_off_locked(priv);
++	if (tx_lpi_cfg_changed && !phydev->autonomous_eee_disabled &&
++	    phydev->drv->set_tx_lpi) {
++		ret = phydev->drv->set_tx_lpi(phydev, &phydev->eee_cfg);
++		tx_lpi_cfg_attempted = true;
 +		if (ret)
-+			goto out_unlock;
++			goto restore_tx_lpi;
++	}
+ 
+ 	ret = genphy_c45_ethtool_set_eee(phydev, data);
+ 	if (ret == 0)
+ 		phy_ethtool_set_eee_noneg(phydev, &old_cfg);
+ 	else if (ret < 0)
+-		phydev->eee_cfg = old_cfg;
++		goto restore_tx_lpi;
+ 
+ 	mutex_unlock(&phydev->lock);
+ 
+-	return ret < 0 ? ret : 0;
++	return 0;
++
++restore_tx_lpi:
++	if (tx_lpi_cfg_attempted) {
++		int rollback_ret;
++
++		rollback_ret = phydev->drv->set_tx_lpi(phydev, &old_cfg);
++		if (rollback_ret)
++			phydev_warn(phydev,
++				    "Failed to restore autonomous Tx LPI: %pe\n",
++				    ERR_PTR(rollback_ret));
 +	}
 +
-+	ephy_ctl = priv->ephy_ctl |
-+		FIELD_PREP(AC200_EPHY_PHY_ADDR_MASK, phy_addr);
++	phydev->eee_cfg = old_cfg;
 +
-+	/* Start from a disabled state before applying the configuration. */
-+	ret = regmap_write(priv->regmap, AC200_SYS_EPHY_CTL0_REG, 0);
-+	if (ret)
-+		goto err_disable;
-+
-+	ret = regmap_write(priv->regmap, AC200_SYS_EPHY_CTL1_REG,
-+			   AC200_EPHY_MII_IO_ENABLE |
-+			   priv->led_io_enable);
-+	if (ret)
-+		goto err_disable;
-+
-+	ret = regmap_write(priv->regmap, AC200_EPHY_CTL_REG,
-+			   ephy_ctl | AC200_EPHY_SHUTDOWN);
-+	if (ret)
-+		goto err_disable;
-+
-+	ret = regmap_write(priv->regmap, AC200_SYS_EPHY_CTL0_REG,
-+			   AC200_EPHY_RESET_DEASSERT |
-+			   AC200_EPHY_SYSCLK_ENABLE);
-+	if (ret)
-+		goto err_disable;
-+
-+	fsleep(10000);
-+
-+	ret = regmap_write(priv->regmap, AC200_EPHY_CTL_REG, ephy_ctl);
-+	if (ret)
-+		goto err_disable;
-+
-+	priv->phy_addr = phy_addr;
-+	priv->powered = true;
-+	goto out_unlock;
-+
-+err_disable:
-+	/* Mark it active so the cleanup sequence is always attempted. */
-+	priv->phy_addr = phy_addr;
-+	priv->powered = true;
-+	ac200_ephy_ctl_power_off_locked(priv);
-+out_unlock:
-+	mutex_unlock(&priv->lock);
++	mutex_unlock(&phydev->lock);
 +
 +	return ret;
-+}
-+
-+static int ac200_ephy_ctl_probe(struct platform_device *pdev)
+ }
+ EXPORT_SYMBOL(phy_ethtool_set_eee);
+ 
+diff --git a/drivers/net/phy/phy_device.c b/drivers/net/phy/phy_device.c
+index f7472a743185..30929b0354b6 100644
+--- a/drivers/net/phy/phy_device.c
++++ b/drivers/net/phy/phy_device.c
+@@ -1357,6 +1357,21 @@ static int phy_poll_reset(struct phy_device *phydev)
+ 	return 0;
+ }
+ 
++static int phy_disable_autonomous_tx_lpi(struct phy_device *phydev)
 +{
-+	struct device *dev = &pdev->dev;
-+	struct ac200_ephy_ctl *priv;
-+	phy_interface_t interface;
-+	struct clk *clk;
-+	unsigned long clk_rate;
-+	unsigned int calibration;
-+	u8 nvmem_calibration;
-+	u8 bps_effuse_code;
-+	u16 ephy_ctl;
-+	int ret;
++	struct eee_config config = phydev->eee_cfg;
 +
-+	priv = devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
-+	if (!priv)
-+		return -ENOMEM;
-+	mutex_init(&priv->lock);
-+
-+	priv->regmap = dev_get_regmap(dev->parent, NULL);
-+	if (!priv->regmap)
-+		return dev_err_probe(dev, -EPROBE_DEFER,
-+				     "parent regmap is not ready\n");
-+
-+	if (device_property_present(dev, "nvmem-cells")) {
-+		ret = nvmem_cell_read_u8(dev, "calibration",
-+					 &nvmem_calibration);
-+		if (ret)
-+			return dev_err_probe(dev, ret,
-+					     "failed to read calibration data\n");
-+		calibration = nvmem_calibration;
-+	} else {
-+		ret = regmap_read(priv->regmap, AC200_EFUSE_EPHY_REG,
-+				  &calibration);
-+		if (ret)
-+			return dev_err_probe(dev, ret,
-+					     "failed to read on-chip calibration data\n");
++	if (phydev->drv->set_tx_lpi) {
++		config.tx_lpi_enabled = false;
++		return phydev->drv->set_tx_lpi(phydev, &config);
 +	}
 +
-+	ret = device_get_phy_mode(dev);
-+	if (ret < 0)
-+		return dev_err_probe(dev, ret, "failed to read PHY mode\n");
-+	interface = ret;
++	if (phydev->drv->disable_autonomous_eee)
++		return phydev->drv->disable_autonomous_eee(phydev);
 +
-+	/* The vendor driver supplies no transfer function beyond this offset. */
-+	bps_effuse_code = (calibration + AC200_EPHY_BPS_EFFUSE_OFFSET) &
-+			   FIELD_MAX(AC200_EPHY_BPS_EFFUSE_MASK);
-+	ephy_ctl = FIELD_PREP(AC200_EPHY_BPS_EFFUSE_MASK, bps_effuse_code) |
-+		   AC200_EPHY_LED_ACTIVE_LOW;
-+	/* EPHY_MODE and BIST_CLK_EN stay clear for normal operation. */
-+
-+	switch (interface) {
-+	case PHY_INTERFACE_MODE_MII:
-+		break;
-+	case PHY_INTERFACE_MODE_RMII:
-+		ephy_ctl |= AC200_EPHY_RMII_SEL;
-+		break;
-+	default:
-+		return dev_err_probe(dev, -EINVAL,
-+				     "unsupported PHY mode %s\n",
-+				     phy_modes(interface));
-+	}
-+
-+	clk = clk_get(dev->parent, NULL);
-+	if (IS_ERR(clk))
-+		return dev_err_probe(dev, PTR_ERR(clk),
-+				     "failed to get input clock\n");
-+
-+	clk_rate = clk_get_rate(clk);
-+	clk_put(clk);
-+
-+	switch (clk_rate) {
-+	case 24000000:
-+		ephy_ctl |= AC200_EPHY_CLK_SEL_24_MHZ;
-+		break;
-+	case 27000000:
-+		break;
-+	default:
-+		return dev_err_probe(dev, -EINVAL,
-+				     "unsupported input clock rate %lu Hz\n",
-+				     clk_rate);
-+	}
-+
-+	priv->control.power_on = ac200_ephy_ctl_power_on;
-+	priv->control.power_off = ac200_ephy_ctl_power_off;
-+	priv->control.set_led_outputs = ac200_ephy_ctl_set_led_outputs;
-+	priv->control.set_led_polarity = ac200_ephy_ctl_set_led_polarity;
-+	priv->control.interface = interface;
-+	priv->ephy_ctl = ephy_ctl;
-+	priv->led_io_enable = AC200_EPHY_LED_IO_ENABLE_MASK;
-+	platform_set_drvdata(pdev, &priv->control);
 +	return 0;
 +}
 +
-+static void ac200_ephy_ctl_remove(struct platform_device *pdev)
-+{
-+	struct acx00_ephy_control *control = platform_get_drvdata(pdev);
+ int phy_init_hw(struct phy_device *phydev)
+ {
+ 	int ret = 0;
+@@ -1395,9 +1410,8 @@ int phy_init_hw(struct phy_device *phydev)
+ 	}
+ 
+ 	/* Re-apply autonomous EEE disable after soft reset */
+-	if (phydev->autonomous_eee_disabled &&
+-	    phydev->drv->disable_autonomous_eee) {
+-		ret = phydev->drv->disable_autonomous_eee(phydev);
++	if (phydev->autonomous_eee_disabled) {
++		ret = phy_disable_autonomous_tx_lpi(phydev);
+ 		if (ret)
+ 			return ret;
+ 	}
+@@ -2973,8 +2987,9 @@ void phy_support_eee(struct phy_device *phydev)
+ 	 * manage LPI signaling instead. The flag is stored so it can be
+ 	 * re-applied after a PHY soft reset (e.g. suspend/resume).
+ 	 */
+-	if (phydev->drv && phydev->drv->disable_autonomous_eee) {
+-		int ret = phydev->drv->disable_autonomous_eee(phydev);
++	if (phydev->drv && (phydev->drv->set_tx_lpi ||
++			    phydev->drv->disable_autonomous_eee)) {
++		int ret = phy_disable_autonomous_tx_lpi(phydev);
+ 
+ 		if (ret)
+ 			phydev_warn(phydev, "Failed to disable autonomous EEE: %pe\n",
+diff --git a/include/linux/phy.h b/include/linux/phy.h
+index 2eba54e068f6..55053b914144 100644
+--- a/include/linux/phy.h
++++ b/include/linux/phy.h
+@@ -1391,6 +1391,24 @@ struct phy_driver {
+ 	 */
+ 	int (*disable_autonomous_eee)(struct phy_device *dev);
+ 
++	/**
++	 * @set_tx_lpi: Configure PHY-autonomous Tx LPI
++	 * @dev: PHY device to configure
++	 * @config: Requested Tx LPI enable state and idle timer
++	 *
++	 * The presence of this callback advertises that the driver supports
++	 * configuring PHY-autonomous LPI through the ethtool EEE Tx LPI fields.
++	 * It is not used for userspace configuration after phylib has handed LPI
++	 * control to the MAC. Drivers without this callback retain the legacy
++	 * behavior in which those fields only configure phylib and the attached
++	 * MAC. A request with Tx LPI disabled must be accepted regardless of the
++	 * timer, since the timer has no meaning while the transmitter is disabled.
++	 *
++	 * Return: 0 on success, negative errno on failure.
++	 */
++	int (*set_tx_lpi)(struct phy_device *dev,
++			  const struct eee_config *config);
 +
-+	control->power_off(control);
-+}
-+
-+static const struct of_device_id ac200_ephy_ctl_of_match[] = {
-+	{ .compatible = "x-powers,ac200-ephy-ctl" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, ac200_ephy_ctl_of_match);
-+
-+static struct platform_driver ac200_ephy_ctl_driver = {
-+	.probe = ac200_ephy_ctl_probe,
-+	.remove = ac200_ephy_ctl_remove,
-+	.shutdown = ac200_ephy_ctl_remove,
-+	.driver = {
-+		.name = "ac200-ephy-ctl",
-+		.of_match_table = ac200_ephy_ctl_of_match,
-+	},
-+};
-+module_platform_driver(ac200_ephy_ctl_driver);
-+
-+MODULE_AUTHOR("James Hilliard <james.hilliard1@gmail.com>");
-+MODULE_DESCRIPTION("X-Powers AC200 Ethernet PHY control driver");
-+MODULE_LICENSE("GPL");
-diff --git a/drivers/net/phy/xpowers-acx00.h b/drivers/net/phy/xpowers-acx00.h
-new file mode 100644
-index 000000000000..8cf6fe616137
---- /dev/null
-+++ b/drivers/net/phy/xpowers-acx00.h
-@@ -0,0 +1,25 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef __DRIVERS_NET_PHY_XPOWERS_ACX00_H
-+#define __DRIVERS_NET_PHY_XPOWERS_ACX00_H
-+
-+#include <linux/phy.h>
-+
-+enum acx00_ephy_led {
-+	ACX00_EPHY_LED_LINK_ACTIVITY,
-+	ACX00_EPHY_LED_SPEED,
-+	ACX00_EPHY_LED_DUPLEX,
-+	ACX00_EPHY_LED_COUNT,
-+};
-+
-+struct acx00_ephy_control {
-+	phy_interface_t interface;
-+	int (*power_on)(struct acx00_ephy_control *control,
-+			unsigned int phy_addr);
-+	int (*power_off)(struct acx00_ephy_control *control);
-+	int (*set_led_outputs)(struct acx00_ephy_control *control,
-+			       unsigned long outputs);
-+	int (*set_led_polarity)(struct acx00_ephy_control *control,
-+				bool active_low);
-+};
-+
-+#endif
+ 	/* Get and Set PHY tunables */
+ 	/** @get_tunable: Return the value of a tunable */
+ 	int (*get_tunable)(struct phy_device *dev,
 
 -- 
 2.53.0
