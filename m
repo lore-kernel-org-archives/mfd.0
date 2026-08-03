@@ -1,192 +1,139 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-vs1-f48.google.com (mail-vs1-f48.google.com [209.85.217.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60D4E39479B;
-	Mon,  3 Aug 2026 07:07:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785740852; cv=none; b=YTZENG7lOIXgH0n67uOJC/tsv2ACKJf3fXNCtwVvB6pXPyUJOv6N7EusADpkvOosULOEe0YK2plC5B5W/kvLmYGlrFW5ybQfKrdadcebgGlG+QxeE1h6ehmwaXOamG/iQbw+jT8CsWqR016xh1J6ABWb+TSwPxYPz73cNyewvQY=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785740852; c=relaxed/simple;
-	bh=fT96Vm5ZuQZE0nYWI2Z4sAsL76nJCkNJcI/OIzhENfY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=EMTG2jhkBDmsvKtkQQ2PKrElkcn8gTVlyaIiBtquHTXMuWcZeW1LYkU5JzdIcBzEbczXjmbQR6PTyPhlJkbxECeSYOP/Vj8jkRPIs1hbr9wduy+5YkwlQw2dfXGHBqbo9gs3CfRFVO6NorxkI7VPnrGfb2EZv5kqHQCrvBPFAxw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fSk4kBSv; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 050EC39EF24
+	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 07:22:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.217.48
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785741763; cv=pass; b=rBEQntpjsT21SgbIWWxowjKiuGPt70qw2aJMGAdcRq0YS+WhCdgpGndVPgso5bcqvqPq4uZTBSTEXhQ18cxEUZ+DVw5oljJct1lju2x6tN3sNWI9I37TlAxJyXuGmehRdKzuSQm6+xYy1gNzn+D3/tQx3uIRMFvH7njZvE3VRj0=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785741763; c=relaxed/simple;
+	bh=A8u5ujOdUQWybgJKMqWZVqAeP8c+v+cuw6pgGBdqcGA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Znrd47hFIP/e/aq8FdI9jj4m1Y6rnrAI+/mDACzNiQbAi8g7sdm7EPBjZXwn5tahu+u7fvvod8w+ulfCccqEakT2pFzWQwW/M4xogIMSvZu2w7QtphcddGmhvAzxRKC/2PSOFHQC174cD5y7W56bPir+XKmuSLowglehQ9ZbYtQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=TUJzTaJi; arc=pass smtp.client-ip=209.85.217.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fSk4kBSv"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04ADD1F000E9;
-	Mon,  3 Aug 2026 07:07:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785740851;
-	bh=ypK3jGgUKK3dY6+nlQbF3+GlhwH+CAiV8k4/9ULVqiU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=fSk4kBSvaHyUrEitakkNQHlGnB82L4TJT+1rk9vp34NQQZ0qMp9B89gDSj8OJvEtb
-	 dCO3xbE9eecQiQ7+TSo/UdR7nQA0EKT0UCQSfUNYnpsEemtUQpJd4Li+6T82ngHPXh
-	 umf8HtssFG8L6qf5IA0jxHqYwSZErY+bvigzSPT+ChqxwQy61yd4rn7pcypFd3m7ik
-	 M+MDUJRrVNrGVnJvSDtc8+WL3oGoQ/RRTfchN38yz9Gj5bm6RylARGPrlGnoXUcwuG
-	 G8Lucm+OT9ai+k4SEEyIWwZpz2z3oJqCyVYsXfjsmOlN3iOJn11gkXDRKAF8og4/dZ
-	 hKFzNiUQWe5iA==
-Message-ID: <f2cc3c90-060f-40c1-a55e-e2ed91e65487@kernel.org>
-Date: Mon, 3 Aug 2026 09:07:16 +0200
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="TUJzTaJi"
+Received: by mail-vs1-f48.google.com with SMTP id ada2fe7eead31-73791ee3612so1654894137.1
+        for <mfd@lists.linux.dev>; Mon, 03 Aug 2026 00:22:41 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785741761; cv=none;
+        d=google.com; s=arc-20260327;
+        b=nXlrskhcpN58NcGfP6sDbx3EWP8avr8be6KUBTa86tdaM5gGkaku3woE9KMYar5P/e
+         LmbMePXxAqjl/9I2KAr/WxwGvAQcHIXwZ6690/JM+9otqbocRzpxMekH2cSqA21cd4ie
+         LZGaKWZu6EoFuxX3ZBX8qChdV/De/Y9Z5r0uccSLhFuZ9i4d9bWhF4X60FVxbvxmWGTT
+         bKeK4uKKCuVrndlKcUK8SZwVRscvGyT7OpUutEVPGEFc52EaAVtDtOJk7ZfRsbPmkHNb
+         riN2vakp7xSaoh2legIv1qItwLPC/dSpYX/5LzmSr1AcrslleaWyZw0Fc4tg/hJnaAnU
+         NJHA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=A8u5ujOdUQWybgJKMqWZVqAeP8c+v+cuw6pgGBdqcGA=;
+        fh=k6Z/lKqWwsygimmMlXF156rkazCo4MFn2KmAZYQyDQQ=;
+        b=sKuhl4pA9GewjKlXxH0/6Ue5h8uNLlVvShvgy5LE2mPNJasQJjvhgfe8KDnrvX44eB
+         4GpifgSoQbliUbhwsFA2yDQzpL74kwXn0g/XphIyyBjmAMc10QUT5fPKvYb6NMFVlLrL
+         XFHIAIdZF5fx3NC7ffqdnFR5zk+QoYQ4MTfU8HizmPlinQQ8X/OMAQEJB0Vty5DN7lTi
+         AwL0L27okrd/x13+zZElGz637UpGywLoJ//3gyxqVjlNhaoPU0VQ/sltpNrK3vTmlY7i
+         npY4ZrV2ptCOQLX9KaZw/SI2zKSXWYs2LaNCuN/MbHJoNiGFfgBwezxEIDobUCldxwkV
+         6QvQ==;
+        darn=lists.linux.dev
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1785741761; x=1786346561; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=A8u5ujOdUQWybgJKMqWZVqAeP8c+v+cuw6pgGBdqcGA=;
+        b=TUJzTaJi66PK7YPLnKDUu/SApTP+Lty6a52BncCYzVeqebQBzJETk9sl9xSIUiKryQ
+         pI1CLruiXxVRXRADWEBOIOhLMK8mpDZl5cqiDIWtoPg8ydaL0jzg5cUpvrx54JISNWNO
+         8h1MAnHSHIoXHsLG6wxGetFfyJEJDRqQMSQzNJfXjcTxL5n5UOUiXK6eBe1cRBjBKQPK
+         R9gS7CRZFb0Dbg7bgBzQlVNxoDAYVYxGZnKaJMPlHBUHMKfMyRDQFkuTqCsiRdJ/vMRh
+         kr2KemtvcTcQDpz86CoDdnBGOmXjYuug6I6dAU1LTdCi0jgVmyuNca8C17zwylJ2LaFt
+         fHQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785741761; x=1786346561;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=A8u5ujOdUQWybgJKMqWZVqAeP8c+v+cuw6pgGBdqcGA=;
+        b=FkvI2A+wc+1umme/wBa5e8yXtTBzfPlgSCrbg9isW3s57nD4NwidRSdBSlFqUZR6vl
+         CD2HUqrOprbm6uOpk7QEFLE4Mevi+Lud8XCGRF+BqXryC+sEtjsEoGp6N+UnWt2CLeSS
+         8BCTcRtWNWhshXUW4vO5gwGT+2ukCSFMNgYamOwbLMjhDEOSMRFmXn5RYdt4kJKnpaJ2
+         ZTsVidsQNcowlP9mp6SP5pu0/2BDUvrdIF/zBwYft+x5Vsq17JMGdcQ2OL+ulPlO8XAO
+         H/h0ATa/uQ9XXpm/b0ilpjuPrCwKoHzwlnP8HTriendsI+69Z7dbenWXpiz9AO2ahsmY
+         58Gw==
+X-Forwarded-Encrypted: i=1; AHgh+Ro/UfrHjtLRb0q5XMsWm1VXfzpN+/sMTOaApcPfqgKsolcjJ0y2lLgbXQsb4eV+DZ06KhE=@lists.linux.dev
+X-Gm-Message-State: AOJu0YwVXO/Q75hHMenBKI2Ab4JBf0ASjY9vDAlpDy1611Q1epGAfScG
+	khNkEMNE9koWvSm8k1YdaKamk1TrXOuNOG+irx6q6McK3Z3EUbckZN3o6a/hxG4IelSnP+AkERh
+	LVh2TuUE9WUbX0NxfiCu1TIaQt1gmkzE=
+X-Gm-Gg: AR+sD12yy3juMsw5v7LVedMtRRLC0VPLKJUOmLJsn657CCJK42U9O+cxJ0sXkzqvJ5N
+	DJ5MhexPokXmTRjOzCiUWDqBxgqAL7V6Dx5t09CMd321CZKjeaYDYUglag8MWWhtxo8q07M7/4W
+	KbCylamf5YTJLEgB3sC/H10OnxcSASJmUoULF3FRPLwzlvrfQT6BLa4/T9mJeYy3+fdAOk9hA6c
+	NdgRBE+0TEBYUP4unCODaKmj1s7gvUaTOgV3M0FffWXRfwi4hoRqqFXoiZDTHVg/LWf2+IhaT68
+	w45xPq7aWKzCU+zBUVAbOAk167SRLgkbI4mCYfNWT5rP+hdn0o/LC1RcZ8h/z2V7JexCSq4I9L9
+	24SN1HjH9ojh3teQF+JlMl5XgCpureOQCdNseMxrIMF0AY+XG30rrktuzwbNgdPccLP7OSgARNd
+	jGqOAJrbNiqy+XtmHT2s8SL7KWhqh7m43jzyEU
+X-Received: by 2002:a05:6102:441a:b0:738:1ef6:51b9 with SMTP id
+ ada2fe7eead31-75b22260dffmr6459811137.5.1785741760783; Mon, 03 Aug 2026
+ 00:22:40 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 08/21] dt-bindings: mfd: x-powers: add AC200
-To: James Hilliard <james.hilliard1@gmail.com>,
- Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
- <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Chen-Yu Tsai <wens@kernel.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>, Andre Przywara
- <andre.przywara@arm.com>, Richard Genoud <richard.genoud@bootlin.com>,
- Maxime Ripard <mripard@kernel.org>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Giuseppe Cavallaro <peppe.cavallaro@st.com>,
- Jose Abreu <joabreu@synopsys.com>,
- Maxime Chevallier <maxime.chevallier@bootlin.com>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>, Andrew Lunn <andrew@lunn.ch>,
- Heiner Kallweit <hkallweit1@gmail.com>, Russell King
- <linux@armlinux.org.uk>, Saravana Kannan <saravanak@kernel.org>,
- Lee Jones <lee@kernel.org>, Heiko Stuebner <heiko@sntech.de>
-Cc: netdev@vger.kernel.org, devicetree@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev,
- linux-kernel@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
- mfd@lists.linux.dev, linux-rockchip@lists.infradead.org
 References: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
- <20260802-submit-acx00-of-dynamic-v1-v1-8-0a53cd9e21cc@gmail.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20260802-submit-acx00-of-dynamic-v1-v1-8-0a53cd9e21cc@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <20260802-submit-acx00-of-dynamic-v1-v1-21-0a53cd9e21cc@gmail.com> <c3171c59-bc83-4be5-beb4-e93bfb4d05a2@kernel.org>
+In-Reply-To: <c3171c59-bc83-4be5-beb4-e93bfb4d05a2@kernel.org>
+From: James Hilliard <james.hilliard1@gmail.com>
+Date: Mon, 3 Aug 2026 01:22:29 -0600
+X-Gm-Features: AUfX_my5qRz2h8yblU9_NUKeJ1t5ekFC9VrjQ-ysDEg0WGg4G6m5XNTvE_CWbqw
+Message-ID: <CADvTj4qg8Yjwr=6KVO_J+r+tEC=6TDrU3o_8YG7vuEdDA0ZpTQ@mail.gmail.com>
+Subject: Re: [PATCH 21/21] arm64: defconfig: enable X-Powers ACx00 Ethernet support
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, 
+	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Chen-Yu Tsai <wens@kernel.org>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+	Samuel Holland <samuel@sholland.org>, Andre Przywara <andre.przywara@arm.com>, 
+	Richard Genoud <richard.genoud@bootlin.com>, Maxime Ripard <mripard@kernel.org>, 
+	Alexandre Torgue <alexandre.torgue@foss.st.com>, Giuseppe Cavallaro <peppe.cavallaro@st.com>, 
+	Jose Abreu <joabreu@synopsys.com>, Maxime Chevallier <maxime.chevallier@bootlin.com>, 
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Andrew Lunn <andrew@lunn.ch>, 
+	Heiner Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, 
+	Saravana Kannan <saravanak@kernel.org>, Lee Jones <lee@kernel.org>, Heiko Stuebner <heiko@sntech.de>, 
+	netdev@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev, 
+	linux-kernel@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, 
+	mfd@lists.linux.dev, linux-rockchip@lists.infradead.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 03/08/2026 07:14, James Hilliard wrote:
-> The AC200 is an I2C-controlled mixed-signal companion IC containing
-> audio, video, RTC and Fast Ethernet PHY functions.
+On Mon, Aug 3, 2026 at 1:00=E2=80=AFAM Krzysztof Kozlowski <krzk@kernel.org=
+> wrote:
+>
+> On 03/08/2026 07:14, James Hilliard wrote:
+> > Build the H616 PWM clock provider, AC200 MFD, both variant-specific
+>
+> Use full names. Is it Samsung H616 PWM clock controller?
 
-This fails when applied, because you did not explain the
-dependencies/merging of this patchset.
+It's the Allwinner H616 PWM.
 
-This is THE MOST important information of cover letter. The first thing
-to explain.
+>
+> > EPHY control drivers and the shared link-PHY driver as modules. Enable =
+the
+> > netdev LED trigger as a module so DT-described PHY LEDs can use hardwar=
+e
+> > offload.
+>
+> Why? IOW, which upstream board needs all of these?
 
-> 
-> Describe the parent device, its input clock, required function supplies,
-> the optional SID bandgap calibration cell used by the vendor initialization
-> sequence, and its optional Ethernet PHY control child. Document the 24 and
-> 27 MHz rates encoded by the public EPHY clock selector.
-> 
+The Orange Pi Zero 2W for example would use this along with
+any other boards using this copackaged x-powers ephy.
 
-...
-
-> +required:
-> +  - compatible
-> +  - reg
-> +  - clocks
-> +  - ac-ldoin-supply
-> +  - ephy-vcc-supply
-> +  - rtc-vcc-supply
-> +  - tv-vcc-supply
-> +
-> +dependencies:
-> +  interrupts: [ interrupt-controller ]
-> +  interrupt-controller: [ '#interrupt-cells', interrupts ]
-> +  '#interrupt-cells': [ interrupt-controller ]
-> +  nvmem-cells: [ nvmem-cell-names ]
-> +  nvmem-cell-names: [ nvmem-cells ]
-
-Why do you need all these dependencies? What are you trying to express?
-
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/interrupt-controller/irq.h>
-> +
-> +    i2c {
-> +        #address-cells = <1>;
-> +        #size-cells = <0>;
-> +
-> +        mixed-signal@10 {
-
-...
-
-> +...
-> diff --git a/include/dt-bindings/mfd/x-powers,ac200.h b/include/dt-bindings/mfd/x-powers,ac200.h
-> new file mode 100644
-> index 000000000000..cc59e2ab4912
-> --- /dev/null
-> +++ b/include/dt-bindings/mfd/x-powers,ac200.h
-> @@ -0,0 +1,13 @@
-> +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-> +/*
-> + * Interrupt numbers of the X-Powers AC200 interrupt controller.
-> + */
-> +
-> +#ifndef _DT_BINDINGS_MFD_X_POWERS_AC200_H
-> +#define _DT_BINDINGS_MFD_X_POWERS_AC200_H
-> +
-> +#define AC200_IRQ_TVE			0
-> +#define AC200_IRQ_EPHY			1
-> +#define AC200_IRQ_RTC			2
-
-Hardware constants are not really bindings, even though you use them in
-the driver.
-
-> +
-> +#endif /* _DT_BINDINGS_MFD_X_POWERS_AC200_H */
-> 
-
-
-Best regards,
-Krzysztof
+>
+>
+> Best regards,
+> Krzysztof
