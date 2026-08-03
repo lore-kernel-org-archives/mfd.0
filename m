@@ -1,170 +1,153 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 290362147E6
-	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 17:15:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0BA42423A66
+	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 17:20:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785777357; cv=none; b=oMmBvcWX4NOekU8FT68CyoHyckh08qgWCWPKR75IWfPsYLybD7DiOj4z2yDCRfbqzJwhBwlxafbIKD7ydK0hJlve1fCUN1+2jatao+YY/2GPWMImKzmRloaD4/f7ZZoUcoUbtmG0989n5SEqJd0dVpHT7/TkwYSA9fVm3Gfm+lU=
+	t=1785777652; cv=none; b=JT3pHQijOwHEWeTizHPml9pfv38cwmI63vVnclvlwbfi/IqzM34ZESdFgPcbBRpaeacTT0W+UgIiXGJRxmIHCOyf4pZRwACRPMotgl501BzjxrdYqioitC6iTm09IRlel3IoEPKvWTnrV+VQC/FiiEmY+/YldLFSaNxobvZH9Q4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785777357; c=relaxed/simple;
-	bh=ntBLxP2m1TqUnO1PfkVqoAvP/CktSMvomKXwB0H/PT8=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=mte6V8SvImZ4S0947/qxn+A6TfD+Xccubi0Bra2dP4UDJW1cDIqzseyx/iUz5dfFuv4n4HNEcwPZCcSs7gthBfYtlm9N92myJfvIFvsSbHqwS10o6Zvr6aJY2xTCW1JX4q5vKMwJAgI23kHFhtahOSkgY2CdtW+lhjOh1gHmDV4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CpKamWPc; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785777652; c=relaxed/simple;
+	bh=zyYG03tMhaObC+0HIHVJK8kKJMjB519sRgHuPqlpedo=;
+	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
+	 Message-Id:References:To; b=I/rn2FwPpyInNLmKNiyZPhrCcIPPztZqvpGMSUJC0Jm/tq4mEAa+GEC7DPAMo9Y6YCwQfaf27uuyLBGnAOQqBwvA6mbaYCsFklKMa8HFmfxuirsiJrKWX6smIEfKmCuxPTkBhpIwxV3ulg92TobdnYpNrcl7QB9qiFHefquldUQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VKExgmcm; arc=none smtp.client-ip=209.85.210.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CpKamWPc"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 951F81F000E9;
-	Mon,  3 Aug 2026 17:15:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785777355;
-	bh=35KDuF7K/l2AGvsIK5E//IIaoylKVYDTJt+G7LMbEVQ=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=CpKamWPcb/fSoo/jiUwVsaPf/ax6MKnnFw66K1a2K3O2cMRcaG8NVjAYPfl9/eNwa
-	 fLROWZYYhNIYu4ThD8WtVxlNzj7lUCRsqM2Tn20ScTkmnQhEE8ZMaH1XPjp7pxkIIz
-	 tmHGz8Ur3U2YFIO5mvGkMQL8zXCr4SxAt7RCj+7ddLdhOLKOnI5Tn3qmTqoRiY1L/9
-	 UevHljBUZcltAO1Apyyfby2IBY8IqNWx02rn/m/PesmI8SecF3YrUkJrXuXSeNOZUk
-	 bRK2Lh7+j7JAxxDQAEvxik70frdf/A7P8+OK9hF4ydPe/V8FwGcw0Gs430HlLh9fy+
-	 brE1f5R9S6Y/Q==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RFC v5 7/7] mfd: ls2kbmc: Capture the reset event of BMC
- through GPIO
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Miao Wang" <shankerwangmiao@gmail.com>
-Cc: lee@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260804-ls2kbmc-mod-v5-7-e6bc5cdd9a93@gmail.com>
-References: <20260804-ls2kbmc-mod-v5-0-e6bc5cdd9a93@gmail.com>
- <20260804-ls2kbmc-mod-v5-7-e6bc5cdd9a93@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 03 Aug 2026 17:15:55 +0000
-Message-Id: <20260803171555.951F81F000E9@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VKExgmcm"
+Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-848c995c29dso295890b3a.3
+        for <mfd@lists.linux.dev>; Mon, 03 Aug 2026 10:20:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1785777648; x=1786382448; darn=lists.linux.dev;
+        h=to:references:message-id:content-transfer-encoding:cc:date
+         :in-reply-to:from:subject:mime-version:content-type:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=zyYG03tMhaObC+0HIHVJK8kKJMjB519sRgHuPqlpedo=;
+        b=VKExgmcm55JpD9aZnpW5r3PtCf19z4hmXvf75hEhs2NLWgC0j70rCXIHvO3ecx+kLr
+         JXpFyuxyLmj567Nd7++DZzG+U+BmjkrfIncVVU6x5laOifcVN4LkfOuc75JV0+qtlv2P
+         1BF+r6OQH4ALh1gzQ+Ky4aLT+NpOOjrbX3I1cFe7FyxlbORKoonKc+4mg0+Pq+rSuPKT
+         jTMGxSGmXMBz91sml2YyE/id9+k3T078gix92Fb+cbJbZ/mmwaIZlXroeAO4RnnmvdKC
+         8QQsMUGFAQ8JYVVJhVR1k66+ZR6TC6p7GuE/hivDaloT46TMyMjVKYFXwRyuxhC6XA6j
+         Z6YA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785777648; x=1786382448;
+        h=to:references:message-id:content-transfer-encoding:cc:date
+         :in-reply-to:from:subject:mime-version:content-type:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=zyYG03tMhaObC+0HIHVJK8kKJMjB519sRgHuPqlpedo=;
+        b=W/onxxiSjDrbQx8DsnF+48MxndFL1E+Wc9Ir0vfOF9uO0aZ9N2gnYTrU8/DrqfBXuo
+         zQTYMlhR1jVUbipCZbM5t2JgjGqzDMkJdsWVN7AK6cBtA92+23DMPfTmQXlt8DGZGcG+
+         nmAIghhAgjP+wRFuIFXo5nV8IzsWxYyhJcHuzxXhowVfk1WPujEqJtkLUAsGrzR+470Y
+         2KWlvManmnwmOo3IQd/3mbjdc3n2aOxWNzIv5YbLCv/cb+kxbLoX/V9aFnnAfE6PuYEQ
+         I1Lhe98voBZ/jlWjCK89hlwd66Je8IQaDGKbajksPj86wWemYp4jjxlrajBVXOu3HufO
+         rozw==
+X-Gm-Message-State: AOJu0YxryzpT6Yu479jxHzMhCtpzEfYhX1zEebD5x0Jjw9YzIcsHUD5r
+	hDbO+Y/gyc5Cyym26K2iiTWxKd8Ju26FUKe7eDIy/kMzjd9DevQ6av6pEAY7TX+v1roKIw==
+X-Gm-Gg: AR+sD106MeesOssg0dcxuptz5aXXMODKTy7tteiRPub7VStuy9YZ4EGaOkWiUnYhHnM
+	Fl6xynq6Vq3NeLSjHjcMv2kdCI7PzfroF5CXj625Tp9FE6/PopoLIOLn6E512gbQJW8/w+jW4/j
+	KwKPseIxgWNLwBf+jWs90CW4jLendjhFsljxiP1h32vS6+tmnwn64thuvfcSyCBQllA4EsMuyJI
+	YA4gXN+9jEM6IWpwF82WXeJz1xRtIWGJuvs0dzZZhGpv92FiuzPniW2nKi3w9JCvxXIDX7noYaS
+	OQyCKj9d74UG9yGdFeqiY+8CS3ORqwWczhKjEWzPuo4/hEd1SkuPqKWXchDD+KLItLopwRLcVZz
+	AxN+D8sNwYoHTzEMscgHFlyMrjCiYIgXC3u/8uzCyY1DsfIt3sRTWMae2Dh6HzuWKwm3Zwwp/8E
+	q9q7m2Bk6PqXYKVat+HGFiAOrujScEYSrdHHf3lIbNGA2tTLPVz9tovhaU646a7ATf9iZ5fnOt0
+	H5MIuD/u2o=
+X-Received: by 2002:a05:6a00:420e:b0:848:5451:cfa8 with SMTP id d2e1a72fcca58-84ee45ad582mr14064936b3a.0.1785777648119;
+        Mon, 03 Aug 2026 10:20:48 -0700 (PDT)
+Received: from smtpclient.apple ([23.247.139.92])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84edbe7a243sm3996750b3a.24.2026.08.03.10.20.46
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Mon, 03 Aug 2026 10:20:47 -0700 (PDT)
+Content-Type: text/plain;
+	charset=utf-8
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81.1.8\))
+Subject: Re: [PATCH RFC v3 7/7] mfd: ls2kbmc: Capture the reset event of BMC
+ through GPIO
+From: Miao Wang <shankerwangmiao@gmail.com>
+In-Reply-To: <20260725211039.GF3526803@google.com>
+Date: Tue, 4 Aug 2026 01:20:33 +0800
+Cc: mfd@lists.linux.dev
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <040B2A9C-4411-48B3-8FCF-46623B85F532@gmail.com>
+References: <20260710-ls2kbmc-mod-v3-0-ef718636e78e@gmail.com>
+ <20260710-ls2kbmc-mod-v3-7-ef718636e78e@gmail.com>
+ <20260709174055.D25E71F00A3A@smtp.kernel.org>
+ <20260723112903.GB3363113@google.com>
+ <E1909632-6D06-4648-986C-6B7867D231DB@gmail.com>
+ <20260723131120.GL3363113@google.com>
+ <73FED0CE-3263-4853-9402-5D0E081EF780@gmail.com>
+ <20260725211039.GF3526803@google.com>
+To: Lee Jones <lee@kernel.org>
+X-Mailer: Apple Mail (2.3826.700.81.1.8)
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
-s) to consider:
+Hi, Jones
 
-New issues:
-- [Low] Casting between `phys_addr_t` and `void *` causes compiler warnings=
- and potential data truncation on 32-bit platforms.
+> 2026=E5=B9=B47=E6=9C=8826=E6=97=A5 05:10=EF=BC=8CLee Jones =
+<lee@kernel.org> =E5=86=99=E9=81=93=EF=BC=9A
+>=20
+> On Thu, 23 Jul 2026, Miao Wang wrote:
+>=20
+>> Hi,
+>>=20
+>>> 2026=E5=B9=B47=E6=9C=8823=E6=97=A5 21:11=EF=BC=8CLee Jones =
+<lee@kernel.org> =E5=86=99=E9=81=93=EF=BC=9A
+>>>=20
+>>> On Thu, 23 Jul 2026, Miao Wang wrote:
+>>>=20
+>>>> Hi,
+>>>>=20
+>>>>> 2026=E5=B9=B47=E6=9C=8823=E6=97=A5 19:29=EF=BC=8CLee Jones =
+<lee@kernel.org> =E5=86=99=E9=81=93=EF=BC=9A
+>>>>>=20
+>>>>> On Thu, 09 Jul 2026, sashiko-bot@kernel.org wrote:
+>>>>>=20
+>>>>>> Thank you for your contribution! Sashiko AI review found 3 =
+potential issue(s) to consider:
+>>>>>>=20
+>>>>>> New issues:
+>>>>>> - [High] Unprotected access to `gpio_chip` without a NULL check =
+leads to a potential NULL pointer dereference or use-after-free.
+>>>>>> - [Medium] The ACPI memory resource search for the GPIO =
+controller only checks the first memory descriptor, ignoring any =
+subsequent ones.
+>>>>>=20
+>>>>> Looks like there are a few of these to consider.
+>>>>=20
+>>>> Many thanks for your response. I was preparing a v4 to fix the =
+first issue
+>>>> found by the bot. However, I believe that the second issue is false =
+positive,
+>>>> since the memory descriptors (if more than one) in _CRS are ordered =
+and the
+>>>> position is meaningful for the driver. As a result, only checking =
+the first
+>>>> descriptor is acceptable.
+>>>>=20
+>>>>>=20
+>>>>> I'm unmarking this for review for now.
+>>>>=20
+>>>> I still want review for other improvement suggestions. Thanks in =
+advance.
+>>>=20
+>>> Due to extreme workload, I need a clean or justified Sashiko pass =
+first.
+>>>=20
+>> So is there any guides that I can refer to to mark for false =
+positives?
+>=20
+> Most people reply to the feedback and state the fact, with a little
+> background or additional information of course.
 
-Pre-existing issues:
-- [High] The driver dynamically modifies the global `ls2k_bmc_cells` array =
-during probe, violating the `static const` requirement and creating a race =
-condition.
---
+I have successfully made the V5 pass the review from Sashiko.
 
---- Patch [7]: [PATCH RFC v5 7/7] mfd: ls2kbmc: Capture the reset event of =
-BMC through GPIO ---
-commit 535a8683905c93577231c2208f8f76431cb9049d
-Author: Miao Wang <shankerwangmiao@gmail.com>
+Cheers,
 
-mfd: ls2kbmc: Capture the reset event of BMC through GPIO
+Miao Wang
 
-This patch modifies the driver to capture the BMC reset event through the
-GPIO framework rather than directly accessing the controller via a fixed
-address. It attempts to find the GPIO pin via ACPI _CRS resources, falling
-back to a fixed address and pin number if not found. This helps prevent
-conflicts when the same GPIO controller is probed by an ACPI GPIO driver.
 
-> diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-> index e7bebfe696ac4..97a666a136fe4 100644
-> --- a/drivers/mfd/ls2k-bmc-core.c
-> +++ b/drivers/mfd/ls2k-bmc-core.c
-
-[ ... ]
-
-> @@ -375,6 +368,91 @@ static void ls2k_bmc_save_pci_data(struct pci_dev *p=
-dev, struct ls2k_bmc_ddata *
->  	pci_read_config_dword(pdev, PCI_INTERRUPT_LINE, &ddata->bmc_pci_data.in=
-terrupt_line);
->  }
-> =20
-> +static struct fwnode_handle *gpio_dev_get_fwnode(struct gpio_device *gde=
-v)
-> +{
-> +	struct device *gdev_dev;
-> +
-> +	gdev_dev =3D gpio_device_to_device(gdev);
-> +	return dev_fwnode(gdev_dev);
-> +}
-> +
-> +static int ls2k_bmc_gpiochip_find(struct gpio_chip *gc, const void *data)
-> +{
-> +	struct acpi_device *adev;
-> +	struct list_head resource_list;
-> +	struct resource_entry *rentry;
-> +	struct fwnode_handle *fwnode =3D gpio_dev_get_fwnode(gc->gpiodev);
-> +	phys_addr_t start_addr =3D (phys_addr_t) data;
-
-[Severity: Low]
-Does casting data from a void pointer back to a phys_addr_t cause data
-truncation on 32-bit platforms where phys_addr_t is a 64-bit type?
-
-Can this also trigger pointer-to-int cast warnings during compilation?
-
-> +	int ret, found =3D 0;
-> +
-
-[ ... ]
-
-> +static struct gpio_desc *ls2k_bmc_find_gpio(struct ls2k_bmc_ddata *ddata)
-> +{
-> +	/*
-> +	 * In conventional way, the GPIO should be obtained through ACPI or
-> +	 * device tree. However, when the information is not available,
-> +	 * we should find the GPIO according to the convention of the server
-> +	 * boards with LS2K BMC, the gpio signal reflecting the reset event
-> +	 * of the BMC should be connected to pin 14 of the GPIO input of
-> +	 * the first CPU node. The address of that GPIO controller is fixed.
-> +	 */
-> +	static const phys_addr_t LOONGSON_GPIO_REG_BASE =3D 0x1FE00500;
-> +	static const unsigned int LS2K_BMC_RESET_GPIO =3D 14;
-> +	int ret;
-> +	struct gpio_device *gdev __free(gpio_device_put) =3D NULL;
-> +	struct property_entry ls2k_bmc_swnode_properties[2] =3D { 0 };
-> +
-> +	dev_dbg(ddata->dev, "Searching for GPIO chip at address %pa\n", &LOONGS=
-ON_GPIO_REG_BASE);
-> +
-> +	gdev =3D gpio_device_find((void *)LOONGSON_GPIO_REG_BASE, ls2k_bmc_gpio=
-chip_find);
-
-[Severity: Low]
-Can passing the 64-bit LOONGSON_GPIO_REG_BASE by casting it to a void point=
-er
-truncate the upper 32 bits on 32-bit architectures?
-
-Does this also trigger int-to-pointer cast warnings during the build?
-
-[ ... ]
-
-[Severity: High]
-This isn't a bug introduced by this patch, but does ls2k_bmc_probe()
-dynamically modify the global ls2k_bmc_cells array during probe?
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_probe() {
-    ...
-    ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data =3D &pd;
-    ls2k_bmc_cells[LS2K_BMC_DISPLAY].pdata_size =3D sizeof(pd);
-    ...
-}
-
-The MFD subsystem guide requires mfd_cell arrays to be static const.
-
-Does this assignment create a race condition on concurrent probes (if multi=
-ple
-PCI devices were present) since instances would overwrite the shared
-platform_data pointer?
-
-Additionally, since pd is a stack variable, does this leave a dangling poin=
-ter
-in the global array after ls2k_bmc_probe() returns?
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260804-ls2kbmc-mo=
-d-v5-0-e6bc5cdd9a93@gmail.com?part=3D7
