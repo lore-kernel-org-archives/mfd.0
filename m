@@ -1,115 +1,170 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38C6B38734E
-	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 16:52:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F53A38E8A2;
+	Mon,  3 Aug 2026 16:56:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785775934; cv=none; b=OPS8DdcHihgq6/6BwNy1Sk0kYYl7s223H5KAxJ5T+yqrBRQ87FtALALh6vHJ3EHiSMpXiELWW4eG2a48ZLseZ/baL2w0TaO/vIBCDVPjrUv9vQHuYFd2OY+eVMUu4KxPfpkd/lQQ+kKmdA+C2+yc8a7bbZ7tJXibH/Dafo3jjDg=
+	t=1785776206; cv=none; b=ijcNv3LfetgSdRG0G8iufI3lbwK8D+hA07p5B4KNJdHPu1mjIpa5Q7+HGjR8dW7OU4BscwE3uMdMEm6CE0sn19zLwfoknFyJ7PqoUPpNV4qsINC+o/7qUIANW0ZD2Z9qlrw1gs+zbcOx4qc7e6PeB0JnNT8BTTpPnugHQoUxrz4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785775934; c=relaxed/simple;
-	bh=9hFWHpMr6667KTRSWMmWOov01VOWplUFcHlU43Po8Bo=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=l/pFDKteN9oVsuV9zf4pltrJMFIEdmR5qmz5PRdX8S+BqNrMY8poecWGGUL7as6caf/Y/Gt/O0Q7g22FC5CiTOOhdD3RnrgLlztvSqOx2Q3mpRGnuyXgRMW4+wmhSBa5SoLdPb5CypM6PVzyFHmZijfCO+8LlZMu7up+1+aDmk4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NX5jUezv; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785776206; c=relaxed/simple;
+	bh=00R75UySHqyvWDXRIcvJrzFhhNQlK+S8CJZvS9Em2ag=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=bOU+K4hg1gwuPnDN6Y8uIODyMjKG5nCp8oLrh3nKVVnr/VGYxxXv45Dn8EYzaeUQM6eKY226WZavlBUT8TetFpivIrgkKC9zSOXYJD+wq9lBtdjXpfJTM5cXo5UNxJbv1LPR6hSHP11oo/5XAhtFGrF3UcB8uDUlPfmPEZhkJqQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=T7dc95Cx; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NX5jUezv"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EF5611F01558
-	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 16:52:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785775933;
-	bh=ktJ1TUfqLx16vP/MAvZ075WUJwVncZtbcK2MP7W0fJA=;
-	h=References:In-Reply-To:Reply-To:From:Date:Subject:To:Cc;
-	b=NX5jUezvCwr3Rigf6GEnsLny5tMHcLZFIvDMsvf0oqTW3eb3OWBaeq+fyRCum6VGL
-	 C9+2zgMetoU5enhL9OdWm9slHbaCi01X9LtmAuQGxwipz59p35oUKE+JxpZR8yV01l
-	 mCpp+kUiy8rHdY5N7+UozqICMcWwmTfVbVB719KSYbH/ao1rExbdoLA9DPENCaUnG8
-	 B5FXrT8ssqElqQUofEl7hAcH2NRyRS7iR3wuNUI5lwrp0jghUXjHwicnkM0liHLNgZ
-	 2C6yEYFu6wZCUCmZ6E3lR3s4LlySmUA+2ZO33Go/3rajwFAvCGqNZ6iklyriI2z016
-	 Atp+mUiQ96tNQ==
-Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-5aeb2bc82ccso4235073e87.2
-        for <mfd@lists.linux.dev>; Mon, 03 Aug 2026 09:52:12 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RpraIAHfgY/a9HXRTFvNNbbWf/kCcFaP2CFbVFttVm/WJ7EOMmpT7wyT0cHGH0WhssoWWo=@lists.linux.dev
-X-Gm-Message-State: AOJu0Yy26wGF4W2piZ5myQeTC2o2aQWP8BpcJzGGfPHEgXs6UzDoXYug
-	7hNu5Qut/11GExmX/+AJ2HUF1747LuF3FPjAL/tBG12A7jnQueSf7OBvXW/zcZ18nN7ppZXSlQ0
-	zo1THtAHGejLdiP9ZtVblo14zv4pC3Tk=
-X-Received: by 2002:ac2:5218:0:b0:5b2:9c0e:a2d9 with SMTP id
- 2adb3069b0e04-5b2e4f9dd16mr1400790e87.65.1785775931139; Mon, 03 Aug 2026
- 09:52:11 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="T7dc95Cx"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A50EDC2BCF6;
+	Mon,  3 Aug 2026 16:56:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1785776205;
+	bh=00R75UySHqyvWDXRIcvJrzFhhNQlK+S8CJZvS9Em2ag=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=T7dc95CxanoWO2CfNzOCth3zZfF97/HKiFGggiEs6D0UPs+bUGUbwds/HQeIMZkZk
+	 zxODSOMdNRNtcgUqUZXdKAkfyoptd1bSfWeLR5pqfSsq/N277QCAbGU4iO/j/4PXuw
+	 EBigXbc/poJaVxsQr8eMTkcBtm2FAxo98iSYtQcq+BVuh6+ffD5hs1NyEZPAzHD13C
+	 g9geozrfYfdtab4XlJkn3UcP7UXNe45LfeXxG1q3Y3MkZEPPwAPlYmwru7AnBZ4p+A
+	 Mcbtfb/oyob256TqstAudfsUKvAe4S6FRi/F/Xer0JtLQhWe8xkHXfyAm44DJv7Wqk
+	 hU9FcU2RZy8og==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77693C55822;
+	Mon,  3 Aug 2026 16:56:45 +0000 (UTC)
+From: Miao Wang via B4 Relay <devnull+shankerwangmiao.gmail.com@kernel.org>
+Subject: [PATCH RFC v5 0/7] mfd: ls2kbmc: multiple fixes for this driver
+Date: Tue, 04 Aug 2026 00:55:48 +0800
+Message-Id: <20260804-ls2kbmc-mod-v5-0-e6bc5cdd9a93@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
- <20260802-submit-acx00-of-dynamic-v1-v1-8-0a53cd9e21cc@gmail.com>
- <2c0210b3-2c68-41f1-aa33-3f1693454849@lunn.ch> <CADvTj4pfNFVGrQV86T7X+nZQYUamxEYLLWuxVXk=av0da_XocQ@mail.gmail.com>
-In-Reply-To: <CADvTj4pfNFVGrQV86T7X+nZQYUamxEYLLWuxVXk=av0da_XocQ@mail.gmail.com>
-Reply-To: wens@kernel.org
-From: Chen-Yu Tsai <wens@kernel.org>
-Date: Tue, 4 Aug 2026 00:51:57 +0800
-X-Gmail-Original-Message-ID: <CAGb2v67Wo+WG47jF_vBUOwv0Vw1SDygXMdBgpsy3R1AQ_LLfHw@mail.gmail.com>
-X-Gm-Features: AUfX_my4aoD19Jk3-8CcfeDfaoI0T_9zWEBW-1SE8UXOLwMz9Yfo_iLW9hIPcwI
-Message-ID: <CAGb2v67Wo+WG47jF_vBUOwv0Vw1SDygXMdBgpsy3R1AQ_LLfHw@mail.gmail.com>
-Subject: Re: [PATCH 08/21] dt-bindings: mfd: x-powers: add AC200
-To: James Hilliard <james.hilliard1@gmail.com>
-Cc: Andrew Lunn <andrew@lunn.ch>, Andrew Lunn <andrew+netdev@lunn.ch>, 
-	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Jernej Skrabec <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>, 
-	Andre Przywara <andre.przywara@arm.com>, Richard Genoud <richard.genoud@bootlin.com>, 
-	Maxime Ripard <mripard@kernel.org>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
-	Giuseppe Cavallaro <peppe.cavallaro@st.com>, Jose Abreu <joabreu@synopsys.com>, 
-	Maxime Chevallier <maxime.chevallier@bootlin.com>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
-	Heiner Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, 
-	Saravana Kannan <saravanak@kernel.org>, Lee Jones <lee@kernel.org>, Heiko Stuebner <heiko@sntech.de>, 
-	netdev@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev, 
-	linux-kernel@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, 
-	mfd@lists.linux.dev, linux-rockchip@lists.infradead.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABTIcGoC/33NsY7CMAyA4VdBmcnJdtKkvQkJiQdgPd2QNg5ER
+ ylqUAVCffeLMrUMjLb1/X6JxGPkJL43LzHyFFMcrnmothvRnd31xDL6PAsCMmDIyEuiv7bvZD9
+ 4WRE02CiApiWRxW3kEB+l9iOOh734zctzTPdhfJYPE5ZTiVmoV7EJJchOad2GynNwanfqXbx8d
+ UNfOhN9sJQtueA9Wo3WmHerFhZhbVW2HCzWRhm2Nb9bvbAK11Zn6wmwAmodqWZp53n+B6W0kex
+ fAQAA
+X-Change-ID: 20260626-ls2kbmc-mod-5209193009b2
+To: Binbin Zhou <zhoubinbin@loongson.cn>, 
+ Chong Qiao <qiaochong@loongson.cn>, Lee Jones <lee@kernel.org>, 
+ Huacai Chen <chenhuacai@kernel.org>, Corey Minyard <corey@minyard.net>, 
+ Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>
+Cc: Xi Ruoyao <xry111@xry111.site>, WANG Xuerui <kernel@xen0n.name>, 
+ Yinbo Zhu <zhuyinbo@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
+ linux-gpio@vger.kernel.org, openipmi-developer@lists.sourceforge.net, 
+ Miao Wang <shankerwangmiao@gmail.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4070;
+ i=shankerwangmiao@gmail.com; s=20250715; h=from:subject:message-id;
+ bh=00R75UySHqyvWDXRIcvJrzFhhNQlK+S8CJZvS9Em2ag=;
+ b=owEBbQKS/ZANAwAKAbAx48p7/tluAcsmYgBqcMhBYc2vOUvOY/wHPTljdj2Ftxko+pcQLIy6H
+ CcaU4QBqL6JAjMEAAEKAB0WIQREqPWPgPJBxluezBOwMePKe/7ZbgUCanDIQQAKCRCwMePKe/7Z
+ bsXYD/9tG2QyBpwmX4FQAK664+oOveFBZxK4TleKwKKs1ZdbfDDzbrGEG/hSKpXIgSO0yxaIEHQ
+ FWjg+G0W7fBSgPEDsyvkABrt9VwskjpJHQs+1zcxEqp7fDJcm2kl2djRtF8sLpgzCRKeMn+mXg6
+ eAaSrJCTaw6nl4GR8co8AY2FSOlDRWf1Qmg/mAoCO/mUJ2FSE1A2y34fzAHAH0rGZtk6QeDR5Bb
+ xmCVY95nqrTl/k4i+HW48IDI4OGOpY3SqKGOoWtTzvuCefUfZkWaitgw6FtQvt5ZsBZmpxTUrX6
+ tmtoZZm7asCDDnmtBUMXyS+m64Ohf6OwoI+SqJf9NEsxdWt+f2k6COv53b41AUs2hD0vEAkyts8
+ jySiF+NWd1slfqf69AJjbZkNknQU/V23pbdPaQ9A2rKc/vmpYod0m2cXpj1/xzcH7li7lUe2g3Z
+ yQH49suD46/M9jBiEGgNP1oXqb211R6KfG3Rvhfwj3fPz0ap4wetSiMwrubQxeEIUtFX7IkbakQ
+ khkx2/Y5eK5EZ/VM7hriQwC4L1cE2qM41/9JdgRsy5bLkfe/wqMB1JJpXVsQ4Ly3ULqKKt7Tqmi
+ oEwDoLDWEluAMIYgMa4PUBwQmZYKxBtCFwr6745kREl0GitkB5Rb0zbHikq9uX1R4gDBcxYMjwT
+ PwNGLA0sF0bKs0w==
+X-Developer-Key: i=shankerwangmiao@gmail.com; a=openpgp;
+ fpr=6FAEFF06B7D212A774C60BFDFA0D166D6632EF4A
+X-Endpoint-Received: by B4 Relay for shankerwangmiao@gmail.com/20250715
+ with auth_id=462
+X-Original-From: Miao Wang <shankerwangmiao@gmail.com>
+Reply-To: shankerwangmiao@gmail.com
 
-On Tue, Aug 4, 2026 at 12:45=E2=80=AFAM James Hilliard
-<james.hilliard1@gmail.com> wrote:
->
-> On Mon, Aug 3, 2026 at 7:18=E2=80=AFAM Andrew Lunn <andrew@lunn.ch> wrote=
-:
-> >
-> > > +            ethernet-phy-control {
-> > > +                compatible =3D "x-powers,ac200-ephy-ctl";
-> > > +                nvmem-cells =3D <&ephy_calibration>;
-> > > +                nvmem-cell-names =3D "calibration";
-> > > +                phy-mode =3D "rmii";
-> > > +            };
-> >
-> > What do you mean by an ethernet PHY control?
-> >
-> > I assume this is not an actual Ethernet PHY, but some control logic
-> > around it? Where is the ethernet PHY itself?
->
-> Correct, this is not the Ethernet PHY itself. It is the package-specific
-> sideband control block that must be configured before the normal Clause 2=
-2
-> PHY registers become usable. For AC200, this control block is accessed
-> through the parent AC200 I2C regmap. For AC300, the equivalent control bl=
-ock
-> is accessed through a separate non-PHY Clause 22 address.
+Previously, the driver has been introduced to support the Loongson 2K
+BMC running on the Loongson Servers, which is essential to prevent
+the system from hanging when the BMC is being reset and the default
+efi-framebuffer is being used. However, there are some drawbacks in the
+driver.
 
-Basically, all the PHY behavior that is normally configured using strapping
-pins on a discrete PHY is done over this I2C channel.
+Firstly, the driver tries to read and write to the connected PCI-E host
+controller registers, assuming that the BMC is connected to LS7A PCI-E
+host controller. This assumption should be true for real products, but
+to prevent from accidentally reading and writing to the wrong PCI-E host
+controller, this driver should be modified to check this before
+accessing the registers.
 
-> The actual Ethernet PHY is a separate device on the MAC's MDIO bus. The
-> shared PHY driver for that device is added in patch 16:
->
-> https://lore.kernel.org/linux-sunxi/20260802-submit-acx00-of-dynamic-v1-v=
-1-16-0a53cd9e21cc@gmail.com/
->
-> The later board DTS patches instantiate it as an ethernet-phy node beneat=
-h
-> the MAC's MDIO bus and reference the appropriate sideband control provide=
-r.
->
-> >
-> >        Andrew
+Secondly, the driver uses non-exported functions to tell the vt
+subsystem to redraw the screen, preventing the driver from being
+compiling as a module. This can be fixed by using the exported
+functions instead.
+
+Thirdly, the driver directly accesses the GPIO controller registers
+using hard-coded addresses, which might conflict with the loaded GPIO
+controller driver for the same GPIO controller. This is fixed in this
+series by using the GPIO subsystem APIs instead. However, legacy GPIO
+APIs have to be used in this fixed to correctly request a GPIO
+descriptor from the GPIO subsystem, which might be further discussed
+to find a better solution.
+
+Finally, there is a minor issue in the driver where it changes the
+mode string describing the screen resolution during probing, which
+prevents the device from being probed again if -EPROBE_DEFER is
+returned by the probe function.
+
+I have tested the changes in this series on a single-socket Loongson
+3C6000 server with a Loongson 2K BMC, and the driver works as expected
+when the corresponding GPIO driver is additionally loaded.
+
+Signed-off-by: Miao Wang <shankerwangmiao@gmail.com>
+---
+Changes in v5:
+- Address issues found by the Sashiko AI review bot
+  - Maintain the compatibility with possible unexpected mode string when
+    parsing, although such mode string is actually not expected, to
+    satisfy the AI bot's concern.
+  - Add a comment to point out that the adjustment of the Kconfig entry
+    for ls2kbmc is in the following patch, to satisfy the AI bot's
+    concern.
+- Link to v4: https://lore.kernel.org/r/20260731-ls2kbmc-mod-v4-0-d201502ba239@gmail.com
+
+Changes in v4:
+- Use a better way to get the GPIO device fwnode.
+- Add a comment to describe a problem found by AI bot which is actually
+  intended.
+- Link to v3: https://lore.kernel.org/r/20260710-ls2kbmc-mod-v3-0-ef718636e78e@gmail.com
+
+Changes in v3:
+- Check the return value of devm_add_action_or_reset when registering
+  the cleanup hook of the work queue
+- Use swnode to create the link between the device to the GPIO chip,
+  and prevent borrowing the legacy GPIO APIs
+- Link to v2: https://lore.kernel.org/r/20260708-ls2kbmc-mod-v2-0-2afdd1741766@gmail.com
+
+Changes in v2:
+- Several fixes suggested by the Sashiko AI review bot
+- Add a cleanup function for the wq on removal of the device
+- Relax the reverse dependency from CONFIG_IPMI_LS2K to
+  CONFIG_MFD_LS2K_BMC_CORE to allow the driver to be built as a module
+- Link to v1: https://lore.kernel.org/r/20260708-ls2kbmc-mod-v1-0-c344bf5defa3@gmail.com
+
+---
+Miao Wang (7):
+      mfd: ls2kbmc: Make a copy when parsing mode string
+      mfd: ls2kbmc: Sanity check for the connected pci port
+      mfd: ls2kbmc: Redraw using exported functions
+      mfd: ls2kbmc: Cancel the work queue on removal
+      ipmi: ls2k: Relax the dependency to its mfd driver
+      mfd: ls2kbmc: Able to be compiled as a module
+      mfd: ls2kbmc: Capture the reset event of BMC through GPIO
+
+ drivers/char/ipmi/Kconfig   |   2 +-
+ drivers/mfd/Kconfig         |   2 +-
+ drivers/mfd/ls2k-bmc-core.c | 246 ++++++++++++++++++++++++++++++++++----------
+ 3 files changed, 192 insertions(+), 58 deletions(-)
+---
+base-commit: 11028ab62899e4191e074ee364c712b77823a9c4
+change-id: 20260626-ls2kbmc-mod-5209193009b2
+
+Best regards,
+-- 
+Miao Wang <shankerwangmiao@gmail.com>
+
+
