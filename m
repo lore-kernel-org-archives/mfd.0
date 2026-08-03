@@ -1,70 +1,70 @@
-Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com [209.85.210.47])
+Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com [209.85.210.45])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EA1838E8B2
-	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 05:15:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C23E39061D
+	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 05:15:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785734137; cv=none; b=Z31sBhMcabDUHF2vMfwdJnc46yiIR11wf8VMYHDQkgSezEiqlVYzB3skANrMVBJBvspC4BhpXWo/WRyHNuClvmXNWPZCP6mHOC2T3qNwol5rYwj65qJ5otWjGWxZUwKKzRsF7K6Wrrdiv4m/9TuVgL/1i7Pmwf+YZ19qmFJLSVg=
+	t=1785734139; cv=none; b=ZuaHMUvfps5MzsM/Dm++KBvJuBRgKV8UKB7Y0WYJHIQAJeRjuvNUgrjIVZsdSNEf80DiSUREhb3s9TqN8B+g345E95VHkmsoKjfun6G3FjQRw7LxeKtgTVXB5ehX3x2CAbS3c7y5BUJwOd3eGSHCnspTAUnd3/eAlxtmgBBjJGA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785734137; c=relaxed/simple;
-	bh=6OQnGRpMnyrb+bp+bGTn43xoUYsbGDK19SjrvuCzOUU=;
+	s=arc-20240116; t=1785734139; c=relaxed/simple;
+	bh=MqlazHFPg7A93Yw8yIBqrOlNXVcT4LqcT4gU0kTc88M=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=B3eLlJzFzg+Ch3zlU8k9Lfa5bejtnPp33aIjbQYQVuVy6utdCjFL9oYQraVGe1ECy/+FR9013tiwTFt1ugnj4w7oU0DeTMHC7512aq6FaRoNcWPKckswQ5efo+G7MEF3pP3qSmxio+SsPUIW5nk7tQowQ/Ci2FZ+0ge5zsIeKDk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=WuZslsfX; arc=none smtp.client-ip=209.85.210.47
+	 In-Reply-To:To:Cc; b=Zp+Pdu9ir7HThgeIDXxigujJ+8jU5l3eoC/I60zi3KeOPSRpKMLeblcAuVMxki/s6N4mAuqciMLSOxHFZO2YOSbgtnA/7fLzRxP5eqXX3CcxmcMeByTuFUtZwqJr6y+xzyi3asZQcN3uYY1EA87kIr/ZwPl3gzr+OVu1MeLOQ9A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=G0AT+HyL; arc=none smtp.client-ip=209.85.210.45
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="WuZslsfX"
-Received: by mail-ot1-f47.google.com with SMTP id 46e09a7af769-7e6128bd9b3so1335076a34.1
-        for <mfd@lists.linux.dev>; Sun, 02 Aug 2026 22:15:33 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="G0AT+HyL"
+Received: by mail-ot1-f45.google.com with SMTP id 46e09a7af769-7e9ef94c0e2so1586140a34.3
+        for <mfd@lists.linux.dev>; Sun, 02 Aug 2026 22:15:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785734132; x=1786338932; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1785734134; x=1786338934; darn=lists.linux.dev;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ws0LFhZuUjZTnhwPoD3ztO16rIL3gtosandi83LBFNY=;
-        b=WuZslsfXI4IkD1It7KD8ELwzrH7eC320X2pb+4Gt4DWrpWarSaXAXR+m2wXTmACOi5
-         lmiWSDJu/9mJj7Jq50qhOBdR6WuXScfXBqoEiF9+XhtAbth0zC0MIOrYQBJuR7fmV6rG
-         ObyXoaCT7c8oFEOFWuBdZvGZjPRTrKVe/RjLacYazWTHdqWcNePMd+JcD6gYY2p4iQUJ
-         Wdq6v1g0700yQiiZzE0i2Vb4mnc/y3skPXfhYKmvMpsb4i+tluGRQqBzDMWhxhJmgZ5G
-         W0YPWqHNkA2soe3mTHN8bxfpw+7aAkzcVH5YEJfY8tptFWFJNthkUiWAajK8Z8VVsP0x
-         qMdw==
+        bh=o3n69SozBgBa42qBZUQe+SN94PjOayvFQRwUM8nAj08=;
+        b=G0AT+HyLkCQT4rO6OZ6gR2SiVnrPshYMQlb9CNedpT3p9miEVWRp+BVwoR+g8j7zRF
+         MUQ9MPgCkIX2ONZi2Dnaxevjv0c9mkzBUHZEL/v85XY+Laua9a7LcM9eIPXz+XzZKiyy
+         pbOKi0YLCF9YV/cncuBgY0NW1p9TcxhTFnIHany2ghXL7qJ6OUqofUomJTrIB/F7bmHN
+         koxjhUEVhUoe0DYnQ9qYtkyliYpbMRQMoRVblK1a6GO6jqor7YquI0FdfJVKC7yX8xP0
+         uwAtTHMv1kh/LI+VsrfM48R+gz4OgwclIjZ+bO0sJL8YIIuDcMGU79n8obqjdmUl06Fp
+         dVpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785734132; x=1786338932;
+        d=1e100.net; s=20251104; t=1785734134; x=1786338934;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ws0LFhZuUjZTnhwPoD3ztO16rIL3gtosandi83LBFNY=;
-        b=prN82N3WiE7JbCn88PXyZaCx/BjWqR79BRiwUvgtHG9WG9g0o7HhhJlznGNu34rNNc
-         rQ9I+kKNaGk8eC8KfCmDDqzETltnQ/jShC+y32YbuvIYf1CC/Apo8ACJnIykfd0WwBeu
-         5kNv43U3NdrMCcAHmwusKSQK60yyelbPwfrsu2xFUP7js0LZvHUbQD5sAGew3gZLBE13
-         Lz1uHj8ZZhLEspXzCDJqf3EEMT1kiR4LsGgXbOmiIEooufvNOBN2O9/GA+UR0R3LRXKv
-         qd/E+mHIiY20e57t/Y08LckT0Epzd0V5IfuWVx1ynlPujDTVlguHi7sc9Vp3P7YPrdR3
-         ZDIQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrRiJ/67Crtn+itYM5IYbo7bICbOqHiMbHzpf96YvWwRRzPQ/ifUqkPY5J+n2r5aZ2O1+4=@lists.linux.dev
-X-Gm-Message-State: AOJu0Yx8rc3+fiIeeyEqWyxQrX7tZ6Iw6SpNvVTdTETxA2p936lEaUAu
-	q11xcXUJoZAWukywtQHzJlmFMpDJahRs00PzbK4QO767qkKeMIoaf4HW
-X-Gm-Gg: AR+sD11hEgqxr1thCR00FVaH7qj39NyPAahZluJntGBLQ+eQkAHi5R6abiP9U8U+g74
-	vvLFdlcN93AOubhcZo6k5sy4fReRUMoKKv0eTP86sOfGYaD7uq2L24il48f6PXuFFabix+f7btj
-	Flqe7iOLyrrPTeDlfsWfH8BnrToT3CpeZ+u29tFmpOs4TS74J66AzV+ABCF7Hs81tkQQ9ZzyAT4
-	jFFcJQ7x6lG/gx8NFOY98ejUy6MPSUfj8iUxS2eU8q+ANgdfefGRFq1NdiNtkc1X63qq1ivAP8Q
-	gkki9TM5CuREAU5XexEoHQuqLaGciZvlxnQa9/ZIF7W3jcQIZQl+/NZveHOB7aZf57YNElEbGRn
-	tsOVH6HcV408msmsWGDE76XQwY0sYRDA55MUf1nQ7rnU88aU3aXCkUvk77gJMtrGO6ajw5EdADv
-	xQjTXjhqWTfdP5B+USIkR+d/6FYjuXQLuqd69DUmB+YzfBqAHBJ/hALZzKoXevaN0x3IvTm8sds
-	LYnZhobX+8Ndfx58u4ylpv4pP8Vo60mc2dKAVPXx1ZmXOy/0//VFy/jq4LUcDgr0qZxZ7tWnujL
-	ARkCTkrmCQk5mOXM95y9z01xbWWKvbR5aR0+9tr8sZ8TwO8i+zDXZph8fZY7joAwUGv09oQcVcx
-	WVk/SXx+vyvCBTEXJ
-X-Received: by 2002:a05:6830:6737:b0:7dc:df37:844b with SMTP id 46e09a7af769-7f196baee6fmr14985696a34.4.1785734132204;
-        Sun, 02 Aug 2026 22:15:32 -0700 (PDT)
+        bh=o3n69SozBgBa42qBZUQe+SN94PjOayvFQRwUM8nAj08=;
+        b=gSBzTQf1o1lV2wR6mJBssop8+xbgO9MLbVWuSP9sP4qsmziRnCCmtAvhANPlRtl1ZK
+         f39H0olITltAyvn0Mpiqr1xoBjEkyVKa/XU+VqrfazGQDFBeIxIXhi5wZMdu4IjQ78Ku
+         f3JgrWFiInv9h+4M+ADoeg/Y3HH8w9zJvq2orA6BA/H+1mwDqjhRnqpHosbX04NBpFOf
+         xNN503m/vD1vw2vsYdDbpAwI/gAnYwkEDublitHjecmZdCG0x+Je+7HLYASKeyNiqElq
+         fE8I/3fHUzeLlScDXEZ26lq9hEGNGOb4vi3Ml9nWWHdGHQINjXj2Jki2pI6pj5jVzuf3
+         TbDw==
+X-Forwarded-Encrypted: i=1; AHgh+RrucdqX2+jDLTAWdGwjBWHwADGqrumTdp3mbh+eSise9+kbwlNIEBiLxM8926AcfaL4hg8=@lists.linux.dev
+X-Gm-Message-State: AOJu0YyDGFnykDa+ZbfcSCKXgSqsqJPdCg+dGLpCqUGeG0n8+TsFeUeA
+	seN0f7VTGbMmfZtQdNYrt3yaQOHTOG6b5GzjlVizV7nfNiyROS2YwnsD
+X-Gm-Gg: AR+sD12IwwPO3MDOein6AG/E0m/JHz4EG8o1nRFLhufX5VGBfQCToqZvmed/hQ9iuT4
+	x4OWfGSZ8VCUlOesWvE4Hcxei3eUeyEfZG3dg0BIkiPdU2vwakPo2en9Yl6TAMAAEvOT02qvBoJ
+	H9Ymf4K9bLPbdQBg5TpNHCpUAonSz7Ebnr2ikLcj3BQFT9Owj8lGsHOTEOYGr5r5dtaqaFjJzzr
+	30O7yME4Jwcsp2cvRwJdyJlFLGmgYyum4LkhvSMPbYQhMq3n5yG/neoHJFhnS8KiDcM3gztL9Sf
+	ZVRCr/H8pe0EvHmNAW/g1qOJDVC2HnbNAfG4MlH2Ew8JWFPVpB8mnnODYuHAFCBH+GojXU1wMxR
+	3RIqNB+4ACMm8BwkJagiRotY7g/iPC1/vh1QPBLk20l8bfmupcbIs5EcuwidsqKUFEZ4+W0rupH
+	Z9okW7xd6SaN/upHWECf6IG0/dhRPczg60kz5NhlNHX8aBQCPYDr+qLq8VjUGz1hZGmIOEOD7pK
+	18T+Hr1UjmBZ4i6NDEZXIeO3jDuduE/dagFOrDBVLt0mEIQOqI4ebLVoFJ9BGOpkpgyapOsnIwy
+	O1wp8oKofx2ASYdXMeU1s9LllS1YBEC93aI0AgUjD27X7NW0k89BLUf5TBKSpqv1LrV/bTjWLmN
+	Hh+ClLPPHthZTpqco
+X-Received: by 2002:a05:6830:7003:b0:7e9:e288:2b60 with SMTP id 46e09a7af769-7f196b465fcmr14384631a34.1.1785734134150;
+        Sun, 02 Aug 2026 22:15:34 -0700 (PDT)
 Received: from [127.0.1.1] (184-96-154-59.hlrn.qwest.net. [184.96.154.59])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7f18f07a5e3sm6787108a34.15.2026.08.02.22.15.30
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7f18f07a5e3sm6787108a34.15.2026.08.02.22.15.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 02 Aug 2026 22:15:31 -0700 (PDT)
+        Sun, 02 Aug 2026 22:15:33 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Sun, 02 Aug 2026 23:14:18 -0600
-Subject: [PATCH 08/21] dt-bindings: mfd: x-powers: add AC200
+Date: Sun, 02 Aug 2026 23:14:19 -0600
+Subject: [PATCH 09/21] mfd: add X-Powers AC200 support
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -73,7 +73,7 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260802-submit-acx00-of-dynamic-v1-v1-8-0a53cd9e21cc@gmail.com>
+Message-Id: <20260802-submit-acx00-of-dynamic-v1-v1-9-0a53cd9e21cc@gmail.com>
 References: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
 In-Reply-To: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
 To: Andrew Lunn <andrew+netdev@lunn.ch>, 
@@ -102,167 +102,388 @@ Cc: netdev@vger.kernel.org, devicetree@vger.kernel.org,
  James Hilliard <james.hilliard1@gmail.com>
 X-Mailer: b4 0.15.2
 
-The AC200 is an I2C-controlled mixed-signal companion IC containing
-audio, video, RTC and Fast Ethernet PHY functions.
+The X-Powers AC200 is a mixed-signal companion IC with a paged register
+map accessed over I2C. Enable its required supplies and board-configured
+input clock, lock the clock rate, and wait for the settling interval used
+by the vendor initialization sequence before accessing the device.
 
-Describe the parent device, its input clock, required function supplies,
-the optional SID bandgap calibration cell used by the vendor initialization
-sequence, and its optional Ethernet PHY control child. Document the 24 and
-27 MHz rates encoded by the public EPHY clock selector.
+Initialize the common control interface, report the chip and package
+revision, and populate the Ethernet PHY control child when firmware
+describes it. Cache only the common page selector because individual
+function resets can invalidate functional registers without regmap's
+knowledge.
 
-Also describe the optional open-drain, level-triggered INTB output and the
-nested interrupt controller which exposes the TV encoder, Ethernet PHY and
-RTC sources. Define the interrupt source numbers for child consumers.
+Optionally apply the SoC SID bandgap calibration using the opaque fixed
+bits from the vendor sequence. The public manual marks that register as
+reserved. Boards which do not use the affected TV encoder path may omit
+the calibration cell.
+
+When firmware describes INTB, register a regmap IRQ domain for the TV
+encoder, Ethernet PHY and RTC sources. Program the shared output enable
+and requested level polarity while preserving the independently managed
+source enables. Systems without a routed interrupt remain unchanged.
+
+The AC200 and its children cannot initiate DMA. Mark the parent as
+DMA-incapable before adding the MFD cells so OF DMA setup does not
+synthesize a mask for the child.
+
+Register a managed action that disables the AC200 control block before
+adding the MFD children. Managed resources unwind in reverse order, so
+the children are removed before their parent control block is disabled
+on driver removal or a later probe failure. Disable the block during
+system shutdown as well.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- .../devicetree/bindings/mfd/x-powers,ac200.yaml    | 118 +++++++++++++++++++++
- include/dt-bindings/mfd/x-powers,ac200.h           |  13 +++
- 2 files changed, 131 insertions(+)
+ drivers/mfd/Kconfig  |  13 +++
+ drivers/mfd/Makefile |   1 +
+ drivers/mfd/ac200.c  | 302 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 316 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/mfd/x-powers,ac200.yaml b/Documentation/devicetree/bindings/mfd/x-powers,ac200.yaml
+diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
+index 763ce6a34782..a71870bcf868 100644
+--- a/drivers/mfd/Kconfig
++++ b/drivers/mfd/Kconfig
+@@ -205,6 +205,19 @@ config MFD_AC100
+ 	  This driver include only the core APIs. You have to select individual
+ 	  components like codecs or RTC under the corresponding menus.
+ 
++config MFD_AC200
++	tristate "X-Powers AC200"
++	depends on I2C
++	depends on OF
++	select MFD_CORE
++	select REGMAP_I2C
++	select REGMAP_IRQ
++	help
++	  Support for the X-Powers AC200 mixed-signal companion IC. The AC200
++	  contains audio, video, RTC and Fast Ethernet PHY functions and is
++	  co-packaged with some Allwinner H6 and H616 SoCs. This driver provides
++	  the shared register access used by the individual function drivers.
++
+ config MFD_AXP20X
+ 	tristate
+ 	select MFD_CORE
+diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
+index dd4bb7e77c33..890e76a9ad00 100644
+--- a/drivers/mfd/Makefile
++++ b/drivers/mfd/Makefile
+@@ -150,6 +150,7 @@ obj-$(CONFIG_MFD_DA9052_SPI)	+= da9052-spi.o
+ obj-$(CONFIG_MFD_DA9052_I2C)	+= da9052-i2c.o
+ 
+ obj-$(CONFIG_MFD_AC100)		+= ac100.o
++obj-$(CONFIG_MFD_AC200)		+= ac200.o
+ obj-$(CONFIG_MFD_AXP20X)	+= axp20x.o
+ obj-$(CONFIG_MFD_AXP20X_I2C)	+= axp20x-i2c.o
+ obj-$(CONFIG_MFD_AXP20X_RSB)	+= axp20x-rsb.o
+diff --git a/drivers/mfd/ac200.c b/drivers/mfd/ac200.c
 new file mode 100644
-index 000000000000..017629cca73c
+index 000000000000..bd9930a02cb2
 --- /dev/null
-+++ b/Documentation/devicetree/bindings/mfd/x-powers,ac200.yaml
-@@ -0,0 +1,118 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/mfd/x-powers,ac200.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: X-Powers AC200 mixed-signal IC
-+
-+maintainers:
-+  - James Hilliard <james.hilliard1@gmail.com>
-+
-+description:
-+  The AC200 is a mixed-signal companion IC containing audio, video, RTC and
-+  Fast Ethernet PHY functions. Its control registers are accessed over I2C.
-+
-+properties:
-+  compatible:
-+    const: x-powers,ac200
-+
-+  reg:
-+    maxItems: 1
-+
-+  clocks:
-+    maxItems: 1
-+    description:
-+      AC200 input clock. When using the Ethernet PHY, its configured rate must
-+      be 24 or 27 MHz, matching the rates encoded by the documented EPHY clock
-+      selector.
-+
-+  interrupts:
-+    maxItems: 1
-+    description:
-+      The INTB pin, which is a shared open-drain, level-triggered output for
-+      the TV encoder, Ethernet PHY and RTC interrupt sources.
-+
-+  interrupt-controller: true
-+
-+  '#interrupt-cells':
-+    const: 1
-+    description:
-+      The interrupt number, as defined in
-+      include/dt-bindings/mfd/x-powers,ac200.h.
-+
-+  ac-ldoin-supply:
-+    description: 3.3 V supply for the audio-codec LDO input
-+
-+  ephy-vcc-supply:
-+    description: 3.3 V supply for the Ethernet PHY analog front end
-+
-+  rtc-vcc-supply:
-+    description: 3.3 V supply for the RTC
-+
-+  tv-vcc-supply:
-+    description: 3.3 V supply for the TV encoder DAC
-+
-+  nvmem-cells:
-+    maxItems: 1
-+    description:
-+      Optional SoC SID cell containing the AC200 bandgap calibration value.
-+      The trim is used by the TV encoder; the public AC200 datasheet does not
-+      document the corresponding register fields.
-+
-+  nvmem-cell-names:
-+    const: bandgap
-+
-+  ethernet-phy-control:
-+    $ref: /schemas/net/x-powers,ac200-ephy-ctl.yaml#
-+
-+required:
-+  - compatible
-+  - reg
-+  - clocks
-+  - ac-ldoin-supply
-+  - ephy-vcc-supply
-+  - rtc-vcc-supply
-+  - tv-vcc-supply
-+
-+dependencies:
-+  interrupts: [ interrupt-controller ]
-+  interrupt-controller: [ '#interrupt-cells', interrupts ]
-+  '#interrupt-cells': [ interrupt-controller ]
-+  nvmem-cells: [ nvmem-cell-names ]
-+  nvmem-cell-names: [ nvmem-cells ]
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/interrupt-controller/irq.h>
-+
-+    i2c {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        mixed-signal@10 {
-+            compatible = "x-powers,ac200";
-+            reg = <0x10>;
-+            clocks = <&pwm 5>;
-+            ac-ldoin-supply = <&reg_3v3>;
-+            ephy-vcc-supply = <&reg_3v3>;
-+            rtc-vcc-supply = <&reg_3v3>;
-+            tv-vcc-supply = <&reg_3v3>;
-+            interrupt-parent = <&pio>;
-+            interrupts = <1 20 IRQ_TYPE_LEVEL_LOW>;
-+            interrupt-controller;
-+            #interrupt-cells = <1>;
-+            nvmem-cells = <&ac200_bandgap>;
-+            nvmem-cell-names = "bandgap";
-+
-+            ethernet-phy-control {
-+                compatible = "x-powers,ac200-ephy-ctl";
-+                nvmem-cells = <&ephy_calibration>;
-+                nvmem-cell-names = "calibration";
-+                phy-mode = "rmii";
-+            };
-+        };
-+    };
-+...
-diff --git a/include/dt-bindings/mfd/x-powers,ac200.h b/include/dt-bindings/mfd/x-powers,ac200.h
-new file mode 100644
-index 000000000000..cc59e2ab4912
---- /dev/null
-+++ b/include/dt-bindings/mfd/x-powers,ac200.h
-@@ -0,0 +1,13 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++++ b/drivers/mfd/ac200.c
+@@ -0,0 +1,302 @@
++// SPDX-License-Identifier: GPL-2.0-only
 +/*
-+ * Interrupt numbers of the X-Powers AC200 interrupt controller.
++ * MFD core driver for the X-Powers AC200
++ *
++ * Copyright (C) 2026 James Hilliard <james.hilliard1@gmail.com>
 + */
 +
-+#ifndef _DT_BINDINGS_MFD_X_POWERS_AC200_H
-+#define _DT_BINDINGS_MFD_X_POWERS_AC200_H
++#include <linux/bitfield.h>
++#include <linux/clk.h>
++#include <linux/delay.h>
++#include <linux/i2c.h>
++#include <linux/interrupt.h>
++#include <linux/irq.h>
++#include <linux/mfd/core.h>
++#include <linux/module.h>
++#include <linux/nvmem-consumer.h>
++#include <linux/of.h>
++#include <linux/property.h>
++#include <linux/regmap.h>
++#include <linux/regulator/consumer.h>
 +
-+#define AC200_IRQ_TVE			0
-+#define AC200_IRQ_EPHY			1
-+#define AC200_IRQ_RTC			2
++#include <dt-bindings/mfd/x-powers,ac200.h>
 +
-+#endif /* _DT_BINDINGS_MFD_X_POWERS_AC200_H */
++#define AC200_SYS_VERSION_REG			0x0000
++#define AC200_SYS_VERSION_PACKAGE_MASK		GENMASK(15, 14)
++#define AC200_SYS_VERSION_CHIP_MASK		GENMASK(11, 0)
++
++#define AC200_SYS_CONTROL_REG			0x0002
++#define AC200_SYS_CONTROL_CHIP_RESET_DEASSERT	BIT(0)
++
++#define AC200_SYS_IRQ_ENABLE_REG			0x0004
++#define AC200_SYS_IRQ_INTB_ENABLE		BIT(15)
++#define AC200_SYS_IRQ_INTB_ACTIVE_HIGH		BIT(14)
++#define AC200_SYS_IRQ_RTC_ENABLE			BIT(12)
++#define AC200_SYS_IRQ_EPHY_ENABLE		BIT(8)
++#define AC200_SYS_IRQ_TVE_ENABLE			BIT(4)
++
++#define AC200_SYS_IRQ_STATUS_REG			0x0006
++
++#define AC200_SYS_BG_CTL_REG			0x0050
++/*
++ * The vendor initialization sequence composes this as SID data | BIT(15) |
++ * (0xa << 6). The public datasheet marks the whole register reserved and
++ * does not name the fixed fields.
++ */
++#define AC200_SYS_BG_CTL_FIXED_BITS		(BIT(15) | (0xa << 6))
++
++/* Interface register accessible from every register page. */
++#define AC200_TWI_REG_ADDR_H	0x00fe
++#define AC200_MAX_REG		0xa1f2
++
++struct ac200 {
++	struct regmap *regmap;
++};
++
++static const char * const ac200_supplies[] = {
++	"ac-ldoin",
++	"ephy-vcc",
++	"rtc-vcc",
++	"tv-vcc",
++};
++
++static const struct regmap_range_cfg ac200_range_cfg[] = {
++	{
++		.range_max = AC200_MAX_REG,
++		.selector_reg = AC200_TWI_REG_ADDR_H,
++		.selector_mask = 0xff,
++		.window_len = 256,
++	},
++};
++
++/*
++ * Each AC200 sub-block can reset independently, invalidating its register
++ * contents without regmap's knowledge. Cache only the common page selector;
++ * this avoids a selector read-modify-write for every access on the same page
++ * without ever returning stale functional-register values.
++ */
++static bool ac200_volatile_reg(struct device *dev, unsigned int reg)
++{
++	return reg != AC200_TWI_REG_ADDR_H;
++}
++
++static const struct regmap_config ac200_regmap_config = {
++	.name = "ac200",
++	.reg_bits = 8,
++	.reg_stride = 2,
++	.val_bits = 16,
++	.ranges = ac200_range_cfg,
++	.num_ranges = ARRAY_SIZE(ac200_range_cfg),
++	.max_register = AC200_MAX_REG,
++	.volatile_reg = ac200_volatile_reg,
++	.cache_type = REGCACHE_MAPLE,
++};
++
++static const struct regmap_irq ac200_irqs[] = {
++	REGMAP_IRQ_REG(AC200_IRQ_TVE, 0, AC200_SYS_IRQ_TVE_ENABLE),
++	REGMAP_IRQ_REG(AC200_IRQ_EPHY, 0, AC200_SYS_IRQ_EPHY_ENABLE),
++	REGMAP_IRQ_REG(AC200_IRQ_RTC, 0, AC200_SYS_IRQ_RTC_ENABLE),
++};
++
++/*
++ * SYS_IRQ_ENABLE is an enable register rather than a mask register, hence
++ * unmask_base. The INTB output enable and polarity bits share the register,
++ * but regmap-irq only updates the bits described by ac200_irqs.
++ *
++ * SYS_IRQ_STATUS follows the state of each source block and is read-only.
++ * Interrupts must therefore be acknowledged in the source block itself.
++ */
++static const struct regmap_irq_chip ac200_irq_chip = {
++	.name = "ac200",
++	.status_base = AC200_SYS_IRQ_STATUS_REG,
++	.unmask_base = AC200_SYS_IRQ_ENABLE_REG,
++	.num_regs = 1,
++	.irqs = ac200_irqs,
++	.num_irqs = ARRAY_SIZE(ac200_irqs),
++};
++
++static const struct mfd_cell ac200_cells[] = {
++	{
++		.name = "ac200-ephy-ctl",
++		.of_compatible = "x-powers,ac200-ephy-ctl",
++	},
++};
++
++static int ac200_disable(struct ac200 *ac200)
++{
++	return regmap_write(ac200->regmap, AC200_SYS_CONTROL_REG, 0);
++}
++
++static void ac200_disable_action(void *data)
++{
++	ac200_disable(data);
++}
++
++static int ac200_init_irq(struct ac200 *ac200, int irq)
++{
++	struct device *dev = regmap_get_device(ac200->regmap);
++	struct regmap_irq_chip_data *irq_data;
++	u16 value = AC200_SYS_IRQ_INTB_ENABLE;
++	u32 trigger;
++	int ret;
++
++	trigger = irq_get_trigger_type(irq);
++	switch (trigger) {
++	case IRQ_TYPE_LEVEL_HIGH:
++		value |= AC200_SYS_IRQ_INTB_ACTIVE_HIGH;
++		break;
++	case IRQ_TYPE_NONE:
++	case IRQ_TYPE_LEVEL_LOW:
++		break;
++	default:
++		return dev_err_probe(dev, -EINVAL,
++				     "INTB requires a level interrupt, not type %u\n",
++				     trigger);
++	}
++
++	ret = regmap_update_bits(ac200->regmap, AC200_SYS_IRQ_ENABLE_REG,
++				 AC200_SYS_IRQ_INTB_ENABLE |
++				 AC200_SYS_IRQ_INTB_ACTIVE_HIGH, value);
++	if (ret)
++		return ret;
++
++	ret = devm_regmap_add_irq_chip(dev, ac200->regmap, irq, IRQF_ONESHOT,
++				       0, &ac200_irq_chip, &irq_data);
++	if (ret)
++		return dev_err_probe(dev, ret,
++				     "failed to add interrupt controller\n");
++
++	return 0;
++}
++
++static int ac200_probe(struct i2c_client *client)
++{
++	struct device *dev = &client->dev;
++	struct device_node *ephy_node __free(device_node) = NULL;
++	struct ac200 *ac200;
++	struct clk *clk;
++	unsigned int version;
++	u16 bandgap_calibration = 0;
++	int ret;
++
++	ac200 = devm_kzalloc(dev, sizeof(*ac200), GFP_KERNEL);
++	if (!ac200)
++		return -ENOMEM;
++
++	ret = devm_regulator_bulk_get_enable(dev, ARRAY_SIZE(ac200_supplies),
++					     ac200_supplies);
++	if (ret)
++		return dev_err_probe(dev, ret, "failed to enable supplies\n");
++
++	clk = devm_clk_get_enabled(dev, NULL);
++	if (IS_ERR(clk))
++		return dev_err_probe(dev, PTR_ERR(clk),
++				     "failed to enable input clock\n");
++
++	ret = devm_clk_rate_exclusive_get(dev, clk);
++	if (ret)
++		return dev_err_probe(dev, ret, "failed to lock clock rate\n");
++
++	ac200->regmap = devm_regmap_init_i2c(client, &ac200_regmap_config);
++	if (IS_ERR(ac200->regmap))
++		return dev_err_probe(dev, PTR_ERR(ac200->regmap),
++				     "failed to initialize regmap\n");
++
++	i2c_set_clientdata(client, ac200);
++
++	if (device_property_present(dev, "nvmem-cells")) {
++		ret = nvmem_cell_read_u16(dev, "bandgap",
++					  &bandgap_calibration);
++		if (ret)
++			return dev_err_probe(dev, ret,
++					     "failed to read bandgap data\n");
++	}
++
++	/*
++	 * No minimum delay is documented. Match the vendor driver's 40 ms delay
++	 * before its first AC200 register access after enabling the input clock.
++	 */
++	msleep(40);
++
++	ret = regmap_read(ac200->regmap, AC200_SYS_VERSION_REG, &version);
++	if (ret)
++		return dev_err_probe(dev, ret,
++				     "failed to read chip version\n");
++
++	dev_info(dev, "AC200 revision %#lx in package %lu\n",
++		 FIELD_GET(AC200_SYS_VERSION_CHIP_MASK, version),
++		 FIELD_GET(AC200_SYS_VERSION_PACKAGE_MASK, version));
++
++	/* Run after the MFD children have been removed. */
++	ret = devm_add_action_or_reset(dev, ac200_disable_action, ac200);
++	if (ret)
++		return ret;
++
++	ret = regmap_write(ac200->regmap, AC200_SYS_CONTROL_REG, 0);
++	if (ret)
++		return ret;
++
++	ret = regmap_write(ac200->regmap, AC200_SYS_CONTROL_REG,
++			   AC200_SYS_CONTROL_CHIP_RESET_DEASSERT);
++	if (ret)
++		return ret;
++
++	if (bandgap_calibration) {
++		ret = regmap_write(ac200->regmap, AC200_SYS_BG_CTL_REG,
++				   AC200_SYS_BG_CTL_FIXED_BITS |
++				   bandgap_calibration);
++		if (ret)
++			return ret;
++	}
++
++	if (client->irq > 0) {
++		ret = ac200_init_irq(ac200, client->irq);
++		if (ret)
++			return ret;
++	}
++
++	/* Neither the AC200 nor its child devices can perform DMA. */
++	dev->coherent_dma_mask = 0;
++	dev->dma_mask = &dev->coherent_dma_mask;
++	ephy_node = of_get_compatible_child(dev->of_node,
++					    "x-powers,ac200-ephy-ctl");
++	if (!ephy_node)
++		return 0;
++
++	return devm_mfd_add_devices(dev, PLATFORM_DEVID_NONE, ac200_cells,
++				    ARRAY_SIZE(ac200_cells), NULL, 0, NULL);
++}
++
++static void ac200_shutdown(struct i2c_client *client)
++{
++	struct ac200 *ac200 = i2c_get_clientdata(client);
++
++	ac200_disable(ac200);
++}
++
++static const struct of_device_id ac200_of_match[] = {
++	{ .compatible = "x-powers,ac200" },
++	{ }
++};
++MODULE_DEVICE_TABLE(of, ac200_of_match);
++
++static const struct i2c_device_id ac200_i2c_ids[] = {
++	{ "ac200" },
++	{ }
++};
++MODULE_DEVICE_TABLE(i2c, ac200_i2c_ids);
++
++static struct i2c_driver ac200_driver = {
++	.driver = {
++		.name = "ac200",
++		.of_match_table = ac200_of_match,
++	},
++	.probe = ac200_probe,
++	.shutdown = ac200_shutdown,
++	.id_table = ac200_i2c_ids,
++};
++module_i2c_driver(ac200_driver);
++
++MODULE_AUTHOR("James Hilliard <james.hilliard1@gmail.com>");
++MODULE_DESCRIPTION("X-Powers AC200 MFD core driver");
++MODULE_LICENSE("GPL");
 
 -- 
 2.53.0
