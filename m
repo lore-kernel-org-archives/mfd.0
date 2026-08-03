@@ -1,159 +1,104 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D95F3C3C0E
-	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 17:07:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 643E840DB5B
+	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 17:09:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785776868; cv=none; b=Q7r4jpBsGFjnOaixwVR4XMqLDMFMrHqKaprs+AJ6BLj/KBq7QaQnjXDT+Ieg9tiTPWeAlnMrQypW4kk9EWQ+MgmUbXO/N5eLWW+0wttsMLGjLZ4fMk7t/zzV5PIr76vzSy6Uq9Aga/CPcqu3iydQvSMsNHeHfYToNEzm4DG2gPo=
+	t=1785776949; cv=none; b=NaaU2NV7DK2g/rVoE+7jNOTgfedreYKTAyV9qYXUdObyy34n3PZpOzppdPURxIuHDKprPrph1wagxaZcbFJE9Bcer/dnY3t6k4ErrjU7tucZYj6U/hFXGIQjdT9b5ZRhCXCfAhh4MOZZtE2CInQGBTmhRZQbc+d31FEF0VzpxOw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785776868; c=relaxed/simple;
-	bh=63rMJGesZ+2F/2HJmbxN/jsvNkmHrYkvdISwWbBth+Q=;
+	s=arc-20240116; t=1785776949; c=relaxed/simple;
+	bh=DKjednXGnVJgFmeuCccit11RghFTY0POtD9YPyZeoEk=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=pYT+I3URGI4HYz/z44EiAkOKy9Mt2Xr0cn+MwHYemfik8bJc58Lpbd737tPLh2HHzZmqAohEvRzLUIsCz3s9aYSRQGOqRQV6fDXDWZRcgiZaa0OZjm8yE60K8JQk7wwCDObCbAJjrn5RlVajBxDocqySEVJQcMcjojfUmRJUkU4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IeE16n87; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=JMaVrNTkPiH/YWFvxpoH8PeE/oW7SrNhmrJnAKWKDLW2Yud4l9IIQo8TIoIUDIPu4nQ0JhQuRZKbpRKc1uzz9wu/Xfs7p5fIoDfctPSoSubQzIpjbWHD7gXUFqxL456WmeDTv3rcIARPOCccbSNUItlLV21MmG7hvjgdOAapbN4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nUEKKrkg; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IeE16n87"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 622D21F000E9;
-	Mon,  3 Aug 2026 17:07:46 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nUEKKrkg"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DBBE61F00A3A;
+	Mon,  3 Aug 2026 17:09:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785776866;
-	bh=wQZ/1JEPcrfOEws2OBBzzBO271aVSlt2BHvaJRtLXbo=;
+	s=k20260515; t=1785776948;
+	bh=OaNkzvz0ViU+h1RfDZTr8V/kxBFRFGS//CIuNaSOsFI=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=IeE16n87wb9TLmjtXooB7BENS80T64qfnNk9NkqcHH3nv3outmy1MUWGB8SrXnlby
-	 ByagtDrJqIucUGgNePxHOw+67zzk35QVpofXejU5KNyOI9SfHCWpaXhdnKztPTZ6MW
-	 DITCgT0qQBhlevPSo54QU9tetH9aT7seNxY/jqBTq8lpo/vh87+AxLsu0ahycgxFv/
-	 W6OazPFU/1DaC2ik0szsoxCdi+n0uqKJISYwe98lLE0iqrjGsq9Qcw8RmJ2yIFG6d2
-	 6H/e2qoyZXzwjLiMwtTbLlV06DR+FOBToI+V4KY6EsTTdZRQONKNfJVy1GyrMF7Kur
-	 kESqXUBBhsfUA==
+	b=nUEKKrkgAW5ppriHqobkqxffnvtv+L+6M5EUgOLgCKbCA/OEIEzFjX9lyhagWEwN7
+	 tuCZ7aZoEASu+4G6jeeqtwSbz9torZTg4o95QFQzDp33lW99Yo3pGo5AN3a3w+KWcr
+	 AnMKFcvapUEJAcX7gQ2klHB5Z8MbkM81sL1+d/4MKyFtILtx2UntKzvr+Z7m1Lqwwu
+	 0tIFMIgQoW9GH9gQsQYrG+wXdT05cosWCmUUqD+OGiWL74Gi3gLAzAeoPwOPQnvuK8
+	 MIEE9G2tnBBIwx3BwMn86wn6AdAo/wPFk0W6C2dUi2kZEzAsoLMbUI/QaTnS4X01s3
+	 5NQHw/ZDGNXaQ==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RFC v5 6/7] mfd: ls2kbmc: Able to be compiled as a
- module
+Subject: Re: [PATCH RFC v5 5/7] ipmi: ls2k: Relax the dependency to its mfd
+ driver
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Miao Wang" <shankerwangmiao@gmail.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260804-ls2kbmc-mod-v5-6-e6bc5cdd9a93@gmail.com>
+In-Reply-To: <20260804-ls2kbmc-mod-v5-5-e6bc5cdd9a93@gmail.com>
 References: <20260804-ls2kbmc-mod-v5-0-e6bc5cdd9a93@gmail.com>
- <20260804-ls2kbmc-mod-v5-6-e6bc5cdd9a93@gmail.com>
+ <20260804-ls2kbmc-mod-v5-5-e6bc5cdd9a93@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Mon, 03 Aug 2026 17:07:45 +0000
-Message-Id: <20260803170746.622D21F000E9@smtp.kernel.org>
+Date: Mon, 03 Aug 2026 17:09:06 +0000
+Message-Id: <20260803170907.DBBE61F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
 
 Pre-existing issues:
-- [Critical] The driver executes a 10+ second busy-wait and a sleeping func=
-tion inside a `stop_machine()` context, severely stalling the entire system.
-- [High] `acpi_unregister_gsi()` is erroneously called immediately after re=
-questing the IRQ, destroying the mapping and breaking interrupt delivery.
-- [Medium] The global `mfd_cell` array is dynamically modified using a stac=
-k-allocated pointer and lacks the `const` qualifier, violating MFD subsyste=
-m guidelines.
+- [High] Blind dereference of platform device resources without checking if=
+ resources exist, leading to a potential NULL pointer dereference.
 --
 
---- Patch [6]: [PATCH RFC v5 6/7] mfd: ls2kbmc: Able to be compiled as a mo=
-dule ---
-commit 998b814232bcf86316d4b7feaee8e3da166c0a9e
+--- Patch [5]: [PATCH RFC v5 5/7] ipmi: ls2k: Relax the dependency to its m=
+fd driver ---
+commit 41124ab927989929db3ae83837ad0e4e74e88d2e
 Author: Miao Wang <shankerwangmiao@gmail.com>
 
-mfd: ls2kbmc: Able to be compiled as a module
+ipmi: ls2k: Relax the dependency to its mfd driver
 
-Make ls2kmc able to be compiled as a module by changing the Kconfig option
-from bool to tristate.
+This commit changes the Kconfig dependency for the Loongson-2K IPMI
+interface from select to imply for MFD_LS2K_BMC_CORE. This allows
+the IPMI driver to be compiled independently of the MFD driver.
 
-> diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
-> index 763ce6a34782b..a7a9f97af248c 100644
-> --- a/drivers/mfd/Kconfig
-> +++ b/drivers/mfd/Kconfig
+> diff --git a/drivers/char/ipmi/Kconfig b/drivers/char/ipmi/Kconfig
+> index 669f760001974..f456e3e894169 100644
+> --- a/drivers/char/ipmi/Kconfig
+> +++ b/drivers/char/ipmi/Kconfig
 [ ... ]
-> @@ -2494,7 +2494,7 @@ config MFD_LOONGSON_SE
->  	  which will forward them to the corresponding engine.
-> =20
->  config MFD_LS2K_BMC_CORE
-> -	bool "Loongson-2K Board Management Controller Support"
-> +	tristate "Loongson-2K Board Management Controller Support"
+> @@ -87,7 +87,7 @@ config IPMI_IPMB
+>  config IPMI_LS2K
+>  	bool 'Loongson-2K IPMI interface'
+>  	depends on LOONGARCH
+> -	select MFD_LS2K_BMC_CORE
+> +	imply MFD_LS2K_BMC_CORE
 
 [Severity: High]
-This is a pre-existing issue, but enabling this driver to be built as a
-module exposes it during module unload or driver unbind.
+This is a pre-existing issue and was not introduced by the patch under
+review, but since this change allows the IPMI driver to probe independently
+of the MFD driver, I noticed a potential regression with resource handling.
 
-Does this code in ls2k_bmc_init() destroy the GSI mapping while the IRQ
-is still in use?
+Looking at ipmi_ls2k_probe() in drivers/char/ipmi/ipmi_si_ls2k.c:
 
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_init() {
-    ...
-    acpi_unregister_gsi(LS2K_BMC_RESET_GPIO_GSI);
-    ...
-}
+    io.addr_data =3D pdev->resource[0].start;
+    io.regspacing =3D resource_size(&pdev->resource[0]);
 
-Calling acpi_unregister_gsi() unconditionally right after devm_request_irq()
-succeeds disposes of the mapping. Hardware interrupts will never reach the
-registered handler. Furthermore, during module unload or driver unbind,
-devm_free_irq() will attempt to free an IRQ whose mapping and descriptor
-have already been disposed, potentially causing a use-after-free or kernel
-warning.
+Does this code blindly dereference the platform device resources without
+checking if they exist?
 
-[Severity: Medium]
-This is a pre-existing issue, but unbinding and rebinding the module could
-trigger a race condition here.
+If the platform device is instantiated without resources (such as manually
+via sysfs, or due to a misconfigured MFD core or device tree), would
+pdev->resource be NULL and cause a kernel panic?
 
-Does this assign the address of a local stack variable to a global array?
+Would it be safer to verify pdev->num_resources > 0 or use
+platform_get_resource() before accessing pdev->resource[0]?
 
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_probe() {
-    ...
-    ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data =3D &pd;
-    ...
-}
-
-Once probe returns, the platform_data pointer points to freed stack memory.
-If another instance of the device binds, or if the driver unbinds and
-rebinds, this dangling pointer could be used or overwritten concurrently.
-Additionally, modifying a global mfd_cell array dynamically violates MFD
-subsystem guidelines which require it to be static const.
-
-[Severity: Critical]
-This isn't a bug introduced by this patch, but there is a severe system
-stall issue in the event handler.
-
-Does this sequence execute a 10,000ms delay and call a sleeping function
-inside an atomic context?
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_events_fn() {
-    ...
-    stop_machine(ls2k_bmc_recover_pci_data, ddata, NULL);
-    ...
-}
-
-Inside the callback, it invokes a 10-second busy wait:
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_recover_pci_data() {
-    ...
-    mdelay(LS2K_BMC_RESET_WAIT_TIME);
-    ...
-}
-
-It also calls a function that can sleep:
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_pcie_is_connected() {
-    ...
-    base =3D pci_iomap(parent, 0, LS7A_PCI_CFG_SIZE);
-    ...
-}
-
-The workqueue handler ls2k_bmc_events_fn() calls stop_machine(), which
-runs ls2k_bmc_recover_pci_data() while all other CPUs spin with local
-interrupts disabled. Stalling the entire system with interrupts disabled
-for over 10 seconds can lead to system-wide lockups, RCU stalls, and NMI
-watchdog panics. Also, pci_iomap() can acquire locks and sleep, which is
-unsafe inside stop_machine().
+>  	help
+>  	  Provides a driver for Loongson-2K IPMI interfaces.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260804-ls2kbmc-mo=
-d-v5-0-e6bc5cdd9a93@gmail.com?part=3D6
+d-v5-0-e6bc5cdd9a93@gmail.com?part=3D5
