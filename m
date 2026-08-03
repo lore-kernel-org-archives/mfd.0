@@ -1,83 +1,40 @@
-Received: from mail-ua1-f54.google.com (mail-ua1-f54.google.com [209.85.222.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A458338DC59
-	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 16:45:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.222.54
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785775538; cv=pass; b=bCP88IaK7HxKbsvmPIHZwQHvM1KktDPdXVSwt8x8SPmhXno8+DwZHzdIy6GoBenZxSb+w4aQHpGcg9584mlbboiuT5UFo4Rk/pgJOU5QFS5FS4JBpGXs7FjHg1G+9H2sOWFrh7M4Fjhc+Fidly/1UZCLreqENavA35YBMG/xsYg=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785775538; c=relaxed/simple;
-	bh=pVJ/u9SrHtpIYcpsDllTKqpayBtCBNOqrDA3wdvqLR4=;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38C6B38734E
+	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 16:52:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785775934; cv=none; b=OPS8DdcHihgq6/6BwNy1Sk0kYYl7s223H5KAxJ5T+yqrBRQ87FtALALh6vHJ3EHiSMpXiELWW4eG2a48ZLseZ/baL2w0TaO/vIBCDVPjrUv9vQHuYFd2OY+eVMUu4KxPfpkd/lQQ+kKmdA+C2+yc8a7bbZ7tJXibH/Dafo3jjDg=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785775934; c=relaxed/simple;
+	bh=9hFWHpMr6667KTRSWMmWOov01VOWplUFcHlU43Po8Bo=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=HZtsogAo2dTnpnTxvM5+LaJbSUjN3kC7RvmcksJdT3x+yscsNIJO0Q/4VlILIABlAsQM576xu2dbiri41HfJbvwLVqdvWnc4l8Z5t2bivMVxxV1HqYv6pupja8RYU3AKhH1p+d+VUuX587dxCZNc7dXbOmgVDeBKqmARqbb4rAc=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=fKmda6lI; arc=pass smtp.client-ip=209.85.222.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	 To:Cc:Content-Type; b=l/pFDKteN9oVsuV9zf4pltrJMFIEdmR5qmz5PRdX8S+BqNrMY8poecWGGUL7as6caf/Y/Gt/O0Q7g22FC5CiTOOhdD3RnrgLlztvSqOx2Q3mpRGnuyXgRMW4+wmhSBa5SoLdPb5CypM6PVzyFHmZijfCO+8LlZMu7up+1+aDmk4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NX5jUezv; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="fKmda6lI"
-Received: by mail-ua1-f54.google.com with SMTP id a1e0cc1a2514c-977bc1cfc6fso889554241.0
-        for <mfd@lists.linux.dev>; Mon, 03 Aug 2026 09:45:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785775535; cv=none;
-        d=google.com; s=arc-20260327;
-        b=YzO332LRa9WNOaVBGlUcx4Ut8ftw5Lkr9qHR4wUnj9CzDQPBxnzWQhErHAzL9xv3Mx
-         0hboLDN43kCmWS+ZCfW0FjRKMou3SVOilIV0fNpIcRBSrrVbqnm3Xb1JQVZZde/Syc+X
-         Gp4Ehu6FkFn8VydB86N3EOslUgLvCWCNduYBgpd3Kd4UacpIYejS00dXfUkPQa8M1OYr
-         AnbuKyV5TFsoqVzjViaUEZ911N1b9diz7wCALl6o5vvYCOgSM2RIZh/5kbXeRMP3AzbP
-         /Q2/h73UMb2YNLilpV4SNy70TJKyyGRhdz8/TMagj7FN5d2iAvem8wy8vUHc6uFSCHIH
-         Ys1Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=niqvePJlDSQd28Qyc7y5gE/vwAYMmaOcsvRZCG9PwY8=;
-        fh=5KXVIk+wVPJbuwdh9MfGA96W5ZiWYZ/n5arICiK3If4=;
-        b=Jt0+YToLNRWT69VqyB7xQ4sRdafvw7Tm/SVG9cZF6mWvQ+LdX8hLcHqudK3tAoS0lz
-         t8k0+Zm0bzP+EKzhcjEDpN4BfSqkDkaH/CPa0gncc/ZVDfMl4/3LjuRcVQB8VsaXty1z
-         Chv/hT6uZl2XrkWj5DoJl/MLeSnbM3VQlM7hgMqm6JseXzIiaoIaL0AS8niM788L0Vzn
-         Th+QWqHLlI5UldcI+NJWKqj4CoOUj8EMz6EC1Sltvtp8XAAXl6/v3kaV4lhrzSfbr9Z1
-         GKEv3AGE6ZZonOWPsAGbQLL5jg5D1jV3jQTFSkGbY+R7FL6owa1VJQ4tg3vWwy9ecQTj
-         itnw==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785775535; x=1786380335; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=niqvePJlDSQd28Qyc7y5gE/vwAYMmaOcsvRZCG9PwY8=;
-        b=fKmda6lImSp0FCSy1CHg9tk8w1tieUXduSW7uRKmi6vNWKbMJPkg0li8BBydJxV8+Q
-         D8WBWNOYV+mKI1/9aqfYF9JPcjIqkkGNzWsQq7NjZCPMDQ18bvniHkA+WFhMyZYclpSi
-         VEeUbHu0yqJf6Z/5UWK7ndgiMvV76oRmSqCPCJJOpNtu0TP9UwrM1pf2JA6ouErcV0Hx
-         CCmLwqzFJD6qAwZl6S/vGhCcB51QcpO1nOG9CsBn6ZCeX/fK0AQBys2YNqr/ku213sCM
-         2Tfb/rSXYNwE8PMaNgQVj4BP90FViYDcTed1QH9x8tV3iVW7uBulpBxvDWhwH9hJH6Ed
-         SmPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785775535; x=1786380335;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=niqvePJlDSQd28Qyc7y5gE/vwAYMmaOcsvRZCG9PwY8=;
-        b=O/9t1WzkWfeJEE8lIS3pd1o65jD9EuEsXH8duANHfsaYWNyWf8nKxCdnpbGRSOYt/v
-         lMDFoHaPMIW8uuV0jNxXx5MHhpKOurp5I2gQBoAkJ8KSp87X4q5j2ag5mkwpEmieNwEF
-         u0BXmt1jPY7YT4koXlRYlmHF4ccLdCsjir6CWlMmyHiXod+RxbY8Rp16S5906t2bN0hs
-         8n+6Q0Iy1znd5/mHcJNkiyF6jNzblgU/qWDnf9gCquhFEQHvWAEWny+oePE57yFRvNlL
-         2sxir9Uty5jcxRQew0FXdDPId25pKYyKS6PwV4oRvQ/i7fpHak4EA3JY9Rcmd0Pqh5HX
-         pFNw==
-X-Forwarded-Encrypted: i=1; AHgh+Ro/WzXB9l4JfPqJeCzPGjadfQzWEvx4uIoeYI8oVlhZ2nyGPt6KNJNqRFX+YCD0m3JL6j0=@lists.linux.dev
-X-Gm-Message-State: AOJu0YwgNtKiOt7ztebYfs6ryuA0eGUKQpWlPZ6o/i4uRqlkqB7zvuEu
-	Ow/ZlR6nkipthRlygmwA1H+4dBRmbgT8ZLAdLEUmbbJKl3IPtMAi4U/te/VtfY2lnQ/8UJTIFoM
-	nHEYetZWdB3HQyRdlq/PrAtEfR8NdG7E=
-X-Gm-Gg: AR+sD10x1lMX/jLUfOTdJwR+AeRH7YiKO6iETE/cGyYw20EPd0eBlrraMMv6vKnDYeZ
-	5PhHVRTh3x9mq4n0pHQwrFfHyOddcW49K48qWAieIaCqkx2tzY+Ql9Rha6wJIBL200CsyZI/3WI
-	aUQPAAApQRiq2ijh3oyPBuE99OND1T6yvHu4/KwEXaKzlul3hOxs77VW2KDddFau5bHKS8F22JR
-	0/xzcuDReOhTgXy7VIl+f2/4c9MTqn8hzfneoDCtSACXLwIvNLRJ+KOoVKYpYJl/S5Ns1eizap0
-	/iIydGSc9Iz3TpC7ACtBak3E0kCd6JUazGIMmscwiLGYi79rS7R3x5Ns7cXPcCEqy2ln6YeIcVJ
-	ccrprgE7nN4+UGowNPTIrFnXhltxDPD7YhD49XpL5HLZlbhkRuekCqXav+JPDaKGxc/UzfNvuJb
-	bP4fwXD3XvFrwIwsHcNxLa774Mort3VHqvzdYv
-X-Received: by 2002:a05:6102:5e82:b0:73a:128c:4e3d with SMTP id
- ada2fe7eead31-75b22b6375cmr7983333137.8.1785775535469; Mon, 03 Aug 2026
- 09:45:35 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NX5jUezv"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EF5611F01558
+	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 16:52:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785775933;
+	bh=ktJ1TUfqLx16vP/MAvZ075WUJwVncZtbcK2MP7W0fJA=;
+	h=References:In-Reply-To:Reply-To:From:Date:Subject:To:Cc;
+	b=NX5jUezvCwr3Rigf6GEnsLny5tMHcLZFIvDMsvf0oqTW3eb3OWBaeq+fyRCum6VGL
+	 C9+2zgMetoU5enhL9OdWm9slHbaCi01X9LtmAuQGxwipz59p35oUKE+JxpZR8yV01l
+	 mCpp+kUiy8rHdY5N7+UozqICMcWwmTfVbVB719KSYbH/ao1rExbdoLA9DPENCaUnG8
+	 B5FXrT8ssqElqQUofEl7hAcH2NRyRS7iR3wuNUI5lwrp0jghUXjHwicnkM0liHLNgZ
+	 2C6yEYFu6wZCUCmZ6E3lR3s4LlySmUA+2ZO33Go/3rajwFAvCGqNZ6iklyriI2z016
+	 Atp+mUiQ96tNQ==
+Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-5aeb2bc82ccso4235073e87.2
+        for <mfd@lists.linux.dev>; Mon, 03 Aug 2026 09:52:12 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RpraIAHfgY/a9HXRTFvNNbbWf/kCcFaP2CFbVFttVm/WJ7EOMmpT7wyT0cHGH0WhssoWWo=@lists.linux.dev
+X-Gm-Message-State: AOJu0Yy26wGF4W2piZ5myQeTC2o2aQWP8BpcJzGGfPHEgXs6UzDoXYug
+	7hNu5Qut/11GExmX/+AJ2HUF1747LuF3FPjAL/tBG12A7jnQueSf7OBvXW/zcZ18nN7ppZXSlQ0
+	zo1THtAHGejLdiP9ZtVblo14zv4pC3Tk=
+X-Received: by 2002:ac2:5218:0:b0:5b2:9c0e:a2d9 with SMTP id
+ 2adb3069b0e04-5b2e4f9dd16mr1400790e87.65.1785775931139; Mon, 03 Aug 2026
+ 09:52:11 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -85,60 +42,74 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 References: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
- <20260802-submit-acx00-of-dynamic-v1-v1-8-0a53cd9e21cc@gmail.com> <2c0210b3-2c68-41f1-aa33-3f1693454849@lunn.ch>
-In-Reply-To: <2c0210b3-2c68-41f1-aa33-3f1693454849@lunn.ch>
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Mon, 3 Aug 2026 10:45:23 -0600
-X-Gm-Features: AUfX_myHhqSCOlS18NU3-rnIJB_yJDCs5Z0LNUdIv6o7tNasY8YkhUjPJd2Ilvs
-Message-ID: <CADvTj4pfNFVGrQV86T7X+nZQYUamxEYLLWuxVXk=av0da_XocQ@mail.gmail.com>
+ <20260802-submit-acx00-of-dynamic-v1-v1-8-0a53cd9e21cc@gmail.com>
+ <2c0210b3-2c68-41f1-aa33-3f1693454849@lunn.ch> <CADvTj4pfNFVGrQV86T7X+nZQYUamxEYLLWuxVXk=av0da_XocQ@mail.gmail.com>
+In-Reply-To: <CADvTj4pfNFVGrQV86T7X+nZQYUamxEYLLWuxVXk=av0da_XocQ@mail.gmail.com>
+Reply-To: wens@kernel.org
+From: Chen-Yu Tsai <wens@kernel.org>
+Date: Tue, 4 Aug 2026 00:51:57 +0800
+X-Gmail-Original-Message-ID: <CAGb2v67Wo+WG47jF_vBUOwv0Vw1SDygXMdBgpsy3R1AQ_LLfHw@mail.gmail.com>
+X-Gm-Features: AUfX_my4aoD19Jk3-8CcfeDfaoI0T_9zWEBW-1SE8UXOLwMz9Yfo_iLW9hIPcwI
+Message-ID: <CAGb2v67Wo+WG47jF_vBUOwv0Vw1SDygXMdBgpsy3R1AQ_LLfHw@mail.gmail.com>
 Subject: Re: [PATCH 08/21] dt-bindings: mfd: x-powers: add AC200
-To: Andrew Lunn <andrew@lunn.ch>
-Cc: Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Chen-Yu Tsai <wens@kernel.org>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
-	Samuel Holland <samuel@sholland.org>, Andre Przywara <andre.przywara@arm.com>, 
-	Richard Genoud <richard.genoud@bootlin.com>, Maxime Ripard <mripard@kernel.org>, 
-	Alexandre Torgue <alexandre.torgue@foss.st.com>, Giuseppe Cavallaro <peppe.cavallaro@st.com>, 
-	Jose Abreu <joabreu@synopsys.com>, Maxime Chevallier <maxime.chevallier@bootlin.com>, 
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Heiner Kallweit <hkallweit1@gmail.com>, 
-	Russell King <linux@armlinux.org.uk>, Saravana Kannan <saravanak@kernel.org>, Lee Jones <lee@kernel.org>, 
-	Heiko Stuebner <heiko@sntech.de>, netdev@vger.kernel.org, devicetree@vger.kernel.org, 
+To: James Hilliard <james.hilliard1@gmail.com>
+Cc: Andrew Lunn <andrew@lunn.ch>, Andrew Lunn <andrew+netdev@lunn.ch>, 
+	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Jernej Skrabec <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>, 
+	Andre Przywara <andre.przywara@arm.com>, Richard Genoud <richard.genoud@bootlin.com>, 
+	Maxime Ripard <mripard@kernel.org>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
+	Giuseppe Cavallaro <peppe.cavallaro@st.com>, Jose Abreu <joabreu@synopsys.com>, 
+	Maxime Chevallier <maxime.chevallier@bootlin.com>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+	Heiner Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, 
+	Saravana Kannan <saravanak@kernel.org>, Lee Jones <lee@kernel.org>, Heiko Stuebner <heiko@sntech.de>, 
+	netdev@vger.kernel.org, devicetree@vger.kernel.org, 
 	linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev, 
 	linux-kernel@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, 
 	mfd@lists.linux.dev, linux-rockchip@lists.infradead.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 3, 2026 at 7:18=E2=80=AFAM Andrew Lunn <andrew@lunn.ch> wrote:
+On Tue, Aug 4, 2026 at 12:45=E2=80=AFAM James Hilliard
+<james.hilliard1@gmail.com> wrote:
 >
-> > +            ethernet-phy-control {
-> > +                compatible =3D "x-powers,ac200-ephy-ctl";
-> > +                nvmem-cells =3D <&ephy_calibration>;
-> > +                nvmem-cell-names =3D "calibration";
-> > +                phy-mode =3D "rmii";
-> > +            };
+> On Mon, Aug 3, 2026 at 7:18=E2=80=AFAM Andrew Lunn <andrew@lunn.ch> wrote=
+:
+> >
+> > > +            ethernet-phy-control {
+> > > +                compatible =3D "x-powers,ac200-ephy-ctl";
+> > > +                nvmem-cells =3D <&ephy_calibration>;
+> > > +                nvmem-cell-names =3D "calibration";
+> > > +                phy-mode =3D "rmii";
+> > > +            };
+> >
+> > What do you mean by an ethernet PHY control?
+> >
+> > I assume this is not an actual Ethernet PHY, but some control logic
+> > around it? Where is the ethernet PHY itself?
 >
-> What do you mean by an ethernet PHY control?
+> Correct, this is not the Ethernet PHY itself. It is the package-specific
+> sideband control block that must be configured before the normal Clause 2=
+2
+> PHY registers become usable. For AC200, this control block is accessed
+> through the parent AC200 I2C regmap. For AC300, the equivalent control bl=
+ock
+> is accessed through a separate non-PHY Clause 22 address.
+
+Basically, all the PHY behavior that is normally configured using strapping
+pins on a discrete PHY is done over this I2C channel.
+
+> The actual Ethernet PHY is a separate device on the MAC's MDIO bus. The
+> shared PHY driver for that device is added in patch 16:
 >
-> I assume this is not an actual Ethernet PHY, but some control logic
-> around it? Where is the ethernet PHY itself?
-
-Correct, this is not the Ethernet PHY itself. It is the package-specific
-sideband control block that must be configured before the normal Clause 22
-PHY registers become usable. For AC200, this control block is accessed
-through the parent AC200 I2C regmap. For AC300, the equivalent control bloc=
-k
-is accessed through a separate non-PHY Clause 22 address.
-
-The actual Ethernet PHY is a separate device on the MAC's MDIO bus. The
-shared PHY driver for that device is added in patch 16:
-
-https://lore.kernel.org/linux-sunxi/20260802-submit-acx00-of-dynamic-v1-v1-=
-16-0a53cd9e21cc@gmail.com/
-
-The later board DTS patches instantiate it as an ethernet-phy node beneath
-the MAC's MDIO bus and reference the appropriate sideband control provider.
-
+> https://lore.kernel.org/linux-sunxi/20260802-submit-acx00-of-dynamic-v1-v=
+1-16-0a53cd9e21cc@gmail.com/
 >
->        Andrew
+> The later board DTS patches instantiate it as an ethernet-phy node beneat=
+h
+> the MAC's MDIO bus and reference the appropriate sideband control provide=
+r.
+>
+> >
+> >        Andrew
