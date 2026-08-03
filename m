@@ -1,157 +1,198 @@
-Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com [209.85.210.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEA7F3A9D99
-	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 05:15:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4A0E9463;
+	Mon,  3 Aug 2026 06:18:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.3
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785734158; cv=none; b=B6KU/Mtpbqp5N+SxuJr1FFchf7HZuy9xEpMmuGDZMB8u8n+CfK9lkW+pQJqDnixRxfq/b2OaqiXmNjJYSZk8kWrNbemMsGTV9Y3lNOrw0fHlVhr4qNToUw3jkztu0xmFGC3KrC7pH+sm7ddidlS7UtmNimqMmVlBSCWnsyAcl5o=
+	t=1785737944; cv=none; b=gwltGsBxjh0y0azD6l09rrmyE9cPTMBff6b0FnNMfMnYDI9HhXgBCwOf13UuBxXMyc4M2ox8HJwlSBYmmdRovzZ1cNI5k9HoB41PbsmttU/xPAiC4D9z8xgGUCSO35eWVKY+zU9cd58vjNk4Esd/jWFAA8pwD1mU3ZgS6Jm4vk8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785734158; c=relaxed/simple;
-	bh=GJHoT3sGNBaHJutusjqByQrs0uUzgfDmspxJwWo+2Fw=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=hzexnf/JYGO7h9siuscLVUvJSEk6C/w9xItH+YKk6q2IqI44UTEdxLEjCCCX6lDOwAcHDPdRMsqPMC8HdofhLmhW/w0wo2vnbv16/oo0m58tO1hpBIi4mWXL8NB8aSIaOjkS08AlGr/zcctCsahSZR+dos00H3spDg+3LgZFcns=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ddlBjSIC; arc=none smtp.client-ip=209.85.210.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1785737944; c=relaxed/simple;
+	bh=Ugm9wYbpELahg9Xe7+XpwxXZm4/hVdPVjwdIIMqoDPE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=MlpxDxl4+kXtzViuGWq7CaNCh+zob39Zrh31kB9OryKC5aHGt8MT96a9O/7GeKEij8IYIWp3jwJoDG8bY6Jwq3WnyrL0so5T7zvHjS1C/5h58hJy1hcAqObd4BkcHnYdNVDwRGQiz0nbvMPQHSTFuaWcudny79Jnh9viCA06lKM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=h7YI8M12; arc=none smtp.client-ip=220.197.31.3
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ddlBjSIC"
-Received: by mail-ot1-f53.google.com with SMTP id 46e09a7af769-7e6b554044fso2627415a34.0
-        for <mfd@lists.linux.dev>; Sun, 02 Aug 2026 22:15:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785734156; x=1786338956; darn=lists.linux.dev;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=V3THAfFmoIZwxbw2uyAABLxKH+fs/K6w42J64CA1198=;
-        b=ddlBjSIC0JLpOdHtY5yr0+WvOyyCd7SCEKcgMXvGST2Ldwf0BU5J31wzuOHHk0ym2X
-         ubI/OyjsBMrKEnikRzEKDf8yrEV/9L/f0DykHHBhTp6sBBs8nyeY+Wam/jvqvLts6j9z
-         A6EZv7TfXAgM4Klh6F+TlY/Mym50jn2wLyq0bo25jpeFmqGy2J5XPlmupLqfvoFXGBTT
-         RoG/KKOBlb5ocGvh8FoirWSAX/nsxg7+A0GLFW0g7Uy7NlVD9KnTny6FQlr9mthyLWje
-         fRcTqwWyqHDzJvSSwUpFtB223gS2aYNWnEf7PdED94iriXwsZhzUQOaMp9s4JmFPkfgg
-         /lsQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785734156; x=1786338956;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=V3THAfFmoIZwxbw2uyAABLxKH+fs/K6w42J64CA1198=;
-        b=Drl6QRpOUjmF0vyQcnyErffG3U7Bl+7OR2bZxAVWJE7xuLca1zfJAWQTFfIlpyGHMU
-         2UXMjeI+46aiSNYvfkHS6glu92gYeaTYvtOjI8uyk6XO1vGrWX9DLvT8Ri+gBj+vald0
-         USBj8nUmhhJyL3UMGwEJIL2NJ5cHGrHpCFb52JOyDruYbgZaiMPOGwesYyXHsFGf9c29
-         UCbUOQXkaqyogqCBosO5AAlkiFhIgLOw2k04Wo283JwJ5D3h//1ww2571icct93hiZv1
-         50w+xLTQe9tdoe+ve4+w2w6jh2kvXk2+aWE6nvLFBlFzc5e1HWOqzgsziL+04xJz7BcU
-         PxQg==
-X-Forwarded-Encrypted: i=1; AHgh+RqTBWWX30ynwuCcthscR9VZIS3gTBsPZZjFSLdtH4OI+CkO1A7w5nmRMReVLdF18jM7vDs=@lists.linux.dev
-X-Gm-Message-State: AOJu0Yzf8pAWIIJ04HQ56t6rIFAiHtTpZAIzxPPsnorHR8M1XKHdPT5g
-	AazRGwyvPD2TPlBY4mqtF/Lmw52dxTeb1sMgVSuLyEsNa97XyTP6ys8b
-X-Gm-Gg: AR+sD12XxXh4Hpfs3GFiyu2jJ2yLyZmeo3YjW9SAVR1zWQdAz5+v2IRBGQ6z8DVcwbz
-	czG81QwFU3LK5Q3lj6ol6Sjx++VeFUH1VprZ8sIZAo5kLmb2eks2UWYMiQVPGdcbPfMoHizDpGg
-	DEZRQgW7wyOtUjdIFsKNTs4DJn4vU3CdjYZJJTvIW/T8EgVfn7KE7I0O7j2GekAWxyH+kDnMBk7
-	dTn/31uKJXn51XyOxAmFvcEiMthSfGMWVEL4knE3X7sae0YS25PXmvYtrIkbJ7pt2cQVwp6+OYd
-	wIn61vvWSZsmt4NGa1mEG55pdPhYiVTdqe4EroyyWaS+Lgn+0V2yrTz5peHBOvQfz9pkEyVdU2X
-	c1UE69isajQJLUUaVI99UBnIr/ktnAYQ4E2jt0gQdJeRwtl/lthMi7g25MF1SMFoOWdzAv/dFRa
-	kBrkjsHAxYUBTnzmynbwFKWN+jL7pwqE91A0wY2pnrapg1AyAwgk84nRlgYufw2xK6sx/ii2+KH
-	tXmPVhMPFJs9y6ouyg2xzicKvUckQdB/oToCBmwyY88nqNPhNeaajFwh27FmMsn7yP15kHkPqVK
-	hh94/P6nb3kcX3MjvS7QN8i8KCegcbIHvTZO4cMl+ck99VXcV5j+XPD1frIb9xjun2yaL2Qbjrs
-	qZpSc1axXV1HQhBsdZ0HxI/CC5IQDsir+1wyB
-X-Received: by 2002:a05:6830:2a8b:b0:7e6:f7fb:9678 with SMTP id 46e09a7af769-7f196cb65a7mr14526881a34.1.1785734154482;
-        Sun, 02 Aug 2026 22:15:54 -0700 (PDT)
-Received: from [127.0.1.1] (184-96-154-59.hlrn.qwest.net. [184.96.154.59])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7f18f07a5e3sm6787108a34.15.2026.08.02.22.15.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 02 Aug 2026 22:15:54 -0700 (PDT)
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Sun, 02 Aug 2026 23:14:31 -0600
-Subject: [PATCH 21/21] arm64: defconfig: enable X-Powers ACx00 Ethernet
- support
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="h7YI8M12"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version:
+	Content-Type; bh=8z/Ja8msCQyhEkE0uXSWUZRUIHxD/U1gQXqjPG00wU0=;
+	b=h7YI8M12Jzaz5cy9Cm5Pn22nsI6GiSamaOgo96RjU2yxsydKU2MISMaZyW1JBI
+	ObiLtpXiM/nE95ktCgP1dHEU7nqD65ujWOMJnyq32AykuXkHx4WStV8le+9EjwYl
+	ot790ANHolh1/E02xQlP6QmkhESoMy4K4kNHEqvnUHH7w=
+Received: from fedora (unknown [])
+	by gzga-smtp-mtada-g1-0 (Coremail) with SMTP id _____wD3T9pzMnBqkykzMg--.4961S2;
+	Mon, 03 Aug 2026 14:17:25 +0800 (CST)
+From: Ju Nan <junan76@163.com>
+To: Antonio Borneo <antonio.borneo@foss.st.com>,
+	Linus Walleij <linusw@kernel.org>
+Cc: Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	=?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>,
+	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+	Clark Williams <clrkwllms@kernel.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Lee Jones <lee@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	linux-gpio@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-arm-kernel@lists.infradead.org,
+	linux-rt-devel@lists.linux.dev,
+	mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] pinctrl: stm32: use a raw spinlock regmap to program the EXTI mux
+Date: Mon,  3 Aug 2026 14:17:14 +0800
+Message-ID: <20260803061718.43210-1-junan76@163.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260802-submit-acx00-of-dynamic-v1-v1-21-0a53cd9e21cc@gmail.com>
-References: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
-In-Reply-To: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
-To: Andrew Lunn <andrew+netdev@lunn.ch>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Chen-Yu Tsai <wens@kernel.org>, 
- Jernej Skrabec <jernej.skrabec@gmail.com>, 
- Samuel Holland <samuel@sholland.org>, 
- Andre Przywara <andre.przywara@arm.com>, 
- Richard Genoud <richard.genoud@bootlin.com>, 
- Maxime Ripard <mripard@kernel.org>, 
- Alexandre Torgue <alexandre.torgue@foss.st.com>, 
- Giuseppe Cavallaro <peppe.cavallaro@st.com>, 
- Jose Abreu <joabreu@synopsys.com>, 
- Maxime Chevallier <maxime.chevallier@bootlin.com>, 
- Maxime Coquelin <mcoquelin.stm32@gmail.com>, Andrew Lunn <andrew@lunn.ch>, 
- Heiner Kallweit <hkallweit1@gmail.com>, 
- Russell King <linux@armlinux.org.uk>, 
- Saravana Kannan <saravanak@kernel.org>, Lee Jones <lee@kernel.org>, 
- Heiko Stuebner <heiko@sntech.de>
-Cc: netdev@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev, 
- linux-kernel@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, 
- mfd@lists.linux.dev, linux-rockchip@lists.infradead.org, 
- James Hilliard <james.hilliard1@gmail.com>
-X-Mailer: b4 0.15.2
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:_____wD3T9pzMnBqkykzMg--.4961S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW3Jw4xJFyUCF1UXFW5Cry7trb_yoW7XFy8pF
+	W3XFWYyrs7Jr4rZrW0y3y0vFW5Kan7t3y5CwnxK3y2vrn0va45K3W3KFyUAFsFkr4kXFZ0
+	yr15AFy8uF1DAFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UKzuZUUUUU=
+X-CM-SenderInfo: pmxqt0ixw6il2tof0z/xtbC1BZgEmpwMnZTtAAA3J
 
-Build the H616 PWM clock provider, AC200 MFD, both variant-specific
-EPHY control drivers and the shared link-PHY driver as modules. Enable the
-netdev LED trigger as a module so DT-described PHY LEDs can use hardware
-offload.
+stm32_gpio_domain_activate() programs the EXTI interrupt multiplexer
+with regmap_field_write(), on a regmap the driver obtains from the generic
+syscon driver via syscon_regmap_lookup_by_phandle(np, "st,syscfg").
 
-Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+An irq_domain .activate callback is by contract called from raw atomic
+context: __setup_irq() takes the raw desc->lock and calls
+irq_activate() while holding it.
+
+That regmap is created by syscon with regmap_init_mmio(). The regmap-mmio
+bus sets .fast_io = true, and syscon does not set use_raw_spinlock, so
+__regmap_init() protects the regmap with a spinlock_t.
+
+On !RT a spinlock_t only ever spins and nothing bad happens at runtime,
+which is why this has gone unnoticed. On PREEMPT_RT spinlock_t is a
+sleeping lock, and taking it under the raw desc->lock is a sleep in atomic
+context. lockdep's wait-context checker catches this ahead of time — with
+CONFIG_PROVE_RAW_LOCK_NESTING=y the driver splats on boot as soon as
+anything requests a GPIO interrupt (here: an sii902x HDMI bridge):
+
+BUG: Invalid wait context
+...
+(&syscon_config)->lock){....}-{3:3}, at: regmap_lock_spinlock
+other info that might help us debug this:
+... 6 locks held by kworker/u8:0/12:
+ #5: (&irq_desc_lock_class){-...}-{2:2}, at: __setup_irq
+
+i.e. a wait type 3 (LD_WAIT_CONFIG, sleeping-on-RT) lock is acquired while
+the raw desc->lock has already limited the context to wait type 2
+(LD_WAIT_SPIN).
+
+Note the driver is already aware that it runs in atomic context here: it uses
+the _in_atomic() hwspinlock primitives around this very same register
+access. The syscon lock is the one lock in that section it does not control.
+
+The fix:
+
+Register a regmap with use_raw_spinlock = true for the node through
+of_syscon_register_regmap() before looking it up, so the syscon layer hands
+out that one instead of instantiating its default. It has to go through the
+syscon layer rather than staying private to the driver, because both pinctrl
+instances of an STM32MP1 (pinctrl and pinctrl_z) reference the same node —
+private regmaps would give them one lock each and no mutual exclusion on the
+mux registers. Same pattern as drivers/soc/samsung/exynos-pmu.c.
+
+Reported-by: "Uwe Kleine-König" <u.kleine-koenig@pengutronix.de>
+Closes: https://lore.kernel.org/all/20220202174430.pf37tt6lua2op3gc@pengutronix.de/
+Signed-off-by: Ju Nan <junan76@163.com>
 ---
- arch/arm64/configs/defconfig | 6 ++++++
- 1 file changed, 6 insertions(+)
+ drivers/pinctrl/stm32/pinctrl-stm32.c | 64 +++++++++++++++++++++++++++
+ 1 file changed, 64 insertions(+)
 
-diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfig
-index 654a102cb5bc..53f6b8edaf33 100644
---- a/arch/arm64/configs/defconfig
-+++ b/arch/arm64/configs/defconfig
-@@ -475,6 +475,9 @@ CONFIG_DP83869_PHY=m
- CONFIG_DP83TD510_PHY=y
- CONFIG_DP83TG720_PHY=m
- CONFIG_VITESSE_PHY=y
-+CONFIG_XPOWERS_AC200_PHY_CTL=m
-+CONFIG_XPOWERS_AC300_PHY_CTL=m
-+CONFIG_XPOWERS_ACX00_PHY=m
- CONFIG_XILINX_GMII2RGMII=m
- CONFIG_CAN_FLEXCAN=m
- CONFIG_CAN_XILINXCAN=m
-@@ -828,6 +831,7 @@ CONFIG_BCM7038_WDT=m
- CONFIG_MFD_ADP5585=m
- CONFIG_MFD_ALTERA_SYSMGR=y
- CONFIG_MFD_BD9571MWV=y
-+CONFIG_MFD_AC200=m
- CONFIG_MFD_AXP20X_I2C=y
- CONFIG_MFD_AXP20X_RSB=y
- CONFIG_MFD_MACSMC=m
-@@ -1325,6 +1329,7 @@ CONFIG_LEDS_TRIGGER_HEARTBEAT=y
- CONFIG_LEDS_TRIGGER_CPU=y
- CONFIG_LEDS_TRIGGER_DEFAULT_ON=y
- CONFIG_LEDS_TRIGGER_PANIC=y
-+CONFIG_LEDS_TRIGGER_NETDEV=m
- CONFIG_EDAC=y
- CONFIG_EDAC_GHES=y
- CONFIG_EDAC_LAYERSCAPE=m
-@@ -1726,6 +1731,7 @@ CONFIG_PWM_SAMSUNG=y
- CONFIG_PWM_SL28CPLD=m
- CONFIG_PWM_STM32=m
- CONFIG_PWM_SUN4I=m
-+CONFIG_PWM_SUN8I=m
- CONFIG_PWM_TEGRA=m
- CONFIG_PWM_TIECAP=m
- CONFIG_PWM_TIEHRPWM=m
-
+diff --git a/drivers/pinctrl/stm32/pinctrl-stm32.c b/drivers/pinctrl/stm32/pinctrl-stm32.c
+index 6a99708a5a23..39df117489d1 100644
+--- a/drivers/pinctrl/stm32/pinctrl-stm32.c
++++ b/drivers/pinctrl/stm32/pinctrl-stm32.c
+@@ -1757,6 +1757,68 @@ static struct irq_domain *stm32_pctrl_get_irq_domain(struct platform_device *pde
+ 	return domain;
+ }
+ 
++/*
++ * The interrupt mux registers are written from stm32_gpio_domain_activate(),
++ * which the irq core calls with the raw desc->lock held. The regmap the
++ * generic syscon driver hands out is protected by a spinlock_t, which may
++ * sleep on PREEMPT_RT and therefore must not be taken from there.
++ *
++ * Publish a raw spinlock regmap for the node before looking it up, so that
++ * all of its users keep sharing one regmap, and one lock.
++ */
++static const struct regmap_config stm32_pctrl_syscfg_regmap_config = {
++	.reg_bits = 32,
++	.val_bits = 32,
++	.reg_stride = 4,
++	.use_raw_spinlock = true,
++};
++
++static void stm32_pctrl_publish_syscfg_regmap(struct device_node *np)
++{
++	struct regmap_config config = stm32_pctrl_syscfg_regmap_config;
++	struct device_node *syscfg_np;
++	struct regmap *regmap;
++	void __iomem *base;
++	struct resource res;
++
++	syscfg_np = of_parse_phandle(np, "st,syscfg", 0);
++	if (!syscfg_np)
++		return;
++
++	if (of_address_to_resource(syscfg_np, 0, &res) ||
++	    resource_size(&res) < config.reg_stride)
++		goto out_put;
++
++	config.max_register = resource_size(&res) - config.reg_stride;
++
++	base = of_iomap(syscfg_np, 0);
++	if (!base)
++		goto out_put;
++
++	/*
++	 * The regmap is handed over to the syscon layer, which never releases
++	 * it, so it must outlive this driver: no device managed allocation
++	 * here, and no device to attach it to either.
++	 */
++	regmap = regmap_init_mmio(NULL, base, &config);
++	if (IS_ERR(regmap)) {
++		iounmap(base);
++		goto out_put;
++	}
++
++	/*
++	 * A regmap is already registered for that node, most likely by the
++	 * other pinctrl instance sharing it. Drop ours and use that one.
++	 */
++	if (of_syscon_register_regmap(syscfg_np, regmap)) {
++		regmap_exit(regmap);
++		iounmap(base);
++	}
++
++out_put:
++	of_node_put(syscfg_np);
++}
++
+ static int stm32_pctrl_dt_setup_irq(struct platform_device *pdev,
+ 			   struct stm32_pinctrl *pctl)
+ {
+@@ -1766,6 +1828,8 @@ static int stm32_pctrl_dt_setup_irq(struct platform_device *pdev,
+ 	int offset, ret, i;
+ 	int mask, mask_width;
+ 
++	stm32_pctrl_publish_syscfg_regmap(np);
++
+ 	pctl->regmap = syscon_regmap_lookup_by_phandle(np, "st,syscfg");
+ 	if (IS_ERR(pctl->regmap))
+ 		return PTR_ERR(pctl->regmap);
 -- 
-2.53.0
+2.55.0
 
