@@ -1,70 +1,70 @@
-Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com [209.85.210.47])
+Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com [209.85.210.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EF2038F624
-	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 05:15:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 027BA3976A0
+	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 05:15:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785734141; cv=none; b=sNOMip9YKwFaA/lHzq/woV1nu+or8QYun+F45F8vyXQj8bzc/BunWAs4rYBmqtSqO7NheCtPQks8u8cv7PxubkPVTcTThs52o8CUVgwEF1qUXufuifH/QJ4wDKVVTRjCn16a7cTm2pMG4gd832G58Yn2rUmByQ9mhjPiOfhHho0=
+	t=1785734141; cv=none; b=vGpejuZADPjXc/xTRgl3sy6W+EjM0AItCxDb/MdEknTW57gqRBG+OWpeFgtyj9UVBJGH6JQiPuKD8xKY2lofMcwhQnto2+kVOhFVj1IWbRNXFcAy78zyZFi/qDLjX1FR/xQf/xHrLrENvjkF3TWJtSsQrYHikDShPueyOTWNQt8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1785734141; c=relaxed/simple;
-	bh=zKmrq4Io78YBlcSoFkA6zgzyWtU0hC2kx2tv6Vt1nvQ=;
+	bh=2SOkuuUqffJAqXcEW7ZDhEaFHvF0SZKllJC1Nh5E8zo=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=CLgcKGP2IgwbHu3dq7vwLLPvRK9ZYUNplh0XPoNqkj1lP6nCd9ne8lyIY7qLcPeIgPcvYPAh7cMs1lbRHVDRMyW9G6Kb/RDyXum6eigpsN/eHZUefeteXIyZ2xCuAFMIFsdj/ptHa26hbldfb85XjchG/g3bpsfNJ0xEIbRWZwc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Zd1xCJL7; arc=none smtp.client-ip=209.85.210.47
+	 In-Reply-To:To:Cc; b=ZCuBFz81O8rq70+PNDz166aR5hHJxFH+4lvPy5Vw3zfftFw7R/s7zyLKRSSYczzuv+4+oOLvQrICXJw5ZLaFUf0mwYda3b0foPgoVYF08tbailHCB6Hn49SQUoTSHlOfEWLueEwixsa1zo5KmZ6lzNo7V336f0Hi2YWMjpubZ54=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=iTkhOC5R; arc=none smtp.client-ip=209.85.210.52
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Zd1xCJL7"
-Received: by mail-ot1-f47.google.com with SMTP id 46e09a7af769-7e9f1f24cbcso2864790a34.0
-        for <mfd@lists.linux.dev>; Sun, 02 Aug 2026 22:15:29 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="iTkhOC5R"
+Received: by mail-ot1-f52.google.com with SMTP id 46e09a7af769-7f18c0e03e3so1152316a34.2
+        for <mfd@lists.linux.dev>; Sun, 02 Aug 2026 22:15:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785734129; x=1786338929; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1785734138; x=1786338938; darn=lists.linux.dev;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gb4LPnphqc1DtduXOsyl640sXOpfiOxS2LbjD6EtoY4=;
-        b=Zd1xCJL7pDGyVFg8h05T4NXUxBp5bH9d6iKOJHgmej5t8kYMJo9i5D2nMZXQflKvC6
-         hlwZ8J1BeXMVElDf/GQXExptEqY88DSmu1OdmpgPu45t12e4ijo5O081N/u/v5/UlJ06
-         2ZxIBfDQa9nkPaOJ1927Zv29EJxFJgR9OlsvaGqTxKgE/+aZfLMEbnee8rPl9ia2AXIK
-         /TqUBJ+IAE/aILsPTWQwT+Ynu8tSNSvvEXzdGvUtA/yEICFSjLIHNqLSazADy/iEwk0Q
-         Hjt8pYHzkvqqyoEUV+u30BWE+vifti4VI2WRsXy/XeUL1GW4YJq/oETOK3WyEpNgxSP4
-         GxSw==
+        bh=GTwjTV5MzEj5mt/lgWMCGvinpE29xZysk84NZ5krcS8=;
+        b=iTkhOC5RzevZ2n3mto9+6mPC8FDrCc9ucrWkW0FRCOWf62RY4+lOXHVvWkKtFGcIIC
+         /9YpLXdkLAZajpwjPFxNbhZBngTnMNQzTB5/ndgQjxRPpAQGi/VnQ+N/7Dh9d+jlZca6
+         OwiuH1HHpOOzA3zivFI6p+PXd+PqowndRiY2KVO6aNrfqWcU0aFtAlfpj15ff6//yLHC
+         TMDnQm9fZxvBshXFCVB1sDSDUFHbmkYAhrsU969pthJhxx1h3jAvXWZlQ+vQwYoD4w57
+         kWypzlp54TJLKTlfMGbmsaixlwZVnOIjen/4vqt/Vr6fKtJUh1fI2RhWrrDsMNj5LKzw
+         RWzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785734129; x=1786338929;
+        d=1e100.net; s=20251104; t=1785734138; x=1786338938;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=gb4LPnphqc1DtduXOsyl640sXOpfiOxS2LbjD6EtoY4=;
-        b=g20gA+6MjgMPLUgs/dLsxHE8oqqYsf6SiaQ+ZV3F7vNQHeL2k8zY2U8v0xyqrKlSc2
-         MoZ0roTWdaHiZpkvC3pAiK+zAf7qlTFfVnu2QWHdLwnpQuOcfjqlUiA2XyrNDbAKIpf2
-         U6q0H5EL0lrxkaKQyr2Jya5d/HnqkNd44xcX2Zczs4Npn1cI6ZmhscqSrxYkvTeUDEag
-         KsvcyMBa3TXUNE7tlloLmXU9oiVItQriEWQ/D1kC8/7Phs/u0pr0WG4xvbrjkPIffae5
-         qxt6OYoH99TUPenzlBLDtP2Ui+bfjWpN2zPc2Vi+Akez/kDkt2lg1yzK0OP8o/gUTHgT
-         jwUg==
-X-Forwarded-Encrypted: i=1; AHgh+RoQmL9kuCpnQY1EQurLneA4t/GA72IgDg5BVUQHeUo2Xle3JPpjGfBFjNn+olNVNDhDkEw=@lists.linux.dev
-X-Gm-Message-State: AOJu0YwZeZpEV8si5x+owDpIRnTw/7P3RITRmveNJyahPrjH+SDzoUaj
-	MGxiett1S+lRTwT6NK9NaqxxHUjkyekRFgzd9yZXgFv4nHR4J53ILlmF
-X-Gm-Gg: AR+sD10TcwYSj9XocNrF70ak1XNwyvcSHsR78tOKBBrrFYuJHFiTDBv7fOMYLGKwpt+
-	mo7ZBZljGb1+0sLidaXBwOWvVmOzq2boVQyRVdVeLO7uiGrNsirfwUjAVkyO02xZeq0XxqE8JyX
-	xTlAIiLoXtDYgPKrD5O+DWE8mmFn9brbuLhvZ+5kKT0WPObqjzTs1Bi0XMXwzEYe3gXDnsuTScK
-	0pGVBDdMOM2Anq99wOxBqWC8jsNGyU55aiL/aMy7Q4nBF4wAFWY4MBpp7dNV9fcMFjrq5Im6ub1
-	+RJJIPExvjEIClZQUELv4UORAvFQ2qrWeOdTcG3i3cYwyYs0vQiyeUFZMhbnuV2vdVakKaFp9Cl
-	9YPNUFS3MpjVY8Q5Dia9gh4CAqFbpGg5U681hTT5o6e7rZ7G19rQo5e7LkD2lOVcue+9iVor78L
-	mztzR5TvuKepp97hYILpLF5EEU0BGw8TzOepCqfaBcQCMwSTgFernDeUy79KZT4bjYIcxIzzeKm
-	gcAHQUqx2r9nnAK0G0AD+3TCRb46EWDzOIH3WyJfUgL5SOpI8jjtRzYD1g8kaMfX6L63A79hKWQ
-	YvCVV1BPmnoEa7hb9omyKIKR7+vnKp6c1uhrhWlcX0ZgfRBj1b1xv4DCF9WB51FnzAXRzsP11W8
-	1rUMY7XJlDznR2feSnibkaLt3CQ==
-X-Received: by 2002:a05:6830:7086:10b0:7db:a297:9e62 with SMTP id 46e09a7af769-7f1892c8017mr4283606a34.8.1785734124209;
-        Sun, 02 Aug 2026 22:15:24 -0700 (PDT)
+        bh=GTwjTV5MzEj5mt/lgWMCGvinpE29xZysk84NZ5krcS8=;
+        b=czhXzNQUE9vV026mCww3NaG0h36TkSH9qaOBsvExvVM+QT65XwgOeEnNxVv9U/T8d+
+         2IYjg7UTO7o8G+lxgBjr7lq6A3QaFYZOibNIsIhbZPq4OrA7i2KmRt5IvvhkYWDPV2cL
+         rm0whx0pBD/g91OQ5DUM5mA04xTpy+ef073aFe3LmxvvsOtlAEb2U8SWIitBaJd5ar5a
+         Y/VUTFd2Xi3vUd0EatfzUogrBWXZJjFApk1H9mKbo777I1IgkGp73PCWSLpvKGq/A83R
+         q4Ev9/sQ6Je8nMZEgRiO40VyzV/0Xrnlmrud5AQgr0DWVDxFNuNcvYPW6HFh8c78Xkhk
+         7hQQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rr2ajLTg1gsFNvUrT5v65LgzfSZ+ZNfji8uPQz/W6/3Mu/aCagrju4NXjgNxutIG8y6v0U=@lists.linux.dev
+X-Gm-Message-State: AOJu0YzCNsnqsspFrkMHc4Zo6JSZ2QZAVpRARt2jpk5P1MqUuoYNADDl
+	dI1FsC0XI1Ra8Hzkz5EzhCAOuaJlNl+PdO6xXZwBpr2yJzvMrH23iTbD
+X-Gm-Gg: AR+sD13RGycOkKSVGXU9DGIcXsVtnYGM7vxbBBP8SYA3zK0I4RY+ODi+Mcp8Yn/cVvn
+	FMCgoLH3ZAU5jPlAYL9VITNURE9EalM7Fvhu0zpdjYO9HrO9v4TLTkErOywz4aakGYhEYF4odJg
+	yrhfAg7dMnSqDakuNkhartaXCwIsEx5vtfNDxO9i/yUCFSAS4EHiE+8PT6I3FBAkhVpSTd69WoK
+	w7oOSbyu3yE1jkslTrYTli3+EfekNbKlYQ/k0KpqTNU9G0EeyETvefdesFMoI3flMXvl0Sa3hJL
+	feRy2+/rp8XwlTcD1B9+3MJ9M/ZMuY0IiXhUHJPvKcMqcYowkdLx5P8Noixcl4jd9wjfuUTvekm
+	Yi38y9n3Gg0MS+Rax/ApoqJyXLj8F9s8vFQ4DlyR0LXiSPrScue/BRf4NU3D7E3+j1FKh7SIiPO
+	GL0EcSX8QIeF6sX/ION2722NPdWMd5KdsyQ0UOax5skLIDn7XafvirwyHZSszRfVz09GLw/MTDO
+	Ru5AB+Tf+ttAL1of7BwwaUaqMXncIlvJAE/kVtbvherpj2mHFbfamPRp2WOXlDWc2aRfWlf3H8e
+	jNoEq40NI9o+hsf8QNhyHYbMVoJXK4Uvea1yX6VGnX31AxO84j9TwS9wViPhL/FjxlDbLJ50KRS
+	7+3kEbGw1XWmQl0F8
+X-Received: by 2002:a05:6830:4489:b0:7e9:cddb:142a with SMTP id 46e09a7af769-7f196bd63a9mr15354948a34.7.1785734137863;
+        Sun, 02 Aug 2026 22:15:37 -0700 (PDT)
 Received: from [127.0.1.1] (184-96-154-59.hlrn.qwest.net. [184.96.154.59])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7f18f07a5e3sm6787108a34.15.2026.08.02.22.15.22
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7f18f07a5e3sm6787108a34.15.2026.08.02.22.15.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 02 Aug 2026 22:15:23 -0700 (PDT)
+        Sun, 02 Aug 2026 22:15:37 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Sun, 02 Aug 2026 23:14:13 -0600
-Subject: [PATCH 03/21] arm64: dts: allwinner: h616: add EMAC1 controller
+Date: Sun, 02 Aug 2026 23:14:21 -0600
+Subject: [PATCH 11/21] dt-bindings: net: x-powers: add AC300 EPHY control
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -73,7 +73,7 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260802-submit-acx00-of-dynamic-v1-v1-3-0a53cd9e21cc@gmail.com>
+Message-Id: <20260802-submit-acx00-of-dynamic-v1-v1-11-0a53cd9e21cc@gmail.com>
 References: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
 In-Reply-To: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
 To: Andrew Lunn <andrew+netdev@lunn.ch>, 
@@ -102,70 +102,102 @@ Cc: netdev@vger.kernel.org, devicetree@vger.kernel.org,
  James Hilliard <james.hilliard1@gmail.com>
 X-Mailer: b4 0.15.2
 
-From: Richard Genoud <richard.genoud@bootlin.com>
+The AC300 companion IC exposes the Fast Ethernet PHY control registers
+through a separate non-PHY Clause 22 address. The manual defines the
+control address as the link-PHY address plus 16, giving address ranges
+of 16-23 and 0-7 respectively.
 
-The H616 has a secondary EMAC controller that supports only RMII at
-10/100 Mbps. It connects through PA0-PA9 to an EPHY in a companion
-AC200 or AC300 package.
+Describe the control endpoint, its required VCC1 supply, its 24, 25 or
+27 MHz input clock, interface mode and calibration cell.
 
-Add the EMAC1 controller and RMII pin group. Leave the controller
-disabled for boards to enable when the companion Ethernet hardware
-is present.
-
-Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- arch/arm64/boot/dts/allwinner/sun50i-h616.dtsi | 30 ++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
+ .../bindings/net/x-powers,ac300-ephy-ctl.yaml      | 77 ++++++++++++++++++++++
+ 1 file changed, 77 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/allwinner/sun50i-h616.dtsi b/arch/arm64/boot/dts/allwinner/sun50i-h616.dtsi
-index 90fe56a1d3cd..6879f27c2b2b 100644
---- a/arch/arm64/boot/dts/allwinner/sun50i-h616.dtsi
-+++ b/arch/arm64/boot/dts/allwinner/sun50i-h616.dtsi
-@@ -432,6 +432,14 @@ pwm5_pin: pwm5-pin {
- 				function = "pwm5";
- 			};
- 
-+			/omit-if-no-ref/
-+			rmii_emac1_pins: rmii-emac1-pins {
-+				pins = "PA0", "PA1", "PA2", "PA3", "PA4",
-+					"PA5", "PA6", "PA7", "PA8", "PA9";
-+				function = "emac1";
-+				drive-strength = <40>;
-+			};
+diff --git a/Documentation/devicetree/bindings/net/x-powers,ac300-ephy-ctl.yaml b/Documentation/devicetree/bindings/net/x-powers,ac300-ephy-ctl.yaml
+new file mode 100644
+index 000000000000..a6634fcfafd4
+--- /dev/null
++++ b/Documentation/devicetree/bindings/net/x-powers,ac300-ephy-ctl.yaml
+@@ -0,0 +1,77 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/net/x-powers,ac300-ephy-ctl.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
- 			/omit-if-no-ref/
- 			spi0_pins: spi0-pins {
- 				pins = "PC0", "PC2", "PC4";
-@@ -789,6 +797,28 @@ mdio0: mdio {
- 			};
- 		};
- 
-+		emac1: ethernet@5030000 {
-+			compatible = "allwinner,sun50i-h616-emac1";
-+			reg = <0x05030000 0x10000>;
-+			interrupts = <GIC_SPI 15 IRQ_TYPE_LEVEL_HIGH>;
-+			interrupt-names = "macirq";
-+			clocks = <&ccu CLK_BUS_EMAC1>;
-+			clock-names = "stmmaceth";
-+			resets = <&ccu RST_BUS_EMAC1>;
-+			reset-names = "stmmaceth";
-+			syscon = <&syscon>;
-+			pinctrl-names = "default";
-+			pinctrl-0 = <&rmii_emac1_pins>;
-+			phy-mode = "rmii";
-+			status = "disabled";
++title: X-Powers AC300 Ethernet PHY control interface
 +
-+			mdio1: mdio {
-+				compatible = "snps,dwmac-mdio";
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+			};
-+		};
++maintainers:
++  - James Hilliard <james.hilliard1@gmail.com>
 +
- 		gpadc: adc@5070000 {
- 			compatible = "allwinner,sun50i-h616-gpadc",
- 				     "allwinner,sun20i-d1-gpadc";
++description:
++  The AC300 Fast Ethernet PHY has a separate control interface accessed as a
++  non-PHY Clause 22 device. Its address is 16 plus the address of the link PHY.
++
++properties:
++  compatible:
++    const: x-powers,ac300-ephy-ctl
++
++  reg:
++    minimum: 16
++    maximum: 23
++
++  clocks:
++    maxItems: 1
++    description:
++      AC300 input clock. Its configured rate must be 24, 25, or 27 MHz and
++      determines the corresponding EPHY_CLK_SEL value.
++
++  vcc1-supply:
++    description:
++      3.3 V supply for the AC300 I/O, bandgap, Ethernet PHY analog front end,
++      and internal digital LDO
++
++  nvmem-cells:
++    maxItems: 1
++    description:
++      SoC SID cell containing the Ethernet PHY calibration value written to
++      the AC300 BGS_EFFUSE field after adding 3 modulo 16, as prescribed by
++      the vendor initialization sequence.
++
++  nvmem-cell-names:
++    const: calibration
++
++  phy-mode:
++    enum:
++      - mii
++      - rmii
++
++required:
++  - compatible
++  - reg
++  - clocks
++  - vcc1-supply
++  - nvmem-cells
++  - nvmem-cell-names
++  - phy-mode
++
++additionalProperties: false
++
++examples:
++  - |
++    mdio {
++        #address-cells = <1>;
++        #size-cells = <0>;
++
++        ethernet-phy-control@10 {
++            compatible = "x-powers,ac300-ephy-ctl";
++            reg = <0x10>;
++            clocks = <&pwm 5>;
++            vcc1-supply = <&reg_3v3>;
++            nvmem-cells = <&ephy_calibration>;
++            nvmem-cell-names = "calibration";
++            phy-mode = "rmii";
++        };
++    };
++...
 
 -- 
 2.53.0
