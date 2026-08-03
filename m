@@ -1,197 +1,153 @@
-Received: from mail-vs1-f46.google.com (mail-vs1-f46.google.com [209.85.217.46])
+Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66B924334BC
-	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 18:45:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.217.46
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785782723; cv=pass; b=GZToXFTDU3YdzpBarrqScP2PVIflfhYcTobXiMEWhDBXzaqC4csWKPa+qlGg3ZzSRb9UlGpwr00ANtsmCp+N7wT31LU+Uii+9YRb4oUQp764FiPPZpZfaFqhci+R9yxuJ2tCVMUpaMrdfnsJ0IObto6/n0l1Fd901sahVJguhgY=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785782723; c=relaxed/simple;
-	bh=m2f7hLEA6HUqRGyrwkI9sBkGWy9QLT2mm+A3bdgIjyw=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Z/O2Uj36rsSVdrPINoFVTHe+pfooYkb8J4t1jGa8QikU9iOk1K+RY2upMMzoCCvClL76m6niC1ehFL6KEAhUo1tvaS97oqYoRLGiUXteXhnN/iFB3WWUFIOyJLeqYKzdt4ZAu2CG0sPXmFF1TtnQ8s6FFmIEySDjZPBoNZLiokk=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=DyIkfyx5; arc=pass smtp.client-ip=209.85.217.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 197DF431E74
+	for <mfd@lists.linux.dev>; Mon,  3 Aug 2026 20:46:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.49
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785790005; cv=none; b=Gl49Q9tabLnSXq3NEZeYrim56CbzoElCnwQ7YSYYXMeCND+sGcfDxPu8ST26rz8RfCLUZE00WB+9HX43+Ef94c18MsCKQv5UwnriuE6rataaF426l6pMe5J16pCdbWVlIMmDzuHTk9tMSC+ER/5rzHKt26t+03+C2+ObiDXYAaI=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785790005; c=relaxed/simple;
+	bh=wBX8BLZdTegOaun5exk4Y6K5BxBMg2rdL/rBxt1YWWs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=sKdOd93Pfxh4X5ZNsgi6IoPFc73Dp7/4k04lEZ0ucWpZ794mRrDurk5lvM5hmKkCDDr0fSkwFMeeLjahPVDecj+WbYlwIjhR3/g+62Ig89clChb6pDMl0oja+5r9Sj4rv8dDs3bsu+tjaB/zwz4On5s8zbPQNoIZa1n8tqcdRCQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=minyard.net; spf=pass smtp.mailfrom=minyard.net; dkim=pass (2048-bit key) header.d=minyard.net header.i=@minyard.net header.b=EsRdQp1e; arc=none smtp.client-ip=209.85.160.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=minyard.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=minyard.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="DyIkfyx5"
-Received: by mail-vs1-f46.google.com with SMTP id ada2fe7eead31-73791ee3612so1958983137.1
-        for <mfd@lists.linux.dev>; Mon, 03 Aug 2026 11:45:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785782720; cv=none;
-        d=google.com; s=arc-20260327;
-        b=nO3T27rSt904aOSbZcGXhPYLAJXstEXiKhHrJjeK1OvbgaKSBmJz7GtNnCEKWAkf9V
-         KxByLwvOPxaxFGoBQGi2+zJaIrQi/4Z7FB+p4PeiwqugbvOm5PZNN0qdosXKAegy+huQ
-         ybHtrmqLTQOnTFcu6GNZPrR0JPNTBjsMu2IZmcrY69h8uihbNHOe0DGFvVIN6G4+bqIU
-         bSNM3259ViMQWV2m2o0sUd1Y6yFwiY26Bs2xD10iF5h+2mv48rwXUoaJVgADKLcQyu6Y
-         avxkX8U0i7VBSLus1xghVW89mrZZooGeWlToa+7a8zzNtgg1QyxNWl6N1SuogQ/gGHeY
-         UkNw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=lhCHZs/g7TB5oMS7PG09o+GsecOnKpnv54KT75DfOGo=;
-        fh=H2ekZv4D5W+YYcXxlme13mFJOPdvcFuxLM01iEEl+lg=;
-        b=WMbxuC/yH6byfCAfnJcn4Duy0F+5l6MzKY2SIhLP37N1jHOb9I07ffu6orIT0Sqbqf
-         e5/YNfeg0vubm7OQCTuh+5odowYVATzmM3vvbyj4PGnvIXmrrXuIBU+EnZOLoG56mGQv
-         V6FwTO7yQN2XcKwc4roSChZGSOOgCneJyTVZOyQjrd3l9yh1ztE1/j1foO7C7pAdgf6S
-         EtcjI+1Hlp/eK9pOeCFxoC9qqGj6/csYof6qUruf5OM36K26lBiU/DH1sAeKFEm/rR2w
-         Cctq+012HFidWwkVmNWeaaG236SRUef/XxC+otOvyV8xPHu3CBfyVyrwDal3FeycRjmB
-         ej0g==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=minyard.net header.i=@minyard.net header.b="EsRdQp1e"
+Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-455ee8f529dso678430fac.1
+        for <mfd@lists.linux.dev>; Mon, 03 Aug 2026 13:46:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785782720; x=1786387520; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=lhCHZs/g7TB5oMS7PG09o+GsecOnKpnv54KT75DfOGo=;
-        b=DyIkfyx55kJsKKFt7rsLN6kZYRmOQTLrYfCpaDFK4Tll1yvh0eQAs8OCZDBBFnuyu/
-         O9uPAMJPpFeR7MgU0vlQHWIJRdfoPJxBKT0unfPEBafxDAGfIuKIEvdrNf0v7rOTafdT
-         KSVJ5gD69fZpykfHJ68kJA8pMfg43crBYasDaRp0YAxEzTYmJ/d8WY4ltEwthE7vYrBE
-         /bLQ6WD+njmIUuuXYMnxnQnd4thmdcp7asU6Vpw9DJdySm1+OOdhrWCd/0KwLFmUjxC+
-         LmgCozuZaYzLGYZaeQQ/jOZzMDpvPFLVUM2pMj8lLIg2Dtsaj3YrwG3Ht22nJ5aHsG71
-         kInQ==
+        d=minyard.net; s=google; t=1785790003; x=1786394803; darn=lists.linux.dev;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:reply-to:message-id:subject:cc:to:from:date:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=7CkkLegqd2C08aV3jq1XWB4t5IoMIYqhhbrvHHvW604=;
+        b=EsRdQp1eZzYy7KvoV7NTJ6LpB4UoDEzXFuk88bzlfCM99+9BozykAZbe2JSbvucvam
+         UZZ6uTYHdMHJSkS/lgSs+IwDrbAdB+UowLEZm7rj+3a9gfoHDwZgInMJW8hH1TTWvurQ
+         piJSw12/wXm7YzhCfptaoTOZfctyr1GTwunpOwIFqHd07NXJvQtcmtuaYhTAS1vA1BQF
+         zU1T7JCcL9jIPA6s5u57BWrXP1wVtKHRhAeskg8WfROqsYekQ5m1XB64GNIRWvZfYTbC
+         PZ5ZCzUKGISuRbbePd1aYsrZwIhlmbXXEAV1E+JcjYqmvStJgSxONNWTIjW7TcW2IhaV
+         B2Aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785782720; x=1786387520;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
+        d=1e100.net; s=20251104; t=1785790003; x=1786394803;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:reply-to:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=lhCHZs/g7TB5oMS7PG09o+GsecOnKpnv54KT75DfOGo=;
-        b=B3uvrPGsCytnxISGSCOaXH0ZQOU6c15ckrh+Z0HLMgNiy0qsAwKg20AsNFTDQ4dgFN
-         4Yq/P2WTXFmPoluRotX7kTGfQcSnPsXEQJOFtEVBPs/0hZQmaDwh12/uMZSYuGZQrELU
-         JHEmr2Z8Y5zb18tA9jTOd9mTAvIcfDyckrqWYxVP07JcYP/jb/6Hc0K6uMAXNMPgZN4c
-         vob3ZbAwNUzjS2UsvCaTo8XyITX/5jHR2JYsVuVyy1IsMFu3XZr+U0IqvGhuImkeFgMl
-         CGBzLzw9meAN5KsFgy6+9RacxuW7hAmjqRqkns7l0p0iBb+kIBL3YDozY9Pd5jt1t3Yk
-         ollw==
-X-Forwarded-Encrypted: i=1; AHgh+Rqo5glKnCEjastS45MfQxyA6BP259DaQI+C7J/kXI/f+cME8G5zR5Jd0BUmFKbXfzv5G6E=@lists.linux.dev
-X-Gm-Message-State: AOJu0YxO4Lx+y0w003l9FEx+fwpJ0/QfCoWcrYVFzBwtvcX9fbW8OK6P
-	Q5Ea16qXat8V2Uy0uhJVOZvQ1veZVHMmV9jfXcn6RUeigiFw7hOz8Aym12Ek/9Kqf6NvY00m86x
-	EgTLbvnKzGbh7NeyzqquF1eMI74NhVVs=
-X-Gm-Gg: AR+sD13Lf50ULVs4uNePEXv8ErNawYdAL4dPF8dWIdxYoB9iNUEzvD9EFvOu0tEwxn7
-	a394wJ6OimLuGGmGKg8cZxQhKBFm+gtZZOpl4GmnLeXl+b7wkmdnbVd63TjbdZiKgy2LreDpO/H
-	BURQntYmUJmSKLckOkmTZVa8mK2akqjSuLgDoBFviabirekQclfEgNoMQMdMFCPUWATP5xd0NrL
-	7HyB+hn6WTy+gqDQRH4+3UIp4C7QdBSDGHNI7rakffAXOLwjGSev7oXAwJFiW3+A3hMcv+nNub8
-	fLzRgFLbJPXISqE8D2EFSJkZL1JWMORn5p2Z3td9F8hysDxfFb9+8o7Xt0TQsu7zK1+ZhO8EP8Q
-	hHrpcmAS/buhp3BPxsqdzjm3FDBjCTrc6ey4cFFgQPX6ooQdjmhjcsKM4E1uE3aVKfnEFZuejU8
-	wf6rr+mWKO4ECHA2+XknEkigtWL3GhBypb7zNq
-X-Received: by 2002:a05:6102:fa5:b0:74a:b492:3a62 with SMTP id
- ada2fe7eead31-75b21e6b74emr8853495137.4.1785782720194; Mon, 03 Aug 2026
- 11:45:20 -0700 (PDT)
+        bh=7CkkLegqd2C08aV3jq1XWB4t5IoMIYqhhbrvHHvW604=;
+        b=h8X92f+THyWbtZ8Ny35p6CjDIhBSf+MLVw5YzZaCMBlC0HwgNtPD3IvD90BnLZkVLX
+         T8yQVZ6MoeEbfOuKmr9cw9B5QucBL9jECmbsXMEWWlmrDlDDYXu3c/+aybj0Wzm/ThBb
+         CBzllZY+K0YQMItfOkDoiBOn1eNcQN+472Xs2vBU3BeHH2XmRJZj84oVLRpcr57fCxf8
+         yEdMeGOZTuov+j0YlzSYKEZdAv5CE97YHUJnaqPXcxC/OE1XKpbUJnN5E1Eo7a1LTZin
+         n9A0hnK1p145BaUY34tvTaoTMkyEJahCZfWdshQbrezLali+nTR1NhLcEaJCpH+nAHze
+         9b+g==
+X-Forwarded-Encrypted: i=1; AHgh+RpyKmDH3QxMyddvV5ioSasC+xmZniITmU2CD2VYLJ+Z5uTkrB7PitjIWS+i664Utar6Ebs=@lists.linux.dev
+X-Gm-Message-State: AOJu0YzmK7Qu11odL3pi59bI0btnu1DWlaBatQqyNX1z/BBU150he4Pa
+	yqB1bgAvNQ9kdSBtShTKnomQ7OksxzdXcFBrT++At/yHfAbd/jK905hzpqhjfEDwdoA=
+X-Gm-Gg: AR+sD10mmzX6gwRWoYvhmuZpb2Q6dYeywq0Je5Yom/rdfer5aJNLTPklSXQAW7xBmW+
+	l3eEfPazy07+H5sc2Vad+vKXDYNGeN/MHSHjQhgZ2FT3noEbG5/zk4yEdbJ9Qz+JZVSBzWAX4Ag
+	7jiuooCiZ4No1hjQjO2DMRcMzg1rkQTo175rgzIBUwjGKEVofJ9HP89WrjSX09xFL7faPn7Z50K
+	1I39bgk3H2xEur93YO5+JzlyyFKWel4S9nU7fB284oJLyFjDCHALbNecHr3cBLCCbFCeDdFD4Up
+	5GMf82vwdvvWXT0Jq4qGcbUNIY0qjMYhqV9a1VtN2JaVoqdsG5niptQzl75HccDOBYCboZd+aVB
+	YqvLDyyeSMNkuO7v1Sd8TmVBSkWRuEZIAHrrawR92SzQSvuGNuNbEHLbStNF7FpAeqdoj4Xx/ED
+	uIT40ITc4Xp640n/+kbzKHM8sne23Ozt9vjd57P4/VXUDnQqBBYJA4LbqLjWxuYFex+aKmNWMyE
+	YuwpZlOciNAiLd7PTmsL3xRtGML6O3msYyVwp/yaU0DHNEmF0+CGWPMqKRF5LxCwhOcbgHiQCGf
+	o3AjTpWemokC6i57xhAQ
+X-Received: by 2002:a05:6871:646:b0:43d:8b5:933c with SMTP id 586e51a60fabf-459057b3bd5mr18200643fac.8.1785790001800;
+        Mon, 03 Aug 2026 13:46:41 -0700 (PDT)
+Received: from mail.minyard.net ([2001:470:b8f6:1b:398b:b195:5c26:85bd])
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-458f6064843sm9889268fac.4.2026.08.03.13.46.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 03 Aug 2026 13:46:41 -0700 (PDT)
+Date: Mon, 3 Aug 2026 15:46:36 -0500
+From: Corey Minyard <corey@minyard.net>
+To: shankerwangmiao@gmail.com
+Cc: Binbin Zhou <zhoubinbin@loongson.cn>,
+	Chong Qiao <qiaochong@loongson.cn>, Lee Jones <lee@kernel.org>,
+	Huacai Chen <chenhuacai@kernel.org>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Xi Ruoyao <xry111@xry111.site>, WANG Xuerui <kernel@xen0n.name>,
+	Yinbo Zhu <zhuyinbo@loongson.cn>,
+	Jiaxun Yang <jiaxun.yang@flygoat.com>, mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org, linux-gpio@vger.kernel.org,
+	openipmi-developer@lists.sourceforge.net
+Subject: Re: [PATCH RFC v5 5/7] ipmi: ls2k: Relax the dependency to its mfd
+ driver
+Message-ID: <anD-LJYB-afdVAXN@mail.minyard.net>
+Reply-To: corey@minyard.net
+References: <20260804-ls2kbmc-mod-v5-0-e6bc5cdd9a93@gmail.com>
+ <20260804-ls2kbmc-mod-v5-5-e6bc5cdd9a93@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
- <20260802-submit-acx00-of-dynamic-v1-v1-10-0a53cd9e21cc@gmail.com>
- <05b1e6a2-725e-4b8e-8629-249637bbcb81@lunn.ch> <CADvTj4o0JdjoO+FC4pO=qnjEQ8MRyzQdKp2Hxy9NsPU-gym5OQ@mail.gmail.com>
- <9b8be475-1fde-409c-a82e-be4b2e402650@lunn.ch>
-In-Reply-To: <9b8be475-1fde-409c-a82e-be4b2e402650@lunn.ch>
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Mon, 3 Aug 2026 12:45:07 -0600
-X-Gm-Features: AUfX_mxrC1O9cxNBLhvxxOGulQcP38PJEIX9XeOzWBEdBf_aYCt8UZQ5evY-RxY
-Message-ID: <CADvTj4pBovti19MXgQjFpxm=7aRm0sYQz9jxfo8bu3txH94THQ@mail.gmail.com>
-Subject: Re: [PATCH 10/21] net: phy: add X-Powers AC200 EPHY control driver
-To: Andrew Lunn <andrew@lunn.ch>
-Cc: Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Chen-Yu Tsai <wens@kernel.org>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
-	Samuel Holland <samuel@sholland.org>, Andre Przywara <andre.przywara@arm.com>, 
-	Richard Genoud <richard.genoud@bootlin.com>, Maxime Ripard <mripard@kernel.org>, 
-	Alexandre Torgue <alexandre.torgue@foss.st.com>, Giuseppe Cavallaro <peppe.cavallaro@st.com>, 
-	Jose Abreu <joabreu@synopsys.com>, Maxime Chevallier <maxime.chevallier@bootlin.com>, 
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Heiner Kallweit <hkallweit1@gmail.com>, 
-	Russell King <linux@armlinux.org.uk>, Saravana Kannan <saravanak@kernel.org>, Lee Jones <lee@kernel.org>, 
-	Heiko Stuebner <heiko@sntech.de>, netdev@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev, 
-	linux-kernel@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, 
-	mfd@lists.linux.dev, linux-rockchip@lists.infradead.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260804-ls2kbmc-mod-v5-5-e6bc5cdd9a93@gmail.com>
 
-On Mon, Aug 3, 2026 at 11:57=E2=80=AFAM Andrew Lunn <andrew@lunn.ch> wrote:
->
-> On Mon, Aug 03, 2026 at 10:09:01AM -0600, James Hilliard wrote:
-> > On Mon, Aug 3, 2026 at 7:51=E2=80=AFAM Andrew Lunn <andrew@lunn.ch> wro=
-te:
-> > >
-> > > > +static int
-> > > > +ac200_ephy_ctl_set_led_outputs(struct acx00_ephy_control *control,
-> > > > +                            unsigned long outputs)
-> > > > +{
-> > > > +}
-> > >
-> > > > +static int
-> > > > +ac200_ephy_ctl_set_led_polarity(struct acx00_ephy_control *control=
-,
-> > > > +                             bool active_low)
-> > > > +{
-> > > > +}
-> > >
-> > > I've not looked into the details, but these look like pinmux. Does
-> > > this I2C device have a GPIO controller? Can these pins be used for
-> > > other things than LEDs? Maybe you should be implementing a GPIO and
-> > > pinmux driver. The Ethernet PHY driver can then just select the
-> > > correct pinmux configuration.
-> >
-> > These do not appear to be GPIO or muxable pins. The AC200
-> > documentation describes them as three dedicated EPHY LED
-> > outputs: link/activity, speed, and duplex. The bits in SYS_EPHY_CTL1
-> > enable those output pads, while EPHY_CTL provides their shared
-> > polarity setting. I have not found any documented GPIO data
-> > registers or alternative functions for these pins.
->
-> So what i'm trying to do with both of these is make it look more like
-> standard Linux building blocks.
->
-> If that is not possible, i would actually put all this code into the
-> PHY driver. You then have a regmap property to gain access to the I2C
-> registers.
+On Tue, Aug 04, 2026 at 12:55:53AM +0800, Miao Wang via B4 Relay wrote:
+> From: Miao Wang <shankerwangmiao@gmail.com>
+> 
+> There is no strong dependency between the IPMI driver and its mfd
+> driver. Although the IPMI driver will not work without the mfd driver,
+> it is not a hard dependency. The IPMI driver can actually be compiled
+> without the mfd driver, and it will just fail to probe. When the mfd
+> driver is loaded, the IPMI driver will probe successfully. Therefore,
+> the dependency of the IPMI driver on its mfd driver should be relaxed
+> to "imply" from "select". This will allow the mfd driver to be compiled
+> as a module and the IPMI driver to be compiled as a part of the ipmi_si
+> module. The adjustment to Kconfig for the mfd driver will be introduced
+> in the later patch in this series.
 
-I understand the goal of using standard Linux building blocks where they
-fit, but I do not think folding these control paths into the common PHY
-driver gives the right device model here.
+I don't think that's what "imply" is for.  Imply seems to be for if
+there is another subsystem that can use this subsystem, but doesn't
+require it to exist.
 
-The AC200 and AC300 expose the same Clause 22 PHY interface, but their
-control functions are separate devices with different transports and
-lifetimes. The AC200 control function is an MFD child accessed through
-the parent I2C regmap. The AC300 control function is a separately
-addressed non-PHY MDIO device. A regmap reference only describes the
-AC200 transport; it does not represent the AC300 control device.
+For instance:
 
-Folding both implementations into the common PHY driver would make that
-driver manage AC200 MFD registers and resources as well as an AC300 MDIO
-control endpoint. That would mix the package-specific control transports
-with the otherwise common Clause 22 implementation.
+config SENSORS_NPCM7XX
+        tristate "Nuvoton NPCM750 and compatible PWM and Fan controllers"
+        imply THERMAL
 
-The current split uses standard subsystems wherever they provide a
-matching abstraction: MFD, regmap, MDIO devices, clocks, regulators,
-NVMEM, device links, and the PHY LED framework. The narrow private
-interface covers only the compound operation which those frameworks
-cannot express: calibrating, addressing, configuring, and sequencing the
-package control block before the Clause 22 interface becomes usable.
+The fan controller will work fine without the thermal subsystem; you
+can control the fan speed without it.  But the thermal subsystem is the
+logical user of this.  I looked at many of these things like this.
 
-The link address is an important example. It is defined once by
-phydev->mdio.addr. AC200 must program that value through its I2C control
-interface, while AC300 must validate it against the address of its MDIO
-control endpoint. Generic PHY operations do not carry a consumer MDIO
-address. Encoding it in a phys specifier or control-node property would
-duplicate the PHY node's reg value. Giving the common PHY driver a raw
-regmap avoids passing the address only by moving the provider-specific
-implementation across the driver boundary.
+In the IPMI case, the IPMI driver is useless without the mfd part.  So
+there's no point in compiling the IPMI part of this if the mfd part is
+not there.
 
-The LED pad-enable and polarity bits are similarly part of the package
-control function. They control dedicated EPHY outputs rather than GPIOs
-or muxable pins. The common PHY driver still owns the PHY LED semantics,
-while the selected control driver performs the package-specific register
-access.
+I could be wrong, but I can't see why you would want to do this.
 
-For those reasons, I think keeping the transport-specific control drivers
-and the common Clause 22 PHY driver separate is the cleaner division.
+-corey
 
->
->        Andrew
->
+> 
+> Fixes: d46651d4e3c0 ("ipmi: Add Loongson-2K BMC support")
+> Signed-off-by: Miao Wang <shankerwangmiao@gmail.com>
+> ---
+>  drivers/char/ipmi/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/char/ipmi/Kconfig b/drivers/char/ipmi/Kconfig
+> index 669f7600019747bcd2b37563477cf336f19a0407..f456e3e89416932f0d21bb742153a503aeb24267 100644
+> --- a/drivers/char/ipmi/Kconfig
+> +++ b/drivers/char/ipmi/Kconfig
+> @@ -87,7 +87,7 @@ config IPMI_IPMB
+>  config IPMI_LS2K
+>  	bool 'Loongson-2K IPMI interface'
+>  	depends on LOONGARCH
+> -	select MFD_LS2K_BMC_CORE
+> +	imply MFD_LS2K_BMC_CORE
+>  	help
+>  	  Provides a driver for Loongson-2K IPMI interfaces.
+>  
+> 
+> -- 
+> 2.49.0
+> 
+> 
