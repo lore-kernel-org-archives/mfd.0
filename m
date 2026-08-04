@@ -1,192 +1,234 @@
-Received: from DB3PR0202CU003.outbound.protection.outlook.com (mail-northeuropeazon11010053.outbound.protection.outlook.com [52.101.84.53])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CAEAE3EB112
-	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 14:19:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.84.53
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785853205; cv=fail; b=C07hf9QV49YTt4CqB0lkmBdKQi1k4Psz5IUwpyQY3z90ShQ6ZaZBpsoAnwIbfv5vlaGOFgPVc0PGooxDLDkbU9yTGCjnSAYjJOP0GXh2IgtbDw6EV3j/oDRjE3LSySCeclr+3xbVFYPvGEfiC3FzuFTxvNDlNJyz1q3y+bP1bmg=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785853205; c=relaxed/simple;
-	bh=qukmNWgXoGy2pWRQ/2q57ZNttrKPSiS9w3sXMYNaDSM=;
-	h=From:Date:Subject:Content-Type:Message-Id:References:In-Reply-To:
-	 To:Cc:MIME-Version; b=Uw6rgI1yfiyhdU+UytS7PWYM5HNjWBeE5oyI4r6y0jeg4M3AOfzy2h2YVlFya9/LP+UnkbflI/TbIrs1vnsOR2woSReibqykpPCdJTZaPhVtge0SXpDqLERsZqfcxEYvH5Z+KGHLJfqtMM4vABPvS7TI+x5W3QY5/t9p4G+KlA0=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=ixEj5ws3; arc=fail smtp.client-ip=52.101.84.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5E843F0AAD;
+	Tue,  4 Aug 2026 14:24:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.5
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785853480; cv=none; b=oh+/X4ehhB5YJ4YVHBYd7C1CVr6XmRXyusXhlUZwYsNFbc26AjIp0I5fGr2Xm49gJxcoc3Fd6Ge2GKCyVh/2mb51KzSF+Ehw2sC69cUzqHDybWGXwuajTluV8oiiTC4qADSBp0OAIM9lLfUuCHXK1tnVqn6fpiibz/UsPKvAMcE=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785853480; c=relaxed/simple;
+	bh=rHnWmvfnall4QZeIN9a9mBRRDgg88+Z8CXK6Kb4emoo=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=TDGbn2OneOFeO9fwHFggHBCodoyeEEvjJrOQPoht2oFYurEQpuV3lYbq8cT8hzi1lEcrMYRXubgx7dPPwEA+YqEJUO2kYBvNfc0iYmCwIafI+V+EGB9qykPP5LeOzQnCPCAys6AnSAMScrVrtwes9+RfFYK8xToD/EzoBOREyOM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=Z62ahoVw; arc=none smtp.client-ip=117.135.210.5
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="ixEj5ws3"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HWfFIQAe/wSC6t4+/KZk+7ZncmfFKskT6HlJ1RQrntoFj9B2VceugdsdxNNaqqJANjzghLi4EnTHBzmsQL5XQYmuQfJ+4+dXr22BoiFhl+xQVYTYx9reXlqKL7CdFceE1DofmbB67SHHZGTqW/MfkkE/OR23Isa2UigAHPHJVi6SG9s13BYzW8WsqrIB2NRTP0aHLDglCae2+D+r2vnE7U5elVxjQb4nZ5kSszxePOZpglVSKZwoDNrZ5dVmk5dspR3yvuT33UK1ZjuMmhkU+XSo/sYdbvPbb2uXQ2furENaIQ6Q8EbHQYbzG/Z6WZ4oGKMS6o3INvMy8lPbnZHZlA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=B9Vjhbqk4xHvoM3LsKMtD2I3ZiOhhBNYpcLYP77k6Ow=;
- b=pWh9oJtMXmrs1gPy37zDerwls2YQ9mZ9Mw1RmTaRM2APYQvlzYXW8Yg0SdwBbrZgBq7lRqes7COGdC42Kshi+U/1H9gLUUASScdkyi2ab+9TVVMCMg4FCejhO5rTuTFXbgzAffISWHRKaAqhGhh71zQOFgEie7Wy6xhUcU4KMv2LSSiybtokrDGGeR4ebR/4ffp4u3wQ2s9KwzCFE/AQ+PqqWloQPaaDlpJEGn8TD8Dhtd07BzwpVquqEAYpH1iJVt3ec9pZvcKHv4+kDS4Oc9gkmgrEKd5HRbnwO4qibH6Wjf3qWvbnezsYi9/GYHeWzfYU/i8fPmhsCFDN0ox9gQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=B9Vjhbqk4xHvoM3LsKMtD2I3ZiOhhBNYpcLYP77k6Ow=;
- b=ixEj5ws3S34WavPVmrDxnfHzc3VpAb2Flwl9/ZAFjah6GGWnGM32jx3aaHJhotYy23PpsyQ6GodvwJfXNMeHFmk6RoAZ4sKe5/x4m0DIJ8MtA8f1so7nIJQcJoe3ei5yuoNRiaHqw7ZzWFXKe4UCn+Smb95cP1znXV5fFJQJvnVn/et2apxK1oXeWyXH5B6RPFciGNPYM+vmKv0onPoWyzHnBJ4bil5NU/Udc81Eb42NwJKtM6joMiNXCQBlwwew2mpO2P5Rty1NIOlBCQIvCeoHXK+cSRVH77pu7z68VrfE40PytE8+jqTqRFLVJlqY6s5deJ8IOP//BRD2cwqduQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
- by DB9PR04MB9790.eurprd04.prod.outlook.com (2603:10a6:10:4c5::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.270.18; Tue, 4 Aug
- 2026 14:19:42 +0000
-Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
- ([fe80::ac38:1699:6f18:c5d9%6]) with mapi id 15.21.0270.017; Tue, 4 Aug 2026
- 14:19:42 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Tue, 04 Aug 2026 22:16:45 +0800
-Subject: [PATCH 10/10] dt-bindings: mfd: samsung,s2mpg10-pmic: Use generic
- power-controller schema
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260804-mfd-syspower-v1-10-a440783c2e78@nxp.com>
-References: <20260804-mfd-syspower-v1-0-a440783c2e78@nxp.com>
-In-Reply-To: <20260804-mfd-syspower-v1-0-a440783c2e78@nxp.com>
-To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Lubomir Rintel <lkundrak@v3.sk>, 
- Dmitry Osipenko <digetx@gmail.com>, 
- Shree Ramamoorthy <s-ramamoorthy@ti.com>, Heiko Stuebner <heiko@sntech.de>, 
- Joseph Chen <chenjh@rock-chips.com>, Chris Zhong <zyw@rock-chips.com>, 
- Zhang Qing <zhangqing@rock-chips.com>, 
- Sebastian Reichel <sebastian.reichel@collabora.com>, 
- Andreas Kemnade <andreas@kemnade.info>, 
- =?utf-8?q?Jonathan_Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>, 
- Julien Panis <jpanis@baylibre.com>, 
- Matti Vaittinen <mazziesaccount@gmail.com>, Alexander Kurz <akurz@blala.de>, 
- =?utf-8?q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- linux-rockchip@lists.infradead.org, linux-samsung-soc@vger.kernel.org, 
- Peng Fan <peng.fan@nxp.com>
-X-Mailer: b4 0.15.2
-X-ClientProxiedBy: SG2PR02CA0121.apcprd02.prod.outlook.com
- (2603:1096:4:188::21) To AM8PR04MB7874.eurprd04.prod.outlook.com
- (2603:10a6:20b:24d::9)
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="Z62ahoVw"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version:
+	Content-Type; bh=ZHRwjPesqBoJn8UTIi0yl5fajUFgc9aYLcMXK0tV0Vg=;
+	b=Z62ahoVwsCSBegc2m9RttLVriZICqT4n2BC2tUNBeBzcgX6V7UnJA32qc5uhsi
+	PVC1wlEn/eCm/MiJWUbBaOvlU1AFONJjQjQw5aznsPV2QA6XkGvVoG8Q1ZFMPa+l
+	LdsErW9zcmOHxaciVZcKhBnkmZ8FgMVTS2UrTJDogf/hM=
+Received: from fedora (unknown [])
+	by gzga-smtp-mtada-g0-2 (Coremail) with SMTP id _____wD3H4+v9XFqDtAgNQ--.21955S2;
+	Tue, 04 Aug 2026 22:22:41 +0800 (CST)
+From: Ju Nan <junan76@163.com>
+To: junan76@163.com,
+	antonio.borneo@foss.st.com,
+	linusw@kernel.org
+Cc: alexandre.torgue@foss.st.com,
+	arnd@arndb.de,
+	bigeasy@linutronix.de,
+	clrkwllms@kernel.org,
+	lee@kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-gpio@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-rt-devel@lists.linux.dev,
+	linux-stm32@st-md-mailman.stormreply.com,
+	mcoquelin.stm32@gmail.com,
+	mfd@lists.linux.dev,
+	rostedt@goodmis.org,
+	=?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
+Subject: [PATCH v3] pinctrl: stm32: program the EXTI mux from .alloc instead of .activate
+Date: Tue,  4 Aug 2026 22:14:03 +0800
+Message-ID: <20260804141402.86911-2-junan76@163.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260803061718.43210-1-junan76@163.com>
+References: <20260803061718.43210-1-junan76@163.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|DB9PR04MB9790:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3db57294-e637-4fc8-f058-08def2336cfc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|19092799006|23010399003|1800799024|7416014|376014|56012099006|10067099003|11063799006|3023799007|6133799003|18002099003|22082099003|921020;
-X-Microsoft-Antispam-Message-Info:
-	Yn0wWKdfChz1WksZOgmpjriQT6/Gro4T8kyJid6d5zbBqkPih/BAECCLKVVsFAtb6D0nM+TDIUYu3cMrEgQqdpGAFMXfkFd7iP+8BcnCVf4574FhlLXKsvIzM6LIhx1xCJKfje4FNrs++ywi3M34X6dcD4XpfiG5zLwBZKRMMx93eDwVEGbR6/q5+YHF5dbBBiR/zzTDWz+bF/K/3D+J93zZm/cA4D8WuXeqGgDlmwDxWSTDZatYbKYS1PaoIsz4Qi8BBKAHaX3PZTph+xUDpgOYZnajugOYByw1LmjIjhgSibeKQSsojN1dsi7ikipQOzcqyet0xiGQNBgG4GV62nyeA+93G0ERLLVg9GQAg/3VC79lfHio6Ry7creA8o0NLL504wibKi3afVngBsKHOM7+Rbs+Ca5bA9kWJiDYwsSQ26uG1MoFDp5IKLpicQv4m0Gg3lIP2q6z/vEEkCn2yXy3YtmDX5dw9OtlB1GUSLOxAF9HvmdTleMos1L916Ax/jKsFocp3rKkgy8ezdu2qR7iTGABkt80lVe3asCAhJ/q51/eT+tjvcJ8vddMjAHJrlHdl61KTIoYKxj7kcsUzd5SnyvmaLEWZFr4RzldLNcLfuK14l3S/q1pqjHOFErBRPSRyzQnRdCYiXfjfIoPhHZlkyHjCpG+w2R1t9Dl6bHI7PYcY6/NAuIP9uNfb1dESxx7wiuRqW4DVrDBE691OA==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM8PR04MB7874.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(19092799006)(23010399003)(1800799024)(7416014)(376014)(56012099006)(10067099003)(11063799006)(3023799007)(6133799003)(18002099003)(22082099003)(921020);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?b2lFWWEyN002NWFRbG1HbWZxS2xYcW10VitURU1YQ3k0K0hyMkNydHlXNGFm?=
- =?utf-8?B?NlkrRHkvQnlKa2puTVNta0poMTUzemhLdkNyTjJiRXR5eC9qUFpYTXBZbC9u?=
- =?utf-8?B?bzE2TGlFcks1RXFnL09xOFVLenJDY1ZFNW91QWp3MmdLNGx3UytpQ0FwVUZp?=
- =?utf-8?B?TGMzYzZXZjBqcXJRUzVUaVpIbnpOMVlUMXl5MjM1Zkd1Yk8vcURzZUxNaGVF?=
- =?utf-8?B?MVBSRWJ1SWZCUGZXOVd1bzhMNm12TUtsS2NUV1g1RFMxTHBYRXBZSzVucEE5?=
- =?utf-8?B?ZjluYlgraitHRXJibURhL2VCWjByVGFiNEp0UnNHWXAvNTBGdEdEOFR6Rlhu?=
- =?utf-8?B?SHdycFF0bWQ0R1Y1L2pZS0NsUW02elhRK3BhK2p2Y0ZuamNUVERjcG1naE0v?=
- =?utf-8?B?amtYUTNTMDFQRkMyaVVlUlI5MUtqOXNlbG5uM3l3d0lYQWlpU3F5cTBoc2JD?=
- =?utf-8?B?UzhIbHFEMVEya3NYY2FtWkJZSFZnM0toTzluVERIQU1ldk15YWtpdzBsQWM3?=
- =?utf-8?B?MElPSHNseURLamhQMUMxcmhYSWlXSUVJVUdPMW5nWk01WDM0TXZGZG5CWEVt?=
- =?utf-8?B?Q1dDdFJNSVBVZUY1VFB2SFVWdWJRUGlnS2xxMTJHV2d5aU1iR2tPa05EU0Z3?=
- =?utf-8?B?U0YxY2RBak4yTHF5eWIycS9YcFpKZmY5anN0Smt5S2NCUVBOaVVVUlgrRmhI?=
- =?utf-8?B?WlVRU3RBbnZyeEIrbTIxWEQ4UjJpU0x6ZXY2OUZ0VU9lM29EV2lubzZVUU5x?=
- =?utf-8?B?TmhMdXlKa3NVTmpTLzVjTWhNV3FLNXo1ZkpLODg5YUh5cW1GM2pXSjlKYklO?=
- =?utf-8?B?NERWZnNkM0IvOVFSSzJjM0tZbmcvSFlyT1hscmE4QnpJWk9zNWVLMVpjTjYx?=
- =?utf-8?B?emxRaE5xQ1h4L3lPL21RQlI4SGhMbG5OalpzN2kvMlFWRXp5ajRwRW44NkJl?=
- =?utf-8?B?TjhnZmhqOFp1ZXNBRVFvTUJzS3JaUktYdkV4WUdLQm4zeng2bUVNMVBiMVNK?=
- =?utf-8?B?TzZ0VHRYT1NTMkNIVmJZbHJMdWUwYlF3WXFXQWJId1cvdHo5THRsQUJGcS80?=
- =?utf-8?B?YytLclM2cFhQMitLbGZHUlJEV0JoYW1KWEVQbGhDNkNSNlc3M3JYNU5jRXE0?=
- =?utf-8?B?YkdrRk1nMWwyM3dranNLOGtWRlJCQzNlZG80a1FwaGZQZzJwWm54MkYycGcx?=
- =?utf-8?B?NmpUdndIVG5PMGNMWUtZb2FaVm9DV2Y3MVhIOHgvS3RsRnFzTjlZSXN3Q21r?=
- =?utf-8?B?WDlKRDlCNHFzVjNLeHMwWml1UWRacTVBdzA4YTliV0FuRjVNdlVzVks1VnFR?=
- =?utf-8?B?UFc4am1kQVJOYlhZRnp5MlVYODkrdEJQNFczZlR1OGNBay85c1c1UitLRzFR?=
- =?utf-8?B?OTdGWXlDbDZXcmVKdmdrTXhVSXViQkowcTE5VFVPYTgwVTRvaEF0ZjZaODNq?=
- =?utf-8?B?UUV5Z1JWc1k5a24wQ1lzQUZpZmhyeWhVNE1DcGYwNXRJemZPKzFKdjh0ZmQ0?=
- =?utf-8?B?Z1NCK1QreWRHSU1zYVhtSnhiYWwrVzF1aWpwbjUyck1PZTM5YWtzVktKd0Nk?=
- =?utf-8?B?MFNqQ3hzZ3lQM1huTkJZb0lWbUl1bG9Pb0RyWHVQdG9sQ0xKTHdqVUlncHVa?=
- =?utf-8?B?TkRYU1hJcGdHSGNKdE5aL3E2RllKNEhNZE5ERXllYmU1Ui85cFNCWm5kM3Bm?=
- =?utf-8?B?aGNSSnRLa1FaNXllbTY4bWZ4RFN5akpyRHMzZWtTY3d4U3JUT3JRQWdnNERo?=
- =?utf-8?B?U0JaSzcvaXdSU2swVVhBVzViR2FrQ1o4alZGcUdlRTlUaEpVNE1oeGtUNUR3?=
- =?utf-8?B?V1RVdyt5YUhWMXRiZ09pdUZyOHByWEVLOXpSajMwWFJrY0Q5eGxmOHI5NXJt?=
- =?utf-8?B?dEVuVjVDZHE3QnMxRk5hQWdwM2FlTWZFejRmcXZoZWwrd1gyNjJOR2FtczhT?=
- =?utf-8?B?cTJxeWxmNm5FNHk1T2hLWDlTRkM3TzEzVmw1NzgrdUsvWDNnT0dDUnFUVjRJ?=
- =?utf-8?B?enBNbFU0WTcxeDV5Q2ZkZC9QSHkyODh6R3FFZ3NtSU5pbXJsNVR0eWJ1T0dP?=
- =?utf-8?B?aEs2T1YveFpNeDM4R1NZMzlWWm9zRkVmMFQ0dGcybmF3b0phYThDOS9NcTFL?=
- =?utf-8?B?ZHhjRU1DQzVLd1NYNHhHeCtndGJGb2QzUVhmR1JNNU0rUldIaHJHeS9MUmVy?=
- =?utf-8?B?Y0FjL1NtT1EwNTUyelF3dGpYQTl0K0xDSzYyZ2h2cU43TUtXQjBnSlphYmt5?=
- =?utf-8?B?WkxhRVlNQTIxVzFpbDlXc1BrenlhRnd4ckp6MEhSLzZubVlwbjFJbUg3M2hU?=
- =?utf-8?B?bWZRRlQ2dnBlb1gvbklWOVMwRmJVWmZZK3ZDTjBUTU9PWWJyUTFSaEtvcUJz?=
- =?utf-8?Q?mYsmHTJPbK21PSKO891/5JCxlGYtE7efaYUV1?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3db57294-e637-4fc8-f058-08def2336cfc
-X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Aug 2026 14:19:42.2231
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: jM6E1HUnls9TpvHZCsYRz/IqRHEwxXgxODTAsPJywKLaJ1W7MxDzLxLARpb4EGY7j2e2GBRL1xS/WRdAflrWpG314VzwqPLxjZmLCmdG3ikAZQPvVPJDZlJlUJzl+o2P
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9790
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:_____wD3H4+v9XFqDtAgNQ--.21955S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW3Ww4rJw4fKryrZry8ZF4fZrb_yoWxWFy3pF
+	WfXrsIyrsxX3WfZ3yDGF4jvF90ka92kasrKw1DKa4xZr1Yvwn5K3WSgFy8ZF4j9F97X3Z0
+	yr4jqry5u3WDAaUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pina9fUUUUU=
+X-CM-SenderInfo: pmxqt0ixw6il2tof0z/xtbC9hShU2px9bS6CAAA34
 
-From: Peng Fan <peng.fan@nxp.com>
+stm32_gpio_domain_activate() writes the EXTI interrupt multiplexer
+through a regmap obtained from the generic syscon driver. The irq core
+calls .activate from __setup_irq() with the raw desc->lock held, so this
+happens in a raw atomic section. regmap-mmio sets fast_io, and syscon
+does not ask for a raw spinlock, so the regmap is protected by a
+spinlock_t. On PREEMPT_RT that is a sleeping lock, which must not be
+taken there. lockdep reports it as soon as a GPIO interrupt is
+requested:
 
-Switch the binding to use the generic power-controller schema instead by
-referencing power-controller.yaml and removing the local
-`system-power-controller` property definition.
+  BUG: Invalid wait context
+  6.17.0 #4 Not tainted
+  -----------------------------
+  kworker/u8:0/12 is trying to lock:
+  (&syscon_config)->lock){....}-{3:3}, at: regmap_lock_spinlock
+  other info that might help us debug this:
+  6 locks held by kworker/u8:0/12:
+   #5: (&irq_desc_lock_class){-...}-{2:2}, at: __setup_irq
+  stack backtrace:
+   regmap_lock_spinlock
+   regmap_field_update_bits_base
+   stm32_gpio_domain_activate
+   irq_domain_activate_irq
+   __setup_irq
+   request_threaded_irq
 
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
+The driver was already aware of running in atomic context there: it uses
+the _in_atomic() hwspinlock primitives around the very same access. The
+syscon lock is the one lock in that section it does not control.
+
+Program the mux from .alloc instead, which runs in a sleepable context.
+That callback already owns this resource: it reserves the mux line in
+pctl->irqmux_map under irqmux_lock, so writing the value it just claimed
+is a natural fit, and the value only depends on the bank.
+
+Nothing requires the mux to be reprogrammed at interrupt startup time:
+the domain has no .deactivate, .free() only releases the irqmux_map bit
+without touching the registers, and the resume path reprograms the mux
+itself in stm32_pinctrl_restore_gpio_regs().
+
+Keep the access inside the existing irqmux_lock section rather than
+after it. hwspin_lock_timeout_in_atomic() deliberately skips the local
+lock that the other hwspinlock modes take, so its caller is responsible
+for disabling preemption and for excluding other local contexts; every
+other hwspinlock user in this driver relies on bank->lock for that.
+irqmux_lock plays the same role here, and it also turns the mux
+reservation and the mux write into a single critical section. Nesting
+the regmap spinlock_t inside irqmux_lock, itself a spinlock_t, is what
+the wait-context checker expects.
+
+Note that this bounds the semaphore hold time on !PREEMPT_RT only. On
+PREEMPT_RT spinlock_t disables neither interrupts nor preemption, so the
+hardware semaphore can be held across a preemptible section and a
+coprocessor contending for it may poll for an unbounded time. That is
+not introduced here: bank->lock is a spinlock_t too, so every existing
+hwspinlock user in this driver behaves the same way on PREEMPT_RT.
+Removing that exposure requires the EXTI mux regmap to be raw-spinlock
+based, which the syscon core does not currently offer, and is left for a
+separate change.
+
+While moving the code, release the mux reservation when the hwspinlock
+cannot be taken, which the .activate callback had no way of doing.
+
+Reported-by: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
+Closes: https://lore.kernel.org/all/20220202174430.pf37tt6lua2op3gc@pengutronix.de/
+Signed-off-by: Ju Nan <junan76@163.com>
 ---
- Documentation/devicetree/bindings/mfd/samsung,s2mpg10-pmic.yaml | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+Changes in v3:
 
-diff --git a/Documentation/devicetree/bindings/mfd/samsung,s2mpg10-pmic.yaml b/Documentation/devicetree/bindings/mfd/samsung,s2mpg10-pmic.yaml
-index 0ea1a440b983..47418077b153 100644
---- a/Documentation/devicetree/bindings/mfd/samsung,s2mpg10-pmic.yaml
-+++ b/Documentation/devicetree/bindings/mfd/samsung,s2mpg10-pmic.yaml
-@@ -18,6 +18,9 @@ description: |
-   GPIO interfaces and is typically complemented by S2MPG10 PMIC in a main/sub
-   configuration as the main PMIC.
+- Keep the mux write inside the existing irqmux_lock critical section
+rather than after it.
+
+v2: https://lore.kernel.org/all/20260804032227.35017-3-junan76@163.com/
+v1: https://lore.kernel.org/all/20260803061718.43210-1-junan76@163.com/
+---
+ drivers/pinctrl/stm32/pinctrl-stm32.c | 55 +++++++++++++--------------
+ 1 file changed, 26 insertions(+), 29 deletions(-)
+
+diff --git a/drivers/pinctrl/stm32/pinctrl-stm32.c b/drivers/pinctrl/stm32/pinctrl-stm32.c
+index 6a99708a5a23..d97057ec28af 100644
+--- a/drivers/pinctrl/stm32/pinctrl-stm32.c
++++ b/drivers/pinctrl/stm32/pinctrl-stm32.c
+@@ -600,30 +600,6 @@ static int stm32_gpio_domain_translate(struct irq_domain *d,
+ 	return 0;
+ }
  
-+allOf:
-+  - $ref: /schemas/power/power-controller.yaml#
-+
- properties:
-   compatible:
-     const: samsung,s2mpg10-pmic
-@@ -36,8 +39,6 @@ properties:
-     description:
-       List of child nodes that specify the regulators.
- 
--  system-power-controller: true
+-static int stm32_gpio_domain_activate(struct irq_domain *d,
+-				      struct irq_data *irq_data, bool reserve)
+-{
+-	struct stm32_gpio_bank *bank = d->host_data;
+-	struct stm32_pinctrl *pctl = dev_get_drvdata(bank->gpio_chip.parent);
+-	int ret = 0;
 -
-   wakeup-source: true
+-	if (pctl->hwlock) {
+-		ret = hwspin_lock_timeout_in_atomic(pctl->hwlock,
+-						    HWSPNLCK_TIMEOUT);
+-		if (ret) {
+-			dev_err(pctl->dev, "Can't get hwspinlock\n");
+-			return ret;
+-		}
+-	}
+-
+-	regmap_field_write(pctl->irqmux[irq_data->hwirq], bank->bank_ioport_nr);
+-
+-	if (pctl->hwlock)
+-		hwspin_unlock_in_atomic(pctl->hwlock);
+-
+-	return ret;
+-}
+-
+ static int stm32_gpio_domain_alloc(struct irq_domain *d,
+ 				   unsigned int virq,
+ 				   unsigned int nr_irqs, void *data)
+@@ -637,18 +613,40 @@ static int stm32_gpio_domain_alloc(struct irq_domain *d,
+ 	int ret = 0;
  
- patternProperties:
-@@ -71,7 +72,7 @@ required:
-   - interrupts
-   - regulators
+ 	/*
+-	 * Check first that the IRQ MUX of that line is free.
+-	 * gpio irq mux is shared between several banks, protect with a lock
++	 * Check first that the IRQ MUX of that line is free, then point it at
++	 * this bank. The mux is shared between several banks, and the register
++	 * is shared with a coprocessor, so hold both irqmux_lock and the
++	 * hwspinlock across the update. irqmux_lock also provides the local
++	 * exclusion and the preemption disabling that the _in_atomic()
++	 * hwspinlock primitives leave to their caller, as it does for the other
++	 * hwspinlock users in this driver.
+ 	 */
+ 	spin_lock_irqsave(&pctl->irqmux_lock, flags);
  
--additionalProperties: false
-+unevaluatedProperties: false
+ 	if (pctl->irqmux_map & BIT(hwirq)) {
+ 		dev_err(pctl->dev, "irq line %ld already requested.\n", hwirq);
+ 		ret = -EBUSY;
+-	} else {
+-		pctl->irqmux_map |= BIT(hwirq);
++		goto unlock;
++	}
++
++	pctl->irqmux_map |= BIT(hwirq);
++
++	if (pctl->hwlock) {
++		ret = hwspin_lock_timeout_in_atomic(pctl->hwlock,
++						    HWSPNLCK_TIMEOUT);
++		if (ret) {
++			dev_err(pctl->dev, "Can't get hwspinlock\n");
++			pctl->irqmux_map &= ~BIT(hwirq);
++			goto unlock;
++		}
+ 	}
  
- examples:
-   - |
-
++	regmap_field_write(pctl->irqmux[hwirq], bank->bank_ioport_nr);
++
++	if (pctl->hwlock)
++		hwspin_unlock_in_atomic(pctl->hwlock);
++
++unlock:
+ 	spin_unlock_irqrestore(&pctl->irqmux_lock, flags);
+ 	if (ret)
+ 		return ret;
+@@ -683,7 +681,6 @@ static const struct irq_domain_ops stm32_gpio_domain_ops = {
+ 	.translate	= stm32_gpio_domain_translate,
+ 	.alloc		= stm32_gpio_domain_alloc,
+ 	.free		= stm32_gpio_domain_free,
+-	.activate	= stm32_gpio_domain_activate,
+ };
+ 
+ /* Pinctrl functions */
 -- 
-2.51.0
+2.55.0
 
