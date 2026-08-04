@@ -1,221 +1,189 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from MRWPR03CU001.outbound.protection.outlook.com (mail-francesouthazon11011001.outbound.protection.outlook.com [40.107.130.1])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E21A3F1AD9
-	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 14:19:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785853167; cv=none; b=lu9lv3vcIvJ7/3T9oVDfiAEEaRVXuG0FauOq/ndFAjkEk2eTqihdSmKDV/vJYxszziy3XP3SE9KXZTel0GgutHkiQS6+FuiqA7VToWmXxKeHqLmPJn7rfUfOMkAGDal0w/cMS2vLu2Tip0gbur9jAwqCH499UL6idk37V3pCvAg=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785853167; c=relaxed/simple;
-	bh=O8BzbCBcjhGwVRbtwuRkH7SD+ZtA/43OKIVWt2hRWig=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=HNNVU0KLEkohSwz23QfprAeDq9sCURvZjzcSOQbM/glqOuRn0tq8h4FUKjeL+kMcDHnOuNIrSw1EjQOe/HtXFyJXmeOCduJXuMdgB/83+j01OjuisxGhhQPpXpk6J7XS/L/WIHbJfoT2gSvHW0flTBUzGOG3TeUA7AbJkOlyfJ8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=RokXGYZa; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cSDIqzSe; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54AA13EF0AA
+	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 14:19:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.130.1
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785853168; cv=fail; b=AN9SdSxJpZhWaUZYfxnJJy0BfS6NPp+jsyfkAD4O5dbpFAcvLcQsv9ak9vMvx+EdBzm5whltjJZB9rDAJMM1IVHo9J5ame4NJ0PGWnsZeLprbGOQNgyRnYDONNHSHo1GWbNbz0w2zsv78M2AQCBMxN67nzdtL/TdVHMqOIvthGo=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785853168; c=relaxed/simple;
+	bh=urOI/V3bFJaTWQ4pdC4xHFEoNpALEG8OGge1ouvW24w=;
+	h=From:Date:Subject:Content-Type:Message-Id:References:In-Reply-To:
+	 To:Cc:MIME-Version; b=qw8L9Tno+sMwzipiMurF3e9cok0LdIWzsCEPa9rHzbpvZgsJuwzHH0QGK5KxDpGkZw1gCWChnhWD68zVVbw+gX3wGO5xhaEJ8vTZ8ChShWgEtaTKE9kWZzCh95BskaSJNSuInRyMBk//2moimr05RP08JMxZzPD4Vby0cRoaczI=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=JD2yAGI2; arc=fail smtp.client-ip=40.107.130.1
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="RokXGYZa";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cSDIqzSe"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 674CXtKN3896330
-	for <mfd@lists.linux.dev>; Tue, 4 Aug 2026 14:19:19 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	XvPnoApYmZ87f1/qec4dvX+v1zVKWXvBvSzu/BPNQhg=; b=RokXGYZauFUft47+
-	qld1gi20gh+J/zXd5XWmR507blMz3qOl4MjnwW39H4jMmNrRp15MFqZu1ML+aj2w
-	TspvZmof8cnNMk2h4AjEGs9Ec4b4kONIJ0JDmEHhzfy6JgCpQ/3Im4htbGTtzH4q
-	Vt9aGr7VuxpP+48N0NvAqRw/+l/fvH7NXylvCyqpKWHO9piz2wu5EuF8qEAEeXPa
-	hi9TVduaW3vQqN2zqmH0BYijpldKPVwvf3uq72t8pnoZzR5CnEfXps452PleZKqJ
-	Touv4wW3RsBdt7nDfmdm7ME+fTH3maaNKuuAAW2ikP6y76FMaw7KP4IVOCcqbiPK
-	4/1Qsw==
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fu1p8c1tm-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <mfd@lists.linux.dev>; Tue, 04 Aug 2026 14:19:19 +0000 (GMT)
-Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-c9fe4c5eb39so3323151a12.1
-        for <mfd@lists.linux.dev>; Tue, 04 Aug 2026 07:19:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785853159; x=1786457959; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=XvPnoApYmZ87f1/qec4dvX+v1zVKWXvBvSzu/BPNQhg=;
-        b=cSDIqzSe0GILSwpVWg+J9K5Cz2kQBcIqrbebr1TCSBpgN+ee4qwIT95IwxE/yqj0+5
-         z86XtUZI9dsV27zJGLIReKvQPyt3CVvdx3u/T4T123GzrlDJF9+LiVCCoVUB4dpgmYNk
-         0tScCsIKoJ5w/mACaDxepMf4JIM7b/PWXc7dGbRMlWJfXe6FrDNG+LsvRzmN3b4eSnmw
-         fuYwSnCKIwK6iNYeZrcKe9UFLeHGmoMC/klFhWMuVA8lh/JGJQh+XrlINrV5eNoSg0x9
-         Ar56pH1EW6CIR3Zx8Y1M0f/u2MpbQgzvYwPZ3mSIvHRLz5e2ZnyBgyJsPW0mL9Fc5Ww4
-         Jy5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785853159; x=1786457959;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=XvPnoApYmZ87f1/qec4dvX+v1zVKWXvBvSzu/BPNQhg=;
-        b=nUCkJEXvpbpxh7G95QxevSy5pl3fSappLdKPKP1OkFpffD08O57Anv2qLNlm+0Pioy
-         IG1++O6LSfKaS8B/vB12D81JVzP5wnAcvI5vb14FiGad6spa27ihSRtBAl1kLsiPFjqA
-         Lma+q+lv+fRYoh+CYdXOIvhy0h9EU/jH2rfaKBBydKnnaXImZA4UJlmJGL0sG3zC6bhr
-         WOJQMfiJWeGT9gd7W2C+sLDxackoZpCenQmdEpLa4IqA7bliSdDqbxebP4Ppm74XQqvV
-         Hia5/JApuKB8qx3x3AacBk+W4iNopfAYy8Bnk7IT24QmiQKlMSLmdFBHG3D3thtzTOLo
-         xYmA==
-X-Forwarded-Encrypted: i=1; AHgh+Rq+1UA4pru8Elu3jPXw1U+yD9EAkNubtN/5MOjBxlllYOU1kvnXnOh6O9k++SyBvfzIBHc=@lists.linux.dev
-X-Gm-Message-State: AOJu0YwSeLd+FG/rP/Z5WYxY7zeSnVjw2O2P+l/W3V1njJBLSRBQadZm
-	GDlLEA039LUv7b5cBCqimUAsRIYZLMRLBAnHz/9HyocuzML/cpdWxfXqmNxDRb2nyUOBXxIlWbJ
-	y9c2B4CrOhChVzlWOGyLBh6mbTL0uw4LkDKagn0hgJJkPrehd/2wRnXs/quHdbSg=
-X-Gm-Gg: AR+sD138fn9e94QXBQzUB+ZJMJ+xVpPr8OWxns5OHZjihB9aWRF6Ln4BTzekuHE6c9D
-	54IVTH9JV2g1JSLGgoIidL4DD0nGYkite4ON5wi+AO8FKQ/NuqswQtkA7lu7dgcDiyenGlsp4Fo
-	3/6d0UgXdJA4pqk9/yRSAcLDFPOKFOZDQQXMg3htKNF6iE5xa+f1qqfc3FmjiOj/HGHCbHPg/mF
-	HPfm2qNv4nRK/LYtP0MAoqWmzKbJ6YYZvH1ZYHGh/O/FIVOQBhMsIGIk4xokqAVts6+5Jw3vjX9
-	CZraa+KmvDOzp9wTnDdLKjF1wI3hvIb2V+1vvrOZZQNs7Nvja+Dt/ACtqgVD4R3r2vB6ky+65AX
-	ny7uFDSGB029smvkbCSUI87FAXk+lV0TK7Q==
-X-Received: by 2002:a05:6a20:db92:b0:3c8:e140:63c3 with SMTP id adf61e73a8af0-3c92a839c3bmr14175338637.37.1785853158746;
-        Tue, 04 Aug 2026 07:19:18 -0700 (PDT)
-X-Received: by 2002:a05:6a20:db92:b0:3c8:e140:63c3 with SMTP id adf61e73a8af0-3c92a839c3bmr14175300637.37.1785853158190;
-        Tue, 04 Aug 2026 07:19:18 -0700 (PDT)
-Received: from [10.218.44.82] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3158673be4dsm7297294eec.16.2026.08.04.07.19.15
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 04 Aug 2026 07:19:17 -0700 (PDT)
-Message-ID: <71b1436f-acb9-41a9-acee-96a1aa79170c@oss.qualcomm.com>
-Date: Tue, 4 Aug 2026 19:49:14 +0530
+	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="JD2yAGI2"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=cDY+1vk0Pcjm/jfhbvCRHgGZJqwWRUrJijFZqWjU1/7Vu8mque9wGHgJy1AcA38ml4mnQryE7jbR8Ba8olXNDJACNw73I9W1zwTlWgX2OHeyW9TMzpD+ERrDCyGtwDY3UtFobsQyZAYCp9TmWhO//Td9UbL8+FTJqxLq9Lmu+4nKHBMAtiEwgDgjm2Wo998/67FVB4VPo1dLmJQXAHl9twG1x1FrqUR2yL8mQaDc/GC/jh7Ri4fIw8iXz6zCkh7ArYpYrn14QmaL4KvKh+A6m6Jou+XGdlTKkeE4BrumsCIirY6i5ZdQlzStVaszUxbh/pb+N51eNH1snCr2jLMC5g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kdOhOX7BAgfOxNpAA9/JJY4c9M1l3N6SV/lL2RrypyA=;
+ b=JpcdRZyihdw/6zc5+U9YmN0vrHke0tapXIrxfH0qTAfMTe83ieKFczlwElsprxIUKsH8j3ouY20TAOuP3gVrhCjr6OY5C4ABYrSRPeyEeVlsZxDvEkgIseXCH/hw47TRtn0yqhPsS2CC5DbDJw6D2X5mv64UuLrTGSn2M/yBMr8g1bixcf9Pn2UkR85eoM7d13i81fqBt8eEv8eHCpzMkJPKMRTTLFDkTADGPsTBemQRrdsl/mnSMmXDGX96RbEyUoKNtkLSu6CbLRWGk/zpw1tUSP5Tl0px9Ezm7K19+gP0bjoQGWywgvwQPi++OZJXpAn7vQQ/ET2Scxxc5IXlcw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kdOhOX7BAgfOxNpAA9/JJY4c9M1l3N6SV/lL2RrypyA=;
+ b=JD2yAGI2WY7/PPJwnkaFKGPdaMIZ3A8RwuSiJ70snAT9VZg8ninQ825hJgilzuemP0YpHF/QOpuONJAefvxWcg/PAp4osPjC7qKP0WOajru+FZ+fjWK/9dKh386oXg/4WaUx46fxuLfVtJPaNSEWEfVXNfyxfLwOSTr6f6KQ1ps47pVx1PGXHeTTALrWwTs4hXwoU67FVWV+92or/G1vH7HlJac+H3PiGD+ItZlu9Bf4Sa1bntMNgC4Ol/8aHEtvH6QXAwhGRHDVjB0hUyzkZLpWrdoAjYPqEg9HHv0SKrwSWkI0E64X6yWofUwpD3mSUZEgggVWMj/r+ai4HVH3mQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
+ by GV1PR04MB9135.eurprd04.prod.outlook.com (2603:10a6:150:26::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.15; Tue, 4 Aug
+ 2026 14:19:09 +0000
+Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
+ ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
+ ([fe80::ac38:1699:6f18:c5d9%6]) with mapi id 15.21.0270.017; Tue, 4 Aug 2026
+ 14:19:09 +0000
+From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Date: Tue, 04 Aug 2026 22:16:39 +0800
+Subject: [PATCH 04/10] dt-bindings: mfd: ricoh,rn5t618: Use generic
+ power-controller schema
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260804-mfd-syspower-v1-4-a440783c2e78@nxp.com>
+References: <20260804-mfd-syspower-v1-0-a440783c2e78@nxp.com>
+In-Reply-To: <20260804-mfd-syspower-v1-0-a440783c2e78@nxp.com>
+To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Lubomir Rintel <lkundrak@v3.sk>, 
+ Dmitry Osipenko <digetx@gmail.com>, 
+ Shree Ramamoorthy <s-ramamoorthy@ti.com>, Heiko Stuebner <heiko@sntech.de>, 
+ Joseph Chen <chenjh@rock-chips.com>, Chris Zhong <zyw@rock-chips.com>, 
+ Zhang Qing <zhangqing@rock-chips.com>, 
+ Sebastian Reichel <sebastian.reichel@collabora.com>, 
+ Andreas Kemnade <andreas@kemnade.info>, 
+ =?utf-8?q?Jonathan_Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>, 
+ Julien Panis <jpanis@baylibre.com>, 
+ Matti Vaittinen <mazziesaccount@gmail.com>, Alexander Kurz <akurz@blala.de>, 
+ =?utf-8?q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ linux-rockchip@lists.infradead.org, linux-samsung-soc@vger.kernel.org, 
+ Peng Fan <peng.fan@nxp.com>
+X-Mailer: b4 0.15.2
+X-ClientProxiedBy: SG2PR02CA0121.apcprd02.prod.outlook.com
+ (2603:1096:4:188::21) To AM8PR04MB7874.eurprd04.prod.outlook.com
+ (2603:10a6:20b:24d::9)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v24 02/12] power: reset: reboot-mode: Add support for
- predefined reboot modes
-To: sashiko-reviews@lists.linux.dev
-Cc: lee@kernel.org, mfd@lists.linux.dev, conor+dt@kernel.org, robh@kernel.org,
-        devicetree@vger.kernel.org
-References: <20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com>
- <20260803-arm-psci-system_reset2-vendor-reboots-v24-2-889281373870@oss.qualcomm.com>
- <20260803095903.CFAA21F000E9@smtp.kernel.org>
-Content-Language: en-US
-From: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-In-Reply-To: <20260803095903.CFAA21F000E9@smtp.kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=A5xc+aWG c=1 sm=1 tr=0 ts=6a71f4e7 cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=VwQbUJbxAAAA:8 a=598FUc-ZneajLAHzYwMA:9 a=QEXdDO2ut3YA:10
- a=_Vgx9l1VpLgwpw_dHYaR:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA0MDExNSBTYWx0ZWRfX0fH1+wAq9gs3
- HyemrwhcwtLiENVZXvi1Gw9tyPfdjyIR9i8eyixau4QiW3JpFGWGE88aBB5GXShzx4MZl0nEHzd
- NrvEP1rxE2GcrznOIi0CXPorS/QNmr/u+Yid5+21t3t0pbhhh+lLgfqIm7CQNY/a1iroOOgGLa/
- tela2he06y6hVdwPko8D13pWD6+VoJHYzSBEyogFuiSTq1GRiIpvO39aSkuijmRqeeHVm7BK+bK
- qoMwd8HDbPxdqc5mTI1nbNKK8efEFrZXcPYBAjOuSqYMgiGj2fA8ZTtq8WqbkwHkh73OaSdT3Z5
- gfOF3rtDuUVoQtaafFVCOhQ8Jw/iOAZoIsmjCBo+iclyO0K59V/3hsqJ5vEzcf1YghzDyBR6EqM
- Rtx8PVFD57x/rMhKL0qyc0MtkxKGamr7uJorVxjT7TAjmpOaT8yc1/ntlMCEr+NlDvPy6H3BcDT
- 8ykQhHfLU4ANhqNWjig==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA0MDExNSBTYWx0ZWRfX6FReXPOZ2IDE
- /jQjNSRmVfLO5Y2WQW2+wngsy7vCsftRyU+yYUwxLyj3WQBjqH4Hfnm+0nUtWx3Q7TXv47K6aWA
- h0Q0pCP0WhZuo+GhcghLfb+6su0z3sE=
-X-Proofpoint-ORIG-GUID: 9pRIE_g7aS7GRjmgxL8X5rc4nS4USuPF
-X-Proofpoint-GUID: 9pRIE_g7aS7GRjmgxL8X5rc4nS4USuPF
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-04_03,2026-08-03_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 malwarescore=0 priorityscore=1501 clxscore=1015
- suspectscore=0 adultscore=0 bulkscore=0 spamscore=0 impostorscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608040115
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|GV1PR04MB9135:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4ad0602a-bbda-4e96-1cc1-08def2335990
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|366016|19092799006|7416014|376014|1800799024|921020|56012099006|10067099003|11063799006|22082099003|18002099003|3023799007;
+X-Microsoft-Antispam-Message-Info:
+	yZfdmje4JcmuMeOiCvPNhINZgWNn54SCy/trh3FQCbKlUfwSBFUVbtLbODwnfG+cx1Q5juoEK4S6XYLsRqrLLJLZbmIyC9W6VqjGtW0t81waYhOMChJmhL3vLkIpFDMEl8/R/oRt+eYu+lX+EXTiecwOAPKXJvOLAIdNeMO1/16tOHulqulQqRynNn20lzLjfsqglQvo1LsJksXz/XA4G3cjSxK3DIL9pqb2UMjj3RSwea4cjOF9ottZpWU5mrrkNClc9MqoiE0J1bdeMxc/PhVRXwMZR0voylE2AhT4EYXKQFpouiHLciT/3hwPpo2QzQjqwJvWN43PxZuV6Ni4GAJLx8TDq4484ezjIbet3+1l+03y799zqTD657cqMKFJ4phx2sZ0kaohP/DyTJ95y6X+gudWN8+MBfRSac9lPUoTlMxZDCE9/rfAPzEknGZ2+nsLBzbsUAgn2NFaXKbgRvlW63d9WlDCdCdyUObsEI5xxLJGdIFcug6hIhaRa+w/wXfqLgdecJoKD2+lsm5zs2T4LFrtFSkfptFRM2xySOKPGLhbY2gdLRWHaqucNH21v04ipSigDkSIo6+O3rEEYge2MjKTNLjOjZeCom2bNVZscyqxG6To12cipI1j1AcL9qGCbkAua05ksbj1OgsQRtQbUaNOPj2CVhN/m+Xd7TB1leGP2ej/55i26a88UE1JgAugMH5nD+cWengOoNx5Uw==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM8PR04MB7874.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(19092799006)(7416014)(376014)(1800799024)(921020)(56012099006)(10067099003)(11063799006)(22082099003)(18002099003)(3023799007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?UFpFVGJtaXdqemh5K3FnWlVPQjJVRkRaV2hIQ2hFRDBVK203MDl0MUpwSmF5?=
+ =?utf-8?B?TGdyOXZIWENCaEFSZHN3dFQ5V0daQ0FjVGtlRWZlMVoxd0JoUGh2UHRRSmRS?=
+ =?utf-8?B?ZkFjK3A3MDZSQ0tWemZqRWQ4ZUpMNVFHc0FjLy8yVk5RLytsc3N4QlhQZEQr?=
+ =?utf-8?B?N1FDRWZPcjFSRkNGNlA4OGJIcDFZOEVxT2Q2MmlsMjFyVWE5dEVnSjh2d05i?=
+ =?utf-8?B?UlNGVlZMVjVMMTQ4UHhkdGI3TzRBRko3SElPczcyeDUwMTJoallyYXZWNFl1?=
+ =?utf-8?B?ZCs2M0lwN2dOTWNRZ0JMWFBnb1hJU0hSWWFqU1Q2bVlXV2dUcXdQSkpNaUJh?=
+ =?utf-8?B?M0dsdGZWTUl6YUlnMVVKNy84SXNZRGdyU3dsekVNK2h0Y3NXUXI4MmI4NDBm?=
+ =?utf-8?B?UmVPZ3hPNXBVcDh6OTlkWXpZTGNNYWFtclBlQW5WVWZSNUJ1dDd3NE1DZWNh?=
+ =?utf-8?B?cHpZU2FHOFo5dXpBT1JHTmcveG1hTEZNVGJWWHdhOGltNktsYkxKUHZoMTN6?=
+ =?utf-8?B?RUJPOTJuMUlmUTFab2hZZ0Z1MVQ0TWFmN1p5Z0JZdEwrRGI4cm10S0h1RlVC?=
+ =?utf-8?B?ZjhSUER5eVMzUS9FeGJDWVU3ZGFrcGlBVDFUSm5VUnFVbDZGK1JaN2thbFNu?=
+ =?utf-8?B?bGJpWmdobWVoa3NUUXRvZFphUGhGMFNhM0theXpENDBaWWxpMUcwM0hUNlRJ?=
+ =?utf-8?B?RzFsS0ZocEV4SmRMYUNQZFhERUZDOTJsclhwV1BFWXN0YXU4b2E2d0Y4TFc1?=
+ =?utf-8?B?d0JEUlVwSG80SldJS09DWDhxaVpwUWQxT3ZvUkM3VTNmaXN1Y2RnSGVGOVpU?=
+ =?utf-8?B?ZERNK2R6cUI2MWd3bm1ENWxxREE1amlCSXUyZzZZTWkrWUxYZ0VjaWVrT2FS?=
+ =?utf-8?B?T1hpMWNNRGpJOHdIWGNSSi90K2lZUStOSXJPdFB1NmV0N2t1Y2x6c0pKTmhB?=
+ =?utf-8?B?cGlBaE13MlNaWVBZVnVPMzF3Wmdka08wRng5dkFJOVFSbWxDcWFuakhLcmJU?=
+ =?utf-8?B?KzFMd2FEQklYbWRqR1RqWDViTnVRYnBoVXF6dEtaY3diMW1SSC9YL0U4Um9a?=
+ =?utf-8?B?NTJJZGxpc1BBc291aGIzYXRxaDRvRnlpUXZzM0xreGdWcTIxbUh5bDZNMzN6?=
+ =?utf-8?B?Q3F1NU5UWmZGMTB6STBZNzRkOHBGaDFWK2dUWjZqbHpyWUl0TDJUTDBMSk1t?=
+ =?utf-8?B?WWZjZjFrWGpDZGpHbXlObUNCam9DQlhOb3BzK1FTZzc0MTN4a3JjWURwSERY?=
+ =?utf-8?B?SVIrbkIxeURubTc4WGE4TGk3YjRrNHpLNVlzWXpPRGJHMnl0ZUFDVnpLTFlr?=
+ =?utf-8?B?QWdBU1J5dzVBM2RtVzQwK0xGR2k1Q1FHNjJWcC82OElBbkkwaUhGRGJIL0pu?=
+ =?utf-8?B?eDYxK2ZkaUxQaXpiWHJPeEFBS1lOMWxHbEdXK1VZaTR3di9nRFNCU1VQQ1Er?=
+ =?utf-8?B?aUpTcFJWZGJZdDdTMzNrZFc3WjJDQXhhbmE0RHVDWGtZN0x2Njk2aFdNdjNH?=
+ =?utf-8?B?dTVUMHRQUmlIc09JS211YXVFQjlQUkhXcW1meG5XR2RZVkQyZlUvYS9JNnF2?=
+ =?utf-8?B?MWJoeUhvd29Ca2lSWUd3Vk5BNzdvVmZZMk1VdllRMFhuQXpCYzduZDRVZ2Zx?=
+ =?utf-8?B?ZEVRL3NuSjZSSW4rSVFrZHcrTnJ1b215WGdZd3Y2RTh6b3lXTTVMWlNHRVdy?=
+ =?utf-8?B?OURrYnJOSDZ4ZHBINGxmWUxEUVBDSzlmbmN3aXFMNnZMRlc3T1YxYzErMzJP?=
+ =?utf-8?B?Y2RRRDdtYkZBZWQwNlZqcFhXeEs0T1owb3VGZnEzeDF2TWgzT09iTnJocnAz?=
+ =?utf-8?B?QytWMWZKa0l1QVJlenRzZktjaWxrUnljRVJrTlVXYllKNHBEOVhJOXJlam90?=
+ =?utf-8?B?aHVUV0VPQU5zWVFTbzY3cDRZQzYvL083eWtwZFVXS0JjT2ZlN2hpZXJ5Szlj?=
+ =?utf-8?B?dmltVWlFZ0lHY0huN0owRytPZFBUeGMwNGtQUEhBV2xsbEl5R1NkL3hzcUta?=
+ =?utf-8?B?SUNGZ2NDNkJ1Q3lVTit5dmlKM0dMTDFBR00zWkgxdkl0ekgrUGdUZDg2UzAw?=
+ =?utf-8?B?TzNvZjZpRDBaWk4vWFVhakdOanNja0VwZjVxUkNRZDVpUG95N2R0MHdIaE5y?=
+ =?utf-8?B?YmlSOUhjcEhvQXZoTjlzNk1MTmc1Z0ZnVVo2c1k0ZTBjOExrWnYvTU1RUGJu?=
+ =?utf-8?B?bmU5T2lmSVZtK0IxWEtaS0xhVFE3TVdMVXo3OFJQTTUwQTZDNXJRNkpib2Fm?=
+ =?utf-8?B?R3M4d1BQWDRQcU1iQmI3Ti9yVm5nSDg2L00yZXZjQWMvR3B2RkY4ODlURUFj?=
+ =?utf-8?B?a0YrV0xrVU9uUDdZczBRZDZEZE90WnhkT1pLMVpTbmkybkFBMzNJUmFFOVRN?=
+ =?utf-8?Q?Q5gtdF6yxvM79H1wrJ3CGKn+2zN0f9VKn8QUQ?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4ad0602a-bbda-4e96-1cc1-08def2335990
+X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Aug 2026 14:19:09.4009
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: dCtqqn4LqPFhggh7aNvkoyTFGyDZMfxiCL5+Q/Jba7kMQjn30wmWcigVJz4Oj0LwknVrgDYGJ/nC7iWfEYtE+KatcaQsUZN1VsJmIoGvSdDH9oEiYZrqMwu2u0ZTMS6Y
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB9135
 
+From: Peng Fan <peng.fan@nxp.com>
 
+Convert the binding to use the generic power-controller schema instead by
+referencing power-controller.yaml and removing the local
+`system-power-controller` property.
 
-On 8/3/2026 3:29 PM, sashiko-bot@kernel.org wrote:
-> Thank you for your contribution! Sashiko AI review found 4 potential issue(s) to consider:
-> 
-> New issues:
-> - [Low] Duplicate predefined reboot modes are not properly deduplicated against DT-defined modes, violating precedence rules and causing duplicate sysfs entries.
-> - [Low] The patch silently changes how device tree arrays are parsed, skipping valid properties with more than 3 elements.
-> 
-> Pre-existing issues:
-> - [High] Memory leak of `struct device` in `reboot_mode_unregister_device` due to a missing `put_device()`.
-> - [High] Multiple instances of the same reboot-mode driver cause sysfs name collisions and incorrect device unregistration, leading to a Use-After-Free.
-> --
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
+---
+ Documentation/devicetree/bindings/mfd/ricoh,rn5t618.yaml | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
 
-[snip..]
+diff --git a/Documentation/devicetree/bindings/mfd/ricoh,rn5t618.yaml b/Documentation/devicetree/bindings/mfd/ricoh,rn5t618.yaml
+index e3d64307b531..d81691f4d574 100644
+--- a/Documentation/devicetree/bindings/mfd/ricoh,rn5t618.yaml
++++ b/Documentation/devicetree/bindings/mfd/ricoh,rn5t618.yaml
+@@ -18,6 +18,7 @@ description: |
+   The RC5T619 additionally includes USB charger detection and an RTC.
+ 
+ allOf:
++  - $ref: /schemas/power/power-controller.yaml#
+   - if:
+       properties:
+         compatible:
+@@ -68,15 +69,10 @@ properties:
+   interrupts:
+     maxItems: 1
+ 
+-  system-power-controller:
+-    type: boolean
+-    description: |
+-      See Documentation/devicetree/bindings/power/power-controller.txt
+-
+   regulators:
+     type: object
+ 
+-additionalProperties: false
++unevaluatedProperties: false
+ 
+ required:
+   - compatible
 
->> +static int reboot_mode_add_predefined_modes(struct reboot_mode_driver *reboot)
->> +{
->> +	const struct reboot_mode_entry *modes = reboot->predefined_modes;
->> +	struct mode_info *info;
->> +	size_t i;
->> +
->> +	if (!modes)
->> +		return 0;
->> +
->> +	for (i = 0; i < reboot->predefined_mode_count; i++) {
->> +		if (modes[i].name && strpbrk(modes[i].name, "\n ,/"))
->> +			return -EINVAL;
->> +
->> +		if (!modes[i].count || modes[i].count > ARRAY_SIZE(modes[i].magic))
->> +			return -EINVAL;
->> +
->> +		info = reboot_mode_create_info(reboot->dev, modes[i].name,
->> +					       modes[i].magic, modes[i].count);
->> +		if (IS_ERR(info))
->> +			return PTR_ERR(info);
->> +
->> +		list_add_tail(&info->list, &reboot->head);
-> 
-> [Severity: Low]
-> Does this code append predefined modes to the list unconditionally without
-> checking if a mode with the same name was already populated from the DT?
-> 
-> If a predefined mode has the same name as a mode from the Device Tree, both
-> entries will be added to the list. When reboot_mode_create_device() iterates
-> the list, it will create duplicate sysfs entries. Should we check for existing
-> modes and deduplicate them to honor the DT precedence rules mentioned in the
-> commit message?
+-- 
+2.51.0
 
-This is documented for pre-defined modes.
-
-> 
->> +	}
->> +
->> +	return 0;
->> +}
-> [ ... ]
->> @@ -183,52 +284,36 @@ int reboot_mode_register(struct reboot_mode_driver *reboot)
->>   
->>   	INIT_LIST_HEAD(&reboot->head);
->>   
->> -	for_each_property_of_node(np, prop) {
->> -		memset(magic, 0, sizeof(magic));
-> [ ... ]
->> +	if (np) {
->> +		for_each_property_of_node(np, prop) {
->> +			memset(magic, 0, sizeof(magic));
->> +			if (strncmp(prop->name, PREFIX, len))
->> +				continue;
->> +
->> +			count = device_property_count_u32(reboot->dev, prop->name);
->> +
->> +			if (count <= 0 || count > ARRAY_SIZE(magic) ||
->> +			    device_property_read_u32_array(reboot->dev, prop->name, magic, count)) {
-> 
-> [Severity: Low]
-> Does this condition strictly reject properties with more than 3 elements
-> instead of reading up to the maximum supported count?
-> 
-> If a DT configuration defines a reboot mode property with more than 3 items,
-> it appears this would skip the valid properties entirely. Previously, would
-> device_property_read_u32_array() have successfully read the first element
-> and functioned correctly while ignoring extra elements?
-
-A driver using reboot-mode framework should handle this case imo.
-
-thanks,
-Shivendra
