@@ -1,175 +1,151 @@
-Received: from mail-vs1-f54.google.com (mail-vs1-f54.google.com [209.85.217.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF6DF46AA98
-	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 15:26:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.217.54
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785857210; cv=pass; b=LOQ9BXJyr1XP24H0Y9nd/ot5DkD9zDiQ1W7Z4M3/VWXo4MM0CcAApFD0wbwdHKWxuiqjuASccWOoRQ1hyq20lmJjymOKYFiMGLiXOTaQSukYaimw/y49FpxcXlqnZJWwTjmiKWV4AmAsL1/dKY4l+JPo5DxcyWNXNG5BbGuro7Q=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785857210; c=relaxed/simple;
-	bh=XUmOi/B6laQ6eMCxOrhzePhtH6HxroybD30jr5qhuKU=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=hrnpRG14pQ+8Q8QhoGzWroz2ayZU1KobItp/pLNCzN2lgAgzrw+ANJFmjpqs/jRi4Jk9U9oZvqy1WyZk9sfo5+Uz9JG0QBLc6KVKNBRKpsnuaiGMBOEhzRSn7Z9U7r7Qm+7gKgzM33slJfEuOAnNueMTfp81AhyrOhXfp1YdGq4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=BUtl7USk; arc=pass smtp.client-ip=209.85.217.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68394466B6C
+	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 15:29:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785857390; cv=none; b=CX8Rnr5WQPbOp4Ay80UTQsrsF5/FImV+FOrdyjzO5vHR5Zqbo6Tg8P63kATuCzYQ5TddyDrU8WawuWKOFLzj15vCuMXKv3oJK3hcMNWDxZD7qh/V/hgJTWiE+692xcNLVD1rUnD55maChVdOQriym8K/Qfw31XLeU39v4wg133o=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785857390; c=relaxed/simple;
+	bh=EASjHB60BOz9k34rAmA66iCbT5N+3YswlGmaCJUepcU=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=Ed3A1NNIGSmWZLNl+n8W6UkKBRUwlK+8Zm9ThMmU0ax164Y9P3Oz4cT7Lj0mKjCSzOG9rPzdZnZaAr6vaSqBaw1C0fL6PHpkVlYYlwf/GgkBP7ZKVLXKpBAoDiVbC3A1SRh7+C3h/GF56DaJWlPlvrJZBRpWUDTI/f5h/Wn4hJI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cd4Apqil; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="BUtl7USk"
-Received: by mail-vs1-f54.google.com with SMTP id ada2fe7eead31-738a5cc517eso3273748137.2
-        for <mfd@lists.linux.dev>; Tue, 04 Aug 2026 08:26:48 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785857207; cv=none;
-        d=google.com; s=arc-20260327;
-        b=E9W3MgnYD40DWfurcPe8+k7hZhBI994YZY6Xh2/uyrQwP6M8yZnsbyvtOZEOciOHn9
-         pYDL9Pv++5pa6LNfjMtEyIR8hNtDKAwzzUp7L518qwHKmYZxHKPUAUwBx/zfL4aHsxMw
-         Kn2smncnxp7IKSjKsp6lPjLy8QMkoAvlv79xVeH5O6n8tZztFkOclt5zhZj47Rw78h9r
-         RKdHerWwW2fuc8eQ7ufzFnFPva61wLzxTZr4CDc+fcsrWLWVRfFT4xMzQ5Gmzdw0UEik
-         PjjBYF+YuQGljGuFPvZnomgeR4EWz9WY/otNHvdYgoVPYn2HNkxBu++pTER2a0oacHj/
-         Va7w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=DIzf+HYojrQvIG1FuzM4Jdr3lr/d2D1NXMxs/JfDycE=;
-        fh=xSYNxu5ru81e4quwamlAP9CMJajvPlhznH380DwVnmc=;
-        b=kcF18Df7siqXe4taBskKlRUujnqQUeipVbzEFhXmGzBOkFSHIGYX9jgfcH+q/EV2Mm
-         T043713e//pJ5VpDkX6MbZvCbAr0Pkoi8a4BD3GP419nIwS2IM/x9yPJ8gkFDiBCG9eG
-         zHqZclV7EX7HxCfuX+XJlo8p76N4fMz0fsdjEGNBpzX/bPX38QAK2bIv6IOeyEIS73s6
-         sDCXLQtU5SMODXu0fBHsSNbKKOoyCLmgc1V1O988mtBpYbXEsCuwiyuS7tlmvl8PTbij
-         iMJA/uuy8qR4fTzAE4yUqWFTliAgbu/alGwCqvmWgqlFc+jr7LP2ag3RLkEFa9HAd1XI
-         aaDA==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785857207; x=1786462007; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=DIzf+HYojrQvIG1FuzM4Jdr3lr/d2D1NXMxs/JfDycE=;
-        b=BUtl7USkVLtaGP8chTA9Ss6Cd1KlaUPPKuLlzK3mvlD259L8XbL3mvBCdc86FnFtw7
-         vqxccJ61+grL5H3BfMIphVJqiUTnwBrQupl0sfyintc+qXzcFoIkYMQITMO/ipNGncz8
-         DkKpfbshrSbP24ORIg6yp8uaCBmcD5med71aHOlgejqhJwYRE9WkTl3ef6tHk/hFNwtW
-         CZLKLiYIDXXIA6bRY0ynS5YlSntnprjUicrJjbUqtsyvQHxNkTGaz0PwMBRW6niwSojQ
-         1vr8+zwfqU58la+M4lFZ8pQdI1xC9FVxDB2GbIzgXuer9HxKifxdXB0hEn89WvqvSiWH
-         RQwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785857207; x=1786462007;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=DIzf+HYojrQvIG1FuzM4Jdr3lr/d2D1NXMxs/JfDycE=;
-        b=TxR50q8g/OFasgjQvMEfNXsiKkNzbv6sFIBoyHQSZDbH0wCeawQKHBhjstnJqBJS/l
-         bhrItCI2tS1oK3INaHXPQJcmNSTzDQGhK/T1v76PWemltYE+N2U7Q3uIXI+YaNRu4smk
-         TpeUGgVJcSPBKdxJ726++OzT9Q6X7Hfv1fQSNtxBMcKjx5y4JPxFhe70R8f8NdYzlNd/
-         qLIslCf8rwNOILo19VIh5IXYqdRzvOZAr6GZhyHhynLk4/B0mBem24bU00oRUaE1v8GK
-         kg97d+hlLT6KmLr2EyYWrLD6lwQ12SRXJ5vYYHaUMCR69Fm4lzAcEKYmHk92PwWif8Ed
-         mstg==
-X-Forwarded-Encrypted: i=1; AHgh+RrdIfCRrsYL/o8fjPlz9zpaV1u5Qaxqb1zhRj/H76ToIPwPSckIV0ztPqD503EwP2pi0dY=@lists.linux.dev
-X-Gm-Message-State: AOJu0YwIPIV84XDD4bj+qvMZ5i9aAJr1zbf7GtWb8xiRzgowiMOBiI4Q
-	nyGQ0VY9sViiRVyhHUmj9w8F7S62fHxn3pyhOMu3OMpF6xc/ri+kEEK57OA6twXPAE1zulj/1Gx
-	8CxezZ5dUXIcL4ffpKJ/6vhr8Y0VZkG0=
-X-Gm-Gg: AR+sD12YtjOtjCJ87IaiyBFWvA5d2vMDMSlDtCyyXQvFtz9FWlgbzQh1hbqly1+zD0T
-	kGbKfm7CRaJvxbwraw/x6KBJzBLpBq5iko/MorQPbmG/3Y7+CjhGcMIQxpg7YrU2PCzlKbZ2Pdr
-	JetEhjQU9aScMIyy0pJNmUEf+J0uMxBWWmK16x1z2Q2TpBOy9Wjkg6QTqsmlNSrZpZTFrjXoZ3G
-	W+x03HsoCVAgI3K1sMwRfTpYRGKvsEK9RmbtqzLPLwfMvhKRs/auEjsgl9H0QMxk+t8hreovMiy
-	PttUVhA+ttZVKtwmRYdA4Sg5D574uM81fp/Sdco/TaJ03u2tWT3fnGC3zYBTkNPU1Mt37HO7/rF
-	4cIM00K6WrddBl/OUt6+mWyl/TEfB5kEwbyFG1JZJ1QGUdA6UO/YTVhhjI1S9hIYFTU2Zxu2RAO
-	z/w8RwcbmPXjOOL+n1zcaoNy1GuguBOg0nuyGR
-X-Received: by 2002:a05:6102:5093:b0:740:2717:a1b2 with SMTP id
- ada2fe7eead31-75b21a600f9mr11149553137.1.1785857207439; Tue, 04 Aug 2026
- 08:26:47 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cd4Apqil"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B83AB1F000E9;
+	Tue,  4 Aug 2026 15:29:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785857383;
+	bh=oJ686uoUihHQg2wwD2bOEy1XrdXRnpOTa6S5YLlsB5g=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=cd4ApqilSKbv2W6j1lLsKqRvVZMek8kN0tILdOVjuCB/qqfUqicqs2NQ7pBx6DBtd
+	 0LhV/QOR8rnIdIACUYsZgZjLnbhjabb2OwKvxUkPoc+adEIegXuilJI0mhiHlp3PGa
+	 dSIFXg5U418sEKyZTIghOZDNMfDr34ucFW2HYiq3qVh6Y8N11LSKxSlt/sBAB4uO24
+	 YKSjUGSysMiBxxSp8GaeABkUc8a5Ea9qogRY1BHuMOti6zqbRP67cH5w6dJm392kud
+	 0bCwgSMSQlgJpibIpKwrh72HOKrKzkANXq4LmcsCzyAa2zx4fi82ULwMV+VG2e1ynK
+	 EQDCteeA5H7Lw==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH 1/4] mfd: cgbc: Fix use of negative error code as valid
+ session handle
+Reply-To: sashiko-reviews@lists.linux.dev
+To: =?utf-8?b?VGhvbWFzIFJpY2hhcmQgKGNvbmdhdGVjIEdtYkgp?= <thomas.richard@bootlin.com>
+Cc: lee@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20260804-cgbc-i2c-storage-devices-support-v1-1-fed38510671c@bootlin.com>
+References: <20260804-cgbc-i2c-storage-devices-support-v1-0-fed38510671c@bootlin.com>
+ <20260804-cgbc-i2c-storage-devices-support-v1-1-fed38510671c@bootlin.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Tue, 04 Aug 2026 15:29:43 +0000
+Message-Id: <20260804152943.B83AB1F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-References: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
- <20260802-submit-acx00-of-dynamic-v1-v1-10-0a53cd9e21cc@gmail.com>
- <05b1e6a2-725e-4b8e-8629-249637bbcb81@lunn.ch> <CADvTj4o0JdjoO+FC4pO=qnjEQ8MRyzQdKp2Hxy9NsPU-gym5OQ@mail.gmail.com>
- <9b8be475-1fde-409c-a82e-be4b2e402650@lunn.ch> <CADvTj4pBovti19MXgQjFpxm=7aRm0sYQz9jxfo8bu3txH94THQ@mail.gmail.com>
- <a9ce53dd-0873-41c0-ad6a-fb42e6cc7aaa@lunn.ch> <CADvTj4qpHU3F0DrEmc0vFi+JiwTNERniiMHKo1LmBd8sg58wJA@mail.gmail.com>
- <205e9051-8e43-44bb-a4b5-4ec69a192fa3@lunn.ch>
-In-Reply-To: <205e9051-8e43-44bb-a4b5-4ec69a192fa3@lunn.ch>
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Tue, 4 Aug 2026 09:26:35 -0600
-X-Gm-Features: AUfX_mxUgphmHVN2nVqeDHtOoQ4DhYlfN2EUsZlGA6OuEq-kXlUnQLFlQtbWoRc
-Message-ID: <CADvTj4qmXWbDsc-vigcSrF1N=zpxmZWGp3YaZ9PFcWK551h3mg@mail.gmail.com>
-Subject: Re: [PATCH 10/21] net: phy: add X-Powers AC200 EPHY control driver
-To: Andrew Lunn <andrew@lunn.ch>
-Cc: Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Chen-Yu Tsai <wens@kernel.org>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
-	Samuel Holland <samuel@sholland.org>, Andre Przywara <andre.przywara@arm.com>, 
-	Richard Genoud <richard.genoud@bootlin.com>, Maxime Ripard <mripard@kernel.org>, 
-	Alexandre Torgue <alexandre.torgue@foss.st.com>, Giuseppe Cavallaro <peppe.cavallaro@st.com>, 
-	Jose Abreu <joabreu@synopsys.com>, Maxime Chevallier <maxime.chevallier@bootlin.com>, 
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Heiner Kallweit <hkallweit1@gmail.com>, 
-	Russell King <linux@armlinux.org.uk>, Saravana Kannan <saravanak@kernel.org>, Lee Jones <lee@kernel.org>, 
-	Heiko Stuebner <heiko@sntech.de>, netdev@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-sunxi@lists.linux.dev, 
-	linux-kernel@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, 
-	mfd@lists.linux.dev, linux-rockchip@lists.infradead.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 4, 2026 at 8:54=E2=80=AFAM Andrew Lunn <andrew@lunn.ch> wrote:
->
-> > I agree that the link PHY cannot be identified by reading its
-> > registers before the package control sequence has run. I do not agree
-> > that this means an arbitrary ID should be placed in DT, though.
->
-> The ability to put the ID in DT is there for two reasons:
->
-> 1) You cannot enumerate the PHY because of missing clocks etc.
-> 2) The vendor messed up, and did not put a valid ID in registers 2 and 3.
->
-> 2 does not happen very often, but this is one example. They are
-> different PHYs, they need different driver code, when you consider the
-> PHY as a whole.
->
-> I also wound not put in an arbitrary ID, pick an unused ID in the
-> vendors range.
+Thank you for your contribution! Sashiko AI review found 3 potential issue(=
+s) to consider:
 
-The value currently used in DT is not arbitrary: 0x00441400 is exactly
-what both link-side Clause 22 endpoints report from registers 2 and 3
-after the corresponding package control sequence has run. This is case
-(1), rather than case (2): the ID cannot initially be read because the
-EPHY has not yet been clocked, configured and released from reset.
+Pre-existing issues:
+- [High] Hardcoded `.id` values are used in the `mfd_cell` array `cgbc_devs=
+` instead of relying on `PLATFORM_DEVID_AUTO`.
+- [High] Uninitialized kernel stack memory can be leaked to userspace via s=
+ysfs if the board controller firmware returns fewer than 3 bytes of data.
+- [Medium] The `mfd_cell` array `cgbc_devs` is missing the `const` qualifie=
+r.
+--
 
-The reported ID does not distinguish the two packages, but replacing it
-with a synthetic unused ID would make an ethernet-phy-idAAAA.BBBB
-compatible disagree with the value actually reported by registers 2 and
-3. If separate AC200 and AC300 PHY driver entries are needed to identify
-the complete package variants, they can use package-specific match data
-while sharing the common link-PHY implementation.
+--- Patch [1]: [PATCH 1/4] mfd: cgbc: Fix use of negative error code as val=
+id session handle ---
+commit d37d718d69c4fd9448146a18eac17c7d57dcefc2
+Author: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
 
->
-> > Both AC200 and AC300 expose the same link-side PHY ID and register
-> > layout.
->
-> No they don't. There are extra registers in different address domains.
+mfd: cgbc: Fix use of negative error code as valid session handle
 
-The block diagrams make the distinction clearer. Both diagrams depict
-an EPHY block with the same internal organization: MII/RMII, auto
-negotiation, auto-MDIX, 10/100 TX and RX PCS/PMA blocks, LED logic,
-clock/reset, PLL and EPHY AFE.
+The cgbc_session_command() return value was directly cast to u8 and used
+as session handle without error checking. Casting a negative error to u8
+produces a valid-looking session handle. So check if return value is
+positive before to cast and use it.
 
-What differs is the surrounding top-level control path. In AC200,
-E_MDC/E_MDIO connect directly to the EPHY, while the package control
-logic and registers are reached separately through RSB/TWI. In AC300,
-the external MDC/MDIO pins first enter a top-level MDIO slave and
-register block, which then provides internal MDC/MDIO connections to
-the EPHY. That top-level block also contains the AC300-specific reset,
-clock, I/O and eFuse controls.
+Cc: stable@vger.kernel.org
+Reported-by: Sashiko <sashiko-bot@kernel.org>
+Closes: https://sashiko.dev/#/patchset/20260713-cgbc-core-fix-cgbc-remove-v=
+1-1-79274ad62b3a%40bootlin.com?part=3D1
+Fixes: 6f1067cfbee7 ("mfd: Add Congatec Board Controller driver")
 
-Therefore, I agree that saying the complete register layouts are the
-same was too broad. The packages have different top-level control
-registers in different address domains, but the diagrams indicate that
-they contain the same link-facing EPHY implementation. That maps
-naturally to shared link-PHY code with separate AC200 and AC300 control
-backends, rather than two copies of the common EPHY implementation.
+> diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
+> index 2becaf797646d..4a409234e66c8 100644
+> --- a/drivers/mfd/cgbc-core.c
+> +++ b/drivers/mfd/cgbc-core.c
 
->
->         Andrew
+[ ... ]
+
+>  static struct mfd_cell cgbc_devs[] =3D {
+>  	{ .name =3D "cgbc-wdt"	},
+
+[Severity: Medium]
+This is a pre-existing issue, but should cgbc_devs be declared with the
+const qualifier?
+
+The MFD subsystem guidelines require mfd_cell arrays to be static const
+so they are placed in .rodata rather than mutable memory.
+
+[ ... ]
+
+>  	{ .name =3D "cgbc-i2c", .id =3D 1 },
+>  	{ .name =3D "cgbc-i2c", .id =3D 2 },
+
+[Severity: High]
+This is a pre-existing issue, but could this cause device naming collisions
+in sysfs?
+
+The cells use hardcoded .id values instead of allowing the MFD core to hand=
+le
+auto-indexing. The subsystem guidelines recommend using PLATFORM_DEVID_AUTO
+to prevent driver load failures.
+
+[ ... ]
+
+>  static int cgbc_get_version(struct cgbc_device_data *cgbc)
+>  {
+>  	...
+> 	ret =3D cgbc_command(cgbc, &cmd, 1, &data, sizeof(data), NULL);
+> 	if (ret)
+> 		return ret;
+>=20
+> 	cgbc->version.feature =3D data[0];
+> 	cgbc->version.major =3D data[1];
+> 	cgbc->version.minor =3D data[2];
+
+[Severity: High]
+This is a pre-existing issue, but can this leak uninitialized stack memory
+to userspace?
+
+If the board controller hardware returns fewer than 3 bytes during the
+CGBC_CMD_GET_FW_REV command, cgbc_command() might still successfully verify
+the truncated response and return 0.
+
+The code then unconditionally reads data[0], data[1], and data[2], storing
+potentially uninitialized stack bytes into cgbc->version, which is later
+exposed via the cgbc_version sysfs attribute.
+
+[ ... ]
+
+>  static int cgbc_init_device(struct cgbc_device_data *cgbc)
+>  {
+>  	...
+> 	ret =3D mfd_add_devices(cgbc->dev, -1, cgbc_devs, ARRAY_SIZE(cgbc_devs),
+> 			      NULL, 0, NULL);
+
+[Severity: High]
+This is a pre-existing issue, but should this pass PLATFORM_DEVID_AUTO
+instead of -1 (PLATFORM_DEVID_NONE)?
+
+Using PLATFORM_DEVID_NONE combined with hardcoded .id values in the mfd_cell
+array violates MFD guidelines.
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260804-cgbc-i2c-s=
+torage-devices-support-v1-0-fed38510671c@bootlin.com?part=3D1
