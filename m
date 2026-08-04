@@ -1,116 +1,171 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 799523E2740;
-	Tue,  4 Aug 2026 12:55:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A050723BD1B;
+	Tue,  4 Aug 2026 12:59:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785848145; cv=none; b=m7AB5ib4TPE/9ya/ZFT5RaJ9/ymZebz7/xswNAw+fAQWQbkqaivh3CLY65aciE6ellrbhegg4a3uy64Lt/9KdTyOUI2pCeFf46RME3/pP77Yf4Q7dbw61nkfCrjblHRUd7RKbg3aprWLq5IvBZTpX6xh59fmYV2+TAtbsyNesY8=
+	t=1785848368; cv=none; b=JKnKM0CXV37f2jhCHwPO8VKZTCmswYp0bQe6GXp7K/6VjlnEfD8zS3wEDGkCkorKls9WHJ1ugVhxB57d8o79dUkHxthU5iB2TnfUfK7inhUOumwAgEdQIYkWdfdRRVNhNPjJhHtEg8EKRQtqvmXHUFNsOqDqCKD3/XEjrPFJKCo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785848145; c=relaxed/simple;
-	bh=U0XNCwgE529iAqicn2/HvYaG7j0IrWjWmVyu6ke2pv8=;
+	s=arc-20240116; t=1785848368; c=relaxed/simple;
+	bh=ve1K+iUSPeFmO1XfuPGB6+L3+NV1E8+eXhzGOpPu+JI=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=eZz0XAY6z7zOD25caBzdc2ATf8lL9m8YRLkPNJDCsSmT2uTVo4jfUDJm5/2uSftAahI1smMDm3aXOLnFZOiIDTljP35McQHjm6UQst7YWT0Y+Mvo0McmuplgbSrZWkI/NbVnaFtk2Sp0U2DV8z99G0Sq08NxaNNn5MTZRj/0UPo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iF2oBTHk; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=TRnXpcWVWuUsicDCCZVLUDACLTugXdga169J4WlmACxkFp0fzeeeFM9YsFhCuSoqCZ1DqJKIQ2jZioSeEpVcYFxQOpMRkIBNyzJY8r85pkxBYdzWhkO5wGXyrWtSJUUYXuMfy0FOgsrktIM5wSlJsEfzHVxmFCXOon79++SBN14=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I5GbCoWn; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iF2oBTHk"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3741E1F000E9;
-	Tue,  4 Aug 2026 12:55:40 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I5GbCoWn"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE9EC1F00A3A;
+	Tue,  4 Aug 2026 12:59:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785848140;
-	bh=9JyJ9i6QvV2lZd8/uKxsmu1fM0BkijsD1S531bWDnCI=;
+	s=k20260515; t=1785848367;
+	bh=9ZGB8/UWvh6L1fVmEZiC/zozBpAuILOLK25J1iPQIf4=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=iF2oBTHk4DcwdEmikw2VWz3UaS75dAR+E+s4RSCqi/E7o9TO8gZzvh+KKfQJlpRPP
-	 ODQktB4fAota8L8HgZ7uvya/rVSgULu/xRlAqyk8QHEIhT58vfUsqsfWMogjnlFJSn
-	 44Yv3/mSEVMsAXXlZW4pIvV+pDEOud2IDm23sidGZV0RptNv8xDd/qp5xogbPnmOA6
-	 97fyLEH3fn7DQT2XcoqYv82x4i0cmH1+Oy4LFWCdrE+W/t9wALpFw9xZah+jET8fR+
-	 cA391CSHZNz1EQx8KSFjQqf++aKpHqmcq9TGYoBr7UVutshB2IoiYeUgHSK67bYHfc
-	 wIz5T+/YUwqSg==
+	b=I5GbCoWnoxBKvKlVuxf0Er5imr5zz2Uht3ijmuiC3HJhsO7mQK5Cmnk1NQ73T9a0w
+	 vqki4XNnDMuAcJyeiA8Kn0coCtmQADQPD/mcXHw2BH3gqmhHwjT1ccZnbXx3GU6qY6
+	 TEMSR+bnF/38b5c4FFf9ZfbeJUHjDJlfnBCUB6fNxqdQdPFCPct/4wOkngMeS2+5fR
+	 wx9chgRkXA+4OAcz4gJaPJOtN2Zm1J0fWZclTgp2Tn3INJ6IOwLZpcciQbnjd8lGxP
+	 8adlRA3q6IlfJbxCj9NqVmPk7l9E9s8sLUdQePBkSn/isMA9eUrpjK19toV5G6qaId
+	 FHeTTrOuLDmyQ==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v4 2/5] thermal/drivers/loongson2: Move thermal_ops to
- chip_data for SoC scalability
+Subject: Re: [PATCH v4 5/5] thermal/drivers/loongson2: Add support for
+ Loongson-2K0300
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Binbin Zhou" <zhoubinbin@loongson.cn>
-Cc: mfd@lists.linux.dev, lee@kernel.org, robh@kernel.org, devicetree@vger.kernel.org, conor+dt@kernel.org
-In-Reply-To: <7fe74a58c164da2e7a897598142f28df0e5ef0c4.1785829933.git.zhoubinbin@loongson.cn>
+Cc: devicetree@vger.kernel.org, lee@kernel.org, mfd@lists.linux.dev, conor+dt@kernel.org, robh@kernel.org
+In-Reply-To: <0c2af3251d520ab04d18c14fce0a825e7b171ca5.1785829933.git.zhoubinbin@loongson.cn>
 References: <cover.1785829933.git.zhoubinbin@loongson.cn>
- <7fe74a58c164da2e7a897598142f28df0e5ef0c4.1785829933.git.zhoubinbin@loongson.cn>
+ <0c2af3251d520ab04d18c14fce0a825e7b171ca5.1785829933.git.zhoubinbin@loongson.cn>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 04 Aug 2026 12:55:39 +0000
-Message-Id: <20260804125540.3741E1F000E9@smtp.kernel.org>
+Date: Tue, 04 Aug 2026 12:59:26 +0000
+Message-Id: <20260804125926.DE9EC1F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
+Thank you for your contribution! Sashiko AI review found 3 potential issue(=
 s) to consider:
-
-Pre-existing issues:
-- [High] The driver misuses the `clamp()` macro when setting temperature th=
-resholds, failing to bound the requested trip values to the hardware's supp=
-orted range `[-40, 125]`.
+- [High] The 'old fuse' validity check uses legitimate dynamic temperature =
+bounds, which will permanently disable sensor calibration during real therm=
+al emergencies.
+- [Medium] The return values of `regmap_read()` for chip ID registers are i=
+gnored, potentially leading to silent failures and miscalculation of temper=
+atures.
+- [Medium] Suspicious manual sign-magnitude parsing and missing sign handli=
+ng for `chip_id0` calibration data.
 --
 
---- Patch [2]: [PATCH v4 2/5] thermal/drivers/loongson2: Move thermal_ops t=
-o chip_data for SoC scalability ---
-commit 1f38b1d9f1db90805ef5765872a4c9de0db11e9c
+--- Patch [5]: [PATCH v4 5/5] thermal/drivers/loongson2: Add support for Lo=
+ongson-2K0300 ---
+commit 3e3a89cf673b3132da6f690e9200a7140d2ed6ae
 Author: Binbin Zhou <zhoubinbin@loongson.cn>
 
-thermal/drivers/loongson2: Move thermal_ops to chip_data for SoC scalability
-   =20
-In preparation for supporting additional Loongson SoCs, this commit
-relocates the thermal zone device operations pointer from the probe
-routine to the per-SoC chip_data structure. This eliminates the need to
-add conditional branches in probe() when a new SoC is introduced.
+thermal/drivers/loongson2: Add support for Loongson-2K0300
+
+This commit adds support for the thermal sensor on the Loongson-2K0300 SoC.
+The sensor uses a 10-bit ADC and requires per-chip calibration offsets read
+from syscon CHIP ID registers. A fallback formula and validity check are
+included for older fuse versions.
 
 > diff --git a/drivers/thermal/loongson2_thermal.c b/drivers/thermal/loongs=
 on2_thermal.c
-> index 5f47fa51fb907..1a8ca2cd06f1b 100644
+> index 1a8ca2cd06f1b..51b29b60372a5 100644
 > --- a/drivers/thermal/loongson2_thermal.c
 > +++ b/drivers/thermal/loongson2_thermal.c
+
 [ ... ]
-> @@ -160,7 +156,7 @@ static int loongson2_thermal_probe(struct platform_de=
-vice *pdev)
->  	loongson2_thermal_set(data, 0, 0, false);
+
+> @@ -72,13 +96,54 @@ static int loongson2_thermal_set(struct loongson2_the=
+rmal_data *data,
+>  	return 0;
+>  }
 > =20
+> +static int loongson2_2k0300_get_temp(struct thermal_zone_device *tz, int=
+ *temp)
+> +{
+> +	struct loongson2_thermal_data *tdata =3D thermal_zone_device_priv(tz);
+> +	int calib_data, calib_offset, temp_mc, raw_adc;
+> +	u32 chip_id0 =3D 0, chip_id1 =3D 0;
+> +
+> +	writel(0xff03, tdata->ctrl_reg + LOONGSON2_THSENS_CFG_REG);
+> +	raw_adc =3D FIELD_GET(LOONGSON2_THSENS_OUT_11B_MASK,
+> +			    readl(tdata->ctrl_reg + LOONGSON2_THSENS_OUT_REG));
+> +
+> +	if (tdata->flags & LS2K0300_OLD_FUSE_FLAG) {
+> +		*temp =3D raw_adc * 569 - 394700;
+> +		return 0;
+> +	}
+> +
+> +	regmap_read(tdata->regmap_cfg, LS2K0300_CHIP_ID0, &chip_id0);
+> +	regmap_read(tdata->regmap_cfg, LS2K0300_CHIP_ID1, &chip_id1);
+
+[Severity: Medium]
+Is it safe to ignore the return values of these regmap_read() calls?
+
+If regmap_read() fails due to an underlying bus or configuration error, it
+will not modify chip_id0 or chip_id1, leaving them at 0. This could cause
+the driver to silently compute an uncalibrated temperature without reporting
+the read error.
+
+> +
+> +	if (chip_id0 & LS2K0300_EXTERN_ID) {
+> +		calib_data =3D FIELD_GET(LS2K0300_ID1_VAL_MASK, chip_id1);
+> +		calib_offset =3D FIELD_GET(LS2K0300_COMP_VAL_MASK, calib_data);
+> +		if (calib_data & LS2K0300_COMP_SIGN_BIT)
+> +			calib_offset =3D -calib_offset;
+> +	} else {
+> +		calib_data =3D FIELD_GET(LS2K0300_ID0_VAL_MASK, chip_id0);
+> +		calib_offset =3D FIELD_GET(LS2K0300_COMP_VAL_MASK, calib_data);
+
+[Severity: Medium]
+Does the chip_id0 fallback path have a missing sign bit check?
+
+The code extracts a 12-bit value into calib_data using a 12-bit mask
+(LS2K0300_ID0_VAL_MASK is GENMASK(31, 20)). It then immediately applies a
+15-bit mask (LS2K0300_COMP_VAL_MASK is GENMASK(14, 0)) to that 12-bit value,
+which appears redundant.
+
+Additionally, unlike the chip_id1 branch above which explicitly checks for a
+sign bit and negates the offset, this branch lacks sign handling. If the
+12-bit fuse data uses a sign bit, interpreting a negative value as a large
+positive integer could skew the temperature calculation significantly.
+
+> +	}
+> +
+> +	temp_mc =3D (raw_adc + calib_offset) * 570 - 394700;
+> +
+> +	/* For old fuse which can not read right thermal data */
+> +	if (temp_mc < LS2K0300_LOWEST_VALID_TEMP || temp_mc > LS2K0300_HIGHEST_=
+VALID_TEMP) {
 
 [Severity: High]
-This is a pre-existing issue, but does loongson2_thermal_set() misuse the
-clamp macro when setting temperature thresholds?
+Could this logic permanently disable sensor calibration during a real overh=
+eat?
 
-Looking at drivers/thermal/loongson2_thermal.c:loongson2_thermal_set(), the
-arguments to clamp() appear to be in the wrong order:
+If the physical CPU temperature genuinely exceeds 125 degrees Celsius during
+a thermal emergency, this check will incorrectly flag the valid hardware fu=
+se
+as invalid.
 
-	/* Set low temperature threshold */
-	loongson2_set_ctrl_regs(data, clamp(-40, low, high), true, enable);
+It then sets the LS2K0300_OLD_FUSE_FLAG, permanently disabling calibration
+for all future reads, which causes the sensor to report lower uncalibrated
+temperatures exactly when accurate readings are needed to trigger a shutdow=
+n.
 
-	/* Set high temperature threshold */
-	loongson2_set_ctrl_regs(data, clamp(125, low, high), false, enable);
+> +		dev_warn_once(tdata->dev, "It's an old fuse, thermal %d is not right\n=
+", temp_mc);
+> +		tdata->flags |=3D LS2K0300_OLD_FUSE_FLAG;
+> +		temp_mc =3D raw_adc * 569 - 394700;
+> +	}
+> +	*temp =3D temp_mc;
+> +
+> +	return 0;
+> +}
 
-Because the clamp macro arguments are swapped (using clamp(-40, low, high)
-instead of clamp(low, -40, 125) and clamp(high, -40, 125)), values like a
-high trip point > 155C are not bounded to 125.
-
-If root sets a thermal trip point > 155C via sysfs, adding HECTO (100) to
-156+ results in a value > 255.
-
-When this is written to the 16-bit hardware register, can it overflow into
-bit 8 (the enable bit), overwriting the control state and truncating the
-threshold to an incorrect value?
-
-Could this cause immediate and continuous hardware thermal alarms (IRQ
-storm), rendering the system unusable?
-
->  	for (i =3D 0; i <=3D LOONGSON2_MAX_SENSOR_SEL_NUM; i++) {
-> -		tzd =3D devm_thermal_of_zone_register(dev, i, data, thermal_ops);
-> +		tzd =3D devm_thermal_of_zone_register(dev, i, data, data->chip_data->t=
-hermal_ops);
->  		if (!IS_ERR(tzd))
->  			break;
+[ ... ]
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/cover.1785829933.gi=
-t.zhoubinbin@loongson.cn?part=3D2
+t.zhoubinbin@loongson.cn?part=3D5
