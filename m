@@ -1,106 +1,112 @@
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 155C313D891;
-	Tue,  4 Aug 2026 02:22:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB9C530B51E;
+	Tue,  4 Aug 2026 03:04:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785810181; cv=none; b=bptwe1/V7ZE8Q9e9QeiRlghN6RcVKsyuwzGR9VD26Jawirw8dmLzsUa6zOo3K/sidjESGCr0tM0om5o9jAJTSCgvu9KfqLqMVFX4dhIZNu2Y7YxK7NvyFdkdEo9NdwIDvOfgVmMBsbxFl7uxEnrdzn27I9gLFlZJWyOLBhK/vZg=
+	t=1785812648; cv=none; b=YWsMuX+pLJ1L0tq5cpH1Q6tPpUdE+D+cB5RzUB8vj2GXBbIndgh4antk+YjfYAG6wXTQ1Sv/jgKDnScNiL1xveNiayQ38k5h9eZ929EfChh3+1I7S33jjm75p/3GYrrDagOX61oqhSrldtufLn6nLWVigiQLqkzZPobAgKM6P2w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785810181; c=relaxed/simple;
-	bh=SX13vEZQJkXZJt2UHR/f4IBlJrPFgf+XlGj5qM4/Nr4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=o8jKT5KRzymkWTcF9Z+FatLVG5EjwmAA1KC6uw5gHhDt5X2zpbwf8/vokjYDkdU0Gr8ahjjOwbIlKscy/z2FGa4HimazCkgM3/UOPQ1G6xW6LAE8vlhyqWMsXZzoisqYMOCZuQDvIG2FIJIWEHHE/xZA2FUi8tmFVpCcO75CblE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=cfJHnsPS; arc=none smtp.client-ip=156.67.10.101
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+	s=arc-20240116; t=1785812648; c=relaxed/simple;
+	bh=5F4jpsYYa71VFyNPIUSPDjrll1rr2OurnGlvjFq2/6Q=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=CSkiWqR1AEwbwGvfZ8/DsTTd4dJcN2rUnDss6L1mLLRBP5yC5cbdZ9RdfiovF1tNKcdAPEBMrRKH53vDQWjxXX/tWWxDjY5Uqf3YSulTqCE9QI4AUjltfCPUxmD1ZKlZ/9ZE3xPLNnmE9cAZBe68a/3fmpqRAfT4g3PjWq+8FM0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=ehs8/bkh; arc=none smtp.client-ip=220.197.31.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="cfJHnsPS"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=KBCTp/Dj4hax8K4vdk++/al4/OPtT9I69ZVO8QctjQ8=; b=cfJHnsPS8+lt50R34OIpYaoLFK
-	3lvFwqf1TuEaHrQJmULImiw3DzOwrg5RFpQF9v0Ipby2paypRM5+7jvqmZmujLgRwKkFh9J/juiLJ
-	X1Qz8nuJE34gNeAFfnoL6029h1zKwlN23cRHzSHI+DEAFprImoSaATxAc7NSwMLiGJKw=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1wr4nj-00FtTG-BR; Tue, 04 Aug 2026 04:22:43 +0200
-Date: Tue, 4 Aug 2026 04:22:43 +0200
-From: Andrew Lunn <andrew@lunn.ch>
-To: James Hilliard <james.hilliard1@gmail.com>
-Cc: Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Chen-Yu Tsai <wens@kernel.org>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Samuel Holland <samuel@sholland.org>,
-	Andre Przywara <andre.przywara@arm.com>,
-	Richard Genoud <richard.genoud@bootlin.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Giuseppe Cavallaro <peppe.cavallaro@st.com>,
-	Jose Abreu <joabreu@synopsys.com>,
-	Maxime Chevallier <maxime.chevallier@bootlin.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Saravana Kannan <saravanak@kernel.org>, Lee Jones <lee@kernel.org>,
-	Heiko Stuebner <heiko@sntech.de>, netdev@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-sunxi@lists.linux.dev, linux-kernel@vger.kernel.org,
-	linux-stm32@st-md-mailman.stormreply.com, mfd@lists.linux.dev,
-	linux-rockchip@lists.infradead.org
-Subject: Re: [PATCH 10/21] net: phy: add X-Powers AC200 EPHY control driver
-Message-ID: <a9ce53dd-0873-41c0-ad6a-fb42e6cc7aaa@lunn.ch>
-References: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
- <20260802-submit-acx00-of-dynamic-v1-v1-10-0a53cd9e21cc@gmail.com>
- <05b1e6a2-725e-4b8e-8629-249637bbcb81@lunn.ch>
- <CADvTj4o0JdjoO+FC4pO=qnjEQ8MRyzQdKp2Hxy9NsPU-gym5OQ@mail.gmail.com>
- <9b8be475-1fde-409c-a82e-be4b2e402650@lunn.ch>
- <CADvTj4pBovti19MXgQjFpxm=7aRm0sYQz9jxfo8bu3txH94THQ@mail.gmail.com>
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="ehs8/bkh"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Message-ID:Date:MIME-Version:Subject:To:From:
+	Content-Type; bh=YKiBIk4wRt6v6NI7XRMCDBJJZejw6wWJNbI2X0Vwybs=;
+	b=ehs8/bkhda2AjPr2bTWWWe8pn/oOuR3Godyaf8dliue5vCE+Hvh81ZacwZukAh
+	B5wggLy2qPyVWcglluPf009vVnI6CXyO8Z5GLeiM0AyCOzOLN/8w/ztI5t7HyO+o
+	+uwxzFvtRA0R7agxFV6mG9q5srWyl4j66mNRZDUuB+gD4=
+Received: from [IPV6:2409:8a62:3e6:1400:e93f:3d77:3322:beb7] (unknown [])
+	by gzga-smtp-mtada-g0-4 (Coremail) with SMTP id _____wD3P1uTVnFqxrfcNg--.17519S2;
+	Tue, 04 Aug 2026 11:03:48 +0800 (CST)
+Message-ID: <c5f7df74-5a45-4bd6-b167-b4f970613d9a@163.com>
+Date: Tue, 4 Aug 2026 11:03:47 +0800
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CADvTj4pBovti19MXgQjFpxm=7aRm0sYQz9jxfo8bu3txH94THQ@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] pinctrl: stm32: use a raw spinlock regmap to program the
+ EXTI mux
+To: sashiko-reviews@lists.linux.dev
+Cc: mfd@lists.linux.dev, linux-rt-devel@lists.linux.dev, lee@kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260803061718.43210-1-junan76@163.com>
+ <20260803063431.205EC1F000E9@smtp.kernel.org>
+Content-Language: en-US
+From: Ju Nan <junan76@163.com>
+In-Reply-To: <20260803063431.205EC1F000E9@smtp.kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-CM-TRANSID:_____wD3P1uTVnFqxrfcNg--.17519S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7KFW8Cry3XFWkGry8WrWruFg_yoW8KryDpF
+	WaqayayrsrGrWIvryqvw48J3W09a1IyF43A3Z8WrWIv3s0ga4fGr15KF45AFWDGF4kC3Z0
+	y3WjqryDu3WDZ3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07U24iUUUUUU=
+X-CM-SenderInfo: pmxqt0ixw6il2tof0z/xtbC9RSxY2pxVpQtIQAA3m
 
-> > So what i'm trying to do with both of these is make it look more like
-> > standard Linux building blocks.
-> >
-> > If that is not possible, i would actually put all this code into the
-> > PHY driver. You then have a regmap property to gain access to the I2C
-> > registers.
-> 
-> I understand the goal of using standard Linux building blocks where they
-> fit, but I do not think folding these control paths into the common PHY
-> driver gives the right device model here.
-> 
-> The AC200 and AC300 expose the same Clause 22 PHY interface, but their
-> control functions are separate devices with different transports and
-> lifetimes. The AC200 control function is an MFD child accessed through
-> the parent I2C regmap. The AC300 control function is a separately
-> addressed non-PHY MDIO device. A regmap reference only describes the
-> AC200 transport; it does not represent the AC300 control device.
-> 
-> Folding both implementations into the common PHY driver would make that
-> driver manage AC200 MFD registers and resources as well as an AC300 MDIO
-> control endpoint. That would mix the package-specific control transports
-> with the otherwise common Clause 22 implementation.
 
-Given how messy this hardware is, i doubt it is discoverable. We have
-been pushing back on hacks to enable various things before probe in
-order to make it discoverable. So you are going to end up putting IDs
-in DT so that the driver probes without it being discovered. That
-means you can put any ID you want in DT, and the driver. So you have
-two different phy driver structs, two different probe functions, etc.
 
-	Andrew
+On 8/3/26 2:34 PM, sashiko-bot@kernel.org wrote:
+> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
+> - [High] Bypassing standard syscon regmap initialization leaves the syscfg clock disabled, leading to hardware bus faults on platforms where the syscfg node requires a clock.
+> - [High] If another driver sharing the syscon node probes before pinctrl, the generic syscon layer will create a default regmap without `use_raw_spinlock`, causing the PREEMPT_RT sleeping-in-atomic bug to persist.
+
+> [Severity: High]
+> Does bypassing the standard syscon regmap initialization leave the syscfg
+> clock disabled?
+> 
+> The generic syscon handling normally calls of_clk_get() and 
+> regmap_mmio_attach_clk(). Since this manual initialization skips that, the
+> clock is never attached to the regmap.
+> 
+> On platforms like STM32F4/F7/H7 where the syscfg node explicitly requires a 
+> clock, could writing to the EXTI mux registers in stm32_gpio_domain_activate()
+> with the clock disabled trigger an imprecise external abort (bus fault)?
+
+That's right for STM32F4/F7, I have checked related dts files and the syscfg
+node does require a clock.
+
+>> +
+>> +	/*
+>> +	 * A regmap is already registered for that node, most likely by the
+>> +	 * other pinctrl instance sharing it. Drop ours and use that one.
+>> +	 */
+>> +	if (of_syscon_register_regmap(syscfg_np, regmap)) {
+>> +		regmap_exit(regmap);
+>> +		iounmap(base);
+>> +	}
+> 
+> [Severity: High]
+> If another driver sharing the st,syscfg node (like Ethernet MAC, I2C, or USB)
+> probes before pinctrl, won't the generic syscon layer have already
+> instantiated a default regmap without use_raw_spinlock?
+> 
+> In that scenario, of_syscon_register_regmap() would return an error and the
+> driver silently discards its raw regmap. Since the driver then falls back to
+> the already registered sleeping regmap, does this cause the PREEMPT_RT 
+> sleeping-in-atomic bug to persist when stm32_gpio_domain_activate() writes to
+> the regmap under the raw desc->lock?
+> 
+
+
+True again for STM32F4/H7. But the syscfg node is shared between pinctrl and
+pinctrl_z only on STM32MP series SoC, and that's the platform on which I tested
+this patch.
+
+Thanks sashiko-bot :P, I will send a V2 later.
+
+>> +
+>> +out_put:
+>> +	of_node_put(syscfg_np);
+>> +}
+> 
+
