@@ -1,166 +1,153 @@
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from out-174.mta1.migadu.com (out-174.mta1.migadu.com [95.215.58.174])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68FB13EBF0C
-	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 09:40:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.177
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 058DD44607A
+	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 10:20:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.174
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785836435; cv=none; b=QFP/MDRIBKKfIbfMVFAMQsR6U58bxX5PrYhiRiokMLmOXlKvxSOycrHLN2UfThh28mD+hH3PUDOCGySsoxz/RBymi4AXSQjgNPxv4cm8Ho9UGqFNVJFzp6EvrzKhZoUqiAJtbm71zsD7Prm3ZXcHD/XJDwNpBmr8sjVlZIHud2M=
+	t=1785838803; cv=none; b=PYDReTPIpGyoNmXxOwOT8rQ/htYtP9KaB3C354Ctl9xwF5NC5q6CNCEoBsw6xXYs8iQthHTeDky7FIjVYwoEdgQIrNzAcyi7+0lhb6zPp/tqyiRHhGg6yI3JfcMGGJztaV/qKTClRm4d6LBCzgu4pgi/icGLSk+k5FQQb2t4k1A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785836435; c=relaxed/simple;
-	bh=+tg4HihkjVnqg6IV94Lm31GvSa3PaWyc5O/YQHA4Dcg=;
-	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
-	 Message-Id:References:To; b=bxVUZstOrngPAxlo3b/hx4rk62Mc8oZrtiZ6Rxs8tAvy1hPtiwIwgsdfhdDPo6a5tOkTde195fwi94RukvkCrVSEveYpy8UwR1170kuP8UNNAgQ6KEblGLvr/lO0fFWVwfsyT6mWhqYXZLbHdKkSmKpgMz/7ducPXdCd0IVJr6M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=eFFitz+7; arc=none smtp.client-ip=209.85.214.177
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1785838803; c=relaxed/simple;
+	bh=W0VsvBw4erS62StCAwFbLIw6VY59rs3FwUtxsXp2c1k=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition; b=tIPUqY2V3UUlYrrrH7VRBb+8Pk5B/q9ZVfcRK/bcxB1cVTVasXTLvc+6vqQlUpj10mB4S3oUvLlbAlYZwmd3z2NrgAdpmAfKTXWVbjD6R0JUortdNHCmqqFiFreSYBmjIcQLfbL2sXdKmRQWFI1/c1yjQvxUOgag30T1kg8q/ik=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=MQajXf89; arc=none smtp.client-ip=95.215.58.174
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="eFFitz+7"
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2cecdc24b1cso6709315ad.1
-        for <mfd@lists.linux.dev>; Tue, 04 Aug 2026 02:40:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785836432; x=1786441232; darn=lists.linux.dev;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:content-type:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=0KP7c64Yl9kvVeMhN4Vu6FcmRJHPM+FSMkVOBoxsZtQ=;
-        b=eFFitz+7KPDvwLjeXHX02EeU+l+Aza2cUEsk9n4knUPCPvWpj1NV6EDNamhkH5ffqt
-         Ntt8+6cBXWMGTiahPefZ5Bsd9ixJsnFSDhrZ0uarqnyR3GQ6wO/+JYj2JXmvmtrtAUIG
-         OhStc8GVtN+QC0977ry9pBjD7JCorLBL5L7C/WbQZfkEeQtSAY+0kidpfK9fyoZjSml0
-         OEzH3yOLZfJbd4n2/T5uzIYH58zmoCjHMl+oU8yVmTeN4dzKO8oSQFhDq6t9GAnwog8m
-         f/HV7/t0ATpMKqVFUQT/d+rD40qfs726JyX1pItwe5qm6e+ICnNCzXyKjo7dglewgbka
-         /x5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785836432; x=1786441232;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:content-type:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=0KP7c64Yl9kvVeMhN4Vu6FcmRJHPM+FSMkVOBoxsZtQ=;
-        b=jmuFxb7Gue4CCpZLpIe+01Nn0CU3MX0j3G+PbuR0602t1xEbWuJg7T6y57DLovJJfG
-         ACsUegxI3RX6mau5U+iM7pS9Sf9qPCYevvFx7Nm2wjPzUv4r2x8fL9iWQIxiOTVgIf0E
-         CekqFE4e/4lYEHOIAfLWYEPx9lcCeDwQexUm/tQhWEss9y2+uOzl+07BSUkWc0uGQXtf
-         qA5bAD1ij0+8UapI+uX2oNxHC669BnF0aN1ao0GWLAvknTcXRRyqbFvMbgun4ApnQz01
-         v5bIkbJJXc41RdtgIlqBkE3iKdtDuPxklEvOY6iEHZKzFNR5qJ8upJX/3dI/mgzjNOYZ
-         AV2Q==
-X-Forwarded-Encrypted: i=1; AHgh+RqtWlX4zLAoGpwLtBXidp+SgRhT6VobdqthgaepgYHjsAgmPBq9mJZuOfR6XasBEwOJN80=@lists.linux.dev
-X-Gm-Message-State: AOJu0YxTRS79FzLd/t8rBpSoGq1QPicOrsGSWWJXuUT5hAKyYH2EF0CN
-	sqipAVOPEaE1SRCdjAONujANDkqzHPBbaD5G/cO1IkQtQtE9hwCAkfRV
-X-Gm-Gg: AR+sD105r1t8BJatqL9UWkwwzUH0txkZKGd+sWt+V9xmB5VWeKqkn8Q9CtiMk520shX
-	a7Fe7HIhdb1tO43q/wRGFShTdDE5025SyYiN13VZqKPsC6FQeDpZXD1qlQuH82oCUQYvZj5FIte
-	Ey8UJVNau26B/CYThVp0AXAniF11PXACAjG+DOHL62oTK2ljhgm7sJJEm86N8Tb1UOHZW7fYyz1
-	nxAmeN9+lwsmBiNrKZj7X14HcZnMU8Mlm0L4twBa0xWQMlpFoGpc5d6+beUE5eE93jqHxxm6eub
-	GOL0CJlWYeEM+7Cc6Up9J4JGwQkdf+m/wDNdY31y1YV46n6Na5UxnkE1k468D+NIFzFqSlb21U+
-	HKCzQv/nXBMQtWN52/aD9zsp9Oqof4XklJpsI5WK+Ki2B+5T78xJesMMvU8wzE3TKYKfCJyAZOe
-	A4rMBnqOv9CwUwNE3kcO9rUINwJlklEzpLsLYxFF0lf3/u1aKmS7LMkmBYHjsMqz2IYuZkkVE9P
-	ur8TVhT4d0=
-X-Received: by 2002:a17:902:c952:b0:2c7:ef84:c58e with SMTP id d9443c01a7336-2d0521bca53mr200300075ad.1.1785836432230;
-        Tue, 04 Aug 2026 02:40:32 -0700 (PDT)
-Received: from smtpclient.apple ([23.247.139.92])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d0aa013da4sm3898605ad.34.2026.08.04.02.40.27
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Tue, 04 Aug 2026 02:40:31 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="MQajXf89"
+Date: Tue, 4 Aug 2026 13:19:43 +0300
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1785838799; h=from:from:reply-to:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+	 content-type:content-type; bh=59bV0VTFOGjwq0yxRhupbuwjdHtO+zfKFhfxls/eC1w=;
+	b=MQajXf89w0T5db6AJd9zx//7rK725ZHKv5Ok+6Bjr62pPw7N17z3N5RCH0aPmCPXoJVyu+
+	NlBiKSyGDQ3ZaGHIvY4YbkDVMDiqwZSq6qEyCkomAIabtYiXScS3prTWPVYTg3NpdPmNtD
+	DMfwz52CyuLOzwJb9MUA2Ko0LJLzDy0=
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Matti Vaittinen <matti.vaittinen@linux.dev>
+To: Matti Vaittinen <mazziesaccount@gmail.com>,
+	Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
+	Matti Vaittinen <matti.vaittinen@linux.dev>
+Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Matti Vaittinen <mazziesaccount@gmail.com>,
+	Michael Turquette <mturquette@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	mfd@lists.linux.dev, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-clk@vger.kernel.org,
+	linux-gpio@vger.kernel.org, linux-rtc@vger.kernel.org
+Subject: [PATCH v2 00/10] Support ROHM BD73800
+Message-ID: <cover.1785838584.git.mazziesaccount@gmail.com>
+Reply-To: Matti Vaittinen <mazziesaccount@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81.1.8\))
-Subject: Re: [PATCH RFC v5 5/7] ipmi: ls2k: Relax the dependency to its mfd
- driver
-From: Miao Wang <shankerwangmiao@gmail.com>
-In-Reply-To: <anD-LJYB-afdVAXN@mail.minyard.net>
-Date: Tue, 4 Aug 2026 17:40:14 +0800
-Cc: Binbin Zhou <zhoubinbin@loongson.cn>,
- Chong Qiao <qiaochong@loongson.cn>,
- Lee Jones <lee@kernel.org>,
- Huacai Chen <chenhuacai@kernel.org>,
- Linus Walleij <linusw@kernel.org>,
- Bartosz Golaszewski <brgl@kernel.org>,
- Xi Ruoyao <xry111@xry111.site>,
- WANG Xuerui <kernel@xen0n.name>,
- Yinbo Zhu <zhuyinbo@loongson.cn>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- mfd@lists.linux.dev,
- linux-kernel@vger.kernel.org,
- linux-gpio@vger.kernel.org,
- openipmi-developer@lists.sourceforge.net
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="VHhze1AYksE9JiYU"
+Content-Disposition: inline
+X-Migadu-Flow: FLOW_OUT
+
+--VHhze1AYksE9JiYU
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Message-Id: <2E268CDE-1D85-4611-BFF7-F74DD36132AB@gmail.com>
-References: <20260804-ls2kbmc-mod-v5-0-e6bc5cdd9a93@gmail.com>
- <20260804-ls2kbmc-mod-v5-5-e6bc5cdd9a93@gmail.com>
- <anD-LJYB-afdVAXN@mail.minyard.net>
-To: corey@minyard.net
-X-Mailer: Apple Mail (2.3826.700.81.1.8)
 
-Hi,
+Add support for the ROHM BD73800 PMIC and compatibles.
 
-> 2026=E5=B9=B48=E6=9C=884=E6=97=A5 04:46=EF=BC=8CCorey Minyard =
-<corey@minyard.net> =E5=86=99=E9=81=93=EF=BC=9A
->=20
-> On Tue, Aug 04, 2026 at 12:55:53AM +0800, Miao Wang via B4 Relay =
-wrote:
->> From: Miao Wang <shankerwangmiao@gmail.com>
->>=20
->> There is no strong dependency between the IPMI driver and its mfd
->> driver. Although the IPMI driver will not work without the mfd =
-driver,
->> it is not a hard dependency. The IPMI driver can actually be compiled
->> without the mfd driver, and it will just fail to probe. When the mfd
->> driver is loaded, the IPMI driver will probe successfully. Therefore,
->> the dependency of the IPMI driver on its mfd driver should be relaxed
->> to "imply" from "select". This will allow the mfd driver to be =
-compiled
->> as a module and the IPMI driver to be compiled as a part of the =
-ipmi_si
->> module. The adjustment to Kconfig for the mfd driver will be =
-introduced
->> in the later patch in this series.
->=20
-> I don't think that's what "imply" is for.  Imply seems to be for if
-> there is another subsystem that can use this subsystem, but doesn't
-> require it to exist.
->=20
-> For instance:
->=20
-> config SENSORS_NPCM7XX
->        tristate "Nuvoton NPCM750 and compatible PWM and Fan =
-controllers"
->        imply THERMAL
->=20
-> The fan controller will work fine without the thermal subsystem; you
-> can control the fan speed without it.  But the thermal subsystem is =
-the
-> logical user of this.  I looked at many of these things like this.
->=20
-> In the IPMI case, the IPMI driver is useless without the mfd part.  So
-> there's no point in compiling the IPMI part of this if the mfd part is
-> not there.
->=20
-> I could be wrong, but I can't see why you would want to do this.
+The ROHM BD73800 is a power management IC which integrates 8 BUCKs and 4
+LDOs. There is also an ADC and operation amplifier intended for current
+/ temperature measurement and accumulation. RTC and 32.768 kHz clock
+gate are also included. The PMIC can be customized via OTP and it has
+options for operating as a main PMIC in multi-PMIC installation. Some
+of the pins can also be used for GPO or GPI (including interrupt support).
 
-The mfd part and the IPMI part loosely depend on each other. Without the
-IPMI part, the mfd part can still work to handle the display part.
-Without the mfd part, the IPMI part is indeed useless, but it will not
-generate compiling errors or other runtime errors. In the runtime,
-the IPMI part can be actually loaded earlier than the mfd part. As a
-result, their dependency is not that strong.
+There are also ROHM BD71851 and BD71885 PMICs out there. These are, from
+the SW-perspective, similar to the BD73800. There is only some different
+default values and OTP settings. The driver should be able to handle them
+just fine.
 
-The reason why I want to change this is that "select" here requires the
-mfd part should also be compiled as built-in (i.e. =3D y), since the
-type of the configure entry IPMI_LS2K is bool. However, I cannot see
-there is no other reason preventing the mfd driver from compiling as
-a module. This patch series will introduce a minor fix, after which
-the mfd driver will be capable to be compiled as a module.
+Revision history:
 
-When the type of MFD_LS2K_BMC_CORE is changed to tristate, the "select"
-here will prevent selecting =3Dm for MFD_LS2K_BMC_CORE. I thus believe
-that "select" here should be also changed.
+v1 =3D> v2:
+ - Rebased on regulator/for-7.3 as it carries dependency:
+   f29a8bf6fde1 ("regulator: dt-bindings: ROHM PMIC state-machine voltages")
+ - dt-bindings: Various fixes, split generic stuff to own files.
+ - gpio: Styling, return -ENODEV if no GPIOs found
+ - MFD: Styling
+ - regulator: Simplify dt-reading
+ More accurate change-log in individual patches.
 
-Any suggestions on declaring the dependency of the both parts?
+---
 
-Cheers,
+Matti Vaittinen (10):
+  dt-bindings: mfd: common ROHM PMIC properties
+  dt-bindings: rohm,bd*: Ref common ROHM bindings
+  dt-bindings: regulator: ROHM BD73800 regulators
+  dt-bindings: mfd: ROHM BD73800 PMIC
+  mfd: Support for ROHM BD73800 PMIC core
+  rtc: bd70528: Support RTC on ROHM BD73800
+  regulator: bd71828: Support ROHM BD73800
+  clk: bd718x7: Support ROHM BD73800
+  gpio: bd73800: Support ROHM BD73800 PMIC GPIOs
+  MAINTAINERS: Add ROHM BD73800 PMIC files
 
-Miao Wang=
+ .../bindings/mfd/rohm,bd71815-pmic.yaml       |   9 +-
+ .../bindings/mfd/rohm,bd71828-pmic.yaml       |   9 +-
+ .../bindings/mfd/rohm,bd72720-pmic.yaml       |  29 +-
+ .../bindings/mfd/rohm,bd73800-pmic.yaml       | 218 +++++++
+ .../bindings/mfd/rohm,pmic-pins.yaml          |  72 +++
+ .../regulator/rohm,bd73800-regulator.yaml     |  99 ++++
+ MAINTAINERS                                   |   2 +
+ drivers/clk/clk-bd718x7.c                     |   8 +
+ drivers/gpio/Kconfig                          |  11 +
+ drivers/gpio/Makefile                         |   1 +
+ drivers/gpio/gpio-bd73800.c                   | 227 +++++++
+ drivers/mfd/Kconfig                           |  15 +-
+ drivers/mfd/rohm-bd71828.c                    | 147 ++++-
+ drivers/regulator/Kconfig                     |   4 +-
+ drivers/regulator/bd71828-regulator.c         | 558 +++++++++++++++++-
+ drivers/rtc/rtc-bd70528.c                     |   8 +
+ include/linux/mfd/rohm-bd73800.h              | 307 ++++++++++
+ include/linux/mfd/rohm-generic.h              |   1 +
+ 18 files changed, 1679 insertions(+), 46 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/mfd/rohm,bd73800-pmic=
+=2Eyaml
+ create mode 100644 Documentation/devicetree/bindings/mfd/rohm,pmic-pins.ya=
+ml
+ create mode 100644 Documentation/devicetree/bindings/regulator/rohm,bd7380=
+0-regulator.yaml
+ create mode 100644 drivers/gpio/gpio-bd73800.c
+ create mode 100644 include/linux/mfd/rohm-bd73800.h
+
+
+base-commit: 36c3ea84289913d16dd2ed783534193c957055b9
+--=20
+2.55.0
+
+
+--VHhze1AYksE9JiYU
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEEIx+f8wZb28fLKEhTeFA3/03aocUFAmpxvLYACgkQeFA3/03a
+ocW5HQgAlH75SLN8BaghMw7rYf5U9E5OPedQFEdQAj2bvP6pi2a0oh763U9YtSRZ
+QfAyxQwz7oEW7rvDT9sMY5A1DcNAo5rTCxeyFKJ1KeBiimdmB277fU2cpMzJ0Noh
+zYrxA2ttWRKa4vGfhxraIK0Z4IAHiL0wSOkH6bvDagXjaUVflGVSShS9xGur5hhY
+udrdU6DX1VAiphwBais1772pxrPuDYtx048OL1TZb9KmKyMX6XY5zEOi1LpvWfhL
+cXGA50TcS3+PLDDGGZF2n0+AYxdc2sL8IEYDJZwo5eWsJ19MdysbX4xWDzCz+NHY
+2G4KMK/9ZJxdjPekEoDWrzyH1P7AnQ==
+=+2F/
+-----END PGP SIGNATURE-----
+
+--VHhze1AYksE9JiYU--
