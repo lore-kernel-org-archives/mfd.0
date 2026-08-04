@@ -1,189 +1,272 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3552443D4E9
-	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 14:34:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDC6F3AD527
+	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 14:38:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785854060; cv=none; b=qrtOqcsvp4oey4+2grZVolN/Inrb3HYWliN5eUvmWfqY1IfnMqO0g4FraoHWDZp/JmfGy0NHgrF3sw7UrydC4Bep8dLgfqQzsnDpt/Srgacu5j18fFI9RWyVZjj8IoVXRF5BHNAFKEfEyjTSKx0epGmbEPA/INd7/CLVB60oVlY=
+	t=1785854333; cv=none; b=K84IXGYxkF1CFWTvy2hesxihqx9KE0SNraUwjMOcVhuvGZ9yjos0cJ6FCmpTefHiBkUF/COv+NZ4GEH2LWpJSXOfhp74wPBpaUlJz0rINK/G2ZCUI4iJ4XUL+H83+OVYU6ujNHngiz40nMjNtYp0VRhVXLupwvyU8f98+EugEqU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785854060; c=relaxed/simple;
-	bh=cbBS4iWNcPPG+loScfyFMqof0GT57839RfkR8d+D8M4=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=VlPfIPQhHwKFo+IFFoDMNwBnQf/YlrbDW/RYiHpHM3swzVLnMvPR2EiHmP+t/ywHh857YeZqDpoQt9kC413rmp3JGdLE8jUeVyEUL2/QxYc4ILD9Xu1Zhq8rpfj55zeIx1XWNbXYq3zH5nac79JxT1urBMXjXVZ+jI0JGPxkSL0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZQnrPk/A; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785854333; c=relaxed/simple;
+	bh=hWvWfNDS/skBD4OhA9EL3ETyRxBDJj6DjHQUqTmubz8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=d/OuVcoFd+IvT1SZsPePZob3Ly4MUFqSnuZ7mmtl8ctTjvCjtvjnnQVKzgmw2e6vU7j8tDCno1bo2EEbSYBU+kQ7mvD4jxhVaRwKpXHDYGuvSSfRm3DP/wRed+au6ihAgjiDX6Bi3S0x4jCDL2kp+3XCh9j/nnHszMaTRdUR7w0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FXM6jYsw; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=BeXpB5qI; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZQnrPk/A"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68E331F00ADE
-	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 14:34:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785854047;
-	bh=cbBS4iWNcPPG+loScfyFMqof0GT57839RfkR8d+D8M4=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=ZQnrPk/A4gJm0G7Ds4mJLU8mMO+/+g5pyecJsOe8IU0As5H0HYVZH2a95KBdlUgiB
-	 3fvZLpgZnwWjUNEdCN5Q+BtnstxgRMJoQ9ms1BspAD8o6NYD4xngo60ViKP9VcbncT
-	 qmNj6Q1HSYX0YlWDdtEp9wtmhVy9bfBz7KDeyoMwttIN7USS7o9TCWbMrIIaTK1wES
-	 nNQGN4/gL90MQ5o9Bgu+wL9GJCS83YjpDEeAPdTIm4E/B6o+RAlz9rd3xM9/i13viz
-	 3o8cQZOeqink2R1doppfUI2DQIBIeNbukuWURri9Hsj6gBuSbfv07j+H5L1kdZcJWR
-	 xdhyHObDkHXBQ==
-Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-c15e2dab83eso664952766b.1
-        for <mfd@lists.linux.dev>; Tue, 04 Aug 2026 07:34:07 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rrdg0h/kWfxJutNJ3S5zd61ofCIaqP9mRoamQHYVOomEUroijQ3R53kzGL9Qm+hEuTUEh0=@lists.linux.dev
-X-Gm-Message-State: AOJu0YzovCdLL50+fkELG8ZJWtOfB55HKs9yTOs/N15uJNToOr7JJoVZ
-	/mPRIyBxrPNBxvl4bpSztLhGezKgD12YmwtpS0QuECV5hAVrKOjcBoo5fzHAzFOhD6mLVYcfvsa
-	u4AU8xPmC7+MFLJHKntFjxKn1jc/tHL0=
-X-Received: by 2002:a17:907:3e05:b0:c1c:285a:475c with SMTP id
- a640c23a62f3a-c1fe816754cmr1272883366b.10.1785854046021; Tue, 04 Aug 2026
- 07:34:06 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FXM6jYsw";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="BeXpB5qI"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 674CXKmA185333
+	for <mfd@lists.linux.dev>; Tue, 4 Aug 2026 14:38:51 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	hS0/v3JdCBgQ6Dl/MnIrfek8ytOMgtXLA+5SqCkN07Q=; b=FXM6jYswYUTszJL2
+	oTsjBa9jXqLET5yymYscfJHcvpbvj2vcJdodRrJ6nECTW6VFNpbuxYM9Do/TvuxF
+	c7I+DWyaMIEel1m+Ow5M7ruy7aMIOIjhcqe24XyIg3eZQtfDukuV+R52Fu8qXXpE
+	KtEuj9ttRfad2UGRpRGgqgqWm8zVvJ7JjeJxYierO75YzQnyUGWMf4u9DU58TJEx
+	W8L6Bu71gLiPsoBEdcbwudnH1l+c8GywMKYr1xcUOTgVO//6laf0E5FwS4j7HWIo
+	MQ04k0oVDb9RHfHVwDbOIlO+3fN4J4kCem9PmiX8TLw4/IUQUh4ZAVTHB+yAAnY2
+	hCkf8w==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fu1p4v31x-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <mfd@lists.linux.dev>; Tue, 04 Aug 2026 14:38:50 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cbb6433e9d4so6378240a12.3
+        for <mfd@lists.linux.dev>; Tue, 04 Aug 2026 07:38:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785854330; x=1786459130; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=hS0/v3JdCBgQ6Dl/MnIrfek8ytOMgtXLA+5SqCkN07Q=;
+        b=BeXpB5qIgxgKqWYsMi6fQPuTPW2LiC8H2qhf/nY22U6yq/GYxuAYQ7iqqXKW7yPAd+
+         up1OivdaJiirAenRfoGOgo5k0yggUY/HSrIABQsUadVD9WiFApZfr3oq3HUegQpWgkbh
+         JpOn30S2vWavxKSV0dSojFLrGqHf/A2igKyT2v8erfO3yzDbb12WlPQAjsuXgFSWA4Gu
+         2AmaflB2TsxM/2FfLjm3z5fRWLCu9BhkXzhVVI6SErktuOGAoGjziOPJGNzrF5nyFg/y
+         eOmxT3zsige6XJEEmh6e0TRwR0FOtuhqY31/q0+VVQK1N9dLWj7+lZ1P/oWayJ2XuTzk
+         SF4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785854330; x=1786459130;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=hS0/v3JdCBgQ6Dl/MnIrfek8ytOMgtXLA+5SqCkN07Q=;
+        b=HuI62B0w9o1WEkwOT5p4mlvrfoH+oqAmboGqhioLSpCh/sFnkMEbmKDTPrhUw9abUR
+         ynQvQK0lEMF/SvXT6N8/fsaD0mfZGUJB4q2SbGA6j5pmbXccWFKj/YyMUugFbr2m+K40
+         a33E7XzGINhOWXKC0bzWyepMWZHidYUAJkPKSn7Qq8+O/jxKtg9q/E0HpqRPdQjMQe0t
+         91J5rzt+Ld5bdpQHO8uexUy8wh5FU8addOnHA07aw5DB4d8ZYNVHWSqYYAtAM/EE//1g
+         4kpuq6G8jeMXxNr6124iyA19JawAspFjVluIYyxmxfu4f7qlz2oMwaPzykOsBv4TOoOs
+         9vrQ==
+X-Gm-Message-State: AOJu0YzZ8YdlFgEUWbtSgLwztUbqfIxovzU6g3fXcT0Nn4mlyuxlQlS/
+	aaMnHnTo9DCzfYzre3vu1wmFhB1Xein1AWwIYJG+8DbQ9TO9EC2vOCdd6GGG4BxU2DclraWKy4K
+	KdYPwkRK29JHyFgFo5q5oZnG0sdVNiKuHpLwsX6pDnjcbWv/x6w/ncJA=
+X-Gm-Gg: AR+sD11KRUXGRT750xwekECZmxormCC12sUD4ETzxSpmqIChm44xRoCZX/+cld3OSto
+	UqPyWDVip8+H35db5om854SXhwAYkio8AwLakPFRhVAnGgG7vAqd37i2OrrgYHHIDB0DxtWXiuI
+	viYno0QluKbX1vYuihX169VBjM5GSqvOGw6g+Nq/2eGAfhh0zXz9I10RCDPFAS01f+qEIV+LzS0
+	viix2ytCyZxL9S3IQVPW/kBU03YsCn2S/9vSIKYvvgVJ95p5zkjL7WQbAvk2h0bop8z5hUbAfTq
+	qZDzQgAId2YDy4zAdNOWe1uzC3HRUCXiBvW8LXc4N5Y6tyJffmG3x6QXGXwoSd2Pm9g8D1hMqPq
+	I5HB6cSWg43hCDsmQ6WRP0sGkCm8NjKk8vw==
+X-Received: by 2002:a05:6a21:d84:b0:3bf:ba48:ca88 with SMTP id adf61e73a8af0-3c92a4c977amr15755975637.15.1785854330141;
+        Tue, 04 Aug 2026 07:38:50 -0700 (PDT)
+X-Received: by 2002:a05:6a21:d84:b0:3bf:ba48:ca88 with SMTP id adf61e73a8af0-3c92a4c977amr15755924637.15.1785854329680;
+        Tue, 04 Aug 2026 07:38:49 -0700 (PDT)
+Received: from [10.218.44.82] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13fca8df89asm8023135c88.9.2026.08.04.07.38.47
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 04 Aug 2026 07:38:49 -0700 (PDT)
+Message-ID: <6cce95d2-4f2e-4148-8a66-012c58dd30a0@oss.qualcomm.com>
+Date: Tue, 4 Aug 2026 20:08:45 +0530
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260710-ls2kbmc-mod-v3-0-ef718636e78e@gmail.com>
- <CAAhV-H6kqN1+ZiTqyvXfPEtQJfvFhp_964AB9C00o0O6pigZmQ@mail.gmail.com>
- <8FCFD614-FEA4-475C-9E0C-50E075B49453@gmail.com> <CAAhV-H5wFZHN2jD-vGgNLuMqugGxwfyfq2TnK=HKyZXxZR7iRA@mail.gmail.com>
- <64E79496-E66E-45A0-B1D6-DB5466C35D46@gmail.com> <CAAhV-H6EN3K_QCd6pJ755PH7t5uUS0g-+BbRKjWr7oq7vX9ZTA@mail.gmail.com>
- <94FDE4B9-CE06-4596-9965-25A70E5A2E3F@gmail.com>
-In-Reply-To: <94FDE4B9-CE06-4596-9965-25A70E5A2E3F@gmail.com>
-From: Huacai Chen <chenhuacai@kernel.org>
-Date: Tue, 4 Aug 2026 22:33:56 +0800
-X-Gmail-Original-Message-ID: <CAAhV-H5VhwHyBtaf8uXDxiq-6-CyvC1PNsrjL3hwZ+uVuF33cg@mail.gmail.com>
-X-Gm-Features: AUfX_mwnFE8CDIpymkfU_DWLFlxsQ41JeST4qlFRGRfXlwvEYS2ZtV0tTlBno4c
-Message-ID: <CAAhV-H5VhwHyBtaf8uXDxiq-6-CyvC1PNsrjL3hwZ+uVuF33cg@mail.gmail.com>
-Subject: Re: [PATCH RFC v3 0/7] mfd: ls2kbmc: multiple fixes for this driver
-To: Miao Wang <shankerwangmiao@gmail.com>
-Cc: Binbin Zhou <zhoubinbin@loongson.cn>, Chong Qiao <qiaochong@loongson.cn>, 
-	Lee Jones <lee@kernel.org>, Corey Minyard <corey@minyard.net>, Linus Walleij <linusw@kernel.org>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Xi Ruoyao <xry111@xry111.site>, WANG Xuerui <kernel@xen0n.name>, 
-	Yinbo Zhu <zhuyinbo@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>, mfd@lists.linux.dev, 
-	linux-kernel@vger.kernel.org, linux-gpio@vger.kernel.org, 
-	openipmi-developer@lists.sourceforge.net
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v24 03/12] firmware: psci: Introduce command-based resets
+To: sashiko-reviews@lists.linux.dev
+Cc: mfd@lists.linux.dev, lee@kernel.org, robh@kernel.org, conor+dt@kernel.org,
+        devicetree@vger.kernel.org
+References: <20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com>
+ <20260803-arm-psci-system_reset2-vendor-reboots-v24-3-889281373870@oss.qualcomm.com>
+ <20260803100148.79AA61F00A3A@smtp.kernel.org>
+Content-Language: en-US
+From: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+In-Reply-To: <20260803100148.79AA61F00A3A@smtp.kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=auOCzyZV c=1 sm=1 tr=0 ts=6a71f97a cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=VwQbUJbxAAAA:8 a=tPMdJ5WBxRjLo3QbcvwA:9 a=QEXdDO2ut3YA:10
+ a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-ORIG-GUID: XdjQKvLyY5AvGz8LshpTOUCrZtVTUCxy
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA0MDExOCBTYWx0ZWRfX4cw0xv5CtALV
+ LE3G+TD9qh+DZUVIN2n5eL6DfbUvesZSDp/F3MWohyT/ECV45FHeQM0r2IWOsQpuZIJnl8VWKQo
+ /8ST+ZFx5EJmUuGfx4x6NzRuHLOWOlI=
+X-Proofpoint-GUID: XdjQKvLyY5AvGz8LshpTOUCrZtVTUCxy
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA0MDExOCBTYWx0ZWRfX42k7JcPpzW/7
+ eTRUa0Lw31sQkZCT0T228FkP22mfPKFipHzXvJCPhVTw62eibVYtosZwddfld+J1ZLUJQeAXkjZ
+ v4mzq8Z2nC8hMy3ZNRaPrAb1rnd02afXNthV7vKNIBYw+1mDfNbzfzjr6YeTqJEh8e6HaJa/247
+ E0jJp24WHImiXnUlvwetvWS9tgVH/efXVp+UVR9bnqn597/xKLw3CJlfQugilpQixB4O3W/BCD6
+ AmXkiF26nynIRRuMVi2BzzgiXZEz1+3zyefSH2YboXK2RYgjV8Y9Qiq0yYhJPZC1uqOIe44ZhHO
+ ePKUkZ9IElKvHLRCD6ROpJbPgBQZyL/r0V8dkGo1cSzTTks5Kg+WfXE6YSbvUgwIoMy/gt7qTHb
+ maLpEaDBfZ3S1sJwsEv9iY3SZRj8KcUwO8XGqB+aIX5sM4t/HEAGbCGDIeKYwVqC0PQ6Y8ysELh
+ GKP7yMSRAU/0rMZAnFg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-04_03,2026-08-03_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 spamscore=0 bulkscore=0 suspectscore=0 malwarescore=0
+ lowpriorityscore=0 clxscore=1015 phishscore=0 adultscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608040118
 
-On Tue, Aug 4, 2026 at 12:09=E2=80=AFAM Miao Wang <shankerwangmiao@gmail.co=
-m> wrote:
->
-> Hi,
->
-> > 2026=E5=B9=B48=E6=9C=883=E6=97=A5 21:45=EF=BC=8CHuacai Chen <chenhuacai=
-@kernel.org> =E5=86=99=E9=81=93=EF=BC=9A
-> >
-> > On Fri, Jul 31, 2026 at 4:24=E2=80=AFPM Miao Wang <shankerwangmiao@gmai=
-l.com> wrote:
-> >>
-> >> Hi,
-> >>
-> >>> 2026=E5=B9=B47=E6=9C=8831=E6=97=A5 16:07=EF=BC=8CHuacai Chen <chenhua=
-cai@kernel.org> =E5=86=99=E9=81=93=EF=BC=9A
-> >>>
-> >>> On Fri, Jul 24, 2026 at 5:28=E2=80=AFPM Miao Wang <shankerwangmiao@gm=
-ail.com> wrote:
-> >>>>
-> >>>> Hi,
-> >>>>
-> >>>>> 2026=E5=B9=B47=E6=9C=8824=E6=97=A5 16:55=EF=BC=8CHuacai Chen <chenh=
-uacai@kernel.org> =E5=86=99=E9=81=93=EF=BC=9A
-> >>>>>
-> >>>>> Hi, Miao,
-> >>>>>
-> >>>>> On Fri, Jul 10, 2026 at 1:24=E2=80=AFAM Miao Wang via B4 Relay
-> >>>>> <devnull+shankerwangmiao.gmail.com@kernel.org> wrote:
-> >>>>>>
-> >>>>>> Previously, the driver has been introduced to support the Loongson=
- 2K
-> >>>>>> BMC running on the Loongson Servers, which is essential to prevent
-> >>>>>> the system from hanging when the BMC is being reset and the defaul=
-t
-> >>>>>> efi-framebuffer is being used. However, there are some drawbacks i=
-n the
-> >>>>>> driver.
-> >>>>>>
-> >>>>>> Firstly, the driver tries to read and write to the connected PCI-E=
- host
-> >>>>>> controller registers, assuming that the BMC is connected to LS7A P=
-CI-E
-> >>>>>> host controller. This assumption should be true for real products,=
- but
-> >>>>>> to prevent from accidentally reading and writing to the wrong PCI-=
-E host
-> >>>>>> controller, this driver should be modified to check this before
-> >>>>>> accessing the registers.
-> >>>>>>
-> >>>>>> Secondly, the driver uses non-exported functions to tell the vt
-> >>>>>> subsystem to redraw the screen, preventing the driver from being
-> >>>>>> compiling as a module. This can be fixed by using the exported
-> >>>>>> functions instead.
-> >>>>> You can replace the redraw function, but I don't think it is necess=
-ary
-> >>>>> to make the bmc driver modular.
-> >>>>>
-> >>>>> BMC core, IPMI and simpledrm display are usually (if not always)
-> >>>>> supposed to work as early as possible.
-> >>>>
-> >>>> I believe that it should be the user's decision to choose whether to
-> >>>> compile a module into the kernel or as a module and it would be bett=
-er
-> >>>> if we can provide the possibilities for the user to choose from.
-> >>>> Additionally, I don't think these modules are supposed to work that
-> >>>> early. The mfd module provide two functions, the display and the ipm=
-i
-> >>>> device. In the aspect of graphical display, without this module, the
-> >>>> user can still see the output during booting on their monitors, sinc=
-e
-> >>>> efifb is working, providing a basic display function. In the aspect =
-of
-> >>>> the ipmi device, I don't think the lack of such device will influenc=
-e
-> >>>> the boot of the system, since it is a common practice to compile ipm=
-i
-> >>>> device drivers as modules on other architectures. As a result, neith=
-er
-> >>>> of the two functions are required to be loaded that early and it is
-> >>>> reasonable to at lease leave the choice to compile it as a module
-> >>>> to the user.
-> >>> Flexibility is not always useful, if a config doesn't provide good
-> >>> effect, then it just increases complexity and makes maintenance more
-> >>> difficult.
-> >>
-> >> I should emphasize that to allow this driver to be a module, there is
-> >> no such increase on maintenance. Moreover, not all loongarch machines
-> >> are requiring this driver. Especially only a part of the server models
-> >> are quipped with this BMC. Comparing with other architectures, the
-> >> driver for BMC are normally compiled as a module, such as mgag200 for
-> >> iLO from HPE and iDRAC from DELL, hibmc_drm for Kunpeng server from
-> >> Huawei. None of these BMC drivers requiring to be compiled into the
-> >> kernel. I cannot see there is any reason keeping the driver from being
-> >> allowed to be compiled as a module. I also do not think it will bring
-> >> any significant maintenance burden. Implementing correct cleanup code
-> >> should be necessary instead of burden.
-> > Can we split into two series, one fix bugs and the others make bmc modu=
-lar?
-> >
-> > Otherwise I don't think we can reach a consensus in the near future.
->
-> I accept different opinions on design trade-offs. However, I don't think
-> you have provided enough excuses to remain this driver as built-in,
-> since I believe normally in kernel, most non-core drivers are all able
-> to be compiled as a module. I also provided some examples from devices
-> with similar functions. As a result, I'll not split this series before
-> there is indeed a strong reason against allowing this driver to be
-> compiled as a module or we may have a great benefit if we force this
-> module to be compiled built-in.
-At least you should remove the first patch from this series. Binbin
-Zhou has been fixing it:
-https://lore.kernel.org/loongarch/20260616115530.4012675-1-zhoubinbin@loong=
-son.cn/
-https://lore.kernel.org/loongarch/20260624085550.1508771-1-zhoubinbin@loong=
-son.cn/
-https://lore.kernel.org/loongarch/20260706021909.2346535-1-zhoubinbin@loong=
-son.cn/
 
-Huacai
 
->
-> Cheers,
->
-> Miao Wang
+On 8/3/2026 3:31 PM, sashiko-bot@kernel.org wrote:
+> Thank you for your contribution! Sashiko AI review found 4 potential issue(s) to consider:
+> - [High] Custom PSCI reset commands are completely ignored on standard normal reboots due to an incorrect NULL check on the restart command string (`data`).
+> - [High] The 64-bit vendor reset `cookie` is silently truncated to 32 bits on 32-bit ARM architectures, violating the PSCI SMC32 calling convention.
+> - [Medium] The `psci_set_reset_cmd` API cannot be used by modular drivers because it is not exported.
+> - [Low] `psci_set_reset_cmd()` does not validate that a non-zero `reset_type` has the vendor-specific bit set.
+> --
+
+[snip..]
+
+>> + *
+>> + * For vendor-specific SYSTEM_RESET2 resets, @reset_type and @cookie
+>> + * must contain platform-defined values.
+>> + *
+>> + * For standard resets, @reset_type must be 0 and @cookie must be a
+>> + * value from enum psci_standard_resets.
+>> + *
+>> + * The reset command may be configured only once per boot cycle.
+>> + */
+>> +int psci_set_reset_cmd(u32 reset_type, u64 cookie)
+>> +{
+>> +	if (!reset_type && !cookie)
+>> +		return -EINVAL;
+> 
+> [Severity: Low]
+> Does this function need to validate that a non-zero reset_type has the
+> vendor-specific bit (PSCI_1_1_RESET_TYPE_VENDOR_START) set?
+> 
+> If a caller erroneously passes a reset_type that is greater than 0 but
+> lacks this bit, it is stored successfully but will be silently ignored
+> during reboot in psci_handle_reset_cmd(). Rejecting it here with -EINVAL
+> might prevent silent runtime failures.
+
+Setting proper command is caller responsibility. In case a unsupported 
+command is sent, it will be ignored in final reset.
+
+> 
+>> +
+>> +	scoped_guard(mutex, &reset_cmd_mutex) {
+>> +		if (reset_cmd)
+>> +			return -EBUSY;
+>> +
+>> +		reset_cmd_data.reset_type = reset_type;
+>> +		reset_cmd_data.cookie = cookie;
+>> +		/*
+>> +		 * Publish the command only after both fields are fully initialized.
+>> +		 * Readers run from the atomic restart notifier path and must not block.
+>> +		 */
+>> +		smp_store_release(&reset_cmd, &reset_cmd_data);
+>> +	}
+>> +
+>> +	return 0;
+>> +}
+> 
+> [Severity: Medium]
+> Is this missing an EXPORT_SYMBOL_GPL?
+> 
+> Reboot-mode drivers are often configured as loadable kernel modules (e.g.,
+> CONFIG_REBOOT_MODE=m), and without an export, they will fail to link against
+> this new API.
+
+This call is expected to be called only by psci-reboot-mode for now.
+
+> 
+> [ ... ]
+>> +static void psci_handle_reset_cmd(const struct psci_system_reset_cmd *cmd)
+>> +{
+>> +	u32 psci_sys_reset_fn;
+>> +
+>> +	/* PSCI_1_1_RESET_TYPE_VENDOR_START identifies vendor reset types. */
+>> +	if ((cmd->reset_type & PSCI_1_1_RESET_TYPE_VENDOR_START) &&
+>> +	    psci_system_reset2_supported) {
+>> +		/* PSCI SYSTEM_RESET2 Vendor-specific reset */
+>> +		invoke_psci_fn(PSCI_FN_NATIVE(1_1, SYSTEM_RESET2),
+>> +			       cmd->reset_type, cmd->cookie, 0);
+> 
+> [Severity: High]
+> Will this silently truncate the 64-bit cmd->cookie on 32-bit ARM
+> architectures?
+> 
+> Because invoke_psci_fn() takes arguments of type unsigned long, the C
+> compiler will cast the u64 cookie to 32 bits. Under the SMC32 calling
+> convention for SYSTEM_RESET2, the secure monitor expects the 64-bit cookie
+> passed across two 32-bit registers (r2 and r3).
+> 
+> Here, it seems r3 will receive 0 because it is passed as the fourth argument,
+> corrupting the hardware communication for vendor-specific resets that rely on
+> the upper 32 bits.
+
+will review if this needs to be taken care.
+
+> 
+>> +	} else {
+>> +		/* Retrieve the psci reset function from reset_cmd */
+>> +		psci_sys_reset_fn = psci_get_sys_reset_fn(cmd);
+>> +		if (!cmd->reset_type && psci_sys_reset_fn)
+>> +			invoke_psci_fn(psci_sys_reset_fn, 0, 0, 0);
+>> +	}
+>> +}
+> [ ... ]
+>> +static int psci_sys_reset(struct notifier_block *nb, unsigned long action,
+>> +			  void *data)
+>> +{
+>> +	const struct psci_system_reset_cmd *cmd;
+>> +
+>> +	/* The function psci_handle_reboot_mode follows reboot_mode based
+>> +	 * reset flow and psci_handle_reset_cmd uses reset_cmd based reset flow.
+>> +	 *
+>> +	 * The reset_cmd is configured at the reboot_notifier phase.
+>> +	 * If panic() or emergency_restart() occurs between the reboot_notifier
+>> +	 * and this final reset, skip command-based reset and let reboot_mode drive
+>> +	 * the reset flow.
+>> +	 *
+>> +	 * The function psci_handle_reset_cmd invokes non-returning PSCI SYSTEM_RESET
+>> +	 * calls to reset the device. If it returns, either the reset failed, or the
+>> +	 * command was unsupported. Fallback to reboot_mode based reset flow.
+>> +	 */
+>> +	cmd = smp_load_acquire(&reset_cmd);
+>> +	if (data && cmd && !panic_in_progress())
+>> +		psci_handle_reset_cmd(cmd);
+> 
+> [Severity: High]
+> Are custom reset commands completely ignored on standard normal reboots
+> due to the "data &&" check?
+> 
+> A standard user-initiated reboot (e.g., executing the reboot command without
+> arguments) invokes sys_reboot(LINUX_REBOOT_CMD_RESTART), which ultimately
+> calls kernel_restart(NULL). This passes NULL down the notifier chain, resulting
+> in data == NULL in psci_sys_reset().
+> 
+> Because of this check, the custom command path appears to be skipped entirely,
+> forcing a fallback to the default behavior and defeating the purpose of
+> setting a custom command for standard reboots.
+
+Yes. If a custom command is set in reboot notifier and data is NULL 
+psci_sys_reset, then we are either in panic or in a emergency_restart. 
+In both cases, custom reboots are skipped.
+
+thanks,
+Shivendra
