@@ -1,44 +1,43 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BF1746D54D;
-	Tue,  4 Aug 2026 15:44:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1CEB38424D
+	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 15:48:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785858293; cv=none; b=J0VZlPQb5jsvOt0r+H9oPyZ4c+Gh+31vXfGkWli2baYNIONPUKdQx+VWbQfDfrDfQguv4PNsigdZZNj35tEqXl58m26T0tRGP5LX57ClWb791SgTHbzKYJ5nx4iocrwrUXyTTnuidfylgkHJkPcd5sgzLfejTrJ0mZC4nqvQYZI=
+	t=1785858505; cv=none; b=oF8SgB+iG64KncDIm73QIH5g8J42OnLEnUo7W1uTChkXPGiF7AmBYMrB2uTWmPxdaY515Ncs+KbjuHFE8KsVdqb0mXcZxQ0OigDNpPiuVF/lOoGTjLfplRhjg7rwVKYPrMp83dJqmlu0LE4L0N5DJYFiopNZhiVIZ0DWmFHe64s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785858293; c=relaxed/simple;
-	bh=ov1fuU2kULc3aC9n2F1tFHTkl3JOt9ZjiDNbYDn2I18=;
+	s=arc-20240116; t=1785858505; c=relaxed/simple;
+	bh=SuyMuXpXC5nv06p3mfIttc1S4julIZAF78WaYrF45UA=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=HtETsyERQyslOOQouTpSTGGpv3bo+LtmTfuTPAp0ZHbqEAJWB0UU/877hcChoH+DrX+IWN3+4lBjPpyfVxCOJ20m34m0hMiwZl246Cfzw6cRhcP7uVamrt5JTcT+Ed9rtHQ6VWnvLcPmRv1wunKjtAzJIYvSO1W/d5KRnDmP/Gs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QS40euDI; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=PdlPEtc7Z/wxus5I0YEhqwkL2XBFwTaidQ4G44Pn7ImeD7nIManq8fU7DYBHPu3rK8mIImAeqIa4HNLjxG7Q+pMlApl+4OtgxtwRMmYi8TAQgp1vO30A0GJTj82wHd6b6516qJC+0xj/vhdt9aoSvbvBNkra2m1h4waeZ89Vuck=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gSjS9aSB; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QS40euDI"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83A1A1F00A3A;
-	Tue,  4 Aug 2026 15:44:49 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gSjS9aSB"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 458301F000E9;
+	Tue,  4 Aug 2026 15:48:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785858289;
-	bh=aN8bu0MartePY6VmwJrJwuYq6VC49S2KVlAlST0+86s=;
+	s=k20260515; t=1785858504;
+	bh=GDdDICInNww0bEerXQdg3atOTvcuXmRe5YifG0YiFVY=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=QS40euDIIzjfkYGdJcs2elWRvL4iv1QH2HZUcIRO77xyuiff5q8Q6h9MkWGzK1Kp0
-	 E6HRzSLrdPlOinY7r/UlPV2Indg7lNcjZWUS6kYJ3v66F+QqJboUdgkDwEZziHtMc/
-	 +VpJcfIkzxb2+xNi80PXTww6Mc6SKKIXksttCOtIHd8OxkSrANLNBb3GVVsuoj9HTa
-	 6wy4/OY86S+M0DZ+BEmLh7z/K2mCLp6zoPr81vKmPiKVJvn0tD60ce3GldL/t2k+hX
-	 9TKSIKcJ0rg7OL3d0qS8CboYr1guPy2gD5NXzJ1X41exTbWyj23LBv1UkB1zjSr3FD
-	 CR4tL1f0A4n3w==
+	b=gSjS9aSB2BP2U7meyqsRvh+qRKwiDI1rg/Gj7IDL3GbVuS8moCJ6RafR7zhQCZiaO
+	 zjvTCRaCtz/OwKQE6y4yf/CCKMEA1ETuTk+vCjsDvofBYrDpIaP0G6dysnUCD6cFnU
+	 PPo/rTVwj9+nVvsLlieOmiQSBpGBjaXZOgHacEFaBqXv/Bwk1oYc2l6+NnT3l2FwWi
+	 CjpF/EwVUMoEhosMkKlOrZw4vb+5KdDBgAMkHhjEMtT9A7pw+FiPM3ViS5T23vSzpX
+	 Fw6thqq6D+QajK/INJoBq6d+AIJM5paZ2uk362+okpKhdtUDcxAcBCjumTFX+HmeEh
+	 AanAtjlIBcCsg==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 05/10] dt-bindings: mfd: netronix,ntxec: Use generic
- power-controller schema
+Subject: Re: [PATCH 3/4] mfd: cgbc: Add virtual I2C bus support
 Reply-To: sashiko-reviews@lists.linux.dev
-To: =?utf-8?b?UGVuZyBGYW4gKE9TUyk=?= <peng.fan@oss.nxp.com>
-Cc: conor+dt@kernel.org, mfd@lists.linux.dev, robh@kernel.org, lee@kernel.org, devicetree@vger.kernel.org
-In-Reply-To: <20260804-mfd-syspower-v1-5-a440783c2e78@nxp.com>
-References: <20260804-mfd-syspower-v1-0-a440783c2e78@nxp.com>
- <20260804-mfd-syspower-v1-5-a440783c2e78@nxp.com>
+To: =?utf-8?b?VGhvbWFzIFJpY2hhcmQgKGNvbmdhdGVjIEdtYkgp?= <thomas.richard@bootlin.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20260804-cgbc-i2c-storage-devices-support-v1-3-fed38510671c@bootlin.com>
+References: <20260804-cgbc-i2c-storage-devices-support-v1-0-fed38510671c@bootlin.com>
+ <20260804-cgbc-i2c-storage-devices-support-v1-3-fed38510671c@bootlin.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 04 Aug 2026 15:44:49 +0000
-Message-Id: <20260804154449.83A1A1F00A3A@smtp.kernel.org>
+Date: Tue, 04 Aug 2026 15:48:23 +0000
+Message-Id: <20260804154824.458301F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -47,48 +46,36 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
 Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
-- [Low] The patch introduces a schema `$ref` to `/schemas/power/power-contr=
-oller.yaml#`, which does not exist in the source tree, breaking schema vali=
-dation.
+- [Low] Hard-coded cell IDs are used for the newly added `cgbc-i2c` subdevi=
+ce instead of `PLATFORM_DEVID_AUTO`.
 --
 
---- Patch [5]: [PATCH 05/10] dt-bindings: mfd: netronix,ntxec: Use generic =
-power-controller schema ---
-commit c8d8d2474f8ae06d3e1689a3ed174b683577d897
-Author: Peng Fan <peng.fan@nxp.com>
+--- Patch [3]: [PATCH 3/4] mfd: cgbc: Add virtual I2C bus support ---
+commit 4f0038d5dc42bfd45540675cdbf89f68ab3673d5
+Author: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
 
-dt-bindings: mfd: netronix,ntxec: Use generic power-controller schema
-   =20
-This commit updates the netronix,ntxec binding to use the generic
-power-controller schema by adding a reference to power-controller.yaml
-and removing the locally defined system-power-controller property.
+mfd: cgbc: Add virtual I2C bus support
 
-> diff --git a/Documentation/devicetree/bindings/mfd/netronix,ntxec.yaml b/=
-Documentation/devicetree/bindings/mfd/netronix,ntxec.yaml
-> index 37fbb953ea12e..2fa8b797c0dcf 100644
-> --- a/Documentation/devicetree/bindings/mfd/netronix,ntxec.yaml
-> +++ b/Documentation/devicetree/bindings/mfd/netronix,ntxec.yaml
-> @@ -13,6 +13,9 @@ description: |
->    This EC is found in e-book readers of multiple brands (e.g. Kobo, Toli=
-no), and
->    is typically implemented as a TI MSP430 microcontroller.
-> =20
-> +allOf:
-> +  - $ref: /schemas/power/power-controller.yaml#
+This commit adds a new I2C cell to support the internal virtual I2C bus=20
+provided by the Board Controller.
+
+> diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
+> index 4a409234e66c8..81bd0a381ca13 100644
+> --- a/drivers/mfd/cgbc-core.c
+> +++ b/drivers/mfd/cgbc-core.c
+> @@ -240,6 +240,7 @@ static struct mfd_cell cgbc_devs[] =3D {
+>  	{ .name =3D "cgbc-gpio"	},
+>  	{ .name =3D "cgbc-i2c", .id =3D 1 },
+>  	{ .name =3D "cgbc-i2c", .id =3D 2 },
+> +	{ .name =3D "cgbc-i2c", .id =3D 3 },
 
 [Severity: Low]
-Does power-controller.yaml exist in the kernel tree at this commit?=20
+Should this use PLATFORM_DEVID_AUTO instead of hard-coding the cell ID?
 
-It appears the generic power controller schema might still be a .txt file.
-Referencing a non-existent YAML file causes the dt_binding_check target to
-fail with an unresolved reference error.=20
-
-Additionally, because unevaluatedProperties is set to false in this binding,
-failing to resolve the schema means the system-power-controller property
-used in the example will be flagged as an invalid property.
-
-[ ... ]
+>  	{ .name =3D "cgbc-hwmon"	},
+>  	{ .name =3D "cgbc-backlight" },
+>  };
 
 --=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260804-mfd-syspow=
-er-v1-0-a440783c2e78@nxp.com?part=3D5
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260804-cgbc-i2c-s=
+torage-devices-support-v1-0-fed38510671c@bootlin.com?part=3D3
