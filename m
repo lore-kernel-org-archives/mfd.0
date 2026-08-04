@@ -1,38 +1,38 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BB923B27F5;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BCD93F44E2;
 	Tue,  4 Aug 2026 19:14:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785870874; cv=none; b=JIpJLNndOZH15Z8+1sWtK+l2LA3wPFwczx78ausaVPD7nEfUwXiFcO+eTuvi7Jt5h3RJrD1fueEvDxPXdCcVoEsOhuZOj5cS5hNIdy7TWZKdr5evBmKX7ziwjbPuFUeg+JVT3rVptbzuEz8z3fPpkkd5IUWLvdU2sXr4oo2wW4c=
+	t=1785870874; cv=none; b=nBqz5OyYzY7dUWpWDFEVyPwBwkyt5+m5Yqzl2t0XXM8aIgJZZaqxMQaIxB+3ndr7eMUVnGRG4d85PJTbEMV8EUJU0H1RQcG2f0Ccace9jcZjFiO0C+TPyqiSjD5l3lWCPGPlC6a64MuWAkGVPjN8O5c7eBldCh3MidZQUI9J4HY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1785870874; c=relaxed/simple;
-	bh=0gStX5aswa2Oy8OyS3h4jCJzOiKQDmU95lX8+cL9t00=;
+	bh=ehRRwOjr5rvL9ll38epbp5w7dw7xqUR8OpqKs2J2CGI=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=X3ZQg7WSuAjTNxzvuXt45WHPkpmobN2CLQIzwoAeGJ3FXtxRYPVREbS41tEwakR/CubvkB03Rm5lnPryARAUsJpcpiBoQzrCvN8HAbS7kXw6EB/FX5+9ZdNMz0+bHg28LMhfC5kyYARCxLBKwBwdtR097KVRLZ3LN76O9Sqf4Mg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cFtZwXij; arc=none smtp.client-ip=10.30.226.201
+	 In-Reply-To:To:Cc; b=WGE0ACZxCwRMio0rfaeQO0jkEhX8EQvzTyOCMMAwuYglGwSEdfQcTvy2sFIdI14Vv4CAVwORaRQRf004wgWqJwj1DLdl8o84NXtbVUD5dfK/VabnE0yYrRLCIdj4phsBvxCzsXNA944uWqJm7/zA+BuyMNER4qUnXhDwE6TSvU4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JQQksl5N; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cFtZwXij"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 2FB69C2BCF5;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JQQksl5N"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 4525AC4AF0C;
 	Tue,  4 Aug 2026 19:14:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1785870874;
-	bh=0gStX5aswa2Oy8OyS3h4jCJzOiKQDmU95lX8+cL9t00=;
+	bh=ehRRwOjr5rvL9ll38epbp5w7dw7xqUR8OpqKs2J2CGI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=cFtZwXijD/rxOvSPQaKZXKOleYwt01INfZGEd57dikH+N8a3SjkuACJTRWFDwOOJ0
-	 fZwsOe/TcQR9UXeoT78jA0QL6Y5h3cdxWk1HS0+HC+0d6bh+j42Wp6jYlzO3qO0yL+
-	 flIhGOb6S9JtPbMTuuGXPYIw/kbM+maS2hPD0rysdBpCmpUoXkNGeyDAb0UxIK30qy
-	 +l/isswjRWDqZbj+1FwLa/GYIfTUOc2YAGZ6LrYlC4/e02GZBv1KXSsKD0zXyPPe9/
-	 qPhIqeO8CMgyK2Rb22TPcTe4cgh7kKLPHvS+tSlCsV/anPhlDL0yyTyss7qfF0WW3Z
-	 aaCQB92hExJmg==
+	b=JQQksl5NDVrz+gA2DVY9oE0KpfxjjEZHNiH4G+Dnt60optUTvYVnktTjGmq42axHV
+	 gsX3Fsu8Cz0rnvyKlcihzrZnJTFuiiw1KageYsRDR9L9/0GStMMdWKjUJV6aFHT3yc
+	 Z16I78wWbXIWEhuLcpFoIS6h3/qRbDY3dw+B444FfCzkHWHmRAmUR6VOhUVZX2aTDp
+	 zp5WVLmDvrRopZ+ztIhieQQrGeK0vA5lJn0rIpjKaJqD1MJb3kIt6LIa5b02BCyoxr
+	 G3S7rNU2CV0dphrCyCG+8A4yQ4M7yuSA+6rfQQPjyaGgdQSa5RTGN+BlFQzmgjgXym
+	 erS4sNpVkgcZQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11BEEC55822;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20FB4C55184;
 	Tue,  4 Aug 2026 19:14:34 +0000 (UTC)
 From: Miao Wang via B4 Relay <devnull+shankerwangmiao.gmail.com@kernel.org>
-Date: Wed, 05 Aug 2026 03:14:19 +0800
-Subject: [PATCH RFC v6 1/7] mfd: ls2kbmc: Make a copy when parsing mode
- string
+Date: Wed, 05 Aug 2026 03:14:20 +0800
+Subject: [PATCH RFC v6 2/7] mfd: ls2kbmc: Sanity check for the connected
+ pci port
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -41,7 +41,7 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260805-ls2kbmc-mod-v6-1-16ccde412d86@gmail.com>
+Message-Id: <20260805-ls2kbmc-mod-v6-2-16ccde412d86@gmail.com>
 References: <20260805-ls2kbmc-mod-v6-0-16ccde412d86@gmail.com>
 In-Reply-To: <20260805-ls2kbmc-mod-v6-0-16ccde412d86@gmail.com>
 To: Binbin Zhou <zhoubinbin@loongson.cn>, 
@@ -54,21 +54,21 @@ Cc: Xi Ruoyao <xry111@xry111.site>, WANG Xuerui <kernel@xen0n.name>,
  linux-gpio@vger.kernel.org, openipmi-developer@lists.sourceforge.net, 
  Miao Wang <shankerwangmiao@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2609;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2625;
  i=shankerwangmiao@gmail.com; s=20250715; h=from:subject:message-id;
- bh=U6cr9tgtHDx0WKodEY4FvK4JRMLlLLDCHMpw0TehXDs=;
- b=owEBbQKS/ZANAwAKAbAx48p7/tluAcsmYgBqcjoXAIlTsV17FkSwaO5PMin8sRqt+4AxAmMxr
- 1OH2mR3rvOJAjMEAAEKAB0WIQREqPWPgPJBxluezBOwMePKe/7ZbgUCanI6FwAKCRCwMePKe/7Z
- btadD/9hTe+oj0gZl4mLlDWhZuHUg+ikGyXw9m3mhvedwqYJVckl9CUNObixytNroc3WPQ5Mpo6
- eeF+NrmkkP42tWaZhZ6gfjTONHR5hD+g5gizI9UlyFbVtYphasiiTmuEDTlw73UJwYYogdEZkKJ
- l6RY+RkxMWXvRQqXJfHIvf7t+gfXYdyhqiNUhb65MztO5JjBM5rI/Xnf7AqBWHU2yOnUZ7gfX90
- 3UO71KsAR5mLR7TEQb0fG7Wl/A3soaPGFTfQhZWP3KQH0Bof+2de9StC2N7pNmPUV/DkGyRfKWE
- ouLKSppp9N7C6pZ7tU4w1nsojo/BXizakMnExfW/A/ecH4GwUhb18n/7hD11Glwr45EVBWOliEh
- ijG0K6Qtwwfo2tpg1qP2Jz/Ua5J50BnKTInaMR+/40fCy7eap+LS4Fv3S3SJaJzgvx25I39AU+B
- B9bdhpOjd7PrHXVciCkkebCgYr0UAKGOkh64bOLAiinrf0PrztR1o3UgKP7rpSA4wO9PYsbOmkA
- AG9fI8aMSkNS74lNZuIzb80apVN8uU/NPMqns3qvhVp7lPYa2OVM7oNPpTwESH+vXEqLEZwvz7z
- 5YZ72ylgl+ttGw7cgWkmY5KH2o2bNX84QCRhJrCkVE2x7qI1UebPR8WcPUoElWIDG6tRlr6o7Zr
- qZFdoPUY//rxCqg==
+ bh=oufFMpAEKeHSvtXxvdMyphQB5j62aoxVcKbqW/18KeU=;
+ b=owEBbQKS/ZANAwAKAbAx48p7/tluAcsmYgBqcjoXBrqMsf+3WA//Isvd+tQeSt5gb+cG0aevq
+ iF4TPh2YPOJAjMEAAEKAB0WIQREqPWPgPJBxluezBOwMePKe/7ZbgUCanI6FwAKCRCwMePKe/7Z
+ bpjqD/45lT6z9eynQ7HELKxgVtQ78gLUcYGDBqrXysKlLXS7kaLbLi9Z7okfAQGULj1c3sHRT64
+ MP3FS1WHQ5PUfbie9+onctsBolGSsIpQ9NxWeX6mvYiLSVOGQmqCUhDWAG4P24dRZLhhMhjc+UA
+ Kv/WoFzYcuBsc4TouaWzFI1Y9/DFeIagA9Ge3zjAscv+VPcaLcN2IyAtH34zeEiTS7P/LEuN6da
+ RqOkQ2RI4T7oO4sZdV7Z4VabU4rUNBdNMZ7Tknuyhnm9M9dy7lsR25mNr8oyOFvXqX2LAOV9GVn
+ td3UjSxDAruVAi3yXOLTJUYNqUtOV+0VNs0lLWNShuWJRWhoDeUTV4L5CklqTSKXWXH1HSY2wof
+ IAVQVH3b/nqJwLKk7/+drlFtJ0r6MTJmp7HAvCIOUIWrZ8U9Dfscd8M7Tgb5Cug3Ybtlwtt5NwK
+ I1N/XDSvN6YlMmYF0tIS0ijoZxXyIsfrqEXVVUGi+EJ0fJx0C/VyJkz/leHp21heozBK1jzkaPt
+ UC253l76ZWQSm5sDIkKqIdT3B9I8VTfCwrKtaFWvEaLD2uLTraj9ZZRVBHvrhxsDqOGTy9+ER4T
+ be8JHlu3z/rKXsjSd8yOIrK9I7eIpfgJ1wMl+PCm6Z2IVvyVM+TTqt59VSpFIqa7t4gPCX1bRbV
+ dhj+qqTX/0X46Ow==
 X-Developer-Key: i=shankerwangmiao@gmail.com; a=openpgp;
  fpr=6FAEFF06B7D212A774C60BFDFA0D166D6632EF4A
 X-Endpoint-Received: by B4 Relay for shankerwangmiao@gmail.com/20250715
@@ -78,83 +78,74 @@ Reply-To: shankerwangmiao@gmail.com
 
 From: Miao Wang <shankerwangmiao@gmail.com>
 
-When parsing the mode string from BMC, the string is manipulated
-in-place with strsep(), preventing from parsing it again. Make a copy of
-the original string and manipulate the copy instead to fix this.
+When the bmc resets, the recovery procedure require to reconfigure the
+parent device. The driver assumes that the parent device should be LS7A.
+Add a sanity check on initialization to ensure this and prevent from
+accidentally operating on non-LS7A ports.
 
-Fixes: 0d64f6d1ffe9 ("mfd: ls2kbmc: Introduce Loongson-2K BMC core driver")
+Fixes: d952bba3fbb5 ("mfd: ls2kbmc: Add Loongson-2K BMC reset function support")
 Signed-off-by: Miao Wang <shankerwangmiao@gmail.com>
 ---
- drivers/mfd/ls2k-bmc-core.c | 36 ++++++++++++++++++++++++++++--------
- 1 file changed, 28 insertions(+), 8 deletions(-)
+ drivers/mfd/ls2k-bmc-core.c | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
 diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-index 408056bfb2fe757a5bde43775a483a48352e706d..fc9695eedd3662ac92ff116811bb07bff1c994ea 100644
+index fc9695eedd3662ac92ff116811bb07bff1c994ea..a9a30611dde9e31cd86ff67b1d6e02bf67b34755 100644
 --- a/drivers/mfd/ls2k-bmc-core.c
 +++ b/drivers/mfd/ls2k-bmc-core.c
-@@ -427,34 +427,54 @@ static int ls2k_bmc_init(struct ls2k_bmc_ddata *ddata)
-  */
- static int ls2k_bmc_parse_mode(struct pci_dev *pdev, struct simplefb_platform_data *pd)
- {
--	char *mode;
-+	/* Assume 64 bytes is enough for the resolution string */
-+	char mode_buf[64], mode_buf_orig[64];
-+	char *mode = mode_buf;
-+	const void __iomem *mode_base;
- 	int depth, ret;
+@@ -35,6 +35,15 @@
+ #define LS2K_IPMI3_RES_START		(LS2K_IPMI2_RES_START + LS2K_IPMI_RES_SIZE)
+ #define LS2K_IPMI4_RES_START		(LS2K_IPMI3_RES_START + LS2K_IPMI_RES_SIZE)
  
- 	/* The last 16M of PCI BAR0 is used to store the resolution string. */
--	mode = devm_ioremap(&pdev->dev, pci_resource_start(pdev, 0) + SZ_16M, SZ_16M);
--	if (!mode)
-+	mode_base = ioremap(pci_resource_start(pdev, 0) + SZ_16M,
-+			    sizeof(mode_buf));
-+	if (!mode_base)
- 		return -ENOMEM;
-+	memcpy_fromio(mode_buf, mode_base, sizeof(mode_buf) - 1);
-+	mode_buf[sizeof(mode_buf) - 1] = '\0';
-+	iounmap((void __iomem *)mode_base);
-+	memcpy(mode_buf_orig, mode_buf, sizeof(mode_buf_orig));
- 
- 	/* The resolution field starts with the flag "video=". */
- 	if (!strncmp(mode, "video=", 6))
- 		mode = mode + 6;
- 
--	ret = kstrtoint(strsep(&mode, "x"), 10, &pd->width);
-+	ret = kstrtouint(strsep(&mode, "x"), 10, &pd->width);
- 	if (ret)
--		return ret;
-+		goto invalid_mode;
- 
--	ret = kstrtoint(strsep(&mode, "-"), 10, &pd->height);
-+	if (mode == NULL) {
-+		ret = -EINVAL;
-+		goto invalid_mode;
-+	}
-+	ret = kstrtouint(strsep(&mode, "-"), 10, &pd->height);
- 	if (ret)
--		return ret;
-+		goto invalid_mode;
- 
-+	if (mode == NULL) {
-+		ret = -EINVAL;
-+		goto invalid_mode;
-+	}
- 	ret = kstrtoint(strsep(&mode, "@"), 10, &depth);
- 	if (ret)
--		return ret;
-+		goto invalid_mode;
- 
- 	pd->stride = pd->width * depth / 8;
- 	pd->format = depth == 32 ? "a8r8g8b8" : "r5g6b5";
- 
- 	return 0;
++/* LS7A port Device IDs */
++#define DEV_LS7A1K_PCIE_PORT0	0x7a09
++#define DEV_LS7A1K_PCIE_PORT1	0x7a19
++#define DEV_LS7A1K_PCIE_PORT2	0x7a29
++#define DEV_LS7A2K_PCIE_PORT0	0x7a39
++#define DEV_LS7A2K_PCIE_PORT1	0x7a49
++#define DEV_LS7A2K_PCIE_PORT2	0x7a59
++#define DEV_LS7A2K_PCIE_PORT3	0x7a69
 +
-+invalid_mode:
-+	dev_err(&pdev->dev, "Invalid resolution string: %s\n", mode_buf_orig);
-+	return ret;
+ #define LS7A_PCI_CFG_SIZE		0x100
+ 
+ /* LS7A bridge registers */
+@@ -477,6 +486,24 @@ static int ls2k_bmc_parse_mode(struct pci_dev *pdev, struct simplefb_platform_da
+ 	return ret;
  }
  
++static const struct pci_device_id ls7a_ports[] = {
++	{ PCI_DEVICE(PCI_VENDOR_ID_LOONGSON, DEV_LS7A1K_PCIE_PORT0) },
++	{ PCI_DEVICE(PCI_VENDOR_ID_LOONGSON, DEV_LS7A1K_PCIE_PORT1) },
++	{ PCI_DEVICE(PCI_VENDOR_ID_LOONGSON, DEV_LS7A1K_PCIE_PORT2) },
++	{ PCI_DEVICE(PCI_VENDOR_ID_LOONGSON, DEV_LS7A2K_PCIE_PORT0) },
++	{ PCI_DEVICE(PCI_VENDOR_ID_LOONGSON, DEV_LS7A2K_PCIE_PORT1) },
++	{ PCI_DEVICE(PCI_VENDOR_ID_LOONGSON, DEV_LS7A2K_PCIE_PORT2) },
++	{ PCI_DEVICE(PCI_VENDOR_ID_LOONGSON, DEV_LS7A2K_PCIE_PORT3) },
++	{ }
++};
++
++static bool ls2k_check_parent(struct pci_dev *dev)
++{
++	struct pci_dev *parent = dev->bus->self;
++
++	return parent && pci_match_id(ls7a_ports, parent) != NULL;
++}
++
  static int ls2k_bmc_probe(struct pci_dev *dev, const struct pci_device_id *id)
+ {
+ 	struct simplefb_platform_data pd;
+@@ -488,6 +515,11 @@ static int ls2k_bmc_probe(struct pci_dev *dev, const struct pci_device_id *id)
+ 	if (ret)
+ 		return ret;
+ 
++	if (!ls2k_check_parent(dev)) {
++		dev_err(&dev->dev, "Expected to be connected to LS7A PCI-E port\n");
++		return -ENODEV;
++	}
++
+ 	ddata = devm_kzalloc(&dev->dev, sizeof(*ddata), GFP_KERNEL);
+ 	if (!ddata)
+ 		return -ENOMEM;
 
 -- 
 2.49.0
