@@ -1,140 +1,166 @@
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B19542AF9D
-	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 07:49:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.218.45
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785829797; cv=pass; b=pngWgbSevGYP7TB1B2lZptPwmYoxUI2nZwSqjok22/nlvCnMSXQ6IYvWO0XirGL2OfMGAj7GO1ce9Pol4SdqZgzDOXkDpfKCViEgxG1WSY0G4ZAkyyNK9nh7yz1PIytHIa6DctjRjKRIK/HV5bAF/uHMrD0hjWUiOvxbqUFHIYs=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785829797; c=relaxed/simple;
-	bh=OmWlM/JGJt4Vhs83DOiTTiO0UFaa1QDbwgGwrj5GUKU=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=rLNFUUVcDWG8NMF19maLfe5CgSuJI/54QMGGa9CXmfmR7gz9mCdYfe14R2fuo02Ee70OC0Hkvv6DOt/TiCiggKuvZLNJQEh+VSpepgG9/tRVcRqYRCQhWDGI8At5fAuDagRIUl/bEcMmdluWROB/5R20/fqaNkXs8sK471GKv8k=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hVkMjXbn; arc=pass smtp.client-ip=209.85.218.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68FB13EBF0C
+	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 09:40:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.177
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785836435; cv=none; b=QFP/MDRIBKKfIbfMVFAMQsR6U58bxX5PrYhiRiokMLmOXlKvxSOycrHLN2UfThh28mD+hH3PUDOCGySsoxz/RBymi4AXSQjgNPxv4cm8Ho9UGqFNVJFzp6EvrzKhZoUqiAJtbm71zsD7Prm3ZXcHD/XJDwNpBmr8sjVlZIHud2M=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785836435; c=relaxed/simple;
+	bh=+tg4HihkjVnqg6IV94Lm31GvSa3PaWyc5O/YQHA4Dcg=;
+	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
+	 Message-Id:References:To; b=bxVUZstOrngPAxlo3b/hx4rk62Mc8oZrtiZ6Rxs8tAvy1hPtiwIwgsdfhdDPo6a5tOkTde195fwi94RukvkCrVSEveYpy8UwR1170kuP8UNNAgQ6KEblGLvr/lO0fFWVwfsyT6mWhqYXZLbHdKkSmKpgMz/7ducPXdCd0IVJr6M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=eFFitz+7; arc=none smtp.client-ip=209.85.214.177
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hVkMjXbn"
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-c1712a04ddaso684910766b.2
-        for <mfd@lists.linux.dev>; Tue, 04 Aug 2026 00:49:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785829794; cv=none;
-        d=google.com; s=arc-20260327;
-        b=W+8jo4C8XGrISCvhs1Pm4SAFRYQ2IdtwaspgqZDSEr+d30zWCcjS3OapUtOzRMOKA2
-         XOs4RttZSrHCx76/Kb9KakbZaIjt+RHrCXVF7/uR0fr2ZFj7EzhwLaE/WnBaJ8yLgZNk
-         iumfHe7aRj9CMleOsUUQfleqJ5YZOd4JAGYorRSX2TGXIw1c/uAFN7HLKrk8weBTjYJ9
-         H5FUQJgCmK7PbrHC6DftrSJU7/jRz7+WDqBUct1f89WR4iFvqj4YzEG183pEozX9POEv
-         N70TSk2Znj5iHTh8FNKDiJNlqy6Mr0Dgb+QzICECfn3NtPllb1YxQXYQsnjOQhUS+T9L
-         YVxA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=tIHHVDdHYzYzDyqpm0ApPfqei6BlC/PdRs4c7TbsR9E=;
-        fh=eQHrI0KtevG8t3XBtxwJlTNTzDj7zTeuxWp/H3iuFnk=;
-        b=TfW6T/TjNMH4TMFWsgATRy4nZl2Ykt9O1/FdaBHry38J6Qh6kO/JIzTRXcvB9ThJk/
-         ORZNWqZ/JDIO1z9mI40Nq8QlP8MbiLh0PLdCO8qiuVz62PL1T7xzQ7c0+FWG5cGVh4Yo
-         ffo54pDl9Z+g1mgXtFsl8mPF+Ror1prEeJuxyJ6gnNAhQfIjhKe+oryy0koO9CNeX1+t
-         h2gaENMTeznnkLXMl5KKmA0gr0gc7FVsZ8Q6B6gkRHN9DXuaX/tvd/81I+RyFSCVMs4K
-         PXtIdSWuQT8kZioCCA6GtNGD7e4hmOEFONEzANViWsTu2lDil9hjFPvnNa6la0iSfgLJ
-         MuuQ==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="eFFitz+7"
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2cecdc24b1cso6709315ad.1
+        for <mfd@lists.linux.dev>; Tue, 04 Aug 2026 02:40:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785829794; x=1786434594; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=tIHHVDdHYzYzDyqpm0ApPfqei6BlC/PdRs4c7TbsR9E=;
-        b=hVkMjXbnCKxDOe/45TfZ02go1k8QDSO2QLO5oIzUUMYegqEcpcgvB37fwXA/FXS2XX
-         UhweJbXrgpLMct4x/gnmXs7EDhmdxQRlnwPR4P/p8sHCYGpKarPE2CdUcQ4Jn692zFy2
-         B6lG7vbyG7qebrAXJJSDtgZJGFZ5SSp8a40wagPk5IJc5SML5SAHXdqkCWYzYzSDuJZ9
-         fdbrWZDtzGtEUduub8ztH9BbH/EROCx9oAIcE+Sedvdb5WMMzTZljec+ODpz0CPWEG86
-         HOwXGnlkQFMV2v47cIyh3nxHRk+yG2df+YI8hyq3Qbs7w81/rrVu8sBwsxynwGlr7Be6
-         9hWg==
+        d=gmail.com; s=20251104; t=1785836432; x=1786441232; darn=lists.linux.dev;
+        h=to:references:message-id:content-transfer-encoding:cc:date
+         :in-reply-to:from:subject:mime-version:content-type:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=0KP7c64Yl9kvVeMhN4Vu6FcmRJHPM+FSMkVOBoxsZtQ=;
+        b=eFFitz+7KPDvwLjeXHX02EeU+l+Aza2cUEsk9n4knUPCPvWpj1NV6EDNamhkH5ffqt
+         Ntt8+6cBXWMGTiahPefZ5Bsd9ixJsnFSDhrZ0uarqnyR3GQ6wO/+JYj2JXmvmtrtAUIG
+         OhStc8GVtN+QC0977ry9pBjD7JCorLBL5L7C/WbQZfkEeQtSAY+0kidpfK9fyoZjSml0
+         OEzH3yOLZfJbd4n2/T5uzIYH58zmoCjHMl+oU8yVmTeN4dzKO8oSQFhDq6t9GAnwog8m
+         f/HV7/t0ATpMKqVFUQT/d+rD40qfs726JyX1pItwe5qm6e+ICnNCzXyKjo7dglewgbka
+         /x5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785829794; x=1786434594;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
+        d=1e100.net; s=20251104; t=1785836432; x=1786441232;
+        h=to:references:message-id:content-transfer-encoding:cc:date
+         :in-reply-to:from:subject:mime-version:content-type:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=tIHHVDdHYzYzDyqpm0ApPfqei6BlC/PdRs4c7TbsR9E=;
-        b=sv+VJdsQCm4VddvMnJq3qRsHxrE6rEcgl9EEawZYJyQQib7/aXslrMDVgaTNuk+DVL
-         OmiyutxG0AbD0Haqcc8dvmVI1jer8bmqi/FRK/Jg3YEMBJ0UnWYV6SdcBTm6C2etEQHz
-         eFmjGTrASEZcrF9vreWK8UVy4b4wI92CwzGHiIK0E9vkaoGQ2IOEvbNo7YtSdWaqYfmu
-         oO1ZC0Un31IIYjugslEpPPEl+oaS2St2hKQg+QAe616UdDTalDp9ncF8y8diT2UU0VeZ
-         1DxwHcBM231n+MfvioNkTj0ApNdzXL7Y/k7aclDxUDCalSL6/4JnSMo1Y2Ei1sbC5EGI
-         9WDw==
-X-Forwarded-Encrypted: i=1; AHgh+RpNB3PbgtVALM7uXFn6nkhsOjpmGm8ECNo/7G9T/8htdFmBMRYsH8f6lh9+DxFBDHYSpVk=@lists.linux.dev
-X-Gm-Message-State: AOJu0YxhREh/IXE31+8a00TpA1MfTVGs4rl/qzBDnb5xH/dQ4ys6bo/O
-	wP2UngZ9OD7vqkgSQGGUY4c6C8PFa73m4yp37gaft3nftZDvf6+675Um2tAYZTYPHcI/ndcklcP
-	4zKx5TpiIArgcGFGMwSvj52zmMOQQnfw=
-X-Gm-Gg: AR+sD11Gj+vdVBHSKtkaTTNg0mTFrj29M/KfpHuXn/cbwOIflJO+59QCahivlk8kji+
-	sGjYLRAXfVPX5x43aKnhk7Vo4T4HAgn8Wvw91iUCR+w475YD1RwMAAz7BYn/TSy9xj1qLge90Nt
-	82/agsq+kOKkHiBHYr2g6TV0hAxAU3x8ezmdXeuoE4rqRIuwXKk3eD/Aadg9VXcejXDCWzNTtxK
-	VRtUfxx9pKX66kKmhWqDDqXSw6ni2T3+RtQfqw2agIgTt28TJ+xuDJKDUi+yQGCKQQsxm3TTTAZ
-	6wDxSq+jOWYgClKN+ljWKox4OVC0ORnsRCS4oOt5Qnge7oE=
-X-Received: by 2002:a17:907:3c83:b0:c1c:257e:4888 with SMTP id
- a640c23a62f3a-c1fe80d7742mr1126518766b.27.1785829793494; Tue, 04 Aug 2026
- 00:49:53 -0700 (PDT)
+        bh=0KP7c64Yl9kvVeMhN4Vu6FcmRJHPM+FSMkVOBoxsZtQ=;
+        b=jmuFxb7Gue4CCpZLpIe+01Nn0CU3MX0j3G+PbuR0602t1xEbWuJg7T6y57DLovJJfG
+         ACsUegxI3RX6mau5U+iM7pS9Sf9qPCYevvFx7Nm2wjPzUv4r2x8fL9iWQIxiOTVgIf0E
+         CekqFE4e/4lYEHOIAfLWYEPx9lcCeDwQexUm/tQhWEss9y2+uOzl+07BSUkWc0uGQXtf
+         qA5bAD1ij0+8UapI+uX2oNxHC669BnF0aN1ao0GWLAvknTcXRRyqbFvMbgun4ApnQz01
+         v5bIkbJJXc41RdtgIlqBkE3iKdtDuPxklEvOY6iEHZKzFNR5qJ8upJX/3dI/mgzjNOYZ
+         AV2Q==
+X-Forwarded-Encrypted: i=1; AHgh+RqtWlX4zLAoGpwLtBXidp+SgRhT6VobdqthgaepgYHjsAgmPBq9mJZuOfR6XasBEwOJN80=@lists.linux.dev
+X-Gm-Message-State: AOJu0YxTRS79FzLd/t8rBpSoGq1QPicOrsGSWWJXuUT5hAKyYH2EF0CN
+	sqipAVOPEaE1SRCdjAONujANDkqzHPBbaD5G/cO1IkQtQtE9hwCAkfRV
+X-Gm-Gg: AR+sD105r1t8BJatqL9UWkwwzUH0txkZKGd+sWt+V9xmB5VWeKqkn8Q9CtiMk520shX
+	a7Fe7HIhdb1tO43q/wRGFShTdDE5025SyYiN13VZqKPsC6FQeDpZXD1qlQuH82oCUQYvZj5FIte
+	Ey8UJVNau26B/CYThVp0AXAniF11PXACAjG+DOHL62oTK2ljhgm7sJJEm86N8Tb1UOHZW7fYyz1
+	nxAmeN9+lwsmBiNrKZj7X14HcZnMU8Mlm0L4twBa0xWQMlpFoGpc5d6+beUE5eE93jqHxxm6eub
+	GOL0CJlWYeEM+7Cc6Up9J4JGwQkdf+m/wDNdY31y1YV46n6Na5UxnkE1k468D+NIFzFqSlb21U+
+	HKCzQv/nXBMQtWN52/aD9zsp9Oqof4XklJpsI5WK+Ki2B+5T78xJesMMvU8wzE3TKYKfCJyAZOe
+	A4rMBnqOv9CwUwNE3kcO9rUINwJlklEzpLsLYxFF0lf3/u1aKmS7LMkmBYHjsMqz2IYuZkkVE9P
+	ur8TVhT4d0=
+X-Received: by 2002:a17:902:c952:b0:2c7:ef84:c58e with SMTP id d9443c01a7336-2d0521bca53mr200300075ad.1.1785836432230;
+        Tue, 04 Aug 2026 02:40:32 -0700 (PDT)
+Received: from smtpclient.apple ([23.247.139.92])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d0aa013da4sm3898605ad.34.2026.08.04.02.40.27
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Tue, 04 Aug 2026 02:40:31 -0700 (PDT)
+Content-Type: text/plain;
+	charset=utf-8
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-References: <cover.1785480242.git.zhoubinbin@loongson.cn> <0fbb8d766b6ed33bf4ae9b066eac174f55ae5b56.1785480242.git.zhoubinbin@loongson.cn>
- <20260804-intelligent-kickass-squid-e4c4c0@quoll>
-In-Reply-To: <20260804-intelligent-kickass-squid-e4c4c0@quoll>
-From: Binbin Zhou <zhoubb.aaron@gmail.com>
-Date: Tue, 4 Aug 2026 15:49:40 +0800
-X-Gm-Features: AUfX_mx5oxerXvL0N18GQL0cgfDF9LTPcv7Pk-z3jk4krWgDnaxFa1jCKZmpg4c
-Message-ID: <CAMpQs4J+RSF+rk1RJW-4+mbaeWpAzMKeiZo1R=B-wfXnAM5ScA@mail.gmail.com>
-Subject: Re: [PATCH v3 3/5] dt-bindings: mfd: syscon: Allow syscon compatible
- for Loongson-2K0300 chip id
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Binbin Zhou <zhoubinbin@loongson.cn>, Huacai Chen <chenhuacai@loongson.cn>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Yinbo Zhu <zhuyinbo@loongson.cn>, zhanghongchen <zhanghongchen@loongson.cn>, 
-	"Rafael J . Wysocki" <rafael@kernel.org>, Daniel Lezcano <daniel.lezcano@linaro.org>, 
-	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>, Lee Jones <lee@kernel.org>, 
-	Huacai Chen <chenhuacai@kernel.org>, devicetree@vger.kernel.org, 
-	linux-pm@vger.kernel.org, mfd@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81.1.8\))
+Subject: Re: [PATCH RFC v5 5/7] ipmi: ls2k: Relax the dependency to its mfd
+ driver
+From: Miao Wang <shankerwangmiao@gmail.com>
+In-Reply-To: <anD-LJYB-afdVAXN@mail.minyard.net>
+Date: Tue, 4 Aug 2026 17:40:14 +0800
+Cc: Binbin Zhou <zhoubinbin@loongson.cn>,
+ Chong Qiao <qiaochong@loongson.cn>,
+ Lee Jones <lee@kernel.org>,
+ Huacai Chen <chenhuacai@kernel.org>,
+ Linus Walleij <linusw@kernel.org>,
+ Bartosz Golaszewski <brgl@kernel.org>,
+ Xi Ruoyao <xry111@xry111.site>,
+ WANG Xuerui <kernel@xen0n.name>,
+ Yinbo Zhu <zhuyinbo@loongson.cn>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ mfd@lists.linux.dev,
+ linux-kernel@vger.kernel.org,
+ linux-gpio@vger.kernel.org,
+ openipmi-developer@lists.sourceforge.net
 Content-Transfer-Encoding: quoted-printable
+Message-Id: <2E268CDE-1D85-4611-BFF7-F74DD36132AB@gmail.com>
+References: <20260804-ls2kbmc-mod-v5-0-e6bc5cdd9a93@gmail.com>
+ <20260804-ls2kbmc-mod-v5-5-e6bc5cdd9a93@gmail.com>
+ <anD-LJYB-afdVAXN@mail.minyard.net>
+To: corey@minyard.net
+X-Mailer: Apple Mail (2.3826.700.81.1.8)
 
-Hi Krzysztof:
+Hi,
 
-On Tue, Aug 4, 2026 at 2:57=E2=80=AFPM Krzysztof Kozlowski <krzk@kernel.org=
-> wrote:
->
-> On Fri, Jul 31, 2026 at 05:42:19PM +0800, Binbin Zhou wrote:
-> > The Loongson-2K0300 SoC exposes its chip ID registers through a syscon
-> > interface. Add the specific compatible `loongson,ls2k0300-chipid-syscon=
-`
-> > to the allowed list of syscon bindings so that it can be referenced fro=
-m
-> > the thermal node via a phandle.
-> >
-> > Signed-off-by: Binbin Zhou <zhoubinbin@loongson.cn>
-> > ---
-> >  Documentation/devicetree/bindings/mfd/syscon.yaml | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/Documentation/devicetree/bindings/mfd/syscon.yaml b/Docume=
-ntation/devicetree/bindings/mfd/syscon.yaml
-> > index e22867088063..18eb9defec8c 100644
-> > --- a/Documentation/devicetree/bindings/mfd/syscon.yaml
-> > +++ b/Documentation/devicetree/bindings/mfd/syscon.yaml
-> > @@ -76,6 +76,7 @@ select:
->
-> There is no such select in the code.
+> 2026=E5=B9=B48=E6=9C=884=E6=97=A5 04:46=EF=BC=8CCorey Minyard =
+<corey@minyard.net> =E5=86=99=E9=81=93=EF=BC=9A
+>=20
+> On Tue, Aug 04, 2026 at 12:55:53AM +0800, Miao Wang via B4 Relay =
+wrote:
+>> From: Miao Wang <shankerwangmiao@gmail.com>
+>>=20
+>> There is no strong dependency between the IPMI driver and its mfd
+>> driver. Although the IPMI driver will not work without the mfd =
+driver,
+>> it is not a hard dependency. The IPMI driver can actually be compiled
+>> without the mfd driver, and it will just fail to probe. When the mfd
+>> driver is loaded, the IPMI driver will probe successfully. Therefore,
+>> the dependency of the IPMI driver on its mfd driver should be relaxed
+>> to "imply" from "select". This will allow the mfd driver to be =
+compiled
+>> as a module and the IPMI driver to be compiled as a part of the =
+ipmi_si
+>> module. The adjustment to Kconfig for the mfd driver will be =
+introduced
+>> in the later patch in this series.
+>=20
+> I don't think that's what "imply" is for.  Imply seems to be for if
+> there is another subsystem that can use this subsystem, but doesn't
+> require it to exist.
+>=20
+> For instance:
+>=20
+> config SENSORS_NPCM7XX
+>        tristate "Nuvoton NPCM750 and compatible PWM and Fan =
+controllers"
+>        imply THERMAL
+>=20
+> The fan controller will work fine without the thermal subsystem; you
+> can control the fan speed without it.  But the thermal subsystem is =
+the
+> logical user of this.  I looked at many of these things like this.
+>=20
+> In the IPMI case, the IPMI driver is useless without the mfd part.  So
+> there's no point in compiling the IPMI part of this if the mfd part is
+> not there.
+>=20
+> I could be wrong, but I can't see why you would want to do this.
 
-Yes, I see, I will rebase on the linux-mfd/for-mfd-next branch.
->
-> Best regards,
-> Krzysztof
->
+The mfd part and the IPMI part loosely depend on each other. Without the
+IPMI part, the mfd part can still work to handle the display part.
+Without the mfd part, the IPMI part is indeed useless, but it will not
+generate compiling errors or other runtime errors. In the runtime,
+the IPMI part can be actually loaded earlier than the mfd part. As a
+result, their dependency is not that strong.
 
---=20
-Thanks.
-Binbin
+The reason why I want to change this is that "select" here requires the
+mfd part should also be compiled as built-in (i.e. =3D y), since the
+type of the configure entry IPMI_LS2K is bool. However, I cannot see
+there is no other reason preventing the mfd driver from compiling as
+a module. This patch series will introduce a minor fix, after which
+the mfd driver will be capable to be compiled as a module.
+
+When the type of MFD_LS2K_BMC_CORE is changed to tristate, the "select"
+here will prevent selecting =3Dm for MFD_LS2K_BMC_CORE. I thus believe
+that "select" here should be also changed.
+
+Any suggestions on declaring the dependency of the both parts?
+
+Cheers,
+
+Miao Wang=
