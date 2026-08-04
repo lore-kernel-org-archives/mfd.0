@@ -1,244 +1,203 @@
-Received: from mail-oo1-f51.google.com (mail-oo1-f51.google.com [209.85.161.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from AS8PR04CU009.outbound.protection.outlook.com (mail-westeuropeazon11011042.outbound.protection.outlook.com [52.101.70.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E4E843A81B
-	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 13:56:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.51
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785851778; cv=none; b=lehQysGo7FW7BSm8F1HyR/5cEhY7kPJYr/2NczqE2jlYRGjS8s2wxEnsRUOSJkl448zp7vcRmqbckKww2gFFmlJQKLdAsbKgoy6bq/7+YrB4uUfKf/IC1Ldc07dkYc0f0Pdckcq9NLLm/9X4ddRBv+6YaylHr3J4b5eiDY+wSaQ=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785851778; c=relaxed/simple;
-	bh=50XrKBZJosL/DTC37lRfslzDFV1+RDFjg0YN60AJyx8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=iPwhDxtXfMGeLfDwqzjCoKdeYosU4Gt70X2SPDGB8beLLdg4Q03UtuoT9iJHw/8lSbJx7rLkov+tEQ5vAgMvNrYytdcdx7QiWPBCiiApTTnKtM1VoH9BWBylGqnuah0ORJrFUOm/xNnQ0y+iMozW76kA3sRDuhpehplzXZMgfnE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=minyard.net; spf=pass smtp.mailfrom=minyard.net; dkim=pass (2048-bit key) header.d=minyard.net header.i=@minyard.net header.b=oY1z0hI4; arc=none smtp.client-ip=209.85.161.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=minyard.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=minyard.net
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBF7E3A7F46
+	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 14:18:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.70.42
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785853146; cv=fail; b=ZBvRnmqbc6EkQbl0H9q1PnBbmsrPbg6zy56Plfx0X4YysxP5Gvwfka3GjeLUDSjaQ+fKQ3+q5mubPz2lko6qVI517VCFHGD1QJWoHfSXUb1TdUANgftNxgorE5mrrkuhWj9LGuDRQ9ICqaUBA+LDgibwNt7gnBqtes1Tucl3MF0=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785853146; c=relaxed/simple;
+	bh=SCFpEdxAnhFseICUPVTGF0MOmLT6dpW1qlayhv2yHCY=;
+	h=From:Subject:Date:Message-Id:Content-Type:To:Cc:MIME-Version; b=HmzH2KFe8qB0D+zYsPPoS17hYsyoWNFakqB4b+7wDTeD5PC8JfPFq8LdahknKQA7263WB0du12TH9e+A+XHfdbmDsCJ1jjkF4DJM6GOpI265fiq6EER3szYMwAuiobos4dV9G3hRfLCeJTUer+WRtvcnChtYFzdYAElIAdljRPo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=dFwVKYc7; arc=fail smtp.client-ip=52.101.70.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=minyard.net header.i=@minyard.net header.b="oY1z0hI4"
-Received: by mail-oo1-f51.google.com with SMTP id 006d021491bc7-6aa9606ddadso3107682eaf.0
-        for <mfd@lists.linux.dev>; Tue, 04 Aug 2026 06:56:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=minyard.net; s=google; t=1785851775; x=1786456575; darn=lists.linux.dev;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:reply-to:message-id:subject:cc
-         :to:from:date:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=sXXO2IRcaN/cQzNifZvrT3g0gNImnjqVwD0ab/RL39s=;
-        b=oY1z0hI43ooICFop0U3UyI00AmdDSnwrPbEor3tEkqgtUNMAA94N/9cVBxlIhCCI0F
-         Y8jFf7/5p+AMaNBTBWW47K4JnvaHv9MpaYFypBCPqASdcP00w/SOyy9Ok+x2x+5AgT+z
-         Mjn94RfEvMCZ7mw0vMtchUaHMZUqBtFeiDA1yFHztsGYOr5wc7EvjvnR6/r+Q0lZw33J
-         CiE/Enl//tsK9GeKvjSFIamoF/BjEWDUlISu64JY4dWf7HEHiC1j5ldVZtGDmoHf6tCZ
-         Pv6ayo3od1mnI5IdihVAZmXM5/XRkOdqhQH06ThAV0bLL1EEDI5rL1GtIdZ78rGdWQ0u
-         QgDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785851775; x=1786456575;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:reply-to:message-id:subject:cc
-         :to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=sXXO2IRcaN/cQzNifZvrT3g0gNImnjqVwD0ab/RL39s=;
-        b=fGvwWt6gX2vha7e6rKWBK5P2QgS4iXozH6olIcru64x8sN7BZpUtx/tJRNqliwL3r9
-         w057/aHcu0SxOACeyNiQbVR3s4Xh93Vf8Oc0OR02bNRBquCOYwKt5W4n+Fp8tZO0/PYL
-         mJ/EET3EMOvafAz73fiz8WtYuv5L3bfX9Krpj2mr6TvPfumAhlEbersvTWyGYMYbKQ/K
-         XKoofZaC0guvJwSzIQbyCB7qyzqGSiIhuI8jNrVjKgJolTWaTfVJRlHwHOZDxGhzwraG
-         q4wUPzql9aBwkYUy6Pj/JJNTcBZ0K6Ix6YzfRtIf7zzaiBf7osQnXCjIfcEqNY/VODmO
-         0VnA==
-X-Forwarded-Encrypted: i=1; AHgh+RorRRWhZJy7A92ALdu7j5g2RdEm+/s83eA+3er9NP9Hu/5nnINUVz0f42IYH/kt7E7umtA=@lists.linux.dev
-X-Gm-Message-State: AOJu0YwaaXV8UWrvgUHVA3+8scpRNEBRgs99/3/gcEaQkJXGORSLLcWj
-	n3Tf1T5FQ40zBOKFz4G1i7bewxSRoVvz4uukSTNCBqYmZktd6gwsxNLvkrh1NYwxkdA=
-X-Gm-Gg: AR+sD11LQDkUb/lR69UFAbDtJzd3tO4bwnIV4wVtnlfIS+E3R6JoSxPMrJwWju7n1Ez
-	m77nAE+BU2tUg3w4WqSrMJgrp3+UxFvDDyPlenebyEPy9BgiywZAF66wPpw8wFvTYjfQ9q5KcP0
-	hu8R3jNyhHXOGH7NRRSuMauWxgLoaljjhVo90cUQMzwwpIwMkt6X/1bXg1P8LJDXkWc6yJuhmIX
-	B1JgZ+wu2r42jtSnk99eg0fdmU2x5SHK+nNV1C6GQfqwikQR+nELtdxrN217rITEuxz7r2ntfsG
-	PH5sOoUFlcsa0+0OZTIDgSoPh9+IhequV3DoI4DxpuTzCY7Xz+iQhCUKnoEWBC8dQBl3KeeSCxU
-	ZTf4jlgNHYV6Blg7s+cRIGE1dPE36dKHACWua6+d8ZhcjEyDkjqax1GPnXaicVBOnYZQZ9yKr/N
-	wfGWNxw5jK+4gXpPpZDE93SfnuBrZ/om4TMgd6FeLCbF3y02nCx+Xl4hNPmntFRNqjextdWz4ZO
-	zxFykbqiYcOI8RNpoeLrHE4FDJM8qHPe4qHdqOB1OP1pl68z2N07b4WbZ5uH4GWzfz/laQjpIJB
-	nMhtds7vyA==
-X-Received: by 2002:a05:6820:430a:b0:6ac:b07c:b34b with SMTP id 006d021491bc7-6ae43181091mr17136344eaf.4.1785851775253;
-        Tue, 04 Aug 2026 06:56:15 -0700 (PDT)
-Received: from mail.minyard.net ([2001:470:b8f6:1b:398b:b195:5c26:85bd])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-6ae93d45b4csm171955eaf.5.2026.08.04.06.56.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 04 Aug 2026 06:56:14 -0700 (PDT)
-Date: Tue, 4 Aug 2026 08:56:11 -0500
-From: Corey Minyard <corey@minyard.net>
-To: Miao Wang <shankerwangmiao@gmail.com>
-Cc: Binbin Zhou <zhoubinbin@loongson.cn>,
-	Chong Qiao <qiaochong@loongson.cn>, Lee Jones <lee@kernel.org>,
-	Huacai Chen <chenhuacai@kernel.org>,
-	Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Xi Ruoyao <xry111@xry111.site>, WANG Xuerui <kernel@xen0n.name>,
-	Yinbo Zhu <zhuyinbo@loongson.cn>,
-	Jiaxun Yang <jiaxun.yang@flygoat.com>, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org, linux-gpio@vger.kernel.org,
-	openipmi-developer@lists.sourceforge.net
-Subject: Re: [PATCH RFC v5 5/7] ipmi: ls2k: Relax the dependency to its mfd
- driver
-Message-ID: <anHvewDHLeyxdTJp@mail.minyard.net>
-Reply-To: corey@minyard.net
-References: <20260804-ls2kbmc-mod-v5-0-e6bc5cdd9a93@gmail.com>
- <20260804-ls2kbmc-mod-v5-5-e6bc5cdd9a93@gmail.com>
- <anD-LJYB-afdVAXN@mail.minyard.net>
- <2E268CDE-1D85-4611-BFF7-F74DD36132AB@gmail.com>
- <anHPgqIj907WFEGT@mail.minyard.net>
- <34EE213F-DA1A-4103-AAE9-85618954C846@gmail.com>
+	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="dFwVKYc7"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mfuZroRBiYGxai/HVID8+7hMEDYOBP5f37K2BmVi5gc9Lt52a2KGOULtNfGXBAQ6ZRIHqpEe+mInHyk4w2y5ajE+q52anpV7S2mH+7ZczaFAuBOC0Li+u36vPjOSDyAtLIusSdFRfZUCNeBMrmTT82sRfcyNSF1uxo9vjJjCeDRoY/WcM1IqrrAd60TP4r4LYvZShmYOX6HNb7WwrwTaBl+TU3SHFdUf45AFVjNl8VCBPAjAPo2amkJ0iKZ0nKYoKS46AKmPAOWxaoXBA+fV0Fr+Hu4iB48OGFXR15oa2VjHwP6ByrgoTRY8LY3GbPhXbkdW1j6Uf9Ant4P2nfBoSA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=BwoyLvF5uRTh+8zKwH2k+U9/12tXAvYRY19m43qfSC0=;
+ b=JcsDYa8qNawJHGXfCsH9H4Obaum3IU5Zr8VccrcFiyqP5nRySVKqrkJzIfKU90pP1ns+LAgMsWMyNikyON8XhMsvWDifMbm/dkfDCY9Giqz6mwi3+q99nPV7PsazthsuIFbyAkFmeBgrejhemxjOITdK+l4nISQBGeIRcGERw6UNG8tFoODlmBrtcdjnQWsdqsGaRo3bSDW8LgXmbVlxO3e9EAb16IAlSoNLqF2uRiW1OBg2+iVmVTFqi1RI+aywCcZ+U+hllM1SsnIVRmeUr25MssIu9RKVBbKoFK5xIHe/MLawRdFxwX6e49XlmE+Rl6qaXXNBAl9sf9x9CH5ekA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=BwoyLvF5uRTh+8zKwH2k+U9/12tXAvYRY19m43qfSC0=;
+ b=dFwVKYc7bPSikpkPgK8WdAE1DKEYoyAOULOgsdjjCKUQFftzWL8YE4GAtm06VExZJxZDas9j1kD0K3rFkxhctpq1jk+EmRiDT/0GsHkPeozaX57b/Rw5KXnjnI1WAyXoFFmoZ+r7NIT7M1wnk2ltOrCZPz41aHYRI5fbL/lAkreBVYjF73n8ACtvO9UQhnxDf7GMYluKpfn5YkfVFxrLOZddgZb2bNVOTo6lTogYu57iAhf8FaahyKirUWfXey3gitfn2bNf8ugIfsMU67Oa82IB0DJpzrUXyr+Ap4/n49KPEUMDSqWfs8vwtrL85GjCJq3qk2+pqq9CczEq5MnjFg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from AM8PR04MB7874.eurprd04.prod.outlook.com (2603:10a6:20b:24d::9)
+ by GV1PR04MB10524.eurprd04.prod.outlook.com (2603:10a6:150:1d0::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.15; Tue, 4 Aug
+ 2026 14:18:46 +0000
+Received: from AM8PR04MB7874.eurprd04.prod.outlook.com
+ ([fe80::ac38:1699:6f18:c5d9]) by AM8PR04MB7874.eurprd04.prod.outlook.com
+ ([fe80::ac38:1699:6f18:c5d9%6]) with mapi id 15.21.0270.017; Tue, 4 Aug 2026
+ 14:18:45 +0000
+From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Subject: [PATCH 00/10] dt-bindings: mfd: Use generic power-controller
+ schema
+Date: Tue, 04 Aug 2026 22:16:35 +0800
+Message-Id: <20260804-mfd-syspower-v1-0-a440783c2e78@nxp.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAEP0cWoC/yXMyw5AMBBA0V+RWWtSNCV+RSyqBiPxSMcz4t8Vy
+ 7O49wJGR8iQBxc43IhpGj2iMADbmbFFQbU3xDLWMpNKDE0t+OR52tEJk9is0kbp1CjwyeywoeP
+ bFeVvXqse7fI+4L4foTpHtnAAAAA=
+X-Change-ID: 20260804-mfd-syspower-a3c8b6a467a4
+To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Lubomir Rintel <lkundrak@v3.sk>, 
+ Dmitry Osipenko <digetx@gmail.com>, 
+ Shree Ramamoorthy <s-ramamoorthy@ti.com>, Heiko Stuebner <heiko@sntech.de>, 
+ Joseph Chen <chenjh@rock-chips.com>, Chris Zhong <zyw@rock-chips.com>, 
+ Zhang Qing <zhangqing@rock-chips.com>, 
+ Sebastian Reichel <sebastian.reichel@collabora.com>, 
+ Andreas Kemnade <andreas@kemnade.info>, 
+ =?utf-8?q?Jonathan_Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>, 
+ Julien Panis <jpanis@baylibre.com>, 
+ Matti Vaittinen <mazziesaccount@gmail.com>, Alexander Kurz <akurz@blala.de>, 
+ =?utf-8?q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ linux-rockchip@lists.infradead.org, linux-samsung-soc@vger.kernel.org, 
+ Peng Fan <peng.fan@nxp.com>
+X-Mailer: b4 0.15.2
+X-ClientProxiedBy: SI2PR04CA0003.apcprd04.prod.outlook.com
+ (2603:1096:4:197::23) To AM8PR04MB7874.eurprd04.prod.outlook.com
+ (2603:10a6:20b:24d::9)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <34EE213F-DA1A-4103-AAE9-85618954C846@gmail.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM8PR04MB7874:EE_|GV1PR04MB10524:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5e05fb5a-352e-4fad-259a-08def2334b61
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|7416014|23010399003|19092799006|1800799024|366016|921020|10067099003|11063799006|56012099006|18002099003|3023799007;
+X-Microsoft-Antispam-Message-Info:
+	4yAJZpHwDXZkf62CGk6yUsYp1gCmPaVx9adNHWzBMdLgyslNNC3x5R5ID0UlZ2nms/TTlojLke5JzFl6GdsDMvGe69ckJtbQboDed1FcNeC10aJS5OkCI1BgLO44rEqWLZR6Y6AJ6A96h66Kb9CFENAnyc1XPkeGCtUqs8ubIq/HF0DnkySMv7r4epWMq+RWc4X3KyhbpTw1Uj9WB8JHlCZ27Sgo+TpVGOykXQCzq83r8n84fUzFaDctw1Qr2vfcferOVJGUr5//Hza6aq2RsbePYut4AAU/o24M4BtOZe8a9TpFduEHB+4gctcBZS6EvzYqqS1phGcbEHYAi58P34nEifiVBNOJdHpDtKhqPVjXawNtnF9AlzoaA98ZWuZmwIxLSecWACwZ8Z11qbq9C7o/U836Xl/lJtPM7PRMzix8CcufzpefGxzeIkUTZRx4ZNLP8J46T49LRZZ7y1bivuPlDWqCzFd/DBiJoigN7N6Z4ulVUuiLApcwYZHOH2ytc1uRHP78IGzJMk49FEKq/1+Rhr5jO7ZQaRKZuHpAjA8hH6SxWtx6qdm4pzZMM0BIsn4OKWfrVa6SLAZ+dh14ymvOZbw7foj6HILefZx2X7kEDbONYUguS6jk6EWqCz9h6f1LOd5Wi3vrcjFTUxB7CHdYLcYBGCTOym4BB974xyDwhU8dGr+nDPgaUxNXfLRNS3rZrgJgajh3Uzu9pj98ow==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM8PR04MB7874.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(23010399003)(19092799006)(1800799024)(366016)(921020)(10067099003)(11063799006)(56012099006)(18002099003)(3023799007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?TGx0NU1LbVRZVk16eWdBNHMyeFhxTGNZR2FJeTgrMFNRZStvQkZDS3h5M3Fw?=
+ =?utf-8?B?V3JsNXlPZk1tRDRCKzJqb0dJSEw2Y08yV3ZHZk9FRnFSa3RETGZCZzhqb3RM?=
+ =?utf-8?B?WlVYMFU4SUcxaG95bmZVMzVYVGhSNk96TXB2Z0VHY2hEWTU4SkZLaGRRaG1F?=
+ =?utf-8?B?eGgrWDZXbGR3bVRVMFd5ZWFleVV6bzh1emN0MENyZ0k2a2dpUXY5Ym5TT2JX?=
+ =?utf-8?B?TW5XNFYzKzR2bHJWdXV1T2hyVmxvY0J3cVhtZytSZ2VpZ2Q1TVF3dlBxeTND?=
+ =?utf-8?B?c2VzcHFFU2JWYk4yTlZpaGlYV0l6VlJkTnFqc1NNYWROOGJncVhtdlVBbEls?=
+ =?utf-8?B?ek84K1ltb0RUcDljN1IvZHJ0OS9uakR3encyVVdrajg2NGE2V25FV2I5NHpo?=
+ =?utf-8?B?SlJ1cXZTUG42Y3dKUjZvOWFqYkNKM2lxcldxMXo2aVBuMWo4dlJtbFVtRkQ0?=
+ =?utf-8?B?b2dpQm5ab3pNL09ZZWZvT0duaE1vQ3BGNzFYR2o5VXRUUGhrUkZXaFRSdmNh?=
+ =?utf-8?B?bUwvUE1RSTlLdWtWRzVuZnlaMTUyZVJYalVncXQyQjNMOGJKQldaMDkrY2N0?=
+ =?utf-8?B?cnlJMjV1dFJQa05FRzY5a01uNUJRNmtPTGs5SVZSL0lpaUZHTW9sMktvWnlT?=
+ =?utf-8?B?ZzdPOFlHK0hGNFYrMXpkRGc1MW9uN3JwZEZPeWx6TXdhUGR2NFpqWEtQWU1u?=
+ =?utf-8?B?ZHRDNnp0UU9KU3oxcjA1bVZ0MUxjZUhXOXhHVlZwWmxhTXdlODZDc1ZpKzha?=
+ =?utf-8?B?SDltODVXWDdIK0NOTXVqcHp4VGhNeUUvNFRZZDV0ZkxRMUpWRjBPNlQvckt5?=
+ =?utf-8?B?UEozUVdHOG0wRElNK2VOSXB2U0lYUjBUS2ZmbmxhRy9TTHVTNjRDaitkQS9B?=
+ =?utf-8?B?ZVM2dUNoMjRLYm9MREdTSTg1aC8zK1pJdU1vOFoyME1ZRFprQjRCRjl5Qm9u?=
+ =?utf-8?B?czNJYlRSRFNRWGw3QjhkclZjbFRpUXJPRUlacU93WXQweXE3YXcwVEtZY1FV?=
+ =?utf-8?B?THB0UG1qU3kzY3J0UEZJV1h2dENjRmpDa1ZEVjZ4TElEZWE4b0hwaDBrcGVB?=
+ =?utf-8?B?aGo3M0lOZjNyVzJqQmFUVklsaUlwTXdPQ3AxdXAyK0RjelREUEw2MVQ1UjVD?=
+ =?utf-8?B?a1BjNTFaQmNSN2s0K25ocC9WMDBheGp2SmtEQlFTU0svT1NIYXl2OTR4Ulcv?=
+ =?utf-8?B?SFBWa2hqL2N4Tk5TL2k3cXVDWndscUwvZStZYnF3RzR1VDl1dU55Y0xIVWZr?=
+ =?utf-8?B?OUxsMXBTWEVPTDkzbTNPMWhWL09PTDBRZGdXYVVDdU81YVhGc3FOM2gzYmwr?=
+ =?utf-8?B?Zmo4Tjh4TUMyWjdROFhWSXIvU0dQRTlKQzZoTWQrcmU2aURCR1RkdlN1NkQw?=
+ =?utf-8?B?WFRTZVNvMjJPOTlsWkczbllTc2loVHBvL2hONDllcllNRDQyT0xiUUo1ZHgr?=
+ =?utf-8?B?ZC9lbjI4RG1vYlp5K0VQMkRUMHoxQndjQ0pKbVhlUlRlditNeGJXT3BpVGhp?=
+ =?utf-8?B?RS9DNXhyVm1XZFgyQ3ZFdFhiVnM3ajF6UFFCdHArbDF1YWFJb0VOM09ETnRa?=
+ =?utf-8?B?QmpackNocDBockRxSEpqN2NzMHo1NVZKTGxUQ2xhRXhCRHZKck9CTzh1Q1Bj?=
+ =?utf-8?B?UG5ZS1VabWoyMTlVY1d4RE1vdURPMi9vem9taFJUT2VVRUFFNFQ5TVRYSzJz?=
+ =?utf-8?B?RGZvOCtzTU9GcWY3UHQwTzVyYW1SWXp4czczUVVMOGxKTEZESkl6RkNkNWVS?=
+ =?utf-8?B?V3EySktYMHNxMUFtVkNqckdVU0NaZlpDa3N2dnQvSzVSMVVGTUxLOWZHZTBC?=
+ =?utf-8?B?Y2o5K2NhT2dmcDBKc0xGazRnTW1BRDY3bEhPcTRVSFJJamlVd0FocExKZzlk?=
+ =?utf-8?B?YURjMjg4RlowT0pMM09xcFoxSDFhVWlEbDdCWDNLTmFGOTNabnczOGIzd201?=
+ =?utf-8?B?SVVrZFp3a2dWNHZBWG1OUWlqa2o0dlRIWHI2S1pTdlhJb25qYXNaVVVPcUJj?=
+ =?utf-8?B?RWU2cmJhYXhORGt6Qk1wOWozT1RtRE00a1VqTFpjNjBya3pHeVBNdFIzNEQ5?=
+ =?utf-8?B?SW9jVUhjaHQ5MzZ2c096dTRQTnR4UnI0Wm84M2p6YzNVUjltNjBIRzZlc2Fq?=
+ =?utf-8?B?NTZkT09FcGVwTUMvQVVEVzlPZjZ6REI4OHNIdjZpN3FjMmg1OUdmQkt1QkV6?=
+ =?utf-8?B?Q2NlekhieExaOUI1STd6QmZ5TGRsMDNxQ0JDU2dMejRKcStlNmE4UFcxblVl?=
+ =?utf-8?B?emQ3ekVoM1dEMVFzMk1ja29EWm04Z25yc09rZW9WNUY0RnhjSGQ0Ri9wbDNh?=
+ =?utf-8?B?d0hHYjRyWVg0eW4xTHY4NTNMT09YVEl0MGkyZTBoL1J0M0RsU3Rra0VYM2cv?=
+ =?utf-8?Q?I6uPv1JGjujRAB8FzKv3GatFySDkG+OTrwz2A?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5e05fb5a-352e-4fad-259a-08def2334b61
+X-MS-Exchange-CrossTenant-AuthSource: AM8PR04MB7874.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Aug 2026 14:18:45.8064
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: VE3dA5ocrsauaPDuc9pRvWFb6Z1p1Kz8lfVfW6OH6f/pRvOjNfslQOYRQMqyMysnOZK+JUXOTWaP3uQMIioz9yc/Dm4wZjDNe4/oJufXxjTM7UciCFMbuKw0Zoqq4FfM
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB10524
 
-On Tue, Aug 04, 2026 at 08:27:11PM +0800, Miao Wang wrote:
-> Hi,
-> 
-> > 2026年8月4日 19:39，Corey Minyard <corey@minyard.net> 写道：
-> > 
-> > On Tue, Aug 04, 2026 at 05:40:14PM +0800, Miao Wang wrote:
-> >> Hi,
-> >> 
-> >>> 2026年8月4日 04:46，Corey Minyard <corey@minyard.net> 写道：
-> >>> 
-> >>> On Tue, Aug 04, 2026 at 12:55:53AM +0800, Miao Wang via B4 Relay wrote:
-> >>>> From: Miao Wang <shankerwangmiao@gmail.com>
-> >>>> 
-> >>>> There is no strong dependency between the IPMI driver and its mfd
-> >>>> driver. Although the IPMI driver will not work without the mfd driver,
-> >>>> it is not a hard dependency. The IPMI driver can actually be compiled
-> >>>> without the mfd driver, and it will just fail to probe. When the mfd
-> >>>> driver is loaded, the IPMI driver will probe successfully. Therefore,
-> >>>> the dependency of the IPMI driver on its mfd driver should be relaxed
-> >>>> to "imply" from "select". This will allow the mfd driver to be compiled
-> >>>> as a module and the IPMI driver to be compiled as a part of the ipmi_si
-> >>>> module. The adjustment to Kconfig for the mfd driver will be introduced
-> >>>> in the later patch in this series.
-> >>> 
-> >>> I don't think that's what "imply" is for.  Imply seems to be for if
-> >>> there is another subsystem that can use this subsystem, but doesn't
-> >>> require it to exist.
-> >>> 
-> >>> For instance:
-> >>> 
-> >>> config SENSORS_NPCM7XX
-> >>>       tristate "Nuvoton NPCM750 and compatible PWM and Fan controllers"
-> >>>       imply THERMAL
-> >>> 
-> >>> The fan controller will work fine without the thermal subsystem; you
-> >>> can control the fan speed without it.  But the thermal subsystem is the
-> >>> logical user of this.  I looked at many of these things like this.
-> >>> 
-> >>> In the IPMI case, the IPMI driver is useless without the mfd part.  So
-> >>> there's no point in compiling the IPMI part of this if the mfd part is
-> >>> not there.
-> >>> 
-> >>> I could be wrong, but I can't see why you would want to do this.
-> >> 
-> >> The mfd part and the IPMI part loosely depend on each other. Without the
-> >> IPMI part, the mfd part can still work to handle the display part.
-> >> Without the mfd part, the IPMI part is indeed useless, but it will not
-> >> generate compiling errors or other runtime errors. In the runtime,
-> >> the IPMI part can be actually loaded earlier than the mfd part. As a
-> >> result, their dependency is not that strong.
-> > 
-> > The operational dependency is strong, which is what I think you want to
-> > convey here.
-> > 
-> >> 
-> >> The reason why I want to change this is that "select" here requires the
-> >> mfd part should also be compiled as built-in (i.e. = y), since the
-> >> type of the configure entry IPMI_LS2K is bool. However, I cannot see
-> >> there is no other reason preventing the mfd driver from compiling as
-> >> a module. This patch series will introduce a minor fix, after which
-> >> the mfd driver will be capable to be compiled as a module.
-> >> 
-> >> When the type of MFD_LS2K_BMC_CORE is changed to tristate, the "select"
-> >> here will prevent selecting =m for MFD_LS2K_BMC_CORE. I thus believe
-> >> that "select" here should be also changed.
-> >> 
-> >> Any suggestions on declaring the dependency of the both parts?
-> > 
-> > Ok, I understand now.
-> > 
-> > Why can't the IPMI part be compiled as a module?  Making that
-> > module-capable would be the right fix, I think.  I can't see
-> > why that wouldn't work.  IIRC, it was bool because the mfd part
-> > was bool.
-> 
-> I would have agree with you if the IPMI part was a normal driver.
-> However, the IPMI part is actually a part of ipmi_si. As a result,
-> the IPMI part can actually be compiled as a module, but as a part
-> of ipmi_si. That is why the configure entry IPMI_LS2K is bool rather
-> than tristate. I don't think it is trivial to convert IPMI_LS2K from
-> bool to tristate.
+The generic power-controller.yaml schema has been added to dt-schema[1],
+providing a common definition for the `system-power-controller` boolean
+property. Convert MFD bindings that locally define this property to
+instead reference the shared schema.
 
-Yes, you are right it would be non-trivial.  It would take some redesign
-of the ipmi_si module.  You are right here, probably not worth it.
+The common change across all patches is:
+ - Add a $ref to /schemas/power/power-controller.yaml#
+ - Remove the local `system-power-controller` property definition
+ - Switch from additionalProperties to unevaluatedProperties
 
-> 
-> > If you changed to imply, you would need a depends on the mfd core, BTW.
-> 
-> If imply is used here, and there is "select MFD_CORE" in MFD_LS2K_BMC_CORE,
-> I think there is no need to add "depends on MFD_CORE" to IPMI_LS2K, if I
-> understand it correctly.
+This is a pick of patches 2-11 from [2], rebased to linux-next/master,
+no changes. Patch 1 (the generic power-controller.yaml schema itself)
+is dropped since it has already been picked up by dt-schema.
 
-If imply doesn't force MFD_LS2K_BMC_CORE to be selected, then it's not
-going to force MFD_CORE to be selected.
+[1] https://github.com/devicetree-org/dt-schema/pull/187
+[2] https://lore.kernel.org/all/177523251875.1559844.9690289848283345069.b4-ty@b4/
 
-> 
-> I don't insist using imply here, if there is a better way to express the
-> relation between both drivers.
-> 
-> > Also, IPMI_LS2K needs a "depends on IPMI_SI" either way.  I missed that
-> > earlier.  Could you add that?
-> 
-> If I understand it correctly, there seems to be no need to add the
-> dependency from the MFD driver to the driver for the actual sub-functions.
-> Examples are:
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
+---
+Peng Fan (10):
+      dt-bindings: mfd: ene-kb[3]930: Use generic power-controller schema
+      dt-bindings: mfd: ti,tps65910: Use generic power-controller schema
+      dt-bindings: mfd: rockchip,rk8x: Use generic power-controller schema
+      dt-bindings: mfd: ricoh,rn5t618: Use generic power-controller schema
+      dt-bindings: mfd: netronix,ntxec: Use generic power-controller schema
+      dt-bindings: mfd: ti,twl: Use generic power-controller schema
+      dt-bindings: mfd: ti,tps6594: Use generic power-controller schema
+      dt-bindings: mfd: rohm,bd71828-pmic: Use generic power-controller schema
+      dt-bindings: mfd: fsl,mc13xxx: Use generic power-controller schema
+      dt-bindings: mfd: samsung,s2mpg10-pmic: Use generic power-controller schema
 
-There absolutely is.  You can select IPMI_LS2K without selecting
-IPMI_SI.  It would compile without it, and it just wouldn't do anything,
-but it would be confusing to be able to select something and it not do
-anything.
+ Documentation/devicetree/bindings/mfd/ene-kb3930.yaml          |  7 ++++---
+ Documentation/devicetree/bindings/mfd/ene-kb930.yaml           |  6 +++---
+ Documentation/devicetree/bindings/mfd/fsl,mc13xxx.yaml         |  5 ++---
+ Documentation/devicetree/bindings/mfd/netronix,ntxec.yaml      |  9 ++++-----
+ Documentation/devicetree/bindings/mfd/ricoh,rn5t618.yaml       |  8 ++------
+ Documentation/devicetree/bindings/mfd/rockchip,rk801.yaml      | 10 ++++------
+ Documentation/devicetree/bindings/mfd/rockchip,rk805.yaml      |  7 +++----
+ Documentation/devicetree/bindings/mfd/rockchip,rk806.yaml      |  3 +--
+ Documentation/devicetree/bindings/mfd/rockchip,rk808.yaml      |  9 +++++----
+ Documentation/devicetree/bindings/mfd/rockchip,rk816.yaml      | 10 ++++------
+ Documentation/devicetree/bindings/mfd/rockchip,rk817.yaml      |  5 ++---
+ Documentation/devicetree/bindings/mfd/rockchip,rk818.yaml      |  9 +++++----
+ Documentation/devicetree/bindings/mfd/rohm,bd71828-pmic.yaml   |  7 ++++---
+ .../devicetree/bindings/mfd/samsung,s2mpg10-pmic.yaml          |  7 ++++---
+ Documentation/devicetree/bindings/mfd/ti,tps65910.yaml         |  6 ++++--
+ Documentation/devicetree/bindings/mfd/ti,tps6594.yaml          |  7 ++++---
+ Documentation/devicetree/bindings/mfd/ti,twl.yaml              |  3 +--
+ 17 files changed, 56 insertions(+), 62 deletions(-)
+---
+base-commit: 9a4cdc958dd79fc6c3b20b51a10debec6ca09fec
+change-id: 20260804-mfd-syspower-a3c8b6a467a4
 
-> 
-> - MFD_MENF21BMC and SENSORS_MENF21BMC_HWMON, LEDS_MENF21BMC, 
->   MENF21BMC_WATCHDOG: The later three declared depends on the former MFD
->   driver
-> - MFD_INTEL_M10_BMC_CORE and FPGA_M10_BMC_SEC_UPDATE, 
->   SENSORS_INTEL_M10_BMC_HWMON: The later two declared depends on the
->   former MFD driver.
-> - MFD_STMFX and PINCTRL_STMFX: The later declared select the former
->   MFD driver.
-> 
-> To summarize, as shown in the current mfd drivers, there is no need to
-> declare dependency to the drivers providing the sub-functions in the
-> mfd drivers, and the drivers of the sub functions should "depends on" or
-> "select" the mfd driver. So if IPMI_LS2K could be tristate, then it would
-> be reasonable to select MFD_LS2K_BMC_CORE or depends on MFD_LS2K_BMC_CORE.
-> 
-> 
-> Regarding the fact that IPMI_LS2K is bool and it is not an independent
-> module but a part of ipmi_si, it comes into my mind that we may choose
-> to adjust the dependency from ipmi_si. That is to remove "select
-> MFD_LS2K_BMC_CORE" from IPMI_LS2K, and add "select MFD_LS2K_BMC_CORE
-> if IPMI_LS2K" to IPMI_SI.
-> 
-> I wonder if such a change would be appropriate.
+Best regards,
+--  
+Peng Fan <peng.fan@nxp.com>
 
-That would be a good solution if it works.  Thanks for working with
-me on this.
-
--corey
-
-> 
-> Cheers,
-> 
-> Miao Wang
-> 
