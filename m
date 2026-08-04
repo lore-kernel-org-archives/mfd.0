@@ -1,60 +1,67 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E55A2368282;
-	Tue,  4 Aug 2026 12:46:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6C9438E5D7;
+	Tue,  4 Aug 2026 12:49:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785847610; cv=none; b=Ta7Y3BZZmMEGoaPIUrHUpebfTqtrynhkIgKkqOrJ0zwime8xZYxdvIBnlRpXZLxF4EZXaw2TlmjWpeT6YdvkwpvJAUabWV0CH8k56La64MWwS5DKKPhYtb+zLpHbJESzGSuqzjyKCeOjAYfDyP8NvpscFxhZoeExj/wqhwqnMDg=
+	t=1785847784; cv=none; b=QjwpXx/yMV2xZ/xSBO/SoEi68rIXm8IRYcNkhA9/j+cQe5RBAJfldnMv6lYVdPjlNYl043/knZ/tfBL+XpggtwIKblUEtSEWFXDLagm+nIHEZvIkR0CXlm6BLKVV1QowYaEmIB78XMBa6/HQTpRmtJ8rg+jMp+SkBLFqV1eoXq0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785847610; c=relaxed/simple;
-	bh=DV+xqtKBS+Jt6YOVAwvmLdBJxBnsZbsx2B+T+izjGJI=;
+	s=arc-20240116; t=1785847784; c=relaxed/simple;
+	bh=e8iVPjb+iwLd8Whp3+AIZ0nnPg4LsHTE+34vwRnxxJI=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=uYxM29FHAkA7tukvEGbtn+TbuBLCSgbBfKMIwK7PJkJdghsLpAiworO3TeFuBpoZjSNZoXlCbnhPcMu6+bq5n4re1v7lsfcVgVXy0Q07er3M+4pDuJ+Uv7tAMD8Sw8CcINvV0oGr4cIQfy7vZhg4eOg0w6XqHK/3xIX1K8ozgqY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iLhwDBgf; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=NEpcHzXY5tWOHy2EaF7z8GI+zD7EPmzd88QnVG9nzvRDoyjuxGZP7wbDHTbe7vR4eIgt2hWZ7Lk4fLsFud2A6zb3aCOFMHCdTAnKaMn9MldEX7/KcGdVlbAlcmr3TcDOOPOd+ZeKfntqT/WUu5fQzxS/NIkf4keJeJ4Abx+smqM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ayeDTUYO; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iLhwDBgf"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EA8D81F000E9;
-	Tue,  4 Aug 2026 12:46:45 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ayeDTUYO"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB81B1F000E9;
+	Tue,  4 Aug 2026 12:49:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785847606;
-	bh=DV+xqtKBS+Jt6YOVAwvmLdBJxBnsZbsx2B+T+izjGJI=;
+	s=k20260515; t=1785847782;
+	bh=e8iVPjb+iwLd8Whp3+AIZ0nnPg4LsHTE+34vwRnxxJI=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=iLhwDBgfYhIf4GSKxKoc51dDg2mYlZkpWl2BsRoz3Qtz5MYSIgwPFbANOqVdCM8o7
-	 Em1M9i0ORt8RBxJMG2lHEZCY5Oi784R/ScXZK+GrWhzhpFNcWz6qBzwdtJFG0sDLdr
-	 Uu/AJy+T6vZAe1sFO8A5ea3yTTPryugih3sRiHVVfck5XGXB4q32pW3vTSLEZfElj8
-	 oLMPqXY3y8nwY1OH3u8NYCUufL+fdSuH/dmBHPlJ/XyjNP71klbuE/trwnhxuXUaDU
-	 hkLkF40EU5IBC1/xdTTiKuvH9Jl3UVa/6//c5WkYmVGXUREWQEUh7Wl1yOz6I4YCFm
-	 iJmkZ2Q1i434A==
+	b=ayeDTUYOrl3DV/ice16IVpLLcdEGjBU5A9J+EITmLWR+g+ZSsLBUcKLVM84yS5yXB
+	 AKFzv3FloFxDMD2Ug06kqIK0+CK1YWMBws9Pxp4ghl5n+1RP7R9wOPYukbGBouBMPb
+	 bT71HtpzDcGmRS7xtBAr0mpvdXUFhG+eqJtBVSZ8rNryAe5ndZR7XBWDYTQS9A16GS
+	 Lvt11QTXFyA1mTt8NxJ3OK+P3U7XDQb99xUGr52lfj03eX9kn21aUOIUPNUkOtDyFc
+	 HePvGwo2dyXLCnkeL8V6Ef6V+DH4QNznD/6Pw4Iem5qmdJhDOzSUh7uGhcyFsplxEp
+	 pkT/ppbpnDT2g==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v4 3/5] dt-bindings: mfd: syscon: Allow syscon
- compatible for Loongson-2K0300 chip id
+Subject: Re: [PATCH v4 4/5] dt-bindings: thermal: loongson,ls2k-thermal: Add
+ compatible for Loongson-2K0300
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Binbin Zhou" <zhoubinbin@loongson.cn>
-Cc: mfd@lists.linux.dev, conor+dt@kernel.org, robh@kernel.org, devicetree@vger.kernel.org, lee@kernel.org
-In-Reply-To: <b76405a88b0cded91ba370139d7223fe2d6953df.1785829933.git.zhoubinbin@loongson.cn>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, lee@kernel.org, robh@kernel.org, conor+dt@kernel.org
+In-Reply-To: <93d79c192b18e1e7387fd8997f168fdc6daf9232.1785829933.git.zhoubinbin@loongson.cn>
 References: <cover.1785829933.git.zhoubinbin@loongson.cn>
- <b76405a88b0cded91ba370139d7223fe2d6953df.1785829933.git.zhoubinbin@loongson.cn>
+ <93d79c192b18e1e7387fd8997f168fdc6daf9232.1785829933.git.zhoubinbin@loongson.cn>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 04 Aug 2026 12:46:45 +0000
-Message-Id: <20260804124645.EA8D81F000E9@smtp.kernel.org>
+Date: Tue, 04 Aug 2026 12:49:41 +0000
+Message-Id: <20260804124941.CB81B1F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-> The Loongson-2K0300 SoC exposes its chip ID registers through a syscon
-> interface. Add the specific compatible `loongson,ls2k0300-chipid-syscon`
-> to the allowed list of syscon bindings so that it can be referenced from
-> the thermal node via a phandle.
+> Add a new compatible string `loongson,ls2k0300-thermal` for the thermal
+> sensor found on the Loongson-2K0300 SoC.
 >=20
+> The hardware differs from existing SoCs in that it requires a phandle to
+> a syscon node that provides the CHIP ID register, used as a compensation
+> source in the temperature calculation.
+>=20
+> Update the binding to make `loongson,chipid` required for this new
+> compatible, and clarify the register region requirements for each
+> variant.
+>=20
+> Acked-by: Conor Dooley <conor.dooley@microchip.com>
 > Signed-off-by: Binbin Zhou <zhoubinbin@loongson.cn>
 
 Sashiko has reviewed this patch and found no issues. It looks great!
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/cover.1785829933.gi=
-t.zhoubinbin@loongson.cn?part=3D3
+t.zhoubinbin@loongson.cn?part=3D4
 
