@@ -1,43 +1,44 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69ACD46D2BA
-	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 15:43:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BF1746D54D;
+	Tue,  4 Aug 2026 15:44:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785858201; cv=none; b=hCW9d+QAegN9i8FM/zeIzePWxdvXHbExfFhErTxb0+BgDVLeFK1Uy2XZi/jNJQyYxskoMdxehn332Vl4oZC2pIxIp3xUiajMpXC5N2jhEr25jTn1ftO5rE2bm2OPgqkYbKxHX1SAMBEsmrlfwbUwxx0+1+fiGWGfJAWk6plz5M4=
+	t=1785858293; cv=none; b=J0VZlPQb5jsvOt0r+H9oPyZ4c+Gh+31vXfGkWli2baYNIONPUKdQx+VWbQfDfrDfQguv4PNsigdZZNj35tEqXl58m26T0tRGP5LX57ClWb791SgTHbzKYJ5nx4iocrwrUXyTTnuidfylgkHJkPcd5sgzLfejTrJ0mZC4nqvQYZI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785858201; c=relaxed/simple;
-	bh=a07Uz3uYLxSL2PZPbbedQIJOA0tSgsF7DD3OOoHwIbk=;
+	s=arc-20240116; t=1785858293; c=relaxed/simple;
+	bh=ov1fuU2kULc3aC9n2F1tFHTkl3JOt9ZjiDNbYDn2I18=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=kmQnsSy0hru/tmG6bTPkgAtc4FAoMtyj+HICOvi83d+0HnSbAseyR/zjOanXd/KfuBRyJT5jMa9c6NQ7kKFS4Mho0SZh7wKnbMUnjoe4ArF+0NOJgOuINUZg38cN9oHfESq12q3f5WbPwmU+rAghGRYGtCHjwgYp1/O/HBkSaYc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=im3LXzMo; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=HtETsyERQyslOOQouTpSTGGpv3bo+LtmTfuTPAp0ZHbqEAJWB0UU/877hcChoH+DrX+IWN3+4lBjPpyfVxCOJ20m34m0hMiwZl246Cfzw6cRhcP7uVamrt5JTcT+Ed9rtHQ6VWnvLcPmRv1wunKjtAzJIYvSO1W/d5KRnDmP/Gs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QS40euDI; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="im3LXzMo"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5766E1F000E9;
-	Tue,  4 Aug 2026 15:43:17 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QS40euDI"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83A1A1F00A3A;
+	Tue,  4 Aug 2026 15:44:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785858197;
-	bh=4NolDWOTQrEluPMjs9TqNdETOudx+MYX/SoimvuHsv8=;
+	s=k20260515; t=1785858289;
+	bh=aN8bu0MartePY6VmwJrJwuYq6VC49S2KVlAlST0+86s=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=im3LXzMoKwLlzJgDw3h1LuT+ZEf15R7kYt1GRTxQa6W6Qzwd+qSutpymRqoVi26hC
-	 Qev5dOM+ojxvC0y98TAvUEOUOj93+0HOY5am8nk89Atf0R/hn/QrNgplKhz9iJ719Q
-	 tm6HCG+U8gc1NptQuzvrg1NwLT7nQJmLToG82Ow/Je9Qi1IS5ejdszhGCxi8wk7gp4
-	 Ybrelm8TMC2XXFQcBco0M0dbxB1QydA4ahqZEZz90rTm3E5BovROFtLNHSAl8rt7MX
-	 ylvVXk9dJW7H/Ayh/hwJ7IgvB/BEfb5MH77kwDZEd5zMps0N159HB52SXVbMFVkpfm
-	 lkfVwfbywvWCw==
+	b=QS40euDIIzjfkYGdJcs2elWRvL4iv1QH2HZUcIRO77xyuiff5q8Q6h9MkWGzK1Kp0
+	 E6HRzSLrdPlOinY7r/UlPV2Indg7lNcjZWUS6kYJ3v66F+QqJboUdgkDwEZziHtMc/
+	 +VpJcfIkzxb2+xNi80PXTww6Mc6SKKIXksttCOtIHd8OxkSrANLNBb3GVVsuoj9HTa
+	 6wy4/OY86S+M0DZ+BEmLh7z/K2mCLp6zoPr81vKmPiKVJvn0tD60ce3GldL/t2k+hX
+	 9TKSIKcJ0rg7OL3d0qS8CboYr1guPy2gD5NXzJ1X41exTbWyj23LBv1UkB1zjSr3FD
+	 CR4tL1f0A4n3w==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 2/4] i2c: cgbc: Add virtual I2C bus support
+Subject: Re: [PATCH 05/10] dt-bindings: mfd: netronix,ntxec: Use generic
+ power-controller schema
 Reply-To: sashiko-reviews@lists.linux.dev
-To: =?utf-8?b?VGhvbWFzIFJpY2hhcmQgKGNvbmdhdGVjIEdtYkgp?= <thomas.richard@bootlin.com>
-Cc: lee@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260804-cgbc-i2c-storage-devices-support-v1-2-fed38510671c@bootlin.com>
-References: <20260804-cgbc-i2c-storage-devices-support-v1-0-fed38510671c@bootlin.com>
- <20260804-cgbc-i2c-storage-devices-support-v1-2-fed38510671c@bootlin.com>
+To: =?utf-8?b?UGVuZyBGYW4gKE9TUyk=?= <peng.fan@oss.nxp.com>
+Cc: conor+dt@kernel.org, mfd@lists.linux.dev, robh@kernel.org, lee@kernel.org, devicetree@vger.kernel.org
+In-Reply-To: <20260804-mfd-syspower-v1-5-a440783c2e78@nxp.com>
+References: <20260804-mfd-syspower-v1-0-a440783c2e78@nxp.com>
+ <20260804-mfd-syspower-v1-5-a440783c2e78@nxp.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 04 Aug 2026 15:43:16 +0000
-Message-Id: <20260804154317.5766E1F000E9@smtp.kernel.org>
+Date: Tue, 04 Aug 2026 15:44:49 +0000
+Message-Id: <20260804154449.83A1A1F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -46,103 +47,48 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
 Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
-
-Pre-existing issues:
-- [High] Uninitialized stack variable `data` used as a denominator, leading=
- to a potential division by zero panic.
+- [Low] The patch introduces a schema `$ref` to `/schemas/power/power-contr=
+oller.yaml#`, which does not exist in the source tree, breaking schema vali=
+dation.
 --
 
---- Patch [2]: [PATCH 2/4] i2c: cgbc: Add virtual I2C bus support ---
-commit 68db5c3b940f7f50540127b0266b86e6b3d69b22
-Author: Thomas Richard <thomas.richard@bootlin.com>
+--- Patch [5]: [PATCH 05/10] dt-bindings: mfd: netronix,ntxec: Use generic =
+power-controller schema ---
+commit c8d8d2474f8ae06d3e1689a3ed174b683577d897
+Author: Peng Fan <peng.fan@nxp.com>
 
-i2c: cgbc: Add virtual I2C bus support
+dt-bindings: mfd: netronix,ntxec: Use generic power-controller schema
+   =20
+This commit updates the netronix,ntxec binding to use the generic
+power-controller schema by adding a reference to power-controller.yaml
+and removing the locally defined system-power-controller property.
 
-Internally the Board Controller has a virtual I2C bus with some virtual
-storage devices on it. Add support for it by defining a i2c_adapter entry.
-This virtual bus has a fixed frequency that cannot be changed.
+> diff --git a/Documentation/devicetree/bindings/mfd/netronix,ntxec.yaml b/=
+Documentation/devicetree/bindings/mfd/netronix,ntxec.yaml
+> index 37fbb953ea12e..2fa8b797c0dcf 100644
+> --- a/Documentation/devicetree/bindings/mfd/netronix,ntxec.yaml
+> +++ b/Documentation/devicetree/bindings/mfd/netronix,ntxec.yaml
+> @@ -13,6 +13,9 @@ description: |
+>    This EC is found in e-book readers of multiple brands (e.g. Kobo, Toli=
+no), and
+>    is typically implemented as a TI MSP430 microcontroller.
+> =20
+> +allOf:
+> +  - $ref: /schemas/power/power-controller.yaml#
 
-> diff --git a/drivers/i2c/busses/i2c-cgbc.c b/drivers/i2c/busses/i2c-cgbc.c
-> index 25a74fa51aa00..c3f1c83b105a8 100644
-> --- a/drivers/i2c/busses/i2c-cgbc.c
-> +++ b/drivers/i2c/busses/i2c-cgbc.c
+[Severity: Low]
+Does power-controller.yaml exist in the kernel tree at this commit?=20
+
+It appears the generic power controller schema might still be a .txt file.
+Referencing a non-existent YAML file causes the dt_binding_check target to
+fail with an unresolved reference error.=20
+
+Additionally, because unevaluatedProperties is set to false in this binding,
+failing to resolve the schema means the system-power-controller property
+used in the example will be flagged as an invalid property.
 
 [ ... ]
 
-> @@ -147,11 +148,14 @@ static int cgbc_i2c_set_frequency(struct i2c_adapte=
-r *adap,
->  	cmd[0] =3D CGBC_I2C_CMD_SPEED | algo_data->bus_id;
->  	cmd[1] =3D cgbc_i2c_freq_to_reg(bus_frequency);
-> =20
-> -	ret =3D cgbc_command(cgbc, &cmd, sizeof(cmd), &data, 1, NULL);
-> -	if (ret)
-> -		return dev_err_probe(i2c->dev, ret,
-> -				     "Failed to initialize I2C bus %s",
-> -				     adap->name);
-> +	/* Virtual bus has a fixed frequency */
-> +	if (algo_data->bus_id !=3D CGBC_I2C_VIRTUAL_BUS_ID) {
-> +		ret =3D cgbc_command(cgbc, &cmd, sizeof(cmd), &data, 1, NULL);
-> +		if (ret)
-> +			return dev_err_probe(i2c->dev, ret,
-> +					     "Failed to initialize I2C bus %s",
-> +					     adap->name);
-> +	}
-> =20
->  	cmd[1] =3D 0x00;
-
-[Severity: High]
-This is a pre-existing issue, but I noticed a potential problem in how
-cgbc_i2c_set_frequency() handles the data variable.
-
-Could this lead to a division by zero panic? The data variable is allocated=
- on
-the stack uninitialized:
-
-drivers/i2c/busses/i2c-cgbc.c:cgbc_i2c_set_frequency() {
-    ...
-    u8 cmd[2], data;
-    ...
-}
-
-When passed to cgbc_command(), if the board controller firmware returns a
-successful status but provides a zero byte count, cgbc_command() skips read=
-ing
-into data and returns 0:
-
-drivers/mfd/cgbc-core.c:cgbc_command() {
-    ...
-    case CGBC_STATUS_DATA_READY:
-        if (istatus > data_size)
-            istatus =3D data_size;
-        for (i =3D 0; i < istatus; i++) {
-            _data[i] =3D ioread8(cgbc->io_cmd + CGBC_CMD_DATA + ((i + 1) % =
-4));
-    ...
-}
-
-If istatus is 0, the loop is skipped and data remains untouched.
-
-When execution continues in cgbc_i2c_set_frequency(), this uninitialized
-value is converted to a frequency:
-
-drivers/i2c/busses/i2c-cgbc.c:cgbc_i2c_set_frequency() {
-    ...
-    ret =3D cgbc_command(cgbc, &cmd, sizeof(cmd), &data, 1, NULL);
-    if (ret)
-        return dev_err_probe(...);
-
-    bus_frequency =3D cgbc_i2c_reg_to_freq(data);
-    ...
-    algo_data->read_maxtime_us =3D (BITS_PER_BYTE + 1) * CGBC_I2C_READ_MAX_=
-LEN
-        * USEC_PER_SEC / bus_frequency;
-    ...
-}
-
-If the uninitialized stack memory evaluates to 0, or if the hardware
-explicitly returns a frequency of 0, would this result in a division by zero
-during the read_maxtime_us calculation?
-
 --=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260804-cgbc-i2c-s=
-torage-devices-support-v1-0-fed38510671c@bootlin.com?part=3D2
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260804-mfd-syspow=
+er-v1-0-a440783c2e78@nxp.com?part=3D5
