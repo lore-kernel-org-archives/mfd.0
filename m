@@ -1,99 +1,98 @@
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 115E73515E6;
-	Tue,  4 Aug 2026 14:54:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E68514399C8
+	for <mfd@lists.linux.dev>; Tue,  4 Aug 2026 14:56:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785855277; cv=none; b=KaQZZnWhUpnT1h0+gfbSR26UVEV4lHYabH0rfB83tGeICBqDnKwxOzgA83xrMX0bcqC+fPaC0B2xUXFS1UrcyE4ebe3vIYy7u0wEMlCAm2YHLWR3UMoeee20ewvTVezvp/f1hyeXVZmo1/0FLFf+5Tnm2mAFRnU0o+qaJJoos3M=
+	t=1785855376; cv=none; b=N57HgDC1SZM3wvwEvsNEHMGsDpk6A0wL33ZdZGiw432vVv3fhdDSc+Rlsr8SRNEuFGFISCzslISbE9miyWtDcyJqUqlsAA7Rmsm84HSGduu6nVLU+J/8Q6Wsz9bB9Km8BgQ2XFWZqy2EHjQ+DFJ1bh+XmW//hxlOPLVUMyr/QA0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785855277; c=relaxed/simple;
-	bh=LladUGeQqQO+Z/uhca5U89Of9v8zaoBpTmkeNyerAWQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=r9Zg2Z0ETdZ5HuGALZOmmGvdxALO83yn69fpCD7jJAv5iVa9APCJqeH2yRbMQRyk08bZ566CSedFrVvKUKf3oUfkbqPKDFR7DyUZBJxNUKCeR+rQdvvQ+/lJG+iqKbIqP1hOFOKYEKd4ysOQoA0CW4gD7KHTxz9RX9vGlBMU0T4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=G6RA/B6N; arc=none smtp.client-ip=156.67.10.101
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+	s=arc-20240116; t=1785855376; c=relaxed/simple;
+	bh=8RNOwG3ZepOtWh9A3e9lLXLVAvJfkOaUb5pq19/wUZY=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=axXRSnWLQ7M3jCkmN0vTBCQzgLM+BVoHL1yl6qB9Eesh35JRWnYCHJnD/PTzDXcqR9PDC+evn6mCF/j60HC6nL9ZTs3LDjqmLZLcgvMwD7Tsv/KY823grNS/v3bodvd5ZK30wiggJNnvjvP74nnl5kIabqFwHSbsQmvwRBGUS2Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=ZmiiEWgG; arc=none smtp.client-ip=185.246.84.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="G6RA/B6N"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=FVcysNhXi0SKuam3CXUhAeBuqKpKKoH5Agw3hOwh+OQ=; b=G6RA/B6N9QcAQXF9n5BBZcIvR6
-	udxKfvx1udCDq1mUllEsc1W+KanrgLjoCOw7n5czm5NayiKbRiyVAlPiVq39BhGrqwFxmSajG8VZJ
-	WSCcdogKlJa3QF5eqLXoTNEgUkDQf5AUdxIoRjkFYOih/yukSGAQDR/E5KiB/sZOJGrA=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1wrGX6-00G0Oe-HM; Tue, 04 Aug 2026 16:54:20 +0200
-Date: Tue, 4 Aug 2026 16:54:20 +0200
-From: Andrew Lunn <andrew@lunn.ch>
-To: James Hilliard <james.hilliard1@gmail.com>
-Cc: Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Chen-Yu Tsai <wens@kernel.org>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Samuel Holland <samuel@sholland.org>,
-	Andre Przywara <andre.przywara@arm.com>,
-	Richard Genoud <richard.genoud@bootlin.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Giuseppe Cavallaro <peppe.cavallaro@st.com>,
-	Jose Abreu <joabreu@synopsys.com>,
-	Maxime Chevallier <maxime.chevallier@bootlin.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Saravana Kannan <saravanak@kernel.org>, Lee Jones <lee@kernel.org>,
-	Heiko Stuebner <heiko@sntech.de>, netdev@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-sunxi@lists.linux.dev, linux-kernel@vger.kernel.org,
-	linux-stm32@st-md-mailman.stormreply.com, mfd@lists.linux.dev,
-	linux-rockchip@lists.infradead.org
-Subject: Re: [PATCH 10/21] net: phy: add X-Powers AC200 EPHY control driver
-Message-ID: <205e9051-8e43-44bb-a4b5-4ec69a192fa3@lunn.ch>
-References: <20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com>
- <20260802-submit-acx00-of-dynamic-v1-v1-10-0a53cd9e21cc@gmail.com>
- <05b1e6a2-725e-4b8e-8629-249637bbcb81@lunn.ch>
- <CADvTj4o0JdjoO+FC4pO=qnjEQ8MRyzQdKp2Hxy9NsPU-gym5OQ@mail.gmail.com>
- <9b8be475-1fde-409c-a82e-be4b2e402650@lunn.ch>
- <CADvTj4pBovti19MXgQjFpxm=7aRm0sYQz9jxfo8bu3txH94THQ@mail.gmail.com>
- <a9ce53dd-0873-41c0-ad6a-fb42e6cc7aaa@lunn.ch>
- <CADvTj4qpHU3F0DrEmc0vFi+JiwTNERniiMHKo1LmBd8sg58wJA@mail.gmail.com>
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="ZmiiEWgG"
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 516D51A140A;
+	Tue,  4 Aug 2026 14:56:13 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 21AED6029E;
+	Tue,  4 Aug 2026 14:56:13 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id E807911C32F2D;
+	Tue,  4 Aug 2026 16:56:10 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1785855372; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding; bh=wMKCpGzde44WGCNaOstqI+K+UpoNsd04Cs3OOxvzj80=;
+	b=ZmiiEWgGNhPpblkf/h+w9ty3Lje9o8Sqki+qcNvV6oXV/HMkDK3g9JmD/ExhYtKRHPmfDT
+	HGRH0vofNGHVBo+eAIfQlw2rK8J28u67erckzLZgZAROJIn3GxmSJDjjiaqEzfHwiOX+02
+	YcQC4NEDIloxUxXtSjhkR1OezLQ/1YiE3TTGbAuQkMOIrSEFDjgHEvGEST2+VVXsMY86te
+	lIHDgqFsowIxauBEd5sA5Wl0UypMPYLFWuVlxJ/8KhZgq6ADdxrxbeDesJMwHZ0Aqee3zP
+	D3WJowxkE/VQWHFcaV4vHZvG5Nx0E0AylamxeAPyrxI+/XkjDs4WGKRVAT6F5g==
+From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
+Subject: [PATCH 0/4] Congatec Board Controller: Add storage devices support
+Date: Tue, 04 Aug 2026 16:55:50 +0200
+Message-Id: <20260804-cgbc-i2c-storage-devices-support-v1-0-fed38510671c@bootlin.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CADvTj4qpHU3F0DrEmc0vFi+JiwTNERniiMHKo1LmBd8sg58wJA@mail.gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/y2NwQrCQAxEf6XkbGC7Cy74K+Jhm8aaS3dNtiKU/
+ rtBPb4ZZt4OxipscBl2UH6JSV0dxtMA9CjrwiizM8QQzyGPGWmZCCUSWq9avJ99RWxoW2tVO06
+ JOROXlGIAv2nKd3l/Fdfbj5Wfm5v6PzyOD12h8kqHAAAA
+X-Change-ID: 20260717-cgbc-i2c-storage-devices-support-b3ee7cea3320
+To: Lee Jones <lee@kernel.org>, Andi Shyti <andi.shyti@kernel.org>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Werner Gartner <Werner.Gartner@congatec.com>, mfd@lists.linux.dev, 
+ linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org, 
+ "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>, 
+ stable@vger.kernel.org, Sashiko <sashiko-bot@kernel.org>
+X-Mailer: b4 0.15.2
+X-Last-TLS-Session-Version: TLSv1.3
 
-> I agree that the link PHY cannot be identified by reading its
-> registers before the package control sequence has run. I do not agree
-> that this means an arbitrary ID should be placed in DT, though.
+The Congatec Board Controller has an internal I2C bus with several storage
+devices (EEPROM and RAM). The bus and devices are virtual but act as real
+hardware. This series adds support for both the bus and devices.
 
-The ability to put the ID in DT is there for two reasons:
+List of devices:
+- Secure Data EEPROM  (64 bytes, RO): static and dynamic board info
+- BIOS EEPROM         (32 bytes, RW): reserved for BIOS applications
+- BC EEPROM           (32 bytes, RO): Board Controller operational params
+- User EEPROM         (32 bytes, RW): user applications
+- BIOS RAM            (32 bytes, RW): reserved for BIOS applications
+- BC RAM               (8 bytes, RO): Board Controller operational params
+- User RAM            (16 bytes, RW): user applications
 
-1) You cannot enumerate the PHY because of missing clocks etc.
-2) The vendor messed up, and did not put a valid ID in registers 2 and 3.
+The i2c-cgbc driver instantiates these devices. A dedicated driver for
+these devices was not necessary since the at24 driver can handle them.
+The 24c01 entry (the most generic one) is used, and parameters (size,
+read-only flag...) are customized via the software_node properties.
 
-2 does not happen very often, but this is one example. They are
-different PHYs, they need different driver code, when you consider the
-PHY as a whole.
+I also took this opportunity to fix an issue reported by Sashiko in the MFD
+driver (PATCH 1).
 
-I also wound not put in an arbitrary ID, pick an unused ID in the
-vendors range.
+Signed-off-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
+---
+Thomas Richard (congatec GmbH) (4):
+      mfd: cgbc: Fix use of negative error code as valid session handle
+      i2c: cgbc: Add virtual I2C bus support
+      mfd: cgbc: Add virtual I2C bus support
+      i2c: cgbc: Add virtual storage devices on the virtual I2C bus
 
-> Both AC200 and AC300 expose the same link-side PHY ID and register
-> layout.
+ drivers/i2c/busses/i2c-cgbc.c | 174 ++++++++++++++++++++++++++++++++++++++++--
+ drivers/mfd/cgbc-core.c       |   7 +-
+ 2 files changed, 174 insertions(+), 7 deletions(-)
+---
+base-commit: 82442496954504a901faf74105a5ab592d782288
+change-id: 20260717-cgbc-i2c-storage-devices-support-b3ee7cea3320
 
-No they don't. There are extra registers in different address domains.
+Best regards,
+--  
+Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
 
-	Andrew
