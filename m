@@ -1,230 +1,229 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com [209.85.210.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0CF883AC0C3;
-	Wed,  5 Aug 2026 01:54:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77E9B3BB684
+	for <mfd@lists.linux.dev>; Wed,  5 Aug 2026 02:28:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785894886; cv=none; b=X9o0xy6Q3gJO9bNjCLlIJFxIZQHZb83IYUt7GUW3N0occeCPY76Sn+gAkwtR4TxvRVFWhxqM95gpXi7onxLDNtp5u3mW+CIWKwRZA2A6d4RpDD4lCB212gtTIiKHr+n/CMzlRoPv0e+zTvHiMPcOKzD8Aw1inOFbJ8uAEfbw8rc=
+	t=1785896911; cv=none; b=mz0Syg3mbFPw/mdIaEYe7nJRWhpZ9iOhfqH4YGLES8MZTSzTk11SlOUwcG7VaEs0c/KMU5DYnM1TI3xsZOrrP+13QySUkZuEZsdDKDHyhCGtMHWUyO/BaZ189A/XQuM+IAhFyMwh7EgbommUfQBB4LbKY7Pgzz2NNwyyJCfShVs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785894886; c=relaxed/simple;
-	bh=RH/0HXmrddyruFd6Vy0PnXTnrHiaivftlKKQ9qaO0fo=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=QIfsyAB4pmEUr73eD4UtgfIPIoMDhOOMOgkM6z0CNW6A13LuVLiz6dx2415y3NjwkxSEZW/Tp+5onvzcmL7GAz5r8U9yszZ9U1Ot/3ncpckv4ayZ9NL2nDOwpwruIiKjYv+/3ZhyevYJV/+UHzHqkgPFELW1fMoiIhI8eYN0+b4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BuMAYWNw; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785896911; c=relaxed/simple;
+	bh=AgYor1tl4LwK4gNfv9Pb0FXMqBQ2M23h+n+2e5R1FgA=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=uBeaiM61ZMBccdPVxwn4eRo2MhWz1XyVXa648hA7GdxmbhTa4jBhQGXLc4G+JVfb5ncVR7ucP/5wF927KzGpTnSMcL2R2buoN2rc+8FqxdCxkLxz3KBdeYzQSAE0g5gKoNAP214n+snE+qpXJLwSmshzU94BFbAU7Twp6ruU3t4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=PsFq6zie; arc=none smtp.client-ip=209.85.210.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BuMAYWNw"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8B1D11F000E9;
-	Wed,  5 Aug 2026 01:54:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785894876;
-	bh=O+wTl6oKFQKzUCUyig9liyowzaff9AYxPzClAQLelh8=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=BuMAYWNwbDPUtUnYZXn2fFb28ZT4niTlec0Yf3T0MRVKaK2dz9aOq0dL67doxsgXt
-	 wDtSG1aSGeRv1Fx+RmUdbiv9OC5W4rnzBhAaf7QpAZloJgDDyaMnThZNewBVr//v6L
-	 0aEzsE/Sa/fUl50AOw+KTyf632PbClBra5yJu5ULGxd8HOIC3d66srZqgERg0aQe5f
-	 Jd+6xe6PSajW7p5V3Y9Eev+Ymob41Ib+OVVdPG/WXrlF1pbPVuqvf+fqqCYykYGlA7
-	 MkaDPzT9LdDNsLHq0/VXEi97p8WNsefDRXxQPyGfOpVlocfk/nm//mWhxG3q6w5vRN
-	 /reH7FTdaR4tQ==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH] mfd: wm8350: propagate ADC read timeout instead of
- returning 0
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Ivy Lopez" <skunkolee@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org, linux-hwmon@vger.kernel.org
-In-Reply-To: <20260805014221.16412-1-skunkolee@gmail.com>
-References: <20260805014221.16412-1-skunkolee@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 05 Aug 2026 01:54:35 +0000
-Message-Id: <20260805015436.8B1D11F000E9@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="PsFq6zie"
+Received: by mail-ot1-f49.google.com with SMTP id 46e09a7af769-7e9ef94c0e2so327660a34.3
+        for <mfd@lists.linux.dev>; Tue, 04 Aug 2026 19:28:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1785896908; x=1786501708; darn=lists.linux.dev;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=+1ymEvJrHT6jMKxrOcndPKlvHyWzoiSIEsONq571lkk=;
+        b=PsFq6zieifP0BtdS9U/iDLgRX+bWIXQ802lyO22r6P959+G4D0DeZbMzQB1vBBNYkj
+         mJ8ESw5dvfj5YKvB0UPFiS3yu9bSWl3LRkcG6nHs0KzKjjeuO8l9/MUW3zHNFQDCMmyq
+         cClpNPUF1I79xC4lD/U0FXnHcysHu7CSWhB2dekSxBu20GId9JZ+gd/DjUjYucPsN0ET
+         4U22+vURh32jW2x/enZbBZFsY29Z+FCPFj5W+O8X4R39mkNq09THeApGi7z3YxOjpaoi
+         86usbWxtldAoiFkpu+y4On2DcC67sqtlJEf10HEAUg4A7nau2zj1XYCq6fJ7U6Jq+sTj
+         MMtA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785896908; x=1786501708;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=+1ymEvJrHT6jMKxrOcndPKlvHyWzoiSIEsONq571lkk=;
+        b=oBHMuZN+s/OVpc7ud/K4hSxxawzXfEmgSqSzPmfH5+PdgKLmt/K3Mk7HGPLrnsfPUi
+         13gQ0Osk9k8/kQ5PHW1SAN+8nMwCXnYow7i1tOLHocLcvgaRYsbhSDU/U/O8Df0B7vQx
+         CkUGVN1wOC+dc7kqX+TwAXFJqJAMiBgv5i7PQ7NAIjMr0kedFzxWKWpv660XsHhCLVxK
+         /nR0aeCKKHw6V52TvzgfghJyGeo/mYDsBMyGz9kP2a86f14eGkyDOVX4MVvlZdKO2ltR
+         PzAup51bc38GRLImwPXPZiBH94Toc2iX8oaVWKJeELWjGim7o4xSbtcXdqQw6gzlL9g7
+         stDA==
+X-Forwarded-Encrypted: i=1; AHgh+RqGrA9Ghc4EiSKWhSP3svl+Y1+WE/+NZr/923UgibM2KLItXIzsH3GBnJsynAEpZt0ZWkM=@lists.linux.dev
+X-Gm-Message-State: AOJu0YwPRD0aZslB53SVoff9bpF9f1eURYuU4fVc6HMS5qRkequL3AmF
+	njbgxOtMApw1e7Z6eLDFkTDkFnJvRRbx7Dtnu0h3E78DtCkJhojiM90ZMQriWujf
+X-Gm-Gg: AR+sD10TfRP55qvijMh5W5WPdhvyucsDEdvPCCfSoWY6/Il+y0/EqzCV/VqJgFrrGt4
+	tKCEW4lIQATIunMld9u2KHRPivPz/vYXAvqQFvehTKsVAWSyttRGnFxD47PTBH2Ydt39VRjJ0wR
+	I7VRM85gBll7eFUNmFO4+kp8B2URy9jW0f81dHWjz2uWgpmPr5lctIIEQxf21ZefRsxemIcEjRd
+	fT5Pb3rYFtIPegP4yRPMjx9L+p2KMvfCjhj1h/Oud21MfmDBJT3JdI+FSYLRRi07hOHIWolIKLh
+	35T28UXaVfbT02XJr9yQyXQIzyalfElgLeSQlXsM8RyTnrmdR0ZSP5F9zY5XiznnmVCIVpn2Xid
+	fzS6pEdgiH8TZwNVMinbep7ev37RLS0rXJUwaxu278QNfuL4M4AFav6wQo4CMWOuj7zcrjvVvuB
+	yYODBiRln6azg24yxwmRB0yb5W0UDRXn2GgNf6zGi9AHN+2rLaUR+01RQ6p8nXykt15E7v6aYue
+	kH2vj8FJ4MFAZ9vYwNm3WpsMIgp8qfTBcxgGdXb+QAdFGTbhC/79X6FJ5ZH3+z/l11T/ANGni8W
+	O26wDwj2RDM8OS1Ol/WrTFKVL8pRdE0iw5A6YGgGgQCfTmCcOdxhPQkq7tBmEkOwYIszBFhTAyj
+	pH36KAfTMowIvSO1Q
+X-Received: by 2002:a05:6830:258c:b0:7e9:e288:2b60 with SMTP id 46e09a7af769-7f1e5c13d31mr2587945a34.1.1785896908242;
+        Tue, 04 Aug 2026 19:28:28 -0700 (PDT)
+Received: from [127.0.1.1] (184-96-154-59.hlrn.qwest.net. [184.96.154.59])
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7f1df565d37sm2078153a34.16.2026.08.04.19.28.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 04 Aug 2026 19:28:27 -0700 (PDT)
+From: James Hilliard <james.hilliard1@gmail.com>
+Subject: [PATCH net-next v2 0/8] net: phy: add X-Powers AC200/AC300 EPHY
+ support
+Date: Tue, 04 Aug 2026 20:26:58 -0600
+Message-Id: <20260804-submit-acx00-of-dynamic-v1-v2-0-3eef49ff1d8c@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/42OSw7CMAxEr4K8xigNHwEr7oG6CI4LRiSBJK1aV
+ b07oXAApNmMZvw8IySOwgmOixEid5Ik+GL0cgF0M/7KKLZ40Erv1F5pTO3FSUZDvVIYGrSDN04
+ IuwoPG6MsVdtG7zUUwDNyI/0MP4PnjJ77DPU3KZw7U/6wf93Ir7b8z9+DT+0mKYc4zOO6asb8s
+ 6NIoTLbNdkD64rodHVGHisKDuppmt5lRCtG9QAAAA==
+X-Change-ID: 20260802-submit-acx00-of-dynamic-v1-94a0dc15f282
+To: Andrew Lunn <andrew+netdev@lunn.ch>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>, 
+ Andrew Lunn <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>, 
+ Russell King <linux@armlinux.org.uk>, Heiko Stuebner <heiko@sntech.de>
+Cc: netdev@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, mfd@lists.linux.dev, 
+ linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, 
+ James Hilliard <james.hilliard1@gmail.com>
+X-Mailer: b4 0.15.2
 
-Thank you for your contribution! Sashiko AI review found 4 potential issue(=
-s) to consider:
+This revision deliberately limits the series to the common PHY and the
+two package-specific control paths. It does not contain runtime Device
+Tree selection, generic MDIO reconfiguration, LEDs, interrupts,
+Wake-on-LAN, statistics, EDPD or PHY-autonomous EEE.
 
-New issues:
-- [High] power_supply get_property callbacks return a positive voltage inst=
-ead of 0 on success.
-- [Low] The commit message description starts with a lowercase letter, viol=
-ating MFD subsystem guidelines.
+The AC200 and AC300 MDIO link endpoints report the same Clause 22 PHY
+identifier and use a compatible link-side paged register layout. Neither
+endpoint is accessible until its package-specific control path has
+initialized it. AC200 uses registers in its I2C MFD regmap, while AC300
+exposes a separate non-PHY Clause 22 control device.
 
-Pre-existing issues:
-- [High] wm8350_reg_read() returns uninitialized stack memory on I/O error.
-- [Medium] The MFD probe function fails to unwind registered devices or ret=
-urn an error if child registration fails.
---
+Keep those transport-specific resources in separate control drivers and
+share only a small private operations interface with the common PHY
+driver. A board described by this series references exactly one enabled
+control device. The PHY driver creates a managed device link to that
+provider, powers the link block before accessing it, and passes the PHY
+address and MAC-selected interface mode to the provider.
 
---- Patch [1]: [PATCH] mfd: wm8350: propagate ADC read timeout instead of r=
-eturning 0 ---
-commit 85cc18ec8aa2aed410635585d8d7ebb26d16479c
-Author: Ivy Lopez <skunkolee@gmail.com>
+This split is independent of CONFIG_OF_DYNAMIC. The initial series uses
+only fixed descriptions and has no Dynamic MDIO dependency. A separate
+development branch can later use bit 0 of the same configuration field
+for runtime selection without changing the binding or provider interface
+or duplicating the common PHY code.
 
-mfd: wm8350: propagate ADC read timeout instead of returning 0
-   =20
-This commit updates wm8350_read_auxadc() to return -ETIMEDOUT when the AUX
-ADC read times out, instead of returning a masked value of 0. It also
-modifies the hwmon and power_supply drivers to propagate this error.
+The series adds:
 
-> mfd: wm8350: propagate ADC read timeout instead of returning 0
+  - a minimal AC200 MFD core and AC200 EPHY control child;
+  - the AC300 non-PHY MDIO control driver; and
+  - the shared AC200/AC300 PHY driver with basic link operation, package
+    calibration, power sequencing and vendor analog initialization.
 
-[Severity: Low]
-This isn't a bug, but the commit message description starts with a lowercase
-letter. Should this be capitalized according to MFD subsystem guidelines?
+The reduced v2 series was built and boot-tested on an H616 system with
+an AC300 package. The raw SID bytes at offset 0x2c were 0x06 0x05, making
+the packed two-bit configuration field 0b01: AC300 with normal calibration
+tuning. The driver validated that value against the fixed AC300 provider,
+bound at MDIO address 0, negotiated a 100 Mbps full-duplex link and passed
+network traffic.
 
-> diff --git a/drivers/mfd/wm8350-core.c b/drivers/mfd/wm8350-core.c
-> index fbc77b218215c..3120c6b8fa3fb 100644
-> --- a/drivers/mfd/wm8350-core.c
-> +++ b/drivers/mfd/wm8350-core.c
+The H616 EMAC1 support has been split into an independent series. Board
+Device Trees and defconfig updates will follow after the driver and
+binding interfaces settle. That later H616 integration will use the
+Allwinner H616 PWM controller as the companion input clock; this code
+series neither applies on nor builds against the PWM series.
 
-[ ... ]
+The AC200 portions build on earlier work by Jernej Skrabec and Andre
+Przywara:
 
-> @@ -221,19 +222,24 @@ int wm8350_read_auxadc(struct wm8350 *wm8350, int c=
-hannel, int scale, int vref)
->  	wait_for_completion_timeout(&wm8350->auxadc_done, msecs_to_jiffies(5));
-> =20
->  	reg =3D wm8350_reg_read(wm8350, WM8350_DIGITISER_CONTROL_1);
+  https://github.com/jernejsk/linux-1/commits/ac200-v4
 
-[Severity: High]
-This is a pre-existing issue, but does wm8350_reg_read() return uninitializ=
-ed
-stack memory on I/O errors?
+Public AC200 and AC300 documentation is linked from:
 
-Looking at wm8350_reg_read():
+  https://linux-sunxi.org/AC200
 
-u16 wm8350_reg_read(struct wm8350 *wm8350, int reg)
-{
-    unsigned int data;
-    int err;
+The AC200 parent schema references the EPHY-control schema in patch 1.
+The AC200 control driver needs the MFD core, so those patches need to be
+kept together or placed on an immutable branch. The AC300 control driver
+and common PHY driver have no link-time dependency on the AC200 backend.
 
-    err =3D regmap_read(wm8350->regmap, reg, &data);
-    if (err)
-        dev_err(wm8350->dev, "read from reg R%d failed\n", reg);
+Assisted-by: OpenAI Codex (gpt-5.6-sol, max)
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+---
+Changes v1 -> v2:
+  - split H616 EMAC1, board Device Trees and defconfig into independent
+    series
+  - remove Dynamic MDIO changes and runtime Device Tree provider
+    selection; require exactly one enabled provider
+  - remove the PHY-autonomous EEE dependency and keep Intelligent EEE
+    disabled
+  - defer LEDs, interrupts, Wake-on-LAN, statistics and EDPD to separate
+    feature patches
+  - make the MAC-provided phydev->interface the sole interface-mode
+    source
+  - retain separate AC200 and AC300 control drivers behind a minimal
+    private operations structure
+  - retain the two-bit package-configuration cell, validate its
+    variant bit against the fixed provider and use its AC300 tuning bit
+  - reduce the initial AC200 MFD core to the common regmap, supplies,
+    clock, reset and EPHY child
+  - leave package LED pads disabled in the basic control drivers
+  - Link to v1:
+    https://patch.msgid.link/20260802-submit-acx00-of-dynamic-v1-v1-0-0a53cd9e21cc@gmail.com
 
-    return data;
-}
+To: Andrew Lunn <andrew+netdev@lunn.ch>
+To: "David S. Miller" <davem@davemloft.net>
+To: Eric Dumazet <edumazet@google.com>
+To: Jakub Kicinski <kuba@kernel.org>
+To: Paolo Abeni <pabeni@redhat.com>
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+To: James Hilliard <james.hilliard1@gmail.com>
+To: Lee Jones <lee@kernel.org>
+To: Andrew Lunn <andrew@lunn.ch>
+To: Heiner Kallweit <hkallweit1@gmail.com>
+To: Russell King <linux@armlinux.org.uk>
+To: Heiko Stuebner <heiko@sntech.de>
+Cc: netdev@vger.kernel.org
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Cc: mfd@lists.linux.dev
+Cc: linux-arm-kernel@lists.infradead.org
+Cc: linux-rockchip@lists.infradead.org
 
-If regmap_read() fails, the uninitialized data variable is returned. Callers
-then blindly use this garbage value to write back to critical hardware
-registers, which can cause power domains to randomly turn on or off.
+---
+James Hilliard (8):
+      dt-bindings: net: x-powers: add AC200 EPHY control
+      dt-bindings: mfd: x-powers: add AC200
+      mfd: add X-Powers AC200 support
+      net: phy: add X-Powers AC200 EPHY control driver
+      dt-bindings: net: x-powers: add AC300 EPHY control
+      net: phy: add X-Powers AC300 EPHY control driver
+      dt-bindings: net: x-powers: add AC200/AC300 EPHY
+      net: phy: add X-Powers AC200/AC300 EPHY driver
 
-> -	if (reg & WM8350_AUXADC_POLL)
-> +	if (reg & WM8350_AUXADC_POLL) {
->  		dev_err(wm8350->dev, "adc chn %d read timeout\n", channel);
-> -	else
-> +		ret =3D -ETIMEDOUT;
-> +	} else {
->  		result =3D wm8350_reg_read(wm8350,
-> -					 WM8350_AUX1_READBACK + channel);
-> +					WM8350_AUX1_READBACK + channel);
-> +	}
-> =20
->  	/* Turn off the ADC */
->  	reg =3D wm8350_reg_read(wm8350, WM8350_POWER_MGMT_5);
->  	wm8350_reg_write(wm8350, WM8350_POWER_MGMT_5,
-> -			 reg & ~WM8350_AUXADC_ENA);
-> +			reg & ~WM8350_AUXADC_ENA);
-> =20
->  	mutex_unlock(&wm8350->auxadc_mutex);
-> =20
-> +	if (ret)
-> +		return ret;
-> +
->  	return result & WM8350_AUXADC_DATA1_MASK;
->  }
->  EXPORT_SYMBOL_GPL(wm8350_read_auxadc);
+ .../devicetree/bindings/mfd/x-powers,ac200.yaml    |  77 +++
+ .../bindings/net/x-powers,ac200-ephy-ctl.yaml      |  39 ++
+ .../bindings/net/x-powers,ac300-ephy-ctl.yaml      |  70 +++
+ .../bindings/net/x-powers,acx00-ephy.yaml          | 117 +++++
+ drivers/mfd/Kconfig                                |  12 +
+ drivers/mfd/Makefile                               |   1 +
+ drivers/mfd/ac200.c                                | 207 ++++++++
+ drivers/net/phy/Kconfig                            |  27 +
+ drivers/net/phy/Makefile                           |   3 +
+ drivers/net/phy/xpowers-ac200-ctl.c                | 294 +++++++++++
+ drivers/net/phy/xpowers-ac300-ctl.c                | 423 ++++++++++++++++
+ drivers/net/phy/xpowers-acx00.c                    | 544 +++++++++++++++++++++
+ drivers/net/phy/xpowers-acx00.h                    |  17 +
+ 13 files changed, 1831 insertions(+)
+---
+base-commit: b16bab325801c7be004222cad0ae296aa5982e79
+change-id: 20260802-submit-acx00-of-dynamic-v1-94a0dc15f282
 
-[Severity: Medium]
-This is a pre-existing issue, but does the MFD probe function fail to unwind
-registered devices if a child registration fails?
+Best regards,
+--  
+James Hilliard <james.hilliard1@gmail.com>
 
-Looking at wm8350_client_dev_register():
-
-ret =3D platform_device_add(*pdev);
-if (ret !=3D 0) {
-    dev_err(wm8350->dev, "Failed to register %s: %d\n", name, ret);
-    platform_device_put(*pdev);
-    *pdev =3D NULL;
-}
-
-This custom helper drops the error, causing wm8350_device_init() to proceed
-without unwinding previously registered children. This violates the MFD
-subsystem guideline that requires unwinding if a child device fails to
-register.
-
-> diff --git a/drivers/power/supply/wm8350_power.c b/drivers/power/supply/w=
-m8350_power.c
-> index b0eb6e0ce8bcf..1113730279053 100644
-> --- a/drivers/power/supply/wm8350_power.c
-> +++ b/drivers/power/supply/wm8350_power.c
-
-[ ... ]
-
-> @@ -257,7 +269,10 @@ static int wm8350_ac_get_prop(struct power_supply *p=
-sy,
->  				 WM8350_LINE_SUPPLY);
->  		break;
->  	case POWER_SUPPLY_PROP_VOLTAGE_NOW:
-> -		val->intval =3D wm8350_read_line_uvolts(wm8350);
-> +		ret =3D wm8350_read_line_uvolts(wm8350);
-> +		if (ret < 0)
-> +			return ret;
-> +		val->intval =3D ret;
->  		break;
->  	default:
->  		ret =3D -EINVAL;
-
-[Severity: High]
-Does this inadvertently return the positive voltage value on success?
-
-By assigning the result of wm8350_read_line_uvolts() to ret in
-wm8350_ac_get_prop(), the power_supply_get_property API will now return a
-large positive voltage (e.g., 5000000) instead of 0 on success.
-
-Many callers within the kernel check if (power_supply_get_property(...))
-and will incorrectly treat the positive return value as a failure, leading
-to broken functionality.
-
-[ ... ]
-
-> @@ -287,7 +302,10 @@ static int wm8350_usb_get_prop(struct power_supply *=
-psy,
->  				 WM8350_USB_SUPPLY);
->  		break;
->  	case POWER_SUPPLY_PROP_VOLTAGE_NOW:
-> -		val->intval =3D wm8350_read_usb_uvolts(wm8350);
-> +		ret =3D wm8350_read_usb_uvolts(wm8350);
-> +		if (ret < 0)
-> +			return ret;
-> +		val->intval =3D ret;
->  		break;
-
-[Severity: High]
-Could this also leak the positive voltage into the return value of
-wm8350_usb_get_prop() instead of returning 0 on success?
-
-[ ... ]
-
-> @@ -356,7 +378,10 @@ static int wm8350_bat_get_property(struct power_supp=
-ly *psy,
->  				 WM8350_BATT_SUPPLY);
->  		break;
->  	case POWER_SUPPLY_PROP_VOLTAGE_NOW:
-> -		val->intval =3D wm8350_read_battery_uvolts(wm8350);
-> +		ret =3D wm8350_read_battery_uvolts(wm8350);
-> +		if (ret < 0)
-> +			return ret;
-> +		val->intval =3D ret;
->  		break;
-
-[Severity: High]
-Is the same regression present here in wm8350_bat_get_property(), where the
-function will return the positive battery voltage rather than 0 on success?
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260805014221.1641=
-2-1-skunkolee@gmail.com?part=3D1
