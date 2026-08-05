@@ -1,206 +1,118 @@
-Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com [209.85.208.169])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A53A3E2751
-	for <mfd@lists.linux.dev>; Wed,  5 Aug 2026 07:14:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B06F33E6392;
+	Wed,  5 Aug 2026 08:08:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785914088; cv=none; b=o8hnzxyJLGbbxQwqtsuuRVmdeYnkh+Ui2zhMqV3jI/YlaOCMzY+xsR/WgbNNRybl8AnrZcg11+sSKikhTysR4lW5ugZTtcdAXcHFN9F0N/JBc+X2WPRSiHwee88uiST7fczF/khJ49gSUBL7XTYUk7nu4rGW6vNJ2cwggJyz6mw=
+	t=1785917295; cv=none; b=rGk487BMGF6cSNjwKAr5avn9mIPHgmf5dJcxwGIik/rH6p7m/lqexDDTQ7aIvKBeNXk9Y7Dx+v4OgLeZOJIRE4Ny7cnfJww1/lN/N+tZ5sVjrItGQeSOf8ZHmS9uwfnPqdenVhAcn8TQWZwpMM1jVyQxluDA04c7S0JaecyMwYw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785914088; c=relaxed/simple;
-	bh=uepu9acxXvQl5sYD1/Nq3WCCzgCd4xSS+zMYdRJKUnY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=pa/S72LD/Xg7xApSL3RVTgcGZ5GSiZtOyZDlpXJqHDKMzwGPV0AMdeU+/Todh+fcsu2IydmIG0bNT86djLRVd8TxvEDUVTxZOnqhNS5Gk+qP24E/nU9TWrVAAt1y/OxIOCr+WH0qzA71BCgIXTjecb7UxnLGB5Mmx2nnS8UpWFg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZucGsbvy; arc=none smtp.client-ip=209.85.208.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1785917295; c=relaxed/simple;
+	bh=NpJ68cAdxRTul9v+KRzPMyOhGoHG7IvwOK7cj3TZ7Fk=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=OBKH16O4073DhnnhQ09TG4mr82r0R6ze9FxdkZtm90zkWEjFF53T4yQeBM7pSqLixLdv1WHMN8+blkXA0V59Z6eCIeZXFs+86qAN42c0neeyUJpL36Xk5t3qRggRByxSQompXfPFv3uUdW9p1GtaO0F395duf9OYptszn9DiE78=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=tWUfbIex; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZucGsbvy"
-Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-39c7ce122c7so6318451fa.2
-        for <mfd@lists.linux.dev>; Wed, 05 Aug 2026 00:14:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785914084; x=1786518884; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=+WwkS9i7GNpI0kimuglDAwrHsAV6ybfyNHVpUwpH78Q=;
-        b=ZucGsbvyajgRhTWqr6rW7djXDsSAn9UM2qzWES8cPpGPudzJEoIDvgH8rNISDOQ33N
-         VlhLGmIKbmLFpy1AUZjB+PTkUgboKysoCHhTNUVYMsynQQd4ENV4cWnNdALfuqpq+LSm
-         Nv0CjKwCAMmh3k6FSVrSOh6yuUF0v0JedCRML1Gap/8/QWMPZAesKOqjei+8RSjLR+B4
-         BhvzGq45Cas0wfnfFZ29r+2ahrjRKoePjmK8gKCA3waiqb/C5xs/foDbbZDvakvvsD5n
-         NS9tA3sWotcpDl3ZiLOFoWVeQCf3zRDMgGxqgScuh01gGWUEbLwhuF3awr03UO/Rt//S
-         MsqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785914084; x=1786518884;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=+WwkS9i7GNpI0kimuglDAwrHsAV6ybfyNHVpUwpH78Q=;
-        b=XNddMl9LSVmc30qtJ6ysML6R1zQWHdbLOXHiubaeZv+hllbhAx2Ano1vK+EtF7H4l0
-         pYeHZEVdNqbVocespc5ZZNyYq8uE2FZqoE9CMdtyzGXs1mtOrEP22C9x9oT1g2ym0k0P
-         oC4YRovRwipXDIW3wHXq3HbFxAh81mzJ+WG1aOuAseCRFJ5Bsw8XOCoAylexeLJjLMtJ
-         kYiqGv6kkCT6uW6X0QBkI1BB9SEDH++mUMtYJXa1pNBBbFpZlUIIYe/p/HV8NhZRD+9z
-         AZ3HBhEoBEFWohBkLPlFvPFLUwe//g3mIHn1tyFhMM83O8ensAt7eme9kLRlFbKxkj3A
-         9Iow==
-X-Gm-Message-State: AOJu0YwOALYdQqVq0qctXwoue+8SU1uoc74FAhlwq8rdXLY6vLLzPEGG
-	bTL4lNHKy7gpBGnXrlRidmhHG+1jnTtE1syFtdigRyF2BdnAclgrRkeX
-X-Gm-Gg: AR+sD127BAXMUNNGcc+yz7DQMeumVbn1CPQznGl0bFuhDFksrNkXq42OZnrsORvFuVI
-	Pn6mNN8gVi0yIBlBrefuI9B/MlyrpCAfehsNj+LDqdYUk3JLc6/3gR522h8ZcnU1b+I/sQcKQsF
-	tXjaYTPI7tu58d9mt6WlJFiKzf3ILEwFwrgiI44Agj7OeJBzuaa8oT1kTiWf8ooXpZJ1adc/fG5
-	hz7IPXM58Jo8uc7YAxBHEdlZK2iE1K1zkAXdg63p5K/itQlF1eFX4vlfBMbSrR1HkJXf6WtE3tj
-	yvnuCAwddDKSk8xEGGob9rc/wRRqqXX/cRNyQO+rhVv73zhSl1F2Yc0qn/H1lKduQ7fNw+VowCP
-	ZQ6aN2QkExSVzB4FPstxDRScIFngMfzjMJIbG2QKbhPmgrnflulLv97jxCc8JRj+G3GZB3TmHGK
-	JNbHJLUCgYhY4NmMw+XvdVLOp58VAqLPN4Dqg5owMHp+grfRQTJ9PxpocXyXoKy+1QDlpY3g==
-X-Received: by 2002:a05:651c:19aa:b0:393:d6dd:e8a1 with SMTP id 38308e7fff4ca-39fbb1ed3demr5005791fa.2.1785914083978;
-        Wed, 05 Aug 2026 00:14:43 -0700 (PDT)
-Received: from [10.38.18.54] ([213.255.186.37])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-39fb9a33c88sm6775331fa.30.2026.08.05.00.14.42
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 05 Aug 2026 00:14:43 -0700 (PDT)
-Message-ID: <da3aece8-3ede-40cb-8f63-45614a965cd7@gmail.com>
-Date: Wed, 5 Aug 2026 10:14:41 +0300
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="tWUfbIex"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A9C30C4AF0F;
+	Wed,  5 Aug 2026 08:08:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1785917294;
+	bh=NpJ68cAdxRTul9v+KRzPMyOhGoHG7IvwOK7cj3TZ7Fk=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=tWUfbIexIerufb8STyJWs4Aq2r6Qc4Q5tzhfh56tE34PfHT+3fE0/9saMvQv8LO6l
+	 eBW7UdT1NV9tIcbQGIdxinDmIjzcvhxT5OHYTM/ydPJEiMGgJy1LXR+f/ASBRhr4K7
+	 D5E6ngA/hH5q5TAoCaM1WNe+u6zYUmXQR4MNhF/i/VqP7vMa8/BxScDTEJzULQfmfG
+	 dOhFRXc3uxgfqqQ587yAWF/CJCuNsutC4eNpFOUiY5CXpcxTm6RtM+LeM0t9iLjVBc
+	 8NCbyE5zf6A77h8aQHAkGLnJivKtvPVSlNqfmETnh9WKPYZZhJrBu5yVSNccieDEVq
+	 h18jhDwIvluww==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 88F1FC56201;
+	Wed,  5 Aug 2026 08:08:14 +0000 (UTC)
+From: Ronald Claveau via B4 Relay <devnull+linux-kernel-dev.aliel.fr@kernel.org>
+Date: Wed, 05 Aug 2026 10:06:03 +0200
+Subject: [PATCH v9 2/6] mfd: khadas-mcu: Use MFD_CELL_* macros for cell
+ declarations
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 08/10] dt-bindings: mfd: rohm,bd71828-pmic: Use generic
- power-controller schema
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, Lee Jones <lee@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Lubomir Rintel <lkundrak@v3.sk>,
- Dmitry Osipenko <digetx@gmail.com>, Shree Ramamoorthy
- <s-ramamoorthy@ti.com>, Heiko Stuebner <heiko@sntech.de>,
- Joseph Chen <chenjh@rock-chips.com>, Chris Zhong <zyw@rock-chips.com>,
- Zhang Qing <zhangqing@rock-chips.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Andreas Kemnade <andreas@kemnade.info>,
- =?UTF-8?Q?Jonathan_Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>,
- Julien Panis <jpanis@baylibre.com>, Alexander Kurz <akurz@blala.de>,
- =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-rockchip@lists.infradead.org, linux-samsung-soc@vger.kernel.org,
- Peng Fan <peng.fan@nxp.com>
-References: <20260804-mfd-syspower-v1-0-a440783c2e78@nxp.com>
- <20260804-mfd-syspower-v1-8-a440783c2e78@nxp.com>
-Content-Language: en-US, en-AU, en-GB, en-BW
-From: Matti Vaittinen <mazziesaccount@gmail.com>
-In-Reply-To: <20260804-mfd-syspower-v1-8-a440783c2e78@nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260805-add-mcu-fan-khadas-vim4-v9-2-75df78710b9e@aliel.fr>
+References: <20260805-add-mcu-fan-khadas-vim4-v9-0-75df78710b9e@aliel.fr>
+In-Reply-To: <20260805-add-mcu-fan-khadas-vim4-v9-0-75df78710b9e@aliel.fr>
+To: Neil Armstrong <neil.armstrong@linaro.org>, Lee Jones <lee@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Andi Shyti <andi.shyti@kernel.org>, 
+ Kevin Hilman <khilman@baylibre.com>, Jerome Brunet <jbrunet@baylibre.com>, 
+ Martin Blumenstingl <martin.blumenstingl@googlemail.com>, 
+ Beniamino Galvani <b.galvani@gmail.com>, 
+ "Rafael J. Wysocki" <rafael@kernel.org>, 
+ Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
+ Lukasz Luba <lukasz.luba@arm.com>, Liam Girdwood <lgirdwood@gmail.com>, 
+ Mark Brown <broonie@kernel.org>
+Cc: linux-amlogic@lists.infradead.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org, 
+ linux-arm-kernel@lists.infradead.org, linux-pm@vger.kernel.org, 
+ mfd@lists.linux.dev, Ronald Claveau <linux-kernel-dev@aliel.fr>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1351;
+ i=linux-kernel-dev@aliel.fr; h=from:subject:message-id;
+ bh=EC3QR4h1VRMR/TQsGWmFoDDKLNA1VXSGTQljiGJtTRI=;
+ b=owGbwMvMwCWm1SvKXP3cUInxtFoSQ1bR+3SpD/YLLt7ud07237FLfMGJDW9iksPyeoyrnbVu3
+ tE9/Eevo5SFQYyLQVZMkaV/ruWJd5ePnvm6Rz0FZg4rE8gQBi5OAZjICT1GhqafE1RV6qae2btL
+ cP7Psga2t1UXr53IU++OWGItMc/Y3YqRYeFrJw7Xj16PnrO2zXrAYnW/w+yxa6pnY1Ha1SuPpe0
+ j2AE=
+X-Developer-Key: i=linux-kernel-dev@aliel.fr; a=openpgp;
+ fpr=DFD863F61375BF917F0012173953305EF1D0EC3E
+X-Endpoint-Received: by B4 Relay for linux-kernel-dev@aliel.fr/default with
+ auth_id=744
+X-Original-From: Ronald Claveau <linux-kernel-dev@aliel.fr>
+Reply-To: linux-kernel-dev@aliel.fr
 
-Hi Peng,
+From: Ronald Claveau <linux-kernel-dev@aliel.fr>
 
-On 04/08/2026 17:16, Peng Fan (OSS) wrote:
-> From: Peng Fan <peng.fan@nxp.com>
-> 
-> Switch the binding to use the generic power-controller schema instead by
-> referencing power-controller.yaml and removing the local
-> `system-power-controller` property definition.
-> 
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> ---
->   Documentation/devicetree/bindings/mfd/rohm,bd71828-pmic.yaml | 7 ++++---
->   1 file changed, 4 insertions(+), 3 deletions(-)
-> 
-> diff --git a/Documentation/devicetree/bindings/mfd/rohm,bd71828-pmic.yaml b/Documentation/devicetree/bindings/mfd/rohm,bd71828-pmic.yaml
-> index 09e7d68e92bf..9818102e02c7 100644
-> --- a/Documentation/devicetree/bindings/mfd/rohm,bd71828-pmic.yaml
-> +++ b/Documentation/devicetree/bindings/mfd/rohm,bd71828-pmic.yaml
-> @@ -15,6 +15,9 @@ description: |
->     single-cell linear charger. Also included is a Coulomb counter, a real-time
->     clock (RTC), and a 32.768 kHz clock gate.
->   
-> +allOf:
-> +  - $ref: /schemas/power/power-controller.yaml#
-> +
->   properties:
->     compatible:
->       oneOf:
-> @@ -79,8 +82,6 @@ properties:
->         used to mark the pins which should not be configured for GPIO. Please see
->         the ../gpio/gpio.txt for more information.
->   
-> -  system-power-controller: true
-> -
->   required:
->     - compatible
->     - reg
-> @@ -91,7 +92,7 @@ required:
->     - gpio-controller
->     - "#gpio-cells"
->   
-> -additionalProperties: false
-> +unevaluatedProperties: false
+Convert khadas_mcu_fan_cells[] and khadas_mcu_cells[] to use the
+MFD_CELL_NAME() helper macro instead of open-coding the struct
+mfd_cell initialisers. While at it, make both arrays const since
+they are never modified after initialisation.
 
+This is a pure cleanup with no functional change, done in
+preparation for a subsequent patch which will need to attach
+platform_data to the fan cell.
 
+Signed-off-by: Ronald Claveau <linux-kernel-dev@aliel.fr>
+---
+ drivers/mfd/khadas-mcu.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-If I am not mistaken, this allows all bindings from referenced common 
-binding files, whether or not they are declared in this binding? If so, 
-then this is probably not aligned with what I am hoping to do with the 
-ROHM PMIC bindings [1] [2].
-
-I hope to collect the commonly used ROHM PMIC bindings in one common 
-file, and reference it from those PMIC files, which use some of those 
-common properties. I would like to collect all of the commonly used ROHM 
-MFD bindings in the same file because scattering them around in tiny 
-files feels like a bad idea to me. This means that not all of the PMICs 
-referencing this file, use all of the bindings from that file.
-
-Hence I would prefer not to just allow everything from the common file - 
-but to limit allowed properties to those that are explicitly mentioned 
-for the specific PMIC. For example, my proposed change [1] moves:
-
-rohm,clkout-open-drain, rohm,pin-clkout, rohm,pin-fault_b, 
-"^rohm,pin-dvs[0-1]$" and "^rohm,pin-exten([0-1])?$" to 
-rohm,pmic-pins.yaml. Only the rohm,clkout-open-drain should be supported 
-allowed with the bd71828. Keeping:
-additionalProperties: false
-
-disallows the properties which aren't explicitly mentioned for the 
-bd71828, while making it possible to keep the description, type and 
-other common stuff in the common rohm,pmic-pins.yaml.
-
-
-
-Also, keeping the single explicit line:
-
-	system-power-controller: true
-
-to denote this specific PMIC can act as a system power controller feels 
-(to me) more descriptive than "hiding" it in
-
-$ref: /schemas/power/power-controller.yaml#
-
-- which is also a single line.
-
-As a summary - would it work if you added the reference (for 
-description), but also kept the explicit system-power-controller: true 
-and also the additionalProperties: false?
-
-
-[1] 
-https://lore.kernel.org/all/838486b443af9188410d8b802a818dc0af20ea9d.1785838585.git.mazziesaccount@gmail.com/
-[2] 
-https://lore.kernel.org/all/d419dcf8776f7ea88e4a66b9a0f0087f11e6622c.1785838585.git.mazziesaccount@gmail.com/
-
-Yours,
-	-- Matti
-
-
->   examples:
->     - |
-> 
-
+diff --git a/drivers/mfd/khadas-mcu.c b/drivers/mfd/khadas-mcu.c
+index ba981a7886921..0e74efe14f367 100644
+--- a/drivers/mfd/khadas-mcu.c
++++ b/drivers/mfd/khadas-mcu.c
+@@ -75,13 +75,13 @@ static const struct regmap_config khadas_mcu_regmap_config = {
+ 	.cache_type	= REGCACHE_MAPLE,
+ };
+ 
+-static struct mfd_cell khadas_mcu_fan_cells[] = {
++static const struct mfd_cell khadas_mcu_fan_cells[] = {
+ 	/* VIM1/2 Rev13+ and VIM3 only */
+-	{ .name = "khadas-mcu-fan-ctrl", },
++	MFD_CELL_NAME("khadas-mcu-fan-ctrl"),
+ };
+ 
+-static struct mfd_cell khadas_mcu_cells[] = {
+-	{ .name = "khadas-mcu-user-mem", },
++static const struct mfd_cell khadas_mcu_cells[] = {
++	MFD_CELL_NAME("khadas-mcu-user-mem"),
+ };
+ 
+ static int khadas_mcu_probe(struct i2c_client *client)
 
 -- 
-Matti Vaittinen
-Linux kernel developer at ROHM Semiconductors
-Oulu Finland
+2.49.0
 
-~~ When things go utterly wrong vim users can always type :help! ~~
+
