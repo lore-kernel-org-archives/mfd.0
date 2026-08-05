@@ -1,105 +1,150 @@
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7360D3E557D;
-	Wed,  5 Aug 2026 08:42:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86FAA402BB8
+	for <mfd@lists.linux.dev>; Wed,  5 Aug 2026 09:43:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785919376; cv=none; b=U2Oz52ljLbi+0t+P67s5E6jH2JH+GG2cFM0sP5rhu+ow7TNZai8Rhhk0kcz9/u11QmrcIJK33C75p09OemBLe7oEjRYn8sxthUdQX13m5XVRj9BnDipYOlww8vhQeB7TcC2l2VjbI8MssKKQ4rs9XpZQzyPTJKNid7yDO1AyW9g=
+	t=1785923017; cv=none; b=gFs+QXkUBbtTJfedOEBFpLH6u0aDRYJ6Y9X/O+qdmqc7WzW05Ct/j/NS3Ob4YqrjjUDkWFhyIuji4V4iN/OUsZriZneMGP5JU1SuNRFDXJGuXgbSnBNxVDFb2ZEXK/4RIYi0CgeCMp7b+IuaYpsrVzgWCwgElv79XEBwbme/mfI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785919376; c=relaxed/simple;
-	bh=XnTZtUDP7A0ciS1XtD8eSYIsPuFWtmXnnZV4q7yC/hI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=kMgFX7DcgVJPkXTz4sfos3Lexd/mkU93AdcRfsXd11Dei0bas7bC7l/dO+dTf2a5HJog2HwR5u7QJHBIa1I/CVjzQQriDQKQL9wwpJNgZxr1w8pQimSxe2ZY1gTvPBQao0rHRu5/YN2ibGORF6gCLjHve3PNOe9LAhpdYeOsI2Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=VwcfVVnd; arc=none smtp.client-ip=185.246.85.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	s=arc-20240116; t=1785923017; c=relaxed/simple;
+	bh=kzl3LjyJT/cJK/tPZUC90cNqEiloCIZi3VNBGZx0Tq8=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=aqVldKwUAwiIXn5sc21BdTAppqExBH6yOJseo8Hz+OxfvlxAjO0Jhlbr2ioU4I3FnrFYNmDY3IqsO+6q8+r15EOSf4587WjSnQ+u4cT3814Y3i+Fz1ZqfRleb3kG2TYIFA9/mHzH08yNw0iDSiV/mWs2IHaY3U1knVaF7G+3nSs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hCQO3DcH; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="VwcfVVnd"
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 8F8954E410CB;
-	Wed,  5 Aug 2026 08:42:48 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 53607602AB;
-	Wed,  5 Aug 2026 08:42:48 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 657F711C3036D;
-	Wed,  5 Aug 2026 10:42:47 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1785919367; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:content-language:in-reply-to:references;
-	bh=vsWplo5uQEpyCH1IdUduqWT5L5gfgXO9eN1hYnahl2g=;
-	b=VwcfVVndnCYJlK9Tn9cpqjNY3nluE3Dnk76OoxyZlFOsyFv84J2LYJW5hCKSaej4J9kTHY
-	jZa/ZXS+9CATRHyqJ1//6xVE94Sj2CnKXVIVV7doIVIY/p3fhdIA9OBAkEQI86ljppIYW+
-	WCAvi72m+c96BOvf9iLhTtFgp66q9HezLXgYpAwifUvNHNJuaMMSDKUwZWzWi5wHbKD4DD
-	/kTUnqxwc3MfIZiqLr5fg2CgWqF8RIZ7tWAjiEB1exq1um/zFl63OM6l7KqvH1w5qRG8sU
-	c4OZgn44lLPt/OoTY9LpgkZbWWX2uz8Pjfl9Drm0N2raTngPB9tKAz8tfVrR8w==
-Message-ID: <a7135791-da04-48fd-accf-86a01edd4818@bootlin.com>
-Date: Wed, 5 Aug 2026 10:42:46 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hCQO3DcH"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 573071F00AC4
+	for <mfd@lists.linux.dev>; Wed,  5 Aug 2026 09:43:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785923015;
+	bh=SEWTlYII+fUiWyq0/uoUuvMRCEnuw1WDu85hQtFf3VU=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=hCQO3DcHzM5OwFzJnbxCc2BtoLhw84uSoJObv3WWEU7S50MmdZ/m0h/kpMLpomsIO
+	 SHwkAonZkmpeNs4n1vGFjGYqPTabxNG2V78pvT5KM3YmgyZBu+XGJAsH9Xiq2O5jgG
+	 a/oZVC3RA4DecqBaChbrmb6g+N51leP985+bZauNXJXuYxMpP3W8clSwPgx602uDwu
+	 vvXCQr2IJg5DNuBosmJBZ3hB91HztVMPDWRpsF+pdJJ9J+FsEsJvU+3/IXZeFbgdro
+	 J7MTm7DVaKJEML/Az29fBr6BINps/uyUYpGh2IKF4qMkNwxVd7cDBfoVZEQdLL7N4p
+	 CgqA70cgOZbQA==
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-69c108fee7fso1042270a12.3
+        for <mfd@lists.linux.dev>; Wed, 05 Aug 2026 02:43:35 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RpsC+vubxu3RJ/yYfj9hSDMWc4frmVCpRMabxETf/nz/X027lcgiwAddRfoCDP+ykSoeZw=@lists.linux.dev
+X-Gm-Message-State: AOJu0YzQFXDEkLpI1nSh2VXRCFiNQLdCYXMH4e2IJn+/rge+httlv4tz
+	snqS/bJBA7ZhaR4yIwnBRvsEiH3XUdW4wPHv6/R3r5bL5YCTHW83VJ3Zj3wx0M/xPzESSiuR8Og
+	OAlj4JeGKNiYxfb1553kdklAsfeZIiWc=
+X-Received: by 2002:a05:6402:5406:b0:6a0:567c:c2fe with SMTP id
+ 4fb4d7f45d1cf-6a14f28888fmr2928147a12.20.1785923013927; Wed, 05 Aug 2026
+ 02:43:33 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] i2c: cgbc: Add virtual storage devices on the virtual
- I2C bus
-To: sashiko-reviews@lists.linux.dev
-Cc: lee@kernel.org, mfd@lists.linux.dev
-References: <20260804-cgbc-i2c-storage-devices-support-v1-0-fed38510671c@bootlin.com>
- <20260804-cgbc-i2c-storage-devices-support-v1-4-fed38510671c@bootlin.com>
- <20260804155830.DC0C91F000E9@smtp.kernel.org>
-Content-Language: en-US
-From: Thomas Richard <thomas.richard@bootlin.com>
-In-Reply-To: <20260804155830.DC0C91F000E9@smtp.kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <cover.1785829933.git.zhoubinbin@loongson.cn>
+In-Reply-To: <cover.1785829933.git.zhoubinbin@loongson.cn>
+From: Huacai Chen <chenhuacai@kernel.org>
+Date: Wed, 5 Aug 2026 17:43:58 +0800
+X-Gmail-Original-Message-ID: <CAAhV-H43c5OWGfE+XepeMbwJvE1US1VapxSTYOh4W77pbRLdXQ@mail.gmail.com>
+X-Gm-Features: AUfX_myJZvZcsFRImM9vvMYUz6MxKvw7tjGf7bRkBFSUuLm8GX_22dr9CRByV7g
+Message-ID: <CAAhV-H43c5OWGfE+XepeMbwJvE1US1VapxSTYOh4W77pbRLdXQ@mail.gmail.com>
+Subject: Re: [PATCH v4 0/5] thermal: loongson2: Add support for
+ Loongson-2K0300 SoC
+To: Binbin Zhou <zhoubinbin@loongson.cn>
+Cc: Binbin Zhou <zhoubb.aaron@gmail.com>, Huacai Chen <chenhuacai@loongson.cn>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Yinbo Zhu <zhuyinbo@loongson.cn>, zhanghongchen <zhanghongchen@loongson.cn>, 
+	"Rafael J . Wysocki" <rafael@kernel.org>, Daniel Lezcano <daniel.lezcano@linaro.org>, 
+	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>, Lee Jones <lee@kernel.org>, 
+	devicetree@vger.kernel.org, linux-pm@vger.kernel.org, mfd@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 8/4/26 5:58 PM, sashiko-bot@kernel.org wrote:
-> Thank you for your contribution! Sashiko AI review found 1 potential issue(s) to consider:
-> - [Medium] Typo in the software node label property for the BIOS EEPROM ('eprom' instead of 'eeprom').
+For the whole series:
+Reviewed-by: Huacai Chen <chenhuacai@loongson.cn>
+
+On Tue, Aug 4, 2026 at 8:41=E2=80=AFPM Binbin Zhou <zhoubinbin@loongson.cn>=
+ wrote:
+>
+> Hi all:
+>
+> This patch series adds thermal zone support for the Loongson-2K0300 SoC.
+>
+> The Loongson-2K0300's thermal sensor is generally compatible with the
+> existing Loongson-2K series, but it features several key differences:
+> 1. It has an independent CPU ID register for reading chip version
+> information.
+> 2. The raw temperature output field has been extended from 8 bits to 11
+> bits.
+> 3. The temperature calculation formula has been updated to incorporate a
+> correction factor based on the version information.
+>
+> To ensure robustness on older hardware revisions, a fallback mechanism
+> is included: if the calculated temperature falls outside the valid range
+> (-55 TO 125),  the driver falls back to a simpler calculation and prints
+> a warning.
+>
+> The patches have been validated on the Loongson-2K0300 development board.
+>
+> Thanks.
+> Binbin
+>
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D
+> V4:
+>  - Rebase on linux-mfd/for-mfd-next;
+> Patch (3/5):
+>  - Remove the `compatible` adding to the `select` node.
+>
+> Link to V3:
+> https://lore.kernel.org/all/cover.1785480242.git.zhoubinbin@loongson.cn/
+>
+> V3:
+> Patch (2/5):
+>  - New patch for moving thermal_ops to chip_data;
+> Patch (3/5):
+>  - Correct spelling errors;
+> Patch (4/5):
+>  - Add Acked-by from Conor, thanks;
+> Patch (5/5):
+>  - Keep loongson2_thermal_data->chip_data as const, and use
+>    data->flags as the private data.
+>  - Renmae LOONGSON2_THSENS_OUT_10B_MASK ->
+>    LOONGSON2_THSENS_OUT_11B_MASK;
+>
+> Link to V2:
+> https://lore.kernel.org/all/cover.1784619512.git.zhoubinbin@loongson.cn/
+>
+> V2:
+> Patch (1/4):
+>  - New patch form Sashiko;
+> Patch (2/4):
+>  - New patch for adding chipid syscon compatible;
+> Patch (3/4):
+>  - Use `loongson,chipid` phandle replace reg property;
+> Patch (3/4):
+>  - Refact `calib_offset` calculate routing;
+>  - Add LS2K0300_OLD_FUSE_FLAG flag.
+>
+> Link to V1:
+> https://lore.kernel.org/all/cover.1783670011.git.zhoubinbin@loongson.cn/
+>
+> Binbin Zhou (5):
+>   thermal/drivers/loongson2: Correct thermal sensor registration loop
+>   thermal/drivers/loongson2: Move thermal_ops to chip_data for SoC
+>     scalability
+>   dt-bindings: mfd: syscon: Allow syscon compatible for Loongson-2K0300
+>     chip id
+>   dt-bindings: thermal: loongson,ls2k-thermal: Add compatible for
+>     Loongson-2K0300
+>   thermal/drivers/loongson2: Add support for Loongson-2K0300
+>
+>  .../devicetree/bindings/mfd/syscon.yaml       |   1 +
+>  .../thermal/loongson,ls2k-thermal.yaml        |  73 +++++++++---
+>  drivers/thermal/loongson2_thermal.c           | 110 ++++++++++++++++--
+>  3 files changed, 156 insertions(+), 28 deletions(-)
+>
+>
+> base-commit: b1eb3de64d02cec71b419b9918d1697797fa156d
 > --
-> 
-> --- Patch [4]: [PATCH 4/4] i2c: cgbc: Add virtual storage devices on the virtual I2C bus ---
-> commit 98b86180cbc7d34ae655eafe5dcbc85e15d4bc49
-> Author: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
-> 
-> i2c: cgbc: Add virtual storage devices on the virtual I2C bus
-> 
-> This commit adds support for virtual storage devices exposed by the Board
-> Controller on its virtual I2C bus. It uses the generic 24c01 at24 driver
-> for all virtual storage devices, customizing their parameters via
-> software_node properties.
-> 
->> diff --git a/drivers/i2c/busses/i2c-cgbc.c b/drivers/i2c/busses/i2c-cgbc.c
->> index c3f1c83b105a8..418de90e11bb8 100644
->> --- a/drivers/i2c/busses/i2c-cgbc.c
->> +++ b/drivers/i2c/busses/i2c-cgbc.c
-> 
-> [ ... ]
-> 
->> @@ -372,6 +372,149 @@ static const struct i2c_adapter cgbc_i2c_adapter[] = {
-> 
-> [ ... ]
-> 
->> +static const struct property_entry cgbc_bios_eeprom_props[] = {
->> +	PROPERTY_ENTRY_U32("size", 32),
->> +	PROPERTY_ENTRY_U32("pagesize", 1),
->> +	PROPERTY_ENTRY_STRING("label", "cgbc-bios-eprom"),
-> 
-> [Severity: Medium]
-> Does this label contain a typo? The other devices use the spelling "eeprom",
-> but this one uses "eprom". 
-> 
-> Since this label is exposed to userspace via sysfs (as an nvmem device),
-> could this naming inconsistency break udev rules or user scripts relying on
-> a standard "eeprom" naming scheme for these storage devices?
-Yes indeed. I missed it because I used i2c device to sysfs entry to test
-(/sys/bus/i2c/devices/i2c-cgbc-bios-eeprom/eeprom). And this typo
-impacts only nvmem device.
-
-Will fix it in v2.
-
-Best Regards,
-Thomas
+> 2.52.0
+>
