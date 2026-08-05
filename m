@@ -1,160 +1,113 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 305644322F9;
-	Wed,  5 Aug 2026 12:30:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28E581A9F85;
+	Wed,  5 Aug 2026 12:30:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785933008; cv=none; b=od1Rp/1UKG7kmpBiUVWhl8oBvrkaWlPFajXmFVuE9DAfDAe/lbFFQWKPhcHfS7e+KwkNpfmKcsmfBCx8mJINC/uaexikAmTzzHsxP3rbuL1eTTDoSkXQB4Gm6zHEB+xqlS7PAtLvogMfIDJLbGFOZz9kGUKmhXzBG2JlApRSwKs=
+	t=1785933020; cv=none; b=MXhl+KoApv5R28ineS+TVp2CUv5DNXk93dzmr901suaEUyhsIU/pzby8ZvQC5IxxYlAskwm6vBtax+Y5f7xKx0Y4Tnan9CDpAg+qKeJqa9oxibg6RnHNgX4m7Je7J73ziT42ukgp/Bal3FDQNu96fjBVSMAxzRUVMjq8gt2q7tk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785933008; c=relaxed/simple;
-	bh=RekKhfDqB/D9DoOWl82/JlDMM9BLUjjagES816DJnUk=;
+	s=arc-20240116; t=1785933020; c=relaxed/simple;
+	bh=XXgnwBsqb8t60M2I79gxkuqRDXt3vC6r08/bEtZkUzE=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=leLuwKADfHpaT0uP6HWSyYz7xTFHSZDeOGA/t15sCsOwf/4Qafj40C6/TDz8FbGBP2IBhEc5Ajry9UGxStml+sZeLbTFu1xGWSNXs51aLQ2k/9Y+aVaKODQl14XMc3rOOi1NpwUgS7tuF1PBrvpjBqx35Gn0XDZbK05ingd7tco=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=R5pXDIv+; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=Jo08Zs7Ev+ZD/rFPbe8lbB2qOfLXg+yP4CzACVCmhFvYmte3C6mGLFgDorMA0Q6KkmURsUhmNXUAjAktq0bwUjXDo/KVLzk7VUGXHNguUwepSq/nXhJhFDsBJqPKr9ER18cnHRiQi71FTW136DvveDB0kOuf4f1IjDfr3QV5V0M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=agKAO4fj; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="R5pXDIv+"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B98F1F00A3A;
-	Wed,  5 Aug 2026 12:30:06 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="agKAO4fj"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 135281F000E9;
+	Wed,  5 Aug 2026 12:30:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785933006;
-	bh=6lFOhiepGCaOGrevwMhsBSxN7qNtm+M7LUpVrUOsjNk=;
+	s=k20260515; t=1785933018;
+	bh=bFQ/oevoSaISZmQwFhtnDGf1LrvHJf/k3MOTF2EPIjk=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=R5pXDIv+mzFdrqmoPjeod5vV6guxqGwLlzhjyrM+DXLuaw79BUeHNN9FDWDaWxYML
-	 dRcOb7RzRQa3izRqYEd8zWLz901CL5p9rn4rqSDuPH6wV3mwdETXuMK+KRttt/WM7z
-	 EPEi3TDYktDxff4w//Cb5hUgp6O/SV77SR4jkrcuEelhO7nEBo4RdXFLUEm31otURN
-	 tgq0ZezRnFIaoI7UGDeYcQMR0xk9qT/5PtnstjrECf/SNSRHShtiD1syPe0/sgdqgt
-	 q9ta+h1CrARztCsd1kPihgp+PvzHmW3+H3DXKqRb0Y/wa0zhtVhuzvG+Jz+CC49TM6
-	 1cHLEzi9zwc0g==
+	b=agKAO4fjFCUYnodqhjAJxMeMpOQ3AHq9JHuI17nrp6qMS/Vl0BFGTiL/5ceQTaspS
+	 yVDS3/XVTIxvtv6N9Nd+phCF7FiB8Mkzyz6oOlD0rEFkYuuKMThvSbjZxnHi+ZAPop
+	 xWPUlXqtvhcdZ22gAVmC3ywy1e9lt0Uiu35+gIft3xAwrMDiQ5KvW6nxgh6OyvcJcm
+	 0MITvD1WrKXARBDDt+NFjv9KTQQV9RoUcfF9FeyAwyL3kbP4QV0uYC+4iJl70XmJIC
+	 eIcj2hxFwsJ2bchGa4GdqepYzO2mL2+I021zdanOkS5OZ8PYhjeXlGiUlxjr8w3alZ
+	 HlLrYjKVz0ljw==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v5 4/6] soc: mfd: add ASPEED AST2600 PCIe BMC device
- driver
+Subject: Re: [PATCH v5 6/6] ARM: dts: aspeed: g6: add aspeed,vuart-over-pci
+ prop to vuart3 and 4
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?R3LDqWdvaXJlIExheWV0?= <gregoire.layet@9elements.com>
-Cc: lee@kernel.org, robh@kernel.org, mfd@lists.linux.dev, conor+dt@kernel.org, devicetree@vger.kernel.org
-In-Reply-To: <51db5e5bb5bf44dd5ab893b8d547291f04e1d3c7.1785932211.git.gregoire.layet@9elements.com>
+Cc: robh@kernel.org, conor+dt@kernel.org, lee@kernel.org, mfd@lists.linux.dev, devicetree@vger.kernel.org
+In-Reply-To: <8d24d424b3504105394055de268e0a11515635a9.1785932211.git.gregoire.layet@9elements.com>
 References: <cover.1785932211.git.gregoire.layet@9elements.com>
- <51db5e5bb5bf44dd5ab893b8d547291f04e1d3c7.1785932211.git.gregoire.layet@9elements.com>
+ <8d24d424b3504105394055de268e0a11515635a9.1785932211.git.gregoire.layet@9elements.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 05 Aug 2026 12:30:06 +0000
-Message-Id: <20260805123006.7B98F1F00A3A@smtp.kernel.org>
+Date: Wed, 05 Aug 2026 12:30:17 +0000
+Message-Id: <20260805123018.135281F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
-- [Medium] The driver violates MFD subsystem guidelines by using the MFD AP=
-I for a single-function device and dynamically generating its `mfd_cell` ar=
-rays.
-- [Low] The commit message prefix and driver structure naming do not adhere=
- to MFD subsystem standards.
+
+Pre-existing issues:
+- [High] Missing error cleanup in `aspeed_vuart_probe` leads to a dangling =
+8250 port and use-after-free on probe failure.
 --
 
---- Patch [4]: [PATCH v5 4/6] soc: mfd: add ASPEED AST2600 PCIe BMC device =
-driver ---
-commit 7554e65cc1603a70fab3089c5b74e52105ba9e5b
+--- Patch [6]: [PATCH v5 6/6] ARM: dts: aspeed: g6: add aspeed,vuart-over-p=
+ci prop to vuart3 and 4 ---
+commit 373b41ed9602ed016ca9e86ec139c751e10daac0
 Author: Gr=C3=A9goire Layet <gregoire.layet@9elements.com>
 
-soc: mfd: add ASPEED AST2600 PCIe BMC device driver
+ARM: dts: aspeed: g6: add aspeed,vuart-over-pci prop to vuart3 and 4
 
-Add support for UART over PCIe between ASPEED AST2600 BMC and host.
-This is the host-side driver.
+The VUART 3 and 4 are VUART over PCI.
+Set this flag to indicate this information.
+Also set the syscon phandle.
 
-> soc: mfd: add ASPEED AST2600 PCIe BMC device driver
+> diff --git a/arch/arm/boot/dts/aspeed/aspeed-g6.dtsi b/arch/arm/boot/dts/=
+aspeed/aspeed-g6.dtsi
+> index 7c02633f2bd69..fbd7ab6332a1e 100644
+> --- a/arch/arm/boot/dts/aspeed/aspeed-g6.dtsi
+> +++ b/arch/arm/boot/dts/aspeed/aspeed-g6.dtsi
+> @@ -722,7 +722,9 @@ vuart3: serial@1e787800 {
+>  				reg-shift =3D <2>;
+>  				interrupts =3D <GIC_SPI 180 IRQ_TYPE_LEVEL_HIGH>;
+>  				clocks =3D <&syscon ASPEED_CLK_APB2>;
+> +				aspeed,scu-syscon =3D <&syscon>;
+>  				no-loopback-test;
+> +				aspeed,vuart-over-pci;
 
-[Severity: Low]
-This isn't a bug, but does the commit message prefix and capitalization fol=
-low
-the MFD subsystem guidelines? The standard format expects
-mfd: <Driver>: <Capitalized description>.
+[Severity: High]
+This is a pre-existing issue, but does enabling this property expose a miss=
+ing
+error cleanup path in the driver?
 
-> diff --git a/drivers/mfd/aspeed-pci-core.c b/drivers/mfd/aspeed-pci-core.c
-> new file mode 100644
-> index 0000000000000..ad6732133ec57
-> --- /dev/null
-> +++ b/drivers/mfd/aspeed-pci-core.c
-> @@ -0,0 +1,120 @@
+If a probe failure occurs in drivers/tty/serial/8250/8250_aspeed_vuart.c
+after the port is registered (for example, if setting up the vuart-over-pci
+functionality fails), the error path skips unregistering the 8250 port:
 
-[ ... ]
+aspeed_vuart_probe() {
+    ...
+err_sysfs_remove:
+    sysfs_remove_group(&vuart->dev->kobj, &aspeed_vuart_attr_group);
+    return rc;
+}
 
-> +static const unsigned int vuart_msi_index[ASPEED_BMC_VUART] =3D { 16, 17=
- };
-> +static const u16 vuart_port_addr[ASPEED_BMC_VUART] =3D { 0x3f8, 0x2f8 };
-> +
-> +struct aspeed_pci_bmc_dev {
-> +	struct plat_serial8250_port uart[ASPEED_BMC_VUART + 1];
-> +	struct mfd_cell cell;
-> +};
+Does this leave the registered port alive while its private data is freed by
+the devres framework?
 
-[Severity: Low]
-This isn't a bug, but does this structure name follow the MFD naming
-conventions? The guidelines recommend avoiding generic suffixes like "dev" =
-and
-instead preferring just the device name.
+If the port later handles an interrupt via aspeed_vuart_handle_irq() or is
+accessed, could it dereference the freed memory and cause a use-after-free
+crash?
 
-[ ... ]
+Would it be safer to ensure serial8250_unregister_port() is called in this
+error path?
 
-> +static int aspeed_pci_bmc_device_setup_vuart(struct pci_dev *pdev,
-> +					     struct aspeed_pci_bmc_dev *pci_bmc_dev)
-> +{
-
-[ ... ]
-
-> +	for (i =3D 0; i < ASPEED_BMC_VUART; i++) {
-> +		port =3D &pci_bmc_dev->uart[i];
-> +
-> +		/* ASPEED BMC device shift addresses by 2 to the left */
-> +		vuart_ioport =3D vuart_port_addr[i] << 2;
-> +
-> +		port->mapbase =3D bar + vuart_ioport;
-> +		port->uartclk =3D 115200 * 16;
-> +		port->irq =3D pci_irq_vector(pdev, vuart_msi_index[i]);
-> +		port->iotype =3D UPIO_MEM32;
-> +		port->type =3D PORT_16550A;
-> +		port->flags |=3D (UPF_IOREMAP | UPF_FIXED_PORT | UPF_FIXED_TYPE);
-> +		port->regshift =3D 2;
-> +	}
-> +
-> +	pci_bmc_dev->cell =3D (struct mfd_cell) {
-> +		.name		=3D "serial8250",
-> +		.platform_data	=3D pci_bmc_dev->uart,
-> +		.pdata_size	=3D sizeof(pci_bmc_dev->uart),
-> +	};
-> +
-> +	return 0;
-> +}
-
-[Severity: Medium]
-Is it safe to generate the mfd_cell dynamically here? The MFD subsystem
-guidelines explicitly forbid creating local dynamic copies of mfd_cell arra=
-ys,
-requiring them to be static const instead to avoid memory safety hazards.
+>  				status =3D "disabled";
+>  			};
 
 [ ... ]
-
-> +static int aspeed_pci_host_bmc_device_probe(struct pci_dev *pdev,
-> +					    const struct pci_device_id *ent)
-> +{
-
-[ ... ]
-
-> +	aspeed_pci_bmc_device_setup_vuart(pdev, pci_bmc_dev);
-> +
-> +	return devm_mfd_add_devices(dev, PLATFORM_DEVID_AUTO,
-> +				    &pci_bmc_dev->cell, 1, &pdev->resource[1],
-> +				    0, NULL);
-> +}
-
-[Severity: Medium]
-Should the MFD API be used here for a device with only a single function? T=
-he
-code registers only one child (serial8250), which violates the MFD subsystem
-rules that prohibit using the MFD API for single-function devices.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/cover.1785932211.gi=
-t.gregoire.layet@9elements.com?part=3D4
+t.gregoire.layet@9elements.com?part=3D6
