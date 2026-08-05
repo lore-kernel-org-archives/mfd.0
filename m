@@ -1,135 +1,178 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 861F13DDAEC;
-	Wed,  5 Aug 2026 08:24:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A65003E49EA
+	for <mfd@lists.linux.dev>; Wed,  5 Aug 2026 08:36:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785918259; cv=none; b=SHRYewmlkp4xTHujALwBh3O7CvwrdI/J8oznMYniYBb3cxzB5G7NcANbcq/Sc4Z8KoAKNIgcdK553qLwYdw4taAjvZL0Y5C5b6RlvMzHK6LeizL1LS/qIKl0IKUwf+RoRewalcVARgfoy83ziW92u8sgV8MbgjCgFmider9mWDI=
+	t=1785919006; cv=none; b=u0gT1rMgg2aiN1B51vZbykTedkBzRSRcptNfdTTOyYpiFZJmgs/OOY8fQs4rVWZfEfEOnHWlndx015QG8Y5zpEyjXn+6sZ69V0MIoic722apkv+bT4s0a51nPTppQLeR7KDKLF5RF6/87Fmz2WBKwypZNR29s874IsggXmNryN4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785918259; c=relaxed/simple;
-	bh=EUjYTwtZmE7hh8Q8l73SoVGocXzri3IrlRnWe3NCPtQ=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=VQYVNlpS/oVTCTyrrhmsE20vA3OUhhrKVpVGqX+O42+fpTGUYhZ3RnPwaKEckMMrOeT3igkA2H8/Eq8OAxh3CG5ml16Dh81nSUakpqyw2kDnXxOH9ZfqGyXlPo/yVOb5+10TixleMR4n7oje6TuUu+TKwb27fKixfOJzWwbebvw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mV/YHnqW; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785919006; c=relaxed/simple;
+	bh=MOn7oxXrZL+xFemqjbz74heu3oMn07FLvq27q11l8C8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=KXA2KCLYfRtnXJOlMm4e6QMAxuqI6JI8cRDthDfncFQRiK2HyG1teYWs3CTHOMD4SUhoPIRWasXeiNyyDtQsHDqL7hD8PliHpUWJX5j0dScVaHI0i+xIk7Zg0uixFyGoXUza2p8t2/bJGvl7hWr89SX844+MGGqekfhCi5nTL3Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=fe62Jeyo; arc=none smtp.client-ip=185.246.84.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mV/YHnqW"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 884591F000E9;
-	Wed,  5 Aug 2026 08:24:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785918257;
-	bh=wPXum4rRsqI3wrxTxVfvisoC2MnoQCPXd7IvHdeqxuA=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=mV/YHnqW2CslUh4q4vQcrTJiclkNqIBbaS0DrxEtru0deO9rw4t+U9VmOR07Q1bfc
-	 ETezp7KMktsz+D7MmtAXYkYgoFMdj+POkcFY75FDRbKgOTKvj3/PH7s9uiphy6mj+0
-	 yv7nW9MgiuZSfY6XgchSMLl18fecanusbRx4c5uTZZCvJQyZ1RcENGmLIGSdmTVQLU
-	 X+SH4LHBv4T0Ztzb5J67RHfRNH1XMPsTQVR3ufQcRiTO2DfmaKkBUpmteLVQbzz3p8
-	 KdytSoMDynYRqksxI2PhD7S+SwVgaYxXyH9mlMKgdDbCgCUNBFnlxOuDkNayveEzk1
-	 qC8EbCaSMPPtQ==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v9 6/6] arm64: dts: amlogic: t7: khadas-vim4: Add i2c
- MCU fan node
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Ronald Claveau" <linux-kernel-dev@aliel.fr>
-Cc: neil.armstrong@linaro.org, devicetree@vger.kernel.org, lee@kernel.org, linux-amlogic@lists.infradead.org, conor+dt@kernel.org, robh@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260805-add-mcu-fan-khadas-vim4-v9-6-75df78710b9e@aliel.fr>
-References: <20260805-add-mcu-fan-khadas-vim4-v9-0-75df78710b9e@aliel.fr>
- <20260805-add-mcu-fan-khadas-vim4-v9-6-75df78710b9e@aliel.fr>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 05 Aug 2026 08:24:15 +0000
-Message-Id: <20260805082416.884591F000E9@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="fe62Jeyo"
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 32A9A1A13E4;
+	Wed,  5 Aug 2026 08:36:43 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 083E1602AB;
+	Wed,  5 Aug 2026 08:36:43 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id EE5B211C34457;
+	Wed,  5 Aug 2026 10:36:37 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1785918998; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:content-language:in-reply-to:references;
+	bh=UR6p8JxnAkaMDEy6WixJCA4H8SM+sl2ouOrm3h2Sd2Q=;
+	b=fe62JeyoEmImowwQ3kgCle/gnjwYUoiTliqUJvz/dmgrbje40siEXkiMfPXIqUvfJC2HcJ
+	jQyLCAemVm4tTENaMPKg/d71rEnDBjJnjgm8oa7LcGusiorVuKp1Z+nC+QdJzS5gP4Qs1N
+	DdQLgWJYK2qEZ4hTKW7dTCQMnZa6QSXwZKIzVH5H5cVmaPBNfM8MiiSuKYmzWGd/XBLYOH
+	AOT72LlVXJT3U/sUx26A+DtQI/zPd+NC2hHH8jpV0Zsu1kWE+yN9/oYrc0vGyNwlmRe1ge
+	qiKoolm2vodnzkM8QbT/Wat1qedVd0Hr2IkZdeNZbuqv+B6oFz+d/tLL7p7TJA==
+Message-ID: <dd5d7a15-2448-426c-83eb-2783c62e82d1@bootlin.com>
+Date: Wed, 5 Aug 2026 10:36:37 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] mfd: cgbc: Fix use of negative error code as valid
+ session handle
+To: sashiko-reviews@lists.linux.dev
+Cc: lee@kernel.org, mfd@lists.linux.dev
+References: <20260804-cgbc-i2c-storage-devices-support-v1-0-fed38510671c@bootlin.com>
+ <20260804-cgbc-i2c-storage-devices-support-v1-1-fed38510671c@bootlin.com>
+ <20260804152943.B83AB1F000E9@smtp.kernel.org>
+Content-Language: en-US
+From: Thomas Richard <thomas.richard@bootlin.com>
+In-Reply-To: <20260804152943.B83AB1F000E9@smtp.kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
-- [High] The khadas-mcu-fan driver leaks regulator references and enable co=
-unts due to binding devres to the parent device and missing cleanup paths.
---
+On 8/4/26 5:29 PM, sashiko-bot@kernel.org wrote:
+> Thank you for your contribution! Sashiko AI review found 3 potential issue(s) to consider:
+> 
+> Pre-existing issues:
+> - [High] Hardcoded `.id` values are used in the `mfd_cell` array `cgbc_devs` instead of relying on `PLATFORM_DEVID_AUTO`.
+> - [High] Uninitialized kernel stack memory can be leaked to userspace via sysfs if the board controller firmware returns fewer than 3 bytes of data.
+> - [Medium] The `mfd_cell` array `cgbc_devs` is missing the `const` qualifier.
+> --
+> 
+> --- Patch [1]: [PATCH 1/4] mfd: cgbc: Fix use of negative error code as valid session handle ---
+> commit d37d718d69c4fd9448146a18eac17c7d57dcefc2
+> Author: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
+> 
+> mfd: cgbc: Fix use of negative error code as valid session handle
+> 
+> The cgbc_session_command() return value was directly cast to u8 and used
+> as session handle without error checking. Casting a negative error to u8
+> produces a valid-looking session handle. So check if return value is
+> positive before to cast and use it.
+> 
+> Cc: stable@vger.kernel.org
+> Reported-by: Sashiko <sashiko-bot@kernel.org>
+> Closes: https://sashiko.dev/#/patchset/20260713-cgbc-core-fix-cgbc-remove-v1-1-79274ad62b3a%40bootlin.com?part=1
+> Fixes: 6f1067cfbee7 ("mfd: Add Congatec Board Controller driver")
+> 
+>> diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
+>> index 2becaf797646d..4a409234e66c8 100644
+>> --- a/drivers/mfd/cgbc-core.c
+>> +++ b/drivers/mfd/cgbc-core.c
+> 
+> [ ... ]
+> 
+>>  static struct mfd_cell cgbc_devs[] = {
+>>  	{ .name = "cgbc-wdt"	},
+> 
+> [Severity: Medium]
+> This is a pre-existing issue, but should cgbc_devs be declared with the
+> const qualifier?
+> 
+> The MFD subsystem guidelines require mfd_cell arrays to be static const
+> so they are placed in .rodata rather than mutable memory.
 
---- Patch [6]: [PATCH v9 6/6] arm64: dts: amlogic: t7: khadas-vim4: Add i2c=
- MCU fan node ---
-commit 69aa0768107f9fa2d0c3f9c0b9a761cb13f3890b
-Author: Ronald Claveau <linux-kernel-dev@aliel.fr>
+yes indeed. Not a big deal, I can add a patch to fix this in v2.
 
-arm64: dts: amlogic: t7: khadas-vim4: Add i2c MCU fan node
-   =20
-Enable and configure i2c MCU node to get fan working on Khadas VIM4.
-   =20
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-Reviewed-by: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
-Signed-off-by: Ronald Claveau <linux-kernel-dev@aliel.fr>
+> 
+> [ ... ]
+> 
+>>  	{ .name = "cgbc-i2c", .id = 1 },
+>>  	{ .name = "cgbc-i2c", .id = 2 },
+> 
+> [Severity: High]
+> This is a pre-existing issue, but could this cause device naming collisions
+> in sysfs?
+> 
+> The cells use hardcoded .id values instead of allowing the MFD core to handle
+> auto-indexing. The subsystem guidelines recommend using PLATFORM_DEVID_AUTO
+> to prevent driver load failures.
 
-> diff --git a/arch/arm64/boot/dts/amlogic/amlogic-t7-a311d2-khadas-vim4.dt=
-s b/arch/arm64/boot/dts/amlogic/amlogic-t7-a311d2-khadas-vim4.dts
-> index c41525a34b721..7d95aadcf6a66 100644
-> --- a/arch/arm64/boot/dts/amlogic/amlogic-t7-a311d2-khadas-vim4.dts
-> +++ b/arch/arm64/boot/dts/amlogic/amlogic-t7-a311d2-khadas-vim4.dts
-> @@ -167,6 +167,19 @@ xtal: xtal-clk {
->  	};
->  };
-> =20
-> +&i2c_m_ao_a {
-> +	status =3D "okay";
-> +	pinctrl-0 =3D <&i2c0_ao_d_pins>;
-> +	pinctrl-names =3D "default";
-> +
-> +	khadas_mcu: system-controller@18 {
-> +		compatible =3D "khadas,vim4-mcu";
-> +		reg =3D <0x18>;
-> +		fan-supply =3D <&vcc5v>;
+PLATFORM_DEVID_NONE (-1) is used and id starts from 1.
+The first I2C bus receives a platform_id of 0 (cgbc-i2c.0, cgbc-i2c.1),
+so no collision. While this design is maybe not ideal, but it works for
+now. Also the plan is to add support for additional boards and I2C
+busses in the future. And since some boards won't support all I2C
+busses, so this scheme will probably be reworked.
 
-[Severity: High]
-Does enabling this fan node expose a regulator leak in the khadas-mcu-fan
-driver?
+> 
+> [ ... ]
+> 
+>>  static int cgbc_get_version(struct cgbc_device_data *cgbc)
+>>  {
+>>  	...
+>> 	ret = cgbc_command(cgbc, &cmd, 1, &data, sizeof(data), NULL);
+>> 	if (ret)
+>> 		return ret;
+>>
+>> 	cgbc->version.feature = data[0];
+>> 	cgbc->version.major = data[1];
+>> 	cgbc->version.minor = data[2];
+> 
+> [Severity: High]
+> This is a pre-existing issue, but can this leak uninitialized stack memory
+> to userspace?
+> 
+> If the board controller hardware returns fewer than 3 bytes during the
+> CGBC_CMD_GET_FW_REV command, cgbc_command() might still successfully verify
+> the truncated response and return 0.
+> 
+> The code then unconditionally reads data[0], data[1], and data[2], storing
+> potentially uninitialized stack bytes into cgbc->version, which is later
+> exposed via the cgbc_version sysfs attribute.
 
-When the driver probes, it appears to attach the regulator resource
-lifecycle to the parent device rather than the child:
+No. If CGBC_CMD_GET_FW_REV command succeeds (and we check cgbc_command's
+return code), it returns exactly 4 bytes. So there is no way to get
+uninitialized values in data buffer.
 
-drivers/thermal/khadas_mcu_fan.c:khadas_mcu_fan_probe() {
-    ...
-    ctx->power =3D devm_regulator_get(dev->parent, "fan");
-    ...
-}
+Also to prevent buffer overflow, cgbc_command verifies that the buffer
+is large enough to hold all received data.
 
-If devm_thermal_of_child_cooling_device_register() fails, the probe
-function returns without calling regulator_disable():
+> 
+> [ ... ]
+> 
+>>  static int cgbc_init_device(struct cgbc_device_data *cgbc)
+>>  {
+>>  	...
+>> 	ret = mfd_add_devices(cgbc->dev, -1, cgbc_devs, ARRAY_SIZE(cgbc_devs),
+>> 			      NULL, 0, NULL);
+> 
+> [Severity: High]
+> This is a pre-existing issue, but should this pass PLATFORM_DEVID_AUTO
+> instead of -1 (PLATFORM_DEVID_NONE)?
+> 
+> Using PLATFORM_DEVID_NONE combined with hardcoded .id values in the mfd_cell
+> array violates MFD guidelines.
 
-drivers/thermal/khadas_mcu_fan.c:khadas_mcu_fan_probe() {
-    ...
-    return ret;
-}
+Ditto (see above)
 
-Furthermore, the driver struct lacks a .remove callback entirely:
-
-drivers/thermal/khadas_mcu_fan.c:
-static struct platform_driver khadas_mcu_fan_driver =3D {
-    .probe      =3D khadas_mcu_fan_probe,
-    .shutdown   =3D khadas_mcu_fan_shutdown,
-    .driver =3D {
-        .name       =3D "khadas-mcu-fan-ctrl",
-        .pm         =3D &khadas_mcu_fan_pm,
-    },
-    .id_table   =3D khadas_mcu_fan_id_table,
-};
-
-Since devres is attached to dev->parent, the driver core will not
-automatically clean up the regulator when the child device probe fails or
-when the child driver is unbound.=20
-
-Will this cause a monotonically increasing enable count and memory leak
-on the parent device during unbind/rebind cycles?
-
-> +		#cooling-cells =3D <2>;
-> +	};
-> +};
-
-[ ... ]
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260805-add-mcu-fa=
-n-khadas-vim4-v9-0-75df78710b9e@aliel.fr?part=3D6
+-- 
+Thomas Richard, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
