@@ -1,151 +1,158 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 816FC1E5B68;
-	Thu,  6 Aug 2026 14:34:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20B86470E8C;
+	Thu,  6 Aug 2026 14:42:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786026873; cv=none; b=HHzvQT05SW9bpUa7yk7jFclj2w6h607kfD8L7HidfOxcnebQvjvh5cPM/6whU3VMfecol+XtAJZpqX1OpOEEU0VwaoAu4iVHTXqGA6hpxwlRpd/0s3nHDpHPhQKJmXYu31izMtEVbuZ5y3TG5UGubPdjO4BKgj6opwWffTCDEjk=
+	t=1786027337; cv=none; b=FKaIsTVn+DQisZwsVh5NpALuxz5SGhTDsQeZjhLo2tUn5/kTlcdCnlchSL+wMbuWUcQFLMuPKm/YurXtmUDV3MLQhnt0ukpIva7eHEDadavarFNOvnR5qrFeV3jE8wdU7WolJglZVpx6jzSXGjaKoQP1m3Ls7YTaB7LWOZMMcvA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786026873; c=relaxed/simple;
-	bh=BmxoDzmWvjYy7BRpRsNx1jtL/Z5kout8w6SoWYxNXdk=;
+	s=arc-20240116; t=1786027337; c=relaxed/simple;
+	bh=7qPtf+dB83YTFh0o6ZSXj4jJr/gA9nOPdArEdRH9Lz8=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OM4hQ8pociUYPA6jdH61Ry3RPouK2hiGM4DS3b+GNJoPwutVfnailllERa+iP1q5wn90UJteUX6njfM0L59Bv9rBAazhuqwL7mNgiQy3/HhX3RgDQKvc7lLstVhYDQAksAJOwjPYNBNuG31uersrCvhLfRvhomMR0gC39b3LRFs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bGPWiCQ6; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=ImRP0ihazHwPAQxrYNNPjgudQccvlK4AvoT1hqIcyJEvCnSjXZW29IwIkoI6I0iW3XpfbC4fxsTBMSz5JeYFhN+3cxRXVG8UWWkJVfA57Js0L6f5XflsYYZdDBL00jXXRigwrMI6ChgJmC/p4sPKjvwXLgsAdQU7jY26IQ/Hl60=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ShjpXVaW; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bGPWiCQ6"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F18871F000E9;
-	Thu,  6 Aug 2026 14:34:30 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ShjpXVaW"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6FF861F000E9;
+	Thu,  6 Aug 2026 14:42:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786026872;
-	bh=2Gx9mxxMMWTHPBUERGHiyw7TTYMO8e9sg6zsgfl3AAk=;
+	s=k20260515; t=1786027335;
+	bh=fOR/7ZIZFzT7PizU/ULMAdcAyu4l6xZI1kylL9/mhA4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=bGPWiCQ6nrN6JGgxHyazw/rLj64xgBxv1i66XfQhUQtk/LiN6Nl0mJJ4ZQOqcl/1f
-	 eZZvhtBDDVzWCri0zd82mk43awApgraBqYRdVEzNo4+dbIMlfbk73BKzlf30znKAt1
-	 xIJcTjZmLJX1ELgGVpglqqBOA+kpnid6fcFPsfY6HcKDEi2cKISUsSsfvC9jXcMEz9
-	 bo0XgafZkENYTwIoUfPUW178GQYHg9pfNiXozk+VlVtcwo9wh1OMCJujg3nn37Z96s
-	 kdtLdHW5dWBVe98L2YlRxWJNEU9IbsknPD50WuWAmfh+rBUv//zHCN0gMOWKo3RPap
-	 eU07vl9RzgAHg==
-Date: Thu, 6 Aug 2026 15:34:28 +0100
+	b=ShjpXVaWhyWMwozYwsvB127NkAEoKCpxqkDFoj+m/78O4DN2PKv3kxu/w5Ds7ozw+
+	 5useUrM58DH3OI71ToGxv0wFOXJomeZE9VZq7EGDzPHUyH9MN6qqUPe72k4NREbvDg
+	 OLM+DMz44iq+uanT5XYUa/B3mbiZ+H4l/Dl4rzSpZYkwulnwkP7NSg4eq0/t+WWV80
+	 WgVvSEUQtBQI+Ssb//Z52k8vaRIlLbySTBTWb5da+MMORVxnlPyazstqNJcLr688XK
+	 sVPxqpHlRokiCsUPG+JT72vZK9gcP9tb41xbceplLfGZQT0bcMDzJzIxXIwU0yUpLV
+	 b3UBFpqgOIPHg==
+Date: Thu, 6 Aug 2026 15:42:10 +0100
 From: Lee Jones <lee@kernel.org>
-To: sashiko-reviews@lists.linux.dev
-Cc: Christian Marangi <ansuelsmth@gmail.com>, robh@kernel.org,
-	mfd@lists.linux.dev, conor+dt@kernel.org,
-	devicetree@vger.kernel.org
-Subject: Re: [PATCH net-next v19 04/10] mfd: an8855: Add support for Airoha
- AN8855 Switch MFD
-Message-ID: <20260806143428.GO2869284@google.com>
-References: <20260728154846.1828945-1-ansuelsmth@gmail.com>
- <20260728154846.1828945-5-ansuelsmth@gmail.com>
- <20260729171638.7CD821F000E9@smtp.kernel.org>
+To: Charles Keepax <ckeepax@opensource.cirrus.com>
+Cc: broonie@kernel.org, robh@kernel.org, krzk+dt@kernel.org,
+	conor+dt@kernel.org, lgirdwood@gmail.com,
+	linux-sound@vger.kernel.org, devicetree@vger.kernel.org,
+	mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
+	patches@opensource.cirrus.com
+Subject: Re: [PATCH 3/3] mfd: cs42l43: Add support for new cs42l44 variant
+Message-ID: <20260806144210.GQ2869284@google.com>
+References: <20260708140039.1993489-1-ckeepax@opensource.cirrus.com>
+ <20260708140039.1993489-4-ckeepax@opensource.cirrus.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260729171638.7CD821F000E9@smtp.kernel.org>
+In-Reply-To: <20260708140039.1993489-4-ckeepax@opensource.cirrus.com>
 
-On Wed, 29 Jul 2026, sashiko-bot@kernel.org wrote:
+On Wed, 08 Jul 2026, Charles Keepax wrote:
 
-> Thank you for your contribution! Sashiko AI review found 6 potential issue(s) to consider:
-> - [High] Concurrent accesses by the switch regmap and the PHY driver on the shared MDIO address corrupt the PHY's hardware page state, causing arbitrary out-of-bounds PHY register reads/writes.
-> - [High] MDIO child buses and PHYs are registered before the switch is taken out of reset and initialized, causing PHY probe failures.
-> - [High] The reset GPIO sequence incorrectly leaves the switch held in reset, and the subsequent poll loop is vulnerable to false successes.
-> - [High] `an8855_regmap_update_bits` fails to mask `write_val`, risking modification of adjacent bits.
-> - [Medium] The driver assumes the hardware page register is 0 at boot without synchronizing this assumption, potentially causing MDIO reads from the wrong page.
-> - [Low] The patch violates multiple MFD subsystem guidelines regarding naming conventions and commit message formatting.
+> The cs42l44 is a cost optimised variant of cs42l43b. Add basic support
+> for this new device.
+> 
+> Signed-off-by: Charles Keepax <ckeepax@opensource.cirrus.com>
+> ---
+>  drivers/mfd/cs42l43-i2c.c        |  2 ++
+>  drivers/mfd/cs42l43-sdw.c        |  1 +
+>  drivers/mfd/cs42l43.c            | 18 ++++++++++++------
+>  include/linux/mfd/cs42l43-regs.h |  1 +
+>  4 files changed, 16 insertions(+), 6 deletions(-)
 
-I'll leave these with you! :)
+Doesn't apply anymore, sorry.  Please rebase.
 
-> --
-> 
-> --- Patch [4]: [PATCH net-next v19 04/10] mfd: an8855: Add support for Airoha AN8855 Switch MFD ---
-> Please note that due to mailing list constraints on quoting large blocks of 
-> code, this review is provided as a free-form summary without direct patch 
-> quotes.
-> 
-> commit 9fc0a25ce584ed2b0b637f4a623a857dd535edcc
-> Author: Christian Marangi <ansuelsmth@gmail.com>
-> mfd: an8855: Add support for Airoha AN8855 Switch MFD
-> 
-> This patch adds support for the Airoha AN8855 Switch MFD, providing a DSA
-> switch and an NVMEM provider. It introduces a regmap over MDIO for switch
-> and PHY accesses.
-> 
-> [Severity: High]
-> In an8855_regmap_read(), the switch regmap acquires the parent lock and sets
-> the hardware page to EXTENDED_4. Does this interleave dangerously with the
-> PHY driver's paged operations?
-> 
-> Since the PHY driver paged operations hold the child MDIO bus lock, the
-> parent lock is acquired and released for each transaction (page write, data
-> read, restore). Can a switch regmap operation interleave between the PHY's
-> page write and data read, changing the hardware page?
-> 
-> Furthermore, when the PHY driver resumes, an855_regmap_phy_reset_page()
-> resets the page to STANDARD (0), ignoring the PHY driver's intended page.
-> Also, an8855_regmap_phy_write() writes the page without updating the cached
-> priv->current_page state. Will this lead to arbitrary out-of-bounds PHY
-> register reads and writes?
-> 
-> [Severity: High]
-> In an8855_core_probe(), the driver calls an855_mdio_register() before
-> toggling the reset GPIO and clearing the global PHY power-down.
-> 
-> Since fwnode_mdiobus_register_phy() triggers the MDIO subsystem to read
-> the PHY ID registers to detect devices, won't these accesses fail or time
-> out if the switch is still in reset and powered down? Should the MDIO and
-> PHY registration be moved after the hardware initialization sequence is
-> complete?
-> 
-> [Severity: High]
-> Looking at the reset sequence in an8855_core_probe(), the code calls
-> gpiod_set_value_cansleep(reset_gpio, 1) at the end. Since the gpiod API
-> treats a logical 1 as asserted regardless of polarity, does this permanently
-> hold the switch in reset?
-> 
-> Immediately after this, regmap_read_poll_timeout() waits for the HWTRAP
-> register to be non-zero. Since the device is in reset, won't the 32-bit
-> MDIO read reconstruct 0xffffffff (as __mdiobus_read returns 0xffff on error),
-> causing the poll loop to instantly and falsely succeed?
-> 
-> [Severity: High]
-> In an8855_regmap_update_bits(), the implementation performs
-> val &= ~mask followed by val |= write_val.
-> 
-> Since the regmap core does not guarantee that write_val is already pre-masked
-> by the caller, could this unintentionally corrupt adjacent bits in the switch
-> registers if write_val contains bits outside the mask? Would it be safer to
-> explicitly mask it using val |= (write_val & mask)?
-> 
-> [Severity: Medium]
-> In an855_regmap_phy_reset_page(), the function skips restoring the page
-> if priv->current_page is 0. Since priv is allocated with kzalloc(), this
-> assumes the hardware page is also 0 at boot.
-> 
-> If the bootloader or a previous kernel execution left the hardware in a
-> different page, such as EXTENDED_4, will subsequent PHY reads access the
-> wrong hardware page because the software state does not match? Should the
-> page register be explicitly initialized during probe?
-> 
-> [Severity: Low]
-> This isn't a bug, but there are a few MFD subsystem style and naming
-> guideline violations.
-> 
-> Does the commit message description unnecessarily include the string "MFD"?
-> Also, the private structure is named struct an8855_core_priv with an
-> instance variable named priv. The MFD guidelines prefer using the device
-> name for the structure, such as struct an8855, and ddata for the instance.
-> 
-> Finally, are there typos in the function names an855_mdio_register and
-> an855_regmap_phy_reset_page, missing the second 8 in AN8855?
-> 
+> diff --git a/drivers/mfd/cs42l43-i2c.c b/drivers/mfd/cs42l43-i2c.c
+> index bd9752d2cfc34..1af878c7a20b4 100644
+> --- a/drivers/mfd/cs42l43-i2c.c
+> +++ b/drivers/mfd/cs42l43-i2c.c
+> @@ -59,6 +59,7 @@ static int cs42l43_i2c_probe(struct i2c_client *i2c)
+>  static const struct of_device_id cs42l43_of_match[] = {
+>  	{ .compatible = "cirrus,cs42l43", .data = (void *)CS42L43_DEVID_VAL },
+>  	{ .compatible = "cirrus,cs42l43b", .data = (void *)CS42L43B_DEVID_VAL },
+> +	{ .compatible = "cirrus,cs42l44", .data = (void *)CS42L43B_DEVID_VAL },
+>  	{ }
+>  };
+>  MODULE_DEVICE_TABLE(of, cs42l43_of_match);
+> @@ -68,6 +69,7 @@ MODULE_DEVICE_TABLE(of, cs42l43_of_match);
+>  static const struct acpi_device_id cs42l43_acpi_match[] = {
+>  	{ .id = "CSC4243", .driver_data = CS42L43_DEVID_VAL },
+>  	{ .id = "CSC2A3B", .driver_data = CS42L43B_DEVID_VAL },
+> +	{ .id = "CSC4244", .driver_data = CS42L43B_DEVID_VAL },
+>  	{ }
+>  };
+>  MODULE_DEVICE_TABLE(acpi, cs42l43_acpi_match);
+> diff --git a/drivers/mfd/cs42l43-sdw.c b/drivers/mfd/cs42l43-sdw.c
+> index 6ccfdcd3f6698..81dd19df53685 100644
+> --- a/drivers/mfd/cs42l43-sdw.c
+> +++ b/drivers/mfd/cs42l43-sdw.c
+> @@ -184,6 +184,7 @@ static int cs42l43_sdw_probe(struct sdw_slave *sdw, const struct sdw_device_id *
+>  static const struct sdw_device_id cs42l43_sdw_id[] = {
+>  	SDW_SLAVE_ENTRY(0x01FA, 0x4243, (void *)CS42L43_DEVID_VAL),
+>  	SDW_SLAVE_ENTRY(0x01FA, 0x2A3B, (void *)CS42L43B_DEVID_VAL),
+> +	SDW_SLAVE_ENTRY(0x01FA, 0x4244, (void *)CS42L43B_DEVID_VAL),
+>  	{ }
+>  };
+>  MODULE_DEVICE_TABLE(sdw, cs42l43_sdw_id);
+> diff --git a/drivers/mfd/cs42l43.c b/drivers/mfd/cs42l43.c
+> index 33479ddd539a6..d6027fa4de705 100644
+> --- a/drivers/mfd/cs42l43.c
+> +++ b/drivers/mfd/cs42l43.c
+> @@ -959,6 +959,7 @@ static void cs42l43_boot_work(struct work_struct *work)
+>  {
+>  	struct cs42l43 *cs42l43 = container_of(work, struct cs42l43, boot_work);
+>  	unsigned int devid, revid, otp;
+> +	bool valid_id;
+>  	int ret;
+>  
+>  	ret = cs42l43_wait_for_attach(cs42l43);
+> @@ -973,19 +974,24 @@ static void cs42l43_boot_work(struct work_struct *work)
+>  
+>  	switch (devid) {
+>  	case CS42L43_DEVID_VAL:
+> +		valid_id = (cs42l43->variant_id == CS42L43_DEVID_VAL);
+> +		break;
+>  	case CS42L43B_DEVID_VAL:
+> -		if (devid != cs42l43->variant_id) {
+> -			dev_err(cs42l43->dev,
+> -				"Device ID (0x%06x) does not match variant ID (0x%06lx)\n",
+> -				devid, cs42l43->variant_id);
+> -			goto err;
+> -		}
+> +	case CS42L44_DEVID_VAL:
+> +		valid_id = (cs42l43->variant_id == CS42L43B_DEVID_VAL);
+>  		break;
+>  	default:
+>  		dev_err(cs42l43->dev, "Unrecognised devid: 0x%06x\n", devid);
+>  		goto err;
+>  	}
+>  
+> +	if (!valid_id) {
+> +		dev_err(cs42l43->dev,
+> +			"Device ID (0x%06x) does not match variant ID (0x%06lx)\n",
+> +			devid, cs42l43->variant_id);
+> +		goto err;
+> +	}
+> +
+>  	ret = regmap_read(cs42l43->regmap, CS42L43_REVID, &revid);
+>  	if (ret) {
+>  		dev_err(cs42l43->dev, "Failed to read rev: %d\n", ret);
+> diff --git a/include/linux/mfd/cs42l43-regs.h b/include/linux/mfd/cs42l43-regs.h
+> index 68831f113589d..4c00ceae8b461 100644
+> --- a/include/linux/mfd/cs42l43-regs.h
+> +++ b/include/linux/mfd/cs42l43-regs.h
+> @@ -1183,6 +1183,7 @@
+>  
+>  /* CS42L43B VARIANT REGISTERS */
+>  #define CS42L43B_DEVID_VAL					0x0042A43B
+> +#define CS42L44_DEVID_VAL					0x00042A44
+>  
+>  #define CS42L43B_DECIM_VOL_CTRL_CH1_CH2				0x00008280
+>  #define CS42L43B_DECIM_VOL_CTRL_CH3_CH4				0x00008284
 > -- 
-> Sashiko AI review · https://sashiko.dev/#/patchset/20260728154846.1828945-1-ansuelsmth@gmail.com?part=4
+> 2.47.3
+> 
 
 -- 
 Lee Jones
