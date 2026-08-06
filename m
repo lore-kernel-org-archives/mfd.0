@@ -1,126 +1,115 @@
-Received: from mail-m49197.qiye.163.com (mail-m49197.qiye.163.com [45.254.49.197])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 390303F482E
-	for <mfd@lists.linux.dev>; Thu,  6 Aug 2026 15:20:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.197
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA1453A7F41
+	for <mfd@lists.linux.dev>; Thu,  6 Aug 2026 15:34:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786029647; cv=none; b=Azm+k5/P8heNNjOyQpV7B04nJYW1MJi1MmYRlByhGz9grp37//bBlFu626w98sWEAhrJs4oB8EtO1A2V1aR2btpUdxxoJidq7HKfI6d7Fbz+Cw8OStl4FNCifC/CdOhapGBNFi+uN/WVBwtUj+UbAR6agjbIOjDti7EeZGYu49Q=
+	t=1786030462; cv=none; b=lp/jqToXeHaE5W39d+VSRqq+OVk5Fs/U0NDurNgEtf0z4j85CG6FwgmYEQx4kX1rPJdmGKVEEJ4uOWIt9We68OaPLEW/141WFHN49wOW/88saSmyoS/ws/LLUkPLeKaU9mltm84U558xdRc/KLpsTG4DEKOHwlIR4Jp/fHzZsf0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786029647; c=relaxed/simple;
-	bh=Sb1NY9V01dgoEXrZxpCG9/auJnmA5P6O6bfCDLm4UnA=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=KXpCRAw0XjW1B6sBoiiNoLS9xzJFMZqBJv/PKcmYkDHMbvoBwcEdNcjDAo8GXoDzII1osKvOi+WDdaqp7vdHt6elavE3GblustkoKLpY8uO+MsqOi+tuxPU2s592kmeLjK13AwVNgHsIMTvTsTiDFgCfrSVtA7NDh2dF+1Msi1Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=seu.edu.cn; spf=pass smtp.mailfrom=seu.edu.cn; dkim=pass (1024-bit key) header.d=seu.edu.cn header.i=@seu.edu.cn header.b=GnxfxLTu; arc=none smtp.client-ip=45.254.49.197
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=seu.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=seu.edu.cn
+	s=arc-20240116; t=1786030462; c=relaxed/simple;
+	bh=IFHjfuJw0ENRitSFvo6z3+5jr0wb7v9M4JU4epLfTVo=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=P2QLWizmF0UdTTsfiUyUYmc1yTA27oGwa/uQYUfMpxZ8uC+V9aPAaY2zsnQYwUT4FwoD6Uq3ZLT+6lMjwe0kYn77GpHTvY+uuTfRWkEtJ1oL32vcGhBH7ch7adpcnHEhK7YLkeCzalzyf/Fw3JLf0XtmGFP/93K4BP3FRgJObyQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nE/cak4K; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=seu.edu.cn header.i=@seu.edu.cn header.b="GnxfxLTu"
-Received: from LAPTOP-99KJFSET (unknown [36.153.54.46])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 490cb5b5b;
-	Thu, 6 Aug 2026 23:20:37 +0800 (GMT+08:00)
-From: Hongyan Xu <getshell@seu.edu.cn>
-To: Support Opensource <support.opensource@diasemi.com>,
-	Lee Jones <lee@kernel.org>
-Cc: mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org,
-	jianhao.xu@seu.edu.cn,
-	Hongyan Xu <getshell@seu.edu.cn>
-Subject: [PATCH v2] mfd: da903x: cancel IRQ work during teardown
-Date: Thu,  6 Aug 2026 23:20:31 +0800
-Message-ID: <20260806152032.894-1-getshell@seu.edu.cn>
-X-Mailer: git-send-email 2.50.1.windows.1
-In-Reply-To: <20260728065557.1517-1-getshell@seu.edu.cn>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nE/cak4K"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8EE021F000E9;
+	Thu,  6 Aug 2026 15:34:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786030458;
+	bh=o9NBY7I1SfKKu427uDxz524cFJq38j9zDocGRvvvqY8=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=nE/cak4KEVrnw1r06qerlxATnXTW3I7WuuGkS7/1umro0Uz6NWp++R9LZ/zryrUSd
+	 BwFftz3DIH4u4EpeNHjvxdRZ5reW1dM64jQJpayML3db5LEjQLmM82BT2+TaAZAa+g
+	 egKgs70kpnkYXR+0tfBUu1xU/SwwhsZDz5yPKx/KuQSsymKTBC6TY3guH+Z75yKMnj
+	 Sxv8jvLo82LtSRN62JAoRI9xb2rjyG4Mldz9RcXyye7UMa7smFPKXf1hV0h4V2h93g
+	 m/0r1bnJN3reBB+5FjNp0+fB3T9F3H8uLug9ojEn/R1QegqsZeJhfzo5R2f0YIiJMn
+	 jWvKmCQqsRmMQ==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v2] mfd: da903x: cancel IRQ work during teardown
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Hongyan Xu" <getshell@seu.edu.cn>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20260806152032.894-1-getshell@seu.edu.cn>
 References: <20260728065557.1517-1-getshell@seu.edu.cn>
+ <20260806152032.894-1-getshell@seu.edu.cn>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Thu, 06 Aug 2026 15:34:18 +0000
+Message-Id: <20260806153418.8EE021F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9fd7a97c0103a1kunm1104d3071001
-X-HM-MType: 10
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVlDSh1LVktIGh5IQhkYTxlCTFYeHw
-	5VEwETFhoSFyQUDg9ZV1kYEgtZQVlITVVKTkhVTk9VT01ZV1kWGg8SFR0UWUFZT0tIVUpLSEpPSE
-	xVSktLVUpCS0tZBg++
-DKIM-Signature: a=rsa-sha256;
-	b=GnxfxLTu9VYID1N5Sawlup+KC0o5E/QXcr587+/u/qPiz9Zx6YblxalOq0rrU4PeZUQmspJuf3EX75BjoLbPlnQTnG6x57/p3uzcbSscCw+uQqwbrddonNzFW0Zl2CDZVVqbr6+pX4msPsAik0cJY6qS5xX+fNGjXvaWEmjzvI4=; s=default; c=relaxed/relaxed; d=seu.edu.cn; v=1;
-	bh=9RiJcmxpWB5jybv13xnn/ti2B+Zn7/fJmDEx4MBtReE=;
-	h=date:mime-version:subject:message-id:from;
 
-The IRQ handler disables the IRQ and schedules irq_work. Releasing the
-IRQ does not drain that work, which can continue to use the devm-allocated
-chip and notifier state.
+Thank you for your contribution! Sashiko AI review found 2 potential issue(=
+s) to consider:
 
-Add a devm action after requesting the IRQ. The action disables the IRQ
-and cancels the work before automatic IRQ release. Run the same action
-before removing child devices on normal detach.
+New issues:
+- [Low] The commit message description starts with a lowercase letter, viol=
+ating MFD subsystem guidelines.
 
-If da903x_add_subdevs() fails, it removes already-created child devices
-before returning from probe. Release the action explicitly before that
-cleanup so the work is stopped before child-device teardown.
+Pre-existing issues:
+- [High] Missing NULL check for platform data (`pdata`) leads to a kernel o=
+ops if the device is instantiated without it.
+--
 
-This issue was found by the author's in-house static analysis tool.
-The patch was reviewed by the author against the latest mainline tree.
+--- Patch [1]: [PATCH v2] mfd: da903x: cancel IRQ work during teardown ---
+commit 2a17d672041aff8f9dbc3cb91964d70e165a4c40
+Author: Hongyan Xu <getshell@seu.edu.cn>
 
-Fixes: 26b8f5e1e2d1 ("mfd: add base support for Dialog DA9030/DA9034 PMICs")
-Cc: stable@vger.kernel.org
-Assisted-by: Codex:GPT-5
-Signed-off-by: Hongyan Xu <getshell@seu.edu.cn>
----
- drivers/mfd/da903x.c | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+mfd: da903x: cancel IRQ work during teardown
 
-diff --git a/drivers/mfd/da903x.c b/drivers/mfd/da903x.c
-index e86b39de3303..f3e983bd21b0 100644
---- a/drivers/mfd/da903x.c
-+++ b/drivers/mfd/da903x.c
-@@ -421,6 +421,14 @@ static irqreturn_t da903x_irq_handler(int irq, void *data)
- 	return IRQ_HANDLED;
- }
- 
-+static void da903x_cancel_irq_work(void *data)
-+{
-+	struct da903x_chip *chip = data;
-+
-+	disable_irq(chip->client->irq);
-+	cancel_work_sync(&chip->irq_work);
-+}
-+
- static const struct da903x_chip_ops da903x_ops[] = {
- 	[0] = {
- 		.init_chip	= da9030_init_chip,
-@@ -484,6 +492,7 @@ static int da903x_add_subdevs(struct da903x_chip *chip,
- 	return 0;
- 
- failed:
-+	devm_release_action(chip->dev, da903x_cancel_irq_work, chip);
- 	da903x_remove_subdevs(chip);
- 	return ret;
- }
-@@ -529,6 +538,11 @@ static int da903x_probe(struct i2c_client *client)
- 		return ret;
- 	}
- 
-+	ret = devm_add_action_or_reset(&client->dev, da903x_cancel_irq_work,
-+				       chip);
-+	if (ret)
-+		return ret;
-+
- 	return da903x_add_subdevs(chip, pdata);
- }
- 
-@@ -536,6 +550,7 @@ static void da903x_remove(struct i2c_client *client)
- {
- 	struct da903x_chip *chip = i2c_get_clientdata(client);
- 
-+	devm_release_action(&client->dev, da903x_cancel_irq_work, chip);
- 	da903x_remove_subdevs(chip);
- }
- 
--- 
-2.50.1.windows.1
+This commit adds a devm action to disable the IRQ and cancel the scheduled
+IRQ work during teardown. It also ensures the action is properly released
+if child device creation fails during probe.
 
+> mfd: da903x: cancel IRQ work during teardown
+
+[Severity: Low]
+This isn't a bug, but MFD subsystem guidelines require the description
+after the subsystem prefix to be capitalized. Should "cancel" be capitalized
+here?
+
+> diff --git a/drivers/mfd/da903x.c b/drivers/mfd/da903x.c
+> index e86b39de3303a..f3e983bd21b0d 100644
+> --- a/drivers/mfd/da903x.c
+> +++ b/drivers/mfd/da903x.c
+
+[ ... ]
+
+> @@ -529,6 +538,11 @@ static int da903x_probe(struct i2c_client *client)
+>  		return ret;
+>  	}
+> =20
+> +	ret =3D devm_add_action_or_reset(&client->dev, da903x_cancel_irq_work,
+> +				       chip);
+> +	if (ret)
+> +		return ret;
+> +
+>  	return da903x_add_subdevs(chip, pdata);
+
+[Severity: High]
+This is a pre-existing issue, but can passing pdata here cause a NULL=20
+pointer dereference if the device is instantiated without platform data?
+
+If the driver is instantiated via the i2c sysfs interface without platform
+data, dev_get_platdata() returns NULL. This is then passed directly into
+da903x_add_subdevs(), which blindly dereferences it:
+
+da903x_probe()->da903x_add_subdevs()
+    for (i =3D 0; i < pdata->num_subdevs; i++) {
+        subdev =3D &pdata->subdevs[i];
+
+Could we add a NULL check for pdata in da903x_probe() to prevent a kernel
+oops?
+
+>  }
+> =20
+> @@ -536,6 +550,7 @@ static void da903x_remove(struct i2c_client *client)
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260806152032.894-=
+1-getshell@seu.edu.cn?part=3D1
