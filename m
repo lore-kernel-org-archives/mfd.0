@@ -1,66 +1,108 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 558C62EEE85;
-	Thu,  6 Aug 2026 13:16:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93ADB3AA9E2;
+	Thu,  6 Aug 2026 14:31:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786022177; cv=none; b=Td9uo/L/1rEoTXZ9Z0w8Ao2sRhKgtun6rOYIYQP4SeViv45TAjrkKXLqitfnucQ2dY+eLpJOuzvNbMm6/jEmfI0LQEifymTl/C24u+X9uGfOAO4Qyasn/Mqrbtjgc5IYi7cAuvDtPx+QMlbNKk2vnIeYT6H90M5zzledQqQJvYk=
+	t=1786026669; cv=none; b=FLoyO2uzeECrDUjJqOymo4KEEVG5tZRtxNbx9ex6t4CNcB5GsSSl1Rg5SWaZmvbByWtBfBernGp8ga+x8NEhU3M6w63RUPS8RT411bpielK3XdFWpRYjTgOZGLMhBZJR4ImfVUlf+os4ZwuCrMGdVwEEmfoOlaWjKMngVAv+8Aw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786022177; c=relaxed/simple;
-	bh=0SYx3cMTHZwoACvsJE2GI92ixgU2d4VrH/fJ8U9gidE=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=uhEL59P04UA9M+sJnX2OLhsHxegPnunnOFWIIuqX+1KACJ1h7E6EeB59J+Jb2Z00uJorL96RLk6Z5PGUnBKMNAsgDj4rBuejIUlZzut0TxPw3Otr+/6yR5stQihA6zYWO3nbK0u/4USoH14lzeLtgHoLCCZHIPxudAQpgcmqDlo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oskrqOSb; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786026669; c=relaxed/simple;
+	bh=4VGqnNGL3CTRgpPaMGTotgH6hk0gjZuB7D+pMLI7MHY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=bDaG+p+OKn+AZddBJpvj8A0t/dLdGM5UapR1+yeDQKlPpwKy5OKHS7D4ZgAMUSa6/yn9uKC6QDGbmjDOkOOHUjh+mKB8rEkbFN8ZcLSdD5EAPt8pVVnkGcfpTp2xbK/jaM3g3PTIMCgVepINJeX9+oCCNGNHdMOQ8oXO2U+iqME=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ac7cnT4O; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oskrqOSb"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0538E1F000E9;
-	Thu,  6 Aug 2026 13:16:12 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ac7cnT4O"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E7201F000E9;
+	Thu,  6 Aug 2026 14:31:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786022173;
-	bh=z5w1Q1IkG9sX+hZCFavA/7VjO6VYl+gDFesJscCb7qs=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=oskrqOSbypOBb3ZziiulKYAAZOt15djUTnihNCy0alaS4vfmuZwTyA6Gj2/x53xA/
-	 syf2p8Bqy+UgsOu/g2o5lENsZIePheNVMhVjUGCiZ1xu6Qwbq8BlKlv0KvKvnrk+8i
-	 Hk5FUGmI2UEmxKvmJxJSKgNtQCaAwPZaEvhBeV1Z8VgRX/sepXoEQsQDkmUwoRXWmY
-	 4ze3m31+YX0Qp2pxyMP2QYxwNg+9ITZzlUc9umXs1p3zQMI3Q8r7V4yUrACLz6AU+v
-	 25pnLn6Z6Um27tciBna0KWaJBmCm+vJmSFSeTrjRhNR4i5yd0JNMN+2uXecU+bk6UL
-	 ZO6AyHx+HFrig==
+	s=k20260515; t=1786026668;
+	bh=9z92muvUMBs/zQdm3D2JnlaPtwGBIzCpTvB/G8+cjrA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Ac7cnT4OjpFvQSstdpUSFUOfjWIFfIRFt+SwM04WnAGtCJhwG5wf2NrxpiQC2iQWg
+	 vLvGIdaJoUSmaUCsPEjpvuUBDXnHZsinMXOEHIws8KDeQU2anB7loFw/evvmGefNo4
+	 gyP0749U1whB/FCAeO0kK55wRsXKA0zOkjvHg8ZgWkP2MulwCc0A28M3LzXmmMH/x4
+	 g/CkOAUVX0ttstk9Tk62sZGn6Am5Lv20mQ2D910MZ4esPXsqvHyJ5rzTa3VzX9dZQ+
+	 QqJ/KduGwaBaW9XUIAAgqYzTHmzcmLZeSb54EcXB73U7cTCdzEo9l9ju+/jmgmUsen
+	 8IiBuc3x1LvwQ==
+Date: Thu, 6 Aug 2026 15:31:03 +0100
 From: Lee Jones <lee@kernel.org>
-To: Lee Jones <lee@kernel.org>, Pengpeng Hou <pengpeng@iscas.ac.cn>
-Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org
-In-Reply-To: <20260720115423.94994-1-pengpeng@iscas.ac.cn>
-References: <20260720115423.94994-1-pengpeng@iscas.ac.cn>
-Subject: Re: (subset) [PATCH v2] mfd: iqs62x: reject zero-length firmware
- records
-Message-Id: <178602217277.2914276.15646333234311178313.b4-ty@b4>
-Date: Thu, 06 Aug 2026 14:16:12 +0100
+To: sashiko-reviews@lists.linux.dev
+Cc: Stefan =?iso-8859-1?Q?D=F6singer?= <stefandoesinger@gmail.com>,
+	vkoul@kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev,
+	olteanv@gmail.com, conor+dt@kernel.org, neil.armstrong@linaro.org,
+	linux-phy@lists.infradead.org, robh@kernel.org
+Subject: Re: [PATCH v8 04/12] mfd: zx297520v3: Add a clock and reset MFD
+ driver
+Message-ID: <20260806143103.GN2869284@google.com>
+References: <20260727-zx29clk-v8-0-7a107b00f1dd@gmail.com>
+ <20260727-zx29clk-v8-4-7a107b00f1dd@gmail.com>
+ <20260727184155.2F0A61F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.16-dev-ad80c
+In-Reply-To: <20260727184155.2F0A61F000E9@smtp.kernel.org>
 
-On Mon, 20 Jul 2026 19:54:23 +0800, Pengpeng Hou wrote:
-> struct iqs62x_fw_rec includes the first data byte in its fixed-size header,
-> so the parser advances by len - 1 bytes after that header. A zero len makes
-> the size_t cursor update move back by one byte, so the next record overlaps
-> the current record instead of following a valid declared extent.
+On Mon, 27 Jul 2026, sashiko-bot@kernel.org wrote:
+
+> Thank you for your contribution! Sashiko AI review found 1 potential issue(s) to consider:
+> - [Medium] Platform data for child devices (`mfd_cell` arrays) is improperly passed as complex pointers via the `.data` field of the `of_device_id` match table.
+> --
 > 
-> Reject zero-length records and express the remaining-size check without an
-> offset addition.
+> --- Patch [4]: [PATCH v8 04/12] mfd: zx297520v3: Add a clock and reset MFD driver ---
+> commit 997b3ee44abc6ec239c36327d1c3fd90393542dd
+> Author: Stefan D�singer <stefandoesinger@gmail.com>
 > 
-> [...]
+> mfd: zx297520v3: Add a clock and reset MFD driver
+> 
+> This driver registers child devices for the zx297520v3 clock and reset
+> controllers. The clk-zx297520v3 and reset-zte-zx297520v3 submitted in
+> the next patches will drive the respective functionalities.
+> 
+> > diff --git a/drivers/mfd/zte-zx297520v3-crm.c b/drivers/mfd/zte-zx297520v3-crm.c
+> > new file mode 100644
+> > index 0000000000000..3a4f6cd0756e3
+> > --- /dev/null
+> > +++ b/drivers/mfd/zte-zx297520v3-crm.c
+> 
+> [ ... ]
+> 
+> > +static int zx297520v3_crm_probe(struct platform_device *pdev)
+> > +{
+> > +	const struct zx297520v3_crm_data *data;
+> > +
+> > +	data = of_device_get_match_data(&pdev->dev);
+> > +	if (!data)
+> > +		return -ENODEV;
+> > +
+> > +	return devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO, data->cells,
+> > +				    data->num_cells, NULL, 0, NULL);
+> > +}
+> > +
+> > +static const struct of_device_id of_match_zx297520v3_crm[] = {
+> > +	{ .compatible = "zte,zx297520v3-topcrm", .data = &zx297520v3_topcrm_data },
+> > +	{ .compatible = "zte,zx297520v3-matrixcrm", .data = &zx297520v3_matrixcrm_data },
+> > +	{ .compatible = "zte,zx297520v3-lspcrm", .data = &zx297520v3_lspcrm_data },
+> 
+> [Severity: Medium]
+> Does passing platform data for child devices via the .data field as complex
+> pointers violate MFD subsystem architecture guidelines?
+> 
+> Instead of mapping compatible strings directly to zx297520v3_crm_data pointers
+> via the .data field, should this use an ID enum or integer ID, and have
+> zx297520v3_crm_probe() switch on the ID to select the correct static const
+> mfd_cell array?
 
-Applied, thanks!
+This is correct.  You must not pass one device registration's (MFD) data
+through another (OF).  Use a defined integer instead and match in a
+switch() statement.  There are lots of examples of this.
 
-[1/1] mfd: iqs62x: reject zero-length firmware records
-      commit: 08ea045e0b82cbcadb7a2efc43a23561489a00f2
-
---
-Lee Jones [李琼斯]
-
+-- 
+Lee Jones
