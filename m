@@ -1,158 +1,126 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail-m49197.qiye.163.com (mail-m49197.qiye.163.com [45.254.49.197])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20B86470E8C;
-	Thu,  6 Aug 2026 14:42:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 390303F482E
+	for <mfd@lists.linux.dev>; Thu,  6 Aug 2026 15:20:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.197
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786027337; cv=none; b=FKaIsTVn+DQisZwsVh5NpALuxz5SGhTDsQeZjhLo2tUn5/kTlcdCnlchSL+wMbuWUcQFLMuPKm/YurXtmUDV3MLQhnt0ukpIva7eHEDadavarFNOvnR5qrFeV3jE8wdU7WolJglZVpx6jzSXGjaKoQP1m3Ls7YTaB7LWOZMMcvA=
+	t=1786029647; cv=none; b=Azm+k5/P8heNNjOyQpV7B04nJYW1MJi1MmYRlByhGz9grp37//bBlFu626w98sWEAhrJs4oB8EtO1A2V1aR2btpUdxxoJidq7HKfI6d7Fbz+Cw8OStl4FNCifC/CdOhapGBNFi+uN/WVBwtUj+UbAR6agjbIOjDti7EeZGYu49Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786027337; c=relaxed/simple;
-	bh=7qPtf+dB83YTFh0o6ZSXj4jJr/gA9nOPdArEdRH9Lz8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ImRP0ihazHwPAQxrYNNPjgudQccvlK4AvoT1hqIcyJEvCnSjXZW29IwIkoI6I0iW3XpfbC4fxsTBMSz5JeYFhN+3cxRXVG8UWWkJVfA57Js0L6f5XflsYYZdDBL00jXXRigwrMI6ChgJmC/p4sPKjvwXLgsAdQU7jY26IQ/Hl60=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ShjpXVaW; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786029647; c=relaxed/simple;
+	bh=Sb1NY9V01dgoEXrZxpCG9/auJnmA5P6O6bfCDLm4UnA=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=KXpCRAw0XjW1B6sBoiiNoLS9xzJFMZqBJv/PKcmYkDHMbvoBwcEdNcjDAo8GXoDzII1osKvOi+WDdaqp7vdHt6elavE3GblustkoKLpY8uO+MsqOi+tuxPU2s592kmeLjK13AwVNgHsIMTvTsTiDFgCfrSVtA7NDh2dF+1Msi1Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=seu.edu.cn; spf=pass smtp.mailfrom=seu.edu.cn; dkim=pass (1024-bit key) header.d=seu.edu.cn header.i=@seu.edu.cn header.b=GnxfxLTu; arc=none smtp.client-ip=45.254.49.197
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=seu.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=seu.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ShjpXVaW"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6FF861F000E9;
-	Thu,  6 Aug 2026 14:42:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786027335;
-	bh=fOR/7ZIZFzT7PizU/ULMAdcAyu4l6xZI1kylL9/mhA4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=ShjpXVaWhyWMwozYwsvB127NkAEoKCpxqkDFoj+m/78O4DN2PKv3kxu/w5Ds7ozw+
-	 5useUrM58DH3OI71ToGxv0wFOXJomeZE9VZq7EGDzPHUyH9MN6qqUPe72k4NREbvDg
-	 OLM+DMz44iq+uanT5XYUa/B3mbiZ+H4l/Dl4rzSpZYkwulnwkP7NSg4eq0/t+WWV80
-	 WgVvSEUQtBQI+Ssb//Z52k8vaRIlLbySTBTWb5da+MMORVxnlPyazstqNJcLr688XK
-	 sVPxqpHlRokiCsUPG+JT72vZK9gcP9tb41xbceplLfGZQT0bcMDzJzIxXIwU0yUpLV
-	 b3UBFpqgOIPHg==
-Date: Thu, 6 Aug 2026 15:42:10 +0100
-From: Lee Jones <lee@kernel.org>
-To: Charles Keepax <ckeepax@opensource.cirrus.com>
-Cc: broonie@kernel.org, robh@kernel.org, krzk+dt@kernel.org,
-	conor+dt@kernel.org, lgirdwood@gmail.com,
-	linux-sound@vger.kernel.org, devicetree@vger.kernel.org,
-	mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
-	patches@opensource.cirrus.com
-Subject: Re: [PATCH 3/3] mfd: cs42l43: Add support for new cs42l44 variant
-Message-ID: <20260806144210.GQ2869284@google.com>
-References: <20260708140039.1993489-1-ckeepax@opensource.cirrus.com>
- <20260708140039.1993489-4-ckeepax@opensource.cirrus.com>
+	dkim=pass (1024-bit key) header.d=seu.edu.cn header.i=@seu.edu.cn header.b="GnxfxLTu"
+Received: from LAPTOP-99KJFSET (unknown [36.153.54.46])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 490cb5b5b;
+	Thu, 6 Aug 2026 23:20:37 +0800 (GMT+08:00)
+From: Hongyan Xu <getshell@seu.edu.cn>
+To: Support Opensource <support.opensource@diasemi.com>,
+	Lee Jones <lee@kernel.org>
+Cc: mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org,
+	jianhao.xu@seu.edu.cn,
+	Hongyan Xu <getshell@seu.edu.cn>
+Subject: [PATCH v2] mfd: da903x: cancel IRQ work during teardown
+Date: Thu,  6 Aug 2026 23:20:31 +0800
+Message-ID: <20260806152032.894-1-getshell@seu.edu.cn>
+X-Mailer: git-send-email 2.50.1.windows.1
+In-Reply-To: <20260728065557.1517-1-getshell@seu.edu.cn>
+References: <20260728065557.1517-1-getshell@seu.edu.cn>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260708140039.1993489-4-ckeepax@opensource.cirrus.com>
+Content-Transfer-Encoding: 8bit
+X-HM-Tid: 0a9fd7a97c0103a1kunm1104d3071001
+X-HM-MType: 10
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVlDSh1LVktIGh5IQhkYTxlCTFYeHw
+	5VEwETFhoSFyQUDg9ZV1kYEgtZQVlITVVKTkhVTk9VT01ZV1kWGg8SFR0UWUFZT0tIVUpLSEpPSE
+	xVSktLVUpCS0tZBg++
+DKIM-Signature: a=rsa-sha256;
+	b=GnxfxLTu9VYID1N5Sawlup+KC0o5E/QXcr587+/u/qPiz9Zx6YblxalOq0rrU4PeZUQmspJuf3EX75BjoLbPlnQTnG6x57/p3uzcbSscCw+uQqwbrddonNzFW0Zl2CDZVVqbr6+pX4msPsAik0cJY6qS5xX+fNGjXvaWEmjzvI4=; s=default; c=relaxed/relaxed; d=seu.edu.cn; v=1;
+	bh=9RiJcmxpWB5jybv13xnn/ti2B+Zn7/fJmDEx4MBtReE=;
+	h=date:mime-version:subject:message-id:from;
 
-On Wed, 08 Jul 2026, Charles Keepax wrote:
+The IRQ handler disables the IRQ and schedules irq_work. Releasing the
+IRQ does not drain that work, which can continue to use the devm-allocated
+chip and notifier state.
 
-> The cs42l44 is a cost optimised variant of cs42l43b. Add basic support
-> for this new device.
-> 
-> Signed-off-by: Charles Keepax <ckeepax@opensource.cirrus.com>
-> ---
->  drivers/mfd/cs42l43-i2c.c        |  2 ++
->  drivers/mfd/cs42l43-sdw.c        |  1 +
->  drivers/mfd/cs42l43.c            | 18 ++++++++++++------
->  include/linux/mfd/cs42l43-regs.h |  1 +
->  4 files changed, 16 insertions(+), 6 deletions(-)
+Add a devm action after requesting the IRQ. The action disables the IRQ
+and cancels the work before automatic IRQ release. Run the same action
+before removing child devices on normal detach.
 
-Doesn't apply anymore, sorry.  Please rebase.
+If da903x_add_subdevs() fails, it removes already-created child devices
+before returning from probe. Release the action explicitly before that
+cleanup so the work is stopped before child-device teardown.
 
-> diff --git a/drivers/mfd/cs42l43-i2c.c b/drivers/mfd/cs42l43-i2c.c
-> index bd9752d2cfc34..1af878c7a20b4 100644
-> --- a/drivers/mfd/cs42l43-i2c.c
-> +++ b/drivers/mfd/cs42l43-i2c.c
-> @@ -59,6 +59,7 @@ static int cs42l43_i2c_probe(struct i2c_client *i2c)
->  static const struct of_device_id cs42l43_of_match[] = {
->  	{ .compatible = "cirrus,cs42l43", .data = (void *)CS42L43_DEVID_VAL },
->  	{ .compatible = "cirrus,cs42l43b", .data = (void *)CS42L43B_DEVID_VAL },
-> +	{ .compatible = "cirrus,cs42l44", .data = (void *)CS42L43B_DEVID_VAL },
->  	{ }
->  };
->  MODULE_DEVICE_TABLE(of, cs42l43_of_match);
-> @@ -68,6 +69,7 @@ MODULE_DEVICE_TABLE(of, cs42l43_of_match);
->  static const struct acpi_device_id cs42l43_acpi_match[] = {
->  	{ .id = "CSC4243", .driver_data = CS42L43_DEVID_VAL },
->  	{ .id = "CSC2A3B", .driver_data = CS42L43B_DEVID_VAL },
-> +	{ .id = "CSC4244", .driver_data = CS42L43B_DEVID_VAL },
->  	{ }
->  };
->  MODULE_DEVICE_TABLE(acpi, cs42l43_acpi_match);
-> diff --git a/drivers/mfd/cs42l43-sdw.c b/drivers/mfd/cs42l43-sdw.c
-> index 6ccfdcd3f6698..81dd19df53685 100644
-> --- a/drivers/mfd/cs42l43-sdw.c
-> +++ b/drivers/mfd/cs42l43-sdw.c
-> @@ -184,6 +184,7 @@ static int cs42l43_sdw_probe(struct sdw_slave *sdw, const struct sdw_device_id *
->  static const struct sdw_device_id cs42l43_sdw_id[] = {
->  	SDW_SLAVE_ENTRY(0x01FA, 0x4243, (void *)CS42L43_DEVID_VAL),
->  	SDW_SLAVE_ENTRY(0x01FA, 0x2A3B, (void *)CS42L43B_DEVID_VAL),
-> +	SDW_SLAVE_ENTRY(0x01FA, 0x4244, (void *)CS42L43B_DEVID_VAL),
->  	{ }
->  };
->  MODULE_DEVICE_TABLE(sdw, cs42l43_sdw_id);
-> diff --git a/drivers/mfd/cs42l43.c b/drivers/mfd/cs42l43.c
-> index 33479ddd539a6..d6027fa4de705 100644
-> --- a/drivers/mfd/cs42l43.c
-> +++ b/drivers/mfd/cs42l43.c
-> @@ -959,6 +959,7 @@ static void cs42l43_boot_work(struct work_struct *work)
->  {
->  	struct cs42l43 *cs42l43 = container_of(work, struct cs42l43, boot_work);
->  	unsigned int devid, revid, otp;
-> +	bool valid_id;
->  	int ret;
->  
->  	ret = cs42l43_wait_for_attach(cs42l43);
-> @@ -973,19 +974,24 @@ static void cs42l43_boot_work(struct work_struct *work)
->  
->  	switch (devid) {
->  	case CS42L43_DEVID_VAL:
-> +		valid_id = (cs42l43->variant_id == CS42L43_DEVID_VAL);
-> +		break;
->  	case CS42L43B_DEVID_VAL:
-> -		if (devid != cs42l43->variant_id) {
-> -			dev_err(cs42l43->dev,
-> -				"Device ID (0x%06x) does not match variant ID (0x%06lx)\n",
-> -				devid, cs42l43->variant_id);
-> -			goto err;
-> -		}
-> +	case CS42L44_DEVID_VAL:
-> +		valid_id = (cs42l43->variant_id == CS42L43B_DEVID_VAL);
->  		break;
->  	default:
->  		dev_err(cs42l43->dev, "Unrecognised devid: 0x%06x\n", devid);
->  		goto err;
->  	}
->  
-> +	if (!valid_id) {
-> +		dev_err(cs42l43->dev,
-> +			"Device ID (0x%06x) does not match variant ID (0x%06lx)\n",
-> +			devid, cs42l43->variant_id);
-> +		goto err;
-> +	}
-> +
->  	ret = regmap_read(cs42l43->regmap, CS42L43_REVID, &revid);
->  	if (ret) {
->  		dev_err(cs42l43->dev, "Failed to read rev: %d\n", ret);
-> diff --git a/include/linux/mfd/cs42l43-regs.h b/include/linux/mfd/cs42l43-regs.h
-> index 68831f113589d..4c00ceae8b461 100644
-> --- a/include/linux/mfd/cs42l43-regs.h
-> +++ b/include/linux/mfd/cs42l43-regs.h
-> @@ -1183,6 +1183,7 @@
->  
->  /* CS42L43B VARIANT REGISTERS */
->  #define CS42L43B_DEVID_VAL					0x0042A43B
-> +#define CS42L44_DEVID_VAL					0x00042A44
->  
->  #define CS42L43B_DECIM_VOL_CTRL_CH1_CH2				0x00008280
->  #define CS42L43B_DECIM_VOL_CTRL_CH3_CH4				0x00008284
-> -- 
-> 2.47.3
-> 
+This issue was found by the author's in-house static analysis tool.
+The patch was reviewed by the author against the latest mainline tree.
 
+Fixes: 26b8f5e1e2d1 ("mfd: add base support for Dialog DA9030/DA9034 PMICs")
+Cc: stable@vger.kernel.org
+Assisted-by: Codex:GPT-5
+Signed-off-by: Hongyan Xu <getshell@seu.edu.cn>
+---
+ drivers/mfd/da903x.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/drivers/mfd/da903x.c b/drivers/mfd/da903x.c
+index e86b39de3303..f3e983bd21b0 100644
+--- a/drivers/mfd/da903x.c
++++ b/drivers/mfd/da903x.c
+@@ -421,6 +421,14 @@ static irqreturn_t da903x_irq_handler(int irq, void *data)
+ 	return IRQ_HANDLED;
+ }
+ 
++static void da903x_cancel_irq_work(void *data)
++{
++	struct da903x_chip *chip = data;
++
++	disable_irq(chip->client->irq);
++	cancel_work_sync(&chip->irq_work);
++}
++
+ static const struct da903x_chip_ops da903x_ops[] = {
+ 	[0] = {
+ 		.init_chip	= da9030_init_chip,
+@@ -484,6 +492,7 @@ static int da903x_add_subdevs(struct da903x_chip *chip,
+ 	return 0;
+ 
+ failed:
++	devm_release_action(chip->dev, da903x_cancel_irq_work, chip);
+ 	da903x_remove_subdevs(chip);
+ 	return ret;
+ }
+@@ -529,6 +538,11 @@ static int da903x_probe(struct i2c_client *client)
+ 		return ret;
+ 	}
+ 
++	ret = devm_add_action_or_reset(&client->dev, da903x_cancel_irq_work,
++				       chip);
++	if (ret)
++		return ret;
++
+ 	return da903x_add_subdevs(chip, pdata);
+ }
+ 
+@@ -536,6 +550,7 @@ static void da903x_remove(struct i2c_client *client)
+ {
+ 	struct da903x_chip *chip = i2c_get_clientdata(client);
+ 
++	devm_release_action(&client->dev, da903x_cancel_irq_work, chip);
+ 	da903x_remove_subdevs(chip);
+ }
+ 
 -- 
-Lee Jones
+2.50.1.windows.1
+
