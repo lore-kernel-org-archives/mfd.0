@@ -1,129 +1,185 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41EE5261B70;
-	Thu,  6 Aug 2026 02:32:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 876D7185B48;
+	Thu,  6 Aug 2026 02:32:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785983564; cv=none; b=n3jWibAkNsFtYEPzVzsiLElgYHnx2t7uQnddkpZjComA1AB0W4W9v5t5IFBRiu9eLtOrB3M/aYUDABODIe6ktbqzvezFh+LfLhDXeo49OjZ7kqLIFBs1i77G3jkC+OZp7zsN0zAxeEc4diXb5diYqXIwUKMsDLBoykjjezFhNwA=
+	t=1785983564; cv=none; b=GWg48myAU8kfwtbrXjZLyEWMy/tcekA4dz40SSVs8Te6HmMyoXR01yfjZt19y0a0rQX5eyLP3Eds2BPT/SIKYZcquE21xOr5YhdppPqcRu1ZK/eYhdm9YK3ARXJ10fZLLajGJpBRbE8YBd6v+xDN2VcZOQaucLPylazQ+Eba41E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1785983564; c=relaxed/simple;
-	bh=Jt4pVcHOUjLILhJVMkZaWva0AZEreTjJbdT9Ds9pcMs=;
+	bh=8CHu+4MKn77SIgbp+nEp6OzJ5MkOQ73MeO3Hk0SUQUc=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=CGckpRhTN5zPpaO/zx2hq37AlcdhU9cmlf4INk48+oJZoQaCosGCA+NGj+z14Dhs86hQP1hEMoBMhughpPTu8OB1Wg2l3pResujg2NdJ7WNA5yMFKTEDj0f+uhrNbEe8ScUpSkfKIHjsQ53oPsuExhSyeb68TquyWJQQ+ByGnEI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hBeq4NKf; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=oZzujjIhBCPqXR4SiHtFFMJWYZaNbdDYF9kzXJQz8zgv3Rw9LK24AnXy6psivBeaETOMpFTlv4dRAAautXjskoxZqUJu7J3nNXVe0EO9ujZflNYSNyxYt4AuzyFOPAkP0y1uliISRcm1CVqTtX1Pc3N/G91u+U3EGuxRG0f+Mz8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GQXJ4CH8; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hBeq4NKf"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 556DF1F000E9;
-	Thu,  6 Aug 2026 02:32:42 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GQXJ4CH8"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 36F281F00A3A;
+	Thu,  6 Aug 2026 02:32:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785983562;
-	bh=XBIAt49lvYOrwnGY5U1HLe2/OgHiEQmiVponHG6lITY=;
+	s=k20260515; t=1785983563;
+	bh=ATpdIH34CbW1hqSKc07+fBs7Ws7er5eiGGU0B3QoBn0=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=hBeq4NKf7+hdLZmb/alfr6c++XgDRLjc5FTjU0pqyJGop8sDHntyNkZoymBZbZOuZ
-	 Z762dq5CvDIxKmomBYVpMgaSlsVZyrMiQZcF2lO6lsDVwIYVsOW786nnhLFvvlEonI
-	 aqIY9/dDH3l4D2mcPUhYkYsfKD5XcX8TZGFP9ijgYaPfsGWTlj3tadtLnFmaDwk3Gb
-	 7Ag+TmxaEsMFZEJANeyc1iLAnKyqKgm3oBIq/pDBM9GfCgoWwVgzxmzoBregSUvIIU
-	 cwpuX2D1Su9N6Xux8kKe6iKvf71sxrwoiHW3TPr7a73eX1Ius5y50VHp7tWdgZzn9V
-	 tHrbQIVbQ5H0A==
+	b=GQXJ4CH8PSSp0CiwGI//fiZaJyq+d5evsmvHXEILvft6ZowJO1o6pChLQPRBq7mp/
+	 bnqImCQB2PiASITTF6eLZovE+FX4jbvk6FDuHt/QSO+yrmx+zSFqKD3DJfI9fBFJGC
+	 FbGmu8NVkegYAz1qsHDquMEm65NXr8BGVL8KCgiLXf0uSieyM6Frw6ZZhYNFWZEuQC
+	 l+GEzo/Gs/IzYJg/iHTY6HrbxHErN1RvFbQ+gFCDkcPVmvExd7s3oa4tRuH3mqsnUM
+	 65tD6BE4487LDpANtx7Ya23S5pFBBYjn4Q0xUOTYDrURV6ETpFgW8yY8AQ7DSjv5w7
+	 9oQgw6c1NNzew==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH net-next v2 3/8] mfd: add X-Powers AC200 support
+Subject: Re: [PATCH net-next v2 8/8] net: phy: add X-Powers AC200/AC300 EPHY
+ driver
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "James Hilliard" <james.hilliard1@gmail.com>
-Cc: conor+dt@kernel.org, robh@kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260804-submit-acx00-of-dynamic-v1-v2-3-3eef49ff1d8c@gmail.com>
+Cc: mfd@lists.linux.dev, conor+dt@kernel.org, lee@kernel.org, robh@kernel.org, devicetree@vger.kernel.org
+In-Reply-To: <20260804-submit-acx00-of-dynamic-v1-v2-8-3eef49ff1d8c@gmail.com>
 References: <20260804-submit-acx00-of-dynamic-v1-v2-0-3eef49ff1d8c@gmail.com>
- <20260804-submit-acx00-of-dynamic-v1-v2-3-3eef49ff1d8c@gmail.com>
+ <20260804-submit-acx00-of-dynamic-v1-v2-8-3eef49ff1d8c@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 06 Aug 2026 02:32:41 +0000
-Message-Id: <20260806023242.556DF1F000E9@smtp.kernel.org>
+Date: Thu, 06 Aug 2026 02:32:42 +0000
+Message-Id: <20260806023243.36F281F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
+Thank you for your contribution! Sashiko AI review found 5 potential issue(=
 s) to consider:
-- [Medium] The driver uses PLATFORM_DEVID_NONE instead of PLATFORM_DEVID_AU=
-TO when registering MFD children, risking sysfs naming collisions.
-- [Low] The commit message prefix violates MFD subsystem capitalization and=
- formatting rules.
-- [Low] The `i2c_device_id` array uses implicit positional initializers ins=
-tead of named initializers.
+- [High] Premature devres action registration causes unbalanced power_off o=
+n probe failure.
+- [High] Missing phy_restore_page() on phy_select_page() error causes MDIO =
+bus deadlock.
+- [High] Unbalanced power_on in soft_reset causes resource reference count =
+leak.
+- [High] Acquiring the supplier's device_lock in probe creates an AB-BA dea=
+dlock.
+- [Medium] Incorrect error recovery in suspend causes an unbalanced power_o=
+n.
 --
 
---- Patch [3]: [PATCH net-next v2 3/8] mfd: add X-Powers AC200 support ---
-commit 98ebae297c54eb1823cd6d77c3a20fc90dde205b
+--- Patch [8]: [PATCH net-next v2 8/8] net: phy: add X-Powers AC200/AC300 E=
+PHY driver ---
+commit 5868cfc367391cc28058cf619b83005f8ecd1852
 Author: James Hilliard <james.hilliard1@gmail.com>
 
-mfd: add X-Powers AC200 support
+net: phy: add X-Powers AC200/AC300 EPHY driver
 
-This commit introduces the MFD core driver for the X-Powers AC200 mixed-sig=
-nal
-companion IC. It initializes shared regmap access over I2C, applies vendor
-resets, and registers Ethernet PHY control children.
+This commit adds a shared PHY driver for the X-Powers AC200 and AC300 compa=
+nion
+ICs. It configures the common MDIO PHY registers and manages package-specif=
+ic
+power, calibration, and interface configurations.
 
-> mfd: add X-Powers AC200 support
-
-[Severity: Low]
-This isn't a bug, but should the commit message prefix follow the standard
-MFD capitalization and naming format? The subsystem guidelines require
-capitalizing the description and using the driver name, such as
-mfd: ac200: Add X-Powers AC200 support.
-
-> The X-Powers AC200 is a mixed-signal companion IC with a paged register
-> map accessed over I2C.
-
-[ ... ]
-
+> diff --git a/drivers/net/phy/xpowers-acx00.c b/drivers/net/phy/xpowers-ac=
+x00.c
+> new file mode 100644
+> index 0000000000000..f9e6be751252d
 > --- /dev/null
-> +++ b/drivers/mfd/ac200.c
-> @@ -0,0 +1,207 @@
+> +++ b/drivers/net/phy/xpowers-acx00.c
+[ ... ]
+> +static int acx00_ephy_get_control(struct phy_device *phydev,
+> +				  struct acx00_ephy_priv *priv)
+> +{
+[ ... ]
+> +	/* The managed link keeps the provider and its operations bound. */
+> +	device_lock(supplier);
+> +	if (!device_is_bound(supplier)) {
+> +		ret =3D -EPROBE_DEFER;
+> +	} else {
+
+[Severity: High]
+Does this introduce a regression by creating a deadlock during device unbin=
+d?
+
+The driver core's really_probe() holds the consumer's device_lock while
+calling acx00_ephy_get_control(), which then acquires device_lock(supplier).
+
+Conversely, the driver core's unbind path holds the supplier's device_lock =
+and
+attempts to acquire the consumer's device_lock to tear down the device link.
 
 [ ... ]
-
-> +	ephy_node =3D of_get_compatible_child(dev->of_node,
-> +					    "x-powers,ac200-ephy-ctl");
-> +	if (!ephy_node)
-> +		return 0;
+> +static int acx00_ephy_probe(struct phy_device *phydev)
+> +{
+[ ... ]
+> +	ret =3D devm_add_action_or_reset(dev, acx00_ephy_control_release, priv);
+> +	if (ret)
+> +		return ret;
 > +
-> +	ret =3D devm_mfd_add_devices(dev, PLATFORM_DEVID_NONE, ac200_cells,
-> +				   ARRAY_SIZE(ac200_cells), NULL, 0, NULL);
+> +	ret =3D acx00_ephy_control_power_on(priv);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret,
+> +				     "failed to power on control block\n");
+
+[Severity: High]
+If acx00_ephy_control_power_on() fails, will the devres cleanup execute an
+unbalanced power_off on the control block?
+
+Since the devm action is registered before power_on completes, returning an
+error here triggers acx00_ephy_control_release() on a device that failed to
+power on.
+
+[ ... ]
+> +static int acx00_ephy_soft_reset(struct phy_device *phydev)
+> +{
+[ ... ]
+> +	ret =3D acx00_ephy_set_interface(phydev);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret =3D acx00_ephy_control_power_on(priv);
+> +	if (ret)
+> +		return ret;
+
+[Severity: High]
+Does this cause a regression by leaking the provider's reference counts
+(regulator, clock, etc.) on every soft reset?
+
+acx00_ephy_control_power_on() is called unconditionally, but there is no
+corresponding power_off in the reset cycle. Repeated interface up/down cycl=
+es
+would monotonically increment the reference counts.
+
+[ ... ]
+> +static int acx00_ephy_config_init(struct phy_device *phydev)
+> +{
+[ ... ]
+> +	oldpage =3D phy_select_page(phydev, ACX00_PAGE_1);
+> +	if (oldpage < 0)
+> +		return oldpage;
+
+[Severity: High]
+Does returning directly here cause a regression by leaving the mdio bus
+permanently deadlocked?
+
+phy_select_page() acquires the mdio bus lock before attempting to read the
+page. If the read fails and returns an error, the caller must still invoke
+phy_restore_page() to unlock the bus.
+
+[ ... ]
+> +static int acx00_ephy_suspend(struct phy_device *phydev)
+> +{
+[ ... ]
+> +	ret =3D acx00_ephy_control_power_off(priv);
+> +	if (ret) {
+> +		resume_ret =3D acx00_ephy_power_on_and_resume(phydev);
+> +		if (resume_ret)
+> +			phydev_warn(phydev,
+> +				    "failed to recover from suspend error: %pe\n",
+> +				    ERR_PTR(resume_ret));
+> +	}
 
 [Severity: Medium]
-Could using PLATFORM_DEVID_NONE here cause sysfs naming collisions if
-multiple instances of the AC200 are present on different I2C buses? The MFD
-subsystem guidelines suggest preferring PLATFORM_DEVID_AUTO for automatic
-cell indexing to prevent driver load failures.
+Does this error recovery path cause a regression by forcing an unbalanced p=
+ower
+state?
 
-> +	if (ret)
-> +		return dev_err_probe(dev, ret, "failed to add MFD devices\n");
-> +
-> +	return 0;
-> +}
-
-[ ... ]
-
-> +static const struct of_device_id ac200_of_match[] =3D {
-> +	{ .compatible =3D "x-powers,ac200" },
-> +	{ }
-> +};
-> +MODULE_DEVICE_TABLE(of, ac200_of_match);
-> +
-> +static const struct i2c_device_id ac200_i2c_ids[] =3D {
-> +	{ "ac200" },
-
-[Severity: Low]
-This isn't a bug, but does the I2C subsystem require initialized arrays of
-type struct i2c_device_id to use named initializers instead of implicit
-positional ones? It looks like this should be { .name =3D "ac200" }.
-
-> +	{ }
-> +};
-> +MODULE_DEVICE_TABLE(i2c, ac200_i2c_ids);
+If acx00_ephy_control_power_off() fails, the resource was never successfully
+powered off. Invoking acx00_ephy_power_on_and_resume() here will execute an
+additional power_on, resulting in a reference count leak.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260804-submit-acx=
-00-of-dynamic-v1-v2-0-3eef49ff1d8c@gmail.com?part=3D3
+00-of-dynamic-v1-v2-0-3eef49ff1d8c@gmail.com?part=3D8
