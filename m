@@ -1,81 +1,114 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1CD521CFE0;
-	Fri,  7 Aug 2026 01:25:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC6D11A680E;
+	Fri,  7 Aug 2026 01:25:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786065951; cv=none; b=eG13J96Q4yz+PAXi8zy0TlIqtNYotiCEHaO96nK+mFsosPU8d54LyNUImtT1y+f/6MIzcmQM46Z/BS7W9GeZGHfzkHUzprcZPt8TN4rTjta2x5Y7bSOw36mY5qaDKL5pQJzCd16nYpr3KVkDONab0ZQSx5n+Ish3sWIqWjeP5xA=
+	t=1786065953; cv=none; b=iFj8umVPRQ00shaQmkVr/xN00Num4pkcX0xGlbgFz/nCrjQB9yiXbTtNZ34T7GeUsvrRvrjsaabM7TN15tdL+qto9vBEWVA9cYzd9uor1t2uUxEtz7I8kFTiDdmdVzQgV5tJKtcIHKnxcNBQUQbfVYStk8Wpbb15A0F7m+M3N+A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786065951; c=relaxed/simple;
-	bh=PwE6QOUJ1Aa2oF3yotqiZ/0apZ/D1+EDyG9hSYtyWNc=;
+	s=arc-20240116; t=1786065953; c=relaxed/simple;
+	bh=S8uLAwe/VTP4lTCqIaO+CJadZzKn09uD1BPmkFmMfo4=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=d1PmhcFx6KpNoz/ZefbxikC3rCBn7XujbWaSoP8r++GExof9JiD1uRS8kKq/2jueG/F1UhfPUXM0CQ8sDf5kZ61U2hVsWwGyIX1k/WxClPzWckaO5kUJlt88XngUwV6OinsVJQilRQo+tPN2OTmmZL+EPrD6VFwv9Okz4FvHmyw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Pvrk/e5q; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=dHk2LVk3i+9UDn28z2OW/SdYFmTMUItcHlyXmnol+8DMf9Dxbq9HO/qej3CXWhJsbiJVHvwtt/6G7BWWpvJj5FEMDmtKdeehYb1yGGQ0pN1nYOM9mA1rEAUP8K/7oDFLDdNiYtSXkzz/ZH0qP0Ior7y1t18KOj5d4lMzx7thv/o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=E+ubUDVC; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Pvrk/e5q"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 421E61F00A3A;
-	Fri,  7 Aug 2026 01:25:50 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="E+ubUDVC"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3B9CC1F00A3D;
+	Fri,  7 Aug 2026 01:25:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786065950;
-	bh=PwE6QOUJ1Aa2oF3yotqiZ/0apZ/D1+EDyG9hSYtyWNc=;
+	s=k20260515; t=1786065951;
+	bh=VmKCmuQY43qsQohSXpQC0CD1jre51pexiQdVFu18NNk=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Pvrk/e5qOB8vfgF82b66GFGV1giklGf2mCaiA0TwOvsw8Eo+BGQWYt8IzAHEocq1J
-	 eEnqQz9USrlcnWTtfm727tsrY678kZRyFpQ1N2JMXUTx8gg6CszAXBUW5vyfQySmYQ
-	 py+Azmdz9aOtcVeuotxk7SQpe8oLV25MdmsFflltV2+jnh4Ed0Ub42AYEYIKlquX1O
-	 zUu+TzwZAHdGZxJg4fMhm19OSSST1EQ3YD0Ale87GUrGS3nFMqIcxMEIjVTwAh4SIJ
-	 fa82CZVPAJbg1djrqfBvTQhuIyG4xvoE8BtORw2GK2fN7l3uJVBmJpFto4uNwjZYta
-	 EKzwrtLQcxVbQ==
+	b=E+ubUDVCSiG+1MRMPN4OvIQQAw93tNtXaC+WUiteJHFcNx6muer0lDQufYF+SowD6
+	 lr7UEwiiwnQCCdYVz8wuHBrD2AF+WkQwoQXkMLWMv4I4I4DmLdH5BmS70v8UsYyxFG
+	 PW/r0Z4GgTxNhDgy70PK5hrdXCWMEjqDDz/jELMt/UW3KR0TyiUrBurzE2vG0a1g7Q
+	 JTUoHEdjJ4daRV9RFFQ5nUszY7l3Vwi3ZIQ4KYuu/aOa4HAC+0c2ejLq+6js2k3dxn
+	 34fv+vzCCProXif5enayZW3GofCjcOZhhXoPSrGmCZBM89HwHfawGSrc176JuOI5Iq
+	 UONsBWMk+8n/A==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH net-next v3 3/4] dt-bindings: net: x-powers: add
- AC200/AC300 EPHY packages
+Subject: Re: [PATCH net-next v3 2/4] mfd: add X-Powers AC200 support
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "James Hilliard" <james.hilliard1@gmail.com>
-Cc: lee@kernel.org, conor+dt@kernel.org, robh@kernel.org, mfd@lists.linux.dev, devicetree@vger.kernel.org
-In-Reply-To: <20260805-submit-acx00-of-dynamic-v1-v3-3-32c3210a6f25@gmail.com>
+Cc: robh@kernel.org, lee@kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev, conor+dt@kernel.org
+In-Reply-To: <20260805-submit-acx00-of-dynamic-v1-v3-2-32c3210a6f25@gmail.com>
 References: <20260805-submit-acx00-of-dynamic-v1-v3-0-32c3210a6f25@gmail.com>
- <20260805-submit-acx00-of-dynamic-v1-v3-3-32c3210a6f25@gmail.com>
+ <20260805-submit-acx00-of-dynamic-v1-v3-2-32c3210a6f25@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Fri, 07 Aug 2026 01:25:49 +0000
-Message-Id: <20260807012550.421E61F00A3A@smtp.kernel.org>
+Date: Fri, 07 Aug 2026 01:25:50 +0000
+Message-Id: <20260807012551.3B9CC1F00A3D@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-> The AC200 and AC300 contain compatible Fast Ethernet link PHYs which
-> report the same Clause 22 identifier and use the same link-side register
-> layout. Their package control paths differ: AC200 uses registers in its
-> I2C MFD, while the AC300 control range is at a second Clause 22 address
-> fixed at 16 plus the link address.
->=20
-> Describe both variants as Ethernet PHY packages. The package reg value is
-> the link PHY base address and the child supplies the documented PHY ID,
-> because the identification registers cannot be read until package setup
-> has completed. The AC300 driver reaches its control range with the PHY
-> package offset helpers. The AC200 package instead references its MFD.
->=20
-> Give fixed hardware variant-specific compatibles. Also provide an ACx00
-> compatible for systems which can contain either package, with one packed
-> NVMEM field containing calibration in bits 3 through 0, the AC300 selector
-> in bit 8 and its low-calibration selector in bit 9. Such a description
-> contains the potential resources for both backends; the driver consumes
-> only those selected by the configuration field.
->=20
-> Describe the package clock, supply and optional xMII receive-clock
-> inversion needed by some integrations. A fixed AC200 package may omit the
-> NVMEM field and use its internal calibration copy. Limit AC300-capable li=
-nk
-> addresses to 0 through 7 so the control address remains in the documented
-> range 16 through 23.
->=20
-> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+Thank you for your contribution! Sashiko AI review found 3 potential issue(=
+s) to consider:
+- [Low] The commit message prefix does not follow the required MFD subsyste=
+m format.
+- [Low] The private data structure instance uses the device name instead of=
+ 'ddata'.
+- [Low] The `i2c_device_id` array does not use named initializers.
+--
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+--- Patch [2]: [PATCH net-next v3 2/4] mfd: add X-Powers AC200 support ---
+commit f27704a7e16fcc27a2ce774a23d85d9a4464373b
+Author: James Hilliard <james.hilliard1@gmail.com>
+
+mfd: add X-Powers AC200 support
+
+This commit adds core MFD support for the X-Powers AC200 mixed-signal compa=
+nion
+IC. It enables package supplies and input clock, initializes the paged regm=
+ap,
+and sets up basic chip reset and teardown handling.
+
+> mfd: add X-Powers AC200 support
+
+[Severity: Low]
+This isn't a bug, but does the commit message prefix follow the MFD subsyst=
+em
+formatting guidelines? The expected format requires a driver name and a
+capitalized description, such as mfd: ac200: Add X-Powers AC200 support.
+
+> diff --git a/drivers/mfd/ac200.c b/drivers/mfd/ac200.c
+> index 0000000000000..e8346a3faad5e
+> --- /dev/null
+> +++ b/drivers/mfd/ac200.c
+[ ... ]
+> +static int ac200_probe(struct i2c_client *client)
+> +{
+> +	struct device *dev =3D &client->dev;
+> +	struct ac200 *ac200;
+
+[Severity: Low]
+This isn't a bug, but should the private data structure instance be named
+ddata instead of ac200? The MFD subsystem guidelines prefer the use of ddata
+for variable instances to avoid hard-coding implementation details.
+
+[ ... ]
+> +static void ac200_shutdown(struct i2c_client *client)
+> +{
+> +	struct ac200 *ac200 =3D i2c_get_clientdata(client);
+
+[Severity: Low]
+This isn't a bug, but similar to ac200_probe(), should this use the ddata
+naming convention for the variable instance?
+
+[ ... ]
+> +static const struct i2c_device_id ac200_i2c_ids[] =3D {
+> +	{ "ac200" },
+> +	{ }
+> +};
+
+[Severity: Low]
+This isn't a bug, but should this array use named initializers to comply wi=
+th
+I2C subsystem initialization rules? For example, using { .name =3D "ac200" =
+}.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260805-submit-acx=
-00-of-dynamic-v1-v3-0-32c3210a6f25@gmail.com?part=3D3
-
+00-of-dynamic-v1-v3-0-32c3210a6f25@gmail.com?part=3D2
