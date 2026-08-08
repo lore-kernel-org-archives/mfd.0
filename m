@@ -1,142 +1,81 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22AFB441623
-	for <mfd@lists.linux.dev>; Fri,  7 Aug 2026 20:29:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95B7A15A86D;
+	Sat,  8 Aug 2026 04:52:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786134595; cv=none; b=GHDGwQwX1zXzYysxfA6U3ER3OVh5E+v5b77EWSAQAKbn+/8IsdkZQ+SRSpotySc16s7D8tX49rWpKMG4PxLs8F5QqMUHhqHgdvbc199zjVq88vB6/4A2Ufmg7XaxaqSNwqsA3Yzkbrz6qAIBaQ8zKt3o5JLoeNISdYxceYzg9tI=
+	t=1786164727; cv=none; b=HGZUTy6xYfrFgJVF+LKpXTN583fMk750Ykh0RYzhy0k188mXsH7jHR95DFCih5dXMAEQ8GxJfKsTkHPsZRVBoRw0EBqzm3m7WWiTQG5ptajS6AQX3DIuWey5GOYTV/1brfCk2eF8mhaNm6EP6gQ59c8nHw/XbFLL4lKVIWMh0zo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786134595; c=relaxed/simple;
-	bh=7kcrtJ8j+vZ43z9CeSYPxhIzZu+b2hH+4cPJzBtMKDc=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=FVAbz4t0MiV+m90910MF5soi9jWQ/xNxfHkhjTUeQUMGirWTvhWleYYGh5WrobTEgc6TD7rgiX290VcWW/wYkzzpmGcjBSS9FxZKnImgaX5Hb7039PTCZbzvW8Ck/zeP5NLDx5B/WcJGxptIr+JnKdbf3KxhVnebQhM7Nads1O8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=epuk1vKE; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786164727; c=relaxed/simple;
+	bh=g7/UbemXKPLkiZ5ilFc+Mwst51NkZDz7cW1GBJgjs+M=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=NpIplqpGLzUxSqiag5Cyz99dzPREK7FhwybxpsMO1bmQ6VCTCyvDIFCBBvJ85vAXSxmmGDP62FBMvUIiPj2ruMUQlYzUm22C2ndWc+lsLnKul1IAfLFcAvbKKGQ4BLT1EWeWeYzyh/qVnz2G9bH/PS8K++NNgPXISJtvxATF5lI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XlsxbRVc; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="epuk1vKE"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDFD51F00AC4
-	for <mfd@lists.linux.dev>; Fri,  7 Aug 2026 20:29:53 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XlsxbRVc"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3B7EC1F000E9;
+	Sat,  8 Aug 2026 04:52:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786134593;
-	bh=7BBfG8gvn0wfloVrzuTpVHpGFkIlfRzmb5mJzr8wSag=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=epuk1vKEGC+zHT3nl1aPSBAD7SbaHJazafahrinpKdTNt+/S8xNx7Wl5EP4wQSlPH
-	 i+GLDIaK/omzo/fXpCf4yQ/7dYVbCzldnCznd6rcXs+mlBESJ19DJlLgqXVcATWFN4
-	 v1v5EF91OaKRvor/jyiNCgNno/f0R67Zb7PmTSg0HDXAVX6UatWBsi6uhv46sOxOUM
-	 0/7TJMvCOZUlgq3P9pEee1jM6TVgVZTLHULAaAQmYwtnP+F/QCrwvusqdOSni0fUdC
-	 ra383EpRZsCRbi5EkTgrO3Wuamp4AXtGUdpXPNwLklUo8MOYCxynpxLQbJGOxU/Ko7
-	 owYx0QvcfSFjQ==
-Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-39c8dbf4f38so35591441fa.3
-        for <mfd@lists.linux.dev>; Fri, 07 Aug 2026 13:29:53 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RrhaO6SvLZdyyHNdeXiDK+tOhwDyYfmgy5wZLiUvau481+C6YhhxhJARUMR4RrYwNL5rVU=@lists.linux.dev
-X-Gm-Message-State: AOJu0YxjNhm33u/DdyjMz90eUtLPfYoUuvm5ibBU6V8exXynkLe4YEzK
-	U3qi3BUj9GFCdzFCdr3XpJMrNHcqNf25rT0YLcbqlNuk4+mbbb0QRjsv+k2C7kmaqahlkSHvzq7
-	zs3UOdFVFex3+q7T4z3Fl8ykI+I79AyQ=
-X-Received: by 2002:a05:651c:b12:b0:39c:6fad:2bc4 with SMTP id
- 38308e7fff4ca-39fdf4c8d15mr7787011fa.16.1786134592653; Fri, 07 Aug 2026
- 13:29:52 -0700 (PDT)
+	s=k20260515; t=1786164726;
+	bh=g7/UbemXKPLkiZ5ilFc+Mwst51NkZDz7cW1GBJgjs+M=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=XlsxbRVcAFX7RRAN9+P3pRHZvU/C6N4BeSKuGrJlML0FX2sK43znWeLTLUV3hIgKG
+	 ybJqpNmgWr85mRDDpfKGr7vV7ggZdnWq17U06LWyNqnr996EwKppFFmW+TxuG6hS60
+	 2ynZt7zDks67+aOISdjCTWcUoDbBvbVN3YEhvjRPw+maXcKkt79CPL8uSGevGQnNch
+	 fwqhsLnQj6giGbtFsU2M0TQ/PFsgYassOhHL5+r8f4RaF0XP2DZMY5rUHAUd7IipVn
+	 iOJoe6Ezm0BnKz/ycVzeJrh17syhU4J16OdiDE71AbyppuyZxvAwxtEyGeLxS2tuOV
+	 sgE29diEuiu+w==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH net-next v4 3/4] dt-bindings: net: x-powers: add
+ AC200/AC300 EPHY packages
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "James Hilliard" <james.hilliard1@gmail.com>
+Cc: devicetree@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20260806-submit-acx00-of-dynamic-v1-v4-3-9bf2f7441632@gmail.com>
+References: <20260806-submit-acx00-of-dynamic-v1-v4-0-9bf2f7441632@gmail.com>
+ <20260806-submit-acx00-of-dynamic-v1-v4-3-9bf2f7441632@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Sat, 08 Aug 2026 04:52:05 +0000
+Message-Id: <20260808045206.3B7EC1F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-References: <cover.1785838584.git.mazziesaccount@gmail.com> <9774b8d6663ea55b1682b32f825ec5689be3e1d8.1785838585.git.mazziesaccount@gmail.com>
-In-Reply-To: <9774b8d6663ea55b1682b32f825ec5689be3e1d8.1785838585.git.mazziesaccount@gmail.com>
-From: Linus Walleij <linusw@kernel.org>
-Date: Fri, 7 Aug 2026 22:29:40 +0200
-X-Gmail-Original-Message-ID: <CAD++jLmatJFfqhNWfgx=qUW2fEwuatxmJR7NyJLAv45LfLHZnw@mail.gmail.com>
-X-Gm-Features: AUfX_myHYbPtrP3S5L3hInuuhbJn2ygvTZZS9m3nHbXN6_wSEyPEOm43kiA3AKw
-Message-ID: <CAD++jLmatJFfqhNWfgx=qUW2fEwuatxmJR7NyJLAv45LfLHZnw@mail.gmail.com>
-Subject: Re: [PATCH v2 09/10] gpio: bd73800: Support ROHM BD73800 PMIC GPIOs
-To: Matti Vaittinen <mazziesaccount@gmail.com>
-Cc: Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>, 
-	Matti Vaittinen <matti.vaittinen@linux.dev>, Lee Jones <lee@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Brian Masney <bmasney@redhat.com>, Bartosz Golaszewski <brgl@kernel.org>, 
-	Alexandre Belloni <alexandre.belloni@bootlin.com>, mfd@lists.linux.dev, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, 
-	linux-rtc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Hi Matti,
+> The AC200 and AC300 contain compatible Fast Ethernet link PHYs which
+> report the same Clause 22 identifier and use the same link-side register
+> layout. Their package control paths differ: AC200 uses registers in its
+> I2C MFD, while the AC300 control range is at a second Clause 22 address
+> fixed at 16 plus the link address.
+>=20
+> Describe both variants as Ethernet PHY packages. The package reg value is
+> the link PHY base address and the child supplies the documented PHY ID,
+> because the identification registers cannot be read until package setup
+> has completed. The AC300 driver reaches its control range with the PHY
+> package offset helpers. The AC200 package instead references its MFD.
+>=20
+> Give fixed hardware variant-specific compatibles. Also provide an ACx00
+> compatible for systems which can contain either package, with one packed
+> NVMEM field containing calibration in bits 3 through 0, the AC300 selector
+> in bit 8 and its low-calibration selector in bit 9. Such a description
+> contains the potential resources for both backends; the driver consumes
+> only those selected by the configuration field.
+>=20
+> Describe the package clock, supply and optional xMII receive-clock
+> inversion needed by some integrations. A fixed AC200 package may omit the
+> NVMEM field and use its internal calibration copy. Limit AC300-capable li=
+nk
+> addresses to 0 through 7 so the control address remains in the documented
+> range 16 through 23.
+>=20
+> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 
-thanks for your patch!
+Sashiko has reviewed this patch and found no issues. It looks great!
 
-On Tue, Aug 4, 2026 at 12:23=E2=80=AFPM Matti Vaittinen
-<matti.vaittinen@linux.dev> wrote:
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260806-submit-acx=
+00-of-dynamic-v1-v4-0-9bf2f7441632@gmail.com?part=3D3
 
-
-> +static int bd73800gpio_get(struct gpio_chip *chip, unsigned int offset)
-> +{
-> +       struct bd73800_gpio *data =3D gpiochip_get_data(chip);
-> +       struct bd73800_gpio_pin_cfg *pin =3D &data->pin[offset];
-> +       int ret, val;
-> +
-> +       /* Only pins configured as GPI via OTP can have their status read=
- */
-> +       if (pin->state !=3D BD73800_PIN_GPI) {
-> +               dev_dbg(data->dev, "pin %d (%x) not input. State %d\n", o=
-ffset,
-> +                       pin->mask, pin->state);
-> +               return -EINVAL;
-> +       }
-> +
-> +       ret =3D regmap_read(data->regmap, BD73800_REG_INT_5_SRC, &val);
-> +       if (ret)
-> +               return ret;
-> +
-> +       return val & pin->mask;
-> +}
-> +
-> +static int bd73800gpo_set(struct gpio_chip *chip, unsigned int offset,
-> +                         int value)
-> +{
-> +       struct bd73800_gpio *data =3D gpiochip_get_data(chip);
-> +       struct bd73800_gpio_pin_cfg *pin =3D &data->pin[offset];
-> +
-> +       if (pin->state !=3D BD73800_PIN_GPO) {
-> +               dev_dbg(data->dev, "pin %d (%d) not output. State %d\n",
-> +                       offset, pin->mask, pin->state);
-> +
-> +               return -EINVAL;
-> +       }
-> +
-> +       if (value)
-> +               return regmap_set_bits(data->regmap, BD73800_REG_GPO_OUT,
-> +                                      pin->mask);
-> +
-> +       return regmap_clear_bits(data->regmap, BD73800_REG_GPO_OUT, pin->=
-mask);
-> +}
-
-These can probably be handled by the latest version of gpio-regmap
-helpers (the version in linux-next).
-
-We now support both input-only and output-only in gpio-regmap.
-
-Latest <linux/gpio/regmap.h>:
-
- * @fixed_direction_mask:
- *                      (Optional) Bitmap representing the GPIO lines that
- *                      make use of the @fixed_direction_output list to
- *                      enforce direction of the GPIO. If this is NULL
- *                      and @fixed_direction_output is defined, ALL GPIOs
- *                      are assumed to be fixed direction (out or in).
- * @fixed_direction_output:
- *                      (Optional) Bitmap representing the fixed direction =
-of
- *                      the GPIO lines. Useful when there are GPIO lines wi=
-th a
- *                      fixed direction mixed together in the same register=
-.
-
-It seems you can set up the fixed_direction_output mask from OTP
-and just use the library, right?
-
-Yours,
-Linus Walleij
