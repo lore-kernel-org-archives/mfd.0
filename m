@@ -1,70 +1,69 @@
-Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com [209.85.160.43])
+Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD04B3D6CB7
-	for <mfd@lists.linux.dev>; Sun,  9 Aug 2026 20:29:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D35F63D75DE
+	for <mfd@lists.linux.dev>; Sun,  9 Aug 2026 20:29:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786307346; cv=none; b=jsTZ5zpdgAPzq2Kv9KdzcaV0FTryG+Z+gjf13r/PJBo35Og7XehiU14Lx496l6ukTQydUqsBZOM5OIeJPlkkbiosHBZw1W6QESWsUUWAXB/VSmLv989s2Nb6sroIkkMZk8TN3tAuBKVwEuG3L4rRIJljEnnzSdn290NhmdM0WCI=
+	t=1786307348; cv=none; b=aff5xnR8R6s7zN/lPwU3LwIXwfKOuQidrRE62hNFSLHmzIQ8QiCBpiZpQlZqXb2ztdF3Sc94DPU+mrmlFCRGaaAU4DisqfHexwBS8mWY/X4YSsDFdMlL95lfboOBpZVKgekpv/59pOA6i3IQbagAOE3nH78tFB8zaU0gd4MZi5c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786307346; c=relaxed/simple;
-	bh=IzRlEU23yfQQ6x4BYmQXGZqejxD9TteX1wiEO5R8YME=;
+	s=arc-20240116; t=1786307348; c=relaxed/simple;
+	bh=e7IVkymbIpH+Sa1WHsWTqsuCYzgVYNscw67zX24MH/w=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=aUAGiddbeTj5AoNCxRV6OY+wl52HHpn07U/2+xTbsjfWG4YU9sUSBQE3NA3b6H9Pef27o7VlS4540xS3ijrxemg83rxZLmGScUgKiOa9+dgwZ9BpasJ1VeD6gKT6/e2kQhOYoYPs4wCjI1h/7W0rDdMeFa4oMSTqFKZ1RkUQVQg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YtHGplrP; arc=none smtp.client-ip=209.85.160.43
+	 In-Reply-To:To:Cc; b=h7lMbuYEb+DkUJUAwcBqofUjcFp9jVGxzg3jRmODFufm9rGKsnfNnjEkawpd6VZV5V3yVvc76OqBAs95wzTN5VPV9NcKuVtFUGbhY8O6qRK0aEaggUWzgswHEG+l3p8uXYcvTm3y/SY5kgqR+NItZ2ZJHeIkUcTDR+1gLvWeJ54=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=GQERcmPq; arc=none smtp.client-ip=209.85.160.45
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YtHGplrP"
-Received: by mail-oa1-f43.google.com with SMTP id 586e51a60fabf-459281bc13bso661438fac.2
-        for <mfd@lists.linux.dev>; Sun, 09 Aug 2026 13:29:04 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GQERcmPq"
+Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-4472500e25fso474560fac.1
+        for <mfd@lists.linux.dev>; Sun, 09 Aug 2026 13:29:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786307343; x=1786912143; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1786307345; x=1786912145; darn=lists.linux.dev;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gyzPxN0hN+8W2JU9IAdx12pcVnDBJDk0tQrb35djIKE=;
-        b=YtHGplrPri9AStrCw3zDFXIZr36VmANiafF3Sp8MrXJ8ZfIqIUgmHveBeicJS2O8SM
-         siXWyqKBRH43XZR8qXcLeAyOzNAOWMtCjKhaUEs7opH3NAiqn4Iv3roUqxUqokIfXKNj
-         oXqxD0R58WejRanoC7DiwLGeQqV21l10a5+kLmX2Px6pGu2o7befQ0FKk19FeaQVFM9F
-         Uhhxog2/9Ve6QIoyo+k0jm6gcI2LVK5SPNN9gFPZ+xQV3605yN0mc0rxnhGNexmik6vZ
-         sqF3hsZy8t4HVLT+ZZ7DGswSavdIhvhXG0kJQ2Dpq0UTo+hTb0v4PSYPnlPwouiulnQ8
-         knDg==
+        bh=bWLjA8G7rk/7KcbJhEyGGcd17Ru6SvxjZkT6BTMdTnk=;
+        b=GQERcmPqWfbf9YWjEsx5YkREndmoz7StIAlMZnrMfxeMLAgVatcLhYog7g1Slfkpva
+         rCmJAz7iWRbdgSPeH8lN10KE6mTYizcfHrn/4HqmdQ9bsz8NxXznXxCwp1RaeU6CxLbj
+         5+GlCl4ZGbwLxojVT2ATVVHUbNpuIPYoaj2v5/NOAK672AhqayTWljLnH62ceWuL/TrK
+         W1Aeu9Tz0VpuaKyiVNc8Z/Y80R6lBaTwsblKyGa9mhZlQDRrYIWUG5x6cfpdblN5q4dx
+         AUIB2H3mBN3HPOaLI+zGlCq7SMgHWKegHt5eOflXnd9JF0GoTxZvmAD0Wbql3sfaFfeJ
+         HHgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786307343; x=1786912143;
+        d=1e100.net; s=20251104; t=1786307345; x=1786912145;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=gyzPxN0hN+8W2JU9IAdx12pcVnDBJDk0tQrb35djIKE=;
-        b=sLvYqpAd6zxGLUoK6u/d4JOZblUOhlmCuaSMF2hbEm0/inrv9yWfhsNg8JPG9TKjAz
-         FrFGDCy4gdyh7BemuhC3siFdpC5Cvt6aAwV46PnYn2UqokKga9aHt4JMHLKFaOxcHZLh
-         Y+Suwx3cuKQtl5Nq3y+T61+XV95FxgCe2vkpZP1+NQkmkjQM6PvH3RzeQ0FwsONFnkM2
-         eCYHbk0uRHbbXJmwt7YEzaAmpO7eBieuznv1XlCtrW14ixLA6H08o6TmVKMxZC/99wxK
-         CdaAF/4F4aNnyXEb4z7IEvmi10YGbUzFRZsqQGhKKTI+ZlP0TmaneSBF+XOJ5GYNeRPB
-         yWFg==
-X-Gm-Message-State: AOJu0Yy2tAKwr70HlXyJhHHfR1zZgaFdg3LO2ahxI807QF4Edohxh0O1
-	GWox3y/M+Pdw49yaCoj77ZNOH8rkHivWtaqqUfvkVytlDqM4MXCmyodwa6lbcw==
-X-Gm-Gg: AR+sD13LUpEW94f/ZvSTB4ELj2Dr5IKKBo0MBu1gj7yfDz887XSz6ASdXw1Cprg7sDn
-	fly12VcTBVNZZvqpD3m29xU+BJBoqJyO0JbgAZeqXTSACJsfwZXH69ejP5KMj4XJ8MNnvhk3sNF
-	WaQORePgd0aHkpuO3ljWG2V4+YcX9ftfD2lJdqmivSsM3vA0W15sKmBcY+lqxcMXrth8kJwmA2O
-	juT3jkWtJKajr4PUYRNNlTHJlrVXGvB22nl71SP2SFkmlfsLkBeLRVuGW0fSzjKUlOgKc65nCM5
-	tniK+6mO5xQoKfJIQYjNRbkKCzCIsxb/CFJx4qR5gy+6mdgiXMSW8p/iuKNj/zUhjOmWwu66htx
-	9Oh8FcMP6DsjitJf7b9DnxM7AZPxCPVDq0R0IxgTH1M5cCf4+3rekqM1hCIGV/XgXP0EE6jcESI
-	dIslxkY6tTb0J7T0QiVDOFmqJYOAwNCUswztklfGML/JzyibfeXvdt8S1T3Su9zPVw0oSxdHcJq
-	MsMQSLA7NMKuMt5LJPtcUpSXaqIBGyEau910BjnBEi3QtzWrmCNr1gSzvKN6CMfIikBIEsCJE/W
-	etjiqlhIcVhWGd+NRcUrYQUkZd/QpIsdJ6V1Kb8nsM2cSpKTz92ZODIoiTrcwtlewa66/9eOqQa
-	VYR3IjMQSBtJ/Xb8L
-X-Received: by 2002:a05:6870:2482:b0:451:ecac:2c13 with SMTP id 586e51a60fabf-459e2a47b11mr13178902fac.8.1786307343529;
-        Sun, 09 Aug 2026 13:29:03 -0700 (PDT)
+        bh=bWLjA8G7rk/7KcbJhEyGGcd17Ru6SvxjZkT6BTMdTnk=;
+        b=Fc/djkdFd2BcMhhG5y05M5zjZRFEvT0znbHXuSAYIK59MxOU7tdREvX3EWY2Tm2bst
+         lzOPR01zX2qeZpebFEAmzRDVkRrfljmpbjaSdv2YhfqE9YP647L3CiZnceYNi7iO45o4
+         VCVMEVKwrwrsI0q8JTSrEmgMS7s4OzAVXs1iHNPecAOPPWMH6bUjcRwLI2KRFFyqKcgd
+         WbMq9HEocu6jQ+FgCxMcBB0+69TaVNmphQJsk1kQpleW1x6Cb1A+0nc4Vl2e3r0B4a0c
+         S6XFdM5phwEXRzT8HI0wrA8WWw2dKjKgyY8qqF4GPATiaWR/9w/FJSQv5vIunrJ5OWoG
+         +EsA==
+X-Gm-Message-State: AOJu0YzjgdPCW+G/bNSZO//t9HDM4JCqz5JorwS0NFx8+ImkFeWO2k1m
+	dIOpc5v5hqrpj2uhh6eaVzcw/f+xt911cZHz3oaNGkd93hY8f+agIQVB
+X-Gm-Gg: AR+sD13X8rCENFRbPQ/AJu58EYIZ07+TkQ0gY3d7cZ1sVOsLfpc7BqLzFNvggvsy2Fr
+	mlmLCkGIlQksC0xt+y9zAoywxbyt7WLfwRQdQCK+1yplcCkPJhzbJHrhCx/teIVpounQwOlK3qs
+	tf683qJc5qRCwnkOx7vKI2fJzHiXnn9dEXWRQRN9e6VfTdkidzO8AvadnHWf/pqBE/fqrf/xgmZ
+	MkdosubhhrAmvHANxsTDx4HaX9AacMBoTc4gFRZapkaY7SLj7ome6MT8ghGMlMJhyTYbMc7VJm0
+	5MLPE4aNBg4DQLEPrVh8RvEsMP7fOhj05WYAzUTgusDWxJIsWJWz2pm9l1WnCXNUsQO4uhWyGy3
+	1MqO6KsF0vJwOl2FMUprFC3AgiCkny8iJVR2egHwoboZ8qoe60ok+5Zj4ubB/qEjLkz8WVmbJbv
+	ApK6Hylp1xVZggOfebog4h1riCtTVhxBqncMTAEZLt3ISY7GDwsl8jZn/wGHwdChcmccM0aROdK
+	SGsJFYVFvMsh5hxgSEYxBN4HpWAmS94His3RRx0U38fUBRXGVADKLwSqg+59pPvG8vKHCPA+Lx8
+	jL5QbFvYzyEm6GLiTZ7HzxT9rpo8fy6otC6MiW64yWkQAQaKHETKmXJxlLzcp8OiK9CAagLHXel
+	MrDbnmrQCQu7mqYs0NGBdnN81vV0=
+X-Received: by 2002:a05:6870:a40c:b0:456:3973:5a89 with SMTP id 586e51a60fabf-4599eda5c51mr18998830fac.8.1786307344630;
+        Sun, 09 Aug 2026 13:29:04 -0700 (PDT)
 Received: from [127.0.1.1] (184-96-154-59.hlrn.qwest.net. [184.96.154.59])
-        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-459f19fd31csm6975362fac.1.2026.08.09.13.29.02
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-459f19fd31csm6975362fac.1.2026.08.09.13.29.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 Aug 2026 13:29:02 -0700 (PDT)
+        Sun, 09 Aug 2026 13:29:04 -0700 (PDT)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Sun, 09 Aug 2026 14:28:32 -0600
-Subject: [PATCH net-next v5 2/5] mfd: syscon: Add managed registration for
- external regmaps
+Date: Sun, 09 Aug 2026 14:28:33 -0600
+Subject: [PATCH net-next v5 3/5] mfd: ac200: Add X-Powers AC200 support
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -73,7 +72,7 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260809-submit-acx00-of-dynamic-v1-v5-2-bfa1f8518b28@gmail.com>
+Message-Id: <20260809-submit-acx00-of-dynamic-v1-v5-3-bfa1f8518b28@gmail.com>
 References: <20260809-submit-acx00-of-dynamic-v1-v5-0-bfa1f8518b28@gmail.com>
 In-Reply-To: <20260809-submit-acx00-of-dynamic-v1-v5-0-bfa1f8518b28@gmail.com>
 To: Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
@@ -89,193 +88,247 @@ Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org,
  linux-kernel@vger.kernel.org, netdev@vger.kernel.org
 X-Mailer: b4 0.15.2
 
-of_syscon_register_regmap() publishes an externally owned regmap in the
-global syscon list, but provides no way for a removable driver to
-withdraw it. Registering a devm-managed regmap from such a driver would
-therefore leave a stale pointer after unbind.
+The X-Powers AC200 is a mixed-signal companion IC with a paged register
+map accessed over I2C.
 
-Factor external registration through an internal helper and add
-devm_of_syscon_register_regmap(). The managed action removes the entry
-under the syscon list lock before later devres actions release the
-regmap. Hold a device-node reference for the lifetime of every
-externally registered entry so its lookup key also remains valid.
+Enable the shared input clock and prevent its rate from changing. Match
+the vendor driver's 40 ms wait before the first register access,
+initialize the paged regmap, report the chip and package revision, and
+apply common reset.
 
-Consumers of a removable provider remain responsible for ordering
-teardown, for example with a managed device link.
+The Ethernet PHY link endpoint is independently enumerated on its MDIO
+bus, so publish the regmap through managed syscon registration for lookup
+through its AC200 firmware reference rather than creating an artificial
+MFD platform child. The managed entry is withdrawn before the regmap is
+released, while the function driver separately manages the PHY analog
+supply.
+
+Cache only the common page selector. Individual functions can reset
+independently and invalidate their other registers without regmap's
+knowledge, so leave all functional registers volatile.
+
+Reset the chip during managed teardown and system shutdown. Consumers
+can use device links to ensure that they unbind before the shared AC200
+resources are released.
 
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 ---
- drivers/mfd/syscon.c       | 87 ++++++++++++++++++++++++++++++++++------------
- include/linux/mfd/syscon.h | 12 +++++++
- 2 files changed, 77 insertions(+), 22 deletions(-)
+ drivers/mfd/Kconfig  |  12 ++++
+ drivers/mfd/Makefile |   1 +
+ drivers/mfd/ac200.c  | 170 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 183 insertions(+)
 
-diff --git a/drivers/mfd/syscon.c b/drivers/mfd/syscon.c
-index 21a7fcdd2737..448422fe4f21 100644
---- a/drivers/mfd/syscon.c
-+++ b/drivers/mfd/syscon.c
-@@ -10,6 +10,7 @@
+diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
+index 763ce6a34782..95e3c62742bb 100644
+--- a/drivers/mfd/Kconfig
++++ b/drivers/mfd/Kconfig
+@@ -205,6 +205,18 @@ config MFD_AC100
+ 	  This driver include only the core APIs. You have to select individual
+ 	  components like codecs or RTC under the corresponding menus.
  
- #include <linux/cleanup.h>
- #include <linux/clk.h>
-+#include <linux/device.h>
- #include <linux/err.h>
- #include <linux/hwspinlock.h>
- #include <linux/list.h>
-@@ -193,53 +194,95 @@ static struct regmap *device_node_get_regmap(struct device_node *np,
- 	return syscon->regmap;
- }
- 
--/**
-- * of_syscon_register_regmap() - Register regmap for specified device node
-- * @np: Device tree node
-- * @regmap: Pointer to regmap object
-- *
-- * Register an externally created regmap object with syscon for the specified
-- * device tree node. This regmap will then be returned to client drivers using
-- * the syscon_regmap_lookup_by_phandle() API.
-- *
-- * Return: 0 on success, negative error code on failure.
-- */
--int of_syscon_register_regmap(struct device_node *np, struct regmap *regmap)
-+static struct syscon *
-+of_syscon_register_regmap_internal(struct device_node *np,
-+				   struct regmap *regmap)
- {
- 	struct syscon *entry, *syscon = NULL;
--	int ret;
- 
- 	if (!np || !regmap)
--		return -EINVAL;
-+		return ERR_PTR(-EINVAL);
- 
- 	syscon = kzalloc_obj(*syscon);
- 	if (!syscon)
--		return -ENOMEM;
-+		return ERR_PTR(-ENOMEM);
- 
- 	/* check if syscon entry already exists */
- 	mutex_lock(&syscon_list_lock);
- 
- 	list_for_each_entry(entry, &syscon_list, list)
- 		if (entry->np == np) {
--			ret = -EEXIST;
--			goto err_unlock;
-+			mutex_unlock(&syscon_list_lock);
-+			kfree(syscon);
-+			return ERR_PTR(-EEXIST);
- 		}
- 
- 	syscon->regmap = regmap;
--	syscon->np = np;
-+	syscon->np = of_node_get(np);
- 
- 	/* register the regmap in syscon list */
- 	list_add_tail(&syscon->list, &syscon_list);
- 	mutex_unlock(&syscon_list_lock);
- 
--	return 0;
-+	return syscon;
-+}
++config MFD_AC200
++	tristate "X-Powers AC200"
++	depends on I2C
++	depends on OF
++	select MFD_SYSCON
++	select REGMAP_I2C
++	help
++	  Support for the X-Powers AC200 mixed-signal companion IC. The AC200
++	  contains audio, video, RTC and Fast Ethernet PHY functions and is
++	  co-packaged with some Allwinner H6 and H616 SoCs. This driver provides
++	  the shared register access used by the individual function drivers.
 +
-+/**
-+ * of_syscon_register_regmap() - Register regmap for specified device node
-+ * @np: Device tree node
-+ * @regmap: Pointer to regmap object
+ config MFD_AXP20X
+ 	tristate
+ 	select MFD_CORE
+diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
+index dd4bb7e77c33..890e76a9ad00 100644
+--- a/drivers/mfd/Makefile
++++ b/drivers/mfd/Makefile
+@@ -150,6 +150,7 @@ obj-$(CONFIG_MFD_DA9052_SPI)	+= da9052-spi.o
+ obj-$(CONFIG_MFD_DA9052_I2C)	+= da9052-i2c.o
+ 
+ obj-$(CONFIG_MFD_AC100)		+= ac100.o
++obj-$(CONFIG_MFD_AC200)		+= ac200.o
+ obj-$(CONFIG_MFD_AXP20X)	+= axp20x.o
+ obj-$(CONFIG_MFD_AXP20X_I2C)	+= axp20x-i2c.o
+ obj-$(CONFIG_MFD_AXP20X_RSB)	+= axp20x-rsb.o
+diff --git a/drivers/mfd/ac200.c b/drivers/mfd/ac200.c
+new file mode 100644
+index 000000000000..25066bb36ac7
+--- /dev/null
++++ b/drivers/mfd/ac200.c
+@@ -0,0 +1,170 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * MFD core driver for the X-Powers AC200
 + *
-+ * Register an externally created regmap object with syscon for the specified
-+ * device tree node. This regmap will then be returned to client drivers using
-+ * the syscon_regmap_lookup_by_phandle() API.
++ * Copyright (C) 2019 Jernej Skrabec <jernej.skrabec@gmail.com>
++ * Copyright (C) 2026 James Hilliard <james.hilliard1@gmail.com>
 + *
-+ * Return: 0 on success, negative error code on failure.
++ * Based on the AC100 driver:
++ * Copyright (C) 2016 Chen-Yu Tsai
 + */
-+int of_syscon_register_regmap(struct device_node *np, struct regmap *regmap)
-+{
-+	return PTR_ERR_OR_ZERO(of_syscon_register_regmap_internal(np, regmap));
-+}
-+EXPORT_SYMBOL_GPL(of_syscon_register_regmap);
 +
-+static void devm_of_syscon_register_regmap_release(void *data)
-+{
-+	struct syscon *syscon = data;
- 
--err_unlock:
-+	mutex_lock(&syscon_list_lock);
-+	list_del(&syscon->list);
- 	mutex_unlock(&syscon_list_lock);
++#include <linux/bitfield.h>
++#include <linux/clk.h>
++#include <linux/delay.h>
++#include <linux/i2c.h>
++#include <linux/mfd/syscon.h>
++#include <linux/module.h>
++#include <linux/regmap.h>
 +
-+	of_node_put(syscon->np);
- 	kfree(syscon);
--	return ret;
- }
--EXPORT_SYMBOL_GPL(of_syscon_register_regmap);
++#define AC200_SYS_VERSION_REG			0x0000
++#define AC200_SYS_VERSION_PACKAGE_MASK		GENMASK(15, 14)
++#define AC200_SYS_VERSION_CHIP_MASK		GENMASK(11, 0)
 +
-+/**
-+ * devm_of_syscon_register_regmap() - Register a managed external syscon regmap
-+ * @dev: Device that owns the regmap
-+ * @np: Device tree node associated with the regmap
-+ * @regmap: Pointer to the externally created regmap
-+ *
-+ * Register an externally created regmap object with syscon and remove it when
-+ * @dev is unbound. Consumers must stop using the regmap before the provider is
-+ * unbound, for example by establishing a managed device link to @dev.
-+ *
-+ * Return: 0 on success, negative error code on failure.
++#define AC200_SYS_CONTROL_REG			0x0002
++#define AC200_SYS_CONTROL_CHIP_RESET_DEASSERT	BIT(0)
++
++/* Interface register accessible from every register page. */
++#define AC200_TWI_REG_ADDR_H	0x00fe
++#define AC200_MAX_REG		0xa1f2
++
++struct ac200 {
++	struct regmap *regmap;
++};
++
++static const struct regmap_range_cfg ac200_range_cfg[] = {
++	{
++		.range_max = AC200_MAX_REG,
++		.selector_reg = AC200_TWI_REG_ADDR_H,
++		.selector_mask = 0xff,
++		.window_len = 256,
++	},
++};
++
++/*
++ * Each AC200 sub-block can reset independently, invalidating its register
++ * contents without regmap's knowledge. Cache only the common page selector;
++ * this avoids a selector read-modify-write for every access on the same page
++ * without ever returning stale functional-register values.
 + */
-+int devm_of_syscon_register_regmap(struct device *dev,
-+				   struct device_node *np,
-+				   struct regmap *regmap)
++static bool ac200_volatile_reg(struct device *dev, unsigned int reg)
 +{
-+	struct syscon *syscon;
-+
-+	syscon = of_syscon_register_regmap_internal(np, regmap);
-+	if (IS_ERR(syscon))
-+		return PTR_ERR(syscon);
-+
-+	return devm_add_action_or_reset(dev,
-+					devm_of_syscon_register_regmap_release,
-+					syscon);
-+}
-+EXPORT_SYMBOL_GPL(devm_of_syscon_register_regmap);
- 
- /**
-  * device_node_to_regmap() - Get or create a regmap for specified device node
-diff --git a/include/linux/mfd/syscon.h b/include/linux/mfd/syscon.h
-index aad9c6b50463..3e804fc1b03e 100644
---- a/include/linux/mfd/syscon.h
-+++ b/include/linux/mfd/syscon.h
-@@ -15,6 +15,7 @@
- #include <linux/errno.h>
- 
- struct device_node;
-+struct device;
- 
- #ifdef CONFIG_MFD_SYSCON
- struct regmap *device_node_to_regmap(struct device_node *np);
-@@ -30,6 +31,9 @@ struct regmap *syscon_regmap_lookup_by_phandle_optional(struct device_node *np,
- 							const char *property);
- int of_syscon_register_regmap(struct device_node *np,
- 			      struct regmap *regmap);
-+int devm_of_syscon_register_regmap(struct device *dev,
-+				   struct device_node *np,
-+				   struct regmap *regmap);
- #else
- static inline struct regmap *device_node_to_regmap(struct device_node *np)
- {
-@@ -75,6 +79,14 @@ static inline int of_syscon_register_regmap(struct device_node *np,
- 	return -EOPNOTSUPP;
- }
- 
-+static inline int
-+devm_of_syscon_register_regmap(struct device *dev,
-+			       struct device_node *np,
-+			       struct regmap *regmap)
-+{
-+	return -EOPNOTSUPP;
++	return reg != AC200_TWI_REG_ADDR_H;
 +}
 +
- #endif
- 
- #endif /* __LINUX_MFD_SYSCON_H__ */
++static const struct regmap_config ac200_regmap_config = {
++	.name = "ac200",
++	.reg_bits = 8,
++	.reg_stride = 2,
++	.val_bits = 16,
++	.ranges = ac200_range_cfg,
++	.num_ranges = ARRAY_SIZE(ac200_range_cfg),
++	.max_register = AC200_MAX_REG,
++	.volatile_reg = ac200_volatile_reg,
++	.cache_type = REGCACHE_MAPLE,
++};
++
++static void ac200_disable(void *data)
++{
++	struct ac200 *ddata = data;
++
++	regmap_write(ddata->regmap, AC200_SYS_CONTROL_REG, 0);
++}
++
++static int ac200_probe(struct i2c_client *client)
++{
++	struct device *dev = &client->dev;
++	unsigned int version;
++	struct ac200 *ddata;
++	struct clk *clk;
++	int ret;
++
++	ddata = devm_kzalloc(dev, sizeof(*ddata), GFP_KERNEL);
++	if (!ddata)
++		return -ENOMEM;
++
++	clk = devm_clk_get_enabled(dev, NULL);
++	if (IS_ERR(clk))
++		return dev_err_probe(dev, PTR_ERR(clk),
++				     "failed to enable input clock\n");
++
++	ret = devm_clk_rate_exclusive_get(dev, clk);
++	if (ret)
++		return dev_err_probe(dev, ret, "failed to lock clock rate\n");
++
++	ddata->regmap = devm_regmap_init_i2c(client, &ac200_regmap_config);
++	if (IS_ERR(ddata->regmap))
++		return dev_err_probe(dev, PTR_ERR(ddata->regmap),
++				     "failed to initialize regmap\n");
++
++	i2c_set_clientdata(client, ddata);
++
++	/*
++	 * No minimum delay is documented. Match the vendor driver's 40 ms delay
++	 * before its first AC200 register access after enabling the input clock.
++	 */
++	msleep(40);
++
++	ret = regmap_read(ddata->regmap, AC200_SYS_VERSION_REG, &version);
++	if (ret)
++		return dev_err_probe(dev, ret,
++				     "failed to read chip version\n");
++
++	dev_info(dev, "AC200 revision %#lx in package %lu\n",
++		 FIELD_GET(AC200_SYS_VERSION_CHIP_MASK, version),
++		 FIELD_GET(AC200_SYS_VERSION_PACKAGE_MASK, version));
++
++	/* Reset the chip after dependent function drivers have unbound. */
++	ret = devm_add_action_or_reset(dev, ac200_disable, ddata);
++	if (ret)
++		return ret;
++
++	ret = regmap_write(ddata->regmap, AC200_SYS_CONTROL_REG, 0);
++	if (ret)
++		return ret;
++
++	ret = regmap_write(ddata->regmap, AC200_SYS_CONTROL_REG,
++			   AC200_SYS_CONTROL_CHIP_RESET_DEASSERT);
++	if (ret)
++		return ret;
++
++	ret = devm_of_syscon_register_regmap(dev, dev->of_node,
++					     ddata->regmap);
++	if (ret)
++		return dev_err_probe(dev, ret,
++				     "failed to register regmap\n");
++
++	return 0;
++}
++
++static void ac200_shutdown(struct i2c_client *client)
++{
++	ac200_disable(i2c_get_clientdata(client));
++}
++
++static const struct of_device_id ac200_of_match[] = {
++	{ .compatible = "x-powers,ac200" },
++	{ }
++};
++MODULE_DEVICE_TABLE(of, ac200_of_match);
++
++static const struct i2c_device_id ac200_i2c_ids[] = {
++	{ .name = "ac200" },
++	{ }
++};
++MODULE_DEVICE_TABLE(i2c, ac200_i2c_ids);
++
++static struct i2c_driver ac200_driver = {
++	.driver = {
++		.name = "ac200",
++		.of_match_table = ac200_of_match,
++	},
++	.probe = ac200_probe,
++	.shutdown = ac200_shutdown,
++	.id_table = ac200_i2c_ids,
++};
++module_i2c_driver(ac200_driver);
++
++MODULE_AUTHOR("James Hilliard <james.hilliard1@gmail.com>");
++MODULE_DESCRIPTION("X-Powers AC200 MFD core driver");
++MODULE_LICENSE("GPL");
 
 -- 
 2.53.0
