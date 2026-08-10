@@ -1,202 +1,108 @@
-Received: from mo4-p02-ob.smtp.rzone.de (mo4-p02-ob.smtp.rzone.de [85.215.255.83])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F9FA43C7A9
-	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 20:59:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=85.215.255.83
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786395600; cv=pass; b=kpqzyspAakEQamFTx2RFRRmN7QtSp2QhSYU7Ym7K0zVMNKJutknelWUZ+Qoxax1w1gjpOLqJXY7eL2FN5aljiR30VIGN4sa5zpUoqPJPz+hzkCSys3YIFRMZgIaPo/6496LA6LlQK3TjUs864dqfWIkZMJMF6WHiLL4Q4A8PhZg=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786395600; c=relaxed/simple;
-	bh=M2b0s5sV+UlmrYlU5mF5+QdMgIVz6hWvd8/C7SfZBcE=;
-	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
-	 Message-Id:References:To; b=eHho8a7KIact/J4GQqp5T+cbSXHibLazcqCyTNTSQ3CMl9N/DBdfFbcCMNRpJ2q6LEAhiUAwmg7F4ot+fiY27dDgup/es+hBoyW+mIPsA4aWL1SyH/EzaFrxAy7lhYauOq64MlrEQDM65mZ0Bd+z+gBsPuR56yOVWNlj8HvX2HE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=goldelico.com; spf=pass smtp.mailfrom=goldelico.com; dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=PsP/bxV0; dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=ol9sAKua; arc=pass smtp.client-ip=85.215.255.83
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=goldelico.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=goldelico.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9624C3B3C08
+	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 21:48:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786398483; cv=none; b=mKnoTwiqs918mBqJSSqgASP6VMEOIPg0KF8JNyPVTKsxQawROI8Vg9Oru3crL3/oDKzCyeMcM+HEH5uofluzmUpxJCshiDmURibgsHIAK6fowHXuVjOkjP/EHR5mNB/vrir71jZMUUwidldwJdfVcg7/ersCSYbY2WWDNeJ+7k4=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786398483; c=relaxed/simple;
+	bh=LrsqqfM5Lf8SduY5JVzHWp4E8K081478dAwhdzwG6Gs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 In-Reply-To:Content-Type:Content-Disposition; b=sXJW57MzZYFmFy/iUlH1A97JtbQyMKgSplA47adc9/e/eEFQ5vfGcYMNm223jE4/SdCOQ3QQyZBiJiv0IWCq8Q/9cBVEcWE1zhFVuk8Ax0Z8XEN6iwUQvCb6oMK68Vac1gAficP5ob2vHqq8u3MhNM1fN+R+BEQXTUyr3QqTnjQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=M/4bcMqP; arc=none smtp.client-ip=170.10.133.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="PsP/bxV0";
-	dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="ol9sAKua"
-ARC-Seal: i=1; a=rsa-sha256; t=1786395414; cv=none;
-    d=strato.com; s=strato-dkim-0002;
-    b=t2BQl9Z8KeurTNXDux1Cx0A8Bjn5K0igXQw7bigsJM3q6Fu18PGX6fQ8shpduQ2qp9
-    kojVa+x45LQPfZEA7f21vmALVD24IAPFWurY/6pZjrRMtWvkYIWYRxp6gKPf+fLOGsSl
-    kVsyrHPDywUYKyqNnyR9GXUPh19Yz1q6Gqukf+lmS9AnuahB/U1XVVZKSS0hLRmaqCkE
-    0N9c9YRybc2rxxFMk31QEfKmbi869/LgVytFIpDjRQnEkDQaa6uBwwiQom/I2JaRLoEo
-    HKsxaYV0a401CR32Zo4qSYOLi1oTrRJyJBpWn4BiGW6G0SOuZGtogL9eW4MayGFUM5NT
-    LR7g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1786395414;
-    s=strato-dkim-0002; d=strato.com;
-    h=To:References:Message-Id:Cc:Date:In-Reply-To:From:Subject:Cc:Date:
-    From:Subject:Sender;
-    bh=M2b0s5sV+UlmrYlU5mF5+QdMgIVz6hWvd8/C7SfZBcE=;
-    b=Dwyj4QBN67/T9pzAOzwI1/AJhjzygobZHUmTcKODeVjNNEWKSV73ese/v4lua+h54C
-    IoGUXYfXo1dcUm6YCznSLE5tI2CwV5ca4KM+zS4VK4uVDykY+/5TW/lSMxDCkmTFd329
-    aHnbS5D6ENGua0gnvcq6s96Tp3XMeRV4H2ichflsdisgRE01IPVSdqL79XlpTDEAXg12
-    efmtlwOw9200KHv86Zp3TLhuxI8zUdS8mnTPzmwM1Sec0g8zCfBsTIZ3vG7RmmcHcxvK
-    tPTphRF5vVjbqPstelrDB1lv/Csoj//SX/yYxh/qQf23AX4v4YY7pFx7k5BuQfC3DPzy
-    7OXQ==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo02
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1786395414;
-    s=strato-dkim-0002; d=goldelico.com;
-    h=To:References:Message-Id:Cc:Date:In-Reply-To:From:Subject:Cc:Date:
-    From:Subject:Sender;
-    bh=M2b0s5sV+UlmrYlU5mF5+QdMgIVz6hWvd8/C7SfZBcE=;
-    b=PsP/bxV0DkARdQeMAEKbfJPJg42HksHI8mlHtlKGDLalnkZ7cIXtbWwJ8LdE7DB99M
-    IIfb2bPHCNo1n8eCFg3PDJO55f0wEdVCy4Hlj8e9VrqLUhmh+LPpel1ZHgOBjIfR2WXF
-    5DV01vxRyuEGon6/1hhSINkJRmXOOTeKgrhyjj5VVzKXcz4fRAUawT+xQLdsxJxX+1K9
-    qHY3mrD4msgpzTNz6d8JL36TJcOrnyYROQ2y6rtb6lYNmnmlSe7AtpWh31Og8Do3WDBX
-    pMTRi48cpor8XLotO1HUL59BLznYwONrDYakOLuV9NNlZRVJDj1yyMUzFkSLgHvFK6G0
-    OJIg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1786395414;
-    s=strato-dkim-0003; d=goldelico.com;
-    h=To:References:Message-Id:Cc:Date:In-Reply-To:From:Subject:Cc:Date:
-    From:Subject:Sender;
-    bh=M2b0s5sV+UlmrYlU5mF5+QdMgIVz6hWvd8/C7SfZBcE=;
-    b=ol9sAKuaZNHWsPcZa7fLcth6fUGMED5C+eqhENktvwwMT/CtFPT0K86CugHMLpZSaJ
-    zfejHdUcnNxS2MSRKNAQ==
-X-RZG-AUTH: ":JGIXVUS7cutRB/49FwqZ7WcJeFKiMhflhwDubTJ9qVpwcQVkPW4I1HrTipoGmsiNZ9v/oGyp26o/Wi+pVFrZX1Db5b3z"
-Received: from smtpclient.apple
-    by smtp.strato.de (RZmta 55.5.6 AUTH)
-    with ESMTPSA id Q58eac27AKuqiaO
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve X9_62_prime256v1 with 256 ECDH bits, eq. 3072 bits RSA))
-	(Client did not present a certificate);
-    Mon, 10 Aug 2026 22:56:52 +0200 (CEST)
-Content-Type: text/plain;
-	charset=us-ascii
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="M/4bcMqP"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1786398480;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=u2kNjc7BvbeCZjQXT/CDfqSPqzNq93GXaL2zxjFnbUA=;
+	b=M/4bcMqPvE7OTFoPT7WmXs0MeNP6AZqxeJhNU9GB9sWGe1BgsHp6xoPuRzt8Q8W1TsTm2U
+	XouBN8IXRdKCfsN9dGlOKsHT1mcEuj7ToTqO5MaVLWDLFIREp6wm5tvXUzAf9YFHaSMGJU
+	ZjRh3eSRhXzzkZqgdvkE1sXO0gcuBds=
+Received: from mail-yw1-f197.google.com (mail-yw1-f197.google.com
+ [209.85.128.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-438-ActITt74OlijK93dqvCjJg-1; Mon, 10 Aug 2026 17:47:59 -0400
+X-MC-Unique: ActITt74OlijK93dqvCjJg-1
+X-Mimecast-MFC-AGG-ID: ActITt74OlijK93dqvCjJg_1786398478
+Received: by mail-yw1-f197.google.com with SMTP id 00721157ae682-81e735bcceaso38599207b3.3
+        for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 14:47:59 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786398478; x=1787003278;
+        h=user-agent:in-reply-to:content-transfer-encoding
+         :content-disposition:content-type:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=u2kNjc7BvbeCZjQXT/CDfqSPqzNq93GXaL2zxjFnbUA=;
+        b=BLNgg4hd3ZP8pBAYojrw9YBaIC21kdKD97IBNHBBFg0rigSP7TwztBGpp0VtPzL282
+         2v4866vwRYHnEu84qDlIhp4iYCPFZsR2BgKZXJcFXFplP8sP46nj/8FzloOOObXLjBbZ
+         /qio1aXvLngfgW3Z69uMmdPKpRzt5xvjP6FzKea89fe9aQ8Kx0rSMNiq7WYepYGu1L58
+         5W56fsbuTdDPADLvyuAOqEuon0cKogj8rd5uh1245yvjRVRiIVLRmHQ+BqXJmn+35G3w
+         KB61axG8gkHg53AjneItHz9GbPb0yF3+ONQ7yco4bzZzvEY5SM4rux1nNIMTNjR7HoXu
+         POKQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrSrH3zRw11HhOQqy86VVTmveAn0AE88vttKxDmCyus1KNqE/GFt/o2ddzCQIWtdvSIrNs=@lists.linux.dev
+X-Gm-Message-State: AOJu0Yw78s9Xwsh49bPB8EU/kdFPhTysxpT7eqVe6htTsi5BOHW5oaDe
+	6jQEeLClhiWG2dIwTJ9nkOCI7PX3feHAS+btyZn/DVY1/5ZuWiBHwR4209kZKFNOI9Lcd1foy7W
+	7vLsBX2or10wM61wWnKdayoL0YEmDdfHx7pj0AgglBSeGc/jZTNHjog==
+X-Gm-Gg: AR+sD10CdGKApsjgE/DkCyGg5v8ktKo0H7DvvwmNDWHm1LYbNaSnnSvGNjw1hk2e4BI
+	t3EesQx9lpr873e8vJou/XMPXAhmiiDBNVPWzkIHUlp2Madf92Nt7l/2aZQf5k14U/3l/iC4eq7
+	NGiSG0WY0D0H/5E8uj7Fqho9625fCXolctvPV+8SZsDsuQ0HT8OHw49UUtLm+/XU3sLSTzQFW8/
+	KduC7TPFyqNC4bI2BY2XQ0kBePATw9sLjVS/fJKAIQmiTCgF2+eZK9lRXkLy5dQ9z0IK5TCajkg
+	tmFQ8lmsQ7guBXdnsC6iCyz/mtwm5MQYsmO3NB4Vk3diBBWuQP35DqvmwSW4kXZ00WfOo+spUIY
+	gfCfDf9XWxW21t3JSwi6IUCkkXTN/xwMhX0U=
+X-Received: by 2002:a05:690c:9989:b0:81e:4e5d:484a with SMTP id 00721157ae682-8243fdf211amr161873617b3.2.1786398478520;
+        Mon, 10 Aug 2026 14:47:58 -0700 (PDT)
+X-Received: by 2002:a05:690c:9989:b0:81e:4e5d:484a with SMTP id 00721157ae682-8243fdf211amr161873217b3.2.1786398478040;
+        Mon, 10 Aug 2026 14:47:58 -0700 (PDT)
+Received: from redhat.com (c-73-183-53-213.hsd1.pa.comcast.net. [73.183.53.213])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-823f577c580sm64586967b3.27.2026.08.10.14.47.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Aug 2026 14:47:57 -0700 (PDT)
+Date: Mon, 10 Aug 2026 17:47:54 -0400
+From: Brian Masney <bmasney@redhat.com>
+To: Stefan =?iso-8859-1?Q?D=F6singer?= <stefandoesinger@gmail.com>
+Cc: Michael Turquette <mturquette@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Russell King <linux@armlinux.org.uk>, Lee Jones <lee@kernel.org>,
+	linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	linux-phy@lists.infradead.org, mfd@lists.linux.dev
+Subject: Re: [PATCH v10 05/12] clk: zte: Add Clock registration infrastructure
+Message-ID: <anpHCvLCm1JKImC_@redhat.com>
+References: <20260810-zx29clk-v10-0-63846490712c@gmail.com>
+ <20260810-zx29clk-v10-5-63846490712c@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81.1.8\))
-Subject: Re: [Letux-kernel] [PATCH 15/16] backlight: remove pandora_bl
-From: "H. Nikolaus Schaller" <hns@goldelico.com>
-In-Reply-To: <20260810223413.01af9a6d@kemnade.info>
-Date: Mon, 10 Aug 2026 22:56:41 +0200
-Cc: linux-fbdev@vger.kernel.org,
- Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
- Liam Girdwood <lgirdwood@gmail.com>,
- Tony Lindgren <tony@atomide.com>,
- dri-devel@lists.freedesktop.org,
- Niranjan H Y <niranjan.hy@ti.com>,
- Sen Wang <sen@ti.com>,
- Rob Herring <robh@kernel.org>,
- Aaro Koskinen <aaro.koskinen@iki.fi>,
- Kevin Hilman <khilman@baylibre.com>,
- Helge Deller <deller@gmx.de>,
- Lee Jones <lee@kernel.org>,
- Russell King <linux@armlinux.org.uk>,
- linux-omap@vger.kernel.org,
- Daniel Thompson <danielt@kernel.org>,
- Grazvydas Ignotas <notasas@gmail.com>,
- devicetree@vger.kernel.org,
- Conor Dooley <conor+dt@kernel.org>,
- Charles Keepax <ckeepax@opensource.cirrus.com>,
- Arnd Bergmann <arnd@arndb.de>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- mfd@lists.linux.dev,
- linux-sound@vger.kernel.org,
- Richard Fitzgerald <rf@opensource.cirrus.com>,
- Mark Brown <broonie@kernel.org>,
- Jaroslav Kysela <perex@perex.cz>,
- Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
- linux-arm-kernel@lists.infradead.org,
- Roger Quadros <rogerq@kernel.org>,
- Jingoo Han <jingoohan1@gmail.com>,
- Takashi Iwai <tiwai@suse.com>,
- linux-kernel@vger.kernel.org,
- kernel@pyra-handheld.com,
- Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Jarkko Nikula <jarkko.nikula@bitmer.com>,
- Ethan Nelson-Moore <enelsonmoore@gmail.com>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <38ED9D73-7BF3-4005-8E1C-4F7125906A20@goldelico.com>
-References: <cover.1783749722.git.hns@goldelico.com>
- <f897f695c0e1e128d7ebb41be8dfdce4d634f552.1783749722.git.hns@goldelico.com>
- <anmpiADsvzW39DNx@aspen.lan>
- <DA9588C6-0238-4713-B1A1-CB2123F02028@goldelico.com>
- <20260810143914.64d29a5c@kemnade.info>
- <2C9844A3-3C4C-48E6-863D-BF8328CEE540@goldelico.com>
- <92FE1162-8C61-4186-B073-6AB4B2BDA640@goldelico.com>
- <20260810223413.01af9a6d@kemnade.info>
-To: Discussions about the Letux Kernel <letux-kernel@openphoenux.org>
-X-Mailer: Apple Mail (2.3826.700.81.1.8)
+MIME-Version: 1.0
+In-Reply-To: <20260810-zx29clk-v10-5-63846490712c@gmail.com>
+User-Agent: Mutt/2.4.0 (2026-06-19)
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: mkDqfntqqhYGZ6POoNNigaynCpFoNB2z4EHWlVQxU9k_1786398478
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
+On Mon, Aug 10, 2026 at 12:28:24AM +0300, Stefan Dösinger wrote:
+> The next patches will implement the regmap clocks and PLL driver. The
+> actual hardware specific clock listing will live in a separate module.
+> 
+> Signed-off-by: Stefan Dösinger <stefandoesinger@gmail.com>
 
-
-> Am 10.08.2026 um 22:34 schrieb Andreas Kemnade <andreas@kemnade.info>:
->=20
-> On Mon, 10 Aug 2026 20:30:13 +0200
-> "H. Nikolaus Schaller" <hns@goldelico.com> wrote:
->=20
->>>=20
->>> Yes that is what I mean. It needs to be ported somewhere. If it can =
-be ported to
->>> some compatible =3D "pwm_bl_for_tps61161" or what fits best it will =
-be fine. Or it
->>> could be in some compatible =3D "pandora_bl" driver.
->>>=20
->>> Has to be worked out when the development machines are not blocked =
-by 3 or 4 other
->>> projects already running in parallel :) =20
->>=20
->> Nevertheless I did a quick look into the pandora_bl driver structure.
->>=20
->> Here are my findings:
->> - the code fragment is part of pandora_backlight_update_status()
->> - priv->old_state remembers if brighness was set to 0 or not
->> - so this code triggers on any change from bright =3D 0 to bright > 0
->> - the pandora_bl driver is the only one to use TWL_MODULE_PWM besides =
-twl-pwm
->>=20
->> So the most natural way of transplanting this appears to me:
->> - add this logic to the twl-pwm driver
->=20
-> That chip could be connected to any pwm driver, so
-> it does not make sense to have that in a pwm driver.
-
-Well, the chip does not need a driver, at all - at least in PWM case.
-The missing piece is just about doing proper startup into PWM mode.
-
-> So it belongs into a backlight driver.
-
-Interesting how contrary requirements can be judged :) Especially
-for such simple things that apparently even work without any driver.
-
-> And since it shared so much
-> code with the pwm_bl, it could be extended.
-
-But how do you give the chip driver access to twl4030 registers?
-Or make it universal so that it works on any PWM generator? Any ideas?
-
-> The compatible should have pwm in the name to be able to also add
-> a w1 driver later.
-
-Ok, that is an argument to be considered.
-
-But: for multi-protocol chips (think of SPI and I2C) there are
-usually two drivers (or glue code for a core driver) for each
-protocol. So we can have one driver when connected to PWM and
-another being an EasyScale (which is not the standard one-wire
-protocol) driver.
-
-BTW: I am still not convinced that the chip needs an EasyScale
-client driver at all. The protocol is similar to an UART with
-fixed bit format. So this rather needs a generic host driver. Not a
-client driver. Something like baclkight levels -> easy-scale.
-Then you can connect any compatible chip.
-
-But even in this case the hardware connection requires you to
-patch or piggy-back that into the twl4030 pwm driver because that
-is the connection given by the Pandora hardware.
-
-So why not generating the simple startup sequence in the PWM driver?
-KISS...
-
-BR,
-Nikolaus
+Reviewed-by: Brian Masney <bmasney@redhat.com>
 
