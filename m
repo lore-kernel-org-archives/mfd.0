@@ -1,130 +1,167 @@
-Received: from mail2.andi.de1.cc (vmd64148.contaboserver.net [161.97.139.27])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0931C3D47BF
-	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 12:40:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=161.97.139.27
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 254F63C1974
+	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 12:48:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786365603; cv=none; b=tar1AsvkI+Z1kYj2kqFupgsTfrsgAD4f1WlM4zMbE3ZmB+b+8f+B4FTUJxqiEjSlukWZJA2j/RMdJFwdl8Llw3Zqwo9+q5k0B7c1mfFMyshbLvaQvcVEynXSbOHwF3IoCXPiK9OW9IrqzFYgKrV9qN8z4z4gMHqnNNiRjy6kvRo=
+	t=1786366087; cv=none; b=F34OYwfCcYDWACG25Zl377ftVunHJuYI0QogF4CdkX+TxqQTwr3Bb4gno6+lNUCbLuX1E85SFEqjMeygEF2JylgUFuBG4urT1eJm58shOgRDa52dO6wXhxMfjig6WMjVI25BxUINnDTK/H8/2Iq36kJ87dwFQ6MciLgj9Ii4Tjs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786365603; c=relaxed/simple;
-	bh=idY+TMDwbQ5ONQBtcS1ma7Z6izl5WGX4G7umMEjIKZM=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=pZawqWhxXFufGgXYaaXnt4gfnm5dY8J47+AXVsff9yd9cDbJ9/yLR9M7DtkqijbVgNt07AlusjFXOOGUOhTwUn+xmDv97Dm5JzRqFo2LIZa2gV8YOCTDKi/+pzOuoQZT7WlyZ4d7/NQfIIsePPLEwix7mnOdLKZbc2gBWZeFN0Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info; spf=pass smtp.mailfrom=kemnade.info; dkim=pass (2048-bit key) header.d=kemnade.info header.i=@kemnade.info header.b=aeJz0Icw; arc=none smtp.client-ip=161.97.139.27
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kemnade.info
+	s=arc-20240116; t=1786366087; c=relaxed/simple;
+	bh=qcohWEeYOzWUYNEukXbe7L4qe/ZkVW8nhrqE1L6yMXE=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=dzlE04EmSk1PXB8zETcnVpiCnC0iy0Hr0eDb0OxaFLU3bgbfUYzA8ma/K1Hj1UyZl3CHcc1OrwUYzLaFeRkNCC/qKXx2VMMaKeFaNfN3yHgUghH+zkxqz0eS+by/R21owKa3MWSf/vrld8ZgCgd/LwSonB3jzZ6e17xWkMuh7zw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FFUMNxqW; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kemnade.info header.i=@kemnade.info header.b="aeJz0Icw"
-Received: from mail.andi.de1.cc ([2a02:c205:3004:2154::1])
-	by mail2.andi.de1.cc with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.98.2)
-	(envelope-from <andreas@kemnade.info>)
-	id 1wtPIH-00000008nwh-2Gpd;
-	Mon, 10 Aug 2026 14:39:53 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=kemnade.info; s=20220719; h=References:In-Reply-To:Subject:Cc:To:From:
-	Reply-To:Content-ID:Content-Description;
-	bh=RY/1wmCxCIFM0LLRBnTLXmBpxbfVg0FeVcj6W7X9LH0=; t=1786365593; x=1787575193; 
-	b=aeJz0Icw32ILXHw/isUgvFEE3thFnDKHTYkPxJ1tQqFQaGirVtA2WTTCTIiqq2eDWtj7t6h2iqy
-	hu8D4/jmtGQq9u8bdoO+piawDaNLzBlvhlWBzeK+J+XP4aftwbzLcu8X643O1148cPPamqbtQIPzs
-	OqKD0/CScGVngJRJH1ckir6a+uqEi9kccuoTUsghbVlz1HxBBeFdNE8Q6MaCzLZVYKJQxg6gnTo0g
-	O5vTzlEdcK1BSId0UaXCwUDVZKOAzXnWGjuHv3MSgB/CsCqL4rq3SyAODKKsEciRdFMpd8gLmTIya
-	QYyWIxc7a8ko6w+VFrrtsJHkScl7CNYF8RRQ==;
-Date: Mon, 10 Aug 2026 14:39:14 +0200
-From: Andreas Kemnade <andreas@kemnade.info>
-To: "H. Nikolaus Schaller" <hns@goldelico.com>
-Cc: Daniel Thompson <danielt@kernel.org>, Grond <grond66@riseup.net>, Stefan
- Leichter <sle85276@gmx.de>, Grazvydas Ignotas <notasas@gmail.com>, Tony
- Lindgren <tony@atomide.com>, Ethan Nelson-Moore <enelsonmoore@gmail.com>,
- Jarkko Nikula <jarkko.nikula@bitmer.com>, Sascha Hauer
- <s.hauer@pengutronix.de>, Lee Jones <lee@kernel.org>, Rob Herring
- <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, Mark Brown
- <broonie@kernel.org>, Aaro Koskinen <aaro.koskinen@iki.fi>, Kevin Hilman
- <khilman@baylibre.com>, Roger Quadros <rogerq@kernel.org>, Russell King
- <linux@armlinux.org.uk>, Jingoo Han <jingoohan1@gmail.com>, Helge Deller
- <deller@gmx.de>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai
- <tiwai@suse.com>, Sen Wang <sen@ti.com>, Richard Fitzgerald
- <rf@opensource.cirrus.com>, Arnd Bergmann <arnd@arndb.de>, Srinivas
- Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, Kuninori Morimoto
- <kuninori.morimoto.gx@renesas.com>, Charles Keepax
- <ckeepax@opensource.cirrus.com>, Niranjan H Y <niranjan.hy@ti.com>,
- letux-kernel@openphoenux.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org,
- linux-omap@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- dri-devel@lists.freedesktop.org, linux-fbdev@vger.kernel.org,
- kernel@pyra-handheld.com, mfd@lists.linux.dev
-Subject: Re: [PATCH 15/16] backlight: remove pandora_bl
-Message-ID: <20260810143914.64d29a5c@kemnade.info>
-In-Reply-To: <DA9588C6-0238-4713-B1A1-CB2123F02028@goldelico.com>
-References: <cover.1783749722.git.hns@goldelico.com>
-	<f897f695c0e1e128d7ebb41be8dfdce4d634f552.1783749722.git.hns@goldelico.com>
-	<anmpiADsvzW39DNx@aspen.lan>
-	<DA9588C6-0238-4713-B1A1-CB2123F02028@goldelico.com>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; aarch64-unknown-linux-gnu)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FFUMNxqW"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C9C851F000E9;
+	Mon, 10 Aug 2026 12:48:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786366086;
+	bh=UsyLhBR3TfzBdpUDGdLRNLfMjDajA/J1e6/apV29cFU=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=FFUMNxqWmlmLjzY/W0pJ8q7NAMmzAZXurQSsVMSeLou31LlNkvN/ZKAGOM2CJvZph
+	 vgLZqyrQqQTbwlMphVvQONP7+z1iOUqHV2x86f1kaABLYBh9vP4CD7nKp3tJ1by9Mz
+	 AtUajXUWOnZqVtOTmCF1RP5TwyicIxxRYdzJji2HRO0XqNpjZpxD35AzYXI79s0rKG
+	 ugrGxybGGfrCkgyHXXAUUjzpIpB3mYLMnAqpHTpnmlA114gpdeNezwpV0P6gUViLro
+	 PVM/7A27xuOstDkT4M+nwHZTGoNI5hMncIM6xp3yCInIINj6ndwFSLWfcMQ/Fcfg02
+	 47WTwBfGMIPRQ==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH RFC v7 8/8] mfd: ls2kbmc: Capture the reset event of BMC
+ through GPIO
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Miao Wang" <shankerwangmiao@gmail.com>
+Cc: lee@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20260810-ls2kbmc-mod-v7-8-8aa0fb5a5462@gmail.com>
+References: <20260810-ls2kbmc-mod-v7-0-8aa0fb5a5462@gmail.com>
+ <20260810-ls2kbmc-mod-v7-8-8aa0fb5a5462@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Mon, 10 Aug 2026 12:48:05 +0000
+Message-Id: <20260810124805.C9C851F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
 
-On Mon, 10 Aug 2026 12:45:16 +0200
-"H. Nikolaus Schaller" <hns@goldelico.com> wrote:
+Thank you for your contribution! Sashiko AI review found 3 potential issue(=
+s) to consider:
 
-> Hi Daniel,
-> 
-> > Am 10.08.2026 um 12:35 schrieb Daniel Thompson <danielt@kernel.org>:
-> > 
-> > On Sat, Jul 11, 2026 at 08:02:02AM +0200, H. Nikolaus Schaller wrote:  
-> >> Retire the platform specific pandora backlight driver since
-> >> it can now be replaced by twl_pm and device tree.
-> >> 
-> >> Signed-off-by: H. Nikolaus Schaller <hns@goldelico.com>  
-> > 
-> > Yay!
-> > 
-> > Reviewed-by: Daniel Thompson (RISCstar) <danielt@kernel.org>  
-> 
-> Well, there were some good comments by Sahiko to the prerequisites of this patch,
-> because it has one speciality the PWM BL driver does not handle (avoid
-> interpretation of PWM signals as W1 protocol).
-> 
-> I haven't found time to work on this, so we can't remove this yet.
-> 
-> In the end it may either remain a pandora_bl driver (converted to DT)
-> or become a patch for something else.
-> 
-But then it is a TPS61161 on top of PWM, not a pandora driver.
-And then there might be just a quirk for that chip in the pwm_bl using
-triggered by a compatible. I guess the quirk is this:
+New issues:
+- [High] Overwriting an error pointer with NULL before evaluating PTR_ERR()=
+ silently masks probe failures and skips interrupt setup.
 
+Pre-existing issues:
+- [High] Dynamic mutation of the global `mfd_cell` array violates MFD guide=
+lines and creates race conditions.
+- [High] The shared interrupt handler unconditionally returns IRQ_HANDLED w=
+ithout hardware verification, defeating spurious interrupt detection.
+--
 
-if (priv->old_state == PANDORABL_WAS_OFF) {
--		/*
--		 * set PWM duty cycle to max. TPS61161 seems to use this
--		 * to calibrate it's PWM sensitivity when it starts.
--		 */
--		twl_i2c_write_u8(TWL_MODULE_PWM, MAX_VALUE, TWL_PWM0_OFF);
--
--		/* first enable clock, then PWM0 out */
--		twl_i2c_read_u8(TWL4030_MODULE_INTBR, &r, TWL_INTBR_GPBR1);
--		r &= ~PWM0_ENABLE;
--		r |= PWM0_CLK_ENABLE;
--		twl_i2c_write_u8(TWL4030_MODULE_INTBR, r, TWL_INTBR_GPBR1);
--		r |= PWM0_ENABLE;
--		twl_i2c_write_u8(TWL4030_MODULE_INTBR, r, TWL_INTBR_GPBR1);
--
--		/*
--		 * TI made it very easy to enable digital control, so easy that
--		 * it often triggers unintentionally and disabes PWM control,
--		 * so wait until 1 wire mode detection window ends.
--		 */
--		usleep_range(2000, 10000);
--	}
+--- Patch [8]: [PATCH RFC v7 8/8] mfd: ls2kbmc: Capture the reset event of =
+BMC through GPIO ---
+commit 6a359b995e90c1c237ad1e2bbc3df19694c36a32
+Author: Miao Wang <shankerwangmiao@gmail.com>
 
-Regards,
-Andreas
+mfd: ls2kbmc: Capture the reset event of BMC through GPIO
+
+The reset event of BMC is captured through GPIO. This patch tries to find
+the GPIO through declared GPIO pin in the _CRS resources of the ACPI node,
+falling back to a fixed address if not found.
+
+> diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
+> index 5eea53f134215..fd2142d4991a4 100644
+> --- a/drivers/mfd/ls2k-bmc-core.c
+> +++ b/drivers/mfd/ls2k-bmc-core.c
+
+[ ... ]
+
+> @@ -402,44 +470,35 @@ static int ls2k_bmc_init(struct ls2k_bmc_ddata *dda=
+ta)
+>  		return ret;
+>  	}
+> =20
+> -	gpio_base =3D ioremap(LOONGSON_GPIO_REG_BASE, LOONGSON_GPIO_REG_SIZE);
+
+[ ... ]
+
+> -	/* Enable GPIO interrupts */
+> -	val =3D readl(gpio_base + LOONGSON_GPIO_INTEN);
+> -	writel(val | BIT(LS2K_BMC_RESET_GPIO), gpio_base + LOONGSON_GPIO_INTEN);
+> +	ddata->reset_gpio =3D devm_gpiod_get_index_optional(&pdev->dev, NULL, 0=
+, GPIOD_IN);
+> +	if (IS_ERR(ddata->reset_gpio)) {
+> +		ddata->reset_gpio =3D NULL;
+> +		return dev_err_probe(ddata->dev, PTR_ERR(ddata->reset_gpio),
+> +				     "Failed to get GPIO pin for reset signal\n");
+> +	}
+
+[Severity: High]
+Does this error path unintentionally return 0 (success) on failure?
+
+Because ddata->reset_gpio is explicitly set to NULL right before calling
+PTR_ERR(ddata->reset_gpio), the error code passed to dev_err_probe()
+evaluates to 0. This masks probe failures (like -EPROBE_DEFER) and causes
+ls2k_bmc_init() to succeed without configuring the interrupt.
+
+> +	if (ddata->reset_gpio =3D=3D NULL) {
+> +		ddata->reset_gpio =3D ls2k_bmc_find_gpio(ddata);
+> +		if (IS_ERR(ddata->reset_gpio)) {
+> +			ddata->reset_gpio =3D NULL;
+> +			return dev_err_probe(ddata->dev, PTR_ERR(ddata->reset_gpio),
+> +					     "Failed to find GPIO pin for reset signal\n");
+> +		}
+> +	}
+
+[Severity: High]
+Is this fallback path subject to the same pointer overwrite issue?
+
+Setting ddata->reset_gpio to NULL before calling PTR_ERR(ddata->reset_gpio)
+will also mask the error code returned from ls2k_bmc_find_gpio().
+
+[ ... ]
+
+[Severity: High]
+This isn't a bug introduced by this patch, but looking at ls2k_bmc_probe():
+
+ls2k_bmc_probe() {
+    struct simplefb_platform_data pd;
+    ...
+    ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data =3D &pd;
+    ls2k_bmc_cells[LS2K_BMC_DISPLAY].pdata_size =3D sizeof(pd);
+}
+
+Does this dynamically mutate the global ls2k_bmc_cells array with a pointer
+to a stack-allocated variable?
+
+The MFD subsystem guidelines require mfd_cell arrays to be static const.
+Mutating this globally could create a data race if multiple driver instances
+probe concurrently, and it leaves a dangling pointer in the global structure
+after the probe function returns.
+
+[Severity: High]
+This is also a pre-existing issue, but looking at the interrupt handler:
+
+ls2k_bmc_interrupt() {
+    ...
+    if (time_after(jiffies, last_jiffies + LS2K_BMC_INT_INTERVAL)) {
+        schedule_work(&ddata->bmc_reset_work);
+        last_jiffies =3D jiffies;
+    }
+
+    return IRQ_HANDLED;
+}
+
+Since devm_request_irq() is called with IRQF_SHARED, is it safe to
+unconditionally return IRQ_HANDLED without checking hardware registers to
+confirm the interrupt actually originated from the BMC?
+
+If another device on the shared IRQ line experiences an unhandled interrupt
+storm, this handler will falsely claim it. This prevents the kernel's
+spurious interrupt detector from disabling the stuck line, which can lead
+to a hard system lockup.
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260810-ls2kbmc-mo=
+d-v7-0-8aa0fb5a5462@gmail.com?part=3D8
