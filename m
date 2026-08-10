@@ -1,221 +1,107 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A1DA3D811E
-	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 12:37:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85E791AF0BB
+	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 12:38:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786365479; cv=none; b=lWN/URKTJ6rAGFbRP7EjHcI27aqXR3VB06koAZdtxa1/eczrklrUo8quiSNL6zlrhcelklCCHVYgKqBXAUVugviZQs1DYSVrlCfTZSi5CYz5XWakS1AdsyMFVOxYZZZmVib6OyMxJXmPt6zJIS5HFaEOB+xRc5vgvXk0y1sT4kk=
+	t=1786365506; cv=none; b=vDrwKCP2bwB99WpYdBNlLz7s0bNUcvEr1zl4Vg1ViTiND8sNxovJ2v57L31ywRLM5YXUKUoZPDtsxnvEmp56wqHAhicb7Hohi49slPTUakh8rfTckYq2XPtLgxxuVuGwgA2caDxlp3+dsKip//x57Fxc9ftd0RPgexxZPyFHf2g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786365479; c=relaxed/simple;
-	bh=XJ7UrIXiNBrCaq5f2hlRzTWGTu7QLAAHdly+4FiXAiI=;
+	s=arc-20240116; t=1786365506; c=relaxed/simple;
+	bh=nDOHhsoLT0mJc5sRmIawxdOD5yHbsUMrZD3Desux+nQ=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=E7tblgqjhkI8uDa9jxu1vMZSPXvMahK536uQLTrNCdwOY2w9ygqa2fDIc6fKKvt6m4Yuf+NlQKIoIoUZQiO4pNYicuORvTGCRV62vXVlXUT387PVUzKXSkNFEb2VRTJgdBWilxcJi1cwA2oW5SO8fPpQpf0kI/fO4OIAr0z60VI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RnFCTluu; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=oVi8mR40IV4orfrl/5I575JRvbEiw0IauuSE48Dq1jQnXK0FjZGskg0XsD7U68KcVX3pGiAnhK1C9NYVM+GmozC8JItHqqRE1OMycDliKCspXSh1WjM+ApTTM+pV2KFzrJLxmB3iHgm+3+j4j2KupApiw4Hfda9eit6LuQPFz34=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=o3eE9esg; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RnFCTluu"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9529A1F000E9;
-	Mon, 10 Aug 2026 12:37:57 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="o3eE9esg"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 02FEC1F00A3A;
+	Mon, 10 Aug 2026 12:38:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786365477;
-	bh=U20psO+4CNhMbhCA9IfjjCEpKbjsThajyVZbGdYyd6c=;
+	s=k20260515; t=1786365504;
+	bh=TwC5rJst8h9G9NGMRjnylL2MSc+oZPzKKyZHFzGPcCc=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=RnFCTluuthbwvhshThrbK8xH5jLF/RY4ybVcYjp3Ftd7lAeyrEndpHC+FctPOpI1l
-	 wz0z0on9LY6RoC1R1mIdP7v8dZuWKFdqPw+3MUGN+k1Kg603Qlb3o4sGdshCAb7LBG
-	 Bny6RmbGuLCNltSkPRvKje9aHdd5I2WK15N9DSH3BhHhfDm/9Bt9Ca5YaE+m+ZE1Mx
-	 8JQvDfkdbMs5dBD6m4pRCAczOWw7d8h3s0lutgM2Vn3haCn8dNchAxgJJgtGlfY2u7
-	 U2zJhsmQlD4aDY5kBipqc862qdfRN6PNAzGUGI5yC62GZK03IZ5Z7cReEZMrJaTEnd
-	 jMbuHx2Kw3fsw==
+	b=o3eE9esgdIpytPcH6w5kA18U8KlvPiv0gp+b7knCl5DJZ/QLypNwzRn48N7+4LsEo
+	 gtI7PHnNHqHGY0GtE3u2x8ll5+z8YROb4FksMLqD0S/3Z8mzqZ5Rha8dp6pSy1cVk8
+	 vVrvVATBPHYO3o6r4LDnpRuX8+s2douzccQKpYT3KjlllV2PgvR+KOc2lppuUWiaQm
+	 7b3y+yTzJPFoHgbNQwvOi24D6vXn4vvCHGj5xs9JGU0BuO730h1R0+sIRduxywTF8o
+	 /gIY9nrKKdlJMAViXnAhLkvuCpjQcbDDNlaS4sIV4NmCUC3E4qJLdrJQVxniLka3fv
+	 bskTtfSmC5a/Q==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RFC v7 3/8] mfd: ls2kbmc: Redraw using exported
- functions
+Subject: Re: [PATCH RFC v7 1/8] mfd: ls2kbmc: Make a copy when parsing mode
+ string
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Miao Wang" <shankerwangmiao@gmail.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260810-ls2kbmc-mod-v7-3-8aa0fb5a5462@gmail.com>
+In-Reply-To: <20260810-ls2kbmc-mod-v7-1-8aa0fb5a5462@gmail.com>
 References: <20260810-ls2kbmc-mod-v7-0-8aa0fb5a5462@gmail.com>
- <20260810-ls2kbmc-mod-v7-3-8aa0fb5a5462@gmail.com>
+ <20260810-ls2kbmc-mod-v7-1-8aa0fb5a5462@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Mon, 10 Aug 2026 12:37:56 +0000
-Message-Id: <20260810123757.9529A1F000E9@smtp.kernel.org>
+Date: Mon, 10 Aug 2026 12:38:23 +0000
+Message-Id: <20260810123824.02FEC1F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 5 potential issue(=
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
 
 Pre-existing issues:
-- [Critical] Lack of upper bound validation on framebuffer height allows ar=
-bitrary out-of-bounds MMIO writes.
-- [High] Missing workqueue cancellation causes a Use-After-Free of `ddata` =
-on driver unbind.
-- [High] Execution of a 10-second busy-loop and sleeping functions while lo=
-cal interrupts are disabled via `stop_machine()`, causing system lockups.
-- [High] The `mfd_cell` array is not `static const` and is dynamically muta=
-ted during probe, violating MFD guidelines and creating data races.
-- [High] Unsynchronized static IRQ throttling state causes a total loss of =
-interrupts for 5 minutes after boot.
+- [High] The driver modifies a static global `mfd_cell` array during probe,=
+ violating MFD guidelines and causing data races with potential stack Use-A=
+fter-Free.
 --
 
---- Patch [3]: [PATCH RFC v7 3/8] mfd: ls2kbmc: Redraw using exported funct=
-ions ---
-commit 531ceb3081c670493fc8de461efa630fc7f4d2e5
+--- Patch [1]: [PATCH RFC v7 1/8] mfd: ls2kbmc: Make a copy when parsing mo=
+de string ---
+commit 391ef025b41aeef2d29d627c04ca398a1673da60
 Author: Miao Wang <shankerwangmiao@gmail.com>
 
-mfd: ls2kbmc: Redraw using exported functions
-
-This commit updates the ls2kbmc driver to use standard console functions.
-It replaces the manual virtual terminal manipulation with console locking
-and the update_screen() function.
+mfd: ls2kbmc: Make a copy when parsing mode string
+   =20
+When parsing the mode string from BMC, the string is manipulated
+in-place with strsep(), preventing from parsing it again. Make a copy of
+the original string and manipulate the copy instead to fix this.
 
 > diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-> index 434db99ee501b..06ec8143d8cdb 100644
+> index 408056bfb2fe7..335590392240b 100644
 > --- a/drivers/mfd/ls2k-bmc-core.c
 > +++ b/drivers/mfd/ls2k-bmc-core.c
-> @@ -25,6 +25,7 @@
->  #include <linux/platform_device.h>
->  #include <linux/stop_machine.h>
->  #include <linux/vt_kern.h>
-> +#include <linux/console.h>
-> =20
+> @@ -427,34 +427,67 @@ static int ls2k_bmc_init(struct ls2k_bmc_ddata *dda=
+ta)
 [ ... ]
-> @@ -310,7 +311,9 @@ static void ls2k_bmc_events_fn(struct work_struct *wo=
-rk)
+>  static int ls2k_bmc_probe(struct pci_dev *dev, const struct pci_device_i=
+d *id)
+>  {
+>  	struct simplefb_platform_data pd;
+>  	struct ls2k_bmc_ddata *ddata;
+[ ... ]
+>  	ret =3D ls2k_bmc_parse_mode(dev, &pd);
+>  	if (ret)
+>  		return ret;
 > =20
->  	if (IS_ENABLED(CONFIG_VT)) {
->  		/* Re-push the display due to previous PCI-E loss. */
-> -		set_console(vt_move_to_console(MAX_NR_CONSOLES - 1, 1));
-> +		console_lock();
-> +		update_screen(vc_cons[fg_console].d);
-> +		console_unlock();
->  	}
->  }
+>  	ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data =3D &pd;
+>  	ls2k_bmc_cells[LS2K_BMC_DISPLAY].pdata_size =3D sizeof(pd);
 
 [Severity: High]
-This isn't a bug introduced by this patch, but is it possible for
-bmc_reset_work to execute after the ddata structure is freed?
+This isn't a bug introduced by this patch, but does modifying the global=20
+ls2k_bmc_cells array with a pointer to the local stack variable pd cause a=
+=20
+data race?
 
-The driver initializes bmc_reset_work without a corresponding unbind
-cancellation step:
+If multiple PCI devices probe concurrently, one thread could overwrite=20
+ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data with a pointer to its stack.
 
-ls2k_bmc_init() {
-    ...
-    INIT_WORK(&ddata->bmc_reset_work, ls2k_bmc_events_fn);
-    ...
-}
+This might result in another thread's devm_mfd_add_devices() call=20
+dereferencing a dangling pointer to a destroyed stack frame during its=20
+kmemdup() operation.
 
-Since there is no driver remove callback or managed action to cancel the
-work, devres will free the IRQ and then ddata on unbind. If the work is
-concurrently executing, can it access the freed ddata here in
-ls2k_bmc_events_fn()?
-
-ls2k_bmc_events_fn() {
-    struct ls2k_bmc_ddata *ddata =3D container_of(work, ...);
-    ...
-    stop_machine(ls2k_bmc_recover_pci_data, ddata, NULL);
-}
-
-[Severity: High]
-This is a pre-existing issue, but does executing stop_machine() here
-cause system lockups?
-
-ls2k_bmc_events_fn() {
-    ...
-    stop_machine(ls2k_bmc_recover_pci_data, ddata, NULL);
-    ...
-}
-
-The callback runs with local interrupts disabled across all CPUs.
-Inside this atomic context, the callback spins for 10 seconds:
-
-ls2k_bmc_recover_pci_data() {
-    ...
-    mdelay(LS2K_BMC_RESET_WAIT_TIME);
-    ...
-}
-
-It also invokes mapping operations that can sleep:
-
-ls2k_bmc_pcie_is_connected() {
-    ...
-    base =3D pci_iomap(parent, 0, LS7A_PCI_CFG_SIZE);
-    ...
-}
-
-Can this combination of mdelay and sleeping functions inside
-stop_machine() lead to deadlocks or watchdog panics?
-
-[Severity: High]
-This is a pre-existing issue, but does mutating ls2k_bmc_cells during
-probe create a data race and a dangling pointer?
-
-ls2k_bmc_probe() {
-    ...
-    ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data =3D &pd;
-    ls2k_bmc_cells[LS2K_BMC_DISPLAY].pdata_size =3D sizeof(pd);
-    ...
-}
-
-Since ls2k_bmc_cells is a shared global array and missing the const
-qualifier:
-
-static struct mfd_cell ls2k_bmc_cells[] =3D { ... };
-
-Assigning the address of a local stack variable (&pd) to platform_data
-leaves a dangling pointer once probe returns. Concurrent probes could
-also overwrite this shared global state. Could this be updated to use
-static const cell definitions to follow MFD guidelines?
-
-[Severity: High]
-This is a pre-existing issue, but does the interrupt handler drop events
-for the first 5 minutes after boot?
-
-ls2k_bmc_interrupt() {
-    static unsigned long last_jiffies;
-    ...
-    if (time_after(jiffies, last_jiffies + LS2K_BMC_INT_INTERVAL)) {
-        schedule_work(&ddata->bmc_reset_work);
-        last_jiffies =3D jiffies;
-    }
-    ...
-}
-
-At boot, jiffies initializes to a large negative number. Since
-last_jiffies is zero-initialized, time_after() evaluates to false
-until jiffies crosses zero, which takes about 5 minutes.
-
-Additionally, since last_jiffies is static and unsynchronized, could
-multiple device instances corrupt this shared throttling state?
-
-[Severity: Critical]
-This is a pre-existing issue, but does the lack of upper bound
-validation on the framebuffer height allow arbitrary out-of-bounds
-memory writes?
-
-ls2k_bmc_parse_mode() {
-    ...
-    ret =3D kstrtouint(strsep(&mode, "-"), 10, &pd->height);
-    if (ret)
-        goto invalid_mode;
-    ...
-    pd->stride =3D pd->width * depth / 8;
-    pd->format =3D depth =3D=3D 32 ? "a8r8g8b8" : "r5g6b5";
-    ...
-}
-
-The height is parsed from an untrusted string without an upper limit
-check against the 4MB maximum resource size.
-
-Since stride and height remain unbounded, the simplefb driver will
-configure a framebuffer using this huge geometry.
-
-When fbcon writes text to the console, can this calculate memory offsets
-that write far beyond the 4MB ioremap region?
+Could we avoid this by not dynamically modifying the static mfd_cell array=
+=20
+during probe?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260810-ls2kbmc-mo=
-d-v7-0-8aa0fb5a5462@gmail.com?part=3D3
+d-v7-0-8aa0fb5a5462@gmail.com?part=3D1
