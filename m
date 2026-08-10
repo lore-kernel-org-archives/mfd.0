@@ -1,167 +1,349 @@
-Received: from AS8PR04CU009.outbound.protection.outlook.com (mail-westeuropeazon11011015.outbound.protection.outlook.com [52.101.70.15])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3919335C69B
-	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 08:28:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.70.15
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786350525; cv=fail; b=lOgUt+NGICVb8NRWHbx5a1lTuS3uzpybLOyyO3kiyyf+aE7Jd7IYCJo54sKwCMwS1F1uYXo4m5DdlVaRgV2c7emVc6mIurx1oQy8TmvNhhN7UpvpSiqF+0IE8QLuhYZNFRzi1LBoPxJ078LWdn7ETM83CHFdFLvLqcj2guyzCdA=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786350525; c=relaxed/simple;
-	bh=6BMEIMlZa37M8EtauMAtkKlJy7+PbNfkYvBPTMkiRkg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:CC:References:From:
-	 In-Reply-To:Content-Type; b=aFDdsrjZ43Nv/aBzfK6KQfXDeSX/CMMkUXraWI2x8yPL2TmdMecdTtKKyq8MRPMWAQxliHttXXfBV01CFFVpDu2vb52+VDuFgnz5DoqsHpckn2bzRf6RRv9zlvVs92v/oG7v25H0w9/WkRLNB/OTtTLvgKjjj2bNxJbVxij1o8w=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=foss.st.com; spf=pass smtp.mailfrom=foss.st.com; dkim=pass (2048-bit key) header.d=foss.st.com header.i=@foss.st.com header.b=AClzcBp0; arc=fail smtp.client-ip=52.101.70.15
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=foss.st.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B53783B813F
+	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 10:14:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786356856; cv=none; b=Km+nTNnnYqWVP7wuAyMAauUZk+7Jokvy1QXYWts50liMr2c6K0qPIOurFhdykPgsnRJaeBHXJMnjdDgbiDGd7eATqXJH1RsKmXCeiK7YCli4JpIidy1MxvomA7yGmtHR5VLmcrH/aUmR4+kuq5KSlo/AzBxd/wEzpf994GEJefE=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786356856; c=relaxed/simple;
+	bh=IZfjOCDZda2QM4OsqzzZYlded+DNx+RlwJFGYaclHis=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=kIizpQx5pJCpbFNKJyDH+wAg0KTR2G5sH5Z1NCYopEI+dlTGHT+E0IuhC/Mzwx8GCKVl4h7Z22eXszYIaj4h3fVBJs00hwvZzPDxO7D4S43pMx9RKp1fW3WFUyY2aQvjyZPTDaEAKjSKkKGDMoRBJ7JLE0eHa1Pcf8GJEmeQh/E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aLaPmUis; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=foss.st.com header.i=@foss.st.com header.b="AClzcBp0"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ly+s73nND2BarILq4KoOml01agizUpgbfLnywRbIR9Yj+638cj3YuzJstZTYECzRrCRMSKmGabEv9vRGMnf/dOcU5yaoSqn0/wWxItmg9PFiNHuW58jRc9y2At7svJEnpH4/YVW+pyP9052R0XZ0cWA2Cmd4x4OAAbqQpINSMwFB8QblEysn676uGCkCCX7Q7EiFnPztUQSbKjUG524KO02ZUdzv9HKJz8BAQh1MN5xEHcSanbRE7P9A7LGBhKjjFGkIn3mkbOXn9Pch7InEil5svuSmFZIKzFNRjASS43D95QscwPIrwd2spv0o3TiWvv3Xe7Pd1yo7I5TdQ+YnuQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=b5YCkNgmJSvMkK+HRONYuUhvdfgZWXzie+VC3pLmtrY=;
- b=BezGTRcRUraCIQFujrrus6dw9+Dl+VviFHdksCfyJxYWU3lU2bwiORqL4kQ9AAW8DZA2/WSCtnNonNFuxG7BdJrfNq7agSgD5CNB/XPX3WFnCi03U+kumMwrYxP6ihWbYdRMMfADU1bC57NpxRrm2a/Xrl6cnUksIylB3wEYe2mI/wzOnzjEIPNe13VCJmZsu8Agne34671d8A3a6Ny8pV8Mnb/QR4Ox8/e2EczVxYvJ4PNYeBcT9M3DGJMNISeVFBT6FKWYk+EBmBkmhpRGipdLmUQ/9PhNV/lINxY/UVar/IDtQ8OHzCDvHpMnM8PgyJBdpPfO2S4I6KkENAsoXw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=outlook.com smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=b5YCkNgmJSvMkK+HRONYuUhvdfgZWXzie+VC3pLmtrY=;
- b=AClzcBp0c2jX+8MfsWybNjZu3ypvK94fyhAnkGEZX8nee2HGJK2RR1PmiecnJLpoGDMDr51BpB4bt4h0s5a23ocGQLVi1C530xbHy2hhWgrCAQ9PQ3RpKS0MeHVw9sWVWZqY2Gk+QBbbYiCATFbuufHPGlJiGvLu9mti8JPJXGHsvuUZrTro9qjo0t1IIvkuM/FQ7Ibc0n+6pP62wN2x4p4s5hm2EvMFhS/Zv2/7pmr+nZag+Lf433VtQvikDtaBbhuUe7W3KunafDAikCrImWCLWkFxEPfxIh01riGqUdeyWAIJYN3CK12VAQ8bySA9ZJnUnN4p3wV6nS1Hs2ZhwA==
-Received: from DB8PR04CA0008.eurprd04.prod.outlook.com (2603:10a6:10:110::18)
- by AM0PR10MB3332.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:208:17d::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Mon, 10 Aug
- 2026 08:28:36 +0000
-Received: from DU6PEPF00009524.eurprd02.prod.outlook.com
- (2603:10a6:10:110:cafe::5a) by DB8PR04CA0008.outlook.office365.com
- (2603:10a6:10:110::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.292.25 via Frontend Transport; Mon,
- 10 Aug 2026 08:28:36 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- DU6PEPF00009524.mail.protection.outlook.com (10.167.8.5) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.315.6 via Frontend Transport; Mon, 10 Aug 2026 08:28:36 +0000
-Received: from STKDAG1NODE2.st.com (10.75.128.133) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Mon, 10 Aug
- 2026 10:34:04 +0200
-Received: from [10.48.86.79] (10.48.86.79) by STKDAG1NODE2.st.com
- (10.75.128.133) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.43; Mon, 10 Aug
- 2026 10:28:34 +0200
-Message-ID: <6c926423-777e-475a-9e28-222d3fb5798e@foss.st.com>
-Date: Mon, 10 Aug 2026 10:28:33 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="aLaPmUis"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A4CD1F0155F
+	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 10:14:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786356854;
+	bh=WnBOfXGhtTI8rLENZpdOKZdlG3mosue/CTpAJ+tFpQk=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=aLaPmUis+9PoMaDyYWMloXEoYkGOAJQeO9QxXb/nRsOtVKeynjhf8b2SnJH+STHiv
+	 S9Rva1bAfxtiUd4oRN/9Z7qsFo2sBaQuG/9FC0pSkkdGpbbAxBLkWTDKQuHawz3n1I
+	 c8Cf0eT3ggm35C7RXkupk834ZqyWHlJUopsj+ERzniDgM+gyGZyfwQF777XuS6FjZU
+	 7pQA0Yv6YaZa7CdyZLANGWigS7lIK+O1ycUW9eRx9VePxt98n7Y8ArkeqnmxbwC1CK
+	 Nmk5+3ObGe3bxbBeuWj7ZdS5GOa20ULWA4VW5vQpvoIXd6X6qFc9G40wI2Damm1CHD
+	 2BcZA7UpeU7Rw==
+Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-5b2a4359d16so1451103e87.3
+        for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 03:14:14 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+Rox7x66+0Jf2ImnZsis3KWVQgo9YvgxVw3S8CAHXXDI+zX9J6qm1l2JGE0D+ALtAsXuxGg=@lists.linux.dev
+X-Gm-Message-State: AOJu0YycmKPCxYxnU81f1riN4KLqPiUyNgsE1gWZBxoq6GGHCUkW5nRz
+	moRa2VwOfNH95daCrvbMkCm4Dbh7A+rV2uITIG2UyR40wAz9qP0L5BhllqQFv6O4y/AEUvr2x8O
+	NfRw3SAirqM7v9OiyZePQmcGYDaNGKoPcxFbnkYZSbw==
+X-Received: by 2002:a05:6512:12d2:b0:5b1:5fb6:5cf6 with SMTP id
+ 2adb3069b0e04-5b3181a640amr101620e87.17.1786356852951; Mon, 10 Aug 2026
+ 03:14:12 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 10 Aug 2026 05:14:11 -0500
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 10 Aug 2026 05:14:11 -0500
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260805-ls2kbmc-mod-v6-7-16ccde412d86@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RESEND 0/9] ARM: stm32: add STM32H7R7 and ART-Pi2 support
-To: Liu Changjie <liucj1228@outlook.com>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Michael Turquette
-	<mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, Brian Masney
-	<bmasney@redhat.com>, Lee Jones <lee@kernel.org>, Dario Binacchi
-	<dario.binacchi@amarulasolutions.com>, Antonio Borneo
-	<antonio.borneo@foss.st.com>, Linus Walleij <linusw@kernel.org>, Russell King
-	<linux@armlinux.org.uk>, Jonathan Corbet <corbet@lwn.net>, Shuah Khan
-	<skhan@linuxfoundation.org>
-CC: <devicetree@vger.kernel.org>, <linux-stm32@st-md-mailman.stormreply.com>,
-	<linux-arm-kernel@lists.infradead.org>, <linux-kernel@vger.kernel.org>,
-	<linux-clk@vger.kernel.org>, <mfd@lists.linux.dev>,
-	<linux-gpio@vger.kernel.org>, <linux-doc@vger.kernel.org>
-References: <MN0PR19MB60912FA1E75E4E55B2E27D34ACCD2@MN0PR19MB6091.namprd19.prod.outlook.com>
-Content-Language: en-US
-From: Alexandre TORGUE <alexandre.torgue@foss.st.com>
-In-Reply-To: <MN0PR19MB60912FA1E75E4E55B2E27D34ACCD2@MN0PR19MB6091.namprd19.prod.outlook.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE2.st.com
- (10.75.128.133)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU6PEPF00009524:EE_|AM0PR10MB3332:EE_
-X-MS-Office365-Filtering-Correlation-Id: d86437f6-c596-4a24-58e5-08def6b95f50
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|82310400026|36860700016|7416014|23010399003|32650700020|11063799006|10067099003|56012099006|6133799003|3023799007|22082099003|18002099003|921020;
-X-Microsoft-Antispam-Message-Info:
-	e6RFKTsbjWGzZoqeIvViHcLBeQ3ECZqHNLkVR4TyAcuqesz22qvE5X3mzMLgbOeOHy1MuSHoCOsXKVqT3aGhs+JpTr7jRju9LqWDnZkcvSBGa3BunFT2OREsrPDven2x9q4Afvoc/6Ky/5V1i2p7O80MCL4M7nP8mUaGPKESQ0RaOV6/U4GtW/u/Df7WSeg8hlt71ulwhzmEOEumtI3Mm9ixcu+ljzpx8ke4JgSvf1N4HymTmDLMXXTvVi907OR2LkPc0jDxYIKDx/tq+T27nkYSEpvnRqjnQABMmyDQYorLfAZbl3RuO7fvYcWF2ZLm/WCQqaekk/TttvHX1+DEfqQapuz7vSc5l+mAmlcH2Y4gH0M0KFA7e6PMQrBh4aAALovloMgGya2Af+l+YZTqhdk+4+K/0GgvnllVNYhsKS2P+x+YRXdGH/OB9Z2iraO5khpl+iLoFxh93qUjFjqWW6NKMPSEBF3ZyKtvodxeidEIZiDiz0ieX0zlKvVu+sAJ1zNLEN6JzwoMbVsrQGETbKw9RTs6RlSpTV90M2bvcrzNRKX6NM17Nj1ziwPeqxiJZrDtqqO4mFIaOoFBy351MlX+LVuQHrvE1kntXYzLmnbMZ+Efr127S4jwrtG2HuRGBvMka0/1W3gDzduqxQt1stYHPE/Ss0J+dLOQ+hLvkrb2yqwx/IasM5rlH5jZf7e7looPvr6VW8qHdUQ3DKWELKjnS0uhCZMiWqE7PvcU31HBmzbBncKFzwBHg7jkFqKW
-X-Forefront-Antispam-Report:
-	CIP:164.130.1.59;CTRY:IT;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:smtpO365.st.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(82310400026)(36860700016)(7416014)(23010399003)(32650700020)(11063799006)(10067099003)(56012099006)(6133799003)(3023799007)(22082099003)(18002099003)(921020);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	j5tPkNwWD90FUCGSMmdnvqtu0S11IAbK3NFPZMUhBy1DzrzpJxwQPRxlXq+topp6cXLyNvOTu1UWt7t8n/GQlvIoP2XlOF9iCQ+HolO5rCx3f5+LhaiztFrCz85nTW6oGWEZO2BQQWJZNgGlbFU90NgCL5vx8yrsHxRA7tFccQZWLUgCrjqgNUzRPjuyfMGSzgqtozYSbQRC5YfOs+OHsB+MMaZXsUTRwB1Jz5babesd4ZWOz7nS0dKB31C7DECPBPGpMYT9fqYpMbaz/DVYYLu0Z9ZjPyHTOw+HWKRFpXo2kISN1JlDIEHFSmlGpo5zm9g1fb3E/r0ejJnD/u2m816w6Tmr1Z5U9L0tt0G+ecgO4nO8SdgXXJNIcxu/323yzDIpktLLxl5daGUEaCiaZ/x4L9B2qAFkPdcjlt0GMRQOPavylj9rUsUD6JeR8tYc
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Aug 2026 08:28:36.0491
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d86437f6-c596-4a24-58e5-08def6b95f50
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f;Ip=[164.130.1.59];Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DU6PEPF00009524.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR10MB3332
+References: <20260805-ls2kbmc-mod-v6-0-16ccde412d86@gmail.com> <20260805-ls2kbmc-mod-v6-7-16ccde412d86@gmail.com>
+Date: Mon, 10 Aug 2026 05:14:11 -0500
+X-Gmail-Original-Message-ID: <CAMRc=Me0DVNYfZJYesvpzTwkVzYZyVzNH+aOAM+DojfV_M9mww@mail.gmail.com>
+X-Gm-Features: AUfX_mzZRCuYVh1IibpEgjsa3wIe1G7ZEocHFOzRorAtuAKLbmR4TjxTIG77wKQ
+Message-ID: <CAMRc=Me0DVNYfZJYesvpzTwkVzYZyVzNH+aOAM+DojfV_M9mww@mail.gmail.com>
+Subject: Re: [PATCH RFC v6 7/7] mfd: ls2kbmc: Capture the reset event of BMC
+ through GPIO
+To: shankerwangmiao@gmail.com
+Cc: Miao Wang via B4 Relay <devnull+shankerwangmiao.gmail.com@kernel.org>, 
+	Xi Ruoyao <xry111@xry111.site>, WANG Xuerui <kernel@xen0n.name>, Yinbo Zhu <zhuyinbo@loongson.cn>, 
+	Jiaxun Yang <jiaxun.yang@flygoat.com>, mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
+	linux-gpio@vger.kernel.org, openipmi-developer@lists.sourceforge.net, 
+	Binbin Zhou <zhoubinbin@loongson.cn>, Chong Qiao <qiaochong@loongson.cn>, 
+	Lee Jones <lee@kernel.org>, Huacai Chen <chenhuacai@kernel.org>, 
+	Corey Minyard <corey@minyard.net>, Linus Walleij <linusw@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Liu
+On Tue, 4 Aug 2026 21:14:25 +0200, Miao Wang via B4 Relay
+<devnull+shankerwangmiao.gmail.com@kernel.org> said:
+> From: Miao Wang <shankerwangmiao@gmail.com>
+>
+> The reset event of BMC is captured through GPIO. However, this driver
+> bypasses the GPIO framework and directly accesses the GPIO controller
+> through the fixed address. When the same GPIO controller is also
+> exposed through ACPI and probed by the corresponding GPIO driver,
+> there would be a conflict between the two drivers.
+>
+> This patch will try to find the GPIO through declared GPIO pin in the
+> _CRS resources of the ACPI node. If no such delaration is found, the
+> driver will fall back to search for the correct GPIO controller and pin
+> according to the fixed address and pin number. A possible DSDT
+> declaration for the GPIO pin might be as follows:
+>
+>     Device (BMC0) {
+>         Name (_ADR, ...) // Match the PCI address of the BMC device
+>         // \_SB.GPO1 is the ACPI path of the GPIO controller
+>         Name (_CRS, ResourceTemplate () {
+>             GpioInt (Edge, ActiveLow, Exclusive, PullNone, 0,
+>                      "\\_SB.GPO1", 0) {
+>                 14 // 14 is the GPIO pin number
+>             }
+>     }
+>
+> Signed-off-by: Miao Wang <shankerwangmiao@gmail.com>
+> ---
+>  drivers/mfd/ls2k-bmc-core.c | 163 +++++++++++++++++++++++++++++++-------------
+>  1 file changed, 116 insertions(+), 47 deletions(-)
+>
+> diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
+> index e7bebfe696ac4554eb6283279811a27ed865ab73..97a666a136fe41ed4268cb70770201533aebb1d5 100644
+> --- a/drivers/mfd/ls2k-bmc-core.c
+> +++ b/drivers/mfd/ls2k-bmc-core.c
+> @@ -26,6 +26,10 @@
+>  #include <linux/stop_machine.h>
+>  #include <linux/vt_kern.h>
+>  #include <linux/console.h>
+> +#include <linux/gpio/consumer.h>
+> +#include <linux/gpio/driver.h>
+> +#include <linux/gpio/property.h>
+> +#include <linux/gpio/machine.h>
+>
+>  /* LS2K BMC resources */
+>  #define LS2K_DISPLAY_RES_START		(SZ_16M + SZ_2M)
+> @@ -81,18 +85,6 @@
+>
+>  #define PCI_REG_STRIDE			0x4
+>
+> -#define LS2K_BMC_RESET_GPIO		14
+> -#define LOONGSON_GPIO_REG_BASE		0x1FE00500
+> -#define LOONGSON_GPIO_REG_SIZE		0x18
+> -#define LOONGSON_GPIO_OEN		0x0
+> -#define LOONGSON_GPIO_FUNC		0x4
+> -#define LOONGSON_GPIO_INTPOL		0x10
+> -#define LOONGSON_GPIO_INTEN		0x14
+> -
+> -#define LOONGSON_IO_INT_BASE		16
+> -#define LS2K_BMC_RESET_GPIO_INT_VEC	(LS2K_BMC_RESET_GPIO % 8)
+> -#define LS2K_BMC_RESET_GPIO_GSI		(LOONGSON_IO_INT_BASE + LS2K_BMC_RESET_GPIO_INT_VEC)
+> -
+>  enum {
+>  	LS2K_BMC_DISPLAY,
+>  	LS2K_BMC_IPMI0,
+> @@ -186,6 +178,7 @@ struct ls2k_bmc_ddata {
+>  	struct work_struct bmc_reset_work;
+>  	struct ls2k_bmc_pci_data bmc_pci_data;
+>  	struct ls2k_bmc_bridge_pci_data bridge_pci_data;
+> +	struct gpio_desc *reset_gpio;
+>  };
+>
+>  static bool ls2k_bmc_bar0_addr_is_set(struct pci_dev *pdev)
+> @@ -375,6 +368,91 @@ static void ls2k_bmc_save_pci_data(struct pci_dev *pdev, struct ls2k_bmc_ddata *
+>  	pci_read_config_dword(pdev, PCI_INTERRUPT_LINE, &ddata->bmc_pci_data.interrupt_line);
+>  }
+>
+> +static struct fwnode_handle *gpio_dev_get_fwnode(struct gpio_device *gdev)
+> +{
+> +	struct device *gdev_dev;
+> +
+> +	gdev_dev = gpio_device_to_device(gdev);
+> +	return dev_fwnode(gdev_dev);
 
-On 7/26/26 17:49, Liu Changjie wrote:
-> Resending to repair threading after Outlook rewrote the cover Message-ID
-> during SMTP submission. Patch contents are unchanged.
-> Add initial mainline support for the STM32H7R7 and the Ruiside ART-Pi2
-> development board.
-> 
-> The ART-Pi2 boots through first-stage firmware in the STM32 internal flash.
-> That firmware configures the PLLs and memory interfaces before Linux
-> executes in place from external XSPI NOR, with 32 MiB of HyperRAM used as
-> system RAM.  Reprogramming the PLLs from Linux could therefore stop the
-> instruction stream.
-> 
-> The RCC driver in this series intentionally reconstructs the active clock
-> rates from the firmware-programmed RCC registers.  It exposes the resulting
-> SYSCLK, bus, timer, UART and SDMMC clocks, while Linux owns only the
-> peripheral clock gates used by the initial device tree.  It also exposes
-> the RCC reset registers through the existing reset-simple driver.  The
-> first reset consumer is SDMMC1.
-> 
-> The pinctrl driver covers GPIOA-H and GPIOM-P, including the AF0 trace
-> functions described by the STM32H7RS pin-control data.  The board device
-> tree enables UART4, TIM5, twelve GPIO banks, two LEDs, the user button and
-> the four-bit SDMMC1 interface used by the microSD socket.  The socket has
-> no card detect signal connected to the MCU, so the board uses broken-cd.
-> 
-> ARM noMMU selects DMA_GLOBAL_POOL.  The board therefore reserves a 2 MiB
-> shared DMA pool for the SDMMC internal DMA descriptor and bounce buffer.
-> The pool is required before the mainline mmci-pl18x driver can probe.
-> 
-Please, have a look on this series from Arnd:
+You can just do a one-liner:
 
-https://lore.kernel.org/all/20260701212353.2196041-1-arnd@kernel.org/
+	return dev_fwnode(gpio_device_to_device(gdev));
 
-"Regarding actually removing the code, I would suggest linux-7.4 (January
-2027), removing both the board files and any drivers that have either
-become newly unused or were missed in a previous machine removal series,
-followed by removing support for then unused CPUs a release later."
+> +}
+> +
+> +static int ls2k_bmc_gpiochip_find(struct gpio_chip *gc, const void *data)
+> +{
+> +	struct acpi_device *adev;
+> +	struct list_head resource_list;
+> +	struct resource_entry *rentry;
+> +	struct fwnode_handle *fwnode = gpio_dev_get_fwnode(gc->gpiodev);
+> +	phys_addr_t start_addr = (phys_addr_t) data;
+> +	int ret, found = 0;
+> +
+> +	if (!is_acpi_node(fwnode))
+> +		goto out;
+> +
+> +	adev = to_acpi_device_node(fwnode);
+> +	if (!adev)
+> +		goto out;
+> +
+> +	INIT_LIST_HEAD(&resource_list);
+> +
+> +	ret = acpi_dev_get_memory_resources(adev, &resource_list);
+> +	if (ret < 0)
+> +		goto out;
+> +	/*
+> +	 * ACPI memory resources are ordered and only the first one is
+> +	 * considered by the driver of the expected GPIO controller. So
+> +	 * here we also only check the first one to see if it matches the
+> +	 * expected address.
+> +	 */
+> +	rentry = list_first_entry_or_null(&resource_list, struct resource_entry, node);
+> +	if (!rentry)
+> +		goto free_resource_list;
+> +	if (rentry->res->start == start_addr)
+> +		found = 1;
+> +
+> +free_resource_list:
+> +	acpi_dev_free_resource_list(&resource_list);
+> +out:
+> +	return found;
+> +}
+> +
+> +static struct gpio_desc *ls2k_bmc_find_gpio(struct ls2k_bmc_ddata *ddata)
+> +{
+> +	/*
+> +	 * In conventional way, the GPIO should be obtained through ACPI or
+> +	 * device tree. However, when the information is not available,
+> +	 * we should find the GPIO according to the convention of the server
+> +	 * boards with LS2K BMC, the gpio signal reflecting the reset event
+> +	 * of the BMC should be connected to pin 14 of the GPIO input of
+> +	 * the first CPU node. The address of that GPIO controller is fixed.
+> +	 */
+> +	static const phys_addr_t LOONGSON_GPIO_REG_BASE = 0x1FE00500;
+> +	static const unsigned int LS2K_BMC_RESET_GPIO = 14;
+> +	int ret;
+> +	struct gpio_device *gdev __free(gpio_device_put) = NULL;
 
-To be short, cortex-v7M CPUs are now deprecated and board support will be
-deleting beginning of next year.
+Please declare the variable where you initialize it when using __free().
 
-So, I'll not take new cortex-v7M board.
+> +	struct property_entry ls2k_bmc_swnode_properties[2] = { 0 };
 
-regards
-Alex
+Prefer `= { };`.
+
+> +
+> +	dev_dbg(ddata->dev, "Searching for GPIO chip at address %pa\n", &LOONGSON_GPIO_REG_BASE);
+> +
+> +	gdev = gpio_device_find((void *)LOONGSON_GPIO_REG_BASE, ls2k_bmc_gpiochip_find);
+> +
+
+No need for a blank line here.
+
+> +	if (!gdev) {
+> +		dev_dbg(ddata->dev, "cannot find GPIO chip at address %pa, deferring\n",
+> +			&LOONGSON_GPIO_REG_BASE);
+> +		return ERR_PTR(-EPROBE_DEFER);
+> +	}
+> +
+> +	ls2k_bmc_swnode_properties[0] = PROPERTY_ENTRY_GPIO("gpio",
+> +		gpio_dev_get_fwnode(gdev), LS2K_BMC_RESET_GPIO, GPIO_ACTIVE_HIGH);
+
+TBH this could become a GPIOLIB function as gpio_device_get_fwnode().
+
+> +
+> +	ret = device_create_managed_software_node(ddata->dev, ls2k_bmc_swnode_properties, NULL);
+> +	if (ret) {
+> +		dev_err(ddata->dev, "Failed to create software node for GPIO reset: %d\n", ret);
+> +		return ERR_PTR(ret);
+
+return dev_err_probe()? This can only be called from probe().
+
+> +	}
+> +
+> +	return devm_gpiod_get_index(ddata->dev, NULL, 0, GPIOD_IN);
+> +}
+> +
+>  static void ls2k_bmc_cancel_wq(void *data)
+>  {
+>  	struct ls2k_bmc_ddata *ddata = data;
+> @@ -384,8 +462,7 @@ static void ls2k_bmc_cancel_wq(void *data)
+>  static int ls2k_bmc_init(struct ls2k_bmc_ddata *ddata)
+>  {
+>  	struct pci_dev *pdev = to_pci_dev(ddata->dev);
+> -	void __iomem *gpio_base;
+> -	int gpio_irq, ret, val;
+> +	int gpio_irq, ret;
+>
+>  	ls2k_bmc_save_pci_data(pdev, ddata);
+>
+> @@ -402,44 +479,36 @@ static int ls2k_bmc_init(struct ls2k_bmc_ddata *ddata)
+>  		return ret;
+>  	}
+>
+> -	gpio_base = ioremap(LOONGSON_GPIO_REG_BASE, LOONGSON_GPIO_REG_SIZE);
+> -	if (!gpio_base)
+> -		return -ENOMEM;
+> -
+> -	/* Disable GPIO output */
+> -	val = readl(gpio_base + LOONGSON_GPIO_OEN);
+> -	writel(val | BIT(LS2K_BMC_RESET_GPIO), gpio_base + LOONGSON_GPIO_OEN);
+> -
+> -	/* Enable GPIO functionality */
+> -	val = readl(gpio_base + LOONGSON_GPIO_FUNC);
+> -	writel(val & ~BIT(LS2K_BMC_RESET_GPIO), gpio_base + LOONGSON_GPIO_FUNC);
+> -
+> -	/* Set GPIO interrupts to low-level active */
+> -	val = readl(gpio_base + LOONGSON_GPIO_INTPOL);
+> -	writel(val & ~BIT(LS2K_BMC_RESET_GPIO), gpio_base + LOONGSON_GPIO_INTPOL);
+> -
+> -	/* Enable GPIO interrupts */
+> -	val = readl(gpio_base + LOONGSON_GPIO_INTEN);
+> -	writel(val | BIT(LS2K_BMC_RESET_GPIO), gpio_base + LOONGSON_GPIO_INTEN);
+> +	ddata->reset_gpio = devm_gpiod_get_index_optional(&pdev->dev, NULL, 0, GPIOD_IN);
+> +	if (IS_ERR(ddata->reset_gpio)) {
+> +		ret = PTR_ERR(ddata->reset_gpio);
+> +		ddata->reset_gpio = NULL;
+> +		return dev_err_probe(ddata->dev, ret, "Failed to get GPIO pin for reset signal\n");
+> +	}
+> +	if (ddata->reset_gpio == NULL) {
+> +		ddata->reset_gpio = ls2k_bmc_find_gpio(ddata);
+> +		if (IS_ERR(ddata->reset_gpio)) {
+> +			ret = PTR_ERR(ddata->reset_gpio);
+> +			ddata->reset_gpio = NULL;
+> +			return dev_err_probe(ddata->dev, ret,
+> +					     "Failed to find GPIO pin for reset signal\n");
+
+Why not just:
+
+	return dev_err_probe(ddata->dev, PTR_ERR(ddata->reset_gpio), ...)?
+
+> +		}
+> +	}
+>
+> -	iounmap(gpio_base);
+> +	gpio_irq = gpiod_to_irq(ddata->reset_gpio);
+>
+> -	/*
+> -	 * Since gpio_chip->to_irq is not implemented in the Loongson-3 GPIO driver,
+> -	 * acpi_register_gsi() is used to obtain the GPIO IRQ. The GPIO interrupt is a
+> -	 * watchdog interrupt that is triggered when the BMC resets.
+> -	 */
+> -	gpio_irq = acpi_register_gsi(NULL, LS2K_BMC_RESET_GPIO_GSI, ACPI_EDGE_SENSITIVE,
+> -				     ACPI_ACTIVE_LOW);
+>  	if (gpio_irq < 0)
+> -		return gpio_irq;
+> +		return dev_err_probe(ddata->dev, gpio_irq,
+> +				     "Failed to get IRQ for GPIO reset signal input\n");
+>
+> -	ret = devm_request_irq(ddata->dev, gpio_irq, ls2k_bmc_interrupt,
+> -			       IRQF_SHARED | IRQF_TRIGGER_FALLING, "ls2kbmc gpio", ddata);
+> -	if (ret)
+> -		dev_err(ddata->dev, "Failed to request LS2KBMC GPIO IRQ %d.\n", gpio_irq);
+> +	ret = devm_request_irq(&pdev->dev, gpio_irq, ls2k_bmc_interrupt,
+> +			       IRQF_SHARED | IRQF_TRIGGER_FALLING, "ls2kbmc reset", ddata);
+> +
+> +	if (ret != 0)
+> +		return dev_err_probe(ddata->dev, ret,
+> +				     "Failed to request IRQ %d for GPIO reset signal input.\n",
+> +				     gpio_irq);
+>
+> -	acpi_unregister_gsi(LS2K_BMC_RESET_GPIO_GSI);
+>  	return ret;
+>  }
+>
+>
+> --
+> 2.49.0
+>
+>
+>
+
+
+Obviously this is ugly but I understand the need for this workaround so with
+the issues above addressed, this will work for me.
+
+Bart
