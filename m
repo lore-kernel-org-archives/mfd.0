@@ -1,59 +1,96 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 836B71531E8;
-	Mon, 10 Aug 2026 07:11:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52BA33A7F70;
+	Mon, 10 Aug 2026 07:12:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786345884; cv=none; b=EbStNl/4BluW3hP26TOLRVGeblhx/OOGx7kGBFZZ/86FWmkbOq+YLRR+yf1kDmBIdv6VoO9OaIJrGqkoh5W+s+NnLvhHxhno56dRrAxwB2U7NstiQ6bBCdVXZMXUYw/Oj8CQLdKTxyYnPFCpQcfn9X7c4GNAKLrT05PBG4jOhG0=
+	t=1786345946; cv=none; b=P2DRLEOEcxst9ofxhbGb4rqftld/YTEwp2yUGbsDTiirzBb+VRHTFKR3uvV9XDvUZoEe1dwUn+JbN+/KpTnnUPC86yechawX1VjUVEJYBT+y0SgsNYqYS/s9jHyBUfUFlSEWwQ3kmRAHfvb2C/qc+qyvj7gRKQ2WJ5oSRLWMnxk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786345884; c=relaxed/simple;
-	bh=lW3zJJwLmzYDz5SFrMRO3XErykbKpFqesISfjZ2rsuM=;
+	s=arc-20240116; t=1786345946; c=relaxed/simple;
+	bh=vxjn0kstIXphSQ7W/hFJBifcLcOmmYk8j+356HbPZGk=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=ORXIWQvBv5oGeUwNltXWjfL6e7F+0bmUS6IU8hsGbQD0BUnIQHhPHDvNdfFMH15OY/2TDd/wmM3+BcO5UzlgZjXVnDHiiStWgUNF20w61VRxLqQRNVyH/oU8taf2hI9tq+PEo4vRzfvCgQpLDNE8CJENwevRx/m6+NQ0JrgDT5o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ubc3TEJG; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=c9QGPT84pdWRS14zU1UkhDYHx4lVN+xOtdIbP4QVUgrLueZULpwAxVFsVYyIYJcLp6rY9Bjxfn3gUWgSieVVZmM/WEa1ewzunMz6UspS+E1LsnV51wRnkpVpvjYKcgfeGzSpcouwJKdRXZHhShU10mi0OC4UVkFhDzwgLLg8RHA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ObxNGGLD; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ubc3TEJG"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 91C581F000E9;
-	Mon, 10 Aug 2026 07:11:22 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ObxNGGLD"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5AA301F00A3A;
+	Mon, 10 Aug 2026 07:12:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786345883;
-	bh=lW3zJJwLmzYDz5SFrMRO3XErykbKpFqesISfjZ2rsuM=;
+	s=k20260515; t=1786345944;
+	bh=ukEbMDHXvbvSJkelE8ZUEfN7cPr40c3734omGYGVXMM=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Ubc3TEJGwmUVtKWNOXJG9ks8hHqYK2ETOPGK35NKB9ZGEIKdlBcqQpbha+C2Weql6
-	 lR2B3ebAkuHB4tZ7nPZp8iBTogA64/0yrvssQVde1QthZ71T6EWBh7kjYYu3v6vnbQ
-	 azNw6farn4DCn4VzWae2P4eJOsFcsJSSy5UhbyBaB8HYT63ilesJvSU27l0Ff8kIms
-	 o6WyfBwa+N+XU0hog3kTUFYzl8NZ9VTpS4f57f8zFy+OcItmtRY3khRO4XR7d/6MFQ
-	 4gwI6eq3RVpMLLymaN5gYsY9QS0NiijEsESzrDhR51m3rptILv9XbOWkR5w3yI7prr
-	 J0f7v8C95S6OQ==
+	b=ObxNGGLD5WKJ4lM8TJgkoU5VvUFFqBYeyq4a5nqYj9EoLJ9dMvg7eavcPGuPzhigo
+	 ynGr22TE6i3gtQg6v+iubiWBRDmdMVQQC4ZCWN4rm5oHAs4XyQ4kM4h1+VgtF3Zeso
+	 3Bd/xOtqECYiq3rhkHKjcSQ0b32s/K8zN27oeda1y5CqYBnKIbwJ2oRJf5j5ANHbx2
+	 CbvtHYUThGqrpgUVgKISpWHvM00wY7jVsMZP3AjzIB4uKNbHDZuo6cDURtxyg20VcP
+	 IAnzH1TmTbTDvH9DPuucmdEa+UedTcr/oVga83HdydiNRXQ9QaWFRMEfVG68Rp+KWS
+	 eWpg34dQvRgpQ==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v10 12/12] ARM: dts: zte: Declare zx297520v3 CRM device
- nodes
+Subject: Re: [PATCH v10 01/12] dt-bindings: clk: zte: Add zx297520v3 top
+ clock and reset controller
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?U3RlZmFuIETDtnNpbmdlcg==?= <stefandoesinger@gmail.com>
-Cc: devicetree@vger.kernel.org, robh@kernel.org, neil.armstrong@linaro.org, olteanv@gmail.com, conor+dt@kernel.org, linux-phy@lists.infradead.org, lee@kernel.org, vkoul@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260810070311.1110849-1-stefandoesinger@gmail.com>
+Cc: robh@kernel.org, vkoul@kernel.org, devicetree@vger.kernel.org, lee@kernel.org, neil.armstrong@linaro.org, linux-phy@lists.infradead.org, olteanv@gmail.com, conor+dt@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20260810-zx29clk-v10-1-63846490712c@gmail.com>
 References: <20260810-zx29clk-v10-0-63846490712c@gmail.com>
- <20260810070311.1110849-1-stefandoesinger@gmail.com>
+ <20260810-zx29clk-v10-1-63846490712c@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Mon, 10 Aug 2026 07:11:22 +0000
-Message-Id: <20260810071122.91C581F000E9@smtp.kernel.org>
+Date: Mon, 10 Aug 2026 07:12:23 +0000
+Message-Id: <20260810071224.5AA301F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-> This makes use of the driver added in the previous patches. It wires up
-> the uart clocks and resets and allows getting rid of the placeholder
-> uartclk node.
->=20
-> Signed-off-by: Stefan D=C3=B6singer <stefandoesinger@gmail.com>
+Thank you for your contribution! Sashiko AI review found 2 potential issue(=
+s) to consider:
+- [Medium] Missing `resets` property definition in the YAML schema.
+- [Medium] Missing `simple-mfd` in compatible string list for syscon with c=
+hildren.
+--
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+--- Patch [1]: [PATCH v10 01/12] dt-bindings: clk: zte: Add zx297520v3 top =
+clock and reset controller ---
+commit 882e8225886a115922ab8c1c6e5b59390b7d1aa8
+Author: Stefan D=C3=B6singer <stefandoesinger@gmail.com>
+
+dt-bindings: clk: zte: Add zx297520v3 top clock and reset controller
+
+This commit adds the device tree binding schema for the zx297520v3 top clock
+and reset controller. It details the required oscillators, clock outputs, P=
+HY
+controls, and includes a child node for syscon-reboot functionality.
+
+> diff --git a/Documentation/devicetree/bindings/clock/zte,zx297520v3-topcr=
+m.yaml b/Documentation/devicetree/bindings/clock/zte,zx297520v3-topcrm.yaml
+> new file mode 100644
+> index 0000000000000..8510ffde29249
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/clock/zte,zx297520v3-topcrm.yaml
+[ ... ]
+> +properties:
+> +  compatible:
+> +    items:
+> +      - const: zte,zx297520v3-topcrm
+> +      - const: syscon
+
+[Severity: Medium]
+This binding includes a syscon-reboot child node, but restricts the compati=
+ble
+strings to just the specific topcrm string and "syscon". Without "simple-mf=
+d"
+in the compatible list, will the kernel's generic platform code fail to
+automatically probe the reboot child node?
+
+[Severity: Medium]
+The commit message mentions a self-referencing reset property, but the
+"resets" property is not explicitly defined in this properties block. Since
+the schema later sets additionalProperties: false, will device trees
+utilizing this self-referencing reset fail dtbs_check schema validation?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260810-zx29clk-v1=
-0-0-63846490712c@gmail.com?part=3D12
-
+0-0-63846490712c@gmail.com?part=3D1
