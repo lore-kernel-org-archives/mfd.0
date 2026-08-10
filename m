@@ -1,146 +1,109 @@
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail2.andi.de1.cc (vmd64148.contaboserver.net [161.97.139.27])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 423AE4398F4
-	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 18:49:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EACF3644CA
+	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 20:34:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=161.97.139.27
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786387784; cv=none; b=lJRYHVG7dPFzw9Em9A+nSuLKkc5PkhJwZvKDekEAMYSLk6FtV4hWh12avJl1YomrF+1WTzv4369+b1J9vCONoXNDSYjGOinXeI5hW/kB64Kx6vcu4F+hxBMY8py/qpjBGbNh2AZUJm3siWsdr2gLvWVb/fzuti1iGJelQim6Jrs=
+	t=1786394091; cv=none; b=JktFOEUGUo88moNqZOBUr5cVZMe2C4WvC84VSt7RJkxgIdZ3ZecuPvrLcEOlenBLL47JjorK3JD9DhLU9T+LNfISSQ1x5t85q15pmb49YdRKYECuhY5x3B2q+mP8IQalB8y9ol3MnPgvS/wfvktU9PSkmSE3QwAsmO8V/d6tsJ8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786387784; c=relaxed/simple;
-	bh=hAQbiBdb/L8L3hFDxA7tlwzLJflj/1mJe11rh+xIi38=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=tbHLoWoKXAhsMXhm7AiPimfznRljRw5CmG3yk1iEyfFjqU+O+6UaBUR5vPXJ8SSx54BVR4J+Gn/YwaFK1WyHQGsOCKcIZS/gg/Oh3CBhPW5HWWwnTu3xMYPD7zzrJAKaO+rLSR8eT1kP49LdQdJVWOcL9AoN6Hy/XsNBDBw/bB8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZIfGDdTx; arc=none smtp.client-ip=209.85.221.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1786394091; c=relaxed/simple;
+	bh=Z//gjbzolO0j9Ht17OZ+pUqamuxMGAP6Onswa//Ty8s=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=L5YkHmUOxnCuoN4lVLzvdiqNlNWIdpRXt6BAoa7wtbNHXqEYazdjpd/mmkEkJvrb1ZAf9U1pMCUxSUqrcGGMdKTiKVetLVdmMSU4+KsoY0eBWwmkh0UlqehGlmPtUltsHZ9SemhIhLCg8kwHWziyWKLb72V/V5SA62Wp4gThHco=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info; spf=pass smtp.mailfrom=kemnade.info; dkim=pass (2048-bit key) header.d=kemnade.info header.i=@kemnade.info header.b=7oNLAliP; arc=none smtp.client-ip=161.97.139.27
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kemnade.info
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZIfGDdTx"
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-476a130c138so2109506f8f.0
-        for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 11:49:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786387781; x=1786992581; darn=lists.linux.dev;
-        h=content-type:mime-version:references:in-reply-to:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=dcLbXw1HtxaVkLOq1A7ImeYJkGmUUOjnz1hGZ+5xdjY=;
-        b=ZIfGDdTxH/eoURpKJJFnT+/peAHHrhSi3XE7/FQRuIVDJnw5hvqfUBjesiBuLQjUVM
-         GMr1Yc4ZLEKfSecBEhpUC3nemNmpvCdfbhlXJWpmKemls3cRNI2XQ6kiGEJ6NDqZJnsy
-         qfWj3dIJ6dAfH2lWaFH4aZui0eEb+ZfIiyc/y+kCNKwKmX1TxEJa7WMd8kuq+aGMAnGo
-         XQTlB8sTZ/1qUTNcYsqtFL4Pql3/vOafsU/RVNEgjaID8p4gIybFkerqeazh7UO7zsBp
-         t521WMSGaSROuAxxFG0EH6ZCiyaRhwOl+7mlOQXDui/awF29IZo2ZxMdeXpw4ueCFSwP
-         fCsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786387781; x=1786992581;
-        h=content-type:mime-version:references:in-reply-to:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=dcLbXw1HtxaVkLOq1A7ImeYJkGmUUOjnz1hGZ+5xdjY=;
-        b=qK52kVLD3ekLLuDFt0kUGX8piMHuKRhNv/VjwEvlkYTSLg3ucO1EsdU6lXZ34eiGJJ
-         SZYRQEM6S40xSivwzb44o/ianAh8+8M+dWtFphbI1fq5noMAfIZy5L0/17ElsJipJbgq
-         +CirERGJ2uHrXjNu3DgPecKmV4NC9heNgfuAj3JIpegIBLEfVwAsYcrG9f7t7x4p2Qt5
-         pMPQ5IddnNtmQW3dOOHkpN2Xv3bP9cXiPooMey3LCGXgQ7jIipQR5p2hZKW92HnBKmi7
-         +vrvgg2B19IHmPtGScprBe7TDIdnRPzeVRuP1U9oUEWhPko1BDV92rjct7xExgyzxH4S
-         k2ag==
-X-Forwarded-Encrypted: i=1; AHgh+Rq2G/RDgzpyBTXG+2fwpCe2DwVBz4ESoxkS7tCHGGKA5Tv5GlfC81k56+X7JN6vFcHR6Sg=@lists.linux.dev
-X-Gm-Message-State: AOJu0Yyaoy+CP2ArDwVluCi2bvGgkt1UlRnsAXTY7d4mMKRlNQOBinZj
-	jeegyTIpmWG7pCZeWBvk2dXua197IQs0GaBP+2GdYsAI2M2prjFACVT5
-X-Gm-Gg: AR+sD10/5GGkw16h4Cn5gcV8k9fq7yYg6MbVWgFgpgl1b7lDOzDYKHn9+bVMxbTeICu
-	w8R8BfePiDD1tGmimhYj0n5dWFHpmg4CWtdKcExa5mbr8CMvlKI40//XZrXgjwrwozNPAiHqDW4
-	BkhaL22D4cQ9EbinK/XwGJd77zvdqXG06gEVrFFgBmn9ewdogRY/wjlQQVjbKguu0iWwQC6uL0u
-	pxf6XP2BuElrfcNXexY6s3fcmtPI7jFcZfqGoUqmWorxuhOxPPVo/86ZIkkOYNM+h0XNojpkPvd
-	xRS+UAjEKbWnFzz+TjfVrv2L8/RwcxxeWgAy3VsVoOO300e6g22boq/ZnTFLeuYgWmq7Th2srQ9
-	HOG43yVFQ7yABRkrVjyZBiyj/ZFpl5F5DJ+pPOuJQlRjuYVF2dlVSFJQWvpBWgUw54PqiLwqrAe
-	NOnaq1aNetQdGXZYAayZ7ggO3YMAxOfId9CzcZKoAUVXLPjgt7Gdo4FUqvx2bEZctJzHc1oK6p
-X-Received: by 2002:adf:f4c9:0:b0:47f:f3f9:ae37 with SMTP id ffacd0b85a97d-47ffd21da75mr38161242f8f.7.1786387781329;
-        Mon, 10 Aug 2026 11:49:41 -0700 (PDT)
-Received: from strix.localnet ([197.250.226.68])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48002206effsm33568215f8f.32.2026.08.10.11.49.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Aug 2026 11:49:40 -0700 (PDT)
-From: Stefan =?UTF-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>
-To: sashiko-reviews@lists.linux.dev, Rob Herring <robh@kernel.org>
-Cc: vkoul@kernel.org, devicetree@vger.kernel.org, lee@kernel.org,
- neil.armstrong@linaro.org, linux-phy@lists.infradead.org, olteanv@gmail.com,
- conor+dt@kernel.org, mfd@lists.linux.dev
-Subject:
- Re: [PATCH v10 01/12] dt-bindings: clk: zte: Add zx297520v3 top clock and
- reset controller
-Date: Mon, 10 Aug 2026 21:49:27 +0300
-Message-ID: <gypuIvsORyye1Tbviu_vVQ@gmail.com>
-In-Reply-To: <20260810153805.GA1793660-robh@kernel.org>
-References:
- <20260810-zx29clk-v10-0-63846490712c@gmail.com>
- <20260810071224.5AA301F00A3A@smtp.kernel.org>
- <20260810153805.GA1793660-robh@kernel.org>
+	dkim=pass (2048-bit key) header.d=kemnade.info header.i=@kemnade.info header.b="7oNLAliP"
+Received: from mail.andi.de1.cc ([2a02:c205:3004:2154::1])
+	by mail2.andi.de1.cc with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.98.2)
+	(envelope-from <andreas@kemnade.info>)
+	id 1wtWhr-0000000BpEY-1okH;
+	Mon, 10 Aug 2026 22:34:47 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=kemnade.info; s=20220719; h=References:In-Reply-To:Subject:Cc:To:From:
+	Reply-To:Content-ID:Content-Description;
+	bh=5fkRRQESuJogTJbUlw1TtnlKX+cyZWiGY0fHfzIT9Xw=; t=1786394087; x=1787603687; 
+	b=7oNLAliPd+dORjeZyRnmWrYouZ3Ddhinc3O7QWJRR7V4eZgWn10m9ODxVcU/0GZVxzGwJAXzY/b
+	OsBz8sv9aWdoMES/6XOSganyWSQCuq++GFXrbzVrV1HsgOECFkbLTMVOwgbh2mB7B4sk4tXuaObIq
+	f9D3lHfrj2PpNllamzEYIov6g0GEYPQPWRSGnD2XbY8GPZZ+d6xCIVkEOsVM5G33wLFxM5Ued1UgD
+	9LHpPEKWiHcWKdtiMMkIwtzmMfbSQ0MFrdX0G2+i6hsxNzKcSIUyByVZZgMCw4VPNIdD2g2pXZb5M
+	bI8AB7brid63mcq+vEwTVLPi/WvGdyv58iYQ==;
+Date: Mon, 10 Aug 2026 22:34:13 +0200
+From: Andreas Kemnade <andreas@kemnade.info>
+To: "H. Nikolaus Schaller" <hns@goldelico.com>
+Cc: Daniel Thompson <danielt@kernel.org>, Grond <grond66@riseup.net>, Stefan
+ Leichter <sle85276@gmx.de>, Grazvydas Ignotas <notasas@gmail.com>, Tony
+ Lindgren <tony@atomide.com>, Ethan Nelson-Moore <enelsonmoore@gmail.com>,
+ Jarkko Nikula <jarkko.nikula@bitmer.com>, Sascha Hauer
+ <s.hauer@pengutronix.de>, Lee Jones <lee@kernel.org>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, Mark Brown
+ <broonie@kernel.org>, Aaro Koskinen <aaro.koskinen@iki.fi>, Kevin Hilman
+ <khilman@baylibre.com>, Roger Quadros <rogerq@kernel.org>, Russell King
+ <linux@armlinux.org.uk>, Jingoo Han <jingoohan1@gmail.com>, Helge Deller
+ <deller@gmx.de>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai
+ <tiwai@suse.com>, Sen Wang <sen@ti.com>, Richard Fitzgerald
+ <rf@opensource.cirrus.com>, Arnd Bergmann <arnd@arndb.de>, Srinivas
+ Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, Kuninori Morimoto
+ <kuninori.morimoto.gx@renesas.com>, Charles Keepax
+ <ckeepax@opensource.cirrus.com>, Niranjan H Y <niranjan.hy@ti.com>,
+ letux-kernel@openphoenux.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org,
+ linux-omap@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ dri-devel@lists.freedesktop.org, linux-fbdev@vger.kernel.org,
+ kernel@pyra-handheld.com, mfd@lists.linux.dev
+Subject: Re: [PATCH 15/16] backlight: remove pandora_bl
+Message-ID: <20260810223413.01af9a6d@kemnade.info>
+In-Reply-To: <92FE1162-8C61-4186-B073-6AB4B2BDA640@goldelico.com>
+References: <cover.1783749722.git.hns@goldelico.com>
+	<f897f695c0e1e128d7ebb41be8dfdce4d634f552.1783749722.git.hns@goldelico.com>
+	<anmpiADsvzW39DNx@aspen.lan>
+	<DA9588C6-0238-4713-B1A1-CB2123F02028@goldelico.com>
+	<20260810143914.64d29a5c@kemnade.info>
+	<2C9844A3-3C4C-48E6-863D-BF8328CEE540@goldelico.com>
+	<92FE1162-8C61-4186-B073-6AB4B2BDA640@goldelico.com>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; aarch64-unknown-linux-gnu)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="nextPartnjexxywtRIihZLyUay2Kiw";
- micalg="pgp-sha256"; protocol="application/pgp-signature"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
---nextPartnjexxywtRIihZLyUay2Kiw
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="utf-8"; protected-headers="v1"
-From: Stefan =?UTF-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>
-To: sashiko-reviews@lists.linux.dev, Rob Herring <robh@kernel.org>
-Date: Mon, 10 Aug 2026 21:49:27 +0300
-Message-ID: <gypuIvsORyye1Tbviu_vVQ@gmail.com>
-In-Reply-To: <20260810153805.GA1793660-robh@kernel.org>
-MIME-Version: 1.0
+On Mon, 10 Aug 2026 20:30:13 +0200
+"H. Nikolaus Schaller" <hns@goldelico.com> wrote:
 
-Am Montag, 10. August 2026, 18:38:05 Ostafrikanische Zeit schrieb Rob Herring:
-> On Mon, Aug 10, 2026 at 07:12:23AM +0000, sashiko-bot@kernel.org wrote:
-> > Thank you for your contribution! Sashiko AI review found 2 potential
-> > issue(s) to consider: - [Medium] Missing `resets` property definition in
-> > the YAML schema. - [Medium] Missing `simple-mfd` in compatible string
-> > list for syscon with children.
-> Neither of these look valid to me.
+> > 
+> > Yes that is what I mean. It needs to be ported somewhere. If it can be ported to
+> > some compatible = "pwm_bl_for_tps61161" or what fits best it will be fine. Or it
+> > could be in some compatible = "pandora_bl" driver.
+> > 
+> > Has to be worked out when the development machines are not blocked by 3 or 4 other
+> > projects already running in parallel :)  
+> 
+> Nevertheless I did a quick look into the pandora_bl driver structure.
+> 
+> Here are my findings:
+> - the code fragment is part of pandora_backlight_update_status()
+> - priv->old_state remembers if brighness was set to 0 or not
+> - so this code triggers on any change from bright = 0 to bright > 0
+> - the pandora_bl driver is the only one to use TWL_MODULE_PWM besides twl-pwm
+> 
+> So the most natural way of transplanting this appears to me:
+> - add this logic to the twl-pwm driver
 
-Yeah, I removed the resets property in response to Krzysztof's feedback [0]. 
-And the syscon-reboot is registered by the MFD driver, which in turn goes back 
-to Conor's suggestion at [1].
+That chip could be connected to any pwm driver, so
+it does not make sense to have that in a pwm driver.
 
-Should I reply to the list when I think Sashiko produced a false warning? In a 
-way it feels like fighting windmills, as it will likely bring up the same 
-warning for further patch revisions.
+So it belongs into a backlight driver. And since it shared so much
+code with the pwm_bl, it could be extended.
+The compatible should have pwm in the name to be able to also add
+a w1 driver later.
 
-It does find a lot of real problems though and as a newbie contributor I feel 
-like it is a valuable tool.
-
-Cheers,
-Stefan
-
-0: https://lore.kernel.org/linux-arm-kernel/20260717-uncovered-feathered-groundhog-eab16e@quoll/
-1: https://lore.kernel.org/linux-arm-kernel/20260617-deed-snap-4649ffae0e27@spud/
-
---nextPartnjexxywtRIihZLyUay2Kiw
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
-
------BEGIN PGP SIGNATURE-----
-
-iQJPBAABCAA5FiEEQxb0tqoFWyeVMl1sPRO8yFRPGiIFAmp6HTcbFIAAAAAABAAO
-bWFudTIsMi41KzEuMTIsMiwyAAoJED0TvMhUTxoi6FgQAKm9IYOLqegfSaVNChHC
-dp6j7VY8B5nPtUGsRfYZo5T7Vf3pKufABFbR1iabCxwC2IB3jXx1qz+24mCXVDHo
-XuRq29BeEeDNBoHh7GNUkTagt+HRHV79yD4tiBNvfH6Mly2NHUeIOOoZ8ZRi8TmH
-I25u5EuZmqCO10wGs7DDbq5ak8DeNsQvk+MQFLxzi7DOdW6UzDv5enNFEoSPj5JW
-tMuj2EoKw+LIT12rkhXAPpUroKtHknKtl+SKolXU1ZjNOgxMdIgRKd5EsTMCWqWe
-Xyi47x2kKDp0a/wSX2kBMUOQZn645dEQPKyAiB7uwEBQIA8PQoxuB2+wBZqXpQ1z
-PE4JW1aAPI5uo+ru6LAMss467ZiK4eejRNWoLsnyVaaO49VwtCjdQftqPI2xC/Dv
-+4aDMhJWJ6+VXFLC9HMC4lz5hggYHrsLfeMARDvyt8YSRrW6+Joh6bjGx5vxt011
-h/FLE4TsK++xPYar9OjtpXLNN2HPi2EBibVVWP4pXWCcm0mIuKXa3jNANUObUBAe
-0z54JE4GKVlIvZTRsqUUlzk/pnQLE1KwLZ5oX4O79537YTkQzjBNmGRZh0NM1SmP
-quoWwa8alZw0Eb9GRPZOFstwiFhvB9mzis3/j6KSeHekWUIyhHfrKhl9wFbezAA4
-wZpFmf+iiVSkrDq/xp/ft93Y
-=7cJL
------END PGP SIGNATURE-----
-
---nextPartnjexxywtRIihZLyUay2Kiw--
-
-
-
+Regards,
+Andreas
