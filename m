@@ -1,440 +1,215 @@
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EBFAE3A451F
-	for <mfd@lists.linux.dev>; Sun,  9 Aug 2026 21:29:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88C45353A65
+	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 05:41:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786310989; cv=none; b=iNYnhNgwjx/AHoWcJ96bUFizEprKMhfjRVvqkTIaJJ7zMfgfx5YWv2Qq0DnBf1bCqLBnBgTHiCegkAOYHv0kzf4LwuWL6/6lV9fzZLUHHOmHmyhWdTr3ppSRCHgJYiuHcj4krdDC2hkey5oxjsZh3miUDuxY7olMRX2ut8+XUpU=
+	t=1786340518; cv=none; b=Uod4ngps4iEFMomfUQh6VLdpoCMNQjmGU5LNlj+icCKjl0YNdzpQiMrarwQqpSUOi2hvlxTx4nMQOtPNkWHMsM00XKh7mvqnEKxshVcvgH5SsF/V21irVizVE6DwI6rwZAvuzxsOoryOz6JZGMh0rXCcpnXQdY352XAfgbDj/XU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786310989; c=relaxed/simple;
-	bh=ZZxckeyA6AJLvKy/8WrFsTFoBp0n9ndwCOBIkhLTkNM=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=UbJepSMgl8U0qG19vxbei9bLKP+h31rCnK2X3G6WXXqXcfLGShGNSVm6bWxBZSMxmOkq//P2xn24eIC0dtcGur97yOFt9VDPODXrZcDS2gio8tro2joDUyIDsw8Au7SJ5a6ZuOgcjUTln8JzqYOrZkNjV1JBsnzmU14OTDVq65Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=OUDXTy0v; arc=none smtp.client-ip=209.85.128.41
+	s=arc-20240116; t=1786340518; c=relaxed/simple;
+	bh=D0o5SJTwXluNVzLqxh1DrcA6buYS0D5p+5EasedrgvY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=jH2S/IXvh3v8ga4IunyocJHuHEf8Ys7dqjVKiimLLZMeuRokQejXsgfvZBTNju657X40Wyp4rY66Djq1wUWbUBkH9BTLsOyZAXoKXkbZ0K5h18MzgHbeRWXblz8n1M0Aj1Qnc9fvRwpygeMekOPP3j3RA1N/v7nnvvep5SuzNhM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=b+Zs09xG; arc=none smtp.client-ip=209.85.167.53
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="OUDXTy0v"
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-49556f97a9dso8125565e9.1
-        for <mfd@lists.linux.dev>; Sun, 09 Aug 2026 14:29:45 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="b+Zs09xG"
+Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-5b01cb18515so1322861e87.2
+        for <mfd@lists.linux.dev>; Sun, 09 Aug 2026 22:41:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786310984; x=1786915784; darn=lists.linux.dev;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=cNYQmWR/t+zQADZCU9tCe+GnxduSNSckEGbwvFCqSSs=;
-        b=OUDXTy0v1LWUFKLDzGNlTf4+/YDhfTYMitU/jwQrLX/rFmVxDJ0oXdpb1T2FesGadt
-         +/XnXPkbN6tvukMIMlBd4kkOFP9nfzDlxti5vH7R1faJVw40lfOBa/eSOMFwVuZ0KVr5
-         S7JOC/xApqC/HtK9LpONaps1bknEzYVasPhtYMw+PDKfV7lf85XM79cy6xR7PGbIxPmm
-         I4UJvGAxgsH5QQ07df6mnWeRoZJNiSUmKk29RgZGhiEdNGEBoyPvHzAybh5qXdihT/II
-         /gFtJOPnVQqhHXkE5PEvCB+LZ67e3XFsMYr4UaMK0pRI4cyRi1vAMSitLFMVUuqFGcem
-         OYgQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786310984; x=1786915784;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20251104; t=1786340514; x=1786945314; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=cNYQmWR/t+zQADZCU9tCe+GnxduSNSckEGbwvFCqSSs=;
-        b=Z9HAyB8ulgnBn42UwmYVHXxsHZpuCVcN2iWj17RNXkTP74SXp2JNUGSPzcrKabXo6U
-         smokqRJxhiGSsEYf7eHzsIEgzPxw/DIygr7PH/IDq9SSMn1n7pAKp03vyeEoCD07pBhF
-         +lVSL4G87hUfXq7FuzJ1xNDwxOZPD09o229PbnML7/JzaLzvzxuo3hqCYutpEZGnYFPL
-         F8bwr1R8tJK+CoegvAHjSm7m8cctKSL+keCnqA71eHOB8rnexVFTKOfrCTY4c/BPd+N4
-         +b+XiyFDsFZ/OBbla/F7i8fe/eAzIfbTXZ0NtVktY5S174qtTIurB4z34RCTe9VU7W3n
-         gCYA==
-X-Forwarded-Encrypted: i=1; AHgh+RrSYFikqIMChF+1td+bPsta4l0YeeVDMAzMsMuPOTImP92R937LI1Ynx2Xymkf44xqKTos=@lists.linux.dev
-X-Gm-Message-State: AOJu0YzjQZLkaXtvTEmOdKh13w6l/6hOvIZpHVJoxGSuRf2uHmZmw/D9
-	Q4KG90XvdjsdcLDPtlQESFnBTMkepeCQsuPGEpP0ovuSrDnHjz0hUSbW
-X-Gm-Gg: AR+sD13qT5BAR34csvPl8LBGJH8jJkU2HQhsqQHqpF2tJjZqYPzFAoAaFj1eoEjxNFw
-	9urIGnX/CBPLvADVM2vCSw7f+Afe+iBCWW58ghqWzfqH+3G9pwbHZf4q7fEv4lU6X9dPxiwSGZG
-	Feq5fKWGr7JBC0MvZ2MWav/+3WbYi2Vn3W+wGuiLOzklQ0m6md21cbHuaxo60hnMbOJbpRsz/1l
-	ZSXbTF9CJK5jGtNBbbtz6kkII7hAn3qhek3+wyzRcBvuwZgjxAmffdoYB+3HCr3AGspVZ1ALrQz
-	8ZlxZjw4u++wJpsS+XL+R69xD+EhOlWhyrPv4tUEFlFyR9vorr2gbydus2VpJ7xILku7etleYwm
-	vrmCfRWu6IJTcSsYgxp2SBr12CKZDjW9ml7gECbZBqkFKaHOGkDf1DQmanbSfRpaStKfaWpJ7V4
-	Z/oJUYx5b64Fk5g496zOXQ5yMuFeEem+3E7x2qVGZUcxFAlsml0pazAzI9ZR2KmMABXJu8poPFw
-	YfHYMkp8Q==
-X-Received: by 2002:a05:600c:630c:b0:499:4d4a:4990 with SMTP id 5b1f17b1804b1-4994e74566bmr402235205e9.3.1786310984187;
-        Sun, 09 Aug 2026 14:29:44 -0700 (PDT)
-Received: from [192.168.0.2] ([197.250.226.68])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-480021e8c5asm28987451f8f.18.2026.08.09.14.29.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 Aug 2026 14:29:43 -0700 (PDT)
-From: =?utf-8?q?Stefan_D=C3=B6singer?= <stefandoesinger@gmail.com>
-Date: Mon, 10 Aug 2026 00:28:30 +0300
-Subject: [PATCH v10 11/12] reset: zte: Add a zx297520v3 reset driver
+        bh=9P5dyYkRO7MIgVHZdpUNXFuXh3XDJtlZIqvMU+tJYAw=;
+        b=b+Zs09xGvjtBAKQsVlUIEQqJcL1B34O7iz+nBrEmdvXzSWECaakxLVmMbfkqwCkmsE
+         b8OY7MGxPQz+Vy2hxCS2ZkDsDXfgHtCmONnAEpMKHOpjoE/L2dQS1Q34a7wQNjB+IAV+
+         +xvxXECx3yhHrAXcTDW7Xyg3q0tchUSqRDSAms3pxjOvSDQ7/LR2Eg985XPBTOeQNsCi
+         ToSPqG6GhNT9lIUKo2eQCymdv3SaeVnXnDgVdZAHQOYsW6g0BCgBCZ9QpyZEbpBz2Or8
+         DFaqqYBevQNbbfjmv3ObDDNjIN/27yAYLiu5gHF4vVzzXY79h06Z5jP4M084rierGc9W
+         sXwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786340514; x=1786945314;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=9P5dyYkRO7MIgVHZdpUNXFuXh3XDJtlZIqvMU+tJYAw=;
+        b=OdaTagd/kI4m9FA62+Om2Ht/rxPazNcCpPyquEwUfnrd3PUP5lb0V7z6VbddqSCS1f
+         X5nWMxsLHIqukJixHOJ/SGMY+wWABdY3Gx3oAf67JSfDJ1cDV+cKVyFn6KmNsuA3aH1V
+         reG4XBZDb2rvSpVSasSevNj6CzBrGr9gCFoj/LIsYVueR/AjPhKy30vLTrOh/AogYRBR
+         A6EOXfuR7PmVIw+TyOaLKYfQUQ8bWl54UbcZECVjdFIc+GIHLIiNtHr9vM/V+Fso/IJ/
+         vhJQq5TJzTPsVlDEOpN0ylfO22UmudoBY/hQ+Kj0dJZmJ5bLR3oFLEdDi5Y90CsgwgVP
+         IfzQ==
+X-Forwarded-Encrypted: i=1; AHgh+RpcLZhZhTjsA61pJGdVm6fDHDjKiZD/Y53kvcf49770iZEQyoLctLEdYMgQp2vWLBHDhag=@lists.linux.dev
+X-Gm-Message-State: AOJu0YxufC1LV+i1IzNkboET9TEO7KPCTmokERlKMKxKBM5nNrNXRkCE
+	DyCGm5UlDs8V2I/O5IHarqrjHfcK9iITt4JQqfLI4gQefDYVAjc8Y0Yi
+X-Gm-Gg: AR+sD121Efdt2Nn8yF4ZjMpMloLWYEZPmcuqOOdDptQHK3iaxZhax06/8ZYOcQDvK9f
+	09/29oBYcTbfLWLysq/xvp7lbUL37cd1+avRZUU5j/zs2ftjDBrFIpDXCqflr9t+J/QldCUwScJ
+	SdfB6aABZD18ToEMAn2u3xwfiL2kVkg+7Yu8Ak4ga/dgnNj/dikB0l6ZEn6/k04tIuFbj4T8tmC
+	hsplNS7hBmVM8NuaVSZYJ3S7zaDKGoOw7oNslgfc8Q+qVHS+lhQSt0lMh/3yTw2qU04/69XuFm6
+	Xiz76jIuNxbMtT/y6KIAmS25TAFt2eWOOCIrbGTvDab5xiJuw5FR4kUjxNLDlFQp7yKXPxRMvyV
+	5fTQiPpvL+qgz7mJUW5ZHs81+tzv70+ReKuzCFJL0A3+6XLcRe3/sHPSP5ZQtsHQ9Wpn35hqVmL
+	ZpBTkD59BtX51okHPqoCCElbB5Y/6qkFh3pMFkZRuOm1WmL6Q2tW1SnjmMUjrAh5T9Y7U3ILj1q
+	diZ0PLI+6Mf7mdwgKkqN4RYkFwH1kVTzdA8am0NNIgfAw==
+X-Received: by 2002:a05:6512:39d1:b0:5b2:add9:d073 with SMTP id 2adb3069b0e04-5b2f4cdbf98mr5877083e87.46.1786340514174;
+        Sun, 09 Aug 2026 22:41:54 -0700 (PDT)
+Received: from ?IPV6:2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703? ([2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b304fd20a7sm1813835e87.11.2026.08.09.22.41.52
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 09 Aug 2026 22:41:53 -0700 (PDT)
+Message-ID: <e58db15b-9b31-42d9-b9f2-df792dd08804@gmail.com>
+Date: Mon, 10 Aug 2026 08:41:52 +0300
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 01/10] dt-bindings: mfd: common ROHM PMIC properties
+To: Linus Walleij <linusw@kernel.org>
+Cc: Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
+ Matti Vaittinen <matti.vaittinen@linux.dev>, Lee Jones <lee@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+ Mark Brown <broonie@kernel.org>, Michael Turquette
+ <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>,
+ Brian Masney <bmasney@redhat.com>, Bartosz Golaszewski <brgl@kernel.org>,
+ Alexandre Belloni <alexandre.belloni@bootlin.com>, mfd@lists.linux.dev,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
+ linux-rtc@vger.kernel.org
+References: <cover.1785838584.git.mazziesaccount@gmail.com>
+ <838486b443af9188410d8b802a818dc0af20ea9d.1785838585.git.mazziesaccount@gmail.com>
+ <CAD++jLky237PRXNmyURjNEOPPgFV00ox1HBeBev=qADxKM3nWQ@mail.gmail.com>
+Content-Language: en-US, en-AU, en-GB, en-BW
+From: Matti Vaittinen <mazziesaccount@gmail.com>
+In-Reply-To: <CAD++jLky237PRXNmyURjNEOPPgFV00ox1HBeBev=qADxKM3nWQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Message-Id: <20260810-zx29clk-v10-11-63846490712c@gmail.com>
-References: <20260810-zx29clk-v10-0-63846490712c@gmail.com>
-In-Reply-To: <20260810-zx29clk-v10-0-63846490712c@gmail.com>
-To: Michael Turquette <mturquette@baylibre.com>, 
- Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>, 
- Brian Masney <bmasney@redhat.com>, Vinod Koul <vkoul@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Russell King <linux@armlinux.org.uk>, Lee Jones <lee@kernel.org>
-Cc: linux-clk@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- linux-phy@lists.infradead.org, mfd@lists.linux.dev, 
- =?utf-8?q?Stefan_D=C3=B6singer?= <stefandoesinger@gmail.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=13352;
- i=stefandoesinger@gmail.com; h=from:subject:message-id;
- bh=ZZxckeyA6AJLvKy/8WrFsTFoBp0n9ndwCOBIkhLTkNM=;
- b=owEBiQJ2/ZANAwAIAT0TvMhUTxoiAcsmYgBqePEP1W2r1xdUvwYzMM7fYUnolSt/rLWDVXYhi
- qycDbs1D7OJAk8EAAEIADkWIQRDFvS2qgVbJ5UyXWw9E7zIVE8aIgUCanjxDxsUgAAAAAAEAA5t
- YW51MiwyLjUrMS4xMiwyLDIACgkQPRO8yFRPGiIcRg//YK+Ha3CYKpi8pksW4QwI4APm20ZAFBC
- 2VqbKd44vspHQ58RmxcEbDpftj78pNzsuoee0ixjBKWCfRHgS17gtDfugLqDNTRH0YAMi6wBmtd
- LGTnAnn/jjTREChMj5gtQt3GcZOswqldmoeJLSAsEeqfS/Snwz2NjSSozf/u2kKZtVH+xdboSUh
- YNNisA+AEtByyaXid1dsksn0xduxE/A8dNeVcgYDAlHZB5OyNphZq8hc28EfMKN7+W9PS/ZC6Ce
- SRo4aYTYpLeG7tRIRqUmfaNH5YU1nw42g1vZFTlanD317h7HfAY9QkHH7V8upfUTsFWmdXGthrD
- HNhTPrZQeZ0VyOR+WbRa4iiA1pVAbOI93mLVfxGFkdzHtY4SrglPX+TivcmyAK+vm5RKlcexajo
- qPVl3mxOzZVxicz9KWUVabvbQjvYMsvyHd3J+P1UaMUrMYgf4YT0TgNXasGolYDSZr4brkB3VYO
- 0wVc/DM2W6LSGXFIiNHJ7r8KJ4tTVdiUjCjocLZR4/9xjQWR8tTcHDTdaZw93O6DK/MqE05r2bF
- LsOZam2HyYjzlnPYo/R5Beq3FWsDsVlNSiH72rB4g6Tlzkls9D3xMHPz83HZNxCyk62n83M7VsD
- ydMU1r8T0t6K3l1nGu63w3OTxDxtDKnPxNVYdZ/N01B1Bw8y4IZc=
-X-Developer-Key: i=stefandoesinger@gmail.com; a=openpgp;
- fpr=4F9C2C8728019633893EBBB98CB81F9A72BBA155
 
-This drives the MFD child devices created by the zte-zx297520v3-crm
-driver.
+On 07/08/2026 23:23, Linus Walleij wrote:
+> Hi Matti,
+> 
+> thanks for your patch (and the other comments in reply to the
+> old review).
 
-Reviewed-by: Philipp Zabel <p.zabel@pengutronix.de>
-Signed-off-by: Stefan Dösinger <stefandoesinger@gmail.com>
----
+Nope. Thank You for taking the time to do the review - and read my replies!
 
-v10:
-Add ZSP reset in matrixcrm
+> 
+> On Tue, Aug 4, 2026 at 12:20 PM Matti Vaittinen
+> <matti.vaittinen@linux.dev> wrote:
+> 
+>> Sometimes the existing properties aren't 100% what reviewers would
+>> prefer. When issues are minor or just cosmetic, changing the existing
+>> properties is not feasible. Reviewers can't be expected to know which
+>> properties are new, and which are existing - and this can lead to
+>> unnecessary review discussion wasting time and energy from everyone.
+>>
+>> Adding a common file for re-used ROHM PMIC properties should make it
+>> clearly visible that a property is re-used, when a new PMIC binding
+>> refers to this file instead of (re-)describing all the existing
+>> bindings. This will also help keeping the common properties identical
+>> across the variants.
+>>
+>> Add new file listing commonly used ROHM PMIC properties.
+> 
+> I see the upside of this, the DT binding maintainers will decide
+> on it. It has the upside you describe, but it has the downside that
+> new components will always (ab-)use the old properties maybe
+> even when there would be a good opportunity to modernize
+> the syntax, and then the reviewers will not catch it.
 
-v9:
-Remove HSIC and USB PHY resets, the phy driver will access them through
-the shared regmap directly
-Sort include files alphabetically
-Depend on HAS_IOMEM due to "select MFD_SYSCON" (Sashiko). This has some,
-but not consistent, precedent in the same file
+I see your point :) I am not intending to "completely hide" these 
+properties from the reviewers. Please, see below.
 
-v8: Select MFD_SYSCON for COMPILE_TESTing this driver without the MFD
-parent driver.
+> But well, maybe that is not a big deal in the universe.
+> 
+> What about patching those old bindings:
+> Documentation/devicetree/bindings/mfd/rohm,bd71815-pmic.yaml:
+> rohm,clkout-open-drain:
+> Documentation/devicetree/bindings/mfd/rohm,bd71828-pmic.yaml:
+> rohm,clkout-open-drain:
+> Documentation/devicetree/bindings/mfd/rohm,bd72720-pmic.yaml:
+> rohm,clkout-open-drain:
+> ...to include this file as part of this patch, and delete the old defines from
+> those three files?
 
-v7:
-Add MODULE_DEVICE_TABLE (Philipp)
-Add DDR control and LSP resets
+I am patching them. I, however, am not planning to delete the properties 
+completely (the comment above about not hiding properties from 
+reviewers). For example, the bd71815 and bd71828, do not support (at 
+least all) of the OTP configured pins which are also declared here. 
+Thus, I don't want to allow those unsupported pin properties for them.
 
-v6:
-Add a comment wrt checking all bits in .status() (Philipp)
-include cleanup (Philipp, Sashiko)
+My plan is to keep the "additionalProperties: false", and require the 
+supported properties to be explicitly listed in the 
+rohm,bd71828-pmic.yaml and rohm,bd72720-pmic.yaml. And, when the types, 
+descriptions, and allowed values (when common for all PMICs) are in the 
+referenced file, the rohm,bdXXXX-pmic.yaml can become quite simple:
 
-v5:
-Make top and matrix MFD children instead of aux devices
-Split USB PHY reset into its own reset ID
-Remove USB reset wait code - this will be handled via syscon from a
-future minimal phy-zx29-usb driver
----
- MAINTAINERS                          |   1 +
- drivers/reset/Kconfig                |  13 ++
- drivers/reset/Makefile               |   1 +
- drivers/reset/reset-zte-zx297520v3.c | 237 +++++++++++++++++++++++++++++++++++
- 4 files changed, 252 insertions(+)
+rohm,clkout-open-drain: true;
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 408bb256d2d4..f1c981979556 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -3911,6 +3911,7 @@ F:	arch/arm/boot/dts/zte/
- F:	arch/arm/mach-zte/
- F:	drivers/clk/zte/
- F:	drivers/mfd/zte-zx297520v3-crm.c
-+F:	drivers/reset/reset-zte-zx297520v3.c
- F:	include/dt-bindings/clock/zte,zx297520v3-clk.h
- F:	include/dt-bindings/phy/zte,zx297520v3-topcrm.h
- F:	include/dt-bindings/reset/zte,zx297520v3-reset.h
-diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
-index d009eb0849a3..b92bd0c16517 100644
---- a/drivers/reset/Kconfig
-+++ b/drivers/reset/Kconfig
-@@ -404,6 +404,19 @@ config RESET_UNIPHIER_GLUE
- 	  on UniPhier SoCs. Say Y if you want to control reset signals
- 	  provided by the glue layer.
- 
-+config RESET_ZTE_ZX297520V3
-+	tristate "ZTE zx297520v3 Reset Driver"
-+	depends on HAS_IOMEM
-+	depends on MFD_ZTE_ZX297520V3_CRM || COMPILE_TEST
-+	default SOC_ZX297520V3
-+	select MFD_SYSCON
-+	help
-+	  This enables the reset controllers for ZTE zx297520v3 SoCs. The reset
-+	  controllers are required for booting this board and are part of the
-+	  clock and reset management controllers on this board, so you will also
-+	  need MFD_ZTE_ZX297520V3_CRM. Enable this if you are building a kernel
-+	  for a ZTE zx297520v3 based board.
-+
- config RESET_ZYNQ
- 	bool "ZYNQ Reset Driver" if COMPILE_TEST
- 	default ARCH_ZYNQ
-diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
-index 3e52569bd276..9a8a48d44dc4 100644
---- a/drivers/reset/Makefile
-+++ b/drivers/reset/Makefile
-@@ -50,5 +50,6 @@ obj-$(CONFIG_RESET_TI_TPS380X) += reset-tps380x.o
- obj-$(CONFIG_RESET_TN48M_CPLD) += reset-tn48m.o
- obj-$(CONFIG_RESET_UNIPHIER) += reset-uniphier.o
- obj-$(CONFIG_RESET_UNIPHIER_GLUE) += reset-uniphier-glue.o
-+obj-$(CONFIG_RESET_ZTE_ZX297520V3) += reset-zte-zx297520v3.o
- obj-$(CONFIG_RESET_ZYNQ) += reset-zynq.o
- obj-$(CONFIG_RESET_ZYNQMP) += reset-zynqmp.o
-diff --git a/drivers/reset/reset-zte-zx297520v3.c b/drivers/reset/reset-zte-zx297520v3.c
-new file mode 100644
-index 000000000000..48463c553b3f
---- /dev/null
-+++ b/drivers/reset/reset-zte-zx297520v3.c
-@@ -0,0 +1,237 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (C) 2026 Stefan Dösinger
-+ */
-+#include <dt-bindings/reset/zte,zx297520v3-reset.h>
-+
-+#include <linux/bits.h>
-+#include <linux/err.h>
-+#include <linux/errno.h>
-+#include <linux/mfd/syscon.h>
-+#include <linux/module.h>
-+#include <linux/platform_device.h>
-+#include <linux/regmap.h>
-+#include <linux/reset-controller.h>
-+#include <linux/types.h>
-+
-+/* Most devices on the zx297520v3 SoC have one reset bit per clock line. As a rule of thumb, the
-+ * lower bit disconnects the device from the bus, similarly to turning off PCLK - registers read 0
-+ * or hang indefinitely. Unlike PCLK, this reset may have a lingering effect after deasserting.
-+ * E.g. timers will be disabled, but retain their counter value.
-+ *
-+ * The other bit resets the actual device registers.
-+ *
-+ * For some devices, e.g. GMAC, both reset bits behave in the same way: They disconnect the device
-+ * and registers will have their default state after deasserting. For devices that have two reset
-+ * bits, both need to be deasserted for the device to function.
-+ */
-+struct zte_reset_reg {
-+	u32 mask;
-+	u16 reg;
-+};
-+
-+struct zte_reset_data {
-+	const struct zte_reset_reg *resets;
-+	unsigned int num;
-+};
-+
-+struct zte_reset {
-+	struct reset_controller_dev rcdev;
-+	struct regmap *map;
-+	const struct zte_reset_reg *resets;
-+};
-+
-+static inline struct zte_reset *to_zte_reset(struct reset_controller_dev *rcdev)
-+{
-+	return container_of(rcdev, struct zte_reset, rcdev);
-+}
-+
-+static int zx29_rst_assert(struct reset_controller_dev *rcdev, unsigned long id)
-+{
-+	struct zte_reset *rst = to_zte_reset(rcdev);
-+
-+	return regmap_clear_bits(rst->map, rst->resets[id].reg, rst->resets[id].mask);
-+}
-+
-+static int zx29_rst_deassert(struct reset_controller_dev *rcdev, unsigned long id)
-+{
-+	struct zte_reset *rst = to_zte_reset(rcdev);
-+
-+	return regmap_set_bits(rst->map, rst->resets[id].reg, rst->resets[id].mask);
-+}
-+
-+static int zx29_rst_status(struct reset_controller_dev *rcdev, unsigned long id)
-+{
-+	struct zte_reset *rst = to_zte_reset(rcdev);
-+	int res;
-+
-+	/* Devices with two reset bits need both deasserted to work. So only report them as
-+	 * deasserted if both bits are set.
-+	 *
-+	 * assert()/deassert() will always clear/set both. The only reason a device might be in a
-+	 * hybrid state is an unexpected handover state from the bootloader.
-+	 */
-+	res = regmap_test_bits(rst->map, rst->resets[id].reg, rst->resets[id].mask);
-+	if (res < 0)
-+		return res;
-+
-+	return !res;
-+}
-+
-+static const struct reset_control_ops zx29_rst_ops = {
-+	.assert		= zx29_rst_assert,
-+	.deassert	= zx29_rst_deassert,
-+	.status		= zx29_rst_status,
-+};
-+
-+static const struct zte_reset_reg zx297520v3_top_resets[] = {
-+	/* This bit is set by ZTE's cpko.ko blob, it looks like a reset bit for the LTE DSP
-+	 * coprocessor. Clocks for it are in matrixcrm.
-+	 */
-+	[ZX297520V3_ZSP_CORE_RESET]  = { .reg = 0x13c, .mask = BIT(0)            },
-+
-+	[ZX297520V3_UART0_RESET]     = { .reg =  0x78, .mask = BIT(6)  | BIT(7)  },
-+	[ZX297520V3_I2C0_RESET]      = { .reg =  0x74, .mask = BIT(8)  | BIT(9)  },
-+	/* Only one reset. Bit 5 is settable but does not do anything observable */
-+	[ZX297520V3_RTC_RESET]       = { .reg =  0x74, .mask = BIT(4)            },
-+	[ZX297520V3_TIMER_T08_RESET] = { .reg =  0x78, .mask = BIT(4)  | BIT(5)  },
-+	[ZX297520V3_TIMER_T09_RESET] = { .reg =  0x78, .mask = BIT(2)  | BIT(3)  },
-+	/* Only one reset. Bit 0 is settable but does not do anything observable */
-+	[ZX297520V3_PMM_RESET]       = { .reg =  0x74, .mask = BIT(1)            },
-+
-+	/* I haven't found any clocks for GPIO. It probably wouldn't make much
-+	 * sense anyway. Only one reset bit per controller.
-+	 */
-+	[ZX297520V3_GPIO_RESET]      = { .reg =  0x74, .mask = BIT(3)            },
-+	[ZX297520V3_GPIO8_RESET]     = { .reg =  0x74, .mask = BIT(2)            },
-+
-+	[ZX297520V3_TIMER_T12_RESET] = { .reg =  0x74, .mask = BIT(6)  | BIT(7)  },
-+	[ZX297520V3_TIMER_T13_RESET] = { .reg =  0x7c, .mask = BIT(0)  | BIT(1)  },
-+	[ZX297520V3_TIMER_T14_RESET] = { .reg =  0x7c, .mask = BIT(2)  | BIT(3)  },
-+	[ZX297520V3_TIMER_T15_RESET] = { .reg =  0x74, .mask = BIT(10) | BIT(11) },
-+	[ZX297520V3_TIMER_T16_RESET] = { .reg =  0x7c, .mask = BIT(4)  | BIT(5)  },
-+	[ZX297520V3_TIMER_T17_RESET] = { .reg = 0x12c, .mask = BIT(0)  | BIT(1)  },
-+	[ZX297520V3_WDT_T18_RESET]   = { .reg =  0x74, .mask = BIT(12) | BIT(13) },
-+	[ZX297520V3_USIM1_RESET]     = { .reg =  0x74, .mask = BIT(14) | BIT(15) },
-+	[ZX297520V3_AHB_RESET]       = { .reg =  0x70, .mask = BIT(0)  | BIT(1)  },
-+
-+	/* USB reset. 0x84 returns the USB device status (0x1 for HSIC up, 0x2 for USB up, but
-+	 * all 3 bits (PCLK, WCLK, PHY) need to be deasserted for the device to report ready.
-+	 * Thus polling the status is the responsibility of the USB PHY driver.
-+	 */
-+	[ZX297520V3_USB_RESET]       = { .reg =  0x80, .mask = BIT(4) | BIT(5)   },
-+	[ZX297520V3_HSIC_RESET]      = { .reg =  0x80, .mask = BIT(1) | BIT(2)   },
-+};
-+
-+static const struct zte_reset_data zx297520v3_topreset_data = {
-+	.resets = zx297520v3_top_resets,
-+	.num = ARRAY_SIZE(zx297520v3_top_resets),
-+};
-+
-+static const struct zte_reset_reg zx297520v3_matrix_resets[] = {
-+	[ZX297520V3_CPU_RESET]       = { .reg =  0x28, .mask = BIT(1)            },
-+	[ZX297520V3_ZSP_BUS_RESET]   = { .reg =  0x3c, .mask = BIT(0)            },
-+	[ZX297520V3_DDR_CTRL_RESET]  = { .reg = 0x100, .mask = BIT(10) | BIT(11) },
-+	[ZX297520V3_EDCP_RESET]      = { .reg =  0x68, .mask = BIT(0)            },
-+	[ZX297520V3_SD0_RESET]       = { .reg =  0x58, .mask = BIT(1)            },
-+	[ZX297520V3_SD1_RESET]       = { .reg =  0x58, .mask = BIT(0)            },
-+	[ZX297520V3_NAND_RESET]      = { .reg =  0x58, .mask = BIT(4)            },
-+	[ZX297520V3_PDCFG_RESET]     = { .reg =  0x94, .mask = BIT(20)           },
-+	[ZX297520V3_SSC_RESET]       = { .reg =  0x94, .mask = BIT(24)           },
-+	[ZX297520V3_GMAC_RESET]      = { .reg = 0x114, .mask = BIT(0)  | BIT(1)  },
-+	[ZX297520V3_VOU_RESET]       = { .reg = 0x16c, .mask = BIT(0)            },
-+	[ZX297520V3_LSP_RESET]       = { .reg =  0x80, .mask = BIT(0)            },
-+};
-+
-+static const struct zte_reset_data zx297520v3_matrixreset_data = {
-+	.resets = zx297520v3_matrix_resets,
-+	.num = ARRAY_SIZE(zx297520v3_matrix_resets),
-+};
-+
-+static const struct zte_reset_reg zx297520v3_lsp_resets[] = {
-+	[ZX297520V3_TIMER_L1_RESET]  = { .reg = 0x04,  .mask = BIT(8)  | BIT(9)  },
-+	[ZX297520V3_WDT_L2_RESET]    = { .reg = 0x08,  .mask = BIT(8)  | BIT(9)  },
-+	[ZX297520V3_WDT_L3_RESET]    = { .reg = 0x0c,  .mask = BIT(8)  | BIT(9)  },
-+	[ZX297520V3_PWM_RESET]       = { .reg = 0x10,  .mask = BIT(8)  | BIT(9)  },
-+	[ZX297520V3_I2S0_RESET]      = { .reg = 0x14,  .mask = BIT(8)  | BIT(9)  },
-+	/* 0x18: Not writeable */
-+	[ZX297520V3_I2S1_RESET]      = { .reg = 0x1c,  .mask = BIT(8)  | BIT(9)  },
-+	/* 0x20: Not writeable */
-+	[ZX297520V3_QSPI_RESET]      = { .reg = 0x24,  .mask = BIT(8)  | BIT(9)  },
-+	[ZX297520V3_UART1_RESET]     = { .reg = 0x28,  .mask = BIT(8)  | BIT(9)  },
-+	[ZX297520V3_I2C1_RESET]      = { .reg = 0x2c,  .mask = BIT(8)  | BIT(9)  },
-+	[ZX297520V3_SPI0_RESET]      = { .reg = 0x30,  .mask = BIT(8)  | BIT(9)  },
-+	[ZX297520V3_TIMER_LB_RESET]  = { .reg = 0x34,  .mask = BIT(8)  | BIT(9)  },
-+	[ZX297520V3_TIMER_LC_RESET]  = { .reg = 0x38,  .mask = BIT(8)  | BIT(9)  },
-+	[ZX297520V3_UART2_RESET]     = { .reg = 0x3c,  .mask = BIT(8)  | BIT(9)  },
-+	[ZX297520V3_WDT_LE_RESET]    = { .reg = 0x40,  .mask = BIT(8)  | BIT(9)  },
-+	[ZX297520V3_TIMER_LF_RESET]  = { .reg = 0x44,  .mask = BIT(8)  | BIT(9)  },
-+	[ZX297520V3_SPI1_RESET]      = { .reg = 0x48,  .mask = BIT(8)  | BIT(9)  },
-+	[ZX297520V3_TIMER_L11_RESET] = { .reg = 0x4c,  .mask = BIT(8)  | BIT(9)  },
-+	[ZX297520V3_TDM_RESET]       = { .reg = 0x50,  .mask = BIT(8)  | BIT(9)  },
-+};
-+
-+static const struct zte_reset_data zx297520v3_lspreset_data = {
-+	.resets = zx297520v3_lsp_resets,
-+	.num = ARRAY_SIZE(zx297520v3_lsp_resets),
-+};
-+
-+static int reset_zx297520v3_probe(struct platform_device *pdev)
-+{
-+	const struct platform_device_id *id = platform_get_device_id(pdev);
-+	struct device *dev = &pdev->dev;
-+	struct device_node *of_node = dev->parent->of_node;
-+	const struct zte_reset_data *data;
-+	struct zte_reset *rst;
-+
-+	if (!id)
-+		return -ENODEV;
-+	data = (const struct zte_reset_data *)id->driver_data;
-+
-+	rst = devm_kzalloc(dev, sizeof(*rst), GFP_KERNEL);
-+	if (!rst)
-+		return -ENOMEM;
-+
-+	rst->resets = data->resets;
-+	rst->rcdev.owner = THIS_MODULE;
-+	rst->rcdev.nr_resets = data->num;
-+	rst->rcdev.ops = &zx29_rst_ops;
-+	rst->rcdev.of_node = of_node;
-+	rst->rcdev.dev = dev;
-+
-+	rst->map = device_node_to_regmap(of_node);
-+	if (IS_ERR(rst->map))
-+		return dev_err_probe(dev, PTR_ERR(rst->map), "Cannot get parent syscon regmap\n");
-+
-+	return devm_reset_controller_register(dev, &rst->rcdev);
-+}
-+
-+static const struct platform_device_id reset_zx297520v3_ids[] = {
-+	{
-+		.name = "zx297520v3-topreset",
-+		.driver_data = (kernel_ulong_t)&zx297520v3_topreset_data,
-+	},
-+	{
-+		.name = "zx297520v3-matrixreset",
-+		.driver_data = (kernel_ulong_t)&zx297520v3_matrixreset_data,
-+	},
-+	{
-+		.name = "zx297520v3-lspreset",
-+		.driver_data = (kernel_ulong_t)&zx297520v3_lspreset_data,
-+	},
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(platform, reset_zx297520v3_ids);
-+
-+static struct platform_driver reset_zx297520v3 = {
-+	.probe = reset_zx297520v3_probe,
-+	.driver = {
-+		.name = "reset-zx297520v3",
-+	},
-+	.id_table = reset_zx297520v3_ids,
-+};
-+module_platform_driver(reset_zx297520v3);
-+
-+MODULE_AUTHOR("Stefan Dösinger <stefandoesinger@gmail.com>");
-+MODULE_DESCRIPTION("ZTE zx297520v3 reset driver");
-+MODULE_LICENSE("GPL");
+Enough to remind reviewers that there is legacy - and allow reviewers as 
+well as authors to re-evaluate the properties - while also pointing out 
+that this is existing stuff. (And allow validator scripts to catch use 
+of unsupported common properties - at least if this works as I think it 
+does).
+
+> Then it is clear what is going on.
+> 
+> Maybe this happens in later patches, but anyway it should be part
+> of this patch I think.
+
+I somehow thought it'd be clearer to split the changes in own patches - 
+but I am fully Ok with squashing these if it is preferred way.
+
+>> +properties:
+>> +  rohm,clkout-open-drain:
+>> +    description: clk32kout mode. Set to 1 for "open-drain" or 0 for "cmos"
+>> +      a.k.a "push-pull".
+>> +    $ref: /schemas/types.yaml#/definitions/uint32
+>> +    maximum: 1
+> 
+> Yeah I see now that this is already in use in three other bindings...
+> 
+> Today we would for a new component use something like
+> rohm,clkout-drive-mode = "drive-push-pull";
+> rohm,clkout-drive-mode = "drive-open-drain";
+> reflecting pin control.
+> 
+> I do understand the idea to keep using the same bindings
+> for all of Rohm MFDs. But when a completely new design
+> arrives with many new properties etc, maybe we can think
+> of something new?
+
+In case of the "rohm,clkout-open-drain" - AFAIR it is not used from new 
+drivers, but the new PMICs which are added, are supported by the same 
+MFD driver. I am not too keen on changing the property values in this 
+driver (because it'd require every user to update their dtses - which 
+feels like a source of problems). Nor am I too excited about supporting 
+old and new values in this driver as it makes the driver (in my opinion 
+unnecessarily) more complex.
+
+What comes to using something else for completely new designs - I'd say 
+(a bit cautiously) that changing the properties there is fine. 
+Cautiously because it is still dancing between "what users have used to 
+see" Vs. "what feels like best course of action - Today" ;) Cautiously 
+also because we don't probably want to support multiple vendor specific 
+properties for same purpose - at least not in a long run.
+
+Yours,
+	-- Matti
+
+Ps, planning to join ELCE/Plumbers this year? It'd be about a time to 
+meet you in person :)
 
 -- 
-2.54.0
+Matti Vaittinen
+Linux kernel developer at ROHM Semiconductors
+Oulu Finland
 
+~~ When things go utterly wrong vim users can always type :help! ~~
