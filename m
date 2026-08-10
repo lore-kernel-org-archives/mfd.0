@@ -1,181 +1,207 @@
-Received: from DM5PR21CU001.outbound.protection.outlook.com (mail-centralusazolkn19011030.outbound.protection.outlook.com [52.103.13.30])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C493C3DA5CD
-	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 12:54:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.103.13.30
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786366453; cv=fail; b=X8ngBEuYB5scvqw89HTbM6OzPxsjmn5bK9+0RPKZJM4DnmEeO33upniHO1izpTVMn4lwCNJIbA4qGKSK8J5Ck6rYOsAi9u8KOLdYM4MzLYLjfojtCYE0ZUGBeqoBSFcbisEmDBRPsamefnCDGlHnmYhMuI7CmePcHzgpgsuJXB0=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786366453; c=relaxed/simple;
-	bh=eLQ9adDM59xgoBHe83NIf2g2wQqJmreB3EHGLbfIln8=;
-	h=To:Cc:Subject:In-Reply-To:References:Content-Type:From:Date:
-	 Message-ID:MIME-Version; b=eb3cLXTKnMWqNus4jZsF+oFA9KXFB9oESPSrVrzfXKgOGM661lQFOC1vuowoCEONHqzK3IgXwbc6iO/B02xenHFqppSmly8zm42qc0rE+E/Rhks7ptn5zO5Q5PE+G8x4VlIkpVbB6Zl7QoBQB5E8SbkjkKGT+SqPEcyfSCiUy2o=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=outlook.com; spf=pass smtp.mailfrom=outlook.com; dkim=pass (2048-bit key) header.d=outlook.com header.i=@outlook.com header.b=mZG59U/+; arc=fail smtp.client-ip=52.103.13.30
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=outlook.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=outlook.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBF453DEAD2;
+	Mon, 10 Aug 2026 13:04:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786367078; cv=none; b=TctEv3D96X6fd8BIb115Exw1jqPr5G0MhoY4xRw8MHaG/kuLMnLX2NoMY1vykKvJFOQ+HgoilxIzHrXbcgwLjU71oddJPfzNm3tYT+2oIhObjefrcWiMcziz//j7BA03xKTc3tQKm6mWZ2kHpMN5rC0todrkC5DfTxcN6iQ7FVQ=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786367078; c=relaxed/simple;
+	bh=VleUTPyNYCta8Pce//26vwcSESLQGjcQbaTRoUUxTl4=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=orKTY3RRU854TSK+RIB1m1jAHtBfkyJl+kIp8Okm97CK9uXUOz4eAPw3Z2aermdLxLEwf6uxZuOdcycSiSXPfQodGkEnSb4cKbBpeEIWfC0kt3D5qDRHIKkWzalXDyiyrRc0U1Bj4XKdqUAyBFFUBLX3p2P6ywLV7eanGu4sFvs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NS6VELix; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=outlook.com header.i=@outlook.com header.b="mZG59U/+"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MzVu1UpJYysHwaPIB0lBvORscq4M8IA8gvxVJbUgpwDTR4EVnk83h+Zb/2jfsrF/AExYi4JbAtMMviP6rRI3yeX1lgdoAfWNsSg4+Qu4lqIlFCCf0B+kzUFBV88bL2rWItTcW5F2yuOLuYaVDkyixYQ/TDSRn0sgoDf9qUlXf3QzPpMi9RXxnmEug6LiCDfTfRCgKBxTbNeAcOFLmrGVD6C53rMrvQFpFSB5x5ARfdK1dd5fAErxRPb/ir/Pq+Qsvg8a8ve3MLDVSKCPX9BHLIprJBWJgm1XEOviZMYOEg83y4mT1WTf+MLrFYYuVPII+Mv0l1iJjK4HBdSJnj6ivA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eLQ9adDM59xgoBHe83NIf2g2wQqJmreB3EHGLbfIln8=;
- b=uzaMkJtlqSTROsrcvWJ7T9JdHmOecQMpUjM4uEY8uDppD4sC6Iy8SnjUoGG0bsK/ihRfzLZnMxRu5gxFMPnmGd8v3sFw3yINVfPzaGjA2xMuowdMCS5CtSRXcj3GwweTbUy5EGPWo1WDuaul4TpRI6TXkf7X4odvVUzONVLqmp6U9Hz5jbBVVFYKST2+MgHEgncL9DFwAcoU9XK+1qOpsMIhVf4lwODE2FQYDSHqbkUJfiOMPaWvydEhHirOJUQ65L2dhb/tVqOqykzJIlNrBBgO/Qvq70x9x5+/wfYn4s77M+JIIiw7Kxhq0C4nTJp1edxwXFa76EWnPagZwtzfkw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eLQ9adDM59xgoBHe83NIf2g2wQqJmreB3EHGLbfIln8=;
- b=mZG59U/+CPTEd8AQDOa+SZa4eKhrzwggvONzj0Mdxl6nAkvlPUJjvu3YIBDBm3LME0g1+BRlPk2wBYD6XARWoRgouIbXU1UckPazZxEmAmPYCtHlKP29K4rr3dawMZXhb6t/FjZHn/zoC81zuA8IUO+hql/tVsPC4W3QO2WVM8rLrJaevwjgERkPsr+tcQM4fc3Aipa7i31G+mFHUYcoD4UPsOP5VM6yDk7o3K/wzzNEwWNnQGdlTvxF7tOVebvzHzRZBuevwVlENV4ZZZLamwuc3bIqI21OZhd4uPBimpVWDg1g6o3gm9vubpViRx1fuEn5ULahc7Ee1OV1gWIUPw==
-Received: from MN0PR19MB6091.namprd19.prod.outlook.com (2603:10b6:208:382::21)
- by PH7PR19MB6109.namprd19.prod.outlook.com (2603:10b6:510:1dc::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Mon, 10 Aug
- 2026 12:54:07 +0000
-Received: from MN0PR19MB6091.namprd19.prod.outlook.com
- ([fe80::af9a:4cc3:facf:9374]) by MN0PR19MB6091.namprd19.prod.outlook.com
- ([fe80::af9a:4cc3:facf:9374%5]) with mapi id 15.21.0292.024; Mon, 10 Aug 2026
- 12:54:06 +0000
-To: Alexandre TORGUE <alexandre.torgue@foss.st.com>,
- Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Michael Turquette <mturquette@baylibre.com>,
- Stephen Boyd <sboyd@kernel.org>,
- Brian Masney <bmasney@redhat.com>,
- Lee Jones <lee@kernel.org>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Antonio Borneo <antonio.borneo@foss.st.com>,
- Linus Walleij <linusw@kernel.org>,
- Russell King <linux@armlinux.org.uk>,
- Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>
-Cc: devicetree@vger.kernel.org,
- linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org,
- linux-kernel@vger.kernel.org,
- linux-clk@vger.kernel.org,
- mfd@lists.linux.dev,
- linux-gpio@vger.kernel.org,
- linux-doc@vger.kernel.org
-Subject: Re: [PATCH RESEND 0/9] ARM: stm32: add STM32H7R7 and ART-Pi2 support
-In-Reply-To: <6c926423-777e-475a-9e28-222d3fb5798e@foss.st.com>
-References: <MN0PR19MB60912FA1E75E4E55B2E27D34ACCD2@MN0PR19MB6091.namprd19.prod.outlook.com>
- <6c926423-777e-475a-9e28-222d3fb5798e@foss.st.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-From: Liu Changjie <liucj1228@outlook.com>
-Date: Mon, 10 Aug 2026 20:54:29 +0800
-Message-ID:
- <MN0PR19MB6091BDFE3DBD8AD6DDC3F77DACDE2@MN0PR19MB6091.namprd19.prod.outlook.com>
-X-ClientProxiedBy: TPYP295CA0056.TWNP295.PROD.OUTLOOK.COM (2603:1096:7d0:8::7)
- To MN0PR19MB6091.namprd19.prod.outlook.com (2603:10b6:208:382::21)
-X-Microsoft-Original-Message-ID:
- <178636646929.268083.8176274173003069719@outlook.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NS6VELix"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2A1C7C19425;
+	Mon, 10 Aug 2026 13:04:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1786367078;
+	bh=VleUTPyNYCta8Pce//26vwcSESLQGjcQbaTRoUUxTl4=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=NS6VELixcJ8nNmMdclWWATvrKvK0bfDHK4Kqzy9tW4JhOJVFLDtN6VuFG0qjW6JLl
+	 V4tWzTJVJQ9iTzQpd7B/pw78eokn2serKlZvZWreNs3h9QOvwU3WUDoWkO4i766LFE
+	 qmgH9JQnPwLsryk5MIF4aB3s57H1TIt1H1Q/pTlAHmMx8KwiOZb4AW3X2nYfRCSaw+
+	 NcweGYbMDo8NnB6jBKZcTyLn1RRUGTHgzCSN0BZnkaHom6/SfkUDSdJzEcfyOmCt5f
+	 FyUpw4/ydTb7hL9DPfHuydNo8Wr7JSwoUf4y8DndtriB+yLDHCt1P51yx17A2hZvgd
+	 IBIZSJB55t2Ug==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 05575C5AE49;
+	Mon, 10 Aug 2026 13:04:38 +0000 (UTC)
+From: Miao Wang via B4 Relay <devnull+shankerwangmiao.gmail.com@kernel.org>
+Subject: [PATCH RFC v8 0/8] mfd: ls2kbmc: multiple fixes for this driver
+Date: Mon, 10 Aug 2026 21:04:23 +0800
+Message-Id: <20260810-ls2kbmc-mod-v8-0-16e44f7322f4@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN0PR19MB6091:EE_|PH7PR19MB6109:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3b8c9cfa-2f84-42d5-4f83-08def6de764d
-X-MS-Exchange-SLBlob-MailProps:
-	znQPCv1HvwUXBahuwteIkQeW30lJPuxOqkWTFX5UGk/2pyNZnU53xV6d54l6wUaXAO3pwQigW1uhQ38aY5HhTPh0ar4doz76rmA1u/D5bhQ90U5+2p0MbZdr34hgDayH+jcvTIzkjzgg6bEM0A/0v+0V2rufgyvx+908JlM8kA5epqd+iXG7cWzYaLAUx+Z1Rf9eU0yoRSP2qlo3S0CHVGez94TiQXGBFyfgQabUm7PqyQpumcw7qk4/KqvHMZNXGKHQdVOPlWOGwfrvePWDaRmW5C/O79KTLsuPPjAqX1J6fD/zgqv9BAFk8E7iG2zV6AtmlXVdelcTSX4gDyQAQZHycbN9uqlTbqwEaHBTG51KnuDRgRxQRNP3htSqQO2UP/Epmq3tTMycNnhbRu/RoHrzETITLkMKbXSRY6un7ONyVL8J9YDtbjTnUl8koGMotKZMof0c1mnw2J37fKMW7yfJpUlKP8Uj5p2AKn3jR/Yyz0y765eJ319JTvlUQ5r6Nsh+eKHEJUNTd70XEfTYuEHKwKumKVWVL8YVEqp0C0DVGrADYRcPdnfJ/eU6yk/lqoWCzA8LAUjZ0tzbRtknb/zBYuNxPV6rPHtH09Aq3GG9dl9VYrTU04JEsAzB/v9myA7XqsuYT4XXPTOavRzvOyNTA/LCpvw7fw0RaxTVtm/8t+bANYGBX+R4DzvV1Kh7PAgaDIvj8yAMOk/Mb5CQGCeBUqOgcfBvVqa3+/FBHo/gYwZ+Gzm8SW+vECpeaDPmV+NPEf8FItU=
-X-Microsoft-Antispam:
-	BCL:0;ARA:14566002|24021099003|37011999003|6090799003|51005399006|15080799012|23021999003|5072599009|25010399006|19110799012|8060799015|3412199025|4302099013|26104999009|440099028|40105399003|10035399007|2607281247196008|1602099012;
-X-Microsoft-Antispam-Message-Info:
-	=?utf-8?B?SFhXeHVQVk9NeVRIZlVtUHY3MnVKZ3hvYjFsV3pUV0VZeU55MlAvaEJYMWRP?=
- =?utf-8?B?TFltMUFKck5CSlJkcE1LZ3RCNjZ6L2VKSEZ6NEFXVWs0TnNIalNJNG5rUlZI?=
- =?utf-8?B?STRTbUwvMDVaNmExVkpBL253Y0V0WEowQ0tqcE5ZaWRXTkFUbW8rL3Bld2RM?=
- =?utf-8?B?dXdKekRHa3FQd2Z3N3NUaHVOY1lDQlQ0d0dPY2RDUVJva0FMQ3dKREhWbkVa?=
- =?utf-8?B?WEZGMHpZT0wra2VTLzFKZjJ1dzhTeGxlaGxjS24wUmpOZGpWdGtyMkVieG5h?=
- =?utf-8?B?L0t1bWVDSXNQcDAvb1dmbHRPMzVWZmcreEg3QjN3UVpJYnBweFhySExJcWdt?=
- =?utf-8?B?Q2RFVVpkSUdYRE1GcmdEWmtadFZEbmNBeE9IZG92cnFVU21wTkZDOFpMSm0r?=
- =?utf-8?B?TnlFOWp1dDJEdmFVbEpNNk5TSThQNjJPcnNYbFh5NUdpRUVhQS9QVVhjSUhw?=
- =?utf-8?B?NlBHTklQaVpjU05YY3JBOHppOTZXYXZIeUtkaXFQUENEYm9UZ0lOWnJlbXM5?=
- =?utf-8?B?U0g4MHdaUXFpRmtmNlZkV0txbFpHc2l3cVhHYlFNS0RzTXJ2bG0xcFR0QjEx?=
- =?utf-8?B?clZ6eTZJeEh5eXdCbkdKSS9yTjFaK3N6Z0VPa1BhekpORkhRT3creU5ZckdM?=
- =?utf-8?B?N3p6TG5iRFM3NlVsTmtNQlZaamdwSlc2OGxvYVcyUVRyVzhXM1VTQjI0ZjhZ?=
- =?utf-8?B?a1BOOGxhdUJtWWROZFMwMG11YzlOSzRPenlKbUlIb3dERGQ2ak1WbnRvRWc0?=
- =?utf-8?B?WW01N1JWd3I0dCsyZElNZjdjZjNoRGZjUndRRWRrZlArYVdsNHFDMGNUM0xQ?=
- =?utf-8?B?TkIrMHZ1N01qc25MSnRnL2w1R0w3RTF1bzFZWE1RQjZiMHVsRHgzZ1B1UG9r?=
- =?utf-8?B?aUZXQldwYVlZZDlGN080SXkrYkp6cHErRUhzSFZBbElEcFBQVVB5ZzExUzR5?=
- =?utf-8?B?My9hcS9VMlgrT1lJRS8zeEJhbE83NVR0YTNFVFhnM2U3TnAydW55UzNBTkhz?=
- =?utf-8?B?ZVNBVHZub3hyQjBTdk03VHYweklJV1A2eWIxblFKRGY2bGdiNzV4VVJoVEF5?=
- =?utf-8?B?T1R0YWw0cFFrRE9kKy9ZSlNFeWRFY3ZVK2NhV2tNSTV0VXRNS3NNODhaU1A4?=
- =?utf-8?B?VTIyUndhbkpPZHBTdGVUbTRITkpVcGJVckNiZWZBY2wzZmpTZThjKytPS1NB?=
- =?utf-8?B?T3QyaC92NjBuaCtGS2ZBRk9YL2IxYjFMUmNzVWhWTkVPRk9xMXFZZmRwQ0Fs?=
- =?utf-8?B?dEFJMGdsVnE5ekE3TlkvZHdveExhVytrbnhOc1RkSFMrNjJ5WnMwS2N6T211?=
- =?utf-8?B?OVRGNHhPMU9wc25lZDJsd2RhM2pjWWxmeW8zUy80MnJEbG9WMmk0QS9nVzFI?=
- =?utf-8?Q?p6AOoIpCjQOgdQuvdGg/NZ0vaRElYpDg=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?R29XUm1HUGdDVCtmU3c5ZU9IRE1kanZhTGRsZ1R5TkFUSlhML0NGcEg4SFlM?=
- =?utf-8?B?VDNRdGg3NW9kcTJrRUlPSnpBVmhYSXB2Rll3UFVuRUFKWDdXTTZmUXQwZTA3?=
- =?utf-8?B?bnBXK3RMTHYzaGdZTWduWVNGMGZFL0VvVzFJU21DSjBUS1hxb3pDZGliTnBD?=
- =?utf-8?B?U29jWWhicUhLWmpFdEZkMkxzNzNtZWxrcTNWSWxvbks3bjJENnFNR3NmcldZ?=
- =?utf-8?B?aHgybEVwbHJEbkxONHEwclkrb2lCSVJFNG5wSUNTaml5Vi9UQWNhQ25MVTN3?=
- =?utf-8?B?eFp3ZXU0bytUUWJocE1aZ2lCamdmTDFpb05pRXozNHI1K0dNOGcvZCt1OEFy?=
- =?utf-8?B?SnhOSGtNc2N3QVlGRXdtOXhBL2ZLU1VvczMxU21JbWVhaENkeFg5endPTXds?=
- =?utf-8?B?SHljVmhuVkFod2JNaXFQNHpVK1VIK2lVU0VkME5RNWI2a2ZRZXkyQSt2Y0tW?=
- =?utf-8?B?SXE3aGh6R1VUdTQ2TkZiUG5Hc3c0eXBHT2NJdklVSXd4UHQ3Z3ZwVFRjSGlO?=
- =?utf-8?B?QnpJYno1YXZQemtZTytRRC9UU3NkK3dFdmZaQXVaOGpHbXo3ZUFpOFRkaXFO?=
- =?utf-8?B?c09WMUJnSytrSDJHOStXVTJQQ0hkQS9ibEdHeG43VFJINlpra3NOT1ozbmdH?=
- =?utf-8?B?a05QNnY4UUdodnIvL3JnallkVzZSNStBR3dHVVZNUi9hc01ydzdTSlVvaTYv?=
- =?utf-8?B?blBrSGZDSy9hUjVueWxwaTREZHRheFhkZWUyRlo3Vm9iVlIvb05TYnJjZDIw?=
- =?utf-8?B?VnlxQ3dsdTljU0s4eldaREx2eHpPalhBNmJFdElHVE82SXFqT09lT2RiZWhI?=
- =?utf-8?B?dEtQR0VySzZLRG1kdTI2eTNmcUIyTzNpOXFpVmV2OUtlRi9yb3dDc1k3NGtG?=
- =?utf-8?B?TTNYUmdYUXlCSlNIclBXQTJxdTBVVTNCaVNjWTlQcjV4amhEZlpZYi9ZNWV2?=
- =?utf-8?B?T1dPZk9OanB5MnYyQ3NxRFJKTHFZNDBZZFFIcWlyMVhGVnNBS1ZZRy9Zanp5?=
- =?utf-8?B?Uit6Yk04Uy9IQzJua3hZYTBpK3pDMFFySGZ0bGxYYXBmR280bWVtWTltNHQ5?=
- =?utf-8?B?MjRmTHNFRnhxQVI0TUJ4ZSt2a3MrcG1URFFJVGJaUlRWaWpIZnV2MGVmeVNE?=
- =?utf-8?B?YUozZk8zaGlwRkcrSGNsUEQwZDUxbVJ6ZWpaVkNOdmFKMHNiZk9JUldFOVE0?=
- =?utf-8?B?ZVdBUGcydmdyc2YwZ2F6N1I2Kyt2OE1Xbi9zUCthbmlTSGNPOWR5WERoblNh?=
- =?utf-8?B?ck1sQU9kR3pCQVB4dEppUWJXYUo0MlhnUzN0REZ6aldWanFuK051K1JJdE1O?=
- =?utf-8?B?TUt1d2U1c01VeWZVeG92eHcxT25zeWNyQ2ZiR3JqOEQ3ejZ6QUJlWHdoWEo5?=
- =?utf-8?B?OXk1VlR3a1FWREYyUnc5bG4yeG1aSVQyMDRwWGdsSmVndFNiUm9YMGtIWjBt?=
- =?utf-8?B?TXhGbVdPenhEdWZkZHUwNmpUY3d6SnZTNEk1NjNYK25NZmFEMW8rYlFzVk9N?=
- =?utf-8?B?QUc0ckRrMUlXd1dqcnRhK0J2Y2lBVkh6SXVmMGk4MWhOYnNlYzlaT1VPMHNa?=
- =?utf-8?B?UTZPRmttbmZORUZxRGpVRTNQb3dKbkNtNmdjSmswMFRZL1JmTHd1aVkvZDVu?=
- =?utf-8?B?b1hzWHBsSnRvSElYZXJpUDhYWm1kOTM2VnlJSUhlWE1uMlFMa0FvMlpKRi9s?=
- =?utf-8?B?Vm9kZy80NnRUb2hvTXFsVDF0Z0FMbEZyNG0yS09oSk8yTjFSbjJZUW5td3Ew?=
- =?utf-8?B?WmdXRDRnd0pSWmxQVVYyRWlWQmZMaGNIN09sWkNkMUJOZCt3UjRkMWlVQnYv?=
- =?utf-8?B?UXdtQWJBUlEyTVRkV0xERm5UQllCWVd1UEZtTm8zdE5zNEYvYWpBVzJ6a1BG?=
- =?utf-8?B?REo1ZERpdnY0MmkxbGlzN0tzN3lTaEVkYTJwN01IZVhSRHc9PQ==?=
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3b8c9cfa-2f84-42d5-4f83-08def6de764d
-X-MS-Exchange-CrossTenant-AuthSource: MN0PR19MB6091.namprd19.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Aug 2026 12:54:06.8840
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
-	00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR19MB6109
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAFjMeWoC/33Pz0rEMBAG8FdZcjYymSSTxJMg+ABexUP+7ga3W
+ 2mlKEvf3diLbRc8zgy/b/iubMxDzSN7OFzZkKc61v7SBnt3YPHkL8fMa2ozQ0ACQuLnEd9DF3n
+ XJ64RnHASwAVkTXwMudSvJe2VvTw/sbe2PNXxsx++lw+TWE5LmAG7CZsEBx6lUqHolIuXj8fO1
+ /N97LslZ8J/LDaLvqQkjBKGaG/lygrYWtlsLkZYkpSNzXurVlaKrVXNJgShAYNH6fZW/1kLamv
+ 1718KUceUnHc3fWlt9dZSs4JiTFkJTPamr1nZfV/TrPUeStBeK8K1nef5BzfUTJQTAgAA
+X-Change-ID: 20260626-ls2kbmc-mod-5209193009b2
+To: Binbin Zhou <zhoubinbin@loongson.cn>, 
+ Chong Qiao <qiaochong@loongson.cn>, Lee Jones <lee@kernel.org>, 
+ Huacai Chen <chenhuacai@kernel.org>, Corey Minyard <corey@minyard.net>, 
+ Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>
+Cc: Xi Ruoyao <xry111@xry111.site>, WANG Xuerui <kernel@xen0n.name>, 
+ Yinbo Zhu <zhuyinbo@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
+ linux-gpio@vger.kernel.org, openipmi-developer@lists.sourceforge.net, 
+ Miao Wang <shankerwangmiao@gmail.com>, Corey Minyard <cminyard@mvista.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6101;
+ i=shankerwangmiao@gmail.com; s=20250715; h=from:subject:message-id;
+ bh=VleUTPyNYCta8Pce//26vwcSESLQGjcQbaTRoUUxTl4=;
+ b=owEBbQKS/ZANAwAKAbAx48p7/tluAcsmYgBqecxbsFXRzpbvqkkSfXdU6rnlNHSDi93mAs+Te
+ QTi1ljvV9uJAjMEAAEKAB0WIQREqPWPgPJBxluezBOwMePKe/7ZbgUCannMWwAKCRCwMePKe/7Z
+ bggwEACGOo3k5L5/Dmpq58mkv3y8dd0tlm6p/6r1BO3K062Igkf1K8d/bPsfaNsmJnuEPs0DIjM
+ Og8d6cSaloHpAznoxXSv5T76tkvszAAdZ60FhGLgQ/1y+SRzgzhySs2IqJpJgG3l5n7ZBjPrbHj
+ uj6VU9nJr6FQoXu7inIeKu/jlOiz0S5wXn/Z4r6FWQgtRSJa1TxhMOFO7js+VOq7+7fTjnx9O8A
+ 3iIuZkafEjlJlSQJ5ukVQWPvMg+z23rKmtDMuPsV8cul6yZK7S9McA81USfYml1sslg3pQ5IpQ1
+ lLeSSi455mcuCIQoyDFd6oGmwRlgiQrtgl+PqTRxjmrttDXY/15RinsE9oFlIYqLD7E464R9X78
+ tTMjzxl/3vsLDw3rwKd6VVW+UQXNb4Vf2Rhr8Hhly32uoIKh+RPAvzAqGVybz4g4VR/Ac1XM+FF
+ B7ybBcgvhJ7UROI0/iqUQ4rTiGLkctNRfs8fsFgic91JhlGrkFJrJZRS7V+epInjqMqFQiB004P
+ BPUv4TYJn8Z0aThK2Bw9jDkbEwiHDvblbq9lS4RiXXZkPtll80OMSwlznafaCp2rl6jMuz9tF9p
+ hppA1Dkd6llBR8tyuwzmNBGaTsVFdDRRSdVyBeXt7X5PC87cBo5jYpfX/BFQxoj0v/hp4m9qkuw
+ sbDsnvc5bmd8prQ==
+X-Developer-Key: i=shankerwangmiao@gmail.com; a=openpgp;
+ fpr=6FAEFF06B7D212A774C60BFDFA0D166D6632EF4A
+X-Endpoint-Received: by B4 Relay for shankerwangmiao@gmail.com/20250715
+ with auth_id=462
+X-Original-From: Miao Wang <shankerwangmiao@gmail.com>
+Reply-To: shankerwangmiao@gmail.com
 
-Hi Alex,
+Previously, the driver has been introduced to support the Loongson 2K
+BMC running on the Loongson Servers, which is essential to prevent
+the system from hanging when the BMC is being reset and the default
+efi-framebuffer is being used. However, there are some drawbacks in the
+driver.
 
-Thanks for pointing me to Arnd's deprecation series. I understand the
-decision not to accept new Cortex-v7M board support, and I will not send
-another revision.
+Firstly, the driver tries to read and write to the connected PCI-E host
+controller registers, assuming that the BMC is connected to LS7A PCI-E
+host controller. This assumption should be true for real products, but
+to prevent from accidentally reading and writing to the wrong PCI-E host
+controller, this driver should be modified to check this before
+accessing the registers.
 
-I had already sent v2 on August 9 before seeing your reply. Please
-consider v2, and the series as a whole, withdrawn from upstream review.
+Secondly, the driver uses non-exported functions to tell the vt
+subsystem to redraw the screen, preventing the driver from being
+compiling as a module. This can be fixed by using the exported
+functions instead.
 
-I have archived the hardware-tested patch set and boot tooling for
-downstream users here:
+Thirdly, the driver directly accesses the GPIO controller registers
+using hard-coded addresses, which might conflict with the loaded GPIO
+controller driver for the same GPIO controller. This is fixed in this
+series by using the GPIO subsystem APIs instead. To associate a GPIO pin
+with a certian PCI device, it should be declared in the firmware level,
+i.e. in the ACPI table or the device tree, and thus the firmware
+interface should be discussed and coordinated with Loongson personnels.
+Despite of this, the proposed solution in this series should be the
+minimum necessary change to express such association. Furthermore, the
+conventional GPIO pin number and the controller address are also
+provided, to be used as a fallback when the GPIO pin is not declared.
 
-https://github.com/HosakaSu/artpi2-linux
+Finally, there is a minor issue in the driver where it changes the
+mode string describing the screen resolution during probing, which
+prevents the device from being probed again if -EPROBE_DEFER is
+returned by the probe function.
 
-Thanks to you and everyone who took the time to review the series.
+I have tested the changes in this series on a single-socket Loongson
+3C6000 server with a Loongson 2K BMC, and the driver works as expected
+when the corresponding GPIO driver is additionally loaded.
 
-Regards,
-Liu Changjie
+Signed-off-by: Miao Wang <shankerwangmiao@gmail.com>
+---
+Changes in v8:
+- Address issues found by the Sashiko AI review bot
+  - Fix the error path of the probe function, preventing unintentionally
+    returning 0 on failure
+  - Reorder the patches in the series to make the change to the Kconfig
+    entry for ls2kbmc to be the last patch, to satisfy the AI bot's
+    concern on failure to clean up when the driver is built as a module
+    and is being removed.
+- Link to v7: https://lore.kernel.org/r/20260810-ls2kbmc-mod-v7-0-8aa0fb5a5462@gmail.com
+
+Changes in v7:
+- When parsing the mode string, require the mode string to start with
+  "video=", reverting the change in v5. Add a comment to describe the
+  reason for this change to satisfy the AI bot's concern.
+- When printing the invalid mode string, use %*pE to print the string
+  to prevent the string from printing garbage characters, as suggested
+  by the AI bot.
+- When calculating the stride, check that the multiplication of width
+  and depth does not overflow, as suggested by the AI bot.
+- Add gpio_device_get_fwnode() into gpiolib.c as a library function to
+  get the fwnode of a GPIO device, as suggested by Bartosz.
+- Adjust the coding style of the patch as suggested by Bartosz.
+- Link to v6: https://lore.kernel.org/r/20260805-ls2kbmc-mod-v6-0-16ccde412d86@gmail.com
+
+Changes in v6:
+- Ajdust the Kconfig entry for IPMI_LS2K, moving the dependency on
+  MFD_LS2K_BMC_CORE to the IPMI_SI Kconfig entry, as discussed with
+  and agreed by Corey.
+- Link to v5: https://lore.kernel.org/r/20260804-ls2kbmc-mod-v5-0-e6bc5cdd9a93@gmail.com
+
+Changes in v5:
+- Address issues found by the Sashiko AI review bot
+  - Maintain the compatibility with possible unexpected mode string when
+    parsing, although such mode string is actually not expected, to
+    satisfy the AI bot's concern.
+  - Add a comment to point out that the adjustment of the Kconfig entry
+    for ls2kbmc is in the following patch, to satisfy the AI bot's
+    concern.
+- Link to v4: https://lore.kernel.org/r/20260731-ls2kbmc-mod-v4-0-d201502ba239@gmail.com
+
+Changes in v4:
+- Use a better way to get the GPIO device fwnode.
+- Add a comment to describe a problem found by AI bot which is actually
+  intended.
+- Link to v3: https://lore.kernel.org/r/20260710-ls2kbmc-mod-v3-0-ef718636e78e@gmail.com
+
+Changes in v3:
+- Check the return value of devm_add_action_or_reset when registering
+  the cleanup hook of the work queue
+- Use swnode to create the link between the device to the GPIO chip,
+  and prevent borrowing the legacy GPIO APIs
+- Link to v2: https://lore.kernel.org/r/20260708-ls2kbmc-mod-v2-0-2afdd1741766@gmail.com
+
+Changes in v2:
+- Several fixes suggested by the Sashiko AI review bot
+- Add a cleanup function for the wq on removal of the device
+- Relax the reverse dependency from CONFIG_IPMI_LS2K to
+  CONFIG_MFD_LS2K_BMC_CORE to allow the driver to be built as a module
+- Link to v1: https://lore.kernel.org/r/20260708-ls2kbmc-mod-v1-0-c344bf5defa3@gmail.com
+
+---
+Miao Wang (8):
+      mfd: ls2kbmc: Make a copy when parsing mode string
+      mfd: ls2kbmc: Sanity check for the connected pci port
+      mfd: ls2kbmc: Redraw using exported functions
+      mfd: ls2kbmc: Cancel the work queue on removal
+      ipmi: ls2k: adjust dependency to its mfd driver
+      gpiolib: add gpio_device_get_fwnode() helper
+      mfd: ls2kbmc: Capture the reset event of BMC through GPIO
+      mfd: ls2kbmc: Able to be compiled as a module
+
+ drivers/char/ipmi/Kconfig   |   2 +-
+ drivers/gpio/gpiolib.c      |  13 +++
+ drivers/mfd/Kconfig         |   2 +-
+ drivers/mfd/ls2k-bmc-core.c | 247 ++++++++++++++++++++++++++++++++++----------
+ include/linux/gpio/driver.h |   1 +
+ 5 files changed, 206 insertions(+), 59 deletions(-)
+---
+base-commit: 11028ab62899e4191e074ee364c712b77823a9c4
+change-id: 20260626-ls2kbmc-mod-5209193009b2
+
+Best regards,
+-- 
+Miao Wang <shankerwangmiao@gmail.com>
+
+
