@@ -1,109 +1,202 @@
-Received: from mail2.andi.de1.cc (vmd64148.contaboserver.net [161.97.139.27])
+Received: from mo4-p02-ob.smtp.rzone.de (mo4-p02-ob.smtp.rzone.de [85.215.255.83])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EACF3644CA
-	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 20:34:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=161.97.139.27
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786394091; cv=none; b=JktFOEUGUo88moNqZOBUr5cVZMe2C4WvC84VSt7RJkxgIdZ3ZecuPvrLcEOlenBLL47JjorK3JD9DhLU9T+LNfISSQ1x5t85q15pmb49YdRKYECuhY5x3B2q+mP8IQalB8y9ol3MnPgvS/wfvktU9PSkmSE3QwAsmO8V/d6tsJ8=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786394091; c=relaxed/simple;
-	bh=Z//gjbzolO0j9Ht17OZ+pUqamuxMGAP6Onswa//Ty8s=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=L5YkHmUOxnCuoN4lVLzvdiqNlNWIdpRXt6BAoa7wtbNHXqEYazdjpd/mmkEkJvrb1ZAf9U1pMCUxSUqrcGGMdKTiKVetLVdmMSU4+KsoY0eBWwmkh0UlqehGlmPtUltsHZ9SemhIhLCg8kwHWziyWKLb72V/V5SA62Wp4gThHco=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info; spf=pass smtp.mailfrom=kemnade.info; dkim=pass (2048-bit key) header.d=kemnade.info header.i=@kemnade.info header.b=7oNLAliP; arc=none smtp.client-ip=161.97.139.27
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kemnade.info
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F9FA43C7A9
+	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 20:59:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=85.215.255.83
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786395600; cv=pass; b=kpqzyspAakEQamFTx2RFRRmN7QtSp2QhSYU7Ym7K0zVMNKJutknelWUZ+Qoxax1w1gjpOLqJXY7eL2FN5aljiR30VIGN4sa5zpUoqPJPz+hzkCSys3YIFRMZgIaPo/6496LA6LlQK3TjUs864dqfWIkZMJMF6WHiLL4Q4A8PhZg=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786395600; c=relaxed/simple;
+	bh=M2b0s5sV+UlmrYlU5mF5+QdMgIVz6hWvd8/C7SfZBcE=;
+	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
+	 Message-Id:References:To; b=eHho8a7KIact/J4GQqp5T+cbSXHibLazcqCyTNTSQ3CMl9N/DBdfFbcCMNRpJ2q6LEAhiUAwmg7F4ot+fiY27dDgup/es+hBoyW+mIPsA4aWL1SyH/EzaFrxAy7lhYauOq64MlrEQDM65mZ0Bd+z+gBsPuR56yOVWNlj8HvX2HE=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=goldelico.com; spf=pass smtp.mailfrom=goldelico.com; dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=PsP/bxV0; dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=ol9sAKua; arc=pass smtp.client-ip=85.215.255.83
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=goldelico.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=goldelico.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kemnade.info header.i=@kemnade.info header.b="7oNLAliP"
-Received: from mail.andi.de1.cc ([2a02:c205:3004:2154::1])
-	by mail2.andi.de1.cc with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.98.2)
-	(envelope-from <andreas@kemnade.info>)
-	id 1wtWhr-0000000BpEY-1okH;
-	Mon, 10 Aug 2026 22:34:47 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=kemnade.info; s=20220719; h=References:In-Reply-To:Subject:Cc:To:From:
-	Reply-To:Content-ID:Content-Description;
-	bh=5fkRRQESuJogTJbUlw1TtnlKX+cyZWiGY0fHfzIT9Xw=; t=1786394087; x=1787603687; 
-	b=7oNLAliPd+dORjeZyRnmWrYouZ3Ddhinc3O7QWJRR7V4eZgWn10m9ODxVcU/0GZVxzGwJAXzY/b
-	OsBz8sv9aWdoMES/6XOSganyWSQCuq++GFXrbzVrV1HsgOECFkbLTMVOwgbh2mB7B4sk4tXuaObIq
-	f9D3lHfrj2PpNllamzEYIov6g0GEYPQPWRSGnD2XbY8GPZZ+d6xCIVkEOsVM5G33wLFxM5Ued1UgD
-	9LHpPEKWiHcWKdtiMMkIwtzmMfbSQ0MFrdX0G2+i6hsxNzKcSIUyByVZZgMCw4VPNIdD2g2pXZb5M
-	bI8AB7brid63mcq+vEwTVLPi/WvGdyv58iYQ==;
-Date: Mon, 10 Aug 2026 22:34:13 +0200
-From: Andreas Kemnade <andreas@kemnade.info>
-To: "H. Nikolaus Schaller" <hns@goldelico.com>
-Cc: Daniel Thompson <danielt@kernel.org>, Grond <grond66@riseup.net>, Stefan
- Leichter <sle85276@gmx.de>, Grazvydas Ignotas <notasas@gmail.com>, Tony
- Lindgren <tony@atomide.com>, Ethan Nelson-Moore <enelsonmoore@gmail.com>,
- Jarkko Nikula <jarkko.nikula@bitmer.com>, Sascha Hauer
- <s.hauer@pengutronix.de>, Lee Jones <lee@kernel.org>, Rob Herring
- <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, Mark Brown
- <broonie@kernel.org>, Aaro Koskinen <aaro.koskinen@iki.fi>, Kevin Hilman
- <khilman@baylibre.com>, Roger Quadros <rogerq@kernel.org>, Russell King
- <linux@armlinux.org.uk>, Jingoo Han <jingoohan1@gmail.com>, Helge Deller
- <deller@gmx.de>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai
- <tiwai@suse.com>, Sen Wang <sen@ti.com>, Richard Fitzgerald
- <rf@opensource.cirrus.com>, Arnd Bergmann <arnd@arndb.de>, Srinivas
- Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, Kuninori Morimoto
- <kuninori.morimoto.gx@renesas.com>, Charles Keepax
- <ckeepax@opensource.cirrus.com>, Niranjan H Y <niranjan.hy@ti.com>,
- letux-kernel@openphoenux.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org,
- linux-omap@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- dri-devel@lists.freedesktop.org, linux-fbdev@vger.kernel.org,
- kernel@pyra-handheld.com, mfd@lists.linux.dev
-Subject: Re: [PATCH 15/16] backlight: remove pandora_bl
-Message-ID: <20260810223413.01af9a6d@kemnade.info>
-In-Reply-To: <92FE1162-8C61-4186-B073-6AB4B2BDA640@goldelico.com>
-References: <cover.1783749722.git.hns@goldelico.com>
-	<f897f695c0e1e128d7ebb41be8dfdce4d634f552.1783749722.git.hns@goldelico.com>
-	<anmpiADsvzW39DNx@aspen.lan>
-	<DA9588C6-0238-4713-B1A1-CB2123F02028@goldelico.com>
-	<20260810143914.64d29a5c@kemnade.info>
-	<2C9844A3-3C4C-48E6-863D-BF8328CEE540@goldelico.com>
-	<92FE1162-8C61-4186-B073-6AB4B2BDA640@goldelico.com>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; aarch64-unknown-linux-gnu)
+	dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="PsP/bxV0";
+	dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="ol9sAKua"
+ARC-Seal: i=1; a=rsa-sha256; t=1786395414; cv=none;
+    d=strato.com; s=strato-dkim-0002;
+    b=t2BQl9Z8KeurTNXDux1Cx0A8Bjn5K0igXQw7bigsJM3q6Fu18PGX6fQ8shpduQ2qp9
+    kojVa+x45LQPfZEA7f21vmALVD24IAPFWurY/6pZjrRMtWvkYIWYRxp6gKPf+fLOGsSl
+    kVsyrHPDywUYKyqNnyR9GXUPh19Yz1q6Gqukf+lmS9AnuahB/U1XVVZKSS0hLRmaqCkE
+    0N9c9YRybc2rxxFMk31QEfKmbi869/LgVytFIpDjRQnEkDQaa6uBwwiQom/I2JaRLoEo
+    HKsxaYV0a401CR32Zo4qSYOLi1oTrRJyJBpWn4BiGW6G0SOuZGtogL9eW4MayGFUM5NT
+    LR7g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1786395414;
+    s=strato-dkim-0002; d=strato.com;
+    h=To:References:Message-Id:Cc:Date:In-Reply-To:From:Subject:Cc:Date:
+    From:Subject:Sender;
+    bh=M2b0s5sV+UlmrYlU5mF5+QdMgIVz6hWvd8/C7SfZBcE=;
+    b=Dwyj4QBN67/T9pzAOzwI1/AJhjzygobZHUmTcKODeVjNNEWKSV73ese/v4lua+h54C
+    IoGUXYfXo1dcUm6YCznSLE5tI2CwV5ca4KM+zS4VK4uVDykY+/5TW/lSMxDCkmTFd329
+    aHnbS5D6ENGua0gnvcq6s96Tp3XMeRV4H2ichflsdisgRE01IPVSdqL79XlpTDEAXg12
+    efmtlwOw9200KHv86Zp3TLhuxI8zUdS8mnTPzmwM1Sec0g8zCfBsTIZ3vG7RmmcHcxvK
+    tPTphRF5vVjbqPstelrDB1lv/Csoj//SX/yYxh/qQf23AX4v4YY7pFx7k5BuQfC3DPzy
+    7OXQ==
+ARC-Authentication-Results: i=1; strato.com;
+    arc=none;
+    dkim=none
+X-RZG-CLASS-ID: mo02
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1786395414;
+    s=strato-dkim-0002; d=goldelico.com;
+    h=To:References:Message-Id:Cc:Date:In-Reply-To:From:Subject:Cc:Date:
+    From:Subject:Sender;
+    bh=M2b0s5sV+UlmrYlU5mF5+QdMgIVz6hWvd8/C7SfZBcE=;
+    b=PsP/bxV0DkARdQeMAEKbfJPJg42HksHI8mlHtlKGDLalnkZ7cIXtbWwJ8LdE7DB99M
+    IIfb2bPHCNo1n8eCFg3PDJO55f0wEdVCy4Hlj8e9VrqLUhmh+LPpel1ZHgOBjIfR2WXF
+    5DV01vxRyuEGon6/1hhSINkJRmXOOTeKgrhyjj5VVzKXcz4fRAUawT+xQLdsxJxX+1K9
+    qHY3mrD4msgpzTNz6d8JL36TJcOrnyYROQ2y6rtb6lYNmnmlSe7AtpWh31Og8Do3WDBX
+    pMTRi48cpor8XLotO1HUL59BLznYwONrDYakOLuV9NNlZRVJDj1yyMUzFkSLgHvFK6G0
+    OJIg==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1786395414;
+    s=strato-dkim-0003; d=goldelico.com;
+    h=To:References:Message-Id:Cc:Date:In-Reply-To:From:Subject:Cc:Date:
+    From:Subject:Sender;
+    bh=M2b0s5sV+UlmrYlU5mF5+QdMgIVz6hWvd8/C7SfZBcE=;
+    b=ol9sAKuaZNHWsPcZa7fLcth6fUGMED5C+eqhENktvwwMT/CtFPT0K86CugHMLpZSaJ
+    zfejHdUcnNxS2MSRKNAQ==
+X-RZG-AUTH: ":JGIXVUS7cutRB/49FwqZ7WcJeFKiMhflhwDubTJ9qVpwcQVkPW4I1HrTipoGmsiNZ9v/oGyp26o/Wi+pVFrZX1Db5b3z"
+Received: from smtpclient.apple
+    by smtp.strato.de (RZmta 55.5.6 AUTH)
+    with ESMTPSA id Q58eac27AKuqiaO
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve X9_62_prime256v1 with 256 ECDH bits, eq. 3072 bits RSA))
+	(Client did not present a certificate);
+    Mon, 10 Aug 2026 22:56:52 +0200 (CEST)
+Content-Type: text/plain;
+	charset=us-ascii
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81.1.8\))
+Subject: Re: [Letux-kernel] [PATCH 15/16] backlight: remove pandora_bl
+From: "H. Nikolaus Schaller" <hns@goldelico.com>
+In-Reply-To: <20260810223413.01af9a6d@kemnade.info>
+Date: Mon, 10 Aug 2026 22:56:41 +0200
+Cc: linux-fbdev@vger.kernel.org,
+ Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+ Liam Girdwood <lgirdwood@gmail.com>,
+ Tony Lindgren <tony@atomide.com>,
+ dri-devel@lists.freedesktop.org,
+ Niranjan H Y <niranjan.hy@ti.com>,
+ Sen Wang <sen@ti.com>,
+ Rob Herring <robh@kernel.org>,
+ Aaro Koskinen <aaro.koskinen@iki.fi>,
+ Kevin Hilman <khilman@baylibre.com>,
+ Helge Deller <deller@gmx.de>,
+ Lee Jones <lee@kernel.org>,
+ Russell King <linux@armlinux.org.uk>,
+ linux-omap@vger.kernel.org,
+ Daniel Thompson <danielt@kernel.org>,
+ Grazvydas Ignotas <notasas@gmail.com>,
+ devicetree@vger.kernel.org,
+ Conor Dooley <conor+dt@kernel.org>,
+ Charles Keepax <ckeepax@opensource.cirrus.com>,
+ Arnd Bergmann <arnd@arndb.de>,
+ Sascha Hauer <s.hauer@pengutronix.de>,
+ mfd@lists.linux.dev,
+ linux-sound@vger.kernel.org,
+ Richard Fitzgerald <rf@opensource.cirrus.com>,
+ Mark Brown <broonie@kernel.org>,
+ Jaroslav Kysela <perex@perex.cz>,
+ Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+ linux-arm-kernel@lists.infradead.org,
+ Roger Quadros <rogerq@kernel.org>,
+ Jingoo Han <jingoohan1@gmail.com>,
+ Takashi Iwai <tiwai@suse.com>,
+ linux-kernel@vger.kernel.org,
+ kernel@pyra-handheld.com,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Jarkko Nikula <jarkko.nikula@bitmer.com>,
+ Ethan Nelson-Moore <enelsonmoore@gmail.com>
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <38ED9D73-7BF3-4005-8E1C-4F7125906A20@goldelico.com>
+References: <cover.1783749722.git.hns@goldelico.com>
+ <f897f695c0e1e128d7ebb41be8dfdce4d634f552.1783749722.git.hns@goldelico.com>
+ <anmpiADsvzW39DNx@aspen.lan>
+ <DA9588C6-0238-4713-B1A1-CB2123F02028@goldelico.com>
+ <20260810143914.64d29a5c@kemnade.info>
+ <2C9844A3-3C4C-48E6-863D-BF8328CEE540@goldelico.com>
+ <92FE1162-8C61-4186-B073-6AB4B2BDA640@goldelico.com>
+ <20260810223413.01af9a6d@kemnade.info>
+To: Discussions about the Letux Kernel <letux-kernel@openphoenux.org>
+X-Mailer: Apple Mail (2.3826.700.81.1.8)
 
-On Mon, 10 Aug 2026 20:30:13 +0200
-"H. Nikolaus Schaller" <hns@goldelico.com> wrote:
 
-> > 
-> > Yes that is what I mean. It needs to be ported somewhere. If it can be ported to
-> > some compatible = "pwm_bl_for_tps61161" or what fits best it will be fine. Or it
-> > could be in some compatible = "pandora_bl" driver.
-> > 
-> > Has to be worked out when the development machines are not blocked by 3 or 4 other
-> > projects already running in parallel :)  
-> 
-> Nevertheless I did a quick look into the pandora_bl driver structure.
-> 
-> Here are my findings:
-> - the code fragment is part of pandora_backlight_update_status()
-> - priv->old_state remembers if brighness was set to 0 or not
-> - so this code triggers on any change from bright = 0 to bright > 0
-> - the pandora_bl driver is the only one to use TWL_MODULE_PWM besides twl-pwm
-> 
-> So the most natural way of transplanting this appears to me:
-> - add this logic to the twl-pwm driver
 
-That chip could be connected to any pwm driver, so
-it does not make sense to have that in a pwm driver.
+> Am 10.08.2026 um 22:34 schrieb Andreas Kemnade <andreas@kemnade.info>:
+>=20
+> On Mon, 10 Aug 2026 20:30:13 +0200
+> "H. Nikolaus Schaller" <hns@goldelico.com> wrote:
+>=20
+>>>=20
+>>> Yes that is what I mean. It needs to be ported somewhere. If it can =
+be ported to
+>>> some compatible =3D "pwm_bl_for_tps61161" or what fits best it will =
+be fine. Or it
+>>> could be in some compatible =3D "pandora_bl" driver.
+>>>=20
+>>> Has to be worked out when the development machines are not blocked =
+by 3 or 4 other
+>>> projects already running in parallel :) =20
+>>=20
+>> Nevertheless I did a quick look into the pandora_bl driver structure.
+>>=20
+>> Here are my findings:
+>> - the code fragment is part of pandora_backlight_update_status()
+>> - priv->old_state remembers if brighness was set to 0 or not
+>> - so this code triggers on any change from bright =3D 0 to bright > 0
+>> - the pandora_bl driver is the only one to use TWL_MODULE_PWM besides =
+twl-pwm
+>>=20
+>> So the most natural way of transplanting this appears to me:
+>> - add this logic to the twl-pwm driver
+>=20
+> That chip could be connected to any pwm driver, so
+> it does not make sense to have that in a pwm driver.
 
-So it belongs into a backlight driver. And since it shared so much
-code with the pwm_bl, it could be extended.
-The compatible should have pwm in the name to be able to also add
-a w1 driver later.
+Well, the chip does not need a driver, at all - at least in PWM case.
+The missing piece is just about doing proper startup into PWM mode.
 
-Regards,
-Andreas
+> So it belongs into a backlight driver.
+
+Interesting how contrary requirements can be judged :) Especially
+for such simple things that apparently even work without any driver.
+
+> And since it shared so much
+> code with the pwm_bl, it could be extended.
+
+But how do you give the chip driver access to twl4030 registers?
+Or make it universal so that it works on any PWM generator? Any ideas?
+
+> The compatible should have pwm in the name to be able to also add
+> a w1 driver later.
+
+Ok, that is an argument to be considered.
+
+But: for multi-protocol chips (think of SPI and I2C) there are
+usually two drivers (or glue code for a core driver) for each
+protocol. So we can have one driver when connected to PWM and
+another being an EasyScale (which is not the standard one-wire
+protocol) driver.
+
+BTW: I am still not convinced that the chip needs an EasyScale
+client driver at all. The protocol is similar to an UART with
+fixed bit format. So this rather needs a generic host driver. Not a
+client driver. Something like baclkight levels -> easy-scale.
+Then you can connect any compatible chip.
+
+But even in this case the hardware connection requires you to
+patch or piggy-back that into the twl4030 pwm driver because that
+is the connection given by the Pandora hardware.
+
+So why not generating the simple startup sequence in the PWM driver?
+KISS...
+
+BR,
+Nikolaus
+
