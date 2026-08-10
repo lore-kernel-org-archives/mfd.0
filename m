@@ -1,152 +1,124 @@
-Received: from mo4-p02-ob.smtp.rzone.de (mo4-p02-ob.smtp.rzone.de [81.169.146.168])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2BF73630BF
-	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 10:51:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=81.169.146.168
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786359097; cv=pass; b=LgWzs7gL1rjWYH5Pt8ekyV8BRD7lC5uhQ5wjDeer1gkedGhlqslr34+X6mEdqsNhu5iKUksDp1yhE365eXzciauTIq+4jYsb+ebjA/AAABgP8U/Ka8JU4Zxv1j+BKg5IM/+K0owurIOX7R+Jw9+ttzk67F8PFLxLrluXKHmZ2Ns=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786359097; c=relaxed/simple;
-	bh=/+Lj5ZmB2Wj4J0ALCVryLcGBe7uwKxdF0BoFyEVf5Lw=;
-	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
-	 Message-Id:References:To; b=SiBJXYeHWt2LNeez3H12bebyhMUTMB5HRMaRjYpYCpfjhx5QQDeVQMaK4bPeuKM4LTNkkg0VjzPmplMP3sH8cZZjAbv+tQT3lvkL1ZE8zMTDkMkICfj8m1RKUL49LYGWLGUmqztv6R9d5h/xMlakXtFYIYtdBJixFpM+1mBlMgQ=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=goldelico.com; spf=pass smtp.mailfrom=goldelico.com; dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=k0vB1a3X; dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b=u0XFv4Ji; arc=pass smtp.client-ip=81.169.146.168
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=goldelico.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=goldelico.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 42E5B3C1083
+	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 11:26:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786361172; cv=none; b=WGIkCn23xQGJLA578yqbRIAnlRVBunDB15BzvSccYwvI+XCl7sC9p0gNTM9NFe5Fl9vw78PzzrAMPTOo+1ZQv3YM6qmneAQqagDMACFP1u70eeafQa9mXXcPZ1q7hUgWjDD2azZnUmrjTinq8lHYJ9pYgDKXa/GmLe30tdQraAI=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786361172; c=relaxed/simple;
+	bh=QwVAnHRHiCemIeYxsEaRGiTsru4MY7geYHkt3gj+mPE=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=TVjrKbLn0IEcPN0hUmAeIh686/Me78PWFhuhKEv1leRvB37u5X8TozRe0JXoIhXahZIOzvr2ulRR1X4+niUATZVOVlFHOgVuLmSeGdHvp5BR6j/ES4yisE/1nGFNk2V8dvVUNOhVsDw3EyfevPOCQ0+590jyQIBJ17NA+15qgb0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TAi5N8oQ; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="k0vB1a3X";
-	dkim=permerror (0-bit key) header.d=goldelico.com header.i=@goldelico.com header.b="u0XFv4Ji"
-ARC-Seal: i=1; a=rsa-sha256; t=1786358730; cv=none;
-    d=strato.com; s=strato-dkim-0002;
-    b=r95vgetHZxNU5/Q91bpahGuvUzNS6S2TBIeGd/QD0yKLV9sWOswllTVMy5nC/xI3Q3
-    mzdOBafYfZKVUKizWCKYIVofrhglfSiMinenGSq59RRATfCpnsEZ7iwpreKyO+CiKYqx
-    dxj2wpd2KTfklVzDwOeC9iOSezWzDxHy11ogy0eqAI7e1rJZ8kTZr4IyvYOGry3isGLa
-    NZ8N2KI6c5ZfaLEOO5MtA0C8a2/GRCpqTlLQk7oXaPBpkMq70+wSc4O/9n41DwwD51iV
-    PnmKY0WZtTDO3BsAu6IapkPO+4VsHJABSFgsxUSaCJ1euEO1W/MtpsFMgynQyMKeiFsA
-    XOGw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1786358730;
-    s=strato-dkim-0002; d=strato.com;
-    h=To:References:Message-Id:Cc:Date:In-Reply-To:From:Subject:Cc:Date:
-    From:Subject:Sender;
-    bh=/+Lj5ZmB2Wj4J0ALCVryLcGBe7uwKxdF0BoFyEVf5Lw=;
-    b=cZANkWRCwYlNVeyjB6NB4O0XANCgXcxaXuXBrybQg3WdB5qI4AIES4njNz55YNvgez
-    ACgdGH3frpp11kDyAc/6G0vsP8E55Q8GAllXV6cE6mLtp/heESnOVFRw/QOlB/XyQI4g
-    FWAC3lH7ZCkOPby3mnn6tzjcEjyqVp/O1IZsvhLUkve+m+Rc1EXva2eC7DSiDZCZDG3v
-    jt1J2T9v62EDkhjTjlDEpevh1fWRnK1gzIdJPhnqZlCkaTTY0JSsAy6QKwCz12/8lRts
-    R4sZz5WS3KwwIIkYSH2BQxH+pO5yxyhbrJNLkPlmwEDXaBQdyqfycVXsHlH4BjaY0ivX
-    XQoQ==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo02
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1786358730;
-    s=strato-dkim-0002; d=goldelico.com;
-    h=To:References:Message-Id:Cc:Date:In-Reply-To:From:Subject:Cc:Date:
-    From:Subject:Sender;
-    bh=/+Lj5ZmB2Wj4J0ALCVryLcGBe7uwKxdF0BoFyEVf5Lw=;
-    b=k0vB1a3XGQa/vwzXHC/q+UZUBFPNUJqaHKDb1/QhVR06t596gAA2wEhFYOAjF8eH6r
-    ceyWM4RenhaakWurc8GGAmIj0CzrCmAK3dMM8+ZVeJvAonbDhh9zlwI8e3I+dJp3pOOF
-    NhQh0j5Xo5VW8t+LwtSdBR1LaPN2h3cyoJBZuz2DAajhfOIgWDdAvEsYfdtRjzjCY1Z+
-    bIhRAX5J3Ld+TGk7B+sUMH6QDjtkRmVOp5b5LmLBWeLjKcNfFgNLFafC4yyjZasjlhPo
-    Gh1JPRryhLmgpa3Na6SMI8BeccvKKYW0ttR3Z8PpWg8cgCtwXlx1KlAZ25APIdZ0JqSK
-    Wdzg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1786358730;
-    s=strato-dkim-0003; d=goldelico.com;
-    h=To:References:Message-Id:Cc:Date:In-Reply-To:From:Subject:Cc:Date:
-    From:Subject:Sender;
-    bh=/+Lj5ZmB2Wj4J0ALCVryLcGBe7uwKxdF0BoFyEVf5Lw=;
-    b=u0XFv4Ji86X9gdHTYnWTfT1UnxYTAcLRqIwilIA9yK+Y/G0MHETjxnZElNPmRYKujj
-    rQ4V4cAiyXvtdwQTN2Aw==
-X-RZG-AUTH: ":JGIXVUS7cutRB/49FwqZ7WcJeFKiMhflhwDubTJ9qVpwcQVkPW4I1HrTipoGmsiNZ9v/oGyp26o/Wi+pVFrZX1Db5b3z"
-Received: from smtpclient.apple
-    by smtp.strato.de (RZmta 55.5.6 AUTH)
-    with ESMTPSA id Q58eac27AAjRgVw
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve X9_62_prime256v1 with 256 ECDH bits, eq. 3072 bits RSA))
-	(Client did not present a certificate);
-    Mon, 10 Aug 2026 12:45:27 +0200 (CEST)
-Content-Type: text/plain;
-	charset=us-ascii
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TAi5N8oQ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2BAD91F0155B
+	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 11:26:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786361170;
+	bh=wZoyj/bcYqq2WaFoOPNolBM0q0on9gdK76aAsSvObhU=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=TAi5N8oQgDU3uxlgGdhWfEn9nNC7rXCuv4yN2uZImZ5Qe473HPVo3p50VUpSWiPHG
+	 IoiTod5iPqxiSXKiITSq8Z8zTmwJc5HZ5uz7xmOpQ3Jkb0fyrve6APE8i9wcqXWbG9
+	 lXGMKZJiKDjBF9o//Mpr0RyCf4KxJ0hU7mN22P+i0Mg5N9bg3iRDxEVPL+nUuBavi3
+	 AGideJY+Jza/asFc16Mup/MjDB2acqh/PegxslqsJ6Ggp5t9N4qp8PgknMdViirGgS
+	 A8bpR8iBlt1Pwb4LwILd9Hw6sRCpa0GAj9fkI0FlOKyQ95A6k8YjbPxxtVg2uxyHNg
+	 fWwlAMzpEDWvA==
+Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-5b01cb18515so1640522e87.2
+        for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 04:26:10 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RrqwsDGFkmRIXw1XA0w3OWQKkgI3RbB2F6/luMYVECqI1pCdUDDkavomuy4opFCjnfbiX8=@lists.linux.dev
+X-Gm-Message-State: AOJu0Yys64hrgzmKis01CdpHf7n+K2+/J1pvXo9qvT3uFx7iWW6pyIvB
+	d7BJCLA7RJ731ggPSSzKVEE+NaPgWG1F1tim3dNYBFu2jLGi1Rm9fdPEAE5YR4e7tYlt4zIns6G
+	54FyeLkBd256Q2hli+n6yHOc0cs+8tDKUFCVnN6fkYA==
+X-Received: by 2002:ac2:4d18:0:b0:5b0:1b0f:7a60 with SMTP id
+ 2adb3069b0e04-5b2f4cc8da0mr3704106e87.32.1786361168649; Mon, 10 Aug 2026
+ 04:26:08 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 10 Aug 2026 06:26:07 -0500
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 10 Aug 2026 06:26:07 -0500
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260801195613.235430-2-krzysztof.kozlowski@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81.1.8\))
-Subject: Re: [PATCH 15/16] backlight: remove pandora_bl
-From: "H. Nikolaus Schaller" <hns@goldelico.com>
-In-Reply-To: <anmpiADsvzW39DNx@aspen.lan>
-Date: Mon, 10 Aug 2026 12:45:16 +0200
-Cc: Grond <grond66@riseup.net>,
- Stefan Leichter <sle85276@gmx.de>,
- Grazvydas Ignotas <notasas@gmail.com>,
- Tony Lindgren <tony@atomide.com>,
- Ethan Nelson-Moore <enelsonmoore@gmail.com>,
- Jarkko Nikula <jarkko.nikula@bitmer.com>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Andreas Kemnade <andreas@kemnade.info>,
- Lee Jones <lee@kernel.org>,
- Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Liam Girdwood <lgirdwood@gmail.com>,
- Mark Brown <broonie@kernel.org>,
- Aaro Koskinen <aaro.koskinen@iki.fi>,
- Kevin Hilman <khilman@baylibre.com>,
- Roger Quadros <rogerq@kernel.org>,
- Russell King <linux@armlinux.org.uk>,
- Jingoo Han <jingoohan1@gmail.com>,
- Helge Deller <deller@gmx.de>,
- Jaroslav Kysela <perex@perex.cz>,
- Takashi Iwai <tiwai@suse.com>,
- Sen Wang <sen@ti.com>,
- Richard Fitzgerald <rf@opensource.cirrus.com>,
- Arnd Bergmann <arnd@arndb.de>,
- Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
- Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
- Charles Keepax <ckeepax@opensource.cirrus.com>,
- Niranjan H Y <niranjan.hy@ti.com>,
- letux-kernel@openphoenux.org,
- devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org,
- linux-sound@vger.kernel.org,
- linux-omap@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org,
- dri-devel@lists.freedesktop.org,
- linux-fbdev@vger.kernel.org,
- kernel@pyra-handheld.com,
- mfd@lists.linux.dev
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <DA9588C6-0238-4713-B1A1-CB2123F02028@goldelico.com>
-References: <cover.1783749722.git.hns@goldelico.com>
- <f897f695c0e1e128d7ebb41be8dfdce4d634f552.1783749722.git.hns@goldelico.com>
- <anmpiADsvzW39DNx@aspen.lan>
-To: Daniel Thompson <danielt@kernel.org>
-X-Mailer: Apple Mail (2.3826.700.81.1.8)
+MIME-Version: 1.0
+References: <20260801195613.235430-2-krzysztof.kozlowski@oss.qualcomm.com>
+Date: Mon, 10 Aug 2026 06:26:07 -0500
+X-Gmail-Original-Message-ID: <CAMRc=MeiXHL-1i31q-+wuibK5qM1=xV+4qn0z+CWFXjt3CdrCQ@mail.gmail.com>
+X-Gm-Features: AUfX_myd-9E67e5jDYYEWIDd_Fhka4yTI8ar0CZ3ucq5EUGNAu2R2AhAZ0we-FI
+Message-ID: <CAMRc=MeiXHL-1i31q-+wuibK5qM1=xV+4qn0z+CWFXjt3CdrCQ@mail.gmail.com>
+Subject: Re: [PATCH] dt-bindings: Correct white-space style
+To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
+	Lorenzo Pieralisi <lpieralisi@kernel.org>, Suzuki K Poulose <suzuki.poulose@arm.com>, 
+	Mike Leach <mike.leach@arm.com>, James Clark <james.clark@linaro.org>, Leo Yan <leo.yan@arm.com>, 
+	Damien Le Moal <dlemoal@kernel.org>, Niklas Cassel <cassel@kernel.org>, Jyri Sarha <jyri.sarha@iki.fi>, 
+	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+	Matthias Brugger <matthias.bgg@gmail.com>, 
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Linus Walleij <linusw@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Patrice Chotard <patrice.chotard@foss.st.com>, 
+	Andi Shyti <andi.shyti@kernel.org>, Jassi Brar <jassisinghbrar@gmail.com>, 
+	Lee Jones <lee@kernel.org>, Johannes Berg <johannes@sipsolutions.net>, 
+	Jeff Johnson <jjohnson@kernel.org>, Viresh Kumar <vireshk@kernel.org>, Nishanth Menon <nm@ti.com>, 
+	Stephen Boyd <sboyd@kernel.org>, Yangbo Lu <yangbo.lu@nxp.com>, 
+	=?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= <ukleinek@kernel.org>, 
+	Paul Walmsley <pjw@kernel.org>, Samuel Holland <samuel.holland@sifive.com>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Richard Cochran <richardcochran@gmail.com>, 
+	Jens Wiklander <jenswi@kernel.org>, Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>, 
+	YC Hung <yc.hung@mediatek.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+	Sean Wang <sean.wang@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
+	Peter Ujfalusi <peter.ujfalusi@gmail.com>, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	coresight@lists.linaro.org, linux-arm-msm@vger.kernel.org, 
+	linux-ide@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	linux-mediatek@lists.infradead.org, linux-gpio@vger.kernel.org, 
+	linux-i2c@vger.kernel.org, mfd@lists.linux.dev, 
+	linux-wireless@vger.kernel.org, ath10k@lists.infradead.org, 
+	linux-pm@vger.kernel.org, netdev@vger.kernel.org, linux-pwm@vger.kernel.org, 
+	linux-riscv@lists.infradead.org, linux-usb@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Daniel,
+On Sat, 1 Aug 2026 21:56:14 +0200, Krzysztof Kozlowski
+<krzysztof.kozlowski@oss.qualcomm.com> said:
+> Correct a few white-space issues, like double space after '=' or before
+> bracket '{' characters, which will be flagged by dt-check-style.  No
+> functional changes.
+>
+> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+>
+> ---
+>
+> Patch applies on Rob's for-next branch.
+> ---
+>  .../arm/firmware/linaro,optee-tz.yaml         |  8 +-
+>  .../devicetree/bindings/arm/psci.yaml         | 18 ++--
+>  .../bindings/arm/qcom,coresight-tnoc.yaml     |  2 +-
+>  .../devicetree/bindings/ata/st,ahci.yaml      | 22 ++---
+>  .../bindings/display/ti/ti,am65x-dss.yaml     | 12 +--
+>  .../bindings/display/ti/ti,j721e-dss.yaml     | 96 +++++++++----------
+>  .../bindings/display/ti/ti,k2g-dss.yaml       | 36 +++----
+>  .../bindings/dsp/mediatek,mt8195-dsp.yaml     |  2 +-
+>  .../bindings/gpio/st,nomadik-gpio.yaml        |  2 +-
+>  .../devicetree/bindings/i2c/st,sti-i2c.yaml   |  2 +-
+>  .../bindings/mailbox/st,sti-mailbox.yaml      |  2 +-
+>  .../bindings/mfd/maxim,max77620.yaml          |  2 +-
+>  .../bindings/net/wireless/qcom,ath10k.yaml    | 34 +++----
+>  .../devicetree/bindings/opp/opp-v2.yaml       | 28 +++---
+>  .../pinctrl/mediatek,mt7988-pinctrl.yaml      |  2 +-
+>  .../devicetree/bindings/ptp/fsl,ptp.yaml      | 12 +--
+>  .../devicetree/bindings/pwm/pwm-sifive.yaml   |  2 +-
+>  .../bindings/usb/ti,twl4030-usb.yaml          |  2 +-
+>  18 files changed, 142 insertions(+), 142 deletions(-)
+>
 
-> Am 10.08.2026 um 12:35 schrieb Daniel Thompson <danielt@kernel.org>:
->=20
-> On Sat, Jul 11, 2026 at 08:02:02AM +0200, H. Nikolaus Schaller wrote:
->> Retire the platform specific pandora backlight driver since
->> it can now be replaced by twl_pm and device tree.
->>=20
->> Signed-off-by: H. Nikolaus Schaller <hns@goldelico.com>
->=20
-> Yay!
->=20
-> Reviewed-by: Daniel Thompson (RISCstar) <danielt@kernel.org>
+For GPIO:
 
-Well, there were some good comments by Sahiko to the prerequisites of =
-this patch,
-because it has one speciality the PWM BL driver does not handle (avoid
-interpretation of PWM signals as W1 protocol).
-
-I haven't found time to work on this, so we can't remove this yet.
-
-In the end it may either remain a pandora_bl driver (converted to DT)
-or become a patch for something else.
-
-BR,
-Nikolaus=
+Acked-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
