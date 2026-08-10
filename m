@@ -1,44 +1,43 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A34B22594BD;
-	Mon, 10 Aug 2026 15:38:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07742431E73;
+	Mon, 10 Aug 2026 17:41:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786376287; cv=none; b=mc3NLO+V3TRxalQFWbwUXuZf3TXcFQ9YJj4uprHy5VqMIeHLweJEOuR2zr0orBfHPa71m8saD+fw1t0Ty26hpjNA6qSJuuiXobc7Ilc+VkwpScyIYzdytvLENS4/mYEGNAg3aOS8oWTjf2V0Fk+WW6tNEXFYooTIVZa9LE+sVZA=
+	t=1786383672; cv=none; b=tzT1ql6hWJTpsxINyW8wbZYVdfxQX98DL5O6ZpP9WsvacgL2edGmwS829RgzjUPGwgVfElRyuX42Ohemc2G+p85GnGxPnFdYXaG3ELoHqUp7MSPoT/GZlYL3xmJhfVmsHlGVfUsl5ZbXS6nfylutyz66qVsNwPKK4mfMcBFJJmM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786376287; c=relaxed/simple;
-	bh=Pdm0dCEgtDoA3/9bfQ9RuIh2kmBSeSobz6nqZNyNJm8=;
+	s=arc-20240116; t=1786383672; c=relaxed/simple;
+	bh=1gkA43Ob2VAQJ3SJxi9pCRhhs6uKkS+NbpTNIg6eFI4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Gb5Oi1uWZ2BvByF1Kkc52Z4w+Oh8/ZsYlkNKUibJPvbWnAHHXKdvsiw/RDx7rCEigGApMTnbZuFixFA2/whVuk0GD4pOmwPw+FGXQl3sbp6Q7ke1+OFQDzI6qPnV4qWR88N2g1fPlZnvBzYIPkfft/FIcwBWfapKKJZwp9fP1+M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JI4t97hr; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=OLbhvCa9iduNXsLnzb0pxkpbreD+Qp6yK/z7l0JiDUkpH/OLRaqy7mZ2b/Puy4xHV+DWpZwRCLPxAE3qfjIKPS/pjvfKnP5j6THto5ZNuULY7nekOrnDNLYmsumiAXdHWS2Nc5LXdAIAZ5gc+aMVPLmIuG55lPvSW7XS3OtRysI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ioKkx8wR; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JI4t97hr"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 607481F00A3A;
-	Mon, 10 Aug 2026 15:38:06 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ioKkx8wR"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B98361F000E9;
+	Mon, 10 Aug 2026 17:41:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786376286;
-	bh=Pdm0dCEgtDoA3/9bfQ9RuIh2kmBSeSobz6nqZNyNJm8=;
+	s=k20260515; t=1786383670;
+	bh=Rdd4ctn0fuMO17vdXdQMdkkbqEH233xVoESwBwpwX3c=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=JI4t97hrUKWAadZ6KRaJuBXKClGftZ63lpcMJl3UOLDl0f49QOe5LYzAqtmWz9Pr1
-	 Z9mEOZz4NhMGD1BEd9LumrWGlyuclTZ25dHShz6A5ePJRW53HcvFr9ttgJtcn1y7Xs
-	 BmNk5ciyBIVB0HBgxadEhFMQf4zx4GRyPcITkkhdOXUOZEzC1uYuB9OWHRv+j2YHNA
-	 nir1rsvEEfrYgWhjIOdKgtTikOz8d6PvC1ZGKNca+wE7jloihXdyfcdhCS6tPjqs/i
-	 PC7F4BMEiDh/OaSODzPxXVMDTN2SA9qEraZDzVUWZ0SobFbeLjI3/dSrERi1n/qp6v
-	 sNcTcypGV72oA==
-Date: Mon, 10 Aug 2026 10:38:05 -0500
+	b=ioKkx8wREtXHrBjhHXAWsMUFWQqFX24N/0EWWruvQihBt0wv0yhoKxSGAL03lLrir
+	 fyW/9HthMw9Dqi0v+kQh7ku9IcUQKje+es3XSKuGuh23bPo45dmYlaE3og+9+T/x0w
+	 x2kDH9z9oHjc1fOWXxncQ+AV4noAY0bzPlhgRedmmRk4eV9G3yf2R5wl4oYd6giFpt
+	 S27oF8t1RVKZ7ClaH873Ing64nCkTaV5759OsuLbEDAzLCl+I33nXv+jrHTR6RRwk8
+	 YsIU1nZx+Fjwi68RWPvmwas6gIuBJ5r9IGQvTIbZUdhTmduNlOyivfWCtPcntrujAo
+	 75qmrbY4GLgEA==
+Date: Mon, 10 Aug 2026 12:41:10 -0500
 From: Rob Herring <robh@kernel.org>
 To: sashiko-reviews@lists.linux.dev
-Cc: Stefan =?iso-8859-1?Q?D=F6singer?= <stefandoesinger@gmail.com>,
-	vkoul@kernel.org, devicetree@vger.kernel.org, lee@kernel.org,
-	neil.armstrong@linaro.org, linux-phy@lists.infradead.org,
-	olteanv@gmail.com, conor+dt@kernel.org, mfd@lists.linux.dev
-Subject: Re: [PATCH v10 01/12] dt-bindings: clk: zte: Add zx297520v3 top
- clock and reset controller
-Message-ID: <20260810153805.GA1793660-robh@kernel.org>
-References: <20260810-zx29clk-v10-0-63846490712c@gmail.com>
- <20260810-zx29clk-v10-1-63846490712c@gmail.com>
- <20260810071224.5AA301F00A3A@smtp.kernel.org>
+Cc: Christian Marangi <ansuelsmth@gmail.com>, lee@kernel.org,
+	mfd@lists.linux.dev, conor+dt@kernel.org,
+	devicetree@vger.kernel.org
+Subject: Re: [PATCH net-next v19 03/10] dt-bindings: mfd: Document support
+ for Airoha AN8855 Switch SoC
+Message-ID: <20260810174110.GA2332942-robh@kernel.org>
+References: <20260728154846.1828945-1-ansuelsmth@gmail.com>
+ <20260728154846.1828945-4-ansuelsmth@gmail.com>
+ <20260729171635.CC5261F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -47,13 +46,25 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260810071224.5AA301F00A3A@smtp.kernel.org>
+In-Reply-To: <20260729171635.CC5261F000E9@smtp.kernel.org>
 
-On Mon, Aug 10, 2026 at 07:12:23AM +0000, sashiko-bot@kernel.org wrote:
-> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
-> - [Medium] Missing `resets` property definition in the YAML schema.
-> - [Medium] Missing `simple-mfd` in compatible string list for syscon with children.
+On Wed, Jul 29, 2026 at 05:16:35PM +0000, sashiko-bot@kernel.org wrote:
+> Thank you for your contribution! Sashiko AI review found 3 potential issue(s) to consider:
 
-Neither of these look valid to me.
+If you want to make maintainers happy, reply to sashiko reports on 
+with what you think are valid or not valid issues.
+
+> - [Low] The `reset-gpios` property is defined as `true` without a `maxItems` constraint.
+
+Not an issue.
+
+> - [Low] The `mdio` child node property is missing the `type: object` declaration.
+
+Not an issue because we implicitly add one IIRC, but you are 
+inconsistent with using 'type: object' on child nodes.
+
+> - [Low] The example includes a DT binding header for GPIO flags but uses a magic number instead of the appropriate macro.
+
+Fix this.
 
 Rob
