@@ -1,274 +1,181 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from DM5PR21CU001.outbound.protection.outlook.com (mail-centralusazolkn19011030.outbound.protection.outlook.com [52.103.13.30])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1077C3DAAC7
-	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 12:48:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786366099; cv=none; b=HBcpt6KBt9IsP8QJJjAnElorbECzwOs3e3eFG+p+DyNjGdmjGA2L3KFfzAAzgZdSU3sBAgs3Ry3XI8E7uvngL+LJnf+JuiOBFucWLfqQt2b+D6u6hGBEXE9QKlt4jzUomiP6JwJAXK9PpvR5mQaEDWAuq/kRzyFEWxBvHJWGfls=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786366099; c=relaxed/simple;
-	bh=jhtiVqAkhpCDpZ4nGQv1VqoBcerFJ8cWuOyMLW2Jz6I=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=WK24wJVXOf/nOcCMvYlPPn9eW2TcjHfvpoH8NitcOfdubai6Qzhnd3jnBIKB3tRKU8lK4o9FeZlSy1213ffIy9CgdreKLd1UrgwmLAsign5ajbaBfUSD7fJjq2bFxXSs27JXzH9IBi8p4vLCSzgf7r/mbXy8vknVc4f8mO0izRQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nv7S3N6y; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C493C3DA5CD
+	for <mfd@lists.linux.dev>; Mon, 10 Aug 2026 12:54:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.103.13.30
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786366453; cv=fail; b=X8ngBEuYB5scvqw89HTbM6OzPxsjmn5bK9+0RPKZJM4DnmEeO33upniHO1izpTVMn4lwCNJIbA4qGKSK8J5Ck6rYOsAi9u8KOLdYM4MzLYLjfojtCYE0ZUGBeqoBSFcbisEmDBRPsamefnCDGlHnmYhMuI7CmePcHzgpgsuJXB0=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786366453; c=relaxed/simple;
+	bh=eLQ9adDM59xgoBHe83NIf2g2wQqJmreB3EHGLbfIln8=;
+	h=To:Cc:Subject:In-Reply-To:References:Content-Type:From:Date:
+	 Message-ID:MIME-Version; b=eb3cLXTKnMWqNus4jZsF+oFA9KXFB9oESPSrVrzfXKgOGM661lQFOC1vuowoCEONHqzK3IgXwbc6iO/B02xenHFqppSmly8zm42qc0rE+E/Rhks7ptn5zO5Q5PE+G8x4VlIkpVbB6Zl7QoBQB5E8SbkjkKGT+SqPEcyfSCiUy2o=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=outlook.com; spf=pass smtp.mailfrom=outlook.com; dkim=pass (2048-bit key) header.d=outlook.com header.i=@outlook.com header.b=mZG59U/+; arc=fail smtp.client-ip=52.103.13.30
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=outlook.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=outlook.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nv7S3N6y"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 79EA61F000E9;
-	Mon, 10 Aug 2026 12:48:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786366097;
-	bh=YzwqXATUy6G2f8ZDQFdYSqQE2TI11prYjV4OYkXnXTU=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=nv7S3N6yGwANrRDpffCpRQ3ao94ggIPtr6hvc3RU/4Jcr4H+LNF9IPK2mMb2KaVZN
-	 CKBUZMLkLBLK9zp6QZ6YyaHFcPLVhjopPaGkw5co3kevLdv6VMPU8wnIosVXYTOev8
-	 VtWhwQ9/SVXuJs5qLBuL59XHXD27jZi9SCGzQSUaTUPS8OWmXc3YdfUC2WPaITl5aO
-	 bfb81yuBIBydsOUyQ/aHMPClBczwHDHMS/ei/DYwAinGDhIsYlLwCBJIvyC0xUhkwY
-	 ETKAhxzHPG3llGW7Ws0evaD4oVyhxtT9qN0EyCsQ5a3StOT1+O9qcO2Xsf8zuiYT83
-	 sauus1dHKLU9A==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RFC v7 2/8] mfd: ls2kbmc: Sanity check for the connected
- pci port
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Miao Wang" <shankerwangmiao@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260810-ls2kbmc-mod-v7-2-8aa0fb5a5462@gmail.com>
-References: <20260810-ls2kbmc-mod-v7-0-8aa0fb5a5462@gmail.com>
- <20260810-ls2kbmc-mod-v7-2-8aa0fb5a5462@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 10 Aug 2026 12:48:16 +0000
-Message-Id: <20260810124817.79EA61F000E9@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=outlook.com header.i=@outlook.com header.b="mZG59U/+"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=MzVu1UpJYysHwaPIB0lBvORscq4M8IA8gvxVJbUgpwDTR4EVnk83h+Zb/2jfsrF/AExYi4JbAtMMviP6rRI3yeX1lgdoAfWNsSg4+Qu4lqIlFCCf0B+kzUFBV88bL2rWItTcW5F2yuOLuYaVDkyixYQ/TDSRn0sgoDf9qUlXf3QzPpMi9RXxnmEug6LiCDfTfRCgKBxTbNeAcOFLmrGVD6C53rMrvQFpFSB5x5ARfdK1dd5fAErxRPb/ir/Pq+Qsvg8a8ve3MLDVSKCPX9BHLIprJBWJgm1XEOviZMYOEg83y4mT1WTf+MLrFYYuVPII+Mv0l1iJjK4HBdSJnj6ivA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eLQ9adDM59xgoBHe83NIf2g2wQqJmreB3EHGLbfIln8=;
+ b=uzaMkJtlqSTROsrcvWJ7T9JdHmOecQMpUjM4uEY8uDppD4sC6Iy8SnjUoGG0bsK/ihRfzLZnMxRu5gxFMPnmGd8v3sFw3yINVfPzaGjA2xMuowdMCS5CtSRXcj3GwweTbUy5EGPWo1WDuaul4TpRI6TXkf7X4odvVUzONVLqmp6U9Hz5jbBVVFYKST2+MgHEgncL9DFwAcoU9XK+1qOpsMIhVf4lwODE2FQYDSHqbkUJfiOMPaWvydEhHirOJUQ65L2dhb/tVqOqykzJIlNrBBgO/Qvq70x9x5+/wfYn4s77M+JIIiw7Kxhq0C4nTJp1edxwXFa76EWnPagZwtzfkw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eLQ9adDM59xgoBHe83NIf2g2wQqJmreB3EHGLbfIln8=;
+ b=mZG59U/+CPTEd8AQDOa+SZa4eKhrzwggvONzj0Mdxl6nAkvlPUJjvu3YIBDBm3LME0g1+BRlPk2wBYD6XARWoRgouIbXU1UckPazZxEmAmPYCtHlKP29K4rr3dawMZXhb6t/FjZHn/zoC81zuA8IUO+hql/tVsPC4W3QO2WVM8rLrJaevwjgERkPsr+tcQM4fc3Aipa7i31G+mFHUYcoD4UPsOP5VM6yDk7o3K/wzzNEwWNnQGdlTvxF7tOVebvzHzRZBuevwVlENV4ZZZLamwuc3bIqI21OZhd4uPBimpVWDg1g6o3gm9vubpViRx1fuEn5ULahc7Ee1OV1gWIUPw==
+Received: from MN0PR19MB6091.namprd19.prod.outlook.com (2603:10b6:208:382::21)
+ by PH7PR19MB6109.namprd19.prod.outlook.com (2603:10b6:510:1dc::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Mon, 10 Aug
+ 2026 12:54:07 +0000
+Received: from MN0PR19MB6091.namprd19.prod.outlook.com
+ ([fe80::af9a:4cc3:facf:9374]) by MN0PR19MB6091.namprd19.prod.outlook.com
+ ([fe80::af9a:4cc3:facf:9374%5]) with mapi id 15.21.0292.024; Mon, 10 Aug 2026
+ 12:54:06 +0000
+To: Alexandre TORGUE <alexandre.torgue@foss.st.com>,
+ Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+ Michael Turquette <mturquette@baylibre.com>,
+ Stephen Boyd <sboyd@kernel.org>,
+ Brian Masney <bmasney@redhat.com>,
+ Lee Jones <lee@kernel.org>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Antonio Borneo <antonio.borneo@foss.st.com>,
+ Linus Walleij <linusw@kernel.org>,
+ Russell King <linux@armlinux.org.uk>,
+ Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>
+Cc: devicetree@vger.kernel.org,
+ linux-stm32@st-md-mailman.stormreply.com,
+ linux-arm-kernel@lists.infradead.org,
+ linux-kernel@vger.kernel.org,
+ linux-clk@vger.kernel.org,
+ mfd@lists.linux.dev,
+ linux-gpio@vger.kernel.org,
+ linux-doc@vger.kernel.org
+Subject: Re: [PATCH RESEND 0/9] ARM: stm32: add STM32H7R7 and ART-Pi2 support
+In-Reply-To: <6c926423-777e-475a-9e28-222d3fb5798e@foss.st.com>
+References: <MN0PR19MB60912FA1E75E4E55B2E27D34ACCD2@MN0PR19MB6091.namprd19.prod.outlook.com>
+ <6c926423-777e-475a-9e28-222d3fb5798e@foss.st.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+From: Liu Changjie <liucj1228@outlook.com>
+Date: Mon, 10 Aug 2026 20:54:29 +0800
+Message-ID:
+ <MN0PR19MB6091BDFE3DBD8AD6DDC3F77DACDE2@MN0PR19MB6091.namprd19.prod.outlook.com>
+X-ClientProxiedBy: TPYP295CA0056.TWNP295.PROD.OUTLOOK.COM (2603:1096:7d0:8::7)
+ To MN0PR19MB6091.namprd19.prod.outlook.com (2603:10b6:208:382::21)
+X-Microsoft-Original-Message-ID:
+ <178636646929.268083.8176274173003069719@outlook.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MN0PR19MB6091:EE_|PH7PR19MB6109:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3b8c9cfa-2f84-42d5-4f83-08def6de764d
+X-MS-Exchange-SLBlob-MailProps:
+	znQPCv1HvwUXBahuwteIkQeW30lJPuxOqkWTFX5UGk/2pyNZnU53xV6d54l6wUaXAO3pwQigW1uhQ38aY5HhTPh0ar4doz76rmA1u/D5bhQ90U5+2p0MbZdr34hgDayH+jcvTIzkjzgg6bEM0A/0v+0V2rufgyvx+908JlM8kA5epqd+iXG7cWzYaLAUx+Z1Rf9eU0yoRSP2qlo3S0CHVGez94TiQXGBFyfgQabUm7PqyQpumcw7qk4/KqvHMZNXGKHQdVOPlWOGwfrvePWDaRmW5C/O79KTLsuPPjAqX1J6fD/zgqv9BAFk8E7iG2zV6AtmlXVdelcTSX4gDyQAQZHycbN9uqlTbqwEaHBTG51KnuDRgRxQRNP3htSqQO2UP/Epmq3tTMycNnhbRu/RoHrzETITLkMKbXSRY6un7ONyVL8J9YDtbjTnUl8koGMotKZMof0c1mnw2J37fKMW7yfJpUlKP8Uj5p2AKn3jR/Yyz0y765eJ319JTvlUQ5r6Nsh+eKHEJUNTd70XEfTYuEHKwKumKVWVL8YVEqp0C0DVGrADYRcPdnfJ/eU6yk/lqoWCzA8LAUjZ0tzbRtknb/zBYuNxPV6rPHtH09Aq3GG9dl9VYrTU04JEsAzB/v9myA7XqsuYT4XXPTOavRzvOyNTA/LCpvw7fw0RaxTVtm/8t+bANYGBX+R4DzvV1Kh7PAgaDIvj8yAMOk/Mb5CQGCeBUqOgcfBvVqa3+/FBHo/gYwZ+Gzm8SW+vECpeaDPmV+NPEf8FItU=
+X-Microsoft-Antispam:
+	BCL:0;ARA:14566002|24021099003|37011999003|6090799003|51005399006|15080799012|23021999003|5072599009|25010399006|19110799012|8060799015|3412199025|4302099013|26104999009|440099028|40105399003|10035399007|2607281247196008|1602099012;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?SFhXeHVQVk9NeVRIZlVtUHY3MnVKZ3hvYjFsV3pUV0VZeU55MlAvaEJYMWRP?=
+ =?utf-8?B?TFltMUFKck5CSlJkcE1LZ3RCNjZ6L2VKSEZ6NEFXVWs0TnNIalNJNG5rUlZI?=
+ =?utf-8?B?STRTbUwvMDVaNmExVkpBL253Y0V0WEowQ0tqcE5ZaWRXTkFUbW8rL3Bld2RM?=
+ =?utf-8?B?dXdKekRHa3FQd2Z3N3NUaHVOY1lDQlQ0d0dPY2RDUVJva0FMQ3dKREhWbkVa?=
+ =?utf-8?B?WEZGMHpZT0wra2VTLzFKZjJ1dzhTeGxlaGxjS24wUmpOZGpWdGtyMkVieG5h?=
+ =?utf-8?B?L0t1bWVDSXNQcDAvb1dmbHRPMzVWZmcreEg3QjN3UVpJYnBweFhySExJcWdt?=
+ =?utf-8?B?Q2RFVVpkSUdYRE1GcmdEWmtadFZEbmNBeE9IZG92cnFVU21wTkZDOFpMSm0r?=
+ =?utf-8?B?TnlFOWp1dDJEdmFVbEpNNk5TSThQNjJPcnNYbFh5NUdpRUVhQS9QVVhjSUhw?=
+ =?utf-8?B?NlBHTklQaVpjU05YY3JBOHppOTZXYXZIeUtkaXFQUENEYm9UZ0lOWnJlbXM5?=
+ =?utf-8?B?U0g4MHdaUXFpRmtmNlZkV0txbFpHc2l3cVhHYlFNS0RzTXJ2bG0xcFR0QjEx?=
+ =?utf-8?B?clZ6eTZJeEh5eXdCbkdKSS9yTjFaK3N6Z0VPa1BhekpORkhRT3creU5ZckdM?=
+ =?utf-8?B?N3p6TG5iRFM3NlVsTmtNQlZaamdwSlc2OGxvYVcyUVRyVzhXM1VTQjI0ZjhZ?=
+ =?utf-8?B?a1BOOGxhdUJtWWROZFMwMG11YzlOSzRPenlKbUlIb3dERGQ2ak1WbnRvRWc0?=
+ =?utf-8?B?WW01N1JWd3I0dCsyZElNZjdjZjNoRGZjUndRRWRrZlArYVdsNHFDMGNUM0xQ?=
+ =?utf-8?B?TkIrMHZ1N01qc25MSnRnL2w1R0w3RTF1bzFZWE1RQjZiMHVsRHgzZ1B1UG9r?=
+ =?utf-8?B?aUZXQldwYVlZZDlGN080SXkrYkp6cHErRUhzSFZBbElEcFBQVVB5ZzExUzR5?=
+ =?utf-8?B?My9hcS9VMlgrT1lJRS8zeEJhbE83NVR0YTNFVFhnM2U3TnAydW55UzNBTkhz?=
+ =?utf-8?B?ZVNBVHZub3hyQjBTdk03VHYweklJV1A2eWIxblFKRGY2bGdiNzV4VVJoVEF5?=
+ =?utf-8?B?T1R0YWw0cFFrRE9kKy9ZSlNFeWRFY3ZVK2NhV2tNSTV0VXRNS3NNODhaU1A4?=
+ =?utf-8?B?VTIyUndhbkpPZHBTdGVUbTRITkpVcGJVckNiZWZBY2wzZmpTZThjKytPS1NB?=
+ =?utf-8?B?T3QyaC92NjBuaCtGS2ZBRk9YL2IxYjFMUmNzVWhWTkVPRk9xMXFZZmRwQ0Fs?=
+ =?utf-8?B?dEFJMGdsVnE5ekE3TlkvZHdveExhVytrbnhOc1RkSFMrNjJ5WnMwS2N6T211?=
+ =?utf-8?B?OVRGNHhPMU9wc25lZDJsd2RhM2pjWWxmeW8zUy80MnJEbG9WMmk0QS9nVzFI?=
+ =?utf-8?Q?p6AOoIpCjQOgdQuvdGg/NZ0vaRElYpDg=3D?=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?R29XUm1HUGdDVCtmU3c5ZU9IRE1kanZhTGRsZ1R5TkFUSlhML0NGcEg4SFlM?=
+ =?utf-8?B?VDNRdGg3NW9kcTJrRUlPSnpBVmhYSXB2Rll3UFVuRUFKWDdXTTZmUXQwZTA3?=
+ =?utf-8?B?bnBXK3RMTHYzaGdZTWduWVNGMGZFL0VvVzFJU21DSjBUS1hxb3pDZGliTnBD?=
+ =?utf-8?B?U29jWWhicUhLWmpFdEZkMkxzNzNtZWxrcTNWSWxvbks3bjJENnFNR3NmcldZ?=
+ =?utf-8?B?aHgybEVwbHJEbkxONHEwclkrb2lCSVJFNG5wSUNTaml5Vi9UQWNhQ25MVTN3?=
+ =?utf-8?B?eFp3ZXU0bytUUWJocE1aZ2lCamdmTDFpb05pRXozNHI1K0dNOGcvZCt1OEFy?=
+ =?utf-8?B?SnhOSGtNc2N3QVlGRXdtOXhBL2ZLU1VvczMxU21JbWVhaENkeFg5endPTXds?=
+ =?utf-8?B?SHljVmhuVkFod2JNaXFQNHpVK1VIK2lVU0VkME5RNWI2a2ZRZXkyQSt2Y0tW?=
+ =?utf-8?B?SXE3aGh6R1VUdTQ2TkZiUG5Hc3c0eXBHT2NJdklVSXd4UHQ3Z3ZwVFRjSGlO?=
+ =?utf-8?B?QnpJYno1YXZQemtZTytRRC9UU3NkK3dFdmZaQXVaOGpHbXo3ZUFpOFRkaXFO?=
+ =?utf-8?B?c09WMUJnSytrSDJHOStXVTJQQ0hkQS9ibEdHeG43VFJINlpra3NOT1ozbmdH?=
+ =?utf-8?B?a05QNnY4UUdodnIvL3JnallkVzZSNStBR3dHVVZNUi9hc01ydzdTSlVvaTYv?=
+ =?utf-8?B?blBrSGZDSy9hUjVueWxwaTREZHRheFhkZWUyRlo3Vm9iVlIvb05TYnJjZDIw?=
+ =?utf-8?B?VnlxQ3dsdTljU0s4eldaREx2eHpPalhBNmJFdElHVE82SXFqT09lT2RiZWhI?=
+ =?utf-8?B?dEtQR0VySzZLRG1kdTI2eTNmcUIyTzNpOXFpVmV2OUtlRi9yb3dDc1k3NGtG?=
+ =?utf-8?B?TTNYUmdYUXlCSlNIclBXQTJxdTBVVTNCaVNjWTlQcjV4amhEZlpZYi9ZNWV2?=
+ =?utf-8?B?T1dPZk9OanB5MnYyQ3NxRFJKTHFZNDBZZFFIcWlyMVhGVnNBS1ZZRy9Zanp5?=
+ =?utf-8?B?Uit6Yk04Uy9IQzJua3hZYTBpK3pDMFFySGZ0bGxYYXBmR280bWVtWTltNHQ5?=
+ =?utf-8?B?MjRmTHNFRnhxQVI0TUJ4ZSt2a3MrcG1URFFJVGJaUlRWaWpIZnV2MGVmeVNE?=
+ =?utf-8?B?YUozZk8zaGlwRkcrSGNsUEQwZDUxbVJ6ZWpaVkNOdmFKMHNiZk9JUldFOVE0?=
+ =?utf-8?B?ZVdBUGcydmdyc2YwZ2F6N1I2Kyt2OE1Xbi9zUCthbmlTSGNPOWR5WERoblNh?=
+ =?utf-8?B?ck1sQU9kR3pCQVB4dEppUWJXYUo0MlhnUzN0REZ6aldWanFuK051K1JJdE1O?=
+ =?utf-8?B?TUt1d2U1c01VeWZVeG92eHcxT25zeWNyQ2ZiR3JqOEQ3ejZ6QUJlWHdoWEo5?=
+ =?utf-8?B?OXk1VlR3a1FWREYyUnc5bG4yeG1aSVQyMDRwWGdsSmVndFNiUm9YMGtIWjBt?=
+ =?utf-8?B?TXhGbVdPenhEdWZkZHUwNmpUY3d6SnZTNEk1NjNYK25NZmFEMW8rYlFzVk9N?=
+ =?utf-8?B?QUc0ckRrMUlXd1dqcnRhK0J2Y2lBVkh6SXVmMGk4MWhOYnNlYzlaT1VPMHNa?=
+ =?utf-8?B?UTZPRmttbmZORUZxRGpVRTNQb3dKbkNtNmdjSmswMFRZL1JmTHd1aVkvZDVu?=
+ =?utf-8?B?b1hzWHBsSnRvSElYZXJpUDhYWm1kOTM2VnlJSUhlWE1uMlFMa0FvMlpKRi9s?=
+ =?utf-8?B?Vm9kZy80NnRUb2hvTXFsVDF0Z0FMbEZyNG0yS09oSk8yTjFSbjJZUW5td3Ew?=
+ =?utf-8?B?WmdXRDRnd0pSWmxQVVYyRWlWQmZMaGNIN09sWkNkMUJOZCt3UjRkMWlVQnYv?=
+ =?utf-8?B?UXdtQWJBUlEyTVRkV0xERm5UQllCWVd1UEZtTm8zdE5zNEYvYWpBVzJ6a1BG?=
+ =?utf-8?B?REo1ZERpdnY0MmkxbGlzN0tzN3lTaEVkYTJwN01IZVhSRHc9PQ==?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3b8c9cfa-2f84-42d5-4f83-08def6de764d
+X-MS-Exchange-CrossTenant-AuthSource: MN0PR19MB6091.namprd19.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Aug 2026 12:54:06.8840
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
+	00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR19MB6109
 
-Thank you for your contribution! Sashiko AI review found 6 potential issue(=
-s) to consider:
+Hi Alex,
 
-Pre-existing issues:
-- [High] The driver dynamically modifies a shared static `mfd_cell` array w=
-ith a stack-allocated platform data pointer during probe.
-- [High] The driver completely freezes the system for over 10 seconds durin=
-g BMC reset recovery by busy-waiting inside a stop_machine() callback.
-- [High] Missing cancellation of workqueue leads to use-after-free on devic=
-e unbind.
-- [High] The driver dynamically maps and unmaps device memory inside a stop=
-_machine() callback, which executes in atomic context with interrupts disab=
-led.
-- [High] The driver bypasses GPIO APIs to perform lockless read-modify-writ=
-e operations on shared SoC-level GPIO controller registers.
-- [High] The interrupt handler unconditionally returns IRQ_HANDLED on a sha=
-red interrupt line and locklessly accesses a static rate-limiting variable.
---
+Thanks for pointing me to Arnd's deprecation series. I understand the
+decision not to accept new Cortex-v7M board support, and I will not send
+another revision.
 
---- Patch [2]: [PATCH RFC v7 2/8] mfd: ls2kbmc: Sanity check for the connec=
-ted pci port ---
-commit 0143b961f7353bf1b0c1d9d60cca1be9f0e57e23
-Author: Miao Wang <shankerwangmiao@gmail.com>
+I had already sent v2 on August 9 before seeing your reply. Please
+consider v2, and the series as a whole, withdrawn from upstream review.
 
-mfd: ls2kbmc: Sanity check for the connected pci port
+I have archived the hardware-tested patch set and boot tooling for
+downstream users here:
 
-When the bmc resets, the recovery procedure require to reconfigure the
-parent device. The driver assumes that the parent device should be LS7A.
-Add a sanity check on initialization to ensure this and prevent from
-accidentally operating on non-LS7A ports.
+https://github.com/HosakaSu/artpi2-linux
 
-> diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-> index 335590392240b..434db99ee501b 100644
-> --- a/drivers/mfd/ls2k-bmc-core.c
-> +++ b/drivers/mfd/ls2k-bmc-core.c
-> @@ -35,6 +35,15 @@
->  #define LS2K_IPMI3_RES_START		(LS2K_IPMI2_RES_START + LS2K_IPMI_RES_SIZE)
->  #define LS2K_IPMI4_RES_START		(LS2K_IPMI3_RES_START + LS2K_IPMI_RES_SIZE)
-> =20
-> +/* LS7A port Device IDs */
-> +#define DEV_LS7A1K_PCIE_PORT0	0x7a09
-> +#define DEV_LS7A1K_PCIE_PORT1	0x7a19
-> +#define DEV_LS7A1K_PCIE_PORT2	0x7a29
-> +#define DEV_LS7A2K_PCIE_PORT0	0x7a39
-> +#define DEV_LS7A2K_PCIE_PORT1	0x7a49
-> +#define DEV_LS7A2K_PCIE_PORT2	0x7a59
-> +#define DEV_LS7A2K_PCIE_PORT3	0x7a69
-> +
->  #define LS7A_PCI_CFG_SIZE		0x100
-> =20
->  /* LS7A bridge registers */
-[ ... ]
-> @@ -490,6 +499,24 @@ static int ls2k_bmc_parse_mode(struct pci_dev *pdev,=
- struct simplefb_platform_da
->  	return ret;
->  }
-> =20
-> +static const struct pci_device_id ls7a_ports[] =3D {
-> +	{ PCI_DEVICE(PCI_VENDOR_ID_LOONGSON, DEV_LS7A1K_PCIE_PORT0) },
-> +	{ PCI_DEVICE(PCI_VENDOR_ID_LOONGSON, DEV_LS7A1K_PCIE_PORT1) },
-> +	{ PCI_DEVICE(PCI_VENDOR_ID_LOONGSON, DEV_LS7A1K_PCIE_PORT2) },
-> +	{ PCI_DEVICE(PCI_VENDOR_ID_LOONGSON, DEV_LS7A2K_PCIE_PORT0) },
-> +	{ PCI_DEVICE(PCI_VENDOR_ID_LOONGSON, DEV_LS7A2K_PCIE_PORT1) },
-> +	{ PCI_DEVICE(PCI_VENDOR_ID_LOONGSON, DEV_LS7A2K_PCIE_PORT2) },
-> +	{ PCI_DEVICE(PCI_VENDOR_ID_LOONGSON, DEV_LS7A2K_PCIE_PORT3) },
-> +	{ }
-> +};
-> +
-> +static bool ls2k_check_parent(struct pci_dev *dev)
-> +{
-> +	struct pci_dev *parent =3D dev->bus->self;
-> +
-> +	return parent && pci_match_id(ls7a_ports, parent) !=3D NULL;
-> +}
-> +
->  static int ls2k_bmc_probe(struct pci_dev *dev, const struct pci_device_i=
-d *id)
->  {
->  	struct simplefb_platform_data pd;
-> @@ -501,6 +528,11 @@ static int ls2k_bmc_probe(struct pci_dev *dev, const=
- struct pci_device_id *id)
->  	if (ret)
->  		return ret;
-> =20
-> +	if (!ls2k_check_parent(dev)) {
-> +		dev_err(&dev->dev, "Expected to be connected to LS7A PCI-E port\n");
-> +		return -ENODEV;
-> +	}
-> +
->  	ddata =3D devm_kzalloc(&dev->dev, sizeof(*ddata), GFP_KERNEL);
->  	if (!ddata)
->  		return -ENOMEM;
+Thanks to you and everyone who took the time to review the series.
 
-I also noticed some pre-existing issues in this file:
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_probe() {
-    ...
-	ret =3D ls2k_bmc_parse_mode(dev, &pd);
-	if (ret)
-		return ret;
-
-	ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data =3D &pd;
-	ls2k_bmc_cells[LS2K_BMC_DISPLAY].pdata_size =3D sizeof(pd);
-    ...
-}
-
-[Severity: High]
-This isn't a bug introduced by this patch, but does this dynamically modify=
- a
-shared static mfd_cell array with a local stack pointer?
-
-The MFD subsystem API requires mfd_cell arrays to be static const.
-
-Modifying the global array with a pointer to the local stack-allocated "pd"
-variable could cause a stack use-after-free during asynchronous or parallel
-probing.
-
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_events_fn() {
-    ...
-	stop_machine(ls2k_bmc_recover_pci_data, ddata, NULL);
-    ...
-}
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_recover_pci_data() {
-    ...
-	/* Waiting for U-Boot and DDR ready */
-	mdelay(LS2K_BMC_RESET_WAIT_TIME);
-    ...
-}
-
-[Severity: High]
-This isn't a bug introduced by this patch, but is this a 10-second busy loo=
-p?
-
-Since ls2k_bmc_recover_pci_data() runs under stop_machine() via
-ls2k_bmc_events_fn(), won't stalling all CPUs with interrupts disabled for
-10 seconds trigger the NMI hard lockup watchdog and freeze the system?
-
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_init() {
-    ...
-	INIT_WORK(&ddata->bmc_reset_work, ls2k_bmc_events_fn);
-    ...
-}
-
-[Severity: High]
-This isn't a bug introduced by this patch, but should this asynchronous wor=
-kqueue
-be canceled on driver removal?
-
-There is no cancel_work_sync() in the device removal path or a managed devm
-action.
-
-This means an interrupt could schedule this work right as the device is
-unbound, leading to a use-after-free when the work executes after ddata is
-freed.
-
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_pcie_is_connected() {
-    ...
-	base =3D pci_iomap(parent, 0, LS7A_PCI_CFG_SIZE);
-    ...
-}
-
-[Severity: High]
-This isn't a bug introduced by this patch, but can pci_iomap() dynamically =
-map
-device memory using sleeping functions here?
-
-This function is called from ls2k_bmc_recover_pci_data() which executes und=
-er
-stop_machine() with interrupts disabled.
-
-Could this lead to a panic due to scheduling while atomic?
-
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_init() {
-    ...
-	/* Disable GPIO output */
-	val =3D readl(gpio_base + LOONGSON_GPIO_OEN);
-	writel(val | BIT(LS2K_BMC_RESET_GPIO), gpio_base + LOONGSON_GPIO_OEN);
-    ...
-}
-
-[Severity: High]
-This isn't a bug introduced by this patch, but is this code performing an
-unprotected read-modify-write on shared SoC-level GPIO controller registers?
-
-Bypassing GPIO APIs to directly modify global registers could race with the
-primary GPIO driver and corrupt configurations for other pins.
-
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_init() {
-    ...
-	ret =3D devm_request_irq(&pdev->dev, pdev->irq, ls2k_bmc_interrupt,
-			       IRQF_SHARED | IRQF_TRIGGER_FALLING, "ls2kbmc pcie", ddata);
-    ...
-}
-
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_interrupt() {
-    ...
-	/* Skip interrupt in LS2K_BMC_INT_INTERVAL */
-	if (time_after(jiffies, last_jiffies + LS2K_BMC_INT_INTERVAL)) {
-		schedule_work(&ddata->bmc_reset_work);
-		last_jiffies =3D jiffies;
-	}
-
-	return IRQ_HANDLED;
-}
-
-[Severity: High]
-This isn't a bug introduced by this patch, but does this interrupt handler
-unconditionally claim shared interrupts without checking the hardware statu=
-s?
-
-Because this interrupt is requested with IRQF_SHARED, unconditionally
-returning IRQ_HANDLED could cause every interrupt from other shared devices=
- to
-trigger a 10-second system freeze, and it defeats spurious interrupt detect=
-ion.
-
-Additionally, the static last_jiffies is modified locklessly.
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260810-ls2kbmc-mo=
-d-v7-0-8aa0fb5a5462@gmail.com?part=3D2
+Regards,
+Liu Changjie
