@@ -1,251 +1,96 @@
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CD5744E04C
-	for <mfd@lists.linux.dev>; Tue, 11 Aug 2026 16:15:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 572303F9A0E;
+	Tue, 11 Aug 2026 16:50:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786464953; cv=none; b=jOdaBbMN6/cvgeglyHNN6MJdxR+Bb0dG+z+lelX75XS+p6Eop9xd9c6mG1q61LcqSi2FYebF6slEofG/2Epq9P13RrtGXa5Xsv+TQt85ljARWbD3/xy2z+vIQIam4zIrcFi9FhWDRvSvLkJfw4sVj/O3h8A5sPzDG8+ML44mYGs=
+	t=1786467020; cv=none; b=qIQaoVnn0Y4DPr0nhcZYB10/D8a/UVA4/YsOfFgWIQMU7AjX0MEGK/yeLzDtkhWJK74FgN7u8AOQAOhiXEi6+q3Cgk9suZ73C4jC7zjz6cW+27cn0mov1qmGEauoqpqm3+0BHicphp9NKa9fARnactfbQiU0S3NGhA6s15de7cw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786464953; c=relaxed/simple;
-	bh=C95/eT/B4XgIoNYdkna/BJk2cUyTQgBKearWQIH0Omo=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=MQMWz9hssR3iuRBzAC9JO5odXS3NcxCKCzFjsEOJP0ONTGbdSMi4GhyASC8svt04CHD5G0QFX+Tq1wO5tUXK1FzUIoFG3ujFWjLff0djH6XXJeeOdSqkc1Ix5mArCFGAwMQA1ny7I+IViX1wbPqSRx0sp/RamUmbC8xRFp1d6vY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=NxRFacBB; arc=none smtp.client-ip=185.246.85.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	s=arc-20240116; t=1786467020; c=relaxed/simple;
+	bh=ucH8eor/BQmPbq7u+tdvqwOYo4KpP9aIXgy+a8/Ylys=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=PAC2zDESSIBOiffZtffY5CtSAKRODZdej/6OCT/545UPX1dVqPBQARoyjGjiKHzIUpnAPVQKED42ZOcFQmW/gZhyduV9f7mgW5CnJlbV1z2S9QUueKfPNx9KTs+wOUJDV5mJm0OlakQQFiqXz/m9ulfHEJZL/wwc611NdZR4cj4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=W/Kg3GG8; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="NxRFacBB"
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id CDEAD4E411B7;
-	Tue, 11 Aug 2026 16:15:50 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id A35756033C;
-	Tue, 11 Aug 2026 16:15:50 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 5BE2C11C48FB5;
-	Tue, 11 Aug 2026 18:15:45 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1786464946; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=/1MK41sLZ4JfBlj5GNXVc1XloBGgOyqLMLE6J7DkXhw=;
-	b=NxRFacBB7eL4zuyPyj9vfKDpbjfZd9yyv1JSFdibG5IejcVfYko/3UgeiTF9503FVCv4Xi
-	N3VMyxiZpkZj4TQ/FX1KxFjg4QcA5yGxkzy+v0L/LKk4aGQfrOX83S+wMm9N3wT2PsYx4w
-	q8NMKeYk8i52sDsXIAT8kbxHXPs/fotqus8GR9BpQP9xfnweXGj2meWuh7jD0mWdfNekjV
-	RLk8QiDvruXLqulemQMXJMvdZqs9494mN1m6/iF+p3r7nmSfwoL3ieDOGai2+phiRdTwAu
-	TkKBIeIYbHDBwNK6O6a12E2GwSHnJckxEVgsYkZX1YZmsFM6c+ebSjJy6xUuxw==
-From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
-Date: Tue, 11 Aug 2026 18:15:06 +0200
-Subject: [PATCH v2 5/5] i2c: cgbc: Add virtual storage devices on the
- virtual I2C bus
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="W/Kg3GG8"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=pa/xq65zYzfXuELw/850fdvoELCyB9BKdLBh1/QrnZo=; b=W/Kg3GG8IKA5pQAP/DgSAJDvN6
+	ozM+p4QeIRIoh1zf8uh3JyWtcyKEfsoXnn/1h4xA6C3I/nKq9mBV/dAAFjcR/9pNTwtgNQ0xbX4My
+	dBduNcwOzAnLZrHpIq0jNjes1Y+xAVfMICmsZwmtB02DL/NYecnbOWIZOha5UWGdc1r0=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1wtpfz-00H7uZ-Sx; Tue, 11 Aug 2026 18:50:07 +0200
+Date: Tue, 11 Aug 2026 18:50:07 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: James Hilliard <james.hilliard1@gmail.com>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, Lee Jones <lee@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>, mfd@lists.linux.dev,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	netdev@vger.kernel.org
+Subject: Re: [PATCH net-next v5 1/5] dt-bindings: mfd: x-powers: Add AC200
+Message-ID: <1302502e-34b7-44d8-8457-f2a9586a61a0@lunn.ch>
+References: <20260809-submit-acx00-of-dynamic-v1-v5-0-bfa1f8518b28@gmail.com>
+ <20260809-submit-acx00-of-dynamic-v1-v5-1-bfa1f8518b28@gmail.com>
+ <ec826a71-bf33-44cc-80e0-dfc7e92ceb61@kernel.org>
+ <CADvTj4r==rKP4ThVZog51MQ2AVDLZNFwrPH+uDLFV2wGZueAtQ@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260811-cgbc-i2c-storage-devices-support-v2-5-3efa998e0ef5@bootlin.com>
-References: <20260811-cgbc-i2c-storage-devices-support-v2-0-3efa998e0ef5@bootlin.com>
-In-Reply-To: <20260811-cgbc-i2c-storage-devices-support-v2-0-3efa998e0ef5@bootlin.com>
-To: Lee Jones <lee@kernel.org>, Andi Shyti <andi.shyti@kernel.org>
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Werner Gartner <Werner.Gartner@congatec.com>, mfd@lists.linux.dev, 
- linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org, 
- "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
-X-Mailer: b4 0.15.2
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CADvTj4r==rKP4ThVZog51MQ2AVDLZNFwrPH+uDLFV2wGZueAtQ@mail.gmail.com>
 
-Add support for virtual storage devices exposed by the Board Controller
-on its virtual I2C bus. There are two device types: EEPROM for persistent
-storage and RAM for non-persistent storage:
-- Secure Data EEPROM  (64 bytes, RO): static and dynamic board info
-- BIOS EEPROM         (32 bytes, RW): reserved for BIOS applications
-- BC EEPROM           (32 bytes, RO): Board Controller operational params
-- User EEPROM         (32 bytes, RW): user applications
-- BIOS RAM            (32 bytes, RW): reserved for BIOS applications
-- BC RAM               (8 bytes, RO): Board Controller operational params
-- User RAM            (16 bytes, RW): user applications
+> > Bundling it together suggests this is somehow incomplete and later will
+> > be finished, which is wrong by itself. How to fix it - decouple
+> > dependencies.
+> 
+> Could you clarify whether you mean that the MFD and net changes
+> should be sent as separate submissions, or that the driver
+> interface should be redesigned so the net side has no dependency
+> on the AC200 MFD provider?
 
-Use the at24 driver with the 24c01 entry (the most generic one) for all
-virtual storage devices, customizing parameters via software_node
-properties (size, pagesize, read-only flag, label).
+There are two parts to this.
 
-Signed-off-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
----
- drivers/i2c/busses/i2c-cgbc.c | 151 +++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 150 insertions(+), 1 deletion(-)
+DT describes hardware. The hardware is fixed, so you should be able to
+describe it. Ideally, the DT binding should not have an Linux
+concepts, or driver concepts, since that is not hardware.
 
-diff --git a/drivers/i2c/busses/i2c-cgbc.c b/drivers/i2c/busses/i2c-cgbc.c
-index c3f1c83b105a..e36755cc963b 100644
---- a/drivers/i2c/busses/i2c-cgbc.c
-+++ b/drivers/i2c/busses/i2c-cgbc.c
-@@ -372,6 +372,149 @@ static const struct i2c_adapter cgbc_i2c_adapter[] = {
- 	},
- };
- 
-+static const struct property_entry cgbc_secure_data_eeprom_props[] = {
-+	PROPERTY_ENTRY_U32("size", 64),
-+	PROPERTY_ENTRY_U32("pagesize", 1),
-+	PROPERTY_ENTRY_BOOL("read-only"),
-+	PROPERTY_ENTRY_STRING("label", "cgbc-secure-data-eeprom"),
-+	{ }
-+};
-+
-+static const struct software_node cgbc_secure_data_eeprom_node = {
-+	.properties = cgbc_secure_data_eeprom_props,
-+};
-+
-+static const struct property_entry cgbc_bc_eeprom_props[] = {
-+	PROPERTY_ENTRY_U32("size", 32),
-+	PROPERTY_ENTRY_U32("pagesize", 1),
-+	PROPERTY_ENTRY_BOOL("read-only"),
-+	PROPERTY_ENTRY_STRING("label", "cgbc-bc-eeprom"),
-+	{ }
-+};
-+
-+static const struct software_node cgbc_bc_eeprom_node = {
-+	.properties = cgbc_bc_eeprom_props,
-+};
-+
-+static const struct property_entry cgbc_user_eeprom_props[] = {
-+	PROPERTY_ENTRY_U32("size", 32),
-+	PROPERTY_ENTRY_U32("pagesize", 1),
-+	PROPERTY_ENTRY_STRING("label", "cgbc-user-eeprom"),
-+	{ }
-+};
-+
-+static const struct software_node cgbc_user_eeprom_node = {
-+	.properties = cgbc_user_eeprom_props,
-+};
-+
-+static const struct property_entry cgbc_bios_eeprom_props[] = {
-+	PROPERTY_ENTRY_U32("size", 32),
-+	PROPERTY_ENTRY_U32("pagesize", 1),
-+	PROPERTY_ENTRY_STRING("label", "cgbc-bios-eeprom"),
-+	{ }
-+};
-+
-+static const struct software_node cgbc_bios_eeprom_node = {
-+	.properties = cgbc_bios_eeprom_props,
-+};
-+
-+static const struct property_entry cgbc_bc_ram_props[] = {
-+	PROPERTY_ENTRY_U32("size", 8),
-+	PROPERTY_ENTRY_U32("pagesize", 1),
-+	PROPERTY_ENTRY_BOOL("read-only"),
-+	PROPERTY_ENTRY_STRING("label", "cgbc-bc-ram"),
-+	{ }
-+};
-+
-+static const struct software_node cgbc_bc_ram_node = {
-+	.properties = cgbc_bc_ram_props,
-+};
-+
-+static const struct property_entry cgbc_user_ram_props[] = {
-+	PROPERTY_ENTRY_U32("size", 16),
-+	PROPERTY_ENTRY_U32("pagesize", 1),
-+	PROPERTY_ENTRY_STRING("label", "cgbc-user-ram"),
-+	{ }
-+};
-+
-+static const struct software_node cgbc_user_ram_node = {
-+	.properties = cgbc_user_ram_props,
-+};
-+
-+static const struct property_entry cgbc_bios_ram_props[] = {
-+	PROPERTY_ENTRY_U32("size", 32),
-+	PROPERTY_ENTRY_U32("pagesize", 1),
-+	PROPERTY_ENTRY_STRING("label", "cgbc-bios-ram"),
-+	{ }
-+};
-+
-+static const struct software_node cgbc_bios_ram_node = {
-+	.properties = cgbc_bios_ram_props,
-+};
-+
-+static const struct i2c_board_info cgbc_i2c_board_info[] = {
-+	{
-+		.type = "24c01",
-+		.addr = 0x40,
-+		.dev_name = "cgbc-secure-data-eeprom",
-+		.swnode = &cgbc_secure_data_eeprom_node,
-+	},
-+	{
-+		.type = "24c01",
-+		.addr = 0x48,
-+		.dev_name = "cgbc-bc-eeprom",
-+		.swnode = &cgbc_bc_eeprom_node,
-+	},
-+	{
-+		.type = "24c01",
-+		.addr = 0x50,
-+		.dev_name = "cgbc-user-eeprom",
-+		.swnode = &cgbc_user_eeprom_node,
-+	},
-+	{
-+		.type = "24c01",
-+		.addr = 0x58,
-+		.dev_name = "cgbc-bios-eeprom",
-+		.swnode = &cgbc_bios_eeprom_node,
-+	},
-+	{
-+		.type = "24c01",
-+		.addr = 0x60,
-+		.dev_name = "cgbc-bc-ram",
-+		.swnode = &cgbc_bc_ram_node,
-+	},
-+	{
-+		.type = "24c01",
-+		.addr = 0x68,
-+		.dev_name = "cgbc-user-ram",
-+		.swnode = &cgbc_user_ram_node,
-+	},
-+	{
-+		.type = "24c01",
-+		.addr = 0x70,
-+		.dev_name = "cgbc-bios-ram",
-+		.swnode = &cgbc_bios_ram_node,
-+	}
-+};
-+
-+static void cgbc_i2c_instantiate_devices(struct i2c_adapter *adap)
-+{
-+	struct i2c_algo_cgbc_data *algo_data = adap->algo_data;
-+	struct i2c_client *client;
-+	int i;
-+
-+	/* We only instantiate devices on Virtual bus */
-+	if (algo_data->bus_id != CGBC_I2C_VIRTUAL_BUS_ID)
-+		return;
-+
-+	for (i = 0; i < ARRAY_SIZE(cgbc_i2c_board_info); i++) {
-+		client  = i2c_new_client_device(adap, &cgbc_i2c_board_info[i]);
-+		if (IS_ERR(client))
-+			dev_err(&adap->dev, "Failed to register %s\n",
-+				cgbc_i2c_board_info[i].dev_name);
-+	}
-+}
-+
- static int cgbc_i2c_probe(struct platform_device *pdev)
- {
- 	struct cgbc_device_data *cgbc = dev_get_drvdata(pdev->dev.parent);
-@@ -393,7 +536,13 @@ static int cgbc_i2c_probe(struct platform_device *pdev)
- 	if (ret)
- 		return ret;
- 
--	return i2c_add_numbered_adapter(&i2c->adap);
-+	ret = i2c_add_numbered_adapter(&i2c->adap);
-+	if (ret)
-+		return ret;
-+
-+	cgbc_i2c_instantiate_devices(&i2c->adap);
-+
-+	return ret;
- }
- 
- static void cgbc_i2c_remove(struct platform_device *pdev)
+The second part is, the MFD driver should be merged via the MFD
+tree. The networking code should be merged via the net-next tree. Each
+patchset needs to build independently. It does not matter if they
+don't run, probe fails, if run on their own. The different patchsets
+will eventually meet up in linux-next, and get merged together in
+-rc1, at which point they should function.
 
--- 
-2.53.0
+If you have any build time dependencies, you clearly need to state
+them in 0/X patch of each patchset, and explain why the build time
+dependency exists. Sometimes they are unavoidable. If that is true,
+the different subsystem Maintainers need to work together. Sometimes
+one subsystem Maintainer gives Acked-by:, and allows another subsystem
+Maintainer to merge the patches. Sometimes one subsystem Maintainer
+will produce a stable branch, with the other subsystem Maintainer
+merges into their subsystem, resulting in the needed build time
+dependencies being fulfilled. This requires Maintainers to work
+together, so you need to make it clear in the commit message this is
+needed. But ideally, you avoid this, subsystems are mostly
+independent.
 
+      Andrew
