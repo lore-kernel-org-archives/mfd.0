@@ -1,44 +1,44 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1A5439CD1B;
-	Wed, 12 Aug 2026 21:37:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82C453B5E07;
+	Wed, 12 Aug 2026 21:37:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786570654; cv=none; b=JEsuYh2WYLdJM3BkL2A0LDt8X+8K4Y5/ObOrsNfxBObL91iwbpf9nd7vEoimnTwhSTtJXaw5ZFFn8KORkY5u4ST2ef4HH9o3EQ9O4AX6ER8lwSB//2/i09LdyLdeTXSCnFMIHiQvIzcD3PunjMQ9w+6yc5WrH8nWPyQWTrojp+g=
+	t=1786570665; cv=none; b=f3Sk/iBZuu9sWoPbrZKA8VrWqkEpg5HoPJkF6LhHMwJWoh8Kc1A2+xxouk7FzBELvlyXF6mapooaSIF+ewIdtJrdm4aeF23VDPd2mT13wqFDNZd2bonwSXWc5EafZliXNVGYjqrTVaPdKfMPkCMqPab/SxSLvC+ISjBz3rh/xQY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786570654; c=relaxed/simple;
-	bh=wuQ2e6g857ThcvZmI20uLA/yeylMQJrOcwARW+bbZc0=;
+	s=arc-20240116; t=1786570665; c=relaxed/simple;
+	bh=OaalBhX1IKVt7VSw41Td40ZnFQ7KZQlr7GWfeqOyFbc=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=ih3WKf8R9ikjHEpoSd4u0JC2eagUVsAx0mzjfpYtHacNeQ4T4z93sEM4+eCi/UUylTXfJ2OkmVg0ox3z5EJ4OYrZjRgTMrgb0zD1q/IdsE/CCl0pXeWWuUS72rWVs2pV4o0mDW09vZtsm1Cqqb48P6VozXaMmr/fF/HGJUGKZDc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lPFYqSua; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=DipK47m3pUxbBsH653uVKav76jZm+LaO5ovsqD2cjVfztMny/KR0ZLXS20vqI0AxY5/97WfZUelF/Y0hl0RfrDRLZ19Kyrok/o+PXM1P4qewqTWwGC/hrbT9hd/JLhG781xr7U39U4zfBG502QHhfDHVMtf/kfCTUixhTbBjUbM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ceqRiJHF; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lPFYqSua"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE3EC1F000E9;
-	Wed, 12 Aug 2026 21:37:32 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ceqRiJHF"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D124F1F000E9;
+	Wed, 12 Aug 2026 21:37:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786570653;
-	bh=wuQ2e6g857ThcvZmI20uLA/yeylMQJrOcwARW+bbZc0=;
+	s=k20260515; t=1786570664;
+	bh=OaalBhX1IKVt7VSw41Td40ZnFQ7KZQlr7GWfeqOyFbc=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=lPFYqSua3WFX/Oop1ATdNKrh4hU0EwjXqHDrfSdOUEDzYP6xSkhKaXeBL1XbDU5nQ
-	 Z6vjqfmr07HM7Q8hUNuW30YUBpQEJwRPq7/RZdgXn4FQXRzKmPkOhQNzsjyhywbG0e
-	 8IGYyZeB5ScEH1xAk2D+IlzsWT/GMgs18uMkR6d87gICUeX0kVLolfk9bMe8hfDadU
-	 ipDCCh+Kit+Eh65zfdja5bt2ICsbKM4Km4qU6zFjKmWokDPGKLfVWZJAnL77eJTHJK
-	 tnzzC1zpOhxMUnbSqlg+I2R3G5sl8F/Pw4hxUZZoMqfXodLdyjybgIjvnrjj6rNCEN
-	 s4jS0AmXvQuWg==
+	b=ceqRiJHFdz4k0mEUnxFPbnkgwbQ0wtFL5TNNnTK2r56NAg+wgzyD9hZegc6L282Wk
+	 OuMJbfy2AP0Y7rHsiB26fQZ520BOK5n9I7VAF9MCTa9g3l085mH4tirVp7baajqNK6
+	 UBy603fzvvX+VicOhpQMK4FogRmyAPF0beV3TDCvskcmBhAqtdHyaMreY/B7zpAxlt
+	 aMalxRQAD+TPQqyjvom9csP0kwTg/kVQYA7ggbNWjvzvHcE8jwSReClprPwYxa86nV
+	 AL94awUnN7qyIVsWZBJtDDxpTuZxQQ69nI93XYZFlzelj0Zj86ufhIxTjxQVw3E2HE
+	 dSgh2h8zU2MrA==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RESEND v6 3/5] dt-bindings: mfd: x-powers,axp152:
- Document AXP318W
+Subject: Re: [PATCH RESEND v6 5/5] regulator: axp20x: add support for the
+ AXP318W
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Jerome Brunet" <jbrunet@baylibre.com>
-Cc: devicetree@vger.kernel.org, conor+dt@kernel.org, robh@kernel.org, lee@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260812-axp318-regulator-v6-3-d6b84b55c000@baylibre.com>
+Cc: robh@kernel.org, devicetree@vger.kernel.org, lee@kernel.org, mfd@lists.linux.dev, conor+dt@kernel.org
+In-Reply-To: <20260812-axp318-regulator-v6-5-d6b84b55c000@baylibre.com>
 References: <20260812-axp318-regulator-v6-0-d6b84b55c000@baylibre.com>
- <20260812-axp318-regulator-v6-3-d6b84b55c000@baylibre.com>
+ <20260812-axp318-regulator-v6-5-d6b84b55c000@baylibre.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 12 Aug 2026 21:37:32 +0000
-Message-Id: <20260812213732.EE3EC1F000E9@smtp.kernel.org>
+Date: Wed, 12 Aug 2026 21:37:43 +0000
+Message-Id: <20260812213743.D124F1F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -47,29 +47,25 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
 > From: Andre Przywara <andre.przywara@arm.com>
 >=20
-> The X-Powers AXP318W is a PMIC used on some newer Allwinner devices.
-> Among a large number of both DCDC and LDO regulators it features the usual
-> ADC/IRQ/power key parts.
-> Like other recent PMICs, it lacks the DC/DC converter PWM frequency contr=
-ol
-> register, that rate is fixed here (1.5MHz on DCDC1, 3 MHz on the others).
+> The X-Powers AXP318W is a typical PMIC from X-Powers, featuring nine
+> DC/DC converters and 28 LDOs, on the regulator side.
 >=20
-> Add the new compatible string, and add that to the list of PMICs without
-> the PWM frequency property.
-> Also add more input supply properties, for the split DCDC and ALDO
-> supplies.
-> The PMIC features *two* switched outputs, hanging of DCDC1, and the
-> manual calls them swout1 and swout2, so follow suit here and add those
-> names to the pattern for matching the node names.
+> Describe the chip's voltage settings and switch registers, how the
+> voltages are encoded, and connect this to the MFD device via its
+> regulator ID.
+> We use just "318" for the internal identifiers, for easier typing and
+> less churn. If something else other than the "AXP318W" shows up, that's
+> an easy change, externally visible strings carry the additional letter
+> already.
 >=20
+> Reviewed-by: Mark Brown <broonie@kernel.org>
 > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> Reviewed-by: Chen-Yu Tsai <wens@kernel.org>
-> Acked-by: Conor Dooley <conor.dooley@microchip.com>
+> Co-developed-by: Jerome Brunet <jbrunet@baylibre.com>
 > Signed-off-by: Jerome Brunet <jbrunet@baylibre.com>
 
 Sashiko has reviewed this patch and found no issues. It looks great!
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260812-axp318-reg=
-ulator-v6-0-d6b84b55c000@baylibre.com?part=3D3
+ulator-v6-0-d6b84b55c000@baylibre.com?part=3D5
 
