@@ -1,113 +1,161 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E536C32E12E;
-	Wed, 12 Aug 2026 08:15:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 546AD352027;
+	Wed, 12 Aug 2026 08:19:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786522527; cv=none; b=Q0qLJaqoEH8Apd8oHuXpoPokhTbpYn/WuPFl8AG6nZcdHlQ83f/3cjaTUxxONPIaIp/VhmCt8adbN7Y8iz3MO+Ph3INKy3RTJl+0gq5dubEso/WrHP5srbJQADEx5ObXGh2ElpfYsYUXrqQP9LUIDE0xf3dW3V/C5HiQSt3hv94=
+	t=1786522747; cv=none; b=AOwKdTnppygaiIOrtdahISp5JQWukYoQZNNvu6DV9YqVhOHpGDwC9LJNYRWV7cI+VQbsah/eOG5MNqCOqcJ3uEBXHbkYG7Pi4bE1AqMp+ijMptpNyMyHD/+xI/Hsa8Rkjo3NPtwiK4+K81YCjanSKWRmxLIvesRkmYSOnP5KObI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786522527; c=relaxed/simple;
-	bh=9BY7ufueTNS3wdYw/+vOSPSkUrKWO4ohMTslQOu0JwA=;
+	s=arc-20240116; t=1786522747; c=relaxed/simple;
+	bh=UbL3iC09wFptwQM3guce+Y0s7k/vjg+ZL4Ya8Dofdfw=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ssZkJ/5kAWjeEGWCrvrIBprfl8fFEsVmXA4b2x4YrUJJJ4rLQQ88Kskil9tfdJrMeahKoIBQBS5ZoCE+e0rquAcTI379Sv3UUVPTTQK+B+mIhKLSHStGTHqBJ5lAGcVmDV7sczRz1eTVysBjQSA/j/4tE1mmsz0xDVfYJmlZXJM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CQuLFUDv; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=SWIDYElpMdRCVsVW2f+SJqFlJ2Kp963eks8LdmtCeS/OJPKNCBbXMMHW5OhJSJQMebBuxuST/iy85DuN+XJQy45BiZpUtRl/UKOUHjKeNWY3c4555R196qeJWwC0fjQ5hPHOHZKcvZT1TfSom6UkjIEFaQgdJH5kt/b2KIDrN/Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Bf1R0GNV; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CQuLFUDv"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1CE961F000E9;
-	Wed, 12 Aug 2026 08:15:23 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Bf1R0GNV"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 256A71F000E9;
+	Wed, 12 Aug 2026 08:18:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786522525;
-	bh=nZtfL1kwIlkIkj/Cq5rLTRLLBqk+ImQDiZUgSiLiBpM=;
+	s=k20260515; t=1786522746;
+	bh=tg2d+uSxSfnEQ+/wwkTn7ftgs1qXWrlfLkCgiC/frqc=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=CQuLFUDv9XLflAELJY36wwErBRpVAuJN7zcl92mvIbBcTYuxS6tdtP2HdE464CXVc
-	 Fr/2zXIIzKTG6maPVbZpbQovMr2g55NmU95xS/Acsn/wOo+kuafSiEutBsbYs6vQYn
-	 h5dthN6B3vIqftGHQjdvvtBYNf78ui2/saVJQbqwCxuLGy8sdvehOqagfKJBMkKvua
-	 oMByjghDPbgStf44rHqUWkqzWIMJpu0g1xB/00qik2t9Rn8YD5sdvNLnN42y7llq9n
-	 xXBgSeccy+vQSP2fPzcfnfS5389bfMWVIG+qv2sqATWH4BuqLpBbVFw5cPqEbF927x
-	 UDYRpe3jsSgCw==
-Date: Wed, 12 Aug 2026 09:15:21 +0100
+	b=Bf1R0GNVZA16GWAATXUlPxuJ4mfMJXiDCQdYgqoD7y80q/FqN0jKELPlZTl9YTSrq
+	 pLpN5vvXrB/Hpwb2Qie70vFXzOaEtxgUQfwS1VvVVj/ntwWHq8sJ4V7c4wUqra+tJl
+	 Yu7Hd+z0rnMOw9KFYuMF/fE7zPPyOoJJ+gE0mIJ27Q1qkAQ1YstVhugQlPW/8W8DAF
+	 AbLBTUPp2Un1B907c7J1kcG/3mPgE6+afRtmm6eywgjLeY/vvyoDNRVwK1xLJYBz8l
+	 BdoJ382q3izk1A2BvnJTdmKd9ULzUj4G1OsjAwisEQrhF8vecaPPNkpzWjNr7I1jAb
+	 wPgPPC2subyLA==
+Date: Wed, 12 Aug 2026 09:18:56 +0100
 From: Lee Jones <lee@kernel.org>
-To: sashiko-reviews@lists.linux.dev
-Cc: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>,
-	conor+dt@kernel.org, mfd@lists.linux.dev,
-	devicetree@vger.kernel.org, robh@kernel.org
-Subject: Re: [PATCH v24 04/12] mfd: psci-mfd: Add PSCI MFD driver for
- cpuidle-psci-domain cell
-Message-ID: <20260812081521.GE1072730@google.com>
+To: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>,
+	Souvik Chakravarty <Souvik.Chakravarty@arm.com>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Andy Yan <andy.yan@rock-chips.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	John Stultz <john.stultz@linaro.org>,
+	Moritz Fischer <moritz.fischer@ettus.com>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Christian Loehle <christian.loehle@arm.com>,
+	Ulf Hansson <ulfh@kernel.org>,
+	Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Sudeep Holla <sudeep.holla@kernel.org>,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+	Andre Draszik <andre.draszik@linaro.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
+	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, mfd@lists.linux.dev,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Subject: Re: [PATCH v24 08/12] mfd: psci-mfd: Add psci-reboot-mode child cell
+Message-ID: <20260812081856.GF1072730@google.com>
 References: <20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com>
- <20260803-arm-psci-system_reset2-vendor-reboots-v24-4-889281373870@oss.qualcomm.com>
- <20260803100023.7AA1C1F00A3A@smtp.kernel.org>
+ <20260803-arm-psci-system_reset2-vendor-reboots-v24-8-889281373870@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260803100023.7AA1C1F00A3A@smtp.kernel.org>
+In-Reply-To: <20260803-arm-psci-system_reset2-vendor-reboots-v24-8-889281373870@oss.qualcomm.com>
 
-On Mon, 03 Aug 2026, sashiko-bot@kernel.org wrote:
+On Mon, 03 Aug 2026, Shivendra Pratap wrote:
 
-> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
-> - [Medium] The new `psci-mfd` driver lacks a `.remove` callback and does not set `.suppress_bind_attrs = true`, allowing manual unbinding via sysfs which leads to resource leaks.
-> - [Low] The newly introduced MFD driver, its file, and its structures include the string 'mfd' in their names, violating subsystem conventions.
+> The PSCI "reboot-mode" node does not define a compatible because it is a
+> configuration of boot-states provided by the underlying firmware. With
+> the new firmware-node based cells in mfd-core, this node can now be
+> exposed as a proper child cell.
+> 
+> Add the psci-reboot-mode child cell to the psci-mfd driver with a
+> named_fwnode. Add psci-cpuidle-domain cell first to isolate it from
+> reboot-mode failures.
+> 
+> Suggested-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+> ---
+>  drivers/mfd/psci-mfd.c      | 27 ++++++++++++++++++++++++++-
+>  drivers/power/reset/Kconfig |  2 +-
+>  2 files changed, 27 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/mfd/psci-mfd.c b/drivers/mfd/psci-mfd.c
+> index 7affd6bb09dd..7befc4fa86f5 100644
+> --- a/drivers/mfd/psci-mfd.c
+> +++ b/drivers/mfd/psci-mfd.c
+> @@ -14,10 +14,35 @@ static const struct mfd_cell psci_cells[] = {
+>  	},
+>  };
+>  
+> +static const struct mfd_cell psci_reboot_mode_cell[] = {
+> +	{
+> +		.name = "psci-reboot-mode",
+> +		.named_fwnode = "reboot-mode",
+> +	},
+> +};
+> +
+>  static int psci_mfd_probe(struct platform_device *pdev)
+>  {
+> -	return devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO, psci_cells,
+> +	int ret;
+> +
+> +	ret = devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO, psci_cells,
+>  				   ARRAY_SIZE(psci_cells), NULL, 0, NULL);
+> +	if (ret)
+> +		goto out;
+> +
+> +	ret = devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO,
+> +				   psci_reboot_mode_cell,
+> +				   ARRAY_SIZE(psci_reboot_mode_cell),
+> +				   NULL, 0, NULL);
+> +	if (ret) {
+> +		if (ret == -ENOMEM)
+> +			goto out;
+> +		dev_warn(&pdev->dev, "reboot-mode child cell failed to add: %d\n", ret);
 
-Please review, explain or fix the Sashiko review(s).
+Okay Yoda, but why is this okay?
 
-If this is a set, this request includes the other patches too.
+Needs a comment.
 
-> --
-> 
-> --- Patch [4]: [PATCH v24 04/12] mfd: psci-mfd: Add PSCI MFD driver for cpuidle-psci-domain cell ---
-> commit 26907aee3ff3e0a5d7112a9be25ebbebb10e94c7
-> Author: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-> 
-> mfd: psci-mfd: Add PSCI MFD driver for cpuidle-psci-domain cell
-> 
-> This commit introduces a new PSCI MFD driver to manage multiple consumers of
-> the PSCI device node. It registers the cpuidle-psci-domain as a child cell
-> and updates the cpuidle driver to probe as an MFD child.
-> 
-> > diff --git a/drivers/mfd/psci-mfd.c b/drivers/mfd/psci-mfd.c
-> > new file mode 100644
-> > index 0000000000000..7affd6bb09dd8
-> > --- /dev/null
-> > +++ b/drivers/mfd/psci-mfd.c
-> [ ... ]
-> > +static struct platform_driver psci_mfd_driver = {
-> > +	.probe = psci_mfd_probe,
-> > +	.driver = {
-> > +		.name = "psci-mfd",
-> 
-> [Severity: Low]
-> This isn't a bug, but does naming the driver and struct with the "mfd"
-> string violate the MFD subsystem guidelines?
-> 
-> The MFD guidelines state not to hard-code implementation details in driver,
-> struct, or device names, and to specifically avoid including the string
-> "mfd" or the driver's own filename in names.
-> 
-> [Severity: Medium]
-> Since there is no .remove callback provided in psci_mfd_driver, does this
-> allow manual sysfs unbinding that could leak resources?
-> 
-> If a user unbinds the driver via sysfs, devres will destroy the child
-> devices. Because the child driver (psci-cpuidle-domain) lacks proper
-> cleanup for non-devm resources like generic PM domains, those resources
-> might leak or leave dangling pointers on this administrative path.
-> 
-> Should .suppress_bind_attrs = true be set in the driver struct to prevent
-> unsupported sysfs unbinding?
-> 
-> > +		.of_match_table = psci_mfd_of_match,
-> > +	},
-> > +};
+> +		ret = 0;
+> +	}
+> +
+> +out:
+> +	return ret;
+>  }
+>  
+>  static const struct of_device_id psci_mfd_of_match[] = {
+> diff --git a/drivers/power/reset/Kconfig b/drivers/power/reset/Kconfig
+> index 143f3260f04a..1810482d52e6 100644
+> --- a/drivers/power/reset/Kconfig
+> +++ b/drivers/power/reset/Kconfig
+> @@ -362,7 +362,7 @@ config NVMEM_REBOOT_MODE
+>  
+>  config PSCI_REBOOT_MODE
+>  	bool "PSCI reboot mode driver"
+> -	depends on ARM_PSCI_FW || COMPILE_TEST
+> +	depends on (ARM_PSCI_FW && MFD_PSCI) || COMPILE_TEST
+>  	select REBOOT_MODE
+>  	help
+>  	  Say y here will enable PSCI reboot mode driver. This gets
 > 
 > -- 
-> Sashiko AI review · https://sashiko.dev/#/patchset/20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com?part=4
+> 2.34.1
+> 
 
 -- 
 Lee Jones
