@@ -1,80 +1,70 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7A19417D7A;
-	Wed, 12 Aug 2026 11:20:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A52503A9630;
+	Wed, 12 Aug 2026 11:25:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786533642; cv=none; b=uqDwdTQgzUlCfHSGFz5UqKwtVIil5ic4R50XybRORpE/AISBnNpSoZ8h0Kno3rGMQRF+WRcKiTD7vy0pRrCSe1IhrLE+GuNu3WaeOsiNccZwkBQ7WNJPxg8khg3lHb5KtPm3Gy0/Mk9U/Ohu4PFj74fLxynYECE5obcx3i5dP+Y=
+	t=1786533947; cv=none; b=iPKSdmqs0RRK3pCgGuLzpoRkKkp6OPtyLESOkDNkrqtEEDnCAAOJ15DuW40xAEjF84VixBmgNgCAyIKLJFDSE/R+EfJGe5cG9W3IUROZiD+f8u8tdXP9K0N0fMcBT4zGDHwU217yXzeufm4pn2bTLXS4S0D1O+x488zD4MDmIJI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786533642; c=relaxed/simple;
-	bh=9A8Bhz2TfTVBJdFtGyPY+UuYkCjmAamRVnmIkozQJoU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=DhFBS9xVzHZlxUT8mqS/qxnL2ecqIFg7dEiEUWpNQjsRwe20SZZNZfFjCUY95n72YHJj4sMYTBjOn40TVdMooBeW5g3WQ10X9byor4zYhnK3/hM54jOJZIQ42sYuiuEkFZ2NMFrJnhSr8bNjYfPL6gdVSX2SIBdM3K8yDG/RXTA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GULO7AVg; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786533947; c=relaxed/simple;
+	bh=I2wXAp1K+YI5d/NgOO42iMyLG3QE2f0VK42W3SoUxAk=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=mDHNIqkI4RubOra1rBrSC/xf3yJXqOj0DbAJ/yQa/DKSiLwNbZ45mdLVMY1qZQ00syX3ZlxOvH84CdLgGBQgKmhFdNT4ryHfJv4FO+XQ9lkC9j3F4iMbz6kK4zQom+Q+GXTErPiNZ0XWp0bVPOjl6FFHdmcP5jJqDbxlRhEd4Aw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ICLDTn3p; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GULO7AVg"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8DFB11F000E9;
-	Wed, 12 Aug 2026 11:20:40 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ICLDTn3p"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F119D1F000E9;
+	Wed, 12 Aug 2026 11:25:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786533641;
-	bh=xjjekHDCD+ngjZWFcAGybvbD19AYt6LyIcYokjOW7N8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=GULO7AVg7KNJAgScpQNaFV/fB8NTEgsdTfaPBLAVc/9xE01wE2CZmkb1bcW6A4Tkl
-	 OwXfw1VccHguO4yJUEVbW1r5+UvW6kjsFzsf5kJhVUOrCZrkAfW3BLo6XLxJLCOz7F
-	 fQJ9644NGPsMrvJByAblb/SDM6FXUN8Gq6TkQBYFlcLj0XsDotLrAXIJgcAPFxeqa6
-	 Levb1LOuKkgkSG+ftWISD/0tSzmsQqt2s7nKhV0jhNv8CL0FexKqtq1kU5upj1Ank1
-	 1WcIDKHGkly+iuWakqQVZ4dUP2vZ3sNMUcnU3lvtKJxW4lCk/fh8JR4DPMoqRZs4Qf
-	 OnJ6Txy9VjC6w==
-Date: Wed, 12 Aug 2026 12:20:37 +0100
+	s=k20260515; t=1786533945;
+	bh=ddodq+ZTTmGF3leYzH9QS+cPvj+UgDzxn1f/c1nGk3Y=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=ICLDTn3pyzoqViRux6DSg3UvYyCDcWDlQiQPWaIpQ7VeaE0dnPOCGt8Pm80wjpikR
+	 2PCYsQqyRfuqL3wJD/cCkmwhw5nCJL2OHr8td+phjGwuHqX8fp2fDCnLP7oq7CVtCj
+	 nD0D7GT8iYd6EFCCYbwTHsuILrnGg/b0c5AAbnvT6SQd0A6hl6+VzS5ni9oeB6rkOl
+	 OTzV0iiIIplCA5IzN1ZeDEBELn/OZnjrdQHFuI9XBYnf1wNS25NwCYDHzmwTP3qfsh
+	 Ud3HSgRNkUjkEGCfM88VGn/0J0iVn3HXpCzQZZCyriwfS0Uuo5NB3JvIgUc7BYdssb
+	 jTIUwVJHgSurQ==
 From: Lee Jones <lee@kernel.org>
-To: sashiko-reviews@lists.linux.dev
-Cc: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>,
-	mfd@lists.linux.dev
-Subject: Re: [PATCH 3/4] mfd: cgbc: Add virtual I2C bus support
-Message-ID: <20260812112037.GJ1072730@google.com>
-References: <20260804-cgbc-i2c-storage-devices-support-v1-0-fed38510671c@bootlin.com>
- <20260804-cgbc-i2c-storage-devices-support-v1-3-fed38510671c@bootlin.com>
- <20260804154824.458301F000E9@smtp.kernel.org>
+To: Binbin Zhou <zhoubb.aaron@gmail.com>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Yinbo Zhu <zhuyinbo@loongson.cn>, 
+ zhanghongchen <zhanghongchen@loongson.cn>, 
+ "Rafael J . Wysocki" <rafael@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
+ Lukasz Luba <lukasz.luba@arm.com>, Lee Jones <lee@kernel.org>, 
+ Huacai Chen <chenhuacai@kernel.org>, 
+ Daniel Lezcano <daniel.lezcano@kernel.org>, 
+ Binbin Zhou <zhoubinbin@loongson.cn>
+Cc: Huacai Chen <chenhuacai@kernel.org>, devicetree@vger.kernel.org, 
+ linux-pm@vger.kernel.org, mfd@lists.linux.dev
+In-Reply-To: <b76405a88b0cded91ba370139d7223fe2d6953df.1785829933.git.zhoubinbin@loongson.cn>
+References: <b76405a88b0cded91ba370139d7223fe2d6953df.1785829933.git.zhoubinbin@loongson.cn>
+Subject: Re: (subset) [PATCH v4 3/5] dt-bindings: mfd: syscon: Allow syscon
+ compatible for Loongson-2K0300 chip id
+Message-Id: <178653394272.1364218.6326646131780320669.b4-ty@b4>
+Date: Wed, 12 Aug 2026 12:25:42 +0100
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260804154824.458301F000E9@smtp.kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
 
-On Tue, 04 Aug 2026, sashiko-bot@kernel.org wrote:
+On Tue, 04 Aug 2026 20:43:56 +0800, Binbin Zhou wrote:
+> The Loongson-2K0300 SoC exposes its chip ID registers through a syscon
+> interface. Add the specific compatible `loongson,ls2k0300-chipid-syscon`
+> to the allowed list of syscon bindings so that it can be referenced from
+> the thermal node via a phandle.
 
-> Thank you for your contribution! Sashiko AI review found 1 potential issue(s) to consider:
-> - [Low] Hard-coded cell IDs are used for the newly added `cgbc-i2c` subdevice instead of `PLATFORM_DEVID_AUTO`.
-> --
-> 
-> --- Patch [3]: [PATCH 3/4] mfd: cgbc: Add virtual I2C bus support ---
-> commit 4f0038d5dc42bfd45540675cdbf89f68ab3673d5
-> Author: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
-> 
-> mfd: cgbc: Add virtual I2C bus support
-> 
-> This commit adds a new I2C cell to support the internal virtual I2C bus 
-> provided by the Board Controller.
-> 
-> > diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
-> > index 4a409234e66c8..81bd0a381ca13 100644
-> > --- a/drivers/mfd/cgbc-core.c
-> > +++ b/drivers/mfd/cgbc-core.c
-> > @@ -240,6 +240,7 @@ static struct mfd_cell cgbc_devs[] = {
-> >  	{ .name = "cgbc-gpio"	},
-> >  	{ .name = "cgbc-i2c", .id = 1 },
-> >  	{ .name = "cgbc-i2c", .id = 2 },
-> > +	{ .name = "cgbc-i2c", .id = 3 },
-> 
-> [Severity: Low]
-> Should this use PLATFORM_DEVID_AUTO instead of hard-coding the cell ID?
+Applied, thanks!
 
-I had this question too.
+[3/5] dt-bindings: mfd: syscon: Allow syscon compatible for Loongson-2K0300 chip id
+      commit: 2b02aa1b547a57e1e7aad1364a57520cf4ac49cf
 
--- 
-Lee Jones
+--
+Lee Jones [李琼斯]
+
