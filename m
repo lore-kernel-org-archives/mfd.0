@@ -1,87 +1,67 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6682436B910;
-	Wed, 12 Aug 2026 01:43:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4192B3AE6E2;
+	Wed, 12 Aug 2026 08:08:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786498998; cv=none; b=IiIINGNApaRBfgpVkOTJuhQqXMscjxnm0inx+ZiMgexMq5LNqnhWKFpBPZJxP2NHcyGbGDxpAu9j3aAyRNihs9h0qbwKHPRt7yFK5s7bNdZAADSb/ggqT/S7tLuDHg0nWFNPAjrvIz0p+d+yANIB+Js9BDiPMdm81kqXYTrvbPU=
+	t=1786522115; cv=none; b=gH6JcsD+UvI5nL+eZnKKJ6XR2GUbbUdw+TOjJAVPV32V3BIi2k4xc47Icuga9N8wAzltd6GdpwuQuJzf/9NVsurouh6l/PEoArIxAEdsoUwxZfF40GTd6uy20eoCSKTvfvj9Per4wrVDjAcpIi4U41UToLwuvO7hEfY8Fdzs9kw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786498998; c=relaxed/simple;
-	bh=RpT96W6McEBmUiSsXd5v3AQZbFYUbGjLH1REzPrLXBI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=hNKJzbmV/JMSnQtwsB7oXJOPL2GOwvryi/wyDD37+VEkGamPKJZBIi5vSICwYu2y6GZYakDX5vupE4kiM2OIrD2lYNpum0M+Gf8Cd1XAf2aNjPdKSo1ztdEdjcTO2RWXvwJc4+/REVzFcj9G9Tr23iwtQc4PQgVXJXlIntdX0lY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ls3ddR1v; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786522115; c=relaxed/simple;
+	bh=Tb4+pN4Co4wjZEX1o5/C5gLdRmo7Y8PIdHLLNpWEUMg=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=bXdQ7GbY9BXNMNAwLz/kI9oycUN4L2BYZLC9dWZ1xmuG5cBZ0VPJHqobevuUGtbiVpNjdoU+rkshsSADltsdHCthq7p52sRHjR4ip+ZLP1tegwu5BjTwirlLhZ8CGKpzJXdzCbt6Sc/jqtUO3awMtnnaIlkwVE41fD0mIBJVu0U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KmhE99h2; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ls3ddR1v"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EA5301F000E9;
-	Wed, 12 Aug 2026 01:43:16 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KmhE99h2"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 07FE31F000E9;
+	Wed, 12 Aug 2026 08:08:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786498997;
-	bh=g/vI6wCZsy/vzbFKcn60dM/qco3YlxXIkCwp9QNjgOU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=ls3ddR1vS4hY9X+AWkteoCYupGCcyzeSsiiivH0yZvd5yzgOBpsjP94cuh6+CXqgu
-	 jzE3anvSWJAgAKaC8yhadkeVm9nRZ3hGNttK/DJuAJfGDonBFNSjVgGei+IiLZu6G2
-	 rL+dbxsnVG4mKWEgiABdM6pT+Xpe6WE2ofJPtnPH5pqXQn2sQP4i5wSfdcbqniRz/d
-	 Rrljh4TTE1TddcgOOwnACfjdoumk5KxbE9w36Hb02e+PJo9c4WwKC4ze6kUMxwCg32
-	 0lz678SLU8DXn9/thfYemLb67pJdI7u33c4yiMsvNXjjCh4oMbp9Z+854UmbKWyDxY
-	 K8f5B+EBbDvwA==
-Date: Tue, 11 Aug 2026 20:43:16 -0500
-From: "Rob Herring (Arm)" <robh@kernel.org>
-To: Matti Vaittinen <matti.vaittinen@linux.dev>
-Cc: Matti Vaittinen <mazziesaccount@gmail.com>,
-	Brian Masney <bmasney@redhat.com>, linux-clk@vger.kernel.org,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org,
-	Lee Jones <lee@kernel.org>, linux-kernel@vger.kernel.org,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	mfd@lists.linux.dev, Stephen Boyd <sboyd@kernel.org>,
-	Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
-	Mark Brown <broonie@kernel.org>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Linus Walleij <linusw@kernel.org>, linux-rtc@vger.kernel.org,
-	linux-gpio@vger.kernel.org
-Subject: Re: [PATCH v2 02/10] dt-bindings: rohm,bd*: Ref common ROHM bindings
-Message-ID: <178649899582.485262.16944212879367030522.robh@kernel.org>
-References: <cover.1785838584.git.mazziesaccount@gmail.com>
- <d419dcf8776f7ea88e4a66b9a0f0087f11e6622c.1785838585.git.mazziesaccount@gmail.com>
+	s=k20260515; t=1786522114;
+	bh=2N4dEcZvp9V+FiV8Y6xckLuMfyi88p7lnAUfO7wp0cg=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=KmhE99h27VRrUD1HOZNJu++1tOGlqnew54odGLYC7MATCMhBxXvs2oilLU7OXxBu+
+	 1bw23kKB/PBnIJkJuXRmib7jSgiWffsaxMbtzbV80pnit4bUSILkctbUOjyXXi4iEu
+	 eAuBh939gedLiG9swAyZUl8UU5lG8JDFfG/Vv4wzO05jB/pw1VTfkVhf5Q80we5IXZ
+	 UvddItY6DbEE6T1q/yNxyYBgesHQAKgH85BwxBeD/YnnvxOjpcOxxRsgCycfQVb5RX
+	 NIVnQzUAu/lXtLMkM+sEfYuuWw5fuYdQ/OEwQo4vvryZPyYSupKOZ5HDAhiunuhiWP
+	 GlPqc3kGiPxcw==
+From: Lee Jones <lee@kernel.org>
+To: Heiko Stuebner <heiko@sntech.de>, Lee Jones <lee@kernel.org>, 
+ Ali Ahmet Memis <ali@iusegentoo.com>
+Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
+ stable@vger.kernel.org
+In-Reply-To: <20260802135307.31380-1-ali@iusegentoo.com>
+References: <20260802135307.31380-1-ali@iusegentoo.com>
+Subject: Re: (subset) [PATCH v2] mfd: qnap-mcu: keep the reply buffer alive
+ past a command timeout
+Message-Id: <178652211278.1293856.6446175346391475139.b4-ty@b4>
+Date: Wed, 12 Aug 2026 09:08:32 +0100
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <d419dcf8776f7ea88e4a66b9a0f0087f11e6622c.1785838585.git.mazziesaccount@gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
 
+On Sun, 02 Aug 2026 13:53:07 +0000, Ali Ahmet Memis wrote:
+> qnap_mcu_exec() publishes an on-stack buffer to the receive path:
+> 
+> 	unsigned char rx[QNAP_MCU_RX_BUFFER_SIZE];
+> 	...
+> 	reply->data = rx;
+> 	reply->length = length;
+> 
+> [...]
 
-On Tue, 04 Aug 2026 13:20:50 +0300, Matti Vaittinen wrote:
-> From: Matti Vaittinen <mazziesaccount@gmail.com>
-> 
-> The commonly used ROHM PMIC bindings were added into
-> rohm,pmic-pins.yaml. Keeping commonly used properties in one file can
-> ease both the maintaining the bindings and the reviewing process.
-> 
-> Reference the common bindings from rohm,pmic-pins.yaml, instead of
-> declaring them from the scratch for every PMIC using them. Keep the PMIC
-> variant specific information (like supported pin functions) in PMIC the
-> specific files, so unsupported values won't be allowed.
-> 
-> Signed-off-by: Matti Vaittinen <mazziesaccount@gmail.com>
-> 
-> ---
-> Revision history:
->  v2:
->   - New patch
-> ---
->  .../bindings/mfd/rohm,bd71815-pmic.yaml       |  9 +++---
->  .../bindings/mfd/rohm,bd71828-pmic.yaml       |  9 +++---
->  .../bindings/mfd/rohm,bd72720-pmic.yaml       | 29 +++----------------
->  3 files changed, 12 insertions(+), 35 deletions(-)
-> 
+Applied, thanks!
 
-Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
+[1/1] mfd: qnap-mcu: keep the reply buffer alive past a command timeout
+      commit: 47504742cea7878ebd1bf1491bbed923df6b90b1
+
+--
+Lee Jones [李琼斯]
 
