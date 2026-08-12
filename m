@@ -1,146 +1,123 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B80E42123A;
-	Wed, 12 Aug 2026 11:53:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2586437110;
+	Wed, 12 Aug 2026 12:00:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786535604; cv=none; b=e9DZQhmM7GoTQ4Z5F70+hPqQohe/NL9N/o/6XgnjTd5+mlOoatoZxhR598i8DT3Lg2Yt2ZmZECWqCnf6dR9vYbjQZrz23qRY8Nd4vR1WkDETvpa41Hk5UyOcVDPEoscxU0jfNPecVUKRvxqsrNXFbIBtclhFh9EjoOUY1LCbMUI=
+	t=1786536017; cv=none; b=sco7FEwI8YgmCEPAcghpShWUtVaE6mj6t4+Q6UOMKOIUgbTOGeEoBUsH2UI8SXClow4dgz8zBtLjVsRKQsa3J/XYR+xeaD2RGCwcWZ+Xj+HKzhEzpVftsho7VVXgPFthOYZXmEyhL0JrPJ309mnd/+zXbV/MV0pCJQ5HIX6wIXg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786535604; c=relaxed/simple;
-	bh=mCt7T+q5ckM4Ec2RGeG31h03mXnJZAQnLvsoW0zfjoY=;
+	s=arc-20240116; t=1786536017; c=relaxed/simple;
+	bh=M6tgc7f8QWnd7QkekMGz/mTksQ7bzy7nYglMj9TzIqQ=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Qv3N2hSMZkasnq6+1SecgFo5xaxhd3MeleF/+RNGuY0rvURdTTaulDuMly5x8mbjYfKM/clonZt+1Jwbg6IZ7QYot601lLT9GEuJviTJeNtPVjh3Y/hpXHtJd6SNvqKSp6UdiBuj+gN8nDF8fJwFonmqdvTJuCjmW7aHg0zNOk8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EQDqkDXz; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=YdHFFjSQqmXzgwuHKt/fpOZ1P89ZwSeq2XOC42Kr4+oRoflUU1TJnmcp1PW6dBKz1X6U2siQEWke1tBJsuLuDpxLIhLpHKv+J3zY3ro3fTrNc4MItQF/f4a+1aqFDfVjOIRy3gWUiXwopFQPGyVG0fSzsFPr0pN42ijTwLx74dE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ic/w6eGg; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EQDqkDXz"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 91D511F000E9;
-	Wed, 12 Aug 2026 11:53:20 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ic/w6eGg"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 63D301F00A3A;
+	Wed, 12 Aug 2026 12:00:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786535601;
-	bh=ipwD5mVGCJ7usQHtP/Xb+NpujWtiVz809Yc/rGyGlYU=;
+	s=k20260515; t=1786536012;
+	bh=MHNBwGGnswWSzAP7z65dBZa8AALtkmk2EGpH/Ujybd0=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=EQDqkDXzTEmfjgikqw8qnrPt2RVIOAbWtzH/+M2YmkbMNpxJTeDA96SOxQ9DCGvtm
-	 W80PG5NyeyMqcfMuTl48588faGTw6JrtCZgtM2pb9QEV2hC0cZt9Gkx4d88muN7oHT
-	 sonRv98Tsd7L273nULRxawD77DYaun7wcb13M9CNelNHt0UQmKH2p0JSH+3wQm8Nw2
-	 DqAm5J9SRd9n8dMUxM20q8q/qztF3866dovxVf4J4PALPSXsHK3GfNKvDyc6DlURAh
-	 k85qJxgHqyZ346/1WfhEOa78/w7bdhAUE9bFG2Mx8JJb8xr3gUMDNp3PIfdQiDJdrF
-	 12HEvtLsdKhyw==
-Date: Wed, 12 Aug 2026 12:53:18 +0100
+	b=ic/w6eGgJIqhYWfLKdXfmz98qSzg6rfB+ir7Atcv+jNiJY7/P3MdEASn2QvwjA1Xv
+	 vKVSxqD2rofrap+9PVJs3t6FawtfXhajZu18cktJ+eZTRkEUvrgxPwPfXewolHSu29
+	 ABfJrEv73jwoTYX2qs64v2L9KQYbFGv2ZP7z9Zk5cVUR9HpYfT0/I0iRwvGNMTpe/M
+	 N//WCw/7H/yv0R0W6ZPIOMZXp8zgeGl42b4vpD9RgRI+YiyHym4yxzIHEdiPiyJwm2
+	 z/SyrZlj9BtRrrqx1k06RxOVOt3y7sYa/Z4Cu/wjKJIqM8z5D3O1ToBZce0y9lDuyd
+	 fLarLCf72R20g==
+Date: Wed, 12 Aug 2026 13:00:07 +0100
 From: Lee Jones <lee@kernel.org>
-To: Hongyan Xu <getshell@seu.edu.cn>
-Cc: Support Opensource <support.opensource@diasemi.com>,
-	mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org, jianhao.xu@seu.edu.cn
-Subject: Re: [PATCH v2] mfd: da903x: cancel IRQ work during teardown
-Message-ID: <20260812115318.GM1072730@google.com>
-References: <20260728065557.1517-1-getshell@seu.edu.cn>
- <20260806152032.894-1-getshell@seu.edu.cn>
+To: sashiko-reviews@lists.linux.dev
+Cc: Ronald Claveau <linux-kernel-dev@aliel.fr>, neil.armstrong@linaro.org,
+	linux-amlogic@lists.infradead.org, mfd@lists.linux.dev,
+	conor+dt@kernel.org, robh@kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH v9 3/6] mfd: khadas-mcu: Add support for VIM4 MCU variant
+Message-ID: <20260812120007.GO1072730@google.com>
+References: <20260805-add-mcu-fan-khadas-vim4-v9-0-75df78710b9e@aliel.fr>
+ <20260805-add-mcu-fan-khadas-vim4-v9-3-75df78710b9e@aliel.fr>
+ <20260805081913.272991F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20260806152032.894-1-getshell@seu.edu.cn>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260805081913.272991F00A3A@smtp.kernel.org>
 
-On Thu, 06 Aug 2026, Hongyan Xu wrote:
+On Wed, 05 Aug 2026, sashiko-bot@kernel.org wrote:
 
-> The IRQ handler disables the IRQ and schedules irq_work. Releasing the
-> IRQ does not drain that work, which can continue to use the devm-allocated
-> chip and notifier state.
+> Thank you for your contribution! Sashiko AI review found 1 potential issue(s) to consider:
+> - [High] The driver unconditionally fails to probe on generic Khadas MCU boards (VIM1/VIM2/VIM3) due to a NULL pointer check on valid match data.
+
+Please review, explain or fix the Sashiko review(s).
+
+If this is a set, this request includes the other patches too.
+
+> --
 > 
-> Add a devm action after requesting the IRQ. The action disables the IRQ
-> and cancels the work before automatic IRQ release. Run the same action
-> before removing child devices on normal detach.
+> --- Patch [3]: [PATCH v9 3/6] mfd: khadas-mcu: Add support for VIM4 MCU variant ---
+> commit eab418dac1b5e94bd297b0a14e92e87b2063dc9b
+> Author: Ronald Claveau <linux-kernel-dev@aliel.fr>
 > 
-> If da903x_add_subdevs() fails, it removes already-created child devices
-> before returning from probe. Release the action explicitly before that
-> cleanup so the work is stopped before child-device teardown.
+> mfd: khadas-mcu: Add support for VIM4 MCU variant
 > 
-> This issue was found by the author's in-house static analysis tool.
-> The patch was reviewed by the author against the latest mainline tree.
+> This patch refactors the probe function to use per-variant values instead of
+> hardcoded globals. It adds dedicated regmap configuration, fan control register,
+> and duty-cycle levels for the VIM4 MCU variant. A new compatible string
+> "khadas,vim4-mcu" is introduced for this new device.
 > 
-> Fixes: 26b8f5e1e2d1 ("mfd: add base support for Dialog DA9030/DA9034 PMICs")
-> Cc: stable@vger.kernel.org
-> Assisted-by: Codex:GPT-5
-> Signed-off-by: Hongyan Xu <getshell@seu.edu.cn>
-> ---
->  drivers/mfd/da903x.c | 15 +++++++++++++++
->  1 file changed, 15 insertions(+)
+> > diff --git a/drivers/mfd/khadas-mcu.c b/drivers/mfd/khadas-mcu.c
+> > index 0e74efe14f367..4cb305ac915e1 100644
+> > --- a/drivers/mfd/khadas-mcu.c
+> > +++ b/drivers/mfd/khadas-mcu.c
+> [ ... ]
+> > @@ -75,47 +75,138 @@ static const struct regmap_config khadas_mcu_regmap_config = {
+> [ ... ]
+> >  static int khadas_mcu_probe(struct i2c_client *client)
+> >  {
+> > +	const struct mfd_cell *cells, *fan_cells;
+> > +	const struct regmap_config *regmap_cfg;
+> >  	struct device *dev = &client->dev;
+> > +	int ncells, nfan_cells, ret;
+> >  	struct khadas_mcu *ddata;
+> > -	int ret;
+> > +	const void *match;
+> >  
+> >  	ddata = devm_kzalloc(dev, sizeof(*ddata), GFP_KERNEL);
+> >  	if (!ddata)
+> >  		return -ENOMEM;
+> >  
+> > +	match = i2c_get_match_data(client);
+> > +	if (!match)
+> > +		return -ENODEV;
 > 
-> diff --git "a/drivers/mfd/da903x.c" "b/drivers/mfd/da903x.c"
-> index e86b39de3303..f3e983bd21b0 100644
-> --- "a/drivers/mfd/da903x.c"
-> +++ "b/drivers/mfd/da903x.c"
-> @@ -421,6 +421,14 @@ static irqreturn_t da903x_irq_handler(int irq, void *data)
->  	return IRQ_HANDLED;
->  }
->  
-> +static void da903x_cancel_irq_work(void *data)
-> +{
-> +	struct da903x_chip *chip = data;
-> +
-> +	disable_irq(chip->client->irq);
-> +	cancel_work_sync(&chip->irq_work);
-> +}
-> +
->  static const struct da903x_chip_ops da903x_ops[] = {
->  	[0] = {
->  		.init_chip	= da9030_init_chip,
-> @@ -484,6 +492,7 @@ static int da903x_add_subdevs(struct da903x_chip *chip,
->  	return 0;
->  
->  failed:
-> +	devm_release_action(chip->dev, da903x_cancel_irq_work, chip);
-
-Manually calling 'devm_release_action' here and in 'da903x_remove' somewhat
-defeats the purpose of using managed resources. Should we instead register
-the subdevice removal as a devm action as well?
-
-If we register the subdevices' cleanup as a devm action before the IRQ
-cancel action, devres will execute them in reverse order during cleanup.
-This would allow us to eliminate the '.remove' callback entirely.
-
->  	da903x_remove_subdevs(chip);
->  	return ret;
->  }
-> @@ -529,6 +538,11 @@ static int da903x_probe(struct i2c_client *client)
->  		return ret;
->  	}
->  
-> +	ret = devm_add_action_or_reset(&client->dev, da903x_cancel_irq_work,
-> +				       chip);
-> +	if (ret)
-> +		return ret;
-> +
-
-If we transition to using a devm action for the subdevice removal, we
-could call 'da903x_add_subdevs' first, register its cleanup action, and
-then register 'da903x_cancel_irq_work'. This would guarantee that the
-IRQ work is cancelled before the subdevices are removed during any
-unwinding or driver removal.
-
->  	return da903x_add_subdevs(chip, pdata);
->  }
->  
-> @@ -536,6 +550,7 @@ static void da903x_remove(struct i2c_client *client)
->  {
->  	struct da903x_chip *chip = i2c_get_clientdata(client);
->  
-> +	devm_release_action(&client->dev, da903x_cancel_irq_work, chip);
-
-With both cleanup steps handled by devres in the correct order, we should
-be able to remove 'da903x_remove' entirely, simplifying the driver.
-
->  	da903x_remove_subdevs(chip);
->  }
->  
+> [Severity: High]
+> Does this code inadvertently break the probe for generic Khadas MCU boards
+> (VIM1/VIM2/VIM3)?
+> 
+> Because KHADAS_MCU_GENERIC evaluates to 0 in its enum, i2c_get_match_data() will
+> return a NULL pointer when matching "khadas,mcu" in khadas_mcu_probe() in
+> drivers/mfd/khadas-mcu.c. This will cause the check here to evaluate to true and
+> unconditionally abort the probe with -ENODEV.
+> 
+> [ ... ]
+> > @@ -123,7 +214,8 @@ static int khadas_mcu_probe(struct i2c_client *client)
+> >  
+> >  #ifdef CONFIG_OF
+> >  static const struct of_device_id khadas_mcu_of_match[] = {
+> > -	{ .compatible = "khadas,mcu", },
+> > +	{ .compatible = "khadas,mcu", .data = (void *)KHADAS_MCU_GENERIC },
+> > +	{ .compatible = "khadas,vim4-mcu", .data = (void *)KHADAS_MCU_VIM4 },
+> >  	{},
+> >  };
+> >  MODULE_DEVICE_TABLE(of, khadas_mcu_of_match);
+> 
 > -- 
-> 2.50.1.windows.1
-> 
+> Sashiko AI review · https://sashiko.dev/#/patchset/20260805-add-mcu-fan-khadas-vim4-v9-0-75df78710b9e@aliel.fr?part=3
 
 -- 
 Lee Jones
