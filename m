@@ -1,165 +1,192 @@
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com [209.85.208.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 588FA442B2C
-	for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 08:29:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 248E839656C
+	for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 08:34:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786609750; cv=none; b=e6TBeUKNZoOmqh3iOm+CLW3OnJVfps5ayXOy2Pgm5m/J14AezAwZrK9+4FdCJM/GCitfu5jycQvkPuF8nXnjmPQZF5knGgMyhUxZ9JrlJCzyrtUumE9yddj2ikP4KQF/N3e6YIjIfJm4N4bgyEk2R3EN9PD3UERCz8ykMa9MYi4=
+	t=1786610065; cv=none; b=q4ARdQnhbNwC9cfwP6LN17+RUQhRS7Bfp4cKHY7NGo2OQ1BBcKJ5OBqmgy9V5unZ2HYuEWbJK4hnvtEOi+ytgAmuCdhETp9LzSEV3qiUEycutn5BHCDB5QbpKCajLqw1NNE29vVhWWCYBT8mhr8mKdikIMg/r9LLscidd48tEF4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786609750; c=relaxed/simple;
-	bh=tZO+uk+U+keRcnrsOz15fPjhTe6BU+LORJ2iCL/GCt0=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=l3wd8QGeHQfoD7TvDF5V/4xQ0bR6Yyegi/zpWXiFZNY9VZyWMMu2mKOb0qs/uTGnpy67LF+A4iviIKLysGZBN2UY2TldCWwm3vQEiz51HRG5BDjntptY3cDs2XiqauIIlhMhCwyTIVJwAZR8iZNH6Mw995yYzqZxBHBSHxfX4EQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=YSmstBUJ; arc=none smtp.client-ip=209.85.221.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	s=arc-20240116; t=1786610065; c=relaxed/simple;
+	bh=Et8yr7T4XI2QiD9tHPH6gogO1W8MVDfDmWwZXyvssoM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=iQ9R93oqHFgiHXUr8eeYdbAUItAGkqB5GSNLuCIK54QmzE7Nw69sXYhbsSzle1NC5kUUExJiDd6fcsXeZjwtH1kDnN6Byldu/Y57ZQLApg71Esw0rjQZFs4J4Kzgl6QL9eZf5nE8xo5sy26iHyCgmoGswgDdPtIpyuuYWwi2as8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=oiyPLpe7; arc=none smtp.client-ip=209.85.208.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="YSmstBUJ"
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-47fe89fb333so1028962f8f.3
-        for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 01:29:07 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="oiyPLpe7"
+Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-3a115c08b0bso8838931fa.0
+        for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 01:34:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1786609745; x=1787214545; darn=lists.linux.dev;
-        h=content-type:mime-version:message-id:date:user-agent:references
-         :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=hd95siWMwoFHK3U5cEWEGYTFALaXZZqw8YjpPHhQMkM=;
-        b=YSmstBUJ7Jx1AxLmmEyvbXWjVcRHS9HSgAExUoL/5F4IinBnTwiJZ8khHcaD3r4SzI
-         AZJ5VRd0VQ5B6pJG387ImsGszVkKpdZ+wc6KPRM+nBzccT0xT3U3W0mrqYKaBacAmV+U
-         KlZ5LwncpxsoLYGotPC7GEaRI3gLb1ck+HhDBAaSlsc5m3T0GJWq5JDuL4nhl8Z4o2pJ
-         2Hv5PibjdrKB1QrXuEpTwcH9tUFNHkSxL9ZjMTxDtXJlTMHNfp7ThGTSBfqNmc8etRYL
-         7CVShKhrYdpwRdI/XWF1oVv6YCl7ucLYR9K0axjXSzGLWhbCViAoWfm3U20H0ZzW6p8h
-         MP9w==
+        d=gmail.com; s=20251104; t=1786610061; x=1787214861; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=mUlqoelOp41/qPHMuXnll43fbi7+sd/XaTpVYDwo8o4=;
+        b=oiyPLpe7qGgHCAq9MTdtKtyQUHqkgdtMLqj2O765oLQDhu7o53swF0cOLLRYkXPOrS
+         zmr7+pEu1ZqSHwEeAHV3CDEj5umHwKRWazuCAjmtmmO3kW2RCYDbTHcpPYVagccW16KS
+         wjBWg9RR/0Jfhfs4EV1Sud3xx8WHzOAVJnaygs1WeweUfjA3Wl22rjxyb0nAG/jK7fds
+         NDh8OFcKqdayPrriI12TToPTSHL/JMStxe45XT3goM39e+V8FOX/rZrGi7sB8CaKBHaJ
+         07OdCPtP8WsBX7p6XFWblU9/X79o46sTZBjqs7UeaHZENMaugHOBM2sXILpa0LzcT8qC
+         dfhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786609745; x=1787214545;
-        h=content-type:mime-version:message-id:date:user-agent:references
-         :in-reply-to:subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=hd95siWMwoFHK3U5cEWEGYTFALaXZZqw8YjpPHhQMkM=;
-        b=JFOx37MdcsI27UnTw8xGhN3Oi3o77jFnXq/s+ZvoII2+gE5NAZpwGfZk6b3lVsbCYw
-         imVRdJGFvWdu426f8efuzGOzDKRNkV2ePwgCkQIQpeNvgMb/HZy1KOSLdpjUNoE5bJva
-         UXLu0ejoDPxxANituygO04L4GrbkcOpXFKiCs7oi5tNSJUD+DUy1NkvexosEx9a4foyu
-         z59oTd06uR+QHwjOd9EUxh3utd+qzJ6keTFaq8rNvIM1Abj6/ts4GWF25aUNRL0DgCZi
-         f4zo49UMQQJbM0ZBcnQazaigRwdqgdJQealFSLzWjXCeQPecx5BndVtxSevdreLLTMH4
-         Qh2g==
-X-Forwarded-Encrypted: i=1; AHgh+Ro/kJGhI4MqGfK8Y4dNO/yNV1AafrE/6NkWyH2raESyvJmk2xu9np1hG67t+NsHXRQ19Kk=@lists.linux.dev
-X-Gm-Message-State: AOJu0YwL/qykglHNWIqBeTKq0/QrDbtUAWg7uF+vU5hIwQgRloiEXIfi
-	jH9C+sGRqEWf6Ee+1/vAk6TWlzniZ+wuF3Tw7SfVWiCvZYaEijH9sTDrdOPaDcNhjH4=
-X-Gm-Gg: AR+sD10FZquwShSuyZ8L6/Sz0rx1+sxyRWc24HmqyCxvZyuv6knfY1HsmE8Uv/tS4ZW
-	YfetAKCm8QMfzEHYQXYLxYYfHoutGnRYuSvAH4KjPMAR35It/WY/gCfZ6ddgXws/RoqXT5qH90O
-	A7tpNPhSc4WkBlPlqcgu5yMyenq56ZIexlscCvgfkPNlPnsg/IFv9Jj95w4RA7F6cobXWShe/qV
-	TQX+Cl+bzMZGYBXiUcZjNmzNY0O+7tqGp8H9ApVT+mHswenGl4Svexq5AA2IVGA5r69vDrhcE7x
-	p3w08diV/XzEl1zHLiWnqIwfpd2C6P0ia2LDTwrnNA+A/JWy8xsBgB9X1mOAZfTjCNU1yFtZAyv
-	Ws8bpOAtBObKYk2gcH9T/nqgV1E/JWV53H6qg0wV8nuZdifjxKbldQ02ge8+QddWXCtMtJuWeEo
-	Crnl/hAWkQ0PHNgEhk+bJ9kdleW4PKJnVystMkqT408/tC/kgBMwpUFRngIZQnP00L+lUn9w==
-X-Received: by 2002:a05:6000:41d0:b0:47f:f908:ba7b with SMTP id ffacd0b85a97d-48159feec0bmr5544710f8f.23.1786609745155;
-        Thu, 13 Aug 2026 01:29:05 -0700 (PDT)
-Received: from localhost ([2a01:e0a:3c5:5fb1:bd31:7f6f:53ba:7518])
-        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-4815a5b6c21sm4863642f8f.27.2026.08.13.01.29.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2026 01:29:04 -0700 (PDT)
-From: Jerome Brunet <jbrunet@baylibre.com>
-To: sashiko-bot@kernel.org, Lee Jones <lee@kernel.org>, Mark Brown
- <broonie@kernel.org>
-Cc: sashiko-reviews@lists.linux.dev, robh@kernel.org, mfd@lists.linux.dev,
- conor+dt@kernel.org, devicetree@vger.kernel.org
-Subject: Re: [PATCH RESEND v6 4/5] mfd: axp20x: Add support for AXP318W PMIC
-In-Reply-To: <20260812214019.CDF921F000E9@smtp.kernel.org>
-	(sashiko-bot@kernel.org's message of "Wed, 12 Aug 2026 21:40:19
-	+0000")
-References: <20260812-axp318-regulator-v6-0-d6b84b55c000@baylibre.com>
-	<20260812-axp318-regulator-v6-4-d6b84b55c000@baylibre.com>
-	<20260812214019.CDF921F000E9@smtp.kernel.org>
-User-Agent: mu4e 1.12.9; emacs 30.1
-Date: Thu, 13 Aug 2026 10:29:02 +0200
-Message-ID: <1jldaafmpd.fsf@starbuckisacylon.baylibre.com>
+        d=1e100.net; s=20251104; t=1786610061; x=1787214861;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=mUlqoelOp41/qPHMuXnll43fbi7+sd/XaTpVYDwo8o4=;
+        b=SNHftJy6PbDL08bJoU82HREmljtbs3RPmWQj+wrcHvKmnGTuIQgC+3k4NEF3+qrQ4O
+         sLe1kz8ENXjakZRvTgu+AwrpdLFC1xZ4oZgDW57Q1lK7p6OTCEL8iNiSYrNp+TbYvrHp
+         NoFjodX8STsqRq5H35FM5p81+klroe7XLnapnI4MROVvAgJ76+WMp4bpM9FNUjTcZldC
+         MMhOwf7F84LFxRalthj4lRfs4CIRygo6pd0wQGySpAWOyyHo0IPIpi5JmsMNL3Nhl4cb
+         YX7L8TgXDZ2jPNrudiw4TEbee+Pl0xJU+qcCL/gzUdK+xU4ZdmEMfJbrXty9YBCpww2i
+         1faA==
+X-Forwarded-Encrypted: i=1; AHgh+RrHlm5Kazp4HhZkbLG9qUvMAUqFXNNR2v8fjYvj2a1yGiG4mjqTWe3Xxmpmi1shaHxsoaw=@lists.linux.dev
+X-Gm-Message-State: AOJu0YyvqbVpy9iLpzfBnPG2PIwGdjNmJONfH8trPSDliVGipUGkyNNn
+	/cZ12qrhZYBq/hsYRa+UNALq6MMbd+L/A4yuHDOa+bciwr1PTuU2YwRc
+X-Gm-Gg: AR+sD12iSVg8bj2qY3J8zLGnS8G9747uRlWdPHzjjhKACDA9jHmtrfAZlbIwMVx5nsW
+	181VgXBNmondAsAEV9LVayUpdtEKntavjSKaiksmf9d5q0b22AXDyy6tji2c87wKTJxrmnzMoE9
+	mXGA/V9kGRCWQqAWypO733Tz6IwI/cIL7siNKX4giUI6KrkRmTQOPtokokF8j4KgTkrF92I7UBB
+	EWBvhI/xv3Usbw6BEsUid/M7PYORhiRRlMXULZUS8nbxcJzt4ZAN9XxWHkPl02sEU5Rr03Qwy0X
+	w2aL4y6DnK3T4sd4HjShi3zOymDY9q5YlTBi+S06IifpksmeAHiHlX02UhB5bcutxqPEwCb+TU4
+	sFWWRclXbQ+swChgtTvBi8t3Y/wNvodqlYaD8iAK3VqtjHc8HutTxIC3ua6Yba1NzvQn6NIRDEv
+	nZFRkgCVZyVZBtxDXMdPRk2Tkqnbu97c7yNBbyY0YgcwX41Y2Lye2oFN3HktfURR/GXEXKLIaP8
+	TJE9dr8mM9YNCC052lsABhtOfDqUQPpZcYrcZTH8dOe80ZJU6BqryBBK32R+AxSBUTL
+X-Received: by 2002:a05:651c:2108:b0:39c:f58e:5c5b with SMTP id 38308e7fff4ca-3a11a6b4a36mr4705651fa.18.1786610060867;
+        Thu, 13 Aug 2026 01:34:20 -0700 (PDT)
+Received: from ?IPV6:2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703? ([2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a11b43f7fbsm2860831fa.37.2026.08.13.01.34.18
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 13 Aug 2026 01:34:19 -0700 (PDT)
+Message-ID: <f5c241a2-00a8-4a32-bad5-3c89fb204b25@gmail.com>
+Date: Thu, 13 Aug 2026 11:34:17 +0300
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 09/10] gpio: bd73800: Support ROHM BD73800 PMIC GPIOs
+To: Linus Walleij <linusw@kernel.org>
+Cc: Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
+ Matti Vaittinen <matti.vaittinen@linux.dev>, Lee Jones <lee@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+ Mark Brown <broonie@kernel.org>, Michael Turquette
+ <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>,
+ Brian Masney <bmasney@redhat.com>, Bartosz Golaszewski <brgl@kernel.org>,
+ Alexandre Belloni <alexandre.belloni@bootlin.com>, mfd@lists.linux.dev,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
+ linux-rtc@vger.kernel.org
+References: <cover.1785838584.git.mazziesaccount@gmail.com>
+ <9774b8d6663ea55b1682b32f825ec5689be3e1d8.1785838585.git.mazziesaccount@gmail.com>
+ <CAD++jLmatJFfqhNWfgx=qUW2fEwuatxmJR7NyJLAv45LfLHZnw@mail.gmail.com>
+Content-Language: en-US, en-AU, en-GB, en-BW
+From: Matti Vaittinen <mazziesaccount@gmail.com>
+In-Reply-To: <CAD++jLmatJFfqhNWfgx=qUW2fEwuatxmJR7NyJLAv45LfLHZnw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On sam. 12 janv. 2008 at 23:40, sashiko-bot@kernel.org wrote:
-
-> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
-> - [High] The corresponding regulator driver lacks support for `AXP318_ID`, causing the `axp20x-regulator` child device probe to fail.
-
-Funny sashiko did not pick up on this when v6 was first sent. This is an
-ordering problem. The regulator part should be applied before the mfd
-one.
-
-I could reorder here but there is not much point since the 2 changes will
-land in different subsystems but it does bring a valid question:
-
-Lee, Mark, are you OK with picking the patches indended for your
-subsystem or would you prefer that I split the series, regulator on one
-side, mfd on the other (with a dep on the regulator one, of course) ?
-
-> - [Medium] The newly added `axp318_cells` array uses a hard-coded cell ID of 1 instead of using `PLATFORM_DEVID_AUTO`.
-> --
-
-... Again, already explained this in previous version and the cover letter.
-
->
-> --- Patch [4]: [PATCH RESEND v6 4/5] mfd: axp20x: Add support for AXP318W PMIC ---
-> commit 5a33005ba66225f7df0e6747b0fcb9263e977f13
-> Author: Andre Przywara <andre.przywara@arm.com>
->
-> mfd: axp20x: Add support for AXP318W PMIC
->
-> This commit introduces MFD core and I2C support for the X-Powers AXP318W
-> PMIC. It defines regmap properties, interrupt maps, and adds the regulator
-> child device.
->
->> diff --git a/drivers/mfd/axp20x.c b/drivers/mfd/axp20x.c
->> index 84839d4aa1ca5..ea00c0cdce58c 100644
->> --- a/drivers/mfd/axp20x.c
->> +++ b/drivers/mfd/axp20x.c
->
-> [ ... ]
->
->> @@ -1061,6 +1129,10 @@ static const struct mfd_cell axp313a_cells[] = {
->>  	MFD_CELL_RES("axp313a-pek", axp313a_pek_resources),
->>  };
->>  
->> +static const struct mfd_cell axp318_cells[] = {
->> +	MFD_CELL_BASIC("axp20x-regulator", NULL, NULL, 0, 1),
->
-> [Severity: Medium]
-> Should this cell use PLATFORM_DEVID_AUTO instead of a hard-coded ID of 1?
->
-> Hard-coding cell IDs or mapping them to fixed instance numbers can lead to
-> device naming collisions in sysfs and driver load failures if multiple PMICs
-> defining the same cell name exist on the same board.
->
-> [Severity: High]
-> Will this child device successfully probe, or are the regulator driver
-> changes missing from this patch series?
->
-> When the MFD core registers the "axp20x-regulator" cell, the regulator driver's
-> axp20x_regulator_probe() is invoked. It checks the axp20x->variant, but since
-> AXP318_ID is not handled in the regulator driver:
->
-> drivers/regulator/axp20x-regulator.c:axp20x_regulator_probe() {
->     ...
->     switch (axp20x->variant) {
->     ...
->     default:
->         dev_err(&pdev->dev, "Unsupported AXP variant: %d\n",
->             axp20x->variant);
->         return -EINVAL;
->     }
-> }
->
-> It appears this will fall through to the default case, print an error,
-> and return -EINVAL unconditionally.
->
->> +};
+On 07/08/2026 23:29, Linus Walleij wrote:
+> Hi Matti,
+> 
+> thanks for your patch!
+> 
+> On Tue, Aug 4, 2026 at 12:23 PM Matti Vaittinen
+> <matti.vaittinen@linux.dev> wrote:
+> 
+> 
+>> +static int bd73800gpio_get(struct gpio_chip *chip, unsigned int offset)
+>> +{
+>> +       struct bd73800_gpio *data = gpiochip_get_data(chip);
+>> +       struct bd73800_gpio_pin_cfg *pin = &data->pin[offset];
+>> +       int ret, val;
 >> +
->>  static const struct mfd_cell axp717_cells[] = {
->>  	MFD_CELL_NAME("axp20x-regulator"),
+>> +       /* Only pins configured as GPI via OTP can have their status read */
+>> +       if (pin->state != BD73800_PIN_GPI) {
+>> +               dev_dbg(data->dev, "pin %d (%x) not input. State %d\n", offset,
+>> +                       pin->mask, pin->state);
+>> +               return -EINVAL;
+>> +       }
+>> +
+>> +       ret = regmap_read(data->regmap, BD73800_REG_INT_5_SRC, &val);
+>> +       if (ret)
+>> +               return ret;
+>> +
+>> +       return val & pin->mask;
+>> +}
+>> +
+>> +static int bd73800gpo_set(struct gpio_chip *chip, unsigned int offset,
+>> +                         int value)
+>> +{
+>> +       struct bd73800_gpio *data = gpiochip_get_data(chip);
+>> +       struct bd73800_gpio_pin_cfg *pin = &data->pin[offset];
+>> +
+>> +       if (pin->state != BD73800_PIN_GPO) {
+>> +               dev_dbg(data->dev, "pin %d (%d) not output. State %d\n",
+>> +                       offset, pin->mask, pin->state);
+>> +
+>> +               return -EINVAL;
+>> +       }
+>> +
+>> +       if (value)
+>> +               return regmap_set_bits(data->regmap, BD73800_REG_GPO_OUT,
+>> +                                      pin->mask);
+>> +
+>> +       return regmap_clear_bits(data->regmap, BD73800_REG_GPO_OUT, pin->mask);
+>> +}
+> 
+> These can probably be handled by the latest version of gpio-regmap
+> helpers (the version in linux-next).
+> 
+> We now support both input-only and output-only in gpio-regmap.
+> 
+> Latest <linux/gpio/regmap.h>:
+> 
+>   * @fixed_direction_mask:
+>   *                      (Optional) Bitmap representing the GPIO lines that
+>   *                      make use of the @fixed_direction_output list to
+>   *                      enforce direction of the GPIO. If this is NULL
+>   *                      and @fixed_direction_output is defined, ALL GPIOs
+>   *                      are assumed to be fixed direction (out or in).
+>   * @fixed_direction_output:
+>   *                      (Optional) Bitmap representing the fixed direction of
+>   *                      the GPIO lines. Useful when there are GPIO lines with a
+>   *                      fixed direction mixed together in the same register.
+> 
+> It seems you can set up the fixed_direction_output mask from OTP
+> and just use the library, right?
+
+The BD73800 uses different registers for 'out' and 'in'. So there aren't 
+really "GPIO lines with a fixed direction mixed together in the same 
+register".
+
+I, however, see some good stuff being in the linux-next! Finally a bit 
+of flexibility in a form of callbacks a driver can register is getting 
+in. So I am somewhat hopeful the usability of gpio-regmap will finally 
+increase.
+
+I think the BD73800 can indeed use the gpio-regmap, by keeping the pin 
+direction information in private data and adding a custom xlate, which 
+errors out if get is requested for output pin, or set is requested for 
+input. I am not sure how much of an improvement it is compared to the 
+patch v2, but I'll give it a shot :) I believe the new -rc1 isn't that 
+far away, and hopefully the gpio-regmap -stuff from the next will be in 
+it together with the regulator stuff bindings depended.
+
+Thanks again for the pointer!
+
+Yours,
+	-- Matti
 
 -- 
-Jerome
+Matti Vaittinen
+Linux kernel developer at ROHM Semiconductors
+Oulu Finland
+
+~~ When things go utterly wrong vim users can always type :help! ~~
