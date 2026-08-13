@@ -1,92 +1,73 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63D3A36A367;
-	Thu, 13 Aug 2026 08:54:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E78243D4FA;
+	Thu, 13 Aug 2026 09:56:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786611299; cv=none; b=UTLk/OixOtcPJVf5g8KPluOyu97+hM1HESFYjxK4JFz2rT8rE7rFhcXcIKU8BJF9ytwJubTnsQicETRXFnXharfV1KyFrUjTj3LmmG6hvGZnz1M4oT6uNARgOXUFkareR5yUlPwtb2AovZp+o8NsSHmHtWi9RzJxPh0tc0Tmr1g=
+	t=1786614966; cv=none; b=oPFnN35hJu2F/ruIPbPP4n5RXLqQObX8/uccPIhAJpLEvpBMdOvH/dFcLKmQ2OzjJQWJrwcv4+Cz9UnQhr8Fs4EXcfeFxyPTAF30ciXJ89PioUy3FzTZs6nR1FhYL2wogFjQDHY+Ey/JknMsU7LRRrBBXj9aMq6iLGJwRci6Ozs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786611299; c=relaxed/simple;
-	bh=b1mkjiaYhZ+gOz/GYR4usDUoP9Mm/7s5Uf6KRLoc/vU=;
+	s=arc-20240116; t=1786614966; c=relaxed/simple;
+	bh=Q5UrNWP2cgzd9JwQj0u8Wlpr2r4pBGqbcj9N5hEn2XQ=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=HUHsxw8o5v8amzQfSMkIiGdXimd9eFuJvvBpDNvyouKSmC/TYR+Z9cVh1ejYjf/AHPfk/UKLkWHA6QIJZC/8wo3uT75eL+ouTsVKqeOOgBUzFVonlJ2pH4Cp0/PRInMqxd2dfVC28nRnS9W0t92eVvPQNpY6gSjkx4Q1s+7kdTg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=k2bXQPNi; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=fSMyvSyzbXvv04WUlqwr+p3y8/Hk7v7S/43iwkAqfsNh7cnCDVdPx9MVuWxnLLRbumRqLy+eh3zQufYDKqMW+rL2ZwzPrd/e4cqpeplkdT5LKUohfJuJ+ORzSrAMXaToGJBQrwguAbb7ledyq3JD7yAJiRgH4H2bc6a7OITcnlo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Iuplm4bl; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="k2bXQPNi"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3EC1D1F000E9;
-	Thu, 13 Aug 2026 08:54:54 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Iuplm4bl"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C97361F000E9;
+	Thu, 13 Aug 2026 09:56:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786611297;
-	bh=djhMMhm4AQ9XAauhB6WGwWYRfna14UGULPtOodmCOI4=;
+	s=k20260515; t=1786614964;
+	bh=k7IRT7w488lOfR9xkeYXBX2k2JLbjwVizA4fzP0b7UI=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=k2bXQPNiqYoX4vcaImKY+NxSSMWV1eceF/U7rvZCBQWtl2AtvqkPfbk5u8KLJMTMI
-	 fMedMNt6M0GC5LmpiGQLJ8gz+heGsAR4J/Hbh/oB2jbc58QACwiDv59QvXu0drSuKE
-	 XgRvX1w1B2SXjmU6t4Eo9h9DhJsdgmLstG2K60zyaO3h65ljKYliL2Tv7CNgYvK6nI
-	 ZkLuiCJMWV1zTZVtnktorVV0uG5MQJMPkl7ucHrkquGN2aOTAEiH8mxinq1z1fUAae
-	 wGxvI/ApPQ7yEHjTd4cbYOL1S+JeiGrF2eUw5jY9uq28kT1GANA+N91a0FuSqX5Fnj
-	 HRbeOf+ZbgmPw==
-Date: Thu, 13 Aug 2026 09:54:51 +0100
+	b=Iuplm4blHS2c8/DcK3dPZ84Lb9r9AaJdZIf04Sd1H84ArTJvE5rlfZTiFJMmbaeIu
+	 wyExIBXnR/cya7T2jDLkmkZJFmaluDJUbgcSaoGRjRJ4wnmN4waylUVPbBzKiIIB5M
+	 274tr+T64x9X3N5eLeBsbKUTYnEhatPykRzyFlC4fNaUXZj+dhQMwjI09vNUp+Rt4m
+	 O/FkDadodLP06MVUp9mQ2XgREtJeGFU5aEzkn3sTHRgFCAbOWfeTxiWojQDLX4vW8I
+	 dsPZBLz2Ci49soTnctPyjLbjyldC5KO3vKCmTJaC5HOuSMXJ96IhFRIfuLZUd1+ZFY
+	 HlMS6hw/NUfEQ==
+Date: Thu, 13 Aug 2026 10:56:00 +0100
 From: Lee Jones <lee@kernel.org>
-To: Miao Wang <shankerwangmiao@gmail.com>
-Cc: Bartosz Golaszewski <brgl@kernel.org>,
-	Miao Wang via B4 Relay <devnull+shankerwangmiao.gmail.com@kernel.org>,
-	Xi Ruoyao <xry111@xry111.site>, WANG Xuerui <kernel@xen0n.name>,
-	Yinbo Zhu <zhuyinbo@loongson.cn>,
-	Jiaxun Yang <jiaxun.yang@flygoat.com>, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org, linux-gpio@vger.kernel.org,
-	openipmi-developer@lists.sourceforge.net,
-	Corey Minyard <cminyard@mvista.com>,
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-	Binbin Zhou <zhoubinbin@loongson.cn>,
-	Chong Qiao <qiaochong@loongson.cn>,
-	Huacai Chen <chenhuacai@kernel.org>,
-	Corey Minyard <corey@minyard.net>,
-	Linus Walleij <linusw@kernel.org>
-Subject: Re: [PATCH RFC v9 0/8] mfd: ls2kbmc: multiple fixes for this driver
-Message-ID: <20260813085451.GX1072730@google.com>
-References: <20260811-ls2kbmc-mod-v9-0-4fa9a5584406@gmail.com>
- <CAMRc=Me=4vhCACibcXWhH1J6OmjxbEmhatPLuUuRE3pFLkT7xw@mail.gmail.com>
- <E22A87D6-F231-442F-83F5-FAE25D0955A2@gmail.com>
+To: Jerome Brunet <jbrunet@baylibre.com>
+Cc: sashiko-bot@kernel.org, Mark Brown <broonie@kernel.org>,
+	sashiko-reviews@lists.linux.dev, robh@kernel.org,
+	mfd@lists.linux.dev, conor+dt@kernel.org,
+	devicetree@vger.kernel.org
+Subject: Re: [PATCH RESEND v6 4/5] mfd: axp20x: Add support for AXP318W PMIC
+Message-ID: <20260813095600.GA1072730@google.com>
+References: <20260812-axp318-regulator-v6-0-d6b84b55c000@baylibre.com>
+ <20260812-axp318-regulator-v6-4-d6b84b55c000@baylibre.com>
+ <20260812214019.CDF921F000E9@smtp.kernel.org>
+ <1jldaafmpd.fsf@starbuckisacylon.baylibre.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <E22A87D6-F231-442F-83F5-FAE25D0955A2@gmail.com>
+In-Reply-To: <1jldaafmpd.fsf@starbuckisacylon.baylibre.com>
 
-On Tue, 11 Aug 2026, Miao Wang wrote:
+On Thu, 13 Aug 2026, Jerome Brunet wrote:
 
-> Hi,
+> On sam. 12 janv. 2008 at 23:40, sashiko-bot@kernel.org wrote:
 > 
-> > 2026年8月11日 21:47，Bartosz Golaszewski <brgl@kernel.org> 写道：
-> > 
-> > On Tue, 11 Aug 2026 10:07:24 +0200, Miao Wang via B4 Relay
-> > <devnull+shankerwangmiao.gmail.com@kernel.org> said:
-> >> Previously, the driver has been introduced to support the Loongson 2K
-> >> BMC running on the Loongson Servers, which is essential to prevent
-> >> the system from hanging when the BMC is being reset and the default
-> >> efi-framebuffer is being used. However, there are some drawbacks in the
-> >> driver.
-> >> 
-> > 
-> > I will stop reviewing this series now. I had further comments that I wanted
-> > to post after reviewing patch 6/8 but got carried away. When I came back to it,
-> > there's another iteration already on the list. This is not the way to do kernel
-> > development. Please *don't* send new iterations hourly or daily. Once a week is
-> > preferable, twice a week in special cases is acceptable. Anything over that and
-> > I'm losing interest.
+> > Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
+> > - [High] The corresponding regulator driver lacks support for `AXP318_ID`, causing the `axp20x-regulator` child device probe to fail.
 > 
-> I apologize for interrupting your review. I thought you had done the review and
-> given the suggestions. The only change in v9 is adding the comments which you
-> had requested in the previous review.
+> Funny sashiko did not pick up on this when v6 was first sent. This is an
+> ordering problem. The regulator part should be applied before the mfd
+> one.
+> 
+> I could reorder here but there is not much point since the 2 changes will
+> land in different subsystems but it does bring a valid question:
+> 
+> Lee, Mark, are you OK with picking the patches indended for your
+> subsystem or would you prefer that I split the series, regulator on one
+> side, mfd on the other (with a dep on the regulator one, of course) ?
 
-What's the plan then, Bartosz?  Have you given up on this series even
-post-apology or will you finish your review after a short break?
+Does this break existing devices or simply delay support for this new one?
 
 -- 
 Lee Jones
