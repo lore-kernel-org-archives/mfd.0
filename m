@@ -1,67 +1,76 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9DFF53DA7D2;
-	Wed, 12 Aug 2026 21:41:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0F7F353EE0;
+	Thu, 13 Aug 2026 06:49:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786570872; cv=none; b=RHsg+arpJx5KtlTtwRwEpwyTq48AU8tnr0rkfZDmnNBLWURO7O263SvfSpreq+AcMabXPdGZ4ls+BZEzoPAIkpknK4h0PFvPuAxRo+Pvhs33NVv4K6W47Rym7e/0YAHePt/J5PpmANodFOjiYWNriCVJcjIYraY80PbfSleXCHY=
+	t=1786603783; cv=none; b=iIiKFTeWTzngZtib4Lke4WiDPKV/gsvqCGZpu4NYinSMUejCjaoSoNSFkKGhXyw24xHJFSxWXwennX37e+529CPY/K+r9UUyknDnRPliy868KqjK6LmequUtsyAsOM25TgSQ3LRjQvMJL9EjJlsKJgrTbTdDSNMRLG27av+t49s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786570872; c=relaxed/simple;
-	bh=wJA5EihTaKzRMaO8YFaoTXvw9ObY53RmdBM1tnQHkxw=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=SGiMORhm26+iKJEwDPb7WC8xBaEnXvTLpHOuX6egrksbNELC8pKYOsCRH/OpKdYfowJ2/T0p1ObNwP5WOJ8VAZ93HoVo1XU/CjyQR8W4+X0equB1DxEl7Ukqj+KaFrNmfaPGfHtk/tBDDLOGjc4VqV2tyESIb6ATyycMkWAG7Yk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HBwN6tNT; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786603783; c=relaxed/simple;
+	bh=IgfvYGsDONV7SdkeNfoxBKJGz1LY+WTdARfP/fFVGYM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=QI8trhxdAVGxu2FhQCjZVg5nzIKZ1F//TtxqT1YJsXG20L2I+h+28ONHF5sonDt92S9ro3E3fFVqpxnkyPViq/RrwVpPLEBqbSlcp0cH+uy5Jky46sdkyspkWvy3PqbP/B5oYggAuwefuOgoc0HbbK65EzoTR7dgYhR9lBFBKNU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WtIMtJ64; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HBwN6tNT"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E398A1F000E9;
-	Wed, 12 Aug 2026 21:41:10 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WtIMtJ64"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BEBB71F000E9;
+	Thu, 13 Aug 2026 06:49:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786570871;
-	bh=wJA5EihTaKzRMaO8YFaoTXvw9ObY53RmdBM1tnQHkxw=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=HBwN6tNTo9h0DF9w0NFAaoj+BIbdPNMR9efwCSyUqzIRHmCJN8MYqRcHdyze1yoMj
-	 HVXESqHePSC2KZj9V+OOWwlsmsRmAIbvDnImq6QDhTUIGEk8i8FRrddKmzRsTg1HQB
-	 jV5oo0SNZF6mS9yXwxKnHDUvXlUBpDIyrmsi/GpqKQbZVxJTbJernBUp3Y7j87COkF
-	 AFptGVMpDvXYmrA65N27T11Fh2XyNJMbyz6AkLiRUlUmVGrMk4gSW3TNBqJ2bp6yeX
-	 lLG9MQvJu79wlNSgf6wnQ4yQPLSIkIooBMpEif6n9RXDftIwlNARV9K1gq3rt33IvD
-	 eE2bYI2lKLgiA==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RESEND v6 2/5] mfd: axp20x-i2c: Fix i2c instantiation
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Jerome Brunet" <jbrunet@baylibre.com>
-Cc: devicetree@vger.kernel.org, mfd@lists.linux.dev, conor+dt@kernel.org, robh@kernel.org, lee@kernel.org
-In-Reply-To: <20260812-axp318-regulator-v6-2-d6b84b55c000@baylibre.com>
-References: <20260812-axp318-regulator-v6-0-d6b84b55c000@baylibre.com>
- <20260812-axp318-regulator-v6-2-d6b84b55c000@baylibre.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 12 Aug 2026 21:41:10 +0000
-Message-Id: <20260812214110.E398A1F000E9@smtp.kernel.org>
+	s=k20260515; t=1786603782;
+	bh=Ra++R/iBXxsuHRo7JR23B4UlsNDyGkoS3vY7G60sCGg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=WtIMtJ64WuXupZ0NP1l4LD62+XYTaU5ztpn5OFzJRy+7Tlw8BzAUR5nYNHoW+oHDS
+	 g6gKPkX67ELSHNV5YzBPFVLRcAa+0FfbD+/rgy0FOVM5aAH6kyDT4u7JQjei/CbTLX
+	 L+rPUQQKtShP7NaoSSULfIvwWk9zHNdM23aAYLmP8qbJZkOZUvP310ZU+JQjKxJlwH
+	 1OSh/9YoGwDAMj09nRZtJUDFaIipoXQhsf7F4rg92oj5sfofcPWNxvv5r0ARHrwkWb
+	 w0BeBE7XY0BUzTlndnrK3BcoqZ5YaOaAcrjQ0SyAu/XEkMFEaQ/9uUOKhIRx7MI+Cv
+	 PYdxJxDIO47zQ==
+Date: Thu, 13 Aug 2026 08:49:33 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: James Hilliard <james.hilliard1@gmail.com>
+Cc: Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Andrew Lunn <andrew@lunn.ch>, 
+	"Jagielski, Jedrzej" <jedrzej.jagielski@intel.com>, Andre Przywara <andre.przywara@arm.com>, 
+	Chen-Yu Tsai <wens@kernel.org>, Jernej =?utf-8?Q?=C5=A0krabec?= <jernej.skrabec@gmail.com>, 
+	linux-sunxi@lists.linux.dev, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v7 1/2] dt-bindings: mfd: x-powers: Add AC200
+Message-ID: <20260813-independent-ladybug-of-perfection-1afe7a@quoll>
+References: <20260811-submit-ac200-mfd-v7-0-8b06f552a4d7@gmail.com>
+ <20260811-submit-ac200-mfd-v7-1-8b06f552a4d7@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260811-submit-ac200-mfd-v7-1-8b06f552a4d7@gmail.com>
 
-> Apparently this device never really supported i2c instantiation via
-> sysfs, because the driver does not even look at the i2c device data,
-> which are not set. It would only probe if the device matched through DT.
->=20
-> Fix that for correctness, even-though it is probably useless.
-> Add the missing AXP323 while at it.
->=20
-> Reported-by: Sashiko <sashiko-bot@kernel.org>
-> Closes: https://lore.kernel.org/r/20260717090209.2A09B1F000E9@smtp.kernel=
-.org
-> Fixes: 41751b033aaa ("mfd: axp20x-i2c: Add i2c-ids to fix module auto-loa=
-ding")
-> Acked-by: Chen-Yu Tsai <wens@kernel.org>
-> Signed-off-by: Jerome Brunet <jbrunet@baylibre.com>
+On Tue, Aug 11, 2026 at 05:11:30PM -0600, James Hilliard wrote:
+> The AC200 is an I2C-controlled mixed-signal companion IC containing
+> audio, video, RTC and Fast Ethernet PHY functions.
+> 
+> Describe the parent device and its shared input clock. The Ethernet PHY
+> is represented by a PHY package on its MDIO bus, with a phandle back to
+> this device for access to the package control registers, so it does not
+> require an MFD child node. Function-specific supplies belong to their
+> consumer bindings rather than the shared parent.
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+Other way to represent it is to put ethernet phy here - either as a
+child or folded into MFD device node - and provide phandle to MDIO bus.
+We do like this already for several devices for I2C case with "i2c-bus"
+property. Here it would be "mdio-bus" for example. Such solution feels
+more vendor-agnostic, easier to re-use, however I cannot find any actual
+arguments against your approach.
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260812-axp318-reg=
-ulator-v6-0-d6b84b55c000@baylibre.com?part=3D2
+Maybe Rob will have his preference, but this looks okay for me then:
+
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+
+Best regards,
+Krzysztof
 
