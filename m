@@ -1,147 +1,118 @@
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B1C747887E
-	for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 12:55:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 680FC478E23
+	for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 13:06:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786625718; cv=none; b=cc5eVqk+mgvENoe/vjshxbFO/miqriVvE7DYPFhIVeAq/mOEFdlF/LNNQNyZ9o9scJKRlqz13douDgyEstl9IoZIDeRbrQv5MpBIVsf7a4goa1Qc9DuVF8mvaiRDBQXuK23hOnpa1sAjBUbK2UwadTtpa6J9LK/Bcd/1tbTnp/0=
+	t=1786626402; cv=none; b=bApiT52ES9q7ukkcYzF/pG9C6PdgE0pk+Dy6BJ/TY76MN1OmBGS3qUhi1nVZJ2lsrq4qMEn0RkBQYeHhUaf9hdmePYKvrQz52Iqwdcd7Ku93E4T6YFuzxDHS5ZZwmmrBorZNPuY7V8f6YhgoXxJvwdribIAsihjKfo+wsVY7h84=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786625718; c=relaxed/simple;
-	bh=HrpuHtXRs3lkzPV2KF4jr4RPVBEPyIUfTr35gw5M1iI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=nQklAOVtX6DFjMLaE4yF97Emk4ErRDjPIqUPhDFSYmBCh+gUS7GIx0Sg7nLLWaYXDZKoLURfUZ4Eigja1FrYbnMCVBv6ZCfl/7HVITf58sU25nTBAUgUt7Cc2EfZA6XGzhWzdlG5IPnjYfQK9/xUMh3mLaUhn8ahIaaQQ3Bal0Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Tdtqz7lg; arc=none smtp.client-ip=209.85.167.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1786626402; c=relaxed/simple;
+	bh=RAl0NVbjiiOs/VyeCemRv0TwYR+tlbA9P9uIHNsY6dg=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=McqTJthdH0y7ZGxhybSNyI0nc1H7q35j57B7o5qSfWtN9WUGV9Rq1mO04nhkEcN9rygGs8MXHHCICs4DgDDEu/heRNEXGnJScEMTjGzk8Qa0VFnxCMeWYO3nvPIkdPswHWYoc4S4j+z+Q4kkAq+1msqgKcaBc0NVVyBGKaEmGOg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UXZVJtg/; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Tdtqz7lg"
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5b2aab18795so726885e87.2
-        for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 05:55:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786625714; x=1787230514; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=9jhcvNWSwuNAllGIhB4lzw/CqsOc6VTmvp2k274Uc3o=;
-        b=Tdtqz7lgBmaUIVonffirYC+8/BuyQ0/V5FbXCjIEZhNfSTsHEkq0QVffs/ikQUiWVu
-         5rKThH9h939Mq/Rarr3SSkQclFU4OLnzhgs+3pvc/Yq7odPEHQ6AGsDizZfOKzFMDolr
-         Cjzsx2ry+xDcG0qR87anbgOohvqKhUx6+VD/DCTlPi6XDcysvVBL8fRwv5SeR0yPBA3L
-         G8181s0TTK/Vk6W9WlMU2gX6wX5iCC5RdNNROg6FEW4seGg6SJKIFDJeXJh4p7Ef0Qn1
-         ju1+Lw7r790FghtAErvrbhMoHMo5reYSJjYMEo9QF0GCS0S4IZVvz+rEBa5ELharaiqU
-         QAVw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786625714; x=1787230514;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=9jhcvNWSwuNAllGIhB4lzw/CqsOc6VTmvp2k274Uc3o=;
-        b=b0fGXGVwwa2XbxKgP43n2OVp0ijfNc7IVUXd70615VFsAJTBY+CHz/DpHLh9cSjemz
-         CIEtQo9zcnbZFxilnA4WOaYNfOzWlGIFhcr5DWt9CeimTtB0mps1oLjKhmmWEkHZjRSe
-         IzOJoRPb6cS487nz3N7z/FYMFGgYp0wjzpv4x6lZYDZG/hl668KELMVzEmKNpUu5V0+j
-         I/bc/ZBgnCseHBYC+2HcyP8O8pD/mf3dyPtMqL4kSmB7DhXIGOUZ0qDhsk6+8mB9V5Fo
-         8HzbvvJL8hX5ncuxQnWdTeGYMZx3t5bxuR5dCXTH7I1DbYna2m7eEW/se4JtkHBhu087
-         N5vA==
-X-Forwarded-Encrypted: i=1; AHgh+Rr97+FsJ+ECmXeUPaV4eqoBFjaXWlC+2t02QeIqAnJo594CUxMwY4zsPF04dcwG6+d0hjk=@lists.linux.dev
-X-Gm-Message-State: AOJu0Yz0AlErJjB0J69yLAP+KEMjTX0dkE2bFB6vMmhQ1gvg3QLTGaAq
-	Bqy+RaSxaXIFMW+tbeLpbwxtJ2HDZ7BI2oE6OkMA37dxy3548uHast7s
-X-Gm-Gg: AR+sD135dWTK38v0AZEU9rUCR5DMmQoA1gLxR91IWdIpERcNah+QaWFwALyGEno0w01
-	Gb6pWUtZzfeMyVQqLakjV/0ciGodistTffVsH5zp6iXa+PhvzHtnuhdm00Gfr+DGkeXhORSm5cJ
-	z/aedY8lqGruTfc9FGywErz/fXM4aYlzAnih2XoUhgktoXZF+canGTw2ZbppzKVYtybHDdOiqJF
-	gfZDtPcyeNysVCFVnKdWK0StWpX+hBTw780avfFn1DRWrt8KjgbXNQGUHfML/DZmQHfAtdm8T7H
-	zspt5MtC2PLUC4uu3RNlrbAn7hsZZXie1ADGkqSONZTe96UbkTOtCLCQ2x2cw7RhbwcA4AiU9Br
-	3DmlmDQXTzIlvU1I80O+JNavJt12yorB6yzq+7dtxaqcIyFFyyhbAUwjfzQQkySEiSvHwrJqmG6
-	92jSuKcbNWPZiMubX84sRV9nRLHG7dBcxOM5hLpGyyav1WfjTLknuvKAXiRlAZEDtWso10MuP8n
-	hzKq+Fq4BSxIG88DWc4+wUyMD9r4pXCgV8UQ/hZHDr5O4U4bXzOsjvI
-X-Received: by 2002:a05:6512:1284:b0:5ae:b0c0:16bc with SMTP id 2adb3069b0e04-5b453f77a1dmr809693e87.27.1786625714101;
-        Thu, 13 Aug 2026 05:55:14 -0700 (PDT)
-Received: from ?IPV6:2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703? ([2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b4539ea237sm456405e87.18.2026.08.13.05.55.12
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 13 Aug 2026 05:55:13 -0700 (PDT)
-Message-ID: <12f70e0f-5cef-4035-9b44-e2cb252932cf@gmail.com>
-Date: Thu, 13 Aug 2026 15:55:12 +0300
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UXZVJtg/"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 414A31F00A3A
+	for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 13:06:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786626401;
+	bh=yQWzU2idhtJFEfGoc824MA5NHjwICFqfWvq6sgVbqeQ=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=UXZVJtg/2Rx9ZJDFRk0rV1flaUPuLIwsFB15lmMdTdhvITsZVwhmJRtAnjke2dcPM
+	 EyRKKSNQ46Dic9or1D5n8yp3ruC6CRTB/JD/ODBDLgVK7E1aiovyORp16hMh26KRV0
+	 vSTog3v+nnYt16PpUwy45UrNG4GHKDhwZraJe/dAxnXBz/2P+sZXENL5cs7QkxnZkm
+	 L9pyu9aXIFzSOlfUJrzqIAtd4pkKh4llCsHlijG4RoUesbzNt1DjM706dqp4X6MGYv
+	 Aw2HVGG/ig688WXvWgyVx0jbQPESHqofU2l5ysylFdNzHOHIx9rVqGavvn1L0wQjwM
+	 npFITTaSA+U4A==
+Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-5aebd52488cso712439e87.2
+        for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 06:06:41 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RqYdLCsMLY2vGRpKIp5q2GMisJhmbR6hd+eb1d4uLBya4mzcYGKQ/fe6MRlYS3ZO/jrZkg=@lists.linux.dev
+X-Gm-Message-State: AOJu0Yws+V2hOYRfEYTKzOUY0YhCu8+xp4hWdN2eMqNQ9lODw4KJusSC
+	XlSxO5XYf1FrAB2uBHjTpCJwwaR9JGUaKSrXejTYsPO3PgJYIOcstWzuilcvPx6wGdRZFpd2aKG
+	vrjnE8Eoy6u1okgGRuPwGJuKTG4CQ8ap7R3OHJCCE8Q==
+X-Received: by 2002:a05:651c:31cd:b0:39c:7859:a2d8 with SMTP id
+ 38308e7fff4ca-3a11a819760mr7294241fa.27.1786626399530; Thu, 13 Aug 2026
+ 06:06:39 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 13 Aug 2026 13:06:38 +0000
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 13 Aug 2026 13:06:38 +0000
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260813123841.GC1820248@google.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 09/10] gpio: bd73800: Support ROHM BD73800 PMIC GPIOs
-To: Linus Walleij <linusw@kernel.org>
-Cc: Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
- Matti Vaittinen <matti.vaittinen@linux.dev>, Lee Jones <lee@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
- Mark Brown <broonie@kernel.org>, Michael Turquette
- <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>,
- Brian Masney <bmasney@redhat.com>, Bartosz Golaszewski <brgl@kernel.org>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>, mfd@lists.linux.dev,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
- linux-rtc@vger.kernel.org
-References: <cover.1785838584.git.mazziesaccount@gmail.com>
- <9774b8d6663ea55b1682b32f825ec5689be3e1d8.1785838585.git.mazziesaccount@gmail.com>
- <CAD++jLmatJFfqhNWfgx=qUW2fEwuatxmJR7NyJLAv45LfLHZnw@mail.gmail.com>
- <f5c241a2-00a8-4a32-bad5-3c89fb204b25@gmail.com>
-Content-Language: en-US, en-AU, en-GB, en-BW
-From: Matti Vaittinen <mazziesaccount@gmail.com>
-In-Reply-To: <f5c241a2-00a8-4a32-bad5-3c89fb204b25@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com>
+ <20260803-arm-psci-system_reset2-vendor-reboots-v24-4-889281373870@oss.qualcomm.com>
+ <20260813123841.GC1820248@google.com>
+Date: Thu, 13 Aug 2026 13:06:38 +0000
+X-Gmail-Original-Message-ID: <CAMRc=MdA_zM_pHCmk7dd7kosqvNmFgA+iXvHS4qpNs9bdsUMCg@mail.gmail.com>
+X-Gm-Features: AUfX_mxLcl-KphrvU6gLOMupiRghMpmm1J92bVQek0OJwjAsSLdXf3P9i5s9MC4
+Message-ID: <CAMRc=MdA_zM_pHCmk7dd7kosqvNmFgA+iXvHS4qpNs9bdsUMCg@mail.gmail.com>
+Subject: Re: [PATCH v24 04/12] mfd: psci-mfd: Add PSCI MFD driver for
+ cpuidle-psci-domain cell
+To: Lee Jones <lee@kernel.org>
+Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
+	Bjorn Andersson <andersson@kernel.org>, Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Souvik Chakravarty <Souvik.Chakravarty@arm.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Andy Yan <andy.yan@rock-chips.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
+	Mark Rutland <mark.rutland@arm.com>, Conor Dooley <conor+dt@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, John Stultz <john.stultz@linaro.org>, 
+	Moritz Fischer <moritz.fischer@ettus.com>, "Rafael J. Wysocki" <rafael@kernel.org>, 
+	Daniel Lezcano <daniel.lezcano@kernel.org>, Christian Loehle <christian.loehle@arm.com>, 
+	Ulf Hansson <ulfh@kernel.org>, Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Sudeep Holla <sudeep.holla@kernel.org>, 
+	Florian Fainelli <florian.fainelli@broadcom.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, Andre Draszik <andre.draszik@linaro.org>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>, linux-pm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	mfd@lists.linux.dev, Srinivas Kandagatla <srini@kernel.org>, 
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
+	Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
 
-On 13/08/2026 11:34, Matti Vaittinen wrote:
-> On 07/08/2026 23:29, Linus Walleij wrote:
-
-...
-
->>   * @fixed_direction_output:
->>   *                      (Optional) Bitmap representing the fixed 
->> direction of
->>   *                      the GPIO lines. Useful when there are GPIO 
->> lines with a
->>   *                      fixed direction mixed together in the same 
->> register.
+On Thu, 13 Aug 2026 14:38:41 +0200, Lee Jones <lee@kernel.org> said:
+> On Mon, 03 Aug 2026, Shivendra Pratap wrote:
+>
+>> PSCI has multiple kernel consumers, such as cpuidle-psci-domain.
+>> Currently, both the PSCI core driver and cpuidle-psci-domain bind
+>> directly to the same PSCI node "arm,psci-1.0". Additional consumers, if
+>> introduced, would also need to bind in the same way, leading to several
+>> drivers attached to a single device node.
 >>
->> It seems you can set up the fixed_direction_output mask from OTP
->> and just use the library, right?
-> 
-> The BD73800 uses different registers for 'out' and 'in'. So there aren't 
-> really "GPIO lines with a fixed direction mixed together in the same 
-> register".
+>> Introduce a PSCI MFD driver that binds to "arm,psci-1.0" and registers
+>> PSCI child cells. As the first user, register cpuidle-psci-domain as a
+>> child cell.
+>>
+>> Update cpuidle-psci-domain to probe as an MFD child and use the parent
+>> PSCI node for power-domain traversal.
+>>
+>> Suggested-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+>> Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+>> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+>> ---
+>>  MAINTAINERS                           |  1 +
+>>  drivers/cpuidle/Kconfig.arm           |  1 +
+>>  drivers/cpuidle/cpuidle-psci-domain.c |  9 +-------
+>>  drivers/mfd/Kconfig                   | 12 ++++++++++
+>>  drivers/mfd/Makefile                  |  2 ++
+>>  drivers/mfd/psci-mfd.c                | 43 +++++++++++++++++++++++++++++++++++
+>
+> We don't usually allow the use of the term MFD in devices.
+>
+> What does this do?  Is it a mux?  psci-mux?
+>
+> If not, think about what it is and call it that instead.
+>
 
-...
+My two cents: I'd call it drivers/mfd/arm-psci.c
 
-> I think the BD73800 can indeed use the gpio-regmap, by keeping the pin 
-> direction information in private data and adding a custom xlate, which 
-> errors out if get is requested for output pin, or set is requested for 
-> input. I am not sure how much of an improvement it is compared to the 
-> patch v2, but I'll give it a shot :) I believe the new -rc1 isn't that 
-> far away, and hopefully the gpio-regmap -stuff from the next will be in 
-> it together with the regulator stuff bindings depended.
-
-Gah. Please, ignore the erroring-out part. I don't know where I picked 
-the idea that the hardware would always return '0' when reading the 
-GPO_OUT register. I think this might have been something I have 
-experienced on a setup where the pin was _not_ set to GPO by OTP. 
-Furthermore, the xlate will never get called if user tries to set value 
-for a GPI pin.
-
-Anyways, implementing xlate with op-check allows me to support this 
-PMIC, even though the register to read for pin status depends on OTP.
-
-So yes, v3 should be able to use gpio-regmap. I will probably delay 
-sending it until v7.3-rc1 is out so I get (all?) dependencies in.
-
-Yours,
-	-- Matti
-
--- 
-Matti Vaittinen
-Linux kernel developer at ROHM Semiconductors
-Oulu Finland
-
-~~ When things go utterly wrong vim users can always type :help! ~~
+Bartosz
