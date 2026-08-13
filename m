@@ -1,108 +1,259 @@
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C5B647988A
-	for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 14:23:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3470547A0C2
+	for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 16:34:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786631030; cv=none; b=h8zi8ZzncCLg/VUiVO4HVpu6oPUHKj34bEzDdjjIXl+LcFtbqbCuyq/4pMwDCW1rI8AquE3q6JCf0ZeX1qKl3a6qG+IJDbqHXAYpEdJiybtBPwbTEh4bdbaMxMICJRTccgyVzkpRRx1angLlYdFyaz1t7sxosqGSMBZ7no1UOsk=
+	t=1786638854; cv=none; b=U7SM4VepdSsZxl2ZwTuW/5MqYaS7dN0huEU9HAiAj4q3IMFZmr9hVczb9iM73D8j34EjAQqT9N37JM+mh9PNLMZlvhInI09jBl981E0+SxzsMPtuNrVVFlqcDZFs4AG8BVayELAXW2QH7ekSzR+GL65wsYs1y9PFBLK2xJyShNM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786631030; c=relaxed/simple;
-	bh=xzA6z/ScLQYJHgyemPeQLuBov2qwLz98o4xTEP7Bomw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=LKvu7B4BaHT/FBQzxcQnzP2XePCxislJlZYNYrhVTsgM44wTGvR5AIAQoYx5zDlSymaaVLb64jWTWb01ZjYRMoxfrYabEDaQGKemwgAGRtl2sKf8PySILgOxM0QLQjL4CeOzplRRhb9s1qzNB5bggg+OdvmGaFv+zN6TOhC3f20=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=9elements.com; spf=pass smtp.mailfrom=9elements.com; dkim=pass (2048-bit key) header.d=9elements.com header.i=@9elements.com header.b=BMO9iq9v; arc=none smtp.client-ip=209.85.128.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=9elements.com
+	s=arc-20240116; t=1786638854; c=relaxed/simple;
+	bh=KybE467r2v1MOUcmEkc88VExWxzUR2AW6N1gN81j3ao=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=XP7Boxcw3zMorY+MRMMX0GQUoS2Rc2ddFrneGZDjQEADByWWETEk/jb91wm7AKGW5eMS9Ishigz5NjhMxRFC/SlaAoFeRP8DxIxUgt3IVz24mMeJmpRJTV4bAi/GT/6Ilpliw+1vMeYMUF3xPFf1Jusy0Pxf5z0uwYltKR9vvDs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HVU9/u2h; arc=none smtp.client-ip=209.85.214.169
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=9elements.com header.i=@9elements.com header.b="BMO9iq9v"
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4954a9e8490so6225645e9.1
-        for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 07:23:48 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HVU9/u2h"
+Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2d319b84213so249675ad.1
+        for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 09:34:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=9elements.com; s=google; t=1786631026; x=1787235826; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=3zAK75b8ZUtjKJXv+z/knfiDKVadFa2L6rKVWPT2qQc=;
-        b=BMO9iq9v4+39Ytnk3zg51BXbTSpE1p9BjBOHJGXDhHFnQtqSaCmxE8fclDZm3DMSVP
-         4PfUZXu3WyADI/B5Z0BtumnVQCGAn8/OApQC0h1QAa3ClCVnh5JKPZTwEpHfC1O/YDWQ
-         TrYuV65rF8pWTgTIYSN4STRRNqyIYAtH1TLhT4ete89Xou5V5yOxyMR1Kj1BiCfUjtAV
-         d9amB36Unti/EFrii+7brVMFzROkn5rnlIcDbo8oNoIy4ALMtsO6V1viONYW00HbDQV1
-         DiBdN8ahtXx7NgjyqvbJ3DlbZYrYhhmAJgbSYFKdLkoBG7d+Ka3aBSEspMcAUJekB59f
-         Mknw==
+        d=gmail.com; s=20251104; t=1786638852; x=1787243652; darn=lists.linux.dev;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=GVD1+XSIWN9etxd7MSlZkNE6f3T+ZdQMW52j2/SNBUI=;
+        b=HVU9/u2hREqJHGab6Q7hq5N4bI0jwaVe3G92YRBrnmXvn3+UvB/voClmJpunbbch1E
+         Ers+ZsX4cqO8xqCSl73upr8KJhJJHIL8aVZ17oiBBZzOopQFStDbN7Hj70pDiFIRJu0H
+         w5ATCE0YbZ5XqWabWhlqtAcUfhkd6k6ypnbj3ThhnPMR0IfU+UP2A6DSFflHQwK8dZTY
+         +QvG41z2mk+7tY65Tta7qKcfndJb2L44GLmRHmw+7rdk3CzEilYx0+XmCnfjQ/suvzUj
+         OGMQIjxsz+Ip3uJW+i5I/5Wph8y1MrnwE4XYvrY8NueIlGbmK9vK0S1wbsGrGnv77nyI
+         yWuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786631026; x=1787235826;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=3zAK75b8ZUtjKJXv+z/knfiDKVadFa2L6rKVWPT2qQc=;
-        b=oPasojLSidRPvDgGKUZySsKWHBjuzEUz+NZJvzMJHGxZDvpyz8RRWUQ+DPX2kz6ODZ
-         MIhNs6eJkZgJSEseqSZQYXVvApuqU6zitgEj1A+uQCZO5DqE1+eHKVux9ZJt7reuigDw
-         UuqvSukB+BN3NdcQ6xAu76BklvINl/wHWfgu1BMNKHxtvqxjH4FdRH/3vAZxdCapMGEB
-         RPkGoAmz/TENESeldlN32jJabmOgOhOiGvgZgZW7IYXsHr+CfmTxdq0+g6OTnh9Il6FY
-         Oy/WeuxgeIX/Su4YirYcY9DMqJkfF+eLWBX/akZKZvBh87ZP8i0PRejv3EGLaKyxThSI
-         blMQ==
-X-Forwarded-Encrypted: i=1; AHgh+RoYJ0mbIpFU7lIvDP3xTP+qNd1/sWBGMCv+7R6mLViO1apxz26I0aDT4K1kazta6DWI4so=@lists.linux.dev
-X-Gm-Message-State: AOJu0YzGaGJ7czGCsY5Mhw7wDexFOGU/jObezC5GI7LuVXmlzmUKtZyg
-	NIucylSk9tknkeL4Q8LCDllJn5X1Dei4+95Wsz+ZS01fIE/BsxUa3s4FMIp/E4Td8RA=
-X-Gm-Gg: AR+sD12h+D2ljffn2UTGwZOuWKMp3IqzgvKi8ZL1KN0ZCFr5nNIGdVfmvb/xW5xnGJL
-	a0zo3vp5JGr1nn7M+krP4R9stIO8X9IMMclyo/up0BCdonDaNKmw0D0OOJRBFnOcbIYYCmgwrnh
-	6bRR9OyS0okfl3zStrwAne2urUTVMmF8xwZmG4ChJYdqUaRZLAhapdo1EtRQ3U8ashyAlyfYiIn
-	CwVhj3D3Rn66lCph+MfFQQJNr2funHM3WR9WkPlug1ICHFR61FFOpzTxCprVBpl9W8L+2Clogdy
-	rhrBTuazX8ZQE+FzXBZMzWUwvtMGVvHUX+ltiQyctKxYuZvHh55eMNB0+v2KpHBZz6Tnae7e9nP
-	BLamiRDieIno5X89vt1r1Le0xQIh9jNlmtjHI/Y8JA2qj10DXt4Jt1M6MUcBNEATqxyvYzfAvA1
-	9wqAfALbvb2J5I4958Wpp8nzGLr/ifZmzW2W8Q1/cf3VajVNhdiUioBCB+YYi+6ki0g+w+HlhRJ
-	FkrKXiH8pWp0ojjgARoihmZ/pYWZAsVmfjFu67pl6xCS4yBsqP8
-X-Received: by 2002:a05:600d:6409:10b0:499:84fc:4548 with SMTP id 5b1f17b1804b1-49984fc45c0mr29737445e9.5.1786631026583;
-        Thu, 13 Aug 2026 07:23:46 -0700 (PDT)
-Received: from ?IPV6:2a01:599:447:e518:cc7c:e59e:1489:db94? ([2a01:599:447:e518:cc7c:e59e:1489:db94])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49981e2e266sm51262395e9.2.2026.08.13.07.23.45
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 13 Aug 2026 07:23:46 -0700 (PDT)
-Message-ID: <15d1ced4-2400-477b-800d-fdcca80559bc@9elements.com>
-Date: Thu, 13 Aug 2026 16:23:44 +0200
+        d=1e100.net; s=20251104; t=1786638852; x=1787243652;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=GVD1+XSIWN9etxd7MSlZkNE6f3T+ZdQMW52j2/SNBUI=;
+        b=aP+bol635iiF3cpjFwCrF5bvn3IV+3KFjhk/Cf4RZORiQ4oQ49mB714PyiIa4GvsRF
+         cjjYYDwikehw4pbJGn6P7/bB5VO9RC5zfiaQf13VbZAZ/5fNfJ9+UbfpNXVx+L/70gD+
+         iOpy/kKFxL0yu5RiebThCWs/zih2jdVMZWrMwjt2vn2gB9yOFI9RZucDGow3+S6XL0dT
+         AzeAfdwgH7Jc49W5gWzQiPxFNpwrLQOQNF4SBbIBpscftFCMpvjG4D9NNljNM+TrIsbo
+         JRjr5sqEXyU3tWxqo3+pi0d6et01GmsyLFlV1PEsLtzrNyaJ0l/efXUbWJYLB2UaP6QW
+         bHcg==
+X-Gm-Message-State: AOJu0YxIcOczWBaXzwltC3xNwYmL8mhSoMH0Io7Oa+HX+jyfuI4AzBgk
+	Mr5PmiwdESEzt7oPyXcJknoxJxast3nXsKWgPEEWm81MNHXysbYZPPDE
+X-Gm-Gg: AR+sD13q16TrzsDC64zmK+AOW/t0fIRKW+pIeG5jGBHp4LTUQV82kpIpshrSTNNFJCe
+	SQUHGae9GV5so/HoQ+Iq9Voqyrt1gjr9Xq5BULWLKzMmkaOi7QP9yupJUAZhe/wPZjBaDarGbZC
+	sOzsp4Kqc7p3Uwz0HwiMNAYmpMcCpnVDPd9/rAvziGi4EsMIbpJrUOgUjMvK6lN1q9kA3W9ashr
+	pxkG48Ypv7SjMazbDaC4CUkM7HuTiJzsjspYWX2oyvAY5cacF/N82+tvcdwoefr7/L8oDe+9Oup
+	wltqckFSXZXPFDOn+Rnk82lDqpadJ5IYQAEDLRPko5yq0iUtwE6XYnohcLY08S1+wqlcdIMKeaf
+	KT+7qd90N55SXNBjT0CWdfPVycvGIOvlHOu6axMJDu2BEtMRUsg3QQhQvxfmZMpBJOYJDLeGh/I
+	XL6ow2sAT2CzHlq4/IGeJ0N94H0ekN1hxjdgZbgvLQxorqDBNbAYy2mathXP+Xss4sdbeZiOcU
+X-Received: by 2002:a17:903:35d0:b0:2cf:ca85:57e2 with SMTP id d9443c01a7336-2d389344e5cmr49852345ad.1.1786638852267;
+        Thu, 13 Aug 2026 09:34:12 -0700 (PDT)
+Received: from [10.219.45.252] ([2409:40c2:5044:2bd6:f356:6376:2cfa:e7ff])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31ebc75d8casm10603376eec.3.2026.08.13.09.34.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Aug 2026 09:34:11 -0700 (PDT)
+From: Bhargav Joshi <j.bhargav.u@gmail.com>
+Date: Thu, 13 Aug 2026 22:03:53 +0530
+Subject: [PATCH] dt-bindings: mfd: ti,keystone-devctrl: Convert to DT
+ schema
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 4/6] soc: mfd: add ASPEED AST2600 PCIe BMC device
- driver
-To: =?UTF-8?Q?Gr=C3=A9goire_Layet?= <gregoire.layet@9elements.com>
-Cc: joel@jms.id.au, andrew@codeconstruct.com.au, lkundrak@v3.sk,
- devicetree@vger.kernel.org, gregkh@linuxfoundation.org,
- jirislaby@kernel.org, robh@kernel.org, krzk+dt@kernel.org,
- conor+dt@kernel.org, lee@kernel.org, =?UTF-8?Q?Gr=C3=A9goire_Layet?=
- <git@gregoirelayet.com>, andrew@lunn.ch, jacky_chou@aspeedtech.com,
- yh_chung@aspeedtech.com, ninad@linux.ibm.com, anirudhsriniv@gmail.com,
- linux-serial@vger.kernel.org, mfd@lists.linux.dev,
- linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org,
- linux-kernel@vger.kernel.org
-References: <cover.1785932211.git.gregoire.layet@9elements.com>
- <51db5e5bb5bf44dd5ab893b8d547291f04e1d3c7.1785932211.git.gregoire.layet@9elements.com>
- <178609182923.193353.7287772568467157519.b4-review@b4>
- <CAFi2wKZdJ3LxJVDqC2K79T0JhoOOWSj=ZmL9pB+Lka_aXDXatQ@mail.gmail.com>
-Content-Language: en-US
-From: Tan Siewert <tan.siewert@9elements.com>
-In-Reply-To: <CAFi2wKZdJ3LxJVDqC2K79T0JhoOOWSj=ZmL9pB+Lka_aXDXatQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260813-ti-keystone-devctrl-v1-1-6f0aa87d9af8@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MSw5AMBRG4a3IHbuJ1iPYihiI/rghJW0jROxdY
+ /gNznnIwwk8tclDDqd42W2EShMal8HOYDHRpDNdZbXKOQivuH3YLdjgHIPbuELRaKUn5KWhWB4
+ Ok1z/tevf9wM0GVnYZQAAAA==
+X-Change-ID: 20260813-ti-keystone-devctrl-6e49212fe35d
+To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Ivan Khoronzhuk <ivan.khoronzhuk@ti.com>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, goledhruva@gmail.com, m-chawdhry@ti.com, 
+ daniel.baluta@gmail.com, simona.toaca@nxp.com, j.bhargav.u@gmail.com
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786638844; l=5070;
+ i=j.bhargav.u@gmail.com; h=from:subject:message-id;
+ bh=KybE467r2v1MOUcmEkc88VExWxzUR2AW6N1gN81j3ao=;
+ b=uDBoLTKL/WyJNfH2ctuGPsUGLJgENsF6FPrEqhaeh3EVjeih0qRhPPZ9BLHHdSeLwO8XVzQpJ
+ yw33URF9Ri6AR0aQAA/99mZtQCIl2Hnx5XuvSix7b9sb+0Fb/T2gwlh
+X-Developer-Key: i=j.bhargav.u@gmail.com; a=ed25519;
+ pk=IqNDwUZKECEA+n8wXctFLBbYL9NhFstZNbOznm/nX1k=
 
-On 8/10/26 12:36 PM, Grégoire Layet wrote:
->> But you're adding the UART devices here which now means that the core driver is
->> doing more than MSI interrupt init.
-> 
-> I might have misunderstood but this is creating the UART device by
-> using the 'serial8250' driver.
+Convert the Texas Instruments Keystone Device State Control binding from
+legacy text format to DT schema.
 
-You're right :face_palm: I haven't had enough coffee when I reviewed it.
+During the conversion, the following updates were made:
+- Added "simple-mfd" to the allowed compatible strings.
+- Enforced child bus properties (#address-cells, #size-cells, and ranges)
+  to be required only when the "simple-mfd" compatible is present.
+- Added patternProperties definitions to validate standard child nodes
+- Updated the examples to demonstrate simple-mfd parent usage and updated
+  node names to conform with standard Devicetree specifications.
 
-Sorry for the confusion!
+Signed-off-by: Bhargav Joshi <j.bhargav.u@gmail.com>
+---
+Note:
+Running dt_binding_check on patch will yield a warning for
+'ti,keystone-reset' in the example block. The YAML conversion patch
+for that child node is already in progress here:
+https://lore.kernel.org/linux-devicetree/20260813-ti-keystone-reset-v1-1-189389503324@gmail.com/
+---
+ .../bindings/mfd/ti,keystone-devctrl.yaml          | 105 +++++++++++++++++++++
+ .../bindings/mfd/ti-keystone-devctrl.txt           |  19 ----
+ 2 files changed, 105 insertions(+), 19 deletions(-)
 
-Tan
+diff --git a/Documentation/devicetree/bindings/mfd/ti,keystone-devctrl.yaml b/Documentation/devicetree/bindings/mfd/ti,keystone-devctrl.yaml
+new file mode 100644
+index 000000000000..33a72c290fb1
+--- /dev/null
++++ b/Documentation/devicetree/bindings/mfd/ti,keystone-devctrl.yaml
+@@ -0,0 +1,105 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/mfd/ti,keystone-devctrl.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Texas Instruments Keystone Device State Control
++
++maintainers:
++  - Ivan Khoronzhuk <ivan.khoronzhuk@ti.com>
++
++description:
++  The Keystone II devices have a set of registers that are used to control the
++  status of its peripherals. This node is intended to allow access to this
++  functionality.
++
++properties:
++  compatible:
++    minItems: 2
++    items:
++      - const: ti,keystone-devctrl
++      - const: syscon
++      - const: simple-mfd
++
++  reg:
++    maxItems: 1
++
++  "#address-cells":
++    const: 1
++
++  "#size-cells":
++    const: 1
++
++  ranges: true
++
++patternProperties:
++  "^keystone_dsp_gpio@[0-9a-f]+$":
++    type: object
++    description: Keystone DSP GPIO controller
++
++  "^keystone_irq@[0-9a-f]+$":
++    type: object
++    description: Keystone DSP to ARM interrupt controller
++
++  "^reset-controller@[0-9a-f]+$":
++    type: object
++    description: Keystone reset controller
++
++required:
++  - compatible
++  - reg
++
++allOf:
++  - if:
++      properties:
++        compatible:
++          contains:
++            const: simple-mfd
++    then:
++      required:
++        - "#address-cells"
++        - "#size-cells"
++        - ranges
++    else:
++      properties:
++        "#address-cells": false
++        "#size-cells": false
++        ranges: false
++
++additionalProperties: false
++
++examples:
++  - |
++    device-state-control@2620000 {
++        compatible = "ti,keystone-devctrl", "syscon";
++        reg = <0x02620000 0x1000>;
++    };
++
++  - |
++    #include <dt-bindings/interrupt-controller/arm-gic.h>
++
++    device-state-control@2620000 {
++        compatible = "ti,keystone-devctrl", "syscon", "simple-mfd";
++        reg = <0x02620000 0x1000>;
++        #address-cells = <1>;
++        #size-cells = <1>;
++        ranges = <0x0 0x02620000 0x1000>;
++
++        keystone_irq@2a0 {
++            compatible = "ti,keystone-irq";
++            reg = <0x2a0 0x4>;
++            interrupts = <GIC_SPI 4 IRQ_TYPE_EDGE_RISING>;
++            interrupt-controller;
++            #interrupt-cells = <1>;
++            ti,syscon-dev = <&devctrl 0x2a0>;
++        };
++
++        reset-controller@328 {
++            compatible = "ti,keystone-reset";
++            reg = <0x328 0x10>;
++            ti,syscon-pll = <&pllctrl 0xe4>;
++            ti,syscon-dev = <&devctrl 0x328>;
++            ti,wdt-list = <0>;
++        };
++    };
+diff --git a/Documentation/devicetree/bindings/mfd/ti-keystone-devctrl.txt b/Documentation/devicetree/bindings/mfd/ti-keystone-devctrl.txt
+deleted file mode 100644
+index 71a1f5963936..000000000000
+--- a/Documentation/devicetree/bindings/mfd/ti-keystone-devctrl.txt
++++ /dev/null
+@@ -1,19 +0,0 @@
+-* Device tree bindings for Texas Instruments keystone device state control
+-
+-The Keystone II devices have a set of registers that are used to control
+-the status of its peripherals. This node is intended to allow access to
+-this functionality.
+-
+-Required properties:
+-
+-- compatible:		"ti,keystone-devctrl", "syscon"
+-
+-- reg:			contains offset/length value for device state control
+-			registers space.
+-
+-Example:
+-
+-devctrl: device-state-control@02620000 {
+-	compatible = "ti,keystone-devctrl", "syscon";
+-	reg = <0x02620000 0x1000>;
+-};
 
+---
+base-commit: 3d6d817622b0a9721e3cc404df3469171582be13
+change-id: 20260813-ti-keystone-devctrl-6e49212fe35d
+
+Best regards,
+-- 
+Bhargav
 
