@@ -1,78 +1,78 @@
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E58143FD09
-	for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 08:19:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 588FA442B2C
+	for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 08:29:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786609170; cv=none; b=h0JGce/zzYgmczvNhTmZTxhEEiYQa06YRqfdx+hfkyef9mX6KM9mLYWd1U3a50flmH/r51uE7EVGv/iq5iiN2RqmYGDT6iPeXo2W+CRWJhCvP0xXw2sBg91Ut5uq/9v27KE1ppZv0qYzFrt5sq1e9PXfJ62NKeiwsZR+FTyLBU8=
+	t=1786609750; cv=none; b=e6TBeUKNZoOmqh3iOm+CLW3OnJVfps5ayXOy2Pgm5m/J14AezAwZrK9+4FdCJM/GCitfu5jycQvkPuF8nXnjmPQZF5knGgMyhUxZ9JrlJCzyrtUumE9yddj2ikP4KQF/N3e6YIjIfJm4N4bgyEk2R3EN9PD3UERCz8ykMa9MYi4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786609170; c=relaxed/simple;
-	bh=3o0ghu/JaY4o1UrD0lyf5hXneVEdMI/7Llifd12GZP8=;
+	s=arc-20240116; t=1786609750; c=relaxed/simple;
+	bh=tZO+uk+U+keRcnrsOz15fPjhTe6BU+LORJ2iCL/GCt0=;
 	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=uDBTOGwRSeUGcZGGV+snbdlrq0vKgzjUOqXS5tKp1TGpm4GSfRZMUwjpez4Q69/6q2V8j04W9tA2CcKb1M5VJlqmvmsmPhJH4jXhZ/PJ8z3gAo8Y7w87tK9x2php7CXrvG8eaYeTqvYskwaSyvzPjZ0B/SQ1AtMDdEH3eIGbbEw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=jKDLWCoi; arc=none smtp.client-ip=209.85.128.54
+	 MIME-Version:Content-Type; b=l3wd8QGeHQfoD7TvDF5V/4xQ0bR6Yyegi/zpWXiFZNY9VZyWMMu2mKOb0qs/uTGnpy67LF+A4iviIKLysGZBN2UY2TldCWwm3vQEiz51HRG5BDjntptY3cDs2XiqauIIlhMhCwyTIVJwAZR8iZNH6Mw995yYzqZxBHBSHxfX4EQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=YSmstBUJ; arc=none smtp.client-ip=209.85.221.43
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="jKDLWCoi"
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-49556f97a9dso11116545e9.1
-        for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 01:19:24 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="YSmstBUJ"
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-47fe89fb333so1028962f8f.3
+        for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 01:29:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1786609163; x=1787213963; darn=lists.linux.dev;
+        d=baylibre.com; s=google; t=1786609745; x=1787214545; darn=lists.linux.dev;
         h=content-type:mime-version:message-id:date:user-agent:references
          :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=jnnmyEy0HKcgC5aHIY6kah2VQrRaESEvLGC8LbPQC3Q=;
-        b=jKDLWCoidE61XfXhxcicE5Vo0xBSbAA7S7BrRwPpk0pBHCfYG2Xsz5Gunx99yjaHB3
-         8RC6k3tdicpglkt6BFIe9ktgan+ufsthVw01gb3NW1H8bGyNeJ8GiZmo61c5GQULAdWx
-         7LVfe1YIvFKh8L0P8nL/cxkJDPc4Un0bjJylzouhI4EfXuUxWgukpqIOLWq1Si1xuYHd
-         /QhwjM8R2u1vjDClKybg20ad5ioKBGmYttpdoJQ4LvLQCzK3bSbZr7NWIvsKo+dbKkCc
-         l/uWxGgEV/R+mbcpUpCXPWK+rBv17f+Nwxkrs3nbqJpfaAx27j2qbZWrL/pJrz53Vitn
-         MCmA==
+        bh=hd95siWMwoFHK3U5cEWEGYTFALaXZZqw8YjpPHhQMkM=;
+        b=YSmstBUJ7Jx1AxLmmEyvbXWjVcRHS9HSgAExUoL/5F4IinBnTwiJZ8khHcaD3r4SzI
+         AZJ5VRd0VQ5B6pJG387ImsGszVkKpdZ+wc6KPRM+nBzccT0xT3U3W0mrqYKaBacAmV+U
+         KlZ5LwncpxsoLYGotPC7GEaRI3gLb1ck+HhDBAaSlsc5m3T0GJWq5JDuL4nhl8Z4o2pJ
+         2Hv5PibjdrKB1QrXuEpTwcH9tUFNHkSxL9ZjMTxDtXJlTMHNfp7ThGTSBfqNmc8etRYL
+         7CVShKhrYdpwRdI/XWF1oVv6YCl7ucLYR9K0axjXSzGLWhbCViAoWfm3U20H0ZzW6p8h
+         MP9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786609163; x=1787213963;
+        d=1e100.net; s=20251104; t=1786609745; x=1787214545;
         h=content-type:mime-version:message-id:date:user-agent:references
          :in-reply-to:subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to:content-type;
-        bh=jnnmyEy0HKcgC5aHIY6kah2VQrRaESEvLGC8LbPQC3Q=;
-        b=p8KdnMMsrORDc9Lo5t4gH/zHg34bBY3/37WgsHRxpryhhAx85xAkegnfhWxwU64uPg
-         ybnWXCSSvJdmG1qZq12TZkvrFJTnyXye7EuEic6gOpFHVbxrIxmURCT+j9sgsOr5Hovk
-         JPOb1atgosyohychizhV385zk6apuxF6AsVpwWIQb7nKofZQ7JBfjWPE8SKAuHujQE+M
-         y9TSt53XTXLX+L4arT+u/cYffFbFvS4dLZEPiPmLbX3S6nB62J4dL92g5lNDFIDfeSnu
-         a0A1/kw2cYprjSIxOLaP8EGwMysLsHjPzuCX39nFxQX6qk5xZMS6R15J44aJJIdvf7mD
-         zVpg==
-X-Forwarded-Encrypted: i=1; AHgh+Ro03IQBV/g41ojIe+ZSjI/WKb6tvgo7rrNLLv93MBcf1wmYGMQuv8ztSdksmW4tnVTZyto=@lists.linux.dev
-X-Gm-Message-State: AOJu0YzDVyLP4qb+zcrwO+EEbduH+zlCibxyvYFBMtNWhBIey2UkYbF4
-	I32Jm3SfDWAh01zHfGYj0bpMSw8OLYxU2py061oPjFHcBcoLSaX8U1btR0qjlU0LOYA=
-X-Gm-Gg: AR+sD136sMDXh7ePb7TblcGyGQyX+thu+8PfEqJphQgHXnvYy2thFxHMqM2po+k8dxd
-	DZFEDtK+8wA6dRzNerITfMyDo6YEiU3A0vSEOAi/qQR/Pn0S7m1/TzcA5tMZjo/wXRbF0wQN/YY
-	TwqpuFy/dx49E6/1RefIjo/qhYVxhbuzv4Zop63DTdrUcyefqDupMchaM06CJRsUrmtjiyzgLPg
-	lLYNdNgEPa7GSNho4mHFJW+ZYhV5ZxccO/IdgAGZ3Q178S9GjcsEi/9eB4fWa2WBhFnQ+DgC9Ko
-	4+fuXyEfY+rgwQF9X29TKlJN7nHpAmXkI45mZpK8+NIzE84YB2qa4wso3U9h8KJ5qvQ17SgQq8h
-	gTlAWQwqnursux6gFKWbO5f67yJ1Kza0Wow2SI15a3EGApAviaCjblkm5EPsGp0YfMwcVkJ8DZc
-	CaJFjglEG2BdMA5uGxv1FU225SAu71OIiHaqdlnaFaYq3h9ZWV2RG0ywNruDA=
-X-Received: by 2002:a05:600c:3e15:b0:499:819e:db2c with SMTP id 5b1f17b1804b1-499821d7ed1mr43073485e9.16.1786609163484;
-        Thu, 13 Aug 2026 01:19:23 -0700 (PDT)
+        bh=hd95siWMwoFHK3U5cEWEGYTFALaXZZqw8YjpPHhQMkM=;
+        b=JFOx37MdcsI27UnTw8xGhN3Oi3o77jFnXq/s+ZvoII2+gE5NAZpwGfZk6b3lVsbCYw
+         imVRdJGFvWdu426f8efuzGOzDKRNkV2ePwgCkQIQpeNvgMb/HZy1KOSLdpjUNoE5bJva
+         UXLu0ejoDPxxANituygO04L4GrbkcOpXFKiCs7oi5tNSJUD+DUy1NkvexosEx9a4foyu
+         z59oTd06uR+QHwjOd9EUxh3utd+qzJ6keTFaq8rNvIM1Abj6/ts4GWF25aUNRL0DgCZi
+         f4zo49UMQQJbM0ZBcnQazaigRwdqgdJQealFSLzWjXCeQPecx5BndVtxSevdreLLTMH4
+         Qh2g==
+X-Forwarded-Encrypted: i=1; AHgh+Ro/kJGhI4MqGfK8Y4dNO/yNV1AafrE/6NkWyH2raESyvJmk2xu9np1hG67t+NsHXRQ19Kk=@lists.linux.dev
+X-Gm-Message-State: AOJu0YwL/qykglHNWIqBeTKq0/QrDbtUAWg7uF+vU5hIwQgRloiEXIfi
+	jH9C+sGRqEWf6Ee+1/vAk6TWlzniZ+wuF3Tw7SfVWiCvZYaEijH9sTDrdOPaDcNhjH4=
+X-Gm-Gg: AR+sD10FZquwShSuyZ8L6/Sz0rx1+sxyRWc24HmqyCxvZyuv6knfY1HsmE8Uv/tS4ZW
+	YfetAKCm8QMfzEHYQXYLxYYfHoutGnRYuSvAH4KjPMAR35It/WY/gCfZ6ddgXws/RoqXT5qH90O
+	A7tpNPhSc4WkBlPlqcgu5yMyenq56ZIexlscCvgfkPNlPnsg/IFv9Jj95w4RA7F6cobXWShe/qV
+	TQX+Cl+bzMZGYBXiUcZjNmzNY0O+7tqGp8H9ApVT+mHswenGl4Svexq5AA2IVGA5r69vDrhcE7x
+	p3w08diV/XzEl1zHLiWnqIwfpd2C6P0ia2LDTwrnNA+A/JWy8xsBgB9X1mOAZfTjCNU1yFtZAyv
+	Ws8bpOAtBObKYk2gcH9T/nqgV1E/JWV53H6qg0wV8nuZdifjxKbldQ02ge8+QddWXCtMtJuWeEo
+	Crnl/hAWkQ0PHNgEhk+bJ9kdleW4PKJnVystMkqT408/tC/kgBMwpUFRngIZQnP00L+lUn9w==
+X-Received: by 2002:a05:6000:41d0:b0:47f:f908:ba7b with SMTP id ffacd0b85a97d-48159feec0bmr5544710f8f.23.1786609745155;
+        Thu, 13 Aug 2026 01:29:05 -0700 (PDT)
 Received: from localhost ([2a01:e0a:3c5:5fb1:bd31:7f6f:53ba:7518])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-49981e438edsm39581985e9.4.2026.08.13.01.19.22
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-4815a5b6c21sm4863642f8f.27.2026.08.13.01.29.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2026 01:19:22 -0700 (PDT)
+        Thu, 13 Aug 2026 01:29:04 -0700 (PDT)
 From: Jerome Brunet <jbrunet@baylibre.com>
-To: sashiko-bot@kernel.org
-Cc: sashiko-reviews@lists.linux.dev, conor+dt@kernel.org, robh@kernel.org,
- mfd@lists.linux.dev, devicetree@vger.kernel.org, lee@kernel.org
-Subject: Re: [PATCH RESEND v6 1/5] mfd: axp20x: Constify axp313 and axp717
- cells
-In-Reply-To: <20260812213712.1A8671F000E9@smtp.kernel.org>
-	(sashiko-bot@kernel.org's message of "Wed, 12 Aug 2026 21:37:11
+To: sashiko-bot@kernel.org, Lee Jones <lee@kernel.org>, Mark Brown
+ <broonie@kernel.org>
+Cc: sashiko-reviews@lists.linux.dev, robh@kernel.org, mfd@lists.linux.dev,
+ conor+dt@kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH RESEND v6 4/5] mfd: axp20x: Add support for AXP318W PMIC
+In-Reply-To: <20260812214019.CDF921F000E9@smtp.kernel.org>
+	(sashiko-bot@kernel.org's message of "Wed, 12 Aug 2026 21:40:19
 	+0000")
 References: <20260812-axp318-regulator-v6-0-d6b84b55c000@baylibre.com>
-	<20260812-axp318-regulator-v6-1-d6b84b55c000@baylibre.com>
-	<20260812213712.1A8671F000E9@smtp.kernel.org>
+	<20260812-axp318-regulator-v6-4-d6b84b55c000@baylibre.com>
+	<20260812214019.CDF921F000E9@smtp.kernel.org>
 User-Agent: mu4e 1.12.9; emacs 30.1
-Date: Thu, 13 Aug 2026 10:19:21 +0200
-Message-ID: <1jqzk2fn5i.fsf@starbuckisacylon.baylibre.com>
+Date: Thu, 13 Aug 2026 10:29:02 +0200
+Message-ID: <1jldaafmpd.fsf@starbuckisacylon.baylibre.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -81,67 +81,85 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-On sam. 12 janv. 2008 at 23:37, sashiko-bot@kernel.org wrote:
+On sam. 12 janv. 2008 at 23:40, sashiko-bot@kernel.org wrote:
 
-> Thank you for your contribution! Sashiko AI review found 1 potential issue(s) to consider:
->
-> Pre-existing issues:
-> - [Medium] Hard-coded cell IDs are used in `axp806_cells` and
-> `axp809_cells` instead of leveraging `platform_device->id` or
-> `PLATFORM_DEVID_AUTO`, violating MFD subsystem guidelines.
+> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
+> - [High] The corresponding regulator driver lacks support for `AXP318_ID`, causing the `axp20x-regulator` child device probe to fail.
+
+Funny sashiko did not pick up on this when v6 was first sent. This is an
+ordering problem. The regulator part should be applied before the mfd
+one.
+
+I could reorder here but there is not much point since the 2 changes will
+land in different subsystems but it does bring a valid question:
+
+Lee, Mark, are you OK with picking the patches indended for your
+subsystem or would you prefer that I split the series, regulator on one
+side, mfd on the other (with a dep on the regulator one, of course) ?
+
+> - [Medium] The newly added `axp318_cells` array uses a hard-coded cell ID of 1 instead of using `PLATFORM_DEVID_AUTO`.
 > --
->
-> --- Patch [1]: [PATCH RESEND v6 1/5] mfd: axp20x: Constify axp313 and axp717 cells ---
-> commit d0271b0bfb6609a5dbfc9c713361a49994e56202
-> Author: Jerome Brunet <jbrunet@baylibre.com>
->
-> mfd: axp20x: Constify axp313 and axp717 cells
->
-> This commit constifies the mfd_cells arrays for the axp313 and axp717 chips.
-> It aligns their declarations with the rest of the supported chips where
-> the arrays are properly marked as const.
 
-As expected and already explained in the cover-letter.
+... Again, already explained this in previous version and the cover letter.
 
+>
+> --- Patch [4]: [PATCH RESEND v6 4/5] mfd: axp20x: Add support for AXP318W PMIC ---
+> commit 5a33005ba66225f7df0e6747b0fcb9263e977f13
+> Author: Andre Przywara <andre.przywara@arm.com>
+>
+> mfd: axp20x: Add support for AXP318W PMIC
+>
+> This commit introduces MFD core and I2C support for the X-Powers AXP318W
+> PMIC. It defines regmap properties, interrupt maps, and adds the regulator
+> child device.
 >
 >> diff --git a/drivers/mfd/axp20x.c b/drivers/mfd/axp20x.c
->> index 679364189ea58..22baab6e10fa6 100644
+>> index 84839d4aa1ca5..ea00c0cdce58c 100644
 >> --- a/drivers/mfd/axp20x.c
 >> +++ b/drivers/mfd/axp20x.c
 >
 > [ ... ]
 >
->> static const struct mfd_cell axp806_cells[] = {
->> 	{
->> 		.id		= 2,
->> 		.name		= "axp20x-regulator",
->> 	},
->> };
->> 
->> static const struct mfd_cell axp809_cells[] = {
->> 	{
->> 		.name		= "axp20x-gpio",
->> 		.of_compatible	= "x-powers,axp221-gpio",
->> 	}, {
->> 		.name		= "axp221-pek",
->> 		.num_resources	= ARRAY_SIZE(axp809_pek_resources),
->> 		.resources	= axp809_pek_resources,
->> 	}, {
->> 		.id		= 1,
->> 		.name		= "axp20x-regulator",
->> 	},
->> };
+>> @@ -1061,6 +1129,10 @@ static const struct mfd_cell axp313a_cells[] = {
+>>  	MFD_CELL_RES("axp313a-pek", axp313a_pek_resources),
+>>  };
+>>  
+>> +static const struct mfd_cell axp318_cells[] = {
+>> +	MFD_CELL_BASIC("axp20x-regulator", NULL, NULL, 0, 1),
 >
 > [Severity: Medium]
-> This is a pre-existing issue, but is it safe to use hard-coded cell IDs
-> like 1 and 2 for the axp20x-regulator cells in the axp806_cells and
-> axp809_cells arrays?
+> Should this cell use PLATFORM_DEVID_AUTO instead of a hard-coded ID of 1?
 >
-> The MFD subsystem guidelines require using PLATFORM_DEVID_AUTO for automatic
-> cell indexing, or platform_device->id if numbering is explicitly needed.
+> Hard-coding cell IDs or mapping them to fixed instance numbers can lead to
+> device naming collisions in sysfs and driver load failures if multiple PMICs
+> defining the same cell name exist on the same board.
 >
-> Can this hard-coded cell ID usage lead to device naming collisions in sysfs
-> or driver load failures?
+> [Severity: High]
+> Will this child device successfully probe, or are the regulator driver
+> changes missing from this patch series?
+>
+> When the MFD core registers the "axp20x-regulator" cell, the regulator driver's
+> axp20x_regulator_probe() is invoked. It checks the axp20x->variant, but since
+> AXP318_ID is not handled in the regulator driver:
+>
+> drivers/regulator/axp20x-regulator.c:axp20x_regulator_probe() {
+>     ...
+>     switch (axp20x->variant) {
+>     ...
+>     default:
+>         dev_err(&pdev->dev, "Unsupported AXP variant: %d\n",
+>             axp20x->variant);
+>         return -EINVAL;
+>     }
+> }
+>
+> It appears this will fall through to the default case, print an error,
+> and return -EINVAL unconditionally.
+>
+>> +};
+>> +
+>>  static const struct mfd_cell axp717_cells[] = {
+>>  	MFD_CELL_NAME("axp20x-regulator"),
 
 -- 
 Jerome
