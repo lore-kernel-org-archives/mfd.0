@@ -1,83 +1,108 @@
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04AFE3955D8;
-	Thu, 13 Aug 2026 13:31:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C5B647988A
+	for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 14:23:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786627889; cv=none; b=KRCX8jzg0elqLxMQoMbo2F1o63S8F7moiGRJvlr1WMLAUAwkTOPSJx3KNuzJd94k/98lcRLyWUTRprRSnlSSdpfn01uo5+ovsg4gueGSb9ixdib0+qAAzVK6jKXa85aKQT4JQXkdC/5vN2RPxNnUEuQieAzah6+qndQTSgD4oR0=
+	t=1786631030; cv=none; b=h8zi8ZzncCLg/VUiVO4HVpu6oPUHKj34bEzDdjjIXl+LcFtbqbCuyq/4pMwDCW1rI8AquE3q6JCf0ZeX1qKl3a6qG+IJDbqHXAYpEdJiybtBPwbTEh4bdbaMxMICJRTccgyVzkpRRx1angLlYdFyaz1t7sxosqGSMBZ7no1UOsk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786627889; c=relaxed/simple;
-	bh=D6AdaN8xQN2ViIQq4+zn2JHML8aRydv1+dPcaNntmao=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ofCWk2TvF6PGKt0fpXdj8azjsk9c6BPl9CIxnwdiIRyReJsC9IY9azCjvr6yAvawpXv3tWpT8HdekTyvE7sfz/VruyG1dflCBERtS0hXxXa5Q4/U+dRFNwwbbq6VLv4V2KEztKsRlkkYbHCawYM1eaqoCJQAe9v1ISsCo+xokdU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=MwVGOfQU; arc=none smtp.client-ip=156.67.10.101
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+	s=arc-20240116; t=1786631030; c=relaxed/simple;
+	bh=xzA6z/ScLQYJHgyemPeQLuBov2qwLz98o4xTEP7Bomw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=LKvu7B4BaHT/FBQzxcQnzP2XePCxislJlZYNYrhVTsgM44wTGvR5AIAQoYx5zDlSymaaVLb64jWTWb01ZjYRMoxfrYabEDaQGKemwgAGRtl2sKf8PySILgOxM0QLQjL4CeOzplRRhb9s1qzNB5bggg+OdvmGaFv+zN6TOhC3f20=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=9elements.com; spf=pass smtp.mailfrom=9elements.com; dkim=pass (2048-bit key) header.d=9elements.com header.i=@9elements.com header.b=BMO9iq9v; arc=none smtp.client-ip=209.85.128.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=9elements.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="MwVGOfQU"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=M0tOB/uv0TR9Y5yCxLw6p1FK2MqTX1tNSOH3AAfyT5M=; b=MwVGOfQULmpDlfIuzW6I3IY3DA
-	xt4hzXJh/Swo/dPiq1nDShuTaUY7u+d+OqiXXWP1FFnW+QQ4eUWLPHcnOtF0WhRvMypi5zuMQI7hI
-	g9ndM/QinE5xYT2qRszFUKkFq+n6Qo4frAIpHHwtVxQxfeij4uY4pBbgSKqaqgPkFGQM=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1wuVWe-00HQyG-4i; Thu, 13 Aug 2026 15:31:16 +0200
-Date: Thu, 13 Aug 2026 15:31:16 +0200
-From: Andrew Lunn <andrew@lunn.ch>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: James Hilliard <james.hilliard1@gmail.com>, Lee Jones <lee@kernel.org>,
-	Arnd Bergmann <arnd@arndb.de>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	"Jagielski, Jedrzej" <jedrzej.jagielski@intel.com>,
-	Andre Przywara <andre.przywara@arm.com>,
-	Chen-Yu Tsai <wens@kernel.org>,
-	Jernej =?utf-8?Q?=C5=A0krabec?= <jernej.skrabec@gmail.com>,
-	linux-sunxi@lists.linux.dev, mfd@lists.linux.dev,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v7 1/2] dt-bindings: mfd: x-powers: Add AC200
-Message-ID: <a11a5072-2477-41b6-8cc3-cb9aa75266cd@lunn.ch>
-References: <20260811-submit-ac200-mfd-v7-0-8b06f552a4d7@gmail.com>
- <20260811-submit-ac200-mfd-v7-1-8b06f552a4d7@gmail.com>
- <20260813-independent-ladybug-of-perfection-1afe7a@quoll>
+	dkim=pass (2048-bit key) header.d=9elements.com header.i=@9elements.com header.b="BMO9iq9v"
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4954a9e8490so6225645e9.1
+        for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 07:23:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=9elements.com; s=google; t=1786631026; x=1787235826; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=3zAK75b8ZUtjKJXv+z/knfiDKVadFa2L6rKVWPT2qQc=;
+        b=BMO9iq9v4+39Ytnk3zg51BXbTSpE1p9BjBOHJGXDhHFnQtqSaCmxE8fclDZm3DMSVP
+         4PfUZXu3WyADI/B5Z0BtumnVQCGAn8/OApQC0h1QAa3ClCVnh5JKPZTwEpHfC1O/YDWQ
+         TrYuV65rF8pWTgTIYSN4STRRNqyIYAtH1TLhT4ete89Xou5V5yOxyMR1Kj1BiCfUjtAV
+         d9amB36Unti/EFrii+7brVMFzROkn5rnlIcDbo8oNoIy4ALMtsO6V1viONYW00HbDQV1
+         DiBdN8ahtXx7NgjyqvbJ3DlbZYrYhhmAJgbSYFKdLkoBG7d+Ka3aBSEspMcAUJekB59f
+         Mknw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786631026; x=1787235826;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=3zAK75b8ZUtjKJXv+z/knfiDKVadFa2L6rKVWPT2qQc=;
+        b=oPasojLSidRPvDgGKUZySsKWHBjuzEUz+NZJvzMJHGxZDvpyz8RRWUQ+DPX2kz6ODZ
+         MIhNs6eJkZgJSEseqSZQYXVvApuqU6zitgEj1A+uQCZO5DqE1+eHKVux9ZJt7reuigDw
+         UuqvSukB+BN3NdcQ6xAu76BklvINl/wHWfgu1BMNKHxtvqxjH4FdRH/3vAZxdCapMGEB
+         RPkGoAmz/TENESeldlN32jJabmOgOhOiGvgZgZW7IYXsHr+CfmTxdq0+g6OTnh9Il6FY
+         Oy/WeuxgeIX/Su4YirYcY9DMqJkfF+eLWBX/akZKZvBh87ZP8i0PRejv3EGLaKyxThSI
+         blMQ==
+X-Forwarded-Encrypted: i=1; AHgh+RoYJ0mbIpFU7lIvDP3xTP+qNd1/sWBGMCv+7R6mLViO1apxz26I0aDT4K1kazta6DWI4so=@lists.linux.dev
+X-Gm-Message-State: AOJu0YzGaGJ7czGCsY5Mhw7wDexFOGU/jObezC5GI7LuVXmlzmUKtZyg
+	NIucylSk9tknkeL4Q8LCDllJn5X1Dei4+95Wsz+ZS01fIE/BsxUa3s4FMIp/E4Td8RA=
+X-Gm-Gg: AR+sD12h+D2ljffn2UTGwZOuWKMp3IqzgvKi8ZL1KN0ZCFr5nNIGdVfmvb/xW5xnGJL
+	a0zo3vp5JGr1nn7M+krP4R9stIO8X9IMMclyo/up0BCdonDaNKmw0D0OOJRBFnOcbIYYCmgwrnh
+	6bRR9OyS0okfl3zStrwAne2urUTVMmF8xwZmG4ChJYdqUaRZLAhapdo1EtRQ3U8ashyAlyfYiIn
+	CwVhj3D3Rn66lCph+MfFQQJNr2funHM3WR9WkPlug1ICHFR61FFOpzTxCprVBpl9W8L+2Clogdy
+	rhrBTuazX8ZQE+FzXBZMzWUwvtMGVvHUX+ltiQyctKxYuZvHh55eMNB0+v2KpHBZz6Tnae7e9nP
+	BLamiRDieIno5X89vt1r1Le0xQIh9jNlmtjHI/Y8JA2qj10DXt4Jt1M6MUcBNEATqxyvYzfAvA1
+	9wqAfALbvb2J5I4958Wpp8nzGLr/ifZmzW2W8Q1/cf3VajVNhdiUioBCB+YYi+6ki0g+w+HlhRJ
+	FkrKXiH8pWp0ojjgARoihmZ/pYWZAsVmfjFu67pl6xCS4yBsqP8
+X-Received: by 2002:a05:600d:6409:10b0:499:84fc:4548 with SMTP id 5b1f17b1804b1-49984fc45c0mr29737445e9.5.1786631026583;
+        Thu, 13 Aug 2026 07:23:46 -0700 (PDT)
+Received: from ?IPV6:2a01:599:447:e518:cc7c:e59e:1489:db94? ([2a01:599:447:e518:cc7c:e59e:1489:db94])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49981e2e266sm51262395e9.2.2026.08.13.07.23.45
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 13 Aug 2026 07:23:46 -0700 (PDT)
+Message-ID: <15d1ced4-2400-477b-800d-fdcca80559bc@9elements.com>
+Date: Thu, 13 Aug 2026 16:23:44 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260813-independent-ladybug-of-perfection-1afe7a@quoll>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 4/6] soc: mfd: add ASPEED AST2600 PCIe BMC device
+ driver
+To: =?UTF-8?Q?Gr=C3=A9goire_Layet?= <gregoire.layet@9elements.com>
+Cc: joel@jms.id.au, andrew@codeconstruct.com.au, lkundrak@v3.sk,
+ devicetree@vger.kernel.org, gregkh@linuxfoundation.org,
+ jirislaby@kernel.org, robh@kernel.org, krzk+dt@kernel.org,
+ conor+dt@kernel.org, lee@kernel.org, =?UTF-8?Q?Gr=C3=A9goire_Layet?=
+ <git@gregoirelayet.com>, andrew@lunn.ch, jacky_chou@aspeedtech.com,
+ yh_chung@aspeedtech.com, ninad@linux.ibm.com, anirudhsriniv@gmail.com,
+ linux-serial@vger.kernel.org, mfd@lists.linux.dev,
+ linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org,
+ linux-kernel@vger.kernel.org
+References: <cover.1785932211.git.gregoire.layet@9elements.com>
+ <51db5e5bb5bf44dd5ab893b8d547291f04e1d3c7.1785932211.git.gregoire.layet@9elements.com>
+ <178609182923.193353.7287772568467157519.b4-review@b4>
+ <CAFi2wKZdJ3LxJVDqC2K79T0JhoOOWSj=ZmL9pB+Lka_aXDXatQ@mail.gmail.com>
+Content-Language: en-US
+From: Tan Siewert <tan.siewert@9elements.com>
+In-Reply-To: <CAFi2wKZdJ3LxJVDqC2K79T0JhoOOWSj=ZmL9pB+Lka_aXDXatQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Thu, Aug 13, 2026 at 08:49:33AM +0200, Krzysztof Kozlowski wrote:
-> On Tue, Aug 11, 2026 at 05:11:30PM -0600, James Hilliard wrote:
-> > The AC200 is an I2C-controlled mixed-signal companion IC containing
-> > audio, video, RTC and Fast Ethernet PHY functions.
-> > 
-> > Describe the parent device and its shared input clock. The Ethernet PHY
-> > is represented by a PHY package on its MDIO bus, with a phandle back to
-> > this device for access to the package control registers, so it does not
-> > require an MFD child node. Function-specific supplies belong to their
-> > consumer bindings rather than the shared parent.
+On 8/10/26 12:36 PM, Grégoire Layet wrote:
+>> But you're adding the UART devices here which now means that the core driver is
+>> doing more than MSI interrupt init.
 > 
-> Other way to represent it is to put ethernet phy here - either as a
-> child or folded into MFD device node - and provide phandle to MDIO bus.
+> I might have misunderstood but this is creating the UART device by
+> using the 'serial8250' driver.
 
-That would be odd. IEEE 802.3 specified that the PHY should be on an
-MDIO bus. And this PHY is on an MDIO bus, that is its primary
-management interface. I2C is just for ancillary configuration.
+You're right :face_palm: I haven't had enough coffee when I reviewed it.
 
-The only kind of sort of an exception we have in the current MDIO
-subsystem is for SFP modules. They only have an I2C bus, not
-MDIO. However, SFP vendors have various protocols for MDIO over
-I2C. So the SFP does appear in the I2C tree, but we then instantiate
-an MDIO bus as an I2C client, and then the PHY is then just a normal
-PHY on an emulated MDIO bus.
+Sorry for the confusion!
 
-	Andrew
+Tan
+
+
