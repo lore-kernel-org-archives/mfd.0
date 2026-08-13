@@ -1,44 +1,53 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E78243D4FA;
-	Thu, 13 Aug 2026 09:56:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34677415F35;
+	Thu, 13 Aug 2026 11:00:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786614966; cv=none; b=oPFnN35hJu2F/ruIPbPP4n5RXLqQObX8/uccPIhAJpLEvpBMdOvH/dFcLKmQ2OzjJQWJrwcv4+Cz9UnQhr8Fs4EXcfeFxyPTAF30ciXJ89PioUy3FzTZs6nR1FhYL2wogFjQDHY+Ey/JknMsU7LRRrBBXj9aMq6iLGJwRci6Ozs=
+	t=1786618803; cv=none; b=AmWP/BBx6zz/0mXZElLRMo3YbPL25QQQQRfIBY7Y+GLtzahaJK1K+pe34NBTxaledtN0/xnCVIkWQWhqpHBgVa3bjRV8opvmdEbRFYsfgBw9XHGPaNRzDET3+inUEHANgF6ee0rEqRPbc8r3mFSikrAvbqek/k9emCx+CQoK0RU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786614966; c=relaxed/simple;
-	bh=Q5UrNWP2cgzd9JwQj0u8Wlpr2r4pBGqbcj9N5hEn2XQ=;
+	s=arc-20240116; t=1786618803; c=relaxed/simple;
+	bh=nAgYORfhm1lxIxC4ei8CBKHTkJ+UAmIGOgZd5g01V4c=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=fSMyvSyzbXvv04WUlqwr+p3y8/Hk7v7S/43iwkAqfsNh7cnCDVdPx9MVuWxnLLRbumRqLy+eh3zQufYDKqMW+rL2ZwzPrd/e4cqpeplkdT5LKUohfJuJ+ORzSrAMXaToGJBQrwguAbb7ledyq3JD7yAJiRgH4H2bc6a7OITcnlo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Iuplm4bl; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=YPTvrfBcgLMpfvjdCSRMZbxTUapT9uCCBu1en+iyCHQzpHrPsbYv4EwCqV9BJRVq5wbRl3KGP2FsC+uv+sj+Rhb3eeq1TJjaM3zRwFvtU9F2QsvKJfztxpwJLtzRnCMm+ZbA5TyhlvQ+25bx4ugPRm2h5XwdOUI/o5RwiNJr35E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ymq+n4Ju; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Iuplm4bl"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C97361F000E9;
-	Thu, 13 Aug 2026 09:56:02 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ymq+n4Ju"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A823D1F000E9;
+	Thu, 13 Aug 2026 10:59:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786614964;
-	bh=k7IRT7w488lOfR9xkeYXBX2k2JLbjwVizA4fzP0b7UI=;
+	s=k20260515; t=1786618801;
+	bh=zF/SUSiiP/uJ2s9U1l64S4bk18A2SuMRPB4CkEY8pP4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Iuplm4blHS2c8/DcK3dPZ84Lb9r9AaJdZIf04Sd1H84ArTJvE5rlfZTiFJMmbaeIu
-	 wyExIBXnR/cya7T2jDLkmkZJFmaluDJUbgcSaoGRjRJ4wnmN4waylUVPbBzKiIIB5M
-	 274tr+T64x9X3N5eLeBsbKUTYnEhatPykRzyFlC4fNaUXZj+dhQMwjI09vNUp+Rt4m
-	 O/FkDadodLP06MVUp9mQ2XgREtJeGFU5aEzkn3sTHRgFCAbOWfeTxiWojQDLX4vW8I
-	 dsPZBLz2Ci49soTnctPyjLbjyldC5KO3vKCmTJaC5HOuSMXJ96IhFRIfuLZUd1+ZFY
-	 HlMS6hw/NUfEQ==
-Date: Thu, 13 Aug 2026 10:56:00 +0100
+	b=Ymq+n4JuCPCF/jYthcOHmQO+kQJC9AtqmL0kiNOKTZ37YAy1CG42+ozJR/9AzETyG
+	 utLM4htc5tNTDJxpBzXI1mQI7Gzni2iq6TcLPMYitNpCUMpFef+uh34ocIh0yPp67Q
+	 CKKd6gtHAUOgKmOC2IRzYPOHcuJ/1gKq+3tWounfcbyrR9Qi4xPYo/jU0LttTEE1K8
+	 9ysztrkQjjoJ41JJ0rYdPy49cmEe0N50necRqeOWJ2rbRIyJwJlKNh6oVUL71BY8Kg
+	 mASQm0aLELkSm39J7XmY9R6M1ZAwjgdiiQMQBUtXm7pLn0lBJdU5fhVF3cy/QeRFFu
+	 yi0oHEWNIJC/w==
+Date: Thu, 13 Aug 2026 11:59:55 +0100
 From: Lee Jones <lee@kernel.org>
-To: Jerome Brunet <jbrunet@baylibre.com>
-Cc: sashiko-bot@kernel.org, Mark Brown <broonie@kernel.org>,
-	sashiko-reviews@lists.linux.dev, robh@kernel.org,
-	mfd@lists.linux.dev, conor+dt@kernel.org,
-	devicetree@vger.kernel.org
-Subject: Re: [PATCH RESEND v6 4/5] mfd: axp20x: Add support for AXP318W PMIC
-Message-ID: <20260813095600.GA1072730@google.com>
-References: <20260812-axp318-regulator-v6-0-d6b84b55c000@baylibre.com>
- <20260812-axp318-regulator-v6-4-d6b84b55c000@baylibre.com>
- <20260812214019.CDF921F000E9@smtp.kernel.org>
- <1jldaafmpd.fsf@starbuckisacylon.baylibre.com>
+To: Matti Vaittinen <mazziesaccount@gmail.com>
+Cc: Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
+	Matti Vaittinen <matti.vaittinen@linux.dev>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Michael Turquette <mturquette@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	mfd@lists.linux.dev, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-clk@vger.kernel.org,
+	linux-gpio@vger.kernel.org, linux-rtc@vger.kernel.org
+Subject: Re: [PATCH v2 05/10] mfd: Support for ROHM BD73800 PMIC core
+Message-ID: <20260813105955.GA1820248@google.com>
+References: <cover.1785838584.git.mazziesaccount@gmail.com>
+ <2aff89e15aa5b03c955760e5dc50b5e2f17081e3.1785838585.git.mazziesaccount@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -47,27 +56,37 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <1jldaafmpd.fsf@starbuckisacylon.baylibre.com>
+In-Reply-To: <2aff89e15aa5b03c955760e5dc50b5e2f17081e3.1785838585.git.mazziesaccount@gmail.com>
 
-On Thu, 13 Aug 2026, Jerome Brunet wrote:
+On Tue, 04 Aug 2026, Matti Vaittinen wrote:
 
-> On sam. 12 janv. 2008 at 23:40, sashiko-bot@kernel.org wrote:
+> From: Matti Vaittinen <mazziesaccount@gmail.com>
 > 
-> > Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
-> > - [High] The corresponding regulator driver lacks support for `AXP318_ID`, causing the `axp20x-regulator` child device probe to fail.
+> The BD73800 integrates regulators, ADC (intended for accumulating current /
+> voltage / power values), a real-time clock (RTC), clock gate and GPIOs.
 > 
-> Funny sashiko did not pick up on this when v6 was first sent. This is an
-> ordering problem. The regulator part should be applied before the mfd
-> one.
+> Add core support for ROHM BD73800 Power Management IC.
 > 
-> I could reorder here but there is not much point since the 2 changes will
-> land in different subsystems but it does bring a valid question:
+> Signed-off-by: Matti Vaittinen <mazziesaccount@gmail.com>
 > 
-> Lee, Mark, are you OK with picking the patches indended for your
-> subsystem or would you prefer that I split the series, regulator on one
-> side, mfd on the other (with a dep on the regulator one, of course) ?
+> ---
+> Revision history:
+>  v1 => v2:
+>   - styling
+>   - update copyright years
+> ---
+>  drivers/mfd/Kconfig              |  15 +-
+>  drivers/mfd/rohm-bd71828.c       | 147 ++++++++++++++-
+>  include/linux/mfd/rohm-bd73800.h | 307 +++++++++++++++++++++++++++++++
+>  include/linux/mfd/rohm-generic.h |   1 +
+>  4 files changed, 462 insertions(+), 8 deletions(-)
+>  create mode 100644 include/linux/mfd/rohm-bd73800.h
 
-Does this break existing devices or simply delay support for this new one?
+Looks okay to me now.
+
+Doesn't apply though, so will need a rebase.
+
+I'd plan to apply this after the next merge-window.
 
 -- 
 Lee Jones
