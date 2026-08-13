@@ -1,118 +1,83 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 680FC478E23
-	for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 13:06:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04AFE3955D8;
+	Thu, 13 Aug 2026 13:31:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786626402; cv=none; b=bApiT52ES9q7ukkcYzF/pG9C6PdgE0pk+Dy6BJ/TY76MN1OmBGS3qUhi1nVZJ2lsrq4qMEn0RkBQYeHhUaf9hdmePYKvrQz52Iqwdcd7Ku93E4T6YFuzxDHS5ZZwmmrBorZNPuY7V8f6YhgoXxJvwdribIAsihjKfo+wsVY7h84=
+	t=1786627889; cv=none; b=KRCX8jzg0elqLxMQoMbo2F1o63S8F7moiGRJvlr1WMLAUAwkTOPSJx3KNuzJd94k/98lcRLyWUTRprRSnlSSdpfn01uo5+ovsg4gueGSb9ixdib0+qAAzVK6jKXa85aKQT4JQXkdC/5vN2RPxNnUEuQieAzah6+qndQTSgD4oR0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786626402; c=relaxed/simple;
-	bh=RAl0NVbjiiOs/VyeCemRv0TwYR+tlbA9P9uIHNsY6dg=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=McqTJthdH0y7ZGxhybSNyI0nc1H7q35j57B7o5qSfWtN9WUGV9Rq1mO04nhkEcN9rygGs8MXHHCICs4DgDDEu/heRNEXGnJScEMTjGzk8Qa0VFnxCMeWYO3nvPIkdPswHWYoc4S4j+z+Q4kkAq+1msqgKcaBc0NVVyBGKaEmGOg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UXZVJtg/; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786627889; c=relaxed/simple;
+	bh=D6AdaN8xQN2ViIQq4+zn2JHML8aRydv1+dPcaNntmao=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ofCWk2TvF6PGKt0fpXdj8azjsk9c6BPl9CIxnwdiIRyReJsC9IY9azCjvr6yAvawpXv3tWpT8HdekTyvE7sfz/VruyG1dflCBERtS0hXxXa5Q4/U+dRFNwwbbq6VLv4V2KEztKsRlkkYbHCawYM1eaqoCJQAe9v1ISsCo+xokdU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=MwVGOfQU; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UXZVJtg/"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 414A31F00A3A
-	for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 13:06:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786626401;
-	bh=yQWzU2idhtJFEfGoc824MA5NHjwICFqfWvq6sgVbqeQ=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=UXZVJtg/2Rx9ZJDFRk0rV1flaUPuLIwsFB15lmMdTdhvITsZVwhmJRtAnjke2dcPM
-	 EyRKKSNQ46Dic9or1D5n8yp3ruC6CRTB/JD/ODBDLgVK7E1aiovyORp16hMh26KRV0
-	 vSTog3v+nnYt16PpUwy45UrNG4GHKDhwZraJe/dAxnXBz/2P+sZXENL5cs7QkxnZkm
-	 L9pyu9aXIFzSOlfUJrzqIAtd4pkKh4llCsHlijG4RoUesbzNt1DjM706dqp4X6MGYv
-	 Aw2HVGG/ig688WXvWgyVx0jbQPESHqofU2l5ysylFdNzHOHIx9rVqGavvn1L0wQjwM
-	 npFITTaSA+U4A==
-Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-5aebd52488cso712439e87.2
-        for <mfd@lists.linux.dev>; Thu, 13 Aug 2026 06:06:41 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RqYdLCsMLY2vGRpKIp5q2GMisJhmbR6hd+eb1d4uLBya4mzcYGKQ/fe6MRlYS3ZO/jrZkg=@lists.linux.dev
-X-Gm-Message-State: AOJu0Yws+V2hOYRfEYTKzOUY0YhCu8+xp4hWdN2eMqNQ9lODw4KJusSC
-	XlSxO5XYf1FrAB2uBHjTpCJwwaR9JGUaKSrXejTYsPO3PgJYIOcstWzuilcvPx6wGdRZFpd2aKG
-	vrjnE8Eoy6u1okgGRuPwGJuKTG4CQ8ap7R3OHJCCE8Q==
-X-Received: by 2002:a05:651c:31cd:b0:39c:7859:a2d8 with SMTP id
- 38308e7fff4ca-3a11a819760mr7294241fa.27.1786626399530; Thu, 13 Aug 2026
- 06:06:39 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 13 Aug 2026 13:06:38 +0000
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 13 Aug 2026 13:06:38 +0000
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260813123841.GC1820248@google.com>
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="MwVGOfQU"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=M0tOB/uv0TR9Y5yCxLw6p1FK2MqTX1tNSOH3AAfyT5M=; b=MwVGOfQULmpDlfIuzW6I3IY3DA
+	xt4hzXJh/Swo/dPiq1nDShuTaUY7u+d+OqiXXWP1FFnW+QQ4eUWLPHcnOtF0WhRvMypi5zuMQI7hI
+	g9ndM/QinE5xYT2qRszFUKkFq+n6Qo4frAIpHHwtVxQxfeij4uY4pBbgSKqaqgPkFGQM=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1wuVWe-00HQyG-4i; Thu, 13 Aug 2026 15:31:16 +0200
+Date: Thu, 13 Aug 2026 15:31:16 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: James Hilliard <james.hilliard1@gmail.com>, Lee Jones <lee@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	"Jagielski, Jedrzej" <jedrzej.jagielski@intel.com>,
+	Andre Przywara <andre.przywara@arm.com>,
+	Chen-Yu Tsai <wens@kernel.org>,
+	Jernej =?utf-8?Q?=C5=A0krabec?= <jernej.skrabec@gmail.com>,
+	linux-sunxi@lists.linux.dev, mfd@lists.linux.dev,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v7 1/2] dt-bindings: mfd: x-powers: Add AC200
+Message-ID: <a11a5072-2477-41b6-8cc3-cb9aa75266cd@lunn.ch>
+References: <20260811-submit-ac200-mfd-v7-0-8b06f552a4d7@gmail.com>
+ <20260811-submit-ac200-mfd-v7-1-8b06f552a4d7@gmail.com>
+ <20260813-independent-ladybug-of-perfection-1afe7a@quoll>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com>
- <20260803-arm-psci-system_reset2-vendor-reboots-v24-4-889281373870@oss.qualcomm.com>
- <20260813123841.GC1820248@google.com>
-Date: Thu, 13 Aug 2026 13:06:38 +0000
-X-Gmail-Original-Message-ID: <CAMRc=MdA_zM_pHCmk7dd7kosqvNmFgA+iXvHS4qpNs9bdsUMCg@mail.gmail.com>
-X-Gm-Features: AUfX_mxLcl-KphrvU6gLOMupiRghMpmm1J92bVQek0OJwjAsSLdXf3P9i5s9MC4
-Message-ID: <CAMRc=MdA_zM_pHCmk7dd7kosqvNmFgA+iXvHS4qpNs9bdsUMCg@mail.gmail.com>
-Subject: Re: [PATCH v24 04/12] mfd: psci-mfd: Add PSCI MFD driver for
- cpuidle-psci-domain cell
-To: Lee Jones <lee@kernel.org>
-Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
-	Bjorn Andersson <andersson@kernel.org>, Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Souvik Chakravarty <Souvik.Chakravarty@arm.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Andy Yan <andy.yan@rock-chips.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
-	Mark Rutland <mark.rutland@arm.com>, Conor Dooley <conor+dt@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, John Stultz <john.stultz@linaro.org>, 
-	Moritz Fischer <moritz.fischer@ettus.com>, "Rafael J. Wysocki" <rafael@kernel.org>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, Christian Loehle <christian.loehle@arm.com>, 
-	Ulf Hansson <ulfh@kernel.org>, Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Sudeep Holla <sudeep.holla@kernel.org>, 
-	Florian Fainelli <florian.fainelli@broadcom.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
-	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, Andre Draszik <andre.draszik@linaro.org>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>, linux-pm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	mfd@lists.linux.dev, Srinivas Kandagatla <srini@kernel.org>, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
-	Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260813-independent-ladybug-of-perfection-1afe7a@quoll>
 
-On Thu, 13 Aug 2026 14:38:41 +0200, Lee Jones <lee@kernel.org> said:
-> On Mon, 03 Aug 2026, Shivendra Pratap wrote:
->
->> PSCI has multiple kernel consumers, such as cpuidle-psci-domain.
->> Currently, both the PSCI core driver and cpuidle-psci-domain bind
->> directly to the same PSCI node "arm,psci-1.0". Additional consumers, if
->> introduced, would also need to bind in the same way, leading to several
->> drivers attached to a single device node.
->>
->> Introduce a PSCI MFD driver that binds to "arm,psci-1.0" and registers
->> PSCI child cells. As the first user, register cpuidle-psci-domain as a
->> child cell.
->>
->> Update cpuidle-psci-domain to probe as an MFD child and use the parent
->> PSCI node for power-domain traversal.
->>
->> Suggested-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->> Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
->> ---
->>  MAINTAINERS                           |  1 +
->>  drivers/cpuidle/Kconfig.arm           |  1 +
->>  drivers/cpuidle/cpuidle-psci-domain.c |  9 +-------
->>  drivers/mfd/Kconfig                   | 12 ++++++++++
->>  drivers/mfd/Makefile                  |  2 ++
->>  drivers/mfd/psci-mfd.c                | 43 +++++++++++++++++++++++++++++++++++
->
-> We don't usually allow the use of the term MFD in devices.
->
-> What does this do?  Is it a mux?  psci-mux?
->
-> If not, think about what it is and call it that instead.
->
+On Thu, Aug 13, 2026 at 08:49:33AM +0200, Krzysztof Kozlowski wrote:
+> On Tue, Aug 11, 2026 at 05:11:30PM -0600, James Hilliard wrote:
+> > The AC200 is an I2C-controlled mixed-signal companion IC containing
+> > audio, video, RTC and Fast Ethernet PHY functions.
+> > 
+> > Describe the parent device and its shared input clock. The Ethernet PHY
+> > is represented by a PHY package on its MDIO bus, with a phandle back to
+> > this device for access to the package control registers, so it does not
+> > require an MFD child node. Function-specific supplies belong to their
+> > consumer bindings rather than the shared parent.
+> 
+> Other way to represent it is to put ethernet phy here - either as a
+> child or folded into MFD device node - and provide phandle to MDIO bus.
 
-My two cents: I'd call it drivers/mfd/arm-psci.c
+That would be odd. IEEE 802.3 specified that the PHY should be on an
+MDIO bus. And this PHY is on an MDIO bus, that is its primary
+management interface. I2C is just for ancillary configuration.
 
-Bartosz
+The only kind of sort of an exception we have in the current MDIO
+subsystem is for SFP modules. They only have an I2C bus, not
+MDIO. However, SFP vendors have various protocols for MDIO over
+I2C. So the SFP does appear in the I2C tree, but we then instantiate
+an MDIO bus as an I2C client, and then the PHY is then just a normal
+PHY on an emulated MDIO bus.
+
+	Andrew
