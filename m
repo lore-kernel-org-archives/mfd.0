@@ -1,127 +1,102 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B34C3769E0;
-	Fri, 14 Aug 2026 06:50:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B91240DB3E
+	for <mfd@lists.linux.dev>; Fri, 14 Aug 2026 07:25:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786690204; cv=none; b=mN7iT+aVIHkZvDZm0ClWtgkch9MlblOdNcc/iymLScaP8Wbs/Oy7LI+gErtF48MXnTOjrHhLZSZMcxJz7c+LaFlo/tJpv8w1N4HGPLypnFuquWvMMObukNx3ryRv0hyBfOWdnFSSsTTF1mY6LHOvs8oMnZPUJ9yw0JYc7MCYinE=
+	t=1786692355; cv=none; b=pCxc7wihrGCX3czGssiivA91d9yH1hc1JT7kCAoms360r3hL0jhK+UexK0BMwAtABkGAUjnpbpUqEOu0LgjSENIhBs8Q8ZMnFvP0SCfpHMBKLvX78giF4S0hwFI6qvz6LD067jvNwfzWTGYJLF6Q49popTxineSFE4PHMGHgjng=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786690204; c=relaxed/simple;
-	bh=T3uGTV5WI3V4/Y5gkA0VRrbhrbY2JhqbwDMPdi3EtJs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=X7ofcoLW8GODK1aOhOjzQUmfkcoABgJjnsQMQRdZ1ZqjLyjeMxa8ZTcKF3e91Nw7DhwWR6hBjGTN6wYm4by6F1dKDVZtzmHU8WeInUyOCOzys9QAXVHEX8AERpQeUATS8DF5hPtecz6HTBtJVzsAOvNeA3Jh1aYOQmx0RhR8TTk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Q5MwQSQE; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786692355; c=relaxed/simple;
+	bh=1GrAZMcm1LPXjU+/Qsg9/1FMvUYDa+8Y1O9nxVVer9g=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=S1PXSb2bEBR4VGu2mQv5N4xVBLhojv9IQsPUin80Kkkc/LWpFquPlpTHi0t7YkJYnzXuCjNm5cjkae4XvVfxo/PkcEMkEv8sH2GovTOSnPmxUsxbF1eS+Zozan/B2gWEAaQmdTN1ov2SpMlVWMWRRUZJzjM9/yfWXaBQW41fc4k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YBucVLV8; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Q5MwQSQE"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C4DB71F000E9;
-	Fri, 14 Aug 2026 06:49:57 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YBucVLV8"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 074051F00ACF
+	for <mfd@lists.linux.dev>; Fri, 14 Aug 2026 07:25:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786690202;
-	bh=GO7u1XyMdAqlxZ/o8hlB37t+KyCDfa8dCUlOtLxSEr0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Q5MwQSQEQuRuVChoIsnpQlDWBw9kMRCiIP+MC9Eux/NLBImTmJ0Rj+3HFiGJCoA1b
-	 5TXaVvQF6TdZ1d9s1t4mfZ0wTSCFDHJjTB33TxDZ0HOXGIPw4Wsep7FnAFZkpIXQas
-	 3RLhUICWJIyjw0f8Z4fNhXPglp7r1SjsMDKt7WQFilIA+so3ffDxEXLQ3hBjdKvy4W
-	 jTYLIAaY7RjlVQ+xdyVnDTgWfpUAUVtu8SSXa0T2CciGKEJIwp3XSmtOCU/L+hFbsB
-	 kFeXifyDIyrMSkvRTMP7VtWqh65uBUqVxU4RV+kpjfykTIa7O5C0FtuWEj8ASIl/2p
-	 /LeKf/vCRj+FA==
-Date: Fri, 14 Aug 2026 08:49:54 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Bhargav Joshi <j.bhargav.u@gmail.com>
-Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Ivan Khoronzhuk <ivan.khoronzhuk@ti.com>, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, goledhruva@gmail.com, m-chawdhry@ti.com, daniel.baluta@gmail.com, 
-	simona.toaca@nxp.com
-Subject: Re: [PATCH] dt-bindings: mfd: ti,keystone-devctrl: Convert to DT
- schema
-Message-ID: <20260814-brilliant-real-moose-e4158c@quoll>
-References: <20260813-ti-keystone-devctrl-v1-1-6f0aa87d9af8@gmail.com>
+	s=k20260515; t=1786692353;
+	bh=zjWapYZHdMgxtzEvLQ2Ffr/6FRwRhpZGjvbVIfTls9w=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=YBucVLV8nNOmJxz6sXoRqisDNRAiPDkVfy5N5miqpCJyoRpBJ63CVWJyu0iDKRo9C
+	 djj2iKNa4SHNljMpvMFxolyBrQYAfP1wJMJqFt6XRQeFifeRg7ohA/7Qy4sUWT1LvM
+	 9D0QGsRGs7trv0J1di8tO+c04y6+8VAYISDsqpR6GIo2S/UmM9y1GLbl3zPV3vasGC
+	 cTFj7p77B5D3phnxOXvsoZbDAzH4fffl2xDjlksD/GP+nLwpiRjvn1FRmgY+YRwmVR
+	 IxJ6FhteB3dhMMzvYdzPhbtdo/SXQ39k8P3A0KHzHHugLJi+KVXRui3yNn6u1SGwR1
+	 sODHmDJQNqqJA==
+Received: by mail-lf1-f42.google.com with SMTP id 2adb3069b0e04-5b015532f7bso621706e87.0
+        for <mfd@lists.linux.dev>; Fri, 14 Aug 2026 00:25:52 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+Rr6EhCedQu7RwvVWTinMX384SI4v+PwxI4X1GIKTcGVs9ireS/6Opmwz1Es9ikoA9e9Qso=@lists.linux.dev
+X-Gm-Message-State: AOJu0YxwAJF3oP0FBJPQKp0znwTnaINZ5nvUzOByk1BQx+P5dj+h0VFP
+	38J2Dp/VWXQ438HymY8nOlfgiDAGyhEBUy9P5ZKd4UNi6VEC9iHb28frvw90diEr6NjeC4jxAuf
+	HKUJPSbENgURLATgp49vdiZHHq4vme0c=
+X-Received: by 2002:a05:6512:8348:b0:5b0:2176:69f6 with SMTP id
+ 2adb3069b0e04-5b459184b7emr258626e87.37.1786692351807; Fri, 14 Aug 2026
+ 00:25:51 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260813-ti-keystone-devctrl-v1-1-6f0aa87d9af8@gmail.com>
+References: <cover.1785838584.git.mazziesaccount@gmail.com> <838486b443af9188410d8b802a818dc0af20ea9d.1785838585.git.mazziesaccount@gmail.com>
+In-Reply-To: <838486b443af9188410d8b802a818dc0af20ea9d.1785838585.git.mazziesaccount@gmail.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Fri, 14 Aug 2026 09:25:40 +0200
+X-Gmail-Original-Message-ID: <CAD++jL=mhchM2L84Dt3myY26cx=ZA4cUr-d6qjqNrw6V=7aPug@mail.gmail.com>
+X-Gm-Features: AcwNN1U780XpZGwhxDiNYxBOxKNu9WP_wvZzUmCrRyQzMpwkyf9iHdEMZlasOC4
+Message-ID: <CAD++jL=mhchM2L84Dt3myY26cx=ZA4cUr-d6qjqNrw6V=7aPug@mail.gmail.com>
+Subject: Re: [PATCH v2 01/10] dt-bindings: mfd: common ROHM PMIC properties
+To: Matti Vaittinen <mazziesaccount@gmail.com>
+Cc: Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>, 
+	Matti Vaittinen <matti.vaittinen@linux.dev>, Lee Jones <lee@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
+	Brian Masney <bmasney@redhat.com>, Bartosz Golaszewski <brgl@kernel.org>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, mfd@lists.linux.dev, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	linux-rtc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 13, 2026 at 10:03:53PM +0530, Bhargav Joshi wrote:
-> Convert the Texas Instruments Keystone Device State Control binding from
-> legacy text format to DT schema.
-> 
-> During the conversion, the following updates were made:
-> - Added "simple-mfd" to the allowed compatible strings.
-> - Enforced child bus properties (#address-cells, #size-cells, and ranges)
->   to be required only when the "simple-mfd" compatible is present.
-> - Added patternProperties definitions to validate standard child nodes
-> - Updated the examples to demonstrate simple-mfd parent usage and updated
->   node names to conform with standard Devicetree specifications.
-> 
-> Signed-off-by: Bhargav Joshi <j.bhargav.u@gmail.com>
-> ---
-> Note:
-> Running dt_binding_check on patch will yield a warning for
-> 'ti,keystone-reset' in the example block. The YAML conversion patch
-> for that child node is already in progress here:
-> https://lore.kernel.org/linux-devicetree/20260813-ti-keystone-reset-v1-1-189389503324@gmail.com/
-> ---
->  .../bindings/mfd/ti,keystone-devctrl.yaml          | 105 +++++++++++++++++++++
->  .../bindings/mfd/ti-keystone-devctrl.txt           |  19 ----
->  2 files changed, 105 insertions(+), 19 deletions(-)
-> 
-> diff --git a/Documentation/devicetree/bindings/mfd/ti,keystone-devctrl.yaml b/Documentation/devicetree/bindings/mfd/ti,keystone-devctrl.yaml
-> new file mode 100644
-> index 000000000000..33a72c290fb1
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/mfd/ti,keystone-devctrl.yaml
-> @@ -0,0 +1,105 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/mfd/ti,keystone-devctrl.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Texas Instruments Keystone Device State Control
-> +
-> +maintainers:
-> +  - Ivan Khoronzhuk <ivan.khoronzhuk@ti.com>
-> +
-> +description:
-> +  The Keystone II devices have a set of registers that are used to control the
-> +  status of its peripherals. This node is intended to allow access to this
-> +  functionality.
-> +
-> +properties:
-> +  compatible:
-> +    minItems: 2
+On Tue, Aug 4, 2026 at 12:20=E2=80=AFPM Matti Vaittinen
+<matti.vaittinen@linux.dev> wrote:
 
-Why? Where is it explained in commit msg?
+> From: Matti Vaittinen <mazziesaccount@gmail.com>
+>
+> ROHM PMICs keep having similar functionalities from one generation to the
+> next. Keeping the device-trees describing these functionalities similar
+> helps users because:
+>   1. They can re-use existing device-tree properties when switching from
+>      one project, using a ROHM PMIC, to next project using newer
+>      variant.
+>   2. The users can find and re-use examples from old projects - even if
+>      they never worked with ROHM PMICs before.
+> Similarly, introducing new and different properties for same
+> functionality previous variant had, will be adding confusion.
+>
+> Sometimes the existing properties aren't 100% what reviewers would
+> prefer. When issues are minor or just cosmetic, changing the existing
+> properties is not feasible. Reviewers can't be expected to know which
+> properties are new, and which are existing - and this can lead to
+> unnecessary review discussion wasting time and energy from everyone.
+>
+> Adding a common file for re-used ROHM PMIC properties should make it
+> clearly visible that a property is re-used, when a new PMIC binding
+> refers to this file instead of (re-)describing all the existing
+> bindings. This will also help keeping the common properties identical
+> across the variants.
+>
+> Add new file listing commonly used ROHM PMIC properties.
+>
+> Signed-off-by: Matti Vaittinen <mazziesaccount@gmail.com>
 
-> +    items:
-> +      - const: ti,keystone-devctrl
-> +      - const: syscon
-> +      - const: simple-mfd
-> +
-> +  reg:
-> +    maxItems: 1
-> +
-> +  "#address-cells":
-> +    const: 1
-> +
-> +  "#size-cells":
-> +    const: 1
-> +
-> +  ranges: true
-> +
-> +patternProperties:
-> +  "^keystone_dsp_gpio@[0-9a-f]+$":
+DT maintainers think it's fine in two patches so:
+Reviewed-by: Linus Walleij <linusw@kernel.org>
 
-
-Incorrect names added without explanation.
-
-Best regards,
-Krzysztof
-
+Yours,
+Linus Walleij
