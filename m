@@ -1,163 +1,195 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC8EA485CDE
-	for <mfd@lists.linux.dev>; Fri, 14 Aug 2026 15:41:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 111BB2868AB
+	for <mfd@lists.linux.dev>; Fri, 14 Aug 2026 17:46:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786722093; cv=none; b=KIo9a20VXTgvHj0TZTi+TC/pdd7wdayw6NxuRVIUfDo9hWzyCPDQeOlr1kwJWZNzNclBYgJ2GVA90Mw78yfnNZCvd1w/95bfPCv3ztIwgzuKh1gmOI8gQl3WGlIT4hxbC2I5T30Lggc4SHX0qHmmf2XQLn1pE6FSFN96mlrKmkc=
+	t=1786729589; cv=none; b=ON334NMp3coVfz5U8/mKhfSTHFljdxc8YoxPBCgP7JWotVvVtBR1VmPytdaOZXvd0N2Mkl2fJ2w9ZEi7HrGo8SV102fMHmCR1C//JqP8246Ms+0jFFNWd+cT2yPr5atQMaIMcEIAHjZ1H9N966mRxS7v4hKwJzEXhUOsFYiX9jQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786722093; c=relaxed/simple;
-	bh=bDlqYH/RCJANqVhVuY/4ALE0UPNskHsyZ4kBvcDs7BU=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=CdsSTVtdF0hkxc2CMUL+tVYgLtj6yEhueZND9hr/SbXJMrD7YlXgU32NIJKWJVuKXeU5gfAzjsrpdJ0Y3e3+813eXvmnDNPR+5y1FL5mE8w9GSLMhu7CEIXCkPcoJQY1e18ZCPkgP74m2oiw2SNhskLo5B8Bzb6MMy8qlS/qz7s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Qhf7RRKx; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786729589; c=relaxed/simple;
+	bh=pHQHDxbUgUXawpMBwNmBaKB96flhW2yqXf2kNVAMug8=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=cUkx4g8aY4yjGFExR8yRfq/BtVIrMKDlh2w9V9pKQD/nFaZebzEs57bRiBxm1CUYFQb+Cw90dM/rl4l/kAJedvWOqw8/atFOTfgv6xWfKmrJ97SyFzr2tCceoDZC4bPbKiyLXzY6LRSeWp1thRU4jMm5u5x/OZh9N/nE+E61zxc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HPTDLabN; arc=none smtp.client-ip=209.85.221.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Qhf7RRKx"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1302A1F000E9;
-	Fri, 14 Aug 2026 15:41:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786722091;
-	bh=oPb2SWDSEGJwxPlClhFqgbFPeFFKk36pddZnOH01Hzs=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Qhf7RRKxVl6jqQ53tbAxQHzJDgHzltjx0JOSLJVv2O2329otDgHyMwC6ySB20bm0k
-	 hKzrgH2G6pJ3viu8uFrHfeW8TL5oE4QwXZ1xRqAty0qwcDaFGvHeApl0VwxLCIELel
-	 sWH4ZVbJKqwIvrhksyz91YlOcZCZ93rKVTzzryfe5CwAaov9vjun883hAYc7Vg+rM7
-	 txF01PwOr3870DyToz0bj8xjG0NVRWazaDksjgCZzZiedjfQDjud+x1gZCS8DMfDT0
-	 TrrOcPZ6I5vOpJ/WNMVRE0uGtCbw70ndEPmA0hgq0d+6UQex1tAnBe9eoHEnOdM5HO
-	 bzYmivqbu8Llw==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3] mfd: da903x: cancel IRQ work during teardown
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Hongyan Xu" <getshell@seu.edu.cn>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260814153019.1114-1-getshell@seu.edu.cn>
-References: <20260814153019.1114-1-getshell@seu.edu.cn>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Fri, 14 Aug 2026 15:41:30 +0000
-Message-Id: <20260814154131.1302A1F000E9@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HPTDLabN"
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-47fd66a094eso522725f8f.3
+        for <mfd@lists.linux.dev>; Fri, 14 Aug 2026 10:46:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1786729586; x=1787334386; darn=lists.linux.dev;
+        h=content-type:mime-version:references:in-reply-to:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=i1r2xPJfkJhEKLocmkcDET9WPaG8FwcMD2/2OeeTJFY=;
+        b=HPTDLabNY6Hin8YVxk59mZRtxdE0sjBV38K/JNf9evLLvO/fossviqWpYK80UFsxfe
+         7O3PMQxi3u5cAyTWj6S42Rd16xLaFqnj823jE8U4TdpyU08akfUfMk5VxHI0EBc+Qown
+         4Hxwacf4E+5t+hPCvnAHf+Jh01Ghu/fdNC8JfKRN442Le9VMp+rC8WyraabgQsmh7yE1
+         uFHcp3RG0xIJmaX45R+KfTM9ML/YYsKLoUjY2szjXipjhwvFRtIeeS7FBWk55rTM/Oug
+         Y5SchDC18fAiSvBPF+opzJ/zaMDTFmOMCOU8NvZUIKrIqnQBgy/r7oLPn6EqI12JHfKy
+         y1Yw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786729586; x=1787334386;
+        h=content-type:mime-version:references:in-reply-to:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=i1r2xPJfkJhEKLocmkcDET9WPaG8FwcMD2/2OeeTJFY=;
+        b=iqUMFR+Puv2pz8rNM7dddqvtGzKlSxcbjCx6BEn57568CBjBnfQaQStG1X9rPLapr5
+         9ww0XSd7Pv1jBgHeitGhuWGt76nmvLf8HKWjyrsvfh32ew+/40UC3xKUDbu8+vRSphIF
+         x/Ir8hSTT+4PqRZsSewFLaZSSUsa+L6eVVAN5XK+SV5q3XFPqDCCcwP4IHFkW65whLIw
+         hAJP7v4ULu5/mYxh2dhNw5ACfVrvw+4MP+X128pc4AjMiIU/SQZq4CtP30/9QT2lm6E3
+         EFX6LQ+sBym3JCunu0lzjQ8nGkf/akCljT/9rEfcIStWSU6+PK3JJWR+Pi61c1Les4Iq
+         Whfw==
+X-Forwarded-Encrypted: i=1; AHgh+RpyMJ0NpHM3fe+ATpyHWb2cONNBXVa0kVP6IO4L5PiO6nrg9GMioISUw3jnSY5H4+RWiTQ=@lists.linux.dev
+X-Gm-Message-State: AOJu0YzFi4SPto3ztL378mmUjkhGD64JD+T8kSPdbUOn446gspnu3rmu
+	a8aYP4VNXi52osf1wXRUWwrgKemu29x2MxuC2szu6EW+tqXDEADXcm36
+X-Gm-Gg: AR+sD110FMDZAB7NUbRdsoJztIqvD0/GVf12bGKxA/zOCMrRD4pH54jXfb0fFWfnYhE
+	u7F1dbelGiM+DvG5fHRuIVMjpFvzlXPSrPkh69mEK/GDJnJEF2F+YziuBP8LVBOnD8KMsqeNAoS
+	u7x/Nyer+EVW+1MNRTzGcHUoOyDADfktZosPdZfDspFOLosOMDsa3et7TNK+wGIdGbujMSOqHol
+	c147YsHMn5mN3PrfOVrWizJy8pur92udP+5Mwtpc4tiW2d07oJ54BCTtkSvjm6c/i33EzqzNUVU
+	KDQz2rGR1uQ12OTV931Dg5N/lSCcMc7OtS04HXYVI/CiEDmQvMmXy7GS8NzK5Zx1zoHkvrokHoD
+	ZzxVhj5indJ6bSqoeJR/pVn4RaIEBa6Ge/eCrFnNteFk1kDkrC3byszcaB4z0bmw0c14YMPj1IE
+	NIoJeHSdE/2BETRT8bsQZiJN9R20+MNOWTABl6YYmXC5S+1ZLR762O3HcfT9B0+r2NcOrgAzEIs
+	RFi89u9s8o=
+X-Received: by 2002:a05:6000:2087:b0:47f:96e6:70a with SMTP id ffacd0b85a97d-481606bcec4mr8999132f8f.0.1786729586010;
+        Fri, 14 Aug 2026 10:46:26 -0700 (PDT)
+Received: from strix.localnet ([197.250.226.224])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4815f219d3dsm10124274f8f.14.2026.08.14.10.46.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 14 Aug 2026 10:46:24 -0700 (PDT)
+From: Stefan =?UTF-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>
+To: Lee Jones <lee@kernel.org>
+Cc: Michael Turquette <mturquette@baylibre.com>,
+ Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+ Philipp Zabel <p.zabel@pengutronix.de>, Brian Masney <bmasney@redhat.com>,
+ Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Russell King <linux@armlinux.org.uk>, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-phy@lists.infradead.org,
+ mfd@lists.linux.dev
+Subject:
+ Re: [PATCH v10 04/12] mfd: zx297520v3: Add a clock and reset MFD driver
+Date: Fri, 14 Aug 2026 20:46:11 +0300
+Message-ID: <gxF9XGmoS_qmWIfVagXDVQ@gmail.com>
+In-Reply-To: <20260812131503.GR1072730@google.com>
+References:
+ <20260810-zx29clk-v10-0-63846490712c@gmail.com>
+ <20260810-zx29clk-v10-4-63846490712c@gmail.com>
+ <20260812131503.GR1072730@google.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: multipart/signed; boundary="nextParthu9EI7NhQy6giXCUf6L9sg";
+ micalg="pgp-sha256"; protocol="application/pgp-signature"
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
-s) to consider:
+--nextParthu9EI7NhQy6giXCUf6L9sg
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"; protected-headers="v1"
+From: Stefan =?UTF-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>
+To: Lee Jones <lee@kernel.org>
+Date: Fri, 14 Aug 2026 20:46:11 +0300
+Message-ID: <gxF9XGmoS_qmWIfVagXDVQ@gmail.com>
+In-Reply-To: <20260812131503.GR1072730@google.com>
+MIME-Version: 1.0
 
-New issues:
-- [Low] The commit message description string is not capitalized.
+Hi,
 
-Pre-existing issues:
-- [High] Missing NULL check for `pdata` in probe path leads to kernel Oops.
-- [High] Data race on `chip->events_mask` leading to lost interrupt masks.
---
+Thanks for your feedback!
 
---- Patch [1]: [PATCH v3] mfd: da903x: cancel IRQ work during teardown ---
-commit d86788370ab7658c6e3b5684327f0a0b0169e280
-Author: Hongyan Xu <getshell@seu.edu.cn>
+Am Mittwoch, 12. August 2026, 16:15:03 Ostafrikanische Zeit schrieb Lee Jon=
+es:
+> > +config MFD_ZTE_ZX297520V3_CRM
+> > +	tristate "ZTE zx297520v3 Clock and Reset Manager"
+> > +	depends on ARCH_ZTE || COMPILE_TEST
+> > +	select MFD_CORE
+> > +	select REGMAP_MMIO
+>=20
+> Is this used?
 
-mfd: da903x: cancel IRQ work during teardown
+Thinking about it: Not in the way the build system cares, so I'll remove it.
 
-The IRQ handler disables the IRQ and schedules irq_work. Releasing the
-IRQ does not drain that work, which can continue to use the devm-allocated
-chip and notifier state. Manage both IRQ-work cancellation and subdevice
-removal with devres.
+The MFD child drivers call device_node_to_regmap(dev->parent->of_node), so =
+a=20
+MMIO regmap gets constructed for the MFD parent. But since the calls are in=
+=20
+the child drivers, REGMAP_MMIO shouldn't be needed to build and run this=20
+particular driver, and the child drivers enable REGMAP_MMIO on their own.
 
-> mfd: da903x: cancel IRQ work during teardown
 
-[Severity: Low]
-This isn't a bug, but there's a minor formatting issue in the commit messag=
-e.
-The MFD subsystem guidelines require capitalizing the description after the
-subsystem prefix.
+> > + * Copyright (C) 2026 Stefan D=C3=B6singer
+>=20
+> Personal copyright, are you sure?
+>=20
+> Is that okay with ZTE?
 
-Could the commit message be updated to use 'Cancel' instead of 'cancel' to
-match these conventions?
+I'm not affiliated with them. This work is my personal hobby project to hav=
+e=20
+some fun and learn things.
 
-> diff --git a/drivers/mfd/da903x.c b/drivers/mfd/da903x.c
-> index e86b39de3303a..e4ad48e1f139b 100644
-> --- a/drivers/mfd/da903x.c
-> +++ b/drivers/mfd/da903x.c
-[ ... ]
-> @@ -520,6 +534,11 @@ static int da903x_probe(struct i2c_client *client)
->  	chip->ops->mask_events(chip, chip->events_mask);
->  	chip->ops->read_events(chip, &tmp);
+I'm not copying code from their kernel dumps either, the quality of the=20
+drivers there is pretty atrocious.
 
-[Severity: High]
-This is a pre-existing issue, but I noticed a potential data race involving
-updates to chip->events_mask.
+If ZTE wants to have copyright of the upstream drivers I won't stop them fr=
+om=20
+doing the work themselves :-)
 
-The exported functions da903x_register_notifier() and
-da903x_unregister_notifier() call da9030_unmask_events() and
-da9030_mask_events().
+> > +enum zx297520v3_parent_type {
+> > +      ZX297520V3_INVALID =3D 0,
+> > +      ZX297520V3_TOPCRM,
+> > +      ZX297520V3_MATRIXCRM,
+> > +      ZX297520V3_LSPCRM,
+>=20
+> None of these are readable.  I suggest you improve the nomenclature.
 
-These functions perform non-atomic read-modify-write operations without
-holding chip->lock:
+I saw that most existing drivers use "undecorated" device names, i.e.=20
+"TOPCRM", "MATRIXCRM", "LSPCRM" in this driver's case. I am concerned that=
+=20
+"TOPCRM" is generic enough that a (future) global header might define a mac=
+ro=20
+or enum value with that name, so I opted to semi-namespace them with the So=
+C=20
+name.
 
-drivers/mfd/da903x.c:da9030_unmask_events() {
-    ...
-    chip->events_mask &=3D ~events;
-    ...
-}
+=46ollowing the example of max*.c, what do you think of TYPE_TOPCRM,=20
+TYPE_MATRIXCRM etc?
 
-If multiple child drivers (like backlight or regulator) are probed or remov=
-ed
-concurrently, could these bitwise updates race and overwrite each other's
-changes?
+The rest of your comments are clear to me, I'll implement them in the next=
+=20
+submission.
 
-Would this lead to lost updates to the interrupt mask, causing some child
-devices to permanently miss interrupts?
+Cheers,
+Stefan
 
-> +	ret =3D devm_add_action_or_reset(&client->dev,
-> +				       da903x_remove_subdevs_action, chip);
-> +	if (ret)
-> +		return ret;
-[ ... ]
-> @@ -529,14 +548,12 @@ static int da903x_probe(struct i2c_client *client)
->  		return ret;
->  	}
-> =20
-> -	return da903x_add_subdevs(chip, pdata);
-> -}
-> -
-> -static void da903x_remove(struct i2c_client *client)
-> -{
-> -	struct da903x_chip *chip =3D i2c_get_clientdata(client);
-> +	ret =3D devm_add_action_or_reset(&client->dev, da903x_cancel_irq_work,
-> +				       chip);
-> +	if (ret)
-> +		return ret;
-> =20
-> -	da903x_remove_subdevs(chip);
-> +	return da903x_add_subdevs(chip, pdata);
->  }
+--nextParthu9EI7NhQy6giXCUf6L9sg
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part.
+Content-Transfer-Encoding: 7Bit
 
-[Severity: High]
-This is a pre-existing issue, but I noticed a potential null pointer
-dereference when passing pdata here.
+-----BEGIN PGP SIGNATURE-----
 
-If the I2C device is dynamically instantiated via the sysfs new_device
-interface or if platform code fails to attach platform data,
-dev_get_platdata(&client->dev) returns NULL.
+iQJPBAABCAA5FiEEQxb0tqoFWyeVMl1sPRO8yFRPGiIFAmp/VGMbFIAAAAAABAAO
+bWFudTIsMi41KzEuMTIsMiwyAAoJED0TvMhUTxoiPokP/iptbRf3/QgYkQF1HNMx
+5pOuSmrcFnzvT8WG+mpgA+2uorsOmUfPhxRF+BA9CgOgazibEyWWETdrkvPHy+/f
+See03pTw5mH4LSt90AOqFDCck47OmmAfzY3AP48o61IR47EiB5eFxf0r1S35tYuE
+ms1C/2a98Rw60mw+eFUz3iBHWOI5fX2+DXZjOaEf/Q7d5KsZyiHOg5QUop8bsmCh
+YRKrMdRwLIbT8nZQyEwLiMJlFGvzdDrZc2Vo39rsPFrRjP+FZGvUc7YIymjWXYi0
+m/GfFV6RQSmxxph+zLCnYfoG2MeHDc+ihgBRACTeYXy3B6FbOUNVfsCB3ENvw/4K
+P+OhBdxhxSIswe5KMDR1zUAeCQfNCsnrzXlLyhMxuFm1VwgzA/DJOucR96rj69hl
+Cne8/8AqirlMgKLNek1Fsze0DkKuxOLMsrDVHYTvlMMt/giA0EtsoQT9iNp7z0Q0
+/dqmTve95/f18m4sorji135TkTiEpmYTdtn1FZVY/2/aUD4z907S7mAomm7kYviq
+jIesXSWzh9SFfRugYKDWsk9AqiP7Av77bafFuLzpgQ5MBnsDPpYTdCZR0ngLaP3F
+phrCAX4IayRFni2+kBYkRMgaGosJolehc+mC04px0CwobqERnJGQGlVbRvuPYVJv
+jL7hUaUKDj90M7cPPNEtjQf9
+=kRv0
+-----END PGP SIGNATURE-----
 
-This null pointer is then passed unconditionally to da903x_add_subdevs(),
-which dereferences it immediately:
+--nextParthu9EI7NhQy6giXCUf6L9sg--
 
-drivers/mfd/da903x.c:da903x_add_subdevs() {
-    ...
-    for (i =3D 0; i < pdata->num_subdevs; i++) {
-        subdev =3D &pdata->subdevs[i];
-    ...
-}
 
-Could this lead to a kernel oops triggered by privileged userspace interact=
-ing
-with sysfs?
 
-Should we add a null check for pdata before creating subdevices?
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260814153019.1114=
--1-getshell@seu.edu.cn?part=3D1
