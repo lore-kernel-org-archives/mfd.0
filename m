@@ -1,85 +1,123 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69E47410D19
-	for <mfd@lists.linux.dev>; Fri, 14 Aug 2026 07:26:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CB0B3D093A
+	for <mfd@lists.linux.dev>; Fri, 14 Aug 2026 13:42:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786692384; cv=none; b=qh73sepU8SRLk+ZlkqSHN748DAhV/1PuOUNcLhUqkCQXyJRm+PZNnena65HLYKpShgLIcty3ahNWB9sbq+f5H79UL9dR1Mt3j1jHDJJkHm7ptoSRRRciE0Py12ADbQ+iOi6RTn1vkugCQ5DanAq+awuTsZSFLANDdD0H2DNyavA=
+	t=1786714927; cv=none; b=o6mjyWzn5pU/MXDQwFbsmjZlNRZsb/kf6fy2CA5rVhbJQrIN0CDmYfdV7sHAPYm0RVoIKu/f76o4D8Iu3ypSZbTkeefieqa3AGOq94oiNBUUQA29TcsFk4is0JlpOsSuFmN6cpw5TxEfKexGkGaP0zp32ZgpMdxf59w0Zy2xurA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786692384; c=relaxed/simple;
-	bh=XUQT37v5nndWRb0WlzDNA/x4ySUuWCY6uRQ4HzaiAOE=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Gw8DWlCkJEkNFdL74kNcw8DWwrB9fgaOLxpDDUQbDfrGAIcQqaI+Y8l4fjI8V9qqQs9SjJqwcWBJ7qeLxa9wfITM5ZqTpSlFnwieO5hja7zU8pCabR1rxmXHvTutGO6AM2I+r74cZTjErNONMF/7itPz0kAlTlnVzbeZyhJHMGM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OiACllOF; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786714927; c=relaxed/simple;
+	bh=Ighuvc8zNEvdMdTBj2MgkY+Ru3uT8BFEEQGLZyHwDyo=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=lVipiFjQv0M9K0MVZLSlh8xh6S8jcF6eMAsFLVgGct96DjqJ+qYO97KMm41gF3syEb3tEOrfgl5LWICgpzHl1qN+g7xMM5o1twbpTTM/FlkqyD/LCqjBNa5oDEtka3jlf8h0Kiu29cnRAOQaywvwzZvD+q2PoA1XsME2BTjrOtQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=bSsFjFRY; arc=none smtp.client-ip=209.85.128.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OiACllOF"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7300B1F00ACA
-	for <mfd@lists.linux.dev>; Fri, 14 Aug 2026 07:26:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786692376;
-	bh=XUQT37v5nndWRb0WlzDNA/x4ySUuWCY6uRQ4HzaiAOE=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=OiACllOFO8QIAhf7lvLqsh35TAFyWvCe2xq2GXnZDpaFdAjecqBiw4YZwYFskiXjX
-	 /d8gLs5hZuR3Kq357/4oocJQCGu/IQ/pYyMzccY2/vfFsVN/3m+96EusRCT+RpsYmr
-	 sGL2dn4xdPbeEC+GD4CWZ6I5SLa6AKx6yL5c6SldwZ7KNFuhtbrgQvhzsoYc130sRI
-	 T6+Ud+WZbVXy6WGydsDXWMbs4HbdeEiSU5dVgPq+7+D1If1tyLR797LO+bqv18Ez6g
-	 hrfRD26wtoqXLuim5hUZPNJPO9cl9GfO4O31Ny5vQXr0dwoCBARnKmjZtNL062XH5i
-	 n8TAKAFJ6fsuw==
-Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-5aeb24c0807so489216e87.0
-        for <mfd@lists.linux.dev>; Fri, 14 Aug 2026 00:26:16 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RqC6nAb/Q2BZnDYcabwCTTLe01xld32N8sMoObFKFNe/objMAGohJxfMdYynLaG6gXSh4E=@lists.linux.dev
-X-Gm-Message-State: AOJu0YzUDBdlxyQL9qaaLQ9fDPVwkTy0Uo6XzvWSJIh4vwBpHdkp2P5W
-	+CuMkO8h19v5GOM5nsdW3Eou3ZtPncrOSmmDuUQ4Nrsznat88lNY0PyXD6UFRiiN8heIMeEICG7
-	Wi6r99BDqrMnsF+gEuLtcb99ONhodVuk=
-X-Received: by 2002:ac2:51d1:0:b0:5b2:a328:cdd5 with SMTP id
- 2adb3069b0e04-5b45919ee31mr544880e87.49.1786692375262; Fri, 14 Aug 2026
- 00:26:15 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="bSsFjFRY"
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-493b966dd74so7092735e9.3
+        for <mfd@lists.linux.dev>; Fri, 14 Aug 2026 06:42:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1786714923; x=1787319723; darn=lists.linux.dev;
+        h=content-type:mime-version:message-id:date:user-agent:references
+         :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=xhKuc7koDaTER66hHC21DLwLn/weA2lcrprNlj91Qto=;
+        b=bSsFjFRY4J3lwo2Jr7zxuMZ2PLVJeiz0OWuV+G9FOeXIoikJyrZFWpLlDHSn9J79Df
+         9GwVe/0by6gsT8vquFjDyeMMH9bUQMvj6jMfbeRaqO3P4S6fIC2bqo9EwwkdoEdVRaNe
+         5FBEGeeKFQOHYbJrjF5TlzNNk+fakSsjCWKV0fx76PHrveOJo52mw7quD/hPcFa5hgwv
+         no19RFGRPjxoK1dTAKpUTGrlle7X/hKM4n9wB/b93vJNXtDXDmi+xoR0ISS5MlCLXQKL
+         xDWp72w2C3GF9sLyTRhp/IAZIiRUlnXRY3QwbEYrgy5ssM3800lS3cG8ZyHnmmf0lt/J
+         tgYw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786714923; x=1787319723;
+        h=content-type:mime-version:message-id:date:user-agent:references
+         :in-reply-to:subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=xhKuc7koDaTER66hHC21DLwLn/weA2lcrprNlj91Qto=;
+        b=SYhQarszbHu81e3cx/hm1PG2ENBTvSBkX6FhIAAaNvSYpoy/f8+teFQbJiOlHlZHmY
+         Pa1R2D4mFSOGIdGBd1EJPlNtQXz+D3FupzTYoFBtanzryMaypFcaSzuwGt1XGRrU+cLv
+         2zulpNBixoldUtIn3hsIql2v+85/e7OLW0YNxZ7/K8oNelx45kSunGH4Uik8SYYdBbyw
+         Fxxu92YN8Dqh+YgoiVVUS1EKD14Sm8iU65uBdDFc0OtepCDJoOVWH4262yxS+pOimH60
+         VXFsR/Ca3dFr9uNens8nvkdoYcyhXkEHt7spdlUMzpdyVVUF8v1x4d4EK5czsN92CFGT
+         uorA==
+X-Forwarded-Encrypted: i=1; AHgh+RokUGOz5Sj4W02flBZAGbTvhAT462Cv3oWFt3Aj1KzGhItedtnE3QcXMnyePzZYyn3NdJA=@lists.linux.dev
+X-Gm-Message-State: AOJu0Yz5vyY7mNPjKrf+twGpEtwdwe8YjwXOO39VnyqAtXgFhmt7ffdC
+	hdwb0oZYqOW5xLHvb8jw2Sq4x14JH7z/qo10IC53lQIW6y8c7281E1OqUNyBfOllyS4=
+X-Gm-Gg: AR+sD10laEhqmtWt0kVU0IWnZfwgIveYm335rcIVqJTilwFoU+k8zvjrHqPET7PRFrX
+	SV/aIP3wbiSul1S7k8qFmxpRFS7tmg/40xxFO7c6l+Mb2FtIezV04pprxPhFI6On6ndJH3tS0DB
+	yYgp+u1z/8foaIF2fC9wP7/TxTuwgyZC3Uj5KOadGsoKZz2bojVuigaMrUFOXxjjyEcJz5aYvRZ
+	tp8AtjQccKwRzvbixu+ZM4eFhvCgtQV2OMIe8/YlzSOsOlh6DQw5OTLekBzrG2HVDlj/SY6SotZ
+	NWMpSBIzsGS29iTMQaibvqwIKISyWHjC/qQdJOUcDxWQFhNxiscu0zE1PM/TxEEAZWZMJdrdQv8
+	1zIkUVuSV7O2oQMHPcJZr5GFv5hg0AofxOd21JRI7HbGBvYYot28Yp1LgzwkxD2+imamgJGXduP
+	jUmz0Vz5JzvsZwsZrKZWyWe5OeAm/5k280OHnsWuUB25cLa7dK10cAxzbU7n1HpDzYheK0VA==
+X-Received: by 2002:a05:600c:810a:b0:495:737a:7afe with SMTP id 5b1f17b1804b1-49987985df1mr76542075e9.15.1786714923535;
+        Fri, 14 Aug 2026 06:42:03 -0700 (PDT)
+Received: from localhost ([2a01:e0a:3c5:5fb1:9886:6a22:ee2a:d5e1])
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-499899c138dsm32119835e9.8.2026.08.14.06.42.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 14 Aug 2026 06:42:02 -0700 (PDT)
+From: Jerome Brunet <jbrunet@baylibre.com>
+To: Lee Jones <lee@kernel.org>
+Cc: sashiko-bot@kernel.org, Mark Brown <broonie@kernel.org>,
+ sashiko-reviews@lists.linux.dev, robh@kernel.org, mfd@lists.linux.dev,
+ conor+dt@kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH RESEND v6 4/5] mfd: axp20x: Add support for AXP318W PMIC
+In-Reply-To: <20260813095600.GA1072730@google.com> (Lee Jones's message of
+	"Thu, 13 Aug 2026 10:56:00 +0100")
+References: <20260812-axp318-regulator-v6-0-d6b84b55c000@baylibre.com>
+	<20260812-axp318-regulator-v6-4-d6b84b55c000@baylibre.com>
+	<20260812214019.CDF921F000E9@smtp.kernel.org>
+	<1jldaafmpd.fsf@starbuckisacylon.baylibre.com>
+	<20260813095600.GA1072730@google.com>
+User-Agent: mu4e 1.12.9; emacs 30.1
+Date: Fri, 14 Aug 2026 15:41:59 +0200
+Message-ID: <1j33wg6cpk.fsf@starbuckisacylon.baylibre.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <cover.1785838584.git.mazziesaccount@gmail.com> <d419dcf8776f7ea88e4a66b9a0f0087f11e6622c.1785838585.git.mazziesaccount@gmail.com>
-In-Reply-To: <d419dcf8776f7ea88e4a66b9a0f0087f11e6622c.1785838585.git.mazziesaccount@gmail.com>
-From: Linus Walleij <linusw@kernel.org>
-Date: Fri, 14 Aug 2026 09:26:02 +0200
-X-Gmail-Original-Message-ID: <CAD++jLnzLiyBsDi2zeR13_95hpip7i3fOSwMbMXD7KYeJj5X=w@mail.gmail.com>
-X-Gm-Features: AcwNN1XqzgmqVA0UuXzJafrByAbtpxUiXy_C_XbrwJ4yAGRJ9EaFb9OIaRI3WXM
-Message-ID: <CAD++jLnzLiyBsDi2zeR13_95hpip7i3fOSwMbMXD7KYeJj5X=w@mail.gmail.com>
-Subject: Re: [PATCH v2 02/10] dt-bindings: rohm,bd*: Ref common ROHM bindings
-To: Matti Vaittinen <mazziesaccount@gmail.com>
-Cc: Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>, 
-	Matti Vaittinen <matti.vaittinen@linux.dev>, Lee Jones <lee@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Brian Masney <bmasney@redhat.com>, Bartosz Golaszewski <brgl@kernel.org>, 
-	Alexandre Belloni <alexandre.belloni@bootlin.com>, mfd@lists.linux.dev, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, 
-	linux-rtc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 
-On Tue, Aug 4, 2026 at 12:21=E2=80=AFPM Matti Vaittinen
-<matti.vaittinen@linux.dev> wrote:
+On dim. 13 janv. 2008 at 11:56, Lee Jones <lee@kernel.org> wrote:
 
-> From: Matti Vaittinen <mazziesaccount@gmail.com>
+> On Thu, 13 Aug 2026, Jerome Brunet wrote:
 >
-> The commonly used ROHM PMIC bindings were added into
-> rohm,pmic-pins.yaml. Keeping commonly used properties in one file can
-> ease both the maintaining the bindings and the reviewing process.
+>> On sam. 12 janv. 2008 at 23:40, sashiko-bot@kernel.org wrote:
+>> 
+>> > Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
+>> > - [High] The corresponding regulator driver lacks support for
+>> > `AXP318_ID`, causing the `axp20x-regulator` child device probe to fail.
+>> 
+>> Funny sashiko did not pick up on this when v6 was first sent. This is an
+>> ordering problem. The regulator part should be applied before the mfd
+>> one.
+>> 
+>> I could reorder here but there is not much point since the 2 changes will
+>> land in different subsystems but it does bring a valid question:
+>> 
+>> Lee, Mark, are you OK with picking the patches indended for your
+>> subsystem or would you prefer that I split the series, regulator on one
+>> side, mfd on the other (with a dep on the regulator one, of course) ?
 >
-> Reference the common bindings from rohm,pmic-pins.yaml, instead of
-> declaring them from the scratch for every PMIC using them. Keep the PMIC
-> variant specific information (like supported pin functions) in PMIC the
-> specific files, so unsupported values won't be allowed.
->
-> Signed-off-by: Matti Vaittinen <mazziesaccount@gmail.com>
+> Does this break existing devices or simply delay support for this new one?
 
-Reviewed-by: Linus Walleij <linusw@kernel.org>
+Existing device are fine and untouched.
 
-Yours,
-Linus Walleij
+I've just checked and if someone tried to run without PATCH 5 (regulators),
+the main axp driver loads fine but the regulator part gives this
+
+axp20x-regulator axp20x-regulator.0: Unsupported AXP variant: 8
+
+Seems sane enough if the regulator part is not present (and no board
+using it has landed yet)
+
+To completly avoid this, the ID would need to be in its own patch,
+then the regulators, finally the MFD. It seems like an unecessary churn
+but I can do that if you prefer.
+
+-- 
+Jerome
