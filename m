@@ -1,121 +1,69 @@
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D9F739CD05
-	for <mfd@lists.linux.dev>; Fri, 14 Aug 2026 21:33:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.218.53
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786743236; cv=pass; b=bH0aDGc+6xotLlbIxd0MKKxl+dJq6QfkjIZtT7Kh3kFSbw0EFK1eksXyuUlUKUlpvuMtAAuJRyB/wBBSMM7pLdW9XCBLivLUkkG1Sv8P+f69o5/339c1yOVRatKE9r7kWtK2SvPj2Nh/MhUCQZTYiHqDPnkh7350kOmiSadqm6Q=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786743236; c=relaxed/simple;
-	bh=bF//maFhRDVTJClT6VlIKy7W5yILeHbfc8S+gFxhrTk=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=rKD1QHvKI2stzGKl/bfNn0aHa6okq7bRHW5nDtHSmWQjMWx5/btiQql8TvIwY7MElcLZ8732R9VwV3UMAJeax5tOb/6A60jnwD5qcHgu5cF8H+fearyNMB/aSPA/iT29aszyaoPBZOZ6d77yOM2eNTvcLFzND2RUnez416UdaQA=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=fm07JK97; arc=pass smtp.client-ip=209.85.218.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDD631B87C0;
+	Sat, 15 Aug 2026 01:50:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786758612; cv=none; b=Kx/kP3ARghG4hddWXk0oiWEj7gzcXw6T4mu3NPzXeeTWhJ9Qa+eanddjbEY2jpNdz3ihVmeTJ67j183CA8utrZXXUR3EhffZ26qGeKqsqi8e3lwWqYY3fHWzkw+RyJBm0G2Usbdsto3N60kW3+cep8qhiTb4ubtuJdCIWkXtEq0=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786758612; c=relaxed/simple;
+	bh=OC+2rLmgdtdiM6IH50iRNE3vyDDiuAg7ntOEwOiFsHo=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=PNPloTE98zLSmN+vu0Xf1Ph2kwpT5iQGdXpOYtkUY+aq7m5GtZpOuZudEsZV1rxPUAlZ+aGKAcASjHapBxoSOeauvQbndlbh1UdfcQGh9Y6Am5iw06qB0kCpJcpBJF2/Apn5QHYrfCIRTXgRu81BRDnSmO9KgDcnQ34nOaL9dH0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=W+WLRV4F; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="fm07JK97"
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-c15e62c695cso13373966b.1
-        for <mfd@lists.linux.dev>; Fri, 14 Aug 2026 14:33:54 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786743233; cv=none;
-        d=google.com; s=arc-20260327;
-        b=eneBA6U00dGmm7mpFopRxvnQkOKgzhHGUIGQboV5ynLnkTrBTLfmnPZPmXpBrLMim/
-         APQyt6SPsnvYOCrUnmpwsoiLpZSDYQtG8jEJ6wjvOwlJQh125eE0jqk96FDQFtRPHlA4
-         +XvHrThZKrKjgos8mBGSHRUe1XRrDmsUJ9oxMxyGibz3nzGTsfJTocrQPumTQckCPkAA
-         rYsQAioy+MzoLzMdE/0/IerGaUviSlVh2+523a9ZcAHF3OHwQwQ2tYVa5rX2RVPR0gnw
-         yY1euE6smmQCr6aoBAdgCK/s698ptKpQOn2Q84fdtW0JTWU4M+dmyCi/yZNFaO7Cjl+p
-         EaVw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=bF//maFhRDVTJClT6VlIKy7W5yILeHbfc8S+gFxhrTk=;
-        fh=9h2jdGU/f6RBSfwYxaCfTlLe0hrcXl+qqAnioKXjqsQ=;
-        b=UTuzz2yJwleMsE772lkKMhjBkqNoBUcwyhDNvF2il4E6VhYkQ7KbemX0xTVXR5yROL
-         F/Z2Xpbf4gIynFpr37J5+L6XJRi3V3b3xI6TzJ81rBkEKIQ2pi8mzVda7dM2vBJTn2fs
-         qeef9lTJw21xHAty8t4erpBkJ0lqF4xg+/kJjX/ilT+yGY+rnAsmQlJyxDo82QIZW9ty
-         PLyc7rqe0d3skspaLYbRQ0xqmmWpDy2VeTsjf+Wby/qay33k1MPIfAjL1WuNlPry1gs1
-         xkS9GqQJeBVJueL25QE7yj9b7K5jgfXg1B6Bybks9jGKlrE4I4vezPp1sU68Es88Kmm3
-         0mTQ==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786743233; x=1787348033; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=bF//maFhRDVTJClT6VlIKy7W5yILeHbfc8S+gFxhrTk=;
-        b=fm07JK97OK7jlIzf40ewuzaJ5o2/xJHn7SjeqM4ByLWw4iEhmO239/Hz+d5Gp9cGK2
-         cP0OKSjPyR3sadfu3kOD9rlYJLi6FJj1k1pORU/5K/82sNbY3Pj3Np1Xd7U2hwk2X2Zf
-         ZeGf4V6XO5VUafHGD/Uw/Gwz9T2VxSXADdOWmh0IEZMcfiSJ41BpBLVlTXB3eDpAf9/K
-         5gkhAC3pUuB3ZifJmvfRGopficiyAQ0I47Un4dtujILkTQUALXbT+nPOzWrUrBnMmPEM
-         hO7mdyoRjzQhMxYSQh7UhU5wExGbK//EuUv2AcKQclfWZvQM9j8NUPmr9FJEWjHo+Y7g
-         9xGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786743233; x=1787348033;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=bF//maFhRDVTJClT6VlIKy7W5yILeHbfc8S+gFxhrTk=;
-        b=KQAq/UlA1LmbzRbHNfq08NqAC9+3G8Ui7QN6KMvMjEtLQNTnuidP2r5VgTjbcJQECR
-         Yoct7a6qBW+mu43XQoIl6ps4ZH+M2fEdTDZE+saAnNWUPyJxrLJEtu98eJHtAOvyj+JM
-         dPotGsjn8UprqkxhraEH6ABV9EdlFBMWiYSj7WzzIrpt4XuuoLsMPjqal7ghOhlC6IPg
-         yVq+JEfGpnpwyUdDS9qqbL/q4Ixvl6wOaeIJlgh1KP8UzVf6F4IX3c10c8e4s9IR0aR5
-         Xj+or2cUE4Gx4rIYBapVMCttPSrp5vWyDdBBJTZPu8IYXqlFsaToBlD9ueeMeCAPoQ6w
-         X7Nw==
-X-Forwarded-Encrypted: i=1; AHgh+Ro3QnMhW5nmWFpKghShZ3nsD90zDYH/BxU6enBBeAMkFHI1ntbxusHsQyOJ2hJC0Js+f2A=@lists.linux.dev
-X-Gm-Message-State: AOJu0YzTh0T7alsx1O4mE9+6a9/YCKZ02HcdAd21hSUVjcGn/E4+LSdu
-	Yu0dLaYrB72BM2tWSlimJxfAi/Aw7m3Cziv0IfonqQq/27/aaig1PDBXrat9C39+DjQ91UGVYzu
-	c88Rw4Xc3pL4v3WKRK4Ma5EQ+ZZP4t5M=
-X-Gm-Gg: AR+sD11Wo/GpzHhmxwtyqTKgBtw0XAmf2pohmBFZGx7lUlNk83wR80T1MBnJ5DejMN4
-	aMf7bDP7LydmkrELv7CI9I6f2MYgJO0b+XiUUkmALmwB9IM5zOIVjTG6McKIhFJ+lwVG7gjMS/+
-	MPjZW1yH5eeDMLucygzDp9ti5khcUrROA7CGyVo9+ej5XbmesTn8lHejUuK0sH1wYGRSTI5a5fu
-	cc9CAxvrh8EEbqlS5hMj9R9QEUmQ7vWLYhACqiEqi47cRfHofpwcc/XmJMmS4SlB3OaTGNuommL
-	PE96ukyXF8wi6NZdR/Y8sZ0Vv05E7eFQM9tnW2DJkLsxZJiN9xwCvIaqa3EcmWfFeJnA3m7DWgq
-	Ie1I=
-X-Received: by 2002:a17:907:3e9b:b0:c12:732a:fe52 with SMTP id
- a640c23a62f3a-c212a26d6a6mr212990566b.4.1786743233242; Fri, 14 Aug 2026
- 14:33:53 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="W+WLRV4F"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 978641F000E9;
+	Sat, 15 Aug 2026 01:49:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786758610;
+	bh=ypH4yKyAk/pJH123N3O/sqv1uP1nyrfrsBdWm0d36VY=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=W+WLRV4F20VcooCsrC8/7Cjf03Th7CgOf9PWVDkOwkqzxFXAy/lQRYYV4ep1Tm+pI
+	 iyEubOSK3u519Ncr9ERMyBnnUYKeN1ll98sfOCYhRhaxoi8HbqmW6/6rOeuuuvcIa9
+	 WbEmQ9DCl4kogtdd6QtzBhzOqqKMi4VpQecMoP9aNHb6Xo0lSYDkHpqSCxJbVVxd96
+	 RVDgSEBOoZAX5RKAAs1PSen88QHww8B49HeKo1EtwaQL18lWpwnAcxg2LA1rinLtX5
+	 eRM6Ugk6pDyKMt/DOfhTm4le/yV6dtlCKFlXM8f0Hdt5PuJBJI3hgwBHfsaYqujSkG
+	 myj9GG5mDPmKw==
+Date: Sat, 15 Aug 2026 02:49:49 +0100
+From: Jonathan Cameron <jic23@kernel.org>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Lee Jones <lee@kernel.org>, Daniel Thompson <danielt@kernel.org>, Jingoo
+ Han <jingoohan1@gmail.com>, Pavel Machek <pavel@kernel.org>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, David Lechner <dlechner@baylibre.com>, Nuno
+ =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>,
+ Helge Deller <deller@gmx.de>, Johan Hovold <johan@kernel.org>,
+ dri-devel@lists.freedesktop.org, linux-leds@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-iio@vger.kernel.org, mfd@lists.linux.dev, linux-fbdev@vger.kernel.org
+Subject: Re: [PATCH v6 02/14] mfd: lm3533: Remove driver specific regmap
+ wrappers
+Message-ID: <20260815024949.110c2ef9@jic23-huawei>
+In-Reply-To: <20260731113632.158440-3-clamor95@gmail.com>
+References: <20260731113632.158440-1-clamor95@gmail.com>
+	<20260731113632.158440-3-clamor95@gmail.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260813-ti-keystone-devctrl-v1-1-6f0aa87d9af8@gmail.com>
- <20260813164117.DE8F01F00A3A@smtp.kernel.org> <CAOWyW_6Wayw0gKMyhpy2wE6oSbikM3fKCopqxHodddM9zt1-FQ@mail.gmail.com>
- <20260814-wild-dog-of-dew-3ccfe8@quoll>
-In-Reply-To: <20260814-wild-dog-of-dew-3ccfe8@quoll>
-From: Bhargav Joshi <j.bhargav.u@gmail.com>
-Date: Sat, 15 Aug 2026 03:03:41 +0530
-X-Gm-Features: AcwNN1Uy44KKTceDwDiBJV_p4AQtngzimLEUMzkno-EHQhuKCEBgyeAvZt7maU0
-Message-ID: <CAOWyW_7NL1GeWCTu5LED4avsRLMOHMs1kVxGN0r+MxMhHSj_AA@mail.gmail.com>
-Subject: Re: [PATCH] dt-bindings: mfd: ti,keystone-devctrl: Convert to DT schema
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: sashiko-reviews@lists.linux.dev, mfd@lists.linux.dev, robh@kernel.org, 
-	lee@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Fri, Aug 14, 2026 at 12:18=E2=80=AFPM Krzysztof Kozlowski <krzk@kernel.o=
-rg> wrote:
->
-> On Thu, Aug 13, 2026 at 10:24:12PM +0530, Bhargav Joshi wrote:
-> > On Thu, Aug 13, 2026 at 10:11=E2=80=AFPM <sashiko-bot@kernel.org> wrote=
-:
-> > >
-> > > Thank you for your contribution! Sashiko AI review found 2 potential =
-issue(s) to consider:
-> > > - [Medium] The schema enforces non-compliant, legacy device tree node=
- names (containing underscores) for child nodes via `patternProperties`, bl=
-ocking the use of standard generic names and contradicting the commit messa=
-ge.
-> > Yes nodes with underscores are kept not to break older dts/dtsi files
-> > which uses underscores
->
-> No, you made them ABI now without explanation why this is needed.
-I will fix dtsi instead of keeping incorrect child names in binding in V2
->
-Best Regards,
-Bhargav
+On Fri, 31 Jul 2026 14:36:20 +0300
+Svyatoslav Ryhel <clamor95@gmail.com> wrote:
+
+> Remove driver-specific regmap wrappers in favor of using regmap helpers
+> directly.
+> 
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> Reviewed-by: Andy Shevchenko <andriy.shevchenko@intel.com>
+> ---
+>  drivers/iio/light/lm3533-als.c      | 79 +++++++++++++----------------
+
+
+Acked-by: Jonathan Cameron <jonathan.cameron@oss.qualcomm.com>
