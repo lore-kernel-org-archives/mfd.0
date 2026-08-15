@@ -1,62 +1,62 @@
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A41D629AB02
-	for <mfd@lists.linux.dev>; Sat, 15 Aug 2026 08:32:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80F2937F337
+	for <mfd@lists.linux.dev>; Sat, 15 Aug 2026 08:34:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786782724; cv=none; b=cK1voeDVHU1M5zc1WdZAxDSeZVjkChNytGihYN7/wxFMsBbR49kurE9UutkBaF25vFK6LzgTFj2/3NV6JHHQBCATjqsy8zhg/aJIib9Jd0l92Nhm0gAKTmCHFzWiSifYa4oJRRhwX9Wx25e+0OOWF5thLyOMhVsLxtM2dJfYIB0=
+	t=1786782899; cv=none; b=apcsZW5hdTuxpZRqH06lGSfimrW3RixdoH9dONmQMUWwV/7TMd/GZUPVmqP6AZ7DaY3Aceqpntn+Q5u2vmzJfbVQvCVzXLcZZdrG9mbJoDFb1HqZickf6SlBoRNOzkwEX6dXU/IyHGtcVs0yj4gOCS9kSFJjXYaryWIzJ9YRDDE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786782724; c=relaxed/simple;
-	bh=ig0Czw6EoJk1SeXGouZnD93LG49YWVcmjNh23KhFKG8=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=bRdbGRI2mLMydFhh97CSWqQXFM2TxI3CgoRDwCcNSBFFeb+Kt6/1ImomIjwu+1E9oFZ+TzD+s2WjJNbBoaLQDdskr2qMjWN1K+MBZ9Iv/wfCRxWrwXOGWTse9R+QNCnsacAridhajbcd31T+tXyQRpBO3Xg0wX82gvML8akoEOI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=DCPmIauS; arc=none smtp.client-ip=209.85.128.43
+	s=arc-20240116; t=1786782899; c=relaxed/simple;
+	bh=m6g2XUJeHF1PIlSodfI1hjH2eJL9yELjoJ2ytDpo5Fw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=mYqJBqyq0bBd72SP2KY2DtmK/wvZVbdBbb24VWmrAghrZitv1RMvzctiXUAGNrtniPdY7AofQAsDP9nLnKK3B7NZc+cRTufotS8uFk/BO0njp/qA3L8qOWqJ+hl/9qQV6ldHLJxbhXr/ZQI4rhA+yqv6PFPAGHHXb34siqZ8myo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=E8UtdMLA; arc=none smtp.client-ip=209.85.221.45
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="DCPmIauS"
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4954a9e8490so17472455e9.1
-        for <mfd@lists.linux.dev>; Sat, 15 Aug 2026 01:32:02 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="E8UtdMLA"
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-472326ca506so1212326f8f.2
+        for <mfd@lists.linux.dev>; Sat, 15 Aug 2026 01:34:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786782721; x=1787387521; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1786782896; x=1787387696; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=JmXRmBb374yuyQNwVRXydj5Wcgj3TvsFot0DLbSW/P4=;
-        b=DCPmIauSTSKpyS4a8hsjQduFXmZ75gJlhWdQnUNb99RYBrAJc3ZKxAEaGHlqMTirJC
-         32q4NGwwB4qxpQyyPB0kReG3oPDoOrShgkI/O+Je8rf3liSbqkRjOgJKG4LLLb9TKKUu
-         8j9p51OOdkzJBxl6XqdqgqSx611t1qAEytFseFnnmwIy+0Cmb9fUQ+8rAkaHomx1g4QQ
-         IE41/pRDxGkYn6oOikb1V7pUUhPgvP/Xz2hk0QeRx5ElnuOK5J9E9eLR5bFkTpoF+yFj
-         XqPJ4WDm7GPZIJIjAXse7AWjpSfTcTVo7UawwVfoj0CkujivjTbPdC8apZ7NWRLLyl3q
-         p0Bw==
+        bh=pzGpX7JiK+m5ce9c9KT1xWR6DUie8OR3CMeaDAX9MSE=;
+        b=E8UtdMLAj/xWQL7Cyi7NOng/vLgrZCOLXW2OvCwRluqM3x6dbuhIUJde0DxjEV8B9d
+         VgvEL9fnhWAu0FmVWoJIL7gi93/cw2leaABgTNFcHg0Jf1OOOp9JxDJvr0vpAovMJfxr
+         Ma2j0Xrs3+SqOtwRnM5mzfzXOq+q/2D2IkU3jAi6Z9SEFEwbEmy+kvhSvCavukA/ApD1
+         uU7rnhpEHcriRHh6SvT7RlQa5zfN/XKR5HuLkcUvpWMXHgtGF43mJGHdW/YAGwj5Y+7P
+         T2f3JVFcc8lOC2k6SgWfVSVtVluTJCpkJPUrzxaAbChUU6eEtvIuttNV7VfmZkxwzQu7
+         ksvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786782721; x=1787387521;
+        d=1e100.net; s=20251104; t=1786782896; x=1787387696;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=JmXRmBb374yuyQNwVRXydj5Wcgj3TvsFot0DLbSW/P4=;
-        b=dCivK2Arz9WyY4QfUKVHQLD3Qpcw5RXtsW/oYI6Te2Wk35herEDN7VoycdoCNSA//X
-         oVRTX+PFcekxY8R01nMryZNbUnoCCknd4tpmQT7/6mAlTaFLJ90cvob7ENIoMZUJRcxf
-         4HMe+qBP13ppL0JCg9Htx/mG8kEESdJwLipOohAQyOz2ERmV5K1zi5NW4TSu0lfVlfwp
-         7cjZzkwjeYQ5en+S6x3kCO5MADbQqgRhaUUX0t1aOgUJX2HHOHoYFGYzgY5G2XST0Yli
-         MYVOmDtrr25qti7LzeFcjOXF3YPI0URvHSR/ICPLjK5GHdAtYohKxOSLE53wG9rFDLbg
-         G9Ng==
-X-Forwarded-Encrypted: i=1; AHgh+RqH6cbXzCDKhLg4vLUo4cyfgQl5+cB+M3oUaHLIXyCHEM1qgnlI9DlBSDqqe/P1GeDpuMM=@lists.linux.dev
-X-Gm-Message-State: AOJu0YzA555+RAnuT1OBoqbKENNtdWZuVox0Zp65e91DsifZY2++DqZv
-	+QKW75BzWs4tmmeNUoNJ2hKZnAAEnJ1zizH+POw9NBowtnfeYa71exiW
-X-Gm-Gg: AR+sD10N/86Q7sQy1ReImNbAWHzA5nwhfXJvzlQmLRYIsIhNy6QZ9Eb2Y2fzqfWNNbK
-	Yy+As6R+dvQJ+fpiouZaazkyNOPxOTxdmdEQK37aFSSE/1TTRy8eccgTbvecjyUGfSqkMkkFfN8
-	HP99vwQit/qhd3ur1a0Bk57KtdXNHb3yfedgZDeAIgWpP1QxfPFYt8DW2kG7bI2uRWQZnq7cIIP
-	dEooYCOMymOrQze+9SPhOvxUdTj8xYPGRSW0X4QR2chOGzRcv1iuZhdZs7ngRWA35WZ15IFCXAy
-	ELyHNSURqR7qxj6yYIxKjFLDjw5A3/CVtagsRKpGT7Lxz+TE1QZW50eQTPZibvhTyDbqlf4f6tB
-	TZoilNbH9v5JGELk6HJ7YoqIeUZkkWJfZwucglZj9sjciiHkI4wxKrmwbE9evP/FpxdnVGcJ4AP
-	VS3dEMtZUBbR/HblnVUiHpss4mI5CDVlY8tZog8Y1SQPsfGAK/5lM3AoZUpTS7qS9fSpQ9NrZT2
-	sZ3Aqkq8PW0zdZtlPx0GNN8bCXGQ5c=
-X-Received: by 2002:a05:600c:5643:b0:499:77ba:4b6 with SMTP id 5b1f17b1804b1-49987ad988emr113620185e9.9.1786782720567;
-        Sat, 15 Aug 2026 01:32:00 -0700 (PDT)
+        bh=pzGpX7JiK+m5ce9c9KT1xWR6DUie8OR3CMeaDAX9MSE=;
+        b=T+FAE0A5zqUHBKxa0sDajxOUuNsKplACcG2tUYxd1aryPdVJBaOWsnz0Q5pB+91c89
+         jOZY+cCVAHKoQ5U3NDw5yDXevMXDVwgNlEkWoYWq3gGUfvX7h8wGDcaZKAZZcicsCraj
+         ERwzvUo4eKC4Dt/CpZU+ngUX9WgpI4dH98xYFjdQbaTqxsry4Y8fjPBhKomuGceJ7PGZ
+         vP3akVQWF2dmbTYSIeJQ0sCX2J2W76/TPrXRVrVymCWJovQ2TnqM1OAOJqtQNxxFUR1s
+         o/JubPvsD08/aBHA/7ndTDvD2dXjbDRBkso5wb36OV9fTugFv4SVe+tBogrCiK9stCih
+         D+gw==
+X-Forwarded-Encrypted: i=1; AHgh+RpqjzDU3cbI0HrIAJM5o+4KtzxOo1L/JeKG0UnhpDPMZ/LBiC3Hl91UwKmm2ExRy7BZj2A=@lists.linux.dev
+X-Gm-Message-State: AOJu0YxWk1OtzpeBVUU7R11f92esrV3fkzQDIDHC392Qpdy7pfh4CWU9
+	aXhpih19yZ6ASb4d4mXcwyWIx9rIl0PrxhPSvYSdWsT17Qet4kINrYlm
+X-Gm-Gg: AR+sD126Rc67U4JwIXiParXH8z1RjngbQPLfTcMkrC/NRoC7Z5CMN9XaHNror7VjaeK
+	SOEj6hflI4RYjfLxKGsSz392Gf370bdA1bYYdYyvdZq+nwXRPe+0xmdY9B9E9imVX34GPWrztEY
+	DCnUr46fFj/eUqHEZ98PJS+Spjrbw2teGL/jutjNZufS8CJwymZAplMbhdVW1uKY+uz4hCP4bUt
+	V+jTjXCKKVOho8rzS+Rn1n/U2iZbLh3tSTM/q00Sgs+z/eEhD3l4Lvlk/IzZ0869aSsBHUag2Oe
+	6YX8hxdHP7qFxZP2i/t8zjoed2htEjeROUqyy0YuN1r9M3KNtCUPPxdAR43SF8gBK9IHtoofVsU
+	wPY0cPiewmDEmkP2CXiFpLN+ZebNjRZS4IIuIQ+3clqP0YCy5AqQl8RWnA7t0Uf/JyS9xuyPZcA
+	Gd63nHOT/0n4MDZ2NnaHBCbJXdu+Wz/0G8iaw/6taUEE4EUsns8WoNv6tyAVC34rjbME/sHPZm2
+	s7DmxL4CoNsQj2tRfjWZZsTYVcPHKk=
+X-Received: by 2002:a5d:5303:0:b0:47f:8802:c182 with SMTP id ffacd0b85a97d-481607a3329mr13321970f8f.29.1786782895668;
+        Sat, 15 Aug 2026 01:34:55 -0700 (PDT)
 Received: from localhost.localdomain ([82.137.32.242])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-49988b1d33asm126774485e9.10.2026.08.15.01.31.59
+        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-4815f2005b0sm16295848f8f.8.2026.08.15.01.34.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 15 Aug 2026 01:32:00 -0700 (PDT)
+        Sat, 15 Aug 2026 01:34:55 -0700 (PDT)
 From: Eduard Bostina <egbostina@gmail.com>
 To: Conor Dooley <conor+dt@kernel.org>,
 	devicetree@vger.kernel.org,
@@ -70,9 +70,9 @@ Cc: daniel.baluta@nxp.com,
 	simona.toaca@nxp.com,
 	goledhruva@gmail.com,
 	m-chawdhry@ti.com
-Subject: [PATCH] dt-bindings: mfd: Convert TPS61050 to DT schema
-Date: Sat, 15 Aug 2026 08:31:45 +0000
-Message-ID: <20260815083145.2145984-1-egbostina@gmail.com>
+Subject: [PATCH] dt-bindings: mfd: Convert TI TWL6040 to DT schema
+Date: Sat, 15 Aug 2026 08:34:51 +0000
+Message-ID: <20260815083451.2147129-1-egbostina@gmail.com>
 X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
@@ -82,183 +82,244 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Convert the Texas Instruments TPS61050/TPS61052 boost converters bindings
-to DT schema.
+Convert the Texas Instruments TWL6040 audio codecs family bindings to DT
+schema.
+
+During the conversion, the following updates were made:
+- Changed 'twl6040,audpwron-gpio' to 'ti,audpwron-gpio', which was
+  misnamed in the old txt binding.
+- Made 'gpio-controller', '#gpio-cells', and 'ti,audpwron-gpio' optional
+  because modern platforms do not require them.
 
 Signed-off-by: Eduard Bostina <egbostina@gmail.com>
 ---
- .../devicetree/bindings/mfd/ti,tps61050.yaml  | 92 +++++++++++++++++++
- .../devicetree/bindings/mfd/tps6105x.txt      | 62 -------------
- 2 files changed, 92 insertions(+), 62 deletions(-)
- create mode 100644 Documentation/devicetree/bindings/mfd/ti,tps61050.yaml
- delete mode 100644 Documentation/devicetree/bindings/mfd/tps6105x.txt
+ .../devicetree/bindings/mfd/ti,twl6040.yaml   | 142 ++++++++++++++++++
+ .../devicetree/bindings/mfd/twl6040.txt       |  67 ---------
+ 2 files changed, 142 insertions(+), 67 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/mfd/ti,twl6040.yaml
+ delete mode 100644 Documentation/devicetree/bindings/mfd/twl6040.txt
 
-diff --git a/Documentation/devicetree/bindings/mfd/ti,tps61050.yaml b/Documentation/devicetree/bindings/mfd/ti,tps61050.yaml
+diff --git a/Documentation/devicetree/bindings/mfd/ti,twl6040.yaml b/Documentation/devicetree/bindings/mfd/ti,twl6040.yaml
 new file mode 100644
-index 000000000000..974ef78d6e26
+index 000000000000..a93835aa9153
 --- /dev/null
-+++ b/Documentation/devicetree/bindings/mfd/ti,tps61050.yaml
-@@ -0,0 +1,92 @@
++++ b/Documentation/devicetree/bindings/mfd/ti,twl6040.yaml
+@@ -0,0 +1,142 @@
 +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
 +%YAML 1.2
 +---
-+$id: http://devicetree.org/schemas/mfd/ti,tps61050.yaml#
++$id: http://devicetree.org/schemas/mfd/ti,twl6040.yaml#
 +$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
-+title: Texas Instruments TPS61050/TPS61052 Boost Converter
++title: Texas Instruments TWL6040 family audio codec
 +
 +maintainers:
 +  - Eduard Bostina <egbostina@gmail.com>
 +
 +description:
-+  The TP61050/TPS61052 is a high-power "white LED driver". The device
-+  provides LED, GPIO and regulator functionalities.
++  The TWL6040s are 8-channel high quality low-power audio codecs providing
++  audio, vibra and GPO functionality on OMAP4+ platforms. They are connected
++  to the host processor via i2c for commands, McPDM for audio data and
++  commands.
 +
 +properties:
 +  compatible:
 +    enum:
-+      - ti,tps61050
-+      - ti,tps61052
++      - ti,twl6040
++      - ti,twl6041
 +
 +  reg:
++    const: 0x4b
++
++  interrupts:
 +    maxItems: 1
 +
-+  regulator:
-+    type: object
-+    $ref: /schemas/regulator/regulator.yaml#
-+    description: Puts the chip in regulator mode.
-+    unevaluatedProperties: false
++  gpio-controller: true
 +
-+  led:
++  "#gpio-cells":
++    const: 1
++
++  "#clock-cells":
++    const: 0
++
++  ti,audpwron-gpio:
++    maxItems: 1
++    description: Power on GPIO line for the twl6040
++
++  vio-supply:
++    description: Regulator for the twl6040 VIO supply
++
++  v2v1-supply:
++    description: Regulator for the twl6040 V2V1 supply
++
++  enable-active-high:
++    type: boolean
++    description: To power on the twl6040 during boot.
++
++  clocks:
++    minItems: 1
++    maxItems: 2
++
++  clock-names:
++    minItems: 1
++    maxItems: 2
++    items:
++      enum:
++        - clk32k
++        - mclk
++
++  vddvibl-supply:
++    description: Regulator for the left vibra motor
++
++  vddvibr-supply:
++    description: Regulator for the right vibra motor
++
++  vibra:
 +    type: object
-+    $ref: /schemas/leds/common.yaml#
-+    description: Puts the chip in LED mode.
-+    unevaluatedProperties: false
++    additionalProperties: false
++    properties:
++      ti,vibldrv-res:
++        $ref: /schemas/types.yaml#/definitions/uint32
++        description: Resistance parameter for left driver
++      ti,vibrdrv-res:
++        $ref: /schemas/types.yaml#/definitions/uint32
++        description: Resistance parameter for right driver
++      ti,viblmotor-res:
++        $ref: /schemas/types.yaml#/definitions/uint32
++        description: Resistance parameter for left motor
++      ti,vibrmotor-res:
++        $ref: /schemas/types.yaml#/definitions/uint32
++        description: Resistance parameter for right motor
++      vddvibl_uV:
++        $ref: /schemas/types.yaml#/definitions/uint32
++        description: vddvibl default voltage if it needs to be changed
++      vddvibr_uV:
++        $ref: /schemas/types.yaml#/definitions/uint32
++        description: vddvibr default voltage if it needs to be changed
++
++    required:
++      - ti,vibldrv-res
++      - ti,vibrdrv-res
++      - ti,viblmotor-res
++      - ti,vibrmotor-res
 +
 +required:
 +  - compatible
 +  - reg
-+
-+allOf:
-+  - not:
-+      required:
-+        - regulator
-+        - led
++  - interrupts
++  - "#clock-cells"
++  - vio-supply
++  - v2v1-supply
 +
 +additionalProperties: false
 +
 +examples:
 +  - |
++    #include <dt-bindings/interrupt-controller/irq.h>
++
 +    i2c {
 +        #address-cells = <1>;
 +        #size-cells = <0>;
 +
-+        tps61052@33 {
-+            compatible = "ti,tps61052";
-+            reg = <0x33>;
-+        };
-+    };
++        audio-codec@4b {
++            compatible = "ti,twl6040";
++            reg = <0x4b>;
++            interrupts = <0 119 IRQ_TYPE_LEVEL_HIGH>;
++            interrupt-parent = <&gic>;
++            gpio-controller;
++            #gpio-cells = <1>;
++            #clock-cells = <0>;
++            ti,audpwron-gpio = <&gpio4 31 0>;
 +
-+  - |
-+    i2c {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
++            vio-supply = <&v1v8>;
++            v2v1-supply = <&v2v1>;
++            enable-active-high;
 +
-+        tps61052@33 {
-+            compatible = "ti,tps61052";
-+            reg = <0x33>;
++            /* regulators for vibra motor */
++            vddvibl-supply = <&vbat>;
++            vddvibr-supply = <&vbat>;
 +
-+            regulator {
-+                regulator-min-microvolt = <5000000>;
-+                regulator-max-microvolt = <5000000>;
-+                regulator-always-on;
++            vibra {
++                ti,vibldrv-res = <8>;
++                ti,vibrdrv-res = <3>;
++                ti,viblmotor-res = <10>;
++                ti,vibrmotor-res = <10>;
 +            };
 +        };
 +    };
-+
-+  - |
-+    #include <dt-bindings/leds/common.h>
-+    i2c {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        tps61052@33 {
-+            compatible = "ti,tps61052";
-+            reg = <0x33>;
-+
-+            led {
-+                color = <LED_COLOR_ID_WHITE>;
-+            };
-+        };
-+    };
-diff --git a/Documentation/devicetree/bindings/mfd/tps6105x.txt b/Documentation/devicetree/bindings/mfd/tps6105x.txt
+diff --git a/Documentation/devicetree/bindings/mfd/twl6040.txt b/Documentation/devicetree/bindings/mfd/twl6040.txt
 deleted file mode 100644
-index dc448a9d5b4d..000000000000
---- a/Documentation/devicetree/bindings/mfd/tps6105x.txt
+index dfd8683ede0c..000000000000
+--- a/Documentation/devicetree/bindings/mfd/twl6040.txt
 +++ /dev/null
-@@ -1,62 +0,0 @@
--* Device tree bindings for TI TPS61050/61052 Boost Converters
+@@ -1,67 +0,0 @@
+-Texas Instruments TWL6040 family
 -
--The TP61050/TPS61052 is a high-power "white LED driver". The
--device provides LED, GPIO and regulator functionalities.
+-The TWL6040s are 8-channel high quality low-power audio codecs providing audio,
+-vibra and GPO functionality on OMAP4+ platforms.
+-They are connected to the host processor via i2c for commands, McPDM for audio
+-data and commands.
 -
 -Required properties:
--- compatible:		"ti,tps61050" or "ti,tps61052"
--- reg:			Specifies the I2C slave address
+-- compatible : "ti,twl6040" for twl6040, "ti,twl6041" for twl6041
+-- reg: must be 0x4b for i2c address
+-- interrupts: twl6040 has one interrupt line connecteded to the main SoC
+-- gpio-controller:
+-- #gpio-cells = <1>: twl6040 provides GPO lines.
+-- #clock-cells = <0>; twl6040 is a provider of pdmclk which is used by McPDM
+-- twl6040,audpwron-gpio: Power on GPIO line for the twl6040
 -
--Optional sub-node:
+-- vio-supply: Regulator for the twl6040 VIO supply
+-- v2v1-supply: Regulator for the twl6040 V2V1 supply
 -
--This subnode selects the chip's operational mode.
--There can be at most one single available subnode.
+-Optional properties, nodes:
+-- enable-active-high: To power on the twl6040 during boot.
+-- clocks: phandle to the clk32k and/or to mclk clock provider
+-- clock-names: Must be "clk32k" for the 32K clock and "mclk" for the MCLK.
 -
--- regulator: presence of this sub-node puts the chip in regulator mode.
--	see ../regulator/regulator.yaml
+-Vibra functionality
+-Required properties:
+-- vddvibl-supply: Regulator for the left vibra motor
+-- vddvibr-supply: Regulator for the right vibra motor
+-- vibra { }: Configuration section for vibra parameters containing the following
+-	     properties:
+-- ti,vibldrv-res: Resistance parameter for left driver
+-- ti,vibrdrv-res: Resistance parameter for right driver
+-- ti,viblmotor-res: Resistance parameter for left motor
+-- ti,viblmotor-res: Resistance parameter for right motor
 -
--- led: presence of this sub-node puts the chip in led mode.
--	Optional properties:
--	- function : see ../leds/common.txt
--	- color    : see ../leds/common.txt
--	- label    : see ../leds/common.txt
--			(deprecated)
+-Optional properties within vibra { } section:
+-- vddvibl_uV: If the vddvibl default voltage need to be changed
+-- vddvibr_uV: If the vddvibr default voltage need to be changed
 -
--Example (GPIO operation only):
+-Example:
+-&i2c1 {
+-	twl6040: twl@4b {
+-		compatible = "ti,twl6040";
 -
--i2c0 {
--	tps61052@33 {
--		compatible = "ti,tps61052";
--		reg = <0x33>;
--	};
--};
+-		interrupts = <0 119 4>;
+-		interrupt-parent = <&gic>;
+-		twl6040,audpwron-gpio = <&gpio4 31 0>;
 -
--Example (GPIO + regulator operation):
+-		vio-supply = <&v1v8>;
+-		v2v1-supply = <&v2v1>;
+-		enable-active-high;
 -
--i2c0 {
--	tps61052@33 {
--		compatible = "ti,tps61052";
--		reg = <0x33>;
+-		/* regulators for vibra motor */
+-		vddvibl-supply = <&vbat>;
+-		vddvibr-supply = <&vbat>;
 -
--		regulator {
--			regulator-min-microvolt = <5000000>;
--			regulator-max-microvolt = <5000000>;
--			regulator-always-on;
+-		vibra {
+-			/* Vibra driver, motor resistance parameters */
+-			ti,vibldrv-res = <8>;
+-			ti,vibrdrv-res = <3>;
+-			ti,viblmotor-res = <10>;
+-			ti,vibrmotor-res = <10>;
 -		};
 -	};
 -};
 -
--Example (GPIO + led operation):
--
--#include <dt-bindings/leds/common.h>
--
--i2c0 {
--	tps61052@33 {
--		compatible = "ti,tps61052";
--		reg = <0x33>;
--
--		led {
--			color = <LED_COLOR_ID_WHITE>;
--		};
--	};
--};
+-/include/ "twl6040.dtsi"
 -- 
 2.43.0
 
