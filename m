@@ -1,66 +1,67 @@
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4279737E5E6
-	for <mfd@lists.linux.dev>; Sat, 15 Aug 2026 18:53:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5F0D425CEE
+	for <mfd@lists.linux.dev>; Sat, 15 Aug 2026 18:53:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.176
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786820006; cv=none; b=XPnX1gocV4EZ4iKbyJKpwDSOMbapUEh/qZO50gRG6CImf8MmhmFpTpP/B1iSrRZ0A0HPG+jKps1MhCKEohWY91lZ90W3NPtB7iXJ4DMt2XdSVS0UVTbiWnD2u3SSH3iE+Vml1+HmJHur2A+hFZS7fIq1NoGZe+ad15bZt1mW/mM=
+	t=1786820022; cv=none; b=qHP4a3akx1L85us9rFfEqyYRV/2g3AU7lotCxhqFCEdIqv0Cx0oeBF8VZFG+tdLqBDurnBBHkmBIsKqNS2dmv0SviyubGWCuYFKiiNQKgTSHm5HEKgL08eo9sxMq2kZos6FcHK+o8GW5SgbnK1jEtUqPqFkyqyr3cgqpdrbh2lg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786820006; c=relaxed/simple;
-	bh=0c/4L0Z1jAiqA034Ce5L4JKC6XAPputkHsDsi5EHESo=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=p+iwS3gxpiyFQjj6JrfB2PjvSfBAlXx2GSBmm5nctN+thF34hjNkAyfAzXafegFS+V3vDvhkymTLlyAwnJL7aEwzXfui8yW0CXFOh14UPBszJAKJ4b/gHgsvWht64OuMFHZuJo4m3pYuo1WX+R/HZTm1Ika0EPRflI9gGakY6PM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EYSMOXBk; arc=none smtp.client-ip=209.85.214.173
+	s=arc-20240116; t=1786820022; c=relaxed/simple;
+	bh=WFjPHdh767TYAqxnbwvqJA2jUU4RF6BRsluNltVcpcI=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=tE5dJl57VN0J3TPlZJoZWgcfd1eTobzCmH9vqrPrxDkpMXq+uCoTYBKRldLKCvZ7HDjfGOUKxqrUCrDX4jtzELV32riG0ncT82y6Vq+Z+4K2jHnQd5ilJGrGbRv+YVVQ3SbSXd0ortbE4Scwe3g/9R2Z2CVa2lWoEkNnXpaaHVM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EM7bL5oc; arc=none smtp.client-ip=209.85.214.176
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EYSMOXBk"
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2cffd93cdedso3476005ad.3
-        for <mfd@lists.linux.dev>; Sat, 15 Aug 2026 11:53:25 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EM7bL5oc"
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2cf49dc28ccso3399855ad.0
+        for <mfd@lists.linux.dev>; Sat, 15 Aug 2026 11:53:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786820004; x=1787424804; darn=lists.linux.dev;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=lO/GAhuRx9Cc4gcz82C8v7OvrP0NnD7lPKYMhoj69UQ=;
-        b=EYSMOXBkBBoOSdx6EHKpd1RzaSpD2V8UHvxp6nLEJ/YyuC0Yypg82PM6mVG+rOeD/l
-         fLSToT8yiPUZO1KcttahZ7SFlKFytVNT+/BRCA8sSAYkTOv8Y6YPcjgOjb3SSOeT6HLJ
-         Je8BJgeFgc9BqibgNuIxQhOtQBBNrv5vU0GV2p8CWEuldQRh6sLgg2AskkKg8FD3hgRn
-         bgQdB+xZ0jo4z8ViDKd1oo7QCOD4YvEGumVaxK5e0RLl5HtPyFPIxgoqpqfU9vh5NOSv
-         BlftgorK9XakbQNmbn2VwcuknChopFfCklqLsSeLvsl5xUpat4FLzPGhixQrp/d7JLH3
-         mbZQ==
+        d=gmail.com; s=20251104; t=1786820020; x=1787424820; darn=lists.linux.dev;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=iRDYJHHyH3j1YjcQkf01ypzJlaSwq1OAM4tqza49KSI=;
+        b=EM7bL5oc2rApkMSp3OeaiW4ER/zVu80OM+1/L2zXbmzdPsc/BKdejE0bmXaGuWaAIj
+         fzWc2+ogKFiZ6C30UznslOBP43la4BNU1XLw2eS3crIPc/Z7z38wIgtbtdqEdMSYLOoB
+         ccxUHdb0R2Zw+c3resIL7+uVnQMdeLaFJ+UZrzuPE35XVbu29fEHFOh17+K0OpHagjqt
+         aruvWJcyakZmEDTkXU5Baj23l+v+1P7DK/ooC/vV38f0SlpvOylUdrr8HDCIxx2K8CJc
+         EYl+0lIn//pGi1f+L0KJwSoiRC2mZL8KiOZ9ff6U2OcluJfHVRpi3apU2bQWbmJVv2dv
+         UvIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786820004; x=1787424804;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=lO/GAhuRx9Cc4gcz82C8v7OvrP0NnD7lPKYMhoj69UQ=;
-        b=Z4SRO92c3YaggPXTIQP4NWdurtxQbVGPyMifbLT/pjocWJtSOerhlIlQ/tUfZdpMIV
-         p+arebptzpI7DZwAYb/2DkYKP/ZsITyafvoxIfJWDPKMLFusha4rNbyGDIiHuSxJl+K2
-         H+BV+EdCS4/UN8MAvwI29XOrfbmRsMrwj8s8FeId6HAU2xOJBbQmpxlBDzccDCzTxAk0
-         +t8IxvInnhwQbZ0NgHqcd3r0pNBJqTKw616OpnAV69RfAgdQwRRzrcExO3YuSpKvDBlN
-         neXqwWvwgot5G0oMG/80eHKsF0JoWaerDqFFqNODruoKHgIe6QT58VgFFd+4LiVtN5Rn
-         xiCg==
-X-Gm-Message-State: AOJu0YyoOoHQ7pUPaALyX+1axKFcIW3vykUFZAnvakB2+9+xEsnfWRUN
-	aK5DrvT6VSX4nVst52CiSyaFWJWaVXrTE9ta44gjbkWnG9miODlwi6MF
-X-Gm-Gg: AR+sD10PoOqqEOed2/IT9HlwTAUP4iRSA1Au3/rpw+YbqLnX2lUA9mcmCPnkML6Foop
-	/nKNYVY54iD7qO99TLr4gU3tEYCaygIFXxkuncXINRWeNrS7bEKh4g8HvHkBYnAZDiZYj7dXG6e
-	sDyWr1K3fHZWaIqusLYVG/dW6sPoIjDRS50CnjXKqYikARLgo7rXNMgx9RhElv57n0R9lPOBgs/
-	ZASqqkPFO97sPN8SWmVQYZGDmgDcdLw3Hi7x0L6wbNDmUhfPXh9+cK//FlwgVTTtvcDc1/E0CJQ
-	nptNsd0fiRLpJR7k3dsWzx23I7MLHNEocDEgiJl1HTm+Tbbrc1/ri5LkuBJ1YB9WBGLOTvM0S3L
-	QxhwOSkMAd4vC7Vk86p9NhV4oiZQV9HMP2cYhBS/hVwkxuo5W+Fec0UL3WfRMC/wP4bzbMDOi6z
-	o1a6iRF34/s76kKcKpgCKLZDyWO6xCEGIb70Ibs3QFj1431W2UhYc26RqH/xTo8pS5/5Kjq1LN
-X-Received: by 2002:a17:90b:448c:b0:38e:55ec:e436 with SMTP id 98e67ed59e1d1-3933b4f801dmr10888735a91.0.1786820004479;
-        Sat, 15 Aug 2026 11:53:24 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1786820020; x=1787424820;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=iRDYJHHyH3j1YjcQkf01ypzJlaSwq1OAM4tqza49KSI=;
+        b=AKpjJy6nw56OvoovQnB1ft3kp0U27fpuxD1lhIf1SdxFZf8mayvoxhxhCTH3HS7/kc
+         bSvA357eUw09DYtVucnOOsSiFun9ThrFEb/AyV95sgfSCo3JnI58tVkRZkKtcFiuVmAS
+         9aVbwN7f9Wi3h2rCqmFMtycowvR7kuIwy8GNkSOY6qJPOxeB543aoPVLieSOeBahBurl
+         zRpbFRWMxzk8eU08wlfFaa1HvwNtn33vwtpH6453Su2k32t6r7HUaeo3eAc6Qwkbv37t
+         3lZdDJ09gR8/7aOdER5oq0B/RZ89xtDZVLCMKBah/NbDwh7chr7/OhuHVvFzP92skyHO
+         3rEQ==
+X-Gm-Message-State: AOJu0YyhC1xQ9Km05JEeUwpMLc0fXQ1b5r8QAa8nKBOdAYrkp2dAcaAm
+	PUC45GXQnkKOcu/RUoGJt8MMtov3gnZ26FR5lLeygabBlj2ZIDayjVio
+X-Gm-Gg: AR+sD12BFi2itqP+e43mPZWRPSpxI+ZJbl2xUwsnvaXq409k2ZM+Z39YtCnd2waWkev
+	CNs6t7oTPI8TqXaKsl+bsCSbpC4w3RvwqxHsZ0ZeaSrQ6KkFU/syzVvgdgSFc7RAt2jiaE/Wa0s
+	vO4Q866aCSvdXssyzC1IvPCntU0inEP9oQDkr+bfRbNHcfxnLvmG2yvo4BnpFKdB9v/oGNKdjOu
+	RQwpbDVsFYesByWCvEuVSkV5jjLB07bTdgjT1utWDnTVidZk3N8IzBuhxEf3fYra90TV4MJXEsA
+	3pYq1LomPdWGBtiSndR3KSORmw5Et6zUkyPT6cMy9FK4RnzecdG/ZBNdLNtjG9ZtkoxBVoEgTxD
+	MtzdZhfpZ8It17iSUw9qaNjJvhhMaokrzpSPjA9BSoyYCDYUCnSP78xAB5xOCvkobOUe5dKJnjI
+	0JBB+s0JiJ/LvlEXvlZR83hr1rwh/kUz3AUIBIMH1b8PR6JA9u8Fti0G20hzEuhEVjHBBh75MU
+X-Received: by 2002:a17:90b:1fc8:b0:38e:7069:7117 with SMTP id 98e67ed59e1d1-3933b50729fmr11479035a91.0.1786820020097;
+        Sat, 15 Aug 2026 11:53:40 -0700 (PDT)
 Received: from [10.112.173.252] ([2409:40c2:505d:7e1:7f19:edf4:38f3:dccf])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-320d61e5cdfsm19289125eec.12.2026.08.15.11.53.12
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-320d61e5cdfsm19289125eec.12.2026.08.15.11.53.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 15 Aug 2026 11:53:23 -0700 (PDT)
+        Sat, 15 Aug 2026 11:53:39 -0700 (PDT)
 From: Bhargav Joshi <j.bhargav.u@gmail.com>
-Subject: [PATCH v2 0/2] ti,keystone-devctrl: Convert to DT schema and DTS
- cleanups
-Date: Sun, 16 Aug 2026 00:22:58 +0530
-Message-Id: <20260816-ti-keystone-devctrl-v2-0-5ab1e13c15c1@gmail.com>
+Date: Sun, 16 Aug 2026 00:22:59 +0530
+Subject: [PATCH v2 1/2] ARM: dts: ti: keystone: Align devctrl child node
+ names with dtschema
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -69,11 +70,9 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32NTQ7CIBCFr9LM2jFAFVtX3sN0QWBoJ/bHACE2T
- e8u9gAuv5f3vrdBpMAU4V5tEChz5GUuoE4V2MHMPSG7wqCE0qKRNSbGF60xLTOho2xTGFHTpVV
- SeaqvDsryHcjz57A+u8IDl35Yj5Msf+l/X5YoUXthTHNzrfHNo58Mj2e7TNDt+/4FBDY0ILYAA
- AA=
-X-Change-ID: 20260813-ti-keystone-devctrl-6e49212fe35d
+Message-Id: <20260816-ti-keystone-devctrl-v2-1-5ab1e13c15c1@gmail.com>
+References: <20260816-ti-keystone-devctrl-v2-0-5ab1e13c15c1@gmail.com>
+In-Reply-To: <20260816-ti-keystone-devctrl-v2-0-5ab1e13c15c1@gmail.com>
 To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
  Krzysztof Kozlowski <krzk+dt@kernel.org>, 
  Conor Dooley <conor+dt@kernel.org>, 
@@ -84,48 +83,193 @@ Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org,
  daniel.baluta@gmail.com, simona.toaca@nxp.com, j.bhargav.u@gmail.com, 
  linux-arm-kernel@lists.infradead.org
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1786819992; l=1571;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786819992; l=6209;
  i=j.bhargav.u@gmail.com; h=from:subject:message-id;
- bh=0c/4L0Z1jAiqA034Ce5L4JKC6XAPputkHsDsi5EHESo=;
- b=Xo7ghDZ+X1o+TnmeQEkuJZN6NrHvhgHnyur8at9eZMwocYxHxuO7WdyBo/0kHttqh2kI5sB9B
- wNTP2VQC5xaD1B1e9GKqh8f+zHrc8argj11FZAjtRZ/76JO2F8Q/JAX
+ bh=WFjPHdh767TYAqxnbwvqJA2jUU4RF6BRsluNltVcpcI=;
+ b=bhGWph23hlMaGN9uRhgEpldXPNtG3qXa5oaIk8ZucKCtx5IRwwO334TDyb7brVSWftIjDhHkX
+ m5+RYSDn5QEC5Jq93gNLhSfB/5CCV1nSlnH651xZOYh1QluLaG49Pbx
 X-Developer-Key: i=j.bhargav.u@gmail.com; a=ed25519;
  pk=IqNDwUZKECEA+n8wXctFLBbYL9NhFstZNbOznm/nX1k=
 
-Series converts Texas Instruments Keystone Device State Control binding
-to DT schema  and aligns the existing dt files with standard naming
-conventions.
-
-Patch 1 aligns the legacy child node names with standard names.
-Patch 2 converts the ti,keystone-devctrl binding to YAML schema.
+Align TI Keystone device state control child node names with standard
+naming conventions.
+- Change keystone_irq to interrupt-controller
+- Change keystone_dsp_gpio to gpio
 
 Signed-off-by: Bhargav Joshi <j.bhargav.u@gmail.com>
 ---
-Changes in v2:
-- Fix legacy node names containing underscores in existing .dtsi files.
-- Dropped 'minItems: 2' and the conditional block. Made 'simple-mfd' and
-  bus properties strictly required, as all in-tree dts uses it. 
-- Updated patternProperties to strictly enforce standard node names
-- Link to v1: https://lore.kernel.org/r/20260813-ti-keystone-devctrl-v1-1-6f0aa87d9af8@gmail.com
+ arch/arm/boot/dts/ti/keystone/keystone-k2e.dtsi  |  2 +-
+ arch/arm/boot/dts/ti/keystone/keystone-k2g.dtsi  |  4 ++--
+ arch/arm/boot/dts/ti/keystone/keystone-k2hk.dtsi | 16 ++++++++--------
+ arch/arm/boot/dts/ti/keystone/keystone-k2l.dtsi  |  8 ++++----
+ arch/arm/boot/dts/ti/keystone/keystone.dtsi      |  2 +-
+ 5 files changed, 16 insertions(+), 16 deletions(-)
 
----
-Bhargav Joshi (2):
-      ARM: dts: ti: keystone: Align devctrl child node names with dtschema
-      dt-bindings: mfd: ti,keystone-devctrl: Convert to DT schema
+diff --git a/arch/arm/boot/dts/ti/keystone/keystone-k2e.dtsi b/arch/arm/boot/dts/ti/keystone/keystone-k2e.dtsi
+index 662aa33cba11..083c94b62fc7 100644
+--- a/arch/arm/boot/dts/ti/keystone/keystone-k2e.dtsi
++++ b/arch/arm/boot/dts/ti/keystone/keystone-k2e.dtsi
+@@ -110,7 +110,7 @@ pscrst: reset-controller {
+ 		};
+ 
+ 		devctrl: device-state-control@2620000 {
+-			dspgpio0: keystone_dsp_gpio@240 {
++			dspgpio0: gpio@240 {
+ 				compatible = "ti,keystone-dsp-gpio";
+ 				reg = <0x240 0x4>;
+ 				gpio-controller;
+diff --git a/arch/arm/boot/dts/ti/keystone/keystone-k2g.dtsi b/arch/arm/boot/dts/ti/keystone/keystone-k2g.dtsi
+index dafe485dfe19..11b27663503a 100644
+--- a/arch/arm/boot/dts/ti/keystone/keystone-k2g.dtsi
++++ b/arch/arm/boot/dts/ti/keystone/keystone-k2g.dtsi
+@@ -121,7 +121,7 @@ devctrl: device-state-control@2620000 {
+ 			#size-cells = <1>;
+ 			ranges = <0x0 0x02620000 0x1000>;
+ 
+-			kirq0: keystone_irq@2a0 {
++			kirq0: interrupt-controller@2a0 {
+ 				compatible = "ti,keystone-irq";
+ 				reg = <0x2a0 0x10>;
+ 				interrupts = <GIC_SPI 1 IRQ_TYPE_EDGE_RISING>;
+@@ -130,7 +130,7 @@ kirq0: keystone_irq@2a0 {
+ 				ti,syscon-dev = <&devctrl 0x2a0>;
+ 			};
+ 
+-			dspgpio0: keystone_dsp_gpio@240 {
++			dspgpio0: gpio@240 {
+ 				compatible = "ti,keystone-dsp-gpio";
+ 				reg = <0x240 0x4>;
+ 				gpio-controller;
+diff --git a/arch/arm/boot/dts/ti/keystone/keystone-k2hk.dtsi b/arch/arm/boot/dts/ti/keystone/keystone-k2hk.dtsi
+index 4fdf4b30384f..b7a9fbd6d59d 100644
+--- a/arch/arm/boot/dts/ti/keystone/keystone-k2hk.dtsi
++++ b/arch/arm/boot/dts/ti/keystone/keystone-k2hk.dtsi
+@@ -88,7 +88,7 @@ pscrst: reset-controller {
+ 		};
+ 
+ 		devctrl: device-state-control@2620000 {
+-			dspgpio0: keystone_dsp_gpio@240 {
++			dspgpio0: gpio@240 {
+ 				compatible = "ti,keystone-dsp-gpio";
+ 				reg = <0x240 0x4>;
+ 				gpio-controller;
+@@ -96,7 +96,7 @@ dspgpio0: keystone_dsp_gpio@240 {
+ 				gpio,syscon-dev = <&devctrl 0x240>;
+ 			};
+ 
+-			dspgpio1: keystone_dsp_gpio@244 {
++			dspgpio1: gpio@244 {
+ 				compatible = "ti,keystone-dsp-gpio";
+ 				reg = <0x244 0x4>;
+ 				gpio-controller;
+@@ -104,7 +104,7 @@ dspgpio1: keystone_dsp_gpio@244 {
+ 				gpio,syscon-dev = <&devctrl 0x244>;
+ 			};
+ 
+-			dspgpio2: keystone_dsp_gpio@248 {
++			dspgpio2: gpio@248 {
+ 				compatible = "ti,keystone-dsp-gpio";
+ 				reg = <0x248 0x4>;
+ 				gpio-controller;
+@@ -112,7 +112,7 @@ dspgpio2: keystone_dsp_gpio@248 {
+ 				gpio,syscon-dev = <&devctrl 0x248>;
+ 			};
+ 
+-			dspgpio3: keystone_dsp_gpio@24c {
++			dspgpio3: gpio@24c {
+ 				compatible = "ti,keystone-dsp-gpio";
+ 				reg = <0x24c 0x4>;
+ 				gpio-controller;
+@@ -120,7 +120,7 @@ dspgpio3: keystone_dsp_gpio@24c {
+ 				gpio,syscon-dev = <&devctrl 0x24c>;
+ 			};
+ 
+-			dspgpio4: keystone_dsp_gpio@250 {
++			dspgpio4: gpio@250 {
+ 				compatible = "ti,keystone-dsp-gpio";
+ 				reg = <0x250 0x4>;
+ 				gpio-controller;
+@@ -128,7 +128,7 @@ dspgpio4: keystone_dsp_gpio@250 {
+ 				gpio,syscon-dev = <&devctrl 0x250>;
+ 			};
+ 
+-			dspgpio5: keystone_dsp_gpio@254 {
++			dspgpio5: gpio@254 {
+ 				compatible = "ti,keystone-dsp-gpio";
+ 				reg = <0x254 0x4>;
+ 				gpio-controller;
+@@ -136,7 +136,7 @@ dspgpio5: keystone_dsp_gpio@254 {
+ 				gpio,syscon-dev = <&devctrl 0x254>;
+ 			};
+ 
+-			dspgpio6: keystone_dsp_gpio@258 {
++			dspgpio6: gpio@258 {
+ 				compatible = "ti,keystone-dsp-gpio";
+ 				reg = <0x258 0x4>;
+ 				gpio-controller;
+@@ -144,7 +144,7 @@ dspgpio6: keystone_dsp_gpio@258 {
+ 				gpio,syscon-dev = <&devctrl 0x258>;
+ 			};
+ 
+-			dspgpio7: keystone_dsp_gpio@25c {
++			dspgpio7: gpio@25c {
+ 				compatible = "ti,keystone-dsp-gpio";
+ 				reg = <0x25c 0x4>;
+ 				gpio-controller;
+diff --git a/arch/arm/boot/dts/ti/keystone/keystone-k2l.dtsi b/arch/arm/boot/dts/ti/keystone/keystone-k2l.dtsi
+index 330b437b667f..4678454c0eb3 100644
+--- a/arch/arm/boot/dts/ti/keystone/keystone-k2l.dtsi
++++ b/arch/arm/boot/dts/ti/keystone/keystone-k2l.dtsi
+@@ -290,7 +290,7 @@ osr: sram@70000000 {
+ 		};
+ 
+ 		devctrl: device-state-control@2620000 {
+-			dspgpio0: keystone_dsp_gpio@240 {
++			dspgpio0: gpio@240 {
+ 				compatible = "ti,keystone-dsp-gpio";
+ 				reg = <0x240 0x4>;
+ 				gpio-controller;
+@@ -298,7 +298,7 @@ dspgpio0: keystone_dsp_gpio@240 {
+ 				gpio,syscon-dev = <&devctrl 0x240>;
+ 			};
+ 
+-			dspgpio1: keystone_dsp_gpio@244 {
++			dspgpio1: gpio@244 {
+ 				compatible = "ti,keystone-dsp-gpio";
+ 				reg = <0x244 0x4>;
+ 				gpio-controller;
+@@ -306,7 +306,7 @@ dspgpio1: keystone_dsp_gpio@244 {
+ 				gpio,syscon-dev = <&devctrl 0x244>;
+ 			};
+ 
+-			dspgpio2: keystone_dsp_gpio@248 {
++			dspgpio2: gpio@248 {
+ 				compatible = "ti,keystone-dsp-gpio";
+ 				reg = <0x248 0x4>;
+ 				gpio-controller;
+@@ -314,7 +314,7 @@ dspgpio2: keystone_dsp_gpio@248 {
+ 				gpio,syscon-dev = <&devctrl 0x248>;
+ 			};
+ 
+-			dspgpio3: keystone_dsp_gpio@24c {
++			dspgpio3: gpio@24c {
+ 				compatible = "ti,keystone-dsp-gpio";
+ 				reg = <0x24c 0x4>;
+ 				gpio-controller;
+diff --git a/arch/arm/boot/dts/ti/keystone/keystone.dtsi b/arch/arm/boot/dts/ti/keystone/keystone.dtsi
+index ff16428860a9..20596fa446b9 100644
+--- a/arch/arm/boot/dts/ti/keystone/keystone.dtsi
++++ b/arch/arm/boot/dts/ti/keystone/keystone.dtsi
+@@ -93,7 +93,7 @@ devctrl: device-state-control@2620000 {
+ 			#size-cells = <1>;
+ 			ranges = <0x0 0x02620000 0x1000>;
+ 
+-			kirq0: keystone_irq@2a0 {
++			kirq0: interrupt-controller@2a0 {
+ 				compatible = "ti,keystone-irq";
+ 				reg = <0x2a0 0x4>;
+ 				interrupts = <GIC_SPI 4 IRQ_TYPE_EDGE_RISING>;
 
- .../bindings/mfd/ti,keystone-devctrl.yaml          | 84 ++++++++++++++++++++++
- .../bindings/mfd/ti-keystone-devctrl.txt           | 19 -----
- arch/arm/boot/dts/ti/keystone/keystone-k2e.dtsi    |  2 +-
- arch/arm/boot/dts/ti/keystone/keystone-k2g.dtsi    |  4 +-
- arch/arm/boot/dts/ti/keystone/keystone-k2hk.dtsi   | 16 ++---
- arch/arm/boot/dts/ti/keystone/keystone-k2l.dtsi    |  8 +--
- arch/arm/boot/dts/ti/keystone/keystone.dtsi        |  2 +-
- 7 files changed, 100 insertions(+), 35 deletions(-)
----
-base-commit: 3d6d817622b0a9721e3cc404df3469171582be13
-change-id: 20260813-ti-keystone-devctrl-6e49212fe35d
-
-Best regards,
 -- 
-Bhargav
+2.55.0
 
