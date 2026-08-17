@@ -1,122 +1,82 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A5AA3BB674;
-	Mon, 17 Aug 2026 10:13:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08A7041E6A3
+	for <mfd@lists.linux.dev>; Mon, 17 Aug 2026 12:57:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786961588; cv=none; b=rMOZhI7gPEjAgH48NarMCO0jjb/AVbGAtZ7gzFPNkwkzuGsBbEsikH/VPFLIQa7Xk1gzSo63XmzEI8H2N6h7/qslCL3SMyIOx2UsH00YmFoUbg2JIwmgNf+V/wpgFiCTk4gg9RpP8eYfyIdc9HyxBucW9fhUFQmEsbNL+wijKtk=
+	t=1786971439; cv=none; b=uwtfmTYJ9TCukV2jUUwEPXzYLqIfbMIAOfa7Dv8qpwImTTWJYyQKpvgyfxo0hh62ma7K9j7A6Ze9xoBnYyixpiwbueqnFZ59d1pQ7655Ysh2u2cc0pmjynxV64+QGat62Aw++xE+0zOzYgC8+24wJaoMhBww4+j8lXwnW0EPlQY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786961588; c=relaxed/simple;
-	bh=fB3bFralXTgeOoIt0YK43Su0t+rNerRznvgUfWsjukI=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=OGFX1wJJwAyzgSarlGP9le9GTw1otDoFHuVqloDZMO7L+05ERrFSiqQcE4nEYQOgDLpbxtegG8KoY1Cl91rWqunPpzQ3tlSmow/tVe7R4n99WKJJp+4npB1EYfPQygEhSIDQnFTe86rklQm8Kak9s00pl5sGCZvuUlsTxI32gIs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BHZ1X5wn; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786971439; c=relaxed/simple;
+	bh=/BIsi9PY+Fil18OFwk36lg/migCZgU71LLGi3zckc5c=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=ooenU0yvQw06HufQk3M406Iql9omG1eckBgBkcK+Ue6FDHY9cwlJtD+XMMkTakb88wxhfOHFGQd7uZKk+4fDQaArejFJ5G10JCrJbRaZHO1YVV9aejlNx0k7PyA7V2+evD/AeR7aCt7ykrlru/YrlUxzeG2w1cTbNsU55yuWfPE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OmhobpQj; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BHZ1X5wn"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4A4D91F000E9;
-	Mon, 17 Aug 2026 10:13:06 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OmhobpQj"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C41671F01564
+	for <mfd@lists.linux.dev>; Mon, 17 Aug 2026 12:57:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786961586;
-	bh=kFSLXQXWWTPxAasn1YXHC+DflzGkN0aSR9CX0lXSl38=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=BHZ1X5wnfLUsPN+6E89eKNptcDY3Y7CGyQ33hHDlaxKucKj+v4uLOPjazCnUDxN4o
-	 CLCZlS/5xOlmW9b/V18SwTMuwkbzFaNl8M51s9slsePYSOiGbCD5TCpdb8XF2/D7iD
-	 f4bidUHV9QhJ+7YPG+DsAmxshr5QqW8A/fA6Q0xBIBsXbcnREg5oG57RFiznPKWvo1
-	 ilSYs7Y8ADxQAd6s9YKfjGEa3VA3DI+TW7twUgxQFl3C6IvNFNReoDfgo3/Wck7njH
-	 +YNZiqvfb1pGi/XPXfgxS7OVqD/mEQht3eyi+vytvLIjOS9UCgew8vnlD7KF7YGCgl
-	 8Cu+817eMsnNg==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3] dt-bindings: mfd: Convert TI TWL6040 to DT schema
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Eduard Bostina" <egbostina@gmail.com>
-Cc: devicetree@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260817100207.2970303-1-egbostina@gmail.com>
-References: <20260817100207.2970303-1-egbostina@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 17 Aug 2026 10:13:05 +0000
-Message-Id: <20260817101306.4A4D91F000E9@smtp.kernel.org>
+	s=k20260515; t=1786971437;
+	bh=yMuUitFtpxg4HIwjXPXk2NVd+fQLMlZkoGPUZSp/E0U=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=OmhobpQjoS+6L9WtCoV3faqmSY8+5uu0hUcCDQZH298uinfRO7U1LU8Fc+m/S8FCx
+	 MCIET7CjS3P1UVolUMXP4WX0qXFgfLIjT9b6FzDozJe6J7LJCHqtvyOgcrcv6k4aPn
+	 N/rAPxv928QWcFRRWUOvKU1H2CqNI5b7ja1XEm0cIh/SJDcGUgO11ZCt38Dtfmoc5k
+	 kE5SE+WgPLkug5z6u+HvQiS/nHGxpwFPDmUO+3dL6iFbq1t8fbhQlAydqQWAIyB8e5
+	 CEWVTh9IW0yP2PfHNzVYXdY29gCsiIHgWhlJErt4ROPdFJxeji+kSLSyZFExuA8509
+	 MTFGVOXQUpwRA==
+Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-5b28c91fba5so4011001e87.1
+        for <mfd@lists.linux.dev>; Mon, 17 Aug 2026 05:57:17 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RrF3WXU1Yxe5f1LJKwiyLAc1+AxHMm5/OWZ0ORqYCrp0O5aduCPvz/ISf9nKu/olD6+4hI=@lists.linux.dev
+X-Gm-Message-State: AOJu0YzeENG2NMrh/Tv9m3QNAhMlEz3p91QoNcAxZ84T4MPH9m88x0Xd
+	FFckQC6dXxutwqm5Q6l1UwdKlOL3W4RtQzeLzExrVGmAB9HSPeoCvZ9Ay8GeGRoPo6AL8eXLp+F
+	sISPpg6kTrPsv0WTIRR/2JtuxF6qxBc4=
+X-Received: by 2002:a05:6512:48d0:b0:5b0:1433:13bd with SMTP id
+ 2adb3069b0e04-5b453baa6d9mr4605381e87.9.1786971436523; Mon, 17 Aug 2026
+ 05:57:16 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+References: <MN0PR19MB6091DB524E7A07E16D108F52ACDF2@MN0PR19MB6091.namprd19.prod.outlook.com>
+In-Reply-To: <MN0PR19MB6091DB524E7A07E16D108F52ACDF2@MN0PR19MB6091.namprd19.prod.outlook.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Mon, 17 Aug 2026 14:57:03 +0200
+X-Gmail-Original-Message-ID: <CAD++jLnDJRJMb2jrmTO3WSKHw+5t9uWJsibp47N1UkdYe54gzQ@mail.gmail.com>
+X-Gm-Features: AcwNN1Xvw2LSRWcZSMjKKrZ79yk9hYmZyF8Kta8zS68H0_RKHsWW6aSjf7zDgKo
+Message-ID: <CAD++jLnDJRJMb2jrmTO3WSKHw+5t9uWJsibp47N1UkdYe54gzQ@mail.gmail.com>
+Subject: Re: [PATCH v2 0/9] ARM: stm32: add STM32H7R7 and ART-Pi2 support
+To: Liu Changjie <liucj1228@outlook.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
+	Brian Masney <bmasney@redhat.com>, Antonio Borneo <antonio.borneo@foss.st.com>, 
+	Russell King <linux@armlinux.org.uk>, Lee Jones <lee@kernel.org>, 
+	Philipp Zabel <p.zabel@pengutronix.de>, 
+	Dario Binacchi <dario.binacchi@amarulasolutions.com>, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, 
+	linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org, 
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, mfd@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
-s) to consider:
+Hi Liu,
 
-New issues:
-- [Low] The 'clock-names' property uses an 'enum' for array items without e=
-nforcing uniqueness or order, allowing invalid configurations to pass schem=
-a validation.
+thanks for your patch!
 
-Pre-existing issues:
-- [High] The MFD driver mutates globally shared `static` resource arrays du=
-ring `probe()`, creating a concurrency data race.
---
+On Sun, Aug 9, 2026 at 12:08=E2=80=AFPM Liu Changjie <liucj1228@outlook.com=
+> wrote:
+>   dt-bindings: pinctrl: stm32: add STM32H7RS
+>   pinctrl: stm32: add STM32H7RS support
 
---- Patch [1]: [PATCH v3] dt-bindings: mfd: Convert TI TWL6040 to DT schema=
- ---
-commit 217f75902b2af0561cd52b8ef59fbfb6ab482cc0
-Author: Eduard Bostina <egbostina@gmail.com>
+If there is no build-time dependency between these two patches and the
+rest, could you send them separately based on v7.3-rc1 once it is out
+so I can merge them to the pinctrl tree independently of the rest of the
+patches?
 
-dt-bindings: mfd: Convert TI TWL6040 to DT schema
-   =20
-Convert the Texas Instruments TWL6040 audio codecs family bindings to DT
-schema.
-
-Link to v2: https://lore.kernel.org/all/20260816092847.2522994-1-egbostina@=
-gmail.com/
-Link to v1: https://lore.kernel.org/all/20260815083451.2147129-1-egbostina@=
-gmail.com/
-
-> diff --git a/Documentation/devicetree/bindings/mfd/ti,twl6040.yaml b/Docu=
-mentation/devicetree/bindings/mfd/ti,twl6040.yaml
-> new file mode 100644
-> index 0000000000000..0d4e620d25a51
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/mfd/ti,twl6040.yaml
-> @@ -0,0 +1,151 @@
-[ ... ]
-> +  clocks:
-> +    minItems: 1
-> +    maxItems: 2
-> +
-> +  clock-names:
-> +    minItems: 1
-> +    maxItems: 2
-> +    items:
-> +      enum:
-> +        - clk32k
-> +        - mclk
-
-[Severity: Low]
-Does this clock-names definition allow duplicate items or arbitrary orderin=
-g?
-
-Using enum for array items without enforcing uniqueness or order might allow
-invalid configurations like ["clk32k", "clk32k"] to pass schema validation.
-
-[Severity: High]
-This isn't a bug introduced by this patch, but looking at twl6040_probe()
-in drivers/mfd/twl6040.c, it modifies a globally shared static array:
-
-drivers/mfd/twl6040.c:twl6040_probe() {
-    ...
-	twl6040_codec_rsrc[0].start =3D irq;
-	twl6040_codec_rsrc[0].end =3D irq;
-	cell->resources =3D twl6040_codec_rsrc;
-	cell->num_resources =3D ARRAY_SIZE(twl6040_codec_rsrc);
-    ...
-}
-
-Does this mutate a globally shared static resource array during probe?
-
-If multiple instances of the TWL6040 device probe concurrently on different
-I2C buses, could they simultaneously modify the start and end fields of the
-global twl6040_codec_rsrc array, creating a concurrency data race?
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260817100207.2970=
-303-1-egbostina@gmail.com?part=3D1
+Yours,
+Linus Walleij
