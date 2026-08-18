@@ -1,110 +1,135 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E7A94519A7;
-	Tue, 18 Aug 2026 10:40:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A4403BFAEB;
+	Tue, 18 Aug 2026 10:41:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787049656; cv=none; b=u7kxeuzUalQYVMaM3tFBN2X91iHizEQ+fKA+6Wt7jV9qjHWMTLnDomqFgORk1Eh59/Md/nHc/chFG2+ZINEUNTJUvcJ5O0NZuWKqALLlB7l2Dc4WkvUnib2KI8rLXnoUu/ocXj5yXbxq9CsJ1myP1ppgAQ+0foEk1nqrOItpXII=
+	t=1787049687; cv=none; b=cpW8xLYajleadveFKF8VnzTFaMoGUYb9L4hivm7luHvCWGBksq4xmN8axhhY+Tb9qTUlJe21iNQfbjv7MDFxSvhnj/bUuWmC+sTSTur2ltroGBdwjSr7IFv7chyEK1iWMCEcQiuMngsp12SvdtksYmu68qQS3OR6Pyvhb2t0sjs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787049656; c=relaxed/simple;
-	bh=Emg+OPwrmvmmmLjhTHS0K31NsuB9INYsECYcrSeIRes=;
+	s=arc-20240116; t=1787049687; c=relaxed/simple;
+	bh=k+Y643r8dMlBB0xXT7Q9qV+b1AVasHvT7DAKlGWB3Fs=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=rO/5pgMft5StKmdw/Y+qvaw7cyxCN6BjVr5QV5DsMiJSj6Ybg3ROlNxHcun3s+s7YAvHAkEzkTaiWrImuU6VcDrtUHW+eQlqzSn96lHxlQEsa2osBmlYUyuAuU48x6sHaDUk9zVujLeA47Z8aq7qlxrDCZU/zfgQ7Jkxv+Y/zgg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=emnSsJW3; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=IKxyK7SlcMDThG1KW8yZdS+6DEQLorW7KBzrRX/3saS7gtvCk1imyI/rqWmVFi3VVwX/M81TChoBNPCdXOfSjFnuCNoLTQvjM5bChdGnS35hJ+EqOLZl0bljF2X2xXzuWNIXSiL7jfavzJs4Xc+KGEy1waEynI1ME6islornRLI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kdCaBeZ7; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="emnSsJW3"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 80D4B1F00A3A;
-	Tue, 18 Aug 2026 10:40:54 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kdCaBeZ7"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8B6AC1F000E9;
+	Tue, 18 Aug 2026 10:41:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787049654;
-	bh=q0GmnbWq1aR7sLH8tE0OsA3GKSBK5iDArgf3cNkYHD4=;
+	s=k20260515; t=1787049685;
+	bh=YyL7htxtAQkG9vAqWuC3lwcaaMREQzjOyvvQONAWCvg=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=emnSsJW3sS/8RgCMZhtFYIVTgjKOJR/e84GB/yZJ1exmpd1n+madriHnsaXSuCpvw
-	 691j7eqlhIBssqdI69kArIPA4lQ/s7M9EHP59mWU1s7vJp1YxbzqYZzMVn33DF5Ofm
-	 tEQWAicw1lFiiM1ktHw+cVd/4bSJ390Ypq5UUK15UHfWZFfrXbLlCeLEmV7B6Bc+rm
-	 2jAJDIlv+8eh12EnOyGTX0Sx7oQaD0Ubh7d1hTbgN+sGZb8kfTKp2Jc8vltGNRxp0X
-	 tE98yb/phliKGd6WlGZbsnhVkm5FfIl9zC1XcwBHubThS2eSdkD+FarfKMIyA5oqyN
-	 jkh/mFadDbZkg==
+	b=kdCaBeZ7Koxk0WAvmj7jGeJz21cv5iQH/JU76c6hqsiHlOWEXZfnLLzVqdDD4SrkX
+	 yL18+cTKvjPIPbXffilh/oYWowfsx0FAWZ9UMLkotKLggkkJTMRBQmPve7+9QxB037
+	 45O812V/ttsaAO2aDd7VJGYTamMPGtn1TbpANFUhNtiJ2DpXpn5TIbc+ycOGlK6OtN
+	 ODkdfdv8uYm4g4XCJS0QVsYjLjSqHVLapBasSY5Y1kU6QXt0lvdkKjlFCKR/L7HpQe
+	 t2ZEDFdWxihhbhBenynJQU4c4+kd4LPUqEeK+BE84Do/KJuqmNK4giuxYf4kl1xkiL
+	 /1XqNG90JnMOg==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v5 05/12] dt-bindings: gpio: pl061: add Ambarella CV75
- variant
+Subject: Re: [PATCH v6 1/6] dt-bindings: serial: 8250: aspeed: add ast2600
+ and aspeed,vuart-over-pci
 Reply-To: sashiko-reviews@lists.linux.dev
-To: "Long Zhao" <longzhao@ambarella.com>
-Cc: linux-clk@vger.kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev, lee@kernel.org, conor+dt@kernel.org, robh@kernel.org
-In-Reply-To: <20260818-cv75-v5-v5-5-7bbb12f0360f@ambarella.com>
-References: <20260818-cv75-v5-v5-0-7bbb12f0360f@ambarella.com>
- <20260818-cv75-v5-v5-5-7bbb12f0360f@ambarella.com>
+To: =?utf-8?b?R3LDqWdvaXJlIExheWV0?= <gregoire.layet@9elements.com>
+Cc: conor+dt@kernel.org, robh@kernel.org, lee@kernel.org, mfd@lists.linux.dev, devicetree@vger.kernel.org
+In-Reply-To: <20260818-aspeed-driver-v6-v6-1-fd7cc0b338ea@9elements.com>
+References: <20260818-aspeed-driver-v6-v6-0-fd7cc0b338ea@9elements.com>
+ <20260818-aspeed-driver-v6-v6-1-fd7cc0b338ea@9elements.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 18 Aug 2026 10:40:54 +0000
-Message-Id: <20260818104054.80D4B1F00A3A@smtp.kernel.org>
+Date: Tue, 18 Aug 2026 10:41:25 +0000
+Message-Id: <20260818104125.8B6AC1F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
+Thank you for your contribution! Sashiko AI review found 2 potential issue(=
 s) to consider:
-- [High] The required `arm,primecell-periphid` value of `0x00000061` for th=
-e `ambarella,cv75-gpio` variant conflicts with the ID required by the `gpio=
--pl061` driver, preventing probing.
+- [High] The schema incorrectly enforces `aspeed,ast2500-vuart` as a mandat=
+ory fallback for PCI-routed `aspeed,ast2600-vuart` devices, breaking backwa=
+rd compatibility.
+- [Low] The schema lacks a mutual exclusivity constraint to forbid LPC-spec=
+ific properties when the VUART is explicitly configured for PCI.
 --
 
---- Patch [5]: [PATCH v5 05/12] dt-bindings: gpio: pl061: add Ambarella CV7=
-5 variant ---
-commit 788e96b7a4c4ea1764ff5dc908fde736c8cb17ba
-Author: Long Zhao <longzhao@ambarella.com>
+--- Patch [1]: [PATCH v6 1/6] dt-bindings: serial: 8250: aspeed: add ast260=
+0 and aspeed,vuart-over-pci ---
+commit f87e924205ddfd55af4d5f7799223f4c9c2ffb59
+Author: Gr=C3=A9goire Layet <gregoire.layet@9elements.com>
 
-dt-bindings: gpio: pl061: add Ambarella CV75 variant
+dt-bindings: serial: 8250: aspeed: add ast2600 and aspeed,vuart-over-pci
 
-This commit documents the Ambarella CV75 GPIO bank compatible for the
-PL061 binding. It adds a requirement for a synthetic arm,primecell-periphid
-override because the hardware lacks a discoverable ID.
+The ASPEED AST2600 can be used as a PCI device with 2 Virtual UARTs
+accessible over PCI. This commit adds bindings for ast2600-vuart and
+a boolean property for using VUART over PCI.
 
-> diff --git a/Documentation/devicetree/bindings/gpio/pl061-gpio.yaml b/Doc=
-umentation/devicetree/bindings/gpio/pl061-gpio.yaml
-> --- a/Documentation/devicetree/bindings/gpio/pl061-gpio.yaml
-> +++ b/Documentation/devicetree/bindings/gpio/pl061-gpio.yaml
+> diff --git a/Documentation/devicetree/bindings/serial/8250.yaml b/Documen=
+tation/devicetree/bindings/serial/8250.yaml
+> index bb7b9c87a8072..8dd4b7af0c0d2 100644
+> --- a/Documentation/devicetree/bindings/serial/8250.yaml
+> +++ b/Documentation/devicetree/bindings/serial/8250.yaml
+
 [ ... ]
-> @@ -57,6 +70,20 @@ properties:
->      minItems: 1
->      maxItems: 8
-> =20
-> +allOf:
+
+>    - if:
+>        anyOf:
+>          - required:
+>              - aspeed,sirq-polarity-sense
+>      then:
+>        properties:
+>          compatible:
+>            const: aspeed,ast2500-vuart
 > +  - if:
+> +      required:
+> +        - aspeed,vuart-over-pci
+> +    then:
+> +      required:
+> +        - aspeed,scu-syscon
+
+[Severity: Low]
+Does this allow logically contradictory device trees to pass schema
+validation?
+
+The VUART must be routed either over PCI or LPC, as UART FIFOs cannot
+be safely shared between two concurrent host interfaces.
+
+Should mutual exclusivity constraints be added here to reject
+aspeed,lpc-io-reg and aspeed,lpc-interrupts when PCI mode is active?
+
 > +      properties:
 > +        compatible:
 > +          contains:
-> +            const: ambarella,cv75-gpio
-> +    then:
+> +            const: aspeed,ast2600-vuart
+> +    else:
 > +      properties:
-> +        arm,primecell-periphid:
-> +          const: 0x00000061
+> +        aspeed,scu-syscon: false
+
+[ ... ]
+
+> @@ -106,6 +128,9 @@ properties:
+>        - const: ns16850
+>        - const: aspeed,ast2400-vuart
+>        - const: aspeed,ast2500-vuart
+> +      - items:
+> +          - const: aspeed,ast2600-vuart
+> +          - const: aspeed,ast2500-vuart
 
 [Severity: High]
-Will this synthetic ID value prevent the gpio-pl061 driver from probing?
+Could this result in a regression if an older kernel boots and matches
+the fallback?
 
-During device initialization, the amba bus subsystem reads the
-arm,primecell-periphid property from the device tree and attempts to match
-it against registered drivers. The gpio-pl061 driver expects an amba
-ID of 0x00041061 with a mask of 0x000fffff.
+An older kernel's aspeed_vuart_probe() driver does not recognize
+aspeed,vuart-over-pci. It will fall back to its default LPC settings,
+programming the VUART to route to the LPC bus at I/O port 0x3f8.
 
-Since 0x00000061 masked with 0x000fffff does not equal 0x00041061, the match
-will fail and the driver will not bind to the device on Ambarella CV75
-platforms.
+This fails to enable the intended PCI communication and actively drives
+the LPC bus, potentially causing hardware conflicts or host crashes if
+another device already occupies 0x3f8 on the LPC bus.
 
-Should this value be 0x00041061 to match the driver's expected ID table?
-
-> +      required:
-> +        - arm,primecell-periphid
-> +        - gpio-ranges
->
->  required:
->    - compatible
->    - reg
+Should the fallback be omitted when aspeed,vuart-over-pci is set?
 
 --=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260818-cv75-v5-v5=
--0-7bbb12f0360f@ambarella.com?part=3D5
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260818-aspeed-dri=
+ver-v6-v6-0-fd7cc0b338ea@9elements.com?part=3D1
