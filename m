@@ -1,146 +1,180 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0665C4519A8;
-	Tue, 18 Aug 2026 10:43:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BDA24570F4;
+	Tue, 18 Aug 2026 10:45:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787049809; cv=none; b=qk+bqrYODXviVMLIoNOwNWZt0Bed0CwqQGV39dnMNC49uRJ6TZmhnLtTdH5NJyqoYTVfT6rObG5PAI5Ntqjnb5Z/JWVO9sVNHS/9mAj2evpQy8TPm1pX7+HHFDaloI82quq3lLNzxzHcRTtenoiybrjR5M/N/2yq36NPruACOPc=
+	t=1787049907; cv=none; b=rLXWIk6e/XD1E7SYJNw72n2i1bwjOdCIRE+ttlSjRJlKHMq/ABVKjJiwF9EFdfyIhEUwZFuKuFaRTGMZhpq5LHu/JwPd5V9HLAyH5WPNMT9g8Uc4wAydiBhcmQdRKzF0EJqFJB1RpQxKKo63QiHdjelGLByPT8/Mm/YYRpqDtQw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787049809; c=relaxed/simple;
-	bh=VhQYWr7b7mj7QFlGp7jPEl+3aMM9NcbOHm8c+Uswp1c=;
+	s=arc-20240116; t=1787049907; c=relaxed/simple;
+	bh=0E2pJqsHjMejhpykpdh03QS2mjuGf09d052pmsWLEC4=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=Jg04Bf/2r+WSh5Lq3cdkXqFWyXeT6BJhQVHk4Hmdq2YLr897R2BMbx4MaadJwPJ0Y3Jj2HJlnj+HpmXeFt+sg7Y5pbCZy6ZqwueJgbNxmbDpHrLsLOXDw/4BB4+R7ICd2WnteuoD2bsgbot1/WNGvlUNyw2Q12hUZNX10N2xiIc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZQbE2xng; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=FHr37DUzv1sEFkXfvCV+Q6iqjqyHw5RtwkDZcCP/L6Xwmwop8hqnbkPtwf9TXqHrVrz0nW25jddwzx/r872G406HW622Lcr3sfasoWFEldExu4t+Tdj2jeZZypRwMqglr+r0ODMgj1F6j0Qas6nZXIHLg6/lz2pk4YwerfuLTtw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bcUYOlcx; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZQbE2xng"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 453971F000E9;
-	Tue, 18 Aug 2026 10:43:27 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bcUYOlcx"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 82F761F00A3A;
+	Tue, 18 Aug 2026 10:45:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787049807;
-	bh=yKm5f5VqSsJHEt8ZpHjTgX2bh+UU8SC5cTufM/X1hOo=;
+	s=k20260515; t=1787049904;
+	bh=R7XopOM92Sm30wwgmYOVBeNFaaq0vzy7rYuxx2pzxgU=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=ZQbE2xngCcrCb7R3+rjquLsensQ6mmofKfZjTYpP7rr7B5fEwdwY4FoGovFDtE9Qu
-	 7jlA1ZzyTSYnXADYxKvIoz4/Qu+B2xGZg0Wb6Pg9vyCjZ4fBR1qLEqmqKqv1PV4i95
-	 dd32IlbDvDO3abA2kKZUaZ8KkK8N9eg753FK6/DlkhjfKUp4oAsNax2bVB7E5OqHfU
-	 8y9de+IA4YXUGDD6McC9rRw+ZliO6K8m15AiPaF9bHMJFfUD/4Tj3mV1VlibBTEO8F
-	 uNi4nhlwP0flFrwRYofWBhidV3CyrwO3Ohqw39RT7pirA0ncHRz+6fEkDIiy1giAAX
-	 myU33ypJ42Lxw==
+	b=bcUYOlcxNY2unaGsdpV/PNxN6CGNb+Fi4kkDuvjx/BmOz6nrwMgbZMe6bZedkM3lN
+	 pZa3iziIzoyfIK8R4t5xZ21YktpzlM7lW3/uFMaCGHcpJAvYNw8Defp1XFnYNKJ74U
+	 O9fHRsEjRiacyRFHeVFKUki5p6F9y5qlYA5ISnN/VmBityDfbymawIOnkxuFhOZyIN
+	 qbMFbKI1nqlHCM/sMHQs23ihdQTXg6LXSP7NHI4v5+2PYnKCVnUytMYuABzFGPqOZs
+	 XNXhYLFF4cDr3G0Vl99zEpo0RpA+owsKfimICBoA820+YxNyVDZd/InT6by42xOayx
+	 ZYSEGnxtqkxqw==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v6 2/6] serial: 8250_aspeed_vuart: add
- aspeed,ast2600-vuart compatible string
+Subject: Re: [PATCH v5 08/12] gpio: pl061: add Ambarella CV75 register
+ layout variant
 Reply-To: sashiko-reviews@lists.linux.dev
-To: =?utf-8?b?R3LDqWdvaXJlIExheWV0?= <gregoire.layet@9elements.com>
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, lee@kernel.org, conor+dt@kernel.org, robh@kernel.org
-In-Reply-To: <20260818-aspeed-driver-v6-v6-2-fd7cc0b338ea@9elements.com>
-References: <20260818-aspeed-driver-v6-v6-0-fd7cc0b338ea@9elements.com>
- <20260818-aspeed-driver-v6-v6-2-fd7cc0b338ea@9elements.com>
+To: "Long Zhao" <longzhao@ambarella.com>
+Cc: robh@kernel.org, conor+dt@kernel.org, mfd@lists.linux.dev, devicetree@vger.kernel.org, linux-clk@vger.kernel.org, lee@kernel.org
+In-Reply-To: <20260818-cv75-v5-v5-8-7bbb12f0360f@ambarella.com>
+References: <20260818-cv75-v5-v5-0-7bbb12f0360f@ambarella.com>
+ <20260818-cv75-v5-v5-8-7bbb12f0360f@ambarella.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 18 Aug 2026 10:43:26 +0000
-Message-Id: <20260818104327.453971F000E9@smtp.kernel.org>
+Date: Tue, 18 Aug 2026 10:45:04 +0000
+Message-Id: <20260818104504.82F761F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
+Thank you for your contribution! Sashiko AI review found 3 potential issue(=
 s) to consider:
-
-Pre-existing issues:
-- [High] Probe error paths after 8250 port registration fail to unregister =
-the port, leading to Use-After-Free.
-- [High] Sysfs attributes are exposed before driver data is set, leading to=
- a NULL pointer dereference if accessed concurrently.
+- [High] Hardware state corruption: `pl061_resume` forcefully claims all pi=
+ns as GPIOs, glitching active alternate functions.
+- [High] Unlocked restoration of the `mask` register in `pl061_resume` race=
+s with consumer IRQ handlers.
+- [High] Silent removal of implicit memory barriers by substituting `_relax=
+ed` I/O accessors.
 --
 
---- Patch [2]: [PATCH v6 2/6] serial: 8250_aspeed_vuart: add aspeed,ast2600=
--vuart compatible string ---
-commit fe8c86639134718c0c590213718a2ba091aac548
-Author: Gr=C3=A9goire Layet <gregoire.layet@9elements.com>
+--- Patch [8]: [PATCH v5 08/12] gpio: pl061: add Ambarella CV75 register la=
+yout variant ---
+commit 507564f23a0859a6fc4454b94d3ad422721665ac
+Author: Long Zhao <longzhao@ambarella.com>
 
-serial: 8250_aspeed_vuart: add aspeed,ast2600-vuart compatible string
+gpio: pl061: add Ambarella CV75 register layout variant
 
-Make the driver compatible with the ast2600-vuart.
-Enable specific configuration for the AST2600.
+This commit extends gpio-pl061 with a per-variant register layout. This=20
+allows the Ambarella CV75 GPIO banks to reuse the PL061 driver instead of=20
+adding a duplicate driver.
 
-> --- a/drivers/tty/serial/8250/8250_aspeed_vuart.c
-> +++ b/drivers/tty/serial/8250/8250_aspeed_vuart.c
-> @@ -560,6 +560,7 @@ static void aspeed_vuart_remove(struct platform_devic=
-e *pdev)
->  static const struct of_device_id aspeed_vuart_table[] =3D {
->  	{ .compatible =3D "aspeed,ast2400-vuart" },
->  	{ .compatible =3D "aspeed,ast2500-vuart" },
-> +	{ .compatible =3D "aspeed,ast2600-vuart" },
-
-[Severity: High]
-This isn't a bug introduced by this patch, but since this enables the driver
-for new hardware, is it possible for the probe error paths to cause a
-use-after-free?
-
-Looking at aspeed_vuart_probe() in drivers/tty/serial/8250/8250_aspeed_vuar=
-t.c,
-the 8250 port is registered early:
-
-aspeed_vuart_probe() {
-    ...
-    rc =3D serial8250_register_8250_port(&port);
-    if (rc < 0)
-        goto err_sysfs_remove;
-    ...
-
-If a subsequent step fails, such as the lpc-io-reg property check:
-
-    rc =3D aspeed_vuart_set_lpc_address(vuart, prop);
-    if (rc < 0) {
-        dev_err_probe(dev, rc, "invalid value in aspeed,lpc-io-reg property=
-\n");
-        goto err_sysfs_remove;
-    }
-
-The err_sysfs_remove label returns without calling
-serial8250_unregister_port(). Devres will then automatically free the vuart
-struct, but the 8250 port remains registered and pointing to freed memory.
-
-If userspace later accesses the port, such as by calling
-aspeed_vuart_startup(), would this dereference the freed vuart pointer?
-
+diff --git a/drivers/gpio/gpio-pl061.c b/drivers/gpio/gpio-pl061.c
+index 919cf86fd590f..7002ddbc97138 100644
+--- a/drivers/gpio/gpio-pl061.c
++++ b/drivers/gpio/gpio-pl061.c
+@@ -50,15 +50,17 @@
+[ ... ]
+> +static u32 pl061_read(struct pl061 *pl061, u32 offset)
+> +{
+> +	if (pl061->variant->access_32bit)
+> +		return readl_relaxed(pl061->base + offset);
+> +
+> +	return readb_relaxed(pl061->base + offset);
+> +}
+> +
+> +static void pl061_write(struct pl061 *pl061, u32 value, u32 offset)
+> +{
+> +	if (pl061->variant->access_32bit)
+> +		writel_relaxed(value, pl061->base + offset);
+> +	else
+> +		writeb_relaxed(value, pl061->base + offset);
+> +}
 
 [Severity: High]
-This is also a pre-existing issue, but does creating the sysfs group this
-early expose a race condition during probe?
+Does this substitution of standard I/O accessors with their relaxed variants
+silently remove implicit memory barriers?
 
-In aspeed_vuart_probe(), sysfs attributes are exposed before the driver
-data is set:
+Previously, the driver used readb() and writeb(), which include memory
+barriers. By switching to the relaxed accessors, if a driver updates a DMA
+buffer and then calls gpiod_set_value() to trigger the hardware, the CPU
+could reorder the GPIO write before the memory write.=20
 
-aspeed_vuart_probe() {
-    ...
-    rc =3D sysfs_create_group(&vuart->dev->kobj, &aspeed_vuart_attr_group);
-    if (rc < 0)
-        return rc;
-    ...
-    platform_set_drvdata(pdev, vuart);
-    return 0;
-}
+Could this cause the device to observe the GPIO edge before the DMA data
+actually reaches memory?
 
-If a userspace process reads a sysfs attribute concurrently before probe
-completes, sirq_show() will retrieve a NULL pointer from dev_get_drvdata():
+[ ... ]
+> @@ -389,7 +512,7 @@ static int pl061_resume(struct device *dev)
+>  	struct pl061 *pl061 =3D dev_get_drvdata(dev);
+>  	int offset;
+> =20
+> -	for (offset =3D 0; offset < PL061_GPIO_NR; offset++) {
+> +	for (offset =3D 0; offset < pl061->gc.ngpio; offset++) {
+>  		if (pl061->csave_regs.gpio_dir & (BIT(offset)))
+>  			pl061_direction_output(&pl061->gc, offset,
+>  					pl061->csave_regs.gpio_data &
+>  					(BIT(offset)));
+>  		else
+>  			pl061_direction_input(&pl061->gc, offset);
+>  	}
 
-sirq_show() {
-    struct aspeed_vuart *vuart =3D dev_get_drvdata(dev);
-    u8 reg;
+[Severity: High]
+Can this loop corrupt the hardware state of alternate function pins during
+system resume?
 
-    reg =3D aspeed_vuart_readb(vuart, ASPEED_VUART_GCRB);
-    ...
-}
+This loop unconditionally calls pl061_direction_output() or
+pl061_direction_input() on all pins. Since this patch now makes those
+functions call pl061_claim_gpio(), which clears the alternate function sele=
+ct
+(afsel) bit:
 
-Will this cause a NULL pointer dereference when aspeed_vuart_readb()
-attempts to access vuart->port?
+pl061_direction_output() -> pl061_claim_gpio():
+    afsel =3D pl061_read(pl061, pl061->variant->afsel);
+    if (afsel & BIT(offset))
+        pl061_write(pl061, afsel & ~BIT(offset),
+                    pl061->variant->afsel);
 
->  	{ },
->  };
+Won't this forcefully claim active alternate function pins (like UART or SP=
+I)
+as GPIOs and momentarily glitch their interfaces until afsel is eventually
+restored below?
+
+[ ... ]
+> -	writeb(pl061->csave_regs.gpio_is, pl061->base + GPIOIS);
+> -	writeb(pl061->csave_regs.gpio_ibe, pl061->base + GPIOIBE);
+> -	writeb(pl061->csave_regs.gpio_iev, pl061->base + GPIOIEV);
+> -	writeb(pl061->csave_regs.gpio_ie, pl061->base + GPIOIE);
+> +	pl061_write(pl061, pl061->csave_regs.gpio_is,
+> +		    pl061->variant->is);
+> +	pl061_write(pl061, pl061->csave_regs.gpio_ibe,
+> +		    pl061->variant->ibe);
+> +	pl061_write(pl061, pl061->csave_regs.gpio_iev,
+> +		    pl061->variant->iev);
+> +	pl061_write(pl061, pl061->csave_regs.gpio_ie,
+> +		    pl061->variant->ie);
+> +	if (pl061->variant->afsel !=3D PL061_REG_NONE)
+> +		pl061_write(pl061, pl061->csave_regs.gpio_afsel,
+> +			    pl061->variant->afsel);
+> +	if (pl061->variant->mask !=3D PL061_REG_NONE)
+> +		pl061_write(pl061, pl061->csave_regs.gpio_mask,
+> +			    pl061->variant->mask);
+
+[Severity: High]
+Is there a race condition between restoring the interrupt enable register a=
+nd
+the mask register?
+
+When pl061_resume() restores gpio_ie, it immediately enables device
+interrupts. It then proceeds to restore the mask register without holding
+pl061->lock.
+
+If a consumer IRQ handler executes concurrently and accesses a GPIO, it will
+acquire the lock and write its target bit to the mask register, which acts =
+as
+an address pointer in pl061_set_data(). The unlocked pl061_resume() could
+then overwrite this mask register just before the IRQ handler accesses the
+data register, potentially misdirecting the GPIO operation.
+
+Should the mask be restored before gpio_ie, or should this section be
+protected by the lock?
 
 --=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260818-aspeed-dri=
-ver-v6-v6-0-fd7cc0b338ea@9elements.com?part=3D2
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260818-cv75-v5-v5=
+-0-7bbb12f0360f@ambarella.com?part=3D8
