@@ -1,284 +1,328 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 250EB3C1D41;
-	Tue, 18 Aug 2026 09:03:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 231BC3C0A0A;
+	Tue, 18 Aug 2026 09:03:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787043811; cv=none; b=g2rHAg31dvSBLsCVqcIE8svgGVuMfxNrTP8MHGHUhiviAd5GAuMjIhi4ymyq75CWh7GLnK/lnNaiJA+7bcZvU3fp7iBd+sD7rZFGreX3nO7V15Fpd/aZCo60WoZP8ncNlhWJLxHUo6Grbswh6OhhLYb5sNR4csQiGyLVoxOwJGM=
+	t=1787043812; cv=none; b=Dls5pC8Iu1SpaQAGkE3tyV/yyT2Vk31n/qoX8zU6+FQBroDij+hQz66PURhT+2C5NoKmAVW8s5T8RsyRHY+scjtEJxIm3oh1pqUW6/Ih+rHLD/b7R/S1J73W5adJMPOdXtugdGY+lNPRT4cdmEUHm3bzR+N3pZ0kkVcFvXTDSEM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787043811; c=relaxed/simple;
-	bh=0qKIhQVZW5rKX6B9PXdGr60TQHbTdXb6cP0DGKkgjRU=;
+	s=arc-20240116; t=1787043812; c=relaxed/simple;
+	bh=QCSzAiduTJ6LygUWkuC4Uvl/wT2UyK9YnHotD0Jx8gc=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=RofLuuIq+ZYBdYG0lK/ZRHa5DMnxJPfKeFzhCMzLyUL4AqknO5z5OSSK8aZOsp2zX8A3wIgDcMs4uMwvFDLgufAC/80YClFUIhL6iXFl9vdHQwjbWf63Qph1hs6NGVqnqZhY8OEp64Rc/ccX99pVnUJKDAyYoDP/Zp1C0W/v1vg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NxO3UTxr; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=dNoMm0tzReiQ9t8Z4Bok1NYQmZFYyq/q7omlr00V3uGxdFF3wLMG0/ORjSB+nhX0IRXKhWySpaOMhl34FvIM21JoY7OMxbGd61oPCfkiLocyW37Ng6nL9ImOWre61sMnLgJm9QgD26x+MtAQvvrRu5FPqTjIB7loUTsKP68YIsw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gAX+3uvK; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NxO3UTxr"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4BB591F000E9;
-	Tue, 18 Aug 2026 09:03:27 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gAX+3uvK"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 81F751F00A3D;
+	Tue, 18 Aug 2026 09:03:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787043808;
-	bh=bmfE2bMEUbqFNj7kpP5gdt7Evvg+mThSQ1+R6T2QIY8=;
+	s=k20260515; t=1787043809;
+	bh=BTL2+r4qg3hCbocJK7M771rK2vkHTl8kAb+pCCkUWl4=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=NxO3UTxrixmJgdBX9ZLBaDrkUW9lHxxjg41RpacBVnHAsItakFKl8ciahg98L8hGa
-	 u2nK+ZHPF2Dngp/RxtryaR7b5S19HhTsklvTv1VtrPEkwER3muiIJVehcqbCM9BY2N
-	 zMZ4Hvra6/AkWf5b2MXoROjpeukoNBRc9uBHaFoBEGMtsd6tUkixAlMoNBB1xdMpBM
-	 G7NOcK0XDZUJH3jjP9U6EGqrJLiMQamgiyWOQA0As1pPA3oOGO5+L6rJq71zqRekgL
-	 w543VcXmE6faX5z7WuQKVJwGXCUDbf20+Qw8/nIrp0lwUON0JQO4xeGDxbm8AIFvhQ
-	 NaXW9cRocSS9A==
+	b=gAX+3uvKSu/jIp9Cfe+q6VUpWtdBB5OebX30aCPtXcIP08P0EQpvCwF5tZ9k+nn7o
+	 Mxe/vuXPMbQ1EikH5EujtdbidanGLkOfpY9pQD1NalBfnwV2tYBKkvwEgSCekP4jRB
+	 C4pJYWgexqpHxHfYAdQKvMyXaDb5kGYe+/xdQKTCtkvgrm0Efsxc4/BZx/4Hi/eKxD
+	 X150KARKa9bFv8k65HmyPCnilYIm7GWoG/8Qhqia6BGabPzm7AAln34SxMQF6DUHRV
+	 UKMlVJlRQjj48/GqWsATNPN/iyWGavl0BRtw1RlF3mG9v82nLD0e50f2dKgTRJeexn
+	 qZVpn6dbU5FhA==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH net-next v20 09/10] net: dsa: mt7530: generalize and
- move common function to lib module
+Subject: Re: [PATCH net-next v20 10/10] net: dsa: Add Airoha AN8855 5-Port
+ Gigabit DSA Switch driver
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Christian Marangi" <ansuelsmth@gmail.com>
-Cc: mfd@lists.linux.dev, robh@kernel.org, lee@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org
-In-Reply-To: <20260817082034.20326-11-ansuelsmth@gmail.com>
+Cc: devicetree@vger.kernel.org, lee@kernel.org, robh@kernel.org, mfd@lists.linux.dev, conor+dt@kernel.org
+In-Reply-To: <20260817082034.20326-12-ansuelsmth@gmail.com>
 References: <20260817082034.20326-1-ansuelsmth@gmail.com>
- <20260817082034.20326-11-ansuelsmth@gmail.com>
+ <20260817082034.20326-12-ansuelsmth@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 18 Aug 2026 09:03:26 +0000
-Message-Id: <20260818090327.4BB591F000E9@smtp.kernel.org>
+Date: Tue, 18 Aug 2026 09:03:28 +0000
+Message-Id: <20260818090328.81F751F00A3D@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 8 potential issue(=
+Thank you for your contribution! Sashiko AI review found 9 potential issue(=
 s) to consider:
-- [High] Unsafe conversion of atomic command register triggers into multipl=
-e sequential Read-Modify-Write (RMW) operations.
-- [High] Hardware staging registers for FDB and VLAN data will retain stale=
- or garbage bits due to the switch from full-register overwrites to field-b=
-ased RMWs.
-- [High] `mt7530_port_enable()` incorrectly applies `PCR_MATRIX_MASK` to an=
- unshifted port matrix value, isolating the port and dropping all traffic.
-- [High] Missing `reg_fields` initialization for `ID_EN7528` leads to a NUL=
-L pointer dereference during port mirroring.
-- [High] mt7530_lib_port_bridge_flags() disables MAC address learning when =
-it is supposed to be enabled, and vice versa.
-- [High] mt7530_lib_fdb_read() swaps the last two bytes of the MAC address =
-when reading FDB entries.
-- [High] Unchecked regmap_field_read() failures lead to the use of uninitia=
-lized stack variables, potentially leaking stack memory to userspace or cor=
-rupting hardware state.
-- [Medium] `mt7530_lib_mib_reset()` inadvertently disables the hardware MIB=
- counters for octets and breaks the flush sequence by writing 0 instead of =
-1.
+- [High] Missing mutex unlock on error paths permanently deadlocks `priv->r=
+eg_mutex`.
+- [High] Kconfig dependency mismatch selects the wrong DSA tag driver, brea=
+king switch probe.
+- [High] Inverted logic for BR_LEARNING disables hardware MAC address learn=
+ing when requested to be enabled.
+- [High] Array index of `-1` for `mib->field_high` accesses the `regmap` po=
+inter, causing a type confusion kernel panic.
+- [High] Kernel panics due to NULL pointer dereferences from missing/uninit=
+ialized regmap fields.
+- [High] Unprotected lockless access to `dev->phydev` of other ports causes=
+ Use-After-Free.
+- [Medium] Duplication of standard kernel statistics in private `ethtool -S=
+` counters.
+- [Medium] Swapped TX and RX histograms in RMON stats mappings.
+- [Low] `an8855_get_sset_count` incorrectly returns 0 instead of -EOPNOTSUP=
+P for unsupported string sets.
 --
 
---- Patch [9]: [PATCH net-next v20 09/10] net: dsa: mt7530: generalize and =
-move common function to lib module ---
-commit 302309065c4dc5c4e0f17f164c9e39732602b582
+--- Patch [10]: [PATCH net-next v20 10/10] net: dsa: Add Airoha AN8855 5-Po=
+rt Gigabit DSA Switch driver ---
+commit 2771206895bf8d2182821a844b4664df5776fc10
 Author: Christian Marangi <ansuelsmth@gmail.com>
 
-net: dsa: mt7530: generalize and move common function to lib module
+net: dsa: Add Airoha AN8855 5-Port Gigabit DSA Switch driver
 
-This commit moves common functions for the MT7530 switch into a separate
-library module to prepare for Airoha support. It refactors register
-accesses to use the regmap reg_field API instead of raw read/writes. A
-new library struct is introduced to house the shared dependencies and
-register fields.
+This commit introduces the driver for the Airoha AN8855 5-Port Gigabit
+DSA switch. It adds configuration for MAC and PHY settings, ethtool
+statistics, bridging, and VLAN capabilities.
 
-> diff --git a/drivers/net/dsa/mt7530-lib.c b/drivers/net/dsa/mt7530-lib.c
-> new file mode 100644
-> index 0000000000000..01ed941efc892
-> --- /dev/null
-> +++ b/drivers/net/dsa/mt7530-lib.c
-> @@ -0,0 +1,1106 @@
+> diff --git a/drivers/net/dsa/Kconfig b/drivers/net/dsa/Kconfig
+> --- a/drivers/net/dsa/Kconfig
+> +++ b/drivers/net/dsa/Kconfig
+> @@ -24,6 +24,15 @@ config NET_DSA_LOOP
 [ ... ]
-> +void mt7530_lib_mib_reset(struct mt7530_lib_priv *priv)
-> +{
-> +	regmap_field_write(priv->fields[MT7530_CCR_MIB_ENABLE], 0);
-> +	regmap_field_write(priv->fields[MT7530_CCR_RX_OCT_CNT_GOOD], 0);
-> +	regmap_field_write(priv->fields[MT7530_CCR_RX_OCT_CNT_BAD], 0);
-> +	regmap_field_write(priv->fields[MT7530_CCR_TX_OCT_CNT_GOOD], 0);
-> +	regmap_field_write(priv->fields[MT7530_CCR_TX_OCT_CNT_BAD], 0);
+> +config NET_DSA_AN8855
+> +	tristate "Airoha AN8855 Ethernet switch support"
+> +	depends on MFD_AIROHA_AN8855 || COMPILE_TEST
+> +	depends on NET_DSA
+> +	select NET_DSA_TAG_MTK
+
+[Severity: High]
+Does this config mistakenly select the MTK tagger instead of the AIROHA tag=
+ger?
+
+In an8855_get_tag_protocol(), the driver returns DSA_TAG_PROTO_AIROHA. If
+NET_DSA_TAG_AIROHA is not independently selected, the required Airoha tagger
+won't be compiled, which will cause the switch initialization to abort.
+
+> diff --git a/drivers/net/dsa/an8855.c b/drivers/net/dsa/an8855.c
+> --- /dev/null
+> +++ b/drivers/net/dsa/an8855.c
+> @@ -0,0 +1,1716 @@
+[ ... ]
+> +static const struct mt7530_reg_field an8855_fields[] =3D {
+> +	{ MT7530_BC_FFP, REG_FIELD(AN8855_BCF, 0, 7) },
+[ ... ]
+> +	{ MT7530_PSC_SA_DIR, REG_FIELD_ID(AN8855_PSC, 4, 4, AN8855_NUM_PORTS, 0=
+x200) },
+
+[Severity: High]
+Does this inverted logic disable hardware MAC address learning when it shou=
+ld
+be enabled?
+
+The MT7530_PSC_SA_DIR field is mapped to AN8855_SA_DIS (Source Address
+Disable, bit 4). When mt7530_lib_port_bridge_flags() processes the BR_LEARN=
+ING
+flag, it writes a 1 to this field to enable learning, which instead sets the
+disable bit and turns the feature off.
+
+[ ... ]
+> +	{ MT7530_MIB_TX_PKT_SZ_512_TO_1023, REG_FIELD_ID(AN8855_PORT_MIB_TX_PKT=
+_SZ_512_TO_1023, 0, 32, AN8855_NUM_PORTS, 0x200) },
+> +	{ AN8855_MIB_TX_PKT_SZ_1024_TO_1518, REG_FIELD_ID(AN8855_PORT_MIB_RX_PK=
+T_SZ_1024_TO_1518, 0, 32, AN8855_NUM_PORTS, 0x200) },
+> +	{ AN8855_MIB_TX_PKT_SZ_1519_TO_MAX, REG_FIELD_ID(AN8855_PORT_MIB_RX_PKT=
+_SZ_1519_TO_MAX, 0, 32, AN8855_NUM_PORTS, 0x200) },
+
+[Severity: High]
+Could the omission of several expected mapping IDs in this array lead to
+kernel panics?
+
+The array appears to omit MT7530_MIRROR_EN, MT7530_MIRROR_PORT, and
+AN8855_MIB_TX_OVERSIZE_DROP. When mt7530_lib_port_mirror_add() or
+an8855_get_ethtool_stats() execute, they will unconditionally read from the=
+se
+uninitialized pointers, resulting in a NULL pointer dereference.
+
+[ ... ]
+> +static const struct mt7530_mib_desc an8855_mib[] =3D {
+> +	MIB_DESC(MT7530_MIB_TX_DROP, -1, "TxDrop"),
+> +	MIB_DESC(MT7530_MIB_TX_CRC_ERR, -1, "TxCrcErr"),
+> +	MIB_DESC(MT7530_MIB_TX_COLLISION, -1, "TxCollision"),
 
 [Severity: Medium]
-Does this correctly clear the counters? The original code wrote a 1 to flush
-and clear the counters. Writing 0 to a write-1-to-clear field might fail to
-reset them.
+Does this array add standardized UAPI counters to the private ethtool
+statistics?
+
+Standard kernel subsystem rules mandate using the standard UAPI (such as
+rtnl_link_stats64 or ethtool_eth_mac_stats) rather than ethtool -S for wide=
+ly
+standardized counters like TxDrop and TxCollision.
 
 [ ... ]
-> +int mt7530_lib_fdb_cmd(struct mt7530_lib_priv *priv, enum mt7530_fdb_cmd=
- cmd,
-> +		       u32 mat, u32 *rsp)
+> +static void an8855_port_fast_age(struct dsa_switch *ds, int port)
 > +{
-> +	u32 val;
+> +	struct an8855_priv *priv =3D ds->priv;
 > +	int ret;
 > +
-> +	ret =3D regmap_field_write(priv->fields[MT7530_ATC_MAT], mat);
-> +	if (ret)
-> +		return ret;
+> +	mutex_lock(&priv->reg_mutex);
 > +
-> +	ret =3D regmap_field_write(priv->fields[MT7530_ATC_CMD], cmd);
-> +	if (ret)
-> +		return ret;
+> +	/* Set to clean Dynamic entry */
+> +	ret =3D regmap_write(priv->regmap, AN8855_ATA2, AN8855_ATA2_TYPE);
+> +	if (ret) {
+> +		dev_err(priv->ds->dev, "failed to update ATA2 reg: %d\n", ret);
+> +		return;
+> +	}
 > +
-> +	ret =3D regmap_field_write(priv->fields[MT7530_ATC_BUSY], 1);
+> +	/* Set Port */
+> +	ret =3D regmap_write(priv->regmap, AN8855_ATWD2,
+> +			   FIELD_PREP(AN8855_ATWD2_PORT, BIT(port)));
+> +	if (ret) {
+> +		dev_err(priv->ds->dev, "failed to update ATWD2 reg: %d\n", ret);
+> +		return;
+> +	}
 
 [Severity: High]
-Can splitting the FDB command execution into multiple read-modify-writes
-corrupt the MAC table operations? The previous implementation constructed t=
-he
-32-bit value and wrote it atomically, preventing intermediate hardware stat=
-es.
+Can these error paths cause a permanent deadlock on priv->reg_mutex?
+
+If regmap_write() fails, the function returns directly without executing
+mutex_unlock(&priv->reg_mutex), deadlocking future driver operations.
 
 [ ... ]
-> +static void mt7530_lib_fdb_write(struct mt7530_lib_priv *priv, u16 vid,
-> +				 u8 port_mask, const u8 *mac,
-> +				 u8 aging, u8 type)
+> +static int an8855_get_sset_count(struct dsa_switch *ds, int port,
+> +				 int sset)
 > +{
-> +	regmap_field_write(priv->fields[MT7530_ATWD_CVID], vid);
-> +	regmap_field_write(priv->fields[MT7530_ATWD_IVL], 1);
+> +	if (sset !=3D ETH_SS_STATS)
+> +		return 0;
+> +
+> +	return ARRAY_SIZE(an8855_mib);
+> +}
 
-[Severity: High]
-Could this approach leak uninitialized or stale data into the FDB table?
-Writing fields individually performs a read-modify-write, preserving undefi=
-ned
-bits from prior operations, whereas the old code explicitly cleared
-unspecified bits by writing fully initialized arrays directly.
+[Severity: Low]
+Should this return -EOPNOTSUPP instead of 0 for unsupported string sets?
+
+Standard kernel API rules require returning -EOPNOTSUPP for unsupported
+ethtool sets to prevent userspace tools from misinterpreting the capability
+as existing but having 0 elements.
 
 [ ... ]
-> +void mt7530_lib_fdb_read(struct mt7530_lib_priv *priv, struct mt7530_fdb=
- *fdb)
+> +static void an8855_get_ethtool_stats(struct dsa_switch *ds, int port,
+> +				     uint64_t *data)
 > +{
-> +	u32 val;
+> +	struct an8855_priv *priv =3D ds->priv;
+> +	const struct mt7530_mib_desc *mib;
+> +	struct mt7530_lib_priv *lib_priv;
+> +	int i;
 > +
-> +	regmap_field_read(priv->fields[MT7530_ATRD_CVID], &val);
-> +	fdb->vid =3D val;
+> +	lib_priv =3D &priv->lib_priv;
+> +	for (i =3D 0; i < ARRAY_SIZE(an8855_mib); i++) {
+> +		mib =3D &an8855_mib[i];
+> +
+> +		mt7530_lib_read_port_stats(lib_priv->fields[mib->field_low],
+> +					   lib_priv->fields[mib->field_high],
+> +					   port, data + i);
+> +	}
+> +}
 
 [Severity: High]
-If regmap_field_read fails, could we end up assigning uninitialized stack
-memory from val to the fdb fields? This might leak kernel stack data to
-userspace during an FDB dump.
+Will passing an array index of -1 for mib->field_high cause a type confusion
+kernel panic?
+
+Several MIB definitions pass -1 for field_high. Since the fields array
+follows the regmap pointer in struct mt7530_lib_priv, an index of -1
+evaluates to the address of the regmap pointer. This disguised pointer will
+then be passed to regmap_fields_read(), causing a crash.
 
 [ ... ]
-> +int mt7530_lib_port_mirror_add(struct mt7530_lib_priv *priv, int port,
-> +			       struct dsa_mall_mirror_tc_entry *mirror,
-> +			       bool ingress, struct netlink_ext_ack *extack)
+> +static const struct mt7530_rmon_hist an8855_rmon_hist_info =3D {
+> +	.ranges_fields =3D (unsigned int []){
+> +		MT7530_MIB_TX_PKT_SZ_64,
+> +		MT7530_MIB_TX_PKT_SZ_65_TO_127,
+> +		MT7530_MIB_TX_PKT_SZ_128_TO_255,
+> +		MT7530_MIB_TX_PKT_SZ_256_TO_511,
+> +		MT7530_MIB_TX_PKT_SZ_512_TO_1023,
+> +		AN8855_MIB_RX_PKT_SZ_1024_TO_1518,
+> +		AN8855_MIB_RX_PKT_SZ_1519_TO_MAX,
+> +	},
+> +	.ranges_tx_fields =3D (unsigned int []){
+> +		MT7530_MIB_RX_PKT_SZ_64,
+> +		MT7530_MIB_RX_PKT_SZ_65_TO_127,
+> +		MT7530_MIB_RX_PKT_SZ_128_TO_255,
+> +		MT7530_MIB_RX_PKT_SZ_256_TO_511,
+> +		MT7530_MIB_RX_PKT_SZ_512_TO_1023,
+> +		AN8855_MIB_RX_PKT_SZ_1024_TO_1518,
+> +		AN8855_MIB_RX_PKT_SZ_1519_TO_MAX,
+> +	},
+
+[Severity: Medium]
+Are the TX and RX histograms swapped in these RMON stats mappings?
+
+The ranges_fields array (intended for RX histograms) is populated with
+TX_PKT_SZ register references, while ranges_tx_fields (intended for TX
+histograms) is populated with RX_PKT_SZ references.
+
+[ ... ]
+> +static void an8855_phylink_mac_link_up(struct phylink_config *config,
+> +				       struct phy_device *phydev, unsigned int mode,
+> +				       phy_interface_t interface, int speed,
+> +				       int duplex, bool tx_pause, bool rx_pause)
 > +{
-> +	int monitor_port;
-> +	u32 val;
+[ ... ]
+> +	} else {
+> +		reg |=3D AN8855_PMCR_FORCE_MODE | AN8855_PMCR_FORCE_LNK;
 > +
-> +	/* Check for existent entry */
-> +	if ((ingress ? priv->mirror_rx : priv->mirror_tx) & BIT(port))
-> +		return -EEXIST;
-> +
-> +	regmap_field_read(priv->fields[MT7530_MIRROR_EN], &val);
+> +		reg &=3D ~AN8855_PMCR_FORCE_SPEED;
+> +		switch (speed) {
+> +		case SPEED_10:
+> +			reg |=3D AN8855_PMCR_FORCE_SPEED_10;
+> +			break;
+> +		case SPEED_100:
+> +			reg |=3D AN8855_PMCR_FORCE_SPEED_100;
+> +			break;
+> +		case SPEED_1000:
+> +			reg |=3D AN8855_PMCR_FORCE_SPEED_1000;
+> +			break;
+> +		case SPEED_2500:
+> +			reg |=3D AN8855_PMCR_FORCE_SPEED_2500;
+> +			break;
+> +		case SPEED_5000:
+> +			dev_err(priv->ds->dev, "Missing support for 5G speed. Aborting...\n");
+> +			return;
+> +		}
 
 [Severity: High]
-Is it possible for priv->fields to lack an initialization here? The
-ID_EN7528 entry in mt753x_table appears to be missing its reg_fields
-setup, which could lead to a NULL pointer dereference.
+Does this error path leave priv->reg_mutex permanently locked?
 
-[Severity: High]
-Could a failure in regmap_field_read leave val and monitor_port
-uninitialized? Using these uninitialized values in the subsequent condition
-might cause unpredictable branch behavior.
+Returning directly in the SPEED_5000 case skips the mutex_unlock() call,
+which will deadlock any future driver operations requiring this mutex.
 
 [ ... ]
-> +int mt7530_lib_port_bridge_flags(struct mt7530_lib_priv *priv, int port,
-> +				 struct switchdev_brport_flags flags,
-> +				 struct netlink_ext_ack *extack)
+> +static int an8855_phylink_mac_enable_tx_lpi(struct phylink_config *confi=
+g,
+> +					    u32 timer, bool tx_clock_stop)
 > +{
-> +	struct dsa_switch *ds =3D priv->ds;
+[ ... ]
+> +	if (timer) {
+> +		dsa_switch_for_each_user_port(other_dp, ds) {
+> +			struct phy_device *phydev;
+> +			struct net_device *dev;
 > +
-> +	if (flags.mask & BR_LEARNING)
-> +		regmap_fields_write(priv->fields[MT7530_PSC_SA_DIR],
-> +				    port, !!(flags.val & BR_LEARNING));
+> +			if (other_dp =3D=3D dp)
+> +				continue;
+> +
+> +			dev =3D other_dp->user;
+> +			if (!dev)
+> +				continue;
+> +
+> +			phydev =3D dev->phydev;
+> +			if (!phydev)
+> +				continue;
+> +
+> +			if (timer < phydev->eee_cfg.tx_lpi_timer)
+> +				timer =3D phydev->eee_cfg.tx_lpi_timer;
+> +		}
 
 [Severity: High]
-Does this invert the learning logic? The hardware bit SA_DIS disables
-learning, so passing the boolean value of BR_LEARNING directly might
-disable learning when it is supposed to be enabled, and vice versa.
+Can this lockless access to another port's dev->phydev cause a
+use-after-free?
 
-[ ... ]
-> +static int mt7530_vlan_cmd(struct mt7530_lib_priv *priv, enum mt7530_vla=
-n_cmd cmd,
-> +			   u16 vid)
-> +{
-> +	u32 val;
-> +	int ret;
-> +
-> +	ret =3D regmap_field_write(priv->fields[MT7530_VTCR_FUNC], cmd);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret =3D regmap_field_write(priv->fields[MT7530_VTCR_VID], vid);
-
-[Severity: High]
-Will breaking this command register access into multiple read-modify-write
-operations cause issues with the hardware state machine? The original code
-wrote the entire VTCR register in a single atomic operation.
-
-[ ... ]
-> +static void mt7530_hw_vlan_add(struct mt7530_lib_priv *priv,
-> +			       struct mt7530_hw_vlan_entry *entry)
-> +{
-> +	struct dsa_port *dp =3D dsa_to_port(priv->ds, entry->port);
-> +	u8 new_members;
-> +	u32 val;
-> +
-> +	new_members =3D entry->old_members | BIT(entry->port);
-> +
-> +	/* Validate the entry with independent learning, create egress tag per
-> +	 * VLAN and joining the port as one of the port members.
-> +	 */
-> +	regmap_field_write(priv->fields[MT7530_VAWD_IVL_MAC], 1);
-
-[Severity: High]
-Might this leave stale or garbage bits in the VAWD1 register? The original
-logic performed a full 32-bit register overwrite, explicitly clearing
-unspecified bits like EG_CON. Using sequential regmap_field_write operations
-performs read-modify-writes, which retains any previous unmapped bits.
-
-> diff --git a/drivers/net/dsa/mt7530.c b/drivers/net/dsa/mt7530.c
-> index d01772cfe3a2d..f313a7a7bfef1 100644
-> --- a/drivers/net/dsa/mt7530.c
-> +++ b/drivers/net/dsa/mt7530.c
-[ ... ]
-> @@ -24,10 +24,159 @@
->  #include <net/pkt_cls.h>
-> =20
->  #include "mt7530.h"
-> +#include "mt7530-lib.h"
-> =20
->  #define MT7530_STATS_POLL_INTERVAL	(1 * HZ)
->  #define MT7530_STATS_RATE_LIMIT		(HZ / 10)
-> =20
-> +static const struct mt7530_reg_field mt753x_fields[] =3D {
-[ ... ]
-> +	{ MT7530_ATRD_ENT_STATUS, REG_FIELD(MT7530_ATRD, 2, 3), },
-> +	{ MT7530_ATRD_MAC_BYTE_5, REG_FIELD(MT7530_TSRA2, 24, 31), },
-> +	{ MT7530_ATRD_MAC_BYTE_4, REG_FIELD(MT7530_TSRA2, 16, 23), },
-
-[Severity: High]
-Are the bit ranges for MAC_BYTE_4 and MAC_BYTE_5 swapped here? The original
-logic mapped MAC_BYTE_4 to bits 24-31 and MAC_BYTE_5 to bits 16-23 in the
-TSRA2 register, causing corrupted MAC addresses on FDB read.
-
-[ ... ]
-> @@ -1373,7 +1141,7 @@ mt7530_port_enable(struct dsa_switch *ds, int port,
->  	if (dsa_port_is_user(dp)) {
->  		struct dsa_port *cpu_dp =3D dp->cpu_dp;
-> =20
-> -		priv->ports[port].pm |=3D PCR_MATRIX(BIT(cpu_dp->index));
-> +		priv->ports[port].pm |=3D BIT(cpu_dp->index);
->  	}
->  	priv->ports[port].enable =3D true;
->  	mt7530_rmw(priv, MT7530_PCR_P(port), PCR_MATRIX_MASK,
->  		   priv->ports[port].pm);
-
-[Severity: High]
-Does this effectively isolate the port by dropping all traffic? The bitmask
-in pm is now constructed without the PCR_MATRIX() shift, but it is passed
-directly into mt7530_rmw() where PCR_MATRIX_MASK is applied. Since the
-unshifted bits fall outside the mask, this will write zero to the matrix
-field.
+Because this function runs without holding the rtnl_lock or any lock
+protecting other ports, it is possible for another interface to concurrently
+be brought down. If that happens, phy_disconnect() could clear and free that
+phydev under rtnl_lock, resulting in this loop accessing freed memory.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260817082034.2032=
-6-1-ansuelsmth@gmail.com?part=3D9
+6-1-ansuelsmth@gmail.com?part=3D10
