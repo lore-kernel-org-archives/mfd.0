@@ -1,140 +1,96 @@
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A50D3442B12
-	for <mfd@lists.linux.dev>; Tue, 18 Aug 2026 14:10:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.54
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787062218; cv=pass; b=tISeDfMBEa51ORycmcVadaIx1ki4k3v8TMpZRD8NsaCagA1SHvDcTy60mdp8iAu17/4ZLQp0Erx+MBuF/c9ESZUEIQ2PopY+DNsR1Nj5M2ztQAQy5sG4f+URBVIn4KQGo0nmorTeZ/epukG0gDrP4s2VPqIzm0CNTnTFubi1KgA=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787062218; c=relaxed/simple;
-	bh=ftrznCscSqPlpj0id6UlQ+EeCoZdkszgo291RJdPy9U=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=CU6iS61fMHOKGPExXboAf2VIN9vB8FGqCP6SDeL+Ieq4V+xfeoGzlI+Lmxz9wi9o6zACLM+pkQ1nSkZhKdsCqelTJtrclv7cPl8P6yH1tY51/4jjNwcsQ+T1vfE6+2s5JNTe0ntR29BOClC41O+XQ1DVGYOPOz/zXV+m0DUU+Jk=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=AeXL3c4K; arc=pass smtp.client-ip=209.85.208.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6D8547884D;
+	Tue, 18 Aug 2026 14:11:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.16
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1787062287; cv=none; b=oG/HvjirbpxdRfdHv4NEM+dEB0+E7rBPJKupTbcCcKtK7aPM4AO79Yhg5ef603NvIwhtUyU0CO0b2JLVh0W8PhnvCAJGjMdO/P0/49bGkq28Cl79y9yrZLjDpAKJ/ZV53IwSS7dC8088c8OKdAVh91iDa28E5sn+aNcv2hu4RPI=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1787062287; c=relaxed/simple;
+	bh=WPuMZj2OAQE9HDFZOAAcnqeB5GxLS7XAo+0fZhNpzmU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=AS8ahagw19UFJcCYzNsKsN2Mq38nyhjYqXWoQUWSV5IZ0IgIITzLhmMghYidQaT7TwaR+huyTkId0teN+jg8CTQ8rsxHgtBWOnW64BH4a7sh2Rz3Ya7Zcir2aeZmCrJqV3pMJOTwfXWH0PSowxOP15GFzjFXiqC3wEqaefz6Sp0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=l8SyjFoD; arc=none smtp.client-ip=192.198.163.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="AeXL3c4K"
-Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-6a18d89e4d9so672360a12.2
-        for <mfd@lists.linux.dev>; Tue, 18 Aug 2026 07:10:16 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787062214; cv=none;
-        d=google.com; s=arc-20260327;
-        b=hQ3mxkJzc9d5GJ4ZxsVUkxYfFq2B136zZ7M3R2epMzIiS3E8X8rPWOYWu6O3XNlHuR
-         1db/m1dWKqnbVriodjqD3Uwmlqp/Ye+mxt9Eu0HDSshLdamwLFOKesk6SahcaOb9DxO6
-         djepjdeK30ovpjM6dKjrHDM7aVy84H1eyyLNojzBXlARz+BM5FTU1oLVSiZc0zpj2DdD
-         VyNYNqCk/2ikxTH7efVr/hNC7Q9PDPxjyckGsCNMCsE/foVK4WYNeDG9RDJ3Mf2Xrdv9
-         ffhwgsY/4317MYuG0ChBTReFXal+IpaKGS3GKaf1lgsWsWoP2bgYoUe1H3AW1RcJ5RcC
-         yHAw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=xlXqdOv5z4xMnW/WIr9rPcU6Spl+WfQOIAJPu4c+j/E=;
-        fh=VS7GEb4KtIkNUjNw17o/+i1Y8iiAL5C9ZfA28A+UFlI=;
-        b=axJio0QHMn7sTlklHYc5wKUZTid7WGQEAY1nF1BEFXtAW/vPOhy1zol1JKKtWbpUhc
-         ZsizDYf+dddKpyFwH6zgg49koG9TCbXhf0XLv/O8J9hgm7ZT4Dx5SBZXOypxQo31J8AC
-         MiF7q0fdz5dMqmmxDR5ODJnpR1JkLS+zK8ipagcA/fPdk6cIZtUpoxEo1u1O/xcY+FWy
-         CUo0cv8+2gbEpL5qimSsCkFbfdrnQVwbQbmHQ8gGl/ryoRn1Ux1380sTKO7YZ9s5yDgu
-         gB+YnH9iKoonCobyqmMgoxQjvvzlhpgxdFv8tZyl1FirSYeFIt14NeLpC6gfglJkvM0Y
-         tE0A==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787062214; x=1787667014; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=xlXqdOv5z4xMnW/WIr9rPcU6Spl+WfQOIAJPu4c+j/E=;
-        b=AeXL3c4Kry5nGOkDhPHUAWBngvPx0cPm+Lxg79Z4gdqbKpTV5YjduPMkBQtReqY3FD
-         omedxtCEQGjcDfdJprQ7LVTZLRPR40IRJmXuR0KDH8Ps4dqb+XOhSVonE7A+BDwLZewg
-         VYBDb9UpwvRECPLaJ8Q090uiuAgzsSx1KxzaXLb6vgMAzsi7/+YFga77MTI5K2kxTqJD
-         4M2kjsllufVgtbllrscX4hQSZtEi2BVlJd+sgLKbi693Orf9HWDzOdL2mDDlwgyVF6XN
-         RM6UXi3YEO1akg5l4PE6m+ZmmM0lvFS+hcD0ooim0Nx/wh4+PRFhcTzeEqJCA7VAE8yG
-         D3Cg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787062214; x=1787667014;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=xlXqdOv5z4xMnW/WIr9rPcU6Spl+WfQOIAJPu4c+j/E=;
-        b=HSBWoeVwZj1aJbaYGUTT3vF2Vyi89H6+btHDb9gheMw00drD9C1WsYQhIRTkgpaXtw
-         Htg1X1ZCh1vecDtPe8w18+FhHI7bpRy+hkSof8cDUmTm0OfbLO+AFAJSwrlFXErVCGwL
-         qOUYvvh89zYLIAS6xC60qzgoi5GoaPA9YJ0nafHOp6zN8VE0g36i9QxhsaMCxbEn+Vx/
-         3qRBRGj0csURjF4O0GU5xsCTUjqTto8dntmobALOgYprJZrtLuP7iIVxqfjVpA6GiWTk
-         7J5S1exv/tIyFqt6FDL9+CcZVcRJ3UYi4rxWEnzw1dpGsJL7DvxWchvUZzzwpUrwcljd
-         mzrA==
-X-Forwarded-Encrypted: i=1; AHgh+RobLj4Ar0f7ftuARTDx6XES0ypalvNHC+PMGsF6ncV9pvhyk5f2UG9JQHJv2sWFvj6XYcY=@lists.linux.dev
-X-Gm-Message-State: AOJu0YzjHYforPqSU6TDV4OLVqp+bzA9pveDciD1VpogYyFi8iggMkwf
-	vsFFx6SLPO7BlZCpbRXEPuAhFxMY9yfzm+BOIVqiyAL/wKQYCq2jkm2DLCtCSAaMK1VeKk+2HUq
-	vFGQCR9lTLuzZdzRVG6QnXwxTWq/cy0o=
-X-Gm-Gg: AR+sD10Or9sIwwRw7mM6RJ2F/K+mxAIo3yHO4TNjcbxpLj/dSh/j67rn7ggLTJON7Wb
-	JEL648ZRQExahRZAElE0xfrqY893kbQqrHXexjIteqT8pr5kMuKt7IWCvHbwT7rArIRLNVaCltK
-	kpUkKbwRSYS98LH2J0iHBSwT2ErFuCklQtu3L+9KFqjDUQEtTH2vA71m/zXqxwPRY0ru8kMTXv8
-	QY3Ak39n2+EYGTh4vxuMMA7yXDerAesXigDL2lEQKBrGzuEHxXLsaLZD7GjR8g1N2QexhUTAl//
-	rUm2Mb0IJemeTXXOimPZlL3yN7mswwaMOa0vX4wWUSGC6LcsqFWHJtiqRGA51vHaWqHG5v3GNJF
-	AYR+Km0DSiehJtA==
-X-Received: by 2002:a05:6402:3888:b0:6a1:8d3e:ee77 with SMTP id
- 4fb4d7f45d1cf-6a38a8b7c62mr9115636a12.1.1787062214328; Tue, 18 Aug 2026
- 07:10:14 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="l8SyjFoD"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1787062285; x=1818598285;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=WPuMZj2OAQE9HDFZOAAcnqeB5GxLS7XAo+0fZhNpzmU=;
+  b=l8SyjFoDqtsuVsBbrZwcvxJTQNtKSQXBCAcYExC5elQZSalOB7ddBHEt
+   qOauC2Mf/DnlMbEYpXwYO09lHZMKxx58IXDwA/E+FNDVyO0ayHg9MY44V
+   p4fovBwN4gqFnJD00WC7h1dtLiEyI1+dCp7+a5WeXCk8aYzjPtJ0t4JnW
+   R2pFdoL6FqQsKcOTy54jS5xqqNFc2I0xue63jtg52LsUWZp+3YA8u9pAn
+   hx3KQ2QcYSPWT/SnoTb1U5sbntgUqAKWnWhyZ0LVeLsFUezLu4XFJry0h
+   lVlFnVfBWUCD3UiUyk6KtHEyQbbgt+kzuuAdcImEv4lVvPOjLiIj2AUrn
+   A==;
+X-CSE-ConnectionGUID: nhavbJbVTEqRu1sAciEUYg==
+X-CSE-MsgGUID: xaAdQNCOQLK30Xoq1LjyZQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11878"; a="75084881"
+X-IronPort-AV: E=Sophos;i="6.25,230,1779174000"; 
+   d="scan'208";a="75084881"
+Received: from fmviesa010.fm.intel.com ([10.60.135.150])
+  by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Aug 2026 07:11:24 -0700
+X-CSE-ConnectionGUID: zdq+TYqBQmyZpF9Eko9Gkw==
+X-CSE-MsgGUID: 5nZDuB5zQVyBEKQ6mP3nNg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.25,230,1779174000"; 
+   d="scan'208";a="261488781"
+Received: from pgcooper-mobl3.ger.corp.intel.com (HELO localhost) ([10.245.245.209])
+  by fmviesa010-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Aug 2026 07:11:19 -0700
+Date: Tue, 18 Aug 2026 17:11:17 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: longzhao@ambarella.com
+Cc: Arnd Bergmann <arnd@arndb.de>, Krzysztof Kozlowski <krzk@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Michael Turquette <mturquette@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>, Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jiri Slaby <jirislaby@kernel.org>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>, devicetree@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
+	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Brian Masney <bmasney@redhat.com>, Lee Jones <lee@kernel.org>,
+	mfd@lists.linux.dev, Long Zhao <zl020895@163.com>
+Subject: Re: [PATCH v5 08/12] gpio: pl061: add Ambarella CV75 register layout
+ variant
+Message-ID: <aoRoBYE_Ns0lu75-@ashevche-desk.local>
+References: <20260818-cv75-v5-v5-0-7bbb12f0360f@ambarella.com>
+ <20260818-cv75-v5-v5-8-7bbb12f0360f@ambarella.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260816-ti-keystone-devctrl-v2-0-5ab1e13c15c1@gmail.com>
- <20260816-ti-keystone-devctrl-v2-2-5ab1e13c15c1@gmail.com> <20260818-convivial-manatee-of-jest-acd3f6@quoll>
-In-Reply-To: <20260818-convivial-manatee-of-jest-acd3f6@quoll>
-From: Bhargav Joshi <j.bhargav.u@gmail.com>
-Date: Tue, 18 Aug 2026 19:40:02 +0530
-X-Gm-Features: AcwNN1VkFAcXdnV8Yz--n3a3WkMmue2uYHuue9khptiKYSaOQgn4dqIhHktkVKs
-Message-ID: <CAOWyW_4BrU+BO+KQjH1M525+0y6_YOa2C_3sjrxPzzgT46aNJw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] dt-bindings: mfd: ti,keystone-devctrl: Convert to
- DT schema
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Ivan Khoronzhuk <ivan.khoronzhuk@ti.com>, Nishanth Menon <nm@ti.com>, 
-	Santosh Shilimkar <ssantosh@kernel.org>, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, goledhruva@gmail.com, m-chawdhry@ti.com, 
-	daniel.baluta@gmail.com, simona.toaca@nxp.com, 
-	linux-arm-kernel@lists.infradead.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260818-cv75-v5-v5-8-7bbb12f0360f@ambarella.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-Hi,
+On Tue, Aug 18, 2026 at 06:31:22PM +0800, Long Zhao via B4 Relay wrote:
 
-On Tue, Aug 18, 2026 at 12:31=E2=80=AFPM Krzysztof Kozlowski <krzk@kernel.o=
-rg> wrote:
->
-> On Sun, Aug 16, 2026 at 12:23:00AM +0530, Bhargav Joshi wrote:
-> > Convert the Texas Instruments Keystone Device State Control binding fro=
-m
-> > legacy text format to DT schema.
-> >
-> > During the conversion, the following updates were made:
-> > - Add "simple-mfd" to compatibles matching existing dts usage.
-> > - Add required bus properties #address-cells, #size-cells, and ranges
-> >   which were missing in text binding.
-> > - Document child nodes gpio, interrupt-controller, and reset-controller=
-.
-> >
-> > Signed-off-by: Bhargav Joshi <j.bhargav.u@gmail.com>
-> > ---
-> > Note: Running dt_binding_check on patch will yield a warning for
-> > 'ti,keystone-reset' in the example block. The YAML conversion patch for
-> > that child node is already in progress here:
-> > https://lore.kernel.org/linux-devicetree/20260813-ti-keystone-reset-v1-=
-1-189389503324@gmail.com/
-> > ---
->
-> You need to send dependencies together, either in patchset or even one
-> patch, depending on the case. If this has warnings then it cannot be
-> applied.
-Yes, but ti,keystone-reset is now already merged into linux-next, so i can
-wait until it is merged into mainline then resend the patch without warning=
-.
+> Extend gpio-pl061 with a per-variant register layout so the Ambarella
+> CV75 GPIO banks can reuse the PL061 driver instead of a duplicate.
 
-Best regards,
-Bhargav
+This is reinvention of gpio-mmio.c (as a library). It has necessary facilities.
+Also gpio-regmap may be considered. So, switch this driver to use one of the
+above and the patch for the new device will be much simpler and elegant.
+
+-- 
+With Best Regards,
+Andy Shevchenko
+
+
