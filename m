@@ -1,143 +1,284 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 444D122083;
-	Tue, 18 Aug 2026 09:03:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 250EB3C1D41;
+	Tue, 18 Aug 2026 09:03:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787043811; cv=none; b=qZRFjSiQ+2++0Q5rHvT6u0om6S7I6zaNgkDT5NVHks9Vvm+6FO4IBnnbZOekQDbFph7s7F/I3kNu/NcpIDyb5m6Noc8JznS1xcAtFwuCvy6EE+ncGUUSySVfV634yCLb5woKlVPYo7POihzTsyIL5U7Zgb63SdmQGsQee2sv0Tw=
+	t=1787043811; cv=none; b=g2rHAg31dvSBLsCVqcIE8svgGVuMfxNrTP8MHGHUhiviAd5GAuMjIhi4ymyq75CWh7GLnK/lnNaiJA+7bcZvU3fp7iBd+sD7rZFGreX3nO7V15Fpd/aZCo60WoZP8ncNlhWJLxHUo6Grbswh6OhhLYb5sNR4csQiGyLVoxOwJGM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1787043811; c=relaxed/simple;
-	bh=LxJ7RQjhRP4W8UUjg5z9x9MsbqzSmsWcGbICkYZOZwE=;
+	bh=0qKIhQVZW5rKX6B9PXdGr60TQHbTdXb6cP0DGKkgjRU=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=qNMeqfinEJB7PD9ihCJBEONEvRpY3GQUPlKkmumJFPBAggObc0jlWWfjTvXp4UOSkwxLCmS7GAKitHd3FsDxePnyof79/QOnRlJkM6mBMf8UC49NOJUkxCe2+LqAQCrJeNKTtdsCTYyQINx3sHBrDPBSfjGQxBHuxXIGmYhjolA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Q1BaSVac; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=RofLuuIq+ZYBdYG0lK/ZRHa5DMnxJPfKeFzhCMzLyUL4AqknO5z5OSSK8aZOsp2zX8A3wIgDcMs4uMwvFDLgufAC/80YClFUIhL6iXFl9vdHQwjbWf63Qph1hs6NGVqnqZhY8OEp64Rc/ccX99pVnUJKDAyYoDP/Zp1C0W/v1vg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NxO3UTxr; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Q1BaSVac"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 154B21F00A3A;
-	Tue, 18 Aug 2026 09:03:26 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NxO3UTxr"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4BB591F000E9;
+	Tue, 18 Aug 2026 09:03:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787043806;
-	bh=rTbzkWdfdSfbiZQN7IIy18CVNyfQ16PpIPL9jtlTBxQ=;
+	s=k20260515; t=1787043808;
+	bh=bmfE2bMEUbqFNj7kpP5gdt7Evvg+mThSQ1+R6T2QIY8=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Q1BaSVac3xoMBfjFu5Fe9QN5kTKAoVsX5sMIN3ehHMLGAyRC0aQp1wKQFnmcruhZy
-	 +IYWV74ZtABdlEifUga5Ab/o+07YLHJbCFVqdFWEGA5O/hz9OP58ts769bE9uNKmsi
-	 I2FpCdYy7DLrSy8ER257wyCPDhk4bVpqAupYGP5iLRSJ/5Z8hx68onIrWDRmBYFraR
-	 QH0mQ19geCWLzVkig30InWUiCI1exdiXF7VoD6PH/YPaLSgWNjQohHXUrnbPMQL98g
-	 Q7ZS+fUMCHMNpZ+J8v0KoMBUfapwZU/VaNhJ57vszwyyA7qCi0yH7dTum9AUAqK29a
-	 bTjGpPT5rO4rg==
+	b=NxO3UTxrixmJgdBX9ZLBaDrkUW9lHxxjg41RpacBVnHAsItakFKl8ciahg98L8hGa
+	 u2nK+ZHPF2Dngp/RxtryaR7b5S19HhTsklvTv1VtrPEkwER3muiIJVehcqbCM9BY2N
+	 zMZ4Hvra6/AkWf5b2MXoROjpeukoNBRc9uBHaFoBEGMtsd6tUkixAlMoNBB1xdMpBM
+	 G7NOcK0XDZUJH3jjP9U6EGqrJLiMQamgiyWOQA0As1pPA3oOGO5+L6rJq71zqRekgL
+	 w543VcXmE6faX5z7WuQKVJwGXCUDbf20+Qw8/nIrp0lwUON0JQO4xeGDxbm8AIFvhQ
+	 NaXW9cRocSS9A==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH net-next v20 08/10] net: dsa: mt7530: move MDIO bus
- locking into regmap
+Subject: Re: [PATCH net-next v20 09/10] net: dsa: mt7530: generalize and
+ move common function to lib module
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Christian Marangi" <ansuelsmth@gmail.com>
-Cc: devicetree@vger.kernel.org, robh@kernel.org, lee@kernel.org, mfd@lists.linux.dev, conor+dt@kernel.org
-In-Reply-To: <20260817082034.20326-10-ansuelsmth@gmail.com>
+Cc: mfd@lists.linux.dev, robh@kernel.org, lee@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org
+In-Reply-To: <20260817082034.20326-11-ansuelsmth@gmail.com>
 References: <20260817082034.20326-1-ansuelsmth@gmail.com>
- <20260817082034.20326-10-ansuelsmth@gmail.com>
+ <20260817082034.20326-11-ansuelsmth@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 18 Aug 2026 09:03:25 +0000
-Message-Id: <20260818090326.154B21F00A3A@smtp.kernel.org>
+Date: Tue, 18 Aug 2026 09:03:26 +0000
+Message-Id: <20260818090327.4BB591F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
+Thank you for your contribution! Sashiko AI review found 8 potential issue(=
 s) to consider:
-- [High] Recursive mutex deadlock in `mt7530_fdb_cmd`, `mt7530_vlan_cmd`, a=
-nd `mt7530_irq_mask_sync` due to unremoved manual locks.
-- [High] Mismatched lock acquisition and release, plus recursive self-deadl=
-ock, in MT7531 indirect PHY access functions.
+- [High] Unsafe conversion of atomic command register triggers into multipl=
+e sequential Read-Modify-Write (RMW) operations.
+- [High] Hardware staging registers for FDB and VLAN data will retain stale=
+ or garbage bits due to the switch from full-register overwrites to field-b=
+ased RMWs.
+- [High] `mt7530_port_enable()` incorrectly applies `PCR_MATRIX_MASK` to an=
+ unshifted port matrix value, isolating the port and dropping all traffic.
+- [High] Missing `reg_fields` initialization for `ID_EN7528` leads to a NUL=
+L pointer dereference during port mirroring.
+- [High] mt7530_lib_port_bridge_flags() disables MAC address learning when =
+it is supposed to be enabled, and vice versa.
+- [High] mt7530_lib_fdb_read() swaps the last two bytes of the MAC address =
+when reading FDB entries.
+- [High] Unchecked regmap_field_read() failures lead to the use of uninitia=
+lized stack variables, potentially leaking stack memory to userspace or cor=
+rupting hardware state.
+- [Medium] `mt7530_lib_mib_reset()` inadvertently disables the hardware MIB=
+ counters for octets and breaks the flush sequence by writing 0 instead of =
+1.
 --
 
---- Patch [8]: [PATCH net-next v20 08/10] net: dsa: mt7530: move MDIO bus l=
-ocking into regmap ---
-commit 93dc44aef1eb650f9b327c234ee71f5777a75b62
-Author: Daniel Golle <daniel@makrotopia.org>
+--- Patch [9]: [PATCH net-next v20 09/10] net: dsa: mt7530: generalize and =
+move common function to lib module ---
+commit 302309065c4dc5c4e0f17f164c9e39732602b582
+Author: Christian Marangi <ansuelsmth@gmail.com>
 
-net: dsa: mt7530: move MDIO bus locking into regmap
+net: dsa: mt7530: generalize and move common function to lib module
 
-This patch moves MDIO bus locking into the switch register regmap by
-configuring the .lock and .unlock callbacks. It removes several manual lock=
-ing
-wrappers, relying on the regmap to protect register accesses automatically.
-It also attempts to switch MT7531 indirect PHY accesses to use reg_mutex.
+This commit moves common functions for the MT7530 switch into a separate
+library module to prepare for Airoha support. It refactors register
+accesses to use the regmap reg_field API instead of raw read/writes. A
+new library struct is introduced to house the shared dependencies and
+register fields.
 
-> --- a/drivers/net/dsa/mt7530-mdio.c
-> +++ b/drivers/net/dsa/mt7530-mdio.c
-> @@ -148,12 +148,14 @@ static const struct regmap_config regmap_config =3D=
- {
->  	.val_bits =3D 32,
->  	.reg_stride =3D 4,
->  	.max_register =3D MT7530_CREV,
-> -	.disable_locking =3D true,
-> +	.lock =3D mt7530_mdio_regmap_lock,
-> +	.unlock =3D mt7530_mdio_regmap_unlock,
->  };
+> diff --git a/drivers/net/dsa/mt7530-lib.c b/drivers/net/dsa/mt7530-lib.c
+> new file mode 100644
+> index 0000000000000..01ed941efc892
+> --- /dev/null
+> +++ b/drivers/net/dsa/mt7530-lib.c
+> @@ -0,0 +1,1106 @@
+[ ... ]
+> +void mt7530_lib_mib_reset(struct mt7530_lib_priv *priv)
+> +{
+> +	regmap_field_write(priv->fields[MT7530_CCR_MIB_ENABLE], 0);
+> +	regmap_field_write(priv->fields[MT7530_CCR_RX_OCT_CNT_GOOD], 0);
+> +	regmap_field_write(priv->fields[MT7530_CCR_RX_OCT_CNT_BAD], 0);
+> +	regmap_field_write(priv->fields[MT7530_CCR_TX_OCT_CNT_GOOD], 0);
+> +	regmap_field_write(priv->fields[MT7530_CCR_TX_OCT_CNT_BAD], 0);
+
+[Severity: Medium]
+Does this correctly clear the counters? The original code wrote a 1 to flush
+and clear the counters. Writing 0 to a write-1-to-clear field might fail to
+reset them.
+
+[ ... ]
+> +int mt7530_lib_fdb_cmd(struct mt7530_lib_priv *priv, enum mt7530_fdb_cmd=
+ cmd,
+> +		       u32 mat, u32 *rsp)
+> +{
+> +	u32 val;
+> +	int ret;
+> +
+> +	ret =3D regmap_field_write(priv->fields[MT7530_ATC_MAT], mat);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret =3D regmap_field_write(priv->fields[MT7530_ATC_CMD], cmd);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret =3D regmap_field_write(priv->fields[MT7530_ATC_BUSY], 1);
 
 [Severity: High]
-Will adding the lock to the regmap configuration cause a recursive deadlock
-in other functions that still hold the manual lock?
+Can splitting the FDB command execution into multiple read-modify-writes
+corrupt the MAC table operations? The previous implementation constructed t=
+he
+32-bit value and wrote it atomically, preventing intermediate hardware stat=
+es.
 
-For example, in mt7530_fdb_cmd(), the manual lock is still held across a
-regmap_read_poll_timeout() call:
+[ ... ]
+> +static void mt7530_lib_fdb_write(struct mt7530_lib_priv *priv, u16 vid,
+> +				 u8 port_mask, const u8 *mac,
+> +				 u8 aging, u8 type)
+> +{
+> +	regmap_field_write(priv->fields[MT7530_ATWD_CVID], vid);
+> +	regmap_field_write(priv->fields[MT7530_ATWD_IVL], 1);
 
-mt7530_fdb_cmd() {
-	mt7530_mutex_lock(priv);
+[Severity: High]
+Could this approach leak uninitialized or stale data into the FDB table?
+Writing fields individually performs a read-modify-write, preserving undefi=
+ned
+bits from prior operations, whereas the old code explicitly cleared
+unspecified bits by writing fully initialized arrays directly.
 
-	ret =3D regmap_read_poll_timeout(priv->regmap, MT7530_ATC, val,
-				       !(val & ATC_BUSY), 20, 20000);
-	...
-}
+[ ... ]
+> +void mt7530_lib_fdb_read(struct mt7530_lib_priv *priv, struct mt7530_fdb=
+ *fdb)
+> +{
+> +	u32 val;
+> +
+> +	regmap_field_read(priv->fields[MT7530_ATRD_CVID], &val);
+> +	fdb->vid =3D val;
 
-Since mt7530_mutex_lock() takes the non-recursive mdio_lock, and the regmap
-now automatically attempts to take the same lock, does this code self-deadl=
-ock?
+[Severity: High]
+If regmap_field_read fails, could we end up assigning uninitialized stack
+memory from val to the fdb fields? This might leak kernel stack data to
+userspace during an FDB dump.
 
-It looks like mt7530_vlan_cmd() and mt7530_irq_mask_sync() also still hold
-mt7530_mutex_lock() while calling regmap operations.
+[ ... ]
+> +int mt7530_lib_port_mirror_add(struct mt7530_lib_priv *priv, int port,
+> +			       struct dsa_mall_mirror_tc_entry *mirror,
+> +			       bool ingress, struct netlink_ext_ack *extack)
+> +{
+> +	int monitor_port;
+> +	u32 val;
+> +
+> +	/* Check for existent entry */
+> +	if ((ingress ? priv->mirror_rx : priv->mirror_tx) & BIT(port))
+> +		return -EEXIST;
+> +
+> +	regmap_field_read(priv->fields[MT7530_MIRROR_EN], &val);
 
+[Severity: High]
+Is it possible for priv->fields to lack an initialization here? The
+ID_EN7528 entry in mt753x_table appears to be missing its reg_fields
+setup, which could lead to a NULL pointer dereference.
+
+[Severity: High]
+Could a failure in regmap_field_read leave val and monitor_port
+uninitialized? Using these uninitialized values in the subsequent condition
+might cause unpredictable branch behavior.
+
+[ ... ]
+> +int mt7530_lib_port_bridge_flags(struct mt7530_lib_priv *priv, int port,
+> +				 struct switchdev_brport_flags flags,
+> +				 struct netlink_ext_ack *extack)
+> +{
+> +	struct dsa_switch *ds =3D priv->ds;
+> +
+> +	if (flags.mask & BR_LEARNING)
+> +		regmap_fields_write(priv->fields[MT7530_PSC_SA_DIR],
+> +				    port, !!(flags.val & BR_LEARNING));
+
+[Severity: High]
+Does this invert the learning logic? The hardware bit SA_DIS disables
+learning, so passing the boolean value of BR_LEARNING directly might
+disable learning when it is supposed to be enabled, and vice versa.
+
+[ ... ]
+> +static int mt7530_vlan_cmd(struct mt7530_lib_priv *priv, enum mt7530_vla=
+n_cmd cmd,
+> +			   u16 vid)
+> +{
+> +	u32 val;
+> +	int ret;
+> +
+> +	ret =3D regmap_field_write(priv->fields[MT7530_VTCR_FUNC], cmd);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret =3D regmap_field_write(priv->fields[MT7530_VTCR_VID], vid);
+
+[Severity: High]
+Will breaking this command register access into multiple read-modify-write
+operations cause issues with the hardware state machine? The original code
+wrote the entire VTCR register in a single atomic operation.
+
+[ ... ]
+> +static void mt7530_hw_vlan_add(struct mt7530_lib_priv *priv,
+> +			       struct mt7530_hw_vlan_entry *entry)
+> +{
+> +	struct dsa_port *dp =3D dsa_to_port(priv->ds, entry->port);
+> +	u8 new_members;
+> +	u32 val;
+> +
+> +	new_members =3D entry->old_members | BIT(entry->port);
+> +
+> +	/* Validate the entry with independent learning, create egress tag per
+> +	 * VLAN and joining the port as one of the port members.
+> +	 */
+> +	regmap_field_write(priv->fields[MT7530_VAWD_IVL_MAC], 1);
+
+[Severity: High]
+Might this leave stale or garbage bits in the VAWD1 register? The original
+logic performed a full 32-bit register overwrite, explicitly clearing
+unspecified bits like EG_CON. Using sequential regmap_field_write operations
+performs read-modify-writes, which retains any previous unmapped bits.
+
+> diff --git a/drivers/net/dsa/mt7530.c b/drivers/net/dsa/mt7530.c
+> index d01772cfe3a2d..f313a7a7bfef1 100644
 > --- a/drivers/net/dsa/mt7530.c
 > +++ b/drivers/net/dsa/mt7530.c
 [ ... ]
-> @@ -597,7 +577,7 @@ mt7531_ind_c45_phy_read(struct mt7530_priv *priv, int=
- port, int devad,
+> @@ -24,10 +24,159 @@
+>  #include <net/pkt_cls.h>
 > =20
->  	ret =3D val & MT7531_MDIO_RW_DATA_MASK;
->  out:
-> -	mt7530_mutex_unlock(priv);
-> +	mutex_unlock(&priv->reg_mutex);
+>  #include "mt7530.h"
+> +#include "mt7530-lib.h"
 > =20
->  	return ret;
->  }
+>  #define MT7530_STATS_POLL_INTERVAL	(1 * HZ)
+>  #define MT7530_STATS_RATE_LIMIT		(HZ / 10)
+> =20
+> +static const struct mt7530_reg_field mt753x_fields[] =3D {
+[ ... ]
+> +	{ MT7530_ATRD_ENT_STATUS, REG_FIELD(MT7530_ATRD, 2, 3), },
+> +	{ MT7530_ATRD_MAC_BYTE_5, REG_FIELD(MT7530_TSRA2, 24, 31), },
+> +	{ MT7530_ATRD_MAC_BYTE_4, REG_FIELD(MT7530_TSRA2, 16, 23), },
 
 [Severity: High]
-Does this leave the locks in an unbalanced state?
+Are the bit ranges for MAC_BYTE_4 and MAC_BYTE_5 swapped here? The original
+logic mapped MAC_BYTE_4 to bits 24-31 and MAC_BYTE_5 to bits 16-23 in the
+TSRA2 register, causing corrupted MAC addresses on FDB read.
 
-The entry path of mt7531_ind_c45_phy_read() still calls
-mt7530_mutex_lock(priv), which takes the mdio_lock:
+[ ... ]
+> @@ -1373,7 +1141,7 @@ mt7530_port_enable(struct dsa_switch *ds, int port,
+>  	if (dsa_port_is_user(dp)) {
+>  		struct dsa_port *cpu_dp =3D dp->cpu_dp;
+> =20
+> -		priv->ports[port].pm |=3D PCR_MATRIX(BIT(cpu_dp->index));
+> +		priv->ports[port].pm |=3D BIT(cpu_dp->index);
+>  	}
+>  	priv->ports[port].enable =3D true;
+>  	mt7530_rmw(priv, MT7530_PCR_P(port), PCR_MATRIX_MASK,
+>  		   priv->ports[port].pm);
 
-mt7531_ind_c45_phy_read() {
-	mt7530_mutex_lock(priv);
-	...
-	ret =3D regmap_read_poll_timeout(...)
-	...
-}
-
-But the exit path now releases a completely different lock (reg_mutex),
-which wasn't previously held.
-
-This pattern also seems to be present in mt7531_ind_c45_phy_write(),
-mt7531_ind_c22_phy_read(), and mt7531_ind_c22_phy_write(), where the
-semantic patch updated the unlock label but missed replacing the entry lock.
-
-Additionally, since the entry path still takes the manual mdio_lock, do the
-subsequent regmap calls inside these functions also trigger the same
-recursive deadlock mentioned earlier?
+[Severity: High]
+Does this effectively isolate the port by dropping all traffic? The bitmask
+in pm is now constructed without the PCR_MATRIX() shift, but it is passed
+directly into mt7530_rmw() where PCR_MATRIX_MASK is applied. Since the
+unshifted bits fall outside the mask, this will write zero to the matrix
+field.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260817082034.2032=
-6-1-ansuelsmth@gmail.com?part=3D8
+6-1-ansuelsmth@gmail.com?part=3D9
