@@ -1,44 +1,44 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A34B2D77F7;
-	Tue, 18 Aug 2026 10:37:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BFC03C65FD;
+	Tue, 18 Aug 2026 10:39:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787049429; cv=none; b=sfM0ezGhtDVT/Ny3CL/bqlMMsMWE+hJ5MoaW1Xu5XXB08x8pV9ysKZ4wSD7n5HGzQhiSqZuoimmQm+4kkJzLdj3QoBXKSiln1eijHObJZNeD7eGzkkqJrjfNybAe5yAa3hiV8a4H8Yh1pDQ5bpHqTcnisJAI9Hxdf01/BpzoQHc=
+	t=1787049565; cv=none; b=Y6UlFVUBpc3ObXGO8qfi3KLOmPY0nMdUtxrpNWHkcJLQQxuwzBtA32LUqSfDgSvGA8NeSbR8A95xeImvxSKa70NuLuwnTKvFqbXsLQaAMN5nj31MDRQa6dFpJgO1vE+malYIRjr1pPJofCaSeCwWP1cpreZvOD26CnIf6XSNmJQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787049429; c=relaxed/simple;
-	bh=WiAI87j2Mi7avHNHhUVBY63l7N0iA4OIqp1/+A5ZPc4=;
+	s=arc-20240116; t=1787049565; c=relaxed/simple;
+	bh=Hue9XY44uAJ3g2jPbvTcssDaTaGRm/IO3J4RvEngWC0=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=inwwzQFwclpKKauBwlR1EbydFJEDkhFok3gio2Fco64YRT+xq4NmkO2ZciSNrfKEEaNSX6SScgk+eVgGwun2P2ZU92gt4fqEXDC7oOcZ0T/rQ9SIbc4rb4geXEp21mbQuiL3jlh4q0EK2hlwyo8eHFiV1OIF/0xkTWBZa4FknKk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BfXhYC4K; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=j+Jzb4kM8pXI+88fcccycOmoz/13gUrD/kAU7VYmwkW4tmUWhUThfmkwHZ2hC/YXxY65I2e+3t5bQud9RngGjkWORbvZtj5EFq19C3w4T2FhX+HutmVBxfcYfiZfnnw5po5kxTho+Hv16PpR8SY7Ty5z21NddajPguM8tSXhYg4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I4Oo/35v; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BfXhYC4K"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDF491F000E9;
-	Tue, 18 Aug 2026 10:37:07 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I4Oo/35v"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E37761F000E9;
+	Tue, 18 Aug 2026 10:39:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787049428;
-	bh=PS7SkIWRH22Qy3Nitrb0KMsG9A/ZQBWZdYQXYxxZo0Q=;
+	s=k20260515; t=1787049564;
+	bh=bEndIbwdq9Pgs4k1f6ULMZCC573uDXwepemP6bgiMW0=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=BfXhYC4KvFMAPJFWMR88Hum69rcDEtoUed3lykY8J1YKgJyQ9t5MYjkoLmslrE5NJ
-	 borij9l8RAUFtyVdirjN4di3HvvzNv9SdtlIwjxUzzTgkEbnWVtvnlAP+NKG7O/smw
-	 72Y8NP4MESjLnD3FiEJqd8gvurQvZSLkjmvlheMdMVxjJeYH3z+/Zw8mGz6fxXQV2c
-	 MOp0nneb5VeNz927sVbj1mJ6ahfl40QWl8Y0LhZgfl4YHvM4tp5rlgkxagSsVbGKYi
-	 Ld27cm+MdwrYlrwwjwZqOR/BCOGbjwrYVbD+iUrysIn8eVOEdOhXqJr+MVjecmvoUB
-	 J4udxtAhYOYGg==
+	b=I4Oo/35v23TzxxnLIFIDsOYljriENLQxQ4skWcqKj4FFQCrAunZ6E1bEVg7zmNmmp
+	 yy7nm4rrW/RTpPwL86/xVCN6pJoXsWuspIMEL3BWPPjmo0eCh6KybApdGg0OXDt3Qy
+	 5SAbGIG51UyWCOdjuUuCfXagxToV2jbukPpss84KtM13Ph8pTbG+eqcjvwzefSjsHP
+	 U5RrYAdNzOP0z4dYHmb6EM5pk8E5xAryRRMisVfM1rE6gxzJatjuogUrhal718FbKw
+	 234AGtZqVSEaYoDdBmv4JTSLhtU/ep/xQCgg8cSCfD9jAIuRQe5mADVQNYuhZ0Rog6
+	 +Ms3ozG0QedTw==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v5 02/12] dt-bindings: mfd: syscon: add Ambarella CV75
- secure scratchpad
+Subject: Re: [PATCH v6 5/6] ARM: dts: aspeed: g6: Change vuart compatible
+ string for ast2600
 Reply-To: sashiko-reviews@lists.linux.dev
-To: "Long Zhao" <longzhao@ambarella.com>
-Cc: conor+dt@kernel.org, mfd@lists.linux.dev, linux-clk@vger.kernel.org, lee@kernel.org, robh@kernel.org, devicetree@vger.kernel.org
-In-Reply-To: <20260818-cv75-v5-v5-2-7bbb12f0360f@ambarella.com>
-References: <20260818-cv75-v5-v5-0-7bbb12f0360f@ambarella.com>
- <20260818-cv75-v5-v5-2-7bbb12f0360f@ambarella.com>
+To: =?utf-8?b?R3LDqWdvaXJlIExheWV0?= <gregoire.layet@9elements.com>
+Cc: conor+dt@kernel.org, robh@kernel.org, mfd@lists.linux.dev, devicetree@vger.kernel.org, lee@kernel.org
+In-Reply-To: <20260818-aspeed-driver-v6-v6-5-fd7cc0b338ea@9elements.com>
+References: <20260818-aspeed-driver-v6-v6-0-fd7cc0b338ea@9elements.com>
+ <20260818-aspeed-driver-v6-v6-5-fd7cc0b338ea@9elements.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 18 Aug 2026 10:37:07 +0000
-Message-Id: <20260818103707.DDF491F000E9@smtp.kernel.org>
+Date: Tue, 18 Aug 2026 10:39:23 +0000
+Message-Id: <20260818103923.E37761F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -47,57 +47,66 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
 Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
-- [Low] The new compatible string `ambarella,cv75-sec-scratchpad` was added=
- to the `properties:compatible` definition but was omitted from the schema'=
-s top-level `select:properties:compatible:contains:enum` list.
+
+Pre-existing issues:
+- [High] This problem wasn't introduced by this patch, but the patch series=
+ adds a new failure path that makes it more likely. Missing serial8250_unre=
+gister_port() and timer_delete_sync() in the error handling path of aspeed_=
+vuart_probe() leads to a use-after-free.
 --
 
---- Patch [2]: [PATCH v5 02/12] dt-bindings: mfd: syscon: add Ambarella CV7=
-5 secure scratchpad ---
-commit 2e61d4a5b3f63c115582c6eb092f0bbc87c52d87
-Author: Long Zhao <longzhao@ambarella.com>
+--- Patch [5]: [PATCH v6 5/6] ARM: dts: aspeed: g6: Change vuart compatible=
+ string for ast2600 ---
+commit 0075a2210772d2bff98e062573ee22db87bab4f2
+Author: Gr=C3=A9goire Layet <gregoire.layet@9elements.com>
 
-dt-bindings: mfd: syscon: add Ambarella CV75 secure scratchpad
+ARM: dts: aspeed: g6: Change vuart compatible string for ast2600
 
-This commit adds the ambarella,cv75-sec-scratchpad compatible string to
-the syscon device tree bindings schema.
+This commit updates the compatible string for the vuart nodes on aspeed-g6 =
+to
+use the ast2600 compatible string. It retains the ast2500 compatible string
+as a fallback, allowing the driver to utilize specific ast2600 properties.
 
-> diff --git a/Documentation/devicetree/bindings/mfd/syscon.yaml b/Document=
-ation/devicetree/bindings/mfd/syscon.yaml
-> index e228670880631..05c7f59aba5de 100644
-> --- a/Documentation/devicetree/bindings/mfd/syscon.yaml
-> +++ b/Documentation/devicetree/bindings/mfd/syscon.yaml
-> @@ -148,6 +148,7 @@ properties:
->                - allwinner,sun50i-a64-system-controller
->                - altr,l3regs
->                - altr,sdr-ctl
-> +              - ambarella,cv75-sec-scratchpad
->                - amd,pensando-elba-syscon
->                - amlogic,meson-mx-assist
->                - amlogic,meson-mx-bootrom
+> diff --git a/arch/arm/boot/dts/aspeed/aspeed-g6.dtsi b/arch/arm/boot/dts/=
+aspeed/aspeed-g6.dtsi
+> index edf4b74f5aba4..c952e2075b4c8 100644
+> --- a/arch/arm/boot/dts/aspeed/aspeed-g6.dtsi
+> +++ b/arch/arm/boot/dts/aspeed/aspeed-g6.dtsi
+> @@ -707,7 +707,7 @@ emmc: sdhci@1e750100 {
+>  			};
+> =20
+>  			vuart1: serial@1e787000 {
+> -				compatible =3D "aspeed,ast2500-vuart";
+> +				compatible =3D "aspeed,ast2600-vuart", "aspeed,ast2500-vuart";
 
-[Severity: Low]
-Does this new compatible string also need to be added to the top-level
-select list?
+[Severity: High]
+This isn't a bug introduced by this patch, but changing the compatible
+string exposes it by enabling a new failure path. Can this regression lead
+to a use-after-free during probe failure?
 
-Looking at Documentation/devicetree/bindings/mfd/syscon.yaml, the schema
-relies on a select list to trigger validation:
+In drivers/tty/serial/8250/8250_aspeed_vuart.c:aspeed_vuart_probe(),
+using the "aspeed,ast2600-vuart" compatible string enables new initializati=
+on
+steps, such as aspeed_ast2600_vuart_over_pci_set_enabled(). If this fails,
+it jumps to the err_sysfs_remove label:
 
-select:
-  properties:
-    compatible:
-      contains:
-        enum:
-          - airoha,en7581-pbus-csr
-          ...
-          - altr,sdr-ctl
-          - amd,pensando-elba-syscon
+err_sysfs_remove:
+	sysfs_remove_group(&vuart->dev->kobj, &aspeed_vuart_attr_group);
+	return rc;
 
-Without being added to this list alongside the other compatible strings,
-could device tree nodes using "ambarella,cv75-sec-scratchpad" bypass dtbs_c=
-heck
-validation entirely, allowing invalid device trees to silently pass?
+Since serial8250_register_8250_port() and timer_setup() were called
+earlier in the probe function, returning an error without unregistering
+the 8250 port or cleaning up the timer will leave the port registered
+with a dangling pointer when the devm-allocated vuart structure is freed.
+If accessed by the tty layer or userspace, it will trigger an oops or
+kernel panic.
+
+Should the error handling block in aspeed_vuart_probe() be updated to
+include serial8250_unregister_port() and timer_delete_sync() before
+returning?
+
+[ ... ]
 
 --=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260818-cv75-v5-v5=
--0-7bbb12f0360f@ambarella.com?part=3D2
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260818-aspeed-dri=
+ver-v6-v6-0-fd7cc0b338ea@9elements.com?part=3D5
