@@ -1,112 +1,143 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E67183C063C;
-	Tue, 18 Aug 2026 09:03:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 444D122083;
+	Tue, 18 Aug 2026 09:03:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787043807; cv=none; b=fwLyy8WL+WwoSS7abV9+9KGoAf/FCqQMO+fD0D6wx0r04WrOaEmeN4lCMIb+tUGzxpvzysJwvWsUqUWPjSF8AzIZTf+Xv8wG5mnDfPbekbHJCXX12zMEgYtAI9sSrsJCFx8wmxstTmvRxe4VXy9ohYmizKor8m+IXqirldjQxCU=
+	t=1787043811; cv=none; b=qZRFjSiQ+2++0Q5rHvT6u0om6S7I6zaNgkDT5NVHks9Vvm+6FO4IBnnbZOekQDbFph7s7F/I3kNu/NcpIDyb5m6Noc8JznS1xcAtFwuCvy6EE+ncGUUSySVfV634yCLb5woKlVPYo7POihzTsyIL5U7Zgb63SdmQGsQee2sv0Tw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787043807; c=relaxed/simple;
-	bh=a0svX8f9VO3395qY7sAFXx04Vle0Ew8HgEJHvv8ak/U=;
+	s=arc-20240116; t=1787043811; c=relaxed/simple;
+	bh=LxJ7RQjhRP4W8UUjg5z9x9MsbqzSmsWcGbICkYZOZwE=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=Rjr3+t8+l7nbs/L8nG4dPYKmShnICukiIR1ZFFAZF7wHR30NAhKn1qAk2VtBPff1GGhhEPfEuk44WGtd5CYMBeGYN04HaLdW0dX57FYFThVBZJHbz5M3On2QnC+PbEFZTS1jvEIPYX1GZwrMOduhOeXdtEWm/72Py0QJKSezvFk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JiiAv0nO; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=qNMeqfinEJB7PD9ihCJBEONEvRpY3GQUPlKkmumJFPBAggObc0jlWWfjTvXp4UOSkwxLCmS7GAKitHd3FsDxePnyof79/QOnRlJkM6mBMf8UC49NOJUkxCe2+LqAQCrJeNKTtdsCTYyQINx3sHBrDPBSfjGQxBHuxXIGmYhjolA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Q1BaSVac; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JiiAv0nO"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3AA811F000E9;
-	Tue, 18 Aug 2026 09:03:25 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Q1BaSVac"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 154B21F00A3A;
+	Tue, 18 Aug 2026 09:03:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787043805;
-	bh=wi8qpfuItg1JCjZzS0mKjzAgjuxm5FVWECf+uoxuMQY=;
+	s=k20260515; t=1787043806;
+	bh=rTbzkWdfdSfbiZQN7IIy18CVNyfQ16PpIPL9jtlTBxQ=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=JiiAv0nOcNCRYW+tuK772GhixsCavxskrZoX18ZXLhI0i2L/HCdxfq4EByhi7nF/3
-	 tiqmezxk+um2P446iJh8hjQ5AR17I94MW3go7t8UwDDtfitQcuMyEKCdxIq5NrAFlM
-	 fj1J5b5vZ8m1mhAWMP4WEPgfg0F2VgnU3P+qOX0hKHlukNJEjFuDtLMeXxhr8KI3V4
-	 TntpuN8b3GNfRw9/v2YE7CM12zr5guKzLoy3uXuS9qobI4/uvcs3idxvuwnZ/rJJrd
-	 Wga0jvhXDm9DdkQQix+HhLKuL7aDt+0Ikn9OVva4yVCU18IXtiM55lEQcb1i1GRtm7
-	 yExHwAZ+Sczpg==
+	b=Q1BaSVac3xoMBfjFu5Fe9QN5kTKAoVsX5sMIN3ehHMLGAyRC0aQp1wKQFnmcruhZy
+	 +IYWV74ZtABdlEifUga5Ab/o+07YLHJbCFVqdFWEGA5O/hz9OP58ts769bE9uNKmsi
+	 I2FpCdYy7DLrSy8ER257wyCPDhk4bVpqAupYGP5iLRSJ/5Z8hx68onIrWDRmBYFraR
+	 QH0mQ19geCWLzVkig30InWUiCI1exdiXF7VoD6PH/YPaLSgWNjQohHXUrnbPMQL98g
+	 Q7ZS+fUMCHMNpZ+J8v0KoMBUfapwZU/VaNhJ57vszwyyA7qCi0yH7dTum9AUAqK29a
+	 bTjGpPT5rO4rg==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH net-next v20 06/10] net: dsa: tag_mtk: add Airoha
- variant usage of this TAG
+Subject: Re: [PATCH net-next v20 08/10] net: dsa: mt7530: move MDIO bus
+ locking into regmap
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Christian Marangi" <ansuelsmth@gmail.com>
-Cc: devicetree@vger.kernel.org, lee@kernel.org, conor+dt@kernel.org, mfd@lists.linux.dev, robh@kernel.org
-In-Reply-To: <20260817082034.20326-8-ansuelsmth@gmail.com>
+Cc: devicetree@vger.kernel.org, robh@kernel.org, lee@kernel.org, mfd@lists.linux.dev, conor+dt@kernel.org
+In-Reply-To: <20260817082034.20326-10-ansuelsmth@gmail.com>
 References: <20260817082034.20326-1-ansuelsmth@gmail.com>
- <20260817082034.20326-8-ansuelsmth@gmail.com>
+ <20260817082034.20326-10-ansuelsmth@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 18 Aug 2026 09:03:24 +0000
-Message-Id: <20260818090325.3AA811F000E9@smtp.kernel.org>
+Date: Tue, 18 Aug 2026 09:03:25 +0000
+Message-Id: <20260818090326.154B21F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
+Thank you for your contribution! Sashiko AI review found 2 potential issue(=
 s) to consider:
-- [High] Adding a new tag protocol enum for Airoha without updating the str=
-ict protocol checks in MediaTek/Airoha ethernet master drivers silently bre=
-aks hardware offloads and special tag functionality.
+- [High] Recursive mutex deadlock in `mt7530_fdb_cmd`, `mt7530_vlan_cmd`, a=
+nd `mt7530_irq_mask_sync` due to unremoved manual locks.
+- [High] Mismatched lock acquisition and release, plus recursive self-deadl=
+ock, in MT7531 indirect PHY access functions.
 --
 
---- Patch [6]: [PATCH net-next v20 06/10] net: dsa: tag_mtk: add Airoha var=
-iant usage of this TAG ---
-commit 9a6d2b41d720a4ec342b1d91531294b7baced74f
-Author: Christian Marangi <ansuelsmth@gmail.com>
+--- Patch [8]: [PATCH net-next v20 08/10] net: dsa: mt7530: move MDIO bus l=
+ocking into regmap ---
+commit 93dc44aef1eb650f9b327c234ee71f5777a75b62
+Author: Daniel Golle <daniel@makrotopia.org>
 
-net: dsa: tag_mtk: add Airoha variant usage of this TAG
+net: dsa: mt7530: move MDIO bus locking into regmap
 
-This commit adds a variant of the MTK DSA tag for Airoha switches,
-documenting differences and introducing the new DSA_TAG_PROTO_AIROHA
-enum to report the Airoha name to external tools.
+This patch moves MDIO bus locking into the switch register regmap by
+configuring the .lock and .unlock callbacks. It removes several manual lock=
+ing
+wrappers, relying on the regmap to protect register accesses automatically.
+It also attempts to switch MT7531 indirect PHY accesses to use reg_mutex.
 
-> diff --git a/include/net/dsa.h b/include/net/dsa.h
-> index 6f7f5c17b5320..396c1e5208523 100644
-> --- a/include/net/dsa.h
-> +++ b/include/net/dsa.h
-> @@ -74,6 +75,7 @@ enum dsa_tag_protocol {
->  	DSA_TAG_PROTO_KSZ9893		=3D DSA_TAG_PROTO_KSZ9893_VALUE,
->  	DSA_TAG_PROTO_LAN9303		=3D DSA_TAG_PROTO_LAN9303_VALUE,
->  	DSA_TAG_PROTO_MTK		=3D DSA_TAG_PROTO_MTK_VALUE,
-> +	DSA_TAG_PROTO_AIROHA		=3D DSA_TAG_PROTO_AIROHA_VALUE,
+> --- a/drivers/net/dsa/mt7530-mdio.c
+> +++ b/drivers/net/dsa/mt7530-mdio.c
+> @@ -148,12 +148,14 @@ static const struct regmap_config regmap_config =3D=
+ {
+>  	.val_bits =3D 32,
+>  	.reg_stride =3D 4,
+>  	.max_register =3D MT7530_CREV,
+> -	.disable_locking =3D true,
+> +	.lock =3D mt7530_mdio_regmap_lock,
+> +	.unlock =3D mt7530_mdio_regmap_unlock,
+>  };
 
 [Severity: High]
-Does adding this new protocol enum break hardware offloads and tag
-processing in the ethernet master drivers?
+Will adding the lock to the regmap configuration cause a recursive deadlock
+in other functions that still hold the manual lock?
 
-Looking at the Mediatek and Airoha ethernet drivers, they appear to use str=
-ict
-protocol checks for DSA_TAG_PROTO_MTK. For example, in
-drivers/net/ethernet/airoha/airoha_eth.c:airoha_get_dsa_tag():
+For example, in mt7530_fdb_cmd(), the manual lock is still held across a
+regmap_read_poll_timeout() call:
 
-    if (dev->dsa_ptr->tag_ops->proto !=3D DSA_TAG_PROTO_MTK)
-        return 0;
+mt7530_fdb_cmd() {
+	mt7530_mutex_lock(priv);
 
-This check would fail to extract the DSA tag for the new Airoha protocol,
-causing untagged packets to retain the tag in the payload which breaks
-the hardware PPE module.
+	ret =3D regmap_read_poll_timeout(priv->regmap, MT7530_ATC, val,
+				       !(val & ATC_BUSY), 20, 20000);
+	...
+}
 
-Similar strict checks exist in other master drivers that might bypass PPE
-hardware routing logic and L2/L3 flow offloading:
+Since mt7530_mutex_lock() takes the non-recursive mdio_lock, and the regmap
+now automatically attempts to take the same lock, does this code self-deadl=
+ock?
 
-drivers/net/ethernet/mediatek/mtk_eth_soc.c:mtk_uses_dsa()
-    dev->dsa_ptr->tag_ops->proto =3D=3D DSA_TAG_PROTO_MTK;
+It looks like mt7530_vlan_cmd() and mt7530_irq_mask_sync() also still hold
+mt7530_mutex_lock() while calling regmap operations.
 
-drivers/net/ethernet/mediatek/mtk_ppe.c:__mtk_ppe_check_skb()
-    if (skb->dev->dsa_ptr->tag_ops->proto !=3D DSA_TAG_PROTO_MTK)
-
-drivers/net/ethernet/mediatek/mtk_ppe_offload.c:mtk_flow_get_dsa_port()
-    if (dp->cpu_dp->tag_ops->proto !=3D DSA_TAG_PROTO_MTK)
-        return -ENODEV;
-
-Should these master drivers be updated to also accept DSA_TAG_PROTO_AIROHA
-so that hardware capabilities are not disabled?
-
+> --- a/drivers/net/dsa/mt7530.c
+> +++ b/drivers/net/dsa/mt7530.c
 [ ... ]
+> @@ -597,7 +577,7 @@ mt7531_ind_c45_phy_read(struct mt7530_priv *priv, int=
+ port, int devad,
+> =20
+>  	ret =3D val & MT7531_MDIO_RW_DATA_MASK;
+>  out:
+> -	mt7530_mutex_unlock(priv);
+> +	mutex_unlock(&priv->reg_mutex);
+> =20
+>  	return ret;
+>  }
+
+[Severity: High]
+Does this leave the locks in an unbalanced state?
+
+The entry path of mt7531_ind_c45_phy_read() still calls
+mt7530_mutex_lock(priv), which takes the mdio_lock:
+
+mt7531_ind_c45_phy_read() {
+	mt7530_mutex_lock(priv);
+	...
+	ret =3D regmap_read_poll_timeout(...)
+	...
+}
+
+But the exit path now releases a completely different lock (reg_mutex),
+which wasn't previously held.
+
+This pattern also seems to be present in mt7531_ind_c45_phy_write(),
+mt7531_ind_c22_phy_read(), and mt7531_ind_c22_phy_write(), where the
+semantic patch updated the unlock label but missed replacing the entry lock.
+
+Additionally, since the entry path still takes the manual mdio_lock, do the
+subsequent regmap calls inside these functions also trigger the same
+recursive deadlock mentioned earlier?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260817082034.2032=
-6-1-ansuelsmth@gmail.com?part=3D6
+6-1-ansuelsmth@gmail.com?part=3D8
