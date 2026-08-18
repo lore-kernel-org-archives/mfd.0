@@ -1,188 +1,201 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1845455199;
-	Tue, 18 Aug 2026 10:40:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38C4F455192;
+	Tue, 18 Aug 2026 10:40:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787049608; cv=none; b=Dyw9nwhYcEFHVvNspRU+7z4J+T22rrzR17zYlYO0se4HRXXTil+z4FXlBo+X8GMf+N2khpoe/+dQM2WdB95oSpCgK7yMhwQG0iWpswE3gg+EK8vw/K5jX8KMnGqMPLVO8vErAGdrucclc31xcZYWPFN7kPhIyayAszFmc+QQpSs=
+	t=1787049645; cv=none; b=uRVd4EeYzd1AOqSqTBRqgdtKswpXCKc44g59DQYztPKooyJ5Ckf0TiR/7L+WrjpsdqevDSY4GEKcbjAkCk8ScYSIQznn6raJoeNsRfuFS7+UsTxBSeZRJvAFbGUsW/hExu8nLGgi+mxuxf1ZwoMamkxf/6QA7FmJ9s3N15vUfxA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787049608; c=relaxed/simple;
-	bh=F4SIiDMWtXLHCp9nVDDPWHXKYklq7fyhIofi7nzuZTI=;
+	s=arc-20240116; t=1787049645; c=relaxed/simple;
+	bh=MFMupQpp0art0Cm2bvZVYaMljbxWx9mUHrcryhiZwHE=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=XcWUmSYiT7hfyANgESV9o6Xlg9giZV7RPo0WeKa7aQU5FglS2QkBTM6J4FBjb/qZbQ1T5IKwuOsXZmnGd7VgIRTnhBhhNhwZwurtYPvdG75iOCa8owsgLy8cX2IqKfhAORymBfeWHB/SNMulqoWK0Dc/Qi+CnyzZ3bGu07YJL5c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FYwqkK8h; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=Fy9qOH31YA6AO+W6YOFKMp5ciaxKU3GRXBe+xX+jEwAc2MsJomw5AfM+c5C3V2m06nxoEoa28ZUZIOiIfIg3gftFxbLtjgDYyqI20+rvt/AO7I1gLxcty+vJygSynSOVHO+x6Vqw17dtBkYS1p6xY5dOydxbtO3c5YotxbOQMg0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kYP8jTFx; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FYwqkK8h"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 09EA31F000E9;
-	Tue, 18 Aug 2026 10:40:06 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kYP8jTFx"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A01161F000E9;
+	Tue, 18 Aug 2026 10:40:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787049607;
-	bh=d2TxfaxaPJr8VxTAlo/fmF1e5A/wJ2wZuGQdQuw2itk=;
+	s=k20260515; t=1787049644;
+	bh=LNn2ZbwuyW8Xs+OoMhWvXKrY0Fa2mxkL5xFG8SpxeNQ=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=FYwqkK8hGIXNOAAtvvnMMBmupEOdsTyBPhPnbZrk3N8uVS4LBv5DR1QRIq9xdmkLC
-	 W1OraUkF5nC1Uw0GdAJcjfbI23d1NiWjHkXVxwp+b3bTleBG3C5v3E5sPxVIII1ah6
-	 aAVy72REA5x/xhkpyb+o2i2o/N6+IXISMHF+g/usnHDUFS4500E9JKTfg28wO5lyBr
-	 Zf/0q6wsEiyYCY4ddP/hXFpyQFJ+ebWzYSLlxjpT9dnaMVkMAnNg5m+2vIwTanWEGu
-	 SAjKkYxmh/6qHppAvwh/qf0V6IaO6VJT5dlrg9kIHEw48Nly6k7Wn4EE2L3te3JO1a
-	 uMhmcZx9bfXSg==
+	b=kYP8jTFxbcrkABQ9dt+5fZGMPnqa5RbkyTmH4L4UO6a4AaTpZGGGAg2cHvtjft6tV
+	 iokw3qPjVzV1DTByKZnhNTwZJCXjuPBqa6ZSueGudFJ5d3kqj8Wjwfqka1qXWw5GgP
+	 EBN/I1JOVZR+vMCUfs2AYd0VAghRRt+7uNBhf/jQ3V2Ct+bF1VFsQu3FcHL+JMMYP1
+	 bKPkPc40lE0Q56/b8KdUkPSywYQdCxkNvo/bLlyrgTj5lzswZawoqlWd2DQWtj91Gl
+	 +VIH0GcNC+J+gAQ7mha48ttA+tIjm5WnUwq1bQt2FrZn7klgu3qPoaL+hA6wXFiNvc
+	 gfWxb5AiMygyA==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v6 4/6] mfd: aspeed-pci-core: add AST2600 PCIe BMC
- device driver
+Subject: Re: [PATCH v6 3/6] serial: 8250_aspeed_vuart: add VUART over PCI
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?R3LDqWdvaXJlIExheWV0?= <gregoire.layet@9elements.com>
-Cc: robh@kernel.org, mfd@lists.linux.dev, lee@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org
-In-Reply-To: <20260818-aspeed-driver-v6-v6-4-fd7cc0b338ea@9elements.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org, devicetree@vger.kernel.org, conor+dt@kernel.org, robh@kernel.org
+In-Reply-To: <20260818-aspeed-driver-v6-v6-3-fd7cc0b338ea@9elements.com>
 References: <20260818-aspeed-driver-v6-v6-0-fd7cc0b338ea@9elements.com>
- <20260818-aspeed-driver-v6-v6-4-fd7cc0b338ea@9elements.com>
+ <20260818-aspeed-driver-v6-v6-3-fd7cc0b338ea@9elements.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 18 Aug 2026 10:40:06 +0000
-Message-Id: <20260818104007.09EA31F000E9@smtp.kernel.org>
+Date: Tue, 18 Aug 2026 10:40:42 +0000
+Message-Id: <20260818104043.A01161F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 5 potential issue(=
+Thank you for your contribution! Sashiko AI review found 4 potential issue(=
 s) to consider:
-- [High] The driver mutates a static global array (`aspeed_uart_port`) duri=
-ng device probe, causing data corruption and race conditions if multiple de=
-vices are present.
-- [Medium] Using the MFD subsystem API for a single-function device violate=
-s MFD design guidelines.
-- [Medium] The driver unconditionally computes memory-mapped I/O addresses =
-from PCIe BAR 1 without verifying the BAR's existence, type, or size.
-- [Low] The commit message subject violates MFD capitalization conventions.
-- [Low] The PCI device ID table is missing the `const` qualifier.
+
+New issues:
+- [Low] Implicit dependency on <linux/bitfield.h> for the FIELD_PREP macro.
+- [Low] Unconditional dev_err() logging in the PCI setup helper will cause =
+log spam if the SCU syscon defers probe.
+- [Low] The return values of regmap operations are ignored and incorrectly =
+shadowed by a hardcoded -EIO.
+
+Pre-existing issues:
+- [Critical] Probe error paths after successful 8250 port registration fail=
+ to unregister the serial port, causing a severe use-after-free memory corr=
+uption and resource leak.
 --
 
---- Patch [4]: [PATCH v6 4/6] mfd: aspeed-pci-core: add AST2600 PCIe BMC de=
-vice driver ---
-commit 91187d47ec6898e7565aba419a47fd407dec5f6c
+--- Patch [3]: [PATCH v6 3/6] serial: 8250_aspeed_vuart: add VUART over PCI=
+ ---
+commit 873385535bf5e6c8576b6766719e73dd291a9a25
 Author: Gr=C3=A9goire Layet <gregoire.layet@9elements.com>
 
-mfd: aspeed-pci-core: add AST2600 PCIe BMC device driver
-   =20
-Add support for UART over PCIe between ASPEED AST2600 BMC and
-host. This is the host-side driver.
+serial: 8250_aspeed_vuart: add VUART over PCI
 
-> mfd: aspeed-pci-core: add AST2600 PCIe BMC device driver
+This patch enables VUART over PCI for the AST2600 by configuring the
+SCU registers when the 'aspeed,vuart-over-pci' property is set. It sets
+up the PCI device enable bits, sets the PCI class code, and configures MSI
+interrupts.
+
+> diff --git a/drivers/tty/serial/8250/8250_aspeed_vuart.c b/drivers/tty/se=
+rial/8250/8250_aspeed_vuart.c
+> index 6afa2f4057e1b..2360d37139bfa 100644
+> --- a/drivers/tty/serial/8250/8250_aspeed_vuart.c
+> +++ b/drivers/tty/serial/8250/8250_aspeed_vuart.c
+> @@ -32,6 +32,28 @@
+>  #define ASPEED_VUART_DEFAULT_SIRQ	4
+>  #define ASPEED_VUART_DEFAULT_SIRQ_POLARITY	IRQ_TYPE_LEVEL_LOW
+> =20
+> +#define ASPEED_SCU_SILICON_REVISION_ID			0x04
+> +#define AST2600A3_REVISION_ID				0x05030303
+> +
+> +#define ASPEED_SCU_PCIE_CONF_CTRL 0xC20
+> +#define  SCU_PCIE_CONF_BMC_DEV_EN					BIT(8)
+> +#define  SCU_PCIE_CONF_BMC_DEV_EN_MMIO				BIT(9)
+> +#define  SCU_PCIE_CONF_BMC_DEV_EN_MSI				BIT(11)
+> +#define  SCU_PCIE_CONF_BMC_DEV_EN_IRQ				BIT(13)
+> +#define  SCU_PCIE_CONF_BMC_DEV_EN_PCIE_BUS_MASTER	BIT(14)
+> +#define  SCU_PCIE_CONF_BMC_DEV_EN_E2L				BIT(15)
+> +#define  SCU_PCIE_CONF_BMC_DEV_EN_LPC_DECODE		BIT(21)
+> +
+> +#define ASPEED_SCUC24 0xC24
+> +#define  ASPEED_SCUC24_MSI_ROUTING_MASK				GENMASK(11, 10)
+> +#define  ASPEED_SCUC24_MSI_ROUTING_PCIE2LPC_PCIDEV1 \
+> +		FIELD_PREP(ASPEED_SCUC24_MSI_ROUTING_MASK, 2)
 
 [Severity: Low]
-This isn't a bug, but the MFD subsystem guidelines require capitalizing the
-description after the prefix. Should "add" be "Add"?
+Does this code rely on FIELD_PREP() without including <linux/bitfield.h>?
 
-> diff --git a/drivers/mfd/aspeed-pci-core.c b/drivers/mfd/aspeed-pci-core.c
-> new file mode 100644
-> index 0000000000000..2f299955bc1b7
-> --- /dev/null
-> +++ b/drivers/mfd/aspeed-pci-core.c
-> @@ -0,0 +1,115 @@
+> +#define  ASPEED_SCUC24_RESERVED_14					BIT(14)
+> +#define  ASPEED_SCUC24_PCIDEV1_INTX_MSI_SCU560_EN	BIT(17)
+> +#define  ASPEED_SCUC24_PCIDEV1_INTX_MSI_HOST2BMC_EN	BIT(18)
+> +
+> +#define ASPEED_SCU_BMC_DEV_CLASS	0xC68
 
 [ ... ]
 
-> +static const unsigned int vuart_msi_index[ASPEED_BMC_NR_VUART] =3D { 16,=
- 17 };
-> +static const u16 vuart_port_addr[ASPEED_BMC_NR_VUART] =3D { 0x3f8, 0x2f8=
- };
-> +
-> +static struct plat_serial8250_port aspeed_uart_port[ASPEED_BMC_NR_VUART =
-+ 1] =3D {
-> +	{
-> +		.uartclk =3D 115200 * 16,
-> +		.iotype =3D UPIO_MEM32,
-> +		.type =3D PORT_16550A,
-> +		.flags =3D (UPF_IOREMAP | UPF_FIXED_PORT | UPF_FIXED_TYPE),
-> +		.regshift =3D 2
-> +	},
-> +	{
-> +		.uartclk =3D 115200 * 16,
-> +		.iotype =3D UPIO_MEM32,
-> +		.type =3D PORT_16550A,
-> +		.flags =3D (UPF_IOREMAP | UPF_FIXED_PORT | UPF_FIXED_TYPE),
-> +		.regshift =3D 2
-> +	},
-> +	{ 0 }
-> +};
-> +
-> +static const struct mfd_cell aspeed_bmc_cell =3D {
-> +	.name		=3D "serial8250",
-> +	.platform_data	=3D aspeed_uart_port,
-> +	.pdata_size	=3D sizeof(aspeed_uart_port),
-> +};
-> +
-> +static int aspeed_pci_bmc_device_setup_vuart(struct pci_dev *pdev)
-> +{
-> +	resource_size_t bar =3D pci_resource_start(pdev, 1);
-> +	unsigned int i;
-> +
-> +	for (i =3D 0; i < ASPEED_BMC_NR_VUART; i++) {
-> +		aspeed_uart_port[i].mapbase =3D bar + (vuart_port_addr[i] << 2);
-> +		aspeed_uart_port[i].irq =3D pci_irq_vector(pdev, vuart_msi_index[i]);
-> +	}
-
-[Severity: High]
-Since aspeed_uart_port is a static global array, won't concurrent device pr=
-obes
-overwrite the hardware parameters for other ASPEED AST2600 PCI devices?
-
-Should the mfd_cell and aspeed_uart_port structures be dynamically allocated
-locally per device during probe to avoid this data corruption?
-
-[Severity: Medium]
-Does this code compute memory-mapped I/O addresses without verifying if BAR=
- 1
-actually has IORESOURCE_MEM set, or checking if the resource length is large
-enough? Could an untrusted device presenting a smaller or disabled BAR 1 le=
-ad
-to an unauthorized or out-of-bounds physical memory mapping primitive?
-
-> +
-> +	return 0;
-> +}
-
-[ ... ]
-
-> +static int aspeed_pci_host_bmc_device_probe(struct pci_dev *pdev,
-> +					    const struct pci_device_id *ent)
+> @@ -412,6 +434,66 @@ static int aspeed_vuart_map_irq_polarity(u32 dt)
+>  	}
+>  }
+> =20
+> +static int aspeed_ast2600_vuart_over_pci_set_enabled(struct platform_dev=
+ice *pdev)
 > +{
 > +	struct device *dev =3D &pdev->dev;
-> +	int rc =3D 0;
+> +	u32 silicon_revision_id;
+> +	struct regmap *scu;
+> +	int rc;
+> +
+> +	u32 pcie_config_ctl =3D SCU_PCIE_CONF_BMC_DEV_EN_IRQ |
+> +				SCU_PCIE_CONF_BMC_DEV_EN_MMIO |
+> +				SCU_PCIE_CONF_BMC_DEV_EN_MSI |
+> +				SCU_PCIE_CONF_BMC_DEV_EN_PCIE_BUS_MASTER |
+> +				SCU_PCIE_CONF_BMC_DEV_EN_E2L |
+> +				SCU_PCIE_CONF_BMC_DEV_EN_LPC_DECODE |
+> +				SCU_PCIE_CONF_BMC_DEV_EN;
+> +
+> +	scu =3D syscon_regmap_lookup_by_phandle(dev->of_node, "aspeed,scu-sysco=
+n");
+> +	if (IS_ERR(scu)) {
+> +		dev_err(dev, "failed to find SCU regmap\n");
+> +		return PTR_ERR(scu);
+> +	}
+
+[Severity: Low]
+If syscon_regmap_lookup_by_phandle() returns -EPROBE_DEFER, will this
+unconditional dev_err() cause unnecessary log spam during boot?=20
+
+The caller properly wraps the return with dev_err_probe(), so removing the
+dev_err() here might be cleaner.
+
+> +
+> +	/* update class code to be an Unassigned/device specific class device */
+> +	if (regmap_write(scu, ASPEED_SCU_BMC_DEV_CLASS, 0xff000000)) {
+> +		dev_err(dev, "could not set PCIe class code\n");
+> +		return -EIO;
+> +	}
+
+[Severity: Low]
+Is it better to propagate the actual regmap_write() error code instead
+of shadowing it with a hardcoded -EIO? Returning the original error might
+help with debugging upstream failures.
 
 [ ... ]
 
-> +	aspeed_pci_bmc_device_setup_vuart(pdev);
+> @@ -540,6 +622,15 @@ static int aspeed_vuart_probe(struct platform_device=
+ *pdev)
+>  	aspeed_vuart_set_host_tx_discard(vuart, true);
+>  	platform_set_drvdata(pdev, vuart);
+> =20
+> +	if (of_device_is_compatible(dev->of_node, "aspeed,ast2600-vuart") &&
+> +	    of_property_read_bool(dev->of_node, "aspeed,vuart-over-pci")) {
+> +		rc =3D aspeed_ast2600_vuart_over_pci_set_enabled(pdev);
+> +		if (rc < 0) {
+> +			dev_err_probe(dev, rc, "could not enable VUART over PCI\n");
+> +			goto err_sysfs_remove;
+> +		}
+> +	}
 > +
-> +	return devm_mfd_add_devices(dev, PLATFORM_DEVID_AUTO,
-> +				    &aspeed_bmc_cell, 1, &pdev->resource[1],
-> +				    0, NULL);
-> +}
 
-[Severity: Medium]
-This isn't a bug, but MFD subsystem guidelines state that the MFD API should
-only be used for devices registering multiple children.=20
+[Severity: Critical]
+This is a pre-existing issue, but does jumping to err_sysfs_remove here leak
+the registered 8250 port?
 
-Since devm_mfd_add_devices() is being called with only a single cell, would=
- it
-be more appropriate to implement this as a standard PCI driver until multip=
-le
-features are actually implemented?
+If aspeed_ast2600_vuart_over_pci_set_enabled() fails, we jump to
+err_sysfs_remove which currently looks like this:
 
-> +
-> +static struct pci_device_id aspeed_bmc_dev_pci_ids[] =3D {
-> +	{ PCI_DEVICE(PCI_VENDOR_ID_ASPEED, ASPEED_BMC_PCI_DEVICE_ID),
-> +		.class =3D PCI_CLASS_OTHERS << 16,
-> +		.class_mask =3D 0xFFFF00
-> +	},
-> +	{ 0 }
-> +};
+err_sysfs_remove:
+	sysfs_remove_group(&vuart->dev->kobj, &aspeed_vuart_attr_group);
+	return rc;
 
-[Severity: Low]
-Should this PCI device ID table be declared with the const qualifier so it
-compiles into the read-only data section instead of writable memory?
+Since serial8250_register_8250_port() was already called earlier in
+aspeed_vuart_probe(), the port remains registered. The driver core will free
+the devm-managed vuart structure when probe fails, potentially leaving a
+dangling pointer in the TTY layer that could trigger a use-after-free upon
+port open or interrupt.
+
+Would it be safer to add a call to serial8250_unregister_port() in the error
+cleanup path?
+
+>  	return 0;
+> =20
+>  err_sysfs_remove:
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260818-aspeed-dri=
-ver-v6-v6-0-fd7cc0b338ea@9elements.com?part=3D4
+ver-v6-v6-0-fd7cc0b338ea@9elements.com?part=3D3
