@@ -1,95 +1,92 @@
-Received: from courrier.aliel.fr (courrier.aliel.fr [65.21.61.41])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3560E7E0E4
-	for <mfd@lists.linux.dev>; Wed, 19 Aug 2026 07:41:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=65.21.61.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57E363D2FE6
+	for <mfd@lists.linux.dev>; Wed, 19 Aug 2026 07:47:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787125282; cv=none; b=KDvWAAO3DhcYYThfSdfEvGZLUpR/gsKqsXNLwOnlno05l3Gqc8fmdEV+71xzQoCqnP/e+JuumSrGj/wKTd6IoT7h/RcLLvsu0gVn70aFm+FRYK/1gdm+V4r1QU4gsi8X+/tEctAO9WT/Q0Ve4yq2+fWmweIxjfgUxsFta2ZedCo=
+	t=1787125643; cv=none; b=XM4ztaC6SwOhCNDrfhjtLa0z1fMlMexaNr2yVUyIol9wH/8sv7p5iFKf06wmxz+cS3PQAvERrzOe8A6zhe6e4DvuYWEjKmL8tQ4YivzJJ25KhJQ7HnJo917/EWVXB0HBof6rnwnWMlhudljtoN9XVZDWG35Uoq4fExkDSZMF1Hs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787125282; c=relaxed/simple;
-	bh=L8oGbzvk2V4mXRjUq7cwdbEYnJjsfG23S7DPzRl86To=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=l48ugbbUvS/wtx9mnPz9Sd810+YOxwR8L3p0Ml1BT/buYnejBv5WiPFrVrW5LFwBMrSpgWZ8ZBELTQ6deUUyEB0oUropEdyX3E2uK5XbxXtxQDQpF4YcooOgx7rWG/zWxmfl8aDx1T2tp+VoaZ4/8hA/lyf/kmwJ8rfsjdALOB0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=aliel.fr; spf=pass smtp.mailfrom=aliel.fr; dkim=pass (1024-bit key) header.d=aliel.fr header.i=@aliel.fr header.b=qKmMfScE; arc=none smtp.client-ip=65.21.61.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=aliel.fr
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=aliel.fr
+	s=arc-20240116; t=1787125643; c=relaxed/simple;
+	bh=CME2svg5ClAUnJKPj2PXGWwyQELSDleWLCO85/xq6ew=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=nhi1j5Iu9x0suZq8qF5gvvusk7L5DVr/XIh6WhVaFVltnrqQguU3gNmpyrq8aOF21ovb2ecwjtVlagLoQzr474rFqmmxum4OQknVfmBzo16X2/wtsxqCiqstpzOCbT8m/7rjB16LYfRB5PbabMgqKpQMnzPBiZ1XDGqfVZqQBrE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=H4xJGj9/; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=aliel.fr header.i=@aliel.fr header.b="qKmMfScE"
-Message-ID: <ef9ca9f8-6cb0-437e-b73d-976059dc6f82@aliel.fr>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=aliel.fr;
-	s=courrier-s1; t=1787125277;
-	bh=L8oGbzvk2V4mXRjUq7cwdbEYnJjsfG23S7DPzRl86To=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To;
-	b=qKmMfScE5JTlY4Eeq4wPokXB0h4AnwPIaDvDXAUMzt7Be4I6uiG35n7+JUe+kGXqP
-	 Km/Uw9FDV759IrI86dJ5RG5sZR+ovUxraZkswtTiBytqB9feg4nSeAs4Uaf7xDt3cj
-	 E6V2AqegDBzwimHL63vAJWItPSyptRfLCtAEan8U=
-Date: Wed, 19 Aug 2026 09:41:15 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="H4xJGj9/"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A92C21F0155A
+	for <mfd@lists.linux.dev>; Wed, 19 Aug 2026 07:47:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787125641;
+	bh=FFro0CShRsSHLGgbO4zij6styDLmEifSQxQUeqQE0X0=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=H4xJGj9/2X+lT/uWhbxXcdPQuM7Bg0MQpuq1YyZ+1rRUji8sJaogN48P6A9i+WlXF
+	 CmbN9ufpRZKvfQ6RHrNVHDKf0ZUKH6lMmKJw7oDStcMGXAGn0aBMXq+s1NsNvDrWZ9
+	 Oljf1DDTrJg9pk8S9WLkII1kgG/vYLtKZ48tKvOA/csRJYfBhVTo3A/9r/PbZzmg2Y
+	 efCuanDt6OZrg0W5f9MhLFvQOGXAzTCWx6lZGlWvr/aX4xkhoq2VnwxEh4XhAolNfu
+	 FDozd1jLinL5SbFvKPd574wZbePTihcoFq2hrYBE+GJwIDlRCEPwDIKZy8j3XzgW1Z
+	 XePiEDb7g8E4Q==
+Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-5b2a3166398so846678e87.3
+        for <mfd@lists.linux.dev>; Wed, 19 Aug 2026 00:47:21 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RqDsAtghUcUucn0/LVI7Ioyc5gH0CbJjcutPaso1AuLCFE0Nvj/G0vbT5bHa6yLzM3kAvQ=@lists.linux.dev
+X-Gm-Message-State: AOJu0YxlQrjKrr0A8hT+VdiRIan3RDQAk4MIBDIfcZol9a3hsSLdALpk
+	P/EQziMJLlDLDxsL+9TZn3+JLd5Su1MjkyamLlwr48mQGHDspdKM1OKKvDlsCxa1lXNEZf6Pipu
+	fR+/8CVseFMJkX1XrpF9D0Ltp6CGCO5A=
+X-Received: by 2002:a05:6512:3b9c:b0:5b4:5c5f:2aed with SMTP id
+ 2adb3069b0e04-5b478bafeedmr801963e87.9.1787125640383; Wed, 19 Aug 2026
+ 00:47:20 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird Beta
-From: linux-kernel-dev@aliel.fr
-Subject: Re: [PATCH v9 4/6] thermal: khadas-mcu-fan: Add fan config from
- platform data Add regulator support
-To: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
- Daniel Lezcano <daniel.lezcano@kernel.org>
-Cc: linux-amlogic@lists.infradead.org, devicetree@vger.kernel.org,
- linux-i2c@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-pm@vger.kernel.org, mfd@lists.linux.dev,
- Neil Armstrong <neil.armstrong@linaro.org>, Lee Jones <lee@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
- Kevin Hilman <khilman@baylibre.com>, Jerome Brunet <jbrunet@baylibre.com>,
- Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
- Beniamino Galvani <b.galvani@gmail.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
- Lukasz Luba <lukasz.luba@arm.com>, Liam Girdwood <lgirdwood@gmail.com>,
- Mark Brown <broonie@kernel.org>, linux-kernel@vger.kernel.org
-References: <20260805-add-mcu-fan-khadas-vim4-v9-0-75df78710b9e@aliel.fr>
- <20260805-add-mcu-fan-khadas-vim4-v9-4-75df78710b9e@aliel.fr>
- <64e146aa-4907-495d-b394-7cecb1727816@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <64e146aa-4907-495d-b394-7cecb1727816@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20260818-cv75-v5-v5-0-7bbb12f0360f@ambarella.com> <20260818-cv75-v5-v5-5-7bbb12f0360f@ambarella.com>
+In-Reply-To: <20260818-cv75-v5-v5-5-7bbb12f0360f@ambarella.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Wed, 19 Aug 2026 09:47:06 +0200
+X-Gmail-Original-Message-ID: <CAD++jLngqGzethEG5Hx+oAPzZoV6rvWNGXYaycFFkDz_dXFz=g@mail.gmail.com>
+X-Gm-Features: AcwNN1Xd6vVOI9stCj2gRpLkQqCARgCDR2Ns_rmI0pVH0qFiDI8kQzTDIQYC_Ck
+Message-ID: <CAD++jLngqGzethEG5Hx+oAPzZoV6rvWNGXYaycFFkDz_dXFz=g@mail.gmail.com>
+Subject: Re: [PATCH v5 05/12] dt-bindings: gpio: pl061: add Ambarella CV75 variant
+To: longzhao@ambarella.com
+Cc: Arnd Bergmann <arnd@arndb.de>, Krzysztof Kozlowski <krzk@kernel.org>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Jiri Slaby <jirislaby@kernel.org>, Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, devicetree@vger.kernel.org, 
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Brian Masney <bmasney@redhat.com>, Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, 
+	Long Zhao <zl020895@163.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 8/7/26 4:34 AM, Daniel Lezcano wrote:
-> On 8/5/26 10:06, Ronald Claveau via B4 Relay wrote:
->> From: Ronald Claveau <linux-kernel-dev@aliel.fr>
->>
->> Replace the hardcoded MAX_LEVEL constant and fan register
->> with values read from platform_data (fan_reg, levels[] and nlevels),
->> as new MCUs need different values.
->>
->> The cooling device's state is stored as an index into levels[],
->> and khadas_mcu_fan_set_level() writes levels[state] to fan_reg,
->> rather than writing the raw state value as before.
->>
->> Optionally acquire and enable a "fan" regulator supply
->> at probe time and on resume,
->> so boards that gate fan power through a regulator are handled.
->>
->> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
->> Signed-off-by: Ronald Claveau <linux-kernel-dev@aliel.fr>
->> ---
-> 
->  * Through which tree this patch should go ? (assuming there is a
-> dependency on other patches)
-> 
+On Tue, Aug 18, 2026 at 12:32=E2=80=AFPM Long Zhao via B4 Relay
+<devnull+longzhao.ambarella.com@kernel.org> wrote:
 
-I think this patch should go through MFD as this patch depends on it.
+> +      properties:
+> +        arm,primecell-periphid:
+> +          const: 0x00000061
 
->  * How this will behave with 100 levels with the step wise governor ?
-> For a 100ms passive delay and 100 states, it will take 10s before
-> reaching the full speed
+The 0x41 in ARMs PeriphID is actually the JEDEC JEP106
+implementer ID (8 bits).
 
-Yes the VIM4 MCU accept values from 0 to 100, but here I'm giving a list
-which is (0, 30, 40, 55, 75, 100), so 5 steps to full speed.
+So you should ideally set this to whatever the hardware engineers
+should have used, had they paid attention to detail.
+If your company has a contact point at JEDEC they should
+know which implementer ID to use for Ambarella designs.
 
--- 
-Best regards,
-Ronald
+Since Ambarella is evidently a member of JEDEC your
+representative should be able to simply request a JEP106
+implementer ID and give it to you if there is not one assigned
+already, but I know it can be hard
+sometimes to find the right person inside the company
+but I think it'd be worth going the extra mile here, say that
+this guy from the kernel community persists.
+
+Yours,
+Linus Walleij
