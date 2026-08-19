@@ -1,124 +1,129 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.14])
+Received: from courrier.aliel.fr (courrier.aliel.fr [65.21.61.41])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 423D23C81B5;
-	Wed, 19 Aug 2026 07:27:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.14
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7E073D5C06;
+	Wed, 19 Aug 2026 07:29:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=65.21.61.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787124476; cv=none; b=IjM8wAQJEBiZzpfzRtIOsu5O01oxwjq4xkJyx83j0Vn9+LUCDahSkeB8UWat9hHHFVJ5BPakBSF414bqiMntqwXbsHQ8g+FbduDwi2xCfDQ1ZnjABpoXOLj40bT6q6pyM6Ds+O5Di/zG3sCL8qun7KYPTZZahHfg4A6Ujk5v/SQ=
+	t=1787124560; cv=none; b=pk30tBSNr7ozBHAV4m0LAeiUoaKpYryfOAwDnK7nGWDZArsF6s+MkL13UrCQUTd5RwBQyWAWtoeQFTtrEQhg3I3yR2mffYETSpTsHSV2TAi4IuKzzy8WphAWJt+Aj4Yn+a4H0OoSSqTJxlvexC+u8xavtqssxevWb5bdL18SQ/c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787124476; c=relaxed/simple;
-	bh=G2kptcnbxzc2RLrx4I654mJLzlzkb8PupIu+d8FB6VQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ZVlNbOFKpn15pMy8f6r3mWLrAtk8FSwt0RdwVFWo1iYDXrEfysj99+IqNj+OUN91/ahzyNDzANSEr0yKRiW43Ju0DHO88gHghUexyUOo6R5V0o+WBG8W2PuQbPmqmYw8NcpMe+6anb8kwDu5iYnaj1K0m2kE02dTcsZf+m1mzgk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=llhhElQK; arc=none smtp.client-ip=192.198.163.14
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1787124560; c=relaxed/simple;
+	bh=Mu+7LLfVGJEa7egrQJ85+es5WpyywoehYqfJDmwmG9c=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=kVn5UpULcDGBrROSBf9jJHzIoc3EPNGHyd2z1PvDTdUm2NGCsUaoTyUYWVFrY3yptXPeufjVaxw0wVBIQq4h0UXBaK7O7x0bIChmsdvP+fpzdggviHcnB+09LCQgwYhp/nVexoTkPFHVV0eVhjuAV56ZdORQfaWhZqyIsYMH/Gc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=aliel.fr; spf=pass smtp.mailfrom=aliel.fr; dkim=pass (1024-bit key) header.d=aliel.fr header.i=@aliel.fr header.b=Bp/jOf1o; arc=none smtp.client-ip=65.21.61.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=aliel.fr
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=aliel.fr
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="llhhElQK"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1787124473; x=1818660473;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=G2kptcnbxzc2RLrx4I654mJLzlzkb8PupIu+d8FB6VQ=;
-  b=llhhElQKBgz4EkM8OhvpIylNkmYfAN1X00+abl4UqR+ogk0zL7tcAziC
-   mUxaf162cZJxGmpa+vMOk8ozO71v1znDwfHhL5PVQBzvlBD+VmM4+XEBQ
-   S+v7er6PXh8RoHel/1lUDbNHHZ35Srgl6Vo2OOR1PfYnnv7RInCWZx5Dr
-   Scf6vurxdYrx4fMph6J6aa+Nlc8kQJDblsAIQo1LJmMmIyYBTbhVodHaA
-   pe/w6E0WImSXLAxzYl0VYxyoBuszh7UlQBuLKVyg+wniihtTNHswNvszO
-   MaV9cNQvbgfdwH0ELOHhQub2kf9SYFtcM7SGBV6AcV6qkQADEm5IPETu5
-   Q==;
-X-CSE-ConnectionGUID: E4Mi8R8eTSyB98a0utnSyQ==
-X-CSE-MsgGUID: v6/Q5vl/Q7W1kWlMImXJvA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11879"; a="87646180"
-X-IronPort-AV: E=Sophos;i="6.25,231,1779174000"; 
-   d="scan'208";a="87646180"
-Received: from orviesa004.jf.intel.com ([10.64.159.144])
-  by fmvoesa108.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Aug 2026 00:27:52 -0700
-X-CSE-ConnectionGUID: J+3m20rtSdqiMKQ+W6sX2Q==
-X-CSE-MsgGUID: i+ywqdASR2ib4M2LXoSg4g==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,231,1779174000"; 
-   d="scan'208";a="269303976"
-Received: from amilburn-desk.amilburn-desk (HELO localhost) ([10.245.244.106])
-  by orviesa004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Aug 2026 00:27:46 -0700
-Date: Wed, 19 Aug 2026 10:27:43 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: zl020895 <zl020895@163.com>
-Cc: longzhao <longzhao@ambarella.com>, Arnd Bergmann <arnd@arndb.de>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	soc <soc@lists.linux.dev>,
-	linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>, Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jiri Slaby <jirislaby@kernel.org>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>,
-	devicetree <devicetree@vger.kernel.org>,
-	linux-clk <linux-clk@vger.kernel.org>,
-	linux-gpio <linux-gpio@vger.kernel.org>,
-	linux-serial <linux-serial@vger.kernel.org>,
-	linux-kernel <linux-kernel@vger.kernel.org>,
-	Brian Masney <bmasney@redhat.com>, Lee Jones <lee@kernel.org>,
-	mfd <mfd@lists.linux.dev>
-Subject: Re: Re: [PATCH v5 08/12] gpio: pl061: add Ambarella CV75 register
- layout variant
-Message-ID: <aoVa74E4l4fy5Por@ashevche-desk.local>
-References: <20260818-cv75-v5-v5-0-7bbb12f0360f@ambarella.com>
- <20260818-cv75-v5-v5-8-7bbb12f0360f@ambarella.com>
- <aoRoBYE_Ns0lu75-@ashevche-desk.local>
- <79f6dc8c.2c42c.1a018dadd29.Coremail.zl020895@163.com>
+	dkim=pass (1024-bit key) header.d=aliel.fr header.i=@aliel.fr header.b="Bp/jOf1o"
+Message-ID: <0ca5c247-18b4-4711-83c9-f0fa6570404d@aliel.fr>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=aliel.fr;
+	s=courrier-s1; t=1787124553;
+	bh=Mu+7LLfVGJEa7egrQJ85+es5WpyywoehYqfJDmwmG9c=;
+	h=Date:From:Subject:To:Cc:References:In-Reply-To;
+	b=Bp/jOf1oKfFdpCH+Zeh00mSopBGHf2Lkn66R1D49WVY/1pwnLxLS4klyg//FH2iFs
+	 D/bZw5GLQdcpBxJD8UVbO5qIW2o4zAQolSp4zmZUthYoDWmFafdoHQC3jQf466cZFd
+	 q/dHXar5lC5Jr9XeqYYKX/o4v8PckUa1GauWTTSo=
+Date: Wed, 19 Aug 2026 09:29:12 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <79f6dc8c.2c42c.1a018dadd29.Coremail.zl020895@163.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+User-Agent: Mozilla Thunderbird Beta
+From: Ronald Claveau <linux-kernel-dev@aliel.fr>
+Subject: Re: [PATCH v9 3/6] mfd: khadas-mcu: Add support for VIM4 MCU variant
+To: Lee Jones <lee@kernel.org>, sashiko-reviews@lists.linux.dev
+Cc: neil.armstrong@linaro.org, linux-amlogic@lists.infradead.org,
+ mfd@lists.linux.dev, conor+dt@kernel.org, robh@kernel.org,
+ devicetree@vger.kernel.org
+References: <20260805-add-mcu-fan-khadas-vim4-v9-0-75df78710b9e@aliel.fr>
+ <20260805-add-mcu-fan-khadas-vim4-v9-3-75df78710b9e@aliel.fr>
+ <20260805081913.272991F00A3A@smtp.kernel.org>
+ <20260812120007.GO1072730@google.com>
+Content-Language: en-US
+In-Reply-To: <20260812120007.GO1072730@google.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, Aug 19, 2026 at 03:09:51PM +0800, zl020895 wrote:
+On 8/12/26 2:00 PM, Lee Jones wrote:
+> On Wed, 05 Aug 2026, sashiko-bot@kernel.org wrote:
 > 
-> I followed Linus' guidance on the v2 pinctrl patch to reuse gpio-pl061 with a
-> per-variant register layout, because the Ambarella banks share the PL061
-> interrupt register model (IS/IBE/IEV/IE/RIS/MIS/IC). gpio-mmio/gpio-regmap
-> cover the DATA/DIR side well, but they seem not provide that IRQ controller,
-> so moving there would need a separate irqchip and would risk duplicating the
-> PL061 IRQ logic Linus asked us not to fork.
+>> Thank you for your contribution! Sashiko AI review found 1 potential issue(s) to consider:
+>> - [High] The driver unconditionally fails to probe on generic Khadas MCU boards (VIM1/VIM2/VIM3) due to a NULL pointer check on valid match data.
 > 
+> Please review, explain or fix the Sashiko review(s).
 > 
-> Would you prefer we keep the PL061 variant for that reason, or is there a
-> gpio-mmio/gpio-regmap approach that also covers this interrupt model cleanly?
-> We can rework either way once that is clear.
+> If this is a set, this request includes the other patches too.
+> 
 
-I haven't told we should duplicate. My suggestion is:
-- convert current gpio-pl061 to use gpio-mmio / gpio-regmap (and I vote for the latter)
-- add new regmap configuration and necessary layout for your case.
+Yes I will check all those reviews.
 
-> ---- Replied Message ----
-> | From | Andy Shevchenko<andriy.shevchenko@linux.intel.com> |
-> | Date | 08/18/2026 22:11 |
-> On Tue, Aug 18, 2026 at 06:31:22PM +0800, Long Zhao via B4 Relay wrote:
+>> --
+>>
+>> --- Patch [3]: [PATCH v9 3/6] mfd: khadas-mcu: Add support for VIM4 MCU variant ---
+>> commit eab418dac1b5e94bd297b0a14e92e87b2063dc9b
+>> Author: Ronald Claveau <linux-kernel-dev@aliel.fr>
+>>
+>> mfd: khadas-mcu: Add support for VIM4 MCU variant
+>>
+>> This patch refactors the probe function to use per-variant values instead of
+>> hardcoded globals. It adds dedicated regmap configuration, fan control register,
+>> and duty-cycle levels for the VIM4 MCU variant. A new compatible string
+>> "khadas,vim4-mcu" is introduced for this new device.
+>>
+>>> diff --git a/drivers/mfd/khadas-mcu.c b/drivers/mfd/khadas-mcu.c
+>>> index 0e74efe14f367..4cb305ac915e1 100644
+>>> --- a/drivers/mfd/khadas-mcu.c
+>>> +++ b/drivers/mfd/khadas-mcu.c
+>> [ ... ]
+>>> @@ -75,47 +75,138 @@ static const struct regmap_config khadas_mcu_regmap_config = {
+>> [ ... ]
+>>>  static int khadas_mcu_probe(struct i2c_client *client)
+>>>  {
+>>> +	const struct mfd_cell *cells, *fan_cells;
+>>> +	const struct regmap_config *regmap_cfg;
+>>>  	struct device *dev = &client->dev;
+>>> +	int ncells, nfan_cells, ret;
+>>>  	struct khadas_mcu *ddata;
+>>> -	int ret;
+>>> +	const void *match;
+>>>  
+>>>  	ddata = devm_kzalloc(dev, sizeof(*ddata), GFP_KERNEL);
+>>>  	if (!ddata)
+>>>  		return -ENOMEM;
+>>>  
+>>> +	match = i2c_get_match_data(client);
+>>> +	if (!match)
+>>> +		return -ENODEV;
+>>
+>> [Severity: High]
+>> Does this code inadvertently break the probe for generic Khadas MCU boards
+>> (VIM1/VIM2/VIM3)?
+>>
+>> Because KHADAS_MCU_GENERIC evaluates to 0 in its enum, i2c_get_match_data() will
+>> return a NULL pointer when matching "khadas,mcu" in khadas_mcu_probe() in
+>> drivers/mfd/khadas-mcu.c. This will cause the check here to evaluate to true and
+>> unconditionally abort the probe with -ENODEV.
+>>
+>> [ ... ]
+>>> @@ -123,7 +214,8 @@ static int khadas_mcu_probe(struct i2c_client *client)
+>>>  
+>>>  #ifdef CONFIG_OF
+>>>  static const struct of_device_id khadas_mcu_of_match[] = {
+>>> -	{ .compatible = "khadas,mcu", },
+>>> +	{ .compatible = "khadas,mcu", .data = (void *)KHADAS_MCU_GENERIC },
+>>> +	{ .compatible = "khadas,vim4-mcu", .data = (void *)KHADAS_MCU_VIM4 },
+>>>  	{},
+>>>  };
+>>>  MODULE_DEVICE_TABLE(of, khadas_mcu_of_match);
+>>
+>> -- 
+>> Sashiko AI review · https://sashiko.dev/#/patchset/20260805-add-mcu-fan-khadas-vim4-v9-0-75df78710b9e@aliel.fr?part=3
 > 
-> > Extend gpio-pl061 with a per-variant register layout so the Ambarella
-> > CV75 GPIO banks can reuse the PL061 driver instead of a duplicate.
-> 
-> This is reinvention of gpio-mmio.c (as a library). It has necessary facilities.
-> Also gpio-regmap may be considered. So, switch this driver to use one of the
-> above and the patch for the new device will be much simpler and elegant.
+
 
 -- 
-With Best Regards,
-Andy Shevchenko
-
-
+Best regards,
+Ronald
