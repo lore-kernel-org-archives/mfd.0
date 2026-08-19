@@ -1,129 +1,83 @@
-Received: from courrier.aliel.fr (courrier.aliel.fr [65.21.61.41])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7E073D5C06;
-	Wed, 19 Aug 2026 07:29:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=65.21.61.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 591D63DCDBB
+	for <mfd@lists.linux.dev>; Wed, 19 Aug 2026 07:33:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787124560; cv=none; b=pk30tBSNr7ozBHAV4m0LAeiUoaKpYryfOAwDnK7nGWDZArsF6s+MkL13UrCQUTd5RwBQyWAWtoeQFTtrEQhg3I3yR2mffYETSpTsHSV2TAi4IuKzzy8WphAWJt+Aj4Yn+a4H0OoSSqTJxlvexC+u8xavtqssxevWb5bdL18SQ/c=
+	t=1787124787; cv=none; b=aV47w/Y8LsYpvmXeqLziCFGbbBSNHIrOUI7CncZE1ctJVm8wjOeiVoV9N++gIUHM+eL/QusMddtajPqa7Vnw2nye1v2aFVSRvronBczfFm10w0+RgkQtsVfMLygHUajd5e6Bhk3Puf0//yUutcy1YQgF4ogoVpZUPUurEtcxCXw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787124560; c=relaxed/simple;
-	bh=Mu+7LLfVGJEa7egrQJ85+es5WpyywoehYqfJDmwmG9c=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=kVn5UpULcDGBrROSBf9jJHzIoc3EPNGHyd2z1PvDTdUm2NGCsUaoTyUYWVFrY3yptXPeufjVaxw0wVBIQq4h0UXBaK7O7x0bIChmsdvP+fpzdggviHcnB+09LCQgwYhp/nVexoTkPFHVV0eVhjuAV56ZdORQfaWhZqyIsYMH/Gc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=aliel.fr; spf=pass smtp.mailfrom=aliel.fr; dkim=pass (1024-bit key) header.d=aliel.fr header.i=@aliel.fr header.b=Bp/jOf1o; arc=none smtp.client-ip=65.21.61.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=aliel.fr
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=aliel.fr
+	s=arc-20240116; t=1787124787; c=relaxed/simple;
+	bh=VkxwTHhpX690h2pXqhYY+zmBovwI3C9WHSBD9ryCt6I=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=gaZajK5HCOFY2GcCa+LwfE7ZH0g84afkSUiTMbC0QUqEnkhFSta/vv0+B8ZgFhHBPf8x7lko2TVpH9aNhCkLEThYZyNCjMHkZEjJBvUWkftEkWNrIktXVqQHBjD/Dy83dRjHzLshISgcQaiw82fHp+xpXVNRKmTFI5xO8bMwz6U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dpOjroIG; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=aliel.fr header.i=@aliel.fr header.b="Bp/jOf1o"
-Message-ID: <0ca5c247-18b4-4711-83c9-f0fa6570404d@aliel.fr>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=aliel.fr;
-	s=courrier-s1; t=1787124553;
-	bh=Mu+7LLfVGJEa7egrQJ85+es5WpyywoehYqfJDmwmG9c=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To;
-	b=Bp/jOf1oKfFdpCH+Zeh00mSopBGHf2Lkn66R1D49WVY/1pwnLxLS4klyg//FH2iFs
-	 D/bZw5GLQdcpBxJD8UVbO5qIW2o4zAQolSp4zmZUthYoDWmFafdoHQC3jQf466cZFd
-	 q/dHXar5lC5Jr9XeqYYKX/o4v8PckUa1GauWTTSo=
-Date: Wed, 19 Aug 2026 09:29:12 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dpOjroIG"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 665E41F0155B
+	for <mfd@lists.linux.dev>; Wed, 19 Aug 2026 07:33:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787124785;
+	bh=VkxwTHhpX690h2pXqhYY+zmBovwI3C9WHSBD9ryCt6I=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=dpOjroIGI85uGUmiGJs9drYoXJhWNmVi4Uu3qGsw/NyvsqnuNvUgi89N9RNfPYAWP
+	 AEgu6FA3sfYXpsYY+Wr9HXu2c8CUR44guutkanr8ETQ64s6zPs4Fh46HEBjo8TPYvD
+	 jjXR4/BaPP1E02MEgaQLgH9LhmetQeGWQMYLdCcKPn1/lPeuo0vL87iviG8vq5aFMT
+	 7BUbcYev20AFu3U5/liiINcqpf2o06mkh1Gpk22RTGdfBkWjXs6MZ2GSuVFHiDCubn
+	 dJzb1UguVvNUKib86ajaYHZEAOcpz6oxmJS6n2q77Tm19iJyblR4R/XacjfhHp7Blg
+	 IdoWLK+59joQA==
+Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-5b021916bd3so1029168e87.3
+        for <mfd@lists.linux.dev>; Wed, 19 Aug 2026 00:33:05 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RqVF+KetD78/8zlko58WWLs+u9IyNAWgYlbGCn65CW/CzvBFcLGrJ7+LxBoqT+17R4vSVU=@lists.linux.dev
+X-Gm-Message-State: AOJu0YwwGx9B/RUHxq6j6Y+qYEaeBB9ULrZBbbdNq6DuyyZfXIMiDsYt
+	uzP8uzJexEt/YjoxsHig1MvyrKY6ZwfnpLmPaj8b4wbAFWn3pAAAbHS0/WhjoeFD3NV5uXXQczc
+	T6cWe6Fh2n72LWFyABuNHKbBR10erP5M=
+X-Received: by 2002:a05:6512:3d86:b0:5ae:a702:6528 with SMTP id
+ 2adb3069b0e04-5b478bdc331mr681671e87.26.1787124783764; Wed, 19 Aug 2026
+ 00:33:03 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird Beta
-From: Ronald Claveau <linux-kernel-dev@aliel.fr>
-Subject: Re: [PATCH v9 3/6] mfd: khadas-mcu: Add support for VIM4 MCU variant
-To: Lee Jones <lee@kernel.org>, sashiko-reviews@lists.linux.dev
-Cc: neil.armstrong@linaro.org, linux-amlogic@lists.infradead.org,
- mfd@lists.linux.dev, conor+dt@kernel.org, robh@kernel.org,
- devicetree@vger.kernel.org
-References: <20260805-add-mcu-fan-khadas-vim4-v9-0-75df78710b9e@aliel.fr>
- <20260805-add-mcu-fan-khadas-vim4-v9-3-75df78710b9e@aliel.fr>
- <20260805081913.272991F00A3A@smtp.kernel.org>
- <20260812120007.GO1072730@google.com>
-Content-Language: en-US
-In-Reply-To: <20260812120007.GO1072730@google.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20260818-cv75-v5-v5-0-7bbb12f0360f@ambarella.com> <20260818-cv75-v5-v5-6-7bbb12f0360f@ambarella.com>
+In-Reply-To: <20260818-cv75-v5-v5-6-7bbb12f0360f@ambarella.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Wed, 19 Aug 2026 09:32:50 +0200
+X-Gmail-Original-Message-ID: <CAD++jLnsyZDBixXMDFUf1+i0ZtYkmzpc+kggn9bx7=8W-gZHSw@mail.gmail.com>
+X-Gm-Features: AcwNN1WedvW-uebjWVm_0ycL6wQEG6qNIR9PZrbwX20kSbc79ar1YheT6gV97uE
+Message-ID: <CAD++jLnsyZDBixXMDFUf1+i0ZtYkmzpc+kggn9bx7=8W-gZHSw@mail.gmail.com>
+Subject: Re: [PATCH v5 06/12] dt-bindings: serial: add Ambarella CV75 UART
+To: longzhao@ambarella.com
+Cc: Arnd Bergmann <arnd@arndb.de>, Krzysztof Kozlowski <krzk@kernel.org>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Jiri Slaby <jirislaby@kernel.org>, Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, devicetree@vger.kernel.org, 
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Brian Masney <bmasney@redhat.com>, Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, 
+	Long Zhao <zl020895@163.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 8/12/26 2:00 PM, Lee Jones wrote:
-> On Wed, 05 Aug 2026, sashiko-bot@kernel.org wrote:
-> 
->> Thank you for your contribution! Sashiko AI review found 1 potential issue(s) to consider:
->> - [High] The driver unconditionally fails to probe on generic Khadas MCU boards (VIM1/VIM2/VIM3) due to a NULL pointer check on valid match data.
-> 
-> Please review, explain or fix the Sashiko review(s).
-> 
-> If this is a set, this request includes the other patches too.
-> 
+On Tue, Aug 18, 2026 at 12:32=E2=80=AFPM Long Zhao via B4 Relay
+<devnull+longzhao.ambarella.com@kernel.org> wrote:
 
-Yes I will check all those reviews.
+> From: Long Zhao <longzhao@ambarella.com>
+>
+> Document the Ambarella CV75 on-chip UART controller binding for early
+> console bring-up. The binding requires a single RCT clock input and
+> fixed 32-bit register access via reg-shift and reg-io-width.
+>
+> Signed-off-by: Long Zhao <longzhao@ambarella.com>
 
->> --
->>
->> --- Patch [3]: [PATCH v9 3/6] mfd: khadas-mcu: Add support for VIM4 MCU variant ---
->> commit eab418dac1b5e94bd297b0a14e92e87b2063dc9b
->> Author: Ronald Claveau <linux-kernel-dev@aliel.fr>
->>
->> mfd: khadas-mcu: Add support for VIM4 MCU variant
->>
->> This patch refactors the probe function to use per-variant values instead of
->> hardcoded globals. It adds dedicated regmap configuration, fan control register,
->> and duty-cycle levels for the VIM4 MCU variant. A new compatible string
->> "khadas,vim4-mcu" is introduced for this new device.
->>
->>> diff --git a/drivers/mfd/khadas-mcu.c b/drivers/mfd/khadas-mcu.c
->>> index 0e74efe14f367..4cb305ac915e1 100644
->>> --- a/drivers/mfd/khadas-mcu.c
->>> +++ b/drivers/mfd/khadas-mcu.c
->> [ ... ]
->>> @@ -75,47 +75,138 @@ static const struct regmap_config khadas_mcu_regmap_config = {
->> [ ... ]
->>>  static int khadas_mcu_probe(struct i2c_client *client)
->>>  {
->>> +	const struct mfd_cell *cells, *fan_cells;
->>> +	const struct regmap_config *regmap_cfg;
->>>  	struct device *dev = &client->dev;
->>> +	int ncells, nfan_cells, ret;
->>>  	struct khadas_mcu *ddata;
->>> -	int ret;
->>> +	const void *match;
->>>  
->>>  	ddata = devm_kzalloc(dev, sizeof(*ddata), GFP_KERNEL);
->>>  	if (!ddata)
->>>  		return -ENOMEM;
->>>  
->>> +	match = i2c_get_match_data(client);
->>> +	if (!match)
->>> +		return -ENODEV;
->>
->> [Severity: High]
->> Does this code inadvertently break the probe for generic Khadas MCU boards
->> (VIM1/VIM2/VIM3)?
->>
->> Because KHADAS_MCU_GENERIC evaluates to 0 in its enum, i2c_get_match_data() will
->> return a NULL pointer when matching "khadas,mcu" in khadas_mcu_probe() in
->> drivers/mfd/khadas-mcu.c. This will cause the check here to evaluate to true and
->> unconditionally abort the probe with -ENODEV.
->>
->> [ ... ]
->>> @@ -123,7 +214,8 @@ static int khadas_mcu_probe(struct i2c_client *client)
->>>  
->>>  #ifdef CONFIG_OF
->>>  static const struct of_device_id khadas_mcu_of_match[] = {
->>> -	{ .compatible = "khadas,mcu", },
->>> +	{ .compatible = "khadas,mcu", .data = (void *)KHADAS_MCU_GENERIC },
->>> +	{ .compatible = "khadas,vim4-mcu", .data = (void *)KHADAS_MCU_VIM4 },
->>>  	{},
->>>  };
->>>  MODULE_DEVICE_TABLE(of, khadas_mcu_of_match);
->>
->> -- 
->> Sashiko AI review · https://sashiko.dev/#/patchset/20260805-add-mcu-fan-khadas-vim4-v9-0-75df78710b9e@aliel.fr?part=3
-> 
+Looks good to me!
+Reviewed-by: Linus Walleij <linusw@kernel.org>
 
-
--- 
-Best regards,
-Ronald
+Yours,
+Linus Walleij
