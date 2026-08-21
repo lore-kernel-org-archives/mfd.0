@@ -1,142 +1,112 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AFAC337B036
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 690A837A821
 	for <mfd@lists.linux.dev>; Fri, 21 Aug 2026 03:48:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787284137; cv=none; b=tlXJmcJPG16f1oHcQT618FZglZ3ErgKwMEsB8s8iP9dHGwrI6eXkKmH9r+gFK3sYhPyH2Bb1mwjdwNQOqt/no63U7bTGJJuePnuInCAselwas30DqQ90pBgT9z4bVz6SeINxgP4Or0bTscOm3moOSCuSv8iod8sHNg5iQZNiuU4=
+	t=1787284138; cv=none; b=ZqeZ7+BIKSrQwA+TlAzVIVcaLOR77NFGw1L7nvOuyop74aZhPbln6RHm0TfBwkTcnqduTRhn8iY8hHuTGMPNlMO1eTD7BK0nruuVzCIRsLmv3Ad5/BwbfhEKt3Zkj2a0GbtYzpbbHTnsAwriMn5g9xORQjB88OxWXMUwssmI0ns=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787284137; c=relaxed/simple;
-	bh=BTp0bZWeF3Drn02bAvGXcMVrwp2yDkZO5m6YeIv8w8Y=;
+	s=arc-20240116; t=1787284138; c=relaxed/simple;
+	bh=KPMzyQVGJrB0DmTcU5XfXF9l7uNMIyXpXVUnSc6TT9o=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=uHZ8mJq4xTsWZDZCLEbksyjukIt4GT/sWoN0qivIBdbmBEQWFyUIhqtQvAFoxv0owmtWxCkYmBxdypV8ZgA9fmzrk2eG3+dqqZPzTRCymgSN7PsAsw5NQk7ldUCyMzLj1Bas2qnQx21TjIuyJMZuKnGT4ZgmNEVnOCAigOkN2TI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cey95VPk; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=Nme+i/DRLEPcefFnTLTHOJCC6oJD8KYs47y/Q01nfbPNALPvrGlJ8N5FUib2b6YvIBD9C5Pxdjy9keVDyPth7D7647q323aLC8YopwliIBqHsGh731dLA69IPE60RYwg5Rsnn1ZnXQDYL2z/QtjxO9xqJ6X4ALighLf5vsbvpsg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Yw50MYOR; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cey95VPk"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 619B41F00A3A;
-	Fri, 21 Aug 2026 03:48:54 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Yw50MYOR"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A274A1F000E9;
+	Fri, 21 Aug 2026 03:48:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787284134;
-	bh=UZE66zdJ1anFtRXMdXik+/OcIgs4XGiux/WkOaWkgXQ=;
+	s=k20260515; t=1787284133;
+	bh=X3Ommau1AvU85wkIDLdJvqUsOkYy8eS6+1Z+u538KAQ=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=cey95VPkLDiXtXCjqDZN2R+/ju9Bxzgs9/PNLdpdNrpDht56ETxBnbqWt+bpJCkVm
-	 g1lA6Ho2wxeAvi3VUpNqnAjtRylHds8+pC1i24BOVSn9Nze2eWZcneLHMYol1hy83c
-	 nU6t8nuZ7x14IRNB8vwxCl+U047JmjqAbOYR9G6dPUoK+kZy8qDw9mB5g6VASYx0Sk
-	 pvfgfycMil5ohxRe7oacxRRti9CEgAsapIYYFRR7ZHkbHmIR66dHRP96tpyUjW6rPs
-	 VfDw5nAjaOGKDIHL3Y8sLeGmvrNZ10+9XeEkgXSvAwPwpMffqKcosPDGYT2MfmGyl5
-	 Zgx4JQByVUnOw==
+	b=Yw50MYORTCrQh2/bkbK+pNXnN/rmCz1pYcO2Aa7c/nr6SvjK5K27SRVdDZ/GI38QS
+	 7vGpjKlq3Ey1Hcq1bi91FibWbqxs3mcNObAhyYZH6x+4JUmWSbo2/7SkYVUWPwyl9j
+	 TYoq57B5h8kU4t5oX/FUqWVnY9FdzvwEO4jHGQh7EhEunyUs111b2PrnQvt4iJYLxv
+	 kWC2oz3XXz0M4D+A6WLJnftLLSBCg+/WTi7p7L5OzCI2PUFLeM3KSwXiKPllnm0khw
+	 3+6gaev3U+yXJDQEtAATPCvmav3WAzAxLJs3bcZrBPEM7Li8mthRJ6Yh3jqVjZY08U
+	 QaJOUiJhuG9uQ==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v7 07/10] mfd: nct6694: Validate the interrupt IN
- endpoint
+Subject: Re: [PATCH v7 06/10] mfd: nct6694: Transfer command payloads via a
+ dedicated DMA buffer
 Reply-To: sashiko-reviews@lists.linux.dev
 To: a0282524688@gmail.com
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260821033505.4017901-8-a0282524688@gmail.com>
+Cc: lee@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20260821033505.4017901-7-a0282524688@gmail.com>
 References: <20260821033505.4017901-1-a0282524688@gmail.com>
- <20260821033505.4017901-8-a0282524688@gmail.com>
+ <20260821033505.4017901-7-a0282524688@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Fri, 21 Aug 2026 03:48:54 +0000
-Message-Id: <20260821034854.619B41F00A3A@smtp.kernel.org>
+Date: Fri, 21 Aug 2026 03:48:53 +0000
+Message-Id: <20260821034853.A274A1F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
+Thank you for your contribution! Sashiko AI review found 2 potential issue(=
 s) to consider:
 
 Pre-existing issues:
-- [High] Unchecked transfer lengths lead to stale data reads.
-- [Medium] Mismatched endpoint address used for interrupt pipe creation.
-- [Medium] Missing endpoint existence and type validation for required bulk=
- endpoints.
+- [High] The GPIO controller driver incorrectly sets `data->gpio.can_sleep =
+=3D false`, falsely advertising to the GPIO core that its callbacks can be =
+invoked from atomic contexts.
+- [High] Missing check for unmapped IRQs allows a USB device to arbitrarily=
+ trigger IRQ 0 handlers.
 --
 
---- Patch [7]: [PATCH v7 07/10] mfd: nct6694: Validate the interrupt IN end=
-point ---
-commit 403c0781b839695d774ed394e3d21842e56bd309
+--- Patch [6]: [PATCH v7 06/10] mfd: nct6694: Transfer command payloads via=
+ a dedicated DMA buffer ---
+commit 20bf57a851a06631ddae8833be2bd95d21bbd709
 Author: Ming Yu <a0282524688@gmail.com>
 
-mfd: nct6694: Validate the interrupt IN endpoint
+mfd: nct6694: Transfer command payloads via a dedicated DMA buffer
 
-The probe reads endpoint[0] of the current altsetting without checking
-that the interface actually describes any endpoint. A device reporting
-zero endpoints makes the driver read past the endpoint array.
+This commit fixes a DMA safety issue on non-coherent architectures by
+transferring command payloads through a dedicated buffer owned by the
+transport. It also ensures commands exceeding the maximum firmware packet
+size are rejected.
 
 > diff --git a/drivers/mfd/nct6694-usb.c b/drivers/mfd/nct6694-usb.c
-> index 793ce54c02aad..c8667984df5eb 100644
+> index 2289ebfde7fab..793ce54c02aad 100644
 > --- a/drivers/mfd/nct6694-usb.c
 > +++ b/drivers/mfd/nct6694-usb.c
-> @@ -305,13 +304,9 @@ static int nct6694_usb_probe(struct usb_interface *i=
-face,
->  	if (ret)
->  		goto err_urb;
-> =20
-> -	interface =3D iface->cur_altsetting;
-> -
-> -	int_endpoint =3D &interface->endpoint[0].desc;
-> -	if (!usb_endpoint_is_int_in(int_endpoint)) {
-> -		ret =3D -ENODEV;
-> +	ret =3D usb_find_int_in_endpoint(iface->cur_altsetting, &int_endpoint);
-> +	if (ret)
->  		goto err_urb;
 
-[Severity: Medium]
-This is a pre-existing issue, but does this probe function also need to
-validate the bulk endpoints?
-
-It appears that nct6694_usb_read_msg() uses usb_bulk_msg() with a hardcoded
-NCT6694_BULK_IN_EP. If a malformed device lacks these bulk endpoints or
-configures them with the wrong type, could it trigger a 'BOGUS urb xfer'
-warning in the USB core?
-
-> -	}
-> =20
->  	usb_fill_int_urb(udata->int_in_urb, udev, usb_rcvintpipe(udev, NCT6694_=
-INT_IN_EP),
->  			 udata->int_buffer, sizeof(*udata->int_buffer), nct6694_usb_int_callb=
-ack,
->  			 nct6694, int_endpoint->bInterval);
-
-[Severity: Medium]
-This is a pre-existing issue, but does this mismatch the found endpoint
-address?
-
-We dynamically find the interrupt endpoint above and use its bInterval here,
-but we still hardcode NCT6694_INT_IN_EP for the pipe creation. If a malform=
-ed
-device has its first interrupt IN endpoint at a different address, and 0x81=
- is
-used for a different type, could this result in a type mismatch and a kernel
-warning?
+[ ... ]
 
 [Severity: High]
-This isn't a bug introduced by this patch, but does the driver handle short=
- or
-zero-length packets correctly?
+This is a pre-existing issue, but does this code leave us vulnerable to
+spurious IRQ 0 triggers?
 
-Looking at nct6694_usb_int_callback(), it seems to read the transfer buffer
-without checking urb->actual_length:
+Looking at nct6694_usb_int_callback() in drivers/mfd/nct6694-usb.c, the
+return value is passed directly into the handler:
 
-drivers/mfd/nct6694-usb.c:nct6694_usb_int_callback() {
-    ...
-	int_status =3D le32_to_cpu(*status_le);
+    generic_handle_irq_safe(irq_find_mapping(nct6694->domain, irq));
 
-	while (int_status) {
-		int irq =3D __ffs(int_status);
-    ...
-}
+If a buggy or malicious USB device sends an interrupt URB with bits set
+for unmapped IRQs, irq_find_mapping() returns 0. Since 0 is often a valid
+system interrupt on some architectures, could this crash the system by
+unconditionally passing 0 to generic_handle_irq_safe()?
 
-Similarly, in nct6694_usb_read_msg(), it appears rx_len is not checked befo=
-re
-evaluating msg->response_header.sts. If a device returns short or zero-leng=
-th
-packets, could this cause the driver to read uninitialized memory and
-potentially trigger spurious IRQs?
+[Severity: High]
+This isn't a bug introduced by this patch, but does the GPIO controller
+driver falsely advertise that its callbacks can run in atomic context?
+
+In drivers/gpio/gpio-nct6694.c during nct6694_gpio_probe(), the driver sets:
+
+    data->gpio.can_sleep =3D false;
+
+However, the GPIO accessors like nct6694_get_value() take a mutex and
+perform blocking USB I/O:
+
+    guard(mutex)(&data->lock);
+    ret =3D nct6694_read_msg(data->nct6694, &cmd_hd, &data->reg_val);
+
+Will this cause a kernel panic if a consumer of this GPIO chip calls a
+gpiod_* function from within a spinlock or hardirq context, given that the
+GPIO core permits atomic usage based on this flag?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260821033505.4017=
-901-1-a0282524688@gmail.com?part=3D7
+901-1-a0282524688@gmail.com?part=3D6
