@@ -1,125 +1,282 @@
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DF7447D443
-	for <mfd@lists.linux.dev>; Thu, 20 Aug 2026 16:23:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.218.45
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787243011; cv=pass; b=Ck39qejJ771VtEXdN68v0wRzniAYbzGUbz9gX98R3AFCdCbL34LN05Vyh1dZOVfgok85m+I7YeGl00l2cNC05NbRm3jqrAjFqzIkOA9bocEFth8i8pnPq/VsqDwEqt8qzrMUJAZkNsMlEWGOVY1AImXk0xX5BOipE/TSeH8JtDQ=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787243011; c=relaxed/simple;
-	bh=nM7522pMTSm6ohXpjcirSMLxO2bUSl44i0fllcYRFAk=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=DoHi53YAHvmia9iICxLzsEXg+vs2XjQZr8CnQmQqS9iLk+0pk+MNosakF7PHobHBM9NoHfzvbMrxW5Ry4wMRWqfU3+k374uOv3peaYk78ETgs/os1yY6cHKeBImhBLz7ViOyHkaSKY2PUYQbsN3wKEP5Q9f2j44BjSqLHdWZDM4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=n5aUL5H3; arc=pass smtp.client-ip=209.85.218.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2AF683783BB
+	for <mfd@lists.linux.dev>; Fri, 21 Aug 2026 03:35:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.176
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1787283330; cv=none; b=uWF5DtvSkfRoSxZQyLdCzqsIMEKlKEecb2WPD+5x8bsIMNKYwKhJYVee7jiJjCceSf1NivlNM78CqvLU7F413xLimVkyRv1cHhLkofodxQOYSAfN4s4Zpuwr9YhLNBY5jKsr/hPTVUStcLS/sjABTV5Uiaj14hPmLT3k43IlWDI=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1787283330; c=relaxed/simple;
+	bh=B1ouq7zNk3OffF9x05iRPTwxZeo6B5tYmbwVJug955A=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=mZII340wXzhWPmnX7gl+PspM88G1xCIE0C1ZcJvC5opcrpokeALikxBNYT/ZNLv1cCcfy5gKleKaiYawaaweUU2XZLVSzn+/OtaiTTnseAMWHmXed4JDskH82Pf6fEdnpBhXSLyuGsU6wCAM+WxqHgaFJS1+FY5lThCO6f1eNqg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=o6fToW6v; arc=none smtp.client-ip=209.85.215.176
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="n5aUL5H3"
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-c15d111ca99so2764566b.0
-        for <mfd@lists.linux.dev>; Thu, 20 Aug 2026 09:23:29 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787243008; cv=none;
-        d=google.com; s=arc-20260327;
-        b=W9IyNzx/zEmZpGxZcc4GJtaGYqxc6ezEDcWmEdrbpm/lZZZldJ4DdFRCjHJvbAr9qA
-         oBxa1mpSy5CU9imBRW9BCpWm8C1XwhNCxQN/7lm9i0nx0X8vW/JofjFrqbdJmmI9iBMq
-         vKvZwULAepbrYMtlapJ4qNX9XuEA8BVJn8F72eT7TGbVjTkTjGVA7/YgXsvxXaPI0/l2
-         vbCg4hYkOpYc9Sma9S5qyYuInL+ale9ICjG+NukN5P7U7wyEoYugDhlf1LPaSjVTE6h9
-         c77iKhFmwZqO9i4Fg1I8+TYWXk2dXoY5dgNHnvyrsygG8lkQdN7UzbKKT7Zs4rbkK22Q
-         CDxQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=yKhR9WkhIUiBs/DXzAMG9ly3j13B+5WjNx96hhgAatQ=;
-        fh=la+xwWJI6omzW4cRsyIpY2AjRfbsoO/ZbhKmRA8nhkg=;
-        b=svizZKdkVKBEbZHaMYA1/8e1nyY3S6x0Y3xrpCLOAY+e3jsR1wJWlvWYf9wBBsFRkh
-         uDZPZBKFjjpYkldAfANuWwUso2aoscjVYyhiS34chskEdO2z5MOSuYmy1ONXqGNk351b
-         krfVpM83Oa3DpvQ8YHVYFyjBq7pAYYfXWOCUfmCWHPNyewf7HYaF7R+PFyKJI5lEBBVU
-         66Ha37VS1qrAPDC8RiIW3tFFkRS+Wx4WAw29kc6qgKN4Zt/nlmCqCjeWLIl2GzecJJtq
-         gKZVSi/tP3ch77P7Tfndr0UNbgx/eyJ6wOrebocdw/BLHMZlBrRG21u8yEQl7ooIl9H5
-         LidQ==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="o6fToW6v"
+Received: by mail-pg1-f176.google.com with SMTP id 41be03b00d2f7-c9cf07d2df6so373326a12.2
+        for <mfd@lists.linux.dev>; Thu, 20 Aug 2026 20:35:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787243008; x=1787847808; darn=lists.linux.dev;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=yKhR9WkhIUiBs/DXzAMG9ly3j13B+5WjNx96hhgAatQ=;
-        b=n5aUL5H3wNkR3xw0ImkkwoXH7dkTBY4aqsmtv4PBxeB8Gd6yLN6cGBJ4fd9Sgvb3I1
-         QRojbW87HJoDbERUAg/dwcejYVpqzbLq3aMXujZHoXd47QZfKQELk+nn1KxtfnoLw0fx
-         9p8caAZgeN692Q9MuoapQZ62oD0BolQiI/pqKz140+t9AvKUvHLI17tvtXQN5PXl3Wu6
-         Fh+X6oQOWfW/+INh+D0pVScDiZJk1H/2kFTrI8PVUMSAu76XD8x2TeEvM78YeBPya9pc
-         ioOP9PwcUO/rBRfRTpfhk077caOyuGje/w6SaGu/LblPpDGm2y2r4xs+4aykwDsDBYY5
-         hcmQ==
+        d=gmail.com; s=20251104; t=1787283327; x=1787888127; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=OlQ97Apv2CPkVoHg6S8Gou0Qv9jKg/Qt6XZBOTaFmHE=;
+        b=o6fToW6vyDYmzYzzwUmWeksBOppHRwW8bVw9kA3rOU8DNiATipkpmGjybPFv+L5Ge8
+         fkjOhYo1qH4TBmzddQ4T+ewUbCffS23C5KjArLxeNsvy1gFJfh5QT2FmdBIAxEPVBaOf
+         oHNlJEV29QTgHgXIjFbhQB6k4gCC4p96Zzh0Aow7vZO9Iplgfd9jCx6Q/Fp1JQ3Z9k4w
+         Cmuaaz4AzHUV9Jhor0lS2kZDXGtlk7Z/AGvM9jSxvDzljNOVeeEMfZe5jYgtVe0Q5zK+
+         e11ZsRDanPHIA4mFegOU7J+IDPl4x2PILLkY25xpJIk6JWoH+BjbqCrfKV7MrjfbunG7
+         oMNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787243008; x=1787847808;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=yKhR9WkhIUiBs/DXzAMG9ly3j13B+5WjNx96hhgAatQ=;
-        b=fXKXC+Qe9p83h4FMrPl8Rhae/bkuhLG4rWC/+S59yspjeXV/YY1eASG/LOmcMQZogY
-         usk2WnMR4whUjUZnDYpc4N8mTcf6Tw5R11hZUZVrFybUrGJ0pyBxMi+10Hg1GLS/rPYl
-         Rn0WqLqqpAoDOVPZ6AdVdgGUGAiQWL1MOH/nH6dkMW+VautQ0rsqFm7THe8J3QMfwi24
-         J5YbjCK5TYHR5Of6xjycaK9vVkdO7jOJHSh7PczF1FpA5UJyOqpIsDoKx/6OhIzlQhi+
-         oHrn3D0/ADUIrddPpnD+1kTNjZi4rH1kftrRDCQeXmzuwGbLSnk/mBoUF8YjpVKGUKvI
-         nwGg==
-X-Forwarded-Encrypted: i=1; AHgh+RpG9iAhZYCl1yTCv50gDm0f5RtJx6hnGA98PKO9MmZoVogW3/m1K0X9PYxSFqJXTNdMz9A=@lists.linux.dev
-X-Gm-Message-State: AOJu0Yzi6skqL94ktiS4WYFE3234pkRcRQNv4pqEoHxRdT60nOrsg3dk
-	k/C1OGQ9ExmwEcvH1caI9q6dUJ3pNSFJsYsakj3Cy9Sfk2wgY5xcrNDI+RvBirp3qtrWvsXqTPC
-	BE7PfamG5Vx4S6qn2zGM32gZHWVfc81k=
-X-Gm-Gg: AR+sD11ISa3XLi7cMEaV0yCBT0tJV/hDKQkBTRdM4nt7vSzK5384PVxaobEXV/egk/w
-	ipVgw4SfZtfZYYsaEaUlAyMJDPLAmwrqqbqMeb0+9i7viuHn7mE2X/1WSbTiSacli1pZGNNJ8Ni
-	bVRxWJqxX25ohxlk+12gdTV17piG/uMS/BtB89FPvMyNkqzO5nIUEvdRzQm8WPYmuojed7WbtNR
-	Ty5zZUzJ3km+9hBkV556Kcl4/cGw5Pyw8pmc+fhDLZ5rOPfXvDqWLvJyaZJcxJy3JNL4zI4lOwb
-	tYoTbDyeQ2aLxVq0XgNkd3ub+hnSQ+lApeoVr4ciJgU=
-X-Received: by 2002:a17:907:a647:b0:c12:9b93:61fd with SMTP id
- a640c23a62f3a-c23e86dd23fmr1141726266b.6.1787243007488; Thu, 20 Aug 2026
- 09:23:27 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1787283327; x=1787888127;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=OlQ97Apv2CPkVoHg6S8Gou0Qv9jKg/Qt6XZBOTaFmHE=;
+        b=jD/XxfDscBjzjnA7U9R/djPS/RnCx0wBHYG5k329rWUfvQfktlVwrIL4X4iD5qhRNq
+         GEO+HSJwrdYSeRZYVOcfZA4Ied3+qx3+RLl9oONbWcsnYE+CzCwsb86AYsHoz05tWfix
+         XIHGhuOQM7kvdVKgbQtPLQKf11exGfvaGQTaeHhUEK0JA9zxIcc7347ZfzqVvZrTTzOO
+         KHouU6eGgVMrK8YCwhuGagqka8fZhweFAhju1fH/Zq0AsCUCNQOyCttH7a/OIqVUlWSk
+         00/5c+emnamVmgMJM8cfiJ/6c+4uyweax+wtsvtAbKCdUEVisLTs7sL3qZmn7/wQSeC6
+         xcgw==
+X-Forwarded-Encrypted: i=1; AHgh+RpbB/CaHE+S/g/r/VBzZNP8NgOtuh3iGQgFVrnePjp61gI8+psHCzYsuzs2pejERooWF2A=@lists.linux.dev
+X-Gm-Message-State: AOJu0YwG+tuNpWoSUINa93NfQYKWWSWNVwsDyqjh/vraPY5RXbgsACYt
+	kjI1LTNeGANbCB5q21yLl37Q+wWZ7xKE6PT+evobyLnG3NhoSr0P0czJ
+X-Gm-Gg: AR+sD12j0Pcwdo4uxL+ze0S3DlgutPLwgkQqWzuJ05/MnEcKzbh41hQbgQrf6E9lENN
+	iPHJJn3FJCPv0EPDvd4jVppEeUuNnenw5z0ffMiRbND9v5+wSmBzgRxc2HDkryaYIVnOZ+pl24X
+	UdDMPhE7ApljPCS5MEb4jkccKgfUxGvbx3HZNtUWLWXHFAImOlth6H5hJ4ZgtBjO3F/05XTABQt
+	F+YUsXdoWAplCWkxtd9cozY8iuF0GAvNoOJEeOmAE0nwYhfha330sIPolWmmbBGzIDwcwVb6Guy
+	bqxpcNHRZ0IvI31sMKoV4mMX0NYKVEbFF/Xn6KHSMUzGPd5Y7sIo5n+uOQSG/AWmCzX3O1lpPLX
+	4JnxRUXZDefg0Omb5kBhZ67JB9FNbJ6hdRsx0rnbrCBHQ9jGcbrocpFtnjxEH4YoH6M2ZaOJlu+
+	j7IcYbesSum3ht16EhTfXzZcloWgj+3S/BIuVjkHURbO1wP/QdIjEOyR8S/WWFNh/Xi322MN2QD
+	78Hy1pfz1VtiVjcqy0ERK+w3r5kSDicm4ZuJw3Thg==
+X-Received: by 2002:a05:6a21:3a46:b0:3bf:63af:855 with SMTP id adf61e73a8af0-3cd2fddf03emr6085839637.1.1787283327385;
+        Thu, 20 Aug 2026 20:35:27 -0700 (PDT)
+Received: from hcdev-d520mt2.. (60-250-196-139.hinet-ip.hinet.net. [60.250.196.139])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cc15891a04csm2204271a12.15.2026.08.20.20.35.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 20 Aug 2026 20:35:27 -0700 (PDT)
+From: a0282524688@gmail.com
+To: lee@kernel.org,
+	Ming Yu <tmyu0@nuvoton.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Andi Shyti <andi.shyti@kernel.org>,
+	Marc Kleine-Budde <mkl@pengutronix.de>,
+	Vincent Mailhol <mailhol@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Wim Van Sebroeck <wim@linux-watchdog.org>
+Cc: linux-kernel@vger.kernel.org,
+	Ming Yu <a0282524688@gmail.com>,
+	linux-gpio@vger.kernel.org,
+	linux-hwmon@vger.kernel.org,
+	linux-i2c@vger.kernel.org,
+	linux-can@vger.kernel.org,
+	linux-rtc@vger.kernel.org,
+	linux-watchdog@vger.kernel.org,
+	mfd@lists.linux.dev
+Subject: [PATCH v7 01/10] mfd: nct6694: Move module type macros to shared header
+Date: Fri, 21 Aug 2026 11:34:56 +0800
+Message-Id: <20260821033505.4017901-2-a0282524688@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260821033505.4017901-1-a0282524688@gmail.com>
+References: <20260821033505.4017901-1-a0282524688@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260820122242.120039-1-l.scorcia@gmail.com> <20260820122242.120039-2-l.scorcia@gmail.com>
-In-Reply-To: <20260820122242.120039-2-l.scorcia@gmail.com>
-From: Luca Leonardo Scorcia <l.scorcia@gmail.com>
-Date: Thu, 20 Aug 2026 18:23:16 +0200
-X-Gm-Features: AcwNN1WN15gIPFE-wS5GMikP40k9b6tUzSd1TSg8R6uNQUbH06o6RfXy9sJzOY8
-Message-ID: <CAORyz2Lgo=teK89gxm6QBMfREY=_cAFN2TuLUFvwGcYpozkWww@mail.gmail.com>
-Subject: Re: [PATCH v9 1/9] dt-bindings: mfd: mt6397: Add MT6392 PMIC
-To: linux-mediatek@lists.infradead.org
-Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Sen Chu <sen.chu@mediatek.com>, 
-	Sean Wang <sean.wang@mediatek.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
-	Lee Jones <lee@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Linus Walleij <linusw@kernel.org>, Val Packett <val@packett.cool>, 
-	Julien Massot <julien.massot@collabora.com>, Fabien Parent <parent.f@gmail.com>, 
-	Akari Tsuyukusa <akkun11.open@gmail.com>, Chen Zhong <chen.zhong@mediatek.com>, 
-	linux-input@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, mfd@lists.linux.dev, 
-	linux-arm-kernel@lists.infradead.org, linux-gpio@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-> --- a/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml
-> +++ b/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml
-> @@ -40,6 +40,10 @@ properties:
->            - mediatek,mt6397
-> +      - items:
-> +          - enum:
-> +              - mediatek,mt6392
-> +          - const: mediatek,mt6323
->        - items:
+From: Ming Yu <a0282524688@gmail.com>
 
-Please disregard this patch/series. Sashiko correctly pointed out that
-it's not necessary and actually wrong to provide a fallback on
-"mediatek,mt6323", which was needed on a previous iteration of the
-series but not in the current one.
-I will mark the series as archived on patchwork and provide a revised
-v10 once completed testing on devices.
+Move NCT6694_XXX_MOD macro definitions from individual sub-device
+drivers into the shared header include/linux/mfd/nct6694.h.
+
+This is a prerequisite for supporting multiple transport interfaces
+(USB, HIF) without duplicating these definitions.
+
+No functional change.
+
+Signed-off-by: Ming Yu <a0282524688@gmail.com>
+---
+Changes in v7:
+
+Changes in v6:
+
+Changes in v5:
+- Split from the monolithic v4 patch to follow the single logical change
+  principle.
+
+ drivers/gpio/gpio-nct6694.c         |  7 -------
+ drivers/hwmon/nct6694-hwmon.c       | 21 ---------------------
+ drivers/i2c/busses/i2c-nct6694.c    |  7 -------
+ drivers/net/can/usb/nct6694_canfd.c |  6 ------
+ drivers/rtc/rtc-nct6694.c           |  7 -------
+ drivers/watchdog/nct6694_wdt.c      |  7 -------
+ include/linux/mfd/nct6694.h         |  9 +++++++++
+ 7 files changed, 9 insertions(+), 55 deletions(-)
+
+diff --git a/drivers/gpio/gpio-nct6694.c b/drivers/gpio/gpio-nct6694.c
+index a8607f0d9915..53bfc5983648 100644
+--- a/drivers/gpio/gpio-nct6694.c
++++ b/drivers/gpio/gpio-nct6694.c
+@@ -13,13 +13,6 @@
+ #include <linux/module.h>
+ #include <linux/platform_device.h>
+ 
+-/*
+- * USB command module type for NCT6694 GPIO controller.
+- * This defines the module type used for communication with the NCT6694
+- * GPIO controller over the USB interface.
+- */
+-#define NCT6694_GPIO_MOD	0xFF
+-
+ #define NCT6694_GPIO_VER	0x90
+ #define NCT6694_GPIO_VALID	0x110
+ #define NCT6694_GPI_DATA	0x120
+diff --git a/drivers/hwmon/nct6694-hwmon.c b/drivers/hwmon/nct6694-hwmon.c
+index 6dcf22ca5018..581451875f2c 100644
+--- a/drivers/hwmon/nct6694-hwmon.c
++++ b/drivers/hwmon/nct6694-hwmon.c
+@@ -15,13 +15,6 @@
+ #include <linux/platform_device.h>
+ #include <linux/slab.h>
+ 
+-/*
+- * USB command module type for NCT6694 report channel
+- * This defines the module type used for communication with the NCT6694
+- * report channel over the USB interface.
+- */
+-#define NCT6694_RPT_MOD			0xFF
+-
+ /* Report channel */
+ /*
+  * The report channel is used to report the status of the hardware monitor
+@@ -38,13 +31,6 @@
+ #define NCT6694_TIN_STS(x)		(0x6A + (x))
+ #define NCT6694_FIN_STS(x)		(0x6E + (x))
+ 
+-/*
+- * USB command module type for NCT6694 HWMON controller.
+- * This defines the module type used for communication with the NCT6694
+- * HWMON controller over the USB interface.
+- */
+-#define NCT6694_HWMON_MOD		0x00
+-
+ /* Command 00h - Hardware Monitor Control */
+ #define NCT6694_HWMON_CONTROL		0x00
+ #define NCT6694_HWMON_CONTROL_SEL	0x00
+@@ -53,13 +39,6 @@
+ #define NCT6694_HWMON_ALARM		0x02
+ #define NCT6694_HWMON_ALARM_SEL		0x00
+ 
+-/*
+- * USB command module type for NCT6694 PWM controller.
+- * This defines the module type used for communication with the NCT6694
+- * PWM controller over the USB interface.
+- */
+-#define NCT6694_PWM_MOD			0x01
+-
+ /* PWM Command - Manual Control */
+ #define NCT6694_PWM_CONTROL		0x01
+ #define NCT6694_PWM_CONTROL_SEL		0x00
+diff --git a/drivers/i2c/busses/i2c-nct6694.c b/drivers/i2c/busses/i2c-nct6694.c
+index 1413ab6f9462..ef3329f34246 100644
+--- a/drivers/i2c/busses/i2c-nct6694.c
++++ b/drivers/i2c/busses/i2c-nct6694.c
+@@ -12,13 +12,6 @@
+ #include <linux/module.h>
+ #include <linux/platform_device.h>
+ 
+-/*
+- * USB command module type for NCT6694 I2C controller.
+- * This defines the module type used for communication with the NCT6694
+- * I2C controller over the USB interface.
+- */
+-#define NCT6694_I2C_MOD			0x03
+-
+ /* Command 00h - I2C Deliver */
+ #define NCT6694_I2C_DELIVER		0x00
+ #define NCT6694_I2C_DELIVER_SEL		0x00
+diff --git a/drivers/net/can/usb/nct6694_canfd.c b/drivers/net/can/usb/nct6694_canfd.c
+index e5f7f8849a73..262b4c26c9d4 100644
+--- a/drivers/net/can/usb/nct6694_canfd.c
++++ b/drivers/net/can/usb/nct6694_canfd.c
+@@ -18,12 +18,6 @@
+ 
+ #define DEVICE_NAME "nct6694-canfd"
+ 
+-/* USB command module type for NCT6694 CANfd controller.
+- * This defines the module type used for communication with the NCT6694
+- * CANfd controller over the USB interface.
+- */
+-#define NCT6694_CANFD_MOD			0x05
+-
+ /* Command 00h - CAN Setting and Initialization */
+ #define NCT6694_CANFD_SETTING			0x00
+ #define NCT6694_CANFD_SETTING_ACTIVE_CTRL1	BIT(0)
+diff --git a/drivers/rtc/rtc-nct6694.c b/drivers/rtc/rtc-nct6694.c
+index 35401a0d9cf5..c06902f150c9 100644
+--- a/drivers/rtc/rtc-nct6694.c
++++ b/drivers/rtc/rtc-nct6694.c
+@@ -14,13 +14,6 @@
+ #include <linux/rtc.h>
+ #include <linux/slab.h>
+ 
+-/*
+- * USB command module type for NCT6694 RTC controller.
+- * This defines the module type used for communication with the NCT6694
+- * RTC controller over the USB interface.
+- */
+-#define NCT6694_RTC_MOD		0x08
+-
+ /* Command 00h - RTC Time */
+ #define NCT6694_RTC_TIME	0x0000
+ #define NCT6694_RTC_TIME_SEL	0x00
+diff --git a/drivers/watchdog/nct6694_wdt.c b/drivers/watchdog/nct6694_wdt.c
+index bc3689bd4b6b..4c06ac105562 100644
+--- a/drivers/watchdog/nct6694_wdt.c
++++ b/drivers/watchdog/nct6694_wdt.c
+@@ -20,13 +20,6 @@
+ 
+ #define NCT6694_WDT_MAX_DEVS		2
+ 
+-/*
+- * USB command module type for NCT6694 WDT controller.
+- * This defines the module type used for communication with the NCT6694
+- * WDT controller over the USB interface.
+- */
+-#define NCT6694_WDT_MOD			0x07
+-
+ /* Command 00h - WDT Setup */
+ #define NCT6694_WDT_SETUP		0x00
+ #define NCT6694_WDT_SETUP_SEL(idx)	(idx ? 0x01 : 0x00)
+diff --git a/include/linux/mfd/nct6694.h b/include/linux/mfd/nct6694.h
+index 6eb9be2cd4a0..3c683e317aa3 100644
+--- a/include/linux/mfd/nct6694.h
++++ b/include/linux/mfd/nct6694.h
+@@ -8,6 +8,15 @@
+ #ifndef __MFD_NCT6694_H
+ #define __MFD_NCT6694_H
+ 
++#define NCT6694_HWMON_MOD	0x00
++#define NCT6694_PWM_MOD		0x01
++#define NCT6694_I2C_MOD		0x03
++#define NCT6694_CANFD_MOD	0x05
++#define NCT6694_WDT_MOD		0x07
++#define NCT6694_RTC_MOD		0x08
++#define NCT6694_RPT_MOD		0xFF
++#define NCT6694_GPIO_MOD	NCT6694_RPT_MOD
++
+ #define NCT6694_VENDOR_ID	0x0416
+ #define NCT6694_PRODUCT_ID	0x200B
+ #define NCT6694_INT_IN_EP	0x81
 -- 
-Luca Leonardo Scorcia
-l.scorcia@gmail.com
+2.34.1
+
