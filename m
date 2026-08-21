@@ -1,71 +1,113 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF778175A9C
-	for <mfd@lists.linux.dev>; Fri, 21 Aug 2026 03:45:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D56F13612ED;
+	Fri, 21 Aug 2026 03:45:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787283951; cv=none; b=XP010SQEtEkn4LZqYCFev0mwnlEzxJog4DIzx3VQCgYNyn5v6P0nomyxEcyvqeQqUrq1dltDfT+Qupc8CJvBRvjbfJXRVSRhyIpqtFtvajIkvJPJcaVzyadmh1m8XXOoxu4MJkKciLdzKrvKIlumDkmrSVeHANClV2kOfWBj/6A=
+	t=1787283952; cv=none; b=m8rqfh0OmAvmoD+1wEvZ2w5f8hF02E7XLEy22Oiy/jeKee88m/XcOuikswh6qeG6Y9yL/tm7C+rLxgF/F+FmL7QNlUxBqnaF9GEbCuxkSudCtmC22+KYdxRpZNfLKZl6qkNdHXxbIyqiaYUqnHKmPVVjzMXhlWCPcMJdqhNxANM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787283951; c=relaxed/simple;
-	bh=vWIqTcItXBL4FtiCGrq+WpRVj0Jgm+yEzBHxzWJBGjE=;
+	s=arc-20240116; t=1787283952; c=relaxed/simple;
+	bh=0Vydrt3ssMF7WVBka/76aNk8/QWPspNQVrPsn9wKnUA=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=H++qTeyy7O0EQXrRA7f4jeMAoOqTnhJJd+sGtzBcu2sJBSV7MqqV1ZFrKOGyexXbs62Oy1h7eJvWGahyERKIELVDcDf13O7mqr7AqrmxbdBII3g5E9wVL93yWcWWMqYvBxrnEqDVOtz8eXP7FQNrf9bwJE5oybrpXJJcRHTMBms=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=a7sq6VqA; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=HmaOvGWgxs+LizGo/NZyyZO/74BMnCsOjCOzrfm5hELn7H8YGYVDZQb6ZfKVazzIZYmTTATLnlDJLKbrcykPjaetvtPC6PwWniiet3seFUzieGBMNd7niEEh+lopBZ5lhVzWMVdGVd1I+8T421KmvJXfZKeYhfx70qpOs2ktAWY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=P+ektRG3; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="a7sq6VqA"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1BAD01F000E9;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="P+ektRG3"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D9FDD1F00A3A;
 	Fri, 21 Aug 2026 03:45:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787283950;
-	bh=vWIqTcItXBL4FtiCGrq+WpRVj0Jgm+yEzBHxzWJBGjE=;
+	s=k20260515; t=1787283951;
+	bh=pnHNL/K5OV3I+LBVvnHcJhb+X7M7xDnIDuy7LRzAooQ=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=a7sq6VqAxxpO6AAULrlDoacdazyDp1DzuG8xplhmnq5TEOZezqIDipPSYVYWq9CsQ
-	 T4D7au32I+groQy4ZO1623IEMMra4hHm6E9tVl5zBH6rtYtoaMIPwSBYEvohpllqnE
-	 XnxvWCMtsIiSbA20OcndIRUMcSdzHj2cNYs9Ygwk0cO9hEINuUyIeQNfyLqZrZVKGX
-	 G45Ckd9g6p88+Bq67wlHe3ulT4DVQS8PmFYwmkjbH8PAZq6/FO4TQYnQGU7AuT3Kpr
-	 BgbAguR6Mmt9Qgwx/BBCYqZ25Qzqba+sPScqJNk4PnRnVUELEr8CjWTjwbdiEEGAzt
-	 5sEbAaLLyLDQg==
+	b=P+ektRG3HRUo/AtCh5nFdXi9yhlhJzqOHapzTPIb7UZ0KNDtmeZ2XznSS1YLV0UQI
+	 jvEAuu93yP3hwxvPGDSnRp+lMBpfP54VHhdouNSYkDREh05sKW/Po1A23AlsIC+FBj
+	 FhEk0gRNonRd9V61YXUMaX4nY0sbND9xe00A6luxDageDmoxGsl5iJH/nQBYAIaAqg
+	 l3NTSZhVrPBFHi5tchJ+BPqL5H4ao9cfDjU0ezSYAJIPgE5nPwv3+CZknbT1G8qNQ3
+	 RCWNDTgMHEQLBKtSVbICk4Q5U8Pt6crXdXMjOQekJN5UGqUGxD6R8ytf4oqixBzlaB
+	 IQU7anY6cFhUw==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v7 05/10] mfd: nct6694: Extract core device management
- into a separate module
+Subject: Re: [PATCH v7 01/10] mfd: nct6694: Move module type macros to
+ shared header
 Reply-To: sashiko-reviews@lists.linux.dev
 To: a0282524688@gmail.com
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260821033505.4017901-6-a0282524688@gmail.com>
+Cc: linux-watchdog@vger.kernel.org, lee@kernel.org, linux-hwmon@vger.kernel.org, linux-can@vger.kernel.org, linux-rtc@vger.kernel.org, "Vincent
+ Mailhol" <mailhol@kernel.org>, "Marc Kleine-Budde" <mkl@pengutronix.de>, mfd@lists.linux.dev, "Oleksij
+ Rempel" <o.rempel@pengutronix.de>, "Alexandre Belloni" <alexandre.belloni@bootlin.com>, "Oliver
+ Hartkopp" <socketcan@hartkopp.net>
+In-Reply-To: <20260821033505.4017901-2-a0282524688@gmail.com>
 References: <20260821033505.4017901-1-a0282524688@gmail.com>
- <20260821033505.4017901-6-a0282524688@gmail.com>
+ <20260821033505.4017901-2-a0282524688@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Fri, 21 Aug 2026 03:45:49 +0000
-Message-Id: <20260821034550.1BAD01F000E9@smtp.kernel.org>
+Date: Fri, 21 Aug 2026 03:45:50 +0000
+Message-Id: <20260821034550.D9FDD1F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-> From: Ming Yu <a0282524688@gmail.com>
->=20
-> Extract the transport-agnostic core logic, including IRQ domain setup,
-> IDA initialization, and MFD sub-device registration, from the USB driver
-> into a new nct6694-core.c module.
->=20
-> The core routines are exported as nct6694_core_probe() and
-> nct6694_core_remove() to be consumed by the transport drivers. The USB
-> driver is updated to pass its specific MFD cells to the core probe
-> routine.
->=20
-> This completes the transport abstraction, ensuring that the shared
-> device management logic is cleanly separated from the underlying I/O
-> implementation, and is fully ready for new transport backends
-> (e.g., HIF).
->=20
-> Signed-off-by: Ming Yu <a0282524688@gmail.com>
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
+s) to consider:
+- [Medium] Moving driver-specific macros into a global header that facilita=
+tes bespoke parent-child accessors.
+--
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+--- Patch [1]: [PATCH v7 01/10] mfd: nct6694: Move module type macros to sh=
+ared header ---
+commit ddd165427cd793b4dafe2d040a37ea0bf7d0d5fc
+Author: Ming Yu <a0282524688@gmail.com>
+
+mfd: nct6694: Move module type macros to shared header
+
+This commit moves module type macros from individual sub-device drivers int=
+o the
+global MFD header include/linux/mfd/nct6694.h. The commit message states th=
+is
+is a prerequisite for supporting multiple transport interfaces without
+duplicating these definitions.
+
+> This is a prerequisite for supporting multiple transport interfaces
+> (USB, HIF) without duplicating these definitions.
+
+[Severity: Medium]
+Is it accurate that multiple transport interfaces use these definitions?
+
+Since these module ID macros appear to be used exclusively by their respect=
+ive
+child drivers, shouldn't they remain local to those drivers rather than bei=
+ng
+centralized to prevent duplicated definitions?
+
+[ ... ]
+
+> diff --git a/include/linux/mfd/nct6694.h b/include/linux/mfd/nct6694.h
+> index 6eb9be2cd4a01..3c683e317aa32 100644
+> --- a/include/linux/mfd/nct6694.h
+> +++ b/include/linux/mfd/nct6694.h
+> @@ -8,6 +8,15 @@
+>  #ifndef __MFD_NCT6694_H
+>  #define __MFD_NCT6694_H
+> =20
+> +#define NCT6694_HWMON_MOD	0x00
+> +#define NCT6694_PWM_MOD		0x01
+> +#define NCT6694_I2C_MOD		0x03
+> +#define NCT6694_CANFD_MOD	0x05
+> +#define NCT6694_WDT_MOD		0x07
+> +#define NCT6694_RTC_MOD		0x08
+> +#define NCT6694_RPT_MOD		0xFF
+> +#define NCT6694_GPIO_MOD	NCT6694_RPT_MOD
+
+[Severity: Medium]
+Does centralizing these macros here violate the MFD subsystem guidelines?
+
+The guidelines state that driver-specific definitions should not be placed =
+in
+the global include/linux/mfd/ directory if they are only used by the parent
+and its immediate children. Keeping them local to drivers/mfd/ or the
+individual sub-devices is preferred.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260821033505.4017=
-901-1-a0282524688@gmail.com?part=3D5
-
+901-1-a0282524688@gmail.com?part=3D1
