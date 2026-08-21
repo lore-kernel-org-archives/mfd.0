@@ -1,116 +1,104 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail2.andi.de1.cc (vmd64148.contaboserver.net [161.97.139.27])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82BD33D6CD7
-	for <mfd@lists.linux.dev>; Fri, 21 Aug 2026 09:35:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A704F3AC0C2
+	for <mfd@lists.linux.dev>; Fri, 21 Aug 2026 10:15:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=161.97.139.27
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787304924; cv=none; b=Sy517wjNLRc+84OjqTOTCNA5CJrB1ORhp/k7aQMbIcddcyj265od66fDzjxgH/Rp1RrYqemqBjopbqiWozln77NTNyWB4KUdNnVWW6kpw8vK9UOsjZwrRCndrnhdGzRU6wQ4FiBrB7Z5wDIzJjgoMIkiVwVnM/ZU/BDOiwD3BxQ=
+	t=1787307356; cv=none; b=Jpn31dWzGXdN3yjQpXXkc2b0Al9Okemw/KA8CFkGjPvJg5d5DWW2RSojVgnbBRHK4rEA1JsxVXJYltF3wnmDi1aBMxOV8kWfGH01Ugk/LgYItQ6cUUcUbnDBFCmCZ1Uhgkzbw7T/GcKhhUQllfKbnSvkDfoe/VgwZrGh9mhaQLA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787304924; c=relaxed/simple;
-	bh=vIR4ZJuDGBXabUFjAsVY7jmb3n2GHjNff9Fki/G4M2o=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=e4Uyjz8jfq63a4mAkW8vmujRxiOtqwO1qn5tkyhK7vq68tZCtLlDhHUQI1CqVGE5xsYD+9mkJOohKpomwDW4ZJgoAh0xK8YQ/BwRNdEbmc//SBes2Xs0ELvkYRHF0gX7R1IMuoMpRHx12ehPuoeFfmIsDV/B0ZJFsw3/lmk9uqo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GRQmPZeA; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1787307356; c=relaxed/simple;
+	bh=24ElsADEh06edAjikGY7oCnUpIBZeIN0N6fSfPxfVsM=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=I/t21kdzX28LgcFEwlgM6cnUI1a2brnPsP+g9r/SyZE/fz6bc9+gHAihD1FsGkF6ut2oiKdnPd24eikBTfQC+z1XY6HiWFNgWaYN6uazUSPBwsnwMPvi1/BGAJU4xLGv3PTjirLv86kWwQl+68Gx3mB4G5SeOl+3WKm7oPWNkZk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info; spf=pass smtp.mailfrom=kemnade.info; dkim=pass (2048-bit key) header.d=kemnade.info header.i=@kemnade.info header.b=6JkL7gQm; arc=none smtp.client-ip=161.97.139.27
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kemnade.info
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GRQmPZeA"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2248C1F00A3A;
-	Fri, 21 Aug 2026 09:35:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787304916;
-	bh=gNRyzFzNanJM6QoENKJwx2v9z2O3nlBY1KtOG/9Txl4=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=GRQmPZeAjOEbKo2RNVwkG0xVShhj4DwRvfpEkTTN4G85d416EigdWAv8RZJ74va9g
-	 VNfFXJfnf5z/zufDolMkXiGfsSbG2QGSfWavp3Dip68/3Yed0ClvZ3IG/JJIZ5uL6F
-	 etNjWltcZwmJc3Ui7rHK+0yYDWiVMqk4mz34tCxW/HdTCX2n8kxmXUaClbl/M09LoF
-	 3EM9draGO3RCOWstTS3zDxD9XVDTw9EvyrgZJuEX6T/sk8HTYR//iwxocUmb2viQhr
-	 TahNBAvfsjaWL/N5Nisn0IPWQBDN5W+FmtA0oRsJbqsszddJ5AH38vU7puw3IEz6Pq
-	 llL8IAelEB45g==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH] drivers/mfd: Convert to DEFINE_SIMPLE_DEV_PM_OPS()
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Triet Hoang" <triet.hoang.dev@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260821092508.324787-1-triet.hoang.dev@gmail.com>
-References: <20260821092508.324787-1-triet.hoang.dev@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Fri, 21 Aug 2026 09:35:15 +0000
-Message-Id: <20260821093516.2248C1F00A3A@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=kemnade.info header.i=@kemnade.info header.b="6JkL7gQm"
+Received: from mail.andi.de1.cc ([2a02:c205:3004:2154::1])
+	by mail2.andi.de1.cc with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.98.2)
+	(envelope-from <andreas@kemnade.info>)
+	id 1wxLy6-00000003T0Q-0PnG;
+	Fri, 21 Aug 2026 11:55:22 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=kemnade.info; s=20220719; h=References:In-Reply-To:Subject:Cc:To:From:
+	Reply-To:Content-ID:Content-Description;
+	bh=fdbqfJ7QvYonUWlTYQvntCdh+ZP0kQrA2filCMbzWPo=; t=1787306122; x=1788515722; 
+	b=6JkL7gQm024u8eahVH27fm4tvVWzUVZ2XuM+tfzr0YJeUJ6B+PUNUKQjPQe4y2OH/Pmflok6OvA
+	yqIN7n7WiRr0OIF0Kc2svlzEUkOAGj0dUlB3LV4kwwK9+pLiphk+RztHLGfvaT1Z/QIAZgTWBFcgJ
+	xm4tDAgt2V/gkXHYAaPGF+gthPYrCb+3S5ZP2IDvhTpJcpwDo4unqUmT87braVhtT35iP9yPKZQHn
+	oF1Y5qMc19PVl7G1Lp616HE7yKUTnKDALe8ZGxmcc8IbquBef9cKr/NShMYiramYTbz9EHInSYFtJ
+	L+0pgEpPhUv/K1An1IrxRDsxVCMCiFdP60ow==;
+Date: Fri, 21 Aug 2026 11:55:05 +0200
+From: Andreas Kemnade <andreas@kemnade.info>
+To: =?UTF-8?B?0JbQsNC80LHQsNC60LjQtdCyINCg0LDQtNC40Lkg0KDQuNC60LDRgNC00Lg=?=
+ =?UTF-8?B?0L3QvtCy0LjRhw==?= <r.zhambakiev@prosoftsystems.ru>
+Cc: Aaro Koskinen <aaro.koskinen@iki.fi>, Kevin Hilman
+ <khilman@baylibre.com>, Roger Quadros <rogerq@kernel.org>, "Tony Lindgren"
+ <tony@atomide.com>, Lee Jones <lee@kernel.org>, Grygorii Strashko
+ <grygorii.strashko@ti.com>, Marcin Niestroj <m.niestroj@grinn-global.com>,
+ "linux-omap@vger.kernel.org" <linux-omap@vger.kernel.org>,
+ "mfd@lists.linux.dev" <mfd@lists.linux.dev>, "linux-kernel@vger.kernel.org"
+ <linux-kernel@vger.kernel.org>, "lvc-project@linuxtesting.org"
+ <lvc-project@linuxtesting.org>, "stable@vger.kernel.org"
+ <stable@vger.kernel.org>
+Subject: Re: [PATCH 1/2] mfd: tps65217: Fix NULL pointer dereference on IRQ
+ init failure
+Message-ID: <20260821115505.6942aeae@kemnade.info>
+In-Reply-To: <20260821075331.131315-2-r.zhambakiev@prosoftsystems.ru>
+References: <20260821075331.131315-1-r.zhambakiev@prosoftsystems.ru>
+	<20260821075331.131315-2-r.zhambakiev@prosoftsystems.ru>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; aarch64-unknown-linux-gnu)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
-s) to consider:
+On Fri, 21 Aug 2026 07:53:58 +0000
+=D0=96=D0=B0=D0=BC=D0=B1=D0=B0=D0=BA=D0=B8=D0=B5=D0=B2 =D0=A0=D0=B0=D0=B4=
+=D0=B8=D0=B9 =D0=A0=D0=B8=D0=BA=D0=B0=D1=80=D0=B4=D0=B8=D0=BD=D0=BE=D0=B2=
+=D0=B8=D1=87 <r.zhambakiev@prosoftsystems.ru> wrote:
 
-New issues:
-- [Low] The commit message prefix uses 'drivers/mfd:' instead of the requir=
-ed 'mfd: ' format.
+> tps65217_probe() ignores the return value of tps65217_irq_init(), so
+> when the irq domain creation fails the probe still completes and the
+> driver ends up bound with a NULL tps->irq_domain. Unloading the
+> module then makes tps65217_remove() call irq_domain_remove() on the
+> NULL pointer and oops the kernel. On top of that, irq_find_mapping()
+> may fall back to the default irq domain and dispose of mappings that
+> belong to other interrupt controllers.
+>=20
+> Check the return value and abort the probe on failure so the error
+> is reported and no inconsistent state is left for removal.
+>=20
+> Fixes: 6556bdacf646fcaa ("mfd: tps65217: Add support for IRQs")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Radiy Zhambakiev <r.zhambakiev@prosoftsystems.ru>
 
-Pre-existing issues:
-- [High] Device teardown sequence disables PM runtime and clocks before unr=
-egistering MFD child devices, leading to an external abort kernel panic.
---
+Reviewed-by: Andreas Kemnade <andreas@kemnade.info>
 
---- Patch [1]: [PATCH] drivers/mfd: Convert to DEFINE_SIMPLE_DEV_PM_OPS() -=
---
-commit f2c525c2ee807012f8f33d16a4bcbea747e75dcf
-Author: Triet Hoang <triet.hoang.dev@gmail.com>
+> ---
+>  drivers/mfd/tps65217.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/mfd/tps65217.c b/drivers/mfd/tps65217.c
+> index c240fac0ede7..2d04d9e0ae29 100644
+> --- a/drivers/mfd/tps65217.c
+> +++ b/drivers/mfd/tps65217.c
+> @@ -333,7 +333,9 @@ static int tps65217_probe(struct i2c_client *client)
+>  	}
+> =20
+>  	if (client->irq) {
+> -		tps65217_irq_init(tps, client->irq);
+> +		ret =3D tps65217_irq_init(tps, client->irq);
+> +		if (ret)
+> +			return ret;
+>  	} else {
+>  		int i;
+> =20
 
-    drivers/mfd: Convert to DEFINE_SIMPLE_DEV_PM_OPS()
-   =20
-    Convert the deprecated SIMPLE_DEV_PM_OPS
-    to DEFINE_SIMPLE_DEV_PM_OPS
-    and pm_sleep_ptr().
-
->     drivers/mfd: Convert to DEFINE_SIMPLE_DEV_PM_OPS()
-
-[Severity: Low]
-This isn't a bug, but does this commit title violate the MFD subsystem nami=
-ng
-conventions? The standard format requires using mfd: <Driver>: for the
-commit message prefix instead of drivers/mfd:.
-
-> diff --git a/drivers/mfd/ti_am335x_tscadc.c b/drivers/mfd/ti_am335x_tscad=
-c.c
-> index 068c25401c6cd..81f07a1d780c5 100644
-> --- a/drivers/mfd/ti_am335x_tscadc.c
-> +++ b/drivers/mfd/ti_am335x_tscadc.c
-[ ... ]
-> @@ -373,7 +373,7 @@ MODULE_DEVICE_TABLE(of, ti_tscadc_dt_ids);
->  static struct platform_driver ti_tscadc_driver =3D {
->  	.driver =3D {
->  		.name   =3D "ti_am3359-tscadc",
-> -		.pm	=3D &tscadc_pm_ops,
-> +		.pm	=3D pm_sleep_ptr(&tscadc_pm_ops),
->  		.of_match_table =3D ti_tscadc_dt_ids,
->  	},
->  	.probe	=3D ti_tscadc_probe,
-
-[Severity: High]
-This is a pre-existing issue, but does ti_tscadc_remove() cause a kernel pa=
-nic
-by disabling PM runtime before unregistering child devices?
-
-When the module is unloaded, ti_tscadc_remove() drops the clock reference a=
-nd
-disables PM runtime:
-
-    pm_runtime_put_sync(&pdev->dev);
-    pm_runtime_disable(&pdev->dev);
-    mfd_remove_devices(tscadc->dev);
-
-When mfd_remove_devices() unbinds the ti_am335x_adc child driver, the child=
-'s
-tiadc_remove() calls am335x_tsc_se_clr(). This issues a regmap_write() to t=
-he
-REG_SE MMIO register while the parent device's clock is already powered dow=
-n,
-which triggers an L3 interconnect error and kernel panic.
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260821092508.3247=
-87-1-triet.hoang.dev@gmail.com?part=3D1
