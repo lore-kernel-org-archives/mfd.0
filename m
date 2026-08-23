@@ -1,174 +1,150 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D999D2F693B
-	for <mfd@lists.linux.dev>; Sun, 23 Aug 2026 15:04:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19FBE339372
+	for <mfd@lists.linux.dev>; Sun, 23 Aug 2026 17:42:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787497487; cv=none; b=oWmST/0GrFXTU0fhyVmrRSFwtBpzgL+IARJ0yk1LjJMvgyAiJIScgPgCsFu4FZh6k8uCkGPJTbQ8o//R0tEAoPvIr8hcCQWwqMCA1tjigNj33bcjZOjqtLLjEPNdn8QV8Cua6TbhpYfyinvgmWJ3mI1+WAkZ0hSvZoIbm85IuWw=
+	t=1787506976; cv=none; b=XDysJu2IrHm+Edjc2sfIENOs1bMTEmZbhEcb0FWydrQ4uWI/wAzj6F5pJ+x28KhUrYLGqANvNgx2aI012WiDR/jHxHErR+CxCng8rzoOn4I/M2FY0AmJOUotbPqP7EO6aaXyWYlDH/t2iOfuheLZ52zCbJQJLGA71phLoU/WqC8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787497487; c=relaxed/simple;
-	bh=wJK+IRMBLE0VnTn8bSkgSg1Z4ePe8NtBDxX5MSaJXlM=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=XmVLJon4f7x/nyomg2BglTuBPnWIFzaj1hTz6gUvtLK1L7/pilUvWFrUNUT2WxP5m/4Dct4dX/2VCLQTufvFf0jJtyTHmb6a6/IUnAZSEooYt7twGLPy+tHWxuy8WFtm82K3Ihv1muIUh+uSEcIlj7z0MfR1LgZzxHQU4VKIcuE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=a99xvnwq; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1787506976; c=relaxed/simple;
+	bh=2R80yGpb1ebUfjeon9HoBof1aH/VJHhf1Nee3wvgaIQ=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=bluhpweAq8nL6z1jT398Wk7G1La2F7oxyKBVCVHRJ5F+7S4QAJ8+bF9LwMCw6/n4ru7UHtMLQXTQSvK/AH1v9IYxZnoVhpMxgQLs8TWifeONGKlEsYFJfVdD5BiHxaS0kphqRHO+6XDSRq3dooLVpTrPvIMHiKwY/dPa74Vzl68=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=UWVYfMIV; arc=none smtp.client-ip=209.85.216.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="a99xvnwq"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B6D5C1F00A3D
-	for <mfd@lists.linux.dev>; Sun, 23 Aug 2026 15:04:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787497485;
-	bh=xsGgYkAkQbDGRSbjrvJuqtTe00nXz5WswQtw/Srcifs=;
-	h=References:In-Reply-To:Reply-To:From:Date:Subject:To:Cc;
-	b=a99xvnwq+UjFxWXZ32BNHv9W84m1gmsn2FUsYDLIIzkVNeIGjOFDzYd59m5c/gpD7
-	 LNsKUL87b0uNtvqwul5jgUWO+N0RcGSzlXlYzG3mCO02vlhyeHZBSedUHxThMu2v03
-	 VILIpzCX75hMNtkd53DlQnENzia7/CZ/fAH1DQk4uQBaPe03K+kTbHo/nSYv39n8Hr
-	 Za2CFFIlgLwjBZMjLb/XIF8CDDVOwEojYcYBCoo8/bVqLiz4cBd1ZYPyaYsrmCv/cw
-	 +P1tvvS56QUXERtCatenyaKSOSyZVxiHzOzKX37Opi1hz7XXyhuGhWcM0y1IE//XH4
-	 i/XVY56tnlFbA==
-Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-39c8dbf4f38so25138571fa.3
-        for <mfd@lists.linux.dev>; Sun, 23 Aug 2026 08:04:45 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RqVzO0McAiL2TDqJ/e1xsI3efTPfUFcatdtGmFP6FkdLWYeAbVt/ct2W6K+yni5AFuCpyM=@lists.linux.dev
-X-Gm-Message-State: AFuF++mAgRZs8IgQi3s6R/ZTHqOJtAW4co+fLvCCBqaHEKfzgC5FJAZQ
-	wrxFYc/ZdpmFuBTU4+JynLJz8/eIH50aNzLnUlU08wZZT/GO8f4krBt9WsEM/SgNtIIdaDgqfO7
-	vptf3Md5kdE9ra6lnilk9CGBPo/IgXts=
-X-Received: by 2002:a2e:bc28:0:b0:3a1:11d3:173e with SMTP id
- 38308e7fff4ca-3a1aee83d62mr48188841fa.14.1787497483973; Sun, 23 Aug 2026
- 08:04:43 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UWVYfMIV"
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-383cb94f742so2745953a91.3
+        for <mfd@lists.linux.dev>; Sun, 23 Aug 2026 10:42:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1787506974; x=1788111774; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=7Rd0cSgl5e9XipVz+olSR45npzJwFMz3Dnz36c8PwvI=;
+        b=UWVYfMIVJmGp/MP5ZJKrwRv3atnZ9ikpdpOIeVXVDDfwarIQUmwrVGb/tU7KNHi2Xz
+         Fk9NAy7KR2zr61md58SzofWmOEPFUy20LMyHrXhEVLPoSf05MEdh1eoU3j/CPclJTPQK
+         OcRqSgOxIzjg06nUWZQDZEFUWh9M5FPrYNUbjTn5dkOpIJjx3AdDwxUeWfh/vgoP+VDf
+         CBHhP2twDCt3tK8PKlC1Jes4IWAqR2Zzb1DaJXzWCVbGqTsQxrMtZdZPWfHpoNfEjuHB
+         ioEDq4+4n2P7+Ic9tWBpy1q/8pujdTG02w9XJ8i54AsrlVbgSgEPEx/As3FmNi50hwlO
+         ZM1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787506974; x=1788111774;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=7Rd0cSgl5e9XipVz+olSR45npzJwFMz3Dnz36c8PwvI=;
+        b=HQXi771sqEl+FfBXF1e18oWHXY4xlREqDjlaYRPBuhcweEpEwgMJSoEF+AYgGSdFOC
+         47wMWDVBKhdBfLAp6BJ0oYgJEfPGDCwp7MYtk8hPg4cRD4JH9Ip48P/UR91DF9y+Y9AI
+         MFVpYAfJ6690ax5hxX004PYGIIMZO4mpbVAaXl6KPQPThzjy74+do1oM6EVeQZyHbgWI
+         JKAIOYslZMeI9Est0F6drHj6RiJ3V9TNQxWWraYO1epkKXbkzDKHFMD1KRzg8QKPT+Qc
+         mbYEhKG4X2i/K+QERhDsDLnzLY6okxI8l2aKhNPivfA7VOJ7chzcvl7gmUOuuxO4U5sJ
+         M/kg==
+X-Gm-Message-State: AFuF++kLfSsYjzCvvItFFrDx9UfOrrCWucgzxHtG6+2J5D9Dsf6nTXg1
+	W+fTiWcntVKddkigmfSmMXra5KslhszrrCSTVyX8pfbL4yPgfJITE/sf
+X-Gm-Gg: AR+sD10DNR/mRktl3qlTTqk2X583AYfJ+kfrStYRVSnkEG7DjGqIwiQL5MRjhV1dvRs
+	XQ62knzxj0kpkswv1XJ3HuM0lFF8Q57JJP9gSUEdk4QHFzsjmp7RufajVkmMx2BbjOf4pKz1o4+
+	F9Cos6WaQJZUpfzvG7RokJqBWVe8WBQN+AtwdK8QHUbBs5zHh+iC8ZOyM666yii948L/xOT+ZiJ
+	of9VzHDx1sVRgJXpWtjEG+r8IsYDi/gUk+j7KPLAiPkhHOAFI+nW6nO9pKohQqCEm1sJJb71kkR
+	E1MVc3KXvnXdWQy8Y/rwRkXZa0r6vhQNx4C8Ee08Ca2pJEIM3ev/DwStSMUX4y/JSvL6f3rYTFe
+	/8rm/pu36OmRixukZgUitugLZQ5Xnpj68zDx/qKVfHMLP3UX7ktg6CazFqDz5PJ8iNxydECmrjd
+	yX7G50hxkSd6nfZ7MvDqtM0Z8KoH9lTpuDT2qIfPsr1pzTr68P/29skPJHei4kX51VogyP94PZ1
+	IQfZwC9urr22Q==
+X-Received: by 2002:a17:90b:1f8d:b0:38c:a59b:5189 with SMTP id 98e67ed59e1d1-395df67778fmr23169451a91.15.1787506974213;
+        Sun, 23 Aug 2026 10:42:54 -0700 (PDT)
+Received: from kurosuda.i.sslab.ics.keio.ac.jp ([131.113.100.7])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-395e49b5d8asm7052087a91.7.2026.08.23.10.42.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 23 Aug 2026 10:42:53 -0700 (PDT)
+From: Hiroki Nakajima <3na7nanana@gmail.com>
+To: support.opensource@diasemi.com,
+	lee@kernel.org
+Cc: mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	Hiroki Nakajima <3na7nanana@gmail.com>
+Subject: [PATCH] mfd: da9062: Use DEFINE_RES_IRQ_NAMED()
+Date: Mon, 24 Aug 2026 02:42:48 +0900
+Message-Id: <20260823174248.833535-1-3na7nanana@gmail.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260812-axp318-regulator-v6-0-d6b84b55c000@baylibre.com> <20260812-axp318-regulator-v6-5-d6b84b55c000@baylibre.com>
-In-Reply-To: <20260812-axp318-regulator-v6-5-d6b84b55c000@baylibre.com>
-Reply-To: wens@kernel.org
-From: Chen-Yu Tsai <wens@kernel.org>
-Date: Sun, 23 Aug 2026 23:04:30 +0800
-X-Gmail-Original-Message-ID: <CAGb2v64HtVFWmYV5uYBN+h2S+xGM=0XrkHuRj13cG3W=nOVN1Q@mail.gmail.com>
-X-Gm-Features: AcwNN1VquLs742qEc8_LGCpKYFHLYLrK5XTQoYktTpdadWoCANLMlSKPCtF7-Qk
-Message-ID: <CAGb2v64HtVFWmYV5uYBN+h2S+xGM=0XrkHuRj13cG3W=nOVN1Q@mail.gmail.com>
-Subject: Re: [PATCH RESEND v6 5/5] regulator: axp20x: add support for the AXP318W
-To: Jerome Brunet <jbrunet@baylibre.com>
-Cc: Andre Przywara <andre.przywara@arm.com>, Lee Jones <lee@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, mfd@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Thu, Aug 13, 2026 at 5:31=E2=80=AFAM Jerome Brunet <jbrunet@baylibre.com=
-> wrote:
->
-> From: Andre Przywara <andre.przywara@arm.com>
->
-> The X-Powers AXP318W is a typical PMIC from X-Powers, featuring nine
-> DC/DC converters and 28 LDOs, on the regulator side.
->
-> Describe the chip's voltage settings and switch registers, how the
-> voltages are encoded, and connect this to the MFD device via its
-> regulator ID.
-> We use just "318" for the internal identifiers, for easier typing and
-> less churn. If something else other than the "AXP318W" shows up, that's
-> an easy change, externally visible strings carry the additional letter
-> already.
->
-> Reviewed-by: Mark Brown <broonie@kernel.org>
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> Co-developed-by: Jerome Brunet <jbrunet@baylibre.com>
-> Signed-off-by: Jerome Brunet <jbrunet@baylibre.com>
-> ---
->  drivers/regulator/axp20x-regulator.c | 324 +++++++++++++++++++++++++++++=
-+++++-
->  include/linux/mfd/axp20x.h           |  45 +++++
->  2 files changed, 360 insertions(+), 9 deletions(-)
->
-> diff --git a/drivers/regulator/axp20x-regulator.c b/drivers/regulator/axp=
-20x-regulator.c
-> index da891415efc0..9e81e2cb7542 100644
-> --- a/drivers/regulator/axp20x-regulator.c
-> +++ b/drivers/regulator/axp20x-regulator.c
-> @@ -138,6 +138,29 @@
->  #define AXP313A_DCDC_V_OUT_MASK                GENMASK(6, 0)
->  #define AXP313A_LDO_V_OUT_MASK         GENMASK(4, 0)
->
-> +#define AXP318_DCDC1_PFM_PWM_CTRL      BIT(7)
-> +#define AXP318_DCDC23_POLYPHASE_CTRL   BIT(6)
-> +#define AXP318_DCDC45_POLYPHASE_CTRL   BIT(7)
-> +#define AXP318_DCDC1_V_OUT_MASK                GENMASK(4, 0)
-> +#define AXP318_DCDC2_V_OUT_MASK                GENMASK(6, 0)
-> +#define AXP318_LDO_V_OUT_MASK          GENMASK(4, 0)
-> +#define AXP318_ELDO_V_OUT_MASK         GENMASK(5, 0)
-> +#define AXP318_THRESHOLD_VOLTAGE       1540000
-> +/*
-> + * FIXME:
-> + * Some LDOs of the AXP318 may be fed by different supplies and
-> + * the documentation repeatedly warns that output voltage must
-> + * be less than the supply, which is the case for any LDO really.
-> + *
-> + * The best way to let the framework handle this is to set the
-> + * min_dropout_uV field. However the AXP318 documentation
-> + * does not provide any information about this.
-> + *
-> + * Realistically, it can't be less than 1uV so use this
-> + * for all LDOs until we know more.
-> + */
-> +#define AXP318_LDO_MIN_DROPOUT         1 /* uV */
-> +
->  #define AXP717_DCDC1_NUM_VOLTAGES      88
->  #define AXP717_DCDC2_NUM_VOLTAGES      107
->  #define AXP717_DCDC3_NUM_VOLTAGES      103
+Use the dedicated DEFINE_RES_IRQ_NAMED() helper for the DA9062 IRQ
+resources instead of open-coding it with DEFINE_RES_NAMED(). This makes
+the intended resource type explicit and keeps the definitions consistent
+with the DA9061 resources.
 
-[...]
+This is a mechanical cleanup with no functional change.
 
-> @@ -1430,6 +1704,20 @@ static int axp20x_set_dcdc_workmode(struct regulat=
-or_dev *rdev, int id, u32 work
->                 workmode <<=3D ffs(mask) - 1;
->                 break;
->
-> +       case AXP318_ID:
-> +               /*
-> +                * Only DCDC1 has PWM control on the AXP318
-> +                * The other DCDCs control DVM through bit 7 of the relat=
-ed
-> +                * registers. Work mode could possibly extended to deal w=
-ith
-> +                * this but it is not how it is documented at the moment
-> +                */
+With an x86_64 allmodconfig and W=1, drivers/mfd/da9062-core.o builds
+successfully and is byte-identical before and after this change.
 
-DVM bit is for turning on / off voltage ramp rate control. It is unrelated
-to work mode. Please drop the comment.
+Assisted-by: Codex:gpt-5 coccinelle
+Signed-off-by: Hiroki Nakajima <3na7nanana@gmail.com>
+---
+ drivers/mfd/da9062-core.c | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
-> +               if (id !=3D AXP318_DCDC1)
-> +                       return -EINVAL;
-> +               reg =3D AXP318_DCDC1_CONTROL;
-> +               mask =3D AXP318_DCDC1_PFM_PWM_CTRL;
-> +               workmode <<=3D ffs(mask) - 1;
-> +               break;
-> +
->         case AXP806_ID:
->                 /*
->                  * AXP806 DCDC regulator IDs have the same range as AXP22=
-X.
+diff --git a/drivers/mfd/da9062-core.c b/drivers/mfd/da9062-core.c
+index 637c5f47a4b0..ad198183aff7 100644
+--- a/drivers/mfd/da9062-core.c
++++ b/drivers/mfd/da9062-core.c
+@@ -203,36 +203,36 @@ static const struct mfd_cell da9061_devs_noirq[] = {
+ };
+ 
+ static const struct resource da9062_core_resources[] = {
+-	DEFINE_RES_NAMED(DA9062_IRQ_VDD_WARN, 1, "VDD_WARN", IORESOURCE_IRQ),
++	DEFINE_RES_IRQ_NAMED(DA9062_IRQ_VDD_WARN, "VDD_WARN"),
+ };
+ 
+ static const struct resource da9062_regulators_resources[] = {
+-	DEFINE_RES_NAMED(DA9062_IRQ_LDO_LIM, 1, "LDO_LIM", IORESOURCE_IRQ),
++	DEFINE_RES_IRQ_NAMED(DA9062_IRQ_LDO_LIM, "LDO_LIM"),
+ };
+ 
+ static const struct resource da9062_thermal_resources[] = {
+-	DEFINE_RES_NAMED(DA9062_IRQ_TEMP, 1, "THERMAL", IORESOURCE_IRQ),
++	DEFINE_RES_IRQ_NAMED(DA9062_IRQ_TEMP, "THERMAL"),
+ };
+ 
+ static const struct resource da9062_wdt_resources[] = {
+-	DEFINE_RES_NAMED(DA9062_IRQ_WDG_WARN, 1, "WD_WARN", IORESOURCE_IRQ),
++	DEFINE_RES_IRQ_NAMED(DA9062_IRQ_WDG_WARN, "WD_WARN"),
+ };
+ 
+ static const struct resource da9062_rtc_resources[] = {
+-	DEFINE_RES_NAMED(DA9062_IRQ_ALARM, 1, "ALARM", IORESOURCE_IRQ),
+-	DEFINE_RES_NAMED(DA9062_IRQ_TICK, 1, "TICK", IORESOURCE_IRQ),
++	DEFINE_RES_IRQ_NAMED(DA9062_IRQ_ALARM, "ALARM"),
++	DEFINE_RES_IRQ_NAMED(DA9062_IRQ_TICK, "TICK"),
+ };
+ 
+ static const struct resource da9062_onkey_resources[] = {
+-	DEFINE_RES_NAMED(DA9062_IRQ_ONKEY, 1, "ONKEY", IORESOURCE_IRQ),
++	DEFINE_RES_IRQ_NAMED(DA9062_IRQ_ONKEY, "ONKEY"),
+ };
+ 
+ static const struct resource da9062_gpio_resources[] = {
+-	DEFINE_RES_NAMED(DA9062_IRQ_GPI0, 1, "GPI0", IORESOURCE_IRQ),
+-	DEFINE_RES_NAMED(DA9062_IRQ_GPI1, 1, "GPI1", IORESOURCE_IRQ),
+-	DEFINE_RES_NAMED(DA9062_IRQ_GPI2, 1, "GPI2", IORESOURCE_IRQ),
+-	DEFINE_RES_NAMED(DA9062_IRQ_GPI3, 1, "GPI3", IORESOURCE_IRQ),
+-	DEFINE_RES_NAMED(DA9062_IRQ_GPI4, 1, "GPI4", IORESOURCE_IRQ),
++	DEFINE_RES_IRQ_NAMED(DA9062_IRQ_GPI0, "GPI0"),
++	DEFINE_RES_IRQ_NAMED(DA9062_IRQ_GPI1, "GPI1"),
++	DEFINE_RES_IRQ_NAMED(DA9062_IRQ_GPI2, "GPI2"),
++	DEFINE_RES_IRQ_NAMED(DA9062_IRQ_GPI3, "GPI3"),
++	DEFINE_RES_IRQ_NAMED(DA9062_IRQ_GPI4, "GPI4"),
+ };
+ 
+ static const struct mfd_cell da9062_devs_irq[] = {
 
-[...]
+base-commit: 9d0e4b1ae5b045a2c92b0b9a1c3b268191c219d9
+-- 
+2.34.1
 
-> diff --git a/include/linux/mfd/axp20x.h b/include/linux/mfd/axp20x.h
-> index 0191467de4ec..251f057ea76d 100644
-> --- a/include/linux/mfd/axp20x.h
-> +++ b/include/linux/mfd/axp20x.h
-> @@ -128,6 +128,7 @@ enum axp20x_variants {
->  #define AXP318_DCDC7_CONTROL           0x18
->  #define AXP318_DCDC8_CONTROL           0x19
->  #define AXP318_DCDC9_CONTROL           0x1a
-> +#define AXP318_DCDC_CONTROL1           0x1b
-
-This could be moved to the previous patch for completeness.
-
-[...]
-
-
-Once fixed,
-
-Reviewed-by: Chen-Yu Tsai <wens@kernel.org>
