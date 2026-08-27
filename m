@@ -1,90 +1,103 @@
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A095E484220;
-	Thu, 27 Aug 2026 15:11:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.142.43.55
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A57A3367B94;
+	Thu, 27 Aug 2026 15:24:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787843464; cv=none; b=j3AbSvGvxQnzWudw/uk84dx7DfP+l9SQUX2I4EGMNobhuC5eyh0WCxxliEQ0Hymz/TMOegxr0DunzWbQba3U3hFNvoKsrrp2GQfPUdiR8TPAzyyACWCPtWmdQyEW0qbFUr+uW9JpqN2GBBom/4SHPh5AxWLQaPNzC0yA/Km8iW8=
+	t=1787844250; cv=none; b=DiUfkZ8FFMTA94w8Wr8ICxh6PaIYwPp8LvYV3LcMVd62H/2GmqjEPKVhOWWn7ZHvjoC4BhmUL1FWHRbeBOe9pn4bJTDL//hXS91MCuJl6LY6e7OMrCaTMnqkTvlG9CxJPLrsJ7OZ+UhzWkWsd5A2OBPSBQuHawaTLlCptDA5UvU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787843464; c=relaxed/simple;
-	bh=wypQmDHUmcBJmH1nhaLuSZ2cqQW4q1hP00xbJAXnlJI=;
+	s=arc-20240116; t=1787844250; c=relaxed/simple;
+	bh=xCsBRArtQOlXcEBVVAZGskJ9yhW8/2TLUCCS7V4l/jU=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=P3YciWGf4YHRD/9z7YeBNVUWFFJeE1+2bJP9qjCPZn+nejTw/SnxfcaXKGi5qQ8nmSUXwOJEiQMSuN5QuFIhxjWN0+a5G9B1CuMkkXjFYrO9bfcpqTtOy+X9x464MRfgY+xOPM4oECTNwVFx7j4BaR13z8Prp/OXyJVRpSFMrSA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de; spf=pass smtp.mailfrom=linutronix.de; dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=M1pVnvi5; dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=Z+IzuBO2; arc=none smtp.client-ip=193.142.43.55
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
+	 Content-Type:Content-Disposition:In-Reply-To; b=A47DeqqBX+2BdpS9hWk2idL23kh83b4Ljm+XHsbZMYyaLAxJpPkZHHKrUu32+zX1addNJyInqG0NKSbf1+j0J/CJJyg6IgKjcFr6rUujkR8j+F0WL5AG2eKro5nzRE1QfmWQikHYREDmRKD77r6J67/tLHdg4ivXHSdRCWxhM50=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kQS16A7z; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="M1pVnvi5";
-	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="Z+IzuBO2"
-Date: Thu, 27 Aug 2026 17:10:56 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1787843457;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=wypQmDHUmcBJmH1nhaLuSZ2cqQW4q1hP00xbJAXnlJI=;
-	b=M1pVnvi5/FOctF+AJQ3fJd4zoa9BaWw8XL/6bw+AYqZ7joQGG48ky2PIxfM/l8ARJk22T3
-	zTzevqto632G7v66F5Cua0qZZFz5jmt1vIJ7iIe9MjfoCz3I/cbZRiEQy3WMhL2VBkRXAx
-	oPBYk+3gQcuG510TbF8rkYPJHHMa86Ee/+gwrSJiz8SkdYjOPurf/nbQalO7pnXKG9aql8
-	J6WXqKGsuYOOokapNZZk/LbO4hBWqZptYKqBH444tygtKQa75z6U61UlqFYRJPx027Av7Y
-	w73RoaZBYmt/yfXsxevOKp4Bjt+49RgIR1uxxooqp0N8hFBgI4O2zNdGHHsfSA==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1787843457;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=wypQmDHUmcBJmH1nhaLuSZ2cqQW4q1hP00xbJAXnlJI=;
-	b=Z+IzuBO2jz4XIuRKpsm6Kra6CrM0Db+wSUt9ljjkuUb3ojtR1Vn9faOSPItXGTQW7uFiyx
-	ohhUj+hn41Xcj+AQ==
-From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-To: Ju Nan <junan76@163.com>
-Cc: antonio.borneo@foss.st.com, linusw@kernel.org,
-	alexandre.torgue@foss.st.com, arnd@arndb.de, clrkwllms@kernel.org,
-	lee@kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-gpio@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-rt-devel@lists.linux.dev,
-	linux-stm32@st-md-mailman.stormreply.com, mcoquelin.stm32@gmail.com,
-	mfd@lists.linux.dev, rostedt@goodmis.org,
-	Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
-Subject: Re: [PATCH v3] pinctrl: stm32: program the EXTI mux from .alloc
- instead of .activate
-Message-ID: <20260827151056.QrjGOPuG@linutronix.de>
-References: <20260803061718.43210-1-junan76@163.com>
- <20260804141402.86911-2-junan76@163.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kQS16A7z"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 653271F00A3A;
+	Thu, 27 Aug 2026 15:24:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787844249;
+	bh=qevHd4DzHs/J/T2zqw/1+MSFbPysy9aHGLu1eo3P3uA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=kQS16A7zlvn7oCq3SxA5gVseJXoATjZ1UPe7sI8rqlXlL2iqJMmAWyZZR7gOx+gHC
+	 NuGQZ0BCfYak+42VYzpfDqTrqeyxtmH9AmR59iTnmJevuMBN03d5ekYEiB/7kOnewS
+	 6S45toKk7GCgsfq/uq8a15QUpDMHdK2gNPAOSqu+oysXEf6vCyH+OpqVXTZGVLEWUa
+	 s0Rad6CSaWWEJIX8C+eOwaQA4mer0/5qkvb3H0w7x5r2v/gcbpkQe2ijN7FfO58uVg
+	 Z7al3LjWKmFW6TA4+C+lqnTaytLOvBKTBwVKByiimbBpceCROkW5nXNJvlOOkl8ALQ
+	 VyJkBXjTv2/wg==
+Date: Thu, 27 Aug 2026 16:24:05 +0100
+From: Lee Jones <lee@kernel.org>
+To: Thomas Richard <thomas.richard@bootlin.com>
+Cc: sashiko-reviews@lists.linux.dev, mfd@lists.linux.dev
+Subject: Re: [PATCH 3/4] mfd: cgbc: Add virtual I2C bus support
+Message-ID: <20260827152405.GE2943942@google.com>
+References: <20260804-cgbc-i2c-storage-devices-support-v1-0-fed38510671c@bootlin.com>
+ <20260804-cgbc-i2c-storage-devices-support-v1-3-fed38510671c@bootlin.com>
+ <20260804154824.458301F000E9@smtp.kernel.org>
+ <20260812112037.GJ1072730@google.com>
+ <cc76739a-1957-4973-afb9-2703e238f0ec@bootlin.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <20260804141402.86911-2-junan76@163.com>
+In-Reply-To: <cc76739a-1957-4973-afb9-2703e238f0ec@bootlin.com>
 
-On 2026-08-04 22:14:03 [+0800], Ju Nan wrote:
-=E2=80=A6
-> Nothing requires the mux to be reprogrammed at interrupt startup time:
-> the domain has no .deactivate, .free() only releases the irqmux_map bit
-> without touching the registers, and the resume path reprograms the mux
-> itself in stm32_pinctrl_restore_gpio_regs().
+On Wed, 12 Aug 2026, Thomas Richard wrote:
 
-The deactivate was last removed in commit db0f032512443 ("pinctrl:
-stm32: check for IRQ MUX validity during alloc()")
+> On 8/12/26 1:20 PM, Lee Jones wrote:
+> > On Tue, 04 Aug 2026, sashiko-bot@kernel.org wrote:
+> > 
+> >> Thank you for your contribution! Sashiko AI review found 1 potential issue(s) to consider:
+> >> - [Low] Hard-coded cell IDs are used for the newly added `cgbc-i2c` subdevice instead of `PLATFORM_DEVID_AUTO`.
+> >> --
+> >>
+> >> --- Patch [3]: [PATCH 3/4] mfd: cgbc: Add virtual I2C bus support ---
+> >> commit 4f0038d5dc42bfd45540675cdbf89f68ab3673d5
+> >> Author: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
+> >>
+> >> mfd: cgbc: Add virtual I2C bus support
+> >>
+> >> This commit adds a new I2C cell to support the internal virtual I2C bus 
+> >> provided by the Board Controller.
+> >>
+> >>> diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
+> >>> index 4a409234e66c8..81bd0a381ca13 100644
+> >>> --- a/drivers/mfd/cgbc-core.c
+> >>> +++ b/drivers/mfd/cgbc-core.c
+> >>> @@ -240,6 +240,7 @@ static struct mfd_cell cgbc_devs[] = {
+> >>>  	{ .name = "cgbc-gpio"	},
+> >>>  	{ .name = "cgbc-i2c", .id = 1 },
+> >>>  	{ .name = "cgbc-i2c", .id = 2 },
+> >>> +	{ .name = "cgbc-i2c", .id = 3 },
+> >>
+> >> [Severity: Low]
+> >> Should this use PLATFORM_DEVID_AUTO instead of hard-coding the cell ID?
+> > 
+> 
+> I use mfd_add_devices() with PLATFORM_DEVID_NONE.
+> So I2C busses will have platform_id from 0 to 2 [1].
+> And I2C adapter is selected using the platform device id [2].
+> 
+> I'm not 100% convinced by this implementation. I planned to add new I2C
+> busses and new boards support, and each board selects some busses. I
+> guess it will be the right time to rework it. If you have any idea to
+> implement this in a better way, please let me know.
 
-=E2=80=A6
-> While moving the code, release the mux reservation when the hwspinlock
-> cannot be taken, which the .activate callback had no way of doing.
+Yes, the solution is to use PLATFORM_DEVID_AUTO as recommended.
 
-It makes sense.
-Acked-by: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+> [1]
+> https://elixir.bootlin.com/linux/v7.2-rc7/source/drivers/mfd/mfd-core.c#L164-L167
+> [2]
+> https://elixir.bootlin.com/linux/v7.2-rc7/source/drivers/i2c/busses/i2c-cgbc.c#L374
+> 
+> 
+> Best Regards,
+> Thomas
 
-> Reported-by: Uwe Kleine-K=C3=B6nig <u.kleine-koenig@pengutronix.de>
-> Closes: https://lore.kernel.org/all/20220202174430.pf37tt6lua2op3gc@pengu=
-tronix.de/
-> Signed-off-by: Ju Nan <junan76@163.com>
-
-Sebastian
+-- 
+Lee Jones
