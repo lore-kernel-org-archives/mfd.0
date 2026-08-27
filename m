@@ -1,113 +1,90 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB2A447D458
-	for <mfd@lists.linux.dev>; Thu, 27 Aug 2026 14:39:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A095E484220;
+	Thu, 27 Aug 2026 15:11:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=193.142.43.55
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787841559; cv=none; b=YMC1hSOl/n1jqEgVBx9p52hwxOuCy2fw5HwJIGkMagzrRrpuaKTFT8DVsP1NfBVdOE6VJY515oT5N4qjYWS8wk0Mx5aeLyjiATHZsivd/Z1S5TXO/yCA8c0kCaMyvUy4Xf71Uq7DcxhL0pPf2JpgnPnHvkj6NgrM/q50fW5moic=
+	t=1787843464; cv=none; b=j3AbSvGvxQnzWudw/uk84dx7DfP+l9SQUX2I4EGMNobhuC5eyh0WCxxliEQ0Hymz/TMOegxr0DunzWbQba3U3hFNvoKsrrp2GQfPUdiR8TPAzyyACWCPtWmdQyEW0qbFUr+uW9JpqN2GBBom/4SHPh5AxWLQaPNzC0yA/Km8iW8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787841559; c=relaxed/simple;
-	bh=dGyzb014fiPmNXSLn5A0CV5Vjfcj/Xvj1o9kLErbULA=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=ttASQjLugTuQmftW5XrLB5V99o7KjbfjsjhFURz2yTORo93E5QdPk1i3nFj3J3YEkGS9mkRMu5iH8Y7qdxle9ay1JAQBooRkGkndQ3mf8cn5W92fwlXMWxS/cHCEVTzgpECoitnVXorIVq06JkZanwB1dIuEFiPveMHFNKK1o20=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Im9ZLPv2; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1787843464; c=relaxed/simple;
+	bh=wypQmDHUmcBJmH1nhaLuSZ2cqQW4q1hP00xbJAXnlJI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=P3YciWGf4YHRD/9z7YeBNVUWFFJeE1+2bJP9qjCPZn+nejTw/SnxfcaXKGi5qQ8nmSUXwOJEiQMSuN5QuFIhxjWN0+a5G9B1CuMkkXjFYrO9bfcpqTtOy+X9x464MRfgY+xOPM4oECTNwVFx7j4BaR13z8Prp/OXyJVRpSFMrSA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de; spf=pass smtp.mailfrom=linutronix.de; dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=M1pVnvi5; dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b=Z+IzuBO2; arc=none smtp.client-ip=193.142.43.55
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Im9ZLPv2"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 527CD1F00A3A;
-	Thu, 27 Aug 2026 14:39:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787841550;
-	bh=zjregPGyT6S8OpRAIPdDZN9AGFsYsinvkxgm859S3RI=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Im9ZLPv2B9mKUyFPvp766fjAoOPS3jHWZlOfhBmPqAEm4p0O3Pi04wIitBoSONIUD
-	 W3xMhCk+TqOrWyz3zzGHDKBLqneotstiVYZ8ctAtKTDRETdJo7AACqccpX6rouLwSz
-	 7n83BQFcsAwkG+z/e9ru2JGxk1eOlY1sas4HIkkGunRv575GYU6FHqq6QsbojSeVtX
-	 riZkh9GQ13O0s6KokM/Krk8HEWtORwMy3nbNfcoGNR/2qv55mvm/mShDWctYNDBpgr
-	 djsyrBp/6j9dpn23U1vDvzPqqlVAF218vTEMbQRIM1h1zgjGV31EUjegfeOpQId+Cj
-	 /+sMcKQM7wA9A==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH] mfd: Fix MAX77705 dependency on regmap
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "David Heidelberg" <david@ixit.cz>
-Cc: lee@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260827-deps-reg-max77705-v1-1-c83a74d3d428@ixit.cz>
-References: <20260827-deps-reg-max77705-v1-1-c83a74d3d428@ixit.cz>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 27 Aug 2026 14:39:09 +0000
-Message-Id: <20260827143910.527CD1F00A3A@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="M1pVnvi5";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="Z+IzuBO2"
+Date: Thu, 27 Aug 2026 17:10:56 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020; t=1787843457;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=wypQmDHUmcBJmH1nhaLuSZ2cqQW4q1hP00xbJAXnlJI=;
+	b=M1pVnvi5/FOctF+AJQ3fJd4zoa9BaWw8XL/6bw+AYqZ7joQGG48ky2PIxfM/l8ARJk22T3
+	zTzevqto632G7v66F5Cua0qZZFz5jmt1vIJ7iIe9MjfoCz3I/cbZRiEQy3WMhL2VBkRXAx
+	oPBYk+3gQcuG510TbF8rkYPJHHMa86Ee/+gwrSJiz8SkdYjOPurf/nbQalO7pnXKG9aql8
+	J6WXqKGsuYOOokapNZZk/LbO4hBWqZptYKqBH444tygtKQa75z6U61UlqFYRJPx027Av7Y
+	w73RoaZBYmt/yfXsxevOKp4Bjt+49RgIR1uxxooqp0N8hFBgI4O2zNdGHHsfSA==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020e; t=1787843457;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=wypQmDHUmcBJmH1nhaLuSZ2cqQW4q1hP00xbJAXnlJI=;
+	b=Z+IzuBO2jz4XIuRKpsm6Kra6CrM0Db+wSUt9ljjkuUb3ojtR1Vn9faOSPItXGTQW7uFiyx
+	ohhUj+hn41Xcj+AQ==
+From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+To: Ju Nan <junan76@163.com>
+Cc: antonio.borneo@foss.st.com, linusw@kernel.org,
+	alexandre.torgue@foss.st.com, arnd@arndb.de, clrkwllms@kernel.org,
+	lee@kernel.org, linux-arm-kernel@lists.infradead.org,
+	linux-gpio@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-rt-devel@lists.linux.dev,
+	linux-stm32@st-md-mailman.stormreply.com, mcoquelin.stm32@gmail.com,
+	mfd@lists.linux.dev, rostedt@goodmis.org,
+	Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
+Subject: Re: [PATCH v3] pinctrl: stm32: program the EXTI mux from .alloc
+ instead of .activate
+Message-ID: <20260827151056.QrjGOPuG@linutronix.de>
+References: <20260803061718.43210-1-junan76@163.com>
+ <20260804141402.86911-2-junan76@163.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20260804141402.86911-2-junan76@163.com>
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
+On 2026-08-04 22:14:03 [+0800], Ju Nan wrote:
+=E2=80=A6
+> Nothing requires the mux to be reprogrammed at interrupt startup time:
+> the domain has no .deactivate, .free() only releases the irqmux_map bit
+> without touching the registers, and the resume path reprograms the mux
+> itself in stm32_pinctrl_restore_gpio_regs().
 
-Pre-existing issues:
-- [High] The PMIC driver registers an MFD cell for the charger, but the cha=
-rger driver is an independent I2C driver, causing dead code and IRQ conflic=
-ts.
---
+The deactivate was last removed in commit db0f032512443 ("pinctrl:
+stm32: check for IRQ MUX validity during alloc()")
 
-commit a9e038f4576add179799c718b71948bb74197bab
-Author: David Heidelberg <david@ixit.cz>
+=E2=80=A6
+> While moving the code, release the mux reservation when the hwspinlock
+> cannot be taken, which the .activate callback had no way of doing.
 
-mfd: Fix MAX77705 dependency on regmap
+It makes sense.
+Acked-by: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
 
-This commit adds missing dependencies for REGMAP_IRQ and REGMAP_I2C to the
-MFD_MAX77705 Kconfig entry to fix a build error in the max77705 driver.
+> Reported-by: Uwe Kleine-K=C3=B6nig <u.kleine-koenig@pengutronix.de>
+> Closes: https://lore.kernel.org/all/20220202174430.pf37tt6lua2op3gc@pengu=
+tronix.de/
+> Signed-off-by: Ju Nan <junan76@163.com>
 
-> diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
-> index e4fd4572472f9..857ca3bb0d5bf 100644
-> --- a/drivers/mfd/Kconfig
-> +++ b/drivers/mfd/Kconfig
-> @@ -1006,6 +1006,8 @@ config MFD_MAX77705
->  	depends on I2C
->  	select MFD_CORE
->  	select MFD_SIMPLE_MFD_I2C
-> +	select REGMAP_I2C
-> +	select REGMAP_IRQ
-
-[Severity: High]
-This is a pre-existing issue, but while reviewing this dependency fix, I
-noticed an architectural conflict between the MAX77705 MFD parent and its
-charger child device.
-
-The PMIC driver registers an MFD cell for the charger in max77705_devs:
-
-    MFD_CELL_OF("max77705-charger", NULL, NULL, 0, 0, "maxim,max77705-charg=
-er"),
-
-However, the charger driver is registered as an independent I2C driver rath=
-er
-than a platform driver:
-
-    module_i2c_driver(max77705_charger_driver);
-
-Will this cause the MFD core's instantiated platform device to become dead
-code since it will never be bound?
-
-Additionally, does this setup cause an IRQ conflict? At boot time, both the
-PMIC driver and the charger I2C driver probe and attempt to request the same
-physical IRQ exclusively. In max77705_charger_probe(), the charger driver
-requests it directly:
-
-    ret =3D devm_regmap_add_irq_chip(chg->dev, chg->regmap, i2c->irq,
-                                   IRQF_ONESHOT, 0,
-                                   chip_desc, &irq_data);
-
-Because IRQF_SHARED is not used and the MFD parent also exclusively requests
-i2c->irq, whichever driver loads second will fail with an -EBUSY error.
-Could this be addressed by converting the charger driver to a standard
-platform driver that consumes resources provided by the MFD parent?
-
->  	help
->  	  Say yes here to add support for Maxim Integrated MAX77705 PMIC.
->  	  This is a Power Management IC with Charger, safe LDOs, Flash, Haptic
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260827-deps-reg-m=
-ax77705-v1-1-c83a74d3d428@ixit.cz?part=3D1
+Sebastian
