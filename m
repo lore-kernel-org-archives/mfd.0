@@ -1,116 +1,129 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0BB614078DF;
-	Thu, 27 Aug 2026 13:55:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F89147604A;
+	Thu, 27 Aug 2026 14:14:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787838914; cv=none; b=M0SRWzUOeiG1Q+XnypDLFRTYoMPi0e2ZoX1OYBkQQttqmoEV+BMAJ9NhLJECIJy1GNettOLJeZPcC03NB3+I25MdOem/gElxZX8GF+YO+EBRRaDa7VlTpKeWEEdEnJcBD8j2yrSHFHsuC9LqjrvAFUlheFAdqwg9gyz0ZRsNfL4=
+	t=1787840072; cv=none; b=Ys9kQTjJV4UR5bn61Tb0U1XALc+2BU2LaWzn3uHUEOBNCP+Cc+J6EvIq0nwf3n7IjkentsUuVdOBbyJBpi2bN5FF1cqm6jiZFJ5DvnHjv7M2dl3rqPRdalr0bgX4vbIDXIv0pFTTu0A9OeJ4KyfEQGkdfZsCMWfaaVT1G4txubQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787838914; c=relaxed/simple;
-	bh=kHkHBGyN6C5h6jgQmgDmF3SNdruCmZV2VInskDgVqm4=;
+	s=arc-20240116; t=1787840072; c=relaxed/simple;
+	bh=yfm0l6U2JD7vyXzu8CeyNZgRDWe8o3K63SYpJUx897M=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=lXZ55umCWE6hn2VccDCvD9zv+lYgRyr7+LtyNRKK5fMTy87txn/7is8sZ4+0KDAWwMvgWQG/XQtQW9VIe+Hmord14wd0jyDyPTInODPyQYGD8XgIRDgnuEOWoA3fPamclwbEwN1E2KpsULzuQJ61PIPX0IhLI1Zk3joLlAzVpzk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SSSfpIDa; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=j9wczCrrsS8DgU0VVEccJAIxQEicVja2P5r90YvbzJWLDtl/iSXe1sfl28xriFHEI2Ffw1WoKfnejy3If/aDkeaeTiJO04WEsEjspKGAU6lnkH+z9Mf2xxpoqB0Zry+LejWMVFF8DBmYLALQqx6B38segnREEfp77hr5zERGzjw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=H/mf54W+; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SSSfpIDa"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D86EA1F000E9;
-	Thu, 27 Aug 2026 13:55:11 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="H/mf54W+"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E6D41F00A3F;
+	Thu, 27 Aug 2026 14:14:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787838912;
-	bh=bIgMtvlLDLyBw7x8n/MOXltBUhzpMCzAYUEiOe5UenU=;
+	s=k20260515; t=1787840067;
+	bh=iPd05vfVGTTXMu8o+Kz/ydj1//S090ZmEizU6uZMvXQ=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=SSSfpIDaTePAiap4C1Sk5PoGGpG6nstmgB/jXDpNG4VLLTNynwaz8CYG9rcGUdf1f
-	 fsZl39vo+X4l0UUeyyhBZFCaePRQg3lf+fK1DMv0Hl1gMGnBKNUsB0ieb3YFNdnerQ
-	 5oWSwLANirkyKTh8TjUBTjdSAvl8VIi3koAPTgh6nrz/Ys7GpZoK0l5lg4u9KRU5tj
-	 z4pEfqGouc21Qq0odekwvpENDPX9SbQxnA1vK4A2lf7skTUCysI3ffErxP8wW9avo8
-	 xvURZNZgMhdmOo/wwHuqgnVGYpUWdHKrB0rQtfmuSkU1O7F9zqPbqe734rYt2HXR5Q
-	 2V2w3V21lxuJw==
-Date: Thu, 27 Aug 2026 14:55:09 +0100
-From: Lee Jones <lee@kernel.org>
-To: sashiko-reviews@lists.linux.dev
-Cc: Triet Hoang <triet.hoang.dev@gmail.com>, mfd@lists.linux.dev
-Subject: Re: [PATCH] drivers/mfd: Convert to DEFINE_SIMPLE_DEV_PM_OPS()
-Message-ID: <20260827135509.GP770273@google.com>
-References: <20260821092508.324787-1-triet.hoang.dev@gmail.com>
- <20260821093516.2248C1F00A3A@smtp.kernel.org>
+	b=H/mf54W+MN//hu47JmgAU9exTPmvl0LBHB5ZzKhGEwexbRuvTYIkxj4GXgA835qnR
+	 9UEt8YKMOrQNOLAFi3nx7pgRQfY25zqX+764+u84p08c1ffcviu+w56HZl/bCUCG0L
+	 ihHFnT+8mC7h+ynswLMu1pkSIvecp+7uEK09sDoYo898fL5w+AT7uAHCJEisDnTdGu
+	 nqenwjGFq5F6mhrGpgDFQqyTszGxV2iYC0cv81MuAExmXpeZ0TN/UNxfU3/4Szp6vv
+	 o+MTXUDPIFfzalBFoZ+PepIPsLWVL0VjVaXlf2cPUDNh52Tp26khuu1cNEKxWPj+FD
+	 a0defbS1Qxr8A==
+Date: Thu, 27 Aug 2026 09:14:26 -0500
+From: "Rob Herring (Arm)" <robh@kernel.org>
+To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Cc: Billy Tsai <billy_tsai@aspeedtech.com>, Mark Brown <broonie@kernel.org>,
+	imx@lists.linux.dev, mfd@lists.linux.dev,
+	Chin-Ting Kuo <chin-ting_kuo@aspeedtech.com>,
+	Lee Jones <lee@kernel.org>, linux-kernel@vger.kernel.org,
+	Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+	Lorenzo Pieralisi <lpieralisi@kernel.org>,
+	Linus Walleij <linusw@kernel.org>, linux-pm@vger.kernel.org,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	linux-aspeed@lists.ozlabs.org, Wells Lu <wellslutw@gmail.com>,
+	Andrzej Hajda <andrzej.hajda@intel.com>, linux-pci@vger.kernel.org,
+	Andi Shyti <andi.shyti@kernel.org>,
+	Andrew Jeffery <andrew@codeconstruct.com.au>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Conor Dooley <conor+dt@kernel.org>, Simona Vetter <simona@ffwll.ch>,
+	Lukasz Luba <lukasz.luba@arm.com>,
+	Dvorkin Dmitry <dvorkin@tibbo.com>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	linux-spi@vger.kernel.org,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	=?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	dri-devel@lists.freedesktop.org,
+	Jernej Skrabec <jernej.skrabec@gmail.com>,
+	linux-iio@vger.kernel.org, Robert Foss <rfoss@kernel.org>,
+	Joel Stanley <joel@jms.id.au>, Olof Johansson <olof@lixom.net>,
+	coresight@lists.linaro.org, linux-input@vger.kernel.org,
+	linux-media@vger.kernel.org, Leo Yan <leo.yan@arm.com>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Boris Brezillon <bbrezillon@kernel.org>,
+	Maxime Ripard <mripard@kernel.org>,
+	Shree Ramamoorthy <s-ramamoorthy@ti.com>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Fabio Estevam <festevam@gmail.com>, Mike Leach <mike.leach@arm.com>,
+	Andy Shevchenko <andy@kernel.org>,
+	Binghui Wang <wangbinghui@hisilicon.com>,
+	Zhang Rui <rui.zhang@intel.com>,
+	linux-arm-kernel@lists.infradead.org, linux-gpio@vger.kernel.org,
+	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Mirela Rabulea <mirela.rabulea@nxp.com>,
+	David Airlie <airlied@gmail.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Ryan Chen <ryan_chen@aspeedtech.com>,
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+	linux-i2c@vger.kernel.org, David Lechner <dlechner@baylibre.com>,
+	Luca Ceresoli <luca.ceresoli@bootlin.com>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Michal Simek <michal.simek@amd.com>, openbmc@lists.ozlabs.org,
+	James Clark <james.clark@linaro.org>,
+	Jonas Karlman <jonas@kwiboo.se>,
+	Suzuki K Poulose <suzuki.poulose@arm.com>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Frank Li <Frank.Li@nxp.com>, devicetree@vger.kernel.org,
+	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	Xiaowei Song <songxiaowei@hisilicon.com>, info@mocean-labs.com
+Subject: Re: [PATCH] dt-bindings: Drop redundant white-space around values in
+ <>
+Message-ID: <178784006582.3145716.1041886875556731621.robh@kernel.org>
+References: <20260826102044.142986-2-krzysztof.kozlowski@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260821093516.2248C1F00A3A@smtp.kernel.org>
+In-Reply-To: <20260826102044.142986-2-krzysztof.kozlowski@oss.qualcomm.com>
 
-On Fri, 21 Aug 2026, sashiko-bot@kernel.org wrote:
 
-> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
+On Wed, 26 Aug 2026 12:20:45 +0200, Krzysztof Kozlowski wrote:
+> Correct a few white-space issues around <>, which will be flagged by
+> dt-check-style.  No functional changes.
 > 
-> New issues:
-> - [Low] The commit message prefix uses 'drivers/mfd:' instead of the required 'mfd: ' format.
+> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> 
+> ---
+> 
+> Rob, Can you take it directly?
+> ---
+>  .../bindings/arm/arm,coresight-cti.yaml       |  2 +-
+>  .../bindings/display/bridge/sil,sii9022.yaml  |  2 +-
+>  .../bindings/i2c/xlnx,xps-iic-2.00.a.yaml     |  4 ++--
+>  .../bindings/iio/light/upisemi,us5182.yaml    |  2 +-
+>  .../bindings/input/matrix-keymap.yaml         |  3 +--
+>  .../devicetree/bindings/input/ti,tca8418.yaml | 21 +++++++++----------
+>  .../bindings/media/nxp,imx8-jpeg.yaml         |  4 ++--
+>  .../devicetree/bindings/mfd/ti,tps65910.yaml  |  2 +-
+>  .../bindings/pci/hisilicon,kirin-pcie.yaml    |  4 ++--
+>  .../pinctrl/sunplus,sp7021-pinctrl.yaml       |  2 +-
+>  .../bindings/spi/aspeed,ast2600-fmc.yaml      |  6 +++---
+>  .../bindings/thermal/thermal-idle.yaml        |  2 +-
+>  12 files changed, 26 insertions(+), 28 deletions(-)
+> 
 
-This needs addressing.
+Applied, thanks!
 
-> Pre-existing issues:
-> - [High] Device teardown sequence disables PM runtime and clocks before unregistering MFD child devices, leading to an external abort kernel panic.
-> --
-> 
-> --- Patch [1]: [PATCH] drivers/mfd: Convert to DEFINE_SIMPLE_DEV_PM_OPS() ---
-> commit f2c525c2ee807012f8f33d16a4bcbea747e75dcf
-> Author: Triet Hoang <triet.hoang.dev@gmail.com>
-> 
->     drivers/mfd: Convert to DEFINE_SIMPLE_DEV_PM_OPS()
->     
->     Convert the deprecated SIMPLE_DEV_PM_OPS
->     to DEFINE_SIMPLE_DEV_PM_OPS
->     and pm_sleep_ptr().
-
-The commit message needs reformatting to avoid the needless early
-line feeds.
-
-> >     drivers/mfd: Convert to DEFINE_SIMPLE_DEV_PM_OPS()
-> 
-> [Severity: Low]
-> This isn't a bug, but does this commit title violate the MFD subsystem naming
-> conventions? The standard format requires using mfd: <Driver>: for the
-> commit message prefix instead of drivers/mfd:.
-> 
-> > diff --git a/drivers/mfd/ti_am335x_tscadc.c b/drivers/mfd/ti_am335x_tscadc.c
-> > index 068c25401c6cd..81f07a1d780c5 100644
-> > --- a/drivers/mfd/ti_am335x_tscadc.c
-> > +++ b/drivers/mfd/ti_am335x_tscadc.c
-> [ ... ]
-> > @@ -373,7 +373,7 @@ MODULE_DEVICE_TABLE(of, ti_tscadc_dt_ids);
-> >  static struct platform_driver ti_tscadc_driver = {
-> >  	.driver = {
-> >  		.name   = "ti_am3359-tscadc",
-> > -		.pm	= &tscadc_pm_ops,
-> > +		.pm	= pm_sleep_ptr(&tscadc_pm_ops),
-> >  		.of_match_table = ti_tscadc_dt_ids,
-> >  	},
-> >  	.probe	= ti_tscadc_probe,
-> 
-> [Severity: High]
-> This is a pre-existing issue, but does ti_tscadc_remove() cause a kernel panic
-> by disabling PM runtime before unregistering child devices?
-> 
-> When the module is unloaded, ti_tscadc_remove() drops the clock reference and
-> disables PM runtime:
-> 
->     pm_runtime_put_sync(&pdev->dev);
->     pm_runtime_disable(&pdev->dev);
->     mfd_remove_devices(tscadc->dev);
-> 
-> When mfd_remove_devices() unbinds the ti_am335x_adc child driver, the child's
-> tiadc_remove() calls am335x_tsc_se_clr(). This issues a regmap_write() to the
-> REG_SE MMIO register while the parent device's clock is already powered down,
-> which triggers an L3 interconnect error and kernel panic.
-> 
-> -- 
-> Sashiko AI review · https://sashiko.dev/#/patchset/20260821092508.324787-1-triet.hoang.dev@gmail.com?part=1
-
--- 
-Lee Jones
