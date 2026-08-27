@@ -1,33 +1,33 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9D4035E93B;
-	Wed, 26 Aug 2026 16:04:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D477934D385;
+	Thu, 27 Aug 2026 12:53:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787760285; cv=none; b=A3VUexClCjhFQFLj1J0JklPNPhcSqESqnkRGwFK0NA98h0zoFSOL4QMTNWTkFjYquIqzT3Ty1/EUjTIqAY8lHYcuEVnGqB4kLZMHZ81tXAmdGxeHQUdka8hdn67wc6eDUbGGvi0LmJmyKKkUcA8uwJmFfAaN+GfB6ChFZUX2CVQ=
+	t=1787835198; cv=none; b=ZmRGS66Q/Jn0Bp0IhUOcGXFzbXyp4JgxeN/JoBctyHamzGad7X5hzjcA5XUH3zjjx84PaWg6Dn9JoJ2RQD/EY88DMVAf7KT3aI6WQ9QfrhUkUZdSBNCvCm6k/nJWxhXuQ9hjErgr2EXgIfjb5fhtZM4u4PHUrjeSLpvSTTBpmiw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787760285; c=relaxed/simple;
-	bh=J3HAsU1KwO4mqDetIrd6P/XZ/1/GwfDOnfmgJD5u77Y=;
+	s=arc-20240116; t=1787835198; c=relaxed/simple;
+	bh=hB8J5rKgHQgIo8h/hxjtzyLJpP/TdCQHWkST/p7ZR6U=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=qmtjKeYUu25SkhnSg0O3h9qfVjfOqKy8ywci0tHldXekayiWCIBmR2hgaFDd/XgepWw/STl7J20xy6qY/TAGwVZ97ncnMgDDqolXWhtr1FO/yqOwQLZkJaqWWc0XxXB9DYlbyXeomvUUx1zXfF8way7J1sc/gSKbtVbxOIqIw1g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oXIEkoWy; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=Rv4xmEiTYrTgU/gXfH+2ut322wUyrib5th3dklbwaAO2iGyBkjZVBTTJrrdYEWMTzD4aZLmsucM56sC9OTEUQ1xKs1lY4SQat9DHsWyIvm9dwRzBLJFfbpuYbFdIlE58REGCFohNvwwaPRsJJf1EWYOgQm1QSYE6bO1VvC1Z7Kg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HpxQ/he4; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oXIEkoWy"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 187B41F000E9;
-	Wed, 26 Aug 2026 16:04:29 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HpxQ/he4"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 931B61F000E9;
+	Thu, 27 Aug 2026 12:52:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787760282;
-	bh=Y8nG5Q59DmZU2W8YTNmb9FicIVaa2DhnYG0xPHeq4QM=;
+	s=k20260515; t=1787835181;
+	bh=Jv30IeE2s+n2A5GRghn5mbNA+ntwEskVEvnsJS/gqNQ=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=oXIEkoWyhVF9O0ycvD4nLcJ11qe08oUKMmfsiwjwiio2a2VH9xvNqubdjmcmWTP9Y
-	 Bht9x/Wh39srsO4PB1OUiOIMYnQJNw1rxz0UhlitqScVm4QP2xUmeqyFmxvbmD6H6M
-	 kt9kyXF+EC9RJcq8TMqglLQPNm6bdQ06SQqHx1Z9z3r8g8FxbaFGdkeBT5grkeoVpo
-	 Wjh0jIhz6u6ZhOyO3gaXtFcf/O1sDe316jbE8/QJ2LREUwww1zshVu3Tz7Y4W0Xi4Z
-	 4Ij1967veWkgHclJ/mMqCWTw7xLAV0C+J/wS/qReNpbtyGnhlW1ipRQRU3rbwe9iB3
-	 imPHWJcoQmQfw==
-Date: Wed, 26 Aug 2026 17:04:28 +0100
-From: Conor Dooley <conor@kernel.org>
+	b=HpxQ/he4c1l/67bjg6zHCWSh7AxGIRhKnrX19FKhID1R0BcbkibPRl+2xW0tbC0ak
+	 hJFvx1qCJqhl53iZGTG/JR7u301HQSljASB0swdFEdVZiKibGOnJN2iCVJHXEYbnTf
+	 GTCBUKdpsBjmlMtHpvbarSgA6dZyeIoEjTP+/Oeo1lq7Q8tVwMRTyOl2wZZNfvhYA1
+	 9RM2gDKmt7oe1am3axpJpa781gtZmH8OBSvfT08Xeg0hRghVLZPfZNQDoRaVSKZks6
+	 UT3rnJOuGjx34CvvC3Nvte8iWDqvxO3jI9R1oIEGE2wOgx6fk6r/6aGuzyfLhzB/cZ
+	 qVz1y3R5ubGhg==
+Date: Thu, 27 Aug 2026 13:52:45 +0100
+From: Lee Jones <lee@kernel.org>
 To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
 	Mike Leach <mike.leach@arm.com>,
@@ -57,7 +57,7 @@ Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
 	Mauro Carvalho Chehab <mchehab@kernel.org>,
 	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
 	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>, Lee Jones <lee@kernel.org>,
+	Fabio Estevam <festevam@gmail.com>,
 	Xiaowei Song <songxiaowei@hisilicon.com>,
 	Binghui Wang <wangbinghui@hisilicon.com>,
 	Bjorn Helgaas <bhelgaas@google.com>,
@@ -89,7 +89,7 @@ Cc: Suzuki K Poulose <suzuki.poulose@arm.com>,
 	linux-pm@vger.kernel.org
 Subject: Re: [PATCH] dt-bindings: Drop redundant white-space around values in
  <>
-Message-ID: <20260826-frequent-parchment-b8baeeafd583@spud>
+Message-ID: <20260827125245.GI770273@google.com>
 References: <20260826102044.142986-2-krzysztof.kozlowski@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
@@ -97,40 +97,37 @@ List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="P8HG2tUakdLhQuVM"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 In-Reply-To: <20260826102044.142986-2-krzysztof.kozlowski@oss.qualcomm.com>
 
---P8HG2tUakdLhQuVM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 26 Aug 2026, Krzysztof Kozlowski wrote:
 
-On Wed, Aug 26, 2026 at 12:20:45PM +0200, Krzysztof Kozlowski wrote:
 > Correct a few white-space issues around <>, which will be flagged by
 > dt-check-style.  No functional changes.
-
-Tool seems pretty useful!
-
-Acked-by: Conor Dooley <conor.dooley@microchip.com>
-
->=20
+> 
 > Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
->=20
+> 
 > ---
->=20
+> 
 > Rob, Can you take it directly?
+> ---
+>  .../bindings/arm/arm,coresight-cti.yaml       |  2 +-
+>  .../bindings/display/bridge/sil,sii9022.yaml  |  2 +-
+>  .../bindings/i2c/xlnx,xps-iic-2.00.a.yaml     |  4 ++--
+>  .../bindings/iio/light/upisemi,us5182.yaml    |  2 +-
+>  .../bindings/input/matrix-keymap.yaml         |  3 +--
+>  .../devicetree/bindings/input/ti,tca8418.yaml | 21 +++++++++----------
+>  .../bindings/media/nxp,imx8-jpeg.yaml         |  4 ++--
+>  .../devicetree/bindings/mfd/ti,tps65910.yaml  |  2 +-
 
---P8HG2tUakdLhQuVM
-Content-Type: application/pgp-signature; name=signature.asc
+Acked-by: Lee Jones <lee@kernel.org>
 
------BEGIN PGP SIGNATURE-----
+>  .../bindings/pci/hisilicon,kirin-pcie.yaml    |  4 ++--
+>  .../pinctrl/sunplus,sp7021-pinctrl.yaml       |  2 +-
+>  .../bindings/spi/aspeed,ast2600-fmc.yaml      |  6 +++---
+>  .../bindings/thermal/thermal-idle.yaml        |  2 +-
+>  12 files changed, 26 insertions(+), 28 deletions(-)
 
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCao8OjAAKCRB4tDGHoIJi
-0tqoAP9QAMmXPklodIMJgwkYAyiHY6wJXbsca2yegWqjDpaZ8gEAzCaVWA0HkeeD
-+jnyIqHP/qOtLch52tvPYIHhTjCRRQ8=
-=3be7
------END PGP SIGNATURE-----
-
---P8HG2tUakdLhQuVM--
+-- 
+Lee Jones
