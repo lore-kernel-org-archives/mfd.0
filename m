@@ -1,43 +1,44 @@
-Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
+Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6CA4544E656
-	for <mfd@lists.linux.dev>; Fri, 28 Aug 2026 13:48:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=210.118.77.12
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A32EF46DFE8
+	for <mfd@lists.linux.dev>; Fri, 28 Aug 2026 13:48:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=210.118.77.11
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787924924; cv=none; b=rp6VEnBx4RQCmaBVc+O4m8+U8ccfzli1BG+EsGj7zxReLN04YtIQ/Pb3Nw0twjziLJM+IUeeypUqgOC0YiTI9jbFop4eBaZsxTmTgbDyBwpOufMwGsUPIeOB7eKT8C5Y20pFEq0Hg4JUK5hbMk/cFji0sthrftGHKqrKMZ5U1y0=
+	t=1787924924; cv=none; b=pUZLhBN8mpJouGcz/0VkfzeOvX1eJ8F35ygwxSocpLp1x1spDQEiTcG5YKmrYDoeFDmgahF9i5GEOakezeEVuKXpBDEyRIKDUgDbI2IaOy8Eglf2W0w2Kl4WkrnN99yS5pQpUPK4ohJGFLEKFIH9fw5p6rd65HjV01yNBfH2DZc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1787924924; c=relaxed/simple;
-	bh=kSyhTKlr46CyUazCxhC4JQnUXR2crmr2/pVYdBbYRmw=;
+	bh=7W0xWyhfKVVIoWLKnehFojycB/3vxqvNCvz0CxAplc4=;
 	h=From:Date:Subject:MIME-Version:Message-Id:In-Reply-To:To:Cc:
-	 Content-Type:References; b=HQrllklBjPw1boo0zz9cqsE1jNtYfaq9zOt5j9dmEMn9rQwuK6hgcgHF6vUzFvG6hyvMt1EdnO9zyWyuVYgD+seGU5W/jFoTb8j1VwKdL+v+vIc1trzIYVb8Pk1e+KlkZ1jfGTgE1ZTFKF0stk6X+nzDGM2tocUpbiID+MOcwg0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=JLIHAHbN; arc=none smtp.client-ip=210.118.77.12
+	 Content-Type:References; b=hL7xWAPUl6xWdu1a3BzpHnJNIHcQ3FMM6cp0NaCX3P6kGW/7V0MUv8MIT+TeUgl7WWGZKIdgBJ5ppFAG99QB2KYGEd6GxpOAgUQVxxvPqD1diBXEuepv8UlKRazF5HBVxbWRvuUZiCkcrYkp5bokUO3SET5OBKPcTn/KIczQiXY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=OuSE0sbB; arc=none smtp.client-ip=210.118.77.11
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="JLIHAHbN"
+	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="OuSE0sbB"
 Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
-	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20260828134834euoutp0279ae8654007bb31aa0e6bbb580aafd3f~P-DyTvJ1t2566925669euoutp02i;
-	Fri, 28 Aug 2026 13:48:34 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20260828134834euoutp0279ae8654007bb31aa0e6bbb580aafd3f~P-DyTvJ1t2566925669euoutp02i
+	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20260828134839euoutp0176e5981555e5cf18da35671d55adc57f~P-D3mrIux3071330713euoutp01G;
+	Fri, 28 Aug 2026 13:48:39 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20260828134839euoutp0176e5981555e5cf18da35671d55adc57f~P-D3mrIux3071330713euoutp01G
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1787924914;
-	bh=izBZNDHydZtZsP3f9EIyugq6OHKRvXuVqz8xHReuyb8=;
+	s=mail20170921; t=1787924919;
+	bh=FVW+IthoCWYlGIWY+ho3Ua+WhD1ThrlaWSmrCvvW92g=;
 	h=From:Date:Subject:In-Reply-To:To:Cc:References:From;
-	b=JLIHAHbNmKKXs2XXdiYTxPlEvTPB5VDhDPRUWfuv+pW8RUlFlj3pRHG6+FvEANGvn
-	 AHPPMrQQUBhU3Ac/8ZPz4h9wLMWdZDvJwZ4IKcnhhzJMfeWbSdWWnqmR1jL+i9hNEQ
-	 Lv1ZC5eKHfswZKa1piLv+HRRRmFlSgW/DDUE/M+U=
+	b=OuSE0sbBIBJD46bR7asK+3q7aNIhwrj+7X9uqtSd/iGUiGfnamLcZjVmRk4ajVilC
+	 HxYHxF2Ldm8kD8ZOwp5I8BNJJEanm3Hi9c1tR4mJq6jiHv4B/F93l2YT2RicptC16K
+	 JaYru0mWVgEJAS2xFjukcC0BD8Jjqm2emzCOSBpk=
 Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
 	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
-	20260828134833eucas1p2b3a442d07d7d86d0f82379bc4ecbe62a~P-Dx6ZzSF2729427294eucas1p2-;
-	Fri, 28 Aug 2026 13:48:33 +0000 (GMT)
+	20260828134839eucas1p2d19363d17d4dbf5a7ae5228444af16fa~P-D29-efo2418124181eucas1p28;
+	Fri, 28 Aug 2026 13:48:39 +0000 (GMT)
 Received: from AMDC4942.eu.corp.samsungelectronics.net (unknown
 	[106.210.136.40]) by eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
-	20260828134832eusmtip11c6327673c8c8eaa071d498e05f7e0d7~P-DwU438m2815728157eusmtip1E;
-	Fri, 28 Aug 2026 13:48:32 +0000 (GMT)
+	20260828134837eusmtip1b44523cdf3362d057bfa273a1f379f7d~P-D1W3mg42856028560eusmtip15;
+	Fri, 28 Aug 2026 13:48:37 +0000 (GMT)
 From: Michal Wilczynski <m.wilczynski@samsung.com>
-Date: Fri, 28 Aug 2026 15:47:35 +0200
-Subject: [PATCH v2 11/15] phy: Add common Innosilicon HDMI PHY helpers
+Date: Fri, 28 Aug 2026 15:47:38 +0200
+Subject: [PATCH v2 14/15] riscv: dts: starfive: jh7110: Update DT for
+ display subsystem
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -45,7 +46,7 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260828-jh7110-clean-send-v2-11-331680c8b9d1@samsung.com>
+Message-Id: <20260828-jh7110-clean-send-v2-14-331680c8b9d1@samsung.com>
 In-Reply-To: <20260828-jh7110-clean-send-v2-0-331680c8b9d1@samsung.com>
 To: Vinod Koul <vkoul@kernel.org>,  Neil Armstrong
 	<neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>,  Krzysztof
@@ -74,460 +75,326 @@ Cc: linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
 	Spierings <maudspierings@gocontroll.com>,  Graham Markall
 	<hello@big-grey.co.uk>,  Michal Wilczynski <m.wilczynski@samsung.com>
 X-Mailer: b4 0.15-dev
-X-CMS-MailID: 20260828134833eucas1p2b3a442d07d7d86d0f82379bc4ecbe62a
+X-CMS-MailID: 20260828134839eucas1p2d19363d17d4dbf5a7ae5228444af16fa
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20260828134833eucas1p2b3a442d07d7d86d0f82379bc4ecbe62a
+X-RootMTR: 20260828134839eucas1p2d19363d17d4dbf5a7ae5228444af16fa
 X-EPHeader: CA
-X-CMS-RootMailID: 20260828134833eucas1p2b3a442d07d7d86d0f82379bc4ecbe62a
+X-CMS-RootMailID: 20260828134839eucas1p2d19363d17d4dbf5a7ae5228444af16fa
 References: <20260828-jh7110-clean-send-v2-0-331680c8b9d1@samsung.com>
-	<CGME20260828134833eucas1p2b3a442d07d7d86d0f82379bc4ecbe62a@eucas1p2.samsung.com>
+	<CGME20260828134839eucas1p2d19363d17d4dbf5a7ae5228444af16fa@eucas1p2.samsung.com>
 
-The Innosilicon HDMI PHY IP is used by several SoCs. They differ in
-where the PHY register block sits in the register space and in which
-pixel clocks they support, but the pre-PLL programming sequence and the
-layout of its registers are the same.
+Activate the display subsystem by adding the dc8200, hdmi and voutcrg
+nodes as direct soc children. Each references the PD_VOUT power domain
+through power-domains, so genpd powers the domain on demand, and the
+HDMI-PHY -> voutcrg -> HDMI-controller probe order is resolved by
+deferred probe.
 
-Add a small library holding that shared part: the pre-PLL configuration
-table format, a lookup, clk_ops determine_rate and recalc_rate helpers,
-and the pre-PLL register programming. Callers pass a regmap, a register
-offset for the PHY block, and their own pixel clock table.
+The monolithic hdmi node is modelled as a container with hdmi_phy
+and hdmi_controller children. This lets the PHY (clock provider,
+depending only on xin24m) and the controller (clock consumer) probe
+independently, breaking the circular clock dependency with voutcrg.
 
-No driver uses it yet; the users are converted separately.
+voutcrg consumes the pixel clock from the &hdmi_phy node instead of the
+old fixed-clock, and dc8200 gets its pixel clocks from voutcrg's MUXes
+and is marked dma-noncoherent for framebuffer DMA. The old, incorrect
+hdmitx0-pixel-clock fixed-clock node is removed.
 
+Co-developed-by: Dominique Belhachemi <db@domibel.de>
+Signed-off-by: Dominique Belhachemi <db@domibel.de>
 Signed-off-by: Michal Wilczynski <m.wilczynski@samsung.com>
 ---
- drivers/phy/Kconfig               |   8 +
- drivers/phy/Makefile              |   1 +
- drivers/phy/phy-inno-hdmi.c       | 297 ++++++++++++++++++++++++++++++++++++++
- include/linux/phy/inno-hdmi-phy.h |  85 +++++++++++
- 4 files changed, 391 insertions(+)
+ arch/riscv/boot/dts/starfive/jh7110-common.dtsi | 119 +++++++++++++++++++++++-
+ arch/riscv/boot/dts/starfive/jh7110.dtsi        |  87 +++++++++++++++--
+ 2 files changed, 196 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/phy/Kconfig b/drivers/phy/Kconfig
-index 19f3b7d12b7d492d16000fa52483dc5002590d7a..0e973b3b02a30704d339db9f15d4695bcbec1c75 100644
---- a/drivers/phy/Kconfig
-+++ b/drivers/phy/Kconfig
-@@ -168,6 +168,14 @@ config PHY_XGENE
- 	help
- 	  This option enables support for APM X-Gene SoC multi-purpose PHY.
+diff --git a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+index a7a1c09a2c9075711f3a214a49618911fdc7b421..7aadc35f4a6aa724c86a868ef65c5c829e666ee2 100644
+--- a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
++++ b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+@@ -33,6 +33,25 @@ memory@40000000 {
+ 		bootph-pre-ram;
+ 	};
  
-+config PHY_INNO_HDMI
-+	tristate
-+	depends on GENERIC_PHY
-+	select REGMAP
-+	help
-+	  Common helpers for the Innosilicon HDMI PHY, shared by the SoC
-+	  drivers that instantiate it. Selected by those drivers.
++	reserved-memory {
++		#address-cells = <2>;
++		#size-cells = <2>;
++		ranges;
 +
- source "drivers/phy/allwinner/Kconfig"
- source "drivers/phy/amlogic/Kconfig"
- source "drivers/phy/apple/Kconfig"
-diff --git a/drivers/phy/Makefile b/drivers/phy/Makefile
-index d7aa516bcc49e7662c9c9db421833fe591dfbc05..e93c473dfc6d837ed6ba540f0b0204a0d68d25bf 100644
---- a/drivers/phy/Makefile
-+++ b/drivers/phy/Makefile
-@@ -7,6 +7,7 @@ obj-$(CONFIG_PHY_COMMON_PROPS)		+= phy-common-props.o
- obj-$(CONFIG_PHY_COMMON_PROPS_TEST)	+= phy-common-props-test.o
- obj-$(CONFIG_GENERIC_PHY)		+= phy-core.o
- obj-$(CONFIG_GENERIC_PHY_MIPI_DPHY)	+= phy-core-mipi-dphy.o
-+obj-$(CONFIG_PHY_INNO_HDMI)		+= phy-inno-hdmi.o
- obj-$(CONFIG_PHY_AIROHA_PCIE)		+= phy-airoha-pcie.o
- obj-$(CONFIG_PHY_CAN_TRANSCEIVER)	+= phy-can-transceiver.o
- obj-$(CONFIG_PHY_ECONET_PCIE)		+= phy-econet-pcie.o
-diff --git a/drivers/phy/phy-inno-hdmi.c b/drivers/phy/phy-inno-hdmi.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..deb2b73a86f5d6be96dedc818c39777904eb37ee
---- /dev/null
-+++ b/drivers/phy/phy-inno-hdmi.c
-@@ -0,0 +1,297 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Common helpers for the Innosilicon HDMI PHY.
-+ *
-+ * Copyright (c) 2017 Rockchip Electronics Co. Ltd.
-+ * Copyright (c) 2025 Samsung Electronics Co., Ltd.
-+ *
-+ * Author: Zheng Yang <zhengyang@rock-chips.com>
-+ * Author: Michal Wilczynski <m.wilczynski@samsung.com>
-+ *
-+ * Derived from drivers/phy/rockchip/phy-rockchip-inno-hdmi.c.
-+ *
-+ * The same PHY IP is used by several SoCs, which differ in where the PHY
-+ * register block sits and in the pixel clock table they support, but share
-+ * the pre-PLL programming sequence.
-+ */
++		/* vout applies for space from this CMA
++		 * Without this CMA reservation,
++		 * vout may not work properly.
++		 */
++		linux,cma {
++			compatible = "shared-dma-pool";
++			reusable;
++			size = <0x0 0x20000000>;
++			alignment = <0x0 0x1000>;
++			alloc-ranges = <0x0 0x70000000 0x0 0x20000000>;
++			linux,cma-default;
++		};
++	};
 +
-+#include <linux/bitfield.h>
-+#include <linux/bits.h>
-+#include <linux/clk-provider.h>
-+#include <linux/errno.h>
-+#include <linux/export.h>
-+#include <linux/iopoll.h>
-+#include <linux/math64.h>
-+#include <linux/module.h>
-+#include <linux/regmap.h>
+ 	gpio-restart {
+ 		compatible = "gpio-restart";
+ 		gpios = <&sysgpio 35 GPIO_ACTIVE_HIGH>;
+@@ -73,12 +92,47 @@ codec {
+ 			};
+ 		};
+ 	};
 +
-+#include <linux/phy/inno-hdmi-phy.h>
++	hdmi-connector {
++		compatible = "hdmi-connector";
++		type = "a";
 +
-+#define INNO_PRE_PLL_CONTROL			0xa0
-+#define INNO_PRE_PLL_POWER_DOWN			BIT(0)
-+#define INNO_PCLK_VCO_DIV_5_MASK		BIT(1)
-+#define INNO_PCLK_VCO_DIV_5(x)			FIELD_PREP(BIT(1), x)
++		port {
++			hdmi_con_in: endpoint {
++				remote-endpoint = <&hdmi_out_con>;
++			};
++		};
++	};
+ };
+ 
+ &cpus {
+ 	timebase-frequency = <4000000>;
+ };
+ 
++&dc8200 {
++	status = "okay";
 +
-+#define INNO_PRE_PLL_DIV_1			0xa1
-+#define INNO_PRE_PLL_PRE_DIV_MASK		GENMASK(5, 0)
-+#define INNO_PRE_PLL_PRE_DIV(x)			FIELD_PREP(GENMASK(5, 0), x)
++	ports {
++		#address-cells = <1>;
++		#size-cells = <0>;
 +
-+#define INNO_PRE_PLL_DIV_2			0xa2
-+#define INNO_SPREAD_SPECTRUM_MOD_DISABLE	BIT(6)
-+#define INNO_PRE_PLL_FRAC_DIV_DISABLE		FIELD_PREP(GENMASK(5, 4), 3)
-+#define INNO_PRE_PLL_FB_DIV_11_8_MASK		GENMASK(3, 0)
-+#define INNO_PRE_PLL_FB_DIV_11_8(x)		FIELD_PREP(GENMASK(3, 0), (x) >> 8)
++		dpu_port0: port@0 {
++			reg = <0>;
++			#address-cells = <1>;
++			#size-cells = <0>;
 +
-+#define INNO_PRE_PLL_DIV_3			0xa3
-+#define INNO_PRE_PLL_FB_DIV_7_0(x)		FIELD_PREP(GENMASK(7, 0), x)
++			dpu_out_dpi0: endpoint@0 {
++				reg = <0>;
++				remote-endpoint = <&hdmi_in>;
++			};
++		};
 +
-+#define INNO_PRE_PLL_TMDSCLK_DIV		0xa4
-+#define INNO_PRE_PLL_TMDSCLK_DIV_C(x)		FIELD_PREP(GENMASK(1, 0), x)
-+#define INNO_PRE_PLL_TMDSCLK_DIV_B(x)		FIELD_PREP(GENMASK(3, 2), x)
-+#define INNO_PRE_PLL_TMDSCLK_DIV_A(x)		FIELD_PREP(GENMASK(5, 4), x)
-+
-+#define INNO_PCLK_DIV_AB			0xa5
-+#define INNO_PCLK_DIV_B_MASK			GENMASK(6, 5)
-+#define INNO_PCLK_DIV_B(x)			FIELD_PREP(GENMASK(6, 5), x)
-+#define INNO_PCLK_DIV_A_MASK			GENMASK(4, 0)
-+#define INNO_PCLK_DIV_A(x)			FIELD_PREP(GENMASK(4, 0), x)
-+
-+#define INNO_PCLK_DIV_CD			0xa6
-+#define INNO_PCLK_DIV_C(x)			FIELD_PREP(GENMASK(6, 5), x)
-+#define INNO_PCLK_DIV_D_MASK			GENMASK(4, 0)
-+#define INNO_PCLK_DIV_D(x)			FIELD_PREP(GENMASK(4, 0), x)
-+
-+#define INNO_PRE_PLL_LOCK_STATUS		0xa9
-+#define INNO_PRE_PLL_LOCK			BIT(0)
-+
-+#define INNO_PRE_PLL_FRAC_DIV_23_16		0xd1
-+#define INNO_PRE_PLL_FRAC_DIV_15_8		0xd2
-+#define INNO_PRE_PLL_FRAC_DIV_7_0		0xd3
-+#define INNO_PRE_PLL_FRAC_DIV(x)		FIELD_PREP(GENMASK(7, 0), x)
-+
-+#define INNO_FRAC_DIV_WIDTH			24
-+
-+static unsigned int inno_reg(const struct inno_hdmi_phy_pre_pll *pll,
-+			     unsigned int reg)
-+{
-+	return (pll->offset + reg) * 4;
-+}
-+
-+static void inno_write(const struct inno_hdmi_phy_pre_pll *pll,
-+		       unsigned int reg, u8 val)
-+{
-+	regmap_write(pll->regmap, inno_reg(pll, reg), val);
-+}
-+
-+static u8 inno_read(const struct inno_hdmi_phy_pre_pll *pll, unsigned int reg)
-+{
-+	unsigned int val;
-+
-+	regmap_read(pll->regmap, inno_reg(pll, reg), &val);
-+
-+	return val;
-+}
-+
-+static void inno_update_bits(const struct inno_hdmi_phy_pre_pll *pll,
-+			     unsigned int reg, u8 mask, u8 val)
-+{
-+	regmap_update_bits(pll->regmap, inno_reg(pll, reg), mask, val);
-+}
-+
-+/**
-+ * inno_hdmi_phy_pre_pll_lookup - find the settings for a pixel clock
-+ * @pll: pre-PLL instance
-+ * @pixclock: requested pixel clock, in Hz
-+ * @tmdsclock: requested TMDS clock, in Hz
-+ *
-+ * Return: the matching table entry, or an ERR_PTR if the PHY cannot generate
-+ * the requested combination.
-+ */
-+const struct inno_hdmi_phy_pre_pll_config *
-+inno_hdmi_phy_pre_pll_lookup(const struct inno_hdmi_phy_pre_pll *pll,
-+			     unsigned long pixclock, unsigned long tmdsclock)
-+{
-+	const struct inno_hdmi_phy_pre_pll_config *cfg;
-+
-+	for (cfg = pll->table; cfg->pixclock != 0; cfg++)
-+		if (cfg->pixclock == pixclock && cfg->tmdsclock == tmdsclock)
-+			return cfg;
-+
-+	return ERR_PTR(-EINVAL);
-+}
-+EXPORT_SYMBOL_GPL(inno_hdmi_phy_pre_pll_lookup);
-+
-+/**
-+ * inno_hdmi_phy_pre_pll_determine_rate - clk_ops.determine_rate helper
-+ * @pll: pre-PLL instance
-+ * @req: rate request, updated with the rate the PHY would produce
-+ *
-+ * The PHY can only generate the pixel clocks described by its table, so a
-+ * request that does not appear there is rejected rather than rounded.
-+ *
-+ * Return: 0 on success, -EINVAL if the rate is not supported.
-+ */
-+int inno_hdmi_phy_pre_pll_determine_rate(const struct inno_hdmi_phy_pre_pll *pll,
-+					 struct clk_rate_request *req)
-+{
-+	const struct inno_hdmi_phy_pre_pll_config *cfg;
-+	unsigned long rate = rounddown(req->rate, 1000);
-+
-+	for (cfg = pll->table; cfg->pixclock != 0; cfg++) {
-+		if (cfg->pixclock == rate) {
-+			req->rate = cfg->pixclock;
-+			return 0;
-+		}
-+	}
-+
-+	return -EINVAL;
-+}
-+EXPORT_SYMBOL_GPL(inno_hdmi_phy_pre_pll_determine_rate);
-+
-+/**
-+ * inno_hdmi_phy_pre_pll_recalc_rate - clk_ops.recalc_rate helper
-+ * @pll: pre-PLL instance
-+ * @parent_rate: rate of the reference clock, in Hz
-+ *
-+ * Return: the pixel clock the pre-PLL is currently programmed for, in Hz.
-+ */
-+unsigned long
-+inno_hdmi_phy_pre_pll_recalc_rate(const struct inno_hdmi_phy_pre_pll *pll,
-+				  unsigned long parent_rate)
-+{
-+	u8 nd, no_a, no_b, no_d;
-+	unsigned long frac;
-+	u64 vco;
-+	u16 nf;
-+
-+	nd = inno_read(pll, INNO_PRE_PLL_DIV_1) & INNO_PRE_PLL_PRE_DIV_MASK;
-+	nf = (inno_read(pll, INNO_PRE_PLL_DIV_2) &
-+	      INNO_PRE_PLL_FB_DIV_11_8_MASK) << 8;
-+	nf |= inno_read(pll, INNO_PRE_PLL_DIV_3);
-+	vco = parent_rate * nf;
-+
-+	if (!(inno_read(pll, INNO_PRE_PLL_DIV_2) &
-+	      INNO_PRE_PLL_FRAC_DIV_DISABLE)) {
-+		frac = inno_read(pll, INNO_PRE_PLL_FRAC_DIV_7_0) |
-+		       (inno_read(pll, INNO_PRE_PLL_FRAC_DIV_15_8) << 8) |
-+		       (inno_read(pll, INNO_PRE_PLL_FRAC_DIV_23_16) << 16);
-+		vco += DIV_ROUND_CLOSEST(parent_rate * frac,
-+					 BIT(INNO_FRAC_DIV_WIDTH));
-+	}
-+
-+	if (inno_read(pll, INNO_PRE_PLL_CONTROL) & INNO_PCLK_VCO_DIV_5_MASK) {
-+		do_div(vco, nd * 5);
-+	} else {
-+		no_a = inno_read(pll, INNO_PCLK_DIV_AB) & INNO_PCLK_DIV_A_MASK;
-+		no_b = FIELD_GET(INNO_PCLK_DIV_B_MASK,
-+				 inno_read(pll, INNO_PCLK_DIV_AB)) + 2;
-+		no_d = inno_read(pll, INNO_PCLK_DIV_CD) & INNO_PCLK_DIV_D_MASK;
-+
-+		do_div(vco, nd * (no_a == 1 ? no_b : no_a) * no_d * 2);
-+	}
-+
-+	return DIV_ROUND_CLOSEST((unsigned long)vco, 1000) * 1000;
-+}
-+EXPORT_SYMBOL_GPL(inno_hdmi_phy_pre_pll_recalc_rate);
-+
-+/**
-+ * inno_hdmi_phy_pre_pll_configure - program the pre-PLL dividers
-+ * @pll: pre-PLL instance
-+ * @cfg: settings to program
-+ *
-+ * The caller is responsible for powering the pre-PLL down beforehand and back
-+ * up afterwards, and for waiting for it to lock.
-+ */
-+void inno_hdmi_phy_pre_pll_configure(const struct inno_hdmi_phy_pre_pll *pll,
-+				     const struct inno_hdmi_phy_pre_pll_config *cfg)
-+{
-+	u8 val;
-+
-+	inno_update_bits(pll, INNO_PRE_PLL_CONTROL, INNO_PCLK_VCO_DIV_5_MASK,
-+			 INNO_PCLK_VCO_DIV_5(cfg->vco_div_5_en));
-+	inno_write(pll, INNO_PRE_PLL_DIV_1, INNO_PRE_PLL_PRE_DIV(cfg->prediv));
-+
-+	val = INNO_SPREAD_SPECTRUM_MOD_DISABLE;
-+	if (!cfg->fracdiv)
-+		val |= INNO_PRE_PLL_FRAC_DIV_DISABLE;
-+
-+	inno_write(pll, INNO_PRE_PLL_DIV_2,
-+		   INNO_PRE_PLL_FB_DIV_11_8(cfg->fbdiv) | val);
-+	inno_write(pll, INNO_PRE_PLL_DIV_3,
-+		   INNO_PRE_PLL_FB_DIV_7_0(cfg->fbdiv));
-+
-+	inno_write(pll, INNO_PCLK_DIV_AB,
-+		   INNO_PCLK_DIV_A(cfg->pclk_div_a) |
-+		   INNO_PCLK_DIV_B(cfg->pclk_div_b));
-+	inno_write(pll, INNO_PCLK_DIV_CD,
-+		   INNO_PCLK_DIV_C(cfg->pclk_div_c) |
-+		   INNO_PCLK_DIV_D(cfg->pclk_div_d));
-+
-+	inno_write(pll, INNO_PRE_PLL_TMDSCLK_DIV,
-+		   INNO_PRE_PLL_TMDSCLK_DIV_A(cfg->tmds_div_a) |
-+		   INNO_PRE_PLL_TMDSCLK_DIV_B(cfg->tmds_div_b) |
-+		   INNO_PRE_PLL_TMDSCLK_DIV_C(cfg->tmds_div_c));
-+
-+	inno_write(pll, INNO_PRE_PLL_FRAC_DIV_7_0,
-+		   INNO_PRE_PLL_FRAC_DIV(cfg->fracdiv));
-+	inno_write(pll, INNO_PRE_PLL_FRAC_DIV_15_8,
-+		   INNO_PRE_PLL_FRAC_DIV(cfg->fracdiv >> 8));
-+	inno_write(pll, INNO_PRE_PLL_FRAC_DIV_23_16,
-+		   INNO_PRE_PLL_FRAC_DIV(cfg->fracdiv >> 16));
-+}
-+EXPORT_SYMBOL_GPL(inno_hdmi_phy_pre_pll_configure);
-+
-+/**
-+ * inno_hdmi_phy_pre_pll_power_down - power the pre-PLL down or up
-+ * @pll: pre-PLL instance
-+ * @power_down: true to power down, false to power up
-+ */
-+void inno_hdmi_phy_pre_pll_power_down(const struct inno_hdmi_phy_pre_pll *pll,
-+				      bool power_down)
-+{
-+	inno_update_bits(pll, INNO_PRE_PLL_CONTROL, INNO_PRE_PLL_POWER_DOWN,
-+			 power_down ? INNO_PRE_PLL_POWER_DOWN : 0);
-+}
-+EXPORT_SYMBOL_GPL(inno_hdmi_phy_pre_pll_power_down);
-+
-+/**
-+ * inno_hdmi_phy_pre_pll_is_powered - report whether the pre-PLL is powered up
-+ * @pll: pre-PLL instance
-+ */
-+bool inno_hdmi_phy_pre_pll_is_powered(const struct inno_hdmi_phy_pre_pll *pll)
-+{
-+	return !(inno_read(pll, INNO_PRE_PLL_CONTROL) & INNO_PRE_PLL_POWER_DOWN);
-+}
-+EXPORT_SYMBOL_GPL(inno_hdmi_phy_pre_pll_is_powered);
-+
-+/**
-+ * inno_hdmi_phy_pre_pll_is_locked - report whether the pre-PLL has locked
-+ * @pll: pre-PLL instance
-+ */
-+bool inno_hdmi_phy_pre_pll_is_locked(const struct inno_hdmi_phy_pre_pll *pll)
-+{
-+	return inno_read(pll, INNO_PRE_PLL_LOCK_STATUS) & INNO_PRE_PLL_LOCK;
-+}
-+EXPORT_SYMBOL_GPL(inno_hdmi_phy_pre_pll_is_locked);
-+
-+/**
-+ * inno_hdmi_phy_pre_pll_wait_locked - wait for the pre-PLL to lock
-+ * @pll: pre-PLL instance
-+ * @timeout_us: how long to wait, in microseconds
-+ *
-+ * Return: 0 once locked, -ETIMEDOUT otherwise.
-+ */
-+int inno_hdmi_phy_pre_pll_wait_locked(const struct inno_hdmi_phy_pre_pll *pll,
-+				      unsigned int timeout_us)
-+{
-+	unsigned int val;
-+
-+	return regmap_read_poll_timeout(pll->regmap,
-+					inno_reg(pll, INNO_PRE_PLL_LOCK_STATUS),
-+					val, val & INNO_PRE_PLL_LOCK,
-+					1000, timeout_us);
-+}
-+EXPORT_SYMBOL_GPL(inno_hdmi_phy_pre_pll_wait_locked);
-+
-+MODULE_DESCRIPTION("Innosilicon HDMI PHY common helpers");
-+MODULE_LICENSE("GPL");
-diff --git a/include/linux/phy/inno-hdmi-phy.h b/include/linux/phy/inno-hdmi-phy.h
-new file mode 100644
-index 0000000000000000000000000000000000000000..e13911e1a18437cf9cefa43dac494caeb2935782
---- /dev/null
-+++ b/include/linux/phy/inno-hdmi-phy.h
-@@ -0,0 +1,85 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Common helpers for the Innosilicon HDMI PHY.
-+ *
-+ * Copyright (c) 2017 Rockchip Electronics Co. Ltd.
-+ * Copyright (c) 2025 Samsung Electronics Co., Ltd.
-+ *
-+ * Author: Zheng Yang <zhengyang@rock-chips.com>
-+ * Author: Michal Wilczynski <m.wilczynski@samsung.com>
-+ *
-+ * Derived from drivers/phy/rockchip/phy-rockchip-inno-hdmi.c.
-+ */
-+
-+#ifndef __PHY_INNO_HDMI_H__
-+#define __PHY_INNO_HDMI_H__
-+
-+#include <linux/types.h>
-+
-+struct clk_rate_request;
-+struct regmap;
-+
-+/**
-+ * struct inno_hdmi_phy_pre_pll_config - pre-PLL settings for one pixel clock
-+ * @pixclock: pixel clock this entry describes, in Hz
-+ * @tmdsclock: TMDS clock this entry describes, in Hz
-+ * @prediv: pre-PLL reference divider
-+ * @fbdiv: pre-PLL feedback divider
-+ * @tmds_div_a: TMDS clock divider A
-+ * @tmds_div_b: TMDS clock divider B
-+ * @tmds_div_c: TMDS clock divider C
-+ * @pclk_div_a: pixel clock divider A
-+ * @pclk_div_b: pixel clock divider B
-+ * @pclk_div_c: pixel clock divider C
-+ * @pclk_div_d: pixel clock divider D
-+ * @vco_div_5_en: divide the VCO output by five
-+ * @fracdiv: pre-PLL fractional divider, zero to use integer mode
-+ */
-+struct inno_hdmi_phy_pre_pll_config {
-+	unsigned long pixclock;
-+	unsigned long tmdsclock;
-+	u8 prediv;
-+	u16 fbdiv;
-+	u8 tmds_div_a;
-+	u8 tmds_div_b;
-+	u8 tmds_div_c;
-+	u8 pclk_div_a;
-+	u8 pclk_div_b;
-+	u8 pclk_div_c;
-+	u8 pclk_div_d;
-+	u8 vco_div_5_en;
-+	u32 fracdiv;
++		dpu_port1: port@1 {
++			reg = <1>;
++		};
++	};
 +};
 +
-+/**
-+ * struct inno_hdmi_phy_pre_pll - a pre-PLL instance
-+ * @regmap: register map covering the PHY registers
-+ * @offset: offset of the PHY register block, in units of the register index.
-+ *	    Zero where the PHY block starts the register space, 0x100 on the
-+ *	    StarFive JH7110 where it is preceded by the HDMI controller.
-+ * @table: pixel clock table, terminated by an entry with a zero pixclock
-+ */
-+struct inno_hdmi_phy_pre_pll {
-+	struct regmap *regmap;
-+	unsigned int offset;
-+	const struct inno_hdmi_phy_pre_pll_config *table;
+ &dvp_clk {
+ 	clock-frequency = <74250000>;
+ };
+@@ -99,8 +153,31 @@ &gmac1_rmii_refin {
+ 	clock-frequency = <50000000>;
+ };
+ 
+-&hdmitx0_pixelclk {
+-	clock-frequency = <297000000>;
++&hdmi_controller {
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&hdmi_pins>;
++
++	ports {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		port@0 {
++			reg = <0>;
++
++			hdmi_in: endpoint {
++				remote-endpoint = <&dpu_out_dpi0>;
++			};
++		};
++
++		hdmi_out_port: port@1 {
++			reg = <1>;
++			hdmi_out_con: endpoint {
++				remote-endpoint = <&hdmi_con_in>;
++			};
++
++		};
++	};
+ };
+ 
+ &i2srx_bclk_ext {
+@@ -351,6 +428,40 @@ &syscrg {
+ };
+ 
+ &sysgpio {
++	hdmi_pins: hdmi-0 {
++		hdmi-cec-pins {
++			pinmux = <GPIOMUX(14, GPOUT_SYS_HDMI_CEC_SDA,
++					      GPOEN_SYS_HDMI_CEC_SDA,
++					      GPI_SYS_HDMI_CEC_SDA)>;
++			input-enable;
++			bias-pull-up;
++		};
++
++		hdmi-hpd-pins {
++			pinmux = <GPIOMUX(15, GPOUT_HIGH,
++					      GPOEN_ENABLE,
++					      GPI_SYS_HDMI_HPD)>;
++			input-enable;
++			bias-disable; /* external pull-up */
++		};
++
++		hdmi-scl-pins {
++			pinmux = <GPIOMUX(0, GPOUT_SYS_HDMI_DDC_SCL,
++					     GPOEN_SYS_HDMI_DDC_SCL,
++					     GPI_SYS_HDMI_DDC_SCL)>;
++			input-enable;
++			bias-pull-up;
++		};
++
++		hdmi-sda-pins {
++			pinmux = <GPIOMUX(1, GPOUT_SYS_HDMI_DDC_SDA,
++					     GPOEN_SYS_HDMI_DDC_SDA,
++					     GPI_SYS_HDMI_DDC_SDA)>;
++			input-enable;
++			bias-pull-up;
++		};
++	};
++
+ 	i2c0_pins: i2c0-0 {
+ 		i2c-pins {
+ 			pinmux = <GPIOMUX(57, GPOUT_LOW,
+@@ -629,3 +740,7 @@ &U74_3 {
+ &U74_4 {
+ 	cpu-supply = <&vdd_cpu>;
+ };
++
++&voutcrg {
++	status = "okay";
 +};
+diff --git a/arch/riscv/boot/dts/starfive/jh7110.dtsi b/arch/riscv/boot/dts/starfive/jh7110.dtsi
+index 9c3e4598747eb5541effe697044484715569a285..024e33b0e97cb13928d69d1d8090ed14d22bb022 100644
+--- a/arch/riscv/boot/dts/starfive/jh7110.dtsi
++++ b/arch/riscv/boot/dts/starfive/jh7110.dtsi
+@@ -290,12 +290,6 @@ gmac1_rmii_refin: gmac1-rmii-refin-clock {
+ 		#clock-cells = <0>;
+ 	};
+ 
+-	hdmitx0_pixelclk: hdmitx0-pixel-clock {
+-		compatible = "fixed-clock";
+-		clock-output-names = "hdmitx0_pixelclk";
+-		#clock-cells = <0>;
+-	};
+-
+ 	i2srx_bclk_ext: i2srx-bclk-ext-clock {
+ 		compatible = "fixed-clock";
+ 		clock-output-names = "i2srx_bclk_ext";
+@@ -352,6 +346,13 @@ tdm_ext: tdm-ext-clock {
+ 		#clock-cells = <0>;
+ 	};
+ 
++	xin24m: xin24m {
++		compatible = "fixed-clock";
++		#clock-cells = <0>;
++		clock-frequency = <24000000>;
++		clock-output-names = "xin24m";
++	};
 +
-+const struct inno_hdmi_phy_pre_pll_config *
-+inno_hdmi_phy_pre_pll_lookup(const struct inno_hdmi_phy_pre_pll *pll,
-+			     unsigned long pixclock, unsigned long tmdsclock);
-+int inno_hdmi_phy_pre_pll_determine_rate(const struct inno_hdmi_phy_pre_pll *pll,
-+					 struct clk_rate_request *req);
-+unsigned long
-+inno_hdmi_phy_pre_pll_recalc_rate(const struct inno_hdmi_phy_pre_pll *pll,
-+				  unsigned long parent_rate);
-+void inno_hdmi_phy_pre_pll_configure(const struct inno_hdmi_phy_pre_pll *pll,
-+				     const struct inno_hdmi_phy_pre_pll_config *cfg);
-+void inno_hdmi_phy_pre_pll_power_down(const struct inno_hdmi_phy_pre_pll *pll,
-+				      bool power_down);
-+bool inno_hdmi_phy_pre_pll_is_powered(const struct inno_hdmi_phy_pre_pll *pll);
-+bool inno_hdmi_phy_pre_pll_is_locked(const struct inno_hdmi_phy_pre_pll *pll);
-+int inno_hdmi_phy_pre_pll_wait_locked(const struct inno_hdmi_phy_pre_pll *pll,
-+				      unsigned int timeout_us);
+ 	soc {
+ 		compatible = "simple-bus";
+ 		interrupt-parent = <&plic>;
+@@ -1199,22 +1200,92 @@ csi_phy: phy@19820000 {
+ 			#phy-cells = <0>;
+ 		};
+ 
++		dc8200: display@29400000 {
++			compatible = "verisilicon,dc";
++			reg = <0x0 0x29400000 0x0 0x2800>;
++			interrupts = <95>;
++			dma-noncoherent;
 +
-+#endif /* __PHY_INNO_HDMI_H__ */
++			power-domains = <&pwrc JH7110_PD_VOUT>;
++
++			clocks = <&voutcrg JH7110_VOUTCLK_DC8200_CORE>,
++				<&voutcrg JH7110_VOUTCLK_DC8200_AXI>,
++				<&voutcrg JH7110_VOUTCLK_DC8200_AHB>,
++				<&voutcrg JH7110_VOUTCLK_DC8200_PIX0>,
++				<&voutcrg JH7110_VOUTCLK_DC8200_PIX1>;
++			clock-names = "core", "axi", "ahb", "pix0", "pix1";
++
++			resets = <&voutcrg JH7110_VOUTRST_DC8200_CORE>,
++				 <&voutcrg JH7110_VOUTRST_DC8200_AXI>,
++				 <&voutcrg JH7110_VOUTRST_DC8200_AHB>;
++			reset-names = "core", "axi", "ahb";
++		};
++
++		hdmi_subsystem: hdmi@29590000 {
++			compatible = "starfive,jh7110-hdmi-subsystem";
++			reg = <0x0 0x29590000 0x0 0x4000>;
++
++			/*
++			 * This MFD's PHY child is the first device in the vout
++			 * region to touch registers, so it owns the NoC display
++			 * bus clock + reset that gate access to the region.
++			 * PD_VOUT is powered on by genpd via power-domains.
++			 */
++			power-domains = <&pwrc JH7110_PD_VOUT>;
++			clocks = <&syscrg JH7110_SYSCLK_NOC_BUS_DISP_AXI>;
++			resets = <&syscrg JH7110_SYSRST_NOC_BUS_DISP_AXI>;
++
++			hdmi_phy: phy {
++				compatible = "starfive,jh7110-inno-hdmi-phy";
++
++				clocks = <&xin24m>;
++				clock-names = "refoclk";
++
++				/* Output clock: The variable pixel clock */
++				#clock-cells = <0>;
++				clock-output-names = "hdmi_pclk";
++
++				/* PHY provider for the controller */
++				#phy-cells = <0>;
++			};
++
++			hdmi_controller: controller {
++				compatible = "starfive,jh7110-inno-hdmi-controller";
++				interrupts = <99>;
++
++				clocks = <&voutcrg JH7110_VOUTCLK_HDMI_TX_SYS>,
++					 <&voutcrg JH7110_VOUTCLK_HDMI_TX_MCLK>,
++					 <&voutcrg JH7110_VOUTCLK_HDMI_TX_BCLK>,
++					 <&hdmi_phy>;
++				clock-names = "sys", "mclk", "bclk", "pclk";
++
++				resets = <&voutcrg JH7110_VOUTRST_HDMI_TX_HDMI>;
++				reset-names = "hdmi_tx";
++
++				phys = <&hdmi_phy>;
++				phy-names = "hdmi-phy";
++			};
++		};
++
+ 		voutcrg: clock-controller@295c0000 {
+ 			compatible = "starfive,jh7110-voutcrg";
+ 			reg = <0x0 0x295c0000 0x0 0x10000>;
++
++			power-domains = <&pwrc JH7110_PD_VOUT>;
++
+ 			clocks = <&syscrg JH7110_SYSCLK_VOUT_SRC>,
+ 				 <&syscrg JH7110_SYSCLK_VOUT_TOP_AHB>,
+ 				 <&syscrg JH7110_SYSCLK_VOUT_TOP_AXI>,
+ 				 <&syscrg JH7110_SYSCLK_VOUT_TOP_HDMITX0_MCLK>,
+ 				 <&syscrg JH7110_SYSCLK_I2STX0_BCLK>,
+-				 <&hdmitx0_pixelclk>;
++				 <&hdmi_phy>;
+ 			clock-names = "vout_src", "vout_top_ahb",
+ 				      "vout_top_axi", "vout_top_hdmitx0_mclk",
+ 				      "i2stx0_bclk", "hdmitx0_pixelclk";
++
+ 			resets = <&syscrg JH7110_SYSRST_VOUT_TOP_SRC>;
+ 			#clock-cells = <1>;
+ 			#reset-cells = <1>;
+-			power-domains = <&pwrc JH7110_PD_VOUT>;
+ 		};
+ 
+ 		pcie0: pcie@940000000 {
 
 -- 
 2.34.1
