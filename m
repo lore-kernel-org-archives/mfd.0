@@ -1,44 +1,44 @@
-Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
+Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8484746D2C1
-	for <mfd@lists.linux.dev>; Fri, 28 Aug 2026 13:48:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=210.118.77.12
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 098D746C4BE
+	for <mfd@lists.linux.dev>; Fri, 28 Aug 2026 13:48:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=210.118.77.11
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787924922; cv=none; b=a+E2Af+a2NNoBXpypn1aCcmyIUl0Nv8uqEsC3rMQSIQ/jYpuGJhWYlvP9DYsO+Qk/U4VY9HrAIub/3IXV3JqNOtdlxhwLWeBnOFzcY/IqeF/l+P6jf43vwJLLInGcEo0rhNtppNxzrtQSN4tzeKo6n/Rh3iyTUOpGyWswgY9FU4=
+	t=1787924923; cv=none; b=FXYQ32EP3Oo2q+FkXjCvei/NvWo5u1pSMwSmGH5A30r8/yIJ5/vLkW96IRZ9cezMnp1mVCcITVSwVccXxtaSwyTJMWrYN9m+iOnEEBQTVg+Y1jqc5v6OIzYIN5f+YAtIvA3vHXM/vu6LLFEAzTADxBIvSkCVzhPNFZu3ECtdvag=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787924922; c=relaxed/simple;
-	bh=EHapSsmMSkVfYfo53Mu7ZIXxC9xACaryKG8DHUnwB0E=;
+	s=arc-20240116; t=1787924923; c=relaxed/simple;
+	bh=msBktUPxiu8N/sQq4y7sBLS7PmdTmP6i4M8JIOB3E7E=;
 	h=From:Date:Subject:MIME-Version:Message-Id:In-Reply-To:To:Cc:
-	 Content-Type:References; b=d6iRXT6bvfiBnFkuiB9L5S3WEOeLpvRQeeWQR1x7CbaRBzOwZ+oZVCC19XypSooZnbtq58LBcQO1imwcWvz64zX+DUuON3v+dRy40EXA6+5sbtoEa6RBum59tzE3L+8wSVky65gJlxgc+R/ZRonQfccj0LzLGyZoEKkazLCSo68=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=L8xMPwm/; arc=none smtp.client-ip=210.118.77.12
+	 Content-Type:References; b=GBZaKNqukYdxCs6db7bzZtQ0QEG3qPkfzkvktcYz3aJeVhEsziWopoHIrRD7rt+rvLQuwmBFnMfSUeQbzUti3OUNIvprL7/H0B3Szot1eqU6Q6/NLOKG+wQn2eVp//QIYRPEBkV5gIoBFuEK3OE12OY/JZjLGEEIf9pwnjqJ+9k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=FiRT7odN; arc=none smtp.client-ip=210.118.77.11
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="L8xMPwm/"
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
-	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20260828134830euoutp025596a92c5b2f14e3a49354843aa00eb0~P-DvI9clk2566925669euoutp02f;
-	Fri, 28 Aug 2026 13:48:30 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20260828134830euoutp025596a92c5b2f14e3a49354843aa00eb0~P-DvI9clk2566925669euoutp02f
+	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="FiRT7odN"
+Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
+	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20260828134836euoutp01476015553922c1794938048d8de01381~P-D0WlOPj2677826778euoutp011;
+	Fri, 28 Aug 2026 13:48:36 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20260828134836euoutp01476015553922c1794938048d8de01381~P-D0WlOPj2677826778euoutp011
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1787924910;
-	bh=hce3Us/XDNiCKANeFbDzQxcrrHgd9MSsPe8r8AHhC0A=;
+	s=mail20170921; t=1787924916;
+	bh=K7P8On0CkhtQDCuF4PP+KrJd5RQGwhmgCXXZhzEWRrY=;
 	h=From:Date:Subject:In-Reply-To:To:Cc:References:From;
-	b=L8xMPwm/lgWrAI2GvkWa7uWbzghuaJU3VKM5qODDiEBPBfWW+UcQSh7figUMpH2MH
-	 NwLg0vt6XKIV0NAl6vseRPnwFh7OvzXBGr9XSSKsqd5UmJTb1NZy+E198phGIDO5+G
-	 Mde9q05pZbNOwA6ZVioHsdAbPEXvb1vphFFqbjRk=
+	b=FiRT7odNg902cUJIQtrvQranvJDAOFV+6YM+brywEC/Qo40cQ7tc41ChdTwri7HM1
+	 BG+XqAXUwlXRKyWCEPqKyN2RnRW7MI70iSvzTWByHnGN3ywOV/jlq0d2U6pGVU8cuk
+	 KZXPP1szIUUU1g230hA8yNN/XPWNIDbcBCvAQdXQ=
 Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
-	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
-	20260828134830eucas1p1188cde4642239a10afedf46b415dfde4~P-DuoGIV31592715927eucas1p1M;
-	Fri, 28 Aug 2026 13:48:30 +0000 (GMT)
+	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
+	20260828134835eucas1p27736632121c17e11f554e295994a7d8d~P-DzngPy72728727287eucas1p24;
+	Fri, 28 Aug 2026 13:48:35 +0000 (GMT)
 Received: from AMDC4942.eu.corp.samsungelectronics.net (unknown
 	[106.210.136.40]) by eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
-	20260828134828eusmtip1e10f1777df471d94950c3265ef92b9ac~P-Ds8YdKI2833728337eusmtip16;
-	Fri, 28 Aug 2026 13:48:28 +0000 (GMT)
+	20260828134833eusmtip1f4405999af46ddd52eeb3669d28a403a~P-Dx_bdLE2832328323eusmtip1P;
+	Fri, 28 Aug 2026 13:48:33 +0000 (GMT)
 From: Michal Wilczynski <m.wilczynski@samsung.com>
-Date: Fri, 28 Aug 2026 15:47:33 +0200
-Subject: [PATCH v2 09/15] clk: starfive: jh7110-vout: Allow pixel clock rate
- propagation
+Date: Fri, 28 Aug 2026 15:47:36 +0200
+Subject: [PATCH v2 12/15] phy: rockchip: inno-hdmi: Use the common
+ Innosilicon PHY helpers
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -46,7 +46,7 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260828-jh7110-clean-send-v2-9-331680c8b9d1@samsung.com>
+Message-Id: <20260828-jh7110-clean-send-v2-12-331680c8b9d1@samsung.com>
 In-Reply-To: <20260828-jh7110-clean-send-v2-0-331680c8b9d1@samsung.com>
 To: Vinod Koul <vkoul@kernel.org>,  Neil Armstrong
 	<neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>,  Krzysztof
@@ -75,47 +75,266 @@ Cc: linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
 	Spierings <maudspierings@gocontroll.com>,  Graham Markall
 	<hello@big-grey.co.uk>,  Michal Wilczynski <m.wilczynski@samsung.com>
 X-Mailer: b4 0.15-dev
-X-CMS-MailID: 20260828134830eucas1p1188cde4642239a10afedf46b415dfde4
+X-CMS-MailID: 20260828134835eucas1p27736632121c17e11f554e295994a7d8d
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20260828134830eucas1p1188cde4642239a10afedf46b415dfde4
+X-RootMTR: 20260828134835eucas1p27736632121c17e11f554e295994a7d8d
 X-EPHeader: CA
-X-CMS-RootMailID: 20260828134830eucas1p1188cde4642239a10afedf46b415dfde4
+X-CMS-RootMailID: 20260828134835eucas1p27736632121c17e11f554e295994a7d8d
 References: <20260828-jh7110-clean-send-v2-0-331680c8b9d1@samsung.com>
-	<CGME20260828134830eucas1p1188cde4642239a10afedf46b415dfde4@eucas1p1.samsung.com>
+	<CGME20260828134835eucas1p27736632121c17e11f554e295994a7d8d@eucas1p2.samsung.com>
 
-The dc8200_pix0 and dc8200_pix1 MUXes feed the display controller, and
-the rate they carry is ultimately produced by the HDMI PHY, which
-registers hdmitx0_pixelclk as a clock provider.
+The RK3328 pre-PLL programming, its table lookup and its recalc_rate and
+determine_rate implementations are the generic Innosilicon ones, so drop
+the local copies and use the shared helpers instead.
 
-Add CLK_SET_RATE_PARENT to both MUXes so a rate requested on them
-reaches that parent, instead of being clamped to whatever rate the
-parent already happens to run at.
+The RK3228 pre-PLL sits at different register addresses, so it keeps its
+own register level code and only shares the table lookup.
 
-Co-developed-by: Dominique Belhachemi <db@domibel.de>
-Signed-off-by: Dominique Belhachemi <db@domibel.de>
+The register writes, their order and the values written are unchanged.
+No functional change intended.
+
 Signed-off-by: Michal Wilczynski <m.wilczynski@samsung.com>
 ---
- drivers/clk/starfive/clk-starfive-jh7110-vout.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/phy/rockchip/Kconfig                  |   1 +
+ drivers/phy/rockchip/phy-rockchip-inno-hdmi.c | 127 +++++---------------------
+ 2 files changed, 25 insertions(+), 103 deletions(-)
 
-diff --git a/drivers/clk/starfive/clk-starfive-jh7110-vout.c b/drivers/clk/starfive/clk-starfive-jh7110-vout.c
-index bad20d5d794a72f071b4d547b7304786a8ba9afa..b608fe358031109a15962a623b1c14d424023c02 100644
---- a/drivers/clk/starfive/clk-starfive-jh7110-vout.c
-+++ b/drivers/clk/starfive/clk-starfive-jh7110-vout.c
-@@ -40,10 +40,10 @@ static const struct jh71x0_clk_data jh7110_voutclk_data[] = {
- 	JH71X0_GATE(JH7110_VOUTCLK_DC8200_AXI, "dc8200_axi", 0, JH7110_VOUTCLK_VOUT_TOP_AXI),
- 	JH71X0_GATE(JH7110_VOUTCLK_DC8200_CORE, "dc8200_core", 0, JH7110_VOUTCLK_VOUT_TOP_AXI),
- 	JH71X0_GATE(JH7110_VOUTCLK_DC8200_AHB, "dc8200_ahb", 0, JH7110_VOUTCLK_VOUT_TOP_AHB),
--	JH71X0_GMUX(JH7110_VOUTCLK_DC8200_PIX0, "dc8200_pix0", 0, 2,
-+	JH71X0_GMUX(JH7110_VOUTCLK_DC8200_PIX0, "dc8200_pix0", CLK_SET_RATE_PARENT, 2,
- 		    JH7110_VOUTCLK_DC8200_PIX,
- 		    JH7110_VOUTCLK_HDMITX0_PIXELCLK),
--	JH71X0_GMUX(JH7110_VOUTCLK_DC8200_PIX1, "dc8200_pix1", 0, 2,
-+	JH71X0_GMUX(JH7110_VOUTCLK_DC8200_PIX1, "dc8200_pix1", CLK_SET_RATE_PARENT, 2,
- 		    JH7110_VOUTCLK_DC8200_PIX,
- 		    JH7110_VOUTCLK_HDMITX0_PIXELCLK),
- 	/* LCD */
+diff --git a/drivers/phy/rockchip/Kconfig b/drivers/phy/rockchip/Kconfig
+index 14698571b607590dc0e7a29f3b39eb9a5d4e3d25..9732c5be87717dc3ddbea1c60080952336a07af9 100644
+--- a/drivers/phy/rockchip/Kconfig
++++ b/drivers/phy/rockchip/Kconfig
+@@ -34,6 +34,7 @@ config PHY_ROCKCHIP_INNO_HDMI
+ 	depends on COMMON_CLK
+ 	depends on HAS_IOMEM
+ 	select GENERIC_PHY
++	select PHY_INNO_HDMI
+ 	help
+ 	  Enable this to support the Rockchip Innosilicon HDMI PHY.
+ 
+diff --git a/drivers/phy/rockchip/phy-rockchip-inno-hdmi.c b/drivers/phy/rockchip/phy-rockchip-inno-hdmi.c
+index 1483907413faa5ce1dc8614db05e6e929410404d..fae766607b0ea120b3adb36001387062f39a5c00 100644
+--- a/drivers/phy/rockchip/phy-rockchip-inno-hdmi.c
++++ b/drivers/phy/rockchip/phy-rockchip-inno-hdmi.c
+@@ -17,6 +17,7 @@
+ #include <linux/of.h>
+ #include <linux/platform_device.h>
+ #include <linux/regmap.h>
++#include <linux/phy/inno-hdmi-phy.h>
+ #include <linux/phy/phy.h>
+ #include <linux/slab.h>
+ 
+@@ -240,6 +241,8 @@ struct inno_hdmi_phy {
+ 	const struct inno_hdmi_phy_drv_data *plat_data;
+ 	int chip_version;
+ 
++	struct inno_hdmi_phy_pre_pll pre_pll;
++
+ 	/* clk provider */
+ 	struct clk_hw hw;
+ 	struct clk *phyclk;
+@@ -247,21 +250,6 @@ struct inno_hdmi_phy {
+ 	unsigned long tmdsclock;
+ };
+ 
+-struct pre_pll_config {
+-	unsigned long pixclock;
+-	unsigned long tmdsclock;
+-	u8 prediv;
+-	u16 fbdiv;
+-	u8 tmds_div_a;
+-	u8 tmds_div_b;
+-	u8 tmds_div_c;
+-	u8 pclk_div_a;
+-	u8 pclk_div_b;
+-	u8 pclk_div_c;
+-	u8 pclk_div_d;
+-	u8 vco_div_5_en;
+-	u32 fracdiv;
+-};
+ 
+ struct post_pll_config {
+ 	unsigned long tmdsclock;
+@@ -290,7 +278,7 @@ struct inno_hdmi_phy_drv_data {
+ 	const struct phy_config		*phy_cfg_table;
+ };
+ 
+-static const struct pre_pll_config pre_pll_cfg_table[] = {
++static const struct inno_hdmi_phy_pre_pll_config pre_pll_cfg_table[] = {
+ 	{ 25175000,  25175000,  3,  125, 3, 1, 1,  1, 3, 3,  4, 0, 0xe00000},
+ 	{ 25175000,  31468750,  1,   41, 0, 3, 3,  1, 3, 3,  4, 0, 0xf5554f},
+ 	{ 27000000,  27000000,  1,   36, 0, 3, 3,  1, 2, 3,  4, 0,      0x0},
+@@ -673,20 +661,12 @@ static const struct phy_ops inno_hdmi_phy_ops = {
+ };
+ 
+ static const
+-struct pre_pll_config *inno_hdmi_phy_get_pre_pll_cfg(struct inno_hdmi_phy *inno,
+-						     unsigned long rate)
++struct inno_hdmi_phy_pre_pll_config *inno_hdmi_phy_get_pre_pll_cfg(struct inno_hdmi_phy *inno,
++								   unsigned long rate)
+ {
+-	const struct pre_pll_config *cfg = pre_pll_cfg_table;
+ 	unsigned long tmdsclock = inno_hdmi_phy_get_tmdsclk(inno, rate);
+ 
+-	for (; cfg->pixclock != 0; cfg++)
+-		if (cfg->pixclock == rate && cfg->tmdsclock == tmdsclock)
+-			break;
+-
+-	if (cfg->pixclock == 0)
+-		return ERR_PTR(-EINVAL);
+-
+-	return cfg;
++	return inno_hdmi_phy_pre_pll_lookup(&inno->pre_pll, rate, tmdsclock);
+ }
+ 
+ static int inno_hdmi_phy_rk3228_clk_is_prepared(struct clk_hw *hw)
+@@ -752,7 +732,7 @@ unsigned long inno_hdmi_phy_rk3228_clk_recalc_rate(struct clk_hw *hw,
+ static int inno_hdmi_phy_rk3228_clk_determine_rate(struct clk_hw *hw,
+ 						   struct clk_rate_request *req)
+ {
+-	const struct pre_pll_config *cfg = pre_pll_cfg_table;
++	const struct inno_hdmi_phy_pre_pll_config *cfg = pre_pll_cfg_table;
+ 
+ 	req->rate = (req->rate / 1000) * 1000;
+ 
+@@ -773,7 +753,7 @@ static int inno_hdmi_phy_rk3228_clk_set_rate(struct clk_hw *hw,
+ 					     unsigned long parent_rate)
+ {
+ 	struct inno_hdmi_phy *inno = to_inno_hdmi_phy(hw);
+-	const struct pre_pll_config *cfg;
++	const struct inno_hdmi_phy_pre_pll_config *cfg;
+ 	unsigned long tmdsclock = inno_hdmi_phy_get_tmdsclk(inno, rate);
+ 	u32 v;
+ 	int ret;
+@@ -870,39 +850,11 @@ unsigned long inno_hdmi_phy_rk3328_clk_recalc_rate(struct clk_hw *hw,
+ 						   unsigned long parent_rate)
+ {
+ 	struct inno_hdmi_phy *inno = to_inno_hdmi_phy(hw);
+-	unsigned long frac;
+-	u8 nd, no_a, no_b, no_d;
+-	u64 vco;
+-	u16 nf;
+-
+-	nd = inno_read(inno, 0xa1) & RK3328_PRE_PLL_PRE_DIV_MASK;
+-	nf = ((inno_read(inno, 0xa2) & RK3328_PRE_PLL_FB_DIV_11_8_MASK) << 8);
+-	nf |= inno_read(inno, 0xa3);
+-	vco = parent_rate * nf;
+-
+-	if (!(inno_read(inno, 0xa2) & RK3328_PRE_PLL_FRAC_DIV_DISABLE)) {
+-		frac = inno_read(inno, 0xd3) |
+-		       (inno_read(inno, 0xd2) << 8) |
+-		       (inno_read(inno, 0xd1) << 16);
+-		vco += DIV_ROUND_CLOSEST(parent_rate * frac, (1 << 24));
+-	}
+ 
+-	if (inno_read(inno, 0xa0) & RK3328_PCLK_VCO_DIV_5_MASK) {
+-		do_div(vco, nd * 5);
+-	} else {
+-		no_a = inno_read(inno, 0xa5) & RK3328_PRE_PLL_PCLK_DIV_A_MASK;
+-		no_b = inno_read(inno, 0xa5) & RK3328_PRE_PLL_PCLK_DIV_B_MASK;
+-		no_b >>= RK3328_PRE_PLL_PCLK_DIV_B_SHIFT;
+-		no_b += 2;
+-		no_d = inno_read(inno, 0xa6) & RK3328_PRE_PLL_PCLK_DIV_D_MASK;
+-
+-		do_div(vco, (nd * (no_a == 1 ? no_b : no_a) * no_d * 2));
+-	}
++	inno->pixclock = inno_hdmi_phy_pre_pll_recalc_rate(&inno->pre_pll,
++							   parent_rate);
+ 
+-	inno->pixclock = DIV_ROUND_CLOSEST((unsigned long)vco, 1000) * 1000;
+-
+-	dev_dbg(inno->dev, "%s rate %lu vco %llu\n",
+-		__func__, inno->pixclock, vco);
++	dev_dbg(inno->dev, "%s rate %lu\n", __func__, inno->pixclock);
+ 
+ 	return inno->pixclock;
+ }
+@@ -910,20 +862,9 @@ unsigned long inno_hdmi_phy_rk3328_clk_recalc_rate(struct clk_hw *hw,
+ static int inno_hdmi_phy_rk3328_clk_determine_rate(struct clk_hw *hw,
+ 						   struct clk_rate_request *req)
+ {
+-	const struct pre_pll_config *cfg = pre_pll_cfg_table;
+-
+-	req->rate = (req->rate / 1000) * 1000;
+-
+-	for (; cfg->pixclock != 0; cfg++)
+-		if (cfg->pixclock == req->rate)
+-			break;
+-
+-	if (cfg->pixclock == 0)
+-		return -EINVAL;
+-
+-	req->rate = cfg->pixclock;
++	struct inno_hdmi_phy *inno = to_inno_hdmi_phy(hw);
+ 
+-	return 0;
++	return inno_hdmi_phy_pre_pll_determine_rate(&inno->pre_pll, req);
+ }
+ 
+ static int inno_hdmi_phy_rk3328_clk_set_rate(struct clk_hw *hw,
+@@ -931,9 +872,8 @@ static int inno_hdmi_phy_rk3328_clk_set_rate(struct clk_hw *hw,
+ 					     unsigned long parent_rate)
+ {
+ 	struct inno_hdmi_phy *inno = to_inno_hdmi_phy(hw);
+-	const struct pre_pll_config *cfg;
++	const struct inno_hdmi_phy_pre_pll_config *cfg;
+ 	unsigned long tmdsclock = inno_hdmi_phy_get_tmdsclk(inno, rate);
+-	u32 val;
+ 	int ret;
+ 
+ 	dev_dbg(inno->dev, "%s rate %lu tmdsclk %lu\n",
+@@ -946,35 +886,11 @@ static int inno_hdmi_phy_rk3328_clk_set_rate(struct clk_hw *hw,
+ 	if (IS_ERR(cfg))
+ 		return PTR_ERR(cfg);
+ 
+-	inno_update_bits(inno, 0xa0, RK3328_PRE_PLL_POWER_DOWN,
+-			 RK3328_PRE_PLL_POWER_DOWN);
+-
+-	/* Configure pre-pll */
+-	inno_update_bits(inno, 0xa0, RK3328_PCLK_VCO_DIV_5_MASK,
+-			 RK3328_PCLK_VCO_DIV_5(cfg->vco_div_5_en));
+-	inno_write(inno, 0xa1, RK3328_PRE_PLL_PRE_DIV(cfg->prediv));
+-
+-	val = RK3328_SPREAD_SPECTRUM_MOD_DISABLE;
+-	if (!cfg->fracdiv)
+-		val |= RK3328_PRE_PLL_FRAC_DIV_DISABLE;
+-	inno_write(inno, 0xa2, RK3328_PRE_PLL_FB_DIV_11_8(cfg->fbdiv) | val);
+-	inno_write(inno, 0xa3, RK3328_PRE_PLL_FB_DIV_7_0(cfg->fbdiv));
+-	inno_write(inno, 0xa5, RK3328_PRE_PLL_PCLK_DIV_A(cfg->pclk_div_a) |
+-		   RK3328_PRE_PLL_PCLK_DIV_B(cfg->pclk_div_b));
+-	inno_write(inno, 0xa6, RK3328_PRE_PLL_PCLK_DIV_C(cfg->pclk_div_c) |
+-		   RK3328_PRE_PLL_PCLK_DIV_D(cfg->pclk_div_d));
+-	inno_write(inno, 0xa4, RK3328_PRE_PLL_TMDSCLK_DIV_C(cfg->tmds_div_c) |
+-		   RK3328_PRE_PLL_TMDSCLK_DIV_A(cfg->tmds_div_a) |
+-		   RK3328_PRE_PLL_TMDSCLK_DIV_B(cfg->tmds_div_b));
+-	inno_write(inno, 0xd3, RK3328_PRE_PLL_FRAC_DIV_7_0(cfg->fracdiv));
+-	inno_write(inno, 0xd2, RK3328_PRE_PLL_FRAC_DIV_15_8(cfg->fracdiv));
+-	inno_write(inno, 0xd1, RK3328_PRE_PLL_FRAC_DIV_23_16(cfg->fracdiv));
++	inno_hdmi_phy_pre_pll_power_down(&inno->pre_pll, true);
++	inno_hdmi_phy_pre_pll_configure(&inno->pre_pll, cfg);
++	inno_hdmi_phy_pre_pll_power_down(&inno->pre_pll, false);
+ 
+-	inno_update_bits(inno, 0xa0, RK3328_PRE_PLL_POWER_DOWN, 0);
+-
+-	/* Wait for Pre-PLL lock */
+-	ret = inno_poll(inno, 0xa9, val, val & RK3328_PRE_PLL_LOCK_STATUS,
+-			1000, 10000);
++	ret = inno_hdmi_phy_pre_pll_wait_locked(&inno->pre_pll, 10000);
+ 	if (ret) {
+ 		dev_err(inno->dev, "Pre-PLL locking failed\n");
+ 		return ret;
+@@ -1373,6 +1289,11 @@ static int inno_hdmi_phy_probe(struct platform_device *pdev)
+ 	if (IS_ERR(inno->regmap))
+ 		return PTR_ERR(inno->regmap);
+ 
++	/* The PHY block starts the register space on these SoCs. */
++	inno->pre_pll.regmap = inno->regmap;
++	inno->pre_pll.offset = 0;
++	inno->pre_pll.table = pre_pll_cfg_table;
++
+ 	/* only the newer rk3328 hdmiphy has an interrupt */
+ 	inno->irq = platform_get_irq(pdev, 0);
+ 	if (inno->irq > 0) {
 
 -- 
 2.34.1
