@@ -1,62 +1,61 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0229033123D;
-	Sun, 30 Aug 2026 22:51:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 26D8B30D405;
+	Sun, 30 Aug 2026 22:51:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788130267; cv=none; b=ZALA/vxs0x1RQygEEk8C7MoQgxVXXp/svNFYnEZHDl5UlBUeHqLpQKuvIGb8WXmnijTbeBG85Qr6qIOFTRrPPg4BEloNDSFrkVbawfAGqaivfe9wzOExb076yT27o/gVWHrD/V0CdM2AR8K4WsvGTKB/O59yTqBrpP05iE1ZADI=
+	t=1788130279; cv=none; b=U2BAAIxf5Qu/7NrjLmS5L3OWsW9U6TxkjOYEJO0xx4cKsmSr9gc+Rcl6bm128SbF4KVwQwzuFYsU0NAc+ljKzgsgboxs9m6wuOjNI3UCbk/0ry5yxJROfJZjBggsr8ak2Rd2vyYAReRqGBOBFipTVtNCenn2aaZbPJsLUI+7LnQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788130267; c=relaxed/simple;
-	bh=orQJknovEiVqQsGcgm7qqVnRWlJazv6UH84n81+7OBc=;
+	s=arc-20240116; t=1788130279; c=relaxed/simple;
+	bh=Cjhn/s+qUYzNQMOOkGag7cXMLmaINL57Y1JyLBd7/X0=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=TU1tyBbneo+AfPYFoCm/IoHW+WrjFAm9OxcGzyLsr8I1QOwFIbYAqjLsRVXmYu+RiYNADN6zLE0x67dxl58jBCOxfBfR8R+I8h470OatBjRQxbbAuXwM+2WJ0n+/Ezy939RZtMgwMulFyUB8mfwb1xgswphufIrVfwuVIQ/IqXw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ihtztLgT; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=YeOouoGWBiENIX0KFcfFaffL6X4q1nDa7z3GNUs+wtWNjAc9v9o+2usFovTkWVCJZk4XP73nOBSVOHhQEYsQdyZmMiMF4h9Kw2ezvnWix4nmtfe7OKiiV1nw6JWUFXag4P6/I8ANIzUiLEvJsylvS+0y6ri26LcWjRtB8Ae6jBI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=L6M9i1ch; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ihtztLgT"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ECCDB1F00A3D;
-	Sun, 30 Aug 2026 22:51:04 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="L6M9i1ch"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3A281F000E9;
+	Sun, 30 Aug 2026 22:51:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788130265;
-	bh=orQJknovEiVqQsGcgm7qqVnRWlJazv6UH84n81+7OBc=;
+	s=k20260515; t=1788130278;
+	bh=Cjhn/s+qUYzNQMOOkGag7cXMLmaINL57Y1JyLBd7/X0=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=ihtztLgT8boJPKGwAAVULRq9p0OF41eF6z51aQ3FxUd4ZWanVDuxS7+FfSWEmtwE0
-	 7t59N9SVmj1OSYZ8tr7+20XxDx26day+gczzaVQC87tmL7l/gTwZjqEfmiqvyU/n6H
-	 MIHW3IWtLcJHBnbrsr7tGBbmE5RszdRZcI1603tf9d3eIg6NMzWHX7PExnEpm6+psD
-	 g8iQCPhElZbqAxXC5A+TWXJlBGUtffbyPJ9Pd8XmnbQu1LG/BcNAer06e7uTXhQpoN
-	 GmTmHW1+lMEzK5iTP22WBsR0bbDKJ6aYB/LFaZcHjyJzU/oxekcKXgelk9ElckjTkS
-	 LcSgYhQd22YXg==
+	b=L6M9i1chbHMz7jBuDWUmD1qfGT2+EdcAqZI8mnzZne3UtQu15M6p4oAERiFqexsek
+	 uVcyfoE75OtAaM+EJSP1cEBrIwyWG1T449AY28k7qTf0sibffbom6aLMNY8Cdhkkxb
+	 4biFK029neYUvtqiXo7/LJqmCs8IdcQeuAk4kXURqdnFsiOpLJcPwyepffY/qsnzjU
+	 9L/TFgZG/l6Tnkj4grqgP4sXOkAzgh1Q2oZ9zVw8V5/aZpur7svW/sqSGaeN1FO4Ic
+	 96p58wVaIvdO4ajL/EEpByboWxMFFRXlB6MDXGKH+BmTnZbau/4OmV8XksMZXLS9lr
+	 AURKtuTZDB2FQ==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 01/13] regulator: ab8500: Fix AB8505 VANA voltage
- selectors
+Subject: Re: [PATCH 03/13] regulator: ab8500: Handle AB8505 VINTCORE
+ selector 7
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Linus Walleij" <linusw@kernel.org>
-Cc: robh@kernel.org, lee@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260831-ux500-dts-snowball-regulator-v1-1-fe279fff5e18@kernel.org>
+Cc: conor+dt@kernel.org, devicetree@vger.kernel.org, robh@kernel.org, lee@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20260831-ux500-dts-snowball-regulator-v1-3-fe279fff5e18@kernel.org>
 References: <20260831-ux500-dts-snowball-regulator-v1-0-fe279fff5e18@kernel.org>
- <20260831-ux500-dts-snowball-regulator-v1-1-fe279fff5e18@kernel.org>
+ <20260831-ux500-dts-snowball-regulator-v1-3-fe279fff5e18@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Sun, 30 Aug 2026 22:51:04 +0000
-Message-Id: <20260830225104.ECCDB1F00A3D@smtp.kernel.org>
+Date: Sun, 30 Aug 2026 22:51:17 +0000
+Message-Id: <20260830225117.B3A281F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-> The AB8505 VANA voltage table assumes selector 0 represents 1.05 V
-> and all eight selectors increase linearly. Selector 0 actually
-> represents 1.2 V. Selectors 1 through 6 cover 1.05 V through
-> 1.175 V, and selector 7 represents 1.225 V.
+> The AB8505 VINTCORE table exposes only selectors 0 through 6. The
+> hardware also accepts selector 7 and maps it to 1.35 V, just like
+> selector 6. Omitting it can make an OTP-programmed selector 7 appear
+> invalid to the regulator core.
 >=20
-> Correct the table so each selector reports and programs the documented
-> voltage.
+> Give AB8505 its own eight-entry selector table while leaving the
+> AB8500 table unchanged.
 >=20
-> Reference: AB8505 User Manual, DM00046744 Rev 3, p. 257
+> Reference: AB8505 User Manual, DM00046744 Rev 3, p. 223
 >=20
-> Fixes: 8a3b1b8703fe ("regulator: ab8500: Add voltage selection for AUDIO =
-and ANA on AB8505")
+> Fixes: 547f384f33db ("regulator: ab8500: add support for ab8505")
 > Assisted-by: LLM
 > Signed-off-by: Linus Walleij <linusw@kernel.org>
 
@@ -64,5 +63,5 @@ Sashiko has reviewed this patch and found no issues. It looks great!
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260831-ux500-dts-=
-snowball-regulator-v1-0-fe279fff5e18@kernel.org?part=3D1
+snowball-regulator-v1-0-fe279fff5e18@kernel.org?part=3D3
 
