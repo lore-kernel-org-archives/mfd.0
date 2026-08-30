@@ -1,35 +1,35 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A6D9306B1B;
-	Sun, 30 Aug 2026 22:44:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2806306B1B;
+	Sun, 30 Aug 2026 22:44:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788129871; cv=none; b=lN6KmWjEGVYL4GLkTb7xNgezCK+2QtX6PGloORmL219deB3v3Oe7oI2hluzWZpn8IQm1wgHKo/WhMXOrXzxVeHSkiE6MkCxKcd/NTbDhkS88J3Mnwr2FqfuoMq7zDNGOgzUlz0pgUoi7F55IAUr/wshY1eq5OeVoMJoV67KFxdA=
+	t=1788129874; cv=none; b=sQyDKrI5GE5quiwX0fWR6NCEUsEYWCD69B7xpXqHNWNpbqLNzVx8la0TpZ3n67MPtVD90Jp7Da24z/JZZWN3VzhWhjw8fGcdtQGlr4dWl5GFywcb+TaLYECoSG3IZFaOcO6Yu7H7dJf7sk9qIwjrWiTQuIwVssIDiKNe8lZjCco=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788129871; c=relaxed/simple;
-	bh=XY7mOhZqq9LWXUt88AII2yu7FLuLutizkwgrhvSheuE=;
+	s=arc-20240116; t=1788129874; c=relaxed/simple;
+	bh=R3jxbGkgGfOX4rp8Evxp0ZbJMbQnQCwHgRqRn6sEKTs=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=cY/jHhEv5LXCloJ87Ph62XReQBkguVEw+cgthVMdEaAW09zkHOpFE+YolX7q0Lnfng+ellv89bCBCiFPTavD9iObHR4oRGzLdu009CuPbocgcPXdF/UKE5ri/+jQNyAYPhMij3ON6Rbn/JSBwXuuzXPfoSWY1RJKpm/nDh2Nv7s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Cf+rZ733; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:To:Cc; b=l4GNDtFcxOQ1SAf+0rA2hrgyr2jdCjg6bCcW/xVNSR8mn9kCJYF7RLJBggS2PzAunRPJCj4IqV/T8Y1n92H4PvfKgio3dFSkkdnfMSYJfNcc81dOPUUTd8AmANYBbtSgP5XMfyDIhv2dYxTN1973THvIgvBs9Ehbt/I4wCBWugE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XeGZiqFT; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Cf+rZ733"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CA8831F00A3D;
-	Sun, 30 Aug 2026 22:44:27 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XeGZiqFT"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6606C1F000E9;
+	Sun, 30 Aug 2026 22:44:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788129870;
-	bh=HW64KVa5kWJeO60DzhKz9juuefGy7uyjxpyhr0h7unk=;
+	s=k20260515; t=1788129872;
+	bh=YmJceeDBdhPEgVm3BODfgB8lKWRTXnpjxh7sCmUtsWM=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=Cf+rZ7334YhuMhcscg7xdC4+E5/HzoVzihsnMBeCq1ue8n0VViYF+OPV9qBqDOu/u
-	 VHlpyrVOjfPC7t5Y0OnikjSkZyMFH0B6vCsae1zSeRO8RDeSbubqyMnuVKte783ViE
-	 mXBc2PLgDgIs3i1nR3boEx1axzsDu10gt+6CyOuEpqSzN4cNT3DKtc9PEmlQytRyO5
-	 vxl9H3rmTtwfWuX/xHtZWFrOkcjjZLHgbTChlgLCGh9FD3HcSeviIuooWgMex4Y7AU
-	 MNWPLPFYJCzIQ6xbtEDFlWsW7L7QYTKTWO2Qq029P3/YFefpAJwB6n7UJXFKz6VsT/
-	 lG21D65xPkmPA==
+	b=XeGZiqFTXxCZ/BfDRN9tKMEsrAFnGEwwV/AFlPpWXDzw97nPr8SUU2py95bX2qkz0
+	 kY8vgRIQz5b+ZpbsFUe3LxK3lMu5tjGTrvn3Uwx8rF04BpbIrZl0fUX/7CI+miC7tc
+	 7eev0fs4sLSnAe6l1qEmVwkOm5GrhskZ6/VqnjgqYMmAJTglOt4lVZATr3NL9eZY3O
+	 qsGNTi16365Px6J6TkN6O8cS7wjitIKB+yhd8UfGhtZcufWG0a89BLfLJOiEIrfpkq
+	 ypyMlFgLmohQVimJba3rX0JaxKY/h1Fv78AwvioKgix2MS5aRHuc+MGQpEfWpsMvqt
+	 qEcI9YKaqqF4A==
 From: Linus Walleij <linusw@kernel.org>
-Date: Mon, 31 Aug 2026 00:43:39 +0200
-Subject: [PATCH 10/13] regulator: ab8500: Preserve OTP-enabled buck
- regulators
+Date: Mon, 31 Aug 2026 00:43:40 +0200
+Subject: [PATCH 11/13] regulator: ab8500: Use scoped guard for shared mode
+ mutex
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -38,7 +38,7 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260831-ux500-dts-snowball-regulator-v1-10-fe279fff5e18@kernel.org>
+Message-Id: <20260831-ux500-dts-snowball-regulator-v1-11-fe279fff5e18@kernel.org>
 References: <20260831-ux500-dts-snowball-regulator-v1-0-fe279fff5e18@kernel.org>
 In-Reply-To: <20260831-ux500-dts-snowball-regulator-v1-0-fe279fff5e18@kernel.org>
 To: Stephan Gerhold <stephan@gerhold.net>, 
@@ -50,180 +50,96 @@ Cc: devicetree@vger.kernel.org, mfd@lists.linux.dev,
  Linus Walleij <linusw@kernel.org>
 X-Mailer: b4 0.14.3
 
-The SMPS enable fields are initialized from OTP and may leave a rail
-enabled for discrete consumers which cannot be described in the device
-tree. Such a rail currently looks unused to the regulator core and is
-disabled when constraints are completed.
-
-Read the enable field while registering each switchable buck
-regulator. If it is nonzero, mark the regulator boot-on and always-on
-dynamically so the unused-regulator sweep leaves it alone. Keep the
-enable operation idempotent so applying the always-on constraint
-preserves an OTP-selected hardware-control or low-power mode instead of
-forcing high-power mode. Synchronize the cached mode with the preserved
-field so an OTP-selected low-power state is also reported correctly.
-
-Regulators which are disabled by OTP retain normal switchable
-behavior.
+Use a scoped mutex guard in ab8500_regulator_set_mode().
 
 Assisted-by: LLM
 Signed-off-by: Linus Walleij <linusw@kernel.org>
 ---
- drivers/regulator/ab8500.c | 76 ++++++++++++++++++++++++++++++++++++++++------
- 1 file changed, 67 insertions(+), 9 deletions(-)
+ drivers/regulator/ab8500.c | 23 ++++++++---------------
+ 1 file changed, 8 insertions(+), 15 deletions(-)
 
 diff --git a/drivers/regulator/ab8500.c b/drivers/regulator/ab8500.c
-index 130febf2680a..57ef3d4610e6 100644
+index 57ef3d4610e6..3c1962ad85d4 100644
 --- a/drivers/regulator/ab8500.c
 +++ b/drivers/regulator/ab8500.c
-@@ -422,11 +422,10 @@ static int ab8500_regulator_disable(struct regulator_dev *rdev)
+@@ -20,6 +20,7 @@
+ #include <linux/kernel.h>
+ #include <linux/module.h>
+ #include <linux/err.h>
++#include <linux/mutex.h>
+ #include <linux/platform_device.h>
+ #include <linux/mfd/abx500.h>
+ #include <linux/mfd/abx500/ab8500.h>
+@@ -542,6 +543,8 @@ static int ab8500_regulator_set_mode(struct regulator_dev *rdev,
+ 		return -EINVAL;
+ 	}
+ 
++	guard(mutex)(&shared_mode_mutex);
++
+ 	if (info->mode_mask) {
+ 		bank = info->mode_bank;
+ 		reg = info->mode_reg;
+@@ -552,9 +555,6 @@ static int ab8500_regulator_set_mode(struct regulator_dev *rdev,
+ 		mask = info->update_mask;
+ 	}
+ 
+-	if (info->shared_mode)
+-		mutex_lock(&shared_mode_mutex);
+-
+ 	switch (mode) {
+ 	case REGULATOR_MODE_NORMAL:
+ 		if (info->shared_mode)
+@@ -573,7 +573,7 @@ static int ab8500_regulator_set_mode(struct regulator_dev *rdev,
+ 			if (!shared_regulator->shared_mode->lp_mode_req) {
+ 				/* Other regulator prevent LP mode */
+ 				info->shared_mode->lp_mode_req = true;
+-				goto out_unlock;
++				return 0;
+ 			}
+ 
+ 			lp_mode_req = true;
+@@ -585,18 +585,15 @@ static int ab8500_regulator_set_mode(struct regulator_dev *rdev,
+ 			val = info->update_val_idle;
+ 		break;
+ 	default:
+-		ret = -EINVAL;
+-		goto out_unlock;
++		return -EINVAL;
+ 	}
+ 
+ 	if (info->mode_mask) {
+ 		enabled = 1;
+ 	} else {
+ 		enabled = ab8500_regulator_is_enabled(rdev);
+-		if (enabled < 0) {
+-			ret = enabled;
+-			goto out_unlock;
+-		}
++		if (enabled < 0)
++			return enabled;
+ 	}
+ 
+ 	if (enabled) {
+@@ -605,7 +602,7 @@ static int ab8500_regulator_set_mode(struct regulator_dev *rdev,
+ 		if (ret < 0) {
+ 			dev_err(rdev_get_dev(rdev),
+ 				"couldn't set regulator mode\n");
+-			goto out_unlock;
++			return ret;
+ 		}
+ 
+ 		dev_vdbg(rdev_get_dev(rdev),
+@@ -621,10 +618,6 @@ static int ab8500_regulator_set_mode(struct regulator_dev *rdev,
+ 	if (info->shared_mode)
+ 		info->shared_mode->lp_mode_req = lp_mode_req;
+ 
+-out_unlock:
+-	if (info->shared_mode)
+-		mutex_unlock(&shared_mode_mutex);
+-
  	return ret;
  }
  
--static int ab8500_regulator_is_enabled(struct regulator_dev *rdev)
-+static int ab8500_regulator_get_enable_value(struct regulator_dev *rdev)
- {
- 	int ret;
- 	struct ab8500_regulator_info *info = rdev_get_drvdata(rdev);
--	u8 enable_mask;
- 	u8 regval;
- 
- 	if (info == NULL) {
-@@ -442,18 +441,71 @@ static int ab8500_regulator_is_enabled(struct regulator_dev *rdev)
- 		return ret;
- 	}
- 
--	enable_mask = info->enable_mask ? info->enable_mask : info->update_mask;
--
- 	dev_vdbg(rdev_get_dev(rdev),
- 		"%s-is_enabled (bank, reg, mask, value): 0x%x, 0x%x, 0x%x,"
- 		" 0x%x\n",
- 		info->desc.name, info->update_bank, info->update_reg,
--		enable_mask, regval);
-+		info->update_mask, regval);
-+
-+	return regval & info->update_mask;
-+}
-+
-+static int ab8500_regulator_is_enabled(struct regulator_dev *rdev)
-+{
-+	struct ab8500_regulator_info *info = rdev_get_drvdata(rdev);
-+	u8 enable_mask;
-+	int ret;
-+
-+	ret = ab8500_regulator_get_enable_value(rdev);
-+	if (ret < 0)
-+		return ret;
-+
-+	enable_mask = info->enable_mask ? info->enable_mask : info->update_mask;
-+
-+	return !!(ret & enable_mask);
-+}
- 
--	if (regval & enable_mask)
--		return 1;
-+static int ab8500_buck_enable(struct regulator_dev *rdev)
-+{
-+	int ret;
-+
-+	/* Keep an OTP-selected hardware or low-power mode intact. */
-+	ret = ab8500_regulator_is_enabled(rdev);
-+	if (ret)
-+		return ret < 0 ? ret : 0;
-+
-+	return ab8500_regulator_enable(rdev);
-+}
-+
-+static int ab8500_buck_init(struct regulator_dev *rdev,
-+			    struct regulator_config *config)
-+{
-+	struct ab8500_regulator_info *info = config->driver_data;
-+	int ret;
-+
-+	ret = ab8500_regulator_get_enable_value(rdev);
-+	if (ret <= 0)
-+		return ret;
-+
-+	/* Report forced LP accurately; HP and hardware control are normal mode. */
-+	if (ret == info->update_val_idle)
-+		info->update_val = info->update_val_idle;
- 	else
--		return 0;
-+		info->update_val = info->update_val_normal;
-+
-+	/*
-+	 * The SMPS enable state is selected by OTP.  An enabled rail may
-+	 * supply discrete board components which are not represented as
-+	 * regulator consumers, so keep it out of the unused-regulator sweep.
-+	 */
-+	rdev->constraints->boot_on = true;
-+	rdev->constraints->always_on = true;
-+	rdev->constraints->valid_ops_mask &= ~REGULATOR_CHANGE_STATUS;
-+
-+	dev_dbg(config->dev, "%s: preserving OTP-enabled state\n",
-+		info->desc.name);
-+
-+	return 0;
- }
- 
- static unsigned int ab8500_regulator_get_optimum_mode(
-@@ -861,7 +913,7 @@ static const struct regulator_ops ab8500_regulator_linear_range_volt_ops = {
- };
- 
- static const struct regulator_ops ab8500_buck_ops = {
--	.enable			= ab8500_regulator_enable,
-+	.enable			= ab8500_buck_enable,
- 	.disable		= ab8500_regulator_disable,
- 	.is_enabled		= ab8500_regulator_is_enabled,
- 	.get_optimum_mode	= ab8500_regulator_get_optimum_mode,
-@@ -1127,6 +1179,7 @@ static struct ab8500_regulator_info
- 		.desc = {
- 			.name		= "BUCK-SMPS1",
- 			.ops		= &ab8500_buck_ops,
-+			.init_cb	= ab8500_buck_init,
- 			.type		= REGULATOR_VOLTAGE,
- 			.id		= AB8500_BUCK_SMPS1,
- 			.owner		= THIS_MODULE,
-@@ -1152,6 +1205,7 @@ static struct ab8500_regulator_info
- 		.desc = {
- 			.name		= "BUCK-SMPS2",
- 			.ops		= &ab8500_buck_ops,
-+			.init_cb	= ab8500_buck_init,
- 			.type		= REGULATOR_VOLTAGE,
- 			.id		= AB8500_BUCK_SMPS2,
- 			.owner		= THIS_MODULE,
-@@ -1177,6 +1231,7 @@ static struct ab8500_regulator_info
- 		.desc = {
- 			.name		= "BUCK-SMPS3",
- 			.ops		= &ab8500_buck_ops,
-+			.init_cb	= ab8500_buck_init,
- 			.type		= REGULATOR_VOLTAGE,
- 			.id		= AB8500_BUCK_SMPS3,
- 			.owner		= THIS_MODULE,
-@@ -1556,6 +1611,7 @@ static struct ab8500_regulator_info
- 		.desc = {
- 			.name		= "BUCK-SMPSA",
- 			.ops		= &ab8500_buck_ops,
-+			.init_cb	= ab8500_buck_init,
- 			.type		= REGULATOR_VOLTAGE,
- 			.id		= AB8505_BUCK_SMPSA,
- 			.owner		= THIS_MODULE,
-@@ -1581,6 +1637,7 @@ static struct ab8500_regulator_info
- 		.desc = {
- 			.name		= "BUCK-SMPSB",
- 			.ops		= &ab8500_buck_ops,
-+			.init_cb	= ab8500_buck_init,
- 			.type		= REGULATOR_VOLTAGE,
- 			.id		= AB8505_BUCK_SMPSB,
- 			.owner		= THIS_MODULE,
-@@ -1606,6 +1663,7 @@ static struct ab8500_regulator_info
- 		.desc = {
- 			.name		= "BUCK-SAFE",
- 			.ops		= &ab8500_buck_ops,
-+			.init_cb	= ab8500_buck_init,
- 			.type		= REGULATOR_VOLTAGE,
- 			.id		= AB8505_BUCK_SAFE,
- 			.owner		= THIS_MODULE,
 
 -- 
 2.55.0
