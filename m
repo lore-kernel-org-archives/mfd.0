@@ -1,63 +1,62 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C117F30D405;
-	Sun, 30 Aug 2026 22:51:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0229033123D;
+	Sun, 30 Aug 2026 22:51:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788130265; cv=none; b=RI9wKHDUh8sNjpgeaF5FGEdpHlXeuZ2TwySinnKXF6/ttpew0Bl+w+7nMiKZCvyAgO9h/TUYFRO+TN/5qXNuyFsSBULMDnvDhumC0FstPLSf2kzeXVN9PyjpGirOginug+XhT1kOd2JOryU6e0xBmZcQJnbNhCuNbsxqFrIcZ4A=
+	t=1788130267; cv=none; b=ZALA/vxs0x1RQygEEk8C7MoQgxVXXp/svNFYnEZHDl5UlBUeHqLpQKuvIGb8WXmnijTbeBG85Qr6qIOFTRrPPg4BEloNDSFrkVbawfAGqaivfe9wzOExb076yT27o/gVWHrD/V0CdM2AR8K4WsvGTKB/O59yTqBrpP05iE1ZADI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788130265; c=relaxed/simple;
-	bh=9Bn4NjrP625WXlMB3GLx/GV4tVt3hWa4qNhEPMNbaxQ=;
+	s=arc-20240116; t=1788130267; c=relaxed/simple;
+	bh=orQJknovEiVqQsGcgm7qqVnRWlJazv6UH84n81+7OBc=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=agdwtCFxuiW7egpf8Kn6oZbaakM6xSSbvKRdoBXzSQzwr8VQZeu76qFKBXlKV/cCvgpwAIAubTjyfjy4b/Vcn8TJVozQstleN2qEJ9kfCZIFm2Z96gaEoMiU5ewaRSAyAwS8dFwXfN/3pF2TLapr6DDQt5AOHUs9IixO/kP8tmA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Bm7R4Z0s; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=TU1tyBbneo+AfPYFoCm/IoHW+WrjFAm9OxcGzyLsr8I1QOwFIbYAqjLsRVXmYu+RiYNADN6zLE0x67dxl58jBCOxfBfR8R+I8h470OatBjRQxbbAuXwM+2WJ0n+/Ezy939RZtMgwMulFyUB8mfwb1xgswphufIrVfwuVIQ/IqXw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ihtztLgT; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Bm7R4Z0s"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 02BAA1F000E9;
-	Sun, 30 Aug 2026 22:51:03 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ihtztLgT"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ECCDB1F00A3D;
+	Sun, 30 Aug 2026 22:51:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788130264;
-	bh=9Bn4NjrP625WXlMB3GLx/GV4tVt3hWa4qNhEPMNbaxQ=;
+	s=k20260515; t=1788130265;
+	bh=orQJknovEiVqQsGcgm7qqVnRWlJazv6UH84n81+7OBc=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Bm7R4Z0sJ7wcKIWv4xEflrYT15lytt53awexMkM3rDJ+TVs9qNiVR7e64IVPESsFr
-	 WMRMQtBeZUDaXGijY4Ape1x0OWjbOYbjU3pIxQrEgZKlHLIwnO2s1KegqlQHPw7E2e
-	 UyspbkoUw0W/7IluU1jm1uf/fWK6cXl34YzI/DMJMqKIlFEgHO65sUqdaTsg6YOaci
-	 cCTw3+tv2Cd5ncWczWU5BvNsKLemGQEB5Z2JsaghQMjEU79Ib32+VcgtcvoJS1vJuG
-	 LtXtceJ3t1i+N6EViPHwysY79q4rpsBzZ9MrgwBYaa6a9X32SVTOUNlX7qyy+bsDmS
-	 4vQpMvai4WQ/g==
+	b=ihtztLgT8boJPKGwAAVULRq9p0OF41eF6z51aQ3FxUd4ZWanVDuxS7+FfSWEmtwE0
+	 7t59N9SVmj1OSYZ8tr7+20XxDx26day+gczzaVQC87tmL7l/gTwZjqEfmiqvyU/n6H
+	 MIHW3IWtLcJHBnbrsr7tGBbmE5RszdRZcI1603tf9d3eIg6NMzWHX7PExnEpm6+psD
+	 g8iQCPhElZbqAxXC5A+TWXJlBGUtffbyPJ9Pd8XmnbQu1LG/BcNAer06e7uTXhQpoN
+	 GmTmHW1+lMEzK5iTP22WBsR0bbDKJ6aYB/LFaZcHjyJzU/oxekcKXgelk9ElckjTkS
+	 LcSgYhQd22YXg==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 06/13] regulator: ab8500: Propagate mode enable read
- errors
+Subject: Re: [PATCH 01/13] regulator: ab8500: Fix AB8505 VANA voltage
+ selectors
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Linus Walleij" <linusw@kernel.org>
-Cc: devicetree@vger.kernel.org, mfd@lists.linux.dev, lee@kernel.org, robh@kernel.org, conor+dt@kernel.org
-In-Reply-To: <20260831-ux500-dts-snowball-regulator-v1-6-fe279fff5e18@kernel.org>
+Cc: robh@kernel.org, lee@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20260831-ux500-dts-snowball-regulator-v1-1-fe279fff5e18@kernel.org>
 References: <20260831-ux500-dts-snowball-regulator-v1-0-fe279fff5e18@kernel.org>
- <20260831-ux500-dts-snowball-regulator-v1-6-fe279fff5e18@kernel.org>
+ <20260831-ux500-dts-snowball-regulator-v1-1-fe279fff5e18@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Sun, 30 Aug 2026 22:51:03 +0000
-Message-Id: <20260830225104.02BAA1F000E9@smtp.kernel.org>
+Date: Sun, 30 Aug 2026 22:51:04 +0000
+Message-Id: <20260830225104.ECCDB1F00A3D@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-> For regulators whose enable and mode share a state field, set_mode()
-> first reads that field so changing the requested mode does not enable a
-> disabled rail. A register read error is currently treated as true and
-> the driver proceeds to write the new mode, potentially enabling a rail
-> whose state is unknown.
+> The AB8505 VANA voltage table assumes selector 0 represents 1.05 V
+> and all eight selectors increase linearly. Selector 0 actually
+> represents 1.2 V. Selectors 1 through 6 cover 1.05 V through
+> 1.175 V, and selector 7 represents 1.225 V.
 >=20
-> Return the read error without changing the register or cached mode.
+> Correct the table so each selector reports and programs the documented
+> voltage.
 >=20
-> References: AB8500 User Manual, UM0836 Rev 3, p. 227;
-> AB8505 User Manual, DM00046744 Rev 3, p. 237
+> Reference: AB8505 User Manual, DM00046744 Rev 3, p. 257
 >=20
-> Fixes: 438e695b87e0 ("regulator: ab8500: Get rid of is_enabled from struc=
-t ab8500_regulator_info")
+> Fixes: 8a3b1b8703fe ("regulator: ab8500: Add voltage selection for AUDIO =
+and ANA on AB8505")
 > Assisted-by: LLM
 > Signed-off-by: Linus Walleij <linusw@kernel.org>
 
@@ -65,5 +64,5 @@ Sashiko has reviewed this patch and found no issues. It looks great!
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260831-ux500-dts-=
-snowball-regulator-v1-0-fe279fff5e18@kernel.org?part=3D6
+snowball-regulator-v1-0-fe279fff5e18@kernel.org?part=3D1
 
