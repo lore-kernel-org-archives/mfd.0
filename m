@@ -1,296 +1,151 @@
-Received: from mail3.ecloud.global (mail3.ecloud.global [135.181.139.185])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4611214A8B
-	for <mfd@lists.linux.dev>; Sat, 29 Aug 2026 19:03:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=135.181.139.185
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788030187; cv=pass; b=Z3fMxzd2mK0hQIOjz09FLNU8hIhPG9zcNT05TmFAmln8vwsVBezgCYhkX8c98PBucPHFgmxFJr2Vey1eURZy5fc2m4zJ89ZmAK9seJ9tqNKQQXzkJS/K/hwqGuHwsx3nD7XJRq0AKzKr9X0CKGOMzZvnWVSMD3g/i7WNhgEKJyY=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788030187; c=relaxed/simple;
-	bh=ZS2eW5V8GCydj07mgnOFacdC1mrX0S6vz92xaoJgopU=;
-	h=Message-ID:Date:MIME-Version:To:Cc:References:Subject:From:
-	 In-Reply-To:Content-Type; b=TteCNb3V/v9u536W8ViUAh6AJ40Wdf/nQeOWMHWUn82TxzuS01+M4uoLJkdHy87t7sbkTFnwZwt441W0fZvtnTkxY0N4R1fR6WHKRmiWQTy49FR8t4u2MHgBu6SOvQZmy3tTnfv5nz08QlpGyatvOq6jtSjE9vv72um12ss5p+E=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=murena.io; spf=pass smtp.mailfrom=murena.io; dkim=pass (1024-bit key) header.d=murena.io header.i=@murena.io header.b=nkuOAMzB; arc=pass smtp.client-ip=135.181.139.185
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=murena.io
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=murena.io
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 280F82459C5
+	for <mfd@lists.linux.dev>; Sun, 30 Aug 2026 03:47:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788061661; cv=none; b=sJC0ShdIrweuZVPRsvEedrHxM4VMm6kqi305eQFR2v8M0uxhvlj4EBeUCvZqHugNReYjGQ1Z+HvqU11SLDiuznav2C8QGtwMzn0Aclhned1+vzgbGf1VZYohHU/zut2Pv1n7qWWHLoA3s9sHvQcn8qaRB9/1Hii/3oFDVyMDIlE=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788061661; c=relaxed/simple;
+	bh=RZhefy0Bru+3z6+0XZb/9fKH1WWUBSNbqtpfus9KhRI=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=e8amRZPVqUCy48jd2R6P909ctiP8LquFctH8x3R3rCABfGblYpOQABoxqJcPh6/Uka6eLahHkrS7kaTLJs2W0grsF7XrzbvnjMwdfwEh6I88kUMcxX/KGCZ4tbdPupFvQmH41EbTWsF7szzy14Kb0aAiXBl0dg++XAdP986dR3g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hn3cyGjF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=L8RJx8sN; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=murena.io header.i=@murena.io header.b="nkuOAMzB"
-Received: from authenticated-user (mail3.ecloud.global [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mail3.ecloud.global (Postfix) with ESMTPSA id 9E0E9883DCA;
-	Sat, 29 Aug 2026 18:54:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=murena.io; s=mail3;
-	t=1788029646;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ehcjoluw1ltFHOACxESvJjxgUUGWa+g0poTQdMIRy1U=;
-	b=nkuOAMzBmGj+QW/LFVmCluA3XLtxasCrezDA5Gp8iboVAS5YbdiSaS4tPc2rRzEKDjCYkc
-	OSR5IyCbOTx5S9CuiWjcb9S2khgdusyJZQcyxiaFh2LVNDVnRNcG4AowmJimuO9OCmGUhM
-	E8ltcGFsoumAKU8e9XDn5NFnMzowtmM=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=murena.io;
-	s=mail3; t=1788029646;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ehcjoluw1ltFHOACxESvJjxgUUGWa+g0poTQdMIRy1U=;
-	b=SUQju1a5AyeEzsWtU11p1zJQg4cmekzyHbQn978fM7Z94OJlpQkUWJ1Kf5ziFCMASSAE+q
-	g/465/MYThLZ7f2m9lYFLAPJJodxWKBQD4qtbleprFGCuTMdrW6whmVQqu6bSatvl+Om8B
-	XOOSzbyrTeaRUnxvI88HOy9celngZRo=
-ARC-Seal: i=1; s=mail3; d=murena.io; t=1788029646; a=rsa-sha256; cv=none;
-	b=4u//Z/BtuPsOYlapubZ5m21WKQAJm/nJb66dH3KaNyha5i+ennk/ENAKtj8HINSK53tyn4
-	5JPH3HWfg734eML0ysqPRxleYyjhd60c8M3yyDQ2xXlkyHVdWJdM/relDgP30qvuYkmy/5
-	E+ouPdROr+TNqlt/XVODzbVbfkCftOc=
-ARC-Authentication-Results: i=1;
-	mail3.ecloud.global;
-	auth=pass smtp.mailfrom=maud_spierings@murena.io
-Message-ID: <0ccb4168-ff88-459c-972d-3c091c155db2@murena.io>
-Date: Sat, 29 Aug 2026 20:54:03 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hn3cyGjF";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="L8RJx8sN"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67U3MvAK2995429
+	for <mfd@lists.linux.dev>; Sun, 30 Aug 2026 03:47:39 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=jHJJEw2EtiBlaQK9tLUvewM+mPfWsn35SgN
+	iG8dIxo8=; b=hn3cyGjFJLwi24X75Y3rmwKbbhGtpQwbGcWaS4tSrnYlFpjD7wS
+	Ihgr2fcD0aeH73tfDatMHwenzo8OCNeSv/AL3Rod2v122Sq8IjrVeMdBa5w6pSA0
+	HSIBIvkL43F3z3tAMXhJQsNZRTVSplXTmr5IJfPdXgRUNGa6izFftL1+0DqLJX6X
+	fImMKbPlkrp+Bbs/iowW8E/0XRhR7Ki/5zK9LmHkO+9bnalwZgUMJ8GMTAFmIa4C
+	ukvXFkMzuoILgGaQGJTnFkLcG3FM5A6847ywkK2j+WWSycZvgQV0q8Rj0jvzqfK6
+	TQge4biOHz/9DWAyGPAEK/YMWBDV1yHJwqA==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gbrq823y4-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <mfd@lists.linux.dev>; Sun, 30 Aug 2026 03:47:39 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cb835525b10so3161361a12.2
+        for <mfd@lists.linux.dev>; Sat, 29 Aug 2026 20:47:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788061659; x=1788666459; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=jHJJEw2EtiBlaQK9tLUvewM+mPfWsn35SgNiG8dIxo8=;
+        b=L8RJx8sNPIdPz9ySfbIGepYb1QnF8zsJkWjVwLV5szXOoQt4JWvTlJgpFh2+eFmm5G
+         yHgX0+n0i8Diwa1/lAoFnkvn/RcINMHigSzVmyM3u4zsO6gL0NqVXQOnyN/bGVXGJ7we
+         lbqGH/+c6Lz+PxNeGFHDJVB/RKSGI2/iiOUgv4enjmgXIXO4bX0ozjF27QByoBYoY55p
+         tr6j3p8XVXqgNt2uMm/X0uc3Z0rh682R+q5OPLBIiIbiC3d3r9nVE/+LBdoFvsW9Jiqw
+         aNCRDhbDliji+x0Eude3EvvvUA+15poK59Ow0VHpmu4xLL4OrCSyWn7QigdC0juxzII4
+         iFag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788061659; x=1788666459;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=jHJJEw2EtiBlaQK9tLUvewM+mPfWsn35SgNiG8dIxo8=;
+        b=SVMzABbdGXMYG3wZDtOLH6N/4sUj0mDsTko1f3t342swlDTp066/ryXryYovfJuooe
+         iWQWJr5LXGNpBtBidRiRMfZarXHVBkkhfCtZg5XsbyiflYulzAksY91buuAwcXZD0pQu
+         Lz8bKbky6upOUcVNebY84MyGkd6DHhNSSnP2VmZTO5wfcDAGKIkHKKvFgeKBvVc0tRwX
+         XBKiRazqf4pQLns961UzqilBnF2dxnkWIY3+BDe41iPw1TGKTKrhm7gPQYlYg133XjxV
+         l9PXh689Q6PZJsIspY3RepI88LMv1fz15Qw/EdShBOfkqSlUBFNthGATku2mBoFohkYB
+         iYMg==
+X-Forwarded-Encrypted: i=1; AHgh+RpDhKplW+UX3yhn8iCB5bf3wx3xG8q/lwB52yDM7fYaBac5jdkRS+qI2u70b+WZOa7376Y=@lists.linux.dev
+X-Gm-Message-State: AFuF++nkCnpdszx4qb1ies8Xp2oms4eWJs/X+JeiFRv3cXny31eSEyt0
+	bU4cZ8668w3ynX+q1nD8OSymSgxy6QBrpw+87KAWxAeNJhOcn/aMbg7q5azQ/bzHMH5uOpv27wV
+	N56qbr/1DroEIbzJODf+vBqpEchejvUHUKeXhmaqdhuwrfgS24Ok8AQU=
+X-Gm-Gg: AR+sD13IaVFf4Lh/Q/k/ESNnvhRiYPZHk6SpjRC/H1bRZ/JvJrL3mvzbr5EU8OrSq89
+	HKWxtrlXUh8/dnAwOdew3xU+hpffAagJRFDrxWK0GoJfb3WOH32Df4Vnw7ceaW8hZwNfTJDxiWF
+	GQMCMxOwd2DrvjOFEeuM30GFX+cOXWqEyrXIuINJETPUb4/m+J261UMUYhVRnSOkv9B2OQyz5VJ
+	t8YuJ1aiebPJ447lFwKXn21/0dWrNpt8kWRRA0gqJ4nznYMdnBjijwz/SPPD19ur7PiINJlWyLS
+	VdlGdqnbFV3CSKmFu6/h57KU0LU5tIQvzxjXWUkrzLMRNl2pz8czI0BmrC58FA8uql6TebCxO3q
+	/qMPFsBSDcHkUwgVKhEOE1TwGtEmdMUi/suLC0YUT4UXjQPfgLjkytNDXHVwU
+X-Received: by 2002:a05:6a21:6b17:b0:3c4:1c9f:d7e with SMTP id adf61e73a8af0-3d26657278fmr32456202637.6.1788061658710;
+        Sat, 29 Aug 2026 20:47:38 -0700 (PDT)
+X-Received: by 2002:a05:6a21:6b17:b0:3c4:1c9f:d7e with SMTP id adf61e73a8af0-3d26657278fmr32456170637.6.1788061658310;
+        Sat, 29 Aug 2026 20:47:38 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3286f8094dasm20956768eec.13.2026.08.29.20.47.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 29 Aug 2026 20:47:38 -0700 (PDT)
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Lee Jones <lee@kernel.org>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>, linux-arm-msm@vger.kernel.org,
+        mfd@lists.linux.dev, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Dhruvin Rajpura <drajpura@qti.qualcomm.com>,
+        Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Subject: [PATCH] dt-bindings: mfd: qcom,spmi-pmic: Document PMAU0102
+Date: Sun, 30 Aug 2026 11:47:19 +0800
+Message-ID: <20260830034719.140213-1-shengchao.guo@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-To: m.wilczynski@samsung.com
-Cc: Laurent.pinchart@ideasonboard.com, airlied@gmail.com, alex@ghiti.fr,
- andrzej.hajda@intel.com, andy.yan@rock-chips.com, andyshrk@163.com,
- aou@eecs.berkeley.edu, bmasney@redhat.com, conor+dt@kernel.org,
- conor@kernel.org, db@domibel.de, devicetree@vger.kernel.org,
- dri-devel@lists.freedesktop.org, hal.feng@starfivetech.com, heiko@sntech.de,
- hello@big-grey.co.uk, jernej.skrabec@gmail.com, jonas@kwiboo.se,
- kernel@esmil.dk, krzk+dt@kernel.org, lee@kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-clk@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-phy@lists.infradead.org,
- linux-riscv@lists.infradead.org, linux-rockchip@lists.infradead.org,
- luca.ceresoli@bootlin.com, m.szyprowski@samsung.com,
- maarten.lankhorst@linux.intel.com, maudspierings@gocontroll.com,
- mfd@lists.linux.dev, mripard@kernel.org, mturquette@baylibre.com,
- neil.armstrong@linaro.org, p.zabel@pengutronix.de, palmer@dabbelt.com,
- pjw@kernel.org, rfoss@kernel.org, robh@kernel.org, sboyd@kernel.org,
- simona@ffwll.ch, tzimmermann@suse.de, uwu@icenowy.me, vkoul@kernel.org
-References: <20260828-jh7110-clean-send-v2-13-331680c8b9d1@samsung.com>
-Subject: Re: [PATCH v2 13/15] phy: starfive: Add jh7110-inno-hdmi-phy driver
-Content-Language: en-US
-From: Maud Spierings <maud_spierings@murena.io>
-In-Reply-To: <20260828-jh7110-clean-send-v2-13-331680c8b9d1@samsung.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: kiQZgRF4PKJ600mQo7LyMXt2AuKvlwLW
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODMwMDAyOSBTYWx0ZWRfXw0AZNJxKtnhj
+ vzO/WVfbvo6YrDXbNeSpoWAYarrSYQQ+t9Rn5hA/cdbwkg0DsbTMUzkROwHhqP0JCwvFgcRfA+/
+ +qbN2s2Y9YFsv4t20WADKpJ3w8l7FnM=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODMwMDAyOSBTYWx0ZWRfX2hfXyq3FLbYk
+ D2xpzghJaIP9ClNtCgJmrLynNXsZSD/YNC4u6UA6xDfSyyHi5l+Iw3CnlV2iZ//4yb069mYNe4f
+ iZKDYN60nuZUPg5Q4n9jKfVovT14IzwTcTTFongJi4/OVD6alFu3D/xW2yffTPIp1isR92vd415
+ 8w/ak4ddTwYQ0nigyykkTcFgNVUSLmm35hEmEmLgDYpQVbLN8FjzpfdL2C9rivXSPQZ0xwBXOrI
+ rdzZjDRWgoT64z8WoFnuNl/d4YdObZIgzdhN+hQfuZkNY7KdLIHGZKJsOIhv8giZv25yaHuIz4Q
+ a+Qkl/gGdh0uOPbizb+xlpzuIQFW4pMhbxJuRFSQ8iN39SD2Exx1WXsiylPawpStw0EJxieRM81
+ OMk1ONeZupz6CJVOr1K5fFr6c88LzRVMNFieZhFe7YQH96RHBOc+igLgAM1Hg+AajgtYB0zmbCL
+ 06GOFR5dEzZrHmnNtnw==
+X-Authority-Analysis: v=2.4 cv=ZOPnX37b c=1 sm=1 tr=0 ts=6a93a7db cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
+ a=GXJ8kvFa_VRzmclzPfYA:9 a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-ORIG-GUID: kiQZgRF4PKJ600mQo7LyMXt2AuKvlwLW
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-30_01,2026-08-27_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 spamscore=0 malwarescore=0 lowpriorityscore=0
+ priorityscore=1501 adultscore=0 bulkscore=0 impostorscore=0 phishscore=0
+ clxscore=1011 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608300029
 
-Hi Michal,
+From: Dhruvin Rajpura <drajpura@qti.qualcomm.com>
 
-Small request for an eventual v3
+Add compatible for Qualcomm PMAU0102 PMIC that is used on Nord platform.
 
-> Add the HDMI PHY driver for the StarFive JH7110.
-> 
-> This driver binds to the starfive,jh7110-inno-hdmi-phy node and
-> gets its regmap from the parent. It has no dependencies on voutcrg, only
-> on its refoclk (xin24m), which breaks the probe-time circular
-> dependency.
-> 
-> This driver provides two main functions:
->  - Clock Provider: It registers clk_ops to provide the variable pixel
->    clock (hdmi_pclk). The .set_rate operation configures the Pre-PLL
->    registers (0x1a0+) based on the requested rate.
-> 
->  - PHY Provider: It registers phy_ops for the controller. The .power_on
->    op configures and enables the Post-PLL and other analog blocks (BIAS,
->    LDO, Serializer, etc.).
-> 
-> The JH7110 instantiates the same Innosilicon IP as the Rockchip RK3328,
-> with the PHY register block shifted by 0x100 because it sits behind the
-> HDMI controller in the shared register space. The pre-PLL programming
-> therefore comes from the common Innosilicon helpers; this driver adds
-> the JH7110 pixel clock table, the post-PLL and the analog configuration.
-> 
-> Co-developed-by: Dominique Belhachemi <db@domibel.de>
-> Signed-off-by: Dominique Belhachemi <db@domibel.de>
-> Signed-off-by: Michal Wilczynski <m.wilczynski@samsung.com>
-> ---
->  drivers/phy/starfive/Kconfig                |  20 +
->  drivers/phy/starfive/Makefile               |   1 +
->  drivers/phy/starfive/phy-jh7110-inno-hdmi.c | 567 ++++++++++++++++++++++++++++
->  3 files changed, 588 insertions(+)
-> 
+Signed-off-by: Dhruvin Rajpura <drajpura@qti.qualcomm.com>
+Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+---
+ Documentation/devicetree/bindings/mfd/qcom,spmi-pmic.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
-[snip]
+diff --git a/Documentation/devicetree/bindings/mfd/qcom,spmi-pmic.yaml b/Documentation/devicetree/bindings/mfd/qcom,spmi-pmic.yaml
+index 5e0ed30a9a46..f6534e9e9912 100644
+--- a/Documentation/devicetree/bindings/mfd/qcom,spmi-pmic.yaml
++++ b/Documentation/devicetree/bindings/mfd/qcom,spmi-pmic.yaml
+@@ -74,6 +74,7 @@ properties:
+           - qcom,pm8994
+           - qcom,pm8998
+           - qcom,pma8084
++          - qcom,pmau0102
+           - qcom,pmc8180
+           - qcom,pmc8180c
+           - qcom,pmc8380
+-- 
+2.43.0
 
-> +
-> +static const struct inno_hdmi_phy_pre_pll_config pre_pll_cfg_table[] = {
-> +	{ 25175000, 25175000, 1, 100, 2, 3, 3, 12, 3, 3, 4, 0, 0xF55555 },
-> +	{ 25200000, 25200000, 1, 100, 2, 3, 3, 12, 3, 3, 4, 0, 0 },
-> +	{ 27000000, 27000000, 1, 90, 3, 2, 2, 10, 3, 3, 4, 0, 0 },
-> +	{ 27027000, 27027000, 1, 90, 3, 2, 2, 10, 3, 3, 4, 0, 0x170A3D },
-> +	{ 28320000, 28320000, 1, 28, 2, 1, 1, 3, 0, 3, 4, 0, 0x51EB85 },
-> +	{ 30240000, 30240000, 1, 30, 2, 1, 1, 3, 0, 3, 4, 0, 0x3D70A3 },
-> +	{ 31500000, 31500000, 1, 31, 2, 1, 1, 3, 0, 3, 4, 0, 0x7FFFFF },
-> +	{ 33750000, 33750000, 1, 33, 2, 1, 1, 3, 0, 3, 4, 0, 0xCFFFFF },
-> +	{ 36000000, 36000000, 1, 36, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
-> +	{ 40000000, 40000000, 1, 80, 2, 2, 2, 12, 2, 2, 2, 0, 0 },
-> +	{ 46970000, 46970000, 1, 46, 2, 1, 1, 3, 0, 3, 4, 0, 0xF851EB },
-> +	{ 49500000, 49500000, 1, 49, 2, 1, 1, 3, 0, 3, 4, 0, 0x7FFFFF },
-> +	{ 49000000, 49000000, 1, 49, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
-> +	{ 50000000, 50000000, 1, 50, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
-> +	{ 54000000, 54000000, 1, 54, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
-> +	{ 54054000, 54054000, 1, 54, 2, 1, 1, 3, 0, 3, 4, 0, 0x0DD2F1 },
-> +	{ 57284000, 57284000, 1, 57, 2, 1, 1, 3, 0, 3, 4, 0, 0x48B439 },
-> +	{ 58230000, 58230000, 1, 58, 2, 1, 1, 3, 0, 3, 4, 0, 0x3AE147 },
-> +	{ 59341000, 59341000, 1, 59, 2, 1, 1, 3, 0, 3, 4, 0, 0x574BC6 },
-> +	{ 59400000, 59400000, 1, 99, 3, 1, 1, 1, 3, 3, 4, 0, 0 },
-> +	{ 65000000, 65000000, 1, 130, 2, 2, 2, 12, 0, 2, 2, 0, 0 },
-> +	{ 68250000, 68250000, 1, 68, 2, 1, 1, 3, 0, 3, 4, 0, 0x3FFFFF },
-> +	{ 71000000, 71000000, 1, 71, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
-> +	{ 74176000, 74176000, 1, 98, 1, 2, 2, 1, 2, 3, 4, 0, 0xE6AE6B },
-> +	{ 74250000, 74250000, 1, 99, 1, 2, 2, 1, 2, 3, 4, 0, 0 },
-> +	{ 75000000, 75000000, 1, 75, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
-> +	{ 78750000, 78750000, 1, 78, 2, 1, 1, 3, 0, 3, 4, 0, 0xCFFFFF },
-> +	{ 79500000, 79500000, 1, 79, 2, 1, 1, 3, 0, 3, 4, 0, 0x7FFFFF },
-> +	{ 83500000, 83500000, 2, 167, 2, 1, 1, 1, 0, 0, 6, 0, 0 },
-> +	{ 83500000, 104375000, 1, 104, 2, 1, 1, 1, 1, 0, 5, 0, 0x600000 },
-> +	{ 85500000, 85500000, 1, 85, 2, 1, 1, 3, 0, 3, 4, 0, 0x7FFFFF },
-> +	{ 85750000, 85750000, 1, 85, 2, 1, 1, 3, 0, 3, 4, 0, 0xCFFFFF },
-> +	{ 85800000, 85800000, 1, 85, 2, 1, 1, 3, 0, 3, 4, 0, 0xCCCCCC },
-> +	{ 88750000, 88750000, 1, 88, 2, 1, 1, 3, 0, 3, 4, 0, 0xCFFFFF },
-> +	{ 89910000, 89910000, 1, 89, 2, 1, 1, 3, 0, 3, 4, 0, 0xE8F5C1 },
-> +	{ 90000000, 90000000, 1, 90, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
-> +	{ 101000000, 101000000, 1, 101, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
-> +	{ 102250000, 102250000, 1, 102, 2, 1, 1, 3, 0, 3, 4, 0, 0x3FFFFF },
-> +	{ 106500000, 106500000, 1, 106, 2, 1, 1, 3, 0, 3, 4, 0, 0x7FFFFF },
-> +	{ 108000000, 108000000, 1, 90, 3, 0, 0, 5, 0, 2, 2, 0, 0 },
-> +	{ 119000000, 119000000, 1, 119, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
-> +	{ 131481000, 131481000, 1, 131, 2, 1, 1, 3, 0, 3, 4, 0, 0x7B22D1 },
-> +	{ 135000000, 135000000, 1, 135, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
-> +	{ 136750000, 136750000, 1, 136, 2, 1, 1, 3, 0, 3, 4, 0, 0xCFFFFF },
-> +	{ 147180000, 147180000, 1, 147, 2, 1, 1, 3, 0, 3, 4, 0, 0x2E147A },
-> +	{ 148352000, 148352000, 1, 98, 1, 1, 1, 1, 2, 2, 2, 0, 0xE6AE6B },
-> +	{ 148500000, 148500000, 1, 99, 1, 1, 1, 1, 2, 2, 2, 0, 0 },
-> +	{ 154000000, 154000000, 1, 154, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
-> +	{ 156000000, 156000000, 1, 156, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
-> +	{ 157000000, 157000000, 1, 157, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
-> +	{ 162000000, 162000000, 1, 162, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
-> +	{ 174250000, 174250000, 1, 145, 3, 0, 0, 5, 0, 2, 2, 0, 0x355555 },
-> +	{ 174500000, 174500000, 1, 174, 2, 1, 1, 3, 0, 3, 4, 0, 0x7FFFFF },
-> +	{ 174570000, 174570000, 1, 174, 2, 1, 1, 3, 0, 3, 4, 0, 0x91EB84 },
-> +	{ 175500000, 175500000, 1, 175, 2, 1, 1, 3, 0, 3, 4, 0, 0x7FFFFF },
-> +	{ 185590000, 185590000, 1, 185, 2, 1, 1, 3, 0, 3, 4, 0, 0x970A3C },
-> +	{ 187000000, 187000000, 1, 187, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
-
-add:
-{ 235690000, 235690000, 1, 235, 2, 1, 1, 3, 0, 3, 4, 0, 0xB0A3D6},
-
-This matches one of the framework 13 displays (fml13v01 board)
-
-source: [1]
-
-edid:
-
-edid-decode (hex):
-
-00 ff ff ff ff ff ff 00 09 e5 5f 09 00 00 00 00
-17 1d 01 03 80 1c 13 78 02 de 50 a3 54 4c 99 26
-0f 50 54 00 00 00 01 01 01 01 01 01 01 01 01 01
-01 01 01 01 01 01 11 5c d0 18 81 e0 2d 50 30 20
-36 00 1d be 10 00 00 1a a7 49 d0 18 81 e0 2d 50
-30 20 36 00 1d be 10 00 00 1a 00 00 00 fe 00 42
-4f 45 20 43 51 0a 20 20 20 20 20 20 00 00 00 fe
-00 4e 45 31 33 35 46 42 4d 2d 4e 34 31 0a 01 21
-
-02 03 19 c1 44 83 10 02 01 23 09 07 07 83 01 00
-00 67 03 0c 00 10 00 00 44 11 5c d0 18 81 e0 2d
-50 30 20 36 00 1d be 10 00 00 1a 00 00 00 00 00
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01
-
-----------------
-
-Block 0, Base EDID:
-   EDID Structure Version & Revision: 1.3
-   Vendor & Product Identification:
-     Manufacturer: BOE
-     Model: 2399
-     Made in: week 23 of 2019
-   Basic Display Parameters & Features:
-     Digital display
-     Maximum image size: 28 cm x 19 cm
-     Gamma: 2.20
-     Monochrome or grayscale display
-     First detailed timing is the preferred timing
-   Color Characteristics:
-     Red  : 0.6396, 0.3291
-     Green: 0.2998, 0.5996
-     Blue : 0.1494, 0.0595
-     White: 0.3125, 0.3281
-   Established Timings I & II: none
-   Standard Timings: none
-   Detailed Timing Descriptors:
-     DTD 1:  2256x1504   59.998513 Hz   3:2     92.938 kHz    235.690000 
-MHz (285 mm x 190 mm)
-                  Hfront   48 Hsync  32 Hback  200 Hpol P
-                  Vfront    3 Vsync   6 Vback   36 Vpol N
-     DTD 2:  2256x1504   47.998302 Hz   3:2     74.349 kHz    188.550000 
-MHz (285 mm x 190 mm)
-                  Hfront   48 Hsync  32 Hback  200 Hpol P
-                  Vfront    3 Vsync   6 Vback   36 Vpol N
-     Alphanumeric Data String: 'BOE CQ'
-     Alphanumeric Data String: 'NE135FBM-N41'
-   Extension blocks: 1
-Checksum: 0x21
-
-----------------
-
-Block 1, CTA-861 Extension Block:
-   Revision: 3
-   Underscans IT Video Formats by default
-   Basic audio support
-   Native detailed modes: 1
-   Video Data Block:
-     VIC   3:   720x480    59.940060 Hz  16:9     31.469 kHz 
-27.000000 MHz (native)
-     VIC  16:  1920x1080   60.000000 Hz  16:9     67.500 kHz 
-148.500000 MHz
-     VIC   2:   720x480    59.940060 Hz   4:3     31.469 kHz 
-27.000000 MHz
-     VIC   1:   640x480    59.940476 Hz   4:3     31.469 kHz 
-25.175000 MHz
-   Audio Data Block:
-     Linear PCM:
-       Max channels: 2
-       Supported sample rates (kHz): 48 44.1 32
-       Supported sample sizes (bits): 24 20 16
-   Speaker Allocation Data Block:
-     FL/FR - Front Left/Right
-   Vendor-Specific Data Block (HDMI), OUI 00-0C-03:
-     Source physical address: 1.0.0.0
-     Maximum TMDS clock: 340 MHz
-   Detailed Timing Descriptors:
-     DTD 3:  2256x1504   59.998513 Hz   3:2     92.938 kHz    235.690000 
-MHz (285 mm x 190 mm)
-                  Hfront   48 Hsync  32 Hback  200 Hpol P
-                  Vfront    3 Vsync   6 Vback   36 Vpol N
-Checksum: 0x01  Unused space in Extension Block: 84 bytes
-
-
-> +	{ 241500000, 241500000, 1, 161, 1, 1, 1, 4, 0, 2, 2, 0, 0 },
-> +	{ 241700000, 241700000, 1, 241, 2, 1, 1, 3, 0, 3, 4, 0, 0xB33332 },
-> +	{ 262750000, 262750000, 1, 262, 2, 1, 1, 3, 0, 3, 4, 0, 0xCFFFFF },
-> +	{ 296500000, 296500000, 1, 296, 2, 1, 1, 3, 0, 3, 4, 0, 0x7FFFFF },
-> +	{ 296703000, 296703000, 1, 98, 0, 1, 1, 1, 0, 2, 2, 0, 0xE6AE6B },
-> +	{ 297000000, 297000000, 1, 99, 0, 1, 1, 1, 0, 2, 2, 0, 0 },
-> +	{ 594000000, 594000000, 1, 99, 0, 2, 0, 1, 0, 1, 1, 0, 0 },
-> +	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-> +};
-> +
-
-kind regards,
-Maud
-
-[1]: 
-https://github.com/DC-DeepComputing/fml13v01-linux/blob/97c64fe2832b6826914b6da7aa4febcdd4d3d444/drivers/gpu/drm/verisilicon/inno_hdmi.c#L112
