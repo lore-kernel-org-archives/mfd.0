@@ -1,109 +1,93 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0DDF389114
-	for <mfd@lists.linux.dev>; Mon, 31 Aug 2026 20:18:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8172B3955D7;
+	Mon, 31 Aug 2026 21:41:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788207505; cv=none; b=MKMgUSWVEC8cdCp0Qizu8KleEafny74mKJTZIb/4pqeN+3F0PpJTkGgY3HTl3gMPQixz01YwU5IqCsUNtyrvcvJerm60k5Cb31NffVt0Y4uGUvSyCWC0CzXCpcRgdiZAbszb3IEzVBpgN+JN7zuxkvfQUEessXAkKLh9/aMKK7k=
+	t=1788212514; cv=none; b=HeqNDgX4TFq//f1IC9VR5Ct+/pUe/AbVOpkdpwtL1NvPxzjmXGYp7olsxw5g9gzIX7X0kHtNVk6g16IcHESwkxoNHJiktx7s/PeXA4qBo2U5IsQzEagqx04uePp90tUdzLnpZVuyl+Z0Sfl3HgqyqCKOz/thFZVZfqBnM67bikg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788207505; c=relaxed/simple;
-	bh=uxXnywrB964lFHIlbAx+gl0yKJDMUxBJ8k53z1N4/DQ=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=bPPTllvuUGRqDxnRDqiHcSUO7JB/zSRvdL5XuJwowAhej/YMp0dklos1JDyRA7spqzzMVECR0HPftsCwhEs9VhOz5bHgTgLQBYoaGsqeDmU7N3xe20lfvcmIWIAnzaxuJyKjHXdhfbCN4hIJ4bLPUOLvaza4qIchI4+eUCy42/M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EZEyv+My; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788212514; c=relaxed/simple;
+	bh=qaV1tTloGcys7j3cgzp5dmXEaVc5v5QwO7uVaKVw0JM=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=PmujJnSzcIkvSgsnkpEjUWP5tiGbMLe3WfM4O/BggSwe2WM3U03O2/iED1tEGSl9ZYAwcZhJFvBt24gBAH6NridPFi91BqdzklWR8yizx8CE1fVAaNe4zVLT3nEonE5DU+KnclAbm4gVJbZfpptKdzgXchgxSjteAKg/nQNx928=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=H2Cl36Xc; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EZEyv+My"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A656D1F00A3F
-	for <mfd@lists.linux.dev>; Mon, 31 Aug 2026 20:18:23 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="H2Cl36Xc"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E00371F000E9;
+	Mon, 31 Aug 2026 21:41:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788207503;
-	bh=dBw06eNRTDzQJpe26/cWXwzg6j8pKh6C6aUf9EkHB6I=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=EZEyv+MylMpO+T8PDxd5NBLwn9f2oKY4Akg0lM2pDOhv28sjEHtxYCzjKI8PBMoji
-	 O3uEiiSNOfKEl9CLZ9cBnQCzVN62OC5/O1e/2VFgOL6ZIJrNvRgkiTEdWZOT6b/5+4
-	 Y6a3aUbL5F99o/D4oQficnS7meovTHjzaA2pSVL/LOSL95rKBM4bTtL6/fSpzNvxDB
-	 3V7BZBcJlrceRv6e/7YKxLZDYw20lfmKTXXarMAs7JDiAC0ehHfrMLsvhH0FMDih6b
-	 8tAcKY4Z5h95sSYKNQikEv8UbAZHmXwgFC+qFg2yCxJgKyHyD1/Hh5w8bqnwirDVFy
-	 hLti5RYZi4oSg==
-Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-5b159850b16so1245062e87.3
-        for <mfd@lists.linux.dev>; Mon, 31 Aug 2026 13:18:23 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBzU3O4bqVuFFzGI78S5FfzJe9HOF7lMEoIlsQ0CYezhUHdATZHY5EHJao8giz9TTI6y1PU=@lists.linux.dev
-X-Gm-Message-State: AFuF++kt+D8oZEDxBVcK2we7t3NJ0DzhfYB3lhMJywJnv3iIcU5rVtvs
-	v5GhTy7EVqZXRac7gTh/UM7L1J9eMU3zzygtTEYRZ98X9ybKAeUlxbl3N1TYmb80VG9FocH47Hv
-	OclNfhWzaDL4GrcYTuE000DiNpaDMiAo=
-X-Received: by 2002:a05:6512:3baa:b0:5b0:197b:9827 with SMTP id
- 2adb3069b0e04-5b5fe058e29mr1175861e87.3.1788207502384; Mon, 31 Aug 2026
- 13:18:22 -0700 (PDT)
+	s=k20260515; t=1788212513;
+	bh=TEEmGKDjyqxS4qnXRtE4P/e+M/1XaA5wZcIfKpKTX0g=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=H2Cl36XcRboZBYSxpbuIlyimZBwJnRvX0ygDjydb/r2wplHhS3ZC6Xfablt6os+HW
+	 H8FeoKABYjDJB3vxYE5sFDZVrQicGVXJNRCsPfH0oUH50ixgL0E6Rszt9WULwBRQp7
+	 d58wd8m0KrlLXhm/J4E1xOFUq5suODDCvi/cNJ9sjA0OKP4x7PvwLG2Xqim+1Dceov
+	 JqfkroAI9Qvn+8jAnxsXlKyrZ98L89zzRL/sHFq1EQv2reNxHDnZpjFfJZrpkUH37J
+	 H7GpciXXI2lt6k0d65S+4RF3wHPuCR65XtXixUVO5GK9aTpo+wpCpSZTgtTKxir1gf
+	 76fsH/CmcGiQQ==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH 1/1] dt-bindings: mfd: da9052: allow dlg,da9053-aa
+ fallback to dlg,da9052
+Reply-To: sashiko-reviews@lists.linux.dev
+To: Frank.Li@oss.nxp.com
+Cc: lee@kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev, Frank.Li@kernel.org, conor+dt@kernel.org, robh@kernel.org, imx@lists.linux.dev
+In-Reply-To: <20260831201522.51294-1-Frank.Li@oss.nxp.com>
+References: <20260831201522.51294-1-Frank.Li@oss.nxp.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Mon, 31 Aug 2026 21:41:52 +0000
+Message-Id: <20260831214152.E00371F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-References: <20260831-ux500-dts-snowball-regulator-v1-0-fe279fff5e18@kernel.org>
- <20260831-ux500-dts-snowball-regulator-v1-8-fe279fff5e18@kernel.org> <20260831-subtitle-anvil-0f33fee6c2af@spud>
-In-Reply-To: <20260831-subtitle-anvil-0f33fee6c2af@spud>
-From: Linus Walleij <linusw@kernel.org>
-Date: Mon, 31 Aug 2026 22:18:09 +0200
-X-Gmail-Original-Message-ID: <CAD++jLnBSrzXnPdtr_NqTymqBupYv_-xW3NAMCa=7Dx1RwtAFg@mail.gmail.com>
-X-Gm-Features: AcwNN1VXZziHPIGagW8xwoy-VUmF5diU5-vmep_nHTuTWOlYmAGJFJ54vJZTXWU
-Message-ID: <CAD++jLnBSrzXnPdtr_NqTymqBupYv_-xW3NAMCa=7Dx1RwtAFg@mail.gmail.com>
-Subject: Re: [PATCH 08/13] dt-bindings: mfd: ab8500: Add regulators
-To: Conor Dooley <conor@kernel.org>
-Cc: Stephan Gerhold <stephan@gerhold.net>, Liam Girdwood <lgirdwood@gmail.com>, 
-	Mark Brown <broonie@kernel.org>, Axel Lin <axel.lin@ingics.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>, 
-	devicetree@vger.kernel.org, mfd@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 31, 2026 at 6:18=E2=80=AFPM Conor Dooley <conor@kernel.org> wro=
-te:
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
+s) to consider:
+- [Low] The patch introduces an inconsistency by explicitly allowing the le=
+gacy fallback compatible string `dlg,da9053-aa` with `dlg,da9052`, but omit=
+ting `dlg,da9053` which uses the exact same pattern.
+--
 
+commit abd213140dc2339cb1dfe32c3ccb7bfd92c4ba9b
+Author: Frank Li <Frank.Li@nxp.com>
 
-> > +            ab8500_buck_smps1:
-> > +            ab8500_buck_smps2:
-> > +            ab8500_buck_smps3:
->
-> How do these differ from
->   regulator-external:
->       ab8500_ext1:
->         description: The voltage for the VSMPS1 external regulator
->       ab8500_ext2:
->         description: The voltage for the VSMPS2 external regulator
->       ab8500_ext3:
->         description: The voltage for the VSMPS3 external regulator
+dt-bindings: mfd: da9052: allow dlg,da9053-aa fallback to dlg,da9052
 
-Exactly in the way they say, the former are internal, the regulators
-exist in the AB8500/AB8505 silicon. The latter are external,
-they are just control channels for regulators outside of the
-AB8500/AB8505.
+This patch adds a fallback compatible string schema allowing dlg,da9053-aa =
+to
+fall back to dlg,da9052 in order to resolve a legacy platform check_dtbs
+warning.
 
-The three "external regulators" are control channels going out
-of the AB8500/AB8505 to control secondary silicon outside
-of the AB8500/AB8505.
+> diff --git a/Documentation/devicetree/bindings/mfd/dlg,da9052.yaml b/Docu=
+mentation/devicetree/bindings/mfd/dlg,da9052.yaml
+> index 1103a8cc5cea4..d1d23c7c4d0c2 100644
+> --- a/Documentation/devicetree/bindings/mfd/dlg,da9052.yaml
+> +++ b/Documentation/devicetree/bindings/mfd/dlg,da9052.yaml
+> @@ -18,6 +18,10 @@ properties:
+>            - dlg,da9053-bb
+>            - dlg,da9053-bc
+>            - dlg,da9052
+> +      - items:
+> +          - enum:
+> +              - dlg,da9053-aa
+> +          - const: dlg,da9052
 
-It is also clearly seen in the Linux driver which use different
-registers.
+[Severity: Low]
+Does this fallback allowance also need to include the plain dlg,da9053 vari=
+ant
+to completely fix the warnings?
 
-The similar name "VSMPS1/2/3" is incidental.
+Looking at arch/arm/boot/dts/nxp/imx/imx53-smd.dts, the pmic node still
+relies on the missing fallback pattern:
 
-SMPS =3D=3D Switched Mode Power Supply.
+		compatible =3D "dlg,da9053", "dlg,da9052";
 
-(Customers didn't much use the external regulators. They
-usually implemeted GPIO-controlled regulators on the side
-instead.)
+Without including dlg,da9053 in the enum alongside dlg,da9053-aa, won't
+the legacy device tree node continue to generate a dtbs_check warning?
 
-If you want I can add some verbiage explaining that they are
-not the same despite the name is similar.
-
-> > +            ab8500_buck_arm:
->
-> realistically, all of these should have -s instead of _s.
-
-Can you elaborate, I have a hard time understanding that
-terse comment :D
-
-Yours,
-Linus Walleij
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260831201522.5129=
+4-1-Frank.Li@oss.nxp.com?part=3D1
