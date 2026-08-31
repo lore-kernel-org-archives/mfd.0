@@ -1,128 +1,111 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2558939D6CA
-	for <mfd@lists.linux.dev>; Mon, 31 Aug 2026 12:03:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F120C233D9E
+	for <mfd@lists.linux.dev>; Mon, 31 Aug 2026 12:03:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788177830; cv=none; b=sBvVFBOXk6fgLnPjbVusJapWhbfbNpuSVbqLhOsl/mxNTYqIhGwX096Xais/DNgcNRXI6GRILPz1wYql8OZ872GXsXlWR+/do9JcDj6niam7EjtQYwOYVT3IdP9yNqBmK72rU9tVhYX6Uey/6NlIFNAOAsd2NimUv10wGwQbR3U=
+	t=1788177841; cv=none; b=A1V96iKOJ7sXC3DuSV3fAgqbMJKWoYyhPptIP6zYQ6BjCGtBMC2zRJ/f/sTzRNEr8xt7oJae4LS412G5GGqhruA1OK2e7z9Pg+24h8JwBODDXLEyLbnDmcZJQLE7eaO9O1IDSkQV+QT2jwMfEvqlepXvT4/aZ1Bl2ec0GBj9Tr4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788177830; c=relaxed/simple;
-	bh=rVkFfBurGNkGKpWvAfPAjSOPnPO9A4uhmtBIsLcwcSA=;
+	s=arc-20240116; t=1788177841; c=relaxed/simple;
+	bh=Ydn6einXAz6KuVHAfoAmWzZIv+jDL86QfleOuwYtz10=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=HhQ1sJ7IBgleQ6BrX7OyghhrT5biBP/nuzdvT9ojQhOv3if7w+r0OArZacNeW0FSZGC0qemBx3E+Hnk9yB3In5YKyHbeemolJ3JZwSGE9NOILwwUvX4EG/vggSDF7O+Ipfv+85ImPP9wyZODW281dAsyMI77t3NkSUShw/H5xys=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Y/n+Vgyd; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=dRlqtnP1UVuofg95gzLCR2x8TOYzLB33z1xzn+Ik0A7VDBnVXCpuNB8kph3G0yEpj/0qilrSuW3w0ItyPvutINSNPfA3O/KR7jRJTm/YlGJ0nqwtX0vRAo2WSOBoqLh6mf4R4aL997DY8U51YcBhj98Toxwg4+wdq45XTbAVOJg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=orAKXZoN; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Y/n+Vgyd"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7F3241F00A3D;
-	Mon, 31 Aug 2026 12:03:48 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="orAKXZoN"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 676641F00A3D;
+	Mon, 31 Aug 2026 12:03:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788177828;
-	bh=+BWRkWwFhpJ+DTaYSIaqS3CPKByOKtMmhR5613wQ634=;
+	s=k20260515; t=1788177839;
+	bh=prwwsf2q4nCUz2P5B/loSmfYt/ob3M+yCkGYEZKeQOk=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Y/n+Vgyd29PLuKWym+2m98lZvXgMpflxHuvgZNPJu5Qy2Y7aqheb4iR1JN3YKu+m6
-	 OcJ8artV3yhkWcQgiSq2RCOqVAwJf/acQmLi2vcT57Y6OVdastmsIG9Z6bP8QaMnN0
-	 BYZlHYXEwsWMIzBMj6qqHXemMnRUyj8nTK4m72RY1oTcyLzPIrYu7MbtCEW1htDLb2
-	 QkX/oQS04BLW40/aTRwWXoTQx8kopVRKDZjg1oGMzLLlA2xGabooBhE/VYxYvaHxiv
-	 J6BDe+j91J1PDpscjCp/Ir3mzhakGKM4I+iNgbtP41+FrxKGtqZ870XTJjRjO8N/x6
-	 s+65ec5giw45A==
+	b=orAKXZoNeCYkdWh+1SWSTYRzWSXhg4iyO3MGjRUUxgSPIzXtj0iQHj+OF9JwQ0w0c
+	 tkGmFswABLUeqsvQi5XIpNQNqRRKDVIn3rNPuhcxpILkrfShVMOdedUoub/VUtbh1z
+	 UfYYSOuyTFP0XOSlplvuqbcUxdL5+3Gzy98sqxfIGJ6sSSTBKTrIFH2f9CyCauyqsC
+	 9GQCCTx+MsrrxgpybiZ8uB/nahvhE7ycQqJC7sms92X/C/SKAMQdgoGUIwrWRB2auN
+	 CVveHekmPCzjzrnLaEhGhB5g5h5WHGARQevSFjva9YKDw5hYRSSHbllu8XlXrbaCIn
+	 2OLZuYRdw1qrA==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 1/2] soundwire: Add a helper function to indicate a
- device will detach
+Subject: Re: [PATCH 2/2] mfd: cs42l43: Move to core detach helper
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Charles Keepax" <ckeepax@opensource.cirrus.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260831115019.1616202-2-ckeepax@opensource.cirrus.com>
+Cc: lee@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20260831115019.1616202-3-ckeepax@opensource.cirrus.com>
 References: <20260831115019.1616202-1-ckeepax@opensource.cirrus.com>
- <20260831115019.1616202-2-ckeepax@opensource.cirrus.com>
+ <20260831115019.1616202-3-ckeepax@opensource.cirrus.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Mon, 31 Aug 2026 12:03:47 +0000
-Message-Id: <20260831120348.7F3241F00A3D@smtp.kernel.org>
+Date: Mon, 31 Aug 2026 12:03:59 +0000
+Message-Id: <20260831120359.676641F00A3D@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
-- [High] sdw_slave_signal_unattach() fails to update slave->status to SDW_S=
-LAVE_UNATTACHED, which can deadlock the SoundWire enumeration state machine=
- if the transient hardware detach is missed.
-- [Low] The kernel-doc comment for sdw_slave_signal_unattach() describes a =
-non-existent parameter and an incorrect return value.
+
+Pre-existing issues:
+- [High] Preexisting lifecycle bug: Devres items added by an asynchronous w=
+orkqueue after devm teardown has started are permanently leaked.
 --
 
-commit b3922d4aabf3e57f2fd4348625745b06244e4fe8
+commit 28cea6eee264ba4b58e5dad35cea9b520bc94140
 Author: Charles Keepax <ckeepax@opensource.cirrus.com>
 
-soundwire: Add a helper function to indicate a device will detach
+mfd: cs42l43: Move to core detach helper
 
-This commit adds a helper function, sdw_slave_signal_unattach(), to indicate
-when a SoundWire device is about to detach due to a reset. This ensures the
-core reinitializes the completions so that sdw_slave_wait_for_init()
-correctly waits for the device to reattach.
+This commit switches the cs42l43 driver to use a new SoundWire core helper=
+=20
+for tracking device detachments instead of tracking it internally. It remov=
+es=20
+the custom device_detach completion.
 
-> diff --git a/include/linux/soundwire/sdw.h b/include/linux/soundwire/sdw.h
-> index 707ca6bd1e23d..969604755ce41 100644
-> --- a/include/linux/soundwire/sdw.h
-> +++ b/include/linux/soundwire/sdw.h
-
+> diff --git a/drivers/mfd/cs42l43.c b/drivers/mfd/cs42l43.c
+> index 4212ebcca60b5..f08ee598366d9 100644
+> --- a/drivers/mfd/cs42l43.c
+> +++ b/drivers/mfd/cs42l43.c
 [ ... ]
-
-> +/**
-> + * sdw_slave_signal_unattach - Signal that the peripheral is about to de=
-tach
-> + * @slave: Pointer to the SoundWire peripheral.
-> + * @timeout_us: Timeout in microseconds.
-> + *
-> + * Inform the core that the peripheral is about to detach from the bus, =
-this
-> + * is usually due to some implementation defined reset mechanism. After =
-this
-> + * sdw_slave_wait_for_init() should be called to wait for the device to
-> + * return.
-> + *
-> + * Return: Zero on success, and a negative error code on failure.
-> + */
-
-[Severity: Low]
-This isn't a bug, but the kernel-doc comment describes a @timeout_us parame=
-ter
-and a return value that do not exist in the inline function signature. Could
-these be removed to prevent kernel-doc warnings during W=3D1 builds?
-
-> +static inline void sdw_slave_signal_unattach(struct sdw_slave *slave)
-> +{
-> +	if (!slave)
-> +		return;
-> +
-> +	slave->unattach_request =3D SDW_UNATTACH_REQUEST_SLAVE_RESET;
-> +	reinit_completion(&slave->enumeration_complete);
-> +	reinit_completion(&slave->initialization_complete);
+> @@ -1115,7 +1103,6 @@ int cs42l43_dev_probe(struct cs42l43 *cs42l43)
+>  	dev_set_drvdata(cs42l43->dev, cs42l43);
+> =20
+>  	mutex_init(&cs42l43->pll_lock);
+> -	init_completion(&cs42l43->device_detach);
+>  	init_completion(&cs42l43->firmware_download);
+>  	INIT_WORK(&cs42l43->boot_work, cs42l43_boot_work);
 
 [Severity: High]
-Does this function also need to update slave->status to SDW_SLAVE_UNATTACHE=
-D?
+This is a pre-existing issue, but is there a potential lifecycle memory lea=
+k=20
+and use-after-free here regarding the asynchronous boot_work?
 
-If a transient hardware unattach is missed (e.g., due to interrupt coalesci=
-ng
-or scheduling delays), the core might see the device reattach as device 0.
-When sdw_handle_slave_status() processes this, it calls
-sdw_program_device_num() which checks if the status is SDW_SLAVE_UNATTACHED.
+Later in cs42l43_dev_probe(), cs42l43_dev_remove() is registered as a devm=
+=20
+action via devm_add_action_or_reset(). If the driver is unbound shortly aft=
+er=20
+probe (e.g., via sysfs unbind or device hot-unplug), the devm teardown will=
+=20
+run and execute cs42l43_dev_remove(), which calls=20
+cancel_work_sync(&cs42l43->boot_work).=20
 
-If slave->status is left as SDW_SLAVE_ATTACHED, sdw_program_device_num()
-aborts without reprogramming the device ID. This leaves the device stuck on
-device 0, failing enumeration and causing sdw_slave_wait_for_init() to time
-out.
+If cs42l43_boot_work() is concurrently running, cancel_work_sync() will=20
+block. Inside the work, devm_mfd_add_devices() is called, which adds new=20
+devres items to the device. Because devres_release_all() is already=20
+iterating over its captured list of items during the unbind, these newly=20
+added devm actions are skipped and permanently leaked.
 
-> +}
-> +
->  /**
->   * sdw_slave_wait_for_init - Wait for device initialisation
->   * @slave: Pointer to the SoundWire peripheral.
+This leaves the MFD child devices registered with pointers to a freed paren=
+t=20
+cs42l43 structure, which could result in a use-after-free if those children=
+=20
+access their parent data.=20
+
+Should the boot_work synchronization be moved out of the devres teardown pa=
+th=20
+so it executes before devres_release_all() captures the release list?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260831115019.1616=
-202-1-ckeepax@opensource.cirrus.com?part=3D1
+202-1-ckeepax@opensource.cirrus.com?part=3D2
