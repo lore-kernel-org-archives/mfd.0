@@ -1,92 +1,134 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BA0337646E
-	for <mfd@lists.linux.dev>; Tue,  1 Sep 2026 19:32:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D21FB4570E1;
+	Tue,  1 Sep 2026 20:02:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788291164; cv=none; b=TtbikImqUoVpinILYVc98MoQ0RadOK+HXvtItxXKMmgnde1+sq3yf5xk4jjFtlh1Jv5g0Fm6lqRsl4tkUneVWBie5dUijfT0SnQ0ATAs9F0f5YOl9n/zZ6aNBCP6zrdpWbxeCuY/47QR9N4ftqi11ACBYm50iqaB15X63A4DvPQ=
+	t=1788292935; cv=none; b=cdXrDxCRm/jBfAt2361SyyGBTgi2xSMv3suhU/dJsRRbH+lh6MhsqpPmCG8OI+OZTXo+utajcasV2KABDTKoOcPbNhaSEnHJDIMNrjMRZzE9t+ovfeAK+9lkvb+fE4+7Wka8Pq80PoIEUei8aWU6e1eBQUelbapElYn4jYHZwuA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788291164; c=relaxed/simple;
-	bh=qaGwawX2l41SR8cJLyr5DVUNHScSlypsAnhZbYeYcn4=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Nbe7anjOT7F+FwVyceuZRE8ajqtksqmTkf7cYV5aSRT6KtIUHv671Vtj1cwA3gZLRKKtUYlfjMPI2mlcR7e1z3wWtm6JojCO7Rl8o1xsKQF26RUIRJ6Gg0OSHzCtglU5qhn5rwjgYudC7rmXaI2HZPzjtygl/RC0IlJaKsaKNaY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZvqrWUo9; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788292935; c=relaxed/simple;
+	bh=rG+KIn92ie5czVekGzaFpq9mWoO7n+BfszteHjcPnl4=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=VBUJbMeO+apYN6LneEi88YzITb7kXKkjM1UANlN/TLbsrwQWX57hW0SfGMO8Spoa/Dpg2rxsF4Q/s0xmLnDGdh80WaspHc2DL2BtbAEB0+iWcZSvVc5LfRCNVnVf5fdGaLB2WkDgFJS4sjC6lmJerUQp+yE9ok1VzunaKH2HAd4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hSUda7UC; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZvqrWUo9"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F6981F00ACF
-	for <mfd@lists.linux.dev>; Tue,  1 Sep 2026 19:32:43 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hSUda7UC"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D0B891F000E9;
+	Tue,  1 Sep 2026 20:02:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788291163;
-	bh=gTb0PbTeAH/TOzITahU9JQpOG+u+beSlQIvzKC8ghuI=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=ZvqrWUo95Bkgl6AMqVmtBx8U9PcT1MMgE5MuUtYupnktNnhXyfBzDydyM+kmOc/Bt
-	 uxwmhQKT1J3Q+KKgSW0PIJp7CcubWhP+pocoAr8yq6Z6Jn6Alp+gf2UsCCJDu7SX80
-	 Uc2dOQizCknnK2KJ42mg+5I9idxliJihtb6Nzk7p4QC2yavavggCP9Fkz9CvGcB2vY
-	 vSb/FatTFlsSRzhfa8CpmKgA14Eqeargd5vToR+zMLWj8wswoq/EZz+8aVjfrEZhNH
-	 gnwrAcdcj0Gdc1pq82COl7m5oPIJFMO0Xd5okA+f9+KGbnxgHGE/PeP03x1juYmGT0
-	 J8gBXtCkjEGUQ==
-Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-5b0231a3e86so147267e87.0
-        for <mfd@lists.linux.dev>; Tue, 01 Sep 2026 12:32:43 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBz/kKe68hDcdqQ3Pv/bWyOEuQf8zqwjQ16d6UQkKS3j/7fx7BtZylZrniUg24gtyB6YBQE=@lists.linux.dev
-X-Gm-Message-State: AFuF++kRLQq4fabS/Q7L/QJpe2aJ85NQz2TQPnBIH1HrEP/ZuO6LOMLY
-	xBTxWt+BIeeyk4P7BaWacMMwa77HLR5sw1nHTL6Nd5z+xp2h8yEwjsgvLh/I0J+FBycHx6nAUQn
-	4Uxe5/rTCjrv/AyM/8z+o1i1nTyo7iJo=
-X-Received: by 2002:a05:6512:b23:b0:5b5:e57b:9126 with SMTP id
- 2adb3069b0e04-5b60832cddcmr35447e87.2.1788291161688; Tue, 01 Sep 2026
- 12:32:41 -0700 (PDT)
+	s=k20260515; t=1788292932;
+	bh=5OuDf05SqTXMns3ClH5tFBIKh25nGgNFQ5iYm4Mk44Q=;
+	h=From:Subject:Date:To:Cc;
+	b=hSUda7UC9S6HIbqtmwUZDv0GWKfiyzBhi8HuscIjlPneDx5NFB7L1TjxJleaTKppK
+	 Vb6vRmwYl8t/ktpnNtzxJ+rHquLZYYkw/GkLtl7RSaVfJwPSyQ/FJQaxm0RI/u+HFA
+	 /mvMKCxxCenQyAethu/zdGZka9dJeM7NdTcCNplXtFliZRRjHW3QtnbO2xkxbGDV7V
+	 9tGL9SkCCPMYDijTQeRo+RQKly7+2zbR3q0aBikOBjJfhMQaqOhKeR1dqQPmnAiFKc
+	 TCiV02KAgmIsxTxWbsZJDSFBy9GMes/0JEH3/N1MBSA+qJ5zCvInAuC8Ve0tbE2wdr
+	 2Q0nmzMy7O8cw==
+From: Linus Walleij <linusw@kernel.org>
+Subject: [PATCH v2 00/13] Add AB8500 buck regulators to the Ux500 device
+ tree
+Date: Tue, 01 Sep 2026 22:02:05 +0200
+Message-Id: <20260901-ux500-dts-snowball-regulator-v2-0-fe88b01829bf@kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260831-ux500-dts-snowball-regulator-v1-0-fe279fff5e18@kernel.org>
- <20260831-ux500-dts-snowball-regulator-v1-8-fe279fff5e18@kernel.org>
- <20260831-subtitle-anvil-0f33fee6c2af@spud> <CAD++jLnBSrzXnPdtr_NqTymqBupYv_-xW3NAMCa=7Dx1RwtAFg@mail.gmail.com>
- <20260901-zombie-hermit-798a9851e3d8@spud>
-In-Reply-To: <20260901-zombie-hermit-798a9851e3d8@spud>
-From: Linus Walleij <linusw@kernel.org>
-Date: Tue, 1 Sep 2026 21:32:29 +0200
-X-Gmail-Original-Message-ID: <CAD++jLmnVu-awNWEjJYJv_L_sOmxefr+A871xoxvhviZR0DewQ@mail.gmail.com>
-X-Gm-Features: AcwNN1Udlk2fn-aq9UBLZcc1lUGjsHQYeIsY5pEoVHaSin971VVGK61XvAEaHJY
-Message-ID: <CAD++jLmnVu-awNWEjJYJv_L_sOmxefr+A871xoxvhviZR0DewQ@mail.gmail.com>
-Subject: Re: [PATCH 08/13] dt-bindings: mfd: ab8500: Add regulators
-To: Conor Dooley <conor@kernel.org>
-Cc: Stephan Gerhold <stephan@gerhold.net>, Liam Girdwood <lgirdwood@gmail.com>, 
-	Mark Brown <broonie@kernel.org>, Axel Lin <axel.lin@ingics.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>, 
-	devicetree@vger.kernel.org, mfd@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33NQQ6CMBCF4auQWTumHVJBV97DsAA7hcamNS0gh
+ nB3K3Ht8n+ZfLNC4mg5waVYIfJskw0+Bx0KuA+t7xmtzg0k6CRqEjgtSgjUY8Lkw6trncPI/eT
+ aMUTsSqWJFHVaVZCJZ2Rjl52/NbkHm/LZe/82y+/6g0v5H54lCjRM1dkYo1jW1wdHz+4YYg/Nt
+ m0fNLpZRskAAAA=
+X-Change-ID: 20260820-ux500-dts-snowball-regulator-b35d2252bd57
+To: Stephan Gerhold <stephan@gerhold.net>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Axel Lin <axel.lin@ingics.com>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>
+Cc: devicetree@vger.kernel.org, mfd@lists.linux.dev, 
+ Linus Walleij <linusw@kernel.org>, 
+ Conor Dooley <conor.dooley@microchip.com>
+X-Mailer: b4 0.14.3
 
-On Tue, Sep 1, 2026 at 7:58=E2=80=AFPM Conor Dooley <conor@kernel.org> wrot=
-e:
-> On Mon, Aug 31, 2026 at 10:18:09PM +0200, Linus Walleij wrote:
-> > On Mon, Aug 31, 2026 at 6:18=E2=80=AFPM Conor Dooley <conor@kernel.org>=
- wrote:
+While working on the Ux500 power domains it became apparent that the
+device trees were using the DB8500 power-domain regulator for supplies
+which actually come from buck converters in the AB8500 PMIC.
 
-> > > > +            ab8500_buck_arm:
-> > >
-> > > realistically, all of these should have -s instead of _s.
-> >
-> > Can you elaborate, I have a hard time understanding that
-> > terse comment :D
->
-> Node-names and properties are expected to have -s instead of _s in them.
-> so ab8500-buck-arm etc
+First: fix a bunch of bugs. All of these patches have Fixes: tags.
+I do not consider any of them urgent or regressions, they can just
+be queued in front of the new functionality.
 
-Ahhhh "underscores rather than hyphens" :D
+Move some regulators over to using linear ranges before adding new
+stuff since linear ranges are nice.
 
-> Although, all your existing ones have _s, so there's conflicting
-> feelings with my OCD. Do w/e you like, for that reason.
+Add bindings and regulator driver support for the six SMPS1, SMPS2,
+SMPS3, ARM, APE and MOD buck converters. Instantiate the regulators for
+both AB8500 and AB8505, where the corresponding rails are named VSMPSA,
+VSMPSB, VSAFE, VARM, VSMPSC and VSMPSM, and connect existing consumers
+to the correct SMPS2/VSMPSB supply.
 
-So when these bindings were first merged they used underscores
-and it was an OK thing at the time.
+The driver follows the active hardware selector, including the
+additional AB8505 selector banks, and uses the variant-specific VARM
+voltage encoding. It provides enable and low-power mode control for the
+three peripheral bucks while leaving the SoC-controlled rails
+voltage-only.
 
-I would use hyphens for any new hardware but feel it will be
-confusing and lead to typos if I break the style on these old, but
-hithereto undefined regulators.
+Since peripheral buck enable state is programmed by OTP and can power
+discrete components outside the device tree, preserve any rail which
+the OTP leaves enabled when regulator constraints are completed.
 
-Yours,
-Linus Walleij
+The last two patches adding device tree changes I will queue myself
+in the ux500 tree. The rest should go into the regulator tree.
+
+Maybe Lee can ack the binding patch once the DT maintainers are happy
+so Mark can merge that with the rest?
+
+Assisted-by: LLM
+Signed-off-by: Linus Walleij <linusw@kernel.org>
+---
+Changes in v2:
+- Pick up Conor's ACK.
+- Fix some terminology and clarify the DT bindings a bit.
+- Link to v1: https://lore.kernel.org/r/20260831-ux500-dts-snowball-regulator-v1-0-fe279fff5e18@kernel.org
+
+---
+Linus Walleij (13):
+      regulator: ab8500: Fix AB8505 VANA voltage selectors
+      regulator: ab8500: Add AB8505 VAUX3 3.05 V setting
+      regulator: ab8500: Handle AB8505 VINTCORE selector 7
+      regulator: ab8500: Treat cut 1.0 VAUX3 as fixed
+      regulator: ab8500: Test dedicated enable bits only
+      regulator: ab8500: Propagate mode enable read errors
+      regulator: ab8500: Use linear ranges for LDO voltages
+      dt-bindings: mfd: ab8500: Add regulators
+      regulator: ab8500: Add buck converter support
+      regulator: ab8500: Preserve OTP-enabled buck regulators
+      regulator: ab8500: Use scoped guard for shared mode mutex
+      ARM: dts: ux500: Add new AB8500/AB8505 regulators
+      ARM: dts: ux500: Fix up regulator assignments
+
+ .../devicetree/bindings/mfd/stericsson,ab8500.yaml | 122 +++-
+ arch/arm/boot/dts/st/ste-ab8500.dtsi               |  28 +-
+ arch/arm/boot/dts/st/ste-ab8505.dtsi               |  28 +-
+ arch/arm/boot/dts/st/ste-href-stuib.dtsi           |   8 +-
+ arch/arm/boot/dts/st/ste-href-tvk1281618-r2.dtsi   |  14 +-
+ arch/arm/boot/dts/st/ste-href-tvk1281618-r3.dtsi   |  10 +-
+ arch/arm/boot/dts/st/ste-href.dtsi                 |   2 +-
+ arch/arm/boot/dts/st/ste-snowball.dts              |  10 +-
+ arch/arm/boot/dts/st/ste-ux500-samsung-codina.dts  |   4 +-
+ arch/arm/boot/dts/st/ste-ux500-samsung-janice.dts  |   2 +-
+ arch/arm/boot/dts/st/ste-ux500-samsung-kyle.dts    |   4 +-
+ arch/arm/boot/dts/st/ste-ux500-samsung-skomer.dts  |   4 +-
+ drivers/regulator/ab8500.c                         | 748 +++++++++++++++++++--
+ 13 files changed, 882 insertions(+), 102 deletions(-)
+---
+base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
+change-id: 20260820-ux500-dts-snowball-regulator-b35d2252bd57
+
+Best regards,
+-- 
+Linus Walleij <linusw@kernel.org>
+
