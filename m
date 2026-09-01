@@ -1,216 +1,128 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E345834FF74;
-	Tue,  1 Sep 2026 15:58:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2065A345EB1;
+	Tue,  1 Sep 2026 17:00:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788278326; cv=none; b=pGD9vmYS9Ct5VGuD1lmbH2b2o1e62QZI/FQUMSqH8QsPdkFP8mrXLw0+x5mIDQDol0iPq7XClcWUqu9REHlJHULHuNp6SkioUJHGNMf48iOm3i75m/rN+ADpwB3xkQBptPeK36j0xCEknk7Vf04FmvfAtlv9+Yozf5iZm85lxUQ=
+	t=1788282037; cv=none; b=j4DZ75W8YP14szuerbyNricyWTTNWY38rIuYQMq0kcCTQUmvs1VQMKiiYE7mnIktq22PQQj5dp7+89pspt6WgXYC78ikItZwnlahpsdMONjNmfkqmHxOBx5iZDQOfiXj9kkbkm6pq3jXPNb4uBfWVD4GDZ6rS1Gj6gIVCqw+Meo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788278326; c=relaxed/simple;
-	bh=xgUcfwuLD2235xRbvvfCNAwIjpmWobPk2FbgQfVNMKo=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=mQKRUxcGcWkImSK8hJkGD+znPdiyqGbN7cvW90GyBknl3bBqZWH0KCAkgbTL+V18yxRjnAdDHAURtCGRMoXVcqSjoreeDglZm5EwUBUT8xz3isosPku9SdexaBePjVJ7ZAHBqUyrthnrzKLcncOTGCIf9nx0bnHX+vJzE1l3NrY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TT45qC47; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788282037; c=relaxed/simple;
+	bh=vJcrOe1u0QpD4vv5iv5CaF3pP+ZDMWWWvspt5KwK3Nw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=T/ABfYToAGSLq6beUCX8mnFpaM+5KdQaiFeqmff8AYReIDO0lZq6X9v+xuW9A2DPme7UT+grVjKX1P/LPtrRoDFV8CGty3fkyPvMsV48fIw1FmoWs/+JSaeJHCZUjB3chOWz+QV7zdupmpBWImL7F5LG1RwBE0KF4GrRgUNSFeg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VQFAV1t4; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TT45qC47"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 00B2B1F000E9;
-	Tue,  1 Sep 2026 15:58:43 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VQFAV1t4"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BE7F61F000E9;
+	Tue,  1 Sep 2026 17:00:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788278324;
-	bh=M43OAN8l1nYO1zD2yvmzenQEcmoNg8EPMdD61wfp1PA=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=TT45qC47Wa8fvW4pU5u5Vkigw74cs87JU7vD5drs6ndn6ZIPcN2S8mZngbojYYdHP
-	 Put2oHSgbsydo8uIO24sAPz+6R9jF+Pua/hlMFSIiVe6AJ+A6dhMMJcv873efyPjMs
-	 9UT/m0QeV03up7SfJvKppX5XZO/Be5kbuZawM5hCULZ6/90Rb7y0Bsx0ZZBzN7cGT3
-	 cgrbSV2p5QwZ6UYuX5/qJtMZ3jJ0Z5+AUp7/ehdyspH/yaX7Y8ucPjMoFUb0dAjdoi
-	 EgEJmSNp4EWFnDZwh+wAIrmN/RLunFs4vF8LrBLo1FHlHfycahFshbwFfQf+1bD1nI
-	 FZhDk09yvb4SQ==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v10 4/6] thermal: khadas-mcu-fan: Add fan config from
- platform data Add regulator support
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Ronald Claveau" <linux-kernel-dev@aliel.fr>
-Cc: neil.armstrong@linaro.org, devicetree@vger.kernel.org, mfd@lists.linux.dev, linux-amlogic@lists.infradead.org, lee@kernel.org, robh@kernel.org, conor+dt@kernel.org
-In-Reply-To: <20260901-add-mcu-fan-khadas-vim4-v10-4-aecdb9955a30@aliel.fr>
-References: <20260901-add-mcu-fan-khadas-vim4-v10-0-aecdb9955a30@aliel.fr>
- <20260901-add-mcu-fan-khadas-vim4-v10-4-aecdb9955a30@aliel.fr>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 01 Sep 2026 15:58:43 +0000
-Message-Id: <20260901155844.00B2B1F000E9@smtp.kernel.org>
+	s=k20260515; t=1788282035;
+	bh=VGtP5h8GP0nM4DDTBfEBAj1tW6cv0CwmwBEM79Toj6M=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=VQFAV1t4aKZCcuWlBucitg9UYQ/pMrtKZsS9Yp2QyCsbwLps1nhNWzR+3x00Mwamx
+	 NbnfCnhOK8yW/Zeq3NZy/x10wdpkGmuj86FqKlLpP6kJuaVyQ42T5crRyPE4WOptid
+	 6PdlNs9IuUJVneValPEA4TB0olUUqB/7fYnCEU4/T5srcZq61SKaR0af/GYE9IAuUe
+	 rUuVQF9iLfeTlRca1+UirMeuMjFSoWUYP+Sk0zOsztQEaYh+Fyu/kRCtXtu9kbVjZ1
+	 sY6pMHx7BjjXuhnRedWDfpZNencxbPSM3iga0dvwepP58EXeHfaQqFLYDTTj/eAV86
+	 +7h3tRlkwVj/A==
+Date: Tue, 1 Sep 2026 18:00:31 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Frank.Li@oss.nxp.com
+Cc: Support Opensource <support.opensource@diasemi.com>,
+	Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
+	"open list:MULTIFUNCTION DEVICES (MFD)" <mfd@lists.linux.dev>,
+	"open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>,
+	open list <linux-kernel@vger.kernel.org>, imx@lists.linux.dev
+Subject: Re: [PATCH 1/1] dt-bindings: mfd: da9052: allow dlg,da9053-aa
+ fallback to dlg,da9052
+Message-ID: <20260901-devourer-pushover-f26c72688255@spud>
+References: <20260831201522.51294-1-Frank.Li@oss.nxp.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="WYaMNmY1aKEUWsQD"
+Content-Disposition: inline
+In-Reply-To: <20260831201522.51294-1-Frank.Li@oss.nxp.com>
 
-Thank you for your contribution! Sashiko AI review found 4 potential issue(=
-s) to consider:
-- [High] Direct assignment of `dev->of_node` without `of_node_get()` causes=
- a reference count underflow and use-after-free on device removal.
-- [Medium] State desynchronization on `khadas_mcu_fan_suspend` error path l=
-eaves the fan permanently disabled.
-- [Medium] Unchecked platform data pointer dereference causes a potential k=
-ernel panic.
-- [Medium] Rolling back `regulator_enable` in the `khadas_mcu_fan_resume` e=
-rror path causes a regulator enable count underflow on driver unbind.
---
+--WYaMNmY1aKEUWsQD
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-commit 48a15d3c23acef32291aa52062459e22677349e6
-Author: Ronald Claveau <linux-kernel-dev@aliel.fr>
+On Mon, Aug 31, 2026 at 04:15:21PM -0400, Frank.Li@oss.nxp.com wrote:
+> From: Frank Li <Frank.Li@nxp.com>
+>=20
+> Allow dlg,da9053-aa fallback to dlg,da9052 to fix legacy platform (> 10
+> years) check_dtbs warnings:
+>   arch/arm/boot/dts/nxp/imx/imx53-voipac-bsb.dtb: dialog@48 (dlg,da9053-a=
+a): compatible: ['dlg,da9053-aa', 'dlg,da9052'] is too long
+>         from schema $id: http://devicetree.org/schemas/mfd/dlg,da9052.yaml
+>=20
+> Signed-off-by: Frank Li <Frank.Li@nxp.com>
+> ---
+> Previous try drop dlg,da9052 at
+> https://lore.kernel.org/imx/20260404-thoughtful-placid-boobook-da26da@quo=
+ll/
+>=20
+> but Krzy have concern about compablity.
+>=20
+> https://lore.kernel.org/imx/20251107-matrimony-showdown-ba6ce6996b2f@spud/
+>=20
+> Conor prefer update old dts.
 
-thermal: khadas-mcu-fan: Add fan config from platform data Add regulator su=
-pport
+I don't think these devices are actually compatible, so this fallback
+would be wrong.
+The data comes from the match data, be that spi or i2c, and there's
+explicitly different behaviour for the da9052 and da9053aa.
+I doubt the legacy platform ever worked properly, and this is what should
+have been explained in the PR that Krzysztof denied not just blindly
+citing a dtbs_check problem.
 
-This commit reads the fan register and level table from platform data inste=
-ad
-of hardcoding them. It also introduces regulator support for the fan's power
-supply during probe, resume, and suspend.
+Nacked-by: Conor Dooley <conor.dooley@microchip.com>
 
-> diff --git a/drivers/thermal/khadas_mcu_fan.c b/drivers/thermal/khadas_mc=
-u_fan.c
-> index 21b3d0a71bd0d..512a6f0ff7c26 100644
-> --- a/drivers/thermal/khadas_mcu_fan.c
-> +++ b/drivers/thermal/khadas_mcu_fan.c
+Thanks,
+Conor.
 
-[ ... ]
-
-> @@ -76,22 +82,53 @@ static const struct thermal_cooling_device_ops khadas=
-_mcu_fan_cooling_ops =3D {
->  	.set_cur_state =3D khadas_mcu_fan_set_cur_state,
->  };
+> ---
+>  Documentation/devicetree/bindings/mfd/dlg,da9052.yaml | 4 ++++
+>  1 file changed, 4 insertions(+)
+>=20
+> diff --git a/Documentation/devicetree/bindings/mfd/dlg,da9052.yaml b/Docu=
+mentation/devicetree/bindings/mfd/dlg,da9052.yaml
+> index 1103a8cc5cea4..d1d23c7c4d0c2 100644
+> --- a/Documentation/devicetree/bindings/mfd/dlg,da9052.yaml
+> +++ b/Documentation/devicetree/bindings/mfd/dlg,da9052.yaml
+> @@ -18,6 +18,10 @@ properties:
+>            - dlg,da9053-bb
+>            - dlg,da9053-bc
+>            - dlg,da9052
+> +      - items:
+> +          - enum:
+> +              - dlg,da9053-aa
+> +          - const: dlg,da9052
 > =20
-> +static void khadas_mcu_fan_regulator_disable(void *data)
-> +{
-> +	struct regulator *power =3D data;
-> +
-> +	regulator_disable(power);
-> +}
-> +
->  static int khadas_mcu_fan_probe(struct platform_device *pdev)
->  {
-> +	const struct khadas_mcu_fan_pdata *pdata =3D dev_get_platdata(&pdev->de=
-v);
->  	struct khadas_mcu *mcu =3D dev_get_drvdata(pdev->dev.parent);
->  	struct thermal_cooling_device *cdev;
->  	struct device *dev =3D &pdev->dev;
->  	struct khadas_mcu_fan_ctx *ctx;
->  	int ret;
-> =20
-> +
-> +	if (!dev->of_node)
-> +		dev->of_node =3D dev->parent->of_node;
+>    reg:
+>      maxItems: 1
+> --=20
+> 2.43.0
+>=20
 
-[Severity: High]
-Does this code cause a reference count underflow and use-after-free on devi=
-ce
-removal?  By assigning dev->of_node without incrementing the reference count
-via of_node_get(), the driver core's unconditional of_node_put(dev->of_node)
-on unbind could underflow the parent's reference count.
+--WYaMNmY1aKEUWsQD
+Content-Type: application/pgp-signature; name=signature.asc
 
-> +
->  	ctx =3D devm_kzalloc(dev, sizeof(*ctx), GFP_KERNEL);
->  	if (!ctx)
->  		return -ENOMEM;
-> +
->  	ctx->mcu =3D mcu;
-> +	ctx->fan_reg =3D pdata->fan_reg;
+-----BEGIN PGP SIGNATURE-----
 
-[Severity: Medium]
-Could this code cause a NULL pointer dereference?  If the device is manually
-instantiated (e.g. via sysfs or a DT overlay) without providing the required
-platform data, dev_get_platdata() returns NULL, which is then unconditional=
-ly
-dereferenced here.
+iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCapcErwAKCRB4tDGHoIJi
+0pUMAQC7BV0GPyb01VEyEWhn/BVS+JygSLlqCFl5z28zdPCjvwEAs8uDma/NGcCv
+/89K37u48N8DyY1o7RlCSJp0o4EGoQU=
+=t2nO
+-----END PGP SIGNATURE-----
 
-> +	ctx->levels =3D pdata->levels;
-> +	ctx->nlevels =3D pdata->nlevels;
-> +
-> +	ctx->power =3D devm_regulator_get(dev, "fan");
-> +	if (IS_ERR(ctx->power))
-> +		return PTR_ERR(ctx->power);
-> +
-> +	ret =3D regulator_enable(ctx->power);
-> +	if (ret) {
-> +		dev_err(dev, "Failed to enable fan power supply: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	ret =3D devm_add_action_or_reset(dev, khadas_mcu_fan_regulator_disable,=
- ctx->power);
-> +	if (ret)
-> +		return ret;
-> +
->  	platform_set_drvdata(pdev, ctx);
-
-[ ... ]
-
->  #ifdef CONFIG_PM_SLEEP
->  static int khadas_mcu_fan_suspend(struct device *dev)
->  {
->  	struct khadas_mcu_fan_ctx *ctx =3D dev_get_drvdata(dev);
-> -	unsigned int level_save =3D ctx->level;
->  	int ret;
-> =20
-> -	ret =3D khadas_mcu_fan_set_level(ctx, 0);
-> +	ret =3D khadas_mcu_fan_set_level(ctx, ctx->levels[0]);
->  	if (ret)
->  		return ret;
-> =20
-> -	ctx->level =3D level_save;
-> -
-> -	return 0;
-> +	return regulator_disable(ctx->power);
-
-[Severity: Medium]
-If regulator_disable() fails here, the PM core aborts system suspend, and t=
-he
-resume callback will not be executed.  Because the fan was successfully tur=
-ned
-off via khadas_mcu_fan_set_level(), but ctx->level was not updated to refle=
-ct
-this, will the thermal framework later fail to restore the correct fan state
-due to evaluating state =3D=3D ctx->level in khadas_mcu_fan_set_cur_state()?
-
->  }
-> =20
->  static int khadas_mcu_fan_resume(struct device *dev)
->  {
->  	struct khadas_mcu_fan_ctx *ctx =3D dev_get_drvdata(dev);
-> +	int ret, ret2;
-> +
-> +	ret =3D regulator_enable(ctx->power);
-> +	if (ret)
-> +		return ret;
-> =20
-> -	return khadas_mcu_fan_set_level(ctx, ctx->level);
-> +	ret =3D khadas_mcu_fan_set_level(ctx, ctx->levels[ctx->level]);
-> +	if (ret) {
-> +		ret2 =3D regulator_disable(ctx->power);
-
-[Severity: Medium]
-Does rolling back the regulator state here cause an enable count underflow
-on driver unbind?
-
-Because khadas_mcu_fan_probe() registered an unconditional cleanup action
-via devm_add_action_or_reset(dev, khadas_mcu_fan_regulator_disable, ctx->po=
-wer),
-calling regulator_disable() here leaves the regulator disabled while the de=
-vice
-remains bound.  When the device is later unbound, the devm action will call
-regulator_disable() again on the already disabled regulator.
-
-> +		if (ret2)
-> +			dev_err(dev, "failed to disable regulator after error %d: %d\n", ret,
-> +				ret2);
-> +		return ret;
-> +	}
-> +
-> +	return 0;
->  }
->  #endif
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260901-add-mcu-fa=
-n-khadas-vim4-v10-0-aecdb9955a30@aliel.fr?part=3D4
+--WYaMNmY1aKEUWsQD--
