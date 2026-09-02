@@ -1,354 +1,164 @@
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+Received: from mta0.migadu.com (out-245.mta0.migadu.com [91.218.175.245])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77FAC42E43A
-	for <mfd@lists.linux.dev>; Wed,  2 Sep 2026 10:29:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8214143E073
+	for <mfd@lists.linux.dev>; Wed,  2 Sep 2026 11:03:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.245
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788344974; cv=none; b=DPigaQcQ0rykn2gphn8yLA0XrQL8PQDBZizZSEh3UjCqLvhzVQmSrJZoECZcczn+lSQ/R4nO1vzChT5wBy8BzFBw3yauocyQFzJblRaUA/ZGFNGb3f6XZJrUNlHrbEmQy1Q+ljpQ6xzKmjubwYFS3/kEvWogmgi7YvGye+nTouk=
+	t=1788347015; cv=none; b=ih46ynWFrvbkFY+qx9JB+XWFPP0D2Ng+RCP1XPve/xRz5W9NIr87SFxPF/5mVibQDpAcBRXeKSO8kA9rS5SttyifWV6LE1prg1P4S7zjVydKih6aUwXZtOWzpFI1nylRqJocp0fH1Q4qPn2YtJoAJe5sBhiM9TuDk79y91LkwuQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788344974; c=relaxed/simple;
-	bh=KjkGEFEeYMGE5tWpb4iz6mos2IDfSvwrV1TRiR4FklE=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=acwqpLji/qXum1ObE+S1Xyej4LxzoD7yBCEWxQn3tEH+UAL/bO6vj2EDEvaQyLG47acSXhVglaBCTgoH6nSswWEbTIlvet8y4U039owoLSohhRxm/sX/P6rjE2ahZDGSnNoKMzm0YVE4Vcrwa9qqyXZhhDCCu8Bf3vMYB63v1Rw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=kU95YtGq; arc=none smtp.client-ip=209.85.128.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1788347015; c=relaxed/simple;
+	bh=20snKJaG8UMW/EixhLl7Mhl2veH34E3KT+pk8OWVknU=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition; b=XegYZtDe48Fuq9eDkbiZ4Kkd6z2L59VvoZjN0kgj47fWCWQQhV6f5AGgGJgP/+Ck7V6fdC/bMiPkNYouE0gTrKpimDRKHvagY8QnU6O9N66aa61hfMr6pnY2NnLsjGzasle2mPVm6KUqlklHSyONe+J1X2dIbrgEJZuqchhU754=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=UqBysMNJ; arc=none smtp.client-ip=91.218.175.245
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kU95YtGq"
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-49ccfbe062eso6848415e9.3
-        for <mfd@lists.linux.dev>; Wed, 02 Sep 2026 03:29:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788344965; x=1788949765; darn=lists.linux.dev;
-        h=content-type:mime-version:references:in-reply-to:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=bZtvmbyOC+TIXQAgxX6du8Vv3LHAYS2xf4YGM8J09kA=;
-        b=kU95YtGqtcpL1YjIVnjaBfEz+KjSUPz1u+4ACdXNdr4m1uB6urxvXAISOuHG3APbnc
-         xxnyM6Ngsy5ceojxU8OuBchhepfF3gBkFR8Rm9MWmgzO39ah8iJ0QSUXe+j5O3IHnSdX
-         Hgp1lJd+1f/J85Z89qz1eHCRLDlE2b/2B5E6Hl8eqy9g9QvVpaYEjP9KSv4cnskfqoyY
-         2dpoRzKXJZeAFNXS5g5BraTIrMEDPnwkRZ2x1IeRkMBILV52VA4Fif/8RBCJHkZPF8HN
-         1M8Qit2IOYp+Yre++9ygT2iG1fpc0CCve7M+g5/fu6M7ztV/8FCgyyGR3I65QIeEs9fR
-         C8Hg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788344965; x=1788949765;
-        h=content-type:mime-version:references:in-reply-to:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=bZtvmbyOC+TIXQAgxX6du8Vv3LHAYS2xf4YGM8J09kA=;
-        b=LePDa9vRk0Vt49MMPZ9oLPCHrvBg2llwqNhVV1QJ/Gt0ii+uogdApRGYYNeq0K8ank
-         NNvGMukM3sTj/kXEm9nx5Hk6iV/dO+/0CIFyyVDYSqT5uHXcWGz6Kx6B4C36nXaMv+S9
-         Qb7nU4LFdMdRR0lrIiAUHQcquoWtByu4TFiHkYyIFEMsIolP37JlXJNs1kMZn9bBFW23
-         XhO4LkekaS7z6riPFywYSHi24N0mkbeM2bOPEIZtYXTqAyG21kKqv2euQvbTwcBQiAu6
-         BQaLadDPoUS3utvov7hYK4IQz64ja08fPUieX3KzhYW+F3IyBKVFHWV2BAUDL/3ZDjsK
-         gqHg==
-X-Forwarded-Encrypted: i=1; AHgh+Rqf6MWJC0ZexoB13qlVyxP/Np93MXpGMCy0rSt5sUFQGkuDMt79mZcIbirfkMoUIN73O6U=@lists.linux.dev
-X-Gm-Message-State: AFuF++mLThRrrJVWzInUS4X2mboWjY1mqoldQ7B+wcrir04r9BqrTetH
-	wDznJhEEzkF8objw3GDiT5GFztDqLGCExVDApfLkNoUwuINOPx1gL/yT
-X-Gm-Gg: AR+sD12qPlNFg+nFc/Eitl7+j2EsuGk8Ll9N8OpU4o3sxzO4ens0xOapbkJLKazgWtE
-	A98oFDR8zPAdWx4nIdlBeBOY7HuDvNShjYfX9NdyIl8jYpk3at+Oil35GVhMfnZGN9LO+fejnkk
-	Bcg3RCbzGVt+6EE4X8Ux+fnMAXDOqVFfWeMmCXf6vO7yLsjNOF7WHGRpFpw1SNgxoE9rqtxD7Ki
-	abYu5HpAF4he1GT4xUEsHW7rVu0ODg0GZxnGR3toqTHhv7iG8QNVfe4+mZ/yMIQm9VgJfPQiqxB
-	/w9pEx62WC7i9fTpGbfTJmaqJtBx7kWI7550ThIXNPpFKi32OBrCYi6sARO9S4F49NUy4AUFnN5
-	2Vql5pJrq3QlkuNbIRyc9Q503AZKCYa/Yh7C5Ee9ZLqOggcHVskHPGH39r756BYO22jUXJSu+g3
-	vhmX66PO1kBVzegVvFV389uEEcPed1n4f0WPm4IlxuYZKuNQc3QGOnElqUP1BrMPn+MbpSU3I=
-X-Received: by 2002:a05:600c:4795:b0:49c:ed88:a782 with SMTP id 5b1f17b1804b1-49ced88a78cmr2713745e9.6.1788344964779;
-        Wed, 02 Sep 2026 03:29:24 -0700 (PDT)
-Received: from strix.localnet ([197.250.227.34])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49cdce10148sm138145595e9.5.2026.09.02.03.29.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Sep 2026 03:29:23 -0700 (PDT)
-From: Stefan =?UTF-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>
-To: Krzysztof Kozlowski <krzk+dt@kernel.org>, Lee Jones <lee@kernel.org>,
- Linus Walleij <linusw@kernel.org>
-Cc: Michael Turquette <mturquette@baylibre.com>,
- Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>,
- Brian Masney <bmasney@redhat.com>, Vinod Koul <vkoul@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Russell King <linux@armlinux.org.uk>, Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>,
- Manivannan Sadhasivam <mani@kernel.org>, linux-clk@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-phy@lists.infradead.org,
- mfd@lists.linux.dev
-Subject:
- Re: [PATCH v11 04/12] ARM: dts: zte: Declare zx297520v3 CRM device nodes
-Date: Wed, 02 Sep 2026 13:29:12 +0300
-Message-ID: <rJbfdbXrS62xFUkr8Ld5TQ@gmail.com>
-In-Reply-To: <20260826-zx29clk-v11-4-f8ad59c6426c@gmail.com>
-References:
- <20260826-zx29clk-v11-0-f8ad59c6426c@gmail.com>
- <20260826-zx29clk-v11-4-f8ad59c6426c@gmail.com>
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="UqBysMNJ"
+X-Envelope-To: mfd@lists.linux.dev
+DKIM-Signature: a=rsa-sha256; bh=20snKJaG8UMW/EixhLl7Mhl2veH34E3KT+pk8OWVknU=;
+ c=simple/simple; d=linux.dev;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1788347011; v=1; x=1788951811;
+ b=UqBysMNJ7nJEOt3ZuhFhQkOwyIXBsK6i2miRq0YnguHuTE5KrLpWWqktfUkwcBK8QcTBwQEH
+ 9j79XAkSeslqGTe9MCut3qyed6/tUZut3ZgxbOy6RbNikOmfcPFruR9Lp0NAZ20RB+CgeyUOlmW
+ boAZrjPCV21R7p8SFGhVHj3U=
+X-Envelope-To: mfd@lists.linux.dev
+Received: by mta11.migadu.com with ESMTPS id f4c9c9e68c3ee15e;
+	Wed, 02 Sep 2026 11:03:21 +0000
+X-Mizu-Trace-ID: f4c9c9e68c3ee15e
+X-Migadu-Flow: FLOW_OUT
+Date: Wed, 2 Sep 2026 14:03:12 +0300
+From: Matti Vaittinen <matti.vaittinen@linux.dev>
+To: Matti Vaittinen <mazziesaccount@gmail.com>,
+	Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
+	Matti Vaittinen <matti.vaittinen@linux.dev>
+Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Matti Vaittinen <mazziesaccount@gmail.com>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney+clk@redhat.com>,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Michael Walle <mwalle@kernel.org>, mfd@lists.linux.dev,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
+	linux-rtc@vger.kernel.org
+Subject: [PATCH v3 00/10] Support ROHM BD73800
+Message-ID: <cover.1788346553.git.mazziesaccount@gmail.com>
+Reply-To: Matti Vaittinen <mazziesaccount@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="nextPartatLajs3yRkirKyBuoKqPXQ";
- micalg="pgp-sha256"; protocol="application/pgp-signature"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="97DSgaQ3eGUvz8QX"
+Content-Disposition: inline
 
---nextPartatLajs3yRkirKyBuoKqPXQ
+--97DSgaQ3eGUvz8QX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"; protected-headers="v1"
-From: Stefan =?UTF-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>
-Date: Wed, 02 Sep 2026 13:29:12 +0300
-Message-ID: <rJbfdbXrS62xFUkr8Ld5TQ@gmail.com>
-In-Reply-To: <20260826-zx29clk-v11-4-f8ad59c6426c@gmail.com>
-MIME-Version: 1.0
 
-Hi List, and in particular Krzysztof,
+Add support for the ROHM BD73800 PMIC and compatibles.
 
+The ROHM BD73800 is a power management IC which integrates 8 BUCKs and 4
+LDOs. There is also an ADC and operation amplifier intended for current
+/ temperature measurement and accumulation. RTC and 32.768 kHz clock
+gate are also included. The PMIC can be customized via OTP and it has
+options for operating as a main PMIC in multi-PMIC installation. Some
+of the pins can also be used for GPO or GPI (including interrupt support).
 
-Am Mittwoch, 26. August 2026, 00:24:03 Ostafrikanische Zeit schrieb Stefan=
-=20
-D=C3=B6singer:
-> This patch adds DT nodes for the main clock and reset controllers on the
-> zx297520v3 board. It replaces the temporary placeholder UART clocks with
-> the proper clocks exported by topcrm and lspcrm.
->=20
-> Signed-off-by: Stefan D=C3=B6singer <stefandoesinger@gmail.com>
->=20
+There are also ROHM BD71851 and BD71885 PMICs out there. These are, from
+the SW-perspective, similar to the BD73800. There is only some different
+default values and OTP settings. The driver should be able to handle them
+just fine.
 
-This patch is the only one of my Z29 Clock and Reset series that has not se=
-en=20
-review comments Did it slip through the cracks?
+Revision history:
 
-Linus Walleij added his R-B on the patch that added the mostly stub DSTI fi=
-le,=20
-so I added him to the mail too.
+v2 =3D> v3:
+ - Rebased on v7.3-rc1.
+ - gpio: Use gpio-regmap as was suggested by Linus W.
+ More accurate change-log in individual patches.
 
-Cheers,
-Stefan
+v1 =3D> v2:
+ - Rebased on regulator/for-7.3 as it carries dependency:
+   f29a8bf6fde1 ("regulator: dt-bindings: ROHM PMIC state-machine voltages")
+ - dt-bindings: Various fixes, split generic stuff to own files.
+ - gpio: Styling, return -ENODEV if no GPIOs found
+ - MFD: Styling
+ - regulator: Simplify dt-reading
+ More accurate change-log in individual patches.
 
-> ---
->=20
-> Version 11: Improved the above the line commit description, removing
-> references to "previous patches" that won't make sense when reading it
-> in the kernel commit log.
->=20
-> Version 10: Fix issues with dt-check-style --mode=3Dstrict in newly added
-> code, but left issues in existing nodes alone.
->=20
-> Version 9:
-> Sort new nodes by mmio address
-> rename syscon-reboot to "reboot"
-> adjust to changes in bindings
->=20
-> Version 7:
-> Add phy nodes to topcrm
-> Remove syscon from matrixclk again
-> Adapt remove now-removed extra clk inputs from matrix
-> Add reset to LSP
-> osc26m -> clock-26m for the fixed rate clocks, likewise for 32k
->=20
-> Version 6:
-> Add syscon to matrixclk
->=20
-> Version 5:
-> Re-name from *clk to *crm
-> Add the syscon-reboot node here because the binding requires it
-> Re-add accidentally dropped uart2 IRQ
-> ---
->  arch/arm/boot/dts/zte/zx297520v3.dtsi | 101
-> ++++++++++++++++++++++++++++++---- 1 file changed, 89 insertions(+), 12
-> deletions(-)
->=20
-> diff --git a/arch/arm/boot/dts/zte/zx297520v3.dtsi
-> b/arch/arm/boot/dts/zte/zx297520v3.dtsi index a16c30a164bb..ebac3cd137df
-> 100644
-> --- a/arch/arm/boot/dts/zte/zx297520v3.dtsi
-> +++ b/arch/arm/boot/dts/zte/zx297520v3.dtsi
-> @@ -3,12 +3,26 @@
->   * Copyright (c) 2026 Stefan D=C3=B6singer <stefandoesinger@gmail.com>
->   */
->=20
-> +#include <dt-bindings/clock/zte,zx297520v3-clk.h>
->  #include <dt-bindings/interrupt-controller/arm-gic.h>
-> +#include <dt-bindings/reset/zte,zx297520v3-reset.h>
->=20
->  / {
->  	#address-cells =3D <1>;
->  	#size-cells =3D <1>;
->=20
-> +	osc26m: clock-26m {
-> +		compatible =3D "fixed-clock";
-> +		#clock-cells =3D <0>;
-> +		clock-frequency =3D <26000000>;
-> +	};
-> +
-> +	osc32k: clock-32k {
-> +		compatible =3D "fixed-clock";
-> +		#clock-cells =3D <0>;
-> +		clock-frequency =3D <32768>;
-> +	};
-> +
->  	cpus {
->  		#address-cells =3D <1>;
->  		#size-cells =3D <0>;
-> @@ -20,15 +34,6 @@ cpu@0 {
->  		};
->  	};
->=20
-> -	/* Base bus clock and default for the UART. It will be replaced once=20
-a
-> clock driver has -	 * been added.
-> -	 */
-> -	uartclk: uartclk-26000000 {
-> -		#clock-cells =3D <0>;
-> -		compatible =3D "fixed-clock";
-> -		clock-frequency =3D <26000000>;
-> -	};
-> -
->  	timer {
->  		compatible =3D "arm,armv7-timer";
->  		interrupts =3D <GIC_PPI 13 IRQ_TYPE_LEVEL_LOW>,
-> @@ -75,18 +80,87 @@ uart0: serial@131000 {
->  			arm,primecell-periphid =3D <0x0018c011>;
->  			reg =3D <0x00131000 0x1000>;
->  			interrupts =3D <GIC_SPI 0 IRQ_TYPE_LEVEL_HIGH>;
-> -			clocks =3D <&uartclk>, <&uartclk>;
-> +			clocks =3D <&topcrm ZX297520V3_UART0_WCLK>,
-> +				 <&topcrm ZX297520V3_UART0_PCLK>;
->  			clock-names =3D "uartclk", "apb_pclk";
-> +			resets =3D <&topcrm ZX297520V3_UART0_RESET>;
-> +
->  			status =3D "disabled";
->  		};
->=20
-> +		topcrm: clock-controller@13b000 {
-> +			compatible =3D "zte,zx297520v3-topcrm", "syscon";
-> +			reg =3D <0x0013b000 0x400>;
-> +			#clock-cells =3D <1>;
-> +			clocks =3D <&osc26m>, <&osc32k>;
-> +			clock-names =3D "osc26m", "osc32k";
-> +			interrupts =3D <GIC_SPI 42 IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 43=20
-IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 45=20
-IRQ_TYPE_EDGE_RISING>,
-> +				     <GIC_SPI 46=20
-IRQ_TYPE_EDGE_RISING>;
-> +			interrupt-names =3D "usb-up", "usb-down",
-> +					  "hsic-up", "hsic-down";
-> +			#phy-cells =3D <1>;
-> +			#reset-cells =3D <1>;
-> +
-> +			reboot {
-> +				compatible =3D "syscon-reboot";
-> +				mask =3D <0x1>;
-> +				offset =3D <0x0>;
-> +				value =3D <0x1>;
-> +			};
-> +		};
-> +
-> +		matrixcrm: clock-controller@1306000 {
-> +			compatible =3D "zte,zx297520v3-matrixcrm";
-> +			reg =3D <0x01306000 0x400>;
-> +			#clock-cells =3D <1>;
-> +			clocks =3D <&osc26m>, <&osc32k>,
-> +				 <&topcrm ZX297520V3_AHB_PCLK>,
-> +				 <&topcrm ZX297520V3_MPLL>,
-> +				 <&topcrm ZX297520V3_MPLL_D5>,
-> +				 <&topcrm ZX297520V3_DPLL>,
-> +				 <&topcrm ZX297520V3_GPLL>,
-> +				 <&topcrm ZX297520V3_GPLL_D2>,
-> +				 <&topcrm ZX297520V3_GATED_OSC26M>;
-> +			clock-names =3D "osc26m", "osc32k", "ahb", "mpll",
-> +				      "mpll-d5", "dpll", "gpll",=20
-"gpll-d2",
-> +				      "wclk-osc26m";
-> +			#hwlock-cells =3D <1>;
-> +			#reset-cells =3D <1>;
-> +		};
-> +
-> +		lspcrm: clock-controller@1400000 {
-> +			compatible =3D "zte,zx297520v3-lspcrm";
-> +			reg =3D <0x01400000 0x100>;
-> +			#clock-cells =3D <1>;
-> +			clocks =3D <&matrixcrm=20
-ZX297520V3_LSP_MPLL_D5_WCLK>,
-> +				 <&matrixcrm=20
-ZX297520V3_LSP_MPLL_D4_WCLK>,
-> +				 <&matrixcrm=20
-ZX297520V3_LSP_MPLL_D6_WCLK>,
-> +				 <&matrixcrm=20
-ZX297520V3_LSP_MPLL_D8_WCLK>,
-> +				 <&matrixcrm=20
-ZX297520V3_LSP_MPLL_D12_WCLK>,
-> +				 <&matrixcrm=20
-ZX297520V3_LSP_OSC26M_WCLK>,
-> +				 <&matrixcrm=20
-ZX297520V3_LSP_OSC32K_WCLK>,
-> +				 <&matrixcrm ZX297520V3_LSP_PCLK>,
-> +				 <&matrixcrm ZX297520V3_LSP_TDM_WCLK>,
-> +				 <&matrixcrm=20
-ZX297520V3_LSP_DPLL_D4_WCLK>;
-> +			clock-names =3D "mpll-d5", "mpll-d4", "mpll-d6",
-> +				      "mpll-d8", "mpll-d12", "osc26m",=20
-"osc32k",
-> +				      "pclk", "tdm-wclk", "dpll-d4";
-> +			#reset-cells =3D <1>;
-> +			resets =3D <&matrixcrm ZX297520V3_LSP_RESET>;
-> +		};
-> +
->  		uart1: serial@1408000 {
->  			compatible =3D "arm,pl011", "arm,primecell";
->  			arm,primecell-periphid =3D <0x0018c011>;
->  			reg =3D <0x01408000 0x1000>;
->  			interrupts =3D <GIC_SPI 1 IRQ_TYPE_LEVEL_HIGH>;
-> -			clocks =3D <&uartclk>, <&uartclk>;
-> +			clocks =3D <&lspcrm ZX297520V3_UART1_WCLK>,
-> +				 <&lspcrm ZX297520V3_UART1_PCLK>;
->  			clock-names =3D "uartclk", "apb_pclk";
-> +			resets =3D <&lspcrm ZX297520V3_UART1_RESET>;
-> +
->  			status =3D "disabled";
->  		};
->=20
-> @@ -95,8 +169,11 @@ uart2: serial@140d000 {
->  			arm,primecell-periphid =3D <0x0018c011>;
->  			reg =3D <0x0140d000 0x1000>;
->  			interrupts =3D <GIC_SPI 2 IRQ_TYPE_LEVEL_HIGH>;
-> -			clocks =3D <&uartclk>, <&uartclk>;
-> +			clocks =3D <&lspcrm ZX297520V3_UART2_WCLK>,
-> +				 <&lspcrm ZX297520V3_UART2_PCLK>;
->  			clock-names =3D "uartclk", "apb_pclk";
-> +			resets =3D <&lspcrm ZX297520V3_UART2_RESET>;
-> +
->  			status =3D "disabled";
->  		};
->  	};
->=20
-> --
-> 2.54.0
+---
+
+Matti Vaittinen (10):
+  dt-bindings: mfd: common ROHM PMIC properties
+  dt-bindings: rohm,bd*: Ref common ROHM bindings
+  dt-bindings: regulator: ROHM BD73800 regulators
+  dt-bindings: mfd: ROHM BD73800 PMIC
+  mfd: Support for ROHM BD73800 PMIC core
+  rtc: bd70528: Support RTC on ROHM BD73800
+  regulator: bd71828: Support ROHM BD73800
+  clk: bd718x7: Support ROHM BD73800
+  gpio: bd73800: Support ROHM BD73800 PMIC GPIOs
+  MAINTAINERS: Add ROHM BD73800 PMIC files
+
+ .../bindings/mfd/rohm,bd71815-pmic.yaml       |   9 +-
+ .../bindings/mfd/rohm,bd71828-pmic.yaml       |   9 +-
+ .../bindings/mfd/rohm,bd72720-pmic.yaml       |  29 +-
+ .../bindings/mfd/rohm,bd73800-pmic.yaml       | 218 +++++++
+ .../bindings/mfd/rohm,pmic-pins.yaml          |  72 +++
+ .../regulator/rohm,bd73800-regulator.yaml     |  99 ++++
+ MAINTAINERS                                   |   2 +
+ drivers/clk/clk-bd718x7.c                     |   8 +
+ drivers/gpio/Kconfig                          |  12 +
+ drivers/gpio/Makefile                         |   1 +
+ drivers/gpio/gpio-bd73800.c                   | 209 +++++++
+ drivers/mfd/Kconfig                           |  15 +-
+ drivers/mfd/rohm-bd71828.c                    | 147 ++++-
+ drivers/regulator/Kconfig                     |   4 +-
+ drivers/regulator/bd71828-regulator.c         | 558 +++++++++++++++++-
+ drivers/rtc/rtc-bd70528.c                     |   8 +
+ include/linux/mfd/rohm-bd73800.h              | 307 ++++++++++
+ include/linux/mfd/rohm-generic.h              |   1 +
+ 18 files changed, 1662 insertions(+), 46 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/mfd/rohm,bd73800-pmic=
+=2Eyaml
+ create mode 100644 Documentation/devicetree/bindings/mfd/rohm,pmic-pins.ya=
+ml
+ create mode 100644 Documentation/devicetree/bindings/regulator/rohm,bd7380=
+0-regulator.yaml
+ create mode 100644 drivers/gpio/gpio-bd73800.c
+ create mode 100644 include/linux/mfd/rohm-bd73800.h
 
 
---nextPartatLajs3yRkirKyBuoKqPXQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
+base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
+--=20
+2.55.0
+
+
+--97DSgaQ3eGUvz8QX
+Content-Type: application/pgp-signature; name=signature.asc
 
 -----BEGIN PGP SIGNATURE-----
 
-iQJPBAABCAA5FiEEQxb0tqoFWyeVMl1sPRO8yFRPGiIFAmqX+ngbFIAAAAAABAAO
-bWFudTIsMi41KzEuMTIsMiwyAAoJED0TvMhUTxoiXQ4QAIgh4cHS40dzpXGGXT06
-nMhiX21hOye6pUgSIUkl7edEIS9jiyMtrziDQ6y08OJGZQuMkBvX7rv70aYYpcNZ
-N2ssTTrip9PyBdNxLdsz2KP3bhnlUK6Xksuk6OuvupuUcFeLojqMEXDCToTGBWmn
-GZTiROWut21Q6RF+XyRKaztTrVJO3IfGyQZGsKt7lWHRLK8NXAJKBlnTUgPHWxht
-UsHVUXebz+0qObRB+mSOVkFFAe4t0FpKyfrSMiZw7UKduO/F35gRovOHs2sIw4WR
-VhjJRneHiRl1CNw7F+wyzdzl4Uq8bMsIiwDKSB6qj920+3oV2vS2nu9WYtT2MEPK
-AzT4b8SAsDQbcExV2j0jpyHqArQlumqYpueE2rsqzS6oa+DHu352RWng7cPyA+sI
-SVs7Dx+DGNp6Fxmhm/SSItKDMX8u/6D6fjbBW0N8PUZ3NyCbyWQ/zt971VsC6bVb
-U/nALB5LYCR3sBilrIC2JGJef+1cFanxITSCYLdOoStI9oI6aLumRRQayVXp94NW
-BJk1m4SJUa+J8ff+WeexXpVYYfnWp9nCYkG+q0es0kgR1Z+0YQKRYDeaviqxcQLq
-26krvpcuMP8cgWx920NVjKh7DXPVW++x8F52hqPYZyYqM5ONWgdIWTfmTCa8Temz
-JE70f1rWWHE+Spu4bDjfQkPB
-=CjRJ
+iQEzBAEBCgAdFiEEIx+f8wZb28fLKEhTeFA3/03aocUFAmqYAnAACgkQeFA3/03a
+ocWq2wgAgL3fXf8KMA2V440duRc7DIi1NzHj2Skga7Hw3Q1+bMip9KQvtNuI0aoP
+C1iFsO894P5zcCLgqXAeXbfFEP1XsXF3xdQE0K6H3ifM/BQAnwbxHMm2Pf/1FdHb
+37SfRjZ1diBkrixn3UYqxljXnB3tJ2Wb7jQ9WeXAdkUr2Ejjf1UBM7MgvNWqjGG4
+VxSASt9NLtxaAxj+DA7MGSSVvpCwepS93NeNW19JJ7aLmSLC69sq0Yndde8gR9r1
+tZ2qC+QhSN0VSJnoCSR83n1UsVTNjM2hm2r9YuQnE9GA9Z2UXFeWbSHyEgoPuWWw
+SbDmfT4YcFgxRspLULmE72TJ5qAXiA==
+=txE5
 -----END PGP SIGNATURE-----
 
---nextPartatLajs3yRkirKyBuoKqPXQ--
-
-
-
+--97DSgaQ3eGUvz8QX--
