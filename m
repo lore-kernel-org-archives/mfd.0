@@ -1,91 +1,72 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D39704A3D2E;
-	Wed,  2 Sep 2026 15:03:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64B774A92E0;
+	Wed,  2 Sep 2026 15:31:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788361398; cv=none; b=Pg+ouTfoebMX1yBeS1CKtFuG0Eh2N30ru5NcCXrC4EB+MNxx0hD12ElakQagyH4yYGIEHdWvjvPBBPAgvUT0uC2bnhTIaRLaRyV81ysRq74ZjJScwHN9AyxQmzG8VEMoYsJS1YGUe5nZgwHotssTNqK770eML6jXtiAwtR2NCTY=
+	t=1788363113; cv=none; b=ISI0SzG1RSDR8dRHfLEotLuK2m5XKsT0yAyAhCkL19DKXFl9jK3LmOLJFZWZUNXLhVjSTKJFsyU02weE+nDhCBERsteCPW+tvCrjeEgoD6Z7CvDU6IrisphhOOOieQvezj5FI/1pGkLlTt1lezg2HEPS6nhjpDvaQjMK3PCprIA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788361398; c=relaxed/simple;
-	bh=KD+6lCODL8Jpw7wXAp9+Ew4CxAlcbymY0Idmg/TcXDg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=P50w9oV35jSwlaJ3xH1XXnnWyfLpqoWbco64wGT7gfwza+tDfNaCfuBZzg48OYrBSca/BUxwA1GyOPjlDwz7bec1j/ND4aOVeLfQAkw3JQdjqR06JNp+gnuv69rOwrgWJib9hhjGMOr+e9d4oNWhK1lGpQcAf47asLTMwFzYew4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UXui4pf3; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788363113; c=relaxed/simple;
+	bh=F8/2e4coUXQd1OEy1MIBLrc2n0JoU2v7FX9aLwh/pHA=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=Vu+NSDd8s83ZAWbIHd81sbSeO66BPLT/EEzh5uVAC+q+Jq7I3k0bgp6I+GxIyVi0IxJsVDyVl77HYl5DwL+Z2cg4HgfhQc8c/o3H71m+CqHOVV1D8bhB/YoWMCE0IJDHnXu1OD2a6NF0kSfRuF3TvocAAOsor5MuwvYVoQ9SGk8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AycOmSUX; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UXui4pf3"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E39E1F000E9;
-	Wed,  2 Sep 2026 15:03:14 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AycOmSUX"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7A4971F000E9;
+	Wed,  2 Sep 2026 15:31:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788361396;
-	bh=OCBvBOB1e1Y5F1+Ypq6H7hE+0TjSUszzUJpRr1GndiU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=UXui4pf3KfAnNS4KIMzvSSf4YWcpH8+KhlHwvfdG5D2nBmBPQ6XwY4BqEkQx+MhNf
-	 xGRRGi2NMHxoIlrfZTQYK1XOHDbv28NWQmZCLOQsc4SMgywKBbIFGJToiNkk1Ok05X
-	 MiKOlbZrXdqRYpkwcOwUA+Gzfw2ReQrBiGDYI7QDO6ta3F+ZvOl/3ESD1Z4wCdGU7i
-	 gLRfTO9sTv/4PdVZv9T1Itw9c6AM2TgS3CT+VeFMWAuGjq+g9KLeo+6DFsFRCasW9s
-	 kKX8W0Tgv0STUpjtWH/tplqyclv3qXhOGnQDyxLzQp4bmzK8JCa0mkLB6N5aej1f4e
-	 JsJPddeAHqTUw==
-Date: Wed, 2 Sep 2026 16:03:12 +0100
+	s=k20260515; t=1788363111;
+	bh=i6uzuZvKCw0azG4q0pqw0jBpOqzGi2PjCgyH0kixHC8=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=AycOmSUXIjOcllCh0E8Y1oRuzMPYyoA/UXQD1D5OzH1IdwZL0G2ZXxeKQT3xm3t8F
+	 LJfhKmffSdyee7Oxvb8EGbHifKdp9cY1XPOnxPlUJUIozbt24k6tRNfkLtTqjnQXmo
+	 ERpJ2YzI20dgnYzqBuPXSmJWL8zm1D/OVtxIOQgGa6BE/NaycSo8+dXZu/bx55X6fm
+	 toOkq7K6eoFdk39mE2MBzKjE2PGl/d1NU59Ahy7JSrIIZD2DOfP957mZ0c6CpPujd7
+	 36TI5eiU0Jab7keOCDP4zLuR3RifnrhaAtp1vqMc4i6hvYHmVT4nHcoICztvU977md
+	 ffi31LWGLl+iQ==
 From: Lee Jones <lee@kernel.org>
-To: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
-Cc: Andi Shyti <andi.shyti@kernel.org>,
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
-	Werner Gartner <Werner.Gartner@congatec.com>, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org,
-	stable@vger.kernel.org, Sashiko <sashiko-bot@kernel.org>
-Subject: Re: [PATCH v2 1/5] mfd: cgbc: Fix use of negative error code as
- valid session handle
-Message-ID: <20260902150312.GC2082450@google.com>
-References: <20260811-cgbc-i2c-storage-devices-support-v2-0-3efa998e0ef5@bootlin.com>
- <20260811-cgbc-i2c-storage-devices-support-v2-1-3efa998e0ef5@bootlin.com>
- <20260902150206.GB2082450@google.com>
+To: Lee Jones <lee@kernel.org>, Hongyan Xu <getshell@seu.edu.cn>
+Cc: Support Opensource <support.opensource@diasemi.com>, 
+ mfd@lists.linux.dev, linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
+ jianhao.xu@seu.edu.cn
+In-Reply-To: <20260814153019.1114-1-getshell@seu.edu.cn>
+References: <20260814153019.1114-1-getshell@seu.edu.cn>
+Subject: Re: (subset) [PATCH v3] mfd: da903x: cancel IRQ work during
+ teardown
+Message-Id: <178836311024.2127451.12083678367837110310.b4-ty@b4>
+Date: Wed, 02 Sep 2026 16:31:50 +0100
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260902150206.GB2082450@google.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
 
-On Wed, 02 Sep 2026, Lee Jones wrote:
-
-> On Tue, 11 Aug 2026, Thomas Richard (congatec GmbH) wrote:
+On Fri, 14 Aug 2026 23:30:19 +0800, Hongyan Xu wrote:
+> The IRQ handler disables the IRQ and schedules irq_work. Releasing the
+> IRQ does not drain that work, which can continue to use the devm-allocated
+> chip and notifier state.
 > 
-> > The cgbc_session_command() return value was directly cast to u8 and used
-> > as session handle without error checking. Casting a negative error to u8
-> > produces a valid-looking session handle. So check if return value is
-> > positive before to cast and use it.
-> > 
-> > Cc: stable@vger.kernel.org
-> > Reported-by: Sashiko <sashiko-bot@kernel.org>
-> > Closes: https://sashiko.dev/#/patchset/20260713-cgbc-core-fix-cgbc-remove-v1-1-79274ad62b3a%40bootlin.com?part=1
-> > Fixes: 6f1067cfbee7 ("mfd: Add Congatec Board Controller driver")
-> > Signed-off-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
-> > ---
-> >  drivers/mfd/cgbc-core.c | 6 +++++-
-> >  1 file changed, 5 insertions(+), 1 deletion(-)
-> > 
-> > diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
-> > index 2becaf797646..4a409234e66c 100644
-> > --- a/drivers/mfd/cgbc-core.c
-> > +++ b/drivers/mfd/cgbc-core.c
-> > @@ -103,7 +103,11 @@ static int cgbc_session_request(struct cgbc_device_data *cgbc)
-> >  	if (ret)
-> >  		return dev_err_probe(cgbc->dev, ret, "device not found or not ready\n");
-> >  
-> > -	cgbc->session = cgbc_session_command(cgbc, CGBC_SESSION_CMD_REQUEST);
-> > +	ret = cgbc_session_command(cgbc, CGBC_SESSION_CMD_REQUEST);
-> > +	if (ret < 0)
-> > +		return dev_err_probe(cgbc->dev, ret, "session handle request timed out\n");
+> Manage both IRQ-work cancellation and subdevice removal with devres.
+> Register the subdevice-removal action before requesting the IRQ, then add
+> the IRQ-work action after the request. This avoids leaving a live IRQ
+> without work cancellation if action registration fails. Devres cleanup
+> then disables the IRQ and drains the work before releasing the IRQ and
+> removing child devices. Register both actions before creating the children
+> so partial probe failures use the same ordering.
 > 
-> Can we make this a bit more user friendly?
-> 
-> "Failed to start XYZ session"?
+> [...]
 
-The other two MFD patches are fine.
+Applied, thanks!
 
--- 
-Lee Jones
+[1/1] mfd: da903x: cancel IRQ work during teardown
+      commit: df41eb0718d7ec4609c98844aca3ea381bb569ef
+
+--
+Lee Jones [李琼斯]
+
