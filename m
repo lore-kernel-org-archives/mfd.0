@@ -1,296 +1,405 @@
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+Received: from mail-vs1-f50.google.com (mail-vs1-f50.google.com [209.85.217.50])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA1E04AF9FD
-	for <mfd@lists.linux.dev>; Wed,  2 Sep 2026 19:36:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.50
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788377788; cv=none; b=sYTNW5PAgmC95Gpwp9n7pyfi+suHJoop9zbBQTjoNsuCfHvmtS/Qu9jvObb+ZoSwVYf+1f9AT0Mbwi5Dx8NW+JRWoFVQ27uHdCpjDNh0Dfn03PPKUJUoe0YH1/vfq2uwPTy76FbjecGTUvkJkXGtNrj0yS/TEcA5FUD+h5VhIKw=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788377788; c=relaxed/simple;
-	bh=6mU+rkd6x5CiFPfsOHOsBRBAd3bkLMfW6WBBQJm5CH0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=UkgZbFuGxcaxY3Hkh8BH9k/ZDiTD3o6Yfkoc91k25Y1I5m0w/mNlDSgq4VOK2ppKczf8BuvmmhJfcS76PohrUFIXPLsGRE5TB5THq+xllHOhq7zitX/CjG/zTnwCrrT7yOqoomKmNySwi5YRP96Npo+n3BkvxuCCrNtoraVwZkM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KRn2G6x1; arc=none smtp.client-ip=209.85.221.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50B864AFE2F
+	for <mfd@lists.linux.dev>; Wed,  2 Sep 2026 19:36:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.217.50
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788377799; cv=pass; b=jGRenQ3/AadcbE6gvq20KqLDhQ2uQxsIyDCWXD5+6arlt+UpbpFSc6v9VAOjhruo7GBM1TCxni/BNhsQN6tv5LdF1OqarpRMFWui8UAYvXKFonZ5hpJCnF8C0JPJt86zo+u3j+rfUrsqVKjlepImDJ8qncT9/CktyM4KJXJIZPs=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788377799; c=relaxed/simple;
+	bh=+EtTP6H/FtO/OTJEnIc0R8Df83ApwUFjyl553EFOAtI=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=QnuDqvUVNNCCokdBtmKGdcvhz8h2t9y4U2egXnXGcwyZrDscVi9ol0DJxnM2iFs9uIAdIQTHI2nJON+c/j2NdozPDuG1WvfdCTsZpiyY5JquOTzKtwsO9fLG0Y390xlaXMhHUFcyXr5fuOlWSOfWoF60uLVoR3smMcRkZ0yZLG4=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=gRbH4VNb; arc=pass smtp.client-ip=209.85.217.50
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KRn2G6x1"
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-4843f205a5bso1122599f8f.1
-        for <mfd@lists.linux.dev>; Wed, 02 Sep 2026 12:36:17 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="gRbH4VNb"
+Received: by mail-vs1-f50.google.com with SMTP id ada2fe7eead31-74ab6c88052so577007137.2
+        for <mfd@lists.linux.dev>; Wed, 02 Sep 2026 12:36:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788377780; cv=none;
+        d=google.com; s=arc-20260327;
+        b=SjpWObkckMfvfWS0isZh+UHQye0FOIenoj8m8c2Qd4RuUDcX2i2qKhKPDKZf5AyXwn
+         /kqUK2koJCgTzrizClMtKfPOS3+N+1wwFQIq8gH41HwN7Q7BvdSFdb/fPT1wyUw1zZi6
+         9+EFDLE2AAeU7aMmbeHlNmAFKhEwxZxWhB20fcWwYDyg0vMHOttRyhETsJHj80oFBYXd
+         aD++tfr6tNYqcVAqxpJU6ciOL7alMZCUFmRUIHpvppHmTT7gaOoI6H809xX5U5CiEG75
+         8x0TImYxn+hzYtDrKucwzPyMchlGqFbzXfblsOWmVJnmo2NFiPp4dAk+YGuQtx4Q5zhY
+         3Ang==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=nUeJONOZOXQw27AH5OAmCGkZrUTbVh90RMUP44aKmJ4=;
+        fh=T+h5Np00eGqh/OcIHGNSdQp7/QVSILiRY4iMNETGCi4=;
+        b=Q5T4Iahge90eYbn8KMmSyoCu+p7v5VFnVpBJo9pVoASMvXX0gEOsf2oO3gZGaqncTC
+         7Yrwos05ABjAsvzbLPGjzobtDpeiByaYku7PQcsLKKmeUG+C3ebrT4w1B5oDoLanc3qf
+         bxK2oDT1KgoJ78HqPkM7DZUi0+I0iqSAiBZorAkM+dtfGxc4WcdDiIGBNoVxGaWdHu1A
+         m9QYiFWLacpkI/4lAws26ywoycfG5z4e4Vg9PHaUHnCDzT2ESsZj8m5Pc/KW+MD3ySLN
+         +TtPlIMDtBlhMZDco2E8ojkp4xOCJdm9g55M2JsDLRmf6il2h32PUKcwFHD7WUdao0dL
+         6lLQ==;
+        darn=lists.linux.dev
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788377773; x=1788982573; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=cFxjyshR5Gj0Fri/Nz5n1/KkLMrahfjaF4DTCzQtdSA=;
-        b=KRn2G6x1l5VYr6KAqQy2+1mpjasrqW+vH6OoabNfih2xXPh62voF++tvlw2pTmr17b
-         0MvMb+7/0+RrWLI5b3yW/QpSJg7sZICpqjxAKA5t205biYC+qg3bzHOQZL6UdS3C0LLq
-         JaNxT+AR/SVRP98RBBi7dD2prCvFeFEG0wa+dboQjkPxbC/Axm9ES5oqcuXW51FG66UK
-         aBtRV5SGC6ROotlMYqb1OCSVaI+qVOyGj52RKm+5VVnPFp7zmI+VoWyD4XXF+3Au/YfI
-         FJUOsxraB3MSL8JFvtOwPrujUgpGSioQqN+pon0Isi6mDnOFs9mcpw2HKTz/IzxfDF4h
-         uvBQ==
+        d=gmail.com; s=20251104; t=1788377780; x=1788982580; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=nUeJONOZOXQw27AH5OAmCGkZrUTbVh90RMUP44aKmJ4=;
+        b=gRbH4VNbwu2z43h3JBtlis+MVzN6txiir1rvQDRN6iST3M4lQXd+CUzgcRhLpw/v3g
+         xVWxboeSZ9HUAQkkeI39f3zq+e7RUlrexeqO5SU/yQS8K1BinxKUdtvuqBTnpvC0xJBP
+         NESywpkdta9zb71644zXdcqgIRR/ed2qON+0nAIxM8q+BFoLxRK9LUhuckGFTJJ/trMf
+         hv/k8ZHGKueEFvGWLCZNznzaTOxdVDMn+v38jiNfISONcITj+o65Rlvig18SoYyIBT0P
+         MM7+/R2qNNfRUzW6UlykfJBx8YjjojDmqIeZShRNH//pJ5C6y37lZfcNJS4dQgC+tRUG
+         nQ3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788377773; x=1788982573;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=cFxjyshR5Gj0Fri/Nz5n1/KkLMrahfjaF4DTCzQtdSA=;
-        b=mW5iR+rh3gBdNtQJpKUpCMCfdVN2qt6CQu7Fd+zTB0TddDszWw8PMAPobLJDPQdXJB
-         eRhDy2zrXCQm14hIZvM+yKWo1x2YRkDvpnNdWgYnc1hOaw1yJbgutNPMMAYeGGsChH1f
-         Kp6DPbQRaSxJIupD/WJbYO9FbGSWsmD7S1go5fPIJDcSxcVRbUprft/MJ2EHZ8sMJf+3
-         rhUNMWqoF/XaX4PAJ6CvJeAi4yW7pGkLy3EHt36BBgQ2gZsKgJNYnkFzWvt61N1C03uI
-         b3jM8SelfGgWEzyXIrYC+/cdQHPnvPy1owEqKlbEasE9j/fpc8jXLg6pG8JtjIP6cMhH
-         GeuA==
-X-Forwarded-Encrypted: i=1; AKwUvBzrfT+KQ5FOVA8OfNZaeCWHXqQzMDNwcXmwu/R2Qs6uHIAoniASlnk4q5F/ogmkBKYNeMI=@lists.linux.dev
-X-Gm-Message-State: AFuF++nPaQZfCQW9AREFKMl8gXRJzs+F6asmPe8KN8kdHfx6xts8OozQ
-	M4uXInjz8+kJkDPP5R0jGolg6l9qu3SfmlOQBEvx0fVXGDKou9yGRbak
-X-Gm-Gg: AYBFou0obvBJYWeYdwPzBnTFV9ehm2LtS8UJh7aAAwYvcQV/S6c7yRFdn6JyqO6AU2Z
-	A7Oe89ggD/GHzroFKAJkG3SofxU3r2kdYNi1c+IIjxt6SeQXy1aO4MAlIAXxWnUtD4gFLvew+GF
-	Gk7+DDrvWQp07JfZVY5pWyz9/F0JIehm2z07Qp/tPMOXr/4b5iQe3gqWHHExRPK3zr0frXMb7bw
-	AEibsfWDK/v2CBIvlI2y/TVU6poThDtFS0fA+teiN/wcQqWqfFrplA6XR+2XJd5YHwYz/oAUOz9
-	g/NvNuIrC7aJzCdS/UewS5J1jl18ctq0RgTcSXqojRggXTEbrnBglLbJqa1HfO5iF7+H/ac8Lwx
-	jfAyQPsvFOfzSRu236HlP/T5P6V1naHo8W/EjNJOFseppF6QKXoBxJdQH8Y0R6dTJOLudvqbQq3
-	enynfYmlVU5IuT4QkufWgrpblTVHkKDsE1NewE1kuuN4vnxGpNZMEu5/lCkQ==
-X-Received: by 2002:a5d:5f8a:0:b0:480:c5:d635 with SMTP id ffacd0b85a97d-4847b6295e6mr14936972f8f.0.1788377773399;
-        Wed, 02 Sep 2026 12:36:13 -0700 (PDT)
-Received: from luca-vm.lan ([154.61.61.58])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-484492cdc37sm8889191f8f.34.2026.09.02.12.36.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Sep 2026 12:36:13 -0700 (PDT)
-From: Luca Leonardo Scorcia <l.scorcia@gmail.com>
-To: linux-mediatek@lists.infradead.org
-Cc: Val Packett <val@packett.cool>,
-	Luca Leonardo Scorcia <l.scorcia@gmail.com>,
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Sen Chu <sen.chu@mediatek.com>,
-	Sean Wang <sean.wang@mediatek.com>,
-	Macpaul Lin <macpaul.lin@mediatek.com>,
-	Lee Jones <lee@kernel.org>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Linus Walleij <linusw@kernel.org>,
-	Julien Massot <julien.massot@collabora.com>,
-	Fabien Parent <parent.f@gmail.com>,
-	Akari Tsuyukusa <akkun11.open@gmail.com>,
-	Chen Zhong <chen.zhong@mediatek.com>,
-	linux-input@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	mfd@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org,
-	linux-gpio@vger.kernel.org
-Subject: [PATCH v10 9/9] arm64: dts: mediatek: Add MediaTek MT6392 PMIC dtsi
-Date: Wed,  2 Sep 2026 21:25:45 +0200
-Message-ID: <20260902193351.185771-10-l.scorcia@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260902193351.185771-1-l.scorcia@gmail.com>
-References: <20260902193351.185771-1-l.scorcia@gmail.com>
+        d=1e100.net; s=20251104; t=1788377780; x=1788982580;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=nUeJONOZOXQw27AH5OAmCGkZrUTbVh90RMUP44aKmJ4=;
+        b=sD8e2oCDCNR+AavJOxvTtTCi1/cBuZ6bjelhKZI7DUkrnTjk/Xc169B5r/JhhFmzPf
+         f27uahRn3LpfUK1TIAu0jo4RBZdxzx1AKh2ylMk+5Xyp+kTPZ5JSruWzed7XN0PLpXTt
+         s/RCsWNMf9+zhQXv7Q0F41V7KRFzwpQoAktMTTnqEaQKycoPcD/1x1HDeElkQ6NyRBmb
+         kJJDLC5AmEcPXXNK7iOrea47JOsf9Qn9lRxtUiEAC7vAO+T1n6Yfq3BBHvgIKTkWqjFV
+         cXiunDg6D5NSOxGVDNfu1lLVduAOZziMmbqxfV5Zwi59d1lxtTXRyYZipjb6g4p9vCrZ
+         Ci1Q==
+X-Forwarded-Encrypted: i=1; AKwUvBzk7bpCuU5VLkFt01Wy3duPgmHWqs1Q4guO019TZVYgeMRAj5F4Ip1Q2syYe1REChN+/EQ=@lists.linux.dev
+X-Gm-Message-State: AFuF++mzJd8McUzNdKIQZs2XNS3b17mwFXoLRf2ah8n5SG3meJ+JcEXK
+	GmJ62nxK1gIEivLXM+wOUblIjHJJSYXScmUDRYh8pcI+XNz04Yx2wOqWhU9ueViALzVLJyz3Na/
+	4HJMr1Fw6yjR3tiMKeQjo0nVixCxU42g=
+X-Gm-Gg: AYBFou1NejWK8xOoDR4FRyeVoo0o+OTvNrcCvt7gZAc/kwbzHqT49GVlo3wqGtP7KWm
+	Era4in7p/yRq6NKykhrjlIdSlz2ABGNBhI8Ja0WqizF4F2HY1lqrVYv+/BW5wpsUHpo7xD2NEwZ
+	bZMxqilRolARK7w4EQRVd+n3ypsjkC/PDSRbMNuzFN7nnvVUEHLy6naIoAB2YQNZDIiuucQc8Uq
+	hC+3/6DLxocam4N1Dnf0H687rlqjeTvEOlFZriQHgt62ZCFgLRGpHAXQ/mL9dsBjVRHhRJF4bFn
+	0uM2euqhpgg6d8qFs+oGMIkIcfELkwshr+eBGlTTnH3LiU7l7NFyDDtCTcdX9ukrccY5ZII9m1+
+	iv208vH2bjAiLUbRkWkNfvd1pFrJpPGDwcmTLiR/uECoy/CR7mo1TmA5lUvP4Xtj9fdv0ti7K7v
+	cL+E5n2buHw31+Hhubg/UL02g5X8aBIlAEieTHjg==
+X-Received: by 2002:a67:e704:0:b0:778:5e58:ec46 with SMTP id
+ ada2fe7eead31-78a1f1f0bb4mr2338551137.2.1788377779561; Wed, 02 Sep 2026
+ 12:36:19 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260811-submit-ac200-mfd-v7-0-8b06f552a4d7@gmail.com>
+ <20260811-submit-ac200-mfd-v7-2-8b06f552a4d7@gmail.com> <20260902143122.GA2082450@google.com>
+In-Reply-To: <20260902143122.GA2082450@google.com>
+From: James Hilliard <james.hilliard1@gmail.com>
+Date: Wed, 2 Sep 2026 15:36:07 -0400
+X-Gm-Features: AcwNN1Xwt_WeKE5EYA94nRgCZXJ8kS7opgPLjZCch4rn9cxdGbvWKIuGY6VRBjY
+Message-ID: <CADvTj4oytrbZw9oKzRu=+tL1WZMyscfDvBMm2uK5hhNv8ZxTBw@mail.gmail.com>
+Subject: Re: [PATCH v7 2/2] mfd: ac200: Add X-Powers AC200 support
+To: Lee Jones <lee@kernel.org>
+Cc: Arnd Bergmann <arnd@arndb.de>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Andrew Lunn <andrew@lunn.ch>, 
+	"Jagielski, Jedrzej" <jedrzej.jagielski@intel.com>, Andre Przywara <andre.przywara@arm.com>, 
+	Chen-Yu Tsai <wens@kernel.org>, =?UTF-8?Q?Jernej_=C5=A0krabec?= <jernej.skrabec@gmail.com>, 
+	linux-sunxi@lists.linux.dev, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Val Packett <val@packett.cool>
+On Wed, Sep 2, 2026 at 8:31=E2=80=AFAM Lee Jones <lee@kernel.org> wrote:
+>
+> On Tue, 11 Aug 2026, James Hilliard wrote:
+>
+> > The X-Powers AC200 is a mixed-signal companion IC with a paged register
+> > map accessed over I2C.
+> >
+> > Enable the shared input clock and prevent its rate from changing. Match
+> > the vendor driver's 40 ms wait before the first register access,
+> > initialize the paged regmap, report the chip and package revision, and
+> > apply common reset.
+> >
+> > The Ethernet PHY link endpoint is independently enumerated on its MDIO
+> > bus rather than created as an MFD platform child. Keep the regmap attac=
+hed
+> > to the AC200 I2C device so a separately enumerated function can resolve
+> > that device, establish its required lifetime relationship and retrieve
+> > the regmap from the provider.
+> >
+> > Cache only the common page selector. Individual functions can reset
+> > independently and invalidate their other registers without regmap's
+> > knowledge, so leave all functional registers volatile.
+> >
+> > Reset the chip during managed teardown and system shutdown.
+> >
+> > Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+> > ---
+> >  drivers/mfd/Kconfig  |  11 ++++
+> >  drivers/mfd/Makefile |   1 +
+> >  drivers/mfd/ac200.c  | 163 +++++++++++++++++++++++++++++++++++++++++++=
+++++++++
+> >  3 files changed, 175 insertions(+)
+> >
+> > diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
+> > index e4fd4572472f..cac3fff5aee9 100644
+> > --- a/drivers/mfd/Kconfig
+> > +++ b/drivers/mfd/Kconfig
+> > @@ -205,6 +205,17 @@ config MFD_AC100
+> >         This driver include only the core APIs. You have to select indi=
+vidual
+> >         components like codecs or RTC under the corresponding menus.
+> >
+> > +config MFD_AC200
+> > +     tristate "X-Powers AC200"
+> > +     depends on I2C
+> > +     depends on OF
+> > +     select REGMAP_I2C
+> > +     help
+> > +       Support for the X-Powers AC200 mixed-signal companion IC. The A=
+C200
+> > +       contains audio, video, RTC and Fast Ethernet PHY functions and =
+is
+> > +       co-packaged with some Allwinner H6 and H616 SoCs. This driver p=
+rovides
+> > +       the shared register access used by the individual function driv=
+ers.
+> > +
+> >  config MFD_AXP20X
+> >       tristate
+> >       select MFD_CORE
+> > diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
+> > index 72d3944b0ad8..f8101d2a9ce9 100644
+> > --- a/drivers/mfd/Makefile
+> > +++ b/drivers/mfd/Makefile
+> > @@ -150,6 +150,7 @@ obj-$(CONFIG_MFD_DA9052_SPI)      +=3D da9052-spi.o
+> >  obj-$(CONFIG_MFD_DA9052_I2C) +=3D da9052-i2c.o
+> >
+> >  obj-$(CONFIG_MFD_AC100)              +=3D ac100.o
+> > +obj-$(CONFIG_MFD_AC200)              +=3D ac200.o
+> >  obj-$(CONFIG_MFD_AXP20X)     +=3D axp20x.o
+> >  obj-$(CONFIG_MFD_AXP20X_I2C) +=3D axp20x-i2c.o
+> >  obj-$(CONFIG_MFD_AXP20X_RSB) +=3D axp20x-rsb.o
+> > diff --git a/drivers/mfd/ac200.c b/drivers/mfd/ac200.c
+> > new file mode 100644
+> > index 000000000000..0964e637afef
+> > --- /dev/null
+> > +++ b/drivers/mfd/ac200.c
+> > @@ -0,0 +1,163 @@
+> > +// SPDX-License-Identifier: GPL-2.0-only
+> > +/*
+> > + * MFD core driver for the X-Powers AC200
+> > + *
+> > + * Copyright (C) 2019 Jernej Skrabec <jernej.skrabec@gmail.com>
+> > + * Copyright (C) 2026 James Hilliard <james.hilliard1@gmail.com>
+> > + *
+> > + * Based on the AC100 driver:
+> > + * Copyright (C) 2016 Chen-Yu Tsai
+>
+> Drop this.  Every driver tends to be based on something else.
 
-Add the dtsi to be included by all boards using the MT6392 PMIC,
-providing support for regulator, keys, pinctrl and RTC.
+Dropped in v8.
 
-Import the new file in the shared device tree for the Pumpkin boards.
+>
+> > + */
+> > +
+> > +#include <linux/bitfield.h>
+> > +#include <linux/clk.h>
+> > +#include <linux/delay.h>
+> > +#include <linux/i2c.h>
+> > +#include <linux/module.h>
+> > +#include <linux/regmap.h>
+>
+> Why aren't you using the MFD API?
+>
+> If you don't need it, then why is this in drivers/mfd?
 
-Signed-off-by: Val Packett <val@packett.cool>
-Signed-off-by: Luca Leonardo Scorcia <l.scorcia@gmail.com>
----
- arch/arm64/boot/dts/mediatek/mt6392.dtsi      | 145 ++++++++++++++++++
- .../boot/dts/mediatek/pumpkin-common.dtsi     |   7 +
- 2 files changed, 152 insertions(+)
- create mode 100644 arch/arm64/boot/dts/mediatek/mt6392.dtsi
+The EPHY remains enumerated on its primary MDIO bus, so it is not an MFD
+child. For non-EPHY use cases, the AC200 audio, video and RTC functions
+are intended to be added as MFD children.
 
-diff --git a/arch/arm64/boot/dts/mediatek/mt6392.dtsi b/arch/arm64/boot/dts/mediatek/mt6392.dtsi
-new file mode 100644
-index 000000000000..cc4770d70246
---- /dev/null
-+++ b/arch/arm64/boot/dts/mediatek/mt6392.dtsi
-@@ -0,0 +1,145 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) 2019 MediaTek Inc.
-+ * Copyright (c) 2024 Val Packett <val@packett.cool>
-+ * Copyright (c) 2026 Luca Leonardo Scorcia <l.scorcia@gmail.com>
-+ */
-+
-+#include <dt-bindings/input/input.h>
-+#include <dt-bindings/regulator/mediatek,mt6392-regulator.h>
-+
-+&pwrap {
-+	pmic: pmic {
-+		compatible = "mediatek,mt6392";
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+
-+		mt6392keys: keys {
-+			compatible = "mediatek,mt6392-keys";
-+
-+			key-power {
-+				linux,keycodes = <KEY_POWER>;
-+				wakeup-source;
-+			};
-+
-+			key-home {
-+				linux,keycodes = <KEY_HOME>;
-+				wakeup-source;
-+			};
-+		};
-+
-+		mt6392pio: pinctrl {
-+			compatible = "mediatek,mt6392-pinctrl";
-+
-+			gpio-controller;
-+			#gpio-cells = <2>;
-+		};
-+
-+		mt6392regulators: regulators {
-+			compatible = "mediatek,mt6392-regulator";
-+
-+			/* Fixed supply defined in the data sheet */
-+			avddldo-supply = <&mt6392_vsys_reg>;
-+
-+			mt6392_vcore_reg: vcore {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_BUCK_MODE_FORCE_PWM>;
-+			};
-+			mt6392_vproc_reg: vproc {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_BUCK_MODE_FORCE_PWM>;
-+			};
-+			mt6392_vsys_reg: vsys {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_BUCK_MODE_FORCE_PWM>;
-+			};
-+			mt6392_vaud28_reg: vaud28 {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vxo22_reg: vxo22 {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vaud22_reg: vaud22 {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vadc18_reg: vadc18 {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vcama_reg: vcama { };
-+			mt6392_vcn35_reg: vcn35 {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vio28_reg: vio28 {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vusb_reg: vusb {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vmc_reg: vmc {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vmch_reg: vmch {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vemc3v3_reg: vemc3v3 {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vcamaf_reg: vcamaf {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vgp1_reg: vgp1 {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vgp2_reg: vgp2 {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vefuse_reg: vefuse {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vm25_reg: vm25 {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vdig18_reg: vdig18 { };
-+			mt6392_vm_reg: vm {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vio18_reg: vio18 {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vcn18_reg: vcn18 {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vcamd_reg: vcamd {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vcamio_reg: vcamio {
-+				regulator-allowed-modes = <MT6392_REGULATOR_MODE_NORMAL
-+							   MT6392_LDO_MODE_LP>;
-+			};
-+			mt6392_vrtc_reg: vrtc { };
-+		};
-+
-+		mt6392rtc: rtc {
-+			compatible = "mediatek,mt6392-rtc", "mediatek,mt6323-rtc";
-+		};
-+	};
-+};
-diff --git a/arch/arm64/boot/dts/mediatek/pumpkin-common.dtsi b/arch/arm64/boot/dts/mediatek/pumpkin-common.dtsi
-index 805fb82138a8..b19d5792bd89 100644
---- a/arch/arm64/boot/dts/mediatek/pumpkin-common.dtsi
-+++ b/arch/arm64/boot/dts/mediatek/pumpkin-common.dtsi
-@@ -6,6 +6,8 @@
- 
- #include <dt-bindings/gpio/gpio.h>
- 
-+#include "mt6392.dtsi"
-+
- / {
- 	aliases {
- 		serial0 = &uart0;
-@@ -160,6 +162,11 @@ &i2c2 {
- 	status = "okay";
- };
- 
-+&pmic {
-+	interrupt-parent = <&pio>;
-+	interrupts = <28 IRQ_TYPE_LEVEL_HIGH>;
-+};
-+
- &uart0 {
- 	status = "okay";
- };
--- 
-2.43.0
+There are no such child drivers in this series, so I have not added
+unused MFD cells. Those can be introduced with their corresponding
+bindings and drivers.
 
+>
+> > +#define AC200_SYS_VERSION_REG                        0x0000
+> > +#define AC200_SYS_VERSION_PACKAGE_MASK               GENMASK(15, 14)
+> > +#define AC200_SYS_VERSION_CHIP_MASK          GENMASK(11, 0)
+> > +
+> > +#define AC200_SYS_CONTROL_REG                        0x0002
+> > +#define AC200_SYS_CONTROL_CHIP_RESET_DEASSERT        BIT(0)
+> > +
+> > +/* Interface register accessible from every register page. */
+> > +#define AC200_TWI_REG_ADDR_H 0x00fe
+> > +#define AC200_MAX_REG                0xa1f2
+> > +
+> > +struct ac200 {
+> > +     struct regmap *regmap;
+> > +};
+>
+> Why not just pass 'regmap' directly?
+
+Changed to store the regmap directly as the I2C driver data.
+
+>
+> > +static const struct regmap_range_cfg ac200_range_cfg[] =3D {
+> > +     {
+> > +             .range_max =3D AC200_MAX_REG,
+> > +             .selector_reg =3D AC200_TWI_REG_ADDR_H,
+> > +             .selector_mask =3D 0xff,
+> > +             .window_len =3D 256,
+> > +     },
+> > +};
+> > +
+> > +/*
+> > + * Each AC200 sub-block can reset independently, invalidating its regi=
+ster
+> > + * contents without regmap's knowledge. Cache only the common page sel=
+ector;
+> > + * this avoids a selector read-modify-write for every access on the sa=
+me page
+> > + * without ever returning stale functional-register values.
+> > + */
+> > +static bool ac200_volatile_reg(struct device *dev, unsigned int reg)
+> > +{
+> > +     return reg !=3D AC200_TWI_REG_ADDR_H;
+> > +}
+> > +
+> > +static const struct regmap_config ac200_regmap_config =3D {
+> > +     .name =3D "ac200",
+> > +     .reg_bits =3D 8,
+> > +     .reg_stride =3D 2,
+> > +     .val_bits =3D 16,
+> > +     .ranges =3D ac200_range_cfg,
+> > +     .num_ranges =3D ARRAY_SIZE(ac200_range_cfg),
+> > +     .max_register =3D AC200_MAX_REG,
+> > +     .volatile_reg =3D ac200_volatile_reg,
+> > +     .cache_type =3D REGCACHE_MAPLE,
+> > +};
+> > +
+> > +static void ac200_disable(void *data)
+> > +{
+> > +     struct ac200 *ddata =3D data;
+> > +
+> > +     regmap_write(ddata->regmap, AC200_SYS_CONTROL_REG, 0);
+> > +}
+>
+> You can't do this in .remove()?
+
+Changed to reset the chip from the I2C remove callback.
+
+>
+> > +static int ac200_probe(struct i2c_client *client)
+> > +{
+> > +     struct device *dev =3D &client->dev;
+> > +     unsigned int version;
+> > +     struct ac200 *ddata;
+> > +     struct clk *clk;
+> > +     int ret;
+> > +
+> > +     ddata =3D devm_kzalloc(dev, sizeof(*ddata), GFP_KERNEL);
+> > +     if (!ddata)
+> > +             return -ENOMEM;
+> > +
+> > +     clk =3D devm_clk_get_enabled(dev, NULL);
+> > +     if (IS_ERR(clk))
+> > +             return dev_err_probe(dev, PTR_ERR(clk),
+> > +                                  "failed to enable input clock\n");
+> > +
+> > +     ret =3D devm_clk_rate_exclusive_get(dev, clk);
+> > +     if (ret)
+> > +             return dev_err_probe(dev, ret, "failed to lock clock rate=
+\n");
+> > +
+> > +     ddata->regmap =3D devm_regmap_init_i2c(client, &ac200_regmap_conf=
+ig);
+> > +     if (IS_ERR(ddata->regmap))
+> > +             return dev_err_probe(dev, PTR_ERR(ddata->regmap),
+> > +                                  "failed to initialize regmap\n");
+> > +
+> > +     i2c_set_clientdata(client, ddata);
+> > +
+> > +     /*
+> > +      * No minimum delay is documented. Match the vendor driver's 40 m=
+s delay
+> > +      * before its first AC200 register access after enabling the inpu=
+t clock.
+> > +      */
+> > +     msleep(40);
+> > +
+> > +     ret =3D regmap_read(ddata->regmap, AC200_SYS_VERSION_REG, &versio=
+n);
+> > +     if (ret)
+> > +             return dev_err_probe(dev, ret,
+> > +                                  "failed to read chip version\n");
+> > +
+> > +     dev_info(dev, "AC200 revision %#lx in package %lu\n",
+> > +              FIELD_GET(AC200_SYS_VERSION_CHIP_MASK, version),
+> > +              FIELD_GET(AC200_SYS_VERSION_PACKAGE_MASK, version));
+>
+> We support all versions, so why print it out at all?
+
+Removed the revision read and log message.
+
+> > +     /* Reset the chip after dependent function drivers have unbound. =
+*/
+> > +     ret =3D devm_add_action_or_reset(dev, ac200_disable, ddata);
+> > +     if (ret)
+> > +             return ret;
+> > +
+> > +     ret =3D regmap_write(ddata->regmap, AC200_SYS_CONTROL_REG, 0);
+> > +     if (ret)
+> > +             return ret;
+> > +
+> > +     ret =3D regmap_write(ddata->regmap, AC200_SYS_CONTROL_REG,
+> > +                        AC200_SYS_CONTROL_CHIP_RESET_DEASSERT);
+> > +     if (ret)
+> > +             return ret;
+>
+> Okay, now what?  What uses this regmap?
+
+The current consumer is the separately submitted AC200/AC300 PHY driver.
+It creates a managed device link to the AC200 I2C device and obtains the
+regmap with dev_get_regmap() for ancillary package-control access.
+
+v8:
+https://patch.msgid.link/20260902-submit-ac200-mfd-v8-0-2aa06720b8ac@gmail.=
+com
+
+>
+> > +     return 0;
+> > +}
+> > +
+> > +static void ac200_shutdown(struct i2c_client *client)
+> > +{
+> > +     ac200_disable(i2c_get_clientdata(client));
+> > +}
+> > +
+> > +static const struct of_device_id ac200_of_match[] =3D {
+> > +     { .compatible =3D "x-powers,ac200" },
+> > +     { }
+> > +};
+> > +MODULE_DEVICE_TABLE(of, ac200_of_match);
+> > +
+> > +static const struct i2c_device_id ac200_i2c_ids[] =3D {
+> > +     { .name =3D "ac200" },
+> > +     { }
+> > +};
+> > +MODULE_DEVICE_TABLE(i2c, ac200_i2c_ids);
+> > +
+> > +static struct i2c_driver ac200_driver =3D {
+> > +     .driver =3D {
+> > +             .name =3D "ac200",
+> > +             .of_match_table =3D ac200_of_match,
+> > +     },
+> > +     .probe =3D ac200_probe,
+> > +     .shutdown =3D ac200_shutdown,
+> > +     .id_table =3D ac200_i2c_ids,
+> > +};
+> > +module_i2c_driver(ac200_driver);
+> > +
+> > +MODULE_AUTHOR("James Hilliard <james.hilliard1@gmail.com>");
+> > +MODULE_DESCRIPTION("X-Powers AC200 MFD core driver");
+> > +MODULE_LICENSE("GPL");
+> >
+> > --
+> > 2.53.0
+> >
+>
+> --
+> Lee Jones
