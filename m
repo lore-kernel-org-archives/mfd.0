@@ -1,121 +1,161 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40123395AE9;
-	Wed,  2 Sep 2026 20:10:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08E6D4CCDFB;
+	Wed,  2 Sep 2026 20:25:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788379858; cv=none; b=OsJu3TtxSgiLI8mP34U3NP/izmiFO4mKfOXs0W7Fz3ReIHxGps9eRDyZL3ez+fb8eQK5nWdia0xc0NaGkxFlIZwV66J3LJfVkqLQTFxDxW/yOBCQg7+bvoX0sOdtHzCsqzzwtoMU8WNa6xf+AKZo408UQJNlVAHTzWOq8sa3AE4=
+	t=1788380702; cv=none; b=gIljD2yiWKTa4Mzc4GRaDBPlMw+HTHWd5183EHvlMouXxduIeZlSsQ6N9llfvVzKAwUoXh308yLYOjVXesNf+1gVSMnNlujKrbLKp4eWI8dBA9SnyaVhi+hTAKvoFvapRa5AMWqa4nnFXNSc5kaITV0X/BQotphjzrCmEvbbmi8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788379858; c=relaxed/simple;
-	bh=ZQ/b9PDsQsPfQuGBXzgd3cgXZgte0WnN6uex/E7gz6Y=;
+	s=arc-20240116; t=1788380702; c=relaxed/simple;
+	bh=fSiltKOcb3v69E6wjt8E5Ko78Hw/y50obDkazcedyc8=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=Mp7fWz2VOKlk3L3bxWybUWpNpASoi7l1gNkiioU/pq4ecf6pBEpkD4bTMuEqrWh9ka0xqddCT914gBhLUNncm9kVLN9BCAMaognAvEmAaSAMsW4chgxVGQeX32Wgg7HaMlei2E+NHIHkPsSRFbdT4XlgUo27ftpAOe/+aqVDlYQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GIEuytdm; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=mC35lJbC78nXPPBHhNIf7ymiwuYrG18BytPM28nSh1n8vIS9ggiYR5K5h57GhR6Pd/0pDPZpyHKyxkHVXneq8dQnnTrDTX3JqoxU78WgK7jeQ5yOaHKqYwYJ/3AO35WK0ns8cUI/e/5Fo4hCInNWC+PFWGa1E9OYW063+1p8bqE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=k5J+kQO1; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GIEuytdm"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 006B61F00A3A;
-	Wed,  2 Sep 2026 20:10:51 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="k5J+kQO1"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D11551F000E9;
+	Wed,  2 Sep 2026 20:24:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788379852;
-	bh=uMFpygn72Dn+dYJFWe9y3IgF5qG7Zfpz62g92hOkRNc=;
+	s=k20260515; t=1788380700;
+	bh=2pPfC1eZm+OvLJcrh/RYH2wsmeUSw3MxD4E5z0eOcZc=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=GIEuytdm67aWwHrxOJM9/RoxWsHmSMkI84Ymqd+tgLU/FTWA61jJCOgOfvulLSXv7
-	 cpYKkJRUkPYkSE7/zkwNk+YCUJv/ELoMsSKhNIbjIJQ2i1KTfo/7Gmt0kNrjvZWlAK
-	 Gkrb98ldIS+VoL/E+LpSX3swFmEX4YWRk0is8sjuM+Em7a5JBdVB/IflyaSDBd7ikI
-	 pfP0j1t0izzxtVD/Z3ObmVWxWmxTE43RICM09EW0xbyfxEck/H3iqFwJaqCBsJAXdQ
-	 sxef9z+ds/Yc3Ymklw79V9hiDO8eDBgD3ii3XGDL4fCHYk4/nOvTlP5cyR4gClioTD
-	 soxTVe11xwZcw==
+	b=k5J+kQO1w70m4sBaGabZxeLo8N966mEWYN1hVUFu9COnssyWo2cf5LVKBpYFMuhU/
+	 ol2AkuGMBPvf5kJH+NRDZuGTmlf/yscMA4ESyJo5K/aJIb1I3dSxxxwkXeQl/hebME
+	 4EsERx2kMndnK3ohKYj0nwUver8gQwLZ30AXJABlmkdksXTQtky1GZjmTqNxGikDaf
+	 PfMOrBFnSgpJZiykRnm7rBg0uM/cQPVuSdfXVzb4Gnrs0wAZJK0rBLcZugRLV89I+H
+	 kuXMdKcGyx/c6qU4jvtnTLgDxKpZ+n+p2Gdx04SvRjsYIcATQUd5nUP7rDkPLj+9pW
+	 CJMJ/3Mew0Wgg==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v10 4/9] mfd: mt6397: Use MFD_CELL_* to describe
- sub-devices
+Subject: Re: [PATCH v10 5/9] mfd: mt6397: Add support for MT6392 PMIC
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Luca Leonardo Scorcia" <l.scorcia@gmail.com>
-Cc: devicetree@vger.kernel.org, dmitry.torokhov@gmail.com, mfd@lists.linux.dev, robh@kernel.org, linux-input@vger.kernel.org, lee@kernel.org, conor+dt@kernel.org
-In-Reply-To: <20260902193351.185771-5-l.scorcia@gmail.com>
+Cc: conor+dt@kernel.org, robh@kernel.org, lee@kernel.org, dmitry.torokhov@gmail.com, linux-input@vger.kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20260902193351.185771-6-l.scorcia@gmail.com>
 References: <20260902193351.185771-1-l.scorcia@gmail.com>
- <20260902193351.185771-5-l.scorcia@gmail.com>
+ <20260902193351.185771-6-l.scorcia@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 02 Sep 2026 20:10:51 +0000
-Message-Id: <20260902201052.006B61F00A3A@smtp.kernel.org>
+Date: Wed, 02 Sep 2026 20:24:59 +0000
+Message-Id: <20260902202459.D11551F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
+Thank you for your contribution! Sashiko AI review found 2 potential issue(=
 s) to consider:
 
+New issues:
+- [Low] Driver-specific header files were added to the global include/linux=
+/mfd/ directory, violating MFD subsystem guidelines.
+
 Pre-existing issues:
-- [High] Missing .remove callback leads to PM notifier use-after-free and I=
-RQ domain memory leak on module unload.
+- [High] Incomplete resource cleanup in probe error path and missing driver=
+ `.remove` callback lead to Use-After-Free and resource leaks.
 --
 
-commit 6a7d774cdf490c33501d839d753ee001e1219166
-Author: Luca Leonardo Scorcia <l.scorcia@gmail.com>
+commit cf917ffc4ed0ebfc40bb77132283778e31d7ae09
+Author: Fabien Parent <parent.f@gmail.com>
 
-mfd: mt6397: Use MFD_CELL_* to describe sub-devices
+mfd: mt6397: Add support for MT6392 PMIC
 
-Use the MFD_CELL_* macros to describe sub-devices. No functional changes.
+Align the MT6397 PMIC driver to other MFD drivers by passing only an
+identifier through mt6397_of_match[*].data and add support for the MT6392
+PMIC and its regulator, RTC, keys and pinctrl devices.
 
 > diff --git a/drivers/mfd/mt6397-core.c b/drivers/mfd/mt6397-core.c
-> index 9ec9519965887..3e08179002fad 100644
+> index 3e08179002fad..f284d3885ae18 100644
 > --- a/drivers/mfd/mt6397-core.c
 > +++ b/drivers/mfd/mt6397-core.c
-> @@ -124,165 +124,92 @@ static const struct resource mt6323_pwrc_resources=
-[] =3D {
-
 [ ... ]
-
->  static const struct mfd_cell mt6397_devs[] =3D {
-> -	{
-> -		.name =3D "mt6397-rtc",
-> -		.num_resources =3D ARRAY_SIZE(mt6397_rtc_resources),
-> -		.resources =3D mt6397_rtc_resources,
-> -		.of_compatible =3D "mediatek,mt6397-rtc",
-> -	}, {
-> -		.name =3D "mt6397-regulator",
-> -		.of_compatible =3D "mediatek,mt6397-regulator",
-> -	}, {
-
-[ ... ]
-
-> +	MFD_CELL_OF("mt6397-keys", mt6397_keys_resources, NULL, 0, 0,
-> +		    "mediatek,mt6397-keys"),
->  };
+> @@ -282,6 +317,7 @@ static int mt6397_probe(struct platform_device *pdev)
+>  	unsigned int id =3D 0;
+>  	struct mt6397_chip *pmic;
+>  	const struct chip_data *pmic_core;
+> +	int chip_variant;
 > =20
->  struct chip_data {
+>  	pmic =3D devm_kzalloc(&pdev->dev, sizeof(*pmic), GFP_KERNEL);
+>  	if (!pmic)
 
 [Severity: High]
-This is a pre-existing issue, but looking at the platform driver definition:
+This isn't a bug introduced by this patch, but doesn't the lack of a .remove
+callback and incomplete probe error handling leak resources and cause a
+use-after-free?
+
+If devm_mfd_add_devices() fails during mt6397_probe(), or if the driver is
+unbound via sysfs, devres automatically frees the mt6397_chip structure.
+However, mt6397_irq_init() registers a PM notifier:
+
+drivers/mfd/mt6397-irq.c:mt6397_irq_init() {
+    ...
+    register_pm_notifier(&chip->pm_nb);
+    return 0;
+}
+
+This is never unregistered because there is no explicit cleanup on the probe
+error path, and no .remove callback is defined in mt6397_driver:
 
 drivers/mfd/mt6397-core.c:
-    static struct platform_driver mt6397_driver =3D {
-        .probe =3D mt6397_probe,
-        .driver =3D {
-            .name =3D "mt6397",
-            ...
-        },
-        ...
-    };
+static struct platform_driver mt6397_driver =3D {
+    .probe =3D mt6397_probe,
+    .driver =3D {
+        .name =3D "mt6397",
+        .of_match_table =3D mt6397_of_match,
+    },
+};
 
-Could the absence of a .remove callback lead to a PM notifier use-after-free
-and IRQ domain memory leak on module unload?
+When the system subsequently suspends, the PM core invokes the dangling
+notifier_call, causing a UAF.
 
-During probe, mt6397_probe() calls mt6397_irq_init() which registers a PM
-notifier with register_pm_notifier(&chip->pm_nb) and creates an IRQ domain
-with irq_domain_create_linear().
+Additionally, the error path destroys the irq domain while the managed IRQ
+thread is still active:
 
-Because the mt6397_driver struct lacks a .remove callback, unbinding the
-driver (via module unload or sysfs) triggers standard devm teardown, freeing
-the chip structure that was allocated via devm_kzalloc().
+drivers/mfd/mt6397-core.c:mt6397_probe() {
+    ...
+    if (ret) {
+        irq_domain_remove(pmic->irq_domain);
+        dev_err(&pdev->dev, "failed to add child devices: %d\n", ret);
+    }
+    ...
+}
 
-Doesn't this leave the kernel's PM notifier chain with a dangling pointer
-to the freed chip->pm_nb, causing a crash on the next suspend/resume cycle,
-and leave the IRQ domain unremoved?
+Does this create a UAF window if an interrupt fires before devres cleans up
+the devm-managed IRQ handler mt6397_irq_thread?
+
+> diff --git a/include/linux/mfd/mt6392/core.h b/include/linux/mfd/mt6392/c=
+ore.h
+> new file mode 100644
+> index 0000000000000..8777b3abf9292
+> --- /dev/null
+> +++ b/include/linux/mfd/mt6392/core.h
+> @@ -0,0 +1,43 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+
+[Severity: Low]
+Does placing this driver-specific header file in the global include/linux/m=
+fd/
+directory violate MFD subsystem layering guidelines?
+
+The MFD subsystem guidelines state: "Do not include driver-specific header
+files in the global include/linux/mfd/ directory if they are only used by t=
+he
+parent and its immediate children. Keep them local to drivers/mfd/."
+
+> diff --git a/include/linux/mfd/mt6392/registers.h b/include/linux/mfd/mt6=
+392/registers.h
+> new file mode 100644
+> index 0000000000000..68fe9af448f5d
+> --- /dev/null
+> +++ b/include/linux/mfd/mt6392/registers.h
+> @@ -0,0 +1,488 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+
+[Severity: Low]
+Is it intentional to place these driver-specific registers in the global
+include directory rather than keeping them local to drivers/mfd/?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260902193351.1857=
-71-1-l.scorcia@gmail.com?part=3D4
+71-1-l.scorcia@gmail.com?part=3D5
