@@ -1,74 +1,82 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A267049CF39;
-	Wed,  2 Sep 2026 13:13:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B0B847CC65
+	for <mfd@lists.linux.dev>; Wed,  2 Sep 2026 13:24:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788354835; cv=none; b=ZI4ocabBW1sNV68/0kHkmqSluC/zmfbBRofLPOnnuDczhRWBxKiyrPxf0YpBAWIrCIj1otq0sD5CVGDH7fSy3DxT1YwEvMiqNcrw+nii7zk68b3AKHqnqnqlh7R8kK/ravwnRY6j94m2Y8BxYaQPn2ME/AHCi0UbwrK9iGp0F3c=
+	t=1788355491; cv=none; b=h8aR7qcozGsv9UrTXoRkOgJ/ReISeFdEKYmWX2SEmr2VftCOmgDkRjCo5as5/HeKU7hGLcf5YZP8cvUeJkBIxTbx2i1Uw9tj/JmQ9AIYib/dXUJaxjM64WzwWwDITTIjKPGMdQjpZtV9PFjy7aM2SPkWjw9gvVEOR4tcVXN9yVY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788354835; c=relaxed/simple;
-	bh=uuhR4rCRRh1/YU6F1GDxAhFo130zKI80x0wn37Qgem8=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=ptAXXo4CTcQPERsCUGcb+Vh1C16gBJalhRNnMRWiGdE8g/OZXKctz2WO4gyfITe8r9C2tw6MEJCA6NY8MfByi3igDf8UtJfcKmaZcbrvOJ5cQuQk0r96rxWWhEqn+JaBUZSbfeyFSABTijwspK3myMzVe3m0hFKRvSZAjWxOgrY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FaFfFGM/; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788355491; c=relaxed/simple;
+	bh=p4cqvaDK+7g1t1n8Daz9GFsd0RQrOw2NEQEp4FqFxQU=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=IfsisYcGDJIeZSVHZi+Wui4bYSW+OieEhhY6eArZfbym0HRC98CmQ2+qKOi65ZGkVxNJM0YsvNaFiwaqC0incLa266V97dvPL2IIPXOpchK0wLBKcecQPbOXifWifAB26sxmN/M5m0PH9yIZzMDkGR7BKADRCrLfJjsiqb3/tCw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nmgjSWMA; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FaFfFGM/"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 197C61F000E9;
-	Wed,  2 Sep 2026 13:13:54 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nmgjSWMA"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4BF931F000E9
+	for <mfd@lists.linux.dev>; Wed,  2 Sep 2026 13:24:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788354834;
-	bh=uuhR4rCRRh1/YU6F1GDxAhFo130zKI80x0wn37Qgem8=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=FaFfFGM/d+HI7JA3MNo5kNWLQGcgAe1bM1ko+oucfr4Rl/prXcImP+ugL9gRueZf+
-	 sBcRKSstSYwVhk+AHOWR8FenCiiHOBHToHIY6CRMvklOzoFiwlSjdCNSLpOpWTzLnE
-	 vxa831UVAFyuIXyAsjE8xrVEb2IBoP1bOgncJ1qtUyhv+yWqQwQUqLLleNlLM/aeuU
-	 tDTjXzGGzx7TAXcBTRliZAAUS6l+e2thbqH/e1Q6dDHj2E2fRuCfJxklh5RaV0ILCo
-	 GJD7xqdViaGxaEaoBKZdb2vFngKUEnQ+R4cMkAYt883peK5ASKDuzcPKVvbnWOqVzy
-	 Ih8fKBNnUSk7w==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v11 4/6] thermal: khadas-mcu-fan: Add fan config from
- platform data Add regulator support
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Ronald Claveau" <linux-kernel-dev@aliel.fr>
-Cc: mfd@lists.linux.dev, lee@kernel.org, conor+dt@kernel.org, robh@kernel.org, devicetree@vger.kernel.org, linux-amlogic@lists.infradead.org, neil.armstrong@linaro.org
-In-Reply-To: <20260902-add-mcu-fan-khadas-vim4-v11-4-5f1610d83bf0@aliel.fr>
-References: <20260902-add-mcu-fan-khadas-vim4-v11-0-5f1610d83bf0@aliel.fr>
- <20260902-add-mcu-fan-khadas-vim4-v11-4-5f1610d83bf0@aliel.fr>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 02 Sep 2026 13:13:53 +0000
-Message-Id: <20260902131354.197C61F000E9@smtp.kernel.org>
+	s=k20260515; t=1788355489;
+	bh=p4cqvaDK+7g1t1n8Daz9GFsd0RQrOw2NEQEp4FqFxQU=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=nmgjSWMAIlKtQp9EfRwaUJqKsnuj3KrITOVqz0dEvr0RNOzXj1rZdWaX6oMXZruAY
+	 NS8+U5ENG+rbq38HnCpOvaX9YYDLcqpogNuK4ZQgab9fgCB86IaqxBQcgVQbHaSKEc
+	 V1wRLVYNnHNDM17nmKtgIiJ1Qj+CFMHUtvq0ZThgO3wc3Q2tUajvj8nXKmEH5Gj+0G
+	 4XMqkgexyRYUrB5EghLx9yGHfMtagn09buJEn3Z3FwkxK8pmBOWwMuPDWs3Un3v2Yd
+	 TmS4Q44ukoEeNjs0rm7oCi+tNVp0JRJBftXkQEFm13VKF+haXrFppBdKbBacpDjmlm
+	 Dbz7cJmaMfJKQ==
+Received: by mail-lj1-f179.google.com with SMTP id 38308e7fff4ca-39f20d19895so8280991fa.2
+        for <mfd@lists.linux.dev>; Wed, 02 Sep 2026 06:24:49 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBwoPXxFEpnJDA3ToQ1RAbNIvs8ESTJ9nwSQ/M7giAj4TNoEScLQA9HSQYUsob9Wlfr/TxE=@lists.linux.dev
+X-Gm-Message-State: AFuF++mkMMAnjHvey5FKePbcfV7JczyoSZMRqh+dd0dY0RPg2tiFJ1ja
+	ZBuBmacxdmF8V6cVDGvCxxGblQXQ198LU1aS3LWhHIemo205AV1LOZJ4n0gKisGZAcLGqrGjLz8
+	L3AjS2Pk6REZc7JC894xIxWKQOgsETgSyS8o48abi5g==
+X-Received: by 2002:a05:651c:a211:20b0:3a3:2a41:c0c4 with SMTP id
+ 38308e7fff4ca-3a34ffdf928mr8237171fa.14.1788355486730; Wed, 02 Sep 2026
+ 06:24:46 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 2 Sep 2026 06:24:45 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 2 Sep 2026 06:24:45 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <d48b55173c74410389ca5c863220370e38e4fc49.1788346553.git.mazziesaccount@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+References: <cover.1788346553.git.mazziesaccount@gmail.com> <d48b55173c74410389ca5c863220370e38e4fc49.1788346553.git.mazziesaccount@gmail.com>
+Date: Wed, 2 Sep 2026 06:24:45 -0700
+X-Gmail-Original-Message-ID: <CAMRc=MfBxYGZK1NRefb8MDhgouxkn1G5Qp18OjbWnKvaspTNFA@mail.gmail.com>
+X-Gm-Features: AcwNN1W18o5pkYxzSwFuL_cj4YP-roXYm9ppEat9QNbwOir598GlWvNoB-rXZmY
+Message-ID: <CAMRc=MfBxYGZK1NRefb8MDhgouxkn1G5Qp18OjbWnKvaspTNFA@mail.gmail.com>
+Subject: Re: [PATCH v3 05/10] mfd: Support for ROHM BD73800 PMIC core
+To: Matti Vaittinen <mazziesaccount@gmail.com>
+Cc: Matti Vaittinen <matti.vaittinen@linux.dev>, Lee Jones <lee@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+	Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+	Jerome Brunet <jbrunet+clk@baylibre.com>, Linus Walleij <linusw@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Alexandre Belloni <alexandre.belloni@bootlin.com>, 
+	Michael Walle <mwalle@kernel.org>, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-clk@vger.kernel.org, 
+	linux-gpio@vger.kernel.org, linux-rtc@vger.kernel.org, 
+	Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>
+Content-Type: text/plain; charset="UTF-8"
 
-> From: Ronald Claveau <linux-kernel-dev@aliel.fr>
->=20
-> Read the fan register and level table from platform_data (fan_reg,
-> levels[] and nlevels) instead of hardcoding a single register and
-> level count, as new MCUs need different values. MAX_LEVEL is kept
-> and bumped from 3 to 5 to make the speed change more gradual with
-> the newer MCUs.
->=20
-> The cooling device's state is stored as an index into levels[],
-> and khadas_mcu_fan_set_level() writes levels[state] to fan_reg,
-> rather than writing the raw state value as before.
->=20
-> Optionally acquire and enable a "fan" regulator supply
-> at probe time and on resume,
-> so boards that gate fan power through a regulator are handled.
-> The regulator is released via a devm_add_action_or_reset()
-> callback.
->=20
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Signed-off-by: Ronald Claveau <linux-kernel-dev@aliel.fr>
+On Wed, 2 Sep 2026 13:04:55 +0200, Matti Vaittinen
+<matti.vaittinen@linux.dev> said:
+> From: Matti Vaittinen <mazziesaccount@gmail.com>
+>
+> The BD73800 integrates regulators, ADC (intended for accumulating current /
+> voltage / power values), a real-time clock (RTC), clock gate and GPIOs.
+>
+> Add core support for ROHM BD73800 Power Management IC.
+>
+> Signed-off-by: Matti Vaittinen <mazziesaccount@gmail.com>
+> Acked-by: Lee Jones <lee@kernel.org>
+>
 
-Sashiko has reviewed this patch and found no issues. It looks great!
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260902-add-mcu-fa=
-n-khadas-vim4-v11-0-5f1610d83bf0@aliel.fr?part=3D4
-
+Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
