@@ -1,140 +1,179 @@
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com [209.85.210.44])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0641379ED2
-	for <mfd@lists.linux.dev>; Wed,  2 Sep 2026 18:46:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBF303911A2
+	for <mfd@lists.linux.dev>; Wed,  2 Sep 2026 19:28:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788374788; cv=none; b=dRuS7q0pf3jyMkHwk7mdFN23eRylV1HVu3SWufPj5bgHab1WLFTMerM509LeEkD/6MZ6Edg4sPodDIkLK6M3G+ReWWWZRItvT4em4wWvjdH0t0EIV70I/W8RUfUdwi37kodOo/Hmlz6DfgNeiM3ISAmlQW8WOiP3ZDY6/ta6ZsE=
+	t=1788377336; cv=none; b=q5NOpL7vmnb9HkkENJvq6EJTpBCOWGU+iiGUIZG4rxRnnXpjtjWHNgfa/C0ccUMK2W96YILE+Z2EyPeoEtke/r+ujGg9LU9dyTu1pj4+BZRfgttAx0fHAF0N/jXsdUp0szG4do/SvyeuBF6inoqyHFUj4UQ8rqBHTzAVrWDUMlg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788374788; c=relaxed/simple;
-	bh=yygwotQtyWeWeoFbS6x/XaiiBa01Fa535pcusnuGMbs=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=XaZV3Glb+yhNNZpRhvOVyFp8KnijbwjJ+B2HQUdYgRlIOO5zCYOJl6MNmRp+6Cbr2t/JqtGlwCSVdFZymXf//8fcLNAu5hTIEDVUc4mXDHw/AF4FfC1yW2vFc86ZL9LlLMqYPt2hvrr41SxItVy6Zc0SyJgjiAsmBEBFFV6xC5g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=mg4a0rz6; arc=none smtp.client-ip=209.85.221.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	s=arc-20240116; t=1788377336; c=relaxed/simple;
+	bh=PN7g6f8q4rSe1aDYWdm44A7DdQCKh0cTB6fHIX0phH0=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Ca+/whOdmqdIuoNsqcKSHyGUi53pBiwLoIqKs/Ol5tsORiuiC53ho1X6/hrvzh5OU+AyFJAyZZyb7fXPjsDPwjz62YifqBKPol6BmT0ziWY1hy4TLApHi9zK/OOQ3P8Xeb0NDa47bpY3DGw2eOuG9p/oi8o270Y2nCREqkOayzs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=O99qMubz; arc=none smtp.client-ip=209.85.210.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="mg4a0rz6"
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-485538d3499so1015327f8f.0
-        for <mfd@lists.linux.dev>; Wed, 02 Sep 2026 11:46:26 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="O99qMubz"
+Received: by mail-ot1-f44.google.com with SMTP id 46e09a7af769-7eb29ed2bbdso853341a34.2
+        for <mfd@lists.linux.dev>; Wed, 02 Sep 2026 12:28:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1788374785; x=1788979585; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=wuAtzw2j6ol/nKID6h+TTCRJxAaTJJD8KprJBxaZGcU=;
-        b=mg4a0rz6n6trsJDZW2oT5asIner3HpYwsn8ei0OjShVLkGBy2SBQuYCD1wyAoP8BY4
-         TbIinIVqo4fU36V2nzdsGXC9rjypOG0H/fsl5Rhkrr1TdR9Ncd+Tykw/lvV2J8fqav0X
-         zEtvoHy6asxKfqBwN85bS5F2mNETz8WnrNcGHQHi8lhkIvFI8A7q/9WTgbpnUEsAM8Nx
-         i4EOgg7k8R/DwQyasL77trssgAtpnw4/JVBBEzE4njuEcY9JsvR6Il+Rrj5+SX1zbIjS
-         rwBhrEIFxgdbr2S1f0xl6/Ai9uRdQLOFIrssn6CDnzYF2bbRoRWCfF+zBgsw+iUPFcIa
-         ulcg==
+        d=gmail.com; s=20251104; t=1788377317; x=1788982117; darn=lists.linux.dev;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=BW8pn0cJ7xlLT4nbmLaz0pA0nlL+jRYhrPKHSPcS2Ws=;
+        b=O99qMubzxMC9+pylVOFRfzDyn60cQigoeHOhM0q0vwnznWGX/XCUQldptK50fjREMZ
+         A9nA9+FZ6Frd+ARHO1+DfqJb5p0BA/3Mqay7OsJW+U96CKrlIfgs5DhtMAiJ0SZsXstK
+         bORfC5bxLZRt+AytbuzRBEB1PVg91/fZR/0gn9N26qw8X47aDvqArSRBCm4L6Zj04Tgi
+         JZNs/jG7oYlbi3M8awSwOV6H4CqU8GM7T9OXzxBMqqDpXduiWcXF9dLE3ZpNWV0aVTMq
+         XJaKfTlaYWM+UvmdUqikeekMh0nwJWM9AU0EMGXgACJcv9eFUPn6v6ilkUpxEySw53hm
+         sbhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788374785; x=1788979585;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :references:in-reply-to:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=wuAtzw2j6ol/nKID6h+TTCRJxAaTJJD8KprJBxaZGcU=;
-        b=ctUAiJiNPRLoPlb1QnBV7coA8eNqmyAtdhpGtUhnpS5Ed/fQB0CcEXn02wYrl4GQUR
-         qJnuMLMDtplEYaeUbpho+5u58uVijl8D9lDJu5fOMynWtz+YQq+AeCfcZE/5Kf1Dcmy7
-         zHVh4wxYjaDU1Xb5/F1cDWuEDbApgwhdVd291Rrb8nlQdXACCwlDOXMUvkz6lldzO8Ul
-         9eRtLv3WUJurpblbcZpfcf6CSBFdJIDYtr0YkBateyNNEcQnRIWLHjzeKRKmaSCnY6LE
-         5uqJw8xLiCTahQ4KLiZ2ImUQF0gh+fKgUA1CyJEI99h4Fccas/mHGZnD4N40jc5yn8ft
-         XTGQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxjPpKvKIEI1FC0cDLWfv5WrkJhewowJmNCPZEhuxNLqbdLPJWWgPliS75+UBcsEkO5+70=@lists.linux.dev
-X-Gm-Message-State: AFuF++mcx9/OPpbf/vY+hiHk0F4R4OxsRl9Op/lE/vHiCD6u+TsHPb6f
-	4hBmlh6G0XQI4n4mT9I4y4AmMm4ISv58jt6SG/pxHF3f1WfLoZ3M2r0HLOfMccThzuA=
-X-Gm-Gg: AYBFou2NSTvzb7054tt+YXooin52LlOP78AiDPuclfMB6r5X/Gb1P7otiBvXtX23Yqr
-	ROUvnPOtLkbOacKGxCRL+ffnbGS+9F2pXaUQLyTdrm3hmL9YUk3xW1cBHzPLtgt2FzrRK/IX/E1
-	N9+4FqttYz9u9+JN940a7g+gPcg9STWr7Iz7sKOv8cmuQn3WhwciSAnowF7sBEgVVTgMktNlk/r
-	AcSzB4CzOagvLZmz6KT6lpbvH6IpA6dygHa5m9g/icBhb7WNMLLGaFlU3eyULjS6wi27mPeEYkt
-	TahTrFR2o2uPXHffELLPrVXeiOG62F+//59uNjmvOkr+gTF96sKxHnShp2ny4U5k/Ui+0LMfYXm
-	Goqa/6j9ybh/yKjg8qFdd2X/mUegfHVfpsojIudgkSwGlR5UduhBQsTRhk2BdYbMeDCcr58HXCT
-	CYefTY/0BzbqG+C7r/nEt/ZADekyRQSKBACOekOOfeU3E9JreVuVKlWMpZGnL19tovKxDhxwGZV
-	656VGk=
-X-Received: by 2002:a05:6000:240c:b0:484:4817:85db with SMTP id ffacd0b85a97d-48488f10241mr11800333f8f.14.1788374785193;
-        Wed, 02 Sep 2026 11:46:25 -0700 (PDT)
-Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48448eea961sm8160630f8f.28.2026.09.02.11.46.24
+        d=1e100.net; s=20251104; t=1788377317; x=1788982117;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=BW8pn0cJ7xlLT4nbmLaz0pA0nlL+jRYhrPKHSPcS2Ws=;
+        b=ZRzzf46hxKJmavl/vIdqPPusAysZszNYZkQrK7nRVb39MpRP/23VKPIfsiZ8/0KY9b
+         hWrTm+rA9OgSFGQcz7crm0u8XqFnphCXugMHQcKrR1iwO0s8FghLezL0Bn+GXxR4ebkj
+         L2kO9z1lebWHypAq8fM26ywHrdwvJdld7erZLezFKcPOwiDjEKaJUoRjJBocBkUajESD
+         2tMjfmowXg/AvoDrjBpTZsEUVb1Vy65HZ9qV0SHQMu7HXJKkFkGpIDYS/cFoq8JGzG/n
+         f1IVjN+Qw8kOT1M5b7fiV/G44x3zk2z89ImU6sjT97SSoaxPsMKVzfwwQQxVhN85FHrY
+         lRdA==
+X-Forwarded-Encrypted: i=1; AHgh+Rpl+2QRvmab8M8yqmVLnCJuniB3Vf90SXiPBbRgPYKIx233EMAY6FgrAH9T87hJSWF8dA8=@lists.linux.dev
+X-Gm-Message-State: AFuF++l3Dww4sYGRH7ihozml7aHuWdhy4U3jsx40LZesQMA0Ui4R7cf/
+	xSXll8AI1pTr0N8zzSrqB2pT0MNTD2BfanY/Et2z4lT6hy9rvuCKxoK6
+X-Gm-Gg: AR+sD10oBpJ7zpypZiufbn+ipF5OH6WSEjWSjCpJy7DlugU6HyUyX5H5RVuwhtoQUkE
+	9Q8LGCf6kHXdn8sTdb6/7WAF3XQLzcH0M2zl67fB5WWIj145yuaJkBFPmQZXIxesiGXxo5bH8ft
+	P20QmJJ9Es/a0gPI7nQoCb8SgGQrlJfdY68bMqRVSbgxnl26mPaWYjqszNoJTkGKUEivla7MWq0
+	HhCziiJkmqS+SUUlAYWMhb+dEowa/AlUp/S2WGUstIbrftphIhwyHPMQWmvJYiDOeSMheXHhxR4
+	bxi1TCvJym5lkvr5MkSgqzS/oDy/XK5grW0yn1TLj2XcuA5p7Uq7h98FWfjxLyoOfttDyEZthVn
+	EaR0HKM1ppVZkDwGAWYWCPeEE0oobtLStU1HdU9Pm4zPoD+S88q72bxqz3rzcoLYPqPGZnnsCry
+	MH8uBFN1HQR0d0FZCADxCx4Z4sIydngFb6CzbmQuqB3GabNDInW43QQT3OieAzTEHzXfOFBjgE4
+	DN+Hh4iwQEgOG0TnaK52PcSIMGMhN0Pq+Ut95Ezm+y8565hEoSm0IgLsEy6P+7cL8FzbyW/BHJu
+	tgreU6R5B96oi3/1SltxfFFxOO2Y4hRnk5Z/grXaEgicFp6CVwVd1FxdCTnle9lkzlZaKIrYRxn
+	oCDXBlKIxvr1Mu4W1Rlo=
+X-Received: by 2002:a05:6820:4c83:b0:6b1:be9f:ce6c with SMTP id 006d021491bc7-6b47ecca88cmr6183827eaf.4.1788377316798;
+        Wed, 02 Sep 2026 12:28:36 -0700 (PDT)
+Received: from [127.0.1.1] (184-96-151-165.hlrn.qwest.net. [184.96.151.165])
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-46f30baa0d4sm4932181fac.6.2026.09.02.12.28.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Sep 2026 11:46:24 -0700 (PDT)
-From: Jerome Brunet <jbrunet@baylibre.com>
-To: wens@kernel.org
-Cc: Andre Przywara <andre.przywara@arm.com>, Lee Jones <lee@kernel.org>, Rob
- Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor
- Dooley <conor+dt@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, Mark
- Brown <broonie@kernel.org>, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, mfd@lists.linux.dev
-Subject: Re: [PATCH RESEND v6 4/5] mfd: axp20x: Add support for AXP318W PMIC
-In-Reply-To: <CAGb2v66Uz6hCQaf5Nk5Eup8wQ+Xo9tuAqm0+ZH9J5CbT0zyAPg@mail.gmail.com>
-References: <20260812-axp318-regulator-v6-0-d6b84b55c000@baylibre.com>
- <20260812-axp318-regulator-v6-4-d6b84b55c000@baylibre.com>
- <CAGb2v66Uz6hCQaf5Nk5Eup8wQ+Xo9tuAqm0+ZH9J5CbT0zyAPg@mail.gmail.com>
-Date: Wed, 02 Sep 2026 20:46:23 +0200
-Message-ID: <1jjyp38pa8.fsf@starbuckisacylon.baylibre.com>
+        Wed, 02 Sep 2026 12:28:35 -0700 (PDT)
+From: James Hilliard <james.hilliard1@gmail.com>
+Subject: [PATCH v8 0/2] mfd: add X-Powers AC200 support
+Date: Wed, 02 Sep 2026 13:28:23 -0600
+Message-Id: <20260902-submit-ac200-mfd-v8-0-2aa06720b8ac@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4XO3YrCMBAF4FeRXDuSBJNOvfI9ZC/yqyOmlaYbF
+ Om7b+oKCgpeHjjznbmxHAYKmW0WNzaEQpn6rgZcLpg7mG4fgHzNTHKpOQoB+dcmGsE4yTmk6AG
+ t8drzNkhUrJ6dhxDpcid3P/+53hyDG2dnbhwoj/1wvW8WNfcePG+f/KXyfQR/7UwiB0VAUcDBR
+ iMiKoFW4nafDJ1Wrk9sHir6hfr0adEVcMoK2UqH6/YNaL4BTQXQch2Vkmbtm1dgmqY/Bjsxtk4
+ BAAA=
+X-Change-ID: 20260811-submit-ac200-mfd-8bad6d09e285
+To: Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ James Hilliard <james.hilliard1@gmail.com>
+Cc: Andrew Lunn <andrew@lunn.ch>, 
+ "Jagielski, Jedrzej" <jedrzej.jagielski@intel.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Chen-Yu Tsai <wens@kernel.org>, 
+ Jernej Skrabec <jernej.skrabec@gmail.com>, linux-sunxi@lists.linux.dev, 
+ mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
 
-On dim. 23 ao=C3=BBt 2026 at 21:17, Chen-Yu Tsai <wens@kernel.org> wrote:
+The X-Powers AC200 is an I2C-controlled mixed-signal companion IC with
+a paged register map shared by its audio, video, RTC and Fast Ethernet
+PHY functions.
 
->>
->> +enum axp318_irqs {
->> +       AXP318_IRQ_DCDC1_V_LOW,
->> +       AXP318_IRQ_DCDC2_V_LOW,
->> +       AXP318_IRQ_DCDC3_V_LOW,
->> +       AXP318_IRQ_DCDC4_V_LOW,
->> +       AXP318_IRQ_DCDC5_V_LOW,
->> +       AXP318_IRQ_DCDC6_V_LOW,
->> +       AXP318_IRQ_DCDC7_V_LOW,
->> +       AXP318_IRQ_DCDC8_V_LOW,
->> +       AXP318_IRQ_DCDC9_V_LOW,
->> +       AXP318_IRQ_DIE_TEMP_HIGH_LV1,
->> +       AXP318_IRQ_DIE_TEMP_HIGH_LV2,
->
->> +       AXP318_IRQ_PEK_SHORT,
->> +       AXP318_IRQ_PEK_LONG,
->
-> The order of these two are reversed.
->
->> +       AXP318_IRQ_PEK_FAL_EDGE,
->> +       AXP318_IRQ_PEK_RIS_EDGE,
->
-> And these two as well.
+Add the parent binding and an I2C provider which enables and rate-locks
+the shared input clock, initializes the paged regmap and controls the
+common reset. Audio, video and RTC functions can be added as MFD
+children.
 
-Applied everything except this is last one.
-AFAICT, the IRQ above are not inverted ... but it is slightly confusing
-because the regmap_irqs orders it the other way
+The current regmap consumer is the separately submitted AC200/AC300
+Ethernet PHY series:
 
-Thanks for the detailed review=20
+  https://patch.msgid.link/20260818-submit-acx00-of-dynamic-v1-v9-0-b8c8d9ad0d83@gmail.com
 
->
-> Once all these are fixed,
-> Reviewed-by: Chen-Yu Tsai <wens@kernel.org>
->
->
-> ChenYu
->
->> +       AXP318_IRQ_GPIO1_INPUT =3D 20,
->> +       AXP318_IRQ_GPIO2_INPUT,
->> +       AXP318_IRQ_GPIO3_INPUT,
->> +       AXP318_IRQ_WDOG_EXPIRE =3D 24,
->> +};
->> +
->>  enum axp717_irqs {
->>         AXP717_IRQ_VBUS_FAULT,
->>         AXP717_IRQ_VBUS_OVER_V,
->>
->> --
->> 2.47.3
->>
+The PHY remains enumerated on MDIO, its primary management bus. Its
+AC200 package node follows the x-powers,ac200 phandle for ancillary I2C
+register access, adds a managed device link and obtains the regmap with
+dev_get_regmap(). This series and the PHY series can be merged in either
+order; AC200 Ethernet support requires both.
 
---=20
-Jerome
+This work builds on earlier AC200 work by Jernej Skrabec and Andre
+Przywara:
+
+  https://github.com/jernejsk/linux-1/commits/ac200-v4
+
+Public AC200 documentation is linked from:
+
+  https://linux-sunxi.org/AC200
+
+Validation included an x86_64 W=1 object build, dt_binding_check, and a
+combined W=1 build with the PHY series. On AC200 hardware, the provider
+and PHY completed 100 overlapping bind cycles while preserving both
+device links and recovering a 100 Mbps full-duplex link.
+
+Assisted-by: Codex:gpt-5.6-sol
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+---
+Changes v7 -> v8:
+- identify the PHY series as the current regmap consumer
+- describe future MFD children and the MDIO/I2C split
+- store the regmap directly as driver data  (suggested by Lee Jones)
+- reset the chip from the remove callback  (suggested by Lee Jones)
+- drop the revision log and inherited-driver attribution  (suggested by Lee Jones)
+- add Krzysztof's Reviewed-by tag to the binding
+- rebase on the current MFD for-mfd-next branch
+- Link to v7: https://patch.msgid.link/20260811-submit-ac200-mfd-v7-0-8b06f552a4d7@gmail.com
+
+Changes v6 -> v7:
+- drop the managed external-syscon helper and AC200 syscon registration
+- leave the regmap attached to the I2C provider for direct device lookup
+- reduce the MFD series from three patches to two
+- Link to v6: https://patch.msgid.link/20260811-submit-ac200-mfd-v6-0-c5b1292c8498@gmail.com
+
+Changes v5 -> v6:
+- split the MFD work from the independently mergeable networking series
+- put the merge routing and shared DT design at the start of the cover letter
+- rebase on the MFD for-mfd-next branch
+- Link to v5: https://patch.msgid.link/20260809-submit-acx00-of-dynamic-v1-v5-0-bfa1f8518b28@gmail.com
+
+To: Lee Jones <lee@kernel.org>
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+To: James Hilliard <james.hilliard1@gmail.com>
+Cc: mfd@lists.linux.dev
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+
+---
+James Hilliard (2):
+      dt-bindings: mfd: x-powers: Add AC200
+      mfd: ac200: Add X-Powers AC200 support
+
+ .../devicetree/bindings/mfd/x-powers,ac200.yaml    |  49 ++++++++
+ drivers/mfd/Kconfig                                |  11 ++
+ drivers/mfd/Makefile                               |   1 +
+ drivers/mfd/ac200.c                                | 136 +++++++++++++++++++++
+ 4 files changed, 197 insertions(+)
+---
+base-commit: 9d0e4b1ae5b045a2c92b0b9a1c3b268191c219d9
+change-id: 20260811-submit-ac200-mfd-8bad6d09e285
+
+Best regards,
+--  
+James Hilliard <james.hilliard1@gmail.com>
+
