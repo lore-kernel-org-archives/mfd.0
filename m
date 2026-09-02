@@ -1,121 +1,156 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3CDF4AF9DA;
-	Wed,  2 Sep 2026 17:01:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C0AF4A8420
+	for <mfd@lists.linux.dev>; Wed,  2 Sep 2026 18:43:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788368474; cv=none; b=VD7XL/lUoUA0/9oFtugTENM+gfAwQFTNgDuGxfeciDVkWyv4h4LKI+Y6/9PSDDvXWdkZlSdHiIrg6JrXkSLDkC/YiIKlYzYo6LFw/rI5dPqgS6nZ0FLHeSXgWqUM2jeMZZx62b14HC1DHbhGoIksR/QvIyAClxy2w74WG5d0RXA=
+	t=1788374605; cv=none; b=tObytIOwg+umi2AErUgtC2L3Ju7pNt2T7crSxf3gfRXHqk0q3WXisF/cNQ+2yhY8n7DXS3/jJhxJiKwZEbCtV80NPxfTDerMhaH08jTDBVKZNEP5M5TdkruwwL1WNZ23sT8GaJ8AQ30MidG9oplXNu2EYHSfRd9ETlRj5pQfkJQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788368474; c=relaxed/simple;
-	bh=Gwt3M8c16qFKjAizc60XazGddbU35HXrs6EDLGqsr38=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=enljVomehWswPcv7Y2Sf5Hleke3gmMowh3oKdHKPxcIcxho/LYiH+xiM4p3FVpYe5SbRLbSe8GIYLuqol43Tnb26CQ/R1NQLJqohqwp6kAAswNAhHO8ddvNyb2kKfKJ0TWxwlVfYgtf7fT6wttOY8LzBkbx8limmJ4seoGjyA0g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GLaDzKYU; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788374605; c=relaxed/simple;
+	bh=5Keyffio6qVpCs5QPavKPlOqOswZ2klYgfP8rJs6TiY=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=Z+LSFTMbFhEy+M3WyTwA2OpAgF4MTYaKYyNYYGlt5iXKWlRy5zCAwBOtN4WMlj3MwqBiiJErufg/0xLiOg5Tl4wp4lK9tmpMLua/O0lg11XAM/HjIfu6CksIcg8IovzNCQj4oH9BXqWoZMeiN2waVl7YauL9+hkcQhljQg+3isg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=lEJXhZ2l; arc=none smtp.client-ip=209.85.221.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GLaDzKYU"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A13E1F00A3A;
-	Wed,  2 Sep 2026 17:01:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788368472;
-	bh=/7fv2ruudY4O7ZTNXcdhmsegrQSkGzb4hyE70Cml4sU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=GLaDzKYUSZVMye2SSMoNuIDIxegxYnEhVTBPwo4tt/sji4h7vPK2nOq5CtHtD6LvU
-	 tKywE/XfKoML/LDJJ/A13Shd3wXzoLI49Is0JLqB2igPgoXxFYH3vGRxGbQA8yPRan
-	 1LnY9xXeiFzFpT5LAZJ71vLBNKQDAysq5nNeku0B+eeNWTZV0uHT7o8SOgEtFD9SiJ
-	 0W8c35ixUX5Yly7BkLekLtedUYPydxVwz3wHMCaRKyGQM2+n1w568X2xgnd3i3crql
-	 Lt6jz26OOGX3wpd5/kbkSnzIvUzS07T690usB2wKIU7IYjdIdySRCXuDtkuq92ZVtc
-	 IxcX0LGSVER6Q==
-Date: Wed, 2 Sep 2026 18:01:08 +0100
-From: Conor Dooley <conor@kernel.org>
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="lEJXhZ2l"
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-482e257a23aso1061742f8f.0
+        for <mfd@lists.linux.dev>; Wed, 02 Sep 2026 11:43:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1788374601; x=1788979401; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=NWYYRVQBRJaK3NbpqrRL/6N4wYR6cMesVqAcJL7LMIY=;
+        b=lEJXhZ2lEyolytukA6smzDx0VElclzuqEdjdZjTF5FXbt2T8pvUO5FDM79odPw/8Kv
+         fy3IarJy6BuRCRn0K+/QFLPrpMUhVWrYBCZtbqyOATkolOuP5wx0zphIw3NA8K3K4MM/
+         MGeoJKyzJrwVk9PPbFGR7jEPQxGVoJ5tT2dod2WkZs4IZ1AO/JCHg/oWkZ1x/XQe6S/H
+         7zlWQ3XHMAFySGNb2InbU/wf6WMk2D6/iPtx7a+X3emtc10t8idyooLkeF0nUwTTBq34
+         REXoeSazWZi+xAnWA798I449Yy63P1buq/h6ViKWayQRyR7sdzCPht2oi5lIki7rwChI
+         8IFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788374601; x=1788979401;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :references:in-reply-to:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=NWYYRVQBRJaK3NbpqrRL/6N4wYR6cMesVqAcJL7LMIY=;
+        b=eVld+UfOX/WpZgeGvanLj5cGhTD2tK6hp6QJhf+LutIUUd1FnVOmJGehCgsAHhY3jF
+         I8FpLccss/GIuW8815gJyvjBl9dtOcvVG23H3TXBs7emU1jW0q5pgB6Em1mgi8BKA1at
+         ZSb0if7mUy7Fy3GY9muVt2sNT+/htuJ3cP9NMQvEDcj7Edei8grmjXw5JXXBpH2YdhQy
+         +uN3B2A4z7D19nsDeS75yPQHA63pbceDGncppQDl6Z4J2PrUT7k2zYEyjwxlmaAwkKeR
+         Z3iaHpqRKRCfH4xHwx2ChwbOT6FZugSjZNDEvh+JwB04+y/crJHcwbstIQdyNxPyzQ5I
+         vLxQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxZDRr2Ak+wM3s2qrQMTg+hiyFo/7Op+ba9AZZgMRs1Q9sEE4VC1hpNpmuNHvy4N3i2vWQ=@lists.linux.dev
+X-Gm-Message-State: AFuF++mQwSt6c0TE4Mu8eO6YF1JVcq9aDO8aUFWsThBV8MWdfD10ktp+
+	VW81ErpxTsXT3o0Hb4TxNvITGz34j6BTjmEqb5tIeWi6Tdv5yygNtbYOxQKaiDiuyWk=
+X-Gm-Gg: AYBFou1uCPPba0lF6jppSB52crcW1qTtPvporqoUAxMDVh6NPZdE2A8ajKe7u7n8Vpf
+	WWKXQ6FgLBGuZAC3nGiDFAAe1eTF13qfREdionis/24DlXuECZSYx3bGxFOo64+dIY5leC5RfHj
+	59hQzRGeFR98KM1r+K1/9aMr1qWaLoIE9DT0oMxKCfi25OKhoiim6ppvxl6aOdFJ6NmO/nuBi3p
+	N7TXe5mfdag97bUCugoUIo1GDJw8BZ/qAQ01KDKTN34gjfAUCBw/CCQ5HTfmlqd0ARf6H5Wp6aV
+	iRVXT+wBKUQbUhCSaM/+paQ3gMfaM8SVDpmV9qxcKzY4vVbUdP/5unQdBBFD+dzYGnyzAuBQzfe
+	xFQT/3K1+fqr6BeNxmDYRSJBth8nVfSFCHUHKxOoWMWvvgv81Feqt86Tms/M/xPOkWmdfDH8dQX
+	XCIAXCI4xcOLBWhfBg5o1POA6vfHqog68XhaV7aLCHJWgjwyyXMavn4kLYNWxT0gKE4uaz6dXPE
+	9YAPCw=
+X-Received: by 2002:a05:6000:1847:b0:482:fb9e:4e20 with SMTP id ffacd0b85a97d-48488dee407mr12111460f8f.6.1788374600680;
+        Wed, 02 Sep 2026 11:43:20 -0700 (PDT)
+Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48448eea961sm8146112f8f.28.2026.09.02.11.43.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 02 Sep 2026 11:43:19 -0700 (PDT)
+From: Jerome Brunet <jbrunet@baylibre.com>
 To: Lee Jones <lee@kernel.org>
-Cc: Frank.Li@oss.nxp.com,
-	Support Opensource <support.opensource@diasemi.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
-	"open list:MULTIFUNCTION DEVICES (MFD)" <mfd@lists.linux.dev>,
-	"open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>,
-	open list <linux-kernel@vger.kernel.org>, imx@lists.linux.dev
-Subject: Re: [PATCH 1/1] dt-bindings: mfd: da9052: allow dlg,da9053-aa
- fallback to dlg,da9052
-Message-ID: <20260902-varied-unsent-b99f9f007685@spud>
-References: <20260831201522.51294-1-Frank.Li@oss.nxp.com>
- <20260901-devourer-pushover-f26c72688255@spud>
- <20260902102532.GQ2943942@google.com>
+Cc: sashiko-bot@kernel.org, Mark Brown <broonie@kernel.org>,
+ sashiko-reviews@lists.linux.dev, robh@kernel.org, mfd@lists.linux.dev,
+ conor+dt@kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH RESEND v6 4/5] mfd: axp20x: Add support for AXP318W PMIC
+In-Reply-To: <20260827134235.GN770273@google.com>
+References: <20260812-axp318-regulator-v6-0-d6b84b55c000@baylibre.com>
+ <20260812-axp318-regulator-v6-4-d6b84b55c000@baylibre.com>
+ <20260812214019.CDF921F000E9@smtp.kernel.org>
+ <1jldaafmpd.fsf@starbuckisacylon.baylibre.com>
+ <20260813095600.GA1072730@google.com>
+ <1j33wg6cpk.fsf@starbuckisacylon.baylibre.com>
+ <20260827134235.GN770273@google.com>
+Date: Wed, 02 Sep 2026 20:43:15 +0200
+Message-ID: <1jld9j8pfg.fsf@starbuckisacylon.baylibre.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="OGMRXVt5Rcvj6VVq"
-Content-Disposition: inline
-In-Reply-To: <20260902102532.GQ2943942@google.com>
-
---OGMRXVt5Rcvj6VVq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 02, 2026 at 11:25:32AM +0100, Lee Jones wrote:
-> On Tue, 01 Sep 2026, Conor Dooley wrote:
->=20
-> > On Mon, Aug 31, 2026 at 04:15:21PM -0400, Frank.Li@oss.nxp.com wrote:
-> > > From: Frank Li <Frank.Li@nxp.com>
-> > >=20
-> > > Allow dlg,da9053-aa fallback to dlg,da9052 to fix legacy platform (> =
-10
-> > > years) check_dtbs warnings:
-> > >   arch/arm/boot/dts/nxp/imx/imx53-voipac-bsb.dtb: dialog@48 (dlg,da90=
-53-aa): compatible: ['dlg,da9053-aa', 'dlg,da9052'] is too long
-> > >         from schema $id: http://devicetree.org/schemas/mfd/dlg,da9052=
-=2Eyaml
-> > >=20
-> > > Signed-off-by: Frank Li <Frank.Li@nxp.com>
-> > > ---
-> > > Previous try drop dlg,da9052 at
-> > > https://lore.kernel.org/imx/20260404-thoughtful-placid-boobook-da26da=
-@quoll/
-> > >=20
-> > > but Krzy have concern about compablity.
-> > >=20
-> > > https://lore.kernel.org/imx/20251107-matrimony-showdown-ba6ce6996b2f@=
-spud/
-> > >=20
-> > > Conor prefer update old dts.
-> >=20
-> > I don't think these devices are actually compatible, so this fallback
-> > would be wrong.
-> > The data comes from the match data, be that spi or i2c, and there's
-> > explicitly different behaviour for the da9052 and da9053aa.
-> > I doubt the legacy platform ever worked properly, and this is what shou=
-ld
-> > have been explained in the PR that Krzysztof denied not just blindly
-> > citing a dtbs_check problem.
-> >=20
-> > Nacked-by: Conor Dooley <conor.dooley@microchip.com>
->=20
-> At first glance this looks like an Acked-by.
->=20
-> IMHO, this is going to cause issues - please rethink this.
+On jeu. 27 ao=C3=BBt 2026 at 14:42, Lee Jones <lee@kernel.org> wrote:
 
-As in, use NAKed-by instead or just say NAK without the name/mail?
-Not entirely sure what you're getting at.
+> On Fri, 14 Aug 2026, Jerome Brunet wrote:
+>
+>> On dim. 13 janv. 2008 at 11:56, Lee Jones <lee@kernel.org> wrote:
+>>=20
+>> > On Thu, 13 Aug 2026, Jerome Brunet wrote:
+>> >
+>> >> On sam. 12 janv. 2008 at 23:40, sashiko-bot@kernel.org wrote:
+>> >>=20
+>> >> > Thank you for your contribution! Sashiko AI review found 2 potentia=
+l issue(s) to consider:
+>> >> > - [High] The corresponding regulator driver lacks support for
+>> >> > `AXP318_ID`, causing the `axp20x-regulator` child device probe to f=
+ail.
+>> >>=20
+>> >> Funny sashiko did not pick up on this when v6 was first sent. This is=
+ an
+>> >> ordering problem. The regulator part should be applied before the mfd
+>> >> one.
+>> >>=20
+>> >> I could reorder here but there is not much point since the 2 changes =
+will
+>> >> land in different subsystems but it does bring a valid question:
+>> >>=20
+>> >> Lee, Mark, are you OK with picking the patches indended for your
+>> >> subsystem or would you prefer that I split the series, regulator on o=
+ne
+>> >> side, mfd on the other (with a dep on the regulator one, of course) ?
+>> >
+>> > Does this break existing devices or simply delay support for this new =
+one?
+>>=20
+>> Existing device are fine and untouched.
+>>=20
+>> I've just checked and if someone tried to run without PATCH 5 (regulator=
+s),
+>> the main axp driver loads fine but the regulator part gives this
+>>=20
+>> axp20x-regulator axp20x-regulator.0: Unsupported AXP variant: 8
+>
+> Can you not enforce the deps with Kconfig?
 
-Cheers,
-Conor.
+This is not a build problem so I do not think Kconfig will change
+anything here. There is no specific config per chip.
 
---OGMRXVt5Rcvj6VVq
-Content-Type: application/pgp-signature; name=signature.asc
+It is just a runtime ordering matter and not a problem. regulator and
+mfd are split so at some point the support is incomplete.
 
------BEGIN PGP SIGNATURE-----
+* MFD first, it is fine it just cant instantiate the regulator until it
+  lands. it is (mostly) useless without it, which is fine.
+* Regulator first. regulator will never be instanciate until MFD support
+  lands, just as useless.
 
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaphWUwAKCRB4tDGHoIJi
-0ihnAQC+sM72UQewHQsSjnn+AW0eqHdzt/R0KAaLAwUBiwA+AwEAqOV3gLKg3Hz2
-Jy6DuQe9rageS3PSAzTM9yRM4q8hMgg=
-=+u7D
------END PGP SIGNATURE-----
+IMO there is nothing to do here.
 
---OGMRXVt5Rcvj6VVq--
+>
+>> Seems sane enough if the regulator part is not present (and no board
+>> using it has landed yet)
+>>=20
+>> To completly avoid this, the ID would need to be in its own patch,
+>> then the regulators, finally the MFD. It seems like an unecessary churn
+>> but I can do that if you prefer.
+>
+> --=20
+> Lee Jones
+
+--=20
+Jerome
