@@ -1,63 +1,91 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4855C30C617;
-	Tue,  1 Sep 2026 20:45:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 031B943B6C5;
+	Wed,  2 Sep 2026 10:25:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788295541; cv=none; b=rHWl2DbdzNf5j1oJgN+Zf7qVLIbJxEdZFVNopkLSdRVM61LaW/M9rkim9o/nM8IeFqX0t5YZth2rl/vWfggtu4CbJeyxrtQ+ZfH4EodEWD3RZbTW4GVvAD23G9g0aasleMgx31KEUnAWzwnFtsHDkU3SnMrhU9WHQIqpNnaaezk=
+	t=1788344739; cv=none; b=OAzvg058Ms2UNeJI8Bq6v494O61OfIH58980iDqkFnT308ROw0SDFISQYCH+G5b/NNptCluG4XbC54YEIvYEpm9+ijfqDrtVUL2GOWiCBIYxWrjp1GRIhxfqYMl4hA3m3aHBSfxDfhDnc9bBPRJhNLEEo207iIVxYm99Si22eqA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788295541; c=relaxed/simple;
-	bh=V81EX/5ARhTCTT8dVZRwd08K3QOHXeb2fOQBgdE9NCg=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=jMZkjWjBAas0dMEqaF1yPdnOZCN/5Xu9BivV7docCLWw8atYjs2B2NVSdGasRcV4z5i5WvqmhQHNigy9vHdcaB/sw/ML+ACugh5uGInA8iqm/7Js/QmdWUzXGhhiTUhnlSgQAFyBgLPZdrjMmHTfoZBZQMKCZyT9t9UScpDErsg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WaI5xkVH; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788344739; c=relaxed/simple;
+	bh=1pHVxuhVmZ9w/A7TSdc7iZpLQg3G8aWC8XtVg04bnTY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=IYWvD80kOXEyswgYqnKAbBxhdyEvOvOcJlWehkO4ItmyrJ/y9PxuKDDnvfCdXIBiQYuY/10k79i7Z9+Zx9Ex79s1y5HedKUM7uJvHgoCYyBn97wbLa/PFFpNfclOf771KfA0IhZqcfedvu4ViSpwyRK4lmWnV1ISsUd6456O6D4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oLMobxKe; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WaI5xkVH"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A22011F000E9;
-	Tue,  1 Sep 2026 20:45:39 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oLMobxKe"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 62E531F000E9;
+	Wed,  2 Sep 2026 10:25:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788295539;
-	bh=V81EX/5ARhTCTT8dVZRwd08K3QOHXeb2fOQBgdE9NCg=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=WaI5xkVHVl0baU8l6Lt1K1P5QWqg/Yi0GS1b7zCf3Mx3XzK0/1WCYzyDTCISc1bCu
-	 VeMrpASstiw3oJeaCJ7zJzCrGOfcgt+Af+DU5WDAiuLsdDQOYmxpD8hkiiK9c1aWdl
-	 E0gchAT1k5BhuRugdcrbCTwulbDxXdoishex3HITwPopkgP1S5jyqvxrDUPcOU2ILS
-	 /aPlG8DpCYcG4cqIDL8jg9ppIH2KoqG4j8yx6zuvzm235O5S2lBAjGBLjHbgC4+zgp
-	 1l32EilXwavB9qoXHlFXeNuAtdu9zukEXE7j7WlsHINARmVdnKsyup/dyyyucZsbNt
-	 HzKVXSpxxqhUQ==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 13/13] ARM: dts: ux500: Fix up regulator assignments
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Linus Walleij" <linusw@kernel.org>
-Cc: robh@kernel.org, mfd@lists.linux.dev, lee@kernel.org, devicetree@vger.kernel.org, conor+dt@kernel.org
-In-Reply-To: <20260901-ux500-dts-snowball-regulator-v2-13-fe88b01829bf@kernel.org>
-References: <20260901-ux500-dts-snowball-regulator-v2-0-fe88b01829bf@kernel.org>
- <20260901-ux500-dts-snowball-regulator-v2-13-fe88b01829bf@kernel.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 01 Sep 2026 20:45:39 +0000
-Message-Id: <20260901204539.A22011F000E9@smtp.kernel.org>
+	s=k20260515; t=1788344737;
+	bh=LU9mnnATmFmz33p4Rn/kqi1Z83OinK8HAKpwhVZ9w6k=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=oLMobxKehFsTtuFNc18cuD0TFD9IxIOoRZQSzH+I+CsLedgf86Fxo4LIJTZ6DQ+8a
+	 bcsUnPbi5HXqBdsILbJEWiuZ1SA4oAudKFT97gw0Wims/MZPmhNswBh0DYSDTxT3aM
+	 rS8owgPb6ODQ+ncRKL3OdSdUdXRy2roKlhqDwO4EE0dRQEW4DoBnmauVKkPECrmUoG
+	 YlvQMM92Q81x4w1vyoAw38kExumuCFCpAMx1TJF4wh1PuRr5aNhpu58nJaTM8lS2vW
+	 WQ13uEPvFJy+vAEtNI1+CuPtmSN1W02h9uzNozHyAElKtESNRszMiEiRNApwHUHyt0
+	 4Nb1e+5Ayewag==
+Date: Wed, 2 Sep 2026 11:25:32 +0100
+From: Lee Jones <lee@kernel.org>
+To: Conor Dooley <conor@kernel.org>
+Cc: Frank.Li@oss.nxp.com,
+	Support Opensource <support.opensource@diasemi.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
+	"open list:MULTIFUNCTION DEVICES (MFD)" <mfd@lists.linux.dev>,
+	"open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>,
+	open list <linux-kernel@vger.kernel.org>, imx@lists.linux.dev
+Subject: Re: [PATCH 1/1] dt-bindings: mfd: da9052: allow dlg,da9053-aa
+ fallback to dlg,da9052
+Message-ID: <20260902102532.GQ2943942@google.com>
+References: <20260831201522.51294-1-Frank.Li@oss.nxp.com>
+ <20260901-devourer-pushover-f26c72688255@spud>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260901-devourer-pushover-f26c72688255@spud>
 
-> Several Ux500 device trees use DB8500 power-domain regulator nodes for
-> supplies which actually come from buck converters in the AB8500 or
-> AB8505 PMIC.
->=20
-> Assign AB8500 consumers to VSMPS2 and VAPE and AB8505 consumers to the
-> native VSMPSB and VSMPSC nodes. Use the common 1.8 V I/O label throughout
-> the reusable HREF board descriptions shared by both PMIC variants.
->=20
-> Assisted-by: LLM
-> Signed-off-by: Linus Walleij <linusw@kernel.org>
+On Tue, 01 Sep 2026, Conor Dooley wrote:
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+> On Mon, Aug 31, 2026 at 04:15:21PM -0400, Frank.Li@oss.nxp.com wrote:
+> > From: Frank Li <Frank.Li@nxp.com>
+> > 
+> > Allow dlg,da9053-aa fallback to dlg,da9052 to fix legacy platform (> 10
+> > years) check_dtbs warnings:
+> >   arch/arm/boot/dts/nxp/imx/imx53-voipac-bsb.dtb: dialog@48 (dlg,da9053-aa): compatible: ['dlg,da9053-aa', 'dlg,da9052'] is too long
+> >         from schema $id: http://devicetree.org/schemas/mfd/dlg,da9052.yaml
+> > 
+> > Signed-off-by: Frank Li <Frank.Li@nxp.com>
+> > ---
+> > Previous try drop dlg,da9052 at
+> > https://lore.kernel.org/imx/20260404-thoughtful-placid-boobook-da26da@quoll/
+> > 
+> > but Krzy have concern about compablity.
+> > 
+> > https://lore.kernel.org/imx/20251107-matrimony-showdown-ba6ce6996b2f@spud/
+> > 
+> > Conor prefer update old dts.
+> 
+> I don't think these devices are actually compatible, so this fallback
+> would be wrong.
+> The data comes from the match data, be that spi or i2c, and there's
+> explicitly different behaviour for the da9052 and da9053aa.
+> I doubt the legacy platform ever worked properly, and this is what should
+> have been explained in the PR that Krzysztof denied not just blindly
+> citing a dtbs_check problem.
+> 
+> Nacked-by: Conor Dooley <conor.dooley@microchip.com>
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260901-ux500-dts-=
-snowball-regulator-v2-0-fe88b01829bf@kernel.org?part=3D13
+At first glance this looks like an Acked-by.
 
+IMHO, this is going to cause issues - please rethink this.
+
+-- 
+Lee Jones
