@@ -1,293 +1,280 @@
-Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com [209.85.167.173])
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 830FD3A5430
-	for <mfd@lists.linux.dev>; Wed,  2 Sep 2026 19:28:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A40FB3C4B60
+	for <mfd@lists.linux.dev>; Wed,  2 Sep 2026 19:34:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788377350; cv=none; b=j7bocLaAVPDa5M4f9xP/EACBtKZLUeJ+giinXjA24ISSoBjjNdr3smWvDtOYGkvosfySX934RJiwi+QFtpe0RIHbRHJd+bQRULP26KasKxiyk87RfYQ0x2RziqcCaFkArnDr5JTprrQ4XAcFWFil3bOqe06ewIZjLbuc0rCE5WA=
+	t=1788377674; cv=none; b=S7utoc6PReno+NzN7CB2eT5j6twDFcvSk7c+QX3kr2yuCTVw1YfgBuW1j5X+oW9Jz++RynUqs1fozdpukyWXDmsqveQMSnXuSWXJdX318IjQ4pc02DDBwvWbeoK2qUMyuuv1Dglx/BOkuH3rt7SKTH6IWgkGNhQ6oQw7d5AMdig=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788377350; c=relaxed/simple;
-	bh=y0NxW0k15f6y/xEBJQYLSpmIltouG64hV/iDPd4IdpA=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=m2VumZwhnjcCpgo2QaZCPGZiAmAmcAB5ltqIBJGiqwttNwMGCVEXdNBVGlxZIGpc/ioDEl5I69WzfPs6lRyJCxbnlyV8lp6/8zv2x9EJmXIcAHHl7zenRKdAw3+NRvjLMG1ZNlxZifz8QqrMcO+sxmjWBDR8X0xhL8Lkf9DPquw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=UPXOD2Hb; arc=none smtp.client-ip=209.85.167.173
+	s=arc-20240116; t=1788377674; c=relaxed/simple;
+	bh=eYrnMB7bcQ9tZrk9TdZFWbZtcH84ppkhNhwV/tshEyI=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=soWKQrGGFMniljbhCTnLJTTppSAu1Q88Xlb/VyDam5+YUU/wGv8StwceK8bnoujrsPsEXIFwlmr4tH/DJQN4lalLCYzZ/5iCH6Ch/Y/9X4K2sMnAbx5B1B9sma31KKsatcJPqWduYp4gk3Sap+CL9HXJ6sOpQL9vRlfzJp0riLw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QOzspDBU; arc=none smtp.client-ip=209.85.221.45
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UPXOD2Hb"
-Received: by mail-oi1-f173.google.com with SMTP id 5614622812f47-4a40bcc8d69so1237511b6e.3
-        for <mfd@lists.linux.dev>; Wed, 02 Sep 2026 12:28:44 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QOzspDBU"
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-48433fad54aso988881f8f.1
+        for <mfd@lists.linux.dev>; Wed, 02 Sep 2026 12:34:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788377321; x=1788982121; darn=lists.linux.dev;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=sKMtJXFkj0ikZheuQpeLvqIbR43z+P6lPFG8SqKjAYQ=;
-        b=UPXOD2HbA7XwdGznmQMbR5gL2kxsh7BvozQBo+r9FUzDLp2d2eksPE0X215wceRwYr
-         4TLLAT7sYY0x3zyjQY4Lv+hdQpxYfWbvlOhbBJdkyQwxgPqGYO69+vayoMVrGVTd+Vpl
-         sNLCCIELNm8LfIzV1PqHOCHTIc2iwvqXGMj3tA3wtuo207RpkB/1IJcAhbSgF8eFLGQK
-         bDLHp+3fgMfuS69St4H195GV9zDqL+aWF7Pi4rvz5xCcVWqI+cbV1ZMdcCl0OX5DrNoA
-         +Q4FZ8Bzp1ebRXxH7Ot/sIiDknflCfec6q0AsBGESclNjmxl/7MizTNTyVFkfDl6tpYA
-         zhbA==
+        d=gmail.com; s=20251104; t=1788377656; x=1788982456; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Dql7ivfqyvhGH9YThZE2gyCfSsqd8ytrUGm38vXWCVI=;
+        b=QOzspDBUUj/GxxOkB7hGDQZnXqTLGPloQtplfRO/8tkfIg8MqKt697aU++gOz5Qf50
+         GOFLklPbfjceKi06j8gT9wk1JnlQzeaYrO8J1oxR7ssFN0hbVhW/P9cR2NahR+J26gKO
+         au+Cz3wSA7ugx/hwtZPBfUTRopd1r9FZm9ku3lf+H/FPNbGfqT7wuAOJiCGgJj695zhG
+         3BdkeEgNcH0WqZYYPcm/FugCoLBjBEfH1Szj6hwhQNVir52Q4aijjlyA90mkCYYMSjXG
+         gPfe2KkwPw2J274KpCSnRoDzYecP/EQv+UQZvAzg1qZ8lSGWUDYDrgcrN2ymqXkbRp47
+         7Rnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788377321; x=1788982121;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=sKMtJXFkj0ikZheuQpeLvqIbR43z+P6lPFG8SqKjAYQ=;
-        b=VtjWQQXEBS285ReopUj0nIn3Veru+3c8f+03rkjTtda8O/x4QYBPk7WGxA2gJR/dKZ
-         hk5vvW/SiMdd/3iZpzCpGS+Co+PAlVJ/8m6gNx+dMYmtHPRmDf17Nyvvb6FsIpg3WIQO
-         FZ5MupifLY6ripr1FiwfK+Cc5GyQEEOoIjTZiF8ENbr1LOVzTE8/J10Jv51J3F0T7yU4
-         8L08domBUiU8Bcqz1HK71tEUdFAQ78Jgh02hf60ZlUn12NsQ1qJXXLCVK1ngQEDnH6V4
-         at6WB9SslWasDPSRVo52UqKoJitGe9yv6jUP/plhGxTmDpPgUkrpwnO+t1ZJptiGF6gS
-         dbHA==
-X-Forwarded-Encrypted: i=1; AHgh+RoGahCrL/Cs6YPm9OdmzRqEAnckE4F0546Ec4aWHjqOYKJ51A+TsWR/MTzHNKz61CTCFm4=@lists.linux.dev
-X-Gm-Message-State: AFuF++myY9egE0KVO11HDhbvJG48v6lbAbuKqwSMIUWGY3E6Dyjl5Uc2
-	cLstwQlT+vcOYIpZ+5JxlTAg77JGE5ZkD6BdB+edHKK55QrVcTstwFOoNfpJug==
-X-Gm-Gg: AR+sD10YkK81QfPO/F3eocqBTTzA6CmarYan7l5X0613bDnnez86gNjXiFuj9NikR63
-	rKH966db03nIybtQyP4bVmBXhIUX+dSpNhdwMJ3/cc8zWryTJ5GQc9QWZB5yuEytBAMFeDrEC+9
-	VvKxi2tBcMw6mvInNGEIg2ocexkK4rHC+czCRp6qTgfNgjxw2SCJXk4BMaR9rfgEEtGrCLyzYx2
-	hCiD60ooAuRGwe94QU282O/uPQXYhdNGZNnNfefAUdjEf+vKHbd1hSAcpR2iKa3fC8UQmPAIAqH
-	fw5ipOJZrzmPPCzVetWLQsToV4//L/sPMMNjmOy6YpItemD7AaWRpwdd77nBaPByK+eRXZEwz82
-	SL2XNB1T4si97E866LTM7yu+nys+X0k0OnCAybYUg5vI8MwGsx7QDKiFPy8OR96pIUcFDYXH8ZZ
-	Ila/uBtLxbkL0/uOt2NEP+tEufLNN4UQtao3mXI7ZALgZyAKOSd2D5SpCH/bqi7iLzMWNtLhpix
-	7OIwEF3pcPNGHgcZ1xB4Df4UeQjImyLg42/F4fIhml3B3u1Vc/qtS7GxW47TJ3xRGfQBaMMS6dP
-	6cvCI8r7I+iVlCsb9rOxFo2sSD0xpX4OMcqdyVB2B87X+Q4ZEJjDrDqv3Lgsa8KcNOSM2ooksFn
-	PfgslzkIURTN9ghHqoRs=
-X-Received: by 2002:a05:6808:1905:b0:4b2:8d7b:41b8 with SMTP id 5614622812f47-4b6bf07c2damr5955510b6e.18.1788377320618;
-        Wed, 02 Sep 2026 12:28:40 -0700 (PDT)
-Received: from [127.0.1.1] (184-96-151-165.hlrn.qwest.net. [184.96.151.165])
-        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-46f30baa0d4sm4932181fac.6.2026.09.02.12.28.38
+        d=1e100.net; s=20251104; t=1788377656; x=1788982456;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Dql7ivfqyvhGH9YThZE2gyCfSsqd8ytrUGm38vXWCVI=;
+        b=aAhcokJwtjLs655sGn2bUmSlXjz3GfTxAh+pKTWL86LJL2pLXAMkokR+WpJU9vYRb9
+         iMTVVaedKWbX2A4suMbHTmtj1x+1JxMtJM6lNBAkqAZq0OY3IT2ZddEszcJg01zK+GKq
+         oSWU+AgyBncWJ23mefcoS9lKEi7nx225xQcdfAXzAM/D0Sr1aAOizg+47FoRPdcfVrAg
+         i92sF7YymGwyskYvjGiv9t6ejtMyNFglQImYupCZkplWEjtdN8ILFuXHVZXgt8sIGL7W
+         iXgngFeV36rmEy2MxlEk8cgALupRyJGyTaMq4AxOTjJD4T6NHkrolP+cyDh7OkBvMvaS
+         B4Sw==
+X-Forwarded-Encrypted: i=1; AKwUvBxPEaGcRjqiEmovYhTVRUcwZaJzsZkJgghIfOZQjSTq+jYsFdGhap2E5ev1SkrrG3uynxQ=@lists.linux.dev
+X-Gm-Message-State: AFuF++kaJI9WB+YnW2zCnccWXKIJhPeuzK3F53V+rwV6+We9rG8uJIqV
+	89G8O6ZBdsvM3+nFKMvnjFw3fBqvVv3zvYEtsy/9YLcNe0whqpSXn2EX
+X-Gm-Gg: AYBFou0zXdm0jjZqQ1toWQZksHW+LnMwvdWSDAPx/+SKi+GbYWW+zUeGkOPOSKAN6QN
+	QpW0efJfwANuMK4MpdWTpzFkvKqRtcnSYEiWCnBD1jV2mSebfnH/2NEPV7HHm1z4TSERVGFUhzh
+	RnFqETX7Kx2ooVmiwPqLyPs8znrz6TbFW3CTi2iQwx4++JA1+7cwyEvklcp35L2CpKfil5NasJw
+	ks3AY8mCnvBiVdVt1y/Oc+mDUy5JbtjnjjhRWa3ZEVCqzbq06x6T63H85nqnKviil/ZmCoBz26t
+	KKzaCyvL2fZqDpOKqgtU2k9vUxFgWJzEa1ZVUaADpxXkIkSMu4rkHt4hEFYtYz4p8TKc1GK5m9q
+	gJYqySUNBdKLR5rXQzjrCwWBlh6CmK2GXf0HBnUXzcCI9r1ZyCtq5ostZMOlshTxwOmLzZ7+G1r
+	yFvITEKbXDu9U9KdNj59lLNUwsTR7L6qtDYvpLFb+vpJLo9L0gTQCUXlEr
+X-Received: by 2002:a05:6000:40d9:b0:47f:86d5:d1d7 with SMTP id ffacd0b85a97d-48488e037efmr14500352f8f.6.1788377656038;
+        Wed, 02 Sep 2026 12:34:16 -0700 (PDT)
+Received: from luca-vm.lan ([154.61.61.58])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-484492cdc37sm8889191f8f.34.2026.09.02.12.34.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Sep 2026 12:28:39 -0700 (PDT)
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Wed, 02 Sep 2026 13:28:25 -0600
-Subject: [PATCH v8 2/2] mfd: ac200: Add X-Powers AC200 support
+        Wed, 02 Sep 2026 12:34:15 -0700 (PDT)
+From: Luca Leonardo Scorcia <l.scorcia@gmail.com>
+To: linux-mediatek@lists.infradead.org
+Cc: Luca Leonardo Scorcia <l.scorcia@gmail.com>,
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Sen Chu <sen.chu@mediatek.com>,
+	Sean Wang <sean.wang@mediatek.com>,
+	Macpaul Lin <macpaul.lin@mediatek.com>,
+	Lee Jones <lee@kernel.org>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Linus Walleij <linusw@kernel.org>,
+	Julien Massot <julien.massot@collabora.com>,
+	Val Packett <val@packett.cool>,
+	Fabien Parent <parent.f@gmail.com>,
+	Akari Tsuyukusa <akkun11.open@gmail.com>,
+	Chen Zhong <chen.zhong@mediatek.com>,
+	linux-input@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	mfd@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org,
+	linux-gpio@vger.kernel.org
+Subject: [PATCH v10 0/9] Add support for MT6392 PMIC
+Date: Wed,  2 Sep 2026 21:25:36 +0200
+Message-ID: <20260902193351.185771-1-l.scorcia@gmail.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260902-submit-ac200-mfd-v8-2-2aa06720b8ac@gmail.com>
-References: <20260902-submit-ac200-mfd-v8-0-2aa06720b8ac@gmail.com>
-In-Reply-To: <20260902-submit-ac200-mfd-v8-0-2aa06720b8ac@gmail.com>
-To: Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- James Hilliard <james.hilliard1@gmail.com>
-Cc: Andrew Lunn <andrew@lunn.ch>, 
- "Jagielski, Jedrzej" <jedrzej.jagielski@intel.com>, 
- Andre Przywara <andre.przywara@arm.com>, Chen-Yu Tsai <wens@kernel.org>, 
- Jernej Skrabec <jernej.skrabec@gmail.com>, linux-sunxi@lists.linux.dev, 
- mfd@lists.linux.dev, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-X-Mailer: b4 0.15.2
+Content-Transfer-Encoding: 8bit
 
-The X-Powers AC200 is a mixed-signal companion IC with a paged register
-map accessed over I2C.
+The MediaTek MT6392 PMIC is usually found on devices powered by
+the MT8516/MT8167 SoC and is yet another MT6323/MT6397 variant.
 
-Enable and rate-lock the shared input clock, wait 40 ms before the first
-register access, initialize the paged regmap and reset the chip. Assert
-reset again during driver removal and system shutdown.
+This series is mostly based around patches submitted a couple
+years ago by Fabien Parent and not merged and from Val Packett's
+submission from Jan 2025 that included extra cleanups, fixes, and a
+new dtsi file similar to ones that exist for other PMICs. Some
+comments weren't addressed and the series was ultimately not merged.
 
-The Ethernet PHY is enumerated on its MDIO bus rather than as an MFD
-child. It follows the x-powers,ac200 phandle and uses this regmap for
-ancillary package-control access. Other AC200 functions can be added as
-MFD children.
+These patches enable four functions: keys, regulator, pinctrl and RTC.
+Mono speaker amp will follow later as I need to work further on the
+audio codec.
 
-Cache only the common page selector. Individual functions can reset
-independently and invalidate their other registers, so leave all
-functional registers volatile.
+I added a handful of device tree improvements to fix some dtbs_check
+errors, added support for the pinctrl device and addressed the comments
+from last year's reviews.
 
-Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
----
- drivers/mfd/Kconfig  |  11 +++++
- drivers/mfd/Makefile |   1 +
- drivers/mfd/ac200.c  | 136 +++++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 148 insertions(+)
+Please note that patch 0006 and 0008 depend on patch 0005 as they need the
+registers.h file, but belong to different driver areas. I'm not sure if
+I'm supposed to squash them even if they belong to different driver
+areas of if it's fine like this. Any advice is welcome.
 
-diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
-index e4fd4572472f..cac3fff5aee9 100644
---- a/drivers/mfd/Kconfig
-+++ b/drivers/mfd/Kconfig
-@@ -205,6 +205,17 @@ config MFD_AC100
- 	  This driver include only the core APIs. You have to select individual
- 	  components like codecs or RTC under the corresponding menus.
- 
-+config MFD_AC200
-+	tristate "X-Powers AC200"
-+	depends on I2C
-+	depends on OF
-+	select REGMAP_I2C
-+	help
-+	  Support for the X-Powers AC200 mixed-signal companion IC. The AC200
-+	  contains audio, video, RTC and Fast Ethernet PHY functions and is
-+	  co-packaged with some Allwinner H6 and H616 SoCs. This driver provides
-+	  the shared register access used by the individual function drivers.
-+
- config MFD_AXP20X
- 	tristate
- 	select MFD_CORE
-diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
-index 72d3944b0ad8..f8101d2a9ce9 100644
---- a/drivers/mfd/Makefile
-+++ b/drivers/mfd/Makefile
-@@ -150,6 +150,7 @@ obj-$(CONFIG_MFD_DA9052_SPI)	+= da9052-spi.o
- obj-$(CONFIG_MFD_DA9052_I2C)	+= da9052-i2c.o
- 
- obj-$(CONFIG_MFD_AC100)		+= ac100.o
-+obj-$(CONFIG_MFD_AC200)		+= ac200.o
- obj-$(CONFIG_MFD_AXP20X)	+= axp20x.o
- obj-$(CONFIG_MFD_AXP20X_I2C)	+= axp20x-i2c.o
- obj-$(CONFIG_MFD_AXP20X_RSB)	+= axp20x-rsb.o
-diff --git a/drivers/mfd/ac200.c b/drivers/mfd/ac200.c
-new file mode 100644
-index 000000000000..8445a460ef6c
---- /dev/null
-+++ b/drivers/mfd/ac200.c
-@@ -0,0 +1,136 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * MFD core driver for the X-Powers AC200
-+ *
-+ * Copyright (C) 2019 Jernej Skrabec <jernej.skrabec@gmail.com>
-+ * Copyright (C) 2026 James Hilliard <james.hilliard1@gmail.com>
-+ */
-+
-+#include <linux/clk.h>
-+#include <linux/delay.h>
-+#include <linux/i2c.h>
-+#include <linux/module.h>
-+#include <linux/regmap.h>
-+
-+#define AC200_SYS_CONTROL_REG			0x0002
-+#define AC200_SYS_CONTROL_CHIP_RESET_DEASSERT	BIT(0)
-+
-+/* Interface register accessible from every register page. */
-+#define AC200_TWI_REG_ADDR_H	0x00fe
-+#define AC200_MAX_REG		0xa1f2
-+
-+static const struct regmap_range_cfg ac200_range_cfg[] = {
-+	{
-+		.range_max = AC200_MAX_REG,
-+		.selector_reg = AC200_TWI_REG_ADDR_H,
-+		.selector_mask = 0xff,
-+		.window_len = 256,
-+	},
-+};
-+
-+/*
-+ * Each AC200 sub-block can reset independently, invalidating its register
-+ * contents without regmap's knowledge. Cache only the common page selector;
-+ * this avoids a selector read-modify-write for every access on the same page
-+ * without ever returning stale functional-register values.
-+ */
-+static bool ac200_volatile_reg(struct device *dev, unsigned int reg)
-+{
-+	return reg != AC200_TWI_REG_ADDR_H;
-+}
-+
-+static const struct regmap_config ac200_regmap_config = {
-+	.name = "ac200",
-+	.reg_bits = 8,
-+	.reg_stride = 2,
-+	.val_bits = 16,
-+	.ranges = ac200_range_cfg,
-+	.num_ranges = ARRAY_SIZE(ac200_range_cfg),
-+	.max_register = AC200_MAX_REG,
-+	.volatile_reg = ac200_volatile_reg,
-+	.cache_type = REGCACHE_MAPLE,
-+};
-+
-+static void ac200_disable(struct regmap *regmap)
-+{
-+	regmap_write(regmap, AC200_SYS_CONTROL_REG, 0);
-+}
-+
-+static int ac200_probe(struct i2c_client *client)
-+{
-+	struct device *dev = &client->dev;
-+	struct regmap *regmap;
-+	struct clk *clk;
-+	int ret;
-+
-+	clk = devm_clk_get_enabled(dev, NULL);
-+	if (IS_ERR(clk))
-+		return dev_err_probe(dev, PTR_ERR(clk),
-+				     "failed to enable input clock\n");
-+
-+	ret = devm_clk_rate_exclusive_get(dev, clk);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "failed to lock clock rate\n");
-+
-+	regmap = devm_regmap_init_i2c(client, &ac200_regmap_config);
-+	if (IS_ERR(regmap))
-+		return dev_err_probe(dev, PTR_ERR(regmap),
-+				     "failed to initialize regmap\n");
-+
-+	i2c_set_clientdata(client, regmap);
-+
-+	/*
-+	 * No minimum delay is documented. Match the vendor driver's 40 ms delay
-+	 * before its first AC200 register access after enabling the input clock.
-+	 */
-+	msleep(40);
-+
-+	ret = regmap_write(regmap, AC200_SYS_CONTROL_REG, 0);
-+	if (ret)
-+		return ret;
-+
-+	ret = regmap_write(regmap, AC200_SYS_CONTROL_REG,
-+			   AC200_SYS_CONTROL_CHIP_RESET_DEASSERT);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+static void ac200_remove(struct i2c_client *client)
-+{
-+	ac200_disable(i2c_get_clientdata(client));
-+}
-+
-+static void ac200_shutdown(struct i2c_client *client)
-+{
-+	ac200_disable(i2c_get_clientdata(client));
-+}
-+
-+static const struct of_device_id ac200_of_match[] = {
-+	{ .compatible = "x-powers,ac200" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, ac200_of_match);
-+
-+static const struct i2c_device_id ac200_i2c_ids[] = {
-+	{ .name = "ac200" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(i2c, ac200_i2c_ids);
-+
-+static struct i2c_driver ac200_driver = {
-+	.driver = {
-+		.name = "ac200",
-+		.of_match_table = ac200_of_match,
-+	},
-+	.probe = ac200_probe,
-+	.remove = ac200_remove,
-+	.shutdown = ac200_shutdown,
-+	.id_table = ac200_i2c_ids,
-+};
-+module_i2c_driver(ac200_driver);
-+
-+MODULE_AUTHOR("James Hilliard <james.hilliard1@gmail.com>");
-+MODULE_DESCRIPTION("X-Powers AC200 MFD core driver");
-+MODULE_LICENSE("GPL");
+Patch 0009 also depends on patch 0003 because of mt6392-regulator.h.
+
+The series has been tested on Xiaomi Mi Smart Clock X04G, on the
+Lenovo Smart Clock 2 CD-24502F and on Sony PlayStation Classic Mini
+SCPH-1000R.
+
+Changes in v10:
+- Removed the fallback on mediatek,mt6323 in the MFD binding document
+  and in the dtsi file. Suggested by Sashiko [11], thus removed the
+  Reviewed-by tag provided by Kryzsztof Kozlowski in patch #1, version 9.
+
+Changes in v9 [10]:
+- Correct binding for vrtc as it does not support mode setting.
+
+From Sashiko:
+- Added missing include in MFD documentation example.
+- Fixed constraints for regulator-initial-mode in regulator binding.
+- Fixed wrong register write while setting LDO standby mode.
+- Added missing pmic interrupt definition in the pumpkin-common include.
+
+Changes in v8 [9]:
+From reviewers:
+- Added example code to the MFD device binding, removed it from the
+  regulators docs.
+- Added minItems/maxItems constraints on the regulator mode definitions,
+  improved the mode constants.
+- Fixed formatting issues in the regulator binding.
+- Import the mt6392.dtsi file in pumpkin-common.dtsi, as it was originally
+  meant in [8].
+
+From sashiko:
+- Added more explicit constraints on the regulator modes definitions.
+- Use the appropriate modeget register for LDO regulators, Buck registers
+  don't have the corresponding register according to the data sheet.
+- Added the missing of_map_mode function.
+- Removed some debugging code that had no use and masked error codes.
+
+Changes in v7 [7]:
+- Removed patch 0008 dependency on patch 0003.
+- Reintroduced the regulator driver. In earlier revisions of this series,
+  it was proposed to remove the dedicated compatible for the regulator
+  device [3]. The driver does not use actually it, but it is not possible
+  at this time to remove it from the bindings since it's a required
+  property.
+
+  Making the regulator-required property conditional was NACKed in [5],
+  with the suggestion to create a separate binding altogether for devices
+  that do not require the compatible property. I tried implementing this,
+  but since the parent device needs to be declared as compatible with
+  mt6323, it leads to a warning in dt_binding_check since mt6323 would
+  be declared as a compatible in both mt6392 and mt6397.
+
+  In the end the only regulator driver from the mt6397 documentation that
+  still declares an of_match is mt6397-regulator and it does not seem
+  to be necessary, so it should be possible to remove it and make the
+  regulator compatible optional for all regulators, but that change would
+  probably deserve its own separate patch series.
+
+Changes in v6 [6]:
+- Dropped the regulators driver for the moment
+- Explained the FCHR key name origin in the commit message
+- Introduced the MFD_CELL_* macro in the sub-devices definitions.
+  A separate, independent commit introduced MFD_CELL_* to all the
+  subdevices in the mt6397-core.c file for consistency
+- Replaced of_device_get_match_data with device_get_match_data
+- Removed the mfd_match_data enum in favor of the preexisting
+  chip_id enum
+- Adjusted the error message if the device is unsupported
+
+Changes in v5 [5]:
+- Double checked regulator driver with data sheet and Android sources.
+  The data sheet I have misses a lot of register descriptions, but
+  Android sources have been helpful to fill the gaps
+- Reintroduced the required attribute for the regulator compatible
+  in the bindings
+- Fixed the missing reference to the MT6392 schema
+- Fixed casts/unused vars reported by kernel test robot
+- Removed Reviewed-by tags from the regulator patches as they have been
+  modified in this version
+
+Changes in v4 [4]:
+- Dropped usage of the regulator compatible
+- Fixed commit messages text to properly reference the target subsystem
+- Added supply rails to the regulator
+- Reworked the regulator schema and PMIC dtsi. Now all supplies are
+  documented and the schema no longer includes voltage information
+- Removed redundant ldo- / buck- prefixes
+- Renamed the pinfunc header to mediatek,mt6392-pinfunc.h
+- Modified the MFD driver to use a simple identifier in the of_match
+  data properties
+
+Changes in v3 [3]:
+- Added pinctrl device
+- Changed mt6397-rtc fallback to mt6323-rtc
+- Added schema for regulators
+- Fixed checkpatch issues
+
+Changes in v2 [2]:
+- Replaced explicit compatibles with fallbacks
+
+Initial version: [1]
+
+[1] https://lore.kernel.org/linux-mediatek/cover.1771865014.git.l.scorcia@gmail.com/
+[2] https://lore.kernel.org/linux-mediatek/20260306120521.163654-1-l.scorcia@gmail.com/
+[3] https://lore.kernel.org/linux-mediatek/20260317184507.523060-1-l.scorcia@gmail.com/
+[4] https://lore.kernel.org/linux-mediatek/20260330083429.359819-1-l.scorcia@gmail.com/
+[5] https://lore.kernel.org/linux-mediatek/20260420213529.1645560-1-l.scorcia@gmail.com/
+[6] https://lore.kernel.org/linux-mediatek/20260612200717.361018-1-l.scorcia@gmail.com/
+[7] https://lore.kernel.org/linux-mediatek/20260615071836.362883-1-l.scorcia@gmail.com/
+[8] https://lore.kernel.org/linux-mediatek/20190323211612.860-25-fparent@baylibre.com/
+[9] https://lore.kernel.org/linux-mediatek/20260620200032.334192-1-l.scorcia@gmail.com/
+[10] https://lore.kernel.org/linux-mediatek/20260820122242.120039-1-l.scorcia@gmail.com/
+[11] https://sashiko.dev/#/message/20260820125850.3B34D1F000E9%40smtp.kernel.org
+
+Fabien Parent (3):
+  dt-bindings: input: mtk-pmic-keys: Add MT6392 PMIC keys
+  mfd: mt6397: Add support for MT6392 PMIC
+  regulator: Add MediaTek MT6392 regulator
+
+Luca Leonardo Scorcia (4):
+  dt-bindings: mfd: mt6397: Add MT6392 PMIC
+  regulator: dt-bindings: Add MediaTek MT6392 PMIC
+  mfd: mt6397: Use MFD_CELL_* to describe sub-devices
+  pinctrl: mediatek: mt6397: Add MediaTek MT6392
+
+Val Packett (2):
+  input: keyboard: mtk-pmic-keys: Add MT6392 support
+  arm64: dts: mediatek: Add MediaTek MT6392 PMIC dtsi
+
+ .../bindings/input/mediatek,pmic-keys.yaml    |   1 +
+ .../bindings/mfd/mediatek,mt6397.yaml         |  72 ++
+ .../regulator/mediatek,mt6392-regulator.yaml  | 112 +++
+ arch/arm64/boot/dts/mediatek/mt6392.dtsi      | 145 ++++
+ .../boot/dts/mediatek/pumpkin-common.dtsi     |   7 +
+ drivers/input/keyboard/mtk-pmic-keys.c        |  18 +
+ drivers/mfd/mt6397-core.c                     | 307 ++++---
+ drivers/mfd/mt6397-irq.c                      |   8 +
+ drivers/pinctrl/mediatek/pinctrl-mt6397.c     |  37 +-
+ drivers/pinctrl/mediatek/pinctrl-mtk-mt6392.h |  64 ++
+ drivers/regulator/Kconfig                     |   9 +
+ drivers/regulator/Makefile                    |   1 +
+ drivers/regulator/mt6392-regulator.c          | 764 ++++++++++++++++++
+ .../regulator/mediatek,mt6392-regulator.h     |  23 +
+ include/linux/mfd/mt6392/core.h               |  43 +
+ include/linux/mfd/mt6392/registers.h          | 488 +++++++++++
+ include/linux/mfd/mt6397/core.h               |   1 +
+ include/linux/regulator/mt6392-regulator.h    |  42 +
+ 18 files changed, 1974 insertions(+), 168 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/regulator/mediatek,mt6392-regulator.yaml
+ create mode 100644 arch/arm64/boot/dts/mediatek/mt6392.dtsi
+ create mode 100644 drivers/pinctrl/mediatek/pinctrl-mtk-mt6392.h
+ create mode 100644 drivers/regulator/mt6392-regulator.c
+ create mode 100644 include/dt-bindings/regulator/mediatek,mt6392-regulator.h
+ create mode 100644 include/linux/mfd/mt6392/core.h
+ create mode 100644 include/linux/mfd/mt6392/registers.h
+ create mode 100644 include/linux/regulator/mt6392-regulator.h
 
 -- 
-2.53.0
+2.43.0
 
