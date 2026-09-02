@@ -1,72 +1,72 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64B774A92E0;
-	Wed,  2 Sep 2026 15:31:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92BA133FE09;
+	Wed,  2 Sep 2026 15:46:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788363113; cv=none; b=ISI0SzG1RSDR8dRHfLEotLuK2m5XKsT0yAyAhCkL19DKXFl9jK3LmOLJFZWZUNXLhVjSTKJFsyU02weE+nDhCBERsteCPW+tvCrjeEgoD6Z7CvDU6IrisphhOOOieQvezj5FI/1pGkLlTt1lezg2HEPS6nhjpDvaQjMK3PCprIA=
+	t=1788363985; cv=none; b=s/wfbzrpK0b7c4ahZq4gBiL31qHHquYnaeUNeGnkGZHyvGV43+8tmCuKxpUvvajj20JOEGV5OPl78jiTsSjVcGeVatTgSckCC99JeYXLCXnHaq8I+fXrBe/bGyrt7lqK9sgd0uVWsidIUyVvyDVQI+jZqzq7CGB0Ax3O493RE+4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788363113; c=relaxed/simple;
-	bh=F8/2e4coUXQd1OEy1MIBLrc2n0JoU2v7FX9aLwh/pHA=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=Vu+NSDd8s83ZAWbIHd81sbSeO66BPLT/EEzh5uVAC+q+Jq7I3k0bgp6I+GxIyVi0IxJsVDyVl77HYl5DwL+Z2cg4HgfhQc8c/o3H71m+CqHOVV1D8bhB/YoWMCE0IJDHnXu1OD2a6NF0kSfRuF3TvocAAOsor5MuwvYVoQ9SGk8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AycOmSUX; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788363985; c=relaxed/simple;
+	bh=MQ8xTVp7HshBdUhAkX6oincjrniBJdbslFzdsi95Ulw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=PB9bZL3JOe+7bP6VHx2A+bUyv5DKFbLRr4VWeveyG73njyTWNFQRuuyWEdBTTI/ZYAgpThMcMqL1020kF9xdDOydzqM580lT9LEY/C9B9Xdva39O+PXhBqFChEsk3QhmBD63pq+Yz+6oxUpBut++ypLoIleNk/sNF5X7GptrzWs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lBi2W2yz; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AycOmSUX"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7A4971F000E9;
-	Wed,  2 Sep 2026 15:31:50 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lBi2W2yz"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2B461F00A3A;
+	Wed,  2 Sep 2026 15:46:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788363111;
-	bh=i6uzuZvKCw0azG4q0pqw0jBpOqzGi2PjCgyH0kixHC8=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=AycOmSUXIjOcllCh0E8Y1oRuzMPYyoA/UXQD1D5OzH1IdwZL0G2ZXxeKQT3xm3t8F
-	 LJfhKmffSdyee7Oxvb8EGbHifKdp9cY1XPOnxPlUJUIozbt24k6tRNfkLtTqjnQXmo
-	 ERpJ2YzI20dgnYzqBuPXSmJWL8zm1D/OVtxIOQgGa6BE/NaycSo8+dXZu/bx55X6fm
-	 toOkq7K6eoFdk39mE2MBzKjE2PGl/d1NU59Ahy7JSrIIZD2DOfP957mZ0c6CpPujd7
-	 36TI5eiU0Jab7keOCDP4zLuR3RifnrhaAtp1vqMc4i6hvYHmVT4nHcoICztvU977md
-	 ffi31LWGLl+iQ==
+	s=k20260515; t=1788363983;
+	bh=eGitWDIlcZr9zvSU+hzEEYkqYzd83UWvS+OZwK2+CsI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=lBi2W2yzrvXVJzPMlfdStn4bFVddJWTcU1CGAX/PCOWtbs/dxRiGEBTDLppEkGwPo
+	 mnHglfgSQ48apYe+/FiB94hboWLnfvkPiiX6Xc7QGSkTymnWcWLnLUAzxEmFNTDIOP
+	 pjlLqEClBZ5lhswXBhsgo/i+TpNQfDPmAZPw9GIzH0rVC8+UfHYjDZ3jrKXEQa3F6O
+	 x9F0qcCuSziOz+InMP8gQqtlqVGu3l6EM3wOX3rgh8rnH83UbbiL65FfwkmLh2BIpc
+	 OnbJTg/rpBHLBD79ilKfEVw1MO+LrCkJL2zQMfVOJxTd7Rr6wqgljdQSyQ8ZQUKf+N
+	 zCEsUuWG292qQ==
+Date: Wed, 2 Sep 2026 16:46:16 +0100
 From: Lee Jones <lee@kernel.org>
-To: Lee Jones <lee@kernel.org>, Hongyan Xu <getshell@seu.edu.cn>
-Cc: Support Opensource <support.opensource@diasemi.com>, 
- mfd@lists.linux.dev, linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
- jianhao.xu@seu.edu.cn
-In-Reply-To: <20260814153019.1114-1-getshell@seu.edu.cn>
-References: <20260814153019.1114-1-getshell@seu.edu.cn>
-Subject: Re: (subset) [PATCH v3] mfd: da903x: cancel IRQ work during
- teardown
-Message-Id: <178836311024.2127451.12083678367837110310.b4-ty@b4>
-Date: Wed, 02 Sep 2026 16:31:50 +0100
+To: Luca Leonardo Scorcia <l.scorcia@gmail.com>
+Cc: linux-mediatek@lists.infradead.org,
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Sen Chu <sen.chu@mediatek.com>,
+	Sean Wang <sean.wang@mediatek.com>,
+	Macpaul Lin <macpaul.lin@mediatek.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>, Linus Walleij <linusw@kernel.org>,
+	Val Packett <val@packett.cool>,
+	Julien Massot <julien.massot@collabora.com>,
+	Fabien Parent <parent.f@gmail.com>,
+	Akari Tsuyukusa <akkun11.open@gmail.com>,
+	Chen Zhong <chen.zhong@mediatek.com>, linux-input@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-pm@vger.kernel.org, mfd@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org, linux-gpio@vger.kernel.org
+Subject: Re: [PATCH RESEND v9 0/9] Add support for MT6392 PMIC
+Message-ID: <20260902154616.GA2133376@google.com>
+References: <20260820122242.120039-1-l.scorcia@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.16-dev-ad80c
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260820122242.120039-1-l.scorcia@gmail.com>
 
-On Fri, 14 Aug 2026 23:30:19 +0800, Hongyan Xu wrote:
-> The IRQ handler disables the IRQ and schedules irq_work. Releasing the
-> IRQ does not drain that work, which can continue to use the devm-allocated
-> chip and notifier state.
-> 
-> Manage both IRQ-work cancellation and subdevice removal with devres.
-> Register the subdevice-removal action before requesting the IRQ, then add
-> the IRQ-work action after the request. This avoids leaving a live IRQ
-> without work cancellation if action registration fails. Devres cleanup
-> then disables the IRQ and drains the work before releasing the IRQ and
-> removing child devices. Register both actions before creating the children
-> so partial probe failures use the same ordering.
-> 
-> [...]
+On Thu, 20 Aug 2026, Luca Leonardo Scorcia wrote:
 
-Applied, thanks!
+> The MediaTek MT6392 PMIC is usually found on devices powered by
+> the MT8516/MT8167 SoC and is yet another MT6323/MT6397 variant.
 
-[1/1] mfd: da903x: cancel IRQ work during teardown
-      commit: df41eb0718d7ec4609c98844aca3ea381bb569ef
+What Acks are you waiting on?
 
---
-Lee Jones [李琼斯]
-
+-- 
+Lee Jones
