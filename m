@@ -1,175 +1,226 @@
-Received: from DB3PR0202CU003.outbound.protection.outlook.com (mail-northeuropeazon11010043.outbound.protection.outlook.com [52.101.84.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8358C4FB9C6;
-	Thu,  3 Sep 2026 19:22:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.84.43
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788463381; cv=fail; b=tPx/mqyHwqRU2N+afdNXJB12gl0dmGybHJyRz1wxvhWHv7SvE8sB2S0zgZJfsxrW8qLik6OjyEeBVB06hPbs6Ajg4ykyJw0db2iUXaGv0pSGOv7pHZwuHDZQS7qk+XPcRvw7npR4pl2Sw5QREEVG/I2ZkUda70vSheBOkN4l7qo=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788463381; c=relaxed/simple;
-	bh=YlVH+k9HzPBFUDbLqnw0BpK6BzrClU7Sx6uYpLalZvI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=R54yWK4OeJ3FIinMVWC1d79/GxEJfIwIsLy4tyXGHu5dAcN4Yv/KX1f+nRRWFBuoigAXBQWnG4siPtu3tji5ZTMs6TDmJ3QVWhu4zucEU5g/tCdbsMH+GDxmhZDsTTDTPGcpkO+iVUcWYRVgOPwcykiQmnnB1sIoadAwJ4NdKpE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=L6awsgWy; arc=fail smtp.client-ip=52.101.84.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF0015111BC
+	for <mfd@lists.linux.dev>; Thu,  3 Sep 2026 20:09:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.175
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788466208; cv=none; b=P2dQxEGFGHe5QxrfcrSwi11HUH1xJLrRoZ/6ri4Dv1RNMQmx1ESnPkQtPRpd5PCdWQxeUJDfRldPoCH/+tOOaSfRJQiRq13bOqfNegjUibOzaghKSbPLRgFGGIP6ideTKhiOL47a1/AuQvkO+e7dYO+QyBdcAy/RMOHlzrRQ6c4=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788466208; c=relaxed/simple;
+	bh=33gmwnaoOgewiIfzCE3tR2Aa3m4ljb1ArNTdi+ongu8=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=n7VTG1VEQVbPpn09mjbuM1NKAC87FFNANQHxWMUeKYToLPG8x5BlcEUaCfmumhGl1iPt/e9ewRaJB8RrVUfprq5jFsEiuJHsv4xuw75uzbGrWqohR3yxxSSYlPJkJhUpQKi5kKcLtUoZ/iwLmYdVntpDs6AwD7TUOhYOyiJ/+po=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=bC+f8pST; arc=none smtp.client-ip=209.85.167.175
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="L6awsgWy"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jV6rwhOEB1QwbZlSKNrPdWFaRbCm26FNwtngAoc+tUOouE/A5I5P/pnBRUr6u2kUBl0aWRZn9B+D5zYiBnK/FsLt4eM3dZ4GtO0Z1EWxJ3TGrPrcFGfN6261HurvF+ZhY0aRahhmysAFrtitLjXHw/nXvVpYP9RGl0NhX2OKXgmFxmVZYq5uZ6jIJWjoz+EmM+5Qu2BW5ChfP5nUHr5xx2neLpi3fXHz86CW48dkhhx932jCPWr5RO+VJ4SiI6IzkSESMHdzL1/KFRWyUyHzYOpMxvymCiWGwZfbgPQ44z6NsNuu+Tpy3YnPMdzvbIeeqRSLEkqSEzrBdhHZg5LIsA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rcVJSmRgiseI93jo70lwLSmn78KKBeExyHPZIx7nwn4=;
- b=N/MVmu2E3ROAyxjtCdaqctXPqQhMuj4v8mOnyeiyfgZGTczGh9oec8hDtY2bBEo7P/WFgwYcbV1L+Cevy6uNgiT+k8aKI4PN7cOZbfPj0ABynyk85TVxoCFvecPWbwKsMlbsshpNvuCTMQuWLSQUmhi4MGSbeNiIry4aFYJ0dJrTXYJp99dTByisTlVX1VI0AJsxJ4iyjJz9tikIw2fKu5XA7n4//pnqXeGxvZgo+7zLI8BIRZ7ZL5Umzc5o1X4BUxm3OUbHKpk9G+CubhJQavpA5xwcF0eUZke2NbUMe2P06jIi7hUvAa9cgeitLUkXCZQjISlgN3Np+uNmFWOjKA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rcVJSmRgiseI93jo70lwLSmn78KKBeExyHPZIx7nwn4=;
- b=L6awsgWyl3o6e64BgYj41ehjZOjHE24j6W95XwPAWEIQuUdOFsIFqgD1u44SmV7X34sx3PycRZ3am9Jllwbor/t+8wdY1LRXz/LFU56WcZUAPxZPlp9VXgwXd/XTRU1sIdj9BgD1U2O1oAXEjPG8OcwwWHbKeyuEBmmTZz0ZNSg0NC+x1n0+HBftR+VYZ1c1FfjeHu3AgCEd5cPE9vMwSGbk9gEKHVpv2WnHwTfd3VS+t47BYMlziR2JMgQh7SfwbivUBfdwwa5ND7nyOHy1ANOEvTQifDsXHaVgwQd936YrtVARNBUq6R/s2Hp9VcdNVEYBl0zpLJJlcamxCK4oZg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com (2603:10a6:150:2cf::9)
- by DU4PR04MB11364.eurprd04.prod.outlook.com (2603:10a6:10:5d7::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.360.13; Thu, 3 Sep
- 2026 19:22:44 +0000
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c]) by GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c%7]) with mapi id 15.21.0360.008; Thu, 3 Sep 2026
- 19:22:44 +0000
-Date: Thu, 3 Sep 2026 14:22:35 -0500
-From: Frank Li <Frank.li@oss.nxp.com>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Support Opensource <support.opensource@diasemi.com>,
-	Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
-	"open list:MULTIFUNCTION DEVICES (MFD)" <mfd@lists.linux.dev>,
-	"open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>,
-	open list <linux-kernel@vger.kernel.org>, imx@lists.linux.dev
-Subject: Re: [PATCH 1/1] dt-bindings: mfd: da9052: allow dlg,da9053-aa
- fallback to dlg,da9052
-Message-ID: <apnI-7b2xXLslwd4@SMW015318>
-References: <20260831201522.51294-1-Frank.Li@oss.nxp.com>
- <20260903-hypnotic-pearl-ladybug-8ed62d@quoll>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260903-hypnotic-pearl-ladybug-8ed62d@quoll>
-X-ClientProxiedBy: CY5P221CA0132.NAMP221.PROD.OUTLOOK.COM
- (2603:10b6:930:1f::30) To GV2PR04MB11799.eurprd04.prod.outlook.com
- (2603:10a6:150:2cf::9)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="bC+f8pST"
+Received: by mail-oi1-f175.google.com with SMTP id 5614622812f47-4b190cdc9feso230060b6e.0
+        for <mfd@lists.linux.dev>; Thu, 03 Sep 2026 13:09:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1788466193; x=1789070993; darn=lists.linux.dev;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=JWJmyHh0/BVQQFMvbAXDDBvFjk+duepqeHP4tC9bWq8=;
+        b=bC+f8pSTwnaB/8d6Oq1FhiVDjWY6GParV9yP8+Zek78NYDjg91cABzDArv6cWxALgH
+         j/gSsMqK4Wx0jaJodUl7OfIcMfIkxB3CVFQk4/c2+oqFEuWM2z4V4OWYSVRnBRjgTzeG
+         BA4w7KYYJo/QHt8NJF9V0RRM9Z3CCakwikMBirzfPCem1UOH6lDX9rFemHlcWt/UKi8m
+         bP1UuyqvuE4NBXV68y7rd8tKdoRUXFlF8r9jkRQlOPcM9dmnYVtgQP99sqm7lDIpVEK/
+         7TT0bu99+P2VKzcIKXRTNnHvz5dcat/F1MT7v1QAtKB98eDWhKRBEW0NQFs7ijht4Y7d
+         sh8A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788466193; x=1789070993;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=JWJmyHh0/BVQQFMvbAXDDBvFjk+duepqeHP4tC9bWq8=;
+        b=KXMgNdmPyReTWtkEyQ6f3JkgA15Q5tvXndpJplDvPIVN88vp740ej2lO7nFcaCjYke
+         2DhyrrkDNlszM1TfDIpkpQ0hdj9A26UrKGt5RNKvsRUjKtURud+iQsqH7rIA2bgGr5zy
+         wJPqZfDl3jW6v5eCdSGLqjDDgJifQCU1l4JtmwZcB8YOStEyTbrxuHVbmZmqf6CIhMGN
+         WNyHfkVU/ZwCbCv/eVqMj6zGwqMEHqRZQLUPg2HYRQLvBUgKOI5A8jUSZJK3cCW86RO2
+         X49P88xKIKEIxG642IAhMYbA4Fu65YdyorlN7X1zAVz/588t17tQEBHUNyJZlZ2A/00W
+         7EZA==
+X-Forwarded-Encrypted: i=1; AKwUvByqPO6kYPZRozQLkDOjBtJEVpIp+bSXZN4K2BTQbRuw69P59fcSHmQDp2cIzBV2ttS6QIg=@lists.linux.dev
+X-Gm-Message-State: AFuF++ltNC7WjVtZ28lJP3MIMGkPGQY8O00PcO0eVogIIuq9jWonCNU/
+	bpNpwA4/LlK9h952O5zcd7jULa3GE6DYaCg+nZu2zmNTtN8l/8kVQm9F
+X-Gm-Gg: AYBFou2hE7hIpfqcBg3GNHzGuFNqZqHKL3Cj88tZCrQGTKZ98kPCHI6LfPotOzribkJ
+	UBWwIJGTj01FFGCOq3pUu0lHid3TFNfCEAYz46ER502ASVzlnSZiTZDrPFIfocWK/ArZGY0ZnDg
+	mqchgmzAL0m7VLfPgEiB03wdgIjsTbf3R0oXac/y7mcpDrx3x71QvaVWHhiAqt+B12UG66j2oOS
+	061Cc09h0WPaA0HY2QgW9owchY6IgZkMsSjYzGa9xtVeJ2wU/MQ1HdofR1EXUVZoDj4uR87VP0d
+	ptRNLUgaHR+UYo2fd0Djdt4JwBNigOjC6kClvAqheNEHLw7p6p35rbzemGAqpGIymLq93awvGgl
+	F4A5UVqMqIFhzg0Kmd814lXWSS9Y3rvE0JSlU9ykY6A3XuxyajbblLhB27hFI7V3khYZ76g9Q9m
+	GnmPi8+3Zfw7GRjS2DhZGFKfValTJWqgsklsox3StkM0jyPgF4sJXNH+8kZS8AV0Ict89IxVdpx
+	Xni7jTBGFPRSMSrdX+k4ka13oTqMWeNF4U8SpDudjwfCWb4J4IcnN+S9JlRtepA26snmXg/SPt7
+	XCMjQUvrqNwf6t1QBq3r9qxt3FVE7fC7govr69tb+FGp2BBQv0AkUfc4dMoAhhhE/2wbZviC0Tv
+	IwHcTGWjyucZfEj193IA=
+X-Received: by 2002:a05:6808:159b:b0:497:da47:df5f with SMTP id 5614622812f47-4b9623ccb8emr868245b6e.17.1788466192869;
+        Thu, 03 Sep 2026 13:09:52 -0700 (PDT)
+Received: from [127.0.1.1] (184-96-151-165.hlrn.qwest.net. [184.96.151.165])
+        by smtp.gmail.com with ESMTPSA id 5614622812f47-4b971246d9csm252885b6e.7.2026.09.03.13.09.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 03 Sep 2026 13:09:52 -0700 (PDT)
+From: James Hilliard <james.hilliard1@gmail.com>
+Subject: [PATCH v9 0/4] mfd: add X-Powers AC200 support
+Date: Thu, 03 Sep 2026 14:09:39 -0600
+Message-Id: <20260903-submit-ac200-mfd-v9-0-6b7ed278989c@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR04MB11799:EE_|DU4PR04MB11364:EE_
-X-MS-Office365-Filtering-Correlation-Id: b16a4194-d990-44ae-c0e8-08df09f0baca
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|19092799006|23010399003|376014|7416014|366016|4143699003|10067099003|11063799006|18002099003|22082099003|3023799007|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	Bop35JZOIzWDod0FHDkIQZw5J5zAlcZKhWG3NT6pqwRPqlBUUmv1/Ah+/X7xHvnhEbP5jxuWeAg/yyp0P86WS3+mTqnBL3Vp1ip1i6HkJqR6OxPcKwXN4QuU5j961eUoYIaRgujYPRs5UIhmdx78/wADXBMlmgkrMeMGq7djmyye9IdpCl8XcKNZGe1FlZyX/N5da96H9FjjP/9rhpd84dScyICT4EzDsmEVwc7PqbUjUFbrLQ+OtuTS1erOZ1ReWYnDREVnudX8gpmCka4RMaFoarEPegnMSfT//Lu7ZoNZ+nHbHIY4G8NLUhgp3hkNOlhjs3uvuR+RGETP0TbqeGIdg9hyTcaF2Sf7kCaJtsUmd0TwtKBn/lwnhioQRBwrsi3c1d2D9GEPxeiTHUcPpo0ml2DB1tqyxeVRKgWdqQs/16mHNgK7jXlRuHe3Ji7rQOhlk3VJYriS1PCk2bqjrbirjosMQvocbsQgbXhsvm70xgY2RLJQCD7tfQvQkAijszBx7EnYM1vfLmJuVASqtZilmkypFIotWHjeE7e+6ZSQUADpL5GOZBvN6BqgygBaXT9bxY28X50a6xqGAlX/Mmmi76BMX+z2rxONCZ52IGw=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB11799.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(19092799006)(23010399003)(376014)(7416014)(366016)(4143699003)(10067099003)(11063799006)(18002099003)(22082099003)(3023799007)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?v/2hK69/rqf8DsD9+laTI0HfkvmK1a613gaD1EUYWfGmTMtZcLjd+ew1jmRL?=
- =?us-ascii?Q?35EK62FNVx62cfPWFUXblD0G13Zi6u7V4mrZlvjo6HUaLa7mL0XZplMliltr?=
- =?us-ascii?Q?GSW1dnRFWSBDJqNvNUSxx6J9egxtfQ2b1VbDNs8Xau5CR3LloTYwA9gNPz6L?=
- =?us-ascii?Q?faS87yqrIlOX/Fn8h5wwCuSvzJjw/bQpG6YwA+Ys8YPAIv0mPJqprfL07pes?=
- =?us-ascii?Q?ATrzb4oyn7oX1YGjWwdl6i0eRkG4yRnddeU0GLSxd3Fm3Ny9HZHBgmtNxveb?=
- =?us-ascii?Q?EM/jBS5RmQ1b8rdG0DVv46Sbzp4zyBoyHba3up+lUMcgtSID3cqEGSKSmr9h?=
- =?us-ascii?Q?4JEcUq+uSzpPxninRgxFY7ExFMOAIwitdZ+LE1TRQxIrR/yXCDajsIM/JHDt?=
- =?us-ascii?Q?PKjtqZs3ZcdJkiFpNd1OpFKj2wO11m3lkyCB/sLhEsQz8sgDCbQEnt4RHbw5?=
- =?us-ascii?Q?3HRcTyWViCexzavngLPD1hkkJkgHqwt3cK0c3wAObT4Y/zdzfONM6bDhorNX?=
- =?us-ascii?Q?bnroSacJ6ttCNK/m76KPKb0mXg82GAn31rnOpkJMD8Qe++pgCRxPeNog8v6k?=
- =?us-ascii?Q?3RwQWnLbAezGQofl0C82upYgXk2OGpMTYrsG7ZBiaEUhxAIEP4ydKv30wMvV?=
- =?us-ascii?Q?Fozpyx1kf3TGjyBXzI/c9VEAC/z/Ji4+5dat2TWT5VgEIP2umTuPSVOSbyYi?=
- =?us-ascii?Q?st1yjJK4IuKw+Hpmcfrs0uQ6dVUnyMLUyNSRpp/6bGCxyfM4HmkV2NWLWrOt?=
- =?us-ascii?Q?xMROG8hGYqSX+2CW1C2wskqbkg/aEyTtpV4APHJflfrMWiGV0jCE9py1abh+?=
- =?us-ascii?Q?SauMN+kkYcRsyfODhM1yi86qI2cHsNKxuZxww/on6WbyzB3t1AACwdivIucD?=
- =?us-ascii?Q?omgTl2cfzR3Zm69jBzS0sQMIwi+rmq4kwiREF0DWgH7E0Edv2VgOwKj0NZUr?=
- =?us-ascii?Q?DZjptZdd0OfqKvMko8FKijr/1dWXZsWfzZyyOOSC//h/pzgy21wFEzInDl/s?=
- =?us-ascii?Q?Q7JUOlkjVjVypBumZD/dfn0yYhWaiOs4XnuR2Uj8GmpGshp8tOA+CInjJfVV?=
- =?us-ascii?Q?D+sYajYKJSRrcZ3+qP4BCd3a0pyxHW0CVqhmTDm7W2dlouQzm5TE/qTfrTIG?=
- =?us-ascii?Q?/1aqLVrsjXXhnUU5bSOCcwaBiOUT9VAYnQRaH+/3T3bULHZxO3AzjP4tKyY7?=
- =?us-ascii?Q?OjVkCsuxaWjfZz5mjk2zLLSg1zfidC5w6CqO+Rc77pJI19PT9UHF+X5Y+KM9?=
- =?us-ascii?Q?47jgJCyS2RGubFhiiJ9wPCedSvlJrAUyx45up5lXaoKBfTtR60EflV0r58uk?=
- =?us-ascii?Q?Y9Zf9MNSbZeLAmzqqSRRdHjdoLfQWGU2Z8lmhTcXdxpKm0U/NL3ex1vMpmz1?=
- =?us-ascii?Q?ltvnwc/BbjOEK+Hb/+voitsOFaolrrlJ+TD2YJwQOJ8ogdoiWWBMRIDRvZPz?=
- =?us-ascii?Q?YQwOyf23PsCV677A0YRBqac48ugLvmEYlKr8YuNIzDDf38VrNNMXrttDuMcA?=
- =?us-ascii?Q?TN7gSFE7C+BrdNNNKnrXEKoRMiF67POCC54SPAo+ILxzJ7Q6DJr2X3dRH0CK?=
- =?us-ascii?Q?v6zuO9VoUpFAmrNnZUzctmJOfeu+jhciwGdEulfE+uMj14ZN1n1Yi42tLpeJ?=
- =?us-ascii?Q?9dymnG6C94Qni6BuC91EafvhApN/+VvP5cypi8/EMXIDWET/U5P6JN79Ir4b?=
- =?us-ascii?Q?JpTpfYdQy9Iyhdd+TGgx0eimOAezp6LgDO/HCTX1aALI6FPOFdfzWl4nC/dz?=
- =?us-ascii?Q?xKwBFJSoxmuPrsEsmuq1tNCDUc5DuTEodzPZuU7Pjq9EW0YoLw8e?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b16a4194-d990-44ae-c0e8-08df09f0baca
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB11799.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Sep 2026 19:22:44.3301
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hjSGSSdLznSDeywUXCwpGhtgSgMFJRR1ip9a5IjfwyLsRKuQSeuZEG8rrYKz+erKi3rhFXINORKgsw7K9dtM6RX8hPdXbt07yxhLFaNFWUGV0opOt1ZrUFAclUj/oD6r
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB11364
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4XOTWrDMBAF4KsErTtlNETyqKveo3Sh30Qhtovli
+ oTgu1dOCwltoMsHb743F1HilGMRL5uLmGLNJY9DC+ZpI/zeDrsIObQsCEkjSwnl0/V5BusJEfo
+ UgJ0NOqCJxEq0s48ppny6km/v37ndHKKfV2dt7HOZx+l83axq7f3waG78qfFjgnAebJ89VAlVA
+ YJLViZWkh3x6663+fjsx16sQ1XfUY8+rboBXjlJhjxvzR+g+w/oGsAOdVKK7DZ0vwG+AQbpAcA
+ NIGtRd4SOrb8HlmX5AtPRB/SPAQAA
+X-Change-ID: 20260811-submit-ac200-mfd-8bad6d09e285
+To: Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ James Hilliard <james.hilliard1@gmail.com>
+Cc: Andrew Lunn <andrew@lunn.ch>, 
+ "Jagielski, Jedrzej" <jedrzej.jagielski@intel.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Chen-Yu Tsai <wens@kernel.org>, 
+ Jernej Skrabec <jernej.skrabec@gmail.com>, linux-sunxi@lists.linux.dev, 
+ mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
 
-On Thu, Sep 03, 2026 at 11:58:35AM +0200, Krzysztof Kozlowski wrote:
-> On Mon, Aug 31, 2026 at 04:15:21PM -0400, Frank.Li@oss.nxp.com wrote:
-> > From: Frank Li <Frank.Li@nxp.com>
-> >
-> > Allow dlg,da9053-aa fallback to dlg,da9052 to fix legacy platform (> 10
-> > years) check_dtbs warnings:
-> >   arch/arm/boot/dts/nxp/imx/imx53-voipac-bsb.dtb: dialog@48 (dlg,da9053-aa): compatible: ['dlg,da9053-aa', 'dlg,da9052'] is too long
-> >         from schema $id: http://devicetree.org/schemas/mfd/dlg,da9052.yaml
-> >
-> > Signed-off-by: Frank Li <Frank.Li@nxp.com>
-> > ---
-> > Previous try drop dlg,da9052 at
-> > https://lore.kernel.org/imx/20260404-thoughtful-placid-boobook-da26da@quoll/
-> >
-> > but Krzy have concern about compablity.
-> >
-> > https://lore.kernel.org/imx/20251107-matrimony-showdown-ba6ce6996b2f@spud/
-> >
-> > Conor prefer update old dts.
-> > ---
-> >  Documentation/devicetree/bindings/mfd/dlg,da9052.yaml | 4 ++++
-> >  1 file changed, 4 insertions(+)
-> >
-> > diff --git a/Documentation/devicetree/bindings/mfd/dlg,da9052.yaml b/Documentation/devicetree/bindings/mfd/dlg,da9052.yaml
-> > index 1103a8cc5cea4..d1d23c7c4d0c2 100644
-> > --- a/Documentation/devicetree/bindings/mfd/dlg,da9052.yaml
-> > +++ b/Documentation/devicetree/bindings/mfd/dlg,da9052.yaml
-> > @@ -18,6 +18,10 @@ properties:
-> >            - dlg,da9053-bb
-> >            - dlg,da9053-bc
-> >            - dlg,da9052
-> > +      - items:
-> > +          - enum:
-> > +              - dlg,da9053-aa
-> > +          - const: dlg,da9052
->
-> ... and the dlg,da9053-aa alone from earlier enum should be removed and
-> existing DTS corrected.
+The X-Powers AC200 is an I2C-controlled mixed-signal companion IC with
+a paged register map shared by its audio, video, RTC and Fast Ethernet
+PHY functions.
 
-there are dlg,da9053-aa alone at arch/arm/boot/dts/nxp/imx/imx53-ppd.dts.
+Add the parent binding and an I2C provider which enables and rate-locks
+the shared input clock, initializes the paged regmap and deasserts the
+common reset without resetting state left by firmware. The common reset
+remains deasserted during removal and shutdown, so unbinding the provider
+does not disrupt independently enumerated functions or discard wake state.
 
-Mix use both because it is too old.
+Describe and instantiate the audio codec and TV encoder as MFD children,
+and provide the shared regmap interrupt controller needed by the TV
+encoder. Only enabled, DT-described function devices are instantiated;
+PHY-only systems therefore acquire no unused platform devices. The ASoC
+codec and DRM bridge drivers are separate subsystem work and are not part
+of this MFD-only series.
 
-Frank
+The current regmap consumer is the separately submitted AC200/AC300
+Ethernet PHY series:
 
->
-> Best regards,
-> Krzysztof
->
+  https://patch.msgid.link/20260818-submit-acx00-of-dynamic-v1-v9-0-b8c8d9ad0d83@gmail.com
+
+The PHY remains enumerated on MDIO, its primary management bus. Its AC200
+package node follows the x-powers,ac200 phandle for ancillary I2C register
+access, adds a managed device link and obtains the regmap with
+dev_get_regmap(). This series and the PHY series can be merged in either
+order; AC200 Ethernet support requires both.
+
+The child descriptions and MFD implementation are adapted from earlier
+work by Jernej Skrabec and Andre Przywara, with their authorship and
+sign-off chain retained:
+
+  https://github.com/jernejsk/linux-1/commits/opi3-eth/
+
+Public AC200 documentation is linked from:
+
+  https://linux-sunxi.org/AC200
+
+Validation included dt_binding_check with dtschema 2026.6, a W=1
+x86_64 object build and strict checkpatch checks. On AC200 hardware, a
+writable common-register marker survived supplier unbind and rebind. The
+provider and PHY then completed 100 overlapping bind cycles; both MFD
+cells were removed and recreated during every cycle while both device
+links remained valid and the 100 Mbps full-duplex link recovered.
+Afterward, 100 pings in each direction completed without loss and 8 MiB
+transfers in both directions compared correctly.
+
+The available board does not expose the codec, TV encoder or INTB pin, so
+the functional audio, video and interrupt paths were not runtime-tested.
+Temporary child nodes nevertheless instantiated both MFD devices, and a
+temporary probe driver bound to each and read the parent common-control
+register as 0x1.
+
+Assisted-by: Codex:gpt-5.6-sol
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+---
+Changes v8 -> v9:
+- deassert common reset without first resetting the entire chip
+- leave common reset deasserted during removal and shutdown, preventing
+  supplier unbind from disrupting the PHY or discarding RTC/WoL state
+  (reported by Sashiko and queried by Lee Jones)
+- stop storing the regmap as unused driver data after dropping teardown
+  callbacks
+- describe the audio codec and TV encoder MFD children
+- add the AC200 interrupt definitions and shared regmap IRQ controller
+- register only enabled, DT-described codec and TV encoder function devices
+- retain Jernej Skrabec and Andre Przywara's authorship and sign-off chain
+  for the adapted child and MFD work
+- make the base provider depend on COMMON_CLK before child support is added
+- require an upstream interrupt when the parent is an interrupt controller
+- credit Jernej Skrabec in the module metadata
+- exercise child enumeration and parent-regmap access with temporary probes
+- rebase on the current MFD for-mfd-next branch
+- verify register-state preservation across supplier unbind and rebind
+- Link to v8: https://patch.msgid.link/20260902-submit-ac200-mfd-v8-0-2aa06720b8ac@gmail.com
+
+Changes v7 -> v8:
+- identify the PHY series as the current regmap consumer
+- describe future MFD children and the MDIO/I2C split
+- store the regmap directly as driver data  (suggested by Lee Jones)
+- reset the chip from the remove callback  (suggested by Lee Jones)
+- drop the revision log and inherited-driver attribution  (suggested by Lee Jones)
+- add Krzysztof's Reviewed-by tag to the binding
+- rebase on the current MFD for-mfd-next branch
+- Link to v7: https://patch.msgid.link/20260811-submit-ac200-mfd-v7-0-8b06f552a4d7@gmail.com
+
+Changes v6 -> v7:
+- drop the managed external-syscon helper and AC200 syscon registration
+- leave the regmap attached to the I2C provider for direct device lookup
+- reduce the MFD series from three patches to two
+- Link to v6: https://patch.msgid.link/20260811-submit-ac200-mfd-v6-0-c5b1292c8498@gmail.com
+
+Changes v5 -> v6:
+- split the MFD work from the independently mergeable networking series
+- put the merge routing and shared DT design at the start of the cover letter
+- rebase on the MFD for-mfd-next branch
+- Link to v5: https://patch.msgid.link/20260809-submit-acx00-of-dynamic-v1-v5-0-bfa1f8518b28@gmail.com
+
+To: Jernej Skrabec <jernej.skrabec@gmail.com>
+To: James Hilliard <james.hilliard1@gmail.com>
+To: Lee Jones <lee@kernel.org>
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+Cc: linux-sunxi@lists.linux.dev
+Cc: mfd@lists.linux.dev
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+
+---
+James Hilliard (2):
+      dt-bindings: mfd: x-powers: Add AC200
+      mfd: ac200: Add X-Powers AC200 support
+
+Jernej Skrabec (2):
+      dt-bindings: mfd: x-powers: Describe AC200 functions
+      mfd: ac200: Add codec and TV encoder cells
+
+ .../devicetree/bindings/mfd/x-powers,ac200.yaml    | 186 +++++++++++++++++
+ MAINTAINERS                                        |   9 +
+ drivers/mfd/Kconfig                                |  15 ++
+ drivers/mfd/Makefile                               |   1 +
+ drivers/mfd/ac200.c                                | 230 +++++++++++++++++++++
+ include/dt-bindings/mfd/x-powers,ac200.h           |  13 ++
+ 6 files changed, 454 insertions(+)
+---
+base-commit: b07adc1a304c7ca9ac25a01051561538757363c9
+change-id: 20260811-submit-ac200-mfd-8bad6d09e285
+
+Best regards,
+--  
+James Hilliard <james.hilliard1@gmail.com>
+
