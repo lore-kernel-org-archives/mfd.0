@@ -1,111 +1,65 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05EC21F03DE;
-	Thu,  3 Sep 2026 13:03:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.3
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8893D4AF694;
+	Thu,  3 Sep 2026 13:26:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788440644; cv=none; b=OEOs4GRIUvFjbtUuJYFXgMula9xGuQayfAfJwDfUySPtYE945BDwym/UHISc0/2DAupoVnFJiH0luF+RrU4wr5CZmteHN5xjk3X8Vi0pldDJvwYzNy//Lj4MUQ4mozjhmkzoydlA4Opu2hBMaAc64pX9MUlRKiKZ+6cdSalwBzQ=
+	t=1788442033; cv=none; b=Q5/THg5OqVAL1E8JQu5s6DINSc/Ze2ECM/h3i0DZ6SPaQM/dUEJFoyaCazirLc2xms3110AkIfkX42sBHKLsXT6v4OoEID8Do43gkh4cPD82ifoIE3QcOuENOhSSonhOLI7sp9gbo41UN18BIjlAfdti3kXFA0WLyLN8xqs8WIE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788440644; c=relaxed/simple;
-	bh=xL+CoTR59C4km0YBHA8/+2wEU5OAHfxf36Bb0007UXs=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
-	 MIME-Version:Message-ID; b=YSQKmuGyDFhpaytfKuFciY/Mv9m2YJBS5IPm+N+HgRJ060ARc6UeAURdN57N1v+keP8YeCSdIQaFO21qQ2hERbf7qtV9eu/Oomq4sBV+ZITQH+92vsBDtcm/aBCdjKHxsFIPeLkqUSyo40vBydtO5sHf45ZgPojjpq/F6YmNu1I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=VTbqw2/F; arc=none smtp.client-ip=220.197.31.3
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1788442033; c=relaxed/simple;
+	bh=mtUjoY/8GQw3j+4LddYJOpy7LT5LLyBQQqH7Kwfxv3g=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=fldiukYKLmkwSXT2mWWiMusM/6IfEgccGUofCfDBREzK4lawH7Nr9zYTLARK2YYHYvRAPpwte3dNlKFN4OicqX0S430gt414AS7tikXG5Yz6gSmB5RDkx+mNXUSBviPS50m58g+13XbEvHKx9qOIgaO6A/KJCkge4pbRESah3zM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SqFKr0ut; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="VTbqw2/F"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
-	Message-ID; bh=xL+CoTR59C4km0YBHA8/+2wEU5OAHfxf36Bb0007UXs=; b=V
-	Tbqw2/FmwS4BYiHW0rwmkxQUU0Vnv7sRkl9W17mQb+gRraw7iOPsVJH/rs7FQ/k7
-	lDtHJXYlEF52X63tlpJ4wpttQpf/FkF6NedBUeTYruurmpE7kWZ56aYIr/pGZE5z
-	KGl9m3KFo4lTw9AmXh7WBnFsSUJ4HWh5MA3OVGU89Q=
-Received: from zl020895$163.com ( [2408:84e2:4b0:1b4c:d51e:e49:24cd:960c] )
- by ajax-webmail-wmsvr-40-115 (Coremail) ; Thu, 3 Sep 2026 21:01:58 +0800
- (CST)
-Date: Thu, 3 Sep 2026 21:01:58 +0800 (CST)
-From: zl020895  <zl020895@163.com>
-To: "Andy Shevchenko" <andriy.shevchenko@linux.intel.com>
-Cc: longzhao <longzhao@ambarella.com>, "Arnd Bergmann" <arnd@arndb.de>,
-	"Krzysztof Kozlowski" <krzk@kernel.org>,
-	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
-	soc <soc@lists.linux.dev>,
-	linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
-	"Rob Herring" <robh@kernel.org>,
-	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
-	"Conor Dooley" <conor+dt@kernel.org>,
-	"Michael Turquette" <mturquette@baylibre.com>,
-	"Stephen Boyd" <sboyd@kernel.org>,
-	"Linus Walleij" <linusw@kernel.org>,
-	"Bartosz Golaszewski" <brgl@kernel.org>,
-	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
-	"Jiri Slaby" <jirislaby@kernel.org>,
-	"Catalin Marinas" <catalin.marinas@arm.com>,
-	"Will Deacon" <will@kernel.org>,
-	devicetree <devicetree@vger.kernel.org>,
-	linux-clk <linux-clk@vger.kernel.org>,
-	linux-gpio <linux-gpio@vger.kernel.org>,
-	linux-serial <linux-serial@vger.kernel.org>,
-	linux-kernel <linux-kernel@vger.kernel.org>,
-	"Brian Masney" <bmasney@redhat.com>, "Lee Jones" <lee@kernel.org>,
-	mfd <mfd@lists.linux.dev>
-Subject: Re:Re: Re: Re: [PATCH v5 10/12] serial: 8250: add Ambarella UART
- driver
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
- 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
-In-Reply-To: <aplttDenvZHvn0mF@ashevche-desk.local>
-References: <20260818-cv75-v5-v5-0-7bbb12f0360f@ambarella.com>
- <20260818-cv75-v5-v5-10-7bbb12f0360f@ambarella.com>
- <aoRpc2RK2_X3CdAi@ashevche-desk.local>
- <162c0385.2c076.1a018b82fa7.Coremail.zl020895@163.com>
- <aplcxoINt0YAjvxL@ashevche-desk.local>
- <709278f9.9699.1a067207b4c.Coremail.zl020895@163.com>
- <aplttDenvZHvn0mF@ashevche-desk.local>
-X-NTES-SC: AL_Qu2TCvifv00q7iCeYekcn0wRhug/UMa4u/sm3YNXc/0Esj/kyz4scntFDXrp/eCXEz6OlTaJfwFx48pKcKVZvW+TqzbAigqlbyZHIiayZw==
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=GBK
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SqFKr0ut"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6698C1F000E9;
+	Thu,  3 Sep 2026 13:26:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788442016;
+	bh=lw9ViF11wKPe2eKXPB/tavLAOnAsDBdRW/k9AIyj8Qk=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=SqFKr0utGQjANyHvbK5Djw6fBwLNrF8U3hBf8iQRDQoac5/+Ke7Ve9edLLBlUxQu6
+	 cm/6CUvQbmwHMrQk46/DcwH76YCFm9O2fhAqo3kvuMmyCzoqgLeIsjrqz/TMoDNTz3
+	 +JpCjaJ26u0gHIHUctHQ3eyoyIPzMYBPJNAQJOhGleOoiS7AHs/TE1Yp1vY9ceBvOr
+	 OCetID+mI7oz2mythUez3gYOCfvy0dWAeU/KO8/JK9hW/xsy7Knw/MoRar77qqDzKd
+	 Hm4m1yb/ghyk7X5heBmLkougL3MFB+68+1v9pkKTZJ+gusGTwfALJMacEq6qDqJWCx
+	 cdcuBWXtkIFmA==
+From: Lee Jones <lee@kernel.org>
+To: support.opensource@diasemi.com, lee@kernel.org, 
+ Hiroki Nakajima <3na7nanana@gmail.com>
+Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org
+In-Reply-To: <20260823174248.833535-1-3na7nanana@gmail.com>
+References: <20260823174248.833535-1-3na7nanana@gmail.com>
+Subject: Re: (subset) [PATCH] mfd: da9062: Use DEFINE_RES_IRQ_NAMED()
+Message-Id: <178844201513.2653879.2045887825159053688.b4-ty@b4>
+Date: Thu, 03 Sep 2026 14:26:55 +0100
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Message-ID: <3a51b3fb.9b8c.1a0675c9db8.Coremail.zl020895@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID:cygvCgD3_4DGb5lqPuE+AA--.16267W
-X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbC7gYOf2qZb8YJQwAA3J
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
 
-SSBzZWUuIFRoYW5rIHlvdSwgQW5keS4KCkJlc3QgcmVnYXJkcywKTG9uZyBaaGFvCgpBdCAyMDI2
-LTA5LTAzIDIwOjUzOjA4LCAiQW5keSBTaGV2Y2hlbmtvIiA8YW5kcml5LnNoZXZjaGVua29AbGlu
-dXguaW50ZWwuY29tPiB3cm90ZToKPk9uIFRodSwgU2VwIDAzLCAyMDI2IGF0IDA3OjU2OjE3UE0g
-KzA4MDAsIHpsMDIwODk1IHdyb3RlOgo+PiAKPj4gVGhhbmtzIGZvciB0aGUgY29uZmlybWF0aW9u
-LiAKPj4gSSB3aWxsIGtlZXAgODI1MF9hbWJhcmVsbGEgYW5kIHVwZGF0ZSB0aGUgY29tbWl0IG1l
-c3NhZ2UgYXMgeW91Cj4+IHN1Z2dlc3RlZC4KPgo+Tm8sIEkgbWVhbiB0byBnbyBiYWNrIHRvIHRo
-ZSB2ZXJzaW9uIHRoYXQgbW9kaWZpZXMgODI1MF9kdy4KPgo+PiBBdCAyMDI2LTA5LTAzIDE5OjQw
-OjU0LCAiQW5keSBTaGV2Y2hlbmtvIiA8YW5kcml5LnNoZXZjaGVua29AbGludXguaW50ZWwuY29t
-PiB3cm90ZToKPj4gPk9uIFdlZCwgQXVnIDE5LCAyMDI2IGF0IDAyOjMxOjU5UE0gKzA4MDAsIHps
-MDIwODk1IHdyb3RlOgo+PiA+PiAKPj4gPj4gVGhhbmtzIGZvciB0aGUgcmV2aWV3Lgo+PiA+Cj4+
-ID4+IFRoaXMgaXMgQW1iYXJlbGxhIDgyNTAtY29tcGF0aWJsZSBJUCwgbm90IFN5bm9wc3lzIERl
-c2lnbldhcmUuIFdlCj4+ID4+IGZpcnN0IHRyaWVkIDgyNTBfZHcgYWZ0ZXIgTGludXMgYXNrZWQg
-dXMgdG8gbW92ZSB0byB0aGUgODI1MCBsaWJyYXJ5Owo+PiA+PiB5b3UgdGhlbiB0b2xkIHVzIG5v
-dCB0byB0b3VjaCA4MjUwX2R3IGFuZCB0byB1c2UgODI1MF9hbWJhcmVsbGEKPj4gPj4gaW5zdGVh
-ZC4gVGhhdCBpcyB3aGF0IHRoaXMgcGF0Y2ggaXMuCj4+ID4+IEJhY2tncm91bmQ6Cj4+ID4+IGh0
-dHBzOi8vbG9yZS5rZXJuZWwub3JnL3IvQ0FEKytqTG02SHpFVTFUTS1jPVZ0anYzRkpFQmVjVlA3
-VHl4U2dxX1EwekYtWXdUNk5BQG1haWwuZ21haWwuY29tLwo+PiA+PiBodHRwczovL2xvcmUua2Vy
-bmVsLm9yZy9saW51eC1zZXJpYWwvYW44S3Z2SFdYMG5hSDNYd0Bhc2hldmNoZS1kZXNrLmxvY2Fs
-Lwo+PiA+PiBodHRwczovL2xvcmUua2VybmVsLm9yZy9saW51eC1zZXJpYWwvN0U3NzQzMDUtMzky
-MC00QkI3LUJBNDYtRTA3NzJENkJFRDg0QGFtYmFyZWxsYS5jb20vCj4+ID4+IEkgd2lsbCBhbHNv
-IHN3aXRjaCB0byB1YXJ0X3JlYWRfcG9ydF9wcm9wZXJ0aWVzKCkgYW5kIHRyaW0gdGhlCj4+ID4+
-IDgyNTBfZHctZGVyaXZlZCBib2lsZXJwbGF0ZS4KPj4gPgo+PiA+VGhhbmtzIGZvciB0aGUgcmVn
-aXN0ZXIgZGVzY3JpcHRpb25zLCBpdCB3YXMgaGVscGZ1bC4gQWZ0ZXIgZ29pbmcgdGhyb3VnaCB0
-aGVtCj4+ID5pdCBzZWVtcyB0aGUgdjMgYXMgeW91IG1hZGUgaXQgaXMgZ29vZCBlbm91Z2ggKHNv
-cnJ5IGZvciBnb2luZyBiYWNrIGFuZCBmb3J0aCkuCj4+ID5XaGF0IGl0IG5lZWRzIGlzIGJldHRl
-ciBjb21taXQgbWVzc2FnZSBleHBsYWluaW5nIHRoYXQgd2hpbGUgaXQncyBub3QgYSBTeW5vcHN5
-cwo+PiA+RFcgSVAsIGl0IHdhcyBtYWRlIHRvIGJlIHF1aXRlIGNvbXBhdGlibGUgd2l0aCB0aGF0
-IChvbiByZWdpc3RlciBsZXZlbCkgYW5kIGhlbmNlCj4+ID5ubyBuZXcgZHJpdmVyIGlzIHJlcXVp
-cmVkLCBqdXN0IGEgc21hbGwgcXVpcmsuCj4KPi0tIAo+V2l0aCBCZXN0IFJlZ2FyZHMsCj5BbmR5
-IFNoZXZjaGVua28KPgo=
+On Mon, 24 Aug 2026 02:42:48 +0900, Hiroki Nakajima wrote:
+> Use the dedicated DEFINE_RES_IRQ_NAMED() helper for the DA9062 IRQ
+> resources instead of open-coding it with DEFINE_RES_NAMED(). This makes
+> the intended resource type explicit and keeps the definitions consistent
+> with the DA9061 resources.
+> 
+> This is a mechanical cleanup with no functional change.
+> 
+> [...]
+
+Applied, thanks!
+
+[1/1] mfd: da9062: Use DEFINE_RES_IRQ_NAMED()
+      commit: 8d0b4b0bef6538ace326afde928eb91f5bce0f9b
+
+--
+Lee Jones [李琼斯]
+
