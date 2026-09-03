@@ -1,42 +1,39 @@
-Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
+Received: from ixit.cz (ixit.cz [84.42.129.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 039DE4AF696
-	for <mfd@lists.linux.dev>; Thu,  3 Sep 2026 13:44:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=210.118.77.12
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 761F34A5EBB
+	for <mfd@lists.linux.dev>; Thu,  3 Sep 2026 14:40:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788443110; cv=none; b=hAJpovD41fqDbISntttfSgoR/uhRhkyjmTF72ll+v1ADmiiRWE0b3hE41qacId5uCNRQjzCZsC+zZCTk3RdIx+lRS5mtmHKq2Dw7U4IUEkx/cStmx8HTWGSm3NX82i5VtG5VYWFxToA2rJ7NtwHKmhVf2pLFSd0ZcYZZjPZGxvQ=
+	t=1788446455; cv=none; b=Aq6vDy7LhOn06NINV/9X0B1Z1rNF6sLbXuTImERLvuRKmRR0VlIDUcTv40XWHsmT6y5no1Llkt3a2kDUZNuPZk9ximTEmX+RZypjDSQv1AZTwnM1dM4FzH5BEjgbjwhCEuvNZsLRCcSy2kZWczzvx7CqeC9tsYpnkvERs+hF5AQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788443110; c=relaxed/simple;
-	bh=m/zYIIjS2dlH+phLZRymtS+W6TRghpDL07a4BaVcfvg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:From:In-Reply-To:
-	 Content-Type:References; b=Z4JCezYcMCdJz4NjvfCaBBBSKjj0XmcnCenRMxMVajOcBreVF37ADOQYiuGKZuqh+c3fPFrHJvBQ0pmBqjEyojuWOTp36po52CWnCFeqrdO+wOl6tD5wZ+zDFlhMnyYxkNtd16COSU3psMmmM+dr9fVFhaANgsnvjyxTd+kZpRw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=U8EUbmYy; arc=none smtp.client-ip=210.118.77.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
+	s=arc-20240116; t=1788446455; c=relaxed/simple;
+	bh=4naB7UIPaDXCcNDksCUuirSZuL4IKfdjox4HXLjJDI0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=e8cQZnpNSSKqlb64Wc5rNrdD+xiZlXZMjpPM0UCaQxmnRpcfEAWMGYPFQB2hhci+d03976/cHgzg38eig0SMbJtYJYxBC4GzlOH/p4rWyxyfjkciGP8AuNcZeddFabU34OoPXVU5tO0ao+OL/Y2B0l0S3EyORGZBzdvyjuJ4ZmM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=HBTWuTmz; arc=none smtp.client-ip=84.42.129.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="U8EUbmYy"
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
-	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20260903134447euoutp0275bc74c23dab134a89925deaae7eed9d~R04MYc5ZA1805318053euoutp02L;
-	Thu,  3 Sep 2026 13:44:47 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20260903134447euoutp0275bc74c23dab134a89925deaae7eed9d~R04MYc5ZA1805318053euoutp02L
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1788443087;
-	bh=qMyNnEe2VO29svGA0dfmwKzLJS9xqVqR88SLj5rL67k=;
-	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
-	b=U8EUbmYyR7YXputAFXW91F6pkDdqiKeau6Up/U569s86JZGZrjQ2JLsNl05H6K5/r
-	 0hFYlwS+j8R9Od3vZKWGF0/0pyHsL9U0sl/AurlvAS43GNjIeUqLwAbBAiyOZXRYZY
-	 doo6ZexuZGwqH5fluJw0qhX9JE+CwIG8TWpKrGjQ=
-Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
-	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
-	20260903134446eucas1p1999879348f53db4f5dff6cea9a73aee8~R04MCdR2p0462604626eucas1p1n;
-	Thu,  3 Sep 2026 13:44:46 +0000 (GMT)
-Received: from [192.168.1.44] (unknown [106.210.136.40]) by
-	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
-	20260903134444eusmtip25a6f7671740df53786ab8867ebd33067~R04KVfPcM2229722297eusmtip2R;
-	Thu,  3 Sep 2026 13:44:44 +0000 (GMT)
-Message-ID: <9bd2e8bf-472a-42b8-a259-901062f32cdf@samsung.com>
-Date: Thu, 3 Sep 2026 15:44:44 +0200
+	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="HBTWuTmz"
+Received: from [10.0.0.152] (unknown [10.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id 2382253401F6;
+	Thu, 03 Sep 2026 16:40:45 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1788446445;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=ozigZcNd1R53uOOyPgHz9kIrV8jED5fHr5sryjLmFzc=;
+	b=HBTWuTmzT13Y7VOAjc6IG2hB4+5maIPoHG0xJd58BuLMRoQqejE3KaRbXiDEEQ7I6orgvw
+	rpSlBrm9GR9M4Agx3kZZ+xw4k3ebSxaH57vk+n8Jr2ezAh07Jdv0u5XqCgcI1pOBI8zIQ/
+	AYze+VFui2F6UKX8qSwrJk9JS9uRK+8=
+Message-ID: <ff2ee3c5-c0fc-4aa6-b64a-c77e4a2242e2@ixit.cz>
+Date: Thu, 3 Sep 2026 16:40:44 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -44,279 +41,117 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 13/15] phy: starfive: Add jh7110-inno-hdmi-phy driver
-To: Maud Spierings <maud_spierings@murena.io>
-Cc: Laurent.pinchart@ideasonboard.com, airlied@gmail.com, alex@ghiti.fr,
-	andrzej.hajda@intel.com, andy.yan@rock-chips.com, andyshrk@163.com,
-	aou@eecs.berkeley.edu, bmasney@redhat.com, conor+dt@kernel.org,
-	conor@kernel.org, db@domibel.de, devicetree@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, hal.feng@starfivetech.com, heiko@sntech.de,
-	hello@big-grey.co.uk, jernej.skrabec@gmail.com, jonas@kwiboo.se,
-	kernel@esmil.dk, krzk+dt@kernel.org, lee@kernel.org,
-	linux-arm-kernel@lists.infradead.org, linux-clk@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-phy@lists.infradead.org,
-	linux-riscv@lists.infradead.org, linux-rockchip@lists.infradead.org,
-	luca.ceresoli@bootlin.com, m.szyprowski@samsung.com,
-	maarten.lankhorst@linux.intel.com, maudspierings@gocontroll.com,
-	mfd@lists.linux.dev, mripard@kernel.org, mturquette@baylibre.com,
-	neil.armstrong@linaro.org, p.zabel@pengutronix.de, palmer@dabbelt.com,
-	pjw@kernel.org, rfoss@kernel.org, robh@kernel.org, sboyd@kernel.org,
-	simona@ffwll.ch, tzimmermann@suse.de, uwu@icenowy.me, vkoul@kernel.org
-Content-Language: en-US
-From: Michal Wilczynski <m.wilczynski@samsung.com>
-In-Reply-To: <e780ecb8-918f-4816-99c8-b69b10b25a18@murena.io>
+Subject: Re: [PATCH] mfd: wcd934x: set DMA mask on parent to silence "DMA mask
+ not set"
+To: Lee Jones <lee@kernel.org>
+Cc: Thomas Tai <thomas.tai@oracle.com>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, mfd@lists.linux.dev,
+ linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org,
+ stable@vger.kernel.org
+References: <20260823-wcd-dma-v1-1-95e44a315ccf@ixit.cz>
+ <20260903124939.GT2133376@google.com>
+Content-Language: en-US, cs-CZ
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <20260903124939.GT2133376@google.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-CMS-MailID: 20260903134446eucas1p1999879348f53db4f5dff6cea9a73aee8
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20260830141726eucas1p2c9fe77236f7114b376fabc752f368521
-X-EPHeader: CA
-X-CMS-RootMailID: 20260830141726eucas1p2c9fe77236f7114b376fabc752f368521
-References: <20260828-jh7110-clean-send-v2-13-331680c8b9d1@samsung.com>
-	<0ccb4168-ff88-459c-972d-3c091c155db2@murena.io>
-	<CGME20260830141726eucas1p2c9fe77236f7114b376fabc752f368521@eucas1p2.samsung.com>
-	<e780ecb8-918f-4816-99c8-b69b10b25a18@murena.io>
 
-
-
-On 8/30/26 16:17, Maud Spierings wrote:
-> I was still having some glitching happening on the display, but I've found the way to fix that, the question is what is actually happening here.
+On 03/09/2026 14:49, Lee Jones wrote:
+> On Sun, 23 Aug 2026, David Heidelberg via B4 Relay wrote:
 > 
-> With just the changes mentioned in my previous email the screen flickers and is very unpleasant. After doing 2 reg writes it behaves as expected:
->   0x29590000 <- 0x00000061
-> is 0x00000075 before, difference is v_REG_CLK_INV | v_REG_CLK_SOURCE_SYS in drivers/gpu/drm/bridge/inno-hdmi.c, these bits always get set but that seems to break this display so there must be some way to detect that these should not be set: v_VCLK_NOT_INV | v_REG_CLK_SOURCE_TMDS
+>> From: David Heidelberg <david@ixit.cz>
+>>
+>> The wcd934x MFD parent (a slim_device) never initializes its
+>> dma_mask/coherent_dma_mask. When the DT-aware children pass through
+>> of_dma_configure() this triggers the "DMA mask not set" warning for
+>> each child.
+>>
+>> Cc: stable@vger.kernel.org
+>> Fixes: f959dcd6ddfd ("dma-direct: Fix potential NULL pointer dereference")
+>> Assisted-by: tencent:hy3
+>> Signed-off-by: David Heidelberg <david@ixit.cz>
+>> ---
+>>   drivers/mfd/wcd934x.c | 6 ++++++
+>>   1 file changed, 6 insertions(+)
+>>
+>> diff --git a/drivers/mfd/wcd934x.c b/drivers/mfd/wcd934x.c
+>> index 3c3080e8c8cf7..70ee13791d52b 100644
+>> --- a/drivers/mfd/wcd934x.c
+>> +++ b/drivers/mfd/wcd934x.c
+>> @@ -1,12 +1,13 @@
+>>   // SPDX-License-Identifier: GPL-2.0
+>>   // Copyright (c) 2019, Linaro Limited
+>>   
+>>   #include <linux/clk.h>
+>> +#include <linux/dma-mapping.h>
+>>   #include <linux/gpio/consumer.h>
+>>   #include <linux/interrupt.h>
+>>   #include <linux/kernel.h>
+>>   #include <linux/mfd/core.h>
+>>   #include <linux/mfd/wcd934x/registers.h>
+>>   #include <linux/mfd/wcd934x/wcd934x.h>
+>>   #include <linux/module.h>
+>>   #include <linux/of.h>
+>> @@ -212,16 +213,21 @@ static int wcd934x_slim_status(struct slim_device *sdev,
+>>   static int wcd934x_slim_probe(struct slim_device *sdev)
+>>   {
+>>   	struct device *dev = &sdev->dev;
+>>   	struct device_node *np = dev->of_node;
+>>   	struct wcd934x_ddata *ddata;
+>>   	struct gpio_desc *reset_gpio;
+>>   	int ret;
+>>   
+>> +	if (!dev->dma_mask) {
+>> +		dev->dma_mask = &dev->coherent_dma_mask;
+>> +		dev->coherent_dma_mask = DMA_BIT_MASK(32);
+>> +	}
+>> +
+> 
+> Any reason not to use dma_coerce_mask_and_coherent()?
 
-I'd rather not hardcode this per board in DT if it can be avoided since
-the right value looks like it depends on what is attached rather than on
-the board wiring. If Andy can confirm from the datasheet what selects the
-register clock source, detecting it at runtime would be the better fix.
+Didn't knew about it. Sending v2.
 
-Either way I don't think this should hold up the series, since it is
-pre existing behaviour in the generic inno-hdmi driver rather than
-something this patchset introduces.
-
-> 
->   0x29590020 <- 0x00000005
-> This one I have no idea, it is 0x00000009 with this patch series but with the vendor kernel I get the value above. When I hook up my external display (regular 1440p) this becomes 0x0000000D on the vendor kernel.
-> 
-> But I can't find this register being written to anywhere there?
-> 
-> Andy, you are credited on the inno-hdmi driver, do you have a datasheet that gives some further info?
-> 
-> kind regards,
-> Maud
-> 
-> On 8/29/26 20:54, Maud Spierings wrote:
->> Hi Michal,
->>
->> Small request for an eventual v3
->>
->>> Add the HDMI PHY driver for the StarFive JH7110.
->>>
->>> This driver binds to the starfive,jh7110-inno-hdmi-phy node and
->>> gets its regmap from the parent. It has no dependencies on voutcrg, only
->>> on its refoclk (xin24m), which breaks the probe-time circular
->>> dependency.
->>>
->>> This driver provides two main functions:
->>>  - Clock Provider: It registers clk_ops to provide the variable pixel
->>>    clock (hdmi_pclk). The .set_rate operation configures the Pre-PLL
->>>    registers (0x1a0+) based on the requested rate.
->>>
->>>  - PHY Provider: It registers phy_ops for the controller. The .power_on
->>>    op configures and enables the Post-PLL and other analog blocks (BIAS,
->>>    LDO, Serializer, etc.).
->>>
->>> The JH7110 instantiates the same Innosilicon IP as the Rockchip RK3328,
->>> with the PHY register block shifted by 0x100 because it sits behind the
->>> HDMI controller in the shared register space. The pre-PLL programming
->>> therefore comes from the common Innosilicon helpers; this driver adds
->>> the JH7110 pixel clock table, the post-PLL and the analog configuration.
->>>
->>> Co-developed-by: Dominique Belhachemi <db@domibel.de>
->>> Signed-off-by: Dominique Belhachemi <db@domibel.de>
->>> Signed-off-by: Michal Wilczynski <m.wilczynski@samsung.com>
->>> ---
->>>  drivers/phy/starfive/Kconfig                |  20 +
->>>  drivers/phy/starfive/Makefile               |   1 +
->>>  drivers/phy/starfive/phy-jh7110-inno-hdmi.c | 567 +++++++++++++++++++ +++++++++
->>>  3 files changed, 588 insertions(+)
->>>
->>
->> [snip]
->>
->>> +
->>> +static const struct inno_hdmi_phy_pre_pll_config pre_pll_cfg_table[] = {
->>> +    { 25175000, 25175000, 1, 100, 2, 3, 3, 12, 3, 3, 4, 0, 0xF55555 },
->>> +    { 25200000, 25200000, 1, 100, 2, 3, 3, 12, 3, 3, 4, 0, 0 },
->>> +    { 27000000, 27000000, 1, 90, 3, 2, 2, 10, 3, 3, 4, 0, 0 },
->>> +    { 27027000, 27027000, 1, 90, 3, 2, 2, 10, 3, 3, 4, 0, 0x170A3D },
->>> +    { 28320000, 28320000, 1, 28, 2, 1, 1, 3, 0, 3, 4, 0, 0x51EB85 },
->>> +    { 30240000, 30240000, 1, 30, 2, 1, 1, 3, 0, 3, 4, 0, 0x3D70A3 },
->>> +    { 31500000, 31500000, 1, 31, 2, 1, 1, 3, 0, 3, 4, 0, 0x7FFFFF },
->>> +    { 33750000, 33750000, 1, 33, 2, 1, 1, 3, 0, 3, 4, 0, 0xCFFFFF },
->>> +    { 36000000, 36000000, 1, 36, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
->>> +    { 40000000, 40000000, 1, 80, 2, 2, 2, 12, 2, 2, 2, 0, 0 },
->>> +    { 46970000, 46970000, 1, 46, 2, 1, 1, 3, 0, 3, 4, 0, 0xF851EB },
->>> +    { 49500000, 49500000, 1, 49, 2, 1, 1, 3, 0, 3, 4, 0, 0x7FFFFF },
->>> +    { 49000000, 49000000, 1, 49, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
->>> +    { 50000000, 50000000, 1, 50, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
->>> +    { 54000000, 54000000, 1, 54, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
->>> +    { 54054000, 54054000, 1, 54, 2, 1, 1, 3, 0, 3, 4, 0, 0x0DD2F1 },
->>> +    { 57284000, 57284000, 1, 57, 2, 1, 1, 3, 0, 3, 4, 0, 0x48B439 },
->>> +    { 58230000, 58230000, 1, 58, 2, 1, 1, 3, 0, 3, 4, 0, 0x3AE147 },
->>> +    { 59341000, 59341000, 1, 59, 2, 1, 1, 3, 0, 3, 4, 0, 0x574BC6 },
->>> +    { 59400000, 59400000, 1, 99, 3, 1, 1, 1, 3, 3, 4, 0, 0 },
->>> +    { 65000000, 65000000, 1, 130, 2, 2, 2, 12, 0, 2, 2, 0, 0 },
->>> +    { 68250000, 68250000, 1, 68, 2, 1, 1, 3, 0, 3, 4, 0, 0x3FFFFF },
->>> +    { 71000000, 71000000, 1, 71, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
->>> +    { 74176000, 74176000, 1, 98, 1, 2, 2, 1, 2, 3, 4, 0, 0xE6AE6B },
->>> +    { 74250000, 74250000, 1, 99, 1, 2, 2, 1, 2, 3, 4, 0, 0 },
->>> +    { 75000000, 75000000, 1, 75, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
->>> +    { 78750000, 78750000, 1, 78, 2, 1, 1, 3, 0, 3, 4, 0, 0xCFFFFF },
->>> +    { 79500000, 79500000, 1, 79, 2, 1, 1, 3, 0, 3, 4, 0, 0x7FFFFF },
->>> +    { 83500000, 83500000, 2, 167, 2, 1, 1, 1, 0, 0, 6, 0, 0 },
->>> +    { 83500000, 104375000, 1, 104, 2, 1, 1, 1, 1, 0, 5, 0, 0x600000 },
->>> +    { 85500000, 85500000, 1, 85, 2, 1, 1, 3, 0, 3, 4, 0, 0x7FFFFF },
->>> +    { 85750000, 85750000, 1, 85, 2, 1, 1, 3, 0, 3, 4, 0, 0xCFFFFF },
->>> +    { 85800000, 85800000, 1, 85, 2, 1, 1, 3, 0, 3, 4, 0, 0xCCCCCC },
->>> +    { 88750000, 88750000, 1, 88, 2, 1, 1, 3, 0, 3, 4, 0, 0xCFFFFF },
->>> +    { 89910000, 89910000, 1, 89, 2, 1, 1, 3, 0, 3, 4, 0, 0xE8F5C1 },
->>> +    { 90000000, 90000000, 1, 90, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
->>> +    { 101000000, 101000000, 1, 101, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
->>> +    { 102250000, 102250000, 1, 102, 2, 1, 1, 3, 0, 3, 4, 0, 0x3FFFFF },
->>> +    { 106500000, 106500000, 1, 106, 2, 1, 1, 3, 0, 3, 4, 0, 0x7FFFFF },
->>> +    { 108000000, 108000000, 1, 90, 3, 0, 0, 5, 0, 2, 2, 0, 0 },
->>> +    { 119000000, 119000000, 1, 119, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
->>> +    { 131481000, 131481000, 1, 131, 2, 1, 1, 3, 0, 3, 4, 0, 0x7B22D1 },
->>> +    { 135000000, 135000000, 1, 135, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
->>> +    { 136750000, 136750000, 1, 136, 2, 1, 1, 3, 0, 3, 4, 0, 0xCFFFFF },
->>> +    { 147180000, 147180000, 1, 147, 2, 1, 1, 3, 0, 3, 4, 0, 0x2E147A },
->>> +    { 148352000, 148352000, 1, 98, 1, 1, 1, 1, 2, 2, 2, 0, 0xE6AE6B },
->>> +    { 148500000, 148500000, 1, 99, 1, 1, 1, 1, 2, 2, 2, 0, 0 },
->>> +    { 154000000, 154000000, 1, 154, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
->>> +    { 156000000, 156000000, 1, 156, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
->>> +    { 157000000, 157000000, 1, 157, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
->>> +    { 162000000, 162000000, 1, 162, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
->>> +    { 174250000, 174250000, 1, 145, 3, 0, 0, 5, 0, 2, 2, 0, 0x355555 },
->>> +    { 174500000, 174500000, 1, 174, 2, 1, 1, 3, 0, 3, 4, 0, 0x7FFFFF },
->>> +    { 174570000, 174570000, 1, 174, 2, 1, 1, 3, 0, 3, 4, 0, 0x91EB84 },
->>> +    { 175500000, 175500000, 1, 175, 2, 1, 1, 3, 0, 3, 4, 0, 0x7FFFFF },
->>> +    { 185590000, 185590000, 1, 185, 2, 1, 1, 3, 0, 3, 4, 0, 0x970A3C },
->>> +    { 187000000, 187000000, 1, 187, 2, 1, 1, 3, 0, 3, 4, 0, 0 },
->>
->> add:
->> { 235690000, 235690000, 1, 235, 2, 1, 1, 3, 0, 3, 4, 0, 0xB0A3D6},
-
-Sure that is no problem, thank you for debugging the issue.
-
->>
->> This matches one of the framework 13 displays (fml13v01 board)
->>
->> source: [1]
->>
->> edid:
->>
->> edid-decode (hex):
->>
->> 00 ff ff ff ff ff ff 00 09 e5 5f 09 00 00 00 00
->> 17 1d 01 03 80 1c 13 78 02 de 50 a3 54 4c 99 26
->> 0f 50 54 00 00 00 01 01 01 01 01 01 01 01 01 01
->> 01 01 01 01 01 01 11 5c d0 18 81 e0 2d 50 30 20
->> 36 00 1d be 10 00 00 1a a7 49 d0 18 81 e0 2d 50
->> 30 20 36 00 1d be 10 00 00 1a 00 00 00 fe 00 42
->> 4f 45 20 43 51 0a 20 20 20 20 20 20 00 00 00 fe
->> 00 4e 45 31 33 35 46 42 4d 2d 4e 34 31 0a 01 21
->>
->> 02 03 19 c1 44 83 10 02 01 23 09 07 07 83 01 00
->> 00 67 03 0c 00 10 00 00 44 11 5c d0 18 81 e0 2d
->> 50 30 20 36 00 1d be 10 00 00 1a 00 00 00 00 00
->> 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
->> 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
->> 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
->> 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
->> 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01
->>
->> ----------------
->>
->> Block 0, Base EDID:
->>    EDID Structure Version & Revision: 1.3
->>    Vendor & Product Identification:
->>      Manufacturer: BOE
->>      Model: 2399
->>      Made in: week 23 of 2019
->>    Basic Display Parameters & Features:
->>      Digital display
->>      Maximum image size: 28 cm x 19 cm
->>      Gamma: 2.20
->>      Monochrome or grayscale display
->>      First detailed timing is the preferred timing
->>    Color Characteristics:
->>      Red  : 0.6396, 0.3291
->>      Green: 0.2998, 0.5996
->>      Blue : 0.1494, 0.0595
->>      White: 0.3125, 0.3281
->>    Established Timings I & II: none
->>    Standard Timings: none
->>    Detailed Timing Descriptors:
->>      DTD 1:  2256x1504   59.998513 Hz   3:2     92.938 kHz    235.690000 MHz (285 mm x 190 mm)
->>                   Hfront   48 Hsync  32 Hback  200 Hpol P
->>                   Vfront    3 Vsync   6 Vback   36 Vpol N
->>      DTD 2:  2256x1504   47.998302 Hz   3:2     74.349 kHz    188.550000 MHz (285 mm x 190 mm)
->>                   Hfront   48 Hsync  32 Hback  200 Hpol P
->>                   Vfront    3 Vsync   6 Vback   36 Vpol N
->>      Alphanumeric Data String: 'BOE CQ'
->>      Alphanumeric Data String: 'NE135FBM-N41'
->>    Extension blocks: 1
->> Checksum: 0x21
->>
->> ----------------
->>
->> Block 1, CTA-861 Extension Block:
->>    Revision: 3
->>    Underscans IT Video Formats by default
->>    Basic audio support
->>    Native detailed modes: 1
->>    Video Data Block:
->>      VIC   3:   720x480    59.940060 Hz  16:9     31.469 kHz 27.000000 MHz (native)
->>      VIC  16:  1920x1080   60.000000 Hz  16:9     67.500 kHz 148.500000 MHz
->>      VIC   2:   720x480    59.940060 Hz   4:3     31.469 kHz 27.000000 MHz
->>      VIC   1:   640x480    59.940476 Hz   4:3     31.469 kHz 25.175000 MHz
->>    Audio Data Block:
->>      Linear PCM:
->>        Max channels: 2
->>        Supported sample rates (kHz): 48 44.1 32
->>        Supported sample sizes (bits): 24 20 16
->>    Speaker Allocation Data Block:
->>      FL/FR - Front Left/Right
->>    Vendor-Specific Data Block (HDMI), OUI 00-0C-03:
->>      Source physical address: 1.0.0.0
->>      Maximum TMDS clock: 340 MHz
->>    Detailed Timing Descriptors:
->>      DTD 3:  2256x1504   59.998513 Hz   3:2     92.938 kHz    235.690000 MHz (285 mm x 190 mm)
->>                   Hfront   48 Hsync  32 Hback  200 Hpol P
->>                   Vfront    3 Vsync   6 Vback   36 Vpol N
->> Checksum: 0x01  Unused space in Extension Block: 84 bytes
->>
->>
->>> +    { 241500000, 241500000, 1, 161, 1, 1, 1, 4, 0, 2, 2, 0, 0 },
->>> +    { 241700000, 241700000, 1, 241, 2, 1, 1, 3, 0, 3, 4, 0, 0xB33332 },
->>> +    { 262750000, 262750000, 1, 262, 2, 1, 1, 3, 0, 3, 4, 0, 0xCFFFFF },
->>> +    { 296500000, 296500000, 1, 296, 2, 1, 1, 3, 0, 3, 4, 0, 0x7FFFFF },
->>> +    { 296703000, 296703000, 1, 98, 0, 1, 1, 1, 0, 2, 2, 0, 0xE6AE6B },
->>> +    { 297000000, 297000000, 1, 99, 0, 1, 1, 1, 0, 2, 2, 0, 0 },
->>> +    { 594000000, 594000000, 1, 99, 0, 2, 0, 1, 0, 1, 1, 0, 0 },
->>> +    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
->>> +};
->>> +
->>
->> kind regards,
->> Maud
->>
->> [1]: https://protect2.fireeye.com/v1/url?k=9e0a6938-c19113c6-9e0be277-000babff250c-ea88914414736a98&q=1&e=54b09ed3-c7be-440b-ace0-db9bfc392036&u=https%3A%2F%2Fgithub.com%2FDC-DeepComputing%2Ffml13v01-linux%2F blob/97c64fe2832b6826914b6da7aa4febcdd4d3d444/drivers/gpu/drm/ verisilicon/inno_hdmi.c#L112
-> 
-> 
-
-Best regards,
--- 
-Michal Wilczynski <m.wilczynski@samsung.com>
+David
