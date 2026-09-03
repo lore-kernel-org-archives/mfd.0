@@ -1,85 +1,85 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD991421A07
-	for <mfd@lists.linux.dev>; Thu,  3 Sep 2026 07:53:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B320042589D;
+	Thu,  3 Sep 2026 08:24:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788421986; cv=none; b=qX2RAV3Y5Y4PlSKpE3+t7gxVJBYnwZ7S1R+lZ+RAAn5dnXeLguV6kutVuMzu1wZ7mEHCNeBUYg3beNcvKx9cZG75KLlECHpu+9+1tYBdRsF6cF7dPIzADqdNBpb+sDV5qoWT8c0MOgzS1JqoSl+Y343UWQkondKDAVwlggkXj7o=
+	t=1788423894; cv=none; b=XYu8CJRRDs1k3IDwxxJZF6+mqxvxZb2opcpQn9r7yOPH45vpsojyeDWIBMlG8oJtY3S3lKkKYYQBPUPY0brrQpuXEon5M5Zdulwe6DF+G1Af/7gyAnUADrbwgqY8hma8Re4O+8pzCO6D63t7JD+LPCx+yHx+jv+7WTw+j4to9x0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788421986; c=relaxed/simple;
-	bh=WFDqwfiLhzlLAxGgLTojwoFhRArb9ZzqLhJka+qIiuk=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=mZL/AKryOw5qlccmbqHIaUfN/Th0hu/B7rMw1kQQs9FukHvhmVrJpLg33I/RPv1qBC7QxyY5m8lnxcfKAEveOnigoKb5QRbRj3dQuhkJ8v/R7oEFFnr5bfK8OBqU+H4hW8W2iArXss8sGshdevaQYdjchgU36imAyiKdAqazO2E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IF0Jy4lg; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788423894; c=relaxed/simple;
+	bh=bAmuj0O7v/xqEPt/dezy6Thdr4Kyk/d8UQ+n7ukuJBU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ewFbQX752SsXMyRvzir8+rBvh5hh203BnUTvYY6v3yBo+eGr7J0FZ+8fnDexLmosQio+C4Q0s7/ycM1wKZ1S/UXms6FNk36040pcKmlna9uQxNq4qCXIB0KEyTgsj9myLUFh7ADH0tJikWSALn9l1NmdRWktD0ikW9OyIAONrZU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zla5GHHc; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IF0Jy4lg"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 937411F00A3F
-	for <mfd@lists.linux.dev>; Thu,  3 Sep 2026 07:53:04 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zla5GHHc"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 349611F000E9;
+	Thu,  3 Sep 2026 08:24:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788421984;
-	bh=WFDqwfiLhzlLAxGgLTojwoFhRArb9ZzqLhJka+qIiuk=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=IF0Jy4lggG3pPTXJSNQn+Rwh3TEOTpmyYfE+DktBqwRfZizfuvky4VwQFHfIeBC9g
-	 1Nvf13iOUS0CPr1zHbrJNiAOxeOk7imw4esLbQkd7NNdIgJdl08bL1c2MuCMyv9MOt
-	 b8QgYJYpmquHHzxgaPdO3fmLu7DnkxCUXCtwzimGit5homuLPZhJYrnheqV6fAWKwx
-	 33isIPhWeQksPDx4G+0QmVXUiiBzMDajY+Y6nETg4Xg1apQi3keNH5aO3+Umy+WZ89
-	 OXZTXQPMGegc+JM8/erWgWF50CS+s7ayA3nQcK3i978tPyKVMJdNXyPXYBlS6RWH4w
-	 r5xFkQxPMOmSg==
-Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-3a20dec69f9so16944491fa.3
-        for <mfd@lists.linux.dev>; Thu, 03 Sep 2026 00:53:04 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvByvNIm1hOpZEv7k/Cch1kmTe0poakNjAiXxjRCUOexRX9w/YomsAC6J7BxUQUxa3f0JBfE=@lists.linux.dev
-X-Gm-Message-State: AFuF++kPhatPA+Sa6GWSRDyTe0/nopVO4XpR2ILKkPKJbjPhoJXBer6l
-	Ld5Gcm3LgM0jNW/Nw5bzjVyR1LtY1EF4RhoPDn/N4JPyRWuF2oOnpLU92sBdvLFSUwDwj7VTPRQ
-	o8D/s6kK/fYhD/QQV3ozk4X/VM5OGHL8eu8J69hrCSQ==
-X-Received: by 2002:a05:651c:2117:b0:3a3:52a7:3a1c with SMTP id
- 38308e7fff4ca-3a352a73adfmr18741561fa.4.1788421983258; Thu, 03 Sep 2026
- 00:53:03 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 3 Sep 2026 00:53:01 -0700
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 3 Sep 2026 00:53:01 -0700
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <57832670-6066-424d-a75f-4eb1f1f0cf73@gmail.com>
+	s=k20260515; t=1788423893;
+	bh=fbIaSZueJ9L7aZ2SFykAsrRHq34CEJ8hDtg94f4lxLA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Zla5GHHcxSaHYLPcV7hDLgmsoz99LeWBz4LNzJGRDna/m4IQQN+EEDM1op7tVD2Lm
+	 OkYqsNGRl2ZFvclRMCzqO2geS3EHyWwFGN9eiVXLz7ibSjlrS3aG2y8AdsdVklpXql
+	 TTCs5EEVlAsYYTAW8jVLHvBJhfWPjsZlmwcw6noz/kePfzDRDtqWJLnQpu7WHT3HCw
+	 Z6S/3xlKd/iXYSekmNL+Mw3yDWCk4PYvN4YpDsoV4YwO15Enzpz5iRIl1yxaX6NG7i
+	 tFu1e6SBmaaR/dgf0DovIlUEEj4uwNpL3AD7HhyPHNg5GqLnxEXVSNkuw66CgjO+5H
+	 EgwDen6DuDT7A==
+Date: Thu, 3 Sep 2026 10:24:49 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Luca Leonardo Scorcia <l.scorcia@gmail.com>
+Cc: linux-mediatek@lists.infradead.org, 
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Sen Chu <sen.chu@mediatek.com>, Sean Wang <sean.wang@mediatek.com>, 
+	Macpaul Lin <macpaul.lin@mediatek.com>, Lee Jones <lee@kernel.org>, 
+	Matthias Brugger <matthias.bgg@gmail.com>, 
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Liam Girdwood <lgirdwood@gmail.com>, 
+	Mark Brown <broonie@kernel.org>, Linus Walleij <linusw@kernel.org>, 
+	Julien Massot <julien.massot@collabora.com>, Val Packett <val@packett.cool>, 
+	Fabien Parent <parent.f@gmail.com>, Akari Tsuyukusa <akkun11.open@gmail.com>, 
+	Chen Zhong <chen.zhong@mediatek.com>, linux-input@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, mfd@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, linux-gpio@vger.kernel.org
+Subject: Re: [PATCH v10 1/9] dt-bindings: mfd: mt6397: Add MT6392 PMIC
+Message-ID: <20260903-normal-electronic-bonobo-3f71eb@quoll>
+References: <20260902193351.185771-1-l.scorcia@gmail.com>
+ <20260902193351.185771-2-l.scorcia@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <cover.1788346553.git.mazziesaccount@gmail.com>
- <5eb294e68b8d5d2c1d3a12b14a55dd2a9c075a09.1788346553.git.mazziesaccount@gmail.com>
- <CAMRc=MchpaOib+jgMniG7=BBYwB1yqLvJG1sMkjXfRaMFPodgA@mail.gmail.com> <57832670-6066-424d-a75f-4eb1f1f0cf73@gmail.com>
-Date: Thu, 3 Sep 2026 00:53:01 -0700
-X-Gmail-Original-Message-ID: <CAMRc=McED871rSf-_3Ahjjxg7QO56cZRuf_2=Xc7+Q4kwMGqnQ@mail.gmail.com>
-X-Gm-Features: AcwNN1W51dTT611YKOF8alZj0OVA9lXPGK61Ff-vrlum5Ji76Da9N2L8zMOMPh4
-Message-ID: <CAMRc=McED871rSf-_3Ahjjxg7QO56cZRuf_2=Xc7+Q4kwMGqnQ@mail.gmail.com>
-Subject: Re: [PATCH v3 09/10] gpio: bd73800: Support ROHM BD73800 PMIC GPIOs
-To: Matti Vaittinen <mazziesaccount@gmail.com>
-Cc: Matti Vaittinen <matti.vaittinen@linux.dev>, Lee Jones <lee@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
-	Jerome Brunet <jbrunet+clk@baylibre.com>, Linus Walleij <linusw@kernel.org>, 
-	Alexandre Belloni <alexandre.belloni@bootlin.com>, Michael Walle <mwalle@kernel.org>, mfd@lists.linux.dev, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, 
-	linux-rtc@vger.kernel.org, 
-	Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>, Bartosz Golaszewski <brgl@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260902193351.185771-2-l.scorcia@gmail.com>
 
-On Thu, 3 Sep 2026 07:00:24 +0200, Matti Vaittinen
-<mazziesaccount@gmail.com> said:
->>
->> Why not return PTR_ERR_OR_ZERO(devm_gpio_regmap_register())?
->
-> How strongly do you feel about it? It's not a big deal, but I always
-> find it a bit harder to read when functions / macros are called inside a
-> parameter list. Thus I'd rather keep it like this, just for the sake of
-> my own eyes :)
->
+On Wed, Sep 02, 2026 at 09:25:37PM +0200, Luca Leonardo Scorcia wrote:
+> Describe the MT6392 PMIC and its RTC and regulator devices. This device
+> is mostly based on MT6323 with some similarities to MT6397 and is usually
+> found on boards using the MT8516/MT8167 SoC.
+> 
+> Signed-off-by: Luca Leonardo Scorcia <l.scorcia@gmail.com>
+> ---
+> Previous version of this patch had the PMIC device declared with a
+> fallback compatible to "mediatek,mt6323". Sashiko pointed out in [1]
+> that it would have been wrong as the fallback device is not really
+> compatible with the new PMIC.
+> 
+> Since the change is significant I have not included the Reviewed-by tag
+> that Krzysztof Kozlowski kindly provided in v9 of this patch, I hope
+> this is the right thing. I really want to get the bindings right as they
+> are harder to fix in later commits if the need arises.
+> 
+> [1] https://sashiko.dev/#/message/20260820125850.3B34D1F000E9%40smtp.kernel.org
+> 
+>  .../bindings/mfd/mediatek,mt6397.yaml         | 72 +++++++++++++++++++
+>  1 file changed, 72 insertions(+)
 
-If you need to respin, please change it, if not, I've given my Ack and LGTM.
-Same above.
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
-Bart
+Best regards,
+Krzysztof
+
