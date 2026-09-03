@@ -1,114 +1,100 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D03241F5E6;
-	Thu,  3 Sep 2026 11:41:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.21
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98C3F4908BC;
+	Thu,  3 Sep 2026 11:57:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.5
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788435676; cv=none; b=shcq/fJH1ZBX3AkMlAZ7uXtmitRgaw1uuiQcSD33FtJ62zDHMZg+j2Cc/HaLGeCAN29I4YCqg0/uvYojmcgFNS71SF2ANQPYu1nwAP9MD8aDs3OfxplSjIXFBWJmR/WnBOdXbs7m4bxbxcDspWFpKenf8uI2u5KL+kyItOnslrE=
+	t=1788436675; cv=none; b=nIjmU9V0yXKcKJAKA/I3//BKsuEDTi+9nB5jGptE/5jJKtb+ZDdjJc2gvBH3WCss6NlABF8cWiiEfSDf+V9UPwZe9pjiZuDqwBXjfu73DAFYS5/ztLw/6SV9QDH06MNnrmCX4UeSNc70DiEfX2mtE7lcCAG2qRwN9KL+lCNPv2c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788435676; c=relaxed/simple;
-	bh=JSuJrngTC4olOG03288V/nmLwz2wwieT77d/P4LnfNw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=F1iCleGE1GLQjU8/lQ/4U6BYbSN7o+AtVK2UMRCRPC+bgaGThdCFv6gDwLanc51gGhrRAHzSyG1NkSEoNJSMVDLG5FweWtNfG7uidwlirfX+SIyQJT95LKqjybNFeEnmEip4hLjgYZ+mIiCeeTS8iCsnsB1BZu6v3ztOS76lhGw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=eG3y6EKC; arc=none smtp.client-ip=198.175.65.21
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1788436675; c=relaxed/simple;
+	bh=TwwfU6hpks+YXRJ6fCld9MUwDFdNClhk4U3xLbF7LOo=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
+	 MIME-Version:Message-ID; b=XIGYQZfTpNi9mLeSkUZV0MsjlNT2LhK0i+0DyqFn391d8NQAIB430AECGueOJp8ppRXmPlh0U+yzPNez0gPK61ZEKrd1EO0mwrCZOST0n1CPQZx43BAAIGjs4dU6UTT7Ne6Y7yCb6/mFZcZmWpbDX/7y2N/UZC3FVtMZHgF1r+o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=iX4QWfdz; arc=none smtp.client-ip=117.135.210.5
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="eG3y6EKC"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1788435666; x=1819971666;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=JSuJrngTC4olOG03288V/nmLwz2wwieT77d/P4LnfNw=;
-  b=eG3y6EKCLPXilQMr5ClufImzbMiwhJZ/GifwKxi4WoK4t4Y7gag0CA7Z
-   D5rxP4kh4UqL+qdoty0G2d9I8r5OEPpVdcbDj+C3c1aBb4ShmX5Mq6Y15
-   2Ls+A5xk9Nkc5PcsZNrVDO3RwnI0KniXqOWy3TqcqvnnbOTW7+9SzYGHo
-   RfBxJweFDhnJzFM9GFD7XyGC3tWPUvUSSdVw0vBtR50zMHihzsvQ5WQ09
-   Ozi3BLo3L1oSCuCK4Wvqkfr5aLt+qqrlWLFCBsleRWZk4mS9zXMtQQ5ya
-   HqLNEKBso2vQ4UmPsF/BfkYXiYOiddozOX2Zr80SNua5teRYbcz8YOr/9
-   g==;
-X-CSE-ConnectionGUID: L3O4a2LKS7yj/Id3y7g67A==
-X-CSE-MsgGUID: Z6J+0FauRNm/1mEFehy/Qw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11894"; a="88762629"
-X-IronPort-AV: E=Sophos;i="6.25,259,1779174000"; 
-   d="scan'208";a="88762629"
-Received: from fmviesa006.fm.intel.com ([10.60.135.146])
-  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Sep 2026 04:41:03 -0700
-X-CSE-ConnectionGUID: q2c9BakcQlmPlwKURwZPPg==
-X-CSE-MsgGUID: IwhtTsApS+ukKqW3wbyOpg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,260,1779174000"; 
-   d="scan'208";a="265355126"
-Received: from smoticic-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.244.28])
-  by fmviesa006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Sep 2026 04:40:57 -0700
-Date: Thu, 3 Sep 2026 14:40:54 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: zl020895 <zl020895@163.com>
-Cc: longzhao <longzhao@ambarella.com>, Arnd Bergmann <arnd@arndb.de>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="iX4QWfdz"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
+	Message-ID; bh=TwwfU6hpks+YXRJ6fCld9MUwDFdNClhk4U3xLbF7LOo=; b=i
+	X4QWfdzCIGfg7Ms8Zvw0g05r1YDsVi+LDnWP81i2YQkoCXDVA4W/ZLwgF1b4Ps8o
+	7/OtBS09LE6KcDhLST0EbJ7VDcGNmNx2GT1kif/+pBCmUAmTDkTFYwTCygqHW+yx
+	baBl36AzpoimswmhjAiCxqYpOEEwG1TWTj41jtNGjw=
+Date: Thu, 3 Sep 2026 19:56:17 +0800 (CST)
+From: zl020895  <zl020895@163.com>
+To: "Andy Shevchenko" <andriy.shevchenko@linux.intel.com>
+Cc: longzhao <longzhao@ambarella.com>, "Arnd Bergmann" <arnd@arndb.de>,
+	"Krzysztof Kozlowski" <krzk@kernel.org>,
+	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
 	soc <soc@lists.linux.dev>,
 	linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>, Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jiri Slaby <jirislaby@kernel.org>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>,
+	"Rob Herring" <robh@kernel.org>,
+	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
+	"Conor Dooley" <conor+dt@kernel.org>,
+	"Michael Turquette" <mturquette@baylibre.com>,
+	"Stephen Boyd" <sboyd@kernel.org>,
+	"Linus Walleij" <linusw@kernel.org>,
+	"Bartosz Golaszewski" <brgl@kernel.org>,
+	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+	"Jiri Slaby" <jirislaby@kernel.org>,
+	"Catalin Marinas" <catalin.marinas@arm.com>,
+	"Will Deacon" <will@kernel.org>,
 	devicetree <devicetree@vger.kernel.org>,
 	linux-clk <linux-clk@vger.kernel.org>,
 	linux-gpio <linux-gpio@vger.kernel.org>,
 	linux-serial <linux-serial@vger.kernel.org>,
 	linux-kernel <linux-kernel@vger.kernel.org>,
-	Brian Masney <bmasney@redhat.com>, Lee Jones <lee@kernel.org>,
+	"Brian Masney" <bmasney@redhat.com>, "Lee Jones" <lee@kernel.org>,
 	mfd <mfd@lists.linux.dev>
-Subject: Re: Re: [PATCH v5 10/12] serial: 8250: add Ambarella UART driver
-Message-ID: <aplcxoINt0YAjvxL@ashevche-desk.local>
+Subject: Re:Re: Re: [PATCH v5 10/12] serial: 8250: add Ambarella UART driver
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
+ 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
+In-Reply-To: <aplcxoINt0YAjvxL@ashevche-desk.local>
 References: <20260818-cv75-v5-v5-0-7bbb12f0360f@ambarella.com>
  <20260818-cv75-v5-v5-10-7bbb12f0360f@ambarella.com>
  <aoRpc2RK2_X3CdAi@ashevche-desk.local>
  <162c0385.2c076.1a018b82fa7.Coremail.zl020895@163.com>
+ <aplcxoINt0YAjvxL@ashevche-desk.local>
+X-NTES-SC: AL_Qu2TCviYuU0s4SCRZekcn0wRhug/UMa4u/sm3YNXc+sEmyb9wCAKQntjBXjy8euBCTqVrACdWgFHxf1WZpRSWZYdwgSvePe0abAvWg2oAg==
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=GBK
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <162c0385.2c076.1a018b82fa7.Coremail.zl020895@163.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Message-ID: <709278f9.9699.1a067207b4c.Coremail.zl020895@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID:ZCgvCgD3vyZhYJlquTA_AA--.3357W
+X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbCxgExomqZYGHZZAAA3b
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
 
-On Wed, Aug 19, 2026 at 02:31:59PM +0800, zl020895 wrote:
-> 
-> Thanks for the review.
-
-> This is Ambarella 8250-compatible IP, not Synopsys DesignWare. We
-> first tried 8250_dw after Linus asked us to move to the 8250 library;
-> you then told us not to touch 8250_dw and to use 8250_ambarella
-> instead. That is what this patch is.
-> Background:
-> https://lore.kernel.org/r/CAD++jLm6HzEU1TM-c=Vtjv3FJEBecVP7TyxSgq_Q0zF-YwT6NA@mail.gmail.com/
-> https://lore.kernel.org/linux-serial/an8KvvHWX0naH3Xw@ashevche-desk.local/
-> https://lore.kernel.org/linux-serial/7E774305-3920-4BB7-BA46-E0772D6BED84@ambarella.com/
-> I will also switch to uart_read_port_properties() and trim the
-> 8250_dw-derived boilerplate.
-
-Thanks for the register descriptions, it was helpful. After going through them
-it seems the v3 as you made it is good enough (sorry for going back and forth).
-What it needs is better commit message explaining that while it's not a Synopsys
-DW IP, it was made to be quite compatible with that (on register level) and hence
-no new driver is required, just a small quirk.
-
--- 
-With Best Regards,
-Andy Shevchenko
-
+SGkgQW5keSwKClRoYW5rcyBmb3IgdGhlIGNvbmZpcm1hdGlvbi4gCkkgd2lsbCBrZWVwIDgyNTBf
+YW1iYXJlbGxhIGFuZCB1cGRhdGUgdGhlIGNvbW1pdCBtZXNzYWdlIGFzIHlvdQpzdWdnZXN0ZWQu
+CgpCZXN0IHJlZ2FyZHMsCkxvbmcgWmhhbwoKQXQgMjAyNi0wOS0wMyAxOTo0MDo1NCwgIkFuZHkg
+U2hldmNoZW5rbyIgPGFuZHJpeS5zaGV2Y2hlbmtvQGxpbnV4LmludGVsLmNvbT4gd3JvdGU6Cj5P
+biBXZWQsIEF1ZyAxOSwgMjAyNiBhdCAwMjozMTo1OVBNICswODAwLCB6bDAyMDg5NSB3cm90ZToK
+Pj4gCj4+IFRoYW5rcyBmb3IgdGhlIHJldmlldy4KPgo+PiBUaGlzIGlzIEFtYmFyZWxsYSA4MjUw
+LWNvbXBhdGlibGUgSVAsIG5vdCBTeW5vcHN5cyBEZXNpZ25XYXJlLiBXZQo+PiBmaXJzdCB0cmll
+ZCA4MjUwX2R3IGFmdGVyIExpbnVzIGFza2VkIHVzIHRvIG1vdmUgdG8gdGhlIDgyNTAgbGlicmFy
+eTsKPj4geW91IHRoZW4gdG9sZCB1cyBub3QgdG8gdG91Y2ggODI1MF9kdyBhbmQgdG8gdXNlIDgy
+NTBfYW1iYXJlbGxhCj4+IGluc3RlYWQuIFRoYXQgaXMgd2hhdCB0aGlzIHBhdGNoIGlzLgo+PiBC
+YWNrZ3JvdW5kOgo+PiBodHRwczovL2xvcmUua2VybmVsLm9yZy9yL0NBRCsrakxtNkh6RVUxVE0t
+Yz1WdGp2M0ZKRUJlY1ZQN1R5eFNncV9RMHpGLVl3VDZOQUBtYWlsLmdtYWlsLmNvbS8KPj4gaHR0
+cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtc2VyaWFsL2FuOEt2dkhXWDBuYUgzWHdAYXNoZXZj
+aGUtZGVzay5sb2NhbC8KPj4gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtc2VyaWFsLzdF
+Nzc0MzA1LTM5MjAtNEJCNy1CQTQ2LUUwNzcyRDZCRUQ4NEBhbWJhcmVsbGEuY29tLwo+PiBJIHdp
+bGwgYWxzbyBzd2l0Y2ggdG8gdWFydF9yZWFkX3BvcnRfcHJvcGVydGllcygpIGFuZCB0cmltIHRo
+ZQo+PiA4MjUwX2R3LWRlcml2ZWQgYm9pbGVycGxhdGUuCj4KPlRoYW5rcyBmb3IgdGhlIHJlZ2lz
+dGVyIGRlc2NyaXB0aW9ucywgaXQgd2FzIGhlbHBmdWwuIEFmdGVyIGdvaW5nIHRocm91Z2ggdGhl
+bQo+aXQgc2VlbXMgdGhlIHYzIGFzIHlvdSBtYWRlIGl0IGlzIGdvb2QgZW5vdWdoIChzb3JyeSBm
+b3IgZ29pbmcgYmFjayBhbmQgZm9ydGgpLgo+V2hhdCBpdCBuZWVkcyBpcyBiZXR0ZXIgY29tbWl0
+IG1lc3NhZ2UgZXhwbGFpbmluZyB0aGF0IHdoaWxlIGl0J3Mgbm90IGEgU3lub3BzeXMKPkRXIElQ
+LCBpdCB3YXMgbWFkZSB0byBiZSBxdWl0ZSBjb21wYXRpYmxlIHdpdGggdGhhdCAob24gcmVnaXN0
+ZXIgbGV2ZWwpIGFuZCBoZW5jZQo+bm8gbmV3IGRyaXZlciBpcyByZXF1aXJlZCwganVzdCBhIHNt
+YWxsIHF1aXJrLgo+Cj4tLSAKPldpdGggQmVzdCBSZWdhcmRzLAo+QW5keSBTaGV2Y2hlbmtvCj4K
 
