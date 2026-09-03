@@ -1,173 +1,135 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96FFB4D90D8
-	for <mfd@lists.linux.dev>; Thu,  3 Sep 2026 15:33:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48A844B540A;
+	Thu,  3 Sep 2026 15:34:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788449595; cv=none; b=H2fFycE3h13L6LLoUtRb+GUYRTmVLDNQJ3hthhNnlTxg5FiPQNSMHBqp6ODw7Y9MbsZWNvl2Dz/Si3pqS7RdiQ0pEsTig9mtEALiY/jXVA6PytmD2jP2RdDu7Las7TC8z3NkgklWbRdHuXQESP0a5iYoTMpHt79mNBKwXQV3jFs=
+	t=1788449681; cv=none; b=L08N47eVnPEO3xNvC8F/Gvn1NtWgt0cMUZvPhespC/abRZ0EjfSAkxxYjm8I7tLmJ/LyQSUCwm2iXL4sXUKRlMIO6eH7n1JnVoHiiFe6wGPouYFeQSZh6aFxi0GSSSse9ex/gzeC/Ao3qhA2f24BPn8PX+OEeOD/3bBIPdT56A8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788449595; c=relaxed/simple;
-	bh=5h9tX+mp60F8Oc6SfAt20IAhJeSlaKq5lTqdU3q1bs0=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=oKz4qnfOFvqg7ckzhjmVmpdLQfC+APWBTZzlGgyxrvwW8IeuPGSW934ngZIYUpudOO6sLruBe7e5VQ8aRiFy+DxCiN2fmF2cKew6KmM7+e0pqNv3lsIcriLGfkznUrRO7WuMJ8GHKCUWkEnCybWB9AsWFX6LFUAvbJ8sXzZLE7s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=n+SHnmbc; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788449681; c=relaxed/simple;
+	bh=ghM4FSZQmHOtCtW/UfYTfnb8D4wLQaKNMfbZUlhpDs8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=pVxhIcI99dpgC3NrbmPB1sVSozNa0lN3JSYsY+lcuoolk9TwNEviqAAYtVhy6V2L/ygAVjweR9uAt5SoOseXBIw00x6CDGCfpsc8ZatdsbhdhLkkEJJM4B/SqPO58fSgwjyeEucrUXHGBqdOFSQSz+MOHzZUSGhvAWCDL+nZ2rA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GingWM12; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="n+SHnmbc"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 37D581F00A3A;
-	Thu,  3 Sep 2026 15:33:14 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GingWM12"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8F9CE1F000E9;
+	Thu,  3 Sep 2026 15:34:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788449594;
-	bh=iBfEp+SDZnU4QL8xICg4UXqCuuvUict3dQSxgfw+BpU=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=n+SHnmbczVNgGSJBCVDtwGdkSyUPE37qQozn8Cr0WjpG+ELk8us0K0VWeLjXFP7KZ
-	 WEthuv+np1/u7zWvxj+xkmcLVDWkf+d35/+tBF+s/0HgPcNJEc3Y+ZlVC76g116YrJ
-	 GA/sPrfU+qYUcfFyWRsu7kFF/cqC+sPcHnGKT0qGU4DVgUprekPOKJ3Stsv8KIDpq6
-	 QbcXkY6rqzFTt4m+CxVDhOKw6AYPhXeRCHm/+gyrU8JHs21q7fcbGo9vT5HhWX0uqW
-	 wnh6++pDfRm3Ft3aL181Swt/M33QM8UKBWmevJGIRrLxrjl+JqRD8K5/83BK/iHXbA
-	 fNUmhI70SPFWQ==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 1/2] mfd: wcd934x: Fix NULL pointer dereference on
- IRQ probe deferral
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "David Heidelberg" <david@ixit.cz>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260903-wcd-dma-v3-1-d3920c6563c4@ixit.cz>
-References: <20260903-wcd-dma-v3-0-d3920c6563c4@ixit.cz>
- <20260903-wcd-dma-v3-1-d3920c6563c4@ixit.cz>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 03 Sep 2026 15:33:13 +0000
-Message-Id: <20260903153314.37D581F00A3A@smtp.kernel.org>
+	s=k20260515; t=1788449679;
+	bh=LVwvRtVb/M7XR6K0WzybbRVJHJwpcA9imnhXDdDApaA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=GingWM12wQ/VrQAt4riQCZaejzKuTAkOQdvGF1UWFzneWfzOmVr023rDpfESFdqPE
+	 f3r+hN7lfQTzcBblrk5mqV7U6MALbUnpBL0pNPDdbH1uC0WsASPyl9L/GEKyMGmDQJ
+	 /uQB86o9adOWLc4lcjPkFrurM7r0kvaBnIhXR0FhbCLfAIfLwhfPwO8PXcTTcUbedl
+	 iBCsP70e4D7nzT20oETW86SVuqJnvrOObOlJ5JJfJJ640n7jpRX8Pv72VvG8RVgDni
+	 p90mRLzy1Sa1tNit5NYw7LDVoQvT5eUVgBBYUWhwOrYcfJvd2PhwEU94N+GTwQMOJv
+	 zvEiSZ21tA33w==
+Date: Thu, 3 Sep 2026 16:34:35 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Frank.Li@oss.nxp.com,
+	Support Opensource <support.opensource@diasemi.com>,
+	Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
+	"open list:MULTIFUNCTION DEVICES (MFD)" <mfd@lists.linux.dev>,
+	"open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>,
+	open list <linux-kernel@vger.kernel.org>, imx@lists.linux.dev
+Subject: Re: [PATCH 1/1] dt-bindings: mfd: da9052: allow dlg,da9053-aa
+ fallback to dlg,da9052
+Message-ID: <20260903-agenda-lividly-41c3b6eb56fc@spud>
+References: <20260831201522.51294-1-Frank.Li@oss.nxp.com>
+ <20260901-devourer-pushover-f26c72688255@spud>
+ <20260903-succinct-military-macaw-9e6e71@quoll>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="cGOoTxa1hXWtpxP5"
+Content-Disposition: inline
+In-Reply-To: <20260903-succinct-military-macaw-9e6e71@quoll>
 
-Thank you for your contribution! Sashiko AI review found 5 potential issue(=
-s) to consider:
+--cGOoTxa1hXWtpxP5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Pre-existing issues:
-- [High] Missing `regulator_bulk_free()` causes a memory and resource leak =
-of unmanaged regulators.
-- [High] The unmanaged regmap allocated via `regmap_init_slimbus()` is perm=
-anently leaked due to missing `regmap_exit()`.
-- [High] Using `devm_regmap_add_irq_chip()` inside the dynamic `wcd934x_sli=
-m_status_up()` callback leads to unbounded devres accumulation and IRQ regi=
-stration failures.
-- [High] Parent MFD driver initializes a private resource (`extclk`) that i=
-s consumed by the child codec driver, violating MFD architecture guidelines.
-- [High] `of_irq_get()` returning 0 (mapping failure) is incorrectly treate=
-d as a valid IRQ, potentially leading to invalid interrupt requests.
---
+On Thu, Sep 03, 2026 at 12:04:42PM +0200, Krzysztof Kozlowski wrote:
+> On Tue, Sep 01, 2026 at 06:00:31PM +0100, Conor Dooley wrote:
+> > On Mon, Aug 31, 2026 at 04:15:21PM -0400, Frank.Li@oss.nxp.com wrote:
+> > > From: Frank Li <Frank.Li@nxp.com>
+> > >=20
+> > > Allow dlg,da9053-aa fallback to dlg,da9052 to fix legacy platform (> =
+10
+> > > years) check_dtbs warnings:
+> > >   arch/arm/boot/dts/nxp/imx/imx53-voipac-bsb.dtb: dialog@48 (dlg,da90=
+53-aa): compatible: ['dlg,da9053-aa', 'dlg,da9052'] is too long
+> > >         from schema $id: http://devicetree.org/schemas/mfd/dlg,da9052=
+=2Eyaml
+> > >=20
+> > > Signed-off-by: Frank Li <Frank.Li@nxp.com>
+> > > ---
+> > > Previous try drop dlg,da9052 at
+> > > https://lore.kernel.org/imx/20260404-thoughtful-placid-boobook-da26da=
+@quoll/
+> > >=20
+> > > but Krzy have concern about compablity.
+> > >=20
+> > > https://lore.kernel.org/imx/20251107-matrimony-showdown-ba6ce6996b2f@=
+spud/
+> > >=20
+> > > Conor prefer update old dts.
+> >=20
+> > I don't think these devices are actually compatible, so this fallback
+> > would be wrong.
+> > The data comes from the match data, be that spi or i2c, and there's
+> > explicitly different behaviour for the da9052 and da9053aa.
+>=20
+> Maybe I looked at wrong driver, where is the difference? I made a very
+> quick glance and I found the only difference in da9052_i2c_fix():
+>=20
+>  59         switch (da9052->chip_id) {
+>  60         case DA9052:
+>  61         case DA9053_AA:
+>  62         case DA9053_BA:
+>  63         case DA9053_BB:
+>=20
+> No differences in "da9052-core.c" and SPI, while looking for these
+> device type enum values.
 
-commit 8457234c3c110957e7336000a7539e523ac72f34
-Author: David Heidelberg <david@ixit.cz>
-Subject: mfd: wcd934x: Fix NULL pointer dereference on IRQ probe deferral
+If you look further afield, since this is an mfd, in the regulator driver
+there's a lot of conditions there that depend on the chip_id. E.g. current
+limits and voltage steps differ. There's also one in the battery driver.
 
-This commit fixes a NULL pointer dereference during an IRQ probe deferral
-in wcd934x_slim_probe. By using dev instead of ddata->dev, which is still
-NULL at this point, it prevents a crash when dev_err_probe is called.
+> > I doubt the legacy platform ever worked properly, and this is what shou=
+ld
+> > have been explained in the PR that Krzysztof denied not just blindly
+> > citing a dtbs_check problem.
+>=20
+> Well, yeah, I wanted an accurate reason with actual analysis, not
+> necessarily making devices compatible if they are not.
+>=20
+> >=20
+> > Nacked-by: Conor Dooley <conor.dooley@microchip.com>
+>=20
+> Best regards,
+> Krzysztof
+>=20
 
-Link: https://lore.kernel.org/mfd/20260903145651.AC1311F00ACA@smtp.kernel.o=
-rg/
+--cGOoTxa1hXWtpxP5
+Content-Type: application/pgp-signature; name=signature.asc
 
-> diff --git a/drivers/mfd/wcd934x.c b/drivers/mfd/wcd934x.c
-> index 3c3080e8c8cf7..3a939e7ad3da5 100644
-> --- a/drivers/mfd/wcd934x.c
-> +++ b/drivers/mfd/wcd934x.c
-> @@ -223,7 +223,7 @@ static int wcd934x_slim_probe(struct slim_device *sde=
-v)
-> =20
->  	ddata->irq =3D of_irq_get(np, 0);
->  	if (ddata->irq < 0)
-> -		return dev_err_probe(ddata->dev, ddata->irq,
-> +		return dev_err_probe(dev, ddata->irq,
->  				     "Failed to get IRQ\n");
+-----BEGIN PGP SIGNATURE-----
 
-[Severity: High]
-This isn't a bug introduced by this patch, but does this incorrectly treat a
-return value of 0 as a valid IRQ?
+iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCapmTiwAKCRB4tDGHoIJi
+0hyCAPwMTGNQ5Lu7AdcSDddXHf86j3pCRARUzL2yMiCKEUScqwEA5pirDPWI6ion
+otwPCYxMPDfiTDWz4YC0Dxa3L+qpxQk=
+=Teac
+-----END PGP SIGNATURE-----
 
-of_irq_get() returns 0 when it explicitly fails to map an interrupt, but the
-check here only handles < 0. If the device tree lacks a valid interrupt
-mapping, it looks like this could pass 0 as a valid IRQ, potentially leading
-to delayed initialization failures or mistakenly requesting a critical syst=
-em
-interrupt.
-
-> =20
->  	ddata->extclk =3D devm_clk_get(dev, "extclk");
-
-[Severity: High]
-This is a pre-existing issue, but does this violate MFD subsystem
-architectural guidelines by initializing a private resource in the parent
-driver?
-
-The parent MFD driver appears to fetch the extclk clock handle that is
-meant entirely for the child codec driver. The MFD guidelines specify that
-parent drivers should not initialize private resources consumed by their
-child drivers to avoid rigid coupling and potential use-after-free bugs
-during refactoring.
-
-[Severity: High]
-This isn't a bug introduced by this patch, but does this driver leak the
-unmanaged regulators on unbind or probe error?
-
-In wcd934x_slim_probe(), the driver allocates unmanaged regulators:
-
-	ret =3D regulator_bulk_get(dev, WCD934X_MAX_SUPPLY, ddata->supplies);
-	if (ret)
-		return dev_err_probe(dev, ret, "Failed to get supplies\n");
-
-However, during device teardown in wcd934x_slim_remove(), the regulators are
-disabled but never freed:
-
-	regulator_bulk_disable(WCD934X_MAX_SUPPLY, ddata->supplies);
-	mfd_remove_devices(&sdev->dev);
-
-Since regulator_bulk_get() is used rather than devm_regulator_bulk_get(),
-does the missing regulator_bulk_free() cause a direct memory and resource
-leak on every device unbind or probe error?
-
-[Severity: High]
-This is a pre-existing issue, but is the unmanaged regmap leaked when the
-SLIMbus transitions to SLIM_DEVICE_STATUS_DOWN or the driver is unbound?
-
-In wcd934x_slim_status_up(), an unmanaged regmap is manually allocated:
-
-	ddata->regmap =3D regmap_init_slimbus(sdev, &wcd934x_regmap_config);
-
-When the device goes down in wcd934x_slim_status():
-
-	case SLIM_DEVICE_STATUS_DOWN:
-		mfd_remove_devices(&sdev->dev);
-		break;
-
-The regmap_exit() call appears to be completely omitted. If the SLIMbus
-hardware state dynamically cycles UP and DOWN, would a new regmap be
-allocated each time wcd934x_slim_status_up() runs, permanently leaking the
-previous one?
-
-[Severity: High]
-This isn't a bug introduced by this patch, but does using a managed device
-resource inside the dynamic wcd934x_slim_status_up() callback lead to
-unbounded devres accumulation?
-
-In wcd934x_slim_status_up():
-
-	ret =3D devm_regmap_add_irq_chip(dev, ddata->regmap, ddata->irq,
-				       IRQF_TRIGGER_HIGH, 0,
-				       &wcd934x_regmap_irq_chip,
-				       &ddata->irq_data);
-
-Because devm_regmap_add_irq_chip() ties the IRQ chip lifecycle to the static
-device probe rather than the dynamic bus state, the IRQ doesn't get freed
-when the bus goes DOWN. On the next UP transition, would a duplicate devres
-entry be leaked, causing request_threaded_irq() to fail with -EBUSY since
-the old handler is still holding the IRQ line?
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260903-wcd-dma-v3=
--0-d3920c6563c4@ixit.cz?part=3D1
+--cGOoTxa1hXWtpxP5--
