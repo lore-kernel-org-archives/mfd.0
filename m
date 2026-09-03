@@ -1,387 +1,171 @@
-Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D38B45D5C4
-	for <mfd@lists.linux.dev>; Thu,  3 Sep 2026 08:54:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=210.118.77.11
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A63174582E8;
+	Thu,  3 Sep 2026 08:54:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788425672; cv=none; b=INJ7P5dBRG37VTpGg+xbw2PxjTRe5AYn7HR8R5rMgwIfkxtWNCELvg2T35CIX2PJVqIPgwjZ5WbZe6lM2Cf4ykmLUck3SaByoNJfvD/Ar12JQL+NRbV5lvhmNAqj33YrdCzIcD/VK499zCG6vq5Sn4Vb//pMStHaDsFe+PWROIk=
+	t=1788425687; cv=none; b=Uk9yzdrl0dW8Mqu/n7+qYjE9vQ3DHDvgHhsb4owMxyo/l8xaqJmu5tytJQDAak5kTSDzw1KZpAE4gaJv0wQQUKDtVGoJ2XguNMaTN5r3jZNSSuYdbRGoGEvzTW+BQ2QXiVKyFQ6VfHwJNMc5u3W5qDXefR+Ls9JCfCdTJd/06m8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788425672; c=relaxed/simple;
-	bh=awiFEh24zTOp/HyrT+jVeeqPiVNdtIPJtvQG/POrSmA=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:From:In-Reply-To:
-	 Content-Type:References; b=nIpOx/rnM0u3erG3XJXgEAvarNcYLHDuReYWoZjkX1xOR2OW92dJ9yzVdA92cPsidJ4SFGve+80wUK2spmuNeVYLcNv36qepV2Dz0LN5qcOk1AyFKYXcAVyewfmUbEiltlUd4zFcZEXshXYibM4R3ILES5XmSn22CHy0bXmnCnM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=MhKqhME4; arc=none smtp.client-ip=210.118.77.11
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
+	s=arc-20240116; t=1788425687; c=relaxed/simple;
+	bh=OVRy/6e49xlc6eddTN/FmuENFYbQY/8opQlBkHAtzVw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=nIJrP5cELZrEzyEP6kViz8zYrWqe33vwkTdo0fP2bDt2DOlBQMFa8cFD27UmIV8jikidz1kDlxBvWON+Y2JHwyIWx8oK5W3tyVN3RqiVw4Hc1rhddny1409olbCGST4cH/5dzHxsYeSqfQXtHW1Slwhnel13UL/Ux4NzibEfFpk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KTprtdcM; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="MhKqhME4"
-Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
-	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20260903085426euoutp0126e2eeae739fc11060973a0b7ba3555e~Rw6sV3hs02164721647euoutp017;
-	Thu,  3 Sep 2026 08:54:26 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20260903085426euoutp0126e2eeae739fc11060973a0b7ba3555e~Rw6sV3hs02164721647euoutp017
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1788425666;
-	bh=LOkYxz3Oezfh1yuw0xzCd8pYE55TvVzXagNAQsIRoy0=;
-	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
-	b=MhKqhME4b5F32bicau4K2jzSEq3wIsEIb5MwjlwFt3U8gckjylOcOhsyGgtydmFMn
-	 7hKX6KuKGngVtIGY6WXos3x5vtepLkZ+Z5fK7JQEblrXSVYB+mE5Rp2qQF0SCP9BMn
-	 rvX+W9Dv3cPgLWA2YwkMBcJCeOAZ3E1uT5NkqwEk=
-Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
-	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
-	20260903085426eucas1p1713eec26146a98505e28a101e05d802a~Rw6sH43dC2977729777eucas1p1q;
-	Thu,  3 Sep 2026 08:54:26 +0000 (GMT)
-Received: from [192.168.1.44] (unknown [106.210.136.40]) by
-	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
-	20260903085424eusmtip2c180ef4b2dc77c593da322a763d8ace6~Rw6qbbnE42884428844eusmtip28;
-	Thu,  3 Sep 2026 08:54:24 +0000 (GMT)
-Message-ID: <0a2524af-b6fa-4570-b959-b4bdabee5ad7@samsung.com>
-Date: Thu, 3 Sep 2026 10:54:24 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KTprtdcM"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B69BD1F000E9;
+	Thu,  3 Sep 2026 08:54:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788425682;
+	bh=4Y6l5YlEpGwlqbTGDyz1WTlFxzg/AACMsnvqaxrx2zI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=KTprtdcMXhRi26hZtSdXz/75tF+gMMrg2uRb1B5mvJ5CiNeoCtgFDm5C5/PODvL+n
+	 GXxlWeYlRoSyDO88p1v+isnav188lx5lsrGIwRSsqgbFzL9svsOSAqgSOOewcJFXeL
+	 cvGqNlddtSqqJVtEAcruojEdpVpxMR4w0ccm7CuLt5e3m3efLtPeUD3T+GF6wOSkI6
+	 2j3pN3znkYdVbKJ1iiFNTD/+K7FZhj2rVA6IKCm1Vv032Um5/M4gALCtV13k8FLSYP
+	 S0wmYm6RiZT43ToTPhNyszQf30wGXoyWAYxQHljePGAghZKhgB0HMByTbJxN09a/nK
+	 0yEk6Dp/urWcA==
+Date: Thu, 3 Sep 2026 09:54:36 +0100
+From: Lee Jones <lee@kernel.org>
+To: James Hilliard <james.hilliard1@gmail.com>
+Cc: Arnd Bergmann <arnd@arndb.de>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Andrew Lunn <andrew@lunn.ch>,
+	"Jagielski, Jedrzej" <jedrzej.jagielski@intel.com>,
+	Andre Przywara <andre.przywara@arm.com>,
+	Chen-Yu Tsai <wens@kernel.org>,
+	Jernej =?utf-8?Q?=C5=A0krabec?= <jernej.skrabec@gmail.com>,
+	linux-sunxi@lists.linux.dev, mfd@lists.linux.dev,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v7 2/2] mfd: ac200: Add X-Powers AC200 support
+Message-ID: <20260903085436.GG2133376@google.com>
+References: <20260811-submit-ac200-mfd-v7-0-8b06f552a4d7@gmail.com>
+ <20260811-submit-ac200-mfd-v7-2-8b06f552a4d7@gmail.com>
+ <20260902143122.GA2082450@google.com>
+ <CADvTj4oytrbZw9oKzRu=+tL1WZMyscfDvBMm2uK5hhNv8ZxTBw@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 12/15] phy: rockchip: inno-hdmi: Use the common
- Innosilicon PHY helpers
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Heiko Stuebner <heiko@sntech.de>, Vinod Koul <vkoul@kernel.org>, Neil
-	Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
-	<conor+dt@kernel.org>, Andrzej Hajda <andrzej.hajda@intel.com>, Robert Foss
-	<rfoss@kernel.org>, Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>, Luca Ceresoli
-	<luca.ceresoli@bootlin.com>, David Airlie <airlied@gmail.com>, Simona Vetter
-	<simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
-	Lee Jones <lee@kernel.org>, Andy Yan <andy.yan@rock-chips.com>, Philipp
-	Zabel <p.zabel@pengutronix.de>, Emil Renner Berthing <kernel@esmil.dk>, Hal
-	Feng <hal.feng@starfivetech.com>, Michael Turquette
-	<mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, Brian Masney
-	<bmasney@redhat.com>, Conor Dooley <conor@kernel.org>, Paul Walmsley
-	<pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
-	<aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, Dominique
-	Belhachemi <db@domibel.de>, linux-phy@lists.infradead.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, mfd@lists.linux.dev,
-	linux-clk@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-rockchip@lists.infradead.org, linux-riscv@lists.infradead.org, Icenowy
-	Zheng <uwu@icenowy.me>, Andy Yan <andyshrk@163.com>, Marek Szyprowski
-	<m.szyprowski@samsung.com>, Maud Spierings <maudspierings@gocontroll.com>,
-	Graham Markall <hello@big-grey.co.uk>
-Content-Language: en-US
-From: Michal Wilczynski <m.wilczynski@samsung.com>
-In-Reply-To: <cddc47a2-81de-4978-9009-bdefeda2d3b5@kwiboo.se>
-Content-Transfer-Encoding: 7bit
-X-CMS-MailID: 20260903085426eucas1p1713eec26146a98505e28a101e05d802a
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20260828134835eucas1p27736632121c17e11f554e295994a7d8d
-X-EPHeader: CA
-X-CMS-RootMailID: 20260828134835eucas1p27736632121c17e11f554e295994a7d8d
-References: <20260828-jh7110-clean-send-v2-0-331680c8b9d1@samsung.com>
-	<CGME20260828134835eucas1p27736632121c17e11f554e295994a7d8d@eucas1p2.samsung.com>
-	<20260828-jh7110-clean-send-v2-12-331680c8b9d1@samsung.com>
-	<cddc47a2-81de-4978-9009-bdefeda2d3b5@kwiboo.se>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CADvTj4oytrbZw9oKzRu=+tL1WZMyscfDvBMm2uK5hhNv8ZxTBw@mail.gmail.com>
 
+On Wed, 02 Sep 2026, James Hilliard wrote:
 
-
-On 9/1/26 20:14, Jonas Karlman wrote:
-> Hi Michal,
+> On Wed, Sep 2, 2026 at 8:31 AM Lee Jones <lee@kernel.org> wrote:
+> >
+> > On Tue, 11 Aug 2026, James Hilliard wrote:
+> >
+> > > The X-Powers AC200 is a mixed-signal companion IC with a paged register
+> > > map accessed over I2C.
+> > >
+> > > Enable the shared input clock and prevent its rate from changing. Match
+> > > the vendor driver's 40 ms wait before the first register access,
+> > > initialize the paged regmap, report the chip and package revision, and
+> > > apply common reset.
+> > >
+> > > The Ethernet PHY link endpoint is independently enumerated on its MDIO
+> > > bus rather than created as an MFD platform child. Keep the regmap attached
+> > > to the AC200 I2C device so a separately enumerated function can resolve
+> > > that device, establish its required lifetime relationship and retrieve
+> > > the regmap from the provider.
+> > >
+> > > Cache only the common page selector. Individual functions can reset
+> > > independently and invalidate their other registers without regmap's
+> > > knowledge, so leave all functional registers volatile.
+> > >
+> > > Reset the chip during managed teardown and system shutdown.
+> > >
+> > > Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+> > > ---
+> > >  drivers/mfd/Kconfig  |  11 ++++
+> > >  drivers/mfd/Makefile |   1 +
+> > >  drivers/mfd/ac200.c  | 163 +++++++++++++++++++++++++++++++++++++++++++++++++++
+> > >  3 files changed, 175 insertions(+)
+> > >
+> > > diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
+> > > index e4fd4572472f..cac3fff5aee9 100644
+> > > --- a/drivers/mfd/Kconfig
+> > > +++ b/drivers/mfd/Kconfig
+> > > @@ -205,6 +205,17 @@ config MFD_AC100
+> > >         This driver include only the core APIs. You have to select individual
+> > >         components like codecs or RTC under the corresponding menus.
+> > >
+> > > +config MFD_AC200
+> > > +     tristate "X-Powers AC200"
+> > > +     depends on I2C
+> > > +     depends on OF
+> > > +     select REGMAP_I2C
+> > > +     help
+> > > +       Support for the X-Powers AC200 mixed-signal companion IC. The AC200
+> > > +       contains audio, video, RTC and Fast Ethernet PHY functions and is
+> > > +       co-packaged with some Allwinner H6 and H616 SoCs. This driver provides
+> > > +       the shared register access used by the individual function drivers.
+> > > +
+> > >  config MFD_AXP20X
+> > >       tristate
+> > >       select MFD_CORE
+> > > diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
+> > > index 72d3944b0ad8..f8101d2a9ce9 100644
+> > > --- a/drivers/mfd/Makefile
+> > > +++ b/drivers/mfd/Makefile
+> > > @@ -150,6 +150,7 @@ obj-$(CONFIG_MFD_DA9052_SPI)      += da9052-spi.o
+> > >  obj-$(CONFIG_MFD_DA9052_I2C) += da9052-i2c.o
+> > >
+> > >  obj-$(CONFIG_MFD_AC100)              += ac100.o
+> > > +obj-$(CONFIG_MFD_AC200)              += ac200.o
+> > >  obj-$(CONFIG_MFD_AXP20X)     += axp20x.o
+> > >  obj-$(CONFIG_MFD_AXP20X_I2C) += axp20x-i2c.o
+> > >  obj-$(CONFIG_MFD_AXP20X_RSB) += axp20x-rsb.o
+> > > diff --git a/drivers/mfd/ac200.c b/drivers/mfd/ac200.c
+> > > new file mode 100644
+> > > index 000000000000..0964e637afef
+> > > --- /dev/null
+> > > +++ b/drivers/mfd/ac200.c
+> > > @@ -0,0 +1,163 @@
+> > > +// SPDX-License-Identifier: GPL-2.0-only
+> > > +/*
+> > > + * MFD core driver for the X-Powers AC200
+> > > + *
+> > > + * Copyright (C) 2019 Jernej Skrabec <jernej.skrabec@gmail.com>
+> > > + * Copyright (C) 2026 James Hilliard <james.hilliard1@gmail.com>
+> > > + *
+> > > + * Based on the AC100 driver:
+> > > + * Copyright (C) 2016 Chen-Yu Tsai
+> >
+> > Drop this.  Every driver tends to be based on something else.
 > 
-> On 8/28/2026 3:47 PM, Michal Wilczynski wrote:
->> The RK3328 pre-PLL programming, its table lookup and its recalc_rate and
->> determine_rate implementations are the generic Innosilicon ones, so drop
->> the local copies and use the shared helpers instead.
+> Dropped in v8.
 > 
-> RK3528 and RK3538/RK3539 also seems to use the generic Innosilicon ones,
-> so we should hopefully also be able to use the helpers for those SoCs.
+> >
+> > > + */
+> > > +
+> > > +#include <linux/bitfield.h>
+> > > +#include <linux/clk.h>
+> > > +#include <linux/delay.h>
+> > > +#include <linux/i2c.h>
+> > > +#include <linux/module.h>
+> > > +#include <linux/regmap.h>
+> >
+> > Why aren't you using the MFD API?
+> >
+> > If you don't need it, then why is this in drivers/mfd?
+> 
+> The EPHY remains enumerated on its primary MDIO bus, so it is not an MFD
+> child. For non-EPHY use cases, the AC200 audio, video and RTC functions
+> are intended to be added as MFD children.
+> 
+> There are no such child drivers in this series, so I have not added
+> unused MFD cells. Those can be introduced with their corresponding
+> bindings and drivers.
 
-Good to know, I've left them alone for now since I don't have the board
-to test it, but it should be fairly easy to convert them as well.
+The rule is that you must provide at least 2 MFD children before this
+constitute as an MFD.  Please provide them in the same series.
 
-> 
->>
->> The RK3228 pre-PLL sits at different register addresses, so it keeps its
->> own register level code and only shares the table lookup.
->>
->> The register writes, their order and the values written are unchanged.
->> No functional change intended.
->>
->> Signed-off-by: Michal Wilczynski <m.wilczynski@samsung.com>
->> ---
->>  drivers/phy/rockchip/Kconfig                  |   1 +
->>  drivers/phy/rockchip/phy-rockchip-inno-hdmi.c | 127 +++++---------------------
->>  2 files changed, 25 insertions(+), 103 deletions(-)
->>
->> diff --git a/drivers/phy/rockchip/Kconfig b/drivers/phy/rockchip/Kconfig
->> index 14698571b607590dc0e7a29f3b39eb9a5d4e3d25..9732c5be87717dc3ddbea1c60080952336a07af9 100644
->> --- a/drivers/phy/rockchip/Kconfig
->> +++ b/drivers/phy/rockchip/Kconfig
->> @@ -34,6 +34,7 @@ config PHY_ROCKCHIP_INNO_HDMI
->>  	depends on COMMON_CLK
->>  	depends on HAS_IOMEM
->>  	select GENERIC_PHY
->> +	select PHY_INNO_HDMI
->>  	help
->>  	  Enable this to support the Rockchip Innosilicon HDMI PHY.
->>  
->> diff --git a/drivers/phy/rockchip/phy-rockchip-inno-hdmi.c b/drivers/phy/rockchip/phy-rockchip-inno-hdmi.c
->> index 1483907413faa5ce1dc8614db05e6e929410404d..fae766607b0ea120b3adb36001387062f39a5c00 100644
->> --- a/drivers/phy/rockchip/phy-rockchip-inno-hdmi.c
->> +++ b/drivers/phy/rockchip/phy-rockchip-inno-hdmi.c
->> @@ -17,6 +17,7 @@
->>  #include <linux/of.h>
->>  #include <linux/platform_device.h>
->>  #include <linux/regmap.h>
->> +#include <linux/phy/inno-hdmi-phy.h>
->>  #include <linux/phy/phy.h>
->>  #include <linux/slab.h>
->>  
->> @@ -240,6 +241,8 @@ struct inno_hdmi_phy {
->>  	const struct inno_hdmi_phy_drv_data *plat_data;
->>  	int chip_version;
->>  
->> +	struct inno_hdmi_phy_pre_pll pre_pll;
->> +
->>  	/* clk provider */
->>  	struct clk_hw hw;
->>  	struct clk *phyclk;
->> @@ -247,21 +250,6 @@ struct inno_hdmi_phy {
->>  	unsigned long tmdsclock;
->>  };
->>  
->> -struct pre_pll_config {
->> -	unsigned long pixclock;
->> -	unsigned long tmdsclock;
->> -	u8 prediv;
->> -	u16 fbdiv;
->> -	u8 tmds_div_a;
->> -	u8 tmds_div_b;
->> -	u8 tmds_div_c;
->> -	u8 pclk_div_a;
->> -	u8 pclk_div_b;
->> -	u8 pclk_div_c;
->> -	u8 pclk_div_d;
->> -	u8 vco_div_5_en;
->> -	u32 fracdiv;
->> -};
->>  
->>  struct post_pll_config {
->>  	unsigned long tmdsclock;
->> @@ -290,7 +278,7 @@ struct inno_hdmi_phy_drv_data {
->>  	const struct phy_config		*phy_cfg_table;
->>  };
->>  
->> -static const struct pre_pll_config pre_pll_cfg_table[] = {
->> +static const struct inno_hdmi_phy_pre_pll_config pre_pll_cfg_table[] = {
->>  	{ 25175000,  25175000,  3,  125, 3, 1, 1,  1, 3, 3,  4, 0, 0xe00000},
->>  	{ 25175000,  31468750,  1,   41, 0, 3, 3,  1, 3, 3,  4, 0, 0xf5554f},
->>  	{ 27000000,  27000000,  1,   36, 0, 3, 3,  1, 2, 3,  4, 0,      0x0},
->> @@ -673,20 +661,12 @@ static const struct phy_ops inno_hdmi_phy_ops = {
->>  };
->>  
->>  static const
->> -struct pre_pll_config *inno_hdmi_phy_get_pre_pll_cfg(struct inno_hdmi_phy *inno,
->> -						     unsigned long rate)
->> +struct inno_hdmi_phy_pre_pll_config *inno_hdmi_phy_get_pre_pll_cfg(struct inno_hdmi_phy *inno,
->> +								   unsigned long rate)
->>  {
->> -	const struct pre_pll_config *cfg = pre_pll_cfg_table;
->>  	unsigned long tmdsclock = inno_hdmi_phy_get_tmdsclk(inno, rate);
->>  
->> -	for (; cfg->pixclock != 0; cfg++)
->> -		if (cfg->pixclock == rate && cfg->tmdsclock == tmdsclock)
->> -			break;
->> -
->> -	if (cfg->pixclock == 0)
->> -		return ERR_PTR(-EINVAL);
->> -
->> -	return cfg;
->> +	return inno_hdmi_phy_pre_pll_lookup(&inno->pre_pll, rate, tmdsclock);
-> 
-> Please fully remove the local inno_hdmi_phy_get_pre_pll_cfg() helper and
-> call inno_hdmi_phy_pre_pll_lookup() in its place.
-
-will do in v3
-
-> 
->>  }
->>  
->>  static int inno_hdmi_phy_rk3228_clk_is_prepared(struct clk_hw *hw)
->> @@ -752,7 +732,7 @@ unsigned long inno_hdmi_phy_rk3228_clk_recalc_rate(struct clk_hw *hw,
->>  static int inno_hdmi_phy_rk3228_clk_determine_rate(struct clk_hw *hw,
->>  						   struct clk_rate_request *req)
->>  {
->> -	const struct pre_pll_config *cfg = pre_pll_cfg_table;
->> +	const struct inno_hdmi_phy_pre_pll_config *cfg = pre_pll_cfg_table;
->>  
->>  	req->rate = (req->rate / 1000) * 1000;
->>  
->> @@ -773,7 +753,7 @@ static int inno_hdmi_phy_rk3228_clk_set_rate(struct clk_hw *hw,
->>  					     unsigned long parent_rate)
->>  {
->>  	struct inno_hdmi_phy *inno = to_inno_hdmi_phy(hw);
->> -	const struct pre_pll_config *cfg;
->> +	const struct inno_hdmi_phy_pre_pll_config *cfg;
->>  	unsigned long tmdsclock = inno_hdmi_phy_get_tmdsclk(inno, rate);
->>  	u32 v;
->>  	int ret;
->> @@ -870,39 +850,11 @@ unsigned long inno_hdmi_phy_rk3328_clk_recalc_rate(struct clk_hw *hw,
->>  						   unsigned long parent_rate)
->>  {
->>  	struct inno_hdmi_phy *inno = to_inno_hdmi_phy(hw);
->> -	unsigned long frac;
->> -	u8 nd, no_a, no_b, no_d;
->> -	u64 vco;
->> -	u16 nf;
->> -
->> -	nd = inno_read(inno, 0xa1) & RK3328_PRE_PLL_PRE_DIV_MASK;
->> -	nf = ((inno_read(inno, 0xa2) & RK3328_PRE_PLL_FB_DIV_11_8_MASK) << 8);
->> -	nf |= inno_read(inno, 0xa3);
->> -	vco = parent_rate * nf;
->> -
->> -	if (!(inno_read(inno, 0xa2) & RK3328_PRE_PLL_FRAC_DIV_DISABLE)) {
->> -		frac = inno_read(inno, 0xd3) |
->> -		       (inno_read(inno, 0xd2) << 8) |
->> -		       (inno_read(inno, 0xd1) << 16);
->> -		vco += DIV_ROUND_CLOSEST(parent_rate * frac, (1 << 24));
->> -	}
->>  
->> -	if (inno_read(inno, 0xa0) & RK3328_PCLK_VCO_DIV_5_MASK) {
->> -		do_div(vco, nd * 5);
->> -	} else {
->> -		no_a = inno_read(inno, 0xa5) & RK3328_PRE_PLL_PCLK_DIV_A_MASK;
->> -		no_b = inno_read(inno, 0xa5) & RK3328_PRE_PLL_PCLK_DIV_B_MASK;
->> -		no_b >>= RK3328_PRE_PLL_PCLK_DIV_B_SHIFT;
->> -		no_b += 2;
->> -		no_d = inno_read(inno, 0xa6) & RK3328_PRE_PLL_PCLK_DIV_D_MASK;
->> -
->> -		do_div(vco, (nd * (no_a == 1 ? no_b : no_a) * no_d * 2));
->> -	}
->> +	inno->pixclock = inno_hdmi_phy_pre_pll_recalc_rate(&inno->pre_pll,
->> +							   parent_rate);
->>  
->> -	inno->pixclock = DIV_ROUND_CLOSEST((unsigned long)vco, 1000) * 1000;
->> -
->> -	dev_dbg(inno->dev, "%s rate %lu vco %llu\n",
->> -		__func__, inno->pixclock, vco);
->> +	dev_dbg(inno->dev, "%s rate %lu\n", __func__, inno->pixclock);
-> 
-> VCO should be between 1.4-3.2 GHz, we now loose this debug information.
-> This is a change that probably should be noted in the commit message.
-
-I think I can restore this debug info in the helper for v3
-
-> 
->>  
->>  	return inno->pixclock;
->>  }
->> @@ -910,20 +862,9 @@ unsigned long inno_hdmi_phy_rk3328_clk_recalc_rate(struct clk_hw *hw,
->>  static int inno_hdmi_phy_rk3328_clk_determine_rate(struct clk_hw *hw,
->>  						   struct clk_rate_request *req)
->>  {
->> -	const struct pre_pll_config *cfg = pre_pll_cfg_table;
->> -
->> -	req->rate = (req->rate / 1000) * 1000;
->> -
->> -	for (; cfg->pixclock != 0; cfg++)
->> -		if (cfg->pixclock == req->rate)
->> -			break;
->> -
->> -	if (cfg->pixclock == 0)
->> -		return -EINVAL;
->> -
->> -	req->rate = cfg->pixclock;
->> +	struct inno_hdmi_phy *inno = to_inno_hdmi_phy(hw);
->>  
->> -	return 0;
->> +	return inno_hdmi_phy_pre_pll_determine_rate(&inno->pre_pll, req);
->>  }
->>  
->>  static int inno_hdmi_phy_rk3328_clk_set_rate(struct clk_hw *hw,
->> @@ -931,9 +872,8 @@ static int inno_hdmi_phy_rk3328_clk_set_rate(struct clk_hw *hw,
->>  					     unsigned long parent_rate)
->>  {
->>  	struct inno_hdmi_phy *inno = to_inno_hdmi_phy(hw);
->> -	const struct pre_pll_config *cfg;
->> +	const struct inno_hdmi_phy_pre_pll_config *cfg;
->>  	unsigned long tmdsclock = inno_hdmi_phy_get_tmdsclk(inno, rate);
->> -	u32 val;
->>  	int ret;
->>  
->>  	dev_dbg(inno->dev, "%s rate %lu tmdsclk %lu\n",
->> @@ -946,35 +886,11 @@ static int inno_hdmi_phy_rk3328_clk_set_rate(struct clk_hw *hw,
->>  	if (IS_ERR(cfg))
->>  		return PTR_ERR(cfg);
->>  
->> -	inno_update_bits(inno, 0xa0, RK3328_PRE_PLL_POWER_DOWN,
->> -			 RK3328_PRE_PLL_POWER_DOWN);
->> -
->> -	/* Configure pre-pll */
->> -	inno_update_bits(inno, 0xa0, RK3328_PCLK_VCO_DIV_5_MASK,
->> -			 RK3328_PCLK_VCO_DIV_5(cfg->vco_div_5_en));
->> -	inno_write(inno, 0xa1, RK3328_PRE_PLL_PRE_DIV(cfg->prediv));
->> -
->> -	val = RK3328_SPREAD_SPECTRUM_MOD_DISABLE;
->> -	if (!cfg->fracdiv)
->> -		val |= RK3328_PRE_PLL_FRAC_DIV_DISABLE;
->> -	inno_write(inno, 0xa2, RK3328_PRE_PLL_FB_DIV_11_8(cfg->fbdiv) | val);
->> -	inno_write(inno, 0xa3, RK3328_PRE_PLL_FB_DIV_7_0(cfg->fbdiv));
->> -	inno_write(inno, 0xa5, RK3328_PRE_PLL_PCLK_DIV_A(cfg->pclk_div_a) |
->> -		   RK3328_PRE_PLL_PCLK_DIV_B(cfg->pclk_div_b));
->> -	inno_write(inno, 0xa6, RK3328_PRE_PLL_PCLK_DIV_C(cfg->pclk_div_c) |
->> -		   RK3328_PRE_PLL_PCLK_DIV_D(cfg->pclk_div_d));
->> -	inno_write(inno, 0xa4, RK3328_PRE_PLL_TMDSCLK_DIV_C(cfg->tmds_div_c) |
->> -		   RK3328_PRE_PLL_TMDSCLK_DIV_A(cfg->tmds_div_a) |
->> -		   RK3328_PRE_PLL_TMDSCLK_DIV_B(cfg->tmds_div_b));
->> -	inno_write(inno, 0xd3, RK3328_PRE_PLL_FRAC_DIV_7_0(cfg->fracdiv));
->> -	inno_write(inno, 0xd2, RK3328_PRE_PLL_FRAC_DIV_15_8(cfg->fracdiv));
->> -	inno_write(inno, 0xd1, RK3328_PRE_PLL_FRAC_DIV_23_16(cfg->fracdiv));
->> +	inno_hdmi_phy_pre_pll_power_down(&inno->pre_pll, true);
->> +	inno_hdmi_phy_pre_pll_configure(&inno->pre_pll, cfg);
->> +	inno_hdmi_phy_pre_pll_power_down(&inno->pre_pll, false);
->>  
->> -	inno_update_bits(inno, 0xa0, RK3328_PRE_PLL_POWER_DOWN, 0);
-> 
-> This should likely also remove all now unused RK3328 pre_pll related
-> macros.
-
-will do for v3.
-
-Thank you for your review, as mentioned before I don't have rockchip
-hardware so a Tested-by tag for after v3 is sent would be very welcome.
-
-> 
-> Regards,
-> Jonas
-> 
->> -
->> -	/* Wait for Pre-PLL lock */
->> -	ret = inno_poll(inno, 0xa9, val, val & RK3328_PRE_PLL_LOCK_STATUS,
->> -			1000, 10000);
->> +	ret = inno_hdmi_phy_pre_pll_wait_locked(&inno->pre_pll, 10000);
->>  	if (ret) {
->>  		dev_err(inno->dev, "Pre-PLL locking failed\n");
->>  		return ret;
->> @@ -1373,6 +1289,11 @@ static int inno_hdmi_phy_probe(struct platform_device *pdev)
->>  	if (IS_ERR(inno->regmap))
->>  		return PTR_ERR(inno->regmap);
->>  
->> +	/* The PHY block starts the register space on these SoCs. */
->> +	inno->pre_pll.regmap = inno->regmap;
->> +	inno->pre_pll.offset = 0;
->> +	inno->pre_pll.table = pre_pll_cfg_table;
->> +
->>  	/* only the newer rk3328 hdmiphy has an interrupt */
->>  	inno->irq = platform_get_irq(pdev, 0);
->>  	if (inno->irq > 0) {
->>
-> 
-> 
-
-Best regards,
 -- 
-Michal Wilczynski <m.wilczynski@samsung.com>
+Lee Jones
