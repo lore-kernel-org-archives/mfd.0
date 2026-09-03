@@ -1,220 +1,141 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4388E4446F7;
-	Thu,  3 Sep 2026 11:12:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 263043EE1F8;
+	Thu,  3 Sep 2026 11:27:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788433931; cv=none; b=LHATXNSF1duoxCGwCAiRJCqponrQCQLkgELkqX3Qm7eir5VxmUyUTN2pUAbhss/PrWZeY37lu+WlbfY7C+UxyEWx46mqEtmA/8YyJrmNl5y2ScqWyq953UEB434CdrRl04zad7x0UZM7WIHXMF4EdfiTu4BROb9xmaIYN++OCvw=
+	t=1788434855; cv=none; b=lJnRdZvgzWwqDIkXbv1RVnBjGJvLumAGhYOOLApB0LBUzpv5hx6EQK2RVANMD3b58gjFkZ7RITKWHeU1DnX6sTdC1gO7/evKO8QT3qZ/PwwOyTF3OHCL/7iLKsizOxAKb6IAIEOj4COX2/bzUcTB4nRUmRsOPYXPvO5Wqdcb5HE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788433931; c=relaxed/simple;
-	bh=hPx0zpui+rME908tDxDIdWLHX0V/27qEa/Okg/OyPZc=;
+	s=arc-20240116; t=1788434855; c=relaxed/simple;
+	bh=T/kkSGpMbWQtgjjaObTskTAonbeVIiJOLsWGw0kXrc4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=LyaPoi279715x6VdL65yHIfaQaK7EsaF8Hx942g52pLL2dhIF5Qe7V9NVOf+sxePvVdsaprg9C2BlcwCEA4sqyPlUtfnsiVTk/ZmNEe0Yk/Fi3u1cFIKEYRXn6Qlw9yikJKdJsYsicf4pRTp9pysC+ESiqr4HVM8jlFex6/6jtM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jl2VNtQv; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=VOKSLtHIVZoVAEUPY1xAR4ECjPunW+ehRPlCoTHTXusFwaYiNMKx4i3kY7m7LEL/teBK5BmLhaCFopd+RK0c+wyOZTJlJBP5lxi6IHLme1dRJ0W6X3h89GLKrNLSLzYE7Uh3GDDxfGHEjL4JSd7YCqYvNLTmgKovcZrnZ5SAb/E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=c4jxYAOb; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jl2VNtQv"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D02D71F000E9;
-	Thu,  3 Sep 2026 11:12:08 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="c4jxYAOb"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA2841F000E9;
+	Thu,  3 Sep 2026 11:27:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788433929;
-	bh=NbAv35ql1Ywao5VW4EtJeB6MEEAd7c7fyiqBzm/EFBk=;
+	s=k20260515; t=1788434853;
+	bh=Hi1v2WtenzXBiQKe6jmV5A4pt0AJojwq3c+tuewSzaY=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=jl2VNtQv2n8SrTsRSR1svwjYxBYJ9tOv9F4xojpkNxc8INNDGiqo6b2Yr88rNX8tz
-	 nGgjgD+4MQH+L00yhiDX5Bkek04LakcoAE6MhNCcLLBXm5tqmviEf5vKEgG+WRiUhX
-	 cT4Bf2PJV9IBB+yICHRE7pXLgQzoP41I+wzYQPP57kD+9Vxj57/NmtOXYuO2sCpqFX
-	 MDmxx2diCvqpHEDij+cvFOnw4+VrLRFHImd4bmdesfyevyQu/7CjuzI0FaUYvdYk0+
-	 ueaMf28UgVqMN2YfHnVfTKV2pzObdZZs4Hm0y1RViafgmixAwdqbwHrtwkUKGC8J7i
-	 ndZ/Jp6jmUTZw==
-Date: Thu, 3 Sep 2026 12:12:06 +0100
+	b=c4jxYAObRQac4hzXYQhuCzAT+VTmPlgRZSRVbKfA27oTCeR3eqWP7wIN7FWUs0Z0I
+	 ZMcjwYvzkRRHhjqTaIZ3csewRmskE85YnAHqyohXe1s5H6qfcpFCR0R0Nzs172O9Rz
+	 VUEAB7QmJGoWv0sQA4i7wXP4njQH3LaYtTV95XthHAQxDx+/voRIrVaJhYNujIK9S+
+	 Euj1k32kkyMV0xjZLT/6d4a/8ySLpIWN8PGKOUq1qpmpBen0+rkYcJ13fahVRl3LKV
+	 /0bVL7E2A+fYncggVqZj8pNXXCKXojTSq3WTj0lOaMxjCQpBRGGhiIIQGiJtf5doBq
+	 UZl2JGm+V5ihg==
+Date: Thu, 3 Sep 2026 12:27:30 +0100
 From: Lee Jones <lee@kernel.org>
-To: a0282524688@gmail.com
-Cc: Ming Yu <tmyu0@nuvoton.com>, linux-kernel@vger.kernel.org,
-	mfd@lists.linux.dev
-Subject: Re: [PATCH v7 06/10] mfd: nct6694: Transfer command payloads via a
- dedicated DMA buffer
-Message-ID: <20260903111206.GO2133376@google.com>
+To: sashiko-reviews@lists.linux.dev
+Cc: a0282524688@gmail.com, mfd@lists.linux.dev
+Subject: Re: [PATCH v7 07/10] mfd: nct6694: Validate the interrupt IN endpoint
+Message-ID: <20260903112730.GP2133376@google.com>
 References: <20260821033505.4017901-1-a0282524688@gmail.com>
- <20260821033505.4017901-7-a0282524688@gmail.com>
- <20260903110953.GN2133376@google.com>
+ <20260821033505.4017901-8-a0282524688@gmail.com>
+ <20260821034854.619B41F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20260903110953.GN2133376@google.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260821034854.619B41F00A3A@smtp.kernel.org>
 
-On Thu, 03 Sep 2026, Lee Jones wrote:
+On Fri, 21 Aug 2026, sashiko-bot@kernel.org wrote:
 
-> On Fri, 21 Aug 2026, a0282524688@gmail.com wrote:
+> Thank you for your contribution! Sashiko AI review found 3 potential issue(s) to consider:
 > 
-> > From: Ming Yu <a0282524688@gmail.com>
-> > 
-> > The transport hands the caller's payload buffer straight to
-> > usb_bulk_msg(). Sub-device drivers embed those buffers in their private
-> > data structures, so they are neither cacheline aligned nor exclusively
-> > owned by the transfer. On non-coherent architectures, mapping such a
-> > buffer for DMA can corrupt the unrelated fields sharing its cachelines.
-> > 
-> > Transfer the payload through a buffer owned by the transport instead,
-> > and reject commands exceeding the maximum firmware packet size.
-> > 
-> > Fixes: 51dad33ede63 ("mfd: Add core driver for Nuvoton NCT6694")
-> > Signed-off-by: Ming Yu <a0282524688@gmail.com>
-> > ---
-> > Changes in v7:
-> > - New patch. Fixes the DMA-unsafe use of caller-owned payload buffers
-> >   reported on v6 patch 6/7.
-> > 
-> >  drivers/mfd/nct6694-usb.c   | 38 +++++++++++++++++++++++++++----------
-> >  include/linux/mfd/nct6694.h |  3 +++
-> >  2 files changed, 31 insertions(+), 10 deletions(-)
-> > 
+> Pre-existing issues:
+> - [High] Unchecked transfer lengths lead to stale data reads.
+> - [Medium] Mismatched endpoint address used for interrupt pipe creation.
+> - [Medium] Missing endpoint existence and type validation for required bulk endpoints.
+
+Since this is a new driver, these are all your issues too, right?
+
+I'm going to stop my review here until Sashiko is clean for this driver.
+
+> --
+> 
+> --- Patch [7]: [PATCH v7 07/10] mfd: nct6694: Validate the interrupt IN endpoint ---
+> commit 403c0781b839695d774ed394e3d21842e56bd309
+> Author: Ming Yu <a0282524688@gmail.com>
+> 
+> mfd: nct6694: Validate the interrupt IN endpoint
+> 
+> The probe reads endpoint[0] of the current altsetting without checking
+> that the interface actually describes any endpoint. A device reporting
+> zero endpoints makes the driver read past the endpoint array.
+> 
 > > diff --git a/drivers/mfd/nct6694-usb.c b/drivers/mfd/nct6694-usb.c
-> > index 2289ebfde7fa..793ce54c02aa 100644
-> > --- 'a/drivers/mfd/nct6694-usb.c'
-> > +++ 'b/drivers/mfd/nct6694-usb.c'
-> > @@ -38,6 +38,7 @@ struct nct6694_usb_data {
-> >  	struct urb *int_in_urb;
-> >  	struct usb_device *udev;
-> >  	union nct6694_usb_msg *usb_msg;
-> > +	void *xfer_buf;
-> >  	__le32 *int_buffer;
+> > index 793ce54c02aad..c8667984df5eb 100644
+> > --- a/drivers/mfd/nct6694-usb.c
+> > +++ b/drivers/mfd/nct6694-usb.c
+> > @@ -305,13 +304,9 @@ static int nct6694_usb_probe(struct usb_interface *iface,
+> >  	if (ret)
+> >  		goto err_urb;
+> >  
+> > -	interface = iface->cur_altsetting;
+> > -
+> > -	int_endpoint = &interface->endpoint[0].desc;
+> > -	if (!usb_endpoint_is_int_in(int_endpoint)) {
+> > -		ret = -ENODEV;
+> > +	ret = usb_find_int_in_endpoint(iface->cur_altsetting, &int_endpoint);
+> > +	if (ret)
+> >  		goto err_urb;
 > 
-> There are a bunch of buffers used in this file and I'm losing track of
-> which one is which.  Please consolidate on the nomenclature for them
-> all.
+> [Severity: Medium]
+> This is a pre-existing issue, but does this probe function also need to
+> validate the bulk endpoints?
 > 
-> Ins, outs, payloads, xfers, etc.  Make a decision and stick to it throughout.
-
-Same with 'len' - label them all please.
-
-> >  };
+> It appears that nct6694_usb_read_msg() uses usb_bulk_msg() with a hardcoded
+> NCT6694_BULK_IN_EP. If a malformed device lacks these bulk endpoints or
+> configures them with the wrong type, could it trigger a 'BOGUS urb xfer'
+> warning in the USB core?
+> 
+> > -	}
 > >  
-> > @@ -120,8 +121,12 @@ int nct6694_usb_read_msg(struct nct6694 *nct6694,
-> >  	struct nct6694_usb_data *udata = nct6694->priv;
-> >  	union nct6694_usb_msg *msg = udata->usb_msg;
-> >  	struct usb_device *udev = udata->udev;
-> > +	u16 len = le16_to_cpu(cmd_hd->len);
-> >  	int tx_len, rx_len, ret;
-> >  
-> > +	if (len > NCT6694_MAX_PACKET_SIZE)
-> > +		return -EINVAL;
-> > +
-> >  	guard(mutex)(&udata->access_lock);
-> >  
-> >  	memcpy(&msg->cmd_header, cmd_hd, sizeof(*cmd_hd));
-> > @@ -140,17 +145,19 @@ int nct6694_usb_read_msg(struct nct6694 *nct6694,
-> >  		return ret;
-> >  
-> >  	/* Receive data packet from USB device */
-> > -	ret = usb_bulk_msg(udev, usb_rcvbulkpipe(udev, NCT6694_BULK_IN_EP), buf,
-> > -			   le16_to_cpu(cmd_hd->len), &rx_len, NCT6694_URB_TIMEOUT);
-> > +	ret = usb_bulk_msg(udev, usb_rcvbulkpipe(udev, NCT6694_BULK_IN_EP), udata->xfer_buf,
-> > +			   len, &rx_len, NCT6694_URB_TIMEOUT);
-> >  	if (ret)
-> >  		return ret;
-> >  
-> > -	if (rx_len != le16_to_cpu(cmd_hd->len)) {
-> > +	if (rx_len != len) {
-> >  		dev_err(nct6694->dev, "Expected received length %d, but got %d\n",
-> > -			le16_to_cpu(cmd_hd->len), rx_len);
-> > +			len, rx_len);
-> >  		return -EIO;
-> >  	}
-> >  
-> > +	memcpy(buf, udata->xfer_buf, len);
-> > +
-> >  	return nct6694_usb_err_handling(nct6694, msg->response_header.sts);
-> >  }
-> >  EXPORT_SYMBOL_GPL(nct6694_usb_read_msg);
-> > @@ -173,12 +180,17 @@ int nct6694_usb_write_msg(struct nct6694 *nct6694,
-> >  	struct nct6694_usb_data *udata = nct6694->priv;
-> >  	union nct6694_usb_msg *msg = udata->usb_msg;
-> >  	struct usb_device *udev = udata->udev;
-> > +	u16 len = le16_to_cpu(cmd_hd->len);
-> >  	int tx_len, rx_len, ret;
-> >  
-> > +	if (len > NCT6694_MAX_PACKET_SIZE)
-> > +		return -EINVAL;
-> > +
-> >  	guard(mutex)(&udata->access_lock);
-> >  
-> >  	memcpy(&msg->cmd_header, cmd_hd, sizeof(*cmd_hd));
-> >  	msg->cmd_header.hctrl = NCT6694_HCTRL_SET;
-> > +	memcpy(udata->xfer_buf, buf, len);
-> >  
-> >  	/* Send command packet to USB device */
-> >  	ret = usb_bulk_msg(udev, usb_sndbulkpipe(udev, NCT6694_BULK_OUT_EP), &msg->cmd_header,
-> > @@ -187,8 +199,8 @@ int nct6694_usb_write_msg(struct nct6694 *nct6694,
-> >  		return ret;
-> >  
-> >  	/* Send data packet to USB device */
-> > -	ret = usb_bulk_msg(udev, usb_sndbulkpipe(udev, NCT6694_BULK_OUT_EP), buf,
-> > -			   le16_to_cpu(cmd_hd->len), &tx_len, NCT6694_URB_TIMEOUT);
-> > +	ret = usb_bulk_msg(udev, usb_sndbulkpipe(udev, NCT6694_BULK_OUT_EP), udata->xfer_buf,
-> > +			   len, &tx_len, NCT6694_URB_TIMEOUT);
-> >  	if (ret)
-> >  		return ret;
-> >  
-> > @@ -199,17 +211,19 @@ int nct6694_usb_write_msg(struct nct6694 *nct6694,
-> >  		return ret;
-> >  
-> >  	/* Receive data packet from USB device */
-> > -	ret = usb_bulk_msg(udev, usb_rcvbulkpipe(udev, NCT6694_BULK_IN_EP), buf,
-> > -			   le16_to_cpu(cmd_hd->len), &rx_len, NCT6694_URB_TIMEOUT);
-> > +	ret = usb_bulk_msg(udev, usb_rcvbulkpipe(udev, NCT6694_BULK_IN_EP), udata->xfer_buf,
-> > +			   len, &rx_len, NCT6694_URB_TIMEOUT);
-> >  	if (ret)
-> >  		return ret;
-> >  
-> > -	if (rx_len != le16_to_cpu(cmd_hd->len)) {
-> > +	if (rx_len != len) {
-> >  		dev_err(nct6694->dev, "Expected transmitted length %d, but got %d\n",
-> > -			le16_to_cpu(cmd_hd->len), rx_len);
-> > +			len, rx_len);
-> >  		return -EIO;
-> >  	}
-> >  
-> > +	memcpy(buf, udata->xfer_buf, len);
-> > +
-> >  	return nct6694_usb_err_handling(nct6694, msg->response_header.sts);
-> >  }
-> >  EXPORT_SYMBOL_GPL(nct6694_usb_write_msg);
-> > @@ -270,6 +284,10 @@ static int nct6694_usb_probe(struct usb_interface *iface,
-> >  	if (!udata->usb_msg)
-> >  		return -ENOMEM;
-> >  
-> > +	udata->xfer_buf = devm_kzalloc(dev, NCT6694_MAX_PACKET_SIZE, GFP_KERNEL);
-> > +	if (!udata->xfer_buf)
-> > +		return -ENOMEM;
-> > +
-> >  	udata->int_buffer = devm_kzalloc(dev, sizeof(*udata->int_buffer), GFP_KERNEL);
-> >  	if (!udata->int_buffer)
-> >  		return -ENOMEM;
-> > diff --git a/include/linux/mfd/nct6694.h b/include/linux/mfd/nct6694.h
-> > index 853b1530755d..cb311e58a437 100644
-> > --- a/include/linux/mfd/nct6694.h
-> > +++ b/include/linux/mfd/nct6694.h
-> > @@ -29,6 +29,9 @@ struct mfd_cell;
-> >  #define NCT6694_HCTRL_SET	0x40
-> >  #define NCT6694_HCTRL_GET	0x80
-> >  
-> > +/* Maximum payload length the firmware accepts in a single command */
-> > +#define NCT6694_MAX_PACKET_SIZE	0x3F0
-> > +
-> >  enum nct6694_irq_id {
-> >  	NCT6694_IRQ_GPIO0 = 0,
-> >  	NCT6694_IRQ_GPIO1,
-> > -- 
-> > 2.34.1
-> > 
+> >  	usb_fill_int_urb(udata->int_in_urb, udev, usb_rcvintpipe(udev, NCT6694_INT_IN_EP),
+> >  			 udata->int_buffer, sizeof(*udata->int_buffer), nct6694_usb_int_callback,
+> >  			 nct6694, int_endpoint->bInterval);
+> 
+> [Severity: Medium]
+> This is a pre-existing issue, but does this mismatch the found endpoint
+> address?
+> 
+> We dynamically find the interrupt endpoint above and use its bInterval here,
+> but we still hardcode NCT6694_INT_IN_EP for the pipe creation. If a malformed
+> device has its first interrupt IN endpoint at a different address, and 0x81 is
+> used for a different type, could this result in a type mismatch and a kernel
+> warning?
+> 
+> [Severity: High]
+> This isn't a bug introduced by this patch, but does the driver handle short or
+> zero-length packets correctly?
+> 
+> Looking at nct6694_usb_int_callback(), it seems to read the transfer buffer
+> without checking urb->actual_length:
+> 
+> drivers/mfd/nct6694-usb.c:nct6694_usb_int_callback() {
+>     ...
+> 	int_status = le32_to_cpu(*status_le);
+> 
+> 	while (int_status) {
+> 		int irq = __ffs(int_status);
+>     ...
+> }
+> 
+> Similarly, in nct6694_usb_read_msg(), it appears rx_len is not checked before
+> evaluating msg->response_header.sts. If a device returns short or zero-length
+> packets, could this cause the driver to read uninitialized memory and
+> potentially trigger spurious IRQs?
 > 
 > -- 
-> Lee Jones
+> Sashiko AI review · https://sashiko.dev/#/patchset/20260821033505.4017901-1-a0282524688@gmail.com?part=7
 
 -- 
 Lee Jones
