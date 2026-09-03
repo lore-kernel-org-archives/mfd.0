@@ -1,171 +1,109 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A63174582E8;
-	Thu,  3 Sep 2026 08:54:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B13543B6FA;
+	Thu,  3 Sep 2026 09:03:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788425687; cv=none; b=Uk9yzdrl0dW8Mqu/n7+qYjE9vQ3DHDvgHhsb4owMxyo/l8xaqJmu5tytJQDAak5kTSDzw1KZpAE4gaJv0wQQUKDtVGoJ2XguNMaTN5r3jZNSSuYdbRGoGEvzTW+BQ2QXiVKyFQ6VfHwJNMc5u3W5qDXefR+Ls9JCfCdTJd/06m8=
+	t=1788426214; cv=none; b=ZD4YtKHk7z2PO1PDTOK2KaxtZh+YYne8dhOjFUMPYM5iDqWKVShOguqdzNRdBkY+JSRByXjA7fk8srxF6cwbDsIZMyiVWWUsgTyb+qFA6kF1noYrKUT7z1/9aHDx9+a6We79XQiKgwmWs8eDUtOt1WKgdMZzyXfFG32c/9OcPfU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788425687; c=relaxed/simple;
-	bh=OVRy/6e49xlc6eddTN/FmuENFYbQY/8opQlBkHAtzVw=;
+	s=arc-20240116; t=1788426214; c=relaxed/simple;
+	bh=hRkjM0yzQ6WmrGWTntChxmZqt6ivRkc1XdsAK65SfVc=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=nIJrP5cELZrEzyEP6kViz8zYrWqe33vwkTdo0fP2bDt2DOlBQMFa8cFD27UmIV8jikidz1kDlxBvWON+Y2JHwyIWx8oK5W3tyVN3RqiVw4Hc1rhddny1409olbCGST4cH/5dzHxsYeSqfQXtHW1Slwhnel13UL/Ux4NzibEfFpk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KTprtdcM; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=tfl2bS8eiTVQGY1qhvhMh6wRU+fHwjU5R6pEifkTNh4J/GTlrTNfwRGMaQcXof4SXOK5/5oMr3o8aPPPIySO2BFzjzrkpyeZQcLLqCQXXVFgF1zdDkwf0+rd/TVli+Fl5ooXXWmVx24Gx+ofYAxDxKoZ2Ngak69Ndz/Mz3eT1i4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MsCiTxVV; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KTprtdcM"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B69BD1F000E9;
-	Thu,  3 Sep 2026 08:54:39 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MsCiTxVV"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E94191F000E9;
+	Thu,  3 Sep 2026 09:03:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788425682;
-	bh=4Y6l5YlEpGwlqbTGDyz1WTlFxzg/AACMsnvqaxrx2zI=;
+	s=k20260515; t=1788426212;
+	bh=sLnLys5bKsTRiofKBLQiGluhfjQKjyc41X0t9mJHY6E=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=KTprtdcMXhRi26hZtSdXz/75tF+gMMrg2uRb1B5mvJ5CiNeoCtgFDm5C5/PODvL+n
-	 GXxlWeYlRoSyDO88p1v+isnav188lx5lsrGIwRSsqgbFzL9svsOSAqgSOOewcJFXeL
-	 cvGqNlddtSqqJVtEAcruojEdpVpxMR4w0ccm7CuLt5e3m3efLtPeUD3T+GF6wOSkI6
-	 2j3pN3znkYdVbKJ1iiFNTD/+K7FZhj2rVA6IKCm1Vv032Um5/M4gALCtV13k8FLSYP
-	 S0wmYm6RiZT43ToTPhNyszQf30wGXoyWAYxQHljePGAghZKhgB0HMByTbJxN09a/nK
-	 0yEk6Dp/urWcA==
-Date: Thu, 3 Sep 2026 09:54:36 +0100
+	b=MsCiTxVVZ17bbPc2qoWOKXByaQzFVWm1T40v3UKmC+mZXT4QOwjiczDWASfZO5bNm
+	 rKLXaSMnI3+io2rcbTw0rXTNWz9hlyImlIpPisCax26MDYBySkXFTYOmB4TmpbwjbJ
+	 hDC1qIEy9CXvhTd52b/Ms9XsngAjmWqx7dZkJ2aM2MZnVzPAaWia/AWSnDrAw6c9HR
+	 BIqbfvtWJO2xAmzNmnFYXvh8Trvj3mV4dJFfAqX/o02LpglnRj+PJg9g2eX4hxkU7Z
+	 eCK0QOnT0N8qc8Tlf3L7eISZ11Yig7u/wykA5RAyB6pBdxwRUtAI9VpcDYgRF1a01b
+	 Mz/EyjHBblhMw==
+Date: Thu, 3 Sep 2026 10:03:28 +0100
 From: Lee Jones <lee@kernel.org>
-To: James Hilliard <james.hilliard1@gmail.com>
-Cc: Arnd Bergmann <arnd@arndb.de>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Andrew Lunn <andrew@lunn.ch>,
-	"Jagielski, Jedrzej" <jedrzej.jagielski@intel.com>,
-	Andre Przywara <andre.przywara@arm.com>,
-	Chen-Yu Tsai <wens@kernel.org>,
-	Jernej =?utf-8?Q?=C5=A0krabec?= <jernej.skrabec@gmail.com>,
-	linux-sunxi@lists.linux.dev, mfd@lists.linux.dev,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v7 2/2] mfd: ac200: Add X-Powers AC200 support
-Message-ID: <20260903085436.GG2133376@google.com>
-References: <20260811-submit-ac200-mfd-v7-0-8b06f552a4d7@gmail.com>
- <20260811-submit-ac200-mfd-v7-2-8b06f552a4d7@gmail.com>
- <20260902143122.GA2082450@google.com>
- <CADvTj4oytrbZw9oKzRu=+tL1WZMyscfDvBMm2uK5hhNv8ZxTBw@mail.gmail.com>
+To: Jerome Brunet <jbrunet@baylibre.com>
+Cc: sashiko-bot@kernel.org, Mark Brown <broonie@kernel.org>,
+	sashiko-reviews@lists.linux.dev, robh@kernel.org,
+	mfd@lists.linux.dev, conor+dt@kernel.org,
+	devicetree@vger.kernel.org
+Subject: Re: [PATCH RESEND v6 4/5] mfd: axp20x: Add support for AXP318W PMIC
+Message-ID: <20260903090328.GH2133376@google.com>
+References: <20260812-axp318-regulator-v6-0-d6b84b55c000@baylibre.com>
+ <20260812-axp318-regulator-v6-4-d6b84b55c000@baylibre.com>
+ <20260812214019.CDF921F000E9@smtp.kernel.org>
+ <1jldaafmpd.fsf@starbuckisacylon.baylibre.com>
+ <20260813095600.GA1072730@google.com>
+ <1j33wg6cpk.fsf@starbuckisacylon.baylibre.com>
+ <20260827134235.GN770273@google.com>
+ <1jld9j8pfg.fsf@starbuckisacylon.baylibre.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CADvTj4oytrbZw9oKzRu=+tL1WZMyscfDvBMm2uK5hhNv8ZxTBw@mail.gmail.com>
+In-Reply-To: <1jld9j8pfg.fsf@starbuckisacylon.baylibre.com>
 
-On Wed, 02 Sep 2026, James Hilliard wrote:
+On Wed, 02 Sep 2026, Jerome Brunet wrote:
 
-> On Wed, Sep 2, 2026 at 8:31â€¯AM Lee Jones <lee@kernel.org> wrote:
-> >
-> > On Tue, 11 Aug 2026, James Hilliard wrote:
-> >
-> > > The X-Powers AC200 is a mixed-signal companion IC with a paged register
-> > > map accessed over I2C.
-> > >
-> > > Enable the shared input clock and prevent its rate from changing. Match
-> > > the vendor driver's 40 ms wait before the first register access,
-> > > initialize the paged regmap, report the chip and package revision, and
-> > > apply common reset.
-> > >
-> > > The Ethernet PHY link endpoint is independently enumerated on its MDIO
-> > > bus rather than created as an MFD platform child. Keep the regmap attached
-> > > to the AC200 I2C device so a separately enumerated function can resolve
-> > > that device, establish its required lifetime relationship and retrieve
-> > > the regmap from the provider.
-> > >
-> > > Cache only the common page selector. Individual functions can reset
-> > > independently and invalidate their other registers without regmap's
-> > > knowledge, so leave all functional registers volatile.
-> > >
-> > > Reset the chip during managed teardown and system shutdown.
-> > >
-> > > Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
-> > > ---
-> > >  drivers/mfd/Kconfig  |  11 ++++
-> > >  drivers/mfd/Makefile |   1 +
-> > >  drivers/mfd/ac200.c  | 163 +++++++++++++++++++++++++++++++++++++++++++++++++++
-> > >  3 files changed, 175 insertions(+)
-> > >
-> > > diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
-> > > index e4fd4572472f..cac3fff5aee9 100644
-> > > --- a/drivers/mfd/Kconfig
-> > > +++ b/drivers/mfd/Kconfig
-> > > @@ -205,6 +205,17 @@ config MFD_AC100
-> > >         This driver include only the core APIs. You have to select individual
-> > >         components like codecs or RTC under the corresponding menus.
-> > >
-> > > +config MFD_AC200
-> > > +     tristate "X-Powers AC200"
-> > > +     depends on I2C
-> > > +     depends on OF
-> > > +     select REGMAP_I2C
-> > > +     help
-> > > +       Support for the X-Powers AC200 mixed-signal companion IC. The AC200
-> > > +       contains audio, video, RTC and Fast Ethernet PHY functions and is
-> > > +       co-packaged with some Allwinner H6 and H616 SoCs. This driver provides
-> > > +       the shared register access used by the individual function drivers.
-> > > +
-> > >  config MFD_AXP20X
-> > >       tristate
-> > >       select MFD_CORE
-> > > diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
-> > > index 72d3944b0ad8..f8101d2a9ce9 100644
-> > > --- a/drivers/mfd/Makefile
-> > > +++ b/drivers/mfd/Makefile
-> > > @@ -150,6 +150,7 @@ obj-$(CONFIG_MFD_DA9052_SPI)      += da9052-spi.o
-> > >  obj-$(CONFIG_MFD_DA9052_I2C) += da9052-i2c.o
-> > >
-> > >  obj-$(CONFIG_MFD_AC100)              += ac100.o
-> > > +obj-$(CONFIG_MFD_AC200)              += ac200.o
-> > >  obj-$(CONFIG_MFD_AXP20X)     += axp20x.o
-> > >  obj-$(CONFIG_MFD_AXP20X_I2C) += axp20x-i2c.o
-> > >  obj-$(CONFIG_MFD_AXP20X_RSB) += axp20x-rsb.o
-> > > diff --git a/drivers/mfd/ac200.c b/drivers/mfd/ac200.c
-> > > new file mode 100644
-> > > index 000000000000..0964e637afef
-> > > --- /dev/null
-> > > +++ b/drivers/mfd/ac200.c
-> > > @@ -0,0 +1,163 @@
-> > > +// SPDX-License-Identifier: GPL-2.0-only
-> > > +/*
-> > > + * MFD core driver for the X-Powers AC200
-> > > + *
-> > > + * Copyright (C) 2019 Jernej Skrabec <jernej.skrabec@gmail.com>
-> > > + * Copyright (C) 2026 James Hilliard <james.hilliard1@gmail.com>
-> > > + *
-> > > + * Based on the AC100 driver:
-> > > + * Copyright (C) 2016 Chen-Yu Tsai
-> >
-> > Drop this.  Every driver tends to be based on something else.
+> On jeu. 27 août 2026 at 14:42, Lee Jones <lee@kernel.org> wrote:
 > 
-> Dropped in v8.
-> 
+> > On Fri, 14 Aug 2026, Jerome Brunet wrote:
 > >
-> > > + */
-> > > +
-> > > +#include <linux/bitfield.h>
-> > > +#include <linux/clk.h>
-> > > +#include <linux/delay.h>
-> > > +#include <linux/i2c.h>
-> > > +#include <linux/module.h>
-> > > +#include <linux/regmap.h>
+> >> On dim. 13 janv. 2008 at 11:56, Lee Jones <lee@kernel.org> wrote:
+> >> 
+> >> > On Thu, 13 Aug 2026, Jerome Brunet wrote:
+> >> >
+> >> >> On sam. 12 janv. 2008 at 23:40, sashiko-bot@kernel.org wrote:
+> >> >> 
+> >> >> > Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
+> >> >> > - [High] The corresponding regulator driver lacks support for
+> >> >> > `AXP318_ID`, causing the `axp20x-regulator` child device probe to fail.
+> >> >> 
+> >> >> Funny sashiko did not pick up on this when v6 was first sent. This is an
+> >> >> ordering problem. The regulator part should be applied before the mfd
+> >> >> one.
+> >> >> 
+> >> >> I could reorder here but there is not much point since the 2 changes will
+> >> >> land in different subsystems but it does bring a valid question:
+> >> >> 
+> >> >> Lee, Mark, are you OK with picking the patches indended for your
+> >> >> subsystem or would you prefer that I split the series, regulator on one
+> >> >> side, mfd on the other (with a dep on the regulator one, of course) ?
+> >> >
+> >> > Does this break existing devices or simply delay support for this new one?
+> >> 
+> >> Existing device are fine and untouched.
+> >> 
+> >> I've just checked and if someone tried to run without PATCH 5 (regulators),
+> >> the main axp driver loads fine but the regulator part gives this
+> >> 
+> >> axp20x-regulator axp20x-regulator.0: Unsupported AXP variant: 8
 > >
-> > Why aren't you using the MFD API?
-> >
-> > If you don't need it, then why is this in drivers/mfd?
+> > Can you not enforce the deps with Kconfig?
 > 
-> The EPHY remains enumerated on its primary MDIO bus, so it is not an MFD
-> child. For non-EPHY use cases, the AC200 audio, video and RTC functions
-> are intended to be added as MFD children.
+> This is not a build problem so I do not think Kconfig will change
+> anything here. There is no specific config per chip.
 > 
-> There are no such child drivers in this series, so I have not added
-> unused MFD cells. Those can be introduced with their corresponding
-> bindings and drivers.
+> It is just a runtime ordering matter and not a problem. regulator and
+> mfd are split so at some point the support is incomplete.
+> 
+> * MFD first, it is fine it just cant instantiate the regulator until it
+>   lands. it is (mostly) useless without it, which is fine.
+> * Regulator first. regulator will never be instanciate until MFD support
+>   lands, just as useless.
 
-The rule is that you must provide at least 2 MFD children before this
-constitute as an MFD.  Please provide them in the same series.
+Okay, this is normal.  So there are no deps between them?
 
 -- 
 Lee Jones
