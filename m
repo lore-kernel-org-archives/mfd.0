@@ -1,100 +1,166 @@
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98C3F4908BC;
-	Thu,  3 Sep 2026 11:57:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.5
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B08684A49BB
+	for <mfd@lists.linux.dev>; Thu,  3 Sep 2026 12:41:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788436675; cv=none; b=nIjmU9V0yXKcKJAKA/I3//BKsuEDTi+9nB5jGptE/5jJKtb+ZDdjJc2gvBH3WCss6NlABF8cWiiEfSDf+V9UPwZe9pjiZuDqwBXjfu73DAFYS5/ztLw/6SV9QDH06MNnrmCX4UeSNc70DiEfX2mtE7lcCAG2qRwN9KL+lCNPv2c=
+	t=1788439274; cv=none; b=OIntMv/C36YYzoEV7vtOTcm/YNNHqvfZZUQNWoOWtMKARcS2MVC98J7e+QgleydbNZrBlffIpH6JWOPy0N2ng/RNaOPxo5bPDMj00NmYKHko7N+Hy0JCtpnobpZUeBKsp34aNH5P3govI8twr/xsO6j/rnWdEJqml8BznMG01Gc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788436675; c=relaxed/simple;
-	bh=TwwfU6hpks+YXRJ6fCld9MUwDFdNClhk4U3xLbF7LOo=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
-	 MIME-Version:Message-ID; b=XIGYQZfTpNi9mLeSkUZV0MsjlNT2LhK0i+0DyqFn391d8NQAIB430AECGueOJp8ppRXmPlh0U+yzPNez0gPK61ZEKrd1EO0mwrCZOST0n1CPQZx43BAAIGjs4dU6UTT7Ne6Y7yCb6/mFZcZmWpbDX/7y2N/UZC3FVtMZHgF1r+o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=iX4QWfdz; arc=none smtp.client-ip=117.135.210.5
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1788439274; c=relaxed/simple;
+	bh=sOT52DbKgvkkHbkje73zUdH0VXn9AYdlxPV7LsvQoaI=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=iQtpy8AjI5YJKRqlgwPqxqPb0KM2FTm3tBAYcE21AdM9lxKH2y1+X50PIP4Daedcwlpj8GhxYTrD6EsXz1h1aLOs1NEHjEslsRZkKx9P7mxrTQabewpEpv5EGrCwKCIC7o1ZSd85NoUlqVTqV6Q0651WdiqEd0asNiM+WAE2Ac0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=kijQavFP; arc=none smtp.client-ip=209.85.128.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="iX4QWfdz"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
-	Message-ID; bh=TwwfU6hpks+YXRJ6fCld9MUwDFdNClhk4U3xLbF7LOo=; b=i
-	X4QWfdzCIGfg7Ms8Zvw0g05r1YDsVi+LDnWP81i2YQkoCXDVA4W/ZLwgF1b4Ps8o
-	7/OtBS09LE6KcDhLST0EbJ7VDcGNmNx2GT1kif/+pBCmUAmTDkTFYwTCygqHW+yx
-	baBl36AzpoimswmhjAiCxqYpOEEwG1TWTj41jtNGjw=
-Date: Thu, 3 Sep 2026 19:56:17 +0800 (CST)
-From: zl020895  <zl020895@163.com>
-To: "Andy Shevchenko" <andriy.shevchenko@linux.intel.com>
-Cc: longzhao <longzhao@ambarella.com>, "Arnd Bergmann" <arnd@arndb.de>,
-	"Krzysztof Kozlowski" <krzk@kernel.org>,
-	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
-	soc <soc@lists.linux.dev>,
-	linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
-	"Rob Herring" <robh@kernel.org>,
-	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
-	"Conor Dooley" <conor+dt@kernel.org>,
-	"Michael Turquette" <mturquette@baylibre.com>,
-	"Stephen Boyd" <sboyd@kernel.org>,
-	"Linus Walleij" <linusw@kernel.org>,
-	"Bartosz Golaszewski" <brgl@kernel.org>,
-	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
-	"Jiri Slaby" <jirislaby@kernel.org>,
-	"Catalin Marinas" <catalin.marinas@arm.com>,
-	"Will Deacon" <will@kernel.org>,
-	devicetree <devicetree@vger.kernel.org>,
-	linux-clk <linux-clk@vger.kernel.org>,
-	linux-gpio <linux-gpio@vger.kernel.org>,
-	linux-serial <linux-serial@vger.kernel.org>,
-	linux-kernel <linux-kernel@vger.kernel.org>,
-	"Brian Masney" <bmasney@redhat.com>, "Lee Jones" <lee@kernel.org>,
-	mfd <mfd@lists.linux.dev>
-Subject: Re:Re: Re: [PATCH v5 10/12] serial: 8250: add Ambarella UART driver
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
- 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
-In-Reply-To: <aplcxoINt0YAjvxL@ashevche-desk.local>
-References: <20260818-cv75-v5-v5-0-7bbb12f0360f@ambarella.com>
- <20260818-cv75-v5-v5-10-7bbb12f0360f@ambarella.com>
- <aoRpc2RK2_X3CdAi@ashevche-desk.local>
- <162c0385.2c076.1a018b82fa7.Coremail.zl020895@163.com>
- <aplcxoINt0YAjvxL@ashevche-desk.local>
-X-NTES-SC: AL_Qu2TCviYuU0s4SCRZekcn0wRhug/UMa4u/sm3YNXc+sEmyb9wCAKQntjBXjy8euBCTqVrACdWgFHxf1WZpRSWZYdwgSvePe0abAvWg2oAg==
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=GBK
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="kijQavFP"
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-49b965570d7so21936715e9.0
+        for <mfd@lists.linux.dev>; Thu, 03 Sep 2026 05:41:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1788439271; x=1789044071; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=+iNE6mGIoSx/OllUwsSZWUgexqjjfHjOUITVK9fxSRA=;
+        b=kijQavFPCkRHy9IVY6ngr5StUgHyzqaNyIdGmTFX26AmTiSAc7LVTWTTZ1tlSRft9g
+         8PAbFEatyT+yGA/TDjtwVgK5DkHzeden85xSK3JFwDum+mvg2Tly6mzsSLdiPL8F/BUE
+         6GHX7DalmmWUVuvx1G8unXXzydJcEQA3/rAp5hPxHG2ErEt3Wga0VMXR+/zMnBveeKyX
+         hMCD3vv1ACs7OSy/bwpjJ7/fTIZ6Xb+gSrdB33m/C6Ya9p/WPH2FKZsPE6V3OhYdBuzZ
+         36AQ1Nf3RmpHkUpElENZmY5o8oBrKO4kmYjaKoeoP0SV6i95Ibszg681TqOqMdj+bVNz
+         ATIg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788439271; x=1789044071;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :references:in-reply-to:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=+iNE6mGIoSx/OllUwsSZWUgexqjjfHjOUITVK9fxSRA=;
+        b=fFzqkeLdsyvihMG0S39PRt+GHYIyqV5tGiIV04fkutYEK1aLQrNatkBSRXb+8kRWk5
+         fHNnMPk9PZ8VwA0fo+4VA5PSuGipgDxKrBHIPSzVGrim1rUOk1ZTIFG0vsJUH/+SVOyJ
+         s1R1XpbghuFsSPK2JCWmNii16XHwi3593lF1YIuiMKKeNCBeplVapbUT6tq3tKuPnsoJ
+         YJEA3PfRsteiJsY5mlJ/HX3rrul99W13dHlq6u0jnhrYvDoD15EdETa4x6o/oM/8ILUw
+         sInz4WK4fiWW5hI9fQWFqt0AyiKSRGM9ETyzzdVn5o2hrE7u9Wz4SXY1u9mkv3Klce2+
+         4o+g==
+X-Forwarded-Encrypted: i=1; AKwUvBzM+wUURzXNS8Z0bUxLwQFNidEC2J/se64JY4q30ZoljzAtRx18Sev7hhWfH6EpdJ+tEy8=@lists.linux.dev
+X-Gm-Message-State: AFuF++k2/v3iXGJuTWJ2YIJYSJnf/cGm5Joo7MP8MLwT9RFF4uP6iOmU
+	fy6MLQtQ93GSpTWhzlcbfDPvRd7Mxu538scKRO3E563QIWPMtwBmKHRz1HEkK8aPXe0=
+X-Gm-Gg: AYBFou1g5Lnh015A2gzljZxyCSRvAS8LO04xtagZmYx95LfDyJd3dy+/1qISPDkGeAK
+	1sak7guG/bPv3Tpu18TCyNXfqWUGO82UHrwpxXqEGLJ/1dQeFHj4j1wtqhLaxuDNMFU1KaMarp/
+	HwcTzELoohIdiSmYNChdql1lhaZxmYYN1nJrlv4gasQ+jkJUEXaUSy15rSov0OQ5SKIVxTnDhxf
+	Gu7no4Y6dJzDTPEWVIR3jWorsmCsu6xvwh/rP6QYOwGZUoI5bEwnS46espl+rS3T3rtTDOQpIhB
+	jFEoCVOBbIZ5WdeVbOdumolXlSkZ+BzUiGm/BxALyB6bmSq9PUuafN1X+Y/9ZBJyFtKBt2XNsj9
+	w5smt94chKNFmaGtmtipintn85N7prtsYI7o3GHoDPN5qx2vhvcE/xK40FCmV3dHC0H90RvmIz2
+	+cmLe+k3U+raiNGgR2e8M9vtQSACpr2P7syaTR+4brQqh51BE7f74YdnGmxwAV5wqNhY8h/WGZ+
+	fIoPFw=
+X-Received: by 2002:a7b:ca42:0:b0:49b:92df:87be with SMTP id 5b1f17b1804b1-49ce55fbdbemr151563565e9.4.1788439271011;
+        Thu, 03 Sep 2026 05:41:11 -0700 (PDT)
+Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48448e80798sm12957979f8f.13.2026.09.03.05.41.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 03 Sep 2026 05:41:10 -0700 (PDT)
+From: Jerome Brunet <jbrunet@baylibre.com>
+To: Lee Jones <lee@kernel.org>
+Cc: sashiko-bot@kernel.org, Mark Brown <broonie@kernel.org>,
+ sashiko-reviews@lists.linux.dev, robh@kernel.org, mfd@lists.linux.dev,
+ conor+dt@kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH RESEND v6 4/5] mfd: axp20x: Add support for AXP318W PMIC
+In-Reply-To: <20260903090328.GH2133376@google.com>
+References: <20260812-axp318-regulator-v6-0-d6b84b55c000@baylibre.com>
+ <20260812-axp318-regulator-v6-4-d6b84b55c000@baylibre.com>
+ <20260812214019.CDF921F000E9@smtp.kernel.org>
+ <1jldaafmpd.fsf@starbuckisacylon.baylibre.com>
+ <20260813095600.GA1072730@google.com>
+ <1j33wg6cpk.fsf@starbuckisacylon.baylibre.com>
+ <20260827134235.GN770273@google.com>
+ <1jld9j8pfg.fsf@starbuckisacylon.baylibre.com>
+ <20260903090328.GH2133376@google.com>
+Date: Thu, 03 Sep 2026 14:41:08 +0200
+Message-ID: <1jh5k68q3f.fsf@starbuckisacylon.baylibre.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Message-ID: <709278f9.9699.1a067207b4c.Coremail.zl020895@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID:ZCgvCgD3vyZhYJlquTA_AA--.3357W
-X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbCxgExomqZYGHZZAAA3b
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-SGkgQW5keSwKClRoYW5rcyBmb3IgdGhlIGNvbmZpcm1hdGlvbi4gCkkgd2lsbCBrZWVwIDgyNTBf
-YW1iYXJlbGxhIGFuZCB1cGRhdGUgdGhlIGNvbW1pdCBtZXNzYWdlIGFzIHlvdQpzdWdnZXN0ZWQu
-CgpCZXN0IHJlZ2FyZHMsCkxvbmcgWmhhbwoKQXQgMjAyNi0wOS0wMyAxOTo0MDo1NCwgIkFuZHkg
-U2hldmNoZW5rbyIgPGFuZHJpeS5zaGV2Y2hlbmtvQGxpbnV4LmludGVsLmNvbT4gd3JvdGU6Cj5P
-biBXZWQsIEF1ZyAxOSwgMjAyNiBhdCAwMjozMTo1OVBNICswODAwLCB6bDAyMDg5NSB3cm90ZToK
-Pj4gCj4+IFRoYW5rcyBmb3IgdGhlIHJldmlldy4KPgo+PiBUaGlzIGlzIEFtYmFyZWxsYSA4MjUw
-LWNvbXBhdGlibGUgSVAsIG5vdCBTeW5vcHN5cyBEZXNpZ25XYXJlLiBXZQo+PiBmaXJzdCB0cmll
-ZCA4MjUwX2R3IGFmdGVyIExpbnVzIGFza2VkIHVzIHRvIG1vdmUgdG8gdGhlIDgyNTAgbGlicmFy
-eTsKPj4geW91IHRoZW4gdG9sZCB1cyBub3QgdG8gdG91Y2ggODI1MF9kdyBhbmQgdG8gdXNlIDgy
-NTBfYW1iYXJlbGxhCj4+IGluc3RlYWQuIFRoYXQgaXMgd2hhdCB0aGlzIHBhdGNoIGlzLgo+PiBC
-YWNrZ3JvdW5kOgo+PiBodHRwczovL2xvcmUua2VybmVsLm9yZy9yL0NBRCsrakxtNkh6RVUxVE0t
-Yz1WdGp2M0ZKRUJlY1ZQN1R5eFNncV9RMHpGLVl3VDZOQUBtYWlsLmdtYWlsLmNvbS8KPj4gaHR0
-cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtc2VyaWFsL2FuOEt2dkhXWDBuYUgzWHdAYXNoZXZj
-aGUtZGVzay5sb2NhbC8KPj4gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGludXgtc2VyaWFsLzdF
-Nzc0MzA1LTM5MjAtNEJCNy1CQTQ2LUUwNzcyRDZCRUQ4NEBhbWJhcmVsbGEuY29tLwo+PiBJIHdp
-bGwgYWxzbyBzd2l0Y2ggdG8gdWFydF9yZWFkX3BvcnRfcHJvcGVydGllcygpIGFuZCB0cmltIHRo
-ZQo+PiA4MjUwX2R3LWRlcml2ZWQgYm9pbGVycGxhdGUuCj4KPlRoYW5rcyBmb3IgdGhlIHJlZ2lz
-dGVyIGRlc2NyaXB0aW9ucywgaXQgd2FzIGhlbHBmdWwuIEFmdGVyIGdvaW5nIHRocm91Z2ggdGhl
-bQo+aXQgc2VlbXMgdGhlIHYzIGFzIHlvdSBtYWRlIGl0IGlzIGdvb2QgZW5vdWdoIChzb3JyeSBm
-b3IgZ29pbmcgYmFjayBhbmQgZm9ydGgpLgo+V2hhdCBpdCBuZWVkcyBpcyBiZXR0ZXIgY29tbWl0
-IG1lc3NhZ2UgZXhwbGFpbmluZyB0aGF0IHdoaWxlIGl0J3Mgbm90IGEgU3lub3BzeXMKPkRXIElQ
-LCBpdCB3YXMgbWFkZSB0byBiZSBxdWl0ZSBjb21wYXRpYmxlIHdpdGggdGhhdCAob24gcmVnaXN0
-ZXIgbGV2ZWwpIGFuZCBoZW5jZQo+bm8gbmV3IGRyaXZlciBpcyByZXF1aXJlZCwganVzdCBhIHNt
-YWxsIHF1aXJrLgo+Cj4tLSAKPldpdGggQmVzdCBSZWdhcmRzLAo+QW5keSBTaGV2Y2hlbmtvCj4K
+On jeu. 03 sept. 2026 at 10:03, Lee Jones <lee@kernel.org> wrote:
 
+> On Wed, 02 Sep 2026, Jerome Brunet wrote:
+>
+>> On jeu. 27 ao=C3=BBt 2026 at 14:42, Lee Jones <lee@kernel.org> wrote:
+>>=20
+>> > On Fri, 14 Aug 2026, Jerome Brunet wrote:
+>> >
+>> >> On dim. 13 janv. 2008 at 11:56, Lee Jones <lee@kernel.org> wrote:
+>> >>=20
+>> >> > On Thu, 13 Aug 2026, Jerome Brunet wrote:
+>> >> >
+>> >> >> On sam. 12 janv. 2008 at 23:40, sashiko-bot@kernel.org wrote:
+>> >> >>=20
+>> >> >> > Thank you for your contribution! Sashiko AI review found 2 poten=
+tial issue(s) to consider:
+>> >> >> > - [High] The corresponding regulator driver lacks support for
+>> >> >> > `AXP318_ID`, causing the `axp20x-regulator` child device probe t=
+o fail.
+>> >> >>=20
+>> >> >> Funny sashiko did not pick up on this when v6 was first sent. This=
+ is an
+>> >> >> ordering problem. The regulator part should be applied before the =
+mfd
+>> >> >> one.
+>> >> >>=20
+>> >> >> I could reorder here but there is not much point since the 2 chang=
+es will
+>> >> >> land in different subsystems but it does bring a valid question:
+>> >> >>=20
+>> >> >> Lee, Mark, are you OK with picking the patches indended for your
+>> >> >> subsystem or would you prefer that I split the series, regulator o=
+n one
+>> >> >> side, mfd on the other (with a dep on the regulator one, of course=
+) ?
+>> >> >
+>> >> > Does this break existing devices or simply delay support for this n=
+ew one?
+>> >>=20
+>> >> Existing device are fine and untouched.
+>> >>=20
+>> >> I've just checked and if someone tried to run without PATCH 5 (regula=
+tors),
+>> >> the main axp driver loads fine but the regulator part gives this
+>> >>=20
+>> >> axp20x-regulator axp20x-regulator.0: Unsupported AXP variant: 8
+>> >
+>> > Can you not enforce the deps with Kconfig?
+>>=20
+>> This is not a build problem so I do not think Kconfig will change
+>> anything here. There is no specific config per chip.
+>>=20
+>> It is just a runtime ordering matter and not a problem. regulator and
+>> mfd are split so at some point the support is incomplete.
+>>=20
+>> * MFD first, it is fine it just cant instantiate the regulator until it
+>>   lands. it is (mostly) useless without it, which is fine.
+>> * Regulator first. regulator will never be instanciate until MFD support
+>>   lands, just as useless.
+>
+> Okay, this is normal.  So there are no deps between them?
+>
+
+I think it is normal yes.
+
+There is a dependency as it stands. mfd change (PATCH 4) introduce a
+header it uses. The header is also used in the regulator change
+(PATCH 5).
+
+I don't think the headers should be split in there own change
+but I can do it if you want.
+
+> --=20
+> Lee Jones
+
+--=20
+Jerome
