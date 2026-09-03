@@ -1,109 +1,104 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B13543B6FA;
-	Thu,  3 Sep 2026 09:03:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7199C469846;
+	Thu,  3 Sep 2026 09:06:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788426214; cv=none; b=ZD4YtKHk7z2PO1PDTOK2KaxtZh+YYne8dhOjFUMPYM5iDqWKVShOguqdzNRdBkY+JSRByXjA7fk8srxF6cwbDsIZMyiVWWUsgTyb+qFA6kF1noYrKUT7z1/9aHDx9+a6We79XQiKgwmWs8eDUtOt1WKgdMZzyXfFG32c/9OcPfU=
+	t=1788426391; cv=none; b=J3XDu1AWOiRoF0IOB7Kz3dPyOz0XLAuJPprfQbaJZx+9bvDhMdPHrZ7tyykwalGDQeYI+Dd3h7TIy27jD7hALo9PbcS9AymddE0ekPnNdYj1dkPWHg1CPKMuQxXOXN3jWRMjPgnCadc0ZISNypMqhCleTBiegzdKocABI463RRQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788426214; c=relaxed/simple;
-	bh=hRkjM0yzQ6WmrGWTntChxmZqt6ivRkc1XdsAK65SfVc=;
+	s=arc-20240116; t=1788426391; c=relaxed/simple;
+	bh=T3Nibt0RMBAKTowEo5mkmfusLMTU9MdcH3Q05Dpfm0M=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=tfl2bS8eiTVQGY1qhvhMh6wRU+fHwjU5R6pEifkTNh4J/GTlrTNfwRGMaQcXof4SXOK5/5oMr3o8aPPPIySO2BFzjzrkpyeZQcLLqCQXXVFgF1zdDkwf0+rd/TVli+Fl5ooXXWmVx24Gx+ofYAxDxKoZ2Ngak69Ndz/Mz3eT1i4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MsCiTxVV; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=JDFhNNtfG9rDeVgu0EAg6Wc4p4jK/f+SAn1THuDFCNyImGae5lOLuUCaw0Qf6PMgoWDURoFcJ5tqlURp4YMAjO69T+5+OpLSzw/X8Xmfw12Y8EZGj1WOUzIxDQhf1rJA9c5LDCFynuRgim0CrpnEtFfDYfoyUXvbjuw5EtVbDPE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eP0zJOHO; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MsCiTxVV"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E94191F000E9;
-	Thu,  3 Sep 2026 09:03:30 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eP0zJOHO"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D13311F000E9;
+	Thu,  3 Sep 2026 09:06:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788426212;
-	bh=sLnLys5bKsTRiofKBLQiGluhfjQKjyc41X0t9mJHY6E=;
+	s=k20260515; t=1788426390;
+	bh=BJurZ0sDL+PdYyxRCXnRVCg/8ycMguZD9/GnjjsgUOU=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=MsCiTxVVZ17bbPc2qoWOKXByaQzFVWm1T40v3UKmC+mZXT4QOwjiczDWASfZO5bNm
-	 rKLXaSMnI3+io2rcbTw0rXTNWz9hlyImlIpPisCax26MDYBySkXFTYOmB4TmpbwjbJ
-	 hDC1qIEy9CXvhTd52b/Ms9XsngAjmWqx7dZkJ2aM2MZnVzPAaWia/AWSnDrAw6c9HR
-	 BIqbfvtWJO2xAmzNmnFYXvh8Trvj3mV4dJFfAqX/o02LpglnRj+PJg9g2eX4hxkU7Z
-	 eCK0QOnT0N8qc8Tlf3L7eISZ11Yig7u/wykA5RAyB6pBdxwRUtAI9VpcDYgRF1a01b
-	 Mz/EyjHBblhMw==
-Date: Thu, 3 Sep 2026 10:03:28 +0100
+	b=eP0zJOHOoS7lq5B3NSCOQTqAOjmyH0JoBfoujISG2iKaiKnt+WPcEXlo5N3TJU8Ji
+	 jn0FxaL+udFQNfzAtnQ/Vq7DpGgE5gtamBbLu0Lx5QNF54eRdnf9hUY1MTtXnco39m
+	 IwIQi83r/ftessLmCGUOhzUXlcmJXlHx+tKFuUXUl1TbXUoduudDYY8O1VQaYIWkEa
+	 ymKukGLoRbZC+/8Cw5K9ObklARRwrrF9IT+8FM2/ZgaPM2ZHRhFuG2E15B8UwteQbT
+	 fBNZRBQ1+x2ez30n0IgBqgj7BjWPOYKG5M1EYkORzVAD5hEljenAdr41RvdzhgbcRW
+	 W86ZfxCwWAl4w==
+Date: Thu, 3 Sep 2026 10:06:25 +0100
 From: Lee Jones <lee@kernel.org>
-To: Jerome Brunet <jbrunet@baylibre.com>
-Cc: sashiko-bot@kernel.org, Mark Brown <broonie@kernel.org>,
-	sashiko-reviews@lists.linux.dev, robh@kernel.org,
-	mfd@lists.linux.dev, conor+dt@kernel.org,
-	devicetree@vger.kernel.org
-Subject: Re: [PATCH RESEND v6 4/5] mfd: axp20x: Add support for AXP318W PMIC
-Message-ID: <20260903090328.GH2133376@google.com>
-References: <20260812-axp318-regulator-v6-0-d6b84b55c000@baylibre.com>
- <20260812-axp318-regulator-v6-4-d6b84b55c000@baylibre.com>
- <20260812214019.CDF921F000E9@smtp.kernel.org>
- <1jldaafmpd.fsf@starbuckisacylon.baylibre.com>
- <20260813095600.GA1072730@google.com>
- <1j33wg6cpk.fsf@starbuckisacylon.baylibre.com>
- <20260827134235.GN770273@google.com>
- <1jld9j8pfg.fsf@starbuckisacylon.baylibre.com>
+To: Conor Dooley <conor@kernel.org>
+Cc: Frank.Li@oss.nxp.com,
+	Support Opensource <support.opensource@diasemi.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
+	"open list:MULTIFUNCTION DEVICES (MFD)" <mfd@lists.linux.dev>,
+	"open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>,
+	open list <linux-kernel@vger.kernel.org>, imx@lists.linux.dev
+Subject: Re: [PATCH 1/1] dt-bindings: mfd: da9052: allow dlg,da9053-aa
+ fallback to dlg,da9052
+Message-ID: <20260903090625.GI2133376@google.com>
+References: <20260831201522.51294-1-Frank.Li@oss.nxp.com>
+ <20260901-devourer-pushover-f26c72688255@spud>
+ <20260902102532.GQ2943942@google.com>
+ <20260902-varied-unsent-b99f9f007685@spud>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <1jld9j8pfg.fsf@starbuckisacylon.baylibre.com>
+In-Reply-To: <20260902-varied-unsent-b99f9f007685@spud>
 
-On Wed, 02 Sep 2026, Jerome Brunet wrote:
+On Wed, 02 Sep 2026, Conor Dooley wrote:
 
-> On jeu. 27 août 2026 at 14:42, Lee Jones <lee@kernel.org> wrote:
+> On Wed, Sep 02, 2026 at 11:25:32AM +0100, Lee Jones wrote:
+> > On Tue, 01 Sep 2026, Conor Dooley wrote:
+> > 
+> > > On Mon, Aug 31, 2026 at 04:15:21PM -0400, Frank.Li@oss.nxp.com wrote:
+> > > > From: Frank Li <Frank.Li@nxp.com>
+> > > > 
+> > > > Allow dlg,da9053-aa fallback to dlg,da9052 to fix legacy platform (> 10
+> > > > years) check_dtbs warnings:
+> > > >   arch/arm/boot/dts/nxp/imx/imx53-voipac-bsb.dtb: dialog@48 (dlg,da9053-aa): compatible: ['dlg,da9053-aa', 'dlg,da9052'] is too long
+> > > >         from schema $id: http://devicetree.org/schemas/mfd/dlg,da9052.yaml
+> > > > 
+> > > > Signed-off-by: Frank Li <Frank.Li@nxp.com>
+> > > > ---
+> > > > Previous try drop dlg,da9052 at
+> > > > https://lore.kernel.org/imx/20260404-thoughtful-placid-boobook-da26da@quoll/
+> > > > 
+> > > > but Krzy have concern about compablity.
+> > > > 
+> > > > https://lore.kernel.org/imx/20251107-matrimony-showdown-ba6ce6996b2f@spud/
+> > > > 
+> > > > Conor prefer update old dts.
+> > > 
+> > > I don't think these devices are actually compatible, so this fallback
+> > > would be wrong.
+> > > The data comes from the match data, be that spi or i2c, and there's
+> > > explicitly different behaviour for the da9052 and da9053aa.
+> > > I doubt the legacy platform ever worked properly, and this is what should
+> > > have been explained in the PR that Krzysztof denied not just blindly
+> > > citing a dtbs_check problem.
+> > > 
+> > > Nacked-by: Conor Dooley <conor.dooley@microchip.com>
+> > 
+> > At first glance this looks like an Acked-by.
+> > 
+> > IMHO, this is going to cause issues - please rethink this.
 > 
-> > On Fri, 14 Aug 2026, Jerome Brunet wrote:
-> >
-> >> On dim. 13 janv. 2008 at 11:56, Lee Jones <lee@kernel.org> wrote:
-> >> 
-> >> > On Thu, 13 Aug 2026, Jerome Brunet wrote:
-> >> >
-> >> >> On sam. 12 janv. 2008 at 23:40, sashiko-bot@kernel.org wrote:
-> >> >> 
-> >> >> > Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
-> >> >> > - [High] The corresponding regulator driver lacks support for
-> >> >> > `AXP318_ID`, causing the `axp20x-regulator` child device probe to fail.
-> >> >> 
-> >> >> Funny sashiko did not pick up on this when v6 was first sent. This is an
-> >> >> ordering problem. The regulator part should be applied before the mfd
-> >> >> one.
-> >> >> 
-> >> >> I could reorder here but there is not much point since the 2 changes will
-> >> >> land in different subsystems but it does bring a valid question:
-> >> >> 
-> >> >> Lee, Mark, are you OK with picking the patches indended for your
-> >> >> subsystem or would you prefer that I split the series, regulator on one
-> >> >> side, mfd on the other (with a dep on the regulator one, of course) ?
-> >> >
-> >> > Does this break existing devices or simply delay support for this new one?
-> >> 
-> >> Existing device are fine and untouched.
-> >> 
-> >> I've just checked and if someone tried to run without PATCH 5 (regulators),
-> >> the main axp driver loads fine but the regulator part gives this
-> >> 
-> >> axp20x-regulator axp20x-regulator.0: Unsupported AXP variant: 8
-> >
-> > Can you not enforce the deps with Kconfig?
-> 
-> This is not a build problem so I do not think Kconfig will change
-> anything here. There is no specific config per chip.
-> 
-> It is just a runtime ordering matter and not a problem. regulator and
-> mfd are split so at some point the support is incomplete.
-> 
-> * MFD first, it is fine it just cant instantiate the regulator until it
->   lands. it is (mostly) useless without it, which is fine.
-> * Regulator first. regulator will never be instanciate until MFD support
->   lands, just as useless.
+> As in, use NAKed-by instead or just say NAK without the name/mail?
+> Not entirely sure what you're getting at.
 
-Okay, this is normal.  So there are no deps between them?
+As in, don't make NACKs looks like acceptance trailers.
+
+If you're going to "NACK", which I always felt was a bit harsh anyway,
+just say it without making it appear like an official sign-off.  Please.
 
 -- 
 Lee Jones
