@@ -1,278 +1,122 @@
-Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0BE14AEBCC
-	for <mfd@lists.linux.dev>; Thu,  3 Sep 2026 12:49:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=210.118.77.11
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E6C547208F;
+	Thu,  3 Sep 2026 12:49:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788439760; cv=none; b=Zy3qGUgtoVI65zz+/Z2r8ERsjXiZTQ5eflQ939rBwrlNNPVIuDd2Ap87pK4JoGf+SOPYBCY7d9u5Gz/FrofMSLuqHcxepMR59f3pS8EyDi3VJt4glp9adu1ZhNGX0GdEyQCrfwWmx/bAKAorkSITnT1HpM9FC5rNJEjPg/MI9no=
+	t=1788439785; cv=none; b=giBn4DS2UDtenB2BpEYApXr7Uq0IILoDajDYhoLL/onix+tSlJBd11CJ/jQ6gGYbiR7UzLuFnBjzscjaa3R8AOg/BPVe8ww76u24taCfSnwABgnTULlVBVXN9t5pm5oQDO1pTrTx4QEQXzY7yKE9t3w3St2et0/wGNfZZ+bABjQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788439760; c=relaxed/simple;
-	bh=ZfvxnfWLj1aEtIL/0QPx1O4jQ4T6LmR71jmInN6G7tw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:From:In-Reply-To:
-	 Content-Type:References; b=rTKlOgk+S1jAzjiT0UsRZP1kr46NawpLBUf8uqo0baW/nnMjFx8tC9xtyZ8xI7/lBwpm6JVHmNnXVyfBSN4PfLlSh6gVVl/Z4x8ipq8RemFJ2SHQl7UO3M0OZTdomlWJ9D7z0xmr+oYOE4pqREgSwx539r2X6iE+uUXBZQA7IkE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=A84uFu5v; arc=none smtp.client-ip=210.118.77.11
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
+	s=arc-20240116; t=1788439785; c=relaxed/simple;
+	bh=eBLWZdRUCJQkpc4ABvRVrT7yaZb3i/iKB43u0BEa12U=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=GgLm2esbjszTa89g4Xltf2p7gmHVkJaAFGEnwFho959iuStFbOtksiCc90Z+GcYcN2IKvn88cel2SpPRnBpC7sWIPKZ3fIyShveaH0TCDYs8ISCxjTQCEG4EuwVOBbJFCRPsfZAM1Vp1+r1dV4U+NYl0MtDCDbFwXfUVRBF2r8U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JPdvRydi; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="A84uFu5v"
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
-	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20260903124916euoutp01c70c3377e9531d0b4effba39237e9f0d~R0Humhg0D2837828378euoutp01a;
-	Thu,  3 Sep 2026 12:49:16 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20260903124916euoutp01c70c3377e9531d0b4effba39237e9f0d~R0Humhg0D2837828378euoutp01a
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1788439756;
-	bh=21XK8ouXwSbTKoSgpNp9PTnpZIppeDeeNUFwSv6ef0I=;
-	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
-	b=A84uFu5vC7oRa7UYvp4kb1qaFuO04d7y8EFyNaPGxT8vRYtNhTEAf1v8qbCTK1g9c
-	 ErZ7MNjb63emnIqANJbVFtycOFms2nxzltkpKWI+k2FVQDNvhQLzokz+RsiTTZD/sZ
-	 tbFgIVRs1iU0Hx2ZDAjgQWZBvVwu/E+5h3lOiTJE=
-Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
-	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
-	20260903124916eucas1p2046caac892ee377927f97ac1ed022764~R0HuWwHQ41235012350eucas1p2O;
-	Thu,  3 Sep 2026 12:49:16 +0000 (GMT)
-Received: from [192.168.1.44] (unknown [106.210.136.40]) by
-	eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
-	20260903124914eusmtip1c88b35a3579efd350fc5d28e52aac15c~R0HsrL5_S2573525735eusmtip1u;
-	Thu,  3 Sep 2026 12:49:14 +0000 (GMT)
-Message-ID: <113c3906-56c1-4940-9857-d611edc64361@samsung.com>
-Date: Thu, 3 Sep 2026 14:49:14 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JPdvRydi"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A17131F000E9;
+	Thu,  3 Sep 2026 12:49:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788439784;
+	bh=F2FrWcK0uvS3ll2oLYKWcdBOi4hjBzbOPy6uKBeL6EY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=JPdvRydiv7M1DbZfJlF8/3lB/fClXPoZxOG6nvJr+SLEr0gfx6T7waiky4YVEPXrU
+	 fejuyY9QilQiduOUvBiCCYFQTG4dYTKP57kS0fVHKuWksBdCpc6yOSYWPDJFIQmMd2
+	 owBafAhkUHwFb+Cc/zFMJKcp2uxF+uEqH7nCEMTR1U7kSkJYIIeCZToWMzqUNZUs50
+	 rHKE3cwzxHHR/CPViGpO/Iyr6eSKpF8KQpPi87auKUC9OfbrVwQdDuxjQfHXWBzEEf
+	 KVndEppzPJHflv+yjPx+Z+tsqYoYdRLmJqZn9EkTR1nlxNbTJJPRIEDN4LDhzjPTiY
+	 tI9jNnn+uNfaQ==
+Date: Thu, 3 Sep 2026 13:49:39 +0100
+From: Lee Jones <lee@kernel.org>
+To: david@ixit.cz
+Cc: Thomas Tai <thomas.tai@oracle.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: Re: [PATCH] mfd: wcd934x: set DMA mask on parent to silence "DMA
+ mask not set"
+Message-ID: <20260903124939.GT2133376@google.com>
+References: <20260823-wcd-dma-v1-1-95e44a315ccf@ixit.cz>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 02/15] dt-bindings: display: bridge: Add
- starfive,jh7110-inno-hdmi-controller
-To: Conor Dooley <conor@kernel.org>
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
-	<neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof
-	Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Andrzej
-	Hajda <andrzej.hajda@intel.com>, Robert Foss <rfoss@kernel.org>, Laurent
-	Pinchart <Laurent.pinchart@ideasonboard.com>, Jonas Karlman
-	<jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, Luca Ceresoli
-	<luca.ceresoli@bootlin.com>, David Airlie <airlied@gmail.com>, Simona Vetter
-	<simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
-	Lee Jones <lee@kernel.org>, Andy Yan <andy.yan@rock-chips.com>, Philipp
-	Zabel <p.zabel@pengutronix.de>, Emil Renner Berthing <kernel@esmil.dk>, Hal
-	Feng <hal.feng@starfivetech.com>, Michael Turquette
-	<mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, Brian Masney
-	<bmasney@redhat.com>, Heiko Stuebner <heiko@sntech.de>, Paul Walmsley
-	<pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
-	<aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, Dominique
-	Belhachemi <db@domibel.de>, linux-phy@lists.infradead.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, mfd@lists.linux.dev,
-	linux-clk@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-rockchip@lists.infradead.org, linux-riscv@lists.infradead.org, Icenowy
-	Zheng <uwu@icenowy.me>, Andy Yan <andyshrk@163.com>, Marek Szyprowski
-	<m.szyprowski@samsung.com>, Maud Spierings <maudspierings@gocontroll.com>,
-	Graham Markall <hello@big-grey.co.uk>
-Content-Language: en-US
-From: Michal Wilczynski <m.wilczynski@samsung.com>
-In-Reply-To: <20260828-stylus-bonfire-b71cbfe8b983@spud>
-Content-Transfer-Encoding: 7bit
-X-CMS-MailID: 20260903124916eucas1p2046caac892ee377927f97ac1ed022764
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20260828134817eucas1p2e2756deff8871be4ea8bb5c65f9c179d
-X-EPHeader: CA
-X-CMS-RootMailID: 20260828134817eucas1p2e2756deff8871be4ea8bb5c65f9c179d
-References: <20260828-jh7110-clean-send-v2-0-331680c8b9d1@samsung.com>
-	<CGME20260828134817eucas1p2e2756deff8871be4ea8bb5c65f9c179d@eucas1p2.samsung.com>
-	<20260828-jh7110-clean-send-v2-2-331680c8b9d1@samsung.com>
-	<20260828-stylus-bonfire-b71cbfe8b983@spud>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260823-wcd-dma-v1-1-95e44a315ccf@ixit.cz>
 
+On Sun, 23 Aug 2026, David Heidelberg via B4 Relay wrote:
 
-
-On 8/28/26 18:47, Conor Dooley wrote:
-> On Fri, Aug 28, 2026 at 03:47:26PM +0200, Michal Wilczynski wrote:
->> Add the dt-binding for the StarFive JH7110 Innosilicon HDMI controller
->> (DRM bridge).
->>
->> This device is the second child of the starfive,jh7110-hdmi-subsystem node.
->> It consumes register access clocks (sys, mclk, bclk) from the voutcrg and
->> both the pixel clock (pclk) and the PHY from its hdmi_phy sibling.
->>
->> Signed-off-by: Michal Wilczynski <m.wilczynski@samsung.com>
->> ---
->>  .../starfive,jh7110-inno-hdmi-controller.yaml      | 109 +++++++++++++++++++++
->>  1 file changed, 109 insertions(+)
->>
->> diff --git a/Documentation/devicetree/bindings/display/bridge/starfive,jh7110-inno-hdmi-controller.yaml b/Documentation/devicetree/bindings/display/bridge/starfive,jh7110-inno-hdmi-controller.yaml
->> new file mode 100644
->> index 0000000000000000000000000000000000000000..0e584e7b756e24e2f99a62daab3117bbf4b472b6
->> --- /dev/null
->> +++ b/Documentation/devicetree/bindings/display/bridge/starfive,jh7110-inno-hdmi-controller.yaml
->> @@ -0,0 +1,109 @@
->> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
->> +%YAML 1.2
->> +---
->> +$id: https://protect2.fireeye.com/v1/url?k=af8ec5c4-ce05d0f2-af8f4e8b-74fe485cbff1-93a4f693847d5818&q=1&e=48120ebb-9eda-4ddc-b580-e20f8c69d005&u=http%3A%2F%2Fdevicetree.org%2Fschemas%2Fdisplay%2Fbridge%2Fstarfive%2Cjh7110-inno-hdmi-controller.yaml%23
->> +$schema: https://protect2.fireeye.com/v1/url?k=4b8c4737-2a075201-4b8dcc78-74fe485cbff1-8caced678494fd92&q=1&e=48120ebb-9eda-4ddc-b580-e20f8c69d005&u=http%3A%2F%2Fdevicetree.org%2Fmeta-schemas%2Fcore.yaml%23
->> +
->> +title: StarFive JH7110 Innosilicon HDMI Controller
->> +
->> +maintainers:
->> +  - Michal Wilczynski <m.wilczynski@samsung.com>
->> +
->> +description:
->> +  The controller portion of the StarFive JH7110 INNO HDMI IP.
->> +
->> +properties:
->> +  compatible:
->> +    const: starfive,jh7110-inno-hdmi-controller
->> +
->> +  interrupts:
->> +    maxItems: 1
->> +
->> +  clocks:
->> +    items:
->> +      - description: System clock for register access
->> +      - description: Module clock
->> +      - description: Bus clock
->> +      - description: Pixel clock from PHY
->> +
->> +  clock-names:
->> +    items:
->> +      - const: sys
->> +      - const: mclk
->> +      - const: bclk
->> +      - const: pclk
+> From: David Heidelberg <david@ixit.cz>
 > 
-> "module" "bus" "pixel" would be more informative than spending most of
-> your characters regurgitating what these are by definition?
-
-So I've reread the TRM and mclk and bclk are named as such there and they
-are audio clocks: section 5.3 lists a "four channel I2S transmitter bit
-clock" among the display subsystem's clock sources, and that is this bclk.
-The already merged starfive,jh7110-voutcrg.yaml names the same input
-"i2stx0_bclk". So I've kept the names and put the information in the
-descriptions instead:
-
- - description: The HDMI controller main clock
- - description: Audio master clock
- - description: Audio bit clock, from the I2S transmitter
- - description: The pixel clock, generated by the PHY
-
-pclk was wrong. In this binding pclk is the register clock, as in
-rockchip,inno-hdmi.yaml, and the generic inno-hdmi driver looks it up by
-that name, holds it enabled for its lifetime and derives the DDC divider
-from its rate. We had it bound to the pixel clock so the pre-PLL stayed
-powered from probe and the divider was sized from 297 MHz instead of
-49.5 MHz, putting the DDC bus at 17 kHz. Slow but not broken which
-is why it went unnoticed.
-
-So in v3 the register clock takes "pclk" and the PHY clock is named
-"pixel".
-
+> The wcd934x MFD parent (a slim_device) never initializes its
+> dma_mask/coherent_dma_mask. When the DT-aware children pass through
+> of_dma_configure() this triggers the "DMA mask not set" warning for
+> each child.
 > 
->> +
->> +  resets:
->> +    maxItems: 1
->> +
->> +  reset-names:
->> +    const: hdmi_tx
->> +
->> +  phys:
->> +    maxItems: 1
->> +
->> +  phy-names:
->> +    const: hdmi-phy
+> Cc: stable@vger.kernel.org
+> Fixes: f959dcd6ddfd ("dma-direct: Fix potential NULL pointer dereference")
+> Assisted-by: tencent:hy3
+> Signed-off-by: David Heidelberg <david@ixit.cz>
+> ---
+>  drivers/mfd/wcd934x.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
 > 
-> With the trend of ?pointless? -names properties, I'm surprised you don't
-> have interrupt-names? I'd ditch 'em all where there's only a single
-> clock. The _ rather than - in the reset name triggers my OCD.
-> pw-bot: changes-requested
+> diff --git a/drivers/mfd/wcd934x.c b/drivers/mfd/wcd934x.c
+> index 3c3080e8c8cf7..70ee13791d52b 100644
+> --- a/drivers/mfd/wcd934x.c
+> +++ b/drivers/mfd/wcd934x.c
+> @@ -1,12 +1,13 @@
+>  // SPDX-License-Identifier: GPL-2.0
+>  // Copyright (c) 2019, Linaro Limited
+>  
+>  #include <linux/clk.h>
+> +#include <linux/dma-mapping.h>
+>  #include <linux/gpio/consumer.h>
+>  #include <linux/interrupt.h>
+>  #include <linux/kernel.h>
+>  #include <linux/mfd/core.h>
+>  #include <linux/mfd/wcd934x/registers.h>
+>  #include <linux/mfd/wcd934x/wcd934x.h>
+>  #include <linux/module.h>
+>  #include <linux/of.h>
+> @@ -212,16 +213,21 @@ static int wcd934x_slim_status(struct slim_device *sdev,
+>  static int wcd934x_slim_probe(struct slim_device *sdev)
+>  {
+>  	struct device *dev = &sdev->dev;
+>  	struct device_node *np = dev->of_node;
+>  	struct wcd934x_ddata *ddata;
+>  	struct gpio_desc *reset_gpio;
+>  	int ret;
+>  
+> +	if (!dev->dma_mask) {
+> +		dev->dma_mask = &dev->coherent_dma_mask;
+> +		dev->coherent_dma_mask = DMA_BIT_MASK(32);
+> +	}
+> +
 
-Will do. reset-names and phy-names will be gone which takes the
-underscore in hdmi_tx with them.
+Any reason not to use dma_coerce_mask_and_coherent()?
 
-Note that in v3 the vout subsystem parent node will be back on Icenowy's
-review, so there will be three new DT patches: bindings for
-starfive,jh7110-vout-subsystem and starfive,jh7110-vout-syscon, and
-starfive,jh7110-dc8200 added to verisilicon,dc.yaml
-
+>  	ddata = devm_kzalloc(dev, sizeof(*ddata), GFP_KERNEL);
+>  	if (!ddata)
+>  		return	-ENOMEM;
+>  
+>  	ddata->irq = of_irq_get(np, 0);
+>  	if (ddata->irq < 0)
+>  		return dev_err_probe(ddata->dev, ddata->irq,
+>  				     "Failed to get IRQ\n");
 > 
->> +
->> +  ports:
->> +    $ref: /schemas/graph.yaml#/properties/ports
->> +    description:
->> +      A graph node with one input port and one output port.
->> +
->> +required:
->> +  - compatible
->> +  - interrupts
->> +  - clocks
->> +  - clock-names
->> +  - resets
->> +  - reset-names
->> +  - phys
->> +  - phy-names
->> +  - ports
->> +
->> +additionalProperties: false
->> +
->> +examples:
->> +  # Shown as a child of the HDMI subsystem node; see
->> +  # Documentation/devicetree/bindings/mfd/starfive,jh7110-hdmi-subsystem.yaml
->> +  # for the full node.
->> +  - |
->> +    #include <dt-bindings/clock/starfive,jh7110-crg.h>
->> +    #include <dt-bindings/reset/starfive,jh7110-crg.h>
->> +
->> +    controller {
+> ---
+> base-commit: 7079a12d7506b07fb53b54a664bfad5fa9b16d70
+> change-id: 20260823-wcd-dma-bd621ee39887
 > 
-> "controller" seems over generic for a node, but I guess if the parent is
-> "hdmi-subsystem" or something it makes sense in that context.
-> 
-> Cheers,
-> Conor.
+> Best regards,
+> --  
+> David Heidelberg <david@ixit.cz>
 > 
 > 
->> +        compatible = "starfive,jh7110-inno-hdmi-controller";
->> +        clocks = <&voutcrg JH7110_VOUTCLK_HDMI_TX_SYS>,
->> +                 <&voutcrg JH7110_VOUTCLK_HDMI_TX_MCLK>,
->> +                 <&voutcrg JH7110_VOUTCLK_HDMI_TX_BCLK>,
->> +                 <&hdmi_phy>;
->> +        clock-names = "sys", "mclk", "bclk", "pclk";
->> +        interrupts = <99>;
->> +        phys = <&hdmi_phy>;
->> +        phy-names = "hdmi-phy";
->> +        resets = <&voutcrg JH7110_VOUTRST_HDMI_TX_HDMI>;
->> +        reset-names = "hdmi_tx";
->> +
->> +        ports {
->> +            #address-cells = <1>;
->> +            #size-cells = <0>;
->> +
->> +            port@0 {
->> +                reg = <0>;
->> +
->> +                endpoint {
->> +                    remote-endpoint = <&dpu_out_dpi0>;
->> +                };
->> +            };
->> +
->> +            port@1 {
->> +                reg = <1>;
->> +
->> +                endpoint {
->> +                    remote-endpoint = <&hdmi_con_in>;
->> +                };
->> +            };
->> +        };
->> +    };
->> +
->> +...
->>
->> -- 
->> 2.34.1
->>
 
-Best regards,
 -- 
-Michal Wilczynski <m.wilczynski@samsung.com>
+Lee Jones
