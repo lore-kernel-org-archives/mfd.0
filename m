@@ -1,111 +1,167 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DAAE53B5E08;
-	Thu,  3 Sep 2026 10:06:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B201E413789;
+	Thu,  3 Sep 2026 10:24:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788430019; cv=none; b=f0CBNVkxEbBk29VEplS+EoUU6irgNv/r4kpTbBjnrHwplpFmWAudpPGz2atcgUOU8ANB7MnS+Kif+UxOJJSUPkmBWBl2pTICjkfG6bnWq5Kh1SGeRCR8T+Yr+GZBs+O1cR7JrBg9EaseLtljY0nKNYqmMGwP58tipHDcQjZ5/n8=
+	t=1788431097; cv=none; b=Vr26Y8qPzVOJ7W7O3ifioFz8cji1O6nerfYJ7ShxBly6D8y33KT3zZF2xW6HDGdBhcmEtSP5GF7sCO+Vq/PBLCJI02efYEJcmY7+kh5YO7xJ6/E0eimk8ZTbn5y2HU30Dnc0uFgcahvr7d5s3+TwDAX9FIsaGMmafH0HgsvEcAM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788430019; c=relaxed/simple;
-	bh=qf2fubPmfLIDNUT2h+9n7NqOBCnS2zp/lbMin3g9bxk=;
+	s=arc-20240116; t=1788431097; c=relaxed/simple;
+	bh=LHFRkKSUyRypbEzGD3KKH1HJBqcfUrjD/NoAiieS0YM=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=IAqn1NoRPMl2kSeVf1FT8U710WphIjRBSaslhZn8+jVKTosC6fVfeih+BBkVJkja6tLZeWAMjSRtGf4LKVO5Ym68KPqhA3Vz5js2mMzY1VIhzVTrP4j//95IHXnXxfiXlAjt9voWq8pQzHLWfaohr++cs0p2dYW/IpIHw0zmqU8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KM3e1OqK; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=MKTWIdCLKtc/4gEMqjUjTAGjPY/gsPOKA0CAPof8ga8QuUA2WRCRGeQIBjrdtKU2KP/13zrqgPIHUh9c54n9v89WQW0IRQyOSTWSPudOtfr8v5EcE0ZKIiyrJK/+LibKgK8nc6L6ofjwRtFJT9Wj6agGzDVCmY0ZfXtR42DRVBA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=j/6UGafh; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KM3e1OqK"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8A4A41F000E9;
-	Thu,  3 Sep 2026 10:06:54 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="j/6UGafh"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 442941F00A3A;
+	Thu,  3 Sep 2026 10:24:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788430015;
-	bh=JOjoOgvlM81zL+NiGiRTWOkPC5emIO7QZ5TW4bJblk8=;
+	s=k20260515; t=1788431091;
+	bh=uKSC3WH3tRk3/QVmtaHUrsq3OcUMiXqgCVYTZfItvgI=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=KM3e1OqKYXCj7bP5cNJc3bDDzKOIbdHc4oa+CQE5WQzfVC0t/tQ76wyIjIZo7aKn4
-	 DSGWUN8Nc+lazZwr+OAX7VFZUEMG7PY5I2ODoU2QQm9V9uGLtSBMIozqCOUg9X/HuK
-	 TTSjMfoNA5k13NeGRL0rXhXkRex47CLoVwXInd86MhN8RnT2QX9OhFyv8dV0fLyqxP
-	 H0gVP43Dv9hOGbL/GIhrCz+IJ9k2t4sOqjLSMKFxvm2h47K7LUJ6M02sjxCmvf+fp9
-	 66ncduGIkhE6kof0T3vcL+sQvTHvRj1qd7E4gh+fp5LwSKb1g5kPBL+Md/THdcDMRq
-	 BksN1brdKv/Jg==
-Date: Thu, 3 Sep 2026 12:06:51 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Lee Jones <lee@kernel.org>
-Cc: Conor Dooley <conor@kernel.org>, Frank.Li@oss.nxp.com, 
-	Support Opensource <support.opensource@diasemi.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
-	"open list:MULTIFUNCTION DEVICES (MFD)" <mfd@lists.linux.dev>, 
-	"open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>, open list <linux-kernel@vger.kernel.org>, imx@lists.linux.dev
-Subject: Re: [PATCH 1/1] dt-bindings: mfd: da9052: allow dlg,da9053-aa
- fallback to dlg,da9052
-Message-ID: <20260903-vague-sassy-cow-d2d6c8@quoll>
-References: <20260831201522.51294-1-Frank.Li@oss.nxp.com>
- <20260901-devourer-pushover-f26c72688255@spud>
- <20260902102532.GQ2943942@google.com>
- <20260902-varied-unsent-b99f9f007685@spud>
- <20260903090625.GI2133376@google.com>
+	b=j/6UGafhFLze3IF39HuhR0yLS/+YgvqAKIoCsEwLjVroDwn//4ne75x3ukL9/wXzC
+	 UPPZF02rZPdUhzIg0UsHtCe7wLvMx1mOZlSs5V+MjFQ7SOYX5LqLX/oI9h+Pp5uW03
+	 toXhB8bO9hywagV4ijxSI8bdZJTMXEewuqNdpTEXjmfS8WRCM0WeogHh5YMXrVoVkf
+	 XEM6Gel2kvZpreFSobtDvdgBh/rqRgEp0/rMX/76e40JuOjJ9XvuwPwge2HMmgD09T
+	 6uNUSP+L0t8SIkpN4bO3WFjBAQbz1Yewr4Ef+S2NY3esQbiQetpPVDTJNQXeQSbpN1
+	 wNJp55Y0Uz3Ug==
+Date: Thu, 3 Sep 2026 11:24:47 +0100
+From: Lee Jones <lee@kernel.org>
+To: a0282524688@gmail.com
+Cc: Ming Yu <tmyu0@nuvoton.com>, linux-kernel@vger.kernel.org,
+	mfd@lists.linux.dev
+Subject: Re: [PATCH v7 04/10] mfd: nct6694: Rename driver to nct6694-usb and
+ update Kconfig
+Message-ID: <20260903102447.GL2133376@google.com>
+References: <20260821033505.4017901-1-a0282524688@gmail.com>
+ <20260821033505.4017901-5-a0282524688@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260903090625.GI2133376@google.com>
+In-Reply-To: <20260821033505.4017901-5-a0282524688@gmail.com>
 
-On Thu, Sep 03, 2026 at 10:06:25AM +0100, Lee Jones wrote:
-> On Wed, 02 Sep 2026, Conor Dooley wrote:
+On Fri, 21 Aug 2026, a0282524688@gmail.com wrote:
+
+> From: Ming Yu <a0282524688@gmail.com>
 > 
-> > On Wed, Sep 02, 2026 at 11:25:32AM +0100, Lee Jones wrote:
-> > > On Tue, 01 Sep 2026, Conor Dooley wrote:
-> > > 
-> > > > On Mon, Aug 31, 2026 at 04:15:21PM -0400, Frank.Li@oss.nxp.com wrote:
-> > > > > From: Frank Li <Frank.Li@nxp.com>
-> > > > > 
-> > > > > Allow dlg,da9053-aa fallback to dlg,da9052 to fix legacy platform (> 10
-> > > > > years) check_dtbs warnings:
-> > > > >   arch/arm/boot/dts/nxp/imx/imx53-voipac-bsb.dtb: dialog@48 (dlg,da9053-aa): compatible: ['dlg,da9053-aa', 'dlg,da9052'] is too long
-> > > > >         from schema $id: http://devicetree.org/schemas/mfd/dlg,da9052.yaml
-> > > > > 
-> > > > > Signed-off-by: Frank Li <Frank.Li@nxp.com>
-> > > > > ---
-> > > > > Previous try drop dlg,da9052 at
-> > > > > https://lore.kernel.org/imx/20260404-thoughtful-placid-boobook-da26da@quoll/
-> > > > > 
-> > > > > but Krzy have concern about compablity.
-> > > > > 
-> > > > > https://lore.kernel.org/imx/20251107-matrimony-showdown-ba6ce6996b2f@spud/
-> > > > > 
-> > > > > Conor prefer update old dts.
-> > > > 
-> > > > I don't think these devices are actually compatible, so this fallback
-> > > > would be wrong.
-> > > > The data comes from the match data, be that spi or i2c, and there's
-> > > > explicitly different behaviour for the da9052 and da9053aa.
-> > > > I doubt the legacy platform ever worked properly, and this is what should
-> > > > have been explained in the PR that Krzysztof denied not just blindly
-> > > > citing a dtbs_check problem.
-> > > > 
-> > > > Nacked-by: Conor Dooley <conor.dooley@microchip.com>
-> > > 
-> > > At first glance this looks like an Acked-by.
-> > > 
-> > > IMHO, this is going to cause issues - please rethink this.
-> > 
-> > As in, use NAKed-by instead or just say NAK without the name/mail?
-> > Not entirely sure what you're getting at.
+> Rename nct6694.c to nct6694-usb.c to accurately reflect that it
+> implements the USB transport backend.
 > 
-> As in, don't make NACKs looks like acceptance trailers.
+> Additionally, introduce a new MFD_NCT6694_USB Kconfig option and convert
+> the existing MFD_NCT6694 into a hidden core symbol. The core symbol is
+> now automatically selected by the transport drivers.
 > 
-> If you're going to "NACK", which I always felt was a bit harsh anyway,
-> just say it without making it appear like an official sign-off.  Please.
+> This Kconfig and naming restructure aligns with standard MFD transport
+> abstraction practices, paving the way for future interfaces (e.g., HIF)
+> to be seamlessly integrated.
+> 
+> Signed-off-by: Ming Yu <a0282524688@gmail.com>
+> ---
+> Changes in v7:
 
-Heh, tag is correct if maintainer, e.g. you in this case, would like to
-take such patch still. There were already such cases, I did it once as
-well to express that I do not agree with the approach taken by other
-maintainer and I want to be sure that a commit in git history will never
-be used in future discussions against my review (because this happens
-all the time "I found commit like this, so I can add here poor code").
+No changes or you forgot to populate it?
 
-Best regards,
-Krzysztof
+> Changes in v6:
 
+> - Split from the monolithic v4 patch to follow the single logical change
+>   principle.
+> 
+>  MAINTAINERS                              |  2 +-
+>  drivers/mfd/Kconfig                      | 31 ++++++++++++++++--------
+>  drivers/mfd/Makefile                     |  2 +-
+>  drivers/mfd/{nct6694.c => nct6694-usb.c} |  0
+>  4 files changed, 23 insertions(+), 12 deletions(-)
+>  rename drivers/mfd/{nct6694.c => nct6694-usb.c} (100%)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 040df7bfb24f..89d7339f3613 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -19356,7 +19356,7 @@ S:	Supported
+>  F:	drivers/gpio/gpio-nct6694.c
+>  F:	drivers/hwmon/nct6694-hwmon.c
+>  F:	drivers/i2c/busses/i2c-nct6694.c
+> -F:	drivers/mfd/nct6694.c
+> +F:	drivers/mfd/nct6694-usb.c
+>  F:	drivers/net/can/usb/nct6694_canfd.c
+>  F:	drivers/rtc/rtc-nct6694.c
+>  F:	drivers/watchdog/nct6694_wdt.c
+> diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
+> index 763ce6a34782..5506a0adf3ec 100644
+> --- "a/drivers/mfd/Kconfig"
+> +++ "b/drivers/mfd/Kconfig"
+> @@ -1164,19 +1164,30 @@ config MFD_MENF21BMC
+>  	  will be called menf21bmc.
+>  
+>  config MFD_NCT6694
+
+So what does this do now?
+
+Will there be another core symbol soon?
+
+> -	tristate "Nuvoton NCT6694 support"
+> +	tristate
+>  	select MFD_CORE
+> +	help
+> +	  Core MFD support for the Nuvoton NCT6694 peripheral expander.
+> +	  This provides the common APIs and shared structures used by all
+> +	  interfaces (USB, HIF) to access the NCT6694 hardware features
+> +	  such as GPIO, I2C, CAN-FD, Watchdog, ADC, PWM, and RTC.
+> +
+> +	  It is selected automatically by the transport interface drivers.
+> +
+> +config MFD_NCT6694_USB
+> +	tristate "Nuvoton NCT6694 USB interface support"
+> +	select MFD_NCT6694
+>  	depends on USB
+>  	help
+> -	  This enables support for the Nuvoton USB device NCT6694, which shares
+> -	  peripherals.
+> -	  The Nuvoton NCT6694 is a peripheral expander with 16 GPIO chips,
+> -	  6 I2C controllers, 2 CANfd controllers, 2 Watchdog timers, ADC,
+> -	  PWM, and RTC.
+> -	  This driver provides core APIs to access the NCT6694 hardware
+> -	  monitoring and control features.
+> -	  Additional drivers must be enabled to utilize the specific
+> -	  functionalities of the device.
+> +	  This enables support for the Nuvoton NCT6694 peripheral expander
+> +	  connected via the USB interface.
+> +
+> +	  The transport driver uses USB bulk and interrupt transfers to
+> +	  communicate with the NCT6694 firmware. Enable this option if you
+> +	  are using the NCT6694 via a USB connection.
+> +
+> +	  To compile this driver as a module, choose M here: the module
+> +	  will be called nct6694-usb.
+>  
+>  config MFD_OCELOT
+>  	tristate "Microsemi Ocelot External Control Support"
+> diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
+> index dd4bb7e77c33..48caac64f3d8 100644
+> --- a/drivers/mfd/Makefile
+> +++ b/drivers/mfd/Makefile
+> @@ -124,7 +124,7 @@ obj-$(CONFIG_MFD_MC13XXX_I2C)	+= mc13xxx-i2c.o
+>  
+>  obj-$(CONFIG_MFD_PF1550)	+= pf1550.o
+>  
+> -obj-$(CONFIG_MFD_NCT6694)	+= nct6694.o
+> +obj-$(CONFIG_MFD_NCT6694_USB)	+= nct6694-usb.o
+>  
+>  obj-$(CONFIG_MFD_CORE)		+= mfd-core.o
+>  
+> diff --git a/drivers/mfd/nct6694.c b/drivers/mfd/nct6694-usb.c
+> similarity index 100%
+> rename from drivers/mfd/nct6694.c
+> rename to drivers/mfd/nct6694-usb.c
+> -- 
+> 2.34.1
+> 
+
+-- 
+Lee Jones
