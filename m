@@ -1,202 +1,1429 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13F233C872B
-	for <mfd@lists.linux.dev>; Fri,  4 Sep 2026 07:17:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788506262; cv=pass; b=c3lEi2kKBFsJ8sUsJKMGXvqP1cQmYn/h/G4KIs9B7ohdQrPaPCbG+oXTlObK4pDj+1W3nvFSKCHD1zqWzj/vLegnyN1WTK15oNkto66exfs+++CtCgwBbZ4zY6vlmKpkXCvndZ8zyGMbpDXL1R/JUYtThzxoN8j09XYuSM7byAU=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788506262; c=relaxed/simple;
-	bh=J8dsPnAWdboF1yFvJDLhBeE5gRfGXjP3682VM1Iqx2M=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=YoMTY1dWYVH+2gWRmfkPljKw0PmtekNcXn6Jh1JkeLknk5WS1cdWRsbgWtdvk5BGfR8i1fSjKCko9C0ITCcbUKx7Zy/cb4ijtohLY5U8E9eNyMMuvmxl3iVErbUohRmhbGnMMa3oPIcyk6jJXdln2aREd0z+1s4JwfiU0smLNDU=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=OI8FT8Wh; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hTi3vxxp; arc=pass smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13BED3CF690
+	for <mfd@lists.linux.dev>; Fri,  4 Sep 2026 07:44:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788507881; cv=none; b=MRz7QdfoYRUQl/SQVkkBYDZTsVG8hlHM6ZD1iz3+h6hnOTF4fVxEa1ee57XtnjeGDDYn4m0rhxhvuRd2gh+r+ET/3OpoTqiNgQ5tt+ieRReG5UGHW3lVtCFj9uPwwj3BYMKYKLfFG1cnwYuGPCCLhnx/94eUijaVKa6JgKN09+s=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788507881; c=relaxed/simple;
+	bh=SxixLoJpvWUpuYUtzMHD+zbfVEWQKfv8O8wWXfnoV6o=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=GeSZjG/p4mXqeW+aHgsILckGl16uh1GBiIeC9rLjWoAHQ0H5yfo/pjFguKNPTQTkcxIM1YT6dk4gr6jlf0lqMiuYc96LwvpWzLY6T3vSvEpjTtshidZwY5gJoJDORIA9zPGAK21Lr127Tre2FoV1Z4Wnb6aOBWS9sTga9GBrB5o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=TMsV6CPE; arc=none smtp.client-ip=209.85.128.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="OI8FT8Wh";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hTi3vxxp"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68463Ucr3009002
-	for <mfd@lists.linux.dev>; Fri, 4 Sep 2026 07:17:40 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	LB6s0B651lSSZ12Sdfk1hENNUEaAaUZ9od/XOsIo4uY=; b=OI8FT8WhAfwVk+ZZ
-	8T5wxyqpe708tolnXc/VTkesfR67qqX1vGQ9RxJyEyTCl2T5XFfW8RIeogaCL5Zt
-	4E/omkikXWrxxm+RLQRXjGY0OlJQ2lKWJX0g7LtAZgVjohNaB92hYZsfdUHcte/P
-	SBndiqT6076Ry6JMFdRQyA+2Yf7A2Xx9N0ugFAnnXxcUTJ91+wZlVx8as/ZggFZl
-	TmagoMORfsZZj+pAc6bU0p25PSM7HrrM0tq/Hyx/iBXiNcsc5oY0K9+La/nYnu39
-	XHaTGr8kOkiuMF9F3RftxWTB2ENwvtQAqCyEA0/kgNGd5Ouwb+M10AzzU4CyC56j
-	k3HbZQ==
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gfp0r0nur-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <mfd@lists.linux.dev>; Fri, 04 Sep 2026 07:17:39 +0000 (GMT)
-Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-cc21bc2923fso1113045a12.2
-        for <mfd@lists.linux.dev>; Fri, 04 Sep 2026 00:17:39 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788506259; cv=none;
-        d=google.com; s=arc-20260327;
-        b=IzgChsZZu18fqD7DEm2FPJgLPhYIXBSB7sXi0hruilCDyzTvltY5/QXjKnWgnm54XF
-         BGh/yWmbLnwN3Wcv3DM3k47qI/oEM4BRjEEA7lmV3WPui0nsKXZVXBz6Tp2DC1vNpvNe
-         F8zvBx8ldZmvjFrqKX/rtw/Do4Xra97RHAXLrLlDhKt3G0Sr+b43qKH1F9JNql2YDgna
-         dGg+UcOVzlhZIw9QXlQ4VLK3gQJytH5wvUQYUmJejr92tRUd6KttDzKYbfU+HXVDe7PX
-         dxg7xq9tc2OUc0dFvGkBVMal6YSEs5MxoNbSMSrXL5uJrQu5hRfEhgYsgq349DIImzz7
-         i17g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=LB6s0B651lSSZ12Sdfk1hENNUEaAaUZ9od/XOsIo4uY=;
-        fh=4zRiIbAZG5MZmyzjqd5tDaKUw0rdcH7zh6ozR5lrIyI=;
-        b=bg6Rtv/1DezJhcXYGK/inn2mxTFTzky4xoXgypGbwi6W5cjBkbxQh+2N1GmTuvGQm6
-         U1/2HxehloEMgp1KNJ1XbLifJZhqY0Viouss6gt9AsoZLsoobYSiPZLUma5m+5CtpOrh
-         82Y+kEMyxyT+Ex695TBBK6IAO9mh+Lw4HiiesNcSd1qNlRiMi7kxPvMW4SdjhH3C60PQ
-         AFNPhCZtA/huJpWUj7v0JRzTRjsqzWHMCR4CY50YZ9VGDuEUqbpsmczVI1Pqy7tJDUAD
-         3xhsFX+gRUIGR0b8RSDfSBKNLXOZIyhUDAS0+AJDMHFrfkwNhSUjlmnsuISa0o1JWL6r
-         rMcg==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="TMsV6CPE"
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-49b0d8bc2aaso7825415e9.0
+        for <mfd@lists.linux.dev>; Fri, 04 Sep 2026 00:44:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788506259; x=1789111059; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=LB6s0B651lSSZ12Sdfk1hENNUEaAaUZ9od/XOsIo4uY=;
-        b=hTi3vxxp+h0XdO2u1zvPn8sXfaLFxlRgEnCYdw0/Xc3Gy2Ca7W9yx3a0Vob4NlIywe
-         J2KfPyUVYfWFDM9G06hKeDWFffPgghCpAh6/A58zjizPo4R/BpC3nHhFLfYN4XdRZc0W
-         gCaH7/ZlzcEvZQYcLJ31Gmld8tj0uQUhOYPP8cBmreAW3cTG0094o8CoBVzBuUr/JDxY
-         D2y8LUH5fTkxeIEsXnhO5wvdMkLAodgf64qzSJ8C1Xrg2clDPyqEd20HjdtxAjlVXm8U
-         Wd0MMzv38lquD00UvlPKphhPITzViBkPXenMSiLO/lyz3bFv+wJF5LL+Ar16m+guuS1w
-         FpnA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788506259; x=1789111059;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=baylibre.com; s=google; t=1788507876; x=1789112676; darn=lists.linux.dev;
+        h=content-type:mime-version:message-id:date:references:in-reply-to
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=LB6s0B651lSSZ12Sdfk1hENNUEaAaUZ9od/XOsIo4uY=;
-        b=eziGO9HB+C/JMix9Imk3Je3OBUPzpCvdW+mGxGM068YH/rIJ5wSF+a3WUk4eo5DZLZ
-         c7tNS384lMOv+s5vJoESOwTEGs4JXgCMMSheCyVc70YevefAdpDTQzb+M7f3dwj4UPvA
-         CO+klvB5XhBGxA2td/bb9ZIM3HmK+edUFysIduTqEh00N51+9/QBeo7XPFuWfbk8PYEA
-         PVBYwAplWB3Hq1F7zewE/5suUK+VwmKiSmntnI2wXc82oJo/GbuhpAbIphLt1PxeLGto
-         irFUtscTtulS0c+Wn7eH0yWz4xq0lLE0ORZlXcbedTwQdFnCIrfz/lckv2/htFTRx4R7
-         pHjg==
-X-Forwarded-Encrypted: i=1; AKwUvBw1ApS7PAw2Z3qnpiByNNNAC+cJwTE6mwIAzaH0Ox8/XVyHqNwGOB5yUB6EEDkZhIN9kxA=@lists.linux.dev
-X-Gm-Message-State: AFuF++ldup+Tsqyf0aRCcPhthazA/jAs7GZ4W970SRoeT3O1m9C/HNwG
-	iSJ8ewhiZ4g/0r4oY1rqlAqa4H6Tv2/NtdFy3QNLpw0Ys30vZQHM6Y02FjgZ7r4lC8bEPv6vdQg
-	9e62L0aTNW+yE7wQhWgb6IkOQ6kamQT7hi0CKZxhcD1xljps/pOiNTDo/H1lvFbquwdpS+CNJBB
-	f+PY2p9+LMBgAnoGzIFU20+r3+g8dR6w==
-X-Gm-Gg: AYBFou2MjWZTCwjeYzSm/JrEha6VVUh/GCu1iPFQXjIjJBuK23vu5ZPm+Xsjgsr/1ZK
-	rKITjg3lNo3oI1+AWX+m/AQPeFknFjH2cnfu+LUP4eAf3EKGBMrZCT4QX4yPkk6AdM7bUlcvnpB
-	zqcYLHApRKIN42fpFPdUGcTHsDvU8xvl9I6gHLhaLtjhVixG20ytCIY0AOZA==
-X-Received: by 2002:a05:6a20:7290:b0:3cd:9f99:3381 with SMTP id adf61e73a8af0-3da39878551mr5927955637.0.1788506258755;
-        Fri, 04 Sep 2026 00:17:38 -0700 (PDT)
-X-Received: by 2002:a05:6a20:7290:b0:3cd:9f99:3381 with SMTP id
- adf61e73a8af0-3da39878551mr5927876637.0.1788506258295; Fri, 04 Sep 2026
- 00:17:38 -0700 (PDT)
+        bh=mn4IHvl7GoSJtXJxPkH6IqdGI00c13eMeep4WJbgeXM=;
+        b=TMsV6CPEABeYnhu/E9cC44TO8QJSCqYlkof1C7+F3uhqNVt7rm+K3M3SPYDxIiulbX
+         eM2BPMWLJ9fH7Px3E1EwE3AqRFSnQuitCnXaosNEfEWrr83cc+oKO94zFzD6rRWoRolz
+         mBev6uD3br+a1aTfdUwit4zYzLj63WN3QuoSwVB9GKAYpFZjZFVqJADb0xZVMP7TEESh
+         sibpboxZ4WliMcN9NoGv6LXlOaL55Ol0N7Pm0MIiX1aBhlTQbw/Fyk77DOyn8SfahkUI
+         OlyHO3zm4OQueAhjp/l7oAAtb2diRGoePjjMsUy8SLULKsfEOKljFckKt3tGnHVC6OSg
+         jJ0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788507876; x=1789112676;
+        h=content-type:mime-version:message-id:date:references:in-reply-to
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=mn4IHvl7GoSJtXJxPkH6IqdGI00c13eMeep4WJbgeXM=;
+        b=U7ooJ0KIO8EUiun/e2GFoCaLgd9NDzL43bOKCBh08qzgWs8uBRL1LBnRYTe7fFPyo/
+         Iu3V3LY6Tqtn4mOQv2/1ndgv7D1Ib5rzsPDo43vx+3vtr73ShvVq+IhIG17TL8R5sP6h
+         PjCcTpmjiDY+aA/f2LZ/63z6tcuOHTTxG2CxeIY9TDcFcDy0lv9CK0tjt4uIRNyDNGXK
+         rvklV6+1jrrnwHoO2zEgXwC1PixpkSJk4ZrTyx6Pjd7s0nPmI8ZCE5s+DNkSVXlFI8Ov
+         vhnlW24PqKpRECix/sKgFLB6fKXIHhf8H46IsIzoDuwYHk6BHC7w85slSZ85CshgJlYI
+         E2/w==
+X-Forwarded-Encrypted: i=1; AKwUvBxnwi/euaD1bfI5xAjUjBILQQcMMFnsZBeuAGokudXbvZgc88uFEmNaIuQUAh28+XgNc+E=@lists.linux.dev
+X-Gm-Message-State: AFuF++nZDg288tzPSBOehTl/6raMLufX5zfVv2f8u4R1LmX7m8637u1e
+	0OSXdOejmxJzWnpd8zkyF/yg4Xe8o5Xa8YfRsjIfhV0KJB0FtnmJYocFa7Dl2L5xbPc=
+X-Gm-Gg: AYBFou3/7IaULDQ5INuCanflemS66GkLDsgiMt72PR61JYDsQHIYjY6LEjU6bhcpuy7
+	2y3CcSpT+ke9iSr5qSOHzWbHtdeR3858ea6P6Hy2hiTuhQei50qXxr3TcasKJ9sY+y60OFZsoPt
+	8ILoakWGZNXW3PY7AIfMUELtZellzDSg8/pX0aZ4vdfEvVCYDhLyhLk9KlCvC7blt+aHdedO6LB
+	UH802oOp2TK0zu0CAkoGj3urDwYnRx4S0zaUCuzjvFodUbkwtEOFijtIuD5WdvVlJfQhKjIzZah
+	ZyvS2yXbmRF1BEYRQyfI3fXazCr5fd7CEbFEJZ+wyhYydOI7Z7OxzUSRKXHWqYdKEiTPLwP7GGf
+	0m8yNmnOjTqqJYFzTTw7tco2iJl2c8U6AXTzW3sv3t6Ls9WWj8hWPkTHWahDAyd0THPJY0Hk1Ry
+	Ezp0SPSrmVVfvjal5GUhStpTcFWed/jjJeHAgym9CTAvxaE5uqEWF11R8HAXlIvWG0OQH7gMSq3
+	CcTnjU=
+X-Received: by 2002:a05:600c:8b88:b0:49c:db20:da13 with SMTP id 5b1f17b1804b1-49cf822a707mr50344025e9.5.1788507876122;
+        Fri, 04 Sep 2026 00:44:36 -0700 (PDT)
+Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4858791bddasm4826929f8f.0.2026.09.04.00.44.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 04 Sep 2026 00:44:35 -0700 (PDT)
+From: Jerome Brunet <jbrunet@baylibre.com>
+To: Long Zhao via B4 Relay <devnull+longzhao.ambarella.com@kernel.org>, Arnd
+ Bergmann <arnd@arndb.de>, Krzysztof Kozlowski <krzk@kernel.org>, Alexandre
+ Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org
+Cc: Long Zhao <longzhao@ambarella.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Michael Turquette <mturquette@baylibre.com>,
+ Stephen Boyd <sboyd@kernel.org>, Linus Walleij <linusw@kernel.org>,
+ Bartosz Golaszewski <brgl@kernel.org>, Greg Kroah-Hartman
+ <gregkh@linuxfoundation.org>, Jiri Slaby <jirislaby@kernel.org>, Andy
+ Shevchenko <andriy.shevchenko@linux.intel.com>, Ilpo =?utf-8?Q?J=C3=A4rvi?=
+ =?utf-8?Q?nen?=
+ <ilpo.jarvinen@linux.intel.com>, Catalin Marinas
+ <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Long Zhao
+ <zl020895@163.com>, Lee Jones <lee@kernel.org>, mfd@lists.linux.dev,
+ devicetree@vger.kernel.org, linux-clk@vger.kernel.org,
+ linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v6 07/13] clk: ambarella: add CV75 CCU driver
+In-Reply-To: <20260904-cv75-v5-v6-7-e918514cb3b1@ambarella.com>
+References: <20260904-cv75-v5-v6-0-e918514cb3b1@ambarella.com>
+ <20260904-cv75-v5-v6-7-e918514cb3b1@ambarella.com>
+Date: Fri, 04 Sep 2026 09:44:33 +0200
+Message-ID: <1jse3plau6.fsf@starbuckisacylon.baylibre.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com>
- <20260903160401.GV2133376@google.com>
-In-Reply-To: <20260903160401.GV2133376@google.com>
-From: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
-Date: Fri, 4 Sep 2026 09:17:25 +0200
-X-Gm-Features: AcwNN1XLgC_UnHcC1VgAAx4Zjez2ZZ2qUdiBHVeX_BYEXGU9Ghy4hb4yt4Luazs
-Message-ID: <CAPx+jO9Hi2R_UnCEhsXLwf74c3RTb+RodaJ6SOVXbQX_eHt++A@mail.gmail.com>
-Subject: Re: [PATCH v24 00/12] Implement PSCI reboot mode driver for PSCI resets
-To: Lee Jones <lee@kernel.org>
-Cc: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        Arnd Bergmann <arnd@arndb.de>, Bjorn Andersson <andersson@kernel.org>,
-        Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>,
-        Souvik Chakravarty <Souvik.Chakravarty@arm.com>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Andy Yan <andy.yan@rock-chips.com>,
-        Matthias Brugger <matthias.bgg@gmail.com>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        John Stultz <john.stultz@linaro.org>,
-        Moritz Fischer <moritz.fischer@ettus.com>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Christian Loehle <christian.loehle@arm.com>,
-        Ulf Hansson <ulfh@kernel.org>,
-        Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Sudeep Holla <sudeep.holla@kernel.org>,
-        Florian Fainelli <florian.fainelli@broadcom.com>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
-        Andre Draszik <andre.draszik@linaro.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
-        linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, mfd@lists.linux.dev,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-        Song Xue <quic_songxue@quicinc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA0MDA2NiBTYWx0ZWRfX4W88R7dxnjYY
- WnLrjQZxnVjxhArjiTBcBpWIUTraxV82Tlqud7mMT1QgKWbjKBefDNphzZKmA2Z4DOP5FatJ+zT
- QmDZs91Z7159+x2tQ0Z6xA2sEVHOKRA=
-X-Proofpoint-ORIG-GUID: DhyNFqqSuJ24VWrsg0RtnoyG5E4GIaem
-X-Proofpoint-GUID: DhyNFqqSuJ24VWrsg0RtnoyG5E4GIaem
-X-Authority-Analysis: v=2.4 cv=T/S8ifKQ c=1 sm=1 tr=0 ts=6a9a7093 cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=_glEPmIy2e8OvE2BGh3C:22 a=VwQbUJbxAAAA:8 a=RfyTg-q-OfOJAL476ygA:9
- a=QEXdDO2ut3YA:10 a=_Vgx9l1VpLgwpw_dHYaR:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA0MDA2NiBTYWx0ZWRfXzip65kF7ns3r
- dUpjJm46lDKzKy0zV14ZKGMVadR4r1dHM3eYR9BdGh8x/JykQHRJtuyCEQygAo0GbQNgxVJFWTX
- uD/nY/faIme7KNxUOTvatRv0xNGBh28goQOqjFUpAd8LInXLpRbfo0r1Q7pWPQWce6n9Lsnwr9m
- nLFhtZelOf2sjg4eFA5WqJzdWkluhVpSzdbQ9I5Xp+qMO7LEb6p72FjE/zgEI58nQ5LTX22K/zQ
- h4vsOe2vHY8iYGCNU2WCuKQsjCNGuIby35APNylh+jubF7QmNK2EsNjepSVl3PQYK9i/ooh42Sf
- nvAFwzkVOoXNekeldQ7bvVj+2VgttEY3F0nPiGVZ9awdKdyaAeNT7Oyx99oto9SgQj4rK5JlwmV
- IwkkQ/ICeCoaWNd3NSjFXgsCAdlB6xoRY+Sw4ZSwQaAaCQgZYw5bw55ajbtntJxA5KL4TRCMGKT
- +GYdboXQXT6NReLCdEg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-04_02,2026-09-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 phishscore=0 lowpriorityscore=0 impostorscore=0
- priorityscore=1501 malwarescore=0 clxscore=1015 spamscore=0 suspectscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2609040066
+Content-Type: text/plain
 
-On Thu, Sep 3, 2026 at 6:04=E2=80=AFPM Lee Jones <lee@kernel.org> wrote:
->
-> On Mon, 03 Aug 2026, Shivendra Pratap wrote:
->
-> > Userspace should be able to initiate device reboots using the various
-> > PSCI SYSTEM_RESET and SYSTEM_RESET2 types defined by PSCI spec. This
-> > patch series introduces psci-reboot-mode driver that will induce
-> > command-based resets to psci driver for executing the device reset.
->
-> The more I read through this submission, the more convinced I get that
-> it does not belong in MFD.  This is a potentially nice "architectural
-> workaround" if it a) didn't break some of MFD's fundamental "real
-> devices only" rules, of which cpuidle and reboot-mode certainly are not
-> and b) didn't require a massive expansion of what the MFD core is
-> designed to do.  I am more that a little uncomfortable with the 150
-> lines being added to MFD core support this workaround.
->
-> My best suggestion so far would be to base these changes inside
-> drivers/firmware/psci and use the aux bus to communicate with the
-> various components.
+On ven. 04 sept. 2026 at 14:38, Long Zhao via B4 Relay <devnull+longzhao.ambarella.com@kernel.org> wrote:
 
-We had some off list discussions about this as well and it seems like
-we are in agreement. What you are suggesting makes perfect sense to
-me.
+> From: Long Zhao <longzhao@ambarella.com>
+>
+> Add the Ambarella CV75 clock driver covering the core PLL and the
+> UART0 / AHB / APB clocks needed for early console bring-up.
+>
+> Signed-off-by: Long Zhao <longzhao@ambarella.com>
+> ---
+>  drivers/clk/Kconfig                 |   1 +
+>  drivers/clk/Makefile                |   1 +
+>  drivers/clk/ambarella/Kconfig       |  13 ++
+>  drivers/clk/ambarella/Makefile      |   6 +
+>  drivers/clk/ambarella/ccu-cv75.c    | 296 +++++++++++++++++++++++++
+>  drivers/clk/ambarella/ccu_common.c  |  60 +++++
+>  drivers/clk/ambarella/ccu_common.h  |  25 +++
+>  drivers/clk/ambarella/ccu_mux_div.c | 234 ++++++++++++++++++++
+>  drivers/clk/ambarella/ccu_mux_div.h |  35 +++
+>  drivers/clk/ambarella/ccu_pll.c     | 421 ++++++++++++++++++++++++++++++++++++
+>  drivers/clk/ambarella/ccu_pll.h     |  70 ++++++
+>  11 files changed, 1162 insertions(+)
 
-Kind regards
-Uffe
+Again seems like this could be split. AFAICT, you are adding 2 clock
+driver and a controller
+
+>
+> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+> index 1717ce75a907..fbbf4963716c 100644
+> --- a/drivers/clk/Kconfig
+> +++ b/drivers/clk/Kconfig
+> @@ -506,6 +506,7 @@ config COMMON_CLK_RPMI
+>  	  the RISC-V platform management interface (RPMI) specification.
+>  
+>  source "drivers/clk/actions/Kconfig"
+> +source "drivers/clk/ambarella/Kconfig"
+>  source "drivers/clk/analogbits/Kconfig"
+>  source "drivers/clk/aspeed/Kconfig"
+>  source "drivers/clk/bcm/Kconfig"
+> diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+> index cc108a75a900..30d823ee606f 100644
+> --- a/drivers/clk/Makefile
+> +++ b/drivers/clk/Makefile
+> @@ -112,6 +112,7 @@ obj-$(CONFIG_COMMON_CLK_XGENE)		+= clk-xgene.o
+>  
+>  # please keep this section sorted lexicographically by directory path name
+>  obj-y					+= actions/
+> +obj-y					+= ambarella/
+>  obj-y					+= analogbits/
+>  obj-y					+= aspeed/
+>  obj-$(CONFIG_COMMON_CLK_AT91)		+= at91/
+> diff --git a/drivers/clk/ambarella/Kconfig b/drivers/clk/ambarella/Kconfig
+> new file mode 100644
+> index 000000000000..d79bb4bd6df5
+> --- /dev/null
+> +++ b/drivers/clk/ambarella/Kconfig
+> @@ -0,0 +1,13 @@
+> +# SPDX-License-Identifier: GPL-2.0-only
+> +
+> +config CLK_AMBARELLA_CV75
+> +	bool "Ambarella CV75 RCT clock controller"
+> +	depends on ARCH_AMBARELLA || COMPILE_TEST
+> +	select CLK_AMBARELLA_CCU
+> +	default ARCH_AMBARELLA
+> +	help
+> +	  Say Y to enable the Ambarella CV75 RCT clock controller.
+> +
+> +config CLK_AMBARELLA_CCU
+> +	bool
+> +	select REGMAP_MMIO
+> diff --git a/drivers/clk/ambarella/Makefile b/drivers/clk/ambarella/Makefile
+> new file mode 100644
+> index 000000000000..36e96326ea97
+> --- /dev/null
+> +++ b/drivers/clk/ambarella/Makefile
+> @@ -0,0 +1,6 @@
+> +#
+> +# Makefile for ambarella specific clk
+> +#
+> +
+> +obj-$(CONFIG_CLK_AMBARELLA_CCU) += ccu_common.o ccu_mux_div.o ccu_pll.o
+> +obj-$(CONFIG_CLK_AMBARELLA_CV75) += ccu-cv75.o
+> diff --git a/drivers/clk/ambarella/ccu-cv75.c b/drivers/clk/ambarella/ccu-cv75.c
+> new file mode 100644
+> index 000000000000..c4828be598be
+> --- /dev/null
+> +++ b/drivers/clk/ambarella/ccu-cv75.c
+> @@ -0,0 +1,296 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (C) 2026 Ambarella, Inc.
+> + *
+> + * CV75 RCT clock controller for boot clocks.
+> + */
+> +
+> +#include <linux/clk-provider.h>
+> +#include <linux/clk.h>
+> +#include <linux/module.h>
+> +#include <linux/of.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/slab.h>
+> +
+> +#include <dt-bindings/clock/ambarella,cv75-rct.h>
+> +
+> +#include "ccu_common.h"
+> +#include "ccu_mux_div.h"
+> +#include "ccu_pll.h"
+> +
+> +enum amb_cv75_clk_type {
+> +	AMB_CV75_CLK_FIXED_RATE,
+> +	AMB_CV75_CLK_FIXED_FACTOR,
+> +	AMB_CV75_CLK_PLL,
+> +	AMB_CV75_CLK_DIV,
+> +	AMB_CV75_CLK_MUX_DIV,
+> +};
+> +
+> +enum amb_cv75_clk_ref {
+> +	AMB_CV75_CLK_REF_OSC = -1,
+> +	AMB_CV75_CLK_REF_DUMMY = -2,
+
+This is fishy, needs a comment at least
+
+> +};
+> +
+> +/* PLL version for CV75 (ambarella,clkpll-v1 in vendor DTS) */
+> +static const struct amb_pll_soc_data cv75_pll_soc_data = {
+> +	.pll_version	= 1,
+> +	.fsout_mask	= CTRL2_FSOUT_DIV2,
+> +	.fsout_val	= CTRL2_FSOUT_DIV2,
+> +	.fsdiv_mask	= CTRL2_FSDIV_DIV2,
+> +	.fsdiv_val	= CTRL2_FSDIV_DIV2,
+> +	.vcodiv_mask	= CTRL2_VCODIV_DIV2,
+> +	.vcodiv_val	= CTRL2_VCODIV_DIV2,
+> +	.vco_max_mhz	= 2600UL,
+> +	.vco_min_mhz	= 850UL,
+> +	.vco_range	= { 1800UL, 1400UL, 1100UL, 0UL },
+> +};
+> +
+> +struct amb_cv75_clk_desc {
+> +	int id;
+> +	enum amb_cv75_clk_type type;
+> +	const char *name;
+> +	int parent;
+> +
+> +	union {
+> +		struct {
+> +			unsigned long rate;
+> +		} fixed_rate;
+> +		struct {
+> +			unsigned long flags;
+> +			unsigned int mult;
+> +			unsigned int div;
+> +		} fixed_factor;
+> +		struct {
+> +			u32 reg_offset[REG_NUM];
+> +			const struct amb_pll_soc_data *soc_data;
+> +		} pll;
+> +		struct {
+> +			u32 reg;
+> +			u32 shift;
+> +			u32 width;
+> +			u32 flags;
+> +			u32 fix_divider;
+> +		} div;
+> +		struct amb_mux_div_desc mux_div;
+> +	};
+> +};
+> +
+> +static const struct amb_cv75_clk_desc cv75_clks[] = {
+> +	{
+> +		.id = AMB_CV75_CLK_REF_DUMMY,
+> +		.type = AMB_CV75_CLK_FIXED_RATE,
+> +		.name = "dummy",
+> +		.fixed_rate.rate = 0,
+> +	},
+
+A clock that comes out of nowhere with a rate 0 is not OK.
+
+> +	{
+> +		.id = CV75_GCLK_CORE,
+> +		.type = AMB_CV75_CLK_PLL,
+> +		.name = "core",
+> +		.parent = AMB_CV75_CLK_REF_OSC,
+> +		.pll = {
+> +			.reg_offset = {
+> +				0x000, 0x004, 0x100,
+> +				0x104, 0x000, 0x000,
+> +			},
+> +			.soc_data = &cv75_pll_soc_data,
+> +		},
+> +	},
+> +	{
+> +		.id = CV75_GCLK_AHB,
+> +		.type = AMB_CV75_CLK_FIXED_FACTOR,
+> +		.name = "ahb",
+> +		.parent = CV75_GCLK_CORE,
+> +		.fixed_factor = {
+> +			.flags = 0,
+> +			.mult = 1,
+> +			.div = 2,
+> +		},
+> +	},
+> +	{
+> +		.id = CV75_GCLK_APB,
+> +		.type = AMB_CV75_CLK_FIXED_FACTOR,
+> +		.name = "apb",
+> +		.parent = CV75_GCLK_CORE,
+> +		.fixed_factor = {
+> +			.flags = 0,
+> +			.mult = 1,
+> +			.div = 4,
+> +		},
+> +	},
+> +	{
+> +		.id = CV75_GCLK_UART0,
+> +		.type = AMB_CV75_CLK_MUX_DIV,
+> +		.name = "uart0",
+> +		.mux_div = {
+> +			.name = "uart0",
+> +			.parents = (const int[]) {
+> +				AMB_CV75_CLK_REF_OSC, CV75_GCLK_CORE,
+> +				AMB_CV75_CLK_REF_DUMMY, AMB_CV75_CLK_REF_DUMMY,
+> +			},
+> +			.num_parents = 4,
+> +			.mux_reg = 0x1c8,
+> +			.mux_shift = 0,
+> +			.mux_mask = 0x3,
+> +			.div_reg = 0x038,
+> +			.div_shift = 0,
+> +			.div_width = 24,
+> +			.div_flags = CLK_DIVIDER_ONE_BASED,
+> +			.fix_divider = 1,
+> +		},
+> +	},
+> +};
+> +
+> +static struct clk_hw *amb_cv75_get_parent(struct amb_ccu *ccu,
+> +					  struct clk_hw *osc,
+> +					  struct clk_hw *dummy,
+> +					  int parent)
+> +{
+> +	if (parent == AMB_CV75_CLK_REF_OSC)
+> +		return osc;
+> +	if (parent == AMB_CV75_CLK_REF_DUMMY)
+> +		return dummy;
+> +
+> +	if (parent < 0 || parent >= ccu->data->num)
+> +		return ERR_PTR(-EINVAL);
+> +
+> +	if (!ccu->data->hws[parent])
+> +		return ERR_PTR(-EPROBE_DEFER);
+> +
+> +	return ccu->data->hws[parent];
+> +}
+> +
+> +static struct clk_hw *amb_cv75_register_mux_div(struct device *dev,
+> +						struct amb_ccu *ccu,
+> +						const struct amb_cv75_clk_desc *desc,
+> +						struct clk_hw *osc,
+> +						struct clk_hw *dummy)
+> +{
+> +	const struct amb_mux_div_desc *md = &desc->mux_div;
+> +	struct clk_parent_data *pdata;
+> +	struct clk_hw *parent;
+> +	u8 i;
+> +
+> +	pdata = devm_kcalloc(dev, md->num_parents, sizeof(*pdata), GFP_KERNEL);
+> +	if (!pdata)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	for (i = 0; i < md->num_parents; i++) {
+> +		if (md->parents[i] == AMB_CV75_CLK_REF_OSC) {
+> +			pdata[i].fw_name = "osc";
+> +			continue;
+> +		}
+> +
+> +		parent = amb_cv75_get_parent(ccu, osc, dummy, md->parents[i]);
+> +		if (IS_ERR(parent))
+> +			return parent;
+> +
+> +		pdata[i].hw = parent;
+> +	}
+> +
+> +	return amb_mux_div_register(dev, ccu->map, md, pdata);
+> +}
+> +
+> +static struct clk_hw *amb_cv75_register_clk(struct device *dev,
+> +					    struct amb_ccu *ccu,
+> +					    const struct amb_cv75_clk_desc *desc,
+> +					    struct clk_hw *osc,
+> +					    struct clk_hw *dummy)
+> +{
+> +	struct amb_pll_desc pll_desc;
+> +	struct clk_hw *parent;
+> +
+> +	switch (desc->type) {
+> +	case AMB_CV75_CLK_FIXED_RATE:
+> +		return devm_clk_hw_register_fixed_rate(dev, desc->name, NULL, 0,
+> +						       desc->fixed_rate.rate);
+> +	case AMB_CV75_CLK_FIXED_FACTOR:
+> +		parent = amb_cv75_get_parent(ccu, osc, dummy, desc->parent);
+> +		if (IS_ERR(parent))
+> +			return parent;
+> +
+> +		return devm_clk_hw_register_fixed_factor_parent_hw(dev,
+> +				desc->name, parent,
+> +				desc->fixed_factor.flags,
+> +				desc->fixed_factor.mult,
+> +				desc->fixed_factor.div);
+> +	case AMB_CV75_CLK_PLL:
+> +		parent = amb_cv75_get_parent(ccu, osc, dummy, desc->parent);
+> +		if (IS_ERR(parent))
+> +			return parent;
+> +
+> +		pll_desc.name = desc->name;
+> +		pll_desc.parent = parent;
+> +		memcpy(pll_desc.reg_offset, desc->pll.reg_offset,
+> +		       sizeof(pll_desc.reg_offset));
+> +		pll_desc.soc_data = desc->pll.soc_data;
+> +		pll_desc.frac_mode = false;
+> +
+> +		return amb_pll_register(dev, ccu->map, &pll_desc);
+> +	case AMB_CV75_CLK_DIV:
+> +		parent = amb_cv75_get_parent(ccu, osc, dummy, desc->parent);
+> +		if (IS_ERR(parent))
+> +			return parent;
+> +
+> +		return amb_div_register(dev, ccu->map, desc->name, parent,
+> +					desc->div.reg, desc->div.shift,
+> +					desc->div.width, desc->div.flags,
+> +					desc->div.fix_divider);
+> +	case AMB_CV75_CLK_MUX_DIV:
+> +		return amb_cv75_register_mux_div(dev, ccu, desc, osc, dummy);
+> +	default:
+> +		return ERR_PTR(-EINVAL);
+> +	}
+> +}
+> +
+> +static int amb_cv75_rct_probe(struct platform_device *pdev)
+> +{
+> +	struct amb_ccu *ccu;
+> +	struct clk *osc_clk;
+> +	struct clk_hw *osc, *dummy = NULL, *hw;
+> +	int i;
+> +
+> +	ccu = amb_ccu_init(pdev, ARRAY_SIZE(cv75_clks));
+> +	if (IS_ERR(ccu))
+> +		return PTR_ERR(ccu);
+> +
+> +	osc_clk = devm_clk_get(&pdev->dev, "osc");
+> +	if (IS_ERR(osc_clk))
+> +		return dev_err_probe(&pdev->dev, PTR_ERR(osc_clk),
+> +				     "missing osc clock\n");
+> +	osc = __clk_get_hw(osc_clk);
+
+If you properly declare your parent_data, you will not have to do this.
+just use fw_name in the parent data.
+
+> +
+> +	for (i = 0; i < ARRAY_SIZE(cv75_clks); i++) {
+> +		hw = amb_cv75_register_clk(&pdev->dev, ccu, &cv75_clks[i],
+> +					   osc, dummy);
+> +		if (IS_ERR(hw))
+> +			return dev_err_probe(&pdev->dev, PTR_ERR(hw),
+> +					     "failed to register %s\n",
+> +					     cv75_clks[i].name);
+> +
+> +		if (cv75_clks[i].id == AMB_CV75_CLK_REF_DUMMY)
+> +			dummy = hw;
+> +		else
+> +			ccu->data->hws[cv75_clks[i].id] = hw;
+> +	}
+> +
+> +	return amb_ccu_register(ccu);
+> +}
+
+Overall, the controller seems a bit overcomplicated to register 4 clocks.
+
+> +
+> +static const struct of_device_id amb_cv75_rct_match[] = {
+> +	{ .compatible = "ambarella,cv75-rct" },
+> +	{ }
+> +};
+> +MODULE_DEVICE_TABLE(of, amb_cv75_rct_match);
+> +
+> +static struct platform_driver amb_cv75_rct_driver = {
+> +	.probe	= amb_cv75_rct_probe,
+> +	.driver = {
+> +		.name = "ambarella-cv75-rct",
+> +		.of_match_table = amb_cv75_rct_match,
+> +	},
+> +};
+> +module_platform_driver(amb_cv75_rct_driver);
+> +
+> +MODULE_AUTHOR("Ambarella Inc.");
+> +MODULE_DESCRIPTION("Ambarella CV75 RCT clock controller");
+> +MODULE_LICENSE("GPL");
+> diff --git a/drivers/clk/ambarella/ccu_common.c b/drivers/clk/ambarella/ccu_common.c
+> new file mode 100644
+> index 000000000000..78587c5f2ce1
+> --- /dev/null
+> +++ b/drivers/clk/ambarella/ccu_common.c
+> @@ -0,0 +1,60 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (C) 2026 Ambarella, Inc.
+> + */
+> +
+> +#include <linux/clk-provider.h>
+> +#include <linux/module.h>
+> +#include <linux/of.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/regmap.h>
+> +
+> +#include "ccu_common.h"
+> +
+> +static const struct regmap_config amb_rct_regmap_config = {
+> +	.reg_bits = 32,
+> +	.val_bits = 32,
+> +	.reg_stride = 4,
+> +	.max_register = AMB_RCT_REG_SIZE - 4,
+> +};
+> +
+> +struct amb_ccu *amb_ccu_init(struct platform_device *pdev,
+> +			     unsigned int num_clks)
+> +{
+> +	struct amb_ccu *ccu;
+> +	void __iomem *base;
+> +
+> +	if (!num_clks)
+> +		return ERR_PTR(-EINVAL);
+> +
+> +	ccu = devm_kzalloc(&pdev->dev, sizeof(*ccu), GFP_KERNEL);
+> +	if (!ccu)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	ccu->dev = &pdev->dev;
+> +
+> +	ccu->data = devm_kzalloc(&pdev->dev,
+> +				 struct_size(ccu->data, hws, num_clks),
+> +				 GFP_KERNEL);
+> +	if (!ccu->data)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	ccu->data->num = num_clks;
+> +
+> +	base = devm_platform_ioremap_resource(pdev, 0);
+> +	if (IS_ERR(base))
+> +		return ERR_CAST(base);
+> +
+> +	ccu->map = devm_regmap_init_mmio(&pdev->dev, base,
+> +					 &amb_rct_regmap_config);
+> +	if (IS_ERR(ccu->map))
+> +		return ERR_CAST(ccu->map);
+> +
+> +	return ccu;
+> +}
+> +
+> +int amb_ccu_register(struct amb_ccu *ccu)
+> +{
+> +	return devm_of_clk_add_hw_provider(ccu->dev, of_clk_hw_onecell_get,
+> +					   ccu->data);
+> +}
+> diff --git a/drivers/clk/ambarella/ccu_common.h b/drivers/clk/ambarella/ccu_common.h
+> new file mode 100644
+> index 000000000000..f2bf9d1f06d7
+> --- /dev/null
+> +++ b/drivers/clk/ambarella/ccu_common.h
+> @@ -0,0 +1,25 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +/*
+> + * Copyright (C) 2026 Ambarella, Inc.
+> + */
+> +
+> +#ifndef __CCU_COMMON_H
+> +#define __CCU_COMMON_H
+> +
+> +#include <linux/clk-provider.h>
+> +#include <linux/device.h>
+> +#include <linux/regmap.h>
+> +
+> +#define AMB_RCT_REG_SIZE	0x1000
+> +
+> +struct amb_ccu {
+> +	struct device *dev;
+> +	struct regmap *map;
+> +	struct clk_hw_onecell_data *data;
+> +};
+> +
+> +struct amb_ccu *amb_ccu_init(struct platform_device *pdev,
+> +			     unsigned int num_clks);
+> +int amb_ccu_register(struct amb_ccu *ccu);
+> +
+> +#endif
+> diff --git a/drivers/clk/ambarella/ccu_mux_div.c b/drivers/clk/ambarella/ccu_mux_div.c
+> new file mode 100644
+> index 000000000000..d5259bc347e4
+> --- /dev/null
+> +++ b/drivers/clk/ambarella/ccu_mux_div.c
+> @@ -0,0 +1,234 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (C) 2026 Ambarella, Inc.
+> + *
+> + * Regmap-backed mux + divider, derived from the vendor composite-clock driver.
+> + */
+> +
+> +#include <linux/clk-provider.h>
+> +#include <linux/device.h>
+> +#include <linux/math64.h>
+> +#include <linux/regmap.h>
+> +
+> +#include "ccu_mux_div.h"
+> +
+> +struct amb_mux {
+> +	struct clk_hw hw;
+> +	struct regmap *map;
+> +	u32 offset;
+> +	u32 mask;
+> +	u32 shift;
+> +};
+> +
+> +struct amb_div {
+> +	struct clk_hw hw;
+> +	struct regmap *map;
+> +	u32 offset;
+> +	u32 shift;
+> +	u32 width;
+> +	u32 flags;
+> +	u32 fix_divider;
+> +};
+
+Looks like these a really independent entities, so they don't really
+need to be mixed.
+
+> +
+> +#define to_amb_mux(_hw)	container_of(_hw, struct amb_mux, hw)
+> +#define to_amb_div(_hw)	container_of(_hw, struct amb_div, hw)
+> +
+> +static u8 amb_mux_get_parent(struct clk_hw *hw)
+> +{
+> +	struct amb_mux *mux = to_amb_mux(hw);
+> +	u32 val;
+> +
+> +	regmap_read(mux->map, mux->offset, &val);
+> +	val >>= mux->shift;
+> +	val &= mux->mask;
+> +
+> +	return val;
+> +}
+> +
+> +static int amb_mux_set_parent(struct clk_hw *hw, u8 index)
+> +{
+> +	struct amb_mux *mux = to_amb_mux(hw);
+> +
+> +	return regmap_update_bits(mux->map, mux->offset,
+> +				  mux->mask << mux->shift,
+> +				  index << mux->shift);
+> +}
+> +
+> +static const struct clk_ops amb_mux_ops = {
+> +	.get_parent = amb_mux_get_parent,
+> +	.set_parent = amb_mux_set_parent,
+> +};
+> +
+> +static unsigned long amb_div_recalc_rate(struct clk_hw *hw,
+> +					 unsigned long parent_rate)
+> +{
+> +	struct amb_div *div = to_amb_div(hw);
+> +	unsigned long rate;
+> +	u32 val;
+> +
+> +	regmap_read(div->map, div->offset, &val);
+> +
+> +	/* Divider reset/disable bit sits above the field at shift+width. */
+> +	if (val & (BIT(div->width) << div->shift))
+
+field_get() ?
+
+> +		return 0;
+
+AFAIU, this divider gates at 0. You need to implement the enable/disable
+ops. returning 0 rate on a gated clock is wrong. You'll probably need to
+cache the divider value when the clock is gated.
+
+> +
+> +	val >>= div->shift;
+> +	val &= clk_div_mask(div->width);
+> +
+> +	rate = divider_recalc_rate(hw, parent_rate, val, NULL,
+> +				   div->flags, div->width);
+> +	if (div->fix_divider)
+> +		rate = div_u64(rate, div->fix_divider);
+> +
+> +	return rate;
+> +}
+> +
+> +static int amb_div_determine_rate(struct clk_hw *hw,
+> +				  struct clk_rate_request *req)
+> +{
+> +	struct amb_div *div = to_amb_div(hw);
+> +	struct clk_rate_request scaled = *req;
+> +	int ret;
+> +
+> +	if (!req->rate && (div->flags & CLK_DIVIDER_ONE_BASED))
+
+You did not check that flag before ? do you need it or not ?
+
+> +		return 0;
+
+this is wrong
+
+> +
+> +	if (div->fix_divider) {
+> +		scaled.rate = min(req->rate,
+> +				  ULONG_MAX / div->fix_divider) *
+> +			      div->fix_divider;
+> +		scaled.min_rate = min(req->min_rate,
+> +				      ULONG_MAX / div->fix_divider) *
+> +				  div->fix_divider;
+> +		scaled.max_rate = min(req->max_rate,
+> +				      ULONG_MAX / div->fix_divider) *
+> +				  div->fix_divider;
+> +	}
+
+What is this ?
+
+> +
+> +	ret = divider_determine_rate(hw, &scaled, NULL, div->width,
+> +				     div->flags);
+> +	if (ret)
+> +		return ret;
+> +
+> +	req->rate = scaled.rate;
+> +	req->best_parent_rate = scaled.best_parent_rate;
+> +	req->best_parent_hw = scaled.best_parent_hw;
+> +	if (div->fix_divider)
+> +		req->rate = div_u64(req->rate, div->fix_divider);
+> +
+
+?
+
+> +	return 0;
+> +}
+> +
+> +static int amb_div_set_rate(struct clk_hw *hw, unsigned long rate,
+> +			    unsigned long parent_rate)
+> +{
+> +	struct amb_div *div = to_amb_div(hw);
+> +	int val, mask;
+> +
+> +	if (div->fix_divider)
+> +		rate *= div->fix_divider;
+> +
+
+Your controller register with fix_divider = 1 ... I don't really get the
+point ?
+
+> +	if (!rate) {
+> +		/* Assert the reset/disable bit above the divider field. */
+> +		val = BIT(div->width);
+> +		mask = clk_div_mask(div->width + 1);
+
+Hijacking set_rate() to gate.
+
+> +	} else {
+> +		val = divider_get_val(rate, parent_rate, NULL,
+> +				      div->width, div->flags);
+> +		if (val < 0)
+> +			return val;
+> +
+> +		/*
+> +		 * Include the disable bit in the mask so a later non-zero
+> +		 * set_rate clears a previous rate==0 disable assert.
+> +		 */
+> +		mask = clk_div_mask(div->width + 1);
+> +	}
+> +
+> +	regmap_update_bits(div->map, div->offset, mask << div->shift,
+> +			   val << div->shift);
+> +
+> +	/*
+> +	 * Non-ONE_BASED dividers use bit 0 as a write-enable strobe. Skip the
+> +	 * pulse when shift == 0 so we do not corrupt the divider field itself.
+> +	 */
+> +	if (!(div->flags & CLK_DIVIDER_ONE_BASED) && div->shift) {
+> +		regmap_update_bits(div->map, div->offset, BIT(0), BIT(0));
+> +		regmap_update_bits(div->map, div->offset, BIT(0), 0);
+> +	}
+
+Looks like you could simplify this A LOT by just have a regular gate on
+this bit and splitting it out on its own clk_hw rather than mixing it
+with the rest
+
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct clk_ops amb_div_ops = {
+> +	.recalc_rate = amb_div_recalc_rate,
+> +	.determine_rate = amb_div_determine_rate,
+> +	.set_rate = amb_div_set_rate,
+> +};
+> +
+> +struct clk_hw *amb_div_register(struct device *dev, struct regmap *map,
+> +				const char *name, const struct clk_hw *parent,
+> +				u32 div_reg, u32 div_shift, u32 div_width,
+> +				u32 div_flags, u32 fix_divider)
+> +{
+> +	struct amb_div *div;
+> +	struct clk_init_data init = {};
+> +	int ret;
+> +
+> +	div = devm_kzalloc(dev, sizeof(*div), GFP_KERNEL);
+> +	if (!div)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	div->map = map;
+> +	div->offset = div_reg;
+> +	div->shift = div_shift;
+> +	div->width = div_width;
+> +	div->flags = div_flags;
+> +	div->fix_divider = fix_divider;
+> +
+> +	init.name = name;
+> +	init.ops = &amb_div_ops;
+> +	init.parent_hws = &parent;
+> +	init.num_parents = 1;
+> +
+> +	div->hw.init = &init;
+> +
+> +	ret = devm_clk_hw_register(dev, &div->hw);
+> +	if (ret)
+> +		return ERR_PTR(ret);
+> +
+> +	return &div->hw;
+> +}
+> +
+> +struct clk_hw *amb_mux_div_register(struct device *dev, struct regmap *map,
+> +				    const struct amb_mux_div_desc *desc,
+> +				    const struct clk_parent_data *parent_data)
+> +{
+> +	struct amb_mux *mux;
+> +	struct amb_div *div;
+> +
+> +	mux = devm_kzalloc(dev, sizeof(*mux), GFP_KERNEL);
+> +	div = devm_kzalloc(dev, sizeof(*div), GFP_KERNEL);
+> +	if (!mux || !div)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	mux->map = map;
+> +	mux->offset = desc->mux_reg;
+> +	mux->shift = desc->mux_shift;
+> +	mux->mask = desc->mux_mask;
+> +
+> +	div->map = map;
+> +	div->offset = desc->div_reg;
+> +	div->shift = desc->div_shift;
+> +	div->width = desc->div_width;
+> +	div->flags = desc->div_flags;
+> +	div->fix_divider = desc->fix_divider;
+> +
+> +	return devm_clk_hw_register_composite_pdata(dev, desc->name,
+> +						    parent_data,
+> +						    desc->num_parents,
+> +						    &mux->hw, &amb_mux_ops,
+> +						    &div->hw, &amb_div_ops,
+> +						    NULL, NULL,
+> +						    CLK_SET_RATE_NO_REPARENT);
+
+So none of your mux will ever reparent ? really ? Looks like a rather
+specific mux driver. That is likely a flag your controller should pass
+on when appropriate
+
+> +}
+> diff --git a/drivers/clk/ambarella/ccu_mux_div.h b/drivers/clk/ambarella/ccu_mux_div.h
+> new file mode 100644
+> index 000000000000..abaefff1201a
+> --- /dev/null
+> +++ b/drivers/clk/ambarella/ccu_mux_div.h
+> @@ -0,0 +1,35 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +/*
+> + * Copyright (C) 2026 Ambarella, Inc.
+> + */
+> +
+> +#ifndef __CCU_MUX_DIV_H
+> +#define __CCU_MUX_DIV_H
+> +
+> +#include <linux/clk-provider.h>
+> +#include <linux/regmap.h>
+> +
+> +struct amb_mux_div_desc {
+> +	const char *name;
+> +	const int *parents;
+> +	u8 num_parents;
+> +	u32 mux_reg;
+> +	u32 mux_shift;
+> +	u32 mux_mask;
+> +	u32 div_reg;
+> +	u32 div_shift;
+> +	u32 div_width;
+> +	u32 div_flags;
+> +	u32 fix_divider;
+> +};
+> +
+> +struct clk_hw *amb_mux_div_register(struct device *dev, struct regmap *map,
+> +				    const struct amb_mux_div_desc *desc,
+> +				    const struct clk_parent_data *parent_data);
+> +
+> +struct clk_hw *amb_div_register(struct device *dev, struct regmap *map,
+> +				const char *name, const struct clk_hw *parent,
+> +				u32 div_reg, u32 div_shift, u32 div_width,
+> +				u32 div_flags, u32 fix_divider);
+> +
+> +#endif
+> diff --git a/drivers/clk/ambarella/ccu_pll.c b/drivers/clk/ambarella/ccu_pll.c
+> new file mode 100644
+> index 000000000000..76452003bb0d
+> --- /dev/null
+> +++ b/drivers/clk/ambarella/ccu_pll.c
+> @@ -0,0 +1,421 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (C) 2026 Ambarella, Inc.
+> + */
+> +
+> +#include <linux/clk-provider.h>
+> +#include <linux/delay.h>
+> +#include <linux/device.h>
+> +#include <linux/math64.h>
+> +#include <linux/rational.h>
+> +#include <linux/regmap.h>
+> +#include <linux/slab.h>
+> +
+> +#include "ccu_pll.h"
+> +
+> +#define AMB_PLL_MAX_SOUT	16UL
+> +#define AMB_PLL_MAX_SDIV	16UL
+> +
+> +struct amb_pll {
+> +	struct clk_hw hw;
+> +	struct regmap *map;
+> +	u32 reg_offset[REG_NUM];
+> +	const struct amb_pll_soc_data *soc_data;
+> +	u32 fix_divider;
+> +	bool frac_mode;
+> +};
+> +
+> +#define to_amb_pll(_hw) container_of(_hw, struct amb_pll, hw)
+> +
+> +static void amb_pll_write_enable(struct regmap *map, u32 offset, u32 val)
+> +{
+> +	regmap_write(map, offset, val);
+> +	regmap_write(map, offset, val | CTRL_WRITE_ENABLE);
+> +	regmap_write(map, offset, val);
+> +}
+> +
+> +static unsigned long amb_pll_calc_vco(struct amb_pll *pll,
+> +				      unsigned long parent_rate)
+> +{
+> +	const struct amb_pll_soc_data *soc_data = pll->soc_data;
+> +	u32 *reg = pll->reg_offset;
+> +	u32 pre_scaler = 1;
+> +	u32 ctrl_val, ctrl2_val = 0, frac_val;
+> +	u32 intp, sdiv, vcodiv, fsdiv;
+> +	u64 frac = 0, vco;
+> +
+> +	if (reg[PRES_OFFSET]) {
+> +		regmap_read(pll->map, reg[PRES_OFFSET], &pre_scaler);
+> +		pre_scaler = (pre_scaler >> 4) + 1;
+> +	}
+> +
+> +	regmap_read(pll->map, reg[CTRL_OFFSET], &ctrl_val);
+> +	intp = ((ctrl_val >> 24) & 0x7f) + 1;
+> +	sdiv = ((ctrl_val >> 12) & 0xf) + 1;
+
+Magic numbers ?
+
+> +
+> +	if (soc_data->pll_version >= 2) {
+> +		vcodiv = (ctrl_val & soc_data->vcodiv_mask) ==
+> +			 soc_data->vcodiv_val ? 2 : 1;
+> +		fsdiv = (ctrl_val & soc_data->fsdiv_mask) ==
+> +			soc_data->fsdiv_val ? 2 : 1;
+> +	} else {
+> +		regmap_read(pll->map, reg[CTRL2_OFFSET], &ctrl2_val);
+> +		vcodiv = (ctrl2_val & soc_data->vcodiv_mask) ==
+> +			 soc_data->vcodiv_val ? 2 : 1;
+> +		fsdiv = (ctrl2_val & soc_data->fsdiv_mask) ==
+> +			soc_data->fsdiv_val ? 2 : 1;
+> +	}
+
+Looks like a copy of a vendor driver. Please clean it up. You do not
+even have this version 2 ATM. This whole table thing seems rather
+overcomplicated for what it does. Just define the field you need along
+with their offsets. You won't have to have if clause like that then
+
+> +
+> +	vco = (u64)parent_rate * vcodiv * fsdiv * intp * sdiv;
+> +	vco = div_u64(vco, pre_scaler);
+> +
+> +	if (ctrl_val & CTRL_FRAC_MODE) {
+> +		regmap_read(pll->map, reg[FRAC_OFFSET], &frac_val);
+> +		frac = (u64)parent_rate * vcodiv * fsdiv * sdiv * frac_val;
+> +		frac = div_u64(frac, pre_scaler) >> 32;
+> +	}
+> +
+> +	return vco + frac;
+> +}
+> +
+> +static unsigned long amb_pll_recalc_rate(struct clk_hw *hw,
+> +					 unsigned long parent_rate)
+> +{
+> +	struct amb_pll *pll = to_amb_pll(hw);
+> +	const struct amb_pll_soc_data *soc_data = pll->soc_data;
+> +	u32 *reg = pll->reg_offset;
+> +	u32 pre_scaler = 1, post_scaler = 1;
+> +	u32 ctrl_val, ctrl2_val = 0;
+> +	u32 vcodiv, fsout, sout;
+> +	u64 rate;
+> +
+> +	regmap_read(pll->map, reg[CTRL_OFFSET], &ctrl_val);
+> +	if (ctrl_val & (CTRL_POWER_DOWN | CTRL_HALT_VCO | CTRL_FORCE_RESET))
+> +		return 0;
+> +
+> +	if (reg[PRES_OFFSET]) {
+> +		regmap_read(pll->map, reg[PRES_OFFSET], &pre_scaler);
+> +		pre_scaler = (pre_scaler >> 4) + 1;
+> +	}
+> +
+> +	if (reg[POST_OFFSET]) {
+> +		regmap_read(pll->map, reg[POST_OFFSET], &post_scaler);
+> +		post_scaler = (post_scaler >> 4) + 1;
+> +	}
+> +
+> +	if (ctrl_val & CTRL_BYPASS)
+> +		return parent_rate / pre_scaler / post_scaler;
+> +
+> +	if (soc_data->pll_version >= 2) {
+> +		vcodiv = (ctrl_val & soc_data->vcodiv_mask) ==
+> +			 soc_data->vcodiv_val ? 2 : 1;
+> +		fsout = (ctrl_val & soc_data->fsout_mask) ==
+> +			soc_data->fsout_val ? 2 : 1;
+> +	} else {
+> +		regmap_read(pll->map, reg[CTRL2_OFFSET], &ctrl2_val);
+> +		vcodiv = (ctrl2_val & soc_data->vcodiv_mask) ==
+> +			 soc_data->vcodiv_val ? 2 : 1;
+> +		fsout = (ctrl2_val & soc_data->fsout_mask) ==
+> +			soc_data->fsout_val ? 2 : 1;
+> +	}
+> +
+> +	sout = ((ctrl_val >> 16) & 0xf) + 1;
+> +	rate = amb_pll_calc_vco(pll, parent_rate);
+> +
+> +	if (soc_data->pll_version >= 2) {
+> +		if (!(ctrl_val & CTRL_BYPASS_HSDIV))
+> +			rate = div_u64(rate, vcodiv * fsout * sout);
+> +	} else {
+> +		if (!(ctrl2_val & CTRL2_BYPASS_HSDIV))
+> +			rate = div_u64(rate, vcodiv * fsout * sout);
+> +	}
+> +
+> +	rate = div_u64(rate, pll->fix_divider * post_scaler);
+> +
+> +	return rate;
+> +}
+> +
+> +static int amb_pll_calc_params(struct amb_pll *pll, unsigned long rate,
+> +			       unsigned long parent_rate, u32 ctrl2_val,
+> +			       u32 *intp, u32 *sdiv, u32 *sout,
+> +			       u32 *vcodiv, u32 *fsdiv, u32 *fsout)
+> +{
+> +	const struct amb_pll_soc_data *soc_data = pll->soc_data;
+> +	unsigned long max_numerator, max_denominator;
+> +	unsigned long intp_ul, sout_ul, rate_tmp, parent_scaled;
+> +	u32 ctrl_val;
+> +
+> +	if (!parent_rate)
+> +		return -EINVAL;
+> +
+> +	*sdiv = 1;
+> +
+> +	if (soc_data->pll_version >= 2) {
+> +		ctrl_val = 0;
+> +		*vcodiv = (ctrl_val & soc_data->vcodiv_mask) ==
+> +			  soc_data->vcodiv_val ? 2 : 1;
+> +		*fsdiv = (ctrl_val & soc_data->fsdiv_mask) ==
+> +			 soc_data->fsdiv_val ? 2 : 1;
+> +		*fsout = (ctrl_val & soc_data->fsout_mask) ==
+> +			 soc_data->fsout_val ? 2 : 1;
+> +	} else {
+> +		*vcodiv = (ctrl2_val & soc_data->vcodiv_mask) ==
+> +			  soc_data->vcodiv_val ? 2 : 1;
+> +		*fsdiv = (ctrl2_val & soc_data->fsdiv_mask) ==
+> +			 soc_data->fsdiv_val ? 2 : 1;
+> +		*fsout = (ctrl2_val & soc_data->fsout_mask) ==
+> +			 soc_data->fsout_val ? 2 : 1;
+> +	}
+> +
+> +	if (rate < parent_rate)
+> +		return -EINVAL;
+> +
+> +	max_numerator = soc_data->vco_max_mhz;
+> +	max_numerator = div_u64(max_numerator * 1000000ULL, parent_rate);
+> +	max_numerator = div_u64(max_numerator, *vcodiv * *fsdiv);
+> +	max_numerator = min(128UL, max_numerator);
+> +	if (!max_numerator)
+> +		return -EINVAL;
+> +
+> +	/*
+> +	 * Approximate intp/sout against the fsdiv/fsout-scaled parent so the
+> +	 * initial guess matches the hardware frequency equation.
+> +	 */
+> +	max_denominator = AMB_PLL_MAX_SOUT;
+> +	parent_scaled = parent_rate * *fsdiv / *fsout;
+> +	if (!parent_scaled)
+> +		return -EINVAL;
+> +	rate_tmp = rate;
+> +	rational_best_approximation(rate_tmp, parent_scaled, max_numerator,
+> +				    max_denominator, &intp_ul, &sout_ul);
+> +
+> +	while (parent_rate * *fsdiv * intp_ul * *sdiv / *fsout / sout_ul >
+> +	       rate) {
+> +		unsigned long resolution = parent_scaled / AMB_PLL_MAX_SOUT;
+> +
+> +		/* Avoid an infinite loop when parent_rate < AMB_PLL_MAX_SOUT. */
+> +		if (!resolution)
+> +			resolution = 1;
+> +
+> +		if (rate_tmp <= resolution)
+> +			return -EINVAL;
+> +
+> +		rate_tmp -= resolution;
+> +		rational_best_approximation(rate_tmp, parent_scaled,
+> +					    max_numerator, max_denominator,
+> +					    &intp_ul, &sout_ul);
+> +	}
+> +
+> +	while (parent_rate / 1000000 * *vcodiv * *fsdiv * intp_ul * *sdiv <
+> +	       soc_data->vco_min_mhz) {
+> +		if (sout_ul > 8 || intp_ul > 64)
+> +			break;
+> +
+> +		intp_ul *= 2;
+> +		sout_ul *= 2;
+> +	}
+> +
+> +	if (intp_ul > max_numerator || sout_ul > max_denominator ||
+> +	    *sdiv > AMB_PLL_MAX_SDIV)
+> +		return -EINVAL;
+> +
+> +	*intp = intp_ul;
+> +	*sout = sout_ul;
+> +
+> +	return 0;
+> +}
+> +
+> +static int amb_pll_determine_rate(struct clk_hw *hw,
+> +				  struct clk_rate_request *req)
+> +{
+> +	struct amb_pll *pll = to_amb_pll(hw);
+> +	const struct amb_pll_soc_data *soc_data = pll->soc_data;
+> +	u32 ctrl2_val = 0;
+> +	u32 intp, sdiv, sout, vcodiv, fsdiv, fsout;
+> +	unsigned long rate;
+> +	u64 rounded;
+> +	int ret;
+> +
+> +	if (!req->best_parent_rate)
+> +		return -EINVAL;
+> +
+> +	if (!req->rate || pll->frac_mode)
+> +		return 0;
+> +
+> +	if (req->rate > ULONG_MAX / pll->fix_divider)
+> +		return -ERANGE;
+> +
+> +	rate = req->rate * pll->fix_divider;
+> +	if (soc_data->ctrl2_val)
+> +		ctrl2_val = soc_data->ctrl2_val;
+> +	else
+> +		regmap_read(pll->map, pll->reg_offset[CTRL2_OFFSET],
+> +			    &ctrl2_val);
+> +
+> +	ret = amb_pll_calc_params(pll, rate, req->best_parent_rate,
+> +				  ctrl2_val, &intp, &sdiv, &sout, &vcodiv,
+> +				  &fsdiv, &fsout);
+> +	if (ret)
+> +		return ret;
+> +
+> +	rounded = (u64)req->best_parent_rate * fsdiv * intp * sdiv;
+> +	rounded = div64_u64(rounded, (u64)fsout * sout);
+> +	rounded = div64_u64(rounded, pll->fix_divider);
+> +	if (rounded < req->min_rate || rounded > req->max_rate)
+> +		return -EINVAL;
+> +
+> +	req->rate = rounded;
+> +
+> +	return 0;
+> +}
+> +
+> +static int amb_pll_set_rate(struct clk_hw *hw, unsigned long rate,
+> +			    unsigned long parent_rate)
+> +{
+> +	struct amb_pll *pll = to_amb_pll(hw);
+> +	const struct amb_pll_soc_data *soc_data = pll->soc_data;
+> +	u32 *reg = pll->reg_offset;
+> +	u32 ctrl_val, ctrl2_val = 0, ctrl3_val, frac_val = 0;
+> +	u32 intp, sdiv, sout, vcodiv, fsdiv, fsout;
+> +	unsigned long old_rate, new_rate, rate_tmp;
+> +	int ret;
+> +
+> +	if (!rate) {
+> +		regmap_read(pll->map, reg[CTRL_OFFSET], &ctrl_val);
+> +		ctrl_val |= CTRL_POWER_DOWN | CTRL_HALT_VCO;
+> +		amb_pll_write_enable(pll->map, reg[CTRL_OFFSET], ctrl_val);
+> +		return 0;
+> +	}
+> +
+> +	if (!parent_rate)
+> +		return -EINVAL;
+> +
+> +	rate *= pll->fix_divider;
+> +
+> +	if (soc_data->ctrl2_val)
+> +		ctrl2_val = soc_data->ctrl2_val;
+> +	else
+> +		regmap_read(pll->map, reg[CTRL2_OFFSET], &ctrl2_val);
+> +
+> +	ret = amb_pll_calc_params(pll, rate, parent_rate, ctrl2_val,
+> +				  &intp, &sdiv, &sout, &vcodiv, &fsdiv,
+> +				  &fsout);
+> +	if (ret)
+> +		return ret;
+> +
+> +	if (soc_data->ctrl2_val)
+> +		regmap_write(pll->map, reg[CTRL2_OFFSET], soc_data->ctrl2_val);
+> +
+> +	ctrl_val = ((intp - 1) & 0x7f) << 24;
+> +	ctrl_val |= ((sdiv - 1) & 0xf) << 12;
+> +	ctrl_val |= ((sout - 1) & 0xf) << 16;
+> +	if (soc_data->pll_version >= 2) {
+> +		ctrl_val |= vcodiv == 2 ? soc_data->vcodiv_val : 0;
+> +		ctrl_val |= fsdiv == 2 ? soc_data->fsdiv_val : 0;
+> +		ctrl_val |= fsout == 2 ? soc_data->fsout_val : 0;
+> +	}
+> +
+> +	regmap_write(pll->map, reg[CTRL_OFFSET], ctrl_val);
+> +	regmap_write(pll->map, reg[FRAC_OFFSET], 0);
+> +
+> +	old_rate = amb_pll_recalc_rate(hw, parent_rate) * pll->fix_divider;
+> +	rate_tmp = old_rate > rate ? 0 : rate - old_rate;
+> +	if (rate_tmp && pll->frac_mode) {
+> +		u64 dividend, divider;
+> +
+> +		dividend = (u64)rate_tmp * sout * fsout;
+> +		dividend <<= 32;
+> +		divider = (u64)sdiv * fsdiv * parent_rate;
+> +		frac_val = DIV64_U64_ROUND_CLOSEST(dividend, divider);
+> +		regmap_write(pll->map, reg[FRAC_OFFSET], frac_val);
+> +		ctrl_val |= CTRL_FRAC_MODE;
+> +	}
+> +
+> +	if (soc_data->pll_version >= 2) {
+> +		ctrl3_val = soc_data->ctrl3_val;
+> +		regmap_write(pll->map, reg[CTRL3_OFFSET],
+> +			     ctrl3_val | CTRL3_VCO_CLAMP);
+> +		regmap_write(pll->map, reg[CTRL_OFFSET],
+> +			     ctrl_val | CTRL_FORCE_RESET);
+> +		ndelay(100);
+> +		regmap_write(pll->map, reg[CTRL_OFFSET],
+> +			     ctrl_val & ~CTRL_FORCE_RESET);
+> +		ndelay(100);
+> +		regmap_write(pll->map, reg[CTRL3_OFFSET],
+> +			     ctrl3_val & ~CTRL3_VCO_CLAMP);
+> +	} else {
+> +		u32 fvco_mhz, range;
+> +
+> +		fvco_mhz = amb_pll_calc_vco(pll, parent_rate) / 1000000UL;
+> +		for (range = 0; range < ARRAY_SIZE(soc_data->vco_range);
+> +		     range++) {
+> +			if (fvco_mhz > soc_data->vco_range[range])
+> +				break;
+> +		}
+> +		if (range == ARRAY_SIZE(soc_data->vco_range))
+> +			range = 0;
+> +		else
+> +			range = ARRAY_SIZE(soc_data->vco_range) - range - 1;
+> +
+> +		regmap_read(pll->map, reg[CTRL3_OFFSET], &ctrl3_val);
+> +		ctrl3_val &= ~CTRL3_VCO_RANGE_MASK;
+> +		ctrl3_val |= range << 1;
+> +		regmap_write(pll->map, reg[CTRL3_OFFSET], ctrl3_val);
+> +
+> +		if (frac_val) {
+> +			ctrl_val |= CTRL_FORCE_RESET;
+> +			amb_pll_write_enable(pll->map, reg[CTRL_OFFSET],
+> +					     ctrl_val);
+> +		}
+> +
+> +		ctrl_val &= ~CTRL_FORCE_RESET;
+> +		amb_pll_write_enable(pll->map, reg[CTRL_OFFSET], ctrl_val);
+> +	}
+> +
+> +	new_rate = amb_pll_recalc_rate(hw, parent_rate);
+> +	rate_tmp = rate / pll->fix_divider;
+> +	if (max(new_rate, rate_tmp) - min(new_rate, rate_tmp) > 10)
+> +		pr_warn("%s: requested %lu, got %lu\n", clk_hw_get_name(hw),
+> +			rate_tmp, new_rate);
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct clk_ops amb_pll_ops = {
+> +	.recalc_rate = amb_pll_recalc_rate,
+> +	.determine_rate = amb_pll_determine_rate,
+> +	.set_rate = amb_pll_set_rate,
+> +};
+> +
+> +struct clk_hw *amb_pll_register(struct device *dev, struct regmap *map,
+> +				const struct amb_pll_desc *desc)
+> +{
+> +	struct amb_pll *pll;
+> +	struct clk_init_data init = {};
+> +	const struct clk_hw *parent = desc->parent;
+> +	int ret;
+> +
+> +	pll = devm_kzalloc(dev, sizeof(*pll), GFP_KERNEL);
+> +	if (!pll)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	pll->map = map;
+> +	memcpy(pll->reg_offset, desc->reg_offset, sizeof(pll->reg_offset));
+> +	pll->soc_data = desc->soc_data;
+> +	pll->fix_divider = 1;
+> +	pll->frac_mode = desc->frac_mode;
+> +
+> +	init.name = desc->name;
+> +	init.ops = &amb_pll_ops;
+> +	init.flags = CLK_GET_RATE_NOCACHE | CLK_IS_CRITICAL;
+> +	init.parent_hws = &parent;
+> +	init.num_parents = 1;
+> +
+> +	pll->hw.init = &init;
+> +
+> +	ret = devm_clk_hw_register(dev, &pll->hw);
+> +	if (ret)
+> +		return ERR_PTR(ret);
+> +
+> +	return &pll->hw;
+> +}
+> diff --git a/drivers/clk/ambarella/ccu_pll.h b/drivers/clk/ambarella/ccu_pll.h
+> new file mode 100644
+> index 000000000000..6d901e88f410
+> --- /dev/null
+> +++ b/drivers/clk/ambarella/ccu_pll.h
+> @@ -0,0 +1,70 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +/*
+> + * Copyright (C) 2026 Ambarella, Inc.
+> + */
+> +
+> +#ifndef __CCU_PLL_H
+> +#define __CCU_PLL_H
+> +
+> +#include <linux/bits.h>
+> +#include <linux/clk-provider.h>
+> +#include <linux/device.h>
+> +#include <linux/regmap.h>
+> +#include <linux/types.h>
+> +
+> +enum {
+> +	CTRL_OFFSET = 0,
+> +	FRAC_OFFSET,
+> +	CTRL2_OFFSET,
+> +	CTRL3_OFFSET,
+> +	PRES_OFFSET,
+> +	POST_OFFSET,
+> +	REG_NUM,
+> +};
+> +
+> +#define CTRL_BYPASS		BIT(2)
+> +#define CTRL_WRITE_ENABLE	BIT(0)
+> +#define CTRL_FRAC_MODE		BIT(3)
+> +#define CTRL_FORCE_RESET	BIT(4)
+> +#define CTRL_POWER_DOWN		BIT(5)
+> +#define CTRL_HALT_VCO		BIT(6)
+> +#define CTRL_VCODIV_DIV2	BIT(8)
+> +#define CTRL_FSDIV_DIV2		BIT(9)
+> +#define CTRL_FSOUT_DIV2		BIT(10)
+> +#define CTRL_BYPASS_HSDIV	BIT(11)
+> +
+> +#define CTRL2_VCODIV_DIV2	BIT(8)
+> +#define CTRL2_FSDIV_DIV2	BIT(9)
+> +#define CTRL2_FSOUT_DIV2	BIT(11)
+> +#define CTRL2_BYPASS_HSDIV	BIT(12)
+> +
+> +#define CTRL3_VCO_RANGE_MASK	0x6
+> +#define CTRL3_VCO_CLAMP		0x8
+> +
+> +struct amb_pll_soc_data {
+> +	u32 pll_version;
+> +	u32 fsout_mask;
+> +	u32 fsout_val;
+> +	u32 fsdiv_mask;
+> +	u32 fsdiv_val;
+> +	u32 vcodiv_mask;
+> +	u32 vcodiv_val;
+> +	u32 vco_max_mhz;
+> +	u32 vco_min_mhz;
+> +	u32 vco_range[4];
+> +	u32 ctrl2_val;
+> +	u32 ctrl3_val;
+> +};
+> +
+> +struct amb_pll_desc {
+> +	const char *name;
+> +	const struct clk_hw *parent;
+> +	u32 reg_offset[REG_NUM];
+> +	const struct amb_pll_soc_data *soc_data;
+> +	bool frac_mode;
+> +};
+> +
+> +struct clk_hw *amb_pll_register(struct device *dev, struct regmap *map,
+> +				const struct amb_pll_desc *desc);
+> +
+> +#endif
+>
+> -- 
+> 2.34.1
+>
+>
+
+-- 
+Jerome
