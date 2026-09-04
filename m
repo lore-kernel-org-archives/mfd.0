@@ -1,105 +1,98 @@
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+Received: from mta1.migadu.com (out-70.mta1.migadu.com [95.215.58.70])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B333E3B3880
-	for <mfd@lists.linux.dev>; Fri,  4 Sep 2026 08:24:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 936B23DCD86
+	for <mfd@lists.linux.dev>; Fri,  4 Sep 2026 08:36:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=95.215.58.70
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788510250; cv=none; b=KcuvVPDetFGCpZW7YYDi4+Fxl8wqgn/G1Y8VqboomoZdMX0s8rtyC20mx8NmmFzFVkhcd9xE4rS5MMakTf8sW2eNDS8EuCNhdwe8y23GratuNfA3L1Nnzc80aEjwERBI4HnTFUSuencfN3WDfWkgibQxrJEylW6RdtjrdIpPpok=
+	t=1788510976; cv=none; b=ggMdN52YmpUDaiKtCBiu+QmFQeh/QtSIqSe2AejGsff17kJFDc9cL3WS2kKmJ2Omo31b/Dry4yTiqAN6aEzt712fNGZrfmgI6pmVvxK1q0n4DCfc0Ztpkwu5TxLs2PllrCo9sDV0I92BaiEiUAbSvrlEHD5GJUCHSOfa5H3B044=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788510250; c=relaxed/simple;
-	bh=bOFX6B1cMLWK/8rdWZyVjQRxmhZreHCtlJQd0747/0g=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=td6X3IZCrD/VydsgizD4/F+1ify2bV+EqumDBUdQ0DWC/KQZbw74nh3Agg+sMmRBK6+sevAtYJf+360RbmEr8oY/UIxApNQeipzfsJXNYOr4BESEIc0I/o1aXIgkMTr6HgINyFcWdFE/NrpKwQEqWXO2VN8nKs6ohBq3ng6D54o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=MX6pa+kY; arc=none smtp.client-ip=209.85.128.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	s=arc-20240116; t=1788510976; c=relaxed/simple;
+	bh=U1x/bNRs0Mwb1PxVQ65+8iKdITUD0P0R70d5PxDMTt8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=lHSvXtWHpwD0mVdTw02leQuJ63KhV7ji22YOXI6bjfVffj2KRsZszY9zvHiukgmTFvrI+SUmZPo7b08NbPtO6AWdK5EMYcZLpB7n8OrR9RKyBJF3YD/3E6heisoh/9c97cafB6OLss03TTzfXilLIyZcq9tQ2c3wwffRXTYWwTo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=U4sDbw/D; arc=none smtp.client-ip=95.215.58.70
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="MX6pa+kY"
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-49ccfbe062eso5932805e9.3
-        for <mfd@lists.linux.dev>; Fri, 04 Sep 2026 01:24:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1788510246; x=1789115046; darn=lists.linux.dev;
-        h=content-type:mime-version:message-id:date:references:in-reply-to
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=bOFX6B1cMLWK/8rdWZyVjQRxmhZreHCtlJQd0747/0g=;
-        b=MX6pa+kYsU2TaRwc99oI5/77Efi57CFhx+T7QHH3WcIuTUlJWBSLOKokMdTg/Q93Q6
-         XzIohDz4IwuhSQsSP8XhzzVsyB3+b0PhSbtaHDJbsfFXCbvknu7GokcNRdz7avZ/3nxW
-         cAq0pGOJa62hqGcq/NOP2ZGkfWqUEAfibv3VbH3CNxjh8xTcvoMyr8V/WwfkSaz8Vp4l
-         PO6pnSqIYwP3QTUyU3OYh/elC0TPgLIVxsJcY6KjKbxRthV9dZbWjMvD49tbpR1rV3lN
-         zWx760QmJVUFRIBuKbd9HD80PX+qghE2c9qobL5kXalAF6dhgWYbUQ0SSRilShCCahZP
-         mKhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788510246; x=1789115046;
-        h=content-type:mime-version:message-id:date:references:in-reply-to
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=bOFX6B1cMLWK/8rdWZyVjQRxmhZreHCtlJQd0747/0g=;
-        b=dcHTp5zkHhNmc9ms0+8Icc/LWYYf0+BHaj1U9Mu97802Fj1lRVFkWSNbH91a2PTx5h
-         Oxg3Q8lW8fNjmgE0ChvWRqyaWzzNkatk/QwkxsBDVkmoWX/0e2wgpYd11QQbzdOsXpEN
-         Q8Z4Y1kOq2Oa8qYJyo7B3ZyIMZNgfIcWVzXAUttlCthtDdYlJFMAKQI1MNYRmVqoaFvh
-         Ew1KZJjmPaeB6VlG1tqLt4CMz0FfgjQKw4Z8s0bfDv1Uh6TTy6OFCBJ+Nugyv3p2Rr8V
-         S2yPAerxOuWqLoIWmsuqoeV7UYomnUCcW3kx/O9UhjoDjGo1QSQwyUYrdQ0Kywi7L9M9
-         9+4g==
-X-Forwarded-Encrypted: i=1; AKwUvByGntNc2+XJXa4X8ulduVrctwjoJ9C6/E60jEKwQC3ZZpSAMvAPcp+pvQNnMXwonMpcg8k=@lists.linux.dev
-X-Gm-Message-State: AFuF++liCIUNJD+j+o1Vnj+1ae05m7hMpMeQCOg7wdGZwJhJlXGLnv3n
-	5WO/5XmL3ozguMOsHfTkFBkCsQdlwYj00c/uqp/z6r7++vPcYyGZEbpJUyv0eYFiOxg=
-X-Gm-Gg: AYBFou1EC3Ci4Z8dlB2H0RAjyHLVXb1SfgQtGh9RORDG195fbe0sGkpyt6xA6h9+cxd
-	HtSY+rl4t43/ampyYZmcAku+JWKc7vn33r/Vq5Bj6e7qV/jQzzy45LpBZueqi8bKk/73P3zirjx
-	/JQOwDufW46BYatQiBRMbdNdgfLQ7Logeig1Pb4ciPFbo3oHX/XhCb2K8/NHMbsqFYN4jzgFXcv
-	mfqz10CP+myWaveomtY7rGrzXigdBk33X2lh8GHHQ8WFwJvhEmOwBdA+7C/CX8NOxS6PXGLDV4b
-	Fcu1SHd+EAxKzhWbPDijQl+58T0347lz1mFkoMTQjuOMAbuh2r+byDsCu7EwshVgay9Ubi35Mr2
-	Vnb3Q2AvpRvc65YWcAHumPU7xABRLlGkTEQMp/ZeBe4Sm74Eyp8Qfh9ePoPrZzVgEa2HwDjerbl
-	i74TbKWCukX+kWiXjjnEDgyFjjT5vF2Pihij/wK8ACTHfS7aCqUsx+ULBGLw4EYpZQnQLl69H1h
-	LJ8NlQ8hCsilwUW5w==
-X-Received: by 2002:a05:600c:a44:b0:49c:dcec:bd27 with SMTP id 5b1f17b1804b1-49cf821e7a5mr40764145e9.8.1788510246002;
-        Fri, 04 Sep 2026 01:24:06 -0700 (PDT)
-Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-485885bfe14sm4632933f8f.35.2026.09.04.01.24.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 04 Sep 2026 01:24:05 -0700 (PDT)
-From: Jerome Brunet <jbrunet@baylibre.com>
-To: Matti Vaittinen <matti.vaittinen@linux.dev>, Matti Vaittinen
- <mazziesaccount@gmail.com>, Matti Vaittinen
- <matti.vaittinen@fi.rohmeurope.com>, Matti Vaittinen
- <matti.vaittinen@linux.dev>
-Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof
- Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Liam
- Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, Matti
- Vaittinen <mazziesaccount@gmail.com>, Stephen Boyd <sboyd@kernel.org>,
- Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet
- <jbrunet+clk@baylibre.com>, Linus Walleij <linusw@kernel.org>, Bartosz
- Golaszewski <brgl@kernel.org>, Alexandre Belloni
- <alexandre.belloni@bootlin.com>, Michael Walle <mwalle@kernel.org>,
- mfd@lists.linux.dev, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-clk@vger.kernel.org,
- linux-gpio@vger.kernel.org, linux-rtc@vger.kernel.org
-Subject: Re: [PATCH v3 08/10] clk: bd718x7: Support ROHM BD73800
-In-Reply-To: <2a74fea679420d147ab1029943ff071628dc8c5a.1788346553.git.mazziesaccount@gmail.com>
-References: <cover.1788346553.git.mazziesaccount@gmail.com>
- <2a74fea679420d147ab1029943ff071628dc8c5a.1788346553.git.mazziesaccount@gmail.com>
-Date: Fri, 04 Sep 2026 10:24:03 +0200
-Message-ID: <1jik4ll90c.fsf@starbuckisacylon.baylibre.com>
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="U4sDbw/D"
+X-Envelope-To: mfd@lists.linux.dev
+DKIM-Signature: a=rsa-sha256; bh=U1x/bNRs0Mwb1PxVQ65+8iKdITUD0P0R70d5PxDMTt8=;
+ c=simple/simple; d=linux.dev;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1788510972; v=1; x=1789115772;
+ b=U4sDbw/DZJoZT1fbeYjtNwoqPSv6ZKOxV/9G/B1jNhJr0WJoi1S9I7oUYcvNsmrcvjKAD/V9
+ caD+k3wntYsUtCuJYBj8x8m4B9+gvdmokOze1yLuAOSZ6ywyAM88aJN3xqyi8y9RudgQla3gcvs
+ zwvTzvTQ9XFqTLrz25yqEWn4=
+X-Envelope-To: mfd@lists.linux.dev
+Received: by smtp.migadu.com with ESMTPS id 502bfefaf8f21b1e;
+	Fri, 04 Sep 2026 08:36:12 +0000
+X-Mizu-Trace-ID: 502bfefaf8f21b1e
+X-Migadu-Flow: FLOW_OUT
+Message-ID: <b749adb5-b3c5-4e30-89b4-9e6849bfd08c@linux.dev>
+Date: Fri, 4 Sep 2026 09:20:13 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/2] Add SoundWire detach helper
+To: Charles Keepax <ckeepax@opensource.cirrus.com>, lee@kernel.org,
+ vkoul@kernel.org
+Cc: yung-chuan.liao@linux.intel.com, linux-sound@vger.kernel.org,
+ patches@opensource.cirrus.com, mfd@lists.linux.dev,
+ linux-kernel@vger.kernel.org
+References: <20260831140157.1736905-1-ckeepax@opensource.cirrus.com>
+Content-Language: en-US
+From: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
+In-Reply-To: <20260831140157.1736905-1-ckeepax@opensource.cirrus.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On mer. 02 sept. 2026 at 14:05, Matti Vaittinen <matti.vaittinen@linux.dev> wrote:
+On 8/31/26 16:01, Charles Keepax wrote:
+> Currently, if a SoundWire driver takes an action that causes the device
+> to detach from the bus it needs to be careful. There will be a period of
+> time until the detach is recognised by the core, if the driver
+> immediately
+> calls sdw_slave_wait_for_init() it is possible for that to complete
+> before the detach has been recognised. Leaving the driver with a device
+> that is potentially not ready for what follows.
+> 
+> To avoid this race add a new helper that drivers can use to inform the
+> core the device will detach. This clears the enumeration completions
+> ensuring that sdw_slave_wait_for_init() can't complete until the device
+> re-attaches.
+> 
+> This is the third part of a longer series of moving these slave
+> attach/deatach operations into the core:
+> 
+> https://lore.kernel.org/linux-sound/20260512103022.1154645-1-ckeepax@opensource.cirrus.com/
+> https://lore.kernel.org/linux-sound/20260608102714.2503120-1-ckeepax@opensource.cirrus.com/
+> 
+> I have based this series off Vinod's soundwire tree as that probably
+> makes sense for which tree to take it through.
+> 
+> Thanks,
+> Charles
+> 
+> Changes since v1:
+>  - Correct kerneldoc
+> 
+> Charles Keepax (2):
+>   soundwire: Add a helper function to indicate a device will detach
+>   mfd: cs42l43: Move to core detach helper
+> 
+>  drivers/mfd/cs42l43-sdw.c     |  2 --
+>  drivers/mfd/cs42l43.c         | 15 +--------------
+>  drivers/soundwire/bus.h       |  6 ------
+>  include/linux/mfd/cs42l43.h   |  1 -
+>  include/linux/soundwire/sdw.h | 26 ++++++++++++++++++++++++++
+>  5 files changed, 27 insertions(+), 23 deletions(-)
 
-> From: Matti Vaittinen <mazziesaccount@gmail.com>
->
-> The ROHM BD73800 PMIC has a 32.768 kHz clock gate. Add support for
-> controlling this clock.
->
-> NOTE: The CLKOUT pin can be muxed by an OTP option. On some OTP
-> configurations the CLKOUT is not outputting the clk signal.
->
-> Signed-off-by: Matti Vaittinen <mazziesaccount@gmail.com>
->
+LGTM, for the series
 
-Reviewed-by: Jerome Brunet <jbrunet@baylibre.com>
+Reviewed-by: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
+
+
