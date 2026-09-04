@@ -1,45 +1,45 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B40A423A9B
-	for <mfd@lists.linux.dev>; Fri,  4 Sep 2026 06:57:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 518BF422556
+	for <mfd@lists.linux.dev>; Fri,  4 Sep 2026 06:58:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788505076; cv=none; b=X84ZsDm9WbKJvQ2hUpeWZR8CDYe09kNzSix6ZpCL4CgAOdTHzVi8bF0AlAZ5Q2j5XoejHzcz70pG39gOJbPOF5cA7Q4hlp9/J0ay+jfXFR9buIeJzCJmlLvGoFqxzku4IggRUgVZo3Rt8oeYPlDn2kbE9ES7wVkTmPVr3DbP6L0=
+	t=1788505122; cv=none; b=ZpAlM1BYi4iHtYTu52T5zkOBbTcSBXASfq3v/8RtONw8WffncF8Q7JFz39Y0KP4je+YvJiZqX1QICmfJmTEzJ1/4GSvfZ+mfP3Wc4KfrA7iXqk15AiRJ76vY5yySbRY94+H2FfUm96/VwoUjbkTGkI/mX+DBX9TVpwb6VX5WSzw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788505076; c=relaxed/simple;
-	bh=TLJZ8X+u8QFS3pvzfr7f3WBFiYtJbiygl39BaKFU5DQ=;
+	s=arc-20240116; t=1788505122; c=relaxed/simple;
+	bh=LOeTtbZCa0cEZvj2Kq+kpJC3/++XvQGrxtloxZ6UrxU=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=eBlIHKEGRXM8frDKXvVNvDbyIJva0+3s0+jPvCrah6KF0b7grG1LQAwLaMa5mI/nlyypcoMDXVQaIJ6Rwvpi90VsOoSUhYeR1n7E/EiNF9MzDNXsqp5TD2jimAE8rgM3jCvDia4lXHTqySNTlmWRuprPBeFTpmtF67ieQi9dTbk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gvSJBEwz; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=KtNNzP+qVuoTjJDyCjUpY5EspioDCGbepREs9rBGKvv2DcvnWcNU/P6D0F3e7T+5XpPmJ24lY/bLuNAowrBf+3eN+kJk9VWSmQDXpOc7eJzYaU8NpIW0v6ju61+PejYS3yWcTTIYADozZe7mF9sMM5AYdDg/J+2/ZlLZ5QWSPug=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EsJRaOtF; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gvSJBEwz"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9CFB31F00A3D;
-	Fri,  4 Sep 2026 06:57:54 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EsJRaOtF"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9FBE41F00A3D;
+	Fri,  4 Sep 2026 06:58:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788505074;
-	bh=2NBexdNexn1Y8CNnnH2+FsOGv80Dn+ArZwhTr12FZy8=;
+	s=k20260515; t=1788505120;
+	bh=HuiYKgFLMZRwSzrB7Z5AWLytqubvsIW8UBMBnq474pU=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=gvSJBEwzgj5HmfzkmbetmE1n6Q+zeWWTLTWr7Qa0jXn+o1+JTm73stIXakeWaFDcA
-	 JeasXUU7OqYTJ8sPguHEVEK/eeMI23EoR7J9o6z/tU8oa2Ay8VKrv99cqaAj+X7DCG
-	 0mOeL0TtPGDKCsUv9eIgkz22Q0b+bShC67thXldGq9hDrHIxXqmnfXgmlJ6iGz2Cm9
-	 DGRVlpdtbu325r6WV12zbjoM0ovyRHC9oq5GHypGYbaAatAHJADtKofCikXyiTs+Yg
-	 geWCsgozEsRvTSch+y+T1fiH4NOo3uwjzHOe3NK2wAhN1qZ8LgcagT1WQg/qTjLM6s
-	 q9O5DAX2OxWJw==
+	b=EsJRaOtFHoWDVBBsnOp1dfBgkvI5Ade0nHtrK4T0fpcBOvT0J9WCb/14XkZlmYabI
+	 yjvmtNe7n6zFqknJfy1DQXwOk4xBxc9WT/38OHuOakPEJKqIbaT1EZdWaszyKLSpK/
+	 rBseWVDWImswFpRTHIkcFih68Iukc6A0qmVpPZvxjrZ8qGB0/YxItNFrsSmWGMcpgf
+	 i469fDSUv8Y7mDto94RQhExGAtefxvut/LYY0xoEd/ZH6HXmjNp5K9E1FVxCqGhLLS
+	 cN0+8ZFJ2Ola5eEoAYsqN/dtkTunN81Wz8G0iA/1FHkokjSwSiTVhIFjcQagzFmmQP
+	 09mkDATJJJ5xw==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 3/3] mfd: tps65217: Use devres for IRQ domain and
- wake teardown
+Subject: Re: [PATCH v3 1/3] mfd: tps65217: Fix NULL pointer dereference on
+ IRQ init failure
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?0JbQsNC80LHQsNC60LjQtdCyINCg0LDQtNC40Lkg0KDQuNC60LDRgNC0?=
  =?utf-8?b?0LjQvdC+0LLQuNGH?= <r.zhambakiev@prosoftsystems.ru>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260904063439.69881-4-r.zhambakiev@prosoftsystems.ru>
+In-Reply-To: <20260904063439.69881-2-r.zhambakiev@prosoftsystems.ru>
 References: <20260904063439.69881-1-r.zhambakiev@prosoftsystems.ru>
- <20260904063439.69881-4-r.zhambakiev@prosoftsystems.ru>
+ <20260904063439.69881-2-r.zhambakiev@prosoftsystems.ru>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Fri, 04 Sep 2026 06:57:54 +0000
-Message-Id: <20260904065754.9CFB31F00A3D@smtp.kernel.org>
+Date: Fri, 04 Sep 2026 06:58:40 +0000
+Message-Id: <20260904065840.9FBE41F00A3D@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -50,64 +50,58 @@ Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
 
 Pre-existing issues:
-- [High] The global static `mfd_cell` array `tps65217s` is dynamically muta=
-ted during probe, which violates MFD subsystem guidelines and corrupts plat=
-form data for subsequent probes.
+- [High] Dynamically mutating the global non-const tps65217s mfd_cell array=
+ during probe violates MFD architecture and corrupts state across devices.
 --
 
-commit 5ed0fd0cf78137c5505f644659e59027eb7df6d2
+commit 2466cdcefeecaa1a479ae1c537a7a6c523875175
 Author: Radiy Zhambakiev <r.zhambakiev@prosoftsystems.ru>
 
-mfd: tps65217: Use devres for IRQ domain and wake teardown
+mfd: tps65217: Fix NULL pointer dereference on IRQ init failure
 
-This commit registers the IRQ domain teardown and disable_irq_wake() as
-devres actions instead of manually cleaning them up in the remove callback.
-It ensures that MFD children release their IRQs before the parent interrupt
-is freed and the domain is torn down, fixing a use-after-free issue.
+tps65217_probe() ignores the return value of tps65217_irq_init(), so
+when the irq domain creation fails the probe still completes and the
+driver ends up bound with a NULL tps->irq_domain. Check the return value
+and abort the probe on failure so the error is reported and no
+inconsistent state is left for removal.
 
 > diff --git a/drivers/mfd/tps65217.c b/drivers/mfd/tps65217.c
-> index 9a1528456ffc2..2d799b60c79b4 100644
+> index c240fac0ede76..2d04d9e0ae29c 100644
 > --- a/drivers/mfd/tps65217.c
 > +++ b/drivers/mfd/tps65217.c
-[ ... ]
-> @@ -380,22 +429,6 @@ static int tps65217_probe(struct i2c_client *client)
->  	return 0;
->  }
+> @@ -333,7 +333,9 @@ static int tps65217_probe(struct i2c_client *client)
+>  	}
 > =20
+>  	if (client->irq) {
+> -		tps65217_irq_init(tps, client->irq);
+> +		ret =3D tps65217_irq_init(tps, client->irq);
+> +		if (ret)
+> +			return ret;
+>  	} else {
+>  		int i;
 
 [Severity: High]
-This isn't a bug introduced by this patch, but while reviewing this file I
-noticed a potential issue with how the global MFD cell array is handled in
-tps65217_probe().
+This is a pre-existing issue, but does the code following this else branch
+corrupt the state for other devices?
 
-Does tps65217_probe() persistently corrupt platform data if a device without
-an assigned IRQ is probed?
-
-The global array is defined as:
-
-static struct mfd_cell tps65217s[] =3D {
-
-If client->irq is 0, tps65217_probe() mutates this shared array:
-
-	} else {
-		int i;
+If a device is probed with client->irq =3D=3D 0, the else branch executes:
 
 		/* Don't tell children about IRQ resources which won't fire */
 		for (i =3D 0; i < ARRAY_SIZE(tps65217s); i++)
 			tps65217s[i].num_resources =3D 0;
-	}
 
-Because this array is shared, modifying it zeroes out the resources for all
-subsequent probes of tps65217 devices, or even for the same device if its
-probe defers and is retried later.
+Because tps65217s is a global array defined earlier without const:
 
-Should tps65217s be declared as static const to prevent this, and should
-this dynamic modification be avoided?
+static struct mfd_cell tps65217s[] =3D {
 
-> -static void tps65217_remove(struct i2c_client *client)
-> -{
-[ ... ]
+This permanently zeroes num_resources for all instances in the module after
+the first driver instantiation without an IRQ. This cross-device state
+corruption leads to missing IRQ resources and non-functional driver features
+for legitimately configured devices.
+
+Should the mfd_cell array be defined as static const to adhere to MFD
+architectural guidelines and prevent this state corruption?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260904063439.6988=
-1-1-r.zhambakiev@prosoftsystems.ru?part=3D3
+1-1-r.zhambakiev@prosoftsystems.ru?part=3D1
