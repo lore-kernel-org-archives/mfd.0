@@ -1,79 +1,70 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33CC6381AEC
-	for <mfd@lists.linux.dev>; Fri,  4 Sep 2026 22:46:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DFB43806CE
+	for <mfd@lists.linux.dev>; Fri,  4 Sep 2026 22:50:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788561962; cv=none; b=qPrjUatJZaEtFJ5Ny7vZj1B050NU4pNPZc1cTRk1z4Idv4fDTXd/GF32X9QLEHkvBQCrbgARkC9WsFImcEDpaQomyRyWXuXF/NI8PskQZkVFIdqjNn4vUoYFI0VVE9ivQQa3mjJwmwxsLofvc2gj4jPTHvx65slODAb/w04UsCc=
+	t=1788562218; cv=none; b=H5Mo4lAzerCBi4JQl/Pg3SR3vptLPOQ+pim69aOOlF9LlUhe72g8UNuCXdwdq3KuBQHHmwf30KWMv0JwDt3xZtZ5ZRKrvaYcYgEF0DQun/FAMwPWdcmjSfmjLdz2CS6hP+SuQLNXPyrfNCo+YEZy/+xHI/w67pRSk8/UksxO4Xs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788561962; c=relaxed/simple;
-	bh=N6PrZC21iwen1B31Vi2jxyoGAz00i3RnJHUvEeJPYKI=;
+	s=arc-20240116; t=1788562218; c=relaxed/simple;
+	bh=LaI524RLHiWVWroEzCiOVLLiqXyEe4eFFE+hiw53VBI=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=bn1OGINShck79I0DLfzsNVY3H+8e1zb+S/P7LiMlnVrhqBwfg06RTvknokGC3WNd0Vjxd72IgdOrEux1a1tyUkvZg0cVgTWyM0rGJUwVcp067aA8P4bOPsB1Ba8kI19lVcdK12eIIa6F/1E5+c4upoWCVZpuJM8mSrz7h+pVk04=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=d70iELOP; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=cJOWnTMdaw/5h9+jhvauJ2n54lcx6BAjVs2AX00mqQqJKfVqZDSugarfOiK0djlnAWb3OfHfoFFujP7m/uceXhome0JiBhBYm9VtB+e67LMQr3YiHgUId77cnbabWtrHkFIoKxQBliYcPBpmdVx/HmQmkcszP7+fEeOLLYvmDTI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZrkOCCFI; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="d70iELOP"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D7E881F0155F
-	for <mfd@lists.linux.dev>; Fri,  4 Sep 2026 22:45:59 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZrkOCCFI"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3D6B11F00ACF
+	for <mfd@lists.linux.dev>; Fri,  4 Sep 2026 22:50:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788561959;
-	bh=N6PrZC21iwen1B31Vi2jxyoGAz00i3RnJHUvEeJPYKI=;
+	s=k20260515; t=1788562217;
+	bh=QIFsmUdz10F99DC44yiISatbO4LMo/BgryDqrJj4LQc=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=d70iELOPejhaBBj5+6MW44oGn0aWXKRbgAohwfHSsU/NLiIvY/fHQDlN6hkNCQojh
-	 KhsDrUKRNEtpUBfA4wXzCclmbNO5nsV0ItTAAd+M7utWhgIOTI88JJVCdlEfYcfHrZ
-	 Sp+cvzGDdyzy5G5Ds/uDrCbuGDYAm4vbC6ahg99HB8cJlTwyoMUzwGszByY5/+7QWO
-	 hGA+wKRDNsUhZmdcUspY3bXo33TZP7b4J95yD78zG9+PN2BrODGzpSpap7cLoFk2oZ
-	 xdMdKxA+P3VuuxMZkwX/X0dNbrCd4U0OrHFZtaKhN8khrcIWsGPUbucNxAh4IFP59x
-	 lI2oMGKWEi3Rw==
-Received: by mail-lj1-f176.google.com with SMTP id 38308e7fff4ca-39ca300db70so13761571fa.2
-        for <mfd@lists.linux.dev>; Fri, 04 Sep 2026 15:45:59 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBwaapT/bMcOyNWviDIkPH9ECIIIyfmVY7oS0UtR4aHrsB3k+iL+chxY0wBwVIcJ4YqFsFI=@lists.linux.dev
-X-Gm-Message-State: AFuF++l+myAEsXI4F1pjocA2ZoSv2knM0mJuObarrwYUfnMSPtslu/rG
-	1kLU+2ToygWEDhf05RZZZV7Q6skq5whXhIVovc9zAwGRGSZYoLeO7U7LrhGfP1pus9/HSJYl2Fy
-	80VsuLrF35X8WclZYkBKQsgnQizHs4ow=
-X-Received: by 2002:a05:6512:a84:b0:5b0:eda:de26 with SMTP id
- 2adb3069b0e04-5b616f2f892mr1623528e87.16.1788561958599; Fri, 04 Sep 2026
- 15:45:58 -0700 (PDT)
+	b=ZrkOCCFIPkJL9lRqu7wbEsfcPgr9szRWtdXJVkCNjTDTC3gCEaGGvqNWcWiIN5oVP
+	 WkvLrxRbHRl2NFOHrSb1uDPh/G5BAXF26rAEpslXDNDNs17rJGoKZYf53snypsTfXa
+	 3+9+RRdYIUV+Ep6y7boSBZuXbssLmpQ3Yur7UKnO/Cjn2aLTwxzM12XbjRvfZqHTOR
+	 /r1sjiSe9zJemV3JBlBDYAltBllyHOM7W8DczGHLMvUSIETWxG2uwWi5OR5eWnkzYJ
+	 7icOCJlpibszmxCkAaAtP6RXpQp6roY0UZVBOCggQy9Kz72ETCGTxb3BskfCkx5ImH
+	 4C3mI+SQih3hg==
+Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-5b0115b9e17so1332762e87.0
+        for <mfd@lists.linux.dev>; Fri, 04 Sep 2026 15:50:17 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBx7R0ag2dTJM4JrAS4U24te2abjqlkj1RJZ5Hs7To6IxYTzX692o03nN6DVsW31g7SolOE=@lists.linux.dev
+X-Gm-Message-State: AFuF++nxuGIGMhdOHre/8zqKjEYSaedBdj7ofs22ot8O7WKatiiVkzOG
+	I9ueiuOIENj/uCDWJ/+oiOXIYAHSBXxbc2nbs+N5Q/cNZ0SOsCv4Pc9OfJxgGXOwBC3csL36DHJ
+	TmkISTH0BpW+zI65+ecvfb9YrYIO4WWM=
+X-Received: by 2002:a05:6512:3984:b0:5b6:1a7c:aa0a with SMTP id
+ 2adb3069b0e04-5b61a7cac43mr1040185e87.34.1788562215915; Fri, 04 Sep 2026
+ 15:50:15 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260904-cv75-v5-v6-0-e918514cb3b1@ambarella.com> <20260904-cv75-v5-v6-13-e918514cb3b1@ambarella.com>
-In-Reply-To: <20260904-cv75-v5-v6-13-e918514cb3b1@ambarella.com>
+References: <20260904123207.36203-1-hemanth.selam@gmail.com>
+In-Reply-To: <20260904123207.36203-1-hemanth.selam@gmail.com>
 From: Linus Walleij <linusw@kernel.org>
-Date: Sat, 5 Sep 2026 00:45:46 +0200
-X-Gmail-Original-Message-ID: <CAD++jL=tVwQPPCFCc=J6gxBt4VvSJKWKvbAeSRSybfXjvpcdPQ@mail.gmail.com>
-X-Gm-Features: AcwNN1WvpRED5iixL57tKxLT16byEdBDfHJOlSmTYR0bXv5jc6tVAgVJ2Y214Ck
-Message-ID: <CAD++jL=tVwQPPCFCc=J6gxBt4VvSJKWKvbAeSRSybfXjvpcdPQ@mail.gmail.com>
-Subject: Re: [PATCH v6 13/13] MAINTAINERS: add ARM/AMBARELLA SoC support
-To: longzhao@ambarella.com
-Cc: Arnd Bergmann <arnd@arndb.de>, Krzysztof Kozlowski <krzk@kernel.org>, 
-	Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev, 
-	linux-arm-kernel@lists.infradead.org, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Jiri Slaby <jirislaby@kernel.org>, Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
-	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
-	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Long Zhao <zl020895@163.com>, 
-	Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
-	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, 
-	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org
+Date: Sat, 5 Sep 2026 00:50:03 +0200
+X-Gmail-Original-Message-ID: <CAD++jLka3QsnvoRDLB0mmAzMJFb-+yWqetSLxFmzpxf3i_1HHw@mail.gmail.com>
+X-Gm-Features: AcwNN1W3m1-Lc4lxvPZ_ch92KoW1rz9j_7ac1OxU__eb1riTgKOJXNVRrEUuwvU
+Message-ID: <CAD++jLka3QsnvoRDLB0mmAzMJFb-+yWqetSLxFmzpxf3i_1HHw@mail.gmail.com>
+Subject: Re: [PATCH] mfd: fix typo "interupts" in comment
+To: Hemanth Selam <hemanth.selam@gmail.com>
+Cc: Lee Jones <lee@kernel.org>, linux-kernel@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, mfd@lists.linux.dev
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 4, 2026 at 8:39=E2=80=AFAM Long Zhao via B4 Relay
-<devnull+longzhao.ambarella.com@kernel.org> wrote:
+On Fri, Sep 4, 2026 at 2:32=E2=80=AFPM Hemanth Selam <hemanth.selam@gmail.c=
+om> wrote:
 
-> From: Long Zhao <longzhao@ambarella.com>
+> Correct "interupts" to "interrupts", reported by scripts/checkpatch.pl
+> using the misspelling list in scripts/spelling.txt.  Only touches comment=
+s,
+> no code changes.
 >
-> Add a maintainer entry covering Ambarella CV75 bindings, DTS and
-> related drivers.
->
-> Signed-off-by: Long Zhao <longzhao@ambarella.com>
+> Assisted-by: Cursor:claude-opus-5
+> Signed-off-by: Hemanth Selam <hemanth.selam@gmail.com>
 
 Reviewed-by: Linus Walleij <linusw@kernel.org>
 
