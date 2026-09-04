@@ -1,214 +1,372 @@
-Received: from mx0b-0002e601.pphosted.com (mx0b-0002e601.pphosted.com [148.163.154.28])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ua1-f47.google.com (mail-ua1-f47.google.com [209.85.222.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A83DD3B9618
-	for <mfd@lists.linux.dev>; Fri,  4 Sep 2026 16:00:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=148.163.154.28
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94EE84E8E05
+	for <mfd@lists.linux.dev>; Fri,  4 Sep 2026 17:06:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.222.47
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788537624; cv=fail; b=f9WKvC+S8HC1vXc/rYxIiDk1IsMhomuFm4J6nLeHmbwiub6FAH0hSOkcBk2rT4r5iGv9ZAI0podvje2dTDAo/tPnL0ciPxwrXBECw2W+SlmysbIOjWkcbjw3ioIJlLF48EOg5PUAnCjBeg+h4Hss6fAGEzSm9TRmq3glUzlueeI=
+	t=1788541582; cv=pass; b=qgEiObBl0b6mCGpDDRetZwY42g9TZvo0AoAydAh4kteg0UUpeZJFdg7ZCguPGSPc6TeelhtS2rt8ZSTTwBIVF+pUn1CLOmOF3tFIDzdscoSYp+qt6B9VXZYhWRlj04BAWi4JjYDEpRpu5zz3xxa76L8Pf2BFnU8MWIti2IQRUSE=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788537624; c=relaxed/simple;
-	bh=0keP9G2C7HYlcSSm5ZGovc4Y8rU+4BrCr34kPweUaTY=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=mm7/1wTFao7GR2dVMNm7GKkT6uHt8fWMf7x4W+4RjQ6/NxdF77BmGdLpJPt77GJike1snWKnfzTxI2BeBwOYxWtFwUALzvXElON4kfZ5mVrSefPPbSoK2LyzIajp6s96xMsOjEgCKxugGc3AxPS/Q6zk6ANMPDJZ6m6tGEWDmGE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com; spf=pass smtp.mailfrom=ti.com; dkim=pass (2048-bit key) header.d=ti.com header.i=@ti.com header.b=hYj78/WX; dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b=euY+y/pf; arc=fail smtp.client-ip=148.163.154.28
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ti.com
+	s=arc-20240116; t=1788541582; c=relaxed/simple;
+	bh=it7al99Mn0Hztn1jkp4WlVXb+TrDxTMcFjo8QDlqTgQ=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Cks1NQLvgpeBB4r8uH9d9uy3bt47tzwHbIG4r0CvRH4Xw2McbNYG5lUajEgTszxfV4Df1dpjHrE0QW2lCmReg2Vdw5gGAcV3SdePDl7Dfcj1asS1/7RERaqWNkvmnK9xQhAhkah3a4L1/cmlIXrQ/ioMx5Rs/BxwJPyFRDYsgMU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=G7LfgvyT; arc=pass smtp.client-ip=209.85.222.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ti.com header.i=@ti.com header.b="hYj78/WX";
-	dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b="euY+y/pf"
-Received: from pps.filterd (m0374956.ppops.net [127.0.0.1])
-	by mx0b-0002e601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 684Ftpvt3921868;
-	Fri, 4 Sep 2026 11:00:04 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	proofpoint-05-2026; bh=0pFhoRam8KwzPA2o0IqfU/PC6jFKp/MhTwt0g/4id
-	lA=; b=hYj78/WXR+zmA+S6ZtTClpSKlLs+fqDIcIcESq0t7vleC3wifBoWEsQFl
-	u2Fs2dhOUBG/x/kNXdQejxr+S7TY2WUlmbwhT5z00hIASwiCtV43DvSoCqmuix+3
-	GeQKKuMO9s3l6UY6Cq50YF8/fXGzgdsYC5nzR+ZIlQE3F1mXHQ6ETg8XPeg0yTwj
-	h9aNMpTshjwTU31ffQ92dnc9Wicl6b2CHd987onVRGT9oDxZLxId/SAAHlEnH/VW
-	sz4/kxza50ertrS5zPBn5OCGkZF+fL5PTirMcPOl3Vg3WtssjesenZy0IpAX4EbU
-	9PCcStx+eIA7FRIg24ENJfA+UeLMg==
-Received: from bn1pr04cu002.outbound.protection.outlook.com (mail-eastus2azon11010001.outbound.protection.outlook.com [52.101.56.1])
-	by mx0b-0002e601.pphosted.com (PPS) with ESMTPS id 4gfyyq0mpg-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Fri, 04 Sep 2026 11:00:03 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BhWi8kz6bfiYbYNu0pNT6ZFdf+nAFhgvxl+b87P0ptIeyttetwPVf46hy3kDDcmEFdvd8qqFvQ7MYNhp4nYxhQGARjY2R1zt858tqBgD3FW3Gehz3YZTBx+8hspCLnUlLx7cJrACwavcIK7C3W6oeHMkKySKnMMMXzx5AbKesEVng5BFVH/H6ixZ6k49UVOLiZKIUHfv7ftwNXpdve7vPzc72FNQk1F/HUDln5cwIps4KnV7vxSZgZAKMFt6lgb0EdFQw+YBQNbndurXg1jdRvu1S8FBkw75ZOYSeEz4E4LQzrX0ymMpua1axQ2Y2HeRWeqpVTnAM+ArnCZOfMrgPA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0pFhoRam8KwzPA2o0IqfU/PC6jFKp/MhTwt0g/4idlA=;
- b=O38oOtLR67z+H5arG1EiQ2lTqSYVj5sNoutZJHVO7t0fgOqKfHUsMvCVVjS6S5cy7UAZFhv4J6Lf3MEsj0j4n4MsIg1Dzm2qRsATGjT2cN7UskSScBi/02VBgtQmn7THOcdSt8s7U3DUjzsrBKMQgFLZ9WjGShljVgO6lk/w1QHjnE1w9OEq9xckPxh2bOiV01eBsno+G7lElO/xwHJCHrj3eFx5KJezlh7YF5/oaseF5hNerAVaP12Iy9044hp/EJz1pDCCbXCMGS7C9tGXINZE29WqhmQQQc66c/D8G5Uu+TBYEr14zt9NPmW5U/HCE7koi3FPjlcWbwJD6l6Ggw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.infradead.org smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0pFhoRam8KwzPA2o0IqfU/PC6jFKp/MhTwt0g/4idlA=;
- b=euY+y/pfaJbpFZ7aotpOS2+cm2JPfQ3o9r3aunTtEAsMiJ4N///K83jG59i1gc1GZsQ+qjljpKohroz55uh/f7nbiTtowggvg4nqbnqglvHNvRVKvbEA+uuDT0RWNp1LP3c5XLM/zY1dnlR+/t1zKdYODH0z1AATSuHOSvrTvDk=
-Received: from CH0PR13CA0015.namprd13.prod.outlook.com (2603:10b6:610:b1::20)
- by DS0PR10MB7065.namprd10.prod.outlook.com (2603:10b6:8:143::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.4; Fri, 4 Sep 2026
- 15:59:57 +0000
-Received: from CH1PEPF0000AD7C.namprd04.prod.outlook.com
- (2603:10b6:610:b1:cafe::75) by CH0PR13CA0015.outlook.office365.com
- (2603:10b6:610:b1::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.4 via Frontend Transport; Fri, 4
- Sep 2026 15:59:57 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- CH1PEPF0000AD7C.mail.protection.outlook.com (10.167.244.84) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.382.8 via Frontend Transport; Fri, 4 Sep 2026 15:59:57 +0000
-Received: from DLEE212.ent.ti.com (157.170.170.114) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Fri, 4 Sep
- 2026 10:59:41 -0500
-Received: from DLEE206.ent.ti.com (157.170.170.90) by DLEE212.ent.ti.com
- (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45; Fri, 4 Sep
- 2026 10:59:41 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE206.ent.ti.com
- (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.45 via Frontend
- Transport; Fri, 4 Sep 2026 10:59:41 -0500
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232] (may be forged))
-	by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 684FxeKx3780170;
-	Fri, 4 Sep 2026 10:59:40 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
-        "Krzysztof
- Kozlowski" <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        "Ivan
- Khoronzhuk" <ivan.khoronzhuk@ti.com>,
-        Santosh Shilimkar
-	<ssantosh@kernel.org>,
-        Bhargav Joshi <j.bhargav.u@gmail.com>
-CC: Nishanth Menon <nm@ti.com>, <mfd@lists.linux.dev>,
-        <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <goledhruva@gmail.com>, <m-chawdhry@ti.com>, <daniel.baluta@gmail.com>,
-        <simona.toaca@nxp.com>, <linux-arm-kernel@lists.infradead.org>
-Subject: Re: (subset) [PATCH v4 0/2] ti,keystone-devctrl: Convert to DT schema and DTS cleanups
-Date: Fri, 4 Sep 2026 10:59:38 -0500
-Message-ID: <178853756367.2995941.13597621016722983915.b4-ty@b4>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20260901-ti-keystone-devctrl-v4-0-2922f2a44792@gmail.com>
-References: <20260901-ti-keystone-devctrl-v4-0-2922f2a44792@gmail.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="G7LfgvyT"
+Received: by mail-ua1-f47.google.com with SMTP id a1e0cc1a2514c-97ca72f2cd9so704611241.2
+        for <mfd@lists.linux.dev>; Fri, 04 Sep 2026 10:06:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788541579; cv=none;
+        d=google.com; s=arc-20260327;
+        b=Uf2BKg0Pt6lfNOPYNxJ1vlZxY7ZeHgnt16ijviipleaeyADDuezNyel4lpnEKzgE3d
+         xG1eKczwsoJkUbtJZHn8hjh/CN0UcNEX0z22Eag7Ca56j+/k+VW/EeokI7I2mpyB6goc
+         hHAMMROEBU7y/QUgB1vFEuIGyHH9zheOvjBZ9a+JLYxc1lu2esroUWMZ6fD93IqllSqw
+         jN3pLQ6bBGhu8OOlICXk5z6EPLGp2s6LZ7LP0uolnmxK3XFHHSzuAz4Fxrhc9EXZQi08
+         olnKTPtRbF3QIfBWowUzzIx9FIojERcHRXCwBCgNXs3KZu/sQ+RtugsPot68z1CjC1c0
+         ILwQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=MFC2guGLZc9ltzCdl0pnPxvf2FTE+4Td6tDRAjgS4Nw=;
+        fh=xClwZirc3BX3rcDHArWUKS2xm0eMnwcpQaOgM8qumkk=;
+        b=VF/e3quyT/ypDPHlooAo0UQbo4nB712E5PTDZjNIuAxts6u0MyjkrKdDfwnzol/8P1
+         VtJC6jMUwMdrii5mQzUIY8CbUzR+Jldy1MBwbkJNVvty3aZAXhAHow3GuHPgN4/mf3MY
+         5Ng5NKp3UbawRk5ZwcceMsOJH1jXEaFKe+mtZ6MnOFIsyHMVFlpj+9yu2h5+0g151mNI
+         k68ueabkzZ0RDkNy51dOI8Ro5nRWccKLFlG5rjxuB87fvWE11Dsqb6mt3EnLM4uL0O+M
+         VQjExSRp7bBUEORIl/hJM51oHqlkRZmgseeM8oJMU/mgVxIvv0bQZUjiLz+ySpIyd1yl
+         4+fQ==;
+        darn=lists.linux.dev
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1788541579; x=1789146379; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=MFC2guGLZc9ltzCdl0pnPxvf2FTE+4Td6tDRAjgS4Nw=;
+        b=G7LfgvyTfvy6rLuh47U8DJhio1OlsUA3gVt5T9sbxDKhH2JFVcDI7DgA4ddnzMbOry
+         K9IlwSfb72F20Ft8hOO9GMv/+0xFtKMBv2+qTHRsUHgaI/2fqroEQQB4WaCP5Q13LPVr
+         FDS/I+0u6fGc2wrhil133WZq2hLB+eXagTQ8XXd7EZuP9tHi7dSeaziDt6MhwkGFbgjX
+         06od8dBeryzdVwosMlpprob6mXu7aFCrAkN4kND4Hh0hT/JLM3tfmc+a5ccFfFFQ9IH/
+         ad9hNrlxA+ZQ2zllYl78jfhZndyFX4q3AnWi9/S1dd8BnDfYL7bdtciKkqe2GKboswUZ
+         bhaQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788541579; x=1789146379;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=MFC2guGLZc9ltzCdl0pnPxvf2FTE+4Td6tDRAjgS4Nw=;
+        b=A1yB2+4aHqwxT9TvWzstcmF2esWxIaXBxvMR+7DlnrB0AkaqemcJphoocBbM9UjcjD
+         8XIG2+ccpGOAnIQFIx39cMK3Z0f/bxmJkufFpcGxL25pIXebWEuqn0hXblArYOGHFB8y
+         ZaFz91MlTxeHZogAD6YiBfZTlB8sNs5ckdsipek4nFbeueMGkctKzMAKoS9hIgfYpZ07
+         yqqQZwJg2kXCfLOt3wKP5gN1ojLpruCUeZOAfeCRVM+2k771pnfLsJbb3Ie8Yl8L7Cjn
+         LA9Rrndm0rsKxHbs+Q2pyAeF/b3H09jxHkdSG/h+0TvkD1jlWO78357Vznsa8QMTgFAP
+         AnOA==
+X-Forwarded-Encrypted: i=1; AKwUvBwZCrdeXNeAuPX/7iyP8PMKmrrQq5dd0tVeKlquMSi6T0l2DGboi27vLpCPKJVCsECWvjs=@lists.linux.dev
+X-Gm-Message-State: AFuF++n1n0qStZ0xCnEtWMzsjJkgiQ79ieIbEMflCI8Fmm5nk9LLT5Sv
+	njHgMKsICGpozfvvl1D2epdIOzMa8TsuJgnonSkoVBKiuxTCyVL1ktujArAKeMOYy4BKe+Ep9w/
+	rponu+W2K2krQTUaXlqhx/hVS4JTG9TI=
+X-Gm-Gg: AYBFou3Pt90SW4XbZaLcFAt0tfoEQKzQoQxDQBuJQbumuedjt1/iSXj5/EbW/+Ax8kB
+	yAt9aZxOO68iLnDRF6PQakCHwqIQVta0VnFCC11cLoFlG2AmxfJnKnuc1Rcr6cK6xZDakwSf0YZ
+	kqYPtoEI+20cqLrLssSUPo0KVMBIjwmIMkq3Z/qVvSKJc4cvTcpAZYwPynl7V5Ob9uIdfEFbE/6
+	cIKYA16nkx/gbTI+Rib/CxklbxrKSv2aKiuJGAWXY0muoC+kAtLhDZ6nwXCpmdP6fHT/2qf+Bbm
+	g+4HsOj8E5vF3MVVDiT4wJYbOKJtDXUvpLeQlxyBZDVM3qMXCIZR6gqHE+lTaibynPwu1nPJdff
+	NOGy5ClCWbYZWPac4IjxTzaUvpHPcEj5uf3ANi67rIOCjhDNnlYna3PKlmEGYLVqpwdW3t+qbuh
+	74bxo7d9djvPGLe5V9hFqCZXGoCeA4OAPUdxF9Fw==
+X-Received: by 2002:a05:6102:8023:b0:789:5fc6:3693 with SMTP id
+ ada2fe7eead31-78a4a6f8278mr2620716137.6.1788541579377; Fri, 04 Sep 2026
+ 10:06:19 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7C:EE_|DS0PR10MB7065:EE_
-X-MS-Office365-Filtering-Correlation-Id: 721e8005-de97-4f48-89f0-08df0a9d9133
-X-LD-Processed: e5b49634-450b-4709-8abb-1e2b19b982b7,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|376014|7416014|1800799024|23010399003|82310400026|13003099007|3023799007|10067099003|18002099003|56012099006|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	+eLim5gzWhMBCQIoNqtTzVcnTdSAT0ruQpqjb5+DKsdyX6VKmgx4ZwXhrjirqT0ivkXPnLy6zwMFmmC8BsgH1I55ppWSHDGzvj6OShhhsocmTmgMiCEkXDMjnIBGAh2aYh7gFUgvEh9wP3wEyS5zowLbp9AGZCTfpB/8UhDcx91Ykt3lFa5a+Q8qHAmdCuaKq0wG1tb/OzYcfSe+KPqhFoM1UUpxvFV/1K5BEK7iRcGfgkwhrxeNIJU8q1VtC69OYA5tMAZcy7rtPs+aVvLfBsz6+KEy+mlK4gtfV0BBnx830tHf9Q8TFz2YfFll8xCwNuvqurp3qDDwGeWP/xZg+eYNcsTw9eIsCQ7T1uHVLGGzZfbw6p43JI4rR3U+NZ786SAoG5c+0UmXecJ9qvY9XSxT1dV4BjWEU1T0tYqXxjwwCwXahL+aqf3Fo6CC7QQxR0dGelOeFlfiNT9oyogI60pR1VXDeg9SNsVQqDDXgQsXmaKxdvNOHNM2OrlSAZG8H4nyy5VrG0b9FQrmApOx1d/+y1/IFV/APPtsbndzLLWTKj1QZKdRM+lXeomgJ0zikedcY1S4N90r5BRdfHNwYIJuPkcLzJgkXxqSAfsIJRtEpzfShirwCtS1OYnsZoyHNphKO9VUq44Wr4SgQbgJtKgeqF+oYDoDIWEUP2KMBB9DaCpQvEJlICTXAun/LZdvOpYaWR8nf8/hpbqPxLQmHw==
-X-Forefront-Antispam-Report:
-	CIP:198.47.23.195;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet201.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(376014)(7416014)(1800799024)(23010399003)(82310400026)(13003099007)(3023799007)(10067099003)(18002099003)(56012099006)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	j9kUkbURadOsGpN9FVinb63riFbbaeHxIYoAZ+ldyakY3cPTOvYeh3r1PdXqMIqJkftPRw9uEmnaES5rwDxBQgt3np4ZwixC3wxrsbY3Y6HrOu2qCE12aFxaY/kfP5ZtGh2H91qzn9XMelraau2cd2AW4qUUC28wOsQa0itHXsmu5PVGak13Sj3+HREwXIIWN5ro8YkLSApsQzM8hzvKtSOuVC79r2OaFox1rU7mysbXY2v4468MGgTKdRIQPzQ1yLHMyj599oJxMGW6ukiwpZMVi3PZ4msDiOHFME5Tfudu1whZFCS1ZoouRzLN8JuwzknI005h1eAuzX9IR3P/3uP4j6XRbtQiAVosPB4z+sXRfQPeCFC0BQ0B8nbEEJ10tG3kNatuI98ak2ErsFSAzs43TFfBVR0x0X3r7F3nBi8N4wt5zHvfO3aMr3VgIOyp
-X-Exchange-RoutingPolicyChecked:
-	BVUWK1eGsNyqdcDuf+Hs09UErTNng3cHpwLylOnltdLpOBNPi67IbDdzhK0pXeaTE7zwos5nitjMwhR8Yurv8FplBQsxdCpnxPpAEeUnHcLVGXf60rBQBMsSrVPKVn1PbxXuHgdvNhN9uqNxsR5gzv7j8SXuZ25f+uOBBBGxuEcg5VSLDprF786Ibkmn4mGhtEd6keoPdP5PNEU7YYoGwm2XIQickr4I7v0Ak0ai5h9XCpRhVYKhcLpYavqW8JHLfpuNj6PB3CYDaubHsKXWtPcRshP+I8lmtAlNzAPBflqGVr4Xz0CS/vJREHGhQeUu5nf9i9d/0VZanxY7j4cQ+w==
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2026 15:59:57.1114
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 721e8005-de97-4f48-89f0-08df0a9d9133
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.195];Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CH1PEPF0000AD7C.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB7065
-X-Authority-Analysis: v=2.4 cv=AfqB2XXG c=1 sm=1 tr=0 ts=6a9aeb03 cx=c_pps
- a=qHW1pi9L+1RZ0SKNcL3CYw==:117 a=f+v6EHfkeJbVwR46tk4DMg==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10
- a=s63m1ICgrNkA:10 a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=Z8NIEmU8O1QQgoT56wFK:22 a=jwouBfj2j3NM8CExmVVE:22 a=VwQbUJbxAAAA:8
- a=sozttTNsAAAA:8 a=o1kACPpZKAZCWsj7fAYA:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-ORIG-GUID: -w1zkFLYejLZVMPTzZHZplQsWfcjFbYp
-X-Proofpoint-GUID: -w1zkFLYejLZVMPTzZHZplQsWfcjFbYp
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA0MDE0NCBTYWx0ZWRfX8b1lwlWPfD3/
- iEFLtjkqSLZb9/if+UVUyOvFc/kcAWlcFazzh1rLzF0Mk/r2d61zYVSv0iRYEFKCsbtQzSNXQY4
- Jghsmx+jFh8BBuHJqBy29AMZC/0E/z40J1eFoXNCLQ8QUK1GE/AlbFRrd9wihOTv0fHScq2eo14
- gTXFGrZzrl1Xl582+L2Vg2a5M9aZ5dAtuiFCJsz1LVxTC+lEg10V0zgt2sWA8AvGftT5zPzrw7m
- 03lqUNWFNTUS/Mi+BCC1/WfMC+TqDIszbV7oJbEh4DWp6RDT38Eg5zB5PGlEOb/JnACv3Vyu/TQ
- YP7QK5057Tgc/hpVEBRQEGTqeESo320A2tFotgXAyTtcACJ9t+Re3Z3skDTQwTqUTi/s0+idsUj
- Tf4tjEFtpV7AnqgZVBekDQDKFbn9InhVHKaPXacY5wBNfHTI6amLPmFHVW6fCa5VE8jlhWj5BiF
- boEWeXrJEc+wxIZ7vnw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA0MDE0NCBTYWx0ZWRfXwOtjPZ/lZQiv
- w+1oFRLlcpJtkfbyCqOfDb81Ps9/EOQsNWbSrUXCYMru0YLtMBup4OK3zWCLYqaQBJ/lHKrMcn7
- MBl4DkDy5ZuwSueoRiVUHNXK1JOflHg=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-04_04,2026-09-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 malwarescore=0 clxscore=1011 adultscore=0
- spamscore=0 phishscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609040144
+References: <20260903-submit-ac200-mfd-v9-0-6b7ed278989c@gmail.com>
+ <20260903-submit-ac200-mfd-v9-3-6b7ed278989c@gmail.com> <20260904-overpass-clumsy-8ccdd5d4ca0e@spud>
+In-Reply-To: <20260904-overpass-clumsy-8ccdd5d4ca0e@spud>
+From: James Hilliard <james.hilliard1@gmail.com>
+Date: Fri, 4 Sep 2026 13:06:08 -0400
+X-Gm-Features: AcwNN1X6bl9ODedCCrg0dVF5P7jGVB6L6R8M2S6nkA_KWsBfrKX-Ph0fkWo7Kdk
+Message-ID: <CADvTj4qKxyPZMLBZgpNMMxkFn09MUCNEc9nLva-j=24C_Zg-nw@mail.gmail.com>
+Subject: Re: [PATCH v9 3/4] dt-bindings: mfd: x-powers: Describe AC200 functions
+To: Conor Dooley <conor@kernel.org>
+Cc: Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Andrew Lunn <andrew@lunn.ch>, 
+	"Jagielski, Jedrzej" <jedrzej.jagielski@intel.com>, Andre Przywara <andre.przywara@arm.com>, 
+	Chen-Yu Tsai <wens@kernel.org>, Jernej Skrabec <jernej.skrabec@gmail.com>, linux-sunxi@lists.linux.dev, 
+	mfd@lists.linux.dev, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Bhargav Joshi,
+On Fri, Sep 4, 2026 at 9:50=E2=80=AFAM Conor Dooley <conor@kernel.org> wrot=
+e:
+>
+> On Thu, Sep 03, 2026 at 02:09:42PM -0600, James Hilliard wrote:
+> > From: Jernej Skrabec <jernej.skrabec@gmail.com>
+> >
+> > Describe the AC200 audio codec and TV encoder as child nodes of the
+> > shared I2C register provider. Keep their analog supplies on the functio=
+n
+> > consumers and describe the TV encoder display graph and optional bandga=
+p
+> > calibration cell.
+> >
+> > Add the shared interrupt-controller properties and interrupt numbers ne=
+eded
+> > by the TV encoder. The Ethernet PHY remains represented on its primary =
+MDIO
+> > bus and is therefore not an MFD child.
+> >
+> > Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+> > Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+> > ---
+> >  .../devicetree/bindings/mfd/x-powers,ac200.yaml    | 136 +++++++++++++=
+++++++++
+> >  MAINTAINERS                                        |   1 +
+> >  include/dt-bindings/mfd/x-powers,ac200.h           |  13 ++
+> >  3 files changed, 150 insertions(+)
+> >
+> > diff --git a/Documentation/devicetree/bindings/mfd/x-powers,ac200.yaml =
+b/Documentation/devicetree/bindings/mfd/x-powers,ac200.yaml
+> > index ca7a910b2c73..935dc07138cb 100644
+> > --- a/Documentation/devicetree/bindings/mfd/x-powers,ac200.yaml
+> > +++ b/Documentation/devicetree/bindings/mfd/x-powers,ac200.yaml
+> > @@ -28,15 +28,114 @@ properties:
+> >        be 24 or 27 MHz, matching the rates encoded by the documented EP=
+HY clock
+> >        selector.
+> >
+> > +  interrupts:
+> > +    maxItems: 1
+> > +    description:
+> > +      The shared open-drain INTB output for the TV encoder, Ethernet P=
+HY and
+> > +      RTC interrupts.
+> > +
+> > +  interrupt-controller: true
+> > +
+> > +  '#interrupt-cells':
+> > +    const: 1
+> > +    description:
+> > +      The interrupt number, as defined in
+> > +      include/dt-bindings/mfd/x-powers,ac200.h.
+> > +
+> > +  codec:
+> > +    type: object
+> > +    $ref: /schemas/sound/dai-common.yaml#
+> > +    unevaluatedProperties: false
+> > +
+> > +    properties:
+> > +      compatible:
+> > +        const: x-powers,ac200-codec
+> > +
+> > +      '#sound-dai-cells':
+> > +        const: 0
+> > +
+> > +      ac-ldoin-supply:
+> > +        description: The 3.3 V supply for the audio codec LDO input.
+> > +
+> > +    required:
+> > +      - compatible
+> > +      - '#sound-dai-cells'
+> > +      - ac-ldoin-supply
+> > +
+> > +  tv-encoder:
+> > +    type: object
+> > +    additionalProperties: false
+> > +
+> > +    properties:
+> > +      compatible:
+> > +        const: x-powers,ac200-tve
+> > +
+> > +      interrupts:
+> > +        maxItems: 1
+> > +        description: Cable detection interrupt.
+>
+> Given the example, this looks like a hack.
+> Is this mfd actually an interrupt controller, or is that just part of
+> this hack too?
 
-On Tue, 01 Sep 2026 05:08:11 +0530, Bhargav Joshi wrote:
-> Series converts Texas Instruments Keystone Device State Control binding
-> to DT schema  and aligns the existing dt files with standard naming
-> conventions.
-> 
-> Patch 1 aligns the legacy child node names with standard names.
-> Patch 2 converts the ti,keystone-devctrl binding to YAML schema.
-> 
-> [...]
+The AC200 has separate TV encoder, Ethernet PHY and RTC status and
+enable bits which are multiplexed onto its shared INTB output, so the
+intent was to represent that demultiplexer as an interrupt controller.
 
-Please note: Bindings need to go through appropriate maintainers.
+I notice that the example's tv-encoder interrupts property inherits
+interrupt-parent =3D <&pio> rather than explicitly referencing the AC200
+interrupt domain. Is that incorrect interrupt relationship what looks
+like a hack here, or do you also object to representing the AC200
+interrupt demultiplexer as an interrupt controller?
 
-I have applied the following to branch ti-keystone-dts-next on [1].
-Thank you!
+> Quite frankly, I am not really sure why either the tv-encoder or codec
+> have dedicated child nodes, they don't appear to have conflicting
+> properties.
 
-[1/2] ARM: dts: ti: keystone: Align devctrl child node names with dtschema
-      commit: 386cccc12a856a376da20ac9e93827ecd49352e7
+Do you mean that the DT properties for both functions should be folded
+into the AC200 parent node, while the MFD driver still creates separate
+codec and TV encoder platform devices?
 
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent up the chain during
-the next merge window (or sooner if it is a relevant bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
+Lee requested at least two MFD children in this series, so I want to
+distinguish the Linux MFD cells from whether those cells need dedicated
+firmware child nodes.
 
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
+> Additionally, why is this not part of patch 1? Add the binding in a
+> complete state from the get-go. On that basis, at least,
+> pw-bot: changes-requested
 
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
+Do you want patches 1 and 3 combined into one complete binding patch,
+while retaining separate implementation commits for the base provider
+and the MFD cells?
 
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-[1] https://git.kernel.org/pub/scm/linux/kernel/git/ti/linux.git
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
-https://ti.com/opensource
-
+> Cheers,
+> Conor.
+>
+> > +
+> > +      tv-vcc-supply:
+> > +        description: The 3.3 V supply for the composite-video DAC.
+> > +
+> > +      nvmem-cells:
+> > +        maxItems: 1
+> > +
+> > +      nvmem-cell-names:
+> > +        items:
+> > +          - const: bandgap
+> > +
+> > +      ports:
+> > +        $ref: /schemas/graph.yaml#/properties/ports
+> > +
+> > +        properties:
+> > +          port@0:
+> > +            $ref: /schemas/graph.yaml#/properties/port
+> > +            description: Input from the display pipeline, carrying CCI=
+R656.
+> > +
+> > +          port@1:
+> > +            $ref: /schemas/graph.yaml#/properties/port
+> > +            description: Output to the composite-video connector.
+> > +
+> > +        required:
+> > +          - port@0
+> > +          - port@1
+> > +
+> > +    required:
+> > +      - compatible
+> > +      - interrupts
+> > +      - tv-vcc-supply
+> > +      - ports
+> > +
+> > +    dependencies:
+> > +      nvmem-cells: [ nvmem-cell-names ]
+> > +      nvmem-cell-names: [ nvmem-cells ]
+> > +
+> >  required:
+> >    - compatible
+> >    - reg
+> >    - clocks
+> >
+> > +allOf:
+> > +  - if:
+> > +      required:
+> > +        - tv-encoder
+> > +    then:
+> > +      required:
+> > +        - interrupts
+> > +        - interrupt-controller
+> > +        - '#interrupt-cells'
+> > +
+> > +dependencies:
+> > +  interrupt-controller: [ '#interrupt-cells', interrupts ]
+> > +  '#interrupt-cells': [ interrupt-controller ]
+> > +
+> >  additionalProperties: false
+> >
+> >  examples:
+> >    - |
+> > +    #include <dt-bindings/interrupt-controller/irq.h>
+> > +    #include <dt-bindings/mfd/x-powers,ac200.h>
+> > +
+> >      i2c {
+> >          #address-cells =3D <1>;
+> >          #size-cells =3D <0>;
+> > @@ -45,6 +144,43 @@ examples:
+> >              compatible =3D "x-powers,ac200";
+> >              reg =3D <0x10>;
+> >              clocks =3D <&pwm 5>;
+> > +            interrupt-parent =3D <&pio>;
+> > +            interrupts =3D <1 20 IRQ_TYPE_LEVEL_LOW>;
+> > +            interrupt-controller;
+> > +            #interrupt-cells =3D <1>;
+> > +
+> > +            codec {
+> > +                compatible =3D "x-powers,ac200-codec";
+> > +                #sound-dai-cells =3D <0>;
+> > +                ac-ldoin-supply =3D <&reg_aldo2>;
+> > +            };
+> > +
+> > +            tv-encoder {
+> > +                compatible =3D "x-powers,ac200-tve";
+> > +                interrupts =3D <AC200_IRQ_TVE>;
+> > +                tv-vcc-supply =3D <&reg_aldo2>;
+> > +
+> > +                ports {
+> > +                    #address-cells =3D <1>;
+> > +                    #size-cells =3D <0>;
+> > +
+> > +                    port@0 {
+> > +                        reg =3D <0>;
+> > +
+> > +                        tve_in: endpoint {
+> > +                            remote-endpoint =3D <&tcon_out_tve>;
+> > +                        };
+> > +                    };
+> > +
+> > +                    port@1 {
+> > +                        reg =3D <1>;
+> > +
+> > +                        tve_out: endpoint {
+> > +                            remote-endpoint =3D <&composite_in>;
+> > +                        };
+> > +                    };
+> > +                };
+> > +            };
+> >          };
+> >      };
+> >  ...
+> > diff --git a/MAINTAINERS b/MAINTAINERS
+> > index 1d03b0060bda..8a48f6a1e593 100644
+> > --- a/MAINTAINERS
+> > +++ b/MAINTAINERS
+> > @@ -29511,6 +29511,7 @@ L:    linux-sunxi@lists.linux.dev
+> >  S:   Maintained
+> >  F:   Documentation/devicetree/bindings/mfd/x-powers,ac200.yaml
+> >  F:   drivers/mfd/ac200.c
+> > +F:   include/dt-bindings/mfd/x-powers,ac200.h
+> >
+> >  X-POWERS AXP288 PMIC DRIVERS
+> >  M:   Hans de Goede <hansg@kernel.org>
+> > diff --git a/include/dt-bindings/mfd/x-powers,ac200.h b/include/dt-bind=
+ings/mfd/x-powers,ac200.h
+> > new file mode 100644
+> > index 000000000000..cc59e2ab4912
+> > --- /dev/null
+> > +++ b/include/dt-bindings/mfd/x-powers,ac200.h
+> > @@ -0,0 +1,13 @@
+> > +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+> > +/*
+> > + * Interrupt numbers of the X-Powers AC200 interrupt controller.
+> > + */
+> > +
+> > +#ifndef _DT_BINDINGS_MFD_X_POWERS_AC200_H
+> > +#define _DT_BINDINGS_MFD_X_POWERS_AC200_H
+> > +
+> > +#define AC200_IRQ_TVE                        0
+> > +#define AC200_IRQ_EPHY                       1
+> > +#define AC200_IRQ_RTC                        2
+> > +
+> > +#endif /* _DT_BINDINGS_MFD_X_POWERS_AC200_H */
+> >
+> > --
+> > 2.53.0
+> >
