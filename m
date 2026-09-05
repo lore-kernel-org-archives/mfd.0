@@ -1,95 +1,107 @@
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DBE1937F8DB
-	for <mfd@lists.linux.dev>; Sat,  5 Sep 2026 13:41:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D3197378833
+	for <mfd@lists.linux.dev>; Sat,  5 Sep 2026 13:51:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788615675; cv=none; b=dWIPP20BnCDpaoSum6r59lDpDbwtI/DZu6MSCGXip4EK5jmLOVYKRhbxe/p9LLoOHy05/cXSwSv2nrWn8uxxEvLnWmj1iqAbQwO0jQ6Vw5xizI7B/L8nKv4J/lh1By8E4QQwzsrsYmjaNzsFLz3MMCIQAaJNsTo98sLmqLBCrWk=
+	t=1788616285; cv=none; b=Q6GoFppC0CoK67TBP/ot3AsRzXFHrFSuHqBk7KQ3Cgg5M9QB3Et8MaWvJtJJnigOSwH9VRyewjg0pYcq9+6BA5ceTl0D0s5ACdWTX5FM0kXbEkt5HPv69OfTpNMjch2V5wvQVPN11Cqp3f65O16U01k/oV54XGagaMv5i6qY89M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788615675; c=relaxed/simple;
-	bh=D+yih9vLuUcIdBEoAKFCK9erjoUJS5S9ZmpeB1vBSIo=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=FAR0it+G3LDb1AYFqsAhdG++6C+0mSbL4Z/6uYlKGyMzZBCgmytgehBlnVa8OnoCjdGuckuxdxJ2gwn/q30seU4KD50y+i5+9zeqeZCEU23ixrPkyRLFXbimdTYd0ypeipxwjjPjByLr93d4He6Ljb3b6ozbHy+ZQebn1I5xmNE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=IfFZoqlB; arc=none smtp.client-ip=117.135.210.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1788616285; c=relaxed/simple;
+	bh=RYgbwYHMBdNznzCwtoSVPia/4BNXPzppUMqhmbeoyvY=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=Wm4+n2e4SMe8mGsvy07Yh/a3X3Aog7TXECv1Oz87yV1ijrStaxd7neo+Ogcpfw1mk2Y9bHoqggjz+kBFTl+PqYFltPDFZfagLSfu5TdNeVafYAuMJivPLgUUsIFV9tr87KGthjnMtp/LlvCLYrmtKtspNVqaWj1TVYAngdEhhpM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DX7+fWSQ; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="IfFZoqlB"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=3A
-	Bn9x+GRJCZGQVM/vtpHJYjaY9XQ+3Oq3XRKqm9WIg=; b=IfFZoqlBXupQvJZ6DA
-	/N98ZSezJuMDLkeKWWHdKUzQzYzDI2m1RQm5AFkiJw6ou51lCuY5dSqbE+Zxh+yy
-	q8xgJOKFCq4/JulWcM0LAZTlonPlqvK0YWHFPhnO5Kgq3GvcgSK/2nFwf9WivTbc
-	fSgs0qko08zVSNIOoqhnY5mZI=
-Received: from localhost.localdomain (unknown [])
-	by gzga-smtp-mtada-g0-1 (Coremail) with SMTP id _____wDX5tDlG5xqsxhkAw--.24726S2;
-	Sat, 05 Sep 2026 21:40:54 +0800 (CST)
-From: "hpp.iscas" <hppiscas@163.com>
-To: Lee Jones <lee@kernel.org>
-Cc: "hpp.iscas" <hppiscas@163.com>,
-	mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	Aaron Kling <webgeek1234@gmail.com>
-Subject: [PATCH] mfd: max77620: publish I2C and OF module aliases
-Date: Sat,  5 Sep 2026 21:40:51 +0800
-Message-ID: <20260905134051.66545-1-hppiscas@163.com>
-X-Mailer: git-send-email 2.50.1
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DX7+fWSQ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E8811F00A3D;
+	Sat,  5 Sep 2026 13:51:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788616283;
+	bh=yIRlkt7Ken6wBc+tesJKxmS+0S0Pf4G0BnIBbrKwmso=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=DX7+fWSQBdC/kG3MxeV8ySmASIi0NnIekGVZtVx+FBuhC/jwn70Q5YvxNPbNLuQ5y
+	 aOazwFmTxzszcxB3I6eLyoqy6P+t4bGK0+ysBOFpiGbR/TpBPa0gFVwVAXzMr2wnpB
+	 wEDcR4H2+D3/Vk/HOj1PYKhTl4AfaVkt6UgGa8Gk2XtJL8p+vLAGYBdiT+TF/FMnw/
+	 ZQxjrx5vDNMrHKJebTE6k5FyXUiEFzU6Yrt6rp1yrGPLYqCtbzMh3cD0BkCDK1jo6x
+	 PFep9dQ8UF9wqJl/G/zcF19sE5h4zMAuHzRer0s96PwSzTFsuF6B1ZZqD8VhfnmjHr
+	 QOOtk2bDbWGFQ==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH] mfd: max77620: publish I2C and OF module aliases
+Reply-To: sashiko-reviews@lists.linux.dev
+To: hpp.iscas <hppiscas@163.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20260905134051.66545-1-hppiscas@163.com>
+References: <20260905134051.66545-1-hppiscas@163.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Sat, 05 Sep 2026 13:51:22 +0000
+Message-Id: <20260905135123.4E8811F00A3D@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-CM-TRANSID:_____wDX5tDlG5xqsxhkAw--.24726S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7Zw1fuFW5CFy8Jw4DAF4fZrb_yoW8Wr18pa
-	y5trWYv3yxWF4a9FW7Wa18ZFn8Gws5KrWUtryUWw1IqFsxAFy7XF40gF1Ykr15XFyfJr13
-	XrWUt3s8Cay0q37anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UrDGOUUUUU=
-X-CM-SenderInfo: 5kssx2xfdvqiywtou0bp/xtbCxgbBimqcG+YndQAA3S
 
-MFD_MAX77620 became tristate without publishing any module alias for the=0D
-I2C driver. Device Tree I2C clients emit OF modaliases, while legacy=0D
-board-info clients use the existing I2C IDs, so both supported=0D
-enumeration paths need module metadata.=0D
-=0D
-Publish the I2C table and add an OF table for the three documented=0D
-compatibles. Keep i2c_client_get_device_id() as the source of chip data=0D
-and leave MFD child registration unchanged.=0D
-=0D
-Fixes: 0d084ee9ba87 ("mfd: max77620: Allow building as a module")=0D
-Signed-off-by: hpp.iscas <hppiscas@163.com>=0D
----=0D
- drivers/mfd/max77620.c | 10 ++++++++++=0D
- 1 file changed, 10 insertions(+)=0D
-=0D
-diff --git a/drivers/mfd/max77620.c b/drivers/mfd/max77620.c=0D
-index c4f89a9..6a624e6 100644=0D
---- a/drivers/mfd/max77620.c=0D
-+++ b/drivers/mfd/max77620.c=0D
-@@ -699,6 +699,15 @@ static const struct i2c_device_id max77620_id[] =3D {=
-=0D
- 	{"max77663", MAX77663},=0D
- 	{},=0D
- };=0D
-+MODULE_DEVICE_TABLE(i2c, max77620_id);=0D
-+=0D
-+static const struct of_device_id max77620_of_match[] =3D {=0D
-+	{ .compatible =3D "maxim,max77620" },=0D
-+	{ .compatible =3D "maxim,max20024" },=0D
-+	{ .compatible =3D "maxim,max77663" },=0D
-+	{ }=0D
-+};=0D
-+MODULE_DEVICE_TABLE(of, max77620_of_match);=0D
- =0D
- static DEFINE_SIMPLE_DEV_PM_OPS(max77620_pm_ops,=0D
- 				max77620_i2c_suspend, max77620_i2c_resume);=0D
-@@ -706,6 +715,7 @@ static DEFINE_SIMPLE_DEV_PM_OPS(max77620_pm_ops,=0D
- static struct i2c_driver max77620_driver =3D {=0D
- 	.driver =3D {=0D
- 		.name =3D "max77620",=0D
-+		.of_match_table =3D max77620_of_match,=0D
- 		.pm =3D pm_sleep_ptr(&max77620_pm_ops),=0D
- 	},=0D
- 	.probe =3D max77620_probe,=0D
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
+s) to consider:
+- [High] Adding an `of_match_table` without migrating device matching logic=
+ causes a NULL pointer dereference when binding via OF fallback compatibles.
+--
 
+commit d8b3d136289436a8115d93de5fbb49572114282f
+Author: hpp.iscas <hppiscas@163.com>
+
+mfd: max77620: publish I2C and OF module aliases
+
+This commit publishes the I2C module alias and adds an OF match table to
+support device enumeration. The patch intentionally leaves the existing
+i2c_client_get_device_id() call as the source of chip data.
+
+> diff --git a/drivers/mfd/max77620.c b/drivers/mfd/max77620.c
+> index c4f89a9681f34..6a624e691fe83 100644
+> --- a/drivers/mfd/max77620.c
+> +++ b/drivers/mfd/max77620.c
+> @@ -699,6 +699,15 @@ static const struct i2c_device_id max77620_id[] =3D {
+>  	{"max77663", MAX77663},
+>  	{},
+>  };
+> +MODULE_DEVICE_TABLE(i2c, max77620_id);
+> +
+> +static const struct of_device_id max77620_of_match[] =3D {
+> +	{ .compatible =3D "maxim,max77620" },
+> +	{ .compatible =3D "maxim,max20024" },
+> +	{ .compatible =3D "maxim,max77663" },
+> +	{ }
+> +};
+
+[Severity: High]
+Does adding this OF match table without populating the .data fields and
+migrating the matching logic to i2c_get_match_data() introduce a NULL point=
+er
+dereference during probe?
+
+If a device tree uses a fallback compatible string not present in the I2C ID
+table (e.g., compatible =3D "maxim,future-chip", "maxim,max77620";), the
+device will bind successfully due to this new OF match table. However, the =
+I2C
+core sets client->name to the first string ("future-chip").
+
+Because max77620_probe() still relies on i2c_client_get_device_id() to obta=
+in
+chip data:
+
+drivers/mfd/max77620.c:max77620_probe() {
+    ...
+    const struct i2c_device_id *id =3D i2c_client_get_device_id(client);
+    ...
+    chip->chip_id =3D (enum max77620_chip_id)id->driver_data;
+    ...
+}
+
+Will i2c_client_get_device_id() return NULL since the fallback name isn't in
+the I2C table, leading to a kernel panic when dereferencing id->driver_data?
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260905134051.6654=
+5-1-hppiscas@163.com?part=3D1
