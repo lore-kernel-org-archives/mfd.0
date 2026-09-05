@@ -1,350 +1,151 @@
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D98825A655
-	for <mfd@lists.linux.dev>; Sat,  5 Sep 2026 21:52:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 061E63B059C;
+	Sat,  5 Sep 2026 22:06:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788645168; cv=none; b=c5mwAw+vXshrZZledndbQxqLa2q3gTE1I4Qgk1WLGp31Ri+M9C0CzETz2C79ZxlYPcyAdjPXwp7oZKn//uC7CcYy+xbyPFQisnIeA4SuZ7uKwxgY+1tottLCwho50n7bXNMgzaMeiXDJz4Rub/Dsry+RWz3dK0X26Lb+8hLb7l8=
+	t=1788646018; cv=none; b=iylqV/aiWkYujuXxF4P3U2OV5fYLGLjxmroYI3HN2dnLkdSPku7RWS8+3833Eko4VuTg7oTjFcPttZmh4ElxnL5yTlqk4iJErKJsu/SVa0C+0/6LvbINRm0ff3qrZc6agvvC6Jt0l/RQibqHGeM32p3DF9neA3/kjZXuBKNzF6U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788645168; c=relaxed/simple;
-	bh=+8fq0VGHmZ+jIIifRhTsmw5nC8PD26zUCtpHZTRIBBE=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version; b=JPJr2GH5QRqfISLkftXNMG6NBtsFsMdILpUEgIykLwRfw7Y03OcNmL5/QaiT68rtEBwDt+B7/PJ1aL8QE2gy5SNCXSdFFiufMBEaNoumz/ypu3C55Q1UXGjLwGEpV1qktiUnDb7nrNLDhK3idhPAfMG+nd9wx3/v44hbtnmvBdA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=r+FDYm8G; arc=none smtp.client-ip=209.85.221.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1788646018; c=relaxed/simple;
+	bh=NY8YwCDOwZbJeDd3aLTsr0drGL8t/zfsEpgw4htOtVY=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=Jq8beHf1nZXPHV4oZ4SskUzLW65pVW32OA4NoGQ/1GQ5ah1HINTERTne0rIPRydm1bhAddGUXEOmirS+63Tvm/lRMrMnViQrzLYOpQ8a0yGnTlq9JK54XOicrKduuK5nEjjJgfoOt0rrTyczKOh4Sepxg8y0Ep4yHN4wgFYdRhQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=c4AxBQyC; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="r+FDYm8G"
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-484362f5c4aso2747450f8f.3
-        for <mfd@lists.linux.dev>; Sat, 05 Sep 2026 14:52:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788645165; x=1789249965; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=N6JGOcfYrEaC/Ge4obmi2SIi++QOKaMHavxPseBP1/Y=;
-        b=r+FDYm8G6EeGIccEFC7IGjluqcUOOyhMfCRQ/+r9fXRHD5rfNvZG0zlr0lQZUSesIP
-         4haEOuHfAYFJYgZqFfcfFiSgRzirheW3SzquB2BJVo1w+f1m8Uxmp3vMat+HqEflKaJX
-         VAHcIuL+thJL+m8sc+gynjwPLapw209NQ2wtj4XY3vsX0LpVDYensEQhaeuh8TyA/rSe
-         35aJod0GKdCycLzW2QfyqSP/xcJq+eTogLFmt+T2zXjt0cIViW1G3Uwo/N4o1wPIzZCZ
-         b5fhi78shHfnruKXtmX1TIRAnftOsPofnSXRferOYzK54oQG7T008lt/t/RV/K1zzabC
-         OS2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788645165; x=1789249965;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=N6JGOcfYrEaC/Ge4obmi2SIi++QOKaMHavxPseBP1/Y=;
-        b=mHkrRwVOADZEHgNNU22evfEX1o3S6jGOeqsQmaPokShNEfouUGLPAiVSSrbNKhOLh/
-         YxTVzIngdeEZZ3GSK2jIu6oqHuqE8hsNRzdz4t7w1cDLYM/hAPMrNq6AqNSuTCEz2jyz
-         bJu73i7SVqbWZOqVLJFMqDSDg6ZYOXeCHCvk+sICxrN2OV+GHj8Pajla6lHKZjGoBQ/1
-         tz37bg1pOe9NNW3Y3vRCQK/l9Pb21wxwYkBs81n0hVc3hzG5HOv6kCg11FHHHIvIjAVG
-         JszAel/upnUTcJF7Ym6MlwHBx3W/eRU1OrawHMPDlWhN8Y+aT6JpYdM2tsLVNbJkSHop
-         r4qg==
-X-Forwarded-Encrypted: i=1; AKwUvBxMloa/P2aBfmwUVMktmA96Uav/90M91rjy49oP59/QQ7IcjLzhkrbvlYr5cn43ITFuyak=@lists.linux.dev
-X-Gm-Message-State: AFuF++nHu1ie8L9dOuUeT3hQGi4yGGyHICDa92SRGlZ34fGW0EqmBgPQ
-	hZsAlJ3K1TMViqXRxlsN6enUol/7HMrqcXZFirePy09itLnceJHmxEwx
-X-Gm-Gg: AYBFou2PheFMLmeNj7AgseKpY/5d11KgdNkgE9ylRSgfHfZT/upofj8AlngHevtBR29
-	7CNQ+38Af1OKqzt/IWgapYBis1o0TaujlxiE9xox9IKc/yyJOFqVV8aI9jEZZ329VnAVvQs43SW
-	XhNh+pIRMyTdB6JpJHjX0PjprbfpOYX1xr6F5rwieXkupZTQgA2VD6zdX9B/PHHz++KSh+NDJuu
-	XqUaf3kG485gsxXOyMYJC+WcsRZEYuQhiZximfAqR7qup8eLx0HBCnjWBZ0SA//3lzzNDCN+pBS
-	HrnJkM0kSyUoXz2FSMzkG/zCiXBEm3pqSkrDqKsJHdKw2d+DG7oeCg/GTej3qtrCPhvTPzLCk7X
-	R6ooX96Nb74VXV1q/3QSbexYuZwM77U/eay4eHya5ZZ76aczJGS/RGq6c/H7DLCQ1LMDxnkB/MS
-	wImHn+3925H/pFHcqF4lg5aAAWLLcijwVBFxZux7DmAp0RYZzWTekn8h2iGbC7ykusrLOKtag1y
-	GZygYqk9edn7PSamnr7duNYQHZsIP1pNcNDRAzwUA==
-X-Received: by 2002:a05:6000:4b11:b0:484:3310:c4fe with SMTP id ffacd0b85a97d-4858709b13amr30736305f8f.25.1788645164635;
-        Sat, 05 Sep 2026 14:52:44 -0700 (PDT)
-Received: from localhost.localdomain ([82.137.32.184])
-        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-485883acd33sm15700165f8f.18.2026.09.05.14.52.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 05 Sep 2026 14:52:43 -0700 (PDT)
-From: Eduard Bostina <egbostina@gmail.com>
-To: Conor Dooley <conor+dt@kernel.org>,
-	devicetree@vger.kernel.org,
-	Eduard Bostina <egbostina@gmail.com>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Lee Jones <lee@kernel.org>,
-	linux-kernel@vger.kernel.org,
-	mfd@lists.linux.dev,
-	Rob Herring <robh@kernel.org>
-Subject: [PATCH v4] dt-bindings: mfd: Convert TI TWL6040 to DT schema
-Date: Sat,  5 Sep 2026 21:52:34 +0000
-Message-ID: <20260905215234.454266-1-egbostina@gmail.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="c4AxBQyC"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2F8AC1F00A3A;
+	Sat,  5 Sep 2026 22:06:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788646016;
+	bh=MIlCF6o9WcZLMM9lvzcVADoiYgfaKcKIQxiDdnXVuxE=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=c4AxBQyCCAd2IcSJHIxXp6oAbJD/lI/qPV8cmlbJ4OachelUSiYMTbpEjkdxIoQQs
+	 PN2olnM61evgVSW+FbCoZ/tz/mQlsOcpUWR8u/Tzftq9EpFlIpKE83gphZ4jVva5+S
+	 F5GyyoGRnmutchfzkAi4s+DaSBBPNF0HHyxOIT6d/htz85Dnf8Mjfhas0ipwF5S7Lb
+	 WNN+f1jnpv1CvSpF0S5qo6C6a6hDF5ECQ5A2wNCofWMhO/OiiyMBA6IeFNKAoSpcod
+	 Kb0s5yHAALK3l9Z0MoN/Z/4h5+y13/XaTyYd5GfrXr32a7bmUBSAUHACHEce1ZKypi
+	 Bw6DxWv5X8AfQ==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v4] dt-bindings: mfd: Convert TI TWL6040 to DT schema
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Eduard Bostina" <egbostina@gmail.com>
+Cc: robh@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org, lee@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20260905215234.454266-1-egbostina@gmail.com>
+References: <20260905215234.454266-1-egbostina@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Sat, 05 Sep 2026 22:06:55 +0000
+Message-Id: <20260905220656.2F8AC1F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+
+Thank you for your contribution! Sashiko AI review found 2 potential issue(=
+s) to consider:
+
+Pre-existing issues:
+- [High] IRQ domain destroyed before devm-managed threaded IRQs are freed a=
+nd before child devices are removed, causing Use-After-Free.
+- [High] The child driver twl6040-vibra allocates regulator devres actions =
+on the parent device using a pointer allocated on the child, leading to a U=
+se-After-Free.
+--
+
+commit 0404bd7a83f494396c387e5f75dbf3991d0ac035
+Author: Eduard Bostina <egbostina@gmail.com>
+
+dt-bindings: mfd: Convert TI TWL6040 to DT schema
 
 Convert the Texas Instruments TWL6040 audio codecs family bindings to DT
-schema.
+schema. It updates naming and optional parameters for modern platforms while
+maintaining hardware requirements for the vibra child node.
 
-During the conversion, the following updates were made:
-- Changed 'twl6040,audpwron-gpio' to 'ti,audpwron-gpio', which was
-  misnamed in the old txt binding.
-- Made 'gpio-controller', '#gpio-cells', and 'ti,audpwron-gpio' optional
-  because modern platforms do not require them.
-- Renamed the vibra 'vddvibl_uV'/'vddvibr_uV' properties to
-  'ti,vddvibl-uV'/'ti,vddvibr-uV', the names actually read by the
-  twl6040-vibra driver.
-- Required 'vddvibl-supply' and 'vddvibr-supply' when the 'vibra' child
-  node is present, since the twl6040-vibra driver unconditionally
-  requests both.
+Link to v3: https://lore.kernel.org/all/20260817100207.2970303-1-egbostina@=
+gmail.com/
+Link to v2: https://lore.kernel.org/all/20260816092847.2522994-1-egbostina@=
+gmail.com/
+Link to v1: https://lore.kernel.org/all/20260815083451.2147129-1-egbostina@=
+gmail.com/
 
-Signed-off-by: Eduard Bostina <egbostina@gmail.com>
-Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
----
-Changes in v4:
-- Add blank lines between the vibra child node's properties for
-  readability, as requested in review. No functional change.
+> diff --git a/Documentation/devicetree/bindings/mfd/ti,twl6040.yaml b/Docu=
+mentation/devicetree/bindings/mfd/ti,twl6040.yaml
+> new file mode 100644
+> index 0000000000000..5efcd79b527c3
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/mfd/ti,twl6040.yaml
+[ ... ]
 
-Link to v3: https://lore.kernel.org/all/20260817100207.2970303-1-egbostina@gmail.com/
-Link to v2: https://lore.kernel.org/all/20260816092847.2522994-1-egbostina@gmail.com/
-Link to v1: https://lore.kernel.org/all/20260815083451.2147129-1-egbostina@gmail.com/
+While reviewing this dt-bindings conversion, I noticed a few pre-existing
+issues in the related C drivers for this hardware family.
 
- .../devicetree/bindings/mfd/ti,twl6040.yaml   | 156 ++++++++++++++++++
- .../devicetree/bindings/mfd/twl6040.txt       |  67 --------
- 2 files changed, 156 insertions(+), 67 deletions(-)
- create mode 100644 Documentation/devicetree/bindings/mfd/ti,twl6040.yaml
- delete mode 100644 Documentation/devicetree/bindings/mfd/twl6040.txt
+In drivers/mfd/twl6040.c:
 
-diff --git a/Documentation/devicetree/bindings/mfd/ti,twl6040.yaml b/Documentation/devicetree/bindings/mfd/ti,twl6040.yaml
-new file mode 100644
-index 000000000000..5efcd79b527c
---- /dev/null
-+++ b/Documentation/devicetree/bindings/mfd/ti,twl6040.yaml
-@@ -0,0 +1,156 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/mfd/ti,twl6040.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Texas Instruments TWL6040 family audio codec
-+
-+maintainers:
-+  - Eduard Bostina <egbostina@gmail.com>
-+
-+description:
-+  The TWL6040s are 8-channel high quality low-power audio codecs providing
-+  audio, vibra and GPO functionality on OMAP4+ platforms. They are connected
-+  to the host processor via i2c for commands, McPDM for audio data and
-+  commands.
-+
-+properties:
-+  compatible:
-+    enum:
-+      - ti,twl6040
-+      - ti,twl6041
-+
-+  reg:
-+    const: 0x4b
-+
-+  interrupts:
-+    maxItems: 1
-+
-+  gpio-controller: true
-+
-+  "#gpio-cells":
-+    const: 1
-+
-+  "#clock-cells":
-+    const: 0
-+
-+  ti,audpwron-gpio:
-+    maxItems: 1
-+    description: Power on GPIO line for the twl6040
-+
-+  vio-supply:
-+    description: Regulator for the twl6040 VIO supply
-+
-+  v2v1-supply:
-+    description: Regulator for the twl6040 V2V1 supply
-+
-+  enable-active-high:
-+    type: boolean
-+    description: To power on the twl6040 during boot.
-+
-+  clocks:
-+    minItems: 1
-+    maxItems: 2
-+
-+  clock-names:
-+    minItems: 1
-+    maxItems: 2
-+    items:
-+      enum:
-+        - clk32k
-+        - mclk
-+
-+  vddvibl-supply:
-+    description: Regulator for the left vibra motor
-+
-+  vddvibr-supply:
-+    description: Regulator for the right vibra motor
-+
-+  vibra:
-+    type: object
-+    additionalProperties: false
-+    properties:
-+      ti,vibldrv-res:
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+        description: Resistance parameter for left driver
-+
-+      ti,vibrdrv-res:
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+        description: Resistance parameter for right driver
-+
-+      ti,viblmotor-res:
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+        description: Resistance parameter for left motor
-+
-+      ti,vibrmotor-res:
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+        description: Resistance parameter for right motor
-+
-+      ti,vddvibl-uV:
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+        description: vddvibl default voltage if it needs to be changed
-+
-+      ti,vddvibr-uV:
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+        description: vddvibr default voltage if it needs to be changed
-+
-+    required:
-+      - ti,vibldrv-res
-+      - ti,vibrdrv-res
-+      - ti,viblmotor-res
-+      - ti,vibrmotor-res
-+
-+required:
-+  - compatible
-+  - reg
-+  - interrupts
-+  - "#clock-cells"
-+  - vio-supply
-+  - v2v1-supply
-+
-+allOf:
-+  - if:
-+      required:
-+        - vibra
-+    then:
-+      required:
-+        - vddvibl-supply
-+        - vddvibr-supply
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/interrupt-controller/irq.h>
-+
-+    i2c {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        audio-codec@4b {
-+            compatible = "ti,twl6040";
-+            reg = <0x4b>;
-+            interrupts = <0 119 IRQ_TYPE_LEVEL_HIGH>;
-+            interrupt-parent = <&gic>;
-+            gpio-controller;
-+            #gpio-cells = <1>;
-+            #clock-cells = <0>;
-+            ti,audpwron-gpio = <&gpio4 31 0>;
-+
-+            vio-supply = <&v1v8>;
-+            v2v1-supply = <&v2v1>;
-+            enable-active-high;
-+
-+            /* regulators for vibra motor */
-+            vddvibl-supply = <&vbat>;
-+            vddvibr-supply = <&vbat>;
-+
-+            vibra {
-+                ti,vibldrv-res = <8>;
-+                ti,vibrdrv-res = <3>;
-+                ti,viblmotor-res = <10>;
-+                ti,vibrmotor-res = <10>;
-+            };
-+        };
-+    };
-diff --git a/Documentation/devicetree/bindings/mfd/twl6040.txt b/Documentation/devicetree/bindings/mfd/twl6040.txt
-deleted file mode 100644
-index dfd8683ede0c..000000000000
---- a/Documentation/devicetree/bindings/mfd/twl6040.txt
-+++ /dev/null
-@@ -1,67 +0,0 @@
--Texas Instruments TWL6040 family
--
--The TWL6040s are 8-channel high quality low-power audio codecs providing audio,
--vibra and GPO functionality on OMAP4+ platforms.
--They are connected to the host processor via i2c for commands, McPDM for audio
--data and commands.
--
--Required properties:
--- compatible : "ti,twl6040" for twl6040, "ti,twl6041" for twl6041
--- reg: must be 0x4b for i2c address
--- interrupts: twl6040 has one interrupt line connecteded to the main SoC
--- gpio-controller:
--- #gpio-cells = <1>: twl6040 provides GPO lines.
--- #clock-cells = <0>; twl6040 is a provider of pdmclk which is used by McPDM
--- twl6040,audpwron-gpio: Power on GPIO line for the twl6040
--
--- vio-supply: Regulator for the twl6040 VIO supply
--- v2v1-supply: Regulator for the twl6040 V2V1 supply
--
--Optional properties, nodes:
--- enable-active-high: To power on the twl6040 during boot.
--- clocks: phandle to the clk32k and/or to mclk clock provider
--- clock-names: Must be "clk32k" for the 32K clock and "mclk" for the MCLK.
--
--Vibra functionality
--Required properties:
--- vddvibl-supply: Regulator for the left vibra motor
--- vddvibr-supply: Regulator for the right vibra motor
--- vibra { }: Configuration section for vibra parameters containing the following
--	     properties:
--- ti,vibldrv-res: Resistance parameter for left driver
--- ti,vibrdrv-res: Resistance parameter for right driver
--- ti,viblmotor-res: Resistance parameter for left motor
--- ti,viblmotor-res: Resistance parameter for right motor
--
--Optional properties within vibra { } section:
--- vddvibl_uV: If the vddvibl default voltage need to be changed
--- vddvibr_uV: If the vddvibr default voltage need to be changed
--
--Example:
--&i2c1 {
--	twl6040: twl@4b {
--		compatible = "ti,twl6040";
--
--		interrupts = <0 119 4>;
--		interrupt-parent = <&gic>;
--		twl6040,audpwron-gpio = <&gpio4 31 0>;
--
--		vio-supply = <&v1v8>;
--		v2v1-supply = <&v2v1>;
--		enable-active-high;
--
--		/* regulators for vibra motor */
--		vddvibl-supply = <&vbat>;
--		vddvibr-supply = <&vbat>;
--
--		vibra {
--			/* Vibra driver, motor resistance parameters */
--			ti,vibldrv-res = <8>;
--			ti,vibrdrv-res = <3>;
--			ti,viblmotor-res = <10>;
--			ti,vibrmotor-res = <10>;
--		};
--	};
--};
--
--/include/ "twl6040.dtsi"
--- 
-2.43.0
+> static void twl6040_remove(struct i2c_client *client)
+> {
+> 	struct twl6040 *twl6040 =3D i2c_get_clientdata(client);
+>=20
+> 	if (twl6040->power_count)
+> 		twl6040_power(twl6040, 0);
+>=20
+> 	regmap_del_irq_chip(twl6040->irq, twl6040->irq_data);
+>=20
+> 	mfd_remove_devices(&client->dev);
 
+[Severity: High]
+This isn't a bug introduced by this patch, but does this sequence lead to a
+use-after-free during teardown?
+
+It looks like twl6040_remove() destroys the IRQ domain via
+regmap_del_irq_chip() before the child devices are removed via
+mfd_remove_devices(). When the children unbind and attempt to free their
+IRQs, won't they access the already-destroyed IRQ domain and descriptors?
+
+A similar sequence seems to occur in the twl6040_probe() error path:
+
+drivers/mfd/twl6040.c:twl6040_probe() {
+[ ... ]
+> 	ret =3D mfd_add_devices(&client->dev, -1, twl6040->cells, children,
+> 			      NULL, 0, NULL);
+> 	if (ret)
+> 		goto readyirq_err;
+>=20
+> 	return 0;
+>=20
+> readyirq_err:
+> 	regmap_del_irq_chip(twl6040->irq, twl6040->irq_data);
+
+[Severity: High]
+This is a pre-existing issue, but does this error path similarly destroy the
+IRQ domain before the devm-managed threaded IRQs are automatically freed by
+devres? This appears to cause a use-after-free when probe fails.
+
+
+In drivers/input/misc/twl6040-vibra.c:
+
+> 	info->supplies[0].supply =3D "vddvibl";
+> 	info->supplies[1].supply =3D "vddvibr";
+> 	/*
+> 	 * When booted with Device tree the regulators are attached to the
+> 	 * parent device (twl6040 MFD core)
+> 	 */
+> 	error =3D devm_regulator_bulk_get(twl6040_core_dev,
+> 					ARRAY_SIZE(info->supplies),
+> 					info->supplies);
+
+[Severity: High]
+This is a pre-existing issue, but does this devres attachment cause a
+use-after-free if the parent device unbinds after the child device?
+
+The info structure is allocated via devm_kzalloc() on the child device. By
+passing info->supplies to devm_regulator_bulk_get() for the parent device
+(twl6040_core_dev), the parent's devres context stores this child-managed
+pointer. If the child unbinds, info is freed, and when the parent later
+unbinds, won't its devres call regulator_bulk_free() on the now-dangling
+info->supplies pointer?
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260905215234.4542=
+66-1-egbostina@gmail.com?part=3D1
