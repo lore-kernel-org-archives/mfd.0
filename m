@@ -1,211 +1,376 @@
-Received: from mail2.ecloud.global (mail2.ecloud.global [135.181.6.248])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D76AF2BF3F3
-	for <mfd@lists.linux.dev>; Sat,  5 Sep 2026 05:21:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=135.181.6.248
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788585709; cv=pass; b=V9gLu/QHogxbIMsD63E1XmYqHV6perCJOUD+pgCOgSxkSRcPgJXMZiWPiEOYQh0Hdk/X1Dh0e7nOY8Ul4+ExsnLhGiJauvbJupj+t1jwJbexHqP841I9tgemTJ2Yb98MpVO6z2JdLg+pYSrWPHPp83CyDNc1p74sYZeBqHK5yr8=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788585709; c=relaxed/simple;
-	bh=PG0Nvk57+SdvlADJPXiKahtxKVSStSRUEYmsxuh/emo=;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B9234772B9
+	for <mfd@lists.linux.dev>; Sat,  5 Sep 2026 10:55:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.50
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788605764; cv=none; b=qHx71L3cRk9qrpdhj8wGIXSfciOfYkHdLOG6672fXorrky3UKzhz70jTDH55BlOpjnqdc1ERCDvvL6Mj8HyOPY4ABAfVOrBmiqmKWtMC7WYEGyDrN2Y4rQLUPpa8EJFE57HDVoK/z5uT6Q9LmhPQlLZfGyqQF5snX5/ZvEZohXo=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788605764; c=relaxed/simple;
+	bh=lLJrHhl9CX3BrBODX3AB1MUAjuoC/G2/t7jZncKSTBc=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=F6zFvsC2YItsPjzEv9FGZwHJDHyFm/reMtWOqLGXbNraGW0CFvovH5lrhQloNkH1ZBRukYMkH1KD50PPOOFMDuPZ4geB3u9NL0qmYo5LDHCSOYo4sVKFw4OOvU3ifIh98y1OhNrZ8mLpG/E9iENS+amGgrN/A2HJ/kG2nKDoUoU=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=murena.io; spf=pass smtp.mailfrom=murena.io; dkim=pass (1024-bit key) header.d=murena.io header.i=@murena.io header.b=e09BHDAH; arc=pass smtp.client-ip=135.181.6.248
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=murena.io
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=murena.io
+	 In-Reply-To:Content-Type; b=UesWfY7OW3iy0aODpvWKQ4t4yTIIOwcWtsT2hjwjAQyv+1ORm9KATSBWXCEKy407TpH9zaCZgsxlGi7hCSq5rUOmBXjYHsM26vEKHVgdqtclVm4VrLOlBUPiVbZymNtTVWEN+Y+KF22gC2NQ++pxUe+vBWLFAanmcn7I068u1Dc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=sdgMkYwy; arc=none smtp.client-ip=209.85.167.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=murena.io header.i=@murena.io header.b="e09BHDAH"
-Received: from authenticated-user (mail2.ecloud.global [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mail2.ecloud.global (Postfix) with ESMTPSA id B8626721285;
-	Sat,  5 Sep 2026 05:21:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=murena.io; s=mail2;
-	t=1788585699;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=KCOIseHcTnUxxa8UzPwtOfVQnt/pNmZAJdUPIg+XLqo=;
-	b=e09BHDAHB8rW8CJ877ybXQO9BIhYTyEJyZ1UfCDGFBXGQp83jw90VJvx43GTmCwSaQjzmZ
-	vZpB35WoTlow0wOgePmLAALvOVX4UDG1WLETkdYfE0Yms42sgAvS1PemSzA2A12krn4rTT
-	1cf3fVX7lS+xZMHPIc92+QnIa3PDUgs=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=murena.io;
-	s=mail2; t=1788585699;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=KCOIseHcTnUxxa8UzPwtOfVQnt/pNmZAJdUPIg+XLqo=;
-	b=jP8u0+6IUTg6AgiXIbTGUEcfBSMqo7Nmd7Jr3DYd3CWjZY43q91uDjoMKSmOPb7C2g5uaR
-	iIEJS2tWhm2RJi0GFGMGg4N9fF1QxzfQ74UijbJC18veoZSi49xvXSRP1T4Cl2WVqw+irA
-	xNMCko+5QoxwijbilgirxAp71w2JUOQ=
-ARC-Authentication-Results: i=1;
-	mail2.ecloud.global;
-	auth=pass smtp.mailfrom=maud_spierings@murena.io
-ARC-Seal: i=1; s=mail2; d=murena.io; t=1788585699; a=rsa-sha256; cv=none;
-	b=Ky3gcQbu+iQn3gGJSjO38x37++V52aS5N/nQCOx3J6XxPIqfFy1ZbkijYRzWOWiFT+pVmT
-	7YFhfuIVisKc3ETR/8jHzo+pemFPQ34KVfBmoujMt5BFDBSdKw+v6R/9q4pnc6yOtpxUSR
-	njWiXCniQ4hrwKE4/mkGqbMrN0fifdM=
-Message-ID: <ea529e06-2eab-4e3b-92af-ba17de44091c@murena.io>
-Date: Sat, 5 Sep 2026 07:21:35 +0200
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="sdgMkYwy"
+Received: by mail-lf1-f50.google.com with SMTP id 2adb3069b0e04-5b568dae0e8so1416701e87.0
+        for <mfd@lists.linux.dev>; Sat, 05 Sep 2026 03:55:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1788605756; x=1789210556; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=C/K62fur/QZSZ3PEXdQG+JTXHX6rDaSLLwnm6mZxkj8=;
+        b=sdgMkYwyl1fM8QvrdfMK0l7GuADlgcdgCIuP4Lapj529dHoYZCqVxAKEf+6dH5APgm
+         RG9tNn/ykVWX0XgQc6Mh3lQ8KzCDN36h+dqeJWymwddrRCcQGVNxgyo2vGsVVNXzqP8l
+         2Ih3Ou30YjR6AyOaVSoxCIrrtxwfuOb52KCz6J0+F10jb/84hKJJpROedW7TiINxG78l
+         DDtyONACb+2esQCu9Yln2gcZOWQJi033rhYp3dtz0DloiPJ/9qiLRmElyZFIS+Oj7LmI
+         FErvSmamwupH2V8JRwWL6mkD3cmJ1lHOVvcnHetY+w4iHqNcBEJBPkaO74OXnuxLlmj8
+         ZBnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788605756; x=1789210556;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=C/K62fur/QZSZ3PEXdQG+JTXHX6rDaSLLwnm6mZxkj8=;
+        b=VR75ka3jFOXwoSABLHDED7e/8q3zeF+hILwhq9Xd0FkFUW78riCFrcSN+R4wQOmZ8c
+         +FxX5vFD7xV59Q1srwr+6BhQ0Sxd61T7MrgHR0zqAt3Y/BEZlvjsL4K9VnSD5pywgzOy
+         faFExn6KUVtmBfSo6Tew3QC6D35IrYXaeQY/jz4BIK9raS1CsrPFbg6+sQtZRMoYtfZP
+         sRWBbHUr+swCA+ODR3vkyAu2vqiWlmenzM0CjV3qJ9QAzkPEdKl8RhaxPGmnofLEjh1s
+         eHi1j9A+z6o5HRs6Jdz5U+lSc6ptOCXKcnwbvmq/lHnX/Xg9cR7QEwyg7HgmTmUl8il8
+         r2JQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwIk5V1CoJ9e5fpIIc/3fZADlkbJFWObSqA5nEZabJtdDthT6SxYzFyucPmslwz2SVGjWs=@lists.linux.dev
+X-Gm-Message-State: AFuF++nQgiSKqT/HGPaeQVQ1PLvgnvYsdoQORsx9KZjjLpDZx6STGoW2
+	eSBJwT02rp+uBm5oNs/BK1IbMgpujuriKiJA0bLeZeJA17p/9ETORRxB
+X-Gm-Gg: AYBFou0ExFMoHQ3N5kex9qcfpHFrvNCTI6a+jzWWNbYQHmMH7I6kdSlojz39L9SLI9/
+	KiEETH3Cw6Q/aYANfnmdtSKO6wlxW7V00CgYTKrHlCGHgKknzEEbtWC5zE3iXJVUbCAqFnWHJss
+	AdISIbYX1xmNVpVv/FumngZAixrZd32F1NVfgjo3VmwYpOTAp6LAwRxwJ4IKYyrUsI+wvVGPQbG
+	Szp9TPs9Oyx201Iht5M1dMTBkDKiWyKc4WiVffZQN8OdTOPgwC80DBv/52F8DnKamMx8cywVqco
+	unfmfvFlSGBt0QaU1cONxlPyFCu2NJAGZVR9pyVoZd499PTx8W5Mmv4L5nWhIRHuWu3k49ByanB
+	ba1H6ycqPVQ4Q/aRctOE1byDADIFATOso0IKkF6ZsqGiddW+kRLEcnSD8cm4Zv54vpAuVTSHiZS
+	FPNZhttwuG2J0EUyXDSuhgHg7Ic79Y0KIGFJhMgP17uNT4sZ7jIW/EbPXRymzsTOJFHUJiPXU1y
+	VpYANMFTVSypMy8HokU6CMe5FBGCheIfJ5idqT6znp9Wd5wEKG8MeY=
+X-Received: by 2002:a05:6512:2c8a:b0:5b6:4ae:a3f5 with SMTP id 2adb3069b0e04-5b617070ac3mr1786241e87.29.1788605756034;
+        Sat, 05 Sep 2026 03:55:56 -0700 (PDT)
+Received: from ?IPV6:2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703? ([2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b6166fe651sm1020664e87.51.2026.09.05.03.55.53
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 05 Sep 2026 03:55:55 -0700 (PDT)
+Message-ID: <fdb1bbb8-1ecb-4636-bc1e-2f025e75ff91@gmail.com>
+Date: Sat, 5 Sep 2026 13:55:53 +0300
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Subject: Re: [PATCH v3 00/19] drm: starfive: jh7110: Enable display subsystem
-To: Michal Wilczynski <m.wilczynski@samsung.com>,
- Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Andrzej Hajda <andrzej.hajda@intel.com>,
- Robert Foss <rfoss@kernel.org>,
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
- Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Luca Ceresoli <luca.ceresoli@bootlin.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Lee Jones <lee@kernel.org>, Andy Yan <andy.yan@rock-chips.com>,
- Philipp Zabel <p.zabel@pengutronix.de>,
- Emil Renner Berthing <kernel@esmil.dk>, Hal Feng
- <hal.feng@starfivetech.com>, Michael Turquette <mturquette@baylibre.com>,
- Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
- Heiko Stuebner <heiko@sntech.de>, Conor Dooley <conor@kernel.org>,
- Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
- Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
- Dominique Belhachemi <db@domibel.de>, Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>
-Cc: linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- mfd@lists.linux.dev, linux-clk@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org,
- linux-riscv@lists.infradead.org, Andy Yan <andyshrk@163.com>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Graham Markall <hello@big-grey.co.uk>,
- Icenowy Zheng <zhengxingda@iscas.ac.cn>
-References: <CGME20260904132708eucas1p1adfa26ef0fe5109eca63a3aeadf74915@eucas1p1.samsung.com>
- <20260904-jh7110-clean-send-v3-0-484f9ae72715@samsung.com>
-Content-Language: en-US
-From: Maud Spierings <maud_spierings@murena.io>
-In-Reply-To: <20260904-jh7110-clean-send-v3-0-484f9ae72715@samsung.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mfd: fix typos in comments
+To: Hemanth Selam <hemanth.selam@gmail.com>, Lee Jones <lee@kernel.org>,
+ Support Opensource <support.opensource@diasemi.com>,
+ =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>
+Cc: linux-kernel@vger.kernel.org, mfd@lists.linux.dev,
+ linux-samsung-soc@vger.kernel.org
+References: <20260904122834.33723-1-hemanth.selam@gmail.com>
+Content-Language: en-US, en-AU, en-GB, en-BW
+From: Matti Vaittinen <mazziesaccount@gmail.com>
+In-Reply-To: <20260904122834.33723-1-hemanth.selam@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello Michal,
+On 04/09/2026 15:28, Hemanth Selam wrote:
+> Fix typos in comments, reported by scripts/checkpatch.pl using the
+> misspelling list in scripts/spelling.txt.  Only touches comments, no code
+> changes.
+> 
+> Assisted-by: Cursor:claude-opus-5
+> Signed-off-by: Hemanth Selam <hemanth.selam@gmail.com>
+> ---
+>   drivers/mfd/88pm800.c                |  2 +-
+>   drivers/mfd/kempld-core.c            |  2 +-
+>   drivers/mfd/max8998.c                |  2 +-
+>   drivers/mfd/rave-sp.c                |  6 +++---
+>   drivers/mfd/si476x-i2c.c             |  2 +-
+>   include/linux/mfd/da9063/registers.h |  2 +-
+>   include/linux/mfd/db8500-prcmu.h     | 32 ++++++++++++++--------------
+>   include/linux/mfd/lp8788.h           |  2 +-
+>   include/linux/mfd/max8998.h          |  2 +-
+>   include/linux/mfd/palmas.h           |  2 +-
+>   include/linux/mfd/rohm-bd71828.h     |  2 +-
+>   include/linux/mfd/samsung/core.h     |  2 +-
+>   include/linux/mfd/si476x-core.h      |  2 +-
+>   include/linux/mfd/twl.h              |  2 +-
+>   14 files changed, 31 insertions(+), 31 deletions(-)
+> 
+> diff --git a/drivers/mfd/88pm800.c b/drivers/mfd/88pm800.c
+> index e9941da58b18..aac630322b3c 100644
+> --- a/drivers/mfd/88pm800.c
+> +++ b/drivers/mfd/88pm800.c
+> @@ -275,7 +275,7 @@ static int device_gpadc_init(struct pm80x_chip *chip,
+>   		goto out;
+>   
+>   	/*
+> -	 * the defult of PM800 is GPADC operates at 100Ks/s rate
+> +	 * the default of PM800 is GPADC operates at 100Ks/s rate
+>   	 * and Number of GPADC slots with active current bias prior
+>   	 * to GPADC sampling = 1 slot for all GPADCs set for
+>   	 * Temprature mesurmants
+> diff --git a/drivers/mfd/kempld-core.c b/drivers/mfd/kempld-core.c
+> index b64729918dfd..47062f876e5d 100644
+> --- a/drivers/mfd/kempld-core.c
+> +++ b/drivers/mfd/kempld-core.c
+> @@ -37,7 +37,7 @@ static void kempld_get_hardware_mutex(struct kempld_device_data *pld)
+>   
+>   static void kempld_release_hardware_mutex(struct kempld_device_data *pld)
+>   {
+> -	/* The harware mutex is released when 1 is written to the mutex bit. */
+> +	/* The hardware mutex is released when 1 is written to the mutex bit. */
+>   	iowrite8(KEMPLD_MUTEX_KEY, pld->io_index);
+>   }
+>   
+> diff --git a/drivers/mfd/max8998.c b/drivers/mfd/max8998.c
+> index eb13bbaeda55..5032eab05bb4 100644
+> --- a/drivers/mfd/max8998.c
+> +++ b/drivers/mfd/max8998.c
+> @@ -146,7 +146,7 @@ static struct max8998_platform_data *max8998_i2c_parse_dt_pdata(
+>   
+>   	/*
+>   	 * ToDo: the 'wakeup' member in the platform data is more of a linux
+> -	 * specfic information. Hence, there is no binding for that yet and
+> +	 * specific information. Hence, there is no binding for that yet and
+>   	 * not parsed here.
+>   	 */
+>   	return pd;
+> diff --git a/drivers/mfd/rave-sp.c b/drivers/mfd/rave-sp.c
+> index 05d26d92df03..53c57bafea8f 100644
+> --- a/drivers/mfd/rave-sp.c
+> +++ b/drivers/mfd/rave-sp.c
+> @@ -331,7 +331,7 @@ static u8 rave_sp_reply_code(u8 command)
+>   		return command + 0x20;
+>   	case 0xE0 ... 0xEF:
+>   		/*
+> -		 * Events emitted by all versions of the firmare use
+> +		 * Events emitted by all versions of the firmware use
+>   		 * least significant bit to get an ACK code
+>   		 */
+>   		return command | 0x01;
+> @@ -544,7 +544,7 @@ static size_t rave_sp_receive_buf(struct serdev_device *serdev,
+>   				 * NOTE: The above means that only the
+>   				 * frame started by third SOF, sent
+>   				 * after this one will have a chance
+> -				 * to get throught.
+> +				 * to get through.
+>   				 */
+>   				goto reset_framer;
+>   			case RAVE_SP_DLE:
+> @@ -595,7 +595,7 @@ static size_t rave_sp_receive_buf(struct serdev_device *serdev,
+>   
+>   	/*
+>   	 * The only way to get out of the above loop and end up here
+> -	 * is throught consuming all of the supplied data, so here we
+> +	 * is through consuming all of the supplied data, so here we
+>   	 * report that we processed it all.
+>   	 */
+>   	return size;
+> diff --git a/drivers/mfd/si476x-i2c.c b/drivers/mfd/si476x-i2c.c
+> index 9bce720a0a08..6351aef2d3bb 100644
+> --- a/drivers/mfd/si476x-i2c.c
+> +++ b/drivers/mfd/si476x-i2c.c
+> @@ -222,7 +222,7 @@ int si476x_core_stop(struct si476x_core *core, bool soft)
+>   	atomic_set(&core->is_alive, 0);
+>   
+>   	if (soft) {
+> -		/* TODO: This probably shoud be a configurable option,
+> +		/* TODO: This probably should be a configurable option,
+>   		 * so it is possible to have the chips keep their
+>   		 * oscillators running
+>   		 */
+> diff --git a/include/linux/mfd/da9063/registers.h b/include/linux/mfd/da9063/registers.h
+> index 7b8364bd08a0..376c5d330599 100644
+> --- a/include/linux/mfd/da9063/registers.h
+> +++ b/include/linux/mfd/da9063/registers.h
+> @@ -14,7 +14,7 @@
+>   #define DA9063_I2C_PAGE_SEL_SHIFT	1
+>   #define	DA9063_EVENT_REG_NUM		4
+>   
+> -/* Page selection I2C or SPI always in the begining of any page. */
+> +/* Page selection I2C or SPI always in the beginning of any page. */
+>   /* Page 0 : I2C access 0x000 - 0x0FF	SPI access 0x000 - 0x07F */
+>   /* Page 1 :				SPI access 0x080 - 0x0FF */
+>   /* Page 2 : I2C access 0x100 - 0x1FF	SPI access 0x100 - 0x17F */
+> diff --git a/include/linux/mfd/db8500-prcmu.h b/include/linux/mfd/db8500-prcmu.h
+> index c939c9a1170a..87a28c4f1d81 100644
+> --- a/include/linux/mfd/db8500-prcmu.h
+> +++ b/include/linux/mfd/db8500-prcmu.h
+> @@ -337,31 +337,31 @@ enum sia_mmdsp_stat {
+>    * @SYSCLKOK_ERR: The SYSCLK is not available in the given time
+>    * @BOOT_ERR: Romcode has not validated the XP70 self reset in the given time
+>    * @ROMCODESAVECONTEXT: The Romcode didn.t correctly save it secure context
+> - * @VARMHIGHSPEEDVALTO_ERR: The ARM high speed supply value transfered
+> + * @VARMHIGHSPEEDVALTO_ERR: The ARM high speed supply value transferred
+>    *          through I2C has not been correctly executed in the given time
+> - * @VARMHIGHSPEEDACCESS_ERR: The command value of VarmHighSpeedVal transfered
+> + * @VARMHIGHSPEEDACCESS_ERR: The command value of VarmHighSpeedVal transferred
+>    *             through I2C has not been correctly executed in the given time
+> - * @VARMLOWSPEEDVALTO_ERR:The ARM low speed supply value transfered through
+> + * @VARMLOWSPEEDVALTO_ERR:The ARM low speed supply value transferred through
+>    *                     I2C has not been correctly executed in the given time
+> - * @VARMLOWSPEEDACCESS_ERR: The command value of VarmLowSpeedVal transfered
+> + * @VARMLOWSPEEDACCESS_ERR: The command value of VarmLowSpeedVal transferred
+>    *             through I2C has not been correctly executed in the given time
+> - * @VARMRETENTIONVALTO_ERR: The ARM retention supply value transfered through
+> + * @VARMRETENTIONVALTO_ERR: The ARM retention supply value transferred through
+>    *                     I2C has not been correctly executed in the given time
+> - * @VARMRETENTIONACCESS_ERR: The command value of VarmRetentionVal transfered
+> + * @VARMRETENTIONACCESS_ERR: The command value of VarmRetentionVal transferred
+>    *             through I2C has not been correctly executed in the given time
+> - * @VAPEHIGHSPEEDVALTO_ERR: The APE highspeed supply value transfered through
+> + * @VAPEHIGHSPEEDVALTO_ERR: The APE highspeed supply value transferred through
+>    *                     I2C has not been correctly executed in the given time
+> - * @VSAFEHPVALTO_ERR: The SAFE high power supply value transfered through I2C
+> + * @VSAFEHPVALTO_ERR: The SAFE high power supply value transferred through I2C
+>    *                         has not been correctly executed in the given time
+> - * @VMODSEL1VALTO_ERR: The MODEM sel1 supply value transfered through I2C has
+> + * @VMODSEL1VALTO_ERR: The MODEM sel1 supply value transferred through I2C has
+>    *                             not been correctly executed in the given time
+> - * @VMODSEL2VALTO_ERR: The MODEM sel2 supply value transfered through I2C has
+> + * @VMODSEL2VALTO_ERR: The MODEM sel2 supply value transferred through I2C has
+>    *                             not been correctly executed in the given time
+> - * @VARMOFFACCESS_ERR: The command value of Varm ON/OFF transfered through
+> + * @VARMOFFACCESS_ERR: The command value of Varm ON/OFF transferred through
+>    *                     I2C has not been correctly executed in the given time
+> - * @VAPEOFFACCESS_ERR: The command value of Vape ON/OFF transfered through
+> + * @VAPEOFFACCESS_ERR: The command value of Vape ON/OFF transferred through
+>    *                     I2C has not been correctly executed in the given time
+> - * @VARMRETACCES_ERR: The command value of Varm retention ON/OFF transfered
+> + * @VARMRETACCES_ERR: The command value of Varm retention ON/OFF transferred
+>    *             through I2C has not been correctly executed in the given time
+>    * @CURAPPWRSTISNOTBOOT:Generated when Arm want to do power state transition
+>    *             ApBoot to ApExecute but the power current state is not Apboot
+> @@ -376,11 +376,11 @@ enum sia_mmdsp_stat {
+>    *                    been correctly executed in the given time
+>    * @ARMREGU2VALTO_ERR: The ArmRegu2 value transferred through I2C has not
+>    *                    been correctly executed in the given time
+> - * @VAPEREGUVALTO_ERR: The VApeRegu value transfered through I2C has not
+> + * @VAPEREGUVALTO_ERR: The VApeRegu value transferred through I2C has not
+>    *                    been correctly executed in the given time
+> - * @VSMPS3REGUVALTO_ERR: The VSmps3Regu value transfered through I2C has not
+> + * @VSMPS3REGUVALTO_ERR: The VSmps3Regu value transferred through I2C has not
+>    *                      been correctly executed in the given time
+> - * @VMODREGUVALTO_ERR: The VModemRegu value transfered through I2C has not
+> + * @VMODREGUVALTO_ERR: The VModemRegu value transferred through I2C has not
+>    *                    been correctly executed in the given time
+>    */
+>   enum mbox_to_arm_err {
+> diff --git a/include/linux/mfd/lp8788.h b/include/linux/mfd/lp8788.h
+> index fd17bec2a33e..e8c50bd38a8a 100644
+> --- a/include/linux/mfd/lp8788.h
+> +++ b/include/linux/mfd/lp8788.h
+> @@ -34,7 +34,7 @@
+>   #define LP8788_ALM_IRQ		"ALARM_IRQ"
+>   
+>   enum lp8788_int_id {
+> -	/* interrup register 1 : Addr 00h */
+> +	/* interrupt register 1 : Addr 00h */
+>   	LP8788_INT_TSDL,
+>   	LP8788_INT_TSDH,
+>   	LP8788_INT_UVLO,
+> diff --git a/include/linux/mfd/max8998.h b/include/linux/mfd/max8998.h
+> index 5473f1983e31..ad2ad24412fb 100644
+> --- a/include/linux/mfd/max8998.h
+> +++ b/include/linux/mfd/max8998.h
+> @@ -45,7 +45,7 @@ enum {
+>   /**
+>    * max8998_regulator_data - regulator data
+>    * @id: regulator id
+> - * @initdata: regulator init data (contraints, supplies, ...)
+> + * @initdata: regulator init data (constraints, supplies, ...)
+>    * @reg_node: DT node of regulator (unused on non-DT platforms)
+>    */
+>   struct max8998_regulator_data {
+> diff --git a/include/linux/mfd/palmas.h b/include/linux/mfd/palmas.h
+> index dabcc0dea802..1d872363820a 100644
+> --- a/include/linux/mfd/palmas.h
+> +++ b/include/linux/mfd/palmas.h
+> @@ -251,7 +251,7 @@ enum tps65917_regulators {
+>   	TPS65917_NUM_REGS,
+>   };
+>   
+> -/* External controll signal name */
+> +/* External control signal name */
+>   enum {
+>   	PALMAS_EXT_CONTROL_ENABLE1      = 0x1,
+>   	PALMAS_EXT_CONTROL_ENABLE2      = 0x2,
+> diff --git a/include/linux/mfd/rohm-bd71828.h b/include/linux/mfd/rohm-bd71828.h
+> index 39fe275a8117..ea9b1a8f495f 100644
+> --- a/include/linux/mfd/rohm-bd71828.h
+> +++ b/include/linux/mfd/rohm-bd71828.h
+> @@ -186,7 +186,7 @@ enum {
+>   #define BD71828_REG_RTC_ALM2		0x63
+>   #define BD71828_REG_RTC_START		BD71828_REG_RTC_SEC
+>   
+> -/* Charger/Battey */
+> +/* Charger/Battery */
+>   #define BD71828_REG_CHG_STATE		0x65
+>   #define BD71828_REG_CHG_FULL		0xd2
+>   #define BD71828_REG_CHG_EN		0x6F
+> diff --git a/include/linux/mfd/samsung/core.h b/include/linux/mfd/samsung/core.h
+> index 6191f409de94..e489ca0d55ed 100644
+> --- a/include/linux/mfd/samsung/core.h
+> +++ b/include/linux/mfd/samsung/core.h
+> @@ -106,7 +106,7 @@ struct sec_platform_data {
+>   /**
+>    * sec_regulator_data - regulator data
+>    * @id: regulator id
+> - * @initdata: regulator init data (contraints, supplies, ...)
+> + * @initdata: regulator init data (constraints, supplies, ...)
+>    */
+>   struct sec_regulator_data {
+>   	int				id;
+> diff --git a/include/linux/mfd/si476x-core.h b/include/linux/mfd/si476x-core.h
+> index d9e3a322134c..40866d7162c9 100644
+> --- a/include/linux/mfd/si476x-core.h
+> +++ b/include/linux/mfd/si476x-core.h
+> @@ -97,7 +97,7 @@ enum si476x_power_state {
+>    * @command: Wait queue for wainting on the command comapletion.
+>    * @cts: Clear To Send flag set upon receiving first status with CTS
+>    * set.
+> - * @tuning: Wait queue used for wainting for tune/seek comand
+> + * @tuning: Wait queue used for wainting for tune/seek command
 
-This new version added some more issues on my fml13v01 board, this time 
-2 registers in the VOUT_CRG are misconfigured that were correct in v2, 
-namely:
+'nit':
+Could you please fix also the 'wainting'?
 
-0x295c0004 was 0x00000004 on the previous version but is now 0x00000006
-0x295c001c was 0x81000000 on the previous version but is now 0x80000000
+With that:
 
-xx04 sets a slightly different clock divider, but it doesn't seem to 
-matter, display also works with this changed value.
+Reviewed-by: Matti Vaittinen <mazziesaccount@gmail.com>
 
-xx1c seems to select the wrong clock mux?
+>    * completion.
+>    * @stc: Similar to @cts, but for the STC bit of the status value.
+>    * @power_up_parameters: Parameters used as argument for POWER_UP
+> diff --git a/include/linux/mfd/twl.h b/include/linux/mfd/twl.h
+> index b31e07fa4d51..238d9dcefc35 100644
+> --- a/include/linux/mfd/twl.h
+> +++ b/include/linux/mfd/twl.h
+> @@ -739,7 +739,7 @@ int twl4030_sih_setup(struct device *dev, int module, int irq_base);
+>   #define TWL4030_REG_VUSB3V1	19
+>   
+>   /* TWL6030 SMPS/LDO's */
+> -/* EXTERNAL dc-to-dc buck convertor controllable via SR */
+> +/* EXTERNAL dc-to-dc buck converter controllable via SR */
+>   #define TWL6030_REG_VDD1	30
+>   #define TWL6030_REG_VDD2	31
+>   #define TWL6030_REG_VDD3	32
 
-After correcting 0x295c001c (and the ones that I mentioned before in the 
-hdmitx block), the display comes to life again.
 
-Not sure why these are changed.
+-- 
+Matti Vaittinen
+Linux kernel developer at ROHM Semiconductors
+Oulu Finland
 
-Besides that it works great!
-
-Kind regards,
-Maud
-
-On 9/4/26 15:27, Michal Wilczynski wrote:
-> This series enables the display subsystem on the StarFive JH7110.
-> 
-> The dom_vout block holds the display controller (dc8200), the clock
-> generator (voutcrg) and the HDMI IP, all inside PD_VOUT. The HDMI IP is
-> a single register block containing both the controller and the PHY, and
-> it has a circular clock dependency with voutcrg:
-> 
->    - the HDMI controller needs pclk/mclk/bclk from voutcrg
->    - voutcrg needs the pixel clock for its dc8200 pixel MUXes, and that
->      clock is generated by the HDMI PHY
-> 
-> The loop only exists if the HDMI block is treated as one device. The
-> PHY's reference clock is xin24m, not a voutcrg output, so splitting the
-> node into a parent plus phy and controller children gives deferred probe
-> a linear order: hdmi-phy, then voutcrg, then hdmi-controller.
-> 
-> The parent maps the register block and owns the regmap its two children
-> share. Everything in the region sits behind one NoC port whose clock and
-> reset gate access to it, inside PD_VOUT, so the vout subsystem node from
-> the RFC is back and owns those for as long as any child exists.
-> 
-> Patch 10 adds a .mode_valid platform op to inno-hdmi.
-> inno_hdmi_bridge_mode_valid() checks the pixel clock against
-> hdmi->refclk, but that clock only exists where a "ref" clock is
-> described. The JH7110 gets its pixel clock from the PHY, so refclk is
-> NULL and the check was skipped: unsupported modes were advertised, the
-> modeset then "succeeded" because the atomic enable path cannot fail, and
-> the display stayed blank.
-> 
-> Patches 15-17 drop the PHY duplication from the RFC. The JH7110 has the
-> same Innosilicon PHY as the RK3328, offset by 0x100 because it sits
-> behind the controller in the shared register block. Patch 15 factors out
-> the pre-PLL config format, table lookup, determine_rate, recalc_rate and
-> the pre-PLL programming; patch 16 moves Rockchip onto it; patch 17 adds
-> the JH7110 driver. Pixel clock tables, post-PLL and analog config stay
-> SoC specific.
-> 
-> Patch 16 should be a no-op for Rockchip - same writes, same order, same
-> values - and RK3228, whose pre-PLL is at different addresses, keeps its
-> own register code and shares only the lookup. I have no Rockchip
-> hardware, so it is build tested only (arm and riscv). A Tested-by would
-> help.
-> 
-> The dc8200 driver, th1520 reset controller and inno-hdmi bridge that the
-> RFC listed as prerequisites are all upstream now, so there are no
-> out-of-tree dependencies.
-> 
-> Testing
-> =======
-> 
-> Tested on a VisionFive 2 v1.3B using modetest.
-> 
-> All 42 modes the sink advertises work, with nothing in dmesg. Pixel
-> clocks run from 25.175 MHz (640x480@59.94) up to 297 MHz
-> (4096x2160@30), including 3840x2160 and the full 1920x1080 and 1280x720
-> rate families.
-> 
-> The four modes the RFC reported as broken work now too: 2560x1440@59.95,
-> 2048x1080@60.00, 2048x1080@24.00 and 720x400@70.08.
-> 
-> Before patch 10, four of the advertised modes failed: 1680x1050@59.95
-> (146.250 MHz), 1400x1050@59.98 (121.750), 1152x864@59.97 (81.768) and
-> 1280x768@60.35 (80.140). Those pixel clocks are not in the PHY pre-PLL
-> table, so clk_set_rate() returned -EINVAL and the screen stayed black
-> while userspace saw a successful modeset. They are rejected in
-> .mode_valid now; the other refresh rates of those resolutions still work.
-> 
-> Every commit builds for riscv, and the Rockchip PHY also for arm.
-> 
-> Notes
-> =====
-> 
-> The JH7110 has no central MAINTAINERS entry and maintainership is
-> fragmented, so patch 19 adds one for the display subsystem and I am
-> happy to help maintain it. The new PHY library lives under drivers/phy/,
-> already covered by the generic PHY framework entry.
-> 
-> checkpatch warns "does MAINTAINERS need updating?" on the patches adding
-> files, because that entry comes in patch 19.
-> 
-> Thanks to Icenowy Zheng for the dc8200 driver and for explaining how the
-> SoC and the display pipeline fit together.
-> 
-> Thanks also to Dominique Belhachemi, who got rid of the vout-subsystem
-> wrapper and helped with the testing, to Maud Spierings for testing on a
-> Framework 13 panel, and to Graham Markall for testing
-> the JH7110 display patches independently and writing up the results:
-> https://big-grey.co.uk/2026/01/26/testing-starfive-jh7110-display-controller-patches/
-> 
+~~ When things go utterly wrong vim users can always type :help! ~~
