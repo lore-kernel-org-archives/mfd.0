@@ -1,124 +1,128 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail2.ecloud.global (mail2.ecloud.global [135.181.6.248])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6003D331A43
-	for <mfd@lists.linux.dev>; Sun,  6 Sep 2026 11:49:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788695403; cv=none; b=q1Ac3RvT6EskEYnJpmpHpODhpGbmb8DU2fYt2EqPIJdxkdlJposyFurogL9JciByyBRubuzu99IEWu6p43VwBxkVqaY2+CSP6vy2YnPEMi1lEWnyIhTveCwIZwzBfu1Ra9ixY+k6mNI0UpE8Ucyjr5WP1nDBGa5npeGE06YvIBE=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788695403; c=relaxed/simple;
-	bh=oGTWdpMnaXibOFppiWaq0dXI0MnBNIFcwkjra8nz7yY=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=JT+pH1lWA60GGq7NN1WjKnFFB45btH9i6pUwLv0DkOkX1iG4VdUkxtJE9ND9xSge0yq5UMi2Fddgt0J7NgXT/+TrxHeHaLTpjGVfppbcaqWIxfcGrsmsak5raBPtr+vArshbZQomzLeqj1ZJdr2+xCxKool2jsOAXXfRH8ajZLM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ko+HRZC1; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0DF6E1EFFA1
+	for <mfd@lists.linux.dev>; Sun,  6 Sep 2026 14:59:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=135.181.6.248
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788706781; cv=pass; b=j+x8Buu53RBEe+yHRJVkdJDK/4OTwLWx60oFY9N5QUUNLRplF7zw0WEINBfvIRleMk4bRJHFe2LCDPK23oN5Jkv/Vplwqu7qaSO4YMHWaQIEGhK+YvuohhEE2MkRd4ZuQL70f6/MXTxRW1Aa9lQRWJhm6AUW+hg2uAlqNxhhjm4=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788706781; c=relaxed/simple;
+	bh=trUhg+DZ4DJN2v5PDlwdx+2pEBTd0PIFaRmDesDqEfU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=B5gc64S6z6xJ68JVw2KSqTDrFI775dnffWb+1kTOmGlFaf3Zcq8Y4xbWCWXwHWkw9RfUW0rbRlHe7KL+ivYbLdweiAK72ju7HEn19sF42ZMdNjNM9WMAnmM278OMvisoVI6tw3O4P3AdBNBV+EUqCtTTzsvH5M5UFQeVgyuE2fw=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=murena.io; spf=pass smtp.mailfrom=murena.io; dkim=pass (1024-bit key) header.d=murena.io header.i=@murena.io header.b=a0Splrg6; arc=pass smtp.client-ip=135.181.6.248
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=murena.io
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=murena.io
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ko+HRZC1"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E0D1E1F00A3A;
-	Sun,  6 Sep 2026 11:49:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788695397;
-	bh=IwJ0jYtRu6MrVuF72gNLZLzsi3Tbm8G7zysjn6SVkLk=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Ko+HRZC1OryZQDeLK+qCBgR03+DQr9kZvwqNrOK1KuoBw2ULD3zSxO8gasx/JoEnP
-	 t1cpJaSaYgGeXSNO5DnhGcWeIMG0WBp7PIufFbpUBuIgAtbxqxHR4SdecCCv5R1feh
-	 6uoSGuEznBc4R30iFkZujA0jFTV3EEKPJVDLGcWSNdjKl7/b/Zr9W0890Bibez6HCO
-	 sArfvR0v6qmnrfkMrczHGIn9EyDAR/093+bJLx8pdzJM7+nFKJE1uD3C2TlCTKMYEP
-	 nVHwpr1GxhdDWq7iGFa2oq0Uxy6ar8QoZOIAsVDi1Zb9y/v2t7smpAVrO1HRD+TpoS
-	 rBJshpjdupYkw==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2] pwm: lp3943: validate DT output indices in
- lp3943_pwm_parse_dt()
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Manush Prajwal" <manushprajwal555@gmail.com>
-Cc: lee@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <6a9d5118.a865c849.172a3c.4f1f@mx.google.com>
-References: <6a9d5118.a865c849.172a3c.4f1f@mx.google.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Sun, 06 Sep 2026 11:49:56 +0000
-Message-Id: <20260906114956.E0D1E1F00A3A@smtp.kernel.org>
+	dkim=pass (1024-bit key) header.d=murena.io header.i=@murena.io header.b="a0Splrg6"
+Received: from authenticated-user (mail2.ecloud.global [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mail2.ecloud.global (Postfix) with ESMTPSA id E594C72128A;
+	Sun,  6 Sep 2026 14:59:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=murena.io; s=mail2;
+	t=1788706771;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=zVMGfeFZrB58Lk7o3G3a6wdkQDsZOBW4TUrkVV5ZwgQ=;
+	b=a0Splrg6zB00oeVpK4FriY8N+4GX17As20bPsA8Vx68XwCxzPSyZuXZgKfTgxovlJtlesN
+	bxEs+wzrGffdT8Ih5QE30TKCExhKjyzbY4otFGSd4YbqpIKaQ+RA4/s7K6HAQBMS8FtR1X
+	CSWgY5ki1wIZLfpJGmpXWo8D0uBPuhw=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=murena.io;
+	s=mail2; t=1788706771;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=zVMGfeFZrB58Lk7o3G3a6wdkQDsZOBW4TUrkVV5ZwgQ=;
+	b=THJSY92/A/bjlj/pBTmUxyu7CCDs80zoyeYMIggATaIpL8vqJFlBrJhaPBJPGEI6RyIMtR
+	NAU+Lsj5+v0YaaS4T+naMaa4I6xDz4kCMWURKf1LKkssivQ9G1gjaQ/S0TqUwpXElYkKGN
+	iejrNvcdKwjMq5n3hnEPRs5vl0+GPmY=
+ARC-Authentication-Results: i=1;
+	mail2.ecloud.global;
+	auth=pass smtp.mailfrom=maud_spierings@murena.io
+ARC-Seal: i=1; s=mail2; d=murena.io; t=1788706771; a=rsa-sha256; cv=none;
+	b=AyIWxjPgvVFrVvAxTXlq0c74VZgXwUKhdAsaAo7owEu5lfVisTLR+RN6ywUsHXhiMJkRFL
+	dLC4XUaP3ekFGA1Jjk/HdAWNPCsR/hNMIYi7EFT4SXTQoHtELqbI3vmzjEzvEMPKBN16Z4
+	TzdFhlnMtX3Oyh73K4IEa6RNY6VrHLU=
+Message-ID: <cb0884b3-c9be-4cfd-ba43-27add3821ddd@murena.io>
+Date: Sun, 6 Sep 2026 16:59:28 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Subject: Re: [PATCH v2 13/15] phy: starfive: Add jh7110-inno-hdmi-phy driver
+To: Dominique Belhachemi <domibel@debian.org>
+Cc: m.wilczynski@samsung.com, Laurent.pinchart@ideasonboard.com,
+ airlied@gmail.com, alex@ghiti.fr, andrzej.hajda@intel.com,
+ andy.yan@rock-chips.com, andyshrk@163.com, aou@eecs.berkeley.edu,
+ bmasney@redhat.com, conor+dt@kernel.org, conor@kernel.org,
+ devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ hal.feng@starfivetech.com, heiko@sntech.de, hello@big-grey.co.uk,
+ jernej.skrabec@gmail.com, jonas@kwiboo.se, kernel@esmil.dk,
+ krzk+dt@kernel.org, lee@kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-phy@lists.infradead.org, linux-riscv@lists.infradead.org,
+ linux-rockchip@lists.infradead.org, luca.ceresoli@bootlin.com,
+ m.szyprowski@samsung.com, maarten.lankhorst@linux.intel.com,
+ maudspierings@gocontroll.com, mfd@lists.linux.dev, mripard@kernel.org,
+ mturquette@baylibre.com, neil.armstrong@linaro.org, p.zabel@pengutronix.de,
+ palmer@dabbelt.com, pjw@kernel.org, rfoss@kernel.org, robh@kernel.org,
+ sboyd@kernel.org, simona@ffwll.ch, tzimmermann@suse.de, uwu@icenowy.me,
+ vkoul@kernel.org
+References: <20260828-jh7110-clean-send-v2-13-331680c8b9d1@samsung.com>
+ <0ccb4168-ff88-459c-972d-3c091c155db2@murena.io>
+ <e780ecb8-918f-4816-99c8-b69b10b25a18@murena.io>
+ <CAAvaLCwvVUddS14MPx0FHdnp+QeZ99+ox17pXt2hSWPTCFcHtw@mail.gmail.com>
+Content-Language: en-US
+From: Maud Spierings <maud_spierings@murena.io>
+In-Reply-To: <CAAvaLCwvVUddS14MPx0FHdnp+QeZ99+ox17pXt2hSWPTCFcHtw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
-s) to consider:
+On 9/6/26 07:39, Dominique Belhachemi wrote:
+> On Sun, Aug 30, 2026 at 10:17 AM Maud Spierings 
+> <maud_spierings@murena.io <mailto:maud_spierings@murena.io>> wrote:
+> 
+>     I was still having some glitching happening on the display, but I've
+>     found the way to fix that, the question is what is actually
+>     happening here.
+> 
+>         0x29590020 <- 0x00000005
+>     This one I have no idea, it is 0x00000009 with this patch series but
+>     with the vendor kernel I get the value above. When I hook up my
+>     external
+>     display (regular 1440p) this becomes 0x0000000D on the vendor kernel.
+> 
+>     But I can't find this register being written to anywhere there?
+> 
+> 
+> Maybe this needs to be swapped?
+> 
+> drivers/gpu/drm/bridge/inno-hdmi.c
+>    -#define v_HSYNC_POLARITY(n)          ((n) << 3)
+>    -#define v_VSYNC_POLARITY(n)          ((n) << 2)
+>    +#define v_HSYNC_POLARITY(n)          ((n) << 2)
+>    +#define v_VSYNC_POLARITY(n)          ((n) << 3)
+> 
 
-Pre-existing issues:
-- [Critical] Passing an enum array pointer to `of_property_read_u32_array` =
-causes a heap buffer overflow and array stride mismatch if the compiler use=
-s a smaller underlying type (e.g., with `-fshort-enums`).
-- [High] Missing NULL check on `pdata->pwms[hwpwm]` in `lp3943_pwm_request_=
-map()` causes a kernel crash if an unconfigured PWM channel is requested.
---
+Those seem to only be relevant the 0x08 register:
+ > #define HDMI_VIDEO_TIMING_CTL		0x08
 
-commit 2bff859954d5825f1b63378dcea622868d103bda
-Author: Manush Prajwal <manushprajwal555@gmail.com>
+also in the code:
 
-pwm: lp3943: validate DT output indices in lp3943_pwm_parse_dt()
-
-This commit adds bounds checking for the ti,pwm0 and ti,pwm1 devicetree
-properties in lp3943_pwm_parse_dt(). It verifies the raw u32 array values
-are within the valid range of 0-15 before storing them, preventing memory
-corruption and out-of-bounds reads in downstream consumers.
-
->     Both consumers of pwm_map->output[] then use an out-of-range value
->     directly as an index/bit-offset with no bounds check of their own:
->    =20
->      - lp3943_pwm_request_map() does
->            test_and_set_bit(offset, &lp3943->pin_used)
->        with offset taken straight from output[i], corrupting memory beyond
->        the single 'unsigned long pin_used' field for offset >=3D BITS_PER=
-_LONG.
-
-[Severity: High]
-This isn't a bug introduced by this patch, but does lp3943_pwm_request_map()
-lack a NULL pointer check for an unconfigured hardware PWM channel?
-
-If a board DT does not define all PWM channels (so pdata->pwms[1] is NULL),
-and a consumer requests it, won't we dereference a NULL pointer here:
-
-drivers/pwm/pwm-lp3943.c:lp3943_pwm_request_map() {
-    ...
-    pwm_map->output =3D pdata->pwms[hwpwm]->output;
-    ...
-}
-
-[ ... ]
-> diff --git a/drivers/pwm/pwm-lp3943.c b/drivers/pwm/pwm-lp3943.c
-> index 10537e74be288..e8bb8dbb9b67b 100644
-> --- a/drivers/pwm/pwm-lp3943.c
-> +++ b/drivers/pwm/pwm-lp3943.c
-[ ... ]
-> @@ -247,6 +247,11 @@ static int lp3943_pwm_parse_dt(struct device *dev,
->  		if (err)
->  			return err;
-> =20
-> +		for (j =3D 0; j < num_outputs; j++) {
-
-[Severity: Critical]
-This is a pre-existing issue, but can passing an enum array pointer to
-of_property_read_u32_array() cause a heap buffer overflow?
-
-If the compiler uses a smaller underlying type for enum lp3943_pwm_output
-(e.g., with -fshort-enums), devm_kcalloc() will allocate less than
-4 bytes per element.
-
-Since of_property_read_u32_array() expects a u32 * buffer and writes 4 bytes
-per element, won't it overwrite adjacent heap memory? Also, wouldn't array
-indexing with output[j] then read with a mismatched stride?
-
-> +			if (output[j] < 0 || output[j] >=3D LP3943_NUM_OUTPUTS)
-> +				return -EINVAL;
-> +		}
-> +
->  		pwm_map =3D devm_kzalloc(dev, sizeof(*pwm_map), GFP_KERNEL);
->  		if (!pwm_map)
->  			return -ENOMEM;
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/6a9d5118.a865c849.1=
-72a3c.4f1f@mx.google.com?part=3D1
+ > /* Set detail external video timing polarity and interlace mode */
+ > value = v_EXTERANL_VIDEO(1);
+ > value |= mode->flags & DRM_MODE_FLAG_PHSYNC ?
+ > 	 v_HSYNC_POLARITY(1) : v_HSYNC_POLARITY(0);
+ > value |= mode->flags & DRM_MODE_FLAG_PVSYNC ?
+ > 	 v_VSYNC_POLARITY(1) : v_VSYNC_POLARITY(0);
+ > value |= mode->flags & DRM_MODE_FLAG_INTERLACE ?
+ > 	 v_INETLACE(1) : v_INETLACE(0);
+ > hdmi_writeb(hdmi, HDMI_VIDEO_TIMING_CTL, value);
