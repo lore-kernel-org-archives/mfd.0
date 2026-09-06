@@ -1,154 +1,135 @@
-Received: from sender5-op-o12.zoho.com (sender5-op-o12.zoho.com [165.173.182.12])
+Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 747172E06D2
-	for <mfd@lists.linux.dev>; Sun,  6 Sep 2026 15:20:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=165.173.182.12
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788708015; cv=pass; b=HcLMmPnfdjCVmxqvuMjSR/Xz/kqJW1dTR7ca/6XMuWuXTexfKPZiNN2wM3EVTyLPQaLL5Kz812t017Y8CgSjOF4eUA2faekB2cpkn0wxL/zicgg7c+xunpYj0GpiM3boLzuHcBl46AbVXoIeLLGrihzvW4Qz+n4vnNfqsSjt70I=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788708015; c=relaxed/simple;
-	bh=USPPcj75apmjrW4dAbM4sywb/D4zta5YUGyKIDcRAXU=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=BBbQolwUQ+ohlj1FOqukp+c0cOochSduVca7OnyyRXrIOxoduZ+VPzLrSlWMwxaPYIYcei++xc5hmoOKFRx52RbCkOSD6FntfHSLPaD6csbsS4A33SvBFFqp1xZixFzRgYW4nBHcPczLF2Q6RUEKsg5hL0FrVbI3lCowk6kuV9c=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=icenowy.me; spf=pass smtp.mailfrom=icenowy.me; dkim=pass (2048-bit key) header.d=icenowy.me header.i=uwu@icenowy.me header.b=jzAEdxks; arc=pass smtp.client-ip=165.173.182.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=icenowy.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=icenowy.me
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 947711F78E6
+	for <mfd@lists.linux.dev>; Sun,  6 Sep 2026 21:16:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.195.75.108
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788729389; cv=none; b=sHp8tvIx+oUawdinx8c3F+ddAqydV3h3cMASfIVfq07hQYY+hNUiXb2nUFR5k5nl2atL6S/Tfm0RiUVZG1TIDGzjFe4ycCqi2OcuT2HdARxSn6PJtt+KGkE7F7tRV6NhE1K+vDNDCRIZu+d2Gw77s0Ky9cBg2GQYC1UgnevwzuM=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788729389; c=relaxed/simple;
+	bh=Yz6XAtOnkvQtlIzqlPnVlNqeGeM/cGnjOg8VCaUYKis=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=npcz091BPj5lzaDy8iyIk2JXLEzZpIfcGgrGa319/924NoZ1oD1cu/2FwzbUodVe91ra+T2rwTHOBKoefK1+1Lt3bHjYBoVGD0xVR5LtMZUewzXQpeLKtmLwQjat2E4mIl9GJ8TByYt8KAvIc92psb8ZXQ8cf9gyjyPIfyOSiHQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=f4AoxTbb; arc=none smtp.client-ip=82.195.75.108
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=debian.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=icenowy.me header.i=uwu@icenowy.me header.b="jzAEdxks"
-ARC-Seal: i=1; a=rsa-sha256; t=1788707913; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=ieCQabN8EQGpXXgECYodCz/ZWBOkqYLbzC0IAYMG8eiFuCymE52MFXM8XcT6yw39sVHBIc2qXnpsaVNw2sn4SSeLTcwBmMpWDsjggGIuvL0BodFvmlMmHh3DI+WnadXCEcpuLwct5OCPKQjaCpLS3L2vKFHX8ILaEEH5q1Uo+Bw=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1788707913; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=68YKKfbSFTtU2N7wERD+i3nPtQ0y2cRum0iBDFTHv+I=; 
-	b=TEEpCx/b1ggvFyy06XzGaMbNMSzL3Ih8lcq69dr3LzhH4NfQtlm+qC/5NnaXvUWQGG8GnayoaudlRlMZFVEHGWH/q6QuAWKVLEzpHRMlAFc7V5nXD+CtW5vK5MJ63hQ+c8dqyh9/JXMwWiDP0NfnLEz1g/88RIYJE0h3d8NLPuw=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=icenowy.me;
-	spf=pass  smtp.mailfrom=uwu@icenowy.me;
-	dmarc=pass header.from=<uwu@icenowy.me>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1788707913;
-	s=zmail2; d=icenowy.me; i=uwu@icenowy.me;
-	h=Message-ID:Subject:Subject:From:From:To:To:Cc:Cc:Date:Date:In-Reply-To:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id:Reply-To;
-	bh=68YKKfbSFTtU2N7wERD+i3nPtQ0y2cRum0iBDFTHv+I=;
-	b=jzAEdxks3X3M2tjU7S5FuCIjaTDUi2qtrtP7DnXmOiMnbT5vFdOwzOCbCPMbWKFd
-	AqKsFENq9fN5HGwqjXYuSfHrxGy6MiIXzb3vnOYn3nzwW+fuarkCTIU9wCTTGE6s7dK
-	zAaUKxcwqTq4iUaFNNoYTk842WVM7mirHdmg6awrwY8XJ/eB3xIFc0o0enQj9Zl3yM/
-	nbcOVOSCgfi8MC0mZIvUnwM80hrNWjqgvIHCUDS52pR0CkaMje0TKgVUzpp2WmiQoW7
-	EB/H0s5j/mdyvhAKH+NZhmAd2zA/4zIfyCb7SDaeazKFS5Qg5Rw7hZUamsT52lO1IpZ
-	oRuXG8vMBA==
-Received: by mx.zohomail.com with SMTPS id 1788707909777230.01672967805905;
-	Sun, 6 Sep 2026 08:18:29 -0700 (PDT)
-Message-ID: <6a5f8c11a092cef83bae8d9ea0100c2fc133a514.camel@icenowy.me>
-Subject: Re: [PATCH v2 13/15] phy: starfive: Add jh7110-inno-hdmi-phy driver
-From: Icenowy Zheng <uwu@icenowy.me>
-To: Maud Spierings <maud_spierings@murena.io>, Dominique Belhachemi
-	 <domibel@debian.org>
-Cc: m.wilczynski@samsung.com, Laurent.pinchart@ideasonboard.com, 
-	airlied@gmail.com, alex@ghiti.fr, andrzej.hajda@intel.com,
- andy.yan@rock-chips.com, 	andyshrk@163.com, aou@eecs.berkeley.edu,
- bmasney@redhat.com, conor+dt@kernel.org, 	conor@kernel.org,
- devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	hal.feng@starfivetech.com, heiko@sntech.de, hello@big-grey.co.uk, 
-	jernej.skrabec@gmail.com, jonas@kwiboo.se, kernel@esmil.dk,
- krzk+dt@kernel.org, 	lee@kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-clk@vger.kernel.org, 	linux-kernel@vger.kernel.org,
- linux-phy@lists.infradead.org, 	linux-riscv@lists.infradead.org,
- linux-rockchip@lists.infradead.org, 	luca.ceresoli@bootlin.com,
- m.szyprowski@samsung.com, 	maarten.lankhorst@linux.intel.com,
- maudspierings@gocontroll.com, 	mfd@lists.linux.dev, mripard@kernel.org,
- mturquette@baylibre.com, 	neil.armstrong@linaro.org,
- p.zabel@pengutronix.de, palmer@dabbelt.com, 	pjw@kernel.org,
- rfoss@kernel.org, robh@kernel.org, sboyd@kernel.org, simona@ffwll.ch, 
-	tzimmermann@suse.de, vkoul@kernel.org
-Date: Sun, 06 Sep 2026 23:18:11 +0800
-In-Reply-To: <cb0884b3-c9be-4cfd-ba43-27add3821ddd@murena.io>
-References: <20260828-jh7110-clean-send-v2-13-331680c8b9d1@samsung.com>
-	 <0ccb4168-ff88-459c-972d-3c091c155db2@murena.io>
-	 <e780ecb8-918f-4816-99c8-b69b10b25a18@murena.io>
-	 <CAAvaLCwvVUddS14MPx0FHdnp+QeZ99+ox17pXt2hSWPTCFcHtw@mail.gmail.com>
-	 <cb0884b3-c9be-4cfd-ba43-27add3821ddd@murena.io>
-Organization: Anthon Open-Source Community
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.3 
+	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="f4AoxTbb"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
+	s=smtpauto.stravinsky; h=X-Debian-User:Content-Transfer-Encoding:Content-Type
+	:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:
+	Reply-To:Content-ID:Content-Description;
+	bh=Y9LS7SYHFlkHvaK4ZooIhwRFHr3vUhLavYrz1nuVPqA=; b=f4AoxTbb7TWe9/8DFTs7RutDb7
+	L82gmbWW2DODqTgiGpBE+E/m0FCkwVtngj8SNAYQuewyWcdMlGTbsVC2+lwNR6wO2xoq3DR7498yq
+	mirf/cmsxLfxhCtGUqUheLnnAbkfCX9gaXuU2mFHeLlZAAYlJNtKMn4nOkQazdx2SK3u2RUlqfOFM
+	KWcbkU4Q73N5/5H/UvoLmg1kZBTNJRKz56T6MAydZXl+bJWQ9dQs7uiQsvZqBs6/e5nhDWZB1AItV
+	U8MJg2E733lKvHsWsYvc/4PDZ1t2e/Smd1u09n+LeuXOg4Y4OLkmRVpwVyptbunYr32iPGvPB515T
+	BJuyiljA==;
+Received: from authenticated-user
+	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128)
+	(Exim 4.96)
+	(envelope-from <domibel@debian.org>)
+	id 1x3KDx-00116y-2O
+	for mfd@lists.linux.dev;
+	Sun, 06 Sep 2026 21:16:25 +0000
+Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-8487214ad2bso3116897b3a.1
+        for <mfd@lists.linux.dev>; Sun, 06 Sep 2026 14:16:25 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBy73Nx9m6ls8JET8w7DpiM9IRuwmLO/2IgRMcI8nE57QoZBednxiOEr3q92lVa0XDPACqY=@lists.linux.dev
+X-Gm-Message-State: AFuF++mvvc9phNL09xmAj1t+q5AUtBR6zjC0zSCNDQlXfm3FKaMfGh/a
+	m4agT/jMFn2MkHgLeLTVb8lltOvSB+0htD7beqbW8L2DfjjZ9XhLEwmfVos4KSSoKUCMXrQmSvK
+	IVh/4wuIeNV+4uFMBJScVB658a5uvZ8A=
+X-Received: by 2002:a05:6a00:c206:b0:851:d12e:389b with SMTP id
+ d2e1a72fcca58-8628622c78fmr14582711b3a.14.1788729379886; Sun, 06 Sep 2026
+ 14:16:19 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-X-ZohoMailClient: External
+References: <20260828-jh7110-clean-send-v2-13-331680c8b9d1@samsung.com>
+ <0ccb4168-ff88-459c-972d-3c091c155db2@murena.io> <e780ecb8-918f-4816-99c8-b69b10b25a18@murena.io>
+ <CAAvaLCwvVUddS14MPx0FHdnp+QeZ99+ox17pXt2hSWPTCFcHtw@mail.gmail.com>
+ <cb0884b3-c9be-4cfd-ba43-27add3821ddd@murena.io> <6a5f8c11a092cef83bae8d9ea0100c2fc133a514.camel@icenowy.me>
+In-Reply-To: <6a5f8c11a092cef83bae8d9ea0100c2fc133a514.camel@icenowy.me>
+From: Dominique Belhachemi <domibel@debian.org>
+Date: Sun, 6 Sep 2026 17:16:08 -0400
+X-Gmail-Original-Message-ID: <CAAvaLCxMntrTbTQ9VNu4H_6LA30TRAqi7mCpn+x3hbTG9WqERA@mail.gmail.com>
+X-Gm-Features: AcwNN1W3Ei1cx4_W0731mEUNvW6xw1POICbdb9C66iM9zFCtDZzsTbla6YfIM_c
+Message-ID: <CAAvaLCxMntrTbTQ9VNu4H_6LA30TRAqi7mCpn+x3hbTG9WqERA@mail.gmail.com>
+Subject: Re: [PATCH v2 13/15] phy: starfive: Add jh7110-inno-hdmi-phy driver
+To: Icenowy Zheng <uwu@icenowy.me>
+Cc: Maud Spierings <maud_spierings@murena.io>, Dominique Belhachemi <domibel@debian.org>, 
+	m.wilczynski@samsung.com, Laurent.pinchart@ideasonboard.com, 
+	airlied@gmail.com, alex@ghiti.fr, andrzej.hajda@intel.com, 
+	andy.yan@rock-chips.com, andyshrk@163.com, aou@eecs.berkeley.edu, 
+	bmasney@redhat.com, conor+dt@kernel.org, conor@kernel.org, 
+	devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	hal.feng@starfivetech.com, heiko@sntech.de, hello@big-grey.co.uk, 
+	jernej.skrabec@gmail.com, jonas@kwiboo.se, kernel@esmil.dk, 
+	krzk+dt@kernel.org, lee@kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-phy@lists.infradead.org, linux-riscv@lists.infradead.org, 
+	linux-rockchip@lists.infradead.org, luca.ceresoli@bootlin.com, 
+	m.szyprowski@samsung.com, maarten.lankhorst@linux.intel.com, 
+	maudspierings@gocontroll.com, mfd@lists.linux.dev, mripard@kernel.org, 
+	mturquette@baylibre.com, neil.armstrong@linaro.org, p.zabel@pengutronix.de, 
+	palmer@dabbelt.com, pjw@kernel.org, rfoss@kernel.org, robh@kernel.org, 
+	sboyd@kernel.org, simona@ffwll.ch, tzimmermann@suse.de, vkoul@kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Debian-User: domibel
 
-=E5=9C=A8 2026-09-06=E6=97=A5=E7=9A=84 16:59 +0200=EF=BC=8CMaud Spierings=
+On Sun, Sep 6, 2026 at 11:19=E2=80=AFAM Icenowy Zheng <uwu@icenowy.me> wrot=
+e:
+>
+> =E5=9C=A8 2026-09-06=E6=97=A5=E7=9A=84 16:59 +0200=EF=BC=8CMaud Spierings=
 =E5=86=99=E9=81=93=EF=BC=9A
-> On 9/6/26 07:39, Dominique Belhachemi wrote:
-> > On Sun, Aug 30, 2026 at 10:17=E2=80=AFAM Maud Spierings=20
-> > <maud_spierings@murena.io=C2=A0<mailto:maud_spierings@murena.io>> wrote=
-:
-> >=20
-> > =C2=A0=C2=A0=C2=A0 I was still having some glitching happening on the d=
-isplay, but
-> > I've
-> > =C2=A0=C2=A0=C2=A0 found the way to fix that, the question is what is a=
-ctually
-> > =C2=A0=C2=A0=C2=A0 happening here.
-> >=20
-> > =C2=A0=C2=A0=C2=A0=C2=A0 =C2=A0 =C2=A00x29590020 <- 0x00000005
-> > =C2=A0=C2=A0=C2=A0 This one I have no idea, it is 0x00000009 with this =
-patch
-> > series but
-> > =C2=A0=C2=A0=C2=A0 with the vendor kernel I get the value above. When I=
- hook up my
-> > =C2=A0=C2=A0=C2=A0 external
-> > =C2=A0=C2=A0=C2=A0 display (regular 1440p) this becomes 0x0000000D on t=
-he vendor
-> > kernel.
-> >=20
-> > =C2=A0=C2=A0=C2=A0 But I can't find this register being written to anyw=
-here there?
-> >=20
-> >=20
-> > Maybe this needs to be swapped?
-> >=20
-> > drivers/gpu/drm/bridge/inno-hdmi.c
-> > =C2=A0=C2=A0 -#define v_HSYNC_POLARITY(n) =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0((n) << 3)
-> > =C2=A0=C2=A0 -#define v_VSYNC_POLARITY(n) =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0((n) << 2)
-> > =C2=A0=C2=A0 +#define v_HSYNC_POLARITY(n) =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0((n) << 2)
-> > =C2=A0=C2=A0 +#define v_VSYNC_POLARITY(n) =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0((n) << 3)
+> > On 9/6/26 07:39, Dominique Belhachemi wrote:
+> > > On Sun, Aug 30, 2026 at 10:17=E2=80=AFAM Maud Spierings
+> > > <maud_spierings@murena.io <mailto:maud_spierings@murena.io>> wrote:
+> > >
+> > >     I was still having some glitching happening on the display, but
+> > > I've
+> > >     found the way to fix that, the question is what is actually
+> > >     happening here.
+> > >
+> > >         0x29590020 <- 0x00000005
+> > >     This one I have no idea, it is 0x00000009 with this patch
+> > > series but
+> > >     with the vendor kernel I get the value above. When I hook up my
+> > >     external
+> > >     display (regular 1440p) this becomes 0x0000000D on the vendor
+> > > kernel.
+> > >
+> > >     But I can't find this register being written to anywhere there?
+> > >
+> > >
+> > > Maybe this needs to be swapped?
+> > >
+> > > drivers/gpu/drm/bridge/inno-hdmi.c
+> > >    -#define v_HSYNC_POLARITY(n)          ((n) << 3)
+> > >    -#define v_VSYNC_POLARITY(n)          ((n) << 2)
+> > >    +#define v_HSYNC_POLARITY(n)          ((n) << 2)
+> > >    +#define v_VSYNC_POLARITY(n)          ((n) << 3)
+>
+> Very weirdly, the original definition here matches current mainline
+> inno-hdmi.c, but the changed definition matches JH7110 vendor
+> inno_hdmi.h [1].
+>
 
-Very weirdly, the original definition here matches current mainline
-inno-hdmi.c, but the changed definition matches JH7110 vendor
-inno_hdmi.h [1].
+The vendor code is correct and matches the RK3128 TRM.
 
-Some weird must happened.
+HDMI_reg08
+    Bit  Attr  Reset  Description
+    3    RW    0x0    vs_polarity   VSYNC polarity   1'b0: Negative
+1'b1: Positive
+    2    RW    0x0    hs_polarity   HSYNC polarity   1'b0: Negative
+1'b1: Positive
 
-Thanks,
-Icenowy
+Nobody noticed this so far because in 720p/1080p both polarities are
+positive, but Maud's 3:2 panel has differing H/V polarity.
 
-
-[1]
-https://github.com/DC-DeepComputing/fml13v01-linux/blob/97c64fe2832b6826914=
-b6da7aa4febcdd4d3d444/drivers/gpu/drm/verisilicon/inno_hdmi.h
-
-> >=20
->=20
-> Those seem to only be relevant the 0x08 register:
-> =C2=A0> #define HDMI_VIDEO_TIMING_CTL		0x08
->=20
-> also in the code:
->=20
-> =C2=A0> /* Set detail external video timing polarity and interlace mode *=
-/
-> =C2=A0> value =3D v_EXTERANL_VIDEO(1);
-> =C2=A0> value |=3D mode->flags & DRM_MODE_FLAG_PHSYNC ?
-> =C2=A0>=C2=A0	 v_HSYNC_POLARITY(1) : v_HSYNC_POLARITY(0);
-> =C2=A0> value |=3D mode->flags & DRM_MODE_FLAG_PVSYNC ?
-> =C2=A0>=C2=A0	 v_VSYNC_POLARITY(1) : v_VSYNC_POLARITY(0);
-> =C2=A0> value |=3D mode->flags & DRM_MODE_FLAG_INTERLACE ?
-> =C2=A0>=C2=A0	 v_INETLACE(1) : v_INETLACE(0);
-> =C2=A0> hdmi_writeb(hdmi, HDMI_VIDEO_TIMING_CTL, value);
+Best
+-Dominique
