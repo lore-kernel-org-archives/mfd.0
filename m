@@ -1,133 +1,108 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail-m15590.qiye.163.com (mail-m15590.qiye.163.com [101.71.155.90])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7ABED2E06ED
-	for <mfd@lists.linux.dev>; Mon,  7 Sep 2026 02:50:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB2A13E8340
+	for <mfd@lists.linux.dev>; Mon,  7 Sep 2026 03:31:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.71.155.90
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788749412; cv=none; b=OdOLcoeWsXxhxFB7dAJe3wqdr7bPcJrRersUcsm9j8q1TMVynj7x+BHFhiRLPmaBNHKf7cO3PF7r/FEiaJKWZrXTqxn2yxhiDTU8e/P08AP6M5We7/Lr6beRrdF3HKw+kCFn0LV2kkeZgLSJSnTpJQ4SQQCg90ImFshwyZMPGS8=
+	t=1788751899; cv=none; b=LZ156u3KoI2YbfXhmJLOfh8mSGipZrVUWCXjnfJfbPoMcWasiT6zNkESgRybdyfdyL3RER/ZV0juqUoELx/DIe4G0gcyqU6N79WaZx/vcbDBo3sxkXaDboEYeMcQ0HPyf6XA07Wyicv/Lh0pLhXFRXKaSFRtmKrgNf5UbpBrPUo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788749412; c=relaxed/simple;
-	bh=rrRE5SDDAivhHNvXKTW8SDKeaKgee6j/8xqVBSoxlC0=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=OElVS9r39PX5UqcyXmLRCUOpWoDE+0vW6OO5L5o49/r7/GcFipLn4gErzx66kM9nEKRLsXx1BJFSE9IrDHHQQpJvf9REuJwA7snZA3+FsU+wx2L7asjsMNpKRM219fhZHOU/LD72DuymxPO+3ncZFzxyKgOaAIrD44cq/LfCHf4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jRdpgoDG; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788751899; c=relaxed/simple;
+	bh=aKf8DhaQ5x5i8jhOQEfA7qapAwbpflbQ/fj5C6rVTU8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=dT840nJGlqE5Nd+wo+IH5M7PSJBr0E21fhSb5ca9jxpeX2sunR4JUz6DX8XOCLP6QqVAiU36O6DJJ9AgQlA0D6x4kpjNbMuqoMWMstlnwUyAsSwgugWA2DC5TPCX2gtnest750E89DyZE9IgTKTcZeYCvuXrrIbO5IiA1x3rOKk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com; spf=pass smtp.mailfrom=rock-chips.com; dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b=Ku4RR7ub; arc=none smtp.client-ip=101.71.155.90
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rock-chips.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jRdpgoDG"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2634B1F00A3A;
-	Mon,  7 Sep 2026 02:50:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788749411;
-	bh=fFXF/8jjch3xSQ7od7lZXPUalIStPFNew8LqbPeMrRk=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=jRdpgoDGBN9zg6DPuftcYgttjJL5DzzAdHr4EIGny2vSM0IqkTJoPdwzHl3aa13rX
-	 1jeDv8aGWlsoEMdgaP1n2WpSd5gZex3egaY2sW43ZZytNlk2HYMpOwbEv/J4xasHoa
-	 UJMBLvM9x1eV6eb2ZbfHLiDM4MgxCCVvOOToASVvpdpJYNgrbUZK19ZzK4kvmAhcIl
-	 1CV5shQg+I8IdAwlznDnkrL08jtQzeRdQ21k7WVofEBs5gnIXZNeUoZ50F313gJaRg
-	 DATxYwQkHyVdzIQeQ36SdQ+cQ+CbCiiJ5ElEBQgDgjBzKV4c/XEAoz4YpC2S1T0UII
-	 sv5+rn4SJmpKA==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v6 1/2] mfd: loongson-se: Add multi-node support
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Qunqin Zhao" <zhaoqunqin@163.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260907023827.14905-2-zhaoqunqin@163.com>
-References: <20260907023827.14905-1-zhaoqunqin@163.com>
- <20260907023827.14905-2-zhaoqunqin@163.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 07 Sep 2026 02:50:10 +0000
-Message-Id: <20260907025011.2634B1F00A3A@smtp.kernel.org>
+	dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b="Ku4RR7ub"
+Received: from [172.16.12.90] (unknown [61.154.14.86])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 4cbfa21e5;
+	Mon, 7 Sep 2026 11:16:05 +0800 (GMT+08:00)
+Message-ID: <d4cfd407-9cf7-4907-9ef9-8bb52b5ec669@rock-chips.com>
+Date: Mon, 7 Sep 2026 11:16:04 +0800
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 15/19] phy: Add common Innosilicon HDMI PHY helpers
+To: Michal Wilczynski <m.wilczynski@samsung.com>
+Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Andrzej Hajda <andrzej.hajda@intel.com>,
+ Robert Foss <rfoss@kernel.org>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Luca Ceresoli <luca.ceresoli@bootlin.com>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Lee Jones <lee@kernel.org>, Andy Yan <andy.yan@rock-chips.com>,
+ Philipp Zabel <p.zabel@pengutronix.de>,
+ Emil Renner Berthing <kernel@esmil.dk>, Hal Feng
+ <hal.feng@starfivetech.com>, Michael Turquette <mturquette@baylibre.com>,
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
+ Heiko Stuebner <heiko@sntech.de>, Conor Dooley <conor@kernel.org>,
+ Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
+ Dominique Belhachemi <db@domibel.de>, Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>, linux-phy@lists.infradead.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, mfd@lists.linux.dev,
+ linux-clk@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-rockchip@lists.infradead.org, linux-riscv@lists.infradead.org,
+ Andy Yan <andyshrk@163.com>, Marek Szyprowski <m.szyprowski@samsung.com>,
+ Maud Spierings <maud_spierings@murena.io>,
+ Graham Markall <hello@big-grey.co.uk>,
+ Icenowy Zheng <zhengxingda@iscas.ac.cn>
+References: <20260904-jh7110-clean-send-v3-0-484f9ae72715@samsung.com>
+ <CGME20260904132737eucas1p240d02860355b180ff9c5e8e4c6941ec0@eucas1p2.samsung.com>
+ <20260904-jh7110-clean-send-v3-15-484f9ae72715@samsung.com>
+Content-Language: en-US
+From: Chaoyi Chen <chaoyi.chen@rock-chips.com>
+In-Reply-To: <20260904-jh7110-clean-send-v3-15-484f9ae72715@samsung.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-HM-Tid: 0aa079ddac6403a7kunm8546d35235ff8c
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkZSEtCVkoZHU1OHUwdTx5OSFYVFA
+	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlNSlVKTk9VSk9VQ01ZV1kWGg8SFR0UWUFZT0tIVUpLSE
+	pKQkxVSktLVUpCS0tZBg++
+DKIM-Signature: a=rsa-sha256;
+	b=Ku4RR7ubhkME7SdU7Q1vR5N4bs9Jd9O9dvZ9PeeRSteOPVUkDArQId4e3ukUTnqz+qWufSkjKXJ2R4/U363WXT4BSsLmk0+jXlh+bAmQV7Motws9BeZFvlX3PDZsY+ze3KEL/3yqEcWz8+aHEvsZGtdV4HknbJNEDvGIuMZ8U48=; c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+	bh=+vkcaZtmTBN2qJZBZCZ7S5klbEWaaU26s6Uci6PmceU=;
+	h=date:mime-version:subject:message-id:from;
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
+Hello Michal,
 
-Pre-existing issues:
-- [Medium] Architecture Guidelines Violation: Bespoke helper functions expo=
-rted for MFD child drivers.
---
+On 9/4/2026 9:27 PM, Michal Wilczynski wrote:
+> The Innosilicon HDMI PHY IP is used by several SoCs. They differ in
+> where the PHY register block sits in the register space and in which
+> pixel clocks they support, but the pre-PLL programming sequence and the
+> layout of its registers are the same.
+> 
+> Add a small library holding that shared part: the pre-PLL configuration
+> table format, a lookup, clk_ops determine_rate and recalc_rate helpers,
+> and the pre-PLL register programming. Callers pass a regmap, a register
+> offset for the PHY block, and their own pixel clock table.
+> 
+> No driver uses it yet; the users are converted separately.
+> 
+> Signed-off-by: Michal Wilczynski <m.wilczynski@samsung.com>
+> ---
+>  drivers/phy/Kconfig               |   8 +
+>  drivers/phy/Makefile              |   1 +
+>  drivers/phy/phy-inno-hdmi.c       | 298 ++++++++++++++++++++++++++++++++++++++
+>  include/linux/phy/inno-hdmi-phy.h |  85 +++++++++++
+>  4 files changed, 392 insertions(+)
+Reviewed-by: Chaoyi Chen <chaoyi.chen@rock-chips.com>
 
-commit 5586c039b03a6072df309c0fa8d59ce3ed3dc98b
-Author: Qunqin Zhao <zhaoqunqin@loongson.cn>
+-- 
+Best, 
+Chaoyi
 
-mfd: loongson-se: Add multi-node support
-
-On the Loongson platform, each node is equipped with a security engine
-device. However, due to a hardware flaw, only the device on node 0 can
-trigger interrupts. Therefore, interrupts from other nodes are forwarded
-by node 0. We need to check in the interrupt handler of node 0 whether
-this interrupt is intended for other nodes, this can be accomplished via
-shared interrupt handling.
-
-> diff --git a/drivers/mfd/loongson-se.c b/drivers/mfd/loongson-se.c
-> index 3902ba377d690..7f552a8ee6a26 100644
-> --- a/drivers/mfd/loongson-se.c
-> +++ b/drivers/mfd/loongson-se.c
-
-[ ... ]
-
-> @@ -211,24 +216,26 @@ static int loongson_se_probe(struct platform_device=
- *pdev)
->  	if (IS_ERR(se->base))
->  		return PTR_ERR(se->base);
-> =20
-> -	writel(SE_INT_ALL, se->base + SE_S2LINT_EN);
-> -
->  	nr_irq =3D platform_irq_count(pdev);
->  	if (nr_irq <=3D 0)
->  		return -ENODEV;
-> =20
-> +	writel(SE_INT_ALL, se->base + SE_S2LINT_CL);
-> +
->  	for (i =3D 0; i < nr_irq; i++) {
->  		irq =3D platform_get_irq(pdev, i);
-> -		err =3D devm_request_irq(dev, irq, se_irq_handler, 0, "loongson-se", s=
-e);
-> +		err =3D devm_request_irq(dev, irq, se_irq_handler, IRQF_SHARED, "loong=
-son-se", se);
->  		if (err)
->  			dev_err(dev, "failed to request IRQ: %d\n", irq);
->  	}
-> =20
-> +	writel(SE_INT_ALL, se->base + SE_S2LINT_EN);
-> +
->  	err =3D loongson_se_init(se, paddr, se->dmam_size);
->  	if (err)
->  		return err;
-> =20
-> -	return devm_mfd_add_devices(dev, PLATFORM_DEVID_NONE, engines,
-> +	return devm_mfd_add_devices(dev, PLATFORM_DEVID_AUTO, engines,
->  				    ARRAY_SIZE(engines), NULL, 0, NULL);
->  }
-
-[Severity: Medium]
-This is a pre-existing issue, but does this driver export bespoke accessor
-functions specifically for child drivers?
-
-Looking at drivers/mfd/loongson-se.c:
-
-struct loongson_se_engine *loongson_se_init_engine(struct device *dev, int =
-id)
-{
-    ...
-}
-
-and loongson_se_send_engine_cmd(), these appear to be bespoke APIs explicit=
-ly
-bypassing standard kernel subsystems for cross-driver communication.
-
-The MFD subsystem guidelines expressly forbid writing bespoke accessors
-or helper functions in the parent to pass state to child devices, as this
-creates tight inter-driver coupling and initialization interdependencies.
-
-Is it possible to refactor this so child drivers directly access parent data
-using standard APIs?
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260907023827.1490=
-5-1-zhaoqunqin@163.com?part=3D1
