@@ -1,70 +1,152 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3DAA73C2D
-	for <mfd@lists.linux.dev>; Mon,  7 Sep 2026 05:01:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCF3A347533
+	for <mfd@lists.linux.dev>; Mon,  7 Sep 2026 05:02:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788757304; cv=none; b=oapYWInOghviOW/vb25r8iC66XAGDl62opVuBUCa/rJxb4+TEjlGeqxPnMTo8Lzxq1Q37ib+e6nHoQ0GbgUM7OzGaFh0EWclF29wsbyaGEicIJaljNPx17twgkWAjRncaAlklKewcGGXAaGjzpFEW+fwHCsoFt26vWKEj37rw0Y=
+	t=1788757375; cv=none; b=hTBKU8w2RTRMRlrcHWz9feD9rTjkAhsqQoXK0skLNWrIPLKG84hNVQr2R1H+9uPBd+HskTWlp0L52kedd650YADNocmpdxGG3+IA1WAMI9n0WVcD7/VTCjRoAkrpjRNoxv+LfstJP7nKyd3TleTrYgFZBpX2zHjs/dPKtTEhIfo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788757304; c=relaxed/simple;
-	bh=SWwOyKiihAqvtBxpe3GwsEaxp7d21x1lCvuz7jLJf08=;
+	s=arc-20240116; t=1788757375; c=relaxed/simple;
+	bh=OiFGlswaVY8Ue7sSMl+kvBbOlIEoMbSiPfW3hD8sEsI=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=SR/4ZCZZUC9bGlKdA90nmFDM54+9lGqCGxvFNpnWjgOEVogHKlOdtSSIkRDCkobdEoF+wLKxnByb47bHlv9uAIG0P1KdC6177OCnE7ZDwdyQEVBhjVp2jWGEbA+8WyPVnICn3kiz5BxcONpFryrrSPckAX9FiqR9mjsX7+M3bvg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZEWPWzK4; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=GfqFXHpKIIWh6UB2cAtRqFYs89qj2VM6hiXSSpyYknj3xOn6plHqk2SdhSU1bHP07T2+E53CA21p3baqsToxXCBL8k1U0Ck5Ot7uXEQId1SfTVxgru2d0HAFM1CP2FR1en1GUmk1a9XzGmTVlvugW1Qxt/SlrHlN8WecpMF7Qdg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bTZZKygy; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZEWPWzK4"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A49701F00A3A;
-	Mon,  7 Sep 2026 05:01:42 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bTZZKygy"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 43B651F00A3A;
+	Mon,  7 Sep 2026 05:02:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788757302;
-	bh=SWwOyKiihAqvtBxpe3GwsEaxp7d21x1lCvuz7jLJf08=;
+	s=k20260515; t=1788757374;
+	bh=tm12X39vbOhBtA697uriuRThlJfibtODrq6tAmjho9U=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=ZEWPWzK4+Z6UoXlsKv2zAvM6w4v/V+GvWKgyFigJCG4oLkv+zRIOIUoDZkIP6yK5O
-	 Dft+nkk2jnY5WPlonxgjZ9EAGBjl5wNQ/ePV9Qv+swNSHNrCmUydsLq9NF5jcAf7Xf
-	 6erSyjcJBwLXZEI13KDhNzv2+5hPGvXxsYoH+YDRi9l4qNDUd8f2v8UtGuBvqzsslx
-	 qm3IallHkvKVuWw53/J6MgCzaQi6nogWJwuAR1WDMeETiE/jWqIchtm/np16Vk+IAd
-	 EWjXu4AcFh1tB97VkxU98a5FaZWJzdpxhtkX1FSNNNvvmiNoU82UkceJl3YNhb1FWu
-	 AYbxSmBjSuZYQ==
+	b=bTZZKygyeDxkOS6Vne7zoBdDniDbYBphQAk/m5tVjhKmLjN3TBffcdq2QSHWWiMsJ
+	 9d7Ao1/7sLcbaPTTcigl4dK/h3rtQ+AVmQxLK29wC2Js0sWkxMp77t9tsfFTp3ZJ8q
+	 643n+ia4apT3/1jgDvZsHhC6YR4gmuYCBzTet1JCDRd024GtnJ8RzeJNoXJy8/OIi+
+	 rD12TrOUqzGNPMPRvxam8BiCjTDT4HrpLVbtm5kraD/83Ml5xHL+2IsPi8tL5sn5bD
+	 F+/1Au3JAOsc7obFUEUWWU7IEtxAez7wdiERh2E5XghSaP/UkmeOPHgIB7GH3X4wX9
+	 Bmlt1dFlgPTdA==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3] mfd: Fix typos in comments
+Subject: Re: [PATCH v2 3/3] mfd: wm831x: Fix typo "convertor" in comment
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Hemanth Selam" <hemanth.selam@gmail.com>
-Cc: lee@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260907045951.23562-1-hemanth.selam@gmail.com>
-References: <20260907045951.23562-1-hemanth.selam@gmail.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20260907045331.16932-4-hemanth.selam@gmail.com>
+References: <20260907045331.16932-1-hemanth.selam@gmail.com>
+ <20260907045331.16932-4-hemanth.selam@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Mon, 07 Sep 2026 05:01:42 +0000
-Message-Id: <20260907050142.A49701F00A3A@smtp.kernel.org>
+Date: Mon, 07 Sep 2026 05:02:53 +0000
+Message-Id: <20260907050254.43B651F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-> Fix misspellings in comments across the MFD drivers and headers, found
-> with scripts/checkpatch.pl using the list in scripts/spelling.txt.
->=20
-> Since v1 this also corrects "wainting" and "comapletion" in
-> include/linux/mfd/si476x-core.h, which checkpatch did not flag; Matti
-> Vaittinen asked for "wainting" and "comapletion" is on the same line.
-> The subject is also capitalised to match the MFD convention.
->=20
-> v3 only picks up the two Acked-by tags that v2 dropped; the diff is
-> unchanged from v2.
->=20
-> Only touches comments, no code changes.
->=20
-> Assisted-by: Cursor:claude-opus-5
-> Reviewed-by: Matti Vaittinen <mazziesaccount@gmail.com>
-> Acked-by: Botsz HUANG <huang.botsz@gmail.com>
-> Acked-by: Nick Huang <sef1548@gmail.com>
-> Signed-off-by: Hemanth Selam <hemanth.selam@gmail.com>
+Thank you for your contribution! Sashiko AI review found 2 potential issue(=
+s) to consider:
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+Pre-existing issues:
+- [High] Negative shift count in `wm831x_auxadc_irq` due to missing validat=
+ion of source field.
+- [High] State leak on error path in `wm831x_auxadc_read_irq` causing perma=
+nent ADC deadlock.
+--
+
+commit 50c01f2e8806d70971e1f256c73c3a0a948552c6
+Author: Hemanth Selam <hemanth.selam@gmail.com>
+
+mfd: wm831x: Fix typo "convertor" in comment
+
+This commit fixes a spelling error in a comment within wm831x_auxadc_irq(),
+changing "convertor" to "converter". No code changes are introduced.
+
+> diff --git a/drivers/mfd/wm831x-auxadc.c b/drivers/mfd/wm831x-auxadc.c
+> index 744e1d161c5a7..6280d4f389815 100644
+> --- a/drivers/mfd/wm831x-auxadc.c
+> +++ b/drivers/mfd/wm831x-auxadc.c
+> @@ -132,7 +132,7 @@ static irqreturn_t wm831x_auxadc_irq(int irq, void *i=
+rq_data)
+>  			1 << input, 0);
+>  	wm831x->auxadc_active &=3D ~(1 << input);
+
+[Severity: High]
+This is a pre-existing issue, but I have a question about the shift operati=
+on
+here.
+
+If the hardware returns 0 in the source mask field of WM831X_AUXADC_DATA (e=
+.g.
+due to hardware malfunction or I2C bus corruption), the input calculation:
+
+	input =3D ((ret & WM831X_AUX_DATA_SRC_MASK)
+		 >> WM831X_AUX_DATA_SRC_SHIFT) - 1;
+
+evaluates to -1.
+
+This would result in attempting to bitwise shift 1 << -1, which is C undefi=
+ned
+behavior and could lead to memory corruption, kernel panics, or unexpected
+register modifications depending on the architecture.
+
+Could this negative shift count occur due to missing validation of the sour=
+ce
+field?
+
+> -	/* Turn off the entire convertor if idle */
+> +	/* Turn off the entire converter if idle */
+>  	if (!wm831x->auxadc_active)
+>  		wm831x_reg_write(wm831x, WM831X_AUXADC_CONTROL, 0);
+> =20
+
+[Severity: High]
+This isn't a bug introduced by this patch, but looking at the error path
+in wm831x_auxadc_read_irq():
+
+drivers/mfd/wm831x-auxadc.c:wm831x_auxadc_read_irq() {
+	...
+	if (!(wm831x->auxadc_active & (1 << input))) {
+		...
+		wm831x->auxadc_active |=3D 1 << input;
+	}
+
+	/* We convert at the fastest rate possible */
+	if (ena) {
+		ret =3D wm831x_set_bits(wm831x, WM831X_AUXADC_CONTROL, ...);
+		if (ret !=3D 0) {
+			dev_err(wm831x->dev, "Failed to start AUXADC: %d\n",
+				ret);
+			goto out;
+		}
+	}
+	...
+out:
+	list_del(&req->list);
+	mutex_unlock(&wm831x->auxadc_lock);
+
+	kfree(req);
+
+	return ret;
+}
+
+If wm831x_set_bits() fails to start the AUXADC (e.g. due to an I2C error),
+the function returns via the out label.
+
+However, the active tracking bit wm831x->auxadc_active |=3D 1 << input; was
+already set and is never reverted on this error path.
+
+On any subsequent read for this input, the code sees the active bit set,
+skips enabling the hardware ADC, and hits the wait_for_completion_timeout
+forever.
+
+The interrupt never fires because the hardware wasn't started, causing a
+permanent functional failure of the ADC channel, coupled with a 500ms thread
+stall on every subsequent read attempt.
+
+Does this error path leak the active state and cause a permanent ADC deadlo=
+ck?
 
 --=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260907045951.2356=
-2-1-hemanth.selam@gmail.com?part=3D1
-
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260907045331.1693=
+2-1-hemanth.selam@gmail.com?part=3D3
