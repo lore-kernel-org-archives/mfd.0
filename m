@@ -1,375 +1,402 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A70146EC84
-	for <mfd@lists.linux.dev>; Mon,  7 Sep 2026 14:12:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D26037C0F8;
+	Mon,  7 Sep 2026 17:19:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788790333; cv=none; b=mXuNDdSPoweKEg09MSX8cmpuXoz4YUMkdt4oNpJMogsokMUfSz5BQoP37OOqtAiKwKJ1i8t5i5/zRUsjK/cxB2ps3EQbHPa5zBlNB52ryqIbj0izUBkBTG554YZ0S7K81yON/8bZZFuJuIqxB2Z3ljY11a6gFHfusUlkimqhhNQ=
+	t=1788801576; cv=none; b=eRKufq/i0yMqs6tfoB66MHAM9MyIXhkH4IVcz9ZtsRsEAtd1RfkAtYL173olOMUzZo8HDYhol+/PEoRvcRJSrOqGeq/XNKXZ9rLlTZWm5Kpgsfij0fVsMxgb90HtJHNfU2f8003QK8nncw3tN9ksbrPkfa1uMun3kjmRTKGSKRI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788790333; c=relaxed/simple;
-	bh=fS+geZIdxtmX7yxbcEzrvKuspfoxDdUwZsyfHCvJ/GY=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=jMxGnfxI6iSYBKIHWLn8Ens4u/wImdMRLaGe5ppcPz4K1ILxtvfaJnt34V9gZ42ubLSKTCrjg8tJUv08W4lJMTcDr/pfXLQ56ClLhVy26qIGOmZPxlno5ZCeBSPAPghKGzPWtu/D5hZyF19i52YD9Br0tRNzvchTb5oCEGjRa74=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TjcSxl9u; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1788801576; c=relaxed/simple;
+	bh=Y73lIijvcuSBUGcNzBJHvaGH20aPg4bzo8/CYyV5PE0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=CkE1KrsQoXQKx4bJOZf+82+5sP47ed/LuHC5JythsDocYSM4NJtRQ0hGLQVgFEWQ9SD8Sq+Ywh3VfleDuSuDdPdJAh6yHfY/zKF4qLUStTXTRThJK3r3F3euAgR6/2xNgsplkcLn8G4pXkgQOx1W23tk9i+cK9+VnySa8PT39Lc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PdcpXP+b; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TjcSxl9u"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1B59E1F00A3D
-	for <mfd@lists.linux.dev>; Mon,  7 Sep 2026 14:12:10 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PdcpXP+b"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE4341F00A3A;
+	Mon,  7 Sep 2026 17:19:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788790330;
-	bh=4j34JVFyI4cB1/rq3EimeqA7+T20tu0tgDX1NSgvu/8=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=TjcSxl9usDzSzcnm6PbtlAErVDzLwHmd9WRMJSnD1x9BZXSLSmh1YVwU98ynQlEhP
-	 PUGfZKuK43jzT4cR36HKNojmr2Ak9EVDUDVjXmUm6Uu5MVVovdwBV3ywLmP3AnvF+y
-	 JgPIiOh7CHmYNfmrynpNHh96iH/iqeapdOkCwc1cm3vS27lB2dLWnbU6Gwazs+vGFs
-	 U9YX80+dCAWjha7oVXCQP3SS72gDtdxCKw4bxE8MkaS8laqV63KqZBoV5t64NqXipo
-	 LpCKns58HEN8yEPuhCtwFnWJuEA2CibNNnEezMec684Md/bBDBYxJb5UI4QCJCqDjm
-	 y1qr2k5391j3A==
-Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-6a374bea882so5186672a12.1
-        for <mfd@lists.linux.dev>; Mon, 07 Sep 2026 07:12:10 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBzX2CVNRsYgZJmlRKv53Mb2WUhweCRTLw9KooIMlmyTpaIo+a27/LVMYLvpeY9hK8+ERqo=@lists.linux.dev
-X-Gm-Message-State: AFuF++nweoLR6NsotJ2D5OydKt9RTlnQ/WhNmTZCW2ZiKs4T3XWLvhnB
-	C2pP/XItbdGGOI4O0UzXEoVxHYGi4cbsglsi0V3iI0rMHWgm/9Deb+93g6XxRi1QnAh/IZkjkxa
-	hXd4cPk8j/+oxIHi53RaCVd1ije8qFcs=
-X-Received: by 2002:a05:6402:325a:b0:6a6:1a05:8b30 with SMTP id
- 4fb4d7f45d1cf-6a7e8d53f89mr12222359a12.6.1788790328635; Mon, 07 Sep 2026
- 07:12:08 -0700 (PDT)
+	s=k20260515; t=1788801574;
+	bh=56yH2hwXm8sg7FdNo7mHIbyUGuEHV1cDz92wT471HWI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=PdcpXP+bxy+2PxoT/M5h3I6DxPT5kT97x7/CbbBW3DaBpzBxOj+JTTEH5cEfBZYiC
+	 5Hw0BjueZwNfz3huIJDu7c+tBLHOiGTKIhm43BTTEalENWypNdKLIU93mm/gnnveYx
+	 8UiGfbx0MgAUN47wKGsvCDy6MYyrDmtED/22GPgsLwJZDT/BAzBhkllMtVfWTuUrRC
+	 Vadl2bkftyecI9q6f7pQAzbJQfuaMN5PFYmOZjXPxPI0f5iEu++VYFrCEGGrThVIO3
+	 As+IqngWhal/u6r9/jm6IQ48rxD+lGIJ5RPUhXAc5ksYmVDnymKuiXwr3r1QHaxvAj
+	 nut9oRNPUGupQ==
+Date: Mon, 7 Sep 2026 18:19:29 +0100
+From: Conor Dooley <conor@kernel.org>
+To: James Hilliard <james.hilliard1@gmail.com>
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Lee Jones <lee@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Andrew Lunn <andrew@lunn.ch>,
+	"Jagielski, Jedrzej" <jedrzej.jagielski@intel.com>,
+	Andre Przywara <andre.przywara@arm.com>,
+	Chen-Yu Tsai <wens@kernel.org>, linux-sunxi@lists.linux.dev,
+	mfd@lists.linux.dev, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: Re: [PATCH v10 1/2] dt-bindings: mfd: x-powers: Add AC200
+Message-ID: <20260907-huddling-sprain-33272820a361@spud>
+References: <20260906-submit-ac200-mfd-v10-0-f522e8dc2bd4@gmail.com>
+ <20260906-submit-ac200-mfd-v10-1-f522e8dc2bd4@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260907023827.14905-1-zhaoqunqin@163.com> <20260907023827.14905-3-zhaoqunqin@163.com>
-In-Reply-To: <20260907023827.14905-3-zhaoqunqin@163.com>
-From: Huacai Chen <chenhuacai@kernel.org>
-Date: Mon, 7 Sep 2026 22:12:01 +0800
-X-Gmail-Original-Message-ID: <CAAhV-H6M+MKs+YYB9dKofVi56wKSoY1y9KYWP9wJfjz=cK9waw@mail.gmail.com>
-X-Gm-Features: AcwNN1VHJCFS1XdyxdMPGv6MTjODmAr6tsGUPDrJQz9tSWNPnmxPSO_egWRxx8A
-Message-ID: <CAAhV-H6M+MKs+YYB9dKofVi56wKSoY1y9KYWP9wJfjz=cK9waw@mail.gmail.com>
-Subject: Re: [PATCH v6 2/2] mfd: loongson-se: Fix miscellaneous issues
-To: Qunqin Zhao <zhaoqunqin@163.com>
-Cc: lee@kernel.org, linux-kernel@vger.kernel.org, loongarch@lists.linux.dev, 
-	linux-crypto@vger.kernel.org, mfd@lists.linux.dev, 
-	Qunqin Zhao <zhaoqunqin@loongson.cn>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="r/LbfgsBnCNRr1Lf"
+Content-Disposition: inline
+In-Reply-To: <20260906-submit-ac200-mfd-v10-1-f522e8dc2bd4@gmail.com>
+
+--r/LbfgsBnCNRr1Lf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi, Qunqin,
+On Sun, Sep 06, 2026 at 04:30:46PM -0600, James Hilliard wrote:
+> The AC200 is an I2C-controlled mixed-signal companion IC containing
+> audio, video, RTC and Fast Ethernet PHY functions.
+>=20
+> Describe the parent device and its shared input clock together with the
+> audio codec and TV encoder child nodes. Keep their analog supplies on the
+> function consumers and describe the TV encoder display graph and optional
+> bandgap calibration cell.
+>=20
+> Add the shared interrupt-controller properties and interrupt numbers used
+> by the TV encoder. The Ethernet PHY is represented by a PHY package on its
+> MDIO bus, with a phandle back to this device for access to the package
+> control registers, so it does not require an MFD child node.
+>=20
+> Keep the INTB connection and TV encoder interrupt optional, including when
+> the TV encoder is enabled. Cable detection status is readable over I2C
+> without an interrupt. If a TV encoder interrupt is described, require the
+> parent interrupt domain and its upstream connection. Include examples
+> with and without INTB connected.
+>=20
+> The input clock must run at 24 or 27 MHz when the Ethernet PHY is used,
+> matching the rates encoded by its documented clock selector.
 
-On Mon, Sep 7, 2026 at 10:38=E2=80=AFAM Qunqin Zhao <zhaoqunqin@163.com> wr=
-ote:
->
-> From: Qunqin Zhao <zhaoqunqin@loongson.cn>
->
-> Address multiple historical driver issues discovered by the Sashiko
-> Automation system within the loongson_se_probe() initialization flow
-> and the driver's interrupt service routines [1].
->
-> - Add an explicit bounds check in se_irq_handler() before accessing
->   the engines array to prevent an out-of-bounds memory access.
->
-> - Switch from devm_kmalloc() to devm_kzalloc() and explicitly
->   initialize all engine completion structures in probe() to avoid a
->   kernel panic from complete() dereferencing a NULL wait head when a
->   spurious interrupt fires before child drivers call
->   loongson_se_init_engine().
->
-> - Serialize command submission with a new poll_lock spinlock and
->   protect the completion reset with the interrupt lock.  Before
->   issuing a command, mask the target interrupt, clear any pending
->   status, and reinitialize the completion under dev_lock, then
->   re-enable the interrupt after the command has been triggered.  This
->   closes the race where a stale interrupt from a previously
->   interrupted command could complete the current command's
->   completion.  The spin_lock_irq() around the 10 ms poll is dropped so
->   interrupts are not disabled for the full busy-wait.
->
-> - Fix EPROBE_DEFER handling: propagate the error directly from
->   platform_irq_count() instead of overwriting it with ENODEV so that
->   probe deferral works when the interrupt provider is not yet ready.
->
-> - Validate dmam_size from firmware against the minimum required size
->   to keep the command buffers of all engines within engine 0's data
->   region and prevent overlapping DMA buffers.
->
-> - Return the error code from devm_request_irq() instead of silently
->   continuing to prevent an indefinite hang.
->
-> - Add a loongson_se_stop() cleanup handler registered with
->   devm_add_action_or_reset() before loongson_se_init() so that a
->   failed init still stops the controller and masks all interrupts via
->   devres, preventing DMA access to freed memory.
->
-> - Zero-initialize the local controller command structures in
->   loongson_se_init() and loongson_se_init_engine() to prevent
->   uninitialized stack data from being written to device registers.
->
-> - Add the SE_CMD_STOP command definition.
->
-> Link: https://lore.kernel.org/all/20260618095949.GB1672911@google.com/ [1=
-]
-> Fixes: e551fa3159e3 ("mfd: Add support for Loongson Security Engine chip =
-controller")
-> Signed-off-by: Qunqin Zhao <zhaoqunqin@loongson.cn>
+> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+
+This should have been dropped when you merged the patches.
+Not sure why you sent v10 without waiting for a reply from me on the v9.
+
+Thanks,
+Conor.
+
+> Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 > ---
->  drivers/mfd/loongson-se.c       | 90 +++++++++++++++++++++++++++++----
->  include/linux/mfd/loongson-se.h |  1 +
->  2 files changed, 82 insertions(+), 9 deletions(-)
->
-> diff --git a/drivers/mfd/loongson-se.c b/drivers/mfd/loongson-se.c
-> index 7f552a8ee..1d332c418 100644
-> --- a/drivers/mfd/loongson-se.c
-> +++ b/drivers/mfd/loongson-se.c
-> @@ -23,6 +23,8 @@
->  struct loongson_se {
->         void __iomem *base;
->         spinlock_t dev_lock;
-> +       /* Synchronizes command submission between users of different eng=
-ines */
-> +       spinlock_t poll_lock;
-Can't we reuse dev_lock?
-
-Huacai
-
->         struct completion cmd_completion;
->
->         void *dmam_base;
-> @@ -42,7 +44,7 @@ static int loongson_se_poll(struct loongson_se *se, u32=
- int_bit)
->         u32 status;
->         int err;
->
-> -       spin_lock_irq(&se->dev_lock);
-> +       spin_lock(&se->poll_lock);
->
->         /* Notify the controller that the engine needs to be started */
->         writel(int_bit, se->base + SE_L2SINT_SET);
-> @@ -52,17 +54,48 @@ static int loongson_se_poll(struct loongson_se *se, u=
-32 int_bit)
->                                                 !(status & int_bit),
->                                                 1, LOONGSON_ENGINE_CMD_TI=
-MEOUT_US);
->
-> -       spin_unlock_irq(&se->dev_lock);
-> +       /*
-> +        * Re-enable the interrupt that loongson_se_reinit_completion() m=
-asked.
-> +        * The hardware guarantees that once the interrupt is re-enabled,=
- only
-> +        * interrupts for the command just issued can arrive, so a stale
-> +        * interrupt from a previously interrupted command can never comp=
-lete
-> +        * this command's completion.
-> +        */
-> +       writel(int_bit | readl(se->base + SE_S2LINT_EN), se->base + SE_S2=
-LINT_EN);
+>  .../devicetree/bindings/mfd/x-powers,ac200.yaml    | 231 +++++++++++++++=
+++++++
+>  MAINTAINERS                                        |   8 +
+>  include/dt-bindings/mfd/x-powers,ac200.h           |  13 ++
+>  3 files changed, 252 insertions(+)
+>=20
+> diff --git a/Documentation/devicetree/bindings/mfd/x-powers,ac200.yaml b/=
+Documentation/devicetree/bindings/mfd/x-powers,ac200.yaml
+> new file mode 100644
+> index 000000000000..0f2e6922fc4f
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/mfd/x-powers,ac200.yaml
+> @@ -0,0 +1,231 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/mfd/x-powers,ac200.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
 > +
-> +       spin_unlock(&se->poll_lock);
->
->         return err;
->  }
->
+> +title: X-Powers AC200 mixed-signal IC
+> +
+> +maintainers:
+> +  - James Hilliard <james.hilliard1@gmail.com>
+> +  - Jernej Skrabec <jernej.skrabec@gmail.com>
+> +
+> +description:
+> +  The AC200 is a mixed-signal companion IC containing audio, video, RTC =
+and
+> +  Fast Ethernet PHY functions. Its control registers are accessed over I=
+2C.
+> +
+> +properties:
+> +  compatible:
+> +    const: x-powers,ac200
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  clocks:
+> +    maxItems: 1
+> +    description:
+> +      AC200 input clock. When using the Ethernet PHY, its configured rat=
+e must
+> +      be 24 or 27 MHz, matching the rates encoded by the documented EPHY=
+ clock
+> +      selector.
+> +
+> +  interrupts:
+> +    maxItems: 1
+> +    description:
+> +      The shared open-drain INTB output for the TV encoder, Ethernet PHY=
+ and
+> +      RTC interrupts. Omit when INTB is not connected.
+> +
+> +  interrupt-controller: true
+> +
+> +  '#interrupt-cells':
+> +    const: 1
+> +    description:
+> +      The interrupt number, as defined in
+> +      include/dt-bindings/mfd/x-powers,ac200.h.
+> +
+> +  codec:
+> +    type: object
+> +    $ref: /schemas/sound/dai-common.yaml#
+> +    unevaluatedProperties: false
+> +
+> +    properties:
+> +      compatible:
+> +        const: x-powers,ac200-codec
+> +
+> +      '#sound-dai-cells':
+> +        const: 0
+> +
+> +      ac-ldoin-supply:
+> +        description: The 3.3 V supply for the audio codec LDO input.
+> +
+> +    required:
+> +      - compatible
+> +      - '#sound-dai-cells'
+> +      - ac-ldoin-supply
+> +
+> +  tv-encoder:
+> +    type: object
+> +    additionalProperties: false
+> +
+> +    properties:
+> +      compatible:
+> +        const: x-powers,ac200-tve
+> +
+> +      interrupts:
+> +        maxItems: 1
+> +        description:
+> +          Cable detection interrupt routed through the AC200 interrupt
+> +          controller. Omit when INTB is not connected. Cable detection s=
+tatus
+> +          can also be read over I2C without an interrupt.
+> +
+> +      tv-vcc-supply:
+> +        description: The 3.3 V supply for the composite-video DAC.
+> +
+> +      nvmem-cells:
+> +        maxItems: 1
+> +
+> +      nvmem-cell-names:
+> +        items:
+> +          - const: bandgap
+> +
+> +      ports:
+> +        $ref: /schemas/graph.yaml#/properties/ports
+> +
+> +        properties:
+> +          port@0:
+> +            $ref: /schemas/graph.yaml#/properties/port
+> +            description: Input from the display pipeline, carrying CCIR6=
+56.
+> +
+> +          port@1:
+> +            $ref: /schemas/graph.yaml#/properties/port
+> +            description: Output to the composite-video connector.
+> +
+> +        required:
+> +          - port@0
+> +          - port@1
+> +
+> +    required:
+> +      - compatible
+> +      - tv-vcc-supply
+> +      - ports
+> +
+> +    dependencies:
+> +      nvmem-cells: [ nvmem-cell-names ]
+> +      nvmem-cell-names: [ nvmem-cells ]
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - clocks
+> +
+> +allOf:
+> +  - if:
+> +      properties:
+> +        tv-encoder:
+> +          anyOf:
+> +            - required: [ interrupts ]
+> +            - required: [ interrupts-extended ]
+> +      required:
+> +        - tv-encoder
+> +    then:
+> +      required:
+> +        - interrupts
+> +        - interrupt-controller
+> +        - '#interrupt-cells'
+> +
+> +dependencies:
+> +  interrupt-controller: [ '#interrupt-cells', interrupts ]
+> +  '#interrupt-cells': [ interrupt-controller ]
+> +
+> +additionalProperties: false
+> +
+> +examples:
+> +  - |
+> +    #include <dt-bindings/interrupt-controller/irq.h>
+> +    #include <dt-bindings/mfd/x-powers,ac200.h>
+> +
+> +    i2c {
+> +        #address-cells =3D <1>;
+> +        #size-cells =3D <0>;
+> +
+> +        mixed-signal@10 {
+> +            compatible =3D "x-powers,ac200";
+> +            reg =3D <0x10>;
+> +            clocks =3D <&pwm 5>;
+> +            interrupt-parent =3D <&pio>;
+> +            interrupts =3D <1 20 IRQ_TYPE_LEVEL_LOW>;
+> +            interrupt-controller;
+> +            #interrupt-cells =3D <1>;
+> +
+> +            codec {
+> +                compatible =3D "x-powers,ac200-codec";
+> +                #sound-dai-cells =3D <0>;
+> +                ac-ldoin-supply =3D <&reg_aldo2>;
+> +            };
+> +
+> +            tv-encoder {
+> +                compatible =3D "x-powers,ac200-tve";
+> +                interrupts =3D <AC200_IRQ_TVE>;
+> +                tv-vcc-supply =3D <&reg_aldo2>;
+> +
+> +                ports {
+> +                    #address-cells =3D <1>;
+> +                    #size-cells =3D <0>;
+> +
+> +                    port@0 {
+> +                        reg =3D <0>;
+> +
+> +                        tve_in: endpoint {
+> +                            remote-endpoint =3D <&tcon_out_tve>;
+> +                        };
+> +                    };
+> +
+> +                    port@1 {
+> +                        reg =3D <1>;
+> +
+> +                        tve_out: endpoint {
+> +                            remote-endpoint =3D <&composite_in>;
+> +                        };
+> +                    };
+> +                };
+> +            };
+> +        };
+> +    };
+> +  - |
+> +    i2c {
+> +        #address-cells =3D <1>;
+> +        #size-cells =3D <0>;
+> +
+> +        mixed-signal@10 {
+> +            compatible =3D "x-powers,ac200";
+> +            reg =3D <0x10>;
+> +            clocks =3D <&pwm 5>;
+> +            /* INTB is not connected. */
+> +
+> +            tv-encoder {
+> +                compatible =3D "x-powers,ac200-tve";
+> +                tv-vcc-supply =3D <&reg_aldo2>;
+> +
+> +                ports {
+> +                    #address-cells =3D <1>;
+> +                    #size-cells =3D <0>;
+> +
+> +                    port@0 {
+> +                        reg =3D <0>;
+> +
+> +                        endpoint {
+> +                            remote-endpoint =3D <&tcon_out_tve>;
+> +                        };
+> +                    };
+> +
+> +                    port@1 {
+> +                        reg =3D <1>;
+> +
+> +                        endpoint {
+> +                            remote-endpoint =3D <&composite_in>;
+> +                        };
+> +                    };
+> +                };
+> +            };
+> +        };
+> +    };
+> +...
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 3a19da74d00c..1b1dd57cc419 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -29504,6 +29504,14 @@ F:	drivers/net/wwan/
+>  F:	include/linux/wwan.h
+>  F:	include/uapi/linux/wwan.h
+> =20
+> +X-POWERS AC200 DRIVERS
+> +M:	Jernej Skrabec <jernej.skrabec@gmail.com>
+> +M:	James Hilliard <james.hilliard1@gmail.com>
+> +L:	linux-sunxi@lists.linux.dev
+> +S:	Maintained
+> +F:	Documentation/devicetree/bindings/mfd/x-powers,ac200.yaml
+> +F:	include/dt-bindings/mfd/x-powers,ac200.h
+> +
+>  X-POWERS AXP288 PMIC DRIVERS
+>  M:	Hans de Goede <hansg@kernel.org>
+>  S:	Maintained
+> diff --git a/include/dt-bindings/mfd/x-powers,ac200.h b/include/dt-bindin=
+gs/mfd/x-powers,ac200.h
+> new file mode 100644
+> index 000000000000..cc59e2ab4912
+> --- /dev/null
+> +++ b/include/dt-bindings/mfd/x-powers,ac200.h
+> @@ -0,0 +1,13 @@
+> +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
 > +/*
-> + * Prepare a completion for a new command: mask the corresponding interr=
-upt,
-> + * clear any pending interrupt status, and reset the completion.  This r=
-uns
-> + * under dev_lock so that the IRQ handler cannot race with it.  The inte=
-rrupt
-> + * is re-enabled in loongson_se_poll() after the command has been issued=
-.
+> + * Interrupt numbers of the X-Powers AC200 interrupt controller.
 > + */
-> +static void loongson_se_reinit_completion(struct loongson_se *se,
-> +                                         struct completion *completion, =
-u32 int_bit)
-> +{
-> +       spin_lock_irq(&se->dev_lock);
 > +
-> +       writel(readl(se->base + SE_S2LINT_EN) & ~int_bit, se->base + SE_S=
-2LINT_EN);
+> +#ifndef _DT_BINDINGS_MFD_X_POWERS_AC200_H
+> +#define _DT_BINDINGS_MFD_X_POWERS_AC200_H
 > +
-> +       writel(int_bit, se->base + SE_S2LINT_CL);
+> +#define AC200_IRQ_TVE			0
+> +#define AC200_IRQ_EPHY			1
+> +#define AC200_IRQ_RTC			2
 > +
-> +       reinit_completion(completion);
-> +
-> +       spin_unlock_irq(&se->dev_lock);
-> +}
-> +
->  static int loongson_se_send_controller_cmd(struct loongson_se *se,
->                                            struct loongson_se_controller_=
-cmd *cmd)
->  {
->         u32 *send_cmd =3D (u32 *)cmd;
->         int err, i;
->
-> +       loongson_se_reinit_completion(se, &se->cmd_completion, SE_INT_CON=
-TROLLER);
-> +
->         for (i =3D 0; i < SE_SEND_CMD_REG_LEN; i++)
->                 writel(send_cmd[i], se->base + SE_SEND_CMD_REG + i * 4);
->
-> @@ -75,12 +108,16 @@ static int loongson_se_send_controller_cmd(struct lo=
-ongson_se *se,
->
->  int loongson_se_send_engine_cmd(struct loongson_se_engine *engine)
->  {
-> +       int err;
-> +
-> +       loongson_se_reinit_completion(engine->se, &engine->completion, BI=
-T(engine->id));
-> +
->         /*
->          * After engine initialization, the controller already knows
->          * where to obtain engine commands from. Now all we need to
->          * do is notify the controller that the engine needs to be starte=
-d.
->          */
-> -       int err =3D loongson_se_poll(engine->se, BIT(engine->id));
-> +       err =3D loongson_se_poll(engine->se, BIT(engine->id));
->
->         if (err)
->                 return err;
-> @@ -93,7 +130,7 @@ struct loongson_se_engine *loongson_se_init_engine(str=
-uct device *dev, int id)
->  {
->         struct loongson_se *se =3D dev_get_drvdata(dev);
->         struct loongson_se_engine *engine =3D &se->engines[id];
-> -       struct loongson_se_controller_cmd cmd;
-> +       struct loongson_se_controller_cmd cmd =3D {0};
->
->         engine->se =3D se;
->         engine->id =3D id;
-> @@ -155,7 +192,8 @@ static irqreturn_t se_irq_handler(int irq, void *dev_=
-id)
->         /* For engines */
->         while (int_status) {
->                 id =3D __ffs(int_status);
-> -               complete(&se->engines[id].completion);
-> +               if (id < SE_ENGINE_MAX)
-> +                       complete(&se->engines[id].completion);
->                 int_status &=3D ~BIT(id);
->                 writel(BIT(id), se->base + SE_S2LINT_CL);
->         }
-> @@ -167,7 +205,7 @@ static irqreturn_t se_irq_handler(int irq, void *dev_=
-id)
->
->  static int loongson_se_init(struct loongson_se *se, dma_addr_t addr, int=
- size)
->  {
-> -       struct loongson_se_controller_cmd cmd;
-> +       struct loongson_se_controller_cmd cmd =3D {0};
->         int err;
->
->         cmd.command_id =3D SE_CMD_START;
-> @@ -188,6 +226,17 @@ static const struct mfd_cell engines[] =3D {
->         { .name =3D "tpm_loongson" },
->  };
->
-> +static void loongson_se_stop(void *data)
-> +{
-> +       struct loongson_se *se =3D data;
-> +       struct loongson_se_controller_cmd cmd =3D {0};
-> +
-> +       cmd.command_id =3D SE_CMD_STOP;
-> +       loongson_se_send_controller_cmd(se, &cmd);
-> +
-> +       writel(0, se->base + SE_S2LINT_EN);
-> +}
-> +
->  static int loongson_se_probe(struct platform_device *pdev)
->  {
->         struct device *dev =3D &pdev->dev;
-> @@ -195,19 +244,34 @@ static int loongson_se_probe(struct platform_device=
- *pdev)
->         int nr_irq, irq, err, i;
->         dma_addr_t paddr;
->
-> -       se =3D devm_kmalloc(dev, sizeof(*se), GFP_KERNEL);
-> +       se =3D devm_kzalloc(dev, sizeof(*se), GFP_KERNEL);
->         if (!se)
->                 return -ENOMEM;
->
->         dev_set_drvdata(dev, se);
->         init_completion(&se->cmd_completion);
->         spin_lock_init(&se->dev_lock);
-> +       spin_lock_init(&se->poll_lock);
->         mutex_init(&se->engine_init_lock);
->
-> +       for (i =3D 0; i < SE_ENGINE_MAX; i++)
-> +               init_completion(&se->engines[i].completion);
-> +
->         dma_set_mask_and_coherent(dev, DMA_BIT_MASK(64));
->         if (device_property_read_u32(dev, "dmam_size", &se->dmam_size))
->                 return -ENODEV;
->
-> +       /*
-> +        * Engine 0 does not exist and its data buffer is reused as the c=
-ommand
-> +        * buffer for the other engines.  The command buffers of all engi=
-nes
-> +        * therefore must fit within engine 0's data region, i.e.
-> +        * dmam_size / SE_ENGINE_MAX >=3D SE_ENGINE_MAX * 2 * SE_ENGINE_C=
-MD_SIZE.
-> +        * Enforce this to keep each engine's data and command buffers fr=
-om
-> +        * overlapping.
-> +        */
-> +       if ((se->dmam_size / SE_ENGINE_MAX) < (SE_ENGINE_MAX * 2 * SE_ENG=
-INE_CMD_SIZE))
-> +               return -EINVAL;
-> +
->         se->dmam_base =3D dmam_alloc_coherent(dev, se->dmam_size, &paddr,=
- GFP_KERNEL);
->         if (!se->dmam_base)
->                 return -ENOMEM;
-> @@ -217,20 +281,28 @@ static int loongson_se_probe(struct platform_device=
- *pdev)
->                 return PTR_ERR(se->base);
->
->         nr_irq =3D platform_irq_count(pdev);
-> -       if (nr_irq <=3D 0)
-> +       if (nr_irq =3D=3D 0)
->                 return -ENODEV;
-> +       if (nr_irq < 0)
-> +               return nr_irq;
->
->         writel(SE_INT_ALL, se->base + SE_S2LINT_CL);
->
->         for (i =3D 0; i < nr_irq; i++) {
->                 irq =3D platform_get_irq(pdev, i);
->                 err =3D devm_request_irq(dev, irq, se_irq_handler, IRQF_S=
-HARED, "loongson-se", se);
-> -               if (err)
-> +               if (err) {
->                         dev_err(dev, "failed to request IRQ: %d\n", irq);
-> +                       return err;
-> +               }
->         }
->
->         writel(SE_INT_ALL, se->base + SE_S2LINT_EN);
->
-> +       err =3D devm_add_action_or_reset(dev, loongson_se_stop, se);
-> +       if (err)
-> +               return err;
-> +
->         err =3D loongson_se_init(se, paddr, se->dmam_size);
->         if (err)
->                 return err;
-> diff --git a/include/linux/mfd/loongson-se.h b/include/linux/mfd/loongson=
--se.h
-> index 07afa0c25..8237ccab7 100644
-> --- a/include/linux/mfd/loongson-se.h
-> +++ b/include/linux/mfd/loongson-se.h
-> @@ -9,6 +9,7 @@
->  #define SE_SEND_CMD_REG_LEN            0x8
->  /* Controller command ID */
->  #define SE_CMD_START                   0x0
-> +#define SE_CMD_STOP                    0x1
->  #define SE_CMD_SET_DMA                 0x3
->  #define SE_CMD_SET_ENGINE_CMDBUF       0x4
->
-> --
-> 2.47.2
->
+> +#endif /* _DT_BINDINGS_MFD_X_POWERS_AC200_H */
+>=20
+> --=20
+> 2.53.0
+>=20
+
+--r/LbfgsBnCNRr1Lf
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCap7yIQAKCRB4tDGHoIJi
+0tYsAP0aVNqD8wj/uzcQ1MNe6bgqGYESX0DYYvuinrWSF/GyzgEA6whkLmHjGLxn
+TDr6nZ6Ln3hfyohiItzkgLGksh1I5Qw=
+=7ay5
+-----END PGP SIGNATURE-----
+
+--r/LbfgsBnCNRr1Lf--
