@@ -1,446 +1,207 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mail-m19731104.qiye.163.com (mail-m19731104.qiye.163.com [220.197.31.104])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 663D943E06A
-	for <mfd@lists.linux.dev>; Mon,  7 Sep 2026 08:14:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 466A040BCBC
+	for <mfd@lists.linux.dev>; Mon,  7 Sep 2026 08:15:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.104
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788768886; cv=none; b=hOw0inwmeO/DeVNMXVPUbbVK056QzysbHQ155vAAllbXjBC/C5PxaT/jjB4kwhLUta5ftfOhCfS31rB+chzLHNiR85iPvkgL55O897unPtOC3LmGyCsnbNFUnGPfXtq6+m4ygMtQKkus9sfJR0ctQNUXERscmeRXfTktqxTOQLw=
+	t=1788768956; cv=none; b=oP701Hwc73eYdrFV018mZJh6ibuhi0lbxyjyQQxsOgirRLqGgW/DKK5UMOnXNkgJEaw7P1Q2AzMPurm5E+420boKL/2uBfehyaHT22mHtoowJwpAvdghDWCNjmzKVXm68BA7eEG2XduX6i6fUr8p8j5N0dCBQ44MEYSAPQad2nM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788768886; c=relaxed/simple;
-	bh=TgC/RkbhJ7vKUyUL9N0dsXA90G09kSlE8ntHvVa5CC8=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Nq+6gwrcgSceOf89rQ813EkHFjBOmJZTb56vIeOY480KIg0GT2YMunnkOLkoEyB9guKzA3Ac+iKMT/gWoYk96JT62HEZOV1/LIOD86pgaguRWn+CwqaLEgM7F+eAg8fVYg0+tyDjPFBuzz2GSh4qqY72hQCmzuvAgRxPF3u1Has=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=S2gUVCD8; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=G5hwG9Pa; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1788768956; c=relaxed/simple;
+	bh=XopvcVj4xqwi7IBJjsec+aRvrgJcTz1ao3mcsm3l+Bg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=CYIgYe0yVKhqsHd0f/C2DEsCdHkC4z0XxP6p+C/vZDDSB28gcXuXGmnz1YTKdg0BZ4H6pCu1nvCPeqrqV8pLXm8Xglit2FJfYNqro+xY+4S1w8oPWWl0c3hbcrcPxN7dT0a8VUf0Ij8E5dS62MYIKl1tSkRBa1H+JGC40OKIitk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com; spf=pass smtp.mailfrom=rock-chips.com; dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b=R9o5yi+G; arc=none smtp.client-ip=220.197.31.104
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rock-chips.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="S2gUVCD8";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="G5hwG9Pa"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68777es43903355
-	for <mfd@lists.linux.dev>; Mon, 7 Sep 2026 08:14:43 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	6n4aVS99yYRnFm88ofoKkQ5lAy+OyD29BpZxJOtYUs0=; b=S2gUVCD8btN9U+Tc
-	h3EXNpuzRHINosHnW62tGU2xaXMO5MW92qqAnkrEXwGI6iU8fE8ykbI3WNrnyI/g
-	w975sFt/13Kxy0bifDNb+2qrB+nrnCMUP9joEIXA0GPwKYLdit+IdWrMB5WdJ+AS
-	i6/lBfReGg9ARXxaZ+ZWH0fhpFKXKmWDQzSwVkNxgSU9Zh70dvwvtcmQkJ57TfOR
-	39XGrEHoMVApOQtCGmMDk9+KhrIX7F1nrZZLy7V8DFeK8M+4OIZMWKDBx07QHRw2
-	m7Ta0xResrQlIWw1X1PIZde+fBG4jKbY7ObKl3jfQgyZHT2ikpq4eespgWyA2Flq
-	pGX0UA==
-Received: from mail-oi1-f197.google.com (mail-oi1-f197.google.com [209.85.167.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ggany5ubg-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <mfd@lists.linux.dev>; Mon, 07 Sep 2026 08:14:42 +0000 (GMT)
-Received: by mail-oi1-f197.google.com with SMTP id 5614622812f47-4ad778bacbeso5088235b6e.1
-        for <mfd@lists.linux.dev>; Mon, 07 Sep 2026 01:14:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1788768881; x=1789373681; darn=lists.linux.dev;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=6n4aVS99yYRnFm88ofoKkQ5lAy+OyD29BpZxJOtYUs0=;
-        b=G5hwG9PaDeJDJdXvchmL2/w4TVUtVwif+XGQx4MYnPKY1h4hNn9RCDYBGQOdRIO5P9
-         C87Lyu/AiP5N8cEYEbzXFDm06hmdQCqzYctyVE88m/JmufBsst4qvlcSSSTdTER/zqAR
-         gdafCxyJZvhGhx0d6Ecf+S31c0rNmdvStkkfHkniZk/WCn7OLIb154mluE7JOPs+dnq2
-         3DABTbiLNN34v1l/1KVEZpQNBeQQRpVfJRO3ryN7i0703ES97WQ0hE2DkFvp9VVqhRQ9
-         HwYjlTZxEN8edcG2sCec6PASX/eyZHAmsZn6dR3IuKuLqwy9KtC2YcY5ayXSiHhsCD7R
-         VnTA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788768881; x=1789373681;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=6n4aVS99yYRnFm88ofoKkQ5lAy+OyD29BpZxJOtYUs0=;
-        b=LsvHrwtp3Nbty9hZvkblIM9h1qDuuzBG616a0e2zqoUzULHBel0oYJM7IXrUH3U+fC
-         syXvIU9co2lB/0xvskLiev/lunJFCu8BWK8G286bINnrk5HzdrbNCyfUVDLKFFeiU5z0
-         jkR4VtgzMTvXbS16qAPsqc0o8mHdqd7/Y9tnqbzMHkHcdOr63Xcon1KgwncsrIROSMvZ
-         Ox3vG2f6TkszqiLI+1iZQSrDnDDk/5o3Q5JUqrs1Bv4D9cJGMAQLPIYvHSHHwBt+ENsC
-         ES0KYOmSbY3ZMzJc9ON24kB+NKbw9Mv9dnTr4gqSjMz0drVUaZTvw84SLwiK3/GGEwox
-         Z/Dw==
-X-Forwarded-Encrypted: i=1; AKwUvBxjy6rsnhQNSEw5xRm+Uc0z/mQ8MG361bBmzzQfvm/ouD1Aq2i7mjgN7fEOWa240BQjF9A=@lists.linux.dev
-X-Gm-Message-State: AFuF++lTw9UvNF6sjtpsK0U0RnB8amGG6she2IcDasZ5rDkBx/ZEdqUu
-	7y8Hk6TOgVjvBeyDq/LYLNnVeqii2BqGxhiLv6ECRezH8rdENWnGqtyn2tdsKR/g1aq6t1Ldztm
-	lZwhEeT48QWCRC9FDZkQHbvnvJWq7c0j5zq+Vte7qUFLnVnBvI2rBEYQ=
-X-Gm-Gg: AYBFou2sITssLaIzG3adPzwtGxJt5Wn/Twvt0YEtCOTtFiJZmJ+/hVhzUuB6rIauTbt
-	Dl9aQpL5g9j5Gfpw2zkBlM/7O68NSO6ewyIIhYasbrv/b4/ZyfYrZV7AbnB5VMerjfj/H1S50r0
-	Skbr2q6BOAB+wCyjyMGRmAOCSZHgUFff7QeD9tOWUaI8qFpe9sAl/FOPf1QuSQBvKtv7R6T69kW
-	GhATdUKC6SIv6jrrTZqACi4XlAQEL70TertgmCB37YGTJ0DDC/0g8o7zBGzPdNFpBliNxUxK/vs
-	EakP4YpYPMHheZ02/geKJ1rFjd4+aAwQAcjvwqHGZfVZCshwPQJsHjFEfBZgxQC5kEjzSkWuZ4S
-	966CGfRbEBbtr0BJ2rA/uAQ4Lbu1L9Ng=
-X-Received: by 2002:a05:6820:4c16:b0:6b7:83d6:2933 with SMTP id 006d021491bc7-6b783d62fb5mr9684821eaf.54.1788768880891;
-        Mon, 07 Sep 2026 01:14:40 -0700 (PDT)
-X-Received: by 2002:a05:6820:4c16:b0:6b7:83d6:2933 with SMTP id 006d021491bc7-6b783d62fb5mr9684786eaf.54.1788768880464;
-        Mon, 07 Sep 2026 01:14:40 -0700 (PDT)
-Received: from hu-nihalkum-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-143243767e1sm21724220c88.6.2026.09.07.01.14.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Sep 2026 01:14:40 -0700 (PDT)
-From: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-Date: Mon, 07 Sep 2026 13:43:42 +0530
-Subject: [PATCH v2 6/6] regulator: qcom-pm8008-regulator: Add support for
- PM8010 PMIC
+	dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b="R9o5yi+G"
+Received: from [172.16.12.90] (unknown [61.154.14.86])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 4ccabc703;
+	Mon, 7 Sep 2026 16:10:29 +0800 (GMT+08:00)
+Message-ID: <745c232e-d2ff-4d32-b997-55d4d37a39fa@rock-chips.com>
+Date: Mon, 7 Sep 2026 16:10:28 +0800
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260907-glymur_camss-v2-6-75f7982dc983@oss.qualcomm.com>
-References: <20260907-glymur_camss-v2-0-75f7982dc983@oss.qualcomm.com>
-In-Reply-To: <20260907-glymur_camss-v2-0-75f7982dc983@oss.qualcomm.com>
-To: Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>, Lee Jones <lee@kernel.org>,
-        Guru Das Srinagesh <linux@gurudas.dev>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-        linux-media@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, mfd@lists.linux.dev,
-        Suresh Vankadara <svankada@qti.qualcomm.com>,
-        Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
-        Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
-        Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
-        Dhruvin Rajpura <drajpura@qti.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788768826; l=10721;
- i=nihal.gupta@oss.qualcomm.com; s=20260608; h=from:subject:message-id;
- bh=yixS+paItpbPG3dnBLS1VUcjAcCmN8R25JH8onqgK0M=;
- b=AshxnNJuhZqt/olXhrP/gDHUkv4390f/hueQU2nS0RTBb+OYBxulCEwtpLNI/q7lr/RKkziFm
- vQDe1xFl4/lBXtix2UFTzuaMZtkbCKguXrjMj36aKBp4GG65X++6dtG
-X-Developer-Key: i=nihal.gupta@oss.qualcomm.com; a=ed25519;
- pk=DIbyFMNwqU/iMvU/0pCQp2wmRVgtHFBT3PcSu+A+Ncw=
-X-Authority-Analysis: v=2.4 cv=X45i7mTe c=1 sm=1 tr=0 ts=6a9e7272 cx=c_pps
- a=WJcna6AvsNCxL/DJwPP1KA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=AkqyrZD3AtcrQouKZzQA:9 a=QEXdDO2ut3YA:10
- a=_Y9Zt4tPzoBS9L09Snn2:22
-X-Proofpoint-ORIG-GUID: TUNQlUKlp6lQv3kg9LI7JSushEoUsJXc
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDA4OCBTYWx0ZWRfX4cQyZjHkicPP
- gDkoTf+dVuMt/sOkZ1BUf/FGNw+qluaI2m/k9GSN4LxBpJ5hjyzyi7muPFRY1RHHkWvS3htYpfw
- N8yOnopOf17e8xc5iq26UMej/U3DdF7EOZ3Ga/OTRRWYfrjsXjcdmT9QPdYb5LYAJopOAOLa0wd
- C6TiFm4Q+kjTiMP/WqCO+cC32GR+K755cq3wONf94D+NIHe/giq3lUSXpo2TNSHI8XC70vp/z/g
- X2uxIoWuWYXrEnJAlwJATSRSFS5t8V39Bn7/t6FkLSePcuMGwK7S7AprdE9IJgg3RgJvyDptPcY
- 7DIDF/pXVq/SAIQQH/s2u56iMI/5Up17Mzo8JuVgqIFGNf69eKekA8nNwnTymtTtRlETOTRc1Ls
- Cx+K6ILq5BFPbWO1OTKe+J+IG4DuMaLASRRZ60fvT+VMWQ4RhL22HiNc6GdPGe1GKUjaEQK1Mlu
- dy0wNv6GOQQy8pf2N/A==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDA4OCBTYWx0ZWRfX5/BQa53LaLNg
- RjLRFzuBxTca5pXi0DW60ibXrHCHNQbzRKNaJ/W9xzgWNWIuLVDQAVyy9903reavxwq1tx/ZFcw
- NfIOkN6mNDWIs9IqVOtf9qWvYnaKdHw=
-X-Proofpoint-GUID: TUNQlUKlp6lQv3kg9LI7JSushEoUsJXc
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-07_02,2026-09-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 suspectscore=0 clxscore=1015 adultscore=0
- impostorscore=0 malwarescore=0 lowpriorityscore=0 spamscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070088
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 13/15] phy: starfive: Add jh7110-inno-hdmi-phy driver
+To: Icenowy Zheng <uwu@icenowy.me>, Maud Spierings
+ <maud_spierings@murena.io>, Dominique Belhachemi <domibel@debian.org>
+Cc: m.wilczynski@samsung.com, Laurent.pinchart@ideasonboard.com,
+ airlied@gmail.com, alex@ghiti.fr, andrzej.hajda@intel.com,
+ andy.yan@rock-chips.com, andyshrk@163.com, aou@eecs.berkeley.edu,
+ bmasney@redhat.com, conor+dt@kernel.org, conor@kernel.org,
+ devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ hal.feng@starfivetech.com, heiko@sntech.de, hello@big-grey.co.uk,
+ jernej.skrabec@gmail.com, jonas@kwiboo.se, kernel@esmil.dk,
+ krzk+dt@kernel.org, lee@kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-phy@lists.infradead.org, linux-riscv@lists.infradead.org,
+ linux-rockchip@lists.infradead.org, luca.ceresoli@bootlin.com,
+ m.szyprowski@samsung.com, maarten.lankhorst@linux.intel.com,
+ maudspierings@gocontroll.com, mfd@lists.linux.dev, mripard@kernel.org,
+ mturquette@baylibre.com, neil.armstrong@linaro.org, p.zabel@pengutronix.de,
+ palmer@dabbelt.com, pjw@kernel.org, rfoss@kernel.org, robh@kernel.org,
+ sboyd@kernel.org, simona@ffwll.ch, tzimmermann@suse.de, vkoul@kernel.org
+References: <20260828-jh7110-clean-send-v2-13-331680c8b9d1@samsung.com>
+ <0ccb4168-ff88-459c-972d-3c091c155db2@murena.io>
+ <e780ecb8-918f-4816-99c8-b69b10b25a18@murena.io>
+ <CAAvaLCwvVUddS14MPx0FHdnp+QeZ99+ox17pXt2hSWPTCFcHtw@mail.gmail.com>
+ <cb0884b3-c9be-4cfd-ba43-27add3821ddd@murena.io>
+ <6a5f8c11a092cef83bae8d9ea0100c2fc133a514.camel@icenowy.me>
+ <CAAvaLCxMntrTbTQ9VNu4H_6LA30TRAqi7mCpn+x3hbTG9WqERA@mail.gmail.com>
+ <057d97bd4b63fa4445dd86548f2ecdcbe9c3b1b6.camel@icenowy.me>
+ <f68d95d0-f918-4dee-9443-38c64247b71a@murena.io>
+ <72f82ae67eca7b5a594d86852c8b0dafb7d02c4c.camel@icenowy.me>
+Content-Language: en-US
+From: Chaoyi Chen <chaoyi.chen@rock-chips.com>
+In-Reply-To: <72f82ae67eca7b5a594d86852c8b0dafb7d02c4c.camel@icenowy.me>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-HM-Tid: 0aa07aeb328603a7kunma6aa1bc239fa0d
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkaGkIdVk9ITEtLGh4eHU5PHlYVFA
+	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlNSlVKTk9VSk9VQ01ZV1kWGg8SFR0UWUFZT0tIVUpLSE
+	pKQkxVSktLVUpCS0tZBg++
+DKIM-Signature: a=rsa-sha256;
+	b=R9o5yi+G+F8zZyawx3whCVV/olFPrerxkAmSHzyaoP+qbbbFH+YbmhSzuasWco4g2ROixc1HaVg3Nk57qQfVWoyw147x+rkDDlxVI/S0hnMtjX9juxpUqfyv6S//I3qqIuaSa56RUA+YvW7x4fEuPAtkPm8AgKLXPFAQYdGtlmY=; c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+	bh=PAs6cpRutX6Xy3xUaS1PXdj4b2ODwk4xwVldcIzzW7w=;
+	h=date:mime-version:subject:message-id:from;
 
-From: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+Hello Icenowy, Maud, Dominique,
 
-The PM8010 is a variant of the PM8008 PMIC with additional LDO
-regulators, a wider voltage range on some LDOs, and LPM/NPM mode
-support. Add PM8010 regulator data tables and voltage ranges, and
-implement set_mode()/get_mode() for switching between LPM and NPM.
+On 9/7/2026 2:55 PM, Icenowy Zheng wrote:
+> 在 2026-09-07一的 08:02 +0200，Maud Spierings写道：
+>> Hi Dominique and Icenowy,
+>>
+>> On 9/7/26 06:01, Icenowy Zheng wrote:
+>>> 在 2026-09-06日的 17:16 -0400，Dominique Belhachemi写道：
+>>>> On Sun, Sep 6, 2026 at 11:19 AM Icenowy Zheng <uwu@icenowy.me>
+>>>> wrote:
+>>>>>
+>>>>> 在 2026-09-06日的 16:59 +0200，Maud Spierings写道：
+>>>>>> On 9/6/26 07:39, Dominique Belhachemi wrote:
+>>>>>>> On Sun, Aug 30, 2026 at 10:17 AM Maud Spierings
+>>>>>>> <
+>>>>>>> maud_spierings@murena.io <mailto:maud_spierings@murena.io>>
+>>>>>>> wrote:
+>>>>>>>
+>>>>>>>      I was still having some glitching happening on the
+>>>>>>> display,
+>>>>>>> but
+>>>>>>> I've
+>>>>>>>      found the way to fix that, the question is what is
+>>>>>>> actually
+>>>>>>>      happening here.
+>>>>>>>
+>>>>>>>          0x29590020 <- 0x00000005
+>>>>>>>      This one I have no idea, it is 0x00000009 with this
+>>>>>>> patch
+>>>>>>> series but
+>>>>>>>      with the vendor kernel I get the value above. When I
+>>>>>>> hook
+>>>>>>> up my
+>>>>>>>      external
+>>>>>>>      display (regular 1440p) this becomes 0x0000000D on the
+>>>>>>> vendor
+>>>>>>> kernel.
+>>>>>>>
+>>>>>>>      But I can't find this register being written to
+>>>>>>> anywhere
+>>>>>>> there?
+>>>>>>>
+>>>>>>>
+>>>>>>> Maybe this needs to be swapped?
+>>>>>>>
+>>>>>>> drivers/gpu/drm/bridge/inno-hdmi.c
+>>>>>>>     -#define v_HSYNC_POLARITY(n)          ((n) << 3)
+>>>>>>>     -#define v_VSYNC_POLARITY(n)          ((n) << 2)
+>>>>>>>     +#define v_HSYNC_POLARITY(n)          ((n) << 2)
+>>>>>>>     +#define v_VSYNC_POLARITY(n)          ((n) << 3)
+>>>>>
+>>>>> Very weirdly, the original definition here matches current
+>>>>> mainline
+>>>>> inno-hdmi.c, but the changed definition matches JH7110 vendor
+>>>>> inno_hdmi.h [1].
+>>>>>
+>>>>
+>>>> The vendor code is correct and matches the RK3128 TRM.
+>>>
+>>> Thanks for the tips on documentation, and I verified this.
+>>>
+>>> It seems that Rockchip people made this always wrong, even with
+>>> their
+>>> pre-DRM display driver... [1]
+>>>
+>>> BTW I checked the Innosilicon dGPU driver code, and its
+>>> g3_ne_hdmi.h
+>>> source file also contains the definition of BIT(3) as VSYNC. (It's
+>>> quite weird that most logic of that driver is in some .o_shipped
+>>> blob,
+>>> but fortunately the g3 logic might be too new to be closed down)
+>>>
+>>> Thanks,
+>>> Icenowy
+>>>
+>>> [1]
+>>> https://github.com/rockchip-linux/kernel/blob/release-4.4/drivers/video/rockchip/hdmi/rockchip-hdmiv1/rockchip_hdmiv1_hw.h#L161
+>>>
+>>>>
+>>>> HDMI_reg08
+>>>>      Bit  Attr  Reset  Description
+>>>>      3    RW    0x0    vs_polarity   VSYNC polarity   1'b0:
+>>>> Negative
+>>>> 1'b1: Positive
+>>>>      2    RW    0x0    hs_polarity   HSYNC polarity   1'b0:
+>>>> Negative
+>>>> 1'b1: Positive
+>>>>
+>>>> Nobody noticed this so far because in 720p/1080p both polarities
+>>>> are
+>>>> positive, but Maud's 3:2 panel has differing H/V polarity.
+>>>>
+>>>> Best
+>>>> -Dominique
+>>
+>> This also solves the devmem behaviour I saw, or well, doesn't realy 
+>> explain it but does show what is actually happening. As Icenowy noted
+>> (maybe that was on telegram only?) the inno-hdmi regs are 8bit
+>> instead 
+>> of 32 bit.
+>>
+>> What is actually happening is:
+>>
+>> devmem 0x29590000 b reads 0x29590000 as expected
+>> but
+>> devmem 0x29590004 b reads 0x29590001
+>> devmem 0x29590008 b reads 0x29590002
+>> ....
+>> devmem 0x29590020 b reads 0x29590008
+>>
+>> For some reason the addressing is weird?
+>>
+>> With this change, the assigned clock change and removing the 
+>> v_REG_CLK_INV | v_REG_CLK_SOURCE_SYS write to HDMI_SYS_CTRL, the
+>> display 
+>> comes up from the start as it should!
+> 
+> Well I checked the RK3128 TRM for these two bits, and their field
+> descriptions are -- "reserved".
+> 
+> What can I react...
+> 
 
-Detect PM8010 via the parent I2C client's compatible string and
-select the matching regulator_ops and register data accordingly.
+You can take a look at the TRM of the RK61X[0]. 
+I think it contains the register descriptions you're looking for :)
 
-Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Signed-off-by: Dhruvin Rajpura <drajpura@qti.qualcomm.com>
-Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
----
- drivers/regulator/qcom-pm8008-regulator.c | 184 ++++++++++++++++++++++++++----
- 1 file changed, 159 insertions(+), 25 deletions(-)
-
-diff --git a/drivers/regulator/qcom-pm8008-regulator.c b/drivers/regulator/qcom-pm8008-regulator.c
-index 9c9b8be2e15a499fa61a05cc9650338d0bbcd122..87807d5d9e8fdbbe422202156bcbf1d0e3fbc155 100644
---- a/drivers/regulator/qcom-pm8008-regulator.c
-+++ b/drivers/regulator/qcom-pm8008-regulator.c
-@@ -8,6 +8,7 @@
- #include <linux/array_size.h>
- #include <linux/bits.h>
- #include <linux/device.h>
-+#include <linux/i2c.h>
- #include <linux/math.h>
- #include <linux/module.h>
- #include <linux/of.h>
-@@ -24,9 +25,19 @@
- 
- #define LDO_VSET_LB_REG			0x40
- 
-+#define LDO_MODE_CTL1_REG		0x45
-+#define MODE_PRIMARY_MASK		GENMASK(2, 0)
-+#define LDO_MODE_NPM			7
-+#define LDO_MODE_LPM			4
-+
- #define LDO_ENABLE_REG			0x46
- #define ENABLE_BIT			BIT(7)
- 
-+#define LDO_STATUS1_REG		0x08
-+#define MODE_STATE_MASK		GENMASK(1, 0)
-+#define MODE_STATE_NPM			3
-+#define MODE_STATE_LPM			2
-+
- struct pm8008_regulator {
- 	struct regmap		*regmap;
- 	struct regulator_desc	desc;
-@@ -39,24 +50,59 @@ struct pm8008_regulator_data {
- 	unsigned int			base;
- 	int				min_dropout_uV;
- 	const struct linear_range	*voltage_range;
-+	int				n_linear_ranges;
-+};
-+
-+struct pm8008_match_data {
-+	const bool has_stepper_ctl_reg;
-+	const struct pm8008_regulator_data *regulator_data;
-+	const int num_regulators;
- };
- 
--static const struct linear_range nldo_ranges[] = {
-+static const struct linear_range pm8008_nldo_ranges[] = {
- 	REGULATOR_LINEAR_RANGE(528000, 0, 122, 8000),
- };
- 
--static const struct linear_range pldo_ranges[] = {
-+static const struct linear_range pm8008_pldo_ranges[] = {
- 	REGULATOR_LINEAR_RANGE(1504000, 0, 237, 8000),
- };
- 
-+static const struct linear_range pm8010_nldo_ranges[] = {
-+	REGULATOR_LINEAR_RANGE(528000, 0, 127, 8000),
-+};
-+
-+static const struct linear_range pm8010_pldo_ranges[] = {
-+	REGULATOR_LINEAR_RANGE(1504000, 0, 255, 8000),
-+};
-+
-+static const struct linear_range pm8010_pldo_lv_ranges[] = {
-+	REGULATOR_LINEAR_RANGE(1800000, 0,  2,  200000),
-+	REGULATOR_LINEAR_RANGE(2608000, 3,  28, 16000),
-+	REGULATOR_LINEAR_RANGE(3104000, 29, 30, 96000),
-+	REGULATOR_LINEAR_RANGE(3312000, 31, 31, 0),
-+};
-+
-+#define PM8008_REGULATOR(_name, _supply, _base, _dropout, _range)	\
-+	{ _name, _supply, _base, _dropout, _range, ARRAY_SIZE(_range) }
-+
- static const struct pm8008_regulator_data pm8008_reg_data[] = {
--	{ "ldo1", "vdd-l1-l2", 0x4000, 225000, nldo_ranges, },
--	{ "ldo2", "vdd-l1-l2", 0x4100, 225000, nldo_ranges, },
--	{ "ldo3", "vdd-l3-l4", 0x4200, 300000, pldo_ranges, },
--	{ "ldo4", "vdd-l3-l4", 0x4300, 300000, pldo_ranges, },
--	{ "ldo5", "vdd-l5",    0x4400, 200000, pldo_ranges, },
--	{ "ldo6", "vdd-l6",    0x4500, 200000, pldo_ranges, },
--	{ "ldo7", "vdd-l7",    0x4600, 200000, pldo_ranges, },
-+	PM8008_REGULATOR("ldo1", "vdd-l1-l2", 0x4000, 225000, pm8008_nldo_ranges),
-+	PM8008_REGULATOR("ldo2", "vdd-l1-l2", 0x4100, 225000, pm8008_nldo_ranges),
-+	PM8008_REGULATOR("ldo3", "vdd-l3-l4", 0x4200, 300000, pm8008_pldo_ranges),
-+	PM8008_REGULATOR("ldo4", "vdd-l3-l4", 0x4300, 300000, pm8008_pldo_ranges),
-+	PM8008_REGULATOR("ldo5", "vdd-l5",    0x4400, 200000, pm8008_pldo_ranges),
-+	PM8008_REGULATOR("ldo6", "vdd-l6",    0x4500, 200000, pm8008_pldo_ranges),
-+	PM8008_REGULATOR("ldo7", "vdd-l7",    0x4600, 200000, pm8008_pldo_ranges),
-+};
-+
-+static const struct pm8008_regulator_data pm8010_reg_data[] = {
-+	PM8008_REGULATOR("ldo1", "vdd-l1-l2", 0x4000, 172000, pm8010_nldo_ranges),
-+	PM8008_REGULATOR("ldo2", "vdd-l1-l2", 0x4100, 172000, pm8010_nldo_ranges),
-+	PM8008_REGULATOR("ldo3", "vdd-l3-l4", 0x4200, 80000, pm8010_pldo_lv_ranges),
-+	PM8008_REGULATOR("ldo4", "vdd-l3-l4", 0x4300, 80000, pm8010_pldo_lv_ranges),
-+	PM8008_REGULATOR("ldo5", "vdd-l5",    0x4400, 296000, pm8010_pldo_ranges),
-+	PM8008_REGULATOR("ldo6", "vdd-l6",    0x4500, 80000, pm8010_pldo_lv_ranges),
-+	PM8008_REGULATOR("ldo7", "vdd-l7",    0x4600, 296000, pm8010_pldo_ranges),
- };
- 
- static int pm8008_regulator_set_voltage_sel(struct regulator_dev *rdev, unsigned int sel)
-@@ -99,8 +145,53 @@ static int pm8008_regulator_get_voltage_sel(struct regulator_dev *rdev)
- 	return regulator_map_voltage_linear_range(rdev, uV, INT_MAX);
- }
- 
-+static int pm8010_regulator_set_mode(struct regulator_dev *rdev, unsigned int mode)
-+{
-+	struct pm8008_regulator *preg = rdev_get_drvdata(rdev);
-+	unsigned int val;
-+
-+	switch (mode) {
-+	case REGULATOR_MODE_NORMAL:
-+		val = LDO_MODE_NPM;
-+		break;
-+	case REGULATOR_MODE_IDLE:
-+		val = LDO_MODE_LPM;
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	return regmap_update_bits(preg->regmap, preg->base + LDO_MODE_CTL1_REG,
-+				   MODE_PRIMARY_MASK, val);
-+}
-+
-+static unsigned int pm8010_regulator_get_mode(struct regulator_dev *rdev)
-+{
-+	struct pm8008_regulator *preg = rdev_get_drvdata(rdev);
-+	unsigned int val;
-+	int ret;
-+
-+	ret = regmap_read(preg->regmap, preg->base + LDO_STATUS1_REG, &val);
-+	if (ret < 0)
-+		return REGULATOR_MODE_INVALID;
-+
-+	return (val & MODE_STATE_MASK) == MODE_STATE_NPM ?
-+		REGULATOR_MODE_NORMAL : REGULATOR_MODE_IDLE;
-+}
-+
-+static unsigned int pm8010_regulator_of_map_mode(unsigned int mode)
-+{
-+	switch (mode) {
-+	case REGULATOR_MODE_NORMAL:
-+	case REGULATOR_MODE_IDLE:
-+		return mode;
-+	default:
-+		return REGULATOR_MODE_INVALID;
-+	}
-+}
-+
- static const struct regulator_ops pm8008_regulator_ops = {
--	.list_voltage		= regulator_list_voltage_linear,
-+	.list_voltage		= regulator_list_voltage_linear_range,
- 	.set_voltage_sel	= pm8008_regulator_set_voltage_sel,
- 	.get_voltage_sel	= pm8008_regulator_get_voltage_sel,
- 	.enable			= regulator_enable_regmap,
-@@ -108,8 +199,20 @@ static const struct regulator_ops pm8008_regulator_ops = {
- 	.is_enabled		= regulator_is_enabled_regmap,
- };
- 
-+static const struct regulator_ops pm8010_regulator_ops = {
-+	.list_voltage		= regulator_list_voltage_linear_range,
-+	.set_voltage_sel	= pm8008_regulator_set_voltage_sel,
-+	.get_voltage_sel	= pm8008_regulator_get_voltage_sel,
-+	.enable			= regulator_enable_regmap,
-+	.disable		= regulator_disable_regmap,
-+	.is_enabled		= regulator_is_enabled_regmap,
-+	.set_mode		= pm8010_regulator_set_mode,
-+	.get_mode		= pm8010_regulator_get_mode,
-+};
-+
- static int pm8008_regulator_probe(struct platform_device *pdev)
- {
-+	const struct pm8008_match_data *match_data;
- 	const struct pm8008_regulator_data *data;
- 	struct regulator_config config = {};
- 	struct device *dev = &pdev->dev;
-@@ -117,15 +220,28 @@ static int pm8008_regulator_probe(struct platform_device *pdev)
- 	struct regulator_desc *desc;
- 	struct regulator_dev *rdev;
- 	struct regmap *regmap;
-+	const struct platform_device_id *id;
- 	unsigned int val;
-+	bool is_pm8010;
- 	int ret, i;
- 
-+	id = platform_get_device_id(pdev);
-+	if (!id)
-+		return dev_err_probe(dev, -ENODEV, "Missing platform device id\n");
-+
-+	match_data = (const struct pm8008_match_data *)id->driver_data;
-+	if (!match_data)
-+		return dev_err_probe(dev, -ENODATA, "Missing driver match data\n");
-+
- 	regmap = dev_get_regmap(dev->parent, "secondary");
- 	if (!regmap)
- 		return -EINVAL;
- 
--	for (i = 0; i < ARRAY_SIZE(pm8008_reg_data); i++) {
--		data = &pm8008_reg_data[i];
-+	is_pm8010 = of_device_is_compatible(to_i2c_client(dev->parent)->dev.of_node,
-+					    "qcom,pm8010-i2c");
-+
-+	for (i = 0; i < match_data->num_regulators; i++) {
-+		data = &match_data->regulator_data[i];
- 
- 		preg = devm_kzalloc(dev, sizeof(*preg), GFP_KERNEL);
- 		if (!preg)
-@@ -140,23 +256,28 @@ static int pm8008_regulator_probe(struct platform_device *pdev)
- 		desc->supply_name = data->supply_name;
- 		desc->of_match = data->name;
- 		desc->regulators_node = of_match_ptr("regulators");
--		desc->ops = &pm8008_regulator_ops;
-+		desc->ops = is_pm8010 ? &pm8010_regulator_ops : &pm8008_regulator_ops;
-+		if (is_pm8010)
-+			desc->of_map_mode = pm8010_regulator_of_map_mode;
- 		desc->type = REGULATOR_VOLTAGE;
- 		desc->owner = THIS_MODULE;
- 
- 		desc->linear_ranges = data->voltage_range;
--		desc->n_linear_ranges = 1;
--		desc->uV_step = desc->linear_ranges[0].step;
--		desc->min_uV = desc->linear_ranges[0].min;
--		desc->n_voltages = linear_range_values_in_range(&desc->linear_ranges[0]);
--
--		ret = regmap_read(regmap, preg->base + LDO_STEPPER_CTL_REG, &val);
--		if (ret < 0) {
--			dev_err(dev, "failed to read step rate: %d\n", ret);
--			return ret;
-+		desc->n_linear_ranges = data->n_linear_ranges;
-+		desc->n_voltages = linear_range_values_in_range_array(desc->linear_ranges,
-+						      desc->n_linear_ranges);
-+
-+		if (match_data->has_stepper_ctl_reg) {
-+			ret = regmap_read(regmap, preg->base + LDO_STEPPER_CTL_REG, &val);
-+			if (ret < 0) {
-+				dev_err(dev, "failed to read step rate: %d\n", ret);
-+				return ret;
-+			}
-+			val &= STEP_RATE_MASK;
-+			desc->ramp_delay = DEFAULT_VOLTAGE_STEPPER_RATE >> val;
-+		} else {
-+			desc->ramp_delay = DEFAULT_VOLTAGE_STEPPER_RATE;
- 		}
--		val &= STEP_RATE_MASK;
--		desc->ramp_delay = DEFAULT_VOLTAGE_STEPPER_RATE >> val;
- 
- 		desc->min_dropout_uV = data->min_dropout_uV;
- 
-@@ -179,8 +300,21 @@ static int pm8008_regulator_probe(struct platform_device *pdev)
- 	return 0;
- }
- 
-+static const struct pm8008_match_data pm8008_data = {
-+	.has_stepper_ctl_reg = true,
-+	.regulator_data = pm8008_reg_data,
-+	.num_regulators = ARRAY_SIZE(pm8008_reg_data),
-+};
-+
-+static const struct pm8008_match_data pm8010_data = {
-+	.has_stepper_ctl_reg = false,
-+	.regulator_data = pm8010_reg_data,
-+	.num_regulators = ARRAY_SIZE(pm8010_reg_data),
-+};
-+
- static const struct platform_device_id pm8008_regulator_id_table[] = {
--	{ .name = "pm8008-regulator" },
-+	{ .name = "pm8008-regulator", .driver_data = (kernel_ulong_t)&pm8008_data },
-+	{ .name = "pm8010-regulator", .driver_data = (kernel_ulong_t)&pm8010_data },
- 	{ }
- };
- MODULE_DEVICE_TABLE(platform, pm8008_regulator_id_table);
+[0]: https://dl.radxa.com/rock/docs/hw/ds/Rockchip%20RK61X%20TRM%20V1.3.1.pdf
 
 -- 
-2.34.1
+Best, 
+Chaoyi
 
