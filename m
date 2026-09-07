@@ -1,116 +1,122 @@
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.14])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8F4530BB8A;
-	Mon,  7 Sep 2026 04:21:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55581377ED7;
+	Mon,  7 Sep 2026 04:46:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.14
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788754887; cv=none; b=hOSmWX7seqbumNXR9YlpyV/aCFrh+2+yz7ZecQnCUFWcmLNfPN/C45hh6w4FjZhTAtWAEItPmOGsLeaSuJcPBHhRSUbuw+bb0YO3ekIqyeKszV/EHZ+LLcFDfEnuXTdlA0PHjc2FcalPvfLTPCVTfpnhhJg0ZYDHKotTUZMtWUs=
+	t=1788756364; cv=none; b=cqbttQqlrk3NSBIEOkSI+deHCgl1B6tw/4RXtM2HhHstH8uZ24BF/MvH9r3feu4+CtI2EbYpJv0wErdd9afOXniSk+jeBB9p/Es02x6SFznbqNUzZZRnRoGNTyTqoQllgbXSZRQvE7h8EQhyTm7U8EUTVOn7BmJrQCcvgyXOAyc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788754887; c=relaxed/simple;
-	bh=2cfVrGf/6fhWtnLXtJ4VBUjuiuAjaAyY8FRSTVbYPg4=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
-	 MIME-Version:Message-ID; b=lVYLnMFvsa+THwCpUGbAemFtAfMUSePFL+QfZtJw2lzavzSRfW1KWTXRHcYlwQGHKFx0ECdIMjWaKTzmvZ/alW0Eoy40jpR+11ptF3B0jJ0ZYFY+puhlDb0AwCCttE3DLq27v7XOdF3ZMoLEjqhQEA8IPlnn/xG3MgKiW26yXE4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=Qkjd8pGr; arc=none smtp.client-ip=117.135.210.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1788756364; c=relaxed/simple;
+	bh=MvbHHEL5/a5EqTe+dAnJ+mIvKAY5vNH6ijYKQPM4nCI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=O26aZYeiZliaELG02UV22tQOlQrwFLVeLep6w1L/VCMePyR8lU1rY3122TGErry/246AgXoT3QhiQd0iqDORgkwzXjQlEiSxFBI0DCAewEyYrrO4h6eTfIhBhnP1lQ8gg+eSzfEDkRO4u8ddd10zwCjgpWI1XdhEDf7xfipgD3A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=UplNlsUb; arc=none smtp.client-ip=198.175.65.14
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="Qkjd8pGr"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
-	Message-ID; bh=2cfVrGf/6fhWtnLXtJ4VBUjuiuAjaAyY8FRSTVbYPg4=; b=Q
-	kjd8pGridspGjjfoRVnbq/cHltdZmFKxzqz+Rp8c+ZDYSp1tJ8S7kRhlu9hDYMRg
-	uPL/WxpTPcD7HhBk/Dek+ESHnqEoyc41nMjrdJAaGCP6d7TGraWUbJ3cPhhc6acZ
-	hp+FPS92g9V3qcvKQytkLXdFVNt4Nu/xt4sVuNtGAc=
-Date: Mon, 7 Sep 2026 12:20:03 +0800 (CST)
-From: zl020895  <zl020895@163.com>
-To: "Andy Shevchenko" <andriy.shevchenko@linux.intel.com>
-Cc: longzhao@ambarella.com, "Arnd Bergmann" <arnd@arndb.de>,
-	"Krzysztof Kozlowski" <krzk@kernel.org>,
-	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="UplNlsUb"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1788756362; x=1820292362;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=MvbHHEL5/a5EqTe+dAnJ+mIvKAY5vNH6ijYKQPM4nCI=;
+  b=UplNlsUbg4grELpS+RvVWM5NnPK6GDn0chbi0VvOypCt4BMfAJIceF3s
+   1nkqZFqVdN4j/s5zhdhp4fNzhYoQzIeSY29f585xtWweL6Lf2C44Xx/fZ
+   YIAjOyIlAAVPdtAX1iYd54pHr9PzGPxGVZpYKXrkR8JePnSxytp5uFa80
+   Kee/aS8OWByLxhY53AFl1Vfg5rqxQ4jj6FBBUj7j66zkFYf73L2AwapxX
+   WO+0CZPNKAAGOyymbPHsJDFdQj/5NHb3wnB6TKdarB7KAFBMfQV3UQme5
+   rvWJfvwn25sFT/2pnBxPNK8bCrDFTMR0Og0YyPePfzI2qGWXXb2Mkjioj
+   w==;
+X-CSE-ConnectionGUID: x5ipgHBmSwyqIh69vgPzCQ==
+X-CSE-MsgGUID: 4XGg/x0URYam5swUwP/QBQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11898"; a="93022622"
+X-IronPort-AV: E=Sophos;i="6.25,266,1779174000"; 
+   d="scan'208";a="93022622"
+Received: from orviesa004.jf.intel.com ([10.64.159.144])
+  by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Sep 2026 21:46:02 -0700
+X-CSE-ConnectionGUID: 6Svu84RsS9W24VILoF1UaQ==
+X-CSE-MsgGUID: 7Pmz5ViORtuzSLnZnlMKgw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.25,266,1779174000"; 
+   d="scan'208";a="274406097"
+Received: from smoticic-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.182])
+  by orviesa004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Sep 2026 21:45:56 -0700
+Date: Mon, 7 Sep 2026 07:45:53 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: zl020895 <zl020895@163.com>
+Cc: longzhao@ambarella.com, Arnd Bergmann <arnd@arndb.de>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
 	soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
-	"Rob Herring" <robh@kernel.org>,
-	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
-	"Conor Dooley" <conor+dt@kernel.org>,
-	"Michael Turquette" <mturquette@baylibre.com>,
-	"Stephen Boyd" <sboyd@kernel.org>,
-	"Linus Walleij" <linusw@kernel.org>,
-	"Bartosz Golaszewski" <brgl@kernel.org>,
-	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
-	"Jiri Slaby" <jirislaby@kernel.org>,
-	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	"Catalin Marinas" <catalin.marinas@arm.com>,
-	"Will Deacon" <will@kernel.org>, "Lee Jones" <lee@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Michael Turquette <mturquette@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>, Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jiri Slaby <jirislaby@kernel.org>,
+	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>, Lee Jones <lee@kernel.org>,
 	mfd@lists.linux.dev, devicetree@vger.kernel.org,
 	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
 	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re:Re: [PATCH v6 08/13] gpio: regmap: support write_data_after_dir
+Subject: Re: Re: [PATCH v6 08/13] gpio: regmap: support write_data_after_dir
  and girq
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
- 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
-In-Reply-To: <apqxwRgi-uVKkOpr@ashevche-desk.local>
+Message-ID: <ap5BgWtHMAxl28wF@ashevche-desk.local>
 References: <20260904-cv75-v5-v6-0-e918514cb3b1@ambarella.com>
  <20260904-cv75-v5-v6-8-e918514cb3b1@ambarella.com>
  <apqxwRgi-uVKkOpr@ashevche-desk.local>
-X-NTES-SC: AL_Qu2TCvueu0Ar5SadZukcn0wRhug/UMa4u/sm3YNXc+8EliryyzkeY0JmJHTvyeuSICCvqhG3WSVSyu1/eZZgGVw+yjmHJBRyn3VJ6zVaxQ==
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+ <27a1901.423e.1a07a183bd4.Coremail.zl020895@163.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Message-ID: <27a1901.423e.1a07a183bd4.Coremail.zl020895@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID:aCgvCgD3dzNzO55qTf9AAA--.18980W
-X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbCxhMtnmqeO3OlvgAA3B
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <27a1901.423e.1a07a183bd4.Coremail.zl020895@163.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-SGkgQW5keSwKClRoYW5rcyBmb3IgdGhlIHJldmlldy4KCj4gQXJlIHlvdSBnb2luZyB0byBmaXgg
-dGhpcyBIVyBpbiB0aGUgbmV4dCB2ZXJzaW9uIG9mIHRoZSBTb0M/Ck5vIOKAlCBBbWJhcmVsbGEg
-ZG9lcyBub3QgdXNlIHdyaXRlX2RhdGFfYWZ0ZXJfZGlyLiBJdCBvbmx5IHByZXNlcnZlcyB0aGUK
-ZXhpc3RpbmcgQVJNIFBMMDYxIHF1aXJrIGFscmVhZHkgZG9jdW1lbnRlZCBpbiBncGlvLXBsMDYx
-IChkYXRhIHdyaXRlcwppZ25vcmVkIHdoaWxlIHRoZSBwaW4gaXMgc3RpbGwgYW4gaW5wdXQpLiBP
-bmx5IHBsMDYxX2FybSBzZXRzIHRoZSBmbGFnLgoKSSB3aWxsIGFsc28gbWFrZSB0aGUgZmlyc3Qg
-Z3Bpb19yZWdtYXBfc2V0KCkgY29uZGl0aW9uYWwgc28gdGhlIHF1aXJrCnBhdGggd3JpdGVzIG9u
-Y2UgYWZ0ZXIgZGlyZWN0aW9uX291dHB1dCwgbm90IHR3aWNlLgoKPiBUaGlzIG5lZWRzIHRvIGJl
-IGluIGEgc2VwYXJhdGUgdXBkYXRlLiBBbHNvIHdlIG5lZWQgdG8gdW5kZXJzdGFuZCB3aHkKPiBp
-dCBpcyByZXF1aXJlZC4KT0ssIGdpcnEgd2lsbCBiZSBhIHNlcGFyYXRlIHBhdGNoLiBQTDA2MSBr
-ZWVwcyBhIGN1c3RvbSBjaGFpbmVkCmlycWNoaXAgKG5vdCByZWdtYXAtaXJxKTsgZ3Bpb19yZWdt
-YXAgdG9kYXkgb25seSB0YWtlcyBpcnFfZG9tYWluIG9yCnJlZ21hcF9pcnFfY2hpcCwgc28gd2Ug
-cGFzc2VkIGdpcnEgdG8ga2VlcCB0aGUgdXN1YWwgZ3Bpb19pcnFfY2hpcCArCmdwaW9jaGlwX2Fk
-ZCBmbG93LiBPcGVuIHRvIHVzaW5nIGEgY2FsbGVyLWNyZWF0ZWQgaXJxX2RvbWFpbiBpbnN0ZWFk
-IGlmCnlvdSBwcmVmZXIuCgo+IElzIHBhaG9sZSBoYXBweSB3aXRoIHRoZSBsYXlvdXQ/CldpbGwg
-Y2hlY2sgYW5kIHJlb3JkZXIgaWYgbmVlZGVkLgoKQmVzdCByZWdhcmRzLApMb25nIFpoYW8KCkF0
-IDIwMjYtMDktMDQgMTk6NTU6NDUsICJBbmR5IFNoZXZjaGVua28iIDxhbmRyaXkuc2hldmNoZW5r
-b0BsaW51eC5pbnRlbC5jb20+IHdyb3RlOgo+T24gRnJpLCBTZXAgMDQsIDIwMjYgYXQgMDI6Mzg6
-MTVQTSArMDgwMCwgTG9uZyBaaGFvIHZpYSBCNCBSZWxheSB3cm90ZToKPgo+VGhhbmtzIGZvciB0
-aGlzIGNoYW5nZSwgbXkgY29tbWVudHMgYmVsb3cuCj4KPj4gQWRkIGFuIG9wdGlvbmFsIHdyaXRl
-LWFmdGVyLWRpcmVjdGlvbi1vdXRwdXQgcXVpcmsgZm9yIGNvbnRyb2xsZXJzCj4+IHRoYXQgaWdu
-b3JlIGRhdGEtcmVnaXN0ZXIgd3JpdGVzIHdoaWxlIGEgbGluZSBpcyBzdGlsbCBjb25maWd1cmVk
-IGFzCj4+IGlucHV0LAo+Cj5UaGUgY2hpcHMgdGhhdCByZXF1aXJlIHRoaXMgYXJlIGJ1Z2d5LiBB
-cmUgeW91IGdvaW5nIHRvIGZpeCB0aGlzIEhXIGluIHRoZSBuZXh0Cj52ZXJzaW9uIG9mIHRoZSBT
-b0M/Cj4KPj4gYW5kIGFsbG93IGRyaXZlcnMgdG8gcGFzcyBhbiBleGlzdGluZyBncGlvX2lycV9j
-aGlwIHRocm91Z2gKPj4gZ3Bpb19yZWdtYXBfcmVnaXN0ZXIoKSBzbyBJUlEgc2V0dXAgY2FuIHN0
-YXkgd2l0aCB0aGUgY2FsbGVyLgo+Cj5UaGlzIG5lZWRzIHRvIGJlIGluIGEgc2VwYXJhdGUgdXBk
-YXRlLiBBbHNvIHdlIG5lZWQgdG8gdW5kZXJzdGFuZCB3aHkKPml0IGlzIHJlcXVpcmVkLiBUaGUg
-Y2FsbGVyIHNob3VsZCBiZSBhYmxlIHRvIGNyZWF0ZSB0aGUgcmVzcGVjdGl2ZSBJUlEKPmRvbWFp
-biB3aGljaCBpcyBpbXBvcnRhbnQuCj4KPi4uLgo+Cj4+IHN0cnVjdCBncGlvX3JlZ21hcCB7Cj4+
-ICAJdW5zaWduZWQgaW50IHJlZ19kaXJfb3V0X2Jhc2U7Cj4+ICAJdW5zaWduZWQgbG9uZyAqZml4
-ZWRfZGlyZWN0aW9uX21hc2s7Cj4+ICAJdW5zaWduZWQgbG9uZyAqZml4ZWRfZGlyZWN0aW9uX291
-dHB1dDsKPj4gKwlib29sIHdyaXRlX2RhdGFfYWZ0ZXJfZGlyOwo+Cj5JcyBgcGFob2xlYCBoYXBw
-eSB3aXRoIHRoZSBsYXlvdXQ/Cj4KPj4gICNpZmRlZiBDT05GSUdfUkVHTUFQX0lSUQo+PiAgCWlu
-dCByZWdtYXBfaXJxX2xpbmU7Cj4KPi4uLgo+Cj4+IHN0YXRpYyBpbnQgZ3Bpb19yZWdtYXBfZGly
-ZWN0aW9uX291dHB1dChzdHJ1Y3QgZ3Bpb19jaGlwICpjaGlwLAo+Cj4+ICAJZ3Bpb19yZWdtYXBf
-c2V0KGNoaXAsIG9mZnNldCwgdmFsdWUpOwo+Cj5eXl4gKHNlZSBiZWxvdykKPgo+PiAgCj4+IC0J
-cmV0dXJuIGdwaW9fcmVnbWFwX3NldF9kaXJlY3Rpb24oY2hpcCwgb2Zmc2V0LCB0cnVlKTsKPj4g
-KwlyZXQgPSBncGlvX3JlZ21hcF9zZXRfZGlyZWN0aW9uKGNoaXAsIG9mZnNldCwgdHJ1ZSk7Cj4+
-ICsJaWYgKHJldCkKPj4gKwkJcmV0dXJuIHJldDsKPj4gKwo+PiArCS8qIFNvbWUgY29udHJvbGxl
-cnMgaWdub3JlIGRhdGEgd3JpdGVzIHdoaWxlIHRoZSBsaW5lIGlzIHN0aWxsIGFuIGlucHV0LiAq
-Lwo+PiArCWlmIChncGlvLT53cml0ZV9kYXRhX2FmdGVyX2RpcikKPj4gKwkJZ3Bpb19yZWdtYXBf
-c2V0KGNoaXAsIG9mZnNldCwgdmFsdWUpOwo+Cj5UaGlzIGNhbiBsZWFkIHRvIHR3byB3cml0ZXMg
-dG8gdGhlIHNhbWUgcmVnaXN0ZXIsIHRoZSBhYm92ZSBuZWVkcyB0byBiZQo+Y29uZGl0aW9uYWwg
-YXMgd2VsbC4KPgo+LS0gCj5XaXRoIEJlc3QgUmVnYXJkcywKPkFuZHkgU2hldmNoZW5rbwo+Cg==
+On Mon, Sep 07, 2026 at 12:20:03PM +0800, zl020895 wrote:
+
+> > Are you going to fix this HW in the next version of the SoC?
+> No — Ambarella does not use write_data_after_dir. It only preserves the
+> existing ARM PL061 quirk already documented in gpio-pl061 (data writes
+> ignored while the pin is still an input). Only pl061_arm sets the flag.
+
+Ah, this is a good news!
+
+In any case when documenting that flag, please also mention that any new HW
+should not use it as it's considered buggy (glitches during direction change
+are guaranteed).
+
+> I will also make the first gpio_regmap_set() conditional so the quirk
+> path writes once after direction_output, not twice.
+
+I see that original pl061 actually writes twice. TBH I don't know the best
+effort here and if it's really required to do so. Probably others have
+better ideas...
+
+> > This needs to be in a separate update. Also we need to understand why
+> > it is required.
+> OK, girq will be a separate patch. PL061 keeps a custom chained
+> irqchip (not regmap-irq); gpio_regmap today only takes irq_domain or
+> regmap_irq_chip, so we passed girq to keep the usual gpio_irq_chip +
+> gpiochip_add flow. Open to using a caller-created irq_domain instead if
+> you prefer.
+
+If there is a chained IRQ, look how PMIC drivers usually do similar setups.
+First what comes to my mind is drivers/mfd/intel_soc_pmic_bxtwc.c.
+
+-- 
+With Best Regards,
+Andy Shevchenko
+
 
