@@ -1,230 +1,227 @@
-Received: from sender6-op-o12.zoho.com (sender6-op-o12.zoho.com [165.173.180.12])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 605442EC0A2
-	for <mfd@lists.linux.dev>; Mon,  7 Sep 2026 06:57:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=165.173.180.12
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788764241; cv=pass; b=Nhva8SBdyh9Y0nU5HCDOUdlPAhA8nkCFY6rIhWl0vEx1wwjZhyaExxM4v5ppzEGUrcFxLxyeLTp53JWyD9nlug5iiRMItkEI5h4iQU0v7SftlmKPFNe5mIxMqcUB60cWn8rsAbofzYDwzxwSz9Ctdiczj/yWpcb18bihs1HaXlE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788764241; c=relaxed/simple;
-	bh=1tMnWdSZi+sjkC4f5IyBKW6FS6ZeNXijReG8GKO87DM=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=E4TuvhhJC4nrP0V4rbiol26CG+cm6tW6SdRY+mFqQsSjqhDXrSXbw/lTHlNp83cAPIOhaz6yxlg6Kj6YB7MehbbL7z0EHYf3dLSL0EqRPfyhYzMvlQjlenTMZv8JbrXnxAtZoo3uE0KYD1jp1oC3LHV0Tmk7z3FRwnHKT2m8bRw=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=icenowy.me; spf=pass smtp.mailfrom=icenowy.me; dkim=pass (2048-bit key) header.d=icenowy.me header.i=uwu@icenowy.me header.b=BMTjuTZB; arc=pass smtp.client-ip=165.173.180.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=icenowy.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=icenowy.me
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DAF533EE1FE
+	for <mfd@lists.linux.dev>; Mon,  7 Sep 2026 08:13:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788768838; cv=none; b=Q1/PWt4NEDg2AksC/NklXtKLakHYvZxNbz/hebu128afIlyC8omE3v07Alp3sNCXKjB9ow6DiI+iJjGTJE79w4mgJRxMW2D7yrjTMXc2yYYCrlOvjrnr5ZQEYFOI+vMyNdPUKh5ZULzSPdnXRv500qKr+pBesqBgFWLHoOI4YSQ=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788768838; c=relaxed/simple;
+	bh=2PkCrrkmsu4vMoHSdZZ8ByoR89oUBJOzMlHa3i0gMqs=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=rlCu+cvxJKgjocqk4b1FexMPMkIvpbsY4p8Gv5MAHoB4+hjvf4hBsXX7Q9zC05Wn5Cgy5pKnav/ufrHbLuLQnkfoQofZ5fu0YIgz2qqz3a19DdZfsqVVtbyTnTCbVXTC3ngLVVGko7d9DuDBwZyTfh7MdxG/Li0wFyaPqRNH2gE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kio9fiZP; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XzkuByf/; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=icenowy.me header.i=uwu@icenowy.me header.b="BMTjuTZB"
-ARC-Seal: i=1; a=rsa-sha256; t=1788764158; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=ZV1f7mIa5Ivl4k9y4SDseO7sHW+HXOhGOnNA3H1xRbt1/D/ksjOmLYeU+FS4cmX+Hts6lkL1r8M+mCPrf6tfIzMjJB0b2sVzMmjqPU/3RUMi+047Y294fhETDs6iReJrrgYolwkXDS2m+zCVwGlte7A50w8KcoeS+6v+/RwWTr0=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1788764158; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=1tMnWdSZi+sjkC4f5IyBKW6FS6ZeNXijReG8GKO87DM=; 
-	b=dS9L/KG15nTBt2++e5uDJMfTNVAaWzLOQuZasm1GbtlC0sCA0bB1YA6nKDHauAHHIGDtz4Q7ivxhvg0CLUMOobpIBo+BNKxHD/ubsyigThw9IO3SwiDnd0li8ZdtFILkmNvA3GExDWArpzFXprIV1qzIu4e5vjtHSjKY2gyVYVQ=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=icenowy.me;
-	spf=pass  smtp.mailfrom=uwu@icenowy.me;
-	dmarc=pass header.from=<uwu@icenowy.me>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1788764158;
-	s=zmail2; d=icenowy.me; i=uwu@icenowy.me;
-	h=Message-ID:Subject:Subject:From:From:To:To:Cc:Cc:Date:Date:In-Reply-To:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id:Reply-To;
-	bh=1tMnWdSZi+sjkC4f5IyBKW6FS6ZeNXijReG8GKO87DM=;
-	b=BMTjuTZBsLIrLLQbFYEi8z0UaWGJZJjxeSYYxBVe6/DSS+g6eYH8Pw9Pt2zTuGh1
-	TbGJxgPa/cjnW41iWvSPZTs1m7utVbmLnfyAbfxAueT2zyPpCg3RW0zQ94/VavjbTLa
-	BT486D9MNAmUPgxRieTGSu/8tMi27JGUaSFQv9cSqgbQSXgbbbRo5g0CUZ7AzmQiGIv
-	lVFA+M7C37fn+a8D09cfSBJESxToQqJg0tFdJybljjyoXRxlc8kR2Nj8pfOZ7xd/k6f
-	nuh5zp+4ma19vHlgD2e4mxkAw5n7TkeKvhRfuYzEaatVRNX9eGykxhWw4vjZjD/0S8c
-	upQLI3pL0g==
-Received: by mx.zohomail.com with SMTPS id 1788764154825847.2528940921899;
-	Sun, 6 Sep 2026 23:55:54 -0700 (PDT)
-Message-ID: <72f82ae67eca7b5a594d86852c8b0dafb7d02c4c.camel@icenowy.me>
-Subject: Re: [PATCH v2 13/15] phy: starfive: Add jh7110-inno-hdmi-phy driver
-From: Icenowy Zheng <uwu@icenowy.me>
-To: Maud Spierings <maud_spierings@murena.io>, Dominique Belhachemi
-	 <domibel@debian.org>
-Cc: m.wilczynski@samsung.com, Laurent.pinchart@ideasonboard.com, 
-	airlied@gmail.com, alex@ghiti.fr, andrzej.hajda@intel.com,
- andy.yan@rock-chips.com, 	andyshrk@163.com, aou@eecs.berkeley.edu,
- bmasney@redhat.com, conor+dt@kernel.org, 	conor@kernel.org,
- devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	hal.feng@starfivetech.com, heiko@sntech.de, hello@big-grey.co.uk, 
-	jernej.skrabec@gmail.com, jonas@kwiboo.se, kernel@esmil.dk,
- krzk+dt@kernel.org, 	lee@kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-clk@vger.kernel.org, 	linux-kernel@vger.kernel.org,
- linux-phy@lists.infradead.org, 	linux-riscv@lists.infradead.org,
- linux-rockchip@lists.infradead.org, 	luca.ceresoli@bootlin.com,
- m.szyprowski@samsung.com, 	maarten.lankhorst@linux.intel.com,
- maudspierings@gocontroll.com, 	mfd@lists.linux.dev, mripard@kernel.org,
- mturquette@baylibre.com, 	neil.armstrong@linaro.org,
- p.zabel@pengutronix.de, palmer@dabbelt.com, 	pjw@kernel.org,
- rfoss@kernel.org, robh@kernel.org, sboyd@kernel.org, simona@ffwll.ch, 
-	tzimmermann@suse.de, vkoul@kernel.org
-Date: Mon, 07 Sep 2026 14:55:42 +0800
-In-Reply-To: <f68d95d0-f918-4dee-9443-38c64247b71a@murena.io>
-References: <20260828-jh7110-clean-send-v2-13-331680c8b9d1@samsung.com>
-	 <0ccb4168-ff88-459c-972d-3c091c155db2@murena.io>
-	 <e780ecb8-918f-4816-99c8-b69b10b25a18@murena.io>
-	 <CAAvaLCwvVUddS14MPx0FHdnp+QeZ99+ox17pXt2hSWPTCFcHtw@mail.gmail.com>
-	 <cb0884b3-c9be-4cfd-ba43-27add3821ddd@murena.io>
-	 <6a5f8c11a092cef83bae8d9ea0100c2fc133a514.camel@icenowy.me>
-	 <CAAvaLCxMntrTbTQ9VNu4H_6LA30TRAqi7mCpn+x3hbTG9WqERA@mail.gmail.com>
-	 <057d97bd4b63fa4445dd86548f2ecdcbe9c3b1b6.camel@icenowy.me>
-	 <f68d95d0-f918-4dee-9443-38c64247b71a@murena.io>
-Organization: Anthon Open-Source Community
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.3 
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kio9fiZP";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XzkuByf/"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68777h1M3903437
+	for <mfd@lists.linux.dev>; Mon, 7 Sep 2026 08:13:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=iKZhBtC4xoReMl+ODu3+f4
+	AYAN3pz02drrC1yYmG534=; b=kio9fiZPu65AWftNbSVpceSef6yf29QCmGAPGX
+	wufKP6iDNfcecZe5LeRBsgRVNtC46T7qsb2cyfmc2PRJrFYL6S1Fo9kbeOG0MHU+
+	VzfmNRiqW0ybbcPjVrPN0N4F/LpLhvXa92d//6NrAElUrmjo79vLn+nPsecIzrj3
+	MaNzJDfy4buguaMJlGyfKd1Zg9U/C0agwJewIW0HtBX74IUVKc2v/XxlRGkSC4fK
+	+o2VX1qGk3KMalDOmjPJsmKI5trgJkuvhHeKNSNhEIUFfe20RPQKBg7R4cv8cvdP
+	X3DkyEHRs9CdL58rEYFwiDk969uRonT6NeYetNq56MRdRZFg==
+Received: from mail-ot1-f70.google.com (mail-ot1-f70.google.com [209.85.210.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ggany5u8q-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <mfd@lists.linux.dev>; Mon, 07 Sep 2026 08:13:55 +0000 (GMT)
+Received: by mail-ot1-f70.google.com with SMTP id 46e09a7af769-7f1ddcd241aso5885719a34.0
+        for <mfd@lists.linux.dev>; Mon, 07 Sep 2026 01:13:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1788768835; x=1789373635; darn=lists.linux.dev;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=iKZhBtC4xoReMl+ODu3+f4AYAN3pz02drrC1yYmG534=;
+        b=XzkuByf/IpJcyHG783tk9eGrVOIJkbUGACZgaBbITSJ3h8pkpmRfarGr5FZ/KQWRLt
+         LiN8UiSmMoqV/LeI+ANdHIL9QmqRSSbZYeN7zPLj80mxfEHvNq5iI8uDfIuWNLOhdqKO
+         hmPCivBmUjh9WEuD4rtkX+LkpVmkXbda62qI4qTRovA5pUuGFQ/SfiI7W0trqu1Q5XNd
+         O4UbbmyZZaved0EpDR7X2Tb4C8eY36kLMEAm7PA/n8K5JvsSMoS+W+y/zzZGI/uOCuDv
+         w874hzCDF46nuqo+tAjXBsjTZKIZvHBMXkc0l03FBa2YZpGCSl/SL6RqUJZKydKw3FnF
+         Fa9A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788768835; x=1789373635;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=iKZhBtC4xoReMl+ODu3+f4AYAN3pz02drrC1yYmG534=;
+        b=KiN0xDrfB2NgU8fLLZxpjBM1qj9EQn1U1mmTQNyt/iGG37AsnwSS4Wq46sqvDmGBPV
+         ECXGOMxuWXrmtojgU3SON84JtPdT0Bv0HEYAAAB/g93k0jlYPzyohQNLWVxZpbnzI91Y
+         UaNf/Kvdyq9DAmgual9nV+gRpFuWOYGDnlM4S+X+d0kNRlXBQMObhdIRcCg03vOIq+Qq
+         ZrPk90wxA10KJ4MTZn6nXmCAho4QYDNWoLhXYdlTLXQY8HngdeVgfknITH5V+/IG+SSW
+         oofDYbDoC2N+gZCXOUc9ZJ4QHr/or2Ao+tjbJq/DL7RVcaFBHg2MJaV/DOKeYYZY3LxW
+         ziOw==
+X-Forwarded-Encrypted: i=1; AKwUvByJahg4Gv13wVM5QTLS4ZFb6ZEPGaMSFGXbcdE6Wbj0f7bgp/gF/2ErO4N4HZ9MKWiPRNM=@lists.linux.dev
+X-Gm-Message-State: AFuF++lmVuHjc8QMuuaknvHjz9Vkxo8sCvQueviPBn2RttbenBRu/t8g
+	wolQ2oRMSK5X/20nl29pU9Dt4ABTrhJ5m/mhcRYQoz4IpMfUYeJ7c9yiPZAm1XWtv/BGbukPjX6
+	3BkZj4a3+hfGAz6HEFn+TjYck52z0J3XkZZCta/kN4BLUEkIrFv4mCqM=
+X-Gm-Gg: AYBFou18hFYJP1Ed6PrXp3iUHa3+6omMXJvjecvl70umzdmIGQdX/Urgt6Ss2mo8ZAe
+	yjeCba0+GaVSjmzm8OGCZmNPg6O7I8aUi3yMYSiwfdtgzwnoMbmVksnV2dQml8XJj1icSIdVRWl
+	uRdRQBTQAXYGfov9kTCMkvsMAVODM/XzwWvob6JaOjCLmgFek0VI3bGobi3UpDznRQmYctO3DZ3
+	dLOl5exUn8H7a8mSW9OAY0fFnUqKwxRa6A1UeE8Ch2A3YKNeJZS+PIVRR93O724YjFBGUuxMK+R
+	HAZz7kYdlS9v82xDJBwvq0Cc+0DoDk7DYx+1A/1k9d4VdrIInTLDjOSszcZlMVhyZiIZoI9js2V
+	CsU4aa3BaAd+MTeZY/EBtbLQZeeuLTZA=
+X-Received: by 2002:a4a:ec49:0:b0:6b8:d957:2803 with SMTP id 006d021491bc7-6b8d9572e0bmr6704634eaf.20.1788768834779;
+        Mon, 07 Sep 2026 01:13:54 -0700 (PDT)
+X-Received: by 2002:a4a:ec49:0:b0:6b8:d957:2803 with SMTP id 006d021491bc7-6b8d9572e0bmr6704610eaf.20.1788768834288;
+        Mon, 07 Sep 2026 01:13:54 -0700 (PDT)
+Received: from hu-nihalkum-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-143243767e1sm21724220c88.6.2026.09.07.01.13.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 07 Sep 2026 01:13:53 -0700 (PDT)
+From: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
+Subject: [PATCH v2 0/6] Add CAMSS support for Qualcomm Glymur
+Date: Mon, 07 Sep 2026 13:43:36 +0530
+Message-Id: <20260907-glymur_camss-v2-0-75f7982dc983@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-X-ZohoMailClient: External
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADBynmoC/22P3YqDMBBGX0VyvZEkajRSlr7HUpb8jDagpk1UK
+ sV33xivFnoz8A18Z868UQBvIaA2eyMPqw3WTTGwrwzpu5x6wNbEjBhhnFRM4H7YxsX/ajmGgFk
+ tu5oqagpToFh5eOjsK+F+bmf28FwidT6XSMkAWLtxtHObCVlqo0XVGFOLTnNdKEZURSUlBhTEh
+ SSiA32gRwhBJp02uyQbQQr8opEWLMOP+4ZXWmOCGeeEd1JIUojrYCfpXe58/40OobsNs/Nbend
+ lySixGsL/f7ayiIqnGWjQJXB6dSHkz0UOh3wexyF1dtmnbtlo1XBaNsJ86N72ff8De8lzDnwBA
+ AA=
+X-Change-ID: 20260529-glymur_camss-27af71b1d3d3
+To: Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>, Lee Jones <lee@kernel.org>,
+        Guru Das Srinagesh <linux@gurudas.dev>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
+        linux-media@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, mfd@lists.linux.dev,
+        Suresh Vankadara <svankada@qti.qualcomm.com>,
+        Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
+        Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+        Dhruvin Rajpura <drajpura@qti.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788768826; l=3428;
+ i=nihal.gupta@oss.qualcomm.com; s=20260608; h=from:subject:message-id;
+ bh=2PkCrrkmsu4vMoHSdZZ8ByoR89oUBJOzMlHa3i0gMqs=;
+ b=9rJF2OhCoF4yzMGqRFpBhRxrc+m1Cgcpt1ZSFaxPjzplyHFawOMqlIngtIB3UeUTJ+XPQqVai
+ BBLhERQOSfiCXHWG4EgyyEzTUQSfdQP6zW6VYNIIFDE0QeoM7B1Uxlr
+X-Developer-Key: i=nihal.gupta@oss.qualcomm.com; a=ed25519;
+ pk=DIbyFMNwqU/iMvU/0pCQp2wmRVgtHFBT3PcSu+A+Ncw=
+X-Authority-Analysis: v=2.4 cv=X45i7mTe c=1 sm=1 tr=0 ts=6a9e7243 cx=c_pps
+ a=7uPEO8VhqeOX8vTJ3z8K6Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=0ARVRLQPdUDne_cnrioA:9
+ a=QEXdDO2ut3YA:10 a=EXS-LbY8YePsIyqnH6vw:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-ORIG-GUID: 1k45fXJI7hYV9H_bEaax_nxXP7gj1EoU
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDA4OCBTYWx0ZWRfX6aVJiMZZZOV4
+ m/c1G/y6PYIr/IH4EtBCpXqiDpxSKtEYTggYXfHBSBvO5vg4XGS7BiF+UbI1QMoWYW/387dScRI
+ QIVeytqSW06Q6bIxVPY3CAKsYtN0Vs9lt64UOpMEg9b/aVJc5D+8HLzOxsupVGMKou5bX9VtL8+
+ xadxbUj1gOVEXoKuZ81GCoPU64lfrx0wKMSw/onlR/qdqmrX2eWxKbEMGeIzQNbvEreTiAnsOTs
+ REm+bV8pYtZJqByHr4MmzY/v7dkDKlOtSAiYfss+mT9bEDDhiG+13e0wEv1cyRFd10urke3q5Wn
+ pfPoChPhP/6khXdzYWpojkZcoMrli1U71tReSIKHssmkatp3zULcVzNjtSiPqX7oI1zeJODy0Ea
+ q1bnCizokzVCIz9q9fPksF2+2tw+K/bgKWoHlSoB7Rsfy6jqQWsnFB2jUwvQR3AmqMRSefMoL8l
+ aUIodvHJ2T/CdL7JnTA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDA4OCBTYWx0ZWRfX1q7JTqHMPMDT
+ eMr6pQV4LfKxh3V3Xt0jhoYSzKdy837u7iqZsWn3McobgKe9sNnjDTAghvXmZmB3YDwygUMg05W
+ cbeC+JC8SEpoXH9AQaoAbbYcEF0lcnI=
+X-Proofpoint-GUID: 1k45fXJI7hYV9H_bEaax_nxXP7gj1EoU
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-07_02,2026-09-03_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 bulkscore=0 suspectscore=0 clxscore=1011 adultscore=0
+ impostorscore=0 malwarescore=0 lowpriorityscore=0 spamscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2609070088
 
-=E5=9C=A8 2026-09-07=E4=B8=80=E7=9A=84 08:02 +0200=EF=BC=8CMaud Spierings=
-=E5=86=99=E9=81=93=EF=BC=9A
-> Hi Dominique and Icenowy,
->=20
-> On 9/7/26 06:01, Icenowy Zheng wrote:
-> > =E5=9C=A8 2026-09-06=E6=97=A5=E7=9A=84 17:16 -0400=EF=BC=8CDominique Be=
-lhachemi=E5=86=99=E9=81=93=EF=BC=9A
-> > > On Sun, Sep 6, 2026 at 11:19=E2=80=AFAM Icenowy Zheng <uwu@icenowy.me=
->
-> > > wrote:
-> > > >=20
-> > > > =E5=9C=A8 2026-09-06=E6=97=A5=E7=9A=84 16:59 +0200=EF=BC=8CMaud Spi=
-erings=E5=86=99=E9=81=93=EF=BC=9A
-> > > > > On 9/6/26 07:39, Dominique Belhachemi wrote:
-> > > > > > On Sun, Aug 30, 2026 at 10:17=E2=80=AFAM Maud Spierings
-> > > > > > <
-> > > > > > maud_spierings@murena.io=C2=A0<mailto:maud_spierings@murena.io>=
->
-> > > > > > wrote:
-> > > > > >=20
-> > > > > > =C2=A0=C2=A0=C2=A0=C2=A0 I was still having some glitching happ=
-ening on the
-> > > > > > display,
-> > > > > > but
-> > > > > > I've
-> > > > > > =C2=A0=C2=A0=C2=A0=C2=A0 found the way to fix that, the questio=
-n is what is
-> > > > > > actually
-> > > > > > =C2=A0=C2=A0=C2=A0=C2=A0 happening here.
-> > > > > >=20
-> > > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x29590020 <- =
-0x00000005
-> > > > > > =C2=A0=C2=A0=C2=A0=C2=A0 This one I have no idea, it is 0x00000=
-009 with this
-> > > > > > patch
-> > > > > > series but
-> > > > > > =C2=A0=C2=A0=C2=A0=C2=A0 with the vendor kernel I get the value=
- above. When I
-> > > > > > hook
-> > > > > > up my
-> > > > > > =C2=A0=C2=A0=C2=A0=C2=A0 external
-> > > > > > =C2=A0=C2=A0=C2=A0=C2=A0 display (regular 1440p) this becomes 0=
-x0000000D on the
-> > > > > > vendor
-> > > > > > kernel.
-> > > > > >=20
-> > > > > > =C2=A0=C2=A0=C2=A0=C2=A0 But I can't find this register being w=
-ritten to
-> > > > > > anywhere
-> > > > > > there?
-> > > > > >=20
-> > > > > >=20
-> > > > > > Maybe this needs to be swapped?
-> > > > > >=20
-> > > > > > drivers/gpu/drm/bridge/inno-hdmi.c
-> > > > > > =C2=A0=C2=A0=C2=A0 -#define v_HSYNC_POLARITY(n)=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ((n) << 3)
-> > > > > > =C2=A0=C2=A0=C2=A0 -#define v_VSYNC_POLARITY(n)=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ((n) << 2)
-> > > > > > =C2=A0=C2=A0=C2=A0 +#define v_HSYNC_POLARITY(n)=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ((n) << 2)
-> > > > > > =C2=A0=C2=A0=C2=A0 +#define v_VSYNC_POLARITY(n)=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ((n) << 3)
-> > > >=20
-> > > > Very weirdly, the original definition here matches current
-> > > > mainline
-> > > > inno-hdmi.c, but the changed definition matches JH7110 vendor
-> > > > inno_hdmi.h [1].
-> > > >=20
-> > >=20
-> > > The vendor code is correct and matches the RK3128 TRM.
-> >=20
-> > Thanks for the tips on documentation, and I verified this.
-> >=20
-> > It seems that Rockchip people made this always wrong, even with
-> > their
-> > pre-DRM display driver... [1]
-> >=20
-> > BTW I checked the Innosilicon dGPU driver code, and its
-> > g3_ne_hdmi.h
-> > source file also contains the definition of BIT(3) as VSYNC. (It's
-> > quite weird that most logic of that driver is in some .o_shipped
-> > blob,
-> > but fortunately the g3 logic might be too new to be closed down)
-> >=20
-> > Thanks,
-> > Icenowy
-> >=20
-> > [1]
-> > https://github.com/rockchip-linux/kernel/blob/release-4.4/drivers/video=
-/rockchip/hdmi/rockchip-hdmiv1/rockchip_hdmiv1_hw.h#L161
-> >=20
-> > >=20
-> > > HDMI_reg08
-> > > =C2=A0=C2=A0=C2=A0=C2=A0 Bit=C2=A0 Attr=C2=A0 Reset=C2=A0 Description
-> > > =C2=A0=C2=A0=C2=A0=C2=A0 3=C2=A0=C2=A0=C2=A0 RW=C2=A0=C2=A0=C2=A0 0x0=
-=C2=A0=C2=A0=C2=A0 vs_polarity=C2=A0=C2=A0 VSYNC polarity=C2=A0=C2=A0 1'b0:
-> > > Negative
-> > > 1'b1: Positive
-> > > =C2=A0=C2=A0=C2=A0=C2=A0 2=C2=A0=C2=A0=C2=A0 RW=C2=A0=C2=A0=C2=A0 0x0=
-=C2=A0=C2=A0=C2=A0 hs_polarity=C2=A0=C2=A0 HSYNC polarity=C2=A0=C2=A0 1'b0:
-> > > Negative
-> > > 1'b1: Positive
-> > >=20
-> > > Nobody noticed this so far because in 720p/1080p both polarities
-> > > are
-> > > positive, but Maud's 3:2 panel has differing H/V polarity.
-> > >=20
-> > > Best
-> > > -Dominique
->=20
-> This also solves the devmem behaviour I saw, or well, doesn't realy=20
-> explain it but does show what is actually happening. As Icenowy noted
-> (maybe that was on telegram only?) the inno-hdmi regs are 8bit
-> instead=20
-> of 32 bit.
->=20
-> What is actually happening is:
->=20
-> devmem 0x29590000 b reads 0x29590000 as expected
-> but
-> devmem 0x29590004 b reads 0x29590001
-> devmem 0x29590008 b reads 0x29590002
-> ....
-> devmem 0x29590020 b reads 0x29590008
->=20
-> For some reason the addressing is weird?
->=20
-> With this change, the assigned clock change and removing the=20
-> v_REG_CLK_INV | v_REG_CLK_SOURCE_SYS write to HDMI_SYS_CTRL, the
-> display=20
-> comes up from the start as it should!
+This series adds Camera Subsystem (CAMSS) support for the Qualcomm
+Glymur SoC.
 
-Well I checked the RK3128 TRM for these two bits, and their field
-descriptions are -- "reserved".
+Glymur's camera hardware topology:
+- 3x CSIPHY (CSI Physical Layer)
+- 3x CSID + 2x CSID Lite (CSI Decoder)
+- 3x TPG (Test Pattern Generator)
+- 2x VFE + 2x VFE Lite (Video Front End)
 
-What can I react...
+The CSIPHY block is the same hardware version as x1e80100 (3ph-1-0),
+differing only in instance count (3 vs 4). TPG, CSID, VFE, CSID wrapper,
+and ICC resources are fully shared with x1e80100.
 
-Thanks,
-Icenowy
+Used following tools for the sanity check of these changes.
+- make -j32 W=1
+- checkpatch.pl
+- make DT_CHECKER_FLAGS=-m W=1 DT_SCHEMA_FILES=i2c/qcom,i2c-cci.yaml dt_binding_check
+- make DT_CHECKER_FLAGS=-m DT_SCHEMA_FILES=media/qcom,glymur-camss.yaml dt_binding_check W=1
 
->=20
-> Kind regards,
-> Maud
+Patch 1 depends on the following dt-bindings series:
+[1] https://lore.kernel.org/all/20260903-x1e-csi2-phy-v17-0-26606fa9a039@linaro.org
+
+Functional dependency:
+[2] https://lore.kernel.org/all/20260906-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v17-0-e2197a3e2551@linaro.org
+
+Changes in v2:
+- Glymur is now defined exclusively with the new PHY API architecture.
+  CSIPHYs are standalone qcom,glymur-csi2-phy nodes falling back to
+  qcom,x1e80100-csi2-phy. The CSIPHY supplies and register regions are
+  removed from the CAMSS binding; they live in the PHY nodes.
+- CAMSS_GLYMUR enum is dropped. Glymur wires directly to
+  x1e80100_resources in the OF match table. The CSIPHY instance
+  difference (3 vs 4) is expressed entirely in DT - Bryan
+- The incomplete compatible + resource enumeration from v1 are collapsed
+  into a single self-contained patch. The pointless VFE enum patch is
+  dropped - Krzysztof, Bryan
+- Add dt-bindings, MFD and regulator support for PM8010 I2C PMIC with
+  qcom,pm8010-i2c compatible; qcom,pm8008 is not equivalent - Konrad
+- Drop dt-bindings: i2c: qcom-cci: Document Glymur compatible; already picked
+  by Andi Shyti into her i2c tree (now in linux-next as 7c9474bd4a8d)
+- Link to v1: https://lore.kernel.org/all/20260529-glymur_camss-v1-0-bee535396d22@oss.qualcomm.com/
+
+Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
+---
+Dhruvin Rajpura (1):
+      dt-bindings: mfd: pm8008: Add PM8010 I2C support
+
+Jishnu Prakash (2):
+      mfd: qcom-pm8008: Add support for PM8010 PMIC
+      regulator: qcom-pm8008-regulator: Add support for PM8010 PMIC
+
+Nihal Kumar Gupta (3):
+      dt-bindings: phy: qcom,x1e80100-csi2-phy: Add Glymur compatible
+      dt-bindings: media: qcom,glymur-camss: Add Glymur CAMSS
+      media: qcom: camss: Add Glymur compatible
+
+ .../bindings/media/qcom,glymur-camss.yaml          | 300 +++++++++++++++++++++
+ .../devicetree/bindings/mfd/qcom,pm8008.yaml       |  14 +-
+ .../bindings/phy/qcom,x1e80100-csi2-phy.yaml       |   6 +-
+ drivers/media/platform/qcom/camss/camss.c          |   1 +
+ drivers/mfd/qcom-pm8008.c                          | 140 ++++++++--
+ drivers/regulator/qcom-pm8008-regulator.c          | 184 +++++++++++--
+ 6 files changed, 583 insertions(+), 62 deletions(-)
+---
+base-commit: 9a4cdc958dd79fc6c3b20b51a10debec6ca09fec
+change-id: 20260529-glymur_camss-27af71b1d3d3
+prerequisite-message-id: <20260903-x1e-csi2-phy-v17-0-26606fa9a039@linaro.org>
+prerequisite-patch-id: 4a27a90c3a55c1f9ef46e9b941576309242f75f8
+prerequisite-patch-id: ec5e059c23defd7db6c47bb17d70d01c9c6cc31b
+
+Best regards,
+-- 
+Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
+
