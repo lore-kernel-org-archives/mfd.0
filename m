@@ -1,26 +1,26 @@
-Received: from mail-m15590.qiye.163.com (mail-m15590.qiye.163.com [101.71.155.90])
+Received: from mail-m4921.qiye.163.com (mail-m4921.qiye.163.com [45.254.49.21])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB2A13E8340
-	for <mfd@lists.linux.dev>; Mon,  7 Sep 2026 03:31:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.71.155.90
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3EFD7277CAD
+	for <mfd@lists.linux.dev>; Mon,  7 Sep 2026 03:56:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.21
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788751899; cv=none; b=LZ156u3KoI2YbfXhmJLOfh8mSGipZrVUWCXjnfJfbPoMcWasiT6zNkESgRybdyfdyL3RER/ZV0juqUoELx/DIe4G0gcyqU6N79WaZx/vcbDBo3sxkXaDboEYeMcQ0HPyf6XA07Wyicv/Lh0pLhXFRXKaSFRtmKrgNf5UbpBrPUo=
+	t=1788753390; cv=none; b=CU79a8h39aTvfe1HlBSStxccRYWVyaMeCs0ZsdIiCcKG2XyEC4LYqJitnqkWkv5Wx9MA4aRpGCQWmk2xAx0t+Z17lOZV8L8KcipjQRa7WN3zjrThpqldB1BgfIequ0pVgrXkBH+Px6G6Un/H2ehk1jd+JXZrZSn4nMeo8N/V6EU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788751899; c=relaxed/simple;
-	bh=aKf8DhaQ5x5i8jhOQEfA7qapAwbpflbQ/fj5C6rVTU8=;
+	s=arc-20240116; t=1788753390; c=relaxed/simple;
+	bh=rNr4D9deSQmTUVh6kFxsRlk5qaYnAx7VmBsAwEZaP8U=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=dT840nJGlqE5Nd+wo+IH5M7PSJBr0E21fhSb5ca9jxpeX2sunR4JUz6DX8XOCLP6QqVAiU36O6DJJ9AgQlA0D6x4kpjNbMuqoMWMstlnwUyAsSwgugWA2DC5TPCX2gtnest750E89DyZE9IgTKTcZeYCvuXrrIbO5IiA1x3rOKk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com; spf=pass smtp.mailfrom=rock-chips.com; dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b=Ku4RR7ub; arc=none smtp.client-ip=101.71.155.90
+	 In-Reply-To:Content-Type; b=GbQWiBAaV6XGxtKnsK8yR6mlNw9PNBW1DIdDXPu6qhv8Chf8YOmpjYONxx6VJ3bT7Zv0Z/Cy8nwcfH8eFMVRxEDIMnetJ5bzk79/3OKJ/aw8LdjIfkJpTLghLTx4T23K9CjnxXWLtSE+Mrs5wtpiDaQY8Q48IWrOkQ9/X8n96ys=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com; spf=pass smtp.mailfrom=rock-chips.com; dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b=J+pH9aqj; arc=none smtp.client-ip=45.254.49.21
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rock-chips.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b="Ku4RR7ub"
+	dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b="J+pH9aqj"
 Received: from [172.16.12.90] (unknown [61.154.14.86])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 4cbfa21e5;
-	Mon, 7 Sep 2026 11:16:05 +0800 (GMT+08:00)
-Message-ID: <d4cfd407-9cf7-4907-9ef9-8bb52b5ec669@rock-chips.com>
-Date: Mon, 7 Sep 2026 11:16:04 +0800
+	by smtp.qiye.163.com (Hmail) with ESMTP id 4cbfd4e16;
+	Mon, 7 Sep 2026 11:20:53 +0800 (GMT+08:00)
+Message-ID: <6e96691c-5d52-4e00-a15b-2a2b21f65fe3@rock-chips.com>
+Date: Mon, 7 Sep 2026 11:20:51 +0800
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -28,7 +28,8 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 15/19] phy: Add common Innosilicon HDMI PHY helpers
+Subject: Re: [PATCH v3 16/19] phy: rockchip: inno-hdmi: Use the common
+ Innosilicon PHY helpers
 To: Michal Wilczynski <m.wilczynski@samsung.com>
 Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
  <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>,
@@ -60,49 +61,105 @@ Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
  Graham Markall <hello@big-grey.co.uk>,
  Icenowy Zheng <zhengxingda@iscas.ac.cn>
 References: <20260904-jh7110-clean-send-v3-0-484f9ae72715@samsung.com>
- <CGME20260904132737eucas1p240d02860355b180ff9c5e8e4c6941ec0@eucas1p2.samsung.com>
- <20260904-jh7110-clean-send-v3-15-484f9ae72715@samsung.com>
+ <CGME20260904132739eucas1p223161c8aa461d6ad18786635ab3c9de4@eucas1p2.samsung.com>
+ <20260904-jh7110-clean-send-v3-16-484f9ae72715@samsung.com>
 Content-Language: en-US
 From: Chaoyi Chen <chaoyi.chen@rock-chips.com>
-In-Reply-To: <20260904-jh7110-clean-send-v3-15-484f9ae72715@samsung.com>
+In-Reply-To: <20260904-jh7110-clean-send-v3-16-484f9ae72715@samsung.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0aa079ddac6403a7kunm8546d35235ff8c
+X-HM-Tid: 0aa079e20e8103a7kunmae2afc193611e7
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkZSEtCVkoZHU1OHUwdTx5OSFYVFA
+	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkaTEsZVh4aS0xLGBgaGkgdTlYVFA
 	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlNSlVKTk9VSk9VQ01ZV1kWGg8SFR0UWUFZT0tIVUpLSE
 	pKQkxVSktLVUpCS0tZBg++
 DKIM-Signature: a=rsa-sha256;
-	b=Ku4RR7ubhkME7SdU7Q1vR5N4bs9Jd9O9dvZ9PeeRSteOPVUkDArQId4e3ukUTnqz+qWufSkjKXJ2R4/U363WXT4BSsLmk0+jXlh+bAmQV7Motws9BeZFvlX3PDZsY+ze3KEL/3yqEcWz8+aHEvsZGtdV4HknbJNEDvGIuMZ8U48=; c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
-	bh=+vkcaZtmTBN2qJZBZCZ7S5klbEWaaU26s6Uci6PmceU=;
+	b=J+pH9aqjliwdMdP6kenDUDgsFo2GFjCulzu+UU8+Z1ovBsC62FGnk1cwrTWEL9+KGDNq4sdEgsK8gJdOHqlSNOH6d50lhGEQHf8B2L81S4cAX6catva+VVg4ikamy9CzRb2ncewysvwvV2ttkQX5ECW8n63q1jQhUmujT/P3DbQ=; c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+	bh=TOMJc+Y8LFdspZYjJ1TLplIIrOzasQxKAI43UPHgqhM=;
 	h=date:mime-version:subject:message-id:from;
 
 Hello Michal,
 
 On 9/4/2026 9:27 PM, Michal Wilczynski wrote:
-> The Innosilicon HDMI PHY IP is used by several SoCs. They differ in
-> where the PHY register block sits in the register space and in which
-> pixel clocks they support, but the pre-PLL programming sequence and the
-> layout of its registers are the same.
+> The RK3328 pre-PLL programming, its table lookup and its recalc_rate and
+> determine_rate implementations are the generic Innosilicon ones, so drop
+> the local copies and use the shared helpers instead.
 > 
-> Add a small library holding that shared part: the pre-PLL configuration
-> table format, a lookup, clk_ops determine_rate and recalc_rate helpers,
-> and the pre-PLL register programming. Callers pass a regmap, a register
-> offset for the PHY block, and their own pixel clock table.
+> The RK3228 pre-PLL sits at different register addresses, so it keeps its
+> own register level code and only shares the table lookup.
 > 
-> No driver uses it yet; the users are converted separately.
+> The now unused RK3328 pre-PLL register macros go with it, as does the
+> local pre-PLL config lookup wrapper; both call sites already have the
+> TMDS clock to hand and call inno_hdmi_phy_pre_pll_lookup() directly.
+> 
+> The RK3328 recalc_rate used to log the pre-PLL output as "vco". The
+> shared helper logs it too, and reports the actual VCO frequency
+> alongside the rate, which is the value with the 1.4-3.2 GHz constraint.
+> 
+> The register writes, their order and the values written are unchanged.
+> No functional change intended.
 > 
 > Signed-off-by: Michal Wilczynski <m.wilczynski@samsung.com>
 > ---
->  drivers/phy/Kconfig               |   8 +
->  drivers/phy/Makefile              |   1 +
->  drivers/phy/phy-inno-hdmi.c       | 298 ++++++++++++++++++++++++++++++++++++++
->  include/linux/phy/inno-hdmi-phy.h |  85 +++++++++++
->  4 files changed, 392 insertions(+)
+>  drivers/phy/rockchip/Kconfig                  |   1 +
+>  drivers/phy/rockchip/phy-rockchip-inno-hdmi.c | 165 ++++----------------------
+>  2 files changed, 26 insertions(+), 140 deletions(-)
+>
+
+[...]
+
+>  
+> @@ -915,39 +858,11 @@ unsigned long inno_hdmi_phy_rk3328_clk_recalc_rate(struct clk_hw *hw,
+>  						   unsigned long parent_rate)
+>  {
+>  	struct inno_hdmi_phy *inno = to_inno_hdmi_phy(hw);
+> -	unsigned long frac;
+> -	u8 nd, no_a, no_b, no_d;
+> -	u64 vco;
+> -	u16 nf;
+> -
+> -	nd = inno_read(inno, 0xa1) & RK3328_PRE_PLL_PRE_DIV_MASK;
+> -	nf = ((inno_read(inno, 0xa2) & RK3328_PRE_PLL_FB_DIV_11_8_MASK) << 8);
+> -	nf |= inno_read(inno, 0xa3);
+> -	vco = parent_rate * nf;
+> -
+> -	if (!(inno_read(inno, 0xa2) & RK3328_PRE_PLL_FRAC_DIV_DISABLE)) {
+> -		frac = inno_read(inno, 0xd3) |
+> -		       (inno_read(inno, 0xd2) << 8) |
+> -		       (inno_read(inno, 0xd1) << 16);
+> -		vco += DIV_ROUND_CLOSEST(parent_rate * frac, (1 << 24));
+> -	}
+> -
+> -	if (inno_read(inno, 0xa0) & RK3328_PCLK_VCO_DIV_5_MASK) {
+> -		do_div(vco, nd * 5);
+> -	} else {
+> -		no_a = inno_read(inno, 0xa5) & RK3328_PRE_PLL_PCLK_DIV_A_MASK;
+> -		no_b = inno_read(inno, 0xa5) & RK3328_PRE_PLL_PCLK_DIV_B_MASK;
+> -		no_b >>= RK3328_PRE_PLL_PCLK_DIV_B_SHIFT;
+> -		no_b += 2;
+> -		no_d = inno_read(inno, 0xa6) & RK3328_PRE_PLL_PCLK_DIV_D_MASK;
+> -
+> -		do_div(vco, (nd * (no_a == 1 ? no_b : no_a) * no_d * 2));
+> -	}
+>  
+> -	inno->pixclock = DIV_ROUND_CLOSEST((unsigned long)vco, 1000) * 1000;
+> +	inno->pixclock = inno_hdmi_phy_pre_pll_recalc_rate(&inno->pre_pll,
+> +							   parent_rate);
+>  
+> -	dev_dbg(inno->dev, "%s rate %lu vco %llu\n",
+> -		__func__, inno->pixclock, vco);
+> +	dev_dbg(inno->dev, "%s rate %lu\n", __func__, inno->pixclock);
+>
+
+The printing here is redundant, because it has already been handled in 
+inno_hdmi_phy_pre_pll_recalc_rate().
+
 Reviewed-by: Chaoyi Chen <chaoyi.chen@rock-chips.com>
+
+>  	return inno->pixclock;
+>  }
 
 -- 
 Best, 
 Chaoyi
-
