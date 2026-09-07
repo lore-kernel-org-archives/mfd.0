@@ -1,152 +1,190 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail2.ecloud.global (mail2.ecloud.global [135.181.6.248])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCF3A347533
-	for <mfd@lists.linux.dev>; Mon,  7 Sep 2026 05:02:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788757375; cv=none; b=hTBKU8w2RTRMRlrcHWz9feD9rTjkAhsqQoXK0skLNWrIPLKG84hNVQr2R1H+9uPBd+HskTWlp0L52kedd650YADNocmpdxGG3+IA1WAMI9n0WVcD7/VTCjRoAkrpjRNoxv+LfstJP7nKyd3TleTrYgFZBpX2zHjs/dPKtTEhIfo=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788757375; c=relaxed/simple;
-	bh=OiFGlswaVY8Ue7sSMl+kvBbOlIEoMbSiPfW3hD8sEsI=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=GfqFXHpKIIWh6UB2cAtRqFYs89qj2VM6hiXSSpyYknj3xOn6plHqk2SdhSU1bHP07T2+E53CA21p3baqsToxXCBL8k1U0Ck5Ot7uXEQId1SfTVxgru2d0HAFM1CP2FR1en1GUmk1a9XzGmTVlvugW1Qxt/SlrHlN8WecpMF7Qdg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bTZZKygy; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E34A32E729
+	for <mfd@lists.linux.dev>; Mon,  7 Sep 2026 06:02:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=135.181.6.248
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788760961; cv=pass; b=a8iHqmP3MRBYHV79gl41dZ4tQnua7exQ+S27j6pvLDG2c7gtt7Hy85IY3MHmHVYjym2jhK5wqQ9etasyj8837oJ3dzSIrMFhz8prh+c5nM6lNTYwL2pzMQap1HwxKdcF7CBcPnmkC914nQKfOqwvJJbm1gfZAuNU1Jq7EjKrhww=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788760961; c=relaxed/simple;
+	bh=j6NNC903zHxkzvRUFicQk32m/77k10e3EwnZbP6cIJs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=AI0njSOBymioDRSEZNRrnxszw8ZKAmYjTvqhB87G89DN/qKBoFYOXbWOCvVYJpGnhR0BEzxmVLhXhB5iPEQcl3wpUwR2VqazWvolusRPtmryUOKfn2LDVgbovT6StHdOndCrYI0J8wT8tcuRyfUU3VDhR2SP9adOT0n2Wn4eBkI=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=murena.io; spf=pass smtp.mailfrom=murena.io; dkim=pass (1024-bit key) header.d=murena.io header.i=@murena.io header.b=PmA/HmG6; arc=pass smtp.client-ip=135.181.6.248
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=murena.io
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=murena.io
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bTZZKygy"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 43B651F00A3A;
-	Mon,  7 Sep 2026 05:02:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1788757374;
-	bh=tm12X39vbOhBtA697uriuRThlJfibtODrq6tAmjho9U=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=bTZZKygyeDxkOS6Vne7zoBdDniDbYBphQAk/m5tVjhKmLjN3TBffcdq2QSHWWiMsJ
-	 9d7Ao1/7sLcbaPTTcigl4dK/h3rtQ+AVmQxLK29wC2Js0sWkxMp77t9tsfFTp3ZJ8q
-	 643n+ia4apT3/1jgDvZsHhC6YR4gmuYCBzTet1JCDRd024GtnJ8RzeJNoXJy8/OIi+
-	 rD12TrOUqzGNPMPRvxam8BiCjTDT4HrpLVbtm5kraD/83Ml5xHL+2IsPi8tL5sn5bD
-	 F+/1Au3JAOsc7obFUEUWWU7IEtxAez7wdiERh2E5XghSaP/UkmeOPHgIB7GH3X4wX9
-	 Bmlt1dFlgPTdA==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 3/3] mfd: wm831x: Fix typo "convertor" in comment
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Hemanth Selam" <hemanth.selam@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260907045331.16932-4-hemanth.selam@gmail.com>
-References: <20260907045331.16932-1-hemanth.selam@gmail.com>
- <20260907045331.16932-4-hemanth.selam@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 07 Sep 2026 05:02:53 +0000
-Message-Id: <20260907050254.43B651F00A3A@smtp.kernel.org>
+	dkim=pass (1024-bit key) header.d=murena.io header.i=@murena.io header.b="PmA/HmG6"
+Received: from authenticated-user (mail2.ecloud.global [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mail2.ecloud.global (Postfix) with ESMTPSA id B5691721160;
+	Mon,  7 Sep 2026 06:02:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=murena.io; s=mail2;
+	t=1788760956;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=BAVC7+HWaVQEnnbRSHCcKz7r6ECmUII3NjKcSqgDdqE=;
+	b=PmA/HmG6YkWmDztp42L5zdma4jFThIPnKvAqNfbKAdesgHuHViEz/9/BsbLyLPrFlMVsMR
+	90PURNCV5f0ejRhPmxHXdYpHnShCWVdp5iL/i21PpFNl/H2uZYZ9c3+WkelnaTWFUrGk5B
+	iBSfUKxKxkV64Fa5Y7MRVyL/qoQhpp4=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=murena.io;
+	s=mail2; t=1788760956;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=BAVC7+HWaVQEnnbRSHCcKz7r6ECmUII3NjKcSqgDdqE=;
+	b=B7cL82PImBfFxeoSczoECpP9wW/1E0dBlifMotXVGSAoewtJC7WP6rAasDziB5y+nt8d9t
+	ka/7gR0eTSE8njdmzxtOje2HHaTjLKe6OFXRMXhKUbs66npTNSBI20Odzcy8a+XGIHu3B9
+	u6sSUVyaFcRVrbYVNphd1SZ9uMItg/o=
+ARC-Authentication-Results: i=1;
+	mail2.ecloud.global;
+	auth=pass smtp.mailfrom=maud_spierings@murena.io
+ARC-Seal: i=1; s=mail2; d=murena.io; t=1788760956; a=rsa-sha256; cv=none;
+	b=rwRBNY+YtZMISw0XZ4wJRHpzo5Yp5mjZm9wz7veARrU2FXHtXfGXC60RqIcwXWYC5dud+W
+	L7dEyuwGnjdl0A8avafm5S5qS1okQ4f9cuM7HuL2m1jEy3RMF9b7rhW97RRaFAfovoOiBa
+	OvyG566rnyc+P4JwysSkJgarI/RAlcQ=
+Message-ID: <f68d95d0-f918-4dee-9443-38c64247b71a@murena.io>
+Date: Mon, 7 Sep 2026 08:02:33 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Subject: Re: [PATCH v2 13/15] phy: starfive: Add jh7110-inno-hdmi-phy driver
+To: Icenowy Zheng <uwu@icenowy.me>, Dominique Belhachemi <domibel@debian.org>
+Cc: m.wilczynski@samsung.com, Laurent.pinchart@ideasonboard.com,
+ airlied@gmail.com, alex@ghiti.fr, andrzej.hajda@intel.com,
+ andy.yan@rock-chips.com, andyshrk@163.com, aou@eecs.berkeley.edu,
+ bmasney@redhat.com, conor+dt@kernel.org, conor@kernel.org,
+ devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ hal.feng@starfivetech.com, heiko@sntech.de, hello@big-grey.co.uk,
+ jernej.skrabec@gmail.com, jonas@kwiboo.se, kernel@esmil.dk,
+ krzk+dt@kernel.org, lee@kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-phy@lists.infradead.org, linux-riscv@lists.infradead.org,
+ linux-rockchip@lists.infradead.org, luca.ceresoli@bootlin.com,
+ m.szyprowski@samsung.com, maarten.lankhorst@linux.intel.com,
+ maudspierings@gocontroll.com, mfd@lists.linux.dev, mripard@kernel.org,
+ mturquette@baylibre.com, neil.armstrong@linaro.org, p.zabel@pengutronix.de,
+ palmer@dabbelt.com, pjw@kernel.org, rfoss@kernel.org, robh@kernel.org,
+ sboyd@kernel.org, simona@ffwll.ch, tzimmermann@suse.de, vkoul@kernel.org
+References: <20260828-jh7110-clean-send-v2-13-331680c8b9d1@samsung.com>
+ <0ccb4168-ff88-459c-972d-3c091c155db2@murena.io>
+ <e780ecb8-918f-4816-99c8-b69b10b25a18@murena.io>
+ <CAAvaLCwvVUddS14MPx0FHdnp+QeZ99+ox17pXt2hSWPTCFcHtw@mail.gmail.com>
+ <cb0884b3-c9be-4cfd-ba43-27add3821ddd@murena.io>
+ <6a5f8c11a092cef83bae8d9ea0100c2fc133a514.camel@icenowy.me>
+ <CAAvaLCxMntrTbTQ9VNu4H_6LA30TRAqi7mCpn+x3hbTG9WqERA@mail.gmail.com>
+ <057d97bd4b63fa4445dd86548f2ecdcbe9c3b1b6.camel@icenowy.me>
+Content-Language: en-US
+From: Maud Spierings <maud_spierings@murena.io>
+In-Reply-To: <057d97bd4b63fa4445dd86548f2ecdcbe9c3b1b6.camel@icenowy.me>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
-s) to consider:
+Hi Dominique and Icenowy,
 
-Pre-existing issues:
-- [High] Negative shift count in `wm831x_auxadc_irq` due to missing validat=
-ion of source field.
-- [High] State leak on error path in `wm831x_auxadc_read_irq` causing perma=
-nent ADC deadlock.
---
+On 9/7/26 06:01, Icenowy Zheng wrote:
+> 在 2026-09-06日的 17:16 -0400，Dominique Belhachemi写道：
+>> On Sun, Sep 6, 2026 at 11:19 AM Icenowy Zheng <uwu@icenowy.me> wrote:
+>>>
+>>> 在 2026-09-06日的 16:59 +0200，Maud Spierings写道：
+>>>> On 9/6/26 07:39, Dominique Belhachemi wrote:
+>>>>> On Sun, Aug 30, 2026 at 10:17 AM Maud Spierings
+>>>>> <maud_spierings@murena.io <mailto:maud_spierings@murena.io>>
+>>>>> wrote:
+>>>>>
+>>>>>      I was still having some glitching happening on the display,
+>>>>> but
+>>>>> I've
+>>>>>      found the way to fix that, the question is what is actually
+>>>>>      happening here.
+>>>>>
+>>>>>          0x29590020 <- 0x00000005
+>>>>>      This one I have no idea, it is 0x00000009 with this patch
+>>>>> series but
+>>>>>      with the vendor kernel I get the value above. When I hook
+>>>>> up my
+>>>>>      external
+>>>>>      display (regular 1440p) this becomes 0x0000000D on the
+>>>>> vendor
+>>>>> kernel.
+>>>>>
+>>>>>      But I can't find this register being written to anywhere
+>>>>> there?
+>>>>>
+>>>>>
+>>>>> Maybe this needs to be swapped?
+>>>>>
+>>>>> drivers/gpu/drm/bridge/inno-hdmi.c
+>>>>>     -#define v_HSYNC_POLARITY(n)          ((n) << 3)
+>>>>>     -#define v_VSYNC_POLARITY(n)          ((n) << 2)
+>>>>>     +#define v_HSYNC_POLARITY(n)          ((n) << 2)
+>>>>>     +#define v_VSYNC_POLARITY(n)          ((n) << 3)
+>>>
+>>> Very weirdly, the original definition here matches current mainline
+>>> inno-hdmi.c, but the changed definition matches JH7110 vendor
+>>> inno_hdmi.h [1].
+>>>
+>>
+>> The vendor code is correct and matches the RK3128 TRM.
+> 
+> Thanks for the tips on documentation, and I verified this.
+> 
+> It seems that Rockchip people made this always wrong, even with their
+> pre-DRM display driver... [1]
+> 
+> BTW I checked the Innosilicon dGPU driver code, and its g3_ne_hdmi.h
+> source file also contains the definition of BIT(3) as VSYNC. (It's
+> quite weird that most logic of that driver is in some .o_shipped blob,
+> but fortunately the g3 logic might be too new to be closed down)
+> 
+> Thanks,
+> Icenowy
+> 
+> [1]
+> https://github.com/rockchip-linux/kernel/blob/release-4.4/drivers/video/rockchip/hdmi/rockchip-hdmiv1/rockchip_hdmiv1_hw.h#L161
+> 
+>>
+>> HDMI_reg08
+>>      Bit  Attr  Reset  Description
+>>      3    RW    0x0    vs_polarity   VSYNC polarity   1'b0: Negative
+>> 1'b1: Positive
+>>      2    RW    0x0    hs_polarity   HSYNC polarity   1'b0: Negative
+>> 1'b1: Positive
+>>
+>> Nobody noticed this so far because in 720p/1080p both polarities are
+>> positive, but Maud's 3:2 panel has differing H/V polarity.
+>>
+>> Best
+>> -Dominique
 
-commit 50c01f2e8806d70971e1f256c73c3a0a948552c6
-Author: Hemanth Selam <hemanth.selam@gmail.com>
+This also solves the devmem behaviour I saw, or well, doesn't realy 
+explain it but does show what is actually happening. As Icenowy noted 
+(maybe that was on telegram only?) the inno-hdmi regs are 8bit instead 
+of 32 bit.
 
-mfd: wm831x: Fix typo "convertor" in comment
+What is actually happening is:
 
-This commit fixes a spelling error in a comment within wm831x_auxadc_irq(),
-changing "convertor" to "converter". No code changes are introduced.
+devmem 0x29590000 b reads 0x29590000 as expected
+but
+devmem 0x29590004 b reads 0x29590001
+devmem 0x29590008 b reads 0x29590002
+....
+devmem 0x29590020 b reads 0x29590008
 
-> diff --git a/drivers/mfd/wm831x-auxadc.c b/drivers/mfd/wm831x-auxadc.c
-> index 744e1d161c5a7..6280d4f389815 100644
-> --- a/drivers/mfd/wm831x-auxadc.c
-> +++ b/drivers/mfd/wm831x-auxadc.c
-> @@ -132,7 +132,7 @@ static irqreturn_t wm831x_auxadc_irq(int irq, void *i=
-rq_data)
->  			1 << input, 0);
->  	wm831x->auxadc_active &=3D ~(1 << input);
+For some reason the addressing is weird?
 
-[Severity: High]
-This is a pre-existing issue, but I have a question about the shift operati=
-on
-here.
+With this change, the assigned clock change and removing the 
+v_REG_CLK_INV | v_REG_CLK_SOURCE_SYS write to HDMI_SYS_CTRL, the display 
+comes up from the start as it should!
 
-If the hardware returns 0 in the source mask field of WM831X_AUXADC_DATA (e=
-.g.
-due to hardware malfunction or I2C bus corruption), the input calculation:
-
-	input =3D ((ret & WM831X_AUX_DATA_SRC_MASK)
-		 >> WM831X_AUX_DATA_SRC_SHIFT) - 1;
-
-evaluates to -1.
-
-This would result in attempting to bitwise shift 1 << -1, which is C undefi=
-ned
-behavior and could lead to memory corruption, kernel panics, or unexpected
-register modifications depending on the architecture.
-
-Could this negative shift count occur due to missing validation of the sour=
-ce
-field?
-
-> -	/* Turn off the entire convertor if idle */
-> +	/* Turn off the entire converter if idle */
->  	if (!wm831x->auxadc_active)
->  		wm831x_reg_write(wm831x, WM831X_AUXADC_CONTROL, 0);
-> =20
-
-[Severity: High]
-This isn't a bug introduced by this patch, but looking at the error path
-in wm831x_auxadc_read_irq():
-
-drivers/mfd/wm831x-auxadc.c:wm831x_auxadc_read_irq() {
-	...
-	if (!(wm831x->auxadc_active & (1 << input))) {
-		...
-		wm831x->auxadc_active |=3D 1 << input;
-	}
-
-	/* We convert at the fastest rate possible */
-	if (ena) {
-		ret =3D wm831x_set_bits(wm831x, WM831X_AUXADC_CONTROL, ...);
-		if (ret !=3D 0) {
-			dev_err(wm831x->dev, "Failed to start AUXADC: %d\n",
-				ret);
-			goto out;
-		}
-	}
-	...
-out:
-	list_del(&req->list);
-	mutex_unlock(&wm831x->auxadc_lock);
-
-	kfree(req);
-
-	return ret;
-}
-
-If wm831x_set_bits() fails to start the AUXADC (e.g. due to an I2C error),
-the function returns via the out label.
-
-However, the active tracking bit wm831x->auxadc_active |=3D 1 << input; was
-already set and is never reverted on this error path.
-
-On any subsequent read for this input, the code sees the active bit set,
-skips enabling the hardware ADC, and hits the wait_for_completion_timeout
-forever.
-
-The interrupt never fires because the hardware wasn't started, causing a
-permanent functional failure of the ADC channel, coupled with a 500ms thread
-stall on every subsequent read attempt.
-
-Does this error path leak the active state and cause a permanent ADC deadlo=
-ck?
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260907045331.1693=
-2-1-hemanth.selam@gmail.com?part=3D3
+Kind regards,
+Maud
