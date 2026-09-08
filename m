@@ -1,110 +1,168 @@
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6DC4B379991
-	for <mfd@lists.linux.dev>; Tue,  8 Sep 2026 05:53:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.43
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 58E4623D7DC
+	for <mfd@lists.linux.dev>; Tue,  8 Sep 2026 06:00:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788846826; cv=none; b=PCDKjGtIEc/WWcZu6mrRGWQMHtHzpa8YnzVw76i5E4/TC0o0qMQ8ScvS1Tw/vL6cNY+vuOHoyYKln4R3qfUTfjIk1y0HHzal2jNZytU5xxd65hP0u99ze61ipf1LZwP9BIPzSyRs9ep3QHEL0eIwByWzA7L5HEPKGCReOfIeZDg=
+	t=1788847228; cv=none; b=rDEQtyqau9ocyUMbZlJsGx+rKwthc63ORVMYsXriAdFDf/DZb8xwzBp25CjcFb8+oFc8lrH+sBuR7jZg25pC4s3PRnaUpbUGpzeEBvaiVBd1R+V2jGlxVf+2hl+0ys0qB5hv7qUvnOc2j0nUZQtUNxrEji4ydq/LI9pTiXhHg8A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788846826; c=relaxed/simple;
-	bh=Jz7PTSKGJ55NnLyUAIe8domyVhPo7IY8b8In90AwBXM=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=LLN8zw29uZAcI7XxRFLdHzdQbfZ31rb2Owp/j49G9QKMUjFQq+hW8XJhnCbw6tIQ4et4L+TdmPWz9DHQQVDH4ntxIWcTbARplzJuEixuGuM08JUhTI6I9+j0AO79LUsktycm/eMHwqQSEvM18u0vYn/y9hhtkF2KrfU1U1o2XSE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hvjR7tIK; arc=none smtp.client-ip=209.85.216.43
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1788847228; c=relaxed/simple;
+	bh=T+RwHxGnN0nt6HDL43qZVESdJ6RXIKEXVivBz2V7HgE=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=pIc5IUWqAnox1ykIn1JScIQjHOwSKkd87ubJupy7UnOS9Kop99FiL4eUATfkW7oBcB1QO4TQ5Z6icPJ7tqLvIGkd3JlHfUd3Knq+86Q8sIki9pY1uaWcu8IEFZy1067tSmH8Jgn+9q1nLzh7sLcYd/fvUf75u9TRFx+RjnI8SHI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NdLE8tzA; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hvjR7tIK"
-Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-382ef647e20so4295616a91.1
-        for <mfd@lists.linux.dev>; Mon, 07 Sep 2026 22:53:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788846825; x=1789451625; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=pAY8TY9q0i8zWUjXHOr0pnr+Oz87HVu+4vQWB90u+IE=;
-        b=hvjR7tIKj84Dr8SOPdo5OUJG+I5O+JObzB7VJJwPOwxn7bzMMeueb650x/pwjCZGXy
-         ZlFf7wMfGeYWu9yTB33ozBfd8csLOQUKdq2J+wdu6OxVXclfWk0dBa+KaWHmpKfCieAT
-         uAp9eRIZHM9+hjohKl9YMYVtXWM3OKQNCgy6B8XEqXf6vRYj9S1TTybXtRs0WA0BEavS
-         tJZGahLm7yHAyOu6XcR8etyPwN87feM35Eszn59QsSLHwOk1/Af5AqtXBhouYe2bhhyz
-         gZNLtlaRJVkQXANxGcu9LlCu/bGzuiPPeRF43Ohn8g/E3nx9z5RR4/5I59Q4/0QDFLP6
-         MSWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788846825; x=1789451625;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=pAY8TY9q0i8zWUjXHOr0pnr+Oz87HVu+4vQWB90u+IE=;
-        b=PdEAIpTElboDVl04XSSH8OMqg/sPFwdAZWtuGxl4aiVsJKGCSDS6moJxoF6Y2EwXgj
-         pD8/jyNMsL4yVFRQnHDgFixh6jxzFwptBJNd+VSLYwEuHkhlkbtGFL2aVg2gBYs7K6fz
-         y3kVZfUZIC9+HBu6zCcS4GO0VNNcpxJh6a0zCuMfHn7EhNGVHNVmdnsJShWVDQWsewPr
-         L9ASRw93mvfO/ePs1/gMjW2ZYO41OITSgaNEG50KwTALQYLprWb3EZKDJ9bvjpsCk5tX
-         ZBIQM8NHXubEaqudUfX66Lnl41z0BtffAiMmk2NNjgLqUILdgYQcWjzbKNhmiSg8s9FJ
-         thwQ==
-X-Gm-Message-State: AFuF++ls+XImfjDl3Dam4bGf9mYjfPbIx2CWBZO1qR5eUjn3Tk/xEuZp
-	zX7eAHPkMhnM496XsopxCQzho7LcPC9wdwGr2rXAIE5jltn1QOZUax+T
-X-Gm-Gg: AYBFou1dTE73c7tXNBvoTEni7KVPvDqupeI0BXKVWHJKN5gk8kWHn/HVOpmK2NMvxJT
-	c+/jCGGqMohMP0JLx+RUaZac+D4XHYJbdMtL3kuQVTAsnNHKdly+IpDConnpK8/dV2pcm9s0IcY
-	mNZFw1SqW84s3Qd00DVJO/u+Ferscu9+9OAFBU3ThbRGXiF707HEldrxr3weHf+E9Zr29yxE6FZ
-	h9VOUVjZ3APdMrjgjuRstIswuGFOmwFWeYm+DFVRW9LbDqKiVDoS16zZleVFjbkW12QbmoeJTra
-	Oj5pLto2mu3qDeWAjjE6py9Gt0o4HCGqN5nIO9QDG5tAWq8eR1eA1YuF0OSd446vple4gfEJPf+
-	rXFbk5UnDvNyKfugDgc2Knev7hs+PrMF6xW7cxV6/k8oFUMdObZFVla4C4DQRxhnWKyjAgc6URj
-	Kynn3QzGmYA6lSlHuBmh5DdeDNJyl7oW6WsCABgFsIQ5A1+05jlhkWKor/pQLoHHg9kk/SzD46q
-	/H189EbiuSDmQ==
-X-Received: by 2002:a17:90b:1c8b:b0:398:9bd5:490c with SMTP id 98e67ed59e1d1-39b26214502mr37996095a91.19.1788846824454;
-        Mon, 07 Sep 2026 22:53:44 -0700 (PDT)
-Received: from volcano9f6e-hostos.amd.com ([165.204.217.251])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1433171a97esm32427231c88.12.2026.09.07.22.53.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 07 Sep 2026 22:53:44 -0700 (PDT)
-From: Hemanth Selam <hemanth.selam@gmail.com>
-To: Lee Jones <lee@kernel.org>,
-	patches@opensource.cirrus.com
-Cc: mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v3] mfd: wm831x: Fix typo "convertor" in comment
-Date: Tue,  8 Sep 2026 11:23:40 +0530
-Message-ID: <20260908055340.22241-1-hemanth.selam@gmail.com>
-X-Mailer: git-send-email 2.48.1
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NdLE8tzA"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B6A741F00A3A;
+	Tue,  8 Sep 2026 06:00:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788847227;
+	bh=ZbsTzRf5fsM4AJb3os1iW8ybgL0YtJ0jt5NAlWV44S0=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=NdLE8tzABEYruQZP8a1mIALHdK/adhDLKqfHnHXrZx5ZOjLPkDPg4J2ajudVV0Iv0
+	 Xb3PIovYV91OR3vcAaP+WaIRvj4MmlwZESJ4uUbUO5E2S4GCQAS8BEgFa9OYwWwp+c
+	 AogfdAMDVRjJDlf9rR2wLdSjdGF17qJb+hbnQgWG/zImiDFHiVIz5nVWPUB4rPS69b
+	 zCM1ryqOhTRZUuFOFsaIjY8LVpiLn0pPCGHyzOHE+uZ7WGRohIlTwh+AKCOBffypuT
+	 A1T0LsFTKAIhWt8q514HgiIO5o/fWA6dnLB1e9k+LKsuiPjAuhbzDXXoJE3qcQyw1+
+	 a/6nbd3co/I4w==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v3] mfd: wm831x: Fix typo "convertor" in comment
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Hemanth Selam" <hemanth.selam@gmail.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20260908055340.22241-1-hemanth.selam@gmail.com>
+References: <20260908055340.22241-1-hemanth.selam@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Tue, 08 Sep 2026 06:00:26 +0000
+Message-Id: <20260908060026.B6A741F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+
+Thank you for your contribution! Sashiko AI review found 2 potential issue(=
+s) to consider:
+
+Pre-existing issues:
+- [High] This problem wasn't introduced by this patch, but memory corruptio=
+n can occur due to freeing a list element without removing it from the list=
+ in wm831x_auxadc_read_irq.
+- [High] This problem wasn't introduced by this patch, but a broken polling=
+ loop in wm831x_auxadc_read_polled causes premature timeout.
+--
+
+commit c4685699a90d5d341f26100b93279945ad18d7cc
+Author: Hemanth Selam <hemanth.selam@gmail.com>
+
+mfd: wm831x: Fix typo "convertor" in comment
 
 Correct "convertor" to "converter", reported by scripts/checkpatch.pl
-using the misspelling list in scripts/spelling.txt.  Only touches a
+using the misspelling list in scripts/spelling.txt. Only touches a
 comment, no code changes.
 
-Since v1 the subject carries the driver name and a capitalised
-description, to match the MFD subsystem convention.
+> diff --git a/drivers/mfd/wm831x-auxadc.c b/drivers/mfd/wm831x-auxadc.c
+> index 6ee3018d8653f..94b8d24611e43 100644
+> --- a/drivers/mfd/wm831x-auxadc.c
+> +++ b/drivers/mfd/wm831x-auxadc.c
+> @@ -138,7 +138,7 @@ static irqreturn_t wm831x_auxadc_irq(int irq, void *i=
+rq_data)
+>  			1 << input, 0);
+>  	wm831x->auxadc_active &=3D ~(1 << input);
+> =20
+> -	/* Turn off the entire convertor if idle */
+> +	/* Turn off the entire converter if idle */
+>  	if (!wm831x->auxadc_active)
+>  		wm831x_reg_write(wm831x, WM831X_AUXADC_CONTROL, 0);
 
-Assisted-by: Cursor:claude-opus-5
-Signed-off-by: Hemanth Selam <hemanth.selam@gmail.com>
----
+While reviewing this file, I noticed a couple of pre-existing issues in
+the surrounding code.
 
-Changes since v2:
- - sent on its own instead of as part of a cirrus series.  Mark Brown
-   asked for patches touching different subsystems not to be grouped into
-   one series when there is no dependency between them.
+In drivers/mfd/wm831x-auxadc.c:wm831x_auxadc_read_irq():
 
- drivers/mfd/wm831x-auxadc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> 	/* Enqueue the request */
+> 	list_add(&req->list, &wm831x->auxadc_pending);
+>=20
+> 	ena =3D !wm831x->auxadc_active;
+>=20
+> 	if (ena) {
+> 		ret =3D wm831x_set_bits(wm831x, WM831X_AUXADC_CONTROL,
+> 				      WM831X_AUX_ENA, WM831X_AUX_ENA);
+> 		if (ret !=3D 0) {
+> 			dev_err(wm831x->dev, "Failed to enable AUXADC: %d\n",
+> 				ret);
+> 			goto out;
+> 		}
+> 	}
+> [ ... ]
+> 	list_del(&req->list);
+> 	ret =3D req->val;
+>=20
+> out:
+> 	mutex_unlock(&wm831x->auxadc_lock);
+>=20
+> 	kfree(req);
+>=20
+> 	return ret;
 
-diff --git a/drivers/mfd/wm831x-auxadc.c b/drivers/mfd/wm831x-auxadc.c
-index 744e1d161c5a..6280d4f38981 100644
---- a/drivers/mfd/wm831x-auxadc.c
-+++ b/drivers/mfd/wm831x-auxadc.c
-@@ -132,7 +132,7 @@ static irqreturn_t wm831x_auxadc_irq(int irq, void *irq_data)
- 			1 << input, 0);
- 	wm831x->auxadc_active &= ~(1 << input);
- 
--	/* Turn off the entire convertor if idle */
-+	/* Turn off the entire converter if idle */
- 	if (!wm831x->auxadc_active)
- 		wm831x_reg_write(wm831x, WM831X_AUXADC_CONTROL, 0);
- 
--- 
-2.48.1
+[Severity: High]
+This isn't a bug introduced by this patch, but memory corruption can occur =
+due
+to freeing a list element without removing it from the list in
+wm831x_auxadc_read_irq.
 
+If wm831x_set_bits() fails and jumps to the out label, the dynamically
+allocated req structure is freed via kfree(req) while it is still linked in
+the wm831x->auxadc_pending list.
+
+Could this leave a dangling pointer in the pending list that might be
+dereferenced during subsequent calls to the interrupt handler
+wm831x_auxadc_irq() or other wm831x_auxadc_read_irq() calls?
+
+Also in drivers/mfd/wm831x-auxadc.c:wm831x_auxadc_read_polled():
+
+> 	/* If we're not using interrupts then poll the
+> 	 * interrupt status register */
+> 	timeout =3D 5;
+> 	while (timeout) {
+> 		msleep(1);
+>=20
+> 		ret =3D wm831x_reg_read(wm831x,
+> 				      WM831X_INTERRUPT_STATUS_1);
+> 		if (ret < 0) {
+> 			dev_err(wm831x->dev,
+> 				"ISR 1 read failed: %d\n", ret);
+> 			goto disable;
+> 		}
+>=20
+> 		/* Did it complete? */
+> 		if (ret & WM831X_AUXADC_DATA_EINT) {
+> 			wm831x_reg_write(wm831x,
+> 					 WM831X_INTERRUPT_STATUS_1,
+> 					 WM831X_AUXADC_DATA_EINT);
+> 			break;
+> 		} else {
+> 			dev_err(wm831x->dev,
+> 				"AUXADC conversion timeout\n");
+> 			ret =3D -EBUSY;
+> 			goto disable;
+> 		}
+> 	}
+
+[Severity: High]
+This isn't a bug introduced by this patch, but a broken polling loop in
+wm831x_auxadc_read_polled causes premature timeout.
+
+When the driver falls back to polled mode, the else block unconditionally
+aborts the polling loop on the first failure after a 1ms delay. The timeout
+variable is also never decremented.
+
+Does this structural issue prevent the while (timeout) loop from actually
+functioning as a polling loop, unconditionally returning -EBUSY if the ADC
+takes slightly longer than 1ms to finish?
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260908055340.2224=
+1-1-hemanth.selam@gmail.com?part=3D1
