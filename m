@@ -1,196 +1,131 @@
-Received: from sender4-op-o11.zoho.com (sender4-op-o11.zoho.com [136.143.188.11])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C492656E054;
-	Wed,  9 Sep 2026 15:47:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.11
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788968860; cv=pass; b=W9nyKY3Gr484GlqJlFZLNDGmGVhxDOp0ds9YEt5KCp4liGH7A/CmA1KA3av2Z0jzMKX1wrbPKNElrHN+UCJZsfqpqwopdwD0ILIo6JsqNVOyB4/72Z2WqJXqqcbQhbnXn7VdHU7Oy0eAEmYQgBpHsyCRv7ZXhAvGLrGYeBxHAow=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788968860; c=relaxed/simple;
-	bh=1WHu6Hc9Jk1lAvAKxEchkOqNKezm6LoV4VOS1wDm8MQ=;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1B2C57D20B;
+	Wed,  9 Sep 2026 16:01:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1788969689; cv=none; b=GlAlPid8PIXMeQ5Y5o42Ht/vjNUjyQ5UufUTf/iY8dLhKQg+gi2xgW5XuA+i1sH34dvSd3RTaujKoAqkLpmSr6IBPpGHNCBgFtW0zg++Bnjq+9caR+tK+9UXIbNxiKsMP1a3nf16AMypLYSWDIvCLM6irayRYf4sJSH3bDk1uX8=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1788969689; c=relaxed/simple;
+	bh=mzbAZMEyh21T6vSxffj37XLmXnWfRgwN51I0/AX5/sA=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=d2HG76UJ05CalqL9hwjkHdWbEhj1b7obATbiDmlE7XiJvBEWmpxxQBBSF7DL9N9J2AwoBUNeJvahBUaStHXFxK0ggJRv7PdEyQ0STPmWx6rhrOvaAL5PPXYqA8oye7rR/03FrbmjfXrlmzKBAE+9LQQlvC5A3SRrPGw33Ljh8QE=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=sebastian.reichel@collabora.com header.b=QK9PzuPu; arc=pass smtp.client-ip=136.143.188.11
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=Yvsi5thsja9kSL77vJJNqQWqAipHjP8pBE7h8WKYVw5P6q3BqyGrex7C4SEWzcHKe1yaW/g5K3c+KZ199WSxMuykcey1fsM7h+O4YypdhB29aXG2JpnFt9VVliJRmi3a63gpY336QxToRkB0Ne9S8Cc/7AOajTopxF6aHcKm9Ek=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XxjZk56z; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=collabora.com header.i=sebastian.reichel@collabora.com header.b="QK9PzuPu"
-ARC-Seal: i=1; a=rsa-sha256; t=1788968850; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=LrNzaX7Q840JJMB22boDRMC4XbmiCXA37gNpa578E+fzZjLt4A+nukYAlA9Df2BaLC7CWgUf6+IU8BT9hMO9vRDfjnyo+MpHbnoB9zuaZX+EAxwsVGbr69mI66nXIuPXJXW59o7Ui0tvWRgxyc6sAlneJtqlRKaXBULfpIV7OUQ=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1788968850; h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=pE7m7m2sBB5ewZCKug+UN71/5f27jp3fJnMB4dlTatU=; 
-	b=T3zLm6V/V1CyF92gtMOjqhUnvmbQ87vAAOjSDUGeov26rGLxk1jR9PkMDtqgz8zqCyNd9s4+X/ncqjedqXLVdJEh69MKUib4DNZFsztCRXhl0IgcKoCMSUssdjG+vjOdH3Q29LKW79Q6xcAUwZsx31gVfcz2hZV4Kt3HW2AuIhs=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=collabora.com;
-	spf=pass  smtp.mailfrom=sebastian.reichel@collabora.com;
-	dmarc=pass header.from=<sebastian.reichel@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1788968850;
-	s=zohomail; d=collabora.com; i=sebastian.reichel@collabora.com;
-	h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
-	bh=pE7m7m2sBB5ewZCKug+UN71/5f27jp3fJnMB4dlTatU=;
-	b=QK9PzuPuYguldW4zRPZuX/PxYYe7H5UaLIKA4Myro5mVihkb8oyjDNFtaSfo7bGc
-	+59RM1jk+7fc0gozUFD98ZXHehTgg7k9PdbQ61Ks5qY+OgcSc6EMo9uj99nNfvythuq
-	FICikCNYNnWe6xQ3Mw6nUy/LipiPEdmal8Cku4JU=
-Received: by mx.zohomail.com with SMTPS id 178896884950669.76921172500283;
-	Wed, 9 Sep 2026 08:47:29 -0700 (PDT)
-Received: by venus (Postfix, from userid 1000)
-	id 412E7183377; Wed, 09 Sep 2026 17:47:21 +0200 (CEST)
-Date: Wed, 9 Sep 2026 17:47:21 +0200
-From: Sebastian Reichel <sebastian.reichel@collabora.com>
-To: Arnd Bergmann <arnd@kernel.org>
-Cc: Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, 
-	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	Arnd Bergmann <arnd@arndb.de>, Daniel Thompson <danielt@kernel.org>, 
-	Jingoo Han <jingoohan1@gmail.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Guenter Roeck <linux@roeck-us.net>, Linus Walleij <linusw@kernel.org>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Jonathan Cameron <jic23@kernel.org>, 
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>, Pavel Machek <pavel@kernel.org>, 
-	Michael Hennerich <michael.hennerich@analog.com>, Support Opensource <support.opensource@diasemi.com>, 
-	Alexandre Belloni <alexandre.belloni@bootlin.com>, Helge Deller <deller@gmx.de>, dri-devel@lists.freedesktop.org, 
-	linux-doc@vger.kernel.org, linux-media@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-hwmon@vger.kernel.org, patches@opensource.cirrus.com, linux-watchdog@vger.kernel.org, 
-	linux-gpio@vger.kernel.org, linux-iio@vger.kernel.org, linux-input@vger.kernel.org, 
-	linux-leds@vger.kernel.org, linux-pm@vger.kernel.org, linux-rtc@vger.kernel.org, 
-	linux-fbdev@vger.kernel.org, linux-sound@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, 
-	llvm@lists.linux.dev
-Subject: Re: [PATCH 11/14] mfd: remove unused wm8350 driver
-Message-ID: <aqF_aeDd8oTZaiRR@venus>
-References: <20260909132153.1596191-1-arnd@kernel.org>
- <20260909132153.1596191-12-arnd@kernel.org>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XxjZk56z"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A46531F00A3A;
+	Wed,  9 Sep 2026 16:01:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1788969687;
+	bh=sdIlJj0OagNdJrulDXbYQgaF9FvZ/jpz9k+rLG0FpVE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=XxjZk56z0aT52foHuSXyAA8RQ77/DbBwkT7QqWTo42d+ObCBKEZgVqLGm5iCw2Iu1
+	 XmusjRBjObGrHyFmSXPbnTodqNDpUQ67TB5e4Vvxg8l4zkhWZgmWG16AEgggjiBIr5
+	 sAPBzr7IHqpQojZktHm6k8rYnPLZysVyxk5Q9XXKokXFPUqgdWt7oZvSOX97omLfau
+	 n/MVnuudtVTLHFiY1Sm2+nveNcpZTq5Y5UZeI2uJMjy+6PiK9UAsrP/xmuXHTzyxH3
+	 pfkyY1CjNHb76TwLiL6whcBgBMwtKvu33V1StHkPC/ykncL1w3OEWfh3ZTcVqzuw4V
+	 XXg8ejeKschGw==
+Date: Wed, 9 Sep 2026 17:01:23 +0100
+From: Lee Jones <lee@kernel.org>
+To: sashiko-reviews@lists.linux.dev
+Cc: Eric Anderson <ejona86@gmail.com>, mfd@lists.linux.dev
+Subject: Re: [PATCH] mfd: rk8xx: Register poweroff handler in atomic phase
+Message-ID: <20260909160123.GD2133376@google.com>
+References: <20260908-veyron-shutdown-v1-1-066ecb80f5f2@gmail.com>
+ <20260908193358.E8D4D1F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="6jecggrki5ootgjo"
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20260909132153.1596191-12-arnd@kernel.org>
-X-Zoho-Virus-Status: 1
-X-Zoho-AV-Stamp: zmail-av-0.2.13.1.5.4/288.959.6
-X-ZohoMailClient: External
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260908193358.E8D4D1F00A3A@smtp.kernel.org>
 
+On Tue, 08 Sep 2026, sashiko-bot@kernel.org wrote:
 
---6jecggrki5ootgjo
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH 11/14] mfd: remove unused wm8350 driver
-MIME-Version: 1.0
+> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
+> 
+> New issues:
+> - [High] The patch moves the power-off handler to `SYS_OFF_MODE_POWER_OFF`, which executes in an atomic context (local interrupts disabled and secondary CPUs halted). The handler calls `regmap_update_bits()`, which unconditionally attempts to acquire a sleepable regmap mutex, leading to a system deadlock if the mutex is held by a stopped CPU.
 
-Hi,
+Please review, explain or fix the Sashiko review(s).
 
-On Wed, Sep 09, 2026 at 03:21:48PM +0200, Arnd Bergmann wrote:
-> From: Arnd Bergmann <arnd@arndb.de>
->=20
-> This driver was used on the i.MX31 ADS reference board from Freescale
-> and the smdk6410 reference board from Samsung. Both used platform_data
-> based driver probing and are now gone from the kernel.
->=20
-> Since probing with devicetree has never been supported by wm8350,
-> it is clear that nothing can use the driver on an upstream kernel,
-> and it is unlikely that anyone is still interested in a devicetree
-> conversion, so remove it.
->=20
-> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
-> ---
->  Documentation/hwmon/index.rst                 |    1 -
->  Documentation/hwmon/wm8350.rst                |   30 -
->  .../watchdog/watchdog-parameters.rst          |    7 -
->  MAINTAINERS                                   |    1 -
->  drivers/gpio/Kconfig                          |    7 -
->  drivers/gpio/Makefile                         |    1 -
->  drivers/gpio/gpio-wm8350.c                    |  144 --
->  drivers/hwmon/Kconfig                         |   10 -
->  drivers/hwmon/Makefile                        |    1 -
->  drivers/hwmon/wm8350-hwmon.c                  |   92 -
->  drivers/leds/Kconfig                          |    8 -
->  drivers/leds/Makefile                         |    1 -
->  drivers/leds/leds-wm8350.c                    |  267 ---
->  drivers/mfd/Kconfig                           |   15 -
->  drivers/mfd/Makefile                          |    4 -
->  drivers/mfd/wm8350-core.c                     |  444 -----
->  drivers/mfd/wm8350-gpio.c                     |  217 ---
->  drivers/mfd/wm8350-i2c.c                      |   64 -
->  drivers/mfd/wm8350-irq.c                      |  542 ------
->  drivers/mfd/wm8350-regmap.c                   |  335 ----
->  drivers/power/supply/Kconfig                  |    7 -
->  drivers/power/supply/Makefile                 |    1 -
->  drivers/power/supply/wm8350_power.c           |  590 ------
->  drivers/regulator/Kconfig                     |    7 -
->  drivers/regulator/Makefile                    |    1 -
->  drivers/regulator/wm8350-regulator.c          | 1330 -------------
->  drivers/rtc/Kconfig                           |   10 -
->  drivers/rtc/Makefile                          |    1 -
->  drivers/rtc/rtc-wm8350.c                      |  474 -----
->  drivers/watchdog/Kconfig                      |    8 -
->  drivers/watchdog/Makefile                     |    1 -
->  drivers/watchdog/wm8350_wdt.c                 |  171 --
->  include/linux/mfd/wm8350/audio.h              |  620 -------
->  include/linux/mfd/wm8350/comparator.h         |  171 --
->  include/linux/mfd/wm8350/core.h               |  692 -------
->  include/linux/mfd/wm8350/gpio.h               |  356 ----
->  include/linux/mfd/wm8350/pmic.h               |  775 --------
->  include/linux/mfd/wm8350/rtc.h                |  265 ---
->  include/linux/mfd/wm8350/supply.h             |  129 --
->  include/linux/mfd/wm8350/wdt.h                |   24 -
->  sound/soc/codecs/Kconfig                      |    5 -
->  sound/soc/codecs/Makefile                     |    2 -
->  sound/soc/codecs/wm8350.c                     | 1638 -----------------
->  sound/soc/codecs/wm8350.h                     |   25 -
->  44 files changed, 9494 deletions(-)
->  delete mode 100644 Documentation/hwmon/wm8350.rst
->  delete mode 100644 drivers/gpio/gpio-wm8350.c
->  delete mode 100644 drivers/hwmon/wm8350-hwmon.c
->  delete mode 100644 drivers/leds/leds-wm8350.c
->  delete mode 100644 drivers/mfd/wm8350-core.c
->  delete mode 100644 drivers/mfd/wm8350-gpio.c
->  delete mode 100644 drivers/mfd/wm8350-i2c.c
->  delete mode 100644 drivers/mfd/wm8350-irq.c
->  delete mode 100644 drivers/mfd/wm8350-regmap.c
->  delete mode 100644 drivers/power/supply/wm8350_power.c
->  delete mode 100644 drivers/regulator/wm8350-regulator.c
->  delete mode 100644 drivers/rtc/rtc-wm8350.c
->  delete mode 100644 drivers/watchdog/wm8350_wdt.c
->  delete mode 100644 include/linux/mfd/wm8350/audio.h
->  delete mode 100644 include/linux/mfd/wm8350/comparator.h
->  delete mode 100644 include/linux/mfd/wm8350/core.h
->  delete mode 100644 include/linux/mfd/wm8350/gpio.h
->  delete mode 100644 include/linux/mfd/wm8350/pmic.h
->  delete mode 100644 include/linux/mfd/wm8350/rtc.h
->  delete mode 100644 include/linux/mfd/wm8350/supply.h
->  delete mode 100644 include/linux/mfd/wm8350/wdt.h
->  delete mode 100644 sound/soc/codecs/wm8350.c
->  delete mode 100644 sound/soc/codecs/wm8350.h
+If this is a set, this request includes the other patches too.
 
-Acked-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+> Pre-existing issues:
+> - [High] The restart handler `rk808_restart()` identically calls `regmap_update_bits()` from an atomic context, presenting a pre-existing deadlock risk during system reboot.
+> --
+> 
+> commit 9ca348a7dffb994afa6516d011f6fbab7c173e09
+> Author: Eric Anderson <ejona86@gmail.com>
+> 
+> mfd: rk8xx: Register poweroff handler in atomic phase
+> 
+> This commit fixes a poweroff regression on Google Veyron devices by moving
+> the power-off handler registration from SYS_OFF_MODE_POWER_OFF_PREPARE to
+> SYS_OFF_MODE_POWER_OFF. This change causes the handler to execute with local
+> interrupts disabled to enable polling I/O for device power down.
+> 
+> > diff --git a/drivers/mfd/rk8xx-core.c b/drivers/mfd/rk8xx-core.c
+> > index 3dcf6abfda74f..21182df45d1b6 100644
+> > --- a/drivers/mfd/rk8xx-core.c
+> > +++ b/drivers/mfd/rk8xx-core.c
+> > @@ -875,7 +875,7 @@ int rk8xx_probe(struct device *dev, int variant, unsigned int irq, struct regmap
+> >  	if (device_property_read_bool(dev, "system-power-controller") ||
+> >  	    device_property_read_bool(dev, "rockchip,system-power-controller")) {
+> >  		ret = devm_register_sys_off_handler(dev,
+> > -				    SYS_OFF_MODE_POWER_OFF_PREPARE, SYS_OFF_PRIO_HIGH,
+> > +				    SYS_OFF_MODE_POWER_OFF, SYS_OFF_PRIO_HIGH,
+> >  				    &rk808_power_off, rk808);
+> 
+> [Severity: High]
+> Does this change introduce a deadlock risk during system shutdown?
+> 
+> Moving the power-off handler to SYS_OFF_MODE_POWER_OFF means it executes in an
+> atomic context where local interrupts are disabled and secondary CPUs are halted
+> via smp_send_stop().
+> 
+> However, the handler calls regmap_update_bits():
+> 
+> drivers/mfd/rk8xx-core.c:rk808_power_off() {
+> 	...
+> 	ret = regmap_update_bits(rk808->regmap, reg, bit, bit);
+> 	...
+> }
+> 
+> regmap_update_bits() attempts to acquire a sleepable regmap mutex. If a
+> secondary CPU was stopped while holding this mutex during a background regmap
+> operation, the primary CPU will block indefinitely with interrupts disabled,
+> preventing the system from shutting down.
+> 
+> [Severity: High]
+> This is a pre-existing issue, but does rk808_restart() have the same
+> deadlock risk during system reboot?
+> 
+> The restart handler is similarly registered using SYS_OFF_MODE_RESTART, which
+> also executes in an atomic context with secondary CPUs halted.
+> 
+> Like the power-off handler, it issues a regmap_update_bits() call:
+> 
+> drivers/mfd/rk8xx-core.c:rk808_restart() {
+> 	...
+> 	ret = regmap_update_bits(rk808->regmap, reg, bit, bit);
+> 	...
+> }
+> 
+> This poses the same structural deadlock risk if another CPU was stopped while
+> holding the sleepable regmap mutex.
+> 
+> >  		if (ret)
+> >  			return dev_err_probe(dev, ret,
+> >  					     "failed to register poweroff handler\n");
+> 
+> -- 
+> Sashiko AI review · https://sashiko.dev/#/patchset/20260908-veyron-shutdown-v1-1-066ecb80f5f2@gmail.com?part=1
 
--- Sebastian
-
---6jecggrki5ootgjo
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEE72YNB0Y/i3JqeVQT2O7X88g7+poFAmqhf4gACgkQ2O7X88g7
-+prKqQ/+PXcHDDMXmArFWKzxhSxHAA3VwPIx07accUNhGecv9r7U8GAjiSQlBv5d
-gojcqTyZ5UKCZQ/g6DCGOzwb9lsRDx5njdMXtyZJUq2Z68YBxbCiKa8iGezkGRAp
-e/rO3HJlQdPs8dvggypfYz+HN/YpOMf/hF9JmgvQI4KR1TYt3RLXavSVQBsb/TMk
-7faKB1EKAYYbJQi+b5fc/iSfNIqxl/Rf+g8VEQtxjSmDafmeLGNJhgS+Amd/CF6i
-nKYmkKALE2Xq6riwBqtqbCazqplJsGsSxWK1qmhfDZs53Ws0+VgYi5N86Qard8Oy
-V8+cITjYwZlOVoRIwSs1roLjdGZFn87iPLEmTmGgBcXtjNMPh5uj4x2+vvhVwW+Y
-0K+Gx3s85iJURMTCZUYqPCI+3fhsU4KQ13g4nf3DAiab3GCtlS8FfH1P+RGHJU5n
-4SAZgJ+DIk7nS4CEYeq3EZJacM7/IAMAdjE/IOSkfmY7ZPui71QXNASTru/d0K23
-5HdYwbYghK1kj2Lb33geTv+TP5LXDsmvvWGDnMTlf5mna6YUdyAvMtgEtF0VDtUV
-CUWngQHAxaSKC2DRfTeqP6/vjUww9bj6oDpUicbnz8BrEags3kzaJWKtFqGUs7M9
-n0wbYmjflYmAe/mK+1CsH7p2TuMiqpvc9pc06lXO/85PySPEqNI=
-=bCBv
------END PGP SIGNATURE-----
-
---6jecggrki5ootgjo--
+-- 
+Lee Jones
