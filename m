@@ -1,69 +1,69 @@
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 157735803A1
-	for <mfd@lists.linux.dev>; Wed,  9 Sep 2026 14:09:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20650569F37
+	for <mfd@lists.linux.dev>; Wed,  9 Sep 2026 14:12:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788962951; cv=none; b=VuPdMjR1XP+jpDKi+jY7otJj0qHqDfWRDvb5mOEALY2RpslMnasaV8xwqN4qG1GwPTEPJVBuy2PrzOjIvJ66pk+aEMWDA2oMZHBE72I0TMdu+EB/h5LTDL9F+9kSReSrjpgnW1nauVIB7VRGu0UTO0o6P74iweNzBTLGwE9ZL90=
+	t=1788963172; cv=none; b=F/9ZvQWBhfTmtdbH49sS4+NMQMtpnwBqH3l4kzbOhIcgm6YG90tlXeYuopdg10+osd6DCX/GpSgfwzbFDNjnealJBnrp2wf6yuvpdF4mqavCJUZMmcoeM5z+90alEYm/zbENWjiuwtciVVZUOHoCcivG0JuNaWNfp1o+v3DH5CM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788962951; c=relaxed/simple;
-	bh=KLWVqQguonffGnm851cAXBHrTBi1vUkJhAMAInMTy3o=;
+	s=arc-20240116; t=1788963172; c=relaxed/simple;
+	bh=VAUG9ocA9CuuA3ZZK3/Ji3B3eMK2e7/A4q+kEwaraLM=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=g+wwSXleZTgr8jO4GInC0/GugVw6upHDh++5eevChSnUTWtGS3F8eJLdWFvy2sMgyYTB90WtF0nPf9brHPs7xu8+tHL1b0Gh+BY0KsneuT0eR+DlzHfWWc9mmTudn5bunduhZbRXjJsu15idlXoJ752l7jo3h/+8GfH+SLbpRq8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=opqxq1Qy; arc=none smtp.client-ip=209.85.216.50
+	 In-Reply-To:Content-Type; b=DxXHmj6TB+OIBPkJd2rymLEc9yU881mkKwA+a1fdpv3dF5MLXhFWRH7ZoVHmA9CshMgxaGV9aP3RKsqBPmoXHXfR7QXqcKuig2cHYdCFKnTaEcz6bkFnVC+uuXK4k4tNIEaE4SV1qNm5etlGqhRnoxy8P2rchbKEA2WZTCiD6zI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RAmGaEu9; arc=none smtp.client-ip=209.85.214.170
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="opqxq1Qy"
-Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-38e42560ebcso4501705a91.1
-        for <mfd@lists.linux.dev>; Wed, 09 Sep 2026 07:09:09 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RAmGaEu9"
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2d58efc7356so76099965ad.1
+        for <mfd@lists.linux.dev>; Wed, 09 Sep 2026 07:12:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788962949; x=1789567749; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1788963170; x=1789567970; darn=lists.linux.dev;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=QYNhQ6Yi/iRYbkVUGBJRb8uet/bvchjSmRRTPBWP7EA=;
-        b=opqxq1QyZdXJ5s5zsn1bsBz+emM+QvlcmQV91Ac3RLL7GG0ZWuJ7DV3ZweKa84YjCv
-         6nM4nAlzaZT7YP3WswVGJjU8u0efxa5k+jERbxHFMiAxKE+iBZ5SUqZyQQwTFvL9KZpc
-         IwUsFpxiQ1h3wS9ylbWcJeybJ2lupBmHZTyBAWS+VuAskhFBVnx58vvftTNRLmZxe/Wj
-         o2OJFmjsjFekinGXpILtHzYs4kXZkeo4uUdzy5VFHmJSrZSPDh4tyvRXffdwHOZL+dtd
-         ttru3J+z3Sfn5ZXnBmBRSDMbfiDJk9WIn2e1iAkZzjpQ0Dypbvw5AL/Y3+y38U8NQNoU
-         +9Lg==
+        bh=2bgojeFeUpvXitpM/OgDxaX8mLFSNcZ2WBsJ3E6rjeI=;
+        b=RAmGaEu9USn1B0XCX0mDhImboOy54QJj9wHjXWjWhfhOGj+x9rrJ2rGeSEvzsb8crd
+         vsx2S3yVjNwVM88uEHPtbv9v2WNaD/taeFiW+LdhyKCvUCYVG0/KpBKCbOxK0QvETqel
+         ETmxREptkC/a2341KHcPnwBRTHes6gWEUX+Hec7YEOIlUlyHChtv+bf59/FEy2F8FfRp
+         DDGkegyNAYdwXGFP4cqZ7mYDxrMl60gqy+msRDHpxNYSATYC5q20JIU1/xldmAi+f86N
+         Q10UOSbVtKKr/xjsi6Aqa4by+ExuSo3UlQWClxdAVHvy0hLTDfJdRc9T3hT/5bYjGCc1
+         F8wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788962949; x=1789567749;
+        d=1e100.net; s=20251104; t=1788963170; x=1789567970;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=QYNhQ6Yi/iRYbkVUGBJRb8uet/bvchjSmRRTPBWP7EA=;
-        b=duPnwT1aJhDPiraRS8kFZnjZ+F8bKAtwPpQXoq15X+UkIPs80BABr1WX6ijEBJiXOp
-         Ts4uNTgkuBLQiPDcDMchajqAV68cWjuzF8iuUnRFi9Clw8bReCQUAxOA1EAiGE0aGZT7
-         0uPpb8d0FVjWL1/69xZrGY0XnXYUwURxEJeEcwR5YRC5/85yKlnr2Z/CrOvxm5UN5MF8
-         G+7DR3zZ+dA4Ri2Lo0HItoFwwitABbl9aYupC90x08mbA9oKGIZBT0IMCVmFRsRT/q3w
-         WzlkeZqg4G7LkHsDqOEW4TbKFICdk2LTyFxukyigMK5Y9yGJwWzJkBFzYp1Yt3WPl32D
-         mkkw==
-X-Forwarded-Encrypted: i=1; AKwUvBw/yT39p+mxFWKPhSAStHwbmfTfAKxLvwXtfGnqGbq+DO3ymd/Zr3k3TYqHZlPdnrMJ6VQ=@lists.linux.dev
-X-Gm-Message-State: AFuF++ndUYbwZUxOtYU54h/hWEpAwJ08DjxUmEyc5eUrmT865s9E3aCN
-	jzhJ86F/SQdEEjmLHhfKwLkJtJJjTkw5KR7Jo0esIsqLRsELGpEkn34l
-X-Gm-Gg: AYBFou2EKrYbUaDUS8nsVE0X6sHbYge9bL4yeKrdt7GbLb2ZAAUs7LlTkhPVxB0QMyc
-	MdjOlYYyyhoQOVAqpj/sHN34rONBlhvlpiHhSgi/DDQo0+b3qCdHnCsz9um2CYkeF2C6g/qQ/ER
-	t/M0I201EibZm7O5WYYgMo6xkPrb/4WItu/0i4wLqLpZh9dI1tqrWwYl+dOdoP24JiPjLgcK/3L
-	4bTcTHhjW3zj6GIUqsz6LFOusZpFIEM+cWehvhWi9c9W8IyIrx6AAs4AXvkqJhppgQA5DmVHpnF
-	LbEgg4f9utqx53pMnh+pn81LNgBXkhBjjY54QzkoMNB9GZAaxwVZajPWikFU1rmFde9ROoupbH6
-	97Hd1DkSRunTOaK5Y8+Udl6AM1+SNLMpFa3nvYP9U/OF/36JQYz4CsjP5bU3WHNoNdPd7YgMHHt
-	wg9s9WWwrH5YzQrXwdlISevGlggd6iXvqMjs4oQ5H0iHz/3uEd1GbwlBlDLUSYA7rL38goYHl3y
-	lWEfkvfwZ0fH+4Xkt7Kvz4CBQk7/lvAWD5Veo4lJRu0B/yw
-X-Received: by 2002:a17:90b:2b8b:b0:398:c0ad:711c with SMTP id 98e67ed59e1d1-39b26272f0fmr55218364a91.15.1788962948995;
-        Wed, 09 Sep 2026 07:09:08 -0700 (PDT)
+        bh=2bgojeFeUpvXitpM/OgDxaX8mLFSNcZ2WBsJ3E6rjeI=;
+        b=b7fxWvVGIOF12/Bjkag9L0AWe3PKtllSP0HwfJOlDfBTerTcfCws/I93vxYSny11YG
+         rhs6UKLJlYrzo642twD4Gs2Re1ti7RQH7Sl+Sn93XL3h7N7Lv6bU/pSNd2DpmOKhXfr0
+         cT7hWOqpirU/sHtJz8kldmpJWqo1YvmPRu3rJESvjWTrb5/c5Ifa9gzME2/IuxUc9gTa
+         zouPSq5k7gYY6AyWgTfBkjZBa6EFnqU7w6F07usOAZ70pJ2TwZaKALmA1bv0P39dc0Ud
+         yHzaL5u5K0sF38qhPRgDtdBuZHobvR/xcobaJr5UsnoGx1iJ3HbyN7LcUnRkjR2ivLHj
+         uklA==
+X-Forwarded-Encrypted: i=1; AKwUvBx1LM2ok75doFDKsKE2OmBPbafky5SEzdhxjU3ZHURLnYpGhUNZ3UmIo7+NHivU5U21Qfc=@lists.linux.dev
+X-Gm-Message-State: AFuF++nrc08Afltv8K8IOTBe936JwVh0bmAKEX8C+D1rQYMk23WzfVhp
+	mtW3e8E4ATgx4bGNCA+ZZWlP+LXAEaSCjXIY+Mth24FXBa2M+k196rVo
+X-Gm-Gg: AYBFou0A8W/PsA7XWX+R9F18lMpVcV6pyFK4mVQ3RjTS9wdHVi43iGPxD7yGAcWZJBE
+	maV2SZ9L4J1CeHOA7AnNp6DyI1KVrHaIEoCk9hXuNU8oT9hidgxjfw+anBJFTzmwRAnjx3R4BGK
+	dgpqx0IXE26ks/yFLpyHFQ7RXYKLH0r2OffjOTMeYdwjn8DIfdgffRyElJav6Rv2+SvzyHHhJji
+	oMGscrLe04DUB/Vujjyn7kG7q05tKCfNiUqfpC9pZT/5DVIwKt7fly2yUli6aH2mpZjfiSIVL+Q
+	imF4J/hmrgpkaOXYUyIBBenSgbrFCFEhUuSnVtbNVhkIVMQxsl8SmijgyMAuQ/g0Nc9wZrS7Xbi
+	R3hApEqKGwRK5AqHCUDCnhOtmh4JyiPqrLhDJlV3o5nRDBFbpzPdcz8r6NhXfD1cPHy4gXBwhst
+	2sxmb/FPGp+ylJG1suF9TypbM7uVrFjbChVfi6fzm6aURi9KMYsrSRl/AdgPMjEjimpq1ODYz1I
+	60c4p+bFUVH0r8yXyfvt7grZUdTJZFseMyHPQB2iQKeSOm6
+X-Received: by 2002:a17:902:8203:b0:2d8:d4d0:792c with SMTP id d9443c01a7336-2db1287779cmr388670795ad.16.1788963170238;
+        Wed, 09 Sep 2026 07:12:50 -0700 (PDT)
 Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39b08bcd243sm39687906a91.5.2026.09.09.07.09.07
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2db14ae7637sm74597655ad.79.2026.09.09.07.12.49
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 09 Sep 2026 07:09:08 -0700 (PDT)
+        Wed, 09 Sep 2026 07:12:49 -0700 (PDT)
 Sender: Guenter Roeck <groeck7@gmail.com>
-Message-ID: <f54c391e-5152-4c60-a52e-9c997c16f706@roeck-us.net>
-Date: Wed, 9 Sep 2026 07:09:06 -0700
+Message-ID: <43a1bbe0-0012-44b1-ab0d-0dea1136869a@roeck-us.net>
+Date: Wed, 9 Sep 2026 07:12:48 -0700
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -71,17 +71,14 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/14] mfd: remove unused rdc321x southbridge support
+Subject: Re: [PATCH 11/14] mfd: remove unused wm8350 driver
 To: Arnd Bergmann <arnd@kernel.org>, Lee Jones <lee@kernel.org>,
  mfd@lists.linux.dev
 Cc: linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- Arnd Bergmann <arnd@arndb.de>,
- Support Opensource <support.opensource@diasemi.com>,
- dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
- devicetree@vger.kernel.org, patches@opensource.cirrus.com,
- linux-watchdog@vger.kernel.org, linux-fbdev@vger.kernel.org
+ Arnd Bergmann <arnd@arndb.de>, linux-hwmon@vger.kernel.org,
+ linux-watchdog@vger.kernel.org
 References: <20260909132153.1596191-1-arnd@kernel.org>
- <20260909132153.1596191-3-arnd@kernel.org>
+ <20260909132153.1596191-12-arnd@kernel.org>
 Content-Language: en-US
 From: Guenter Roeck <linux@roeck-us.net>
 Autocrypt: addr=linux@roeck-us.net; keydata=
@@ -127,20 +124,21 @@ Autocrypt: addr=linux@roeck-us.net; keydata=
  F0WaMvQMNrk9UAUziVcUkLU52NS9SXqpVg8vgrO0JKx97IXFPcNh0DWsSj/0Y8HO/RDkGXYn
  FDMj7fZSPKyPQPmEHg+W/KzxSSfdgWIHF2QaQ0b2q1wOSec4Rti52ohmNSY+KNIW/zODhugJ
  np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
-In-Reply-To: <20260909132153.1596191-3-arnd@kernel.org>
+In-Reply-To: <20260909132153.1596191-12-arnd@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 On 9/9/26 06:21, Arnd Bergmann wrote:
 > From: Arnd Bergmann <arnd@arndb.de>
 > 
-> The rdc321x was a 486-class SoC developed by RDC. While RDC's later
-> products closely resemble the DM&P Vortex86 product line and are still
-> sold under both names, I checked the datasheets for those and found that
-> the GPIO and WDT blocks on them are incompatible with the rtc321x.
+> This driver was used on the i.MX31 ADS reference board from Freescale
+> and the smdk6410 reference board from Samsung. Both used platform_data
+> based driver probing and are now gone from the kernel.
 > 
-> Remove this driver, as there is no way to run Linux any more on the
-> older chips after i486 support has been removed.
+> Since probing with devicetree has never been supported by wm8350,
+> it is clear that nothing can use the driver on an upstream kernel,
+> and it is unlikely that anyone is still interested in a devicetree
+> conversion, so remove it.
 > 
 > Signed-off-by: Arnd Bergmann <arnd@arndb.de>
 
