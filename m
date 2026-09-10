@@ -1,114 +1,61 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A07703D1AAA;
-	Thu, 10 Sep 2026 09:33:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0CAD0396D13;
+	Thu, 10 Sep 2026 09:34:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789032836; cv=none; b=t/aTBZyNBlohyRQMWz5w79I42D/y2TPdEZpHQizk2lMWvsXn+T/fSDsAyJJEamDkyZhBzYr5aHRG1qYuMKM0aUl34hbH96ibo/jpzjqbzTGZ6uhKgXeeIKlXvUij5MYaydjEPQdPSbqRZsyYX7iMW59m89WNFC58wNr1HxTB+fg=
+	t=1789032898; cv=none; b=OoIhZ1CiJxZsg9mhpH9yJAf+WFKdp3Tf0lGr3h8rJI8rmeoRqm+FJPJ9IMHxb/GM2uiFu8vdzWiCsZqkvdZmNLO5AA1xM7QeitogHRAfLBJ2NVky1g2HHdaWwqVpmCRzTBs6JPt6qrP+9f9g9164+WskTs0HUiKPF+QG7vfztY0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789032836; c=relaxed/simple;
-	bh=FjcDcqvU0235HfXhQqh3BNVRPpVFE3oJFo7uUnHGA88=;
-	h=From:Date:To:cc:Subject:In-Reply-To:Message-ID:References:
-	 MIME-Version:Content-Type; b=j79tny9sOKOC8csXtjX0sySq32l3SvVfTxPP2J8rF3aKb+AT9LnQ2RpBxpKITfOVFIZGt1yohdSxiQjIKnGZTXrV5ILRpC3QlDyF+yX+QjyLmQhFhMKpsywznRLvASz96WP0L5ahXJ0VvBLGpgBnuTuQJc8TGg1LN9+3T36ZW9o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=j0Afn0Le; arc=none smtp.client-ip=198.175.65.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1789032898; c=relaxed/simple;
+	bh=jTnUjcazQGxN7YyVuB+HY8VyHyC3cX22vFIMW/lUYvo=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=WSjwsCOqYyJmciJ3rnpCI6JS6dLucVDb5sGFgDG/Wg+3iKAj6uL32cXyQKysrpxXIIkJtwToimeYcMmn0KFWLKKeXEZ6x6phU2UmGT0C5XdNZgtn4P4NVMcGeJoka12lAbVVFw0e6FBgJPmdgvfCulXvbOTCnAkIbbP/b1ipIxI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VLpIIb5m; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="j0Afn0Le"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789032832; x=1820568832;
-  h=from:date:to:cc:subject:in-reply-to:message-id:
-   references:mime-version;
-  bh=FjcDcqvU0235HfXhQqh3BNVRPpVFE3oJFo7uUnHGA88=;
-  b=j0Afn0Lej0ydhpIAQ+NGGwmQv9OO/GXEe9LiG5Hf9MONOtGPXjrBp/Ul
-   AR+ILa2OtVrPWgMDZbF1eaBlJIcFSfQ40Xang+3kVVrwJpyzqgN6K2/Wu
-   zMTv7MMIT7AbD7wa0jHJZFdfoAhbiRHtuzLYSU4+Lr5EaDBPsIKXJrBIN
-   aGMDCrx4LP1VjOUgrPnC/7t/Y/yijND4hbKDW+RCbzcVnvOkhtaDA3v1+
-   gueI5GoRp8Co+8I5yh95b/RhAIAqjni6XdZKZg3maExzZUKyu7TFp6589
-   m3HrsnZX+8EBTHoMNOJUGMEyJci1vO2TiIuMg5PsrsTgB4jKSR9gc1x1f
-   Q==;
-X-CSE-ConnectionGUID: W7+EuS1oTR2TZc8f6YpZrQ==
-X-CSE-MsgGUID: vUmkur0qReWdVXBsJmk9Cg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11900"; a="89509916"
-X-IronPort-AV: E=Sophos;i="6.27,95,1787036400"; 
-   d="scan'208";a="89509916"
-Received: from orviesa009.jf.intel.com ([10.64.159.149])
-  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Sep 2026 02:33:50 -0700
-X-CSE-ConnectionGUID: 3jn/nBKeSJK4lhAyBYfZeA==
-X-CSE-MsgGUID: IkjzOK7hQjS96BFYssBhzg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,95,1787036400"; 
-   d="scan'208";a="272089790"
-Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.221])
-  by orviesa009-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Sep 2026 02:33:42 -0700
-From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-Date: Thu, 10 Sep 2026 12:33:38 +0300 (EEST)
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-cc: zl020895 <zl020895@163.com>, longzhao@ambarella.com, 
-    Arnd Bergmann <arnd@arndb.de>, Krzysztof Kozlowski <krzk@kernel.org>, 
-    Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev, 
-    linux-arm-kernel@lists.infradead.org, Rob Herring <robh@kernel.org>, 
-    Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-    Conor Dooley <conor+dt@kernel.org>, 
-    Michael Turquette <mturquette@baylibre.com>, 
-    Stephen Boyd <sboyd@kernel.org>, Linus Walleij <linusw@kernel.org>, 
-    Bartosz Golaszewski <brgl@kernel.org>, 
-    Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-    Jiri Slaby <jirislaby@kernel.org>, 
-    Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, 
-    Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, 
-    devicetree@vger.kernel.org, linux-clk@vger.kernel.org, 
-    linux-gpio@vger.kernel.org, linux-serial <linux-serial@vger.kernel.org>, 
-    LKML <linux-kernel@vger.kernel.org>
-Subject: Re: Re: [PATCH v6 11/13] serial: 8250_dw: add Ambarella CV75
- quirks
-In-Reply-To: <aqJ35vMBiBZo2iUE@ashevche-desk.local>
-Message-ID: <b199eb38-b1a2-4db6-81d8-37bab09a75b7@linux.intel.com>
-References: <20260904-cv75-v5-v6-0-e918514cb3b1@ambarella.com> <20260904-cv75-v5-v6-11-e918514cb3b1@ambarella.com> <aqJrSnr0rwv4BOJ3@ashevche-desk.local> <122573f8.8232.1a08a9765fc.Coremail.zl020895@163.com> <aqJ35vMBiBZo2iUE@ashevche-desk.local>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VLpIIb5m"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1DBF41F000FF;
+	Thu, 10 Sep 2026 09:34:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789032896;
+	bh=jTnUjcazQGxN7YyVuB+HY8VyHyC3cX22vFIMW/lUYvo=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=VLpIIb5mGiXlYL35DjbYfVFTOjm7aB4KV7ErpPPd8AqlN4ovbUa/LhaQWy3Tsaj3Q
+	 7B0KMdN6I+GLvbP/SW8Rips51819d13YY3TCPM6IHHDgqzRXTZX30/BmtQADav4hb5
+	 F+OfCTyCY5uFJU0zgEDAGnnkXJP3/mbFqIUlCySI9GwM2BdlN1cJ4PTamQAg/cu19H
+	 YrYQNyKz/s/VpVjwwgAyX2Q7EfoWa3wBQzFmt7AaI4NtLIRuIUsda1QhFqs3phssSh
+	 msxX14914t1KcYGgyXi6izqWkwqe7ykKhnhQ82/4vLBlm89epXQgBqsBjgH9J4OKSw
+	 bb3dBNf6hLIng==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v7 1/5] mfd: axp20x: Constify axp313 and axp717 cells
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Jerome Brunet" <jbrunet@baylibre.com>
+Cc: lee@kernel.org, linux-sunxi@lists.linux.dev, devicetree@vger.kernel.org, mfd@lists.linux.dev, robh@kernel.org, conor+dt@kernel.org
+In-Reply-To: <20260910-axp318-regulator-v7-1-de720ceb9bac@baylibre.com>
+References: <20260910-axp318-regulator-v7-0-de720ceb9bac@baylibre.com>
+ <20260910-axp318-regulator-v7-1-de720ceb9bac@baylibre.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Thu, 10 Sep 2026 09:34:55 +0000
+Message-Id: <20260910093456.1DBF41F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
 
-On Thu, 10 Sep 2026, Andy Shevchenko wrote:
+> mfd_cells array should generally be const and there does not seem to be
+> anything against it for the axp313 and axp717.
+>=20
+> Constify the mfd_cells array for the axp313 and axp717 to be consistent
+> with the other supported chips
+>=20
+> Acked-by: Chen-Yu Tsai <wens@kernel.org>
+> Signed-off-by: Jerome Brunet <jbrunet@baylibre.com>
 
-> On Thu, Sep 10, 2026 at 05:12:52PM +0800, zl020895 wrote:
-> 
-> > > Wondering if we should undo this in the port's .shutdown() callback.
-> > I saw the shutdown path already covers it: dw8250_shutdown() calls
-> > serial8250_do_shutdown(), which does
-> > 	up->ier = 0;
-> > 	serial_port_out(port, UART_IER, 0);
-> > so both the IER shadow and hardware IER are cleared, including ETOI.
-> 
-> Depending on the answer to Ilpo the enabling may need an updated comment
-> summarising the above.
+Sashiko has reviewed this patch and found no issues. It looks great!
 
-I'd prefer removing the entire "Force them ..." sentence, it feels really 
-basic detail about how ->ier works. I believe that would resolve your 
-concern if relates to what shutdown does for the flag (clears it while 
-the comment as is says nothing is supposed to clear it).
-
-> > At 2026-09-10 16:33:14, "Andy Shevchenko" <andriy.shevchenko@linux.intel.com> wrote:
-> > >On Fri, Sep 04, 2026 at 02:38:18PM +0800, Long Zhao via B4 Relay wrote:
-> 
-> ...
-> 
-> > >> +	/*
-> > >> +	 * Ambarella keeps variant IER bits (e.g. ETOI) set for correct RX
-> > >> +	 * timeout behaviour. Force them into the 8250 IER shadow so later
-> > >> +	 * generic IER updates do not clear them.
-> > >> +	 */
-> > >
-> > >Wondering if we should undo this in the port's .shutdown() callback.
-> 
-> 
-
--- 
- i.
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260910-axp318-reg=
+ulator-v7-0-de720ceb9bac@baylibre.com?part=3D1
 
