@@ -1,129 +1,318 @@
-Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com [209.85.210.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28EB238A701
-	for <mfd@lists.linux.dev>; Wed,  9 Sep 2026 23:49:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.225.140
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1788997774; cv=pass; b=gvzWiF5x8u+g3Rqsawq0jTU8Or8p7JxdymIkf6WpS/QfVvnS6OLFu1rA89hMoPp/f/QIAu1alw9LmS91HQGxEWCuP8Al3639l+AGnq3uFVQVWhwUlbBd7JKWxQZnaXIkINHaZsSFu2Ry2fKRzmXpY+7a6W59qDVEs+wSkX4KJdw=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1788997774; c=relaxed/simple;
-	bh=aIWytb9URnMQVfyMlYUEh0bfqxr8LFOLIuxQ9h1oQu4=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=rw2KplBI2kMuL+Q+uQLDK7T606B1qdQRMXp8TManqqirnLvWuhwqB+dVvh96B79NRouiwHLZXJZSSOUQvV7zkeEkIl29HSTnzcRcAWfqZa6VA99QXhVwGbyWznuxDFTbz1FwuZ2tK3haFKMgdLRhtayfMIcYXOpNiOifBiD2uuk=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=lNBdpv4V; arc=pass smtp.client-ip=74.125.225.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71ADE2DECA8
+	for <mfd@lists.linux.dev>; Thu, 10 Sep 2026 00:26:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.52
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789000017; cv=none; b=u2AOGfbFMbec6zQPs2nA6fw5A+1xPmj07aTqoa9v9vr6+PXdjQN2VhMSeyvf4czsWKDTFvgHEudLaHtA7TD5Sbtlk7NI2cu+mJrLUPr0L524goJmJSBXyzbPuz+DUnLVyU68xgrosdII24Eq2P1ygbi8TJYcn85lIZEofLAy7BA=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789000017; c=relaxed/simple;
+	bh=LUDT1kHiXHBCnePbIaYBUJQHAxuAaQl4Sg3kYNxuzRM=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=MUy/gE6lIy66lnRQKIuoe0pXcDn4PklJQd7U6Fh/bsm9wAczvh8R12DvlznUpTC/hPy+nKOi405hA6+X34id7KOgvwzDx3z19TZO4bP8iRS47FFzv3EOjRcAUPHrbmekzYZztoEx1x/2++8n8m/7jOzBcJxUszYPd2gfL0b6dDo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZDwNq6Z3; arc=none smtp.client-ip=209.85.210.52
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lNBdpv4V"
-Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49cd38e0e5dso8941205e9.2
-        for <mfd@lists.linux.dev>; Wed, 09 Sep 2026 16:49:32 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1788997771; cv=none;
-        d=google.com; s=arc-20260327;
-        b=Frwvw6QFGewfe4+N9GX8VhmDFWzu+373gyAATuckIlFmH+Sy2caT5yyTCx/JjPTK8a
-         YMHGydd3TqUZz/J9muUQVHZhML3dpE+D97vZ58YgY9PtpvwtPRshlRu0kmmbBs9Eyq6N
-         NNMnSKYEGRoJXIksOSIRYjv1zfqVOo4suMp1qWVLjPYELcSyCq5APspeHZVhlFHuY3s3
-         vsg3GDy0n2zQ/1dOXWY0BBMsH5ZKrXtpvHPRL/nfooVviRP1nYy5s/HtQX1kU5JPWiZV
-         l2UWhGd+irofALWnRoDS4nqJAQf4VlvoWslZazmylde3FKwGB6ZNeeQyGqIG3lrMczbz
-         mADw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=aIWytb9URnMQVfyMlYUEh0bfqxr8LFOLIuxQ9h1oQu4=;
-        fh=ZRRKpmRY7NSf8l8UGPFkse4LNMk9KMy2phLAHIz9Emw=;
-        b=Oe1Y1yjFquAba7txNJZELz6y4I/jHJIhJM7rNYRP0FNKLt/7t0XS5rqcuRndxiD/Ms
-         5AcBXTeEFDrcExM3tXSrLLWqEOJ7M3nUHlw9hFch+u5pSiWLnFIfY2vLbCFwzrjNWSGq
-         4kvYE9ixzHzuPxhyUQDmmwDp3FNiCvoWAhbITfvooj7AUL2/zPunAd4QE4HADlfkUlES
-         YdlNuKBozn+TuHiXLQH/Ej/aV+gKWgh1Xm6DTRLylhLRMJWVw9YyoyNvuw4xVTaDh8qn
-         vF+TuuLEIUCDGtmyKDpa0BrdkJ5U2FBwEgGHj/3pKI3BxC2i+vLhmcnPKvrYYChvDgE+
-         KlTg==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZDwNq6Z3"
+Received: by mail-ot1-f52.google.com with SMTP id 46e09a7af769-7f4e729368fso5834784a34.0
+        for <mfd@lists.linux.dev>; Wed, 09 Sep 2026 17:26:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788997771; x=1789602571; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=aIWytb9URnMQVfyMlYUEh0bfqxr8LFOLIuxQ9h1oQu4=;
-        b=lNBdpv4VfynKNguIQjhp/X0FUIcgCGZE4cmHo/fFL5wD+FnLeseY+YXFINxU2RN+iT
-         5JF+wy1iVZB+Pf4v64Vb6eXShnfQR03RJ/91fvCRtK3l/4wNGe8m1HFYU35euW2rmalQ
-         J91ZGqXv2aDYQN4cbSJ5BirM/Szheqp8I1Dzocle35UdH6yXFMwW6YuTxiUP4MDYeuLd
-         oZOIQ4TOHCZNsBd7ZDkfuDOh8ym1f5sdXyfATZ8sV1et+VRR86fWE2MgxxhmcRqdQBMa
-         D6sQ32XyXG+PO3HbD4C3G0Fu7zEdZj9gqDfLT3yUxR3QfkIJkAzHeLnVUazRZoRmGZri
-         f0sQ==
+        d=gmail.com; s=20251104; t=1789000014; x=1789604814; darn=lists.linux.dev;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=eTa0efMcyPx+a3sRs/5/R1BWxQ19AFGAD7UOiV7rwak=;
+        b=ZDwNq6Z3bzvpDR2zuIW8Zmdf3OX3SYSb9AUrtMR/BN32hn1Z+tvRWMAj+HsRtxbzdL
+         3pAYQl32g1dYtU82dX4aQDvJ3XSKPu3nE3FYcbQEHF3jcbzYzEV8I3T1nnrqhtfPPFtA
+         4WM4AhynH03kQB5iIirTOuhe5eD+9GRkHfVsWM4SYwfdC7YJtAiPfdVW79bCueiZyKFh
+         7KEtlLf8bL6QvyaGIs30OEgWikvEjKcgwTDaG3uS8ntANKPVrUtFsWfya0+AIo7fmyxO
+         yPxwduoEgaQZivcBoi2JvNW00E9rwAvamJk+wUkDmXUNZAeTafoczhFtUUfP1/wAja5q
+         N5+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788997771; x=1789602571;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
+        d=1e100.net; s=20251104; t=1789000014; x=1789604814;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=aIWytb9URnMQVfyMlYUEh0bfqxr8LFOLIuxQ9h1oQu4=;
-        b=E/Fk38Pf1DBo3S4JVz9KVx5YGTGcrcJjl97Vqlmb+l1HgnyYGW8EOU+sDrKCoSjfwy
-         3pTUoPje3DMoC+1Yn0xDEoegKYOTIsiHJAfM9rsmDCLdbNAYesvfKASga8abINx/vfst
-         0JhCM61wNsBV/FWIynzN7K8n8tvxSAu6QKsUirb9sLoNfWDQ2W6NGYsYwgUl7/VIN5/R
-         PLCLc81/WR3y0RvQU1RrcuL70D7AAtZrcq2g/dTRDtPnot0DELUiDHYJr0ke1MHGgYHR
-         M41+xUxJafaX0+74Su+/yPjVvJxXMyHUMqi2bYk7YiV1inoCEYXTnV2tPtfawmz7NMRz
-         Mdng==
-X-Forwarded-Encrypted: i=1; AKwUvBx6KPBaSo77y/7tpAeuN0GX0tLmlGaWFgF+urhhxsU85oMm/9ruoZ0/ZzxTqMNlJ6QtAA0=@lists.linux.dev
-X-Gm-Message-State: AFuF++kVgCZedChtVOsF9uKIZdHmDlB9o9fsppzWQTD40rCkCHS+qBrp
-	AUlPXqtwnKAyJK3GcvJ5mbb8B8TNopBJiR2eqaJFdkaN/e9m7w2TK7+Lcte/zI0Cyp6fsYRGihw
-	YohlDfXJCQaCm7qWPqYmWcM8wXsCXA+7IurvdULs=
-X-Gm-Gg: AYBFou0LYwmGifWV91XZ8+QINvcrlowPCbVEWvFCuBCZHYBHIE1kTLIcWlhzx11A0wn
-	vAOFJG/r10DU5ZlBYGMnFV7PZf9o+b6O4ewz4alciFCEUbgVM3bbgelCNw8A15TnXmXXdHxtRsX
-	oLwiodNmdGHnZ1pwotxNVb2WpbQFek10lY6xB+aiqz2XQWmw5kfXSQXpYBiXU8Wtv2nA1Zh2fRf
-	MZ26V5R2M6sM2ZKb+Cb3IuXqNbqjsr3VSfg7QLWtxI7+dWvZ/IooY2Gow+3eG3sjwcwknh26eVR
-	fimQvGrRU71dcjpe7ouRJsAyITRSTQdNtjBpsrb7cfO4sWGkli1MXHHO6HHh8BGRA5xCq8UX0B1
-	VYMgBwsh19gA=
-X-Received: by 2002:a05:600c:5647:b0:499:b65e:49c9 with SMTP id
- 5b1f17b1804b1-49d259138bamr57643145e9.10.1788997771230; Wed, 09 Sep 2026
- 16:49:31 -0700 (PDT)
+        bh=eTa0efMcyPx+a3sRs/5/R1BWxQ19AFGAD7UOiV7rwak=;
+        b=psiPjad7m8ElhEi5LbufV8Jde6Ynl/Z5Spxx47lLwoCRvX2GfEYg2+9Jj2EpV/cnc4
+         cegIsCcYZrSB2df+NpFtlTU9ow3fFFCw/x/Tf/YPUBBMVQiPRxK+c6Ahzb/ZVpTQ3XaP
+         gls5SBcPuntRC1KX9iBb1pVboUpxK3HJ5wz7KXdqGYnQXlVDjHAiesFUzIG1wTlRfekM
+         R4pMGCUVIC58ua5bC/SaophSpHd5ycLfMLd6KfUAhDUBptufg+rm+wTUKUTwsDS2kpjz
+         vRdku5r3FT+A0WyOvWEfKE1WgxBy1nXhLI/8rbm9eq6EX2nePAMZaEBF34M7ZKaSp6SE
+         MdNg==
+X-Forwarded-Encrypted: i=1; AKwUvBxb8vLzkxQfkH5W0c7CI81d/AoZj7nHofyMJ3MEDxnyh9lHE2HztGMCQ3asHXHI5gN84hM=@lists.linux.dev
+X-Gm-Message-State: AFuF++myt2xrLCezqWMOHAMNiSmJ3Opw1IMbIEb6JrbEzaI1PtczMpfg
+	aRIMRNDkk8ykGA8TCF1lMoeVsNnkrGakTuq5O7GjFWn2CDzVs0EEUpq6
+X-Gm-Gg: AYBFou0a6ae61TJ9lkbkwHoktyuQfbVGjzz9Sk71TPW0bSxVQ+qtGe40snV281KYfmS
+	/eDxUshdrTJVbT/vT7zKsFDhh9aK4ODPfn+w8G5GkH1o0oORS12lbi7bRpTAucq0ii3+0L5dmDV
+	xwH0SM1QjtdPRm2Rlvtq+rRSnjDLi3f4jNKFI5M3e89yH/Qba5o9JO13wrzSxAx1IS5864iqu/i
+	EjlJp6eDQZi8uRk2lBj6TqSPR8AeUdHI2kx+c3QCUtCSqRhWbS0tZ6ILZD2tA6ikQicoKS83BRd
+	ZS/KGZ3HaSw96Vf/zizBhb9SQo+iYhiam8upCbCn/CjTG/trO7JIpKm9yjMBNLc4OiTEIsbKmAI
+	lIgmKCyHeACCgI/RCkEdGDzMGOvKjLvp1EOaVL5J400VtvMmI/iehtEgy2/I/EtNdi+0nsEb1bC
+	mo2nCvgBJWIU8jC3aFHC98bg0u5+Gquch2piJ04K9eXf1LSwMi5h8o1V7sbGUwmiQj8nbt8P9n2
+	oqDS6OKFlS12IeiEB3nDgSqkQ89VRQJkBums22KTEm2Nrz95h5cqbPWxeX/W9iEF0kKJMQSqwc8
+	NAqMkfMGBS8VmUkTMs/HEAZ5xO03p7K1zQMtJ4eatMb9YPAPKzr1ceCYgTkoaStA3abSVW2h5zR
+	/PZiAzLpEx3c2cnIjEt+HVRvJJ1NrxmUd8SV6NBlf
+X-Received: by 2002:a05:6830:3509:b0:7dc:c749:ade3 with SMTP id 46e09a7af769-7fa1deab695mr24907263a34.3.1789000014269;
+        Wed, 09 Sep 2026 17:26:54 -0700 (PDT)
+Received: from [127.0.1.1] (184-96-151-165.hlrn.qwest.net. [184.96.151.165])
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7fe2fbf5db8sm10182789a34.25.2026.09.09.17.26.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 09 Sep 2026 17:26:53 -0700 (PDT)
+From: James Hilliard <james.hilliard1@gmail.com>
+Date: Wed, 09 Sep 2026 18:26:50 -0600
+Subject: [PATCH v12 1/2] dt-bindings: mfd: x-powers: Add AC200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260908-veyron-shutdown-v1-1-066ecb80f5f2@gmail.com>
- <20260908193358.E8D4D1F00A3A@smtp.kernel.org> <20260909160123.GD2133376@google.com>
-In-Reply-To: <20260909160123.GD2133376@google.com>
-From: Eric Anderson <ejona86@gmail.com>
-Date: Wed, 9 Sep 2026 16:49:19 -0700
-X-Gm-Features: AcwNN1VJoV3v1Odah8Fe7ZJ7tAJmsAS7QKdDGq3DirsVmWFAI2U8jnmFZUFXl5M
-Message-ID: <CAFyMnzYZrJDvkk80LrjN+K+goZXroejY=rtkQTbx2eUNqVgueQ@mail.gmail.com>
-Subject: Re: [PATCH] mfd: rk8xx: Register poweroff handler in atomic phase
-To: Lee Jones <lee@kernel.org>
-Cc: sashiko-reviews@lists.linux.dev, mfd@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260909-submit-ac200-mfd-v12-1-a44d6bc30a4f@gmail.com>
+References: <20260909-submit-ac200-mfd-v12-0-a44d6bc30a4f@gmail.com>
+In-Reply-To: <20260909-submit-ac200-mfd-v12-0-a44d6bc30a4f@gmail.com>
+To: Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ James Hilliard <james.hilliard1@gmail.com>, Lee Jones <lee@kernel.org>, 
+ Arnd Bergmann <arnd@arndb.de>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: Andrew Lunn <andrew@lunn.ch>, 
+ "Jagielski, Jedrzej" <jedrzej.jagielski@intel.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Chen-Yu Tsai <wens@kernel.org>, 
+ linux-sunxi@lists.linux.dev, mfd@lists.linux.dev, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Conor Dooley <conor.dooley@microchip.com>
+X-Mailer: b4 0.15.2
 
-On Wed, Sep 9, 2026 at 9:01=E2=80=AFAM Lee Jones <lee@kernel.org> wrote:
-> On Tue, 08 Sep 2026, sashiko-bot@kernel.org wrote:
-> > New issues:
-> > - [High] The patch moves the power-off handler to `SYS_OFF_MODE_POWER_O=
-FF`, which executes in an atomic context (local interrupts disabled and sec=
-ondary CPUs halted). The handler calls `regmap_update_bits()`, which uncond=
-itionally attempts to acquire a sleepable regmap mutex, leading to a system=
- deadlock if the mutex is held by a stopped CPU.
->
-> Please review, explain or fix the Sashiko review(s).
+The AC200 is an I2C-controlled mixed-signal companion IC containing
+audio, video, RTC and Fast Ethernet PHY functions.
 
-From my perspctive, my change is a limited revert for a regression,
-and the findings were prexisting (before the regression, and still
-today with reset). Also, my change is fixing a guaranteed hang, so
-even if this could cause a deadlock with non-zero probability, that is
-still an improvement over the current code.
+Describe the shared input clock, audio DAI, TV encoder display graph and
+optional bandgap calibration in one parent node. The codec and TV encoder
+do not need separate firmware nodes.
 
-Looking into the actual report, without me knowing anything about
-anything, it is either not an issue or a widespread problem.
-as3722_pm_power_off, atc2603c_do_poweroff/atc2609a_do_poweroff,
-syscon_poweroff, max77620_pm_power_off look to have the same pattern
-(best as I can tell). The counter examples are rk808_power_off and
-odroid_go_ultra_poweroff_prepare which register as _PREPARE, with
-odroid_go_ultra also having an explicit comment about the lock.
+AC_LDOIN and TV_VCC are distinct 3.3 V supply inputs. Describe them
+separately without requiring different external regulators. Require the
+audio supply when the DAI is described and the video supply when the
+display graph is present, while allowing PHY-only configurations.
 
-This is happening in the final acts of shutting down, so it seems the
-system should be pretty quiet at this point. If there's a better
-approach, I could look into it, but someone would need to provide a
-hint as my ability to provide this patch was "make it work like it
-used to." Alternatively, the patch could be viewed as a regression
-report.
+Describe the optional shared INTB connection without an internal
+interrupt domain. Cable detection status remains readable over I2C when
+INTB is not connected. Include wired and unwired examples.
+
+The Ethernet PHY is represented by a PHY package on its MDIO bus, with a
+phandle back to this device for access to the package control registers.
+It therefore does not require an MFD child node. The input clock must run
+at 24 or 27 MHz when the Ethernet PHY is used, matching the rates encoded
+by its documented clock selector.
+
+Co-developed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
+---
+ .../devicetree/bindings/mfd/x-powers,ac200.yaml    | 168 +++++++++++++++++++++
+ MAINTAINERS                                        |   7 +
+ 2 files changed, 175 insertions(+)
+
+diff --git a/Documentation/devicetree/bindings/mfd/x-powers,ac200.yaml b/Documentation/devicetree/bindings/mfd/x-powers,ac200.yaml
+new file mode 100644
+index 000000000000..75dafa7c1071
+--- /dev/null
++++ b/Documentation/devicetree/bindings/mfd/x-powers,ac200.yaml
+@@ -0,0 +1,168 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/mfd/x-powers,ac200.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: X-Powers AC200 mixed-signal IC
++
++maintainers:
++  - James Hilliard <james.hilliard1@gmail.com>
++  - Jernej Skrabec <jernej.skrabec@gmail.com>
++
++description:
++  The AC200 is a mixed-signal companion IC containing audio, video, RTC and
++  Fast Ethernet PHY functions. Its control registers are accessed over I2C.
++  The audio codec and TV encoder are described by properties of this node.
++  The Ethernet PHY is described separately on its MDIO bus.
++
++allOf:
++  - $ref: /schemas/sound/dai-common.yaml#
++
++properties:
++  compatible:
++    const: x-powers,ac200
++
++  reg:
++    maxItems: 1
++
++  clocks:
++    maxItems: 1
++    description:
++      AC200 input clock. When using the Ethernet PHY, its configured rate must
++      be 24 or 27 MHz, matching the rates encoded by the documented EPHY clock
++      selector.
++
++  interrupts:
++    maxItems: 1
++    description:
++      The shared, level-triggered, open-drain INTB output for the TV encoder,
++      Ethernet PHY and RTC interrupts. Omit when INTB is not connected. TV
++      encoder cable detection status can also be read over I2C without an
++      interrupt.
++
++  '#sound-dai-cells':
++    const: 0
++
++  ac-ldoin-supply:
++    description:
++      The 3.3 V supply connected to the AC_LDOIN pin for the audio codec LDO
++      input. This may be the same regulator as tv-vcc-supply.
++
++  tv-vcc-supply:
++    description:
++      The 3.3 V supply connected to the TV_VCC pin for the composite-video
++      DAC. This may be the same regulator as ac-ldoin-supply.
++
++  nvmem-cells:
++    maxItems: 1
++    description: TV encoder bandgap calibration.
++
++  nvmem-cell-names:
++    items:
++      - const: bandgap
++
++  ports:
++    $ref: /schemas/graph.yaml#/properties/ports
++
++    properties:
++      port@0:
++        $ref: /schemas/graph.yaml#/properties/port
++        description: Input to the TV encoder, carrying CCIR656.
++
++      port@1:
++        $ref: /schemas/graph.yaml#/properties/port
++        description: Output to the composite-video connector.
++
++    required:
++      - port@0
++      - port@1
++
++required:
++  - compatible
++  - reg
++  - clocks
++
++dependencies:
++  '#sound-dai-cells': [ ac-ldoin-supply ]
++  ports: [ tv-vcc-supply ]
++  nvmem-cells: [ nvmem-cell-names ]
++  nvmem-cell-names: [ nvmem-cells ]
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/interrupt-controller/irq.h>
++
++    i2c {
++        #address-cells = <1>;
++        #size-cells = <0>;
++
++        mixed-signal@10 {
++            compatible = "x-powers,ac200";
++            reg = <0x10>;
++            clocks = <&pwm 5>;
++            interrupt-parent = <&pio>;
++            interrupts = <1 20 IRQ_TYPE_LEVEL_LOW>;
++            #sound-dai-cells = <0>;
++            ac-ldoin-supply = <&reg_aldo2>;
++            tv-vcc-supply = <&reg_aldo2>;
++
++            ports {
++                #address-cells = <1>;
++                #size-cells = <0>;
++
++                port@0 {
++                    reg = <0>;
++
++                    tve_in: endpoint {
++                        remote-endpoint = <&tcon_out_tve>;
++                    };
++                };
++
++                port@1 {
++                    reg = <1>;
++
++                    tve_out: endpoint {
++                        remote-endpoint = <&composite_in>;
++                    };
++                };
++            };
++        };
++    };
++  - |
++    i2c {
++        #address-cells = <1>;
++        #size-cells = <0>;
++
++        mixed-signal@10 {
++            compatible = "x-powers,ac200";
++            reg = <0x10>;
++            clocks = <&pwm 5>;
++            /* INTB is not connected. */
++            tv-vcc-supply = <&reg_aldo2>;
++
++            ports {
++                #address-cells = <1>;
++                #size-cells = <0>;
++
++                port@0 {
++                    reg = <0>;
++
++                    endpoint {
++                        remote-endpoint = <&tcon_out_tve>;
++                    };
++                };
++
++                port@1 {
++                    reg = <1>;
++
++                    endpoint {
++                        remote-endpoint = <&composite_in>;
++                    };
++                };
++            };
++        };
++    };
++...
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 3a19da74d00c..419340093c9b 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -29504,6 +29504,13 @@ F:	drivers/net/wwan/
+ F:	include/linux/wwan.h
+ F:	include/uapi/linux/wwan.h
+ 
++X-POWERS AC200 DRIVERS
++M:	Jernej Skrabec <jernej.skrabec@gmail.com>
++M:	James Hilliard <james.hilliard1@gmail.com>
++L:	linux-sunxi@lists.linux.dev
++S:	Maintained
++F:	Documentation/devicetree/bindings/mfd/x-powers,ac200.yaml
++
+ X-POWERS AXP288 PMIC DRIVERS
+ M:	Hans de Goede <hansg@kernel.org>
+ S:	Maintained
+
+-- 
+2.53.0
+
