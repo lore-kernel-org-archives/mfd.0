@@ -1,67 +1,68 @@
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E90553AEF2E
-	for <mfd@lists.linux.dev>; Thu, 10 Sep 2026 09:31:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D7623DDB03
+	for <mfd@lists.linux.dev>; Thu, 10 Sep 2026 09:31:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789032704; cv=none; b=azCWuhbbhJF4xJ5P0jjzzIOIIAmZ1RzJ4Rb+i//7Yrrw2yHDMdy2guDOaA87Ysql1R8UtN4C1yawThAJZutn3NJVBLnZhETsLqbRVdkNdBdbxEAJtVHQ1H3b59s0gy6Y9PXhEXqZ/7C2Hyk5E/AIkOa5uC/eHBW+w6PnO1ZJqGI=
+	t=1789032706; cv=none; b=GW2P28KKGzIJu0GvAx3SNlPDIGnlMlw22dILw76YIkKtHYKKBoMX2dwFSBHOUP/8SjI+AdNrqwmtOUw3ZVTnNQLFlVFR52/9AudD/X5lWKG4NrS963qlFsN0w4spNM4OO5K/2YenWtu2T1uab3Ttprhg0/GP+a4zlGsv95GIuYY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789032704; c=relaxed/simple;
-	bh=U65vA4iIr02MHl2n6QXZFfU+NDomKjnZHbkK5Rr1iqk=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=CmspeD/YoTO8n+XY730OVdIjFjPFtuWQFmGvVg0gTB6YKzprVo+YRK3rvSHkTbrwg8t1olUbHHdPzJsYH4Lbi8pCQPrHQOKmRYl1iz1BVOl0hLfcoqSGI0kfpAlwgxyhk4L6r+/b8RvxarS9FA9HB67BNdQN9NAIn9tti6ed7Jc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=FYC3ysYI; arc=none smtp.client-ip=209.85.128.46
+	s=arc-20240116; t=1789032706; c=relaxed/simple;
+	bh=6WS2gG4eQGvXIRMEkRovIFW0AaWwhRZ2tj+ICuFq6Q8=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=BfN5qPJIas32sYbwPJib8+7Be9c8eaPZBBD1iCMLO6Y3dbpuZa1lE1iaheraYtKuM9UMv3+OD5jtro18h55MMNt1Hx2BCLAP1hV84vgf2/IYC0ww5p2pmOg1WkE6konEW92kSKdbAAVykHbU46pE3W1YE8A7Tji7bXfFj869p24=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=MKcPClDz; arc=none smtp.client-ip=209.85.221.49
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="FYC3ysYI"
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-49b8e527d63so86822905e9.2
-        for <mfd@lists.linux.dev>; Thu, 10 Sep 2026 02:31:38 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="MKcPClDz"
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-482e257a23aso4551419f8f.0
+        for <mfd@lists.linux.dev>; Thu, 10 Sep 2026 02:31:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1789032696; x=1789637496; darn=lists.linux.dev;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=DGt/68Seh+Cu/MXxxMelYUkMWN3xBNuSwl1SfYB7jDw=;
-        b=FYC3ysYIaGI9bp+aGV7E/q2psCdR8g3hpTtQi0joZQfbcBSmrtAGgrpO7tvZZmToAg
-         L6LdqHcED/k1XB+J8ca/svIXCewEcjfCRYU0i7Pv62KPLquqn7ekhRiqoOZspj5XxjNt
-         9J/FqVktEHqHIwbKWO/Pvrd6GZmnHM5KtANVbSpIuj0anvXLYEVvYs+ZocRIgo4waHhR
-         6V09efptKGsbteqNr+q6J2Eqx/7TgTZAtwSn5YKJBKIy3FIRvcm5KyK6JKcriTdUtl2r
-         OOhupWioNhJPTdLhupue2nkE+T0r9ljy6cHPyJY2ZgU0VhXrXkkCmkh494gyHRopkzgq
-         RbBw==
+        d=baylibre.com; s=google; t=1789032698; x=1789637498; darn=lists.linux.dev;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=eC2Iu7WVN9Kv8E55jimB5I9lAFW6apWINO+cxwm+DSo=;
+        b=MKcPClDz3SehN3dXWTAe0MsaQpRAZrP9gtvXlIL8ObZos6URhE+jkoeokA0FTgZnUv
+         dNVWPDcT3YLua4h1AiToDJivftRnf5rPNeO6Ap+hicKM1Cv3rStn/tNOPpZJgoqzTQWC
+         2h5zilUWux+CNQSvVxcLJUF5Aq7Tk8Ob3r5PY00Ej8noWoWgixOQkxQmcaBEXQz04kNw
+         Mq/xGgkX4w4f11KYhSMVGVhgFNw2TF7Ypz/lt4NsDV1pxkyvV1OYVJIkFxup2iHcyJCW
+         5rdO3dITjWJOO50/tTpFGBqk19sMV1ZTPeVlTKHrwuVq1rdRFzkwfDMwyBJOuoIzux7B
+         AJNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789032696; x=1789637496;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=DGt/68Seh+Cu/MXxxMelYUkMWN3xBNuSwl1SfYB7jDw=;
-        b=kFrO/tme/zECGb+v/EVuaDBYusPkSasM7jf8kGz7vA38eirLX4gEVNhVl7dDDZuPR5
-         r8sMhgFLcUjM8ZXxB5qrXjHfqXtoPjy/7hFCwndkyIJ310Nnvh833ZBNVJRlBq77dIlf
-         1VqIXMflQ3R+SsbFHwVlnC5wjikpQugcPUyKgb3TlYnJVdt/Und6HY8iw2tA28cg28yT
-         6354QCx79cLLQvrseE+sOJnF9UDxnbM7NvnuwYfWDhcT/oiwhGI3uhbz32PKfpZPzgdL
-         D7NVLuMZDbZu95j6L/ia5vKAqJOYj5xkxLHAmYUgFvDdmQvBXfsgTwQWxsqA9dFxyEI8
-         kdmw==
-X-Forwarded-Encrypted: i=1; AKwUvBwWuL/6S4UejMFibSohzQDYr0bi9ldq+e2XXmUxR5iHWmnb39tYOQQPQLfjpbgswv3CBMk=@lists.linux.dev
-X-Gm-Message-State: AFuF++kZIuwjWv6A2cOduQKiqP0A4oZ0DcUVWkUmrUcGbwBM4RNOoptL
-	uDLhtWXVMlaTxGhhHFXqNakDx+WP54pO+wk2rKZPv9Ut+S6x+kJOyY9Lc1TGahey3Jo=
-X-Gm-Gg: AYBFou3cmatlg8oKh5BiiPcnD71SIDkiiG+kTqULWGoLYtzpWgFj5zt6dvb1ASOizQo
-	HQwaXm8QduVnecbGd3IGrH8wTHlt/XtTqLARKmrBMaHSVRJIjugtHlyg7+Mz/o06bRUc+fj4wz/
-	wkam6tmEgLCoIVpX8VPVO3iSbxnJcZv2C/UuSB6PEIBNhPzeQGELsrafIMKPx2ef7apiGKNM1N7
-	rBAxj6kiwnBZECPFqoqGpcdcJ5geQrbZkOB7e7bpWzEzskzxR4m2xTdUf4UyKZ7oxqtIvpipFWN
-	6aZWHZlmsgMX6esx6ENUPwGm9ISfa+K/5QKSNlhm/Wv2TU1Q9SGSpb7EbGfoED1HcWwKtENLkeO
-	gM3IsxkDvpoRkMNMsMyh2vqWB0k9VfPgnl0xpPYYI95ODhtQ0TAsEZaKODvUtxAWUBDEHqxwuhY
-	WZ81CKjq2LCRgF8s4ihNhhaw+Z97rW+KTCYw/IYvSrL5SNpn2iX2ZOQpdUxQ6D6Wj5D/2CfS2/2
-	Lb894uzoybz5RwqJQ==
-X-Received: by 2002:a05:600c:3b02:b0:49b:9202:6f80 with SMTP id 5b1f17b1804b1-49cf8220edemr425817905e9.6.1789032695579;
-        Thu, 10 Sep 2026 02:31:35 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1789032698; x=1789637498;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=eC2Iu7WVN9Kv8E55jimB5I9lAFW6apWINO+cxwm+DSo=;
+        b=nm7cvvtykrnbVuihfTh7+2kX3vDDwUM5Oi4rgGAtSSAJ6Fqq6DR/qM/7hbeaet1Zcp
+         3obwxYViT8XtghJeYQdai7mdGOwk0lHj3+sUINjr7WJUvkQPYllC8CGOVf6AXh1e0Bm/
+         THDIWucHb7ewQcgm3kSF0vMP2aOhDICEX7ZfpYZAbYBuHOPi1mEUSTFqB1MFuCBu5zTx
+         SdkFlTpfEqL1ZTtpn1QH6jhH/vxotAJL9EWG5apNtv6mtBMg0Ag0xUHfeFj3KN/H8WQe
+         3MJsDNp8bGAnYqXUMbaNLwen8zSjeB59Z9SjvdCgJyDfR7BTlQEdh3D4yDyljHZgBZFJ
+         dJXA==
+X-Forwarded-Encrypted: i=1; AKwUvBzBoh6itvr6VfxEYC1oJdxsKGQJG+4n3TLhWXmWawb/M+OEXCkrDuafK7FKbuSProyDFUQ=@lists.linux.dev
+X-Gm-Message-State: AFuF++lXQfjmK8JQXcHdcxVp8zVflpxLvPYIR2btVnYkClb9/35snfdP
+	03YwOg4Dk68CmBicE7trb3gOrbhgGGZggNXRri9GKi8eoMA1z5H4P+tp1FPSSqcbD+4=
+X-Gm-Gg: AYBFou3BkAn6kcwb8YVRe7PDglSDVMvr+5Yh+4ndOIcQ209My+1YX96An94lhJJ3rRv
+	m3fNXX4eU7JkuW4Q1L8zmYh4akfOy2yp+DV0ls1PAnq8M57XjZ2AivekwYVIx5aqKPBpKYGL+2I
+	s/XxnrrXi/K6xefMqimuzSKL7t7TDVcU5s+XcSHEo9got7JD0L0Lk6rF3JXWWxvt2FQYke1bu8D
+	DWhNPGlhjrxXBZBR/iYRnj+2F1Irca9HFnuGll4REi8ynmZI0hibkF5c2iBwAoPYx0XbX25KYf8
+	mHriIx2xTjeHxQBTZrCME5jpad8avqz4+pogTeKg5WDrM0YAtAI0BKCT7fD21SDVPPmPNaauSTB
+	7LTmjhzdhKBpznqUO14ZarT7eo6o4T/CaA6ZL2iNouPxP2LrCBIPM27W+iVwQlgVC+9g5harML6
+	bq+XN1YmaZWA7cGonzYSkag6ClzitWUKbSeJATcfSE/iuI77nFbdCR3qkwMKLdibtYCILHcPLK0
+	4w/evkZEOXwukzN+Szg5g6MLC5d
+X-Received: by 2002:a05:6000:491c:b0:486:e727:d4a9 with SMTP id ffacd0b85a97d-486e727d4bamr267531f8f.55.1789032698493;
+        Thu, 10 Sep 2026 02:31:38 -0700 (PDT)
 Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49d26d4e3f3sm66092525e9.15.2026.09.10.02.31.32
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4858dd90e1fsm54098918f8f.28.2026.09.10.02.31.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Sep 2026 02:31:32 -0700 (PDT)
+        Thu, 10 Sep 2026 02:31:37 -0700 (PDT)
 From: Jerome Brunet <jbrunet@baylibre.com>
-Subject: [PATCH v7 0/5] regulator: Add X-Powers AXP318W PMIC support
-Date: Thu, 10 Sep 2026 11:31:07 +0200
-Message-Id: <20260910-axp318-regulator-v7-0-de720ceb9bac@baylibre.com>
+Date: Thu, 10 Sep 2026 11:31:08 +0200
+Subject: [PATCH v7 1/5] mfd: axp20x: Constify axp313 and axp717 cells
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -70,13 +71,9 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIANt4omoC/4XPy26DMBAF0F+JWNfI4wcOWeU/qi4GPA6uwkOG0
- NCIf69JVQlVVru80vjc60c2UvA0ZqfDIws0+9H3XQzm5ZDVDXYXYt7GnAkuCm6AM7wPEo4s0OV
- 2xakPTEmtdE1SFOCy+GwI5Pz9Sb6+fefxVr1TPW3OduFC37KpCYQ/tAYuAEBwkLmILSWXDBh2N
- lA+hM/lAwOeMbR53beb0PgxVi/P1bPYmv4YOAvGGZF2UOuiUqU7V7hcfRXtjds2znJvmIQho2F
- MaWuoSmOtShjqP0NFQ3N0rjT8qKxNGHpniNRfdDQQ0KEhEsqVCaPYGRISRhGNSpFRWmuBUv8y1
- nX9Ark+bPMXAgAA
-X-Change-ID: 20260710-axp318-regulator-43545ce3261f
+Message-Id: <20260910-axp318-regulator-v7-1-de720ceb9bac@baylibre.com>
+References: <20260910-axp318-regulator-v7-0-de720ceb9bac@baylibre.com>
+In-Reply-To: <20260910-axp318-regulator-v7-0-de720ceb9bac@baylibre.com>
 To: Andre Przywara <andre.przywara@arm.com>, Lee Jones <lee@kernel.org>, 
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
  Conor Dooley <conor+dt@kernel.org>, Chen-Yu Tsai <wens@kernel.org>, 
@@ -84,119 +81,58 @@ To: Andre Przywara <andre.przywara@arm.com>, Lee Jones <lee@kernel.org>,
  Hans de Goede <hansg@kernel.org>
 Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
  mfd@lists.linux.dev, linux-sunxi@lists.linux.dev, 
- Jerome Brunet <jbrunet@baylibre.com>, Sashiko <sashiko-bot@kernel.org>, 
- Conor Dooley <conor.dooley@microchip.com>
+ Jerome Brunet <jbrunet@baylibre.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4080; i=jbrunet@baylibre.com;
- h=from:subject:message-id; bh=U65vA4iIr02MHl2n6QXZFfU+NDomKjnZHbkK5Rr1iqk=;
- b=owEBbQKS/ZANAwAKAeb8Dxw38tqFAcsmYgBqonjtDS1WT3rALVGNiF8RLi/gxqITHUSlljEgO
- xO6EuQl2hGJAjMEAAEKAB0WIQT04VmuGPP1bV8btxvm/A8cN/LahQUCaqJ47QAKCRDm/A8cN/La
- hdPKEACHNleOvLFJvngqUQQy/1jvZ34s4hRZqzxVQrdmrOFXh4cCPw6ml9sn4Sa+sXyZAZTwX1B
- L55sCnj3KPi+hcy5oVNmosjqE/bt6TEneeSs/SOvZyuNsZ/6Zua+6plZ2MG+T0YvuOKtzV58UVw
- ad/ktw22Tb3JlL0Yc4jiaAUSbobrvzw4sRwlmW1IrWKjy/ah20phF2TLHWRTaxVve89zXksnWz6
- XXUKh3kvda4C2Pj+VvrQbhpUsnQ4jlOMQEDTyrNmLgauXIaE9/oPwX2D9Y0oMtGDKGp3vVYwRoV
- Xlmhrrc1DyaerTrTsgbZHEoHyZsHFjQZPKAvphLfFpd3/z6SkB2cHzTgz7YtkGvI0S2zg7bXkMo
- lwiPBiAseBUhzUXliAr3BntAuowFuz4hFP0kJEXIoSin6pdweqFVUoQAuGJZTSuUmcjrgPw7pPT
- uODWLH8lZOAGm2bGE/aM3H5rgj6IU1mL6qP26iXMQ/Nm96xPIaKjP217uxn3eru/EqAXyR15i5M
- tCnJzooqZl1uc/EKVYJeimGLVQiouco8XLoSz9qdSJJsdOQWjmm/ZnxCv4IwxYrpF3VoEPxXOWM
- pFXf4eFwh/lb6m1sQpv+oy8GPdLlhgFlLQzOl3uVPDDqgX6KCpf1y0H7RlgatMvvALsBZeeiNZE
- TlBRHzMyIEcidiA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1161; i=jbrunet@baylibre.com;
+ h=from:subject:message-id; bh=6WS2gG4eQGvXIRMEkRovIFW0AaWwhRZ2tj+ICuFq6Q8=;
+ b=owEBbQKS/ZANAwAKAeb8Dxw38tqFAcsmYgBqonjuqKxu8UNJHq0DCQAWeUf5/7Y3PNX51fj8j
+ RwHioty2leJAjMEAAEKAB0WIQT04VmuGPP1bV8btxvm/A8cN/LahQUCaqJ47gAKCRDm/A8cN/La
+ hfhdD/9PQSp8YB79F9eYZ31MRivxo7VTk8yHo2WHgTfXaGtRTfjp9JvsSb/KXSnXm1mkXgSDKF/
+ 1qKGGwWOg2SDh+0/gc195UoHaT7SBPOGUOS7WuyIuXdLAIEURQpsUjuNlmK2aKITGtlSXu7IlfK
+ 6EZZapEDo5HMn7h07BKKCdaraVW0Dnkw3Q29VHrnU4Vt+2Y1fL4IhwK+mVvjYtrzmwL+Cj89hcn
+ 8BziLEW2Id7SUD3TNpb/t+kfqdQ507IKS3Zh4y1Sx2zmS/R7MggQQjm5jVmL5KHLM4DTTKIJnLK
+ GcdngZL14h1BzQRc6VyJjoD4iJnShD7BkcnFE9LnFq4HdHxP83iC0ki1E28iApVmmD843/Pr+ud
+ XyNn5mTkpyjSvMFsUdpJwu/S8/5FpSiHTbHqxM4AXEtmsvHYvraEj0GsTBrUtmduGL2w6ncFW6I
+ 5gMOWdniEQXZRDBNUR74eBZG5yJKAjHdzl7YWazuo8IyVtcRVgFpKQmZxI7UgLK0MONTR2RSDrE
+ q/U03CaNG7XBfU2Y/p+vZWek4zxBiATbJksSPsb6I2bOlURjlc2BPa7YUAD7woYaGVIR8qfxue5
+ o2TYBOrh6ODPkxuTU+VwqGvFc3h6K7iq9HL2NdzIFs4SPtpgwW42j/OF5vhkjLuOpjufjyR4Ume
+ LVznEVirXAmuMUg==
 X-Developer-Key: i=jbrunet@baylibre.com; a=openpgp;
  fpr=F29F26CF27BAE1A9719AE6BDC3C92AAF3E60AED9
 
-This patch series adds support for the X-Powers AXP318W PMIC, which is
-used recently on new boards with Allwinner SoCs (the A733).
+mfd_cells array should generally be const and there does not seem to be
+anything against it for the axp313 and axp717.
 
-The PMIC features 9 DCDC buck converters and 28 LDOs, plus the usual ADC,
-interrupts, and power key components.
-A datasheet can be found linked in this Wiki table:
-https://linux-sunxi.org/AXP_PMICs
+Constify the mfd_cells array for the axp313 and axp717 to be consistent
+with the other supported chips
 
-There was an unclosed topic regarding the handling of LDOs output
-voltage being limited to input voltage being provided by the supply.
-Chen-Yu noted the min_dropout_uV would be a good fit for that but
-the actual minimal dropout value was unknown. I've arbitrarily picked
-1uV because it is the minimum the framework supports. Realistically a low
-dropout regulator is bound to have some dropout. This choice does the
-trick for now and is certain be less restrictive than what it is in
-reality.
-
-If anyone has problems because the dropout is actually higher
-* it is arguably an HW design error
-* it is a good time to let us know what the actual dropout is
-
-Changes in v7:
-- Rebased on v7.3-rc1.
-- Applied Chen-Yu change requests.
-  - More complete register definition all in the MFD change.
-  - Add writeable region holes.
-  - Fix invertion between short and long press IRQ.
-  - Drop confusing comment about DVM.
-  - Use MFD_CELL_NAME() for the regulator device.
-- Link to v6: https://patch.msgid.link/20260812-axp318-regulator-v6-0-d6b84b55c000@baylibre.com
-
-Changes in v6:
-- Apply wording suggestions from Chen-Yu
-- Link to v5: https://patch.msgid.link/20260720-axp318-regulator-v5-0-a1afa7ee24f9@baylibre.com
-
-Changes in v5:
-- Fix shutdown register offset
-- Re-order patches to put fixes first
-- Tighten DT regexp around swout
-- Other points raised by Sashiko on v4 are unrelated to the addition
-  of the AXP318 support and pre-exist the series. They are not
-  addressed ATM.
-- Link to v4: https://patch.msgid.link/20260717-axp318-regulator-v4-0-50aff97084dd@baylibre.com
-
-Changes in v4:
-- Capitalize patch 3 title
-- regulator: add support for workmode and poly-phase.
-- i2c: fix probe through i2c sysfs
-- Link to v3: https://patch.msgid.link/20260717-axp318-regulator-v3-0-779dc1b97dd4@baylibre.com
-
-Changes in v3:
-- Correct mess up v2 errors regarding ops and ids.
-- Correctly propagate errors when checking axp318 threshold.
-- Fix DT binding regex regarding dcdc max ids
-- Add missing RTCLDO.
-- Remove axp318 PEK MFD cell:
-  As pointed out by sashiko, the driver name did not match anything in the
-  pek driver. While the device does support some handling of the power
-  button, it does not seem to match the existing driver. Register 0x36
-  relates to DLDO3, not the power key, as expected by the misc driver.
-  Leave this out for now.
-- Constify axp313 and axp717 mfd_cells array for consistency.
-- Link to v2: https://patch.msgid.link/20260710-axp318-regulator-v2-0-ee5f1c56b49f@baylibre.com
-
-Changes in v2:
-- Dropped _NUM_VOLTAGES macros
-- Use min_dropout_uV to limit LDO voltage to supplies
-- Add bypass mode for EDLO4/5
-- Prevent crossing 1.54V threshold for DCDC6/7/8/9
-- Link to v1: https://lore.kernel.org/r/20251021112013.2710903-1-andre.przywara@arm.com
-
+Acked-by: Chen-Yu Tsai <wens@kernel.org>
+Signed-off-by: Jerome Brunet <jbrunet@baylibre.com>
 ---
-Andre Przywara (3):
-      dt-bindings: mfd: x-powers,axp152: Document AXP318W
-      mfd: axp20x: Add support for AXP318W PMIC
-      regulator: axp20x: add support for the AXP318W
+ drivers/mfd/axp20x.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Jerome Brunet (2):
-      mfd: axp20x: Constify axp313 and axp717 cells
-      mfd: axp20x-i2c: Fix i2c instantiation
+diff --git a/drivers/mfd/axp20x.c b/drivers/mfd/axp20x.c
+index 50df66de24e0..4d770e718716 100644
+--- a/drivers/mfd/axp20x.c
++++ b/drivers/mfd/axp20x.c
+@@ -1055,13 +1055,13 @@ static const struct mfd_cell axp152_cells[] = {
+ 	},
+ };
+ 
+-static struct mfd_cell axp313a_cells[] = {
++static const struct mfd_cell axp313a_cells[] = {
+ 	/* AXP323 is sometimes paired with AXP717 as sub-PMIC */
+ 	MFD_CELL_BASIC("axp20x-regulator", NULL, NULL, 0, 1),
+ 	MFD_CELL_RES("axp313a-pek", axp313a_pek_resources),
+ };
+ 
+-static struct mfd_cell axp717_cells[] = {
++static const struct mfd_cell axp717_cells[] = {
+ 	MFD_CELL_NAME("axp20x-regulator"),
+ 	MFD_CELL_RES("axp20x-pek", axp717_pek_resources),
+ 	MFD_CELL_OF("axp717-adc",
 
- .../devicetree/bindings/mfd/x-powers,axp152.yaml   |  28 +-
- drivers/mfd/axp20x-i2c.c                           |  26 +-
- drivers/mfd/axp20x-rsb.c                           |   1 +
- drivers/mfd/axp20x.c                               |  93 +++++-
- drivers/regulator/axp20x-regulator.c               | 319 ++++++++++++++++++++-
- include/linux/mfd/axp20x.h                         | 148 +++++++++-
- 6 files changed, 589 insertions(+), 26 deletions(-)
----
-base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
-change-id: 20260710-axp318-regulator-43545ce3261f
-
-Best regards,
---  
-Jerome
+-- 
+2.53.0
 
