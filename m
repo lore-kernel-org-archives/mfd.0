@@ -1,99 +1,103 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 53BD63F1045;
-	Thu, 10 Sep 2026 09:43:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9ADB1343D63;
+	Thu, 10 Sep 2026 09:47:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.2
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789033422; cv=none; b=KWv3HdR3k95r9te1OVntd/o0hzb4nKwtX0MYJYjYW7F4yUV5UH0tu/vXd/FrIaD/g9/nV+lbA4IzrlZT5aJDczuYgaexffTdTWvZ1XwNNhiHUAVICFJ9iYNhgEnfVqcIt51yVxeYJxeVSdNIDifCLof+/8PvdqNXqi3nLp7BjOE=
+	t=1789033632; cv=none; b=ZSNOJAB1r1vDAOgEtESnQytda8VGWyVJiosfGTy4yCT97bt97qrGPDvqNtEyWfM3OcA5sJbVSTFKQOpff9ZdwM0nTHuiWYXHLTiyg7Xa91S0/3cPOekNGRpDci/WummAWLy7pasCumCJwnJhRCuAUQXddbmj3F5kHmbPIPjMBYU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789033422; c=relaxed/simple;
-	bh=YaoGfQ84ks+iaR2dKeqY8M15G+lBDfndgtqit6O3r5Q=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=TDghwMMfcF3sRVwIZg/95rBjZQUUueOslPXpX/ce2kVw8mJLA3QhRsGsX65QfdPtBo2JLAzBHxzTd7ZhdSNqGt4dggIXXHtM4UNCKHDfWnjaChtFRpAF1S9Elldy/cgH2rvlhrQu/5jAtif87j+63/6158d+RSGrjxNRrdyZDk4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JU0pPDhQ; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789033632; c=relaxed/simple;
+	bh=F5/vPpllGKppAQmvAZ51j2daco6+yuo7BVECN5KUbX0=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
+	 MIME-Version:Message-ID; b=FqKUAnQFANwCsVrmyLSsOAPeC5YsGY3aFFxqZdnq4fb5+Z2BI/DzsWuABXnwnoYifQUhQcoLU78rd/V3hXCwrCpjS5AV+oIpriqcXvbfQPs0ifjDqNO9Vc/2wR17ySEX6IJG5ntwXEzSP6dxzICBHwnR3e5CmVt8lynRvI75Xys=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=lqXmm7sM; arc=none smtp.client-ip=220.197.31.2
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JU0pPDhQ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F03DD1F00893;
-	Thu, 10 Sep 2026 09:43:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789033411;
-	bh=OYLEwdz7aP8UsgD+AaSdAYjyNHvX+ERbt9ZD4hVP2Vw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=JU0pPDhQWLMlJankpgTKk/VMDFm6H3Hp5m4ZY6B607EaX3t95xdIL1zjBXlP/l0+z
-	 09OxRYv34EgaxUJQnF65T6sWTQVntJT14aRkKCwG81eTqzq8dUMeifQtfCBUil14s+
-	 wdk3UZB04f6H72qp/Mv+JCTpAKkvudu35GRS8IQNAC61WCVaqHqBm4VTF2wfdh1S/d
-	 u+u6uyhruGS409IYYNbiwvjn8CoIOBByb2/1ttq0FjPARDUKkaQD59SD+dI2vjPoVe
-	 +IBxM/eRfVLC3IcwpuYQNtus8GneyyYOrt/7oHkwvSHjpeowBgzUpFy+w8TbEhrbvX
-	 7xbhovkh12ZqQ==
-Date: Thu, 10 Sep 2026 10:43:26 +0100
-From: Lee Jones <lee@kernel.org>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Botsz HUANG <huang.botsz@gmail.com>,
-	Hemanth Selam <hemanth.selam@gmail.com>,
-	Support Opensource <support.opensource@diasemi.com>,
-	Matti Vaittinen <mazziesaccount@gmail.com>,
-	=?iso-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>,
-	linux-kernel@vger.kernel.org, mfd@lists.linux.dev,
-	linux-samsung-soc@vger.kernel.org
-Subject: Re: [PATCH] mfd: fix typos in comments
-Message-ID: <20260910094326.GP2133376@google.com>
-References: <20260904122834.33723-1-hemanth.selam@gmail.com>
- <apwFlV97bLVlvsOJ@botszhome>
- <59747ea8-bd89-4dff-ba13-ff9c66318e8c@kernel.org>
- <20260909161454.GF2133376@google.com>
- <20260909161710.GG2133376@google.com>
- <a05c4086-1681-44f4-88c6-de1073b0f5a6@kernel.org>
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="lqXmm7sM"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
+	Message-ID; bh=F5/vPpllGKppAQmvAZ51j2daco6+yuo7BVECN5KUbX0=; b=l
+	qXmm7sMACXKuGTYrhuNCWfmPg5VEqhYXjr3OUG/evdiii5qKdz1WBt9cWRK4AIyR
+	oOrGDa7nYpOkYEna1BshJ0UY8tk5Wjp5lZbAwr0uJOSm9quHSnEItNUmyjrM/biC
+	LLq2WOZewwsIWu8Riybaa3g98vnHpzOPIGS9fsrNxk=
+Date: Thu, 10 Sep 2026 17:45:36 +0800 (CST)
+From: zl020895  <zl020895@163.com>
+To: =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
+Cc: "Andy Shevchenko" <andriy.shevchenko@linux.intel.com>,
+	longzhao@ambarella.com, "Arnd Bergmann" <arnd@arndb.de>,
+	"Krzysztof Kozlowski" <krzk@kernel.org>,
+	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
+	soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+	"Rob Herring" <robh@kernel.org>,
+	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
+	"Conor Dooley" <conor+dt@kernel.org>,
+	"Michael Turquette" <mturquette@baylibre.com>,
+	"Stephen Boyd" <sboyd@kernel.org>,
+	"Linus Walleij" <linusw@kernel.org>,
+	"Bartosz Golaszewski" <brgl@kernel.org>,
+	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+	"Jiri Slaby" <jirislaby@kernel.org>,
+	"Catalin Marinas" <catalin.marinas@arm.com>,
+	"Will Deacon" <will@kernel.org>, "Lee Jones" <lee@kernel.org>,
+	mfd@lists.linux.dev, devicetree@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
+	linux-serial <linux-serial@vger.kernel.org>,
+	LKML <linux-kernel@vger.kernel.org>
+Subject: Re:Re: Re: [PATCH v6 11/13] serial: 8250_dw: add Ambarella CV75
+ quirks
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
+ 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
+In-Reply-To: <b199eb38-b1a2-4db6-81d8-37bab09a75b7@linux.intel.com>
+References: <20260904-cv75-v5-v6-0-e918514cb3b1@ambarella.com>
+ <20260904-cv75-v5-v6-11-e918514cb3b1@ambarella.com>
+ <aqJrSnr0rwv4BOJ3@ashevche-desk.local>
+ <122573f8.8232.1a08a9765fc.Coremail.zl020895@163.com>
+ <aqJ35vMBiBZo2iUE@ashevche-desk.local>
+ <b199eb38-b1a2-4db6-81d8-37bab09a75b7@linux.intel.com>
+X-NTES-SC: AL_Qu2TC/yYvE0o4CCfYekcn0wRhug/UMa4u/sm3YNXc8IFoD/G9CUlQFRoOmbk686TGjqAnROpYCR11ftiZ4N9xBLb9kFkJNpkbO2sqGB8hQ==
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <a05c4086-1681-44f4-88c6-de1073b0f5a6@kernel.org>
+Message-ID: <55b27872.8ed9.1a08ab55a52.Coremail.zl020895@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID:hCgvCgD3n9RAfKJqJMVDAA--.19073W
+X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbCxgBy42qifEADiwAA3r
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
 
-On Thu, 10 Sep 2026, Krzysztof Kozlowski wrote:
-
-> On 09/09/2026 18:17, Lee Jones wrote:
-> > On Wed, 09 Sep 2026, Lee Jones wrote:
-> > 
-> >> On Tue, 08 Sep 2026, Krzysztof Kozlowski wrote:
-> >>
-> >>> On 05/09/2026 14:05, Botsz HUANG wrote:
-> >>>> On Fri, Sep 04, 2026 at 05:58:28PM +0530, Hemanth Selam wrote:
-> >>>>> 2.48.1
-> >>>>>
-> >>>>
-> >>>> good job~
-> >>>> Acked-by: Botsz HUANG <huang.botsz@gmail.com>
-> >>>
-> >>> I don't think this is real identity. It always comes with other
-> >>> LLM-generated content - as in this case as well - from Nick Huang
-> >>> <sef1548@gmail.com>.
-> >>
-> >> sef1548@gmail.com is Googleable and appears to be legit.
-> >>
-> >> They also have commits dating back to May last year.
-> > 
-> > Botsz Huang is also a real name [0].
-> > 
-> > Now, whether they should be Acked-by:ing patches is another issue entirely!
-> 
-> But:
-> 1. The questionable account only acks when sef1548 acks
-> 2. Even the style is exactly the same repeating the same mistake of not
-> removing quoted text:
->  - big wall of text
-> > LGTM
-> > Acked-by: Nick Huang <sef1548@gmail.com>
-> 
->  - big wall of text
-> > good job~
-> > Acked-by: Botsz HUANG <huang.botsz@gmail.com>
-
-Suspect indeed.  Huangs anything to say?
-
--- 
-Lee Jones
+SGkgSWxwbywgQW5keSwKCkknbGwgZ28gd2l0aCB0aGUgc2ltcGxlIGNvbW1lbnQ6CgkvKgoJICog
+QW1iYXJlbGxhIGtlZXBzIHZhcmlhbnQgSUVSIGJpdHMgKGUuZy4gRVRPSSkgc2V0IGZvciBjb3Jy
+ZWN0IFJYCgkgKiB0aW1lb3V0IGJlaGF2aW91ci4KCSAqLwoJdXAtPmllciB8PSBkLT5wZGF0YS0+
+aWVyX21hc2s7CgpCZXN0IHJlZ2FyZHMsCkxvbmcgWmhhbwoKQXQgMjAyNi0wOS0xMCAxNzozMzoz
+OCwgIklscG8gSsOkcnZpbmVuIiA8aWxwby5qYXJ2aW5lbkBsaW51eC5pbnRlbC5jb20+IHdyb3Rl
+Ogo+T24gVGh1LCAxMCBTZXAgMjAyNiwgQW5keSBTaGV2Y2hlbmtvIHdyb3RlOgo+Cj4+IE9uIFRo
+dSwgU2VwIDEwLCAyMDI2IGF0IDA1OjEyOjUyUE0gKzA4MDAsIHpsMDIwODk1IHdyb3RlOgo+PiAK
+Pj4gPiA+IFdvbmRlcmluZyBpZiB3ZSBzaG91bGQgdW5kbyB0aGlzIGluIHRoZSBwb3J0J3MgLnNo
+dXRkb3duKCkgY2FsbGJhY2suCj4+ID4gSSBzYXcgdGhlIHNodXRkb3duIHBhdGggYWxyZWFkeSBj
+b3ZlcnMgaXQ6IGR3ODI1MF9zaHV0ZG93bigpIGNhbGxzCj4+ID4gc2VyaWFsODI1MF9kb19zaHV0
+ZG93bigpLCB3aGljaCBkb2VzCj4+ID4gCXVwLT5pZXIgPSAwOwo+PiA+IAlzZXJpYWxfcG9ydF9v
+dXQocG9ydCwgVUFSVF9JRVIsIDApOwo+PiA+IHNvIGJvdGggdGhlIElFUiBzaGFkb3cgYW5kIGhh
+cmR3YXJlIElFUiBhcmUgY2xlYXJlZCwgaW5jbHVkaW5nIEVUT0kuCj4+IAo+PiBEZXBlbmRpbmcg
+b24gdGhlIGFuc3dlciB0byBJbHBvIHRoZSBlbmFibGluZyBtYXkgbmVlZCBhbiB1cGRhdGVkIGNv
+bW1lbnQKPj4gc3VtbWFyaXNpbmcgdGhlIGFib3ZlLgo+Cj5JJ2QgcHJlZmVyIHJlbW92aW5nIHRo
+ZSBlbnRpcmUgIkZvcmNlIHRoZW0gLi4uIiBzZW50ZW5jZSwgaXQgZmVlbHMgcmVhbGx5IAo+YmFz
+aWMgZGV0YWlsIGFib3V0IGhvdyAtPmllciB3b3Jrcy4gSSBiZWxpZXZlIHRoYXQgd291bGQgcmVz
+b2x2ZSB5b3VyIAo+Y29uY2VybiBpZiByZWxhdGVzIHRvIHdoYXQgc2h1dGRvd24gZG9lcyBmb3Ig
+dGhlIGZsYWcgKGNsZWFycyBpdCB3aGlsZSAKPnRoZSBjb21tZW50IGFzIGlzIHNheXMgbm90aGlu
+ZyBpcyBzdXBwb3NlZCB0byBjbGVhciBpdCkuCj4KPj4gPiBBdCAyMDI2LTA5LTEwIDE2OjMzOjE0
+LCAiQW5keSBTaGV2Y2hlbmtvIiA8YW5kcml5LnNoZXZjaGVua29AbGludXguaW50ZWwuY29tPiB3
+cm90ZToKPj4gPiA+T24gRnJpLCBTZXAgMDQsIDIwMjYgYXQgMDI6Mzg6MThQTSArMDgwMCwgTG9u
+ZyBaaGFvIHZpYSBCNCBSZWxheSB3cm90ZToKPj4gCj4+IC4uLgo+PiAKPj4gPiA+PiArCS8qCj4+
+ID4gPj4gKwkgKiBBbWJhcmVsbGEga2VlcHMgdmFyaWFudCBJRVIgYml0cyAoZS5nLiBFVE9JKSBz
+ZXQgZm9yIGNvcnJlY3QgUlgKPj4gPiA+PiArCSAqIHRpbWVvdXQgYmVoYXZpb3VyLiBGb3JjZSB0
+aGVtIGludG8gdGhlIDgyNTAgSUVSIHNoYWRvdyBzbyBsYXRlcgo+PiA+ID4+ICsJICogZ2VuZXJp
+YyBJRVIgdXBkYXRlcyBkbyBub3QgY2xlYXIgdGhlbS4KPj4gPiA+PiArCSAqLwo+PiA+ID4KPj4g
+PiA+V29uZGVyaW5nIGlmIHdlIHNob3VsZCB1bmRvIHRoaXMgaW4gdGhlIHBvcnQncyAuc2h1dGRv
+d24oKSBjYWxsYmFjay4KPj4gCj4+IAo+Cj4tLSAKPiBpLgo=
