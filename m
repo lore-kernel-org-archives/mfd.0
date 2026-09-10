@@ -1,103 +1,157 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9ADB1343D63;
-	Thu, 10 Sep 2026 09:47:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.2
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3EFC455176
+	for <mfd@lists.linux.dev>; Thu, 10 Sep 2026 10:37:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789033632; cv=none; b=ZSNOJAB1r1vDAOgEtESnQytda8VGWyVJiosfGTy4yCT97bt97qrGPDvqNtEyWfM3OcA5sJbVSTFKQOpff9ZdwM0nTHuiWYXHLTiyg7Xa91S0/3cPOekNGRpDci/WummAWLy7pasCumCJwnJhRCuAUQXddbmj3F5kHmbPIPjMBYU=
+	t=1789036670; cv=none; b=qOFemAYzTp7yw5FGyl5OePbUYOQDJJRI2RBUZY1MW+/3ZHfEZi0wsw++vN21IiQPtSnnldrQDlX2nBHorSoFrvfs3LNkpjmN0UgeaKeL4m2RPNxYrOKbBNLH4S4jr98/sRUHeUdI0QuqH0uyWQ0W20AD81+c4C4LF4JsxYnYml4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789033632; c=relaxed/simple;
-	bh=F5/vPpllGKppAQmvAZ51j2daco6+yuo7BVECN5KUbX0=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
-	 MIME-Version:Message-ID; b=FqKUAnQFANwCsVrmyLSsOAPeC5YsGY3aFFxqZdnq4fb5+Z2BI/DzsWuABXnwnoYifQUhQcoLU78rd/V3hXCwrCpjS5AV+oIpriqcXvbfQPs0ifjDqNO9Vc/2wR17ySEX6IJG5ntwXEzSP6dxzICBHwnR3e5CmVt8lynRvI75Xys=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=lqXmm7sM; arc=none smtp.client-ip=220.197.31.2
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1789036670; c=relaxed/simple;
+	bh=rMU+PmTBon7MZYNFvL/32kuzRyhojyfvr5NuoahMVyA=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=scAiK61XxhpU6SzeGFUcCj6zBpeNEYCaOb7tJ+5N4fA7mXAfXvlLa8ukW18X8cIy2LAcBAC6Chv2QFxJdlR1eJmu0uOeD6bDkmBPLzHFNfQ9fvJxKYEoSlV8DRHnYyJaD9QSX+vHPGbWohxpZKVsZK1KAUKjdV+/Ha/OA8O9rfY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=Vzla2Mgk; arc=none smtp.client-ip=74.125.225.76
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="lqXmm7sM"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
-	Message-ID; bh=F5/vPpllGKppAQmvAZ51j2daco6+yuo7BVECN5KUbX0=; b=l
-	qXmm7sMACXKuGTYrhuNCWfmPg5VEqhYXjr3OUG/evdiii5qKdz1WBt9cWRK4AIyR
-	oOrGDa7nYpOkYEna1BshJ0UY8tk5Wjp5lZbAwr0uJOSm9quHSnEItNUmyjrM/biC
-	LLq2WOZewwsIWu8Riybaa3g98vnHpzOPIGS9fsrNxk=
-Date: Thu, 10 Sep 2026 17:45:36 +0800 (CST)
-From: zl020895  <zl020895@163.com>
-To: =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
-Cc: "Andy Shevchenko" <andriy.shevchenko@linux.intel.com>,
-	longzhao@ambarella.com, "Arnd Bergmann" <arnd@arndb.de>,
-	"Krzysztof Kozlowski" <krzk@kernel.org>,
-	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
-	soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
-	"Rob Herring" <robh@kernel.org>,
-	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
-	"Conor Dooley" <conor+dt@kernel.org>,
-	"Michael Turquette" <mturquette@baylibre.com>,
-	"Stephen Boyd" <sboyd@kernel.org>,
-	"Linus Walleij" <linusw@kernel.org>,
-	"Bartosz Golaszewski" <brgl@kernel.org>,
-	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
-	"Jiri Slaby" <jirislaby@kernel.org>,
-	"Catalin Marinas" <catalin.marinas@arm.com>,
-	"Will Deacon" <will@kernel.org>, "Lee Jones" <lee@kernel.org>,
-	mfd@lists.linux.dev, devicetree@vger.kernel.org,
-	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
-	linux-serial <linux-serial@vger.kernel.org>,
-	LKML <linux-kernel@vger.kernel.org>
-Subject: Re:Re: Re: [PATCH v6 11/13] serial: 8250_dw: add Ambarella CV75
- quirks
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
- 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
-In-Reply-To: <b199eb38-b1a2-4db6-81d8-37bab09a75b7@linux.intel.com>
-References: <20260904-cv75-v5-v6-0-e918514cb3b1@ambarella.com>
- <20260904-cv75-v5-v6-11-e918514cb3b1@ambarella.com>
- <aqJrSnr0rwv4BOJ3@ashevche-desk.local>
- <122573f8.8232.1a08a9765fc.Coremail.zl020895@163.com>
- <aqJ35vMBiBZo2iUE@ashevche-desk.local>
- <b199eb38-b1a2-4db6-81d8-37bab09a75b7@linux.intel.com>
-X-NTES-SC: AL_Qu2TC/yYvE0o4CCfYekcn0wRhug/UMa4u/sm3YNXc8IFoD/G9CUlQFRoOmbk686TGjqAnROpYCR11ftiZ4N9xBLb9kFkJNpkbO2sqGB8hQ==
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="Vzla2Mgk"
+Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-48449f62b93so1154885f8f.0
+        for <mfd@lists.linux.dev>; Thu, 10 Sep 2026 03:37:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1789036664; x=1789641464; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=6EF+UHNSS4hI0lePcCf3NeWVNl/rHsUyRzTVnqSXcQw=;
+        b=Vzla2MgkcZ3OWISQaKcUST+UL0tIA6QJtHXx8I3lJxL5F9Tm/rWNrfWHCyuFPzN7Uy
+         MbQeDDhqr8hXl77oqSn0ItosBViTo7cjDVFU29Qqil+xC+2cLZXq7mWoEWyQ+ZikRzXh
+         0JMJZ8R9dvMphlUfjJbzTK4QcFgGd1nDe/AIY0u5NvoBKGmQdbxel+P6Wm7bkC/VuhKw
+         giRQxgkN7W2TycD+zyjaSFOjMakrG4LYxT/uOCSloWkRChsuOtCOKoxtElAo4bnhsmpt
+         kH73T6lKXQLgYvL5B6J99bF+rVKGKTuy3/yrrb4bn4BKIaKoWUUUTu7peaqCxNTV6bwe
+         3LLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789036664; x=1789641464;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :references:in-reply-to:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=6EF+UHNSS4hI0lePcCf3NeWVNl/rHsUyRzTVnqSXcQw=;
+        b=bODD37wI8zi6xwahV5eeskPrKADKOoappeCkgiRBxR8hMSJH+qDjuSmryY7tUCb056
+         kw2KWPgl/oX+oAxXgGlxiaaRQ/IQOcakZHGL9TOWWPVQmCTa0y5waUubqp/Y6ctMh/Ah
+         MIC890gInsq+CHrZ41txl0bx/KpAbVLxoOUPhTrHd/OWpV8Ekngt+vF95KVE592pa05u
+         p6kHGUErsWzk0t1LM5CkckUbv3+YVoNi7QOApv+WXse/Ej3HcscLkhYI2wCcQ9+vWAy/
+         dDkbmJg3ZjlV3b/Xld7N8lFS6fhGjwNtlr8Z1expUsgobye6ldojxHa9eoSZzhoczuX+
+         SI6Q==
+X-Forwarded-Encrypted: i=1; AKwUvBwknciChbbwHtPgCZ7Bw6rQOru7IZ4eEPsDpn/viD5RYn15h2FxZEBPQDp0RPSMfl0Q0Oo=@lists.linux.dev
+X-Gm-Message-State: AFuF++l2+04j0MWnIFSqQ4TYJId5u1pfZY9h4KKGxCsGu/+01JNIK896
+	OBTeNS+RO1519d/MJ5BZymSODyNstKZW0ffTb3VS7BomDF2FwvDKzWsaPcesGZqIyyU=
+X-Gm-Gg: AYBFou3dmC4/GwmhfgZHrQaSNMOXLflqXMEZqrl42QMoemliqob+AP+P7vjenikJDr8
+	aAUxhItlTh6vHw7+kLiDWepbEAWAeOCibthWRkqa1qiyZhsmclpZnpavMfdEYgirqkoiZdMdYPi
+	3EM3sfBo9pWyg7cLUsD0RnLuOiAMmC4oENriSeBicdBVI400ipq4yojpsei5kkwmEQ3qoSksZBm
+	P/NzvZD9/NfX3zvzE9tnXVL2fMgPJ+AbCZf8zxCOxtBbSPslsFc34awr4Qc5ml0/2M3n09GOWXG
+	hF8Ktj9CMJtSL6c40NBDtu/zliU/EvxCqBn0MJ+nBklEXKbZzSVSNZQgLehPszwe1N5bmAYdAdJ
+	RmAgeyvlpoSV6GKryBUR+8knWe7MQS1bohyccsjWmA33cM42vPm8VqlO8xKdExmo3g/5uqQ7QIq
+	B9Qh+SHq1a/xxfyE3IcTSZGkHDL/5GxmKj2VGT7pALlDurBM6L1OP1fbDqoNm6ptR5Cj9eyyVjy
+	zEzNgnG82HNGV52mw==
+X-Received: by 2002:a05:6000:24c1:b0:484:482d:dce4 with SMTP id ffacd0b85a97d-486d7322325mr4803704f8f.0.1789036664113;
+        Thu, 10 Sep 2026 03:37:44 -0700 (PDT)
+Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4858ab73c2bsm48835518f8f.22.2026.09.10.03.37.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 10 Sep 2026 03:37:43 -0700 (PDT)
+From: Jerome Brunet <jbrunet@baylibre.com>
+To: sashiko-reviews@lists.linux.dev
+Cc: linux-sunxi@lists.linux.dev, conor+dt@kernel.org, robh@kernel.org,
+ mfd@lists.linux.dev, lee@kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH v7 3/5] dt-bindings: mfd: x-powers,axp152: Document AXP318W
+In-Reply-To: <20260910094251.A112A1F000FF@smtp.kernel.org>
+References: <20260910-axp318-regulator-v7-0-de720ceb9bac@baylibre.com>
+ <20260910-axp318-regulator-v7-3-de720ceb9bac@baylibre.com>
+ <20260910094251.A112A1F000FF@smtp.kernel.org>
+Date: Thu, 10 Sep 2026 12:37:42 +0200
+Message-ID: <1jtsnx75op.fsf@starbuckisacylon.baylibre.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Message-ID: <55b27872.8ed9.1a08ab55a52.Coremail.zl020895@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID:hCgvCgD3n9RAfKJqJMVDAA--.19073W
-X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbCxgBy42qifEADiwAA3r
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-SGkgSWxwbywgQW5keSwKCkknbGwgZ28gd2l0aCB0aGUgc2ltcGxlIGNvbW1lbnQ6CgkvKgoJICog
-QW1iYXJlbGxhIGtlZXBzIHZhcmlhbnQgSUVSIGJpdHMgKGUuZy4gRVRPSSkgc2V0IGZvciBjb3Jy
-ZWN0IFJYCgkgKiB0aW1lb3V0IGJlaGF2aW91ci4KCSAqLwoJdXAtPmllciB8PSBkLT5wZGF0YS0+
-aWVyX21hc2s7CgpCZXN0IHJlZ2FyZHMsCkxvbmcgWmhhbwoKQXQgMjAyNi0wOS0xMCAxNzozMzoz
-OCwgIklscG8gSsOkcnZpbmVuIiA8aWxwby5qYXJ2aW5lbkBsaW51eC5pbnRlbC5jb20+IHdyb3Rl
-Ogo+T24gVGh1LCAxMCBTZXAgMjAyNiwgQW5keSBTaGV2Y2hlbmtvIHdyb3RlOgo+Cj4+IE9uIFRo
-dSwgU2VwIDEwLCAyMDI2IGF0IDA1OjEyOjUyUE0gKzA4MDAsIHpsMDIwODk1IHdyb3RlOgo+PiAK
-Pj4gPiA+IFdvbmRlcmluZyBpZiB3ZSBzaG91bGQgdW5kbyB0aGlzIGluIHRoZSBwb3J0J3MgLnNo
-dXRkb3duKCkgY2FsbGJhY2suCj4+ID4gSSBzYXcgdGhlIHNodXRkb3duIHBhdGggYWxyZWFkeSBj
-b3ZlcnMgaXQ6IGR3ODI1MF9zaHV0ZG93bigpIGNhbGxzCj4+ID4gc2VyaWFsODI1MF9kb19zaHV0
-ZG93bigpLCB3aGljaCBkb2VzCj4+ID4gCXVwLT5pZXIgPSAwOwo+PiA+IAlzZXJpYWxfcG9ydF9v
-dXQocG9ydCwgVUFSVF9JRVIsIDApOwo+PiA+IHNvIGJvdGggdGhlIElFUiBzaGFkb3cgYW5kIGhh
-cmR3YXJlIElFUiBhcmUgY2xlYXJlZCwgaW5jbHVkaW5nIEVUT0kuCj4+IAo+PiBEZXBlbmRpbmcg
-b24gdGhlIGFuc3dlciB0byBJbHBvIHRoZSBlbmFibGluZyBtYXkgbmVlZCBhbiB1cGRhdGVkIGNv
-bW1lbnQKPj4gc3VtbWFyaXNpbmcgdGhlIGFib3ZlLgo+Cj5JJ2QgcHJlZmVyIHJlbW92aW5nIHRo
-ZSBlbnRpcmUgIkZvcmNlIHRoZW0gLi4uIiBzZW50ZW5jZSwgaXQgZmVlbHMgcmVhbGx5IAo+YmFz
-aWMgZGV0YWlsIGFib3V0IGhvdyAtPmllciB3b3Jrcy4gSSBiZWxpZXZlIHRoYXQgd291bGQgcmVz
-b2x2ZSB5b3VyIAo+Y29uY2VybiBpZiByZWxhdGVzIHRvIHdoYXQgc2h1dGRvd24gZG9lcyBmb3Ig
-dGhlIGZsYWcgKGNsZWFycyBpdCB3aGlsZSAKPnRoZSBjb21tZW50IGFzIGlzIHNheXMgbm90aGlu
-ZyBpcyBzdXBwb3NlZCB0byBjbGVhciBpdCkuCj4KPj4gPiBBdCAyMDI2LTA5LTEwIDE2OjMzOjE0
-LCAiQW5keSBTaGV2Y2hlbmtvIiA8YW5kcml5LnNoZXZjaGVua29AbGludXguaW50ZWwuY29tPiB3
-cm90ZToKPj4gPiA+T24gRnJpLCBTZXAgMDQsIDIwMjYgYXQgMDI6Mzg6MThQTSArMDgwMCwgTG9u
-ZyBaaGFvIHZpYSBCNCBSZWxheSB3cm90ZToKPj4gCj4+IC4uLgo+PiAKPj4gPiA+PiArCS8qCj4+
-ID4gPj4gKwkgKiBBbWJhcmVsbGEga2VlcHMgdmFyaWFudCBJRVIgYml0cyAoZS5nLiBFVE9JKSBz
-ZXQgZm9yIGNvcnJlY3QgUlgKPj4gPiA+PiArCSAqIHRpbWVvdXQgYmVoYXZpb3VyLiBGb3JjZSB0
-aGVtIGludG8gdGhlIDgyNTAgSUVSIHNoYWRvdyBzbyBsYXRlcgo+PiA+ID4+ICsJICogZ2VuZXJp
-YyBJRVIgdXBkYXRlcyBkbyBub3QgY2xlYXIgdGhlbS4KPj4gPiA+PiArCSAqLwo+PiA+ID4KPj4g
-PiA+V29uZGVyaW5nIGlmIHdlIHNob3VsZCB1bmRvIHRoaXMgaW4gdGhlIHBvcnQncyAuc2h1dGRv
-d24oKSBjYWxsYmFjay4KPj4gCj4+IAo+Cj4tLSAKPiBpLgo=
+On jeu. 10 sept. 2026 at 09:42, sashiko-bot@kernel.org wrote:
+
+> Thank you for your contribution! Sashiko AI review found 1 potential issu=
+e(s) to consider:
+> - [Medium] The new `x-powers,axp318w` compatible string is omitted from t=
+he conditional block that makes the `interrupts` property optional for rece=
+nt generation PMICs.
+> --
+>
+> commit e4119d6ce87c67baf660bd6f040790fb69b77af3
+> Author: Andre Przywara <andre.przywara@arm.com>
+>
+> dt-bindings: mfd: x-powers,axp152: Document AXP318W
+>
+> This commit adds the compatible string x-powers,axp318w for the AXP318W P=
+MIC
+> to the binding schema. It also adds new input supply properties and updat=
+es
+> the regex for matching switched output nodes.
+>
+>> diff --git a/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml =
+b/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
+>> index 45f015d63df16..38556c32417b3 100644
+>> --- a/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
+>> +++ b/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
+>> @@ -83,6 +83,7 @@ allOf:
+>>            contains:
+>>              enum:
+>>                - x-powers,axp313a
+>> +              - x-powers,axp318w
+>>                - x-powers,axp323
+>>                - x-powers,axp15060
+>>                - x-powers,axp717
+>
+> [Severity: Medium]
+> Does the x-powers,axp318w compatible string also need to be added to the
+> earlier if-then block that governs the interrupts requirement?
+
+Ahhh, got it the other way around first time this poped - resending ...
+
+>
+> Just above this hunk in Documentation/devicetree/bindings/mfd/x-powers,ax=
+p152.yaml,
+> there is a block that makes interrupts mandatory for all PMICs except a s=
+elect
+> few:
+>
+>   - if:
+>       not:
+>         properties:
+>           compatible:
+>             contains:
+>               enum:
+>                 - x-powers,axp15060
+>                 - x-powers,axp305
+>                 - x-powers,axp313a
+>                 - x-powers,axp323
+>
+>     then:
+>       required:
+>         - interrupts
+>
+> By omitting x-powers,axp318w from this enum, the interrupts property is
+> mandatory for the new PMIC. Could this cause device trees with an unconne=
+cted
+> AXP318W interrupt line to falsely fail dt_binding_check validation, given=
+ that
+> similar recent generation PMICs operate fine without it?
+>
+> --=20
+> Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260910-axp318-r=
+egulator-v7-0-de720ceb9bac@baylibre.com?part=3D3
+
+--=20
+Jerome
