@@ -1,179 +1,139 @@
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D379F379EDA
-	for <mfd@lists.linux.dev>; Thu, 10 Sep 2026 06:04:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.222.174
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789020284; cv=pass; b=N629+J2IvhMrtGVOcuXjkWR9yudgPBLmZZePLP/qBHlJXOsJI9WVucd4SVXSla8HHmINQC+1lrFZjcNc7qbax/ZZXJnI3vYadfxN3cPmoNwOFTII9tszPfwMzb7vz1gfmi3G4hni0XsK1IDqZMbRNySgRMNGbZrKQcCrCwkqILI=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789020284; c=relaxed/simple;
-	bh=Y6b96iet9s2KwwRC14nzYS35sZ+CgS6dHidY71VhHFQ=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=odbv5OkggL6RCfTLP9FZwa62y//udxxZa1REFMyCiMZQXFKJGLBdhC6rTVQeR9fttPNSHbbysqC7Q44farELpRyxrbTV2UTmecTJEWkiRWp/MZJIN+UqmU4ycpj6e2T87WIREan3u8oAtrXGPI84OlTRfV7O7M/IiUx049DYkGg=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Kspa5MmG; arc=pass smtp.client-ip=209.85.222.174
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 81814384CF5;
+	Thu, 10 Sep 2026 06:16:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789020980; cv=none; b=hvYld4Est4E5lUQ+qEyCx18o0lCcLKuOrrfo4/UZ7c7fEsiSQXi+U4FpdD0Z77sFVtB8OjfEdV9Khj2ODKJbYnGOYY84f3aT1puFhASlt/ZNvIWJMb4A3cE5EMl2Tp7PiYuW6cLzkMBfGnDB86wwvXcC98LGzl2Q/Pdd6fxXDZo=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789020980; c=relaxed/simple;
+	bh=dy8JF2HPHqpbKppZPV0XvOy0C89bNiEmcRH7MGBdAB8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Q1SFaZuXKeQ/oPZItLXOuA51YmZgvVQRxvWLuIp0ClT1VPLZSt2r8xronyIwqr4CF9hBTXNSEgBbYx7HJ9uSjXH2Km2lnVN2oxy3CN2dAIdMA7IzAo8drRmiSynYwpwB+I1j9tEySATiIYxJ2vnVkGMstIvJ69izOFljeMMKOWU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iRb6JNW/; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Kspa5MmG"
-Received: by mail-qk1-f174.google.com with SMTP id af79cd13be357-9309d4ea213so732427185a.1
-        for <mfd@lists.linux.dev>; Wed, 09 Sep 2026 23:04:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1789020282; cv=none;
-        d=google.com; s=arc-20260327;
-        b=cBLVaYS2Lc8A1JSwmMWM1y4k8eOpABHF8lBGZPp/1LgenUW0oquvqBCncRkCJbwG9O
-         /8IysItsRok4nwhA23/hHQBzQd0FP8kqHg/ZNaC08BBV31I4CwGgysLD7LQdkJ1WHmRD
-         QXRfh6Txc/rXCur1ddmb7e86Sof2U5tUmGAy9GKPlc5Y2PMnFwloCtz8ILgCCOtnvv5x
-         WuASBdAw/xSn6r0Of4epPzJQ5m9arKyfAnAK2VNzu8mtXr5k4vpXm7sHkx6WHQLW9zzn
-         nh8HpXTJznmQkWRF2KmG782Is5KaQsefucWib0qK1dAdHEpyhxMmdCIKLTuAk+IYfL0B
-         lbmg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=nBNYr0evCGRWWAC1VfILVSzC5WtT6AbMNuwOI5qjq5M=;
-        fh=diDOTdROKGwQnAeAXyhUwDN+0bBO9AG8IQd4B4vTca4=;
-        b=nbmaEx+pNuxc6bq1vbEOvU+zMuFKu8z6nc1JAkccIife8DN4UmXJs393Sz/HAcY4rp
-         1HCeNlfn6cjHCJUbMLRctj7M9lclc+Wl6rN8FQ77+wVQmML+YpRXUc5YawmJnNYuX79y
-         TGirx2aJC1rcM2xfCN2bhENjtGDNG3EFTJ28U6rRcBTaGY8XxgE4yhBlXClYNYa57dDH
-         OMtBv3JsrvYFIVgsBcGlVanoRuslCZY7FYnrpHu+4mrmWagHqNJu4eyLrLQAJkLdTuaK
-         f4kQ6PnJ9gwhOVqrBDaWEm4I20RmenK+OWhYBYpd5Qvwf29oU2HBUp3pXQrG4ZpUuJ6K
-         utag==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789020282; x=1789625082; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=nBNYr0evCGRWWAC1VfILVSzC5WtT6AbMNuwOI5qjq5M=;
-        b=Kspa5MmG5YW8z9oU6g8/9r/kypys5TZXeR+0CLvjHJeL+loYKLya2M/80/DGQGDYhN
-         aV1p+U9LlkGIp82rD6lDPk6xMUkFE8oPCKO/HuYRGpvcymwj734hJpMuFV6b0OQwCRwW
-         QnwxZG4DV7A8DyNvzJFI+gxsBkRCOFjKjLnJlrwgY38E6pIRvxHNtWwqqrTXkq/uMBH6
-         sSrhgdOMux0z5jMmMtuIuVqhkxmhJVes04HR1fn4t912j20lLam9TMt56zPcTbvHj8nJ
-         eAbrauFe2yi83cWhxion43l0UucftADfFlRns/pMzcTXvIaWPax9Oyze4N2locFbVG+Z
-         djDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789020282; x=1789625082;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=nBNYr0evCGRWWAC1VfILVSzC5WtT6AbMNuwOI5qjq5M=;
-        b=BgwVcgIgcODS/lZJP5bCr/V2baOg2hm8B/SUj4nSZ65OpVYqoUDfGhJakNzlCQfZ0j
-         hLL623mP9iwmQYEUX8ZxhDAo6ysxdnVxnd2vLJRpAfmeMUqFOk74eHufxRjn/U8jnjL9
-         AUU67GzODWCx/OxjlbsKoiHglI6toUq2aYmn/fS9XELQ1bF+JNT20PfYeF09FKjfi2Ht
-         x85s9wxhaVlI/BZV14SYCIfsjR8jO7jtb3zzxAslOPiFDI4R16CFYtonlgfawHU+0Ia4
-         /ubQnqj5xlDJsdiWnZkKPZAevxZz1seYAY2NRYVfi9nT4zrPWQCb20Vrcshqwhm/DIeh
-         b8Rw==
-X-Forwarded-Encrypted: i=1; AKwUvBw8zNBUj7PdkjAFa3Y+/E1wdH2SWOLSqD8kXAgY1OQsLwL/5uRvYDlJjucZ6m2l5HFNTec=@lists.linux.dev
-X-Gm-Message-State: AFuF++mhrvjf/PrXRaXciPORpQUgLczwDvLeJtMbcUewCRlKnGBQThdz
-	5ElAdOReLNsP+6znnUHK7g18CFuTpI//1xR+pGvlNAjzndayAL2ZxNmrMI/58VtxdMdyGgpjNIS
-	1cZT6bqzayiopJDJ5cNkMbzm58fx3iWI=
-X-Gm-Gg: AYBFou1K4D3Ef6IpiXc5GhRGyQF9O1paRiOFJOB91U2yr+kz/0YyuHzyRS7ZoZb0BRt
-	WJ287x4ksCdy3FN+K4BVFf1IdtLuMtmPnf01uOsCqU8R2ul9CPsmHkG5H6Vm8Bv/vZ6VIN1begR
-	0c3y4Ll3Oc93jSNF2OokF1Ef3FkjvdDssynjVIaWYue8BgpmvOkAEA3nmP/XFYGcalAoTJ2UAjr
-	xfgmzyVAsR+fDPQS96MYPSPacEmq4+DqvwZz3BIV91ctMI9d7IgOIUBZU8AfoCv5vUOARiLQi2n
-	+f5JEJOjqgxHa8bdS2+0To5aIVrnXnU23p6USpQb5gK1SZmm5Oj+4BUU
-X-Received: by 2002:a05:620a:4443:b0:92e:5d44:73fc with SMTP id
- af79cd13be357-939805cd179mr4210849585a.12.1789020281612; Wed, 09 Sep 2026
- 23:04:41 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iRb6JNW/"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D258E1F00893;
+	Thu, 10 Sep 2026 06:16:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789020968;
+	bh=h6Exf0e8vILsYNXuRufIR8cElvccbDJONMs+KKdJ0hs=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=iRb6JNW/uIyBGIC+b02KqPdx2+r9VaLnKuR5wE17VK6k56okkHiUb3tZWT2mP6RDu
+	 3KIqIiuykcum2z8JXcgpRDEPk3OjwwkXTLr53LzeIwYNsfPU/TF3cXn8RR2+ZvFOPq
+	 3xytP6LFyl3pexeKCqNUCI6ZY40w9QnNLCQIOWGThgbsW6qYyRYeXtVoeCd1wZGkPN
+	 fV2DGDzhEne76CL5cYsKPtSdeCNOa9SZsUWyPaN51ckRr+rbrg1kV6VhTXLw2mFSFm
+	 a0xbUkWBrV1wvJd4jdc0LeeU7kxILnh2f8xH1mxubodQJwwJQocaC+IPZPiVtF+NpW
+	 jeuXxAlItUFXw==
+Message-ID: <a05c4086-1681-44f4-88c6-de1073b0f5a6@kernel.org>
+Date: Thu, 10 Sep 2026 08:16:02 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260821033505.4017901-1-a0282524688@gmail.com>
- <20260821033505.4017901-5-a0282524688@gmail.com> <20260903102447.GL2133376@google.com>
-In-Reply-To: <20260903102447.GL2133376@google.com>
-From: Ming Yu <a0282524688@gmail.com>
-Date: Thu, 10 Sep 2026 14:04:28 +0800
-X-Gm-Features: AcwNN1VdtjlRW6XgLdxAdHaEJGhXj6u2d43oLgez_0YxgAUHTZ1OoGurmEs-fpU
-Message-ID: <CAOoeyxX8Tmk0qaWHz+xJoUZgGZbrqhcWQnGYbTEPoCWC2bOcdw@mail.gmail.com>
-Subject: Re: [PATCH v7 04/10] mfd: nct6694: Rename driver to nct6694-usb and
- update Kconfig
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mfd: fix typos in comments
 To: Lee Jones <lee@kernel.org>
-Cc: Ming Yu <tmyu0@nuvoton.com>, linux-kernel@vger.kernel.org, mfd@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: Botsz HUANG <huang.botsz@gmail.com>,
+ Hemanth Selam <hemanth.selam@gmail.com>,
+ Support Opensource <support.opensource@diasemi.com>,
+ Matti Vaittinen <mazziesaccount@gmail.com>,
+ =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>,
+ linux-kernel@vger.kernel.org, mfd@lists.linux.dev,
+ linux-samsung-soc@vger.kernel.org
+References: <20260904122834.33723-1-hemanth.selam@gmail.com>
+ <apwFlV97bLVlvsOJ@botszhome>
+ <59747ea8-bd89-4dff-ba13-ff9c66318e8c@kernel.org>
+ <20260909161454.GF2133376@google.com> <20260909161710.GG2133376@google.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20260909161710.GG2133376@google.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi Lee,
+On 09/09/2026 18:17, Lee Jones wrote:
+> On Wed, 09 Sep 2026, Lee Jones wrote:
+> 
+>> On Tue, 08 Sep 2026, Krzysztof Kozlowski wrote:
+>>
+>>> On 05/09/2026 14:05, Botsz HUANG wrote:
+>>>> On Fri, Sep 04, 2026 at 05:58:28PM +0530, Hemanth Selam wrote:
+>>>>> 2.48.1
+>>>>>
+>>>>
+>>>> good job~
+>>>> Acked-by: Botsz HUANG <huang.botsz@gmail.com>
+>>>
+>>> I don't think this is real identity. It always comes with other
+>>> LLM-generated content - as in this case as well - from Nick Huang
+>>> <sef1548@gmail.com>.
+>>
+>> sef1548@gmail.com is Googleable and appears to be legit.
+>>
+>> They also have commits dating back to May last year.
+> 
+> Botsz Huang is also a real name [0].
+> 
+> Now, whether they should be Acked-by:ing patches is another issue entirely!
 
-Thank you for reviewing.
+But:
+1. The questionable account only acks when sef1548 acks
+2. Even the style is exactly the same repeating the same mistake of not
+removing quoted text:
+ - big wall of text
+> LGTM
+> Acked-by: Nick Huang <sef1548@gmail.com>
 
-Lee Jones <lee@kernel.org> =E6=96=BC 2026=E5=B9=B49=E6=9C=883=E6=97=A5=E9=
-=80=B1=E5=9B=9B =E4=B8=8B=E5=8D=886:24=E5=AF=AB=E9=81=93=EF=BC=9A
->
-> On Fri, 21 Aug 2026, a0282524688@gmail.com wrote:
->
-> > From: Ming Yu <a0282524688@gmail.com>
-> >
-> > Rename nct6694.c to nct6694-usb.c to accurately reflect that it
-> > implements the USB transport backend.
-> >
-> > Additionally, introduce a new MFD_NCT6694_USB Kconfig option and conver=
-t
-> > the existing MFD_NCT6694 into a hidden core symbol. The core symbol is
-> > now automatically selected by the transport drivers.
-> >
-> > This Kconfig and naming restructure aligns with standard MFD transport
-> > abstraction practices, paving the way for future interfaces (e.g., HIF)
-> > to be seamlessly integrated.
-> >
-> > Signed-off-by: Ming Yu <a0282524688@gmail.com>
-> > ---
-> > Changes in v7:
->
-> No changes or you forgot to populate it?
->
+ - big wall of text
+> good job~
+> Acked-by: Botsz HUANG <huang.botsz@gmail.com>
 
-There is no functional change in v7 for this patch; I'll mark it
-explicitly as "No changes." in v8.
 
-> > Changes in v6:
->
-...
-> > --- "a/drivers/mfd/Kconfig"
-> > +++ "b/drivers/mfd/Kconfig"
-> > @@ -1164,19 +1164,30 @@ config MFD_MENF21BMC
-> >         will be called menf21bmc.
-> >
-> >  config MFD_NCT6694
->
-> So what does this do now?
->
-> Will there be another core symbol soon?
->
-
-MFD_NCT6694 is now a hidden symbol that builds only the
-transport-agnostic core (nct6694-core.o, added in 5/10): the IRQ
-domain, IDA pools and MFD sub-device registration shared by every
-backend. It has no prompt because it is not useful on its own, so it
-is  selected automatically by whichever transport driver is enabled.
-
-There won't be a second core symbol. The next addition is another
-*transport*, MFD_NCT6694_HIF (eSPI, 10/10), which likewise selects
-MFD_NCT6694. So the final shape is a single shared core selected by
-one  or more transports:
-    MFD_NCT6694 (hidden core)                 -> nct6694-core.o
-        ^ select
-    MFD_NCT6694_USB (USB transport)    -> nct6694-usb.o
-    MFD_NCT6694_HIF (eSPI transport)     -> nct6694-hif.o   [10/10]
-
-I'll clarify this in the commit message for v8.
-
-> > -     tristate "Nuvoton NCT6694 support"
-> > +     tristate
-> >       select MFD_CORE
-> > +     help
-> > +       Core MFD support for the Nuvoton NCT6694 peripheral expander.
-> > +       This provides the common APIs and shared structures used by all
-> > +       interfaces (USB, HIF) to access the NCT6694 hardware features
-> > +       such as GPIO, I2C, CAN-FD, Watchdog, ADC, PWM, and RTC.
-> > +
-...
->
-> --
-> Lee Jones
-
-Thanks,
-Ming
+Best regards,
+Krzysztof
