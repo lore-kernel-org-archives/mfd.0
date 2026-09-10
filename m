@@ -1,51 +1,43 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D501A4A1E00;
-	Thu, 10 Sep 2026 14:06:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80B6C490C0D;
+	Thu, 10 Sep 2026 14:16:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789049194; cv=none; b=UMht8o+qOK8MnmGDAAmTCBpUaKOi12IFp51fk4YcUtWYfGyvv+QcI6vqqQt1CwRzARyhdK3qfHqf0EUWCfipILMy78fftTukk8pSb10IUfnEDEksKlm7cEbHH9AueltBa6SfsmpYABZ4KNCkPdULmB96LAKK7mgeqrehhGpiY3s=
+	t=1789049795; cv=none; b=ZhaT64saHSRGOw25IgElx68eResKOtjS+uwTPcRav5Eda0CUuqtQLRuL7PDWVALTAB/Kkq0rUzLfZH8IzThhP9dHrhoBNUFLy/ORC2vbRZM19ph0Ba5+Rk2ADshEc96cGhXrYkLrE/Vmu38O0ILJDieHLHWd8lUkyf2zgP2MMBg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789049194; c=relaxed/simple;
-	bh=88KPowZRgPkRN7e6qBym8yy8Un2Q9OTfDjhdBF7OACs=;
+	s=arc-20240116; t=1789049795; c=relaxed/simple;
+	bh=3Y/m3Qkf6cKV7OHiIFv4YAVb+X/pEuLBsNCBEVxnM3E=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=iY9YJuI/rOdU+zN+HSgS8NWVXKQvowvksUQLcl3tZhHW3pNHORhKxKHAB+jFQk/BlCf4k9lii5AmXveAd/TpYXTnwB4mxKl9fkYq887+HcMlgG8l9tFppnRmPMbQix6R9wxcV1vMV+VuiLFGzjVpiquTF7fn88FXFQrAgLkSG94=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HQbQBE3S; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=TM038LYmU4392NOaueQ9Os8OU1AbraJsLzkK1YU3mobvJ9Rzap8XVOGj1PvvbPTjiBkWjtyRg1fcJt1u2T8kT+xO+mO3y20wHzZGVx0hLOu8othZpRhjciSa5kCaDo/1kNAyux0W3M8T7tB4EqCypGmKPYquyt/NVYQOnCooCxQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=F2yD8kF+; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HQbQBE3S"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D5B591F000FF;
-	Thu, 10 Sep 2026 14:06:27 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="F2yD8kF+"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2465A1F000FF;
+	Thu, 10 Sep 2026 14:16:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789049192;
-	bh=g1LxwTgpYFNZEHQDmeS6XR82COxB2wINTdd76rmn4vM=;
+	s=k20260515; t=1789049794;
+	bh=jlbkzOzLCW57AMblPScYBFvVgRLjuwLIep83xkYzrQ4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=HQbQBE3Sp2Z1toTEurJrkDPxOu+Hd2Y0g6UyESX16c/6EenWyOJeNJPY3ngZvBzTw
-	 VXBY34FsqHxqlHe0cWraSrHh+kCjD+ig/BoM/uvS8VrKrVjsAygiJqvq1B0I3t49Yj
-	 KULXpCc1Xak/cbLu6L2T8JLeNvl36E/8r0Q0U1D/DxciBq7338EyuTyhW59NtKBAJr
-	 ddDoeCbgQIPS3yW0Zt0FKcTv8kf684umKiKEiEzlfcCLQk1bZ8gLm8OwMrzOQ257oU
-	 ELmd8VsmvhUD6A6CMUSd8ZAhIEK0QVl6GB2Pmw7ueRoE6on2rFJpbGPbq0yuxLPy6V
-	 mZYVUcKzffljQ==
-Date: Thu, 10 Sep 2026 15:06:25 +0100
+	b=F2yD8kF+q9OYuYS0oX4fpiCDyPTHf34wqe/xEFgKzjT861IRj3xpatOHJjYoUXohx
+	 SA/4rUPFoBcEWZKsLFcexsa1oqvAcuaNng49+jZBwaHDjPHrsW1pDbls7N96fHHYk5
+	 06QlQI8DjrNbBl0GjnH11/5TEjdO9HmceN7KGU5Ag9Bzy3X5Mu8++5JliknWwea62R
+	 2/lWRQX8zabsmGBe7g2hCZ0XVM1siSQ2QRLR8LV66xKxPP+an4xum1x+y/H+6sZd3l
+	 voLv0fGJPaxVF7UP0u8w/HIbLUAqQqYpEEHlSNP0w0fHWW+25bH+Eyy+be0xfK9khz
+	 8VybuPBina8Yw==
+Date: Thu, 10 Sep 2026 15:16:29 +0100
 From: Lee Jones <lee@kernel.org>
-To: Daniel Thompson <danielt@kernel.org>, Jingoo Han <jingoohan1@gmail.com>,
-	Pavel Machek <pavel@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
-	Andy Shevchenko <andy@kernel.org>, Helge Deller <deller@gmx.de>,
-	Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Johan Hovold <johan@kernel.org>, dri-devel@lists.freedesktop.org,
-	linux-leds@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org,
-	mfd@lists.linux.dev, linux-fbdev@vger.kernel.org
-Subject: Re: [PATCH v6 00/14] mfd: lm3533: convert to OF bindings, improve
- support
-Message-ID: <20260910140625.GD1051768@google.com>
-References: <20260731113632.158440-1-clamor95@gmail.com>
- <178904903999.1172658.13303214372114400299.b4-ty@b4>
+To: sashiko-reviews@lists.linux.dev
+Cc: Ronald Claveau <linux-kernel-dev@aliel.fr>, neil.armstrong@linaro.org,
+	linux-amlogic@lists.infradead.org, devicetree@vger.kernel.org,
+	mfd@lists.linux.dev, robh@kernel.org, conor+dt@kernel.org
+Subject: Re: [PATCH v11 1/6] mfd: khadas-mcu: Add per-variant configuration
+ infrastructure and VIM4 support
+Message-ID: <20260910141629.GE1051768@google.com>
+References: <20260902-add-mcu-fan-khadas-vim4-v11-0-5f1610d83bf0@aliel.fr>
+ <20260902-add-mcu-fan-khadas-vim4-v11-1-5f1610d83bf0@aliel.fr>
+ <20260902130216.55BC21F00A3A@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -54,48 +46,62 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <178904903999.1172658.13303214372114400299.b4-ty@b4>
+In-Reply-To: <20260902130216.55BC21F00A3A@smtp.kernel.org>
 
-On Thu, 10 Sep 2026, Lee Jones wrote:
+On Wed, 02 Sep 2026, sashiko-bot@kernel.org wrote:
 
-> On Fri, 31 Jul 2026 14:36:18 +0300, Svyatoslav Ryhel wrote:
-> > Convert LM3533 to OF bindings, add missing VIN supply, add support for
-> > setting mapping mode and LED sources based on device tree.
+> Thank you for your contribution! Sashiko AI review found 1 potential issue(s) to consider:
+> - [Low] Parent MFD driver introduces child-specific private resources (fan configuration) via a platform data struct in a global MFD header, violating MFD separation and coupling principles.
+> --
 > 
-> Applied, thanks!
+> commit 85d716a1f91fa9e8e2f48479df8c7b07e0cf0279
+> Author: Ronald Claveau <linux-kernel-dev@aliel.fr>
 > 
-> [01/14] dt-bindings: leds: Document TI LM3533 LED controller
->         commit: 0747740a123b844a87f7b86977845ccaca15362b
-> [02/14] mfd: lm3533: Remove driver specific regmap wrappers
->         commit: f022c47f4843462cd02f1163f624631f7f4e409e
-> [03/14] mfd: lm3533: Remove extern from shared functions in the header
->         commit: 06ea59b4135ed6c999bc33daca1abf51071f5f53
-> [04/14] mfd: lm3533: Pass only regmap and light sensor presence to child devices
->         commit: f6420210fbaf563de34c769f4a408790523bc36c
-> [05/14] iio: light: lm3533-als: Remove redundant pdata helpers
->         commit: 948c42932e0b696de11a2aee69a81d8a6f83dd12
-> [06/14] mfd: lm3533-core: Remove redundant pdata helpers
->         commit: cdc9de135bc4bac7b7a344e76bef8e7e6cfb3e16
-> [07/14] mfd: lm3533: Use dev_groups in struct device_driver
->         commit: d172f3814461c91db5af71fb628601af8389a3ee
-> [08/14] mfd: lm3533: Convert to use OF bindings
->         commit: 5669316d7055325d981b5a37f574299c848af581
-> [09/14] mfd: lm3533: Add support for VIN power supply
->         commit: 4a2300981a68c8f6ef5c667d6f81667c4036b269
-> [10/14] mfd: lm3533: Set DMA mask
->         commit: 95a968ec7c31d70d4e38840409c3983ca7cac937
-> [11/14] video: backlight: lm3533_bl: Improve logic of sysfs functions
->         commit: 92992a77a4c471064cec8398310c3f9486340c16
-> [12/14] video: backlight: lm3533_bl: Set initial mapping mode from DT
->         commit: 879dd08125dbec68ea0d5b624aa8c42175232637
-> [13/14] video: backlight: lm3533_bl: Implement backlight_scale property
->         commit: 0077e5ed836a01a0c82f23b91afdd38e42ace8b8
+> mfd: khadas-mcu: Add per-variant configuration infrastructure and VIM4 support
+> 
+> This commit introduces per-variant configuration structures for the KHADAS MCU
+> driver, adding support for VIM4 specific registers. It also introduces an enum
+> for variant matching and a fan platform data struct to pass fan configuration
+> to a sub-driver.
+> 
+> > diff --git a/include/linux/mfd/khadas-mcu.h b/include/linux/mfd/khadas-mcu.h
+> > index a99ba2ed0e4e0..7a9980ea63e7e 100644
+> > --- a/include/linux/mfd/khadas-mcu.h
+> > +++ b/include/linux/mfd/khadas-mcu.h
+> 
+> [ ... ]
+> 
+> > @@ -88,4 +95,21 @@ struct khadas_mcu {
+> >  	struct regmap *regmap;
+> >  };
+> >  
+> > +/**
+> > + * struct khadas_mcu_fan_pdata - fan sub-driver configuration
+> > + * @fan_reg: register address to write the fan level
+> > + * @levels: table mapping logical cooling-device states to raw fan levels
+> > + * @nlevels: number of entries in @levels
+> > + */
+> > +struct khadas_mcu_fan_pdata {
+> > +	unsigned int fan_reg;
+> > +	const unsigned int *levels;
+> > +	unsigned int nlevels;
+> > +};
+> 
+> [Severity: Low]
+> Does this struct introduce child-specific private configuration into the core
+> MFD driver?
+> 
+> By defining khadas_mcu_fan_pdata to pass thermal cooling state levels, it
+> appears the parent MFD driver will be forced to handle configurations specific
+> to a single sub-driver. The MFD subsystem principles indicate that the core
+> driver should only handle shared core resources, while child drivers should
+> manage their own private configurations.
+> 
+> Could this approach create tight coupling where any new fan variant requires
+> changes to the core MFD driver, rather than keeping those details contained
+> within the thermal driver?
 
-Submitted for build testing.
-
-I'll send out a pull-request once that passes.
-
-Note to self: ib-mfd-backlight-iio-leds-7.4
+Agreed.  Why can this not live in the fan driver?
 
 -- 
 Lee Jones
