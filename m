@@ -1,157 +1,73 @@
-Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3EFC455176
-	for <mfd@lists.linux.dev>; Thu, 10 Sep 2026 10:37:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BBD34570F4;
+	Thu, 10 Sep 2026 10:40:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789036670; cv=none; b=qOFemAYzTp7yw5FGyl5OePbUYOQDJJRI2RBUZY1MW+/3ZHfEZi0wsw++vN21IiQPtSnnldrQDlX2nBHorSoFrvfs3LNkpjmN0UgeaKeL4m2RPNxYrOKbBNLH4S4jr98/sRUHeUdI0QuqH0uyWQ0W20AD81+c4C4LF4JsxYnYml4=
+	t=1789036846; cv=none; b=uSfocUhSYzEVNVAOUg/2QBr1tRW9dXT4mj2MTn3OvKvSVBrj0xoi4gpCcL/Jhto47xaYwXXq/OhhV3qB57l48QV8JVhYyNrMpfHYxy6BU2EOqG9f9t7QkDk4uOITe7DF2NHv25fEfYwDLGR8Hq05zWqQJMC5McnETsXnBpcyCO8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789036670; c=relaxed/simple;
-	bh=rMU+PmTBon7MZYNFvL/32kuzRyhojyfvr5NuoahMVyA=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=scAiK61XxhpU6SzeGFUcCj6zBpeNEYCaOb7tJ+5N4fA7mXAfXvlLa8ukW18X8cIy2LAcBAC6Chv2QFxJdlR1eJmu0uOeD6bDkmBPLzHFNfQ9fvJxKYEoSlV8DRHnYyJaD9QSX+vHPGbWohxpZKVsZK1KAUKjdV+/Ha/OA8O9rfY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=Vzla2Mgk; arc=none smtp.client-ip=74.125.225.76
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	s=arc-20240116; t=1789036846; c=relaxed/simple;
+	bh=U+Qyejdi7oMG30kRh4XpuQ9DWNqDtxoMoOV0E6oKga8=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=Ke1zv77znevCSNfj0ulX8jukBcDm97UsdzyDI/z9RNn3U3nBTkMFEuvFPQYpoLtZyC/GQsnsSTTjmt5RSEz1YjvHrXoM32HWr7jO8Z+BdPs7JZpaiAP7USoO8FTK+j98NXEVxP0Tf2MGsCKTWwwh2FY0yDBr5VLGozXGZYvowJ0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iVKyYrCU; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="Vzla2Mgk"
-Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-48449f62b93so1154885f8f.0
-        for <mfd@lists.linux.dev>; Thu, 10 Sep 2026 03:37:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1789036664; x=1789641464; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=6EF+UHNSS4hI0lePcCf3NeWVNl/rHsUyRzTVnqSXcQw=;
-        b=Vzla2MgkcZ3OWISQaKcUST+UL0tIA6QJtHXx8I3lJxL5F9Tm/rWNrfWHCyuFPzN7Uy
-         MbQeDDhqr8hXl77oqSn0ItosBViTo7cjDVFU29Qqil+xC+2cLZXq7mWoEWyQ+ZikRzXh
-         0JMJZ8R9dvMphlUfjJbzTK4QcFgGd1nDe/AIY0u5NvoBKGmQdbxel+P6Wm7bkC/VuhKw
-         giRQxgkN7W2TycD+zyjaSFOjMakrG4LYxT/uOCSloWkRChsuOtCOKoxtElAo4bnhsmpt
-         kH73T6lKXQLgYvL5B6J99bF+rVKGKTuy3/yrrb4bn4BKIaKoWUUUTu7peaqCxNTV6bwe
-         3LLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789036664; x=1789641464;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :references:in-reply-to:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=6EF+UHNSS4hI0lePcCf3NeWVNl/rHsUyRzTVnqSXcQw=;
-        b=bODD37wI8zi6xwahV5eeskPrKADKOoappeCkgiRBxR8hMSJH+qDjuSmryY7tUCb056
-         kw2KWPgl/oX+oAxXgGlxiaaRQ/IQOcakZHGL9TOWWPVQmCTa0y5waUubqp/Y6ctMh/Ah
-         MIC890gInsq+CHrZ41txl0bx/KpAbVLxoOUPhTrHd/OWpV8Ekngt+vF95KVE592pa05u
-         p6kHGUErsWzk0t1LM5CkckUbv3+YVoNi7QOApv+WXse/Ej3HcscLkhYI2wCcQ9+vWAy/
-         dDkbmJg3ZjlV3b/Xld7N8lFS6fhGjwNtlr8Z1expUsgobye6ldojxHa9eoSZzhoczuX+
-         SI6Q==
-X-Forwarded-Encrypted: i=1; AKwUvBwknciChbbwHtPgCZ7Bw6rQOru7IZ4eEPsDpn/viD5RYn15h2FxZEBPQDp0RPSMfl0Q0Oo=@lists.linux.dev
-X-Gm-Message-State: AFuF++l2+04j0MWnIFSqQ4TYJId5u1pfZY9h4KKGxCsGu/+01JNIK896
-	OBTeNS+RO1519d/MJ5BZymSODyNstKZW0ffTb3VS7BomDF2FwvDKzWsaPcesGZqIyyU=
-X-Gm-Gg: AYBFou3dmC4/GwmhfgZHrQaSNMOXLflqXMEZqrl42QMoemliqob+AP+P7vjenikJDr8
-	aAUxhItlTh6vHw7+kLiDWepbEAWAeOCibthWRkqa1qiyZhsmclpZnpavMfdEYgirqkoiZdMdYPi
-	3EM3sfBo9pWyg7cLUsD0RnLuOiAMmC4oENriSeBicdBVI400ipq4yojpsei5kkwmEQ3qoSksZBm
-	P/NzvZD9/NfX3zvzE9tnXVL2fMgPJ+AbCZf8zxCOxtBbSPslsFc34awr4Qc5ml0/2M3n09GOWXG
-	hF8Ktj9CMJtSL6c40NBDtu/zliU/EvxCqBn0MJ+nBklEXKbZzSVSNZQgLehPszwe1N5bmAYdAdJ
-	RmAgeyvlpoSV6GKryBUR+8knWe7MQS1bohyccsjWmA33cM42vPm8VqlO8xKdExmo3g/5uqQ7QIq
-	B9Qh+SHq1a/xxfyE3IcTSZGkHDL/5GxmKj2VGT7pALlDurBM6L1OP1fbDqoNm6ptR5Cj9eyyVjy
-	zEzNgnG82HNGV52mw==
-X-Received: by 2002:a05:6000:24c1:b0:484:482d:dce4 with SMTP id ffacd0b85a97d-486d7322325mr4803704f8f.0.1789036664113;
-        Thu, 10 Sep 2026 03:37:44 -0700 (PDT)
-Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4858ab73c2bsm48835518f8f.22.2026.09.10.03.37.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 10 Sep 2026 03:37:43 -0700 (PDT)
-From: Jerome Brunet <jbrunet@baylibre.com>
-To: sashiko-reviews@lists.linux.dev
-Cc: linux-sunxi@lists.linux.dev, conor+dt@kernel.org, robh@kernel.org,
- mfd@lists.linux.dev, lee@kernel.org, devicetree@vger.kernel.org
-Subject: Re: [PATCH v7 3/5] dt-bindings: mfd: x-powers,axp152: Document AXP318W
-In-Reply-To: <20260910094251.A112A1F000FF@smtp.kernel.org>
-References: <20260910-axp318-regulator-v7-0-de720ceb9bac@baylibre.com>
- <20260910-axp318-regulator-v7-3-de720ceb9bac@baylibre.com>
- <20260910094251.A112A1F000FF@smtp.kernel.org>
-Date: Thu, 10 Sep 2026 12:37:42 +0200
-Message-ID: <1jtsnx75op.fsf@starbuckisacylon.baylibre.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iVKyYrCU"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC6251F000FF;
+	Thu, 10 Sep 2026 10:40:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789036845;
+	bh=kUjMBaKPwMAWmPyiQrZjenHw3IEOxvu7Zu+P9rGEhIw=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=iVKyYrCUHtMTdFLc+1xqaQvBhKX0NEFfPIGvxMaSiWUMJvS0PwEv32TJQOwql3pbN
+	 OIpZi2CBe899OjIVh1R0lVU7+GGmOXls3ivpo5GAShxILr2RCrU+u2bTiUulBWbUyr
+	 mcWcOvtXiFbXflkaEK5GB/83Q8qBF/S07qIAaT4v5m60wyLSkS4i+YVlJDqPc4BDlk
+	 G+2it3bItrLd+K6yy5iUQWNp3h4guGee4k6DSFr6oZaoEng3a2T65Bu6n5jSmVaW54
+	 KEEWXHsBtF6/DDKaOxv/q2imbff/iPkFOW9upW0GEvjl+Y+bmD3PtMQD+oiR8U6aog
+	 jk8Ro4cNRgoKA==
+From: Lee Jones <lee@kernel.org>
+To: Stephan Gerhold <stephan@gerhold.net>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Axel Lin <axel.lin@ingics.com>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>, 
+ Linus Walleij <linusw@kernel.org>
+Cc: devicetree@vger.kernel.org, mfd@lists.linux.dev, 
+ Conor Dooley <conor.dooley@microchip.com>
+In-Reply-To: <20260901-ux500-dts-snowball-regulator-v2-8-fe88b01829bf@kernel.org>
+References: <20260901-ux500-dts-snowball-regulator-v2-8-fe88b01829bf@kernel.org>
+Subject: Re: (subset) [PATCH v2 08/13] dt-bindings: mfd: ab8500: Add
+ regulators
+Message-Id: <178903684262.1027854.13896932519291014595.b4-ty@b4>
+Date: Thu, 10 Sep 2026 11:40:42 +0100
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
 
-On jeu. 10 sept. 2026 at 09:42, sashiko-bot@kernel.org wrote:
+On Tue, 01 Sep 2026 22:02:13 +0200, Linus Walleij wrote:
+> The buck converters were not initially added to the device tree or
+> drivers as they are mostly always-on, but their outputs supply devices
+> which need to reference the correct regulator.
+> 
+> Describe the six AB8500 buck converters when the regulator node uses
+> "stericsson,ab8500-regulator". Describe the AB8505 converters under
+> their native VSMPSA, VSMPSB, VSAFE, VARM, VSMPSC and VSMPSM names when
+> the node uses "stericsson,ab8505-regulator".
+> 
+> [...]
 
-> Thank you for your contribution! Sashiko AI review found 1 potential issu=
-e(s) to consider:
-> - [Medium] The new `x-powers,axp318w` compatible string is omitted from t=
-he conditional block that makes the `interrupts` property optional for rece=
-nt generation PMICs.
-> --
->
-> commit e4119d6ce87c67baf660bd6f040790fb69b77af3
-> Author: Andre Przywara <andre.przywara@arm.com>
->
-> dt-bindings: mfd: x-powers,axp152: Document AXP318W
->
-> This commit adds the compatible string x-powers,axp318w for the AXP318W P=
-MIC
-> to the binding schema. It also adds new input supply properties and updat=
-es
-> the regex for matching switched output nodes.
->
->> diff --git a/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml =
-b/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
->> index 45f015d63df16..38556c32417b3 100644
->> --- a/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
->> +++ b/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
->> @@ -83,6 +83,7 @@ allOf:
->>            contains:
->>              enum:
->>                - x-powers,axp313a
->> +              - x-powers,axp318w
->>                - x-powers,axp323
->>                - x-powers,axp15060
->>                - x-powers,axp717
->
-> [Severity: Medium]
-> Does the x-powers,axp318w compatible string also need to be added to the
-> earlier if-then block that governs the interrupts requirement?
+Applied, thanks!
 
-Ahhh, got it the other way around first time this poped - resending ...
+[08/13] dt-bindings: mfd: ab8500: Add regulators
+        commit: a02f846177305ebff7938291926c8d891624e14c
 
->
-> Just above this hunk in Documentation/devicetree/bindings/mfd/x-powers,ax=
-p152.yaml,
-> there is a block that makes interrupts mandatory for all PMICs except a s=
-elect
-> few:
->
->   - if:
->       not:
->         properties:
->           compatible:
->             contains:
->               enum:
->                 - x-powers,axp15060
->                 - x-powers,axp305
->                 - x-powers,axp313a
->                 - x-powers,axp323
->
->     then:
->       required:
->         - interrupts
->
-> By omitting x-powers,axp318w from this enum, the interrupts property is
-> mandatory for the new PMIC. Could this cause device trees with an unconne=
-cted
-> AXP318W interrupt line to falsely fail dt_binding_check validation, given=
- that
-> similar recent generation PMICs operate fine without it?
->
-> --=20
-> Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260910-axp318-r=
-egulator-v7-0-de720ceb9bac@baylibre.com?part=3D3
+--
+Lee Jones [李琼斯]
 
---=20
-Jerome
