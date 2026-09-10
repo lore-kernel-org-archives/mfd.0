@@ -1,186 +1,242 @@
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E4D74A6895
-	for <mfd@lists.linux.dev>; Thu, 10 Sep 2026 18:38:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19DB4595732
+	for <mfd@lists.linux.dev>; Thu, 10 Sep 2026 19:15:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789065489; cv=none; b=XcfMkZwMk54a2VVcCFIUSipv72wrKyEUT2E9FSJwN7PiER6pEZpc4IBSRfvwl3x8nsWQQPvJndrQ5+7dCXSJw3bOjJWDXSQvma3InQCFBui3s1Z+Y7WiwM6oEGX6B49LHEAjSKWgkE/4UTk7wLE8vaNFQ1EW2kJRKif3g6Spsus=
+	t=1789067712; cv=none; b=H/9rn7QBmNFjl64vMhOMgwh92C9NtOqYjKht2wtmNQ2GdL1NgzZijtYc0ZxIGm/BrCu3UvC9GrCpgyzulVbOnnAoENwTfzh2aZxl3WrI15e73IFQxVPHPduOwQob4ZKw89xmsxW19jYPxYJrfhXHkJUvFpQkHXPDAuaO8GYFK1I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789065489; c=relaxed/simple;
-	bh=XqQ/TBdyys53bJSV2TlOxB+9gn0LoZosuGJ+Op+jijg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=V3BfhFlOBN/N50Yf2CvTrpKI6g6JI0qX28guRRlbIoytCaAg90upYp4nAxKvjlKonKZy77MPDJhOS4jWjupe1J77jFNZLL3d5HRP3gXh9ceFQZwM+EGxKENCxwPBM4l+zXDwtic1AEKUMC96ZM1ctlkG1IiA3Uyjp+gPWcHpe28=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QWSSZWpR; arc=none smtp.client-ip=209.85.216.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+	s=arc-20240116; t=1789067712; c=relaxed/simple;
+	bh=SIjCw6vu2Nolc5BGLxkzrlpiPylpl82CNVXXbYaAcVo=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=aOyy9e4EXbxChG0l9BdA8KCi/Hao/dFFJrxC9ZVQgAdLZ3q8t83080UwRaROD6PTc/hr+u22qJgdsP5Pq8zlJU28vJyy0405dOc1DQBjhMHcTMskT2JMQ35Kg0GZmAhIEwf/Vz8eJnfYb84KpQjzjYt/ZEDm1WxSjvXKPsz7K78=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=cJ/KvyAt; arc=none smtp.client-ip=209.85.221.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QWSSZWpR"
-Received: by mail-pj1-f46.google.com with SMTP id 98e67ed59e1d1-381b831d535so102531a91.0
-        for <mfd@lists.linux.dev>; Thu, 10 Sep 2026 11:38:07 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="cJ/KvyAt"
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-47ddf7b09e5so105942f8f.1
+        for <mfd@lists.linux.dev>; Thu, 10 Sep 2026 12:15:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789065487; x=1789670287; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20251104; t=1789067708; x=1789672508; darn=lists.linux.dev;
+        h=content-type:mime-version:references:in-reply-to:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=9u7TJ9tgwm2KnuZFSYIca8LwnX5gbxqDtxG2LPSH6i0=;
-        b=QWSSZWpRFB3EkX3PwRugQ8tw886Qpe+oF9B3tIfQjF9R7FeU0kOyRLtGpc5Ei4lblZ
-         a0+TmlbuclSvGdQ8tzO/H7KItU8uM6hyne1Qg7bs41So1P7tJtIvekpN/LiWb5RPT1w+
-         AkClS073FFovjHZahqxYTjJL6guAYZaJvGGCVImwcHpMXiScPjMJrYgDCDvCbsyRtrrX
-         pw4kZyF+IvyjSWIeIFYxTonq6kWAwTK2WXH01I6ivgGMUItjkuzoZNtAOjiiCgMMhHNP
-         5Bb/XLr3C9xV5ck47IX/Qtitn02kyb+Wfar7AtHuj5gnMFn+BplwcEzZZe8mY6iTflN6
-         uf5Q==
+        bh=4fbV+eT9jOuG2Qn7UfINqLkpoy41J2mIUSyeK6YfW10=;
+        b=cJ/KvyAtyfVBV3H+5tayoHauKoPgAoS6SM1ABpgBOLvIy53MgIhZpVd+E3oOqvSbfw
+         VwM6lOYunxhKLa8HkN1IkHk1JqNHWHMteRUpjyOGP1EXMgxABvp9MnOB95DUZfwkWAhA
+         8xaNVJJ2+nKoDGJiLLqpmf8tUs9TJAfG4PciM2tv+6sFOqOP1fKpG1oDjhUrCnIF+JKm
+         r+4PzhWjEk9Y6+rki92ylpI7JeUi1UwvtfRO5ngbcIHkNO6vbNkmkDpHTCib1StYYBsN
+         9iYy9vNCtSnR694nuF6o5+z8KarWIQ3g+nCn0eyBd5ibINoBy88NcUHVehlQvGCi7Cr6
+         N1WA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789065487; x=1789670287;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=9u7TJ9tgwm2KnuZFSYIca8LwnX5gbxqDtxG2LPSH6i0=;
-        b=Nmi1sYb1QyWjQpRzMUcageIhFKsmKB9+AtAZ3YrzDxZC8QDpyLl0Xh12zGkeOs5asg
-         JojfGLAxkRP2DgBE75Nest+5ndZ1gpgh9xJTVuZmmMITBnPDq+5bi3suWa0w1IRpCdrE
-         GgYHDMSeWgodq+7DEwzZt2HmkQB92rLY7RADkJElU3ccDJ/xOBRoYEBXcY20U3Zejulx
-         oqhGy6blU5Y/LrEuv/e9q5idNcRTN45BrjZfUcCUkr+OJnqhgEfDF6cg90FoTTGJWW2i
-         QWdyxXVxu0ctyyTnfB0sGFCMEFFpbKDI3YSgM/INdiUPstMOu+GtBlnRbX0GuWyM4rTC
-         wdLg==
-X-Forwarded-Encrypted: i=1; AKwUvBwiJxTKYRlIa0CAPdScbQZZaDf62fXdiAJRFNv8AnSTp8Yfbid/rceBfRbsBo+vRMRzw8Y=@lists.linux.dev
-X-Gm-Message-State: AFuF++lusvAKWM8N4YjEyeI83BC166cIRidanMtNFzsxZ9um5UvJL1l/
-	cwXlATwvjCC+SqlKuV5bjHscqSvVA/i16yuTfsNLzzmKav2HsrTMbf5v
-X-Gm-Gg: AYBFou0p+9vCWOO55WIOjKPhC8qEHaUWpgFYQgJ0WIMyTR62E96x9pxB2o5qvMLetKI
-	SZyzA/YremJMxh7WFIO7xV3LQ/B8Yyz6Rep3Vv1GDTeZVaGfRapG9GiMtoPsgB99A4bZRwUVz+U
-	vs2eT0oSKk7RnHe6TOatZAXvNbqfc46ijPHjE6QdStOo9OpibIBxyQG4b3hYK5Mt6c315n+LMix
-	w7qGNm36K2Hg9z1EzTVk/wIYaStjtZ6COlftCacEjc7jlyzKemg93ZthpJYD896T1KIWVU7ii7U
-	GWSgBGc6+MzpPYnPbWhug88d9hVuCJCCta8e90huxj0N40NuHCl2rRmvWXn94ycQhszyqs+AB1b
-	JTb2T2PwoFPRphA7P5PG2ItjtSSgmO2kdAHtcUhjoLx+rLt1ceP4riq12xTzAD0agUuL+pHIUsy
-	uhaGn4Ak83lQ8pcqaoO7K0FbqtNpm/YoHgIpwyn2rscHdeHKFAAVrt6+0kzvbxY6YQFyNK9cOcJ
-	qtcAJNK10KTZHpjZ354jpECPq28f0jkV+qyySU0EYDsZrvx
-X-Received: by 2002:a17:90b:35d2:b0:39d:8d38:8b04 with SMTP id 98e67ed59e1d1-39d9bbea1d3mr52593a91.1.1789065486698;
-        Thu, 10 Sep 2026 11:38:06 -0700 (PDT)
-Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39d95752809sm851731a91.13.2026.09.10.11.38.04
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 10 Sep 2026 11:38:06 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Message-ID: <7a92a79e-e22a-4e34-9f11-4086b88f62cc@roeck-us.net>
-Date: Thu, 10 Sep 2026 11:38:03 -0700
+        d=1e100.net; s=20251104; t=1789067708; x=1789672508;
+        h=content-type:mime-version:references:in-reply-to:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=4fbV+eT9jOuG2Qn7UfINqLkpoy41J2mIUSyeK6YfW10=;
+        b=IKLjT/o2gKOMy488oIlwgcQvHMGHbZrRn3DdhjQlbKsPDFD1I8pibRmZSNfkL09uDo
+         KoDGdocQdpWoJZnZ2oc5l9wUfK3qHsy5/aWE0qOFDSl65FvFqLiTCnFvUIyMBXx4rhZ7
+         k8O3fQWOwgESKKZshxUrDNwtojYvgfwKZWV6sMicEhpDTc4kMpSgk4uoXp/2UztQ9cZD
+         ySK1uci+ZwkyXeImSnj9imosTUdylbG4qzt6mlJ+M4fYJCaSsAdq2b+hN8zJdGrwhbqp
+         XBd6EE5SY5x0b3kifNHpkxk+7xm0WcGyViJw4i9Ii6MxQfCcloVa6U//uCswdY6z6Gxw
+         SIwA==
+X-Forwarded-Encrypted: i=1; AKwUvByrlw5hHZre7w9p7g4aaSQVV5UaP9J/aVvP4rHxWUU2b2W3a+uOr8DjSKLFJwSS0rwcMRc=@lists.linux.dev
+X-Gm-Message-State: AFuF++lOSp5bFG4+kDSGbXnw/fE8vbi8Haht7dDXdxn0JQF2D7DL8q6y
+	FT9PFz38xNcjOxfmZnZ/hMr0A/pg2jJZG5bWMrA7h9Xgu5nfIsnp/MlR
+X-Gm-Gg: AYBFou2zgIRBieG+oS8jafEMk/Z/6+0eWgBaPbZQu05gnnSqQWaULjY25PMchS5xRDp
+	IvztmcR+3tiLJUJrLAPAt2AfBikcaUjhDRq/+/sUZlpE/YFI35w+/fGU4yu1e/fSqnFQ+0X/jZB
+	qImxvOpWcZeQGhgW6fF1lx6JxfAAZpN9hrtkjoU/gAR6KIzmMDhSP1kRv1fzpcQkaOYsOfduW+S
+	KReYlFkzu8ZOZnT60h+FMipgBQD3cSidcMF/I2E0WOqjsnExJvkZXHLR9Md+zg83MuuOygsnTUK
+	+AYTbuDTAPxQaHQW/2HkRmFcJZ45s+YkdrD0TnmQDOB3DQLqm+H3L8tGIWX1DgAHxHWLw+Ukxhk
+	tdinUEbnLuewVNF3m5Jj3wVQMeoXP/rzi0Swfvr96ZczmCX4rGeFv/HGkfHf5zoFMUdux5VhNtW
+	U47AAdbSlI6CAb0FcAlup1f4KdGxC4IEn74gBlQ3H6kj0WQ5iSKlPV0lfWUiVTArhERJjmIrybl
+	ea11Y+Ivg==
+X-Received: by 2002:a05:600c:a07:b0:49c:fc6c:be0d with SMTP id 5b1f17b1804b1-49e619bd19cmr5097405e9.19.1789067707645;
+        Thu, 10 Sep 2026 12:15:07 -0700 (PDT)
+Received: from strix.localnet ([197.250.227.248])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49e61a33d72sm4385485e9.2.2026.09.10.12.15.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 10 Sep 2026 12:15:06 -0700 (PDT)
+From: Stefan =?UTF-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>
+To: Lee Jones <lee@kernel.org>
+Cc: Michael Turquette <mturquette@baylibre.com>,
+ Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+ Philipp Zabel <p.zabel@pengutronix.de>, Brian Masney <bmasney@redhat.com>,
+ Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Russell King <linux@armlinux.org.uk>, Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>,
+ Manivannan Sadhasivam <mani@kernel.org>, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-phy@lists.infradead.org,
+ mfd@lists.linux.dev
+Subject:
+ Re: [PATCH v11 05/12] mfd: zx297520v3: Add a clock and reset MFD driver
+Date: Thu, 10 Sep 2026 22:14:54 +0300
+Message-ID: <x9tzyTnKRAOyrdtSGnka0g@gmail.com>
+In-Reply-To: <20260910161711.GK1051768@google.com>
+References:
+ <20260826-zx29clk-v11-0-f8ad59c6426c@gmail.com>
+ <20260826-zx29clk-v11-5-f8ad59c6426c@gmail.com>
+ <20260910161711.GK1051768@google.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 08/14] mfd: remove unused aat2870 driver
-To: Arnd Bergmann <arnd@arndb.de>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Arnd Bergmann <arnd@kernel.org>
-Cc: Alexandre Belloni <alexandre.belloni@bootlin.com>,
- Bartosz Golaszewski <brgl@kernel.org>, Mark Brown <broonie@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Daniel Thompson <danielt@kernel.org>,
- Helge Deller <deller@gmx.de>, devicetree@vger.kernel.org,
- Dmitry Torokhov <dmitry.torokhov@gmail.com>,
- dri-devel@lists.freedesktop.org, Jonathan Cameron <jic23@kernel.org>,
- Jingoo Han <jingoohan1@gmail.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Lee Jones <lee@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
- Linus Walleij <linusw@kernel.org>, linux-arm-kernel@lists.infradead.org,
- linux-doc@vger.kernel.org, linux-fbdev@vger.kernel.org,
- "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
- linux-hwmon@vger.kernel.org, linux-iio@vger.kernel.org,
- linux-input@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-leds@vger.kernel.org, linux-media@vger.kernel.org,
- linux-pm@vger.kernel.org, linux-rtc@vger.kernel.org,
- linux-sound@vger.kernel.org, linux-watchdog@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, llvm@lists.linux.dev,
- Mauro Carvalho Chehab <mchehab@kernel.org>, mfd@lists.linux.dev,
- Michael Hennerich <michael.hennerich@analog.com>,
- patches@opensource.cirrus.com, Pavel Machek <pavel@kernel.org>,
- Rob Herring <robh@kernel.org>, Sebastian Reichel <sre@kernel.org>,
- Support Opensource <support.opensource@diasemi.com>
-References: <CAPVz0n0ryOns2sCJE_jFana9MVzwEj1QZuPEa8FNhGbHXnMB+A@mail.gmail.com>
- <11652e5e-053e-45b0-98a0-0c1cb2aeedc4@app.fastmail.com>
-Content-Language: en-US
-From: Guenter Roeck <linux@roeck-us.net>
-Autocrypt: addr=linux@roeck-us.net; keydata=
- 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
- np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
-In-Reply-To: <11652e5e-053e-45b0-98a0-0c1cb2aeedc4@app.fastmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; boundary="nextPartKW3nFVAkQr2M_09ZHSiKcQ";
+ micalg="pgp-sha256"; protocol="application/pgp-signature"
 
-On 9/10/26 11:14, Arnd Bergmann wrote:
-> On Thu, Sep 10, 2026, at 18:40, Svyatoslav Ryhel wrote:
->> __
->> Hello Arnd! May you please spare AAT2870 from being removed? I have a
->> device which uses aat2870 (LG Optimus 2X P990 Tegra 2, not upstreamed
->> yet, but in process as well) and atm I am working on converting this
->> driver to use OF. Thank you!
-> 
-> Sure, I have removed this patch from my series now.
-> 
->> P. S. If you are planning to remove more old drivers, please CC me in
->> since I may be interested in some additional driver upgrades for
->> devices I own.
-> 
-> Please have a look at
-> 
-> https://git.kernel.org/pub/scm/linux/kernel/git/soc/soc.git/log/?h=board-remove-7.3
-> 
-> I tried to be careful about figuring out exactly which drivers are
-> unused, but I'm sure there are still a few false positive and false
-> negative ones in there. I've added the current list of driver files below,
-> let me know if you see something that shouldn't be there.
-> 
->       Arnd
-> 
-...
-> drivers/hwmon/ds620.c
-> drivers/hwmon/f75375s.c
-> drivers/hwmon/max1111.c
-> drivers/hwmon/max197.c
+--nextPartKW3nFVAkQr2M_09ZHSiKcQ
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"; protected-headers="v1"
+From: Stefan =?UTF-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>
+To: Lee Jones <lee@kernel.org>
+Date: Thu, 10 Sep 2026 22:14:54 +0300
+Message-ID: <x9tzyTnKRAOyrdtSGnka0g@gmail.com>
+In-Reply-To: <20260910161711.GK1051768@google.com>
+MIME-Version: 1.0
 
-I missed the rationale for removing those, but then I don't really
-mind either. I guess we'll hear if someone still uses any of those
-drivers/chips.
+Hi Lee,
 
-Guenter
+Thanks again for your review!
+
+Am Donnerstag, 10. September 2026, 19:17:11 Ostafrikanische Zeit schrieb Le=
+e=20
+Jones:
+> On Wed, 26 Aug 2026, Stefan D=C3=B6singer wrote:
+
+> If you use of_platform_populate() there is no issue with this living in
+> soc/.
+>=20
+> You cannot use the MFD API outside of drivers/mfd though.
+
+I'll keep it in drivers/mfd. of_platform_populate would force me to expose =
+the=20
+inner split of the CRM devices in the DT, which Conor and Krzysztof advised=
+=20
+against.
+
+> > + * Copyright (C) 2026 Stefan D=C3=B6singer
+>=20
+> Are you sure ZTE are okay with you Copywriting a driver for their IP?
+
+This is my free time work reverse engineering work, not something I did in=
+=20
+coordination with ZTE or payment from them. I only took information about t=
+he=20
+hardware from their GPL dumps and not code. In my understanding the copyrig=
+ht=20
+of this code should be mine, and putting (c) ZTE would even be misleading.
+
+ZTE provided U-Boot sources on request. Their kernel sources were already=20
+public before. Sadly they provided no material on their LTE components.
+
+I didn't explicitly ask them for permission to upstream self-written driver=
+s=20
+for their platform because I don't think I need it and I'd just expect a=20
+request like this to languish in their legal department.
+
+The kernel once had support for a related zx296702 and zx296718 support tha=
+t=20
+was removed in 89d4f98ae90d ("ARM: remove zte zx platform"). This code was=
+=20
+written by Linaro and I believe commissioned by ZTE, so I don't think they =
+are=20
+upset about me doing their work for free. At some point I'll resurrect some=
+ of=20
+the drivers from back then, which will then of course carry the appropriate=
+=20
+Linaro and ZTE copyright notices.
+
+> > +enum zx_device_type {
+> > +	TYPE_INVALID =3D 0,
+> > +	TYPE_TOPCRM,
+> > +	TYPE_MATRIXCRM,
+> > +	TYPE_LSPCRM,
+> > +};
+>=20
+> What do each of these mean?
+>=20
+> Is the nomenclature taken from the datasheet?
+>=20
+> If not, can we improve it to make them easier to read for humans?
+>=20
+> Failing that, more comments would be helpful.
+>=20
+> > +
+> > +static const struct mfd_cell zx297520v3_topcrm_cells[] =3D {
+> > +	MFD_CELL_NAME("zx297520v3-topclk"),
+> > +	MFD_CELL_NAME("zx297520v3-topreset"),
+>=20
+> Why are these works concatenated together like this?
+>=20
+> Same with zx_device_type above?
+
+I don't have datasheets. The names are from ZTE's mmio defines, which I exp=
+ect=20
+to match whatever is in the datasheet.
+
+zx297520v3 is the name ZTE gave that SoC (printed on the chip, in their ker=
+nel=20
+sources and boot messages). Yeah I wish it were less of a random string of=
+=20
+letters and numbers. I believe it should be in the MFD cell name as a kind =
+of=20
+namespacing. In the (unlikely) event hat support for a different ZX SoC is=
+=20
+added some day it will bring similarly named "top"/"matrix"/"lsp" controlle=
+rs
+
+topcrm / matrixcrm / lspcrm are the names ZTE gave the 3 clock/reset/misc=20
+controllers. The DT binding docs in patches 1-3 elaborate on the respective=
+=20
+roles of these controllers (although that understanding is based on reverse=
+=20
+engineering, so it might be wrong)
+
+=46inally, "clk", "reset" are the names I gave the child nodes.
+
+Rather than write zx297520v3-topcrm-clk, zx297520v3-matrixcrm-reset I cut o=
+ut=20
+the "crm-" part.
+
+Can you think of better names? Are you OK with the names if I add the above=
+=20
+explanation as a comment - a little bit shortened, and making sure I don't=
+=20
+repeat information that's in the bindings more than necessary?
+
+Cheers,
+Stefan
+
+--nextPartKW3nFVAkQr2M_09ZHSiKcQ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part.
+Content-Transfer-Encoding: 7Bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQJPBAABCAA5FiEEQxb0tqoFWyeVMl1sPRO8yFRPGiIFAmqjAa4bFIAAAAAABAAO
+bWFudTIsMi41KzEuMTIsMiwyAAoJED0TvMhUTxoi1l4P/j2RW0zmocuD81Wb5sZv
+znns4ujhGapOszlboqNQmeHKggVJawfrXfzWDfrJjPPoh/CtxKqMnktV0jNxud+F
+2epOFBD7UpM75AM6FVhx++ol5zDBVsuGFUjJMTmJ8m9jji4bNEuZcD2mTtlAt9Hr
+E19NYXZLQ1QsWdUi05+JaAx40GfP3swda/sENz78aOm4KNkcbbnE9OGaG4JaTbb5
+xfNh3OZ5AlBeIKlfsZFdtJSKsb/iBpEIc24hMHVaWm+h+KjbFKpP4034lGwshYzT
+tB1BoP+jJ+ebVTKzKTpT3xiuW+cLQDegDAyKhzYZulk4ILuzIq7JomMVn4P8UzHR
+3YNTu8DdCEZbAqDDMNlWWTkpYRPTSvYtSbivB6DeCM6oO46o7WvlnFqcjWRqN4/z
+j0s062KBfAkiodcaVaeLCjmg6aPqYKf0/yjhDTsjZRiDSn6nIs58JPh8PNhfgNhw
+4XHOVKRhzTYxOrOJxP33xgwbQf9IeJQT6n3UFqw62ieLCpR5uFd31vIHHS+bH2kd
+dAv3ER5fhNZcladCb4H4Nbx4TwiQ+ry3+KIPEJWre3zFNW0F79AGo1yz21/Buy6h
+NBjFRtosY8KazSjZqVHFdCn9N6N0X+1x3R79gJgTRSXrCbk/icBx9pACGfOb0pET
+wvukjxM7IWssDtOA0cwG+zAr
+=PTj7
+-----END PGP SIGNATURE-----
+
+--nextPartKW3nFVAkQr2M_09ZHSiKcQ--
+
+
 
