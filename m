@@ -1,78 +1,111 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95ADB44CAC1
-	for <mfd@lists.linux.dev>; Fri, 11 Sep 2026 08:36:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA96A470445
+	for <mfd@lists.linux.dev>; Fri, 11 Sep 2026 08:51:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789115810; cv=none; b=k3KeOKafubCErdXjLGCUTcTyHZhf9e8xN6SGd+AMMvuc6rrKs8d0fm/qiM1zITajqt3nyXcJ2NSmptwupQrtwUv39k2jT/hhR41V3pbaaoRVm7gg2Zt5XOESMkpl0VaQaR6AZ2982YbbrUnMIjLlVwsGbLtr2h36lhXzdtfZ30s=
+	t=1789116678; cv=none; b=cKtjmYQfJf6Obo8TRZHIUXcxVf8ZFbOk8ptP6fi5Oy0uuXg+fE/hIj5HYcf8CNC1+fEgwxKby8+KDVMQtqiVxyjkNYzHy4YzZG3lyaU00+77E713h4un8aRO1eEwKuyuvJlcPPvAlie/QvS0QDUK/6px99MT16GRe1Rab/b7IKk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789115810; c=relaxed/simple;
-	bh=27Ah1A7+YGbheg32CazNcC3Me9fuuX9iJpxCNFvuRVs=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=P64FQI/AiLT3csD0k2C4eZg3SujOA03xl5I/MSFf0ZB9Bx7jzIkIoHuf6Gyz1hvrS0iMziZAVJ6H5tgBGjWz4hLkEhBTGi96bCXQSHbHbbrhn3Poejb8Wsw9ZoA4K6Byn58mRpRI0SzxMCObyAxbxCv2irhXXB8UFqVuc9mrf34=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=A1XXHFV+; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789116678; c=relaxed/simple;
+	bh=tvMysC/CeuoJ/SvvYgRXc3PRiPBy5Wp9M/28y1+/T4Y=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Content-Type:Date:
+	 Message-ID; b=sCYtY1gWI7vHIAWQCh/XQRQ3T1MkYPftqsQEfK5GMbc5XRfxL5qtiuaiJO0WiUPa24o7mPsKR1jDDFfhQsdVBqJigqNUQD+uv1h6+JHqR9Ohn4SPmr/xuR1qWzNS5oIMAdqKigVJdo1Bj9Yt1H/rf1u5BipRPsKVpq+mLV/N8E0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=kmoMB9Ip; arc=none smtp.client-ip=74.125.227.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="A1XXHFV+"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 754CC1F0089E
-	for <mfd@lists.linux.dev>; Fri, 11 Sep 2026 08:36:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789115807;
-	bh=27Ah1A7+YGbheg32CazNcC3Me9fuuX9iJpxCNFvuRVs=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=A1XXHFV+BPRZif5b3sNhMuQHnREkbb5nB7Q9AYCqm1EjaoC6FZQjddizrmoCx42YB
-	 JmzVuQowjQJAtPuZsQ3CtKB0vpHzt1QDJEJNaN5eFB2SPobhj80UZTuvDDN4XMkrFi
-	 s5nd0PCRkdyN/SPP//ZgydDNEQI4iTX1sYJM84hNHm3gf86ppC4cN4clK2tA1eZynf
-	 YOQy5J2HYCXB/uZAZb0/Uq2luak/fxqJprCuWBWe34acLXMZScRYhs0erRQCm4AyrK
-	 Ccn00mVJjgeRVJ1dVeIlmZIrrE7TQF+kz8PV3qKLV3GXOSd0CbuwpleiMW2F8uGfkU
-	 sziXyzpssYKuw==
-Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b5e4f15b78so603025e87.2
-        for <mfd@lists.linux.dev>; Fri, 11 Sep 2026 01:36:47 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBxuJJ/S40pbHRLsZbb3pZeyRh5lNnxyqvYoP8Cy/rhkM11S6qTZRplox+S/GR5LLevW3rY=@lists.linux.dev
-X-Gm-Message-State: AFuF++mxKTuDuMY887bAzavA8l7Do9MTcee8k1M/iDiCaQ7dRZt3s47P
-	+AFPcqk2UGqqbqVtdIqpjXdDW8iy0GWFLMKWXXU1etxu7Jgz7mqRuo0oCGaXOvJOk6bpmUX/GWB
-	AjNl7Y8daLJOvlRzq1ij1uGt3cb87rqA=
-X-Received: by 2002:a05:6512:2204:b0:5b4:7d9d:16d7 with SMTP id
- 2adb3069b0e04-5b8a02df777mr1274704e87.11.1789115806176; Fri, 11 Sep 2026
- 01:36:46 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kmoMB9Ip"
+Received: by mail-pj2-f12.google.com with SMTP id d9443c01a7336-2d747eb79f7so3643765ad.1
+        for <mfd@lists.linux.dev>; Fri, 11 Sep 2026 01:51:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789116676; x=1789721476; darn=lists.linux.dev;
+        h=message-id:date:content-type:references:in-reply-to:subject:cc:to
+         :from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=AwetnbBbHmq54+9PKFJhG/LjURf4GtsJuxXdoTuoU6c=;
+        b=kmoMB9IpdMzYcbBirkrhL5HvlwJgf/DEqONJ0VIgnyeDdKANtoICYMaQsHPHDPl7ka
+         aprROkzlRVWaonHbbk9qr/ypNNxo2KfYpgIDbXaw078NusnyFut7mXh8kAvfxj9xOflZ
+         cppwTsdtQFNawFbNlN4VPTVSmYMy7nGEEEsgKebl2h986trCMrUuVYySAUdhf6Ee6S1w
+         7lhz/GLrEWZrrPE100NmbowhgW5cW7XoH6ykmU28F3iUykLzK0wS7Sf+CZT4N1IqiWn3
+         Wgp0yBlaHgjuBfAx2dMuS4aeMuCEfEuaUeg9e9YdiNPnrgG2TAC+kItdxjQ/dC8Hx/Ds
+         W7bg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789116676; x=1789721476;
+        h=message-id:date:content-type:references:in-reply-to:subject:cc:to
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=AwetnbBbHmq54+9PKFJhG/LjURf4GtsJuxXdoTuoU6c=;
+        b=WL3nkixirrhCA3y3crgmBE55XP+RDx4B0VJc4W7FO2g/OuOsWn64+RZUPc5s+YZjcH
+         hVc2FHDQb358pBaWcYpQ4fRMSp/ZLZ/PI+2FsUvh0HdooJK+m6NsgIYCu7FJPwr6io8x
+         i/hDEdEw7tl0kkeutaipTQfztVEjSG/gN8eeIHEbU73vAwWnRcvY9wuG7BAjQiiEbXzF
+         oPzlKz/VO714LA7SK3zumKhvNsPZvBbnO2GF3QEjPfiqfE5kZTLDrJA0EEAeyntzRcMd
+         TytZ279tCVmsdh+ZygESowA/y5vgGPUpHYKC4N2M3q8UF6A7JDyv00XZKJn9ymlPruZq
+         zslg==
+X-Forwarded-Encrypted: i=1; AKwUvBzRHPaNt9yNpd3wq9kJdl/O+d/+Ij7O8/Kh2fXjos28KJoTSdhgEv1nI8hO0PhGojpDfLs=@lists.linux.dev
+X-Gm-Message-State: AFuF++nBj5wlo37m5pkHwRQIY/sg41z7CDfhduIiALkiEFByQDW9Xqo6
+	zCQ0ph+nCNuuQNBhasaz0UjlpPiaXGnycB+JHEcYaNn/eUfApgw3wAeC
+X-Gm-Gg: AYBFou3iBhRfB98lKbEUynU9uiD8VCjxs4bB+PmEJCtC7u1BzJ9XC2JVVCHH1iFio02
+	Zve5Y1wVpu6pOMa6mypRKgndkbpoCGqsIz9LcZ0gg0xYGV6Gvn3TNDchws5mkK1mH/iAvJ7P41v
+	emlxCavSHrhbtAHHgkyZCfxUr2Fs8oTGTJcC2YQu9KFdLnYsMIVkgJ3EeGRXPRaQcr8FkFZlOLH
+	iHyBIfHEqL6bGRTSE24tn4EES0E0vYUrTCTFgSnAnRsH67F/h7l6C1kYL3AoehoYd4tKaor9BbF
+	+4mi8ffovrKdtSBGg6/hfNpJOXPn39XfAYCV+F+qppNPmP4XVgkybYrVP4a86zYLALm/FbJtsle
+	EY+XYIyMpGjHGadCEcF6SuPpSk/2/cj6dACRf/6e4SxO9s+KYQ4EAxG4IYYwmWPAE6mSGLpbA6k
+	etWI9YDQQ+HkCwUFN9PHh/PVOC2doK6h1mbv/tvi0vMIVfrxjyp84WlAynpKXIDLl0q1hb5WugC
+	ckyFIMb8gfXAaZDu6sFlwqyDo/PlZCLT6X4
+X-Received: by 2002:a17:90b:270e:b0:398:dcf6:d40e with SMTP id 98e67ed59e1d1-39d9c1fe880mr5993873a91.17.1789116675878;
+        Fri, 11 Sep 2026 01:51:15 -0700 (PDT)
+Received: from volcano9f6e-hostos.amd.com ([165.204.217.251])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14365ba71cesm4799895c88.13.2026.09.11.01.51.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 11 Sep 2026 01:51:15 -0700 (PDT)
+From: Hemanth Selam <hemanth.selam@gmail.com>
+To: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Botsz HUANG <huang.botsz@gmail.com>, Nick Huang <sef1548@gmail.com>,
+ Support Opensource <support.opensource@diasemi.com>,
+ Matti Vaittinen <mazziesaccount@gmail.com>,
+ =?utf-8?q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>,
+ linux-kernel@vger.kernel.org, mfd@lists.linux.dev,
+ linux-samsung-soc@vger.kernel.org
+Subject: Re: [PATCH] mfd: fix typos in comments
+In-Reply-To: <20260910094326.GP2133376@google.com>
+References: <20260904122834.33723-1-hemanth.selam@gmail.com>
+ <apwFlV97bLVlvsOJ@botszhome>
+ <59747ea8-bd89-4dff-ba13-ff9c66318e8c@kernel.org>
+ <20260909161454.GF2133376@google.com>
+ <20260909161710.GG2133376@google.com>
+ <a05c4086-1681-44f4-88c6-de1073b0f5a6@kernel.org>
+ <20260910094326.GP2133376@google.com>
+Content-Type: text/plain; charset=utf-8
+Date: Fri, 11 Sep 2026 14:21:10 +0530
+Message-ID: <178911667044.715443.13795127169435157424@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-References: <20260911-ux500-simple-sound-v1-0-6771ac714e82@kernel.org> <621688e1-0c18-460e-b48d-581fbd3ef5dd@sirena.org.uk>
-In-Reply-To: <621688e1-0c18-460e-b48d-581fbd3ef5dd@sirena.org.uk>
-From: Linus Walleij <linusw@kernel.org>
-Date: Fri, 11 Sep 2026 10:36:34 +0200
-X-Gmail-Original-Message-ID: <CAD++jLnsecR99S95qfqBnBkHRNV=Na_OPizuPN4aneMdAL33vg@mail.gmail.com>
-X-Gm-Features: AcwNN1V5zJYngX4zb79GBa_GbR3Ci7WBCeWHBlSjl-hmvsmlAMBJlpPFbpvchAA
-Message-ID: <CAD++jLnsecR99S95qfqBnBkHRNV=Na_OPizuPN4aneMdAL33vg@mail.gmail.com>
-Subject: Re: [PATCH 0/9] ASoC: ux500: Migrate HREF and Samsung audio to simple-card
-To: Mark Brown <broonie@kernel.org>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>, 
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, linux-sound@vger.kernel.org, 
-	devicetree@vger.kernel.org, mfd@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 11, 2026 at 1:10=E2=80=AFAM Mark Brown <broonie@kernel.org> wro=
-te:
+On Thu, 10 Sep 2026, Lee Jones wrote:
+> > Now, whether they should be Acked-by:ing patches is another issue
+> > entirely!
 
-> The modern thing is to use audio-graph-card2 (which scales down to the
-> use cases that simple- handles with a more flexible binding).
+I am the one who carried those two tags into v3, so let me take that part
+off your hands.
 
-OK I will take a look and see if I can phase over to that thing.
+I collected them the way b4 does, without knowing anything about either
+person beyond the mail on the list, and I am in no position to vouch for
+them.  I should not have respun the patch just to add them, which is what
+v3 says it is for.
 
-> What's your thinking on merge strategy here?
+If it is useful I will send a v4 with both Acked-by trailers dropped,
+keeping only Matti's Reviewed-by, which he gave after asking for the
+"wainting" fix that v3 includes.  That way the patch does not depend on
+how the wider question is settled.  Say the word and I will send it; or
+if you would rather just apply v3 and strip the two trailers at commit
+time, that works too and saves a round trip.
 
-First finalize the bindings and have them approved, Lee want to merge
-the MFD binding change in his tree, when that is done all ASoC
-things can go in and the DTS changes in parallel through the SoC
-tree.
+I will also drop the Assisted-by trailer naming the model while I am at
+it, as has been asked of me elsewhere.
 
-(I have the similar idea with the regulator set that is floating.)
+Thanks,
+Hemanth
 
-Yours,
-Linus Walleij
