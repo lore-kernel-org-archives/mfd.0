@@ -1,75 +1,415 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2869B44607B
-	for <mfd@lists.linux.dev>; Fri, 11 Sep 2026 08:03:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 829863C553F
+	for <mfd@lists.linux.dev>; Fri, 11 Sep 2026 08:10:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789113814; cv=none; b=JH/PaBg/z8A5vgegWOjK5K/DeNKTR0+CzxwFx141W9usKFXN9SFn08W7LFPpovzaVOFRaSeEcK0+fNam1d1KflmURNKo4NWyairXkhmrVpEILkcfDtn/QrQxXYvDnMh8ZVKyZESEVhP1TC6qo+FGK6Irn0Rlvoq6xOSuq+0x/hw=
+	t=1789114244; cv=none; b=QW/j8whsdswQr6J6HXhkm3BKQiRCH8Gdfy0ADjWIRMuQB5M0ZtCNBzXq0kECHfbokH3LZpsnWuIJMN8v4AZ6r+i0Jif8za0yhil0a8olb9xtS4xnD2DQVE/buSLLkgwt9A3KKGat0np4tIQFM8tRKGrWtNVWxhzSFCv1XqFPSa0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789113814; c=relaxed/simple;
-	bh=Pmr1zFWLLyUrP9pTv4EmEZkugbLlSXEPEM1233Egn0E=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=leGu7rrKRH2lkGL2+8d7ywJLqlkoV3WVVU1A97lIUFsuTwrOJDoaOLdHSac1nR4QrFLTQeqrTWZ5gxElxWKr4yrw50oclZJFJKSZ/rRwWZopPo7oxUaI09Q9F6Z3xD8oTym/E2DgpOKobt/N70Z8cQ1oRqD6PPOOI2w+WqquYh4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=U2GmrN90; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789114244; c=relaxed/simple;
+	bh=Hjn5D/KsOBnj/6SzCxyIYYhw+PVj8k1aY5xVPxRy8fU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Uzm7WhugrW4mt50O+1onVO5IjKZDy3ekZ34RH6FAETFcNZ7hGP1LL0UwN8TmmTkvXyzomzx5BtfgGDReQxp4Yd+1cQcaDNMp1wserB+YFN7J+CJwlnkbqFlsqLIlFzLLeeDwCFn1QdhFa/SCOVfx30Xmk7go97aQ4LYYWEQkV/U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HSdXsnz2; arc=none smtp.client-ip=209.85.216.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="U2GmrN90"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2DF8D1F00899
-	for <mfd@lists.linux.dev>; Fri, 11 Sep 2026 08:03:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789113810;
-	bh=Pmr1zFWLLyUrP9pTv4EmEZkugbLlSXEPEM1233Egn0E=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=U2GmrN90RD/c8e9R2zbI6MI6iktTO0InOKh1XNXjegmI/XugpnpR/ddSSbisnrhsB
-	 vqTK5HOIlXOiaCJFzt4u759QtSsVXt7EnjYBM9GXBH7vVltbUsSo8CDJZmSJS/jpQA
-	 hvAgFY1DI9+lDk9OWi3c483DQn2UP+AU628k3s9LPBoPw8E8VTKUqVjrg74AigzNuV
-	 Hdd6KdWeyJB789kElRhNU/h3FdKO1AlllaeRYu2TwdhmlRlTAMkhuRSY4NQr4KAi5m
-	 4Q+owYPXpKFOPnEo/frxU8epEnIPl/xdOcqrJB4LOoccL5sGwM4sFRulR28s4+3s/n
-	 i/4bERRCP6S6w==
-Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-5b4a9994c20so772850e87.0
-        for <mfd@lists.linux.dev>; Fri, 11 Sep 2026 01:03:30 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvByOIAy7jMEHU9OmRA1JZhYJTZD0YGa9M0K6+d1+Xvs3BNsBZbCQNrw2ezm3JTisVAbUtiQ=@lists.linux.dev
-X-Gm-Message-State: AFuF++lJvYb9ALPhlneG2kbUdBbG0atulCrbu5zb700Sm6zacLQZ1kv6
-	/0jt7W3HMY7A34gQk99EewvRkx04Et98Mtmb3FnvS4DRSLcwBXSTBoWFsy2GFB6fPNVVYvaHtTI
-	T+vcNWUQcDVmJreyxsiLzQjrcvIPXAWk=
-X-Received: by 2002:a05:6512:68f:b0:5b6:1a7c:59cf with SMTP id
- 2adb3069b0e04-5b8a0304560mr723222e87.41.1789113808874; Fri, 11 Sep 2026
- 01:03:28 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HSdXsnz2"
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-3990fe066ebso509094a91.1
+        for <mfd@lists.linux.dev>; Fri, 11 Sep 2026 01:10:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789114242; x=1789719042; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=u7Qx43bG49fe/sQM/Uno0+GUNPMxqPw+3RuQb5XIhZY=;
+        b=HSdXsnz2LFoxcwKbnxMieqTH+ss9fgXHSuznaS6pkDeDBajlg7fW2/SbDNOMbe8odt
+         K/3Z2+Rsqb9JMCRHd5WJE77VDPsB6fvDX/XpPkBt1F/07r4vIlVl5qnLJrP5bGeDvRq7
+         vl2sE6Wz9SSzPvSVxt/c6pRvo9SpgZKrbdBlAXYbIiiSiZe/ILIrDuLBebO5Gm8LDbLb
+         XvKwJfPQCySyLiqi46ICW8WxJZMqA0kakClYYbo2uU3v5yp/VCO9F5IrmA1wYb4/KnB1
+         IcE1rmkcfBgYWO8jsykFL6fJHJthTPfT0vQ8U5MnnokiFUMaDNo4vyGpedXE8Ny16iz4
+         ACug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789114242; x=1789719042;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=u7Qx43bG49fe/sQM/Uno0+GUNPMxqPw+3RuQb5XIhZY=;
+        b=WRzmSiEE1BPJce1k6KfHsv5o72YzKfOTVz9f0UAij6eme7jtIUH61yQ/2mrNcEle8/
+         30vHWPqzNsT6ITn6mB5OYTYuEJm3LbYbPNfZ2GSSqybanQjAwXtH60yg7CFjeZxSLP7W
+         Te1x55xObUsIuSqg00+vzlCxYMgFm6NiRBm42xDnnqb7VbBxhDacb8jIkByT+zgM6Z/N
+         l19aOHoalS/2uJodRS6LWxQ8/j7qw/ocNRkqZ1W2IQlXjxI0ahdm/D9ZUX3BakMgBR4d
+         S1vyJzkRrHZtCcZw1oy6w9kMHrpB6CzoCm95WrCoxN93VxT/ixa+ogR0cEhDNpFHaUyo
+         Za6Q==
+X-Forwarded-Encrypted: i=1; AKwUvBxY4sFXDj9QviyFPTpdkUovXY+h+g9PfhWDtHAOaH7UuzDRz+6W+gro1//Bj+vWZryauOk=@lists.linux.dev
+X-Gm-Message-State: AFuF++nt4yJPLZf7K0B2tIuiaVRu0kjRX0oliHEhOjwk98LV26UlxmfQ
+	nnHn2UjPz/w833Z58qJPmn9yxsUwYNCam7ga0IjhaWX/OS03EjfoZ/I=
+X-Gm-Gg: AYBFou0amukioqT9VZukIzYpGFm46uCpmI1kGS1LxALo2XCr9AEz4JVtCGLBwjm//VH
+	MO0c/nOtR6dCEaKfpBcvkC6vyOrOOxLy6SBS9o4dJVZndaoqK4EuznV2FSc935wVFH+U1fSqoyL
+	fdY6ju/Q2NzIyiOX1ibZwb1NOEdXlxQ1VnxKcJNYm/QAOJBtwvZ0BdXifHB6/oFgFstyZWBF/nf
+	rScVZfGZrw0qrphqN/9TmGbrEKegmdfmwhEKJJ1uZm1p8QO+p39YF7Eb09s6g9DvbqEznNLbvMo
+	INhdbWBz1FwM5tiig2yZw5rE5cLp8rF/1nXx8Q5SnJZtoWLEPgIaNzGkDv4TTjTw3wR380wsbiv
+	5CaOsM2ffBUbCnfZ+tCfAPTrEunOjCYnDVyW9ATXXI57AJ9V/mDUVP+tU9UWq/aDSa/PnZSTBLJ
+	5sFI2FBNRR5f7N9pMeqXf7kLEJzjuqilqQ1cKE/oe/R3Pp7dzZNSVwhuLUhy3Job/D381Pqk0Nj
+	LFw+EwAnigL
+X-Received: by 2002:a17:90b:3c89:b0:398:ba9e:75ff with SMTP id 98e67ed59e1d1-39d9c35047emr5120013a91.21.1789114241653;
+        Fri, 11 Sep 2026 01:10:41 -0700 (PDT)
+Received: from DL2XHKPB4.dl.net ([103.63.104.162])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39d994872e0sm3514967a91.8.2026.09.11.01.10.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 11 Sep 2026 01:10:40 -0700 (PDT)
+From: Triet Hoang <triet.hoang.dev@gmail.com>
+To: Lee Jones <lee@kernel.org>
+Cc: Chanwoo Choi <cw00.choi@samsung.com>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Roger Quadros <rogerq@kernel.org>,
+	Tony Lindgren <tony@atomide.com>,
+	mfd@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org,
+	linux-mediatek@lists.infradead.org,
+	linux-omap@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Triet Hoang <triet.hoang.dev@gmail.com>
+Subject: [PATCH v2 RESEND] mfd: Convert to DEFINE_SIMPLE_DEV_PM_OPS()
+Date: Fri, 11 Sep 2026 15:10:22 +0700
+Message-ID: <20260911081022.3475479-1-triet.hoang.dev@gmail.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260901-ux500-dts-snowball-regulator-v2-0-fe88b01829bf@kernel.org>
-In-Reply-To: <20260901-ux500-dts-snowball-regulator-v2-0-fe88b01829bf@kernel.org>
-From: Linus Walleij <linusw@kernel.org>
-Date: Fri, 11 Sep 2026 10:03:16 +0200
-X-Gmail-Original-Message-ID: <CAD++jLkkX1yOcuZnTZhvi0vgrquffTGFoVznfz8vCOjNjiipYQ@mail.gmail.com>
-X-Gm-Features: AcwNN1UfnXECHxtGopjI6gR_i_DsGzT5cXQ7pcJChpJOw_nkxbdKVBlNEAR5xsw
-Message-ID: <CAD++jLkkX1yOcuZnTZhvi0vgrquffTGFoVznfz8vCOjNjiipYQ@mail.gmail.com>
-Subject: Re: [PATCH v2 00/13] Add AB8500 buck regulators to the Ux500 device tree
-To: Stephan Gerhold <stephan@gerhold.net>, Liam Girdwood <lgirdwood@gmail.com>, 
-	Mark Brown <broonie@kernel.org>, Axel Lin <axel.lin@ingics.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>
-Cc: devicetree@vger.kernel.org, mfd@lists.linux.dev, 
-	Conor Dooley <conor.dooley@microchip.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hi Mark,
+Convert the deprecated SIMPLE_DEV_PM_OPS() to DEFINE_SIMPLE_DEV_PM_OPS()
+and pm_sleep_ptr().
 
-On Tue, Sep 1, 2026 at 10:02=E2=80=AFPM Linus Walleij <linusw@kernel.org> w=
-rote:
+This allows us to drop the __maybe_unused annotations from PM callbacks.
+This is a straightforward cleanup with no functional change intended.
 
-> While working on the Ux500 power domains it became apparent that the
-> device trees were using the DB8500 power-domain regulator for supplies
-> which actually come from buck converters in the AB8500 PMIC.
+Signed-off-by: Triet Hoang <triet.hoang.dev@gmail.com>
+---
+Changes in v2:
+- Change commit message prefix from "drivers/mfd: " to "mfd: ".
+- Wrap to 75 ish chars for commit messages.
 
-Since Lee applied the prerequisite patch 8/13 do you think you could
-apply patches 1-7 and 9-11?
+Link to v1: https://lore.kernel.org/all/20260821092508.324787-1-triet.hoang.dev@gmail.com/
+Link to v2: https://lore.kernel.org/all/20260829050228.42638-1-triet.hoang.dev@gmail.com/
+---
+ drivers/mfd/iqs62x.c           | 8 ++++----
+ drivers/mfd/max77843.c         | 8 ++++----
+ drivers/mfd/mt6360-core.c      | 8 ++++----
+ drivers/mfd/rk8xx-i2c.c        | 4 ++--
+ drivers/mfd/rn5t618.c          | 8 ++++----
+ drivers/mfd/ti_am335x_tscadc.c | 8 ++++----
+ drivers/mfd/tps6586x.c         | 8 ++++----
+ drivers/mfd/twl-core.c         | 8 ++++----
+ 8 files changed, 30 insertions(+), 30 deletions(-)
 
-I can also resend those separately if that's easier.
+diff --git a/drivers/mfd/iqs62x.c b/drivers/mfd/iqs62x.c
+index ee017617d1d1..bea1ebdca9e7 100644
+--- a/drivers/mfd/iqs62x.c
++++ b/drivers/mfd/iqs62x.c
+@@ -1015,7 +1015,7 @@ static void iqs62x_remove(struct i2c_client *client)
+ 	wait_for_completion(&iqs62x->fw_done);
+ }
+ 
+-static int __maybe_unused iqs62x_suspend(struct device *dev)
++static int iqs62x_suspend(struct device *dev)
+ {
+ 	struct iqs62x_core *iqs62x = dev_get_drvdata(dev);
+ 	int ret;
+@@ -1036,7 +1036,7 @@ static int __maybe_unused iqs62x_suspend(struct device *dev)
+ 				  IQS62X_PWR_SETTINGS_PWR_MODE_HALT);
+ }
+ 
+-static int __maybe_unused iqs62x_resume(struct device *dev)
++static int iqs62x_resume(struct device *dev)
+ {
+ 	struct iqs62x_core *iqs62x = dev_get_drvdata(dev);
+ 	int ret;
+@@ -1051,7 +1051,7 @@ static int __maybe_unused iqs62x_resume(struct device *dev)
+ 				  IQS62X_PWR_SETTINGS_DIS_AUTO, 0);
+ }
+ 
+-static SIMPLE_DEV_PM_OPS(iqs62x_pm, iqs62x_suspend, iqs62x_resume);
++static DEFINE_SIMPLE_DEV_PM_OPS(iqs62x_pm, iqs62x_suspend, iqs62x_resume);
+ 
+ static const struct of_device_id iqs62x_of_match[] = {
+ 	{ .compatible = "azoteq,iqs620a" },
+@@ -1067,7 +1067,7 @@ static struct i2c_driver iqs62x_i2c_driver = {
+ 	.driver = {
+ 		.name = "iqs62x",
+ 		.of_match_table = iqs62x_of_match,
+-		.pm = &iqs62x_pm,
++		.pm = pm_sleep_ptr(&iqs62x_pm),
+ 	},
+ 	.probe = iqs62x_probe,
+ 	.remove = iqs62x_remove,
+diff --git a/drivers/mfd/max77843.c b/drivers/mfd/max77843.c
+index 2a48577b1a79..9ae6715642ae 100644
+--- a/drivers/mfd/max77843.c
++++ b/drivers/mfd/max77843.c
+@@ -173,7 +173,7 @@ static const struct i2c_device_id max77843_id[] = {
+ 	{ },
+ };
+ 
+-static int __maybe_unused max77843_suspend(struct device *dev)
++static int max77843_suspend(struct device *dev)
+ {
+ 	struct i2c_client *i2c = to_i2c_client(dev);
+ 	struct max77693_dev *max77843 = i2c_get_clientdata(i2c);
+@@ -185,7 +185,7 @@ static int __maybe_unused max77843_suspend(struct device *dev)
+ 	return 0;
+ }
+ 
+-static int __maybe_unused max77843_resume(struct device *dev)
++static int max77843_resume(struct device *dev)
+ {
+ 	struct i2c_client *i2c = to_i2c_client(dev);
+ 	struct max77693_dev *max77843 = i2c_get_clientdata(i2c);
+@@ -197,12 +197,12 @@ static int __maybe_unused max77843_resume(struct device *dev)
+ 	return 0;
+ }
+ 
+-static SIMPLE_DEV_PM_OPS(max77843_pm, max77843_suspend, max77843_resume);
++static DEFINE_SIMPLE_DEV_PM_OPS(max77843_pm, max77843_suspend, max77843_resume);
+ 
+ static struct i2c_driver max77843_i2c_driver = {
+ 	.driver	= {
+ 		.name = "max77843",
+-		.pm = &max77843_pm,
++		.pm = pm_sleep_ptr(&max77843_pm),
+ 		.of_match_table = max77843_dt_match,
+ 		.suppress_bind_attrs = true,
+ 	},
+diff --git a/drivers/mfd/mt6360-core.c b/drivers/mfd/mt6360-core.c
+index b9b1036c8ff4..8a97c30cad3f 100644
+--- a/drivers/mfd/mt6360-core.c
++++ b/drivers/mfd/mt6360-core.c
+@@ -583,7 +583,7 @@ static int mt6360_probe(struct i2c_client *client)
+ 	return 0;
+ }
+ 
+-static int __maybe_unused mt6360_suspend(struct device *dev)
++static int mt6360_suspend(struct device *dev)
+ {
+ 	struct i2c_client *i2c = to_i2c_client(dev);
+ 
+@@ -593,7 +593,7 @@ static int __maybe_unused mt6360_suspend(struct device *dev)
+ 	return 0;
+ }
+ 
+-static int __maybe_unused mt6360_resume(struct device *dev)
++static int mt6360_resume(struct device *dev)
+ {
+ 
+ 	struct i2c_client *i2c = to_i2c_client(dev);
+@@ -604,7 +604,7 @@ static int __maybe_unused mt6360_resume(struct device *dev)
+ 	return 0;
+ }
+ 
+-static SIMPLE_DEV_PM_OPS(mt6360_pm_ops, mt6360_suspend, mt6360_resume);
++static DEFINE_SIMPLE_DEV_PM_OPS(mt6360_pm_ops, mt6360_suspend, mt6360_resume);
+ 
+ static const struct of_device_id __maybe_unused mt6360_of_id[] = {
+ 	{ .compatible = "mediatek,mt6360", },
+@@ -615,7 +615,7 @@ MODULE_DEVICE_TABLE(of, mt6360_of_id);
+ static struct i2c_driver mt6360_driver = {
+ 	.driver = {
+ 		.name = "mt6360",
+-		.pm = &mt6360_pm_ops,
++		.pm = pm_sleep_ptr(&mt6360_pm_ops),
+ 		.of_match_table = of_match_ptr(mt6360_of_id),
+ 	},
+ 	.probe = mt6360_probe,
+diff --git a/drivers/mfd/rk8xx-i2c.c b/drivers/mfd/rk8xx-i2c.c
+index 2951b2911a37..161b25fbe146 100644
+--- a/drivers/mfd/rk8xx-i2c.c
++++ b/drivers/mfd/rk8xx-i2c.c
+@@ -251,7 +251,7 @@ static void rk8xx_i2c_shutdown(struct i2c_client *client)
+ 	rk8xx_shutdown(&client->dev);
+ }
+ 
+-static SIMPLE_DEV_PM_OPS(rk8xx_i2c_pm_ops, rk8xx_suspend, rk8xx_resume);
++static DEFINE_SIMPLE_DEV_PM_OPS(rk8xx_i2c_pm_ops, rk8xx_suspend, rk8xx_resume);
+ 
+ static const struct of_device_id rk8xx_i2c_of_match[] = {
+ 	{ .compatible = "rockchip,rk801", .data = &rk801_data },
+@@ -270,7 +270,7 @@ static struct i2c_driver rk8xx_i2c_driver = {
+ 	.driver = {
+ 		.name = "rk8xx-i2c",
+ 		.of_match_table = rk8xx_i2c_of_match,
+-		.pm = &rk8xx_i2c_pm_ops,
++		.pm = pm_sleep_ptr(&rk8xx_i2c_pm_ops),
+ 	},
+ 	.probe = rk8xx_i2c_probe,
+ 	.shutdown  = rk8xx_i2c_shutdown,
+diff --git a/drivers/mfd/rn5t618.c b/drivers/mfd/rn5t618.c
+index 23ca00d2c624..8c68dd16bb9e 100644
+--- a/drivers/mfd/rn5t618.c
++++ b/drivers/mfd/rn5t618.c
+@@ -243,7 +243,7 @@ static void rn5t618_i2c_remove(struct i2c_client *i2c)
+ 	unregister_restart_handler(&rn5t618_restart_handler);
+ }
+ 
+-static int __maybe_unused rn5t618_i2c_suspend(struct device *dev)
++static int rn5t618_i2c_suspend(struct device *dev)
+ {
+ 	struct rn5t618 *priv = dev_get_drvdata(dev);
+ 
+@@ -253,7 +253,7 @@ static int __maybe_unused rn5t618_i2c_suspend(struct device *dev)
+ 	return 0;
+ }
+ 
+-static int __maybe_unused rn5t618_i2c_resume(struct device *dev)
++static int rn5t618_i2c_resume(struct device *dev)
+ {
+ 	struct rn5t618 *priv = dev_get_drvdata(dev);
+ 
+@@ -263,7 +263,7 @@ static int __maybe_unused rn5t618_i2c_resume(struct device *dev)
+ 	return 0;
+ }
+ 
+-static SIMPLE_DEV_PM_OPS(rn5t618_i2c_dev_pm_ops,
++static DEFINE_SIMPLE_DEV_PM_OPS(rn5t618_i2c_dev_pm_ops,
+ 			rn5t618_i2c_suspend,
+ 			rn5t618_i2c_resume);
+ 
+@@ -271,7 +271,7 @@ static struct i2c_driver rn5t618_i2c_driver = {
+ 	.driver = {
+ 		.name = "rn5t618",
+ 		.of_match_table = rn5t618_of_match,
+-		.pm = &rn5t618_i2c_dev_pm_ops,
++		.pm = pm_sleep_ptr(&rn5t618_i2c_dev_pm_ops),
+ 	},
+ 	.probe = rn5t618_i2c_probe,
+ 	.remove = rn5t618_i2c_remove,
+diff --git a/drivers/mfd/ti_am335x_tscadc.c b/drivers/mfd/ti_am335x_tscadc.c
+index 068c25401c6c..81f07a1d780c 100644
+--- a/drivers/mfd/ti_am335x_tscadc.c
++++ b/drivers/mfd/ti_am335x_tscadc.c
+@@ -313,7 +313,7 @@ static int __maybe_unused ti_tscadc_can_wakeup(struct device *dev, void *data)
+ 	return device_may_wakeup(dev);
+ }
+ 
+-static int __maybe_unused tscadc_suspend(struct device *dev)
++static int tscadc_suspend(struct device *dev)
+ {
+ 	struct ti_tscadc_dev *tscadc = dev_get_drvdata(dev);
+ 
+@@ -331,7 +331,7 @@ static int __maybe_unused tscadc_suspend(struct device *dev)
+ 	return 0;
+ }
+ 
+-static int __maybe_unused tscadc_resume(struct device *dev)
++static int tscadc_resume(struct device *dev)
+ {
+ 	struct ti_tscadc_dev *tscadc = dev_get_drvdata(dev);
+ 
+@@ -345,7 +345,7 @@ static int __maybe_unused tscadc_resume(struct device *dev)
+ 	return 0;
+ }
+ 
+-static SIMPLE_DEV_PM_OPS(tscadc_pm_ops, tscadc_suspend, tscadc_resume);
++static DEFINE_SIMPLE_DEV_PM_OPS(tscadc_pm_ops, tscadc_suspend, tscadc_resume);
+ 
+ static const struct ti_tscadc_data tscdata = {
+ 	.adc_feature_name = "TI-am335x-adc",
+@@ -373,7 +373,7 @@ MODULE_DEVICE_TABLE(of, ti_tscadc_dt_ids);
+ static struct platform_driver ti_tscadc_driver = {
+ 	.driver = {
+ 		.name   = "ti_am3359-tscadc",
+-		.pm	= &tscadc_pm_ops,
++		.pm	= pm_sleep_ptr(&tscadc_pm_ops),
+ 		.of_match_table = ti_tscadc_dt_ids,
+ 	},
+ 	.probe	= ti_tscadc_probe,
+diff --git a/drivers/mfd/tps6586x.c b/drivers/mfd/tps6586x.c
+index 3cfd2f02b62f..600186b1e8cb 100644
+--- a/drivers/mfd/tps6586x.c
++++ b/drivers/mfd/tps6586x.c
+@@ -618,7 +618,7 @@ static void tps6586x_i2c_remove(struct i2c_client *client)
+ 		free_irq(client->irq, tps6586x);
+ }
+ 
+-static int __maybe_unused tps6586x_i2c_suspend(struct device *dev)
++static int tps6586x_i2c_suspend(struct device *dev)
+ {
+ 	struct tps6586x *tps6586x = dev_get_drvdata(dev);
+ 
+@@ -628,7 +628,7 @@ static int __maybe_unused tps6586x_i2c_suspend(struct device *dev)
+ 	return 0;
+ }
+ 
+-static int __maybe_unused tps6586x_i2c_resume(struct device *dev)
++static int tps6586x_i2c_resume(struct device *dev)
+ {
+ 	struct tps6586x *tps6586x = dev_get_drvdata(dev);
+ 
+@@ -638,7 +638,7 @@ static int __maybe_unused tps6586x_i2c_resume(struct device *dev)
+ 	return 0;
+ }
+ 
+-static SIMPLE_DEV_PM_OPS(tps6586x_pm_ops, tps6586x_i2c_suspend,
++static DEFINE_SIMPLE_DEV_PM_OPS(tps6586x_pm_ops, tps6586x_i2c_suspend,
+ 			 tps6586x_i2c_resume);
+ 
+ static const struct i2c_device_id tps6586x_id_table[] = {
+@@ -651,7 +651,7 @@ static struct i2c_driver tps6586x_driver = {
+ 	.driver	= {
+ 		.name	= "tps6586x",
+ 		.of_match_table = of_match_ptr(tps6586x_of_match),
+-		.pm	= &tps6586x_pm_ops,
++		.pm	= pm_sleep_ptr(&tps6586x_pm_ops),
+ 	},
+ 	.probe		= tps6586x_i2c_probe,
+ 	.remove		= tps6586x_i2c_remove,
+diff --git a/drivers/mfd/twl-core.c b/drivers/mfd/twl-core.c
+index c024a28b057e..b7d749208131 100644
+--- a/drivers/mfd/twl-core.c
++++ b/drivers/mfd/twl-core.c
+@@ -903,7 +903,7 @@ twl_probe(struct i2c_client *client)
+ 	return status;
+ }
+ 
+-static int __maybe_unused twl_suspend(struct device *dev)
++static int twl_suspend(struct device *dev)
+ {
+ 	struct i2c_client *client = to_i2c_client(dev);
+ 
+@@ -913,7 +913,7 @@ static int __maybe_unused twl_suspend(struct device *dev)
+ 	return 0;
+ }
+ 
+-static int __maybe_unused twl_resume(struct device *dev)
++static int twl_resume(struct device *dev)
+ {
+ 	struct i2c_client *client = to_i2c_client(dev);
+ 
+@@ -923,7 +923,7 @@ static int __maybe_unused twl_resume(struct device *dev)
+ 	return 0;
+ }
+ 
+-static SIMPLE_DEV_PM_OPS(twl_dev_pm_ops, twl_suspend, twl_resume);
++static DEFINE_SIMPLE_DEV_PM_OPS(twl_dev_pm_ops, twl_suspend, twl_resume);
+ 
+ static const struct i2c_device_id twl_ids[] = {
+ 	{ "twl4030", TWL4030_VAUX2 },	/* "Triton 2" */
+@@ -942,7 +942,7 @@ static const struct i2c_device_id twl_ids[] = {
+ /* One Client Driver , 4 Clients */
+ static struct i2c_driver twl_driver = {
+ 	.driver.name	= DRIVER_NAME,
+-	.driver.pm	= &twl_dev_pm_ops,
++	.driver.pm	= pm_sleep_ptr(&twl_dev_pm_ops),
+ 	.id_table	= twl_ids,
+ 	.probe		= twl_probe,
+ 	.remove		= twl_remove,
+-- 
+2.53.0
 
-Yours,
-Linus Walleij
