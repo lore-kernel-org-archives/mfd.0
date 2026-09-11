@@ -1,42 +1,41 @@
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3D1D403AF8
-	for <mfd@lists.linux.dev>; Fri, 11 Sep 2026 18:49:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 532CB40802F
+	for <mfd@lists.linux.dev>; Fri, 11 Sep 2026 18:49:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789152548; cv=none; b=PGyuJsvnM7RF93597Ea26juP8GxXebrcaGFabZRE/ujCcy6kH03X/Ee0TP/XSysDLa+Eqvx85mswwjV+vHerEe2tJPhp7djysN0AfXqzAVnFufRtRe++LCLcOnjUIjFv1/iIf2ncT7UMlV2koEeTImSNCSTSssWfLQGO7+/jYrA=
+	t=1789152549; cv=none; b=qVpXQjvtlx2EU9L5bHq+R1skiqRrBCf/MDAPZI5+3KAdicSuA7Z0pqMN4hSxzaMc8UiUlHOoo5RihhpPjq5I4RHdgi9XlUK40XCmWPzElx0bX/CBMRSXNMKKr1jxFJU9kTC5/rJDMYY2X5DJsFiFGBt+3b4Wmb9uYFrMO+G0cIY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789152548; c=relaxed/simple;
-	bh=GNNzSTLbgpHykj/Jyzbjs1Z5IOBldeOKxShjDx3id9g=;
+	s=arc-20240116; t=1789152549; c=relaxed/simple;
+	bh=MLXlkWvAz2reCSNezaXmeowtTnYNrr3l0Mg0DQtTtKk=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=jthbULvjlIQs+fhHXrsgA/X+77R/XagkcThMd9sjD9K55F1B34H6DvZ/yWZwKbgq7/AkCM4n9KAO+/OKlKUTOE+S1yT4LHE/kmIA1ZZAKuAmtpPNdoeVoFrZSV0haHhmJd9VejbTXdubvxtqfHoimacGGByTY+Yk6L3vdO1aI9g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=aoWfWH9p; arc=none smtp.client-ip=185.246.84.56
+	 In-Reply-To:To:Cc; b=Sfp6OZv0M4BBxRX0mB88cYfeWPz7TzR5rtAmL97kXQkSuH03hJJg5klRZyXAI6A8zFs10at26sjHDJHvXOlDs8iDC+480aN0ack+mmOg6NWQExhHO4ba8u+p5a2PasM7Y7dEYr3MrVz7hh6tiTpymwaLkne4F46xo1R0kRGtwSw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=BDKaNuqZ; arc=none smtp.client-ip=185.171.202.116
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="aoWfWH9p"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="BDKaNuqZ"
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id EA1301A022B;
-	Fri, 11 Sep 2026 18:49:03 +0000 (UTC)
+	by smtpout-04.galae.net (Postfix) with ESMTPS id E567BC63440;
+	Fri, 11 Sep 2026 18:49:45 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id BEC7060737;
-	Fri, 11 Sep 2026 18:49:03 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 1C3FD11C7AFAD;
-	Fri, 11 Sep 2026 20:49:01 +0200 (CEST)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 4A7B5606E3;
+	Fri, 11 Sep 2026 18:49:01 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 09A3111C7AFB3;
+	Fri, 11 Sep 2026 20:48:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1789152542; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1789152540; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=FtWqilX0/XJZ8szdotwy1h9xODOL04sHT1uvbcJkTbc=;
-	b=aoWfWH9p/yAMQ04WVnv0gSjfaGEpfXyrRWq1me6fmM9g+f0lTvpH1S7zFRf8F65nHEzXzZ
-	yMRlr198ROXQ12VCeMBx93HR4QeZaVDYLb/+JzMvz1P96LUfI5hS++w5v/oKWM62doJEEH
-	sAKjEI1ETYw1ja98I6Omee2TdqIZ/6uYsgtpOfu29dYJ5XA/ZnTkcoR8HzmKA5JLqy0jnG
-	sClxgNHvioedRl9xmCx11UF/3PX/ocQK6tVBe4yekmB0NCQw/hzd+NWEbBiEEgVeP9a0z6
-	gv/Ac2CX5lQPtuhkNYwVSBYvSFJ/K9/FQs+L4ysOprMnATShSSxUbD3fqjYuqA==
+	bh=qb0jmvppUUTsrwnBOJ07ToDzPzb3JhdaJ8as8Vej6mY=;
+	b=BDKaNuqZsRe2nd5FatX4ifvigzPmM0GWscsZa7I2+E4EU1R7L1azLxsJwzTclu2k8dyq1J
+	UkF85YotvMUYg0215TKev7p1mSz6g99uSk32jciuWm88oAgZ9RcXvlxiR1yI1RytqMJU28
+	XcM/bJYUrhrznEhh2cSZXja+sAbwDpKNJb3aQ4D0sTLYiuWiMcwCwoX5jm6YEdMmAUbBy3
+	lBYBwgcfS5VQ7/oR4j8BQ6ZGtim3r5nSkjlvkvUDvKoR6j/qMBJBtOK5hH8B9lkC0CAX5k
+	V6UCvJJRbo9EIECrOHAD0nBV2H+rCSJnRxq+NwUsxzL4sNSN86E5uAVfi2+i4w==
 From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
-Date: Fri, 11 Sep 2026 20:48:10 +0200
-Subject: [PATCH v3 8/9] mfd: cgbc: Add virtual storage devices on the
- virtual I2C bus
+Date: Fri, 11 Sep 2026 20:48:08 +0200
+Subject: [PATCH v3 6/9] i2c: cgbc: Add support for fixed frequency buses
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -45,7 +44,7 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260911-cgbc-i2c-storage-devices-support-v3-8-594b53fbc5ea@bootlin.com>
+Message-Id: <20260911-cgbc-i2c-storage-devices-support-v3-6-594b53fbc5ea@bootlin.com>
 References: <20260911-cgbc-i2c-storage-devices-support-v3-0-594b53fbc5ea@bootlin.com>
 In-Reply-To: <20260911-cgbc-i2c-storage-devices-support-v3-0-594b53fbc5ea@bootlin.com>
 To: Lee Jones <lee@kernel.org>, Andi Shyti <andi.shyti@kernel.org>
@@ -56,203 +55,95 @@ Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 X-Mailer: b4 0.16.0
 X-Last-TLS-Session-Version: TLSv1.3
 
-Add support for virtual storage devices exposed by the Board Controller
-on its virtual I2C bus. There are two device types: EEPROM for persistent
-storage and RAM for non-persistent storage:
-- Secure Data EEPROM  (64 bytes, RO): static and dynamic board info
-- BIOS EEPROM         (32 bytes, RW): reserved for BIOS applications
-- BC EEPROM           (32 bytes, RO): Board Controller operational params
-- User EEPROM         (32 bytes, RW): user applications
-- BIOS RAM            (32 bytes, RW): reserved for BIOS applications
-- BC RAM               (8 bytes, RO): Board Controller operational params
-- User RAM            (16 bytes, RW): user applications
-
-Use the at24 driver with the 24c01 entry (the most generic one) for all
-virtual storage devices, customizing parameters via software_node
-properties (size, pagesize, read-only flag, label).
+Some I2C buses run at a fixed frequency. Add a fixed_freq flag to struct
+cgbc_i2c_platform_data to identify them. But the frequency is still needed
+to compute read_maxtime_us, so split cgbc_i2c_set_frequency() into two
+functions:
+- cgbc_i2c_set_frequency(): sets the bus frequency (skipped for
+  fixed-frequency busses).
+- cgbc_i2c_get_frequency(): reads the bus frequency and computes
+  read_maxtime_us.
 
 Signed-off-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
 ---
- drivers/mfd/cgbc-core.c                | 129 +++++++++++++++++++++++++++++++++
- include/linux/platform_data/i2c-cgbc.h |   4 +
- 2 files changed, 133 insertions(+)
+ drivers/i2c/busses/i2c-cgbc.c          | 30 +++++++++++++++++++-----------
+ include/linux/platform_data/i2c-cgbc.h |  2 ++
+ 2 files changed, 21 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
-index 90fa0e657385..097b7309a400 100644
---- a/drivers/mfd/cgbc-core.c
-+++ b/drivers/mfd/cgbc-core.c
-@@ -13,11 +13,13 @@
+diff --git a/drivers/i2c/busses/i2c-cgbc.c b/drivers/i2c/busses/i2c-cgbc.c
+index d388e07aad84..cb0435b3cc5f 100644
+--- a/drivers/i2c/busses/i2c-cgbc.c
++++ b/drivers/i2c/busses/i2c-cgbc.c
+@@ -129,7 +129,6 @@ static int cgbc_i2c_set_frequency(struct i2c_adapter *adap,
+ 	struct cgbc_i2c_data *i2c = i2c_get_adapdata(adap);
+ 	struct cgbc_device_data *cgbc = i2c->cgbc;
+ 	u8 cmd[2], data;
+-	int ret;
  
- #include <linux/dmi.h>
- #include <linux/iopoll.h>
-+#include <linux/i2c.h>
- #include <linux/mfd/cgbc.h>
- #include <linux/mfd/core.h>
- #include <linux/module.h>
- #include <linux/platform_data/i2c-cgbc.h>
- #include <linux/platform_device.h>
-+#include <linux/property.h>
- #include <linux/sysfs.h>
+ 	if (bus_frequency > CGBC_I2C_FREQ_MAX_HZ ||
+ 	    bus_frequency < CGBC_I2C_FREQ_MIN_HZ) {
+@@ -140,18 +139,21 @@ static int cgbc_i2c_set_frequency(struct i2c_adapter *adap,
+ 	cmd[0] = CGBC_I2C_CMD_SPEED | i2c->bus_id;
+ 	cmd[1] = cgbc_i2c_freq_to_reg(bus_frequency);
  
- #define CGBC_IO_SESSION_BASE	0x0E20
-@@ -56,6 +58,131 @@
+-	ret = cgbc_command(cgbc, &cmd, sizeof(cmd), &data, 1, NULL);
+-	if (ret)
+-		return dev_err_probe(i2c->dev, ret,
+-				     "Failed to initialize I2C bus %s",
+-				     adap->name);
++	return cgbc_command(cgbc, &cmd, sizeof(cmd), &data, 1, NULL);
++}
  
- static struct platform_device *cgbc_pdev;
+-	cmd[1] = 0x00;
++static int cgbc_i2c_get_frequency(struct i2c_adapter *adap)
++{
++	struct cgbc_i2c_data *i2c = i2c_get_adapdata(adap);
++	struct cgbc_device_data *cgbc = i2c->cgbc;
++	u8 cmd[2] = { CGBC_I2C_CMD_SPEED | i2c->bus_id };
++	unsigned int bus_frequency;
++	u8 data;
++	int ret;
  
-+static const struct property_entry cgbc_secure_data_eeprom_props[] = {
-+	PROPERTY_ENTRY_U32("size", 64),
-+	PROPERTY_ENTRY_U32("pagesize", 1),
-+	PROPERTY_ENTRY_BOOL("read-only"),
-+	PROPERTY_ENTRY_STRING("label", "cgbc-secure-data-eeprom"),
-+	{ }
-+};
-+
-+static const struct software_node cgbc_secure_data_eeprom_node = {
-+	.properties = cgbc_secure_data_eeprom_props,
-+};
-+
-+static const struct property_entry cgbc_bc_eeprom_props[] = {
-+	PROPERTY_ENTRY_U32("size", 32),
-+	PROPERTY_ENTRY_U32("pagesize", 1),
-+	PROPERTY_ENTRY_BOOL("read-only"),
-+	PROPERTY_ENTRY_STRING("label", "cgbc-bc-eeprom"),
-+	{ }
-+};
-+
-+static const struct software_node cgbc_bc_eeprom_node = {
-+	.properties = cgbc_bc_eeprom_props,
-+};
-+
-+static const struct property_entry cgbc_user_eeprom_props[] = {
-+	PROPERTY_ENTRY_U32("size", 32),
-+	PROPERTY_ENTRY_U32("pagesize", 1),
-+	PROPERTY_ENTRY_STRING("label", "cgbc-user-eeprom"),
-+	{ }
-+};
-+
-+static const struct software_node cgbc_user_eeprom_node = {
-+	.properties = cgbc_user_eeprom_props,
-+};
-+
-+static const struct property_entry cgbc_bios_eeprom_props[] = {
-+	PROPERTY_ENTRY_U32("size", 32),
-+	PROPERTY_ENTRY_U32("pagesize", 1),
-+	PROPERTY_ENTRY_STRING("label", "cgbc-bios-eeprom"),
-+	{ }
-+};
-+
-+static const struct software_node cgbc_bios_eeprom_node = {
-+	.properties = cgbc_bios_eeprom_props,
-+};
-+
-+static const struct property_entry cgbc_bc_ram_props[] = {
-+	PROPERTY_ENTRY_U32("size", 8),
-+	PROPERTY_ENTRY_U32("pagesize", 1),
-+	PROPERTY_ENTRY_BOOL("read-only"),
-+	PROPERTY_ENTRY_STRING("label", "cgbc-bc-ram"),
-+	{ }
-+};
-+
-+static const struct software_node cgbc_bc_ram_node = {
-+	.properties = cgbc_bc_ram_props,
-+};
-+
-+static const struct property_entry cgbc_user_ram_props[] = {
-+	PROPERTY_ENTRY_U32("size", 16),
-+	PROPERTY_ENTRY_U32("pagesize", 1),
-+	PROPERTY_ENTRY_STRING("label", "cgbc-user-ram"),
-+	{ }
-+};
-+
-+static const struct software_node cgbc_user_ram_node = {
-+	.properties = cgbc_user_ram_props,
-+};
-+
-+static const struct property_entry cgbc_bios_ram_props[] = {
-+	PROPERTY_ENTRY_U32("size", 32),
-+	PROPERTY_ENTRY_U32("pagesize", 1),
-+	PROPERTY_ENTRY_STRING("label", "cgbc-bios-ram"),
-+	{ }
-+};
-+
-+static const struct software_node cgbc_bios_ram_node = {
-+	.properties = cgbc_bios_ram_props,
-+};
-+
-+static const struct i2c_board_info cgbc_i2c_i2cv_board_info[] = {
-+	{
-+		.type = "24c01",
-+		.addr = 0x40,
-+		.dev_name = "cgbc-secure-data-eeprom",
-+		.swnode = &cgbc_secure_data_eeprom_node,
-+	},
-+	{
-+		.type = "24c01",
-+		.addr = 0x48,
-+		.dev_name = "cgbc-bc-eeprom",
-+		.swnode = &cgbc_bc_eeprom_node,
-+	},
-+	{
-+		.type = "24c01",
-+		.addr = 0x50,
-+		.dev_name = "cgbc-user-eeprom",
-+		.swnode = &cgbc_user_eeprom_node,
-+	},
-+	{
-+		.type = "24c01",
-+		.addr = 0x58,
-+		.dev_name = "cgbc-bios-eeprom",
-+		.swnode = &cgbc_bios_eeprom_node,
-+	},
-+	{
-+		.type = "24c01",
-+		.addr = 0x60,
-+		.dev_name = "cgbc-bc-ram",
-+		.swnode = &cgbc_bc_ram_node,
-+	},
-+	{
-+		.type = "24c01",
-+		.addr = 0x68,
-+		.dev_name = "cgbc-user-ram",
-+		.swnode = &cgbc_user_ram_node,
-+	},
-+	{
-+		.type = "24c01",
-+		.addr = 0x70,
-+		.dev_name = "cgbc-bios-ram",
-+		.swnode = &cgbc_bios_ram_node,
+ 	ret = cgbc_command(cgbc, &cmd, sizeof(cmd), &data, 1, NULL);
+ 	if (ret)
+-		return dev_err_probe(i2c->dev, ret,
+-				     "Failed to get I2C bus frequency");
++		return ret;
+ 
+ 	bus_frequency = cgbc_i2c_reg_to_freq(data);
+ 
+@@ -359,9 +361,15 @@ static int cgbc_i2c_probe(struct platform_device *pdev)
+ 	i2c_set_adapdata(&i2c->adap, i2c);
+ 	platform_set_drvdata(pdev, i2c);
+ 
+-	ret = cgbc_i2c_set_frequency(&i2c->adap, I2C_MAX_STANDARD_MODE_FREQ);
++	if (!pdata->fixed_freq) {
++		ret = cgbc_i2c_set_frequency(&i2c->adap, I2C_MAX_STANDARD_MODE_FREQ);
++		if (ret)
++			return dev_err_probe(dev, ret, "Failed to set I2C bus frequency");
 +	}
-+};
 +
- static const struct cgbc_i2c_platform_data cgbc_i2c_i2c0_pdata = {
- 	.name = "cgbc-i2c0",
- 	.cgbc_bus_id = 0,
-@@ -70,6 +197,8 @@ static const struct cgbc_i2c_platform_data cgbc_i2c_i2cv_pdata = {
- 	.name  = "cgbc-i2cv",
- 	.cgbc_bus_id = 3,
- 	.fixed_freq = true,
-+	.devices = cgbc_i2c_i2cv_board_info,
-+	.nb_devices = ARRAY_SIZE(cgbc_i2c_i2cv_board_info),
- };
++	ret = cgbc_i2c_get_frequency(&i2c->adap);
+ 	if (ret)
+-		return ret;
++		return dev_err_probe(i2c->dev, ret, "Failed to get I2C bus frequency");
  
- static const struct mfd_cell cgbc_devs[] = {
+ 	return i2c_add_numbered_adapter(&i2c->adap);
+ }
 diff --git a/include/linux/platform_data/i2c-cgbc.h b/include/linux/platform_data/i2c-cgbc.h
-index 224926c12070..5f20503ce858 100644
+index 4465e8a7b40e..224926c12070 100644
 --- a/include/linux/platform_data/i2c-cgbc.h
 +++ b/include/linux/platform_data/i2c-cgbc.h
-@@ -14,11 +14,15 @@
+@@ -13,10 +13,12 @@
+  * struct cgbc_platform_data - Platform data of the CGBC I2C driver
   * @name:		I2C adapter name
   * @cgbc_bus_id:	I2C bus ID (from Board Controller point of view)
-  * @fixed_freq:		I2C bus has a fixed frequency
-+ * @nb_devices:		number of devices to add when the driver is probed
-+ * @devices:		devices to add
++ * @fixed_freq:		I2C bus has a fixed frequency
   */
  struct cgbc_i2c_platform_data {
  	const char *name;
  	int cgbc_bus_id;
- 	bool fixed_freq;
-+	int nb_devices;
-+	struct i2c_board_info const *devices;
++	bool fixed_freq;
  };
  
  #endif /* _LINUX_I2C_CGBC_H */
