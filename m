@@ -1,54 +1,52 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02F393F104F
-	for <mfd@lists.linux.dev>; Fri, 11 Sep 2026 18:57:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 346D83630A5
+	for <mfd@lists.linux.dev>; Fri, 11 Sep 2026 18:58:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789153051; cv=none; b=o6u2kHDWjVg63n4BhSBvLYZRpRZbJDUiMk6muyWrvCpGaUfv/8S//GMyt+RegZxE0JWv3qJU+JLl4gYbM+M+L/+vSUslUEvwkp9+6PU8J/tFegNfll8SIxmL/w9yJBZ40ulFPz3BWEulEFQYzjhPqSUTCFUiZcJIvDyNx04JjTk=
+	t=1789153122; cv=none; b=aHmSGnPzejx9eHdETQS+lopTHhRE3IwACLWJ0laBz9hSxEAfKA6QrgyTSzQFK7RuuO6tnkWAHlOGWyOtnUcEKaM7GocSHenQNn1BXvVaYWA7wvv63sRekRASilO7Xclr/klVgUlqf8kABLQ/EL5YFG28DhyCdSXT+zRBQ9gxCdk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789153051; c=relaxed/simple;
-	bh=J2WjtCoUAeJzLBtGDHgO4mitDjgkIP9caolZTit2Djs=;
+	s=arc-20240116; t=1789153122; c=relaxed/simple;
+	bh=Vvon+tB2kHW4CuE1GnpTbhtKCjOX+tKxLfXp+sIVEYw=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=ADhuVevviBvHSUblVH7avyuNf2E2osQ1geg5GMF7WAdpvy59hC8sfEL91EFnbtjGL2xRxwEdsUsfw3LDPS3WQ4K4CTzrwRvye5VqWElH5LZ8+AEeziBiibLM7aKwPyOHus/MX2lXkz7Ke6wpa1Bt5FOzGFdi9qFIaNP0xo+CF6w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WS6s79XX; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=IM2Er5jser2IT18AqYjVx0qoHa60Xf7NG1JBvJbQQKuK12by6/mZwZwcvR4UIH6InZ9NU9yy35FxB7NRQd7NT4gjUfgs32EJPQQ9xkJvGOqd4gRH+iUAf9JkoK4UZdxB7bFYR8oMGUOkHNCLjqa/utvHBQFZsRPR1lfGq6M2XS8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Uj2mazlt; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WS6s79XX"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 798D81F00893;
-	Fri, 11 Sep 2026 18:57:29 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Uj2mazlt"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 579DC1F000FF;
+	Fri, 11 Sep 2026 18:58:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789153049;
-	bh=J2WjtCoUAeJzLBtGDHgO4mitDjgkIP9caolZTit2Djs=;
+	s=k20260515; t=1789153120;
+	bh=Vvon+tB2kHW4CuE1GnpTbhtKCjOX+tKxLfXp+sIVEYw=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=WS6s79XXlvFtIimVL4ijbDw/FTmUIe0Ud9wiOdowCfpAC1MG9OnsDFQHkMGQBnTSq
-	 iWNuxm4CQ7Ksp2Id/QuJL/goEfbATuVbx3KBMULpV6lZ53HFKq9rKhc1+YdX064Slb
-	 MToFC1pD+UhGnEcdjgsRmwgVPx9gQJ89PEvvJ3V/XhKxArK1yjVlt6n/8KCqn2RZhy
-	 gmtYLun1l6BpShJwYM7uWsqadC+uoJtuH99WHBj+OSXjW/aPuWrfobKOV+Sy3ntGDO
-	 QVfFA9A4cN+6Q160nqv9IsTtXBiRqSiCkUwpytVr41Hs+0kFKbFmOuOCH+ykYqxs0/
-	 6Mkd6YntQLrcg==
+	b=Uj2mazlt4/00Os7lFyoNpFeXov1NCpVMrIuCLbqf+Kk8w+Pk9l2za7R3ciIiVn8nG
+	 H1W99/tuv7xUx/F8pnZqPItJ8oXLPjyhtzQ0u3Fu/5Al9dwN/SiT4K6ITEHVm9tnMk
+	 DI4LDsbGmAuN7WUgWM7kG2ASBHWb1Xv7bdw8IMEXCI8V17nI2P9rEfOJdzavLSAcIH
+	 JyDrzCQn0wdcELfSnf0YNYraUlkIAqOmDP9+cmc4cEzfBu8nghc6BfgHPnzbZ8vMES
+	 qsZnCB+TG7+sHLyEHhe/lCrx5yRexhjK9ukpmipNl4Zy+XIOV1WpaHjf+0HaeEJLMI
+	 GTKyQU241yZaA==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 4/9] mfd: cgbc: Use PLATFORM_DEVID_AUTO for child
- device registration
+Subject: Re: [PATCH v3 7/9] mfd: cgbc: Add virtual I2C bus support
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?VGhvbWFzIFJpY2hhcmQgKGNvbmdhdGVjIEdtYkgp?= <thomas.richard@bootlin.com>
-Cc: lee@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260911-cgbc-i2c-storage-devices-support-v3-4-594b53fbc5ea@bootlin.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20260911-cgbc-i2c-storage-devices-support-v3-7-594b53fbc5ea@bootlin.com>
 References: <20260911-cgbc-i2c-storage-devices-support-v3-0-594b53fbc5ea@bootlin.com>
- <20260911-cgbc-i2c-storage-devices-support-v3-4-594b53fbc5ea@bootlin.com>
+ <20260911-cgbc-i2c-storage-devices-support-v3-7-594b53fbc5ea@bootlin.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Fri, 11 Sep 2026 18:57:29 +0000
-Message-Id: <20260911185729.798D81F00893@smtp.kernel.org>
+Date: Fri, 11 Sep 2026 18:58:39 +0000
+Message-Id: <20260911185840.579DC1F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-> Since parameters are now passed to the i2c-cgbc driver via platform
-> data, the I2C driver no longer depends on the platform device ID to probe
-> the correct I2C buses. Drop the hardcoded cell ID in favor of
-> PLATFORM_DEVID_AUTO.
+> Internally the Board Controller has a virtual I2C bus with some virtual
+> storage devices (EEPROM and RAM). So add a new I2C cell for this I2C
+> virtual bus.
 >=20
 > Signed-off-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
 
@@ -56,5 +54,5 @@ Sashiko has reviewed this patch and found no issues. It looks great!
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260911-cgbc-i2c-s=
-torage-devices-support-v3-0-594b53fbc5ea@bootlin.com?part=3D4
+torage-devices-support-v3-0-594b53fbc5ea@bootlin.com?part=3D7
 
