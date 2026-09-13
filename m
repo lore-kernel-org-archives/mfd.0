@@ -1,142 +1,222 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from flow-b6-smtp.messagingengine.com (flow-b6-smtp.messagingengine.com [202.12.124.141])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 884CF285061
-	for <mfd@lists.linux.dev>; Sun, 13 Sep 2026 02:22:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9196B346E75;
+	Sun, 13 Sep 2026 08:34:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.12.124.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789266167; cv=none; b=J0ZBomOGSAPjazKO4fnUBqPEUQTxlaiGwlah7QtRbST+Ypnq25XsWFb65ydMkHpdGQrxugJDqMW7PXZ1Z+upOo4gDJyHlG4LrotG5qUaks/FAiT5eJsyN2vJKvB1mteObUVXHImSa7H52YNlQqieuyhQ61uk/M5xZebdec3qqPY=
+	t=1789288442; cv=none; b=mi/w+u1U5tgXxTTUXo5UADoDVSmauzlgdvdlINuK6lYX7YFivM1iBmq44Xz9OU6NW8MdL9YDPL4sHDnaBRwi04owTFjbJTk1eT11cp0yHsoIDNSmGCxaeydyltXOSq+AoN6j6yqkwQFOLfr2biq6Uyex9HLGvww7dTHIqZf99V4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789266167; c=relaxed/simple;
-	bh=22wu3d85jazbKAfsv2+pTlCsMqZpmKb3p9rkB8FsfFg=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=AuJ2ewP0pb+YoA5JMn9lq6oYKnOR+0M2K1IPi3jzxirzEWzYnPTk1HMyLzOPwfG8vCaqzMD8XcYybOzFYzNh4BD4qQlDyW4Sm8pWRFbI5jJtTSV28AiZHXPWBjTxaJq8vhXX2h+Uf+vjhlczZLYJiIhGjEL8/V4hsFf9mE666ek=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FYpPVYgI; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789288442; c=relaxed/simple;
+	bh=l21u1VfuTUk80ee1/KqRN/TTYww9xGQuE4vEMp/bBy0=;
+	h=MIME-Version:Date:From:To:Cc:Message-Id:In-Reply-To:References:
+	 Subject:Content-Type; b=gXe7AdxiTcAi1Lblvu+dQubTAAhvLtEzDz5k3udGAxhmGpbj4i4zmTs9Mu5+uUgui9PYUCcAfkr8WSRvj0f5S0mBO1oOFsL4YlFhqOOXlS9bya9n9wytsV3NreIS9ho+Bp+H0gqxFkLgINZD2rDfUWJK8/k3shQ1XrLmtFd8Bv4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arndb.de; spf=pass smtp.mailfrom=arndb.de; dkim=pass (2048-bit key) header.d=arndb.de header.i=@arndb.de header.b=hP4uSJGU; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=nvm4EGrz; arc=none smtp.client-ip=202.12.124.141
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arndb.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arndb.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FYpPVYgI"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D802B1F000FF;
-	Sun, 13 Sep 2026 02:22:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789266166;
-	bh=Lyqnh9VgfuHS3AhRGiUd7PQo0VezoCv0QYFIZSffeqs=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=FYpPVYgIVWAWNmZV9PW6fqhf4Bgbo6qB/ryHEPQJuKWq6HFawyO+V1Nf1AkufevRH
-	 gZ5lnB1eJwlDlmWZ9JKyELi8r898N3e3VCK2Hy8qBNC9kN8bzn87EJm/cfBSSYAeg8
-	 wZTnOk7yEP9E46QwKWlWmE9f8rZE0Pl/0MMY9J4Z3K17YSm9QsviAthN1c2RIDpMRO
-	 Oanwl5qKZsDHVmj06uhSEYGafJ+JyU9v57c2iAXrCgvqvkw9WbIdAB5XzTkYsgXnwf
-	 VGxzYypl3wkDB5sb3Xvofyycf0miAuo5lRXNS0xJlEj5Am7ZsPz18KfGlYlzXQTTHm
-	 gedU17Nvz0tsQ==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH] mfd: da9150: balance IRQ wake on teardown
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Myeonghun Pak" <mhun512@gmail.com>
-Cc: lee@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260913021420.60344-1-mhun512@gmail.com>
-References: <20260913021420.60344-1-mhun512@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Sun, 13 Sep 2026 02:22:45 +0000
-Message-Id: <20260913022245.D802B1F000FF@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=arndb.de header.i=@arndb.de header.b="hP4uSJGU";
+	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="nvm4EGrz"
+Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
+	by mailflow.stl.internal (Postfix) with ESMTP id 3F049130010C;
+	Sun, 13 Sep 2026 04:33:55 -0400 (EDT)
+Received: from ams-imap-03 ([10.64.2.23])
+  by ams-compute-02.internal (MEProxy); Sun, 13 Sep 2026 04:33:59 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm3; t=1789288434;
+	 x=1789295634; bh=FK/hgn5ztNrzJ8FzxNsGVH8sTakZzoGmnSB/QJ0ZjK4=; b=
+	hP4uSJGU4LPNyh7tNOFYiOwyUhoJjvn+rtx/gV1jNxsXli24Yj4H9OHWbSCUCOYp
+	1LmeKkR/FDUTxfeVUcR3PW6hzHXaeKbqkwhguEsHXcWXM+EqRDq6Mutivw7D6AP7
+	zxcO7/7iOjRUeRDtvmwTdGVJi91XV93oTtX2lrN8t5oAK8MveTvPjOJLHdwKGLDv
+	WDY18MwDH078GeQblDSx50OkW8RYXHIL1Py1DTJXQ6l5yXDv8UpvOCwggfr73muh
+	tjWCnmei/4Ederp7aq+6q9XhHyjG3orbvr7iO3P4pOWy80p3tGPWWzvPjFz6Xoj/
+	l/E+uRa80heywM28ZQPbng==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1789288434; x=
+	1789295634; bh=FK/hgn5ztNrzJ8FzxNsGVH8sTakZzoGmnSB/QJ0ZjK4=; b=n
+	vm4EGrz4F6jR5JXE4wigJ8Ry7JX5M0AcC921ZlsuVqc/YpoeL8SAT+tKWa33nB0T
+	ZjwnZB7JaKQBbZtda19Ii6izZqboxNE1agBJILSQAvcaL8wIdNQhGx6H6fTk7CiJ
+	9DNwc7XlhvV+mMoGxebUGze3s1kX5uyoEPunC4jlIgaJyiyTX4Sbb7UtBOpcgTkm
+	GA9daUeYKwy5LcIt5VDo8mzbeUuePrI+JBZLjzF/J2KeYkeu+nmvT4YELvXjrCdX
+	MgxF8P55rsqI0lTOj9w6JBgCin8AMz9HlCAbF/Hl/i9h5rN/siDdaojxzhTnkeU0
+	a5HBpRoQJPWwTY7SPsEjQ==
+X-ME-Sender: <xms:6V-mapGAWvvTCYmPsF0gHXxbEy2q1VIUbPN28RqMGUUZtzTOrnEvuA>
+    <xme:6V-mapLXRXStV_91mp4cNlBE7UDv4i1YnLRZiVf3ZoCTB1V3wH1kzPlEqS463DWcH
+    jBKPFdmoJWdTPPrTaq2cSmCN-or1svTLHlOTE8BeqZQDBbr6-RKxf_M>
+X-ME-Proxy-Cause: dmFkZTFlVhM1xA9XUYL3SefhQrC0hRhFkTaBBJIQ3su2kNz4MfZ3F028vj/UpSaZ9vtqdo
+    wovmypaSI/+/Azrkn02Yb8tOmVCj78ufH0HthXhTBRf6WeFoUXig393+d5/MfEq2pSRnyw
+    LvkfDeXAZA0b/j/z/1yiQhabfROQmtQB7KcVHYhL5U/1ONNfzRfrULV/TAUFjNOKXvZqHU
+    1d3D75czeqAluQHI4FwbSCqywRuOSl2dbfCEwiQwzFVuJIGYTmYp+6BhJS/cWlHc13mRMu
+    JCF4bc/fUM2PhFgmF6DfLis1vMU0ddqwu1kq89fIC1RtR0wlPT1taz0+6qP2fokAV623EC
+    7WvNLhWl3kVw2NxV4IcXin9Y98/yDUmwATW+ikygGBZJ6YYQmvcBkxJjwY6s1s0lBnkurW
+    dgFHyjPldyFsZBx8c3uSdH5l15d1REZen5gyrGPU1HE169zMMgo3KEmBEUmtacwkM75/YY
+    grwFCl6KM0Bz9faJrynux+UReF8cohlyDGeVV9rTC5y20vL4mU3p+bx1hfEaXHZ84F3XO2
+    v2UOS2mSdQ64QMhfWRfWITFHODS475vwD85qi+Wj3j/4MpFov5LCO3ZCpCX0NoG23iGgHA
+    cDtOhMrnZ/x93jpFr/xtrmhKYEtASmslgyDXrwp3akV21xiDzYSAeZt4Xing
+X-ME-Proxy: <xmx:7l-marCsxWSQh7GyHEJQeExs04vUHwGvSpX6l3ZVDsiTwMGzIFCPpg>
+    <xmx:7l-mamy6bQq8k5lrbzz61NVzb-U8lzuLCWChRPmqZFuL-W1-V1RBnA>
+    <xmx:7l-mapO3Ea7pdRgQSbEG743m78cgcMsUglEvHhQP6eVdBbbYwVXaDw>
+    <xmx:7l-matdXxH-1ltZbtCG0gBd_mR1zKSCO473ThhfLCbYY-V19IRKADw>
+    <xmx:8l-maj_96L_YD-vKCf9QRDIxzcji6jyg1fRDZfFt7ZuAErCOtrULUMr4>
+Feedback-ID: i56a14606:Fastmail
+Received: by mailuser.ams.internal (Postfix, from userid 501)
+	id DB07132A007E; Sun, 13 Sep 2026 04:33:44 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+X-ThreadId: AK-jVwBtQCQR
+Date: Sun, 13 Sep 2026 10:33:04 +0200
+From: "Arnd Bergmann" <arnd@arndb.de>
+To: "Jonathan Cameron" <jic23@kernel.org>
+Cc: "Svyatoslav Ryhel" <clamor95@gmail.com>,
+ "Arnd Bergmann" <arnd@kernel.org>,
+ "Alexandre Belloni" <alexandre.belloni@bootlin.com>,
+ "Bartosz Golaszewski" <brgl@kernel.org>,
+ "Mark Brown" <broonie@kernel.org>, "Conor Dooley" <conor+dt@kernel.org>,
+ "Daniel Thompson" <danielt@kernel.org>, "Helge Deller" <deller@gmx.de>,
+ devicetree@vger.kernel.org,
+ "Dmitry Torokhov" <dmitry.torokhov@gmail.com>,
+ dri-devel@lists.freedesktop.org, "Jingoo Han" <jingoohan1@gmail.com>,
+ "Krzysztof Kozlowski" <krzk+dt@kernel.org>, "Lee Jones" <lee@kernel.org>,
+ "Liam Girdwood" <lgirdwood@gmail.com>,
+ "Linus Walleij" <linusw@kernel.org>,
+ linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+ linux-fbdev@vger.kernel.org,
+ "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
+ linux-hwmon@vger.kernel.org, linux-iio@vger.kernel.org,
+ linux-input@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-leds@vger.kernel.org, linux-media@vger.kernel.org,
+ linux-pm@vger.kernel.org, linux-rtc@vger.kernel.org,
+ linux-sound@vger.kernel.org, linux-watchdog@vger.kernel.org,
+ "Guenter Roeck" <linux@roeck-us.net>, linuxppc-dev@lists.ozlabs.org,
+ llvm@lists.linux.dev, "Mauro Carvalho Chehab" <mchehab@kernel.org>,
+ mfd@lists.linux.dev, "Michael Hennerich" <michael.hennerich@analog.com>,
+ patches@opensource.cirrus.com, "Pavel Machek" <pavel@kernel.org>,
+ "Rob Herring" <robh@kernel.org>, "Sebastian Reichel" <sre@kernel.org>,
+ "Support Opensource" <support.opensource@diasemi.com>
+Message-Id: <e53ae695-99ed-4f14-855b-b922a938438c@app.fastmail.com>
+In-Reply-To: <20260912232047.19c4cb10@jic23-hlaptop>
+References: 
+ <CAPVz0n0ryOns2sCJE_jFana9MVzwEj1QZuPEa8FNhGbHXnMB+A@mail.gmail.com>
+ <11652e5e-053e-45b0-98a0-0c1cb2aeedc4@app.fastmail.com>
+ <20260912232047.19c4cb10@jic23-hlaptop>
+Subject: Re: [PATCH 08/14] mfd: remove unused aat2870 driver
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
-s) to consider:
+On Sun, Sep 13, 2026, at 00:20, Jonathan Cameron wrote:
+> On Thu, 10 Sep 2026 20:14:15 +0200 "Arnd Bergmann" <arnd@arndb.de> wrote:
+>> 
+>> I tried to be careful about figuring out exactly which drivers are
+>> unused, but I'm sure there are still a few false positive and false
+>> negative ones in there. I've added the current list of driver files below,
+>> let me know if you see something that shouldn't be there.
+> Hi Arnd
+>
+> For I2C and SPI at least, there doesn't need to be explicit
+> device tree support as long as they have defaults when platform
+> data isn't there. Those two buses will happily bind based on
+> a dt-compatible and their i2c_device_id or spi_device_id tables
+> for example.
+>
+> So unless they fail to probe (some might?) we don't have
+> a clear signal on whether they are in use via DT or not.
+>
+> For vast majority of IIO drivers we don't have an upstream
+> DTS as there is no clear motivation for anyone to upstream
+> the dts for a random industrial control board or similar.
 
-New issues:
-- [Low] The commit message description is not capitalized, violating the MF=
-D subsystem guidelines.
+Right, that was my general rule, if I had tried to remove
+all drivers that could plausibly probe with an external dtb
+but have no internal users, that would have easily doubled
+the 300 patches I already did.
 
-Pre-existing issues:
-- [High] The global static mfd_cell array `da9150_devs` is not const and is=
- dynamically modified during probe, violating MFD guidelines and introducin=
-g data races/state corruption.
-- [High] `da9150_reg_read()` returns an uninitialized value on `regmap_read=
-()` failure, which is then used to compute an I2C device address.
---
+>> drivers/iio/adc/ad7266.c
+> No to dropping this.
+>
+>
+>> drivers/iio/adc/ad7791.c
+> No to dropping this one.
+>
+>> drivers/iio/adc/ad7793.c
+> Maybe. Analog devices ack needed.
+>
+> Production part but this one indeed fails to probe.  Analog
+> folk, do you want to fix this one up?
+>
+>> drivers/iio/adc/ad7887.c
+> No to dropping this.
+>
+> Production part - should work fine with defaults in driver.
+> Could like the others drop the platform data handling.
 
-commit e761f00f1bf078aef3d54fe1deeb793b0138ed73
-Author: Myeonghun Pak <mhun512@gmail.com>
+This was one patch that I wasn't sure about myself (all four
+drivers together) since it looks like even when they do probe
+from dtb, the feature set would be limited without a DT
+binding, and they have been in the tree for a rather long time
+without users.
 
-mfd: da9150: balance IRQ wake on teardown
+I've dropped the patch now. I looked at dropping the platform_data
+handling, but I think that only makes sense if we get a
+proper DT binding first.
 
-This commit ensures that IRQ wake is properly disabled on probe failure or
-driver removal if it was successfully enabled. It prevents wake depth
-imbalance by tracking the success of enable_irq_wake.
+>> drivers/iio/adc/lp8788_adc.c
+> Probably
+>
+> Sub driver of an MFD.  I'm fine with that going if we know
+> the mfd is no longer in use.
 
-> mfd: da9150: balance IRQ wake on teardown
+Ok, I posted that one as
+https://lore.kernel.org/all/20260909132153.1596191-8-arnd@kernel.org/
 
-[Severity: Low]
-This isn't a bug, but MFD subsystem guidelines require the commit descripti=
-on
-to be capitalized. Should the subject line be formatted as mfd: da9150:
-Balance IRQ wake on teardown?
+and so far, everyone agreed on removing it.
 
-> diff --git a/drivers/mfd/da9150-core.c b/drivers/mfd/da9150-core.c
-> index 5c59cc869fb3e..d91d419fea663 100644
-> --- a/drivers/mfd/da9150-core.c
-> +++ b/drivers/mfd/da9150-core.c
-> @@ -450,7 +450,8 @@ static int da9150_probe(struct i2c_client *client)
-> =20
->  	da9150->irq_base =3D regmap_irq_chip_get_base(da9150->regmap_irq_data);
-> =20
-> -	enable_irq_wake(da9150->irq);
-> +	if (!enable_irq_wake(da9150->irq))
-> +		da9150->irq_wake_enabled =3D true;
-> =20
->  	ret =3D mfd_add_devices(da9150->dev, -1, da9150_devs,
->  			      ARRAY_SIZE(da9150_devs), NULL,
+>> drivers/iio/adc/lpc18xx_adc.c
+>> drivers/iio/dac/lpc18xx_dac.c
+> Probably
+>
+> Likewise these two.
 
-[Severity: High]
-This is a pre-existing issue, but I noticed da9150_devs is a global array
-that gets dynamically modified during probe:
+Right, this one of course should follow the removal of
+CONFIG_ARCH_LPC18XX in arch/arm/
 
-drivers/mfd/da9150-core.c:da9150_probe() {
-...
-		da9150_devs[DA9150_FG_IDX].platform_data =3D pdata->fg_pdata;
-...
-}
+>> drivers/iio/frequency/ad9523.c
+> Maybe. Analog Devices ack needed.
+>
+> Fails to probe without platform data and marked not recomended
+> for new designs. If we get an Ack from Analog devices folk
+> I'm fine with this one going away.
 
-Does modifying a shared global mfd_cell array during probe corrupt the state
-for all subsequent instances of the device? If a second da9150 device is
-probed without its own platform data, it seems it would incorrectly inherit
-the platform_data assigned to the first device, potentially leading to
-incorrect hardware configuration or use-after-free conditions.
+This matches what I wrote in 
+https://git.kernel.org/pub/scm/linux/kernel/git/soc/soc.git/commit/?id=20c1515b0caec2769c0916d087326f640bfb8aab
 
-[Severity: High]
-This is also a pre-existing issue, but looking earlier in da9150_probe(), it
-uses da9150_reg_read() to get the qif_addr:
+I'll keep the patch in the series and we'll see what the
+maintainers think when I post it.
 
-drivers/mfd/da9150-core.c:da9150_probe() {
-...
-	qif_addr =3D da9150_reg_read(da9150, DA9150_CORE2WIRE_CTRL_A);
-	qif_addr =3D (qif_addr & DA9150_CORE_BASE_ADDR_MASK) >> 1;
-	qif_addr |=3D DA9150_QIF_I2C_ADDR_LSB;
-	da9150->core_qif =3D i2c_new_dummy_device(client->adapter, qif_addr);
-...
-}
+Thanks a lot for taking a look!
 
-If regmap_read() fails inside da9150_reg_read(), it leaves val unassigned:
+I wonder if some of the older Analog drivers were only ever used
+on Blackfin. My series still removes a few more drivers outside
+of iio list that had platform_data in arch/blackfin/ until we
+removed that in 2018. These all fail to probe without
+platform_data, which means they also wouldn't work with the
+downstream adsp-sc5xx/sc8xx port or any other upstream Arm
+platform:
 
-drivers/mfd/da9150-core.c:da9150_reg_read() {
-	int val, ret;
+a4bdf847e0e1 backlight: remove unused adp8860/8870 drivers
+c71829e110e9 Input: touchscreen: remove unused ad7877 driver
+b4d4ca64500b Input: misc: remove unused ad714x driver
+978426a3fe1a usb: remove unused sl811 driver
+0860c9f297c3 mfd: remove unused adp5520 driver
 
-	ret =3D regmap_read(da9150->regmap, reg, &val);
-...
-	return val;
-}
-
-Can this lead to the driver registering a dummy device at an unpredictable
-I2C address derived from an uninitialized stack variable? It seems
-subsequent reads or writes to the QIF interface could target this random
-address, potentially corrupting the state of another hardware device on the
-bus.
-
-[ ... ]
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260913021420.6034=
-4-1-mhun512@gmail.com?part=3D1
+       Arnd
