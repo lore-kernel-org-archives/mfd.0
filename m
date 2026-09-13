@@ -1,151 +1,142 @@
-Received: from mail-qk2-f13.google.com (mail-qk2-f13.google.com [74.125.230.205])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2BAFE30D3EF
-	for <mfd@lists.linux.dev>; Sun, 13 Sep 2026 02:14:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.205
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 884CF285061
+	for <mfd@lists.linux.dev>; Sun, 13 Sep 2026 02:22:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789265671; cv=none; b=ciPW776l0YVXTyUSv5dXy5R+L8nfF8ST0vF2eoUKSj9iYWMfyKFs66sbnp8yhVJSfU1ACOmubYnAthMMiq7H9AWwbJ3oIpGyIo7cxwFiThMyVgK+nP9ECLQ10XAWi8jlNsvel/X65CaItftNTKHJvMa2rIV3r8goDKGbu1rk5hk=
+	t=1789266167; cv=none; b=J0ZBomOGSAPjazKO4fnUBqPEUQTxlaiGwlah7QtRbST+Ypnq25XsWFb65ydMkHpdGQrxugJDqMW7PXZ1Z+upOo4gDJyHlG4LrotG5qUaks/FAiT5eJsyN2vJKvB1mteObUVXHImSa7H52YNlQqieuyhQ61uk/M5xZebdec3qqPY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789265671; c=relaxed/simple;
-	bh=MaAJoU6a7Qyxznv4vcbVvqn1Vtx1/3A0x/k0WpAIyt0=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Gl6UPvslcdfH7Urcjo5k3EFDt5075+dgFgqompo0HxGG/pzLZB2gW2vK24BPjolKu4t+9Xkm3CkFYllEygiBCLVwY8Mq8ugogFQMUo4Cb0+EbJHs9Y4KfZJyGgaq5guRw95mV5dw2MgwJzcqitrrz4pjPK52lkFs9YMIA+cpdag=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=e3vlUjfo; arc=none smtp.client-ip=74.125.230.205
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1789266167; c=relaxed/simple;
+	bh=22wu3d85jazbKAfsv2+pTlCsMqZpmKb3p9rkB8FsfFg=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=AuJ2ewP0pb+YoA5JMn9lq6oYKnOR+0M2K1IPi3jzxirzEWzYnPTk1HMyLzOPwfG8vCaqzMD8XcYybOzFYzNh4BD4qQlDyW4Sm8pWRFbI5jJtTSV28AiZHXPWBjTxaJq8vhXX2h+Uf+vjhlczZLYJiIhGjEL8/V4hsFf9mE666ek=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FYpPVYgI; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="e3vlUjfo"
-Received: by mail-qk2-f13.google.com with SMTP id af79cd13be357-93910cc46c7so64273785a.3
-        for <mfd@lists.linux.dev>; Sat, 12 Sep 2026 19:14:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789265669; x=1789870469; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=3En0YSc2ctcfWFz6P+MWPu/wu8wKVRURedbkaqkB1rw=;
-        b=e3vlUjfofi/1JrjsXRgHERUlaMgwb1P4r3m8/Gz9X3w+4+EY30/4CoFtWSQugljUFe
-         JCklKd6qQTy0Zh7iyYUPsscFDcEGgD9Uyfjp2fzNXFcOuqhBuLqZphA9iJYbO183tg/z
-         OKeDmi6Us8rZ1gJ3EWp27fdSDMxowlb5D8Vi1+BXWBoGsP79/pkSXEJIsc9pzfDLPqkE
-         U1i6/3xK0mnwlBzRcMBa76mzTZ8cFp676zxXq9uZQaJSfyWjoLX9IYpbqrso4mEHigLi
-         LsrigP5TH1hH8rsT/zrBWh64xL18QoJJeTls6bL/mjAIeQMGWtV7Sh/zFI2gVPE8ZbNs
-         4J5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789265669; x=1789870469;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=3En0YSc2ctcfWFz6P+MWPu/wu8wKVRURedbkaqkB1rw=;
-        b=kHsBo4rJxHLriTnJvN0FMGNon1OgjtK3eRt9XNISepARACVvsvmizxP003AOe1swaK
-         7UoZWDB1gnSmsEYiQ67ZnhfPcIBrtOlWUNwXOtcjw7plzVhvZK1HD/AME6X56vxfrpz0
-         HPR8wVq6r0zklqmn/1jpKHSZEFXRkhkJEZb/2HUh8bbULO355smna0AA+nIIl7A4zvrm
-         UBbejSoWT6yQjndXYZaDZz5ZcYl2Z/m3Z2AE38wK17VAQJKDuJQGN9uFWyD0gKGAQUUx
-         g8TbdsxzvOIixkwP1tLay+K/JBYaCQbsDJBYs3s0b1/mtfvQyWv2d5QJ0v2llLDTKzv1
-         FwiQ==
-X-Gm-Message-State: AFuF++mS4zJHgiqZ6GpaUMAbsqeA4VEO5/iHGMGnlxGp5cgsEyYz+poZ
-	66hLCU3qmW+PrTrYecYvBC2rVBAvbufrD3I60OSGv4G8R/dVurGhakM=
-X-Gm-Gg: AYBFou2SnESLclnZW54SDCt3UVD2AfTUK7oMvc+V3YwgdEIR051HYGpEQ8eQbop7dAl
-	ZZvi2FjviqxWh/ZFQt3IH60bx6CcWl0IBS8j7kMIfsNDjaT6gg3o7Kru1DgUuW1SHFsznw1ydqo
-	HNy/szjoqre+2GUXtQ6opvIiUXNFNRbDQZ4dFmDqNHF2XTsMOoeNrlEVb1FTS+pILjDjyvsfuvN
-	7avGCGfxIajBL4WNHi0ElZ08fWqY/ozBcYM8HRU0JvPbA02FS7eXOVZSzS39LmB1cVGCKiJIrPU
-	LCBFFZoYHHg+HNcGmp+7kcE7/pspXo1QUqhn0x67vHh85Wa42wuYnrkKc7znYanfP16jIcTDyEW
-	CmmzrcTRY5lt8W80XI82oZkYKPEnouqFZcXi169oWnGqT0UVvFa9rXX/CrT+r/8GpzfOH4zCvs8
-	kEJOR85u8/VYMewZq1C3QEVmTs63srK9fxWMzwIRXAJ5IMgVP2KGi17Vo+bRdwX+ebA4zGAy6bY
-	z+lYNjFjQED1mMqSSYncz1aBhbAZCqUK9B3ExrScewduWlEcMvRPWVGIB7pWwjpmSq8wLkwU9y8
-	6HHg1JT0Ocv5ymLLJEZIOpJHzuDIQ/arxis3X0Yb1irr
-X-Received: by 2002:a05:620a:288a:b0:939:ede4:a499 with SMTP id af79cd13be357-93a035f328dmr773950285a.5.1789265668929;
-        Sat, 12 Sep 2026 19:14:28 -0700 (PDT)
-Received: from localhost.localdomain ([104.39.73.78])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-939f1dd527asm512943485a.16.2026.09.12.19.14.27
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Sat, 12 Sep 2026 19:14:28 -0700 (PDT)
-From: Myeonghun Pak <mhun512@gmail.com>
-To: Lee Jones <lee@kernel.org>,
-	Support Opensource <support.opensource@diasemi.com>
-Cc: mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	Adam Thomson <Adam.Thomson.Opensource@diasemi.com>,
-	Ijae Kim <ae878000@gmail.com>
-Subject: [PATCH] mfd: da9150: balance IRQ wake on teardown
-Date: Sat, 12 Sep 2026 22:14:20 -0400
-Message-ID: <20260913021420.60344-1-mhun512@gmail.com>
-X-Mailer: git-send-email 2.47.1
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FYpPVYgI"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D802B1F000FF;
+	Sun, 13 Sep 2026 02:22:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789266166;
+	bh=Lyqnh9VgfuHS3AhRGiUd7PQo0VezoCv0QYFIZSffeqs=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=FYpPVYgIVWAWNmZV9PW6fqhf4Bgbo6qB/ryHEPQJuKWq6HFawyO+V1Nf1AkufevRH
+	 gZ5lnB1eJwlDlmWZ9JKyELi8r898N3e3VCK2Hy8qBNC9kN8bzn87EJm/cfBSSYAeg8
+	 wZTnOk7yEP9E46QwKWlWmE9f8rZE0Pl/0MMY9J4Z3K17YSm9QsviAthN1c2RIDpMRO
+	 Oanwl5qKZsDHVmj06uhSEYGafJ+JyU9v57c2iAXrCgvqvkw9WbIdAB5XzTkYsgXnwf
+	 VGxzYypl3wkDB5sb3Xvofyycf0miAuo5lRXNS0xJlEj5Am7ZsPz18KfGlYlzXQTTHm
+	 gedU17Nvz0tsQ==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH] mfd: da9150: balance IRQ wake on teardown
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Myeonghun Pak" <mhun512@gmail.com>
+Cc: lee@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20260913021420.60344-1-mhun512@gmail.com>
+References: <20260913021420.60344-1-mhun512@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Sun, 13 Sep 2026 02:22:45 +0000
+Message-Id: <20260913022245.D802B1F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 
-DA9150 enables IRQ wake after registering its regmap IRQ chip, but does not
-disable it on a later probe failure or driver removal. This leaves the wake
-depth elevated after the handler is removed, and repeated bind attempts can
-accumulate the imbalance.
+Thank you for your contribution! Sashiko AI review found 3 potential issue(=
+s) to consider:
 
-Remember whether enabling IRQ wake succeeded and balance only a successful
-call. Remove MFD children first so their nested IRQ users are gone, then
-disable wake before removing the regmap IRQ chip. Preserve the existing
-non-fatal behavior when IRQ wake cannot be enabled.
+New issues:
+- [Low] The commit message description is not capitalized, violating the MF=
+D subsystem guidelines.
 
-This issue was identified during our ongoing static-analysis research while
-reviewing kernel code.
+Pre-existing issues:
+- [High] The global static mfd_cell array `da9150_devs` is not const and is=
+ dynamically modified during probe, violating MFD guidelines and introducin=
+g data races/state corruption.
+- [High] `da9150_reg_read()` returns an uninitialized value on `regmap_read=
+()` failure, which is then used to compute an I2C device address.
+--
 
-Fixes: b8fce55c09d3 ("mfd: Add support for DA9150 combined charger & fuel-gauge device")
-Assisted-by: OpenAI:GPT-5.6
-Co-developed-by: Ijae Kim <ae878000@gmail.com>
-Signed-off-by: Ijae Kim <ae878000@gmail.com>
-Signed-off-by: Myeonghun Pak <mhun512@gmail.com>
----
- drivers/mfd/da9150-core.c       | 9 +++++++--
- include/linux/mfd/da9150/core.h | 1 +
- 2 files changed, 8 insertions(+), 2 deletions(-)
+commit e761f00f1bf078aef3d54fe1deeb793b0138ed73
+Author: Myeonghun Pak <mhun512@gmail.com>
 
-diff --git a/drivers/mfd/da9150-core.c b/drivers/mfd/da9150-core.c
-index 5c59cc869fb3e..d91d419fea663 100644
---- a/drivers/mfd/da9150-core.c
-+++ b/drivers/mfd/da9150-core.c
-@@ -450,7 +450,8 @@ static int da9150_probe(struct i2c_client *client)
- 
- 	da9150->irq_base = regmap_irq_chip_get_base(da9150->regmap_irq_data);
- 
--	enable_irq_wake(da9150->irq);
-+	if (!enable_irq_wake(da9150->irq))
-+		da9150->irq_wake_enabled = true;
- 
- 	ret = mfd_add_devices(da9150->dev, -1, da9150_devs,
- 			      ARRAY_SIZE(da9150_devs), NULL,
-@@ -463,6 +464,8 @@ static int da9150_probe(struct i2c_client *client)
- 	return 0;
- 
- mfd_fail:
-+	if (da9150->irq_wake_enabled)
-+		disable_irq_wake(da9150->irq);
- 	regmap_del_irq_chip(da9150->irq, da9150->regmap_irq_data);
- regmap_irq_fail:
- 	i2c_unregister_device(da9150->core_qif);
-@@ -474,8 +477,10 @@ static void da9150_remove(struct i2c_client *client)
- {
- 	struct da9150 *da9150 = i2c_get_clientdata(client);
- 
--	regmap_del_irq_chip(da9150->irq, da9150->regmap_irq_data);
- 	mfd_remove_devices(da9150->dev);
-+	if (da9150->irq_wake_enabled)
-+		disable_irq_wake(da9150->irq);
-+	regmap_del_irq_chip(da9150->irq, da9150->regmap_irq_data);
- 	i2c_unregister_device(da9150->core_qif);
- }
- 
-diff --git a/include/linux/mfd/da9150/core.h b/include/linux/mfd/da9150/core.h
-index d116d5f3ef561..369698036d1aa 100644
---- a/include/linux/mfd/da9150/core.h
-+++ b/include/linux/mfd/da9150/core.h
-@@ -65,6 +65,7 @@ struct da9150 {
- 	struct regmap_irq_chip_data *regmap_irq_data;
- 	int irq;
- 	int irq_base;
-+	bool irq_wake_enabled;
- };
- 
- /* Device I/O - Query Interface for FG and standard register access */
--- 
-2.47.1
+mfd: da9150: balance IRQ wake on teardown
 
+This commit ensures that IRQ wake is properly disabled on probe failure or
+driver removal if it was successfully enabled. It prevents wake depth
+imbalance by tracking the success of enable_irq_wake.
+
+> mfd: da9150: balance IRQ wake on teardown
+
+[Severity: Low]
+This isn't a bug, but MFD subsystem guidelines require the commit descripti=
+on
+to be capitalized. Should the subject line be formatted as mfd: da9150:
+Balance IRQ wake on teardown?
+
+> diff --git a/drivers/mfd/da9150-core.c b/drivers/mfd/da9150-core.c
+> index 5c59cc869fb3e..d91d419fea663 100644
+> --- a/drivers/mfd/da9150-core.c
+> +++ b/drivers/mfd/da9150-core.c
+> @@ -450,7 +450,8 @@ static int da9150_probe(struct i2c_client *client)
+> =20
+>  	da9150->irq_base =3D regmap_irq_chip_get_base(da9150->regmap_irq_data);
+> =20
+> -	enable_irq_wake(da9150->irq);
+> +	if (!enable_irq_wake(da9150->irq))
+> +		da9150->irq_wake_enabled =3D true;
+> =20
+>  	ret =3D mfd_add_devices(da9150->dev, -1, da9150_devs,
+>  			      ARRAY_SIZE(da9150_devs), NULL,
+
+[Severity: High]
+This is a pre-existing issue, but I noticed da9150_devs is a global array
+that gets dynamically modified during probe:
+
+drivers/mfd/da9150-core.c:da9150_probe() {
+...
+		da9150_devs[DA9150_FG_IDX].platform_data =3D pdata->fg_pdata;
+...
+}
+
+Does modifying a shared global mfd_cell array during probe corrupt the state
+for all subsequent instances of the device? If a second da9150 device is
+probed without its own platform data, it seems it would incorrectly inherit
+the platform_data assigned to the first device, potentially leading to
+incorrect hardware configuration or use-after-free conditions.
+
+[Severity: High]
+This is also a pre-existing issue, but looking earlier in da9150_probe(), it
+uses da9150_reg_read() to get the qif_addr:
+
+drivers/mfd/da9150-core.c:da9150_probe() {
+...
+	qif_addr =3D da9150_reg_read(da9150, DA9150_CORE2WIRE_CTRL_A);
+	qif_addr =3D (qif_addr & DA9150_CORE_BASE_ADDR_MASK) >> 1;
+	qif_addr |=3D DA9150_QIF_I2C_ADDR_LSB;
+	da9150->core_qif =3D i2c_new_dummy_device(client->adapter, qif_addr);
+...
+}
+
+If regmap_read() fails inside da9150_reg_read(), it leaves val unassigned:
+
+drivers/mfd/da9150-core.c:da9150_reg_read() {
+	int val, ret;
+
+	ret =3D regmap_read(da9150->regmap, reg, &val);
+...
+	return val;
+}
+
+Can this lead to the driver registering a dummy device at an unpredictable
+I2C address derived from an uninitialized stack variable? It seems
+subsequent reads or writes to the QIF interface could target this random
+address, potentially corrupting the state of another hardware device on the
+bus.
+
+[ ... ]
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260913021420.6034=
+4-1-mhun512@gmail.com?part=3D1
