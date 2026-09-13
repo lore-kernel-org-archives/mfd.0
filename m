@@ -1,181 +1,153 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C20813AF2
-	for <mfd@lists.linux.dev>; Sun, 13 Sep 2026 12:46:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C74253515FC;
+	Sun, 13 Sep 2026 12:49:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789303571; cv=none; b=YZoXEul3qbJIIhTg92DovuFYoC2ZL528AXqHP7foSGRWLl9UObqVoKZZvcPl6kEJ59FwE9lvdG627sYRt+HNcb6LRBBQm0ruirKjy9vGeVkbxdOH00bczd/kD4+LbmARiucvN5/vRG7306jtCHurcsf69UFsq3SnQWjQZezm52w=
+	t=1789303762; cv=none; b=VCr5y5KOtZC+j208J5viJhNRBQ9bMk6EwF/Wdpm0YF+Z87P5pzNo8U8+S3Tqb2WgHOy8s2OV4BQjNj+dgLGS3zW3FC+IB0UO4PNOpHfD2psq5YUKPBHFGYTmev3H/KZ9QdZ9Nh8WSs90IhfYp3sWSX201xEeHjrJQZY4kzu2A44=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789303571; c=relaxed/simple;
-	bh=PoAGdQbC5LAJzgOr7ItHzrx69rhy49IX3HHkQldHffs=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=Ppf40XRCdVafsJDwjVrHOWYbJUph1x5ZlNRMbgMdeD5m8EKlrT/oP0rXnVf96w7IIpjMB64nqyTE/otGGST7DZmSkZ32qQ/G4eMxTAxkiEQUAtNBROK9rN/5zXETeruCW3KbmFU3cGKfPIXw2a4sUfZQflM740oY6PRIgRnWrqI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OKljvV2I; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789303762; c=relaxed/simple;
+	bh=L7lV7paqVUnNrUQnDEmuxT7H/Lnd2vr3h0PaghIp8P4=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=H35ipwmDV3TDMPgmk6tI6i6pI2hLRYkPcezvngWJQe+cUEzpjYW99XQ3BwqD6WGAQhmB9Y/VA+0nRv+FITxJePkqnFlkEcFTMY63WCs3egIxSwlihtmrjkQBtbDuHjPSjBdjZ50aQkzqGjZYZhvdbiInIVI7tijR60ekCkeV9Rc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=s/xSkLJa; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OKljvV2I"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3F1E1F000FF;
-	Sun, 13 Sep 2026 12:46:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789303570;
-	bh=oMGvZ3qHVFl7QgG1zoDjMno6gACbuamj6krnHKUXFVg=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=OKljvV2IdEfe5fFK8/MPjqc9jWMdn7swhrnyY19NBPgstmHhKkveLyzfdC+YBR1ec
-	 TG53OHUdM95UqIb2ME3Ohfpug0aKUMSfhjxgeHKKTMEq1g3Mz/N5sx1SarrxYbLF+X
-	 ambygQMnu88wEj50Msff5UFlgBMfMSHzUozQvS2Xg6bRzrU8QvxQmeLnYBdSIZs+TT
-	 E7cNFjQf6pGXSeBcDDalkxQ52LT6TwZ23X1ONvkmHc7Qr/nRC8YwBBoZuTmUJ9t3Bf
-	 b0ftJUTupgWCAgql3z8Lz2BFn43/vncIuP7HhFT6f1j/HocRQO2gSalj57uLlv1Cko
-	 f+nd623/TMy7w==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH] mfd/intel-lpss: Fix DebugFS initialization
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Maria Lisina" <sekoohaka.sarisan@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260913-intel-lpss-debugfs-v1-1-833cbb6fffc9@gmail.com>
-References: <20260913-intel-lpss-debugfs-v1-1-833cbb6fffc9@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Sun, 13 Sep 2026 12:46:09 +0000
-Message-Id: <20260913124609.D3F1E1F000FF@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="s/xSkLJa"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2AF11C2BCC7;
+	Sun, 13 Sep 2026 12:49:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1789303762;
+	bh=L7lV7paqVUnNrUQnDEmuxT7H/Lnd2vr3h0PaghIp8P4=;
+	h=From:Date:Subject:To:Cc:Reply-To:From;
+	b=s/xSkLJaVlF7ObRpaCLNW14Gt5SG1JAf8EJdnm+GrNS+n1SilNYU9zjtrvuLPIQxK
+	 igazhl0eGKRuqJ4VOMmT9O3zyNCItA0HbMkanOc6opkWFDSdAeiqHK36wtJGac1HEA
+	 aNOv5lySEFCiYSgsy+MVD1Xce5NnfRcnp1IdiBm+QpRc/DXcIZkvrQ7h5Jg8JYYVkb
+	 9FCHyKKQ9iUqidKhfJQaKSLI2sJiRXyq7R5IzysTQ5D8cO/Nn2Rt6YKqi2SL+AeVvV
+	 e7TkpxtIRE9rs+9KIKkNYkrYJomUr/tEHY6SKWwQ/23d3/Y7ApAVAJGvHUuQl65WcJ
+	 PSjj3pQirtutQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 047CDC88E66;
+	Sun, 13 Sep 2026 12:49:22 +0000 (UTC)
+From: Maria Lisina via B4 Relay <devnull+sekoohaka.sarisan.gmail.com@kernel.org>
+Date: Sun, 13 Sep 2026 17:49:11 +0500
+Subject: [PATCH v2] mfd/intel-lpss: Fix DebugFS initialization
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260913-intel-lpss-debugfs-v2-1-a1a4faf5cc63@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAMabpmoC/32NSwqDQBAFryK9TgdnBkWzyj3EhY7d2uCPaSMJ4
+ t0z8QBZVsGrd4BSEFJ4JAcE2kVlmSPYWwJ+aOaeULrIYFObp6VxKPNGI46rKnbUvnpWJGaXFWl
+ nbJlBHK6BWN5XtKojD6LbEj7Xx25+9m9uN2iwcM63bc7Mvnz2UyPj3S8T1Od5fgFcEVjmtAAAA
+ A==
+X-Change-ID: 20260913-intel-lpss-debugfs-eff3580d1295
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+ Lee Jones <lee@kernel.org>
+Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
+ Maria Lisina <sekoohaka.sarisan@gmail.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2468;
+ i=sekoohaka.sarisan@gmail.com; h=from:subject:message-id;
+ bh=ObhylMvBLeRGP+c+qG/FbxaQVC32MIujLgILkv2Vqy4=;
+ b=owEBbQKS/ZANAwAKARPrfuqZo5+iAcsmYgBqppvQHgPFedfrDk2pLoPHPjV5eByNXH1CK3RoH
+ U9d2kUS6MqJAjMEAAEKAB0WIQQ8HZKKOdqg5DRiM0sT637qmaOfogUCaqab0AAKCRAT637qmaOf
+ onR5D/9FAEnj5NRceIFDPBYNbMlWBvZXYvf4+Q8Yf/W575f4mH1DfVI9gijvSJ//EEex0TUEuaK
+ QkGjniZ7HNA4guQc09yzNgGtq1nwpOqYBqhfcVVR9FWWE/Hw7JzyXLCxBTdsivgcNJIWD8FHWDl
+ 7ZQJdvo9oyt3+WaumB55pSPX2HfqIRj4kZw0N/nI1sTmmJpo3vSBSlhqjFcRJ82WONjbIRKYInM
+ i+O2UxUPN2EtqI0rSYFCrOPRfMxfZUx4p20LIRteVTDKfozcLH04RiDBIBT/KisnQICj1NIPOSv
+ jUG9AURr/SH3GuOJrLNy30K+lmRDqnZUYGF8FUzXjCrYjCFdI395TunAsyQRzPdtS5E9Ou07XhJ
+ GUjIm1L6jDkGK6MKjnYTnDE/F8KiBMTqZxsMpLUAi8lDgBWCgyINVD6mLIRXzNbvOSJLTE8yhkV
+ m5CEO5TxtstfVntpdWc6xhZE6cLQgqZ3PS3zo/tO634K+whnimVrviwo6O36lDaIiaqqhqt6QmE
+ Ou9sbFeGw0hG8Ygs8t9lF96VVtd+Q6TrPzkOjAiBAJlrQtGWSEBXUQIvZ/ec1jLXvrs90zEva9j
+ boPZtdIB/YS8ax/EKlhC0ppQgzlBVkyXtN3RNSP1Jb16MudQweGLTAUvYMawAUflcsciWVbeuqp
+ kNCEUuxcI/mPdlQ==
+X-Developer-Key: i=sekoohaka.sarisan@gmail.com; a=openpgp;
+ fpr=3C1D928A39DAA0E43462334B13EB7EEA99A39FA2
+X-Endpoint-Received: by B4 Relay for sekoohaka.sarisan@gmail.com/default
+ with auth_id=1030
+X-Original-From: Maria Lisina <sekoohaka.sarisan@gmail.com>
+Reply-To: sekoohaka.sarisan@gmail.com
 
-Thank you for your contribution! Sashiko AI review found 4 potential issue(=
-s) to consider:
+From: Maria Lisina <sekoohaka.sarisan@gmail.com>
 
-New issues:
-- [Medium] The commit message claims to modify `intel_lpss_exit()`, but it =
-actually modifies `intel_lpss_init()`.
-- [Low] Non-standard commit message prefix violates MFD subsystem conventio=
-ns.
+The original code defers DebugFS check with unnecessary warning message
+which also appears when DebugFS is simply disabled.
 
-Pre-existing issues:
-- [High] Missing `mfd_remove_devices()` in the error path of `intel_lpss_pr=
-obe()` causes leaked child devices and a potential Use-After-Free.
-- [High] Skipping LTR caching when debugfs is disabled causes incorrect PM =
-QoS hardware writes to be skipped.
---
+Therefore it spams dmesg with these messages:
 
-commit 8da79d835d33133ad4b3fd059be5d350a5d246f0
-Author: Maria Lisina <sekoohaka.sarisan@gmail.com>
+  intel-lpss 0000:00:15.0: Failed to create debugfs entries
+  intel-lpss 0000:00:15.3: Failed to create debugfs entries
+  intel-lpss 0000:00:1e.0: Failed to create debugfs entries
+  intel-lpss 0000:00:1e.2: Failed to create debugfs entries
 
-mfd/intel-lpss: Fix DebugFS initialization
+This patch adds proper checks to intel_lpss_exit() and
+intel_lpss_debugfs_add() functions and removes warning message.
 
-This commit fixes DebugFS initialization in the intel-lpss driver by adding
-proper checks when debugfs is disabled. It aims to prevent dmesg spam
-regarding failed debugfs entries.
+Signed-off-by: Maria Lisina <sekoohaka.sarisan@gmail.com>
+---
+Changes in v2:
+- Fixed function name in comment section.
+- Link to v1: https://lore.kernel.org/r/20260913-intel-lpss-debugfs-v1-1-833cbb6fffc9@gmail.com
+---
+ drivers/mfd/intel-lpss.c | 19 +++++++++++++------
+ 1 file changed, 13 insertions(+), 6 deletions(-)
 
-> mfd/intel-lpss: Fix DebugFS initialization
+diff --git a/drivers/mfd/intel-lpss.c b/drivers/mfd/intel-lpss.c
+index 63d6694f71457b2e09d238af0a9bfb897a169a64..c2cb58c0f98a996d5a2718956092e74139f2a286 100644
+--- a/drivers/mfd/intel-lpss.c
++++ b/drivers/mfd/intel-lpss.c
+@@ -146,9 +146,12 @@ static int intel_lpss_debugfs_add(struct intel_lpss *lpss)
+ {
+ 	struct dentry *dir;
+ 
++	if (!intel_lpss_debugfs) {
++		lpss->debugfs = NULL;
++		return 0;
++	}
++
+ 	dir = debugfs_create_dir(dev_name(lpss->dev), intel_lpss_debugfs);
+-	if (IS_ERR(dir))
+-		return PTR_ERR(dir);
+ 
+ 	/* Cache the values into lpss structure */
+ 	intel_lpss_cache_ltr(lpss);
+@@ -432,10 +435,7 @@ int intel_lpss_probe(struct device *dev,
+ 		goto err_clk_register;
+ 
+ 	intel_lpss_ltr_expose(lpss);
+-
+-	ret = intel_lpss_debugfs_add(lpss);
+-	if (ret)
+-		dev_warn(dev, "Failed to create debugfs entries\n");
++	intel_lpss_debugfs_add(lpss);
+ 
+ 	if (intel_lpss_has_idma(lpss)) {
+ 		ret = mfd_add_devices(dev, lpss->devid, &intel_lpss_idma64_cell,
+@@ -539,6 +539,13 @@ EXPORT_NS_GPL_DEV_PM_OPS(intel_lpss_pm_ops, INTEL_LPSS) = {
+ static int __init intel_lpss_init(void)
+ {
+ 	intel_lpss_debugfs = debugfs_create_dir("intel_lpss", NULL);
++
++	/* Ensure intel_lpss_debugfs stays NULL on error,
++	 * so intel_lpss_debugfs_add() exits properly.
++	 */
++	if (IS_ERR(intel_lpss_debugfs))
++		intel_lpss_debugfs = NULL;
++
+ 	return 0;
+ }
+ module_init(intel_lpss_init);
 
-[Severity: Low]
-Does this commit message prefix violate the MFD subsystem conventions?
+---
+base-commit: 2f0c1cf72f4682178506f513bbf015e591b1aa4a
+change-id: 20260913-intel-lpss-debugfs-eff3580d1295
 
-The MFD subsystem guidelines enforce a strict commit prefix format:
-mfd: <Driver>: <Capitalized description>. Using a slash instead of a colon
-after the subsystem name breaks Git history categorization standards.
+Best regards,
+-- 
+Maria Lisina <sekoohaka.sarisan@gmail.com>
 
-> This patch adds proper checks to intel_lpss_exit() and
-> intel_lpss_debugfs_add() functions and removes warning message.
 
-[Severity: Medium]
-Is the reference to intel_lpss_exit() correct here?
-
-The commit message states that this patch modifies intel_lpss_exit(),
-but the code changes actually modify intel_lpss_init() to set
-intel_lpss_debugfs =3D NULL on error. intel_lpss_exit() is not modified in
-the provided diff.
-
-> diff --git a/drivers/mfd/intel-lpss.c b/drivers/mfd/intel-lpss.c
-> index 63d6694f71457..51550c1835c69 100644
-> --- a/drivers/mfd/intel-lpss.c
-> +++ b/drivers/mfd/intel-lpss.c
-> @@ -146,9 +146,12 @@ static int intel_lpss_debugfs_add(struct intel_lpss =
-*lpss)
->  {
->  	struct dentry *dir;
-> =20
-> +	if (!intel_lpss_debugfs) {
-> +		lpss->debugfs =3D NULL;
-> +		return 0;
-> +	}
-> +
-
-[Severity: High]
-This isn't a bug introduced by this patch, but does skipping
-intel_lpss_cache_ltr() here cause incorrect PM QoS hardware writes to be
-skipped?
-
-If debugfs is disabled in the kernel, intel_lpss_debugfs_add() returns early
-here, skipping the subsequent call to intel_lpss_cache_ltr(). Because lpss =
-is
-zero-allocated, lpss->active_ltr and lpss->idle_ltr remain 0.
-
-Later, when PM QoS calls intel_lpss_ltr_set(), it checks if the new LTR val=
-ue
-matches lpss->active_ltr:
-
-drivers/mfd/intel-lpss.c:intel_lpss_ltr_set() {
-    ...
-    if (ltr =3D=3D lpss->active_ltr)
-        return;
-    ...
-}
-
-If the new calculated LTR value evaluates to 0, this check evaluates to true
-and the function returns early without writing to the hardware register,
-leaving the LTR incorrectly active.
-
-[ ... ]
-
-> @@ -432,10 +435,7 @@ int intel_lpss_probe(struct device *dev,
->  		goto err_clk_register;
-> =20
->  	intel_lpss_ltr_expose(lpss);
-> -
-> -	ret =3D intel_lpss_debugfs_add(lpss);
-> -	if (ret)
-> -		dev_warn(dev, "Failed to create debugfs entries\n");
-> +	intel_lpss_debugfs_add(lpss);
-> =20
->  	if (intel_lpss_has_idma(lpss)) {
->  		ret =3D mfd_add_devices(dev, lpss->devid, &intel_lpss_idma64_cell,
-
-[Severity: High]
-This is a pre-existing issue, but is the error path missing a call to
-mfd_remove_devices() if the main cell registration fails?
-
-In intel_lpss_probe(), the driver registers the IDMA child device via
-mfd_add_devices(). If the subsequent mfd_add_devices() call for the main ce=
-ll
-fails, the probe function jumps to err_remove_ltr:
-
-drivers/mfd/intel-lpss.c:intel_lpss_probe() {
-    ...
-    ret =3D mfd_add_devices(dev, lpss->devid, lpss->cell,
-                          1, info->mem, info->irq, NULL);
-    if (ret)
-        goto err_remove_ltr;
-    ...
-err_remove_ltr:
-    intel_lpss_debugfs_remove(lpss);
-    intel_lpss_ltr_hide(lpss);
-    intel_lpss_unregister_clock(lpss);
-}
-
-The err_remove_ltr path unwinds resources but misses a call to
-mfd_remove_devices(dev). The previously added IDMA device is left registered
-while the parent device's devres frees the memory associated with the parent
-(including the intel_lpss struct).
-
-Could this leave dangling IDMA child devices that maintain references to fr=
-eed
-memory, leading to a use-after-free?
-
-[ ... ]
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260913-intel-lpss=
--debugfs-v1-1-833cbb6fffc9@gmail.com?part=3D1
