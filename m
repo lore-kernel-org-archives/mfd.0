@@ -1,188 +1,180 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk2-f12.google.com (mail-qk2-f12.google.com [74.125.230.204])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F0E3362120
-	for <mfd@lists.linux.dev>; Sun, 13 Sep 2026 15:25:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BF2837E5E9
+	for <mfd@lists.linux.dev>; Sun, 13 Sep 2026 20:50:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.204
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789313112; cv=none; b=MY0CBwo9YJ7Zdi63FYplAfMpT2kTV6UMDgy6s6PE+2yv32wM3jgXn68tXUYm6eunl/yWkPF8PAK+/DDDLGmBj5bMeX4bmzQJV2FGAUqWTgakeLi9G0rk3fGgFNPC3yfTeVBI5Dwsnx5g18Umy2skt5N8mdFzdLklL2LDEA6JW/k=
+	t=1789332626; cv=none; b=orsYjgFBgkeZGM2CsNOovKFue3bG+71rpNsvdd/FeW9jJpKNR7i6IVc0XfJbkMLPbroDXiwUdMC7BTqysX7Loi0T6hNId5dDEzK6C8Nl7T8G74RrzkwjfjbD5QvJyKOaKjnghNWEbPKQWf+g0rkiPizdZZwDyiIInUs17OaBbzk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789313112; c=relaxed/simple;
-	bh=ld4R1jneXBW1hGoO0VRUWX/Y4qVOEP+XupoaDss+ItI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Vg9/OOWv5GJfkRlzgJ35v4cLLYFBzWKgQPtmojEtKV0zGEfBR3wVoKkS/mshORp7jlCVgU+nJhwxw2h4ZEUnQx5qR4DCBlIiMxDSGrsJrlo/1IaQSqPZuQZaFih1EMz0zdd2x8hQJ/DbeAfp+HEaXlG6riKECgO20Z2XRAjwh5w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=UClpXggN; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RDmkYF62; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1789332626; c=relaxed/simple;
+	bh=cjSdxH7baFihtM/V1AMCnUMKfob28Q3GgdzY21w2Wkw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=PwRHLJ5DCiQNDYPCR4+S/OytdClzDbxu9vpLZv1tIGkl4O8OYCCxZUuiy59N/IotSd5Z/AkvOaYMoHD7FIA50Ky8oQXhTZPGV835bkTHGtYmxO6hSbiNpQG5XyTzVH8aejAgngNI6Li+4/Jy1vYlfDOspccZwYO5u+RN1sLv8cQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RtJ3RpK2; arc=none smtp.client-ip=74.125.230.204
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="UClpXggN";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RDmkYF62"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68DDxx113039763
-	for <mfd@lists.linux.dev>; Sun, 13 Sep 2026 15:25:04 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	JJ8vr1mNWBrNs+oy+VzKW00DnpjkO29odTofhcUnTGM=; b=UClpXggNDGnUoju4
-	8s7pg2DMW+aMyZIUBvoIm3xqhEDNuIZ4G7sd4CZmdYMnHd9zDSUsG5sjzuWrZDYg
-	qcVEOykNpnfBaM7ZnrgJiKY4L2LJZCYnSRsf7WlQ/j0Qy1Mq+Li9c58BMLT5crGK
-	p24eMVk9QrUCvPcDchUlxN5jCfOie3h0kC2kYxMJblMD7ubKLtio4iDmTlsw66xg
-	cyLXq+/xwyLLBs+OnBgqkVROVXdGzl0r8tcDDDGFaQ0xLcMvAt9PNDekthiXMMql
-	YhphqN8MA4xiN0Yy9MKDIVHK6ojMwvU5xHfOmCySmeQzZyAhh/cX9+QiEU3mjX0F
-	jwC9Vw==
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gmy9ckj28-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <mfd@lists.linux.dev>; Sun, 13 Sep 2026 15:25:03 +0000 (GMT)
-Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-c89704da8c7so3525587a12.0
-        for <mfd@lists.linux.dev>; Sun, 13 Sep 2026 08:25:03 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RtJ3RpK2"
+Received: by mail-qk2-f12.google.com with SMTP id d75a77b69052e-52fb7692a57so16535881cf.1
+        for <mfd@lists.linux.dev>; Sun, 13 Sep 2026 13:50:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789313103; x=1789917903; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=JJ8vr1mNWBrNs+oy+VzKW00DnpjkO29odTofhcUnTGM=;
-        b=RDmkYF62sSIbjU3T/XU5axNb7OA0rbY5Hj/51AqN7BK/WTC2vzMjAd2TATgwF1QK7x
-         IKwS9iaUr62DfocjeTHeGtpkkavXWGZ4SaIPgJH12iDuoNR9Z5j2F4RUOvKxit2BH5XK
-         j3Np7fXOAjTvT9asqHVscp0ZBR5zFhJy4RwPojjE5vsya+MT1LQDKNxgjQFt6JrRzmwP
-         FvMHVTE40NiqlECafaCf2je+MLCCEOtEVecZ6JEbf/vU+jdu4soNkkID3g47XzfsI0cl
-         SZ8vwuRo9qtYTfloWu6WqTkYR4wXmEnxSGVyYviBarTNoHqNzOAN0obbARXsM04Z2s6h
-         MRIw==
+        d=gmail.com; s=20251104; t=1789332624; x=1789937424; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=FMTgWivp0e7gelEPDHuWnCELoEKFxvhsWudexAHdLaU=;
+        b=RtJ3RpK2RQLeM/yB+dH5Wra8fKCErzII4eJ5FVBS2e7Poy63I7ZLKEt9au5eLaBefz
+         t9ib6pnmNYIiPeYc/cOBskhAMSuz9OUDK4JKFZeiQlpudua/swmZfGLrXiZRjgC9kkCs
+         eqoGibSj8ei1Xm5lFZyI3CiVy5KIJylda8ffT8idwanZaWa6rh3qxI49ygAbBKkXxCAF
+         QnFEmlCxLGOC5ZCdeMdfO1HjaM4iN/w7uQ0nzjIBukbKwLeRA2tO625vl3bzB7fEM3xC
+         V//XnkhAI1NNMVgDaJ9lTw2AOkiPV4M7X2+6ZiMF4fgsYrJ3q6nJldLptdekUIygEEfU
+         zQ+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789313103; x=1789917903;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1789332624; x=1789937424;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=JJ8vr1mNWBrNs+oy+VzKW00DnpjkO29odTofhcUnTGM=;
-        b=FBEq+KXXavPOsm2jmfy6ZMa10KnXtSRF55aisRkbpNLYKaB8cAdGCWOeimTr0KTgMk
-         BIkPjZwks48rbWOn6hT/d1bAMpp6lc81S1tw1X/YPjEvK2zhW0d86CoMZgzU6ov+DMtc
-         LnuVpXKiv0KocbCbPe5XjIN2km3oY5X0tjxQmYqRELk7j466l4U8qTl1pJGFELKN/kpc
-         gvW3d+n9XHwq/JANcn40eY/AqbOOfku/rSwDnSc0f4gRKR/1MUGNoCUYxZlywCD9NtVH
-         Qw6mZgLfB7awzgmN5bkqaFV5Fs4zy3B2DNQiGt5mpNp5QB2UI8Y9jC20CT+F1i8RKX9A
-         vQcA==
-X-Forwarded-Encrypted: i=1; AKwUvBxtgMfz6Wla0mujJV9n5BH3PHMuRyLd67youtAYKQyBn2eYMRuimVeigaxrlKh7h7F3+Pc=@lists.linux.dev
-X-Gm-Message-State: AFuF++llWav+/ORcZazyLD9GZtZapIy/BnNekL8Oxv+JtwMHIqvpMdN8
-	/+3jsyNnsd2h4QoBn+TkkxBs2IIrzoOoS70mgcNwYrT7h3+aH4HALlSJegyujja93QSTxOv+nzK
-	/MNspbq7aKRM8FV4Q2uXTCV3siGh3khGg0hpW1H62j0viYYwJEUdjqCE=
-X-Gm-Gg: AYBFou3RBYlMAj9LYe1mxu1ZWttu2O0Wq1Syz4j6YW6kcO050OhyLxQNLB+pNmce/ua
-	ZAlBY4VUvL92dRF/TeajKk0gT6AAZMiREMn/S2NouK9Adip9oWJUwdYtv/OJkjDQQqFwj4LGQ5P
-	0lvHgI2u+Jgcxi8LRUWHYYzImsZ2ClS0W1pGqfWMhO+iA6c7rgUVrsGYc8V0YsXSnab4m2m+w13
-	wjfmn5eJeDj0lnAa4vVVt6ZP+3Pa9N/ZWf6P6BMFQK0Dn+gWHVgNZKbCEe72n/B7T8zHElNcChR
-	umWXYINylPAul5KrRG40YXGzydPd2G7sTkrmy+wOYvM7p1k90S3VN36843dYlKcNdf1BRVrkPnw
-	SbN0Xi2RXStGQI6xZYXtjh4WA08+5JqZ1Op4=
-X-Received: by 2002:a05:6a21:113:b0:3cc:8f53:26c0 with SMTP id adf61e73a8af0-3daed31ac42mr27011594637.17.1789313103232;
-        Sun, 13 Sep 2026 08:25:03 -0700 (PDT)
-X-Received: by 2002:a05:6a21:113:b0:3cc:8f53:26c0 with SMTP id adf61e73a8af0-3daed31ac42mr27011548637.17.1789313102860;
-        Sun, 13 Sep 2026 08:25:02 -0700 (PDT)
-Received: from [192.168.29.31] ([49.43.232.43])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-33ba4e9a8a9sm19916161eec.13.2026.09.13.08.24.52
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 13 Sep 2026 08:25:02 -0700 (PDT)
-Message-ID: <9345454b-4e31-4224-980c-0066c912252b@oss.qualcomm.com>
-Date: Sun, 13 Sep 2026 20:54:50 +0530
+        bh=FMTgWivp0e7gelEPDHuWnCELoEKFxvhsWudexAHdLaU=;
+        b=QiQF3aCXMwhD5/r6cmU3NewqgKYO44wpViWsMTpXA86tQVkdokOy+JRQBRsd1eQtsT
+         atRNcTlubHEvVgWsDRY8BXkGI7h9mYFL8En6szCgomHDeiF5abPRGLDa3r+evjrTn9xM
+         M9NP3XR0An3BlF3WGuKyguNZIFRuoWXBbhaAdqMAIMFcAFt8gWNLPermvO81+lT/+54+
+         Z61THw0lKlTJLvfW71WIj4pSw4usojyx3H6UsUX60Igmby16peXOklIkfZgBw0iOopwy
+         xFs7czdLYGAczEKdQSPiWnsWogjVSw/LPv0MTWiZeUvIe+VFNm4gKsmbzSB8WEmz4nLw
+         S22A==
+X-Forwarded-Encrypted: i=1; AKwUvBywawKjmNTG6+Eb1wv/QA1HIYEyfN9FFR8Lx+RiSvzYsihQkGFo702RlZoezoWFdPF0l9k=@lists.linux.dev
+X-Gm-Message-State: AFuF++ni0Exg/vU1jo8uNzdC7oz9R5HDLg65BdwcIs2S6+gO6Qza3xkw
+	Uh/Jk+BmZ/fqszC/v2KyTkCv4HtuKWEaBUZkV8gRMjcBOXlwOXAeQTo=
+X-Gm-Gg: AYBFou2xrFXhaz9bEcPE0tTaJifOj5JO0TYAq20N2xQVlDe5A8kn9UiEkP8p5f2XcM9
+	R3AcRegnnq3EJVaosVJuZXWENZvNYcfVFara0Wyoly75/w5lSR69hZqJJePPXTKe1/a3M27fV5P
+	EH4x/6t8bG0WxPeAiJgRWwgVIFL4VuzRsrZhMDArWBLFMbCxJJbr7ulUArlvc9IA31pSBYc/km6
+	FJUY881m0ANfZEHRacyrK7agANCYBZ83sEaq0Wn7CRGzetExHVRyIuKb8AJ/uNW0RduKtoPDc2n
+	PDNAeD1t9oO8frT8HCOT3ArqhiKk3WuYigY6ZwFSg55j2A8RaroeNjliDxd88GfKzbEA3i2M50r
+	dtbSrXGLV4IUGG8vG+cEHM5CtV/WRMfvsYe79DsTdzTE7m+9wmxXU0V6+07FKVU6ozqc9pja43T
+	c3TwNlnDJA+f83cOLhXhpAGX/siXuBek94Yres5CR+t8q4UuWSFHkZGTCBm5g+0mEHtI8/cVFF/
+	XwaBe+JrmeI7fQEGqqNYoYtTAxxUh20fHQlCt+JaD4UNWqkWi+Nfu/jKpRnBGhD6dBf9ZloV7vA
+	FRtuHNauZ0r5W/cm5zQXyCQykGfgG6j+pw==
+X-Received: by 2002:a05:622a:1355:b0:530:ba79:edd3 with SMTP id d75a77b69052e-530e832fe99mr121931421cf.62.1789332624296;
+        Sun, 13 Sep 2026 13:50:24 -0700 (PDT)
+Received: from localhost.localdomain ([104.39.73.78])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-530ca4ba156sm79460671cf.19.2026.09.13.13.50.22
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Sun, 13 Sep 2026 13:50:22 -0700 (PDT)
+From: Myeonghun Pak <mhun512@gmail.com>
+To: Lee Jones <lee@kernel.org>
+Cc: Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Roger Quadros <rogerq@kernel.org>,
+	Tony Lindgren <tony@atomide.com>,
+	linux-omap@vger.kernel.org,
+	mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org,
+	Ijae Kim <ae878000@gmail.com>
+Subject: [PATCH] mfd: twl-core: unregister the auxiliary platform device on unbind
+Date: Sun, 13 Sep 2026 16:50:12 -0400
+Message-ID: <20260913205013.54777-1-mhun512@gmail.com>
+X-Mailer: git-send-email 2.50.1
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v24 05/12] dt-bindings: arm: Document reboot mode magic
-To: Rob Herring <robh@kernel.org>
-Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Sebastian Reichel <sre@kernel.org>,
-        Souvik Chakravarty <Souvik.Chakravarty@arm.com>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Andy Yan
- <andy.yan@rock-chips.com>,
-        Matthias Brugger <matthias.bgg@gmail.com>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        John Stultz
- <john.stultz@linaro.org>,
-        Moritz Fischer <moritz.fischer@ettus.com>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Christian Loehle <christian.loehle@arm.com>,
-        Lee Jones <lee@kernel.org>, Ulf Hansson <ulfh@kernel.org>,
-        Pavan Kondeti
- <pavan.kondeti@oss.qualcomm.com>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Sudeep Holla <sudeep.holla@kernel.org>,
-        Florian Fainelli <florian.fainelli@broadcom.com>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
-        Andre Draszik <andre.draszik@linaro.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
-        linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, mfd@lists.linux.dev,
-        Srinivas Kandagatla <srini@kernel.org>
-References: <20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com>
- <20260803-arm-psci-system_reset2-vendor-reboots-v24-5-889281373870@oss.qualcomm.com>
- <20260803140222.GA3188037-robh@kernel.org>
-Content-Language: en-US
-From: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-In-Reply-To: <20260803140222.GA3188037-robh@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTEzMDIyMCBTYWx0ZWRfXziqU77X92zIm
- nGeQw2QVK/5L5UYQ7RE/X9M93Yl5dJXGbXPDuNvb6O690n0zxNTIt9N5S/rqk4Ps7clZixFMAYD
- p3/0SGKPRcr0gY7uGC2RhOxcRTp1WUAEx79VbrGHXKuQOx4dXLrSngfR144sv/VFmnB8s/7KMl4
- dLI/phpXUHp8004FWDd7Cc8cdxqnaZrcFgMVM39Zf2xnoykJRaNZelSEgCFNei3YRrUovu5VX52
- X7cvuiy7s9rC8a3qn9XooJ2mNolvFdZptjrK7CcGXz2WUFx27UB+YRrckwNWCdEz05RJXuW0Ik/
- /2+HyPbNPCfVjNdF3TklzQ6Ject2Dj76p9yxCLslgMJzJ5Dxhnf+ZQ+w4azB8vQCLzf/sClmfD3
- 9pn5ym/nCN1A1fPkg3nQjFW9QJGJB1stciUUkEMw2dpipz/hQKG62O27BjTZfPUY3zC1ZAiTnPJ
- E9PwPB1ElwlxpIbMsMQ==
-X-Authority-Analysis: v=2.4 cv=EMyTQFZC c=1 sm=1 tr=0 ts=6aa6c04f cx=c_pps
- a=rz3CxIlbcmazkYymdCej/Q==:117 a=ExSUBmHX20r5BGnuCy1yUw==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=q4JZvQwPHRNDhfj5UpAA:9 a=QEXdDO2ut3YA:10 a=bFCP_H2QrGi7Okbo017w:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTEzMDIyMCBTYWx0ZWRfX8lBoABY6WmOq
- tP//C+ynpsq9mLZ43wSVuvzKopvAkS33Lmyq9aM79UGF1jTwcoEX78Sa9FoKSdg0cKcO0tQttXY
- pzDgUIdQgxQFIsJ+Azs1G6Ta1xfyE2M=
-X-Proofpoint-GUID: dQ6wxbjsueicLCt349Is6qCrSVTNZCjR
-X-Proofpoint-ORIG-GUID: dQ6wxbjsueicLCt349Is6qCrSVTNZCjR
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-13_05,2026-09-11_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 phishscore=0 priorityscore=1501 impostorscore=0
- spamscore=0 bulkscore=0 clxscore=1015 malwarescore=0 suspectscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
- definitions=main-2609130220
+Content-Transfer-Encoding: 8bit
 
+twl_probe() registers a standalone platform device named "twl", but keeps
+its pointer only in a local variable. Probe errors unregister the device,
+while successful probe leaves no way for twl_remove() to release it. The
+platform device therefore remains registered after the I2C driver unbinds.
 
+Register a managed action on the I2C device immediately after adding the
+platform device. This unregisters it on probe failure and driver unbind,
+and also handles failure to register the action itself. Remove the manual
+error-path unregister to avoid releasing the device twice.
 
-On 8/3/2026 7:32 PM, Rob Herring wrote:
-> On Mon, Aug 03, 2026 at 03:13:36PM +0530, Shivendra Pratap wrote:
->> Add bindings to describe vendor-specific reboot modes. Values here
->> correspond to valid parameters to vendor-specific reset types in PSCI
->> SYSTEM_RESET2 call.
+This issue was identified during our ongoing static-analysis research while
+reviewing kernel code.
 
-[snip..]
+Fixes: defa6be1c821 ("mfd: Fix compile for twl-core.c by removing cpu_is_omap usage")
+Cc: stable@vger.kernel.org
+Assisted-by: OpenAI:GPT-5.6
+Co-developed-by: Ijae Kim <ae878000@gmail.com>
+Signed-off-by: Ijae Kim <ae878000@gmail.com>
+Signed-off-by: Myeonghun Pak <mhun512@gmail.com>
+---
+ drivers/mfd/twl-core.c | 23 +++++++++++++++--------
+ 1 file changed, 15 insertions(+), 8 deletions(-)
 
->> +  - if:
->> +      not:
->> +        properties:
->> +          compatible:
->> +            contains:
->> +              const: arm,psci-1.0
-> 
-> SYSTEM_RESET2 was introduced in PSCI 1.1...
-
-just wanted to check on this.
-we have a max of arm,psci-1.0 defined in compatible.
-SYSTEM_RESET2 is already being used in some cases with "arm,psci-1.0".
-how should this be handled here?
-
-thanks,
-Shivendra
+diff --git a/drivers/mfd/twl-core.c b/drivers/mfd/twl-core.c
+index c024a28b0..128cd3f6c 100644
+--- a/drivers/mfd/twl-core.c
++++ b/drivers/mfd/twl-core.c
+@@ -719,6 +719,11 @@ static const struct mfd_cell twl6032_cells[] = {
+ 	{ .name = "twl6032-clk" },
+ };
+ 
++static void twl_unregister_device(void *data)
++{
++	platform_device_unregister(data);
++}
++
+ /* NOTE: This driver only handles a single twl4030/tps659x0 chip */
+ static int
+ twl_probe(struct i2c_client *client)
+@@ -754,17 +759,22 @@ twl_probe(struct i2c_client *client)
+ 		return status;
+ 	}
+ 
++	status = devm_add_action_or_reset(&client->dev, twl_unregister_device,
++					  pdev);
++	if (status)
++		return status;
++
+ 	if (!i2c_check_functionality(client->adapter, I2C_FUNC_I2C)) {
+ 		dev_dbg(&client->dev, "can't talk I2C?\n");
+ 		status = -EIO;
+-		goto free;
++		goto out;
+ 	}
+ 
+ 	twl_priv = devm_kzalloc(&client->dev, sizeof(struct twl_private),
+ 				GFP_KERNEL);
+ 	if (!twl_priv) {
+ 		status = -ENOMEM;
+-		goto free;
++		goto out;
+ 	}
+ 
+ 	if ((id->driver_data) & TWL6030_CLASS) {
+@@ -784,7 +794,7 @@ twl_probe(struct i2c_client *client)
+ 					 GFP_KERNEL);
+ 	if (!twl_priv->twl_modules) {
+ 		status = -ENOMEM;
+-		goto free;
++		goto out;
+ 	}
+ 
+ 	for (i = 0; i < num_slaves; i++) {
+@@ -880,7 +890,7 @@ twl_probe(struct i2c_client *client)
+ 		status = devm_mfd_add_devices(&client->dev, PLATFORM_DEVID_NONE,
+ 					      cells, num_cells, NULL, 0, NULL);
+ 		if (status < 0)
+-			goto free;
++			goto out;
+ 
+ 		if (of_device_is_system_power_controller(node)) {
+ 			if (!pm_power_off)
+@@ -896,10 +906,7 @@ twl_probe(struct i2c_client *client)
+ fail:
+ 	if (status < 0)
+ 		twl_remove(client);
+-free:
+-	if (status < 0)
+-		platform_device_unregister(pdev);
+-
++out:
+ 	return status;
+ }
+ 
+-- 
+2.39.5
