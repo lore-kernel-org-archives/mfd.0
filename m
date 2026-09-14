@@ -1,133 +1,114 @@
-Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
+Received: from TYVP286CU001.outbound.protection.outlook.com (mail-japaneastazon11011047.outbound.protection.outlook.com [52.101.125.47])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08A4E3AFD1D
-	for <mfd@lists.linux.dev>; Mon, 14 Sep 2026 19:38:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=210.118.77.11
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789414736; cv=none; b=HGJljMxC0WdRtZpcJs8gZivdvYvJM9LlgNlYj3e+lu6xiFZfGby4QSKvStPubh0S+7zpHDn4F/n6C02tGIFiApN3O4Qn4nSUvkbt9S7PgSdFp6CrLTs0qd1Rj4PM8DqAt3KAgnBIA1gp6Fcr+Dpf2Os8gFIUdNDytdbzXibdw/w=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789414736; c=relaxed/simple;
-	bh=slQN8zGDUmYs9br0zIMXRpsNo5O7uLthjpuA9U0b8rM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:From:In-Reply-To:
-	 Content-Type:References; b=Sqbtl73Ep13B1VVlFyt8jAOGdr8nVR6BrdwrvxtGmuUXerRlsrp3f1Vu1oLAhvPjJbOehVQ1mqEcOL7ZA6oayWatz5/4ME3mcnuHgNauS5jsBlou00nWMMLMcFy7insNjWBKmfWL8dxvd/hJx1543rWhp4vZFd9kc52PUr/f9tU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=WTY8xEi6; arc=none smtp.client-ip=210.118.77.11
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9ED8D37F32F
+	for <mfd@lists.linux.dev>; Mon, 14 Sep 2026 20:15:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.125.47
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789416960; cv=fail; b=jGkkmTR3YNCbkvobBPgHTzyh0okglGMOxFh5UTB6ELC32ZXOg/RoRBtyqZ77yIfRAwqTmZ4NHjhM9Z5wmhkT2dy62P1chCCvCygruCH5cYDifC+7xJ2n9hAfk3GYNaGuablPuuLD0TTnU4ZfeMIZZzT+zOTiUYlPoymXjX0wZ4s=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789416960; c=relaxed/simple;
+	bh=TM50yrCnKlHFecFBMzVpi6N8+EQUrNtJ4JKdDSDcJDw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=uZBfKsADtitKyO0f/JVmoOyUBMcgY296nw4QCY67DnS5acuXLMOOw0N/0faPGxONO0WGJXr+6J/DR4GbKtBr6/iRhamqqpCtwyHlfm+Xpwm7FEb0nKt4JSKHGGGWSOQeSMro0Pya3H9snLmN9vi426jgZmBLzgbv88NuR32hFrg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=renesas.com; spf=pass smtp.mailfrom=renesas.com; dkim=pass (1024-bit key) header.d=renesas.com header.i=@renesas.com header.b=nSNN61BU; arc=fail smtp.client-ip=52.101.125.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=renesas.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=renesas.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="WTY8xEi6"
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
-	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20260914193842euoutp01953e61d38ec40643bc4d7157964f6df4~VRzWra7uK0314903149euoutp01E;
-	Mon, 14 Sep 2026 19:38:42 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20260914193842euoutp01953e61d38ec40643bc4d7157964f6df4~VRzWra7uK0314903149euoutp01E
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1789414722;
-	bh=l4wDoWVeNywfcIR5L4rg3J/vDfSoW2zWF07vjDkO78A=;
-	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
-	b=WTY8xEi6jJOa1gLnOSUBPvlQpMk4v2dS5Nlb2zkZtStSIF1Pr3VZihsDFbmaj+Y4h
-	 48ffokqJfJoWOeBrkZRq1liliRT+IYnxf1/b09yAMsjlsgBoE69rhThGKgRG7auZzS
-	 XuVmAtFsH2iSO/zueW7kE3R3lnmCSs0qp5222L1M=
-Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
-	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
-	20260914193842eucas1p27f2871f925584e946f2bb24c04b38b90~VRzWUs-Iu3205232052eucas1p2N;
-	Mon, 14 Sep 2026 19:38:42 +0000 (GMT)
-Received: from [192.168.1.44] (unknown [106.210.136.40]) by
-	eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
-	20260914193840eusmtip1c6e3388713b55ee3f14ee6a855ba8b6e~VRzUiiOIx1812818128eusmtip1N;
-	Mon, 14 Sep 2026 19:38:40 +0000 (GMT)
-Message-ID: <fcfdd9da-8425-4cf9-94ba-23b06cd06185@samsung.com>
-Date: Mon, 14 Sep 2026 21:38:40 +0200
+	dkim=pass (1024-bit key) header.d=renesas.com header.i=@renesas.com header.b="nSNN61BU"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=XPKn0XxVV2dn3UlhYO2N0NKsWcAFkJFEo8VvBBx+a7EJZ3iM3L98cnJDV30Xl2EIHXmReOmVknysrwzZ0euvKby+7mm2GEYSH9v1VyuT5opk++7T7DDuG/y7wBLt2gheG533gX0vnVCsH4xSCk7A2re0n1/A+emlqHAnX+ryWbBn4wBqFKwfJ0H4r9U8+jpobXN8X4xFagYr/cGrc5JslyNduCcDauAmMaZFcN3q7EHig+BmW+MZM4OccZFzZc/4ypU9pw2dDP0RIW8MEeMtWwIgCnIQy3A10E4xi9lNTrse71XHLOqkE3pxLVd1nrejdo4RZ+fhS/cV8GKJYheWag==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SMHEFDimhdn0MCy/mD6AMOzqNMlFO4fVV2BvvIBmzM4=;
+ b=izgAJr4BlDERZzS6cB7K3yvdfp43JTpnfpusKrW2RaUJDESCelXs2u79L/DKH/JYDQ8JncewTyuFztr2BimcVvuRDwbKK8eEVxKd14+P/9+UEMIfXnG8jVQqOIbHEgZgcfNPISs92frsGEmo6IavzoyRQ9XjARt2q+aNrUFHfgQSSozL1nmj2+5BSenUG8a0920z5gZNxxp522JEaJatgPaDFBJlJUIEgp7X0KEURFZsB9IXAxIdgDgeT0thvMvspwJZAo9cfSAucbfgIz3qDwabgoQUlgbpfeFnSEwzqdaiW1X6VVkiyU6PVFGj0rddtRoFANUyBw6ddFQ+6yOCUg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 8.62.32.50) smtp.rcpttodomain=kernel.org smtp.mailfrom=renesas.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=renesas.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=renesas.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SMHEFDimhdn0MCy/mD6AMOzqNMlFO4fVV2BvvIBmzM4=;
+ b=nSNN61BU6xzTu67IjSZ/9x0y9xugN1Op4T7Ea/RJLfWtMPD9rFpERvjDmoqJXtAm5VcojQGXhiTGDpXCj4+tWJ9WvCIg9I7ObGf2y0aNUmHnyaIfNNc4zWDH0XX6TLheR8cgnhVK32XTD7vjFJDbWyuskWIBcSZUcrBfEsz7/58=
+Received: from OS0PR01CA0030.jpnprd01.prod.outlook.com (2603:1096:604:25::17)
+ by TYCPR01MB11374.jpnprd01.prod.outlook.com (2603:1096:400:3c2::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Mon, 14 Sep
+ 2026 20:15:54 +0000
+Received: from OS3PEPF0000003E.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:604:25:cafe::50) by OS0PR01CA0030.outlook.office365.com
+ (2603:1096:604:25::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.12 via Frontend Transport; Mon,
+ 14 Sep 2026 20:15:54 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 8.62.32.50)
+ smtp.mailfrom=renesas.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=renesas.com;
+Received-SPF: Pass (protection.outlook.com: domain of renesas.com designates
+ 8.62.32.50 as permitted sender) receiver=protection.outlook.com;
+ client-ip=8.62.32.50; helo=ejcrelay005p.adwin.renesas.com; pr=E
+Received: from ejcrelay005p.adwin.renesas.com (8.62.32.50) by
+ OS3PEPF0000003E.mail.protection.outlook.com (10.167.240.7) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.7
+ via Frontend Transport; Mon, 14 Sep 2026 20:15:54 +0000
+Received: from demon-pc.localdomain (unknown [10.226.93.156])
+	by ejcrelay005p.adwin.renesas.com (Postfix) with ESMTP id BDD33300026E;
+	Tue, 15 Sep 2026 05:15:52 +0900 (JST)
+From: Cosmin Tanislav <cosmin-gabriel.tanislav.xa@renesas.com>
+To: Lee Jones <lee@kernel.org>
+Cc: mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	Cosmin Tanislav <cosmin-gabriel.tanislav.xa@renesas.com>
+Subject: [PATCH 0/3] MTU3 MFD improvements
+Date: Mon, 14 Sep 2026 23:14:53 +0300
+Message-ID: <20260914201456.2018403-1-cosmin-gabriel.tanislav.xa@renesas.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 18/19] riscv: dts: starfive: jh7110: Update DT for
- display subsystem
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
-	<neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof
-	Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Andrzej
-	Hajda <andrzej.hajda@intel.com>, Robert Foss <rfoss@kernel.org>, Laurent
-	Pinchart <Laurent.pinchart@ideasonboard.com>, Jonas Karlman
-	<jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, Luca Ceresoli
-	<luca.ceresoli@bootlin.com>, David Airlie <airlied@gmail.com>, Simona Vetter
-	<simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
-	Lee Jones <lee@kernel.org>, Andy Yan <andy.yan@rock-chips.com>, Philipp
-	Zabel <p.zabel@pengutronix.de>, Emil Renner Berthing <kernel@esmil.dk>, Hal
-	Feng <hal.feng@starfivetech.com>, Michael Turquette
-	<mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, Brian Masney
-	<bmasney@redhat.com>, Heiko Stuebner <heiko@sntech.de>, Conor Dooley
-	<conor@kernel.org>, Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt
-	<palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti
-	<alex@ghiti.fr>, Dominique Belhachemi <db@domibel.de>, Brian Masney
-	<bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>,
-	linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	mfd@lists.linux.dev, linux-clk@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org,
-	linux-riscv@lists.infradead.org, Andy Yan <andyshrk@163.com>, Marek
-	Szyprowski <m.szyprowski@samsung.com>, Maud Spierings
-	<maud_spierings@murena.io>, Graham Markall <hello@big-grey.co.uk>, Icenowy
-	Zheng <zhengxingda@iscas.ac.cn>
-Content-Language: en-US
-From: Michal Wilczynski <m.wilczynski@samsung.com>
-In-Reply-To: <20260910-determined-fantastic-seriema-3ff701@quoll>
-Content-Transfer-Encoding: 7bit
-X-CMS-MailID: 20260914193842eucas1p27f2871f925584e946f2bb24c04b38b90
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20260904132743eucas1p1e02218d3fb38af95c3dd4bfa24904cab
-X-EPHeader: CA
-X-CMS-RootMailID: 20260904132743eucas1p1e02218d3fb38af95c3dd4bfa24904cab
-References: <20260904-jh7110-clean-send-v3-0-484f9ae72715@samsung.com>
-	<CGME20260904132743eucas1p1e02218d3fb38af95c3dd4bfa24904cab@eucas1p1.samsung.com>
-	<20260904-jh7110-clean-send-v3-18-484f9ae72715@samsung.com>
-	<20260910-determined-fantastic-seriema-3ff701@quoll>
+Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: OS3PEPF0000003E:EE_|TYCPR01MB11374:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: ed4e706e-3199-4a27-371f-08df129cfae9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|36860700016|23010399003|82310400026|1800799024|10067099003|56012099006|11063799006|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	Xd8GDZBIRJCl5dgY9xDRgbEFNuBLWFBsa/2LHOIGKShYOpK82rW8v3YnAjtiHK4QmG/7SSNiW+o0G+Px3LOlusD9e2ifu9SUATE+ABjuOH87WWvd/tTJVaoqGdFvINCCPNAGuHy5WZ3M5joAzxfdKv431IYiFSpbtgk32WhgCtOTqhLJab1Te2Op3yk/hQ1qqzHBMrxkx7qoLnX98cTP9XDaifR9EH0cgX8pQNevbl4bKqxOJeNhrrt9X2GUU7D17ar4MpKosT0jrg8hIxZQwBf5JFGuLWnaJt2HggLVHPOPr+gdJhXkhvUcXn49OKXA7YgG2NigxUXLOQ16TvtjTMO1jAfqdEHxLy0Q99tmVDuNxJk5vHxyABH1chBIJUt/ERFzkgBRHUch1fZ94YVCUIxvdxJP/nWIAYMzI5MoWVyYelyp/DMsj9mRKELQPFnl12IpK7C/OceKsg6ECVmNS4L5H61zJPGi8wRAUXGwWWGv2dlP4xtwZ0VKt/EZiTjDOM3lxVk+AvEOnFRgg5keX1OPBperDaC1xfyanjqRhbpvOp3nGpdWagJGS4RQQwBhSg36sdkIt9IlOWin56q/b4dpLzf2vv3zF0s054cTpZxHbY6t5jo5YigZBla3jsowWhHtX9PRabKvdU/x1ph3+oJrsAOIPJ9yflKFaqN+pWt7MS4zMsMBw/pczI214PbOGqNTewHQUzoJ39c/XN4L8g==
+X-Forefront-Antispam-Report:
+	CIP:8.62.32.50;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:ejcrelay005p.adwin.renesas.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700016)(23010399003)(82310400026)(1800799024)(10067099003)(56012099006)(11063799006)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	Kkw6vnMCFJcff0OcLRpciL3bmvzLd6sjbQWm4Zrmtwn1N7OywOMiowUjk2XG5SNeJWJ8BBEwF9UJPvEpkDmF1v5KXQWfj1siIlcZ+HWguMl3nB4iiIoiKqqwXFHLCu7+iuQ+TMM+xK6mU/tz8sEPzVL5WQ0R0QCgkpbieOgZERhU9EM8z4RSl/6Oi4fpFQxapK3uEakGMLmBqfOEtw07FjX5k1tBMI3Txb7GdBCrXLUGFCH1fgm1BLdpxblmyZBsCaFln5Pq2Qtey/KrVKoJDEqV/yx87tHwXVhx+tpbdfo8ct5oluRgMHJEC5o2ycQ6GfOv8W3brTwtOrg02pHWHN592U2CjKJ3iYUsqeUk6muj82zR3o0SP7iqk784+VjRs+1ysj4Z8aHYSVq6P4eLuANPh/0GrhfDr/e06XvcuORZ1g5ow+YkP3bh/2bXc6gH
+X-OriginatorOrg: renesas.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2026 20:15:54.3061
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ed4e706e-3199-4a27-371f-08df129cfae9
+X-MS-Exchange-CrossTenant-Id: 53d82571-da19-47e4-9cb4-625a166a4a2a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=53d82571-da19-47e4-9cb4-625a166a4a2a;Ip=[8.62.32.50];Helo=[ejcrelay005p.adwin.renesas.com]
+X-MS-Exchange-CrossTenant-AuthSource: OS3PEPF0000003E.JPNP286.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCPR01MB11374
 
+This series does some code quality improvements to the MTU3 MFD driver,
+and enables runtime PM to allow simplifications in the sub-drivers by
+relying on PM domains rather than open-coding clock handling.
 
+Cosmin Tanislav (3):
+  mfd: rz-mtu3: do not use struct rz_mtu3_channel::dev
+  mfd: rz-mtu3: reuse shared_reg_update_bit() in start_stop_ch()
+  mfd: rz-mtu3: enable runtime PM
 
-On 9/10/26 10:37, Krzysztof Kozlowski wrote:
-> On Fri, Sep 04, 2026 at 03:27:19PM +0200, Michal Wilczynski wrote:
->> diff --git a/arch/riscv/boot/dts/starfive/jh7110.dtsi b/arch/riscv/boot/dts/starfive/jh7110.dtsi
->> index 9c3e4598747eb5541effe697044484715569a285..0f981f4c89586269b987be8591037c9461e04703 100644
->> --- a/arch/riscv/boot/dts/starfive/jh7110.dtsi
->> +++ b/arch/riscv/boot/dts/starfive/jh7110.dtsi
->> @@ -290,12 +290,6 @@ gmac1_rmii_refin: gmac1-rmii-refin-clock {
->>  		#clock-cells = <0>;
->>  	};
->>  
->> -	hdmitx0_pixelclk: hdmitx0-pixel-clock {
->> -		compatible = "fixed-clock";
->> -		clock-output-names = "hdmitx0_pixelclk";
->> -		#clock-cells = <0>;
->> -	};
->> -
->>  	i2srx_bclk_ext: i2srx-bclk-ext-clock {
->>  		compatible = "fixed-clock";
->>  		clock-output-names = "i2srx_bclk_ext";
->> @@ -352,6 +346,13 @@ tdm_ext: tdm-ext-clock {
->>  		#clock-cells = <0>;
->>  	};
->>  
->> +	xin24m: xin24m {
-> 
-> Other clocks are called foo-clock, so follow this as well (even though
-> it does not follow recommended practice of clock-foo, but at least some
-> consistency).
+ drivers/mfd/rz-mtu3.c | 71 ++++++++++++++++++-------------------------
+ 1 file changed, 30 insertions(+), 41 deletions(-)
 
-will rename to to xin24m-clock
-
-> 
-> Best regards,
-> Krzysztof
-> 
-> 
-
-Best regards,
 -- 
-Michal Wilczynski <m.wilczynski@samsung.com>
+2.55.0
 
