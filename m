@@ -1,187 +1,113 @@
-Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8074C3FADE2;
-	Mon, 14 Sep 2026 08:22:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B684B40DB4C
+	for <mfd@lists.linux.dev>; Mon, 14 Sep 2026 08:32:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.19
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789374142; cv=none; b=IJHTgnSX/Xc2xDM0KcA00Xo69Oa7xQ3TLZn6uLVAlTxeUuAMVy8MMZ7IBCy0fA4RJbflKyZ6NEhGy0UBAvCGXSQEgrazXhoxY9ca6WUXxWttKon7uclAO8oHDy49K0znXBdZQZz4Nd2Z7pC53BXOEkj9r1wsCaBmH8ihdefwq/Y=
+	t=1789374775; cv=none; b=MbQyxV2en8CP+vRsu6gyxJQlvwZQOgX6Gnyk7BCMOc8BBzQf6W/deh3kOq/eC+7iwesd3l4XWEwqJpnJx5xqfEG0hw8IJmB2QcWuPoMyFeYV/g2/GNVBjW8ug3kG6wpTvmVbmBBjh0o1SyrPkZiv7733GzU8/pGGPpbwN7GfrxA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789374142; c=relaxed/simple;
-	bh=2x6G8Wp4QYVbrbwa17mOv38gkQwWsBwXD/mF/pokOYo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=kwBf7XN90Y4sQatF2fuG252viM5VP4gaBbcJBSkNz9bsJfthj5HJlJ9EDOh/Nk5YuPnMO2Pog4tviSJXnozum8Ks88ByrSogITytnCMyU+ljyKl3PLrdMcQO4nweJsjdIRbkZywY4QyKhpFxWh/OBDlnRVQk+33qZeabq4LJcCA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
-Received: from loongson.cn (unknown [10.20.42.102])
-	by gateway (Coremail) with SMTP id _____8DxOvC4rqdq07sLAA--.34234S3;
-	Mon, 14 Sep 2026 16:22:16 +0800 (CST)
-Received: from [10.20.42.102] (unknown [10.20.42.102])
-	by front1 (Coremail) with SMTP id qMiowJCxPs+zrqdqWIYgAA--.4475S2;
-	Mon, 14 Sep 2026 16:22:14 +0800 (CST)
-Message-ID: <4ca28c4a-1a4d-4f12-b9c0-10f092e93a66@loongson.cn>
-Date: Mon, 14 Sep 2026 16:19:31 +0800
+	s=arc-20240116; t=1789374775; c=relaxed/simple;
+	bh=yYxEKBXvBD1ee5grZtppYox0uuKGFenCIwPJj3HT3Vc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ARty/9Jw62m8FbAn0lUi1CKioEHJz4kw7OYcOdtBsTUgRyfMGuOH/eBvxs3uA5sfaQ7Qet3WKcXQBVobeGnTiXEzqQ5Me1WBdr4y7PiTYf4h8lfrGaJObFscQesp4bRZ+0aI/SSHSRrosSRYNZjKAqo2BY78dg34e0tKEuX4CaE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=B6wH+8o/; arc=none smtp.client-ip=198.175.65.19
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="B6wH+8o/"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1789374774; x=1820910774;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=yYxEKBXvBD1ee5grZtppYox0uuKGFenCIwPJj3HT3Vc=;
+  b=B6wH+8o/GWPlaPp9EAhEkPdo9mJOgCPt/0BHXQem7DWkFPYhiP5VDUt7
+   tF11gAYGvyNt+GWRS/z0AVYRrk6t17GWsXGANaOiN2rJoBHkzimW9Iayx
+   71duedZGnD27lQ79xkJFuwBoiwo1ac0bEX5bR59iVecS1EUHPN0TMBtlK
+   IjSVCa1qTpq8o0WQcNn618+U0Qc6OWEVR/BYuSzsDxVElc605s2vR3fDt
+   sFg78oMWsS3hUonBbUT2imCRFYTPkjdHQWsqkgtee9zYB3906xfgi9hBK
+   vuIEebQbpHPoFrtgPOVsx3AEMPbDCmK98D6xNHrTXz6ZaYz016D9nQGQT
+   g==;
+X-CSE-ConnectionGUID: gT9V/zs7ReKUuh7jelNQCw==
+X-CSE-MsgGUID: FDBB8mggRSicm1Skfr9kug==
+X-IronPort-AV: E=McAfee;i="6800,10657,11904"; a="89659439"
+X-IronPort-AV: E=Sophos;i="6.27,102,1787036400"; 
+   d="scan'208";a="89659439"
+Received: from orviesa006.jf.intel.com ([10.64.159.146])
+  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Sep 2026 01:32:53 -0700
+X-CSE-ConnectionGUID: NMBQt1ZtRGiP4G04W+vaGA==
+X-CSE-MsgGUID: tuNUeGHNQKiHZA6Nc+MzEA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,102,1787036400"; 
+   d="scan'208";a="270781690"
+Received: from ettammin-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.245.29])
+  by orviesa006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Sep 2026 01:32:51 -0700
+Date: Mon, 14 Sep 2026 11:32:49 +0300
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Myeonghun Pak <mhun512@gmail.com>
+Cc: Andy Shevchenko <andy@kernel.org>, Lee Jones <lee@kernel.org>,
+	mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
+	Ijae Kim <ae878000@gmail.com>
+Subject: Re: [PATCH] mfd: intel_soc_pmic_crc: balance IRQ wake enable
+Message-ID: <aqexMdHnHHq_l0Y3@ashevche-desk.local>
+References: <20260913013615.22615-1-mhun512@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 2/2] mfd: loongson-se: Fix miscellaneous issues
-To: Huacai Chen <chenhuacai@kernel.org>, Qunqin Zhao <zhaoqunqin@163.com>
-Cc: lee@kernel.org, linux-kernel@vger.kernel.org, loongarch@lists.linux.dev,
- linux-crypto@vger.kernel.org, mfd@lists.linux.dev
-References: <20260911090256.7834-1-zhaoqunqin@163.com>
- <20260911090256.7834-3-zhaoqunqin@163.com>
- <CAAhV-H4VEtZJAoYBz24=ab37fdpLL_kSS92vxMn61Rcq0C33aQ@mail.gmail.com>
-Content-Language: en-US
-From: Qunqin Zhao <zhaoqunqin@loongson.cn>
-In-Reply-To: <CAAhV-H4VEtZJAoYBz24=ab37fdpLL_kSS92vxMn61Rcq0C33aQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:qMiowJCxPs+zrqdqWIYgAA--.4475S2
-X-CM-SenderInfo: 52kd01pxqtx0o6or00hjvr0hdfq/
-X-Coremail-Antispam: 1Uk129KBj93XoWxtFW5Cr17CrW8ur48WFWDKFX_yoW7Wr4DpF
-	Waka1Ykr4DJr4xuwnxX3W5uFya9395tr1UCa93tayUAr9Fyrn5WFy3KFyUua9rurWxtF12
-	qFWktFZ5uas8AagCm3ZEXasCq-sJn29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7KY7ZEXa
-	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
-	0xBIdaVrnRJUUUkjb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
-	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
-	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
-	0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
-	xVW8Jr0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx
-	1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r106r15McIj6I8E87Iv
-	67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41l42xK82IYc2Ij64
-	vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8G
-	jcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2I
-	x0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK
-	8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I
-	0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x07jUsqXUUUUU=
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260913013615.22615-1-mhun512@gmail.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
+
+On Sat, Sep 12, 2026 at 09:36:15PM -0400, Myeonghun Pak wrote:
+> The INT33FD Crystal Cove driver enables the parent IRQ as a wake source
+> after registering its regmap IRQ chip.  When that succeeds, a later
+> mfd_add_devices() failure or driver removal leaves the wake enable
+> unbalanced.
+> 
+> Register a managed action only after enable_irq_wake() succeeds.  Since
+> the action is registered after the managed regmap IRQ chip, reverse devres
+> order disables IRQ wake before tearing down the IRQ chip.  Keep warning and
+> continuing when enable_irq_wake() itself fails.
+> 
+> This is limited to the Bay Trail and Cherry Trail Crystal Cove PMIC
+> variants using the INT33FD ACPI ID.
+> 
+> This issue was identified during our ongoing static-analysis research while
+> reviewing kernel code.
+
+...
+
+> Assisted-by: OpenAI:GPT-5.6
+
+Assisted-by: LLM
+
+...
+
+>  	ret = enable_irq_wake(pmic->irq);
+> -	if (ret)
+> +	if (ret) {
+>  		dev_warn(dev, "Can't enable IRQ as wake source: %d\n", ret);
+> +	} else {
+> +		ret = devm_add_action_or_reset(dev,
+> +					       crystal_cove_disable_irq_wake, pmic);
+
+Make it a single line.
+
+> +		if (ret)
+> +			return ret;
+> +	}
 
 
-在 2026/9/14 15:36, Huacai Chen 写道:
-> Hi, Qunqin,
->
-> On Fri, Sep 11, 2026 at 5:03 PM Qunqin Zhao <zhaoqunqin@163.com> wrote:
->> From: Qunqin Zhao <zhaoqunqin@loongson.cn>
->>
->> Address multiple historical driver issues discovered by the Sashiko
->> Automation system within the loongson_se_probe() initialization flow
->> and the driver's interrupt service routines [1].
->>
->> - Add an explicit bounds check in se_irq_handler() before accessing
->>   the engines array to prevent an out-of-bounds memory access.
->>
->> - Validate the id argument in loongson_se_init_engine() and reject
->>   engine 0, whose data buffer is reused for the command buffers of all
->>   other engines, to prevent out-of-bounds accesses and overlapping DMA
->>   buffers.
->>
->> - Switch from devm_kmalloc() to devm_kzalloc() and initialize all
->>   engine completion structures in probe(), dropping the redundant
->>   init_completion() in loongson_se_init_engine().
->>
->> - Introduce loongson_se_reinit_completion() to mask the target
->>   interrupt, clear any pending status, and reset the completion under
->>   dev_lock before a command is issued, then re-enable the interrupt
->>   under the same lock after the command has been triggered.  This
->>   closes the race where a stale interrupt from a previously
->>   interrupted command could complete the current command's completion.
->>   A new poll_lock serializes the trigger and poll busy-wait so
->>   interrupts are not disabled for up to 10 ms.
-> The locking of this driver is more and more complicated, I doubt
-> whether AI's review is really correct here. For me, the existing
-> locking code is just fine and simple.
+Shouldn't disable_irq_wake() be called at .shutdown() as well?
 
-I'm not sure  whether disabling interrupts for 10 ms will cause kernel damage.
+-- 
+With Best Regards,
+Andy Shevchenko
 
-Or keep the current lock and fix it if we actually run into problems? 
-
-After all, this extreme case will not occur. In practical tests, polling 
-
-averages only a few microseconds, with the worst case under 1 ms.
-
-Thanks.
-
->
-> Huacai
->
->> - Wait for controller command completion with a bounded
->>   non-interruptible wait so a pending signal cannot leave the
->>   controller running while its DMA buffers are being torn down, and a
->>   wedged controller cannot hang the kernel indefinitely.
->>
->> - Fix EPROBE_DEFER handling: propagate the error directly from
->>   platform_irq_count() instead of overwriting it with ENODEV so that
->>   probe deferral works when the interrupt provider is not yet ready.
->>
->> - Validate dmam_size from firmware against the minimum required size
->>   to keep the command buffers of all engines within engine 0's data
->>   region and prevent overlapping DMA buffers.
->>
->> - Return the error code from devm_request_irq() instead of silently
->>   continuing to prevent an indefinite hang.
->>
->> - Add a loongson_se_stop() cleanup handler registered with
->>   devm_add_action_or_reset() before loongson_se_init() so that a
->>   failed init still stops the controller and masks all interrupts via
->>   devres, preventing DMA access to freed memory.
->>
->> - Zero-initialize the local controller command structures in
->>   loongson_se_init() and loongson_se_init_engine() to prevent
->>   uninitialized stack data from being written to device registers.
->>
->> - Add the SE_CMD_STOP command definition.
->>
->> Link: https://lore.kernel.org/all/20260618095949.GB1672911@google.com/ [1]
->> Fixes: e551fa3159e3 ("mfd: Add support for Loongson Security Engine chip controller")
->> Signed-off-by: Qunqin Zhao <zhaoqunqin@loongson.cn>
->> ---
->>  drivers/mfd/loongson-se.c       | 112 ++++++++++++++++++++++++++++----
->>  include/linux/mfd/loongson-se.h |   1 +
->>  2 files changed, 102 insertions(+), 11 deletions(-)
->>
->> diff --git a/drivers/mfd/loongson-se.c b/drivers/mfd/loongson-se.c
->> index 7f552a8ee..18075d4fa 100644
->> --- a/drivers/mfd/loongson-se.c
->> +++ b/drivers/mfd/loongson-se.c
->> @@ -23,6 +23,8 @@
->>  struct loongson_se {
->>         void __iomem *base;
->>         spinlock_t dev_lock;
->> +       /* Synchronizes command submission between users of different engines */
->> +       spinlock_t poll_lock;
->>         struct completion cmd_completion;
->>
->>         void *dmam_base;
->> @@ -42,7 +44,7 @@ static int loongson_se_poll(struct loongson_se *se, u32 int_bit)
->>         u32 status;
->>         int err;
->>
->> -       spin_lock_irq(&se->dev_lock);
->> +       spin_lock(&se->poll_lock);
->>
->>         /* Notify the controller that the engine needs to be started */
->>         writel(int_bit, se->base + SE_L2SINT_SET);
->> @@ -52,17 +54,51 @@ static int loongson_se_poll(struct loongson_se *se, u32 int_bit)
->>                                                 !(status & int_bit),
->>                                                 1, LOONGSON_ENGINE_CMD_TIMEOUT_US);
->>
->> +       spin_unlock(&se->poll_lock);
->> +
->> +       spin_lock_irq(&se->dev_lock);
->> +       /*
->> +        * Re-enable the interrupt that loongson_se_reinit_completion() masked.
->> +        * The hardware guarantees that once the interrupt is re-enabled, only
->> +        * interrupts for the command just issued can arrive, so a stale
->> +        * interrupt from a previously interrupted command can never complete
->> +        * this command's completion.
->> +        */
->> +       writel(int_bit | readl(se->base + SE_S2LINT_EN), se->base + SE_S2LINT_EN);
->> +
->>         spin_unlock_irq(&se->dev_lock);
->>
->>         return err;
->>  }
->>
 
