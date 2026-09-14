@@ -1,156 +1,117 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FABC35F5E1;
-	Mon, 14 Sep 2026 17:58:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4752D3F39FA
+	for <mfd@lists.linux.dev>; Mon, 14 Sep 2026 19:37:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=210.118.77.12
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789408720; cv=none; b=LdGrBqKgqjdtlEmN/3B7KMCW/uJzPxBHgRY8qu0wd0jnAZ2ks+BZHowfBtxV7QczkBL8N2QTnAvEDhm38fATOB7XL4utYw0nRgmwxUT+vR/gYQxMQGMNYLBktWVs6z5gg8G70rtFJiLvP3cSBB88WAGjsEj2QdDpl7ri6vns5AA=
+	t=1789414681; cv=none; b=a0cbOE+l0ePumz15M5EJMYIugxrTBcmxvakLcAKvc/Tqa4tqbJpS+/Fud5SWnWDdW8+2U8xhGM9e9KZAWLNTx+r1noz37Dvh67RtYqH52cjiHLWsaeNErLOJkgdtqADf65tdtgokjAG8nRjfGkZOMWdQlkd50XSz+Xd4if0bmgo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789408720; c=relaxed/simple;
-	bh=U+dlreTHMrn8mVodgZLK/9z2doJFXHIt2bExrEmPof8=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=j+Gm/h2GZlLffW77OitDiip9aBE04tIh03AjaDnsM7deoxjAF54wbyMtEeDtImLKZJFUf10tO1WavnRMHA6vhE6LgWMQz9CUISkBxsgJB6uAerczdzX1LxARTGbVLSwHBHnUHX3ceI6RLKDjFPYGG0xl9YNugzXYo1GLr4e8YRY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZzAj6iGk; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789414681; c=relaxed/simple;
+	bh=esfTqUFnJaXqzB9sd63RRu6eFINaCWw/BiY6x3X4v3Q=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:From:In-Reply-To:
+	 Content-Type:References; b=ASRHr8uYml+taUq6qgZazL3/FeB6ye5k0sSK3vYbUtA4Ct8F1GhgYH7iGtkFcUmnpVUkZVWkC6qyUcW+x/cvXf1khq0zi/oGRWVLjY3lr1xoZ5NEZ8nsLa6tncJWD8v3atSopIOi4YlL/MmwYpOvXu3SN3ttZRw0TDrRm6NEbtw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=TZKarI6F; arc=none smtp.client-ip=210.118.77.12
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZzAj6iGk"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 79B6D1F000FF;
-	Mon, 14 Sep 2026 17:58:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789408718;
-	bh=IhOQ8GEXdd7uvsZfUmQgjqmO71kvlQhQHpEUuxQmZpY=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=ZzAj6iGkGz2QzwVb22oW27D86y4wW2Tl8olT69zfrhJ872NmkUDJ4LVSQ/lnEP1Xy
-	 jsH3J5lyR4ihAZ7M3UW0KVRnaxcc6869kmOCuVz8tsUCJu7bfaO9zPOYTFoiokkQjq
-	 5XF1dRnCBYrHcXzMuzYsusG/B5iCCIoRdX2lni3K4CN5Vdsc0hUrWTrdRB6hpaefR1
-	 ifHyrzOZMRqu/ODvwqK5I+j4IM37cQJtvgMM7a6mwtGtFMYueLu8N511bNm23HuqnD
-	 kSqAkaR8Q3XG9ilZypm7+QR+mD0xk8me+qgjKaADL6rnd14ZSjTgnbxniuayzsvdD+
-	 fM4iWHB2n5evA==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH] dt-bindings: mfd: as3722: Convert to DT schema
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Shaunak Datar" <shaunakkdatar@gmail.com>
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, lee@kernel.org, robh@kernel.org, conor+dt@kernel.org
-In-Reply-To: <20260914174440.104115-1-shaunakkdatar@gmail.com>
-References: <20260914174440.104115-1-shaunakkdatar@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 14 Sep 2026 17:58:38 +0000
-Message-Id: <20260914175838.79B6D1F000FF@smtp.kernel.org>
+	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="TZKarI6F"
+Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
+	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20260914193754euoutp02981281706c8e3139fb5b93cfbd25526a~VRyqJA0Bb0156301563euoutp02C;
+	Mon, 14 Sep 2026 19:37:54 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20260914193754euoutp02981281706c8e3139fb5b93cfbd25526a~VRyqJA0Bb0156301563euoutp02C
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1789414675;
+	bh=5quPaYobLEbeMOu5MqGjHlx1gGO6GYM4Ci77INCJQLA=;
+	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
+	b=TZKarI6Fzswot9c4aVXuInO0XRxf9GfzbOMlt7onjkVzeL1ZbqAInBvs4atJ/oDi0
+	 AUtj/OANEEt5ewm+9Sk6Wb7zy4Ml9/IM+VLkFU4eqSkZba+0uuGUKYDcVqnkJKj0Lt
+	 oxPYASnd7d7htQ9OwYLZimxgp4UXzR/izU9JOwv4=
+Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
+	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
+	20260914193754eucas1p1c5e933b8753ce6d75f7c5f34e3bb72d6~VRypvtokG2298422984eucas1p1x;
+	Mon, 14 Sep 2026 19:37:54 +0000 (GMT)
+Received: from [192.168.1.44] (unknown [106.210.136.40]) by
+	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
+	20260914193752eusmtip20be6a60002305f9f5bc9e993970a2799~VRynuwkCl0478104781eusmtip2P;
+	Mon, 14 Sep 2026 19:37:52 +0000 (GMT)
+Message-ID: <782506ab-70b8-40a0-98f6-239e74351c1e@samsung.com>
+Date: Mon, 14 Sep 2026 21:37:52 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 06/19] dt-bindings: display: verisilicon: Add
+ starfive,jh7110-dc8200
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
+	<neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof
+	Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Andrzej
+	Hajda <andrzej.hajda@intel.com>, Robert Foss <rfoss@kernel.org>, Laurent
+	Pinchart <Laurent.pinchart@ideasonboard.com>, Jonas Karlman
+	<jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, Luca Ceresoli
+	<luca.ceresoli@bootlin.com>, David Airlie <airlied@gmail.com>, Simona Vetter
+	<simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+	Lee Jones <lee@kernel.org>, Andy Yan <andy.yan@rock-chips.com>, Philipp
+	Zabel <p.zabel@pengutronix.de>, Emil Renner Berthing <kernel@esmil.dk>, Hal
+	Feng <hal.feng@starfivetech.com>, Michael Turquette
+	<mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, Brian Masney
+	<bmasney@redhat.com>, Heiko Stuebner <heiko@sntech.de>, Conor Dooley
+	<conor@kernel.org>, Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt
+	<palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti
+	<alex@ghiti.fr>, Dominique Belhachemi <db@domibel.de>, Brian Masney
+	<bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>,
+	linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+	mfd@lists.linux.dev, linux-clk@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org,
+	linux-riscv@lists.infradead.org, Andy Yan <andyshrk@163.com>, Marek
+	Szyprowski <m.szyprowski@samsung.com>, Maud Spierings
+	<maud_spierings@murena.io>, Graham Markall <hello@big-grey.co.uk>, Icenowy
+	Zheng <zhengxingda@iscas.ac.cn>
+Content-Language: en-US
+From: Michal Wilczynski <m.wilczynski@samsung.com>
+In-Reply-To: <20260910-amorphous-vigilant-jaybird-d65c4f@quoll>
+Content-Transfer-Encoding: 7bit
+X-CMS-MailID: 20260914193754eucas1p1c5e933b8753ce6d75f7c5f34e3bb72d6
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-RootMTR: 20260904132719eucas1p1c900149ffa1b8771aca238e6441482ee
+X-EPHeader: CA
+X-CMS-RootMailID: 20260904132719eucas1p1c900149ffa1b8771aca238e6441482ee
+References: <20260904-jh7110-clean-send-v3-0-484f9ae72715@samsung.com>
+	<CGME20260904132719eucas1p1c900149ffa1b8771aca238e6441482ee@eucas1p1.samsung.com>
+	<20260904-jh7110-clean-send-v3-6-484f9ae72715@samsung.com>
+	<20260910-amorphous-vigilant-jaybird-d65c4f@quoll>
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
-s) to consider:
 
-New issues:
-- [Medium] The YAML schema artificially restricts the PMIC to a single pinm=
-ux state node by hardcoding the node name to `pinmux`.
-- [Medium] The `interrupts` property is missing from the `required` list in=
- the YAML binding despite being strictly required by the MFD driver.
 
-Pre-existing issues:
-- [High] The regulator driver incorrectly rejects `ams,ext-control =3D <3>`=
-, preventing configuration of the ENABLE3 external control pin.
---
+On 9/10/26 10:34, Krzysztof Kozlowski wrote:
+> On Fri, Sep 04, 2026 at 03:27:07PM +0200, Michal Wilczynski wrote:
+>> The JH7110 embeds a DC8200. The binding requires an SoC specific
+>> compatible ahead of the generic one, so add the JH7110 to the enum.
+>>
+>> Signed-off-by: Michal Wilczynski <m.wilczynski@samsung.com>
+>> ---
+>>  Documentation/devicetree/bindings/display/verisilicon,dc.yaml | 1 +
+>>  1 file changed, 1 insertion(+)
+> 
+> And this one must be before patch #5 or switch in your patch #5 to
+> compatibles-style for children, instead of $ref (see some recent
+> display/msm/*mdss* bindings like sm8750).
+> 
+> Best regards,
+> Krzysztof
 
-commit a75df0e5820c75f9d84e306c3842971fc178f5d3
-Author: Shaunak Datar <shaunakkdatar@gmail.com>
+Thanks, I think I can do both for the v4.
 
-dt-bindings: mfd: as3722: Convert to DT schema
+> 
+> 
 
-Convert the AS3722 PMIC binding from the text format to YAML Schema to
-enable DT Schema validation.
-
-> diff --git a/Documentation/devicetree/bindings/mfd/ams,as3722.yaml b/Docu=
-mentation/devicetree/bindings/mfd/ams,as3722.yaml
-> new file mode 100644
-> index 0000000000000..065537f50e063
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/mfd/ams,as3722.yaml
-[ ... ]
-> +  ams,system-power-controller:
-> +    type: boolean
-> +    description:
-> +      Boolean, to enable the power off functionality through this device.
-> +
-> +  pinmux:
-> +    type: object
-> +    additionalProperties: false
-
-[Severity: Medium]
-Does this hardcoded node name artificially restrict the PMIC to a single pi=
-nmux
-state node?
-
-Device trees requiring multiple pinctrl states (e.g., default and sleep) wi=
-ll
-fail schema validation if they define multiple state nodes. The schema uses=
- a
-fixed pinmux property name and additionalProperties: false on the root, whi=
-ch
-rejects any other node names. Would it be better to use patternProperties
-(e.g., "^pinmux(-[a-z0-9-]+)?$") to allow multiple state nodes?
-
-> +    description:
-> +      Pin control setting at boot. Each subnode represents some desired
-[ ... ]
-> +          ams,enable-tracking:
-> +            type: boolean
-> +            description:
-> +              Enable tracking with SD1, only supported by LDO3.
-> +
-> +required:
-> +  - compatible
-> +  - reg
-> +  - interrupt-controller
-> +  - "#interrupt-cells"
-
-[Severity: Medium]
-Is the interrupts property missing from this required list?
-
-The PMIC driver unconditionally fails to probe with -EINVAL at runtime if t=
-he
-interrupt is absent (as3722_i2c_probe() calls irq_get_irq_data(i2c->irq)).
-Device trees missing the interrupts property will silently pass schema
-validation but fail at runtime. Adding interrupts to the required list would
-accurately reflect the hardware and driver dependencies.
-
-[ ... ]
-
-While reviewing this binding conversion, I also noticed a pre-existing issue
-in the regulator driver.
-
-drivers/regulator/as3722-regulator.c:as3722_get_regulator_dt_data() {
-    ...
-		ret =3D of_property_read_u32(reg_node, "ams,ext-control", &prop);
-		if (!ret) {
-			if (prop < 3)
-				reg_config->ext_control =3D prop;
-			else
-				dev_warn(&pdev->dev,
-					"ext-control have invalid option: %u\n",
-					prop);
-		}
-    ...
-}
-
-[Severity: High]
-This is a pre-existing issue, but does this off-by-one check incorrectly re=
-ject
-ams,ext-control =3D <3>?
-
-A valid device tree specifying ams,ext-control =3D <3> is validated with
-if (prop < 3), which rejects 3, warns the user, and defaults to 0 (no exter=
-nal
-control), despite as3722_extreg_init() explicitly supporting
-AS3722_EXT_CONTROL_ENABLE3 (3). Should this check be prop <=3D 3 so the ENA=
-BLE3
-hardware pin can be correctly configured?
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260914174440.1041=
-15-1-shaunakkdatar@gmail.com?part=3D1
+Best regards,
+-- 
+Michal Wilczynski <m.wilczynski@samsung.com>
