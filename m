@@ -1,68 +1,62 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E09249EC4A;
-	Mon, 14 Sep 2026 15:21:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4555D4A260C;
+	Mon, 14 Sep 2026 15:21:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789399275; cv=none; b=CNsBAkXTTjAaRoBsCzuTXPCnfXhsSGiqONqA/QiclhoYg7eImp82OuVKdDIN+qcMBkXswz3NdzT7cuRFdnjFWDjwEGL6FUaIWHDDiiwwy3WDEwj2KfdaPk1LyiMDt8OKTRqa2v2lFRJHkbcLFGEGgEnmLocryFmjdTyKGePxckI=
+	t=1789399322; cv=none; b=HEqOc4Z1E/Nlg3bE69bvOfe+GCzUluv9jwO0rgA425Ufd3ra/mBnYp99K8qUJK8OYvR0mM2dDYegXh8WCJeGKHQZVMf3fAy+2PPycO96E/soIAnjV4NRqdx2MTZPcoMQzzKO8yUHszFUmKnQyazliax7/tUWpc4qa5LHZyJSef0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789399275; c=relaxed/simple;
-	bh=x32QQPQzQgrdpRfR+6x5PkkSeUgjL/5Yki3QP22a/60=;
+	s=arc-20240116; t=1789399322; c=relaxed/simple;
+	bh=D1ShA7Ja24sSwcQmiinuAgguB3eRDA7U5CDf9VVXPoE=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=SbXLsg4XKcNMaFOOtJEW1Cdw1raOgsMbWbVWJ1cpEpMp2TfaF0SPqNPSDR3+/MvzOKtopKwSEPUT2rMb4Lc7GBsxgQNPSsKui5MtblpF348Rk2YkK62u0Rn4ZIGjk565Qnw6sNAqZqLtk8kf7SnRRrJ9PcEMGLL46janz0WLzSY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XF6UPoH5; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=bP0O45JsoeIakSN+QPPvirZhFyFcrPurr0fnEOKU0m7NEK/5v+HBCfmu1s8YiIdoW5UHfPWvaKHWvXvoqMf8JE+jtGktTU01wCuU4NT+sZCHbZzR3D5QppzmXnGqQxnxCR0evhHv3hm3SKe+OehsBJRIqnBCbgoQzUuajAEmi2E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DNn7psfG; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XF6UPoH5"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61B7E1F000FF;
-	Mon, 14 Sep 2026 15:21:12 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DNn7psfG"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F7951F000FF;
+	Mon, 14 Sep 2026 15:21:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789399272;
-	bh=h2ZNmba0KibhPNoeE1X88UknsUiczS5w1go9ZpTW9ec=;
+	s=k20260515; t=1789399319;
+	bh=D1ShA7Ja24sSwcQmiinuAgguB3eRDA7U5CDf9VVXPoE=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=XF6UPoH5ec2k/tfDv01AHGASSeKgwWL01paFJUMEbIhjvSPlSjRahdO7N6CkcK2J0
-	 86lMnNn8p/gGcz+AHEfs2w/tXn4W9WUgu8lCvBSvnTLL0qkD1waTYCpIwcNy8yGGwT
-	 0/OI1G0dF+pJ16uuUljKudMRPryi9nUwawLdKO4HQqdTvAAa7UHEIcQSnjGNUykjpm
-	 yi1NeKI6bPSwLToXUQQMagebXmCjfxE/lgx5C8xojJE5UAZCXhv1Z/b8yx6MP533cd
-	 z/jSX0NG958ciI8g5K18ZdWEBVeLVHiVhrvVUelrOlKzvMdbzEvL/lvQiJ1Gx8UKZM
-	 Ngv9N7MUc6tsQ==
+	b=DNn7psfGNOYma4An7p2BTPfbp1JmveaGGMaOVLsYJCLAIUsBJjdxLrvvS63f3rLjv
+	 r57uyVusRUNeIzwdSL3VC4a+Ht6WhChbocSwidOgf+zstly3guw8akdwu8CXjzM1Kf
+	 7VOvj6kt5NXj+tnXt0lXhw0UXvBUnfe0DCmnL2y5FYnzDBog4TkAgdtAzliDnYTHuZ
+	 HTlDoAIjisq5vhHJ73UpHrermpj9Akm2MSa1zMl0TC9vC0Hf0w9E3a62/JLtHd3b2w
+	 xyJMIpXeP2TCPNVm5RrfCI6jluxm3hy8aBva5ydUnNKZJg4xtpsizLxgW8QK2ntCN3
+	 MnNEmpFF0y4SA==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v25 06/10] power: reset: Add psci-reboot-mode driver
+Subject: Re: [PATCH v25 04/10] firmware: psci: Add support for PSCI
+ auxiliary devices
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Shivendra Pratap" <shivendra.pratap@oss.qualcomm.com>
-Cc: robh@kernel.org, devicetree@vger.kernel.org, conor+dt@kernel.org, mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260914-arm-psci-system_reset2-vendor-reboots-v25-6-4aaf5c09b5c2@oss.qualcomm.com>
+Cc: robh@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20260914-arm-psci-system_reset2-vendor-reboots-v25-4-4aaf5c09b5c2@oss.qualcomm.com>
 References: <20260914-arm-psci-system_reset2-vendor-reboots-v25-0-4aaf5c09b5c2@oss.qualcomm.com>
- <20260914-arm-psci-system_reset2-vendor-reboots-v25-6-4aaf5c09b5c2@oss.qualcomm.com>
+ <20260914-arm-psci-system_reset2-vendor-reboots-v25-4-4aaf5c09b5c2@oss.qualcomm.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Mon, 14 Sep 2026 15:21:11 +0000
-Message-Id: <20260914152112.61B7E1F000FF@smtp.kernel.org>
+Date: Mon, 14 Sep 2026 15:21:58 +0000
+Message-Id: <20260914152159.5F7951F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-> PSCI supports different types of resets like SYSTEM_RESET, SYSTEM_RESET2
-> ARCH WARM reset and SYSTEM_RESET2 vendor-specific resets. Currently
-> there is no common driver that handles all supported psci resets at one
-> place. Additionally, there is no common mechanism to issue the supported
-> psci resets from userspace.
+> PSCI has multiple kernel consumers, such as cpuidle-psci-domain.
+> Currently, both the PSCI core driver and cpuidle-psci-domain bind
+> directly to the same PSCI node "arm,psci-1.0". Additional consumers, if
+> introduced, would also need to bind in the same way, leading to multiple
+> drivers attached to a single device node.
 >=20
-> Add psci-reboot-mode as an auxiliary device created by the psci-devices
-> driver. Define two types of PSCI resets, predefined-resets and
-> vendor-specific resets.  Predefined-resets are defined by psci driver
-> and vendor-specific resets are defined by SoC vendors, under the
-> psci:reboot-mode node of SoC device tree.
+> Introduce a PSCI auxiliary-device provider that binds to "arm,psci-1.0"
+> and registers PSCI child devices on the auxiliary bus. As the first
+> user, register cpuidle-psci-domain as an auxiliary device.
 >=20
-> Register the driver with the reboot-mode framework to interface these
-> resets to userspace. When userspace initiates a supported command, pass
-> the reset arguments to the PSCI driver to enable command-based reset.
->=20
-> This change allows userspace to issue supported PSCI reset commands
-> using the standard reboot system calls while enabling SoC vendors to
-> define their specific resets for PSCI.
+> Update cpuidle-psci-domain to probe as an auxiliary driver and use
+> the PSCI device node for power-domain traversal.
 >=20
 > Suggested-by: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
 > Suggested-by: Lee Jones <lee@kernel.org>
@@ -73,5 +67,5 @@ Sashiko has reviewed this patch and found no issues. It looks great!
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260914-arm-psci-s=
-ystem_reset2-vendor-reboots-v25-0-4aaf5c09b5c2@oss.qualcomm.com?part=3D6
+ystem_reset2-vendor-reboots-v25-0-4aaf5c09b5c2@oss.qualcomm.com?part=3D4
 
