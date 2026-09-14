@@ -1,553 +1,156 @@
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 590D148D86E
-	for <mfd@lists.linux.dev>; Mon, 14 Sep 2026 17:45:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FABC35F5E1;
+	Mon, 14 Sep 2026 17:58:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789407904; cv=none; b=urd1TmqAfV/uQwas48WGoS9Zp6uezQ6EAP2Fr3SHb+w+/goL4LhA1P9X9EcOTJJwkWYjAc3tnhf0Ri1ETrepQDFsp/hJgwapvb2hetXgsvUz24Up0M5EBZig9QgSE4nUvDFwi2sGu1/St4i2TGmjE1UemLTfdiRib2ro1oqsYsg=
+	t=1789408720; cv=none; b=LdGrBqKgqjdtlEmN/3B7KMCW/uJzPxBHgRY8qu0wd0jnAZ2ks+BZHowfBtxV7QczkBL8N2QTnAvEDhm38fATOB7XL4utYw0nRgmwxUT+vR/gYQxMQGMNYLBktWVs6z5gg8G70rtFJiLvP3cSBB88WAGjsEj2QdDpl7ri6vns5AA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789407904; c=relaxed/simple;
-	bh=MMWFGtaedlVIaLBehr3d5s7D/JrRyqZqSljlSJrtzcA=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=kLDMHcqPeRbpw4IPnNlDET7i+fbjNnrRkb9M1T4H7NEA5yoHqaVXWWWFOYgjVy/2X5zfDLRM21V2BR0rjthFCPxQBQ9auAuhaf38z5zgU+PRLECKblB/3BMbkEZvHEGaiSKG45XWwNWFCMwwMMGpP7L2D4dD4fTXcJ7XhQ0o1YU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hAwZP0lk; arc=none smtp.client-ip=209.85.210.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1789408720; c=relaxed/simple;
+	bh=U+dlreTHMrn8mVodgZLK/9z2doJFXHIt2bExrEmPof8=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=j+Gm/h2GZlLffW77OitDiip9aBE04tIh03AjaDnsM7deoxjAF54wbyMtEeDtImLKZJFUf10tO1WavnRMHA6vhE6LgWMQz9CUISkBxsgJB6uAerczdzX1LxARTGbVLSwHBHnUHX3ceI6RLKDjFPYGG0xl9YNugzXYo1GLr4e8YRY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZzAj6iGk; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hAwZP0lk"
-Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-86908cbc011so5267599b3a.1
-        for <mfd@lists.linux.dev>; Mon, 14 Sep 2026 10:45:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789407901; x=1790012701; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=3Y3GiwQ4Cm9nlRyQc6o+wIwqI/4ArsztJdfOVuNld2Y=;
-        b=hAwZP0lkjZ/3xrb+jalwHJPZ//dVV8d1JTPtJZAFeqp9kCtv2/KwWMyTcym5zNtCGX
-         Z2GBDZTGHyEJ2DzuinYp5uJkEhwyvWrJ0tVR6/Y2T4/x8WPZHKxJoxRCiUy83iPTF9gW
-         4U1CtDkpYfNuyZz2rBcIZFvqbBHdX7FJqliFq2kuSvXMn2joF0Kpw1K+3hUBMgfigC8+
-         Hs4JpdmD31TpaloCpZUGbq0Z+oTtw9wrt/ChigX32ZG8EvRPc2Ovo2PhfLcfuNYfLr4X
-         aIn07vV4R5B8UPhZ5z79TqZLMgnf4k4Qh9au6FT8XEHa4/u8KBWiuQrjMKLEsryFmwo+
-         N51w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789407901; x=1790012701;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=3Y3GiwQ4Cm9nlRyQc6o+wIwqI/4ArsztJdfOVuNld2Y=;
-        b=CtXxY798XyoKDB5NFjSttgxFZM3B5BtKpq9uLk+iPc/EM298YFQYO9dg9OBRaVfvtS
-         vs+O5fFyg52ofVm1v2uKZ6JOLfn+Slvq60yxIhdhqVnWdhJbtWHYrx6czHsbS4sRqWxm
-         4d6XdAu3JozGjkQ+/uWzkozPMnm4Z8NOI7ZwrSMJNn8cwiez5pxpRfXj0iobNUy5zJp5
-         kWXs1RmmI2bFXXK0jujbh8DtfZWYWzNWIltATP69uHSCpgyBH25ug5Y5v9QqTmW+Hlyd
-         JSra22WlLMBImtqRHtUSLO5UGFogRBbHabU7K9AaShrrKdW6FjZ3vjtoGKlE9KVxtMmb
-         RLog==
-X-Forwarded-Encrypted: i=1; AKwUvBzSrbvo90HgI40oHVc8Y6l+sR8IdOjb2ERlHDto3wi/q9vRMlMC4TjtF1fWAueyVTD23ug=@lists.linux.dev
-X-Gm-Message-State: AFuF++nlBMT611s+3hI+ineqFPeTKmdO81yXj5e2U8FZC2INo587ig+d
-	FD7OF2lkZ8vqRgxfO1WFA7aWznfmXrJFPDj9+5QAnz0+xhWb8fp/B+tW
-X-Gm-Gg: AYBFou3P352j0azM1iu53nmn8tBV41OPTWdLpis0rZ7qknSopm5c71jdtcra+5wG2kR
-	iZjdbDgOtWsDBGMCCPZgZ+v4778S5HQE3skslqvk513SFZWX+5l+MqWTGJrG7aOXMYlaPrFLaRB
-	57zIWPKBblRnwz7rWcOj3Mo/u0IDUw+8upOBDCuTP66WgOg/EpJOIMU6hdcO0cDrqRO/x58O1i5
-	AV3lRwxXCIpfVDjY2zcfBoSTS/htzMI4x0EXaNE2DCcR97X908tV8m/rkGTcZlPIKRnft0ywJGl
-	lifKsMHbzzBVDbwqeiQonlpLDStYzJSQh+YiIRbBSTBDr2podtBU03zwsnJn9vmJErL9BBydqnJ
-	wRDNZF4uKL7+JykZDg6pGkZuVHQCd2waz6GtiaKcJvYyQiZnJ55Jpu8lNtzrMcSOOWGL/I6vNA7
-	VRGkSs+QzX6cAt6zCBLEfnIJOb6MmPwZfNm+96nV/lFCaxWYPLxo/OlnLJpu2R92WNpZvg8mD56
-	i5Z9P8jQQ==
-X-Received: by 2002:a05:6a20:7f9f:b0:3d3:ae50:97c7 with SMTP id adf61e73a8af0-3db406a920dmr7251537637.20.1789407901284;
-        Mon, 14 Sep 2026 10:45:01 -0700 (PDT)
-Received: from fedora ([103.137.155.131])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14365b759d0sm27664356c88.7.2026.09.14.10.44.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 14 Sep 2026 10:45:00 -0700 (PDT)
-From: Shaunak Datar <shaunakkdatar@gmail.com>
-To: lee@kernel.org,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org
-Cc: ldewangan@nvidia.com,
-	mfd@lists.linux.dev,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Shaunak Datar <shaunakkdatar@gmail.com>
-Subject: [PATCH] dt-bindings: mfd: as3722: Convert to DT schema
-Date: Mon, 14 Sep 2026 23:14:40 +0530
-Message-ID: <20260914174440.104115-1-shaunakkdatar@gmail.com>
-X-Mailer: git-send-email 2.54.0
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZzAj6iGk"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 79B6D1F000FF;
+	Mon, 14 Sep 2026 17:58:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789408718;
+	bh=IhOQ8GEXdd7uvsZfUmQgjqmO71kvlQhQHpEUuxQmZpY=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=ZzAj6iGkGz2QzwVb22oW27D86y4wW2Tl8olT69zfrhJ872NmkUDJ4LVSQ/lnEP1Xy
+	 jsH3J5lyR4ihAZ7M3UW0KVRnaxcc6869kmOCuVz8tsUCJu7bfaO9zPOYTFoiokkQjq
+	 5XF1dRnCBYrHcXzMuzYsusG/B5iCCIoRdX2lni3K4CN5Vdsc0hUrWTrdRB6hpaefR1
+	 ifHyrzOZMRqu/ODvwqK5I+j4IM37cQJtvgMM7a6mwtGtFMYueLu8N511bNm23HuqnD
+	 kSqAkaR8Q3XG9ilZypm7+QR+mD0xk8me+qgjKaADL6rnd14ZSjTgnbxniuayzsvdD+
+	 fM4iWHB2n5evA==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH] dt-bindings: mfd: as3722: Convert to DT schema
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Shaunak Datar" <shaunakkdatar@gmail.com>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, lee@kernel.org, robh@kernel.org, conor+dt@kernel.org
+In-Reply-To: <20260914174440.104115-1-shaunakkdatar@gmail.com>
+References: <20260914174440.104115-1-shaunakkdatar@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Mon, 14 Sep 2026 17:58:38 +0000
+Message-Id: <20260914175838.79B6D1F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+
+Thank you for your contribution! Sashiko AI review found 3 potential issue(=
+s) to consider:
+
+New issues:
+- [Medium] The YAML schema artificially restricts the PMIC to a single pinm=
+ux state node by hardcoding the node name to `pinmux`.
+- [Medium] The `interrupts` property is missing from the `required` list in=
+ the YAML binding despite being strictly required by the MFD driver.
+
+Pre-existing issues:
+- [High] The regulator driver incorrectly rejects `ams,ext-control =3D <3>`=
+, preventing configuration of the ENABLE3 external control pin.
+--
+
+commit a75df0e5820c75f9d84e306c3842971fc178f5d3
+Author: Shaunak Datar <shaunakkdatar@gmail.com>
+
+dt-bindings: mfd: as3722: Convert to DT schema
 
 Convert the AS3722 PMIC binding from the text format to YAML Schema to
 enable DT Schema validation.
 
-Signed-off-by: Shaunak Datar <shaunakkdatar@gmail.com>
----
- .../devicetree/bindings/mfd/ams,as3722.yaml   | 230 ++++++++++++++++++
- .../devicetree/bindings/mfd/as3722.txt        | 214 ----------------
- 2 files changed, 230 insertions(+), 214 deletions(-)
- create mode 100644 Documentation/devicetree/bindings/mfd/ams,as3722.yaml
- delete mode 100644 Documentation/devicetree/bindings/mfd/as3722.txt
+> diff --git a/Documentation/devicetree/bindings/mfd/ams,as3722.yaml b/Docu=
+mentation/devicetree/bindings/mfd/ams,as3722.yaml
+> new file mode 100644
+> index 0000000000000..065537f50e063
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/mfd/ams,as3722.yaml
+[ ... ]
+> +  ams,system-power-controller:
+> +    type: boolean
+> +    description:
+> +      Boolean, to enable the power off functionality through this device.
+> +
+> +  pinmux:
+> +    type: object
+> +    additionalProperties: false
 
-diff --git a/Documentation/devicetree/bindings/mfd/ams,as3722.yaml b/Documentation/devicetree/bindings/mfd/ams,as3722.yaml
-new file mode 100644
-index 000000000000..065537f50e06
---- /dev/null
-+++ b/Documentation/devicetree/bindings/mfd/ams,as3722.yaml
-@@ -0,0 +1,230 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/mfd/ams,as3722.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: ams AS3722 Power Management Integrated Circuit
-+
-+maintainers:
-+  - Laxman Dewangan <ldewangan@nvidia.com>
-+
-+properties:
-+  compatible:
-+    const: ams,as3722
-+
-+  reg:
-+    description: I2C device address.
-+    maxItems: 1
-+
-+  interrupts:
-+    maxItems: 1
-+
-+  interrupt-controller: true
-+
-+  "#interrupt-cells":
-+    const: 2
-+    description: |
-+      Should be set to 2 for IRQ number and flags.
-+      The first cell is the IRQ number. IRQ numbers for different interrupt
-+      source of AS3722 are defined at dt-bindings/mfd/as3722.h
-+      The second cell is the flags, encoded as the trigger masks from
-+      dt-bindings/interrupt-controller/irq.h
-+
-+  gpio-controller: true
-+
-+  "#gpio-cells":
-+    const: 2
-+    description:
-+      The first cell is the pin number and the second cell is used to
-+      specify the GPIO polarity.
-+
-+  ams,enable-internal-int-pullup:
-+    type: boolean
-+    description:
-+      Boolean property, to enable internal pullup on interrupt pin. Missing
-+      this will disable internal pullup on INT pin.
-+
-+  ams,enable-internal-i2c-pullup:
-+    type: boolean
-+    description:
-+      Boolean property, to enable internal pullup on i2c scl/sda pins.
-+      Missing this will disable internal pullup on i2c scl/sda lines.
-+
-+  ams,enable-ac-ok-power-on:
-+    type: boolean
-+    description:
-+      Boolean property, to enable exit out of power off mode with AC_OK pin
-+      (pin enabled in power off mode).
-+
-+  ams,system-power-controller:
-+    type: boolean
-+    description:
-+      Boolean, to enable the power off functionality through this device.
-+
-+  pinmux:
-+    type: object
-+    additionalProperties: false
-+    description:
-+      Pin control setting at boot. Each subnode represents some desired
-+      configuration for a list of pins. This configuration can include the
-+      mux function to select on those pin(s), and various pin configuration
-+      parameters, such as pull-up, open drain.
-+
-+    patternProperties:
-+      "^gpio[0-9_-]+$":
-+        type: object
-+        $ref: /schemas/pinctrl/pinmux-node.yaml#
-+        unevaluatedProperties: false
-+
-+        properties:
-+          pins:
-+            description: List of pins.
-+            items:
-+              enum: [gpio0, gpio1, gpio2, gpio3, gpio4, gpio5, gpio6, gpio7]
-+
-+          function:
-+            enum: [gpio, interrupt-out, gpio-in-interrupt,
-+                   vsup-vbat-low-undebounce-out, vsup-vbat-low-debounce-out,
-+                   voltage-in-standby, oc-pg-sd0, oc-pg-sd6, powergood-out,
-+                   pwm-in, pwm-out, clk32k-out, watchdog-in, soft-reset-in]
-+
-+          bias-disable: true
-+          bias-pull-up: true
-+          bias-pull-down: true
-+          bias-high-impedance: true
-+          drive-open-drain: true
-+
-+        required:
-+          - pins
-+
-+  regulators:
-+    type: object
-+    additionalProperties: false
-+    description:
-+      Container for the regulator subnodes and their input supplies.
-+
-+    properties:
-+      vsup-sd2-supply:
-+        description: Input supply for SD2.
-+      vsup-sd3-supply:
-+        description: Input supply for SD3.
-+      vsup-sd4-supply:
-+        description: Input supply for SD4.
-+      vsup-sd5-supply:
-+        description: Input supply for SD5.
-+      vin-ldo0-supply:
-+        description: Input supply for LDO0.
-+      vin-ldo1-6-supply:
-+        description: Input supply for LDO1 and LDO6.
-+      vin-ldo2-5-7-supply:
-+        description: Input supply for LDO2, LDO5 and LDO7.
-+      vin-ldo3-4-supply:
-+        description: Input supply for LDO3 and LDO4.
-+      vin-ldo9-10-supply:
-+        description: Input supply for LDO9 and LDO10.
-+      vin-ldo11-supply:
-+        description: Input supply for LDO11.
-+
-+    patternProperties:
-+      "^(sd[0-6]|ldo[0-79]|ldo1[01])$":
-+        type: object
-+        $ref: /schemas/regulator/regulator.yaml#
-+        unevaluatedProperties: false
-+
-+        properties:
-+          ams,ext-control:
-+            $ref: /schemas/types.yaml#/definitions/uint32
-+            enum: [0, 1, 2, 3]
-+            description: |
-+              External control of the rail. The option of this properties
-+              will tell which external input is controlling this rail.
-+              Valid values are 0, 1, 2 and 3.
-+                0: There is no external control of this rail.
-+                1: Rail is controlled by ENABLE1 input pin.
-+                2: Rail is controlled by ENABLE2 input pin.
-+                3: Rail is controlled by ENABLE3 input pin.
-+              Missing this property on DT will be assumed as no external
-+              control. The external control pin macros are defined at
-+              dt-bindings/mfd/as3722.h
-+
-+          ams,enable-tracking:
-+            type: boolean
-+            description:
-+              Enable tracking with SD1, only supported by LDO3.
-+
-+required:
-+  - compatible
-+  - reg
-+  - interrupt-controller
-+  - "#interrupt-cells"
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/interrupt-controller/arm-gic.h>
-+    #include <dt-bindings/mfd/as3722.h>
-+
-+    i2c {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        pmic@40 {
-+            compatible = "ams,as3722";
-+            reg = <0x40>;
-+            interrupts = <GIC_SPI 86 IRQ_TYPE_LEVEL_HIGH>;
-+
-+            ams,system-power-controller;
-+
-+            interrupt-controller;
-+            #interrupt-cells = <2>;
-+
-+            gpio-controller;
-+            #gpio-cells = <2>;
-+
-+            pinctrl-names = "default";
-+            pinctrl-0 = <&as3722_default>;
-+
-+            as3722_default: pinmux {
-+                gpio0 {
-+                    pins = "gpio0";
-+                    function = "gpio";
-+                    bias-pull-down;
-+                };
-+
-+                gpio1_2_4_7 {
-+                    pins = "gpio1", "gpio2", "gpio4", "gpio7";
-+                    function = "gpio";
-+                    bias-pull-up;
-+                };
-+
-+                gpio3_5_6 {
-+                    pins = "gpio3", "gpio5", "gpio6";
-+                    bias-high-impedance;
-+                };
-+            };
-+
-+            regulators {
-+                vsup-sd2-supply = <&vdd_5v0_sys>;
-+                vsup-sd3-supply = <&vdd_5v0_sys>;
-+                vin-ldo0-supply = <&vdd_1v35_lp0>;
-+
-+                sd0 {
-+                    regulator-name = "vdd_cpu";
-+                    regulator-min-microvolt = <700000>;
-+                    regulator-max-microvolt = <1400000>;
-+                    regulator-always-on;
-+                    ams,ext-control = <AS3722_EXT_CONTROL_PIN_ENABLE2>;
-+                };
-+
-+                ldo3 {
-+                    regulator-name = "vdd_rtc";
-+                    regulator-min-microvolt = <1200000>;
-+                    regulator-max-microvolt = <1200000>;
-+                    regulator-always-on;
-+                    ams,enable-tracking;
-+                };
-+            };
-+        };
-+    };
-diff --git a/Documentation/devicetree/bindings/mfd/as3722.txt b/Documentation/devicetree/bindings/mfd/as3722.txt
-deleted file mode 100644
-index 2a665741d7fe..000000000000
---- a/Documentation/devicetree/bindings/mfd/as3722.txt
-+++ /dev/null
-@@ -1,214 +0,0 @@
--* ams AS3722 Power management IC.
--
--Required properties:
---------------------
--- compatible: Must be "ams,as3722".
--- reg: I2C device address.
--- interrupt-controller: AS3722 has internal interrupt controller which takes the
--  interrupt request from internal sub-blocks like RTC, regulators, GPIOs as well
--  as external input.
--- #interrupt-cells: Should be set to 2 for IRQ number and flags.
--  The first cell is the IRQ number. IRQ numbers for different interrupt source
--  of AS3722 are defined at dt-bindings/mfd/as3722.h
--  The second cell is the flags, encoded as the trigger masks from binding document
--	interrupts.txt, using dt-bindings/irq.
--
--Optional properties:
----------------------
--- ams,enable-internal-int-pullup: Boolean property, to enable internal pullup on
--	interrupt pin. Missing this will disable internal pullup on INT pin.
--- ams,enable-internal-i2c-pullup: Boolean property, to enable internal pullup on
--	i2c scl/sda pins. Missing this will disable internal pullup on i2c
--	scl/sda lines.
--- ams,enable-ac-ok-power-on: Boolean property, to enable exit out of power off
--	mode with AC_OK pin (pin enabled in power off mode).
--
--Optional submodule and their properties:
--=======================================
--
--Pinmux and GPIO:
--===============
--Device has 8 GPIO pins which can be configured as GPIO as well as the special IO
--functions.
--
--Please refer to pinctrl-bindings.txt in this directory for details of the
--common pinctrl bindings used by client devices, including the meaning of the
--phrase "pin configuration node".
--
--Following are properties which is needed if GPIO and pinmux functionality
--is required:
--    Required properties:
--    -------------------
--	- gpio-controller: Marks the device node as a GPIO controller.
--	- #gpio-cells: Number of GPIO cells. Refer to binding document
--			gpio/gpio.txt
--
--    Optional properties:
--    --------------------
--	Following properties are require if pin control setting is required
--	at boot.
--	- pinctrl-names: A pinctrl state named "default" be defined, using the
--		bindings in pinctrl/pinctrl-bindings.txt.
--	- pinctrl[0...n]: Properties to contain the phandle that refer to
--		different nodes of pin control settings. These nodes represents
--		the pin control setting of state 0 to state n. Each of these
--		nodes contains different subnodes to represents some desired
--		configuration for a list of pins. This configuration can
--		include the mux function to select on those pin(s), and
--		various pin configuration parameters, such as pull-up,
--		open drain.
--
--		Each subnode have following properties:
--		Required properties:
--		    - pins: List of pins. Valid values of pins properties are:
--				gpio0, gpio1, gpio2, gpio3, gpio4, gpio5,
--				gpio6, gpio7
--
--		Optional properties:
--			function, bias-disable, bias-pull-up, bias-pull-down,
--			bias-high-impedance, drive-open-drain.
--
--			Valid values for function properties are:
--				gpio, interrupt-out, gpio-in-interrupt,
--				vsup-vbat-low-undebounce-out,
--				vsup-vbat-low-debounce-out,
--				voltage-in-standby, oc-pg-sd0, oc-pg-sd6,
--				powergood-out, pwm-in, pwm-out, clk32k-out,
--				watchdog-in, soft-reset-in
--
--Regulators:
--===========
--Device has multiple DCDC and LDOs. The node "regulators" is require if regulator
--functionality is needed.
--
--Following are properties of regulator subnode.
--
--    Optional properties:
--    -------------------
--	The input supply of regulators are the optional properties on the
--	regulator node. The input supply of these regulators are provided
--	through following properties:
--		vsup-sd2-supply: Input supply for SD2.
--		vsup-sd3-supply: Input supply for SD3.
--		vsup-sd4-supply: Input supply for SD4.
--		vsup-sd5-supply: Input supply for SD5.
--		vin-ldo0-supply: Input supply for LDO0.
--		vin-ldo1-6-supply: Input supply for LDO1 and LDO6.
--		vin-ldo2-5-7-supply: Input supply for LDO2, LDO5 and LDO7.
--		vin-ldo3-4-supply: Input supply for LDO3 and LDO4.
--		vin-ldo9-10-supply: Input supply for LDO9 and LDO10.
--		vin-ldo11-supply: Input supply for LDO11.
--
--    Optional sub nodes for regulators:
--    ---------------------------------
--	The subnodes name is the name of regulator and it must be one of:
--	sd[0-6], ldo[0-7], ldo[9-11]
--
--	Each sub-node should contain the constraints and initialization
--	information for that regulator. See regulator.txt for a description
--	of standard properties for these sub-nodes.
--	Additional optional custom properties  are listed below.
--		ams,ext-control: External control of the rail. The option of
--			this properties will tell which external input is
--			controlling this rail. Valid values are 0, 1, 2 ad 3.
--			0: There is no external control of this rail.
--			1: Rail is controlled by ENABLE1 input pin.
--			2: Rail is controlled by ENABLE2 input pin.
--			3: Rail is controlled by ENABLE3 input pin.
--			Missing this property on DT will be assume as no
--			external control. The external control pin macros
--			are defined @dt-bindings/mfd/as3722.h
--
--		ams,enable-tracking: Enable tracking with SD1, only supported
--			by LDO3.
--
--Power-off:
--=========
--AS3722 supports the system power off by turning off all its rails.
--The device node should have the following properties to enable this
--functionality
--ams,system-power-controller: Boolean, to enable the power off functionality
--        through this device.
--
--Example:
----------
--#include <dt-bindings/mfd/as3722.h>
--...
--ams3722 {
--	compatible = "ams,as3722";
--	reg = <0x48>;
--
--	ams,system-power-controller;
--
--	interrupt-parent = <&intc>;
--	interrupt-controller;
--	#interrupt-cells = <2>;
--
--	gpio-controller;
--	#gpio-cells = <2>;
--
--	pinctrl-names = "default";
--	pinctrl-0 = <&as3722_default>;
--
--	as3722_default: pinmux {
--			gpio0 {
--				pins = "gpio0";
--				function = "gpio";
--				bias-pull-down;
--			};
--
--			gpio1_2_4_7 {
--				pins = "gpio1", "gpio2", "gpio4", "gpio7";
--				function = "gpio";
--				bias-pull-up;
--			};
--
--			gpio5 {
--				pins = "gpio5";
--				function = "clk32k_out";
--			};
--	}
--
--	regulators {
--			vsup-sd2-supply = <...>;
--			...
--
--			sd0 {
--				regulator-name = "vdd_cpu";
--				regulator-min-microvolt = <700000>;
--				regulator-max-microvolt = <1400000>;
--				regulator-always-on;
--				ams,ext-control = <2>;
--			};
--
--			sd1 {
--				regulator-name = "vdd_core";
--				regulator-min-microvolt = <700000>;
--				regulator-max-microvolt = <1400000>;
--				regulator-always-on;
--				ams,ext-control = <1>;
--			};
--
--			sd2 {
--				regulator-name = "vddio_ddr";
--				regulator-min-microvolt = <1350000>;
--				regulator-max-microvolt = <1350000>;
--				regulator-always-on;
--			};
--
--			sd4 {
--				regulator-name = "avdd-hdmi-pex";
--				regulator-min-microvolt = <1050000>;
--				regulator-max-microvolt = <1050000>;
--				regulator-always-on;
--			};
--
--			sd5 {
--				regulator-name = "vdd-1v8";
--				regulator-min-microvolt = <1800000>;
--				regulator-max-microvolt = <1800000>;
--				regulator-always-on;
--			};
--			....
--	};
--};
+[Severity: Medium]
+Does this hardcoded node name artificially restrict the PMIC to a single pi=
+nmux
+state node?
 
-base-commit: cba2348ab114391f5b1a00fa65c5b739f13f0563
--- 
-2.54.0
+Device trees requiring multiple pinctrl states (e.g., default and sleep) wi=
+ll
+fail schema validation if they define multiple state nodes. The schema uses=
+ a
+fixed pinmux property name and additionalProperties: false on the root, whi=
+ch
+rejects any other node names. Would it be better to use patternProperties
+(e.g., "^pinmux(-[a-z0-9-]+)?$") to allow multiple state nodes?
 
+> +    description:
+> +      Pin control setting at boot. Each subnode represents some desired
+[ ... ]
+> +          ams,enable-tracking:
+> +            type: boolean
+> +            description:
+> +              Enable tracking with SD1, only supported by LDO3.
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - interrupt-controller
+> +  - "#interrupt-cells"
+
+[Severity: Medium]
+Is the interrupts property missing from this required list?
+
+The PMIC driver unconditionally fails to probe with -EINVAL at runtime if t=
+he
+interrupt is absent (as3722_i2c_probe() calls irq_get_irq_data(i2c->irq)).
+Device trees missing the interrupts property will silently pass schema
+validation but fail at runtime. Adding interrupts to the required list would
+accurately reflect the hardware and driver dependencies.
+
+[ ... ]
+
+While reviewing this binding conversion, I also noticed a pre-existing issue
+in the regulator driver.
+
+drivers/regulator/as3722-regulator.c:as3722_get_regulator_dt_data() {
+    ...
+		ret =3D of_property_read_u32(reg_node, "ams,ext-control", &prop);
+		if (!ret) {
+			if (prop < 3)
+				reg_config->ext_control =3D prop;
+			else
+				dev_warn(&pdev->dev,
+					"ext-control have invalid option: %u\n",
+					prop);
+		}
+    ...
+}
+
+[Severity: High]
+This is a pre-existing issue, but does this off-by-one check incorrectly re=
+ject
+ams,ext-control =3D <3>?
+
+A valid device tree specifying ams,ext-control =3D <3> is validated with
+if (prop < 3), which rejects 3, warns the user, and defaults to 0 (no exter=
+nal
+control), despite as3722_extreg_init() explicitly supporting
+AS3722_EXT_CONTROL_ENABLE3 (3). Should this check be prop <=3D 3 so the ENA=
+BLE3
+hardware pin can be correctly configured?
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260914174440.1041=
+15-1-shaunakkdatar@gmail.com?part=3D1
