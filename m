@@ -1,104 +1,138 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.4])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AFC0C481238
-	for <mfd@lists.linux.dev>; Mon, 14 Sep 2026 12:49:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2169476CDD
+	for <mfd@lists.linux.dev>; Mon, 14 Sep 2026 13:48:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789390153; cv=none; b=vD1vDANMqw1FvpFY1hB2V6ZPrANPcjAJVZhUXxc5w7Qz4XICEuOYuydQslwRF4BiCMMcYXHYqAo+w3MyMzW+eziDh0h4Ae2X7xLOIGo4ZDC2QLXfD8YTEQt80LtPbcTGd8SaMUCtp5xCUUu5CvC2F/Ag+zeNBZj6dvPeKBb3aWk=
+	t=1789393690; cv=none; b=O0le7Rc/OzMrkbeEQYvWSbN3ebiEHchCxGiDKnLQv5BrLJj171/EqAnuwCpL420YuWnX39fXbC2Wx/DeJx1Vi1azvEipqnf0vcJ2TYubfBh2GRfnaz5buzCohL/HMjxedKSoGqyVD8hImYI7c9qIUDG4IATa2VY9FsFlLfiDIho=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789390153; c=relaxed/simple;
-	bh=Va6TxsOvVU0H8fPHx+7CmH5OtXBpMCgkGRTK5de67gE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=JnXDCxRPbO0IBFnrPXsLNC9XDgYSz+wwUE3JsxjJg2ruNzHwsv5wI/T2JjXQgvrxOg2J5BF8Ld5l36PrsepU1rxY1in5KLc8xHiup6hUrZ71hbseO21NbByrA/OKZ8eWQbO+wNtm06OB4/4sZtSXwlGeX1H7eqmt+0vhbR8Hx9M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=SuY7h/ck; arc=none smtp.client-ip=192.198.163.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1789393690; c=relaxed/simple;
+	bh=EG/ztHWKElovDpphTXoJLfpgeTlLLOAmLLnmFprYhHs=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=DErW2EhgvQXl5vv3wzQMrCAj5dG21KKjTvUmnk2EghxoGEAiis0dwTlXrFbegurEF/nWxD0vaE/77VJjQZL3mWKl2/ScnxuQ/UtGfSxQbMKxn9TgEDdoQe9yd+52ZtlU1k+7RipniNPfCyi8FiYcKtflbJ3giscaSOxRhBvKW+U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=flipper.net; spf=pass smtp.mailfrom=flipper.net; dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net header.b=22Xnqm2d; arc=none smtp.client-ip=74.125.225.141
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flipper.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="SuY7h/ck"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789390151; x=1820926151;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=Va6TxsOvVU0H8fPHx+7CmH5OtXBpMCgkGRTK5de67gE=;
-  b=SuY7h/ckqB78GLYoIfWIX8yG/6wQ2m//RPIaI1fxY519XYa64iSaXfOQ
-   kSzenSW18+prRlKQYa2c7vTYfWFk74pJwuQtlpxKOnkTEk19XN402Ixwt
-   OjW9UpYZVFrvZ6Mi7QL1unj/DXO3TLdssF55KKroww/ng8arrfcZskS+S
-   klDhmGDGKHFCoAzNVJG5p6Wtw8AkCxDV/cnELGbbRAAMKMnjb/3q+aK9W
-   0QyOcYg2363Rjq/rdOXKIxgeQyWN0j1EqIIpM963vIJQ0CS1CU5+3omps
-   8YRH6dEtDfQcqKWfB9dckg7/h1qKL6yagGiyfyl/cQqDaf3GoHabO6lnb
-   w==;
-X-CSE-ConnectionGUID: YBjptA8bQIuMeBaJoA1vMQ==
-X-CSE-MsgGUID: eFvAZs1TRdyjGtmiByASDw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11904"; a="250075"
-X-IronPort-AV: E=Sophos;i="6.27,102,1787036400"; 
-   d="scan'208";a="250075"
-Received: from orviesa008.jf.intel.com ([10.64.159.148])
-  by fmvoesa114.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Sep 2026 05:49:10 -0700
-X-CSE-ConnectionGUID: dAeJPzQwS2ecvsZBrjFKXg==
-X-CSE-MsgGUID: YUlVYx26SzuJLkLcYX8WDg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,102,1787036400"; 
-   d="scan'208";a="272127418"
-Received: from ettammin-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.245.29])
-  by orviesa008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Sep 2026 05:49:08 -0700
-Date: Mon, 14 Sep 2026 15:49:06 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: sekoohaka.sarisan@gmail.com
-Cc: Lee Jones <lee@kernel.org>, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4] mfd: intel-lpss: Prevent DebugFS messages if it is
- not initialized
-Message-ID: <aqftQrjT5RtIn-Ax@ashevche-desk.local>
-References: <20260914-intel-lpss-debugfs-v4-1-0eb82ea7c1e3@gmail.com>
+	dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net header.b="22Xnqm2d"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49ccf3ca94bso10169345e9.3
+        for <mfd@lists.linux.dev>; Mon, 14 Sep 2026 06:48:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=flipper.net; s=google; t=1789393687; x=1789998487; darn=lists.linux.dev;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=l49MHyks2tmo+INGHY8t8az6CtTGwBm7JjOMFzvt9u0=;
+        b=22Xnqm2dbr36DUq3dpMeMnEmvVI/DkTI4J/ZW8GQPdHh7VfLzwg2o0UFHLCCPtptSk
+         epN7PSKWc7anMWkfaQAOkk42e/EoF8S6mpJdCId+TcDuuIPxf4irUyzrcRvxPHyyb0VH
+         rUzboPY8EmewmH7nGMV98uVFw2gBWDf7/skuEkxwPmTyUeKTdSZKjde6Gdo3c6LG88p/
+         z98gEv9TfxQN3FFi+wmXkQuRh7hFATxuvfI8j54GR4PmWMxFh0aMr7vnsmh547XYeyqn
+         /t3eGJpowPBwK74v5LvAzTWQHjNdRDrfLM4p0U9Yp3v+bAEwU45LDEz8RtDPGMrH/cE7
+         ae+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789393687; x=1789998487;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=l49MHyks2tmo+INGHY8t8az6CtTGwBm7JjOMFzvt9u0=;
+        b=ZY27+Yc39fSEvB09e1G/CKNX8+VF8HgLJvIjqm9NMEYQhBJzXkQEpfG2eTDexBRMrv
+         k376q51GKgEECWaJjUUwu6Z8zPiDcomqr+21AT87tsDRieYRWzlrl7v3FBYUEy+DzQc9
+         1nsdp0yG+k3//dT7+0Trep1nVGEngHNRgl29W9WQOwVc90/AAeRZWbyECCPCLt4VYeQ1
+         rXy55GKBZCDa8gqOPNrKC/+aJW9Qp3fjnpTgSS3DyfYj9U+yv1mNwf40AFE5Ar6GeZeZ
+         61KShXEf1lQ2gMESoFZMbDfaueIXfKx12SIikMB/S3waVUqfL40omyUzFghyshMo82gf
+         EuNg==
+X-Gm-Message-State: AFuF++klUC0MTglZzgiI4+nm1Vlj+jfBcAkM6Qis0D6N9rw8ZIWfKXHm
+	LJ0WrB+rP3SDuX5krh7SQyp6/q8rY5emRF0GmdImimAVhpdgArBbpLVvSv5x1CTov1Q=
+X-Gm-Gg: AYBFou1FgSjzRx9HerXW1Vu4v3sJTCR61DyUT9PkMKErDyCI9eMSIWSIhaQJ1+u60jd
+	OgNN9yZDeh76V8g5FkLX4s+ZcNFjOGegP6k8QI3SQEW4EOlqlQvEu2fOa2rU4AItkQ4eBtqbCDH
+	CH7ZhyeHYFQygq36ZuIB6fM5gY4+fUL2JK3O8lB57zfvp4zJZ3U/Yr/kC+iQYBefUoBWnA/Q+JB
+	7v97qlguIiuauPaTEZyWxJ1r3INwyRkaZ5GKPGxjVPLtCYf8lK9jItEAefUBwfykB4nUQeG13jB
+	gObloUqnocM+yjGs4p7df2Zd5+7Z0wr39RcVD0TIYw7jeFt4Zda4t9qCTvsi4BtKlBG3FuHg7nL
+	VbINZttWktKjAENegUOzPb67FrllB14I3xPsBjcv3A6ma38x6RvtUVQSxGgWpK/rQNsg/Us9ZlR
+	Uo01H6c3/aEV4DUWsKFHQCTUx2r4yGkHxMUD4UfCOHkmQSA7XINzgrrEpwG8yItJp3s8UXsc5na
+	TqgzP8CbRdvjiRprdk=
+X-Received: by 2002:a05:600c:860b:b0:49c:ee36:10fc with SMTP id 5b1f17b1804b1-49e7a648955mr28649655e9.8.1789393686773;
+        Mon, 14 Sep 2026 06:48:06 -0700 (PDT)
+Received: from alchark-surface.localdomain ([146.70.184.81])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49d26c2a419sm447432445e9.7.2026.09.14.06.48.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 14 Sep 2026 06:48:06 -0700 (PDT)
+From: Alexey Charkov <alchark@flipper.net>
+Date: Mon, 14 Sep 2026 17:48:03 +0400
+Subject: [PATCH] dt-bindings: mfd: ti,bq25703a: Expand to include BQ25798
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260914-intel-lpss-debugfs-v4-1-0eb82ea7c1e3@gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260914-bq25798-v1-1-dc5e2ec343c4@flipper.net>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDS0MT3aRCI1NzSwtdM3NzM4tEEwNTQ/NUJaDqgqLUtMwKsEnRsRB+cWl
+ SVmpyCUi7Um0tAB2KtM5rAAAA
+X-Change-ID: 20260914-bq25798-67768a40517e
+To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Chris Morgan <macromorgan@hotmail.com>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Alexey Charkov <alchark@flipper.net>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1465; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=EG/ztHWKElovDpphTXoJLfpgeTlLLOAmLLnmFprYhHs=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWQt/y1efX5jXeJ50af31mwO1F2wu3v395vXm3exXVytE
+ VAUkdYW3jGRhUGMi8FSTJFl7rcltlON+Gbt8vD4CjOHlQlkiLRIAwMQsDDw5SbmlRrpGOmZahvq
+ GRrpGOsYMXBxCsBU72VhZDjRca99d5eQbfHS6jhWth+vD+QWXP7CwFQi+1S5fB3fmwkM/4xa9zx
+ i4H6+LnD/5jNCcgEp+yWqH8txaZ/umtv3/JuEBT8A
+X-Developer-Key: i=alchark@flipper.net; a=openpgp;
+ fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 
-On Mon, Sep 14, 2026 at 04:21:31PM +0500, Maria Lisina via B4 Relay wrote:
+TI has unpublished the BQ25792 charger variant and pulled its docs from
+their website.
 
-> The original code expects DebugFS to be always initialized which
-> causes unwanted warnings when DebugFS is simply disabled.
-> 
-> Therefore it spams dmesg with these messages:
-> 
->   intel-lpss 0000:00:15.0: Failed to create debugfs entries
->   intel-lpss 0000:00:15.3: Failed to create debugfs entries
->   intel-lpss 0000:00:1e.0: Failed to create debugfs entries
->   intel-lpss 0000:00:1e.2: Failed to create debugfs entries
+BQ25798 is a pin and register compatible replacement, which also adds MPPT
+tracking support (reg 0x15, added in BQ25798 and reserved in BQ25792) and
+backup mode (reg 0x0f[1], reg 0x10[7:6], reg 0x16[0] and reg 0x1c[7:5] on
+BQ25798 - all of them reserved on BQ25792).
 
-In previous review I pointed out that one of such a message is enough,
-no need to repeat it for each LPSS device in the system.
+Expand the existing binding to include BQ25798 with a fallback compatible
+to BQ25792.
 
-> This patch adds proper check to intel_lpss_init() and
-> intel_lpss_debugfs_add() functions to prevent writing to
-> uninitialized DebugFS.
+Link: https://www.ti.com/product/BQ25798
+Signed-off-by: Alexey Charkov <alchark@flipper.net>
+---
+ Documentation/devicetree/bindings/mfd/ti,bq25703a.yaml | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
-...
+diff --git a/Documentation/devicetree/bindings/mfd/ti,bq25703a.yaml b/Documentation/devicetree/bindings/mfd/ti,bq25703a.yaml
+index cdce83f05804..43afd232a614 100644
+--- a/Documentation/devicetree/bindings/mfd/ti,bq25703a.yaml
++++ b/Documentation/devicetree/bindings/mfd/ti,bq25703a.yaml
+@@ -11,9 +11,14 @@ maintainers:
+ 
+ properties:
+   compatible:
+-    enum:
+-      - ti,bq25703a
+-      - ti,bq25792
++    oneOf:
++      - enum:
++          - ti,bq25703a
++          - ti,bq25792
++      - items:
++          - enum:
++              - ti,bq25798
++          - const: ti,bq25792
+ 
+   reg:
+     const: 0x6b
 
-> Changes in v4:
-> - Keep the dmesg messages, instead check whether DebugFS is initialized
-> - Link to v3: https://lore.kernel.org/r/20260913-intel-lpss-debugfs-v3-1-1b8e2b1f0992@gmail.com
+---
+base-commit: 68142f986ff04b2b70b31db00f719bf690f64a9a
+change-id: 20260914-bq25798-67768a40517e
 
-I mentioned that switching to the debug (or info) level is fine,
-I'm a bit puzzled what this version is trying to achieve. Strictly
-speaking the debugfs is designed in the way that no checks are
-required at all. In this case we want the user be informed about
-this as debugfs carries the LTR values.
-
-So, I expect to see dev_warn() --> dev_dbg() or dev_info() in one-liner.
-
--- 
-With Best Regards,
-Andy Shevchenko
-
+Best regards,
+--  
+Alexey Charkov <alchark@flipper.net>
 
