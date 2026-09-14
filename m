@@ -1,113 +1,70 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B684B40DB4C
-	for <mfd@lists.linux.dev>; Mon, 14 Sep 2026 08:32:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.19
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2A6E41A93A;
+	Mon, 14 Sep 2026 09:44:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789374775; cv=none; b=MbQyxV2en8CP+vRsu6gyxJQlvwZQOgX6Gnyk7BCMOc8BBzQf6W/deh3kOq/eC+7iwesd3l4XWEwqJpnJx5xqfEG0hw8IJmB2QcWuPoMyFeYV/g2/GNVBjW8ug3kG6wpTvmVbmBBjh0o1SyrPkZiv7733GzU8/pGGPpbwN7GfrxA=
+	t=1789379093; cv=none; b=J06O2y+B3FNLNuU11s1p3Vv1Xp5AgiTEv2vqzdM+84bfIkqgPkWoKMj+zJIECCtPfGwlRRWVzVe00tXKEocWVfKraA11xM88Z+DC9zBCGeuZVOQqz9hxr/gcq5QG3YeTHfGwKe0vQTtA3U0Nlna+tGNhDNhvfYAcL9Db72YjvOU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789374775; c=relaxed/simple;
-	bh=yYxEKBXvBD1ee5grZtppYox0uuKGFenCIwPJj3HT3Vc=;
+	s=arc-20240116; t=1789379093; c=relaxed/simple;
+	bh=6nYt2qmvQiwbF8zdA1cWcafihjBF9zdHKhaWCkPbVsc=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ARty/9Jw62m8FbAn0lUi1CKioEHJz4kw7OYcOdtBsTUgRyfMGuOH/eBvxs3uA5sfaQ7Qet3WKcXQBVobeGnTiXEzqQ5Me1WBdr4y7PiTYf4h8lfrGaJObFscQesp4bRZ+0aI/SSHSRrosSRYNZjKAqo2BY78dg34e0tKEuX4CaE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=B6wH+8o/; arc=none smtp.client-ip=198.175.65.19
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=PffzBM2Rlkek4/BENBDcC+5wehVpbMt8q+MB/dxCHseNSU2WcbrHJu0+tXPAd4VeTExtbiLvC/y9DEwEnPDSg6BYEzumkZqTM5/pnKeorIsUsPY5OKC2IlBame4az2hDV4SDVfqIe/JmqDSZOx+E2iLeOXgTdb+tdv7PHSlAIA4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AwJKXUYx; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="B6wH+8o/"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789374774; x=1820910774;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=yYxEKBXvBD1ee5grZtppYox0uuKGFenCIwPJj3HT3Vc=;
-  b=B6wH+8o/GWPlaPp9EAhEkPdo9mJOgCPt/0BHXQem7DWkFPYhiP5VDUt7
-   tF11gAYGvyNt+GWRS/z0AVYRrk6t17GWsXGANaOiN2rJoBHkzimW9Iayx
-   71duedZGnD27lQ79xkJFuwBoiwo1ac0bEX5bR59iVecS1EUHPN0TMBtlK
-   IjSVCa1qTpq8o0WQcNn618+U0Qc6OWEVR/BYuSzsDxVElc605s2vR3fDt
-   sFg78oMWsS3hUonBbUT2imCRFYTPkjdHQWsqkgtee9zYB3906xfgi9hBK
-   vuIEebQbpHPoFrtgPOVsx3AEMPbDCmK98D6xNHrTXz6ZaYz016D9nQGQT
-   g==;
-X-CSE-ConnectionGUID: gT9V/zs7ReKUuh7jelNQCw==
-X-CSE-MsgGUID: FDBB8mggRSicm1Skfr9kug==
-X-IronPort-AV: E=McAfee;i="6800,10657,11904"; a="89659439"
-X-IronPort-AV: E=Sophos;i="6.27,102,1787036400"; 
-   d="scan'208";a="89659439"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
-  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Sep 2026 01:32:53 -0700
-X-CSE-ConnectionGUID: NMBQt1ZtRGiP4G04W+vaGA==
-X-CSE-MsgGUID: tuNUeGHNQKiHZA6Nc+MzEA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,102,1787036400"; 
-   d="scan'208";a="270781690"
-Received: from ettammin-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.245.29])
-  by orviesa006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Sep 2026 01:32:51 -0700
-Date: Mon, 14 Sep 2026 11:32:49 +0300
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Myeonghun Pak <mhun512@gmail.com>
-Cc: Andy Shevchenko <andy@kernel.org>, Lee Jones <lee@kernel.org>,
-	mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
-	Ijae Kim <ae878000@gmail.com>
-Subject: Re: [PATCH] mfd: intel_soc_pmic_crc: balance IRQ wake enable
-Message-ID: <aqexMdHnHHq_l0Y3@ashevche-desk.local>
-References: <20260913013615.22615-1-mhun512@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AwJKXUYx"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C06121F000FF;
+	Mon, 14 Sep 2026 09:44:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789379092;
+	bh=7oTu0d+0Fng6387kjjfZt62xlgG4iwEnpYsY40VG/Ho=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=AwJKXUYxu2mk018JrvfobY4v2/1iitVaMT3IPdoEL9Dhptuk86dYWjE1hmwbGweip
+	 G9YbI8JCD/Roai2iKXzafYLn7VJDIHvKI17gT5I1gWWOYsXmzjqZSQhQNBsHzuyGDq
+	 1nK49n33KIeUVVdWn+taXyyAGZw0xq1efG6Py78j/samC5nea2i9H9TTuc80epxaRb
+	 hEp+8O4fOix1UsVy6dGnIcKEFqv+Mw9K0Dj4cnmNokkpRtYaxF3FRPeXgCa14aUi+9
+	 YahzdtRk++xKNYA3nR/U1gK6j6YXyqdOQR2zE9s0nL4s6nHAK0u6hyNkk9s1fTEPoH
+	 y8gLqWQpfryXQ==
+Date: Mon, 14 Sep 2026 11:44:48 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Long Zhao <longzhao@ambarella.com>
+Cc: Arnd Bergmann <arnd@arndb.de>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Michael Turquette <mturquette@baylibre.com>, 
+	Stephen Boyd <sboyd@kernel.org>, Linus Walleij <linusw@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Jiri Slaby <jirislaby@kernel.org>, Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+	Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>, Catalin Marinas <catalin.marinas@arm.com>, 
+	Will Deacon <will@kernel.org>, Long Zhao <zl020895@163.com>, Lee Jones <lee@kernel.org>, 
+	mfd@lists.linux.dev, devicetree@vger.kernel.org, linux-clk@vger.kernel.org, 
+	linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v6 04/13] dt-bindings: pinctrl: add Ambarella CV75 pinctrl
+Message-ID: <20260914-refined-elite-seriema-0f7eaa@quoll>
+References: <20260904-cv75-v5-v6-0-e918514cb3b1@ambarella.com>
+ <20260904-cv75-v5-v6-4-e918514cb3b1@ambarella.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260913013615.22615-1-mhun512@gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+In-Reply-To: <20260904-cv75-v5-v6-4-e918514cb3b1@ambarella.com>
 
-On Sat, Sep 12, 2026 at 09:36:15PM -0400, Myeonghun Pak wrote:
-> The INT33FD Crystal Cove driver enables the parent IRQ as a wake source
-> after registering its regmap IRQ chip.  When that succeeds, a later
-> mfd_add_devices() failure or driver removal leaves the wake enable
-> unbalanced.
+On Fri, Sep 04, 2026 at 02:38:11PM +0800, Long Zhao wrote:
+> Document the CV75 pin controller binding using generic function and
+> groups properties for pinmux configuration.
 > 
-> Register a managed action only after enable_irq_wake() succeeds.  Since
-> the action is registered after the managed regmap IRQ chip, reverse devres
-> order disables IRQ wake before tearing down the IRQ chip.  Keep warning and
-> continuing when enable_irq_wake() itself fails.
-> 
-> This is limited to the Bay Trail and Cherry Trail Crystal Cove PMIC
-> variants using the INT33FD ACPI ID.
-> 
-> This issue was identified during our ongoing static-analysis research while
-> reviewing kernel code.
+> Signed-off-by: Long Zhao <longzhao@ambarella.com>
+> ---
+>  .../bindings/pinctrl/ambarella,cv75-pinctrl.yaml   | 239 +++++++++++++++++++++
+>  1 file changed, 239 insertions(+)
 
-...
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
-> Assisted-by: OpenAI:GPT-5.6
-
-Assisted-by: LLM
-
-...
-
->  	ret = enable_irq_wake(pmic->irq);
-> -	if (ret)
-> +	if (ret) {
->  		dev_warn(dev, "Can't enable IRQ as wake source: %d\n", ret);
-> +	} else {
-> +		ret = devm_add_action_or_reset(dev,
-> +					       crystal_cove_disable_irq_wake, pmic);
-
-Make it a single line.
-
-> +		if (ret)
-> +			return ret;
-> +	}
-
-
-Shouldn't disable_irq_wake() be called at .shutdown() as well?
-
--- 
-With Best Regards,
-Andy Shevchenko
-
+Best regards,
+Krzysztof
 
