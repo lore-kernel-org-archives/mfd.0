@@ -1,43 +1,44 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A4F5371067
-	for <mfd@lists.linux.dev>; Mon, 14 Sep 2026 20:27:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E130449C4D7
+	for <mfd@lists.linux.dev>; Mon, 14 Sep 2026 20:28:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789417679; cv=none; b=M/x0F7bxjrSmck3jZX7e3KgAUm7IkjDC+x0U+vXSAM+yBABC666UdR/xe4KBW74Rb265zVMEhJez1+km1k7Phv+pxY6o/BukvQF3saThYv/kRvMBxCKyE2ju5eP9oqAV2frPY8HabFTrKKNVkxuSAQMEYWLzzhoek91cyMp9mx0=
+	t=1789417710; cv=none; b=uq9rR2Rn2ciVEDyYFLE8cKTPMzQi8hvtW4wYnIjaz8STYEfJb/UKmgasF5LeygxPTrriXdOgtAV55wnSmiccudE4OHQeYpL/8u+xTNj3CDtikLm7AJSkdR2q8DJVRNHcQmuOrELvM8pJNBSMy4tLeZi84u8okZL+kt6pyhI+8Vg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789417679; c=relaxed/simple;
-	bh=/eV30aWArLNaWjH7GEZU4SBqtuoeT8CedmjmUXGmki0=;
+	s=arc-20240116; t=1789417710; c=relaxed/simple;
+	bh=FCSWSW6aKxZzFSyAAF7U4fs0v74ga41w6qQSEsg0ARk=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=KQOEWqbxFpEUBuxbIwZy03iGsCfdVOpPn+hi2NjiFJtyUMZVyZuRVcg2g9wBWANXLHzbHYlujVHXiD0hmP8Syt7I3+29Wq9cCVmwed+33nPNPOWGsBnmI9gj6swM2p1HBiQgHBQPwPTYfhbwRjjMupGjLQkBAulNKGB2XznsnqQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ir2y/ZmG; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=eRaYAgoGkkLx5Qn3I9ITovzfuyvwjgTsh97wvyBqtd/d6k19Dm5IROTOs0UKj1mmIE2WE8zCdHHIO7xWur5c3EBcp4wMlIH+QbPsC7My5BEno1CYbzV4fumiAbUtm2lFyC8lZGEKmH291dGgQKxKtI75K8EAvvxtH850IIcQ/34=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jxhK6BwE; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ir2y/ZmG"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 774AF1F000FF;
-	Mon, 14 Sep 2026 20:27:57 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jxhK6BwE"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 46A991F000FF;
+	Mon, 14 Sep 2026 20:28:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789417677;
-	bh=VzhiORhVpcV4Hp3ui1gLk2ZXpnrPXYdnAIFBRGuwl7c=;
+	s=k20260515; t=1789417708;
+	bh=eIDFqkBfe+sDsl9MtrfuFIG/JR3USizUkEW/xytCDLw=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Ir2y/ZmGU7VEp2jMhRbJgM1FaYaeHeC0n6L2es6xB0pyNx+QLh6N3j6uZim2aO7PR
-	 GmVMhAYOLo25z47YigumWwNsuml7xlv1l2AGEhHvs856tpKEPSNXKgcA3GipNhL6qJ
-	 764MRnJgIGycGhPTHdu4uRNJTWK1yEmwg4IQW8MCwswJ+NNOAI3fMN1DJcMRU//K+q
-	 yz2fDYWLy5xTgCdFTPiGWPJOcYHIq02Cpcl7FwQhU6uKcbMTnkfe6N92lHL++m0Eln
-	 buxuQT/8fgz64OLhi580zi+c559fkYXCghHyX8DbmRwtJ+jgmjY0UIE+yq3MvkeOt1
-	 hybaPegE8bwUQ==
+	b=jxhK6BwE/tjEaLC4l3nopBG+uOnyXKTBAs45KtRVwAHWjZjKogoMiLojEc3dyQFeI
+	 AvH6Savxvt8RrkKTJCZkmDk5uy4rimUXmo5uND4BlozTeVhUgrJvZfzIFU9E7TrH/I
+	 re3PWLXqlmjkrX+TDkjQdpUOe1D4/yGZYoKgSMwuhgC6t67ycicZ2nl8noFAZqJguT
+	 ZX0yrUfuHY4UU43Ec3RMq+E3EkIwyg1vyPInCWvJhRqNBwoWs2WzlCpY6bSGjfbv1b
+	 TVLdoQL+roP1zSbOS6gjiKB5SSCqoqIzoYPMKd3wlo1DJOqh8FQXYaDIkbGhF7SVL4
+	 OOMHdL5Cqjtig==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 3/3] mfd: rz-mtu3: enable runtime PM
+Subject: Re: [PATCH 1/3] mfd: rz-mtu3: do not use struct
+ rz_mtu3_channel::dev
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Cosmin Tanislav" <cosmin-gabriel.tanislav.xa@renesas.com>
-Cc: lee@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260914201456.2018403-4-cosmin-gabriel.tanislav.xa@renesas.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20260914201456.2018403-2-cosmin-gabriel.tanislav.xa@renesas.com>
 References: <20260914201456.2018403-1-cosmin-gabriel.tanislav.xa@renesas.com>
- <20260914201456.2018403-4-cosmin-gabriel.tanislav.xa@renesas.com>
+ <20260914201456.2018403-2-cosmin-gabriel.tanislav.xa@renesas.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Mon, 14 Sep 2026 20:27:56 +0000
-Message-Id: <20260914202757.774AF1F000FF@smtp.kernel.org>
+Date: Mon, 14 Sep 2026 20:28:27 +0000
+Message-Id: <20260914202828.46A991F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -46,63 +47,65 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
 Thank you for your contribution! Sashiko AI review found 2 potential issue(=
 s) to consider:
-- [High] Parent device runtime PM is enabled without setting it to active, =
-causing child devices' probe to fail PM activation and permanently leak the=
-ir clocks.
-- [Low] The commit message description is not capitalized.
+- [Medium] The patch replaces a standard API call with a bespoke pointer ar=
+ithmetic helper to retrieve parent data, cementing an MFD architectural gui=
+deline violation.
+- [Low] The commit message description starts with a lowercase letter, viol=
+ating MFD subsystem guidelines.
 --
 
-commit e5d000ec993dddaf773352525f11aae34e95a812
+commit 8098c2550655f8bdfa6c7acd0a4b1dfbc4e57e2a
 Author: Cosmin Tanislav <cosmin-gabriel.tanislav.xa@renesas.com>
 
-mfd: rz-mtu3: enable runtime PM
+mfd: rz-mtu3: do not use struct rz_mtu3_channel::dev
 
-This commit enables runtime PM on the rz-mtu3 parent device. This allows
-child devices to correctly propagate their runtime PM usage to the parent's
-PM domain, replacing the open-coded clock handling within the child devices
-themselves.
+Channels 1 and 2 are used by both the PWM and counter drivers. Both
+subdrivers assign struct rz_mtu3_channel::dev to their own device
+instance for those shared channels, so the value stored in it depends on
+which subdriver binds last.
 
-> mfd: rz-mtu3: enable runtime PM
+> mfd: rz-mtu3: do not use struct rz_mtu3_channel::dev
 
 [Severity: Low]
-This isn't a bug, but the commit message subject violates the MFD subsystem
-formatting rules which mandate capitalizing the description after the
-subsystem prefix. Should it be "mfd: rz-mtu3: Enable runtime PM"?
+Does this commit message subject violate the MFD subsystem formatting
+conventions? The guidelines mandate capitalizing the description after the
+subsystem prefix, e.g., "mfd: <Driver>: <Capitalized description>".
 
 > diff --git a/drivers/mfd/rz-mtu3.c b/drivers/mfd/rz-mtu3.c
-> index 88aa1fedf1ef5..e24e67e7a66cb 100644
+> index 0a254e61ec0a5..d809436e2124c 100644
 > --- a/drivers/mfd/rz-mtu3.c
 > +++ b/drivers/mfd/rz-mtu3.c
-[ ... ]
-> @@ -330,6 +332,10 @@ static int rz_mtu3_probe(struct platform_device *pde=
-v)
->  		mutex_init(&ddata->channels[i].lock);
->  	}
-> =20
-> +	ret =3D devm_pm_runtime_enable(dev);
-> +	if (ret)
-> +		return ret;
-> +
-
-[Severity: High]
-Does enabling runtime PM on the parent without calling
-pm_runtime_set_active() leave the parent device in the RPM_SUSPENDED state?
-
-During child driver probe, if a child calls pm_runtime_set_active(), it
-would receive -EBUSY because the parent is suspended and ignore_children is
-false. If the child driver ignores this error, its runtime PM status would
-remain RPM_SUSPENDED.
-
-Since the child considers itself already suspended, will subsequent calls to
-pm_runtime_idle() or pm_runtime_put() in the child driver be ignored by the
-PM core? If the runtime_suspend callback is never invoked to balance the
-clk_prepare_enable() called during probe, could this result in a permanent
-clock leak?
-
->  	return devm_mfd_add_devices(dev, 0, rz_mtu3_devs,
->  				    ARRAY_SIZE(rz_mtu3_devs), NULL, 0, NULL);
+> @@ -60,10 +60,17 @@ static bool rz_mtu3_is_16bit_shared_reg(u16 offset)
+>  		offset =3D=3D RZ_MTU3_TCNTSA || offset =3D=3D RZ_MTU3_TCNTSB);
 >  }
+> =20
+> +static inline struct rz_mtu3_priv *rz_mtu3_ch_to_priv(struct rz_mtu3_cha=
+nnel *ch)
+> +{
+> +	struct rz_mtu3_channel *first_ch =3D ch - ch->channel_number;
+> +	struct rz_mtu3 *mtu =3D container_of(first_ch, struct rz_mtu3, channels=
+[0]);
+> +
+> +	return mtu->priv_data;
+> +}
+
+[Severity: Medium]
+Does the introduction of rz_mtu3_ch_to_priv() violate MFD guidelines for
+parent data access?
+
+The MFD guidelines explicitly state that child drivers must directly access
+parent data using standard APIs (like dev_get_drvdata) and to avoid writing
+bespoke helpers in the parent.=20
+
+While this replaces dev_get_drvdata(ch->dev->parent) to avoid depending on
+subdriver-populated state, substituting it with a custom helper using point=
+er
+arithmetic (ch - ch->channel_number) tightly couples the implementation to
+the physical layout of the channels array.
+
+Could the child drivers be refactored to retrieve the parent data themselves
+instead of introducing this bespoke accessor?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260914201456.2018=
-403-1-cosmin-gabriel.tanislav.xa@renesas.com?part=3D3
+403-1-cosmin-gabriel.tanislav.xa@renesas.com?part=3D1
