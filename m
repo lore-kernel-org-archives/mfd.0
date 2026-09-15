@@ -1,57 +1,56 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B76531E845
-	for <mfd@lists.linux.dev>; Tue, 15 Sep 2026 06:46:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.19
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4655F32AAA3
+	for <mfd@lists.linux.dev>; Tue, 15 Sep 2026 06:47:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.10
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789454776; cv=none; b=OrpRax7bXb7NL1OiJ8A8YBZd9LxZikSuWVMld8C7vxGQMoL7MiU/7LlYlphEEVqfQv4BAFXbLYURmXCw00GqEd7glxw+QF7G2FZGjfTEE/ifWgWmQUl7o9YBl3JIW7+eAgQM9f/1XWgy5ZJcolP8Muq5/Zok7ypYeZwStET/f84=
+	t=1789454852; cv=none; b=eF8y5kQbuoULcCDYDwXaF3UOOcW3w05bCv4oKMYWjzlPnGL1I8/muIa7KfVJiQxfEYuYyrEegGYGB9ptsy8NrahANyFCm86BLu7ldNGH/buB5hmjSbh6vzCPn+VO9PWn/UMskdZeCZRBMufgl9ZBuEdIyRbE0opFjJD8acbqY9U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789454776; c=relaxed/simple;
-	bh=1cxC1xyc7rLN0Cq0Lvl3Awdci4A7vuFx75SfdtBOgqg=;
+	s=arc-20240116; t=1789454852; c=relaxed/simple;
+	bh=ao/1SP0limgLbSFXUesvmpCimW5D0rPtohPBkJ5qmhE=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=rkfmQGmSJfWy4dtwLG4caa8ig98HKLzeiAhuowuv6aIPnX0OdmEKoxWRCFMlFzttfr0rwtYkJZQzIaZ7Lh12IiGu6myf8cmF6XceeTqBY35TQxJdR4kpqP+buVVx05BIvB46bwTbGdTGx6X5QgzhZB2HKpotZu/PLHz3gSTp2oA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=EjXPPFDM; arc=none smtp.client-ip=192.198.163.19
+	 Content-Type:Content-Disposition:In-Reply-To; b=t2hUo/FFL9avVyd5hqnIIhDaPOmS1O3yFiph7NXTTpqTE3ziei5z78vxUubud7mNE9KeJ36ZxbwT2VVdeZnYQuPS4zJpdxlH37J3Gq1cstLLRRy+4niaSw2dkGVWSA9PCo/xF3NRdI2lb3oRQvQPPgP5KgVRlPFnG7UXH5NBkTo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=UKmsjiQp; arc=none smtp.client-ip=192.198.163.10
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="EjXPPFDM"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="UKmsjiQp"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789454775; x=1820990775;
+  t=1789454851; x=1820990851;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=1cxC1xyc7rLN0Cq0Lvl3Awdci4A7vuFx75SfdtBOgqg=;
-  b=EjXPPFDMl4sGwGBjZUlhFf+qvkeC9GcE4Yv/Lg24Fxfdxrk1WcdkGVxh
-   xJb0lKCIt+eNdh8pz/IHjOqN2lsBxSKo0ISEvnXsu79NaJ2PeODpFHndc
-   Rx9ongjaq4wAZQzMVWD/cypQx//mHJ7Cr4RKsYa4E0ElDvJAKvYfs1E5b
-   Lsy5ZGBuwffgJJkQHyzUwAOGID8Ad0JL45Yk8hHVZ2D3Ex86Kmn8F++zr
-   aCaiAp8TzWC7vHoH4QXTDeErGUziR0hOxYi9+hp+Mmhcnlg+GsNKgKWoJ
-   cBTV1vJW3M/CTbI8Rb1eQcmGsJiHQvmVXmbVGl5cCz+phJagLev032Eum
-   g==;
-X-CSE-ConnectionGUID: di6UrIJHQmiK+cUw2BQwng==
-X-CSE-MsgGUID: 4/O+s+2MStmrMfM9AFiQow==
-X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="88748603"
+  bh=ao/1SP0limgLbSFXUesvmpCimW5D0rPtohPBkJ5qmhE=;
+  b=UKmsjiQpui2IQ4f4wLELXathgLaR3xP2cP+rW63vv9yTEcmolmdB2ukp
+   15ApGuAMXK5NYjzP3L8egIXrRdojChhyfPZPgOg3vHB7E35oeAq/9JqC5
+   oc1wJOxC/OGd+Wvhh3DUCzf2bqOMqMNNDjiDFrOt8HS+/87rjMd9fugEx
+   HDy3VRhgSIGQgn344jNmvR+UTI8tSUzfVmh6TrJ+oL3ETAsfF7hiooEy8
+   qMPAPM5djg6UpwVoezC+Qn0o+5oJv3DGHnMNQy645el69DroAC8N6/1D8
+   UMSg2GyNqIwoGZQqfZUkVRgkqdYjsi0psWMsNki7eQGEx/yMTCQxIxQdT
+   w==;
+X-CSE-ConnectionGUID: 94waqNFGS6amLP9aydNNnA==
+X-CSE-MsgGUID: R8vlFQ/ITqWHsiADfxxYOw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="101159297"
 X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="88748603"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
-  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Sep 2026 23:46:15 -0700
-X-CSE-ConnectionGUID: PgySGGHzSLO9P3sHAPYFxw==
-X-CSE-MsgGUID: FsG6xCqLRNqBx2W2Emb2hg==
+   d="scan'208";a="101159297"
+Received: from fmviesa011.fm.intel.com ([10.60.135.151])
+  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Sep 2026 23:47:30 -0700
+X-CSE-ConnectionGUID: Lwqdy2QzSeWmmdAmXlHJLw==
+X-CSE-MsgGUID: AN6mNyizSjSesEKkz2IQ5Q==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="311138702"
+   d="scan'208";a="1069969"
 Received: from smoticic-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.203])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Sep 2026 23:46:13 -0700
-Date: Tue, 15 Sep 2026 09:46:10 +0300
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Sep 2026 23:47:29 -0700
+Date: Tue, 15 Sep 2026 09:47:27 +0300
 From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 To: Maria Lisina <sekoohaka.sarisan@gmail.com>
 Cc: lee@kernel.org, linux-kernel@vger.kernel.org, mfd@lists.linux.dev
 Subject: Re: [PATCH v4] mfd: intel-lpss: Prevent DebugFS messages if it is
  not initialized
-Message-ID: <aqjpsq0OzZjkl0eo@ashevche-desk.local>
-References: <aqftQrjT5RtIn-Ax@ashevche-desk.local>
- <20260914142737.603133-1-sekoohaka.sarisan@gmail.com>
+Message-ID: <aqjp_4t-IbmQ0y2U@ashevche-desk.local>
+References: <CAPFe3MkfeFTBaDj+yu=C0h=g00mdcbAUYgtGNfMzcshHJygkJA@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -60,44 +59,22 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260914142737.603133-1-sekoohaka.sarisan@gmail.com>
+In-Reply-To: <CAPFe3MkfeFTBaDj+yu=C0h=g00mdcbAUYgtGNfMzcshHJygkJA@mail.gmail.com>
 Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
  krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On Mon, Sep 14, 2026 at 07:27:37PM +0500, Maria Lisina wrote:
+This is out of email thread copy, I answered inside the whole thread.
+
+On Mon, Sep 14, 2026 at 06:57:22PM +0500, Maria Lisina wrote:
 > I'm sorry, I didn't notice the part about commit description.
 > 
-> Also I don't really get it how is this dmesg message mandatory
-> when DebugFS is completely disabled. It makes no sense to me.
-> If user needs these LTR values for debugging purposes they should
-> know about DebugFS. In other cases when DebugFS is disabled these
-> messages shouldn't even appear as these LTR values stored in DebugFS
-> don't do anything, at least if I remember correctly they aren't used
-> for any purpose other than debugging while being exposed in DebugFS.
-
-This is fair point, but the patch does something else.
-
-In lieu of the above you can propose a change that moves
-the intel_lpss_debugfs_add() function to return void and
-drop the message completely justifying it as you put it
-here.
-
-Something like this (but in mangled form)
-
--static int intel_lpss_debugfs_add(struct intel_lpss *lpss)
-+static void intel_lpss_debugfs_add(struct intel_lpss *lpss)
-
--        if (IS_ERR(dir))
--                return PTR_ERR(dir);
-
--        return 0;
-
--        ret = intel_lpss_debugfs_add(lpss);
-+        intel_lpss_debugfs_add(lpss);
--        if (ret)
--               dev_warn(dev, "Failed to create debugfs entries\n");
-
-Would it work for you?
+> Also I don't really get it how is this dmesg message mandatory when DebugFS
+> is completely disabled. It makes no sense to me. If user needs these LTR
+> values for debugging purposes they should know about DebugFS. In other
+> cases when DebugFS is disabled these messages shouldn't even appear as
+> these LTR values stored in DebugFS don't do anything, at least if I
+> remember correctly they aren't used for any purpose other than debugging
+> while being exposed in DebugFS.
 
 -- 
 With Best Regards,
