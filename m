@@ -1,68 +1,68 @@
-Received: from mail-oo2-f0.google.com (mail-oo2-f0.google.com [74.125.231.128])
+Received: from mail-oo2-f5.google.com (mail-oo2-f5.google.com [74.125.231.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDB16328B75
-	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 04:15:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.231.128
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31FD1399013
+	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 04:15:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.231.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789532133; cv=none; b=suDFCH1KwLYC9irqgclJQEuAvx+Hn91f21n90JCItkOtiQKt5xvlxMQGWmYspGDYYlb6JvEbI2unGb4Eh2dmEomBqH+L5i7t1lg1SkMdt6FY0+pdUKfujA/NMpIUSQm0L3hf9ImWhejBjFR5KAPM8XE/bYUBshPgbJqQVVshLdo=
+	t=1789532136; cv=none; b=UB6NlNxlcVqz5yvHM56PxegCoMeFVfZnEbDAGfr8yF5tA7V+g7+L4HJOmSEOKyyjlbBRT+H4WDf0l5L99hvRGb7NZhEtAvpiq9E59F+UsAqhYjZel2O3rP8AqNM/kng97uibKIqv0xulZKG2haNvOrqY8vgQF5w7Ez47ElrUMSg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789532133; c=relaxed/simple;
-	bh=pmiqpg+YqOsk+EKifCpoFFAOwMNO4lcDpbG+a0tTy6k=;
+	s=arc-20240116; t=1789532136; c=relaxed/simple;
+	bh=eMXlSZo1VOCw8RXDlIOWEe10ScLpRFrd7gnttzf71Ac=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=i7TbRhi3X9RGSDPp+ZQpStoYw/tvtS3gOdDfhfno7DRzt5eLXio48jpRhvnd3+gDtFK+edJPStqvJISvuXO0jFFTrrpXGOJozuTwuReKuQ1FfEaiazKPalgC8MCVVdOlOV+I94YIrkMXnpfFdG3i7kFAF7O61uEJ+oKIxYXN49U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hLOLmSX9; arc=none smtp.client-ip=74.125.231.128
+	 In-Reply-To:To:Cc; b=jtSLtYx+6ZPFH9FcwINFJlKehPDeqbATtQosstqIlGCCy6uCb/hQHY6MfV4CJQ2UuvO65CKQutXy8uLMq2XGd5u+RQUDZFpAEFYRPAhpuN8N/qoLQg+ILPaHHkeHWGLisEI3Ot6KEHh+bGi67oeX85c9GZACp2BzpkwzUbYLEak=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=W3lonfzd; arc=none smtp.client-ip=74.125.231.133
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hLOLmSX9"
-Received: by mail-oo2-f0.google.com with SMTP id 46e09a7af769-804795653f9so905278a34.0
-        for <mfd@lists.linux.dev>; Tue, 15 Sep 2026 21:15:31 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="W3lonfzd"
+Received: by mail-oo2-f5.google.com with SMTP id 46e09a7af769-7f4e6693089so1856453a34.0
+        for <mfd@lists.linux.dev>; Tue, 15 Sep 2026 21:15:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789532131; x=1790136931; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1789532132; x=1790136932; darn=lists.linux.dev;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=jhwjcBFP/KKm35RjYsTK0NhciT0e3mhgRUR8OdcQ0MU=;
-        b=hLOLmSX9dBttj9BibcRhsYX5xfVzZvILJWs8bqe80G1V/iq2kwsP+J4+0OcSUc33KM
-         TvdalsU1PAFqdJHBbJN8PpXPAwupKLNhXbo5m922ze7VAFKOwWTJrv4+Vd1z4lgYjBh4
-         D2HLFBXw/kQrygxvNsiY11/9zRSb2wExpjt3h6h1lpuGQIbLJdZWK3NxiTfRoSPaAmDR
-         qrP0MsLtBgKO28Cs/hxX9COQA5FSNBirXbuEHcHtiRMerCeLeZmSRrUa4TnDJOn6/FjM
-         nBCRBC0e01s+K55aJIsRSknj126F8n8bxaNO2Yb3ufJryldFSDAuoQlDVxGyxKNwLxnh
-         ODgw==
+        bh=kv7K+NQDwkzVit4t1U8RT9Xbw/6Dvr8ewgY1vIfRASQ=;
+        b=W3lonfzdaoOurq8hdZDsJ/Wklv75SIf+IG7VT10U+pQLRjCiWwKGmtToI90Mw/gNt7
+         QHE5Xl88wPpjifAjGwbJaatP8/SXepKwkMy6u4ved6/XcWFXDkTkIsOlnp5kTFGuY4P/
+         fQkANLmUz1T+dNd3qBvBTK11ypiJqokOX1M7RQ6rX+caFEPqe3LjKk1burtwTbpMFrFQ
+         zVTpdK97Mprr+55pAKV+qVHZqdvKVwnwJ3BFflcqKWNPSjQtOEerOX3mdyryJb3nAXLW
+         MPJoibPRd2Gv882LxOgM/obEjI6y4GsxRODw4AMh9MzWjvAnhj8+W5d++AZtABn9sUjz
+         BVew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789532131; x=1790136931;
+        d=1e100.net; s=20260707; t=1789532132; x=1790136932;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=jhwjcBFP/KKm35RjYsTK0NhciT0e3mhgRUR8OdcQ0MU=;
-        b=DWvLOTbMWntO0dsDvkVHSTPX+po+u7SKgDwakbQxiD7F6r08/abgmoGopIL7+WQShD
-         fGU7HgRrz5NDeKvVOkWMMwGw5BZwOi3tMUZ/onB/IthJ1ePXutVkQUFE8OKUxvi0vluv
-         4vqpniV6JVCEgHKMlIyTEMcjqtjA8oK8oyJM14o1lUaYuSwIRuOy9f2Q24KXUNOckzd5
-         rfg3C4T8Kt+Z4a2O2OPGDVZTkpUo7f8CMrtMdQ+JGU2KrqTBshrN5gKH88RxLIZKbxXT
-         kdY9YDrwjO+wUEU9qos/6q8fXI05Hfml0fOT3DVgMV74WoedmXA6mw0H0hTRZntrFBew
-         oGKA==
-X-Forwarded-Encrypted: i=1; AKwUvBwmZDioqXs3e489Db4+7YnGINOoDVLPq79Ynvsv+/GXM7wuxcOd+RNXMgjtxBpF9lFuf68=@lists.linux.dev
-X-Gm-Message-State: AFuF++nwzZTOwlIvfZMe0+jZuMeVOWcYxKXm9IbmYdsr6My3LhMlcU0+
-	GM3PserV44pT257fN533KaOtvd0wDfacl1wVa+fO4WxNuomhT6QPvJMI
-X-Gm-Gg: AYBFou1gFsB0obc9c0jZpobjS+504QN99x3NI72gbXSGL0S2+DxqOZHARo6Kblk1WbK
-	GiHlRnMwlJ8csHDCpsg4CSQQ9dAoP5hrFTpI8y/xMb8CzjJWDA/EtgbvVYz6a22ryPQAZJWN8gi
-	J/OUouAVliz/DCqzwh6+m4jpTRObGoOB0eAgxhwm8nK+rcyj8vNCKRB4gvXDOTAAZT1/Xa+RR+w
-	JW47rBJmVb814OKVyfI8P+04OKDbdp93c0dlOwL8QE3dEcps5+hra6kF3NZzeZL/1D2iw0GknX0
-	lVkn+q8bYUYD7hNs5wzcVD13oGyWS/EJz8xSJK6eqKwklyifLHfXJf1kT14qG3uoEDRDBKGd5R3
-	D91cvTr1eWn2m8pP6NnRXFHpw9vkFXadnK35QjxKoREGW/IUpt9pIysP264OLYQ4YC+cUsjkcNQ
-	/f64b+HUZJXOsxeWlquKy3FEFMlTgnBonrop0fyQ+XfXgxXnLae/9qFjsMs4148h3UQ6M=
-X-Received: by 2002:a05:6830:6211:b0:7fa:ab72:9e04 with SMTP id 46e09a7af769-80b2f7c830fmr1398025a34.28.1789532130742;
-        Tue, 15 Sep 2026 21:15:30 -0700 (PDT)
+        bh=kv7K+NQDwkzVit4t1U8RT9Xbw/6Dvr8ewgY1vIfRASQ=;
+        b=Pc66KNB/vc3AR38ho5KKwPg9MwjUqi3hnNIjv9cvOLgBZPDbE45E+WUvq8hVA1jtbo
+         cU7JtfH6W/lPQYN2tzULr3DUCqUfG7c8mhdE/fQRBNrTbm7HhCs/GZwfUKUJcJ4JQKdr
+         eFu80BifP+f1AXMs+ZvdBVFb1RLPgBp2T4TgjNuWjOuTJ0X6qT7knj+pzhmtOj90yvJK
+         zS6mq386sK7fyGmTcpSIxPvfHZPAlqgLAxN/tDsLs7D4AdD/nkhnCdQNlyv23z+YmXyr
+         DxJZ8H/i7KO5nYqSWLoQzU0A0mJ2zA2dWjiHfnIceal9KHGCwyqEOcTrRgznl6YgpClc
+         DxXg==
+X-Forwarded-Encrypted: i=1; AKwUvBy3+RtgQxHv7QOWlXnZ7vUQScUeAGgbedW+o/p6M9eDZ2cHEJo1ew4Hyur2Fu+3DzxKMRE=@lists.linux.dev
+X-Gm-Message-State: AFuF++kQTk7QAKmwNTtlpjHAySlU7JbPh4rIYo/gb8yaeQe9qpANAKk2
+	6ZLJZuHf/69dw7J1TJyBZaIiAc6F7uuCEX9jJ5twA/sxfcL496xc2sNJ
+X-Gm-Gg: AYBFou31f2cdbvgUj8KmHxAy/N8kolt7j7x0Qx7RlltP+hgf6Hsn8vftr/5UhUa60Yk
+	vUAIrehWX2sqfyISNh8HwTHIx0IEGhETEoID02jJa/j0BgAlkR+HfAHEorvRgG1fAa6NWSvEAaf
+	iskWW6HjepWcR14FSG70Fpxbo96Ww44I55HU8lJ6uH7M3SCA9Bw2VOqBuAnYGFhj0c2bqS+7fHR
+	0xq7VEgsH3brrkWIZQwJBgmo5S5V4wEX0vyCaDaPuwwKhvKibAvL2NvX0FOFf2wPhrYEi29ERV9
+	sa0/+xRYDWyCg8jgvVjm3U9vUEqsCSjb2vpuCA3tdTmTKYFxSks1s9nH5kzc8FB6wTcHWKFT80v
+	smHTLMdpraXFvd/tbU025LLJLVWAvsr5C5/tofw4O07F0UjEyNVXAmuIFtTP5YnKZWaubsmrz8X
+	OEh2QAPfsb8csppAqImY7LcWDzGLl5zIK1jVyoQ1HM/UGtxjrc+eqjBEjgBqA4jJiB7wSAqyqCY
+	byDMA==
+X-Received: by 2002:a05:6830:6105:b0:7f8:4ac8:bd2a with SMTP id 46e09a7af769-80b2e558715mr3543149a34.12.1789532132103;
+        Tue, 15 Sep 2026 21:15:32 -0700 (PDT)
 Received: from [192.168.18.164] ([2600:8804:5716:d800::b712])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-80b07ad0373sm1440484a34.26.2026.09.15.21.15.29
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-80b07ad0373sm1440484a34.26.2026.09.15.21.15.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 15 Sep 2026 21:15:30 -0700 (PDT)
+        Tue, 15 Sep 2026 21:15:31 -0700 (PDT)
 From: Ryan Brue <ryanbrue.dev@gmail.com>
-Date: Tue, 15 Sep 2026 23:15:26 -0500
-Subject: [PATCH 1/3] dt-bindings: iio: adc: mediatek,mt6359-auxadc: add
- mt6397 PMIC AUXADC
+Date: Tue, 15 Sep 2026 23:15:27 -0500
+Subject: [PATCH 2/3] iio: adc: mt6397-auxadc: add mt6397 PMIC AUXADC driver
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -71,7 +71,7 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260915-rbrue-suez-upstreaming-mt6397-auxadc-v1-1-d35d2ac3d6f0@gmail.com>
+Message-Id: <20260915-rbrue-suez-upstreaming-mt6397-auxadc-v1-2-d35d2ac3d6f0@gmail.com>
 References: <20260915-rbrue-suez-upstreaming-mt6397-auxadc-v1-0-d35d2ac3d6f0@gmail.com>
 In-Reply-To: <20260915-rbrue-suez-upstreaming-mt6397-auxadc-v1-0-d35d2ac3d6f0@gmail.com>
 To: Jonathan Cameron <jic23@kernel.org>, 
@@ -90,59 +90,444 @@ Cc: linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
  Luca Leonardo Scorcia <l.scorcia@gmail.com>, 
  Ryan Brue <ryanbrue.dev@gmail.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789532127; l=2042;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789532127; l=14253;
  i=ryanbrue.dev@gmail.com; s=20260906; h=from:subject:message-id;
- bh=pmiqpg+YqOsk+EKifCpoFFAOwMNO4lcDpbG+a0tTy6k=;
- b=zlRbINoqD2290MGLwe+MTrL1s4Bsp9ASTtTw5dB1r5/3VSi6a+YNhJDWnfn5xx5DMFAkDSpsR
- JKyOG0N88gfCa+Au6JKO0cUBK36yIriOBv3MjrXPSU5E4mjHwOdwFy9
+ bh=eMXlSZo1VOCw8RXDlIOWEe10ScLpRFrd7gnttzf71Ac=;
+ b=0u2/Akbf2ysKhB6fTs57++wLo5QOOioVh1JTcrpvIUVHzF0WcH9IzQUB4W9MZgVlp4+hFTAFa
+ Gayu3Z55t2tBvFvV5tZJF6KAb7aIpbF2tRBEIWvC6nuqoqcp4bKDJ8N
 X-Developer-Key: i=ryanbrue.dev@gmail.com; a=ed25519;
  pk=KsUvVaP//v/2q+ZBuacc7cLbsyEYn+AD71Sn28oZWKo=
 
-The MediaTek mt6397 PMIC includes a 10-bit AUXADC used for battery voltage
-and battery temperature measurements. It is not register compatible with
-mt6359: a conversion is requested by writing a channel number to a select
-field and pulsing an edge triggered start bit rather than by setting the
-channel's bit in a request register, and the results live elsewhere.
-It therefore gets its own compatible rather than a fallback.
+The mt6397 AUXADC is a 10-bit ADC behind the SoC's PMIC wrapper. On boards
+built around this PMIC it is the only way to read the battery: the SoC's
+AUXADC is wired to board thermistors and the charger ICs these boards use
+have no ADC of their own.
 
-Add the binding and the header naming the channels a consumer puts in
-io-channels. The battery channel is named for the input it measures,
-ISENSE, which is what mt6323-auxadc calls the same input.
+Add a driver exposing the battery voltage and battery temperature
+channels. Only those two are described, so a channel ID in the device tree
+is an index into the driver's channel array rather than the PMIC's channel
+number, as mt6323-auxadc does. The ready bit lives in a channel's raw
+result register, but the value comes from the chip's trimmed copy of it,
+which is what the vendor driver reads for a measurement.
+
+Both channels need more than that, as the vendor programs them. The
+battery voltage is measured through ISENSE, because a board with a
+switching charger in the power path leaves BATSNS on the charger's system
+rail instead of on the pack. The thermistor only reads correctly with the
+PMIC's battery-detect bias and input buffer enabled, which take 20 ms to
+settle. Both are switched back off afterwards.
+
+Reads average sixteen conversions in software; the chip's sample
+accumulator makes no measurable difference at any setting, so it is left
+at one sample per conversion.
 
 Assisted-by: LLM
 Signed-off-by: Ryan Brue <ryanbrue.dev@gmail.com>
 ---
- .../devicetree/bindings/iio/adc/mediatek,mt6359-auxadc.yaml      | 1 +
- include/dt-bindings/iio/adc/mediatek,mt6397-auxadc.h             | 9 +++++++++
- 2 files changed, 10 insertions(+)
+ MAINTAINERS                     |   7 +
+ drivers/iio/adc/Kconfig         |  11 ++
+ drivers/iio/adc/Makefile        |   1 +
+ drivers/iio/adc/mt6397-auxadc.c | 340 ++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 359 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/iio/adc/mediatek,mt6359-auxadc.yaml b/Documentation/devicetree/bindings/iio/adc/mediatek,mt6359-auxadc.yaml
-index c2f7387e4bfc..2847bd5d5bc4 100644
---- a/Documentation/devicetree/bindings/iio/adc/mediatek,mt6359-auxadc.yaml
-+++ b/Documentation/devicetree/bindings/iio/adc/mediatek,mt6359-auxadc.yaml
-@@ -26,6 +26,7 @@ properties:
-           - mediatek,mt6359-auxadc
-           - mediatek,mt6363-auxadc
-           - mediatek,mt6373-auxadc
-+          - mediatek,mt6397-auxadc
-       - items:
-           - enum:
-               - mediatek,mt6365-auxadc
-diff --git a/include/dt-bindings/iio/adc/mediatek,mt6397-auxadc.h b/include/dt-bindings/iio/adc/mediatek,mt6397-auxadc.h
+diff --git a/MAINTAINERS b/MAINTAINERS
+index c2414447892c..9b254f98b5d7 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -16713,6 +16713,13 @@ S:	Maintained
+ F:	drivers/iio/adc/mt6323-auxadc.c
+ F:	include/dt-bindings/iio/adc/mediatek,mt6323-auxadc.h
+ 
++MEDIATEK MT6397 PMIC AUXADC DRIVER
++M:	Ryan Brue <ryanbrue.dev@gmail.com>
++L:	linux-iio@vger.kernel.org
++S:	Maintained
++F:	drivers/iio/adc/mt6397-auxadc.c
++F:	include/dt-bindings/iio/adc/mediatek,mt6397-auxadc.h
++
+ MEDIATEK MT6735 CLOCK & RESET DRIVERS
+ M:	Yassine Oudjana <y.oudjana@protonmail.com>
+ L:	linux-clk@vger.kernel.org
+diff --git a/drivers/iio/adc/Kconfig b/drivers/iio/adc/Kconfig
+index 415e519ad4eb..9a1d36ed53cb 100644
+--- a/drivers/iio/adc/Kconfig
++++ b/drivers/iio/adc/Kconfig
+@@ -1233,6 +1233,17 @@ config MEDIATEK_MT6370_ADC
+ 	  This driver can also be built as a module. If so, the module
+ 	  will be called "mt6370-adc".
+ 
++config MEDIATEK_MT6397_AUXADC
++	tristate "MediaTek MT6397 PMIC AUXADC driver"
++	depends on MFD_MT6397
++	help
++	  Say yes here to enable support for MediaTek MT6397 PMIC Auxiliary ADC.
++	  This driver provides the battery voltage and battery temperature
++	  channels used by the fuel gauge on boards built around this PMIC.
++
++	  This driver can also be built as a module. If so, the module will be
++	  called mt6397-auxadc.
++
+ config MEDIATEK_MT6577_AUXADC
+ 	tristate "MediaTek AUXADC driver"
+ 	depends on ARCH_MEDIATEK || COMPILE_TEST
+diff --git a/drivers/iio/adc/Makefile b/drivers/iio/adc/Makefile
+index dcec0abb03b7..13cb4206bdb7 100644
+--- a/drivers/iio/adc/Makefile
++++ b/drivers/iio/adc/Makefile
+@@ -105,6 +105,7 @@ obj-$(CONFIG_MEDIATEK_MT6323_AUXADC) += mt6323-auxadc.o
+ obj-$(CONFIG_MEDIATEK_MT6359_AUXADC) += mt6359-auxadc.o
+ obj-$(CONFIG_MEDIATEK_MT6360_ADC) += mt6360-adc.o
+ obj-$(CONFIG_MEDIATEK_MT6370_ADC) += mt6370-adc.o
++obj-$(CONFIG_MEDIATEK_MT6397_AUXADC) += mt6397-auxadc.o
+ obj-$(CONFIG_MEDIATEK_MT6577_AUXADC) += mt6577_auxadc.o
+ obj-$(CONFIG_MEN_Z188_ADC) += men_z188_adc.o
+ obj-$(CONFIG_MESON_SARADC) += meson_saradc.o
+diff --git a/drivers/iio/adc/mt6397-auxadc.c b/drivers/iio/adc/mt6397-auxadc.c
 new file mode 100644
-index 000000000000..b696c1cb5ebe
+index 000000000000..dbfa82341d6c
 --- /dev/null
-+++ b/include/dt-bindings/iio/adc/mediatek,mt6397-auxadc.h
-@@ -0,0 +1,9 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++++ b/drivers/iio/adc/mt6397-auxadc.c
+@@ -0,0 +1,340 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * MediaTek MT6397 PMIC AUXADC IIO driver
++ *
++ * Copyright (c) 2026 Ryan Brue <ryanbrue.dev@gmail.com>
++ *
++ * Based on drivers/iio/adc/mt6323-auxadc.c
++ */
 +
-+#ifndef _DT_BINDINGS_MEDIATEK_MT6397_AUXADC_H
-+#define _DT_BINDINGS_MEDIATEK_MT6397_AUXADC_H
++#include <linux/array_size.h>
++#include <linux/bitfield.h>
++#include <linux/bits.h>
++#include <linux/cleanup.h>
++#include <linux/delay.h>
++#include <linux/iio/iio.h>
++#include <linux/math.h>
++#include <linux/module.h>
++#include <linux/mutex.h>
++#include <linux/platform_device.h>
++#include <linux/regmap.h>
++#include <linux/stringify.h>
++#include <linux/time.h>
++#include <linux/types.h>
 +
-+#define MT6397_AUXADC_ISENSE		0
-+#define MT6397_AUXADC_BAT_TEMP		1
++#include <linux/mfd/mt6397/core.h>
 +
-+#endif
++#include <dt-bindings/iio/adc/mediatek,mt6397-auxadc.h>
++
++/* The ready bit is in the raw result register, the value in the trimmed one. */
++#define MT6397_AUXADC_ADC(n)		(0x0514 + 2 * (n))
++#define MT6397_AUXADC_ADC_RDY		BIT(15)
++#define MT6397_AUXADC_ADC_VAL		GENMASK(9, 0)
++#define MT6397_AUXADC_ADC_TRIM(n)	(0x052a + 2 * (n))	/* ADC11 + n */
++
++/* The thermistor needs the battery-detect bias and the input buffer on. */
++#define MT6397_AUXADC_CON0		0x0542
++#define MT6397_AUXADC_CON0_BUF_PWD_B	BIT(1)
++#define MT6397_AUXADC_CON0_BUF_PWD_ON	BIT(3)
++#define MT6397_CHR_CON7			0x000e
++#define MT6397_CHR_CON7_BATON_TDET_EN	BIT(2)
++#define MT6397_AUXADC_BATTEMP_SETTLE_US	(20 * USEC_PER_MSEC)
++
++#define MT6397_AUXADC_CON1		0x0544
++#define MT6397_AUXADC_CON1_CHSEL	GENMASK(10, 7)
++#define MT6397_AUXADC_CON1_START	BIT(0)
++
++/*
++ * CHR_CON16 and the two SOURCE_CH0 selects route either BATSNS or ISENSE onto
++ * the battery channel. Only ISENSE is used: with a switching charger in the
++ * power path BATSNS sits on the system rail rather than on the pack.
++ */
++#define MT6397_CHR_CON16		0x0020
++#define MT6397_CHR_CON16_ADCIN_VSEN_EN	BIT(11)
++#define MT6397_CHR_CON16_ADCIN_VBAT_EN	BIT(10)
++#define MT6397_CHR_CON16_ADCIN_SEL	(MT6397_CHR_CON16_ADCIN_VSEN_EN | \
++					 MT6397_CHR_CON16_ADCIN_VBAT_EN)
++#define MT6397_AUXADC_CON14		0x055e
++#define MT6397_AUXADC_CON14_CH0_NORM_SEL BIT(2)
++#define MT6397_AUXADC_CON14_CH0_LBAT_SEL BIT(0)
++#define MT6397_AUXADC_ISENSE_SETTLE_US	USEC_PER_MSEC
++
++/* Samples accumulated per conversion; the chip's accumulator is left off. */
++#define MT6397_AUXADC_CON0_SPL_NUM	GENMASK(11, 7)
++
++/* Conversions averaged in software per read. */
++#define MT6397_AUXADC_SAMPLES		16
++
++/* Hardware limitation: the result is not ready for this long after START. */
++#define MT6397_AUXADC_START_US		30
++
++/* The battery channel is divided down by 4; the thermistor is not divided. */
++#define MT6397_AUXADC_ISENSE_DIVIDER	4
++
++/* The PMIC's own channel numbers, as the CON1 select field takes them. */
++#define MT6397_AUXADC_HWCHAN_BATSNS	0
++#define MT6397_AUXADC_HWCHAN_BAT_TEMP	3
++
++struct mt6397_auxadc {
++	struct regmap *regmap;
++	/* AUXADC doesn't support reading multiple channels simultaneously. */
++	struct mutex lock;
++};
++
++#define MTK_PMIC_IIO_CHAN(_name, _chan, _hwchan)                \
++{                                                               \
++	.type = IIO_VOLTAGE,                                    \
++	.indexed = 1,                                           \
++	.channel = _chan,                                       \
++	.address = _hwchan,                                     \
++	.datasheet_name = __stringify(_name),                   \
++	.info_mask_separate = BIT(IIO_CHAN_INFO_RAW) |          \
++			      BIT(IIO_CHAN_INFO_SCALE),         \
++}
++
++/*
++ * A device tree channel ID indexes this array; .address holds the PMIC channel
++ * number. The thermistor reports as a voltage because that is all the PMIC
++ * measures: the divider across an NTC whose curve belongs to the board.
++ */
++static const struct iio_chan_spec mt6397_auxadc_channels[] = {
++	MTK_PMIC_IIO_CHAN(isense,   MT6397_AUXADC_ISENSE,
++			  MT6397_AUXADC_HWCHAN_BATSNS),
++	MTK_PMIC_IIO_CHAN(bat_temp, MT6397_AUXADC_BAT_TEMP,
++			  MT6397_AUXADC_HWCHAN_BAT_TEMP),
++};
++
++static int mt6397_auxadc_read_once(struct mt6397_auxadc *adc,
++				   const struct iio_chan_spec *chan, int *val)
++{
++	struct regmap *map = adc->regmap;
++	unsigned int reg;
++	int ret;
++
++	ret = regmap_update_bits(map, MT6397_AUXADC_CON1,
++				 MT6397_AUXADC_CON1_CHSEL,
++				 FIELD_PREP(MT6397_AUXADC_CON1_CHSEL,
++					    chan->address));
++	if (ret)
++		return ret;
++
++	/* START is edge triggered: it has to be lowered before being raised. */
++	ret = regmap_clear_bits(map, MT6397_AUXADC_CON1,
++				MT6397_AUXADC_CON1_START);
++	if (ret)
++		return ret;
++
++	ret = regmap_set_bits(map, MT6397_AUXADC_CON1,
++			      MT6397_AUXADC_CON1_START);
++	if (ret)
++		return ret;
++
++	fsleep(MT6397_AUXADC_START_US);
++
++	ret = regmap_read_poll_timeout(map, MT6397_AUXADC_ADC(chan->address),
++				       reg, reg & MT6397_AUXADC_ADC_RDY,
++				       100, 100 * USEC_PER_MSEC);
++	if (ret)
++		return ret;
++
++	ret = regmap_read(map, MT6397_AUXADC_ADC_TRIM(chan->address), &reg);
++	if (ret)
++		return ret;
++
++	*val = FIELD_GET(MT6397_AUXADC_ADC_VAL, reg);
++
++	return 0;
++}
++
++static int mt6397_auxadc_battemp_bias(struct mt6397_auxadc *adc, bool on)
++{
++	struct regmap *map = adc->regmap;
++	int ret;
++
++	if (on) {
++		ret = regmap_set_bits(map, MT6397_AUXADC_CON0,
++				      MT6397_AUXADC_CON0_BUF_PWD_ON);
++		if (ret)
++			return ret;
++		ret = regmap_set_bits(map, MT6397_AUXADC_CON0,
++				      MT6397_AUXADC_CON0_BUF_PWD_B);
++		if (ret)
++			return ret;
++		return regmap_set_bits(map, MT6397_CHR_CON7,
++				       MT6397_CHR_CON7_BATON_TDET_EN);
++	}
++
++	ret = regmap_clear_bits(map, MT6397_CHR_CON7,
++				MT6397_CHR_CON7_BATON_TDET_EN);
++	ret = ret ?: regmap_clear_bits(map, MT6397_AUXADC_CON0,
++				       MT6397_AUXADC_CON0_BUF_PWD_B);
++	return ret ?: regmap_clear_bits(map, MT6397_AUXADC_CON0,
++					MT6397_AUXADC_CON0_BUF_PWD_ON);
++}
++
++static int mt6397_auxadc_isense_enable(struct mt6397_auxadc *adc)
++{
++	struct regmap *map = adc->regmap;
++	int ret;
++
++	ret = regmap_update_bits(map, MT6397_CHR_CON16,
++				 MT6397_CHR_CON16_ADCIN_SEL,
++				 MT6397_CHR_CON16_ADCIN_VSEN_EN);
++	if (ret)
++		return ret;
++
++	return regmap_set_bits(map, MT6397_AUXADC_CON14,
++			       MT6397_AUXADC_CON14_CH0_NORM_SEL |
++			       MT6397_AUXADC_CON14_CH0_LBAT_SEL);
++}
++
++static int mt6397_auxadc_isense_disable(struct mt6397_auxadc *adc)
++{
++	struct regmap *map = adc->regmap;
++	int ret;
++
++	ret = regmap_clear_bits(map, MT6397_AUXADC_CON14,
++				MT6397_AUXADC_CON14_CH0_NORM_SEL |
++				MT6397_AUXADC_CON14_CH0_LBAT_SEL);
++
++	return ret ?: regmap_clear_bits(map, MT6397_CHR_CON16,
++					MT6397_CHR_CON16_ADCIN_SEL);
++}
++
++static int mt6397_auxadc_read_channel(struct mt6397_auxadc *adc,
++				      const struct iio_chan_spec *chan,
++				      int *val)
++{
++	unsigned int i, sum = 0;
++	int ret, sample;
++
++	/* Held across the whole burst: the channel select is shared state. */
++	guard(mutex)(&adc->lock);
++
++	if (chan->channel == MT6397_AUXADC_ISENSE) {
++		ret = mt6397_auxadc_isense_enable(adc);
++		if (ret)
++			return ret;
++		fsleep(MT6397_AUXADC_ISENSE_SETTLE_US);
++	} else {
++		ret = mt6397_auxadc_battemp_bias(adc, true);
++		if (ret)
++			return ret;
++		fsleep(MT6397_AUXADC_BATTEMP_SETTLE_US);
++	}
++
++	for (i = 0; i < MT6397_AUXADC_SAMPLES; i++) {
++		ret = mt6397_auxadc_read_once(adc, chan, &sample);
++		if (ret)
++			break;
++
++		sum += sample;
++	}
++
++	/* Lower START so the converter is not left armed between reads. */
++	regmap_clear_bits(adc->regmap, MT6397_AUXADC_CON1,
++			  MT6397_AUXADC_CON1_START);
++
++	if (chan->channel == MT6397_AUXADC_ISENSE)
++		mt6397_auxadc_isense_disable(adc);
++	else
++		mt6397_auxadc_battemp_bias(adc, false);
++
++	if (ret)
++		return ret;
++
++	*val = DIV_ROUND_CLOSEST(sum, MT6397_AUXADC_SAMPLES);
++
++	return 0;
++}
++
++static int mt6397_auxadc_read_raw(struct iio_dev *indio_dev,
++				  const struct iio_chan_spec *chan,
++				  int *val, int *val2, long mask)
++{
++	struct mt6397_auxadc *adc = iio_priv(indio_dev);
++	int ret;
++
++	switch (mask) {
++	case IIO_CHAN_INFO_RAW:
++		ret = mt6397_auxadc_read_channel(adc, chan, val);
++		if (ret)
++			return ret;
++
++		return IIO_VAL_INT;
++
++	case IIO_CHAN_INFO_SCALE:
++		/* 1200 mV full range with 10-bit resolution. */
++		*val = 1200;
++		if (chan->channel == MT6397_AUXADC_ISENSE)
++			*val *= MT6397_AUXADC_ISENSE_DIVIDER;
++		*val2 = 10;
++
++		return IIO_VAL_FRACTIONAL_LOG2;
++
++	default:
++		return -EINVAL;
++	}
++}
++
++static int mt6397_auxadc_init(struct mt6397_auxadc *adc)
++{
++	return regmap_update_bits(adc->regmap, MT6397_AUXADC_CON0,
++				  MT6397_AUXADC_CON0_SPL_NUM,
++				  FIELD_PREP(MT6397_AUXADC_CON0_SPL_NUM, 1));
++}
++
++static const struct iio_info mt6397_auxadc_info = {
++	.read_raw = mt6397_auxadc_read_raw,
++};
++
++static int mt6397_auxadc_probe(struct platform_device *pdev)
++{
++	struct device *dev = &pdev->dev;
++	struct mt6397_chip *chip = dev_get_drvdata(dev->parent);
++	struct mt6397_auxadc *adc;
++	struct iio_dev *indio_dev;
++	int ret;
++
++	indio_dev = devm_iio_device_alloc(dev, sizeof(*adc));
++	if (!indio_dev)
++		return -ENOMEM;
++
++	adc = iio_priv(indio_dev);
++	adc->regmap = chip->regmap;
++
++	ret = devm_mutex_init(dev, &adc->lock);
++	if (ret)
++		return ret;
++
++	ret = mt6397_auxadc_init(adc);
++	if (ret)
++		return dev_err_probe(dev, ret, "failed to initialize auxadc\n");
++
++	indio_dev->name = "mt6397-auxadc";
++	indio_dev->info = &mt6397_auxadc_info;
++	indio_dev->modes = INDIO_DIRECT_MODE;
++	indio_dev->channels = mt6397_auxadc_channels;
++	indio_dev->num_channels = ARRAY_SIZE(mt6397_auxadc_channels);
++
++	return devm_iio_device_register(dev, indio_dev);
++}
++
++static const struct of_device_id mt6397_auxadc_of_match[] = {
++	{ .compatible = "mediatek,mt6397-auxadc" },
++	{ /* sentinel */ }
++};
++MODULE_DEVICE_TABLE(of, mt6397_auxadc_of_match);
++
++static struct platform_driver mt6397_auxadc_driver = {
++	.driver = {
++		.name = "mt6397-auxadc",
++		.of_match_table = mt6397_auxadc_of_match,
++	},
++	.probe = mt6397_auxadc_probe,
++};
++module_platform_driver(mt6397_auxadc_driver);
++
++MODULE_LICENSE("GPL");
++MODULE_AUTHOR("Ryan Brue <ryanbrue.dev@gmail.com>");
++MODULE_DESCRIPTION("MediaTek MT6397 PMIC AUXADC Driver");
 
 -- 
 2.55.0
