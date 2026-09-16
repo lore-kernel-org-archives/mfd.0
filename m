@@ -1,124 +1,162 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.14])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C74B4DA545;
-	Wed, 16 Sep 2026 10:23:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.14
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EAA8F4AF142;
+	Wed, 16 Sep 2026 10:27:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789554254; cv=none; b=jCpVcqr6GhrOy2fka5hy4HpygxONcIcqoN/W36nvZg8DBQcmG0OWJ4yI7VSXVgNxF5HJZc+cvP6WIU80U4BsYmZK3YMftIR6htyH5KLzwnnqj3kiL+AB2ist7ggy7U+pVO+pr/mH+jzKJHFr+/1YWSOzpIrw1J6rDOpuoeuU2kk=
+	t=1789554473; cv=none; b=K65ahm40CiBX05YtKGjMQos0zgT1AiJnCWEIPAY/g4oOpN5B5OkgBieD7MR74/zATI4bxLhPgag9XWfACM3iuKcUcDaeSLjaIqml1V1yBZWca374PEQRSr8bXKdlZ2Wc5NxwwJpv85Ie4QnDmTV6xK1cR2LQe/p+4/qV51fkWrs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789554254; c=relaxed/simple;
-	bh=PeVfyJvNsLA4HGK44/YoeVENKrqs3ZCDtZ1Sly+fN/8=;
+	s=arc-20240116; t=1789554473; c=relaxed/simple;
+	bh=wXreIP3tC205f3nPQFVedjNw6ICCrCqnjkjAc3ffaGY=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=SBLgVGgsAtQSni1dG6PYXLVRs8As0AHawdKrjanx+i5HtVddn7PZJj6Htajs2Bkc6XP6atvrKXCUldzwP7CW7CQn3w+o5O7IKCDG4BxczkkWDPTcbSl/CiMFz4cE/Bzz9ceXZveLxmURaq4hhBvm23xzjoHjP8Ba9+EdnSP8Gq4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=RQdHqPNR; arc=none smtp.client-ip=198.175.65.14
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=cxKHtvcojKC9DY/kBFs2dfyjzZZ7xled5rbDGid3KCvTxWN47Ts0heij0cI0DxEPIwQeG1mc0l2fG0SPzuSn4DioqD3nehzH/K28RbgUr5HNFsSdc2ZwrfW9Nw1Gj0IcvmogMgD9WrtZSjfyTqSLqH+Ch1YPEaXvtnvB1khN3ZE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SFNwsPtB; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="RQdHqPNR"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789554238; x=1821090238;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=PeVfyJvNsLA4HGK44/YoeVENKrqs3ZCDtZ1Sly+fN/8=;
-  b=RQdHqPNRJT231W2uJk54/zr4R30gTm6QQlbybP8ZXqr3eLPvrbSJiWB4
-   VtlwSWvrj3k9ys0VE/LMDQlhNKeO7re5zm/k3irEU36+89LuWHcZO8FHz
-   QlUPF1VhNgtMUeB4eX0nzzmOma0LQy/0/gFWhE8DPT6kOScrKP1FRh+24
-   uV0FDPee5EeMr/qgZab+t3QVgNCwqR2dbt1Jkp/E6nf/+Ze50HZv6ko/v
-   P9VcVUUxO1re0FQR1jz4XLir4ymJZNSxqhLGfEA7eRFJWwhEspaIyz2do
-   wtAF+m726df07ySCPUylCao7d9jcH+rm1UIwcLSldv9EVZsV5OiMYBU4K
-   Q==;
-X-CSE-ConnectionGUID: pEoL0r3xTo2DPGlkSA7vQw==
-X-CSE-MsgGUID: NW8s8I37S8adsrB1+rkdnA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="93798674"
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="93798674"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
-  by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 03:23:54 -0700
-X-CSE-ConnectionGUID: zZTsqc9USHyL5sqH2UfPDg==
-X-CSE-MsgGUID: 8JRWbhnbR4S5o23MCxAirA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="311581967"
-Received: from ettammin-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.244.145])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 03:23:48 -0700
-Date: Wed, 16 Sep 2026 13:23:45 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Linus Walleij <linusw@kernel.org>
-Cc: Bartosz Golaszewski <brgl@kernel.org>, soc@lists.linux.dev,
-	longzhao@ambarella.com,
-	Long Zhao via B4 Relay <devnull+longzhao.ambarella.com@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Jerome Brunet <jbrunet@baylibre.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jiri Slaby <jirislaby@kernel.org>,
-	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, Long Zhao <zl020895@163.com>,
-	Lee Jones <lee@kernel.org>, mfd@lists.linux.dev,
-	devicetree@vger.kernel.org, linux-clk@vger.kernel.org,
-	linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-	Arnd Bergmann <arnd@arndb.de>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	linux-arm-kernel@lists.infradead.org
-Subject: Re: [PATCH v7 00/15] Ambarella CV75 SoC minimal bring-up
-Message-ID: <aqpuMcqbra9i6UDq@ashevche-desk.local>
-References: <20260915-cv75-v5-v7-0-3297d3fbc9c0@ambarella.com>
- <CAMRc=McEOcWq8i3B01AR1PnfBzSQaLEaOzE6Qa+QdVXrvS_YrA@mail.gmail.com>
- <CAD++jLnRL_s9zPNkSj2UnHWPx+QHAXV19DA7dEmGZu0AkxxyaA@mail.gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SFNwsPtB"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB8AA1F000FF;
+	Wed, 16 Sep 2026 10:27:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789554455;
+	bh=x4jHf775ozqpKeid93D9RRDJNOOQZz0wUt4rIU/B1rA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=SFNwsPtBe/BjLRWY4fpK1iXFneo/VYdGEknGosnm5IdOVtgRCU6z65FrAVKakj4Rf
+	 0GUPB0aE2X98KztSAjIJnOGXqE7iEZ/CewPW+ktFsFLfcuz8iYIApqgu+TM4l/CxYy
+	 GUyzYIq2UMPXC4IpF9isKXnl6i/dADhXrwgjbnoyXXOYj5GT4ykU4K21qilrHqkroG
+	 xFJ6SQ5feeabbEd2rFxEMr4bOcH1a5/LNwon7awpRWkdqLk4k7qz9V/4STFqIhCHgz
+	 BVNakNYgW38m0iNu1HEDnJ7Epdj2BcbIa+5KEG2MN6ag8Vnw/myJzYkqIB1xu6GRuz
+	 uqgY0erNP1JNQ==
+Date: Wed, 16 Sep 2026 11:27:32 +0100
+From: Lee Jones <lee@kernel.org>
+To: Maria Lisina <sekoohaka.sarisan@gmail.com>
+Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	mfd@lists.linux.dev, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v5] mfd: intel-lpss: Clean up and modernize DebugFS usage
+Message-ID: <20260916102732.GJ11487@google.com>
+References: <20260916-intel-lpss-debugfs-v5-1-99295f534067@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAD++jLnRL_s9zPNkSj2UnHWPx+QHAXV19DA7dEmGZu0AkxxyaA@mail.gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+In-Reply-To: <20260916-intel-lpss-debugfs-v5-1-99295f534067@gmail.com>
 
-On Wed, Sep 16, 2026 at 11:42:56AM +0200, Linus Walleij wrote:
-> On Wed, Sep 16, 2026 at 11:14 AM Bartosz Golaszewski <brgl@kernel.org> wrote:
-> > On Tue, 15 Sep 2026 13:15:30 +0200, Long Zhao via B4 Relay
-> > <devnull+longzhao.ambarella.com@kernel.org> said:
-> > > This series adds minimal Ambarella CV75 support for early bring-up with
-> > > a serial console: DT bindings, RCT clocks, pinctrl, PL061 GPIO via
-> > > gpio-regmap, 8250_dw UART quirks, ARCH_AMBARELLA, CV75 EVK DT, and
-> > > MAINTAINERS.
-> > >
-> > > This is a single unified series. Please apply via the SoC
-> > > tree; subsystem maintainers are Cc'd for their pieces.
-> >
-> > I would prefer to take the GPIO regmap bits through the GPIO tree and provide
-> > an immutable branch to the SoC tree as it has potential for conflicts that
-> > early into the cycle.
+On Wed, 16 Sep 2026, Maria Lisina wrote:
+
+> The DebugFS API is designed to handle errors gracefully.
+> Any explicit checking on return values is considered an anti-pattern.
 > 
-> Queue them up and send us the IB if you think they are ready!
+> This patch removes unnecessary error checking and converts
+> intel_lpss_debugfs_add() into a void function.
 > 
-> Long can probably send a PR based on that IB for the rest to the
-> SoC tree, a bit tricksy but it works.
+> While at it, this patch also clean ups legacy and deprecated usage
+> of S_IRUGO macro and debugfs_remove_recursive() function.
+> 
+> Signed-off-by: Maria Lisina <sekoohaka.sarisan@gmail.com>
+> ---
+> Changes in v5:
+> - Changed the goal of the patch to DebugFS modernization.
+> - Refactored intel_lpss_debugfs_add() into a void function.
+> - Removed deprecated macros and functions.
+> - Removed dmesg message completely.
+> - Link to v4: https://lore.kernel.org/r/20260914-intel-lpss-debugfs-v4-1-0eb82ea7c1e3@gmail.com
+> 
+> Changes in v4:
+> - Keep the dmesg messages, instead check whether DebugFS is initialized
+> - Link to v3: https://lore.kernel.org/r/20260913-intel-lpss-debugfs-v3-1-1b8e2b1f0992@gmail.com
+> 
+> Changes in v3:
+> - Fixed commit name and description.
+> - Link to v2: https://lore.kernel.org/r/20260913-intel-lpss-debugfs-v2-1-a1a4faf5cc63@gmail.com
+> 
+> Changes in v2:
+> - Fixed function name in comment section.
+> - Link to v1: https://lore.kernel.org/r/20260913-intel-lpss-debugfs-v1-1-833cbb6fffc9@gmail.com
+> ---
+>  drivers/mfd/intel-lpss.c | 28 +++++++++++-----------------
+>  1 file changed, 11 insertions(+), 17 deletions(-)
+> 
+> diff --git a/drivers/mfd/intel-lpss.c b/drivers/mfd/intel-lpss.c
+> index 63d6694f71457b2e09d238af0a9bfb897a169a64..1a61ef1a62b3e8a2777f357d5c4605d5d57d9532 100644
+> --- a/drivers/mfd/intel-lpss.c
+> +++ b/drivers/mfd/intel-lpss.c
+> @@ -142,28 +142,25 @@ static void intel_lpss_cache_ltr(struct intel_lpss *lpss)
+>  	lpss->idle_ltr = readl(lpss->priv + LPSS_PRIV_IDLELTR);
+>  }
+>  
+> -static int intel_lpss_debugfs_add(struct intel_lpss *lpss)
+> +static void intel_lpss_debugfs_add(struct intel_lpss *lpss)
+>  {
+> -	struct dentry *dir;
+> -
+> -	dir = debugfs_create_dir(dev_name(lpss->dev), intel_lpss_debugfs);
+> -	if (IS_ERR(dir))
+> -		return PTR_ERR(dir);
+> +	lpss->debugfs =
+> +		debugfs_create_dir(dev_name(lpss->dev), intel_lpss_debugfs);
 
-I'm still unsure why we can't use IRQ facility from gpio-regmap.
-Can you have a look there?
+No need to line-wrap for this.  Use up to 100-chars to prevent this craziness.
 
-With that being said, I'm not sure that the patch that exposing gpio_chip
-from gpio-regmap is justified.
+Why continue if this returns an error?
 
-The whole GPIO rework needs a bit more routine work (resplitting, refactoring,
-et cetera), so later we may see clearer what's going on.
+>  
+>  	/* Cache the values into lpss structure */
+>  	intel_lpss_cache_ltr(lpss);
+>  
+> -	debugfs_create_x32("capabilities", S_IRUGO, dir, &lpss->caps);
+> -	debugfs_create_x32("active_ltr", S_IRUGO, dir, &lpss->active_ltr);
+> -	debugfs_create_x32("idle_ltr", S_IRUGO, dir, &lpss->idle_ltr);
+> -
+> -	lpss->debugfs = dir;
+> -	return 0;
+> +	debugfs_create_x32("capabilities", 0444, lpss->debugfs,
+
+Does this accept a NULL pointer or an error in parameter 3?
+
+> +					   &lpss->caps);
+
+You should always align to the '(' but in this case, don't wrap at all.
+
+> +	debugfs_create_x32("active_ltr", 0444, lpss->debugfs,
+> +					   &lpss->active_ltr);
+> +	debugfs_create_x32("idle_ltr", 0444, lpss->debugfs,
+> +					   &lpss->idle_ltr);
+>  }
+>  
+>  static void intel_lpss_debugfs_remove(struct intel_lpss *lpss)
+>  {
+> -	debugfs_remove_recursive(lpss->debugfs);
+> +	debugfs_remove(lpss->debugfs);
+
+Please explain why this is required?
+
+>  }
+>  
+>  static void intel_lpss_ltr_set(struct device *dev, s32 val)
+> @@ -432,10 +429,7 @@ int intel_lpss_probe(struct device *dev,
+>  		goto err_clk_register;
+>  
+>  	intel_lpss_ltr_expose(lpss);
+> -
+> -	ret = intel_lpss_debugfs_add(lpss);
+> -	if (ret)
+> -		dev_warn(dev, "Failed to create debugfs entries\n");
+> +	intel_lpss_debugfs_add(lpss);
+>  
+>  	if (intel_lpss_has_idma(lpss)) {
+>  		ret = mfd_add_devices(dev, lpss->devid, &intel_lpss_idma64_cell,
+> 
+> ---
+> base-commit: 2f0c1cf72f4682178506f513bbf015e591b1aa4a
+> change-id: 20260913-intel-lpss-debugfs-eff3580d1295
+> 
+> Best regards,
+> -- 
+> Maria Lisina <sekoohaka.sarisan@gmail.com>
+> 
 
 -- 
-With Best Regards,
-Andy Shevchenko
-
-
+Lee Jones
