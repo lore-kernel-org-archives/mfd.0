@@ -1,97 +1,114 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.20])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FA4F408602
-	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 11:01:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.20
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF7F04DF4D4;
+	Wed, 16 Sep 2026 11:02:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.5
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789556529; cv=none; b=uZRZtq9PG6a+30+s0S9CHSo1ipl0YjLWySad901Svj0wUKKOIjocKpgUxLjCu9y0SGnCOLQWK9hkGtyNpQ7cWr9rozOwgNJhArI9PS3Ea3ji/jciG3kRem8d7jXnsGTnQrXbesJjg+aCnpHK4w5ICmLhms2xne8NUaPT3GVHaqw=
+	t=1789556557; cv=none; b=eT8m2r0VgM4/cnDRsdxR2QVuB23181su+7qQWTiA+xuan2LHSEKHmyYtdJ/B+hhZXR3nLpABNVdUGOY10Sq03FjdYmHae0pGs0j0s2ahPg+0i44wl+b44ctPqlUbcyfDvG4uZvjTC4R4yAeVc8/2/QjRe011EkmkJSt3IHjDQFI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789556529; c=relaxed/simple;
-	bh=ZgHhEaRahJwkbaHFYWSN4ZGdYIdpQi0S6GSbhcaGKLQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Mt94cRLGBspPHrp7t042T3SQSRZX8hpoVtSO2ZDHu47T/CH4yHsDy9oCaPZBdOb9iMAbDOWQEe1E45SchUF7vJL8jPRGGwcT9rzMA/gUzFSoEVa5Jf3ZwUA88iH+5vSztz5VptwHirBvwcfedJIrE/uEDBTjVUY0rqmAaSW6gp4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=lMoBZ32u; arc=none smtp.client-ip=198.175.65.20
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1789556557; c=relaxed/simple;
+	bh=XWYr4ENYidcskbtv9TLVflYBJ2nrgan0itQw24BVLf4=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
+	 MIME-Version:Message-ID; b=JB1HBdCMTbing6H5N/dW+j3XIDIa+CFvZSOGiLCRh5aPvuD7gA4BpZu70AJCUBFUee5puMHlvUNlahq6cGJUcXi1L4PSyhILZndw5HSc3JYjnYu/NSZFp7DU1lG49ba/fKuM3TNYFjQizu+97mw8n5uTWFicT7ab1L4aboqN/s0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=QXJHNWlt; arc=none smtp.client-ip=117.135.210.5
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="lMoBZ32u"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789556506; x=1821092506;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=ZgHhEaRahJwkbaHFYWSN4ZGdYIdpQi0S6GSbhcaGKLQ=;
-  b=lMoBZ32ud1H1Kg04FdBBb9cGvfgShZj7NWKgD1pUmX7c/ysULnXuAA3+
-   DXqnPPjzMEOMf7nzwm6jStRp03vhvntjNS3DZ3JOwOcmjd76FQwhKsZdw
-   3TpQRaUX80blhpPE3tzjF0cqTo20Sk6O3xoi0wzxxX1DF7iFoTh+aDT7E
-   t49NDbNKoIeQTiQ5LJmybBcJIjqf/un8sNtkzdwWXDHz7X3R8UXJrmuk2
-   EmYoYDjQyBrDWKzEe1KvPDMFnMx7VyxWff/dXFy/Vtslnfz/+IsbrOMgI
-   ldDrPpmVE1D5nTUi3+3fmIuDmDUNQEtR2isRaZgAmw/wDnUrV2RWC6qRt
-   A==;
-X-CSE-ConnectionGUID: DXlmE1nbTrKrTs7qCEcrIQ==
-X-CSE-MsgGUID: /BTF/XhuSjqtgkXxnO7N8Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="89685111"
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="89685111"
-Received: from fmviesa006.fm.intel.com ([10.60.135.146])
-  by orvoesa112.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 04:01:44 -0700
-X-CSE-ConnectionGUID: xNBFxqqmSLGHbHlQEmX23A==
-X-CSE-MsgGUID: +Mm8Fq7hTqmIU2PoHWqeuw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="269040543"
-Received: from ettammin-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.244.145])
-  by fmviesa006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 04:01:43 -0700
-Date: Wed, 16 Sep 2026 14:01:40 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Lee Jones <lee@kernel.org>
-Cc: Maria Lisina <sekoohaka.sarisan@gmail.com>, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v5] mfd: intel-lpss: Clean up and modernize DebugFS usage
-Message-ID: <aqp3FMncWrzR1adT@ashevche-desk.local>
-References: <20260916-intel-lpss-debugfs-v5-1-99295f534067@gmail.com>
- <20260916102732.GJ11487@google.com>
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="QXJHNWlt"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
+	Message-ID; bh=XWYr4ENYidcskbtv9TLVflYBJ2nrgan0itQw24BVLf4=; b=Q
+	XJHNWltJ0xSQ2jiM+iN+TKdx/QfKg5EV2QfGCCC7ecN9ytw5qTQGeyoQSRXfXT77
+	Mb0SBvpZRv6x4NjIJ1X7n8qKqfQfcw/OEN8q2EGHfn3rUe3/LYnW4kH9sj1lXB7w
+	Prdy6/f38S5VaZxWVmvZMZs2mJDy2dYjcORs+da+x0=
+Date: Wed, 16 Sep 2026 19:01:10 +0800 (CST)
+From: zl020895  <zl020895@163.com>
+To: "Andy Shevchenko" <andriy.shevchenko@linux.intel.com>
+Cc: "Linus Walleij" <linusw@kernel.org>,
+	"Bartosz Golaszewski" <brgl@kernel.org>, soc@lists.linux.dev,
+	longzhao@ambarella.com,
+	"Long Zhao via B4 Relay" <devnull+longzhao.ambarella.com@kernel.org>,
+	"Rob Herring" <robh@kernel.org>,
+	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
+	"Conor Dooley" <conor+dt@kernel.org>,
+	"Michael Turquette" <mturquette@baylibre.com>,
+	"Stephen Boyd" <sboyd@kernel.org>,
+	"Jerome Brunet" <jbrunet@baylibre.com>,
+	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+	"Jiri Slaby" <jirislaby@kernel.org>,
+	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	"Catalin Marinas" <catalin.marinas@arm.com>,
+	"Will Deacon" <will@kernel.org>, "Lee Jones" <lee@kernel.org>,
+	mfd@lists.linux.dev, devicetree@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
+	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org,
+	"Krzysztof Kozlowski" <krzysztof.kozlowski@oss.qualcomm.com>,
+	"Arnd Bergmann" <arnd@arndb.de>,
+	"Krzysztof Kozlowski" <krzk@kernel.org>,
+	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
+	linux-arm-kernel@lists.infradead.org
+Subject: Re:Re: [PATCH v7 00/15] Ambarella CV75 SoC minimal bring-up
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
+ 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
+In-Reply-To: <aqpuMcqbra9i6UDq@ashevche-desk.local>
+References: <20260915-cv75-v5-v7-0-3297d3fbc9c0@ambarella.com>
+ <CAMRc=McEOcWq8i3B01AR1PnfBzSQaLEaOzE6Qa+QdVXrvS_YrA@mail.gmail.com>
+ <CAD++jLnRL_s9zPNkSj2UnHWPx+QHAXV19DA7dEmGZu0AkxxyaA@mail.gmail.com>
+ <aqpuMcqbra9i6UDq@ashevche-desk.local>
+X-NTES-SC: AL_Qu2TC/meuUws5iaYYOkcn0wRhug/UMa4u/sm3YNXc+0EmQv84jsnW19JAXbm4NmSDCydmwSSfylD1ctrZLJSSmM9ix4F2GWSJfiNOy6P3A==
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260916102732.GJ11487@google.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Message-ID: <23d61058.962b.1a0a9e0b355.Coremail.zl020895@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID:ZigvCgB3r9v2dqpqhlJIAA--.26232W
+X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbCxhYgkWqqdvZsNQAA34
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
 
-On Wed, Sep 16, 2026 at 11:27:32AM +0100, Lee Jones wrote:
-> On Wed, 16 Sep 2026, Maria Lisina wrote:
-> 
-> > The DebugFS API is designed to handle errors gracefully.
-> > Any explicit checking on return values is considered an anti-pattern.
-> > 
-> > This patch removes unnecessary error checking and converts
-> > intel_lpss_debugfs_add() into a void function.
-> > 
-> > While at it, this patch also clean ups legacy and deprecated usage
-> > of S_IRUGO macro and debugfs_remove_recursive() function.
-
-...
-
-> Why continue if this returns an error?
-
-Because we don't care.
-
-> > +	debugfs_create_x32("capabilities", 0444, lpss->debugfs,
-> 
-> Does this accept a NULL pointer or an error in parameter 3?
-
-Yes, debugfs is designed to be used without checks.
-
-> > +					   &lpss->caps);
-
--- 
-With Best Regards,
-Andy Shevchenko
-
-
+VGhhbmtzIEJhcnQsIExpbnVzLCBBbmR5LgoKQUNLOiBHUElPIGJpdHMgdGhyb3VnaCB0aGUgR1BJ
+TyB0cmVlLCB0aGVuIGFuIElCIGZvciB0aGUgU29DIHRyZWUuCkkgd2lsbCBrZWVwIGEgdW5pZmll
+ZCBzZXJpZXMgZm9yIG5vdy4KCnJlZ21hcC1pcnEgY2Fubm90IGRvIFBMMDYxIHR5cGUgKElTL0lC
+RS9JRVYsIGJvdGgtZWRnZSkgcGx1cyB0aGUKQU1CQSBjaGFpbmVkIGRlbXV4LgoKVHdvIG9wdGlv
+bnMgZm9yIHY4IOKAlCBBbmR5LCB3aGljaCBkbyB5b3UgcHJlZmVyPwogIDEpIENvbnZlcnQgUEww
+NjEgTU1JTyB0byByZWdtYXAgb25seS4gS2VlcCB0aGUgZXhpc3RpbmcgZ3Bpb19jaGlwCiAgICAg
+YW5kIGlycWNoaXAvZ2lycSAoZG91YmxlLXdyaXRlIHN0YXlzIGluIHRoZSBkcml2ZXIpLiBBbWJh
+cmVsbGEKICAgICBsYXlvdXQgY2FuIGJlIGEgZm9sbG93LXVwIG9uIHRoYXQuIE5vIGdwaW8tcmVn
+bWFwIHlldC4KCiAgMikgQWZ0ZXIgKDEpLCBhbHNvIG1vdmUgZ2V0L3NldC9kaXJlY3Rpb24gdG8g
+Z3Bpby1yZWdtYXAuIElSUQogICAgIHdvdWxkIHN0YXkgYSBjdXN0b20gUEwwNjEgaXJxY2hpcCAo
+bm90IHJlZ21hcC1pcnEpLiBJIGFtIG5vdAogICAgIHN1cmUgd2UgY2FuIGF2b2lkIGEgd2F5IHRv
+IGdldCB0aGUgZ3Bpb19jaGlwIGZvcgogICAgIGdwaW9jaGlwXypfaXJxKCkgLyB0aGUgY2hhaW5l
+ZCBoYW5kbGVyLgoKSSBhbSBsZWFuaW5nIHRvICgxKSBmb3IgdjguCgpCZXN0IHJlZ2FyZHMsCkxv
+bmcgWmhhbwoK5ZyoIDIwMjYtMDktMTYgMTg6MjM6NDXvvIwiQW5keSBTaGV2Y2hlbmtvIiA8YW5k
+cml5LnNoZXZjaGVua29AbGludXguaW50ZWwuY29tPiDlhpnpgZPvvJoKPk9uIFdlZCwgU2VwIDE2
+LCAyMDI2IGF0IDExOjQyOjU2QU0gKzAyMDAsIExpbnVzIFdhbGxlaWogd3JvdGU6Cj4+IE9uIFdl
+ZCwgU2VwIDE2LCAyMDI2IGF0IDExOjE04oCvQU0gQmFydG9zeiBHb2xhc3pld3NraSA8YnJnbEBr
+ZXJuZWwub3JnPiB3cm90ZToKPj4gPiBPbiBUdWUsIDE1IFNlcCAyMDI2IDEzOjE1OjMwICswMjAw
+LCBMb25nIFpoYW8gdmlhIEI0IFJlbGF5Cj4+ID4gPGRldm51bGwrbG9uZ3poYW8uYW1iYXJlbGxh
+LmNvbUBrZXJuZWwub3JnPiBzYWlkOgo+PiA+ID4gVGhpcyBzZXJpZXMgYWRkcyBtaW5pbWFsIEFt
+YmFyZWxsYSBDVjc1IHN1cHBvcnQgZm9yIGVhcmx5IGJyaW5nLXVwIHdpdGgKPj4gPiA+IGEgc2Vy
+aWFsIGNvbnNvbGU6IERUIGJpbmRpbmdzLCBSQ1QgY2xvY2tzLCBwaW5jdHJsLCBQTDA2MSBHUElP
+IHZpYQo+PiA+ID4gZ3Bpby1yZWdtYXAsIDgyNTBfZHcgVUFSVCBxdWlya3MsIEFSQ0hfQU1CQVJF
+TExBLCBDVjc1IEVWSyBEVCwgYW5kCj4+ID4gPiBNQUlOVEFJTkVSUy4KPj4gPiA+Cj4+ID4gPiBU
+aGlzIGlzIGEgc2luZ2xlIHVuaWZpZWQgc2VyaWVzLiBQbGVhc2UgYXBwbHkgdmlhIHRoZSBTb0MK
+Pj4gPiA+IHRyZWU7IHN1YnN5c3RlbSBtYWludGFpbmVycyBhcmUgQ2MnZCBmb3IgdGhlaXIgcGll
+Y2VzLgo+PiA+Cj4+ID4gSSB3b3VsZCBwcmVmZXIgdG8gdGFrZSB0aGUgR1BJTyByZWdtYXAgYml0
+cyB0aHJvdWdoIHRoZSBHUElPIHRyZWUgYW5kIHByb3ZpZGUKPj4gPiBhbiBpbW11dGFibGUgYnJh
+bmNoIHRvIHRoZSBTb0MgdHJlZSBhcyBpdCBoYXMgcG90ZW50aWFsIGZvciBjb25mbGljdHMgdGhh
+dAo+PiA+IGVhcmx5IGludG8gdGhlIGN5Y2xlLgo+PiAKPj4gUXVldWUgdGhlbSB1cCBhbmQgc2Vu
+ZCB1cyB0aGUgSUIgaWYgeW91IHRoaW5rIHRoZXkgYXJlIHJlYWR5IQo+PiAKPj4gTG9uZyBjYW4g
+cHJvYmFibHkgc2VuZCBhIFBSIGJhc2VkIG9uIHRoYXQgSUIgZm9yIHRoZSByZXN0IHRvIHRoZQo+
+PiBTb0MgdHJlZSwgYSBiaXQgdHJpY2tzeSBidXQgaXQgd29ya3MuCj4KPkknbSBzdGlsbCB1bnN1
+cmUgd2h5IHdlIGNhbid0IHVzZSBJUlEgZmFjaWxpdHkgZnJvbSBncGlvLXJlZ21hcC4KPkNhbiB5
+b3UgaGF2ZSBhIGxvb2sgdGhlcmU/Cj4KPldpdGggdGhhdCBiZWluZyBzYWlkLCBJJ20gbm90IHN1
+cmUgdGhhdCB0aGUgcGF0Y2ggdGhhdCBleHBvc2luZyBncGlvX2NoaXAKPmZyb20gZ3Bpby1yZWdt
+YXAgaXMganVzdGlmaWVkLgo+Cj5UaGUgd2hvbGUgR1BJTyByZXdvcmsgbmVlZHMgYSBiaXQgbW9y
+ZSByb3V0aW5lIHdvcmsgKHJlc3BsaXR0aW5nLCByZWZhY3RvcmluZywKPmV0IGNldGVyYSksIHNv
+IGxhdGVyIHdlIG1heSBzZWUgY2xlYXJlciB3aGF0J3MgZ29pbmcgb24uCj4KPi0tIAo+V2l0aCBC
+ZXN0IFJlZ2FyZHMsCj5BbmR5IFNoZXZjaGVua28KPgo=
