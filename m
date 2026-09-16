@@ -1,95 +1,92 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73A8D4A2633
-	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 09:43:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 837B44AF9F3
+	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 09:51:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.10
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789551801; cv=none; b=QwhzuW3KtEqefzqN+M9I8cg1OdAVBY1hLPUnBsLCykXL2MbElYhDNJafEo3lHATCaCq7FD1GgHyiHR0g4faluYILkrpknURlzG+ccosfy2s3VZckVb0wI3k5yJHqwHgTDEG2sOLYQz2eK3GFF7PAdIz3baRypf/u7c2rzVjjWv4=
+	t=1789552274; cv=none; b=kazs43twbRgbEa+vz2cgJWDZAYw/nD11iaj/mL377Myw/F9h5TgGV8A9/V28HBqPX2Ug7+TXhXvI+aPZ3kaED6CTpAgj+W5/0+o35+na//GdeKuaSO/mr61Jhnv8YQWAiKJl4aly53PhmZUn6032PJLO21a4hSKLlLiW+PRQGVk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789551801; c=relaxed/simple;
-	bh=F3XAkt71bhIAWEC1ICnSKPfvdKIX/T9WRczYZnwW3iw=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Y2CUCNvc8D3a+PVhlZBhhEpKdpffUBduljA3c2JwCikd72y3r7U1EluQIMirmCSC4/CApavWG1xtlR45av6bF/mc0gHUY1WW7sJvCBjlZxC9H479GEW27ILDmXZ7cEpmg2amrI0/MMzzyg1lVnUuWzhQL3FXzldquNCWjVe/Qnk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IXl8q9ZC; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789552274; c=relaxed/simple;
+	bh=UIwWPNKRQ8FW7Bu3jbEPy9yWyv1Y+CRFZBuPobR95d0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=UaSdzcr4fk+k0E78y/Voa6mr0sT9cY5iP6Ji0go5yuqwzquZJmwZ0+cyCopfffGw2mz/PY0J7FDSJIYUYeFMG3F/kHphsNl5HH9E+wHylO9ebHV5/sMQ9TKIhC8r3/6Zyur9fW7WauxAsqdtfUWlxnX3HDTgJW4yDeeH6TFD00s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=lpN3keqc; arc=none smtp.client-ip=192.198.163.10
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IXl8q9ZC"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AB41F1F008A1
-	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 09:43:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789551790;
-	bh=F3XAkt71bhIAWEC1ICnSKPfvdKIX/T9WRczYZnwW3iw=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=IXl8q9ZCD1dvSn2KHw7LYsq5TamJfBC9svJngVUoPtAjGvN3AGOWjcegBVIRcvmFF
-	 XT6NrbG9olT/96quf46Aj1p5TW/bOlRJqGEpKc2DvnnTXZ7qmrFaUvn7S/QkLAj9xA
-	 VTA9+RM2dRfHk3re3CEfd0MoKCHcUNuhj2uVDlfmDu5vlNWPRtjDIjCN7m2aK4dKa+
-	 vri7E5HQr9oevAF/INz6el1lZ/EqryyIvvWL5AuaOv2lDJ9wQjNtc9HTuu5uI9yeIU
-	 jvNRYpp4RADOHSwGl1NXhGtH8HhW4PYN63KmDV1bs399TWMPA2ZvEm7XDa38cyNSOc
-	 fNkQ+oRZi1HCA==
-Received: by mail-lf2-f13.google.com with SMTP id 2adb3069b0e04-5b5e4f1801fso775060e87.2
-        for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 02:43:10 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBxZ/hKYKojBI5ILxy4mtR0sWsaV99tzgFmX7enLeOIqy2fWhHN7ixnHR+1VXQlpcvtcGl0=@lists.linux.dev
-X-Gm-Message-State: AFuF++lOaTESAAbBUhr+7ryfEJjqe9QJIHsGbt6SI3rr4XxBXX0RMCWu
-	9gWJ3OW3inmifhsKWyvXIRD1Cy9eEBe5F4W/by23KlREMx3iobLLbbN0VOd+zZ2NiYXhBNjZ/nu
-	N0leYiomVzCW8QIT17lYmD2nQsUJ5y0U=
-X-Received: by 2002:a05:6512:318d:b0:5b4:b03e:b17 with SMTP id
- 2adb3069b0e04-5b8b6611fb9mr542523e87.4.1789551789409; Wed, 16 Sep 2026
- 02:43:09 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="lpN3keqc"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1789552271; x=1821088271;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=UIwWPNKRQ8FW7Bu3jbEPy9yWyv1Y+CRFZBuPobR95d0=;
+  b=lpN3keqc2doZES6wZDzdAlMJKCSI696tBsXtGmYCb7NSkavDArNWFw2a
+   m7CvquFXHraOjMB2NvMLteYf6JiPd2AnCKx91SXFaE0UYecnPsCpCfnIP
+   ri9mZ8a4qJhKMTdkFK9gtaOg0CX3sKm1VroE/lNHege178ppONxVKEkJ+
+   TZWTgf50fvbl+KJMYl481C0/C5ACaEG7hpivrf7FWh4RCh047rS/xKeBS
+   TkmCTe1ighf3WnpASLtpoX4z4l7r6Ki9QsuJWho5hN1oQYZL6lQ+ovwB2
+   GzWsqDvMxBiKnLsrenOP9QgtC/0RgvipadGeAiH7AbkaQRFNONCF2t3Gu
+   Q==;
+X-CSE-ConnectionGUID: 5Uyr0kjYRKeF0GmwlAoxmw==
+X-CSE-MsgGUID: 9ciaoX3GRe2U+N7i7qaSOg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="101270146"
+X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
+   d="scan'208";a="101270146"
+Received: from fmviesa009.fm.intel.com ([10.60.135.149])
+  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 02:51:06 -0700
+X-CSE-ConnectionGUID: KfvqFqviTauBpXirtJ5MXw==
+X-CSE-MsgGUID: RK56W2AkRI2hfojlaoS2QQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
+   d="scan'208";a="267080866"
+Received: from ettammin-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.244.145])
+  by fmviesa009-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 02:51:01 -0700
+Date: Wed, 16 Sep 2026 12:50:58 +0300
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Ryan Brue <ryanbrue.dev@gmail.com>
+Cc: Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Lee Jones <lee@kernel.org>, linux-iio@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-mediatek@lists.infradead.org, mfd@lists.linux.dev,
+	Roman Vivchar <rva333@protonmail.com>,
+	Luca Leonardo Scorcia <l.scorcia@gmail.com>
+Subject: Re: [PATCH 0/3] iio: adc: add mt6397 PMIC AUXADC support
+Message-ID: <aqpmgliQW7FW53o5@ashevche-desk.local>
+References: <20260915-rbrue-suez-upstreaming-mt6397-auxadc-v1-0-d35d2ac3d6f0@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260915-cv75-v5-v7-0-3297d3fbc9c0@ambarella.com> <CAMRc=McEOcWq8i3B01AR1PnfBzSQaLEaOzE6Qa+QdVXrvS_YrA@mail.gmail.com>
-In-Reply-To: <CAMRc=McEOcWq8i3B01AR1PnfBzSQaLEaOzE6Qa+QdVXrvS_YrA@mail.gmail.com>
-From: Linus Walleij <linusw@kernel.org>
-Date: Wed, 16 Sep 2026 11:42:56 +0200
-X-Gmail-Original-Message-ID: <CAD++jLnRL_s9zPNkSj2UnHWPx+QHAXV19DA7dEmGZu0AkxxyaA@mail.gmail.com>
-X-Gm-Features: AcwNN1WkFxjMauP_yhzfkji573cflVZ6I3z5YLnNlcrQliI-kEo2Pckshh4B6Vw
-Message-ID: <CAD++jLnRL_s9zPNkSj2UnHWPx+QHAXV19DA7dEmGZu0AkxxyaA@mail.gmail.com>
-Subject: Re: [PATCH v7 00/15] Ambarella CV75 SoC minimal bring-up
-To: Bartosz Golaszewski <brgl@kernel.org>, soc@lists.linux.dev
-Cc: longzhao@ambarella.com, 
-	Long Zhao via B4 Relay <devnull+longzhao.ambarella.com@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Jerome Brunet <jbrunet@baylibre.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Jiri Slaby <jirislaby@kernel.org>, Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
-	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
-	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Long Zhao <zl020895@163.com>, 
-	Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
-	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, 
-	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, Arnd Bergmann <arnd@arndb.de>, 
-	Krzysztof Kozlowski <krzk@kernel.org>, Alexandre Belloni <alexandre.belloni@bootlin.com>, 
-	linux-arm-kernel@lists.infradead.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260915-rbrue-suez-upstreaming-mt6397-auxadc-v1-0-d35d2ac3d6f0@gmail.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On Wed, Sep 16, 2026 at 11:14=E2=80=AFAM Bartosz Golaszewski <brgl@kernel.o=
-rg> wrote:
-> On Tue, 15 Sep 2026 13:15:30 +0200, Long Zhao via B4 Relay
-> <devnull+longzhao.ambarella.com@kernel.org> said:
-> > This series adds minimal Ambarella CV75 support for early bring-up with
-> > a serial console: DT bindings, RCT clocks, pinctrl, PL061 GPIO via
-> > gpio-regmap, 8250_dw UART quirks, ARCH_AMBARELLA, CV75 EVK DT, and
-> > MAINTAINERS.
-> >
-> > This is a single unified series. Please apply via the SoC
-> > tree; subsystem maintainers are Cc'd for their pieces.
-> >
->
-> I would prefer to take the GPIO regmap bits through the GPIO tree and pro=
-vide
-> an immutable branch to the SoC tree as it has potential for conflicts tha=
-t
-> early into the cycle.
+On Tue, Sep 15, 2026 at 11:15:25PM -0500, Ryan Brue wrote:
+> The MediaTek mt6397 PMIC has a 10-bit AUXADC that nothing in-tree can
+> reach. On boards built around it that ADC is the only path to the battery:
+> the SoC's AUXADC is wired to board thermistors, and the charger ICs these
+> boards use have no ADC at all, so without it there is no pack voltage and
+> no state of charge.
 
-Queue them up and send us the IB if you think they are ready!
+This doesn't explain why a brand new driver? Perhaps we have existing code that
+may be updated to support this device?
 
-Long can probably send a PR based on that IB for the rest to the
-SoC tree, a bit tricksy but it works.
+-- 
+With Best Regards,
+Andy Shevchenko
 
-Yours,
-Linus Walleij
+
