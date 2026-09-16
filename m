@@ -1,162 +1,148 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EAA8F4AF142;
-	Wed, 16 Sep 2026 10:27:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7AF74D990A;
+	Wed, 16 Sep 2026 10:30:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789554473; cv=none; b=K65ahm40CiBX05YtKGjMQos0zgT1AiJnCWEIPAY/g4oOpN5B5OkgBieD7MR74/zATI4bxLhPgag9XWfACM3iuKcUcDaeSLjaIqml1V1yBZWca374PEQRSr8bXKdlZ2Wc5NxwwJpv85Ie4QnDmTV6xK1cR2LQe/p+4/qV51fkWrs=
+	t=1789554643; cv=none; b=XvV8qxx7yNdvV9r9cX1tmJ2f/Y9IcNMfp9dvMKositceF8NADZl3MkxcQtO45ZmcMVncI+0D9AvxY+m6uVtp33hKEFATEhQE1Vx/zIU7wDKS+KpETs7wSHG77VUeNFxsntoq/Kckh9e8t8dTpYSVLafWKKOmy/3vw5zisNcS6ak=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789554473; c=relaxed/simple;
-	bh=wXreIP3tC205f3nPQFVedjNw6ICCrCqnjkjAc3ffaGY=;
+	s=arc-20240116; t=1789554643; c=relaxed/simple;
+	bh=ToDiMD4kX9Iv406tqdtGXihdMYJOYTJMXqk/zYESWj4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=cxKHtvcojKC9DY/kBFs2dfyjzZZ7xled5rbDGid3KCvTxWN47Ts0heij0cI0DxEPIwQeG1mc0l2fG0SPzuSn4DioqD3nehzH/K28RbgUr5HNFsSdc2ZwrfW9Nw1Gj0IcvmogMgD9WrtZSjfyTqSLqH+Ch1YPEaXvtnvB1khN3ZE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SFNwsPtB; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=KQ9Cmmge8m2goi7e6TjzfiT/Dg/WRlXqHYlpmoyDeWT3yMIf0d4kohP+2NHKvsUB2hhn22qHWMnsa2rOBbGw56/rmFJKSxzbqS7I0skj0Lm9Di6gTZC7giNlA8orjGJ4Zh9VhQZvtgjHfXjDE0p5yOJM8BhW2CJJg/mrjxudfBU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HPVnz4nf; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SFNwsPtB"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB8AA1F000FF;
-	Wed, 16 Sep 2026 10:27:34 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HPVnz4nf"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4B7091F00893;
+	Wed, 16 Sep 2026 10:30:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789554455;
-	bh=x4jHf775ozqpKeid93D9RRDJNOOQZz0wUt4rIU/B1rA=;
+	s=k20260515; t=1789554620;
+	bh=HMnGR1uP61JN+YKnnP9vFpggh244A2KHvY9fMIpEhfo=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=SFNwsPtBe/BjLRWY4fpK1iXFneo/VYdGEknGosnm5IdOVtgRCU6z65FrAVKakj4Rf
-	 0GUPB0aE2X98KztSAjIJnOGXqE7iEZ/CewPW+ktFsFLfcuz8iYIApqgu+TM4l/CxYy
-	 GUyzYIq2UMPXC4IpF9isKXnl6i/dADhXrwgjbnoyXXOYj5GT4ykU4K21qilrHqkroG
-	 xFJ6SQ5feeabbEd2rFxEMr4bOcH1a5/LNwon7awpRWkdqLk4k7qz9V/4STFqIhCHgz
-	 BVNakNYgW38m0iNu1HEDnJ7Epdj2BcbIa+5KEG2MN6ag8Vnw/myJzYkqIB1xu6GRuz
-	 uqgY0erNP1JNQ==
-Date: Wed, 16 Sep 2026 11:27:32 +0100
+	b=HPVnz4nfexvQhm6Ny/K/nF407DX5XswJufYNl/mLsMCXQncIkes5DPb6rOyeCJPwk
+	 V2EDc1JYGmk/bZrLXi1QuXydpXpSK7wPqG+qjvHRQUJSM//FCPShW1FVWIjz2OytjS
+	 pgXxihgAW1VFKnfGsRWgsACXsXJF8UI197ss3ECqdaPAIRqbPOEvF9uZKYgYDOXMWL
+	 adYRm9mb3tHlC2FSIPjqeQ9qiLikZf9KfDPbEPEIbArC/QYMuiGo3DnT71thp7mRXg
+	 ijy6pWDL6snOx6Rpulb6Q8GieZsvAPQlS+0nIGyJt8OLernbgXOcUGj96S1peR7gbs
+	 y4aGOo702H8Sw==
+Date: Wed, 16 Sep 2026 11:30:16 +0100
 From: Lee Jones <lee@kernel.org>
-To: Maria Lisina <sekoohaka.sarisan@gmail.com>
-Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	mfd@lists.linux.dev, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v5] mfd: intel-lpss: Clean up and modernize DebugFS usage
-Message-ID: <20260916102732.GJ11487@google.com>
-References: <20260916-intel-lpss-debugfs-v5-1-99295f534067@gmail.com>
+To: sashiko-reviews@lists.linux.dev
+Cc: Ryan Brue <ryanbrue.dev@gmail.com>, robh@kernel.org,
+	devicetree@vger.kernel.org, conor+dt@kernel.org,
+	mfd@lists.linux.dev
+Subject: Re: [PATCH 3/3] mfd: mt6397-core: Add mt6397 AUXADC support
+Message-ID: <20260916103016.GK11487@google.com>
+References: <20260915-rbrue-suez-upstreaming-mt6397-auxadc-v1-0-d35d2ac3d6f0@gmail.com>
+ <20260915-rbrue-suez-upstreaming-mt6397-auxadc-v1-3-d35d2ac3d6f0@gmail.com>
+ <20260916042448.A40941F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20260916-intel-lpss-debugfs-v5-1-99295f534067@gmail.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260916042448.A40941F000FF@smtp.kernel.org>
 
-On Wed, 16 Sep 2026, Maria Lisina wrote:
+On Wed, 16 Sep 2026, sashiko-bot@kernel.org wrote:
 
-> The DebugFS API is designed to handle errors gracefully.
-> Any explicit checking on return values is considered an anti-pattern.
+> Thank you for your contribution! Sashiko AI review found 1 potential issue(s) to consider:
+> - [Medium] iio: mt6397-auxadc: hardware state leak on error paths
+
+Please review, explain or fix the Sashiko review(s).
+
+If this is a set, this request includes the other patches too.
+
+> --
 > 
-> This patch removes unnecessary error checking and converts
-> intel_lpss_debugfs_add() into a void function.
+> commit e17dd59587f106380c3ede8aa27c118b33350f88
+> Author: Ryan Brue <ryanbrue.dev@gmail.com>
 > 
-> While at it, this patch also clean ups legacy and deprecated usage
-> of S_IRUGO macro and debugfs_remove_recursive() function.
+> mfd: mt6397-core: Add mt6397 AUXADC support
 > 
-> Signed-off-by: Maria Lisina <sekoohaka.sarisan@gmail.com>
-> ---
-> Changes in v5:
-> - Changed the goal of the patch to DebugFS modernization.
-> - Refactored intel_lpss_debugfs_add() into a void function.
-> - Removed deprecated macros and functions.
-> - Removed dmesg message completely.
-> - Link to v4: https://lore.kernel.org/r/20260914-intel-lpss-debugfs-v4-1-0eb82ea7c1e3@gmail.com
+> The mt6397 PMIC includes an AUXADC. Register the AUXADC in the mt6397
+> devices array to allow the corresponding driver to probe using compatible
+> string.
 > 
-> Changes in v4:
-> - Keep the dmesg messages, instead check whether DebugFS is initialized
-> - Link to v3: https://lore.kernel.org/r/20260913-intel-lpss-debugfs-v3-1-1b8e2b1f0992@gmail.com
+> > diff --git a/drivers/mfd/mt6397-core.c b/drivers/mfd/mt6397-core.c
+> > index 9ec9519965887..5d5f816492aaa 100644
+> > --- a/drivers/mfd/mt6397-core.c
+> > +++ b/drivers/mfd/mt6397-core.c
+> > @@ -261,6 +261,9 @@ static const struct mfd_cell mt6359_devs[] = {
+> >  
+> >  static const struct mfd_cell mt6397_devs[] = {
+> >  	{
+> > +		.name = "mt6397-auxadc",
+> > +		.of_compatible = "mediatek,mt6397-auxadc",
 > 
-> Changes in v3:
-> - Fixed commit name and description.
-> - Link to v2: https://lore.kernel.org/r/20260913-intel-lpss-debugfs-v2-1-a1a4faf5cc63@gmail.com
+> [Severity: Medium]
+> Enabling this device exposes a hardware state leak on error paths in the
+> mt6397-auxadc driver.
 > 
-> Changes in v2:
-> - Fixed function name in comment section.
-> - Link to v1: https://lore.kernel.org/r/20260913-intel-lpss-debugfs-v1-1-833cbb6fffc9@gmail.com
-> ---
->  drivers/mfd/intel-lpss.c | 28 +++++++++++-----------------
->  1 file changed, 11 insertions(+), 17 deletions(-)
+> In mt6397_auxadc_isense_enable(), if the second regmap write fails, does the
+> function return without unwinding the first write, leaving
+> MT6397_CHR_CON16_ADCIN_VSEN_EN incorrectly enabled?
 > 
-> diff --git a/drivers/mfd/intel-lpss.c b/drivers/mfd/intel-lpss.c
-> index 63d6694f71457b2e09d238af0a9bfb897a169a64..1a61ef1a62b3e8a2777f357d5c4605d5d57d9532 100644
-> --- a/drivers/mfd/intel-lpss.c
-> +++ b/drivers/mfd/intel-lpss.c
-> @@ -142,28 +142,25 @@ static void intel_lpss_cache_ltr(struct intel_lpss *lpss)
->  	lpss->idle_ltr = readl(lpss->priv + LPSS_PRIV_IDLELTR);
->  }
->  
-> -static int intel_lpss_debugfs_add(struct intel_lpss *lpss)
-> +static void intel_lpss_debugfs_add(struct intel_lpss *lpss)
->  {
-> -	struct dentry *dir;
-> -
-> -	dir = debugfs_create_dir(dev_name(lpss->dev), intel_lpss_debugfs);
-> -	if (IS_ERR(dir))
-> -		return PTR_ERR(dir);
-> +	lpss->debugfs =
-> +		debugfs_create_dir(dev_name(lpss->dev), intel_lpss_debugfs);
-
-No need to line-wrap for this.  Use up to 100-chars to prevent this craziness.
-
-Why continue if this returns an error?
-
->  
->  	/* Cache the values into lpss structure */
->  	intel_lpss_cache_ltr(lpss);
->  
-> -	debugfs_create_x32("capabilities", S_IRUGO, dir, &lpss->caps);
-> -	debugfs_create_x32("active_ltr", S_IRUGO, dir, &lpss->active_ltr);
-> -	debugfs_create_x32("idle_ltr", S_IRUGO, dir, &lpss->idle_ltr);
-> -
-> -	lpss->debugfs = dir;
-> -	return 0;
-> +	debugfs_create_x32("capabilities", 0444, lpss->debugfs,
-
-Does this accept a NULL pointer or an error in parameter 3?
-
-> +					   &lpss->caps);
-
-You should always align to the '(' but in this case, don't wrap at all.
-
-> +	debugfs_create_x32("active_ltr", 0444, lpss->debugfs,
-> +					   &lpss->active_ltr);
-> +	debugfs_create_x32("idle_ltr", 0444, lpss->debugfs,
-> +					   &lpss->idle_ltr);
->  }
->  
->  static void intel_lpss_debugfs_remove(struct intel_lpss *lpss)
->  {
-> -	debugfs_remove_recursive(lpss->debugfs);
-> +	debugfs_remove(lpss->debugfs);
-
-Please explain why this is required?
-
->  }
->  
->  static void intel_lpss_ltr_set(struct device *dev, s32 val)
-> @@ -432,10 +429,7 @@ int intel_lpss_probe(struct device *dev,
->  		goto err_clk_register;
->  
->  	intel_lpss_ltr_expose(lpss);
-> -
-> -	ret = intel_lpss_debugfs_add(lpss);
-> -	if (ret)
-> -		dev_warn(dev, "Failed to create debugfs entries\n");
-> +	intel_lpss_debugfs_add(lpss);
->  
->  	if (intel_lpss_has_idma(lpss)) {
->  		ret = mfd_add_devices(dev, lpss->devid, &intel_lpss_idma64_cell,
+> drivers/iio/adc/mt6397-auxadc.c:mt6397_auxadc_isense_enable() {
+>     ...
+> 	ret = regmap_update_bits(map, MT6397_CHR_CON16,
+> 				 MT6397_CHR_CON16_ADCIN_SEL,
+> 				 MT6397_CHR_CON16_ADCIN_VSEN_EN);
+> 	if (ret)
+> 		return ret;
 > 
-> ---
-> base-commit: 2f0c1cf72f4682178506f513bbf015e591b1aa4a
-> change-id: 20260913-intel-lpss-debugfs-eff3580d1295
+> 	return regmap_set_bits(map, MT6397_AUXADC_CON14,
+> 			       MT6397_AUXADC_CON14_CH0_NORM_SEL |
+> 			       MT6397_AUXADC_CON14_CH0_LBAT_SEL);
+> }
 > 
-> Best regards,
+> Similarly, during teardown in mt6397_auxadc_isense_disable(), the use of the
+> ?: operator short-circuits the sequence.
+> 
+> If the first regmap_clear_bits() fails, will it abandon the cleanup and skip
+> disabling MT6397_CHR_CON16_ADCIN_SEL?
+> 
+> drivers/iio/adc/mt6397-auxadc.c:mt6397_auxadc_isense_disable() {
+>     ...
+> 	ret = regmap_clear_bits(map, MT6397_AUXADC_CON14,
+> 				MT6397_AUXADC_CON14_CH0_NORM_SEL |
+> 				MT6397_AUXADC_CON14_CH0_LBAT_SEL);
+> 
+> 	return ret ?: regmap_clear_bits(map, MT6397_CHR_CON16,
+> 					MT6397_CHR_CON16_ADCIN_SEL);
+> }
+> 
+> A similar issue appears in mt6397_auxadc_battemp_bias().
+> 
+> Does this function lack a rollback path if the second or third regmap
+> operation fails, permanently leaking previously modified register states?
+> 
+> drivers/iio/adc/mt6397-auxadc.c:mt6397_auxadc_battemp_bias() {
+>     ...
+> 	if (on) {
+> 		ret = regmap_set_bits(map, MT6397_AUXADC_CON0,
+> 				      MT6397_AUXADC_CON0_BUF_PWD_ON);
+> 		if (ret)
+> 			return ret;
+> 		ret = regmap_set_bits(map, MT6397_AUXADC_CON0,
+> 				      MT6397_AUXADC_CON0_BUF_PWD_B);
+> 		if (ret)
+> 			return ret;
+> 		return regmap_set_bits(map, MT6397_CHR_CON7,
+> 				       MT6397_CHR_CON7_BATON_TDET_EN);
+> 	}
+>     ...
+> }
+> 
+> > +	}, {
+> >  		.name = "mt6397-rtc",
+> 
 > -- 
-> Maria Lisina <sekoohaka.sarisan@gmail.com>
-> 
+> Sashiko AI review · https://sashiko.dev/#/patchset/20260915-rbrue-suez-upstreaming-mt6397-auxadc-v1-0-d35d2ac3d6f0@gmail.com?part=3
 
 -- 
 Lee Jones
