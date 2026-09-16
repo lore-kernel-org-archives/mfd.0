@@ -1,88 +1,280 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5720148032F
-	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 09:14:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F4973C65E0
+	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 09:23:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789550078; cv=none; b=kvOOiHFuQACbIC+yQYI7oMUWp050RBY4Um+0N/cLGkuOsKCAvIum6JDCtliAUvr0FUVVQPDRYTh1Y78BCmLnPPqrfl+CwNKpGsCR8i8n9Q4ry5ZnVV2MOU/j+L+PlgaKyou0/S68bI6qzaq0koYAZt2PBRQ2037JBm6Iatvinhs=
+	t=1789550628; cv=none; b=Oh5bqIYSKOdKaUVbwQj+NH7Eo/lilwrhNtd5xS6HobvfhVLbSzapGzJNz8rIvTd+lBrHlQuljxaeHR6dopfNQasMFWdXeOEsmSuQ/YRb+ImVNlHQvVKyLyukYmNaGEt8TEJHCHQoqz0/nQaYxXFH21muwgfc26Rfti5yH2G4Suo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789550078; c=relaxed/simple;
-	bh=IqWr3OCkEbgbUvmDu/uRyxYgoRP9YkYUb5hBzz6eFS4=;
+	s=arc-20240116; t=1789550628; c=relaxed/simple;
+	bh=iaLKXS4GLLt0zuJVNlPY5s2ZWcrrZ/oNlHsKvhP4+cA=;
 	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=EHOwsLYjXfA683gLfiABBVTw5J2TsrG/k1f6nGbcXUuXQGMBUdDDVzlJrggphDZWwovALuntsFCLWrqV1TJSw/d4DjES+sQhRmrTfzVu/8v0v9pcTMP0qa2ikSzaxm0K/pEJzEH8D+O2l5Wv5pcBl3Kv6jAu0i7B2Gapj6Bzf+c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=G4629f/U; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=dP/bMWHOTmH6xuPZxqLsEumQ4fWkIRPDtJP+O7A7EiwbEbDLhCG2lCaX7Q3P1mPs+NcRXXCTCUGmASAc4h3USqVerE401X3ujFo5XMD20Hx92rEDDN3lVOsTycN72neKbgnkLUx9xYfL77vu2rteiZQ2dPAhHnDQ1M2guhE6dd4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=B72l6WtU; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="G4629f/U"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 148C51F0089E
-	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 09:14:05 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="B72l6WtU"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8E45D1F008A6
+	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 09:23:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789550045;
-	bh=IqWr3OCkEbgbUvmDu/uRyxYgoRP9YkYUb5hBzz6eFS4=;
+	s=k20260515; t=1789550609;
+	bh=8y1oxDA3Zy9NWOoBvZCFqDaZfIYjK92V//s3NXF9nW8=;
 	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=G4629f/UcKe7I5SlFPmwy6hXIMvYowntf5zI+TVR5dUYVPVgiH/HGqzVVCQI9+K9x
-	 r9HPN+Oq8a/822bZWof702+JiwGheNgxzoaFwJMc07QmoyD69TKuZGt8ZvBqRKU6E5
-	 ydySK/Mu/7VVjVD/79Z1Y5Ol/GL3efea9FLw+lj2hnBatbnfO+98mZlzKsTeq8+fcr
-	 iPlHBdT68m0oPDLgPCIoPG7jwOFP+zKzdDXx3QpR6bSNenfMopFTUSZwA8SdG+this
-	 V4rtdEx7iar3eLNPj3luvexbGMwq2uVwhh9X4fLIgHt12mph04moHTNd7A89RwSgXR
-	 KdWQOXnCs808g==
-Received: by mail-lr2-f33.google.com with SMTP id 38308e7fff4ca-3a2ff16c0e6so5416251fa.0
-        for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 02:14:04 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBxeg9EZ3dQ1FBKk3QEsoD1cwXTMB81mnKUtGRIcdXbqqqeo2UJsI29/hac+fCqmvHyDNjs=@lists.linux.dev
-X-Gm-Message-State: AFuF++lXnRHZbN4P57m7VJBQ3Cm4krQ15PYdIbeNQgmipPU9dPwY1Jf0
-	8lQoJszWU0NJAIUYqaw5HiwN7o4863aCR0vqjjTMLCF6zYFcpyBArTrwG2JmEZ2q/ExMIkerPlQ
-	NPIZPlLRNHtl+BpNsQsb6001lIBeOXOb4/hn6N5SpWg==
-X-Received: by 2002:a2e:b8c3:0:b0:3a2:72c:cde9 with SMTP id
- 38308e7fff4ca-3a5dc9a7cefmr3078451fa.4.1789550043681; Wed, 16 Sep 2026
- 02:14:03 -0700 (PDT)
+	b=B72l6WtUyZlmC55w0Cn4FiftTPNmuFNftMahr1iTQQBG4ZVsbSn0gAJNgiTuSQ+LL
+	 s8iSQoFDJrPerRuoITrYSEw5/F4kI8eWfSUtx/N0lhsvuCXAuTBv8dPvsSZHG+E/yj
+	 CXcYrpf2of49P+clI/5/0doxNKm13SRLmF/RPfAg0LDNGqkyorjBFDAThmIC5Mr68u
+	 Kc52OpQzbVKhtWMys5E0Oilcb/8UQienLFHaVvFMO7GIvy2vyq9GdB3nmzcr7YlarR
+	 7KkfKw9o12b7n5hNbcahM/++69+gwUZduQlFLedBB8X9ZtR8gONAaoH2Q1oQSnOgJt
+	 iF9v0mj4TPlKQ==
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b5e4f15b79so660611e87.1
+        for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 02:23:29 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBykWo2GGKvJQh68L4bCdnYykBFqD7eaiwePVREpBwrDL7WhYPRp414YtNMTCUvNRjqbSMc=@lists.linux.dev
+X-Gm-Message-State: AFuF++nzqO9eD5m4fsPeIQ1E4gzfWICMbZFgXtoBSpWTqGZkoZjL6FBB
+	1r6C/PPaqVsMd74nIvECvA7JAb3i2h4D5RY0VZSSAeYMkDngU3fJJZEbcXLm1xQ9ydznKu5RiRN
+	76JXd6U4QYTAAQDyDFxbv1wuOhnkFPV3HvebSNcWyhg==
+X-Received: by 2002:a05:6512:1151:b0:5ae:bd5e:95f7 with SMTP id
+ 2adb3069b0e04-5b8b660ab6bmr1012067e87.4.1789550608110; Wed, 16 Sep 2026
+ 02:23:28 -0700 (PDT)
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 16 Sep 2026 05:14:01 -0400
+ HTTPREST; Wed, 16 Sep 2026 04:23:26 -0500
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 16 Sep 2026 05:14:01 -0400
+ HTTPREST; Wed, 16 Sep 2026 04:23:26 -0500
 From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260915-cv75-v5-v7-0-3297d3fbc9c0@ambarella.com>
+In-Reply-To: <20260914-arm-psci-system_reset2-vendor-reboots-v25-6-4aaf5c09b5c2@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260915-cv75-v5-v7-0-3297d3fbc9c0@ambarella.com>
-Date: Wed, 16 Sep 2026 05:14:01 -0400
-X-Gmail-Original-Message-ID: <CAMRc=McEOcWq8i3B01AR1PnfBzSQaLEaOzE6Qa+QdVXrvS_YrA@mail.gmail.com>
-X-Gm-Features: AcwNN1V2X8i9yMMrAT1QmpJK0AF7EkMhYvRTvc6M9zTS3HHfv-L8qE4KXcdtIiI
-Message-ID: <CAMRc=McEOcWq8i3B01AR1PnfBzSQaLEaOzE6Qa+QdVXrvS_YrA@mail.gmail.com>
-Subject: Re: [PATCH v7 00/15] Ambarella CV75 SoC minimal bring-up
-To: longzhao@ambarella.com
-Cc: Long Zhao via B4 Relay <devnull+longzhao.ambarella.com@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Jerome Brunet <jbrunet@baylibre.com>, Linus Walleij <linusw@kernel.org>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Jiri Slaby <jirislaby@kernel.org>, Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
-	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
-	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Long Zhao <zl020895@163.com>, 
-	Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
-	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, 
-	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, Arnd Bergmann <arnd@arndb.de>, 
-	Krzysztof Kozlowski <krzk@kernel.org>, Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev, 
-	linux-arm-kernel@lists.infradead.org
+References: <20260914-arm-psci-system_reset2-vendor-reboots-v25-0-4aaf5c09b5c2@oss.qualcomm.com>
+ <20260914-arm-psci-system_reset2-vendor-reboots-v25-6-4aaf5c09b5c2@oss.qualcomm.com>
+Date: Wed, 16 Sep 2026 04:23:26 -0500
+X-Gmail-Original-Message-ID: <CAMRc=MdpuRhbCXZd1xkRH4Rs4g=iGRa1oaeN6vcmP3CjcJpydA@mail.gmail.com>
+X-Gm-Features: AcwNN1UsWFiQdwj37p9YrE8LwqI5EWZQm-VOsqh34gtu3xJhOe-g-SrOqENvLgQ
+Message-ID: <CAMRc=MdpuRhbCXZd1xkRH4Rs4g=iGRa1oaeN6vcmP3CjcJpydA@mail.gmail.com>
+Subject: Re: [PATCH v25 06/10] power: reset: Add psci-reboot-mode driver
+To: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+Cc: Florian Fainelli <florian.fainelli@broadcom.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, Andre Draszik <andre.draszik@linaro.org>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>, linux-pm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	mfd@lists.linux.dev, Srinivas Kandagatla <srini@kernel.org>, 
+	Ulf Hansson <ulf.hansson@oss.qualcomm.com>, 
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
+	Lorenzo Pieralisi <lpieralisi@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
+	Bjorn Andersson <andersson@kernel.org>, Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Souvik Chakravarty <Souvik.Chakravarty@arm.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Andy Yan <andy.yan@rock-chips.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
+	Mark Rutland <mark.rutland@arm.com>, Conor Dooley <conor+dt@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, John Stultz <john.stultz@linaro.org>, 
+	Moritz Fischer <moritz.fischer@ettus.com>, "Rafael J. Wysocki" <rafael@kernel.org>, 
+	Daniel Lezcano <daniel.lezcano@kernel.org>, Christian Loehle <christian.loehle@arm.com>, 
+	Lee Jones <lee@kernel.org>, Ulf Hansson <ulfh@kernel.org>, 
+	Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>, Abel Vesa <abelvesa@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Sudeep Holla <sudeep.holla@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, 15 Sep 2026 13:15:30 +0200, Long Zhao via B4 Relay
-<devnull+longzhao.ambarella.com@kernel.org> said:
-> This series adds minimal Ambarella CV75 support for early bring-up with
-> a serial console: DT bindings, RCT clocks, pinctrl, PL061 GPIO via
-> gpio-regmap, 8250_dw UART quirks, ARCH_AMBARELLA, CV75 EVK DT, and
-> MAINTAINERS.
+On Mon, 14 Sep 2026 16:59:10 +0200, Shivendra Pratap
+<shivendra.pratap@oss.qualcomm.com> said:
+> PSCI supports different types of resets like SYSTEM_RESET, SYSTEM_RESET2
+> ARCH WARM reset and SYSTEM_RESET2 vendor-specific resets. Currently
+> there is no common driver that handles all supported psci resets at one
+> place. Additionally, there is no common mechanism to issue the supported
+> psci resets from userspace.
 >
-> This is a single unified series. Please apply via the SoC
-> tree; subsystem maintainers are Cc'd for their pieces.
+> Add psci-reboot-mode as an auxiliary device created by the psci-devices
+> driver. Define two types of PSCI resets, predefined-resets and
+> vendor-specific resets.  Predefined-resets are defined by psci driver
+> and vendor-specific resets are defined by SoC vendors, under the
+> psci:reboot-mode node of SoC device tree.
 >
+> Register the driver with the reboot-mode framework to interface these
+> resets to userspace. When userspace initiates a supported command, pass
+> the reset arguments to the PSCI driver to enable command-based reset.
+>
+> This change allows userspace to issue supported PSCI reset commands
+> using the standard reboot system calls while enabling SoC vendors to
+> define their specific resets for PSCI.
+>
+> Suggested-by: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
+> Suggested-by: Lee Jones <lee@kernel.org>
+> Suggested-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+> ---
+>  MAINTAINERS                            |   1 +
+>  drivers/firmware/psci/psci-devices.c   |  71 +++++++++++++++++++++-
+>  drivers/power/reset/Kconfig            |  10 ++++
+>  drivers/power/reset/Makefile           |   1 +
+>  drivers/power/reset/psci-reboot-mode.c | 104 +++++++++++++++++++++++++++++++++
+>  5 files changed, 185 insertions(+), 2 deletions(-)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 9c0334ee2ed2..1c0f111ba197 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -21933,6 +21933,7 @@ S:	Maintained
+>  F:	Documentation/devicetree/bindings/arm/psci.yaml
+>  F:	drivers/firmware/psci/
+>  F:	drivers/firmware/psci/psci-devices.c
+> +F:	drivers/power/reset/psci-reboot-mode.c
+>  F:	include/linux/psci.h
+>  F:	include/uapi/linux/psci.h
+>
+> diff --git a/drivers/firmware/psci/psci-devices.c b/drivers/firmware/psci/psci-devices.c
+> index f1eca61e3269..43e6743202f9 100644
+> --- a/drivers/firmware/psci/psci-devices.c
+> +++ b/drivers/firmware/psci/psci-devices.c
+> @@ -4,19 +4,86 @@
+>   */
+>
+>  #include <linux/auxiliary_bus.h>
+> +#include <linux/device.h>
+>  #include <linux/init.h>
+>  #include <linux/of.h>
+>  #include <linux/platform_device.h>
+> +#include <linux/psci.h>
+> +#include <linux/slab.h>
+> +
+> +static void arm_psci_auxiliary_device_release(struct device *dev)
+> +{
+> +	struct auxiliary_device *auxdev = to_auxiliary_dev(dev);
+> +
+> +	of_node_put(dev->of_node);
+> +	kfree(auxdev);
+> +}
+> +
+> +static struct auxiliary_device *
+> +arm_psci_auxiliary_device_create(struct device *dev, const char *devname,
+> +				 struct device_node *np)
+> +{
+> +	struct auxiliary_device *auxdev;
+> +	int ret;
+> +
+> +	auxdev = kzalloc_obj(*auxdev);
+> +	if (!auxdev)
+> +		return NULL;
+> +
+> +	auxdev->id = 0;
+> +	auxdev->name = devname;
+> +	auxdev->dev.parent = dev;
+> +	auxdev->dev.release = arm_psci_auxiliary_device_release;
+> +
+> +	if (np)
+> +		device_set_node(&auxdev->dev, of_fwnode_handle(of_node_get(np)));
+> +
+> +	ret = auxiliary_device_init(auxdev);
+> +	if (ret) {
+> +		of_node_put(auxdev->dev.of_node);
+> +		kfree(auxdev);
+> +		return NULL;
+> +	}
+> +
+> +	ret = __auxiliary_device_add(auxdev, "arm-psci");
+> +	if (ret) {
+> +		auxiliary_device_uninit(auxdev);
+> +		return NULL;
+> +	}
+> +
+> +	ret = devm_add_action_or_reset(dev, auxiliary_device_destroy, auxdev);
+> +	if (ret)
+> +		return NULL;
+> +
+> +	return auxdev;
+> +}
+>
+>  static int arm_psci_probe(struct platform_device *pdev)
+>  {
+>  	struct auxiliary_device *auxdev;
+> +#ifdef CONFIG_PSCI_REBOOT_MODE
+> +	struct device_node *reboot_mode_np = NULL;
+> +#endif
+>
+> -	auxdev = __devm_auxiliary_device_create(&pdev->dev, "arm-psci",
+> -						"psci-cpuidle-domain", NULL, 0);
+> +	auxdev = arm_psci_auxiliary_device_create(&pdev->dev,
+> +						  "psci-cpuidle-domain",
+> +						  pdev->dev.of_node);
+>  	if (!auxdev)
+>  		return -ENOMEM;
+>
+> +#ifdef CONFIG_PSCI_REBOOT_MODE
+> +	if (psci_has_system_reset2_support())
+> +		reboot_mode_np = of_get_child_by_name(pdev->dev.of_node,
+> +						      "reboot-mode");
+> +
+> +	auxdev = arm_psci_auxiliary_device_create(&pdev->dev,
+> +						  "psci-reboot-mode",
+> +						  reboot_mode_np);
+> +	of_node_put(reboot_mode_np);
+> +	if (!auxdev)
+> +		dev_warn(&pdev->dev, "failed to create PSCI reboot mode device\n");
+> +#endif
+> +
+>  	return 0;
+>  }
+>
+> diff --git a/drivers/power/reset/Kconfig b/drivers/power/reset/Kconfig
+> index bce996bbef28..5c349f41e097 100644
+> --- a/drivers/power/reset/Kconfig
+> +++ b/drivers/power/reset/Kconfig
+> @@ -360,6 +360,16 @@ config NVMEM_REBOOT_MODE
+>  	  then the bootloader can read it and take different
+>  	  action according to the mode.
+>
+> +config PSCI_REBOOT_MODE
+> +	bool "PSCI reboot mode driver"
+> +	depends on ARM_PSCI_DEVICES
+> +	select REBOOT_MODE
 
-I would prefer to take the GPIO regmap bits through the GPIO tree and provide
-an immutable branch to the SoC tree as it has potential for conflicts that
-early into the cycle.
+Needs: select AUXILIARY_BUS
+
+> +	help
+> +	  Say y here to enable the PSCI reboot mode driver. The driver
+> +	  registers with the reboot-mode framework to configure PSCI
+> +	  reset commands, which are executed by the PSCI driver during
+> +	  psci_sys_reset().
+> +
+>  config POWER_MLXBF
+>  	tristate "Mellanox BlueField power handling driver"
+>  	depends on (GPIO_MLXBF2 || GPIO_MLXBF3) && ACPI
+> diff --git a/drivers/power/reset/Makefile b/drivers/power/reset/Makefile
+> index e31cab4ba78e..45d8aaaffaa1 100644
+> --- a/drivers/power/reset/Makefile
+> +++ b/drivers/power/reset/Makefile
+> @@ -41,5 +41,6 @@ obj-$(CONFIG_REBOOT_MODE) += reboot-mode.o
+>  obj-$(CONFIG_SYSCON_REBOOT_MODE) += syscon-reboot-mode.o
+>  obj-$(CONFIG_POWER_RESET_SC27XX) += sc27xx-poweroff.o
+>  obj-$(CONFIG_NVMEM_REBOOT_MODE) += nvmem-reboot-mode.o
+> +obj-$(CONFIG_PSCI_REBOOT_MODE) += psci-reboot-mode.o
+>  obj-$(CONFIG_POWER_MLXBF) += pwr-mlxbf.o
+>  obj-$(CONFIG_POWER_RESET_QEMU_VIRT_CTRL) += qemu-virt-ctrl.o
+> diff --git a/drivers/power/reset/psci-reboot-mode.c b/drivers/power/reset/psci-reboot-mode.c
+> new file mode 100644
+> index 000000000000..bf2dd6626feb
+> --- /dev/null
+> +++ b/drivers/power/reset/psci-reboot-mode.c
+> @@ -0,0 +1,104 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + */
+> +
+> +#include <linux/array_size.h>
+> +#include <linux/auxiliary_bus.h>
+> +#include <linux/device.h>
+
+[
+
+> +#include <linux/errno.h>
+> +#include <linux/init.h>
+> +#include <linux/kconfig.h>
+
+]
+
+Why are you including these?
 
 Bart
