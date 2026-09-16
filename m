@@ -1,58 +1,58 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4253849B46A
-	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 15:46:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.9
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6AC1A4C2248
+	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 15:46:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.12
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789573570; cv=none; b=eUwiegi1m/7DlTly7CMiQz+yPRo1YroXPE5TSRfjngKM/VP2HvbSNur2DIfEDUZ4a9kRd7NseZDv80+xxnMwlJ9E4ywDxcmP0xfA2AlnGLxobjNuruLIk6wztEJabMIDz8vy44TcR27jLDRiFh44gdKxOhYxNR920F/a8UJn2WU=
+	t=1789573607; cv=none; b=ZbY9txjGV7jg9wKcINXTXo/bQVw4SUf9ipGi4pB0vYILAduCBgGts1q8wzKU/p+MNNfU3HS7IhjDq6MBTPwt1hPRlhjxne9WhhYPh96BZlSnLrRo0StNSTW13aeTgVZsZ/Wdw14+lLNkk76/tOZMhCtyDN9vGGXuRBCDYHv9oEA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789573570; c=relaxed/simple;
-	bh=5uKyglGe3ZnLYyMIvNdfqXCAfiZMkQlN6vOESCSsJmQ=;
+	s=arc-20240116; t=1789573607; c=relaxed/simple;
+	bh=8YfAChzzYynEpIoUqa09cY7ERZlGsWOpbfK6mHcU1vc=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=rXiXU9lzkfy3aAoA9t5qe0yDWJ7xdah4Sd5jx80+vzgijuSiWr6dMbR9xl1gLLMUyJZtNqBGfSZ5S/vF1s4EYD3i5GbFrBlgiLZz7FNq3+oPwTitVxu0nz8POEyKLvuhRSye8igHkd/BucbWyPP57fXzwc3+C7a2DRNeN9HEGPM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=MUuqW7+6; arc=none smtp.client-ip=192.198.163.9
+	 Content-Type:Content-Disposition:In-Reply-To; b=BzHh49dY6C+RQl4ZpH0zePNTEG0kvCF00hUAIHT1IEF9wz+Z3h21WoR6E1yvbgb98uI3FxvL9R/v0n+z8guVyH7Bh9gQAUep8kqSmSl4O4ssSrKTeYTRYlGvx0NoBXYYI+zi4txJZO4vShocnCSe9RDojW+azKaw1ShgTs0cBY0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=EeoLY8Pa; arc=none smtp.client-ip=192.198.163.12
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="MUuqW7+6"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="EeoLY8Pa"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789573569; x=1821109569;
+  t=1789573606; x=1821109606;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=5uKyglGe3ZnLYyMIvNdfqXCAfiZMkQlN6vOESCSsJmQ=;
-  b=MUuqW7+6cDfRlLGkp+6/P/1mgtpAzxeU2nbXIadxNunHvnjwnUEGW6PB
-   l39kcLSoeAtHl/9Y55XI5dE35Tp/eStQMzpoGSSQB/XkxFYgS4oD+NvEQ
-   2kMEgUnVXHdpp13d9Pu+NZNJ91KK1NfQkYIeJXmaoQstthXg2QEk0JcJW
-   5z6COUVHL5mC/5z463gMXU6nEhFLC512Nys2KaHtw4R4cfoDNNcVTpmiS
-   /KB03iaBpv7MirSmJ8C6aT0v0ACoh4JOfT6nU52PuQIrLs550PN1spTS0
-   56BGjhsysZD+eBuebvVAbzL0Uo5KST2w2OMp8GOHBUm1DIuzuExiiZeDa
-   w==;
-X-CSE-ConnectionGUID: FmKuK4edSIOJ+VvCA7Hupw==
-X-CSE-MsgGUID: sGRpetrqR+K0PfjjxaFRLg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="100618172"
+  bh=8YfAChzzYynEpIoUqa09cY7ERZlGsWOpbfK6mHcU1vc=;
+  b=EeoLY8PaGHyzkpk2M8eJPXc6K7bNjAYOdiQQGiXPqY3FoWLjFJZRPFbK
+   T1Nr78AUlT7p+3ffMA+Gin7GHzLTK6jqEiBhhiFQ9quhdHoRoe8e8jxLK
+   KJfekSKttQ3usiBBWsqGogsaHVj5iW4ffd+9v/EIqbAiGdNhxU9KJ9/g/
+   RUHzujX4ArJQ0Ip2yONCn0nhYUz4JjRPqOkz8TmmJaFdfcrK3+Q/XBk4H
+   VrNpvElK205fOvvfaxPrXnGO77E0O7goigo4LrMAXAVTFt01aVG7GtbWg
+   B+4HMhO7kw+BNp5jno+L8uJ3TB/ih4WsGgILksQy8uZ7wYM88kCHwAGam
+   Q==;
+X-CSE-ConnectionGUID: LFrtVLPJQxW4b5vX7USyhw==
+X-CSE-MsgGUID: 8q53UPZLQWOowWqnzDZFGw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="93777928"
 X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="100618172"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 08:46:09 -0700
-X-CSE-ConnectionGUID: lKsd4L1PSvS/GcIdusBAbg==
-X-CSE-MsgGUID: 5EvdPaZnTg+0VIvy2JtXwg==
+   d="scan'208";a="93777928"
+Received: from fmviesa010.fm.intel.com ([10.60.135.150])
+  by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 08:46:46 -0700
+X-CSE-ConnectionGUID: LtWiRUl3Q0GXr6Gcdhm9Nw==
+X-CSE-MsgGUID: vlsygdZNSPCeetIajPi6NA==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="273350420"
+   d="scan'208";a="269669156"
 Received: from ettammin-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.244.145])
-  by orviesa007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 08:46:07 -0700
-Date: Wed, 16 Sep 2026 18:46:04 +0300
+  by fmviesa010-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 08:46:44 -0700
+Date: Wed, 16 Sep 2026 18:46:42 +0300
 From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 To: Maria Lisina <sekoohaka.sarisan@gmail.com>
 Cc: Lee Jones <lee@kernel.org>, mfd@lists.linux.dev,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v6 2/4] mfd: intel-lpss: Use plain octal values for file
- permissions
-Message-ID: <aqq5vFAf1GoPjYme@ashevche-desk.local>
+Subject: Re: [PATCH v6 3/4] mfd: intel-lpss: Remove extra DebugFS dentry
+Message-ID: <aqq54onvzmXbMH8L@ashevche-desk.local>
 References: <20260916-intel-lpss-debugfs-v6-0-5c118ac430ed@gmail.com>
- <20260916-intel-lpss-debugfs-v6-2-5c118ac430ed@gmail.com>
+ <20260916-intel-lpss-debugfs-v6-3-5c118ac430ed@gmail.com>
+ <aqq5d5ESVulYfOnK@ashevche-desk.local>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -61,16 +61,43 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260916-intel-lpss-debugfs-v6-2-5c118ac430ed@gmail.com>
+In-Reply-To: <aqq5d5ESVulYfOnK@ashevche-desk.local>
 Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
  krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On Wed, Sep 16, 2026 at 07:36:40PM +0500, Maria Lisina wrote:
-> S_IRUGO macro is obsoleted and not recommended to use,
-> therefore replace it with plain octal values.
+On Wed, Sep 16, 2026 at 06:44:59PM +0300, Andy Shevchenko wrote:
+> On Wed, Sep 16, 2026 at 07:36:41PM +0500, Maria Lisina wrote:
 
-Yep, octal permissions much easier to get without looking aside!
+...
+
+> >  static void intel_lpss_debugfs_add(struct intel_lpss *lpss)
+> >  {
+> > -	struct dentry *dir;
+> > -
+> > -	dir = debugfs_create_dir(dev_name(lpss->dev), intel_lpss_debugfs);
+> > +	lpss->debugfs = debugfs_create_dir(dev_name(lpss->dev),
+> > +					   intel_lpss_debugfs);
+> 
+> As Lee pointed out, we are fine with 100 limit, so one line here and below.
+
+After addressing this feel free to add
 Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+
+> >  	/* Cache the values into lpss structure */
+> >  	intel_lpss_cache_ltr(lpss);
+> >  
+> > -	debugfs_create_x32("capabilities", 0444, dir, &lpss->caps);
+> > -	debugfs_create_x32("active_ltr", 0444, dir, &lpss->active_ltr);
+> > -	debugfs_create_x32("idle_ltr", 0444, dir, &lpss->idle_ltr);
+> > -
+> > -	lpss->debugfs = dir;
+> > +	debugfs_create_x32("capabilities", 0444,
+> > +			   lpss->debugfs, &lpss->caps);
+> > +	debugfs_create_x32("active_ltr", 0444,
+> > +			   lpss->debugfs, &lpss->active_ltr);
+> > +	debugfs_create_x32("idle_ltr", 0444,
+> > +			   lpss->debugfs, &lpss->idle_ltr);
+> >  }
 
 -- 
 With Best Regards,
