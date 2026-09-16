@@ -1,103 +1,169 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mta0.migadu.com (out-253.mta0.migadu.com [91.218.175.253])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AAA2390600;
-	Wed, 16 Sep 2026 04:50:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.2
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E91C3E49F8
+	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 06:04:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.253
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789534260; cv=none; b=EiptFXSAjzUQDre1zX5p+MQnMsL9CP8Eie+0OeJbjmrtU+2MpVtu4V1mItkYM09IedtD0jMYvP2YmV98v/m6ShiiI6h8I4SWP924nQUidqTj5gw9qARMzNN0EvibVtXvbI8jQfcRKTNd7idGZ6HcUC+fg4vqqBPKlM9hakafENk=
+	t=1789538654; cv=none; b=ZyqAvnT8zNCaPyIqf138gFl3e+tsH/3lU+RGhE2Jykq1ZW/Zw7MvVwzU1IThdSCFZx5ETLHYGgo/SXkCr00Lh9tzC4/osq9yjeK/JNV66F1/ZEjhduM/uRENggQNMTW2au5T+cQGL3vTjjF4/kz7QxHOe+tv31D9cG7M8O9UjJM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789534260; c=relaxed/simple;
-	bh=0brGLsUCM8OjbH30xJ1GI8+aQZaH1XqCveD1VKrsWZs=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
-	 MIME-Version:Message-ID; b=Wwg50nwUuikseX4aqRVJZaPKc/mOG+6W5VGXHZvmsSGYz1Xxxa65PGQmDkUO4N7EeQ6FhTDHF40nCZbS/sGJ1Buou3akebUeKzRcPJWRB4YrxA+vjV/hpj3qVg4aSExrVC+p+WZvECyMSXGvhdBWxGd6GiwksP0Npk3YjUCakiA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=cozk4Wq4; arc=none smtp.client-ip=220.197.31.2
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1789538654; c=relaxed/simple;
+	bh=Wjxk7Nkbncmp1+ATMZ2lzO7C1dQkbRu3+K8tHlPDmXk=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition; b=f3CmKRk04CI1FJ4zWOfDJSisYGGkfbVmkjzzIKvbet9vLRmZqUz3UbEjS9px0ducqPhUabv8S3LMhahswk1I45jTr6f6GmqaVPzb+fnIzyYbTzMWA6tUNCKwk9RyX5M9/qQmkSDfGx9rYvFtAarECmJ1F4Zfp/jkP75SBU0+aTA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=hRLl4N7X; arc=none smtp.client-ip=91.218.175.253
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="cozk4Wq4"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
-	Message-ID; bh=0brGLsUCM8OjbH30xJ1GI8+aQZaH1XqCveD1VKrsWZs=; b=c
-	ozk4Wq4p0a+DYAskc3v9AeRJoPdFWFJor9rVy8GTBoM2VubqyAPdxTZ6dRvW8RyZ
-	qXdVJoirnouBR8BM6pThOkUfT62bcjnWVEPGMy5OWgP6o852ML5VEF7Mn6bzmsEg
-	Simst3JWQ+tkbh3OetC6/1WiW62pyZkPkW5yxTQPY4=
-Date: Wed, 16 Sep 2026 12:49:46 +0800 (CST)
-From: zl020895  <zl020895@163.com>
-To: "Andy Shevchenko" <andriy.shevchenko@linux.intel.com>
-Cc: longzhao@ambarella.com, "Arnd Bergmann" <arnd@arndb.de>,
-	"Krzysztof Kozlowski" <krzk@kernel.org>,
-	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
-	soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
-	"Rob Herring" <robh@kernel.org>,
-	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
-	"Conor Dooley" <conor+dt@kernel.org>,
-	"Michael Turquette" <mturquette@baylibre.com>,
-	"Stephen Boyd" <sboyd@kernel.org>,
-	"Jerome Brunet" <jbrunet@baylibre.com>,
-	"Linus Walleij" <linusw@kernel.org>,
-	"Bartosz Golaszewski" <brgl@kernel.org>,
-	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
-	"Jiri Slaby" <jirislaby@kernel.org>,
-	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	"Catalin Marinas" <catalin.marinas@arm.com>,
-	"Will Deacon" <will@kernel.org>, "Lee Jones" <lee@kernel.org>,
-	mfd@lists.linux.dev, devicetree@vger.kernel.org,
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="hRLl4N7X"
+X-Envelope-To: mfd@lists.linux.dev
+DKIM-Signature: a=rsa-sha256; bh=Wjxk7Nkbncmp1+ATMZ2lzO7C1dQkbRu3+K8tHlPDmXk=;
+ c=simple/simple; d=linux.dev;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1789538649; v=1; x=1790143449;
+ b=hRLl4N7XdRohK/q0vgsb62X/bioqxaKPMgI1uejN0dj+a51QKxh0v89ZjFyqWr2ykVm0NAAn
+ DKr+5piBu6j3OxnN1Eeegvrl1y48Yg2SH/8SrSQB0MGbl7QFVl1sSULduofyUSiGgmrCswBLzIt
+ xaLoIxPCJ2NC17BBn4oVzGyE=
+X-Envelope-To: mfd@lists.linux.dev
+Received: by mta12.migadu.com with ESMTPS id b599e5e885e3c597;
+	Wed, 16 Sep 2026 06:04:08 +0000
+X-Mizu-Trace-ID: b599e5e885e3c597
+X-Migadu-Flow: FLOW_OUT
+Date: Wed, 16 Sep 2026 09:04:04 +0300
+From: Matti Vaittinen <matti.vaittinen@linux.dev>
+To: Matti Vaittinen <mazziesaccount@gmail.com>,
+	Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
+	Matti Vaittinen <matti.vaittinen@linux.dev>
+Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Matti Vaittinen <mazziesaccount@gmail.com>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney+clk@redhat.com>,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Michael Walle <mwalle@kernel.org>, mfd@lists.linux.dev,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
 	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
-	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re:Re: [PATCH v7 09/15] gpiolib: regmap: add gpio_regmap_get_chip()
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
- 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
-In-Reply-To: <aqlknvOejkE5zutq@ashevche-desk.local>
-References: <20260915-cv75-v5-v7-0-3297d3fbc9c0@ambarella.com>
- <20260915-cv75-v5-v7-9-3297d3fbc9c0@ambarella.com>
- <aqlknvOejkE5zutq@ashevche-desk.local>
-X-NTES-SC: AL_Qu2TC/mYu0kj4CiRZekcn0wRhug/UMa4u/sm3YNXc+gGgS7rxD0iflpxF2DKzOe1GTqXuzGSbTdPyMZYULtmDWHgzTizjvt8es72bjBGWA==
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+	linux-rtc@vger.kernel.org, Sverdlin@mva-rohm,
+	Alexander <alexander.sverdlin@siemens.com>
+Subject: [PATCH v4 00/10] Support ROHM BD73800
+Message-ID: <cover.1789538455.git.mazziesaccount@gmail.com>
+Reply-To: Matti Vaittinen <mazziesaccount@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Message-ID: <327d09fc.4043.1a0a88cad9b.Coremail.zl020895@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID:iCgvCgD334PqH6pqGGFHAA--.23892W
-X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbCxgtHuGqqH+vnbAAA3N
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="XojVb7aV+M6rXB30"
+Content-Disposition: inline
 
-SGkgQW5keSwgCgpUaGFua3MgZm9yIHRoZSByZXZpZXcuCgpJdCBpc24ndDsgdGhhdCB3YXMgbGVm
-dG92ZXIgZnJvbSBkcm9wcGluZyBnaXJxLiB2OCB3aWxsIHJlc3RvcmUgdGhlCm9yaWdpbmFsIGF0
-dGFjaCBjb2RlLiBUaGUgcmVhbCBhZGRpdGlvbiBpcyBncGlvX3JlZ21hcF9nZXRfY2hpcCgpLCBz
-bwpQTDA2MSBjYW4gY3JlYXRlIGl0cyBpcnEgZG9tYWluIGFmdGVyIHJlZ2lzdGVyLgoKQmVzdCBy
-ZWdhcmRzLApMb25nIFpoYW8KCkF0IDIwMjYtMDktMTUgMjM6MzA6MzgsICJBbmR5IFNoZXZjaGVu
-a28iIDxhbmRyaXkuc2hldmNoZW5rb0BsaW51eC5pbnRlbC5jb20+IHdyb3RlOgo+T24gVHVlLCBT
-ZXAgMTUsIDIwMjYgYXQgMDc6MTU6MzlQTSArMDgwMCwgTG9uZyBaaGFvIHZpYSBCNCBSZWxheSB3
-cm90ZToKPgo+PiBMZXQgZHJpdmVycyB0aGF0IGltcGxlbWVudCBhIGN1c3RvbSBpcnFjaGlwIHJl
-dHJpZXZlIHRoZSBncGlvX2NoaXAKPj4gYWZ0ZXIgcmVnaXN0cmF0aW9uLiBBdHRhY2ggYSBjYWxs
-ZXItcHJvdmlkZWQgaXJxX2RvbWFpbiBvbmx5IHdoZW4gaXQKPj4gaXMgcHJlc2VudC4KPgo+Li4u
-Cj4KPj4gIHN0cnVjdCBncGlvX3JlZ21hcCAqZ3Bpb19yZWdtYXBfcmVnaXN0ZXIoY29uc3Qgc3Ry
-dWN0IGdwaW9fcmVnbWFwX2NvbmZpZyAqY29uZmlnKQo+PiAgewo+PiAtCXN0cnVjdCBpcnFfZG9t
-YWluICppcnFfZG9tYWluOwo+PiAgCXN0cnVjdCBncGlvX3JlZ21hcCAqZ3BpbzsKPj4gIAlzdHJ1
-Y3QgZ3Bpb19jaGlwICpjaGlwOwo+PiAgCWludCByZXQ7Cj4KPj4gICNpZmRlZiBDT05GSUdfUkVH
-TUFQX0lSUQo+PiAgCWlmIChjb25maWctPnJlZ21hcF9pcnFfY2hpcCkgewo+PiArCQlzdHJ1Y3Qg
-aXJxX2RvbWFpbiAqaXJxX2RvbWFpbjsKPj4gKwo+PiAgCQlncGlvLT5yZWdtYXBfaXJxX2xpbmUg
-PSBjb25maWctPnJlZ21hcF9pcnFfbGluZTsKPj4gIAkJcmV0ID0gcmVnbWFwX2FkZF9pcnFfY2hp
-cF9md25vZGUoZGV2X2Z3bm9kZShjb25maWctPnBhcmVudCksIGNvbmZpZy0+cmVnbWFwLAo+PiAg
-CQkJCQkJIGNvbmZpZy0+cmVnbWFwX2lycV9saW5lLCBjb25maWctPnJlZ21hcF9pcnFfZmxhZ3Ms
-Cj4+IEBAIC00MjAsMTIgKzQyNywxNSBAQCBzdHJ1Y3QgZ3Bpb19yZWdtYXAgKmdwaW9fcmVnbWFw
-X3JlZ2lzdGVyKGNvbnN0IHN0cnVjdCBncGlvX3JlZ21hcF9jb25maWcgKmNvbmZpZwo+PiAgCQkJ
-Z290byBlcnJfcmVtb3ZlX2dwaW9jaGlwOwo+PiAgCj4+ICAJCWlycV9kb21haW4gPSByZWdtYXBf
-aXJxX2dldF9kb21haW4oZ3Bpby0+aXJxX2NoaXBfZGF0YSk7Cj4+ICsJCWlmIChpcnFfZG9tYWlu
-KSB7Cj4+ICsJCQlyZXQgPSBncGlvY2hpcF9pcnFjaGlwX2FkZF9kb21haW4oY2hpcCwgaXJxX2Rv
-bWFpbik7Cj4+ICsJCQlpZiAocmV0KQo+PiArCQkJCWdvdG8gZXJyX3JlbW92ZV9ncGlvY2hpcDsK
-Pj4gKwkJfQo+PiAgCX0gZWxzZQo+PiAgI2VuZGlmCj4+IC0JaXJxX2RvbWFpbiA9IGNvbmZpZy0+
-aXJxX2RvbWFpbjsKPj4gLQo+PiAtCWlmIChpcnFfZG9tYWluKSB7Cj4+IC0JCXJldCA9IGdwaW9j
-aGlwX2lycWNoaXBfYWRkX2RvbWFpbihjaGlwLCBpcnFfZG9tYWluKTsKPj4gKwlpZiAoY29uZmln
-LT5pcnFfZG9tYWluKSB7Cj4+ICsJCXJldCA9IGdwaW9jaGlwX2lycWNoaXBfYWRkX2RvbWFpbihj
-aGlwLCBjb25maWctPmlycV9kb21haW4pOwo+PiAgCQlpZiAocmV0KQo+PiAgCQkJZ290byBlcnJf
-cmVtb3ZlX2dwaW9jaGlwOwo+PiAgCX0KPgo+SSBkbyBub3QgdW5kZXJzdGFuZCBob3cgaXQncyBk
-aWZmZXJlbnQgZnJvbSB0aGUgb3JpZ2luYWwgb25lLiBDYW4geW91IGVsYWJvcmF0ZT8KPgo+LS0g
-Cj5XaXRoIEJlc3QgUmVnYXJkcywKPkFuZHkgU2hldmNoZW5rbwo+Cg==
+--XojVb7aV+M6rXB30
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Add support for the ROHM BD73800 PMIC and compatibles.
+
+The ROHM BD73800 is a power management IC which integrates 8 BUCKs and 4
+LDOs. There is also an ADC and operation amplifier intended for current
+/ temperature measurement and accumulation. RTC and 32.768 kHz clock
+gate are also included. The PMIC can be customized via OTP and it has
+options for operating as a main PMIC in multi-PMIC installation. Some
+of the pins can also be used for GPO or GPI (including interrupt support).
+
+There are also ROHM BD71851 and BD71885 PMICs out there. These are, from
+the SW-perspective, similar to the BD73800. There is only some different
+default values and OTP settings. The driver should be able to handle them
+just fine.
+
+Revision history:
+
+v3 =3D> v4:
+ - Minor styling
+ More accurate change-log in individual patches.
+
+v2 =3D> v3:
+ - Rebased on v7.3-rc1.
+ - gpio: Use gpio-regmap as was suggested by Linus W.
+ More accurate change-log in individual patches.
+
+v1 =3D> v2:
+ - Rebased on regulator/for-7.3 as it carries dependency:
+   f29a8bf6fde1 ("regulator: dt-bindings: ROHM PMIC state-machine voltages")
+ - dt-bindings: Various fixes, split generic stuff to own files.
+ - gpio: Styling, return -ENODEV if no GPIOs found
+ - MFD: Styling
+ - regulator: Simplify dt-reading
+ More accurate change-log in individual patches.
+
+---
+
+Matti Vaittinen (10):
+  dt-bindings: mfd: common ROHM PMIC properties
+  dt-bindings: rohm,bd*: Ref common ROHM bindings
+  dt-bindings: regulator: ROHM BD73800 regulators
+  dt-bindings: mfd: ROHM BD73800 PMIC
+  mfd: Support for ROHM BD73800 PMIC core
+  rtc: bd70528: Support RTC on ROHM BD73800
+  regulator: bd71828: Support ROHM BD73800
+  clk: bd718x7: Support ROHM BD73800
+  gpio: bd73800: Support ROHM BD73800 PMIC GPIOs
+  MAINTAINERS: Add ROHM BD73800 PMIC files
+
+ .../bindings/mfd/rohm,bd71815-pmic.yaml       |   9 +-
+ .../bindings/mfd/rohm,bd71828-pmic.yaml       |   9 +-
+ .../bindings/mfd/rohm,bd72720-pmic.yaml       |  29 +-
+ .../bindings/mfd/rohm,bd73800-pmic.yaml       | 218 +++++++
+ .../bindings/mfd/rohm,pmic-pins.yaml          |  72 +++
+ .../regulator/rohm,bd73800-regulator.yaml     |  99 ++++
+ MAINTAINERS                                   |   2 +
+ drivers/clk/clk-bd718x7.c                     |   8 +
+ drivers/gpio/Kconfig                          |  12 +
+ drivers/gpio/Makefile                         |   1 +
+ drivers/gpio/gpio-bd73800.c                   | 209 +++++++
+ drivers/mfd/Kconfig                           |  15 +-
+ drivers/mfd/rohm-bd71828.c                    | 147 ++++-
+ drivers/regulator/Kconfig                     |   4 +-
+ drivers/regulator/bd71828-regulator.c         | 558 +++++++++++++++++-
+ drivers/rtc/rtc-bd70528.c                     |   8 +
+ include/linux/mfd/rohm-bd73800.h              | 306 ++++++++++
+ include/linux/mfd/rohm-generic.h              |   1 +
+ 18 files changed, 1661 insertions(+), 46 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/mfd/rohm,bd73800-pmic=
+=2Eyaml
+ create mode 100644 Documentation/devicetree/bindings/mfd/rohm,pmic-pins.ya=
+ml
+ create mode 100644 Documentation/devicetree/bindings/regulator/rohm,bd7380=
+0-regulator.yaml
+ create mode 100644 drivers/gpio/gpio-bd73800.c
+ create mode 100644 include/linux/mfd/rohm-bd73800.h
+
+
+base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
+--=20
+2.55.0
+
+
+--XojVb7aV+M6rXB30
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEEIx+f8wZb28fLKEhTeFA3/03aocUFAmqqMVQACgkQeFA3/03a
+ocU6agf/erXoYpeXBfdNklLVkEaEgEF0ZxTUMKmzxvgR8WMZK1v8pTOKFx6Kyv0e
+caZgMbTSHqxiYvVIEkLR4tc4Shm1ER9i/Pz6xGPjjrru7UrIZxpXJ+LfHFFvbR0t
+N+Bw+MqwvNIXEMx8BuPYNnHj0UgFbXNA2hJmgXbS4RGGh3qCkr2Lumuj/4syAUUf
+tm6mPxFbzMcFu5lPky9W3bTLWPKgM2ZeppMq5xI9jlEOwETeitUHS2Cc2rhCoXcF
+y3K1Qdswxn+aWBP7bg+bWFCk3mMqakx3oKN8S5C49ssRA24OsXhAaMGsZ7OPniJe
+S93wHr4rphPHzhT7Mw16tyirnAhZxg==
+=qCdj
+-----END PGP SIGNATURE-----
+
+--XojVb7aV+M6rXB30--
