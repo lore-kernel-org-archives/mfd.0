@@ -1,111 +1,72 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B57293D9DD6;
-	Wed, 16 Sep 2026 13:23:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08DD2377A8E;
+	Wed, 16 Sep 2026 13:42:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789565036; cv=none; b=ZV0uPxoEwnxqz7RCl88phtv79v083r0GbPGwY+9QvuPc/IuaKdzw13ZJBXOWKzN6K2Mn/60HZ2OrsgCcMNS3ycJDQnxBijfS/maAQCCaAsinlIKL2Ldm9FKaStHbjh8EpaUo0Bhddxalt/y8y6liW6PIxqmzUVWZmao2+9JF6r8=
+	t=1789566181; cv=none; b=jh4y0A2k6nhxbM6QQ4PVDGCgRj2psRDQ2fO62s2M1eF0FaKO4jVNIYoa7a4vtWZzfHpQiqOhosmqQ8crYHoAlh4QLigR8BGiu/hkS0GNkgi5EiSinbO63sFxZVPG0Tmz5zLssCKD3xOzTV4sl9JSTBx4u2Yg3vCwTpmVEnWvxl4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789565036; c=relaxed/simple;
-	bh=KKdUQ3pRp5Bws2/KjNWqsTQIgqRakrl2l3TW8OaOV+g=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=fbynknXsS908pVY+dKzBXQcW0j3G37P/7kHQPw3MHU7hh4E4A/3mola02bnQ6tD+VyaE9eKek1PUMX5um4d2/sxILy3mklBU37GZ1ODtABQNONWo8fQKH2MB4JIGOdfuc8PMZZWGgQZZjUQAerXBBHIEsVfMi2IUzP8dKWgavrU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KLjbjRvP; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789566181; c=relaxed/simple;
+	bh=r7R8Rl9QXttxDQa8M3ISCfFVBD6v2n9Cco1J472JFqw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=PXpZY3hxqpwd4nrlN1lYqUG+9cC3SjXOFxOe28KuZoTbznkn7rMKV2yzwShZwiKY64pBobLBUESmd6dFOw8R0Zw6BjyL5glAS2hDVs5MZR+9Kj0+Me4KItxnzhdYjY0TiKAHUEk5SK8WYnJbKHyUIvykERJdP1wv+ExWgUoMQ1Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YJI5UvLV; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KLjbjRvP"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DEA431F000FF;
-	Wed, 16 Sep 2026 13:23:50 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YJI5UvLV"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3DDFD1F000FF;
+	Wed, 16 Sep 2026 13:42:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789565031;
-	bh=tOB4yDutDeKv4unLVnR8U7XJtQgqKPXuHsEO5mbZpwg=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=KLjbjRvPhEwF4o8vz6M2V8JjH4l92ACgvpXBKZlDzRywAPDK/hyuCDm4F/U0ZBMgB
-	 /sRd8mkX5Hp9PwF4/NZwZ8fdjV70RBSxNOmOh63tHS+RVraIYVHpvRlkVWhrLvivKP
-	 iV4Dz1jm9r5Sk2rSIxF7hq4JJX3PgYlQeQTbV1pBDialI9vhuVZRmhAm8ri0B+uOrx
-	 vXIef51FYRgY8jzYgKyfFiiOOL+EZzhMsFTdIJDWfS4xdImr0p0sMrTyzBdmyNWIuv
-	 d/K4hLzm+jqgPR2d6v3h7OyTxdj3tgcbmpTDlOiQdytpU8qEvMNfT+ggY7NhrINRhl
-	 +yMXrfMj4sBZg==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 2/4] regulator: dt-bindings:
- nvidia,tegra-regulators-coupling: Convert to DT schema
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Bhargav Joshi" <j.bhargav.u@gmail.com>
-Cc: lee@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org, robh@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260916-ti-tps6586x-v2-2-f12cfdfb446c@gmail.com>
-References: <20260916-ti-tps6586x-v2-0-f12cfdfb446c@gmail.com>
- <20260916-ti-tps6586x-v2-2-f12cfdfb446c@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 16 Sep 2026 13:23:50 +0000
-Message-Id: <20260916132350.DEA431F000FF@smtp.kernel.org>
+	s=k20260515; t=1789566171;
+	bh=BYPB8bAbwAMeutxJDiV9oZQvHzjkHscvMyLXgFR1TSw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=YJI5UvLV2CEqFxo/fFVbyfPRlpjFzZ3c9KsymDxn9LMhAt5UvXj4wEedLiJgHSCFS
+	 /zWooU96U02tpyOIMhIYkcR493IAGGMH/vbKzWkzAQ/fAdlZX8tzNjhnPXHHiUl1xA
+	 PmjKOjzxV0Ms96rQCf1BISKK7zEt2yG4DuNqkZ82C7Az9HDG17+jkrY/XYbyiZL8ZB
+	 cgr3PnmVWx6bxQ4HuElL2TkXRAnZxOAcudhanutYCmaNgjQ+m/zYleFQUzaWuYluMb
+	 EqBm3VimCq+DQLdGnMQ27qlaPkYri7fmniUZLZDfXFQLFd6KLvoIXN7cvTxxfZ8pvV
+	 QVeYpusB1MQtw==
+Date: Wed, 16 Sep 2026 14:42:47 +0100
+From: Lee Jones <lee@kernel.org>
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Maria Lisina <sekoohaka.sarisan@gmail.com>, mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v5] mfd: intel-lpss: Clean up and modernize DebugFS usage
+Message-ID: <20260916134247.GT11487@google.com>
+References: <20260916-intel-lpss-debugfs-v5-1-99295f534067@gmail.com>
+ <20260916102732.GJ11487@google.com>
+ <aqp3FMncWrzR1adT@ashevche-desk.local>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <aqp3FMncWrzR1adT@ashevche-desk.local>
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
-- [Low] regulator: dt-bindings: merged headers and missing spaces in descri=
-ption
---
+On Wed, 16 Sep 2026, Andy Shevchenko wrote:
 
-commit c698037c054c9372f8a8e2ee437ab89f8f0611c7
-Author: Bhargav Joshi <j.bhargav.u@gmail.com>
+> On Wed, Sep 16, 2026 at 11:27:32AM +0100, Lee Jones wrote:
+> > On Wed, 16 Sep 2026, Maria Lisina wrote:
+> > 
+> > > The DebugFS API is designed to handle errors gracefully.
+> > > Any explicit checking on return values is considered an anti-pattern.
+> > > 
+> > > This patch removes unnecessary error checking and converts
+> > > intel_lpss_debugfs_add() into a void function.
+> > > 
+> > > While at it, this patch also clean ups legacy and deprecated usage
+> > > of S_IRUGO macro and debugfs_remove_recursive() function.
+> 
+> ...
+> 
+> > Why continue if this returns an error?
+> 
+> Because we don't care.
 
-regulator: dt-bindings: nvidia,tegra-regulators-coupling: Convert to DT sch=
-ema
-   =20
-Convert NVIDIA Tegra Regulators Coupling from legacy text to DT schema.
-Set additionalProperties true as this is shared schema.
+If you engage your Embedded mind, you will reel at the wasted cycles!
 
-> diff --git a/Documentation/devicetree/bindings/regulator/nvidia,tegra-reg=
-ulators-coupling.yaml b/Documentation/devicetree/bindings/regulator/nvidia,=
-tegra-regulators-coupling.yaml
-> new file mode 100644
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/regulator/nvidia,tegra-regulators=
--coupling.yaml
-> @@ -0,0 +1,76 @@
-
-[ ... ]
-
-> +description:
-> +  NVIDIA Tegra SoC's have a mandatory voltage-coupling between regulator=
-s. Thus
-> +  on Tegra20 there are 3 coupled regulators and on NVIDIA Tegra30 there =
-are 2.
-> +
-> +  Tegra20 voltage coupling On Tegra20 SoC's - there are 3 coupled
-> +  regulators:CORE, RTC and CPU. The CORE and RTC voltages shall be in a =
-range
-> +  of 170mV from each other and they both shall be higher than the CPU vo=
-ltage
-> +  by at least 120mV.
-> +
-> +  Tegra30 voltage coupling On Tegra30 SoC's - there are 2 coupled
-> +  regulators:CORE and CPU. The CORE and CPU voltages shall be in a range=
- of
-
-[Severity: Low]
-Could the formatting in this description be adjusted to better reflect the=
-=20
-original text binding?
-
-Currently, the old section headers like "Tegra20 voltage coupling" and=20
-"Tegra30 voltage coupling" are merged directly into the sentences, creating=
-=20
-awkward phrasing like "Tegra20 voltage coupling On Tegra20 SoC's".=20
-
-Additionally, is it possible to add a space after "regulators:" in both the=
-=20
-Tegra20 and Tegra30 paragraphs to improve readability?
-
-> +  300mV from each other and CORE voltage shall be higher than the CPU by=
- N mV,
-> +  where N depends on the CPU voltage.
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260916-ti-tps6586=
-x-v2-0-f12cfdfb446c@gmail.com?part=3D2
+-- 
+Lee Jones
