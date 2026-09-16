@@ -1,129 +1,125 @@
-Received: from mta0.migadu.com (out-203.mta0.migadu.com [91.218.175.203])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.20])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E33C43E63B2
-	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 06:13:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.203
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91A7B3F44D7
+	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 07:23:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.20
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789539182; cv=none; b=X2Vk8i4TCEkV1d26r3BXLiVW2OyY5Iwz9b2FTt05EppjNh2ttQ9O7u6KDCStrvojbV5glDCQOmYKoyl5g2okwmRZ4JMpQ49dqcyh/NB+cl53dhK/lb+L9NeaNst4oKPGCMokabD8Erprh9Y23RGB7T6D9BaVmRomuIJoPS9kDzE=
+	t=1789543409; cv=none; b=a7Lod3CjNX/txUNX1/Bt47FY3BJ6lwingvfAdlXLxPTwDpuc59SKAlbdrgrKiAa3/fwfwJx1B50m0EGFrVDNvaPYyKlj9dP9OTJ0fyNerzFONa4z0876N2VvpFyTmLLH0wTlfSEJhyBYxzd96/RGGM4tBi79I3S7fSDE7j/q9bE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789539182; c=relaxed/simple;
-	bh=oI6jcWCD8TyMR1NvHzCU9RzXsy5dY9606WpYMP/nRCo=;
+	s=arc-20240116; t=1789543409; c=relaxed/simple;
+	bh=dRoAeA74q2QI4UIwipkW3XzvOQdsImwmZhpmB+2UJgU=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=DmQ7zqvesYC4cgO24E1iE/ewoFcMGZ/XV4eY+FWPaHwZwj2LCNeTG71ejOLSMXBmh45d2ssXdYe5eXioEj3rcKeXWd3KehVwMZyeHmIBXWiBI1tvrB8Uo9oUnNEx5Bg4KpOa++yPX2NpdTr1f6ta3olUcsHbW9c4118OOQ8rgHI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=rTBSXlxD; arc=none smtp.client-ip=91.218.175.203
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+	 Content-Type:Content-Disposition:In-Reply-To; b=sylJCyCIR7uh9SRTksYpQNeI8ewt2+lu8TPCh31bvHJ9tjcvc2VMRSmoQoLXdGQEHqHIRFqVy3ZLv9s6yhGwilZKrAlLyzC4U3swUcq19de8noDJfuBEPYgxguR397f209DGYqHgxR9kdg+qkFo2tk46Htszn9AsSnJQ466S+UY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=iTg72EQC; arc=none smtp.client-ip=198.175.65.20
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="rTBSXlxD"
-X-Envelope-To: mfd@lists.linux.dev
-DKIM-Signature: a=rsa-sha256; bh=oI6jcWCD8TyMR1NvHzCU9RzXsy5dY9606WpYMP/nRCo=;
- c=simple/simple; d=linux.dev;
- h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1789539179; v=1; x=1790143979;
- b=rTBSXlxDvsBqUYLnTNMfNVEHTXhKGHxfUAgi7m3Ek+qUHb9wMUk3KcZJbckYDFCk8MblFehx
- 3jFXUAgfch8GA2BXDFLHYOcgFgGKeW36ul/mGOECRWVlV/WQtMz8advMAzeOwYh5p7BUzhbidWX
- jpCSjim67SuZVpICN1dpuVk4=
-X-Envelope-To: mfd@lists.linux.dev
-Received: by mta10.migadu.com with ESMTPS id 96fcc20599bce933;
-	Wed, 16 Sep 2026 06:12:58 +0000
-X-Mizu-Trace-ID: 96fcc20599bce933
-X-Migadu-Flow: FLOW_OUT
-Date: Wed, 16 Sep 2026 09:12:50 +0300
-From: Matti Vaittinen <matti.vaittinen@linux.dev>
-To: Matti Vaittinen <mazziesaccount@gmail.com>,
-	Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
-	Matti Vaittinen <matti.vaittinen@linux.dev>
-Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Matti Vaittinen <mazziesaccount@gmail.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	Michael Walle <mwalle@kernel.org>, mfd@lists.linux.dev,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
-	linux-rtc@vger.kernel.org, Sverdlin@mva-rohm,
-	Alexander <alexander.sverdlin@siemens.com>
-Subject: [PATCH v4 10/10] MAINTAINERS: Add ROHM BD73800 PMIC files
-Message-ID: <078e51b1a71ca5d823c81cde8d3bde358742b2c9.1789538455.git.mazziesaccount@gmail.com>
-Reply-To: Matti Vaittinen <mazziesaccount@gmail.com>
-References: <cover.1789538455.git.mazziesaccount@gmail.com>
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="iTg72EQC"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1789543405; x=1821079405;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=dRoAeA74q2QI4UIwipkW3XzvOQdsImwmZhpmB+2UJgU=;
+  b=iTg72EQCl2kYxG7Ns5WD82y2oiPQF9nvtxbKrTc7E/hwlwHi8WdCNcQI
+   LGyWh6UTasVqULeZlcZFAm/1Yftgtckt4zZ3VanHPNyaPQq3hdE4u7Boa
+   k6hlSF/0eSZLJd6JxGnPmAt9a5aX7SsFOtAytC+VPpAf0xFqC5X9sS0m/
+   znKK5IY1lk/lfXtGYhjLuWX1d7JrvVMRw4U9ctKroXXUha4rCoCV4SoS/
+   OorG2wH72IFkF7h8+JfYqk3SMNo13CJ3W7X2VOWYYxIeVNuKLMeP05bGl
+   QN7L8mfO8T7yClm7yHCN92ienRWNHCoZEnRGAST6OZde3trdkhHYikWNX
+   g==;
+X-CSE-ConnectionGUID: PNwBmQk5R++KOcS8+tWU3w==
+X-CSE-MsgGUID: EpUiDwiyR16KrV15/nQpVw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="89670555"
+X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
+   d="scan'208";a="89670555"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+  by orvoesa112.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 00:23:19 -0700
+X-CSE-ConnectionGUID: pR30zu/vQpGrFrujS6ypPA==
+X-CSE-MsgGUID: U9kF4cAXSzmZHNUIWdHP7A==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
+   d="scan'208";a="277376952"
+Received: from ettammin-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.244.145])
+  by orviesa005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 00:23:17 -0700
+Date: Wed, 16 Sep 2026 10:23:14 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Maria Lisina <sekoohaka.sarisan@gmail.com>
+Cc: Lee Jones <lee@kernel.org>, mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v5] mfd: intel-lpss: Clean up and modernize DebugFS usage
+Message-ID: <aqpD4q6jMw2FdArD@ashevche-desk.local>
+References: <20260916-intel-lpss-debugfs-v5-1-99295f534067@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="SbEvGAB+GKChB7iR"
-Content-Disposition: inline
-In-Reply-To: <cover.1789538455.git.mazziesaccount@gmail.com>
-
---SbEvGAB+GKChB7iR
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20260916-intel-lpss-debugfs-v5-1-99295f534067@gmail.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-=46rom: Matti Vaittinen <mazziesaccount@gmail.com>
+On Wed, Sep 16, 2026 at 03:13:35AM +0500, Maria Lisina wrote:
 
-Add the undersigned as a maintainer for the ROHM BD73800 PMIC related
-files.
+Thank you for the update, my comments below.
 
-Signed-off-by: Matti Vaittinen <mazziesaccount@gmail.com>
-Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+> The DebugFS API is designed to handle errors gracefully.
+> Any explicit checking on return values is considered an anti-pattern.
+> 
+> This patch removes unnecessary error checking and converts
+> intel_lpss_debugfs_add() into a void function.
 
----
-Revision history:
- v1 =3D> :
-  - No changes
----
- MAINTAINERS | 2 ++
- 1 file changed, 2 insertions(+)
+Yep, these two paragraphs are good!
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 3a19da74d00c..b0925fa212cc 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -23821,6 +23821,7 @@ F:	drivers/clk/clk-bd718x7.c
- F:	drivers/gpio/gpio-bd71815.c
- F:	drivers/gpio/gpio-bd71828.c
- F:	drivers/gpio/gpio-bd72720.c
-+F:	drivers/gpio/gpio-bd73800.c
- F:	drivers/mfd/rohm-bd71828.c
- F:	drivers/mfd/rohm-bd718x7.c
- F:	drivers/mfd/rohm-bd9576.c
-@@ -23840,6 +23841,7 @@ F:	include/linux/mfd/rohm-bd71815.h
- F:	include/linux/mfd/rohm-bd71828.h
- F:	include/linux/mfd/rohm-bd718x7.h
- F:	include/linux/mfd/rohm-bd72720.h
-+F:	include/linux/mfd/rohm-bd73800.h
- F:	include/linux/mfd/rohm-bd957x.h
- F:	include/linux/mfd/rohm-bd96801.h
- F:	include/linux/mfd/rohm-bd96802.h
---=20
-2.55.0
+> While at it, this patch also clean ups legacy and deprecated usage
+> of S_IRUGO macro and debugfs_remove_recursive() function.
+
+No, this should be a separate patch.
+
+...
+
+> -static int intel_lpss_debugfs_add(struct intel_lpss *lpss)
+> +static void intel_lpss_debugfs_add(struct intel_lpss *lpss)
+>  {
+
+> -	struct dentry *dir;
+> -
+> -	dir = debugfs_create_dir(dev_name(lpss->dev), intel_lpss_debugfs);
+
+> +	lpss->debugfs =
+> +		debugfs_create_dir(dev_name(lpss->dev), intel_lpss_debugfs);
+
+> -	lpss->debugfs = dir;
+
+This is unneeded churn. Yes, I understand that dir won't be used, but if you
+really want to refactor do it in a separate change.
+
+>  }
+
+...
+
+>  static void intel_lpss_debugfs_remove(struct intel_lpss *lpss)
+>  {
+> -	debugfs_remove_recursive(lpss->debugfs);
+> +	debugfs_remove(lpss->debugfs);
+
+Hmm... Why?
+
+>  }
+
+...
+
+So, if you really want a refactoring, split this to up to three patches:
+1) drop debugfs checks along with the warn message (as your initial goal);
+2) replace macros by plain octal values for the permissions (optional);
+3) assign debugfs directory directly (optional).
+
+-- 
+With Best Regards,
+Andy Shevchenko
 
 
---SbEvGAB+GKChB7iR
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEIx+f8wZb28fLKEhTeFA3/03aocUFAmqqM2IACgkQeFA3/03a
-ocUlPgf/UQtEHmpliQhUmYPnZV6kHQcYRZWQcuWpDMSNJt8M7evnNQYXhFcFtpeW
-FCGQUzkzPrOtKQUj6T3tvikw5duc5K1mBuczaAIt29RJ8H7uGBz8kjNAPsQobMa4
-rD6xam7h3MHtOhXNDb2zQTcqi7ml0IrRQiaqGRyL0MQtVqA3bT8NegCDH8UEmwQn
-xL3zLiQ+/gV36zrfgPBUSM5MQYuQCN0Rfo/ISVG2Q0fdxOGigMzBAzPeQjjNx1bO
-RCBOkDPvlfLxTFQqEVkusNpWkXgVkeBIPFf2EgjAGZCYo7nllPKSY3RFMDvb+mXU
-q0IL7vs2YtmhrrxCGBO8VpuwMg3uLg==
-=UR3U
------END PGP SIGNATURE-----
-
---SbEvGAB+GKChB7iR--
