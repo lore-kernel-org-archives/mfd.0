@@ -1,77 +1,68 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.14])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2AA924AAC5B
-	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 16:04:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.14
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 328D84B405E;
+	Wed, 16 Sep 2026 16:09:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789574665; cv=none; b=qe/v5V2xLDEkxlbMQzHTtNrsypXVVxaxGO/DhWJqYJnAmt424PSfkS8pj5W1/pub4N4tEI4p/cVtLIIqiizkkgCgwZPGKj+aDPJ+KHHMiQw9q9JCTmibcDcgUCqWq5H54rLCN42/RBPRe/j9kf616Lo/3FO0BQQgHY0G+lyxhO4=
+	t=1789574998; cv=none; b=DR2J4yYOCRMdrBI1jE2imCLD58ny0lkjqXxK3XGwwsSCIJqdPRsuDBrddHQwFxpkjikchg/eDd4Vd/cD1iNEjtzuHrLH7xnawHu61jCtD3e9Xo71bxuHtP+VlClzXfIZPzwJbN7YnW0y8/cH2VQr4YpkblDWunS05M0hKn5Rs3w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789574665; c=relaxed/simple;
-	bh=92l4NDWgiz4obqz329dkg3ScCky7u3lxMDL7f4FNZOM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=kUGK0xkyVy9cwHwSGc1ZFyvw9vVJluRjRe/5Ro5DYf5ByNkBEQUmL2+Fls1qPbUL9IKJ7ysdbOk5ZhrGhypDWHCn64Bx41NOBean3jBTVAzclQ93LIqQDnST56zLLMSDQ3Mv+giwn5sSnn9UkNRNM5JNnwZZ43m9uiiuz5Wfy3g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=I5I37ppq; arc=none smtp.client-ip=198.175.65.14
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1789574998; c=relaxed/simple;
+	bh=IVOk/NyLCOnmdtXDSh97VsiQQ4+7BEqgMAgqRzOr8D4=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=LLGw4mqiUg3e0FTA+PANFds0vb+MdxRCIW8G0Xlozf0XyZOTP8N4Eni/AgyiOlYUr19jvTx+uLvu9YmrTHXskNmng7Z0QzaJuKY+0OYgrYXuo5KLIm+9G9c3p4nnN7cghBl15ehW+vEyfiAQWb2GoX83WPeP5c5KwJFQ0oqbJXg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=a5v9uhgv; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="I5I37ppq"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789574663; x=1821110663;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=92l4NDWgiz4obqz329dkg3ScCky7u3lxMDL7f4FNZOM=;
-  b=I5I37ppqGomZH5TvdSh9dLxx5qF4uGAMrqpNKjm9OSMKsRrqOUeXRiP0
-   6v5JEWR01ri0e2eswkZ3J82W7Kuk+I6hZNaTHMP2CdZTGNzeXOd+ajYwc
-   LoL4s2UppyQUkB8MbRmGVAIHcCCqgRiR4nJx7j0eOkMQlkWY0W3MpU9O4
-   iefvZGoM0ZBHdeZH5911l0GxOv2eD1K0TxpJMWAkjIUzmWgheHm9ELVw2
-   IhFDwgaMJUWKa8eRxxQ4LejjLnYQzIis3T8z6RyxmPa1TenMRWrdqtJrD
-   rpSncXl6kHhptiXpE8Ort7tp6NSscek6W68CCvfTaFFl16kBX4rdCMzWJ
-   w==;
-X-CSE-ConnectionGUID: Yk+vYL6XTLyeZfKgSF1fig==
-X-CSE-MsgGUID: NR4eWFWYQCeoArgmBmAOaQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="93828291"
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="93828291"
-Received: from fmviesa003.fm.intel.com ([10.60.135.143])
-  by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 09:04:23 -0700
-X-CSE-ConnectionGUID: L+BT3bNZR0yUTTjJTh89aA==
-X-CSE-MsgGUID: FBv0/dHjQUWocOyRL7/fgw==
-X-ExtLoop1: 1
-Received: from ettammin-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.244.145])
-  by fmviesa003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 09:04:21 -0700
-Date: Wed, 16 Sep 2026 19:04:19 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Maria Lisina <sekoohaka.sarisan@gmail.com>
-Cc: lee@kernel.org, linux-kernel@vger.kernel.org, mfd@lists.linux.dev
-Subject: Re: [PATCH v6 3/4] mfd: intel-lpss: Remove extra DebugFS dentry
-Message-ID: <aqq-AwWnyBeSeEbT@ashevche-desk.local>
-References: <aqq5d5ESVulYfOnK@ashevche-desk.local>
- <20260916155407.47647-1-sekoohaka.sarisan@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="a5v9uhgv"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5B5101F00899;
+	Wed, 16 Sep 2026 16:09:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789574986;
+	bh=24kDvTvumsTOqnnfHmJx3FdAyn43pZdYMl7EiRDbWow=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=a5v9uhgvaR80Br1I4LS5nbw9EHgr6bvcQs5zbzFPFoi8nRoWlCT91o96A5P2V/T9v
+	 5MuV/gHt+I2DttCshSUAoTLU4vY/o3YwaYawW+QABYJpegkmBKAVRu8ix/VgOVG1wF
+	 A/0ERZeo+p26HlxsEdIjZqEXeOcWDo1yrVFLMHyKeiBGOullxRGvT1FhC31nu6xrr6
+	 6LB9Akj+TyumNOKkLf4IFZ4HZoAvhB9Bz8BxvlDfEJmu0Q7szaiGqoGs6P+/71HHuU
+	 XPYyNysyTI5ktOFARzEw2Eti9QuBQKpFkRp5qF3C2qoMfh/m5YCZqH85kd5ksHgXdi
+	 udDVuh9t6RjOw==
+From: Lee Jones <lee@kernel.org>
+To: lee@kernel.org, Charles Keepax <ckeepax@opensource.cirrus.com>
+Cc: linux-sound@vger.kernel.org, patches@opensource.cirrus.com, 
+ mfd@lists.linux.dev, linux-kernel@vger.kernel.org
+In-Reply-To: <20260904131243.755201-1-ckeepax@opensource.cirrus.com>
+References: <20260904131243.755201-1-ckeepax@opensource.cirrus.com>
+Subject: Re: (subset) [PATCH v2] mfd: cs42l43: Move cancel_work_sync() into
+ remove
+Message-Id: <178957498501.1766829.10062828436736023046.b4-ty@b4>
+Date: Wed, 16 Sep 2026 17:09:45 +0100
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260916155407.47647-1-sekoohaka.sarisan@gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
 
-On Wed, Sep 16, 2026 at 08:54:07PM +0500, Maria Lisina wrote:
-> > As Lee pointed out, we are fine with 100 limit, so one line here and below.
+On Fri, 04 Sep 2026 14:12:43 +0100, Charles Keepax wrote:
+> The cs42l43 driver kicks off a work item waiting for the device
+> to appear on the SoundWire bus, once the device appears the
+> MFD children are added and the clean up is then done through
+> devres. As the work is synchronised in from the devres clean
+> up this could lead to new devres items being added after the
+> clean up has started, if the driver is removed before the work
+> has fully completed. The work should be synchronised before any
+> devres clean up is started.
 > 
-> But doesn't the guideline strictly say no more than 80?
+> [...]
 
-Yes it says, some maintainers used relaxed version (which is default in
-checkpatch and now it's 100). Lee is the maintainer of the MFD subsystem
-and it's clear he leans towards using 100 limit.
+Applied, thanks!
 
--- 
-With Best Regards,
-Andy Shevchenko
+[1/1] mfd: cs42l43: Move cancel_work_sync() into remove
+      commit: f0749e65fdb0026abe1294adc5648f58642754f8
 
+--
+Lee Jones [李琼斯]
 
