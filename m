@@ -1,152 +1,148 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.15])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 119EE4DF4AC;
-	Wed, 16 Sep 2026 15:20:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.15
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 828E050C287;
+	Wed, 16 Sep 2026 15:21:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789572060; cv=none; b=q3PYCgUZPVJjvvIcENtN7ox/hOQ/7uyHqrgGzrjwL3z6LxCFBO/N1o8Dtk4rkp/sxnlCGgOOBTE/boSipxTH7k0BoK18caEu+r0luS1iNV9XDFWls0rPv1bcia13LkEngwVerWvnE940F0/R2AbrUWvCQWhNu3wvuUmBIX6ijxg=
+	t=1789572120; cv=none; b=TZa96XtHkc37L/djQHG+V4M2851EsWMPNN+RZ4PRQSKrP9OQvWowDO6i9H61torWNteLAn6I69OOiW5k6qDcxiK6ViFjq6WwbLROWDod81LL19R8FfWG+IgUgvQgVnK75XEP2cJdmcs7UAU1Zpt3hk2Cc6pR/hJzLP8oasdK7BM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789572060; c=relaxed/simple;
-	bh=ABPqlFY+qgVQVQriZmgkEfnyudsflUMPcXg+FS+S01s=;
+	s=arc-20240116; t=1789572120; c=relaxed/simple;
+	bh=QIyy0N04LfkgJYMMXXUHPODj1i7q6YwpTVR/0YmYeu8=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=aHNhwJOwNoqQIQplxQKfiE+Koljwb3EEW6wveIHcsCjiD6/02x0t8lhccPOx4uYevNDgbehCbXo0T5yjJg6kITm3FaKBKix9AYP4IN6ctv+MWuMhaI7H2iYof70GgRLQmyftoHxfOH/xF7Hv/SJbncfJ/BxnVBsCDU+sHK0skE4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=arUGXbLz; arc=none smtp.client-ip=198.175.65.15
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=FTPGvavTwq47yThjQPPw5Y6Jyl2aB3nyxhL+FH3FdBgIuhIY9+nvoElVNIixOY4cSReWhWvbKWW519S7umMJWMLhBKqPxkQ6QyTF6szTs8oeT0SGE2wu85SnH9OD0FPiXOSKc+xGjfFR4FwkU/1T4/V4LGXjMduIA0GrPDw9FBY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fQ/mnoAy; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="arUGXbLz"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789572054; x=1821108054;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=ABPqlFY+qgVQVQriZmgkEfnyudsflUMPcXg+FS+S01s=;
-  b=arUGXbLz7GS6MkKKo59fnkA8t+VUiPzQ3XP2cDLVvWo9aDEh15npGzEb
-   yNHXd2eQQRQb7dybK9mpL8pdab5xDp71cKgX1cAmlbLw+U4BaKuIgJkih
-   13uOWkr7D1492zwnmm5q4HoQsuu/9X0gZXfH9LFAnG6K6wvmPUJ+EPs9z
-   f1QM3bS/mpLdM4DTFhg5i2iKeH/YqVDY9jv9A6gY3hCh/s10iWpej2ECY
-   iY+OgxtfUl/5IGsq0P4ySXNI8mkE1WOlLzWDg9vt6jYc2KNTqzJcCCuZI
-   8otR3iXLw627ojT3WCJC3J4xfeevPGEnxj+FSu2jLpK36vG7ZRy90TDTj
-   w==;
-X-CSE-ConnectionGUID: gHJyN2X5Rf2GJzD+RbKV1A==
-X-CSE-MsgGUID: Gegs4NTVQT2b0gLQhY3Rlw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="93653717"
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="93653717"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
-  by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 08:20:49 -0700
-X-CSE-ConnectionGUID: JwexR3oJQzatmu4g5LEWDA==
-X-CSE-MsgGUID: vFlYH9tyRkangFMS75Q85w==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="296853472"
-Received: from ettammin-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.244.145])
-  by fmviesa002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 08:20:43 -0700
-Date: Wed, 16 Sep 2026 18:20:40 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: zl020895 <zl020895@163.com>
-Cc: Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>, soc@lists.linux.dev,
-	longzhao@ambarella.com,
-	Long Zhao via B4 Relay <devnull+longzhao.ambarella.com@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Jerome Brunet <jbrunet@baylibre.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jiri Slaby <jirislaby@kernel.org>,
-	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, Lee Jones <lee@kernel.org>,
-	mfd@lists.linux.dev, devicetree@vger.kernel.org,
-	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
-	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-	Arnd Bergmann <arnd@arndb.de>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	linux-arm-kernel@lists.infradead.org
-Subject: Re: Re: [PATCH v7 00/15] Ambarella CV75 SoC minimal bring-up
-Message-ID: <aqqzyPR-2JKr-2Me@ashevche-desk.local>
-References: <20260915-cv75-v5-v7-0-3297d3fbc9c0@ambarella.com>
- <CAMRc=McEOcWq8i3B01AR1PnfBzSQaLEaOzE6Qa+QdVXrvS_YrA@mail.gmail.com>
- <CAD++jLnRL_s9zPNkSj2UnHWPx+QHAXV19DA7dEmGZu0AkxxyaA@mail.gmail.com>
- <aqpuMcqbra9i6UDq@ashevche-desk.local>
- <23d61058.962b.1a0a9e0b355.Coremail.zl020895@163.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fQ/mnoAy"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6C7101F00893;
+	Wed, 16 Sep 2026 15:21:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789572113;
+	bh=TlsZEJAiiH82j/Mx6kTCN96sqcmaljLGoEMImAFW9O8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=fQ/mnoAyoegvsCX7j37IkLXN5iVwvdZmpbmbNJrj/n2UusJHKt+UBNdAoo2EIvRrC
+	 X63V26CHTn/jqU/9nngXJYpQyvPL87Km1zRSfxgiLw8XNY5O4khKbDWHIJapHhHQi0
+	 k1h5GDt+LUEHS/7kCgs+msRgSbVPmcMgBABUyVEORHX+tvRY3kCzOximZbYNzYrkOh
+	 ZKCA0GXMEJVpN35gTBPIK1GrMc4zdd0l3qtVqu0xtOSlpg6Iv99HEh6r33T8JamoVk
+	 SUbnwCX7p7vxdAAS7Mk5rKH4eApvTeYNGgqi8vUv4b3NG9N+sqF595j8vWKjc4MCm4
+	 PtoiYI26DtEYw==
+Date: Wed, 16 Sep 2026 16:21:48 +0100
+From: Lee Jones <lee@kernel.org>
+To: Charles Keepax <ckeepax@opensource.cirrus.com>
+Cc: vkoul@kernel.org, yung-chuan.liao@linux.intel.com,
+	pierre-louis.bossart@linux.dev, linux-sound@vger.kernel.org,
+	patches@opensource.cirrus.com, mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 2/2] mfd: cs42l43: Move to core detach helper
+Message-ID: <20260916152148.GF1605367@google.com>
+References: <20260831140157.1736905-1-ckeepax@opensource.cirrus.com>
+ <20260831140157.1736905-3-ckeepax@opensource.cirrus.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <23d61058.962b.1a0a9e0b355.Coremail.zl020895@163.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+In-Reply-To: <20260831140157.1736905-3-ckeepax@opensource.cirrus.com>
 
-On Wed, Sep 16, 2026 at 07:01:10PM +0800, zl020895 wrote:
+On Mon, 31 Aug 2026, Charles Keepax wrote:
 
-> ACK: GPIO bits through the GPIO tree, then an IB for the SoC tree.
-> I will keep a unified series for now.
+> Now the core has a helper to signal a device will detach from
+> the SoundWire bus, there is no need for the cs42l43 driver code
+> to separately track that. Switch to using the new core helper.
 > 
-> regmap-irq cannot do PL061 type (IS/IBE/IEV, both-edge) plus the
-> AMBA chained demux.
+> Signed-off-by: Charles Keepax <ckeepax@opensource.cirrus.com>
+> ---
 > 
-> Two options for v8 — Andy, which do you prefer?
->   1) Convert PL061 MMIO to regmap only. Keep the existing gpio_chip
->      and irqchip/girq (double-write stays in the driver). Ambarella
->      layout can be a follow-up on that. No gpio-regmap yet.
+> No changes since v1.
 > 
->   2) After (1), also move get/set/direction to gpio-regmap. IRQ
->      would stay a custom PL061 irqchip (not regmap-irq). I am not
->      sure we can avoid a way to get the gpio_chip for
->      gpiochip_*_irq() / the chained handler.
+>  drivers/mfd/cs42l43-sdw.c   |  2 --
+>  drivers/mfd/cs42l43.c       | 15 +--------------
+>  include/linux/mfd/cs42l43.h |  1 -
+>  3 files changed, 1 insertion(+), 17 deletions(-)
 > 
-> I am leaning to (1) for v8.
+> diff --git a/drivers/mfd/cs42l43-sdw.c b/drivers/mfd/cs42l43-sdw.c
+> index 0a6999453f325..f0825d6bf7b38 100644
+> --- a/drivers/mfd/cs42l43-sdw.c
+> +++ b/drivers/mfd/cs42l43-sdw.c
+> @@ -102,8 +102,6 @@ static int cs42l43_sdw_update_status(struct sdw_slave *sdw, enum sdw_slave_statu
+>  		break;
+>  	case SDW_SLAVE_UNATTACHED:
+>  		dev_dbg(cs42l43->dev, "Device detach\n");
 
-I would prefer to see (2) and then we can discuss to roll-back if it looks not
-good enough.
+Is this now superfluous?
 
-Either way your PM runtime support for gpio-regmap is a good change.
+> -
+> -		complete(&cs42l43->device_detach);
+>  		break;
+>  	default:
+>  		break;
+> diff --git a/drivers/mfd/cs42l43.c b/drivers/mfd/cs42l43.c
+> index 4212ebcca60b5..f08ee598366d9 100644
+> --- a/drivers/mfd/cs42l43.c
+> +++ b/drivers/mfd/cs42l43.c
+> @@ -30,7 +30,6 @@
+>  #define CS42L43_RESET_DELAY_MS			20
+>  
+>  #define CS42L43_SDW_ATTACH_TIMEOUT_MS		5000
+> -#define CS42L43_SDW_DETACH_TIMEOUT_MS		100
+>  
+>  #define CS42L43_MCU_BOOT_STAGE1			1
+>  #define CS42L43_MCU_BOOT_STAGE2			2
+> @@ -555,7 +554,7 @@ static int cs42l43_soft_reset(struct cs42l43 *cs42l43)
+>  		{ CS42L43_SFT_RESET, CS42L43_SFT_RESET_VAL },
+>  	};
+>  
+> -	reinit_completion(&cs42l43->device_detach);
+> +	sdw_slave_signal_unattach(cs42l43->sdw);
 
-> 在 2026-09-16 18:23:45，"Andy Shevchenko" <andriy.shevchenko@linux.intel.com> 写道：
-> >On Wed, Sep 16, 2026 at 11:42:56AM +0200, Linus Walleij wrote:
-> >> On Wed, Sep 16, 2026 at 11:14 AM Bartosz Golaszewski <brgl@kernel.org> wrote:
-> >> > On Tue, 15 Sep 2026 13:15:30 +0200, Long Zhao via B4 Relay
-> >> > <devnull+longzhao.ambarella.com@kernel.org> said:
-> >> > > This series adds minimal Ambarella CV75 support for early bring-up with
-> >> > > a serial console: DT bindings, RCT clocks, pinctrl, PL061 GPIO via
-> >> > > gpio-regmap, 8250_dw UART quirks, ARCH_AMBARELLA, CV75 EVK DT, and
-> >> > > MAINTAINERS.
-> >> > >
-> >> > > This is a single unified series. Please apply via the SoC
-> >> > > tree; subsystem maintainers are Cc'd for their pieces.
-> >> >
-> >> > I would prefer to take the GPIO regmap bits through the GPIO tree and provide
-> >> > an immutable branch to the SoC tree as it has potential for conflicts that
-> >> > early into the cycle.
-> >> 
-> >> Queue them up and send us the IB if you think they are ready!
-> >> 
-> >> Long can probably send a PR based on that IB for the rest to the
-> >> SoC tree, a bit tricksy but it works.
-> >
-> >I'm still unsure why we can't use IRQ facility from gpio-regmap.
-> >Can you have a look there?
-> >
-> >With that being said, I'm not sure that the patch that exposing gpio_chip
-> >from gpio-regmap is justified.
-> >
-> >The whole GPIO rework needs a bit more routine work (resplitting, refactoring,
-> >et cetera), so later we may see clearer what's going on.
+If this call NULL safe?
+
+>  	/*
+>  	 * Apply cache only because the soft reset will cause the device to
+> @@ -566,17 +565,6 @@ static int cs42l43_soft_reset(struct cs42l43 *cs42l43)
+>  
+>  	msleep(CS42L43_RESET_DELAY_MS);
+>  
+> -	if (cs42l43->sdw) {
+> -		unsigned long timeout = msecs_to_jiffies(CS42L43_SDW_DETACH_TIMEOUT_MS);
+> -		unsigned long time;
+> -
+> -		time = wait_for_completion_timeout(&cs42l43->device_detach, timeout);
+> -		if (!time) {
+> -			dev_err(cs42l43->dev, "Timed out waiting for device detach\n");
+> -			return -ETIMEDOUT;
+> -		}
+> -	}
+> -
+>  	return -EAGAIN;
+>  }
+>  
+> @@ -1115,7 +1103,6 @@ int cs42l43_dev_probe(struct cs42l43 *cs42l43)
+>  	dev_set_drvdata(cs42l43->dev, cs42l43);
+>  
+>  	mutex_init(&cs42l43->pll_lock);
+> -	init_completion(&cs42l43->device_detach);
+>  	init_completion(&cs42l43->firmware_download);
+>  	INIT_WORK(&cs42l43->boot_work, cs42l43_boot_work);
+>  
+> diff --git a/include/linux/mfd/cs42l43.h b/include/linux/mfd/cs42l43.h
+> index 8e993fb535e68..798dc55149662 100644
+> --- a/include/linux/mfd/cs42l43.h
+> +++ b/include/linux/mfd/cs42l43.h
+> @@ -86,7 +86,6 @@ struct cs42l43 {
+>  	struct regmap_irq_chip_data *irq_data;
+>  
+>  	struct work_struct boot_work;
+> -	struct completion device_detach;
+>  	struct completion firmware_download;
+>  	int firmware_error;
+>  
+> -- 
+> 2.47.3
+> 
 
 -- 
-With Best Regards,
-Andy Shevchenko
-
-
+Lee Jones
