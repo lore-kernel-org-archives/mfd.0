@@ -1,63 +1,164 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5DD61632DD
-	for <mfd@lists.linux.dev>; Tue, 15 Sep 2026 22:18:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F862383980
+	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 00:45:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=149.28.215.223
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789510737; cv=none; b=a2NsPLJlrTC5SFTVEzjkUAL2NbUqSno2/CrK7ov6W63HddGKoKGn3KKe+8WW55OBmqASKddyWJUXG7VbDPnUlgiYLsve8U2cgH8Cph9x4y1ipAF3qSevvaEZfQMdWW/nT8T0oUIJcILjyUxDSd2I24H69tKdMhy9YXuGKhDAzx8=
+	t=1789519553; cv=none; b=eMdPPChiIcmvBUnXsFyxv24n5H9G08x/be5+zZhXD1qAXP5csuHCikkXWIJt6aLARdTjo29YHuFmzoH5XyoNMgZMMr2V0/pMn1cciL9evq67SH+ay/PiUI2LufY9vIMc7kHlBR6Dndv7ONEUsYbGn8iNaMCCGsgsbIBuyPe1yLQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789510737; c=relaxed/simple;
-	bh=B+dtM0AM+t/yT9gEBAszP943/fTjUpS3ioLT9xHVMEk=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=ejLBhdq4fj6j6ne7T2M+ysg9S10qanNs1bV8/pjmyCMY+tlWDN80k7WEer+fe2NQwrRv6HZ9a6n3/qlweojUri/iOiw3gOt4U3E0dm2bKifGZ+epxDd7k7jSUJWju8fSNKG7T/7JNIgup2YvKRdOGFofmM15Ep+lGJoAXB8YEc8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AVc1iRTM; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789519553; c=relaxed/simple;
+	bh=RMvbwBxno+Tb07Mx42tPhYykW/4X6mwmOraQ9Jzivcs=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Cc:Subject:From:To:
+	 References:In-Reply-To; b=H5va9z8Olt8qEZQwxQuRszAv1dO60vVq8mfNaEPBm9xk/KJsWnswCs2ROgMtTcv6UCSvrziSH5pEPXtKuTPgXlUS97s6ktm9Dm6KZlJn7k2cfr6OxURDZnKdUwRqUIVunWnB6X/GTkIdkqglB9hlS7VPxMDz0kEp+z0h8UZqzpo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ubuntu.com; spf=pass smtp.mailfrom=fe-bounces.ubuntu.com; dkim=pass (2048-bit key) header.d=ubuntu.com header.i=@ubuntu.com header.b=u8xa1Jvt; arc=none smtp.client-ip=149.28.215.223
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ubuntu.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fe-bounces.ubuntu.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AVc1iRTM"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DAB021F000FF;
-	Tue, 15 Sep 2026 22:18:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789510736;
-	bh=B+dtM0AM+t/yT9gEBAszP943/fTjUpS3ioLT9xHVMEk=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=AVc1iRTMl4zkpWym7N548SnxOyISkTqHsZIOs8x+cvGK+uCXdxiC+gzmxKn7Zs4W1
-	 88Ms3bdrywS75SO6Bd1yvFTrzisVT4HvlA8yK6hazz2BXP8+Yur5BvKMSf9VzVWPq0
-	 LS3TeKioBMs2oVzd2wES1ncJt1EYj8fnVLj/XSN5ECMmv1/wcNO5TkQGz43a6k4QkC
-	 pE46WTH49trGzioRHaDqV+ZC0OfU15t1b4Ule5iI/x2tCjMmr51Oh6KvFPt+sByDe6
-	 nRY18YEonQUaRFl9mP0hg/zwX/9XvGTtJw4RybqYuNxOQtA8hQMsI7fOcfDV8BCeP6
-	 CdOsldGxGJd9A==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v5] mfd: intel-lpss: Clean up and modernize DebugFS
- usage
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Maria Lisina" <sekoohaka.sarisan@gmail.com>
-Cc: lee@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260916-intel-lpss-debugfs-v5-1-99295f534067@gmail.com>
-References: <20260916-intel-lpss-debugfs-v5-1-99295f534067@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 15 Sep 2026 22:18:55 +0000
-Message-Id: <20260915221855.DAB021F000FF@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=ubuntu.com header.i=@ubuntu.com header.b="u8xa1Jvt"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ubuntu.com;
+ h=In-Reply-To: References: To: From: Subject: Cc: Message-Id: Date:
+ Content-Type: Content-Transfer-Encoding: Mime-Version; q=dns/txt;
+ s=fe-953a8a3ca9; t=1789519542;
+ bh=s2V8BnF8h+8Uq8u8VZxp/reb7V9zH1peGA2ahNF542Q=;
+ b=u8xa1Jvt4Mwhjxpo2C3sQvO4pkTyqmSG4TDkj3hGBc9s9F5p/psj3rxiF7b+P7JTnOXsJKKLw
+ GOrUC7Mheantsamq4SK/9iI3NPmJVs/Nh2iI+wLnngwGt17eC+zU2NF0EY8h9WVlp8GCNr78PH+
+ v2ko65wn2E4gsod+KT0IS8GHwmh/MhXpMAml2kQ1jfE4IA++Ic/7U6j5G0kA3Hb+8F+980zhXyn
+ Y30gX/7YHUu/e/7W0IKbwiMD4aK1gW6ZXVbq1M061Biyji0tjdKfQnwgO62NAkXjpo4xPIMfvGl
+ 0DxARhOJU79vyylE7QX0v0HtbnyR9f8zM0/kGxNvib/g==
+X-Forward-Email-ID: 6aa9e69076866d48a84e7189
+X-Forward-Email-Sender: rfc822; jpeisach@ubuntu.com, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.14.2
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8; format=Flowed
+Date: Tue, 15 Sep 2026 20:45:01 -0400
+Message-Id: <DLGBPXP4F8E0.9X0QMZ9GFQVF@ubuntu.com>
+Cc: <linux-phy@lists.infradead.org>, <devicetree@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
+ <mfd@lists.linux.dev>, <linux-clk@vger.kernel.org>,
+ <linux-arm-kernel@lists.infradead.org>,
+ <linux-rockchip@lists.infradead.org>, <linux-riscv@lists.infradead.org>,
+ "Marek Szyprowski" <m.szyprowski@samsung.com>, "Maud Spierings"
+ <maud_spierings@murena.io>, "Graham Markall" <hello@big-grey.co.uk>,
+ "Icenowy Zheng" <zhengxingda@iscas.ac.cn>, "Chaoyi Chen"
+ <chaoyi.chen@rock-chips.com>, "Joshua Peisach" <jpeisach@ubuntu.com>,
+ =?utf-8?q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+Subject: Re: [PATCH v4 00/20] drm: starfive: jh7110: Enable display
+ subsystem
+From: "Joshua Peisach" <jpeisach@ubuntu.com>
+To: "Michal Wilczynski" <m.wilczynski@samsung.com>, "Vinod Koul"
+ <vkoul@kernel.org>, "Neil Armstrong" <neil.armstrong@linaro.org>, "Rob
+ Herring" <robh@kernel.org>, "Krzysztof Kozlowski" <krzk+dt@kernel.org>,
+ "Conor Dooley" <conor+dt@kernel.org>, "Andrzej Hajda"
+ <andrzej.hajda@intel.com>, "Robert Foss" <rfoss@kernel.org>, "Laurent
+ Pinchart" <Laurent.pinchart@ideasonboard.com>, "Jonas Karlman"
+ <jonas@kwiboo.se>, "Jernej Skrabec" <jernej.skrabec@gmail.com>, "Luca
+ Ceresoli" <luca.ceresoli@bootlin.com>, "Maarten Lankhorst"
+ <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
+ "Thomas Zimmermann" <tzimmermann@suse.de>, "Lee Jones" <lee@kernel.org>,
+ "Andy Yan" <andy.yan@rock-chips.com>, "Philipp Zabel"
+ <p.zabel@pengutronix.de>, "Emil Renner Berthing" <kernel@esmil.dk>, "Hal
+ Feng" <hal.feng@starfivetech.com>, "Michael Turquette"
+ <mturquette@baylibre.com>, "Stephen Boyd" <sboyd@kernel.org>, "Heiko
+ Stuebner" <heiko@sntech.de>, "Paul Walmsley" <pjw@kernel.org>, "Palmer
+ Dabbelt" <palmer@dabbelt.com>, "Albert Ou" <aou@eecs.berkeley.edu>,
+ "Alexandre Ghiti" <alex@ghiti.fr>, "Dominique Belhachemi" <db@domibel.de>,
+ "Brian Masney" <bmasney+clk@redhat.com>, "Jerome Brunet"
+ <jbrunet+clk@baylibre.com>
+X-Mailer: aerc 0.21.0
+References: <CGME20260915153213eucas1p148f013af239a334fc78cdc249c0f8a61@eucas1p1.samsung.com> <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
+In-Reply-To: <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
 
-> The DebugFS API is designed to handle errors gracefully.
-> Any explicit checking on return values is considered an anti-pattern.
->=20
-> This patch removes unnecessary error checking and converts
-> intel_lpss_debugfs_add() into a void function.
->=20
-> While at it, this patch also clean ups legacy and deprecated usage
-> of S_IRUGO macro and debugfs_remove_recursive() function.
->=20
-> Signed-off-by: Maria Lisina <sekoohaka.sarisan@gmail.com>
+On Tue Sep 15, 2026 at 11:32 AM EDT, Michal Wilczynski wrote:
+>
+> Testing
+> =3D=3D=3D=3D=3D=3D=3D
+>
+> Tested on a VisionFive 2 v1.3B using modetest.
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+I.. got nothing. I did have to manually modprobe the modules, but
+unless I am doing something wrong.. I didn't get anything and modetest
+just gave -2.
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260916-intel-lpss=
--debugfs-v5-1-99295f534067@gmail.com?part=3D1
+> ---
+> Michal Wilczynski (20):
+>       dt-bindings: phy: Add starfive,jh7110-inno-hdmi-phy
+>       dt-bindings: display: bridge: Add starfive,jh7110-inno-hdmi-control=
+ler
+>       dt-bindings: mfd: Add starfive,jh7110-hdmi-subsystem
+>       dt-bindings: soc: starfive: Add starfive,jh7110-vout-syscon
+>       dt-bindings: display: verisilicon: Add starfive,jh7110-dc8200
+>       dt-bindings: soc: starfive: Add starfive,jh7110-vout-subsystem
+>       drm/bridge: inno-hdmi: Split probe out of bind
+>       drm/bridge: inno-hdmi: Allow the register map to come from a parent
+>       drm/bridge: inno-hdmi: Add .disable platform operation
+>       drm/bridge: inno-hdmi: Add .mode_valid platform operation
+>       drm/bridge: inno-hdmi: Make the PHY configuration table optional
+>       soc: starfive: Add jh7110-hdmi-subsystem driver
+>       soc: starfive: Add jh7110-vout-subsystem driver
+>       clk: starfive: jh7110-vout: Allow pixel clock rate propagation
+>       drm/bridge: starfive: Add JH7110 HDMI controller driver
+>       phy: Add common Innosilicon HDMI PHY helpers
+>       phy: rockchip: inno-hdmi: Use the common Innosilicon PHY helpers
+>       phy: starfive: Add jh7110-inno-hdmi-phy driver
+>       riscv: dts: starfive: jh7110: Update DT for display subsystem
+>       MAINTAINERS: Add StarFive JH7110 display subsystem entry
+>
+>  .../starfive,jh7110-inno-hdmi-controller.yaml      | 121 +++++
+>  .../bindings/display/verisilicon,dc.yaml           |   1 +
+>  .../mfd/starfive,jh7110-hdmi-subsystem.yaml        |  95 ++++
+>  .../phy/starfive,jh7110-inno-hdmi-phy.yaml         |  49 ++
+>  .../soc/starfive/starfive,jh7110-syscon.yaml       |   1 +
+>  .../starfive/starfive,jh7110-vout-subsystem.yaml   | 218 ++++++++
+>  MAINTAINERS                                        |  13 +
+>  arch/riscv/boot/dts/starfive/jh7110-common.dtsi    | 121 ++++-
+>  arch/riscv/boot/dts/starfive/jh7110.dtsi           | 105 +++-
+>  drivers/clk/starfive/clk-starfive-jh7110-vout.c    |   6 +-
+>  drivers/gpu/drm/bridge/Kconfig                     |  11 +
+>  drivers/gpu/drm/bridge/Makefile                    |   1 +
+>  drivers/gpu/drm/bridge/inno-hdmi.c                 | 112 +++-
+>  drivers/gpu/drm/bridge/jh7110-inno-hdmi.c          | 297 +++++++++++
+>  drivers/phy/Kconfig                                |   8 +
+>  drivers/phy/Makefile                               |   1 +
+>  drivers/phy/phy-inno-hdmi.c                        | 298 +++++++++++
+>  drivers/phy/rockchip/Kconfig                       |   1 +
+>  drivers/phy/rockchip/phy-rockchip-inno-hdmi.c      | 168 +-----
+>  drivers/phy/starfive/Kconfig                       |  20 +
+>  drivers/phy/starfive/Makefile                      |   1 +
+>  drivers/phy/starfive/phy-jh7110-inno-hdmi.c        | 579 +++++++++++++++=
+++++++
+>  drivers/soc/Kconfig                                |   1 +
+>  drivers/soc/Makefile                               |   1 +
+>  drivers/soc/starfive/Kconfig                       |  43 ++
+>  drivers/soc/starfive/Makefile                      |   3 +
+>  drivers/soc/starfive/jh7110-hdmi-subsystem.c       |  73 +++
+>  drivers/soc/starfive/jh7110-vout-subsystem.c       |  82 +++
+>  include/drm/bridge/inno_hdmi.h                     |  10 +-
+>  include/linux/phy/inno-hdmi-phy.h                  |  85 +++
+>  30 files changed, 2337 insertions(+), 188 deletions(-)
+> ---
+> base-commit: fd73f4a6659897191fa0d40695fe370925dd3780
+> change-id: 20251031-jh7110-clean-send-7d2242118026
+>
+> Best regards,
 
+By the way, something weird happenined while I applied the patches
+using git am. Somehow, some were out of order. The 10th patch
+adding .mode_valid tried to be applied before .disable even though
+in the series, the order is correctly set? git would obviously
+fail because the .disable entry did not exist in the header, so I had
+to manually put those in.
+
+I guess it's possible that something went wrong here? I personally
+pulled the mailbox from the lore.kernel.org mbox.gz file.
