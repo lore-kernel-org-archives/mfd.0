@@ -1,114 +1,115 @@
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF7F04DF4D4;
-	Wed, 16 Sep 2026 11:02:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.5
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 337C54EC678;
+	Wed, 16 Sep 2026 11:22:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789556557; cv=none; b=eT8m2r0VgM4/cnDRsdxR2QVuB23181su+7qQWTiA+xuan2LHSEKHmyYtdJ/B+hhZXR3nLpABNVdUGOY10Sq03FjdYmHae0pGs0j0s2ahPg+0i44wl+b44ctPqlUbcyfDvG4uZvjTC4R4yAeVc8/2/QjRe011EkmkJSt3IHjDQFI=
+	t=1789557733; cv=none; b=GHwNPEVIi+8zr4bLK4akqeoim+c/BCsUDdtQkm80ncn24dXF9jurU81Zj7498QXK8ZnMfpGBCAwagG2U5MwGT4BYEBhXvHvpFrC/KnYAU1mA6t1lTEKhk/YQzAX2s+1ifZcmcR7tQdyqoUK8jkFuihRRBazKg2OrAsm6jFo2ghQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789556557; c=relaxed/simple;
-	bh=XWYr4ENYidcskbtv9TLVflYBJ2nrgan0itQw24BVLf4=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
-	 MIME-Version:Message-ID; b=JB1HBdCMTbing6H5N/dW+j3XIDIa+CFvZSOGiLCRh5aPvuD7gA4BpZu70AJCUBFUee5puMHlvUNlahq6cGJUcXi1L4PSyhILZndw5HSc3JYjnYu/NSZFp7DU1lG49ba/fKuM3TNYFjQizu+97mw8n5uTWFicT7ab1L4aboqN/s0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=QXJHNWlt; arc=none smtp.client-ip=117.135.210.5
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1789557733; c=relaxed/simple;
+	bh=F4tNhj582OFHSkSYr3E5i0u16GEo/PD6lsqkjPUqJeg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=FHG2rbzau/Pi2eYjV5CRMUS16FTgA/6uQS45VbMvf/3rffsNoCmX+WW0Mm9FZrx+QDxOV79kwDH+mHpV7t7zfFdXkTJeii5PB0qW4IpE31OBQEXkN7tEbN+cdEJpNzjEaK2luks0n2BOrwsx8TTz7y/X2dKCfVA04NVBF8acvGY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ahEjjpuP; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="QXJHNWlt"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
-	Message-ID; bh=XWYr4ENYidcskbtv9TLVflYBJ2nrgan0itQw24BVLf4=; b=Q
-	XJHNWltJ0xSQ2jiM+iN+TKdx/QfKg5EV2QfGCCC7ecN9ytw5qTQGeyoQSRXfXT77
-	Mb0SBvpZRv6x4NjIJ1X7n8qKqfQfcw/OEN8q2EGHfn3rUe3/LYnW4kH9sj1lXB7w
-	Prdy6/f38S5VaZxWVmvZMZs2mJDy2dYjcORs+da+x0=
-Date: Wed, 16 Sep 2026 19:01:10 +0800 (CST)
-From: zl020895  <zl020895@163.com>
-To: "Andy Shevchenko" <andriy.shevchenko@linux.intel.com>
-Cc: "Linus Walleij" <linusw@kernel.org>,
-	"Bartosz Golaszewski" <brgl@kernel.org>, soc@lists.linux.dev,
-	longzhao@ambarella.com,
-	"Long Zhao via B4 Relay" <devnull+longzhao.ambarella.com@kernel.org>,
-	"Rob Herring" <robh@kernel.org>,
-	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
-	"Conor Dooley" <conor+dt@kernel.org>,
-	"Michael Turquette" <mturquette@baylibre.com>,
-	"Stephen Boyd" <sboyd@kernel.org>,
-	"Jerome Brunet" <jbrunet@baylibre.com>,
-	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
-	"Jiri Slaby" <jirislaby@kernel.org>,
-	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	"Catalin Marinas" <catalin.marinas@arm.com>,
-	"Will Deacon" <will@kernel.org>, "Lee Jones" <lee@kernel.org>,
-	mfd@lists.linux.dev, devicetree@vger.kernel.org,
-	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
-	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org,
-	"Krzysztof Kozlowski" <krzysztof.kozlowski@oss.qualcomm.com>,
-	"Arnd Bergmann" <arnd@arndb.de>,
-	"Krzysztof Kozlowski" <krzk@kernel.org>,
-	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
-	linux-arm-kernel@lists.infradead.org
-Subject: Re:Re: [PATCH v7 00/15] Ambarella CV75 SoC minimal bring-up
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
- 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
-In-Reply-To: <aqpuMcqbra9i6UDq@ashevche-desk.local>
-References: <20260915-cv75-v5-v7-0-3297d3fbc9c0@ambarella.com>
- <CAMRc=McEOcWq8i3B01AR1PnfBzSQaLEaOzE6Qa+QdVXrvS_YrA@mail.gmail.com>
- <CAD++jLnRL_s9zPNkSj2UnHWPx+QHAXV19DA7dEmGZu0AkxxyaA@mail.gmail.com>
- <aqpuMcqbra9i6UDq@ashevche-desk.local>
-X-NTES-SC: AL_Qu2TC/meuUws5iaYYOkcn0wRhug/UMa4u/sm3YNXc+0EmQv84jsnW19JAXbm4NmSDCydmwSSfylD1ctrZLJSSmM9ix4F2GWSJfiNOy6P3A==
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ahEjjpuP"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D7DA1F000FF;
+	Wed, 16 Sep 2026 11:21:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789557719;
+	bh=gD7w5VVQ3g5qNpNjChQr/b3F5YLn6o8rO2n40UFb5tg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=ahEjjpuPVCkG2MdaRTkUqzMva32AuIu5AN9ywxz1skbJFS2O7oriO0PRDN9j29shy
+	 tS19546+sJ6k+zUkFWyoaLaJSWRFvM0AgEd2er3N352g+CzkdwClmN5GOXG3lrYaM6
+	 3GJdz8PQjPfriUFJN4IAH/19vwS1w+Uuah+vldIpEJZktwupJkkGvFH7Vwz29tI2Bv
+	 NjnLwOTHUHvwCY1mXfh/RjrundUhjM+4SaHH/ESCrqIJv6RFGm428OCqEZgfmooUgc
+	 Ulzp1ar4aB+wVhXvSb2AjxYeKxRlCc0Ed1FoGNE2JjzP88mT2zYCPuO8LNOMi+uN5L
+	 ZjnobDWUE41Mw==
+Date: Wed, 16 Sep 2026 12:21:55 +0100
+From: Lee Jones <lee@kernel.org>
+To: sashiko-reviews@lists.linux.dev
+Cc: Cosmin Tanislav <cosmin-gabriel.tanislav.xa@renesas.com>,
+	mfd@lists.linux.dev
+Subject: Re: [PATCH 1/3] mfd: rz-mtu3: do not use struct rz_mtu3_channel::dev
+Message-ID: <20260916112155.GQ11487@google.com>
+References: <20260914201456.2018403-1-cosmin-gabriel.tanislav.xa@renesas.com>
+ <20260914201456.2018403-2-cosmin-gabriel.tanislav.xa@renesas.com>
+ <20260914202828.46A991F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Message-ID: <23d61058.962b.1a0a9e0b355.Coremail.zl020895@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID:ZigvCgB3r9v2dqpqhlJIAA--.26232W
-X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbCxhYgkWqqdvZsNQAA34
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260914202828.46A991F000FF@smtp.kernel.org>
 
-VGhhbmtzIEJhcnQsIExpbnVzLCBBbmR5LgoKQUNLOiBHUElPIGJpdHMgdGhyb3VnaCB0aGUgR1BJ
-TyB0cmVlLCB0aGVuIGFuIElCIGZvciB0aGUgU29DIHRyZWUuCkkgd2lsbCBrZWVwIGEgdW5pZmll
-ZCBzZXJpZXMgZm9yIG5vdy4KCnJlZ21hcC1pcnEgY2Fubm90IGRvIFBMMDYxIHR5cGUgKElTL0lC
-RS9JRVYsIGJvdGgtZWRnZSkgcGx1cyB0aGUKQU1CQSBjaGFpbmVkIGRlbXV4LgoKVHdvIG9wdGlv
-bnMgZm9yIHY4IOKAlCBBbmR5LCB3aGljaCBkbyB5b3UgcHJlZmVyPwogIDEpIENvbnZlcnQgUEww
-NjEgTU1JTyB0byByZWdtYXAgb25seS4gS2VlcCB0aGUgZXhpc3RpbmcgZ3Bpb19jaGlwCiAgICAg
-YW5kIGlycWNoaXAvZ2lycSAoZG91YmxlLXdyaXRlIHN0YXlzIGluIHRoZSBkcml2ZXIpLiBBbWJh
-cmVsbGEKICAgICBsYXlvdXQgY2FuIGJlIGEgZm9sbG93LXVwIG9uIHRoYXQuIE5vIGdwaW8tcmVn
-bWFwIHlldC4KCiAgMikgQWZ0ZXIgKDEpLCBhbHNvIG1vdmUgZ2V0L3NldC9kaXJlY3Rpb24gdG8g
-Z3Bpby1yZWdtYXAuIElSUQogICAgIHdvdWxkIHN0YXkgYSBjdXN0b20gUEwwNjEgaXJxY2hpcCAo
-bm90IHJlZ21hcC1pcnEpLiBJIGFtIG5vdAogICAgIHN1cmUgd2UgY2FuIGF2b2lkIGEgd2F5IHRv
-IGdldCB0aGUgZ3Bpb19jaGlwIGZvcgogICAgIGdwaW9jaGlwXypfaXJxKCkgLyB0aGUgY2hhaW5l
-ZCBoYW5kbGVyLgoKSSBhbSBsZWFuaW5nIHRvICgxKSBmb3IgdjguCgpCZXN0IHJlZ2FyZHMsCkxv
-bmcgWmhhbwoK5ZyoIDIwMjYtMDktMTYgMTg6MjM6NDXvvIwiQW5keSBTaGV2Y2hlbmtvIiA8YW5k
-cml5LnNoZXZjaGVua29AbGludXguaW50ZWwuY29tPiDlhpnpgZPvvJoKPk9uIFdlZCwgU2VwIDE2
-LCAyMDI2IGF0IDExOjQyOjU2QU0gKzAyMDAsIExpbnVzIFdhbGxlaWogd3JvdGU6Cj4+IE9uIFdl
-ZCwgU2VwIDE2LCAyMDI2IGF0IDExOjE04oCvQU0gQmFydG9zeiBHb2xhc3pld3NraSA8YnJnbEBr
-ZXJuZWwub3JnPiB3cm90ZToKPj4gPiBPbiBUdWUsIDE1IFNlcCAyMDI2IDEzOjE1OjMwICswMjAw
-LCBMb25nIFpoYW8gdmlhIEI0IFJlbGF5Cj4+ID4gPGRldm51bGwrbG9uZ3poYW8uYW1iYXJlbGxh
-LmNvbUBrZXJuZWwub3JnPiBzYWlkOgo+PiA+ID4gVGhpcyBzZXJpZXMgYWRkcyBtaW5pbWFsIEFt
-YmFyZWxsYSBDVjc1IHN1cHBvcnQgZm9yIGVhcmx5IGJyaW5nLXVwIHdpdGgKPj4gPiA+IGEgc2Vy
-aWFsIGNvbnNvbGU6IERUIGJpbmRpbmdzLCBSQ1QgY2xvY2tzLCBwaW5jdHJsLCBQTDA2MSBHUElP
-IHZpYQo+PiA+ID4gZ3Bpby1yZWdtYXAsIDgyNTBfZHcgVUFSVCBxdWlya3MsIEFSQ0hfQU1CQVJF
-TExBLCBDVjc1IEVWSyBEVCwgYW5kCj4+ID4gPiBNQUlOVEFJTkVSUy4KPj4gPiA+Cj4+ID4gPiBU
-aGlzIGlzIGEgc2luZ2xlIHVuaWZpZWQgc2VyaWVzLiBQbGVhc2UgYXBwbHkgdmlhIHRoZSBTb0MK
-Pj4gPiA+IHRyZWU7IHN1YnN5c3RlbSBtYWludGFpbmVycyBhcmUgQ2MnZCBmb3IgdGhlaXIgcGll
-Y2VzLgo+PiA+Cj4+ID4gSSB3b3VsZCBwcmVmZXIgdG8gdGFrZSB0aGUgR1BJTyByZWdtYXAgYml0
-cyB0aHJvdWdoIHRoZSBHUElPIHRyZWUgYW5kIHByb3ZpZGUKPj4gPiBhbiBpbW11dGFibGUgYnJh
-bmNoIHRvIHRoZSBTb0MgdHJlZSBhcyBpdCBoYXMgcG90ZW50aWFsIGZvciBjb25mbGljdHMgdGhh
-dAo+PiA+IGVhcmx5IGludG8gdGhlIGN5Y2xlLgo+PiAKPj4gUXVldWUgdGhlbSB1cCBhbmQgc2Vu
-ZCB1cyB0aGUgSUIgaWYgeW91IHRoaW5rIHRoZXkgYXJlIHJlYWR5IQo+PiAKPj4gTG9uZyBjYW4g
-cHJvYmFibHkgc2VuZCBhIFBSIGJhc2VkIG9uIHRoYXQgSUIgZm9yIHRoZSByZXN0IHRvIHRoZQo+
-PiBTb0MgdHJlZSwgYSBiaXQgdHJpY2tzeSBidXQgaXQgd29ya3MuCj4KPkknbSBzdGlsbCB1bnN1
-cmUgd2h5IHdlIGNhbid0IHVzZSBJUlEgZmFjaWxpdHkgZnJvbSBncGlvLXJlZ21hcC4KPkNhbiB5
-b3UgaGF2ZSBhIGxvb2sgdGhlcmU/Cj4KPldpdGggdGhhdCBiZWluZyBzYWlkLCBJJ20gbm90IHN1
-cmUgdGhhdCB0aGUgcGF0Y2ggdGhhdCBleHBvc2luZyBncGlvX2NoaXAKPmZyb20gZ3Bpby1yZWdt
-YXAgaXMganVzdGlmaWVkLgo+Cj5UaGUgd2hvbGUgR1BJTyByZXdvcmsgbmVlZHMgYSBiaXQgbW9y
-ZSByb3V0aW5lIHdvcmsgKHJlc3BsaXR0aW5nLCByZWZhY3RvcmluZywKPmV0IGNldGVyYSksIHNv
-IGxhdGVyIHdlIG1heSBzZWUgY2xlYXJlciB3aGF0J3MgZ29pbmcgb24uCj4KPi0tIAo+V2l0aCBC
-ZXN0IFJlZ2FyZHMsCj5BbmR5IFNoZXZjaGVua28KPgo=
+On Mon, 14 Sep 2026, sashiko-bot@kernel.org wrote:
+
+> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
+> - [Medium] The patch replaces a standard API call with a bespoke pointer arithmetic helper to retrieve parent data, cementing an MFD architectural guideline violation.
+> - [Low] The commit message description starts with a lowercase letter, violating MFD subsystem guidelines.
+
+Please review, explain or fix the Sashiko review(s).
+
+If this is a set, this request includes the other patches too.
+
+> --
+> 
+> commit 8098c2550655f8bdfa6c7acd0a4b1dfbc4e57e2a
+> Author: Cosmin Tanislav <cosmin-gabriel.tanislav.xa@renesas.com>
+> 
+> mfd: rz-mtu3: do not use struct rz_mtu3_channel::dev
+> 
+> Channels 1 and 2 are used by both the PWM and counter drivers. Both
+> subdrivers assign struct rz_mtu3_channel::dev to their own device
+> instance for those shared channels, so the value stored in it depends on
+> which subdriver binds last.
+> 
+> > mfd: rz-mtu3: do not use struct rz_mtu3_channel::dev
+> 
+> [Severity: Low]
+> Does this commit message subject violate the MFD subsystem formatting
+> conventions? The guidelines mandate capitalizing the description after the
+> subsystem prefix, e.g., "mfd: <Driver>: <Capitalized description>".
+> 
+> > diff --git a/drivers/mfd/rz-mtu3.c b/drivers/mfd/rz-mtu3.c
+> > index 0a254e61ec0a5..d809436e2124c 100644
+> > --- a/drivers/mfd/rz-mtu3.c
+> > +++ b/drivers/mfd/rz-mtu3.c
+> > @@ -60,10 +60,17 @@ static bool rz_mtu3_is_16bit_shared_reg(u16 offset)
+> >  		offset == RZ_MTU3_TCNTSA || offset == RZ_MTU3_TCNTSB);
+> >  }
+> >  
+> > +static inline struct rz_mtu3_priv *rz_mtu3_ch_to_priv(struct rz_mtu3_channel *ch)
+> > +{
+> > +	struct rz_mtu3_channel *first_ch = ch - ch->channel_number;
+> > +	struct rz_mtu3 *mtu = container_of(first_ch, struct rz_mtu3, channels[0]);
+> > +
+> > +	return mtu->priv_data;
+> > +}
+> 
+> [Severity: Medium]
+> Does the introduction of rz_mtu3_ch_to_priv() violate MFD guidelines for
+> parent data access?
+> 
+> The MFD guidelines explicitly state that child drivers must directly access
+> parent data using standard APIs (like dev_get_drvdata) and to avoid writing
+> bespoke helpers in the parent. 
+> 
+> While this replaces dev_get_drvdata(ch->dev->parent) to avoid depending on
+> subdriver-populated state, substituting it with a custom helper using pointer
+> arithmetic (ch - ch->channel_number) tightly couples the implementation to
+> the physical layout of the channels array.
+> 
+> Could the child drivers be refactored to retrieve the parent data themselves
+> instead of introducing this bespoke accessor?
+> 
+> -- 
+> Sashiko AI review · https://sashiko.dev/#/patchset/20260914201456.2018403-1-cosmin-gabriel.tanislav.xa@renesas.com?part=1
+
+-- 
+Lee Jones
