@@ -1,115 +1,276 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from courrier.aliel.fr (courrier.aliel.fr [65.21.61.41])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 337C54EC678;
-	Wed, 16 Sep 2026 11:22:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F5BA3E171F
+	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 13:01:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=65.21.61.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789557733; cv=none; b=GHwNPEVIi+8zr4bLK4akqeoim+c/BCsUDdtQkm80ncn24dXF9jurU81Zj7498QXK8ZnMfpGBCAwagG2U5MwGT4BYEBhXvHvpFrC/KnYAU1mA6t1lTEKhk/YQzAX2s+1ifZcmcR7tQdyqoUK8jkFuihRRBazKg2OrAsm6jFo2ghQ=
+	t=1789563719; cv=none; b=tVJ/0jCTyycIGhLbfOGjfTH8TiVwjZ5WixfqYZPcD0tAf/qWTIIoWey2zlGEl1ldU2h/XtX25nhCvNxBtrbSjuExe+SdOU+eguRWD5jDXhR8PqvDfCaL+6a/OtCHy8uzwJyUXMwzh0MOOjhb+2nAevrwXqX4z0VLzl0Mo6qJA6A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789557733; c=relaxed/simple;
-	bh=F4tNhj582OFHSkSYr3E5i0u16GEo/PD6lsqkjPUqJeg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=FHG2rbzau/Pi2eYjV5CRMUS16FTgA/6uQS45VbMvf/3rffsNoCmX+WW0Mm9FZrx+QDxOV79kwDH+mHpV7t7zfFdXkTJeii5PB0qW4IpE31OBQEXkN7tEbN+cdEJpNzjEaK2luks0n2BOrwsx8TTz7y/X2dKCfVA04NVBF8acvGY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ahEjjpuP; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789563719; c=relaxed/simple;
+	bh=rrewkVtepVS6AYm0+2LOcrtcOwzSIbzO1eGTDAZuq8A=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=SXRbRpqx7fTkBAAhk9EKQ/OeIFh/aY75k0TO5sg81V1+S3aL7+GK2HO7HqdQlyxnsFQY2LZyzmTMWqFZ3QxDtFVEi3ozouKpJNq9op0GxczI4GJcCwtLfNDYk1wEjMvvVoFOS8Mt+3Ks/86AadHA3PTs4aD1Eq91wFzW5FBVk0I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=aliel.fr; spf=pass smtp.mailfrom=aliel.fr; dkim=pass (1024-bit key) header.d=aliel.fr header.i=@aliel.fr header.b=WoidFiOn; arc=none smtp.client-ip=65.21.61.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=aliel.fr
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=aliel.fr
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ahEjjpuP"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7D7DA1F000FF;
-	Wed, 16 Sep 2026 11:21:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789557719;
-	bh=gD7w5VVQ3g5qNpNjChQr/b3F5YLn6o8rO2n40UFb5tg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=ahEjjpuPVCkG2MdaRTkUqzMva32AuIu5AN9ywxz1skbJFS2O7oriO0PRDN9j29shy
-	 tS19546+sJ6k+zUkFWyoaLaJSWRFvM0AgEd2er3N352g+CzkdwClmN5GOXG3lrYaM6
-	 3GJdz8PQjPfriUFJN4IAH/19vwS1w+Uuah+vldIpEJZktwupJkkGvFH7Vwz29tI2Bv
-	 NjnLwOTHUHvwCY1mXfh/RjrundUhjM+4SaHH/ESCrqIJv6RFGm428OCqEZgfmooUgc
-	 Ulzp1ar4aB+wVhXvSb2AjxYeKxRlCc0Ed1FoGNE2JjzP88mT2zYCPuO8LNOMi+uN5L
-	 ZjnobDWUE41Mw==
-Date: Wed, 16 Sep 2026 12:21:55 +0100
-From: Lee Jones <lee@kernel.org>
-To: sashiko-reviews@lists.linux.dev
-Cc: Cosmin Tanislav <cosmin-gabriel.tanislav.xa@renesas.com>,
-	mfd@lists.linux.dev
-Subject: Re: [PATCH 1/3] mfd: rz-mtu3: do not use struct rz_mtu3_channel::dev
-Message-ID: <20260916112155.GQ11487@google.com>
-References: <20260914201456.2018403-1-cosmin-gabriel.tanislav.xa@renesas.com>
- <20260914201456.2018403-2-cosmin-gabriel.tanislav.xa@renesas.com>
- <20260914202828.46A991F000FF@smtp.kernel.org>
+	dkim=pass (1024-bit key) header.d=aliel.fr header.i=@aliel.fr header.b="WoidFiOn"
+Message-ID: <b391c2d1-4a76-4419-b76b-4246f1363bc7@aliel.fr>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=aliel.fr;
+	s=courrier-s1; t=1789563712;
+	bh=rrewkVtepVS6AYm0+2LOcrtcOwzSIbzO1eGTDAZuq8A=;
+	h=Date:From:Subject:To:Cc:References:In-Reply-To;
+	b=WoidFiOnKLfiITb4eYcrjoEaeAziA7/vtvJDXzP3+ZiDXkdbBHeqRx2yfBRYtS43y
+	 J6PiUTC/baX6P9S9pyNcIKFLEIgD82S9StKPdifg1FSZ3WvIJtadT/xnEGYVvTY4n8
+	 bDAwA+56/f7JZgXmvr3AZ55QEMVv1XKudZQPEaD0=
+Date: Wed, 16 Sep 2026 15:01:42 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260914202828.46A991F000FF@smtp.kernel.org>
+User-Agent: Mozilla Thunderbird Beta
+From: linux-kernel-dev@aliel.fr
+Subject: Re: [PATCH v11 3/6] mfd: khadas-mcu: Add support for VIM4 MCU variant
+To: Lee Jones <lee@kernel.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
+ Kevin Hilman <khilman@baylibre.com>, Jerome Brunet <jbrunet@baylibre.com>,
+ Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+ Beniamino Galvani <b.galvani@gmail.com>,
+ "Rafael J. Wysocki" <rafael@kernel.org>,
+ Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+ Lukasz Luba <lukasz.luba@arm.com>, Liam Girdwood <lgirdwood@gmail.com>,
+ Mark Brown <broonie@kernel.org>, linux-amlogic@lists.infradead.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-i2c@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-pm@vger.kernel.org, mfd@lists.linux.dev
+References: <20260902-add-mcu-fan-khadas-vim4-v11-0-5f1610d83bf0@aliel.fr>
+ <20260902-add-mcu-fan-khadas-vim4-v11-3-5f1610d83bf0@aliel.fr>
+ <20260910142153.GF1051768@google.com>
+Content-Language: en-US
+In-Reply-To: <20260910142153.GF1051768@google.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, 14 Sep 2026, sashiko-bot@kernel.org wrote:
+On 9/10/26 4:21 PM, Lee Jones wrote:
+> On Wed, 02 Sep 2026, Ronald Claveau via B4 Relay wrote:
+> 
+>> From: Ronald Claveau <linux-kernel-dev@aliel.fr>
+>>
+>> Refactor probe() to use per-variant values
+>> instead of hardcoded globals.
+>>
+>> Add dedicated regmap configuration for the VIM4 MCU,
+>> with its own volatile/writeable registers.
+>>
+>> Introduce struct khadas_mcu_fan_pdata to pass the fan
+>> control register and duty-cycle levels per variant.
+>> VIM4 uses a different register and level set (0-100)
+>>  declared as a list (0, 30, 40, 55, 75, 100) compared
+>>  to previous boards (0-3).
+>>
+>> Add a new compatible string "khadas,vim4-mcu".
+>>
+>> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+>> Signed-off-by: Ronald Claveau <linux-kernel-dev@aliel.fr>
+> 
+> Generally fine.
+> 
+>> ---
+>>  drivers/mfd/khadas-mcu.c | 120 +++++++++++++++++++++++++++++++++++++++++------
+>>  1 file changed, 106 insertions(+), 14 deletions(-)
+>>
+>> diff --git a/drivers/mfd/khadas-mcu.c b/drivers/mfd/khadas-mcu.c
+>> index 0e74efe14f367..4cb305ac915e1 100644
+>> --- a/drivers/mfd/khadas-mcu.c
+>> +++ b/drivers/mfd/khadas-mcu.c
+>> @@ -75,47 +75,138 @@ static const struct regmap_config khadas_mcu_regmap_config = {
+>>  	.cache_type	= REGCACHE_MAPLE,
+>>  };
+>>  
+>> +static const unsigned int khadas_mcu_fan_levels[] = {
+>> +	0, 1, 2, 3,
+>> +};
+>> +
+>> +static const struct khadas_mcu_fan_pdata khadas_mcu_fan_pdata = {
+>> +	.fan_reg	= KHADAS_MCU_CMD_FAN_STATUS_CTRL_REG,
+>> +	.levels		= khadas_mcu_fan_levels,
+>> +	.nlevels	= ARRAY_SIZE(khadas_mcu_fan_levels),
+>> +};
+> 
+> I still don't think these belong in here.
+> 
 
-> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
-> - [Medium] The patch replaces a standard API call with a bespoke pointer arithmetic helper to retrieve parent data, cementing an MFD architectural guideline violation.
-> - [Low] The commit message description starts with a lowercase letter, violating MFD subsystem guidelines.
+I will move it to the fan driver.
 
-Please review, explain or fix the Sashiko review(s).
+>>  static const struct mfd_cell khadas_mcu_fan_cells[] = {
+>>  	/* VIM1/2 Rev13+ and VIM3 only */
+>> -	MFD_CELL_NAME("khadas-mcu-fan-ctrl"),
+>> +	MFD_CELL_BASIC("khadas-mcu-fan-ctrl", NULL, &khadas_mcu_fan_pdata,
+>> +		       sizeof(khadas_mcu_fan_pdata), 0),
+>>  };
+>>  
+>>  static const struct mfd_cell khadas_mcu_cells[] = {
+>>  	MFD_CELL_NAME("khadas-mcu-user-mem"),
+>>  };
+>>  
+>> +static bool khadas_mcu_vim4_reg_volatile(struct device *dev, unsigned int reg)
+>> +{
+>> +	switch (reg) {
+>> +	case KHADAS_MCU_PWR_OFF_CMD_REG:
+>> +	case KHADAS_MCU_VIM4_REST_CONF_REG:
+>> +	case KHADAS_MCU_WOL_INIT_START_REG:
+>> +	case KHADAS_MCU_VIM4_LED_ON_RAM_REG:
+>> +	case KHADAS_MCU_VIM4_FAN_CTRL_REG:
+>> +	case KHADAS_MCU_VIM4_WDT_EN_REG:
+>> +	case KHADAS_MCU_VIM4_SYS_RST_REG:
+>> +		return true;
+>> +	default:
+>> +		return false;
+>> +	}
+>> +}
+>> +
+>> +static bool khadas_mcu_vim4_reg_writeable(struct device *dev, unsigned int reg)
+>> +{
+>> +	switch (reg) {
+>> +	case KHADAS_MCU_VERSION_0_REG:
+>> +	case KHADAS_MCU_VERSION_1_REG:
+>> +	case KHADAS_MCU_SHUTDOWN_NORMAL_STATUS_REG:
+>> +		return false;
+>> +	default:
+>> +		return true;
+>> +	}
+>> +}
+>> +
+>> +static const struct regmap_config khadas_mcu_vim4_regmap_config = {
+>> +	.reg_bits	= 8,
+>> +	.reg_stride	= 1,
+>> +	.val_bits	= 8,
+>> +	.max_register	= KHADAS_MCU_VIM4_SYS_RST_REG,
+>> +	.volatile_reg	= khadas_mcu_vim4_reg_volatile,
+>> +	.writeable_reg	= khadas_mcu_vim4_reg_writeable,
+>> +	.cache_type	= REGCACHE_MAPLE,
+>> +};
+>> +
+>> +static const unsigned int khadas_mcu_vim4_fan_levels[] = {
+>> +	0, 30, 40, 55, 75, 100,
+>> +};
+>> +
+>> +static const struct khadas_mcu_fan_pdata khadas_mcu_vim4_fan_pdata = {
+>> +	.fan_reg	= KHADAS_MCU_VIM4_FAN_CTRL_REG,
+>> +	.levels		= khadas_mcu_vim4_fan_levels,
+>> +	.nlevels	= ARRAY_SIZE(khadas_mcu_vim4_fan_levels),
+>> +};
+>> +
+>> +static const struct mfd_cell khadas_mcu_vim4_fan_cells[] = {
+>> +	MFD_CELL_BASIC("khadas-mcu-fan-ctrl", NULL, &khadas_mcu_vim4_fan_pdata,
+>> +		       sizeof(khadas_mcu_vim4_fan_pdata), 0),
+>> +};
+>> +
+>>  static int khadas_mcu_probe(struct i2c_client *client)
+>>  {
+>> +	const struct mfd_cell *cells, *fan_cells;
+>> +	const struct regmap_config *regmap_cfg;
+>>  	struct device *dev = &client->dev;
+>> +	int ncells, nfan_cells, ret;
+>>  	struct khadas_mcu *ddata;
+>> -	int ret;
+>> +	const void *match;
+>>  
+>>  	ddata = devm_kzalloc(dev, sizeof(*ddata), GFP_KERNEL);
+>>  	if (!ddata)
+>>  		return -ENOMEM;
+>>  
+>> +	match = i2c_get_match_data(client);
+> 
+> The nomenclature can be improved here.
+> 
+> What are these?  Device ID?  Chip ID?  Revision?
+> 
 
-If this is a set, this request includes the other patches too.
+I will change this to 'mcu_variant'
 
-> --
+>> +	if (!match)
+>> +		return -ENODEV;
+>> +
+>> +	switch ((uintptr_t)match) {
+>> +	case KHADAS_MCU_GENERIC:
+>> +		regmap_cfg	= &khadas_mcu_regmap_config;
+>> +		cells		= khadas_mcu_cells;
+>> +		ncells		= ARRAY_SIZE(khadas_mcu_cells);
+>> +		fan_cells	= khadas_mcu_fan_cells;
+>> +		nfan_cells	= ARRAY_SIZE(khadas_mcu_fan_cells);
+>> +		break;
+>> +	case KHADAS_MCU_VIM4:
+>> +		regmap_cfg	= &khadas_mcu_vim4_regmap_config;
+>> +		cells		= NULL;
+>> +		ncells		= 0;
+>> +		fan_cells	= khadas_mcu_vim4_fan_cells;
+>> +		nfan_cells	= ARRAY_SIZE(khadas_mcu_vim4_fan_cells);
+>> +		break;
+>> +	default:
+>> +		return -ENODEV;
+>> +	}
+>> +
+>>  	i2c_set_clientdata(client, ddata);
+>>  
+>>  	ddata->dev = dev;
+>>  
+>> -	ddata->regmap = devm_regmap_init_i2c(client, &khadas_mcu_regmap_config);
+>> +	ddata->regmap = devm_regmap_init_i2c(client, regmap_cfg);
+>>  	if (IS_ERR(ddata->regmap)) {
+>>  		ret = PTR_ERR(ddata->regmap);
+>> -		dev_err(dev, "Failed to allocate register map: %d\n", ret);
+>> -		return ret;
+>> +		return dev_err_probe(dev, ret, "Failed to allocate register map\n");
+>>  	}
+>>  
+>> -	ret = devm_mfd_add_devices(dev, PLATFORM_DEVID_NONE,
+>> -				   khadas_mcu_cells,
+>> -				   ARRAY_SIZE(khadas_mcu_cells),
+>> -				   NULL, 0, NULL);
+>> -	if (ret)
+>> -		return ret;
+>> +	if (cells && ncells) {
+>> +		ret = devm_mfd_add_devices(dev, PLATFORM_DEVID_NONE,
+>> +					   cells,
+>> +					   ncells,
+>> +					   NULL, 0, NULL);
+>> +		if (ret)
+>> +			return ret;
+>> +	}
+>>  
+>>  	if (of_property_present(dev->of_node, "#cooling-cells"))
+>>  		return devm_mfd_add_devices(dev, PLATFORM_DEVID_NONE,
+>> -					    khadas_mcu_fan_cells,
+>> -					    ARRAY_SIZE(khadas_mcu_fan_cells),
+>> +					    fan_cells,
+>> +					    nfan_cells,
+>>  					    NULL, 0, NULL);
+>>  
+>>  	return 0;
+>> @@ -123,7 +214,8 @@ static int khadas_mcu_probe(struct i2c_client *client)
+>>  
+>>  #ifdef CONFIG_OF
+>>  static const struct of_device_id khadas_mcu_of_match[] = {
+>> -	{ .compatible = "khadas,mcu", },
+>> +	{ .compatible = "khadas,mcu", .data = (void *)KHADAS_MCU_GENERIC },
+>> +	{ .compatible = "khadas,vim4-mcu", .data = (void *)KHADAS_MCU_VIM4 },
+>>  	{},
+>>  };
+>>  MODULE_DEVICE_TABLE(of, khadas_mcu_of_match);
+>>
+>> -- 
+>> 2.49.0
+>>
+>>
 > 
-> commit 8098c2550655f8bdfa6c7acd0a4b1dfbc4e57e2a
-> Author: Cosmin Tanislav <cosmin-gabriel.tanislav.xa@renesas.com>
-> 
-> mfd: rz-mtu3: do not use struct rz_mtu3_channel::dev
-> 
-> Channels 1 and 2 are used by both the PWM and counter drivers. Both
-> subdrivers assign struct rz_mtu3_channel::dev to their own device
-> instance for those shared channels, so the value stored in it depends on
-> which subdriver binds last.
-> 
-> > mfd: rz-mtu3: do not use struct rz_mtu3_channel::dev
-> 
-> [Severity: Low]
-> Does this commit message subject violate the MFD subsystem formatting
-> conventions? The guidelines mandate capitalizing the description after the
-> subsystem prefix, e.g., "mfd: <Driver>: <Capitalized description>".
-> 
-> > diff --git a/drivers/mfd/rz-mtu3.c b/drivers/mfd/rz-mtu3.c
-> > index 0a254e61ec0a5..d809436e2124c 100644
-> > --- a/drivers/mfd/rz-mtu3.c
-> > +++ b/drivers/mfd/rz-mtu3.c
-> > @@ -60,10 +60,17 @@ static bool rz_mtu3_is_16bit_shared_reg(u16 offset)
-> >  		offset == RZ_MTU3_TCNTSA || offset == RZ_MTU3_TCNTSB);
-> >  }
-> >  
-> > +static inline struct rz_mtu3_priv *rz_mtu3_ch_to_priv(struct rz_mtu3_channel *ch)
-> > +{
-> > +	struct rz_mtu3_channel *first_ch = ch - ch->channel_number;
-> > +	struct rz_mtu3 *mtu = container_of(first_ch, struct rz_mtu3, channels[0]);
-> > +
-> > +	return mtu->priv_data;
-> > +}
-> 
-> [Severity: Medium]
-> Does the introduction of rz_mtu3_ch_to_priv() violate MFD guidelines for
-> parent data access?
-> 
-> The MFD guidelines explicitly state that child drivers must directly access
-> parent data using standard APIs (like dev_get_drvdata) and to avoid writing
-> bespoke helpers in the parent. 
-> 
-> While this replaces dev_get_drvdata(ch->dev->parent) to avoid depending on
-> subdriver-populated state, substituting it with a custom helper using pointer
-> arithmetic (ch - ch->channel_number) tightly couples the implementation to
-> the physical layout of the channels array.
-> 
-> Could the child drivers be refactored to retrieve the parent data themselves
-> instead of introducing this bespoke accessor?
-> 
-> -- 
-> Sashiko AI review · https://sashiko.dev/#/patchset/20260914201456.2018403-1-cosmin-gabriel.tanislav.xa@renesas.com?part=1
+
 
 -- 
-Lee Jones
+Best regards,
+Ronald
