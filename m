@@ -1,131 +1,88 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55286449EB8
-	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 07:25:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5720148032F
+	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 09:14:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789543564; cv=none; b=A3YBtBYukx1dwviCaaShqILCs2naI3tAvNZdMeKWer4sDBu2cwLSQ1SvyFgLyfy3cxPIiBysudLHLBbpiNVtCZxjMkPoT2ASWa65DGmCWWN+7tiQ6dHcPYyWSgRr2EoDKtQuGthSxuVVLFXJRzWANof2b0weLLALVvMcQbd7rCg=
+	t=1789550078; cv=none; b=kvOOiHFuQACbIC+yQYI7oMUWp050RBY4Um+0N/cLGkuOsKCAvIum6JDCtliAUvr0FUVVQPDRYTh1Y78BCmLnPPqrfl+CwNKpGsCR8i8n9Q4ry5ZnVV2MOU/j+L+PlgaKyou0/S68bI6qzaq0koYAZt2PBRQ2037JBm6Iatvinhs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789543564; c=relaxed/simple;
-	bh=oQP+u4JD3Tz5keSnn55jVh1FaFdJ9BK5OQaBPfBOUpo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=b7DPQHD/J10vdAKsOwjMRHyOHMHR0oUoLebM67rdLntEpY/sRPGpAUJetepJU0slxQmdTzrl/RSmd20Uyvso8e7SGTvsh+Gq0tzvUbJ3fXB2gSXtC1q95UyGdRBq5oN3py4aZPh6lvwLxuyZy/KqVbv9U1jSEOrj2R3GLl1afmA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=jYr8L4N/; arc=none smtp.client-ip=198.175.65.18
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	s=arc-20240116; t=1789550078; c=relaxed/simple;
+	bh=IqWr3OCkEbgbUvmDu/uRyxYgoRP9YkYUb5hBzz6eFS4=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=EHOwsLYjXfA683gLfiABBVTw5J2TsrG/k1f6nGbcXUuXQGMBUdDDVzlJrggphDZWwovALuntsFCLWrqV1TJSw/d4DjES+sQhRmrTfzVu/8v0v9pcTMP0qa2ikSzaxm0K/pEJzEH8D+O2l5Wv5pcBl3Kv6jAu0i7B2Gapj6Bzf+c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=G4629f/U; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="jYr8L4N/"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789543550; x=1821079550;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=oQP+u4JD3Tz5keSnn55jVh1FaFdJ9BK5OQaBPfBOUpo=;
-  b=jYr8L4N/4ho3+lPFxfB1vITEN6twbCptDLUl8NiafoYkcH8UZGJzrd3Z
-   iIhDXTibL6F9E8nhRi2ZPF8XbuN93Yf1vVi327foyqUMOvQmAJElyP4+2
-   t512ivTZlccIcWPzPFqUcqtHWNdd2KnylscndIC1reVp6FZnb8MOqoFz/
-   PQSMVgI9an63vLjHe8aQ3R9WyjbHaAVewyhOEIejomoMS8cnJH8xsIErs
-   TR44eKhMjqJl75DSVT8FcfxLbCMQERh+agFccAyHP+KOW/BBZNS4crZ7P
-   lHwYZARSoMRiFldB3Uqx2dNLO0JVCOLkV+dNICpiB90zPfafCoePKnEEp
-   Q==;
-X-CSE-ConnectionGUID: lEOURlGYSnWuMRwLwugtfw==
-X-CSE-MsgGUID: wJenTjxLRyKtwkVGHO7fIg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="89959162"
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="89959162"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 00:25:47 -0700
-X-CSE-ConnectionGUID: nTnSttqCQES/gWJVAsRRsg==
-X-CSE-MsgGUID: A0T+wDLMR3WnLm9aCFqeiQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="273222953"
-Received: from ettammin-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.244.145])
-  by orviesa007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 00:25:45 -0700
-Date: Wed, 16 Sep 2026 10:25:43 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Maria Lisina <sekoohaka.sarisan@gmail.com>
-Cc: Lee Jones <lee@kernel.org>, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v5] mfd: intel-lpss: Clean up and modernize DebugFS usage
-Message-ID: <aqpEd2uG4IOFmw_L@ashevche-desk.local>
-References: <20260916-intel-lpss-debugfs-v5-1-99295f534067@gmail.com>
- <aqpD4q6jMw2FdArD@ashevche-desk.local>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="G4629f/U"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 148C51F0089E
+	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 09:14:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789550045;
+	bh=IqWr3OCkEbgbUvmDu/uRyxYgoRP9YkYUb5hBzz6eFS4=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=G4629f/UcKe7I5SlFPmwy6hXIMvYowntf5zI+TVR5dUYVPVgiH/HGqzVVCQI9+K9x
+	 r9HPN+Oq8a/822bZWof702+JiwGheNgxzoaFwJMc07QmoyD69TKuZGt8ZvBqRKU6E5
+	 ydySK/Mu/7VVjVD/79Z1Y5Ol/GL3efea9FLw+lj2hnBatbnfO+98mZlzKsTeq8+fcr
+	 iPlHBdT68m0oPDLgPCIoPG7jwOFP+zKzdDXx3QpR6bSNenfMopFTUSZwA8SdG+this
+	 V4rtdEx7iar3eLNPj3luvexbGMwq2uVwhh9X4fLIgHt12mph04moHTNd7A89RwSgXR
+	 KdWQOXnCs808g==
+Received: by mail-lr2-f33.google.com with SMTP id 38308e7fff4ca-3a2ff16c0e6so5416251fa.0
+        for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 02:14:04 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBxeg9EZ3dQ1FBKk3QEsoD1cwXTMB81mnKUtGRIcdXbqqqeo2UJsI29/hac+fCqmvHyDNjs=@lists.linux.dev
+X-Gm-Message-State: AFuF++lXnRHZbN4P57m7VJBQ3Cm4krQ15PYdIbeNQgmipPU9dPwY1Jf0
+	8lQoJszWU0NJAIUYqaw5HiwN7o4863aCR0vqjjTMLCF6zYFcpyBArTrwG2JmEZ2q/ExMIkerPlQ
+	NPIZPlLRNHtl+BpNsQsb6001lIBeOXOb4/hn6N5SpWg==
+X-Received: by 2002:a2e:b8c3:0:b0:3a2:72c:cde9 with SMTP id
+ 38308e7fff4ca-3a5dc9a7cefmr3078451fa.4.1789550043681; Wed, 16 Sep 2026
+ 02:14:03 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 16 Sep 2026 05:14:01 -0400
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 16 Sep 2026 05:14:01 -0400
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260915-cv75-v5-v7-0-3297d3fbc9c0@ambarella.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aqpD4q6jMw2FdArD@ashevche-desk.local>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+References: <20260915-cv75-v5-v7-0-3297d3fbc9c0@ambarella.com>
+Date: Wed, 16 Sep 2026 05:14:01 -0400
+X-Gmail-Original-Message-ID: <CAMRc=McEOcWq8i3B01AR1PnfBzSQaLEaOzE6Qa+QdVXrvS_YrA@mail.gmail.com>
+X-Gm-Features: AcwNN1V2X8i9yMMrAT1QmpJK0AF7EkMhYvRTvc6M9zTS3HHfv-L8qE4KXcdtIiI
+Message-ID: <CAMRc=McEOcWq8i3B01AR1PnfBzSQaLEaOzE6Qa+QdVXrvS_YrA@mail.gmail.com>
+Subject: Re: [PATCH v7 00/15] Ambarella CV75 SoC minimal bring-up
+To: longzhao@ambarella.com
+Cc: Long Zhao via B4 Relay <devnull+longzhao.ambarella.com@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
+	Jerome Brunet <jbrunet@baylibre.com>, Linus Walleij <linusw@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Jiri Slaby <jirislaby@kernel.org>, Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
+	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Long Zhao <zl020895@163.com>, 
+	Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, Arnd Bergmann <arnd@arndb.de>, 
+	Krzysztof Kozlowski <krzk@kernel.org>, Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org
+Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Sep 16, 2026 at 10:23:18AM +0300, Andy Shevchenko wrote:
-> On Wed, Sep 16, 2026 at 03:13:35AM +0500, Maria Lisina wrote:
-> 
-> Thank you for the update, my comments below.
-> 
-> > The DebugFS API is designed to handle errors gracefully.
-> > Any explicit checking on return values is considered an anti-pattern.
-> > 
-> > This patch removes unnecessary error checking and converts
-> > intel_lpss_debugfs_add() into a void function.
-> 
-> Yep, these two paragraphs are good!
-> 
-> > While at it, this patch also clean ups legacy and deprecated usage
-> > of S_IRUGO macro and debugfs_remove_recursive() function.
-> 
-> No, this should be a separate patch.
+On Tue, 15 Sep 2026 13:15:30 +0200, Long Zhao via B4 Relay
+<devnull+longzhao.ambarella.com@kernel.org> said:
+> This series adds minimal Ambarella CV75 support for early bring-up with
+> a serial console: DT bindings, RCT clocks, pinctrl, PL061 GPIO via
+> gpio-regmap, 8250_dw UART quirks, ARCH_AMBARELLA, CV75 EVK DT, and
+> MAINTAINERS.
+>
+> This is a single unified series. Please apply via the SoC
+> tree; subsystem maintainers are Cc'd for their pieces.
+>
 
-...
+I would prefer to take the GPIO regmap bits through the GPIO tree and provide
+an immutable branch to the SoC tree as it has potential for conflicts that
+early into the cycle.
 
-> > -static int intel_lpss_debugfs_add(struct intel_lpss *lpss)
-> > +static void intel_lpss_debugfs_add(struct intel_lpss *lpss)
-> >  {
-> 
-> > -	struct dentry *dir;
-> > -
-> > -	dir = debugfs_create_dir(dev_name(lpss->dev), intel_lpss_debugfs);
-> 
-> > +	lpss->debugfs =
-> > +		debugfs_create_dir(dev_name(lpss->dev), intel_lpss_debugfs);
-> 
-> > -	lpss->debugfs = dir;
-> 
-> This is unneeded churn. Yes, I understand that dir won't be used, but if you
-> really want to refactor do it in a separate change.
-> 
-> >  }
-
-...
-
-> >  static void intel_lpss_debugfs_remove(struct intel_lpss *lpss)
-> >  {
-> > -	debugfs_remove_recursive(lpss->debugfs);
-> > +	debugfs_remove(lpss->debugfs);
-> 
-> Hmm... Why?
-
-Answering this will give you...
-
-> >  }
-
-...
-
-> So, if you really want a refactoring, split this to up to three patches:
-> 1) drop debugfs checks along with the warn message (as your initial goal);
-> 2) replace macros by plain octal values for the permissions (optional);
-> 3) assign debugfs directory directly (optional).
-
-4) replace debugfs_remove_recursive() with debugfs_remove() (optional).
-
--- 
-With Best Regards,
-Andy Shevchenko
-
-
+Bart
