@@ -1,141 +1,112 @@
-Received: from mail-lf2-f12.google.com (mail-lf2-f12.google.com [74.125.229.204])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 42ECD519922
-	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 14:37:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.229.204
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 719A551FCB6;
+	Wed, 16 Sep 2026 14:37:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789569427; cv=none; b=pPzzgvZHSxHoowpdHxzS5BRflM8JKOupheKpY7n62X9+OXy7GQRfRwI6iV+z82uBs7O/GblJfLkl+fYGtsy4cwDIEpO6/L6lZVxs2Bt8mPtZQR2wbUSI1PjC+h8tEbt7jCJZGQF+xabg4Qof4UVnByw/DzFp5kz0I+q3pTTxK0I=
+	t=1789569431; cv=none; b=Eew+XugR0eXqK6Asi52Pdak0VqS098aAHHdghKOum5M0CTdLkcImImnRN1B1jcnRVO18aHbhHho9/LiT5QC4rY6MsIMp9RhjeJugQRmDsOeJMJ9GyU0f68UYWWUoDzf+CnifjTzPH1rDcXA1mE0AEszQFDWZzKcgTE8204d+ZcE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789569427; c=relaxed/simple;
-	bh=xNWXjh2jZNqUOiPZC4IQkFyQMkKV6evtU42asOP+reA=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=sm8DVPlduBJ2N8G4Xj3vv+l6TYOgEetUpyC4+EMeLkCaIU2l6Lmw3pikKz9KL7Y/YInDq/uKWl1nm1x6XB1jm1Xg5BVtRJW6XNyRgY3OKqzpg1N3fyD6//gxuDOS1X6fPkUeTRI/xqMkecRDO6wVfLTC2ilPHSMumLTuVI9YLig=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VNbYbBvz; arc=none smtp.client-ip=74.125.229.204
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1789569431; c=relaxed/simple;
+	bh=u5YbA0lJn7jafcJOoRIhi8zIOC3l9Ds9QNgAHW2+WSc=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=RJwVfmmnglJMj5fMMm4BF7IlQM9q92dFJ3k3Jf2IWaBC+W+ffEI9NFitA7LL8OBOK8meyY9avqpe1PuB8bv/gZunR7jQxDM1mu45sD5GuLsEwGUCACty696Pjd52v+hW3ngwYktBVZe2zdlqp7Cf0mWqC3cShgu9rozORQFn6Ek=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MXYDnN82; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VNbYbBvz"
-Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b79784a6edso1170861e87.1
-        for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 07:37:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789569421; x=1790174221; darn=lists.linux.dev;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ufX6v0lew7XrjHWTQTFcEf1Xg5s99AqsmFqOBj55n5o=;
-        b=VNbYbBvz6bHJ5k8Obu8Rdc8Uox050ei0gXIczqLiKWZWS50TOCwdr3fZ9GdSfUFNil
-         M8BM958bzAAGcD6FH/HHRN7hAhKpDJXjBYGpXrBBgkQ58GwZFfdFHJP9dordTqPcrYnr
-         Iat0qB7rQcKm0zM/qPuc52X6tSCP8g+NQ2+Uj0+GXUHHKg24evvnpRxXhjAhA4P2EOMn
-         8H8WtFjUpSEmwixpexiWA5HEQyJ8T4z2LpAVFEfC4sonNhW4aKuNCHRtS5A0s1jiVcDT
-         AK/Ov7lfe276BqzSmnrm/EDhySNXHLzUn5StVM7JITVOVweZcBQ4eEbuYBmKX+R6RrLs
-         FNJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789569421; x=1790174221;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ufX6v0lew7XrjHWTQTFcEf1Xg5s99AqsmFqOBj55n5o=;
-        b=CqLuGaTDEd2kf7cmiKVuN51eAL22YYHhBhvdMw9WEr3N//MoogdnyqrE0bnHvEvNix
-         AVp1d7b4Orq6asZD+a+uhlKaatV3lv1cb5+rmrs3tcajbxKyF5p7k9xydDnJ4Yz8YmHe
-         EL76CXnQwwIDJFcAQJldt0oKfTy6550NbEVHPOq90GF+65vkPobbkpeqEC3ZL40GoJht
-         ljKPsCE31jDPYr1f3QwwhGOIy4WjEjl7q5cUHh3TIWtjgOGr1zj2tLwV6kqY/pgwP2Ar
-         MfxnEPQnElI37QqGxoHGOwTZw0mDviS02vMfOmRsAo3olhilosg4MsX6h6xxyXVWR3TR
-         0H2g==
-X-Gm-Message-State: AFuF++nyiadpmoXyYx2EaqE8BgEZbajvWFfXHZRxZt2KuGcGLGsFa/yJ
-	8cqGs9PfREkpNtI8k+nISGvq7O85Int2X7EVoN+UENOZF9l6xtVtW6s=
-X-Gm-Gg: AYBFou2I0j9t1UDCE7faQOdH755GmcxGRY4o/PW42xTDJTrZAD3OqJM5cExs73Ynavf
-	sCK/bkalwGBFLV5/SYaTCNCiNklJxsED4SjAIu+sOtT+tNwxAoqI/ozFb4CACGV6YXqPv7/ucWp
-	hqDNd4tCX0i/W74Uh2sMPnQYTZrAy07TljH1BbVaIOBdd4ppgFkmGyjn6r25Fs6SePTSefd5V/5
-	Zk2FIQf08kgp/N5DXsOwiK+QhuzrF9b/Sy3aA4OO0TBtRB50o1bIa/sAVkZd63/k/2+7jba3is1
-	FvFs8mM/Ca8/Fx6kaL8p3QrukREPyjT+NzGjVTgF4ll+4U1ex2lQg+LpsPq3SsTaGm2+y66HBJL
-	blCflcNKWznh/dfjtNp2Pd5zm3JQrASUzCn7IbcxxTfzPPp2Kq29yYtCr7vOeD3G/mz3+gKaXsM
-	FsEMcdZug59u4yx205GamayOZIWVPajgyZyUN+gs6iw2/dzxAKQTUeMR58oLMBnUvgJsBKrYqlC
-	N/uzYMqOpLhGD4/Jy/Vkgk17i/BXIUYlfYA
-X-Received: by 2002:a05:6512:2390:b0:5b7:518a:fe57 with SMTP id 2adb3069b0e04-5b8b664c839mr925372e87.39.1789569420831;
-        Wed, 16 Sep 2026 07:37:00 -0700 (PDT)
-Received: from [127.0.0.1] (sekoohaka.ddns.net. [151.243.208.241])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b8b57c3d46sm978675e87.19.2026.09.16.07.36.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Sep 2026 07:37:00 -0700 (PDT)
-From: Maria Lisina <sekoohaka.sarisan@gmail.com>
-Date: Wed, 16 Sep 2026 19:36:41 +0500
-Subject: [PATCH v6 3/4] mfd: intel-lpss: Remove extra DebugFS dentry
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MXYDnN82"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9125F1F000FF;
+	Wed, 16 Sep 2026 14:37:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789569430;
+	bh=WmD7+JkdWSw5bXD8OLAxj69nU9CDDrx2HTygqDjUwHo=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=MXYDnN82sgfKyS0kVNgDXOfkvg76I+iXYBnnbYS62lYTWaWczLaRP+cNZC0xVJ1IP
+	 skOFzs1/i9uHZ27QZsrbg3SZrbaDX+aYl5CcOI5+lu5sJVBpU66RfNPiAk+Z2/8qYv
+	 Ohvy6pIGr7VG376dHibYR0FxhgQ0K4D+i8pox1ZqDdZJahZ0SKw2n9xXlhvsWW9Uhj
+	 SMJXK3T4e4WDL43JlpmwaLKyAGds4k+sMIAedJSHZMpGpWUIvEYVISFvHph82LfQug
+	 QPHTe+xMqHif9J31QUkXL5IFy5AB86p3XDHn7jXvGcooV5+ihlrdoEhWlUAxcsjpyQ
+	 TLASaUIdo33+w==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v2 19/19] arm64: dts: qcom: generalmobile-shamrock: new
+ device
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Muzaffer Kadir" <muzafferkadir@mainlining.org>
+Cc: robh@kernel.org, linux-clk@vger.kernel.org, linux-input@vger.kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org, dmitry.torokhov@gmail.com, mfd@lists.linux.dev, lee@kernel.org, dri-devel@lists.freedesktop.org
+In-Reply-To: <20260916-msm8952-initial-support-v2-19-798c2602dde1@mainlining.org>
+References: <20260916-msm8952-initial-support-v2-0-798c2602dde1@mainlining.org>
+ <20260916-msm8952-initial-support-v2-19-798c2602dde1@mainlining.org>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Wed, 16 Sep 2026 14:37:09 +0000
+Message-Id: <20260916143709.9125F1F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260916-intel-lpss-debugfs-v6-3-5c118ac430ed@gmail.com>
-References: <20260916-intel-lpss-debugfs-v6-0-5c118ac430ed@gmail.com>
-In-Reply-To: <20260916-intel-lpss-debugfs-v6-0-5c118ac430ed@gmail.com>
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
- Lee Jones <lee@kernel.org>
-Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
- Maria Lisina <sekoohaka.sarisan@gmail.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1487;
- i=sekoohaka.sarisan@gmail.com; h=from:subject:message-id;
- bh=xNWXjh2jZNqUOiPZC4IQkFyQMkKV6evtU42asOP+reA=;
- b=owEBbQKS/ZANAwAKARPrfuqZo5+iAcsmYgBqqqmH447aC/HryKCjz2EfIa561rW+fvUeP1DmG
- vL+R1k+6tGJAjMEAAEKAB0WIQQ8HZKKOdqg5DRiM0sT637qmaOfogUCaqqphwAKCRAT637qmaOf
- om5wD/wP7wOu9p6ii/PYG1fI6dc3hxzCshOrpD28DfA7aO6j6fpT8C6pqOy+IB8hNyOHdIuEygF
- m3vRvYjbVuxlafJMj2V7enO5sL9+JzSkwmwyqT3DfF54FDzN2CQluqK1j1lAzABNxm6gXT3AnMy
- 1TgVpnsxo2P86wkNrVguuP4058uUdmzABaxY5SvP2mhEf7MZNKxELna8AmCWfwknQxsHi9VFwj/
- vmGpksHlt9kKZFbO8yOSZMw4hu46d6tPGq8xRJcgbz5qrzbYdvL/xHlCPyk0I3NBBOI1JQ27K60
- Klqkb7ecbF1y7+nQluNUwUQ3TKO4Nkus7b2ITGNXdBijPsOpt1Zwn+V5iNlDuHP32iJtNj1P3IY
- yIRBT5qYMexWcZIwkEeeZLAYn4ZPD3GBk9vEqZmQNKDKXj4Avt8s5Va/kw4z5gFSvp4x6cFC7GA
- 6ow3M3HI6bc8sNpXGCb3HD4jbxH0fQoIwh/WxgCAIUBut41t4wk12eFVYDAAN8IiWpnk4hj+/+l
- FlOc/4q9I7y/KFVAb8IIZ+WXY0+zhY0PftsX8CQyAnBwzPKFkX91KSZeCUhwtX0O0HLFa6qi5b5
- +ctuW33yQHV7CuYFmliVd77ciJAenc4WVew6c0DQgfKIDTf3m9S3XlVL5jNm2j/GyuWXL6CRMvh
- gXNM61a9ekcFogg==
-X-Developer-Key: i=sekoohaka.sarisan@gmail.com; a=openpgp;
- fpr=3C1D928A39DAA0E43462334B13EB7EEA99A39FA2
 
-There is no point to keep the variable dir just to assing
-lpss->debugfs to it later, just use lpss->debugfs directly.
+Thank you for your contribution! Sashiko AI review found 2 potential issue(=
+s) to consider:
+- [Medium] dts: console UART (blsp1_uart2) is left disabled
+- [Medium] dts: TUSB320 interrupt configured as rising edge causes missed e=
+vents
+--
 
-Signed-off-by: Maria Lisina <sekoohaka.sarisan@gmail.com>
----
- drivers/mfd/intel-lpss.c | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+commit eeb150c49a7166233f7744c010edc1dd2b105149
+Author: Muzaffer Kadir <muzafferkadir@mainlining.org>
 
-diff --git a/drivers/mfd/intel-lpss.c b/drivers/mfd/intel-lpss.c
-index 190de88d146aae9418566adf36a47d11afa90b2a..f1a8feb0fdf2042a3b6a8422400cb8f9511b4876 100644
---- a/drivers/mfd/intel-lpss.c
-+++ b/drivers/mfd/intel-lpss.c
-@@ -144,18 +144,18 @@ static void intel_lpss_cache_ltr(struct intel_lpss *lpss)
- 
- static void intel_lpss_debugfs_add(struct intel_lpss *lpss)
- {
--	struct dentry *dir;
--
--	dir = debugfs_create_dir(dev_name(lpss->dev), intel_lpss_debugfs);
-+	lpss->debugfs = debugfs_create_dir(dev_name(lpss->dev),
-+					   intel_lpss_debugfs);
- 
- 	/* Cache the values into lpss structure */
- 	intel_lpss_cache_ltr(lpss);
- 
--	debugfs_create_x32("capabilities", 0444, dir, &lpss->caps);
--	debugfs_create_x32("active_ltr", 0444, dir, &lpss->active_ltr);
--	debugfs_create_x32("idle_ltr", 0444, dir, &lpss->idle_ltr);
--
--	lpss->debugfs = dir;
-+	debugfs_create_x32("capabilities", 0444,
-+			   lpss->debugfs, &lpss->caps);
-+	debugfs_create_x32("active_ltr", 0444,
-+			   lpss->debugfs, &lpss->active_ltr);
-+	debugfs_create_x32("idle_ltr", 0444,
-+			   lpss->debugfs, &lpss->idle_ltr);
- }
- 
- static void intel_lpss_debugfs_remove(struct intel_lpss *lpss)
+arm64: dts: qcom: generalmobile-shamrock: new device
 
--- 
-2.47.3
+Add General Mobile Shamrock (GM 5 Plus). Shamrock is designed similar to
+L9300. Downstream reference is [1].
 
+Link: https://github.com/Asderdd/android_kernel_generalmobile_shamrock/blob=
+/cm-14.1/arch/arm/boot/dts/qcom/msm8952-l9300.dtsi
+
+> diff --git a/arch/arm64/boot/dts/qcom/msm8952-generalmobile-shamrock.dts =
+b/arch/arm64/boot/dts/qcom/msm8952-generalmobile-shamrock.dts
+> new file mode 100644
+> index 0000000000000..e6c92ebcbf214
+> --- /dev/null
+> +++ b/arch/arm64/boot/dts/qcom/msm8952-generalmobile-shamrock.dts
+[ ... ]
+> +	aliases {
+> +		mmc0 =3D &sdhc_1; /* SDC1 eMMC slot */
+> +		mmc1 =3D &sdhc_2; /* SDC2 SD card slot */
+> +		serial0 =3D &blsp1_uart2;
+> +	};
+[ ... ]
+> +	chosen {
+> +		stdout-path =3D "serial0:115200n8";
+
+[Severity: Medium]
+Will the kernel be able to probe the UART device intended for the console?
+
+This configures the kernel console to use serial0, which maps to blsp1_uart=
+2.
+However, blsp1_uart2 is left with status =3D "disabled" in the included
+msm8952.dtsi and is never explicitly enabled with status =3D "okay" in this
+board DTS.
+
+Since the driver will not probe, this breaks standard serial output and
+serial debugging.
+
+[ ... ]
+> +	tusb320: tusb320@67 {
+> +		compatible =3D "ti,tusb320";
+> +		reg =3D <0x67>;
+> +		interrupts-extended =3D <&tlmm 45 IRQ_TYPE_EDGE_RISING>;
+
+[Severity: Medium]
+Does this configure the tusb320 interrupt incorrectly for an active-low
+open-drain pin?
+
+Any Type-C event triggers an active-low interrupt from the TUSB320, which
+would be missed by this rising-edge configuration. The INT_N line will rema=
+in
+low indefinitely because the interrupt is never serviced and cleared,
+breaking USB Type-C plug/unplug detection.
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260916-msm8952-in=
+itial-support-v2-0-798c2602dde1@mainlining.org?part=3D19
