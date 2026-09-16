@@ -1,67 +1,89 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30D1152121F;
-	Wed, 16 Sep 2026 15:29:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54ECD54DAF0
+	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 15:42:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789572596; cv=none; b=jYPiSdfa/1iPc46srov9yB08o0KNJrHDCqY041sMsIdD5PaAPBITVTEbOS/sLLSaCP9ku9pdIWtKQF/vRPIokfXjbyi6hiTFC//jeHQQIpavYmWgafRQhsbbrGuzZd0kBWLCMDTBhSHyHw/8yEjuOlkntanyvhWYKA+GIwdAq6I=
+	t=1789573366; cv=none; b=L5aI8bOczh6Sz1BzjvWeLD6Q6epcT6fkPRmcPhiMmRbY7uL6G2yqCKNVT7bz2uRol03QRIu6UmlQWJD4i3XSKrDP/0o8CdnET5vMBg4g2mZOx/w2pr+ql5Y7abc+b2ey+xcV2B5N1//Wel+deHHoeUKDOS7SGz/inmj0iOKMoCM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789572596; c=relaxed/simple;
-	bh=8xhpwGozIr0T1lmQV0OryooWhP9CgyIQHWmTMTrbzqg=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=ZdcCe2BL8pGLRUe1EqfF3l0gYNQjVF6UaBfpTPjADxPg6Run/UFn5C7ky2dh9xH8Uz3p5Rv5zj75SBxIXU4clAENmY6xGBmM3zDAfFwO2/nLFsouejkpUoBp11v4eCGT3Woyk5RGIFpHIgtbepDf+xDzczXZXhQlAaSf634kyAE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=j9MMBGAb; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789573366; c=relaxed/simple;
+	bh=M0DwqKAlxhLxP1NZoF9woGjuh8FYwAiWpOUlWUljIWM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=G3qiwQwWv0GjW3cRbfyPJ2s9HERaxfmJzefwLgf6HfOqbu2pkPfV2yBrrfcolxV4AQcvROm+HV9IytY9jICxOMzGcgQ5IEx3n0j+9ozviqBqu4AWv8kr6QFYJagI1yVXSNDDvNMJWte25jBkP120uo+g1bLVLcaGRERi7e7Bgfs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=W6ygh01v; arc=none smtp.client-ip=192.198.163.18
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="j9MMBGAb"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C1B371F000FF;
-	Wed, 16 Sep 2026 15:29:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789572590;
-	bh=QvxmsL8bBryD13yQT4Sh8NN03a7Rkbq2gIRrlYpwI50=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=j9MMBGAbLsrRCAD0MM1rs/mTSCMpMA5e0VeHa0Bulw8MSzsgIJdNw2tw6lSu3hOS8
-	 E80ewJgQTR/QmnQo1row9OYYxEqevjyy1DOsRy9EIaAXLLBKaKZqXvdj8YBdxsQNa+
-	 Dp1+UqV7fkz9xX3TrbsmjEIGnSvNwrMF+OsjuY9JbTdFKwyEwYm7HR7of3XL7sb/D5
-	 U+vhqLa1JB8YFN8NSR3SWSnzN5DYQ+VXOtI6ZEU0hsjQEzuXif1EaiQ/NMnKFDUJfZ
-	 Dl5YCQmdP3Mk3n9O+ow9NZDVmvu5IwIp4ZOuUYTLLuGpqm7E852hlVecAkFX9zchz2
-	 CusGF5wlZDHeA==
-From: Lee Jones <lee@kernel.org>
-To: Linus Walleij <linusw@kernel.org>, Lee Jones <lee@kernel.org>, 
- Hemanth Selam <hemanth.selam@gmail.com>
-Cc: linux-arm-kernel@lists.infradead.org, mfd@lists.linux.dev, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <20260907045526.18873-1-hemanth.selam@gmail.com>
-References: <20260907045526.18873-1-hemanth.selam@gmail.com>
-Subject: Re: (subset) [PATCH v2] mfd: ab8500: Fix typo "interupts" in
- comment
-Message-Id: <178957258952.1739336.2506970336565641469.b4-ty@b4>
-Date: Wed, 16 Sep 2026 16:29:49 +0100
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="W6ygh01v"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1789573360; x=1821109360;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=M0DwqKAlxhLxP1NZoF9woGjuh8FYwAiWpOUlWUljIWM=;
+  b=W6ygh01vwkRZfFHeK1ZikbV20wpzIZBGvvVak2P6S2v1644IaLr081PG
+   Cgd4gwrJQyAzcFxfwdQdLR/K1WCX8nQh9T1/vz47HPahnKZczw8LMV5au
+   w1xl1Rrt//Jd3ApSmjat+DGCIVstTwLBs4GAKsea8Y3SXe53RP+mVT0vz
+   CmgIvED/5jPMBJrsuYJwKBsvy3tEIJ6kWG90qFATfYwPOXD5OAbfS5dTF
+   T1Smsgj8qDAKmu7FOXiNyd5XLtmCA4xAYxNXJyF+SbevSwL1kCO6rMK4l
+   Fz0PGzeMgrYG/5pYr4jYNgPmJw7DP8pMqdPrNhgcrzPjMBha/mjc5xlnQ
+   g==;
+X-CSE-ConnectionGUID: cIkqa7I5QiGOTpwmJQ96jA==
+X-CSE-MsgGUID: qyPx9Z2XTjq17X9DbsRmUw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="89090396"
+X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
+   d="scan'208";a="89090396"
+Received: from fmviesa002.fm.intel.com ([10.60.135.142])
+  by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 08:42:38 -0700
+X-CSE-ConnectionGUID: +//jVAnPSlWPAe4BMOkKpQ==
+X-CSE-MsgGUID: apKexJvAQXeAhjI56MWPNA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
+   d="scan'208";a="296857731"
+Received: from ettammin-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.244.145])
+  by fmviesa002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2026 08:42:36 -0700
+Date: Wed, 16 Sep 2026 18:42:34 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Lee Jones <lee@kernel.org>
+Cc: Maria Lisina <sekoohaka.sarisan@gmail.com>, mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v5] mfd: intel-lpss: Clean up and modernize DebugFS usage
+Message-ID: <aqq46mmXI07okO67@ashevche-desk.local>
+References: <20260916-intel-lpss-debugfs-v5-1-99295f534067@gmail.com>
+ <20260916102732.GJ11487@google.com>
+ <aqp3FMncWrzR1adT@ashevche-desk.local>
+ <20260916134247.GT11487@google.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.16-dev-ad80c
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260916134247.GT11487@google.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On Mon, 07 Sep 2026 10:25:26 +0530, Hemanth Selam wrote:
-> Correct "interupts" to "interrupts", reported by scripts/checkpatch.pl
-> using the misspelling list in scripts/spelling.txt.  Only touches a
-> comment, no code changes.
+On Wed, Sep 16, 2026 at 02:42:47PM +0100, Lee Jones wrote:
+> On Wed, 16 Sep 2026, Andy Shevchenko wrote:
+> > On Wed, Sep 16, 2026 at 11:27:32AM +0100, Lee Jones wrote:
+> > > On Wed, 16 Sep 2026, Maria Lisina wrote:
+
+...
+
+> > > Why continue if this returns an error?
+> > 
+> > Because we don't care.
 > 
-> Since v1 the subject carries the driver name and a capitalised
-> description, to match the MFD subsystem convention.
-> 
-> [...]
+> If you engage your Embedded mind, you will reel at the wasted cycles!
 
-Applied, thanks!
+True, but it not the hot path. Anyway, Greg KH is keen to see debugfs properly
+used, id est without checking. I am fine with that.
 
-[1/1] mfd: ab8500: Fix typo "interupts" in comment
-      commit: 708222feb63451ecadfd0a70a5d99f96c7d021de
+-- 
+With Best Regards,
+Andy Shevchenko
 
---
-Lee Jones [李琼斯]
 
