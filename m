@@ -1,67 +1,67 @@
 Received: from mail-lf2-f12.google.com (mail-lf2-f12.google.com [74.125.229.204])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 710F751993B
-	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 14:37:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 42ECD519922
+	for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 14:37:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.229.204
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789569427; cv=none; b=QkHCfoSdXIdNfMC2M1fwUbI18qrLRnszB5z3npZRnI8pl35gNSwvCcfvHuavoVn8tdVmUoeaD59IQ1TylMX6YLtQojQbHVILCOJxDqx8rkIqc+jWIRqWHETlEIV2PoY5IrPD2MTljm+pTffgTwAPovrl/3bm5oktqoPcXag+W20=
+	t=1789569427; cv=none; b=pPzzgvZHSxHoowpdHxzS5BRflM8JKOupheKpY7n62X9+OXy7GQRfRwI6iV+z82uBs7O/GblJfLkl+fYGtsy4cwDIEpO6/L6lZVxs2Bt8mPtZQR2wbUSI1PjC+h8tEbt7jCJZGQF+xabg4Qof4UVnByw/DzFp5kz0I+q3pTTxK0I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1789569427; c=relaxed/simple;
-	bh=Plcq2owhNg0Sj/G/B7MmlGcqYnIdbvu/V2UiRRh0xc0=;
+	bh=xNWXjh2jZNqUOiPZC4IQkFyQMkKV6evtU42asOP+reA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=gIr4sJkypnAcqTQJBL4rhmKbpzvgzz3Xqy4AHb//kCn3uQwJ9eMkGlMk15BiCS3LNwsC6RN+XNNtsWsQ8Ss7hS39Lkm1SZaM82xLBo+ftPEe0UdJ52zM/iRnv3WtesXWYjioWo/okPFNi4qRjXjIc5g8UwcZxFsv6ETNRFNTiUY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=rBgg5c+h; arc=none smtp.client-ip=74.125.229.204
+	 In-Reply-To:To:Cc; b=sm8DVPlduBJ2N8G4Xj3vv+l6TYOgEetUpyC4+EMeLkCaIU2l6Lmw3pikKz9KL7Y/YInDq/uKWl1nm1x6XB1jm1Xg5BVtRJW6XNyRgY3OKqzpg1N3fyD6//gxuDOS1X6fPkUeTRI/xqMkecRDO6wVfLTC2ilPHSMumLTuVI9YLig=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=VNbYbBvz; arc=none smtp.client-ip=74.125.229.204
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="rBgg5c+h"
-Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b5e4f13d76so1153036e87.3
-        for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 07:37:04 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VNbYbBvz"
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b79784a6edso1170861e87.1
+        for <mfd@lists.linux.dev>; Wed, 16 Sep 2026 07:37:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789569422; x=1790174222; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1789569421; x=1790174221; darn=lists.linux.dev;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=cmw0ERx25M/EqcNmLRr7smyny30OD8/FRmvQ0lL93qY=;
-        b=rBgg5c+hZUd2jezXiBUeGJRUOtJqov8kMqWcNg4XS/XlXp4XwcViRkyPuo54srgxKS
-         WACXAvPLo/oZvDzL2uhPFSSzv2jhmbpIYB+n2AeLX1ZzmWtYviF1Xm2cXDldev7nHk4l
-         nuRfqaektanHIUDsZcnydT6jsXLldeZK6O1LogOO55FoBdyrcHLlOqUQEkFKfkJlhOM9
-         O5NDi/cgAYZqqS7lwtLBWACWBTRpPU0vVmC064SJn6HSAqARx6TQDoKiLJ19xFht67gq
-         uu4tJN0zU+Q9PYlijfd90Hzaz7cUjXXX2VLocl8u7Q8w7iKvWqxKLb9/I62DQ3DIo1pc
-         KGeA==
+        bh=ufX6v0lew7XrjHWTQTFcEf1Xg5s99AqsmFqOBj55n5o=;
+        b=VNbYbBvz6bHJ5k8Obu8Rdc8Uox050ei0gXIczqLiKWZWS50TOCwdr3fZ9GdSfUFNil
+         M8BM958bzAAGcD6FH/HHRN7hAhKpDJXjBYGpXrBBgkQ58GwZFfdFHJP9dordTqPcrYnr
+         Iat0qB7rQcKm0zM/qPuc52X6tSCP8g+NQ2+Uj0+GXUHHKg24evvnpRxXhjAhA4P2EOMn
+         8H8WtFjUpSEmwixpexiWA5HEQyJ8T4z2LpAVFEfC4sonNhW4aKuNCHRtS5A0s1jiVcDT
+         AK/Ov7lfe276BqzSmnrm/EDhySNXHLzUn5StVM7JITVOVweZcBQ4eEbuYBmKX+R6RrLs
+         FNJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789569422; x=1790174222;
+        d=1e100.net; s=20260707; t=1789569421; x=1790174221;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=cmw0ERx25M/EqcNmLRr7smyny30OD8/FRmvQ0lL93qY=;
-        b=LLLJ/jqWKMEYgNjilj5QmtvSH4dB4b4D1XCA9+kty/5klR7vmw1Q52sVQu2gcFJ0w3
-         nLlp3kIJZ1H+AxDEBn3QW9L5ct9Tw/T8UfeLT4GaHe0lSnoqd4cSuuD1mMo3HZVcuJ2c
-         xHU6b5NZnoOaBHMhkfcfY8KHqMcwA0eMS1xeBmZo7PPdUJvXuzdosMR4vwaXtVK3OQJg
-         //hzAI4HEr7PT43uX0d4iwM5LTpOneW+3CkzOD279ZsjDPcxTH72YrTF8+ioKgce/NkC
-         kfFtwMlifCevvb7tLEW6MuYv3qcoNiG0gqB/NTpaKX1BxnaOK5mCoyBVKxm7jINzRjJ2
-         7rpg==
-X-Gm-Message-State: AFuF++kJAcMK1JKAXA5R3WkEzXkm50TxkHyCK3XfsWMnSc5J+AYsggNN
-	IMRCH7r1s86zWHofQF0RtPwM2LR0l53/vCGXpORcOq4H4AxitY3d2hE=
-X-Gm-Gg: AYBFou09Zq5rP+L6+mXhF5QxLRNiKr9uuKMUFfO41DevKWO6v9Jv6lTQ7X3UmHmpPju
-	LvloGDVhmMcGYD1VkLenBboeDbe2MZg/MGVpJOGxWReuzhGA6ZvNax+1DWT2itVG7QKn5jMNOQ5
-	ljwzsKNGPF+wA3sYdm14XQmQcDUapU8f4W8nt+mQcYjM2NJ0kHYqS+D2KO15KClmUgaAWtSpwxj
-	77GRdfereFTEJGn9JRIQFgmN+/Zx3JuLCdXqDBFKWnRsXW5IS0LmLvF/f76ckmXk+rOYxXYQwnv
-	BBgkpt0lhWmfCXU2G+1+S/rRaqiRKV4+fPKAI1Wwpf8rvmMtfMuV0wm/pf2P2BIlII+1d3F8o0d
-	ZSy6DQKmdJjAX057Bnb7YfRorYuqLL0RhP36Hijmn8Y9rlCq3rQ+YQsC2FjZExt6CxEEFpieKGO
-	66HMn9gm9bDycAK/PlDA3+3+Eq795y6OtWCi6DR1mT5xf/qUlBdFWo0dF1L/bvDxiHy5/GPwpPp
-	5ge8dB6ewegO08Sas7DeSwaJA==
-X-Received: by 2002:a05:6512:6cf:b0:5b6:1a7c:28 with SMTP id 2adb3069b0e04-5b8b6649eefmr816014e87.43.1789569422105;
-        Wed, 16 Sep 2026 07:37:02 -0700 (PDT)
+        bh=ufX6v0lew7XrjHWTQTFcEf1Xg5s99AqsmFqOBj55n5o=;
+        b=CqLuGaTDEd2kf7cmiKVuN51eAL22YYHhBhvdMw9WEr3N//MoogdnyqrE0bnHvEvNix
+         AVp1d7b4Orq6asZD+a+uhlKaatV3lv1cb5+rmrs3tcajbxKyF5p7k9xydDnJ4Yz8YmHe
+         EL76CXnQwwIDJFcAQJldt0oKfTy6550NbEVHPOq90GF+65vkPobbkpeqEC3ZL40GoJht
+         ljKPsCE31jDPYr1f3QwwhGOIy4WjEjl7q5cUHh3TIWtjgOGr1zj2tLwV6kqY/pgwP2Ar
+         MfxnEPQnElI37QqGxoHGOwTZw0mDviS02vMfOmRsAo3olhilosg4MsX6h6xxyXVWR3TR
+         0H2g==
+X-Gm-Message-State: AFuF++nyiadpmoXyYx2EaqE8BgEZbajvWFfXHZRxZt2KuGcGLGsFa/yJ
+	8cqGs9PfREkpNtI8k+nISGvq7O85Int2X7EVoN+UENOZF9l6xtVtW6s=
+X-Gm-Gg: AYBFou2I0j9t1UDCE7faQOdH755GmcxGRY4o/PW42xTDJTrZAD3OqJM5cExs73Ynavf
+	sCK/bkalwGBFLV5/SYaTCNCiNklJxsED4SjAIu+sOtT+tNwxAoqI/ozFb4CACGV6YXqPv7/ucWp
+	hqDNd4tCX0i/W74Uh2sMPnQYTZrAy07TljH1BbVaIOBdd4ppgFkmGyjn6r25Fs6SePTSefd5V/5
+	Zk2FIQf08kgp/N5DXsOwiK+QhuzrF9b/Sy3aA4OO0TBtRB50o1bIa/sAVkZd63/k/2+7jba3is1
+	FvFs8mM/Ca8/Fx6kaL8p3QrukREPyjT+NzGjVTgF4ll+4U1ex2lQg+LpsPq3SsTaGm2+y66HBJL
+	blCflcNKWznh/dfjtNp2Pd5zm3JQrASUzCn7IbcxxTfzPPp2Kq29yYtCr7vOeD3G/mz3+gKaXsM
+	FsEMcdZug59u4yx205GamayOZIWVPajgyZyUN+gs6iw2/dzxAKQTUeMR58oLMBnUvgJsBKrYqlC
+	N/uzYMqOpLhGD4/Jy/Vkgk17i/BXIUYlfYA
+X-Received: by 2002:a05:6512:2390:b0:5b7:518a:fe57 with SMTP id 2adb3069b0e04-5b8b664c839mr925372e87.39.1789569420831;
+        Wed, 16 Sep 2026 07:37:00 -0700 (PDT)
 Received: from [127.0.0.1] (sekoohaka.ddns.net. [151.243.208.241])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b8b57c3d46sm978675e87.19.2026.09.16.07.37.01
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b8b57c3d46sm978675e87.19.2026.09.16.07.36.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 16 Sep 2026 07:37:01 -0700 (PDT)
+        Wed, 16 Sep 2026 07:37:00 -0700 (PDT)
 From: Maria Lisina <sekoohaka.sarisan@gmail.com>
-Date: Wed, 16 Sep 2026 19:36:42 +0500
-Subject: [PATCH v6 4/4] mfd: intel-lpss: Switch to debugfs_remove()
+Date: Wed, 16 Sep 2026 19:36:41 +0500
+Subject: [PATCH v6 3/4] mfd: intel-lpss: Remove extra DebugFS dentry
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -70,7 +70,7 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260916-intel-lpss-debugfs-v6-4-5c118ac430ed@gmail.com>
+Message-Id: <20260916-intel-lpss-debugfs-v6-3-5c118ac430ed@gmail.com>
 References: <20260916-intel-lpss-debugfs-v6-0-5c118ac430ed@gmail.com>
 In-Reply-To: <20260916-intel-lpss-debugfs-v6-0-5c118ac430ed@gmail.com>
 To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
@@ -78,46 +78,63 @@ To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
 Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
  Maria Lisina <sekoohaka.sarisan@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=839;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1487;
  i=sekoohaka.sarisan@gmail.com; h=from:subject:message-id;
- bh=Plcq2owhNg0Sj/G/B7MmlGcqYnIdbvu/V2UiRRh0xc0=;
- b=owEBbQKS/ZANAwAKARPrfuqZo5+iAcsmYgBqqqmIhbltBtihMGq/M3BExEHj+gmJXlfOt0sEL
- 5ye5ii2QNOJAjMEAAEKAB0WIQQ8HZKKOdqg5DRiM0sT637qmaOfogUCaqqpiAAKCRAT637qmaOf
- omcoD/kBF3WXjeuCpjqW3XLz6MXZGZWv0ilitCt5mDR63fcZFXitPP4p+PiduKXI+vB2OVRVkpv
- 816SWIAoIPBYVqqVs7pYPesWbkhBc1sXWc7z47xDJMmFrv5162mfISLSYUj1lVEvTCdffaO/l/W
- aVTGA7G9x/hHfU1pEkMTC9vqdpTJQQN8Ta0KEqAVfGM5hxKyjDYDIZ5LR3QcK9pc1cOYyw2kWFO
- d1XhVflQQJYkq2Xdcw2tKEgNAO9xRf3lYr28r15AENBiP5s4BAKe/LdzUXvi1MCELQUcd3JiL07
- tPpGWpahtZEbHqdkH39+VcYAr9Rdvf/0ItM4FYS7kDqiQP00qax8DEs08+C+w4bi0fk3LLjmBqL
- hG0KJFVpf5Krvt8z7224CiB5lQ44XYXKMC9fhC7A/b4tcJ3UXqiQcWscfcZlivM2UfsH5RyIhE7
- nbdFaP4p8biHj4rTGEfBeXC+m9wiOW/5U3CpQD/ubQ2XEhs5xOQkGajkGrSwwXwA+K6qEb/qtQm
- seXCn2VzSoZ0N8tF5G3FzsTGRGsx0W37ya8qAdSzjr0A0YGZDpM+jYValWsrSOZjR5tPFrUDDdd
- qm/yWICgh38i+ycs0blPeiCp+m39MyLqlCh3HhrMCxPmXX3BAZ8v5zPKC0F+0vXs+/IBTQMeYB3
- ooAHXWWv6f07IxQ==
+ bh=xNWXjh2jZNqUOiPZC4IQkFyQMkKV6evtU42asOP+reA=;
+ b=owEBbQKS/ZANAwAKARPrfuqZo5+iAcsmYgBqqqmH447aC/HryKCjz2EfIa561rW+fvUeP1DmG
+ vL+R1k+6tGJAjMEAAEKAB0WIQQ8HZKKOdqg5DRiM0sT637qmaOfogUCaqqphwAKCRAT637qmaOf
+ om5wD/wP7wOu9p6ii/PYG1fI6dc3hxzCshOrpD28DfA7aO6j6fpT8C6pqOy+IB8hNyOHdIuEygF
+ m3vRvYjbVuxlafJMj2V7enO5sL9+JzSkwmwyqT3DfF54FDzN2CQluqK1j1lAzABNxm6gXT3AnMy
+ 1TgVpnsxo2P86wkNrVguuP4058uUdmzABaxY5SvP2mhEf7MZNKxELna8AmCWfwknQxsHi9VFwj/
+ vmGpksHlt9kKZFbO8yOSZMw4hu46d6tPGq8xRJcgbz5qrzbYdvL/xHlCPyk0I3NBBOI1JQ27K60
+ Klqkb7ecbF1y7+nQluNUwUQ3TKO4Nkus7b2ITGNXdBijPsOpt1Zwn+V5iNlDuHP32iJtNj1P3IY
+ yIRBT5qYMexWcZIwkEeeZLAYn4ZPD3GBk9vEqZmQNKDKXj4Avt8s5Va/kw4z5gFSvp4x6cFC7GA
+ 6ow3M3HI6bc8sNpXGCb3HD4jbxH0fQoIwh/WxgCAIUBut41t4wk12eFVYDAAN8IiWpnk4hj+/+l
+ FlOc/4q9I7y/KFVAb8IIZ+WXY0+zhY0PftsX8CQyAnBwzPKFkX91KSZeCUhwtX0O0HLFa6qi5b5
+ +ctuW33yQHV7CuYFmliVd77ciJAenc4WVew6c0DQgfKIDTf3m9S3XlVL5jNm2j/GyuWXL6CRMvh
+ gXNM61a9ekcFogg==
 X-Developer-Key: i=sekoohaka.sarisan@gmail.com; a=openpgp;
  fpr=3C1D928A39DAA0E43462334B13EB7EEA99A39FA2
 
-debugfs_remove_recursive() is deprecated and has become
-a macro for debugfs_remove(), replace it with the direct
-debugfs_remove() call instead.
+There is no point to keep the variable dir just to assing
+lpss->debugfs to it later, just use lpss->debugfs directly.
 
 Signed-off-by: Maria Lisina <sekoohaka.sarisan@gmail.com>
 ---
- drivers/mfd/intel-lpss.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/mfd/intel-lpss.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/mfd/intel-lpss.c b/drivers/mfd/intel-lpss.c
-index f1a8feb0fdf2042a3b6a8422400cb8f9511b4876..beb01252f9021bbf40b293c81181b29e9b61bf56 100644
+index 190de88d146aae9418566adf36a47d11afa90b2a..f1a8feb0fdf2042a3b6a8422400cb8f9511b4876 100644
 --- a/drivers/mfd/intel-lpss.c
 +++ b/drivers/mfd/intel-lpss.c
-@@ -160,7 +160,7 @@ static void intel_lpss_debugfs_add(struct intel_lpss *lpss)
+@@ -144,18 +144,18 @@ static void intel_lpss_cache_ltr(struct intel_lpss *lpss)
  
- static void intel_lpss_debugfs_remove(struct intel_lpss *lpss)
+ static void intel_lpss_debugfs_add(struct intel_lpss *lpss)
  {
--	debugfs_remove_recursive(lpss->debugfs);
-+	debugfs_remove(lpss->debugfs);
+-	struct dentry *dir;
+-
+-	dir = debugfs_create_dir(dev_name(lpss->dev), intel_lpss_debugfs);
++	lpss->debugfs = debugfs_create_dir(dev_name(lpss->dev),
++					   intel_lpss_debugfs);
+ 
+ 	/* Cache the values into lpss structure */
+ 	intel_lpss_cache_ltr(lpss);
+ 
+-	debugfs_create_x32("capabilities", 0444, dir, &lpss->caps);
+-	debugfs_create_x32("active_ltr", 0444, dir, &lpss->active_ltr);
+-	debugfs_create_x32("idle_ltr", 0444, dir, &lpss->idle_ltr);
+-
+-	lpss->debugfs = dir;
++	debugfs_create_x32("capabilities", 0444,
++			   lpss->debugfs, &lpss->caps);
++	debugfs_create_x32("active_ltr", 0444,
++			   lpss->debugfs, &lpss->active_ltr);
++	debugfs_create_x32("idle_ltr", 0444,
++			   lpss->debugfs, &lpss->idle_ltr);
  }
  
- static void intel_lpss_ltr_set(struct device *dev, s32 val)
+ static void intel_lpss_debugfs_remove(struct intel_lpss *lpss)
 
 -- 
 2.47.3
