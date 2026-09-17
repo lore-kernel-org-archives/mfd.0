@@ -1,98 +1,120 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed2-f31.google.com (mail-ed2-f31.google.com [74.125.228.95])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D723C4E325C
-	for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 15:17:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789658257; cv=none; b=l/gwgoGIOs1InKUbUdfxF1aPZmfsPR9EKOknsYqAs46YKwEQvbgadnDZXIuY1kdy+FGcOfC7OpQKI9TKCl87gpoum614w8w4l2k8z+zPMNnJnNUiZgpr4ruuirjAzASqBalENEoy2yG7qsawO8u5EkuVvs4jmc6u1pej/1w4VS8=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789658257; c=relaxed/simple;
-	bh=yokcjFoYaQjb2AXJXwiS2CgA9icNw4hd0m3OmDjYLh0=;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 527BD4EF127
+	for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 16:52:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.228.95
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789663921; cv=pass; b=o/X6xHd3GYhQ9AYBxKtmr7LspXWOW3X9yHB8LfH3xbBOICpAZxRTskVXrMmIYahvFtRntna736HRXuzUW/iYX0Ak6+iTXJ7CdMOVJyY7sR/HW4ZLBOeHw8PyWtYKFj54YCdfuTbJxQP2yeUyGNGdbu11hh3GtpIu8SGsTYWk5bM=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789663921; c=relaxed/simple;
+	bh=hEHMAKUllCDwfWN1D2DXADtsf72BtNJRtUxT6u8f6tI=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=gEjZWs2eqmn/fJj+JEyYsHu8D0voBESS2XqLu6QK0uUnMn8G521loKQxnJWjdAZ9U0t8/5XF5nNqKFVarozSkddGiSC8F816DxWT721NFxh6n/on2iHgMpbPtlWiwV5mqZ0u1tb0fzPH+o5nY40yMEoReQoDOXFkNL7ae1KLZ/w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=baYHiQhL; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=OZnVB80PYN6XUdlv3YTTGjgvrUfafRxwZ2i2vFGeDqiYT0wgUtG0MKu2wpQuBAkQXT3zk3X1j9TUhsiS1AVsWPr2+fVnNju9rbpd9I+GRdkPm483+cRuLXS0ijPhkhG/+AdGY6rH9qUtE0foOuHOC4AcOH4wwSPnogVf2xfCYAw=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KEaa1vkT; arc=pass smtp.client-ip=74.125.228.95
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="baYHiQhL"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8291A1F0089D
-	for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 15:17:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789658230;
-	bh=yokcjFoYaQjb2AXJXwiS2CgA9icNw4hd0m3OmDjYLh0=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=baYHiQhLKHIXv5JcbsYM8h8jWAIdy60s6NhCh0ZGU54W95BOiAuC94Ol2AcpHo47g
-	 xOJkjhXStRdOshTWhG385se+mN0mwxSalEgzP9JG2PQIOLJ/oHEIVw0zHQeJ6cCyxv
-	 qfvHypAZ4Aa+PBTDs1xGLwk8gxllOPs9TBclUTaLcaptPXVE/nH6o6dNw9fmKr/Ga+
-	 euX0r0XKcn50B8jtWh1/A5rkcHzzpSCbjKD97mWUlLgkoyhoofyCpgqfsFLMmV7xqx
-	 ARc5Jnmu7agtqFNmn3zlh9R+1V4XybdteMzm34GCd9fCbp5oeKdHFvfY4O6Spsy5NH
-	 56pQ+Rtftr60g==
-Received: by mail-ed2-f12.google.com with SMTP id 4fb4d7f45d1cf-6a996c8adf3so1647096a12.1
-        for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 08:17:10 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBxKeGlNq8dbDPYwcjO4FnPQ3vzaYYRIjhbYNyUz8Q1C4KKVZG9+3yFJYQdVet8R5irm/Ys=@lists.linux.dev
-X-Gm-Message-State: AFuF++m84YJc6GvSzpHnAKCldKyc4YGvBAH9phlljAfER78kUeCt473a
-	T2MSFPjOk+QNb+sNlUVwceHvj26Waf1iYeTas00aranGJ1S0gckEhJZJq+GhMPDNw3GMR4yx0DX
-	iror2FPLwXdUPFhmqp8vC4v1cXKtSkA==
-X-Received: by 2002:a05:6402:460c:b0:6a6:8dd:c76b with SMTP id
- 4fb4d7f45d1cf-6aa22247992mr11552271a12.1.1789658228391; Thu, 17 Sep 2026
- 08:17:08 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KEaa1vkT"
+Received: by mail-ed2-f31.google.com with SMTP id 4fb4d7f45d1cf-6aa053900f5so1900835a12.1
+        for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 09:52:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789663918; cv=none;
+        d=google.com; s=arc-20260327;
+        b=sy9aKHHxok9sTyVg1a/U83z7zDq1dwdOXtAnnp6zTtVSeaE+mvZ+4xeyI2j+czujqL
+         5LAJ1aOSAIP0gqWYJb4ovFWL45fmvtUezddMxfABDQbNWdCT5bC1BHGu0qnxYVxl027S
+         GA60CHvvZq/jkT8ik8WWOlDPlqcgWnulj93A1b1MONAgVtD6BcFXRBOa8Tv6fDfUaf7v
+         ft+gBYcWOHtziRdC3+pCjnckab6f/1Yepwu4+Zv8aeYSe/TdvXNssf/GlEqz5/kcsXnt
+         tBIQ6NTZsgFhcCuSj3cY41rkFgOZ7sBlGNkC3Pdn2dHT5gPAoU9exijRZ6e8lBR/fy+K
+         Gcqg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=0dTGZsVCSr6ANtWetAbHE4IIsX02FpxvKoMT01AVXUs=;
+        fh=MWctrO/KTii1gOu1qnjnDrgwstDYUcJDX0taCXQYJXY=;
+        b=iybXORZxtj7j8SX5oBseP5RUrBwzaEp/ojw0iwKnUZdhGqA3PN/QKagB7TBcgZq3bo
+         qxVQYc6Ve9QHLeERKgxO6PBnw5sBw9rRpG9bUNtMmcqo2UTVJpIROmr/fd/xz8D8QZxs
+         tyJ2K8BUdbRN8IYMEKibkaYu4LlmPnojuXRNAfmK9E7l4VnRzXFGbB4IgJFxc1UD/jfN
+         ZRnBTp2o5JOElpHu70YETjUB+Oxs6bpWT0eIoYChmnTYwEJkweQ8/IeZ15+ye/x0pK7J
+         EmmobHkEZKDE3DD7PIHioc/8FZkC3RrPKc6GhdaDHMdv7zDPQ9rH/H7kFYq0rveAspUp
+         oIXA==;
+        darn=lists.linux.dev
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789663918; x=1790268718; darn=lists.linux.dev;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=0dTGZsVCSr6ANtWetAbHE4IIsX02FpxvKoMT01AVXUs=;
+        b=KEaa1vkTMEYcheYJgooJNUPZ4Z9Ap65KNTOhoPFmsS5PAcFRtHIgOKvpZC0wMjvi2T
+         pAiW9IWXjJkgGeqT46tg8kDrrF8rbt+nXBxSc+x0pVi3TZ1fvowN83YLiBMdFugGj1SF
+         g8s+LXROa5SEjdbjz5b7NuRtvKH66lUQdB81UhrYVfOH1pOzjAOOVIxPHMZU1hJz3pDK
+         y3H+T/Y5DMH0wDjCN34Cyav/TfeG8IbtOT6S1NY7YUrA83n3Ssa0iuUDbRuvRbwnV+aR
+         j3ZsNq77I24biXKIN+rTsKRjlZnR0HhVfSAYvGlRTZV6h7zcxeDir/V6jgizGtMxf5Vm
+         kYqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789663918; x=1790268718;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=0dTGZsVCSr6ANtWetAbHE4IIsX02FpxvKoMT01AVXUs=;
+        b=jAw+fI56RL641y3iR8eUAoxMD02BKqZp0hVjczZHc+dttlKHWy7MftpWF6Ua2AvrCM
+         rK8ovZKzlIRTOq5WsuPSDEIVGZl35hCqAq3CN+Fg7PP+OiQKcg8PwbPikoJQYWVba7yj
+         uz/alPPgfE0oqf3m0IPVZxpkf5Uz97zdI71Syx3IqJNdn414KnaAi+h5avsZ/vIMZYl7
+         xtrloC0rbcrLKx/S6nUzT8UyzYT6QVW8kZjGej9P839kALNdXV2KRl/QoL5mi16XPVlX
+         gCbuUVzxLi0ACcNZUJB880OL0is5gHJEeVdU4shc8Ug+vH8X4yrqsYInSg/p8JnU/JJB
+         5irg==
+X-Forwarded-Encrypted: i=1; AKwUvBxj8btfpS7afqxBlmn3pYw80zJ9C6AkHpNYRdFoXhxt3LmBtrahX2g8uH20cnCGyzlagrw=@lists.linux.dev
+X-Gm-Message-State: AFuF++kXWJNrJgEPgnriwmmk4+vl9Qa34I3YKV8ukKOb/ZwEeGwzfGJg
+	a3xbw6CmFFKwi/1XxAg6PrOMCaTPxg1SxsXzr/yvvc2IxdWxeu2i0hXVXHRKowHeOTJNfcEXkSf
+	xh6hI9ONq4NwGPVplFL89AFj9Zmw1/n0=
+X-Gm-Gg: AYBFou2dAqhKXdjTHOUg6Y1acR53fEJHOtPslX/H7j/xJoUrudrUpzrLFhEka4vOVt9
+	5I5V8mhx7bcjIMCxvCyn5MSdpg3HnpLv1FTMNDZx6yW4fPA7SbA2IoLyhHO+3ItHtY0azsJWuJs
+	ukRZYjegNT4U8Kz6Js0rusJKgTCHWzHEh9tVgk92ncXUoJD+xDoVBNABPumHGhbRwMu3iVLBHsE
+	EGfmov6E9WmjqYB7WM3UMrBaDpIMO4+X+E4M+gpt2qy4vIwYZ670Lhy4aaQAvklnr3D4KreltWc
+	4ODnYI4wWsrIWaFIzLYHpAuvIsmO+lXvFZHEF7WPLZ6VwRyeo67vun0=
+X-Received: by 2002:a05:6402:3789:b0:6a9:98de:6d8d with SMTP id
+ 4fb4d7f45d1cf-6aa2245fd0fmr5568315a12.45.1789663918221; Thu, 17 Sep 2026
+ 09:51:58 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260917144134.459819-1-matyasdaniel006@gmail.com>
-In-Reply-To: <20260917144134.459819-1-matyasdaniel006@gmail.com>
-From: Rob Herring <robh@kernel.org>
-Date: Thu, 17 Sep 2026 10:16:56 -0500
-X-Gmail-Original-Message-ID: <CAL_JsqLyPK2rJVAyzCtGtrBSTwOKRZ_EAmE1Xd++9DFaxrrmDw@mail.gmail.com>
-X-Gm-Features: AcwNN1WrkKsI-hJClnXnbb72poP7rLqVHTc23ccK3T-HSnvYyjsVzuH4L2tWH2Y
-Message-ID: <CAL_JsqLyPK2rJVAyzCtGtrBSTwOKRZ_EAmE1Xd++9DFaxrrmDw@mail.gmail.com>
-Subject: Re: [PATCH] dt-bindings: Expand flow lists to block lists
-To: Daniel Matyas <matyasdaniel006@gmail.com>
-Cc: Shenghao Ding <shenghao-ding@ti.com>, Kevin Lu <kevin-lu@ti.com>, Baojun Xu <baojun.xu@ti.com>, 
-	Sen Wang <sen@ti.com>, Peter Huewe <peterhuewe@gmx.de>, Jarkko Sakkinen <jarkko@kernel.org>, 
-	Jason Gunthorpe <jgg@ziepe.ca>, Chunfeng Yun <chunfeng.yun@mediatek.com>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Matthias Brugger <matthias.bgg@gmail.com>, 
+References: <20260902193351.185771-1-l.scorcia@gmail.com> <20260917143459.GA2348773@google.com>
+In-Reply-To: <20260917143459.GA2348773@google.com>
+From: Luca Leonardo Scorcia <l.scorcia@gmail.com>
+Date: Thu, 17 Sep 2026 18:51:47 +0200
+X-Gm-Features: AcwNN1UCLyUlHms-nbsVMpe5KcLakQ0vi0ozu7P9tcFuOM-WKvxcQ6ubbojqdxA
+Message-ID: <CAORyz2+rT-oNJtWc5BRDrpUjBPVbO6A=qrX_K+J7fAR5Ebm_3Q@mail.gmail.com>
+Subject: Re: [PATCH v10 0/9] Add support for MT6392 PMIC
+To: Lee Jones <lee@kernel.org>
+Cc: linux-mediatek@lists.infradead.org, 
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Sen Chu <sen.chu@mediatek.com>, 
+	Sean Wang <sean.wang@mediatek.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
+	Matthias Brugger <matthias.bgg@gmail.com>, 
 	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
-	Wim Van Sebroeck <wim@linux-watchdog.org>, Dharma Balasubiramani <dharma.b@microchip.com>, 
-	Jeff LaBundy <jeff@labundy.com>, Simon Glass <sjg@chromium.org>, Linus Walleij <linusw@kernel.org>, 
-	Alexandre Torgue <alexandre.torgue@foss.st.com>, Giuseppe Cavallaro <peppe.cavallaro@st.com>, 
-	Jose Abreu <joabreu@synopsys.com>, Atish Patra <atishp@rivosinc.com>, 
-	Shawn Guo <shawn.guo@linaro.org>, Dmitry Osipenko <digetx@gmail.com>, 
-	Ibrahim Tilki <Ibrahim.Tilki@analog.com>, Okan Sahin <Okan.Sahin@analog.com>, 
-	devicetree@vger.kernel.org, linux-rtc@vger.kernel.org, 
-	Ricard Wanderlof <ricardw@axis.com>, patches@opensource.cirrus.com, 
-	Lukas Wunner <lukas@wunner.de>, Eugen Hristev <ehristev@kernel.org>, mfd@lists.linux.dev, 
-	linux-samsung-soc@vger.kernel.org, linux-mmc@vger.kernel.org, 
-	linux-mtd@lists.infradead.org, linux-amlogic@lists.infradead.org, 
-	netdev@vger.kernel.org, linux-pci@vger.kernel.org, 
-	linux-perf-users@vger.kernel.org, linux-phy@lists.infradead.org, 
-	linux-tegra@vger.kernel.org, linux-sound@vger.kernel.org, 
-	linux-integrity@vger.kernel.org, linux-usb@vger.kernel.org, 
-	linux-mediatek@lists.infradead.org, linux-watchdog@vger.kernel.org
+	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+	Linus Walleij <linusw@kernel.org>, Julien Massot <julien.massot@collabora.com>, 
+	Val Packett <val@packett.cool>, Fabien Parent <parent.f@gmail.com>, 
+	Akari Tsuyukusa <akkun11.open@gmail.com>, Chen Zhong <chen.zhong@mediatek.com>, 
+	linux-input@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, mfd@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, linux-gpio@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 17, 2026 at 9:41=E2=80=AFAM Daniel Matyas <matyasdaniel006@gmai=
-l.com> wrote:
->
-> Running dt_bindings_check returned:
-> [error] string value is redundantly quoted with any quotes (quoted-string=
-s)
->
+> Still waiting on Acks by the looks of things?
 
-That false positive is fixed in newer versions of yamllint since at
-least a year and a half ago. There's also some other quoting checks
-I'd like to turn on, but that bumps the minimum version since unknown
-checks are an error in yamllint.
+Unfortunately yes. Patch 4/9 [1] was suggested by you in [2] and it's
+independent from the rest of the series; it could be merged without
+introducing functional changes, but I don't know if you can provide
+the Ack for it or if a specific maintainer has to provide that.
 
-> The files used quotation marks in flow lists because the strings had
-> commas and these commas were interpreted as separators. Convert flow
-> style lists to block style lists, so that there is no problems with the
-> commas.
+[1] https://lore.kernel.org/linux-mediatek/20260902193351.185771-5-l.scorcia@gmail.com/
+[2] https://lore.kernel.org/linux-mediatek/20260520150014.GF2767592@google.com/
 
-If we wanted to fix like this, we should probably just require block
-style everywhere, but I don't think we should do that.
-
-Rob
+Thank you
+-- 
+Luca Leonardo Scorcia
+l.scorcia@gmail.com
