@@ -1,61 +1,104 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 984BD3EFD17;
-	Thu, 17 Sep 2026 08:08:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 180A63EB7F8;
+	Thu, 17 Sep 2026 08:11:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789632497; cv=none; b=Ty8Yia1qTx5v3URu8mA89Xb729NfQ0MzaIEYG2p/xxaOE/cSxtluV3jPXRrouL0nOUgQKSCKGVpCrFV9YATzQG/YFkXy4XPuyJ6MnoRLHJQ2B6bjAZP8paDJ6C+3scq7MiRhEV/RM4EiQlOX00QVvzafYygSJifQl2W08zEKh1I=
+	t=1789632680; cv=none; b=KCFZaEpCycTfiE4sRIcsoJrveARf82TLDfs2PPTnH6H8R0nVdf9gsc/ffzd5/1vdhQyRpoLbhwbMGSoazR2ZOfc8oDjzhx/j+Cbw6zUiSabYDKRptPBkNH3G8DWljzaCRRKKjhpDwcV8XD/GPeWAvmRyjb26bfFZKxBGZU2mNgE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789632497; c=relaxed/simple;
-	bh=wFl8cOBOThylEyLf927ohFdSpr+rudS5mT01A0J9STg=;
+	s=arc-20240116; t=1789632680; c=relaxed/simple;
+	bh=C8GOUSGG2p753GU/d8fnijIVm/CIaPQvvAfkuQDpRdg=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=Mio2KFbYXVkdnZnJ8oz+LOWBKCjzEqnrPXKa6opcWTq7BuTa306a4PP4LcVQH9M9eFma/cKkEGmKYTZR1w6ub2cE+1zXU4UFrgAFW8xI8cSzVaz+Il8TE9gydTuyZWtB1R1XAOy1NwJPDUn1b6HmKPVB2mvS1al/Q3723XF36t8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TVDcknN3; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=Z00kKehOLrKQbn17pebXxPZH2l8CSp1wIH8GP5pKoIAuwuVlUgeOmDGuLH72CgGPraav2AyB3uxHB5oqy87z0/BZrTvGv0olEDUQ9qtIs7iheFWQduJOLfrm2psGfyr96U3a2eSugzDimTLtM53qYNxbad0QJLMlDhnWrrcQZKg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OuPPAf/i; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TVDcknN3"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8EC981F000FF;
-	Thu, 17 Sep 2026 08:08:11 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OuPPAf/i"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 835FA1F000FF;
+	Thu, 17 Sep 2026 08:11:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789632492;
-	bh=wFl8cOBOThylEyLf927ohFdSpr+rudS5mT01A0J9STg=;
+	s=k20260515; t=1789632678;
+	bh=tjCANDN9Cmup5RNH0pmtUarjfOrz4F1NfcznTrPGBKg=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=TVDcknN36SgLs8i01Y9CMgL+V45CMxPpl3+Nc4J4pVJr8fke63ta5N5H9MMKTKSTW
-	 iimMlQwDp4vWOLMe/d2FO/3mlo7tTk2E1Ll4AlbsJbZOAAXnbhQA3hXs1L1AWel1tm
-	 y/8sPcjnTRbPummVjEJ9rxT8WkM8QaGlPwtX0qjp80On9ON7R02Zn2S0VFGHgOxFkX
-	 Lr6wxGvNEXtArhnUBKm5KupLW4ErigTxU5pa2GXO+vrFsDTolwwqO7BDuIhGHattwC
-	 i8lNUuReUYxPLJCu6DnxVKtyEUJ0sDxBNrI779r8V0N3xyIEyXKM4sJnyUw475MLiT
-	 vKlvHZ+aYb62A==
+	b=OuPPAf/ixhkMKZtufAwleeFqsXVNLMHJFyK5RB7ugR83JjGPNyP+LML/+1+ptnVeW
+	 RUusJngLCsXHfboW3jAK9VQDYhcMNQZ8hFElaZ1HKw0Pn5/Av1VJ6RDKx2KHdgsq4F
+	 MHrQQBvijWAaPUCSj3lEEYcow1B/XLrll5cKply9Z/iLR+5fLn/9MEFTAqAViwovt8
+	 OC5h7iN/qEkeG8VxOU09eg7KjifBWN4Pc9HV2AZDppnws7CJ7qQ+8OlIgKwFiwxCxF
+	 ig/M9jcIwQuUfuw9PhBiqHkrVJAO5Lwnbyq5s44YDGX7sVygCta/ozB25wuDXeXQH0
+	 zCPITHErJPRBw==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v12 6/6] arm64: dts: amlogic: t7: khadas-vim4: Add i2c
- MCU fan node
+Subject: Re: [PATCH v12 3/6] mfd: khadas-mcu: Add support for VIM4 MCU
+ variant
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Ronald Claveau" <linux-kernel-dev@aliel.fr>
-Cc: linux-amlogic@lists.infradead.org, robh@kernel.org, mfd@lists.linux.dev, lee@kernel.org, devicetree@vger.kernel.org, conor+dt@kernel.org, neil.armstrong@linaro.org
-In-Reply-To: <20260917-add-mcu-fan-khadas-vim4-v12-6-497cd543a148@aliel.fr>
+Cc: neil.armstrong@linaro.org, linux-amlogic@lists.infradead.org, devicetree@vger.kernel.org, mfd@lists.linux.dev, robh@kernel.org, lee@kernel.org, conor+dt@kernel.org
+In-Reply-To: <20260917-add-mcu-fan-khadas-vim4-v12-3-497cd543a148@aliel.fr>
 References: <20260917-add-mcu-fan-khadas-vim4-v12-0-497cd543a148@aliel.fr>
- <20260917-add-mcu-fan-khadas-vim4-v12-6-497cd543a148@aliel.fr>
+ <20260917-add-mcu-fan-khadas-vim4-v12-3-497cd543a148@aliel.fr>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 17 Sep 2026 08:08:11 +0000
-Message-Id: <20260917080811.8EC981F000FF@smtp.kernel.org>
+Date: Thu, 17 Sep 2026 08:11:18 +0000
+Message-Id: <20260917081118.835FA1F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-> From: Ronald Claveau <linux-kernel-dev@aliel.fr>
->=20
-> Enable and configure i2c MCU node to get fan working on Khadas VIM4.
->=20
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Reviewed-by: Martin Blumenstingl <martin.blumenstingl@googlemail.com>
-> Signed-off-by: Ronald Claveau <linux-kernel-dev@aliel.fr>
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
+s) to consider:
+- [Low] mfd: Incorrect writeable registers in VIM4 regmap config
+--
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+commit fc44329d7ee6d12a0077930b2632df3554d1e38f
+Author: Ronald Claveau <linux-kernel-dev@aliel.fr>
+
+mfd: khadas-mcu: Add support for VIM4 MCU variant
+
+This commit adds support for the VIM4 MCU variant by refactoring the
+probe function to use per-variant values. It introduces a dedicated=20
+regmap configuration for the VIM4 MCU, with its own volatile and=20
+writeable register checks.
+
+> diff --git a/drivers/mfd/khadas-mcu.c b/drivers/mfd/khadas-mcu.c
+> index 0e74efe14f367..4b37e74e2b04a 100644
+> --- a/drivers/mfd/khadas-mcu.c
+> +++ b/drivers/mfd/khadas-mcu.c
+
+[ ... ]
+
+> +static bool khadas_mcu_vim4_reg_writeable(struct device *dev, unsigned i=
+nt reg)
+> +{
+> +	switch (reg) {
+> +	case KHADAS_MCU_VERSION_0_REG:
+> +	case KHADAS_MCU_VERSION_1_REG:
+> +	case KHADAS_MCU_SHUTDOWN_NORMAL_STATUS_REG:
+> +		return false;
+> +	default:
+> +		return true;
+
+[Severity: Low]
+Does this function omit multiple known read-only registers defined for the =
+MCU,
+such as KHADAS_MCU_MAC_0_REG and KHADAS_MCU_USID_0_REG?
+
+Because this switch defaults to true, any unlisted read-only register is
+incorrectly marked as writeable. Because the regmap uses REGCACHE_MAPLE,
+writing to an omitted read-only register will inappropriately cache the wri=
+tten
+value instead of failing, which could poison the cache for subsequent reads.
+
+Even though the khadas-mcu-user-mem cell isn't instantiated for the VIM4 va=
+riant
+(meaning there is no active code path writing to these registers in normal
+production operation), should these known read-only registers be explicitly
+handled to prevent future caching issues?
+
+> +	}
+> +}
+> +
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260917-add-mcu-fa=
-n-khadas-vim4-v12-0-497cd543a148@aliel.fr?part=3D6
-
+n-khadas-vim4-v12-0-497cd543a148@aliel.fr?part=3D3
