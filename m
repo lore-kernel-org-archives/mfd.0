@@ -1,68 +1,68 @@
-Received: from mail-oi2-f9.google.com (mail-oi2-f9.google.com [74.125.231.201])
+Received: from mail-oo2-f0.google.com (mail-oo2-f0.google.com [74.125.231.128])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC40F44AB6E
-	for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 20:24:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.231.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6C6740BCCB
+	for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 20:56:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.231.128
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789676653; cv=none; b=dU/FC/kBJPdjGW2jpuWq824IoL/x42+WP7RzVQA7ertC5T7Walu9x12nnprTvu3U/Z0bKgoU5iKk3CRucUuTecxyYnHmSLuCBTY912GuCDSGWBjYTZfLTeL7iWVuTvxNRttr/NGbdd+dmOBQL9GkzEJOu5ETZLzwvZ+KuuG1Ziw=
+	t=1789678612; cv=none; b=R9fbJ4JNR3eKyPmCHOxUuareRjo+hGF4Exj/5/ZjeqGSW8fPJrbK2jbe+N/UsRhH53o0lDqqGxiwqcGER7mUSsLIsuz3xcj86edt3qYEpicnq0oBQ4UAF3KsohLIEGYt7gP8twr5oYJPHrFhS4g5pj4xDsHXbyx0gQ6X4UycZ4Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789676653; c=relaxed/simple;
-	bh=Yshl8u41lsc1ZIeHhJ2AbGKqFXfjn1ErfK+AnH2JZhU=;
+	s=arc-20240116; t=1789678612; c=relaxed/simple;
+	bh=D/cpHqVPtGZUVLRI7v02mDnLvMkXVMv5jnRoM2p9ZVo=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Yo+lGA24ZWhd23uVBNjMGcjBAu6HbNpEyByfuStxoOZLeGdWwkM5sV8XIioN/NNdYkfiNemNrQp3bBSVg7m68HImwIK1uMRqOyhelpqUzs6uLbqUfqNSB/6W55F1VlEgZA3rnTlpSfhs/Op9tspWQfBD6nZXD/oFUtHyWGRlLgQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NAK21OL0; arc=none smtp.client-ip=74.125.231.201
+	 In-Reply-To:Content-Type; b=qRFLWJYKP6iHgbb8DaIu7Ojc1wq+a6avKAvhF4oQ3MvYc7sXUEoSbLuk+3pln1lTmunrLMRhUdHqbhGGV7fFj5dCB+yRCA1kC6GD+jj6N2mWzOGzvOh0nPX4jk18h3R9zifT95kfHtXMSaQhwLr1R9JBiQptw/rvkSpwe/Ody34=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=sx/1nOzh; arc=none smtp.client-ip=74.125.231.128
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NAK21OL0"
-Received: by mail-oi2-f9.google.com with SMTP id 46e09a7af769-7f9cc0e524aso429422a34.1
-        for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 13:24:09 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="sx/1nOzh"
+Received: by mail-oo2-f0.google.com with SMTP id 006d021491bc7-6a3900cb2b5so27254eaf.0
+        for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 13:56:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789676648; x=1790281448; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1789678609; x=1790283409; darn=lists.linux.dev;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=7itKtlTYX9R4u2oxxBvlnWOsxUd+L61slFivLar7yO0=;
-        b=NAK21OL0FeI6WuEhd42vpQYbkfci1tCdDJr9AshPmjre3yczqdHvWua3vrroOkwGxx
-         d5WqvrucsevXmRx9fsqgr3/IOsGnknrM5rE525KcsCDVK2VE5SWCChgDrxEKle8F52rj
-         RMHsYRnq2LEYkQkyydw9CxoZ7OSrvuMCRzdU8QsHQwNfCYB+1vBF8foMgqHIqxT8kNVB
-         Y/BMdxXrvRlh/DJSajYYs/1MRMZKZ+ieu8jSVu4mtkIB5iNU0o7HuBwV+tL68LZZw6PR
-         r6Vc5KRxTMYQUtzUvdT4r8IFsOXISXrGpzr3C14bCFGQg8EG0K+S1mnYynS6hYdIaPnz
-         URow==
+        bh=VqcPQwYq5exU7gKmkOcg/sQ85WVoAlRW8Nng5r6wY2Q=;
+        b=sx/1nOzhUzAP/aRljLKShrQB5TGTrHUUGgzFNWrs5V9+TJUMBMoha2eqNEjJ7ovJLF
+         c/OUYDg69JhzRd38EdpwpfqWz31OQ813ZdOCFhFvsbxh6i7wUticU0ZqlrhIF3TTp8wo
+         waTuR6bPArYh0IMjKpL+fhXio2DK8iQg85aY4HXBlJCYKRdkXq1+JvbbB3rY/5VnYrys
+         WWnuPXcOJg5Xl9FC5uLVRFNoBzgLnlbC1okIr8/mpsj+oVk7h5whnFizTpHPKLBi8uPU
+         9PfkSXYV5S8W2edierj0acaara/RIV0URUajiMKHVUrNtyUJ1suerqnmMH36OGE52G0z
+         ARpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789676648; x=1790281448;
+        d=1e100.net; s=20260707; t=1789678609; x=1790283409;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=7itKtlTYX9R4u2oxxBvlnWOsxUd+L61slFivLar7yO0=;
-        b=AYR6NFYEk+RIFaQA9hD1XqxzDeZBOTVQ9ViVSkh1g4SZYpfgwYFDT9Sx4B16Uz3LXA
-         dQFfUWvafv3o5mWb9HLt00nH0wfEQc8/utmzWIjiYK9TIsSCmGTMDltYZ5bTr5b/M+5u
-         NWgkXJxCSoFmtDPYMl06+aO2uuucTv9Alg54TORRP0E1i/SvvAePIVpF0eHyAUxvwwWh
-         k05lfaVLSLbGmYlYKGCIoNx5jPfjQRpJVSSqHEmoECH8xPxenjY0tN0k54ZV+MswyZ6+
-         p4BKKmFz/1jS6T3029opm5ztHVb5uPZhxCK1rmqahCnRrl7WO3uuW0R4hbksiYic/CgH
-         8UcQ==
-X-Forwarded-Encrypted: i=1; AKwUvByn5lHrWc0AXhf5nvetCaIckl6hrk6RK3TFF1rh7h+rhfW03KTSr+Re/QXHIlhefTkTGNI=@lists.linux.dev
-X-Gm-Message-State: AFuF++mycNUIgEXRLGmdgR2Ru91qq5Hh+rbbQB4JhYeTjGExzfPZiwzS
-	o3bTXI2MN+coEh82GPqI5IQRrIMuLAuGcdp16qhIQ2t+xARmDoWyqikI
-X-Gm-Gg: AYBFou3Buz0N8T5B1d4RDBlUKVfep734JjMpMlC92U6XqzKzmf388kAXG7LWpAc2loM
-	0CX5idnhS3/5W39BenTUyBjzDdW6VmsiAFa2B+azhQb3TkKwAFi1cAwM1TxFIm0CivwpU3hOaJZ
-	FjJx3K70asuihDB8uUUgTMUvjsrifHe9kXMcoclE+JYZgEOlWWcJTS6aOK04oLyLzftEi0si7L3
-	F1wNZDaH1HMnv9uxaxJjLM/xopX4zViPx8tdcoQRmXi1c5a62O5bY4cPn9QIpVF1bDzZ4T49N5+
-	ag/88JyTC1nhC76S27I+QS8OHnGh1w77mJ7dzX2NL2jPSwAufBhvfbHvsRwIxb6lsaP9cY2qp9W
-	i48sse0wsNRHmC5StCAujgGHGxxYft08k4SATQQ77PJE4v3OVwwtF87fJEY93E70pthZbgtOBm3
-	sY1VXx64Jyfd5QifWX00NpByYwh9w5shLtuGNJOoa6/11pH0cEkikKLTtrjKwc3dldNLwpjSQgs
-	WWZQz1l9IZX1xg=
-X-Received: by 2002:a05:6820:2219:b0:6b3:5475:4861 with SMTP id 006d021491bc7-6ca9aa3fb5dmr186014eaf.18.1789676648385;
-        Thu, 17 Sep 2026 13:24:08 -0700 (PDT)
+        bh=VqcPQwYq5exU7gKmkOcg/sQ85WVoAlRW8Nng5r6wY2Q=;
+        b=Qzce1v/rSe0nvkgBrosQWmipCs2UG1k/BOWFw75uIum/X37XmHd3viW0BwMvpIiEro
+         TXWnKoNnJ/geTd/s2d6xw3MXJVHIDbiYdRcMMQcdNL3SoTUtzxMnBSeMEi1jeOlBVJKf
+         tnEkuoWy+Wa3r3+oIs8B28yThI4bqTD4d6MKo0E0LFEY2H64Yo2tePA1JoXLK0wmKCKf
+         gLbyCYUdDy+xvGGGJJwNfijOFpavITRHIUNCBdkkput6Rl1nkApPcqQY5lQMMfCQS6vU
+         oiK2AYxMhvSEMYUwj7ShUcykQWageRmb0Q9yDqJ8KdzC3dWso9BOcSqwTogoX7BT9zrF
+         LLWw==
+X-Forwarded-Encrypted: i=1; AKwUvBx48Ufk9aB5hj6ZtIKIAVCq5bKHQqYw0mKGKPfURh9h1tVx52yE9+YMh9DQ7DWc8AuBw2E=@lists.linux.dev
+X-Gm-Message-State: AFuF++m0n1WqK6eTRdprZB2xbdNXLUysmxp0E5x7O2kdWum7bBgbrsKZ
+	VXsHkKWcQUIU8ed/MCsc5QiGWetp+1s+uvnWuhmiC8CWelKE2tos2cBWDPx5Ju7k8sM=
+X-Gm-Gg: AYBFou0H29CGgeCx/E6cUAkyP5IZWWgM11rRf28+qDipfNnmcQS0JLVTog0Yy5w2V+9
+	irEuHpey8M25mbv/uRSQ+TaLB6P+LGdb+Q4e+I50OYv3tT7bn/Pp3RKbmq2Xrwbr0wTB73YeWJO
+	lqhXtGlw0zzl6j0Mt94XicQ0MgXrwUNeKT73M0oUSrcCiPYPJDczyP8iSJmhTyXWxvBOa40H11O
+	CWPQ/xDyXzR0UoT7wSQU7Z0+A8h43UdIp76Ol+YZIY6+EBtz7KyvIKt3cLh9tIbN5D3Xv/35JNj
+	sYkRQ/+Q+zejbPcE8fLVXUZTpRx6ka2Z7RvrZdKr+DIZvMu25PTi2Xaqv5at0FIAYhQSomz+Ruq
+	Ty4MJakxiKq2Z2Csn4fUpWST2+1qZD5719OX2QxxAztk1J70GBOkgauSdCQf5Osiv0ZSV4NuoIK
+	vTH26theEJNjithnvVD1WoPOI2Ev9NOBRj8joYhxIr6d+vzar8qN31glDL0SvW9WvBcJMdxWQcQ
+	N7jikVo4laJXA0=
+X-Received: by 2002:a05:6820:16a6:b0:6ac:b6c0:2c09 with SMTP id 006d021491bc7-6ca9a22b45bmr268813eaf.1.1789678609442;
+        Thu, 17 Sep 2026 13:56:49 -0700 (PDT)
 Received: from ?IPV6:2600:8804:5716:d800::b712? ([2600:8804:5716:d800::b712])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-6c8f5cf48besm3802412eaf.4.2026.09.17.13.24.06
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-486ac360590sm873135fac.17.2026.09.17.13.56.46
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 17 Sep 2026 13:24:07 -0700 (PDT)
-Message-ID: <2d1b80f2-53f6-4ed6-81bf-e35c0a9efb26@gmail.com>
-Date: Thu, 17 Sep 2026 15:24:05 -0500
+        Thu, 17 Sep 2026 13:56:48 -0700 (PDT)
+Message-ID: <b573c7fc-61e1-4112-8ff6-078aa72e755e@gmail.com>
+Date: Thu, 17 Sep 2026 15:56:46 -0500
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -70,76 +70,101 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/3] iio: adc: add mt6397 PMIC AUXADC support
-To: Andy Shevchenko <andriy.shevchenko@intel.com>
-Cc: Jonathan Cameron <jic23@kernel.org>, David Lechner
- <dlechner@baylibre.com>, =?UTF-8?Q?Nuno_S=C3=A1?= <nuno.sa@analog.com>,
- Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Lee Jones <lee@kernel.org>, linux-iio@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org,
- mfd@lists.linux.dev, Roman Vivchar <rva333@protonmail.com>,
- Luca Leonardo Scorcia <l.scorcia@gmail.com>
+Subject: Re: [PATCH 3/3] mfd: mt6397-core: Add mt6397 AUXADC support
+To: sashiko-reviews@lists.linux.dev
+Cc: lee@kernel.org, robh@kernel.org, devicetree@vger.kernel.org,
+ conor+dt@kernel.org, mfd@lists.linux.dev
 References: <20260915-rbrue-suez-upstreaming-mt6397-auxadc-v1-0-d35d2ac3d6f0@gmail.com>
- <aqpmgliQW7FW53o5@ashevche-desk.local>
+ <20260915-rbrue-suez-upstreaming-mt6397-auxadc-v1-3-d35d2ac3d6f0@gmail.com>
+ <20260916042448.A40941F000FF@smtp.kernel.org>
 Content-Language: en-US
 From: Ryan Brue <ryanbrue.dev@gmail.com>
-In-Reply-To: <aqpmgliQW7FW53o5@ashevche-desk.local>
+In-Reply-To: <20260916042448.A40941F000FF@smtp.kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 9/16/26 4:50 AM, Andy Shevchenko wrote:
-> On Tue, Sep 15, 2026 at 11:15:25PM -0500, Ryan Brue wrote:
->> The MediaTek mt6397 PMIC has a 10-bit AUXADC that nothing in-tree can
->> reach. On boards built around it that ADC is the only path to the battery:
->> the SoC's AUXADC is wired to board thermistors, and the charger ICs these
->> boards use have no ADC at all, so without it there is no pack voltage and
->> no state of charge.
-> This doesn't explain why a brand new driver? Perhaps we have existing code that
-> may be updated to support this device?
-I considered adding mt6397 support to either mt6323-auxadc or 
-mt6359-auxadc, and both had problems.
-
-Both mt6323-auxadc and mt6359-auxadc select channels through a request 
-register (1 bit per channel), while mt6397 uses a 4-bit numeric field 
-CHSEL in CON1 (10:7), and then pulses a START bit (CON1 bit 0). That was 
-the biggest reason I made the new driver.
-
-For mt6323-auxadc, which is the closest I could find to the mt6397 
-(CON0..CON27), it has 13 more registers than the mt6397 (CON0..CON14). 
-It uses CON22 for its request register, and reads the result value from 
-the same register as the ready bit. We don't do that - the mt6397 has a 
-factory calibrated value for each channel at 0x16 higher than the raw 
-value. mt6323 also has a 1800 mV / 15 bit scale / resolution while we 
-have 1200 mV / 10 bits. We also have some per-channel preparation that 
-we have to do before the burst, that the mt6323 doesn't have to do.
-
-For mt6359-auxadc, it has a more generic framework for describing the 
-AUXADC, but it assumes requests are channel-per-bit, and so we would 
-have to basically ignore req_idx, req_mask, rdy_idx, and rdy_mask.
-
-We also have our own software sampling, which the vendor does too 
-(Amazon Fire OS based on Linux 3.18). We'd have to have our own sampling 
-callback to do it.
-
-I drafted two other versions of these patches adding mt6397 support to 
-both of those drivers, but the differences meant I had to add a lot of 
-extra boilerplate to each driver and to me it didn't make sense.
-
-In v2 I will add the justification to the cover letter and commits for 
-why I chose a new driver.
-
-If you'd like me to instead send the exploratory patches I made adapting 
-mt6323-auxadc or mt6359-auxadc, let me know. I'm fine if it ends up 
-seeming like we should adapt one of the existing drivers, but I think 
-the mechanism for controlling this AUXADC is unique and merits its own 
-driver.
-
-Thanks again for the review, I am going through each one, and sorry for 
-the delay. I'm rather new to kernel development.
-
-Best regards,
-Ryan
+On 9/15/26 11:24 PM, sashiko-bot@kernel.org wrote:
+> Thank you for your contribution! Sashiko AI review found 1 potential issue(s) to consider:
+> - [Medium] iio: mt6397-auxadc: hardware state leak on error paths
+> --
+>
+> commit e17dd59587f106380c3ede8aa27c118b33350f88
+> Author: Ryan Brue <ryanbrue.dev@gmail.com>
+>
+> mfd: mt6397-core: Add mt6397 AUXADC support
+>
+> The mt6397 PMIC includes an AUXADC. Register the AUXADC in the mt6397
+> devices array to allow the corresponding driver to probe using compatible
+> string.
+>
+>> diff --git a/drivers/mfd/mt6397-core.c b/drivers/mfd/mt6397-core.c
+>> index 9ec9519965887..5d5f816492aaa 100644
+>> --- a/drivers/mfd/mt6397-core.c
+>> +++ b/drivers/mfd/mt6397-core.c
+>> @@ -261,6 +261,9 @@ static const struct mfd_cell mt6359_devs[] = {
+>>   
+>>   static const struct mfd_cell mt6397_devs[] = {
+>>   	{
+>> +		.name = "mt6397-auxadc",
+>> +		.of_compatible = "mediatek,mt6397-auxadc",
+> [Severity: Medium]
+> Enabling this device exposes a hardware state leak on error paths in the
+> mt6397-auxadc driver.
+>
+> In mt6397_auxadc_isense_enable(), if the second regmap write fails, does the
+> function return without unwinding the first write, leaving
+> MT6397_CHR_CON16_ADCIN_VSEN_EN incorrectly enabled?
+>
+> drivers/iio/adc/mt6397-auxadc.c:mt6397_auxadc_isense_enable() {
+>      ...
+> 	ret = regmap_update_bits(map, MT6397_CHR_CON16,
+> 				 MT6397_CHR_CON16_ADCIN_SEL,
+> 				 MT6397_CHR_CON16_ADCIN_VSEN_EN);
+> 	if (ret)
+> 		return ret;
+>
+> 	return regmap_set_bits(map, MT6397_AUXADC_CON14,
+> 			       MT6397_AUXADC_CON14_CH0_NORM_SEL |
+> 			       MT6397_AUXADC_CON14_CH0_LBAT_SEL);
+> }
+>
+> Similarly, during teardown in mt6397_auxadc_isense_disable(), the use of the
+> ?: operator short-circuits the sequence.
+>
+> If the first regmap_clear_bits() fails, will it abandon the cleanup and skip
+> disabling MT6397_CHR_CON16_ADCIN_SEL?
+>
+> drivers/iio/adc/mt6397-auxadc.c:mt6397_auxadc_isense_disable() {
+>      ...
+> 	ret = regmap_clear_bits(map, MT6397_AUXADC_CON14,
+> 				MT6397_AUXADC_CON14_CH0_NORM_SEL |
+> 				MT6397_AUXADC_CON14_CH0_LBAT_SEL);
+>
+> 	return ret ?: regmap_clear_bits(map, MT6397_CHR_CON16,
+> 					MT6397_CHR_CON16_ADCIN_SEL);
+> }
+>
+> A similar issue appears in mt6397_auxadc_battemp_bias().
+>
+> Does this function lack a rollback path if the second or third regmap
+> operation fails, permanently leaking previously modified register states?
+>
+> drivers/iio/adc/mt6397-auxadc.c:mt6397_auxadc_battemp_bias() {
+>      ...
+> 	if (on) {
+> 		ret = regmap_set_bits(map, MT6397_AUXADC_CON0,
+> 				      MT6397_AUXADC_CON0_BUF_PWD_ON);
+> 		if (ret)
+> 			return ret;
+> 		ret = regmap_set_bits(map, MT6397_AUXADC_CON0,
+> 				      MT6397_AUXADC_CON0_BUF_PWD_B);
+> 		if (ret)
+> 			return ret;
+> 		return regmap_set_bits(map, MT6397_CHR_CON7,
+> 				       MT6397_CHR_CON7_BATON_TDET_EN);
+> 	}
+>      ...
+> }
+Good find, exiting early could leave the select bits set on CON14, or 
+the battery detect bias current or input buffer on in CON0/CON7. Will be 
+fixed in v2.
