@@ -1,42 +1,42 @@
 Received: from mx.prosyst.ru (m2.prosoftsystems.ru [46.48.77.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79B124BD364
-	for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 10:34:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E3F54A4F12
+	for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 10:34:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=46.48.77.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789641257; cv=none; b=KQ9X2RjzSg+0gwQPli/0v8LYDzJ4RC850qqpSerLlZiOKQF+K7Tz0XtdSpvLDEu8+ydM/6Q3RFOG9hIkLpFJIYcWm7Pv9XCl/XLqcwjIfPASaDjldW5Vz58aBGjBlO4wblzGQkVGCLgby1DiJVpX9J56ScguoJefWJlH9Rgt4Z4=
+	t=1789641263; cv=none; b=N2g36VZ/t6Yj2UobcRY12QxKCGUo+gqqkQP8r8x5sGy1MMb+17tWr7eA+F/po6xShFjTUxL7B1v4eTn1LMXZswJZondbsQW5jgv4ng18IWxtCgGD8MxK7C3ltoU4vkXYfpfBtbZYI71uAMnmbHCl7GuXEZiXIx/BgBj2a4jGzbo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789641257; c=relaxed/simple;
-	bh=EDvQQPM4NXFJxheRWHtlfaJepcn9e1uFAUjhCilE6GY=;
+	s=arc-20240116; t=1789641263; c=relaxed/simple;
+	bh=SlbmVcyKluXQZa94Vx0faY5/XwBAe7c+q7v4s8ZbJ6M=;
 	h=Content-Type:From:To:CC:Subject:Date:Message-ID:References:
-	 In-Reply-To:MIME-Version; b=B+ac+rSVQ98Rziq7vNFggvAw1tNa6b6NK3wqUvabOSFDdRcZDF5p0ebWADMGxn6rYOhZ91xCMcrn/Qlq7X/yr8eYa1lEjsHLxQibAGp8Tx19hPgpjNtW2pQfhjeDLBN6EIDVicDeNvt0vEiu6ah3XCldHBHBx25cNJVmPxzDFQE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=prosoftsystems.ru; spf=pass smtp.mailfrom=prosoftsystems.ru; dkim=pass (2048-bit key) header.d=prosoftsystems.ru header.i=@prosoftsystems.ru header.b=jKVXWG/B; arc=none smtp.client-ip=46.48.77.131
+	 In-Reply-To:MIME-Version; b=bY1deU9/TY2X05qTwCEgkz2JUF8Dgf/BYkXB1NMlF8qQCRGCr3QjXQMZUdm5WeHWOxzleyrICbBoGbXhBUUtzG4yqhmxXzTK8UjMlr8CUUxrshsK1r0raZMhWcpfg0260TWWILybjMQJf0foo1C2muUujBbYnCbxVfVu//q7pb4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=prosoftsystems.ru; spf=pass smtp.mailfrom=prosoftsystems.ru; dkim=pass (2048-bit key) header.d=prosoftsystems.ru header.i=@prosoftsystems.ru header.b=GzXg24+i; arc=none smtp.client-ip=46.48.77.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=prosoftsystems.ru
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=prosoftsystems.ru
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=prosoftsystems.ru header.i=@prosoftsystems.ru header.b="jKVXWG/B"
+	dkim=pass (2048-bit key) header.d=prosoftsystems.ru header.i=@prosoftsystems.ru header.b="GzXg24+i"
 Content-Language: ru-RU
 Content-Type: text/plain; charset="koi8-r"
 Content-Transfer-Encoding: quoted-printable
 DKIM-Signature: v=1; a=rsa-sha256; d=prosoftsystems.ru; s=ps;
-	c=relaxed/relaxed; t=1789641234; h=from:to:date:message-id:subject;
-	bh=q5DGoGch0eP9pgkA7a+3UVKIBNQSk0tdO3CJEoh/R8w=;
-	b=jKVXWG/BjNpqvXXGQUJhSAJngKWXTN0sv4ed+tq8GKLS4p/HQbfX9w7Gcmnq39cj+UkUPx20Ylx
-	B/lCaahO/lf4OIc9HTLYoYXBClnNRgsgoix+aqclucuf+bCipJSV5bqCzus+sZ+AerMkj9rUzVEvw
-	BDhTdNwYpeeGl2ACYco6Pp8dlyyTiTJi/mLZfIxJ93cRU3YRKjRF74m9KiZ8IPGnaaINJP1V/m/Rz
-	GKdlHCSqsSxEkZcQ2oxarJJIe9rzcaMlPcnqBFIX+DRwhczLltcP5Hl4Nn2U75Jl5H3mvLSSM2clO
-	OuA9wQMYDH1Wf2ixK9jHcvagZJHcAfxvWU+Q==
-Received: from echo-2.prosoft.ural.ru (172.21.245.22) by mx.prosoftsystems.ru
+	c=relaxed/relaxed; t=1789641237; h=from:to:date:message-id:subject;
+	bh=9i41YP6YKQ0XrCrYgugZtRgKOBXpPuMajk3GxJ8Jlqc=;
+	b=GzXg24+iquMUWSRemvcSKKPOYL3qUexrHZjhQ1kWDJv3zEW3WnDArFYToqDUh4dUQXWvX7c36xX
+	fvE/TDvSPcVtIn01I/TCV2+14Mr61tHaMPD08pWDLyfXpSGO0JJKj5VnZJxCJgXPRWVHJeZvxkrxI
+	SHvlyh83y0F9AAFrYD6tfEAH+MG5fmvUAbSi301k/LeJBGWfSUPBE4ntTFcbo3o1OXm6TROnxZI3v
+	DURAx6XXjdHMeCgeUBlphBDf3a0OqRlJzEK/JF37nrCl7kvAYkPaOT/9uTOZL4wOqpQfLASvT2F23
+	+OwZF/dVclkSPcy75zIWCimgSLg+nY3cUYkA==
+Received: from ECHO-3.prosoft.ural.ru (172.25.100.229) by mx.prosoftsystems.ru
  (172.21.240.33) with Microsoft SMTP Server (TLS) id 15.1.396.30; Thu, 17 Sep
- 2026 15:33:54 +0500
+ 2026 15:33:56 +0500
 Received: from echo-2.prosoft.ural.ru (172.21.245.22) by
- echo-2.prosoft.ural.ru (172.21.245.22) with Microsoft SMTP Server
+ ECHO-3.prosoft.ural.ru (172.25.100.229) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.39; Thu, 17 Sep 2026 15:33:53 +0500
+ 15.2.1748.39; Thu, 17 Sep 2026 15:33:56 +0500
 Received: from echo-2.prosoft.ural.ru ([::1]) by echo-2.prosoft.ural.ru
  ([fe80::c1a2:90f7:8820:c669%17]) with mapi id 15.02.1748.039; Thu, 17 Sep
- 2026 15:33:53 +0500
+ 2026 15:33:56 +0500
 From: =?koi8-r?B?9sHNwsHLycXXIPLBxMnKIPLJy8HSxMnOz9fJ3g==?=
 	<r.zhambakiev@prosoftsystems.ru>
 To: Aaro Koskinen <aaro.koskinen@iki.fi>
@@ -50,13 +50,13 @@ CC: =?koi8-r?B?9sHNwsHLycXXIPLBxMnKIPLJy8HSxMnOz9fJ3g==?=
 	<linux-kernel@vger.kernel.org>, "lvc-project@linuxtesting.org"
 	<lvc-project@linuxtesting.org>, "stable@vger.kernel.org"
 	<stable@vger.kernel.org>
-Subject: [PATCH v4 1/3] mfd: tps65217: Fix NULL pointer dereference on IRQ
- init failure
-Thread-Topic: [PATCH v4 1/3] mfd: tps65217: Fix NULL pointer dereference on
- IRQ init failure
-Thread-Index: AQHdRpAJK/P1oYJB3ES3PIID9fN00g==
-Date: Thu, 17 Sep 2026 10:33:53 +0000
-Message-ID: <20260917103312.92624-2-r.zhambakiev@prosoftsystems.ru>
+Subject: [PATCH v4 2/3] mfd: tps65217: Check return value when masking
+ interrupt sources
+Thread-Topic: [PATCH v4 2/3] mfd: tps65217: Check return value when masking
+ interrupt sources
+Thread-Index: AQHdRpAKPZuvbfcdOEiS/29Hcxv2lQ==
+Date: Thu, 17 Sep 2026 10:33:55 +0000
+Message-ID: <20260917103312.92624-3-r.zhambakiev@prosoftsystems.ru>
 References: <20260917103312.92624-1-r.zhambakiev@prosoftsystems.ru>
 In-Reply-To: <20260917103312.92624-1-r.zhambakiev@prosoftsystems.ru>
 Accept-Language: ru-RU, en-US
@@ -71,38 +71,42 @@ MIME-Version: 1.0
 
 From: Radiy Zhambakiev <r.zhambakiev@prosoftsystems.ru>
 
-tps65217_probe() ignores the return value of tps65217_irq_init(), so
-when the irq domain creation fails the probe still completes and the
-driver ends up bound with a NULL tps->irq_domain. Unloading the
-module then makes tps65217_remove() call irq_domain_remove() on the
-NULL pointer and oops the kernel. On top of that, irq_find_mapping()
-may fall back to the default irq domain and dispose of mappings that
-belong to other interrupt controllers.
+tps65217_irq_init() ignores the error returned by
+tps65217_set_bits() when masking all interrupt sources. A failed
+register write leaves the driver's software mask out of sync with the
+hardware and may result in spurious interrupts.
 
-Check the return value and abort the probe on failure so the error
-is reported and no inconsistent state is left for removal.
+Check the return value and propagate the error to the caller.
+
+Found by Linux Verification Center (linuxtesting.org) with SVACE.
 
 Fixes: 6556bdacf646fcaa ("mfd: tps65217: Add support for IRQs")
 Cc: stable@vger.kernel.org
 Signed-off-by: Radiy Zhambakiev <r.zhambakiev@prosoftsystems.ru>
 ---
- drivers/mfd/tps65217.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ drivers/mfd/tps65217.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/mfd/tps65217.c b/drivers/mfd/tps65217.c
-index c240fac0ede7..2d04d9e0ae29 100644
+index 2d04d9e0ae29..ee640e3fcf7b 100644
 --- a/drivers/mfd/tps65217.c
 +++ b/drivers/mfd/tps65217.c
-@@ -333,7 +333,9 @@ static int tps65217_probe(struct i2c_client *client)
- 	}
+@@ -155,8 +155,12 @@ static int tps65217_irq_init(struct tps65217 *tps, int=
+ irq)
 =20
- 	if (client->irq) {
--		tps65217_irq_init(tps, client->irq);
-+		ret =3D tps65217_irq_init(tps, client->irq);
-+		if (ret)
-+			return ret;
- 	} else {
- 		int i;
+ 	/* Mask all interrupt sources */
+ 	tps->irq_mask =3D TPS65217_INT_MASK;
+-	tps65217_set_bits(tps, TPS65217_REG_INT, TPS65217_INT_MASK,
+-			  TPS65217_INT_MASK, TPS65217_PROTECT_NONE);
++	ret =3D tps65217_set_bits(tps, TPS65217_REG_INT, TPS65217_INT_MASK,
++				TPS65217_INT_MASK, TPS65217_PROTECT_NONE);
++	if (ret) {
++		dev_err(tps->dev, "Failed to mask interrupt sources: %d\n", ret);
++		return ret;
++	}
 =20
+ 	tps->irq_domain =3D irq_domain_create_linear(dev_fwnode(tps->dev), TPS652=
+17_NUM_IRQ,
+ 						   &tps65217_irq_domain_ops, tps);
 --=20
 2.53.0
