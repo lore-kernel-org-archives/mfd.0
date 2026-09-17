@@ -1,66 +1,100 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E86A503BDC;
-	Thu, 17 Sep 2026 12:48:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88ABA2D3ED1;
+	Thu, 17 Sep 2026 12:56:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.2
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789649336; cv=none; b=ICP/293wSa0sxBio1ZhtX3UiojK/vGi5jBaxSTmC5SupLXuBPSb81MK7NxmXBJlaG9PaDdCqxVMVyziZWuNombcQ6mdZfz4eYu0J+Jy3CRnrd3xCc7dZJp+7LjkF67ayQOB2Cno5eD92hv84onpLEQ0b3xjj5mzTQ5JFBGMtyME=
+	t=1789649779; cv=none; b=VOcXsBMKl8qplTeVJsJx0X7dsyjQXwDfh3xmsP8pqYUZjSHe2dSAWgA/ru11UyB8ipV0OJJJYmyZk/gIqS1c2v9zQqqztjgvv1g8ZtE2hDaXH+p1OHFsWpJ5M0kX5d1PdmTqoqTXHJlZ8FmNCf57Ydn16W1d2Dc/QmuA2XB2LNs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789649336; c=relaxed/simple;
-	bh=ybPZwFWVbAcWQe49Qez6gagDON00RN7+CnlsMZKQbo8=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=JrVLN1I3U8f6YHlH7w1URLtWKydeA1hT5FnIsFLPREjRGUABwgVjE/sNo9V7zIkTdUHdV1JPq4a17aQYPkQS6jxJgk5vKwJ9qsajG9n6liuq/kaoP2pBZ2sEw9HF4tUcszIQd4JP+HgSYTBDHkz9sEwOjMogHvd6XraGz3ess0Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kb3jCSew; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789649779; c=relaxed/simple;
+	bh=hJcOsp7/4gBcZglC/7Pd3zJVofVyfh4TOUzPHB2LbyM=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
+	 MIME-Version:Message-ID; b=LVs/yl5nQszdkempOkss+oUKLYCDUf+EQaqL5sBcolSAAg82CainZ+rYbAnjRBvnxF0MPRnDSuD681t0O1gijw/LdnXXEJlLQfbRromME9vOKAhnf5Z/sFzYFQ0FG9XblBFMSNhziBLlgZ47tXy3Pi8+jPCe7xIx8IB0K+pYqkQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=bhDMZFuC; arc=none smtp.client-ip=220.197.31.2
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kb3jCSew"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9E4441F000FF;
-	Thu, 17 Sep 2026 12:48:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789649314;
-	bh=ybPZwFWVbAcWQe49Qez6gagDON00RN7+CnlsMZKQbo8=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=kb3jCSewOKOFL8NNhKRVo+SBUREc2I3GSS7xlN+uhQ/YuMinWgK8LkfAeJmoYpQxN
-	 E1wuUX16tYt3EJwT4qpnuCujaemV3Lsb1gKdegqUKiFhEm/IbS5X9sYmxXaQBka7AU
-	 wrGM2uwxymJ0mmD0MrdsHzs82UiwsmogjlLSjBw2OXlCcX3kKxkC7UYEqlHVBL9z1o
-	 5UDltVEpxoFjgSd5NkPVgskP0pAzWWXHkcplKiX73cUAloUGW/XI64NWW6bN8EOp3m
-	 tH/mYXXYK8inS6NZrdtuSB9etKZg4n7pZAN74DqV3emLR2OhiV1cR4t6vJNdXeKhxu
-	 cmNVblCErq9oQ==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2] dt-bindings: mfd: ti,bq25703a: Expand to include
- BQ25798
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Alexey Charkov" <alchark@flipper.net>
-Cc: devicetree@vger.kernel.org, conor+dt@kernel.org, lee@kernel.org, robh@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260917-bq25798-v2-1-5086845cd3eb@flipper.net>
-References: <20260917-bq25798-v2-1-5086845cd3eb@flipper.net>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 17 Sep 2026 12:48:34 +0000
-Message-Id: <20260917124834.9E4441F000FF@smtp.kernel.org>
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="bhDMZFuC"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
+	Message-ID; bh=hJcOsp7/4gBcZglC/7Pd3zJVofVyfh4TOUzPHB2LbyM=; b=b
+	hDMZFuCwZhSkhaMjahcX5Bc05UtoeH3U7Sl3PP+Z0O5nklwxOkrfAsaVj1kzJ1/C
+	Ph75WHXQ6Jwlmp3FaB5SqyXkkkLmh60LChtuTjj/FD/tHRgEBQYw7CSWjYln4dl9
+	yKGQ/bZSPv+fNWsI53VzHJ5JbdjGW84sZEoBkxnOAo=
+Date: Thu, 17 Sep 2026 20:55:15 +0800 (CST)
+From: zl020895  <zl020895@163.com>
+To: "Andy Shevchenko" <andriy.shevchenko@linux.intel.com>
+Cc: longzhao@ambarella.com, "Arnd Bergmann" <arnd@arndb.de>,
+	"Krzysztof Kozlowski" <krzk@kernel.org>,
+	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
+	soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+	"Rob Herring" <robh@kernel.org>,
+	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
+	"Conor Dooley" <conor+dt@kernel.org>,
+	"Michael Turquette" <mturquette@baylibre.com>,
+	"Stephen Boyd" <sboyd@kernel.org>,
+	"Jerome Brunet" <jbrunet@baylibre.com>,
+	"Linus Walleij" <linusw@kernel.org>,
+	"Bartosz Golaszewski" <brgl@kernel.org>,
+	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+	"Jiri Slaby" <jirislaby@kernel.org>,
+	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	"Catalin Marinas" <catalin.marinas@arm.com>,
+	"Will Deacon" <will@kernel.org>, "Lee Jones" <lee@kernel.org>,
+	mfd@lists.linux.dev, devicetree@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
+	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re:Re: Re: [PATCH v7 12/15] pinctrl: ambarella: add CV75 pin
+ controller
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
+ 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
+In-Reply-To: <aqvbfCQ6cxfGYJeC@ashevche-desk.local>
+References: <20260915-cv75-v5-v7-0-3297d3fbc9c0@ambarella.com>
+ <20260915-cv75-v5-v7-12-3297d3fbc9c0@ambarella.com>
+ <aqp0VlwWotnuK9t7@ashevche-desk.local>
+ <40f1f819.7f85.1a0ae9e4dae.Coremail.zl020895@163.com>
+ <aqvbfCQ6cxfGYJeC@ashevche-desk.local>
+X-NTES-SC: AL_Qu2TC/qftk8q4yGQY+kcn0wRhug/UMa4u/sm3YNXc+4Eqibs3gYGRG9PH0nv/8uJLS6Juh6wVSdN18d0QrRHMpJrKUK/9tD+DJuJ0EekfA==
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Message-ID: <4bd10649.9ba9.1a0af6f7ffd.Coremail.zl020895@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID:aSgvCgAHvpUz46tqpbxGAA--.49547W
+X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbC7hOK+2qr4zO2kQAA36
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
 
-> TI has unpublished the BQ25792 charger variant and pulled its docs from
-> their website.
->=20
-> BQ25798 is a pin and register compatible replacement, which also adds MPPT
-> tracking support (reg 0x15, added in BQ25798 and reserved in BQ25792) and
-> backup mode (reg 0x0f[1], reg 0x10[7:6], reg 0x16[0] and reg 0x1c[7:5] on
-> BQ25798 - all of them reserved on BQ25792).
->=20
-> Expand the existing binding to include BQ25798 with a fallback compatible
-> to BQ25792.
->=20
-> Link: https://www.ti.com/product/BQ25798
-> Signed-off-by: Alexey Charkov <alchark@flipper.net>
-
-Sashiko has reviewed this patch and found no issues. It looks great!
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260917-bq25798-v2=
--1-5086845cd3eb@flipper.net?part=3D1
-
+VGhhbmtzLCBBbmR5LgoKUElOQ1RSTF9QSU5HUk9VUCBvbmx5IGNhcnJpZXMgcGluIG51bWJlcnMu
+IFRoZSBJT01VWCBhbHQgaXMgbm90IHRoZQpwaW5jdHJsIGZ1bmN0aW9uOiB0aGUgc2FtZSBwaW4g
+aXMgaW4gc2V2ZXJhbCBncm91cHMgd2l0aCBkaWZmZXJlbnQKYWx0cywgYW5kIGEgZmV3IGdyb3Vw
+cyBtaXggYWx0cy4KCkluIHY4IEkgd2lsbCBzd2l0Y2ggdGhlIGdyb3VwIHRhYmxlcyB0byBQSU5D
+VFJMX1BJTkdST1VQIGFuZCBwYXNzIGEKcGVyLXBpbiBhbHQgYXJyYXkgYXMgZ3JvdXAgZGF0YSBm
+b3Igc2V0X211eCgpLiBQSU5DVFJMX1BJTkZVTkNUSU9OCnN0YXlzIGFzIGl0IGlzLgoKQmVzdCBy
+ZWdhcmRzLApMb25nIFpoYW8KCkF0IDIwMjYtMDktMTcgMjA6MjI6MjAsICJBbmR5IFNoZXZjaGVu
+a28iIDxhbmRyaXkuc2hldmNoZW5rb0BsaW51eC5pbnRlbC5jb20+IHdyb3RlOgo+T24gVGh1LCBT
+ZXAgMTcsIDIwMjYgYXQgMDU6MDY6NDVQTSArMDgwMCwgemwwMjA4OTUgd3JvdGU6Cj4+IFRoYW5r
+cyBmb3IgdGhlIHJldmlldy4gVGhlIHNtYWxsIGNvbW1lbnRzIHdpbGwgYmUgaW4gdjgsCj4+IGlu
+Y2x1ZGluZyBwaW5jb25mIHNldCB2aWEgcmVnbWFwX2Fzc2lnbl9iaXRzLgo+PiAKPj4gUElOQ1RS
+TF9QSU5HUk9VUCBkb2VzIG5vdCBmaXQgaGVyZTogZ3JvdXBzIGNhcnJ5Cj4+IEFNQkFfUElOTVVY
+KHBpbiwgYWx0KSwgbm90IGEgcGluLW51bWJlciBsaXN0LCBzbyBJIHdpbGwga2VlcAo+PiBDVjc1
+X0dST1VQLgo+Cj5JIGRpZG4ndCBnZXQuIEl0IHRha2VzIGEgcGluIGFzIGEgcGFyYW1ldGVyIGFu
+ZCBhZGRzIHRoZSBmdW5jdGlvbiBvbiB0b3AKPm9mIGl0LiBJdCBpcyBhIGNvbWJvLCBidXQgSSB0
+aGluayBpdCBzdGlsbCBmaXRzIHRoZSBwdXJwb3NlLiBQbGVhc2UsIHVzZQo+ZXhpc3RpbmcgZGF0
+YSBzdHJ1Y3R1cmUgYW5kIGEgbWFjcm8uCj4KPj4gQXQgMjAyNi0wOS0xNiAxODo0OTo1OCwgIkFu
+ZHkgU2hldmNoZW5rbyIgPGFuZHJpeS5zaGV2Y2hlbmtvQGxpbnV4LmludGVsLmNvbT4gd3JvdGU6
+Cj4+ID5PbiBUdWUsIFNlcCAxNSwgMjAyNiBhdCAwNzoxNTo0MlBNICswODAwLCBMb25nIFpoYW8g
+dmlhIEI0IFJlbGF5IHdyb3RlOgo+Cj4uLi4KPgo+PiA+PiArI2RlZmluZSBBTUJBX1BJTk1VWChw
+aW4sIGFsdCkJCSgoKGFsdCkgPDwgMTIpIHwgKHBpbikpCj4+ID4+ICsjZGVmaW5lIEFNQkFfUElO
+TVVYX1RPX1BJTihtdXgpCQkoKG11eCkgJiAweGZmZikKPj4gPj4gKyNkZWZpbmUgQU1CQV9QSU5N
+VVhfVE9fQUxUKG11eCkJCSgoKG11eCkgPj4gMTIpICYgMHg3KQo+PiA+PiArCj4+ID4+ICtzdHJ1
+Y3QgYW1iX3Bpbm11eF9ncm91cCB7Cj4+ID4+ICsJY29uc3QgY2hhciAqbmFtZTsKPj4gPj4gKwlj
+b25zdCB1MzIgKm11eDsKPj4gPj4gKwl1bnNpZ25lZCBpbnQgbm11eDsKPj4gPj4gK307Cj4KPl5e
+XiBsZWZ0IGZvciB0aGUgY29udGV4dC4KPgo+Cj4tLSAKPldpdGggQmVzdCBSZWdhcmRzLAo+QW5k
+eSBTaGV2Y2hlbmtvCj4K
