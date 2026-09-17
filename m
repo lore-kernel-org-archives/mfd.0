@@ -1,184 +1,75 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43C3B44E66F;
-	Thu, 17 Sep 2026 23:03:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD75F3749E8;
+	Thu, 17 Sep 2026 23:06:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789686218; cv=none; b=pwQbC6HumjnT5PKfoZ8Mfn9FINpHYaH9Gz7qe8BLCrJMybkjw5CLz/iP9nUfsQLr1enUz/EGiAizxjhr26RN2Tfqpc02QBYVVaKN/dHs5rapzR/Stl2bRFv3svN66BWtthSa5L1Qm9kxIsflj3Xv2zc9TInI8UwXOKedu/1E/2U=
+	t=1789686394; cv=none; b=dCRnn65XDY5O8T+inJlPNqRVFvb+8f18hdjq/uzO2HQyQjeB997rs1KDw8KSJ2WpUeJ1QeAmkvg7gsFWopS1Qv+4PoSTPveY6Dwl3/M4XRMQbw+AySW9SyBcy39cf2t+kqwDiRcQvvpKzQVsSHfnVic9mCdUbtVF0RkPr+LVCww=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789686218; c=relaxed/simple;
-	bh=OzzRBbvB7/oz4atmfrfpVLHzIFWCBoNTHYCRq7+XE4k=;
+	s=arc-20240116; t=1789686394; c=relaxed/simple;
+	bh=Dh7RLnkLTl81gse+6Pp9Pkzk5xZpZUoDU1n0h24OMaE=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=uGQgvTEn3saqgphlCo9PhfH0/wgAoNnTe0W6/kQNtb3laf05WP/qg1BqcsEsczGOSCo5VcK2fPUziE0Mx2OrkRRQvy/50nuVuSHrQG7w2CWAP2HXpoMGI7+R1BKHsW7jpZ1GCcIR5LV9FsrR3gyOl51ZOHnrnGkT9kCi5blbQ54=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jyabxKok; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=RNCvPmBlN+iF6cuZVPu5/3oSkihyEHhwwqv/LzzF2s4Na4jXCP/n5ZaHQJmslmFUuRVUyGYHW+qyHsfuVQhotmLgZPDy4Cazog/8qxJXzErlNzoc4vXFxYjoAqOaVssh0yqVer0f7kilo9DVEzxGdm37hE7jlVX+fwFWcbaWV4s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NZctrOc9; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jyabxKok"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BC95C1F000FF;
-	Thu, 17 Sep 2026 23:03:29 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NZctrOc9"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BFA241F000FF;
+	Thu, 17 Sep 2026 23:06:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789686210;
-	bh=padsMz4O0oX5xAreF3bhZHM8P4eo9wGvOpKJIUWfABY=;
+	s=k20260515; t=1789686386;
+	bh=Dh7RLnkLTl81gse+6Pp9Pkzk5xZpZUoDU1n0h24OMaE=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=jyabxKokC4apvVW1MfPbqJZ7aVgoNdfClXLWIFQhUJv0nY+7BtsvYaEFcJ/ggYWxx
-	 aWi3HIQklL21KQwwy8MxeYeDL486r3eJdVoB2860LOHn6wZZ3HdhxOaS5iWx0Myxqq
-	 JncI/2Ja39GWdX7c2JgFZerMvWdETIrUPcjYkKkpUNYHYS/Cdvyv2buukHx66pDsZY
-	 Ohunsf7JW9yAA7psHUpWZ+5MmhtMpZJQbaeu+t/h2hHjR/dWbU90R8Dj4KKFztUCZi
-	 V8wehpuc18g27tu0tuzewuihh4ItRKugel2y/doyzaO4ffMv/oeF44ZMhWSuOuqnHl
-	 XxgVurmBQ6Kow==
+	b=NZctrOc9esmypkA1vqHsX3kUpcVfuDRSs+oNqvc66Xwy4azN7fAY/zniicy52Nfkg
+	 JggVQgHRy9eQmLqaNV3sD5HPuIbkPghz05bCOFjLzdmSHfHyh+03Irstqs9fSqT5aQ
+	 3Lj5IDKMJNd5RZ194WNnAXeD+9u0G80aho4WcCXiawNTpXsMlJ57Ii1U2uExtTTmnk
+	 iUrG+JjE9camcc8NQC3B4a4tdC+SNlGMM342rtOuQAo/zd3BBBAKQs2b3NzvtONJmi
+	 HmGvldwXKrLUVNCq6MF8BvY/+812ySBFSj3mGBk1p6V2CVmKv98wVT+m/oEUP/8bqN
+	 XzZkjNEkUOkgw==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 5/9] ASoC: ux500: Remove the MOP500 machine driver
+Subject: Re: [PATCH v2 8/9] ARM: dts: ux500: Add Samsung phone audio graphs
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Linus Walleij" <linusw@kernel.org>
-Cc: mfd@lists.linux.dev, conor+dt@kernel.org, lee@kernel.org, devicetree@vger.kernel.org, robh@kernel.org
-In-Reply-To: <20260918-ux500-simple-sound-v2-5-88d29416e3c3@kernel.org>
+Cc: lee@kernel.org, mfd@lists.linux.dev, robh@kernel.org, devicetree@vger.kernel.org, conor+dt@kernel.org
+In-Reply-To: <20260918-ux500-simple-sound-v2-8-88d29416e3c3@kernel.org>
 References: <20260918-ux500-simple-sound-v2-0-88d29416e3c3@kernel.org>
- <20260918-ux500-simple-sound-v2-5-88d29416e3c3@kernel.org>
+ <20260918-ux500-simple-sound-v2-8-88d29416e3c3@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 17 Sep 2026 23:03:29 +0000
-Message-Id: <20260917230329.BC95C1F000FF@smtp.kernel.org>
+Date: Thu, 17 Sep 2026 23:06:25 +0000
+Message-Id: <20260917230625.BFA241F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 4 potential issue(=
-s) to consider:
-- [High] ALSA: devicetree ABI breakage due to removal of stericsson,snd-soc=
--mop500
-- [High] ALSA: ux500: mono streams fail with -EINVAL due to rigid static TD=
-M slot masks
-- [Medium] ALSA: silent loss of audio on kernel upgrade due to missing SND_=
-AUDIO_GRAPH_CARD2 selection
-- [Medium] ALSA: ux500: loss of cross-DAI synchronization allows conflictin=
-g hardware parameters
---
+> The released Samsung product kernels all connect codec DAI 0 to MSP1
+> for playback and codec DAI 1 to MSP3 for capture. The codec provides
+> the bit and frame clocks, while ULPCLK is the machine driver's default
+> audio clock parent. Keep the codec-provided clocks continuous as in the
+> product kernels.
+>=20
+> Add a common two-link audio graph card and include it from Codina,
+> Codina-TMO, Gavini, Skomer, Kyle, Golden and Janice. Use the generic
+> card name "Samsung". The later product kernels use DSP_A with an
+> 8-by-16-bit TDM frame, playback slots 0 and 1 and capture slot 0.
+>=20
+> Codina and HD Codina retain their older DSP_B configuration with a
+> 16-by-16-bit frame and playback slots 1 and 3. Preserve Gavini's
+> AMIC1A-to-VAMIC2 bias routing. Golden and Janice use the configuration
+> from the newest Codina-TMO product source; their board files are
+> byte-for-byte identical across the available later product releases.
+>=20
+> Kyle's audio I2C bus contains only a disabled placeholder, so AB8505
+> remains its sole active codec.
+>=20
+> Assisted-by: LLM
+> Signed-off-by: Linus Walleij <linusw@kernel.org>
 
-commit 310750ed2beb07b175f87e9079b77587ed249ddd
-Author: Linus Walleij <linusw@kernel.org>
-
-ASoC: ux500: Remove the MOP500 machine driver
-
-This patch removes the MOP500 machine driver and its obsolete binding, repl=
-acing
-it with audio-graph-card2. It updates the ux500 ASoC Kconfig to directly se=
-lect
-the codec, MSP, and DMA platform components previously selected by the mach=
-ine
-driver.
-
-> diff --git a/sound/soc/ux500/Kconfig b/sound/soc/ux500/Kconfig
-> index 1130580603500..f3c7c216267c0 100644
-> --- a/sound/soc/ux500/Kconfig
-> +++ b/sound/soc/ux500/Kconfig
-> @@ -6,28 +6,19 @@ menuconfig SND_SOC_UX500
->  	tristate "Ux500"
->  	depends on SND_SOC
->  	depends on MFD_DB8500_PRCMU
-> +	depends on AB8500_CORE && AB8500_GPADC
-> +	select SND_SOC_AB8500_CODEC
-> +	select SND_SOC_UX500_PLAT_MSP_I2S
-> +	select SND_SOC_UX500_PLAT_DMA
-
-[Severity: Medium]
-Will this lead to a silent loss of audio on kernel upgrade?
-
-When upgrading a kernel config where CONFIG_SND_SOC_UX500_MACH_MOP500 was s=
-et,
-the old config is dropped. Since the required replacement
-CONFIG_SND_AUDIO_GRAPH_CARD2 is neither selected nor implied by SND_SOC_UX5=
-00,
-users upgrading their kernel using make oldconfig might lose audio support.
-
-[ ... ]
-
-> diff --git a/sound/soc/ux500/mop500.c b/sound/soc/ux500/mop500.c
-> deleted file mode 100644
-> index 6d196b4b88027..0000000000000
-> --- a/sound/soc/ux500/mop500.c
-> +++ /dev/null
-[ ... ]
-> -static const struct of_device_id snd_soc_mop500_match[] =3D {
-> -	{ .compatible =3D "stericsson,snd-soc-mop500", },
-> -	{},
-> -};
-
-[Severity: High]
-Does removing this compatible string break devicetree backward compatibilit=
-y?
-
-Without a backward-compatibility binding provided in the generic driver, au=
-dio
-will fail to probe on systems booting with existing or older devicetrees th=
-at
-contain the stericsson,snd-soc-mop500 compatible string.
-
-[ ... ]
-
-> diff --git a/sound/soc/ux500/mop500_ab8500.c b/sound/soc/ux500/mop500_ab8=
-500.c
-> deleted file mode 100644
-> index feb683c55d113..0000000000000
-> --- a/sound/soc/ux500/mop500_ab8500.c
-> +++ /dev/null
-[ ... ]
-> -static int mop500_ab8500_hw_params(struct snd_pcm_substream *substream,
-> -			struct snd_pcm_hw_params *params)
-> -{
-[ ... ]
-> -	/* Ensure configuration consistency between DAIs */
-> -	scoped_guard(mutex, &mop500_ab8500_params_lock) {
-> -		if (mop500_ab8500_usage) {
-> -			if (mop500_ab8500_rate !=3D params_rate(params) ||
-> -			    mop500_ab8500_channels !=3D params_channels(params)) {
-> -				return -EBUSY;
-> -			}
-> -		} else {
-> -			mop500_ab8500_rate =3D params_rate(params);
-> -			mop500_ab8500_channels =3D params_channels(params);
-> -		}
-> -		__set_bit(cpu_dai->id, &mop500_ab8500_usage);
-> -	}
-
-[Severity: Medium]
-Will the removal of these consistency checks allow conflicting hardware
-parameters?
-
-When two applications open concurrent streams on the separate DAIs exposed =
-by
-the AB8500 codec, requesting different sample rates or channel counts, the
-hardware might receive conflicting configuration requests. Since this lock =
-is
-removed and neither the generic audio-graph-card2 nor the codec driver
-enforces cross-DAI consistency, can this cause synchronization regressions?
-
-[ ... ]
-> -	is_playback =3D (substream->stream =3D=3D SNDRV_PCM_STREAM_PLAYBACK);
-> -	switch (channels) {
-> -	case 1:
-> -		slots =3D 16;
-> -		tx_slots =3D (is_playback) ? TX_SLOT_MONO : 0;
-> -		rx_slots =3D (is_playback) ? 0 : RX_SLOT_MONO;
-> -		break;
-> -	case 2:
-
-[Severity: High]
-Does removing this dynamic TDM slot configuration cause mono streams to fai=
-l?
-
-Without this dynamic update, the CPU DAI falls back to enforcing the static
-devicetree mask. The ALSA core will call ux500_msp_dai_hw_params(), which
-validates the channel count against the static TDM mask.=20
-
-Because the devicetree statically sets a stereo TDM mask (slots_active =3D =
-2),
-a mono playback request evaluates params_channels() !=3D slots_active as tr=
-ue
-and returns -EINVAL. Can this prevent users or applications from requesting
-mono playback?
+Sashiko has reviewed this patch and found no issues. It looks great!
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260918-ux500-simp=
-le-sound-v2-0-88d29416e3c3@kernel.org?part=3D5
+le-sound-v2-0-88d29416e3c3@kernel.org?part=3D8
+
