@@ -1,120 +1,188 @@
-Received: from mail-ed2-f31.google.com (mail-ed2-f31.google.com [74.125.228.95])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 527BD4EF127
-	for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 16:52:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.228.95
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789663921; cv=pass; b=o/X6xHd3GYhQ9AYBxKtmr7LspXWOW3X9yHB8LfH3xbBOICpAZxRTskVXrMmIYahvFtRntna736HRXuzUW/iYX0Ak6+iTXJ7CdMOVJyY7sR/HW4ZLBOeHw8PyWtYKFj54YCdfuTbJxQP2yeUyGNGdbu11hh3GtpIu8SGsTYWk5bM=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789663921; c=relaxed/simple;
-	bh=hEHMAKUllCDwfWN1D2DXADtsf72BtNJRtUxT6u8f6tI=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=OZnVB80PYN6XUdlv3YTTGjgvrUfafRxwZ2i2vFGeDqiYT0wgUtG0MKu2wpQuBAkQXT3zk3X1j9TUhsiS1AVsWPr2+fVnNju9rbpd9I+GRdkPm483+cRuLXS0ijPhkhG/+AdGY6rH9qUtE0foOuHOC4AcOH4wwSPnogVf2xfCYAw=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=KEaa1vkT; arc=pass smtp.client-ip=74.125.228.95
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDE0A4E7805
+	for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 17:22:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=210.118.77.11
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789665738; cv=none; b=sBxKMmpfzC3HsjBE65AkcJJf16gIVNPA64tU72jgWp88COU4SlRVIu78k5kNSqhxiHHDZbR77ZWrXvX8yHH2yEJzW8XRB0B/qczBTe5pXrFYDTW4zQEjWIVfDwneexfKXJZmp+Avdy/Qq7MZKIF6wqbbfyGZE1ugyHdoS0qY0VQ=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789665738; c=relaxed/simple;
+	bh=i7vxyd+RUUEAWFJj4iedqbpXOAXYL3d7mLXj1p4df0o=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:From:In-Reply-To:
+	 Content-Type:References; b=kYYznCq+H2BOwZtjhQi1zzgpKWRFQTsvzlmpupPAUnpFu6SRn+2N/ouGZ33eEIORXp0hOqaD1AYYnFaENz82LmOy/gP69AC/qsnzHk6rvetSDmFUm9U05eeRwvx+PWbfFGehtPkr1E7KR5PaSeYKHwyNHTMj8qnFbL+4iMuq7qE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=VOxLMdss; arc=none smtp.client-ip=210.118.77.11
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KEaa1vkT"
-Received: by mail-ed2-f31.google.com with SMTP id 4fb4d7f45d1cf-6aa053900f5so1900835a12.1
-        for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 09:52:00 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1789663918; cv=none;
-        d=google.com; s=arc-20260327;
-        b=sy9aKHHxok9sTyVg1a/U83z7zDq1dwdOXtAnnp6zTtVSeaE+mvZ+4xeyI2j+czujqL
-         5LAJ1aOSAIP0gqWYJb4ovFWL45fmvtUezddMxfABDQbNWdCT5bC1BHGu0qnxYVxl027S
-         GA60CHvvZq/jkT8ik8WWOlDPlqcgWnulj93A1b1MONAgVtD6BcFXRBOa8Tv6fDfUaf7v
-         ft+gBYcWOHtziRdC3+pCjnckab6f/1Yepwu4+Zv8aeYSe/TdvXNssf/GlEqz5/kcsXnt
-         tBIQ6NTZsgFhcCuSj3cY41rkFgOZ7sBlGNkC3Pdn2dHT5gPAoU9exijRZ6e8lBR/fy+K
-         Gcqg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=0dTGZsVCSr6ANtWetAbHE4IIsX02FpxvKoMT01AVXUs=;
-        fh=MWctrO/KTii1gOu1qnjnDrgwstDYUcJDX0taCXQYJXY=;
-        b=iybXORZxtj7j8SX5oBseP5RUrBwzaEp/ojw0iwKnUZdhGqA3PN/QKagB7TBcgZq3bo
-         qxVQYc6Ve9QHLeERKgxO6PBnw5sBw9rRpG9bUNtMmcqo2UTVJpIROmr/fd/xz8D8QZxs
-         tyJ2K8BUdbRN8IYMEKibkaYu4LlmPnojuXRNAfmK9E7l4VnRzXFGbB4IgJFxc1UD/jfN
-         ZRnBTp2o5JOElpHu70YETjUB+Oxs6bpWT0eIoYChmnTYwEJkweQ8/IeZ15+ye/x0pK7J
-         EmmobHkEZKDE3DD7PIHioc/8FZkC3RrPKc6GhdaDHMdv7zDPQ9rH/H7kFYq0rveAspUp
-         oIXA==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789663918; x=1790268718; darn=lists.linux.dev;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=0dTGZsVCSr6ANtWetAbHE4IIsX02FpxvKoMT01AVXUs=;
-        b=KEaa1vkTMEYcheYJgooJNUPZ4Z9Ap65KNTOhoPFmsS5PAcFRtHIgOKvpZC0wMjvi2T
-         pAiW9IWXjJkgGeqT46tg8kDrrF8rbt+nXBxSc+x0pVi3TZ1fvowN83YLiBMdFugGj1SF
-         g8s+LXROa5SEjdbjz5b7NuRtvKH66lUQdB81UhrYVfOH1pOzjAOOVIxPHMZU1hJz3pDK
-         y3H+T/Y5DMH0wDjCN34Cyav/TfeG8IbtOT6S1NY7YUrA83n3Ssa0iuUDbRuvRbwnV+aR
-         j3ZsNq77I24biXKIN+rTsKRjlZnR0HhVfSAYvGlRTZV6h7zcxeDir/V6jgizGtMxf5Vm
-         kYqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789663918; x=1790268718;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=0dTGZsVCSr6ANtWetAbHE4IIsX02FpxvKoMT01AVXUs=;
-        b=jAw+fI56RL641y3iR8eUAoxMD02BKqZp0hVjczZHc+dttlKHWy7MftpWF6Ua2AvrCM
-         rK8ovZKzlIRTOq5WsuPSDEIVGZl35hCqAq3CN+Fg7PP+OiQKcg8PwbPikoJQYWVba7yj
-         uz/alPPgfE0oqf3m0IPVZxpkf5Uz97zdI71Syx3IqJNdn414KnaAi+h5avsZ/vIMZYl7
-         xtrloC0rbcrLKx/S6nUzT8UyzYT6QVW8kZjGej9P839kALNdXV2KRl/QoL5mi16XPVlX
-         gCbuUVzxLi0ACcNZUJB880OL0is5gHJEeVdU4shc8Ug+vH8X4yrqsYInSg/p8JnU/JJB
-         5irg==
-X-Forwarded-Encrypted: i=1; AKwUvBxj8btfpS7afqxBlmn3pYw80zJ9C6AkHpNYRdFoXhxt3LmBtrahX2g8uH20cnCGyzlagrw=@lists.linux.dev
-X-Gm-Message-State: AFuF++kXWJNrJgEPgnriwmmk4+vl9Qa34I3YKV8ukKOb/ZwEeGwzfGJg
-	a3xbw6CmFFKwi/1XxAg6PrOMCaTPxg1SxsXzr/yvvc2IxdWxeu2i0hXVXHRKowHeOTJNfcEXkSf
-	xh6hI9ONq4NwGPVplFL89AFj9Zmw1/n0=
-X-Gm-Gg: AYBFou2dAqhKXdjTHOUg6Y1acR53fEJHOtPslX/H7j/xJoUrudrUpzrLFhEka4vOVt9
-	5I5V8mhx7bcjIMCxvCyn5MSdpg3HnpLv1FTMNDZx6yW4fPA7SbA2IoLyhHO+3ItHtY0azsJWuJs
-	ukRZYjegNT4U8Kz6Js0rusJKgTCHWzHEh9tVgk92ncXUoJD+xDoVBNABPumHGhbRwMu3iVLBHsE
-	EGfmov6E9WmjqYB7WM3UMrBaDpIMO4+X+E4M+gpt2qy4vIwYZ670Lhy4aaQAvklnr3D4KreltWc
-	4ODnYI4wWsrIWaFIzLYHpAuvIsmO+lXvFZHEF7WPLZ6VwRyeo67vun0=
-X-Received: by 2002:a05:6402:3789:b0:6a9:98de:6d8d with SMTP id
- 4fb4d7f45d1cf-6aa2245fd0fmr5568315a12.45.1789663918221; Thu, 17 Sep 2026
- 09:51:58 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="VOxLMdss"
+Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
+	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20260917172208euoutp0150132b34809348820d8ba580cbf71ba6~WK399rJ9Y0164201642euoutp01M;
+	Thu, 17 Sep 2026 17:22:08 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20260917172208euoutp0150132b34809348820d8ba580cbf71ba6~WK399rJ9Y0164201642euoutp01M
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1789665728;
+	bh=0WtKtiSzYCp277IiLimE78OZqsRgc7cWGLsFATmTw1E=;
+	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
+	b=VOxLMdss8ZyVY8BfR85gXrDrglNJ8tt+tRyIRy34jspUqU6Tu6fH7k4IIRxxxXpHz
+	 tavqrMHAweRf1Js/R3ZW2sD9k5Czxee/0C9FYVHtvUe/S5KKtnbQdi/kswqFi00MoB
+	 ulGFKEi5ek5Q3N8AhJ1OxMwZsSONTxYMV+bMrihk=
+Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
+	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
+	20260917172208eucas1p2a1f43f12fe05dd5a7cb640c4cec85744~WK39uT1rB0077700777eucas1p2z;
+	Thu, 17 Sep 2026 17:22:08 +0000 (GMT)
+Received: from [192.168.1.44] (unknown [106.210.136.40]) by
+	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
+	20260917172206eusmtip266a4da637fbe5ad68f6836811ac14898~WK38DTFaD3000830008eusmtip2I;
+	Thu, 17 Sep 2026 17:22:06 +0000 (GMT)
+Message-ID: <136d6789-2f0c-4a91-ab2d-de3a3f119d5d@samsung.com>
+Date: Thu, 17 Sep 2026 19:22:05 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260902193351.185771-1-l.scorcia@gmail.com> <20260917143459.GA2348773@google.com>
-In-Reply-To: <20260917143459.GA2348773@google.com>
-From: Luca Leonardo Scorcia <l.scorcia@gmail.com>
-Date: Thu, 17 Sep 2026 18:51:47 +0200
-X-Gm-Features: AcwNN1UCLyUlHms-nbsVMpe5KcLakQ0vi0ozu7P9tcFuOM-WKvxcQ6ubbojqdxA
-Message-ID: <CAORyz2+rT-oNJtWc5BRDrpUjBPVbO6A=qrX_K+J7fAR5Ebm_3Q@mail.gmail.com>
-Subject: Re: [PATCH v10 0/9] Add support for MT6392 PMIC
-To: Lee Jones <lee@kernel.org>
-Cc: linux-mediatek@lists.infradead.org, 
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Sen Chu <sen.chu@mediatek.com>, 
-	Sean Wang <sean.wang@mediatek.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
-	Matthias Brugger <matthias.bgg@gmail.com>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Linus Walleij <linusw@kernel.org>, Julien Massot <julien.massot@collabora.com>, 
-	Val Packett <val@packett.cool>, Fabien Parent <parent.f@gmail.com>, 
-	Akari Tsuyukusa <akkun11.open@gmail.com>, Chen Zhong <chen.zhong@mediatek.com>, 
-	linux-input@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, mfd@lists.linux.dev, 
-	linux-arm-kernel@lists.infradead.org, linux-gpio@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 00/20] drm: starfive: jh7110: Enable display
+ subsystem
+To: Joshua Peisach <jpeisach@ubuntu.com>, Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+	<conor+dt@kernel.org>, Andrzej Hajda <andrzej.hajda@intel.com>, Robert Foss
+	<rfoss@kernel.org>, Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+	Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Luca Ceresoli <luca.ceresoli@bootlin.com>, Maarten Lankhorst
+	<maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>, Lee Jones <lee@kernel.org>, Andy
+	Yan <andy.yan@rock-chips.com>, Philipp Zabel <p.zabel@pengutronix.de>, Emil
+	Renner Berthing <kernel@esmil.dk>, Hal Feng <hal.feng@starfivetech.com>,
+	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
+	<sboyd@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Paul Walmsley
+	<pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
+	<aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, Dominique
+	Belhachemi <db@domibel.de>, Brian Masney <bmasney+clk@redhat.com>, Jerome
+	Brunet <jbrunet+clk@baylibre.com>
+Cc: linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+	mfd@lists.linux.dev, linux-clk@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org,
+	linux-riscv@lists.infradead.org, Marek Szyprowski
+	<m.szyprowski@samsung.com>, Maud Spierings <maud_spierings@murena.io>,
+	Graham Markall <hello@big-grey.co.uk>, Icenowy Zheng
+	<zhengxingda@iscas.ac.cn>, Chaoyi Chen <chaoyi.chen@rock-chips.com>,
+	=?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+Content-Language: en-US
+From: Michal Wilczynski <m.wilczynski@samsung.com>
+In-Reply-To: <DLGBPXP4F8E0.9X0QMZ9GFQVF@ubuntu.com>
+Content-Transfer-Encoding: 7bit
+X-CMS-MailID: 20260917172208eucas1p2a1f43f12fe05dd5a7cb640c4cec85744
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-RootMTR: 20260915153213eucas1p148f013af239a334fc78cdc249c0f8a61
+X-EPHeader: CA
+X-CMS-RootMailID: 20260915153213eucas1p148f013af239a334fc78cdc249c0f8a61
+References: <CGME20260915153213eucas1p148f013af239a334fc78cdc249c0f8a61@eucas1p1.samsung.com>
+	<20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
+	<DLGBPXP4F8E0.9X0QMZ9GFQVF@ubuntu.com>
 
-> Still waiting on Acks by the looks of things?
 
-Unfortunately yes. Patch 4/9 [1] was suggested by you in [2] and it's
-independent from the rest of the series; it could be merged without
-introducing functional changes, but I don't know if you can provide
-the Ack for it or if a specific maintainer has to provide that.
 
-[1] https://lore.kernel.org/linux-mediatek/20260902193351.185771-5-l.scorcia@gmail.com/
-[2] https://lore.kernel.org/linux-mediatek/20260520150014.GF2767592@google.com/
+On 9/16/26 02:45, Joshua Peisach wrote:
+> On Tue Sep 15, 2026 at 11:32 AM EDT, Michal Wilczynski wrote:
+>>
+>> Testing
+>> =======
+>>
+>> Tested on a VisionFive 2 v1.3B using modetest.
+> 
+> I.. got nothing. I did have to manually modprobe the modules, but
+> unless I am doing something wrong.. I didn't get anything and modetest
+> just gave -2.
 
-Thank you
+Hmm have you also changed the DTB not just the kernel and the modules
+(you can also built in everything).
+
+Also note modetest needs -M verisilicon.
+
+If that is not it, could you send "dmesg | grep -iE
+'verisilicon|inno|hdmi|vout'" and "ls /sys/class/drm/"?
+
+> 
+>> ---
+>> Michal Wilczynski (20):
+>>       dt-bindings: phy: Add starfive,jh7110-inno-hdmi-phy
+>>       dt-bindings: display: bridge: Add starfive,jh7110-inno-hdmi-controller
+>>       dt-bindings: mfd: Add starfive,jh7110-hdmi-subsystem
+>>       dt-bindings: soc: starfive: Add starfive,jh7110-vout-syscon
+>>       dt-bindings: display: verisilicon: Add starfive,jh7110-dc8200
+>>       dt-bindings: soc: starfive: Add starfive,jh7110-vout-subsystem
+>>       drm/bridge: inno-hdmi: Split probe out of bind
+>>       drm/bridge: inno-hdmi: Allow the register map to come from a parent
+>>       drm/bridge: inno-hdmi: Add .disable platform operation
+>>       drm/bridge: inno-hdmi: Add .mode_valid platform operation
+>>       drm/bridge: inno-hdmi: Make the PHY configuration table optional
+>>       soc: starfive: Add jh7110-hdmi-subsystem driver
+>>       soc: starfive: Add jh7110-vout-subsystem driver
+>>       clk: starfive: jh7110-vout: Allow pixel clock rate propagation
+>>       drm/bridge: starfive: Add JH7110 HDMI controller driver
+>>       phy: Add common Innosilicon HDMI PHY helpers
+>>       phy: rockchip: inno-hdmi: Use the common Innosilicon PHY helpers
+>>       phy: starfive: Add jh7110-inno-hdmi-phy driver
+>>       riscv: dts: starfive: jh7110: Update DT for display subsystem
+>>       MAINTAINERS: Add StarFive JH7110 display subsystem entry
+>>
+>>  .../starfive,jh7110-inno-hdmi-controller.yaml      | 121 +++++
+>>  .../bindings/display/verisilicon,dc.yaml           |   1 +
+>>  .../mfd/starfive,jh7110-hdmi-subsystem.yaml        |  95 ++++
+>>  .../phy/starfive,jh7110-inno-hdmi-phy.yaml         |  49 ++
+>>  .../soc/starfive/starfive,jh7110-syscon.yaml       |   1 +
+>>  .../starfive/starfive,jh7110-vout-subsystem.yaml   | 218 ++++++++
+>>  MAINTAINERS                                        |  13 +
+>>  arch/riscv/boot/dts/starfive/jh7110-common.dtsi    | 121 ++++-
+>>  arch/riscv/boot/dts/starfive/jh7110.dtsi           | 105 +++-
+>>  drivers/clk/starfive/clk-starfive-jh7110-vout.c    |   6 +-
+>>  drivers/gpu/drm/bridge/Kconfig                     |  11 +
+>>  drivers/gpu/drm/bridge/Makefile                    |   1 +
+>>  drivers/gpu/drm/bridge/inno-hdmi.c                 | 112 +++-
+>>  drivers/gpu/drm/bridge/jh7110-inno-hdmi.c          | 297 +++++++++++
+>>  drivers/phy/Kconfig                                |   8 +
+>>  drivers/phy/Makefile                               |   1 +
+>>  drivers/phy/phy-inno-hdmi.c                        | 298 +++++++++++
+>>  drivers/phy/rockchip/Kconfig                       |   1 +
+>>  drivers/phy/rockchip/phy-rockchip-inno-hdmi.c      | 168 +-----
+>>  drivers/phy/starfive/Kconfig                       |  20 +
+>>  drivers/phy/starfive/Makefile                      |   1 +
+>>  drivers/phy/starfive/phy-jh7110-inno-hdmi.c        | 579 +++++++++++++++++++++
+>>  drivers/soc/Kconfig                                |   1 +
+>>  drivers/soc/Makefile                               |   1 +
+>>  drivers/soc/starfive/Kconfig                       |  43 ++
+>>  drivers/soc/starfive/Makefile                      |   3 +
+>>  drivers/soc/starfive/jh7110-hdmi-subsystem.c       |  73 +++
+>>  drivers/soc/starfive/jh7110-vout-subsystem.c       |  82 +++
+>>  include/drm/bridge/inno_hdmi.h                     |  10 +-
+>>  include/linux/phy/inno-hdmi-phy.h                  |  85 +++
+>>  30 files changed, 2337 insertions(+), 188 deletions(-)
+>> ---
+>> base-commit: fd73f4a6659897191fa0d40695fe370925dd3780
+>> change-id: 20251031-jh7110-clean-send-7d2242118026
+>>
+>> Best regards,
+> 
+> By the way, something weird happenined while I applied the patches
+> using git am. Somehow, some were out of order. The 10th patch
+> adding .mode_valid tried to be applied before .disable even though
+> in the series, the order is correctly set? git would obviously
+> fail because the .disable entry did not exist in the header, so I had
+> to manually put those in.
+> 
+> I guess it's possible that something went wrong here? I personally
+> pulled the mailbox from the lore.kernel.org mbox.gz file.
+
+I would recommend using b4 shazam instead
+
+> 
+
+Best regards,
 -- 
-Luca Leonardo Scorcia
-l.scorcia@gmail.com
+Michal Wilczynski <m.wilczynski@samsung.com>
