@@ -1,144 +1,165 @@
-Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
+Received: from mail-ej2-f12.google.com (mail-ej2-f12.google.com [74.125.228.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 429B12D97B7
-	for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 18:28:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789669737; cv=none; b=XGGbMwSXzA9p4KdgeTtcjt/lpvNlksg0R9AWxLEqeXouPMTn9LsBo1VwMu8jneae0v2K/Zjyb+tV8N2YQbaGJepcluMILM7yTWa2bX1eop2/REThIJUNYjUC2w1YFmDEsypDqxOrkOgaO/UtxfTM+QDmAOdTB9zZJ78IrLQRBtk=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789669737; c=relaxed/simple;
-	bh=2SpGKqTp/JfwTgeFMmRyNuW7aoTJomcaZ2jk3HniGKE=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=qLTbiUELtrSpPwBAWJHtkb36nn8Ix5p9aXi1m4NpUmFpeeJlOsLRJDskz+5OlgJjIWmK+xv4RJBBI/W37o3wSzrzNzfgdYbmy1fhirghCZB5T5XjXTuoQF9hh7h2pbBIjXzYlGJX6Rz2FdgnwwDlDZ3HwZeyx8zJU0bMC3V95HU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=IkjiXdHL; arc=none smtp.client-ip=74.125.225.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5530E3CB57B
+	for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 18:33:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.228.140
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1789669999; cv=pass; b=AlCS1WbrKKYaat/gGYiAi7fPtj1AJM5ml2qq4lArkE5H6reLU1Y9aFNG5m9IY0LWGg9MTezRKkSWONDKAvJ6g2m4HWDwf5/XXDnrJUHWtpaN1utlGQtzkuokanOcOjAWllfewJzUZBQ0DM5saJmDyqIaquZL63hy5jt4mJGWJxE=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1789669999; c=relaxed/simple;
+	bh=Z0mdvsxuTksnVj1s16xXhW0wn2tIEeKz/5P4yoMDNVM=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=aDZvowZHSUWqI0TfNchQY1grlqOiXLM6cDUR73u5W96AyTRdp/yw1rCkPeEiywoVdbrKfhe/cwvf3uLUgcV5usQFuAC0HpMLgNxa5DhEP15cSfoX8vkkpS6ZxqE5vVA9bCqwgwiCI3W5gCQhX8OrDToxFW7XG2Ie9OzG6VWo2DU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=dDgWCuQL; arc=pass smtp.client-ip=74.125.228.140
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="IkjiXdHL"
-Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-485b1d2874fso435341f8f.0
-        for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 11:28:55 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dDgWCuQL"
+Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c254fa650c8so204116666b.0
+        for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 11:33:18 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789669996; cv=none;
+        d=google.com; s=arc-20260327;
+        b=OEikyMAzEvKqGdAmwYjl9577DnjtfmmOO7DR70kxdIPBC68NXFH5hPkp2KKPxduaO2
+         6JW8qDW+bfz5vY0zlHkenhjndkT6PkY7zPuhJpHbwWk+4oqxg3xcoW3Nr1/9jToZfEBP
+         AU3wtM/irNZnIPJpYpF+TYu6wiIlA0Pvi4uut6qMXQ+ExIog0eIbmY3Qqw3rbwsgvX4s
+         zJc5CVc2GFRfG0CxzoPLmkk3FwPG9CTA41TvC3l3aDwUCqPQDfp+Ag9F2SnofYod15KL
+         Kpa27/cjVmyKeKyem0JGKyJ0xNRVimu9eKrXwREc6qBjFq92Txasj6uvZstKxgl0UahO
+         PBgQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=RAtHZMv4Fp/A6jZu1D8NUV7UjBzzzb65ZEkPo8MNyj4=;
+        fh=+/aJ3ZhAtt/B7FiKFjOU2OHctcN9UpzN2eDdbkfJA2U=;
+        b=HD+JEJk94iSQSE5kyoE3LoSUrAqMtDXiheND+QhnpF3ct08AEWVDdZ2ZBJdh1RZ1OR
+         zL5Qfjw9LncWwxqfPRtJn7oMkTnLKJaHL+oCY2JUAh72voFfsNfC9v4MmzuKccx8OElC
+         Ae+qEGUb0KtJhVns0JRksX2zmTvrO3AKuVRUEAr5j68wHtyglQ/KsSyS0iidmbkOCx8N
+         uDtcj+r7DwKwnKv3SWAxlVBaDH+erSQntXev87SUTTs8M3Tx9Jrb062ZvsfrBaERVaa4
+         yyVVZqoSbBDL1zyxtDO2iULVGyzmVcgqDiShB5/ypoAF1nbDHXdZAHUUHiNLyAqAE/PA
+         I6ZQ==;
+        darn=lists.linux.dev
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789669733; x=1790274533; darn=lists.linux.dev;
-        h=content-type:mime-version:references:in-reply-to:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Z8WFLPr3Z4Vj59hqf3BiQcKfbTnQOlSm6y7UQuAGxu8=;
-        b=IkjiXdHLWSO98eI6dgid7nro1dQnNsL2d3bzWr98n2a6LzRduAQwipMi/we2cpIMyl
-         8vrpk5Tyk2C8wiyos2h2c+4Cq/cJW67M/yiXkVlnO/wsN6KBYMJqB9QWjpnDn4BEtW9G
-         n7KMBS7oRdEKPqZWb5RskTw3pXjnm476AA5jlRIZLIvQDHe32k7lYyJwsqyQhiIR2cSf
-         5lGynKnU4VbuKQCtgTnGU7IWYRlkHUBq5ASEU6zFlIY908SQIEEWDqP67Fb5hgwFq487
-         Z6d4FrQNorVqnDp/fAig4hmXMQq0tcyqR/dz0ik3PyqjZNk9KYmvMRAHCkGzt+evwIeK
-         l1GQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789669733; x=1790274533;
-        h=content-type:mime-version:references:in-reply-to:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+        d=gmail.com; s=20251104; t=1789669996; x=1790274796; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=Z8WFLPr3Z4Vj59hqf3BiQcKfbTnQOlSm6y7UQuAGxu8=;
-        b=pXKP+v9blrqBjQlDR054PFvVl3tfBAS9hS3gWbT+VGavaUFYOZrijJKjOAphoi+pe0
-         lweevcJokZMmD9v3iBPl7n6+VXokCFkRkbdWvbCltnH2+idwa9o6R1bhmQH6cRXyvwpO
-         nblSqUC1TZ+7eYoXi9VtssN289B9ReE3cCByyaCY0OsYbHzPGO21B6B7rB8i/zj5L/LG
-         8Pn0SJoBi64nwY435TEPwna9mZrn+DfjjOP9ivQULDHi6cZUVMZFRe7jMF9eO37rEaRF
-         X8KF9c1pwHjvRQx3/atf5WP7Ue6Ngjm/VdDAzU/xr3p202eRtCx4XwG+2SizNnevnAEW
-         Jr8g==
-X-Forwarded-Encrypted: i=1; AKwUvBzKdD/1aGKRYvm0am/ZtlvBAgj6SCDSKf2dXCVDBh6xlsEgHbckAS4qPNzjwIg0xREqD7c=@lists.linux.dev
-X-Gm-Message-State: AFuF++kkhuf/kCXsVC1iSCHqfac0DLsOMotFWi2DRT82W/g9G2bYkXE4
-	wmgmDHnB5pmfGaOZNcRtjydSP1jM7m8JIO82odWrfj3hBlDZ1X8A7maL
-X-Gm-Gg: AYBFou1dI4rvduSv/KnPDTTblqiukvVVAwLXMOGPgd8qoYUkoGUXt6fMPiqMqAnZdLQ
-	9Rvlyxj+TI3Jsix4Zfe7ZjzXE0dgRn3rPMyYJ7EliLJ32LGOZdWBqvaONpAoD6KP5SFY0ofwvVZ
-	nWEhdelS/9IcmpS/y49gWsC7ZGMW00uEj/4EWemXyk691rdSIpUsgiSz2K2XU2/SJx4Izz7wGjT
-	z+Nj+UkBlpbKuKAZxpQZDIXx1Ty3lOBSvR15ZF3gcth/h+Aq4wXHfAjHT6aOqDbbTqe8xpUzNJ0
-	JjgebvcdzLWs2Nd913u5PLzTESiimQBPDjEJRD9UDEqoFKQdWob0WyBx4Ep8M5rdZ52sfZN0k31
-	OrW4Yoa3o3Bt1EptHrG0+xOIkGiCxeowbvoNF4pSQRr407bkAp6fmeAXGSZprNHfkbEpaZbZvop
-	ZBLv41KwgeR3F69hiR9VUN5MfT5FOdJslF1JMWEoEyeDkBtpz0RgsB/5EV0O5jg+h66NOBBkwqx
-	Vtkgw==
-X-Received: by 2002:a05:6000:708:b0:487:11:d053 with SMTP id ffacd0b85a97d-4871d915c41mr24943f8f.0.1789669733272;
-        Thu, 17 Sep 2026 11:28:53 -0700 (PDT)
-Received: from strix.localnet ([197.250.51.38])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4870bf26c8dsm17422129f8f.14.2026.09.17.11.28.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 17 Sep 2026 11:28:52 -0700 (PDT)
-From: Stefan =?UTF-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>
-To: Lee Jones <lee@kernel.org>
-Cc: Michael Turquette <mturquette@baylibre.com>,
- Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
- Philipp Zabel <p.zabel@pengutronix.de>, Brian Masney <bmasney@redhat.com>,
- Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
- Russell King <linux@armlinux.org.uk>, Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>,
- Manivannan Sadhasivam <mani@kernel.org>, linux-clk@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-phy@lists.infradead.org,
- mfd@lists.linux.dev
-Subject:
- Re: [PATCH v11 05/12] mfd: zx297520v3: Add a clock and reset MFD driver
-Date: Thu, 17 Sep 2026 21:28:36 +0300
-Message-ID: <lIjduhk6Sb-yyUCQAY-CKQ@gmail.com>
-In-Reply-To: <x9tzyTnKRAOyrdtSGnka0g@gmail.com>
-References:
- <20260826-zx29clk-v11-0-f8ad59c6426c@gmail.com>
- <20260910161711.GK1051768@google.com> <x9tzyTnKRAOyrdtSGnka0g@gmail.com>
+        bh=RAtHZMv4Fp/A6jZu1D8NUV7UjBzzzb65ZEkPo8MNyj4=;
+        b=dDgWCuQLJwVGtgXFs4uIxG34JQ7u77J0P6CZoxM0a13QBGvXceDthKuSGFPOWjnd8z
+         IjLzqiRmPCPZVk0Ch45OIrzGkmnemES+rBPQFv/JeeFKcVIFIyyXlwM5MtDOvHQoNwo1
+         wcLqNFLP8B0/StnZj5vu9/zrbNfU701WQKZQXGTVdBUU0HTr2twOjsfbCj9DYU7zoyc5
+         6MMQXjGN3c4PWR+y4FVJAmxzNySUhVEeHQtnNr6bCydvmYdefkcTde7kaGW/CRxJ5TjX
+         Ew5NcqG9H2tpG+WsMW1h9v/Vp5wdPuqoEjywGEiLmhN/iGvqfpZ4IJXYo0ui/bu5DIGI
+         8kvg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789669996; x=1790274796;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=RAtHZMv4Fp/A6jZu1D8NUV7UjBzzzb65ZEkPo8MNyj4=;
+        b=NVs1hfpoRnKGt7WwRgFq/wx4CSf/L6G0o9+wABsMHjy2zN9jbT0ir+IyOPLkxzhYv6
+         qAfWVI84ZuoOd9h9IEUr/yjVhmnmXgQo1rOtOqgU+2npZKWysM1MmDiog3FbY9t7dydi
+         I5Bjsf4YvtnzgxxOEy0pvgvBeOPqJWA4RsLycsIbov3We7p+424uCqMn5+8ZdvXEf3Z4
+         fKOGFWHNmymFQmRmehgwVi98PiFPiSoriYE9OQ4ihA2geU5C8kUxzeujmTXjGztb3VI3
+         ekbedn/EKHIvs+EZJJHQdAfWEIb3wVZbYusApR1guyJWRi1G0sxLXXQpLXcudcDBBBfy
+         mmvQ==
+X-Forwarded-Encrypted: i=1; AKwUvBw/Z9r6NWVek946pvHy1zDc0PXffTQl4X2idvQl/J2j0rVEKJrmdaP6RE9+CnEJbbcELec=@lists.linux.dev
+X-Gm-Message-State: AFuF++nIXltWu5ZlKYjgH7DbkTXdnMmXOJ7UhMYJu8p0o9vkb9i5WEaA
+	iV1PnrWlHZfhJJ2mLyHo6giW763U2hQeJ+JvuWMqSK8dXNu2XIrc8QJ43o9GF2qiKmeX9il7fyN
+	efaz5oaGevH1Y33iN1uBdGn72V/Rn7g==
+X-Gm-Gg: AYBFou1YuK6+ggQWrQBWPB5dADnofAbuXbRcMWo67p1kalKEfpgkIsNwqlIp+2OW1FD
+	1Qe+5FL2AMfv8X4svI/cuxwetjWXE/+6trSSL5iG+m/Ui2KNxwt8KyCd3mXIEyBLnw8jynQVoa/
+	RjlD1d+Rh8Ou/0WvZMs7zgbIvKrBxdj7GpnJDUoNlxYX18zkWlstc51abifeZydLryy3PpCoxBC
+	mi7Tz4dtBXR4QrS4d7jPOXBHLKevmJTSodaS60Q7v9If0ea4Gb7HGWrakrs4t+GbN53PXsM6t7u
+	rBtTEeuomeD3GNnq7osNSa04JgNrL9dAoN96QNS89aRjBVWPiyRjPotzmm5DJ54hVPlScGrU1wU
+	xEGjIR69Z5mPdAHHjDyEq6fe0Sc60ZvukixYEw380g+vMEg2kAGndma2nKSESR35MzTYI
+X-Received: by 2002:a17:906:9c84:b0:c25:8fdf:5d with SMTP id
+ a640c23a62f3a-c2a15685169mr7747666b.13.1789669996402; Thu, 17 Sep 2026
+ 11:33:16 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="nextPartElaGoEJaRnaci40IYCPnGA";
- micalg="pgp-sha256"; protocol="application/pgp-signature"
+References: <CAGEsz8F1hk5UpR0tJ6LjnbTKTyfKAxu6E9=7TLM_ABgodF9TdQ@mail.gmail.com>
+ <aqj-zOf7VhWlGqg3@ashevche-desk.local>
+In-Reply-To: <aqj-zOf7VhWlGqg3@ashevche-desk.local>
+From: Myeonghun Pak <mhun512@gmail.com>
+Date: Thu, 17 Sep 2026 14:33:04 -0400
+X-Gm-Features: AcwNN1Uomklmj5nh7O87baQcN6DxKDiyYePx3EGmO-GgU6xPrW2O450usLTp77Y
+Message-ID: <CAGEsz8EL-cWXTexpcBHF3=mYLnebwE7ESEJ59+p3VnGf02YLNw@mail.gmail.com>
+Subject: Re: [PATCH v2] mfd: intel_soc_pmic_crc: Balance IRQ wake enable
+To: Andy Shevchenko <andriy.shevchenko@intel.com>
+Cc: Andy Shevchenko <andy@kernel.org>, Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, 
+	linux-kernel@vger.kernel.org, Ijae Kim <ae878000@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
---nextPartElaGoEJaRnaci40IYCPnGA
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="utf-8"; protected-headers="v1"
-From: Stefan =?UTF-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>
-To: Lee Jones <lee@kernel.org>
-Date: Thu, 17 Sep 2026 21:28:36 +0300
-Message-ID: <lIjduhk6Sb-yyUCQAY-CKQ@gmail.com>
-In-Reply-To: <x9tzyTnKRAOyrdtSGnka0g@gmail.com>
-MIME-Version: 1.0
+Hello Andy,
 
-Hi Lee,
+Thanks for the feedback. I=E2=80=99ll use non-devm wake handling and drop t=
+he
+shutdown changes in v3.
 
-Am Donnerstag, 10. September 2026, 22:14:54 Ostafrikanische Zeit schrieben 
-Sie:
-> Hi Lee,
-> 
-> Thanks again for your review!
+Best regards,
+Myeonghun Pak
 
-This is a ping regarding my reply[0] to your review from last week. Do you 
-have any comments on my responses?
-
-Thanks,
-Stefan
-
-0: https://lore.kernel.org/linux-arm-kernel/x9tzyTnKRAOyrdtSGnka0g@gmail.com/
-
---nextPartElaGoEJaRnaci40IYCPnGA
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
-
------BEGIN PGP SIGNATURE-----
-
-iQJPBAABCAA5FiEEQxb0tqoFWyeVMl1sPRO8yFRPGiIFAmqsMVQbFIAAAAAABAAO
-bWFudTIsMi41KzEuMTIsMiwyAAoJED0TvMhUTxoiw48P/3we1ILZFxaaGd9dUpM9
-EPNR5ZVYal8qGKGBQRRFG5L5iI9qCAETVZTl5UuYFjjcs3U9+f2t8HbH5pd6hZSt
-C2F3WDGrsGddEGAPArMF7962KRKHHPUDoEOokUhrdp0/J7XFAZRDjCPJJdZxTHZD
-cpnqNPNwoTUAWYs4kLINKy7fY7PW+sJqUmAqvnB47RLoFURA9/DYcNxa/1esTScd
-Vyzm0NEsRFuZVSYTSjbBffTn266IrxNRSBnCJOxRAEv4edO2dkkqy9OZBDQLkcYn
-LJDrdJY/bAPJFapkXGuowmd5kVtYjG60V8+0suU1m+2HLlSipyfl4XeYHAS8gT5x
-UbXlsxgwtxCnMHWed3RbtXUGsYuBCsuO2HRz0Rv6Cduc2qY4XeEtgFxShiQbtq4w
-bxxE8DTlxoYjflISxEYYp/fD79irBB3hsp7oeSzP8PUyHsuFfCKpb2kfwnUtwRIQ
-Ov2oPm29JViaAFvrF1h5FQEU2zLsdNBquOIlsqamK07yjEPcELwlAByNv9e65/Zn
-3HUXepbTgovCaAofjQsggxDdSLLb4O5FjNn26DgHxz9d6ONWOjyqOIalTG2SbujQ
-ZDmnp3aIX6ETZBue8mBr5Df9zQTmCwYmmAh4PtqvOfy8R72pr+i3SSUdTXIj8h4X
-3h6c3+ubcO2oiEqVFEPbus5o
-=NhYp
------END PGP SIGNATURE-----
-
---nextPartElaGoEJaRnaci40IYCPnGA--
-
-
-
+2026=EB=85=84 9=EC=9B=94 15=EC=9D=BC (=ED=99=94) =EC=98=A4=EC=A0=84 4:16, A=
+ndy Shevchenko <andriy.shevchenko@intel.com>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=
+=84=B1:
+>
+> On Mon, Sep 14, 2026 at 03:18:51PM -0700, Myeonghun Pak wrote:
+> > The INT33FD Crystal Cove driver enables the parent IRQ as a wake source
+> > after registering its regmap IRQ chip.  When that succeeds, a later
+> > mfd_add_devices() failure or driver removal leaves the wake enable
+> > unbalanced.  Shutdown only disables IRQ handling, leaving IRQ wake enab=
+led.
+> >
+> > Register a managed action only after enable_irq_wake() succeeds.  Since
+> > the action is registered after the managed regmap IRQ chip, reverse dev=
+res
+> > order disables IRQ wake before tearing down the IRQ chip.  Keep warning=
+ and
+> > continuing when enable_irq_wake() itself fails.
+>
+> > Shutdown does not release managed resources, so explicitly release the
+> > wake-disable action there if it was registered.  This also removes the
+> > action, preventing a second disable during subsequent managed cleanup.
+>
+> Why? If it goes to shutdown, cleaning resources makes a little sense, no?
+>
+> > This is limited to the Bay Trail and Cherry Trail Crystal Cove PMIC
+> > variants using the INT33FD ACPI ID.
+> >
+> > This issue was identified during our ongoing static-analysis research w=
+hile
+> > reviewing kernel code.
+>
+> ...
+>
+> > static void crystal_cove_shutdown(struct i2c_client *i2c)
+> >  {
+> >       struct intel_soc_pmic *pmic =3D i2c_get_clientdata(i2c);
+> >
+> > +     if (devm_is_action_added(&i2c->dev, crystal_cove_disable_irq_wake=
+, pmic))
+> > +             devm_release_action(&i2c->dev, crystal_cove_disable_irq_w=
+ake, pmic);
+>
+> Is it legit to call devm at this point? When is .shutdown() called and wh=
+at are
+> the assumptions before and after for a certain device?
+>
+> >       disable_irq(pmic->irq);
+>
+> This looks a bit ugly. Can we start with no-devm? This will solve the abo=
+ve
+> question as well.
+>
+> --
+> With Best Regards,
+> Andy Shevchenko
+>
+>
