@@ -1,211 +1,185 @@
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1F99388E58
-	for <mfd@lists.linux.dev>; Fri, 18 Sep 2026 15:33:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=121.127.44.73
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EA732ED154
+	for <mfd@lists.linux.dev>; Fri, 18 Sep 2026 16:43:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789745591; cv=none; b=FsyO3/Ct98Gy440fOONpHWcbmKkXq0F1+ZfR7fJdsxGcxtiChOzsF336T7Rz5ZyRBrAJZ8CXmuJdKUWg5Xgh/bWI8MlGWsoQIg2DdNHJYc4MFAyJvO58fFOkEtpmxXugd0GswLcDxXtMik6j8d4/Ymr4s99R/RRRnvBu4XrKEVc=
+	t=1789749808; cv=none; b=io1M6jlGPRRGaYTVzXgJrh4LbX1Y8G5XdiMZyj0UuafhF4C3ohvSTPee73/LqP8qYxiHwlZnoRHlEAbKwZLx9U1Ti9bh8fjdKirVJJ63pmse5/6US/Odw8DdCEpYk+rHZWiRzFCRXcINkahS5rlkgkShJimArannjvMCfqXvTzE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789745591; c=relaxed/simple;
-	bh=L1WiWMmX3DsfOI8wyFB2zH02SO5nVuyZ3sk5usay3Fs=;
-	h=Mime-Version:Content-Type:Date:Message-Id:Cc:Subject:From:To:
-	 References:In-Reply-To; b=pLUa1LXdKwCsh6l5gXRtXh9fmgkoDGHaee1ETmkyC6/YIBHpmw4pGrJwU7WpP+SpQSAU2AMhEb6VVcu7yKlr3GeUx4XrAWX0P1R2cAo9d4Wgmhl1PUMejQIKAGMNyhKAAEbcCuo38Rp0t8Rb98y49WR5zZZkb3OnCnYWz6BiwZ8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ubuntu.com; spf=pass smtp.mailfrom=fe-bounces.ubuntu.com; dkim=pass (2048-bit key) header.d=ubuntu.com header.i=@ubuntu.com header.b=WSKglNxT; arc=none smtp.client-ip=121.127.44.73
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ubuntu.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fe-bounces.ubuntu.com
+	s=arc-20240116; t=1789749808; c=relaxed/simple;
+	bh=H6fsZYId41KQpeu0ypkHNClFv6JIG/e+9fOK7DhdSvA=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=m5lpaHD6yNCMIEHButFe2ZKBgR22g2a7qLy/mI+FovNp0vmxMfK1bEHscyJEqCTbst9oVsbK7Gpvhrojj8DyXOpYo8polhBbkO+PfIRtq8/8bMxQWK+4Oqy0Vvq1/yWW9isLxOA+vQhpwWtOILb+AwMjTIYem7JCVCDQ5UrsZhc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gCqrl8Wn; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=BBu/t3ao; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ubuntu.com header.i=@ubuntu.com header.b="WSKglNxT"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ubuntu.com;
- h=In-Reply-To: References: To: From: Subject: Cc: Message-Id: Date:
- Content-Type: Content-Transfer-Encoding: Mime-Version; q=dns/txt;
- s=fe-953a8a3ca9; t=1789745584;
- bh=WtQrZyaQlO+mtHmYw2SBSJxPWTjmzlVgI7Rp9b5tPg4=;
- b=WSKglNxTo7r9xrmbxFBs/4JDwfZ6C1K2QssH/5aQNsNR/Rdgt+IsOIS2kvwFnluq/+ygGot/G
- Zx1L3sWb/cLq0lZIQY+z3MzUyJANeI8b4jjnX57IkYCLN87lhB17aShpwcnvykmFO8RUjSsRpFb
- YVDXr/ZCncXUBsFpXSG1uKb6YMkkj7/Lb2uJ+GIHru+LMYdyyWNSsNHb5oTW607FEKf8g0RTgy5
- 6xFXLtxCIbWKS1oG2ORrkvThAon2FDKjRGHMWvLly6UsmUGnhg+AiRBrza1H7yVBAf6s8i2J/DN
- xI1nES12Uwj1M43QQB2xyi2PLq0bfyvDC7omqA8AyiVA==
-X-Forward-Email-ID: 6aad59a12df78bc22ddeff38
-X-Forward-Email-Sender: rfc822; jpeisach@ubuntu.com, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 2.14.2
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gCqrl8Wn";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="BBu/t3ao"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68IEQt7k1019884
+	for <mfd@lists.linux.dev>; Fri, 18 Sep 2026 16:43:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=oA6mPBcLFH3SC1iZeQ71t0
+	LSRYXqkDAN0OfRuXOGK2M=; b=gCqrl8WnlWeTApwrn8UvaGb2scDlmek50jvOtQ
+	tmtkcUFRMu5DV8wOPb5CGREe0CLNtkth7AKAjkBONAkeLuOZMbYtb/W8XZ33smgT
+	su/Jed6i0W1UvEBhCrkzbF5cTInqpQips5iVodenwkeyt6modgqavZj47/OR87so
+	0l15fF434lPYtHdv7r5Oa8WF0KmvSznQUNpMjgVUTWQpaUPldlWRUp9qHOoozrxd
+	R4Q87NPOE2J4ywB5GxYqoaRyNQhNWNEA+Ae0KGcs3ufqgnSTvqOPPqPQrRaFOO7T
+	ToI6qqfKY8i1SpsNbc6fF8Bo80BB2toz3ocftzIhclJ0C/Xg==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gs72u0knq-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <mfd@lists.linux.dev>; Fri, 18 Sep 2026 16:43:26 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-39533bb224cso1902382a91.3
+        for <mfd@lists.linux.dev>; Fri, 18 Sep 2026 09:43:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1789749805; x=1790354605; darn=lists.linux.dev;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=oA6mPBcLFH3SC1iZeQ71t0LSRYXqkDAN0OfRuXOGK2M=;
+        b=BBu/t3aoCcrUaGIMJeygqlv315lAr0EXNyB3iLUQNidGR/jdJJm+/TI+lyaz1Eys8u
+         xX1Ju+GiIviTt0I2/jJnXFpf41pWygOnT/z/JOLYlt8h7Lw4yRiHaApVLPcWmpb5OUdZ
+         lpI4kHu7HI+FNNGHigNFKGAYyZN7QKrE0+ITdu/h5E+OqgRrk0Hp8JDvfF8AewRG2RG/
+         8vvFu9sQfi+o8Tn+Ie3v5tZ398LC/lIjuAVQeHUC7/toIaycZ6/Uyq7RycQV4JaIyUa5
+         w68jtUCRZyiTSnRcgtV82QpaA7/UFctXLzd1f+rqm6EMflgKUhqXzhIEg3G64HkO6h0+
+         UsgQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789749805; x=1790354605;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=oA6mPBcLFH3SC1iZeQ71t0LSRYXqkDAN0OfRuXOGK2M=;
+        b=gPX/XWUfNwpkp/P0doiEQ5Rd4P0h3ZRclc3Xxf//wHbHAvF/t+xSEuGSuUIGPWLwj6
+         7A8q4KgbfV37Ymf4c7bab1orGRaktOxuAl8a1RBkF1KaM1hMJEhUJGi5Dp29y1tkPsRk
+         kPa841b6twOzfnX75a22PVKxVYFKEiuBHc7p9KK3J/Bqlttv0POTyNWcVsyXK/SO7nqs
+         s6msHiNG1oAUvqoSfxnVUZUPbtpxfxR6p1LNXOyXDrTFLSiXjyP8JGlspAzL8yGTKlmG
+         gpkjwExcwYcklKNEaGLQ2zbwIwM7Vz0iBGvF+cw9aiYfdtt9uNHeuBhi8QTwyXXdNuMC
+         82FA==
+X-Forwarded-Encrypted: i=1; AKwUvBwJ+Ve1cy8jfM1MFXDplrF1H5s+zXR9E1qkBwDoqxyZgmFTY8jRD8cAAWlZdSDz7sfsPG4=@lists.linux.dev
+X-Gm-Message-State: AFuF++lwd5d3azVNkugx24pJbLD+EFM4jkQuebSLCoEj+sp/2hl+0mfF
+	87KjlaLzXKWk+FGjL9lu/HWPnWl9aIGHkOi6oXTgIUfeK0TunBvwW4sJOSjIvo0QOuMLzpUfPcF
+	lJog8yyTsxVEKOj7xQUtZj6FMkGf9RLYULfdq3E7rjR9ObJdI7sQWWJ8=
+X-Gm-Gg: AYBFou1vIwbo28/DLoUPdvSdkCzpWM0KScb2Z1cQbOohAILCgPb/iY7EVaAyHW2XJBQ
+	e48mmfnibt9GBARDW1bbMeyPWOMGU6sxtNgwSyjDSF8afZZKdIxMTpF/LzXFYBiFfOZTmN1kaNC
+	mSoZ/N60lG4XTLthC9BOWPT6Wj1hpteaBI3xCQ0vuEFozgHN/GfsJAdL7FKaE6q/PiODFMc8cav
+	ZJqjXLvvHOJ0LNaj0EQRpwbrObWo5ZlfPbdAX/aVpGB6zP49Z2SzNA0aUmXMBKYfmvNIR5vII7H
+	qA6VL2UhL/y6ArRWQl070NbpnI0UWYKhqH7K8TCaAYnK2DAwdCOuM+2vYJB+aBGDodGNWPQmCAY
+	uZAEMAI9iUhYYny7KoQ==
+X-Received: by 2002:a17:903:2f06:b0:2dd:8e7d:90f7 with SMTP id d9443c01a7336-2ddb1adb4a8mr71307825ad.9.1789749805267;
+        Fri, 18 Sep 2026 09:43:25 -0700 (PDT)
+X-Received: by 2002:a17:903:2f06:b0:2dd:8e7d:90f7 with SMTP id d9443c01a7336-2ddb1adb4a8mr71307305ad.9.1789749804649;
+        Fri, 18 Sep 2026 09:43:24 -0700 (PDT)
+Received: from [10.213.109.130] ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ddb754e390sm11161895ad.32.2026.09.18.09.43.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 18 Sep 2026 09:43:24 -0700 (PDT)
+From: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+Subject: [PATCH 0/6] mfd: qcom-pm8008: Add support for PM8010 over I2C
+Date: Fri, 18 Sep 2026 22:12:44 +0530
+Message-Id: <20260918-pm8010_i2c_support-v1-0-de33d78fad9d@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8; format=Flowed
-Date: Fri, 18 Sep 2026 11:32:45 -0400
-Message-Id: <DLIJUQCKB76W.3RHK9KPO5JSOZ@ubuntu.com>
-Cc: <linux-phy@lists.infradead.org>, <devicetree@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
- <mfd@lists.linux.dev>, <linux-clk@vger.kernel.org>,
- <linux-arm-kernel@lists.infradead.org>,
- <linux-rockchip@lists.infradead.org>, <linux-riscv@lists.infradead.org>,
- "Marek Szyprowski" <m.szyprowski@samsung.com>, "Maud Spierings"
- <maud_spierings@murena.io>, "Graham Markall" <hello@big-grey.co.uk>,
- "Icenowy Zheng" <zhengxingda@iscas.ac.cn>, "Chaoyi Chen"
- <chaoyi.chen@rock-chips.com>, =?utf-8?q?Uwe_Kleine-K=C3=B6nig?=
- <u.kleine-koenig@baylibre.com>
-Subject: Re: [PATCH v4 00/20] drm: starfive: jh7110: Enable display
- subsystem
-From: "Joshua Peisach" <jpeisach@ubuntu.com>
-To: "Michal Wilczynski" <m.wilczynski@samsung.com>, "Joshua Peisach"
- <jpeisach@ubuntu.com>, "Vinod Koul" <vkoul@kernel.org>, "Neil Armstrong"
- <neil.armstrong@linaro.org>, "Rob Herring" <robh@kernel.org>, "Krzysztof
- Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley" <conor+dt@kernel.org>,
- "Andrzej Hajda" <andrzej.hajda@intel.com>, "Robert Foss"
- <rfoss@kernel.org>, "Laurent Pinchart" <Laurent.pinchart@ideasonboard.com>,
- "Jonas Karlman" <jonas@kwiboo.se>, "Jernej Skrabec"
- <jernej.skrabec@gmail.com>, "Luca Ceresoli" <luca.ceresoli@bootlin.com>,
- "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
- <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "Lee
- Jones" <lee@kernel.org>, "Andy Yan" <andy.yan@rock-chips.com>, "Philipp
- Zabel" <p.zabel@pengutronix.de>, "Emil Renner Berthing" <kernel@esmil.dk>,
- "Hal Feng" <hal.feng@starfivetech.com>, "Michael Turquette"
- <mturquette@baylibre.com>, "Stephen Boyd" <sboyd@kernel.org>, "Heiko
- Stuebner" <heiko@sntech.de>, "Paul Walmsley" <pjw@kernel.org>, "Palmer
- Dabbelt" <palmer@dabbelt.com>, "Albert Ou" <aou@eecs.berkeley.edu>,
- "Alexandre Ghiti" <alex@ghiti.fr>, "Dominique Belhachemi" <db@domibel.de>,
- "Brian Masney" <bmasney+clk@redhat.com>, "Jerome Brunet"
- <jbrunet+clk@baylibre.com>
-X-Mailer: aerc 0.21.0
-References: <CGME20260915153213eucas1p148f013af239a334fc78cdc249c0f8a61@eucas1p1.samsung.com> <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com> <DLGBPXP4F8E0.9X0QMZ9GFQVF@ubuntu.com> <136d6789-2f0c-4a91-ab2d-de3a3f119d5d@samsung.com>
-In-Reply-To: <136d6789-2f0c-4a91-ab2d-de3a3f119d5d@samsung.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAARqrWoC/yXMTQqDMBBA4avIrBuYTNT+XEWKaBzbKVRDRosg3
+ r1Rl9/ivRWUo7DCI1sh8k9UxiHBXjLw72Z4sZEuGQipxLstTPje0GIt5GudQxjjZByWlJN1V/I
+ OUhgi97Ic0+p5Wuf2w37aT7BtfwIjf8h2AAAA
+X-Change-ID: 20260915-pm8010_i2c_support-3062421372c3
+To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Guru Das Srinagesh <linux@gurudas.dev>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, mfd@lists.linux.dev,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Dhruvin Rajpura <drajpura@qti.qualcomm.com>,
+        Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+        Oleg Keri <okerixx@gmail.com>,
+        Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789749799; l=1613;
+ i=jishnu.prakash@oss.qualcomm.com; s=20251014; h=from:subject:message-id;
+ bh=H6fsZYId41KQpeu0ypkHNClFv6JIG/e+9fOK7DhdSvA=;
+ b=qKnWaYqEKCCysF3ieQyz7rqHneuV3s7N/zgJRNtZUrOVX0OAm8QMt2iZoZ+5DeMvSI7wQMd1v
+ E2dbxY4M1tNAbrWRqW5vVuSIwCccSh59OHswK9t38hVxp2mrO9bCJpc
+X-Developer-Key: i=jishnu.prakash@oss.qualcomm.com; a=ed25519;
+ pk=g89pXdLVwRjdTeQ+uX1QzvBO346E3hQAc1N7fcTXgmk=
+X-Proofpoint-ORIG-GUID: 19MGQvpFWsElKM6skqN_r4SYfsT906O1
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDIzOCBTYWx0ZWRfXybd/8pA1x2s8
+ 2XnuHD0e8WRyhuHxFf805joiDS6jg1vty+wcXnTiZeb5EaDEqS6wCXr6qrqwzz9xT3xOK5pFLDe
+ 8HNjRtmsTbeDOuthQ5hDV7EC5cwsMNE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDIzOCBTYWx0ZWRfX/L0csQKJLVgK
+ pOPpNCIUxDOL6+2plyUXoDaKjpmhgOLM7jLzFIoPa6p0i4aLAoTbbZBjNyMEV1ds1FOpxxOOG8W
+ 4lks7Y+yiv2JEI24CVky8iG0GYKrPZeBlqpLtsvwcLEjGa/yH4jVMNxmb1f7sbUfMJTvYEJtIV5
+ k/0WvRUIhITgZVhi0hpHLvr0l3bXL6nxbFjTo663h5pEEj4ZC8sDtFvxlxDF9cmACssz/JBm85R
+ KEfA+CLOTisPEVftCAeBw59MRwWPAiXXazIJC34BpfKe7DKYUNKXGEzH6Ez2ICKAgUOdL7UIf8O
+ ZuFiBImFUO/873vVtFzhsh3pWpSn3nV3NPS0KbB+7ccAOrtpoE0BDtdf8t5+LDMFzrPNKC0w4l3
+ q8eW1U+qazKPVJ7BWZfWPo1ylJlIvSPJQMpRyqAjCW579QYzlfKX56Jc6dkfHGO+ys4ztyvjWfX
+ p5iQ399PDDDUX7VfR5Q==
+X-Proofpoint-GUID: 19MGQvpFWsElKM6skqN_r4SYfsT906O1
+X-Authority-Analysis: v=2.4 cv=DO8acCNb c=1 sm=1 tr=0 ts=6aad6a2e cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=tWdyBv_7HfDShhJaVkwA:9 a=QEXdDO2ut3YA:10
+ a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-18_04,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 clxscore=1015 impostorscore=0 suspectscore=0 bulkscore=0
+ adultscore=0 spamscore=0 malwarescore=0 phishscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609180238
 
-On Thu Sep 17, 2026 at 1:22 PM EDT, Michal Wilczynski wrote:
->
->
-> On 9/16/26 02:45, Joshua Peisach wrote:
->> On Tue Sep 15, 2026 at 11:32 AM EDT, Michal Wilczynski wrote:
->>>
->>> Testing
->>> =3D=3D=3D=3D=3D=3D=3D
->>>
->>> Tested on a VisionFive 2 v1.3B using modetest.
->>=20
->> I.. got nothing. I did have to manually modprobe the modules, but
->> unless I am doing something wrong.. I didn't get anything and modetest
->> just gave -2.
->
-> Hmm have you also changed the DTB not just the kernel and the modules
-> (you can also built in everything).
->
-Yes (I didn't built-in everything, but I did make sure the DTB was
-copied and flash-kernel was run)
+PM8010 is the next generation PMIC following PM8008 and has similar
+functionality, providing 7 LDOs that power camera sensors and associated
+hardware, with some differences from PM8008 LDOs. The series also adds
+support for skipping interrupt configurations which is needed to support
+SoCs where the PMIC's interrupt pin is grounded, such as Glymur.
 
-> Also note modetest needs -M verisilicon.
->
+Patch 1 adds the new compatible string for PM8010 over I2C
 
-"failed to open device 'versilicon' with busid '(null)': No such file
-or directory"
+Patch 2 adds PM8010 LDO support
 
+Patch 3 adds mode voting support for PM8010, which is not supported on PM8008
 
-> If that is not it, could you send "dmesg | grep -iE
-> 'verisilicon|inno|hdmi|vout'" and "ls /sys/class/drm/"?
->
-the dmesg output:
+Patch 4 adds PM8010 support in the MFD driver
 
-[    0.090950] /soc/display-subsystem@29400000/hdmi@29590000/controller: Fi=
-xed dependency cycle(s) with /soc/display-subsystem@29400000/display@294000=
-00
-[    0.091029] /soc/display-subsystem@29400000/display@29400000: Fixed depe=
-ndency cycle(s) with /soc/display-subsystem@29400000/hdmi@29590000/controll=
-er
-[    0.104227] /hdmi-connector: Fixed dependency cycle(s) with /soc/display=
--subsystem@29400000/hdmi@29590000/controller
-[    0.104272] /soc/display-subsystem@29400000/hdmi@29590000/controller: Fi=
-xed dependency cycle(s) with /hdmi-connector
+Patch 5 updates documentation to make interrupt configuration optional
 
+Patch 6 updates the MFD driver to tolerate a missing interrupt
 
-/sys/class/drm only contains the file "version"
+Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+---
+Dhruvin Rajpura (1):
+      regulator: qcom-pm8008: Add PM8010 mode support
 
--Josh
+Konrad Dybcio (5):
+      dt-bindings: mfd: pm8008: Add qcom,pm8010-i2c compatible
+      regulator: pm8008: Add PM8010 support
+      mfd: qcom-pm8008: Add PM8010 support
+      dt-bindings: mfd: pm8008: Make interrupts optional
+      mfd: qcom-pm8008: Tolerate missing interrupt
 
->>=20
->>> ---
->>> Michal Wilczynski (20):
->>>       dt-bindings: phy: Add starfive,jh7110-inno-hdmi-phy
->>>       dt-bindings: display: bridge: Add starfive,jh7110-inno-hdmi-contr=
-oller
->>>       dt-bindings: mfd: Add starfive,jh7110-hdmi-subsystem
->>>       dt-bindings: soc: starfive: Add starfive,jh7110-vout-syscon
->>>       dt-bindings: display: verisilicon: Add starfive,jh7110-dc8200
->>>       dt-bindings: soc: starfive: Add starfive,jh7110-vout-subsystem
->>>       drm/bridge: inno-hdmi: Split probe out of bind
->>>       drm/bridge: inno-hdmi: Allow the register map to come from a pare=
-nt
->>>       drm/bridge: inno-hdmi: Add .disable platform operation
->>>       drm/bridge: inno-hdmi: Add .mode_valid platform operation
->>>       drm/bridge: inno-hdmi: Make the PHY configuration table optional
->>>       soc: starfive: Add jh7110-hdmi-subsystem driver
->>>       soc: starfive: Add jh7110-vout-subsystem driver
->>>       clk: starfive: jh7110-vout: Allow pixel clock rate propagation
->>>       drm/bridge: starfive: Add JH7110 HDMI controller driver
->>>       phy: Add common Innosilicon HDMI PHY helpers
->>>       phy: rockchip: inno-hdmi: Use the common Innosilicon PHY helpers
->>>       phy: starfive: Add jh7110-inno-hdmi-phy driver
->>>       riscv: dts: starfive: jh7110: Update DT for display subsystem
->>>       MAINTAINERS: Add StarFive JH7110 display subsystem entry
->>>
->>>  .../starfive,jh7110-inno-hdmi-controller.yaml      | 121 +++++
->>>  .../bindings/display/verisilicon,dc.yaml           |   1 +
->>>  .../mfd/starfive,jh7110-hdmi-subsystem.yaml        |  95 ++++
->>>  .../phy/starfive,jh7110-inno-hdmi-phy.yaml         |  49 ++
->>>  .../soc/starfive/starfive,jh7110-syscon.yaml       |   1 +
->>>  .../starfive/starfive,jh7110-vout-subsystem.yaml   | 218 ++++++++
->>>  MAINTAINERS                                        |  13 +
->>>  arch/riscv/boot/dts/starfive/jh7110-common.dtsi    | 121 ++++-
->>>  arch/riscv/boot/dts/starfive/jh7110.dtsi           | 105 +++-
->>>  drivers/clk/starfive/clk-starfive-jh7110-vout.c    |   6 +-
->>>  drivers/gpu/drm/bridge/Kconfig                     |  11 +
->>>  drivers/gpu/drm/bridge/Makefile                    |   1 +
->>>  drivers/gpu/drm/bridge/inno-hdmi.c                 | 112 +++-
->>>  drivers/gpu/drm/bridge/jh7110-inno-hdmi.c          | 297 +++++++++++
->>>  drivers/phy/Kconfig                                |   8 +
->>>  drivers/phy/Makefile                               |   1 +
->>>  drivers/phy/phy-inno-hdmi.c                        | 298 +++++++++++
->>>  drivers/phy/rockchip/Kconfig                       |   1 +
->>>  drivers/phy/rockchip/phy-rockchip-inno-hdmi.c      | 168 +-----
->>>  drivers/phy/starfive/Kconfig                       |  20 +
->>>  drivers/phy/starfive/Makefile                      |   1 +
->>>  drivers/phy/starfive/phy-jh7110-inno-hdmi.c        | 579 +++++++++++++=
-++++++++
->>>  drivers/soc/Kconfig                                |   1 +
->>>  drivers/soc/Makefile                               |   1 +
->>>  drivers/soc/starfive/Kconfig                       |  43 ++
->>>  drivers/soc/starfive/Makefile                      |   3 +
->>>  drivers/soc/starfive/jh7110-hdmi-subsystem.c       |  73 +++
->>>  drivers/soc/starfive/jh7110-vout-subsystem.c       |  82 +++
->>>  include/drm/bridge/inno_hdmi.h                     |  10 +-
->>>  include/linux/phy/inno-hdmi-phy.h                  |  85 +++
->>>  30 files changed, 2337 insertions(+), 188 deletions(-)
->>> ---
->>> base-commit: fd73f4a6659897191fa0d40695fe370925dd3780
->>> change-id: 20251031-jh7110-clean-send-7d2242118026
->>>
->>> Best regards,
->>=20
->> By the way, something weird happenined while I applied the patches
->> using git am. Somehow, some were out of order. The 10th patch
->> adding .mode_valid tried to be applied before .disable even though
->> in the series, the order is correctly set? git would obviously
->> fail because the .disable entry did not exist in the header, so I had
->> to manually put those in.
->>=20
->> I guess it's possible that something went wrong here? I personally
->> pulled the mailbox from the lore.kernel.org mbox.gz file.
->
-> I would recommend using b4 shazam instead
->
->>=20
->
-> Best regards,
+ .../devicetree/bindings/mfd/qcom,pm8008.yaml       |  10 +-
+ drivers/mfd/qcom-pm8008.c                          | 108 +++++++++---
+ drivers/regulator/qcom-pm8008-regulator.c          | 184 ++++++++++++++++++---
+ 3 files changed, 250 insertions(+), 52 deletions(-)
+---
+base-commit: fd73f4a6659897191fa0d40695fe370925dd3780
+change-id: 20260915-pm8010_i2c_support-3062421372c3
+
+Best regards,
+--  
+Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
 
