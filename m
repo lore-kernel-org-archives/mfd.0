@@ -1,57 +1,68 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC50033F58D
-	for <mfd@lists.linux.dev>; Fri, 18 Sep 2026 07:16:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.13
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCDC913959D
+	for <mfd@lists.linux.dev>; Fri, 18 Sep 2026 07:19:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789715794; cv=none; b=J0HsBlbf8Ih3NJG09H12Z0Z3eJt/q2BpvJRcQ/c0z8oBHqrOpvstm5q2vN3LLr3z2Dfh+JvaJEgZXRs3PL3BNnHaIaDPSpdhDJWaIbp7xffXtc4r8k2fCMSB4E2yMtk7DluHOJWWHi1WRn+rWRKUmR6kqbJRQRBBdX5kK+qPVBg=
+	t=1789715943; cv=none; b=be0/qJHCoMZw3tTJEykix3mfp2OreQuYR/T9SKs6uFelQxuEri+ifbMUK2F/S/5TSgsl3DQ/7KBEYiyGSDQ4pxsJLUS5aIcUCtgdsDL2G06894Da5R84NrtlL6iUO9ODPukGmMiqnXkLtkW0Uk6ZuPsuSVyfOVjNibgIpDsth0k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789715794; c=relaxed/simple;
-	bh=fA7/UnaYykb1NNCMAnNibkhBBnsqLfyGWvbdfXT2bdI=;
+	s=arc-20240116; t=1789715943; c=relaxed/simple;
+	bh=dfxlF5cxykKt1JLCGAytW/kqApoyMBeXGMrJQ5Ycbg4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=eZN9QqgF+Izf0kCOkYLcLH4jZlAmTpQ+/fAhdxId5ArzJMPQM9bWOMSnhV/eBnbI6ucMA2YdF2ZO9DntIo7ciKkIndlqsfBZNEucuqqX1oVMUn5OP7rBrAGMLjaHmHb3OkWsNsVBbHC4Jm26Goo7dzYI8Dhkl8n4hNlIP3iE0wM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=EoGxW1Qe; arc=none smtp.client-ip=192.198.163.13
+	 Content-Type:Content-Disposition:In-Reply-To; b=He+sKSy8Evw7vqB60qwVaBFAPUHyoBTrkoIgvNYOpMXX66z5jNV0GjB8GZwnLWIexi1EI+69ssnzIQasMP88c3j2KFMsW8zhO7uN145JIZT4gNfNhknXyUbSy+GKcmsrAqb+3U2q8uApu+Pw/Wus0GAjEprcyNeGBlRMGCjQOHM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=AO5MzpOI; arc=none smtp.client-ip=192.198.163.18
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="EoGxW1Qe"
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="AO5MzpOI"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1789715792; x=1821251792;
+  t=1789715942; x=1821251942;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=fA7/UnaYykb1NNCMAnNibkhBBnsqLfyGWvbdfXT2bdI=;
-  b=EoGxW1QeL0k4NMQVIvQY+WGTURG4eJH8hh0r1GJiKvjXbZH3shrAdvLH
-   87HGNo4VjqblEeLZ3HjFiwZmGk/jVtvbLRMvf7ADAUzhLgD8rf7w53wbD
-   E2fdLgvC5ooWuEZQFPNT7ohr59DHLCFpfjcO+XJim8h4AoPnPch7FhQIZ
-   58xDTpT54BfW7gaTSZzB6kyGXKawnlTLdtqdBCjgj49b88/jpLcsaqp+q
-   SyA5WJ7JvM/H2cj4O3x4+YwSkcdLsFGllwPvzqUzH3f1WmmPHtvesfHmj
-   yM2pEY6ApAdX0XNCOpMfFJZLYU1hNqcytpAcRvXRtIF2WYdkZVyZGF+OO
-   Q==;
-X-CSE-ConnectionGUID: 3G5j4K5cSwSOv2TB8wlrQw==
-X-CSE-MsgGUID: bkJLctLrQqKOyZBXsNBB/Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="92712720"
+  bh=dfxlF5cxykKt1JLCGAytW/kqApoyMBeXGMrJQ5Ycbg4=;
+  b=AO5MzpOIY1iqz4xALzwf6KWEZ1NoI4XqXad2JhZh2a0E8gtsn5V0uk+E
+   KrhHe5HNSjyGtMyoI9gXF58hlNdftOuRFX1gSUN+hKhp1N1ywFYAzA4TP
+   sHiRpffaySWyNTHAsQh8IOV2+0Pp56Emai6jqCd4lV3WK1OZ4sOln4/8m
+   YrjqZjnQXIi9TbPxH1tjxFbWPqqr7kVawGSzwI/HWhtqw5WRziwSd4qJ9
+   zbSn9K59UkTtTc87NJ8b803iqcTXI7bvYgL7ZQuUuHUNg4LDlbwLhYrM8
+   4mHoR/UllDv8w/UUzAAuO9hd9HV56Wx4A5Jy6tEW2/AFz0pg/M1CfRlLH
+   g==;
+X-CSE-ConnectionGUID: mqJFl220TH2g9PTuq7/qrg==
+X-CSE-MsgGUID: tfjm0ayLTHO9jHk+L3y6JA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="89338052"
 X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="92712720"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
-  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Sep 2026 00:16:29 -0700
-X-CSE-ConnectionGUID: 6oed3UO/SEGyBQJ/nUa00g==
-X-CSE-MsgGUID: Y7eNRWi0Q5uM79fpfqC0Vg==
+   d="scan'208";a="89338052"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+  by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Sep 2026 00:19:01 -0700
+X-CSE-ConnectionGUID: YVxCbwO2SqqSvBOkmu44aw==
+X-CSE-MsgGUID: FpOe3BXLSpad84ZaQLJXvQ==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
-   d="scan'208";a="299360210"
+   d="scan'208";a="276224505"
 Received: from carterle-desk.ger.corp.intel.com (HELO localhost) ([10.245.245.170])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Sep 2026 00:16:27 -0700
-Date: Fri, 18 Sep 2026 10:16:25 +0300
+  by fmviesa004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Sep 2026 00:18:57 -0700
+Date: Fri, 18 Sep 2026 10:18:51 +0300
 From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Myeonghun Pak <mhun512@gmail.com>
-Cc: Andy Shevchenko <andy@kernel.org>, Lee Jones <lee@kernel.org>,
-	mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
-	Ijae Kim <ae878000@gmail.com>
-Subject: Re: [PATCH v3] mfd: intel_soc_pmic_crc: Balance IRQ wake enable
-Message-ID: <aqzlSd5moyLIhLbG@ashevche-desk.local>
-References: <CAGEsz8GN7XObjqzMZ1KcghAKH8anMsYSU30PUJ_YXY-zDsvcpA@mail.gmail.com>
+To: Ryan Brue <ryanbrue.dev@gmail.com>
+Cc: Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Lee Jones <lee@kernel.org>, linux-iio@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-mediatek@lists.infradead.org, mfd@lists.linux.dev,
+	Roman Vivchar <rva333@protonmail.com>,
+	Luca Leonardo Scorcia <l.scorcia@gmail.com>
+Subject: Re: [PATCH v2 0/3] iio: adc: add mt6397 PMIC AUXADC support
+Message-ID: <aqzl29C_R4zwAnDK@ashevche-desk.local>
+References: <20260917-rbrue-suez-upstreaming-mt6397-auxadc-v2-0-db35882a6080@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -60,69 +71,94 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAGEsz8GN7XObjqzMZ1KcghAKH8anMsYSU30PUJ_YXY-zDsvcpA@mail.gmail.com>
+In-Reply-To: <20260917-rbrue-suez-upstreaming-mt6397-auxadc-v2-0-db35882a6080@gmail.com>
 Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
  krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On Thu, Sep 17, 2026 at 01:36:25PM -0500, Myeonghun Pak wrote:
-> The INT33FD Crystal Cove driver enables the parent IRQ as a wake source
-> after registering its regmap IRQ chip. When that succeeds, a later
-> mfd_add_devices() failure or driver removal leaves the wake enable
-> unbalanced.
+On Thu, Sep 17, 2026 at 09:19:49PM -0500, Ryan Brue wrote:
+> The MediaTek mt6397 PMIC has a 10-bit AUXADC that nothing in-tree can
+> reach. On boards built around it that ADC is the only path to the battery:
+> the SoC's AUXADC is wired to board thermistors, and the charger ICs these
+> boards use have no ADC at all, so without it there is no pack voltage and
+> no state of charge.
 > 
-> Record whether enable_irq_wake() succeeded and disable IRQ wake on a
-> subsequent mfd_add_devices() failure or driver removal. On removal, do
-> this after removing the MFD children and before the managed regmap IRQ
-> chip is released. Keep warning and continuing when enable_irq_wake()
-> itself fails, without attempting to disable wake in that case.
+> Patch 1 adds the compatible to the existing MediaTek PMIC AUXADC schema and
+> the header naming the channels, patch 2 the driver, patch 3 the MFD cell
+> that instantiates it. The cell comes last so that no commit in between
+> registers a child no driver can claim.
 > 
-> This is limited to the Bay Trail and Cherry Trail Crystal Cove PMIC
-> variants using the INT33FD ACPI ID.
+> The mt6397 is not given mediatek,mt6359-auxadc as a fallback because the
+> two are not register compatible; patch 1 has the detail.
 > 
-> This issue was identified during our ongoing static-analysis research while
-> reviewing kernel code.
-
-...
-
->  	ret = enable_irq_wake(pmic->irq);
->  	if (ret)
->  		dev_warn(dev, "Can't enable IRQ as wake source: %d\n", ret);
-
-> +	else
-> +		pmic->irq_wake_enabled = true;
-
-No need. Hint: we have irqd_is_wakeup_set().
-
-...
-
->  			      config->n_cell_devs, NULL, 0,
->  			      regmap_irq_get_domain(pmic->irq_chip_data));
-> -	if (ret)
-> +	if (ret) {
->  		pwm_remove_table(crc_pwm_lookup, ARRAY_SIZE(crc_pwm_lookup));
-> +		if (pmic->irq_wake_enabled)
-> +			disable_irq_wake(pmic->irq);
-> +	}
+> Only the two channels a board needs for its pack are described, so patch 1
+> ships a header naming them: a channel ID is an index into the driver's array
+> and not the PMIC's channel number, as in mt6323-auxadc. The register
+> sequences are the ones the vendor kernel's pmic_auxadc.c programs.
 > 
->  	return ret;
->  }
-> 
->  static void crystal_cove_i2c_remove(struct i2c_client *i2c)
->  {
-> +	struct intel_soc_pmic *pmic = i2c_get_clientdata(i2c);
-> +
->  	/* remove crc-pwm lookup table */
->  	pwm_remove_table(crc_pwm_lookup, ARRAY_SIZE(crc_pwm_lookup));
-> 
->  	mfd_remove_devices(&i2c->dev);
-> +	if (pmic->irq_wake_enabled)
-> +		disable_irq_wake(pmic->irq);
+> One note on patch 3: it adds a cell to mt6397_devs[], which Luca Leonardo
+> Scorcia's MT6392 series converts to the MFD_CELL_* macros in its patch
+> 4/9 [1]. Whichever of the two lands second needs a respin. Mine would
+> become a single MFD_CELL_OF(), and I can do a respin if that patch arrives
+> first.
 
-Hmm... This looks like another possible bug as we remove table before removing
-the MFD devices. Not sure if this is okay. Can you check that as well? Perhaps
-we would need another fix-patch.
+> Cc'd Luca.
 
->  }
+Instead of this, just put the real Cc: email tag here
+Cc: Luca Leonardo Scorcia <l.scorcia@gmail.com>
+
+> Tested on an Amazon Fire HD 10 (2017), an mt8173 with an mt6397. Both
+> channels are exercised: the battery channel by a fuel gauge, which reads 817
+> counts, 3830 mV with the pack at rest, and the thermistor channel by an
+> ntc-thermistor consuming it.
+> 
+> A new driver was created here, instead of modifying an existing driver such
+> as mt6323-auxadc or mt6359-auxadc, for the following reasons:
+> 
+>  - Both mt6323-auxadc and mt6359-auxadc select channels through a request
+>    register (1 bit per channel), while mt6397 uses a 4-bit numeric field
+>    CHSEL in CON1 (10:7), and then pulses a START bit (CON1 bit 0).
+> 
+>  - For mt6323-auxadc, which is the closest I could find to the mt6397
+>    (CON0..CON27), it has 13 more registers than the mt6397 (CON0..CON14).
+>    It uses CON22 for its request register, and reads the result value
+>    from the same register as the ready bit. We don't do that - the mt6397
+>    has a factory calibrated value for each channel at 0x16 higher than the
+>    raw value. mt6323 also has a 1800 mV / 15 bit scale / resolution while
+>    we have 1200 mV / 10 bits. We also have some per-channel preparation
+>    that we have to do before the burst, that the mt6323 doesn't have to
+>    do.
+> 
+>  - For mt6359-auxadc, it has a more generic framework for describing the
+>    AUXADC, but it assumes requests are channel-per-bit, and so we would
+>    have to basically ignore req_idx, req_mask, rdy_idx, and rdy_mask.
+> 
+>  - We also have our own software sampling, which the vendor does too
+>    (Amazon Fire OS based on Linux 3.18). We'd have to have our own
+>    sampling callback to do it.
+> 
+> I have two things in the driver different from the vendor (Amazon
+> Fire OS based on a 3.18 kernel). Verified with over 150 interleaved reads
+> per setting:
+> 
+>  - Leaving the ISENSE input enabled between reads, as the vendor does,
+>    makes no difference to the value, so the driver switches it off again
+>    and leaves both ADC input enables clear when idle.
+> 
+>  - The chip's sample accumulator makes no difference at 4, 8, 16 or 31
+>    samples and costs no measurable time, so it is left at one. Software
+>    averaging helps, but only by about a quarter: 0.92 LSB standard
+>    deviation for one conversion against 0.67 for sixteen, where independent
+>    samples would have given 0.23. Conversions in a burst are correlated.
+> 
+> The reading was checked against the charger, which regulates the pack to
+> a programmed voltage in constant-voltage mode. Over twelve such voltages
+> from 3904 to 4080 mV, and charge currents from 111 to 778 mA, the driver's
+> reading is a mean of 0.9 mV from the regulated value, well inside
+> the charger's regulation tolerance. That also settles reading the chip's
+> trimmed result register rather than the raw one - the raw register is
+> 20.7 mV low at every one of the twelve points.
+> 
+> [1] https://lore.kernel.org/all/20260902193351.185771-5-l.scorcia@gmail.com/
 
 -- 
 With Best Regards,
