@@ -1,126 +1,211 @@
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CEC050EBF6;
-	Fri, 18 Sep 2026 13:40:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=5.75.144.95
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1F99388E58
+	for <mfd@lists.linux.dev>; Fri, 18 Sep 2026 15:33:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=121.127.44.73
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789738807; cv=none; b=T6rnS7wOVwU5tsVGb9nGQkjoG/uvFLtlBX04TFqcOtGYa6Mj+JSxfkqzp0gFK53QhmxTMxFDOkNblhZE7+moPLJVtoIY9PMtOUHPRph6fIImM2epbHqdereaTvNqIL20I5+6TXZJIRBTbPJ24OQfO9XkpZ2gqiHmPVuCSu1Fh6I=
+	t=1789745591; cv=none; b=FsyO3/Ct98Gy440fOONpHWcbmKkXq0F1+ZfR7fJdsxGcxtiChOzsF336T7Rz5ZyRBrAJZ8CXmuJdKUWg5Xgh/bWI8MlGWsoQIg2DdNHJYc4MFAyJvO58fFOkEtpmxXugd0GswLcDxXtMik6j8d4/Ymr4s99R/RRRnvBu4XrKEVc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789738807; c=relaxed/simple;
-	bh=2yFgt0ROuksLy413n9Mkj4wxAWjjdsXYuq4ymzuvrHQ=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=ViK2bWBEF+8kl1WYz5ZiT54NXj6jLDDy9IgMc1KhPR1kN/YG3Y5OnQrBasi2T/R3FS12HhqTSkGsaW8/wUm7C+JA2K3hAPXKkFl2hO8pNkfYuB6v3SdrcIpD5RRpCqVazexOlWD+6ta2I97N2NQLiqlqFyz+SXQh77eAfFIaNio=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org; spf=pass smtp.helo=mail.mainlining.org; arc=none smtp.client-ip=5.75.144.95
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.helo=mail.mainlining.org
-Message-ID: <06462390-f3c2-4018-bd8c-fee513e600ce@mainlining.org>
-Date: Fri, 18 Sep 2026 16:38:55 +0300
+	s=arc-20240116; t=1789745591; c=relaxed/simple;
+	bh=L1WiWMmX3DsfOI8wyFB2zH02SO5nVuyZ3sk5usay3Fs=;
+	h=Mime-Version:Content-Type:Date:Message-Id:Cc:Subject:From:To:
+	 References:In-Reply-To; b=pLUa1LXdKwCsh6l5gXRtXh9fmgkoDGHaee1ETmkyC6/YIBHpmw4pGrJwU7WpP+SpQSAU2AMhEb6VVcu7yKlr3GeUx4XrAWX0P1R2cAo9d4Wgmhl1PUMejQIKAGMNyhKAAEbcCuo38Rp0t8Rb98y49WR5zZZkb3OnCnYWz6BiwZ8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ubuntu.com; spf=pass smtp.mailfrom=fe-bounces.ubuntu.com; dkim=pass (2048-bit key) header.d=ubuntu.com header.i=@ubuntu.com header.b=WSKglNxT; arc=none smtp.client-ip=121.127.44.73
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ubuntu.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fe-bounces.ubuntu.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=ubuntu.com header.i=@ubuntu.com header.b="WSKglNxT"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ubuntu.com;
+ h=In-Reply-To: References: To: From: Subject: Cc: Message-Id: Date:
+ Content-Type: Content-Transfer-Encoding: Mime-Version; q=dns/txt;
+ s=fe-953a8a3ca9; t=1789745584;
+ bh=WtQrZyaQlO+mtHmYw2SBSJxPWTjmzlVgI7Rp9b5tPg4=;
+ b=WSKglNxTo7r9xrmbxFBs/4JDwfZ6C1K2QssH/5aQNsNR/Rdgt+IsOIS2kvwFnluq/+ygGot/G
+ Zx1L3sWb/cLq0lZIQY+z3MzUyJANeI8b4jjnX57IkYCLN87lhB17aShpwcnvykmFO8RUjSsRpFb
+ YVDXr/ZCncXUBsFpXSG1uKb6YMkkj7/Lb2uJ+GIHru+LMYdyyWNSsNHb5oTW607FEKf8g0RTgy5
+ 6xFXLtxCIbWKS1oG2ORrkvThAon2FDKjRGHMWvLly6UsmUGnhg+AiRBrza1H7yVBAf6s8i2J/DN
+ xI1nES12Uwj1M43QQB2xyi2PLq0bfyvDC7omqA8AyiVA==
+X-Forward-Email-ID: 6aad59a12df78bc22ddeff38
+X-Forward-Email-Sender: rfc822; jpeisach@ubuntu.com, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.14.2
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Muzaffer Kadir <muzafferkadir@mainlining.org>
-Subject: Re: [PATCH v2 01/19] dt-bindings: clock: qcom: Add MSM8952 global
- clock controller
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Srinivas Kandagatla <srini@kernel.org>,
- Ulf Hansson <ulfh@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
- "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
- Robin Murphy <robin.murphy@arm.com>, Lee Jones <lee@kernel.org>,
- Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
- <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>,
- Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Robert Marko <robimarko@gmail.com>, Guru Das Srinagesh <linux@gurudas.dev>,
- Amit Kucheria <amitk@kernel.org>, Thara Gopinath <thara.gopinath@gmail.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>,
- Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
- Lukasz Luba <lukasz.luba@arm.com>, Kees Cook <kees@kernel.org>,
- Tony Luck <tony.luck@intel.com>, "Guilherme G. Piccoli"
- <gpiccoli@igalia.com>, Dmitry Torokhov <dmitry.torokhov@gmail.com>,
- David Heidelberg <david@ixit.cz>, Dang Huynh <danct12@riseup.net>,
- phone-devel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-mmc@vger.kernel.org,
- iommu@lists.linux.dev, mfd@lists.linux.dev, dri-devel@lists.freedesktop.org,
- freedreno@lists.freedesktop.org, linux-pm@vger.kernel.org,
- linux-input@vger.kernel.org
-References: <20260916-msm8952-initial-support-v2-0-798c2602dde1@mainlining.org>
- <20260916-msm8952-initial-support-v2-1-798c2602dde1@mainlining.org>
- <20260918-liberal-significant-crow-f1e66f@quoll>
- <29506e08-9337-487f-af2d-b75f5aa8341e@mainlining.org>
- <232b8c59-0357-407b-9e34-78e290f76ba0@kernel.org>
-Content-Language: en-US
-In-Reply-To: <232b8c59-0357-407b-9e34-78e290f76ba0@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8; format=Flowed
+Date: Fri, 18 Sep 2026 11:32:45 -0400
+Message-Id: <DLIJUQCKB76W.3RHK9KPO5JSOZ@ubuntu.com>
+Cc: <linux-phy@lists.infradead.org>, <devicetree@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
+ <mfd@lists.linux.dev>, <linux-clk@vger.kernel.org>,
+ <linux-arm-kernel@lists.infradead.org>,
+ <linux-rockchip@lists.infradead.org>, <linux-riscv@lists.infradead.org>,
+ "Marek Szyprowski" <m.szyprowski@samsung.com>, "Maud Spierings"
+ <maud_spierings@murena.io>, "Graham Markall" <hello@big-grey.co.uk>,
+ "Icenowy Zheng" <zhengxingda@iscas.ac.cn>, "Chaoyi Chen"
+ <chaoyi.chen@rock-chips.com>, =?utf-8?q?Uwe_Kleine-K=C3=B6nig?=
+ <u.kleine-koenig@baylibre.com>
+Subject: Re: [PATCH v4 00/20] drm: starfive: jh7110: Enable display
+ subsystem
+From: "Joshua Peisach" <jpeisach@ubuntu.com>
+To: "Michal Wilczynski" <m.wilczynski@samsung.com>, "Joshua Peisach"
+ <jpeisach@ubuntu.com>, "Vinod Koul" <vkoul@kernel.org>, "Neil Armstrong"
+ <neil.armstrong@linaro.org>, "Rob Herring" <robh@kernel.org>, "Krzysztof
+ Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley" <conor+dt@kernel.org>,
+ "Andrzej Hajda" <andrzej.hajda@intel.com>, "Robert Foss"
+ <rfoss@kernel.org>, "Laurent Pinchart" <Laurent.pinchart@ideasonboard.com>,
+ "Jonas Karlman" <jonas@kwiboo.se>, "Jernej Skrabec"
+ <jernej.skrabec@gmail.com>, "Luca Ceresoli" <luca.ceresoli@bootlin.com>,
+ "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
+ <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "Lee
+ Jones" <lee@kernel.org>, "Andy Yan" <andy.yan@rock-chips.com>, "Philipp
+ Zabel" <p.zabel@pengutronix.de>, "Emil Renner Berthing" <kernel@esmil.dk>,
+ "Hal Feng" <hal.feng@starfivetech.com>, "Michael Turquette"
+ <mturquette@baylibre.com>, "Stephen Boyd" <sboyd@kernel.org>, "Heiko
+ Stuebner" <heiko@sntech.de>, "Paul Walmsley" <pjw@kernel.org>, "Palmer
+ Dabbelt" <palmer@dabbelt.com>, "Albert Ou" <aou@eecs.berkeley.edu>,
+ "Alexandre Ghiti" <alex@ghiti.fr>, "Dominique Belhachemi" <db@domibel.de>,
+ "Brian Masney" <bmasney+clk@redhat.com>, "Jerome Brunet"
+ <jbrunet+clk@baylibre.com>
+X-Mailer: aerc 0.21.0
+References: <CGME20260915153213eucas1p148f013af239a334fc78cdc249c0f8a61@eucas1p1.samsung.com> <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com> <DLGBPXP4F8E0.9X0QMZ9GFQVF@ubuntu.com> <136d6789-2f0c-4a91-ab2d-de3a3f119d5d@samsung.com>
+In-Reply-To: <136d6789-2f0c-4a91-ab2d-de3a3f119d5d@samsung.com>
 
-
-
-On Fri, 18 Sep 2026 15:26:34 +0200, Krzysztof Kozlowski wrote:
-> On 18/09/2026 15:01, Muzaffer Kadir wrote:
->> Hi Krzysztof,
->>
->> On Fri, 18 Sep 2026 12:02:02 +0200, Krzysztof Kozlowski wrote:
->>> On Wed, Sep 16, 2026 at 05:22:06PM +0300, Muzaffer Kadir wrote:
->>>> Add a device tree binding to describe clocks, resets and power domains
->>>> provided by the global clock controller on MSM8952 SoC.
->>>>
->>>> Signed-off-by: Muzaffer Kadir <muzafferkadir@mainlining.org>
+On Thu Sep 17, 2026 at 1:22 PM EDT, Michal Wilczynski wrote:
+>
+>
+> On 9/16/26 02:45, Joshua Peisach wrote:
+>> On Tue Sep 15, 2026 at 11:32 AM EDT, Michal Wilczynski wrote:
 >>>
->>> Please run scripts/checkpatch.pl on the patches and fix reported
->>> warnings. After that, run also 'scripts/checkpatch.pl --strict' on the
->>> patches and (probably) fix more warnings. Some warnings can be ignored,
->>> especially from --strict run, but the code here looks like it needs a
->>> fix. Feel free to get in touch if the warning is not clear.
+>>> Testing
+>>> =3D=3D=3D=3D=3D=3D=3D
 >>>
->>
->> Then I will ask a few things,
->>
->> WARNING: DT binding headers should be licensed (GPL-2.0-only OR .*)
->> #88: FILE: include/dt-bindings/clock/qcom,gcc-msm8952.h:1:
->> +/* SPDX-License-Identifier: GPL-2.0-only */
->>
->> As I said on cover, I originally based on msm8939 gcc,
-> 
-> I don't get this. There is no file like:
-> Documentation/devicetree/bindings/clock/qcom,*msm8939*
+>>> Tested on a VisionFive 2 v1.3B using modetest.
+>>=20
+>> I.. got nothing. I did have to manually modprobe the modules, but
+>> unless I am doing something wrong.. I didn't get anything and modetest
+>> just gave -2.
+>
+> Hmm have you also changed the DTB not just the kernel and the modules
+> (you can also built in everything).
+>
+Yes (I didn't built-in everything, but I did make sure the DTB was
+copied and flash-kernel was run)
 
-this file I was talking about:
-include/dt-bindings/clock/qcom,gcc-msm8939.h
+> Also note modetest needs -M verisilicon.
+>
 
-> 
-> so I have no clue what did you take as a base. If this is derivative of
-> some work, it can be mentioned in the commit msg. We usually ignore
-> cover letters for anything relevant to actual code.
-> 
-Understood, I will fix the commit msg on v3.
+"failed to open device 'versilicon' with busid '(null)': No such file
+or directory"
 
->> would it cause license problems with file if I fix this
->> warning?
->>
->> Some patches say "has style problems, please review."
->> Is this related to formatting of code inside patch ?
->>
->> WARNING: Prefer a maximum 75 chars per line (possible unwrapped commit description?)
->> #16: 
->> [1] https://android.googlesource.com/kernel/msm.git/+/refs/tags/android-wear-7.0.0_r0.3/drivers/clk/qcom/clock-gcc-8952.c
-> 
-> I do not see such line in this patch.
 
-I misunderstood as all patches, Sorry.
-This was in 3. patch commit description.
+> If that is not it, could you send "dmesg | grep -iE
+> 'verisilicon|inno|hdmi|vout'" and "ls /sys/class/drm/"?
+>
+the dmesg output:
 
-Best Regards,
-Muzaffer Kadir
+[    0.090950] /soc/display-subsystem@29400000/hdmi@29590000/controller: Fi=
+xed dependency cycle(s) with /soc/display-subsystem@29400000/display@294000=
+00
+[    0.091029] /soc/display-subsystem@29400000/display@29400000: Fixed depe=
+ndency cycle(s) with /soc/display-subsystem@29400000/hdmi@29590000/controll=
+er
+[    0.104227] /hdmi-connector: Fixed dependency cycle(s) with /soc/display=
+-subsystem@29400000/hdmi@29590000/controller
+[    0.104272] /soc/display-subsystem@29400000/hdmi@29590000/controller: Fi=
+xed dependency cycle(s) with /hdmi-connector
+
+
+/sys/class/drm only contains the file "version"
+
+-Josh
+
+>>=20
+>>> ---
+>>> Michal Wilczynski (20):
+>>>       dt-bindings: phy: Add starfive,jh7110-inno-hdmi-phy
+>>>       dt-bindings: display: bridge: Add starfive,jh7110-inno-hdmi-contr=
+oller
+>>>       dt-bindings: mfd: Add starfive,jh7110-hdmi-subsystem
+>>>       dt-bindings: soc: starfive: Add starfive,jh7110-vout-syscon
+>>>       dt-bindings: display: verisilicon: Add starfive,jh7110-dc8200
+>>>       dt-bindings: soc: starfive: Add starfive,jh7110-vout-subsystem
+>>>       drm/bridge: inno-hdmi: Split probe out of bind
+>>>       drm/bridge: inno-hdmi: Allow the register map to come from a pare=
+nt
+>>>       drm/bridge: inno-hdmi: Add .disable platform operation
+>>>       drm/bridge: inno-hdmi: Add .mode_valid platform operation
+>>>       drm/bridge: inno-hdmi: Make the PHY configuration table optional
+>>>       soc: starfive: Add jh7110-hdmi-subsystem driver
+>>>       soc: starfive: Add jh7110-vout-subsystem driver
+>>>       clk: starfive: jh7110-vout: Allow pixel clock rate propagation
+>>>       drm/bridge: starfive: Add JH7110 HDMI controller driver
+>>>       phy: Add common Innosilicon HDMI PHY helpers
+>>>       phy: rockchip: inno-hdmi: Use the common Innosilicon PHY helpers
+>>>       phy: starfive: Add jh7110-inno-hdmi-phy driver
+>>>       riscv: dts: starfive: jh7110: Update DT for display subsystem
+>>>       MAINTAINERS: Add StarFive JH7110 display subsystem entry
+>>>
+>>>  .../starfive,jh7110-inno-hdmi-controller.yaml      | 121 +++++
+>>>  .../bindings/display/verisilicon,dc.yaml           |   1 +
+>>>  .../mfd/starfive,jh7110-hdmi-subsystem.yaml        |  95 ++++
+>>>  .../phy/starfive,jh7110-inno-hdmi-phy.yaml         |  49 ++
+>>>  .../soc/starfive/starfive,jh7110-syscon.yaml       |   1 +
+>>>  .../starfive/starfive,jh7110-vout-subsystem.yaml   | 218 ++++++++
+>>>  MAINTAINERS                                        |  13 +
+>>>  arch/riscv/boot/dts/starfive/jh7110-common.dtsi    | 121 ++++-
+>>>  arch/riscv/boot/dts/starfive/jh7110.dtsi           | 105 +++-
+>>>  drivers/clk/starfive/clk-starfive-jh7110-vout.c    |   6 +-
+>>>  drivers/gpu/drm/bridge/Kconfig                     |  11 +
+>>>  drivers/gpu/drm/bridge/Makefile                    |   1 +
+>>>  drivers/gpu/drm/bridge/inno-hdmi.c                 | 112 +++-
+>>>  drivers/gpu/drm/bridge/jh7110-inno-hdmi.c          | 297 +++++++++++
+>>>  drivers/phy/Kconfig                                |   8 +
+>>>  drivers/phy/Makefile                               |   1 +
+>>>  drivers/phy/phy-inno-hdmi.c                        | 298 +++++++++++
+>>>  drivers/phy/rockchip/Kconfig                       |   1 +
+>>>  drivers/phy/rockchip/phy-rockchip-inno-hdmi.c      | 168 +-----
+>>>  drivers/phy/starfive/Kconfig                       |  20 +
+>>>  drivers/phy/starfive/Makefile                      |   1 +
+>>>  drivers/phy/starfive/phy-jh7110-inno-hdmi.c        | 579 +++++++++++++=
+++++++++
+>>>  drivers/soc/Kconfig                                |   1 +
+>>>  drivers/soc/Makefile                               |   1 +
+>>>  drivers/soc/starfive/Kconfig                       |  43 ++
+>>>  drivers/soc/starfive/Makefile                      |   3 +
+>>>  drivers/soc/starfive/jh7110-hdmi-subsystem.c       |  73 +++
+>>>  drivers/soc/starfive/jh7110-vout-subsystem.c       |  82 +++
+>>>  include/drm/bridge/inno_hdmi.h                     |  10 +-
+>>>  include/linux/phy/inno-hdmi-phy.h                  |  85 +++
+>>>  30 files changed, 2337 insertions(+), 188 deletions(-)
+>>> ---
+>>> base-commit: fd73f4a6659897191fa0d40695fe370925dd3780
+>>> change-id: 20251031-jh7110-clean-send-7d2242118026
+>>>
+>>> Best regards,
+>>=20
+>> By the way, something weird happenined while I applied the patches
+>> using git am. Somehow, some were out of order. The 10th patch
+>> adding .mode_valid tried to be applied before .disable even though
+>> in the series, the order is correctly set? git would obviously
+>> fail because the .disable entry did not exist in the header, so I had
+>> to manually put those in.
+>>=20
+>> I guess it's possible that something went wrong here? I personally
+>> pulled the mailbox from the lore.kernel.org mbox.gz file.
+>
+> I would recommend using b4 shazam instead
+>
+>>=20
+>
+> Best regards,
+
