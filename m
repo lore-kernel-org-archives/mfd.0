@@ -1,67 +1,123 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from cstnet.cn (smtp21.cstnet.cn [159.226.251.21])
+	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D572F2367D3;
-	Fri, 18 Sep 2026 05:04:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 920AB175A64
+	for <mfd@lists.linux.dev>; Fri, 18 Sep 2026 05:58:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.226.251.21
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789707868; cv=none; b=N24qeLkr2E8mi4BUner7MgC1rvmEjmgQojmkC//nLYmVEVTWRjyt6pc3il8CzbHalluTESbjsyg4geLzyeVqajK4vpsZiyZNlc0EK9pJVwOJs7FBnC+JWkCRQ9RMF00t+0mlBbA89ubVKxjmQ1OTa+KzQmIu6hlWc1221y+aADA=
+	t=1789711141; cv=none; b=REVNDg0PdUHCG1M6roMQwn4AsHi30eKexOfLr0zXphrGHq6k43ZaTlXW6AQ9gs4DNc/a5cv4Dc0m0Di7wtzx4xGMbcXpn/+8FL2Pg6UsErUZauas/XUC2Pi2tWmjAdtdFKcNtiNdiUdLAMdXIYj+6ISL+VDGgo1yJLCehARLxWs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789707868; c=relaxed/simple;
-	bh=nR6pyfZ3jF0P9rscXHGANvnts1kdsr+yHb1qI9RhDYo=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=s5eOm4M80mH3u4pgqti13+U50yV7t21D5EKpHeDbGcwZqb7u3x339ulPYgtJUm8znBtnR65EcTd00uN4YUFI0KDysYkU3bdyrxDLbpPObAYhLOnaiAwBUqQDl4P+dpsBZASZLXDpYhFSHYcfWZin/Jt+JtoIsaxOhRq171hs9L8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=a6vRMB67; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="a6vRMB67"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C0ECB1F000FF;
-	Fri, 18 Sep 2026 05:04:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789707866;
-	bh=nR6pyfZ3jF0P9rscXHGANvnts1kdsr+yHb1qI9RhDYo=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=a6vRMB67cJsj82UgtAPxq1kihDpHRIqbNbzpd+RNpD+5IVHvgin1kvJgemPiiT8EG
-	 vSZzIE38lHMLwtTRqkGkiCy0aHFdvCW6AL5dKWdJ2t7eGZkexaiy6MXciJTLtDGZBn
-	 bsqRdQV/wBq4/Z3fh6yCSh+RF74xQDwXvc8XSLN22K08lLEbyMlvY+78WB2mQFF3ee
-	 WeR7RHPsCDNw1NYMIwVFk1GkDIrfnaIjV4bA4bsyaD6uy+wdIGLuCk+XoxlotrtbnE
-	 FX5Yjhd9CD0+srGSBv7PPZuU/LHI6xVB7ZoBatG7MLdMQMY3Qq9uNni9IGz0hYxvFn
-	 DYjIxO5Vv0CFQ==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 1/2] dt-bindings: mfd: mediatek: mt6397: describe the
- RTC's nvmem layout
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Ryan Brue" <ryanbrue.dev@gmail.com>
-Cc: robh@kernel.org, lee@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org, linux-rtc@vger.kernel.org, "Alexandre
- Belloni" <alexandre.belloni@bootlin.com>, mfd@lists.linux.dev
-In-Reply-To: <20260917-rbrue-suez-upstreaming-mt6397-rtc-nvmem-v1-1-558b8f95cfbc@gmail.com>
-References: <20260917-rbrue-suez-upstreaming-mt6397-rtc-nvmem-v1-0-558b8f95cfbc@gmail.com>
- <20260917-rbrue-suez-upstreaming-mt6397-rtc-nvmem-v1-1-558b8f95cfbc@gmail.com>
-Content-Type: text/plain; charset=utf-8
+	s=arc-20240116; t=1789711141; c=relaxed/simple;
+	bh=JS8Rhd7b/HFoVVdP0RMjIv015cFtAfHlBy4pvpu4gbk=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=pMXAHJz8LjrcDHkTnEAisGI+Hql2yWJ8Sug8yhWbt5+664rSutr3XPAoUE7I2XII30LXSEaEvi3VZfpFIsBqwON2P10aPrzWMp/BHBHMrpL+rek9P1bdDRmeFU8gwcw1zRodCtAREij588M7nG/Ugj3ifjYlpyygGtAvFBxjBhU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.21
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iscas.ac.cn
+Received: from edelgard.fodlan.icenowy.me (unknown [112.94.103.44])
+	by APP-01 (Coremail) with SMTP id qwCowAAn_O8C06xqtWNICA--.15380S2;
+	Fri, 18 Sep 2026 13:58:28 +0800 (CST)
+Message-ID: <1aa49a9bcf5c5a16ce38b57f8f508a31ca70c1ce.camel@iscas.ac.cn>
+Subject: Re: [PATCH v4 05/20] dt-bindings: display: verisilicon: Add
+ starfive,jh7110-dc8200
+From: Icenowy Zheng <zhengxingda@iscas.ac.cn>
+To: Michal Wilczynski <m.wilczynski@samsung.com>, Vinod Koul
+ <vkoul@kernel.org>,  Neil Armstrong <neil.armstrong@linaro.org>, Rob
+ Herring <robh@kernel.org>, Krzysztof Kozlowski	 <krzk+dt@kernel.org>, Conor
+ Dooley <conor+dt@kernel.org>, Andrzej Hajda	 <andrzej.hajda@intel.com>,
+ Robert Foss <rfoss@kernel.org>, Laurent Pinchart	
+ <Laurent.pinchart@ideasonboard.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Luca Ceresoli
+ <luca.ceresoli@bootlin.com>, Maarten Lankhorst	
+ <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, Lee Jones <lee@kernel.org>, Andy
+ Yan <andy.yan@rock-chips.com>, Philipp Zabel	 <p.zabel@pengutronix.de>,
+ Emil Renner Berthing <kernel@esmil.dk>, Hal Feng	
+ <hal.feng@starfivetech.com>, Michael Turquette <mturquette@baylibre.com>, 
+ Stephen Boyd <sboyd@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Paul
+ Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
+ <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,  Dominique
+ Belhachemi	 <db@domibel.de>, Brian Masney <bmasney+clk@redhat.com>, Jerome
+ Brunet	 <jbrunet+clk@baylibre.com>
+Cc: linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	mfd@lists.linux.dev, linux-clk@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, 
+	linux-riscv@lists.infradead.org, Marek Szyprowski
+ <m.szyprowski@samsung.com>,  Maud Spierings <maud_spierings@murena.io>,
+ Graham Markall <hello@big-grey.co.uk>, Chaoyi Chen	
+ <chaoyi.chen@rock-chips.com>, Joshua Peisach <jpeisach@ubuntu.com>, Uwe
+ =?ISO-8859-1?Q?Kleine-K=F6nig?=	 <u.kleine-koenig@baylibre.com>
+Date: Fri, 18 Sep 2026 13:58:26 +0800
+In-Reply-To: <20260915-jh7110-clean-send-v4-5-f0e4fd6f2cc8@samsung.com>
+References: <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
+		<CGME20260915153222eucas1p213b95b05ea7eb9a18700af8888ef5a44@eucas1p2.samsung.com>
+	 <20260915-jh7110-clean-send-v4-5-f0e4fd6f2cc8@samsung.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Date: Fri, 18 Sep 2026 05:04:25 +0000
-Message-Id: <20260918050425.C0ECB1F000FF@smtp.kernel.org>
+User-Agent: Evolution 3.58.3 
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+X-CM-TRANSID:qwCowAAn_O8C06xqtWNICA--.15380S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7ur4fJrW7tF1UKFykGFy5XFb_yoW8GF4xpF
+	sakFZrJFyIgrn3W3y8J3WUK3y7Wr1xA3W0gF1jq3W2grs8GFWFqr4Y9r1qgF4UJFW8CFW8
+	ZFsY9rWYvr1vyF7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUvGb7Iv0xC_Cr1lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwV
+	C2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
+	0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUXVWUAwAv7VC2z280aVAFwI0_Jr0_Gr
+	1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4IIrI8v6xkF7I0E8cxan2IY04v7
+	MxkF7I0En4kS14v26rWY6Fy7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r
+	4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF
+	67AKxVWrXVW8Jr1lIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6x
+	IIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY
+	6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa
+	73UjIFyTuYvjxUaGYpUUUUU
+X-CM-SenderInfo: x2kh0wp0lqwv3d6l2u1dvotugofq/
 
-> Four of the MT6397 RTC's alarm registers use only their low bits; the
-> high byte of each is storage the clock and the alarm don't touch.
-> MediaTek's documentation names them RTC_NEW_SPARE0 to RTC_NEW_SPARE3 and
-> assigns the first to a fuel gauge, which is what a battery driver reads
-> at boot so that the reported capacity does not jump across a reboot.
+=E5=9C=A8 2026-09-15=E4=BA=8C=E7=9A=84 17:32 +0200=EF=BC=8CMichal Wilczynsk=
+i=E5=86=99=E9=81=93=EF=BC=9A
+> The JH7110 embeds a DC8200. The binding requires an SoC specific
+> compatible ahead of the generic one, so add the JH7110 to the enum.
 >=20
-> They sit in the RTC's always-on domain, so the driver can offer them as
-> a battery-backed nvmem provider. Allow a board to lay cells out over
-> them.
+> Reviewed-by: Joshua Peisach <jpeisach@ubuntu.com>
+> Signed-off-by: Michal Wilczynski <m.wilczynski@samsung.com>
+> ---
+> =C2=A0Documentation/devicetree/bindings/display/verisilicon,dc.yaml | 1 +
+> =C2=A01 file changed, 1 insertion(+)
 >=20
-> Assisted-by: LLM
-> Signed-off-by: Ryan Brue <ryanbrue.dev@gmail.com>
+> diff --git
+> a/Documentation/devicetree/bindings/display/verisilicon,dc.yaml
+> b/Documentation/devicetree/bindings/display/verisilicon,dc.yaml
+> index
+> 919a9001220120054cb62d1d01b7293367266f95..05a202633cd273fec358c095c64
+> 584d959d96d90 100644
+> --- a/Documentation/devicetree/bindings/display/verisilicon,dc.yaml
+> +++ b/Documentation/devicetree/bindings/display/verisilicon,dc.yaml
+> @@ -16,6 +16,7 @@ properties:
+> =C2=A0=C2=A0 compatible:
+> =C2=A0=C2=A0=C2=A0=C2=A0 items:
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 - enum:
+> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 - starfive,jh7110=
+-dc8200
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+Note: this binding is being refactored as part of MA35D1 support
+introduction (this SoC has a single-port DC like a DC8000), after the
+refactor the binding string might need to appear twice.
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260917-rbrue-suez=
--upstreaming-mt6397-rtc-nvmem-v1-0-558b8f95cfbc@gmail.com?part=3D1
+Thanks,
+Icenowy
+
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 - thead,th15=
+20-dc8200
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 - const: verisilicon,dc # DC IPs hav=
+e discoverable ID/revision
+> registers
+> =C2=A0
 
