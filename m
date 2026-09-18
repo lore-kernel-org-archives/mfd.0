@@ -1,131 +1,232 @@
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+Received: from mail-oi2-f9.google.com (mail-oi2-f9.google.com [74.125.231.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E9DE349B1C
-	for <mfd@lists.linux.dev>; Fri, 18 Sep 2026 00:35:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=149.28.215.223
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35E2A397924
+	for <mfd@lists.linux.dev>; Fri, 18 Sep 2026 02:20:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.231.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789691712; cv=none; b=Laq9jTr5AaOedY/CHnME2RefmFb5UMmYZMJp3KptPKlMPa5QaqadP+EBfvOtvGR8Of2OeyLNbaVxqesf4PGmzOYRHz7MuW716ilYOiXicKksGZvuBTKNG507ZNCr4qeQjEMiBJUFrK/grZDF8PS/B43uggaUTSkmUH1vMaku9Wg=
+	t=1789698018; cv=none; b=d+8YcGqLeTpK3o1XFILIwKoHD3VgTTScC3jsR7qgim7QKk+rvrD7yA8dJx1GAzL/NJU18l34Liwzgne7BYSpNGMeGts1g/YYoepmZrFIz4DGr9UoIP2xTUZl6r5bDe26KYp24Dk9tEIl6uBZCbYHpz1ukDqCD3h3s33Z+AmS5us=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789691712; c=relaxed/simple;
-	bh=8QgXkkNdHre4C26c9GV+NpL0QV5WDefYsihE2tDLo6E=;
-	h=Mime-Version:Content-Type:Date:Message-Id:Subject:From:To:Cc:
-	 References:In-Reply-To; b=kWVCnTvpu4UU9cx4UNLDLitCs0f9kWXf5IGDxCSBFeMGxDNxcPfqmpI3jZjVfWtQbxstoWsHeRXhi32WCVkCEqtldsKeGDXtB5RdZevBw+E2+OqSuqhqR20ZFDEZhIi4T6DIS19/4SVG5Qy4iYygIw5VnWnK7U3TR1CQmxvbNMY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ubuntu.com; spf=pass smtp.mailfrom=fe-bounces.ubuntu.com; dkim=pass (2048-bit key) header.d=ubuntu.com header.i=@ubuntu.com header.b=i/zD/iE8; arc=none smtp.client-ip=149.28.215.223
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ubuntu.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fe-bounces.ubuntu.com
+	s=arc-20240116; t=1789698018; c=relaxed/simple;
+	bh=y1XijeL7ERuaPsHwAqTxsTx8YvMIXk+ce3oHtZNzHHE=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=RlNVYYNxx4frVxY/htWnsp+ER6DJzGzrOKEgphtT0VTdzC5BCichBxttnV5MpsuhFHF6qX9O1TSY9eCVFCThu5qs4ABjxknkumZRUvYuFX+leEz9MnvB6Va3YTguipuXDYfBRptn16NLKEFDTOj0hdjNQTir4YMpJjmX91pTsbU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Wv8tCeNy; arc=none smtp.client-ip=74.125.231.201
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ubuntu.com header.i=@ubuntu.com header.b="i/zD/iE8"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ubuntu.com;
- h=In-Reply-To: References: Cc: To: From: Subject: Message-Id: Date:
- Content-Type: Content-Transfer-Encoding: Mime-Version; q=dns/txt;
- s=fe-953a8a3ca9; t=1789691705;
- bh=8QgXkkNdHre4C26c9GV+NpL0QV5WDefYsihE2tDLo6E=;
- b=i/zD/iE8FAvD1UG2LLj2+hGmLVJ1X7G0Oe5rQxSKfUOTSCpRXIos7sREzherJgjbVSQI4nEQo
- ojzI3S5JUr7obZseN1LVC5nAI5rNKhaJ/ukorEM4uxba0ETTpN/piXLKCpvO1I86BgGTMhiUfNH
- xsTLrqr5vpUNM9Dwyh6SqYqL/vl+oJNk7u4IUdoFYv3IFGcEn3A/tPqBMZdspdJjaE5wHLJd0rA
- b+k58Z+SWJe91LVnvmTV6ebbQiCZuDaFJlxCmanPZLc64w+GBoTdUIZ1Ad2dhxaW8B74BLjWrlw
- NA2KU3eO9tgJdjK4AOHFKWboze5F0CKxkNfy+rRhpyPQ==
-X-Forward-Email-ID: 6aac871042fb3e762f6d18f9
-X-Forward-Email-Sender: rfc822; jpeisach@ubuntu.com, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.14.2
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Wv8tCeNy"
+Received: by mail-oi2-f9.google.com with SMTP id 46e09a7af769-7f9cc0e524aso59678a34.1
+        for <mfd@lists.linux.dev>; Thu, 17 Sep 2026 19:20:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789698010; x=1790302810; darn=lists.linux.dev;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=sc2r2klq9bIyV1XXapVYTBuFntdUrMrqc3FpTwDvDDw=;
+        b=Wv8tCeNyZGCXTt7p7ioRLraOdlCtS3H8xng+4BRlbIEd986BS+1IF991Xs/Kv5dr33
+         Q6dkPStrvRiZh09NKsS6PriD+OX2RStJB/eNDs1Xr1gmCe8xMHPGx0feMArbZfvDrMqP
+         t7gLRIevwa1UrqLMzrNohrClaZZU3b+ywor/TAsl1kCP/wr5iPAybFcStXFd2wDXNAG6
+         Aqu52vDoJ4KIru8UJH3azLt2oUA86h/kZnkxQcBatT3kVy8rk+GbB77tXA4i+bQMVPIZ
+         OM8P/9UyadP9L3Q1A39pUGSn2nOACx2yVrbuey3z7bgLbHwk3W4aGQCNVAnyamezDpuP
+         022g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789698010; x=1790302810;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=sc2r2klq9bIyV1XXapVYTBuFntdUrMrqc3FpTwDvDDw=;
+        b=0fdUU0/7JRrOywH26QT4iJbOgyF8xqlph6a7dtAamAmnuwtzNjYscws74JBT2n2T6q
+         4gVY1lBqvjjGGOi6Ct1jaRCnuM8CcomIH8l2MXGlQeEKu1sZlkQ/9ytIYKsGS3H5DTZP
+         jR7b4/HfX8iew2xlIDaBQO8wIME5DB0gecgwgF3/cJDO+5tQ1KbCK2QUyyNVnYdtPgw5
+         +yKQiZ0g+iIvGJUNdkE+7ePIUxkAN/ztogeYjZizvSvL1BwcYuJUprCwukfZEIq32xKi
+         jO6Y5OFFMHAXZlEAnmOOLiM/7zT9cIqRx/VGpgYG6inqOy0I3aIYGIDk6kwdy7cBiM/Z
+         LQ0Q==
+X-Forwarded-Encrypted: i=1; AKwUvBwQNBx4WkIAV3oAuyPsQYoNJtcigOumrJLzPB+yH0YdGOD7gwkfo0r9QYCi37bqYhElV1M=@lists.linux.dev
+X-Gm-Message-State: AFuF++n7nJ65u6ANhJ0hA2lySXe5oufI0PmsIfy8LJ1Pr8CwYDj44+aL
+	TioEjM0jjqHyejFs7xqxbMf/OJe+AA3IlaRMqfqGb4FZyuNnhEwnanRl
+X-Gm-Gg: AYBFou23ylrgnqxqlGjMHMeCs8poWUhqfL8VJ/T/os8kO2ypQTWRDWDJ6KhEXsP8US9
+	OoXWQ/Mjp/UJjevDJz6cyOJgjqmVLvetoaAlYbPbGuyfOPjHyTeg1tbH4bsXWryxn4f6ZdAZHFE
+	nyqTrX8XzXboUWVXC54Dr2lzwcgqelJJ04iyOqkLkFuFP5CcP09AoV5Vjj5dNpK5ic5UskE8JBB
+	UEN7ZwXoIwb96A+DNyEg/IX2hLfOAfqQIiwHjaasp7XnorpMyiklSnYJAsxHA7pQtN23Gyg9ksc
+	hbAqs6FeZ3DX5bQMRL+ggHlqwhKjDVbaj2D5z/eu8o5MqRLBw5V2jXXA9DlGziRrgqBdnh4mIWv
+	pTCVieQ0Deq4ScZiQZL279h/kyLFyTLqKioDPOqXDPz8L3Pt9z7qH0uM0J+hIv0xIiirGjOWQ5T
+	7swgrpXnCKOj3qqkw2zqt27DVGJDhW4FCNNrDeT4+/Aqh9Ojcx2jvOxTqDwn0ovwi+og==
+X-Received: by 2002:a05:6808:1687:b0:4b9:a829:f00a with SMTP id 5614622812f47-4ccf6e76820mr1386242b6e.22.1789698010143;
+        Thu, 17 Sep 2026 19:20:10 -0700 (PDT)
+Received: from [192.168.18.164] ([2600:8804:5716:d800::b712])
+        by smtp.gmail.com with ESMTPSA id 46e09a7af769-80e5226786csm295476a34.22.2026.09.17.19.20.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 17 Sep 2026 19:20:09 -0700 (PDT)
+From: Ryan Brue <ryanbrue.dev@gmail.com>
+Subject: [PATCH v2 0/3] iio: adc: add mt6397 PMIC AUXADC support
+Date: Thu, 17 Sep 2026 21:19:49 -0500
+Message-Id: <20260917-rbrue-suez-upstreaming-mt6397-auxadc-v2-0-db35882a6080@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8; format=Flowed
-Date: Thu, 17 Sep 2026 20:34:18 -0400
-Message-Id: <DLI0QTP0NUHS.DAFYGACKWKWO@ubuntu.com>
-Subject: Re: [PATCH v4 01/20] dt-bindings: phy: Add
- starfive,jh7110-inno-hdmi-phy
-From: "Joshua Peisach" <jpeisach@ubuntu.com>
-To: "Krzysztof Kozlowski" <krzk@kernel.org>, "Michal Wilczynski"
- <m.wilczynski@samsung.com>
-Cc: "Vinod Koul" <vkoul@kernel.org>, "Neil Armstrong"
- <neil.armstrong@linaro.org>, "Rob Herring" <robh@kernel.org>, "Krzysztof
- Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley" <conor+dt@kernel.org>,
- "Andrzej Hajda" <andrzej.hajda@intel.com>, "Robert Foss"
- <rfoss@kernel.org>, "Laurent Pinchart" <Laurent.pinchart@ideasonboard.com>,
- "Jonas Karlman" <jonas@kwiboo.se>, "Jernej Skrabec"
- <jernej.skrabec@gmail.com>, "Luca Ceresoli" <luca.ceresoli@bootlin.com>,
- "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>, "Maxime Ripard"
- <mripard@kernel.org>, "Thomas Zimmermann" <tzimmermann@suse.de>, "Lee
- Jones" <lee@kernel.org>, "Andy Yan" <andy.yan@rock-chips.com>, "Philipp
- Zabel" <p.zabel@pengutronix.de>, "Emil Renner Berthing" <kernel@esmil.dk>,
- "Hal Feng" <hal.feng@starfivetech.com>, "Michael Turquette"
- <mturquette@baylibre.com>, "Stephen Boyd" <sboyd@kernel.org>, "Heiko
- Stuebner" <heiko@sntech.de>, "Paul Walmsley" <pjw@kernel.org>, "Palmer
- Dabbelt" <palmer@dabbelt.com>, "Albert Ou" <aou@eecs.berkeley.edu>,
- "Alexandre Ghiti" <alex@ghiti.fr>, "Dominique Belhachemi" <db@domibel.de>,
- "Brian Masney" <bmasney+clk@redhat.com>, "Jerome Brunet"
- <jbrunet+clk@baylibre.com>, <linux-phy@lists.infradead.org>,
- <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
- <dri-devel@lists.freedesktop.org>, <mfd@lists.linux.dev>,
- <linux-clk@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
- <linux-rockchip@lists.infradead.org>, <linux-riscv@lists.infradead.org>,
- "Marek Szyprowski" <m.szyprowski@samsung.com>, "Maud Spierings"
- <maud_spierings@murena.io>, "Graham Markall" <hello@big-grey.co.uk>,
- "Icenowy Zheng" <zhengxingda@iscas.ac.cn>, "Chaoyi Chen"
- <chaoyi.chen@rock-chips.com>, "Joshua Peisach" <jpeisach@ubuntu.com>,
- =?utf-8?q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
-X-Mailer: aerc 0.21.0
-References: <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
- <CGME20260915153214eucas1p2b548f3236ef98fb0cbf320e397420125@eucas1p2.samsung.com> <20260915-jh7110-clean-send-v4-1-f0e4fd6f2cc8@samsung.com> <20260917-mutant-chamois-of-competence-46ca77@quoll>
-In-Reply-To: <20260917-mutant-chamois-of-competence-46ca77@quoll>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43NQQ6CMBCF4auQrh3TFoviynsYFrUdYBJLSUsJS
+ ri7lcS9y/8t3reyiIEwsmuxsoAzRfJDDnkomOn10CGQzc0klxWvxQnCIySEmPANaYxTQO1o6MB
+ NVVmfQadFWwMKhZQXLpVRnOWrMWBLy87cm9w9xcmH167O4rv+APUfMAvgYEtlpTalrVp+65ym5
+ 9F4x5pt2z71T+yd2AAAAA==
+X-Change-ID: 20260914-rbrue-suez-upstreaming-mt6397-auxadc-5e1228025c50
+To: Jonathan Cameron <jic23@kernel.org>, 
+ David Lechner <dlechner@baylibre.com>, 
+ =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>, 
+ Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Matthias Brugger <matthias.bgg@gmail.com>, 
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
+ Lee Jones <lee@kernel.org>
+Cc: linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ linux-mediatek@lists.infradead.org, mfd@lists.linux.dev, 
+ Roman Vivchar <rva333@protonmail.com>, 
+ Luca Leonardo Scorcia <l.scorcia@gmail.com>, 
+ Andy Shevchenko <andriy.shevchenko@intel.com>, 
+ Ryan Brue <ryanbrue.dev@gmail.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789698008; l=6852;
+ i=ryanbrue.dev@gmail.com; s=20260906; h=from:subject:message-id;
+ bh=y1XijeL7ERuaPsHwAqTxsTx8YvMIXk+ce3oHtZNzHHE=;
+ b=FCTap6xMVd8AUK+hpvcJVgk4cUYYkXyTqgE1215eBhIbPDxwSKbDPiV3mwBUvfJfMEljyiFuh
+ TmSXQurH25iAqdTLf6NrBwRHXlqr6IVrBxX3zPmRt5+JFeYot8yuenp
+X-Developer-Key: i=ryanbrue.dev@gmail.com; a=ed25519;
+ pk=KsUvVaP//v/2q+ZBuacc7cLbsyEYn+AD71Sn28oZWKo=
 
-On Thu Sep 17, 2026 at 2:51 AM EDT, Krzysztof Kozlowski wrote:
-> On Tue, Sep 15, 2026 at 05:32:09PM +0200, Michal Wilczynski wrote:
->> Add the dt-binding for the StarFive JH7110 Innosilicon HDMI PHY.
->>=20
->> This device is a child of the starfive,jh7110-hdmi-subsystem node. It
->> functions as both a PHY provider for the controller and as a clock
->> provider for the variable pixel clock (hdmi_pclk), which it generates
->> from its refoclk.
->>=20
->> Reviewed-by: Joshua Peisach <jpeisach@ubuntu.com>
->
-> While I appreciate other people looking at this, I don't think review
-> here applies. It was a blanket tag, given to the entire series, with
-> exception that it is from newbie, thus I want to ask: was this binding
-> REALLY reviewed by Joshua?
->
-> Are the rest of the patches actually reviewed or just "looks good to
-> me"? I see no comments from Joshua on v3, v2 and v1, which is usual sign
-> of doing review.
->
->
-I commented on v3 saying that I would test if I could. I don't just
-throw "Reviewed-by" on everything I look at.
+The MediaTek mt6397 PMIC has a 10-bit AUXADC that nothing in-tree can
+reach. On boards built around it that ADC is the only path to the battery:
+the SoC's AUXADC is wired to board thermistors, and the charger ICs these
+boards use have no ADC at all, so without it there is no pack voltage and
+no state of charge.
 
-If anything, I've been trying to be more honest in reviews, and only
-review ones that I actually care about[1].
+Patch 1 adds the compatible to the existing MediaTek PMIC AUXADC schema and
+the header naming the channels, patch 2 the driver, patch 3 the MFD cell
+that instantiates it. The cell comes last so that no commit in between
+registers a child no driver can claim.
 
-If reviewing patches isn't a good way for newbies to start getting
-familiar with the kernel code (especially a NEW driver), then I don't
-know what is.
+The mt6397 is not given mediatek,mt6359-auxadc as a fallback because the
+two are not register compatible; patch 1 has the detail.
 
-And to be clear, I'm not using a LLM to review. I am using actual
-intelligence. For the JH7110 PR specifically, I did actually go through
-and review each commit, because I wanted to learn what was happening
-and why. Actually, that's why I asked where the data sheet was[2].
+Only the two channels a board needs for its pack are described, so patch 1
+ships a header naming them: a channel ID is an index into the driver's array
+and not the PMIC's channel number, as in mt6323-auxadc. The register
+sequences are the ones the vendor kernel's pmic_auxadc.c programs.
 
-So if you really want to, drop the Reviewed-by tag. And if it makes
-you feel better, I'll leave the series alone.
+One note on patch 3: it adds a cell to mt6397_devs[], which Luca Leonardo
+Scorcia's MT6392 series converts to the MFD_CELL_* macros in its patch
+4/9 [1]. Whichever of the two lands second needs a respin. Mine would
+become a single MFD_CELL_OF(), and I can do a respin if that patch arrives
+first.
+Cc'd Luca.
 
--Josh
+Tested on an Amazon Fire HD 10 (2017), an mt8173 with an mt6397. Both
+channels are exercised: the battery channel by a fuel gauge, which reads 817
+counts, 3830 mV with the pack at rest, and the thermistor channel by an
+ntc-thermistor consuming it.
 
-[1] I won't be reviewing PRs around devicetree since I'm not confident
-(or frankly, interested) in it at this point. https://lore.kernel.org/all/D=
-L94TU52KBMO.2HAKJMJXV2CPE@ubuntu.com/
+A new driver was created here, instead of modifying an existing driver such
+as mt6323-auxadc or mt6359-auxadc, for the following reasons:
 
-[2] Michal giving me the hardware info:
-https://lore.kernel.org/all/071901ef-57f3-456f-af5b-a8c99a0a7dd3@samsung.co=
-m/
+ - Both mt6323-auxadc and mt6359-auxadc select channels through a request
+   register (1 bit per channel), while mt6397 uses a 4-bit numeric field
+   CHSEL in CON1 (10:7), and then pulses a START bit (CON1 bit 0).
+
+ - For mt6323-auxadc, which is the closest I could find to the mt6397
+   (CON0..CON27), it has 13 more registers than the mt6397 (CON0..CON14).
+   It uses CON22 for its request register, and reads the result value
+   from the same register as the ready bit. We don't do that - the mt6397
+   has a factory calibrated value for each channel at 0x16 higher than the
+   raw value. mt6323 also has a 1800 mV / 15 bit scale / resolution while
+   we have 1200 mV / 10 bits. We also have some per-channel preparation
+   that we have to do before the burst, that the mt6323 doesn't have to
+   do.
+
+ - For mt6359-auxadc, it has a more generic framework for describing the
+   AUXADC, but it assumes requests are channel-per-bit, and so we would
+   have to basically ignore req_idx, req_mask, rdy_idx, and rdy_mask.
+
+ - We also have our own software sampling, which the vendor does too
+   (Amazon Fire OS based on Linux 3.18). We'd have to have our own
+   sampling callback to do it.
+
+I have two things in the driver different from the vendor (Amazon
+Fire OS based on a 3.18 kernel). Verified with over 150 interleaved reads
+per setting:
+
+ - Leaving the ISENSE input enabled between reads, as the vendor does,
+   makes no difference to the value, so the driver switches it off again
+   and leaves both ADC input enables clear when idle.
+
+ - The chip's sample accumulator makes no difference at 4, 8, 16 or 31
+   samples and costs no measurable time, so it is left at one. Software
+   averaging helps, but only by about a quarter: 0.92 LSB standard
+   deviation for one conversion against 0.67 for sixteen, where independent
+   samples would have given 0.23. Conversions in a burst are correlated.
+
+The reading was checked against the charger, which regulates the pack to
+a programmed voltage in constant-voltage mode. Over twelve such voltages
+from 3904 to 4080 mV, and charge currents from 111 to 778 mA, the driver's
+reading is a mean of 0.9 mV from the regulated value, well inside
+the charger's regulation tolerance. That also settles reading the chip's
+trimmed result register rather than the raw one - the raw register is
+20.7 mV low at every one of the twelve points.
+
+[1] https://lore.kernel.org/all/20260902193351.185771-5-l.scorcia@gmail.com/
+
+Signed-off-by: Ryan Brue <ryanbrue.dev@gmail.com>
+---
+Changes in v2:
+- Add justification for this being a new driver rather than folded into
+  mt6323-auxadc.c or mt6359-auxadc.c, in the cover letter and patch 2.
+- Drop the "ret = ret ?: ..." chains, and let teardown fall through on
+  errors, allowing the chance for all bits to be properly torn down. The
+  errors are now held rather than discarded. (Andy and sashiko-bot)
+- Run teardown even when per-channel setup fails part-way through, so we
+  don't leave bits enabled that would have been cleared. (sashiko-bot)
+- Set ISENSE settle time to (1 * USEC_PER_MSEC). (Andy)
+- Write the two channel descriptors out instead of using a macro. Also
+  gets rid of the padded column. (Andy, Jonathan)
+- Move the MAINTAINERS entry for the dt-bindings header into patch 1, as
+  the mt6323 series does.
+- Declare the sample loop counter in the loop, instead of with sum, and
+  split the declaration of sample and ret. (Andy)
+- Keep the two CHR_CON16 ADCIN bits as BIT()s rather than turning them
+  into values of a GENMASK field. Fix OR operator on the bits, treat them
+  as mutually exclusive. (Jonathan)
+- The rest of Jonathan's v1 review: two-space indent separating a register's
+  fields from the register, a blank line before the settle times, a lock
+  comment that says why the lock is held, the two CON1 START writes on one
+  line each, the single-call init helper inlined into probe, and { } for the
+  of_device_id sentinel.
+- Add the additional three CHR_CON16 ADCIN defines that make up the 5
+  single-bit enables. These are currently unused.
+- Link to v1: https://patch.msgid.link/20260915-rbrue-suez-upstreaming-mt6397-auxadc-v1-0-d35d2ac3d6f0@gmail.com
+
+---
+Ryan Brue (3):
+      dt-bindings: iio: adc: mediatek,mt6359-auxadc: add mt6397 PMIC AUXADC
+      iio: adc: mt6397-auxadc: add mt6397 PMIC AUXADC driver
+      mfd: mt6397-core: Add mt6397 AUXADC support
+
+ .../bindings/iio/adc/mediatek,mt6359-auxadc.yaml   |   1 +
+ MAINTAINERS                                        |   7 +
+ drivers/iio/adc/Kconfig                            |  11 +
+ drivers/iio/adc/Makefile                           |   1 +
+ drivers/iio/adc/mt6397-auxadc.c                    | 378 +++++++++++++++++++++
+ drivers/mfd/mt6397-core.c                          |   3 +
+ .../dt-bindings/iio/adc/mediatek,mt6397-auxadc.h   |   9 +
+ 7 files changed, 410 insertions(+)
+---
+base-commit: fd73f4a6659897191fa0d40695fe370925dd3780
+change-id: 20260914-rbrue-suez-upstreaming-mt6397-auxadc-5e1228025c50
+
+Best regards,
+--  
+Ryan Brue <ryanbrue.dev@gmail.com>
+
