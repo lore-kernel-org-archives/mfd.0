@@ -1,166 +1,201 @@
-Received: from cstnet.cn (smtp21.cstnet.cn [159.226.251.21])
-	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72D5039E9DD
-	for <mfd@lists.linux.dev>; Fri, 18 Sep 2026 06:22:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.226.251.21
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 082913515F0;
+	Fri, 18 Sep 2026 06:41:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789712527; cv=none; b=cK4bNWVr28ef07+6ciagCCbHsKYUn+ZmftzB2XckkWAsbBQxJtI/LjvOT7dQjHHpWaotHth0LlQSEhy6Z2GXsypNhQAfe6C1cxpuYd5Rf6r6GiZaxfTWLZTIZW1U6A2jZ4u3A8HEYUgkj8LckAfKQqfGJfHgpDTGEdab2QJwNiQ=
+	t=1789713728; cv=none; b=J6VlmDMUIIZa3Tz4e3xB84s5pKjIHH66sz2SqOTaJJhmrJyBNG2inSBL5kEE5WqjLB+KDlNnj+4qdRoA8ciy39GqUEFVI4a1p2LemN9yr3BHCSxqWPQ2yCSQ9HvXJQBzSkX2oAW46HYOpXPdzj5ImtUDmi4Y7KSkcGkk/66ldIg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789712527; c=relaxed/simple;
-	bh=rNMK1oveRj5l3CUKdcVnFNQ6+pbzm/NbL31Ljykro28=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=fQc4ILZqpycP1JpQR5syUo0NtpIdlMPEZZu1xki/XByHt5xi5Ioo8g8T9SbGgRxbGZX6PbqBCTLnO+tUh7ZeOe2rNHWmjIsx9oHmDQj4mor84bJCewu/1Z2Gw8+oVJcogf+I4RaHWL2qmhtnnzWGNq0ylbySphCljikfCFZ8+2A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.21
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iscas.ac.cn
-Received: from edelgard.fodlan.icenowy.me (unknown [112.94.103.44])
-	by APP-01 (Coremail) with SMTP id qwCowADnuu5y2KxqkbJICA--.14966S2;
-	Fri, 18 Sep 2026 14:21:41 +0800 (CST)
-Message-ID: <b8efa0db854929a353c430f78fffd907bd7ccb65.camel@iscas.ac.cn>
-Subject: Re: [PATCH v4 01/20] dt-bindings: phy: Add
- starfive,jh7110-inno-hdmi-phy
-From: Icenowy Zheng <zhengxingda@iscas.ac.cn>
-To: Krzysztof Kozlowski <krzk@kernel.org>, Joshua Peisach
- <jpeisach@ubuntu.com>
-Cc: Michal Wilczynski <m.wilczynski@samsung.com>, Vinod Koul
- <vkoul@kernel.org>,  Neil Armstrong <neil.armstrong@linaro.org>, Rob
- Herring <robh@kernel.org>, Krzysztof Kozlowski	 <krzk+dt@kernel.org>, Conor
- Dooley <conor+dt@kernel.org>, Andrzej Hajda	 <andrzej.hajda@intel.com>,
- Robert Foss <rfoss@kernel.org>, Laurent Pinchart	
- <Laurent.pinchart@ideasonboard.com>, Jonas Karlman <jonas@kwiboo.se>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Luca Ceresoli
- <luca.ceresoli@bootlin.com>, Maarten Lankhorst	
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, Lee Jones <lee@kernel.org>, Andy
- Yan <andy.yan@rock-chips.com>, Philipp Zabel	 <p.zabel@pengutronix.de>,
- Emil Renner Berthing <kernel@esmil.dk>, Hal Feng	
- <hal.feng@starfivetech.com>, Michael Turquette <mturquette@baylibre.com>, 
- Stephen Boyd <sboyd@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Paul
- Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
- <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,  Dominique
- Belhachemi	 <db@domibel.de>, Brian Masney <bmasney+clk@redhat.com>, Jerome
- Brunet	 <jbrunet+clk@baylibre.com>, linux-phy@lists.infradead.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org, mfd@lists.linux.dev,
- linux-clk@vger.kernel.org, 	linux-arm-kernel@lists.infradead.org,
- linux-rockchip@lists.infradead.org, 	linux-riscv@lists.infradead.org, Marek
- Szyprowski <m.szyprowski@samsung.com>,  Maud Spierings
- <maud_spierings@murena.io>, Graham Markall <hello@big-grey.co.uk>, Chaoyi
- Chen	 <chaoyi.chen@rock-chips.com>, Uwe =?ISO-8859-1?Q?Kleine-K=F6nig?=	
- <u.kleine-koenig@baylibre.com>
-Date: Fri, 18 Sep 2026 14:21:37 +0800
-In-Reply-To: <20260918-futuristic-mindful-waxbill-21fa2d@quoll>
-References: <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
-	 <CGME20260915153214eucas1p2b548f3236ef98fb0cbf320e397420125@eucas1p2.samsung.com>
-	 <20260915-jh7110-clean-send-v4-1-f0e4fd6f2cc8@samsung.com>
-	 <20260917-mutant-chamois-of-competence-46ca77@quoll>
-	 <DLI0QTP0NUHS.DAFYGACKWKWO@ubuntu.com>
-	 <20260918-futuristic-mindful-waxbill-21fa2d@quoll>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.3 
+	s=arc-20240116; t=1789713728; c=relaxed/simple;
+	bh=RyjwYG+6xyUtnZHla2yzl5xik596f0q8iVyX5puo++Y=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=icVP24dCPuAMK6NGxSPkvditHmMaMfCZZzqKI8OMAbYHoutRGHg3U4EiDL6qwDfAqxCmdxKl67RVhBNzbel4RrGFfrWfcJeKmWKkFgk/LUi14n0L0LngC5+EHu11AcrJ9COY5/RX3GXXH8oRdvMAR6b2MuV1ZBqC5P8TtdKut/4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=g4ED0di8; arc=none smtp.client-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="g4ED0di8"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7627E1F000FF;
+	Fri, 18 Sep 2026 06:41:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789713716;
+	bh=NQNv62oAZsl1F7csxaJEi7LWQT0O7ByC0WTruZRdyGE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=g4ED0di8eL1AQIkIyrzjWr3kkR/6Lm3VLeU0TIc0vFcokmcJ60P5HXU649k4P9UbV
+	 vdH1IvwyYJcrn2+jUmbfTWTK1OpiLZ/6P5c6LKeRW6d6gW/XmS4SLpXyATQdNQSZg+
+	 BOb+YXv4wnL3ceDRqUUdFnqmNtrGv68H7yAqYSM4TSR0ohN3WRZ85+p9dygq3Qzvzg
+	 NhQFawgMtUtFcC0V+bt4s7sBu1/yHReYMD2FgIA9ve8z4dkvUJDyw86XT10k2k+oqw
+	 AlxuHt/lYeWpydOreU8ctv2+5zxo1v9GWh8SCwRF71wj+HOrK6imIba21LkRp9E81U
+	 zb8Xjx3n/HCvQ==
+Message-ID: <8b4256bf-5ad3-4405-ae7a-17bc664f7ae9@kernel.org>
+Date: Fri, 18 Sep 2026 08:41:37 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-X-CM-TRANSID:qwCowADnuu5y2KxqkbJICA--.14966S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7tw4xKF13WFyUCw1UKF1rWFg_yoW5Jr18pF
-	WDK3ZIkr4DJr1xAwn293WjgryF9w47A34Yqry5Wryjvr98tF1rtr4xGr45u3WDKr4fWr42
-	vF1jk34fu3sYyaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvGb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwV
-	C2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
-	0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr
-	1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4IIrI8v6xkF7I0E8cxan2IY04v7
-	MxkF7I0En4kS14v26rWY6Fy7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r
-	4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF
-	67AKxVWrXVW8Jr1lIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6x
-	IIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvE
-	x4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa
-	73UjIFyTuYvjxU9PfHDUUUU
-X-CM-SenderInfo: x2kh0wp0lqwv3d6l2u1dvotugofq/
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 01/20] dt-bindings: phy: Add
+ starfive,jh7110-inno-hdmi-phy
+To: Icenowy Zheng <zhengxingda@iscas.ac.cn>,
+ Joshua Peisach <jpeisach@ubuntu.com>
+Cc: Michal Wilczynski <m.wilczynski@samsung.com>,
+ Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Andrzej Hajda <andrzej.hajda@intel.com>,
+ Robert Foss <rfoss@kernel.org>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Luca Ceresoli <luca.ceresoli@bootlin.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Lee Jones <lee@kernel.org>, Andy Yan <andy.yan@rock-chips.com>,
+ Philipp Zabel <p.zabel@pengutronix.de>,
+ Emil Renner Berthing <kernel@esmil.dk>, Hal Feng
+ <hal.feng@starfivetech.com>, Michael Turquette <mturquette@baylibre.com>,
+ Stephen Boyd <sboyd@kernel.org>, Heiko Stuebner <heiko@sntech.de>,
+ Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
+ Dominique Belhachemi <db@domibel.de>, Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>, linux-phy@lists.infradead.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, mfd@lists.linux.dev,
+ linux-clk@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-rockchip@lists.infradead.org, linux-riscv@lists.infradead.org,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Maud Spierings <maud_spierings@murena.io>,
+ Graham Markall <hello@big-grey.co.uk>,
+ Chaoyi Chen <chaoyi.chen@rock-chips.com>,
+ =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+References: <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
+ <CGME20260915153214eucas1p2b548f3236ef98fb0cbf320e397420125@eucas1p2.samsung.com>
+ <20260915-jh7110-clean-send-v4-1-f0e4fd6f2cc8@samsung.com>
+ <20260917-mutant-chamois-of-competence-46ca77@quoll>
+ <DLI0QTP0NUHS.DAFYGACKWKWO@ubuntu.com>
+ <20260918-futuristic-mindful-waxbill-21fa2d@quoll>
+ <b8efa0db854929a353c430f78fffd907bd7ccb65.camel@iscas.ac.cn>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
+ cFgcqTTuNHjAvxtUG8pQgGTHAObYs6xeYJtjUH0ZX6ndJ33FJYf5V3yXqqjcZ30FgHzJCFUu
+ JMp7PSyMPzpUXfU12yfcRYVEMQrmplNZssmYhiTeVicuOOypWugZKVLGNm0IweVCaZ/DJDIH
+ gNbpvVwjcKYrx85m9cBVEBUGaQP6AT7qlVCkrf50v8bofSIyVa2xmubbAwwFA1oxoOusjPIE
+ J3iadrwpFvsZjF5uHAKS+7wHLoW9hVzOnLbX6ajk5Hf8Pb1m+VH/E8bPBNNYKkfTtypTDUCj
+ NYcd27tjnXfG+SDs/EXNUAIRefCyvaRG7oRYF3Ec+2RgQDRnmmjCjoQNbFrJvJkFHlPeHaeS
+ BosGY+XWKydnmsfY7SSnjAzLUGAFhLd/XDVpb1Een2XucPpKvt9ORF+48gy12FA5GduRLhQU
+ vK4tU7ojoem/G23PcowM1CwPurC8sAVsQb9KmwTGh7rVz3ks3w/zfGBy3+WmLg++C2Wct6nM
+ Pd8/6CBVjEWqD06/RjI2AnjIq5fSEH/BIfXXfC68nMp9BZoy3So4ZsbOlBmtAPvMYX6U8VwD
+ TNeBxJu5Ex0Izf1NV9CzC3nNaFUYOY8KfN01X5SExAoVTr09ewARAQABzSVLcnp5c3p0b2Yg
+ S296bG93c2tpIDxrcnprQGtlcm5lbC5vcmc+wsGPBBMBCgA5AhsDBgsJCAcDAgYVCAIJCgsE
+ FgIDAQIeAQIXgBYhBJvQfg4MUfjVlne3VBuTQ307QWKbBQJp2mE8AAoJEBuTQ307QWKbeaIP
+ /ihHTkTW4KsN/DQ945JJbyu5tI0J80Wue7QyyLPglyKfhgb5cLLNPpOC8cCIJsc7+W3i2P38
+ s2c1cOH6CYGE7E9ur3Vfme8NW2S2I/Z8VC7bZnzyS23wT17LrsdS/qCpx4o8U+pt/xdXDKph
+ EGRYrIEmMpUWvyYzyYKGIe25FtaayIIKpq8eZYyFcp2f/sG5IkOW5uZzHPMPdcm87jU7fyuQ
+ rAU2vx9r+ulUfQ/q9Z2roC/ode3l7t2pN7BCBCsUDp6JCrUyZrtT1e7EbA0ZRP3aOBNk2P2E
+ DQOgJGjGdO5Yx2Y9LFtltu6JbsBJHi1syGRX3AtQYOMc4Y1WGoeZJmMlvKj2ZqqXNkcWi2DS
+ IQEWB0uW6CqFsBBIMGDa+6OzdaVO/uAVXWDWml02Men3CILdI1MbVjoh8ECqYUY7OQ+JJvNN
+ vnliuq5WM3Ghd3jg/LZZrxXjdIginRHFQCjIJYLKpLZWm1/iDFedcfzqRNYmTtqscdCNHW41
+ oT3Z7BmO9xwdjuwBS6nmS6JJwkbf5Ot2QR4pB/DRU7ZwjT1qHe+9r9gF32wXVQatHNGK/VVu
+ sfwOnkdxCWkp/qb2gdQRmZh+SedStWshigH6sNfuHBloF/q+hjMRc8b2m326OZdrbSHwY1Sz
+ vti8Hn7n8NjdHO9LKB7BIdjkA9DA5WsqOuVCzsFNBFVDXDQBEADNkrQYSREUL4D3Gws46JEo
+ Z9HEQOKtkrwjrzlw/tCmqVzERRPvz2Xg8n7+HRCrgqnodIYoUh5WsU84N03KlLueMNsWLJBv
+ BaubYN4JuJIdRr4dS4oyF1/fQAQPHh8Thpiz0SAZFx6iWKB7Qrz3OrGCjTPcW6eiOMheesVS
+ 5hxietSmlin+SilmIAPZHx7n242u6kdHOh+/SyLImKn/dh9RzatVpUKbv34eP1wAGldWsRxb
+ f3WP9pFNObSzI/Bo3kA89Xx2rO2roC+Gq4LeHvo7ptzcLcrqaHUAcZ3CgFG88CnA6z6lBZn0
+ WyewEcPOPdcUB2Q7D/NiUY+HDiV99rAYPJztjeTrBSTnHeSBPb+qn5ZZGQwIdUW9YegxWKvX
+ XHTwB5eMzo/RB6vffwqcnHDoe0q7VgzRRZJwpi6aMIXLfeWZ5Wrwaw2zldFuO4Dt91pFzBSO
+ IpeMtfgb/Pfe/a1WJ/GgaIRIBE+NUqckM+3zJHGmVPqJP/h2Iwv6nw8U+7Yyl6gUBLHFTg2h
+ YnLFJI4Xjg+AX1hHFVKmvl3VBHIsBv0oDcsQWXqY+NaFahT0lRPjYtrTa1v3tem/JoFzZ4B0
+ p27K+qQCF2R96hVvuEyjzBmdq2esyE6zIqftdo4MOJho8uctOiWbwNNq2U9pPWmu4vXVFBYI
+ GmpyNPYzRm0QPwARAQABwsF2BBgBCgAgAhsMFiEEm9B+DgxR+NWWd7dUG5NDfTtBYpsFAmna
+ YUkACgkQG5NDfTtBYptX+BAApg32CkxwNucNEi8WfWA8oKkW0y8YDuY6ORMo9FWNGiT/OTy0
+ vyJrLocrpn86zwfjVp+eCrssPYh8eqJfnWqmYv6ACQtHPYzPZQ3mSo8H97Z01oUxITzCxpXm
+ ZkLgPIqtDPcC2E3dPM/fVxcyowM8XsaMA9wcsaUYrta8toOq2b9tKcjleKMfMrm0gQ9u7wUc
+ QbLkwj6TCLOwucb07GXzLTNF9PZmaDUpKAZjMjmrW+le+SFvQbhamx0rxLWPR0NWntXpbCn+
+ +ACch03p/JyTBVktxFsFyCt7pTPE1kEaeuXBTe/a2D9iQvRxRW19LvuO2e59/u1wYUiH/orz
+ wbIC2S4dBsPAPihL3ztOU1yE86GPyQtSE0kU+/7snnLt4QGi6PChf3t5gnNjAzjUUovO8rgI
+ c+5yN5heq5loYHgK6OQ9OlHzsPHO9e9MOQcKlFycs1pyijFGzDwdNUm/SchK8iWT2QApTx4A
+ K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
+ n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
+ qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
+In-Reply-To: <b8efa0db854929a353c430f78fffd907bd7ccb65.camel@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-=E5=9C=A8 2026-09-18=E4=BA=94=E7=9A=84 08:16 +0200=EF=BC=8CKrzysztof Kozlow=
-ski=E5=86=99=E9=81=93=EF=BC=9A
-> On Thu, Sep 17, 2026 at 08:34:18PM -0400, Joshua Peisach wrote:
-> > On Thu Sep 17, 2026 at 2:51 AM EDT, Krzysztof Kozlowski wrote:
-> > > On Tue, Sep 15, 2026 at 05:32:09PM +0200, Michal Wilczynski
-> > > wrote:
-> > > > Add the dt-binding for the StarFive JH7110 Innosilicon HDMI
-> > > > PHY.
-> > > >=20
-> > > > This device is a child of the starfive,jh7110-hdmi-subsystem
-> > > > node. It
-> > > > functions as both a PHY provider for the controller and as a
-> > > > clock
-> > > > provider for the variable pixel clock (hdmi_pclk), which it
-> > > > generates
-> > > > from its refoclk.
-> > > >=20
-> > > > Reviewed-by: Joshua Peisach <jpeisach@ubuntu.com>
-> > >=20
-> > > While I appreciate other people looking at this, I don't think
-> > > review
-> > > here applies. It was a blanket tag, given to the entire series,
-> > > with
-> > > exception that it is from newbie, thus I want to ask: was this
-> > > binding
-> > > REALLY reviewed by Joshua?
-> > >=20
-> > > Are the rest of the patches actually reviewed or just "looks good
-> > > to
-> > > me"? I see no comments from Joshua on v3, v2 and v1, which is
-> > > usual sign
-> > > of doing review.
-> > >=20
-> > >=20
-> > I commented on v3 saying that I would test if I could. I don't just
->=20
-> Testing has nothing to do with reviewing.
->=20
-> > throw "Reviewed-by" on everything I look at.
-> >=20
-> > If anything, I've been trying to be more honest in reviews, and
-> > only
-> > review ones that I actually care about[1].
->=20
-> You gave blanket tag for entire series, so I do not get this
-> argument.
->=20
-> >=20
-> > If reviewing patches isn't a good way for newbies to start getting
-> > familiar with the kernel code (especially a NEW driver), then I
-> > don't
-> > know what is.
->=20
-> Writing code and receiving review is something for newbies to start
-> with. If you do not know kernel code or bindings, why do you think
-> your review is applicable? If I try to review design of a post-
-> tension
-> concrete bridge, I would probably learn something. Would my
-> review apply? No.
+On 18/09/2026 08:21, Icenowy Zheng wrote:
+> 在 2026-09-18五的 08:16 +0200，Krzysztof Kozlowski写道：
+>> On Thu, Sep 17, 2026 at 08:34:18PM -0400, Joshua Peisach wrote:
+>>> On Thu Sep 17, 2026 at 2:51 AM EDT, Krzysztof Kozlowski wrote:
+>>>> On Tue, Sep 15, 2026 at 05:32:09PM +0200, Michal Wilczynski
+>>>> wrote:
+>>>>> Add the dt-binding for the StarFive JH7110 Innosilicon HDMI
+>>>>> PHY.
+>>>>>
+>>>>> This device is a child of the starfive,jh7110-hdmi-subsystem
+>>>>> node. It
+>>>>> functions as both a PHY provider for the controller and as a
+>>>>> clock
+>>>>> provider for the variable pixel clock (hdmi_pclk), which it
+>>>>> generates
+>>>>> from its refoclk.
+>>>>>
+>>>>> Reviewed-by: Joshua Peisach <jpeisach@ubuntu.com>
+>>>>
+>>>> While I appreciate other people looking at this, I don't think
+>>>> review
+>>>> here applies. It was a blanket tag, given to the entire series,
+>>>> with
+>>>> exception that it is from newbie, thus I want to ask: was this
+>>>> binding
+>>>> REALLY reviewed by Joshua?
+>>>>
+>>>> Are the rest of the patches actually reviewed or just "looks good
+>>>> to
+>>>> me"? I see no comments from Joshua on v3, v2 and v1, which is
+>>>> usual sign
+>>>> of doing review.
+>>>>
+>>>>
+>>> I commented on v3 saying that I would test if I could. I don't just
+>>
+>> Testing has nothing to do with reviewing.
+>>
+>>> throw "Reviewed-by" on everything I look at.
+>>>
+>>> If anything, I've been trying to be more honest in reviews, and
+>>> only
+>>> review ones that I actually care about[1].
+>>
+>> You gave blanket tag for entire series, so I do not get this
+>> argument.
+>>
+>>>
+>>> If reviewing patches isn't a good way for newbies to start getting
+>>> familiar with the kernel code (especially a NEW driver), then I
+>>> don't
+>>> know what is.
+>>
+>> Writing code and receiving review is something for newbies to start
+>> with. If you do not know kernel code or bindings, why do you think
+>> your review is applicable? If I try to review design of a post-
+>> tension
+>> concrete bridge, I would probably learn something. Would my
+>> review apply? No.
+> 
+> My personal thoughts: everyone should be able to send R-b, but the
 
-My personal thoughts: everyone should be able to send R-b, but the
-effect of the R-b depends on who sent it.
+Yes, that is true and this is not questionable. We clearly documented
+that everyone is able.
 
-In this case, I am okay about adding Joshua's R-b, but I don't
-necessarily think the patchset is reviewed enough because of this R-b.
+> effect of the R-b depends on who sent it.
 
-Thanks,
-Icenowy
+I question whether is applicable here.
 
->=20
-> Best regards,
-> Krzysztof
->=20
->=20
-> _______________________________________________
-> linux-riscv mailing list
-> linux-riscv@lists.infradead.org
-> http://lists.infradead.org/mailman/listinfo/linux-riscv
+Blanket reviews without comments leaves just such feeling. And if, like
+here, there is no interest in reviewing DT, which I assume the DT was
+not reviewed and which was my question here, then why giving Rb tag to DT?
 
+
+Best regards,
+Krzysztof
