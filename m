@@ -1,40 +1,21 @@
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66CDE4E3246;
-	Fri, 18 Sep 2026 11:53:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C787B4A262C;
+	Fri, 18 Sep 2026 13:03:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=5.75.144.95
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789732436; cv=none; b=IrmLOHigdVS8oUnIjmWn1spNkjJ8wfYe43gtMhRaviLzuUMPl2i/qtHvk0SFdUBxuDrX/TWxHrkJfEewbe4QkxV6HjF4QgsFBNMX8ayolzAZTPrJy1NM1u1VxmQnYNPkZYSEpFlbvOJ2XgvvUmQlt8S5rBssb6iA4WRD6XrrDk0=
+	t=1789736590; cv=none; b=T0ICqi+CxLZD+Yymw0s9MoOOcgOWJzjXBV+X8GMl5xrWRj2/WHthMFtfIFIvKgjwQIhWmZL4t3QK9NYFqDaNMa/Wj8aDPdbGx3+SCeJ/gPKuJWpwVHxU/FNxSqarq9L+H/b/s7hFyv5sNlwPf8+M6sAa/ZyZqKnxvBYIDfEIQOg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789732436; c=relaxed/simple;
-	bh=KDbByxRcaux5zLHvhjjDx3CPde+azl0e1Fh97lil920=;
+	s=arc-20240116; t=1789736590; c=relaxed/simple;
+	bh=yVcEqSXbP/8mFfz7dHA2v+SFBTVxlkUsy2wH62WCuGg=;
 	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=uGUpw+PVlf5jfphxEccxrEm88V6UR6HvMKz/kYU8eX4rNWhXjhXnD3oA6LzGhi3JTplEvl01r3pYd6w6/HL38UBRibghMpB6/ua50WN4RekA0uoAXKNirjR05UZ3WZ9+CCgkCuvdsGjzJ5OlhbxUkfOdbotXfRZOY+jgGV3t0cI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=n0zlGi8j; arc=none smtp.client-ip=185.171.202.116
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="n0zlGi8j"
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 47EBFC58470;
-	Fri, 18 Sep 2026 11:54:35 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 6617260649;
-	Fri, 18 Sep 2026 11:53:50 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 61AB810328331;
-	Fri, 18 Sep 2026 13:53:45 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1789732426; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:content-language:in-reply-to:references;
-	bh=ic8VIm7EhlwQJ6CwBH4kBPbGdagbD84cPSnTGPSbYIg=;
-	b=n0zlGi8jMvQCS7qzC91Qc3U/1n5Zcv4A60jZc7i1eSEea+vA/HW72AN1lT7v5nq613gcAg
-	SHVyzrXssYIzbXpMR4Iu+RUJhXPoHW1vQDXUNsZkgaYr5ehFJPgDEcFu2e5bCgq7vwxegc
-	1pl148nqjcSjwXh5thGvpq977PtCM9NyTijntGBcQST9F2tFlIjyUmz2e8/RhLeaU9pZBd
-	DfCATgNWyTYEVhULOMzKdc20ydvu8PhBERPiaBheo1aJVY6q3BQ79nMKtVRZyHfWsUOqzU
-	5hzzsy8f4ekeUYXExa/nSZWoOfkXzeFtQRUt42WSnjNntjoZTYmaBvbF7EHOLA==
-Message-ID: <121381c2-5a1a-4dee-b8b0-35f59328810f@bootlin.com>
-Date: Fri, 18 Sep 2026 13:53:44 +0200
+	 In-Reply-To:Content-Type; b=KEThj6DFAKFhS7aG9rgZuWG7ZQv6gCvKvSJn+O1jAMZ72rBv1vcSXIMBSMvPErHzK9HHEgraFz/RdbMevFRdVl9pVLJRn4SDr3lM0LD4LHstyf8edUxU06fVVGnOEi54Eb/m1hvjuO6wzRFj6eV46PG7SEzNYoAPcLwFRGP/WSo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org; spf=pass smtp.helo=mail.mainlining.org; arc=none smtp.client-ip=5.75.144.95
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.helo=mail.mainlining.org
+Message-ID: <29506e08-9337-487f-af2d-b75f5aa8341e@mainlining.org>
+Date: Fri, 18 Sep 2026 16:01:43 +0300
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -42,181 +23,130 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Thomas Richard <thomas.richard@bootlin.com>
-Subject: Re: [PATCH v3 1/9] mfd: cgbc: Fix use of negative error code as valid
- session handle
-To: sashiko-reviews@lists.linux.dev
-Cc: mfd@lists.linux.dev, lee@kernel.org
-References: <20260911-cgbc-i2c-storage-devices-support-v3-0-594b53fbc5ea@bootlin.com>
- <20260911-cgbc-i2c-storage-devices-support-v3-1-594b53fbc5ea@bootlin.com>
- <20260911190215.517821F000FF@smtp.kernel.org>
+From: Muzaffer Kadir <muzafferkadir@mainlining.org>
+Subject: Re: [PATCH v2 01/19] dt-bindings: clock: qcom: Add MSM8952 global
+ clock controller
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Srinivas Kandagatla <srini@kernel.org>,
+ Ulf Hansson <ulfh@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
+ "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+ Robin Murphy <robin.murphy@arm.com>, Lee Jones <lee@kernel.org>,
+ Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
+ <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Robert Marko <robimarko@gmail.com>, Guru Das Srinagesh <linux@gurudas.dev>,
+ Amit Kucheria <amitk@kernel.org>, Thara Gopinath <thara.gopinath@gmail.com>,
+ "Rafael J. Wysocki" <rafael@kernel.org>,
+ Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+ Lukasz Luba <lukasz.luba@arm.com>, Kees Cook <kees@kernel.org>,
+ Tony Luck <tony.luck@intel.com>, "Guilherme G. Piccoli"
+ <gpiccoli@igalia.com>, Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+ David Heidelberg <david@ixit.cz>, Dang Huynh <danct12@riseup.net>,
+ phone-devel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-mmc@vger.kernel.org,
+ iommu@lists.linux.dev, mfd@lists.linux.dev, dri-devel@lists.freedesktop.org,
+ freedreno@lists.freedesktop.org, linux-pm@vger.kernel.org,
+ linux-input@vger.kernel.org
+References: <20260916-msm8952-initial-support-v2-0-798c2602dde1@mainlining.org>
+ <20260916-msm8952-initial-support-v2-1-798c2602dde1@mainlining.org>
+ <20260918-liberal-significant-crow-f1e66f@quoll>
 Content-Language: en-US
-In-Reply-To: <20260911190215.517821F000FF@smtp.kernel.org>
+In-Reply-To: <20260918-liberal-significant-crow-f1e66f@quoll>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
 
-On 9/11/26 9:02 PM, sashiko-bot@kernel.org wrote:
-> Thank you for your contribution! Sashiko AI review found 4 potential issue(s) to consider:
+Hi Krzysztof,
+
+On Fri, 18 Sep 2026 12:02:02 +0200, Krzysztof Kozlowski wrote:
+> On Wed, Sep 16, 2026 at 05:22:06PM +0300, Muzaffer Kadir wrote:
+>> Add a device tree binding to describe clocks, resets and power domains
+>> provided by the global clock controller on MSM8952 SoC.
+>>
+>> Signed-off-by: Muzaffer Kadir <muzafferkadir@mainlining.org>
 > 
-> Pre-existing issues:
-> - [High] The platform device `cgbc_pdev` is leaked if `platform_driver_register()` fails during module initialization.
-> - [High] `cgbc_command()` can return success without fully initializing the caller's data buffer, leading to reads of uninitialized stack memory.
-> - [High] Truncating `istatus` prematurely in `cgbc_command()` desynchronizes the driver from the hardware data stream and corrupts checksum validation.
-> - [High] `cgbc_wait_device()` uses `ioread16()` to read an 8-bit status register, which may read undefined adjacent bits and cause erroneous timeouts.
-> --
+> Please run scripts/checkpatch.pl on the patches and fix reported
+> warnings. After that, run also 'scripts/checkpatch.pl --strict' on the
+> patches and (probably) fix more warnings. Some warnings can be ignored,
+> especially from --strict run, but the code here looks like it needs a
+> fix. Feel free to get in touch if the warning is not clear.
 > 
-> commit 5958523826be2db0df4509b215ea904388b04fd3
-> Author: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
-> 
-> mfd: cgbc: Fix use of negative error code as valid session handle
-> 
-> This commit fixes an issue where a negative error code from
-> cgbc_session_command() was directly cast to u8 and treated as a valid session
-> handle. It adds an explicit check to ensure the return value is positive before
-> assigning it to the session variable.
-> 
-> Closes: https://sashiko.dev/#/patchset/20260713-cgbc-core-fix-cgbc-remove-v1-1-79274ad62b3a%40bootlin.com?part=1
-> 
->> diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
->> index 2becaf797646d..4a409234e66c8 100644
->> --- a/drivers/mfd/cgbc-core.c
->> +++ b/drivers/mfd/cgbc-core.c
->> @@ -103,7 +103,11 @@ static int cgbc_session_request(struct cgbc_device_data *cgbc)
->>  	if (ret)
->>  		return dev_err_probe(cgbc->dev, ret, "device not found or not ready\n");
->>  
->> -	cgbc->session = cgbc_session_command(cgbc, CGBC_SESSION_CMD_REQUEST);
->> +	ret = cgbc_session_command(cgbc, CGBC_SESSION_CMD_REQUEST);
->> +	if (ret < 0)
->> +		return dev_err_probe(cgbc->dev, ret, "session handle request timed out\n");
+
+Then I will ask a few things,
+
+WARNING: DT binding headers should be licensed (GPL-2.0-only OR .*)
+#88: FILE: include/dt-bindings/clock/qcom,gcc-msm8952.h:1:
++/* SPDX-License-Identifier: GPL-2.0-only */
+
+As I said on cover, I originally based on msm8939 gcc,
+would it cause license problems with file if I fix this
+warning?
+
+Some patches say "has style problems, please review."
+Is this related to formatting of code inside patch ?
+
+WARNING: Prefer a maximum 75 chars per line (possible unwrapped commit description?)
+#16: 
+[1] https://android.googlesource.com/kernel/msm.git/+/refs/tags/android-wear-7.0.0_r0.3/drivers/clk/qcom/clock-gcc-8952.c
+
+Should I move these to "Link:" to fix this type of warnings?
+Wouldn't moving them cause a bit understanding loss?
+
+grep: warning: stray \ before -
+What does this mean ?
+
+Thanks
+
+>> ---
+>>  .../bindings/clock/qcom,gcc-msm8952.yaml           |  56 ++++++
+>>  include/dt-bindings/clock/qcom,gcc-msm8952.h       | 217 +++++++++++++++++++++
+>>  2 files changed, 273 insertions(+)
+>>
+>> diff --git a/Documentation/devicetree/bindings/clock/qcom,gcc-msm8952.yaml b/Documentation/devicetree/bindings/clock/qcom,gcc-msm8952.yaml
+>> new file mode 100644
+>> index 000000000000..274dde633e17
+>> --- /dev/null
+>> +++ b/Documentation/devicetree/bindings/clock/qcom,gcc-msm8952.yaml
+>> @@ -0,0 +1,56 @@
+>> +# SPDX-License-Identifier: GPL-2.0-only
+>> +%YAML 1.2
+>> +---
+>> +$id: http://devicetree.org/schemas/clock/qcom,gcc-msm8952.yaml#
+>> +$schema: http://devicetree.org/meta-schemas/core.yaml#
 >> +
->> +	cgbc->session = ret;
->>  
->>  	/* The Board Controller sent us a wrong session handle, we cannot communicate with it */
->>  	if (cgbc->session < CGBC_SESSION_VALID_MIN || cgbc->session > CGBC_SESSION_VALID_MAX)
+>> +title: Qualcomm Global Clock & Reset Controller on MSM8952
+>> +
+>> +maintainers:
+>> +  - Muzaffer Kadir <muzafferkadir@mainlining.org>
+>> +
+>> +description: |
+>> +  Qualcomm global clock control module provides the clocks, resets and power
+>> +  domains on MSM8952.
+>> +
+>> +  See also::
 > 
-> [Severity: High]
-> This isn't a bug introduced by this patch, but is the platform device
-> cgbc_pdev leaked if platform_driver_register() fails?
+> git grep "also::" -- Documentation/devicetree/bindings/clock/
 > 
-> drivers/mfd/cgbc-core.c:cgbc_init() {
-> 	...
-> 	cgbc_pdev = platform_device_register_simple("cgbc", PLATFORM_DEVID_NONE, cgbc_resources,
-> 						    ARRAY_SIZE(cgbc_resources));
-> 	if (IS_ERR(cgbc_pdev))
-> 		return PTR_ERR(cgbc_pdev);
+> I asked you month ago here:
+> <e3fb3794-ca7a-4794-8036-b69e563aaa57@kernel.org>
+> to not work on old forks.
 > 
-> 	return platform_driver_register(&cgbc_driver);
-> }
-> 
-> The error path here directly returns the error code without cleaning up the
-> previously registered platform device. This leaves a dangling device on the
-> platform bus, preventing the driver from being loaded successfully again
-> without a system reboot.
-> 
+> Old fork which you should not use is postmarketos, lineageos, whatever
+> Android fork kernel, and whatever other tree which is not upstream from
+> kernel.org.
 
-True. But I'll fix it later in a separate patch.
-I don't want to pollute more this series with such fixes for
-"pre-existing issues".
+I created all of this before sending pinctrl. I tried to clean up by
+reading others in upstream before sending but I guess I didn't
+noticed that, sorry about that.
+I didn't reused fork and mainly used upstream after your reply.
 
-> [Severity: High]
-> This is a pre-existing issue, but does cgbc_command() fail to fully
-> initialize the provided data buffer before returning success?
-> 
-> drivers/mfd/cgbc-core.c:cgbc_command() {
-> 	...
-> 	case CGBC_STATUS_ERROR:
-> 	case CGBC_STATUS_CMD_READY:
-> 		data_checksum = ioread8(cgbc->io_cmd + CGBC_CMD_DATA + 1);
-> 		if ((istatus & CGBC_MASK_STATUS) == CGBC_STATUS_ERROR)
-> 			ret = -EIO;
-> 		istatus = istatus & CGBC_MASK_ERROR_CODE;
-> 		break;
-> 	...
-> }
-> 
-> If the hardware returns CGBC_STATUS_CMD_READY, the function returns 0 but
-> does not write to the provided data buffer.
-> 
-> When called from cgbc_get_version(), this trusts cgbc_command() and blindly
-> consumes the potentially uninitialized stack variable data:
-> 
-> drivers/mfd/cgbc-core.c:cgbc_get_version() {
-> 	...
-> 	ret = cgbc_command(cgbc, &cmd, 1, &data, sizeof(data), NULL);
-> 	if (ret)
-> 		return ret;
-> 
-> 	cgbc->version.feature = data[0];
-> 	...
-> }
-> 
-> This uninitialized byte is then exposed to userspace via the world-readable
-> cgbc_version sysfs attribute, potentially leaking kernel stack memory:
-> 
-> drivers/mfd/cgbc-core.c:cgbc_version_show() {
-> 	...
-> 	return sysfs_emit(buf, "CGBCP%c%c%c\n", cgbc->version.feature, cgbc->version.major,
-> 			  cgbc->version.minor);
-> }
-
-It is expected that CGBC_CMD_GET_FW_REV cmd returns data, so on success
-it returns CGBC_STATUS_DATA_READY, else an error. But it cannot return
-CGBC_STATUS_CMD_READY. So no potential uninitialized data usage.
-
-> 
-> [Severity: High]
-> This isn't a bug introduced by this patch, but does modifying istatus
-> directly break the checksum offset calculation and hardware read
-> synchronization?
-> 
-> drivers/mfd/cgbc-core.c:cgbc_command() {
-> 	...
-> 	/* Check command status */
-> 	switch (istatus & CGBC_MASK_STATUS) {
-> 	case CGBC_STATUS_DATA_READY:
-> 		if (istatus > data_size)
-> 			istatus = data_size;
-> 		for (i = 0; i < istatus; i++) {
-> 			_data[i] = ioread8(cgbc->io_cmd + CGBC_CMD_DATA + ((i + 1) % 4));
-> 			checksum ^= _data[i];
-> 		}
-> 	...
-> }
-> 
-> If the hardware sends more data than expected (istatus > data_size),
-> istatus is truncated. The loop then reads only data_size bytes, leaving the
-> remaining data and the real checksum unread in the hardware registers. The
-> driver then reads a data byte as the checksum, guaranteeing a mismatch
-> (-EIO). Does the driver need to read all bytes the hardware sends to stay
-> synchronized?
-
-Returning an error if the data buffer size does not match is expected,
-else the caller will only receive partial data.
-Maybe it shall return earlier and not start reading data at all if
-buffer is not big enough. Anyway I'll not fix this in this series.
-
-> 
-> [Severity: High]
-> This is a pre-existing issue, but does this ioread16() on the 8-bit status
-> register read undefined adjacent bits?
-> 
-> drivers/mfd/cgbc-core.c:cgbc_wait_device() {
-> 	...
-> 	ret = readx_poll_timeout(ioread16, cgbc->io_session + CGBC_SESSION_STATUS, status,
-> 				 status == CGBC_SESSION_STATUS_FREE, 0, 500000);
-> 	...
-> }
-> 
-> If the adjacent register at offset 0x03 contains non-zero data, the 16-bit
-> read will incorporate it, failing the exact equality check and causing
-> readx_poll_timeout() to fail. The status register appears to be 8-bit, as
-> cgbc_session_command() correctly uses iowrite8() to write to it. Can this
-> cause erroneous timeouts and break driver initialization?
-> 
-
-CGBC_SESSION_STATUS is 16 bits register. No issue.
-
-Best Regards,
-Thomas
+Best regards,
+Muzaffer Kadir
