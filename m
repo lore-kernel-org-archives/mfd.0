@@ -1,69 +1,69 @@
-Received: from mail-pj2-f43.google.com (mail-pj2-f43.google.com [74.125.227.171])
+Received: from mail-pz2-f42.google.com (mail-pz2-f42.google.com [74.125.228.42])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0628352BE53
-	for <mfd@lists.linux.dev>; Fri, 18 Sep 2026 21:02:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC51C3DD521
+	for <mfd@lists.linux.dev>; Fri, 18 Sep 2026 21:02:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.228.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789765358; cv=none; b=UAnH79Dcr6CYPEJtvHpOQL9Vzu3AhlHBST07KaGhxLjpHBWO9WMwJHiJnaw4T4jkindV5ovU+HyhrqbVJwvzheRnFJhLQVqDpX7ztTOb2G2wXDA/t43cBF5I/KAKDCfXAXfAKHP4wyaM5Xcl2SMPSO9wu96nvYP03MtJJ+GDpqk=
+	t=1789765374; cv=none; b=B8G6+UDwR/Ym2k6V0r75I4aHLPezBy45ijkg+7cDtHCO0JbvPoNWAds5sCbTx1PCwvCkyWBCLyFxcTv/G4vUL5DyNBBW4/hy+XU8NCwzZu/pMUrEuVNF272VEqj/5PujbEFGaqglyV9Asxobz0jiUtMYXkFDFpYVLAtLCPSXHkU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789765358; c=relaxed/simple;
-	bh=khvWqygseB7fpC76dgUJOaNtCER/GOHR4LnPt6eYkbw=;
+	s=arc-20240116; t=1789765374; c=relaxed/simple;
+	bh=7VFJeJ4QrNJQ+InqE+bbZQH2NYeGdB0Jrv+prGbC5A4=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Q/bKhAdfHGLpWka2krbELHxjjqtJQ2UyZ5Mqozb6GOWEirBeYmJJoGsX19nQGyjWZCb12Ut9ctkefSeFiJS2NkxCwWEfWC7QtoEnQIHmR7DIoGz72PBX928zqPtMYIs24Vc0HIFjhOjke9Y+bsInX/bj1BHEYt+ae7szyVFc9+A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=CAgLl+5s; arc=none smtp.client-ip=74.125.227.171
+	 In-Reply-To:To:Cc; b=o3H9UBaugoQ7f6SA3bXUgu14vmm7HN9yh/Km7Z0l/pp6WunpttbWwxdgtHbDSlIyUFiV22r3uejGKzAPZjBx0f43I8a0vb413dER9HMWuNhW1Z/j8vX/Gj/dOwBHHh1TPnqHNjfV4RV/SnTo8iI6QLd4qewtbNNESjr2hESu+Iw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=tObWqtuJ; arc=none smtp.client-ip=74.125.228.42
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="CAgLl+5s"
-Received: by mail-pj2-f43.google.com with SMTP id d9443c01a7336-2d6ff23d82eso1407665ad.3
-        for <mfd@lists.linux.dev>; Fri, 18 Sep 2026 14:02:36 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="tObWqtuJ"
+Received: by mail-pz2-f42.google.com with SMTP id 41be03b00d2f7-cc1e1b51234so142319a12.3
+        for <mfd@lists.linux.dev>; Fri, 18 Sep 2026 14:02:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789765356; x=1790370156; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1789765372; x=1790370172; darn=lists.linux.dev;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=SyEeb8Fr9emmHGcnOcMAo5PWMFsb+SWAIx+uH54QAkE=;
-        b=CAgLl+5s7QPXa1R/zXa1TA3+RsV8nrccARungkeE9MJdERXyCBvQ9SvStsjyu8ZnGJ
-         vdPFuLtsI/93hXbUOkBg+yNfHCc4j0XIzAI3R99QAShDplpYMUGgLhgo6XJmJCG1TrKN
-         w4vIrssmK/UjAeoHowOdsgzaJNWRgDEJwR0k0JZ/pHl6mxz81L8Jgm8Li8LvuTE1VU30
-         WYqr/noRPaxi1Ln9JbNZmQ9UrMz0TUOuPn3vKbavtAzaou1aSiayX86l7tXNzBbGZAP+
-         pjai+sI7LRJtBst85Ba2CIK3y6i8L7aeYu1PFW5HvDW8KMtQGGdI6Si627ZbLW0i8pJM
-         L0qQ==
+        bh=geikbrKsDXcFqc56hsKasFpB/gHezUrUiLv7oPljlwY=;
+        b=tObWqtuJc4qR+GUk5MmNcDwyEKkD6/4nOvZNN3y+zHHIqjGdakSLfzG+NhQvdRPSr2
+         Q0lNaLBmS5gKtBaK9nQmE4dUCBb0fEWyd4ipaAgudvzoq7goYDeq+HCf8Do2STzhQkOs
+         vARQaoHr6tg2RKgRixEgozfy+JgHsbzZc4T2vQhE8WdbpDaEaG3tJqBv8Dm+V7sp1UZ9
+         IGwCyNU8SajxCcOieYJjIcV3/2Gg/M4v2b1sJKBIok/Z0W9zTwGxh/POJ3GDLoJ4WA64
+         +sqmdS1MQa7ymwwZmkTSnbmjD/ADb7EJ5HCB7kGWvXJAwcQgn33QI7D0iN2Vm3NaNKe7
+         rpWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789765356; x=1790370156;
+        d=1e100.net; s=20260707; t=1789765372; x=1790370172;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=SyEeb8Fr9emmHGcnOcMAo5PWMFsb+SWAIx+uH54QAkE=;
-        b=hLjG0LyRtM2ho2kNQwSFUyza/d7kzuFKGXn2nAjJErg/POLKrG6D3Y5ny5LIRK+VPj
-         +d4fIGhhq1eT8KWK+OnfmrjAbQvYImmgxNN1PrsBsY/8Y8P8YeMMxIu/TiLZ8jthtRQw
-         QpE8tGRdb6LGqxQ+A8zZKojaIABV6jt/oc9/60EzPMt1vAxcb3p4A6bDyS5/mLdhkHGU
-         fUXTkbiH3xnBDNtIN1PlL2eC5Zv1IHbOoVzHHQHOxQqKVIcTyBSY0F9WjZJNHKCrr4fo
-         uvl8Pvu7lCik+8tEPdE1eUW9SnypUdbPNyJW0ATznpJDVwJUQMDtA41nDFSdo5TYrxeP
-         CAFA==
-X-Forwarded-Encrypted: i=1; AKwUvBwFO/iDFljsj15mgijaE3aiHzcz/+pg9f2/q+vi0RXxJ8aLm6R5/nVmmrwdhR7BVcKL1Eg=@lists.linux.dev
-X-Gm-Message-State: AFuF++mDo8gcG0anM4EzkhfdRqSBWmkfkInsxcJHWnLSkfxsKWLi92YQ
-	NDgdbY9wA4JCpXJqUOimc3XLMQz6gA9BqGH8EcU8kwKndeKkQ/vhxxwM
-X-Gm-Gg: AYBFou1RoBYX7mu6jeVU9iF+6tlQYCEYlxk/040uYZm/7VhJ2kpGPlsUu9FRPPzfQBH
-	Ubl/wJnboD1BLKCFR1aMcoK9rod8rAJYyvWtXUiF+jWLSAT9rxHrkmwkYNL25p3yHKJDEyNhcnS
-	0yz6rBLqBj7P2L7ZWIJE6Gn6MdYJz76usTkAZ9EJhynPh4sQk7XXb8DiHyStvCvUHf0mZiGjBed
-	oNtoJukqdueTiQsM9tXtgGIXMBO3eCIZvrV9xtEOkN8nJ6QpIIpv2EM05v+9hRZAfQOeFoIzniq
-	7jn+f3o52SwsgplNesLOYjkLdLxWij4J/E3ba53EdQDnmQ/xjvhZe2+zgSM1DcT7qnFNZP7dhhf
-	HHKOP0UliE+iquSS212jARrnpaGycuoVTqp4lQR+wSWlvzIzamkquF/vae8VgXuFGem0suZBbga
-	GydEMWiR/8TB8L07H0wM/XHKPlwFNgMn3GVdVLni3BsdOD3sETD11NeWaDKpGdf5xPllCvlSQyh
-	QYwNT6m
-X-Received: by 2002:a17:90b:4acc:b0:39d:f130:ba54 with SMTP id 98e67ed59e1d1-39e549c111fmr6837005a91.0.1789765355954;
-        Fri, 18 Sep 2026 14:02:35 -0700 (PDT)
+        bh=geikbrKsDXcFqc56hsKasFpB/gHezUrUiLv7oPljlwY=;
+        b=c8aJBn9k5F8WZp224XABC4a+fgf6bIJClXQF2FGqil2A1TgCFtbLPvO52ceoT9QbQJ
+         D4sQcEqFnyVAxzUVH0CaNck08n8vfG+GIAlgwznoapmonh1lkiWsrszNlfS8gHOMNesI
+         sO0mABI/lNEAtPcblR10MoT2fbke+A13xZlj3CdAEdgpKTsfvOOMZUZrEpQwBtJdveG6
+         ohtOTj49Zs58Ohm9kL0fcZ4ZuuxHMQXxPpWidv9QjmqhGLSDz+FqwbtG/2ZWFfpmxVpz
+         3iUr5rTyE/2JxkbovBv4lLDowobn4F9to9rlh7nbDJmnfE/yn62LtKPtuYE4iXUpoffx
+         9WDQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzw7Ajgi4FH8U7HIqECBDUK9fJtFwHix8RjKNn0KeEYeCBLWZA4Qr9KhTEKI8IcJxOpvT4=@lists.linux.dev
+X-Gm-Message-State: AFuF++msaYw/W2jaEvSnfnk14T2GIVXOit04a3VhdgicUt4CbsyP1PBU
+	hkkVopf4utWza2nBEHxDgFd7nT4FDPhKHX58R1hHg1z3NwlVneomBxEb
+X-Gm-Gg: AYBFou1b6mboAJTPC782fxj5188nL3Gm7U54PLjZ44sR3Yw6Byd1Q4VWvDc/UdvZfHP
+	gUVUrnXXV1m003BBgThefnWKm4bGND+j6YocQg/GgXeP5XI81sQhGrTUF1ezgD4AJbYFDbVW01B
+	kHEUFklB9MPgY6cyvsYa3TTa+2JLFm8uJlEIw5VWLvOu2kKwd43fvdGLVp5hhP2L0f4/PiHnIpW
+	5o6PCpd20ISHeuQyNC7pqlF/f74dyzBNgRXXdKJJyqbfzW1mz8belMV82mii2OIpMgGvtTlIqD9
+	0lrFXrY8hZZMC3ks5S6uUoRIwDVOYx1jhRVLY4wmfjRVRefLlR2WZVRUY6g4BVGDfLMhT6i+8LR
+	euPlbvJRIy8AENFSrjWno+StsqrKq0ESaQzkUf11yNleRc2aojjFXIwdkkJo6QhN89E+6zFBHXq
+	q8q9csw+L8Wj4nSNCoeOYgi/uoJSexy7n36HCq81wbMOKWBgDiUJHEMkhl3ezi+jMZONnb5AJ7R
+	Go5zBmF
+X-Received: by 2002:a17:90b:5303:b0:39e:56a2:b81 with SMTP id 98e67ed59e1d1-39e598b5a15mr6134359a91.3.1789765372243;
+        Fri, 18 Sep 2026 14:02:52 -0700 (PDT)
 Received: from [10.198.60.252] ([2409:40c2:5404:cbbd:a461:609f:eccf:23f])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144d55ab3a3sm1396904c88.5.2026.09.18.14.02.20
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-144d55ab3a3sm1396904c88.5.2026.09.18.14.02.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 18 Sep 2026 14:02:35 -0700 (PDT)
+        Fri, 18 Sep 2026 14:02:51 -0700 (PDT)
 From: Bhargav Joshi <j.bhargav.u@gmail.com>
-Date: Sat, 19 Sep 2026 02:31:24 +0530
-Subject: [PATCH v3 3/4] regulator: dt-bindings: Reference Tegra regulator
- coupling schema
+Date: Sat, 19 Sep 2026 02:31:25 +0530
+Subject: [PATCH v3 4/4] regulator: dt-bindings: ti,tps6586x: Convert to DT
+ schema
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -72,7 +72,7 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260919-ti-tps6586x-v3-3-63dd240f4684@gmail.com>
+Message-Id: <20260919-ti-tps6586x-v3-4-63dd240f4684@gmail.com>
 References: <20260919-ti-tps6586x-v3-0-63dd240f4684@gmail.com>
 In-Reply-To: <20260919-ti-tps6586x-v3-0-63dd240f4684@gmail.com>
 To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
@@ -89,91 +89,368 @@ Cc: linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
  simona.toaca@nxp.com, j.bhargav.u@gmail.com, mfd@lists.linux.dev, 
  Thierry Reding <treding@nvidia.com>, linux-tegra@vger.kernel.org
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789765290; l=3311;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789765290; l=10424;
  i=j.bhargav.u@gmail.com; h=from:subject:message-id;
- bh=khvWqygseB7fpC76dgUJOaNtCER/GOHR4LnPt6eYkbw=;
- b=Vq0Gccle4lp1aryeTtZiKIETU7HnviwUPyZ5s/r/ULkM3lkxhmNg6Q8Vtgw3WXgae4i/a9tn4
- HSSVF2sS11XC5xTQnXE+/mBx/bMvpoV8S/ruSvxGOGyutaNiLWg0G1P
+ bh=7VFJeJ4QrNJQ+InqE+bbZQH2NYeGdB0Jrv+prGbC5A4=;
+ b=kn13BB5y4Wt5AneZVvAv+A4peK674VBv3FPrC+PiZ9CNnmVuQAgL+oAcMRI7xDwBKRmRPQ6Bn
+ vV+4FfWx+iaDtVqFcZte9dejveVcH1QnwC5q2dy1CLPAS1CdfkDMOLC
 X-Developer-Key: i=j.bhargav.u@gmail.com; a=ed25519;
  pk=IqNDwUZKECEA+n8wXctFLBbYL9NhFstZNbOznm/nX1k=
 
-Several PMICs used on Tegra boards TPS65910, TPS62360, and MAX77620 use
-Tegra-specific regulator coupling properties. Update their dt bindings
-to reference the shared nvidia,tegra-regulators-coupling.yaml schema.
+Convert Texas Instruments tps6586x regulator binding from text to DT
+schema. Reference to nvidia,tegra-regulators-coupling in child regulator
+nodes.
 
 Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
 Signed-off-by: Bhargav Joshi <j.bhargav.u@gmail.com>
 ---
- Documentation/devicetree/bindings/mfd/ti,tps65910.yaml       | 12 +++++++++---
- .../bindings/regulator/maxim,max77620-regulator.yaml         |  5 ++++-
- Documentation/devicetree/bindings/regulator/ti,tps62360.yaml |  1 +
- 3 files changed, 14 insertions(+), 4 deletions(-)
+ .../devicetree/bindings/regulator/ti,tps6586x.yaml | 196 +++++++++++++++++++++
+ .../devicetree/bindings/regulator/tps6586x.txt     | 135 --------------
+ 2 files changed, 196 insertions(+), 135 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/mfd/ti,tps65910.yaml b/Documentation/devicetree/bindings/mfd/ti,tps65910.yaml
-index caff9dc0b2bb..798d27099401 100644
---- a/Documentation/devicetree/bindings/mfd/ti,tps65910.yaml
-+++ b/Documentation/devicetree/bindings/mfd/ti,tps65910.yaml
-@@ -99,7 +99,9 @@ properties:
-     patternProperties:
-       "^(vrtc|vio|vpll|vdac|vmmc|vbb|vddctrl)$":
-         type: object
--        $ref: /schemas/regulator/regulator.yaml#
-+        allOf:
-+          - $ref: /schemas/regulator/regulator.yaml#
-+          - $ref: /schemas/regulator/nvidia,tegra-regulators-coupling.yaml#
-         properties:
-           ti,regulator-ext-sleep-control:
-             description: |
-@@ -112,7 +114,9 @@ properties:
- 
-       "^(vdd[1-3]|vaux([1-2]|33)|vdig[1-2])$":
-         type: object
--        $ref: /schemas/regulator/regulator.yaml#
-+        allOf:
-+          - $ref: /schemas/regulator/regulator.yaml#
-+          - $ref: /schemas/regulator/nvidia,tegra-regulators-coupling.yaml#
-         properties:
-           ti,regulator-ext-sleep-control:
-             description: |
-@@ -125,7 +129,9 @@ properties:
- 
-       "^ldo[1-8]$":
-         type: object
--        $ref: /schemas/regulator/regulator.yaml#
-+        allOf:
-+          - $ref: /schemas/regulator/regulator.yaml#
-+          - $ref: /schemas/regulator/nvidia,tegra-regulators-coupling.yaml#
-         properties:
-           ti,regulator-ext-sleep-control:
-             description: |
-diff --git a/Documentation/devicetree/bindings/regulator/maxim,max77620-regulator.yaml b/Documentation/devicetree/bindings/regulator/maxim,max77620-regulator.yaml
-index 7118c34961ba..67fbe7d6dc1c 100644
---- a/Documentation/devicetree/bindings/regulator/maxim,max77620-regulator.yaml
-+++ b/Documentation/devicetree/bindings/regulator/maxim,max77620-regulator.yaml
-@@ -22,7 +22,10 @@ patternProperties:
- 
-   "^(sd[0-3]|ldo[0-8])$":
-     type: object
--    $ref: /schemas/regulator/regulator.yaml#
-+    allOf:
-+      - $ref: /schemas/regulator/regulator.yaml#
-+      - $ref: /schemas/regulator/nvidia,tegra-regulators-coupling.yaml#
+diff --git a/Documentation/devicetree/bindings/regulator/ti,tps6586x.yaml b/Documentation/devicetree/bindings/regulator/ti,tps6586x.yaml
+new file mode 100644
+index 000000000000..1f7c7b35066f
+--- /dev/null
++++ b/Documentation/devicetree/bindings/regulator/ti,tps6586x.yaml
+@@ -0,0 +1,196 @@
++# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/regulator/ti,tps6586x.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
-     unevaluatedProperties: false
- 
-     properties:
-diff --git a/Documentation/devicetree/bindings/regulator/ti,tps62360.yaml b/Documentation/devicetree/bindings/regulator/ti,tps62360.yaml
-index 90c39275c150..6768fc6ea0d3 100644
---- a/Documentation/devicetree/bindings/regulator/ti,tps62360.yaml
-+++ b/Documentation/devicetree/bindings/regulator/ti,tps62360.yaml
-@@ -20,6 +20,7 @@ description: |
- 
- allOf:
-   - $ref: regulator.yaml#
-+  - $ref: /schemas/regulator/nvidia,tegra-regulators-coupling.yaml#
- 
- properties:
-   compatible:
++title: TI TPS6586x family of regulators
++
++maintainers:
++  - Thierry Reding <thierry.reding@avionic-design.de>
++
++properties:
++  compatible:
++    const: ti,tps6586x
++
++  reg:
++    maxItems: 1
++
++  interrupts:
++    maxItems: 1
++
++  "#gpio-cells":
++    const: 2
++
++  gpio-controller: true
++
++  sys-supply:
++    description: The input supply for SYS.
++
++  ti,system-power-controller:
++    type: boolean
++    description:
++      Whether or not this PMIC is controlling the system power.
++
++  regulators:
++    type: object
++    additionalProperties: false
++    description:
++      list of regulators provided by this controller, LDO5 and LDO_RTC is
++      supplied by SYS regulator internally and driver take care of making
++      proper parent child relationship.
++
++    properties:
++      sys:
++        type: object
++        $ref: regulator.yaml#
++        unevaluatedProperties: false
++
++    patternProperties:
++      "^ldo([0-9]|_rtc)$":
++        type: object
++        allOf:
++          - $ref: /schemas/regulator/regulator.yaml#
++          - $ref: /schemas/regulator/nvidia,tegra-regulators-coupling.yaml#
++        unevaluatedProperties: false
++
++      "^sm[0-2]$":
++        type: object
++        allOf:
++          - $ref: /schemas/regulator/regulator.yaml#
++          - $ref: /schemas/regulator/nvidia,tegra-regulators-coupling.yaml#
++        unevaluatedProperties: false
++
++patternProperties:
++  "^vin-sm[0-2]-supply$":
++    description: The input supply for the corresponding SM (SM0, SM1, or SM2).
++
++  "^vinldo(01|23|4|678|9)-supply$":
++    description: The input supply for the corresponding LDO or group of LDOs.
++
++required:
++  - compatible
++  - reg
++  - interrupts
++  - regulators
++  - "#gpio-cells"
++  - gpio-controller
++  - sys-supply
++  - vin-sm0-supply
++  - vin-sm1-supply
++  - vin-sm2-supply
++  - vinldo01-supply
++  - vinldo23-supply
++  - vinldo4-supply
++  - vinldo678-supply
++  - vinldo9-supply
++
++additionalProperties: false
++
++examples:
++  - |
++    i2c {
++      #address-cells = <1>;
++      #size-cells = <0>;
++
++      pmic@34 {
++          compatible = "ti,tps6586x";
++          reg = <0x34>;
++          interrupts = <0 88 0x4>;
++
++          #gpio-cells = <2>;
++          gpio-controller;
++
++          ti,system-power-controller;
++
++          sys-supply = <&vdd_5v0_sys>;
++          vin-sm0-supply = <&sys_reg>;
++          vin-sm1-supply = <&sys_reg>;
++          vin-sm2-supply = <&sys_reg>;
++          vinldo01-supply = <&sm2_reg>;
++          vinldo23-supply = <&sm2_reg>;
++          vinldo4-supply = <&sm2_reg>;
++          vinldo678-supply = <&sm2_reg>;
++          vinldo9-supply = <&sm2_reg>;
++
++          regulators {
++              sys {
++                  regulator-name = "vdd_sys";
++                  regulator-boot-on;
++                  regulator-always-on;
++              };
++
++              sm0 {
++                  regulator-min-microvolt = < 725000>;
++                  regulator-max-microvolt = <1500000>;
++                  regulator-boot-on;
++                  regulator-always-on;
++              };
++
++              sm1 {
++                  regulator-min-microvolt = < 725000>;
++                  regulator-max-microvolt = <1500000>;
++                  regulator-boot-on;
++                  regulator-always-on;
++              };
++
++              sm2 {
++                  regulator-min-microvolt = <3000000>;
++                  regulator-max-microvolt = <4550000>;
++                  regulator-boot-on;
++                  regulator-always-on;
++              };
++
++              ldo0 {
++                  regulator-name = "PCIE CLK";
++                  regulator-min-microvolt = <3300000>;
++                  regulator-max-microvolt = <3300000>;
++              };
++
++              ldo1 {
++                  regulator-min-microvolt = < 725000>;
++                  regulator-max-microvolt = <1500000>;
++              };
++
++              ldo2 {
++                  regulator-min-microvolt = < 725000>;
++                  regulator-max-microvolt = <1500000>;
++              };
++
++              ldo3 {
++                  regulator-min-microvolt = <1250000>;
++                  regulator-max-microvolt = <3300000>;
++              };
++
++              ldo4 {
++                  regulator-min-microvolt = <1700000>;
++                  regulator-max-microvolt = <2475000>;
++              };
++
++              ldo5 {
++                  regulator-min-microvolt = <1250000>;
++                  regulator-max-microvolt = <3300000>;
++              };
++
++              ldo6 {
++                  regulator-min-microvolt = <1250000>;
++                  regulator-max-microvolt = <3300000>;
++              };
++
++              ldo7 {
++                  regulator-min-microvolt = <1250000>;
++                  regulator-max-microvolt = <3300000>;
++              };
++
++              ldo8 {
++                  regulator-min-microvolt = <1250000>;
++                  regulator-max-microvolt = <3300000>;
++              };
++
++              ldo9 {
++                  regulator-min-microvolt = <1250000>;
++                  regulator-max-microvolt = <3300000>;
++              };
++          };
++      };
++    };
+diff --git a/Documentation/devicetree/bindings/regulator/tps6586x.txt b/Documentation/devicetree/bindings/regulator/tps6586x.txt
+deleted file mode 100644
+index 8b40cac24d93..000000000000
+--- a/Documentation/devicetree/bindings/regulator/tps6586x.txt
++++ /dev/null
+@@ -1,135 +0,0 @@
+-TPS6586x family of regulators
+-
+-Required properties:
+-- compatible: "ti,tps6586x"
+-- reg: I2C slave address
+-- interrupts: the interrupt outputs of the controller
+-- #gpio-cells: number of cells to describe a GPIO
+-- gpio-controller: mark the device as a GPIO controller
+-- regulators: A node that houses a sub-node for each regulator within the
+-  device. Each sub-node is identified using the node's name (or the deprecated
+-  regulator-compatible property if present), with valid values listed below.
+-  The content of each sub-node is defined by the standard binding for
+-  regulators; see regulator.txt.
+-  sys, sm[0-2], ldo[0-9] and ldo_rtc
+-- sys-supply: The input supply for SYS.
+-- vin-sm0-supply: The input supply for the SM0.
+-- vin-sm1-supply: The input supply for the SM1.
+-- vin-sm2-supply: The input supply for the SM2.
+-- vinldo01-supply: The input supply for the LDO1 and LDO2
+-- vinldo23-supply: The input supply for the LDO2 and LDO3
+-- vinldo4-supply: The input supply for the LDO4
+-- vinldo678-supply: The input supply for the LDO6, LDO7 and LDO8
+-- vinldo9-supply: The input supply for the LDO9
+-
+-Optional properties:
+-- ti,system-power-controller: Telling whether or not this pmic is controlling
+-  the system power.
+-
+-Each regulator is defined using the standard binding for regulators.
+-
+-Note: LDO5 and LDO_RTC is supplied by SYS regulator internally and driver
+-      take care of making proper parent child relationship.
+-
+-Example:
+-
+-	pmu: tps6586x@34 {
+-		compatible = "ti,tps6586x";
+-		reg = <0x34>;
+-		interrupts = <0 88 0x4>;
+-
+-		#gpio-cells = <2>;
+-		gpio-controller;
+-
+-		ti,system-power-controller;
+-
+-		sys-supply = <&some_reg>;
+-		vin-sm0-supply = <&some_reg>;
+-		vin-sm1-supply = <&some_reg>;
+-		vin-sm2-supply = <&some_reg>;
+-		vinldo01-supply = <...>;
+-		vinldo23-supply = <...>;
+-		vinldo4-supply = <...>;
+-		vinldo678-supply = <...>;
+-		vinldo9-supply = <...>;
+-
+-		regulators {
+-			sys_reg: sys {
+-				regulator-name = "vdd_sys";
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			sm0_reg: sm0 {
+-				regulator-min-microvolt = < 725000>;
+-				regulator-max-microvolt = <1500000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			sm1_reg: sm1 {
+-				regulator-min-microvolt = < 725000>;
+-				regulator-max-microvolt = <1500000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			sm2_reg: sm2 {
+-				regulator-min-microvolt = <3000000>;
+-				regulator-max-microvolt = <4550000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			ldo0_reg: ldo0 {
+-				regulator-name = "PCIE CLK";
+-				regulator-min-microvolt = <3300000>;
+-				regulator-max-microvolt = <3300000>;
+-			};
+-
+-			ldo1_reg: ldo1 {
+-				regulator-min-microvolt = < 725000>;
+-				regulator-max-microvolt = <1500000>;
+-			};
+-
+-			ldo2_reg: ldo2 {
+-				regulator-min-microvolt = < 725000>;
+-				regulator-max-microvolt = <1500000>;
+-			};
+-
+-			ldo3_reg: ldo3 {
+-				regulator-min-microvolt = <1250000>;
+-				regulator-max-microvolt = <3300000>;
+-			};
+-
+-			ldo4_reg: ldo4 {
+-				regulator-min-microvolt = <1700000>;
+-				regulator-max-microvolt = <2475000>;
+-			};
+-
+-			ldo5_reg: ldo5 {
+-				regulator-min-microvolt = <1250000>;
+-				regulator-max-microvolt = <3300000>;
+-			};
+-
+-			ldo6_reg: ldo6 {
+-				regulator-min-microvolt = <1250000>;
+-				regulator-max-microvolt = <3300000>;
+-			};
+-
+-			ldo7_reg: ldo7 {
+-				regulator-min-microvolt = <1250000>;
+-				regulator-max-microvolt = <3300000>;
+-			};
+-
+-			ldo8_reg: ldo8 {
+-				regulator-min-microvolt = <1250000>;
+-				regulator-max-microvolt = <3300000>;
+-			};
+-
+-			ldo9_reg: ldo9 {
+-				regulator-min-microvolt = <1250000>;
+-				regulator-max-microvolt = <3300000>;
+-			};
+-		};
+-	};
 
 -- 
 2.55.0
