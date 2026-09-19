@@ -1,71 +1,113 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A6F92C87F;
-	Sat, 19 Sep 2026 12:37:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E06F3B47C6
+	for <mfd@lists.linux.dev>; Sat, 19 Sep 2026 13:01:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789821441; cv=none; b=e7/iBYg2neC66B2qd9Er7vl+b2yv6zsCyilxsRUeYo3O+oMyQ+feeduGmKt/Bupqh/k8RILJxAeWbsJ4nExRUeMluhjLRvrBI8FWpDFYPJuEuPFl6DSG2sfxkUaUPfvI3dkF7R9DRa4cli4s/WFgldI9lC9nvY22xtoBM9cq3fs=
+	t=1789822903; cv=none; b=oU+0FqoBlGC+YxgKKmgR/x5Xus871/OU20VJYgHVE+VBo8vuWM0Kz3cCbYxR42Yno3KQ3xCBobhOLFL83wWpXz+L0b//gGAvqDNIPdkzYKM1HqUm5DbOqcbSNLxJgAUeQz9LKG1EGuy8z2iQWvA6MLwtTvB7JRHCtDAByT0qBXc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789821441; c=relaxed/simple;
-	bh=CudjOoiS0CN5wckAnmUNIAvsvwLoUc3xC2z4gGv7Sas=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=s78zU6gquoXW7N0oAmLQrJ0PUALCoIfol6MAoS7ipU8datLV6rWl4D/6RCshkTYAmagrwDmduj4nGy8Sfwvi8p3F+HjW44GoLPl6fgOKHNCtEwIVm7L2ukMrVbcPXZbii+ldv5fvpAr1JHp75eDtWVuWezIMsWwTm+ShTnXQNgo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=J8MwJpnx; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789822903; c=relaxed/simple;
+	bh=uA+HoBevpg+o3pjy8ENPdza6Bd76MyHGiCyS2GIOcHw=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=q8D1CfjrhuuIqBttZEYhr98mC/7LAqfoF3pKQvofKQIrRqOsauJldYK7pLIz9uXieSES/gAQQOQdkQvFLPCyqmvLD3GAsMx6KyLd3y+VWAAF/zVEaBLBaBkEdn8KI37WnWpBdEwwdHvRoqhIFHTCBbCS/Tv3UE4pJiaHYQ15o7Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=o3GQjlwm; arc=none smtp.client-ip=74.125.225.141
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="J8MwJpnx"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 806E51F000FF;
-	Sat, 19 Sep 2026 12:37:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789821439;
-	bh=CudjOoiS0CN5wckAnmUNIAvsvwLoUc3xC2z4gGv7Sas=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=J8MwJpnxpfTMPYQNJ0tPP3AW4WnISpBVuf/zD9hVvBn4URcekWHCPB5jjFvFR8Go+
-	 vnmjj1kW2gMk17yGwbgejIvaavqJo4IYFUd6SRIt64B1RW/LblqWzEVS/dW8GCGtYL
-	 /bW2pBsLwfddFNfQyKjT6T0+ZG2pQpyn6cVJt8vBaAhouDsp1YH0sUhYxvYgtXM4DW
-	 2gr196+DQIq2NH5CrQfifOGGok93eGHQadwFTpg0hyN3f8Y1Yj+eghnkr+v4pP0rTq
-	 0JxJ5tPHKLlQA+yeZuwfQHz8dZoIw83MrJxCzGH+thiPYoZWEAdXHwleIQg/uCQNP7
-	 pdlRgb88sPVRA==
-From: sashiko-bot@kernel.org
-Subject: Re: [RFC PATCH v2 3/3] arm64: dts: rockchip: fix power-off on
- Firefly-RK3399
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Yaozhong Li" <yaozhonguwl@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org, robh@kernel.org
-In-Reply-To: <20260919122930.1418-4-yaozhonguwl@gmail.com>
-References: <20260909092728.1859-1-yaozhonguwl@gmail.com>
- <20260919122930.1418-4-yaozhonguwl@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Sat, 19 Sep 2026 12:37:19 +0000
-Message-Id: <20260919123719.806E51F000FF@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="o3GQjlwm"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49e71cdb22bso12071465e9.2
+        for <mfd@lists.linux.dev>; Sat, 19 Sep 2026 06:01:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789822900; x=1790427700; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=uA+HoBevpg+o3pjy8ENPdza6Bd76MyHGiCyS2GIOcHw=;
+        b=o3GQjlwmKGr5WWDx2FFvP6SLUZFepRk6m5d0HwiCM/9Y1x9NBqMuJFNfkRQNheaAWg
+         zLCvT3t3Vgd1/8w3wzdy/rqobYerbwDElBwQ/sPsiEuZ8ge1jTvpGIjgv3znlyq8m4RC
+         DbWD+Ep2AO+f0YFOAAz4jEeW4CkRc5EojQevQFXbinYYl9AQqnEBiRTcg+n7Iozos2ZC
+         o7MNYkNOH+vE3OoTxIIIahVDnms9JOKNboBsfmuZb9WcAEU8Nw0GgWpQQBVFSp9FmA57
+         FmHkVstv/XnNNQZJTr0cpjnwVvu9yQtzp4NMhrVD5PI4na95mVsH0Otuwlo4q0Q6pDUt
+         xjqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789822900; x=1790427700;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=uA+HoBevpg+o3pjy8ENPdza6Bd76MyHGiCyS2GIOcHw=;
+        b=dSNg5Mp7lR0uF/cbda4ZX0ZDLvveoRSHeWSCFijB/rOntKXBlx4kz9M3Bnx7jV+5+g
+         PdjFkzUaCdK14/G354fig3D0miBb/cgLAfUe4h08QhAWLVXtHpubh+E7KDXnfhJHHXYD
+         EVEzvfl93Pw3Q4FzGaQV3sdEjYe+kf1v9Ubr5RCKSc19wPTydtEQKsrwopAeM+25eD5I
+         e1XE9cSiF3jvIsKrwqvlpBwfObEK2tzoddB5/JFtfst0qlL0kay5oeQgecUoZjWKmjub
+         eo6r4HjygCnLLDOtBcnk8mzVKv/bquthvBF9hSvc1Spwp1JQ7T3DLHeayOakIYeDtWGV
+         l9UQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxOMos28i35QdzfiymOKsXq7bHkWiffij9qsiYjSMFo+PyLpn49L8gL7xmGgzd5Fkea5QA=@lists.linux.dev
+X-Gm-Message-State: AFuF++n/n06UJl9sVmOLVN7Ht2YDau3tH/B4tPBM+VUwWJDo2V+KfR1y
+	JTzIV1/4kOk3VC6UWmNM+DvW5Kirv8IITPXs5bTr9NMTy3bh5UuaADAa
+X-Gm-Gg: AYBFou1lBQnbEMsdag21N7mR+yzaETBgJsCVWhEJQcpLBM+hK/rP+mYhpq1jyl9n6F4
+	00oATh0K3J6Gf443efksRuo32MPE4Wue8F54x4dhz03vEvT6vLWivRNf4ToljH/PHVkYs09XjD+
+	NJj49SgoH7YG6v0E+MfTUeQaSxixRjbG3xL5d5fOsnhSwG3LncS+wremi3aMeWWtcpj91VzZRGD
+	81mON9H+xdtx8RV6g2WdoPhpRpFNLLQP38Yq5GLRC3b3Zb6/A0DNt5JCysd7PRKNnavxfN83R5m
+	kGFnWLLfSL0c2sAVcjMFsMOAmGItkBqAJCIImVMbm8LoIKnIZpOnK2/grvVF8eFJ5bm8FVyZ+SV
+	qtS/s9AOywR+MHDiEvJlEtS1CjcAhxJNQ286NUXaRaxUC4ekgYn+8lygizWnDrp9fnTH+j+pHGv
+	8lRMyx3Pbx1oGRJ1/YemNqFQJVfYeRhI76QfeOxSawZc/LIbB5//EpCFC3WOGXvX5m1Be6mSWD+
+	JgEHpLL
+X-Received: by 2002:a05:600c:3b05:b0:49e:6249:268b with SMTP id 5b1f17b1804b1-49fc574194amr69801595e9.32.1789822899376;
+        Sat, 19 Sep 2026 06:01:39 -0700 (PDT)
+Received: from localhost.localdomain ([185.40.61.191])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-49fc52a5b6esm65037995e9.4.2026.09.19.06.01.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 19 Sep 2026 06:01:38 -0700 (PDT)
+From: Oleg Keri <okerixx@gmail.com>
+To: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
+	Lee Jones <lee@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Guru Das Srinagesh <linux@gurudas.dev>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	mfd@lists.linux.dev,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Dhruvin Rajpura <drajpura@qti.qualcomm.com>,
+	Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+	Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
+Subject: Re: [PATCH 0/6] mfd: qcom-pm8008: Add support for PM8010 over I2C
+Date: Sat, 19 Sep 2026 15:01:28 +0200
+Message-ID: <178982288839.2267.636188297415440296@gmail.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260918-pm8010_i2c_support-v1-0-de33d78fad9d@oss.qualcomm.com>
+References: <20260918-pm8010_i2c_support-v1-0-de33d78fad9d@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-> poweroff on this board drops the rails and immediately brings them back
-> up, so it reboots instead of staying off and U-Boot reports a power-on
-> reset.
->=20
-> Firefly's BSP drives GPIO1_D0 and GPIO1_B5 low during shutdown, before
-> writing the RK808's shutdown bit. Mainline does not describe GPIO1_D0 at
-> all, and describes GPIO1_B5 as the backlight enable GPIO - the vendor's
-> own backlight node has no enable GPIO. Nothing therefore releases either
-> line at power-off, and while the backlight owns GPIO1_B5 it can hold it
-> asserted, which is enough to make the board come back up on its own.
->=20
-> Describe both lines in the PMIC node and drop the backlight enable-gpios,
-> with the settle time the vendor uses.
->=20
-> Fixes: 171582e00db1 ("arm64: dts: rockchip: add support for firefly-rk339=
-9 board")
-> Signed-off-by: Yaozhong Li <yaozhonguwl@gmail.com>
+Hi Jishnu,
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+On Fri, Sep 18, 2026, Jishnu Prakash wrote:
+> PM8010 is the next generation PMIC following PM8008 and has similar
+> functionality, providing 7 LDOs that power camera sensors and associated
+> hardware, with some differences from PM8008 LDOs. The series also adds
+> support for skipping interrupt configurations which is needed to support
+> SoCs where the PMIC's interrupt pin is grounded, such as Glymur.
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260919122930.1418=
--1-yaozhonguwl@gmail.com?part=3D3
+For the series:
 
+Tested-by: Oleg Keri <okerixx@gmail.com> # Lenovo Yoga Slim 7x Gen 11 (Glymur)
+
+PM8010 at 0x8 on the camera CCI bus with no interrupt line, on
+next-20260918. The MFD and the regulator probe, L2, L4 and L7 power an
+ov08x40 and the camera streams with libcamera.
+
+Thanks,
+Oleg
