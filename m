@@ -1,87 +1,74 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4977F47799B
-	for <mfd@lists.linux.dev>; Sun, 20 Sep 2026 22:24:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E02DB488763;
+	Sun, 20 Sep 2026 23:17:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789943092; cv=none; b=bOi+8uQuUSzqPFo8SBKgixqr4Mj5gCB2/HKKLTyDGeCJu4n1jQYLTiECmr7TXhAqVbb+JockrHn4iSR3/0nm+GkrVTke8zslsisva6QVgPIxhWNTZbvpvOQWozu2fGulZr3p96cIU8IGWDFb/XbjQDfsELngMNSxpe4FdItZWA4=
+	t=1789946231; cv=none; b=Qkveexd84igVHmmDaq4hJUKBnP+sbpduD2Ysy8XUz8OFhSwfGOsmlEPRv+YSupYsd4dyzQ6m5if9+klmgspisrFl85M4iMQmNt0vaOPDk1sTZD6D5VBUWwfuvZip/6qDsiijIDNq8go12b8CFRubCBJvKEwlb5XN7oRyuG15GTA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789943092; c=relaxed/simple;
-	bh=WUPInYN4PL/yK9hW5R5yIfO87gDLK/c9FX+2yDiavu8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=dFMLzRAr2J5cWXZSF2JNUz9vho8vCKLPkFQ0vq/Flb2mOlii6elW3eg8MtUPcxq4IafstwNPYTuqsqwjHrbZsdKSS2p0yOecqduf7zCQQuA953GbL+LfJ6j0Z3LCkzUYf9FV04uVR4dsS/MWaH5bza+9e8w7eSLUlGlKLCYDVAs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bZdIrP5z; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789946231; c=relaxed/simple;
+	bh=uwQv+gsZQprnLWxIK7LbEhpURpn71iFDNKNtfyWgzUs=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=oFDXkOivZtS/LT5PbxBxGN9kAHqTsl4nwfvbbmCxeT0Ud28/qyDDfo2z3mRHj876TVuaqIsxShhiAcazXLYYKYqRHXml9YTnJX4mLfmhm71H7bYqL6J3GST88YPp4qZPUclqC+tdS/dod8gA1+fj6+UQrsTtJh6J03OqwATJX/k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KXchSqOM; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bZdIrP5z"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB7B31F0089E
-	for <mfd@lists.linux.dev>; Sun, 20 Sep 2026 22:24:50 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KXchSqOM"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A394B1F000FF;
+	Sun, 20 Sep 2026 23:17:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789943090;
-	bh=WUPInYN4PL/yK9hW5R5yIfO87gDLK/c9FX+2yDiavu8=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=bZdIrP5zvfwLap8QfgPC6COgqkkxn0Rp0hb4PQKz9GA5pE0+W/gBasPcsR/EvdFSt
-	 UXm6945/ajbswS+4XQ+4dx7fZeirRuIc+eZIGHIAumn/joKyaWlX0hyYa+o71uUG10
-	 AIdFA1c7JncyvouIlGceLHUvQwE3Cf+5H3xPuexO1N/xCbK2b8EjoGGNqBgV16XJTs
-	 MFWpLEeSjom1yw8Bz/I9F2JDOetHNwbGFCMbEnrt8GPy2HiXcaLxcva//65OIZKiBq
-	 C2P5cn1+tlcTLioHtUKEGVz/r7KfY7fmx+OnX+W2CU8cI5BaUMibP55Z3XY37kQhmZ
-	 ENLiItDcfxrmg==
-Received: by mail-lr2-f12.google.com with SMTP id 38308e7fff4ca-3a2ff00b8d8so19001981fa.1
-        for <mfd@lists.linux.dev>; Sun, 20 Sep 2026 15:24:50 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvByNK/OnxhpfdISBMh5d2BQl3Q9IDi7gab1A4nmA59hQj8cIAYoSfNv1613P2d472zK4VfM=@lists.linux.dev
-X-Gm-Message-State: AFuF++nfGlkJAOuR9zPHJkGXiRRgMMqMN894UYHMXpsBXVZyk+PD88BO
-	itUwPT2eDUno+JkU9/F/68rwQtgwzs4NPSyxAIa1tBinPdGgBk5vdr3TR5KaYJIxNi47FwZDlh0
-	v3gQQZqLRqMJkluEaHV7JUSfAkriGi1g=
-X-Received: by 2002:a05:6512:4023:b0:5b6:1a7c:fd96 with SMTP id
- 2adb3069b0e04-5b8c197532bmr2591380e87.60.1789943089466; Sun, 20 Sep 2026
- 15:24:49 -0700 (PDT)
+	s=k20260515; t=1789946229;
+	bh=iNmqXhGZZ3SwaOV8bqOvV8+pT+SPZVFh4wF6oc2IRlM=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=KXchSqOMRu6y0GF6EJYza2QP88aCzZmwup1XUPGrasdEXOhI6G7OJ14iaK1CWpkJs
+	 yqDplcxA/MrOg7wIZwopBhu4eSf0x2hW43ePFgdnb1T8ZMGX4KBu4ZJhbq905a+M2B
+	 /QZq8nTfycPwGGIPWRLsEmzwrLZwV0Mx2erm3tVKNSXQuHaPkO0J4Bk/KhqqPUr36b
+	 LQQTXQ+wRVrHLNYaYL5uxJlfha8588V9Hp1xwdIzVyqQGtskhuqi/Fwt0mI8+W6MiC
+	 nyvSs8D9Mn/PNqMjBa9q4p3DN9FDOlq1/cC3K9rnEI+ARfCKV/s3bGi8ip+Wjn8cPq
+	 k9TKIz31I3z4A==
+Date: Mon, 21 Sep 2026 00:17:02 +0100
+From: Jonathan Cameron <jic23@kernel.org>
+To: Ryan Brue <ryanbrue.dev@gmail.com>
+Cc: David Lechner <dlechner@baylibre.com>, Nuno =?UTF-8?B?U8Oh?=
+ <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Lee
+ Jones <lee@kernel.org>, linux-iio@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org,
+ mfd@lists.linux.dev, Roman Vivchar <rva333@protonmail.com>, Luca Leonardo
+ Scorcia <l.scorcia@gmail.com>, Andy Shevchenko
+ <andriy.shevchenko@intel.com>
+Subject: Re: [PATCH v3 0/3] iio: adc: add mt6397 PMIC AUXADC support
+Message-ID: <20260921001702.3a208780@jic23-hlaptop>
+In-Reply-To: <20260920-rbrue-suez-upstreaming-mt6397-auxadc-v3-0-c00edacbee64@gmail.com>
+References: <20260920-rbrue-suez-upstreaming-mt6397-auxadc-v3-0-c00edacbee64@gmail.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260915-cv75-v5-v7-0-3297d3fbc9c0@ambarella.com> <20260915-cv75-v5-v7-11-3297d3fbc9c0@ambarella.com>
-In-Reply-To: <20260915-cv75-v5-v7-11-3297d3fbc9c0@ambarella.com>
-From: Linus Walleij <linusw@kernel.org>
-Date: Mon, 21 Sep 2026 00:24:34 +0200
-X-Gmail-Original-Message-ID: <CAD++jLmbK8AHth2qQ6O-Yh8m4_8uKL1cJdNFqBjnP1ssUe3+Pw@mail.gmail.com>
-X-Gm-Features: AcwNN1WFNRVHMkwoIIIv3cjD7Ln9bstVj0LBZyLRdnKTtq0jQLXH6pVRP5eDyRQ
-Message-ID: <CAD++jLmbK8AHth2qQ6O-Yh8m4_8uKL1cJdNFqBjnP1ssUe3+Pw@mail.gmail.com>
-Subject: Re: [PATCH v7 11/15] gpio: pl061: add Ambarella register-layout variant
-To: longzhao@ambarella.com
-Cc: Arnd Bergmann <arnd@arndb.de>, Krzysztof Kozlowski <krzk@kernel.org>, 
-	Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev, 
-	linux-arm-kernel@lists.infradead.org, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Jerome Brunet <jbrunet@baylibre.com>, Bartosz Golaszewski <brgl@kernel.org>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jiri Slaby <jirislaby@kernel.org>, 
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
-	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
-	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Long Zhao <zl020895@163.com>, 
-	Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
-	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, 
-	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Tue, Sep 15, 2026 at 1:15=E2=80=AFPM Long Zhao via B4 Relay
-<devnull+longzhao.ambarella.com@kernel.org> wrote:
+On Sun, 20 Sep 2026 00:31:50 -0500
+Ryan Brue <ryanbrue.dev@gmail.com> wrote:
 
-> From: Long Zhao <longzhao@ambarella.com>
->
-> Add a 32-bit, 32-line layout with DAT/DIR/IS/IBE/IEV/IE/MIS/IC plus
-> MASK and ENABLE. Probe unmasks the bank and enables the controller.
-> IRQ type changes also clear the pending bit. This derivative does not
-> need write-after-direction or system suspend save/restore.
->
-> Match the part with designer AMBA_VENDOR_AMBARELLA (JEP106 identity
-> 0x68, bit 7 set) and part number 0x061.
->
-> Signed-off-by: Long Zhao <longzhao@ambarella.com>
+> The MediaTek mt6397 PMIC has a 10-bit AUXADC that nothing in-tree can
+> reach. On boards built around it that ADC is the only path to the battery:
+> the SoC's AUXADC is wired to board thermistors, and the charger ICs these
+> boards use have no ADC at all, so without it there is no pack voltage and
+> no state of charge.
 
-Reviewed-by: Linus Walleij <linusw@kernel.org>
+Hi Ryan,
 
-Yours,
-Linus Walleij
+Please slow down between new versions.  Unless a maintainer is specifically
+asking for a quick turn around (sometimes happen very late in a series) at
+least a week is typical time to allow multiple reviews to come in
+and hence save on effort all round.
+
+Jonathan
+
