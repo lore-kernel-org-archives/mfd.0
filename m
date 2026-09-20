@@ -1,190 +1,170 @@
-Received: from cstnet.cn (smtp21.cstnet.cn [159.226.251.21])
-	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 313103DE45A
-	for <mfd@lists.linux.dev>; Sun, 20 Sep 2026 07:36:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.226.251.21
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E62A73E5EC2
+	for <mfd@lists.linux.dev>; Sun, 20 Sep 2026 10:05:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789889808; cv=none; b=e3w5AQ44JIPMpPeBHIl68r2RqwiwydNdM+Ja1Rxpkf2KQhAkuBpOmZRKkXOf0B3KLQRIiGsNXOPdoExGRsA7Frobc6Lfk0nqZPZa1JK3o6fT2rf42HPQz/t60IX4/j2O3QnoEU81+mejnG80/pP5NFjJ3nPoKsUwuov9sx9UkrQ=
+	t=1789898710; cv=none; b=dQYT/BTOBM7YO4GFwMsjDkT0DdUa4XzitthGfPxaA5eA0WKxWNQ0sI60pjgE5RoPk2b5mGEcjxjmuCpYkUpr4Rj4sZSvqad1XkEKfJpmZDeaOODyrE+vVZLl5lMX8YeDyb1HXpQ2KRBU7brx2HtuvUikPlFOtbYj/EVM5gRanxs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789889808; c=relaxed/simple;
-	bh=GmCWKYdsAu1pOrg3q0i0TXq3UX1NjofE99nERVmE+bU=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=hH87MBYR/vk+y4ZfaRkp86k3JQk9ewrtqcWiY1R1PWDItgUyTbidgAkznaw9gXNcDKgnNSDc0JsEB1HJKZoqnbA8tCm4J1FQVBUpyiJnjHl3ShBOIuYUmCi34Uj01nKgpc1yeDifM14ExxTVveM99KJO77LUHP4WFzWkAAr+rCo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.21
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iscas.ac.cn
-Received: from edelgard.fodlan.icenowy.me (unknown [112.94.103.44])
-	by APP-01 (Coremail) with SMTP id qwCowACXbfHejK9q8PFxCA--.24571S2;
-	Sun, 20 Sep 2026 15:36:00 +0800 (CST)
-Message-ID: <cdb63b93c4a8857ac61b17902369086e9a278dd3.camel@iscas.ac.cn>
-Subject: Re: [PATCH v4 00/20] drm: starfive: jh7110: Enable display subsystem
-From: Icenowy Zheng <zhengxingda@iscas.ac.cn>
-To: Byron Stanoszek <gandalf@winds.org>, Michal Wilczynski
-	 <m.wilczynski@samsung.com>
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
- <neil.armstrong@linaro.org>,  Rob Herring <robh@kernel.org>, Krzysztof
- Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
- Andrzej Hajda <andrzej.hajda@intel.com>, Robert Foss <rfoss@kernel.org>,
- Laurent Pinchart	 <Laurent.pinchart@ideasonboard.com>, Jonas Karlman
- <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, Luca Ceresoli
- <luca.ceresoli@bootlin.com>, Maarten Lankhorst	
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, Lee Jones <lee@kernel.org>, Andy
- Yan <andy.yan@rock-chips.com>, Philipp Zabel	 <p.zabel@pengutronix.de>,
- Emil Renner Berthing <kernel@esmil.dk>, Hal Feng	
- <hal.feng@starfivetech.com>, Michael Turquette <mturquette@baylibre.com>, 
- Stephen Boyd <sboyd@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Paul
- Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
- <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,  Dominique
- Belhachemi	 <db@domibel.de>, Brian Masney <bmasney+clk@redhat.com>, Jerome
- Brunet	 <jbrunet+clk@baylibre.com>, linux-phy@lists.infradead.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org, mfd@lists.linux.dev,
- linux-clk@vger.kernel.org, 	linux-arm-kernel@lists.infradead.org,
- linux-rockchip@lists.infradead.org, 	linux-riscv@lists.infradead.org, Marek
- Szyprowski <m.szyprowski@samsung.com>,  Maud Spierings
- <maud_spierings@murena.io>, Graham Markall <hello@big-grey.co.uk>, Chaoyi
- Chen	 <chaoyi.chen@rock-chips.com>, Joshua Peisach <jpeisach@ubuntu.com>,
- Uwe =?ISO-8859-1?Q?Kleine-K=F6nig?=	 <u.kleine-koenig@baylibre.com>
-Date: Sun, 20 Sep 2026 15:35:58 +0800
-In-Reply-To: <b8b046ee-c574-3e16-6079-2fc415633dae@winds.org>
-References: 
-	<CGME20260915153213eucas1p148f013af239a334fc78cdc249c0f8a61@eucas1p1.samsung.com>
-	 <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
-	 <b8b046ee-c574-3e16-6079-2fc415633dae@winds.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
-User-Agent: Evolution 3.58.3 
+	s=arc-20240116; t=1789898710; c=relaxed/simple;
+	bh=PVtQgVmSpyfIu95EBVnFKjv5QM6juuMMqQmwaZS/fQA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=DPSDHtd5Tt6KG3w3Btol5QytQNYRSq99vIlYjHILKtlNyDbL762Sx+he7tq0gg/LObCOG6wQxKGBgJPSIj/xM/j74SYZJCfrFl4mrpXIndnln95Aye+lZJrPataEjK7UFZ0XLgCMXp3OX1YIx2bx/s43b+3Ce5sNxFKfiOaB2z8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oWBIbzhX; arc=none smtp.client-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oWBIbzhX"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9A721F0089F
+	for <mfd@lists.linux.dev>; Sun, 20 Sep 2026 10:05:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789898708;
+	bh=M7NZhpxBrkp8Vzpt1FhZ1vqtn7lpguc1OW9Ue/8E4VI=;
+	h=References:In-Reply-To:Reply-To:From:Date:Subject:To:Cc;
+	b=oWBIbzhXtymHbRL5PwQwT5FWNGGs8IXtkiIcpk1knJHMO7/gLmI+30eOv9l6E/7qf
+	 TlqXlfjla12uhy9qrykUEChWGrzFpoRUWk8a56MaRpkbWPxEQbG1OLyXY/+RtyA+wv
+	 isL/TnU8KzIvhqoVhbzm9IhsX70HHAKZGiuP5MbYzi1sQ2O1IxoKQQ6k81DGKqmU6A
+	 GLVVelQMEGqMoPqi5rSIXo/p8xG2XdIxGxPRAiPKd0wmn76j4Ob6iSPHmROvoxrgwH
+	 0P82uuTppu5lGfbv/RnphdCmRlAsd4y0516++K96bD52FwCmLaaQuX9RFjqfnOSfl0
+	 gVfg6u7FfeDjQ==
+Received: by mail-lr2-f12.google.com with SMTP id 38308e7fff4ca-3a2ff15fadfso8331291fa.0
+        for <mfd@lists.linux.dev>; Sun, 20 Sep 2026 03:05:08 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBy0BsI6AE9UnPNAbuMyqOXlOCNXm2kXjyGRLMT2cOVZdMw4njmGSlvmIQNkYKFNYSUQHuc=@lists.linux.dev
+X-Gm-Message-State: AFuF++kiUAkJIyuI2vntFNK406vHfy86JwHn9v7UkRnY1FP8RqaqZ2PB
+	eX+cMKJy0d+95s+7t5/az5NFm4iI27Bhv/xlOd6ERZ45BUX9ltBsGTjFnmaV4vclDfVXUznk91p
+	CBNT5wM4fxiMuTjwZzwaPic2flHiFU8s=
+X-Received: by 2002:a2e:b8c1:0:b0:3a6:d50:e26e with SMTP id
+ 38308e7fff4ca-3a60d50e441mr6927511fa.2.1789898707044; Sun, 20 Sep 2026
+ 03:05:07 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-X-CM-TRANSID:qwCowACXbfHejK9q8PFxCA--.24571S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3WF1Dtry3JrWxuw1fWFyDKFg_yoWxGr1fpr
-	18Jr1UGrW8Jr1kJw18Ar1UJry5Zr4UJw1UJr15GFyUA34UJw1jqr1UWr1YgFnrAr4kJr1U
-	Xr1UGrnxZF1DJw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUPKb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwV
-	C2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
-	0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr
-	1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4xvF2IEb7IF0Fy264kE64k0F24l
-	FcxC0VAYjxAxZF0Ex2IqxwACI402YVCY1x02628vn2kIc2xKxwCY1x0262kKe7AKxVWrXV
-	W3AwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v2
-	6r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Wrv_Gr1UMIIYrx
-	kI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v2
-	6r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8Jw
-	CI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJwCE64xvF2IEb7IF0Fy7YxBIdaVFxhVjvjDU
-	0xZFpf9x07bTTmDUUUUU=
-X-CM-SenderInfo: x2kh0wp0lqwv3d6l2u1dvotugofq/
+References: <20260910-axp318-regulator-v8-0-e906a61a7f3d@baylibre.com>
+In-Reply-To: <20260910-axp318-regulator-v8-0-e906a61a7f3d@baylibre.com>
+Reply-To: wens@kernel.org
+From: Chen-Yu Tsai <wens@kernel.org>
+Date: Sun, 20 Sep 2026 18:04:53 +0800
+X-Gmail-Original-Message-ID: <CAGb2v64zjCan5Up=bxJ_JfCcj2y=2=jNnM8buKQN2ULEA-82cA@mail.gmail.com>
+X-Gm-Features: AcwNN1X5_0H5ONYiyVVLAE5WEX7_3CXfPb5UokMjxFhKsOHjiWGm7bWqapkRcO8
+Message-ID: <CAGb2v64zjCan5Up=bxJ_JfCcj2y=2=jNnM8buKQN2ULEA-82cA@mail.gmail.com>
+Subject: Re: [PATCH v8 0/5] regulator: Add X-Powers AXP318W PMIC support
+To: Lee Jones <lee@kernel.org>
+Cc: Jerome Brunet <jbrunet@baylibre.com>, Andre Przywara <andre.przywara@arm.com>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+	Hans de Goede <hansg@kernel.org>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	mfd@lists.linux.dev, linux-sunxi@lists.linux.dev, 
+	Sashiko <sashiko-bot@kernel.org>, Conor Dooley <conor.dooley@microchip.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-5ZyoIDIwMjYtMDktMjDml6XnmoQgMDI6MDkgLTA0MDDvvIxCeXJvbiBTdGFub3N6ZWvlhpnpgZPv
-vJoKPiBPbiBUdWUsIDE1IFNlcCAyMDI2LCBNaWNoYWwgV2lsY3p5bnNraSB3cm90ZToKPiAKPiA+
-IFRoaXMgc2VyaWVzIGVuYWJsZXMgdGhlIGRpc3BsYXkgc3Vic3lzdGVtIG9uIHRoZSBTdGFyRml2
-ZSBKSDcxMTAuCj4gCj4gSGkgTWljaGFsLAo+IAo+IEkgdGVzdGVkIHlvdXIgdjQgcGF0Y2ggc2Vy
-aWVzIG9uIG15IFZpc2lvbkZpdmUyIDEuM0Igd2l0aCBrZXJuZWwgNy4zLQo+IHJjMyB0b2RheQo+
-IGFuZCBpdCB3b3JrcyB2ZXJ5IHdlbGwsIGV4Y2VwdCBmb3IgMiBpc3N1ZXMuIE5vdGUsIHRvIG1h
-a2UgdGhlIHNjcmVlbgo+IHJlZnJlc2gKPiBwcm9wZXJseSwgSSBhbSB1c2luZyB0aGUgbm9uY29o
-ZXJlbnQgY2FjaGUgZml4ZXMgZnJvbQo+IGh0dHBzOi8vZ2l0aHViLmNvbS9nYW5ib2luZy1qaDcx
-MTAvbGludXgvY29tbWl0cy9nYW5ib2luZy1qaDcxMTAtY2FjaGUtZml4LXYxLwo+IChzcGVjaWZp
-Y2FsbHkgY29tbWl0cyAzNjgzZDk3LCBlZjkzZTJjLCAyNzdkYjBiLCBhbmQgMjZjZTNlNikgaW4K
-PiBhZGRpdGlvbiB0bwo+IHlvdXIgcGF0Y2guCj4gCj4gSXNzdWUgMTogSSBoYXZlIGEgRGVsbCBV
-MjcxMSBtb25pdG9yIHdoaWNoIGhhcyBsaW1pdGVkIEhETUkgMS4zCj4gY2FwYWJpbGl0eSwgc28K
-PiBJIGludmVudGVkIG15IG93biBYb3JnIG1vZGUgdG8gZ2V0IGEgZ29vZCBmcmFtZSByYXRlOgo+
-IAo+ICIyNTYweDE0NDBfNDAuMjIiwqAgMTYyLjAwwqAgMjU2MCAyNjA4IDI2NDAgMjcyMMKgIDE0
-NDAgMTQ0MyAxNDQ4IDE0ODEKPiAraHN5bmMgLXZzeW5jCj4gCj4gV2l0aCB0aGlzIG1vZGUgYW5k
-IHlvdXIgbmV3IGRyaXZlciwgSSBzdGFydGVkIGdldHRpbmcgcm93cyBvZiBibGFjawo+IHBpeGVs
-cwo+IGZsaWNrZXJpbmcgaW4gdGhlIHVwcGVyLWxlZnQgY29ybmVyIG9mIG15IExDRCBzY3JlZW4u
-IFRoZXNlIHdlcmVuJ3QKPiB0aGVyZSBiYWNrCj4gd2hlbiBJIHdhcyBydW5uaW5nIHRoZSBzYW1l
-IG1vZGUgdW5kZXIgdGhlIEtlaXRoIFpoYW8gZHJpdmVyIGZyb20KPiBTdGFyRml2ZQo+IChkcm0v
-dmVyaXNpbGljb24gdjUgcGx1cyBhIGJ1bmNoIG9mIHBhdGNoZXMgZm9yIGRtYSBjYWNoZSBjb2hl
-cmVuY3kpCj4gKAo+IGh0dHBzOi8vcGF0Y2h3b3JrLmtlcm5lbC5vcmcvcHJvamVjdC9kcmktZGV2
-ZWwvY292ZXIvMjAyNDExMjAwNjE4NDguMTk2NzU0LTEta2VpdGguemhhb0BzdGFyZml2ZXRlY2gu
-Y29tCj4gLykuCj4gCj4gVGhlIGdsaXRjaGVzIEkgc2F3IHN1Z2dlc3RlZCB0aGUgc3luYyBwb2xh
-cml0eSB3YXMgYmVpbmcgc2V0Cj4gaW5jb3JyZWN0bHk7IHRoZQo+IG51bWJlciBvZiBnbGl0Y2hl
-ZCByb3dzIHdhcyBleGFjdGx5IHRoZSB2c3luYyBwdWxzZSB3aWR0aCBwbHVzIDEKPiAoaS5lLgo+
-ICIxNDQwIDE0NDMgMTQ0OCAxNDgxIiBwcm9kdWNlZCA2IGJhZCByb3dzLCAiMTQ0MCAxNDQzIDE0
-NTYgMTQ4MSIKPiBwcm9kdWNlZCAxNCwKPiAiMTQ0MCAxNDQxIDE0NDIgMTQ4MSIgcHJvZHVjZWQg
-MiwgYW5kIHNvIGZvcnRoKS4KPiAKPiBJIGRpZCBhIHJlZ2lzdGVyIGR1bXAgYmV0d2VlbiB0aGUg
-dHdvIGRyaXZlcnMgYW5kIGZvdW5kIHRoYXQsCj4gYWx0aG91Z2ggdGhlCj4gREM4MjAwIEhTWU5D
-IGFuZCBWU1lOQyByZWdpc3RlcnMgd2VyZSBpZGVudGljYWwgYmV0d2VlbiB0aGUgdHdvCj4gdmVy
-c2lvbnMsIHRoZQo+IGhzeW5jIGFuZCB2c3luYyBiaXRzIG9uIHRoZSBpbm5vIGhkbWkgdHggd2Vy
-ZSBzd2FwcGVkIGJldHdlZW4gdGhlCj4gdHdvLiBXaGVuIEkKPiBtYW51YWxseSBzZXQgdGhlIFZJ
-REVPX1RJTUlOR19DVEwgcmVnaXN0ZXIgZnJvbSAweDA5IHRvIDB4MDUKPiAobWF0Y2hpbmcgdGhl
-Cj4gb3V0cHV0IG9mIEtlaXRoJ3MgZHJpdmVyKSwgdGhlIGdsaXRjaGVzIHdlbnQgYXdheS4KPiAK
-PiBLZWl0aCBaaGFvIGRyaXZlcjoKPiAKPiA9PT0gREM4MjAwIGRpc3BsYXkgMCA9PT0KPiBEQ8Kg
-wqAgUEFORUxfQ09ORklHwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAweDE0MTggPSAweDAw
-MDAxMTExCj4gREPCoMKgIEhTSVpFwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIDB4MTQzMCA9IDB4MEFBMDBBMDAKPiBEQ8KgwqAgSFNZTkPCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMHgxNDM4ID0gMHg0NTI4MEEzMAo+IERDwqDCoCBW
-U0laRcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAweDE0NDAgPSAw
-eDA1QzkwNUEwCj4gREPCoMKgIFZTWU5DwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgIDB4MTQ0OCA9IDB4QzJENDA1QTMKPiBEQ8KgwqAgRFBJX0NPTkZJR8KgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDB4MTRCOCA9IDB4MDAwMDAwMDUKPiBEQ8KgwqAgRkJf
-Q09ORklHwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAweDE1MTggPSAweDE0MDAw
-MDAwCj4gREPCoMKgIEZCX0FERFJFU1PCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAw
-eDE0MDAgPSAweDcxMjAwMDAwCj4gREPCoMKgIEZCX1NUUklERcKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgMHgxNDA4ID0gMHgwMDAwMjgwMAo+IERDwqDCoCBGQl9TSVpFwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMHgxODEwID0gMHgwMkQwMEEwMAo+IERD
-wqDCoCBGQl9DT05GSUdfRVjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDB4MUNDMCA9IDB4
-MDAwMDIwMDAKPiBEQ8KgwqAgUEFORUxfU1RBUlTCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqAgMHgxQ0NDID0gMHgwMDAwMDAwMQo+IERDwqDCoCBEUF9DT05GSUfCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgIDB4MUNEMCA9IDB4MDAwMDAwMEEKPiBEQ8KgwqAgRkJfV0FURVJf
-TUFSS8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDB4MUNFOCA9IDB4MDAwMDAwMDAKPiBEQ8Kg
-wqAgUEFORUxfQ09ORklHX0VYwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAweDI1MTggPSAweDAwMDAw
-MDAwCj4gCj4gPT09IElOTk8gSERNSSBUWCB2aWRlbyB0aW1pbmcgPT09Cj4gSERNSSBWSURFT19U
-SU1JTkdfQ1RMwqDCoMKgwqDCoMKgwqDCoMKgwqAgMHgwOMKgwqAgPSAweDA1Cj4gSERNSSBFWFRf
-SFRPVEFMX0zCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDB4MDnCoMKgID0gMHhBMAo+IEhE
-TUkgRVhUX0hUT1RBTF9IwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAweDBBwqDCoCA9IDB4
-MEEKPiBIRE1JIEVYVF9IQkxBTktfTMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMHgwQsKg
-wqAgPSAweEEwCj4gSERNSSBFWFRfSEJMQU5LX0jCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-IDB4MEPCoMKgID0gMHgwMAo+IEhETUkgRVhUX0hERUxBWV9MwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoCAweDBEwqDCoCA9IDB4NzAKPiBIRE1JIEVYVF9IREVMQVlfSMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgMHgwRcKgwqAgPSAweDAwCj4gSERNSSBFWFRfSERVUkFUSU9OX0zCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgIDB4MEbCoMKgID0gMHgyMAo+IEhETUkgRVhUX0hEVVJBVElPTl9I
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAweDEwwqDCoCA9IDB4MDAKPiBIRE1JIEVYVF9WVE9UQUxf
-TMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMHgxMcKgwqAgPSAweEM5Cj4gSERNSSBFWFRf
-VlRPVEFMX0jCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDB4MTLCoMKgID0gMHgwNQo+IEhE
-TUkgRVhUX1ZCTEFOS8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDB4MTPCoMKgID0g
-MHgyOQo+IEhETUkgRVhUX1ZERUxBWcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDB4
-MTTCoMKgID0gMHgyNgo+IEhETUkgRVhUX1ZEVVJBVElPTsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIDB4MTXCoMKgID0gMHgwNQo+IAo+IFlvdXIgZHJpdmVyIChzaG93aW5nIG9ubHkgdGhlIGNo
-YW5nZWQgdmFsdWVzKToKPiAKPiBEQ8KgwqAgRFBfQ09ORklHwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoCAweDFDRDAgPSAweDAwMDAwMDAwCj4gREPCoMKgIFBBTkVMX0NPTkZJR19F
-WMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMHgyNTE4ID0gMHgwMDAwMDAwMQo+IEhETUkgVklERU9f
-VElNSU5HX0NUTMKgwqDCoMKgwqDCoMKgwqDCoMKgIDB4MDjCoMKgID0gMHgwOQo+IAo+IFNwZWNp
-ZmljYWxseSB0aGUgYml0I3MgYXJlIGRpZmZlcmVudCBiZXR3ZWVuIHRoZSB0d28gZHJpdmVyczoK
-PiAKPiBpbm5vX2hkbWktc3RhcmZpdmUuaCAoS2VpdGggWmhhbyk6wqDCoMKgwqAgaW5uby1oZG1p
-LmMgKGdlbmVyaWMpOgo+IMKgwqAgdl9IU1lOQ19QT0xBUklUWV9TRihuKcKgICgobikgPDwgMinC
-oMKgwqDCoCB2X0hTWU5DX1BPTEFSSVRZwqAgYml0IDMKPiDCoMKgIHZfVlNZTkNfUE9MQVJJVFlf
-U0YobinCoCAoKG4pIDw8IDMpwqDCoMKgwqAgdl9WU1lOQ19QT0xBUklUWcKgIGJpdCAyCj4gCj4g
-Il9TRiIgc3VnZ2VzdHMgdGhpcyBjaGFuZ2UgaXMgc3BlY2lmaWMgdG8gU3RhckZpdmUuIFRoZSBj
-b3JyZWN0Cj4gcG9zaXRpb25zIGFyZQo+IEhTWU5DPWJpdCAyIGFuZCBWU1lOQz1iaXQgMyBmb3Ig
-dGhlIEpINzExMC4KCkluIGZhY3QgaXQncyBub3QgU0Ygc3BlY2lmaWMsIFsxXSBwZy4xMyAoZnVs
-bCBtYW51YWwgcGFnZSA5NzkpIGFsc28Kc2hvd3MgdGhlIHNhbWUgZm9yIFJLLgoKSXQgY291bGQg
-YmUgYW4gZXJyb3IgZnJvbSBSb2NrY2hpcCBkZXZlbG9wZXJzIHNpbmNlIHRoZSBiZWdpbm5pbmcu
-CgpbMV0KaHR0cHM6Ly9naXRodWIuY29tL0RlY2lIRC9yb2NrY2hpcF9kb2NzL2Jsb2IvbWFpbi9y
-azMxMjgvVFJNLWNoYXB0ZXItMjQtaGRtaS10eC5wZGYKClRoYW5rcywKSWNlbm93eQoKPiAKPiBJ
-J20gZ3Vlc3NpbmcgdGhhdCB5b3VyIDQyLW1vZGUgdGVzdCBwYXNzZWQgYmVjYXVzZSBtb3N0IENF
-QSBtb2RlcyBhcmUKPiAraHN5bmMKPiArdnN5bmMsIGFuZCB0aGlzIHdvdWxkbid0IHNob3cgYW55
-IGRpZmZlcmVuY2UgaWYgdGhlIHR3byBiaXRzIHdlcmUKPiB0cmFuc3Bvc2VkLgo+IAo+IE9uY2Ug
-dGhlIHN5bmMgcG9sYXJpdHkgaXMgc29ydGVkLCBJJ2QgYmUgaGFwcHkgdG8gZ2l2ZSBhIFRlc3Rl
-ZC1ieToKPiBvbiB0aGUKPiBzZXJpZXMuCj4gCj4gwqAgLS0KPiAKPiBJc3N1ZSAyOiBUaGlzIGlz
-IG1vcmUgYSBmZWF0dXJlIHJlcXVlc3QgdGhhbiBhbiBpc3N1ZS4gT3JpZ2luYWxseSwgSQo+IHRy
-aWVkCj4gcnVubmluZyB0aGlzIFhvcmcgbW9kZWxpbmUsIHdoaWNoIHdvcmtlZCB3ZWxsIHVuZGVy
-IEtlaXRoJ3MgZHJpdmVyOgo+IAo+ICIyNTYweDE0NDBfNDkuOTAiwqAgMjAxLjAwwqAgMjU2MCAy
-NjA4IDI2NDAgMjcyMMKgIDE0NDAgMTQ0MyAxNDQ4IDE0ODEKPiAraHN5bmMgLXZzeW5jCj4gCj4g
-SG93ZXZlciwgeW91ciBkcml2ZXIgd291bGQgbm90IGFjY2VwdCB0aGlzIHBpeGVsIGNsb2NrLiBJ
-IHRoZW4KPiBub3RpY2VkIHlvdSBoYXZlCj4gYSBwcmUtUExMIHRhYmxlIG9mIGZpeGVkIGNsb2Nr
-cy4gSXMgdGhlcmUgYW55IGNoYW5jZSB5b3UgY2FuIGNoYW5nZQo+IHRoZSBjb2RlIHRvCj4gY29t
-cHV0ZSB0aGUgcHJlLVBMTCBvbiB0aGUgZmx5IGxpa2UgaG93IEtlaXRoIGRvZXMgaXQsIHJhdGhl
-ciB0aGFuCj4gdXNlIGEgdGFibGU/Cj4gCj4gVGhhbmtzIGZvciBhbGwgeW91ciBncmVhdCB3b3Jr
-IQo+IAo+IEJlc3QgcmVnYXJkcywKPiDCoCAtQnlyb24KPiAKPiAKPiBfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+IGxpbnV4LXJpc2N2IG1haWxpbmcgbGlz
-dAo+IGxpbnV4LXJpc2N2QGxpc3RzLmluZnJhZGVhZC5vcmcKPiBodHRwOi8vbGlzdHMuaW5mcmFk
-ZWFkLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbnV4LXJpc2N2Cg==
+Hi Lee,
 
+On Thu, Sep 10, 2026 at 6:44=E2=80=AFPM Jerome Brunet <jbrunet@baylibre.com=
+> wrote:
+>
+> This patch series adds support for the X-Powers AXP318W PMIC, which is
+> used recently on new boards with Allwinner SoCs (the A733).
+>
+> The PMIC features 9 DCDC buck converters and 28 LDOs, plus the usual ADC,
+> interrupts, and power key components.
+> A datasheet can be found linked in this Wiki table:
+> https://linux-sunxi.org/AXP_PMICs
+>
+> There was an unclosed topic regarding the handling of LDOs output
+> voltage being limited to input voltage being provided by the supply.
+> Chen-Yu noted the min_dropout_uV would be a good fit for that but
+> the actual minimal dropout value was unknown. I've arbitrarily picked
+> 1uV because it is the minimum the framework supports. Realistically a low
+> dropout regulator is bound to have some dropout. This choice does the
+> trick for now and is certain be less restrictive than what it is in
+> reality.
+>
+> If anyone has problems because the dropout is actually higher
+> * it is arguably an HW design error
+> * it is a good time to let us know what the actual dropout is
+>
+> Changes in v8:
+> - Fix interrupt optional in the binding (mis-understanding on my end)
+>   Resent quickly to avoid wasting time on v7 over this
+> - Link to v7: https://patch.msgid.link/20260910-axp318-regulator-v7-0-de7=
+20ceb9bac@baylibre.com
+>
+> Changes in v7:
+> - Rebased on v7.3-rc1.
+> - Applied Chen-Yu change requests.
+>   - More complete register definition all in the MFD change.
+>   - Add writeable region holes.
+>   - Fix invertion between short and long press IRQ.
+>   - Drop confusing comment about DVM.
+>   - Use MFD_CELL_NAME() for the regulator device.
+> - Link to v6: https://patch.msgid.link/20260812-axp318-regulator-v6-0-d6b=
+84b55c000@baylibre.com
+>
+> Changes in v6:
+> - Apply wording suggestions from Chen-Yu
+> - Link to v5: https://patch.msgid.link/20260720-axp318-regulator-v5-0-a1a=
+fa7ee24f9@baylibre.com
+>
+> Changes in v5:
+> - Fix shutdown register offset
+> - Re-order patches to put fixes first
+> - Tighten DT regexp around swout
+> - Other points raised by Sashiko on v4 are unrelated to the addition
+>   of the AXP318 support and pre-exist the series. They are not
+>   addressed ATM.
+> - Link to v4: https://patch.msgid.link/20260717-axp318-regulator-v4-0-50a=
+ff97084dd@baylibre.com
+>
+> Changes in v4:
+> - Capitalize patch 3 title
+> - regulator: add support for workmode and poly-phase.
+> - i2c: fix probe through i2c sysfs
+> - Link to v3: https://patch.msgid.link/20260717-axp318-regulator-v3-0-779=
+dc1b97dd4@baylibre.com
+>
+> Changes in v3:
+> - Correct mess up v2 errors regarding ops and ids.
+> - Correctly propagate errors when checking axp318 threshold.
+> - Fix DT binding regex regarding dcdc max ids
+> - Add missing RTCLDO.
+> - Remove axp318 PEK MFD cell:
+>   As pointed out by sashiko, the driver name did not match anything in th=
+e
+>   pek driver. While the device does support some handling of the power
+>   button, it does not seem to match the existing driver. Register 0x36
+>   relates to DLDO3, not the power key, as expected by the misc driver.
+>   Leave this out for now.
+> - Constify axp313 and axp717 mfd_cells array for consistency.
+> - Link to v2: https://patch.msgid.link/20260710-axp318-regulator-v2-0-ee5=
+f1c56b49f@baylibre.com
+>
+> Changes in v2:
+> - Dropped _NUM_VOLTAGES macros
+> - Use min_dropout_uV to limit LDO voltage to supplies
+> - Add bypass mode for EDLO4/5
+> - Prevent crossing 1.54V threshold for DCDC6/7/8/9
+> - Link to v1: https://lore.kernel.org/r/20251021112013.2710903-1-andre.pr=
+zywara@arm.com
+>
+> ---
+> Andre Przywara (3):
+>       dt-bindings: mfd: x-powers,axp152: Document AXP318W
+>       mfd: axp20x: Add support for AXP318W PMIC
+>       regulator: axp20x: add support for the AXP318W
+>
+> Jerome Brunet (2):
+>       mfd: axp20x: Constify axp313 and axp717 cells
+>       mfd: axp20x-i2c: Fix i2c instantiation
+
+I think this series is ready to be merged. Mark gave his reviewed-by for
+the regulator patch, which IIRC he said acks the patch to go through
+another tree.
+
+So please merge the whole series through the mfd tree.
+
+
+Thanks
+ChenYu
