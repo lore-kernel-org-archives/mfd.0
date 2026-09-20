@@ -1,121 +1,59 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80E603AE706;
-	Sun, 20 Sep 2026 05:49:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED87A35C19B;
+	Sun, 20 Sep 2026 05:54:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789883393; cv=none; b=LZ6cSGT3+rQqPa7TYv5aphOnySUuxnr8Re2xVkKDMaNOiG3z6vs5U+pmRh/jmmnMPLFAV6yfmuxWUYvCNpQSXWGYntggkl2gZcPvVdkljwpy3cU1v+yxgbcJOOXrD1Dp93pQgoHrnFTA1S4TF4Xh/XV2GX12HN60daUdy/XqyV8=
+	t=1789883673; cv=none; b=poCC5A5c8rTOQlKrxBUNKi/VlzPSAWzN33tMXky7Yop6kYW16KFNWwVa2R044hZ+tEqIwyyq2WJSD8zcUaRYeEjxAg1jNpaoXnxNK6zxlUdO5hihDAhLG41UH9PANzlMSlAvBC8HQqV1F0VQghWX/awZbG7WTaKoU6KnqK3MHM4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789883393; c=relaxed/simple;
-	bh=PRg30yh/paj0sG4qbPJcP/6xQk59t7uYoqPPFSsMU1Y=;
+	s=arc-20240116; t=1789883673; c=relaxed/simple;
+	bh=so5wOo52EZzLRNAekkIumlha0vlg5X3ViGU2vsMfpcs=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=N6t3AtoojeUEk1tqTw3juy2XdiwNxR++TMhhDdsStC+7/amDWklas29cscNdGtG4Lgcrv8nOeHx3Ymakx/PxCjMw5RCj3tt/2Rt6C6AOHQxM0pq9yoMp90pvB024pEZn3FHbFpr2e2n7XPbL+S95wg8rpn9nvImuegYtOeKGtio=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=djjjVCJm; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=J1AGQ76chkHe4F8OYvk8O8GAx8leoDSh70muRNLD6HEbKMaxCcJCDQUdq1mrl+C0xYJO0khWZNXr02tcqUY5Wp0WZ2nEF8BIEsMAQqgWV4dPivV2afwMW3aL9daS68OlR6CQa3LlWzMlBx2h9ZO1NW/W+unbuMGz/Ewz4R7cV9o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PQYhD6ot; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="djjjVCJm"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A94E1F000FF;
-	Sun, 20 Sep 2026 05:49:50 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PQYhD6ot"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1A76D1F000FF;
+	Sun, 20 Sep 2026 05:54:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789883391;
-	bh=C8aYHwyoGgEnVMcmsM/OeiYq1QCkwc6fitChj13TuT0=;
+	s=k20260515; t=1789883672;
+	bh=so5wOo52EZzLRNAekkIumlha0vlg5X3ViGU2vsMfpcs=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=djjjVCJm/vH14/tcZctx/L4POACpAdlZDZdy/cto3hjEde/B3h6uNkSVr6fEMZbRT
-	 dSp8Q7rKtvUqpl38ZgADURDM9fxPofgbI65JG8WAKvm2I67ezQSinrq39bo1DkRVGR
-	 k8QYgDcDZ/oK1gGb8zDm9kEngdMz36R1OTq9A4wv+BEXN6+rbakm1AN28Hzc3tZnK7
-	 olouGMVoSkWJu5ghbB2ERHQtDAOxSZNI9r9Ky/r/+mbaXalJX0KwJcrvDu3ad8+jXs
-	 73+EBbLFvQhDtIDwIKVqs8YNHBxVBWjsJw/91TPK8csfgQ8+Y/z9KtT55IjPm9P5kJ
-	 LyCW5fv3HwoLA==
+	b=PQYhD6otZIzJCQYjlpQHzxcOkoH75EbYaboOe+GVxTsqBRL8un9CRcmzbM67+jOlP
+	 3rJZGkmUgCZ4O57vxpXnOBlRzzrToByRlm71BM7sFzvKgj2/XIgj+5o6ELQLTMQRIg
+	 nBfqKDwGziaMJrzYkXfWlEhrB6iJBZ3tKxz+PTIuogJi4qepfZUlEVVagK5j/u/I1j
+	 oelCsjaIh9fU1+uisJmbKDYVLbLPxn/aQ5M7kixfCJBlBCZ2CAjRc9DbBZidVf5CjF
+	 wQup8G0dDQrMiUnd/3D8b9sv+SxrBahp3lfK0aD80FYxQwtTszZ2UApWMFbe+UP17G
+	 jTwzNE/vUp0dQ==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 2/3] iio: adc: mt6397-auxadc: add mt6397 PMIC AUXADC
- driver
+Subject: Re: [PATCH v3 3/3] mfd: mt6397-core: Add mt6397 AUXADC support
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Ryan Brue" <ryanbrue.dev@gmail.com>
-Cc: lee@kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev, robh@kernel.org, conor+dt@kernel.org
-In-Reply-To: <20260920-rbrue-suez-upstreaming-mt6397-auxadc-v3-2-c00edacbee64@gmail.com>
+Cc: mfd@lists.linux.dev, conor+dt@kernel.org, lee@kernel.org, devicetree@vger.kernel.org, robh@kernel.org
+In-Reply-To: <20260920-rbrue-suez-upstreaming-mt6397-auxadc-v3-3-c00edacbee64@gmail.com>
 References: <20260920-rbrue-suez-upstreaming-mt6397-auxadc-v3-0-c00edacbee64@gmail.com>
- <20260920-rbrue-suez-upstreaming-mt6397-auxadc-v3-2-c00edacbee64@gmail.com>
+ <20260920-rbrue-suez-upstreaming-mt6397-auxadc-v3-3-c00edacbee64@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Sun, 20 Sep 2026 05:49:50 +0000
-Message-Id: <20260920054950.9A94E1F000FF@smtp.kernel.org>
+Date: Sun, 20 Sep 2026 05:54:31 +0000
+Message-Id: <20260920055432.1A76D1F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
-- [Medium] iio: adc: early return on regmap error abandons hardware teardown
---
+> The mt6397 PMIC includes an AUXADC. Register the AUXADC in the mt6397
+> devices array to allow the corresponding driver to probe using compatible
+> string.
+>=20
+> Assisted-by: LLM
+> Signed-off-by: Ryan Brue <ryanbrue.dev@gmail.com>
 
-commit 7889b991ac3807eea04917eed3e7986efc9451b3
-Author: Ryan Brue <ryanbrue.dev@gmail.com>
-
-iio: adc: mt6397-auxadc: add mt6397 PMIC AUXADC driver
-   =20
-The mt6397 AUXADC is a 10-bit ADC behind the SoC's PMIC wrapper. On boards
-built around this PMIC it is the only way to read the battery. Add a driver
-exposing the battery voltage and battery temperature channels.
-
-> diff --git a/drivers/iio/adc/mt6397-auxadc.c b/drivers/iio/adc/mt6397-aux=
-adc.c
-> new file mode 100644
-> index 0000000000000..d860cd3a89227
-> --- /dev/null
-> +++ b/drivers/iio/adc/mt6397-auxadc.c
-
-[ ... ]
-
-> +static int mt6397_auxadc_battemp_bias_off(struct mt6397_auxadc *adc)
-> +{
-> +	struct regmap *map =3D adc->regmap;
-> +	int ret;
-> +
-> +	ret =3D regmap_clear_bits(map, MT6397_CHR_CON7, MT6397_CHR_CON7_BATON_T=
-DET_EN);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret =3D regmap_clear_bits(map, MT6397_AUXADC_CON0, MT6397_AUXADC_CON0_B=
-UF_PWD_B);
-> +	if (ret)
-> +		return ret;
-> +
-> +	return regmap_clear_bits(map, MT6397_AUXADC_CON0,
-> +				 MT6397_AUXADC_CON0_BUF_PWD_ON);
-> +}
-
-[Severity: Medium]
-Does returning early here abandon the hardware teardown? If clearing
-MT6397_CHR_CON7 fails, the MT6397_AUXADC_CON0 bias buffers will remain
-enabled. Since the caller relies on this function to provide unconditional
-teardown even if earlier steps failed, should this function continue and
-attempt to clear the remaining bits regardless of an error?
-
-[ ... ]
-
-> +static int mt6397_auxadc_isense_disable(struct mt6397_auxadc *adc)
-> +{
-> +	struct regmap *map =3D adc->regmap;
-> +	int ret;
-> +
-> +	ret =3D regmap_clear_bits(map, MT6397_AUXADC_CON14,
-> +				MT6397_AUXADC_CON14_CH0_NORM_SEL |
-> +				MT6397_AUXADC_CON14_CH0_LBAT_SEL);
-> +	if (ret)
-> +		return ret;
-> +
-> +	return regmap_clear_bits(map, MT6397_CHR_CON16,
-> +				 MT6397_CHR_CON16_ADCIN_VSEN_EN |
-> +				 MT6397_CHR_CON16_ADCIN_VBAT_EN);
-> +}
-
-[Severity: Medium]
-Similarly, does returning early here prevent MT6397_CHR_CON16 from being
-cleared if updating MT6397_AUXADC_CON14 fails?
+Sashiko has reviewed this patch and found no issues. It looks great!
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260920-rbrue-suez=
--upstreaming-mt6397-auxadc-v3-0-c00edacbee64@gmail.com?part=3D2
+-upstreaming-mt6397-auxadc-v3-0-c00edacbee64@gmail.com?part=3D3
+
