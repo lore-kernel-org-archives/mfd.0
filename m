@@ -1,81 +1,58 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4515739D6E5;
-	Mon, 21 Sep 2026 23:27:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 505B74756BB;
+	Mon, 21 Sep 2026 23:31:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790033238; cv=none; b=JsO3CpsNL90Kl9+cGp6AnR0T7SqhqkVZU0u47XDwEJa1Vb1wNhapLscEoFFfW4RtAdJm59/4c4qIIdyfHprOYMSGkPW7gDCIP4ZGIzDRiF8kvhV6PJSitTK5qbywMh+o6WQ2+s4JC/uj/4EDhWo3I7uxzki8rVJ3psnu392mpOg=
+	t=1790033513; cv=none; b=RQO1yjwR0lNFce9wFPkvHUN67FtCnp5L2NFLN9yJMM9KIToQ6L9PnEFNvQW60m6owZuJ0edfbObNq4z9z+EDUUZY1yEHIvRmSvug3nLqlIJxa3uelu3vcWySs97L6MLDsKIXRxycFMwUT556PUapqgYwxGdNllLbYUH1PR7pyho=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790033238; c=relaxed/simple;
-	bh=Ao357iwZSA3eUXiCfHYj01nU93jGSa6IpSAQ/lvIjH4=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=f3TYD/5eXqNQEOfrHmiHbloxq2ex0FAcw/DJUZEwqH+Df52Uuih1Tvw3ZqnJGIlhnrUWucawpfpqmzDPkHGh0ucgCCYZgLngRuNlS661lFXAWx9AdoyZo/DD3jh7mb9X9TuwGsET3X3QtkXeNLSVXy68ycL80P8jLSNVSac5svw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QF0U6e5U; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790033513; c=relaxed/simple;
+	bh=jHfgA3tNHMVt6gW//NTn0n4fB3HG7WWVoeK2quZhE9Q=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=JoMVaNAGvXyGx2ThJQFYAs5xc0T2PfuwXh8azFCknAwPkNuE7FREYuj1JBktZrGd+fCJGTAbsaRbTayP+W1xhz2dfX8FT1zdv42TgdGHNaAQEvY9az14YrH2akUooIG1p6CaE/G7AxsDmVAAeu1UXd8MiStDVMB6kHQlyKQEdNg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YyErKP3d; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QF0U6e5U"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 14D8E1F00893;
-	Mon, 21 Sep 2026 23:27:05 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YyErKP3d"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A38611F000FF;
+	Mon, 21 Sep 2026 23:31:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790033225;
-	bh=kWMUlyFZDu5I4TJse0Xdw6ZZGOr5Zeuzgrz0NVyny6s=;
-	h=From:To:Cc:Subject:Date;
-	b=QF0U6e5UMUQmn70x5QvQwDdf8QBnhhnrccAiyGBGj5QAYMyTzrg6V0jQeNHoNyQ6Z
-	 /bXYrD792nkvXIl88wePsep83P8ZXr216J4E33UNQ5VdK3V5U2QuiiW1cxVco8BLyd
-	 JaRAOR+NghpC6IJ+9LwH0hFwuMrsw8+HXxYOepQeOncXGJZGlsvHRHZ0OGfZSyjGyc
-	 5xUKvnbd8vYjmWhaTH+1YJ2Nsvzz0y+MH3MCLweRPJ+pIEwPAN6PxDkUeiYWAC+5xF
-	 jslkhZmh7H7fK2olUFhWuvfQgdGjrbdBClGLdmcbJHNx0sPcls5nJgacVpMhJEkD3u
-	 f9z/Gh5nzvazw==
-From: "Rob Herring (Arm)" <robh@kernel.org>
-To: Lee Jones <lee@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	Gene Chen <gene_chen@richtek.com>
-Cc: mfd@lists.linux.dev,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-mediatek@lists.infradead.org
-Subject: [PATCH] dt-bindings: mfd: Allow MT6360 interrupt flags
-Date: Mon, 21 Sep 2026 18:27:00 -0500
-Message-ID: <20260921232701.3133291-1-robh@kernel.org>
-X-Mailer: git-send-email 2.53.0
+	s=k20260515; t=1790033509;
+	bh=jHfgA3tNHMVt6gW//NTn0n4fB3HG7WWVoeK2quZhE9Q=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=YyErKP3d5eWTTGjpgz9U7LUovEIg9Cpfq+BQK/lnD8Ds7Iq3ZQfvIF1HhFEIBLPZO
+	 8EGtdzup2rPoRspyunJxAlVCbdJF+nrn3Y+9gWDYx5tzFtv8rtxL7FHr811qQq3Ld7
+	 AAagcM+ABwIxt+2gT043yguqEeMRc3FqALztgsrx4HM2+iGglIrHtXbZ+sYZAQ56K6
+	 ALPLUGre6AbKR7Xlu+8d9dSO0ZnMITUggsOI5bgsVQM/0+5ORq2Mbz7ZrJ8jc25O8+
+	 KCXQ6SH+VziN/E6oDS/mzN2hZ4YhxXcc1Ix8iaNq/qayKpgb+PNzh4qJCnNzW74Zk1
+	 CA/BPQhE6CKKQ==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH] dt-bindings: mfd: mediatek: Allow MT6357 ADC
+Reply-To: sashiko-reviews@lists.linux.dev
+To: =?utf-8?b?Um9iIEhlcnJpbmcgKEFybSk=?= <robh@kernel.org>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, lee@kernel.org, robh@kernel.org, conor+dt@kernel.org
+In-Reply-To: <20260921232632.3131680-1-robh@kernel.org>
+References: <20260921232632.3131680-1-robh@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Mon, 21 Sep 2026 23:31:48 +0000
+Message-Id: <20260921233148.A38611F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 
-MT6360 interrupt controllers use either one interrupt cell or two
-cells, with the optional second cell carrying trigger flags. Allow both
-forms.
+> MT6357 PMIC nodes can contain an adc child using the MT6359 AUXADC
+> binding. Add the child node reference so the ADC subnode is evaluated
+> instead of rejected.
+>=20
+> Assisted-by: LLM
+> Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 
-Assisted-by: LLM
-Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
----
- Documentation/devicetree/bindings/mfd/mediatek,mt6360.yaml | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+Sashiko has reviewed this patch and found no issues. It looks great!
 
-diff --git a/Documentation/devicetree/bindings/mfd/mediatek,mt6360.yaml b/Documentation/devicetree/bindings/mfd/mediatek,mt6360.yaml
-index fb65abf30d57..828ed7f558f6 100644
---- a/Documentation/devicetree/bindings/mfd/mediatek,mt6360.yaml
-+++ b/Documentation/devicetree/bindings/mfd/mediatek,mt6360.yaml
-@@ -33,9 +33,10 @@ properties:
-   interrupt-controller: true
- 
-   "#interrupt-cells":
--    const: 1
-+    enum: [1, 2]
-     description:
--      The first cell is the IRQ number.
-+      The first cell is the IRQ number. The optional second cell is the IRQ
-+      trigger type.
- 
-   regulators:
-     $ref: /schemas/regulator/mt6360-regulator.yaml#
--- 
-2.53.0
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260921232632.3131=
+680-1-robh@kernel.org?part=3D1
 
