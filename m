@@ -1,98 +1,142 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9361D48D880;
-	Mon, 21 Sep 2026 11:10:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.2
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D42648A2D1
+	for <mfd@lists.linux.dev>; Mon, 21 Sep 2026 11:15:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789989018; cv=none; b=J9NIrLgDsXU4PJMMXzaBkcZD7SAGp8xacCFwXMAIXc3ljcpwFfMdLN4Edg1Dou1yLeI3ggbW6DLPKjYciPJ+7WVH1hOSmbAiZ/XNW9j0R4hEQ8OwexHSH3ePWjNFgJY/JUtY7i7XYUU2Uj4ad77Our/7VmF3Vz6/tjrwCSfxXxE=
+	t=1789989330; cv=none; b=U+nWR4uPxf6NtdBoKpxWdCTzjj8Ei9phrI7DqpNJ8qU67pRUb8f6J+MNjzvOg6V0rb1mn5a/AQqtGCVlajWuIRXXM+ponkloqCSOtLz7xm9g702NUmpPNRkDqqxKGR6GMle+ZaItkJLYSYu6saTvkX54s5nonjGI4xiEhtmD5lo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789989018; c=relaxed/simple;
-	bh=1BhpQZoAXGVHhCY2yPQOy2cprPNEspiRapZr8208ImA=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
-	 MIME-Version:Message-ID; b=VdoYLNqISZkrixrl6DUNEt/TJ7u2gNmbVa8NbUdvK6dMp2viIBjXQGpMJpGAa9KnzpATzIsm72zrsCcECIV5MpkivCMDr3xj7rUCk27CBT9EsvJ6gyGeWOPgv3y/xUD3nVXbAEc+sdwuWgfgiAH5qYnwEJkG96XGtV6XGeTLZ1Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=e+cHLb2E; arc=none smtp.client-ip=220.197.31.2
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1789989330; c=relaxed/simple;
+	bh=Fl8LEDF2+G92eNmZm/5BuP9dhnVEgbjMk0wmGrfEco4=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=DEklwu9J1SRQsSspwNPKJ9m/NDoSylHSYmYlFrcvdGeSHJYTpy8LL23XEwfI+XE9KxR4x6e9OrMoSzwiR3eMEQaKljsTJ9W5gG4oNFo8ip7aBH7+AAVfgAk1Z6jaBAtqMV6bY7cCOzlmMKw/iuF8AGzevOgj6XHb/agpCYG7FNw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=tGLayeNr; arc=none smtp.client-ip=74.125.227.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="e+cHLb2E"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
-	Message-ID; bh=1BhpQZoAXGVHhCY2yPQOy2cprPNEspiRapZr8208ImA=; b=e
-	+cHLb2EsoCJmyv5IQM9q0sqiir1Lv71mBv80vQnaKLgpB66FeKfHDB22f4OxAXsT
-	YlEkv1c5YP+QgfMfc3gFGTFXs/blWnWK4cAhKXR1FQtwWLlZDbUifAVtv52YRxA6
-	VyiDIwOpZjj1P+MtR2DXrhnthimjQTFHDMsLDQarek=
-Date: Mon, 21 Sep 2026 19:08:48 +0800 (CST)
-From: zl020895  <zl020895@163.com>
-To: "Bartosz Golaszewski" <brgl@kernel.org>
-Cc: longzhao@ambarella.com,
-	"Long Zhao via B4 Relay" <devnull+longzhao.ambarella.com@kernel.org>,
-	"Rob Herring" <robh@kernel.org>,
-	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
-	"Conor Dooley" <conor+dt@kernel.org>,
-	"Michael Turquette" <mturquette@baylibre.com>,
-	"Stephen Boyd" <sboyd@kernel.org>,
-	"Jerome Brunet" <jbrunet@baylibre.com>,
-	"Linus Walleij" <linusw@kernel.org>,
-	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
-	"Jiri Slaby" <jirislaby@kernel.org>,
-	"Andy Shevchenko" <andriy.shevchenko@linux.intel.com>,
-	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	"Catalin Marinas" <catalin.marinas@arm.com>,
-	"Will Deacon" <will@kernel.org>, "Lee Jones" <lee@kernel.org>,
-	mfd@lists.linux.dev, devicetree@vger.kernel.org,
-	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
-	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org,
-	"Krzysztof Kozlowski" <krzysztof.kozlowski@oss.qualcomm.com>,
-	"Arnd Bergmann" <arnd@arndb.de>,
-	"Krzysztof Kozlowski" <krzk@kernel.org>,
-	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
-	soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org
-Subject: Re:Re: [PATCH v8 00/18] Ambarella CV75 SoC minimal bring-up
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
- 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
-In-Reply-To: <CAMRc=Mf-0oLOPZsPboE0dzOGE2AzNE0LXmv9fcmgWO47FtGu1g@mail.gmail.com>
-References: <20260921-cv75-v5-v8-0-282ff5d98dda@ambarella.com>
- <CAMRc=Mf-0oLOPZsPboE0dzOGE2AzNE0LXmv9fcmgWO47FtGu1g@mail.gmail.com>
-X-NTES-SC: AL_Qu2TC/WTt0Ep7iiZZukcn0wRhug/UMa4u/sm3YNXc+oEoxnL1BEgV2ZqNGrf3+6vEQOojDKXWThy0/tgZolRgdClO9P1d1YqDPcyYtmcnA==
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="tGLayeNr"
+Received: by mail-pj2-f12.google.com with SMTP id d9443c01a7336-2d747f05ffdso19975825ad.1
+        for <mfd@lists.linux.dev>; Mon, 21 Sep 2026 04:15:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789989328; x=1790594128; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=9cuLvycUbpxuZeCkGbkO7ppnyiQyHbP7lOQEyxsj8o4=;
+        b=tGLayeNr7NtLQApVZfZiqyzEWSMZ6tbVYpXzg9uTjlWOJREeDAtBZvOr6SWpPQG1nK
+         GUre6EmBtt4Fl97W+WBbd+HDnRVdMTcV5+bOgZ5KEcmFBI5zO9WUIFQ3mPNdh2wwhIM4
+         KfxTWX07R2bbiWoju9qcS4rDz0eNNzBbWOMwVIRraEQiafARBchmJ+c8EJ/cArKFctRb
+         2/CZiDLO0g1fnk563jEuqxMCsSNM+11oPs0UJ1tUMQgU4WmtJ7KkZrGwCb5q9dStPzGL
+         tJt9w0fdYE79xrOOl0QVwRLia3rgOOQkuYYous3wVByovZvF160HR9DvZh+ie69Ffofx
+         4Spg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789989328; x=1790594128;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=9cuLvycUbpxuZeCkGbkO7ppnyiQyHbP7lOQEyxsj8o4=;
+        b=xGKbZVxnCy3pb0daeulXVL+PlqiUfoTG9mT0kUleoq5xrkzp+M3VEW6EpFiTO7BZIx
+         puc8h88XZNyfRXzTJvzuiHVCd563+U2jvseyq7NQmWVBW4T4k6+zMcVVRKf1JtSq1Utt
+         0iH6dSll9yIhGPfIRGP0e634nwjr7FVWz6cv13WtddhdFU0VcqSwBZuXNON1Ru6UYHIh
+         fgv/YGd+NsCQf7aZz/wZvinzFk2crLy+QHKGqh3HaV/fy6X8ucYLhIdRF844urz4OVdC
+         z5NRfFvEwALXZaEl6DDmcpHicsRR4f2WWl0wO4S8IEeDvn6FqEHIAh3jUQOzjdgi4xkT
+         fZDw==
+X-Forwarded-Encrypted: i=1; AKwUvBytGnfLECgqWTDjcPqL4ppy5X9NyF9W6zeuLX1jNowjk0Khz0SBFmwTvZwZVH/VvRoOzJo=@lists.linux.dev
+X-Gm-Message-State: AFuF++nlydr3MBFOtnUrDN+nLGAT7V0qgMBRF3OD2CzcswFHBHC1CDwp
+	eWIMR2/Kt994EEWXOHmy9y6CpZMtnW8BkFzICS/KCtsDfLb/S0BUMXIY
+X-Gm-Gg: AYBFou23k60jdhWUz3X339YoKEBvxfKokduvJtuSBmrE8LbqNl+HoAlX+POkEyQY3xZ
+	QoXadUwhW66bWoQ/ESNEq1tVPZ4BGfdSwm5/xRsdpbmIvsMbId+EKHPU0VFzRo9GixAXD7N/J3A
+	ZOGs6oj6qwpDzIq7q96dNYV4Xk837e0akXdbjWUKIhxvkSoL5dqhnaO+AJ4FGdAFTPO+xhKxz3H
+	yCweiFzKveuoZFG+1eUITxpjvnQcbc9YcyUyDmabPFdOekD0YYK4AjJseJdBYKQg0v4lKYz7X7H
+	sZ+uaFOD20d+95B/XgoIv+XiOTdOvGXwgPRBTYNzy0xyHGsdk2LTsi8wRVJ4/six/TlfKxRHGpU
+	o/QGlvAo0S0H6LxZdvREr7vkQ8iGy3QQOO+EuwTcyUKpT8YNYvyZWzDlSYQW9L1UlWUOJtyDrtF
+	cImPnZk3z7pY2leO4p4YS5SntScLQ0j73nV6tLXfUGFJD+n6UXKYolb88U5cPHkg92Ch7NpLZmy
+	W9xZ2E=
+X-Received: by 2002:a17:903:2c47:b0:2dd:c168:c4e0 with SMTP id d9443c01a7336-2ddc168c512mr84966165ad.0.1789989327719;
+        Mon, 21 Sep 2026 04:15:27 -0700 (PDT)
+Received: from lgs.. ([101.76.249.46])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df378440f4sm26419465ad.59.2026.09.21.04.15.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 21 Sep 2026 04:15:27 -0700 (PDT)
+From: Guangshuo Li <lgs201920130244@gmail.com>
+To: Linus Walleij <linusw@kernel.org>,
+	Lee Jones <lee@kernel.org>,
+	Samuel Ortiz <sameo@linux.intel.com>,
+	Mattias Wallin <mattias.wallin@stericsson.com>,
+	Ludovic Barre <ludovic.barre@stericsson.com>,
+	Alexandre Torgue <alexandre.torgue@st.com>,
+	Julien Delacou <julien.delacou@stericsson.com>,
+	linux-arm-kernel@lists.infradead.org,
+	mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Cc: Guangshuo Li <lgs201920130244@gmail.com>,
+	stable@vger.kernel.org
+Subject: [PATCH] mfd: ab8500: fix child device leaks on probe failure
+Date: Mon, 21 Sep 2026 19:09:09 +0800
+Message-ID: <20260921110909.370945-1-lgs201920130244@gmail.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Message-ID: <c90c1c.9973.1a0c3a77d36.Coremail.zl020895@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID:ZSgvCgD3d8BAELFqlexLAA--.37435W
-X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbCxgAbjGqxEEAmzQAA3x
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Content-Transfer-Encoding: 8bit
 
-VGhhbmtzLCBCYXJ0LiAKClBsZWFzZSBxdWV1ZSB0aGUgR1BJTyBwYXRjaGVzIHlvdXJzZWxmIGFu
-ZCBwcm92aWRlIGFuIGltbXV0YWJsZQpicmFuY2ggZm9yIHRoZSBTb0MgdHJlZS4KClRoZSBHUElP
-IHBhcnQgaXM6CiAgZ3Bpb2xpYjogcmVnbWFwOiBhZGQgd3JpdGVfZGF0YV9hZnRlcl9kaXIgcXVp
-cmsKICBncGlvbGliOiByZWdtYXA6IGFkZCBncGlvX3JlZ21hcF9nZXRfY2hpcCgpCiAgZ3Bpbzog
-cGwwNjE6IGNvbnZlcnQgcmVnaXN0ZXIgYWNjZXNzIHRvIHJlZ21hcAogIGdwaW86IHBsMDYxOiB1
-c2UgSVJRX1RZUEVfTEVWRUxfTUFTSyBhbmQgSVJRX1RZUEVfRURHRV9CT1RICiAgZ3BpbzogcGww
-NjE6IHVzZSBjbGVhbnVwIGhlbHBlcnMgZm9yIGxvY2tzCiAgZ3BpbzogcGwwNjE6IHN3aXRjaCBk
-YXRhIHBhdGggdG8gZ3Bpby1yZWdtYXAKICBncGlvOiBwbDA2MTogYWRkIEFtYmFyZWxsYSByZWdp
-c3Rlci1sYXlvdXQgdmFyaWFudAoKSSB3aWxsIHNlbmQgYSBmb2xsb3ctdXAgZm9yIGdwaW9fcmVn
-bWFwX2dldF9jaGlwKCkgd2l0aCB0aGUgbWlzc2luZwprZXJuZWwtZG9jLiBUaGUgcmVzdCBvZiB0
-aGUgc2VyaWVzIChjbGssIHBpbmN0cmwsIFVBUlQsIERUKSBjYW4gc3RheQp3aXRoIHRoZSBTb0Mg
-dHJlZSBvbmNlIHRoYXQgR1BJTyBicmFuY2ggaXMgYXZhaWxhYmxlLgoKQmVzdCByZWdhcmRzLApM
-b25nIFpoYW8KCkF0IDIwMjYtMDktMjEgMTg6MzE6NDUsICJCYXJ0b3N6IEdvbGFzemV3c2tpIiA8
-YnJnbEBrZXJuZWwub3JnPiB3cm90ZToKPk9uIE1vbiwgMjEgU2VwIDIwMjYgMDY6MjM6MTkgKzAy
-MDAsIExvbmcgWmhhbyB2aWEgQjQgUmVsYXkKPjxkZXZudWxsK2xvbmd6aGFvLmFtYmFyZWxsYS5j
-b21Aa2VybmVsLm9yZz4gc2FpZDoKPj4gVGhpcyBzZXJpZXMgYWRkcyBtaW5pbWFsIEFtYmFyZWxs
-YSBDVjc1IHN1cHBvcnQgZm9yIGVhcmx5IGJyaW5nLXVwIHdpdGgKPj4gYSBzZXJpYWwgY29uc29s
-ZTogRFQgYmluZGluZ3MsIFJDVCBjbG9ja3MsIHBpbmN0cmwsIFBMMDYxIEdQSU8gdmlhCj4+IGdw
-aW8tcmVnbWFwLCA4MjUwX2R3IFVBUlQgcXVpcmtzLCBBUkNIX0FNQkFSRUxMQSwgQ1Y3NSBFVksg
-RFQsIGFuZAo+PiBNQUlOVEFJTkVSUy4KPj4KPj4gVGhpcyBpcyBhIHNpbmdsZSB1bmlmaWVkIHNl
-cmllcy4gUGxlYXNlIGFwcGx5IHZpYSB0aGUgU29DCj4+IHRyZWU7IHN1YnN5c3RlbSBtYWludGFp
-bmVycyBhcmUgQ2MnZCBmb3IgdGhlaXIgcGllY2VzLgo+Pgo+Cj5BcyBJIHNhaWQgYmVmb3JlOiB0
-aGlzIGJyaW5ncyBpbiBhIGxvdCBvZiBwb3RlbnRpYWxseSBjb25mbGljdGluZyBjb2RlIGludG8K
-PmRyaXZlcnMvZ3Bpby8gc28gSSdsbCBuZWVkIGFuIGltbXV0YWJsZSBicmFuY2ggdG8gcHVsbCBv
-ciBJIGNhbiBxdWV1ZSB0aGUgR1BJTwo+cGFydCBteXNlbGYgYW5kIHByb3ZpZGUgYW4gaW1tdXRh
-YmxlIGJyYW5jaCB0byBvdGhlciB0cmVlcy4KPgo+QmFydG9zego=
+ab8500_probe() registers MFD child devices before completing the
+remaining device initialization.
+
+On AB8540, the main MFD device batch may be registered successfully
+before registration of the cut-specific batch fails. In that case,
+the probe returns without removing the child devices registered by
+the earlier mfd_add_devices() call.
+
+The same issue occurs when sysfs group creation fails after the MFD
+children have been registered. Since the probe returns an error, there
+is no later teardown path to unregister those devices.
+
+Call mfd_remove_devices() on these error paths so that MFD child
+devices successfully registered earlier in the probe are properly
+unregistered and released.
+
+The issue was identified by a static analysis tool I developed and
+confirmed by manual review.
+
+Fixes: cca69b67b3ba ("mfd: Export ab8500 chip id to sysfs")
+Fixes: 9c717cf3fa16 ("mfd: ab8500-core: Add device for new RTC version for AB8540 cut2")
+Cc: stable@vger.kernel.org
+Signed-off-by: Guangshuo Li <lgs201920130244@gmail.com>
+---
+ drivers/mfd/ab8500-core.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/mfd/ab8500-core.c b/drivers/mfd/ab8500-core.c
+index f0bc0b5a6f4a..e675223b6023 100644
+--- a/drivers/mfd/ab8500-core.c
++++ b/drivers/mfd/ab8500-core.c
+@@ -1220,8 +1220,10 @@ static int ab8500_probe(struct platform_device *pdev)
+ 		ret = mfd_add_devices(ab8500->dev, 0, ab8500_devs,
+ 				ARRAY_SIZE(ab8500_devs), NULL,
+ 				0, ab8500->domain);
+-	if (ret)
++	if (ret) {
++		mfd_remove_devices(ab8500->dev);
+ 		return ret;
++	}
+ 
+ 	/* Add battery management devices */
+ 	ret = mfd_add_devices(ab8500->dev, 0, ab8500_bm_devs,
+@@ -1243,8 +1245,10 @@ static int ab8500_probe(struct platform_device *pdev)
+ 		ret = sysfs_create_group(&ab8500->dev->kobj,
+ 					 &ab8505_attr_group);
+ 
+-	if (ret)
++	if (ret) {
+ 		dev_err(ab8500->dev, "error creating sysfs entries\n");
++		mfd_remove_devices(ab8500->dev);
++	}
+ 
+ 	return ret;
+ }
+-- 
+2.43.0
+
