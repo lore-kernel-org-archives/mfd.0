@@ -1,82 +1,103 @@
-Received: from rtits2.realtek.com.tw (rtits2.realtek.com [211.75.126.72])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.3])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 11EFB136351;
-	Mon, 21 Sep 2026 03:47:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=211.75.126.72
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51C40134CCF;
+	Mon, 21 Sep 2026 03:53:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.3
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789962454; cv=none; b=UD03tpLpx9Vr0eqsLrRb/47m9FEr/TzGBVUKfv37zROLY1ZV3aNuZyZpoPMk6lnFU2bcHhOJn+LQ/BecsZOT4yNaIbmRtFlvYq9SXjl9af6DLTMuo95WNR++2Fee7V2XsB7X+hJ8duC8TyNaOdU/2SfJ6rfKHfj4566TXAvqnW8=
+	t=1789962819; cv=none; b=EI2xwA0OCd5QC69fzAwdPYL5soJ6+XVOhQTEHzIhLE9glI+Lf/zSebeIIK8N2Tx3g2um54phlKZdmtJ6FWo9JHzjK2F8Lhc9qq6WCjjiswmggyR4lNXsB0dcb6gtWkCFuAFGyhfhmjjBbG/hzb8oyo/IPah4t7E2Y7RBF38CquE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789962454; c=relaxed/simple;
-	bh=KAkKDvhFORf2LGfFzHZLo3KGCvvHSMaEiCLfrj0YM7Q=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:MIME-Version; b=gn0vJnWK8/t4LnZzcicHzuHU61CwY9r5lESWKmIp8IKm/G2Pw4jjwrTTDe83C1Q7c/MLUnAxRKbzs88ukZglsnsHqW5u7eUcbpu88UCG4JxY1ahVlNaVHB4EvBTA21N7BYK1hloIY5ueKXiHsDdLZSZDUCDWSkPwpeFVJr65Jiw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=realsil.com.cn; spf=pass smtp.mailfrom=realsil.com.cn; dkim=pass (2048-bit key) header.d=realsil.com.cn header.i=@realsil.com.cn header.b=VYkMiv7W; arc=none smtp.client-ip=211.75.126.72
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=realsil.com.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=realsil.com.cn
+	s=arc-20240116; t=1789962819; c=relaxed/simple;
+	bh=thBRA3BdH8VdVY4ioZyS/SS+nEIYECE2vWuugLNgY/U=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
+	 MIME-Version:Message-ID; b=cQfDBPI5V8FfuBiNtXkblLQBta+rktSGoKmrtcmN06Zjuex3ldojjX5GjHOyLloHy2TxKtuCg8CDuXywHFmEciauE82eRjZ5jwyjnZVqeZ++jd8zKdNX/sn3PdSzHvJFXwDFyH9HdT4hQTHfPCg1OiO0G4c/C7qF/73riiX/4BM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=M9LOz8VE; arc=none smtp.client-ip=117.135.210.3
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=realsil.com.cn header.i=@realsil.com.cn header.b="VYkMiv7W"
-X-SpamFilter-By: ArmorX SpamTrap 5.80 with qID 68L3kXoD52233309, This message is accepted by code: ctloc85258
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=realsil.com.cn;
-	s=dkim; t=1789962394;
-	bh=KAkKDvhFORf2LGfFzHZLo3KGCvvHSMaEiCLfrj0YM7Q=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:MIME-Version;
-	b=VYkMiv7WfFsI4wqT3xs3o0U0ksuLZwwJC0DCtuStaboWSg5GfFa8fy9PUr69YnGE6
-	 TBbYdhYw1NUPhIuA16mYTPve7ghhcbKEypQEIb2QgV14fkQ0+u93gEcec4Z+huhD/O
-	 yuJtBrIUEHjRLzK+WfbdFccEf1MhopUwQJETBCI7zL5/SAFrVEJNMwDtJ4wPw+EcWa
-	 puLDSBA7+lsECcPxoi9srQrpqZwHsnXGvfJMAmt8vD1KciIbzgpVix/utN8lIIvYqn
-	 AO44Rnb4016fdqw2gHTgoDEJrbuVx2kPL0mbfq6GKycrJLmX5LNd1Wq/SQSJy9BA/B
-	 4BTU127Ckf2Yg==
-Received: from RS-EX-MBS2.realsil.com.cn ([172.29.17.102])
-	by rtits2.realtek.com.tw (8.15.2/3.29/5.94) with ESMTPS id 68L3kXoD52233309
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Mon, 21 Sep 2026 11:46:34 +0800
-Received: from RS-EX-MBS2.realsil.com.cn (172.29.17.102) by
- RS-EX-MBS2.realsil.com.cn (172.29.17.102) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.49; Mon, 21 Sep 2026 11:46:33 +0800
-Received: from RS-EX-MBS2.realsil.com.cn ([fe80::d17c:2fd0:cf8e:635]) by
- RS-EX-MBS2.realsil.com.cn ([fe80::d17c:2fd0:cf8e:635%9]) with mapi id
- 15.02.2562.049; Mon, 21 Sep 2026 11:46:33 +0800
-From: =?utf-8?B?5ZGo5a+F?= <zain_zhou@realsil.com.cn>
-To: Krzysztof Kozlowski <krzk@kernel.org>, Alexandre Belloni
-	<alexandre.belloni@bootlin.com>, Frank Li <Frank.Li@nxp.com>, Rob Herring
-	<robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
-	<conor+dt@kernel.org>, Lee Jones <lee@kernel.org>, Liam Girdwood
-	<lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, Vikash Bansal
-	<vikash.bansal@nxp.com>, Aman Kumar Pandey <aman.kumarpandey@nxp.com>,
-	Lakshay Piplani <lakshay.piplani@nxp.com>
-CC: "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
-	"linux-i3c@lists.infradead.org" <linux-i3c@lists.infradead.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"mfd@lists.linux.dev" <mfd@lists.linux.dev>, =?utf-8?B?546L54Kc?=
-	<wei_wang@realsil.com.cn>
-Subject: =?utf-8?B?5Zue5aSNOiBbUkZDIFBBVENIIDMvNF0gcmVndWxhdG9yOiBydHM0OTB4OiBBZGQgZHJpdmVyIGZvciBvbi1kaWUgcmVndWxhdG9ycw==?=
-Thread-Topic: [RFC PATCH 3/4] regulator: rts490x: Add driver for on-die
- regulators
-Thread-Index: AQHdSOfKLIR/IAtYvU2nf5+oMdLbTLbW6X4AgAF7WJA=
-Date: Mon, 21 Sep 2026 03:46:33 +0000
-Message-ID: <fe92f1275efe4451978fc473cbad39dc@realsil.com.cn>
-References: <20260920100501.4091351-1-zain_zhou@realsil.com.cn>
- <20260920100501.4091351-4-zain_zhou@realsil.com.cn>
- <58c3ea87-b7df-4c68-b22b-5102c158d5f7@kernel.org>
-In-Reply-To: <58c3ea87-b7df-4c68-b22b-5102c158d5f7@kernel.org>
-Accept-Language: en-US, zh-CN
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="M9LOz8VE"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
+	Message-ID; bh=thBRA3BdH8VdVY4ioZyS/SS+nEIYECE2vWuugLNgY/U=; b=M
+	9LOz8VEDOzW1v1SZPBtTQXUuw+YsMKEVnxVl/0cHjx3OSoeJ0X6egsKou5PFBYgY
+	Wi1+GsvX8iQrfU7GrEzCATDMxFhFufmC5vdvXv3z1xkkrHp+twfDGb0DeW51aXNS
+	mGvGIB9YhBi/YgIsNqWRThQ5VZxIqnaG1lWWe+9A2E=
+Date: Mon, 21 Sep 2026 11:52:33 +0800 (CST)
+From: zl020895  <zl020895@163.com>
+To: "Linus Walleij" <linusw@kernel.org>
+Cc: longzhao@ambarella.com, "Arnd Bergmann" <arnd@arndb.de>,
+	"Krzysztof Kozlowski" <krzk@kernel.org>,
+	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
+	soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+	"Rob Herring" <robh@kernel.org>,
+	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
+	"Conor Dooley" <conor+dt@kernel.org>,
+	"Michael Turquette" <mturquette@baylibre.com>,
+	"Stephen Boyd" <sboyd@kernel.org>,
+	"Jerome Brunet" <jbrunet@baylibre.com>,
+	"Bartosz Golaszewski" <brgl@kernel.org>,
+	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+	"Jiri Slaby" <jirislaby@kernel.org>,
+	"Andy Shevchenko" <andriy.shevchenko@linux.intel.com>,
+	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	"Catalin Marinas" <catalin.marinas@arm.com>,
+	"Will Deacon" <will@kernel.org>, "Lee Jones" <lee@kernel.org>,
+	mfd@lists.linux.dev, devicetree@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
+	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re:Re: [PATCH v7 08/15] gpiolib: regmap: add write_data_after_dir
+ quirk
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
+ 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
+In-Reply-To: <CAD++jLkHfgu_V8i_fhE1WQe+qwJ=ictQSONWPq1fPuYYb8tSRA@mail.gmail.com>
+References: <20260915-cv75-v5-v7-0-3297d3fbc9c0@ambarella.com>
+ <20260915-cv75-v5-v7-8-3297d3fbc9c0@ambarella.com>
+ <CAD++jLkHfgu_V8i_fhE1WQe+qwJ=ictQSONWPq1fPuYYb8tSRA@mail.gmail.com>
+X-NTES-SC: AL_Qu2TC/WdvU8u5SiZYukcn0wRhug/UMa4u/sm3YNXc80ElTHX5Qk5QFV9DV/c98WtKxmClBWuVzh21PVmZapTMlnau6fbzs43n5vSZcX5aQ==
 Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
+Message-ID: <46342be7.3c81.1a0c2181721.Coremail.zl020895@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID:fSgvCgD3n00BqrBqt2pLAA--.36901W
+X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbC7gFx4mqwqgHFHgAA3W
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
 
-T24gU3VuLCBTZXAgMjAsIDIwMjYsIEtyenlzenRvZiBLb3psb3dza2kgd3JvdGU6DQo+IFlvdSBs
-ZWFrIE9GIG5vZGVzLg0KDQpUaGFua3MgZm9yIHRoZSByZXZpZXcuDQoNCkJvdGggcmVndWxhdG9y
-cyBhbmQgbm9kZSBhcmUgZGVjbGFyZWQgd2l0aCBfX2ZyZWUoZGV2aWNlX25vZGUpLCBzbyB0aGUN
-CnJlZmVyZW5jZXMgcmV0dXJuZWQgYnkgb2ZfZ2V0X2F2YWlsYWJsZV9jaGlsZF9ieV9uYW1lKCkg
-c2hvdWxkIGJlDQpkcm9wcGVkIG9uIHNjb3BlIGV4aXQsIGluY2x1ZGluZyB0aGUgY29udGludWUg
-YW5kIGVycm9yIHBhdGhzLg0KDQpDb3VsZCB5b3UgY2xhcmlmeSB3aGljaCByZWZlcmVuY2UgaXMg
-bGVha2luZz8NCg0KQmVzdCByZWdhcmRzLA0KWmFpbg0K
+SGkgTGludXMsCgpUaGFua3MgZm9yIHRoZSByZXZpZXcuIHY4IHdpbGwgc2tpcCB0aGUgcHJlLWRp
+cmVjdGlvbiBncGlvX3JlZ21hcF9zZXQoKSB3aGVuCndyaXRlX2RhdGFfYWZ0ZXJfZGlyIGlzIHNl
+dC4gVGhlIGdwaW9fcmVnbWFwX3NldCgpIHJldHVybnMgc3RheQppZ25vcmVkLCBwZXIgQW5keS4K
+CjAwMTQ6IGFkZGVkIHlvdXIgUmV2aWV3ZWQtYnkuCgpCZXN0IHJlZ2FyZHMsCkxvbmcgWmhhbwoK
+QXQgMjAyNi0wOS0yMSAwNjowMjo0OCwgIkxpbnVzIFdhbGxlaWoiIDxsaW51c3dAa2VybmVsLm9y
+Zz4gd3JvdGU6Cj5IaSBMb25nLAo+Cj50aGFua3MgZm9yIHlvdXIgcGF0Y2ghCj4KPk9uIFR1ZSwg
+U2VwIDE1LCAyMDI2IGF0IDE6MTXigK9QTSBMb25nIFpoYW8gdmlhIEI0IFJlbGF5Cj48ZGV2bnVs
+bCtsb25nemhhby5hbWJhcmVsbGEuY29tQGtlcm5lbC5vcmc+IHdyb3RlOgo+Cj4KPj4gRnJvbTog
+TG9uZyBaaGFvIDxsb25nemhhb0BhbWJhcmVsbGEuY29tPgo+Pgo+PiBTb21lIGNvbnRyb2xsZXJz
+IGlnbm9yZSBkYXRhLXJlZ2lzdGVyIHdyaXRlcyB3aGlsZSBhIGxpbmUgaXMgc3RpbGwgYW4KPj4g
+aW5wdXQuIE9wdGlvbmFsbHkgd3JpdGUgdGhlIG91dHB1dCB2YWx1ZSBhZ2FpbiBhZnRlciBzd2l0
+Y2hpbmcgdGhlCj4+IGRpcmVjdGlvbiwgbWF0Y2hpbmcgdGhlIGV4aXN0aW5nIFBMMDYxIGJlaGF2
+aW91ci4KPj4KPj4gU2lnbmVkLW9mZi1ieTogTG9uZyBaaGFvIDxsb25nemhhb0BhbWJhcmVsbGEu
+Y29tPgo+Cj5PSyBJIHNlZS4KPgo+KC4uLikKPgo+Cj4+IEBAIC0yNzEsOSArMjcyLDIyIEBAIHN0
+YXRpYyBpbnQgZ3Bpb19yZWdtYXBfZGlyZWN0aW9uX291dHB1dChzdHJ1Y3QgZ3Bpb19jaGlwICpj
+aGlwLAo+PiAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gcmV0Owo+PiAgICAgICAgIH0K
+Pj4KPj4gLSAgICAgICBncGlvX3JlZ21hcF9zZXQoY2hpcCwgb2Zmc2V0LCB2YWx1ZSk7Cj4+ICsg
+ICAgICAgcmV0ID0gZ3Bpb19yZWdtYXBfc2V0KGNoaXAsIG9mZnNldCwgdmFsdWUpOwo+PiArICAg
+ICAgIGlmIChyZXQpCj4+ICsgICAgICAgICAgICAgICByZXR1cm4gcmV0Owo+Cj5pZiAoIWdwaW8t
+PndyaXRlX2RhdGFfYWZ0ZXJfZGlyKSB7Cj4gICAgIHJldCA9IGdwaW9fcmVnbWFwX3NldChjaGlw
+LCBvZmZzZXQsIHZhbHVlKTsKPiAgICAgaWYgKHJldCkKPiAgICAgICAgICAgICByZXR1cm4gcmV0
+Owo+fQo+Cj5UaGVyZSBpcyBubyBwb2ludCBpbiBkb2luZyBzb21ldGhpbmcgeW91IGtub3cgd2ls
+bCBub3QKPndvcmsuCj4KPj4gKyAgICAgICByZXQgPSBncGlvX3JlZ21hcF9zZXRfZGlyZWN0aW9u
+KGNoaXAsIG9mZnNldCwgdHJ1ZSk7Cj4+ICsgICAgICAgaWYgKHJldCkKPj4gKyAgICAgICAgICAg
+ICAgIHJldHVybiByZXQ7Cj4+Cj4+IC0gICAgICAgcmV0dXJuIGdwaW9fcmVnbWFwX3NldF9kaXJl
+Y3Rpb24oY2hpcCwgb2Zmc2V0LCB0cnVlKTsKPj4gKyAgICAgICAvKgo+PiArICAgICAgICAqIGdw
+aW8gdmFsdWUgaXMgc2V0IGFnYWluLCBiZWNhdXNlIHBsMDYxIGRvZXNuJ3QgYWxsb3cgdG8gc2V0
+IHZhbHVlIG9mCj4+ICsgICAgICAgICogYSBncGlvIHBpbiBiZWZvcmUgY29uZmlndXJpbmcgaXQg
+aW4gT1VUIG1vZGUuCj4+ICsgICAgICAgICovCj4+ICsgICAgICAgaWYgKGdwaW8tPndyaXRlX2Rh
+dGFfYWZ0ZXJfZGlyKQo+PiArICAgICAgICAgICAgICAgcmV0dXJuIGdwaW9fcmVnbWFwX3NldChj
+aGlwLCBvZmZzZXQsIHZhbHVlKTsKPgo+VGhlbiB0aGVyZSBpcyBBbmR5J3MgY29tbWVudCBhcyB3
+ZWxsLgo+Cj5UaGUgcmVzdCBsb29rcyBnb29kLgo+Cj5Zb3VycywKPkxpbnVzIFdhbGxlaWoK
