@@ -1,76 +1,95 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 548F2484239
-	for <mfd@lists.linux.dev>; Mon, 21 Sep 2026 11:23:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22C2243303E;
+	Mon, 21 Sep 2026 12:21:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.2
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1789989792; cv=none; b=PlMtI5PHXzcKrqjto85nM847NRMc7pug8PPjZ8CRHLGxijzNV1pnoNJtMo9afBzgu1gtimugjuWfAwyQvdsOIEA5W569wmMK070sZFD/1ftr1AUmX0CHXZvHzPAtRi4vr4QrUpmN2223PrhfcIPI6PZjfiL44hwWqvTxP5ftz+c=
+	t=1789993275; cv=none; b=SQjF00Wn4Wg2RKL7ed1oVLDX3XnD6TB4A1ugvbMUMHeAWnlk0gkVW5jDVa55k2PKCvEEywE5fs/nAJQzuJSiAbTNAPiKXYaljpAWrYWSZXgqtEv2LtjEZWH/A70ZF/7Arnap3kDRDvVBHSvtKZdFeb2dCVOr9KQsBqOpOuJ4ox8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1789989792; c=relaxed/simple;
-	bh=7WH8SgZEwPZe5MWEfBMd1wR0vG4U8EgQQNmMsFSu4gw=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=f/A1QPv6c1K3KPvrO5V7mr5bo2jdLcpteJkD3DogqEXF7iqIRjvduwBfK+7h+QxkTJ4a1B7t9QwK6X6sf9IOHBrO8xAlY81t/bHdObtpLUt37mP8Mhzcy7UaOfstqF/zBrkOLZJ4y/gEJlWKbythMK+QKXlaS86hv9wrSHYQqP8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QLbZWz/s; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1789993275; c=relaxed/simple;
+	bh=x1eBDSEnp8xXV2Qaa6P1kJIKyiMhTWpft8UHmmtwQNU=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
+	 MIME-Version:Message-ID; b=t8S9YadWwGFaoIHApX5MRUhAqBs5ArwLX92NHO290gd7o5eVbY1mo3l5hgBBLPMxl4Xy2yPAgCC6iIo/Ymzz4ehx3B+zUSXHPFJ+QmpT09Rjmuw+m2zoh2dZKelat52HjFvnHk6NsDm7nVZRVZpQwXiel3SbGZItMK0IDFJ8RTo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=mhq6yoO2; arc=none smtp.client-ip=220.197.31.2
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QLbZWz/s"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7BFE21F000FF;
-	Mon, 21 Sep 2026 11:23:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789989785;
-	bh=7WH8SgZEwPZe5MWEfBMd1wR0vG4U8EgQQNmMsFSu4gw=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=QLbZWz/sFMGp+2LWPNuebdVPOs3a+EaBGvNA57nCLeAx4tNur59Cwy/Bq4sOGmb7r
-	 8Ioz+QDRfcrBo+rAaHQ9HxbzsZpfMDdZ0u6PV7z+DuTkU4AmomYeBF0nDuwGEe9gU2
-	 da1ADMbZMTV+5tFRpyF1pXTv6ai3P909AOIkGU3r2ciBn4DvcNtLvvVweqyC+OOPkM
-	 m9vjGi4YyyCB9+apWVnXLSCJWSSwu4JXb5kNQj2kDhjEmqyePu4lA48yqyNYaUtB/3
-	 7qQcDfs49en1ASzZsurWwEas5SrKvqwB+HlDsOaCIjE7Q4F7JkTI7it26YoQtx49kV
-	 1ITxamSmaOUbA==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH] mfd: ab8500: fix child device leaks on probe failure
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Guangshuo Li" <lgs201920130244@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260921110909.370945-1-lgs201920130244@gmail.com>
-References: <20260921110909.370945-1-lgs201920130244@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 21 Sep 2026 11:23:05 +0000
-Message-Id: <20260921112305.7BFE21F000FF@smtp.kernel.org>
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="mhq6yoO2"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
+	Message-ID; bh=x1eBDSEnp8xXV2Qaa6P1kJIKyiMhTWpft8UHmmtwQNU=; b=m
+	hq6yoO27MPQGcxvvmUKswwl0txbqYV7Xm/coLEOybz5sQF7jtjVcmP32p4FhtlDO
+	KnJX7Q455/r91xWQwQ+DiLiJyMftUuzBqmMkmN57F9opD1m/i09br2XcIkME6QEg
+	JYEdapnLO0he7VGKxxH4+lK2NuocPmCiSSpL4E8jGQ=
+Date: Mon, 21 Sep 2026 20:19:49 +0800 (CST)
+From: zl020895  <zl020895@163.com>
+To: "Bartosz Golaszewski" <brgl@kernel.org>
+Cc: longzhao@ambarella.com,
+	"Long Zhao via B4 Relay" <devnull+longzhao.ambarella.com@kernel.org>,
+	"Rob Herring" <robh@kernel.org>,
+	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
+	"Conor Dooley" <conor+dt@kernel.org>,
+	"Michael Turquette" <mturquette@baylibre.com>,
+	"Stephen Boyd" <sboyd@kernel.org>,
+	"Jerome Brunet" <jbrunet@baylibre.com>,
+	"Linus Walleij" <linusw@kernel.org>,
+	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+	"Jiri Slaby" <jirislaby@kernel.org>,
+	"Andy Shevchenko" <andriy.shevchenko@linux.intel.com>,
+	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	"Catalin Marinas" <catalin.marinas@arm.com>,
+	"Will Deacon" <will@kernel.org>, "Lee Jones" <lee@kernel.org>,
+	mfd@lists.linux.dev, devicetree@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
+	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org,
+	"Arnd Bergmann" <arnd@arndb.de>,
+	"Krzysztof Kozlowski" <krzk@kernel.org>,
+	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
+	soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org
+Subject: Re:Re: [PATCH v8 09/18] gpiolib: regmap: add gpio_regmap_get_chip()
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
+ 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
+In-Reply-To: <CAMRc=Mf7dtxvxBUF1fOuKw0mxdhCYPj=J4ckySPZUvcZ7a6cbQ@mail.gmail.com>
+References: <20260921-cv75-v5-v8-0-282ff5d98dda@ambarella.com>
+ <20260921-cv75-v5-v8-9-282ff5d98dda@ambarella.com>
+ <CAMRc=Mf7dtxvxBUF1fOuKw0mxdhCYPj=J4ckySPZUvcZ7a6cbQ@mail.gmail.com>
+X-NTES-SC: AL_Qu2TC/WSvEkj7yacY+kcn0wRhug/UMa4u/sm3YNXc+sEvwvN1yAKfXhgLWTM3uu3ORuQqwGKex1g8e9feapSOav+wmljU0SfVFj33va5Mw==
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Message-ID: <3e3a7197.9e4e.1a0c3e88117.Coremail.zl020895@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID:ZCgvCgDnz3XlILFq0Q9MAA--.35W
+X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbCxgVIuWqxIOW++wAA3p
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
 
-> ab8500_probe() registers MFD child devices before completing the
-> remaining device initialization.
->=20
-> On AB8540, the main MFD device batch may be registered successfully
-> before registration of the cut-specific batch fails. In that case,
-> the probe returns without removing the child devices registered by
-> the earlier mfd_add_devices() call.
->=20
-> The same issue occurs when sysfs group creation fails after the MFD
-> children have been registered. Since the probe returns an error, there
-> is no later teardown path to unregister those devices.
->=20
-> Call mfd_remove_devices() on these error paths so that MFD child
-> devices successfully registered earlier in the probe are properly
-> unregistered and released.
->=20
-> The issue was identified by a static analysis tool I developed and
-> confirmed by manual review.
->=20
-> Fixes: cca69b67b3ba ("mfd: Export ab8500 chip id to sysfs")
-> Fixes: 9c717cf3fa16 ("mfd: ab8500-core: Add device for new RTC version fo=
-r AB8540 cut2")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Guangshuo Li <lgs201920130244@gmail.com>
-
-Sashiko has reviewed this patch and found no issues. It looks great!
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260921110909.3709=
-45-1-lgs201920130244@gmail.com?part=3D1
-
+SGkgQmFydCwKCkRvbmUsIHNlbnQgYXMgYSBmb2xsb3ctdXA6Cmh0dHBzOi8vbG9yZS5rZXJuZWwu
+b3JnL2FsbC8yMDI2MDkyMS1ncGlvLWRvYy1mb2xsb3d1cC12MS0xLTYxODczODEyNGY0Y0BhbWJh
+cmVsbGEuY29tLwoKQmVzdCByZWdhcmRzLApMb25nIFpoYW8KCkF0IDIwMjYtMDktMjEgMTg6MzU6
+MDgsICJCYXJ0b3N6IEdvbGFzemV3c2tpIiA8YnJnbEBrZXJuZWwub3JnPiB3cm90ZToKPk9uIE1v
+biwgMjEgU2VwIDIwMjYgMDY6MjM6MjggKzAyMDAsIExvbmcgWmhhbyB2aWEgQjQgUmVsYXkKPjxk
+ZXZudWxsK2xvbmd6aGFvLmFtYmFyZWxsYS5jb21Aa2VybmVsLm9yZz4gc2FpZDoKPj4gRnJvbTog
+TG9uZyBaaGFvIDxsb25nemhhb0BhbWJhcmVsbGEuY29tPgo+Pgo+PiBMZXQgZHJpdmVycyB0aGF0
+IGltcGxlbWVudCBhIGN1c3RvbSBpcnFjaGlwIHJldHJpZXZlIHRoZSBncGlvX2NoaXAKPj4gYWZ0
+ZXIgcmVnaXN0cmF0aW9uLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBMb25nIFpoYW8gPGxvbmd6aGFv
+QGFtYmFyZWxsYS5jb20+Cj4+IC0tLQo+PiAgZHJpdmVycy9ncGlvL2dwaW8tcmVnbWFwLmMgIHwg
+NiArKysrKysKPj4gIGluY2x1ZGUvbGludXgvZ3Bpby9yZWdtYXAuaCB8IDEgKwo+PiAgMiBmaWxl
+cyBjaGFuZ2VkLCA3IGluc2VydGlvbnMoKykKPj4KPj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3Bp
+by9ncGlvLXJlZ21hcC5jIGIvZHJpdmVycy9ncGlvL2dwaW8tcmVnbWFwLmMKPj4gaW5kZXggZmJk
+NGM3NTM1MjVhLi4yMWUwOTkzYjg5ZTIgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvZ3Bpby9ncGlv
+LXJlZ21hcC5jCj4+ICsrKyBiL2RyaXZlcnMvZ3Bpby9ncGlvLXJlZ21hcC5jCj4+IEBAIC0yOTUs
+NiArMjk1LDEyIEBAIHZvaWQgKmdwaW9fcmVnbWFwX2dldF9kcnZkYXRhKHN0cnVjdCBncGlvX3Jl
+Z21hcCAqZ3BpbykKPj4gIH0KPj4gIEVYUE9SVF9TWU1CT0xfR1BMKGdwaW9fcmVnbWFwX2dldF9k
+cnZkYXRhKTsKPj4KPj4gK3N0cnVjdCBncGlvX2NoaXAgKmdwaW9fcmVnbWFwX2dldF9jaGlwKHN0
+cnVjdCBncGlvX3JlZ21hcCAqZ3BpbykKPj4gK3sKPj4gKwlyZXR1cm4gJmdwaW8tPmdwaW9fY2hp
+cDsKPj4gK30KPj4gK0VYUE9SVF9TWU1CT0xfR1BMKGdwaW9fcmVnbWFwX2dldF9jaGlwKTsKPgo+
+UGxlYXNlIHByb3ZpZGUgYSBrZXJuZWwgZG9jIGZvciBhbGwgcHVibGljIEFQSXMuIEl0IHNob3Vs
+ZCBleHBsYWluIHRoYXQgdGhpcwo+bXVzdCBub3QgYmUgdXNlZCBvdXRzaWRlIG9mIGEgR1BJTyBj
+b250cm9sbGVyIGRyaXZlciBjb250ZXh0Lgo+Cj5CYXJ0Cg==
