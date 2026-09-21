@@ -1,78 +1,210 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5819E3BE627;
-	Mon, 21 Sep 2026 18:18:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56EDA4E0B79;
+	Mon, 21 Sep 2026 18:19:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790014718; cv=none; b=NIL+vY5LzF635y/YwrmfE0ENhC2ShRD2sIhHwD8rJqpQPNK+o9lcrQV9DubWy8aNQZpU1yweoAFd1qvFJOHHmHSHspuc3h+8JwY1jbsS3XOKrXD2m7mzLofSzzACT098YErgjIaS30dMPI7fWbC2qFIzslIAAqQ0NwecbjQCnYk=
+	t=1790014752; cv=none; b=RdbioLmPoYcGNX1j4tXE15+TQRh1MIvfAytAzuBWXms27uTyMYrJj4AnfVVVZkeS+SPQXFj+7iMuqyyeoXpea5q4bJMKD9qZjymQrvj7hHnloR0cnNh3uDwvcHr8q9vUjOvH66dw0pcTu8bzHYtN4JiOwVMM43QGFmtVhy/75oA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790014718; c=relaxed/simple;
-	bh=Oo89vx5yydQGIL1iDyz/B0YNMuq7l9nfmGbOSCJaWew=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=HjapUI/KNiJT6737qEiV2BtG9dvQ0paw/qoEcoJGJ9qrkR8D1GeL3H6MgwHCxcp4V2Wl5CRSaegJilQ39PBfu4boaS0Hw2ePJfe3btCR86sXStdcm0pAM85bK6QhZysWq5yXkASymVCW86OlgiJ1+d3AE2LTEdh/+FmLu/5jNR8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=X4Zq7HUJ; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790014752; c=relaxed/simple;
+	bh=BpRcOMKg3LS8V8DqNarIsVgSnibco3n89MGgkueN2dc=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=moe0jViHK0FbBeJuizU71EQx1Pj1ScqL3XMM/vpituquXyixK8jWqOODy6kxd2eIsiP4J+2QQaaIMd3cX1UE+VAUr7lRBJ2E1mj88q3dz65L6gjkjtGF3GIMpaWYNNGMQpc/v3ezBPR5cXjgJKXhNIoU3fXQcRykUJdkVcPhLr4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cExF5tZq; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="X4Zq7HUJ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3B771F000FF;
-	Mon, 21 Sep 2026 18:18:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790014717;
-	bh=y3MmTN1WCD1kBfJ5XE9TLBBrKPVz6WjoZ7nFhMOitjc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=X4Zq7HUJRxh5B0hjjKPecA0hoM3MqF0UDwMAyPRVVl/lmady8eL/qvHriDScs/xdi
-	 piIdLTuIOk5gWgXXz037qmed+6js9U4EP9MXJdWOO1WizH2N0RCqxNR90oobb2XE15
-	 kGZVCWNOhazNDkGqeN3P98hv4n2g7G5o2JmdqLsk/F/HfWjflmOi6ers3b7X/QN15d
-	 iaU8DBa7F+wKU7ETSJe1cVkeBQPxp19zd1IwtjqWeZeNOMEbg63/g/qrNdHJMHr4D/
-	 OamlFuHUzT6zzUXmMlNVkb5biEIFK1YmSBcBXoPCMd10TowjkKf9eVtmGCyhZR3uW4
-	 +bETFCJdlUlaw==
-Date: Mon, 21 Sep 2026 13:18:34 -0500
-From: "Rob Herring (Arm)" <robh@kernel.org>
-To: Quchaosheng <quchaosheng000406@163.com>
-Cc: linux-kernel@vger.kernel.org, Lee Jones <lee@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, mfd@lists.linux.dev,
-	Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org,
-	linux-pwm@vger.kernel.org,
-	Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <ukleinek@kernel.org>
-Subject: Re: [PATCH] dt-bindings: mfd: convert lp3943 to DT schema
-Message-ID: <179001471344.1208214.13809098512770141099.robh@kernel.org>
-References: <20260914013752.394579-1-quchaosheng000406@163.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cExF5tZq"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 037BBC2BCFA;
+	Mon, 21 Sep 2026 18:19:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1790014752;
+	bh=BpRcOMKg3LS8V8DqNarIsVgSnibco3n89MGgkueN2dc=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=cExF5tZqDDGIWkrqVOUJS1uzg/RBkCnHzxT6HcXgoDtmN1LAJbnTTv6oGPJqVQxAl
+	 k18J2I6fmd8xuZbx3LY8px3h0AkJZLwFSEdVEtrTTD60vFI4lPtkrYm9CFWKnDETHI
+	 CG8a0JmNb1Oj3febBeqMvVUek5StYiMlQhsHNoRAoxNjroHt+11lxxSrCO9u8xPY47
+	 BEwpPejlaWUL2kojHyZuxNLPUuKKXdKPawgMAcjCTfhVoPpo92KoZopXADc7XW2K9E
+	 HaQTtJ8prLX+WqGmQ7iA17VDJOhk1rw8HR9NCQIEgTLf5O+PaF3wpDjR3zw3U14ClY
+	 +QGoKqhWOcxKA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BCB63C982EE;
+	Mon, 21 Sep 2026 18:19:11 +0000 (UTC)
+From: Muzaffer Kadir via B4 Relay <devnull+muzafferkadir.mainlining.org@kernel.org>
+Subject: [PATCH v3 00/19] Add Initial Support For MSM8952, Add General
+ Mobile Shamrock
+Date: Mon, 21 Sep 2026 21:18:51 +0300
+Message-Id: <20260921-msm8952-initial-support-v3-0-b96fd3fe298b@mainlining.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260914013752.394579-1-quchaosheng000406@163.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3XNQQ6CMBAF0KuQrq1pRwrUlfcwLiqMMAm0pMVGQ
+ 7i7hbgwMSz/5P83MwvoCQM7ZzPzGCmQsymcDhmrO2Nb5NSkzEBAIbTQfAhDpRVwsjSR6Xl4jqP
+ zEy+EEUrXgFIhS+vR44Nem3y9pdxRmJx/b4+iXK9fU8KuGSUXXGCZgyqru4L8MhiyfarZ9uh8y
+ 1Y4wi9W7GOQsFJXdepB06D8w5Zl+QAMNnZ2EAEAAA==
+X-Change-ID: 20260909-msm8952-initial-support-60a059c2e15e
+To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+ Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Srinivas Kandagatla <srini@kernel.org>, 
+ Ulf Hansson <ulfh@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+ "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>, 
+ Robin Murphy <robin.murphy@arm.com>, Lee Jones <lee@kernel.org>, 
+ Rob Clark <robin.clark@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Robert Marko <robimarko@gmail.com>, Guru Das Srinagesh <linux@gurudas.dev>, 
+ Amit Kucheria <amitk@kernel.org>, Thara Gopinath <thara.gopinath@gmail.com>, 
+ "Rafael J. Wysocki" <rafael@kernel.org>, 
+ Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
+ Lukasz Luba <lukasz.luba@arm.com>, Kees Cook <kees@kernel.org>, 
+ Tony Luck <tony.luck@intel.com>, 
+ "Guilherme G. Piccoli" <gpiccoli@igalia.com>, 
+ Dmitry Torokhov <dmitry.torokhov@gmail.com>
+Cc: David Heidelberg <david@ixit.cz>, phone-devel@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-mmc@vger.kernel.org, iommu@lists.linux.dev, mfd@lists.linux.dev, 
+ dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
+ Krzysztof Kozlowski <krzk@kernel.org>, linux-pm@vger.kernel.org, 
+ linux-input@vger.kernel.org, Muzaffer Kadir <muzafferkadir@mainlining.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Abel Vesa <abel.vesa@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790014748; l=5337;
+ i=muzafferkadir@mainlining.org; s=20260816; h=from:subject:message-id;
+ bh=BpRcOMKg3LS8V8DqNarIsVgSnibco3n89MGgkueN2dc=;
+ b=6d13bf2rcAw9hZjgCqRhx3KaAyNMRl7pBSwIaYokFdaChqCK+NJqUuNKUp/H2hb89vl9tkXXB
+ OZwD9zD3YBTDzCAbk2QST9OKaOBjHsbOO67kWdLyO/DWCgGUyfG7Vul
+X-Developer-Key: i=muzafferkadir@mainlining.org; a=ed25519;
+ pk=4zkv4suQ3cYcO4Z7CrV8JSSjEGLBGepUtvQCFjgnYIU=
+X-Endpoint-Received: by B4 Relay for muzafferkadir@mainlining.org/20260816
+ with auth_id=954
+X-Original-From: Muzaffer Kadir <muzafferkadir@mainlining.org>
+Reply-To: muzafferkadir@mainlining.org
 
+MSM8952 is a SoC with 8 core cpu and Adreno 405 gpu.
 
-On Mon, 14 Sep 2026 09:37:52 +0800, Quchaosheng wrote:
-> Convert the LP3943 MFD binding from free-form text to DT schema.
-> 
-> The LP3943 is an I2C LED driver that contains two sub-devices,
-> lp3943-gpio and lp3943-pwm.  The GPIO sub-device is already covered by
-> trivial-gpio.yaml, so only the PWM sub-device needs a schema of its own.
-> 
-> The PWM schema documents the ti,pwm0 and ti,pwm1 properties that select
-> the output pins for each of the two internal PWM channels, matching what
-> pwm-lp3943.c reads through of_property_read_u32_array().
-> 
-> Both schemas pass dt_binding_check.
-> 
-> Signed-off-by: Quchaosheng <quchaosheng000406@163.com>
-> ---
->  .../devicetree/bindings/mfd/lp3943.txt        | 33 --------
->  .../devicetree/bindings/mfd/ti,lp3943.yaml    | 64 +++++++++++++++
->  .../devicetree/bindings/pwm/pwm-lp3943.txt    | 58 --------------
->  .../devicetree/bindings/pwm/pwm-lp3943.yaml   | 80 +++++++++++++++++++
->  4 files changed, 144 insertions(+), 91 deletions(-)
->  delete mode 100644 Documentation/devicetree/bindings/mfd/lp3943.txt
->  create mode 100644 Documentation/devicetree/bindings/mfd/ti,lp3943.yaml
->  delete mode 100644 Documentation/devicetree/bindings/pwm/pwm-lp3943.txt
->  create mode 100644 Documentation/devicetree/bindings/pwm/pwm-lp3943.yaml
-> 
+Ported without uart connection. ramoops and usb
+mainly used to debug.
+USB is not enabled in this series because it
+depends on the not yet upstreamed (and not developed by me)
+pmi8950_smbcharger.
 
-Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
+General Mobile shamrock display panel driver
+is generated using MSM8916's mdss dsi panel
+driver generator and tested with it. I didn't
+include it.
+
+The GCC and DTS files are derived from existing
+Qualcomm source files. Original copyright notices
+are retained.
+
+GCC is based on msm8939's gcc file.
+SoC device tree is based on MSM8937 file.
+
+in some downstreams MSM8952 GCC is merged with
+MSM8917 and MSM8937's. But upstreamed MSM8917 is
+based on different GCC and different pll structure.
+I have no way to verify MSM8952 pll so I am not sure
+about how correct pll structure is.
+
+Pinctrl driver was submitted and merged here:
+https://lore.kernel.org/all/20260907-msm8952-pinctrl-v5-0-9a2d8d72ffdb@mainlining.org/
+
+Signed-off-by: Muzaffer Kadir <muzafferkadir@mainlining.org>
+---
+Changes in v3:
+- Improved GCC driver, also rewrote resets part
+- Rewrote the dt-binding side of gcc
+- Reformatted Device tree files with dt-check-style tool
+- Added reset to sdhci1 and sdhci2
+- Added cx regulator to gcc
+- Added gcc commit messages that it is a derived driver
+- Dropped adsp_mem, renamed lpass_mem to adsp_mem
+- Changed tusb320 interrupt from rising to falling as downstream uses
+- Link to v2: https://patch.msgid.link/20260916-msm8952-initial-support-v2-0-798c2602dde1@mainlining.org
+
+Changes in v2:
+- Changed device dts file as David's and Konrad's suggestions
+- Removed accidental duplicated clock assigments and fixed wrong gcc gp1,gp2
+  and gp3 parent_maps
+- Updated commit messages to make it wrapped at 72 character.
+- Fixed spi1 tlmm node naming
+- Added remaining spi and i2c nodes
+- Wired up mpm
+- Add mmio-sram to rpm_msg_ram
+- Reformatted msm8952.dtsi
+- Removed rpmcc-msm8952 driver entry and replaced it with rpmcc-msm8976
+- Merged sdhci tlmm pins to single nodes, now it is similar to existing SoCs
+- Rebased to latest linux-next, now storage works
+- Removed polling-delay properties from tsens
+- Link to v1: https://lore.kernel.org/r/20260912-msm8952-initial-support-v1-0-0e742578b524@mainlining.org
+
+---
+Muzaffer Kadir (19):
+      dt-bindings: clock: qcom: Add MSM8952 global clock controller
+      clk: qcom: Add global clock controller driver for MSM8952
+      dt-bindings: nvmem: Add compatible for MSM8952
+      dt-bindings: power: rpmpd: Add MSM8952 power domains
+      dt-bindings: mmc: sdhci-msm: Add MSM8952 compatible
+      dt-bindings: vendor-prefixes: Add General Mobile
+      dt-bindings: arm: qcom: Document MSM8952 SoC binding
+      dt-bindings: iommu: qcom,iommu: Add MSM8952 IOMMU to SMMUv2 compatibles
+      dt-bindings: mfd: qcom,tcsr: Add compatible for MSM8952
+      dt-bindings: display/msm: qcom, mdp5: Add MSM8952 compatible
+      dt-bindings: firmware: qcom,scm: Document MSM8952 SCM
+      dt-bindings: clock: qcom,rpmcc: Add MSM8952 compatible
+      drm: msm: mdp5: Add MDP5 configuration for MSM8952
+      soc: qcom: ubwc: Add UBWC config for MSM8952
+      dt-bindings: thermal: tsens: Add MSM8952
+      thermal: qcom: tsens: Add support for MSM8952 tsens
+      arm64: dts: qcom: Add initial support for MSM8952
+      dt-bindings: input: touchscreen: goodix: Add binding for GT970
+      arm64: dts: qcom: generalmobile-shamrock: new device
+
+ Documentation/devicetree/bindings/arm/qcom.yaml    |    6 +
+ .../bindings/clock/qcom,gcc-msm8952.yaml           |   65 +
+ .../devicetree/bindings/clock/qcom,rpmcc.yaml      |    5 +
+ .../devicetree/bindings/display/msm/qcom,mdp5.yaml |    1 +
+ .../devicetree/bindings/firmware/qcom,scm.yaml     |    3 +
+ .../bindings/input/touchscreen/goodix.yaml         |   35 +-
+ .../devicetree/bindings/iommu/qcom,iommu.yaml      |    1 +
+ .../devicetree/bindings/mfd/qcom,tcsr.yaml         |    1 +
+ .../devicetree/bindings/mmc/qcom,sdhci-msm.yaml    |    1 +
+ .../devicetree/bindings/nvmem/qcom,qfprom.yaml     |    1 +
+ .../devicetree/bindings/power/qcom,rpmpd.yaml      |    1 +
+ .../devicetree/bindings/thermal/qcom-tsens.yaml    |    1 +
+ .../devicetree/bindings/vendor-prefixes.yaml       |    2 +
+ arch/arm64/boot/dts/qcom/Makefile                  |    1 +
+ .../dts/qcom/msm8952-generalmobile-shamrock.dts    |  435 +++
+ arch/arm64/boot/dts/qcom/msm8952.dtsi              | 2696 +++++++++++++++
+ drivers/clk/qcom/Kconfig                           |   10 +
+ drivers/clk/qcom/Makefile                          |    1 +
+ drivers/clk/qcom/gcc-msm8952.c                     | 3548 ++++++++++++++++++++
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_cfg.c           |   81 +
+ drivers/soc/qcom/ubwc_config.c                     |    1 +
+ drivers/thermal/qcom/tsens-v1.c                    |   44 +
+ drivers/thermal/qcom/tsens.c                       |    3 +
+ drivers/thermal/qcom/tsens.h                       |    2 +-
+ include/dt-bindings/clock/qcom,gcc-msm8952.h       |  215 ++
+ 25 files changed, 7144 insertions(+), 16 deletions(-)
+---
+base-commit: e657a464aba873f5eaf3ca821b6e4016674492d6
+change-id: 20260909-msm8952-initial-support-60a059c2e15e
+
+Best regards,
+--  
+Muzaffer Kadir <muzafferkadir@mainlining.org>
+
 
