@@ -1,111 +1,85 @@
-Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+Received: from rtits2.realtek.com.tw (rtits2.realtek.com [211.75.126.72])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89F743793D2
-	for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 11:00:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC12E539784;
+	Tue, 22 Sep 2026 11:18:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=211.75.126.72
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790074823; cv=none; b=dCIjO2RRWQrbSw5fwXbImdKKsJe212iTQZenfQfscKPHLsVJPkAdXmq+l6eTX5winlKQqWistHpYgv3oASg75nzVcQiIC8Paykt1jFTmhlh9brcb1ViujS7BcNwvdZjqPhVzGvquMm0fWZs5B8XM+APZFvJGPG598KPT6Jh80gM=
+	t=1790075910; cv=none; b=apgG9n7AegXIWQ3x7Ry6NMeZrLGH2AsvBELxlQZHRgq3wfHbDsFqzbCiqa/1Y0BGfJUoIMn+LjPkE367vx1pKigU9xrtPhDm8zP6kpEuOsVPXyhXzJjPlCc93VPAddrhwGbToiRZiRX4+0A+pwaqeGkpTNwmI/iCcfqxAwDP5qE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790074823; c=relaxed/simple;
-	bh=/0OHB51Px1kwmAioyURonbOhXzHFSra/T+tZss6z+H4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=tcSYpGdZuEDolCksXDTrFzRFqGPqV6Vdzn73yx7xuIroHyRkFdQvSN7u/eKbBOlmuUPOF95aFdCPbRXS7UjyvOZxjY6Xhxpsce3ZLYgnENyndYJFDUoeH2Vwg1bXL4PW1rGQKQ8XEseoCHeAfJzSRzIH+heE3/cw9gz4s7WZdvw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=dn31uHLo; arc=none smtp.client-ip=74.125.225.141
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790075910; c=relaxed/simple;
+	bh=vmHKNujf04ClybYydx3hcwsqBhWnQx+QdwzxdTT29X0=;
+	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
+	 Content-Type:MIME-Version; b=AcHeeJytG7iGi6DqDhsOrnKCWmoNI7r/TdCe5KxSW66IKLKvQKQ8LgFQ6U8BYoLtUJQ+ewxClDZC3Fon5CoP/K3p4KpPxEHzdNbNS0MLkghWL+Yk6x3NNbMJW9kFnrlciPqxVpS09mV+llJpKAXAX3qn4xAHJkWYXYCsPJPyjBw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=realsil.com.cn; spf=pass smtp.mailfrom=realsil.com.cn; dkim=pass (2048-bit key) header.d=realsil.com.cn header.i=@realsil.com.cn header.b=gk1OjVpJ; arc=none smtp.client-ip=211.75.126.72
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=realsil.com.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=realsil.com.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dn31uHLo"
-Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49cd38e0e5dso56845355e9.2
-        for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 04:00:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790074816; x=1790679616; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=y7qcpIDKckcU+FwnXhQhXsF99jpMu30FwevkL1hVHm8=;
-        b=dn31uHLoLNO7jHc0dnbekYwarjaO4YdLoUxRrV/gUFSp/C0q9dVFQdTyX9aKdBZFNf
-         Uq8PIoYWI3K3ytW+SpQHQpe4N62/yVjTBhGSJhup3F6vBWta6ocyo1jn622ocBZVznBQ
-         kfa1gX+cN9s/JqWYxANFUdqEcn5Qwdcw/V8KL3rGBmhuHlQHeiUBccuWNE4uChkt5mgW
-         28TOQgA9G/fwDqg+fw3x7k1wAJR2a5DgeQduNrnkGTzN3uEohB2FBEsN/pcLr3+/WF4M
-         IuL8iZif3hKCxO/fKbb3pI4nzWTFl6TkHQYcgmBXpEzgdmVx9sAuTXczgv6y3fENNNfb
-         T2Mw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790074816; x=1790679616;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=y7qcpIDKckcU+FwnXhQhXsF99jpMu30FwevkL1hVHm8=;
-        b=kg0f/Q9pBpsdgSdRfuhe4Trl6rR/v6uzAWPDliVx5I9hE9yZQiIBQ4fpZHmkyMOT+p
-         yk6of00uWAT07nZZmqyBWYIM9X7JsJnbcfWvg7sXYIqU/He5C9YQxhnzNwbEb669Cok0
-         NJRj6XbCrVdvdtg5bvsL1Q/FSHQgLJm7snmbFHmdf6/WxyO7kOh+mnDz9OtimG/68uNB
-         MYwjKSt6rw6d1QzMZXe+KjJHF+BJqjze3sENZEjF3DDp+SXwTzQpj+SadhEvFuiqolos
-         MHi2LZtdc4lhmwVyJdKS+e6Y5pK6Jpsz0wvceHsAL0nZ92JXIQDET5U9wmDTCDdqg1u0
-         ic3w==
-X-Forwarded-Encrypted: i=1; AKwUvBwrJkvb/5psM63J1GqQ0GwXF2QR86MGGONtlOUomx9DxaXiYJVEcoSrHPALDznx/NMWxKA=@lists.linux.dev
-X-Gm-Message-State: AFuF++lPYMEKdWH5WHF/17EJc2hjQYHG1NYlVXHxDECNgy1pftqla8lR
-	QRkXTl8V/nNO4JTeBJ4Xv9rrSwC2aDdjlLPetOdaGRHSsGGBgLWk1RVrXh3MQB+Z/jg=
-X-Gm-Gg: AYBFou0MHcqXM5q/COq7jngZ0z6ifZML3RB7jk2YhPcSEN3aP1TsENdkea9jo+Nxo1d
-	oEt/e2PeBUUNCJI8n2rb1KkslZUwoMXB3qLYbO79DvCgs7jTHQhEdy8jvF2/4hbARN0EPzouGEn
-	aBNWeeUo8nqDf23RWDh6GshTNjlR5k6P8U8pjwqBHs0ghJ9gzU1C5NqceurwZneclveMUZ+JUcK
-	8zhkR803MQO/W9Z2VSvhUsL5WVxXxj2E3MtbP5uWTA1mPl5AcYXXvW2H54ZkQMFoodapFJ/Ltg0
-	z9+rnkF7YuIqQWLmX/knoeMaPSO2A14ztqZJg1jIO6JyrK4AaED8CEbavdbBJO4EV1ZPC0O5qQV
-	sgc8bOaZPzwLbF5pz8yOH1KPsoXmN6+i09C/jetn709ZSEELlVqV0DKOjfmjnZr33L31jc/ZfmV
-	xcE2XSJilBgANjrFQ2Y/gvnN+I+4FRlNvrW5mnaXiMA/GkcxGvYG+brRM2oYXRu6uLV0EjMlrnv
-	ONrHb4=
-X-Received: by 2002:a05:600c:4e4c:b0:49f:bd3c:bc28 with SMTP id 5b1f17b1804b1-49fc574f456mr195177935e9.35.1790074814606;
-        Tue, 22 Sep 2026 04:00:14 -0700 (PDT)
-Received: from localhost.localdomain ([94.252.75.113])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-49fdaa4e47csm85599365e9.1.2026.09.22.04.00.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Sep 2026 04:00:14 -0700 (PDT)
-From: Oleg Keri <okerixx@gmail.com>
-To: Lee Jones <lee@kernel.org>
-Cc: Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Guru Das Srinagesh <linux@gurudas.dev>,
-	linux-arm-msm@vger.kernel.org,
-	mfd@lists.linux.dev,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 2/2] mfd: qcom-pm8008: support PMICs with no interrupt line
-Date: Tue, 22 Sep 2026 13:00:06 +0200
-Message-ID: <179007480602.173050.17097175603597060097@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260922101459.GB2730113@google.com>
-References: <20260922101459.GB2730113@google.com>
+	dkim=pass (2048-bit key) header.d=realsil.com.cn header.i=@realsil.com.cn header.b="gk1OjVpJ"
+X-SpamFilter-By: ArmorX SpamTrap 5.80 with qID 68MBHTc943573188, This message is accepted by code: ctloc85258
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=realsil.com.cn;
+	s=dkim; t=1790075850;
+	bh=vmHKNujf04ClybYydx3hcwsqBhWnQx+QdwzxdTT29X0=;
+	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:MIME-Version;
+	b=gk1OjVpJ+qN21rf1ebCj8jVcix41KX4smsXom+CXRJaPmDwGWS3k6Czp4/z6bg4Iy
+	 pSo7DJ+eaXCdDWusXF3b+t0LWZjy/ryMOzF/B8TM8lH7y6W3j2ZO6v0xnpNNKVGO0z
+	 DRKmcfIvUMy+7dPNk2665VHuan8JdF6x/LwQWp1t+nt82XpN85C2UB1mNsgJ47iFE4
+	 G46HV9JwQhFFBLZ4am2Y4MDDF5smjvSbPllECQnKsEkeE5vEPqKIhTjCjs1gXmybjw
+	 46slVMOEok+EDLMInWl1XCrWD32dLY51uqpHAtY0Hyt4ZftZw5Wjpgi7HBQC9nUwDm
+	 aRiCQx7AJymJQ==
+Received: from RS-EX-MBS3.realsil.com.cn ([172.29.17.103])
+	by rtits2.realtek.com.tw (8.15.2/3.29/5.94) with ESMTPS id 68MBHTc943573188
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Tue, 22 Sep 2026 19:17:29 +0800
+Received: from RS-EX-MBS2.realsil.com.cn (172.29.17.102) by
+ RS-EX-MBS3.realsil.com.cn (172.29.17.103) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.49; Tue, 22 Sep 2026 19:17:29 +0800
+Received: from RS-EX-MBS2.realsil.com.cn ([fe80::d17c:2fd0:cf8e:635]) by
+ RS-EX-MBS2.realsil.com.cn ([fe80::d17c:2fd0:cf8e:635%9]) with mapi id
+ 15.02.2562.049; Tue, 22 Sep 2026 19:17:29 +0800
+From: =?utf-8?B?5ZGo5a+F?= <zain_zhou@realsil.com.cn>
+To: Frank Li <Frank.li@oss.nxp.com>
+CC: Alexandre Belloni <alexandre.belloni@bootlin.com>, Frank Li
+	<Frank.Li@nxp.com>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski
+	<krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Lee Jones
+	<lee@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, Mark Brown
+	<broonie@kernel.org>, Vikash Bansal <vikash.bansal@nxp.com>, "Aman Kumar
+ Pandey" <aman.kumarpandey@nxp.com>, Lakshay Piplani
+	<lakshay.piplani@nxp.com>, "devicetree@vger.kernel.org"
+	<devicetree@vger.kernel.org>, "linux-i3c@lists.infradead.org"
+	<linux-i3c@lists.infradead.org>, "linux-kernel@vger.kernel.org"
+	<linux-kernel@vger.kernel.org>, "mfd@lists.linux.dev" <mfd@lists.linux.dev>,
+	=?utf-8?B?546L54Kc?= <wei_wang@realsil.com.cn>
+Subject: =?utf-8?B?5Zue5aSNOiBbUkZDIFBBVENIIDQvNF0gaTNjOiBodWI6IEFkZCBSZWFsdGVrIFJUUzQ5MHggSTNDIGh1YiBzdXBwb3J0?=
+Thread-Topic: [RFC PATCH 4/4] i3c: hub: Add Realtek RTS490x I3C hub support
+Thread-Index: AQHdSOfLaKpFKLXJIUuzQzqoL4gPULbY2e6AgAGbpWA=
+Date: Tue, 22 Sep 2026 11:17:28 +0000
+Message-ID: <1453c25fb1fd4db1a928bf83e72187f9@realsil.com.cn>
+References: <20260920100501.4091351-1-zain_zhou@realsil.com.cn>
+ <20260920100501.4091351-5-zain_zhou@realsil.com.cn>
+ <arF6ifEpWAlO10B3@lizhi-Precision-Tower-5810>
+In-Reply-To: <arF6ifEpWAlO10B3@lizhi-Precision-Tower-5810>
+Accept-Language: en-US, zh-CN
+Content-Language: zh-CN
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-Hi Lee,
-
-On Tue, Sep 22, 2026, Lee Jones wrote:
-> What on earth is going on here:
->
-> https://lore.kernel.org/r/20260907-glymur_camss-v2-5-75f7982dc983@oss.qualcomm.com
-
-Three postings for the same PMIC, in order:
-
-- Nihal's Glymur CAMSS v2 (7 Sep) carried PM8010 support for qcom-pm8008
-  as patches 3-6, including the no-interrupt case.
-- My series (8 Sep) was a strict subset of that, written without
-  checking the list first. I withdrew it the same day on the cover
-  letter [1]; please drop it.
-- Nihal dropped the PMIC patches from his v3 (17 Sep), and Jishnu posted
-  them as a dedicated series, "mfd: qcom-pm8008: Add support for PM8010
-  over I2C" (18 Sep) [2]. That is the one to review. It runs on my
-  board, PM8010 with no interrupt line, and I sent a Tested-by there.
-
-[1] https://lore.kernel.org/all/178887481187.4612.2819576206036967152@gmail.com/
-[2] https://lore.kernel.org/all/20260918-pm8010_i2c_support-v1-0-de33d78fad9d@oss.qualcomm.com/
-
-Sorry for the confusion,
-Oleg
+T24gTW9uLCBTZXAgMjEsIDIwMjYgYXQgMDI6NDI6MTdQTSAtMDQwMCwgRnJhbmsgTGkgd3JvdGU6
+DQo+IFRoaXMgcmVnaXN0ZXIgaXMgdGhlIGV4YWN0bHkgc2FtZSBhcyBQM0gyWDRYLiBDYW4geW91
+IGRpcmVjdCByZXVzZQ0KPiBwM2gyeConcyBkcml2ZXIuDQoNCkJvdGggUDNIMng0eCBhbmQgUlRT
+NDkweCBhcmUgYmFzZWQgb24gdGhlIEkzQyBIdWIgQ29tbW9uIEFyY2hpdGVjdHVyZQ0KU3BlY2lm
+aWNhdGlvbiwgc28gaWRlbnRpY2FsIHNwZWNpZmljYXRpb24tZGVmaW5lZCByZWdpc3RlcnMgYXJl
+DQpleHBlY3RlZC4NCg0KSG93ZXZlciwgdGhlIGN1cnJlbnQgUDNIMng0eCBkcml2ZXIgaXMgZGV2
+aWNlLXNwZWNpZmljIHJhdGhlciB0aGFuIGENCmdlbmVyaWMgaW1wbGVtZW50YXRpb24gb2YgdGhl
+IHNwZWNpZmljYXRpb24uIERvIHlvdSBtZWFuIHJlZmFjdG9yaW5nDQppdCBpbnRvIGEgY29tbW9u
+IGltcGxlbWVudGF0aW9uIGZvciBkZXZpY2VzIGJhc2VkIG9uIHRoaXMNCnNwZWNpZmljYXRpb24s
+IHdoaWxlIGtlZXBpbmcgdGhlIGRldmljZS1zcGVjaWZpYyBwYXJ0cyBzZXBhcmF0ZT8NCg0KQmVz
+dCByZWdhcmRzLA0KWmFpbg0K
