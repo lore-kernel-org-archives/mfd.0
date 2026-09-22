@@ -1,305 +1,388 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 795054F4D13;
-	Tue, 22 Sep 2026 10:16:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69A0941DDE3
+	for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 10:36:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=92.121.34.21
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790072165; cv=none; b=FvMfLKJAq7tXP+/xGDw7EAz63LWgLiam8fMJ8teYZ3TD/T6Y6Ba7Z0uEeqezDTUZjJoZhZZ7Rap4t84v1YvijSa3zoLumtt7ldydM7WXpqgk6SbPH+Dz6+3gHt+ID2siFVsqO7BvKlmI1Gxe8czbxDOSHbT84K5Tq8/eahiBt0A=
+	t=1790073374; cv=none; b=Hm7wK/oXR5xl65pe8+5/93WY3zvrGqOpRihefPHLSEeK5fstMIbCuKPWqQ0iCFu0rFefYmLuQ2z6FNjli51lXkZh7hMQjTI9xzf2iXD7//QUocZd0XvhIhdPZktLb9sFf0CUIU/29RQXxMoklC7jRHnJyechvWBOE1/jr7TiRBI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790072165; c=relaxed/simple;
-	bh=3Zz5vdUwlRmEw1SpaMkw7RvyanZ7+PYsmxfj5Wvf6dk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=U/rTqSKa2ym+M6KqWKWQmQc2Sa8cj7ihxIlszoalXuKUPpJWxURgDouknCfvRrRb2WWbADgN6liZaSTOdpohiR/YCOAxEyR9BVNVepxGJpRUw3vbbKpZRZIOMyEEmvnllj6jZbhh61ESl934RIkOnWaawuxt+nJVOMnolOepfmo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TFoYP+4w; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TFoYP+4w"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7BCB41F000FF;
-	Tue, 22 Sep 2026 10:15:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790072156;
-	bh=RIYi2p8vmFv/xYihUANKk6S+FDUFfc3Ergx1l2zSeD0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=TFoYP+4wQrKRDZYY5uBI3kCDkIz/i1BEQedpVpd+pR9otjdqKA9Nm9cXZ60jXoX5E
-	 aGUKDrfv5e06Hk2HvWl4i8/mvXCl0YCPeIm2M6crGk788EBpPzU5siu7ntHo3yKavu
-	 mYaj7RXVzuXU8OpwOeRyL5z1x5sybuXNgu1tCN29VkCyiekpLKcFPAXRI4kxA2g12q
-	 ZWkFztuW6mnuZURgL1DgRUa+w5TCnk1FETyip0S8vm9t7y/D2a8gu2vzDcs8fy/jRB
-	 4Bw7pa0Wgx7f67TmfWhb51hvMVUmPaeCNqsZKCIQWd4RgSBB9GZSR1olN5BkuwZ0/N
-	 apPSRDMeWA16w==
-Date: Tue, 22 Sep 2026 11:15:49 +0100
-From: Lee Jones <lee@kernel.org>
-To: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-Cc: Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Guru Das Srinagesh <linux@gurudas.dev>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>, linux-arm-msm@vger.kernel.org,
-	linux-phy@lists.infradead.org, linux-media@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	mfd@lists.linux.dev, Suresh Vankadara <svankada@qti.qualcomm.com>,
-	Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
-	Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
-	Dhruvin Rajpura <drajpura@qti.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH v2 5/6] mfd: qcom-pm8008: Add support for PM8010 PMIC
-Message-ID: <20260922101549.GC2730113@google.com>
-References: <20260907-glymur_camss-v2-0-75f7982dc983@oss.qualcomm.com>
- <20260907-glymur_camss-v2-5-75f7982dc983@oss.qualcomm.com>
+	s=arc-20240116; t=1790073374; c=relaxed/simple;
+	bh=Vg4bWcLlugAsTCG7HLlx82yMTTssM0zNWJauQHfVqdQ=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=fIM5DL0dqQodsLKJz2r5iAXP3RcGqKxKEg2kI3ShqIKFfDepyztT4fJtMnqiAwZQWfobhppjqmlRkDJUkoZaBKBJjYAmZJGBsuiILJ5GZ1Ukywl/fHZrfcHQtaUak53ud5eFerNoeepfwtuKBYAcj/Y0xgmFy1yIUTOlYKU+EzM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com; spf=pass smtp.mailfrom=nxp.com; arc=none smtp.client-ip=92.121.34.21
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxp.com
+Received: from inva021.nxp.com (localhost [127.0.0.1])
+	by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 4204A200091;
+	Tue, 22 Sep 2026 12:36:01 +0200 (CEST)
+Received: from aprdc01srsp001v.ap-rdc01.nxp.com (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
+	by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id E136420004E;
+	Tue, 22 Sep 2026 12:36:00 +0200 (CEST)
+Received: from lsv03900.swis.in-blr01.nxp.com (lsv03900.swis.in-blr01.nxp.com [10.12.177.15])
+	by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id 3BBAF18000BA;
+	Tue, 22 Sep 2026 18:35:57 +0800 (+08)
+From: Lakshay Piplani <lakshay.piplani@nxp.com>
+To: linux-kernel@vger.kernel.org,
+	linux-i3c@lists.infradead.org,
+	alexandre.belloni@bootlin.com,
+	krzk+dt@kernel.org,
+	robh@kernel.org,
+	conor+dt@kernel.org,
+	devicetree@vger.kernel.org,
+	broonie@kernel.org,
+	mfd@lists.linux.dev,
+	lee@kernel.org,
+	Frank.Li@nxp.com,
+	lgirdwood@gmail.com
+Cc: vikash.bansal@nxp.com,
+	priyanka.jain@nxp.com,
+	aman.kumarpandey@nxp.com,
+	Lakshay Piplani <lakshay.piplani@nxp.com>
+Subject: [PATCH v20 0/8] Add support for NXP P3H2x4x I3C hub driver
+Date: Tue, 22 Sep 2026 16:05:42 +0530
+Message-Id: <20260922103551.2754613-1-lakshay.piplani@nxp.com>
+X-Mailer: git-send-email 2.25.1
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260907-glymur_camss-v2-5-75f7982dc983@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Mon, 07 Sep 2026, Nihal Kumar Gupta wrote:
+This series adds support for the NXP P3H2x4x family of multi-port I3C
+hub devices, including their on-die regulators and downstream I3C/SMBus
+target ports.
 
-> From: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-> 
-> The PM8010 is a variant of the PM8008 PMIC with a slightly different
-> IRQ layout and MFD cells. Introduce per-variant match data (IRQ chip
-> descriptor and MFD cells) selected via the new "qcom,pm8010-i2c"
-> compatible string, and support probing without an interrupt line by
-> falling back to a reduced set of MFD cells when the client has no IRQ
-> assigned.
-> 
-> Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-> Signed-off-by: Dhruvin Rajpura <drajpura@qti.qualcomm.com>
-> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
+The series introduces:
+- Core I3C master enhancements required for hub support
+- Generic I3C hub framework
+- MFD driver with regulator and I3C hub child drivers for the P3H2x4x I3C hub
 
-I think you two need to chat:
+The dependency order within the series is:
 
-https://lore.kernel.org/r/20260908130745.2545-3-okerixx@gmail.com
+- Patches 1 and 2 provide the I3C core helpers required by the generic
+  I3C hub framework
+- Patch 3 provides the P3H2x4x Device Tree binding
+- Patch 4 provides the MFD parent required by both the regulator and
+  P3H2x4x I3C hub child drivers
+- Patch 5 provides the regulator child driver and depends on patch 4
+- Patch 6 provides the generic I3C hub framework and depends on the
+  I3C core changes in patches 1 and 2
+- Patch 7 provides the P3H2x4x I3C hub child driver and depends on
+  patches 4 and 6
+- Patch 8 extends the P3H2x4x hub driver with SMBus slave mode support
+  and depends on patch 7
 
-> ---
->  drivers/mfd/qcom-pm8008.c | 140 ++++++++++++++++++++++++++++++++++++----------
->  1 file changed, 112 insertions(+), 28 deletions(-)
-> 
-> diff --git a/drivers/mfd/qcom-pm8008.c b/drivers/mfd/qcom-pm8008.c
-> index 60204cc9a2dc60cc1fe1b64030f5d803100e7874..28532cef7908ef3409a3dfc0779aae3b1a3885b9 100644
-> --- a/drivers/mfd/qcom-pm8008.c
-> +++ b/drivers/mfd/qcom-pm8008.c
-> @@ -34,6 +34,7 @@ enum {
->  	PM8008_GPIO1,
->  	PM8008_GPIO2,
->  	PM8008_NUM_PERIPHS,
-> +	PM8010_NUM_PERIPHS = 2,
->  };
->  
->  #define PM8008_PERIPH_0_BASE	0x900
-> @@ -55,6 +56,10 @@ enum {
->  #define PM8008_IRQ_GPIO1	6
->  #define PM8008_IRQ_GPIO2	7
->  
-> +#define PM8010_IRQ_MISC_MBG_FAULT	0
-> +/* 1-3 are unused */
-> +#define PM8010_IRQ_MISC_LDO_OCP	4
-> +
->  enum {
->  	SET_TYPE_INDEX,
->  	POLARITY_HI_INDEX,
-> @@ -88,6 +93,12 @@ static const struct regmap_irq pm8008_irqs[] = {
->  	_IRQ(PM8008_IRQ_GPIO2,	      PM8008_GPIO2,	BIT(0), IRQ_TYPE_SENSE_MASK),
->  };
->  
-> +static const struct regmap_irq pm8010_irqs[] = {
-> +	_IRQ(PM8010_IRQ_MISC_MBG_FAULT, PM8008_MISC, BIT(0), IRQ_TYPE_EDGE_RISING),
-> +	_IRQ(PM8010_IRQ_MISC_LDO_OCP, PM8008_MISC, BIT(4), IRQ_TYPE_EDGE_RISING),
-> +	_IRQ(PM8008_IRQ_TEMP_ALARM, PM8008_TEMP_ALARM, BIT(0), IRQ_TYPE_SENSE_MASK),
-> +};
-> +
->  static const unsigned int pm8008_periph_base[] = {
->  	PM8008_PERIPH_0_BASE,
->  	PM8008_PERIPH_1_BASE,
-> @@ -158,6 +169,25 @@ static const struct regmap_irq_chip pm8008_irq_chip = {
->  	.get_irq_reg		= pm8008_get_irq_reg,
->  };
->  
-> +static const struct regmap_irq_chip pm8010_irq_chip = {
-> +	.name			= "pm8010",
-> +	.main_status		= I2C_INTR_STATUS_BASE,
-> +	.num_main_regs		= 1,
-> +	.irqs			= pm8010_irqs,
-> +	.num_irqs		= ARRAY_SIZE(pm8010_irqs),
-> +	.num_regs		= PM8010_NUM_PERIPHS,
-> +	.status_base		= INT_LATCHED_STS_OFFSET,
-> +	.mask_base		= INT_EN_CLR_OFFSET,
-> +	.unmask_base		= INT_EN_SET_OFFSET,
-> +	.mask_unmask_non_inverted = true,
-> +	.ack_base		= INT_LATCHED_CLR_OFFSET,
-> +	.config_base		= pm8008_config_regs,
-> +	.num_config_bases	= ARRAY_SIZE(pm8008_config_regs),
-> +	.num_config_regs	= PM8010_NUM_PERIPHS,
-> +	.set_type_config	= pm8008_set_type_config,
-> +	.get_irq_reg		= pm8008_get_irq_reg,
-> +};
-> +
->  static const struct regmap_config qcom_mfd_regmap_cfg = {
->  	.name		= "primary",
->  	.reg_bits	= 16,
-> @@ -179,10 +209,32 @@ static const struct resource pm8008_temp_res[] = {
->  
->  static const struct mfd_cell pm8008_cells[] = {
->  	MFD_CELL_NAME("pm8008-regulator"),
-> -	MFD_CELL_RES("qpnp-temp-alarm", pm8008_temp_res),
-> +	MFD_CELL_RES("spmi-temp-alarm", pm8008_temp_res),
->  	MFD_CELL_NAME("pm8008-gpio"),
->  };
->  
-> +static const struct mfd_cell pm8010_cells[] = {
-> +	MFD_CELL_NAME("pm8010-regulator"),
-> +	MFD_CELL_RES("spmi-temp-alarm", pm8008_temp_res),
-> +	MFD_CELL_NAME("pm8008-gpio"),
-> +};
-> +
-> +static const struct mfd_cell pm8008_no_irq_cells[] = {
-> +	MFD_CELL_NAME("pm8008-regulator"),
-> +};
-> +
-> +static const struct mfd_cell pm8010_no_irq_cells[] = {
-> +	MFD_CELL_NAME("pm8010-regulator"),
-> +};
-> +
-> +struct pm8008_match_data {
-> +	const struct regmap_irq_chip *irq_chip_desc;
-> +	const struct mfd_cell *mfd_cells;
-> +	const struct mfd_cell *no_irq_mfd_cells;
-> +	int num_mfd_cells;
-> +	int no_irq_num_mfd_cells;
-> +};
-> +
->  static void devm_irq_domain_fwnode_release(void *data)
->  {
->  	struct fwnode_handle *fwnode = data;
-> @@ -192,15 +244,22 @@ static void devm_irq_domain_fwnode_release(void *data)
->  
->  static int pm8008_probe(struct i2c_client *client)
->  {
-> -	struct regmap_irq_chip_data *irq_data;
-> +	struct regmap_irq_chip_data *irq_data = NULL;
-> +	const struct pm8008_match_data *data;
->  	struct device *dev = &client->dev;
->  	struct regmap *regmap, *regmap2;
->  	struct fwnode_handle *fwnode;
-> +	const struct mfd_cell *cells;
->  	struct i2c_client *dummy;
->  	struct gpio_desc *reset;
-> +	int num_cells;
->  	char *name;
->  	int ret;
->  
-> +	data = device_get_match_data(dev);
-> +	if (!data)
-> +		return dev_err_probe(dev, -ENODATA, "Missing driver match data\n");
-> +
->  	dummy = devm_i2c_new_dummy_device(dev, client->adapter, client->addr + 1);
->  	if (IS_ERR(dummy)) {
->  		ret = PTR_ERR(dummy);
-> @@ -231,37 +290,62 @@ static int pm8008_probe(struct i2c_client *client)
->  	 */
->  	usleep_range(1000, 2000);
->  
-> -	name = devm_kasprintf(dev, GFP_KERNEL, "%pOF-internal", dev->of_node);
-> -	if (!name)
-> -		return -ENOMEM;
-> -
-> -	name = strreplace(name, '/', ':');
-> -
-> -	fwnode = irq_domain_alloc_named_fwnode(name);
-> -	if (!fwnode)
-> -		return -ENOMEM;
-> -
-> -	ret = devm_add_action_or_reset(dev, devm_irq_domain_fwnode_release, fwnode);
-> -	if (ret)
-> -		return ret;
-> -
-> -	ret = devm_regmap_add_irq_chip_fwnode(dev, fwnode, regmap, client->irq,
-> -				IRQF_SHARED, 0, &pm8008_irq_chip, &irq_data);
-> -	if (ret) {
-> -		dev_err(dev, "failed to add IRQ chip: %d\n", ret);
-> -		return ret;
-> +	if (client->irq) {
-> +		name = devm_kasprintf(dev, GFP_KERNEL, "%pOF-internal", dev->of_node);
-> +		if (!name)
-> +			return -ENOMEM;
-> +
-> +		name = strreplace(name, '/', ':');
-> +
-> +		fwnode = irq_domain_alloc_named_fwnode(name);
-> +		if (!fwnode)
-> +			return -ENOMEM;
-> +
-> +		ret = devm_add_action_or_reset(dev, devm_irq_domain_fwnode_release, fwnode);
-> +		if (ret)
-> +			return ret;
-> +
-> +		ret = devm_regmap_add_irq_chip_fwnode(dev, fwnode, regmap, client->irq,
-> +						       IRQF_SHARED, 0, data->irq_chip_desc,
-> +						       &irq_data);
-> +		if (ret) {
-> +			dev_err(dev, "failed to add IRQ chip: %d\n", ret);
-> +			return ret;
-> +		}
-> +
-> +		/* Needed by GPIO driver. */
-> +		dev_set_drvdata(dev, regmap_irq_get_domain(irq_data));
-> +		cells = data->mfd_cells;
-> +		num_cells = data->num_mfd_cells;
-> +	} else {
-> +		cells = data->no_irq_mfd_cells;
-> +		num_cells = data->no_irq_num_mfd_cells;
->  	}
->  
-> -	/* Needed by GPIO driver. */
-> -	dev_set_drvdata(dev, regmap_irq_get_domain(irq_data));
-> -
-> -	return devm_mfd_add_devices(dev, PLATFORM_DEVID_AUTO, pm8008_cells,
-> -				ARRAY_SIZE(pm8008_cells), NULL, 0,
-> -				regmap_irq_get_domain(irq_data));
-> +	return devm_mfd_add_devices(dev, PLATFORM_DEVID_AUTO, cells,
-> +				    num_cells, NULL, 0,
-> +				    regmap_irq_get_domain(irq_data));
->  }
->  
-> +static const struct pm8008_match_data pm8008_data = {
-> +	.irq_chip_desc = &pm8008_irq_chip,
-> +	.mfd_cells = pm8008_cells,
-> +	.no_irq_mfd_cells = pm8008_no_irq_cells,
-> +	.num_mfd_cells = ARRAY_SIZE(pm8008_cells),
-> +	.no_irq_num_mfd_cells = ARRAY_SIZE(pm8008_no_irq_cells),
-> +};
-> +
-> +static const struct pm8008_match_data pm8010_data = {
-> +	.irq_chip_desc = &pm8010_irq_chip,
-> +	.mfd_cells = pm8010_cells,
-> +	.no_irq_mfd_cells = pm8010_no_irq_cells,
-> +	.num_mfd_cells = ARRAY_SIZE(pm8010_cells),
-> +	.no_irq_num_mfd_cells = ARRAY_SIZE(pm8010_no_irq_cells),
-> +};
-> +
->  static const struct of_device_id pm8008_match[] = {
-> -	{ .compatible = "qcom,pm8008", },
-> +	{ .compatible = "qcom,pm8008", .data = &pm8008_data },
-> +	{ .compatible = "qcom,pm8010-i2c", .data = &pm8010_data },
->  	{ },
->  };
->  MODULE_DEVICE_TABLE(of, pm8008_match);
-> 
-> -- 
-> 2.34.1
-> 
+Changes in v20:
+- Rebased the series onto v7.3-rc4
+- Moved the generic I3C hub MAINTAINERS entries from patch 6 to patch 7,
+  allowing patches 1, 2 and 6 to be applied independently of the P3H2x4x
+  driver
+- No functional driver changes
+- Link to v19: https://lore.kernel.org/linux-i3c/20260916070728.1088801-1-lakshay.piplani@nxp.com/T/#u
+
+Changes in v19:
+- Rebased the series onto v7.3-rc3
+- Expressed P3H2440, P3H2441 and P3H2841 using nxp,p3h2840 as their
+  fallback compatible in the DT binding
+- Reworked the binding description to contain hardware details only
+- Updated the binding example to demonstrate the fallback-compatible form
+- Retained only nxp,p3h2840 in the MFD driver's OF match table
+- Link to v18: https://lore.kernel.org/linux-i3c/20260903062108.2712296-1-lakshay.piplani@nxp.com/T/#u
+
+Changes in v18:
+- Rebased onto v7.3-rc1; no intended driver behaviour changes
+- Adapted i3c_master_register_fwnode() to the generic fwnode handling
+  introduced in v7.3-rc1
+- Link to v17: https://lore.kernel.org/linux-i3c/20260902102929.2268307-1-lakshay.piplani@nxp.com/T/#u
+
+Changes in v17:
+- Document the calling context of i3c_dev_recycle_ibi_slot_controller():
+  it runs in workqueue context without the bus lock held, while the 
+  controller owns and synchronizes its IBI pool
+- Retain the request_ibi capability check to preserve the pre-series
+  behaviour for regular I3C devices
+- Explain in the binding description that all variants share the same register
+  interface, software reads the target-port count from DEV_CAPAB, and
+  the x0/x1 variants differ only in power-up defaults that the driver
+  overrides
+- Remove the fixed post-enable delay; regulator settling is now handled
+  by the regulator core
+- Add .enable_time = 5000 through P3H2X4X_LDO_ENABLE_TIME_US to all four
+  LDO descriptors, so the regulator core applies the post-enable
+  settling delay
+- Move the lockdep-only routing-lock class assignment into a dedicated
+  helper, leaving hub context initialization unconditional when
+  CONFIG_LOCKDEP is disabled
+- Document that hub_dev must already be registered and remove the
+  WARN_ON_ONCE checks for its descriptor and parent controller
+- Export i3c_hub_master_ops as a const object and reference it directly
+  instead of returning it through an accessor
+- Document that downstream ports share the parent controller's dynamic
+  address domain and that independent per-port DAA domains are not
+  provided
+- Document that a broadcast CCC on a virtual bus reaches the parent bus
+  and devices behind other connected ports; directed CCCs must be used
+  for per-device scope
+- Document that fixed-DT address reservations remain allocated for the
+  lifetime of the parent bus, are reused across driver reprobes, and
+  that downstream hot-join support would also require reserving static
+  addresses
+- Use a named initializer for the platform_device_id table
+- Document why I3C target ports are connected once and left connected,
+  making their per-operation enable and disable callbacks no-ops
+- Reference the exported i3c_hub_master_ops object directly
+- Link to v16: https://lore.kernel.org/linux-i3c/20260826103819.1614843-1-lakshay.piplani@nxp.com/T/#u
+
+Changes in v16:
+- Rename the controller-only helpers with a "_locked" suffix to
+  make the parent-bus locking contract explicit, route IBI slot recycling
+  through the controller helper, and destroy the generic IBI workqueue when
+  request_ibi() fails
+- Fix a lockdep "recursive locking" false positive on the hub forwarding path
+  by giving the virtual bus lock and hub routing mutex per-nesting-depth
+  lockdep classes
+- Fix parent-bus dynamic-address reservation to reserve by assigned-address
+  and only when the slot is free, avoiding ENTDAA collisions
+- Make downstream reattach atomic against asynchronous IBI and reject it while
+  an IBI is live; detach IBI-lifetime invariant documented and checked with
+  WARN_ON_ONCE; underlying core IBI teardown fix deferred (known I3C-core
+  limitation)
+- Tighten the target-port reg schema (explicit minimum 0, maximum 7, and
+  maximum 3 for four-port variants)
+- Do not ignore regulator-enable failures during hub configuration
+- Widen the SMBus poll deadline to the datasheet SDA-stuck/SCL-low recovery
+  window and use DMA-safe buffers for controller-agent and SMBus-agent
+  transfers over I3C
+- Advertise I2C_FUNC_SLAVE only when CONFIG_I2C_SLAVE is enabled, reject slave
+  registration unless the upstream I3C device and IBI path are available, and
+  always clear the software slave state on unregister
+- Validate the SMBus-agent IBI payload length and bound the target-port loop
+  by num_target_ports before dispatching receive events
+- Link to v15: https://lore.kernel.org/linux-i3c/20260817103844.2142802-1-lakshay.piplani@nxp.com/T/#u
+
+Changes in v15:
+- Replace the direct attach and detach APIs with controller-only helpers
+  that do not modify address-slot state, device lists or generic IBI
+  lifecycle state
+- Add controller-only helpers for device attach, reattach and detach,
+  and for requesting, freeing, enabling, disabling and recycling IBI
+  resources
+- Rework the generic hub architecture to keep downstream logical device
+  descriptors associated with their virtual controllers
+- Add a permanent parent-facing descriptor for each downstream device
+  and use it for operations handled by the physical parent controller
+- Remove temporary descriptor reparenting and temporary hub dynamic
+  address replacement from downstream transfer paths
+- Forward downstream private transfers and the complete IBI lifecycle,
+  including IBI slot recycling, through the parent-facing descriptor
+  with appropriate parent-bus locking
+- Add binding and MFD support for the P3H2440, P3H2441, P3H2840 and
+  P3H2841 variants
+- Fix the target-port reg schema and update the binding examples to use
+  SMBus target-port nodes
+- Read the device capability register to determine whether the device
+  provides four or eight target ports
+- Configure and register only the target ports implemented by the
+  selected device variant
+- Preserve the MFD parent's driver data and store the hub context in the
+  shared MFD structure for use by IBI callbacks
+- Validate target-port types and indices while ignoring non-target-port
+  children, such as the regulators node, during Device Tree parsing
+- Correct the SMBus transfer timeout calculation for 400 kHz operation
+- Use I2C adapter quirks to enforce the maximum supported read and write
+  payload lengths
+- Publish callback-visible SMBus adapter state before adapter
+  registration and roll it back if registration fails
+- Rework SMBus slave registration and unregistration to use the shared
+  protected-register lock and update software state only after the
+  corresponding hardware operation succeeds
+- Update the MFD source description to identify the device as an NXP
+  P3H2x4x multi-port I3C hub instead of referring to it as an "MFD
+  device driver"
+- Link to v14: https://lore.kernel.org/linux-i3c/20260714092053.2461482-1-lakshay.piplani@nxp.com/T/#u
+
+Changes in v14:
+- Add i3c_master_register_fwnode() for virtual I3C masters and use it instead of temporarily changing
+  parent dev->of_node
+- Add runtime PM handling in i3c_master_send_ccc_cmd()
+- Export i3c_bus_maintenance_lock()/unlock() and use them in hub paths
+- Fix IBI request/free cleanup to handle forwarded callbacks that clear dev->ibi, and destroy the
+  allocated IBI workqueue on request failure
+- Add a shared MFD protected_reg_lock and use it for protected register accesses across P3H2X4X
+  child drivers
+- Rework regulator protected-register handling to restore the original protection state after
+  each operation
+- Serialize hub route selection around DAA, CCC, private transfer and IBI paths
+- Hold the parent maintenance lock across temporary hub address reattach, transfer and address
+  restore
+- Fix SMBus polling interval calculation
+- Clean up already registered SMBus adapters on adapter allocation or registration failure
+- Fix SMBus slave receive status handling by clearing receive flags on error paths, using FIELD_GET()
+  and explicitly clearing overflow status
+- Link to v13: https://lore.kernel.org/linux-i3c/20260701065755.2067793-1-lakshay.piplani@nxp.com/T/#u
+
+Changes in v13:
+- Fix I3C master address management in direct attach/detach paths by using i3c_master_get_i3c_addrs()
+  adding rollback on failure, skipping master self attach/detach, and properly releasing addresses to
+  avoid stale state and use-after-free issues.
+- Export and document address slot helper APIs for I3C hub support.
+- Reserve parent bus address slots for downstream devices with identical static and assigned addresses
+  by parsing target-port DT nodes prior to virtual controller registration, preventing DAA conflicts.
+- Keep broadcast RSTDAA blocked with added documentation, and clarify intentional no-op callbacks
+  and pending TODOs (e.g., IBI slot recycle).
+- Rework SMBus transaction handling to use polling instead of fixed delays
+  avoiding premature reads and data corruption.
+- Fix DT handling issues by preventing duplicate target-port node leaks and restoring dev->of_node
+  after temporary modification.
+- Improve resource management using devm-based cleanup for DT nodes, IBI setup, adapter unregister
+  and register relock paths.
+- Make IBI setup optional and robust to avoid probe failures on unsupported platforms, with proper cleanup.
+- Fix SMBus slave receive path by improving buffer handling, event delivery, and handling of unregistered ports.
+- Strengthen concurrency handling with proper locking around shared state.
+- Link to v12: https://lore.kernel.org/linux-i3c/20260617110355.1591844-1-lakshay.piplani@nxp.com/T/#u
+
+Changes in v12:
+- Rebased on i3c/next
+- Dropped patches 1/9 and 2/9 from v11 as they are already applied
+- Add address check in i3c_master_direct_detach_i3c_dev_locked() to skip
+  detach for unaddressed devices
+- Drop redundant depends on I3C from config I3C_HUB
+- Return -EOPNOTSUPP for unsupported I2C transfers in the generic hub ops
+- Correct default pull-up and drive-strength values
+- Add devm cleanup for the IBI request/enable path
+- Remove dead code and simplify cleanup by relying on devm-managed resources
+- Fix SMBus slave client NULL handling and unregister cleanup
+- Link to v11: https://lore.kernel.org/linux-i3c/20260612111816.3688240-1-lakshay.piplani@nxp.com/T/#u
+
+Changes in v11:
+- Convert i3c_master_supports_ccc_cmd() to return bool and align
+  semantics with CCC support checks used by the I3C core
+- Use MFD_CELL_NAME() for child device registration
+- Rename driver names to follow subsystem conventions:
+     - Use '-' instead of '_' in driver names
+     - Drop the "_drv" suffix from driver names
+- Fix virtual hub address reattach handling and parent bus locking
+- Fix IBI request and cleanup error paths
+- Improve SMBus slave mode payload validation and parsing
+- Link to v10: https://lore.kernel.org/linux-i3c/20260525064209.2263045-1-lakshay.piplani@nxp.com/T/#u
+
+Changes in v10:
+- Rename i3c_master_reattach_i3c_dev() to *_locked to reflect required
+  bus locking
+- Rename i3c_master_direct_attach_i3c_dev() and i3c_master_direct_detach_i3c_dev()
+  to *_locked, as these APIs must be called with the bus lock held for write
+- Drop redundant is_p3h2x4x_in_i3c flag from p3h2840.h
+- Remove unnecessary ibi_lock handling in request/enable/disable/free
+  IBI APIs
+- Remove redundant parent pointer from struct i3c_hub and derive upstream
+  master from hub_dev
+- Split SMBus target/slave mode support, including IBI and MCTP receive handling,
+  into a separate patch
+- Link to v9: https://lore.kernel.org/linux-i3c/20260420105222.1562243-1-lakshay.piplani@nxp.com/T/#u
+
+Changes in v9:
+- Renamed macros to follow consistent uppercase naming conventions
+- Made REGMAP selects in the P3H2X4X MFD Kconfig conditional, to avoid I3C/I2C dependency issues
+- Referenced i3c.yaml and i2c-controller.yaml for child bus nodes
+- Dropped unnecessary #address-cells and #size-cells from child nodes
+- Added CONFIG_I2C_SLAVE guards where necessary to avoid build errors when I2C slave support is disabled
+- Link to v8: https://lore.kernel.org/linux-i3c/20260323062737.886728-1-lakshay.piplani@nxp.com/T/#u
+
+Changes in v8:
+- Add compatible in i3c example
+- Link to v7: https://lore.kernel.org/linux-i3c/20260319112441.3888957-1-lakshay.piplani@nxp.com/T/#u
+
+Changes in v7:
+- Fix kernel-doc warnings across I3C core and hub code
+- Rework DT binding schema and examples to pass dt_binding_check
+- Update MFD Kconfig to use I3C_OR_I2C
+- Convert CONFIG_I3C_HUB to tristate
+- Remove unnecessary CONFIG_I2C_SLAVE guards
+- Replace custom helpers with find_closest()
+- Use devm_regulator_get_enable_optional()
+- Link to v6: https://lore.kernel.org/linux-i3c/64c5070c-aa9e-427a-933e-91e168f0510c@kernel.org/T/#u
+
+Changes in v6:
+- Update DT binding with vendor-prefixed properties
+- Add generic I3C hub support
+- Remove generic code from P3H2x4x driver
+- Link to v5: https://lore.kernel.org/linux-i3c/20260206120121.856471-1-aman.kumarpandey@nxp.com/T/#u
+
+Changes in v5:
+- Update supply naming and descriptions
+- Improve MFD Kconfig/Makefile ordering
+- Link to v4: https://lore.kernel.org/linux-i3c/20260113114529.1692213-2-aman.kumarpandey@nxp.com/T/#u
+
+Changes in v4:
+- Split driver into MFD, regulator and I3C hub parts
+- Update I3C master for hub support
+- Fix DT binding issues
+- Link to v3: https://lore.kernel.org/linux-i3c/20250811-bittern-of-abstract-prestige-aaeda9@kuoka/T/#u
+
+Changes in v3:
+- Add MFD support for hub and regulators
+- Add regulator integration
+- Link to v2: https://lore.kernel.org/linux-i3c/17145d2f-5d07-4939-8381-74e27cde303c@kernel.org/T/#u
+
+Changes in v2:
+- Fix DT binding warnings
+- Refine DT parsing logic
+- Link to v1: https://lore.kernel.org/linux-i3c/822d6dca-b2c6-4439-ade5-219620ebc435@kernel.org/T/#u
+
+Aman Kumar Pandey (5):
+  i3c: master: Add APIs for I3C hub support
+  dt-bindings: i3c: Add NXP P3H2x4x i3c-hub support
+  mfd: p3h2x4x: Add driver for NXP P3H2x4x i3c hub and on-die regulator
+  regulator: p3h2x4x: Add driver for on-die regulators in NXP P3H2x4x
+    i3c hub
+  i3c: hub: p3h2x4x: Add support for NXP P3H2x4x I3C hub functionality
+
+Lakshay Piplani (3):
+  i3c: master: Add controller-only device operation helpers
+  i3c: hub: Add support for the I3C interface in the I3C hub
+  i3c: hub: p3h2x4x: Add SMBus slave mode support
+
+ .../devicetree/bindings/i3c/nxp,p3h2840.yaml  | 330 +++++++
+ MAINTAINERS                                   |  15 +
+ drivers/i3c/Kconfig                           |  15 +
+ drivers/i3c/Makefile                          |   2 +
+ drivers/i3c/hub.c                             | 832 ++++++++++++++++++
+ drivers/i3c/hub/Kconfig                       |  11 +
+ drivers/i3c/hub/Makefile                      |   4 +
+ drivers/i3c/hub/p3h2840_i3c_hub.h             | 362 ++++++++
+ drivers/i3c/hub/p3h2840_i3c_hub_common.c      | 413 +++++++++
+ drivers/i3c/hub/p3h2840_i3c_hub_i3c.c         | 178 ++++
+ drivers/i3c/hub/p3h2840_i3c_hub_smbus.c       | 651 ++++++++++++++
+ drivers/i3c/internals.h                       |  14 +
+ drivers/i3c/master.c                          | 385 ++++++--
+ drivers/mfd/Kconfig                           |  13 +
+ drivers/mfd/Makefile                          |   1 +
+ drivers/mfd/p3h2840.c                         | 164 ++++
+ drivers/regulator/Kconfig                     |  10 +
+ drivers/regulator/Makefile                    |   1 +
+ drivers/regulator/p3h2840_i3c_hub_regulator.c | 289 ++++++
+ include/linux/i3c/device.h                    |   2 +
+ include/linux/i3c/hub.h                       |  92 ++
+ include/linux/i3c/master.h                    |  17 +
+ include/linux/mfd/p3h2840.h                   |  41 +
+ 23 files changed, 3790 insertions(+), 52 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/i3c/nxp,p3h2840.yaml
+ create mode 100644 drivers/i3c/hub.c
+ create mode 100644 drivers/i3c/hub/Kconfig
+ create mode 100644 drivers/i3c/hub/Makefile
+ create mode 100644 drivers/i3c/hub/p3h2840_i3c_hub.h
+ create mode 100644 drivers/i3c/hub/p3h2840_i3c_hub_common.c
+ create mode 100644 drivers/i3c/hub/p3h2840_i3c_hub_i3c.c
+ create mode 100644 drivers/i3c/hub/p3h2840_i3c_hub_smbus.c
+ create mode 100644 drivers/mfd/p3h2840.c
+ create mode 100644 drivers/regulator/p3h2840_i3c_hub_regulator.c
+ create mode 100644 include/linux/i3c/hub.h
+ create mode 100644 include/linux/mfd/p3h2840.h
 
 -- 
-Lee Jones
+2.25.1
+
