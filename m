@@ -1,182 +1,168 @@
-Received: from mail-pj2-f13.google.com (mail-pj2-f13.google.com [74.125.227.141])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99BCB52122E
-	for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 10:55:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 575A73939C9;
+	Tue, 22 Sep 2026 10:55:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790074512; cv=none; b=Okm+cnuim96qYLQVHu4DMgkaYPuIDW+cshk6Rg3cQITazNS0XBZ9uWFZ6MUpN/hA0Yh2mYkd43ABGoteuCrOlXp8zsLhfVLLe79tGBxbYqMzIJNxcl/OPvW2/DOgwqWtiHeblkVkoeqj/AM53dNhF+rB4IVZ6I+UH/PmaVuPtqM=
+	t=1790074518; cv=none; b=U+v1J0J9GHT+kqFv0vZoJ3bIeWVBFTIkXblIm32AziaeKoEejyrt6zyq7gt2Ggz4XhjCjCXgV4O2HB2etIi6IvK3X7GPA/HZMtc5djS78POQluft0xAXktPgB4/tKWOzRTTJJOhN0EfUYBAfzFmFZ6CVzlMHNzUEdgndBF6B1MY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790074512; c=relaxed/simple;
-	bh=FJ1s9+IWST7wzuvMM2nR3FjXUniYpzyF+HfM2q13NXY=;
-	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
-	 Message-Id:References:To; b=Z6sq0UMOfR4eBJgBs8Viwjrbk9afoTq8nQUuMlo16RGEPYntLY87RebcQSiPRKiC0JABDDzBxfmhpiM8N5dpjMVXhAOGnnvKbm20lGkx/5b30ZVGM2phuGM4wFxE6Y2g1k3zGaC3Tsf3nZn8y//luljxXEkPDczJLioPV01cP8k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=dl7ndl5s; arc=none smtp.client-ip=74.125.227.141
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790074518; c=relaxed/simple;
+	bh=qo9THL6VKsT/lL5P22xZ9s6iyQubCi4QytGRN/QPJF8=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=CKyBDbTU8DKkK3ud0lA79UO/eK+8H2rZ6sASBlEtXcPBxfv545XfudYafQcxuzDGFrZZt7s0f2c0R0+zI9XBHfhd8qKSUy8BRxFmZ2LSFKTdqrObinNiBqpeCEiSVIZMgKrhEHcxiH8dagtoHUNKAS3z/eKRV5YE2+hXRGwxdDQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Mf9m3cXB; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dl7ndl5s"
-Received: by mail-pj2-f13.google.com with SMTP id d9443c01a7336-2dd4b8eb7f9so5530845ad.3
-        for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 03:55:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790074504; x=1790679304; darn=lists.linux.dev;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:content-type:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=Qvfi21S6/W+JGJPKauvye3VyzMgsaM4FPWg0czrYd1M=;
-        b=dl7ndl5sqhZaDhwgqb/8icEEgsHiDYa+UOW7LLzXN1KTHYC+sGAQspWuOLY5MJqx0m
-         Che6xdLHBO91wtO8jzGmo5KFnIsoVFnxDJvANJX932sx8sQPrTYNpWLOMAXzzsYFEtIJ
-         WBDokdhf+jy/BSX6Sl4hiOVM7rR9DQPZ3ErhrnIdcPI9gXKHgqtCYKhiVPfU+kUQeGrO
-         gl0mepudJovpAFJ9ScBHULeP1BzWDorPBNkO8Hyr9LapfLy91NcKuP5nUdfAVcAh9kDU
-         0uZmycE6LYA/YhIHEWwpGGdgiN4AtnIrf8hROnsZqiGHFqwVqwAybU9ULR5+jfeG6o0p
-         mxjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790074504; x=1790679304;
-        h=to:references:message-id:content-transfer-encoding:cc:date
-         :in-reply-to:from:subject:mime-version:content-type:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Qvfi21S6/W+JGJPKauvye3VyzMgsaM4FPWg0czrYd1M=;
-        b=MARrD9GCg+Bhi0UjZV6uJ+iTlhqjl5K1XCORcIYCHWf4cpNBRhOAJI2iz+Rs++9jGz
-         oBuPQdt43oa7E9UaATcs8UNhTFc3TsVT551tFhhC1xqVEbc71MCOEUgYqzgtus14ZW0h
-         B6SC0Ufky0/k4jgyQauCOPq5uo6cQiiJk+6fu+9nPcs8uQGPWS9pzuVguZFIgDbl5TDb
-         pB2AZxyShSpJajOYQHz6qKb3ptDSt3wi7zvEFtITY9GTnMY8X918NHLz/C54SmO5XtKj
-         Ne2L4TAGXy0l4b99LtsAlZ4+FCeNWCN7sBNuA78KerFvv8uXGeVGO7IFgW7kugubG3FS
-         8Vzg==
-X-Forwarded-Encrypted: i=1; AKwUvBwtvkRZqhWI9YAKswBsaWgS3sblSsMDAYk49Gus9t0i9zWAwbRp/iiqoq0VqLSiHWjnrCI=@lists.linux.dev
-X-Gm-Message-State: AFuF++nGNYB50NDWjllWILxpW2dh+2+iMkQ1vcjU7k/t7uMp0t8ERaJO
-	3Ctfp/tDGIgU+ngO3iKdGzwZfo2xnOeVMJQ6wydm2nEQ3Hmvy1PxW3fw
-X-Gm-Gg: AYBFou0jndVSqk1qY90SyOLgculyO7gtgB0N18Sdcc6UQUv7mMQEGaPGy0rkGx30f3f
-	jvoZ1UKUwYI3lP8Nipn69YqBPHzFdwMihxfARwSblQMIzAIQlU2bGNBMMXQvNj5Zjuf46AdRPCP
-	YEHTyLLj6r8N/oM7Z8kl9eSyBHuGzWSkdZsh6N7Ya1NoBZ4E1SCS5s0zAX3yrBQA3BJK64W6XsM
-	iLsu1UaBKh5rLMpVcrICeY3T9KuIVj0xUXd+AqEcRacdMxCpzlWcLDJA+rSKh8yzQxU44R83Dam
-	tLgJhKsdItfSyV+pA55MImkaMM6CWQpSB4sQy7i9nsKPtZhA7H6FgjWFzGIpINcbHTnpjVMpmOF
-	9t1tUoN7jsAtgAG78TklLDW5Wp7IG39DAzvIK7Wbi0DRyd78UpHyUvL+7zM6SU6pyZnU3gqEHH3
-	tuCOmxPrMx0V9IRPrcVNZu03J65ZYVQf9Y6AdeP8aVHJnGCI0SCbplnWCaAVtsFZw1s2lFoWrjO
-	p9nM5HvgAfDws6bjJwK
-X-Received: by 2002:a17:903:1a24:b0:2cc:f4d4:29a0 with SMTP id d9443c01a7336-2df60bc66e2mr12441705ad.3.1790074504347;
-        Tue, 22 Sep 2026 03:55:04 -0700 (PDT)
-Received: from smtpclient.apple ([23.247.139.92])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df5d019a69sm7754535ad.15.2026.09.22.03.54.58
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Tue, 22 Sep 2026 03:55:03 -0700 (PDT)
-Content-Type: text/plain;
-	charset=utf-8
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Mf9m3cXB"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3D811F000FF;
+	Tue, 22 Sep 2026 10:55:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790074510;
+	bh=s/+QYMob5+87WiegSIyEa79IoXlYo95rJzrQ1G3FftY=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=Mf9m3cXBnrivcj+3uhYb2gw+lRy12PHKU/CD6qXTKQ+KjBesvuX23lptmMf4MgLXD
+	 GF96MJR1PQgMFS8FjDkWNFc+JneBve0WC7cDNfQALYCFZThNwrHxOHjP3D+3UiQ/kl
+	 3op3FD5LTjwbcEyb0JnDe16St4Nqkf0d460G0b1unK5lJNhY5TuSX98NNEocH1FSAH
+	 CHFGA2LM+uS4dB4FykHEWYY2liehqnKdB1uPw1axYgdIs4Lra6zjxsuonKYhKtUlZI
+	 U+Pak5xw9fASmCznT59HA+elvFOkz4yb2kBS3jBz67ilUvY4c7UNVsgsgXgMMeiX9B
+	 fMJKLPgzbCjcA==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v20 7/8] i3c: hub: p3h2x4x: Add support for NXP P3H2x4x
+ I3C hub functionality
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Lakshay Piplani" <lakshay.piplani@nxp.com>
+Cc: devicetree@vger.kernel.org, Frank.Li@kernel.org, lee@kernel.org, linux-i3c@lists.infradead.org, conor+dt@kernel.org, robh@kernel.org, "Alexandre
+ Belloni" <alexandre.belloni@bootlin.com>, mfd@lists.linux.dev
+In-Reply-To: <20260922103551.2754613-8-lakshay.piplani@nxp.com>
+References: <20260922103551.2754613-1-lakshay.piplani@nxp.com>
+ <20260922103551.2754613-8-lakshay.piplani@nxp.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Tue, 22 Sep 2026 10:55:09 +0000
+Message-Id: <20260922105509.C3D811F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81.1.8\))
-Subject: Re: [PATCH RFC v9 0/8] mfd: ls2kbmc: multiple fixes for this driver
-From: Miao Wang <shankerwangmiao@gmail.com>
-In-Reply-To: <52183cd9-4b43-456d-896d-ee2fea6d5d72@loongson.cn>
-Date: Tue, 22 Sep 2026 18:54:45 +0800
-Cc: Chong Qiao <qiaochong@loongson.cn>,
- Lee Jones <lee@kernel.org>,
- Huacai Chen <chenhuacai@kernel.org>,
- Corey Minyard <corey@minyard.net>,
- Linus Walleij <linusw@kernel.org>,
- Bartosz Golaszewski <brgl@kernel.org>,
- Xi Ruoyao <xry111@xry111.site>,
- WANG Xuerui <kernel@xen0n.name>,
- Yinbo Zhu <zhuyinbo@loongson.cn>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- mfd@lists.linux.dev,
- linux-kernel@vger.kernel.org,
- linux-gpio@vger.kernel.org,
- openipmi-developer@lists.sourceforge.net,
- Corey Minyard <cminyard@mvista.com>,
- Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <F6B4A7C7-066E-405B-B6B0-B27D29B4BEFB@gmail.com>
-References: <20260811-ls2kbmc-mod-v9-0-4fa9a5584406@gmail.com>
- <52183cd9-4b43-456d-896d-ee2fea6d5d72@loongson.cn>
-To: Binbin Zhou <zhoubinbin@loongson.cn>
-X-Mailer: Apple Mail (2.3826.700.81.1.8)
 
-Hi,
+Thank you for your contribution! Sashiko AI review found 2 potential issue(=
+s) to consider:
+- [High] i3c: hub: TOCTOU race and disconnect during I3C master registration
+- [Medium] i3c: hub: inconsistent DT child parsing allows port usurpation
+--
 
-> 2026=E5=B9=B49=E6=9C=8822=E6=97=A5 17:55=EF=BC=8CBinbin Zhou =
-<zhoubinbin@loongson.cn> =E5=86=99=E9=81=93=EF=BC=9A
->=20
-> Hi:
->=20
-> On 2026/8/11 16:07, Miao Wang via B4 Relay wrote:
->> Previously, the driver has been introduced to support the Loongson 2K
->> BMC running on the Loongson Servers, which is essential to prevent
->> the system from hanging when the BMC is being reset and the default
->> efi-framebuffer is being used. However, there are some drawbacks in =
-the
->> driver.
->> Firstly, the driver tries to read and write to the connected PCI-E =
-host
->> controller registers, assuming that the BMC is connected to LS7A =
-PCI-E
->> host controller. This assumption should be true for real products, =
-but
->> to prevent from accidentally reading and writing to the wrong PCI-E =
-host
->> controller, this driver should be modified to check this before
->> accessing the registers.
->> Secondly, the driver uses non-exported functions to tell the vt
->> subsystem to redraw the screen, preventing the driver from being
->> compiling as a module. This can be fixed by using the exported
->> functions instead.
->> Thirdly, the driver directly accesses the GPIO controller registers
->> using hard-coded addresses, which might conflict with the loaded GPIO
->> controller driver for the same GPIO controller. This is fixed in this
->> series by using the GPIO subsystem APIs instead. To associate a GPIO =
-pin
->> with a certian PCI device, it should be declared in the firmware =
-level,
->> i.e. in the ACPI table or the device tree, and thus the firmware
->> interface should be discussed and coordinated with Loongson =
-personnels.
->> Despite of this, the proposed solution in this series should be the
->> minimum necessary change to express such association. Furthermore, =
-the
->> conventional GPIO pin number and the controller address are also
->> provided, to be used as a fallback when the GPIO pin is not declared.
->> Finally, there is a minor issue in the driver where it changes the
->> mode string describing the screen resolution during probing, which
->> prevents the device from being probed again if -EPROBE_DEFER is
->> returned by the probe function.
->> I have tested the changes in this series on a single-socket Loongson
->> 3C6000 server with a Loongson 2K BMC, and the driver works as =
-expected
->> when the corresponding GPIO driver is additionally loaded.
->> Signed-off-by: Miao Wang <shankerwangmiao@gmail.com>
->> ---
->> Changes in v9:
->> - Extend the kernel docs for gpio_device_get_fwnode() to describe the
->>   usage of this function, as suggested by Bartosz.
->> - Link to v8: =
-https://lore.kernel.org/r/20260810-ls2kbmc-mod-v8-0-16e44f7322f4@gmail.com=
+commit 0eedb3548ed97f556aa49d9f3afacf2b02004acb
+Author: Aman Kumar Pandey <aman.kumarpandey@nxp.com>
 
->=20
-> I=E2=80=99m deeply sorry for the delayed response due to personal =
-reasons.
->=20
-> Regarding Patch-1, I don=E2=80=99t mind using your current version as =
-is=E2=80=94it=E2=80=99s more complete. However, I received another email =
-from lkp[1] a few days ago, and I still hope this patch can be merged =
-sooner.
->=20
-> The current discussion is focused on the GPIO-related patch, but in =
-reality, it isn=E2=80=99t closely tied to the other patches; it=E2=80=99s =
-more of an optimization. If possible, I personally think we could set it =
-aside for now and treat it as a separate set of feature optimization =
-patches.
->=20
-> [1]: https://lore.kernel.org/all/202608230816.ifMzE0No-lkp@intel.com/
+i3c: hub: p3h2x4x: Add support for NXP P3H2x4x I3C hub functionality
 
-I'm not opposed to separating the first patch from the other patches.
-But it seems that Bartosz has not been back ready for reviewing this
-series.
+This commit adds I3C hub functionality for the NXP P3H2x4x family. It
+enables I3C/I2C communication between host and hub, transparent communicati=
+on
+with downstream devices, and target port configuration.
 
-Cheers,
+> diff --git a/drivers/i3c/hub/p3h2840_i3c_hub_common.c b/drivers/i3c/hub/p=
+3h2840_i3c_hub_common.c
+> --- /dev/null
+> +++ b/drivers/i3c/hub/p3h2840_i3c_hub_common.c
+[ ... ]
+> +static void p3h2x4x_get_target_port_dt_conf(struct device *dev,
+> +					    const struct device_node *node)
+> +{
+> +	struct p3h2x4x_i3c_hub_dev *p3h2x4x_i3c_hub =3D dev_get_drvdata(dev);
+> +	struct p3h2x4x *p3h2x4x =3D dev_get_drvdata(dev->parent);
+> +	u64 tp_port;
+> +
+> +	for_each_available_child_of_node_scoped(node, dev_node) {
+> +		if (of_property_read_reg(dev_node, 0, &tp_port, NULL))
+> +			continue;
 
-Miao Wang
+[Severity: Medium]
+Does this loop potentially capture unrelated nodes with a "reg" property?
 
+Unlike p3h2x4x_parse_tp_dt_settings() below which checks if the node name is
+"i3c" or "smbus", this loop iterates over all children of the MFD node with=
+out
+checking the node name. If an unrelated child has a "reg" property, it might
+usurp a valid target port slot and incorrectly default to P3H2X4X_TP_MODE_I=
+3C.
 
+[ ... ]
+> +static int p3h2x4x_parse_tp_dt_settings(struct device *dev,
+> +					const struct device_node *node,
+> +					struct tp_configuration tp_config[])
+> +{
+> +	struct p3h2x4x *p3h2x4x =3D dev_get_drvdata(dev->parent);
+> +	u64 id;
+> +	int ret;
+> +
+> +	for_each_available_child_of_node_scoped(node, tp_node) {
+> +		enum p3h2x4x_tp_mode mode;
+> +
+> +		/*
+> +		 * Only "i3c" and "smbus" children describe target ports. Skip any
+> +		 * other child (for example the MFD "regulators" container), which
+> +		 * has no "reg" property.
+> +		 */
+> +		if (of_node_name_eq(tp_node, "i3c"))
+> +			mode =3D P3H2X4X_TP_MODE_I3C;
+> +		else if (of_node_name_eq(tp_node, "smbus"))
+> +			mode =3D P3H2X4X_TP_MODE_SMBUS;
+> +		else
+> +			continue;
+
+[ ... ]
+> diff --git a/drivers/i3c/hub/p3h2840_i3c_hub_i3c.c b/drivers/i3c/hub/p3h2=
+840_i3c_hub_i3c.c
+> --- /dev/null
+> +++ b/drivers/i3c/hub/p3h2840_i3c_hub_i3c.c
+[ ... ]
+> +int p3h2x4x_tp_i3c_algo(struct p3h2x4x_i3c_hub_dev *p3h2x4x_hub)
+> +{
+[ ... ]
+> +		ret =3D i3c_master_register_fwnode(controller,
+> +						 p3h2x4x_hub->dev,
+> +						 of_fwnode_handle(p3h2x4x_hub->tp_bus[tp].of_node),
+> +						 &i3c_hub_master_ops,
+> +						 false);
+
+[Severity: High]
+Could this lead to a physical port disconnection and subsequent transfer
+failures?
+
+When i3c_master_register_fwnode() is called here, it triggers DAA. At this
+time, the always_enable flag is false, meaning p3h2x4x_hub_enable_port() and
+p3h2x4x_hub_disable_port() will actively manipulate P3H2X4X_TP_NET_CON_CONF.
+After DAA completes, the port is left physically disconnected.
+
+> +		if (ret)
+> +			return ret;
+> +
+> +		ret =3D devm_add_action_or_reset(p3h2x4x_hub->dev,
+> +					       p3h2x4x_unregister_i3c_master,
+> +					       controller);
+> +		if (ret)
+> +			return ret;
+> +
+> +		ntwk_mask |=3D p3h2x4x_hub->tp_bus[tp].tp_mask;
+> +		p3h2x4x_hub->tp_bus[tp].is_registered =3D true;
+> +		p3h2x4x_hub->hub_config.tp_config[tp].always_enable =3D true;
+> +	}
+> +	return regmap_write(p3h2x4x_hub->regmap, P3H2X4X_TP_NET_CON_CONF, ntwk_=
+mask);
+
+[Severity: High]
+Because always_enable is set to true in the loop, subsequent port enable and
+disable callbacks become no-ops. However, the hardware register
+P3H2X4X_TP_NET_CON_CONF isn't actually written until the very end of the lo=
+op.
+
+Does this leave a window where the port is exposed but physically
+disconnected? If an I3C transfer is initiated concurrently before the loop
+finishes, won't it fail due to the software assuming the port is always
+enabled while the hardware hasn't been updated yet?
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260922103551.2754=
+613-1-lakshay.piplani@nxp.com?part=3D7
