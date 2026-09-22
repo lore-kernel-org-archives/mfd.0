@@ -1,179 +1,142 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qv2-f35.google.com (mail-qv2-f35.google.com [74.125.230.163])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5CF94D486C
-	for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 20:36:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0914331EB4
+	for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 21:02:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790109389; cv=none; b=ol0H8hODxUAXhT4aV8EHMlWxWpza2Jdjq+RlVirYRMd4MY0O7IcUOnbDFrfRtZow/CJd7xrTREQO2eXr2031xc+l7no+PsD+tZEppENkF1jcrHUPOE8v2fChdcTpQL/CwP3XOLpnOQCVUnxN0OYfYVsqe4Q93IpZi5KxmC1XuHI=
+	t=1790110938; cv=none; b=RA3PvnS1F8o0zlZQBS59XFGaHe2V18cwLmSxixXQ9IPZ7J8m3EXphg+k9KkuNwlFXnuTfjIHOxjBKvTUgeS6kxGxagq8Ko0ti7bZlaLsrOtWd4SUBGtyVS3qmKH82QacG2W9TLSiPZ8BYSSrPAtJZMIdt44tNA6e4SqdkpNElsM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790109389; c=relaxed/simple;
-	bh=F2Rmub3kqynxFCpMUaKCzbW3Wn9kxlczWQbB/Q64QTc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=JWxxFpK2L12l5niNqyLT+u4SaGA9A7SxrIMn1KjMAbdQN2XB9v6sDyPEjx60ScQrAFHfkTwtxNs0wrMY8MuDHL+/26yCh0bHMiviZODs5J7WUNJYiQblH+lyrvEbsm7BvYStenvKy0Mx2f7rjHJ/SeY4UwyQf5+jXfFY4xn5UZE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gq1bXgXF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=aPQ7o3f9; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790110938; c=relaxed/simple;
+	bh=mUiTpuXZ08jRjcCjuhENhAkI/h8z83dpTQbKz9it2Yg=;
+	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
+	 In-Reply-To:Content-Type; b=rk2DSH+4R6hXDfWWtCF6r3zoXTWAfWnQOu/j+1/iBEOoWb0tGPBHQyOQCaoEj7qjbkz2Bc/MfLzDv4laH7gw8pyhIgEeHDftwSSoKgEd+ma87hHnS/RhJq76aoTPaNLj2u+4vGOYjSynPFSzb2GtyVQ9nYSf/U251jQMsCTpyIY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=CA1Iw14v; arc=none smtp.client-ip=74.125.230.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gq1bXgXF";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="aPQ7o3f9"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68MI744p1509190
-	for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 20:36:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=+hpos+oDMvB//kGlWtIFvFC8
-	JGuO25mX9RiSy0nVVWI=; b=gq1bXgXF3s8Ra4n02W3SuuXBHDj7XCY1aL1sxa9c
-	u2ix9mNTUjoYemXIUH9MUJBag6g96s+TaF3H4UV4X0Wwh4Jp4C+bT1bvRGIefFf/
-	evLcj9iy5K80G4tgUlTNm0+6PM8pnK+UlIK/rQHU6HORQq1dobQdsAQc0sOs2yVP
-	l6barOdQ00KSB1x/v5eVSy6TCD2xX5HcAR6wERBje5qrpc8jf9qzQK1pZrDDPGLL
-	RPaiXl66re5XrVB2T0JhfiWpX/Geoo/8x+tGZHhuAEDzeSmfJIODDBAb9vTknyUK
-	jnvkqMl1sq27dq08hW6w+a7KwE/1SdLH0GWY6i24Cmp4Cw==
-Received: from mail-ua1-f69.google.com (mail-ua1-f69.google.com [209.85.222.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gux7xry20-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 20:36:13 +0000 (GMT)
-Received: by mail-ua1-f69.google.com with SMTP id a1e0cc1a2514c-98331b577e4so194440241.1
-        for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 13:36:13 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="CA1Iw14v"
+Received: by mail-qv2-f35.google.com with SMTP id 6a1803df08f44-9104e54b1abso3511156d6.1
+        for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 14:02:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790109372; x=1790714172; darn=lists.linux.dev;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=+hpos+oDMvB//kGlWtIFvFC8JGuO25mX9RiSy0nVVWI=;
-        b=aPQ7o3f9iOKkBbHh6ELHrtq0VfUCixltXhnw8EQezupMhAnml4WOn56w4SHz5ICyz7
-         4igPVQ4BTgMxwi7WDr9d5l6cA0JbTmZ0lx5Ngntj7yoPZ4B0GDwYF/2B6GGNAhLkXTHL
-         f6T4NUwRqoOrdhOqwmUqzdh5xFSFgBtudB/yXBkc6as8pYOltMTV+5r0kdj1+HtS59PY
-         rYSqHa43nQh2HqARkjfo89t8P6PvlePJeh9t+Dvq9gb25xzd5o7OKynE9ZzJIZ7nn2dr
-         v0QXliLz+tUz7OvycgnDSmtaEB+9lvLUIevWNyb5mH/tB6jlQCt4uaspk8Z4UwvN0BIr
-         dQQA==
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1790110930; x=1790715730; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=b9Tj2oRUZivsRV4DF4owfEOUU+s6qPBlsbxiJLCQngg=;
+        b=CA1Iw14v1lOfLvC2mzQODGPqsKtro2ZAOYuuwvLgOrl12roJH3dE9xc2JOvQtaYAKD
+         eWfCcYhz73Pch59IhNAY85fdlnFtFRTJz15xPD3vy0fDBoyDz5XNp7drHyK88YN85N2S
+         WiFNdLyO5q36nwBJbnAq6+FZHCKAZnQD0J/1T6Ku+rFBvMgar+f39bAUXM/18kcgKXSX
+         tTDqoL0u2h3QxZgDBB4qZ5BqEpKpsB7NVgTlVpOK+nM3d6RJr11xLwyDKlxkFLG7B/RR
+         DC70HguuiO9/ofiUjOBcDmGASKS6uAkya8KhXdddDuCbpIMSpEJHXAQgIg6FXMkZV0EO
+         2Jig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790109372; x=1790714172;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=+hpos+oDMvB//kGlWtIFvFC8JGuO25mX9RiSy0nVVWI=;
-        b=qrMdn1WEx25lSAQZZBvbBFZ86PN0GlwmfUMimk8S39xAYTxCzOnzgs92Vy+Ae3mSL4
-         AzhQk9vF9hZm3m1xUwp7IgXueRUGh/s/KGpHRYGGIWeZizOqcWemRI498p29HrrkY0hL
-         e3KzPMXLsSZH5U8ttO6+ca78ieUiidjZgBqPCBJy6a3caq3ROPC+BZJUMFHl/qNbnYLS
-         qybtakChiUkNDXbkUWlYnWb11EW04RGna07BcPSVo6D9BkrQSzeZJt7an/qMpaRhdmxU
-         eET07mlHcE1mIwW+iLv1H3/OztbegF/liul3HY8pd4LefsL5hhAm2/xYaHZWpe5lW6wK
-         553w==
-X-Forwarded-Encrypted: i=1; AKwUvByHco+C7PL+Nh0J09rhSkFxRodgh5cgK5YkLR8XaTzGzSoTQNqTOeHsgv+yY0zP4kNqiPo=@lists.linux.dev
-X-Gm-Message-State: AFuF++nU2oEkXUK2X31clJtHKdKTJt6UNZqWTmxdthfab6Ft+VZJGD64
-	QnV6iVLWn/OIab0GuhQWBxa8QnxLVLJF3RiPejy8RPrDK3HFfPyECNzXF6ynZXbRHc9Ao+cNUu9
-	xAmKYL024BNkBU4q/FwH3z5ITYNu72GBgGIeXdzzHb7y3FJPivAf+5nc=
-X-Gm-Gg: AYBFou1pQLUWzaWBiP1/IhvlNFUuYTjIFgU10T8l8Okf4HQeEd0+LsowB5qHjTblTJr
-	dMkFoIWa27DCOj4sFsIfKWMmLbaP/PC8idk/k4yuZlad5efA2ooy4bf32JzFjeQtpyMrcn2J86a
-	DScedGz+Ga80zDqqR3Wd0JRbNDI8CMSs0Ex/QXwqZ9mtZy6+UMEd7TWJddNkJYmnkau4n0WrjVh
-	2F2QID5qh58oXZXR3Yilkfpf6OT2fb9I1Zis34I6uJ5z+y4E2Maqq1izjGt53cF/UR7B9nzliQ5
-	KQ9hm08k4eHjZpGzkV/zTFmrfO5TOUMvfBbKyHjDvxLz4zzMEeNzLfwOvDICDXVuQTeWlEY4jZV
-	wq3TsIPNw+85/6Q==
-X-Received: by 2002:a05:6122:21a1:b0:5c9:a7af:8178 with SMTP id 71dfb90a1353d-5c9f1597c52mr1337348e0c.2.1790109371757;
-        Tue, 22 Sep 2026 13:36:11 -0700 (PDT)
-X-Received: by 2002:a05:6122:21a1:b0:5c9:a7af:8178 with SMTP id 71dfb90a1353d-5c9f1597c52mr1337277e0c.2.1790109371230;
-        Tue, 22 Sep 2026 13:36:11 -0700 (PDT)
-Received: from oss.qualcomm.com ([86.121.170.232])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4886876c267sm965996f8f.16.2026.09.22.13.36.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Sep 2026 13:36:10 -0700 (PDT)
-Date: Tue, 22 Sep 2026 23:36:06 +0300
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: muzafferkadir@mainlining.org
-Cc: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Srinivas Kandagatla <srini@kernel.org>, Ulf Hansson <ulfh@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
-        Robin Murphy <robin.murphy@arm.com>, Lee Jones <lee@kernel.org>,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Robert Marko <robimarko@gmail.com>,
-        Guru Das Srinagesh <linux@gurudas.dev>,
-        Amit Kucheria <amitk@kernel.org>,
-        Thara Gopinath <thara.gopinath@gmail.com>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-        Kees Cook <kees@kernel.org>, Tony Luck <tony.luck@intel.com>,
-        "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
-        Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-        David Heidelberg <david@ixit.cz>, phone-devel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mmc@vger.kernel.org, iommu@lists.linux.dev, mfd@lists.linux.dev,
-        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
-        Krzysztof Kozlowski <krzk@kernel.org>, linux-pm@vger.kernel.org,
-        linux-input@vger.kernel.org
-Subject: Re: [PATCH v3 02/19] clk: qcom: Add global clock controller driver
- for MSM8952
-Message-ID: <c2jt5rpbmys2fguk6ui7e4lwzp55vio3vf73akeiega2wqb5pf@ewp6wsvtxm3n>
-References: <20260921-msm8952-initial-support-v3-0-b96fd3fe298b@mainlining.org>
- <20260921-msm8952-initial-support-v3-2-b96fd3fe298b@mainlining.org>
+        d=1e100.net; s=20260707; t=1790110930; x=1790715730;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:from:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=b9Tj2oRUZivsRV4DF4owfEOUU+s6qPBlsbxiJLCQngg=;
+        b=UhIhkMoFWjxtjs+K1Iq13uvZWduD6IpxyHmDvy1spAMfON9gEhqB1iwp3fmoIiQGvG
+         Zo7eTl9folRbWOToYr/ldtEzFPQ7D25kIzCpMP5BK/JeL1Dnk+g7yRLS3sRYiEypSkfK
+         O9Jbhxy8gHyf2Q2OfD8+kL3cTR7B1aMMLttMKv9x9YyZYRIAcxnKZu//OoAdiNekL+OS
+         gNINCFdSM3jGpJwlRrgAoGadVPEr9K3px6f5HMSnJoyvrPfF2PjqiA06niLFizr2qUOM
+         8Y0/jeHkh3fy+PkFrhzutRJdousvKYEomRPtapuNTER3upzGA+33+xIaCeKkW3Ehv1Da
+         7ZCg==
+X-Forwarded-Encrypted: i=1; AKwUvBxdKwIBtr3VSxp31cyv6Zxe03DW5EkQ4HymfdvMDgd8Ay7k1w3+14EyHXO9yBWRh7Q8lj4=@lists.linux.dev
+X-Gm-Message-State: AFuF++nVmGMkxL1wFtXpAyZuf0euK+MD20hXK8Rx4RE3s9BAa5zeLvbh
+	xWJyDkj42Eb/sBReCqA4thMxg3i6MZScd7mGgiQq+nMxG4fmf4/h9jip3CtlQX4NPTY=
+X-Gm-Gg: AYBFou3HwbK5TPO6Gjugd0omEZVgfmxHkPQJVBDBPzS+CstTroVmLR2fJrQIkkZYIG2
+	eNxXpE8+cjk6HLXREMI46zwZceqqprYFT95LGuAY7vLupLm1sJtcHbyOz394x85vSxwq4R3u6ZI
+	HHOrwCbFT36ewQlBDzXqctgATXlm26np2i1Tlkq+sV3V0i4TSyCJbzFxbow92g9Q+O/+xds8GF5
+	nTOtVIdMuFLRTaU1JHlGXB0LumxBoYpKRBNhvUwRNIyWVOqpqErUv0UXQAAGcnauiFj8N5Mnhie
+	FSWVigX5sAelWGCEUxGmVq2aeB15K0Ldo7MmwjUPJ5szp09J9GvZrdIAqYHhMOhBGf7ThSZJ5ZC
+	mbZAe4KBKBCLVoh3yePNzVrp+OniSCyPJTTNRaWben71uDMoVhHqaNbL2xKbFbEGHcsdIjc4LWM
+	ExMSbTY53tH5Vdof3IVUlW7IJJI66MzXswSYmx/j8w3xiTC61JOYGVfBkv7RhjOcaQZp7qE80=
+X-Received: by 2002:a05:620a:2682:b0:93c:2419:37d6 with SMTP id af79cd13be357-93c252555e7mr100858985a.66.1790110929661;
+        Tue, 22 Sep 2026 14:02:09 -0700 (PDT)
+Received: from [172.22.22.28] ([73.62.185.64])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-93c24822e3asm69157885a.16.2026.09.22.14.02.07
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 22 Sep 2026 14:02:09 -0700 (PDT)
+Message-ID: <7e32063f-f1a4-4259-96c9-fcbdd25c7f2f@riscstar.com>
+Date: Tue, 22 Sep 2026 16:02:07 -0500
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260921-msm8952-initial-support-v3-2-b96fd3fe298b@mainlining.org>
-X-Proofpoint-GUID: TBsphR2e8KKWY83N4ccfbbJPMhbt9V3u
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIyMDI5NSBTYWx0ZWRfX4gslZIrUWX/d
- aoa9INGFaPyEHXaY5dWNQ91JrX7lq+NsOeGzpy2Qq70W7D8Yw5/zcgpoR0p18a8j6J45bZCiFOv
- jI0GCRdOO9tGehlkXt68+F8W6xVytNlfij49AeRM0KfCQ94wQuKuMO5r/eNpgzboe5xa/7KycQo
- UpwaQ0sb+KnhAHNKKeWfQq+ir1GaES95u8TvVCuJgBqmFN850pIavIW3vko8prpaVeltwJEhEra
- 7GmoDUz0R852x5Ds4yj9s3M+kXz0PXs+44auNZZe0ehPBXI1Qz8sG1+QrESeIGUW7QlmtESyB6u
- A4dHptAbXh5ZK1mviVBR+fHyn7NGPWzjK6jL8iCttDV6E2PSCNQ6ws2Iocm4fcPzSF+UdRjWuwi
- MzHCH2NCKEbDz4Ea0ki9Ownb1GkxeNK2Ept+yHFFoUkqVj+dcApPOm1gy34yZz4WzEkVbiv3JHX
- LBCdNp6m/XKK1rePsFQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIyMDI5NSBTYWx0ZWRfXyihB3CQAcCY6
- /WFsCQ32UWdWAPYcXGTgbax2iElCPvKXap3JKCjlDnEzThdShqsFuNScNtHnGvRgfVpFy1Ru2cw
- n8mq2GtpNhfQX4AmhI7N9tHMMtgSYWE=
-X-Authority-Analysis: v=2.4 cv=QsDLTlyd c=1 sm=1 tr=0 ts=6ab2e6bd cx=c_pps
- a=UbhLPJ621ZpgOD2l3yZY1w==:117 a=po8fGBi+ks8MzcVQGuqtFQ==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=Oh2cFVv5AAAA:8 a=OuZLqq7tAAAA:8 a=EUspDBNiAAAA:8 a=n1RHFZ1giDiXVFLDIJ0A:9
- a=CjuIK1q_8ugA:10 a=TOPH6uDL9cOC6tEoww4z:22 a=7KeoIwV6GZqOttXkcoxL:22
- a=AKGiAy9iJ-JzxKVHQNES:22
-X-Proofpoint-ORIG-GUID: TBsphR2e8KKWY83N4ccfbbJPMhbt9V3u
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-22_03,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 clxscore=1015 lowpriorityscore=0 phishscore=0 bulkscore=0
- suspectscore=0 impostorscore=0 adultscore=0 malwarescore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609220295
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] dt-bindings: mfd: introduce the TC9564 config syscon
+From: Alex Elder <elder@riscstar.com>
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
+ robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org,
+ andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
+ kees@kernel.org, gustavoars@kernel.org, p.zabel@pengutronix.de,
+ daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
+ lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, mfd@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260918165234.687224-1-elder@riscstar.com>
+ <20260918165234.687224-2-elder@riscstar.com>
+ <20260920-fiery-fanatic-manticore-6abf0a@quoll>
+ <85b0e7de-e4a8-4e08-b801-a9664d366e1a@riscstar.com>
+Content-Language: en-US
+In-Reply-To: <85b0e7de-e4a8-4e08-b801-a9664d366e1a@riscstar.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 26-09-21 21:18:53, Muzaffer Kadir via B4 Relay wrote:
-> From: Muzaffer Kadir <muzafferkadir@mainlining.org>
-> 
-> This driver provides clocks, resets and power domains needed for various
-> components of the MSM8952.
-> 
-> Some downstreams merge MSM8952 to MSM8917 and MSM8937. But upstreamed
-> GCC driver for 8917 series has different pll structure and ported from
-> different GCC driver.
-> 
-> MSM8952 GCC driver is mainly based on MSM8939 GCC driver, with
-> some parts added from existing other GCC drivers.
-> 
-> Link: https://android.googlesource.com/kernel/msm.git/+/refs/tags/android-wear-7.0.0_r0.3/drivers/clk/qcom/clock-gcc-8952.c
-> Signed-off-by: Muzaffer Kadir <muzafferkadir@mainlining.org>
+On 9/21/26 4:46 PM, Alex Elder wrote:
+>> I also have doubts that this is needed - I see no updates to the misc
+>> binding, which would be referencing it. But then another point would be,
+>> that you do not need separate child node, which has no properties.
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Krzysztof, I've done some additional work on this based on
+your feedback.
+
+I think you are correct that there is no need to define
+this as a special syscon with its own compatible string.
+
+Instead, I can simply define a simple syscon with a label:
+
+         tc9564_config_syscon0: syscon@0 {
+                 compatible = "syscon";
+                 reg = <0x0 0x2000>;
+         };
+
+And then have the devices that need to use it, refer to
+its label using a phandle:
+
+         tc9564_clock0: clock@1004 {
+                 compatible = "toshiba,tc9564-clock";
+                 toshiba,config-syscon = <&tc9564_config_syscon0>;
+                 #clock-cells = <1>;
+                 #reset-cells = <1>;
+         };
+
+         tc9564_emac0: ethernet@40000 {
+                 compatible = "toshiba,tc9564-xgmac";
+                 reg = <0x40000 0x8000>;
+                 toshiba,config-syscon = <&tc9564_config_syscon0 0x1070>;
+		. . .
+	};
+
+         tc9564_emac1: ethernet@48000 {
+                 compatible = "toshiba,tc9564-xgmac";
+                 reg = <0x48000 0x8000>;
+                 toshiba,config-syscon = <&tc9564_config_syscon0 0x1074>;
+		. . .
+	};
+
+That simplifies things a bit, and requires no devicetree binding.
+
+If you think this is incorrect, please let me know, otherwise it
+is the direction I plan to go with the next version of this
+series.
+
+Thank you again for your review.
+
+					-Alex
