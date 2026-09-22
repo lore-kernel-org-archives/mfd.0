@@ -1,71 +1,213 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40D6F4562BD;
-	Tue, 22 Sep 2026 09:46:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C1C323C2B9B
+	for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 09:55:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=114.242.206.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790070377; cv=none; b=uTWlXjCq68YoBwrSsISmFDOWWvUvVSAtvkXCAIlQ84pG88j0io/PgzqSNkJ0fr/qY3hLZGOwUGX1aALg3zzAW2lIjidMr151u5jowyWcJhvAh4TD6jgUdP3N8oMtVRY+AEEFuFiCGk32W+TEek2an79vKsYzl+j9McUbCoHpDmc=
+	t=1790070923; cv=none; b=N3aX4jOpy8y1WN0zj6qiN7D3mgvKmf3heqzA7l4Ge9P7Lh1Dbhegpws3r+n60voTlL90gufAtmgmwSoFgBHTDalCFGxmHCfdRBzgs65HPLEQ9DBUxFpxq0Z0i5EsmjnOKcbyDS/BzPGdKLHWfmLzfm0S2z571VQDpnWF8A3EFgA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790070377; c=relaxed/simple;
-	bh=OqvRZJj5kPRj+It6ugJYRn8yhiSUN2qgS6LI0PNP9Tk=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=OIPi3woPVdwW+vYW620cJX2MVQSE2nhB/DY3oo7y3/QGcf+0+L21y3Ga4IT1VrUcs8La+zdaI3urJocxAPWer5GXKViVsHCeKCPre2QGPkYE4VXTPtsXS/iU2JRJvRfT/SddEzMtVuRS/YTKEGbuR81T9Efwj2opmktIIdr3NyE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lxnZJB4s; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lxnZJB4s"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E35AE1F000FF;
-	Tue, 22 Sep 2026 09:46:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790070375;
-	bh=CNV5Sz8dms0b/G6Vk56f+ekd3U0e51F6ajd/M8urfbk=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=lxnZJB4swe49GY6QiSkcTOQ8EqHSHkTLjbKj5dg+Kcy1nLYqVN7Svgw/mhgK7IApM
-	 ohaq+xuocpdYTJNOaHZW7SWgWZ825iAupwcOHIOxtWousQt2R/JqrADca3/AmSvhlJ
-	 6ULQ0cxFN4poQOrNvXPsrTiVY6/n6mNBZrS84kwMiJMj23HeqU1Jj62m2P1C2aOFQf
-	 ScSFwoa3gHjfT/Rd/OtgNNDnBNo7jmll4/p+GedUOLaO6qcBYKoFiBYgCOqR9Ph3PU
-	 sqjttGpRZ03U8HPSNFW4QAYB5kUf5f4TomxE8HMvEYIvmyD90vRvqMO9KeXoj9oOOk
-	 KGAdBc9auRGdg==
-From: Lee Jones <lee@kernel.org>
-To: Lee Jones <lee@kernel.org>, 
- Sebastian Reichel <sebastian.reichel@collabora.com>, 
- Eric Anderson <ejona86@gmail.com>
-Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org
-In-Reply-To: <20260908-veyron-shutdown-v1-1-066ecb80f5f2@gmail.com>
-References: <20260908-veyron-shutdown-v1-1-066ecb80f5f2@gmail.com>
-Subject: Re: (subset) [PATCH] mfd: rk8xx: Register poweroff handler in
- atomic phase
-Message-Id: <179007037467.2777136.12266666852504858186.b4-ty@b4>
-Date: Tue, 22 Sep 2026 10:46:14 +0100
+	s=arc-20240116; t=1790070923; c=relaxed/simple;
+	bh=1USIA3QuKT3HfWYjrwytG+eI3HrgQopFvJxZ0ymZ0DU=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=AoNwWD0K+nLNO18y7YaErJ+3wOuC0ZYcNosKomhg/3Ml+d3EJUDy6WBrjwWI/VZVL+BRryG5VDPlp8mhFzOH07BQtzUPzeQuw4bdLDKFVIbqAIYj4BzOD+RRcSXEFo2LC7GbzK3BrGWmAicQbMA/UdmBEJHVuragrRUPFLjLISk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn; spf=pass smtp.mailfrom=loongson.cn; arc=none smtp.client-ip=114.242.206.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
+Received: from loongson.cn (unknown [223.64.68.159])
+	by gateway (Coremail) with SMTP id _____8Cx_9KFULJqHZkOAA--.42662S3;
+	Tue, 22 Sep 2026 17:55:17 +0800 (CST)
+Received: from [10.161.0.102] (unknown [223.64.68.159])
+	by front1 (Coremail) with SMTP id qMiowJAx3c6CULJqSbcjAA--.10868S2;
+	Tue, 22 Sep 2026 17:55:15 +0800 (CST)
+Message-ID: <52183cd9-4b43-456d-896d-ee2fea6d5d72@loongson.cn>
+Date: Tue, 22 Sep 2026 17:55:13 +0800
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+From: Binbin Zhou <zhoubinbin@loongson.cn>
+Subject: Re: [PATCH RFC v9 0/8] mfd: ls2kbmc: multiple fixes for this driver
+To: shankerwangmiao@gmail.com, Chong Qiao <qiaochong@loongson.cn>,
+ Lee Jones <lee@kernel.org>, Huacai Chen <chenhuacai@kernel.org>,
+ Corey Minyard <corey@minyard.net>, Linus Walleij <linusw@kernel.org>,
+ Bartosz Golaszewski <brgl@kernel.org>
+Cc: Xi Ruoyao <xry111@xry111.site>, WANG Xuerui <kernel@xen0n.name>,
+ Yinbo Zhu <zhuyinbo@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
+ linux-gpio@vger.kernel.org, openipmi-developer@lists.sourceforge.net,
+ Corey Minyard <cminyard@mvista.com>,
+ Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+References: <20260811-ls2kbmc-mod-v9-0-4fa9a5584406@gmail.com>
+In-Reply-To: <20260811-ls2kbmc-mod-v9-0-4fa9a5584406@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.16-dev-ad80c
+X-CM-TRANSID:qMiowJAx3c6CULJqSbcjAA--.10868S2
+X-CM-SenderInfo: p2kr3uplqex0o6or00hjvr0hdfq/1tbiAgESCGqx8fgGjgAAsD
+X-Coremail-Antispam: 1Uk129KBj93XoWxuFW7uF1UCw43Xw43Kr45Arc_yoWxtry7pF
+	Z0kFW3Cr4DJr4xKFsa93WxuFya9an7JF43GrnrK3s8ua45uFyxZrW3KFyY9FyDArZ3uF1S
+	vF15tFnrGFyDA3cCm3ZEXasCq-sJn29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7KY7ZEXa
+	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+	0xBIdaVrnRJUUUk0b4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
+	xVW8Jr0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx
+	1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r106r15McIj6I8E87Iv
+	67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41l42xK82IYc2Ij64
+	vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8G
+	jcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r4a6rW5MIIYrxkI7VAKI48JMIIF0xvE2I
+	x0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK
+	8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I
+	0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxU2DUUUUUUU
 
-On Tue, 08 Sep 2026 12:20:39 -0700, Eric Anderson wrote:
-> This fixes a regression from v6.1 to v6.6 where Google Veyron devices
-> (rk3288) would not power off after being shut down.
+Hi:
+
+On 2026/8/11 16:07, Miao Wang via B4 Relay wrote:
+> Previously, the driver has been introduced to support the Loongson 2K
+> BMC running on the Loongson Servers, which is essential to prevent
+> the system from hanging when the BMC is being reset and the default
+> efi-framebuffer is being used. However, there are some drawbacks in the
+> driver.
 > 
-> Prior to commit 4fec8a5a85c4 ("mfd: rk808: Convert to device managed
-> resources"), pm_power_off was called by legacy_pm_power_off() which
-> itself was registered using SYS_OFF_MODE_POWER_OFF. But in that commit
-> the registration of rk808_power_off() moved to
-> SYS_OFF_MODE_POWER_OFF_PREPARE. At the very least, the code should be
-> consistent between SYS_OFF_MODE_POWER_OFF and SYS_OFF_MODE_RESTART; both
-> should be *_PREPARE or both not.
+> Firstly, the driver tries to read and write to the connected PCI-E host
+> controller registers, assuming that the BMC is connected to LS7A PCI-E
+> host controller. This assumption should be true for real products, but
+> to prevent from accidentally reading and writing to the wrong PCI-E host
+> controller, this driver should be modified to check this before
+> accessing the registers.
 > 
-> [...]
+> Secondly, the driver uses non-exported functions to tell the vt
+> subsystem to redraw the screen, preventing the driver from being
+> compiling as a module. This can be fixed by using the exported
+> functions instead.
+> 
+> Thirdly, the driver directly accesses the GPIO controller registers
+> using hard-coded addresses, which might conflict with the loaded GPIO
+> controller driver for the same GPIO controller. This is fixed in this
+> series by using the GPIO subsystem APIs instead. To associate a GPIO pin
+> with a certian PCI device, it should be declared in the firmware level,
+> i.e. in the ACPI table or the device tree, and thus the firmware
+> interface should be discussed and coordinated with Loongson personnels.
+> Despite of this, the proposed solution in this series should be the
+> minimum necessary change to express such association. Furthermore, the
+> conventional GPIO pin number and the controller address are also
+> provided, to be used as a fallback when the GPIO pin is not declared.
+> 
+> Finally, there is a minor issue in the driver where it changes the
+> mode string describing the screen resolution during probing, which
+> prevents the device from being probed again if -EPROBE_DEFER is
+> returned by the probe function.
+> 
+> I have tested the changes in this series on a single-socket Loongson
+> 3C6000 server with a Loongson 2K BMC, and the driver works as expected
+> when the corresponding GPIO driver is additionally loaded.
+> 
+> Signed-off-by: Miao Wang <shankerwangmiao@gmail.com>
+> ---
+> Changes in v9:
+> - Extend the kernel docs for gpio_device_get_fwnode() to describe the
+>    usage of this function, as suggested by Bartosz.
+> - Link to v8: https://lore.kernel.org/r/20260810-ls2kbmc-mod-v8-0-16e44f7322f4@gmail.com
 
-Applied, thanks!
+I’m deeply sorry for the delayed response due to personal reasons.
 
-[1/1] mfd: rk8xx: Register poweroff handler in atomic phase
-      commit: a9c8cbec9f5d209efb3d8811f7d46d7af39504d1
+Regarding Patch-1, I don’t mind using your current version as is—it’s 
+more complete. However, I received another email from lkp[1] a few days 
+ago, and I still hope this patch can be merged sooner.
 
---
-Lee Jones [李琼斯]
+The current discussion is focused on the GPIO-related patch, but in 
+reality, it isn’t closely tied to the other patches; it’s more of an 
+optimization. If possible, I personally think we could set it aside for 
+now and treat it as a separate set of feature optimization patches.
+
+[1]: https://lore.kernel.org/all/202608230816.ifMzE0No-lkp@intel.com/
+> 
+> Changes in v8:
+> - Address issues found by the Sashiko AI review bot
+>    - Fix the error path of the probe function, preventing unintentionally
+>      returning 0 on failure
+>    - Reorder the patches in the series to make the change to the Kconfig
+>      entry for ls2kbmc to be the last patch, to satisfy the AI bot's
+>      concern on failure to clean up when the driver is built as a module
+>      and is being removed.
+> - Link to v7: https://lore.kernel.org/r/20260810-ls2kbmc-mod-v7-0-8aa0fb5a5462@gmail.com
+> 
+> Changes in v7:
+> - When parsing the mode string, require the mode string to start with
+>    "video=", reverting the change in v5. Add a comment to describe the
+>    reason for this change to satisfy the AI bot's concern.
+> - When printing the invalid mode string, use %*pE to print the string
+>    to prevent the string from printing garbage characters, as suggested
+>    by the AI bot.
+> - When calculating the stride, check that the multiplication of width
+>    and depth does not overflow, as suggested by the AI bot.
+> - Add gpio_device_get_fwnode() into gpiolib.c as a library function to
+>    get the fwnode of a GPIO device, as suggested by Bartosz.
+> - Adjust the coding style of the patch as suggested by Bartosz.
+> - Link to v6: https://lore.kernel.org/r/20260805-ls2kbmc-mod-v6-0-16ccde412d86@gmail.com
+> 
+> Changes in v6:
+> - Ajdust the Kconfig entry for IPMI_LS2K, moving the dependency on
+>    MFD_LS2K_BMC_CORE to the IPMI_SI Kconfig entry, as discussed with
+>    and agreed by Corey.
+> - Link to v5: https://lore.kernel.org/r/20260804-ls2kbmc-mod-v5-0-e6bc5cdd9a93@gmail.com
+> 
+> Changes in v5:
+> - Address issues found by the Sashiko AI review bot
+>    - Maintain the compatibility with possible unexpected mode string when
+>      parsing, although such mode string is actually not expected, to
+>      satisfy the AI bot's concern.
+>    - Add a comment to point out that the adjustment of the Kconfig entry
+>      for ls2kbmc is in the following patch, to satisfy the AI bot's
+>      concern.
+> - Link to v4: https://lore.kernel.org/r/20260731-ls2kbmc-mod-v4-0-d201502ba239@gmail.com
+> 
+> Changes in v4:
+> - Use a better way to get the GPIO device fwnode.
+> - Add a comment to describe a problem found by AI bot which is actually
+>    intended.
+> - Link to v3: https://lore.kernel.org/r/20260710-ls2kbmc-mod-v3-0-ef718636e78e@gmail.com
+> 
+> Changes in v3:
+> - Check the return value of devm_add_action_or_reset when registering
+>    the cleanup hook of the work queue
+> - Use swnode to create the link between the device to the GPIO chip,
+>    and prevent borrowing the legacy GPIO APIs
+> - Link to v2: https://lore.kernel.org/r/20260708-ls2kbmc-mod-v2-0-2afdd1741766@gmail.com
+> 
+> Changes in v2:
+> - Several fixes suggested by the Sashiko AI review bot
+> - Add a cleanup function for the wq on removal of the device
+> - Relax the reverse dependency from CONFIG_IPMI_LS2K to
+>    CONFIG_MFD_LS2K_BMC_CORE to allow the driver to be built as a module
+> - Link to v1: https://lore.kernel.org/r/20260708-ls2kbmc-mod-v1-0-c344bf5defa3@gmail.com
+> 
+> ---
+> Miao Wang (8):
+>        mfd: ls2kbmc: Make a copy when parsing mode string
+>        mfd: ls2kbmc: Sanity check for the connected pci port
+>        mfd: ls2kbmc: Redraw using exported functions
+>        mfd: ls2kbmc: Cancel the work queue on removal
+>        ipmi: ls2k: adjust dependency to its mfd driver
+>        gpiolib: add gpio_device_get_fwnode() helper
+>        mfd: ls2kbmc: Capture the reset event of BMC through GPIO
+>        mfd: ls2kbmc: Able to be compiled as a module
+> 
+>   drivers/char/ipmi/Kconfig   |   2 +-
+>   drivers/gpio/gpiolib.c      |  17 +++
+>   drivers/mfd/Kconfig         |   2 +-
+>   drivers/mfd/ls2k-bmc-core.c | 247 ++++++++++++++++++++++++++++++++++----------
+>   include/linux/gpio/driver.h |   1 +
+>   5 files changed, 210 insertions(+), 59 deletions(-)
+> ---
+> base-commit: 11028ab62899e4191e074ee364c712b77823a9c4
+> change-id: 20260626-ls2kbmc-mod-5209193009b2
+> 
+> Best regards,
+
+-- 
+Thanks.
+Binbin
 
