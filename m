@@ -1,153 +1,174 @@
-Received: from mail-qv2-f12.google.com (mail-qv2-f12.google.com [74.125.230.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC22852FE58
-	for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 10:14:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.230.140
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790072077; cv=pass; b=P8TXOdURML0EXZq8CABKtzCr2DdzG0H9FwYlos2tlQTIEpOjF1C2CghoZNieNny2DAouG3zvtfzLvp7p9ogbi5C6XnLOYH4qSQoolhGJLO5sY6K5Vw+rhQANUIl6CaRadg+PLs0+s/vbw/EqcSqCxqN2O9UiuhK3hlQdvTR/MrA=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790072077; c=relaxed/simple;
-	bh=MP7qOWwL+P1a6ht9RviQn5PbhcTDg1vQhBcP5eyXfGM=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=BjdT72UhmwhCYodI7fFBDizJx9nx5xyCtru14Lfrh/ebXEQh6svjZUjbFtjPf6xklfOE+5qNdOIVANg7jx5pB6GOdUz4J2GRTRKvGn49NdvUyfjqfhWNBKixEqdTFSB3V9q15hVFydwo9E+lG3rOKUNI1cvUAdhOwKx09yKGFsw=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=GvTxz3/K; arc=pass smtp.client-ip=74.125.230.140
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 626EB531625;
+	Tue, 22 Sep 2026 10:15:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1790072105; cv=none; b=mL7mnbyeM5guv3TmdzLwlJ0nuoqm2b072xzla4wLDTGqdpzg8782WhEsZ+wPha5/5WHY5/rJqNT3rs7epFmAeX1612j9fVaCwpRG5zrZQpnNyIYfqwpVXAcb7sgQJ7ffIHbqM9A4QSQPrldch7LCHWYnydBmGxhmUwQD36QcKZU=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1790072105; c=relaxed/simple;
+	bh=B8PZIFaBD2VXHHaQdRYASlQthcO8el0btXkEdvfzK4I=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=iyoEAYHeXB9E6ST/AoFYsSQAI64sXe3jWFNPsDv3r91/mhIOFvjjhmsg1r2oBwWQh41d4/Tnkti7wHCogg+s18xYvcN0Mf4GaXqekH52bhvg7N3vkj9wAEk0sC3nPuXsQ2Ei4nyWmibUBOn14zX520W1hB6G5a7ksaiOZnDsZw4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZBubiN0w; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GvTxz3/K"
-Received: by mail-qv2-f12.google.com with SMTP id 6a1803df08f44-90cdfcbe208so47091846d6.0
-        for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 03:14:35 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790072074; cv=none;
-        d=google.com; s=arc-20260327;
-        b=k2UpWd0GtXiYMbU+HKE2MDs90lunay+L2xNueGQ3fy+mZWK/6m+YiFaW6TIgNxQLLb
-         +SNbjOutwUsA+wwqefYGsdp2frvYDOFrFg5ieOCPtXmCDbMt3Skfg9SzOYOzzLoOCZCw
-         eMjqyCBNHZPDIy21CDc21/28/AToHQY5YrYK1Yxu7GwD96NcXkv+YxdtLYwS3azrRcXi
-         phzFiB1kCWx7v7diDZeY9Ku1LsqNFQ/sfDEPvfKIqeWbfR+lfPZZdweq94U82cbWD7Tc
-         FppivovA2KVAPs09O2fFAOg0h+MHU5TjylmG/EvOSaAxLED0KkWH0RY3D6ANoRV22OCW
-         hg5g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=2ESDSZM667q7EB0r3pmeL1vJBKH8ckNK36jbuGzw9rQ=;
-        fh=DU3voBDRn9IflY71OAnm2cdyja3A8Ki1TQzvhmgilDw=;
-        b=VSNemLQDtRZnrKmfG6GFyBHXYTgA6Ut6huWeYVk6RLflSQpcTBPy8G544LfmPudvP+
-         U++0wugSA2LIiBGWS/k6CY3CESzq4bygYzIvD4BPRAC7vu5YNBERzco/lCvqbJsMgIoq
-         3It+9TxGhEkqLgV9FC9594pzTaf3iT7Q2YQ10IdMg77M4JF5XRtAR2Fjmo3q6qDB/41G
-         77/e0cbxWzyYU1ubhtMTTRf/tjXLdsk0p4B2HuCZZiDkhWU8MQYJKOGizy42p94PGYv/
-         M6Ai9xxUJsJF1uHD7MymOP1erim0jYqArYcsQSd3tJs0c+9v1ysCNcPzlsvnEy4CPjFF
-         kXAg==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790072074; x=1790676874; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=2ESDSZM667q7EB0r3pmeL1vJBKH8ckNK36jbuGzw9rQ=;
-        b=GvTxz3/KjlRmv7hl6fAAiJ+UyDQx4981rFK4qFqq2pBzlsNSfCb46NI3BVb4arMVsp
-         BdOJWC74rqMjeAUwzt1zCht12TaTcXsKJMCTBhVv06Wz1L2/Cx5/NLXm9ItDkH7DUQLb
-         bcOjT9aoblAXxmZQ+Fne635kR47T0gHg2Vw1e9sIZ4mkzJss/kLenyKxuF2gmVYc70vr
-         9Db1njYqdj1MFf/rPYmUCEeh9MvcaiD0bs+fEVEYLbDhOcAm3A4gTWLUv2ySqYX6BM/f
-         6hIz4t6Cia8XjWYLuU6yJtuGElqRrg8aN5vH8X0gnmDVB0iodE6jTq6k8KsKcjDrf24B
-         SEow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790072074; x=1790676874;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=2ESDSZM667q7EB0r3pmeL1vJBKH8ckNK36jbuGzw9rQ=;
-        b=eeeSBzyDdpFBAlXDIV4Hj8HEqcw7wM4GJozcbN8/0fJfNIsYcrly9Xo9YwvVH2iuio
-         mj+vr1uGGIs3AP32BoX01tHpQSUpJiTcewLvaKeQc4++uOS55Ibj9Iko1ViQMD2upcTs
-         5fVVyDUMmqJXG1EpKLecHrkkT4ZNJE5YPtXYqqfT2NuowPXQGefU3P6KT2QizzpZLsIY
-         WA7aHxLu+wdQ9qyhOlq+srygT+hbnrN1oIxYZKaod64udp+BSGhuhUvP9iE+J+C2zpbo
-         mYkkiz9Bb8O6BQIoKEBbVvtnpP0QdYRi/eF+v70wtgIZTndq6i5ITSHsaP4dpTdfLjg1
-         B99g==
-X-Forwarded-Encrypted: i=1; AKwUvBxTNc248qPPLyDkR9Sgf7Sw5VQZDnM0wYpNvnQqAe7Y9h8LTN6GNd9oDPVL0jCnnyIWc+M=@lists.linux.dev
-X-Gm-Message-State: AFuF++lTNnvA/4AdBTytES8x/ADcZTC2a2WURHTRp2Bl86QNa5uPDLgt
-	xVA7YvFbu916mmjtqyE7iZNPvf0mE7fKILLkVOubKPzKeKoT4i9eT+ljBuLvF625XQR2r9L8SSc
-	0mYVwOdH3WNQIPEOW2Sp+BO6eGgWw7Fo=
-X-Gm-Gg: AYBFou3rI1GxhURaJ0c2Imtz4XaZuSPzTaoGk620l9hC3/peqmVXoR9TzlvBWM2HKko
-	d2CuIIPFvjJfIe0fxQgH7eCoFBqS/8WFAo8uoAp5WYehFgdUL3DA69K7TwPsErJaWcYuGavB3Du
-	jRb8zxfnqt/8eVhnYaLadLZTInG08cVlgh3NICbNxbZGloREJn/hVuacuIkKmZFyrk+1a3Rqb/f
-	lBPpHMwQcBS4GlWITJvMrt2QDr0dyq0mkDeI06tn4kxafafE14zNjbYADOgl3jZaySOg++uO+AN
-	TDG0awhCUgdM6PtLz0kBYZibxZK9NTd/pgjAPNTyZrvSnLWFqu4VIj4=
-X-Received: by 2002:a05:6214:d63:b0:913:fa79:99c3 with SMTP id
- 6a1803df08f44-913fc94b160mr46562816d6.43.1790072074583; Tue, 22 Sep 2026
- 03:14:34 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZBubiN0w"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0FFD91F000FF;
+	Tue, 22 Sep 2026 10:15:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790072103;
+	bh=f1pdLGa0UEMpnQgZG2KeGnY+1YE0FhA/JOcJvCMadWo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=ZBubiN0wiULnLXbRqfMLX/fKTN42G2ywVepNyljhkpE1eZnAOVKBCB7teXak1x7iF
+	 n9eK/Q8jNhbBeaEspN7sSW0Jt1mx4BBv15iG5Hl35TyRMdkN5XVszcc9N0excbUQzg
+	 M+PB+7X6F7cFrVygIMiXXeX8DxnGhJS2BQw7BGEMfCd7SFioYwTJNWsZze+Vmo65rb
+	 Qjmxiv8wnfFhdOvhn42457gO6lzdXbi8gDq3Qm8Vyx2fU7LYo0ccIHybH92kcqtRwZ
+	 p0gLmV8GqZ6fNhkdh0FmvExM1f3zHs2vBdz302/OCzqtvITkkvPZC0ZjE5q1od9W2O
+	 l8QDPJ9RyMVHQ==
+Date: Tue, 22 Sep 2026 11:14:59 +0100
+From: Lee Jones <lee@kernel.org>
+To: Oleg Keri <okerixx@gmail.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Guru Das Srinagesh <linux@gurudas.dev>,
+	linux-arm-msm@vger.kernel.org, mfd@lists.linux.dev,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 2/2] mfd: qcom-pm8008: support PMICs with no interrupt
+ line
+Message-ID: <20260922101459.GB2730113@google.com>
+References: <20260908130745.2545-1-okerixx@gmail.com>
+ <20260908130745.2545-3-okerixx@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260915123812.14747-1-ansuelsmth@gmail.com> <20260915123812.14747-5-ansuelsmth@gmail.com>
- <20260921134410.13a7173c@kernel.org>
-In-Reply-To: <20260921134410.13a7173c@kernel.org>
-From: "Christian Marangi (Ansuel)" <ansuelsmth@gmail.com>
-Date: Tue, 22 Sep 2026 12:14:22 +0200
-X-Gm-Features: AcwNN1WQadm9kZulSu2D2w98S17OkpHd-MeZLtXiKqWwHyLw9Fh6tPwUuh65TfY
-Message-ID: <CA+_ehUyFH_ZSsjhp-U9WBFoRZR-ZMWnNQ5pY5vAy1LxUU5hSsw@mail.gmail.com>
-Subject: Re: [PATCH net-next v22 4/9] mfd: an8855: Add support for Airoha
- AN8855 Switch
-To: Jakub Kicinski <kuba@kernel.org>
-Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, 
-	Vladimir Oltean <olteanv@gmail.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
-	"Chester A. Unal" <chester.a.unal@arinc9.com>, Daniel Golle <daniel@makrotopia.org>, 
-	Heiner Kallweit <hkallweit1@gmail.com>, Russell King <linux@armlinux.org.uk>, 
-	Simon Horman <horms@kernel.org>, linux-arm-kernel@lists.infradead.org, 
-	linux-mediatek@lists.infradead.org, netdev@vger.kernel.org, 
-	mfd@lists.linux.dev, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260908130745.2545-3-okerixx@gmail.com>
 
-Il giorno lun 21 set 2026 alle ore 22:44 Jakub Kicinski
-<kuba@kernel.org> ha scritto:
->
-> On Tue, 15 Sep 2026 14:38:01 +0200 Christian Marangi wrote:
-> > Add support for Airoha AN8855 Switch that provide support for a DSA
-> > switch and a NVMEM provider.
-> >
-> > Also make use of the mdio-regmap driver and register a regmap for each
-> > internal PHY of the switch.
-> > This is needed to handle the double usage of the PHYs as both PHY and
-> > Switch accessor.
->
-> GCC spews warnings:
->
-> drivers/mfd/airoha-an8855.c: In function =E2=80=98an8855_mdio_register=E2=
-=80=99:
-> drivers/mfd/airoha-an8855.c:438:48: warning: =E2=80=98-phy=E2=80=99 direc=
-tive output may be truncated writing 4 bytes into a region of size between =
-1 and 61 [-Wformat-truncation=3D]
->   438 |         snprintf(mrc.name, MII_BUS_ID_SIZE, "%s-phy%d", priv->bus=
-->id, addr);
->       |                                                ^~~~
-> In function =E2=80=98an8855_phy_bus_register=E2=80=99,
->     inlined from =E2=80=98an8855_mdio_register=E2=80=99 at ../drivers/mfd=
-/airoha-an8855.c:469:9:
-> drivers/mfd/airoha-an8855.c:438:45: note: using the range [-2147483648, 2=
-147483647] for directive argument
->   438 |         snprintf(mrc.name, MII_BUS_ID_SIZE, "%s-phy%d", priv->bus=
-->id, addr);
->       |                                             ^~~~~~~~~~
-> drivers/mfd/airoha-an8855.c:438:9: note: =E2=80=98snprintf=E2=80=99 outpu=
-t between 6 and 76 bytes into a destination of size 61
->   438 |         snprintf(mrc.name, MII_BUS_ID_SIZE, "%s-phy%d", priv->bus=
-->id, addr);
->       |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
-~~~~~~~~~~~
->
+On Tue, 08 Sep 2026, Oleg Keri wrote:
 
-Hi,
+> The interrupt is only needed for the temperature alarm and the two GPIOs.
+> Where the pin is not routed the regulators are still perfectly usable, but
+> probe fails: client->irq is 0 and request_threaded_irq() rejects it.
+> 
+> Skip the IRQ chip in that case and register the regulator cell alone. The
+> temperature alarm cannot be registered without a domain either, because
+> its IORESOURCE_IRQ would be handed to the platform device as a raw number
+> rather than being mapped, and the GPIO cell needs the domain for the same
+> reason.
+> 
+> Signed-off-by: Oleg Keri <okerixx@gmail.com>
 
- I also didn't receive the email for the AI review... Did it broke also her=
-e?
-If everything else is ok, should I send new revision or maybe we can pick t=
-his
-and I can send followup for this warning?
+What on earth is going on here:
+
+https://lore.kernel.org/r/20260907-glymur_camss-v2-5-75f7982dc983@oss.qualcomm.com
+
+> ---
+>  drivers/mfd/qcom-pm8008.c | 63 +++++++++++++++++++++++++--------------
+>  1 file changed, 40 insertions(+), 23 deletions(-)
+> 
+> diff --git a/drivers/mfd/qcom-pm8008.c b/drivers/mfd/qcom-pm8008.c
+> index 60204cc9a2dc..b51a9657ee56 100644
+> --- a/drivers/mfd/qcom-pm8008.c
+> +++ b/drivers/mfd/qcom-pm8008.c
+> @@ -183,6 +183,10 @@ static const struct mfd_cell pm8008_cells[] = {
+>  	MFD_CELL_NAME("pm8008-gpio"),
+>  };
+>  
+> +static const struct mfd_cell pm8008_regulator_cells[] = {
+> +	MFD_CELL_NAME("pm8008-regulator"),
+> +};
+> +
+>  static void devm_irq_domain_fwnode_release(void *data)
+>  {
+>  	struct fwnode_handle *fwnode = data;
+> @@ -195,9 +199,12 @@ static int pm8008_probe(struct i2c_client *client)
+>  	struct regmap_irq_chip_data *irq_data;
+>  	struct device *dev = &client->dev;
+>  	struct regmap *regmap, *regmap2;
+> +	const struct mfd_cell *cells;
+>  	struct fwnode_handle *fwnode;
+> +	struct irq_domain *domain;
+>  	struct i2c_client *dummy;
+>  	struct gpio_desc *reset;
+> +	int num_cells;
+>  	char *name;
+>  	int ret;
+>  
+> @@ -231,33 +238,43 @@ static int pm8008_probe(struct i2c_client *client)
+>  	 */
+>  	usleep_range(1000, 2000);
+>  
+> -	name = devm_kasprintf(dev, GFP_KERNEL, "%pOF-internal", dev->of_node);
+> -	if (!name)
+> -		return -ENOMEM;
+> -
+> -	name = strreplace(name, '/', ':');
+> -
+> -	fwnode = irq_domain_alloc_named_fwnode(name);
+> -	if (!fwnode)
+> -		return -ENOMEM;
+> -
+> -	ret = devm_add_action_or_reset(dev, devm_irq_domain_fwnode_release, fwnode);
+> -	if (ret)
+> -		return ret;
+> -
+> -	ret = devm_regmap_add_irq_chip_fwnode(dev, fwnode, regmap, client->irq,
+> -				IRQF_SHARED, 0, &pm8008_irq_chip, &irq_data);
+> -	if (ret) {
+> -		dev_err(dev, "failed to add IRQ chip: %d\n", ret);
+> -		return ret;
+> +	if (client->irq > 0) {
+> +		name = devm_kasprintf(dev, GFP_KERNEL, "%pOF-internal", dev->of_node);
+> +		if (!name)
+> +			return -ENOMEM;
+> +
+> +		name = strreplace(name, '/', ':');
+> +
+> +		fwnode = irq_domain_alloc_named_fwnode(name);
+> +		if (!fwnode)
+> +			return -ENOMEM;
+> +
+> +		ret = devm_add_action_or_reset(dev, devm_irq_domain_fwnode_release, fwnode);
+> +		if (ret)
+> +			return ret;
+> +
+> +		ret = devm_regmap_add_irq_chip_fwnode(dev, fwnode, regmap,
+> +						      client->irq, IRQF_SHARED, 0,
+> +						      &pm8008_irq_chip, &irq_data);
+> +		if (ret) {
+> +			dev_err(dev, "failed to add IRQ chip: %d\n", ret);
+> +			return ret;
+> +		}
+> +
+> +		domain = regmap_irq_get_domain(irq_data);
+> +		cells = pm8008_cells;
+> +		num_cells = ARRAY_SIZE(pm8008_cells);
+> +	} else {
+> +		domain = NULL;
+> +		cells = pm8008_regulator_cells;
+> +		num_cells = ARRAY_SIZE(pm8008_regulator_cells);
+>  	}
+>  
+>  	/* Needed by GPIO driver. */
+> -	dev_set_drvdata(dev, regmap_irq_get_domain(irq_data));
+> +	dev_set_drvdata(dev, domain);
+>  
+> -	return devm_mfd_add_devices(dev, PLATFORM_DEVID_AUTO, pm8008_cells,
+> -				ARRAY_SIZE(pm8008_cells), NULL, 0,
+> -				regmap_irq_get_domain(irq_data));
+> +	return devm_mfd_add_devices(dev, PLATFORM_DEVID_AUTO, cells,
+> +				num_cells, NULL, 0, domain);
+>  }
+>  
+>  static const struct of_device_id pm8008_match[] = {
+> -- 
+> 2.55.0
+> 
+
+-- 
+Lee Jones
