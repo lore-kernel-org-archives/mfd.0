@@ -1,44 +1,43 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4657951C04C;
-	Tue, 22 Sep 2026 10:47:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48969334C1C;
+	Tue, 22 Sep 2026 10:48:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790074048; cv=none; b=Uni3bBmeEXhewe/OBcwD+T4HRG2qjhyMaXxpFmD7d7ZDMwPEEWf9thS+X/TbMrf8AJist3PDllF8SiD4T+v+Oy+LgX5xjb9mfhRTM8Fw4O9cQnMTh3qnveAEoeD0xhqlF21KBd08stR9y3Jfb4ClrwqvWzWLzFb+uMGmnv9EUEs=
+	t=1790074134; cv=none; b=PZHb3u0buG4RfiAm300d9drAsql3yFb+bLnRSnbWt7ZxR8lwPV3Go6TgztH+Bsvg+MjzNa/5eE9+9ET7oNZhIAcv7rGov5MiTVY6Y3ulkV7tnV6X6BPJ9WcCiaeAPp+nVs5TcH+0Wh7tXoaZUEiSDebipuyHEJ219tY0RWLwjSU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790074048; c=relaxed/simple;
-	bh=D4xt0EQqkbQ4QpGr/rWEfLBSlUeslFGA4wmWm+gy+4M=;
+	s=arc-20240116; t=1790074134; c=relaxed/simple;
+	bh=sdoU+05LwGO/5IKHz2JWlLMFm+pfMdWGUdSvyfJT7bM=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=BiEjOB0RB1HU99Qor/1UglL1qAnWuJCef8ZNcnR5DIYYaN7jvWkHM2y6ADpAwrS3w6/N32s+mSsiMwnhQXZWp3vcmMstVtvKKIxW0vIDEpdDqUrOTfX7ogRPyXNYALAPQNtCjzKn9DTmy2IFKcAz1YmhvAR7t9c7lC1I22ZqyvU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GHBegxnm; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=LIAo1WSEmG7lcUd9LyCg46htN4W3D9y5RFeTNAOFUngMnahi/dTKvfBjHdVIQ/IoBo8T76SkqPdDK/3BE1mAcXW+V6rCpxBie+1OUAKI7bKr3I4ya3/In35WlREQcwI7cwkv8Gm0ifiZGKcf8yo7SFOEW+iHICtslfo/J6uPMfY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MOCZ7uKD; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GHBegxnm"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A9121F000FF;
-	Tue, 22 Sep 2026 10:47:26 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MOCZ7uKD"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 740561F000FF;
+	Tue, 22 Sep 2026 10:48:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790074046;
-	bh=D4xt0EQqkbQ4QpGr/rWEfLBSlUeslFGA4wmWm+gy+4M=;
+	s=k20260515; t=1790074133;
+	bh=tlFFiZRxfgx1Jj0XoMt/FlYoTm4Jk3kOQYOucZTA4lI=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=GHBegxnmYqFCdMTEazxdAjbs/5mie58S9/aKqW6Y1JsNdqVg88UYFYvhey1/4SMnh
-	 9AMUlF9FtY9Ewi4OuAMcRCbDD+pdLNPTzMgBFICHgYU3qf7H0gFT7Az7pZCYx3qHpp
-	 XphNhteU0lhlyYPQPKv0Bxlbp6Wy2+90BVaZoE0LD+Mdjlu5Mjxy/Io0B8Y27xjsnm
-	 v7Ol2jpDeiVRqP8kUffH9DLXOFPyixbwkME4izv2b6O54Vh1SPh7p4gTYvURVXECWi
-	 aHtLFeXag9xxwX1DF916u/6ZzOEBtojKnNReP0c7blfRDfkqGOocU3QEgNwVEtJshW
-	 d2KY86qJlOqgw==
+	b=MOCZ7uKD+yQJIe3pIxg++oA1F9B25OfBINPzRBIyqkfIEiJVN8XDTtVfuFpJkFiLk
+	 McrhI2qEt55ZTAulGfzVDjiJigkLmd8S34dTfcygzE0jcWzbaoMA4ByStcgI0U1RM1
+	 YBg2hsfNbmRWKF27PoimbHshBpSuUrExyRXajTCPK2E36ejfG9m7qsirs6PZilV8MU
+	 sHNuz5on7VeVS24WqxSK0V/4IGQt8MfLv/rksztiteyTqlW+TsC6i6OF9gmXFSWiOg
+	 YnM1q2CWX3Io9ncnu+NimclHyCK8Z3S1Rcg38IO9auLyF3Lj/T7c3YWXoKlBMRGeqH
+	 Jrpd6sdGJQyNg==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v20 5/8] regulator: p3h2x4x: Add driver for on-die
- regulators in NXP P3H2x4x i3c hub
+Subject: Re: [PATCH v20 1/8] i3c: master: Add APIs for I3C hub support
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Lakshay Piplani" <lakshay.piplani@nxp.com>
-Cc: linux-i3c@lists.infradead.org, "Alexandre Belloni" <alexandre.belloni@bootlin.com>, devicetree@vger.kernel.org, conor+dt@kernel.org, robh@kernel.org, mfd@lists.linux.dev, lee@kernel.org, Frank.Li@kernel.org
-In-Reply-To: <20260922103551.2754613-6-lakshay.piplani@nxp.com>
+Cc: "Alexandre Belloni" <alexandre.belloni@bootlin.com>, devicetree@vger.kernel.org, conor+dt@kernel.org, mfd@lists.linux.dev, linux-i3c@lists.infradead.org, lee@kernel.org, robh@kernel.org, Frank.Li@kernel.org
+In-Reply-To: <20260922103551.2754613-2-lakshay.piplani@nxp.com>
 References: <20260922103551.2754613-1-lakshay.piplani@nxp.com>
- <20260922103551.2754613-6-lakshay.piplani@nxp.com>
+ <20260922103551.2754613-2-lakshay.piplani@nxp.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 22 Sep 2026 10:47:25 +0000
-Message-Id: <20260922104726.6A9121F000FF@smtp.kernel.org>
+Date: Tue, 22 Sep 2026 10:48:52 +0000
+Message-Id: <20260922104852.740561F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -47,49 +46,60 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
 Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
-- [Low] mfd: driver-specific header placed in global include directory
+- [Low] i3c: missing locking documentation for exported i3c_bus_set_addr_sl=
+ot_status()
 --
 
-commit 51d204aed0d51828d1e68a0ac0a10f8c8cac311b
+commit 732589b2fdab035a70a02657f4550d825edf46a1
 Author: Aman Kumar Pandey <aman.kumarpandey@nxp.com>
+Subject: i3c: master: Add APIs for I3C hub support
 
-regulator: p3h2x4x: Add driver for on-die regulators in NXP P3H2x4x i3c hub
+Add CCC helpers to check CCC support and send CCC commands, address slot
+helpers to query and update I3C bus address slot state, registering virtual
+masters with an explicit firmware node, and exposing the bus maintenance
+lock helpers.
 
-This commit adds a regulator driver for the on-die regulators in the NXP
-P3H2x4x i3c hub device, registering them via the regulator subsystem using
-the MFD framework.
-
-> diff --git a/drivers/regulator/p3h2840_i3c_hub_regulator.c b/drivers/regu=
-lator/p3h2840_i3c_hub_regulator.c
-> new file mode 100644
-> index 0000000000000..244f2a4f70f38
-> --- /dev/null
-> +++ b/drivers/regulator/p3h2840_i3c_hub_regulator.c
-> @@ -0,0 +1,289 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright 2025-2026 NXP
-> + * NXP P3H2X4X regulator driver file contain functions for enable/disabl=
-e regulator
-> + * and voltage set/get.
+> diff --git a/drivers/i3c/master.c b/drivers/i3c/master.c
+> index 2cdbffd33fd7f..d1e8cae374b97 100644
+> --- a/drivers/i3c/master.c
+> +++ b/drivers/i3c/master.c
+[ ... ]
+> @@ -423,11 +435,18 @@ static void i3c_bus_set_addr_slot_status_mask(struc=
+t i3c_bus *bus, u16 addr,
+>  	*ptr |=3D ((unsigned long)status & mask) << (bitpos % BITS_PER_LONG);
+>  }
+> =20
+> -static void i3c_bus_set_addr_slot_status(struct i3c_bus *bus, u16 addr,
+> -					 enum i3c_addr_slot_status status)
+> +/**
+> + * i3c_bus_set_addr_slot_status() - Set I3C bus address slot status
+> + * @bus: I3C bus.
+> + * @addr: I3C address to update.
+> + * @status: Address slot status to set.
 > + */
-> +#include <linux/bitfield.h>
-> +#include <linux/cleanup.h>
-> +#include <linux/mfd/p3h2840.h>
+> +void i3c_bus_set_addr_slot_status(struct i3c_bus *bus, u16 addr,
+> +				  enum i3c_addr_slot_status status)
 
 [Severity: Low]
-Does this include violate the MFD subsystem guidelines for driver-specific
-headers?=20
+Could the kernel-doc for this newly exported function be updated to document
+the locking requirements?
 
-The MFD guidelines state that driver-specific header files used only by the
-parent and its immediate children should be kept local to drivers/mfd/
-rather than being placed in the global include/linux/mfd/ directory. Since
-this header appears to only be used by the p3h2840 parent and children,
-could it be moved to the local subsystem directory to avoid polluting the
-global include space?
+Because i3c_bus_set_addr_slot_status() calls i3c_bus_set_addr_slot_status_m=
+ask(),
+which modifies bus->addrslots using non-atomic bitwise operations, the call=
+er
+needs to hold the bus->lock (for example, by calling i3c_bus_maintenance_lo=
+ck())
+to prevent data races. Documenting this requirement would help prevent futu=
+re
+consumers of this API from introducing concurrency issues.
 
-[ ... ]
+>  {
+>  	i3c_bus_set_addr_slot_status_mask(bus, addr, status, I3C_ADDR_SLOT_STAT=
+US_MASK);
+>  }
+> +EXPORT_SYMBOL_GPL(i3c_bus_set_addr_slot_status);
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260922103551.2754=
-613-1-lakshay.piplani@nxp.com?part=3D5
+613-1-lakshay.piplani@nxp.com?part=3D1
