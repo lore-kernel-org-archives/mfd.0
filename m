@@ -1,164 +1,134 @@
-Received: from mail-wr2-f12.google.com (mail-wr2-f12.google.com [74.125.225.76])
+Received: from mail-yx2-f12.google.com (mail-yx2-f12.google.com [74.125.224.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 874F7542EC1
-	for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 12:53:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.76
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B315550DC0
+	for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 13:13:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790081608; cv=none; b=cvFtveF1jLuHrSruxrqOAalqS5N2ZYVwos1mGpouKnxzXbu4qqoEUbPucPFBiAVlS1hgbaXzuFOo0aNT/aMkgOA7Jv+ZJ/TeTmfiI0zqQh1KyLMIJzNcmYkEqtLtL8P5QWKeLHqMkec1xW8BAvxFnlg8oVXDaD6RMNsej2q1tMM=
+	t=1790082805; cv=none; b=EKaJhhnubAK3J2SKF6PAZOReceDZMeri0cn48CEJg4MuzoygXegSYaZpZP78b31WOcM83cJtWbO6sZdPgjbPW5eQDFiOWgSniQZZgTyQUctVv+Vu9lfd8cIJJQ9BPniCFl7o5doMTd5RmsOFVn0sKHjClBzrc7bI4dsz1ko3OfA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790081608; c=relaxed/simple;
-	bh=v4Ul7xXqzvPTm1KnAhXO58P90eD2KlGTNsegXWmzADU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=CuLuh4jpJ3ZlDhn5kyaBH0e/a9mtNmzZKVaCb50M0cTgc76bnSxbo4hNSbessNjcz3uSxfJeAWNwqdnzyY3SO9yi3x79FL+qPJXeOWisWSuh8eVcIIVM4QnOZUBNnHuaCEgTu+6nLu4rCr2yAtMXcYuVSgCY4z5ikYiqONshJcg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=f0t9yfDE; arc=none smtp.client-ip=74.125.225.76
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	s=arc-20240116; t=1790082805; c=relaxed/simple;
+	bh=7ScoP72loie+KDTnxQPNwCK69btdw+khKMf6M0k1bJA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=vFren+hgCCgX6PfxdC+10ru+7EJEnqwF1H780fZoMrLMx1dvWl/JT5uBWKFnfIrKk9IezYR2ycMsgxsF9ALvMYsLp+szHByqSaaMSLJWKisiBfzMHucIZ62kKLl2xEWD8HhyXXIgCKOgT7FYUiDnnbOPlspOJaU4//tCXgtAHDA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=Su5wRsSr; arc=none smtp.client-ip=74.125.224.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="f0t9yfDE"
-Received: by mail-wr2-f12.google.com with SMTP id ffacd0b85a97d-482f62ccdb1so1434410f8f.1
-        for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 05:53:22 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="Su5wRsSr"
+Received: by mail-yx2-f12.google.com with SMTP id 00721157ae682-85d4ddd1d91so29715367b3.1
+        for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 06:13:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1790081599; x=1790686399; darn=lists.linux.dev;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=UsAsHIO1y8RCUKiEPTTkY3IWmv6reNZonvZkfCzW3Ag=;
-        b=f0t9yfDEmFdw4vwahaUUgYPAbzMct7GOZdWFBggvNOoZfzW7Hql5R0wK7nZKI5bOIB
-         to0wQo1P+y+mIOa0cK8tjZFh8766mT1ULbZoCNXia6H1kJNG76AUwnpbpsEZMFpZj0kX
-         6PWMqvbv1KsBd7Yxt3b9hkjn6yZMM3GtyO/+N4ZewB0g3+dFGGO+M/OpBcslWlWTGpZR
-         hZb45L5hM9dQX55B9a91xlXb8k7t706TxUZ2SyN52q46k5ZDblyoW7VpMN05gYnOFEYK
-         qMToNmWYC73iuY6Chj/n9lXEZ9TKGasooPdAMEZ//fKTbSv0Kk3m5Fkx17CBxrlx+MC6
-         bEOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790081599; x=1790686399;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1790082802; x=1790687602; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=UsAsHIO1y8RCUKiEPTTkY3IWmv6reNZonvZkfCzW3Ag=;
-        b=UwMcClrvl1yu2Zluc2wN8i4LODb8C1BQxW0P9qYO8iXUHOGeES1ZQZ+LB2P9WYMUug
-         I8nUaNL7Qqo3dZ8DmBNEmst+RikuM7z1FNeddVd/yf4pDWiZS0+TE9CTqFxl4oqQYN2D
-         G0YXlO0KlhmT3MWjr5B0aojzVk73/91tyEHgk9nDiosXwY1Pa/x46XdMV54L8Df5UKa4
-         ePfj6Ma2tXbSeE+L+EEYetHEJTDwgv7vXK+9hb6NY1Pj2MZvS4IWpcqn9xdhfyEJ95v7
-         RLRZB2tW8ogCf7GyjTA9bg3AMmfLTTSxYUvfJjqWISn2kv2S+GE9MrScTRgN+XdUzc/f
-         V7Fg==
-X-Forwarded-Encrypted: i=1; AKwUvBwxgULB83ZqRrNxC8INLu+7uEAzoLecLLjbegx5RtfZDVEHbFlysTpDtQB44RdTV6XXdW8=@lists.linux.dev
-X-Gm-Message-State: AFuF++nqgZg7NUnDi9fXlOc2s9P0jWIamUJx7DoNpYFu4qNA6jUFHs2p
-	k5hX8472H2HFBIaZpgQ+izPXBzvGV++SdSaRVbkr1aRc2kuC+Ty1tvkxsVFhUNgbNgY=
-X-Gm-Gg: AYBFou1LAl9dRH1RE/eoPZX7J5Qm8lQduMeVoJ17zp2WDR3noZXFigFk9/X0TzxSjM6
-	rKqMTTqymP92KGCaYfsKWX+na+1HcHInTyrYg7uZDBxBlco+RArcQ0Ix6WJUqP56gAzCuTbDUby
-	SbKiHoDupeNttTYhv067jW4g22kTPndPFCkTRPtVCVHOY2IvzIvg+ziIrunqMkI0x1fyxi6V5KO
-	4ixzhFboU0CtkqCbsTlcZuUBbOSN9Pi1NSrGkAkDyBf2/ZxdXz5jEipyEgA58+G1DNq6HLeQtg6
-	X4SPQqXr2odGwyIDlEcZEXOI91HbNWRtG3rjmP7IMmzN9jKaNKAf2fgzctXghASR8DiQxdQJwgC
-	lnLtrh44sBkuh0KiZ7qtcuJ67rlIHR/0ZA8RQ84vPEKUHEy2rt3M+Lz8nKx+CdgXNCy3Z8Oqygs
-	R9NqX0tiNmPedL9H9Fw39QPv0YFWpNrqRWtkgMHO9XtTHfVFMVnCsQfGPFimBykNwVWCrRWBee9
-	MiGybtpn6112ezgsMcREQya8sxzggQO5Ut++inrr5HGU/Wn6DAH2vIJlV5xwA==
-X-Received: by 2002:a05:6000:4608:b0:487:f31:857f with SMTP id ffacd0b85a97d-488610118bamr4476584f8f.15.1790081599025;
-        Tue, 22 Sep 2026 05:53:19 -0700 (PDT)
-Received: from localhost (p200300f65f19a9041d0e57515b2ea4c8.dip0.t-ipconnect.de. [2003:f6:5f19:a904:1d0e:5751:5b2e:a4c8])
-        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-48862731a53sm4931099f8f.4.2026.09.22.05.53.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Sep 2026 05:53:18 -0700 (PDT)
-Date: Tue, 22 Sep 2026 14:53:17 +0200
-From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
-To: Alex Elder <elder@riscstar.com>
-Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com, 
-	robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org, 
-	andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org, kees@kernel.org, 
-	gustavoars@kernel.org, p.zabel@pengutronix.de, daniel@riscstar.com, 
-	mohd.anwar@oss.qualcomm.com, lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org, 
-	devicetree@vger.kernel.org, mfd@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
-	linux-hardening@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 3/4] clk: toshiba: introduce a TC9564 SoC clock and reset
- driver
-Message-ID: <arJ5gQmthKh2ayGg@monoceros>
-References: <20260918165234.687224-1-elder@riscstar.com>
- <20260918165234.687224-4-elder@riscstar.com>
- <arA1svdQzaj3VanR@monoceros>
- <28ebbf27-24db-4b5f-87f0-831d13f93b8f@riscstar.com>
+        bh=5TqBGWJ1w7neWAQnzpWPy+Fm8xr9GVtFmSS2aSnE1bQ=;
+        b=Su5wRsSrdQdpKnCrXjx4ndbK21LygkNY/NCxH4/IZMUZP/U+bZBhh+UZdCWmSEZUSl
+         rabUua78YnIe2gY37wcIvEDzyvHc9uXipVwfToV5B6aVv0jlsR91/Y3H7+v9G0AYIjtZ
+         zBPc/3Te5gUxQECPQ3WPZ91edkiKXnfglTBJIwMWZQxOG3VUpVV0m6tZRGt9jXsaGCOo
+         BPNM8igXxDIbn0KTjXDWlxzftySkHwbBwRM/K0N36H7V4n1HtrVXsFKctnbR1Uzc8dj9
+         0F+k1bRVUpssicJpYzeHiWC651EzdUtMuhyIAyoJ5CL1xIwtxFJPom+6ycTCsSRd9Tpw
+         xfIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790082802; x=1790687602;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=5TqBGWJ1w7neWAQnzpWPy+Fm8xr9GVtFmSS2aSnE1bQ=;
+        b=zqhAtIpEYsgpJNHWkxf1emfi2w+pAOFu/l0zGoKQhknDRQUsaEkjVsk/D4n3jAUpBs
+         Tq5z3w718hjF60+K1LndlBwbLi3aTVSBq9JZ6UNZ9RjWYR7Vc+g46f0JoXEmGvHL9HRl
+         4PMQ9Qa4IdKJRv+PXuE/xHJcX3rgdILnJfpnVy317QuhjkhDpvEl2nojORVwbft8AQBv
+         GXN7osVicFIhzwx0TtUg0ipYTcXl0EvdmxKsiGCg8jiboA/yG96wo5n/MxYA18S41mMy
+         Z0Bbix8BtdL5vGGmJpo5GmIC/gwSTGMQbwOCWZmx39ATBGNwzirnXuBl3Xf8p5rgGs7c
+         W/Dw==
+X-Forwarded-Encrypted: i=1; AKwUvBzh7kc5XMDgPTdSsKdAk7ZDLOPWLeyA04+2LR11brWxj3fCDqIk4mIDyAM2uDK32PdKr98=@lists.linux.dev
+X-Gm-Message-State: AFuF++lTP++gGN/GjGCmyurBaAQj44tglf2eNlm1apnk53xvew+NHfOh
+	2WnzpDDLxpLRq9BWTaVxRBNPLpZLlP6G8JBHwu4ddXh8xy9MviZ4qKT3mj3e+/5bSM8=
+X-Gm-Gg: AYBFou3a7sjxAWa9XkOb02d37lTEgJGu7dv1VIbSICkMKKr0ZHTSXtN5RXv/wWOBJVT
+	QrnrDtTT2ZPiV9LJIUl4jmwbrNWHffDi1JUrW+q5RKkGiU7UMN5bO2vpw/y/8DlZJeHfFp/gNt0
+	vyr1tppdBhCZlcH1JWCLMWqILb49PBlrZmcTSbkgyo0j6tJc6ocabelNm0cU2R0b3UG9W2ZUttH
+	3ijYuiOYxFze3bF9iL78dVP3tTw6oYZ1r3sQk1UmB9pTMuDJ+oHbR9nZT24Bjy/qtQO9tYI3Wvx
+	Wd54+yYjyvG9rTZ/zzeYq0ihndWzGyN6XF7lILapjPnmQcJVjnhSL7+YkUu1LhjaSa2S2VIw/S1
+	auVTr4dMoZzt3SjZOBSxpkzMwfhZJ2NM66SZYYg3hx1fhq899rboiSbiw3IrbZtRur/IVKcKnwV
+	lbxoViOpO2pOGOxErwo/0vX2niFP0vzpzgT5xY1SHc17WsARijTVR6dZV+G+JQragh6FPpZYUQt
+	EQp81z63Q==
+X-Received: by 2002:a05:690c:d:b0:81d:472c:17a8 with SMTP id 00721157ae682-8972beadba5mr62389717b3.0.1790082801845;
+        Tue, 22 Sep 2026 06:13:21 -0700 (PDT)
+Received: from [172.22.22.28] ([73.62.185.64])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-8a2c25bacffsm5463367b3.24.2026.09.22.06.13.20
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 22 Sep 2026 06:13:21 -0700 (PDT)
+Message-ID: <1ac16236-284a-4d01-b68a-4b32d5c5287c@riscstar.com>
+Date: Tue, 22 Sep 2026 08:13:19 -0500
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="ztliwx3eij5ch7ku"
-Content-Disposition: inline
-In-Reply-To: <28ebbf27-24db-4b5f-87f0-831d13f93b8f@riscstar.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/4] dt-bindings: clock: introduce
+ toshiba,tc9564-clock.yaml
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
+ robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org,
+ andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
+ kees@kernel.org, gustavoars@kernel.org, p.zabel@pengutronix.de,
+ daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
+ lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, mfd@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260918165234.687224-1-elder@riscstar.com>
+ <20260918165234.687224-3-elder@riscstar.com>
+ <20260920-messy-successful-caracara-fcdbcd@quoll>
+Content-Language: en-US
+From: Alex Elder <elder@riscstar.com>
+In-Reply-To: <20260920-messy-successful-caracara-fcdbcd@quoll>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
+On 9/20/26 1:21 PM, Krzysztof Kozlowski wrote:
+>> diff --git a/include/dt-bindings/clock/toshiba,tc9564.h b/include/dt-bindings/clock/toshiba,tc9564.h
+>> new file mode 100644
+>> index 0000000000000..75732fddd3025
+>> --- /dev/null
+>> +++ b/include/dt-bindings/clock/toshiba,tc9564.h
+>> @@ -0,0 +1,54 @@
+>> +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+>> +
+>> +/*
+>> + * Copyright (C) 2026 by RISCstar Solutions Corporation.  All rights reserved.
+>> + */
+>> +
+>> +#ifndef __ClOCK_TOSHIBA_TC9564_H__
+>> +#define __ClOCK_TOSHIBA_TC9564_H__
+>> +
+>> +/* Clock IDs */
+>> +
+>> +#define CLOCK_MCU		0
+>> +#define CLOCK_INTC		1
+>> +/* #define CLOCK_PCIE		2 */
+>> +/* #define CLOCK_I2C		3 */
+> Drop both, and SRAM is number 2. Or enable and implement them.
 
---ztliwx3eij5ch7ku
-Content-Type: text/plain; protected-headers=v1; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH 3/4] clk: toshiba: introduce a TC9564 SoC clock and reset
- driver
-MIME-Version: 1.0
+I forgot to respond to this.  I think you are confused.
 
-Hello Alex,
+SRAM is BAR number 2.  This is defining clock IDs.
 
-On Tue, Sep 22, 2026 at 07:37:53AM -0500, Alex Elder wrote:
-> On 9/20/26 2:39 PM, Uwe Kleine-K=F6nig wrote:
-> > On Fri, Sep 18, 2026 at 11:52:32AM -0500, Alex Elder wrote:
-> > > +#include <linux/bits.h>
-> > > +#include <linux/clk-provider.h>
-> > > +#include <linux/mfd/syscon.h>
-> > > +#include <linux/mod_devicetable.h>
-> > > +#include <linux/module.h>
-> > > +#include <linux/platform_device.h>
-> > > +#include <linux/regmap.h>
-> > > +#include <linux/reset-controller.h>
-> >=20
-> > Please rely on linux/platform_device.h to provide of_device_id and drop
-> > including <linux/mod_devicetable.h>. (If you want to go full iwyu,
-> > include <linux/device-id/of.h> instead.)
->=20
-> In general I would like to "go full iwyu" but have never heard
-> it expressed that way.  Can you recommend a tool available that
-> will help me do that?
+And the reason these are commented out is that, while they
+do exist, we explicitly do not want anyone to disable either
+of these clocks because PCIe uses them.  This clock (and
+reset) control is accessed via PCIe.
 
-There is `apt install iwyu`, but I only tried that shortly and didn't
-manage to make it work nicely with-in the kernel.
+I do accept that someone might want me to simply omit
+these commented-out definitions, and I'd be fine with
+that.
 
-> It looks like "mod_devicetable.h" doesn't help much unless I
-> need struct_cpu_feature (which I do not), so I'll include "of.h".
+But your suggestion wasn't sensible so I wanted to clear
+that up before deleting these.
 
-Yeah, and for struct cpu_feature there is
-https://lore.kernel.org/all/ef103a4b9e1cd7477fa52ee347c4ec301354fba9.178998=
-8540.git.u.kleine-koenig@baylibre.com/
-=2E
-=20
-> > > +static const struct of_device_id tc9564_clk_ids[] =3D {
-> > > +	{ .compatible =3D "toshiba,tc9564-clock" },
-> > > +	{ },
-> > > +};
-> >=20
-> > Drop the trailing comma after the list terminator please.
->=20
-> OK.  Only for the list terminator, right, because nothing
-> will ever follow it?  Non-empty final initializer is OK
-> to have a comma as far as you're concerned?
-
-correct. A non-empty last item even should have a comma.
-
-Best regards
-Uwe
-
---ztliwx3eij5ch7ku
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmqyejsACgkQj4D7WH0S
-/k47Vgf+MRlVLPMGuXHor1vwVO9Aio3Q8yy+NUEK/fWTE+YEMTA1w+6YqsgeiJ18
-k46MRbkEremJC2B/gZElmlpu4paEu99Qg+kif1t+k21ZaiC9Kl71V2ue+dNtbP93
-U6/uxACp6gAw5u3yAf2GFlAOJhCXVBaeVd25LntVeVdhRYQb48cp6V5Uo2C2ukK5
-WfEPetJwrAilKQUBpNladzLOIXT4/xVdzLTl1kQCTeJ+k+4f9ubiLI5C6cJOsf2j
-MC4jBXoimClS2rp5jMK42D8blKcvVDH4Z4X87FPzl1sqRy8EI+nFftpZt0hSW/ai
-gYSqxdYQ0cXLyu2XzCARC0BSUETt/g==
-=zJTm
------END PGP SIGNATURE-----
-
---ztliwx3eij5ch7ku--
+					-Alex
