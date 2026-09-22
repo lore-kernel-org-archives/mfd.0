@@ -1,54 +1,54 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 560BB3C9EE6
-	for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 07:18:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6DC683C9EF0
+	for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 07:24:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790061490; cv=none; b=UrE6Xwzp55w71lRYLy+7LTRi34TT+O5ClWqvw+s/gXF0RZRiLg17fjO3kr8YcXBhtLduz94hoxo+MELabveJOBfwBNNqBDfELQlBC/6DGSRCqSDpsF+jFQKlnav/vljBue+aGEBqEiHClufIEQDj79z5B1N3uh9zsHIA5jAB0Do=
+	t=1790061868; cv=none; b=Qo0980+XUm+0qzfLQb4dnTegP98JnOU+U1qbz3UNTjELsDwc1/RCl3+pl29ucPykkx6+JKzNDnBatarHBLnMuSCU2BOj3K6YmpZ/fzz0j9LhUu1aaciIpYxv+J/DfpQUmn6mGkoiyM7nYBsehBP0fAQwKm2Z+fbPu8hZprqyxps=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790061490; c=relaxed/simple;
-	bh=vfAOnWF9ma8enyqr4D1jm+4ryfaUF06KvZPYdakyP4g=;
+	s=arc-20240116; t=1790061868; c=relaxed/simple;
+	bh=dnHoQ9hJxT1jx4dONrAt87VQ3Ef84mxygQ9fqqx65vM=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=vCMtD93qwtFtghWQxqwOrtJf+1pCIXDP9Wu47q6qY+9WPE8P4W0QqjCC/eSqBh/iY6UjdCAZCB9zVWeI4wHSPME8R4d2iB0OELgonZ8cDwX2+WMMYPBHAdC5JKlG84fk0cCdqqc7/n+qjLN0n4FnOmOdMF+vYwUkmUyfO1lrGA0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TdgKWF2E; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=lnXWN/34XdO8tNAm5EZrLA57T3fYxqn2/tLLCbRZ2+CrImhSaY46WYJMOkkQZCUaRFy5AbviPTdpSLgCQ82ibX4Rpxh1TUP3PwMIjTgDk4rUxNLlQ2Jdy7fI/fpq0OH4FvyE8MaoEkmouZbnwEhE0hxLwI/O0rQ8alz7VZJ/+xs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=f+ZiLe9N; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TdgKWF2E"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61A691F008A2
-	for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 07:18:02 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="f+ZiLe9N"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 323791F008A4
+	for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 07:24:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790061482;
-	bh=Kiu2zTEU4eOPd6KYh9rbDUJ7UJD3txxYyQibAU4/O4U=;
+	s=k20260515; t=1790061867;
+	bh=dnHoQ9hJxT1jx4dONrAt87VQ3Ef84mxygQ9fqqx65vM=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=TdgKWF2EpS1w3ADvij2BopLpxhHXGdHIunEVbiZcvtASTMdf/9sUcUsOCpknA/t97
-	 OUDjR9pY9+X6TC0C7nH/sd0n5JKYjOW0JKYTuP8kSz9UyZwWuiPuD1OnzwLncY14m+
-	 z1V4mE8i6JRQJ8xGQB6k1qtTQZeDJ4qv7cs7bLXpyPTP0U9wqBJH/nZLelCYQq7Oe/
-	 oVPXn1WdL76/wYtlx9Psk9Oc9CxpkcIhZFCd2IyFMqmD6QUbOpcXGzpKktQRoSmHOm
-	 ce6l5zgc+wWVOzGg3rCucrtknj4lDC33ancgZfwJYKmtGTfPVghJMT7Jko+pc3V0Te
-	 Uou8jemMlGVvg==
-Received: by mail-lr2-f12.google.com with SMTP id 38308e7fff4ca-3a2ff17443dso39817021fa.1
-        for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 00:18:02 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBwYwS6my7oA3cGw/Oy8tZ5OalLraW86YyRZGmcDai9NmfcJi/6peWqGkM2AtgO6UGabPo4=@lists.linux.dev
-X-Gm-Message-State: AFuF++nioAWL/iauB8ZZpO4mEFyof38e3Q+L1wMxYZKnWWUaXmTMssM9
-	DbOYwugiZl+0iZLydfEFpUGoGOTNVKmp5hQv+IPAS2oo030rrFdt38O/f49z8V2z+uNhvLvznaa
-	kCFtUpsWz/oYbYRVTMiawbaH8ZAuyuDM=
-X-Received: by 2002:ac2:51c3:0:b0:5b8:bc5e:b572 with SMTP id
- 2adb3069b0e04-5b8c1845684mr4028396e87.42.1790061480637; Tue, 22 Sep 2026
- 00:18:00 -0700 (PDT)
+	b=f+ZiLe9N+4HhobIOiXEkHSOzJPiavcqREHehqAwNFiC6345vzVqQ0XkFyy0KZLSon
+	 mL8vlDLDMcccOzT/PVl1scbUyc58IKW+EpJhksVggpBN7qVRYVOFrfk1dfoi8DTMLq
+	 XTsyDObN9lrEAZIOn9ddRz8TKaRrnEs+mS0QUYuqlPXuQqg0i/3o4HQSnBnBN2RlkL
+	 t/d7Mf/CRnjOGt/CFEOYqI1b2ZQ3umC3r4HNuAtWJ9HEwmjNVNMvGGPEdmhDctmzKK
+	 /MlckJ13teVFVlHezc3sFsPaWvdMGeBM/MWBUTpKBBKPDweGpMgVU1disO8Pej0Myh
+	 3y51cbIY09riw==
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b5e4f1b845so3121482e87.1
+        for <mfd@lists.linux.dev>; Tue, 22 Sep 2026 00:24:27 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBxDK82UyoFIlDykQlWGaN4QMa/Zb6l29W3xpb68jbXRsZD8lM0ZzkkGPdSBJEB4SXXeh9c=@lists.linux.dev
+X-Gm-Message-State: AFuF++k3LG7Ewu7TyFBqpr2lKBaf3DmB9XCOxO0Nw2v/L8NKNQ755SZY
+	Gedz1aUCyvTECLAM1Gsvi5i1lKwyHlFrG1y9kNKrSYYWGTsvcVgRA+Wnm5Wqwh6daWAdnLWphME
+	qQM7qU5pUJy8D3dqcWYXPpWrzMRHStIU=
+X-Received: by 2002:a05:6512:b95:b0:5ae:ba8f:f9fa with SMTP id
+ 2adb3069b0e04-5b8c18411aemr4246334e87.18.1790061865764; Tue, 22 Sep 2026
+ 00:24:25 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260921-cv75-v5-v8-0-282ff5d98dda@ambarella.com> <20260921-cv75-v5-v8-8-282ff5d98dda@ambarella.com>
-In-Reply-To: <20260921-cv75-v5-v8-8-282ff5d98dda@ambarella.com>
+References: <20260921-cv75-v5-v8-0-282ff5d98dda@ambarella.com> <20260921-cv75-v5-v8-11-282ff5d98dda@ambarella.com>
+In-Reply-To: <20260921-cv75-v5-v8-11-282ff5d98dda@ambarella.com>
 From: Linus Walleij <linusw@kernel.org>
-Date: Tue, 22 Sep 2026 09:17:48 +0200
-X-Gmail-Original-Message-ID: <CAD++jLkSfPvuO=ZgqwYnbBBjxuu4ns1EDpHXQxKgWGqK9E130A@mail.gmail.com>
-X-Gm-Features: AclHuK98tk4GqYStUdUYs2m51yzirRsfrNvcnULTogZGKv-tdFHo0QJgErcoW2U
-Message-ID: <CAD++jLkSfPvuO=ZgqwYnbBBjxuu4ns1EDpHXQxKgWGqK9E130A@mail.gmail.com>
-Subject: Re: [PATCH v8 08/18] gpiolib: regmap: add write_data_after_dir quirk
+Date: Tue, 22 Sep 2026 09:24:14 +0200
+X-Gmail-Original-Message-ID: <CAD++jLk1WEwWRFdLjkbY3YSJmbQ3oLaoNAv3Ca6ZJ2ebubp2jA@mail.gmail.com>
+X-Gm-Features: AclHuK9erJBC7wstRYz1ZiKk7AbclZKt0-cY_QBUwQ7InLcjPRkXXHSAcSuac_8
+Message-ID: <CAD++jLk1WEwWRFdLjkbY3YSJmbQ3oLaoNAv3Ca6ZJ2ebubp2jA@mail.gmail.com>
+Subject: Re: [PATCH v8 11/18] gpio: pl061: use IRQ_TYPE_LEVEL_MASK and IRQ_TYPE_EDGE_BOTH
 To: longzhao@ambarella.com
 Cc: Arnd Bergmann <arnd@arndb.de>, Krzysztof Kozlowski <krzk@kernel.org>, 
 	Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev, 
@@ -66,77 +66,17 @@ Cc: Arnd Bergmann <arnd@arndb.de>, Krzysztof Kozlowski <krzk@kernel.org>,
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Long,
-
-this is starting to look good!
-
 On Mon, Sep 21, 2026 at 6:23=E2=80=AFAM Long Zhao via B4 Relay
 <devnull+longzhao.ambarella.com@kernel.org> wrote:
 
 > From: Long Zhao <longzhao@ambarella.com>
 >
-> Some controllers ignore data-register writes while a line is still an
-> input. Optionally write the output value again after switching the
-> direction, matching the existing PL061 behaviour.
+> Use the standard IRQ_TYPE_LEVEL_MASK and IRQ_TYPE_EDGE_BOTH helpers
+> instead of open-coded edge and level comparisons.
 >
 > Signed-off-by: Long Zhao <longzhao@ambarella.com>
-(...)
 
-> +++ b/include/linux/gpio/regmap.h
-> @@ -48,6 +48,13 @@ struct regmap;
->   *                     (Optional) Bitmap representing the fixed directio=
-n of
->   *                     the GPIO lines. Useful when there are GPIO lines =
-with a
->   *                     fixed direction mixed together in the same regist=
-er.
-> + * @write_data_after_dir:
-> + *                     (Optional) Write the output value again after
-> + *                     switching a line to output in ->direction_output(=
-).
-> + *                     Needed for hardware which ignores data register
-> + *                     writes while the line is configured as an input.
-> + *                     This is a legacy quirk (e.g. ARM PL061); new hard=
-ware
-> + *                     must not use it. Direction changes will glitch.
->   * @drvdata:           (Optional) Pointer to driver specific data which =
-is
->   *                     not used by gpio-remap but is provided "as is" to=
- the
->   *                     driver callback(s).
-> @@ -94,6 +101,7 @@ struct gpio_regmap_config {
->         unsigned int reg_dir_out_base;
->         int reg_stride;
->         int ngpio_per_reg;
-> +       bool write_data_after_dir;
->         struct irq_domain *irq_domain;
->         unsigned long *fixed_direction_mask;
->         unsigned long *fixed_direction_output;
-
-1. You have put the kerneldoc in a completely different place in the order
-of thing than where you put the flag in the struct.
-
-2. Put a comment above the behaviour flags because there will
-invariably be more of them! Something like:
-/* Regmap GPIO behaviour flags */
-
-3. Put a newline before & after the flags so they end up in a separate
-section of the struct, so people know where to add them.
-
-I would put them:
-
-        struct device *parent;
-        struct regmap *regmap;
-        struct fwnode_handle *fwnode;
-
-        const char *label;
-        int ngpio;
-        const char *const *names;
-
-HERE
-
-        unsigned int reg_dat_base;
-        unsigned int reg_set_base;
+Reviewed-by: Linus Walleij <linusw@kernel.org>
 
 Yours,
 Linus Walleij
