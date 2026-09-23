@@ -1,106 +1,98 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0655A357D1A;
-	Wed, 23 Sep 2026 10:19:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFAE249483A;
+	Wed, 23 Sep 2026 10:36:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790158776; cv=none; b=YrfF1YWt6SDvuUxQFHCi82se1m5TOIvjnIFhOk/7P1Xn78StusaMs5cj13GB4sdRvVSv2ZSEYY0bDmci1dCiSo9W7Bohc6hVk2lFPGt2XKy83g9eBbnEodLO9aTglhza9bxMgPATEuNuunKdWUZ3Lk/8cDORNL5kyCislvmJPmA=
+	t=1790159795; cv=none; b=SHy8jMMQsf0m7elmCHKbPHI5IpZP7B5EoTCjP4is1wl1dfyPBjyNZ7QiVhYtiQU45OSpTOZN3pjHHbhhJUaGkaEt7faurYrUe4Cnbu/xPZ6yPgeAbiULiV7FgQqMyll623MG/8QGyZCV1zhAp+OS3n9BwFBLYwqm2xLFMrNk9jA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790158776; c=relaxed/simple;
-	bh=EM24E4sO7sV9a07DKnzcEJnvWBCdD2dnZrt+skAvdQY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=iYo5GXCMuCMav4n2KheXtehH5W1ZY4I+T9Gw2m0zwuQ3HUwUPBpcK+b5hV0YVuEJBPKu5wRTuE3t2qEm7OwJ3CCRBaWbtKDZIZ6HcCPT2KEjlgXZPTuGqLIudmX9swK0ht4fvdQnZJMDV1UVBWCaEvuN1H0EhIhXGbomsN8dUd8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kPYelFyF; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790159795; c=relaxed/simple;
+	bh=BNlY5xjtHSj1GEaKqs7rlieTEQ43nPigzufnY7SmXXU=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=boxlFgEUYw1SYtV/5ozPS1+N3fdMdW7GadVQhSfjHDgrDiitnctk0ngvTeaq6foFw3s05uE5hLnhukxqRH1+HXSg6dM3J2TjCn93OFwR75VflIfgT46cAMLw0ufPfvhdUj1BsRTzerPkd+LGZIu/lt/gdriJvzg5n9+9b6wG7NI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SUcE+u5/; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kPYelFyF"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08E4C1F000FF;
-	Wed, 23 Sep 2026 10:19:29 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SUcE+u5/"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EC5B71F00893;
+	Wed, 23 Sep 2026 10:36:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790158772;
-	bh=4yZu5k7G2mvUqwrOPUIO/yinZuuQ7b17GcD28NPiS80=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=kPYelFyFxfUtCbV2k9Wv6r2Bbl++2NQDwXrUaey1bJouX2XbhQSkcaY7UuDnd+Uc+
-	 pXgil+aij4Y/iAlt0ADBFxPuXY5yDowtVo+edi3OlpuuaWeDpglke9s7I2FOABl+q5
-	 Pd1lF0zEf/7HZoj/oOf/bWC4kqdo/tVEGO7g5JeDtPCL7RpqAdwbjGLXRsiwB4aaVv
-	 B50+3SrzoTxhYFMRBuCwmVNixyNG+ZCMV9GYc2G7chnCi/QqlU3vkm+vKczo3LogeR
-	 PpXA7lCQPoi3BzuDcFivVSqA/aDpTpxLN5I8UalvdClWhmxxrMQABbHICsLqLRT6JA
-	 Rgh3Ya0H2HIXA==
-Date: Wed, 23 Sep 2026 11:19:27 +0100
+	s=k20260515; t=1790159788;
+	bh=Yorwe0EZnqCqSvsfpdyJVKhkzKAvOjuwrv5FciPTH24=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=SUcE+u5/Db/88k9SHmSzQ88Rl5almzeblDWCuZRUNoGlTtSkztC2w8BEBMSdk545Z
+	 qeZ7UczVMu2vyeR/5pOHvTg5vfW3UTZtmjHBRpI1Vfbpzp9HTqjifadDVlfqszQSQW
+	 1GL1A7KesWiPX9347q9s/slxahQ/sDU7hWVh8E83IYNPEREIpWZo6TpE0mGBpwbzzK
+	 Wa0WuKqTkSaBtGoAprCoxEMLmGWOG28PEUVn6vH6OxnDcJhIVvR+9PuD0sx0dXME93
+	 8CLtFBJhR3iaSkJrid85eph6ZiMzTf9tewgH0biVI2q+26jgIOhFWOVmWNLujr9BQ0
+	 6LbxfQTkYwjjQ==
 From: Lee Jones <lee@kernel.org>
-To: Hemanth Selam <hemanth.selam@gmail.com>
-Cc: Support Opensource <support.opensource@diasemi.com>,
-	Matti Vaittinen <mazziesaccount@gmail.com>,
-	=?iso-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Botsz HUANG <huang.botsz@gmail.com>, Nick Huang <sef1548@gmail.com>,
-	mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
-	linux-samsung-soc@vger.kernel.org
-Subject: Re: [PATCH v5] mfd: Fix typos in comments
-Message-ID: <20260923101927.GC3864833@google.com>
-References: <20260917054045.15805-1-hemanth.selam@gmail.com>
+To: Matti Vaittinen <mazziesaccount@gmail.com>, 
+ Matti Vaittinen <mazziesaccount@gmail.com>, 
+ Matti Vaittinen <matti.vaittinen@linux.dev>
+Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, 
+ Mark Brown <broonie@kernel.org>, Matti Vaittinen <mazziesaccount@gmail.com>, 
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+ Jerome Brunet <jbrunet+clk@baylibre.com>, Linus Walleij <linusw@kernel.org>, 
+ Bartosz Golaszewski <brgl@kernel.org>, 
+ Alexandre Belloni <alexandre.belloni@bootlin.com>, 
+ Michael Walle <mwalle@kernel.org>, mfd@lists.linux.dev, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, 
+ linux-rtc@vger.kernel.org, Sverdlin@mva-rohm, 
+ Alexander <alexander.sverdlin@siemens.com>
+In-Reply-To: <cover.1789538455.git.mazziesaccount@gmail.com>
+References: <cover.1789538455.git.mazziesaccount@gmail.com>
+Subject: Re: [PATCH v4 00/10] Support ROHM BD73800
+Message-Id: <179015978363.3959854.12736921200463465317.b4-ty@b4>
+Date: Wed, 23 Sep 2026 11:36:23 +0100
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260917054045.15805-1-hemanth.selam@gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
 
-On Thu, 17 Sep 2026, Hemanth Selam wrote:
+On Wed, 16 Sep 2026 09:04:04 +0300, Matti Vaittinen wrote:
+> Add support for the ROHM BD73800 PMIC and compatibles.
+> 
+> The ROHM BD73800 is a power management IC which integrates 8 BUCKs and 4
+> LDOs. There is also an ADC and operation amplifier intended for current
+> / temperature measurement and accumulation. RTC and 32.768 kHz clock
+> gate are also included. The PMIC can be customized via OTP and it has
+> options for operating as a main PMIC in multi-PMIC installation. Some
+> of the pins can also be used for GPO or GPI (including interrupt support).
+> 
+> [...]
 
-> Fix misspellings in comments across the MFD drivers and headers, found
-> with scripts/checkpatch.pl using the list in scripts/spelling.txt.
-> 
-> Only touches comments, no code changes.
-> 
-> Reviewed-by: Matti Vaittinen <mazziesaccount@gmail.com>
-> Signed-off-by: Hemanth Selam <hemanth.selam@gmail.com>
-> ---
-> v5: no change to the diff; moved the version notes below the --- where
->     they belong rather than leaving them in the commit log.
-> 
-> v4: dropped the two Acked-by tags that v3 added, keeping only Matti's
->     Reviewed-by, and dropped the Assisted-by trailer.
-> 
-> v2: also corrects "wainting" and "comapletion" in
->     include/linux/mfd/si476x-core.h, which checkpatch did not flag;
->     "comapletion" sits on the same line as the "wainting" Matti asked
->     about.  Subject capitalised to match the MFD convention.
-> 
->  drivers/mfd/88pm800.c                |  2 +-
->  drivers/mfd/kempld-core.c            |  2 +-
->  drivers/mfd/max8998.c                |  2 +-
->  drivers/mfd/rave-sp.c                |  6 +++---
->  drivers/mfd/si476x-i2c.c             |  2 +-
->  include/linux/mfd/da9063/registers.h |  2 +-
->  include/linux/mfd/db8500-prcmu.h     | 32 ++++++++++++++--------------
->  include/linux/mfd/lp8788.h           |  2 +-
->  include/linux/mfd/max8998.h          |  2 +-
->  include/linux/mfd/palmas.h           |  2 +-
->  include/linux/mfd/rohm-bd71828.h     |  2 +-
->  include/linux/mfd/samsung/core.h     |  2 +-
->  include/linux/mfd/si476x-core.h      |  4 ++--
->  include/linux/mfd/twl.h              |  2 +-
->  14 files changed, 32 insertions(+), 32 deletions(-)
-> 
-> diff --git a/drivers/mfd/88pm800.c b/drivers/mfd/88pm800.c
-> index e9941da58b18..aac630322b3c 100644
-> --- a/drivers/mfd/88pm800.c
-> +++ b/drivers/mfd/88pm800.c
-> @@ -275,7 +275,7 @@ static int device_gpadc_init(struct pm80x_chip *chip,
->  		goto out;
->  
->  	/*
-> -	 * the defult of PM800 is GPADC operates at 100Ks/s rate
-> +	 * the default of PM800 is GPADC operates at 100Ks/s rate
->  	 * and Number of GPADC slots with active current bias prior
->  	 * to GPADC sampling = 1 slot for all GPADCs set for
->  	 * Temprature mesurmants
+Applied, thanks!
 
-While you are here, could we also fix 'Temprature mesurmants' on this line?
+[01/10] dt-bindings: mfd: common ROHM PMIC properties
+        commit: 8204b924c6cac2d77af0d000985593d58b8c2ade
+[02/10] dt-bindings: rohm,bd*: Ref common ROHM bindings
+        commit: f6a6d948c2e0bd35aa31f635ec5ef42ac7f804c5
+[03/10] dt-bindings: regulator: ROHM BD73800 regulators
+        commit: f08afff0ddd74e2edb11d4be9cdc7b4919d68ee8
+[04/10] dt-bindings: mfd: ROHM BD73800 PMIC
+        commit: 579eae348f7393f14cc864af8c99f7c675e5b1f2
+[05/10] mfd: Support for ROHM BD73800 PMIC core
+        commit: 6f6ebfdd38126edc6cd3f1427ee261d57a83fff9
+[06/10] rtc: bd70528: Support RTC on ROHM BD73800
+        commit: fcf132b701bc8efdef211588f64434b5fea5750d
+[07/10] regulator: bd71828: Support ROHM BD73800
+        commit: e2be91507689f46f973d3ab83901d5e31dbd650c
+[08/10] clk: bd718x7: Support ROHM BD73800
+        commit: 9dd502dde33c60274e1b4962f05194bc16006d7d
+[09/10] gpio: bd73800: Support ROHM BD73800 PMIC GPIOs
+        commit: 03888668ce533f948a1de975523e2663d723bbe8
+[10/10] MAINTAINERS: Add ROHM BD73800 PMIC files
+        commit: e8e8d60fe8cc35340f6110ff70ef7959de1c3c0b
 
--- 
-Lee Jones
+--
+Lee Jones [李琼斯]
+
