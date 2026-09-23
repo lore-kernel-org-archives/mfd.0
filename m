@@ -1,29 +1,29 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8B05456291
-	for <mfd@lists.linux.dev>; Wed, 23 Sep 2026 07:44:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.3
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0BAD4582D8
+	for <mfd@lists.linux.dev>; Wed, 23 Sep 2026 07:46:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.5
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790149464; cv=none; b=YYsQyrvqzEryKddg8GK6R8CDv6FtRhkIzlbY44sX24T845xrt1HKgc+ZmYo5+cwx9Ak3i+YrbCgwJFmgj4+gH2rRsC00zQQ5tHdhOJU7snQEHrHFYYMOkqO6qbwGYHSGK/Pp4m1krsGgug+gWDmvRrmTcMSmCexVMoW2Q6ZgHoQ=
+	t=1790149593; cv=none; b=nMR8jgdb7SIubOBly0zOjWGyWyLINPFIxy+VhBFMQP5UtCfQWtCUrKioUsmRR3cuxoBqkja2gutMN3sSogZ9SCrUuDZA4DhfWtPRyaVPa5Zox9cvQbo6D5XRK4J+IqEa07ZTYRQXBBoEPHbVPzNWuV3dQO3qBsM96IOo3GKDv38=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790149464; c=relaxed/simple;
+	s=arc-20240116; t=1790149593; c=relaxed/simple;
 	bh=/2gTemkZVCx765RzD8+vg/si9R+RsMdUhgwTOizrnsU=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=BtsG7EkRNueqU2ZfLkiRCEhell6oVh32yMzJgMDfX8Wupv4UR+9MtrMDIUYWHSKkECYUcT/sViGrMbPejvFjtRQ3DYdgldU1Nc9eR0etd7AvoQEmIV64VUCzN27AMxSZRlKEYmkRW+DHdpWgqFfJpqysUgwr+fOWkOhE/vsHJak=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=Krr3MOtI; arc=none smtp.client-ip=220.197.31.3
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=AIrgd3bj/siB448F7RWhnTPxqqMEJ/tNGmmxjsfMjGSvbxdH2FRkKWXUOM1kN1F6Wa5BlYmnnYyDCtF7q/1t9nngYStfe4QLq5Xsu2hgxKxD/J6IOQuYxoKQjWBwoCPddcgwzYCKralCPdKUiyiblbNZREagDf3zT0k1kNylLAc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=ZXhIPGXf; arc=none smtp.client-ip=117.135.210.5
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="Krr3MOtI"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="ZXhIPGXf"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
 	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=QZ
-	2CklEPM41fBCBH4wMrs2bqusIBHz8n45dNOsqwuuM=; b=Krr3MOtISiN8CanmkK
-	MogyM2xLXQg8yg6bMaaBnZRMlfvyT8Gbf4Ff9krgL4Eot0MQT7kVDnstiTF4jz4l
-	9brbj4QCrPuZ7+DV+oQE1cLn+eNaTyuGLpTcapDE/zGzAmr9ofi+fcuNMhBpVrYl
-	ZoWDctCWf5w9iivdb0/hrBET8=
+	2CklEPM41fBCBH4wMrs2bqusIBHz8n45dNOsqwuuM=; b=ZXhIPGXfnuUPQO7hho
+	Z6mls1UwLr0w/B5xQSWcG9TigaAZL5AszmhnhrrLhwdeynBoFyBGaMi0rboMJ4D2
+	OB1qXptw4TgKIBisj0R28PYSocIdPD6hdYabTFW3KZ1u3QP7Y5oD4Fb4HWD9YykB
+	cChAFPX+mQfGxzOx3ldLiLk4E=
 Received: from chaosheng-ASUS-TUF-Gaming-F16-FX607JV-FX607JV.lan (unknown [])
-	by gzsmtp5 (Coremail) with SMTP id QCgvCgB3eHMzg7NqoFfKAw--.49100S2;
-	Wed, 23 Sep 2026 15:43:49 +0800 (CST)
+	by gzga-smtp-mtada-g0-4 (Coremail) with SMTP id _____wCnX76Jg7NqtZwiAQ--.40954S2;
+	Wed, 23 Sep 2026 15:45:14 +0800 (CST)
 From: Quchaosheng <quchaosheng000406@163.com>
 To: Lee Jones <lee@kernel.org>,
 	Rob Herring <robh@kernel.org>,
@@ -38,9 +38,9 @@ Cc: Chris Zhong <zyw@rock-chips.com>,
 	linux-rockchip@lists.infradead.org,
 	linux-kernel@vger.kernel.org,
 	quchaosheng000406@163.com
-Subject: [PATCH] dt-bindings: mfd: rockchip,rk805: Convert pinctrl to DT schema
-Date: Wed, 23 Sep 2026 15:43:37 +0800
-Message-ID: <20260923074337.575122-1-quchaosheng000406@163.com>
+Subject: [PATCH v4] dt-bindings: mfd: rockchip,rk805: Convert pinctrl to DT schema
+Date: Wed, 23 Sep 2026 15:45:03 +0800
+Message-ID: <20260923074503.575956-1-quchaosheng000406@163.com>
 X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
@@ -49,12 +49,12 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:QCgvCgB3eHMzg7NqoFfKAw--.49100S2
+X-CM-TRANSID:_____wCnX76Jg7NqtZwiAQ--.40954S2
 X-Coremail-Antispam: 1Uf129KBjvJXoWxuw47tr47AF45GF47CF4fAFb_yoWfGr47pF
 	ZxAF4fJrn2gF43uw48tw18Cw1fuan7Ar4UC3WUKryIqan8uryjyr13Kw1rZFyDGFW0va4a
 	vr15Wr98XwnrC3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0JUj2NZUUUUU=
-X-CM-SenderInfo: xtxfxtprvkv0bjqqikiqw6il2tof0z/xtbC5BZ16mqzgzZcmwAA3G
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0JUbTmhUUUUU=
+X-CM-SenderInfo: xtxfxtprvkv0bjqqikiqw6il2tof0z/xtbDAAqKAGqzg4rJEwAA3K
 
 pinctrl-rk805.txt describes the pinmux controller that is part of the
 Rockchip RK805 PMIC. The PMIC itself is already described by
