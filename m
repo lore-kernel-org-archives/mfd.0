@@ -1,109 +1,123 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from 0001.3ffe.de (0001.3ffe.de [159.69.201.130])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B894E23392B;
-	Wed, 23 Sep 2026 06:39:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C90D344471C;
+	Wed, 23 Sep 2026 06:57:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.69.201.130
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790145574; cv=none; b=W3KyeHr2AEBZgz+/M0M+jVKl1XfKWF2QR4hp1sFCV+CXx+VPc+9T1zFG+nMJpM1aQpo1oIspAwyROi2VhTYuQ/Q1QMVhyoDKjSeuq59kqSACtWGdkcg9V82mw4RTYnacuui3209nnJ7pDT4CdHe502PlT6R+o7BU0Vb6/YxB+C0=
+	t=1790146636; cv=none; b=etsuM0vxZrPBt4rot3QEoxYlo+yJ7Om8b7AI0SmkB3r4WxiVnD5vW3jJIZWljk//n0XIbg9eVFCtslHOnWJzGsEA+IePElnxsWxACs4Xwne4tCshpwYo0xVZby97ozCCLFlVmRGZzW2kL2XYkL27WSnnllqtz02q/V1nL1CfBW8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790145574; c=relaxed/simple;
-	bh=+I0vc7x0ElKdYA7CgOJ6FVU1d7HtcCRO8oddZDbuQ+4=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=rTo0Sd6T95l/MPFeqaLB8JTSV/WHg6anIhG0VgnwRNDHF/HjyLVlxkfV5jZKzV/YhvYu4OpRco9Xnx/TwgfGHKKy0Cs6fYu4bz1umOiedbMqaF5/5NjCb2fvi7uNBInR39g94bypAzrWjMuzV0oIHq7iqsqg8QfmDHTRglacuCM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IXGVy0uB; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790146636; c=relaxed/simple;
+	bh=Aplh7dJTViOVzCjHVkbCEOKv4UcGtIR4VW/U3iKThjc=;
+	h=Mime-Version:Content-Type:Date:Message-Id:From:To:Subject:Cc:
+	 References:In-Reply-To; b=eaG+8aIRRh23YnAg9FKiCIlgvLoHZ/orKZBCRfVkHWtYx6ZeYoiaNTdHHV92SorEJFb66fA9naBjFyMM/d4dnjcGy+el78SeIuBfdO9s40l8TLcD1RUKD850JDToFJEg66xIj5ckbG24y/qDVkNl9nZp+qaCV6NutyeH9uIHobI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=walle.cc; spf=pass smtp.mailfrom=walle.cc; dkim=pass (2048-bit key) header.d=walle.cc header.i=@walle.cc header.b=a6C66Cms; arc=none smtp.client-ip=159.69.201.130
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=walle.cc
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=walle.cc
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IXGVy0uB"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2142E1F000FF;
-	Wed, 23 Sep 2026 06:39:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790145568;
-	bh=ZImzNM5xnnr2nQFqCUc4w7ithMom07a0Av/7PMBmLVg=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=IXGVy0uBIRVJ6kUYUMh7dd3a4+SMnu/tE2Pw6eva2mTFQuEmc+RBE5/WaQtEUIMC9
-	 4ngIn0DbOpyRp0YHoGWo6G+hLcpLc+yZxLGHvWJ3p6Y3feujIVlhFqr+qewhjaAYt6
-	 o1ak18IK/tGqFw8sGSfslQsBeNXWERdoGMpwRnn9UzeuAcCgbN+RxCGsCPt/my5z6y
-	 UGA8EYyq13dyDbESdx5yqJ67gPkiDIBxnHX6UP7yay7XNaYjKxMmLtGpE+4NLxeIml
-	 quxiulBX+tWwng91KGKmEqil0rWVBpsFZKEl48OhhAoiFVCz6lyKRSTo3+m1T54Hfh
-	 ndQLmAA2okkBg==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3] dt-bindings: mfd: Convert rk805 pinctrl to DT schema
-Reply-To: sashiko-reviews@lists.linux.dev
-To: Quchaosheng <quchaosheng000406@163.com>
-Cc: robh@kernel.org, mfd@lists.linux.dev, conor+dt@kernel.org, lee@kernel.org, devicetree@vger.kernel.org
-In-Reply-To: <20260923062746.516666-1-quchaosheng000406@163.com>
-References: <20260923062746.516666-1-quchaosheng000406@163.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 23 Sep 2026 06:39:27 +0000
-Message-Id: <20260923063928.2142E1F000FF@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=walle.cc header.i=@walle.cc header.b="a6C66Cms"
+Received: from localhost (unknown [213.135.10.150])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mail.3ffe.de (Postfix) with ESMTPSA id DEC2A5D;
+	Wed, 23 Sep 2026 08:57:02 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=walle.cc; s=mail2022082101;
+	t=1790146623;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Aplh7dJTViOVzCjHVkbCEOKv4UcGtIR4VW/U3iKThjc=;
+	b=a6C66CmseqidgmeBJlOBRw5wwOqfckQBCRM2EHmuSQ/tjDoUJVjdWa2uhEz2Q4mmrOA7RK
+	BW6A+P9gGreJnsPw8EJSE+Bqvzjxyapc7ICNjHyyCA535LH730HY9e4T1hykVEOAnUDvHi
+	i4VLXnxOHEFFImpmkRqu7Jkw5ng5DJuhnexpycD1ULRnQBacxQqEynR+TLkDGa6vHFGwmU
+	36QfKryCCcIFwMv0FEcfsONjPbdAJ/nsz0Qsa3cTN5p79f7hbbHPOwWdeQey9efHdNRoeu
+	hVrtQ/uGMgF7JMEFmmVoXg2Xl5QJ2K8bOjKFcmsFX28SrKZS27zNsozce6Kigg==
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=66e4aab55ce6c10e65aac407de2f18ed76c4de06773e522fce8193b51364;
+ micalg=pgp-sha384; protocol="application/pgp-signature"
+Date: Wed, 23 Sep 2026 08:57:00 +0200
+Message-Id: <DLMI0KJW4743.2J11ZTFS2FUH0@walle.cc>
+From: "Michael Walle" <michael@walle.cc>
+To: "zl020895" <zl020895@163.com>
+Subject: Re: [PATCH v7 09/15] gpiolib: regmap: add gpio_regmap_get_chip()
+Cc: <longzhao@ambarella.com>, "Arnd Bergmann" <arnd@arndb.de>, "Krzysztof
+ Kozlowski" <krzk@kernel.org>, "Alexandre Belloni"
+ <alexandre.belloni@bootlin.com>, <soc@lists.linux.dev>,
+ <linux-arm-kernel@lists.infradead.org>, "Rob Herring" <robh@kernel.org>,
+ "Krzysztof Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley"
+ <conor+dt@kernel.org>, "Michael Turquette" <mturquette@baylibre.com>,
+ "Stephen Boyd" <sboyd@kernel.org>, "Jerome Brunet" <jbrunet@baylibre.com>,
+ "Linus Walleij" <linusw@kernel.org>, "Bartosz Golaszewski"
+ <brgl@kernel.org>, "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>, "Jiri
+ Slaby" <jirislaby@kernel.org>, "Andy Shevchenko"
+ <andriy.shevchenko@linux.intel.com>, =?utf-8?q?Ilpo_J=C3=A4rvinen?=
+ <ilpo.jarvinen@linux.intel.com>, "Catalin Marinas"
+ <catalin.marinas@arm.com>, "Will Deacon" <will@kernel.org>, "Lee Jones"
+ <lee@kernel.org>, <mfd@lists.linux.dev>, <devicetree@vger.kernel.org>,
+ <linux-clk@vger.kernel.org>, <linux-gpio@vger.kernel.org>,
+ <linux-serial@vger.kernel.org>, <linux-kernel@vger.kernel.org>
+X-Mailer: aerc 0.20.0
+References: <20260915-cv75-v5-v7-0-3297d3fbc9c0@ambarella.com>
+ <20260915-cv75-v5-v7-9-3297d3fbc9c0@ambarella.com>
+ <DLL08SC6PWNS.2BUBIQYMBWIKQ@walle.cc>
+ <650e4694.3f81.1a0c7598840.Coremail.zl020895@163.com>
+In-Reply-To: <650e4694.3f81.1a0c7598840.Coremail.zl020895@163.com>
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
-s) to consider:
-- [High] dt-bindings: mfd: DT ABI breakage for rk805 pinctrl container node
-- [Low] dt-bindings: mfd: missing driver prefix in commit message
---
+--66e4aab55ce6c10e65aac407de2f18ed76c4de06773e522fce8193b51364
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-commit fb35b4123e96d1c068df56e50d1eaaf6204d1a23
-Author: Quchaosheng <quchaosheng000406@163.com>
+Hi,
 
-dt-bindings: mfd: Convert rk805 pinctrl to DT schema
+On Tue Sep 22, 2026 at 6:22 AM CEST, zl020895 wrote:
+> gpio-regmap can already attach a domain via config.irq_domain or
+> regmap_irq_chip. PL061 cannot use regmap-irq: type is programmed in
+> IS/IBE/IEV (including both-edge) and the parent IRQ is an AMBA chained
+> demux.
+>
+> In v8 the custom linear domain used the gpio_chip as host_data, and
+> that chip only exists after gpio_regmap_register(), so I added
+> gpio_regmap_get_chip().
+>
+> I can drop the helper: create the domain with the PL061 private data as
+> host_data, pass it in config.irq_domain, and let gpio-regmap register
+> it. I will do that in the next revision if you agree.
 
-This commit converts the pinctrl binding for the Rockchip RK805 PMIC from a
-standalone text file to a YAML schema integrated into rockchip,rk805.yaml. =
-It
-drops the standalone text binding and adds a child node schema for pin
-configuration nodes.
+Yes please. You shouldn't need any of gpio_chip members.
 
-Link: https://sashiko.dev/#/patchset/20260923034245.396417-1-quchaosheng000=
-406@163.com?part=3D1
+-michael
 
-> dt-bindings: mfd: Convert rk805 pinctrl to DT schema
+> At 2026-09-21 20:48:44, "Michael Walle" <michael@walle.cc> wrote:
+>>On Tue Sep 15, 2026 at 1:15 PM CEST, Long Zhao via B4 Relay wrote:
+>>> From: Long Zhao <longzhao@ambarella.com>
+>>>
+>>> Let drivers that implement a custom irqchip retrieve the gpio_chip
+>>> after registration. Attach a caller-provided irq_domain only when it
+>>> is present.
+>>
+>>So why do we need this? Why can't gpio-regmap register the
+>>irq_domain?
+>>
+>>-michael
 
-[Severity: Low]
-Does this commit message subject violate the MFD subsystem naming conventio=
-ns?
 
-The guidelines strictly require the prefix format:
-mfd: <Driver>: <Capitalized description>
+--66e4aab55ce6c10e65aac407de2f18ed76c4de06773e522fce8193b51364
+Content-Type: application/pgp-signature; name="signature.asc"
 
-The driver or binding name component (e.g., rk805: or rockchip,rk805:)
-appears to be completely missing before the capitalized description.
+-----BEGIN PGP SIGNATURE-----
 
-> diff --git a/Documentation/devicetree/bindings/mfd/rockchip,rk805.yaml b/=
-Documentation/devicetree/bindings/mfd/rockchip,rk805.yaml
-> index da2391530c16c..681a90a265c06 100644
-> --- a/Documentation/devicetree/bindings/mfd/rockchip,rk805.yaml
-> +++ b/Documentation/devicetree/bindings/mfd/rockchip,rk805.yaml
-> @@ -86,6 +86,34 @@ properties:
->          unevaluatedProperties: false
->      unevaluatedProperties: false
-> =20
-> +patternProperties:
-> +  '-pins$':
-> +    type: object
+iKcEABMJAC8WIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCarN4PREcbWljaGFlbEB3
+YWxsZS5jYwAKCRASJzzuPgIf+EqJAYCURfSHF28/wy7zcS9T5rqwQKdtr6Vi+fm6
+FKEPiUj0ESQUaJWITdtLmMhXUYTwU4sBgKrlZbW1f9Nl/NmxVqpSp5Yv9aq5pAEe
+oRACiSMyH2ZwhTvQKxQkjpEcDZZyx4q0Fw==
+=oMt8
+-----END PGP SIGNATURE-----
 
-[Severity: High]
-Does this pattern restrict child nodes to only those ending in -pins,
-incorrectly rejecting the legacy pinmux container node?
-
-Device tree bindings are considered kernel ABI, and schemas must validate
-existing correct device trees. The original pinctrl-rk805.txt explicitly
-documented a nested structure where a container node (named pinmux) held
-sub-nodes (e.g., gpio01) containing the actual pin configuration.
-
-With the new YAML schema setting additionalProperties: false at the top lev=
-el
-and restricting child nodes via patternProperties to only match the -pins$
-regex, existing device trees using the valid legacy pinmux container node
-will be actively rejected by dtbs_check because pinmux does not match
--pins$ and is not explicitly defined in the schema.
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260923062746.5166=
-66-1-quchaosheng000406@163.com?part=3D1
+--66e4aab55ce6c10e65aac407de2f18ed76c4de06773e522fce8193b51364--
