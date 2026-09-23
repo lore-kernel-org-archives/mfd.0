@@ -1,181 +1,122 @@
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E04695335AA
-	for <mfd@lists.linux.dev>; Wed, 23 Sep 2026 15:42:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A836045C6E0;
+	Wed, 23 Sep 2026 15:56:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790178127; cv=none; b=qJwgxrmJ8PYYdjMZPZHwl8Wwh/JmutK+Gg8WdBtziultJx6jZ7yZlyYjySsVD28nT3xzYcAml35mPY9YPFaHlbgrhbdR5HalVTge0ENLPH1VFuOTtTFSa0FlV9k3t8dY8DVzQZnLNhfSMDHqwXpGyzmW8SDUrR0NPd9OB/OVRfs=
+	t=1790179016; cv=none; b=cARqz9YeSkEQjjbdcirhqeuWg/ZCIfi3sjmn73b4b7HQ2suHWAcM++YGc0NiIiZVF5oMs1iOVkXJHuVcqiyOfDAjNOUUmbwyQSQ1FRxFNdE9R758/NHb9vntUJ2uMnxl6dyALLQHpvR0kwWrFgPjwOFFsoocDixwnhfJSqBL0e8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790178127; c=relaxed/simple;
-	bh=Bf2WDs6ju2xnoaqyYTaniTAmubFZHV7uVUwkSsLckOU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=eI7Hiy7EBcsTRzVc5dPFkOQUCKM9qA/STPepnsuPlu4zShPVfSyQABCeyDBqNt/mfjI2Lq/WM2JUqqgYR9fliwgwqaYeVK7DFjwKQ1f0V+SCX7Zv2QKVLTLmdN2g5J5VQ0z81ST4cDq+YRPdW/taijUh9ZmJYhEKvQFqhQTqHt0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=hM1TSjdn; arc=none smtp.client-ip=185.246.85.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	s=arc-20240116; t=1790179016; c=relaxed/simple;
+	bh=/FpLeywFakr66tyZtygmudWEDeCblAzYOgiRGXwjdU4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=iaorwsvwcoz+rhVSAqNoYObHiZsL4LC6NpiWA3XprmdELmYDOf6b0LOzmIbysFKOE70ASnRGkrAtXfkAJbtnkfMjZM0MDTu81yKYQFHv+Sg0geHyedOk6/cxtbTkDKUF6O9WuEhfTYKl6uFaEECthURogUOEk2v4BrAuEK4hMYI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ojSxbjbO; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="hM1TSjdn"
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 2C0374E41045;
-	Wed, 23 Sep 2026 15:42:03 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id E19A260580;
-	Wed, 23 Sep 2026 15:42:02 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id ED708103290E1;
-	Wed, 23 Sep 2026 17:42:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1790178122; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:content-language:in-reply-to:references;
-	bh=THlp2NCefvx0BAiojze+1baYVFoUxGf/jKi6XVt79f8=;
-	b=hM1TSjdnDiakjzd2nHhWm+SlveuzgCxbXN8CPuSxoGc4ZE8yZEh4Lq5rEgc/OYpBXwLsXY
-	HMKomkFKIFTHEfWZlr8cCfGu8iTyZzaRdYUs1qldghEE0TeK7tyKuWsV3rpKdA2hQTKF28
-	2qE+3tM9Fu/CuN1pAbAHJm7uItXrb/OJwDnu1PEhZdSdU4qIKu+qb0eb/kCtLXMBTH+uyU
-	3vrYFkK4cqIstxrDPhbQPumVtxVNACpq4lco9UNGZZ4laFdOIAmzv4iv5mUe60H1eYlzrx
-	ONXe2PZidkCo4A/l7BfbqwmMFQMRubOJOI+bu9YFBcMLBQHBqYEvMLbOE+o/FQ==
-Message-ID: <6f8bdbc3-6184-4165-8e5b-83e98e67e70c@bootlin.com>
-Date: Wed, 23 Sep 2026 17:42:00 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ojSxbjbO"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66B541F000FF;
+	Wed, 23 Sep 2026 15:56:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790179013;
+	bh=xMJCztkb++DIu4FkVGc3EOyCHobio6pWpbZKkC50C1g=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=ojSxbjbO2xBhK41KhWk7HAu6SgNQ/YUdnYIh6T1/jcZBB82dhr1G2iANV2rYHKB41
+	 cZyEtyQs/0s1o2q8liazCWJcjTYWBzkKBvE+pSAfGb8chJTRGc0D8aV5DZXgdYhktd
+	 poj/gCnIMCqd6dTVW4mZO6rD3z4iLJO+SCGM2vC3N5TKciMDJPeV/YWgbSVIr5VcYl
+	 tPkhEiM0GLbJPybQWIG6NqZkaymHpWJmmtW7DkjK8J9wb5Cb+mSGe5h5IFPZ1NC7Fo
+	 oEIT5Ska6RadE4AY04XWDt78E+42Nla0citF9/eyvLOuehAryvQQFCn5qOde5WHjxP
+	 cGVV635fDN6Ig==
+Date: Wed, 23 Sep 2026 16:56:49 +0100
+From: Lee Jones <lee@kernel.org>
+To: Qunqin Zhao <zhaoqunqin@163.com>
+Cc: zhaoqunqin@loongson.cn, chenhuacai@kernel.org,
+	linux-kernel@vger.kernel.org, loongarch@lists.linux.dev,
+	linux-crypto@vger.kernel.org, mfd@lists.linux.dev
+Subject: Re: [PATCH v7 1/2] mfd: loongson-se: Add multi-node support
+Message-ID: <20260923155649.GK3864833@google.com>
+References: <20260911090256.7834-1-zhaoqunqin@163.com>
+ <20260911090256.7834-2-zhaoqunqin@163.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/9] mfd: cgbc: Add I2C platform data
-To: Lee Jones <lee@kernel.org>
-Cc: Andi Shyti <andi.shyti@kernel.org>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Werner Gartner <Werner.Gartner@congatec.com>, mfd@lists.linux.dev,
- linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org
-References: <20260911-cgbc-i2c-storage-devices-support-v3-0-594b53fbc5ea@bootlin.com>
- <20260911-cgbc-i2c-storage-devices-support-v3-2-594b53fbc5ea@bootlin.com>
- <20260923150254.GH3864833@google.com>
-Content-Language: en-US
-From: Thomas Richard <thomas.richard@bootlin.com>
-In-Reply-To: <20260923150254.GH3864833@google.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260911090256.7834-2-zhaoqunqin@163.com>
 
-On 9/23/26 5:02 PM, Lee Jones wrote:
-> On Fri, 11 Sep 2026, Thomas Richard (congatec GmbH) wrote:
-> 
->> Define I2C platform data for each I2C bus in the cgbc MFD driver. Platform
->> data passes per-bus parameters to the I2C driver, rather than being defined
->> inside the i2c-cgbc driver itself. This makes the i2c-cgbc driver more
->> generic.
->>
->> Signed-off-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
->> ---
->>  MAINTAINERS                            |  1 +
->>  drivers/mfd/cgbc-core.c                | 39 ++++++++++++++++++++++++++--------
->>  include/linux/platform_data/i2c-cgbc.h | 22 +++++++++++++++++++
->>  3 files changed, 53 insertions(+), 9 deletions(-)
->>
->> diff --git a/MAINTAINERS b/MAINTAINERS
->> index 6215fcb07770..561f102c2541 100644
->> --- a/MAINTAINERS
->> +++ b/MAINTAINERS
->> @@ -6621,6 +6621,7 @@ F:	drivers/mfd/cgbc-core.c
->>  F:	drivers/video/backlight/cgbc_bl.c
->>  F:	drivers/watchdog/cgbc_wdt.c
->>  F:	include/linux/mfd/cgbc.h
->> +F:	include/linux/platform_data/i2c-cgbc.h
->>  
->>  CONSOLE SUBSYSTEM
->>  M:	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
->> diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
->> index 4a409234e66c..321fa3fff2ac 100644
->> --- a/drivers/mfd/cgbc-core.c
->> +++ b/drivers/mfd/cgbc-core.c
->> @@ -16,6 +16,7 @@
->>  #include <linux/mfd/cgbc.h>
->>  #include <linux/mfd/core.h>
->>  #include <linux/module.h>
->> +#include <linux/platform_data/i2c-cgbc.h>
->>  #include <linux/platform_device.h>
->>  #include <linux/sysfs.h>
->>  
->> @@ -55,6 +56,35 @@
->>  
->>  static struct platform_device *cgbc_pdev;
->>  
->> +static const struct cgbc_i2c_platform_data cgbc_i2c_gp_pdata = {
->> +	.name = "Congatec General Purpose I2C adapter",
->> +	.cgbc_bus_id = 0,
->> +};
->> +
->> +static const struct cgbc_i2c_platform_data cgbc_i2c_pm_pdata = {
->> +	.name  = "Congatec Power Management I2C adapter",
->> +	.cgbc_bus_id = 4,
->> +};
->> +
->> +static const struct mfd_cell cgbc_devs[] = {
->> +	{ .name = "cgbc-backlight" },
-> 
-> MFD_CELL_*
-> 
->> +	{ .name = "cgbc-gpio" },
->> +	{ .name = "cgbc-hwmon" },
->> +	{
->> +		.name = "cgbc-i2c",
->> +		.id = 1,
-> 
-> Why does PLATFORM_DEVID_AUTO not work for you?
+On Fri, 11 Sep 2026, Qunqin Zhao wrote:
 
-Path 2, 3 and 4 do the transition to PLATFORM_DEVID_AUTO.
-But at this point I2C driver uses cell id to identify the bus.
-
-Patch 2: adds cgbc_bus_id (in cgbc_i2c_platform_data) to identify the bus.
-Patch 3: modifies I2C driver to use cgbc_i2c_platform_data.
-Patch 4: now I2C driver doesn't rely on cell id, so switch to
-PLATFORM_DEVID_AUTO
-
+> From: Qunqin Zhao <zhaoqunqin@loongson.cn>
 > 
->> +		.platform_data = &cgbc_i2c_gp_pdata,
->> +		.pdata_size = sizeof(cgbc_i2c_gp_pdata),
->> +	},
->> +	{
->> +		.name = "cgbc-i2c",
->> +		.id = 2,
->> +		.platform_data = &cgbc_i2c_pm_pdata,
->> +		.pdata_size = sizeof(cgbc_i2c_pm_pdata),
->> +	},
->> +	{ .name = "cgbc-wdt" },
->> +};
->> +
->>  /* Wait the Board Controller is ready to receive some session commands */
->>  static int cgbc_wait_device(struct cgbc_device_data *cgbc)
->>  {
->> @@ -235,15 +265,6 @@ int cgbc_command(struct cgbc_device_data *cgbc, void *cmd, unsigned int cmd_size
->>  }
->>  EXPORT_SYMBOL_GPL(cgbc_command);
->>  
->> -static struct mfd_cell cgbc_devs[] = {
->> -	{ .name = "cgbc-wdt"	},
->> -	{ .name = "cgbc-gpio"	},
->> -	{ .name = "cgbc-i2c", .id = 1 },
->> -	{ .name = "cgbc-i2c", .id = 2 },
->> -	{ .name = "cgbc-hwmon"	},
->> -	{ .name = "cgbc-backlight" },
->> -};
->> -
->>  static int cgbc_map(struct cgbc_device_data *cgbc)
->>  {
->>  	struct device *dev = cgbc->dev;
->> diff --git a/include/linux/platform_data/i2c-cgbc.h b/include/linux/platform_data/i2c-cgbc.h
->> new file mode 100644
->> index 000000000000..4465e8a7b40e
->> --- /dev/null
->> +++ b/include/linux/platform_data/i2c-cgbc.h
+> On the Loongson platform, each node is equipped with a security engine
+> device. However, due to a hardware flaw, only the device on node 0 can
+> trigger interrupts. Therefore, interrupts from other nodes are forwarded
+> by node 0. We need to check in the interrupt handler of node 0 whether
+> this interrupt is intended for other nodes, this can be accomplished via
+> shared interrupt handling.
 > 
-> I think this area is mainly used to share data with OF.
+> Signed-off-by: Qunqin Zhao <zhaoqunqin@loongson.cn>
+> ---
+>  drivers/mfd/loongson-se.c | 15 +++++++++++----
+>  1 file changed, 11 insertions(+), 4 deletions(-)
 > 
-> Did you consider include/linux/mfd?
-I thought it was the right place. But I can move the struct to
-include/linux/mfd/cgbc.h if you prefer.
+> diff --git a/drivers/mfd/loongson-se.c b/drivers/mfd/loongson-se.c
+> index 3902ba377..7f552a8ee 100644
+> --- a/drivers/mfd/loongson-se.c
+> +++ b/drivers/mfd/loongson-se.c
+> @@ -140,6 +140,11 @@ static irqreturn_t se_irq_handler(int irq, void *dev_id)
+>  
+>  	int_status = readl(se->base + SE_S2LINT_STAT);
+>  
 
-Best Regards,
-Thomas
+Nit: Checks should follow immediately from the call that allocated them.
 
+Thus, remove this empty line please.
+
+> +	if (int_status == 0) {
+> +		spin_unlock(&se->dev_lock);
+> +		return IRQ_NONE;
+> +	}
+> +
+>  	/* For controller */
+>  	if (int_status & SE_INT_CONTROLLER) {
+>  		complete(&se->cmd_completion);
+> @@ -211,24 +216,26 @@ static int loongson_se_probe(struct platform_device *pdev)
+>  	if (IS_ERR(se->base))
+>  		return PTR_ERR(se->base);
+>  
+> -	writel(SE_INT_ALL, se->base + SE_S2LINT_EN);
+> -
+>  	nr_irq = platform_irq_count(pdev);
+>  	if (nr_irq <= 0)
+>  		return -ENODEV;
+>  
+> +	writel(SE_INT_ALL, se->base + SE_S2LINT_CL);
+> +
+>  	for (i = 0; i < nr_irq; i++) {
+>  		irq = platform_get_irq(pdev, i);
+> -		err = devm_request_irq(dev, irq, se_irq_handler, 0, "loongson-se", se);
+> +		err = devm_request_irq(dev, irq, se_irq_handler, IRQF_SHARED, "loongson-se", se);
+>  		if (err)
+>  			dev_err(dev, "failed to request IRQ: %d\n", irq);
+>  	}
+>  
+> +	writel(SE_INT_ALL, se->base + SE_S2LINT_EN);
+> +
+>  	err = loongson_se_init(se, paddr, se->dmam_size);
+>  	if (err)
+>  		return err;
+>  
+> -	return devm_mfd_add_devices(dev, PLATFORM_DEVID_NONE, engines,
+> +	return devm_mfd_add_devices(dev, PLATFORM_DEVID_AUTO, engines,
+>  				    ARRAY_SIZE(engines), NULL, 0, NULL);
+>  }
+>  
+> -- 
+> 2.47.2
+> 
+
+-- 
+Lee Jones
