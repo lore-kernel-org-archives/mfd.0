@@ -1,430 +1,197 @@
-Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+Received: from mail-pj2-f13.google.com (mail-pj2-f13.google.com [74.125.227.141])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E101D57982B
-	for <mfd@lists.linux.dev>; Wed, 23 Sep 2026 20:58:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 643A03AFCE2
+	for <mfd@lists.linux.dev>; Wed, 23 Sep 2026 21:01:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790197109; cv=none; b=lZufVEhwjxu+rL+GKS1aH9Pn96ZRJZAZnOPoFcK4rcgzfU4zpdwojg820YaPNliFbOkqwsFhFvf6w3dlhCu0KO7YR7cTvNdOD8fH6z2Q3PVN7aZS2ktn6TV7/PqppmqIYLamGMmKJexmxL0XVH0kN5Bv8Rc4xPXsOREp/009JQg=
+	t=1790197267; cv=none; b=Afbp1INxbw2lB8Z8n1H+ebjC0NGPjnjHMC0z15OlGfgswUDfviYf3hkzhPMptfmz36SYsxAXdj25Nj2YDJ086EW7oKYSRBAuq60iwpsc5H86Khca8jEcMZfslU1eSPYmvPz4gv2pCLx4eiLOhcsWhCg2nFzzfaV7Rsdpswvrhck=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790197109; c=relaxed/simple;
-	bh=CnMF7v4cVD2NWW476ulng2IfM18YIgH5scwjktb+jms=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=QwWufBsl5nLW13AQapWvPFGgZyM9VeNiuCNiUDL9/Mo9CtOO/mvYbkQ+TZ6l1CDMQmaR381N/0WH2eVeFhcS/gniOvjvwKbp/fNBODiSwBX4S2b4+1WaNoLfyCUwLNgH04OB6B3BsjNYXq03zgaPw9IW2ihUVxna42sGNQHPVrA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=eSHb9Un+; arc=none smtp.client-ip=74.125.225.141
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	s=arc-20240116; t=1790197267; c=relaxed/simple;
+	bh=XqpqZlTInduldJGK/k9p45wY9O0vx4/ZLKo6TIPnC6A=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ov8OYpFfWB8updfiHgerl+QmfOoLHdAs0+tpx6a6HQulwXGAdjC4DrjI798CD8aqe9J0LpdCe8sm4sdOqoNQ3bCH+xEt84QzrrYITMrfU0GdaOcR6miBeB3PjFwuClem1gihdZ3QG6zOA5unHnOPqN8iFXv4p6uRvS9FlV37Bzw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=f/YepFpg; arc=none smtp.client-ip=74.125.227.141
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="eSHb9Un+"
-Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49e7bcb94d3so9569425e9.2
-        for <mfd@lists.linux.dev>; Wed, 23 Sep 2026 13:58:24 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="f/YepFpg"
+Received: by mail-pj2-f13.google.com with SMTP id 98e67ed59e1d1-396ccda24a3so843330a91.0
+        for <mfd@lists.linux.dev>; Wed, 23 Sep 2026 14:01:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1790197103; x=1790801903; darn=lists.linux.dev;
-        h=content-type:mime-version:message-id:date:references:in-reply-to
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Z4Mxoo0BjytpbcPdlZ9wg50FxPDTNNYaSFfcT2mT85c=;
-        b=eSHb9Un+Gqawwou3+V6ZfhObUcj3Xtusv5Rr3aCbLMKLnrRpm7jVStrnzENArZQRNL
-         1T/N9o+dpke3sKmWLXu/gqB2rDks7zAt0GZdN9NtlK1dMbYnBo9jon1+A4iHOiGP6QYN
-         tpBh5n3aH/tMEQ97RLnu4rp9ef7TYC7xSvd2nINzyiqGccIoHt1sR9G2dQ7JTQpYDPY6
-         MBhrmz6TEnrZz+Gev+FQg0a1dQblOiHxsIOS1YFLDMb905gwGhqO8GYsXj9WdfovBYUq
-         zqdugEmszRUA38a2iGpqPdxZqAESwSX1jIjOCBeN2oUCfVCoW/bVII/9ibQDkUkd7brz
-         NzpQ==
+        d=gmail.com; s=20251104; t=1790197263; x=1790802063; darn=lists.linux.dev;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:sender:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=8Bd6czkO45GCnh+x0rZQde+5ow2qqkq1hEyPhw5kvHI=;
+        b=f/YepFpgG6PW24ExNw4Im42WdTwya53CYt2ZqcZC7hHYpxjgB4NYrqnRDlllo7E//5
+         EB1zYnIja3d0UQhxj5A2ThIkAsUvNuziYPJXvSkGvb6387hnQZQZ7t1RIPvwMoKXptIs
+         XrtCKnoGQKbFao5uS7g2QfeoiFvuFFci7+ZqWE+JFwMYW2VbjBa92TCvGYMmj8bV1G+a
+         EoZR5oAs8nJqJWuLz24BPDX6d/zWvymt+3LRk1xAfzpPafdDNWkD2a9wfJ4nMZVYc5In
+         B0w6lKmGFdtY1OFpfei2lCb8UWhr6lezcRkjXUPsiniv06/LUHk8aTyNPHRHachqjVJJ
+         vTJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790197103; x=1790801903;
-        h=content-type:mime-version:message-id:date:references:in-reply-to
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=Z4Mxoo0BjytpbcPdlZ9wg50FxPDTNNYaSFfcT2mT85c=;
-        b=2LsIqAg82BqSExvhtHx7nLS3Avg3pf20m66WP0sCoKzDvzrhEFhY+4xbTJhKm75/x/
-         tITjwUHq4fXliMlXMdqz3dKK8MVTZiJAJXcfuqWsYCxSLWJAHi7UBGtLLjcdWFd+ZYYL
-         /ZWlKyAE3wlMj+lMYqnr82E+gt+ZB8E3muQDVjPsBWA/0keQsg200Sq+BvkCHmIyYJS0
-         9baQLt7DgeaNHpFDfjImwVOfOHZsjoRl9UKeHR7d2gJpCiNWU5EDfISOtqcdC/LDV5sz
-         JTBBM2w8SGOlN7Kva6SGkBmcUmdLtjfhuXfb2i5chpNDUCnCCXIBLbGrDJnLXNQpuPgn
-         nLbg==
-X-Forwarded-Encrypted: i=1; AKwUvBxbpclF+7x0f6ZXVd9cX8WAF88UdG6WSG3ZacfkCpbFFU/vhIsWGZf8/XgkC8v8ycfZjXY=@lists.linux.dev
-X-Gm-Message-State: AFuF++mS/XYy2p3AnEJbiTwesubmSpsbxM5ANtFpO1D+sQzMPJnamaWH
-	yjYPSdI3C3lvXAE2q1jToH0CZiz9Wyn0Br2JJYRpEXdyWdCNnhBURgXjkqhnFH0/rYY=
-X-Gm-Gg: AYBFou3XyXnT0v4XL6c5ufWRMD9NTlcTWDsh5nU6mOWsL0WWNO0Qn7JJpvBFRg+m0Oz
-	QzVMjQ3QaFuDdk8AqwexksrHhzfae6BaAlajlE8jJvP+7CJ2hc1bGazec0H3fti6TUEmfWaLl7T
-	XSjaZAwde4NQZpt7BRl2Bljytve6dCpHlKk1oQNaXfQsP+C1qb7kzrolhVrlqi+H702JKupWQCK
-	NBBaZ0CCQ9+xj7h7qdhv9O+y7GGq0ORllqA6tQW607X9iRx84v1YKpu4RDEv2K0lAwfsXqOuC36
-	jlw0Dlo5R1N4HWXMS8HgKC1N9bZ6KocEE3r4EX8f/BcaVFaVQ1UuykY8a6gScbV8yNsRtyvzj10
-	1jaAqStfJ4LimDnfmV/dTlrm7DD8biN4P3P8nI7SLvb/G/TEKnuthOotiRGKpbjzhjvKwv6Y5GH
-	kWahtBvyhKS6MT1Zw3F+pDlIqQbLBCteSI0a+bjFdhBV+gbd//T9ZCeamFk8qtD6+YoDUE2/60R
-	nVXyXkoCYQvPk3vrgc=
-X-Received: by 2002:a05:600c:4689:b0:499:be2d:c290 with SMTP id 5b1f17b1804b1-49fe66b4001mr7015405e9.9.1790197103011;
-        Wed, 23 Sep 2026 13:58:23 -0700 (PDT)
-Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fe5ded2b7sm12132335e9.10.2026.09.23.13.58.22
+        d=1e100.net; s=20260707; t=1790197263; x=1790802063;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:sender:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=8Bd6czkO45GCnh+x0rZQde+5ow2qqkq1hEyPhw5kvHI=;
+        b=wAzk/gKqWOKNwgKlXwxj/v3VxvApDxGsrp3ef4ED6brElEJ8pW842IQjs9MOV51ZVY
+         Xb2uLb1eY+E+iKSrxADX9f95DfkZsuGFiKg8JziRKFnZAz7rEXJhVo/0ftEya1X5pmpl
+         0di1OzthY48EHcO9n8kRbz/zfEWDkTsvbVz/8N7v8+xyk5sGgRsGgdfjUPwLgX+iEe3g
+         2OsUsm5ocu78exUts5VfY+QRhtf5bvq1RyH4vSeEL0/9eDtoiR69rPdKll3U3HkFNndw
+         WNA88mtTSYRehdxS6zlgl+3L5V6bJ64kW27dENBWFyxqfS1qD0RMpkHM7aMSkGk8vD/r
+         /OLA==
+X-Forwarded-Encrypted: i=1; AKwUvBwGfJR22kUldBqCVL2vKRUr7YoVI8jXH9cgh4PWUDebYbpl1e3cmaLW5j+36EdxGJO8zTw=@lists.linux.dev
+X-Gm-Message-State: AFuF++l6YDUW4Wn1jrRwcnMngFHSqq1er7+S88pv+obWpQIxOIglhe4f
+	GtyxYSskCd3BllYILuhYC08JlsxMXNy9hlycP1uhNd+b0r0sjcNvYoQg
+X-Gm-Gg: AYBFou1MQG+R71bxemiCctHzbdqT2iow5VZGsVdix/SIVFaJ1TTV/bu3FB4m5Okt8pb
+	4/qWAVp+Uze5Ik+m22v2CTLZH/6w4PXL/IJfDJaHB+KD4i+g/9cOwuV/aZjwADwqF9KxOTQbI3S
+	eZoNRelshxWwHk9X3WvFbK2aohX9Wak4VMNwVsxRFpz/IOPs7r+T9Sm0Tg7aE+/+QP6Btpz36DI
+	CLLxYPfus1QBIB/yKZ0iBuUStrlpjPEFoxCGzomU6VDE18ulaI20wd77vMe/pbngvUcxIU3LvHH
+	xaeCxjT/FMHd7sNo58jnI5RRwiExr/Jz7sbbJ7wXylSEKt4v9I3JvMbIFwPb6HRuaSWxevG1taq
+	eH49owklp5QxapT9MhXDkLQsimOYFiQeRUph6yKCv40aqzWzwDelg54/K4Sbh7ovfUAS6Wso8Mj
+	wa2ugcNrqp3S6PZNpB4MEIo9h7M1EkUozFibfKhoMv429263vqpSp331J9rRIsPsjvQRR+dE13k
+	ZgYQS9UeB+F
+X-Received: by 2002:a17:90a:d406:b0:39e:6a81:c922 with SMTP id 98e67ed59e1d1-3a09872c528mr260420a91.21.1790197263197;
+        Wed, 23 Sep 2026 14:01:03 -0700 (PDT)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a097344841sm850282a91.10.2026.09.23.14.01.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 13:58:22 -0700 (PDT)
-From: Jerome Brunet <jbrunet@baylibre.com>
-To: Alex Elder <elder@riscstar.com>, Brian Masney <bmasney@redhat.com>
-Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
- robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org,
- andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
- kees@kernel.org, gustavoars@kernel.org, p.zabel@pengutronix.de,
- daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
- lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org,
- devicetree@vger.kernel.org, mfd@lists.linux.dev,
- linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 3/4] clk: toshiba: introduce a TC9564 SoC clock and
- reset driver
-In-Reply-To: <0785235b-de06-44d4-9068-ec706eeba848@riscstar.com>
-References: <20260918165234.687224-1-elder@riscstar.com>
- <20260918165234.687224-4-elder@riscstar.com> <arG238GS8bMB6DkW@redhat.com>
- <0785235b-de06-44d4-9068-ec706eeba848@riscstar.com>
-Date: Wed, 23 Sep 2026 22:58:21 +0200
-Message-ID: <1jcxu3adn6.fsf@starbuckisacylon.baylibre.com>
+        Wed, 23 Sep 2026 14:01:02 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Date: Wed, 23 Sep 2026 14:01:00 -0700
+From: Guenter Roeck <linux@roeck-us.net>
+To: Primoz Fiser <primoz.fiser@norik.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Support Opensource <support.opensource@diasemi.com>,
+	Lee Jones <lee@kernel.org>,
+	Wim Van Sebroeck <wim@linux-watchdog.org>,
+	devicetree@vger.kernel.org, imx@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+	mfd@lists.linux.dev, linux-watchdog@vger.kernel.org,
+	upstream@lists.phytec.de, andrej.picej@norik.com
+Subject: Re: [PATCH 3/4] watchdog: da9062: reset board on watchdog timeout
+Message-ID: <146c3502-3205-43ce-9d1c-c58b936d160e@roeck-us.net>
+References: <20260923111719.2032012-1-primoz.fiser@norik.com>
+ <20260923111719.2032012-4-primoz.fiser@norik.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260923111719.2032012-4-primoz.fiser@norik.com>
 
-On mar. 22 sept. 2026 at 08:33, Alex Elder <elder@riscstar.com> wrote:
+On Wed, Sep 23, 2026 at 01:17:18PM +0200, Primoz Fiser wrote:
+> From: Andrej Picej <andrej.picej@norik.com>
+> 
+> Implement a method to change watchdog timeout configuration based on DT
+> binding ("dlg,wdt-sd"). There is a possibility to change the behaviour
+> of watchdog reset. Setting WATCHDOG_SD bit enables SHUTDOWN mode, and
+> clearing it enables POWERDOWN mode on watchdog timeout.
+> 
+> If no DT binding is specified the WATCHDOG_SD bit stays in default
+> configuration, not breaking behaviour of devices which might depend on
+> default fuse configuration.
+> 
+> Note: This patch requires that the config register CONFIG_I is
+> configured as writable in the da9061/2 multi function device.
+> 
 
-> On 9/21/26 5:59 PM, Brian Masney wrote:
->> Hi Alex,
->> 
->> On Fri, Sep 18, 2026 at 11:52:32AM -0500, Alex Elder wrote:
->>> Define a new platform driver that manages clock and reset signals
->>> within the TC9564 SoC.  There are 21 clocks, which can only be
->>> enabled and disabled, as well as 13 reset signals.
->>>
->>> Two registers manage the state of the clocks and two others manage
->>> the state of the resets.  The registers are accessed via a regmap
->>> supplied by a system controller, which coordinates access to a
->>> region of memory that will be shared with another driver.
->>>
->>> Access to the memory region is provided via a BAR on a PCIe endpoint
->>> function embedded in the TC9564 SoC.  For that reason, neither the
->>> PCIe clock nor PCIe reset can be manipulated by this driver (they
->>> are assumed always on and deasserted, respectively).
->>>
->>> Similarly, control is not available for the I2C clock and reset,
->>> because the PCIe subsystem on the TC9564 relies on I2C
->>>
->>> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
->>> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
->>> Signed-off-by: Alex Elder <elder@riscstar.com>
->>> ---
->>>   MAINTAINERS              |   1 +
->>>   drivers/clk/Kconfig      |  11 ++
->>>   drivers/clk/Makefile     |   1 +
->>>   drivers/clk/clk-tc9564.c | 366 +++++++++++++++++++++++++++++++++++++++
->>>   4 files changed, 379 insertions(+)
->>>   create mode 100644 drivers/clk/clk-tc9564.c
->>>
->>> diff --git a/MAINTAINERS b/MAINTAINERS
->>> index 66d0e7e65adcb..39346a5cd9a7f 100644
->>> --- a/MAINTAINERS
->>> +++ b/MAINTAINERS
->>> @@ -27675,6 +27675,7 @@ M:	Alex Elder <elder@kernel.org>
->>>   M:	Daniel Thompson <danielt@kernel.org>
->>>   S:	Maintained
->>>   F:	Documentation/devicetree/bindings/clock/toshiba,tc9564-clock.yaml
->>> +F:	drivers/clk/clk-tc9564.c
->>>   F:	include/dt-bindings/clock/toshiba,tc9564.h
->>>   
->>>   TOSHIBA TC9564 PCI DRIVER
->>> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
->>> index f9592fd9ec2bb..50efa10d48450 100644
->>> --- a/drivers/clk/Kconfig
->>> +++ b/drivers/clk/Kconfig
->>> @@ -292,6 +292,17 @@ config COMMON_CLK_S2MPS11
->>>   	  clock. These multi-function devices have two (S2MPS14) or three
->>>   	  (S2MPS11, S5M8767) fixed-rate oscillators, clocked at 32KHz each.
->>>   
->>> +config COMMON_CLK_TC9564
->>> +	tristate "Toshiba TC9564 clock support"
->>> +	depends on TC9564_PCI
->> 
->> select RESET_CONTROLLER
->
-> Thank you.  The reset and clock drivers were previously separate
-> and the reset only became available if RESET_CONTROLLER was enabled.
-> Combining them means I need this.  I will add it.
+Please reword to something like:
 
-Why did you combine them ?
+Implement a method to change watchdog timeout configuration based on the
+"dlg,wdt-sd" devicetree property. Setting the WATCHDOG_SD bit enables
+SHUTDOWN mode, and clearing it enables POWERDOWN mode on watchdog timeout.
 
-it would be a lot better if the reset were handled in
-drivers/reset rather than in clock. There has already been some work to
-move reset from clock back to reset. This often involve auxiliary drivers.
+If no devicetree property is specified, the WATCHDOG_SD bit stays in default
+configuration, not breaking behaviour of devices which might depend on
+default fuse configuration.
 
->
-> I also need to select MFD_SYSCON to get syscon_node_to_regmap()
-> (or perhaps something similar, depending on the answers to my
-> questions about the proper way to define the syscon).
->> 
->>> +	default m
->> 
->> default n
->
-> This depends on TC9564_PCI, and if TC9564_PCI is enabled I would
-> like this to (automatically) be available (at least as a module).
->
-> Why do you recommend "n"?
->
->>> +	help
->>> +	  This enables support for the clock and reset controller embedded
->>> +	  in the Toshiba TC9564 (and Qualcomm QPS615) SoC.  The state of
->>> +	  clock and reset lines is controlled by MMIO to a region managed
->>> +	  by a system controller; this ensures access to the region is
->>> +	  coordinated between this and other drivers.
->> 
->> Rather than 'other drivers', outline specifically which other drivers.
->
-> I was intentionally vague at this point because the one other driver
-> has not yet gone out for upstream review for this iteration of the
-> code.  But I do agree with you, so I'll change this to say:
->
->     ... between this and the XGMAC (stmmac) driver.
->
-> Then it will be correct without modification once that driver goes
-> out for review.  Is that better, or do you suggest something else?
->
->>> +
->>>   config CLK_TWL
->>>   	tristate "Clock driver for the TWL PMIC family"
->>>   	depends on TWL4030_CORE
->>> diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
->>> index b18af485d7f03..a98ea8ff92066 100644
->>> --- a/drivers/clk/Makefile
->>> +++ b/drivers/clk/Makefile
->>> @@ -110,6 +110,7 @@ obj-$(CONFIG_COMMON_CLK_SI570)		+= clk-si570.o
->>>   obj-$(CONFIG_COMMON_CLK_SP7021)		+= clk-sp7021.o
->>>   obj-$(CONFIG_COMMON_CLK_STM32F)		+= clk-stm32f4.o
->>>   obj-$(CONFIG_COMMON_CLK_STM32H7)	+= clk-stm32h7.o
->>> +obj-$(CONFIG_COMMON_CLK_TC9564)		+= clk-tc9564.o
->>>   obj-$(CONFIG_COMMON_CLK_TPS68470)      += clk-tps68470.o
->>>   obj-$(CONFIG_CLK_TWL6040)		+= clk-twl6040.o
->>>   obj-$(CONFIG_CLK_TWL)			+= clk-twl.o
->>> diff --git a/drivers/clk/clk-tc9564.c b/drivers/clk/clk-tc9564.c
->>> new file mode 100644
->>> index 0000000000000..4f900bc8994a7
->>> --- /dev/null
->>> +++ b/drivers/clk/clk-tc9564.c
->>> @@ -0,0 +1,366 @@
->>> +// SPDX-License-Identifier: GPL-2.0-only
->>> +
->>> +/*
->>> + * Copyright (C) 2026 by RISCstar Solutions Corporation.  All rights reserved.
->>> + */
->>> +
->>> +#include <linux/bits.h>
->>> +#include <linux/clk-provider.h>
->>> +#include <linux/mfd/syscon.h>
->>> +#include <linux/mod_devicetable.h>
->> 
->> Uwe already pointed out removing this.
->
-> Yes, done.
->
->> 
->>> +#include <linux/module.h>
->>> +#include <linux/platform_device.h>
->>> +#include <linux/regmap.h>
->>> +#include <linux/reset-controller.h>
->>> +
->>> +#include <dt-bindings/clock/toshiba,tc9564.h>
->>> +
->>> +#define CLK_CTRL0_OFFSET	0x1004
->>> +#define RST_CTRL0_OFFSET	0x1008
->>> +#define CLK_CTRL1_OFFSET	0x100c
->>> +#define RST_CTRL1_OFFSET	0x1010
->>> +
->>> +struct tc9564_clock_init {
->>> +	const char *name;	/* NULL means unused entry */
->>> +	u32 offset;
->>> +	u32 mask;
->>> +};
->>> +
->>> +struct tc9564_clock {
->>> +	struct clk_hw hw;
->>> +	u32 which;
->>> +	u32 offset;		/* CLK_CTRL0_OFFSET or CLK_CTRL1_OFFSET */
->>> +	u32 mask;		/* Zero means undefined clock */
->>> +};
->>> +
->>> +struct tc9564_reset {
->>> +	u32 offset;		/* RST_CTRL0_OFFSET or RST_CTRL1_OFFSET */
->>> +	u32 mask;		/* Zero means undefined reset */
->>> +};
->>> +
->>> +struct tc9564_clocks {
->>> +	struct device *dev;
->>> +	struct regmap *regmap;
->>> +	struct reset_controller_dev rcdev;
->>> +	size_t clock_count;
->>> +	struct tc9564_clock clocks[] __counted_by(clock_count);
->>> +};
->>> +
->>> +#define TC9564_CLOCK_INIT0(_name, _bit)	__TC9564_CLOCK_INIT(_name, 0, _bit)
->>> +#define TC9564_CLOCK_INIT1(_name, _bit)	__TC9564_CLOCK_INIT(_name, 1, _bit)
->>> +
->>> +#define __TC9564_CLOCK_INIT(_name, _reg, _bit)		\
->>> +	[CLOCK_##_name] = {				\
->>> +		.name	= #_name,			\
->>> +		.offset	= CLK_CTRL ## _reg ## _OFFSET,	\
->>> +		.mask	= BIT(_bit),			\
->>> +	}
->>> +
->>> +#define TC9564_RESET_INIT0(_name, _bit)	__TC9564_RESET_INIT(_name, 0, _bit)
->>> +#define TC9564_RESET_INIT1(_name, _bit)	__TC9564_RESET_INIT(_name, 1, _bit)
->>> +
->>> +#define __TC9564_RESET_INIT(_name, _reg, _bit)		\
->>> +	[RESET_##_name] = {				\
->>> +		.offset	= RST_CTRL ## _reg ## _OFFSET,	\
->>> +		.mask = BIT(_bit),			\
->>> +	}
->>> +
->>> +static const struct tc9564_clock_init tc9564_clock_init[] = {
->>> +	TC9564_CLOCK_INIT0(MCU, 0),
->>> +	TC9564_CLOCK_INIT0(INTC, 4),
->>> +	/* TC9564_CLOCK_INIT0(PCIE, 9), */
->>> +	/* TC9564_CLOCK_INIT0(I2C, 12), */
->> 
->> A comment would be useful here to outline why these are commented out.
->> Is the PCIE one comment out because of what's outlined in the commit
->> message?
->
-> Yes, that is why.  We are downstream of PCIe, and PCIe in this
-> case depends on I2C.  So we don't want to mess with these two
-> clocks or their reset counterparts.
->
-> I only provide this for the benefit of documentation.  If someone
-> happens to see bit 9 set in this register, it means the PCIe clock
-> is enabled.
->
-> Anyway, others have suggested simply removing these comments.
-> So I'll do what you suggest, but I'm interested to know whether
-> you would favor just deleting them instead.
->> 
->>> +	TC9564_CLOCK_INIT0(SRAM, 13),
->>> +	TC9564_CLOCK_INIT0(UART, 16),
->>> +	TC9564_CLOCK_INIT0(MSIGEN, 18),
->>> +	TC9564_CLOCK_INIT0(PLL, 24),
->>> +	TC9564_CLOCK_INIT0(SGMII, 25),
->>> +	TC9564_CLOCK_INIT0(REFCLKO, 26),
->
-> . . .
->
->>> +static const struct reset_control_ops tc9564_reset_control_ops = {
->>> +	.assert		= tc9564_reset_assert,
->>> +	.deassert	= tc9564_reset_deassert,
->> 
->> I'd rather not have the extra spaces because sometimes these get out of
->> line with new members that need more space. Also tc9564_clk_ops above
->> doesn't have the extra spaces.
->
-> That's OK with me.  I normally align assignments like this for
-> readability, but it's obviously an arbitrary stylistic choice.
-> I'll just use one space, no alignment (just as the clk_ops do
-> above).  I'll do the same in the platform driver structure
-> assignments.
->> 
->>> +};
->>> +
->>> +static void tc9564_reset_assert_all(struct tc9564_clocks *clocks)
->>> +{
->>> +	for (u32 id = 0; id < TC9564_RESET_COUNT; id++)
->>> +		if (tc9564_reset[id].mask)
->>> +			tc9564_reset_manage(&clocks->rcdev, id, true);
->>> +}
->>> +
->>> +static int tc9564_reset_init(struct tc9564_clocks *clocks)
->>> +{
->>> +	struct reset_controller_dev *rcdev = &clocks->rcdev;
->>> +
->>> +	rcdev->ops = &tc9564_reset_control_ops;
->>> +	rcdev->owner = THIS_MODULE;
->>> +	rcdev->dev = clocks->dev;
->>> +	rcdev->of_node = dev_of_node(clocks->dev);
->>> +	rcdev->nr_resets = TC9564_RESET_COUNT;
->>> +
->>> +	return devm_reset_controller_register(clocks->dev, rcdev);
->>> +}
->>> +
->>> +static int tc9564_clk_probe(struct platform_device *pdev)
->>> +{
->>> +	struct device *dev = &pdev->dev;
->>> +	struct tc9564_clocks *clocks;
->>> +	int ret;
->>> +
->>> +	if (!dev_of_node(dev))
->>> +		return dev_err_probe(dev, -EINVAL, "no devicetree node\n");
->>> +
->>> +	clocks = tc9564_clk_init(dev);
->>> +	if (IS_ERR(clocks))
->>> +		return dev_err_probe(dev, PTR_ERR(clocks),
->>> +				     "failed to initialize clocks\n");
->>> +
->>> +	ret = tc9564_reset_init(clocks);
->>> +	if (ret)
->>> +		return dev_err_probe(dev, ret, "failed to initialize resets\n");
->>> +
->>> +	/* Force all resets to be initially asserted */
->>> +	tc9564_reset_assert_all(clocks);
->>> +
->>> +	/* Force all clocks to be initially disabled */
->>> +	tc9564_clock_disable_all(clocks);
->>> +
->>> +	platform_set_drvdata(pdev, clocks);
->>> +
->>> +	return 0;
->>> +}
->>> +
->>> +static void tc9564_clk_remove(struct platform_device *pdev)
->>> +{
->>> +	struct tc9564_clocks *clocks = platform_get_drvdata(pdev);
->>> +
->>> +	/* Leave all resets to be deasserted when done */
->>> +	tc9564_reset_assert_all(clocks);
->> 
->> The comment says deasserted but the code calls assert_all.
->
-> Oops.  Will fix.  Thank you very much for your review Brian.
->
-> 					-Alex
->
->> 
->> Brian
->> 
->> 
->>> +
->>> +	/* Leave all clocks disabled when done */
->>> +	tc9564_clock_disable_all(clocks);
->>> +}
->>> +
->>> +static const struct of_device_id tc9564_clk_ids[] = {
->>> +	{ .compatible = "toshiba,tc9564-clock" },
->>> +	{ },
->>> +};
->>> +MODULE_DEVICE_TABLE(of, tc9564_clk_ids);
->>> +
->>> +static struct platform_driver tc9564_clk_driver = {
->>> +	.probe	= tc9564_clk_probe,
->>> +	.remove	= tc9564_clk_remove,
->>> +	.driver	= {
->>> +		.name		= KBUILD_MODNAME,
->>> +		.of_match_table = tc9564_clk_ids,
->>> +		.probe_type	= PROBE_PREFER_ASYNCHRONOUS,
->>> +	},
->>> +};
->>> +module_platform_driver(tc9564_clk_driver);
->>> +
->>> +MODULE_DESCRIPTION("Toshiba TC9564 Clock and Reset Driver");
->>> +MODULE_LICENSE("GPL");
->>> -- 
->>> 2.53.0
->>>
->> 
->
+Specifically, "There is a possibility ..." should not be part of the
+description at all, and "Note:" should not be part of the description
+and be moved below "---".
 
--- 
-Jerome
+> Signed-off-by: Andrej Picej <andrej.picej@norik.com>
+> Tested-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+> Reviewed-by: Adam Thomson <Adam.Thomson.Opensource@diasemi.com>
+> Acked-by: Guenter Roeck <linux@roeck-us.net>
+> Reviewed-by: Guenter Roeck <linux@roeck-us.net>
+> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
+> ---
+>  drivers/watchdog/da9062_wdt.c | 27 +++++++++++++++++++++++++++
+>  1 file changed, 27 insertions(+)
+> 
+> diff --git a/drivers/watchdog/da9062_wdt.c b/drivers/watchdog/da9062_wdt.c
+> index 3d7bf2f351db..7ceef8cd7425 100644
+> --- a/drivers/watchdog/da9062_wdt.c
+> +++ b/drivers/watchdog/da9062_wdt.c
+> @@ -204,8 +204,11 @@ static int da9062_wdt_probe(struct platform_device *pdev)
+>  {
+>  	struct device *dev = &pdev->dev;
+>  	unsigned int timeout;
+> +	unsigned int mask;
+>  	struct da9062 *chip;
+>  	struct da9062_watchdog *wdt;
+> +	int ret;
+> +	u32 val;
+>  
+>  	chip = dev_get_drvdata(dev->parent);
+>  	if (!chip)
+> @@ -245,6 +248,30 @@ static int da9062_wdt_probe(struct platform_device *pdev)
+>  		set_bit(WDOG_HW_RUNNING, &wdt->wdtdev.status);
+>  	}
+>  
+> +	/*
+> +	 * Configure what happens on watchdog timeout. Can be specified with
+> +	 * "dlg,wdt-sd" dt-binding (0 -> POWERDOWN, 1 -> SHUTDOWN).
+> +	 * If "dlg,wdt-sd" dt-binding is NOT set use the default.
+
+This is not really what he code below does.
+It sets the mode to shutdown if val is != 0, not if it is 1.
+
+> +	 */
+> +	ret = device_property_read_u32(dev, "dlg,wdt-sd", &val);
+> +	if (!ret) {
+> +		if (val)
+> +			/* Use da9062's SHUTDOWN mode */
+> +			mask = DA9062AA_WATCHDOG_SD_MASK;
+> +		else
+> +			/* Use da9062's POWERDOWN mode. */
+> +			mask = 0x0;
+> +
+> +		ret = regmap_update_bits(wdt->hw->regmap,
+> +						DA9062AA_CONFIG_I,
+> +						DA9062AA_WATCHDOG_SD_MASK,
+> +						mask);
+
+CHECK: Alignment should match open parenthesis
+#157: FILE: drivers/watchdog/da9062_wdt.c:266:
++               ret = regmap_update_bits(wdt->hw->regmap,
++                                               DA9062AA_CONFIG_I,
+
+Also, this does not require an additional variable.
+
+		ret = regmap_update_bits(wdt->hw->regmap,
+					 DA9062AA_CONFIG_I,
+					 DA9062AA_WATCHDOG_SD_MASK,
+					 val ? DA9062AA_WATCHDOG_SD_MASK : 0);
+
+> +
+> +		if (ret)
+> +			dev_err(dev, "failed to set wdt reset mode: %d\n",
+> +				ret);
+
+			return dev_err_probe(dev, ret,
+					     "failed to set wdt reset mode\n");
+
+Thanks,
+Guenter
