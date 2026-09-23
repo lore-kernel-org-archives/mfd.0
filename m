@@ -1,84 +1,108 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from cp2.siel.si (cp2.siel.si [46.19.12.180])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0785E3A4F58;
-	Wed, 23 Sep 2026 11:13:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C941249B1EF;
+	Wed, 23 Sep 2026 11:17:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=46.19.12.180
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790162008; cv=none; b=jmFonlyirtzbK9eyHtbRvQmyIJgH0TC5fRc9Pa7/hzvz0MzoMh6rzN8RDI0Ut2aORvtjGSbQx0L9n3HnVnyz46c5yt9IOII+HgzE0bS3yIHUdL613reUY/KKciU9okeSU94VSQAEOUBVXjMIOQSUDOrb1FB98KpVLc4JVBDsEh0=
+	t=1790162246; cv=none; b=cOZJ8jisOdJBLJSwDVohJyK1Gr4pfQX1Tq7MzOvgG7BDhZy39cxtARQwP0yxG6eZrsmUHYMFOgPi9IzbVK4ov/yJx9L+eBftK/88JYUWoFRpmaxLRJdnAQwig3iox6KtcQpwbojG2ZuRK4sZ4aQyXblc6uOFwpqwrzOs9qPrY7Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790162008; c=relaxed/simple;
-	bh=y4mAh4QRCnmU31ygKAPUR/tNyPpFdvNtOoRLdlbia/o=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=Olu1MQljZpTkS7dDAWQdZCcl4OVFOI5wQDFXIfBsRt89Ehe6BsHDwK+7tMqhLsRT3AJDVDa7xfiMoI4lFCrslu44ptPV8qV7lRqN0Bh2ilG0kNfn9zMYox0vsF42pGgIs1c2Fc2PXYrvcVE0r04AgoKG2r7n7UKfoc1PApF2mJY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=f255DHjP; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790162246; c=relaxed/simple;
+	bh=2+omdqyn+5i8zEgTKuHWQg1tTbCMYOp4CLE9fbUVb3E=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=pPVf6NTpilwIxVbBhEt0/RPBwfUW448BPeupt+YfOaBMuUfs82YO/WtrWGYs5CsQis+DBkDnp/F3xwbudD7qiH2pwEWjvG5wSmu7q1Qls4Qwrbl9ySx3FqYYzH3HPZDl8ahItfnwP/8MIehdf/N2DE9Jiu/34JKCBuN/WfYZqYA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=norik.com; spf=pass smtp.mailfrom=norik.com; dkim=pass (2048-bit key) header.d=norik.com header.i=@norik.com header.b=KTmreRC6; arc=none smtp.client-ip=46.19.12.180
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=norik.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=norik.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="f255DHjP"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65E821F000FF;
-	Wed, 23 Sep 2026 11:13:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790162006;
-	bh=6OWssQdGeKsyE+yPPzL9NID088rXE6n1NT7d9aLNuLU=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=f255DHjPL7qcmuNQwMipvzvnDX+7hQ2EPoy15lFc3RlpueYEfKHfvnoUqEYqM1sNb
-	 NWBIafoReygqiJurrwkepfMrWtm4dmdciZcGPHZj/UXcGVhT/gUEj9o7ycAyOsvv1H
-	 VqqSVjZjXHtHcvciU24arw2rlEWeASuZ4V6Pee7xW62cur2hfF2P1a2knuHbqR+q42
-	 gMBblt0TMmXcHqNunum5Arm0/pdXZWQDgCJyQiuCPlGnyePwTCIA4Udngv9vfkhOae
-	 NuuKuLY3Qe+HkhbVscCeNe2wrBS53RY93ZrUlKLi0/K3QG2Yu63tslB35MvSjcWKk7
-	 qFkKtFqTPodkg==
-From: Lee Jones <lee@kernel.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>, Lee Jones <lee@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Andi Shyti <andi.shyti@kernel.org>, 
- Kevin Hilman <khilman@baylibre.com>, Jerome Brunet <jbrunet@baylibre.com>, 
- Martin Blumenstingl <martin.blumenstingl@googlemail.com>, 
- Beniamino Galvani <b.galvani@gmail.com>, 
- "Rafael J. Wysocki" <rafael@kernel.org>, 
- Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
- Lukasz Luba <lukasz.luba@arm.com>, Liam Girdwood <lgirdwood@gmail.com>, 
- Mark Brown <broonie@kernel.org>, Ronald Claveau <linux-kernel-dev@aliel.fr>
-Cc: linux-amlogic@lists.infradead.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org, 
- linux-arm-kernel@lists.infradead.org, linux-pm@vger.kernel.org, 
- mfd@lists.linux.dev
-In-Reply-To: <20260917-add-mcu-fan-khadas-vim4-v12-0-497cd543a148@aliel.fr>
-References: <20260917-add-mcu-fan-khadas-vim4-v12-0-497cd543a148@aliel.fr>
-Subject: Re: (subset) [PATCH v12 0/6] Add VIM4 MCU/FAN support
-Message-Id: <179016200216.3991538.9729498500468458301.b4-ty@b4>
-Date: Wed, 23 Sep 2026 12:13:22 +0100
+	dkim=pass (2048-bit key) header.d=norik.com header.i=@norik.com header.b="KTmreRC6"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com;
+	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Unsubscribe-Post:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=bl7tym+Lu2vHHOzs+uUoc+3f+eTV2ZLmnuMsx9CFWy8=; b=KTmreRC6RhFR0elJA8L3YCgyQt
+	nZcEtodFvJX+Wj1eVQmyh8vtM9u63htAdESzqmNjtQVKgxHOY7nMTQFEaRWCzduTNKbJgh/Eeptv2
+	7GeYpyC4dS3UoWwpH/ajhrx60RFKYcj/XV+G+OZ6Dk2DUIPIVLPZ+dLe2eHCAncvYuInxjriNdiBl
+	3vPQ2OzVdlaBIHfx+UOTO+USK0RRPgbmBskM0DrF3+lKBfS1tnVPI6kB6NkSgdf6SqNyauL4ldqCn
+	eQFw0ygB0tG2qhMsl2H+c5hy8C7XHTDbDZcjFwj86hGHGoZsqlvCpIJDy+v1KeyIQ/P7b3XZ9ytvi
+	2UP7q1KQ==;
+Received: from 89-212-21-243.static.t-2.net ([89.212.21.243]:43182 helo=localhost.localdomain)
+	by cp2.siel.si with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+	(Exim 4.100)
+	(envelope-from <primoz.fiser@norik.com>)
+	id 1x9KyZ-0000000A1qw-2Q0k;
+	Wed, 23 Sep 2026 13:17:22 +0200
+From: Primoz Fiser <primoz.fiser@norik.com>
+To: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Frank Li <Frank.Li@nxp.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Support Opensource <support.opensource@diasemi.com>,
+	Lee Jones <lee@kernel.org>,
+	Wim Van Sebroeck <wim@linux-watchdog.org>,
+	Guenter Roeck <linux@roeck-us.net>
+Cc: devicetree@vger.kernel.org,
+	imx@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org,
+	linux-kernel@vger.kernel.org,
+	mfd@lists.linux.dev,
+	linux-watchdog@vger.kernel.org,
+	upstream@lists.phytec.de,
+	andrej.picej@norik.com
+Subject: [PATCH 2/4] mfd: da9061: make register CONFIG_I writable
+Date: Wed, 23 Sep 2026 13:17:17 +0200
+Message-Id: <20260923111719.2032012-3-primoz.fiser@norik.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260923111719.2032012-1-primoz.fiser@norik.com>
+References: <20260923111719.2032012-1-primoz.fiser@norik.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.16-dev-ad80c
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cp2.siel.si
+X-AntiAbuse: Original Domain - lists.linux.dev
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - norik.com
+X-Get-Message-Sender-Via: cp2.siel.si: authenticated_id: primoz.fiser@norik.com
+X-Authenticated-Sender: cp2.siel.si: primoz.fiser@norik.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-On Thu, 17 Sep 2026 09:58:59 +0200, Ronald Claveau wrote:
-> The Khadas VIM4 board features a different MCU variant compared to
-> previous VIM boards.
-> While it shares the same I2C-based communication model,
-> it differs in some ways:
-> 
->   - A distinct register map with its own volatile/writeable register set
->   - A fan control with 0–100 levels instead of the 0–3 levels previously
->   - A fan power supply gated through a regulator
-> 
-> [...]
+From: Andrej Picej <andrej.picej@norik.com>
 
-Applied, thanks!
+Make the config register CONFIG_I writable to change the watchdog mode.
 
-[1/6] mfd: khadas-mcu: Add per-variant configuration infrastructure and VIM4 support
-      commit: 6277c3cd74f54c26bf4d5e88182a378ee7190d90
-[2/6] mfd: khadas-mcu: Use MFD_CELL_* macros for cell declarations
-      commit: f9f61c21b942ac387acd7fb3ef1f950cba59755f
-[3/6] mfd: khadas-mcu: Add support for VIM4 MCU variant
-      commit: c94c97f8c97e684d44ef5483d7f2ad6b3dfa55ac
-[4/6] thermal: khadas-mcu-fan: Add fan config from platform data Add regulator support
-      commit: dad6f7897a93b4e1614664dbbcae0f61e57d1ac0
+Signed-off-by: Andrej Picej <andrej.picej@norik.com>
+Reviewed-by: Adam Thomson <Adam.Thomson.Opensource@diasemi.com>
+Tested-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
+---
+ drivers/mfd/da9062-core.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
---
-Lee Jones [李琼斯]
+diff --git a/drivers/mfd/da9062-core.c b/drivers/mfd/da9062-core.c
+index 32dd24483ee0..c987e533824d 100644
+--- a/drivers/mfd/da9062-core.c
++++ b/drivers/mfd/da9062-core.c
+@@ -427,7 +427,7 @@ static const struct regmap_range da9061_aa_writeable_ranges[] = {
+ 	regmap_reg_range(DA9062AA_VBUCK1_B, DA9062AA_VBUCK4_B),
+ 	regmap_reg_range(DA9062AA_VBUCK3_B, DA9062AA_VBUCK3_B),
+ 	regmap_reg_range(DA9062AA_VLDO1_B, DA9062AA_VLDO4_B),
+-	regmap_reg_range(DA9062AA_CONFIG_J, DA9062AA_CONFIG_J),
++	regmap_reg_range(DA9062AA_CONFIG_I, DA9062AA_CONFIG_J),
+ 	regmap_reg_range(DA9062AA_GP_ID_0, DA9062AA_GP_ID_19),
+ };
+ 
+-- 
+2.34.1
 
