@@ -1,128 +1,137 @@
-Received: from mail-pj2-f34.google.com (mail-pj2-f34.google.com [74.125.227.162])
+Received: from mail-qk2-f13.google.com (mail-qk2-f13.google.com [74.125.230.205])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ECE8C3546E0
-	for <mfd@lists.linux.dev>; Wed, 23 Sep 2026 21:03:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.162
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 500B84734F7
+	for <mfd@lists.linux.dev>; Wed, 23 Sep 2026 21:33:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.205
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790197393; cv=none; b=Tvjaldc/nivQjyW8slmqfpNmqSP2KwdcfNep15FIHpDAdCH9RTFXrZhJxkwrJlL2GDeIpI54+9kwu5605s1xFShNxkmZxvh8/3w3wG6Oocd7jXm9V5fME5Aj2AC3H5Po5vgp49kFpPXkSj8alPUh8GkA9zMb6jb2tJ+oYc+C8M4=
+	t=1790199221; cv=none; b=JBW3a1y6pAaXJXY4ScZ2tOlz4GIpdy9zp3fIyf+FIH924BBeLS9B5AKTSk/tJ61fX8Q7OGCLeAlyD4d4xS8aRK3fGVFmMjIPF+vnDqrLtdhSLkID7lS9w2ggnLASzSourfQnEFyPos8MKmGMyKfX2qGyxl6+4vK0E4I/oT9m4B0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790197393; c=relaxed/simple;
-	bh=V8xcOFGWQPMTSprDRa3yYxi8wSmB7wiOFbJrnC+xVpU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=lsJdSNuxPfilWtgh5mtrI5BmSgJ6Yl9QI4znUHY6+NZK4n6E4Cq7z+Jk5CSK3G2ZalX6dAVqK/LOgWEZpwjSmSngDR8+G49GBZ2iRc6F5NdiKDg698SPY/08h2+8Zk1LgN3QQ0HAZWRG8bW6d+m3YNhVvSr4zIeeg6dWm+BhhjU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=kvYwBmXO; arc=none smtp.client-ip=74.125.227.162
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790199221; c=relaxed/simple;
+	bh=AIosAjl/qfQ0+4SRj6KraAsMA9o8Ij1Mh3Om3uxMQ5M=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=QhdSsvG4dLZRqqP4OE6cbRLJ0v2K4eYu/WWbGGLyThJ8/2UY9quPx2eNhAABhdR9amhBRu4yY+AO6T7Q52iFL5LLW9mYUky7wHWvG1ZmwYT52SHyiC0vGF6XPG/jrfK9eNCiUE+84tkmyvn7oi0nrTmrE93YqBzTV0hy13gUeh4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=eKvIw163; arc=none smtp.client-ip=74.125.230.205
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kvYwBmXO"
-Received: by mail-pj2-f34.google.com with SMTP id d9443c01a7336-2d747eb79f7so6735045ad.1
-        for <mfd@lists.linux.dev>; Wed, 23 Sep 2026 14:03:09 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="eKvIw163"
+Received: by mail-qk2-f13.google.com with SMTP id d75a77b69052e-530fa0716f6so15900711cf.3
+        for <mfd@lists.linux.dev>; Wed, 23 Sep 2026 14:33:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790197386; x=1790802186; darn=lists.linux.dev;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:sender:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=urjJV9cwlFxNv7KbCDA3FefKThqBp2XiJBexrbouUOU=;
-        b=kvYwBmXOt/5R9UQEDAhjSR2T/0fOOICBlmiaYrP8DDZFre4usHEqvFrFhz8JAkYCtU
-         GoMoUF9naxOEjjToYGwxHHCiDs1jD3mftT+CDaSr07x2FW+A3S9jDuM6equ+mC4YBSp7
-         qInjng8AfH1mFinULZGIAoL2fYok7aR0XKEWHJtUGHHcm44HJ8m0+tuG5/TqB6Aet2mE
-         ZNgiIgVSrVIn+KiUkExyzaNyLG3AfskJu7edUt4OsvDXjoWVNJCBDk2yqaHiLMkAchI2
-         UCRKCRX8L5FFcw46t8mFIoPEwwwIqoBetdfebb7L8NBS9MwwRtl4ZSEI4Eis8n1pAxX8
-         Mmiw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790197386; x=1790802186;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:sender:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1790199218; x=1790804018; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=urjJV9cwlFxNv7KbCDA3FefKThqBp2XiJBexrbouUOU=;
-        b=ty9mUmyfckCYmudPVA55SYB0Sd/cMvpHlJfgAj+3qMeVzMOPXMCwcVP2YbomIJYVZ6
-         uL1W+7HqB/ofOQ2NVrvxMzciIfQxUekHoZuDbhmYCc3Pc9rBCNMgsSoR96EIdamx5H1n
-         UKp5xXQNI08f2SC5ps0BeSqiwphYXL7TiC646/FbC/U8OcdfQ+6gfoKqYH7Rv2ViF5j9
-         3/BvtWozDGm5dP/XbAfwHe4/M3bLcVJfv70CuzCwdmBtSMMLWFBfCwFpQyFzTbjbPE1Z
-         RyXTPNXR56R3ZpDBmhiY57IavZfFDerHyNU6MOIvh1Arah9SlqWwNl4EwGVotlSWtdq8
-         Zobg==
-X-Forwarded-Encrypted: i=1; AKwUvByvxVuflO6hC6u8ODRyxg7QgSX7j4nhFEinrv+XbPSqOuprSC8fUMQ5M5o4JUXcSTb6pZw=@lists.linux.dev
-X-Gm-Message-State: AFuF++k0oYEkU6lClhvtSaSzygeXeb+MwwtzeWzCTb4B2BCm6us4w2Aa
-	yyZWj/MtxQKvN9J/+Zk4vecD7QV/KLwNvAQbhXdonrunxsEoiUsLzsuQ
-X-Gm-Gg: AYBFou1wBVsk1Z2w64gOgS6cJj+iU0cXSRPc9jglwjZFkEKzQdfhpIw5pzKUrjarHML
-	atpPLyV9yFs8i3E4XCSf5+it/JWptxe5MmILNWJ5HRreHblEpS087bfjYItDlW4+MjRO1iTvEOT
-	KWTy+XzosjsG84LuXi0g3rvFY/719BXZaEaW+H9wgO7tQUrwiwoJpvgfuaC7ftUf1fWNXj6bT/s
-	rOPl+BqKkvNzzmXTcL5nDUQ7y5PhRc6h8c8i9exJEjnEQ40Kt1WJfSPhiqopUEHZI/H3Y9v8ayW
-	QOm6cXTa28wrDbZ+bCeJK1i3ZGvFMzfHWdKlyeNQpYEk1IY2Tn8xpsmCYlnIFYkTb2VDUhknMKU
-	MLMUsFuVq144Zu3wMSvTObuKOwJab6vypTE9wPi1x/kX1nnjU530ne19hSRw3mdPZyjEzfjhpDs
-	hqF/cBMxtkZ+RTyPjuZC2dHyh2B0df3SxkzT5yCYJ492UH6g3agiBj3PpiLlFNaQhHtgcLk2ZLb
-	4BsFmQaxOtb
-X-Received: by 2002:a17:90b:4c82:b0:39e:6c68:1552 with SMTP id 98e67ed59e1d1-3a09896ee0fmr243012a91.26.1790197385901;
-        Wed, 23 Sep 2026 14:03:05 -0700 (PDT)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a0972b15f1sm848270a91.2.2026.09.23.14.03.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Sep 2026 14:03:04 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Wed, 23 Sep 2026 14:03:04 -0700
-From: Guenter Roeck <linux@roeck-us.net>
-To: Primoz Fiser <primoz.fiser@norik.com>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	Support Opensource <support.opensource@diasemi.com>,
-	Lee Jones <lee@kernel.org>,
-	Wim Van Sebroeck <wim@linux-watchdog.org>,
-	devicetree@vger.kernel.org, imx@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-	mfd@lists.linux.dev, linux-watchdog@vger.kernel.org,
-	upstream@lists.phytec.de, andrej.picej@norik.com
-Subject: Re: [PATCH 3/4] watchdog: da9062: reset board on watchdog timeout
-Message-ID: <10de1304-577b-494b-b8d6-3792ebd1bbf3@roeck-us.net>
-References: <20260923111719.2032012-1-primoz.fiser@norik.com>
- <20260923111719.2032012-4-primoz.fiser@norik.com>
- <146c3502-3205-43ce-9d1c-c58b936d160e@roeck-us.net>
+        bh=dJzkV1wEUwUk4mOjqXcbC0Tz78XuSDZNKDr6Z/EZbvA=;
+        b=eKvIw163evC9JviH7ejmkAUY6mxkoSSxXU/4AyYIlX6DCA8Op6YiVD6b/HUGgd3RPG
+         lQ8cYm/pVdvD3zoOqjsDT0AnnFxansjPyWKzCiqXs0y4tC5tXvn3nGqtEeryfTbzRUAp
+         NwZ/BLTiiCtLG13SJyCMChbb5ur32+nTCipy5FfEGvcOHBA2hQjNBxrhE0L5o50fqaaE
+         36tcO2NrGJJx0aAjv71xstMy4c50u2jnJ+2eeUxdEwFJUDaM/OgppGVARjfuiipXZ289
+         1QSW0wXySz9UcZQ78bt3QI4NkMDEno/0e42pxGHjRF9ivW3wLPngkdCK2GEjIHRSfeeU
+         mRQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790199218; x=1790804018;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=dJzkV1wEUwUk4mOjqXcbC0Tz78XuSDZNKDr6Z/EZbvA=;
+        b=VTEETjfeiVYQdLHw0YWkdvx6pSfuzC0NsopHPwYxztwswW7cEAaNgcklK6nFfETGC9
+         5o8QW6UR3umS5ptBgGi+LJydcjeGwJ3UpbevBEja4f9/nKPnukTjJ5QQUCwwxOArcwPE
+         kyLxYbleHMA1afiMB0WAzgzs8dZpLF3MGAzcBX13tQBOYgADDFkBomZfqd5UKR7/tOKN
+         6/teEd5ADE7eKBSTechdxKZcwAehUOlUENgTfhiT2tY5s5/1hx+OtVKGMi1077GFiihr
+         mssDhG7iOLgJNptAYNNjXQCKbWUBER0RCHsbs3qPJ3UnAR5kBV2lSMEF7hHBKCAEeSCt
+         VYag==
+X-Forwarded-Encrypted: i=1; AKwUvByVYaqHdL9AFrkGZqXbrgTpR8/5q3mvEqszhqbekXcwaLSm7N0AtqvsgJMTH0yzGNspZjc=@lists.linux.dev
+X-Gm-Message-State: AFuF++mFqyS/UiFHCge2JK2QSE6lJYVUHf7f61I16nmqlQPIrjTsgsrr
+	ZWTQEYXM9ynKHczPeEmau1Xab9xF3imtBQPJuMIYQbSPIRuLYnAJrdehBltgL3Zsdng=
+X-Gm-Gg: AYBFou3uuAzftd47L1kGjE40gpTEML3o2HgNdK5EZU6dgz2LkrSkfQRAN5mkTXhncIW
+	p8OnKgf26Th3TRfjqZdtAGVMK1W6T35kJG++Jx3JCSeWBPJoOEObYGnXVZVkL6i+h1f8QebWktt
+	8sfQkJC8q8rW0uIRBJ0y5q+M4iXMDS4rtWKE23aJdhwjq9B0t4vS4uy2VccB8MAWXYK8EJ7fZqg
+	L2RD5PNDt5iT+FvaQPro3KddOAKjsZ5jL02As/26O6KYpLqnPmbqs/3Tv1RWILsuuTzzh0ouf/i
+	jo8sh8NIPdra3c/Oh0LX8oKf2iBpN/j+/LPkfww/iulrHug6R7K5HmzgTegxKDo5bzTshxpFNnb
+	aoEt+L/oT8uSQzo/gm424b7yIwsrmbknfMfrw6bkB+U8NPrtS8e1l8tGZAtw/puk+iU216KE9hq
+	qo43gqW/ZFeQ0lO7XPz4ZlhOlZWKOlheKs9gco/u4nitzYJKEHWzv2IW6+E8pPjxGDv5UXurY=
+X-Received: by 2002:a05:622a:1806:b0:531:d7d:64ea with SMTP id d75a77b69052e-532fb63b162mr8219331cf.26.1790199218185;
+        Wed, 23 Sep 2026 14:33:38 -0700 (PDT)
+Received: from [172.22.22.28] ([73.62.185.64])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-532fb287d92sm3634361cf.20.2026.09.23.14.33.36
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 23 Sep 2026 14:33:37 -0700 (PDT)
+Message-ID: <7147ce22-fc6d-4cff-9470-98e341da0a87@riscstar.com>
+Date: Wed, 23 Sep 2026 16:33:35 -0500
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <146c3502-3205-43ce-9d1c-c58b936d160e@roeck-us.net>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/4] clk: toshiba: introduce a TC9564 SoC clock and reset
+ driver
+To: Jerome Brunet <jbrunet@baylibre.com>, Brian Masney <bmasney@redhat.com>
+Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
+ robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org,
+ andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
+ kees@kernel.org, gustavoars@kernel.org, p.zabel@pengutronix.de,
+ daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
+ lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, mfd@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260918165234.687224-1-elder@riscstar.com>
+ <20260918165234.687224-4-elder@riscstar.com> <arG238GS8bMB6DkW@redhat.com>
+ <0785235b-de06-44d4-9068-ec706eeba848@riscstar.com>
+ <1jcxu3adn6.fsf@starbuckisacylon.baylibre.com>
+Content-Language: en-US
+From: Alex Elder <elder@riscstar.com>
+In-Reply-To: <1jcxu3adn6.fsf@starbuckisacylon.baylibre.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Sep 23, 2026 at 02:01:03PM -0700, Guenter Roeck wrote:
-> On Wed, Sep 23, 2026 at 01:17:18PM +0200, Primoz Fiser wrote:
-> > From: Andrej Picej <andrej.picej@norik.com>
-> > 
-> > Implement a method to change watchdog timeout configuration based on DT
-> > binding ("dlg,wdt-sd"). There is a possibility to change the behaviour
-> > of watchdog reset. Setting WATCHDOG_SD bit enables SHUTDOWN mode, and
-> > clearing it enables POWERDOWN mode on watchdog timeout.
-> > 
-> > If no DT binding is specified the WATCHDOG_SD bit stays in default
-> > configuration, not breaking behaviour of devices which might depend on
-> > default fuse configuration.
-> > 
-> > Note: This patch requires that the config register CONFIG_I is
-> > configured as writable in the da9061/2 multi function device.
-> > 
+On 9/23/26 3:58 PM, Jerome Brunet wrote:
+>>>> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+>>>> index f9592fd9ec2bb..50efa10d48450 100644
+>>>> --- a/drivers/clk/Kconfig
+>>>> +++ b/drivers/clk/Kconfig
+>>>> @@ -292,6 +292,17 @@ config COMMON_CLK_S2MPS11
+>>>>    	  clock. These multi-function devices have two (S2MPS14) or three
+>>>>    	  (S2MPS11, S5M8767) fixed-rate oscillators, clocked at 32KHz each.
+>>>>    
+>>>> +config COMMON_CLK_TC9564
+>>>> +	tristate "Toshiba TC9564 clock support"
+>>>> +	depends on TC9564_PCI
+>>> select RESET_CONTROLLER
+>> Thank you.  The reset and clock drivers were previously separate
+>> and the reset only became available if RESET_CONTROLLER was enabled.
+>> Combining them means I need this.  I will add it.
+> Why did you combine them ?
 > 
-> Please reword to something like:
-> 
-> Implement a method to change watchdog timeout configuration based on the
-> "dlg,wdt-sd" devicetree property. Setting the WATCHDOG_SD bit enables
-> SHUTDOWN mode, and clearing it enables POWERDOWN mode on watchdog timeout.
-> 
-> If no devicetree property is specified, the WATCHDOG_SD bit stays in default
-> configuration, not breaking behaviour of devices which might depend on
-> default fuse configuration.
-> 
-> Specifically, "There is a possibility ..." should not be part of the
-> description at all, and "Note:" should not be part of the description
-> and be moved below "---".
-> 
-Also, the subject is wrong. The patch does not "reset board on watchdog
-timeout", it implements support for "dlg,wdt-sd".
+> it would be a lot better if the reset were handled in
+> drivers/reset rather than in clock. There has already been some work to
+> move reset from clock back to reset. This often involve auxiliary drivers.
+To be honest, I got a suggestion from someone to combine them, but
+I said "no, I got feedback last year that separating them was
+better."  But then a second person told me that these are often
+combined, so I took that as "two against one" and decided to
+merge them.
 
-Guenter
+The other reason is that four registers are used:
+   #define CLK_CTRL0_OFFSET	0x1004
+   #define RST_CTRL0_OFFSET	0x1008
+   #define CLK_CTRL1_OFFSET	0x100c
+   define RST_CTRL1_OFFSET	0x1010
+
+They alternate between clock and reset.  The previous separated
+drivers specified the two offsets for each driver in the reg
+property.  But somehow these interleaved registers seemed a
+little off, so I thought the combined driver cleaned that up
+a little.
+
+I don't have any strong preference one way or another.  If you
+think they're better separate, I don't mind separating them
+again.  The two drivers are extremely simple.
+
+					-Alex
