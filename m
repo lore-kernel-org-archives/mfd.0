@@ -1,123 +1,149 @@
-Received: from 0001.3ffe.de (0001.3ffe.de [159.69.201.130])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C90D344471C;
-	Wed, 23 Sep 2026 06:57:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.69.201.130
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3ECD6331EB7;
+	Wed, 23 Sep 2026 07:18:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790146636; cv=none; b=etsuM0vxZrPBt4rot3QEoxYlo+yJ7Om8b7AI0SmkB3r4WxiVnD5vW3jJIZWljk//n0XIbg9eVFCtslHOnWJzGsEA+IePElnxsWxACs4Xwne4tCshpwYo0xVZby97ozCCLFlVmRGZzW2kL2XYkL27WSnnllqtz02q/V1nL1CfBW8=
+	t=1790147912; cv=none; b=E8ED9xpnVjp20R6oUt3bI7EPkQszJg6eRqi1nNOgJ0niAEwbQWonUhphzud14j/9cDM8Uo+CY4Za4ChzQqFR9RGLDXyl+5zNlP9xevFmCrCpJNeReiCZ8s3PzkV8zziHf4ydU9/aA9R6g6pne2zey/RLxtHbC80vtoLtO+IspnA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790146636; c=relaxed/simple;
-	bh=Aplh7dJTViOVzCjHVkbCEOKv4UcGtIR4VW/U3iKThjc=;
-	h=Mime-Version:Content-Type:Date:Message-Id:From:To:Subject:Cc:
-	 References:In-Reply-To; b=eaG+8aIRRh23YnAg9FKiCIlgvLoHZ/orKZBCRfVkHWtYx6ZeYoiaNTdHHV92SorEJFb66fA9naBjFyMM/d4dnjcGy+el78SeIuBfdO9s40l8TLcD1RUKD850JDToFJEg66xIj5ckbG24y/qDVkNl9nZp+qaCV6NutyeH9uIHobI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=walle.cc; spf=pass smtp.mailfrom=walle.cc; dkim=pass (2048-bit key) header.d=walle.cc header.i=@walle.cc header.b=a6C66Cms; arc=none smtp.client-ip=159.69.201.130
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=walle.cc
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=walle.cc
+	s=arc-20240116; t=1790147912; c=relaxed/simple;
+	bh=0Lwr0/tWfAZ9fseMLREPGQiGCFcJK1ojgMrbwR3LwYQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=pgingF27wn7RckGQR+0MgvGpo4WUjpOjwGBM1AmMNd4y0+LorEVCCfEV3XMn81Qv+7p+BIgib3OGQ39bkAxwQvvuBRVYKO73t5oFpUADKiOsPc+oZazXJlF1LT3SfrUG31M65DEfrZfRNl5shPG5o0JQtalqdV4TAUWv3zZvGNE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AgkSvpyD; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=walle.cc header.i=@walle.cc header.b="a6C66Cms"
-Received: from localhost (unknown [213.135.10.150])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mail.3ffe.de (Postfix) with ESMTPSA id DEC2A5D;
-	Wed, 23 Sep 2026 08:57:02 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=walle.cc; s=mail2022082101;
-	t=1790146623;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Aplh7dJTViOVzCjHVkbCEOKv4UcGtIR4VW/U3iKThjc=;
-	b=a6C66CmseqidgmeBJlOBRw5wwOqfckQBCRM2EHmuSQ/tjDoUJVjdWa2uhEz2Q4mmrOA7RK
-	BW6A+P9gGreJnsPw8EJSE+Bqvzjxyapc7ICNjHyyCA535LH730HY9e4T1hykVEOAnUDvHi
-	i4VLXnxOHEFFImpmkRqu7Jkw5ng5DJuhnexpycD1ULRnQBacxQqEynR+TLkDGa6vHFGwmU
-	36QfKryCCcIFwMv0FEcfsONjPbdAJ/nsz0Qsa3cTN5p79f7hbbHPOwWdeQey9efHdNRoeu
-	hVrtQ/uGMgF7JMEFmmVoXg2Xl5QJ2K8bOjKFcmsFX28SrKZS27zNsozce6Kigg==
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AgkSvpyD"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2AF641F000FF;
+	Wed, 23 Sep 2026 07:18:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790147910;
+	bh=hjeJPL69ZDqze5/p8wzcHo2cRaykHOUG+cZBY+I4Ow0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=AgkSvpyD0aEFsFPDzirqDI2fo1fs2XImrxaomjofc/LRjrWC7t9UBBSkPB8jWEh5X
+	 7N6KYfapuHMAxfSwq8VQ26WiONDxjWxTZyQplaeIOqlvYZ4+z/bLdsA2iYvRU/hznx
+	 O/N0fLnrRShxrG1yjA1JaeXrUdIeEK/0gh+01GWGv6alJVJr3BRjN1PqAUNqmOb7Bu
+	 vNZY5ZePju1uxu/ZDZauTaYLekKVN9oszqIlEP1osNsmCqsoiC7mwibS3tXXh80lT4
+	 njSnS/Osa13TXMIkxVEww1OUlL4oA4V1m7U3sdmTiL/aQtfrPS/cYZIWDwJQAUSMMH
+	 /7cfWpmXkVPOQ==
+Message-ID: <3e7b66be-124a-446f-bdfd-b0fe30fff796@kernel.org>
+Date: Wed, 23 Sep 2026 09:18:24 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-Mime-Version: 1.0
-Content-Type: multipart/signed;
- boundary=66e4aab55ce6c10e65aac407de2f18ed76c4de06773e522fce8193b51364;
- micalg=pgp-sha384; protocol="application/pgp-signature"
-Date: Wed, 23 Sep 2026 08:57:00 +0200
-Message-Id: <DLMI0KJW4743.2J11ZTFS2FUH0@walle.cc>
-From: "Michael Walle" <michael@walle.cc>
-To: "zl020895" <zl020895@163.com>
-Subject: Re: [PATCH v7 09/15] gpiolib: regmap: add gpio_regmap_get_chip()
-Cc: <longzhao@ambarella.com>, "Arnd Bergmann" <arnd@arndb.de>, "Krzysztof
- Kozlowski" <krzk@kernel.org>, "Alexandre Belloni"
- <alexandre.belloni@bootlin.com>, <soc@lists.linux.dev>,
- <linux-arm-kernel@lists.infradead.org>, "Rob Herring" <robh@kernel.org>,
- "Krzysztof Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley"
- <conor+dt@kernel.org>, "Michael Turquette" <mturquette@baylibre.com>,
- "Stephen Boyd" <sboyd@kernel.org>, "Jerome Brunet" <jbrunet@baylibre.com>,
- "Linus Walleij" <linusw@kernel.org>, "Bartosz Golaszewski"
- <brgl@kernel.org>, "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>, "Jiri
- Slaby" <jirislaby@kernel.org>, "Andy Shevchenko"
- <andriy.shevchenko@linux.intel.com>, =?utf-8?q?Ilpo_J=C3=A4rvinen?=
- <ilpo.jarvinen@linux.intel.com>, "Catalin Marinas"
- <catalin.marinas@arm.com>, "Will Deacon" <will@kernel.org>, "Lee Jones"
- <lee@kernel.org>, <mfd@lists.linux.dev>, <devicetree@vger.kernel.org>,
- <linux-clk@vger.kernel.org>, <linux-gpio@vger.kernel.org>,
- <linux-serial@vger.kernel.org>, <linux-kernel@vger.kernel.org>
-X-Mailer: aerc 0.20.0
-References: <20260915-cv75-v5-v7-0-3297d3fbc9c0@ambarella.com>
- <20260915-cv75-v5-v7-9-3297d3fbc9c0@ambarella.com>
- <DLL08SC6PWNS.2BUBIQYMBWIKQ@walle.cc>
- <650e4694.3f81.1a0c7598840.Coremail.zl020895@163.com>
-In-Reply-To: <650e4694.3f81.1a0c7598840.Coremail.zl020895@163.com>
-
---66e4aab55ce6c10e65aac407de2f18ed76c4de06773e522fce8193b51364
-Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/4] dt-bindings: clock: introduce
+ toshiba,tc9564-clock.yaml
+To: Alex Elder <elder@riscstar.com>
+Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
+ robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org,
+ andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
+ kees@kernel.org, gustavoars@kernel.org, p.zabel@pengutronix.de,
+ daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
+ lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, mfd@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260918165234.687224-1-elder@riscstar.com>
+ <20260918165234.687224-3-elder@riscstar.com>
+ <20260920-messy-successful-caracara-fcdbcd@quoll>
+ <1ac16236-284a-4d01-b68a-4b32d5c5287c@riscstar.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <1ac16236-284a-4d01-b68a-4b32d5c5287c@riscstar.com>
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 22/09/2026 15:13, Alex Elder wrote:
+> On 9/20/26 1:21 PM, Krzysztof Kozlowski wrote:
+>>> diff --git a/include/dt-bindings/clock/toshiba,tc9564.h b/include/dt-bindings/clock/toshiba,tc9564.h
+>>> new file mode 100644
+>>> index 0000000000000..75732fddd3025
+>>> --- /dev/null
+>>> +++ b/include/dt-bindings/clock/toshiba,tc9564.h
+>>> @@ -0,0 +1,54 @@
+>>> +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+>>> +
+>>> +/*
+>>> + * Copyright (C) 2026 by RISCstar Solutions Corporation.  All rights reserved.
+>>> + */
+>>> +
+>>> +#ifndef __ClOCK_TOSHIBA_TC9564_H__
+>>> +#define __ClOCK_TOSHIBA_TC9564_H__
+>>> +
+>>> +/* Clock IDs */
+>>> +
+>>> +#define CLOCK_MCU		0
+>>> +#define CLOCK_INTC		1
+>>> +/* #define CLOCK_PCIE		2 */
+>>> +/* #define CLOCK_I2C		3 */
+>> Drop both, and SRAM is number 2. Or enable and implement them.
+> 
+> I forgot to respond to this.  I think you are confused.
+> 
+> SRAM is BAR number 2.  This is defining clock IDs.
+> 
+> And the reason these are commented out is that, while they
+> do exist, we explicitly do not want anyone to disable either
+> of these clocks because PCIe uses them.  This clock (and
+> reset) control is accessed via PCIe.
+> 
+> I do accept that someone might want me to simply omit
+> these commented-out definitions, and I'd be fine with
+> that.
+> 
+> But your suggestion wasn't sensible so I wanted to clear
+> that up before deleting these.
+> 
 
-On Tue Sep 22, 2026 at 6:22 AM CEST, zl020895 wrote:
-> gpio-regmap can already attach a domain via config.irq_domain or
-> regmap_irq_chip. PL061 cannot use regmap-irq: type is programmed in
-> IS/IBE/IEV (including both-edge) and the parent IRQ is an AMBA chained
-> demux.
->
-> In v8 the custom linear domain used the gpio_chip as host_data, and
-> that chip only exists after gpio_regmap_register(), so I added
-> gpio_regmap_get_chip().
->
-> I can drop the helper: create the domain with the PL061 private data as
-> host_data, pass it in config.irq_domain, and let gpio-regmap register
-> it. I will do that in the next revision if you agree.
+Indices should be continuous, there is no point in having holes in
+numbering.
 
-Yes please. You shouldn't need any of gpio_chip members.
-
--michael
-
-> At 2026-09-21 20:48:44, "Michael Walle" <michael@walle.cc> wrote:
->>On Tue Sep 15, 2026 at 1:15 PM CEST, Long Zhao via B4 Relay wrote:
->>> From: Long Zhao <longzhao@ambarella.com>
->>>
->>> Let drivers that implement a custom irqchip retrieve the gpio_chip
->>> after registration. Attach a caller-provided irq_domain only when it
->>> is present.
->>
->>So why do we need this? Why can't gpio-regmap register the
->>irq_domain?
->>
->>-michael
-
-
---66e4aab55ce6c10e65aac407de2f18ed76c4de06773e522fce8193b51364
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iKcEABMJAC8WIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCarN4PREcbWljaGFlbEB3
-YWxsZS5jYwAKCRASJzzuPgIf+EqJAYCURfSHF28/wy7zcS9T5rqwQKdtr6Vi+fm6
-FKEPiUj0ESQUaJWITdtLmMhXUYTwU4sBgKrlZbW1f9Nl/NmxVqpSp5Yv9aq5pAEe
-oRACiSMyH2ZwhTvQKxQkjpEcDZZyx4q0Fw==
-=oMt8
------END PGP SIGNATURE-----
-
---66e4aab55ce6c10e65aac407de2f18ed76c4de06773e522fce8193b51364--
+Best regards,
+Krzysztof
