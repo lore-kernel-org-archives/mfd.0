@@ -1,74 +1,93 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00F873ED128
-	for <mfd@lists.linux.dev>; Wed, 23 Sep 2026 17:28:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2A373E63B0;
+	Wed, 23 Sep 2026 17:44:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790184492; cv=none; b=nrYeg0Tg9LhhIdqdu186dwr99XmS8WpQH4CgD4xsZglo3rJ3DqTJfwp1Jj4rnjQvX765h7tZrQFNOKAu8s76k0rvdmHnyYDeV8qbQjQMj0REj1XTh9AhKboF81OcGfqKZ0eQupOWJ8UrY/GflJMwLR5wwFcoS1YTfWfcoOkqGt4=
+	t=1790185488; cv=none; b=VY1T4c1gIidyR3ARza2Tj1X0AnjHJN1BU/qnqj9g4oimPRu9RWFjNVU3Ep7eq/kCmsxGr7gSksI+zI6qoVe/TFlbX+u5D8A1tFywri3BC5ZGsrHxbSFRCL8EBPUhLHnNELBQ+1tpjT5PRSR8jgbzRQRCyIBGRyikot+t2GgpRgs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790184492; c=relaxed/simple;
-	bh=Cc+kmMQpFSYKCu+YbHyMQJivl+pk5zH2psxS0LqXXyI=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Q+hui/UYr7SyNPC1GwwdvAlrH+fVpgItSde5E4HWwYYHt64n0/Xv/g08VbYL7BnRPCBgWHUKxuAYYEiMhB/m+JZu5RBNgVHW3kWVV21IL9lzyzP6zQyGANw8ZwG0jDvU5/f/ShFobMtRRv71MpVmBU/c3h3ps4Aq7GZ+vGxoenk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kjR1f9n7; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790185488; c=relaxed/simple;
+	bh=Jf8J2LoHC1NWfXfw+1GbvJyiZDPbgtqBHpqpN0+aNE8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=QTR27oviCb7XdRHsefPOjytbsSLc1XN7JyJoY9vOgWNvcQY3Q56Q4lXni3ylwaE+6CPNWe0mBrm/6M+rzsntj+3fhtseOGNjsQvsGqi/kWFANSQNSowaJzvyj4TrpA9FBAhXuxNZH/nU4ECgl2KwEj1V2gznGwlOcviunPRXX5Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cCbge/am; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kjR1f9n7"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8DEB61F00899
-	for <mfd@lists.linux.dev>; Wed, 23 Sep 2026 17:28:10 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cCbge/am"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34AE41F000FF;
+	Wed, 23 Sep 2026 17:44:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790184490;
-	bh=Cc+kmMQpFSYKCu+YbHyMQJivl+pk5zH2psxS0LqXXyI=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=kjR1f9n7Bnbpwah7NKquK/z3KO0YjB6mEhI7NuwSq8Ys+Ltz+qau7l2eKLB6WH8rW
-	 apnLloQsPeIV8MalvygclXsageLvIZ/FHCDScYdppYsGw2QIqewHfQBJmLMDCLUkf3
-	 8hjDhFSvjb4ykJO82FiyJVEop+jbZ4tLZhqFCCnk7SlOd4w1c6x8c714qd5D9ncwIm
-	 R5TPSnLW2n6NsbNdvLmxaDOWvU9g3VFMc7hyupHT8bdcyfXxy1+BXKe3H2eX9Fb/HO
-	 aeaVp8YLS21DnK1BCOkQ4sAm0XxI8iB2/pTl8sJHr/J4jDGHQv4VUiN0L1ak85uRfL
-	 q73G4DL3mn5hQ==
-Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b5e4f13d7aso1513045e87.1
-        for <mfd@lists.linux.dev>; Wed, 23 Sep 2026 10:28:10 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBy68Tux/V5Q5TmpzboEFabIWDqrtDFPZjGkRGB8trvJ3cDMRDmuyfgqrGfMaxhUgb8ir9Y=@lists.linux.dev
-X-Gm-Message-State: AFuF++lVNBPkCR0aULB4t8QTba0UTGn67mqGLfkO3OPTrbr6WkGaUURn
-	w0XIHgvwONEUgnX00EyvisBPiQ5cnj40Y1WJciE+w9HZd1OZ/5W4I4cN1I3FvnDtGi/jVl9zQHF
-	5QDpRfzTCmitLtEuGMd3YTqQMEGDvxTY=
-X-Received: by 2002:a05:6512:3d0d:b0:5b8:b419:c8ad with SMTP id
- 2adb3069b0e04-5b8d8979194mr1060604e87.17.1790184489272; Wed, 23 Sep 2026
- 10:28:09 -0700 (PDT)
+	s=k20260515; t=1790185486;
+	bh=Jf8J2LoHC1NWfXfw+1GbvJyiZDPbgtqBHpqpN0+aNE8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=cCbge/am5sVz/tGOgcSblRgqLhKxsq7FsyfcuQnw5VTXcfZMBcxapo8lpQGre3MGa
+	 nYTJcqyPaS8/+/dYyYfmVnKO5IECrmIzSL0SwSNJRiA6h9GgSoy2hR80ALGFdnz3dZ
+	 xIpmqLi+sV1LrH9D/KFi7ZAJ/0z67kB16X4p02YWX5Rdx31WjRIbyjhCM1hSDdg78c
+	 jyien2Tmb/6jGS8ixwJPsq3OqkP8L7Fq8jEkL6VmLSuRmLITTop5AaDrAtinv+8+5j
+	 V7ZiPO+ZE7NKmDL5reOHi4XbUxasdX7w6+t2/c0dZuQAnTpt9yjxwTE1ZDmUZg6ZKw
+	 M3BFDdO9dOPcA==
+Received: by finisterre.sirena.org.uk (Postfix, from userid 1000)
+	id E17F71AC573C; Wed, 23 Sep 2026 18:44:42 +0100 (BST)
+Date: Wed, 23 Sep 2026 19:44:42 +0200
+From: Mark Brown <broonie@kernel.org>
+To: Bhargav Joshi <j.bhargav.u@gmail.com>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Thierry Reding <thierry.reding@avionic-design.de>,
+	Lee Jones <lee@kernel.org>,
+	Shree Ramamoorthy <s-ramamoorthy@ti.com>,
+	Thierry Reding <thierry.reding@kernel.org>,
+	Jonathan Hunter <jonathanh@nvidia.com>,
+	Dmitry Osipenko <digetx@gmail.com>,
+	Svyatoslav Ryhel <clamor95@gmail.com>,
+	Laxman Dewangan <ldewangan@nvidia.com>,
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+	goledhruva@gmail.com, m-chawdhry@ti.com, daniel.baluta@gmail.com,
+	simona.toaca@nxp.com, mfd@lists.linux.dev,
+	Thierry Reding <treding@nvidia.com>, linux-tegra@vger.kernel.org
+Subject: Re: [PATCH v3 2/4] regulator: dt-bindings:
+ nvidia,tegra-regulators-coupling: Convert to DT schema
+Message-ID: <arQQCovjYH9Y1QIS@sirena.co.uk>
+References: <20260919-ti-tps6586x-v3-0-63dd240f4684@gmail.com>
+ <20260919-ti-tps6586x-v3-2-63dd240f4684@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260918-ux500-simple-sound-v2-0-88d29416e3c3@kernel.org> <20260918-ux500-simple-sound-v2-6-88d29416e3c3@kernel.org>
-In-Reply-To: <20260918-ux500-simple-sound-v2-6-88d29416e3c3@kernel.org>
-From: Linus Walleij <linusw@kernel.org>
-Date: Wed, 23 Sep 2026 19:27:55 +0200
-X-Gmail-Original-Message-ID: <CAD++jL=yLFiYcWsRF6eR4a8o=27wcmj4nxa8jirDaOfR3JBHkw@mail.gmail.com>
-X-Gm-Features: AclHuK_-UVmPGIePjUjF3dX8xYRAyOgnfC7Kt7jTimuuvtdsVniy9gpSsWuCuCg
-Message-ID: <CAD++jL=yLFiYcWsRF6eR4a8o=27wcmj4nxa8jirDaOfR3JBHkw@mail.gmail.com>
-Subject: Re: [PATCH v2 6/9] ARM: dts: ux500: Add sound DAI provider cells
-To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Lee Jones <lee@kernel.org>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
-Cc: linux-sound@vger.kernel.org, devicetree@vger.kernel.org, 
-	mfd@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="CEFCVUg3l04Mhh2b"
+Content-Disposition: inline
+In-Reply-To: <20260919-ti-tps6586x-v3-2-63dd240f4684@gmail.com>
+X-Cookie: I've been there.
 
-On Fri, Sep 18, 2026 at 12:51=E2=80=AFAM Linus Walleij <linusw@kernel.org> =
-wrote:
 
-> Describe each MSP as a single-DAI provider and the AB8500 codec as a
-> two-DAI provider. This lets audio graph endpoints resolve the MSP DAI
-> and select the codec playback or capture interface by port number.
->
-> Assisted-by: LLM
-> Signed-off-by: Linus Walleij <linusw@kernel.org>
+--CEFCVUg3l04Mhh2b
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Assuming Lee will apply the ACKed binding patch so I applied this and
-the rest of the DTS patches to the ux500 DTS branch for v7.4.
+On Sat, Sep 19, 2026 at 02:31:23AM +0530, Bhargav Joshi wrote:
+> Convert NVIDIA Tegra Regulators Coupling from legacy text to DT schema.
+> Set additionalProperties true as this is shared schema.
 
-Yours,
-Linus Walleij
+This and patch 3 don't apply against current code, please check and
+resend.
+
+--CEFCVUg3l04Mhh2b
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmq0EAoACgkQJNaLcl1U
+h9BexQgAhWK8GVQrDthcMcEUnKph4BAuolarj5+hqLRX5o9hZ00HcfZnJquV/GtW
+lnZnnDcfDuzoy17TRMlNzgTxIxh/c4l4VkczQS0DaQKApHOwGD1ZXFPPKP249Hie
+b0K+cbwjUjYFCS/8wqY1JTiJLpcCEkXR5iQj2RcgpDA0PJ0S/ZvqzsMDdzk81Ig0
+VRWippWxEi0a0aMSpzjaJG338Ls+wZshv78yxWv5QVxficl0gXZxu3huLrcy0gBI
+ESiDadTZ7bFfOprf0I/0CnEYvn8ImBr4KO2EidtXXwKcq43SCm6mz4yCdzX+viLs
+HhgwgtqE2rZaXSbv2ELfTEDUk71QgQ==
+=JbS0
+-----END PGP SIGNATURE-----
+
+--CEFCVUg3l04Mhh2b--
