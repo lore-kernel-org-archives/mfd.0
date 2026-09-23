@@ -1,165 +1,308 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0FB53F4DD2;
-	Wed, 23 Sep 2026 07:25:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8B05456291
+	for <mfd@lists.linux.dev>; Wed, 23 Sep 2026 07:44:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.3
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790148345; cv=none; b=u7V4cTtlBheSrrK0atNs5lzLjiikCk0JisA5657oaCUhJ0+FH/KZpOP+ZaLMd7/PKaweh7JQqMYItEo0tzJDG5E/0DgeD51MFGMysuk1/g7rJ8TCX/chN+3Zi9hwsGwcsLzgLbF5MGx+cP5PId5YIsr7FpQRTqRJJ7bbxX9hUiU=
+	t=1790149464; cv=none; b=YYsQyrvqzEryKddg8GK6R8CDv6FtRhkIzlbY44sX24T845xrt1HKgc+ZmYo5+cwx9Ak3i+YrbCgwJFmgj4+gH2rRsC00zQQ5tHdhOJU7snQEHrHFYYMOkqO6qbwGYHSGK/Pp4m1krsGgug+gWDmvRrmTcMSmCexVMoW2Q6ZgHoQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790148345; c=relaxed/simple;
-	bh=gjKAhENt8OS/KqIAW7SARRbkKsR3HmNYD+TAopC3l9k=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=in3DrK/8/fOZ3k+eXJLI8+SF0jyx0NvRJs4blqzedc83eoT+32jfZoTSJEpWJzbOiND/5mremyOcGzYYZActNvywYXLfPQIqvvV/MCDQngWGM60sGMI2567MroCqymzxjk7y2atUxFI+5YEilWRugn0VSKXDRbomZ4K1hgQdQ/g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PnTvaGXU; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790149464; c=relaxed/simple;
+	bh=/2gTemkZVCx765RzD8+vg/si9R+RsMdUhgwTOizrnsU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=BtsG7EkRNueqU2ZfLkiRCEhell6oVh32yMzJgMDfX8Wupv4UR+9MtrMDIUYWHSKkECYUcT/sViGrMbPejvFjtRQ3DYdgldU1Nc9eR0etd7AvoQEmIV64VUCzN27AMxSZRlKEYmkRW+DHdpWgqFfJpqysUgwr+fOWkOhE/vsHJak=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=Krr3MOtI; arc=none smtp.client-ip=220.197.31.3
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PnTvaGXU"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1E5C91F000FF;
-	Wed, 23 Sep 2026 07:25:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790148343;
-	bh=nHU+klMl+6fj4IxcKpc7ReZXkRGsZ/M7dfsPEKrCLKE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=PnTvaGXUEepbUNJGYgo3QOK4ATe+VF/C8uPkFpcODBJG2+8AQajxzrLP9gSiT1cpN
-	 oqdoJh4cY7kJEcr2m69K9E87Y8ff2qQOhA73C5DmXfBv7i1WF7u06LJ3tKG17/ycaS
-	 wPSA9YdoCgh9YctF48BD1ljFpgbQ5ynzDGb3B4KWCZdC1eJ3v2Z4hzONnPMSLMC0nd
-	 38OjgtZXzVh4ccWsjkiIR6Fm8BGgCsYPDMyKR8FcEzjpv8mj8TlWc2V7svKF/hWGGP
-	 uyAFHMeWZk2IJPrfxD2ODwhF6dqj0o7YHfc7uIuwSogMPlgqR3nCoNjVX1Qhw7IVam
-	 VD5SqOjKsZI/g==
-Message-ID: <fbeac5ba-a28d-4d34-8d23-4946aef515ea@kernel.org>
-Date: Wed, 23 Sep 2026 09:25:34 +0200
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="Krr3MOtI"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=QZ
+	2CklEPM41fBCBH4wMrs2bqusIBHz8n45dNOsqwuuM=; b=Krr3MOtISiN8CanmkK
+	MogyM2xLXQg8yg6bMaaBnZRMlfvyT8Gbf4Ff9krgL4Eot0MQT7kVDnstiTF4jz4l
+	9brbj4QCrPuZ7+DV+oQE1cLn+eNaTyuGLpTcapDE/zGzAmr9ofi+fcuNMhBpVrYl
+	ZoWDctCWf5w9iivdb0/hrBET8=
+Received: from chaosheng-ASUS-TUF-Gaming-F16-FX607JV-FX607JV.lan (unknown [])
+	by gzsmtp5 (Coremail) with SMTP id QCgvCgB3eHMzg7NqoFfKAw--.49100S2;
+	Wed, 23 Sep 2026 15:43:49 +0800 (CST)
+From: Quchaosheng <quchaosheng000406@163.com>
+To: Lee Jones <lee@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Heiko Stuebner <heiko@sntech.de>
+Cc: Chris Zhong <zyw@rock-chips.com>,
+	Zhang Qing <zhangqing@rock-chips.com>,
+	mfd@lists.linux.dev,
+	devicetree@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-rockchip@lists.infradead.org,
+	linux-kernel@vger.kernel.org,
+	quchaosheng000406@163.com
+Subject: [PATCH] dt-bindings: mfd: rockchip,rk805: Convert pinctrl to DT schema
+Date: Wed, 23 Sep 2026 15:43:37 +0800
+Message-ID: <20260923074337.575122-1-quchaosheng000406@163.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] dt-bindings: mfd: introduce the TC9564 config syscon
-To: Alex Elder <elder@riscstar.com>
-Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
- robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org,
- andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
- kees@kernel.org, gustavoars@kernel.org, p.zabel@pengutronix.de,
- daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
- lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org,
- devicetree@vger.kernel.org, mfd@lists.linux.dev,
- linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20260918165234.687224-1-elder@riscstar.com>
- <20260918165234.687224-2-elder@riscstar.com>
- <20260920-fiery-fanatic-manticore-6abf0a@quoll>
- <85b0e7de-e4a8-4e08-b801-a9664d366e1a@riscstar.com>
- <7e32063f-f1a4-4259-96c9-fcbdd25c7f2f@riscstar.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <7e32063f-f1a4-4259-96c9-fcbdd25c7f2f@riscstar.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:QCgvCgB3eHMzg7NqoFfKAw--.49100S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxuw47tr47AF45GF47CF4fAFb_yoWfGr47pF
+	ZxAF4fJrn2gF43uw48tw18Cw1fuan7Ar4UC3WUKryIqan8uryjyr13Kw1rZFyDGFW0va4a
+	vr15Wr98XwnrC3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0JUj2NZUUUUU=
+X-CM-SenderInfo: xtxfxtprvkv0bjqqikiqw6il2tof0z/xtbC5BZ16mqzgzZcmwAA3G
 
-On 22/09/2026 23:02, Alex Elder wrote:
-> On 9/21/26 4:46 PM, Alex Elder wrote:
->>> I also have doubts that this is needed - I see no updates to the misc
->>> binding, which would be referencing it. But then another point would be,
->>> that you do not need separate child node, which has no properties.
-> 
-> Krzysztof, I've done some additional work on this based on
-> your feedback.
-> 
-> I think you are correct that there is no need to define
-> this as a special syscon with its own compatible string.
-> 
-> Instead, I can simply define a simple syscon with a label:
-> 
->          tc9564_config_syscon0: syscon@0 {
->                  compatible = "syscon";
+pinctrl-rk805.txt describes the pinmux controller that is part of the
+Rockchip RK805 PMIC. The PMIC itself is already described by
+rockchip,rk805.yaml, so the pinmux part belongs there as well: the
+pinctrl node is a child of the PMIC node, not a separate device.
 
-I never proposed anything like that. I asked to drop simple-mfd.
+Fold the pinmux description into rockchip,rk805.yaml and drop the
+standalone text binding.
 
->                  reg = <0x0 0x2000>;
->          };
-> 
-> And then have the devices that need to use it, refer to
-> its label using a phandle:
-> 
->          tc9564_clock0: clock@1004 {
->                  compatible = "toshiba,tc9564-clock";
->                  toshiba,config-syscon = <&tc9564_config_syscon0>;
->                  #clock-cells = <1>;
->                  #reset-cells = <1>;
->          };
-> 
->          tc9564_emac0: ethernet@40000 {
->                  compatible = "toshiba,tc9564-xgmac";
->                  reg = <0x40000 0x8000>;
->                  toshiba,config-syscon = <&tc9564_config_syscon0 0x1070>;
-> 		. . .
-> 	};
-> 
->          tc9564_emac1: ethernet@48000 {
->                  compatible = "toshiba,tc9564-xgmac";
->                  reg = <0x48000 0x8000>;
->                  toshiba,config-syscon = <&tc9564_config_syscon0 0x1074>;
-> 		. . .
-> 	};
-> 
-> That simplifies things a bit, and requires no devicetree binding.
-> 
-> If you think this is incorrect, please let me know, otherwise it
-> is the direction I plan to go with the next version of this
-> series.
-> 
+While doing so, add the missing child node schema. The rockchip,rk805.yaml
+schema ends with 'additionalProperties: false' but did not describe the pin
+configuration child nodes at all, so a valid pinmux node like the one shown
+in pinctrl-rk805.txt was rejected:
 
-I think nothing behind PCI EP should be described in DT, because
-everything is internal to the device and implied by compatible (or
-vid/pid). We do describe internals of devices in DT usually for complex
-devices (like some display blocks with multiple subblocks) or when they
-are used outside of that device. That's why I asked how are all these
-clocks and resets exposed to the host. If the syscon is used only by the
-device itself, I don't quite get the benefits of describing it in DT.
+    pmic@18 (rockchip,rk805): 'rk805-default-pins' does not match any of
+    the regexes: '^pinctrl-[0-9]+$'
 
-Best regards,
-Krzysztof
+The pin configuration nodes require 'pins'; without it a node that names
+no pin is accepted silently, while the text binding it replaces listed
+'pins' as required. The RK805 exposes two output-only GPIOs, so 'pins' is
+an enum of gpio0 and gpio1 and a typo such as "gpio2" is caught.
+
+The nodes may be direct children of the PMIC, or sit one level deeper
+inside a "pinmux" grouping node, which is the layout the example of the
+text binding used. pinctrl-bindings.txt allows the configuration nodes to
+be grandchildren of the pin controller, and the driver reaches both
+layouts: pinconf_generic_dt_node_to_map() parses the referenced node and
+then walks its children. The example shows both.
+
+The example also regains the gpio-controller and #gpio-cells lines that the
+example of the text binding had.
+
+Reported-by: Sashiko <sashiko-bot@kernel.org>
+Link: https://sashiko.dev/#/patchset/20260923034245.396417-1-quchaosheng000406@163.com?part=1
+Link: https://sashiko.dev/#/patchset/20260923062746.516666-1-quchaosheng000406@163.com?part=1
+Assisted-by: LLM
+Signed-off-by: Quchaosheng <quchaosheng000406@163.com>
+---
+Changes in v4:
+- Describe the pin configuration nodes both as direct children and inside a
+  "pinmux" grouping node. Only the flat form was described, so the layout
+  used by the example of the text binding this replaces was still rejected:
+
+    pmic@18 (rockchip,rk805): 'pinmux' does not match any of the regexes:
+      '-pins$', '^pinctrl-[0-9]+$'
+
+  The nodes are now one definition referenced from both places, and the
+  example shows the flat node and a "pinmux" node holding one.
+- Name the binding in the summary. dt-bindings: mfd: <binding>: is the form
+  Documentation/devicetree/bindings/submitting-patches.rst asks for on
+  conversions, and 364 of the 385 dt-bindings: mfd: commits in the tree name
+  a binding there.
+
+Changes in v3:
+- Capitalize the summary phrase. dt-bindings: mfd: titles are capitalized
+  after the subsystem prefix (Add 61, Convert 20 against convert 6).
+- Add gpio-controller and #gpio-cells to the example, which the text
+  binding's example had and the conversion dropped.
+- gpio-controller and #gpio-cells are deliberately *not* added to the
+  required list. rv1108-evb, rv1108-elgin-r1 and rk3328-a1 do not set
+  them, so requiring them breaks three in-tree boards:
+
+    rv1108-evb.dtb: pmic@18 (rockchip,rk805): 'gpio-controller' is a required property
+
+  No rk8xx PMIC schema requires the pair, and gpio.yaml already enforces
+  that they appear together ("'#gpio-cells' is a dependency of
+  'gpio-controller'"). The pinctrl driver calls devm_gpiochip_add_data()
+  unconditionally, so the property is not what makes the GPIO controller
+  work either.
+
+Changes in v2:
+- Require 'pins' in the pin configuration nodes. Without it a node that
+  names no pin passes validation, while the text binding listed 'pins'
+  as required.
+---
+ .../bindings/mfd/rockchip,rk805.yaml          | 65 ++++++++++++++++++-
+ .../bindings/pinctrl/pinctrl-rk805.txt        | 63 ------------------
+ 2 files changed, 64 insertions(+), 64 deletions(-)
+ delete mode 100644 Documentation/devicetree/bindings/pinctrl/pinctrl-rk805.txt
+
+diff --git a/Documentation/devicetree/bindings/mfd/rockchip,rk805.yaml b/Documentation/devicetree/bindings/mfd/rockchip,rk805.yaml
+index da2391530c16..aafc80212c48 100644
+--- a/Documentation/devicetree/bindings/mfd/rockchip,rk805.yaml
++++ b/Documentation/devicetree/bindings/mfd/rockchip,rk805.yaml
+@@ -77,6 +77,21 @@ properties:
+     description:
+       The input supply for LDO_REG3.
+ 
++  # pinctrl-bindings.txt allows the pin configuration nodes to be grandchildren
++  # of the pin controller, and the text binding this replaces used that layout:
++  # a "pinmux" node holding the nodes that carry "pins". The driver reaches both
++  # layouts, because pinconf_generic_dt_node_to_map() parses the referenced node
++  # and then walks its children.
++  pinmux:
++    type: object
++    additionalProperties: false
++    patternProperties:
++      '^.+$':
++        if:
++          type: object
++        then:
++          $ref: '#/$defs/rk805-pin-config'
++
+   regulators:
+     type: object
+     patternProperties:
+@@ -86,6 +101,38 @@ properties:
+         unevaluatedProperties: false
+     unevaluatedProperties: false
+ 
++$defs:
++  rk805-pin-config:
++    type: object
++    description:
++      The RK805 has two output-only GPIOs which can be muxed to the GPIO
++      function and driven low or high at boot.
++    additionalProperties: false
++
++    properties:
++      pins:
++        description:
++          List of GPIO pins to configure.
++        items:
++          enum: [gpio0, gpio1]
++        minItems: 1
++        maxItems: 2
++
++      function:
++        description:
++          The RK805 only supports the GPIO function.
++        enum: [gpio]
++
++      output-low: true
++      output-high: true
++
++    required:
++      - pins
++
++patternProperties:
++  '-pins$':
++    $ref: '#/$defs/rk805-pin-config'
++
+ allOf:
+   - if:
+       properties:
+@@ -125,9 +172,11 @@ examples:
+             interrupt-parent = <&gpio2>;
+             interrupts = <RK_PA6 IRQ_TYPE_LEVEL_LOW>;
+             pinctrl-names = "default";
+-            pinctrl-0 = <&pmic_int_l>;
++            pinctrl-0 = <&pmic_int_l>, <&rk805_default>, <&rk805_grouped>;
+             rockchip,system-power-controller;
+             wakeup-source;
++            gpio-controller;
++            #gpio-cells = <2>;
+             #clock-cells = <0>;
+ 
+             vcc1-supply = <&vcc_sys>;
+@@ -137,6 +186,20 @@ examples:
+             vcc5-supply = <&vcc_io>;
+             vcc6-supply = <&vcc_io>;
+ 
++            rk805_default: rk805-default-pins {
++                pins = "gpio0";
++                function = "gpio";
++                output-high;
++            };
++
++            rk805_grouped: pinmux {
++                gpio01 {
++                    pins = "gpio1";
++                    function = "gpio";
++                    output-low;
++                };
++            };
++
+             regulators {
+                 vdd_logic: DCDC_REG1 {
+                     regulator-name = "vdd_logic";
+diff --git a/Documentation/devicetree/bindings/pinctrl/pinctrl-rk805.txt b/Documentation/devicetree/bindings/pinctrl/pinctrl-rk805.txt
+deleted file mode 100644
+index 6ad49e51c72e..000000000000
+--- a/Documentation/devicetree/bindings/pinctrl/pinctrl-rk805.txt
++++ /dev/null
+@@ -1,63 +0,0 @@
+-Pincontrol driver for RK805 Power management IC.
+-
+-RK805 has 2 pins which can be configured as GPIO output only.
+-
+-Please refer file <devicetree/bindings/pinctrl/pinctrl-bindings.txt>
+-for details of the common pinctrl bindings used by client devices,
+-including the meaning of the phrase "pin configuration node".
+-
+-Optional Pinmux properties:
+---------------------------
+-Following properties are required if default setting of pins are required
+-at boot.
+-- pinctrl-names: A pinctrl state named per <pinctrl-bindings.txt>.
+-- pinctrl[0...n]: Properties to contain the phandle for pinctrl states per
+-		<pinctrl-bindings.txt>.
+-
+-The pin configurations are defined as child of the pinctrl states node. Each
+-sub-node have following properties:
+-
+-Required properties:
+-------------------
+-- #gpio-cells: Should be two. The first cell is the pin number and the
+-  second is the GPIO flags.
+-
+-- gpio-controller: Marks the device node as a GPIO controller.
+-
+-- pins: List of pins. Valid values of pins properties are: gpio0, gpio1.
+-
+-First 2 properties must be added in the RK805 PMIC node, documented in
+-Documentation/devicetree/bindings/mfd/rockchip,rk808.yaml
+-
+-Optional properties:
+--------------------
+-Following are optional properties defined as pinmux DT binding document
+-<pinctrl-bindings.txt>. Absence of properties will leave the configuration
+-on default.
+-	function,
+-	output-low,
+-	output-high.
+-
+-Valid values for function properties are: gpio.
+-
+-There are also not customised properties for any GPIO.
+-
+-Example:
+---------
+-rk805: rk805@18 {
+-	compatible = "rockchip,rk805";
+-	...
+-	gpio-controller;
+-	#gpio-cells = <2>;
+-
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pmic_int_l>, <&rk805_default>;
+-
+-	rk805_default: pinmux {
+-		gpio01 {
+-			pins = "gpio0", "gpio1";
+-			function = "gpio";
+-			output-high;
+-		};
+-	};
+-};
+-- 
+2.43.0
+
