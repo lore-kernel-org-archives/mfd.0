@@ -1,110 +1,95 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB79D476CEC
-	for <mfd@lists.linux.dev>; Thu, 24 Sep 2026 13:41:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.13
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34F3537F324;
+	Thu, 24 Sep 2026 14:03:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790257282; cv=none; b=GQA2QCFCAd/M37ivDutI2hj6eyjdA4EMUbyuoXmceTdSxM5e14gxA7nGKRi5bGAkQ+NjjN1//jvI+lPsgr71NznpXvWoLcS8/pZIE2Kem3QzkZO3qcVOUCq1VxADbaDXJKAM8PPEKrU8KhXqt3aWBBecezH1egj2terz7cJI454=
+	t=1790258586; cv=none; b=lE7QXs+1bT5msVvJaJZEbOrAMFUvb06W8uOlZ8pF/Ryi4RkHiI74ifoZ999kjY77tQqZ5WcitBc5U2CJE6AKQWPHtjdGI6E/PlRSv+janMHEbaozG6bQo1tvCw/seio3fZH3EjiyPw7n6NURANI+7jq6CB7/wv6ODK/qpxJDGfU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790257282; c=relaxed/simple;
-	bh=PFdeZvRwJ03GC0MI8yKsz1xucQfg/jVwJ3DLdZiHs5E=;
+	s=arc-20240116; t=1790258586; c=relaxed/simple;
+	bh=2lKYLt6kBnBNyZdKzWnNbey4gymvXeAKbO6AN2n1VoI=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=fnNNCVIozBALftiy5KJorGlLShX2dMfm14Fu14Rsy96fabZagj/AhJYNfV4uMsF/6Qw1mCSJFS/3eQSF/R0727UVJDhhGVQIs+9d5mwyvv0qzwYZfI0W8jAbUiC/+bcXZPjgXV/hyVsIpTYRbwLrvsFjNrA6kjgNj2hZZ9VoFM8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=n74Qdsmr; arc=none smtp.client-ip=192.198.163.13
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=eZFz7vgdU7J+23xuEI2CoA2Hbe+4To728HT+84q3goATXqf2OKuTf1h85U/R+NRR6w5+HacuJxPWRn83PkPmV9UerVIcrENZGAaYugOA31Mv1MKW65p7fHUGTdbvuhP5kXjGw8ehKxfRlOHfuJzPNbALZ/edPqeVPQxavdriB5I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NHDNnIya; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="n74Qdsmr"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1790257279; x=1821793279;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=PFdeZvRwJ03GC0MI8yKsz1xucQfg/jVwJ3DLdZiHs5E=;
-  b=n74Qdsmr9telr3TDhy8D7HPXx+onMyprrFIl8dI5YHywNPMzXo8vFbLj
-   XlKrjYSJ3LRWzIBUNvUkEjS6ZzK6YiPOflHgM7S5Qzw1B7wcGVfc5WLxF
-   gdDMhX0oEJ8wAJGWV6AJhj2ht4eMpruwNEsKQPSWgpIiIVCNrmaUtLB/H
-   Wo6kfdqBSxO8hPHkDv/75QQuMDBeZMs1YvAfs7pLDP6KwAZ7RhGHH7mAo
-   hzTpIzRJauM8qvv3vZ5ShL2FZi2eBosKvac4VJ1Ys87oIAGNS2EIanLSa
-   V3fOzZ2M97T/CCANmLg6wANWZZZGWf+HkV++BOUv817bCqrUAw4QEUCcZ
-   g==;
-X-CSE-ConnectionGUID: 2s7GKfwVS46s1gNlebiLwg==
-X-CSE-MsgGUID: FEb7EHAhQEC75ZnhcKWc7Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11914"; a="93526125"
-X-IronPort-AV: E=Sophos;i="6.27,120,1787036400"; 
-   d="scan'208";a="93526125"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
-  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Sep 2026 06:41:16 -0700
-X-CSE-ConnectionGUID: knjfqmmySg2aLKvheaeQwA==
-X-CSE-MsgGUID: rRbQ4xjGQI6NLFU44M0APg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,120,1787036400"; 
-   d="scan'208";a="311944280"
-Received: from black.igk.intel.com ([10.91.253.5])
-  by orviesa001.jf.intel.com with ESMTP; 24 Sep 2026 06:41:14 -0700
-Received: by black.igk.intel.com (Postfix, from userid 1001)
-	id CFF7F99; Thu, 24 Sep 2026 15:41:13 +0200 (CEST)
-Date: Thu, 24 Sep 2026 15:41:13 +0200
-From: Mika Westerberg <mika.westerberg@linux.intel.com>
-To: Guangshuo Li <lgs201920130244@gmail.com>
-Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Lee Jones <lee@kernel.org>, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Subject: Re: [PATCH] mfd: intel-lpss: fix iDMA device leak on probe failure
-Message-ID: <20260924134113.GQ106095@black.igk.intel.com>
-References: <20260921104058.353748-1-lgs201920130244@gmail.com>
- <20260921110512.GS106095@black.igk.intel.com>
- <CANUHTR9gA-mKn8Y496Pty4_Fhu3BSSyhXWrmiod1WvuVdQjkag@mail.gmail.com>
- <arJ0pDlXpdlsF0sT@ashevche-desk.local>
- <20260922123315.GF106095@black.igk.intel.com>
- <CANUHTR_Su1KxOeB2fJDwzVeyW4WpnWuzTYm=6Yz4z12Pr6GugQ@mail.gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NHDNnIya"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4FE941F000FF;
+	Thu, 24 Sep 2026 14:03:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790258584;
+	bh=bT2hyD58yE4Bwij0cU1re8RgfUx2xVSwEEVdr4Sr2xA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=NHDNnIya57yXo3X+BaazR/pTsRnhC+WttCrtop18ZnR9S2t7scKCsRUDBLpiV9PVE
+	 JHRBYOW6HhuZqxI+c3QW2eIpFx/MYltDOyeeJI4dzQE/a8sr5OuV4Tg8f8JXjBmm/K
+	 EtieBZERX+mbrOiI3DVrHDXHs5CkUKbdFVUfCzB8AUYMy9qFcBzfxnmI4Gc0YAhu9o
+	 r85jde0tiwPXT2OjsmalI5bVKcQ4AncpNyccJdIsNDcm/BHA7FSY4sZvjDXUPlYWZc
+	 7xg0ZHgrS3zi502mSAQMNwbw2kL/CnU3biZRkV2LIhaRNHr8yHnvEIzcremPYL19lU
+	 thZGstq8fB/aQ==
+Date: Thu, 24 Sep 2026 15:03:00 +0100
+From: Lee Jones <lee@kernel.org>
+To: "Rob Herring (Arm)" <robh@kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, linux-kernel@vger.kernel.org,
+	mfd@lists.linux.dev, devicetree@vger.kernel.org
+Subject: Re: [PATCH v2] dt-bindings: mfd: hisilicon: Fix Hi6421 SPMI
+ compatible
+Message-ID: <20260924140300.GE453446@google.com>
+References: <20260923191526.2206628-1-robh@kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CANUHTR_Su1KxOeB2fJDwzVeyW4WpnWuzTYm=6Yz4z12Pr6GugQ@mail.gmail.com>
+In-Reply-To: <20260923191526.2206628-1-robh@kernel.org>
 
-On Thu, Sep 24, 2026 at 08:00:29PM +0800, Guangshuo Li wrote:
-> Thanks Andy and Mika.
-> 
-> On Tue, 22 Sept 2026 at 20:33, Mika Westerberg
-> <mika.westerberg@linux.intel.com> wrote:
-> >
-> > On Tue, Sep 22, 2026 at 03:29:24PM +0300, Andy Shevchenko wrote:
-> > > On Tue, Sep 22, 2026 at 03:59:32PM +0800, Guangshuo Li wrote:
-> > > > On Mon, 21 Sept 2026 at 19:05, Mika Westerberg
-> > > > <mika.westerberg@linux.intel.com> wrote:
-> > > > > On Mon, Sep 21, 2026 at 06:40:58PM +0800, Guangshuo Li wrote:
-> > >
-> > > > > I think this could use devm_mfd_add_devices() instead.
-> > > > >
-> > > > > > The issue was identified by a static analysis tool I developed and
-> > > > > > confirmed by manual review.
-> > >
-> > > > Do you mean converting both MFD registrations to devm_mfd_add_devices()
-> > > > and dropping the explicit mfd_remove_devices() from the remove path, like
-> > > > this?
-> > >
-> > > Won't work properly. The rule of thumb, it should be no 'goto' after devm_*() call.
-> >
-> > hmm, isn't the unwind done in driver core and has nothing to do with goto?
-> > Maybe things have changed since I last time looked? ;-)
-> 
-> devm_mfd_add_devices() would remove the children when the parent
-> device's devres is released after probe returns an error. However, the
-> current error path tears down the debugfs, LTR, clock, and IDA state
-> before returning, while intel_lpss_remove() removes the MFD children
-> before those resources.
-> 
-> Given that ordering, would keeping mfd_add_devices() and adding
-> mfd_remove_devices() at err_remove_ltr, as in the original patch, be
-> preferable here?
+On Wed, 23 Sep 2026, Rob Herring (Arm) wrote:
 
-Yes I agree,
+> Use the hisilicon,hi6421-spmi compatible documented by the in-tree DTS
+> and matched by the Hi6421 SPMI PMIC driver.
+> 
+> Assisted-by: LLM
+> Fixes: dee8a4e807dc ("dt-bindings: mfd: Convert hisilicon,hi6421-pmic to DT schema")
 
-Acked-by: Mika Westerberg <mika.westerberg@linux.intel.com>
+What is this commit?  I don't see it anywhere.
+
+> Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
+> ---
+> v2:
+>  - Drop "gpios" addition.
+> ---
+>  .../devicetree/bindings/mfd/hisilicon,hi6421-spmi-pmic.yaml   | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/Documentation/devicetree/bindings/mfd/hisilicon,hi6421-spmi-pmic.yaml b/Documentation/devicetree/bindings/mfd/hisilicon,hi6421-spmi-pmic.yaml
+> index 6a824351834e..0dd37c40eeff 100644
+> --- a/Documentation/devicetree/bindings/mfd/hisilicon,hi6421-spmi-pmic.yaml
+> +++ b/Documentation/devicetree/bindings/mfd/hisilicon,hi6421-spmi-pmic.yaml
+> @@ -24,7 +24,7 @@ properties:
+>      pattern: "pmic@[0-9a-f]"
+>  
+>    compatible:
+> -    const: hisilicon,hi6421v600-spmi
+> +    const: hisilicon,hi6421-spmi
+>  
+>    reg:
+>      maxItems: 1
+> @@ -66,7 +66,7 @@ examples:
+>          #size-cells = <0>;
+>  
+>          pmic@0 {
+> -            compatible = "hisilicon,hi6421v600-spmi";
+> +            compatible = "hisilicon,hi6421-spmi";
+>              reg = <0 SPMI_USID>;
+>  
+>              #interrupt-cells = <2>;
+> -- 
+> 2.53.0
+> 
+
+-- 
+Lee Jones
