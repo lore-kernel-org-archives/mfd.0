@@ -1,166 +1,82 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1832438484;
-	Thu, 24 Sep 2026 08:27:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08B7044C4F8;
+	Thu, 24 Sep 2026 09:44:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790238432; cv=none; b=jmxLk5Q8knCc8V98KLIgM25b1ByXYzTy+X54twhoE72RhVUinALlQWbumOI/6uo/KteQuZYj9yM374/fihFXJ34HoogN5L4OvvQuHtcROTvj+PLxgsswFbONOv6ZDMg2Il6j7SlrJvvgY4R9/Ni0ik5kyou3IEGzK9HXIFlTj7Y=
+	t=1790243073; cv=none; b=jEXvNctXObJ5dtFxCt8XWXOXaoOoGgwgqmYXL4o6ZlNR9EA6WkOnlSbRx6wtnqp0OgVDlcE3Pjn7BqhASZ/3Vmz6aklasq12uan+IltDDiBMmMXigFmH8GPd9WGOAdw3uDZEdY4v9X+HKNHCki2a3XHrrE5cBWjFvnZSRUtnh+0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790238432; c=relaxed/simple;
-	bh=/ZJPM/j3VoX/brreRRGCIoNNpvJ58Zubgs3wsdoVSp4=;
+	s=arc-20240116; t=1790243073; c=relaxed/simple;
+	bh=Bklt/lBn2Ai1XEG7ghAX6pydy5cFRHz2SINOS/FJ7gA=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=LdFCz96JEthRkNXyj1mj4XGc3ZquVnPxKTwcix2+5WJHpNFLrSV6C8l7y7B5pvVibJ0JaKg0ogB24EyFVdJFZCWU9s0BmafoWnx65CurATtzLBLlDgcav7wBliigjuFshWZynfeQX53obuKZxaxMJAEtxBeCSaYoGOFfRpun2Rw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=oCFteEh2; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=EgrtQr8/9FW2q8YtsWyCW2XDdFDn+4v15T5mCF1mKuJntVLxUG0OepCeXfSbAcH6QeBsFC8OvniVtSKzgu4knupKKu+sd8EGRvy94PK4DpsI3pUaP4MIvyJkCNQk4K2wTJ8GBjnGwdYrrt9/L301Q0yRbse1qxNCxLnAjka+QOQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I5P5deiR; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="oCFteEh2"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 109141F000FF;
-	Thu, 24 Sep 2026 08:27:07 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I5P5deiR"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0B5071F000FF;
+	Thu, 24 Sep 2026 09:44:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790238430;
-	bh=HnH+9D3+g9xSe5BhyiIPrM68xeq0CDckO2idDyxHKJA=;
+	s=k20260515; t=1790243064;
+	bh=cM6GfKjgEnG0sVqAPz+FlJCa9DHDAX4z1zJYJsuiWgc=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=oCFteEh2pew1BUXTkT/8DALQO1Q3pccGzeSjlRD+0RHTW5Ki0nlF1c5zUadWbhc8s
-	 4GDuE/nVq/rXW6X6vBFNDRiReaRJE90tg8FTd/y9RBoDcQ3LkeZBXzFO0wC7zDUsI9
-	 LYbZhUTdMz+pc8YKhC6bCmeRVxNpzKl7huq5CkJwWuOBOI1/I0NLHF0RqMKQEdckSN
-	 50+YfsKUbjZWJX4YV4WfN00WExPdQuTT6LfU/FG/KZEby+M6ztc0RKv/atWX0moXWf
-	 pLoOYZgSA2jSLlabvL+6yVwPlWGzREr374VOnRZSY5sw1kTeiHWRqU56xfN2Q7gsh6
-	 nxC9bptrHrJ7w==
-Date: Thu, 24 Sep 2026 09:27:05 +0100
+	b=I5P5deiRUq9UlqEoPBmwvvQhiP0FySIWkBF2YMwQPhp5FeXxLEkr5zi/42rn1oZbK
+	 NBl8/CgJdkw/WO6ZDDZ9X+cc7GgnoSIjCBB5G020q1kVwc2+u5rYeqBLGvi+I1f2Rz
+	 AkGobkRY4KdALUx5M7Y53/qnQyIFTlsmlKsohnprq8onB+KnZuwYmcyPI9BG6V9nEi
+	 iWRNafcPNUN/u2Y2qvE1Tcykz0Tyvyp8Um8yBJ8GxWk5m4pgqEBGPiQDwUVc+N0mXR
+	 UkVlON+RxAxVpUiVc3JLk24qyl8cVkoiatJe50DjdHwJtqCw2kYOLIHwnL+m4cfK0b
+	 HmMgITS/4Lcbg==
+Date: Thu, 24 Sep 2026 09:44:20 +0000
 From: Lee Jones <lee@kernel.org>
-To: Jerome Brunet <jbrunet@baylibre.com>
-Cc: Andre Przywara <andre.przywara@arm.com>, Rob Herring <robh@kernel.org>,
+To: Linus Walleij <linusw@kernel.org>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Chen-Yu Tsai <wens@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>, Hans de Goede <hansg@kernel.org>,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	mfd@lists.linux.dev, linux-sunxi@lists.linux.dev,
-	Sashiko <sashiko-bot@kernel.org>
-Subject: Re: [PATCH v8 2/5] mfd: axp20x-i2c: Fix i2c instantiation
-Message-ID: <20260924082705.GO3864833@google.com>
-References: <20260910-axp318-regulator-v8-0-e906a61a7f3d@baylibre.com>
- <20260910-axp318-regulator-v8-2-e906a61a7f3d@baylibre.com>
+	Conor Dooley <conor+dt@kernel.org>,
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	linux-sound@vger.kernel.org, devicetree@vger.kernel.org,
+	mfd@lists.linux.dev
+Subject: Re: [PATCH v2 6/9] ARM: dts: ux500: Add sound DAI provider cells
+Message-ID: <20260924094420.GA3849155@google.com>
+References: <20260918-ux500-simple-sound-v2-0-88d29416e3c3@kernel.org>
+ <20260918-ux500-simple-sound-v2-6-88d29416e3c3@kernel.org>
+ <CAD++jL=yLFiYcWsRF6eR4a8o=27wcmj4nxa8jirDaOfR3JBHkw@mail.gmail.com>
+ <20260924065449.GN3864833@google.com>
+ <CAD++jLnbJnENbZuXyr6uoeHioCxek6ZZes_MyWk9MowBzuMqkQ@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260910-axp318-regulator-v8-2-e906a61a7f3d@baylibre.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAD++jLnbJnENbZuXyr6uoeHioCxek6ZZes_MyWk9MowBzuMqkQ@mail.gmail.com>
 
-On Thu, 10 Sep 2026, Jerome Brunet wrote:
+On Thu, 24 Sep 2026, Linus Walleij wrote:
 
-> Apparently this device never really supported i2c instantiation via
-> sysfs, because the driver does not even look at the i2c device data,
-> which are not set. It would only probe if the device matched through DT.
+> On Thu, Sep 24, 2026 at 8:54 AM Lee Jones <lee@kernel.org> wrote:
 > 
-> Fix that for correctness, even-though it is probably useless.
-> Add the missing AXP323 while at it.
+> > On Wed, 23 Sep 2026, Linus Walleij wrote:
+> > > On Fri, Sep 18, 2026 at 12:51 AM Linus Walleij <linusw@kernel.org> wrote:
+> > >
+> > > > Describe each MSP as a single-DAI provider and the AB8500 codec as a
+> > > > two-DAI provider. This lets audio graph endpoints resolve the MSP DAI
+> > > > and select the codec playback or capture interface by port number.
+> > > >
+> > > > Assisted-by: LLM
+> > > > Signed-off-by: Linus Walleij <linusw@kernel.org>
+> > >
+> > > Assuming Lee will apply the ACKed binding patch so I applied this and
+> > > the rest of the DTS patches to the ux500 DTS branch for v7.4.
+> >
+> > Right, but it's not Acked yet, is it?  Or did I miss something?
 > 
-> Reported-by: Sashiko <sashiko-bot@kernel.org>
-> Closes: https://lore.kernel.org/r/20260717090209.2A09B1F000E9@smtp.kernel.org
-> Fixes: 41751b033aaa ("mfd: axp20x-i2c: Add i2c-ids to fix module auto-loading")
-> Acked-by: Chen-Yu Tsai <wens@kernel.org>
-> Signed-off-by: Jerome Brunet <jbrunet@baylibre.com>
-> ---
->  drivers/mfd/axp20x-i2c.c   | 24 +++++++++++++-----------
->  drivers/mfd/axp20x-rsb.c   |  1 +
->  drivers/mfd/axp20x.c       |  1 -
->  include/linux/mfd/axp20x.h |  3 +--
->  4 files changed, 15 insertions(+), 14 deletions(-)
-> 
-> diff --git a/drivers/mfd/axp20x-i2c.c b/drivers/mfd/axp20x-i2c.c
-> index 5c93136f977e..a76bec5604c4 100644
-> --- a/drivers/mfd/axp20x-i2c.c
-> +++ b/drivers/mfd/axp20x-i2c.c
-> @@ -35,6 +35,7 @@ static int axp20x_i2c_probe(struct i2c_client *i2c)
->  	axp20x->irq = i2c->irq;
->  	dev_set_drvdata(axp20x->dev, axp20x);
->  
-> +	axp20x->variant = (kernel_ulong_t)i2c_get_match_data(i2c);
+> It was ACKed under a different Subject: so I resent the patch
+> for clarity, sorry for the mess.
 
-device_get_match_data() is bus agnostic and should still work from the
-core driver.  What's the purpose of splitting it out and adding
-additional call-sites?
-
->  	ret = axp20x_match_device(axp20x);
->  	if (ret)
->  		return ret;
-> @@ -76,17 +77,18 @@ MODULE_DEVICE_TABLE(of, axp20x_i2c_of_match);
->  #endif
->  
->  static const struct i2c_device_id axp20x_i2c_id[] = {
-> -	{ "axp152" },
-> -	{ "axp192" },
-> -	{ "axp202" },
-> -	{ "axp209" },
-> -	{ "axp221" },
-> -	{ "axp223" },
-> -	{ "axp313a" },
-> -	{ "axp717" },
-> -	{ "axp803" },
-> -	{ "axp806" },
-> -	{ "axp15060" },
-> +	{ .name = "axp152",	.driver_data = AXP152_ID },
-> +	{ .name = "axp192",	.driver_data = AXP192_ID },
-> +	{ .name = "axp202",	.driver_data = AXP202_ID },
-> +	{ .name = "axp209",	.driver_data = AXP209_ID },
-> +	{ .name = "axp221",	.driver_data = AXP221_ID },
-> +	{ .name = "axp223",	.driver_data = AXP223_ID },
-> +	{ .name = "axp313a",	.driver_data = AXP313A_ID },
-> +	{ .name = "axp323",	.driver_data = AXP323_ID },
-> +	{ .name = "axp717",	.driver_data = AXP717_ID },
-> +	{ .name = "axp803",	.driver_data = AXP803_ID },
-> +	{ .name = "axp806",	.driver_data = AXP806_ID },
-> +	{ .name = "axp15060",	.driver_data = AXP15060_ID },
->  	{ }
->  };
->  MODULE_DEVICE_TABLE(i2c, axp20x_i2c_id);
-> diff --git a/drivers/mfd/axp20x-rsb.c b/drivers/mfd/axp20x-rsb.c
-> index 059656f2a1bd..8fdc870c1fe4 100644
-> --- a/drivers/mfd/axp20x-rsb.c
-> +++ b/drivers/mfd/axp20x-rsb.c
-> @@ -35,6 +35,7 @@ static int axp20x_rsb_probe(struct sunxi_rsb_device *rdev)
->  	axp20x->irq = rdev->irq;
->  	dev_set_drvdata(&rdev->dev, axp20x);
->  
-> +	axp20x->variant = (kernel_ulong_t)device_get_match_data(axp20x->dev);
->  	ret = axp20x_match_device(axp20x);
->  	if (ret)
->  		return ret;
-> diff --git a/drivers/mfd/axp20x.c b/drivers/mfd/axp20x.c
-> index 4d770e718716..de6946d4bb13 100644
-> --- a/drivers/mfd/axp20x.c
-> +++ b/drivers/mfd/axp20x.c
-> @@ -1267,7 +1267,6 @@ int axp20x_match_device(struct axp20x_dev *axp20x)
->  	const struct mfd_cell *cells_no_irq = NULL;
->  	int nr_cells_no_irq = 0;
->  
-> -	axp20x->variant = (long)device_get_match_data(dev);
->  	switch (axp20x->variant) {
->  	case AXP152_ID:
->  		axp20x->nr_cells = ARRAY_SIZE(axp152_cells);
-> diff --git a/include/linux/mfd/axp20x.h b/include/linux/mfd/axp20x.h
-> index b352661d99a1..1badb4868d17 100644
-> --- a/include/linux/mfd/axp20x.h
-> +++ b/include/linux/mfd/axp20x.h
-> @@ -997,8 +997,7 @@ static inline int axp20x_read_variable_width(struct regmap *regmap,
->  /**
->   * axp20x_match_device(): Setup axp20x variant related fields
->   *
-> - * @axp20x: axp20x device to setup (.dev field must be set)
-> - * @dev: device associated with this axp20x device
-> + * @axp20x: axp20x device to setup (.dev and variant fields must be set)
->   *
->   * This lets the axp20x core configure the mfd cells and register maps
->   * for later use.
-> 
-> -- 
-> 2.53.0
-> 
+Are you going to tell me what that subject was?  =;-)
 
 -- 
 Lee Jones
