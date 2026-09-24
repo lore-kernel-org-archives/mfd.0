@@ -1,119 +1,218 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BAE0459AC7;
-	Thu, 24 Sep 2026 13:00:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 492983E0081
+	for <mfd@lists.linux.dev>; Thu, 24 Sep 2026 13:10:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790254846; cv=none; b=acMJwNgEK6h8vtE78D2N0UsDx7fkbSI51WQNyIhybFGYI9tn8etsCAQ3OSoPduZUriFcFF8v2JmZ717Ux8Ie6NlIfEWzQ+eqUFGBTsVOqNp+fYSnSrcFAKtVJgAumnEu5OrIZZff0b9zCgebeuu4gsFGxbhgQhojqWOjukr4gAU=
+	t=1790255425; cv=none; b=Zr/cABqMFbMtGgB+Q0Or2yoBHAxsktTW8Dvhsd7uj1rT7mtQJNVKb7GiLwE1lwGdDuqAQ6AQMUqI5CmuPNTKH3z1/G2RP5kiuqOo2je3QSGZSSWZ6iGN8ccrDP8rxGjUWUkpGfFu4gAXDeuWLxCq+X/ERqejnMuIfdFCl1fypOM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790254846; c=relaxed/simple;
-	bh=lQ9iv3yD0ptTA54gnXaolzRlm7/dGGbiYR5tFbAgAcM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=pnw6+ERmTJ7L4551Tvw2pkizxFnSjB8JJNplAFoSraBb4vtcMymsjkkb7AwwIOLVAHJFuKXl/KY2jr4wcxDhMV2iowr+UPdwSUA5pcfsuDzX0C162P37/L1+tUq3H0nCXXm4NxiLFG5AC1cgBz61txKTxsPaMVa9OvMqzIgi8Fo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eZENFdU2; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790255425; c=relaxed/simple;
+	bh=ssAl/+k4jPnOyZvFEczhhMivxC5cY0K7XEWGExEoAHg=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=IrKY4mwWaMrXyl+4bSmDQbStUWtZcxrSWZhyL9s/NzCFQSsAM54lVaqVyOx5orT3vSP8iU7025LayHeLDcC+bNCtW2stfRpwGke1AEchkeBX7iIL5Z7kaEQvVhoG/8xITqvhhJ9KdTqz39BBVAEihJolyGwKVppp+ZLOEHNfwPs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=dLNIXwe5; arc=none smtp.client-ip=74.125.225.141
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eZENFdU2"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B35BA1F000FF;
-	Thu, 24 Sep 2026 13:00:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790254845;
-	bh=wgAsGxjOI4SZCAEuxYRxPYQum9DEyKkKsyTbJWwoLNg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=eZENFdU2E/XV9I//8XRof0Mq2OyiVVh/IlQYRFrXsBhkHGKKPhe5wUEUVv6HNtiIm
-	 mWvLeogoTBMmpwV8w2W9zVk9Ty52RU1vRPH0eegRfZBbAD7HKKfLf4jL8+ps8Un8BG
-	 C4YS3wdM+pettGiXmC1s6w8gu7RlIvZJBIoLtmzRiD0lJvWZ5hMtmrkWLfx4iVcgPL
-	 tN0QOtsa/0JK1E7lPPn/hdF/6o7hodvclldHr8c6jLr4hicJ5SAIVUHkAsTPkf4hLX
-	 2wQTlHmzlzQlUTxSidJ1F2/4AvRwUa0iutemQnEWGljyDfSbgZfQqoHwn66fS1rBsk
-	 ziOjnLv15akpQ==
-Date: Thu, 24 Sep 2026 14:00:38 +0100
-From: Lee Jones <lee@kernel.org>
-To: Matti Vaittinen <mazziesaccount@gmail.com>
-Cc: Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
-	Matti Vaittinen <matti.vaittinen@linux.dev>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	Michael Walle <mwalle@kernel.org>, mfd@lists.linux.dev,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
-	linux-rtc@vger.kernel.org, Sverdlin@mva-rohm,
-	Alexander <alexander.sverdlin@siemens.com>
-Subject: [GIT PULL] Immutable branch between MFD, Clk, GPIO, Regulator and
- RTC due for the v7.4 merge window
-Message-ID: <20260924130038.GB453446@google.com>
-References: <cover.1789538455.git.mazziesaccount@gmail.com>
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="dLNIXwe5"
+Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49e83a388f8so12640195e9.1
+        for <mfd@lists.linux.dev>; Thu, 24 Sep 2026 06:10:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1790255420; x=1790860220; darn=lists.linux.dev;
+        h=content-type:mime-version:message-id:date:references:in-reply-to
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=yqY+VYU5NXGX1DIhJ+QOGA70yG14D0itgxaOKESe4N8=;
+        b=dLNIXwe5VKPoavVSqtztRK3s0Zj24t77qV0Kkj1Var9aiv/gDB1+Z/D0nu5wv5ZGEc
+         DzxuQshEdbo++67L2bXYWOlnG5/vX22K+RJ5TJqoJksLIY5AT4TWZE9JleMuTYBZS4XR
+         7nz83GFihFBhaFd/yPWH1M5z75Bucs4KO6p0O0Zyy9eqkp+ifGpttrAPJPDZtdK1Iz+v
+         9iBVn5z3MfItFsRTLsMUKANILvyj6TD7qahLU/+r1jqAn1RtSDzuytJhrkSXAinpnRda
+         7xf+tylVtxOa75sOVoI69+e7yyW8Fy3Aid4ew6xHWHO2HxpyPHTano1/8CLm6XOSm3Er
+         PorA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790255420; x=1790860220;
+        h=content-type:mime-version:message-id:date:references:in-reply-to
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=yqY+VYU5NXGX1DIhJ+QOGA70yG14D0itgxaOKESe4N8=;
+        b=1yCdWDBFDYlJJthg6c0wTSXZEnj2XjvAo+HrbqAmUEYYeB0w96lIsk4z7ruA9qbzaE
+         1RVo+PRd3srFeLXVfKmxfKRP7VswsTqhRA8YxCxK2czLfp07Gn/S/GXMhkPr3gtPGS7w
+         yQOP72ypzOYyY6hJJFDTO5vzdHJef+uYg3Iqg6xiTZ33HxX1KF7mIfjYjX9P8uPkj0iA
+         8uLXaZTOoJ6OEH7wXUaCDX1z+j5RpJGJAPZU05SQ7a+9iXkzItQY4Fl6aYvqtCptuDlF
+         j2C6N26FtMfkJx2Uk64x8FuDEgjcDq/S3Y5wuK71oPoPqAyP35RXKsWqm6Jy1rzR2/7g
+         GnMg==
+X-Forwarded-Encrypted: i=1; AKwUvBxDckIMcRwWhu5lJ0L7603IksAa3rTrr60hp7DSbcUnJK+eJfFk4aMkEnAIr/e9gbfCZv0=@lists.linux.dev
+X-Gm-Message-State: AFuF++lwSEBeti2iNQ3sz8Pc2lanO3FYCi57nW/rph6eNDK8ZG/Qj+1F
+	eN4l4erNCuuBNgnroSi0ayUXldcaFWWlmhiopqp4wZmwlGjxwrIQI1acoT1gD4lM3I8=
+X-Gm-Gg: AYBFou0tpiXQc5axWewy9OlmnL1T8COiBebECPyOk/WHTxTTKKk/7euInem2GB3nKOU
+	sgYBtF61abtjBNK/vCgo1lFTSONKhTg+S+KodTvxcKKUzyb9zUTHs9AoLvZlIfUiDiOYCjopDNo
+	PnG1LrTAfMesGJtIFk9Y0RDAUU3Mb5SCAgzur5St4AFbhgwIdJoUxIuYKWG37qXePzN17rbsEb9
+	gousQs8qapdYTpFpZnydNIBAtuWx1umzuloFovcxyESkltwvXV5XdiVecild0hCyh4m9Vo7c820
+	XzP3vKPQnlSBpMA9AOcce5/jcJ35b6sGq68/MLQpHhQOXr/PEyzuPDp+OWydlnoExFVKnPWbyBZ
+	WI8g+UbSkQRjG4TZNg5BkBHBxsILb0KUU7xfpQZ5q/yzUiLHamywoL/QJPkTKoGZ5NFKSXC9nfd
+	F6k703T0xAc+akJynLA0o5ymEkCWnTdaITUUcsf2ma2yfUZAUqZzYel2lpnXLhvoq6spkPA/Ivs
+	SRBrHqzWfx7tmyjhQ==
+X-Received: by 2002:a05:600c:8b8b:b0:49c:f512:2361 with SMTP id 5b1f17b1804b1-49fe66d470emr42998155e9.14.1790255420471;
+        Thu, 24 Sep 2026 06:10:20 -0700 (PDT)
+Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fe0c77b8csm87532775e9.3.2026.09.24.06.10.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Sep 2026 06:10:18 -0700 (PDT)
+From: Jerome Brunet <jbrunet@baylibre.com>
+To: Lee Jones <lee@kernel.org>
+Cc: Andre Przywara <andre.przywara@arm.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Chen-Yu Tsai <wens@kernel.org>, Liam Girdwood
+ <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, Hans de Goede
+ <hansg@kernel.org>, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, mfd@lists.linux.dev,
+ linux-sunxi@lists.linux.dev, Sashiko <sashiko-bot@kernel.org>
+Subject: Re: [PATCH v8 2/5] mfd: axp20x-i2c: Fix i2c instantiation
+In-Reply-To: <20260924082705.GO3864833@google.com>
+References: <20260910-axp318-regulator-v8-0-e906a61a7f3d@baylibre.com>
+ <20260910-axp318-regulator-v8-2-e906a61a7f3d@baylibre.com>
+ <20260924082705.GO3864833@google.com>
+Date: Thu, 24 Sep 2026 15:10:17 +0200
+Message-ID: <1jy0cq94na.fsf@starbuckisacylon.baylibre.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <cover.1789538455.git.mazziesaccount@gmail.com>
+Content-Type: text/plain
 
-Enjoy!
+On jeu. 24 sept. 2026 at 09:27, Lee Jones <lee@kernel.org> wrote:
 
-The following changes since commit cee9395acd8043be0644b25c34bfa86623f2b935:
+> On Thu, 10 Sep 2026, Jerome Brunet wrote:
+>
+>> Apparently this device never really supported i2c instantiation via
+>> sysfs, because the driver does not even look at the i2c device data,
+>> which are not set. It would only probe if the device matched through DT.
+>> 
+>> Fix that for correctness, even-though it is probably useless.
+>> Add the missing AXP323 while at it.
+>> 
+>> Reported-by: Sashiko <sashiko-bot@kernel.org>
+>> Closes: https://lore.kernel.org/r/20260717090209.2A09B1F000E9@smtp.kernel.org
+>> Fixes: 41751b033aaa ("mfd: axp20x-i2c: Add i2c-ids to fix module auto-loading")
+>> Acked-by: Chen-Yu Tsai <wens@kernel.org>
+>> Signed-off-by: Jerome Brunet <jbrunet@baylibre.com>
+>> ---
+>>  drivers/mfd/axp20x-i2c.c   | 24 +++++++++++++-----------
+>>  drivers/mfd/axp20x-rsb.c   |  1 +
+>>  drivers/mfd/axp20x.c       |  1 -
+>>  include/linux/mfd/axp20x.h |  3 +--
+>>  4 files changed, 15 insertions(+), 14 deletions(-)
+>> 
+>> diff --git a/drivers/mfd/axp20x-i2c.c b/drivers/mfd/axp20x-i2c.c
+>> index 5c93136f977e..a76bec5604c4 100644
+>> --- a/drivers/mfd/axp20x-i2c.c
+>> +++ b/drivers/mfd/axp20x-i2c.c
+>> @@ -35,6 +35,7 @@ static int axp20x_i2c_probe(struct i2c_client *i2c)
+>>  	axp20x->irq = i2c->irq;
+>>  	dev_set_drvdata(axp20x->dev, axp20x);
+>>  
+>> +	axp20x->variant = (kernel_ulong_t)i2c_get_match_data(i2c);
+>
+> device_get_match_data() is bus agnostic and should still work from the
+> core driver.  What's the purpose of splitting it out and adding
+> additional call-sites?
 
-  Linux 7.3-rc1 (2026-08-30 13:34:40 -0700)
+Hi,
 
-are available in the Git repository at:
+device_get_match_data() works when the data comes through that path,
+which is generally the case.
 
-  git://git.kernel.org/pub/scm/linux/kernel/git/lee/mfd.git ib-mfd-clk-gpio-regulator-rtc-v7.4
+i2c_get_match_data() calls device_get_match_data() then fallback to the
+i2c_device_ids. It covers the instanciation from sysfs mainly, not
+something usual.
 
-for you to fetch changes up to e8e8d60fe8cc35340f6110ff70ef7959de1c3c0b:
+As explained in the description, this changes plugs a hole identified by
+sashiko that technically exists but I highly doubt anyone will
+instanciate the PMIC through that interface. Those things do not really
+come as breakout boards ... That being said, it is cheap to fix.
 
-  MAINTAINERS: Add ROHM BD73800 PMIC files (2026-09-23 11:32:19 +0100)
-
-----------------------------------------------------------------
-Immutable branch between MFD, Clk, GPIO, Regulator and RTC due for the v7.4 merge window
-
-----------------------------------------------------------------
-Matti Vaittinen (10):
-      dt-bindings: mfd: Common ROHM PMIC properties
-      dt-bindings: rohm,bd*: Ref common ROHM bindings
-      dt-bindings: regulator: ROHM BD73800 regulators
-      dt-bindings: mfd: ROHM BD73800 PMIC
-      mfd: Support for ROHM BD73800 PMIC core
-      rtc: bd70528: Support RTC on ROHM BD73800
-      regulator: bd71828: Support ROHM BD73800
-      clk: bd718x7: Support ROHM BD73800
-      gpio: bd73800: Support ROHM BD73800 PMIC GPIOs
-      MAINTAINERS: Add ROHM BD73800 PMIC files
-
- .../devicetree/bindings/mfd/rohm,bd71815-pmic.yaml |   9 +-
- .../devicetree/bindings/mfd/rohm,bd71828-pmic.yaml |   9 +-
- .../devicetree/bindings/mfd/rohm,bd72720-pmic.yaml |  29 +-
- .../devicetree/bindings/mfd/rohm,bd73800-pmic.yaml | 218 ++++++++
- .../devicetree/bindings/mfd/rohm,pmic-pins.yaml    |  72 +++
- .../bindings/regulator/rohm,bd73800-regulator.yaml |  99 ++++
- MAINTAINERS                                        |   2 +
- drivers/clk/clk-bd718x7.c                          |   8 +
- drivers/gpio/Kconfig                               |  12 +
- drivers/gpio/Makefile                              |   1 +
- drivers/gpio/gpio-bd73800.c                        | 209 ++++++++
- drivers/mfd/Kconfig                                |  15 +-
- drivers/mfd/rohm-bd71828.c                         | 147 +++++-
- drivers/regulator/Kconfig                          |   4 +-
- drivers/regulator/bd71828-regulator.c              | 558 ++++++++++++++++++++-
- drivers/rtc/rtc-bd70528.c                          |   8 +
- include/linux/mfd/rohm-bd73800.h                   | 306 +++++++++++
- include/linux/mfd/rohm-generic.h                   |   1 +
- 18 files changed, 1661 insertions(+), 46 deletions(-)
- create mode 100644 Documentation/devicetree/bindings/mfd/rohm,bd73800-pmic.yaml
- create mode 100644 Documentation/devicetree/bindings/mfd/rohm,pmic-pins.yaml
- create mode 100644 Documentation/devicetree/bindings/regulator/rohm,bd73800-regulator.yaml
- create mode 100644 drivers/gpio/gpio-bd73800.c
- create mode 100644 include/linux/mfd/rohm-bd73800.h
+>
+>>  	ret = axp20x_match_device(axp20x);
+>>  	if (ret)
+>>  		return ret;
+>> @@ -76,17 +77,18 @@ MODULE_DEVICE_TABLE(of, axp20x_i2c_of_match);
+>>  #endif
+>>  
+>>  static const struct i2c_device_id axp20x_i2c_id[] = {
+>> -	{ "axp152" },
+>> -	{ "axp192" },
+>> -	{ "axp202" },
+>> -	{ "axp209" },
+>> -	{ "axp221" },
+>> -	{ "axp223" },
+>> -	{ "axp313a" },
+>> -	{ "axp717" },
+>> -	{ "axp803" },
+>> -	{ "axp806" },
+>> -	{ "axp15060" },
+>> +	{ .name = "axp152",	.driver_data = AXP152_ID },
+>> +	{ .name = "axp192",	.driver_data = AXP192_ID },
+>> +	{ .name = "axp202",	.driver_data = AXP202_ID },
+>> +	{ .name = "axp209",	.driver_data = AXP209_ID },
+>> +	{ .name = "axp221",	.driver_data = AXP221_ID },
+>> +	{ .name = "axp223",	.driver_data = AXP223_ID },
+>> +	{ .name = "axp313a",	.driver_data = AXP313A_ID },
+>> +	{ .name = "axp323",	.driver_data = AXP323_ID },
+>> +	{ .name = "axp717",	.driver_data = AXP717_ID },
+>> +	{ .name = "axp803",	.driver_data = AXP803_ID },
+>> +	{ .name = "axp806",	.driver_data = AXP806_ID },
+>> +	{ .name = "axp15060",	.driver_data = AXP15060_ID },
+>>  	{ }
+>>  };
+>>  MODULE_DEVICE_TABLE(i2c, axp20x_i2c_id);
+>> diff --git a/drivers/mfd/axp20x-rsb.c b/drivers/mfd/axp20x-rsb.c
+>> index 059656f2a1bd..8fdc870c1fe4 100644
+>> --- a/drivers/mfd/axp20x-rsb.c
+>> +++ b/drivers/mfd/axp20x-rsb.c
+>> @@ -35,6 +35,7 @@ static int axp20x_rsb_probe(struct sunxi_rsb_device *rdev)
+>>  	axp20x->irq = rdev->irq;
+>>  	dev_set_drvdata(&rdev->dev, axp20x);
+>>  
+>> +	axp20x->variant = (kernel_ulong_t)device_get_match_data(axp20x->dev);
+>>  	ret = axp20x_match_device(axp20x);
+>>  	if (ret)
+>>  		return ret;
+>> diff --git a/drivers/mfd/axp20x.c b/drivers/mfd/axp20x.c
+>> index 4d770e718716..de6946d4bb13 100644
+>> --- a/drivers/mfd/axp20x.c
+>> +++ b/drivers/mfd/axp20x.c
+>> @@ -1267,7 +1267,6 @@ int axp20x_match_device(struct axp20x_dev *axp20x)
+>>  	const struct mfd_cell *cells_no_irq = NULL;
+>>  	int nr_cells_no_irq = 0;
+>>  
+>> -	axp20x->variant = (long)device_get_match_data(dev);
+>>  	switch (axp20x->variant) {
+>>  	case AXP152_ID:
+>>  		axp20x->nr_cells = ARRAY_SIZE(axp152_cells);
+>> diff --git a/include/linux/mfd/axp20x.h b/include/linux/mfd/axp20x.h
+>> index b352661d99a1..1badb4868d17 100644
+>> --- a/include/linux/mfd/axp20x.h
+>> +++ b/include/linux/mfd/axp20x.h
+>> @@ -997,8 +997,7 @@ static inline int axp20x_read_variable_width(struct regmap *regmap,
+>>  /**
+>>   * axp20x_match_device(): Setup axp20x variant related fields
+>>   *
+>> - * @axp20x: axp20x device to setup (.dev field must be set)
+>> - * @dev: device associated with this axp20x device
+>> + * @axp20x: axp20x device to setup (.dev and variant fields must be set)
+>>   *
+>>   * This lets the axp20x core configure the mfd cells and register maps
+>>   * for later use.
+>> 
+>> -- 
+>> 2.53.0
+>> 
+>
+> -- 
+> Lee Jones
 
 -- 
-Lee Jones
+Jerome
