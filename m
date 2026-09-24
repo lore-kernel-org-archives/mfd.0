@@ -1,157 +1,69 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B22637F32C;
-	Thu, 24 Sep 2026 14:15:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60A4E37F8DC;
+	Thu, 24 Sep 2026 14:16:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790259317; cv=none; b=j14S9/fQZplWEQ4r7VoENmkUPPTznOQ0B6fk6rTZje5gTiEUDQKKIY9yp4xOvmlVDgQzs5T2vQ0+mUhcfQa93pvkcbzflKY4j6l/Kg0EMAS8pdkhZ20ucL9bZALi6j4KFgYdgY29uDPluMbm/HAmX/Y1++GEum87M/DNypgoZko=
+	t=1790259393; cv=none; b=Fl7v9S2AoGFgtWk4lnBqKn2nnLtzUf6gfbnth1bgScWDGC/8NIY4GD4J7INPt6+vgMG7Y1PulCpT98mCHQ3pbgZrO46y3WZB+/txufg2cYvq6NyXRkam7sibyuGzso8BGJD474GKdPwMW7J0Ix4FxrwQ8CL1X/3QA/6vs0PeEEk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790259317; c=relaxed/simple;
-	bh=v1Zl3eLodsbJbR8FP0robGqvh9JyFU2C/tAZZGtNcC4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=bp6lccjd4CN2T7jBJkVWtxk4/E9wUOQ5vFM67YA9rOjwYjAbalaVqmaMKAnARwhgv2WEk0w4y3PjbP5E35NdNTvUS4ITokJ+BL8QeeCTiIB1q+ilXvD5tTszI9dWWDc17Qhtuu7SImN5Dwua4dFka0AilpEAoD1fHhHTvyJdUrg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JBKRD+OW; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790259393; c=relaxed/simple;
+	bh=mZZ6qpu7H8MObiOXtAL8mvcjirC/qntGFwdz5Y346Mo=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=g8rq7nTUlRTHUgWvbbg4uTM2ujR62XDvUXu6yiyyPD9g7l/hFmHDErEBM0bqukkMROfZVhijoT6DgzfOCqDYIoLEAOu9YR7xSAFnS+tQF482dhMRvKkXFVsHvpJhObrVIQltAGcDdtmMQIMRqDTlsQqn5rHKeczOAacAWWA3Jhw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XuS25CDT; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JBKRD+OW"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 63DEC1F000FF;
-	Thu, 24 Sep 2026 14:15:08 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XuS25CDT"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C35B1F000FF;
+	Thu, 24 Sep 2026 14:16:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790259312;
-	bh=qTdT0Pnje9Db4mI6g9mHhsv+qLxeAIpDfVpVO6cj1T4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=JBKRD+OWoeubfRo5gPpJwJc3aBMFeibR3f8yEydfDyM/bk4aLgeJhsqPPKSne3YB7
-	 D+PszabqrNryBW7EUSo1MmBTKDVi/qN+CYKGZ1oJ+viLpE/IEZqRy0/10rQ17k8vAy
-	 FhQ1OyGdoF50czcfuhC8SDUE127jKXnseOA9YJb7GqhAEWN++OY2k/sTUx3IxAaANL
-	 FLVDY6A1Uvtv45K1xBTseTEM/28NTBxZcU1dGulqv2zfZR7IGoWOmUEep3eWv4+8s0
-	 BW4HCdA79Idm/IA/CMxP6yNFiNUzYtuAk2MHyi9ybiG1g3KFb9Nzey3h/oQUAUvinc
-	 94UZc61v0Rpkg==
-Date: Thu, 24 Sep 2026 15:15:05 +0100
+	s=k20260515; t=1790259392;
+	bh=4I2Uczjs36quEFEOlB6alCHCdbRcfKOEZRzz1zHWB8U=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=XuS25CDTKlPqvb/NishbYJphykh/SL0ITs7qOY2DBLB36kENOFqqSRMziMKCxNLMr
+	 ciRIocUfSoZv2yf+xEeSmApwXDmB1ysp4CWnTjDCP+gbe492QkffxMKNsNr4ILFwVr
+	 h1w+fXI3Ly6UGIEm4Et5rdBUDShZP50drB8xv+qiWN6ngvnDwtvYZ/7DhKbENcT4pj
+	 Pg4bBS5hn33BJL4zRxDQqmoJAOG98iaCf/p9n4imrHffSTGXyxfMa2f75DiAhwWCiv
+	 3MKeHJh4jBtkvANtoZ3fkPg5jWgIro7OfiMgz+ncGY3XxK6gI/rhTMl+R+DDUH1s0w
+	 yrr9B1SWomKmA==
 From: Lee Jones <lee@kernel.org>
-To: Stefan =?iso-8859-1?Q?D=F6singer?= <stefandoesinger@gmail.com>
-Cc: Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Brian Masney <bmasney@redhat.com>, Vinod Koul <vkoul@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Russell King <linux@armlinux.org.uk>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Manivannan Sadhasivam <mani@kernel.org>, linux-clk@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, linux-phy@lists.infradead.org,
-	mfd@lists.linux.dev
-Subject: Re: [PATCH v12 04/12] mfd: zx297520v3: Add a clock and reset MFD
- driver
-Message-ID: <20260924141505.GF453446@google.com>
-References: <20260923-zx29clk-v12-0-9c243796b6d2@gmail.com>
- <20260923-zx29clk-v12-4-9c243796b6d2@gmail.com>
+To: Lee Jones <lee@kernel.org>, Myeonghun Pak <mhun512@gmail.com>
+Cc: Support Opensource <support.opensource@diasemi.com>, 
+ linux-kernel@vger.kernel.org, mfd@lists.linux.dev, 
+ Ijae Kim <ae878000@gmail.com>
+In-Reply-To: <20260923021936.957065-1-mhun512@gmail.com>
+References: <20260923021936.957065-1-mhun512@gmail.com>
+Subject: Re: (subset) [PATCH v2] mfd: da9150: Balance IRQ wake on teardown
+Message-Id: <179025939080.628281.10940598071478534866.b4-ty@b4>
+Date: Thu, 24 Sep 2026 15:16:30 +0100
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260923-zx29clk-v12-4-9c243796b6d2@gmail.com>
+X-Mailer: b4 0.16-dev-ad80c
 
-On Wed, 23 Sep 2026, Stefan Dˆsinger wrote:
+On Tue, 22 Sep 2026 22:19:36 -0400, Myeonghun Pak wrote:
+> DA9150 enables IRQ wake after registering its regmap IRQ chip, but does not
+> disable it on a later probe failure or driver removal. This leaves the wake
+> depth elevated after the handler is removed, and repeated bind attempts can
+> accumulate the imbalance.
+> 
+> Remember whether enabling IRQ wake succeeded and balance only a successful
+> call. Remove MFD children first so their nested IRQ users are gone, then
+> disable wake before removing the regmap IRQ chip. Preserve the existing
+> non-fatal behavior when IRQ wake cannot be enabled.
+> 
+> [...]
 
-> This driver registers child devices for the zx297520v3 clock and reset
-> controllers. The clk-zx297520v3 and reset-zte-zx297520v3 submitted in
-> the next patches will drive the respective functionalities.
-> 
-> Signed-off-by: Stefan Dˆsinger <stefandoesinger@gmail.com>
-> 
-> ---
-> 
-> Changes v12:
-> Added comments elaborating on the role of the driver and the hardware.
-> 
-> Regarding the names: zx297520v3 is the SoC's name (chip marking, boot
-> messages). TOPCRM, MATRIXCRM, LSPCRM are ZTE's names for the MMIO blocks
-> in their downstream sources. Sadly no datasheet is available. "clk",
-> "reset" names for the child nodes are mine.
-> 
-> Regarding personal copyright: I am not affiliated with ZTE nor paid by
-> them. This is my personal hobby project. I am using knowledge extracted
-> from ZTE's kernel dumps, but not code.
-> 
-> Changes v10 (All Lee Jones):
-> *) drop "select REGMAP_MMIO"
-> *) Drop comment about unimplemented hwlocks
-> *) Use MFD_CELL_[NAME|OF]
-> *) Renamed the device type enum and its values
-> *) Use device_get_match_data instead of the of_ variant
-> *) Improved debug messages
-> 
-> Changes v9:
-> Deassert the LSP reset and enable the LSP pclk here. In practice the
-> boot rom needs to do that because it prints to an LSP-connected UART and
-> reads the boot policy from the LSP connected flash chip.
-> 
-> In doing so, I migrated the match data to an enum as mfd.md suggests.
-> 
-> Changes v8:
-> *) Remove .of_compatible from PHY mfd child
-> 
-> *) Move to drivers/mfd (Sashiko)
-> 
-> For me either soc/zte or mfd/ is fine. Note though that this MFD parent
-> is very specific to the zx297520v3 SoC. I don't expect this to be reused
-> anywhere else. There are two more MFD-ish devices in there: soc_sys at
-> 0x140000, which I plan to handle in the same driver, and an i2c PMIC,
-> which would get its own host driver.
-> 
-> *) Use PLATFORM_DEVID_AUTO (Sashiko). NONE was intentional as I only
-> ever expect one instance, but I don't see any harm in doing the standard
-> thing and use AUTO
-> 
-> *) On the suggestion not to put the link to mfd_cells[] into match data:
-> I see that it is spelled out in Sashiko's mfd.md, written by Lee Jones,
-> the MFD maintainer. I would appreciate some education on the rationale
-> behind it: Putting a pointer into the void *data is a common pattern in
-> the kernel. I don't understand in which situation this can possibly
-> break?
-> 
-> Both structs are static const in the same compilation unit. data is a
-> const void *, not a uintptr_t or kernel_ulong_t, so it seems passing a
-> pointer is the intended use. What am I missing?
-> 
-> Changes v7:
-> Add phy MFD child
-> 
-> Changes v6: Make the ZTE SoC driver section depend on HAS_IOMEM
-> (Sashiko). The entire MFD section, which contains MFD_CORE, depends on
-> HAS_IOMEM even with COMPILE_TEST.
-> 
-> Add a NULL ptr check for of_device_get_match_data (Sashiko). While not
-> uniform, rave-sp, rohm-bd9576, atc260x, da9052-i2c protect against
-> incorrect manual attachment that way.
-> 
-> Add lspclk here as well in an attempt to satisfy both Conor Dooley, who
-> asks for MFD for top and matrix, and Philipp Zabel, who prefers aux but
-> at least wants the reset driver limited to one driver type.
-> 
-> Changes v5: Use MFD instead of Aux bus for top and matrix crm because of
-> extra functionality: Reboot in top, hwlock in Matrix.
-> 
-> LSP clocks stay with the aux bus and are thus not handled in this
-> driver. The clk driver will bind directly to the lspcrm node.
-> ---
->  MAINTAINERS                      |   1 +
->  drivers/mfd/Kconfig              |  12 +++++
->  drivers/mfd/Makefile             |   2 +
->  drivers/mfd/zte-zx297520v3-crm.c | 111 +++++++++++++++++++++++++++++++++++++++
->  4 files changed, 126 insertions(+)
+Applied, thanks!
 
-Doesn't apply.
+[1/1] mfd: da9150: Balance IRQ wake on teardown
+      commit: ef464f82f3aecad4071af71074b2ceb77ffbb609
 
-Please bring the MAINTAINERS changes out into their own patch
+--
+Lee Jones [ÊùéÁêºÊñØ]
 
--- 
-Lee Jones
