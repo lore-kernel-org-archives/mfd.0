@@ -1,60 +1,87 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B57336C0D6
-	for <mfd@lists.linux.dev>; Thu, 24 Sep 2026 10:32:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF92138838B
+	for <mfd@lists.linux.dev>; Thu, 24 Sep 2026 11:04:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790245974; cv=none; b=cN4o/SuG5nkZ8CUlj4CmqbSD2/+a3vCKkgWSHNlbESubqI+S8isKrWlQ05+BE7Ue6te9gfWmgdMJRsDPI8OjAMH5bUb+bAeb1xxCcnV1qDO6SVUrM7bKXfLZmV9vuFEjo9csynEfLfTQf2YzCVHfeUjSJoSc4j8mhJEnHHxKCCI=
+	t=1790247869; cv=none; b=gpIHe6SYjd5hvCOgCnkAb+3F2d2eu6jpGUBzh9iOvKU85q8JzNXE0s2m8x0B8U6R3g8iYK77vK9DujfQ8nC5DDoNsNJT3oLlGs0ceYMTEsur4s25FPiI/F2qu5wnOn6d9guozLPbmFnfTBmtP9K44hQdM9GIuUz61j64T1zp0Uo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790245974; c=relaxed/simple;
-	bh=ijjybpOuYrCIGVnvTepZxENGvBEPp5umWh8OKG6ruNU=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=Jnnd6VaU9IOn9FDt5GwJrxSoLCBwGt4RYm9AWk1JVXGK6qPBqH+HdPz4KCGCigEVcsDfUmsxzKOnpMN2WuScmutXekouA9ZQ10xMU01Unvp/xXypAbcsHeSWEx9XiEN5ieEZ9or9zIE0hmspRALOTblAj3/y5TULAdOIm1wwkgs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZmrO/Zxp; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790247869; c=relaxed/simple;
+	bh=xz5bwAgVE7qTepiKE8OlbrQBKG8VLxrreAE2auvrnIo=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=mIsoHVtXliRF+9cuH5+kUGNcxwRRMaPtGCrjRg/OlDnym/+aA/mszFoN3YdYb+n3zJfed8mJcDFrYyXKRRBXTF84Qkyj/7rTz1A1SeWeWn/dmPy7VwvMWXjuda6HRuMKYDRp5acDj9tvC4lkRyvRKBV6mjVXT4jmvgpEXKG/leI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PUjND3vB; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZmrO/Zxp"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B4BC41F000FF;
-	Thu, 24 Sep 2026 10:32:52 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PUjND3vB"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 389691F0089A
+	for <mfd@lists.linux.dev>; Thu, 24 Sep 2026 11:04:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790245973;
-	bh=ijjybpOuYrCIGVnvTepZxENGvBEPp5umWh8OKG6ruNU=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=ZmrO/Zxpvb31JEetAhuG/K81WQkV00efakxMoYj4O7N2bza9/5uYU2wNgD1LQ8jaM
-	 SiFWUp0bmMJhEzLJLIK1mXa1GJ82U/roNztvE8Ob645yzUTTHpZvFjvXqt6DoqJF0F
-	 gwzlTBZaJfhvj7uOOSA7JY/iPjOBTSJvdvYOMvY32nx9NH934M1iN48jC6fY6dAUXZ
-	 a4Pyjp/ejkngYjColyKeoZ2IOs67XNP4m9Ery8QscxCOEX2X8ESB30tQr4oF5BUO2O
-	 Ue1O8nBlOUHUySDGE4SfXWXdg0Qvr5L4mCy4us87FZucSQcXOGW1lixkEEzCtihn/Z
-	 XktBp/RaLpqsQ==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v6] mfd: Fix typos in comments
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Hemanth Selam" <hemanth.selam@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260924103046.1709181-1-hemanth.selam@gmail.com>
-References: <20260924103046.1709181-1-hemanth.selam@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 24 Sep 2026 10:32:52 +0000
-Message-Id: <20260924103252.B4BC41F000FF@smtp.kernel.org>
+	s=k20260515; t=1790247868;
+	bh=YJWFnpmGuKQdcj3EBBzF/7yahGxSn2KCUNK04VLhlaA=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=PUjND3vBWPVcIfkDOFl+K6Yeb496QrhI1+K6Cv+nbKgxYaKX4rnNtXEAxGglgAFBB
+	 x3yHBFmSev8uGzCe9sHwMmqbg+vKCY7qiPIb/L95ETQeSg2whzDMZ55M5LGLjyqsSB
+	 U5r+47M7qKr+jK0VlQN6weZgYhRA3DGKRrh+JqJ1W6Ta/ZUV85zQihvwM8q2tgiex+
+	 8MhdyhUnw1I0jonr7WWSOCDcZjWJ2427haQgudQ+GSUtzqN+I830mnf2KHxJvCkEti
+	 u56HGFoCWz7BgB/LGH8e+Eug1f9dyQpBO7BTlIdSbnISFBzMJ0fO5yyKfaqbt3Plpc
+	 FQSPO1I0oLqaA==
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5b5e4f1b846so2313908e87.0
+        for <mfd@lists.linux.dev>; Thu, 24 Sep 2026 04:04:28 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBwdhcpMrH5xOyCg0WjFj6hwPb1NA2b5YOLm99Np6WXDGQZqtcmyd265jDuQ++x47DPsK0s=@lists.linux.dev
+X-Gm-Message-State: AFuF++lK6cRJKgRCLm0+vNBjA6Q42VpfoMlAHJ2uW9d2pYVw6/zhj01L
+	KWZIPJwZ9M8FawENn0v7fr0AEfpUjq0VNqnC9pCiHsHL8Br+wxDQL5xI59norNNBoMwbrRBBiIz
+	OamFXS5x52YMViyif86S7IzgXVvAJF0I=
+X-Received: by 2002:ac2:4574:0:b0:5b6:962:4ed2 with SMTP id
+ 2adb3069b0e04-5b8df04cf73mr536889e87.22.1790247866915; Thu, 24 Sep 2026
+ 04:04:26 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+References: <20260918-ux500-simple-sound-v2-0-88d29416e3c3@kernel.org>
+ <20260918-ux500-simple-sound-v2-6-88d29416e3c3@kernel.org>
+ <CAD++jL=yLFiYcWsRF6eR4a8o=27wcmj4nxa8jirDaOfR3JBHkw@mail.gmail.com>
+ <20260924065449.GN3864833@google.com> <CAD++jLnbJnENbZuXyr6uoeHioCxek6ZZes_MyWk9MowBzuMqkQ@mail.gmail.com>
+ <20260924094420.GA3849155@google.com>
+In-Reply-To: <20260924094420.GA3849155@google.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Thu, 24 Sep 2026 13:04:14 +0200
+X-Gmail-Original-Message-ID: <CAD++jLnSsiMTVVX2WRWS-ACyaX+mMe+sfjqkZWDBvF9SWCCFOg@mail.gmail.com>
+X-Gm-Features: AclHuK91sMP2G7yCemn-SFUSJa0zaXI4PhUu6TRM6YLsNwig0ItCJbNQOJQqUOI
+Message-ID: <CAD++jLnSsiMTVVX2WRWS-ACyaX+mMe+sfjqkZWDBvF9SWCCFOg@mail.gmail.com>
+Subject: Re: [PATCH v2 6/9] ARM: dts: ux500: Add sound DAI provider cells
+To: Lee Jones <lee@kernel.org>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, linux-sound@vger.kernel.org, 
+	devicetree@vger.kernel.org, mfd@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> Fix misspellings in comments across the MFD drivers and headers, found
-> with scripts/checkpatch.pl using the list in scripts/spelling.txt.
->=20
-> Only touches comments, no code changes.
->=20
-> Reviewed-by: Matti Vaittinen <mazziesaccount@gmail.com>
-> Reviewed-by: Andr=C3=A9 Draszik <andre.draszik@linaro.org>
-> Signed-off-by: Hemanth Selam <hemanth.selam@gmail.com>
+On Thu, Sep 24, 2026 at 11:44=E2=80=AFAM Lee Jones <lee@kernel.org> wrote:
+> On Thu, 24 Sep 2026, Linus Walleij wrote:
+> > On Thu, Sep 24, 2026 at 8:54=E2=80=AFAM Lee Jones <lee@kernel.org> wrot=
+e:
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+> > > > Assuming Lee will apply the ACKed binding patch so I applied this a=
+nd
+> > > > the rest of the DTS patches to the ux500 DTS branch for v7.4.
+> > >
+> > > Right, but it's not Acked yet, is it?  Or did I miss something?
+> >
+> > It was ACKed under a different Subject: so I resent the patch
+> > for clarity, sorry for the mess.
+>
+> Are you going to tell me what that subject was?  =3D;-)
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260924103046.1709=
-181-1-hemanth.selam@gmail.com?part=3D1
+Sorry!
+"[PATCH v3] mfd: dt-bindings: ab8500: Describe codec graph and
+microphone wiring"
+https://lore.kernel.org/mfd/20260923-ux500-simple-sound-v3-1-56a771c3ea28@k=
+ernel.org/
 
+Yours,
+Linus Walleij
