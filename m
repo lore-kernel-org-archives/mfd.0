@@ -1,102 +1,138 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk2-f42.google.com (mail-qk2-f42.google.com [74.125.230.234])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A11F84A263D;
-	Thu, 24 Sep 2026 15:30:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 297214BFE96
+	for <mfd@lists.linux.dev>; Thu, 24 Sep 2026 18:56:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.230.234
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790263806; cv=none; b=AwE7zFSOnB9jmkMStOUVLu3n3FnK/4yNZezjxetsIk5ZBdeoxDcU4GzsiUJriPI4Y5Kc1p/n8UilujJ0uOh1oY5Ibq3UaljrpC/AqoefsupuKmK7gvSjKe3/pQ9JAWGA/ca6mo7Vnr1xQ7xkLGqfL/sCh3QpTK7e6MDdwrJy4pg=
+	t=1790276207; cv=none; b=byP5doCiH/u+vaHUweNU3bfhrhbBqpujQjdLZrH28eR6qltjd77NdSq3rQh48Iu5/ib6p1Tns0ilgwggFxzntwtfCzTQ8TKYCt0qi1AO9mSBLtIUhC61Vgs9Ehsy2UtNib0I0sM8zF1azHl3LFxFfJZveq6NJMMfRRfesCuW30Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790263806; c=relaxed/simple;
-	bh=6Kd3H8OgG7G5CfVYho6YrPmqzUbKDh3yoZfacF7ygBM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=iLL1HOSAuexLaI+SIlOZqLqLmTts6H8CsN5nD5Srh4bFT7d5K4LrSnHCUpo0lupxBBjdyUvAbjBee9DjUXjioAtDgBNPdCGKearD6P9dv/RwlWh1CwDi2c20t2cw2VSlnO3HNziXlFNGTSxPlZOjpu5rJZTkZrwcUIM+NHfafnc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EW0B7Nc6; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790276207; c=relaxed/simple;
+	bh=8FwKlIoS1YJr20q5/GeHL/Z3vtXW795veMaqn77uBQo=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=tQo1bB3Vs9hmTul5d7AaugNjunXyn4n4EnTKk+Q7DfNOpHSm32ym7E2vRb8Q6rIf/zjEznEUFuIuqwAfTAa7kbRxO1vKxPToAQsImWWf8Q+n36JZoaQnlWNn7XAf1vfVuXm/qq1VOvsroeo7vCbNcTeMmD3wzGFouoA7CI4q3/k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=UeiKDZa/; arc=none smtp.client-ip=74.125.230.234
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EW0B7Nc6"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4A8C91F000FF;
-	Thu, 24 Sep 2026 15:30:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790263805;
-	bh=3xaD1IMfAyp/uIU4MITG18na4g3zXQJFSDgCzveCcZU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=EW0B7Nc6zPIXKvae2h9udoFtfnvLgEztZgFp0GIOtPQU6aa0CKVM4BU/HUwpZ0vKr
-	 1Ng2uL1PApIcsZ4dt5R5rJKBtQ+ejpuIHqzHFWmmVVwhmekO997ypwXY7o1b50WfWZ
-	 jNFyYcsC4YxISGl8X5n0lAnADzdfFjebSuXNuMX4ChHZy2l4ud2CDTfr6dJYsj4GSw
-	 /HSilVBl9WDa93bYPAWt+PWertSA1Ap0Lu9AOmmd31jcJF3mOw6bQ5CoDyBZirCmh8
-	 972QlyXRwXWLAAYyvARx/fHNTHXFpJ4VQs7bNe/4FU9mINsUnDG7ZOXj72PcCtGHg4
-	 yo2B1+UfXTs2Q==
-Date: Thu, 24 Sep 2026 10:30:01 -0500
-From: "Rob Herring (Arm)" <robh@kernel.org>
-To: Michal Wilczynski <m.wilczynski@samsung.com>
-Cc: Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
-	devicetree@vger.kernel.org, linux-rockchip@lists.infradead.org,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Icenowy Zheng <zhengxingda@iscas.ac.cn>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Andy Yan <andy.yan@rock-chips.com>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	Joshua Peisach <jpeisach@ubuntu.com>,
-	Stephen Boyd <sboyd@kernel.org>, Lee Jones <lee@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	linux-arm-kernel@lists.infradead.org, linux-phy@lists.infradead.org,
-	Hal Feng <hal.feng@starfivetech.com>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Alexandre Ghiti <alex@ghiti.fr>,
-	Andrzej Hajda <andrzej.hajda@intel.com>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Maud Spierings <maud_spierings@murena.io>,
-	Chaoyi Chen <chaoyi.chen@rock-chips.com>,
-	Heiko Stuebner <heiko@sntech.de>, Vinod Koul <vkoul@kernel.org>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	dri-devel@lists.freedesktop.org, Jonas Karlman <jonas@kwiboo.se>,
-	Luca Ceresoli <luca.ceresoli@bootlin.com>, mfd@lists.linux.dev,
-	Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <u.kleine-koenig@baylibre.com>,
-	Emil Renner Berthing <kernel@esmil.dk>,
-	Albert Ou <aou@eecs.berkeley.edu>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Graham Markall <hello@big-grey.co.uk>, linux-clk@vger.kernel.org,
-	Paul Walmsley <pjw@kernel.org>, Robert Foss <rfoss@kernel.org>,
-	linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Dominique Belhachemi <db@domibel.de>
-Subject: Re: [PATCH v4 06/20] dt-bindings: soc: starfive: Add
- starfive,jh7110-vout-subsystem
-Message-ID: <179026380151.180820.13279134510036926790.robh@kernel.org>
-References: <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
- <CGME20260915153224eucas1p1c19b20f6af600b1c3228a9a8f4bb4490@eucas1p1.samsung.com>
- <20260915-jh7110-clean-send-v4-6-f0e4fd6f2cc8@samsung.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UeiKDZa/"
+Received: by mail-qk2-f42.google.com with SMTP id d75a77b69052e-5329fc7b325so1508611cf.0
+        for <mfd@lists.linux.dev>; Thu, 24 Sep 2026 11:56:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790276204; x=1790881004; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=u7if64GBDyZRxjhYKdKsp7wUaEGoHDi7prbfVqVtWGk=;
+        b=UeiKDZa/Y/T4xlMJOrkEQrP2wYcdjAndh4rC1790u0wrBHo/DeB0W+yREwMI1CKBtz
+         IWr9ZAxphUUBD4H4wzVK/oel1UhrL9zqoSnbWLV4X4RLaHS/oQLsz7NYo/kLonIa6GbP
+         BNTXWohtri8n9H0RNgPk9yDqhWormqqD/CKcFsIhqbLWBlgDwY0XNVsV4guYiWwwyYCt
+         YPTmwgRo7ErmwDoCbzRcxCBHlGtN6Bmy2rXGPyHC5LGOx38XdbrjLHhajSFN/nYntqjA
+         AnyLlvOdqVGgly1kn+uGG6GOdSwqqMPaeQSTuDev/x5SN4H0ZHsWhBbW+QGTSuESeDxm
+         /D+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790276204; x=1790881004;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=u7if64GBDyZRxjhYKdKsp7wUaEGoHDi7prbfVqVtWGk=;
+        b=GlGl4ZYMr3Qcd0ybsLGjRTjlucuUhTgANcKungBDKiRqIw6CZobxALeh5cYl+VEq1r
+         QdVVGYBYhCBzzTd7V2Nkm4kaoFsGtooTiBcWYo7pbGGlelmvYrob/jeDhrbiBesH7k3z
+         A+fWHLeHqVWyQPf8jiBOIguu8n1k6TPo9iRE7nAJS4jX0MItc4nPT8p5zJK0UTmhMi2G
+         d/kV5HQhGw4MLZ8KsMhW4BNe9W+VPPwPSrZp3Sb7vUz2uyP9DZShkzLdQAgwLfBgD9nF
+         M/kwH7GM9mHxutKvWU+OmVRHRNo00+ro3CX6mDJDFE3wzOziiHn+3CSVocn8FLw6cAGb
+         RnlA==
+X-Gm-Message-State: AFuF++nnKzgf6dkG3y02o7F/PsI3Fx/oDQ0n3Yx5RTwGUQpYNBVVvvnu
+	SlOXga0PbqFCmAPx8uQsCTY57z7zeyA3nAT5bx4KtbwjyR4z4nc2KdejGuJx8w==
+X-Gm-Gg: AYBFou0UY30+s4bsWSkXQQpvUoYOnM1lpa+OwCNeDoOij6Z+zqh0/Gu1BVINV6yS1PH
+	UyrlkhyyYbPqTtSztAsI+iIPBOy25QthduEmmEZ8sHezJUqdJ7LoYI1bvIObRwqkfBfaacb0joe
+	8KYZIRT4A6dRpel/5DkQsmjWJ2K7zwGwAnCjDZQ0SKFAUwgjRffHU9IC2MUg8hfDtB3X+RAE5zc
+	dssH2tZNaPozq09P928vsO1VPvNZMgWW8/rb4T6Tbq86OSe0nOtrQQZQegYEOBSGoBo35fLI+rs
+	FvWrL8+Kt/izt5/4w3VPXZccUyxX3UO7ysx7+MVmVF2T9+OwkQtvTpdtIjdIiU85lP16BVfNofF
+	PKOKefAiekcrPzTwdm6lgWbcOhiYzp8YrdMXs7PZSLLg+NtzWg/362eSK/64ewgxMwC6F4S47pv
+	5Nu7v8MnJcd0pfcle3vsSyvWSSulZ5pbYgdgGA35KMRoX9xS7xZnuvc127lyhAKE2WERHp2pNJj
+	EDRIqxY7Feet4DD+vjK88HSv+gkE8HB8Wsx6ZxaDbtIwOYV0UJy82WkoHWCkpWH1qAcuGvwhx2N
+	ECWvbuatc9SFYYGGcFioSUUuueC1EOqxSgb0q0o81/7VWVkNgBNJLgLczvc=
+X-Received: by 2002:a05:622a:130e:b0:532:d743:33e6 with SMTP id d75a77b69052e-5330b5881b9mr3667121cf.9.1790276203621;
+        Thu, 24 Sep 2026 11:56:43 -0700 (PDT)
+Received: from ryzen.lan ([2601:644:8000:7a86::e34])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-5330beed557sm286031cf.15.2026.09.24.11.56.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 24 Sep 2026 11:56:42 -0700 (PDT)
+From: Rosen Penev <rosenp@gmail.com>
+To: mfd@lists.linux.dev
+Cc: Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Roger Quadros <rogerq@kernel.org>,
+	Tony Lindgren <tony@atomide.com>,
+	Lee Jones <lee@kernel.org>,
+	linux-omap@vger.kernel.org (open list:OMAP2+ SUPPORT),
+	linux-kernel@vger.kernel.org (open list)
+Subject: [PATCHv2] mfd: twl-core: allocate modules with twl_private
+Date: Thu, 24 Sep 2026 11:56:39 -0700
+Message-ID: <20260924185639.30913-1-rosenp@gmail.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260915-jh7110-clean-send-v4-6-f0e4fd6f2cc8@samsung.com>
+Content-Transfer-Encoding: 8bit
 
+Use a flexible array member to allocate the twl_client array together
+with struct twl_private. This removes a separate devm_kcalloc() and
+keeps the module data tied to the main private structure.
 
-On Tue, 15 Sep 2026 17:32:14 +0200, Michal Wilczynski wrote:
-> The JH7110 groups its display hardware into a video output subsystem,
-> dom_vout_top, covering the DC8200, the HDMI transmitter, the video
-> output clock generator and the video output system controller.
-> 
-> They share one NoC port whose clock and reset gate access to every
-> register in the region, and the region sits in the PD_VOUT power
-> domain. Describe the subsystem as a bus node so those resources are
-> owned by the block that shares them, rather than by whichever consumer
-> happens to probe first.
-> 
-> Signed-off-by: Michal Wilczynski <m.wilczynski@samsung.com>
-> ---
->  .../starfive/starfive,jh7110-vout-subsystem.yaml   | 218 +++++++++++++++++++++
->  1 file changed, 218 insertions(+)
-> 
+Can't use twl_get_num_slaves() for this as that bases its value on
+twl_priv->twl_id , which is unallocated at this point.
 
-Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
+Signed-off-by: Rosen Penev <rosenp@gmail.com>
+---
+ v2: don't use twl_get_num_slaves().
+ drivers/mfd/twl-core.c | 16 ++++------------
+ 1 file changed, 4 insertions(+), 12 deletions(-)
+
+diff --git a/drivers/mfd/twl-core.c b/drivers/mfd/twl-core.c
+index f86df356d658..0b78fe30e047 100644
+--- a/drivers/mfd/twl-core.c
++++ b/drivers/mfd/twl-core.c
+@@ -159,7 +159,7 @@ struct twl_private {
+ 	unsigned int twl_id;
+ 
+ 	struct twl_mapping *twl_map;
+-	struct twl_client *twl_modules;
++	struct twl_client twl_modules[];
+ };
+ 
+ static struct twl_private *twl_priv;
+@@ -770,7 +770,9 @@ twl_probe(struct i2c_client *client)
+ 		goto out;
+ 	}
+ 
+-	twl_priv = devm_kzalloc(&client->dev, sizeof(struct twl_private),
++	num_slaves = (id->driver_data & TWL6030_CLASS) ? 3 : 4;
++	twl_priv = devm_kzalloc(&client->dev,
++				struct_size(twl_priv, twl_modules, num_slaves),
+ 				GFP_KERNEL);
+ 	if (!twl_priv) {
+ 		status = -ENOMEM;
+@@ -787,16 +789,6 @@ twl_probe(struct i2c_client *client)
+ 		twl_regmap_config = twl4030_regmap_config;
+ 	}
+ 
+-	num_slaves = twl_get_num_slaves();
+-	twl_priv->twl_modules = devm_kcalloc(&client->dev,
+-					 num_slaves,
+-					 sizeof(struct twl_client),
+-					 GFP_KERNEL);
+-	if (!twl_priv->twl_modules) {
+-		status = -ENOMEM;
+-		goto out;
+-	}
+-
+ 	for (i = 0; i < num_slaves; i++) {
+ 		struct twl_client *twl = &twl_priv->twl_modules[i];
+ 
+-- 
+2.55.0
 
