@@ -1,134 +1,184 @@
-Received: from mail-yx2-f42.google.com (mail-yx2-f42.google.com [74.125.224.170])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-001ae601.pphosted.com (mx0b-001ae601.pphosted.com [67.231.152.168])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEDA547D460
-	for <mfd@lists.linux.dev>; Thu, 24 Sep 2026 12:00:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.224.170
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2EB147AF5C;
+	Thu, 24 Sep 2026 12:05:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=67.231.152.168
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790251245; cv=pass; b=Sw9aoOEFMmFdTLA1CSjWwBzaQaBBectizt3OKaLNkO/UNaVYfjd1PYYwHmXjSt1Jih3QYHxOsnLhsqaIaQz2Mlhr+KKWUMwge/Tbu+mN3skK82Es9tXC2Fj+/UGjoTHxuR5uqiIU5uj6uL9UP0BLgJn18nkXnEUKsMzoU8rqwng=
+	t=1790251541; cv=fail; b=XhspEr1vsTHy6zESoMOInRpRET2JOVEAhoGe7SLu55HcAng5zuRFW5AQOJwIO0dCCMJ66KLik9frQY/pTWMXEL0q9SaBC7/Ww2CJLY0tm/p4sdooxhlpWDKuApCIjxWafdrn3/cyyGwvQ4OB4N6hEbkLVknHfteEcHxQ8G6F004=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790251245; c=relaxed/simple;
-	bh=V4eu6A97YuNjzUNXoyTJh0xukmvbj4affVPwK+58STs=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=cQJAQg8e0+yauqPcry1ZURPO7I6FGg3AlO1wdjFLvMpDYnZpGVWNnneXPa6gtn78Ub/vQjLmXS64V+lJFlJ/2pBcXre0csCLUZaUx9WSbMhd55GFNAnJ9ctAENEcNzM4U8CedfmFVZOARZa2dkKuHEYsGQ+JaE21r2PAgUD6rs4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JNkFctAY; arc=pass smtp.client-ip=74.125.224.170
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1790251541; c=relaxed/simple;
+	bh=EYpzI+fa9TD9Nt+4guBllVWLaaiCaUXR8FCoWfN130U=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=NDbl7FMnGQEMQgo4zUl8uATyLUj8r2XPSDCSs9/+xjYGE48DCX8l+LTsycnWOVPRTEhhy/PK/gpVZRpIBSE3LXK4i+2w0cVEJ5deo2ajB/2hQBCGJx/M/q18fAP5Zddds7P2V2zsO4ZwWHXA/UaGPpXbNt+UCxcwhBHOXz1yQAU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com; spf=pass smtp.mailfrom=opensource.cirrus.com; dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b=a7vywXlm; dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b=QZ2Z/Z/c; arc=fail smtp.client-ip=67.231.152.168
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=opensource.cirrus.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JNkFctAY"
-Received: by mail-yx2-f42.google.com with SMTP id 956f58d0204a3-6729ca45e37so2214741d50.2
-        for <mfd@lists.linux.dev>; Thu, 24 Sep 2026 05:00:41 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1790251240; cv=none;
-        d=google.com; s=arc-20260327;
-        b=gO5ai9D086VmkRuRzBnmDsID0bby8G0aan2eq/aF4rvZrRlvxnPxcwrqVxZrig8DVG
-         B80ioAbO97o5+lmSyIpzyYtpGWtqbE12spG2ctq37r49/1DtjlF3XTpOv54RCtoxXXyY
-         /N/U9vf3TAmWZtnp3a/Zm4i7jYB6rgZy02IwqX2PdrYJ2k1biHmsdzxKkZ+imUsB1Sp6
-         Hh7HpHj7bOU9Abwvo0S8dq+TBt+hrBWgw8EOXqNYRHGlm0EMsudF+54xuoZmPQAQA4PV
-         /FpMecqcb9HgTtiUlntTZl4O7ej/Ox7/0DweHhphIk+GdJu2dMDblweZ3jrnw9XfpfMl
-         nB5A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=V4eu6A97YuNjzUNXoyTJh0xukmvbj4affVPwK+58STs=;
-        fh=ND/CV2HTa0fcBfRDaPBXkEutyQPuCCJwGJ8b88JIGNw=;
-        b=BvwZMsiIzO78e5R3ccbMuBkWOWU+NMnft+tCEWbIg/JBDcJfNDU41HmXOGBTi3NHNH
-         TXdcpB12pNr7gnJJaWs7YeFUIkGzEpAtIuIBPAxFIc7+7iuiO7sRZuduPg9CWrt64kWA
-         iny2U3TsK+YGADKsXJK4QvuIUajQu4eci+nG1z/1w3l1LteCQdk8VQzo0TJB/dS7UB29
-         GzXmU4zrVBP7egVkAyRUDjDakXUHQtlJNYdqKU+Quzi2D7oK49K1HYnGs3NXXqE31dh8
-         Y8Z9omck21pulJh6eWCiXnTr/MYMGsqf0EkduFOJOXn8oNDaIfGW7w8+nVq1YSVNgEuh
-         3cow==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b="a7vywXlm";
+	dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b="QZ2Z/Z/c"
+Received: from pps.filterd (m0077474.ppops.net [127.0.0.1])
+	by mx0b-001ae601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68O4qImI3664366;
+	Thu, 24 Sep 2026 07:05:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
+	:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=PODMain02222019; bh=ZJoeBHeiQKNwwIlh
+	BSbfyjNR+vVP2DHCQ9A2bNfJ65c=; b=a7vywXlmqupBRylbl01pjt545AV3M8KP
+	ngW3NHcevhsrC3VYjFjutS58eJtp9NFFknVePfrrJ+1hkRMXKv9eMQ6spB9jBy21
+	9c7vlShwOYgSVPA3gaXgwVCyI5e3KFi/OHRGgxO5KZF1B8/O1obNQNR8mPGyQCNJ
+	rXiicmk1OR55hD4Raher/mO897qaNwmiTFR1/mMFdR4VoUJqTZ0n1rQyTMo5y0KI
+	8zhKxz4OKZpiFVEOeYbKl/rCmIxpxAdhqrJT1SSd6zYNFpzR+JUGl4FkZPxBJR0L
+	moJbIik23zt0H9H1qVpR/JZjqmi9kvYXMCXl+8wUm1kUNt4aYLN+6A==
+Received: from bl2pr02cu003.outbound.protection.outlook.com (mail-eastusazon11021131.outbound.protection.outlook.com [52.101.52.131])
+	by mx0b-001ae601.pphosted.com (PPS) with ESMTPS id 4gsptj77wh-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Thu, 24 Sep 2026 07:05:31 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=U/kNNb6dfklZwW8fjRke6c8nJC0axxJYpnGAUAnZnSNcuGLqg9aEfhom+XN9SK4mz6/fU6VhkAbjE3zvGZL4USLa9pj2U7bsq1MQIAegrJd6PEefN0xMiKfr0br2SC8FRBroaIUP0vIDa/izd8IzbzTeiJGIz1DSDkl7HF2+nFRmBuaO3w87ibXRTt/uxlI4OHE0Y+bRv1NVrq7xd9Sts0jeqU5Z/9kf3M64j/xRuV8Gkz7DjyInJxRyD8BkwWvgHsyht6VOMO2xp93Vib7o4NXhRyUcwm7M85GiVTQds4SN+KrGsNFVwlnn0Rp3fEMuYHAzfVwitP7RXhbovt0C6w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ZJoeBHeiQKNwwIlhBSbfyjNR+vVP2DHCQ9A2bNfJ65c=;
+ b=dueoT+ST9b+m2S/m8XwNelZWF1BO0B3Z1jX5NDHEL0+DsJP6ZAF9w0D0I6CzoPRfAKaW0Ft0XjTMHdHB1/pv+I+6zLdlfNGglFGVDNPj0eBMQpymaoYIszInduqYeR9WDvQeaymxqmzH4Q6DUrqzJXI8Sdr4iVmM/ePruKSGy1MDJTgHjayzARDN690QDttZse3SuvXLapMV9AhlLpqj9wV9POeGfAfEBx9Ma2b4SwbT0peeQfvvFsujgqfQRSuAE3eKd58cvURdznl3t1kB5wYxsAFL3HzJ9FymKUBa/0NGD/IF27Cr+9c7poEUR4k1mhezERNpTUL0MEMktVy6+w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 84.19.233.75) smtp.rcpttodomain=cirrus.com
+ smtp.mailfrom=opensource.cirrus.com; dmarc=fail (p=reject sp=reject pct=100)
+ action=oreject header.from=opensource.cirrus.com; dkim=none (message not
+ signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790251240; x=1790856040; darn=lists.linux.dev;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=V4eu6A97YuNjzUNXoyTJh0xukmvbj4affVPwK+58STs=;
-        b=JNkFctAYmk1DrafEy3bzwjjOPC/YsbQQubsFAYJ/w2vmrBUfW5bYSXBa8AkaxlJxP0
-         /egwjLPEA7MPUmrLqo4xeLVgYcozgkYdcSK9H866gSurR2DrksumsLbjWBSwvTlNrPo4
-         w6scdnK6oGreTzzzv+1ZAu+tVR5YyxjfGagAzEdFKkDJIrldmhSLpATqHS87RxzNHZrh
-         /WDF+aRmM80s5lilR3EQb1HFzyAdC7tCXfIo8JFO8WjePPfJWfZKlHNWHOMn84g8uobG
-         JnJHPLJMnngX9+jBrSZAZhPvOVW4UCU19vah5yFuC3hKpiC1PyFPHC6ODUGNc1DOeF61
-         KGsw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790251240; x=1790856040;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=V4eu6A97YuNjzUNXoyTJh0xukmvbj4affVPwK+58STs=;
-        b=XqAlndl2KKNE1/p7q8RnIoo+xYieUTC363NBqQv5Xcv6XDZLmZuMKpxxbGBplVrx8i
-         p9XZ4Q0Ase3E9pqVbfgd0xavrdcAoz3AiCl9pOZG1WjXJDlHndGVw/wUKJ7M1BEox7UC
-         LChElDAA+y9QcViSqzQ2dx+eBBeDBAOXhUYgAnnuLou0g5q2HT45kqBiKbRf0quOLRqb
-         R/VoNpzoeFAYhGzpXZGEsRqUdr7m8g1VTWoOTKa+4UDxx/jICq1ccmVX6F0m32NWUvzq
-         iN2OdIN6K6fam/Uf91H4UUHWIFv/RYDcFuxGFNFiPmFguVtEwUbevKkwoyUtMXAsxyau
-         d6xw==
-X-Forwarded-Encrypted: i=1; AKwUvBwjjlUJwXTLPhds+owE4Sd7CGcOo20mETQPi8i1YSwk6+lT+O/v/ZQH7tnjsLhf3KR0g0c=@lists.linux.dev
-X-Gm-Message-State: AFuF++kqEK0ml74UWiJPTuFCaoVERxgkjVJq5sHwyH6aM9R2DTs4VnHe
-	yGGHEFVfisRYPVVBuqCUQA2JSODzTCQeI3jY7GsysWcEdKUu8AwqDgHwPJW5Zd+np4d1/yhoanV
-	47bDb663QwPao0N4fiNybsij1rux6kVU=
-X-Gm-Gg: AYBFou0RYd7sY3xycQTEbRwZG63Qa7ZBYmreiCKonbosSLa1bcPA2FMf2fMh2DMDM6W
-	qhKYywYRw8SJGz4UUHXG4JCeC/JTi/ByFqrQJWNxmRmwpoxEe5jP4LlU5yXZdeskTUHTodIzNr3
-	Wt7P3nYj+1Smib+5GUxFzdD0Us/W3IP37Ei1UbK+sQZnqNIgBPegLsw6iLDOezbZiN3d0Zzn+Ux
-	0hPimeTDNsbo4xr8e7Y3DuHhajEEMuTPU4LyDEXlKlSa2nKy5eSn4eJQlE5cZ2qa/iLaWtAif0p
-	0QsoM4nCEKbWHswJlSMFuYTWAeQZPFFCUq/GWxrsPHkShO2xb9AxHNk0/Q==
-X-Received: by 2002:a05:690e:c46:b0:673:938f:684 with SMTP id
- 956f58d0204a3-673938f08d6mr168889d50.56.1790251239884; Thu, 24 Sep 2026
- 05:00:39 -0700 (PDT)
+ d=cirrus4.onmicrosoft.com; s=selector2-cirrus4-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZJoeBHeiQKNwwIlhBSbfyjNR+vVP2DHCQ9A2bNfJ65c=;
+ b=QZ2Z/Z/c4ffpiqZlV5vvGCBs+KwXITk2qamW8qHkhoxJ7STvM/ooWkSzq5JiIF3sLNN2dKsZ3flntS1BxDRP6qhqd7/1bsvLU1BB24PqeqiONgfeRQSW7alEi7XiLzZ8u/x35E0Al9XWmlwQAstx5ZRBqHYPgPXNevWIpzzlQnc=
+Received: from MN2PR07CA0027.namprd07.prod.outlook.com (2603:10b6:208:1a0::37)
+ by CY5PR19MB6448.namprd19.prod.outlook.com (2603:10b6:930:3c::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.18; Thu, 24 Sep
+ 2026 12:05:26 +0000
+Received: from BN3PEPF00022BCA.namprd03.prod.outlook.com
+ (2603:10b6:208:1a0:cafe::1c) by MN2PR07CA0027.outlook.office365.com
+ (2603:10b6:208:1a0::37) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.13 via Frontend Transport; Thu,
+ 24 Sep 2026 12:05:26 +0000
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=softfail (sender
+ IP is 84.19.233.75) smtp.mailfrom=opensource.cirrus.com; dkim=none (message
+ not signed) header.d=none;dmarc=fail action=oreject
+ header.from=opensource.cirrus.com;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ opensource.cirrus.com discourages use of 84.19.233.75 as permitted sender)
+Received: from edirelay1.ad.cirrus.com (84.19.233.75) by
+ BN3PEPF00022BCA.mail.protection.outlook.com (10.167.248.167) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.8
+ via Frontend Transport; Thu, 24 Sep 2026 12:05:25 +0000
+Received: from ediswmail9.ad.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
+	by edirelay1.ad.cirrus.com (Postfix) with ESMTPS id 93176406540;
+	Thu, 24 Sep 2026 12:05:24 +0000 (UTC)
+Received: from ediswws07.ad.cirrus.com (ediswws07.ad.cirrus.com [198.90.208.12])
+	by ediswmail9.ad.cirrus.com (Postfix) with ESMTPSA id 8C45A820247;
+	Thu, 24 Sep 2026 12:05:24 +0000 (UTC)
+From: Charles Keepax <ckeepax@opensource.cirrus.com>
+To: lee@kernel.org, vkoul@kernel.org
+Cc: yung-chuan.liao@linux.intel.com, pierre-louis.bossart@linux.dev,
+        linux-sound@vger.kernel.org, patches@opensource.cirrus.com,
+        mfd@lists.linux.dev, linux-kernel@vger.kernel.org
+Subject: [PATCH v2 RESEND 0/2] Add SoundWire detach helper
+Date: Thu, 24 Sep 2026 13:05:18 +0100
+Message-ID: <20260924120520.2511081-1-ckeepax@opensource.cirrus.com>
+X-Mailer: git-send-email 2.47.3
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260921104058.353748-1-lgs201920130244@gmail.com>
- <20260921110512.GS106095@black.igk.intel.com> <CANUHTR9gA-mKn8Y496Pty4_Fhu3BSSyhXWrmiod1WvuVdQjkag@mail.gmail.com>
- <arJ0pDlXpdlsF0sT@ashevche-desk.local> <20260922123315.GF106095@black.igk.intel.com>
-In-Reply-To: <20260922123315.GF106095@black.igk.intel.com>
-From: Guangshuo Li <lgs201920130244@gmail.com>
-Date: Thu, 24 Sep 2026 20:00:29 +0800
-X-Gm-Features: AclHuK8ajLz_1mV9OsX5cTlVyofvFYTK8P24xEanxXIUMhPnGnhiLT98a2I6OJ0
-Message-ID: <CANUHTR_Su1KxOeB2fJDwzVeyW4WpnWuzTYm=6Yz4z12Pr6GugQ@mail.gmail.com>
-Subject: Re: [PATCH] mfd: intel-lpss: fix iDMA device leak on probe failure
-To: Mika Westerberg <mika.westerberg@linux.intel.com>
-Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Lee Jones <lee@kernel.org>, 
-	mfd@lists.linux.dev, linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF00022BCA:EE_|CY5PR19MB6448:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: 5bfd3d47-7df9-4696-7adc-08df1a341e6a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|61400799027|36860700016|23010399003|376014|82310400026|10067099003|56012099006|11063799006|16102099003|18002099003|13003099007;
+X-Microsoft-Antispam-Message-Info:
+	iIfW2EJ659X04/rygkD7GBt9KdgYcTHr2a31ENn0BWosBnsX64q1BOoqzy0VtZdCKSs8zJ1DyAQRtk2juOSKJ0slK1nAWPBeYG0KMsp+PnU5x3T1FENPsRImrwbm/+f0hzWZjiZ+0x/kWuiym7R3vHIiCYNxk9216jJFXAAWAFpwzorKVVU6cWP7kDkvWJiCBclXmPQEcNb8rEC5k6zUlR96EwKW00YPuwk/ClX/hte+5lSubumKOn6Vl7oT2n9WfGoPifquoLtxF4iBWFtSGNIaqgEaaZ6pIN7332n2KNwSNRRrX0NgFobdZEYeNmvk6TWXsCQ4udJBdDcRDqncgsFN0QOjARNsA9UM4JOrm1lDzH6lY5uIJD/YNJtVm8yusgjTV32F4RAUppe4OcW12QfCWHRxCGu/D5XpPUj8R9ZdYGl5Yp2lMqTL3lsf2mLSMhhiWRgQ1+N4AEII4phKGrwEqPEkrbfp7KpInzq0XM2lyO8XU+V8o/wxlJSYVUQkZp/i3+sDh7mI5hp+GhEMIZBLFflclA0+rtXH4HiwE+YrPlAEI3U2hZbBKVWBVeleF1fBK8vHVcWADW/kjU6Hy3tfFkypdzPz+PW5+LFmnKmxr1udEVjiilRVOC/CtsXdCX2aK6SZQSlDGqVgp0J/sRQhjDmadMjMyN9HqL0tcTY=
+X-Forefront-Antispam-Report:
+	CIP:84.19.233.75;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:edirelay1.ad.cirrus.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(61400799027)(36860700016)(23010399003)(376014)(82310400026)(10067099003)(56012099006)(11063799006)(16102099003)(18002099003)(13003099007);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	Y7g6OPw3a3pxR4E03jETQfUoLyZvHRnibY9qgdq61UN5s7PlqNTTa2Lk7ewwzAtUbUK4ZWFzwqfyeq9f6Q2tXhRIftEwDcs89xmjLGQaGdseIFyQYwMxVuaP0dso3Y/h9B4JLaOLV7NLksASwAC657avep8LCl+UGL02yrhl8yh4droJq121wj4SCeQbXuySbzfm7f6KT+cgNDe1ug9/hub9ueQvf1/fW/aONp5+9EVEM5NHaTI1aEfm1ZtOcs3WQd7laos7vnf1+Iq+Cgi3yJnZ8NR+ydfxFADwpfFUeJ2fQgUMnQ8+klBgWjtl68VOiHqHuzNLCR2//ZK42lvPzBoUrFwdiG/JlU45f3Kx/RKqySrfBeXsmcQrq70+hGkdRYl0BSyPbxY5l8BTpogAU5Q1m5OH9h/lq+ZYeSlhO7vjTVVTSXVGHLcDlkWdWjol
+X-Exchange-RoutingPolicyChecked:
+	eQhS+eTBL+AfYlaRY9qmBJFNuuG2J9y1v6AMO0u9EBwG+oChYsQAeuX92hBM97NvO1TM7JPOU191kon5R1AHeL8EF9nAc0MbteN1bj6tmX7TZktepqfL2SIdsu460Mrnz8HXfncJn4ms4O1vL+k1uq7EDLmJbPIQHyhqcn0+0yLOShBV4axufJca31O9/kfVi3a4Zd1dAeEYDuaCIfBNrVpuwYwpNzEvpVs66b3RAs+IXqwIICmTxlp+d6iK7gshPlc42u0b1szhsOeaIn23Soad+YUes6InLPxqB3dI2eFiwiDzSgg1ls1e7MtAkhVK7CPA2ZeAU1cADU5aFHTheg==
+X-OriginatorOrg: opensource.cirrus.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2026 12:05:25.8679
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5bfd3d47-7df9-4696-7adc-08df1a341e6a
+X-MS-Exchange-CrossTenant-Id: bec09025-e5bc-40d1-a355-8e955c307de8
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bec09025-e5bc-40d1-a355-8e955c307de8;Ip=[84.19.233.75];Helo=[edirelay1.ad.cirrus.com]
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-BN3PEPF00022BCA.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR19MB6448
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTI0MDA1MCBTYWx0ZWRfX23vORqsdNe4t
+ L2P5V3/yfletUivUb8Rsm3yAAxHzi+AApVQKhQ68nNxi0IGTpNJyIhimCbzwMcYEwe1ZBuAETdG
+ iR3AvwMTsmbRb0jZsnnTrorJiRnEHao=
+X-Authority-Analysis: v=2.4 cv=fuZJ914f c=1 sm=1 tr=0 ts=6ab5120b cx=c_pps
+ a=rXPbZPGhlTecGYCSGyL8Jw==:117 a=h1hSm8JtM9GN1ddwPAif2w==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=VdqzKS8jKosA:10 a=s63m1ICgrNkA:10 a=RWc_ulEos4gA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=iX4cTi3TZMoOKdANLEfx:22 a=KfkQE9S9VqCBgivYGm0O:22
+ a=VwQbUJbxAAAA:8 a=w1d2syhTAAAA:8 a=cZtL-XUxLnsMaWc3fMoA:9
+X-Proofpoint-GUID: VwrV3vmEcB82RUFtTivZQGwUG1rlRe5q
+X-Proofpoint-ORIG-GUID: VwrV3vmEcB82RUFtTivZQGwUG1rlRe5q
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTI0MDA1MCBTYWx0ZWRfXysH5Rzzzccrz
+ m2/wtOUIvHo18F2bTrbMdEEF5T82u6j0tYl4/t/U84kdA3yOIYYMSMW8aKdcgWv1l8fimaMoWCF
+ UtVMvEhAgXtoZ5fr6ikBIj8LqyU+hmc9OyMm98rOEb9sDiCSfhJKrzEe4+wCDaaCzm3L5mx6i8O
+ BK3GRhXc9QGr9Pcj3B/JVfTuL9ZUVMFxrvF+GRNm2PujuwFbLS3NxiNIdwUyPk3YTrsnlP/skdY
+ ST4QZ9eatUpZqLDECGMJ246gO7Tk40wfWyvuBf1o8uNnpqZ0owrGeaPpvCfGyM6yswa5Nel+Psr
+ zzePZex564S95j5tmBT9DVTqJ9WqjN7Hx/KyrwnFNS7ZacgSJfVABw7SRDz/Xeb7HqwdS+gVdVZ
+ Ef8V/u07F+wTH2pVcc8hFP7k4zps0lkh5Ip+tYtngnmGN7lc41iEekYllqo68M0eOKe0k/OH5/+
+ H0KY8EUokfXl41IzUVw==
+X-Proofpoint-Spam-Reason: safe
 
-Thanks Andy and Mika.
+Currently, if a SoundWire driver takes an action that causes the
+device to detach from the bus it needs to be careful. There will be
+a period of time until the detach is recognised by the core, if the
+driver immediately calls sdw_slave_wait_for_init() it is possible for
+that to complete before the detach has been recognised. Leaving the
+driver with a device that is potentially not ready for what follows.
 
-On Tue, 22 Sept 2026 at 20:33, Mika Westerberg
-<mika.westerberg@linux.intel.com> wrote:
->
-> On Tue, Sep 22, 2026 at 03:29:24PM +0300, Andy Shevchenko wrote:
-> > On Tue, Sep 22, 2026 at 03:59:32PM +0800, Guangshuo Li wrote:
-> > > On Mon, 21 Sept 2026 at 19:05, Mika Westerberg
-> > > <mika.westerberg@linux.intel.com> wrote:
-> > > > On Mon, Sep 21, 2026 at 06:40:58PM +0800, Guangshuo Li wrote:
-> >
-> > > > I think this could use devm_mfd_add_devices() instead.
-> > > >
-> > > > > The issue was identified by a static analysis tool I developed and
-> > > > > confirmed by manual review.
-> >
-> > > Do you mean converting both MFD registrations to devm_mfd_add_devices()
-> > > and dropping the explicit mfd_remove_devices() from the remove path, like
-> > > this?
-> >
-> > Won't work properly. The rule of thumb, it should be no 'goto' after devm_*() call.
->
-> hmm, isn't the unwind done in driver core and has nothing to do with goto?
-> Maybe things have changed since I last time looked? ;-)
+To avoid this race add a new helper that drivers can use to inform
+the core the device will detach. This clears the enumeration
+completions ensuring that sdw_slave_wait_for_init() can't complete
+until the device re-attaches.
 
-devm_mfd_add_devices() would remove the children when the parent
-device's devres is released after probe returns an error. However, the
-current error path tears down the debugfs, LTR, clock, and IDA state
-before returning, while intel_lpss_remove() removes the MFD children
-before those resources.
+This is the third part of a longer series of moving these slave
+attach/deatach operations into the core:
 
-Given that ordering, would keeping mfd_add_devices() and adding
-mfd_remove_devices() at err_remove_ltr, as in the original patch, be
-preferable here?
+https://lore.kernel.org/linux-sound/20260512103022.1154645-1-ckeepax@opensource.cirrus.com/
+https://lore.kernel.org/linux-sound/20260608102714.2503120-1-ckeepax@opensource.cirrus.com/
+
+I have based this series off Vinod's soundwire tree, but the patches
+apply to both the current MFD and SoundWire next branches so should
+be fine to apply to either tree.
 
 Thanks,
-Guangshuo
+Charles
+
+Changes since v1:
+ - Correct kerneldoc
+
+Charles Keepax (2):
+  soundwire: Add a helper function to indicate a device will detach
+  mfd: cs42l43: Move to core detach helper
+
+ drivers/mfd/cs42l43-sdw.c     |  2 --
+ drivers/mfd/cs42l43.c         | 15 +--------------
+ drivers/soundwire/bus.h       |  6 ------
+ include/linux/mfd/cs42l43.h   |  1 -
+ include/linux/soundwire/sdw.h | 26 ++++++++++++++++++++++++++
+ 5 files changed, 27 insertions(+), 23 deletions(-)
+
+-- 
+2.47.3
+
