@@ -1,143 +1,72 @@
-Received: from cp2.siel.si (cp2.siel.si [46.19.12.180])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BB2B411FAC;
-	Thu, 24 Sep 2026 06:50:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=46.19.12.180
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BFC284252AB;
+	Thu, 24 Sep 2026 06:54:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790232663; cv=none; b=A2f6DoxO5ryuUv/4FyUtxyRixbdVROKhuJ9gUFYobigm3ypZdg/Z6ayhOpNVi3hvU2xeh8CUCm+rPeu5iuOQgjCghM/d8wNpEEPjWSIEdP8TksyP2HXbtyCC1hlmmxw7eAddWrwxjdq2v7iICYuYeBXV+dzg4dNnAGYW0jRj/U8=
+	t=1790232911; cv=none; b=laVPiOCEDRU7idkXwyxdAzJ+v4xHutYqcezQ6QkFK+gCF91cUPmtHS7mrP2nKTbqVfz61bjYpkT1LsRMO807ifP0R6wcy72SkaAB+a1dG0G2HcpO8lEEHFiOtpMCxjToq2Iej9P03qCi0C6Sdak8uBTYFuFwKk9/KSq1vt/NzKU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790232663; c=relaxed/simple;
-	bh=MCNvcoTk5YjIM8nidulhpRODqz/2SeRFgaV2PQZnIB8=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=newbVUIQbtZX3I4xLzwjiJd9quvTQ4wYYpETLmTgxWGJ4YNnKdLag1KxxTwZCVFTmRxEJuOnPjbySlAEYt09CdeLbZ7Ntew5SqCpBv1fchvPXE8nVJPHxSjxtEysLD+bfx3W+Yml5ENceZqKiPwy0Ybn5p34STw+WECG2reYaqQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=norik.com; spf=pass smtp.mailfrom=norik.com; dkim=pass (2048-bit key) header.d=norik.com header.i=@norik.com header.b=UwYG+7Mf; arc=none smtp.client-ip=46.19.12.180
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=norik.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=norik.com
+	s=arc-20240116; t=1790232911; c=relaxed/simple;
+	bh=PmTx3nVvmRzO6q8oBv16K1gVDmX4dfcy1BwWrGLwYv0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=HyIMAQ7lovIZ0h2ZwvdU8ym4xzmAyfKTvv91fi0HZJ38uYJ8eT23m4VsWbjSqHQIet7v+30Ro4QCM0nKNeHfLgvLme9hg37ZaYgB+RPvsOgn5qFbqkHxIrwAn/YizfBHd2NzS1kAmZwXyVZyTmq5wyAF1H5yw8GE59wLT6rMFZ4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EdENoEyN; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=norik.com header.i=@norik.com header.b="UwYG+7Mf"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com;
-	s=default; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
-	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Unsubscribe-Post:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=rbBjtZiwvW3+ed65Dqj2P8+3DohWPWa2sAVoOy4X4uM=; b=UwYG+7MfwAnL+GwQoqLTRm3NiF
-	RzXKfdW43ZehApaeECIGs/G2lSEjFUYL+yn2F7iKvWK8flpOdwFGIyGsS1ezuGcWrolciOZIk/0wY
-	RVffowucdAhZL3QOATt2W9lKwMYtI0NTUvXq28hEHchEoZ7PcblOz5q7Z1DgNKx0s1FHnl2xVJI13
-	xrlO53SEFyzDbhqPXuXdxTnfOnTSKhyeeHtqiPxTZtIaWnHHY05l5G+1APv3BSjdaU+uDvS+F6eqE
-	xeyh0ol1IV3RccMb39ephvbjTMd1tzyz1euuBX9kF4+99VScTIA2EhpUOT/T1fpXnAeu6Eouh5Mlr
-	UVcKltvA==;
-Received: from 89-212-21-243.static.t-2.net ([89.212.21.243]:54176 helo=localhost.localdomain)
-	by cp2.siel.si with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
-	(Exim 4.100.1)
-	(envelope-from <primoz.fiser@norik.com>)
-	id 1x9dI7-0000000AyGs-3vil;
-	Thu, 24 Sep 2026 08:50:48 +0200
-From: Primoz Fiser <primoz.fiser@norik.com>
-To: Rob Herring <robh@kernel.org>,
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EdENoEyN"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 30EE51F00893;
+	Thu, 24 Sep 2026 06:54:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790232894;
+	bh=lCtdSBzZeYW3VMpSyC5oblNd6RICO241sZJgNzC3eWg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=EdENoEyNr14OaiwJbS/9Rn5cJ729SQ0montonmsY5MmVj8Uu/ShkgjLgNaAWzCmZN
+	 772IiCk2dx4gIozywhBx5lyl6qSrha3tFu6EzEe6RcOrFJOp7fDcsdpaf4gErJi8W9
+	 xWdnjUmOQ8OM+vtUpUA74hz82OxU2qlSr0MTmYDaxK/xcbmgj3tN/EH9BDsM5LpV3U
+	 bRhlprO2nB4RjOcOYlZpxbEsC7T2puTvCUQn/F++cS0OLS+QXa9NC1hbp+nYwf37Oy
+	 oTrFE23jtaq3AEsLf/9cZDuNAjLB1rPwmc6Q5Jihzg+buLRXqR/sPn15dSzt4lJR/U
+	 XAf/VBgaNHyPw==
+Date: Thu, 24 Sep 2026 07:54:49 +0100
+From: Lee Jones <lee@kernel.org>
+To: Linus Walleij <linusw@kernel.org>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	Support Opensource <support.opensource@diasemi.com>,
-	Lee Jones <lee@kernel.org>,
-	Wim Van Sebroeck <wim@linux-watchdog.org>,
-	Guenter Roeck <linux@roeck-us.net>
-Cc: devicetree@vger.kernel.org,
-	imx@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org,
-	mfd@lists.linux.dev,
-	linux-watchdog@vger.kernel.org,
-	upstream@lists.phytec.de,
-	andrej.picej@norik.com
-Subject: [PATCH v2 3/4] watchdog: da9062: Add support for dlg,wdt-sd property
-Date: Thu, 24 Sep 2026 08:50:43 +0200
-Message-Id: <20260924065044.368341-4-primoz.fiser@norik.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260924065044.368341-1-primoz.fiser@norik.com>
-References: <20260924065044.368341-1-primoz.fiser@norik.com>
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	linux-sound@vger.kernel.org, devicetree@vger.kernel.org,
+	mfd@lists.linux.dev
+Subject: Re: [PATCH v2 6/9] ARM: dts: ux500: Add sound DAI provider cells
+Message-ID: <20260924065449.GN3864833@google.com>
+References: <20260918-ux500-simple-sound-v2-0-88d29416e3c3@kernel.org>
+ <20260918-ux500-simple-sound-v2-6-88d29416e3c3@kernel.org>
+ <CAD++jL=yLFiYcWsRF6eR4a8o=27wcmj4nxa8jirDaOfR3JBHkw@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cp2.siel.si
-X-AntiAbuse: Original Domain - lists.linux.dev
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - norik.com
-X-Get-Message-Sender-Via: cp2.siel.si: authenticated_id: primoz.fiser@norik.com
-X-Authenticated-Sender: cp2.siel.si: primoz.fiser@norik.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+In-Reply-To: <CAD++jL=yLFiYcWsRF6eR4a8o=27wcmj4nxa8jirDaOfR3JBHkw@mail.gmail.com>
 
-From: Andrej Picej <andrej.picej@norik.com>
+On Wed, 23 Sep 2026, Linus Walleij wrote:
 
-Implement a method to change watchdog timeout configuration based on the
-"dlg,wdt-sd" devicetree property. Setting the WATCHDOG_SD bit enables
-SHUTDOWN mode, and clearing it enables POWERDOWN mode on watchdog
-timeout.
+> On Fri, Sep 18, 2026 at 12:51 AM Linus Walleij <linusw@kernel.org> wrote:
+> 
+> > Describe each MSP as a single-DAI provider and the AB8500 codec as a
+> > two-DAI provider. This lets audio graph endpoints resolve the MSP DAI
+> > and select the codec playback or capture interface by port number.
+> >
+> > Assisted-by: LLM
+> > Signed-off-by: Linus Walleij <linusw@kernel.org>
+> 
+> Assuming Lee will apply the ACKed binding patch so I applied this and
+> the rest of the DTS patches to the ux500 DTS branch for v7.4.
 
-If no devicetree property is specified, the WATCHDOG_SD bit stays in the
-default configuration, not breaking behaviour of devices which might
-depend on default fuse configuration.
+Right, but it's not Acked yet, is it?  Or did I miss something?
 
-Signed-off-by: Andrej Picej <andrej.picej@norik.com>
-Tested-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Reviewed-by: Adam Thomson <Adam.Thomson.Opensource@diasemi.com>
-Acked-by: Guenter Roeck <linux@roeck-us.net>
-Reviewed-by: Guenter Roeck <linux@roeck-us.net>
-Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
----
-Changes in v2:
-- implement Guenter's remarks (code refactor and update commit message)
-
- drivers/watchdog/da9062_wdt.c | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
-
-diff --git a/drivers/watchdog/da9062_wdt.c b/drivers/watchdog/da9062_wdt.c
-index 3d7bf2f351db..0c007847b7c4 100644
---- a/drivers/watchdog/da9062_wdt.c
-+++ b/drivers/watchdog/da9062_wdt.c
-@@ -206,6 +206,8 @@ static int da9062_wdt_probe(struct platform_device *pdev)
- 	unsigned int timeout;
- 	struct da9062 *chip;
- 	struct da9062_watchdog *wdt;
-+	int ret;
-+	u32 val;
- 
- 	chip = dev_get_drvdata(dev->parent);
- 	if (!chip)
-@@ -245,6 +247,22 @@ static int da9062_wdt_probe(struct platform_device *pdev)
- 		set_bit(WDOG_HW_RUNNING, &wdt->wdtdev.status);
- 	}
- 
-+	/*
-+	 * Configure what happens on watchdog timeout. Can be specified with
-+	 * the "dlg,wdt-sd" devicetree property (0 -> POWERDOWN, non-zero ->
-+	 * SHUTDOWN). If the property is not set, leave the default in place.
-+	 */
-+	ret = device_property_read_u32(dev, "dlg,wdt-sd", &val);
-+	if (!ret) {
-+		ret = regmap_update_bits(wdt->hw->regmap,
-+					 DA9062AA_CONFIG_I,
-+					 DA9062AA_WATCHDOG_SD_MASK,
-+					 val ? DA9062AA_WATCHDOG_SD_MASK : 0);
-+		if (ret)
-+			return dev_err_probe(dev, ret,
-+					     "failed to set wdt reset mode\n");
-+	}
-+
- 	return devm_watchdog_register_device(dev, &wdt->wdtdev);
- }
- 
 -- 
-2.34.1
-
+Lee Jones
