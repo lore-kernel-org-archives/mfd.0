@@ -1,218 +1,110 @@
-Received: from mail-wm2-f13.google.com (mail-wm2-f13.google.com [74.125.225.141])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 492983E0081
-	for <mfd@lists.linux.dev>; Thu, 24 Sep 2026 13:10:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.141
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB79D476CEC
+	for <mfd@lists.linux.dev>; Thu, 24 Sep 2026 13:41:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790255425; cv=none; b=Zr/cABqMFbMtGgB+Q0Or2yoBHAxsktTW8Dvhsd7uj1rT7mtQJNVKb7GiLwE1lwGdDuqAQ6AQMUqI5CmuPNTKH3z1/G2RP5kiuqOo2je3QSGZSSWZ6iGN8ccrDP8rxGjUWUkpGfFu4gAXDeuWLxCq+X/ERqejnMuIfdFCl1fypOM=
+	t=1790257282; cv=none; b=GQA2QCFCAd/M37ivDutI2hj6eyjdA4EMUbyuoXmceTdSxM5e14gxA7nGKRi5bGAkQ+NjjN1//jvI+lPsgr71NznpXvWoLcS8/pZIE2Kem3QzkZO3qcVOUCq1VxADbaDXJKAM8PPEKrU8KhXqt3aWBBecezH1egj2terz7cJI454=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790255425; c=relaxed/simple;
-	bh=ssAl/+k4jPnOyZvFEczhhMivxC5cY0K7XEWGExEoAHg=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=IrKY4mwWaMrXyl+4bSmDQbStUWtZcxrSWZhyL9s/NzCFQSsAM54lVaqVyOx5orT3vSP8iU7025LayHeLDcC+bNCtW2stfRpwGke1AEchkeBX7iIL5Z7kaEQvVhoG/8xITqvhhJ9KdTqz39BBVAEihJolyGwKVppp+ZLOEHNfwPs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=dLNIXwe5; arc=none smtp.client-ip=74.125.225.141
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	s=arc-20240116; t=1790257282; c=relaxed/simple;
+	bh=PFdeZvRwJ03GC0MI8yKsz1xucQfg/jVwJ3DLdZiHs5E=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=fnNNCVIozBALftiy5KJorGlLShX2dMfm14Fu14Rsy96fabZagj/AhJYNfV4uMsF/6Qw1mCSJFS/3eQSF/R0727UVJDhhGVQIs+9d5mwyvv0qzwYZfI0W8jAbUiC/+bcXZPjgXV/hyVsIpTYRbwLrvsFjNrA6kjgNj2hZZ9VoFM8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=n74Qdsmr; arc=none smtp.client-ip=192.198.163.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="dLNIXwe5"
-Received: by mail-wm2-f13.google.com with SMTP id 5b1f17b1804b1-49e83a388f8so12640195e9.1
-        for <mfd@lists.linux.dev>; Thu, 24 Sep 2026 06:10:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1790255420; x=1790860220; darn=lists.linux.dev;
-        h=content-type:mime-version:message-id:date:references:in-reply-to
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=yqY+VYU5NXGX1DIhJ+QOGA70yG14D0itgxaOKESe4N8=;
-        b=dLNIXwe5VKPoavVSqtztRK3s0Zj24t77qV0Kkj1Var9aiv/gDB1+Z/D0nu5wv5ZGEc
-         DzxuQshEdbo++67L2bXYWOlnG5/vX22K+RJ5TJqoJksLIY5AT4TWZE9JleMuTYBZS4XR
-         7nz83GFihFBhaFd/yPWH1M5z75Bucs4KO6p0O0Zyy9eqkp+ifGpttrAPJPDZtdK1Iz+v
-         9iBVn5z3MfItFsRTLsMUKANILvyj6TD7qahLU/+r1jqAn1RtSDzuytJhrkSXAinpnRda
-         7xf+tylVtxOa75sOVoI69+e7yyW8Fy3Aid4ew6xHWHO2HxpyPHTano1/8CLm6XOSm3Er
-         PorA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790255420; x=1790860220;
-        h=content-type:mime-version:message-id:date:references:in-reply-to
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=yqY+VYU5NXGX1DIhJ+QOGA70yG14D0itgxaOKESe4N8=;
-        b=1yCdWDBFDYlJJthg6c0wTSXZEnj2XjvAo+HrbqAmUEYYeB0w96lIsk4z7ruA9qbzaE
-         1RVo+PRd3srFeLXVfKmxfKRP7VswsTqhRA8YxCxK2czLfp07Gn/S/GXMhkPr3gtPGS7w
-         yQOP72ypzOYyY6hJJFDTO5vzdHJef+uYg3Iqg6xiTZ33HxX1KF7mIfjYjX9P8uPkj0iA
-         8uLXaZTOoJ6OEH7wXUaCDX1z+j5RpJGJAPZU05SQ7a+9iXkzItQY4Fl6aYvqtCptuDlF
-         j2C6N26FtMfkJx2Uk64x8FuDEgjcDq/S3Y5wuK71oPoPqAyP35RXKsWqm6Jy1rzR2/7g
-         GnMg==
-X-Forwarded-Encrypted: i=1; AKwUvBxDckIMcRwWhu5lJ0L7603IksAa3rTrr60hp7DSbcUnJK+eJfFk4aMkEnAIr/e9gbfCZv0=@lists.linux.dev
-X-Gm-Message-State: AFuF++lwSEBeti2iNQ3sz8Pc2lanO3FYCi57nW/rph6eNDK8ZG/Qj+1F
-	eN4l4erNCuuBNgnroSi0ayUXldcaFWWlmhiopqp4wZmwlGjxwrIQI1acoT1gD4lM3I8=
-X-Gm-Gg: AYBFou0tpiXQc5axWewy9OlmnL1T8COiBebECPyOk/WHTxTTKKk/7euInem2GB3nKOU
-	sgYBtF61abtjBNK/vCgo1lFTSONKhTg+S+KodTvxcKKUzyb9zUTHs9AoLvZlIfUiDiOYCjopDNo
-	PnG1LrTAfMesGJtIFk9Y0RDAUU3Mb5SCAgzur5St4AFbhgwIdJoUxIuYKWG37qXePzN17rbsEb9
-	gousQs8qapdYTpFpZnydNIBAtuWx1umzuloFovcxyESkltwvXV5XdiVecild0hCyh4m9Vo7c820
-	XzP3vKPQnlSBpMA9AOcce5/jcJ35b6sGq68/MLQpHhQOXr/PEyzuPDp+OWydlnoExFVKnPWbyBZ
-	WI8g+UbSkQRjG4TZNg5BkBHBxsILb0KUU7xfpQZ5q/yzUiLHamywoL/QJPkTKoGZ5NFKSXC9nfd
-	F6k703T0xAc+akJynLA0o5ymEkCWnTdaITUUcsf2ma2yfUZAUqZzYel2lpnXLhvoq6spkPA/Ivs
-	SRBrHqzWfx7tmyjhQ==
-X-Received: by 2002:a05:600c:8b8b:b0:49c:f512:2361 with SMTP id 5b1f17b1804b1-49fe66d470emr42998155e9.14.1790255420471;
-        Thu, 24 Sep 2026 06:10:20 -0700 (PDT)
-Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49fe0c77b8csm87532775e9.3.2026.09.24.06.10.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Sep 2026 06:10:18 -0700 (PDT)
-From: Jerome Brunet <jbrunet@baylibre.com>
-To: Lee Jones <lee@kernel.org>
-Cc: Andre Przywara <andre.przywara@arm.com>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Chen-Yu Tsai <wens@kernel.org>, Liam Girdwood
- <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, Hans de Goede
- <hansg@kernel.org>, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, mfd@lists.linux.dev,
- linux-sunxi@lists.linux.dev, Sashiko <sashiko-bot@kernel.org>
-Subject: Re: [PATCH v8 2/5] mfd: axp20x-i2c: Fix i2c instantiation
-In-Reply-To: <20260924082705.GO3864833@google.com>
-References: <20260910-axp318-regulator-v8-0-e906a61a7f3d@baylibre.com>
- <20260910-axp318-regulator-v8-2-e906a61a7f3d@baylibre.com>
- <20260924082705.GO3864833@google.com>
-Date: Thu, 24 Sep 2026 15:10:17 +0200
-Message-ID: <1jy0cq94na.fsf@starbuckisacylon.baylibre.com>
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="n74Qdsmr"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1790257279; x=1821793279;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=PFdeZvRwJ03GC0MI8yKsz1xucQfg/jVwJ3DLdZiHs5E=;
+  b=n74Qdsmr9telr3TDhy8D7HPXx+onMyprrFIl8dI5YHywNPMzXo8vFbLj
+   XlKrjYSJ3LRWzIBUNvUkEjS6ZzK6YiPOflHgM7S5Qzw1B7wcGVfc5WLxF
+   gdDMhX0oEJ8wAJGWV6AJhj2ht4eMpruwNEsKQPSWgpIiIVCNrmaUtLB/H
+   Wo6kfdqBSxO8hPHkDv/75QQuMDBeZMs1YvAfs7pLDP6KwAZ7RhGHH7mAo
+   hzTpIzRJauM8qvv3vZ5ShL2FZi2eBosKvac4VJ1Ys87oIAGNS2EIanLSa
+   V3fOzZ2M97T/CCANmLg6wANWZZZGWf+HkV++BOUv817bCqrUAw4QEUCcZ
+   g==;
+X-CSE-ConnectionGUID: 2s7GKfwVS46s1gNlebiLwg==
+X-CSE-MsgGUID: FEb7EHAhQEC75ZnhcKWc7Q==
+X-IronPort-AV: E=McAfee;i="6800,10657,11914"; a="93526125"
+X-IronPort-AV: E=Sophos;i="6.27,120,1787036400"; 
+   d="scan'208";a="93526125"
+Received: from orviesa001.jf.intel.com ([10.64.159.141])
+  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Sep 2026 06:41:16 -0700
+X-CSE-ConnectionGUID: knjfqmmySg2aLKvheaeQwA==
+X-CSE-MsgGUID: rRbQ4xjGQI6NLFU44M0APg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,120,1787036400"; 
+   d="scan'208";a="311944280"
+Received: from black.igk.intel.com ([10.91.253.5])
+  by orviesa001.jf.intel.com with ESMTP; 24 Sep 2026 06:41:14 -0700
+Received: by black.igk.intel.com (Postfix, from userid 1001)
+	id CFF7F99; Thu, 24 Sep 2026 15:41:13 +0200 (CEST)
+Date: Thu, 24 Sep 2026 15:41:13 +0200
+From: Mika Westerberg <mika.westerberg@linux.intel.com>
+To: Guangshuo Li <lgs201920130244@gmail.com>
+Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Lee Jones <lee@kernel.org>, mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Subject: Re: [PATCH] mfd: intel-lpss: fix iDMA device leak on probe failure
+Message-ID: <20260924134113.GQ106095@black.igk.intel.com>
+References: <20260921104058.353748-1-lgs201920130244@gmail.com>
+ <20260921110512.GS106095@black.igk.intel.com>
+ <CANUHTR9gA-mKn8Y496Pty4_Fhu3BSSyhXWrmiod1WvuVdQjkag@mail.gmail.com>
+ <arJ0pDlXpdlsF0sT@ashevche-desk.local>
+ <20260922123315.GF106095@black.igk.intel.com>
+ <CANUHTR_Su1KxOeB2fJDwzVeyW4WpnWuzTYm=6Yz4z12Pr6GugQ@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <CANUHTR_Su1KxOeB2fJDwzVeyW4WpnWuzTYm=6Yz4z12Pr6GugQ@mail.gmail.com>
 
-On jeu. 24 sept. 2026 at 09:27, Lee Jones <lee@kernel.org> wrote:
+On Thu, Sep 24, 2026 at 08:00:29PM +0800, Guangshuo Li wrote:
+> Thanks Andy and Mika.
+> 
+> On Tue, 22 Sept 2026 at 20:33, Mika Westerberg
+> <mika.westerberg@linux.intel.com> wrote:
+> >
+> > On Tue, Sep 22, 2026 at 03:29:24PM +0300, Andy Shevchenko wrote:
+> > > On Tue, Sep 22, 2026 at 03:59:32PM +0800, Guangshuo Li wrote:
+> > > > On Mon, 21 Sept 2026 at 19:05, Mika Westerberg
+> > > > <mika.westerberg@linux.intel.com> wrote:
+> > > > > On Mon, Sep 21, 2026 at 06:40:58PM +0800, Guangshuo Li wrote:
+> > >
+> > > > > I think this could use devm_mfd_add_devices() instead.
+> > > > >
+> > > > > > The issue was identified by a static analysis tool I developed and
+> > > > > > confirmed by manual review.
+> > >
+> > > > Do you mean converting both MFD registrations to devm_mfd_add_devices()
+> > > > and dropping the explicit mfd_remove_devices() from the remove path, like
+> > > > this?
+> > >
+> > > Won't work properly. The rule of thumb, it should be no 'goto' after devm_*() call.
+> >
+> > hmm, isn't the unwind done in driver core and has nothing to do with goto?
+> > Maybe things have changed since I last time looked? ;-)
+> 
+> devm_mfd_add_devices() would remove the children when the parent
+> device's devres is released after probe returns an error. However, the
+> current error path tears down the debugfs, LTR, clock, and IDA state
+> before returning, while intel_lpss_remove() removes the MFD children
+> before those resources.
+> 
+> Given that ordering, would keeping mfd_add_devices() and adding
+> mfd_remove_devices() at err_remove_ltr, as in the original patch, be
+> preferable here?
 
-> On Thu, 10 Sep 2026, Jerome Brunet wrote:
->
->> Apparently this device never really supported i2c instantiation via
->> sysfs, because the driver does not even look at the i2c device data,
->> which are not set. It would only probe if the device matched through DT.
->> 
->> Fix that for correctness, even-though it is probably useless.
->> Add the missing AXP323 while at it.
->> 
->> Reported-by: Sashiko <sashiko-bot@kernel.org>
->> Closes: https://lore.kernel.org/r/20260717090209.2A09B1F000E9@smtp.kernel.org
->> Fixes: 41751b033aaa ("mfd: axp20x-i2c: Add i2c-ids to fix module auto-loading")
->> Acked-by: Chen-Yu Tsai <wens@kernel.org>
->> Signed-off-by: Jerome Brunet <jbrunet@baylibre.com>
->> ---
->>  drivers/mfd/axp20x-i2c.c   | 24 +++++++++++++-----------
->>  drivers/mfd/axp20x-rsb.c   |  1 +
->>  drivers/mfd/axp20x.c       |  1 -
->>  include/linux/mfd/axp20x.h |  3 +--
->>  4 files changed, 15 insertions(+), 14 deletions(-)
->> 
->> diff --git a/drivers/mfd/axp20x-i2c.c b/drivers/mfd/axp20x-i2c.c
->> index 5c93136f977e..a76bec5604c4 100644
->> --- a/drivers/mfd/axp20x-i2c.c
->> +++ b/drivers/mfd/axp20x-i2c.c
->> @@ -35,6 +35,7 @@ static int axp20x_i2c_probe(struct i2c_client *i2c)
->>  	axp20x->irq = i2c->irq;
->>  	dev_set_drvdata(axp20x->dev, axp20x);
->>  
->> +	axp20x->variant = (kernel_ulong_t)i2c_get_match_data(i2c);
->
-> device_get_match_data() is bus agnostic and should still work from the
-> core driver.  What's the purpose of splitting it out and adding
-> additional call-sites?
+Yes I agree,
 
-Hi,
-
-device_get_match_data() works when the data comes through that path,
-which is generally the case.
-
-i2c_get_match_data() calls device_get_match_data() then fallback to the
-i2c_device_ids. It covers the instanciation from sysfs mainly, not
-something usual.
-
-As explained in the description, this changes plugs a hole identified by
-sashiko that technically exists but I highly doubt anyone will
-instanciate the PMIC through that interface. Those things do not really
-come as breakout boards ... That being said, it is cheap to fix.
-
->
->>  	ret = axp20x_match_device(axp20x);
->>  	if (ret)
->>  		return ret;
->> @@ -76,17 +77,18 @@ MODULE_DEVICE_TABLE(of, axp20x_i2c_of_match);
->>  #endif
->>  
->>  static const struct i2c_device_id axp20x_i2c_id[] = {
->> -	{ "axp152" },
->> -	{ "axp192" },
->> -	{ "axp202" },
->> -	{ "axp209" },
->> -	{ "axp221" },
->> -	{ "axp223" },
->> -	{ "axp313a" },
->> -	{ "axp717" },
->> -	{ "axp803" },
->> -	{ "axp806" },
->> -	{ "axp15060" },
->> +	{ .name = "axp152",	.driver_data = AXP152_ID },
->> +	{ .name = "axp192",	.driver_data = AXP192_ID },
->> +	{ .name = "axp202",	.driver_data = AXP202_ID },
->> +	{ .name = "axp209",	.driver_data = AXP209_ID },
->> +	{ .name = "axp221",	.driver_data = AXP221_ID },
->> +	{ .name = "axp223",	.driver_data = AXP223_ID },
->> +	{ .name = "axp313a",	.driver_data = AXP313A_ID },
->> +	{ .name = "axp323",	.driver_data = AXP323_ID },
->> +	{ .name = "axp717",	.driver_data = AXP717_ID },
->> +	{ .name = "axp803",	.driver_data = AXP803_ID },
->> +	{ .name = "axp806",	.driver_data = AXP806_ID },
->> +	{ .name = "axp15060",	.driver_data = AXP15060_ID },
->>  	{ }
->>  };
->>  MODULE_DEVICE_TABLE(i2c, axp20x_i2c_id);
->> diff --git a/drivers/mfd/axp20x-rsb.c b/drivers/mfd/axp20x-rsb.c
->> index 059656f2a1bd..8fdc870c1fe4 100644
->> --- a/drivers/mfd/axp20x-rsb.c
->> +++ b/drivers/mfd/axp20x-rsb.c
->> @@ -35,6 +35,7 @@ static int axp20x_rsb_probe(struct sunxi_rsb_device *rdev)
->>  	axp20x->irq = rdev->irq;
->>  	dev_set_drvdata(&rdev->dev, axp20x);
->>  
->> +	axp20x->variant = (kernel_ulong_t)device_get_match_data(axp20x->dev);
->>  	ret = axp20x_match_device(axp20x);
->>  	if (ret)
->>  		return ret;
->> diff --git a/drivers/mfd/axp20x.c b/drivers/mfd/axp20x.c
->> index 4d770e718716..de6946d4bb13 100644
->> --- a/drivers/mfd/axp20x.c
->> +++ b/drivers/mfd/axp20x.c
->> @@ -1267,7 +1267,6 @@ int axp20x_match_device(struct axp20x_dev *axp20x)
->>  	const struct mfd_cell *cells_no_irq = NULL;
->>  	int nr_cells_no_irq = 0;
->>  
->> -	axp20x->variant = (long)device_get_match_data(dev);
->>  	switch (axp20x->variant) {
->>  	case AXP152_ID:
->>  		axp20x->nr_cells = ARRAY_SIZE(axp152_cells);
->> diff --git a/include/linux/mfd/axp20x.h b/include/linux/mfd/axp20x.h
->> index b352661d99a1..1badb4868d17 100644
->> --- a/include/linux/mfd/axp20x.h
->> +++ b/include/linux/mfd/axp20x.h
->> @@ -997,8 +997,7 @@ static inline int axp20x_read_variable_width(struct regmap *regmap,
->>  /**
->>   * axp20x_match_device(): Setup axp20x variant related fields
->>   *
->> - * @axp20x: axp20x device to setup (.dev field must be set)
->> - * @dev: device associated with this axp20x device
->> + * @axp20x: axp20x device to setup (.dev and variant fields must be set)
->>   *
->>   * This lets the axp20x core configure the mfd cells and register maps
->>   * for later use.
->> 
->> -- 
->> 2.53.0
->> 
->
-> -- 
-> Lee Jones
-
--- 
-Jerome
+Acked-by: Mika Westerberg <mika.westerberg@linux.intel.com>
