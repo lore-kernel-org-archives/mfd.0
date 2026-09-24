@@ -1,81 +1,59 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C59AE47DF9B;
-	Thu, 24 Sep 2026 12:06:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B782A47ECDF
+	for <mfd@lists.linux.dev>; Thu, 24 Sep 2026 12:12:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790251576; cv=none; b=CJF6SR6elxQ9xhVdtlROwUsdJUbVzDE1OyBRDKZh8sU5UczPhOwfH07ADY7FDyJFA+xbt+DnhZE4fxB1iN9GtAcH56c5O7XiURk2WmckpyessQtD3A92v2g3k+Wm9c7kfC+U7+6NqRmKHiWjndQqPfdpbH1h25Kolndtf/d0AFY=
+	t=1790251923; cv=none; b=O7njnJ/MOockCseCGFbAZoWJtE9cxTSWg5yShucsNURc3FgG3EwRjJGaKdL2CzcyYN0GHOcSjH06Hx5D6bDz5P5qEBqygaAH1Gnii3jJu3XMftmErFg4rtjodhFX3otQ/rY3nxS87G2VrmLrgwwo1yB2gSFjiiGPBPweecaIHLA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790251576; c=relaxed/simple;
-	bh=HeUaHytR2Ny8G7lalHxUgGrqgTcsuuwdRy3p0d5VQIE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=XB3xzXVC5i32j/6ALizR6xgZSDohiXfTcHa6ahNyCwtbHebg9ZQfHuFqGqMjs+T9pKay13KMy0vB/JefJVD2/+wz7qykrD8U8jrKAdXn/5qTPSqo1sxabmUEHX28GqnlYE/rN9iDqcd1WsxKjRw+j9aGQy8lKRk9rDMOECgaklU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RCwRACh+; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790251923; c=relaxed/simple;
+	bh=6a2A7idEs/zAekKGaszSg+GZiSzskOB25QB6Ph6ptHQ=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=hHsf5IU/0aUsNMiqPXNOf/2PNK/ZptUXIbuZz9AruY5MADCsT8y1iJcVlvoDfADYVbZoqf1L7vNg5C58sSKeUq+UwR5tnNQScoBuROh3jmOd+J/iPvnfjjUv1JZpINFiNy7lhRkpVV3Jy9Hni2zxTj5jXJbk8Fuuyu2LfV4beYs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IcwbcsKg; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RCwRACh+"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 78AB21F00893;
-	Thu, 24 Sep 2026 12:06:13 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IcwbcsKg"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 263C71F000FF;
+	Thu, 24 Sep 2026 12:12:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790251574;
-	bh=ft+OTCES8ugvjkrYuU/qZLvMsblsf5K47aGXq7gU7cU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=RCwRACh+iJhhqvlt9Qar7j4l8eYQ15/7ck+6CFCU+l01gPu0DvkTsZO4xtegvyA+H
-	 RGHM/E/UQeieIqmMplyK2wBpTmu2+Io2a7yw4mJNCFi9ZQXA0r67B6DEp9xNz4dqIC
-	 s0738sWCmQdf/0vyD6TKMJp0u8V4hbzE3hy/uG19MMSUhs+EErpH9hD4P5WSuj3BUp
-	 kpDwe2YXiXGTqH1g1yXWHb93SjMTyC6r424gjGTpTzuNjCpINfW1yyQLCf2DDCufYE
-	 tRYjvH5wbE/7LcUda7FZr1t6ffzxBcKy3MGgKVnSXH0I1lJccXM4wpbVb0FFSuTChp
-	 3BoCmqPwoEO0A==
-Date: Thu, 24 Sep 2026 14:06:10 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Ryan Brue <ryanbrue.dev@gmail.com>
-Cc: Jonathan Cameron <jic23@kernel.org>, 
-	David Lechner <dlechner@baylibre.com>, Nuno =?utf-8?B?U8Oh?= <nuno.sa@analog.com>, 
-	Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Matthias Brugger <matthias.bgg@gmail.com>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Lee Jones <lee@kernel.org>, linux-iio@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, mfd@lists.linux.dev, 
-	Roman Vivchar <rva333@protonmail.com>, Luca Leonardo Scorcia <l.scorcia@gmail.com>, 
-	Andy Shevchenko <andriy.shevchenko@intel.com>
-Subject: Re: [PATCH v3 1/3] dt-bindings: iio: adc: mediatek,mt6359-auxadc:
- add mt6397 PMIC AUXADC
-Message-ID: <20260924-brass-kraken-from-uranus-cbbe5f@quoll>
-References: <20260920-rbrue-suez-upstreaming-mt6397-auxadc-v3-0-c00edacbee64@gmail.com>
- <20260920-rbrue-suez-upstreaming-mt6397-auxadc-v3-1-c00edacbee64@gmail.com>
+	s=k20260515; t=1790251922;
+	bh=6a2A7idEs/zAekKGaszSg+GZiSzskOB25QB6Ph6ptHQ=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=IcwbcsKgaENnRpqLXNFLP1flewXUZeM0ApqjtYzEa0EAc3VkCdFoYOMO+rd891SVf
+	 I/eXmZCJxZP3dvgMJiFaSzcbeLAqZIB19bCrpt7BKDdNW7vhC4AH57oh4jj0NscJl4
+	 SvBh+nG7fBe0FPM+KiacBFzDJUm2/N+B6R7GBUTTyzKuouojsoOfiEjPkEeibvT9uS
+	 HxHSJJqfLS4SRo/Tlg5ZfooHHNVRf7fOW/rZyFK5xbAEWYWmmfZEJLO7PNQSw67Bwo
+	 oQUDtzv5SnfGXgF8QgkK6WPCiQVd+V510bt+/fVDAYq5x7NMMgGIRH5nX+3F8EQ2cq
+	 VFV1jjjO5n9rA==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v2 RESEND 2/2] mfd: cs42l43: Move to core detach helper
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Charles Keepax" <ckeepax@opensource.cirrus.com>
+Cc: lee@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20260924120520.2511081-3-ckeepax@opensource.cirrus.com>
+References: <20260924120520.2511081-1-ckeepax@opensource.cirrus.com>
+ <20260924120520.2511081-3-ckeepax@opensource.cirrus.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Thu, 24 Sep 2026 12:12:01 +0000
+Message-Id: <20260924121202.263C71F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260920-rbrue-suez-upstreaming-mt6397-auxadc-v3-1-c00edacbee64@gmail.com>
 
-On Sun, Sep 20, 2026 at 12:31:51AM -0500, Ryan Brue wrote:
-> The MediaTek mt6397 PMIC includes a 10-bit AUXADC used for battery voltage
-> and battery temperature measurements. It is not register compatible with
-> mt6359: a conversion is requested by writing a channel number to a select
-> field and pulsing an edge triggered start bit rather than by setting the
-> channel's bit in a request register, and the results live elsewhere.
-> It therefore gets its own compatible rather than a fallback.
-> 
-> Add the binding and the header naming the channels a consumer puts in
-> io-channels. The battery channel is named for the input it measures,
-> ISENSE, which is what mt6323-auxadc calls the same input.
-> 
-> Assisted-by: LLM
-> Signed-off-by: Ryan Brue <ryanbrue.dev@gmail.com>
-> ---
->  .../devicetree/bindings/iio/adc/mediatek,mt6359-auxadc.yaml      | 1 +
->  MAINTAINERS                                                      | 6 ++++++
->  include/dt-bindings/iio/adc/mediatek,mt6397-auxadc.h             | 9 +++++++++
->  3 files changed, 16 insertions(+)
+> Now the core has a helper to signal a device will detach from
+> the SoundWire bus, there is no need for the cs42l43 driver code
+> to separately track that. Switch to using the new core helper.
+>=20
+> Reviewed-by: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
+> Signed-off-by: Charles Keepax <ckeepax@opensource.cirrus.com>
 
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Sashiko has reviewed this patch and found no issues. It looks great!
 
-Best regards,
-Krzysztof
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260924120520.2511=
+081-1-ckeepax@opensource.cirrus.com?part=3D2
 
