@@ -1,118 +1,119 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDCF954788
-	for <mfd@lists.linux.dev>; Thu, 24 Sep 2026 12:17:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BAE0459AC7;
+	Thu, 24 Sep 2026 13:00:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790252228; cv=none; b=U3Tly4fHy559DF1OhtkudvIggoSwFjJhGfbzN0E6NTKHzrVrQBqga9iAM7qUE6IPtuqB1xvermlXPumGjNTgOAr1spQ5C9hly8mqdSe5Uub/NORPwV5vIpmpZZcCmLvrF8L40Xi1nD4k+P6AFb62C8qAs68TRPXeTtsrKgCaEkw=
+	t=1790254846; cv=none; b=acMJwNgEK6h8vtE78D2N0UsDx7fkbSI51WQNyIhybFGYI9tn8etsCAQ3OSoPduZUriFcFF8v2JmZ717Ux8Ie6NlIfEWzQ+eqUFGBTsVOqNp+fYSnSrcFAKtVJgAumnEu5OrIZZff0b9zCgebeuu4gsFGxbhgQhojqWOjukr4gAU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790252228; c=relaxed/simple;
-	bh=ifUOohIUcG2JussOaV/HQZb4e7ScSpeQLqYlPwN+Ozw=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=O3R06OQpoW3bcJO2QwLTOIxmnwe0cd45nQBmY+GH7ShWTtoTO28H5wUQT0/l+bOJ0tNLkx9LuY3gjszwAxrGUq8urG8gtVWVHRJeC8lcybTILLaEnyZkPVH4UcLPVr1bjyOgzE5pZJ4EO0djQBoXd1i7jWZeIDPO5TcJb2fS+JI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Wf0LYaOK; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790254846; c=relaxed/simple;
+	bh=lQ9iv3yD0ptTA54gnXaolzRlm7/dGGbiYR5tFbAgAcM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=pnw6+ERmTJ7L4551Tvw2pkizxFnSjB8JJNplAFoSraBb4vtcMymsjkkb7AwwIOLVAHJFuKXl/KY2jr4wcxDhMV2iowr+UPdwSUA5pcfsuDzX0C162P37/L1+tUq3H0nCXXm4NxiLFG5AC1cgBz61txKTxsPaMVa9OvMqzIgi8Fo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eZENFdU2; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Wf0LYaOK"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 432811F000FF;
-	Thu, 24 Sep 2026 12:17:06 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eZENFdU2"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B35BA1F000FF;
+	Thu, 24 Sep 2026 13:00:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790252226;
-	bh=CwmIZSxE5ptbt4ABrPEfUHZrA5TS+NGx7T8Hce98B/g=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Wf0LYaOKkGoR+UAjd6PA6NpOjqgem2G7DfVke6QXYYZ4D8p51N+tkeae97/0pS3gi
-	 5ifMqC17t+dSrdKbbr+V76krzmgKBM+LxdNoIo+vGROLSakFNk6qrVUp6ZGpvnoEK/
-	 XVm34RpGYGhw5doB3lVSpvcxR9OaQEsfFNhvpV8Ehdrnofd7T1EYk4wRGNHfUfN7t0
-	 47fAHFK1oG57WrAsadWvVZqqpEXlS86C+NpKtNCnX2G9ahQrLVRX2xOjULwCRlfSaM
-	 qPMvhqPHYfFk0KsAAkFDQXu1SXG3uaX3XNAF4O9lXrEGQsjua6qkKxheinxvVTJaSo
-	 jBg173ESfKbaQ==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 RESEND 1/2] soundwire: Add a helper function to
- indicate a device will detach
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Charles Keepax" <ckeepax@opensource.cirrus.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260924120520.2511081-2-ckeepax@opensource.cirrus.com>
-References: <20260924120520.2511081-1-ckeepax@opensource.cirrus.com>
- <20260924120520.2511081-2-ckeepax@opensource.cirrus.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 24 Sep 2026 12:17:05 +0000
-Message-Id: <20260924121706.432811F000FF@smtp.kernel.org>
+	s=k20260515; t=1790254845;
+	bh=wgAsGxjOI4SZCAEuxYRxPYQum9DEyKkKsyTbJWwoLNg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=eZENFdU2E/XV9I//8XRof0Mq2OyiVVh/IlQYRFrXsBhkHGKKPhe5wUEUVv6HNtiIm
+	 mWvLeogoTBMmpwV8w2W9zVk9Ty52RU1vRPH0eegRfZBbAD7HKKfLf4jL8+ps8Un8BG
+	 C4YS3wdM+pettGiXmC1s6w8gu7RlIvZJBIoLtmzRiD0lJvWZ5hMtmrkWLfx4iVcgPL
+	 tN0QOtsa/0JK1E7lPPn/hdF/6o7hodvclldHr8c6jLr4hicJ5SAIVUHkAsTPkf4hLX
+	 2wQTlHmzlzQlUTxSidJ1F2/4AvRwUa0iutemQnEWGljyDfSbgZfQqoHwn66fS1rBsk
+	 ziOjnLv15akpQ==
+Date: Thu, 24 Sep 2026 14:00:38 +0100
+From: Lee Jones <lee@kernel.org>
+To: Matti Vaittinen <mazziesaccount@gmail.com>
+Cc: Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>,
+	Matti Vaittinen <matti.vaittinen@linux.dev>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney+clk@redhat.com>,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Michael Walle <mwalle@kernel.org>, mfd@lists.linux.dev,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
+	linux-rtc@vger.kernel.org, Sverdlin@mva-rohm,
+	Alexander <alexander.sverdlin@siemens.com>
+Subject: [GIT PULL] Immutable branch between MFD, Clk, GPIO, Regulator and
+ RTC due for the v7.4 merge window
+Message-ID: <20260924130038.GB453446@google.com>
+References: <cover.1789538455.git.mazziesaccount@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <cover.1789538455.git.mazziesaccount@gmail.com>
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
-- [High] soundwire: data race in sdw_slave_signal_unattach() with complete_=
-all()
---
+Enjoy!
 
-commit 0022c8987af32edaf369ec5a75ade11e2d3a1ba3
-Author: Charles Keepax <ckeepax@opensource.cirrus.com>
+The following changes since commit cee9395acd8043be0644b25c34bfa86623f2b935:
 
-soundwire: Add a helper function to indicate a device will detach
+  Linux 7.3-rc1 (2026-08-30 13:34:40 -0700)
 
-Add a helper function that a driver can call to indicate it is about to
-initiate an action that will cause the device to detach from the bus.
+are available in the Git repository at:
 
-> diff --git a/include/linux/soundwire/sdw.h b/include/linux/soundwire/sdw.h
-> index 707ca6bd1e23d..7d41df30561cf 100644
-> --- a/include/linux/soundwire/sdw.h
-> +++ b/include/linux/soundwire/sdw.h
+  git://git.kernel.org/pub/scm/linux/kernel/git/lee/mfd.git ib-mfd-clk-gpio-regulator-rtc-v7.4
 
-[ ... ]
+for you to fetch changes up to e8e8d60fe8cc35340f6110ff70ef7959de1c3c0b:
 
-> @@ -1214,6 +1221,25 @@ static inline int sdw_update_no_pm(struct sdw_slav=
-e *slave, u32 addr, u8 mask, u
-> =20
->  #endif /* CONFIG_SOUNDWIRE */
-> =20
-> +/**
-> + * sdw_slave_signal_unattach - Signal that the peripheral is about to de=
-tach
-> + * @slave: Pointer to the SoundWire peripheral.
-> + *
-> + * Inform the core that the peripheral is about to detach from the bus, =
-this
-> + * is usually due to some implementation defined reset mechanism. After =
-this
-> + * sdw_slave_wait_for_init() should be called to wait for the device to
-> + * return.
-> + */
-> +static inline void sdw_slave_signal_unattach(struct sdw_slave *slave)
-> +{
-> +	if (!slave)
-> +		return;
-> +
-> +	slave->unattach_request =3D SDW_UNATTACH_REQUEST_SLAVE_RESET;
-> +	reinit_completion(&slave->enumeration_complete);
-> +	reinit_completion(&slave->initialization_complete);
+  MAINTAINERS: Add ROHM BD73800 PMIC files (2026-09-23 11:32:19 +0100)
 
-[Severity: High]
-Is there a risk of a data race here in sdw_slave_signal_unattach() with
-complete_all()?
+----------------------------------------------------------------
+Immutable branch between MFD, Clk, GPIO, Regulator and RTC due for the v7.4 merge window
 
-Since reinit_completion() is non-atomic and executes locklessly here, a race
-can occur if the bus ping thread concurrently processes a previous or bounc=
-ing
-ATTACHED event in sdw_handle_slave_status(), which calls complete_all().
+----------------------------------------------------------------
+Matti Vaittinen (10):
+      dt-bindings: mfd: Common ROHM PMIC properties
+      dt-bindings: rohm,bd*: Ref common ROHM bindings
+      dt-bindings: regulator: ROHM BD73800 regulators
+      dt-bindings: mfd: ROHM BD73800 PMIC
+      mfd: Support for ROHM BD73800 PMIC core
+      rtc: bd70528: Support RTC on ROHM BD73800
+      regulator: bd71828: Support ROHM BD73800
+      clk: bd718x7: Support ROHM BD73800
+      gpio: bd73800: Support ROHM BD73800 PMIC GPIOs
+      MAINTAINERS: Add ROHM BD73800 PMIC files
 
-If complete_all() finishes after the zeroing, the completion remains marked
-as done.
+ .../devicetree/bindings/mfd/rohm,bd71815-pmic.yaml |   9 +-
+ .../devicetree/bindings/mfd/rohm,bd71828-pmic.yaml |   9 +-
+ .../devicetree/bindings/mfd/rohm,bd72720-pmic.yaml |  29 +-
+ .../devicetree/bindings/mfd/rohm,bd73800-pmic.yaml | 218 ++++++++
+ .../devicetree/bindings/mfd/rohm,pmic-pins.yaml    |  72 +++
+ .../bindings/regulator/rohm,bd73800-regulator.yaml |  99 ++++
+ MAINTAINERS                                        |   2 +
+ drivers/clk/clk-bd718x7.c                          |   8 +
+ drivers/gpio/Kconfig                               |  12 +
+ drivers/gpio/Makefile                              |   1 +
+ drivers/gpio/gpio-bd73800.c                        | 209 ++++++++
+ drivers/mfd/Kconfig                                |  15 +-
+ drivers/mfd/rohm-bd71828.c                         | 147 +++++-
+ drivers/regulator/Kconfig                          |   4 +-
+ drivers/regulator/bd71828-regulator.c              | 558 ++++++++++++++++++++-
+ drivers/rtc/rtc-bd70528.c                          |   8 +
+ include/linux/mfd/rohm-bd73800.h                   | 306 +++++++++++
+ include/linux/mfd/rohm-generic.h                   |   1 +
+ 18 files changed, 1661 insertions(+), 46 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/mfd/rohm,bd73800-pmic.yaml
+ create mode 100644 Documentation/devicetree/bindings/mfd/rohm,pmic-pins.yaml
+ create mode 100644 Documentation/devicetree/bindings/regulator/rohm,bd73800-regulator.yaml
+ create mode 100644 drivers/gpio/gpio-bd73800.c
+ create mode 100644 include/linux/mfd/rohm-bd73800.h
 
-Would this cause subsequent calls to sdw_slave_wait_for_init() to return
-immediately, and potentially lead the driver to perform I/O against a
-detached device?
-
-> +}
-> +
->  /**
->   * sdw_slave_wait_for_init - Wait for device initialisation
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260924120520.2511=
-081-1-ckeepax@opensource.cirrus.com?part=3D1
+-- 
+Lee Jones
