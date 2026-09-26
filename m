@@ -1,117 +1,176 @@
-Received: from stravinsky.debian.org (stravinsky.debian.org [82.195.75.108])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36C161A683E
-	for <mfd@lists.linux.dev>; Sat, 26 Sep 2026 03:37:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.195.75.108
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D750B3A83AC;
+	Sat, 26 Sep 2026 12:40:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790393831; cv=none; b=ggXzIhWBrVuci8yujCTf4SYj4/9YZlX8gmQaarXmw4ZvVJYKfAppsxQ9c86AQAQNfixkxf/ZRslZmbof1JvaoxQK0ETLZ6c4to9t+4zU6UC+mY+WV2iYP1qA+guuSSDs9rwgIehzOX9p/WtLZTn9cxyY0gb6qxAsY9ekOVZAfN8=
+	t=1790426433; cv=none; b=knJ0FK34I0z4RYk3TAYNa4KoknvmFaQpn814usoHJdivRyAQi5Fyw0vFyYNEbixG9Hh7WiPgOHRbnCuvYTTpScyFPUwIBaDNzOaPfywI4qao80EvHkDqf2WrXMflpCr7W54WrfVm0nUe6HBxnP5sFzgGmu38IePeEQISdPs6Ans=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790393831; c=relaxed/simple;
-	bh=BLv0rRdoWToZOH28vOWENZ07pNp7lKwV0lf3MjaJwMw=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ZuZO8SirApy8Qa+ZH1BHq1C2nRJdFeiwQ9GzqhI0skUSg9fWs484ih6gZby3oqSWq96s/tOy0nstDQJyPqIOw/oBq1SVhrPvLc3x4NDL3jOrSrZUxIjePy9eJcCYRj+JX8rxTuvAH7ButRcSFrdGjdSodiTBGk6Hrid75mmVooY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org; spf=pass smtp.mailfrom=debian.org; dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b=jo9wQQ7m; arc=none smtp.client-ip=82.195.75.108
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=debian.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=debian.org
+	s=arc-20240116; t=1790426433; c=relaxed/simple;
+	bh=fbeH1V4vzunDOndyawowxW/6qRCo8v7L07Fr6mvTg5k=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=njVzCbOn0asWQIK4Drk2nFyv9JlRqNzZIVXFASO0L3VytE8VWS/Z37me+iZHrLkiXsSVaDJh2J/kiS+Y+nkWvcYWFIYSHw4mWOtQ5TsPqMN1S+Lnw0V4F625mjRTnwZU6KjvQ7TdQA/B0L8mX7vx83Z8LDfXHwFmnoDwFddlGeM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=pRx+Op4v; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=debian.org header.i=@debian.org header.b="jo9wQQ7m"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=debian.org;
-	s=smtpauto.stravinsky; h=X-Debian-User:Content-Transfer-Encoding:Content-Type
-	:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:
-	Reply-To:Content-ID:Content-Description;
-	bh=AQLmCm/9B4mrJDzPpo+c4kOsaksdj2bsxYt/mOLsFQ8=; b=jo9wQQ7mm1/ITjk+ho4Jqb3VQ4
-	pZIm1U2kqU9EuqV46lVDXBxtDVqh6mbj/xZCVgKxADk0e2A+hQc6WwZfju0uf/V9QQDHCcacY0TFO
-	kvEYBfRRfI7hAG62lVNBjhLw3NdbPvg/A/lUr8mu8Z/uP1+PInYzLX2mvLZidv8ajyiaLyE9N/WXN
-	DiWG1A+Y4rYjXLv7HkZsYQ9Fu1lUSzYgN0eO9ym8loXE/rzLtByS5fEFW7wwesxFNYSNy/NVqgAlC
-	p5RVlYBoeEHqVbXfwr/vSn+oAcQhe7y0NVmH4v6jfafS+/SH1x4gI3ntSvqjYJyPDFRi/2TfNfFv2
-	ozuxqb4A==;
-Received: from authenticated-user
-	by stravinsky.debian.org with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128)
-	(Exim 4.96)
-	(envelope-from <domibel@debian.org>)
-	id 1xAJDo-005naM-17
-	for mfd@lists.linux.dev;
-	Sat, 26 Sep 2026 03:37:08 +0000
-Received: by mail-pz2-x23.google.com with SMTP id d2e1a72fcca58-8814e797a5bso120962b3a.0
-        for <mfd@lists.linux.dev>; Fri, 25 Sep 2026 20:37:07 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBwBBt/wjXPC4J4rRfe5IzMBxds8mrYvjr6yXbtWDiUyK4jfx/iy5Fp48NYM5GQg1UtQjUs=@lists.linux.dev
-X-Gm-Message-State: AFuF++mKiQ54cWR5jH4Bvhf/UEMr5YEloBxLJuOYKZLFMZtNcTuNSkX1
-	M3Thmd7d9dPPs/qF9m99Nzl2ZWG3XAfEJ9/Bd0ygmu5e51Ncsj2Yl5Kmkn0KRU0mpvxieTRkkmk
-	xV8SnzkWV4DWjPphqHUzkE13e8h9ONwo=
-X-Received: by 2002:aa7:888b:0:b0:880:7e9a:6e56 with SMTP id
- d2e1a72fcca58-8807e9a73a8mr2177107b3a.13.1790393525763; Fri, 25 Sep 2026
- 20:32:05 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="pRx+Op4v"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 8A29EC32782;
+	Sat, 26 Sep 2026 12:40:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1790426433;
+	bh=fbeH1V4vzunDOndyawowxW/6qRCo8v7L07Fr6mvTg5k=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=pRx+Op4v7ku1/IUyCHwevHXuHkCucoxQe0N9phyPYaX77lPzoBg9QnjNkn9Bzmf6S
+	 NVqz+cOV51xw9OsosZ7AX7cNHMOXzrmha1sx6xhEApB+joZvrTusBj51deDqNeLT5M
+	 bRQPU4agF2/JsdW5YK8x6ovFr9BrMUQWPeOU1Tj8hQ0U5l897BEgtUpBAo54y2+Gfv
+	 ye3yX+ROPx1AovA2L3AmBZq2s9FrgR4bnArriW3nrIw3i9pOLvrPWPZmw3XXF0u1WM
+	 KHJ3Z7bP1+eFsO6rkdO1BRXXSXuqdNmrBFKu0suVoUmCh4m4C9F5FL/Wg8XzBEJPE2
+	 /46mEwAj8An2Q==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78AE1C98328;
+	Sat, 26 Sep 2026 12:40:33 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Sat, 26 Sep 2026 14:40:23 +0200
+Subject: [PATCH RFC 04/12] usb: typec: qcom: Make PMIC port probe
+ selectable
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <CGME20260915153246eucas1p289987fd8757c89ff865c99b6465708a8@eucas1p2.samsung.com>
- <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com> <20260915-jh7110-clean-send-v4-18-f0e4fd6f2cc8@samsung.com>
-In-Reply-To: <20260915-jh7110-clean-send-v4-18-f0e4fd6f2cc8@samsung.com>
-From: Dominique Belhachemi <domibel@debian.org>
-Date: Fri, 25 Sep 2026 23:31:54 -0400
-X-Gmail-Original-Message-ID: <CAAvaLCzm1o=m6P88KNeHCG9BuTBu4AQmAec90kN3MMC6ZpALaQ@mail.gmail.com>
-X-Gm-Features: AclHuK8_8y3EcFqb3OgZBY9WaeDxyzPMPd1_yK_ekhMIXfr7tAphtd8D7H_5xEI
-Message-ID: <CAAvaLCzm1o=m6P88KNeHCG9BuTBu4AQmAec90kN3MMC6ZpALaQ@mail.gmail.com>
-Subject: Re: [PATCH v4 18/20] phy: starfive: Add jh7110-inno-hdmi-phy driver
-To: Michal Wilczynski <m.wilczynski@samsung.com>
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Andrzej Hajda <andrzej.hajda@intel.com>, Robert Foss <rfoss@kernel.org>, 
-	Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, Jonas Karlman <jonas@kwiboo.se>, 
-	Jernej Skrabec <jernej.skrabec@gmail.com>, Luca Ceresoli <luca.ceresoli@bootlin.com>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, Lee Jones <lee@kernel.org>, Andy Yan <andy.yan@rock-chips.com>, 
-	Philipp Zabel <p.zabel@pengutronix.de>, Emil Renner Berthing <kernel@esmil.dk>, 
-	Hal Feng <hal.feng@starfivetech.com>, Michael Turquette <mturquette@baylibre.com>, 
-	Stephen Boyd <sboyd@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Paul Walmsley <pjw@kernel.org>, 
-	Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
-	Alexandre Ghiti <alex@ghiti.fr>, Dominique Belhachemi <db@domibel.de>, Brian Masney <bmasney+clk@redhat.com>, 
-	Jerome Brunet <jbrunet+clk@baylibre.com>, linux-phy@lists.infradead.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org, mfd@lists.linux.dev, 
-	linux-clk@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-rockchip@lists.infradead.org, linux-riscv@lists.infradead.org, 
-	Marek Szyprowski <m.szyprowski@samsung.com>, Maud Spierings <maud_spierings@murena.io>, 
-	Graham Markall <hello@big-grey.co.uk>, Icenowy Zheng <zhengxingda@iscas.ac.cn>, 
-	Chaoyi Chen <chaoyi.chen@rock-chips.com>, Joshua Peisach <jpeisach@ubuntu.com>, 
-	=?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= <u.kleine-koenig@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Debian-User: domibel
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260926-typec-v1-4-31adc19f32c6@ixit.cz>
+References: <20260926-typec-v1-0-31adc19f32c6@ixit.cz>
+In-Reply-To: <20260926-typec-v1-0-31adc19f32c6@ixit.cz>
+To: Alexey Minnekhanov <alexeymin@minlexx.ru>, 
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Heikki Krogerus <heikki.krogerus@linux.intel.com>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ Lee Jones <lee@kernel.org>, Stephen Boyd <sboyd@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
+ phone-devel@vger.kernel.org, mfd@lists.linux.dev, 
+ David Heidelberg <david@ixit.cz>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2776; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=0rBqhoYEUS5e6Dqw7gl8GlLS56lHpFV9ezYYskglvBA=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqt70+w/f0+R0Sai12heN/MhIh3cfG2zGBplQjT
+ Amw5uAyGPOJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCare9PgAKCRBgAj/E00kg
+ cq/aEACDASJtuj9XnIaBYYWlfCvYWzdnaO1kkWypCP+jJS9r7zLJAfnX7V+vN5kArhjrFrO46gk
+ wHleVtVTSF2vyK8zTICd68HEyjr1rUL0LWxPZwPNiIvOF6oPeg3HuSVxk6WpWm1ySQt2o+L906B
+ 0GYzUGwdQYDdV23gcLx8/016p1ubedMwj5IE3iSi4UyYZ7QDzVoigcMNXKvWsmjjBb0FpyB487y
+ 6oFuYyuNPxdcUbO4nj0Y5smop/cVT0RkGwWPBsFSptKftApLgPTJM3pGqXUESqf24d3R1iJc2pH
+ hd3EkC7gQvz5tao6GQC4J0W6RtWw1NhGHERO58xe4eiOlBw37j/ajp69Y6yI8kKiWeNOaM5cl8I
+ 0TW8qnBMuFaxHhK8GrrC5YT/8gdVX1IaMafE8ZzeebEU9euOrUMRUQNBb8SRnjXBn/Q8veANnj8
+ k2YJ+O/KPGpJbiWtuYcbHRtyy5+IqIQprLjhJ+MCc6a9jHsMKQz+LYZGv5lzaFi5m8mWtM42ail
+ HiBo82MfXe5eaRKoSrEnA3Q73RGDRbLJfGzu1WHkJit5+kfCOoFBPoBpeux6s8wzjWgxEAWm7kD
+ ptCg/Ko3aWWfoi0fTd2g9jasGpzv2KKr/4hg6c5jZe/gIp9dMPf1jOaTgKLHO/yy7hloxJVOuHi
+ WLyGtBvZK1f26hg==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-On Tue, Sep 15, 2026 at 11:32=E2=80=AFAM Michal Wilczynski
-<m.wilczynski@samsung.com> wrote:
->
-> +static int starfive_hdmi_phy_probe(struct platform_device *pdev)
-> +{
-> +       ret =3D clk_set_rate(inno->phyclk, 297000000);
-> +       if (ret) {
-> +               dev_err(dev, "Failed to set default rate: %d\n", ret);
-> +               goto err_del_clk_provider;
-> +       }
+From: David Heidelberg <david@ixit.cz>
 
-Hi Michal,
+This is a preparation for extending the support with 1st generation
+Type-C.
 
-Can we drop these 5 lines?
-When my 4K monitor comes up in mode (3840x2160@30, 297 MHz) the screen
-stays blank.
+Assisted-by: LLM
+Co-developed-by: Alexey Minnekhanov <alexeymin@minlexx.ru>
+Signed-off-by: Alexey Minnekhanov <alexeymin@minlexx.ru>
+Signed-off-by: David Heidelberg <david@ixit.cz>
+---
+ drivers/usb/typec/tcpm/qcom/qcom_pmic_typec.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
-When the first real modeset requests a mode whose pixel clock is also 297 M=
-Hz,
-clk_set_rate(hdmi_pclk, 297000000) then sees cur =3D=3D want and does nothi=
-ng.
-So the pre-PLL is never actually programmed.
+diff --git a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec.c b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec.c
+index d770e58bc16cf..41aaae6bb3724 100644
+--- a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec.c
++++ b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec.c
+@@ -13,19 +13,25 @@
+ #include <linux/usb/tcpm.h>
+ 
+ #include <drm/bridge/aux-bridge.h>
+ 
+ #include "qcom_pmic_typec.h"
+ #include "qcom_pmic_typec_pdphy.h"
+ #include "qcom_pmic_typec_port.h"
+ 
++typedef int (*pmic_typec_port_probe_fn)(struct platform_device *pdev,
++					struct pmic_typec *tcpm,
++					const struct pmic_typec_port_resources *res,
++					struct regmap *regmap, u32 base);
++
+ struct pmic_typec_resources {
+ 	const struct pmic_typec_pdphy_resources	*pdphy_res;
+ 	const struct pmic_typec_port_resources	*port_res;
++	pmic_typec_port_probe_fn	port_probe;
+ };
+ 
+ static int qcom_pmic_typec_init(struct tcpc_dev *tcpc)
+ {
+ 	return 0;
+ }
+ 
+ static int qcom_pmic_typec_probe(struct platform_device *pdev)
+@@ -55,18 +61,17 @@ static int qcom_pmic_typec_probe(struct platform_device *pdev)
+ 		dev_err(dev, "Failed to get regmap\n");
+ 		return -ENODEV;
+ 	}
+ 
+ 	ret = of_property_read_u32_index(np, "reg", 0, &base);
+ 	if (ret)
+ 		return ret;
+ 
+-	ret = qcom_pmic_typec_port_probe(pdev, tcpm,
+-					 res->port_res, regmap, base);
++	ret = res->port_probe(pdev, tcpm, res->port_res, regmap, base);
+ 	if (ret)
+ 		return ret;
+ 
+ 	if (res->pdphy_res) {
+ 		ret = of_property_read_u32_index(np, "reg", 1, &base);
+ 		if (ret)
+ 			return ret;
+ 
+@@ -132,21 +137,23 @@ static void qcom_pmic_typec_remove(struct platform_device *pdev)
+ 	tcpm->port_stop(tcpm);
+ 	tcpm_unregister_port(tcpm->tcpm_port);
+ 	fwnode_handle_put(tcpm->tcpc.fwnode);
+ }
+ 
+ static const struct pmic_typec_resources pm8150b_typec_res = {
+ 	.pdphy_res = &pm8150b_pdphy_res,
+ 	.port_res = &pm8150b_port_res,
++	.port_probe = qcom_pmic_typec_port_probe,
+ };
+ 
+ static const struct pmic_typec_resources pmi632_typec_res = {
+ 	/* PD PHY not present */
+ 	.port_res = &pm8150b_port_res,
++	.port_probe = qcom_pmic_typec_port_probe,
+ };
+ 
+ static const struct of_device_id qcom_pmic_typec_table[] = {
+ 	{ .compatible = "qcom,pm8150b-typec", .data = &pm8150b_typec_res },
+ 	{ .compatible = "qcom,pmi632-typec", .data = &pmi632_typec_res },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(of, qcom_pmic_typec_table);
 
-Without these 5 lines inno->pixclock stays 0,
-so the first modeset's clk_set_rate() always runs .set_rate() for real.
+-- 
+2.55.0
 
-Together with my forgotten fix from May we can have working 4K@30 on the VF=
-2.
-https://lore.kernel.org/all/20260528184145.384114-1-domibel@debian.org/
 
-Best
--Dominique
