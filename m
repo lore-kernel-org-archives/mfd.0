@@ -1,151 +1,172 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C404F3876CD;
-	Sat, 26 Sep 2026 18:25:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE37F37475D;
+	Sat, 26 Sep 2026 18:25:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790447119; cv=none; b=bEnR3q+Kqzi0sLKEWNS19EJ6kbODgrJqQA/cTVEl5uvKsqCpLYGdLF6JK1d6yt+b/mS4XK9DZa4L+QiZ3uXEjYW1u8yrMLvJhCYXi+imK54lLM99riBOnapnNldQjpMcGfYVQXu1qxzSZyEj+cgtGmqSE4xz9t3WhJjziQFg4+M=
+	t=1790447121; cv=none; b=jZu3qgUGyHjeKeatdLhhvUalsPr/tu0g5zn7yOauHsXdxCZ+UY/nwi19HYHB4yMyDRapupBcKksZ0qX89Cyuhqs7y/gSwiCD7CiX5A5X4dnmgi3DkDDSFtBSSlDJC7ZyRLzlkc0LkFQzXqdC+rIewhqaPkBNjKqHe95b/PIIltY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790447119; c=relaxed/simple;
-	bh=Mvg9IUyaJIVJWiQ6fdmEqaHeqohfg8IMawm8LXDgIak=;
+	s=arc-20240116; t=1790447121; c=relaxed/simple;
+	bh=l/Q2KOhzvRiakPzmviTgUEWa3cJO1aow0Fjd705smQU=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=Rq4O8Mvnc+tfFvKOhTA+vNfNnTIojuCA9bJMyWjM/+NrkhIZ70/KuU2JdwbHLjgOLyHXGKG6W3kKcvcwhz7ACnY+g6dlDqzl37x4oGveLGbnWK40iihQKZKWWyUA+yJ5+wrGQCdu7N84+o8wWzg63zxvZ44Jnfu1cexvCTbf6+M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kNcOLwOL; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=qPJ/ppSYgA+/qejP/906tZJszorMm+LawsVqHUMR9gqXFhmby1/uILk/qXLphRT3O5pIXum/LTn+DGcpryQyI1UlhEjpPsp4CjdmAUuymqenqxkfCwPEPJfdd6fBJKaaj1wHWZykyLnJgZucU25+FqZ7NfFreeV5KaQcQVXisu8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PB35ELl4; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kNcOLwOL"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A2601F0089A;
-	Sat, 26 Sep 2026 18:25:18 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PB35ELl4"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F4431F00893;
+	Sat, 26 Sep 2026 18:25:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790447118;
-	bh=TZ0MkNa8Ic1fIj176djFwYRj+DX9VRrxELOTf87lbHY=;
+	s=k20260515; t=1790447119;
+	bh=E7Dvrru3WPQQpj1JmTM+Bk3V4umuui/BXDL1Tz+nJy0=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=kNcOLwOLVsoG1AdSxDdhiDjpHmOXh5daQ+7JAHUEvI02dmVQh/xCnHQbE4Kv2+wRy
-	 Vc/SvATKC3M5y3BOFpU4rJ0b9JNOlmHK1gpRYd4Lk04j5kqOF6LXW77/AC2MPPHTxX
-	 RePcsMjYdGZ/DlJH12aZZeV5gQnQpgfdcG0NXifuRUS50SzBs9GMsRWrzjk0njjTWS
-	 1p75DnKC5YojIuCPBS8Q/Zz3gsw+o7qsVwFaUoSks6UdmV5lJ1LIuem/DAnYQISAss
-	 RUnQnxH4Kyoqhwf5JafU1AvF8I54ydiGriIG65A/8O+tS1q7kRuLuR1JDA6/M7LSrp
-	 /QQ3ItxKOgDhw==
+	b=PB35ELl4hpUo+SjnIOfUyt7Wy4hHC6kv2F10igpc0RxCsNuhstBnmmiFyhizZqBHL
+	 IITaf6UWXiAfya8KC7nvN08bgGPwDyenQDKyM9faap0zUKb9saNxFbTd8XOE2g3Xzi
+	 ataHQMdKxpEqenIiZti6LUUmPuWKm6X8OsjNXQP2dxTeV0pd8dYQEIMUIiwQjA4qS2
+	 skqq9GefQMUJ/EyLfflsM2PeZ4PiJXW2JDyqM2zDvvEErJT1SQmXZdIz9TUurV9klg
+	 FusHTaBDCwA1bCZS7JRnncwOFdmic+m7E3iR01hqiTATm5fLnftwX636Y63siLAfJi
+	 RgmiLQWPjWoIw==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH net-next v23 4/9] mfd: an8855: Add support for Airoha
- AN8855 Switch
+Subject: Re: [PATCH net-next v23 5/9] net: phy: Add Airoha AN8855 Internal
+ Switch Gigabit PHY
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Christian Marangi" <ansuelsmth@gmail.com>
-Cc: robh@kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev, lee@kernel.org, conor+dt@kernel.org
-In-Reply-To: <20260925182435.21207-5-ansuelsmth@gmail.com>
+Cc: conor+dt@kernel.org, lee@kernel.org, mfd@lists.linux.dev, robh@kernel.org, devicetree@vger.kernel.org
+In-Reply-To: <20260925182435.21207-6-ansuelsmth@gmail.com>
 References: <20260925182435.21207-1-ansuelsmth@gmail.com>
- <20260925182435.21207-5-ansuelsmth@gmail.com>
+ <20260925182435.21207-6-ansuelsmth@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Sat, 26 Sep 2026 18:25:17 +0000
-Message-Id: <20260926182518.3A2601F0089A@smtp.kernel.org>
+Date: Sat, 26 Sep 2026 18:25:18 +0000
+Message-Id: <20260926182519.1F4431F00893@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
+Thank you for your contribution! Sashiko AI review found 3 potential issue(=
 s) to consider:
-- [Medium] of: memory leak of mdio_np in an8855_mdio_register error path
-- [Medium] mfd: sysfs naming collision for virtual MDIO bus with multiple s=
-witches
+- [Medium] net: phy: air_an8855: incorrect r50ohm calibration for 127 due t=
+o forward search
+- [Medium] net: phy: air_an8855: register clobbering in AN8855_PHY_RXADC_RE=
+V registers
+- [Low] net: phy: air_an8855: an8855_set_downshift ignores specific count v=
+alues
 --
 
-commit 802b31a10a6859408359f548c9b38d422fd3e7dc
+commit c9b4d007095aa6a972d5abbc505cecf057eb353e
 Author: Christian Marangi <ansuelsmth@gmail.com>
-Subject: mfd: an8855: Add support for Airoha AN8855 Switch
 
-Add support for Airoha AN8855 Switch that provide support for a DSA
-switch and a NVMEM provider. Also make use of the mdio-regmap driver
-and register a regmap for each internal PHY of the switch.
+net: phy: Add Airoha AN8855 Internal Switch Gigabit PHY
 
-> diff --git a/drivers/mfd/airoha-an8855.c b/drivers/mfd/airoha-an8855.c
+Add support for Airoha AN8855 Internal Switch Gigabit PHY. This is a
+simple PHY driver to configure and calibrate the PHY for the AN8855 Switch
+with the use of NVMEM cells.
+
+> diff --git a/drivers/net/phy/air_an8855.c b/drivers/net/phy/air_an8855.c
 > new file mode 100644
-> index 0000000000000..a2a36704a9fca
+> index 0000000000000..bc22256fd5f95
 > --- /dev/null
-> +++ b/drivers/mfd/airoha-an8855.c
+> +++ b/drivers/net/phy/air_an8855.c
+> @@ -0,0 +1,275 @@
+
 [ ... ]
-> +static int an8855_phy_bus_register(struct device *dev, struct an8855_cor=
-e_priv *priv,
-> +				   struct device_node *phy_np,
-> +				   struct an8855_phy_bus *phy_bus_info)
+
+> +static int an8855_get_r50ohm_val(struct device *dev, const char *calib_n=
+ame,
+> +				 u8 *dest)
 > +{
-[ ... ]
-> +	mrc.regmap =3D regmap;
-> +	mrc.parent =3D dev;
-> +	mrc.valid_addr =3D addr;
-> +	snprintf(mrc.name, MII_BUS_ID_SIZE, "an8855:%u-phy%u", priv->switch_add=
-r,
-> +		 phy_offset);
-
-[Severity: Medium]
-Will this static naming scheme fail to disambiguate virtual buses across
-multiple independent parent devices?
-
-If a system contains multiple AN8855 switches on different MDIO buses but
-configured at the same MDIO address (e.g., address 0), priv->switch_addr
-will be identical for both.
-
-Since devm_mdio_regmap_register attempts to register both virtual buses with
-the exact same name (e.g., an8855:0-phy0), would this lead to a sysfs naming
-collision and cause the second switch to fail probe? A parent device
-identifier like dev_name(dev) might be needed to ensure uniqueness.
-
+> +	u32 shift_sel, val;
+> +	int ret;
+> +	int i;
 > +
-> +	bus =3D devm_mdio_regmap_register(dev, &mrc);
-[ ... ]
-> +static int an8855_mdio_register(struct device *dev, struct an8855_core_p=
-riv *priv,
-> +				struct an8855_phy_bus *phy_bus_infos)
-> +{
-> +	struct device_node *mdio_np;
-> +	int ret =3D 0;
-> +	int i =3D 0;
-> +
-> +	mdio_np =3D of_get_child_by_name(dev->of_node, "mdio");
-
-[Severity: Medium]
-Does this code leak the mdio_np device node on the error path?
-
-of_get_child_by_name dynamically acquires and increments the reference
-count of the returned device node mdio_np.
-
-> +	if (!mdio_np)
-> +		return -ENODEV;
-> +
-> +	for_each_available_child_of_node_scoped(mdio_np, phy_np) {
-> +		if (i >=3D AN8855_MAX_PHY_PORT) {
-> +			ret =3D -EINVAL;
-> +			goto exit;
-> +		}
-> +
-> +		ret =3D an8855_phy_bus_register(dev, priv, phy_np,
-> +					      &phy_bus_infos[i]);
-> +		if (ret)
-> +			goto exit;
-> +
-> +		i++;
-> +	}
-> +
-> +	of_node_put(mdio_np);
-> +exit:
-
-In the normal execution path, of_node_put(mdio_np) is correctly called.
-However, if an error occurs during child node iteration, the code executes
-goto exit, which jumps directly to the cleanup block and bypasses
-of_node_put(mdio_np), leaving the reference count incremented.
-
-> +	if (ret) {
-> +		while (i--)
-> +			fwnode_handle_put(phy_bus_infos[i].node);
-> +
+> +	ret =3D nvmem_cell_read_u32(dev, calib_name, &val);
+> +	if (ret)
 > +		return ret;
-> +	}
 > +
-> +	return i;
+> +	shift_sel =3D FIELD_GET(AN8855_SWITCH_EFUSE_R50O, val);
+> +	for (i =3D 0; i < ARRAY_SIZE(dsa_r50ohm_table); i++)
+> +		if (dsa_r50ohm_table[i] =3D=3D shift_sel)
+> +			break;
+> +
+> +	if (i < 8 || i >=3D ARRAY_SIZE(dsa_r50ohm_table))
+> +		*dest =3D dsa_r50ohm_table[25];
+
+[Severity: Medium]
+Will this mapping produce the wrong value for 127?
+
+Since dsa_r50ohm_table starts with multiple 127s, the forward loop finds
+the first match at index 0. Then the subsequent check sees i < 8 and assigns
+94 (table index 25) instead of 127.
+
+Should this use a reverse search (or find the last match) to map 127 to 127
+at index 16 (where 16 - 8 =3D 8)?
+
+> +	else
+> +		*dest =3D dsa_r50ohm_table[i - 8];
+> +
+> +	return 0;
+> +}
+
+[ ... ]
+
+> +static int an8855_set_downshift(struct phy_device *phydev, u8 cnt)
+> +{
+> +	u16 ds =3D cnt !=3D DOWNSHIFT_DEV_DISABLE ? AN8855_PHY_EN_DOWN_SHIFT : =
+0;
+
+[Severity: Low]
+Does this code incorrectly ignore unsupported downshift counts?
+
+If a user sets an unsupported downshift retry count via ethtool that isn't
+DOWNSHIFT_DEV_DISABLE or DOWNSHIFT_DEV_DEFAULT_COUNT, this simply applies
+AN8855_PHY_EN_DOWN_SHIFT and returns 0 (success).
+
+Should it return -EOPNOTSUPP for unknown values to maintain consistency
+between requested and actual hardware state?
+
+> +
+> +	return phy_modify_paged(phydev, AN8855_PHY_PAGE_EXTENDED_1,
+> +				AN8855_PHY_EXT_REG_14, AN8855_PHY_EN_DOWN_SHIFT,
+> +				ds);
+> +}
+
+[ ... ]
+
+> +static int an8855_config_init(struct phy_device *phydev)
+> +{
+
+[ ... ]
+
+> +	ret =3D phy_set_bits_mmd(phydev, MDIO_MMD_VEND1, AN8855_PHY_RXADC_CTRL,
+> +			       AN8855_PHY_RG_AD_SAMPLE_PHSEL_A |
+> +			       AN8855_PHY_RG_AD_SAMPLE_PHSEL_C);
+> +	if (ret)
+> +		return ret;
+> +	ret =3D phy_write_mmd(phydev, MDIO_MMD_VEND1, AN8855_PHY_RXADC_REV_0,
+> +			    FIELD_PREP(AN8855_PHY_RG_AD_RESERVE0_A, 0x1));
+> +	if (ret)
+> +		return ret;
+> +	ret =3D phy_write_mmd(phydev, MDIO_MMD_VEND1, AN8855_PHY_RXADC_REV_1,
+> +			    FIELD_PREP(AN8855_PHY_RG_AD_RESERVE0_C, 0x1));
+
+[Severity: Medium]
+Can this clobber the adjacent fields in the RXADC_REV registers?
+
+phy_write_mmd() overwrites the entire 16-bit register. By preparing only
+AN8855_PHY_RG_AD_RESERVE0_A and AN8855_PHY_RG_AD_RESERVE0_C, the lower
+8 bits (RESERVE0_B and RESERVE0_D) will be unintentionally zeroed out.
+
+Should phy_modify_mmd() be used here instead to preserve undocumented
+hardware defaults?
+
+> +	if (ret)
+> +		return ret;
+> +
+> +	return 0;
 > +}
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260925182435.2120=
-7-1-ansuelsmth@gmail.com?part=3D4
+7-1-ansuelsmth@gmail.com?part=3D5
