@@ -1,44 +1,44 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 546AF38F638;
-	Sat, 26 Sep 2026 18:25:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 484AD37475D;
+	Sat, 26 Sep 2026 18:25:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790447122; cv=none; b=kZHQTMF6CF+DKa7k2CpXeSFq8H549P/eClosQV0bxJBYMLpEWi2bOseuiaGuiBqB6qLggwBqkZgsmunQOZJs7ChGpMlxlRJOlmtAYucbEXrqJhTLry6uDcsB79bF6J60Bj7vZiaDm+vl667QexICXv0U9JaNbQ2AobOrDYR+W5Y=
+	t=1790447123; cv=none; b=QdIVKEA0uIZV+Xn69rLTrXy7ahmXa98RcPyPVarJDnuL1+DO/Y+7WYCxjmERLd8xq3Yhsrp+71pXYa/+jL010wgo29cMkkRDerOdQklVictxbBDor/i/6wwsSDl//1+RDKGbQMqDhZuA7jdbqVfmz1yvkf85dJmH+8QQ3lzMWZQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790447122; c=relaxed/simple;
-	bh=e1nG5uDABUAYLAnathPwPw21CLNj4OVUxFtx8n8MhUQ=;
+	s=arc-20240116; t=1790447123; c=relaxed/simple;
+	bh=ngQG8R5tsSUQzHuttJFkijrVvuQsZ4JZwj8mxd82QYc=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=NzAbMdJBpdZOX4LRtVYXUkNFxBQ1sxAZAYpgOdOuvuQCzTHPCjK6dV3UvCL6lXBF9LJBJ3hv7l1NCdv2E4gmOVaSt7UZoXRxZy9UL1TD296VONAwkNwYZqA2ku93lexTQ5F/lz4Hk71JayIe8sh+TwVF7jwXFYiaopcQ/aExRYc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BBRP2sE0; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=KsJBlvW9nnn4I8yV0lfBWViGny0Q2N6dT9+RYioQ6XnMO82N56khdlllB3kdBNRsEJi8BDhio29u03ZRSjqx0ozH5oxbbKLInXtcEjXRtYro1jvH1SSiCDk+PCg4FKfrXYGg7Z6tYh6VJDIVRTdgkecVumSXw6mHSeC8MiY9KlQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=j+BrDjzG; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BBRP2sE0"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3BC61F00898;
-	Sat, 26 Sep 2026 18:25:20 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="j+BrDjzG"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB19E1F00893;
+	Sat, 26 Sep 2026 18:25:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790447121;
-	bh=4zW0dKWKf7G2tG4jteQ0vH7n7FK453EFT9m7Rn5hKII=;
+	s=k20260515; t=1790447122;
+	bh=y91/M6+S30XB5QBhXkt5qkeu3ScNmE1JmweV6XFfN1U=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=BBRP2sE0AaZTXKePeQtP2+JzW9qQa75LSegTzcFvIx+ctsMLKQsjzqZwUOmCueu1r
-	 DY49+viaaRUl5M8bpWxZepW/6otIbyxpiEBkKj3C7WWW7NrY+1RHGVycfa3mnoirj3
-	 9g+1zPY1qB3sXNCboLvBfjP0uhF5GkL1yD01jexRl8Vrhl8/DGErtleLY+4ArK7Stv
-	 Vcl+1uiWKxgf3btMe3ZHPvaMvhgAENCgYyCxosT/BB6zpmEI8vIYMBC9DUu9qmL5Op
-	 ikXCLSYScJtbj5lmxzSBD8U4OoQTv/7+EW1IXFC6v3IHuKuITbd6K6SGZbS2ft2l5O
-	 ydff2wrha441g==
+	b=j+BrDjzGg1GkTChscwERTMwJ2ofp0AND4KzheGTI8cw63GDa22LhVVrZLwroQY4Bw
+	 LqKV2Leo/EYEFE+mBtOZr2RJcTcJG/V3tHWK7GOZw6tDGNk2Fr0RymWxGfTT3sLlHm
+	 3Y4NiCzJUGoPA3/z1v0X9YLYsEmebiQe6NesRnLYDOF0OMOxp7njH05055VXdPVMbO
+	 4J+lof2NOTp1JMcWwvSp1UekcdMbGiNKDWOlJ3UZEtDe6L9LuqmPHtogYsUtwrGsMH
+	 z59b+cnyJDr6okiNglVx+9Y/yiskMiKQu5hiP3iibw7bKVA83OofRToG3uCrwaiAK3
+	 tuY9Ui2oIHWIw==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH net-next v23 6/9] net: dsa: tag_mtk: add Airoha variant
- usage of this TAG
+Subject: Re: [PATCH net-next v23 1/9] dt-bindings: net: dsa: Document
+ support for Airoha AN8855 DSA Switch
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Christian Marangi" <ansuelsmth@gmail.com>
-Cc: lee@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org, robh@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260925182435.21207-7-ansuelsmth@gmail.com>
+Cc: devicetree@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20260925182435.21207-2-ansuelsmth@gmail.com>
 References: <20260925182435.21207-1-ansuelsmth@gmail.com>
- <20260925182435.21207-7-ansuelsmth@gmail.com>
+ <20260925182435.21207-2-ansuelsmth@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Sat, 26 Sep 2026 18:25:20 +0000
-Message-Id: <20260926182520.D3BC61F00898@smtp.kernel.org>
+Date: Sat, 26 Sep 2026 18:25:21 +0000
+Message-Id: <20260926182521.CB19E1F00893@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -47,66 +47,82 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
 Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
-- [High] net: dsa: missing DSA_TAG_PROTO_AIROHA support in Mediatek/Airoha =
-ethernet drivers
+- [Low] dt-bindings: unresolved phandles in example will cause dt_binding_c=
+heck to fail
 --
 
-commit 3da7d110875eb668c591fb8186046c81cef009ee
+commit 149759f83399f8efe1a862e7d0f5637ed4300bbc
 Author: Christian Marangi <ansuelsmth@gmail.com>
 
-net: dsa: tag_mtk: add Airoha variant usage of this TAG
+dt-bindings: net: dsa: Document support for Airoha AN8855 DSA Switch
 
-Add variant of the MTK TAG for Airoha Switch and comments about difference
-between Airoha AN8855 and Mediatek tag bitmap.
+This commit introduces a new YAML device tree binding to document support f=
+or=20
+the Airoha AN8855 5-port Gigabit Switch. It describes the exposed internal=
+=20
+PHYs on the MDIO bus.
 
-> diff --git a/include/net/dsa.h b/include/net/dsa.h
-> index 5d12191b6f6f5..9824c63ad50b3 100644
-> --- a/include/net/dsa.h
-> +++ b/include/net/dsa.h
-> @@ -76,6 +77,7 @@ enum dsa_tag_protocol {
->  	DSA_TAG_PROTO_KSZ9893		=3D DSA_TAG_PROTO_KSZ9893_VALUE,
->  	DSA_TAG_PROTO_LAN9303		=3D DSA_TAG_PROTO_LAN9303_VALUE,
->  	DSA_TAG_PROTO_MTK		=3D DSA_TAG_PROTO_MTK_VALUE,
-> +	DSA_TAG_PROTO_AIROHA		=3D DSA_TAG_PROTO_AIROHA_VALUE,
+> diff --git a/Documentation/devicetree/bindings/net/dsa/airoha,an8855-swit=
+ch.yaml b/Documentation/devicetree/bindings/net/dsa/airoha,an8855-switch.ya=
+ml
+> new file mode 100644
+> index 0000000000000..5ad9b9e139831
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/net/dsa/airoha,an8855-switch.yaml
+[ ... ]
+> +examples:
+> +  - |
+> +    ethernet-switch {
+> +        compatible =3D "airoha,an8855-switch";
+> +
+> +        ports {
+> +            #address-cells =3D <1>;
+> +            #size-cells =3D <0>;
+> +
+> +            port@0 {
+> +                reg =3D <0>;
+> +                label =3D "lan1";
+> +                phy-mode =3D "internal";
+> +                phy-handle =3D <&internal_phy1>;
 
-[Severity: High]
-Does adding this new protocol variant break Ethernet drivers that explicitly
-check for DSA_TAG_PROTO_MTK?
+[Severity: Low]
+Will this example pass make dt_binding_check? The device tree compiler stri=
+ctly
+checks for label existence, and it looks like the internal_phy1 label (along
+with the other phy labels) is not defined within this example block. This
+might cause dtc to report a fatal "Reference to non-existent node or label"
+error during the validation build.
 
-For example, in drivers/net/ethernet/airoha/airoha_eth.c:airoha_get_dsa_tag=
-(),
-failing to recognize the Airoha DSA protocol prevents extracting the tag for
-hardware DMA descriptors, breaking transmission:
+> +            };
+[ ... ]
+> +            port@4 {
+> +                reg =3D <4>;
+> +                label =3D "wan";
+> +                phy-mode =3D "internal";
+> +                phy-handle =3D <&internal_phy5>;
+> +            };
+> +
+> +            port@5 {
+> +                reg =3D <5>;
+> +                label =3D "cpu";
+> +                ethernet =3D <&gmac0>;
 
-	if (dev->dsa_ptr->tag_ops->proto !=3D DSA_TAG_PROTO_MTK)
-		return 0;
+[Severity: Low]
+Similar to the phy-handle references, is the gmac0 label defined in this
+example? Leaving this undefined could also trigger a reference compilation
+error when the example is extracted and built.
 
-Similarly, does this break PPE L2 flow offload in
-drivers/net/ethernet/mediatek/mtk_ppe.c:mtk_ppe_check_skb() because it
-rejects the Airoha protocol variant?
-
-	if (!netdev_uses_dsa(skb->dev) ||
-		    skb->dev->dsa_ptr->tag_ops->proto !=3D DSA_TAG_PROTO_MTK)
-
-And in drivers/net/ethernet/mediatek/mtk_ppe_offload.c:mtk_flow_get_dsa_por=
-t(),
-will flow offloads targeting Airoha DSA ports fail or misroute?
-
-	if (dp->cpu_dp->tag_ops->proto !=3D DSA_TAG_PROTO_MTK)
-		return -ENODEV;
-
-Finally, in drivers/net/ethernet/mediatek/mtk_eth_soc.c:mtk_uses_dsa(), doe=
-s it
-disable GDMA hardware special tag parsing when an Airoha switch is connecte=
-d?
-
-	return netdev_uses_dsa(dev) &&
-	       dev->dsa_ptr->tag_ops->proto =3D=3D DSA_TAG_PROTO_MTK;
-
->  	DSA_TAG_PROTO_QCA		=3D DSA_TAG_PROTO_QCA_VALUE,
->  	DSA_TAG_PROTO_TRAILER		=3D DSA_TAG_PROTO_TRAILER_VALUE,
->  	DSA_TAG_PROTO_8021Q		=3D DSA_TAG_PROTO_8021Q_VALUE,
+> +                phy-mode =3D "2500base-x";
+> +
+> +                fixed-link {
+> +                    speed =3D <2500>;
+> +                    full-duplex;
+> +                    pause;
+> +                };
+> +            };
+> +        };
+> +    };
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260925182435.2120=
-7-1-ansuelsmth@gmail.com?part=3D6
+7-1-ansuelsmth@gmail.com?part=3D1
