@@ -1,154 +1,402 @@
-Received: from mail-wr2-f35.google.com (mail-wr2-f35.google.com [74.125.225.99])
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1460A3BB101
-	for <mfd@lists.linux.dev>; Sun, 27 Sep 2026 20:28:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.99
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D79003BFE24
+	for <mfd@lists.linux.dev>; Sun, 27 Sep 2026 20:51:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790540914; cv=none; b=JC5miVKVaSkYP1/hr/SQg4tk6gut6CEK1LUbZ6c9ZsElKa6fX6D+zQPbb2FUhvwiwsf6yTF08pjZoxkBlfE/le66bfhrmLNCb4TCaT2nFEU3uBpUSsSHO8v2r2rXHJK9gEPj378zB+Sx18+ZxAnbly0JiJhVbG2GKtEWvo6zdkE=
+	t=1790542268; cv=none; b=iK4wtazrjO+YL40j3nqU0AwbUF43rxvwhNleSG1Q/6ijkHOg5P9GSNWffisHCQjsEOcCCO5934ohrxycbmFxwlBLB7WItOiKbH7cULHU7R8dKdt3KT6x//4M+nkfYZ+ZY3IGoNrZ5dy1VF1+8c22ngVkPxy/zpePCGQ521JHLXw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790540914; c=relaxed/simple;
-	bh=FSVVe/cPDU2HiWT6f26OgXG1GyfOSzOG3siiaAo3dOY=;
-	h=Message-ID:Date:From:To:Cc:Subject:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=pHU2DT9wlN0KHjKa76zrdRATCeCGQ5/gU0xP3yY0Pj8GHbH9OfO1uuzH5hNiotjvqzh99xwL0l9rJnPKDk69XK49oOnyhErfYw9mPxTc6qM4Y/Iwt96Doyk+vwH8XVHkzlS8KoLhZetVfjUloH90+mA6gdmfPQ4eBT0TiLT2kBQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=TFtWGjmI; arc=none smtp.client-ip=74.125.225.99
+	s=arc-20240116; t=1790542268; c=relaxed/simple;
+	bh=QvrCBO1Yv1uu9lB4VC3C33kwTXsj8pF49PIlS0v8lsA=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=hFvoSvMVHMyt5tXuLYFrJgA4aiZ2PnVwoAMthHE4kPxLGhehdG2Z2pTbVyIoOM1H5beAR7zYqM7RRe5k+L5WXjwiz15vYqEz6yad144NZqi3oN41UCvZCp1g0uHJmcpapanO3ZryoxURolC0dUaUmOEa7/X3a0bt+ZaVcGPeIVs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZhlDn5jX; arc=none smtp.client-ip=74.125.225.140
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="TFtWGjmI"
-Received: by mail-wr2-f35.google.com with SMTP id ffacd0b85a97d-48882c1f261so748164f8f.0
-        for <mfd@lists.linux.dev>; Sun, 27 Sep 2026 13:28:32 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZhlDn5jX"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49b912d3920so17764725e9.1
+        for <mfd@lists.linux.dev>; Sun, 27 Sep 2026 13:51:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790540911; x=1791145711; darn=lists.linux.dev;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:subject:cc:to:from:date:message-id:from:to:cc:subject
+        d=gmail.com; s=20251104; t=1790542264; x=1791147064; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=ZpDxu+FSADcYkY7OEJ6DHltLDpB0SvAaV3ZviPXPtHQ=;
-        b=TFtWGjmIeTm5bCFx+1CjaWoWSzuzRSovS4oqJfX+Fj1XWACnGWWFljYhnx4FUx6n5q
-         LWt0ba4nY+/r2dFuH1Zr4TdSq4EqIXUvCMnijDE06TlybmsuVwT5YjPpXXp5FF7YG0eD
-         3qzK/w+4GoYLhOa/7nev45KkOLXqagaHlOO79x0bHNoDtnwi9D4+vvBKSkbjy4d/GRK7
-         vSaHTkTCCccuyq/NynTxD6Zp6n+Sn0oNJEQszRdvRoE0j5+aHuGIDnf6TCgQTKqAaD/S
-         usnCTVuTNofqUxgrY9oxLn+ksbnI3AdkS8e/dAgB2G815lRcvQ8k86l5JahM/6djFqq3
-         hiyg==
+        bh=kUYGyZPkzisCXjd18YS32E0k2NnfBv/Du6efJgbaS1U=;
+        b=ZhlDn5jXR12dbPYY92cZuCrvHfJpueCYv120yT69zRyyyZKTjSup4rfvslaDQrbEYM
+         zSmk4PhSJk5ljyE2a6jMMdTQUslKUxezi2CaYm6ZkdZacwA0UO4XLFT/2RgoIWw44J0D
+         2Du0Y6gSZFL2q6beCV5vT4217DStAJKURvN/JnzJHR8wAuJD+ikiia48CkBb1Y4DYd8h
+         MqgPJas6xZvCQKN8qixGcNreNznr1gX2celYcE8jQCzWp0iKsdmyHgiOFrYcI1npkw+g
+         mGphGtim7/8l7F7oGxxtY2iYjEAi86TfgBguz+AZ+I4EJnj78Gf7NEoc3Sok4Uz+8Jjk
+         R4Yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790540911; x=1791145711;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:subject:cc:to:from:date:message-id:x-gm-gg
+        d=1e100.net; s=20260707; t=1790542264; x=1791147064;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ZpDxu+FSADcYkY7OEJ6DHltLDpB0SvAaV3ZviPXPtHQ=;
-        b=Vm69js0mAytLxX99S/oRIGbXbGJJtx/ZxHgsQzcMEDinzLdKQOWGD4nAFbJqWoyw7/
-         QGViX6aIXIKuAhkYYD8Tx9mCV0KVRaEAXybBykYsGY0uuvkzUx+1ayNRQLmeQh+a0fni
-         7iyDHjqHNQlcusBZ95Oi+oGFj0wBFNmhaEaebc+Pn6w6got++OJfVDctj0B+kvtZB+B4
-         28rTLPTq4dfisRS+lSH6aDmLFGk+MvvH51rS+cIWZJ48fT44mZd0SBXI3zuGO+WMqeVf
-         iI4ei8cu/wlu4lD1IndlDiiRXJf1bjbScgbyJDcBqbEl6a8ZmLmNR/PStIztEJJt+aol
-         PhUw==
-X-Forwarded-Encrypted: i=1; AKwUvBxtXxSM2yzpksHCLYqQU3rRPOpLJxX834k2oepXh3xvr9MJc6AC/YQBeF8DMW881h0dth4=@lists.linux.dev
-X-Gm-Message-State: AFuF++lMeOchuPaQ4TyGkNBbqQOo0g9ZfEulf1ftEBmTue9snwj72g0E
-	T07qLidMOyRRrqdPoHdsRyCOkNaG8SqYsBJAroBpsUHkej+OT9FnH5lM
-X-Gm-Gg: AYBFou0Smnytt3XliPHSZ15cWNfUD8ZdVw6+UgQIGhZHOvVf9FgdPl4uPiBc5FM5IGN
-	Cwr3mWKXc+U/13EnOcEhVnpzuum0sEVHWQp2McxX6skwgwnmRzaItCiaLfFLNM44SrO/wE57LxI
-	gizTTe/f/bM2L0Az3NSZqYQL5ZwAlqnT0qoUQmgkp9FIwmFgdKmjg7v8YETv4d3dtlPPAhj/zF0
-	OtH6UYAyCAPPnwPsZ9vtBlhg/mcb6R9wK89gxZBl/Eh/nQwCXv/MgxhBcUniPdfP6HytL67CdRO
-	Eyja2EnIxg86OOwq3v8pi33a4vCY34bT0K8coNn8iVWYc5QZO1r58905PWOyRxAC+BTW6t4ZTsk
-	U9Yj0nAoYx/iFaewixeaKfQWoHdH53KRXga6A3cri0rkmJ9pWUa7rlgYa3bGwu64250KNqUes6g
-	LPXxIITr36uzgmsgsgJT9mjRmwih+4Nv4CxgTIM9NxXdtsWX/glplPrce/HL/YJt04NGtmyxTuN
-	GUro7quWx7Zj1apiMb6ONjmdYUUfEMqh8TiOhhuwpGot+U=
-X-Received: by 2002:a05:600c:1f83:b0:49b:8f5e:51fb with SMTP id 5b1f17b1804b1-49fe66c8087mr198495325e9.3.1790540911202;
-        Sun, 27 Sep 2026 13:28:31 -0700 (PDT)
-Received: from Ansuel-XPS. (host-82-57-191-234.retail.telecomitalia.it. [82.57.191.234])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a00571744csm17037495e9.13.2026.09.27.13.28.28
+        bh=kUYGyZPkzisCXjd18YS32E0k2NnfBv/Du6efJgbaS1U=;
+        b=xRgXR0420fouidvltmMzvTYmRPLhpzONYDLhQo27UouNlfSwUvmEeDDIfpcMuwa135
+         RiR4caSBW1Lhyy+ad7wJ4kLFCvtnSvsa45v3i4TTemdEGxDpxOZsvrYRaI0CAE35qzLn
+         W4onpf3B0ACHFF39rQGUjmP6w9hTJ6dvWTMP1OimI3DIAUK+D0F14dosl+XJek/BNOkC
+         3F6laih4tysBSczXBX6h581OK5LvzbCQOpvBFyFbMroW8cawh8KEr/BZGD+Z7FcxwoWW
+         JxqKVkEnGu9GgeI+buMpzHJvZV+zecy9iCSiBLry3eucv6i3qFQ2xuc/lPsf255lNce8
+         uWAg==
+X-Forwarded-Encrypted: i=1; AKwUvBznmkUuPP+MqAP6COr8iN5/coMI0oai0fJkiFo73Clg8SzlEzlEGNWTDpWEsUtxnJlXEj8=@lists.linux.dev
+X-Gm-Message-State: AFuF++kgHMu0dFlzgg1p2JqYA49uOb2hc9TayK/rjMy1G+Nah2owqMpu
+	3orp17SDGHNFeq19Q6OD0zEmV6Up1djm62pezyUIpFEXnuyMMuiBfc+k
+X-Gm-Gg: AYBFou1dcs9JD93kJv+ugfdOeAsA2xt5M2ZuuCk8bjG+xjPM/Jfy/3U3Ej/AvsT3YHe
+	LB5e9lv46CjPzn6mqZCY2UZ0rL1fwSP5AG4tzlkkOQSwMQ0ikbt8iACMnafanDj9sTP+rO8FFw3
+	TIjtldO0I7M9fKMf+svafoNkvVZ7IqYDkujlaQXn6cNe8oRn2crWn4mlK+5U8XxyXCI9GleEQw6
+	f84OvcpW5aqWkGRURWCK8/Cl+xHlRtul+BJTSbAUlIKaUa3MIyUE1EnUsaD8xIh3cg7mE02q2y/
+	FlvFz/1mfzcLBkWxYmScDTXaKUCy6t7kDaf13j0JIkcGRfB9M0y12HTKUAetOjcZvYvMxJv5SRa
+	Cl44506Ay0qk0A0BZASpiGUR4imw7WGYeLq/q6Yv+iBuuKM/yz4jgcAUBU+N2RS+FSF5EJE6Rk1
+	qk9s/o0Q2L0nMessJm++bnNC9IVMrh5Li+SRpsAuOqIqw+0BEuDdlQ/3zb2TR6BCN3h5Xwqb5rC
+	EogHDU=
+X-Received: by 2002:a05:600c:4754:b0:49c:c96a:d36b with SMTP id 5b1f17b1804b1-49fe66d1663mr204967735e9.12.1790542263869;
+        Sun, 27 Sep 2026 13:51:03 -0700 (PDT)
+Received: from strix.doe.home ([197.250.96.148])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a0018e6ba2sm88613255e9.5.2026.09.27.13.50.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 27 Sep 2026 13:28:30 -0700 (PDT)
-Message-ID: <6ab97c6e.f5ac67e6.37e70.11e5@mx.google.com>
-X-Google-Original-Message-ID: <arl8aT34M7MBL89n@Ansuel-XPS.>
-Date: Sun, 27 Sep 2026 22:28:25 +0200
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Andrew Lunn <andrew@lunn.ch>
-Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
+        Sun, 27 Sep 2026 13:51:03 -0700 (PDT)
+From: =?UTF-8?q?Stefan=20D=C3=B6singer?= <stefandoesinger@gmail.com>
+To: Michael Turquette <mturquette@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Vladimir Oltean <olteanv@gmail.com>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	"Chester A. Unal" <chester.a.unal@arinc9.com>,
-	Daniel Golle <daniel@makrotopia.org>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Brian Masney <bmasney@redhat.com>,
+	Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
 	Russell King <linux@armlinux.org.uk>,
-	Simon Horman <horms@kernel.org>,
+	Lee Jones <lee@kernel.org>,
+	Brian Masney <bmasney+clk@redhat.com>,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	Manivannan Sadhasivam <mani@kernel.org>
+Cc: linux-clk@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
 	linux-arm-kernel@lists.infradead.org,
-	linux-mediatek@lists.infradead.org, netdev@vger.kernel.org,
-	mfd@lists.linux.dev, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH net-next v23 8/9] net: dsa: mt7530: generalize and move
- common function to lib module
-References: <20260925182435.21207-1-ansuelsmth@gmail.com>
- <20260925182435.21207-9-ansuelsmth@gmail.com>
- <cd200dee-1bde-4cc2-a296-c93d704cb906@lunn.ch>
+	linux-phy@lists.infradead.org,
+	mfd@lists.linux.dev,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: [PATCH v13 02/13] dt-bindings: clk: zte: Add zx297520v3 matrix clock and reset controller
+Date: Sun, 27 Sep 2026 23:50:55 +0300
+Message-ID: <20260927205055.185366-1-stefandoesinger@gmail.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260927-zx29clk-v13-0-70d8f673386c@gmail.com>
+References: <20260927-zx29clk-v13-0-70d8f673386c@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <cd200dee-1bde-4cc2-a296-c93d704cb906@lunn.ch>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sun, Sep 27, 2026 at 09:02:09PM +0200, Andrew Lunn wrote:
-> On Fri, Sep 25, 2026 at 08:24:30PM +0200, Christian Marangi wrote:
-> > In preparation of support of DSA Switch from Airoha, create a mt7530
-> > library module and move there all the common function.
-> > 
-> > Function are generalized to use the reg_field regmap API but still apply
-> > the same exact logic. Every function is renamed to mt7530_lib prefix to
-> > better identify it.
-> > 
-> > Minimum modification are needed to the register header and common enum and
-> > macro are moved to the mt7530 library header to permit reuse.
-> > 
-> > A library struct is introduced with everything required for the common
-> > functions.
-> > 
-> > The generalization and the introduction of reg_field regmap API have the
-> > side effect of permitting to clean the mirror functions that required
-> > special handling for MT7530 and MT7531 based switch that had different
-> > registers. This is done by declaring a common MT7530 reg_field and a
-> > specific one in the Switch match table.
-> > 
-> > No behaviour change is expected by this change as it's just a code move and
-> > reimplementation.
-> > 
-> > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> > ---
-> >  drivers/net/dsa/Kconfig       |    4 +
-> >  drivers/net/dsa/Makefile      |    1 +
-> >  drivers/net/dsa/mt7530-lib.c  | 1128 +++++++++++++++++++++++++++
-> >  drivers/net/dsa/mt7530-lib.h  |  391 ++++++++++
-> >  drivers/net/dsa/mt7530-mdio.c |    4 +
-> >  drivers/net/dsa/mt7530-mmio.c |    4 +
-> >  drivers/net/dsa/mt7530.c      | 1368 ++++++++-------------------------
-> >  drivers/net/dsa/mt7530.h      |  256 ++----
-> 
-> The number of mt* file keep going up. Is it time to move it into a
-> subdirectory?
+This controller contains clocks and resets for high speed devices on the
+zx297520v3 board and hardware spinlocks that I expect will be necessary
+to communicate correctly with the LTE DSP firmware blob.
 
-The problem as always is that mediatek directory will also contain airoha
-stuff...
+I don't know much about the hwlocks yet other than that they exist, so
+there is no header yet adding meaning to their indices. Presumably that
+meaning doesn't exist in hardware and is de facto defined by ZTE's
+firmware blobs running on the rprocs.
 
-> 
-> Reviewed-by: Andrew Lunn <andrew@lunn.ch>
->
+The zte-zx297520v3-crm driver will instantiate separate MFD children for
+clocks and resets, which are handled by separate clock and reset
+drivers.
 
-I would like to fix some trivial things pointed out by sashiko. Can I apply
-those and keep the review tag? For this patch for example it's just the
-typo for the multicast MIB.
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Signed-off-by: Stefan Dösinger <stefandoesinger@gmail.com>
+---
 
-For the other patch is also very trivial stuff. 
+v11->v12: Add RFFE clock. It belongs to the SSC device (ZTE's name, not
+mine) and together they are used to set up radio hardware.
 
+Also add LTE_MODEM clocks: I defined them in the driver in version 10
+already but forgot to export them. (No, I don't know what this LTE_MODEM
+device does. The LTE modem firmware uses it. I found that the pclk gates
+mmio address  space 0xf8000000-0xf8300000 and 0xfc000000-0xfc220000 and
+that this area is only accessible to M0 and ZSP.
+
+v9->v10:
+Add ZSP PCLK and ZSP bus reset. I don't know the exact difference
+between the ZSP reset in topcrm+0x13c and the one in matrixcrm+0x3c.
+Core state vs axi connection is my best guess. Both need to be
+deasserted for the ZSP to work.
+
+Fix order of clock-cells in example code.
+
+v8->v9:
+*) The SDIO controllers and GMAC depend on topcrm's ahb clock for
+register access / dma operation. Add the input to the binding.
+
+v7->v8:
+*) Start clock indices at 0
+*) Fix indentation
+
+*) Add a prose note about discovered registers that allow writing
+CNTVAL. I am not exposing them in any way because for now I see no need
+to use this functionality. It is possible that the counter resets to 0
+during standby, which means someone needs to fix it up using those
+registers.
+
+Nevertheless, no syscon yet for these reasons: I have no idea how CNTVAL
+behaves during standby. It might be just fine. Standby very likely needs
+firmware handling running on the Cortex M0, which can restore CNTVAL if
+necessary. If Linux needs to do it, it can probably be done by the clock
+or MFD parent driver. Given what I've learned so far I'd rather add
+syscon later than put it in place without a clear user.
+
+Details of how to manipulate CNTVAL will be in the matrix clk driver.
+
+*) A non-change in the binding text, but worth mentioning: Register
+0x118 contains gates that gate off matrix-synthesized PLL fixed
+dividers. They reinforce the understanding of the top->matrix interface
+and the adequacy of the bindings.
+
+v6->v7:
+
+*) Moved it back to clock/
+
+*) Remove syscon compatible again. I looked into remaining unknown
+registers and I am convinced that there is no odd misc register left
+that can't be exposed as a proper subsystem provider.
+
+The controls in 0x100 that ZTE's DRAM reading code exercises are auto
+clock gating controls and the actual mailbox is in a different
+controller.
+
+Unknown registers in 0x120-0x12c are a frequency voting mechanism for
+the AXI bus clock. The driver will participate in that voting rather
+than set the frequency via 0x0. If need be it could be exposed
+as #interconnect-cells, but it won't necessitate "syscon".
+
+*) Reduce the number of input clocks to match register controls in
+topclk's input control that affect matrix and LSP.
+
+*) Add DDR mux and gates. Not to change them, but to make sure CCF knows
+about which PLL is feeding the sysmem memory
+
+Changes
+v5->v6:
+Add syscon compatible - Conor suggested this after v4 and I forgot it in v5.
+
+v4->v5:
+Move binding to soc/zte
+Remove topclk from the example
+Add #hwlock-cells for hw spinlock registers
+Add more clocks I stumbled into: sram0 and another LTE related device
+
+v3->v4:
+Split matrixclk into its own controller again because syscon/regmap
+deals poorly with device nodes that have more than one memory region. As
+a consequence I am passing all PLL outputs generated on Topclk down to
+Matrixclk.
+---
+ .../clock/zte,zx297520v3-matrixcrm.yaml       | 98 +++++++++++++++++++
+ MAINTAINERS                                   |  1 +
+ .../dt-bindings/clock/zte,zx297520v3-clk.h    | 45 +++++++++
+ .../dt-bindings/reset/zte,zx297520v3-reset.h  | 13 +++
+ 4 files changed, 157 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/clock/zte,zx297520v3-matrixcrm.yaml
+
+diff --git a/Documentation/devicetree/bindings/clock/zte,zx297520v3-matrixcrm.yaml b/Documentation/devicetree/bindings/clock/zte,zx297520v3-matrixcrm.yaml
+new file mode 100644
+index 000000000000..5e9506db7365
+--- /dev/null
++++ b/Documentation/devicetree/bindings/clock/zte,zx297520v3-matrixcrm.yaml
+@@ -0,0 +1,98 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/clock/zte,zx297520v3-matrixcrm.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: ZTE zx297520v3 SoC matrix clock and reset controller
++
++maintainers:
++  - Stefan Dösinger <stefandoesinger@gmail.com>
++
++description: |
++  This controller contains clock and reset controls for high speed devices on
++  the zx297520v3 board: The CPU, RAM, SDIO and Ethernet clocks and resets are
++  found here. This controller requires PLL-generated clocks from Topcrm as well
++  as the fixed 26 MHz and 32 kHz oscillators found on this board.
++
++  This controller also contains hardware mutex registers for synchronization
++  with different processors on this board.
++
++  An additional curiosity are registers that allow setting (but not reading) the
++  ARM architected timer's CNTVAL. This is not exposed in the binding because
++  there shouldn't be a need to access it.
++
++  All available clocks are defined as preprocessor macros in the
++  "include/dt-bindings/clock/zte,zx297520v3-clk.h" header. Resets are defined in
++  the "include/dt-bindings/reset/zte,zx297520v3-reset.h" header.
++
++properties:
++  compatible:
++    const: zte,zx297520v3-matrixcrm
++
++  reg:
++    maxItems: 1
++
++  clocks:
++    items:
++      - description: 26 MHz external oscillator
++      - description: 32 kHz external oscillator
++      - description: AHB clock from topcrm
++      - description: Main PLL output from topcrm (usually 624 MHz)
++      - description: Main PLL subdivision factor 5
++      - description: Dpll output from topcrm (usually 491.52 MHz)
++      - description: Gpll output from topcrm (usually 200 MHz)
++      - description: Gpll subdivision factor 2
++      - description: osc26m work clock from topcrm
++
++  clock-names:
++    items:
++      - const: osc26m
++      - const: osc32k
++      - const: ahb
++      - const: mpll
++      - const: mpll-d5
++      - const: dpll
++      - const: gpll
++      - const: gpll-d2
++      - const: wclk-osc26m
++
++  "#clock-cells":
++    const: 1
++
++  "#hwlock-cells":
++    const: 1
++
++  "#reset-cells":
++    const: 1
++
++required:
++  - compatible
++  - reg
++  - clocks
++  - clock-names
++  - "#clock-cells"
++  - "#hwlock-cells"
++  - "#reset-cells"
++
++additionalProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/clock/zte,zx297520v3-clk.h>
++    #include <dt-bindings/reset/zte,zx297520v3-reset.h>
++
++    clock-controller@1306000 {
++        compatible = "zte,zx297520v3-matrixcrm";
++        reg = <0x01306000 0x400>;
++        #clock-cells = <1>;
++        clocks = <&osc26m>, <&osc32k>, <&topcrm ZX297520V3_AHB_PCLK>,
++                 <&topcrm ZX297520V3_MPLL>, <&topcrm ZX297520V3_MPLL_D5>,
++                 <&topcrm ZX297520V3_DPLL>, <&topcrm ZX297520V3_GPLL>,
++                 <&topcrm ZX297520V3_GPLL_D2>,
++                 <&topcrm ZX297520V3_GATED_OSC26M>;
++        clock-names = "osc26m", "osc32k", "ahb", "mpll", "mpll-d5", "dpll",
++                      "gpll", "gpll-d2", "wclk-osc26m";
++        #hwlock-cells = <1>;
++        #reset-cells = <1>;
++    };
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 43fd556e155b..5f367b5126c2 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -3922,6 +3922,7 @@ L:	linux-arm-kernel@lists.infradead.org (moderated for non-subscribers)
+ S:	Odd fixes
+ F:	Documentation/arch/arm/zte/
+ F:	Documentation/devicetree/bindings/arm/zte.yaml
++F:	Documentation/devicetree/bindings/clock/zte,zx297520v3-matrixcrm.yaml
+ F:	Documentation/devicetree/bindings/clock/zte,zx297520v3-topcrm.yaml
+ F:	arch/arm/boot/dts/zte/
+ F:	arch/arm/mach-zte/
+diff --git a/include/dt-bindings/clock/zte,zx297520v3-clk.h b/include/dt-bindings/clock/zte,zx297520v3-clk.h
+index 1bc9267e4d62..d98bc38635b0 100644
+--- a/include/dt-bindings/clock/zte,zx297520v3-clk.h
++++ b/include/dt-bindings/clock/zte,zx297520v3-clk.h
+@@ -69,4 +69,49 @@
+ #define ZX297520V3_GSM_156M			60
+ #define ZX297520V3_ABB_WCLK			61
+ 
++#define ZX297520V3_SYS_TIMER_WCLK		0
++#define ZX297520V3_CPU_WCLK			1
++#define ZX297520V3_CPU_PCLK			2
++#define ZX297520V3_ZSP_WCLK			3
++#define ZX297520V3_ZSP_PCLK			4
++#define ZX297520V3_DDR_CTRL_PCLK		5
++#define ZX297520V3_DDR_CTRL_WCLK		6
++#define ZX297520V3_EDCP_WCLK			7
++#define ZX297520V3_EDCP_PCLK			8
++#define ZX297520V3_SD0_WCLK			9
++#define ZX297520V3_SD0_PCLK			10
++#define ZX297520V3_SD0_CDET			11
++#define ZX297520V3_SD1_WCLK			12
++#define ZX297520V3_SD1_PCLK			13
++#define ZX297520V3_SD1_CDET			14
++#define ZX297520V3_NAND_WCLK			15
++#define ZX297520V3_NAND_PCLK			16
++#define ZX297520V3_DMA_PCLK			17
++#define ZX297520V3_MBOX_PCLK			18
++#define ZX297520V3_PDCFG_WCLK			19
++#define ZX297520V3_PDCFG_PCLK			20
++#define ZX297520V3_RFFE_WCLK			21
++#define ZX297520V3_SSC_WCLK			22
++#define ZX297520V3_SSC_PCLK			23
++#define ZX297520V3_AXI_WCLK			24
++#define ZX297520V3_GMAC_WCLK			25
++#define ZX297520V3_GMAC_PCLK			26
++#define ZX297520V3_GMAC_AHB			27
++#define ZX297520V3_VOU_WCLK			28
++#define ZX297520V3_VOU_PCLK			29
++#define ZX297520V3_LSP_MPLL_D5_WCLK		30
++#define ZX297520V3_LSP_MPLL_D4_WCLK		31
++#define ZX297520V3_LSP_MPLL_D6_WCLK		32
++#define ZX297520V3_LSP_MPLL_D8_WCLK		33
++#define ZX297520V3_LSP_MPLL_D12_WCLK		34
++#define ZX297520V3_LSP_OSC26M_WCLK		35
++#define ZX297520V3_LSP_OSC32K_WCLK		36
++#define ZX297520V3_LSP_PCLK			37
++#define ZX297520V3_LSP_TDM_WCLK			38
++#define ZX297520V3_LSP_DPLL_D4_WCLK		39
++#define ZX297520V3_SRAM0_PCLK			40
++#define ZX297520V3_GSM_CFG_PCLK			41
++#define ZX297520V3_LTE_MODEM_WCLK		42
++#define ZX297520V3_LTE_MODEM_PCLK		43
++
+ #endif /* __DT_BINDINGS_CLOCK_ZX297520V3_H */
+diff --git a/include/dt-bindings/reset/zte,zx297520v3-reset.h b/include/dt-bindings/reset/zte,zx297520v3-reset.h
+index 4a0eaec0e981..54e5b24f859a 100644
+--- a/include/dt-bindings/reset/zte,zx297520v3-reset.h
++++ b/include/dt-bindings/reset/zte,zx297520v3-reset.h
+@@ -27,4 +27,17 @@
+ #define ZX297520V3_USB_RESET			18
+ #define ZX297520V3_HSIC_RESET			19
+ 
++#define ZX297520V3_CPU_RESET			0
++#define ZX297520V3_ZSP_BUS_RESET		1
++#define ZX297520V3_DDR_CTRL_RESET		2
++#define ZX297520V3_EDCP_RESET			3
++#define ZX297520V3_SD0_RESET			4
++#define ZX297520V3_SD1_RESET			5
++#define ZX297520V3_NAND_RESET			6
++#define ZX297520V3_PDCFG_RESET			7
++#define ZX297520V3_SSC_RESET			8
++#define ZX297520V3_GMAC_RESET			9
++#define ZX297520V3_VOU_RESET			10
++#define ZX297520V3_LSP_RESET			11
++
+ #endif /* __DT_BINDINGS_RESET_ZX297520V3_H */
 -- 
-	Ansuel
+2.55.0
+
