@@ -1,39 +1,42 @@
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48FFE3B1008
-	for <mfd@lists.linux.dev>; Sun, 27 Sep 2026 15:16:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7E973B19B1
+	for <mfd@lists.linux.dev>; Sun, 27 Sep 2026 15:27:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=210.118.77.11
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790522199; cv=none; b=C5GEQ6dhYtw3uJf5rb8RtJseHGdExp0TuRmz9p1OB964MPEl63mOslOsg0wENKNWc6x8OlmfqJOnA/bXd8fKO8PyGALvxSA/HMWRr1Ww+tWaMUbJ4ztDTBNy93oRzF7ttkPl3eQobu3hJpGYhsTR+NNBIOVrpQKPV9tB6D5vCP8=
+	t=1790522825; cv=none; b=uknK2QYZOdAGUoAdzp1T5MW6X0z04un3+hbRRzVTgm7Zdum4xs9XUZXD/2QDDHfgx+nQkJGqOE+4pt2u+w9n4ficCzsER5hSWE1R6I2dKH952e4jDYfCd9IL0cMQMNUNAzqc1LZdBjjN5Ic4T7bu/95CI7D9UyFYzQsq6DrOhZk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790522199; c=relaxed/simple;
-	bh=Zm/V2QPoQ+ObdCKzlFBAWU/oTFcqMQrNCaw8C12jPeU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=GJJklNlD1Sl4ig6iJahH6gsVvT17usbtiWVY2UG5ffFcIxvcY/tvvO58qarhPyawiLCSEUvdWz1vf6gBMZM9en33NFEa4ejA2coDOM47bAzAhV3rkHCuAvOiZhTVJ5jJYrhVtpM0KsaeX8Z5LB8zQjlINzzQySs95jnsvWzWHl8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=bUVcdsiu; arc=none smtp.client-ip=84.42.129.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	s=arc-20240116; t=1790522825; c=relaxed/simple;
+	bh=ZJif99HrM3tONVAFov7W+Nz1FkXr7HloM1H9lUZ80zI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:From:In-Reply-To:
+	 Content-Type:References; b=SOioAyxCP4tuDsirPkgQRN/3TLGFwCyZxBRnqtyKKNrgupcHxEuDB5Q96ax/IIg9bMfphn/ZoCHzchMF1x7p8aqFamQjz3oDBxFROEn5sv8kM4hkQ4T55xX1895seoH7SrDMcIR3Y4xjlJzSeEVlXYBzwX20ek2l+5OUluK0yZg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=gjg9eQOW; arc=none smtp.client-ip=210.118.77.11
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="bUVcdsiu"
-Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id 4BCBD53401E6;
-	Sun, 27 Sep 2026 17:16:29 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1790522189;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=4X2QWOAcvkJ1kn46m/lcIe8UiBLlhl3cGvSNpRcw4m8=;
-	b=bUVcdsiuAeW164XN+2tKOJCZoYkG5aUwuajdSILj6Q2qFTPYxG+4KklzPGASAhEKeRRhD+
-	RmuqnO1iM6BF/tr5qO0Q3pzPlGDEqybU6YHvJmEP3USTPKlncyV/B/kVtkAWuzlUQZY2uR
-	L6pAmnDPRzL7igW4vzpEiq2DRI7rmJI=
-Message-ID: <f85cdfb7-b797-4b4b-9937-670c6dfe52c3@ixit.cz>
-Date: Sun, 27 Sep 2026 17:16:28 +0200
+	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="gjg9eQOW"
+Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
+	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20260927152657euoutp01fee60fb85c8f744f5b23de099f9efd5d~ZNwQwVanT0796507965euoutp01Z;
+	Sun, 27 Sep 2026 15:26:57 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20260927152657euoutp01fee60fb85c8f744f5b23de099f9efd5d~ZNwQwVanT0796507965euoutp01Z
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1790522818;
+	bh=552yr90urBhvBvN6cAihy9SNDNfGhvxsBdcKYn8Bqkg=;
+	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
+	b=gjg9eQOWA0CxY3ngNhBHqtz1JM3KKcYnvAXf1eQWIfGbzS+ettayDylBqirZGSDZ0
+	 4/LXiCaTIPkLLVpd5a2xD3aFHM5RQsqbdNfRkqEjajd72YE31sUYSbxWhMeTWRmQ+F
+	 TWdrCd/edX3NzOp1vM2aOWlWptW3UGr6cosY45Yg=
+Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
+	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
+	20260927152656eucas1p1473e0b9575b6efc4ccc01e99783bf8aa~ZNwPrSQNF0222902229eucas1p1j;
+	Sun, 27 Sep 2026 15:26:56 +0000 (GMT)
+Received: from [192.168.1.44] (unknown [106.210.136.40]) by
+	eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
+	20260927152655eusmtip1c51d14fba318ce4acae93d017ad71be3~ZNwOCLRV_3134331343eusmtip1g;
+	Sun, 27 Sep 2026 15:26:55 +0000 (GMT)
+Message-ID: <a74ccc09-ed64-4915-ab85-232c6d953c3d@samsung.com>
+Date: Sun, 27 Sep 2026 17:26:54 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -41,121 +44,99 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 00/12] Qualcomm Type-C support for 1st generation
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Alexey Minnekhanov <alexeymin@minlexx.ru>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Heikki Krogerus <heikki.krogerus@linux.intel.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Lee Jones <lee@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
- linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
- phone-devel@vger.kernel.org, mfd@lists.linux.dev
-References: <20260926-typec-v1-0-31adc19f32c6@ixit.cz>
- <voc4ie6fcegr3thk5n6dib4pkdxmracch4hhgjdih6pxrq2bfm@lq7mx4flowqk>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <voc4ie6fcegr3thk5n6dib4pkdxmracch4hhgjdih6pxrq2bfm@lq7mx4flowqk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH v4 05/20] dt-bindings: display: verisilicon: Add
+ starfive,jh7110-dc8200
+To: Icenowy Zheng <zhengxingda@iscas.ac.cn>, Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+	<conor+dt@kernel.org>, Andrzej Hajda <andrzej.hajda@intel.com>, Robert Foss
+	<rfoss@kernel.org>, Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+	Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Luca Ceresoli <luca.ceresoli@bootlin.com>, Maarten Lankhorst
+	<maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>, Lee Jones <lee@kernel.org>, Andy
+	Yan <andy.yan@rock-chips.com>, Philipp Zabel <p.zabel@pengutronix.de>, Emil
+	Renner Berthing <kernel@esmil.dk>, Hal Feng <hal.feng@starfivetech.com>,
+	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
+	<sboyd@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Paul Walmsley
+	<pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
+	<aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, Dominique
+	Belhachemi <db@domibel.de>, Brian Masney <bmasney+clk@redhat.com>, Jerome
+	Brunet <jbrunet+clk@baylibre.com>
+Cc: linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+	mfd@lists.linux.dev, linux-clk@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org,
+	linux-riscv@lists.infradead.org, Marek Szyprowski
+	<m.szyprowski@samsung.com>, Maud Spierings <maud_spierings@murena.io>,
+	Graham Markall <hello@big-grey.co.uk>, Chaoyi Chen
+	<chaoyi.chen@rock-chips.com>, Joshua Peisach <jpeisach@ubuntu.com>,
+	=?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+Content-Language: en-US
+From: Michal Wilczynski <m.wilczynski@samsung.com>
+In-Reply-To: <1aa49a9bcf5c5a16ce38b57f8f508a31ca70c1ce.camel@iscas.ac.cn>
 Content-Transfer-Encoding: 8bit
+X-CMS-MailID: 20260927152656eucas1p1473e0b9575b6efc4ccc01e99783bf8aa
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-RootMTR: 20260915153222eucas1p213b95b05ea7eb9a18700af8888ef5a44
+X-EPHeader: CA
+X-CMS-RootMailID: 20260915153222eucas1p213b95b05ea7eb9a18700af8888ef5a44
+References: <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
+	<CGME20260915153222eucas1p213b95b05ea7eb9a18700af8888ef5a44@eucas1p2.samsung.com>
+	<20260915-jh7110-clean-send-v4-5-f0e4fd6f2cc8@samsung.com>
+	<1aa49a9bcf5c5a16ce38b57f8f508a31ca70c1ce.camel@iscas.ac.cn>
 
-On 27/09/2026 15:05, Dmitry Baryshkov wrote:
-> On Sat, Sep 26, 2026 at 02:40:19PM +0200, David Heidelberg via B4 Relay wrote:
->> This series adds basic USB Type-C support for 1st gen devices, covering
->> configurations that do not require VBUS power (e.g. devices using
->> externally powered docks).
+
+
+On 9/18/26 07:58, Icenowy Zheng wrote:
+> 在 2026-09-15二的 17:32 +0200，Michal Wilczynski写道：
+>> The JH7110 embeds a DC8200. The binding requires an SoC specific
+>> compatible ahead of the generic one, so add the JH7110 to the enum.
 >>
->> VBUS support will be added in a follow-up series after this one is merged.
->> Supporting VBUS will likely require refactoring parts of the SMBX charger
->> support, which is why it is not included here.
+>> Reviewed-by: Joshua Peisach <jpeisach@ubuntu.com>
+>> Signed-off-by: Michal Wilczynski <m.wilczynski@samsung.com>
+>> ---
+>>  Documentation/devicetree/bindings/display/verisilicon,dc.yaml | 1 +
+>>  1 file changed, 1 insertion(+)
 >>
->> Tested with an externally powered dock station:
->>
->>   - Pixel 3 / 3 XL
->>   - SHIFT 6mq
->>   - OnePlus 6
->>
->> Tested with an additional, not-yet-included VBUS patch for non-powered
->> devices:
->>
->>   - Xiaomi Redmi Note 7
->>   - Xiaomi Mi Pad 4
+>> diff --git
+>> a/Documentation/devicetree/bindings/display/verisilicon,dc.yaml
+>> b/Documentation/devicetree/bindings/display/verisilicon,dc.yaml
+>> index
+>> 919a9001220120054cb62d1d01b7293367266f95..05a202633cd273fec358c095c64
+>> 584d959d96d90 100644
+>> --- a/Documentation/devicetree/bindings/display/verisilicon,dc.yaml
+>> +++ b/Documentation/devicetree/bindings/display/verisilicon,dc.yaml
+>> @@ -16,6 +16,7 @@ properties:
+>>    compatible:
+>>      items:
+>>        - enum:
+>> +          - starfive,jh7110-dc8200
 > 
-> THis is very interesting, as it will also unblock DisplayPort support on
-> devices from those generations.
+> Note: this binding is being refactored as part of MA35D1 support
+> introduction (this SoC has a single-port DC like a DC8000), after the
+> refactor the binding string might need to appear twice.
+> 
+> Thanks,
+> Icenowy
 
-Yes, DP works with some minor adjustment there and there (going to be follow-up)
+Hi,
+Thank you for letting me know. I've found the patchset on the mailing
+list [1]. Will make sure to rebase (and fix) after it gets in
+(presumably before this one although I'm not 100% sure).
+
+[1] - https://lore.kernel.org/all/20260918030125.315978-2-a0987203069@gmail.com/
+
 
 > 
+>>            - thead,th1520-dc8200
+>>        - const: verisilicon,dc # DC IPs have discoverable ID/revision
+>> registers
+>>  
 > 
-> One major comment. As we see, on SMB2 PMICs parts of the Type-C
-> functionality are provided by the charger / FG device. I guess that on
-> SMB5 PMICs we will get the same problem once somebody tries to implement
-> additional charger features. Would it make sense to rework the PMIC TCPM
-> driver to be a composite driver, taking several components via the
-> existing Linux interface?
-
-As this gets decided from the QCOM side, I'm fine with whatever suits the 
-hardware best.
-
-David
-
-> 
->>
->> Credits to everyone who has contributed to Type-C enablement before:
->>
->>   Casey Connolly
->>   Zachary Dry — LLM generation and testing
->>   Max Furman — LLM generation and testing
->>
->> Signed-off-by: David Heidelberg <david@ixit.cz>
 > 
 
+Best regards,
+-- 
+Michal Wilczynski <m.wilczynski@samsung.com>
