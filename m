@@ -1,84 +1,77 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20723431E71;
-	Sun, 27 Sep 2026 17:52:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 362C530E0FE;
+	Sun, 27 Sep 2026 18:45:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790531541; cv=none; b=psUc+2N1jdInoLlwzsoleMWTFOskSbXHtQezWGXgBjb5Cpyv88s5p+FKRP2Qe7FiPSkEFp53GBQMg92rSWKxVCv2qLjaxgFbuApXLFug7Ehc6oexBpr5v3JvMGl0cXpITNzSFvYQABvCFl5rzlPsthrK7CAsA2NxnkHPvG6DVk0=
+	t=1790534729; cv=none; b=Hz14+VdsnT7sfXXpF4fqZe+yM8vBodHxde78bP/roWaxzSafDCqaNjeX6aIiddLmhJMt3sDnsaeayFQP9bLBAnHIQI7TIzkc3It6RLt/eqsPw5a0fnkhYchT+1w2NsqQeOZxuJVwGa91FPvhbEkEs9hILbe9/3NLeNEMEnVA1ZA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790531541; c=relaxed/simple;
-	bh=6cEUMP31L4/CdlrVra674pnUkoxfmAa0lhY52HMvXT8=;
+	s=arc-20240116; t=1790534729; c=relaxed/simple;
+	bh=otKpkFo3fxS9EmndeJyODqHThBhg6teG+Gs9AeIaXS4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=glgdJU4qC0z3hNm1gI0zDq/URFViRKQ2x0PXZpQM2arEvWcsa3xSOQsCwAQpgFkSbf+Ae2jsbn3osNh5/KmBGSziwf7PJ4pUcBCa6lADiN8CYXl1ae59bLmNRnPyGH/GJ76OkKSFmuC+7gKF2PievsAE/0zqjjjtjnc70d0Ho+g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NPWVAc17; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=af+iePLLzJlUQsShoe3YiyWDA/u+M+kGl2sbOeKQq0pCV9AM1qn6F4RbUOFA/gMhnxDojvuud/ZeVnLY4+2u52uB62EArHuqrTLQL0/AExvTzZ1xQ5jeKlyGH8tBVO6zyF7FwDWQus6MYFGaxrKsm1GeEuvZLmxEqgUn/Kr29JE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=rCiSnUJ2; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NPWVAc17"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4486B1F00893;
-	Sun, 27 Sep 2026 17:52:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790531538;
-	bh=QazZ2O3eNUMlHmNoeOgTtKD8VMEf7NnZOMkD5FjrEGE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=NPWVAc17BwaG8NWnQglCsaYlwi54DrweQwn5HxAje9YeEh6A1HBC6vR4hKsbyNPqo
-	 zcrpg9SzPthq6JeV7iWiIZW79p6G5bQAWFmUokFF+tewUOt1SVUzSZnZwazJ8iw/MR
-	 qjOFObIx+NDDRKEIOIHkabBBFbQ2ELQi7JwExHR+KUdsJad0l33qIXFxYHbPEPVgBK
-	 EtDrpZd+S16KxqFTJUSG8B0x8qBQm6dWckb+ZFi2XVC4O0eKW/MxAriCPKI56n6Udx
-	 b9xKeeb7Fbu9sNt03/9rKoKUgcGITYqhAanEyBE5m8lksVsDBkdTaZIb70zIMaT6KT
-	 B5PuKxI/xhofA==
-Date: Sun, 27 Sep 2026 19:52:14 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Muzaffer Kadir <muzafferkadir@mainlining.org>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
-	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Srinivas Kandagatla <srini@kernel.org>, 
-	Ulf Hansson <ulfh@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	"Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>, 
-	Robin Murphy <robin.murphy@arm.com>, Lee Jones <lee@kernel.org>, 
-	Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, 
-	Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
-	Simona Vetter <simona@ffwll.ch>, Robert Marko <robimarko@gmail.com>, 
-	Guru Das Srinagesh <linux@gurudas.dev>, Amit Kucheria <amitk@kernel.org>, 
-	Thara Gopinath <thara.gopinath@gmail.com>, "Rafael J. Wysocki" <rafael@kernel.org>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
-	Lukasz Luba <lukasz.luba@arm.com>, Kees Cook <kees@kernel.org>, Tony Luck <tony.luck@intel.com>, 
-	"Guilherme G. Piccoli" <gpiccoli@igalia.com>, Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
-	David Heidelberg <david@ixit.cz>, phone-devel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-clk@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-mmc@vger.kernel.org, iommu@lists.linux.dev, mfd@lists.linux.dev, 
-	dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, linux-pm@vger.kernel.org, 
-	linux-input@vger.kernel.org
-Subject: Re: [PATCH v3 18/19] dt-bindings: input: touchscreen: goodix: Add
- binding for GT970
-Message-ID: <20260927-acrid-labrador-of-typhoon-897f7c@quoll>
-References: <20260921-msm8952-initial-support-v3-0-b96fd3fe298b@mainlining.org>
- <20260921-msm8952-initial-support-v3-18-b96fd3fe298b@mainlining.org>
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="rCiSnUJ2"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=XOZCUtTkrG5ksbg7GHum6vxlU/QGb8FKtSPAAJz104M=; b=rCiSnUJ2wDqcA0siV9Oe9iiKYI
+	c4LnjWW9IHv9TSgwZHH3Ae9tkM50pS7OsMeJKUQY+vb2yGMBePj8zqdyOddBug+P4Ir7N+US+D0sP
+	D9AkkjIOu4Kg/c7FkJMVT9QMweed7vJhBBNc/RNgZgVO3jJycd5kSvheRasKBeMLBLYU=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1xAts2-007YMh-Kf; Sun, 27 Sep 2026 20:45:06 +0200
+Date: Sun, 27 Sep 2026 20:45:06 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Christian Marangi <ansuelsmth@gmail.com>
+Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Vladimir Oltean <olteanv@gmail.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	"Chester A. Unal" <chester.a.unal@arinc9.com>,
+	Daniel Golle <daniel@makrotopia.org>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Simon Horman <horms@kernel.org>,
+	linux-arm-kernel@lists.infradead.org,
+	linux-mediatek@lists.infradead.org, netdev@vger.kernel.org,
+	mfd@lists.linux.dev, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH net-next v23 5/9] net: phy: Add Airoha AN8855 Internal
+ Switch Gigabit PHY
+Message-ID: <544bfdda-abdb-4fb6-a4c1-201dd8899703@lunn.ch>
+References: <20260925182435.21207-1-ansuelsmth@gmail.com>
+ <20260925182435.21207-6-ansuelsmth@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260921-msm8952-initial-support-v3-18-b96fd3fe298b@mainlining.org>
+In-Reply-To: <20260925182435.21207-6-ansuelsmth@gmail.com>
 
-On Mon, Sep 21, 2026 at 09:19:09PM +0300, Muzaffer Kadir wrote:
-> GT970 works with GT911 driver, document it to be
-> used with GT911 compatible.
+On Fri, Sep 25, 2026 at 08:24:27PM +0200, Christian Marangi wrote:
+> Add support for Airoha AN8855 Internal Switch Gigabit PHY.
 > 
-> Signed-off-by: Muzaffer Kadir <muzafferkadir@mainlining.org>
-> ---
->  .../bindings/input/touchscreen/goodix.yaml         | 35 ++++++++++++----------
->  1 file changed, 20 insertions(+), 15 deletions(-)
+> This is a simple PHY driver to configure and calibrate the PHY for the
+> AN8855 Switch with the use of NVMEM cells.
+> 
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Reviewed-by: Andrew Lunn <andrew@lunn.ch>
 
-Best regards,
-Krzysztof
-
+    Andrew
