@@ -1,140 +1,94 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF6ED3D6CDE;
-	Mon, 28 Sep 2026 12:58:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 891B93D4137
+	for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 13:05:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790600292; cv=none; b=sT/o9qw6j7adDPpDVKeuzuNYUotXUwVROAxRQOLkLflNb2Dpsd6VMpnGyxWetIYMVnCZ5A4Rb33VfV/9s/mE5fENlHvPnxVwmtX+bWZjc2g0EvJynVyaD/qjGUXbW+uvrBwQEV4JgMiM8Y3a3L+ZbQPgZROhxI2s19+K6IharHk=
+	t=1790600705; cv=none; b=lVBr1LbLVpf6jlR48N76zneIcdJtX10sLAFPd31/mk6aRhti465T4iKYLSnbzEL24lcEP26EZhLwJoQYR44Lb+8D9VNW2eRRvWBAPYAW2jE2ZCWpItojBl5WFtpvo2RmLsE1yvAIEk7denSyQbMvmdIPOxa5CwIpKzkChHrUDi0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790600292; c=relaxed/simple;
-	bh=722o4IHwmNd65+XBhYRpX9s0+i5OvSi5xLrY4R5GEtI=;
-	h=Date:Content-Type:MIME-Version:From:Cc:To:In-Reply-To:References:
-	 Message-Id:Subject; b=tkbS++du7ag+oWFg/DPs1ns+Wtk/3aoMZ5C20dxFKn0MXqQLGRt/SjwRZyfC+N3Axfg6pzVn+X/jp9G47FM9Lg6Duda/F4MnfZ6tsf7PVUydS+1CymxTpFudjS8WCKc9Fs48yVs5d9ODewwDobuGCqS427cD1DpfXYeykpJs9C0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nZVWhwvl; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790600705; c=relaxed/simple;
+	bh=52j8945jlWgUfs7EXbllgzvVcw8lTaTuRBWLQUFKmCM=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=gc/ATgVX2gOYQn92lo3YDtyDscn4T1piKaWpb2NZRuYfR62ASgSvrNG8/5SixfDnNg98FHpxUqmnlw8s9ItGGxyuetIdEoDrdK3gPQzEbJvtxALs69yOVwx7zH2EEsg3S1WmNqFiaxEIbeg7yPjIFMMGAiq123KyOwvIacklbBA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=avR42vum; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nZVWhwvl"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7F7A11F000FF;
-	Mon, 28 Sep 2026 12:58:10 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="avR42vum"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 464491F00893
+	for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 13:05:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790600290;
-	bh=B1VO9gTWXFj+zWXT8NiCvuBVy6vF6WZGrfa8TOULsfo=;
-	h=Date:From:Cc:To:In-Reply-To:References:Subject;
-	b=nZVWhwvlVR4lGCOL/74j9V3S/RTzvtgJ2va3IxkdMui3Q/zhXRh1Llve1fFRhAO+z
-	 HuFWgg7LxkPzGC8y7sLaFbZGzYFPBSK7tkWsbmCy/au4GlPxiOHtqxaXR6hBWU4Tbm
-	 XLnLHgaEl57i/iXv1qOVamzeya8vHDObVjXhd8qcWyTnIl7fDOHIeTp9CBiQQUgxO3
-	 B9doT/i7rEbRGr5FZtLy7ed2Pz7UvtujNI0l+EwQ/9gu038uFCqgqNFoQt/0cMq5BV
-	 NRrSEU/V1XWYUH+G+2Vpk7tEJuSE5hba/+pcdwrx989ysc9XKLCgz21C7hQnmyKIje
-	 xg0PODWtf1wLA==
-Date: Mon, 28 Sep 2026 07:58:08 -0500
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	s=k20260515; t=1790600704;
+	bh=auF1PGZG5FeNj0rD11SzUL3le7hplnl5FCbwZHCGXog=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=avR42vummbxAYHr8lyLj8YiH5LjxJQD912LYbEWoe6zyGuvhlgWsSiOrRiLgPwwUY
+	 ikkHL/h23xI+2DyIj97vMtLCXkqayBHl+RmU0mE7zC7nH7UHcHQHtD86gS/hqSyCuW
+	 eGtHCpdL7wqrAtwiweZt6akw6LKRm+xYn6bmxUfw4ORjIZ2L0pKRhpNnEEXmdpVw3R
+	 1hAMFN5LoW/Fs8X54sqGhwYprmdMI8JSE8/0jES9Cs2ekxw1Ut77kIzC793+BKDXFp
+	 eCMKhakENvdXMOxVcymVsYJkylXosRJ/Pr+ZqYxMhilMuXIdf7L5icvUCtVaOoBcNM
+	 Yuh4E7fdGgMYg==
+Received: by mail-ej2-f42.google.com with SMTP id a640c23a62f3a-c2aff2c45efso230872266b.3
+        for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 06:05:04 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBzcabsTYiBCpb8oc1LIfaNZK6/r+ZLYWyJg/1BLlxjLlTSedwsztl17oDrd8G9zPT0LGwI=@lists.linux.dev
+X-Gm-Message-State: AFq9FYKaKlsZMHHn53hUAhjNi2xyghhzA9g4X+RSXwmD+iSUVsOO1HY3
+	CIJNLJfejaTJjJmdpDkrUxt498chj4D249S44MSNme39YKXFYiB6Dj1JQ+oH2BpaygL6LxxZvmP
+	VjDL+7bU+DfJpgdMFegodvq5bAY1HcA==
+X-Received: by 2002:a17:907:9616:b0:c29:5d41:dfe8 with SMTP id
+ a640c23a62f3a-c2ac25d87efmr1120379466b.43.1790600702883; Mon, 28 Sep 2026
+ 06:05:02 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-From: "Rob Herring (Arm)" <robh@kernel.org>
-Cc: Krzysztof Kozlowski <krzk+dt@kernel.org>, mfd@lists.linux.dev, 
- Lee Jones <lee@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, linux-kernel@vger.kernel.org, 
- devicetree@vger.kernel.org, Mark Brown <broonie@kernel.org>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-In-Reply-To: <20260927155745.187758-2-clamor95@gmail.com>
-References: <20260927155745.187758-1-clamor95@gmail.com>
- <20260927155745.187758-2-clamor95@gmail.com>
-Message-Id: <179060023175.3803944.16357771664157803576.robh@kernel.org>
-Subject: Re: [PATCH v1 1/3] regulator: dt-bindings: maxim,max8907: Convert
- to DT schema
+References: <20260924-ti-tps6586x-v4-0-6c7a8fb8b646@gmail.com> <20260924-ti-tps6586x-v4-1-6c7a8fb8b646@gmail.com>
+In-Reply-To: <20260924-ti-tps6586x-v4-1-6c7a8fb8b646@gmail.com>
+From: Rob Herring <robh@kernel.org>
+Date: Mon, 28 Sep 2026 08:04:51 -0500
+X-Gmail-Original-Message-ID: <CAL_JsqLhhJYP9yP5i55dvBMUr_jqLr3CUvQrvdt__uYPJVNSHw@mail.gmail.com>
+X-Gm-Features: AclHuK9QEJ4uOQxPljBhZckKlXzAHfCFvrVCDh-aLNseE1t90L9tpQanxTIxWOs
+Message-ID: <CAL_JsqLhhJYP9yP5i55dvBMUr_jqLr3CUvQrvdt__uYPJVNSHw@mail.gmail.com>
+Subject: Re: [PATCH v4 1/2] regulator: dt-bindings: nvidia,tegra-regulators-coupling:
+ Convert to DT schema
+To: Bhargav Joshi <j.bhargav.u@gmail.com>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Thierry Reding <thierry.reding@avionic-design.de>, Lee Jones <lee@kernel.org>, 
+	Shree Ramamoorthy <s-ramamoorthy@ti.com>, Thierry Reding <thierry.reding@kernel.org>, 
+	Jonathan Hunter <jonathanh@nvidia.com>, Dmitry Osipenko <digetx@gmail.com>, 
+	Svyatoslav Ryhel <clamor95@gmail.com>, Laxman Dewangan <ldewangan@nvidia.com>, linux-kernel@vger.kernel.org, 
+	devicetree@vger.kernel.org, goledhruva@gmail.com, m-chawdhry@ti.com, 
+	daniel.baluta@gmail.com, simona.toaca@nxp.com, mfd@lists.linux.dev, 
+	Thierry Reding <treding@nvidia.com>, linux-tegra@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-
-On Sun, 27 Sep 2026 18:57:42 +0300, Svyatoslav Ryhel wrote:
-> Convert Maxim MAX8907 regulator binding from text to DT schema. Reference
-> to nvidia,tegra-regulators-coupling in child regulator nodes.
-> 
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+On Wed, Sep 23, 2026 at 5:04=E2=80=AFPM Bhargav Joshi <j.bhargav.u@gmail.co=
+m> wrote:
+>
+> Convert NVIDIA Tegra Regulators Coupling from legacy text to DT schema.
+> Set additionalProperties true as this is shared schema.
+>
+> Signed-off-by: Bhargav Joshi <j.bhargav.u@gmail.com>
 > ---
->  .../devicetree/bindings/regulator/max8907.txt |  69 -----
->  .../bindings/regulator/maxim,max8907.yaml     | 285 ++++++++++++++++++
->  2 files changed, 285 insertions(+), 69 deletions(-)
->  delete mode 100644 Documentation/devicetree/bindings/regulator/max8907.txt
->  create mode 100644 Documentation/devicetree/bindings/regulator/maxim,max8907.yaml
-> 
+>  .../regulator/nvidia,tegra-regulators-coupling.txt | 65 ----------------=
+---
+>  .../nvidia,tegra-regulators-coupling.yaml          | 74 ++++++++++++++++=
+++++++
+>  2 files changed, 74 insertions(+), 65 deletions(-)
 
-My bot found errors running 'make dt_binding_check' on your patch:
+[...]
 
-yamllint warnings/errors:
+> +examples:
+> +  - |
+> +    pmic {
+> +        regulators {
+> +            core_vdd_reg: core {
 
-dtschema/dtc warnings/errors:
-/builds/robherring/linux-dt-review/Documentation/devicetree/bindings/regulator/maxim,max8907.yaml: Unresolvable reference: /schemas/regulator/nvidia,tegra-regulators-coupling.yaml#
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:mbatt: False schema does not allow {'regulator-name': ['v_powerrail'], 'regulator-always-on': True, 'phandle': 2}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:sd1: False schema does not allow {'regulator-name': ['vcc_1v2_ddrio'], 'regulator-min-microvolt': [[1200000]], 'regulator-max-microvolt': [[1200000]], 'regulator-always-on': True, 'regulator-boot-on': True}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:sd2: False schema does not allow {'regulator-name': ['vdd_core'], 'regulator-min-microvolt': [[950000]], 'regulator-max-microvolt': [[1300000]], 'regulator-always-on': True, 'regulator-boot-on': True}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:sd3: False schema does not allow {'regulator-name': ['vcc_1v8_io'], 'regulator-min-microvolt': [[1800000]], 'regulator-max-microvolt': [[1800000]], 'regulator-always-on': True, 'regulator-boot-on': True, 'phandle': 3}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo1: False schema does not allow {'regulator-name': ['vcc_3v3_ddr'], 'regulator-min-microvolt': [[3300000]], 'regulator-max-microvolt': [[3300000]], 'regulator-always-on': True, 'regulator-boot-on': True}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo2: False schema does not allow {'regulator-name': ['vcc_1v1_pll'], 'regulator-min-microvolt': [[1100000]], 'regulator-max-microvolt': [[1100000]], 'regulator-always-on': True, 'regulator-boot-on': True}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo3: False schema does not allow {'regulator-name': ['vcc_1v8_lcd'], 'regulator-min-microvolt': [[1800000]], 'regulator-max-microvolt': [[1800000]], 'regulator-boot-on': True}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo4: False schema does not allow {'regulator-name': ['avdd_3v3_usb'], 'regulator-min-microvolt': [[3300000]], 'regulator-max-microvolt': [[3300000]], 'regulator-always-on': True, 'regulator-boot-on': True}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo5: False schema does not allow {'regulator-name': ['vcc_2v8_emmc'], 'regulator-min-microvolt': [[2800000]], 'regulator-max-microvolt': [[2800000]], 'regulator-boot-on': True}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo6: False schema does not allow {'regulator-name': ['vcc_hdmi_pll'], 'regulator-min-microvolt': [[1800000]], 'regulator-max-microvolt': [[1800000]]}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo7: False schema does not allow {'regulator-name': ['vcc_3v0_sensor'], 'regulator-min-microvolt': [[3000000]], 'regulator-max-microvolt': [[3000000]], 'regulator-boot-on': True}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo8: False schema does not allow {'regulator-name': ['vcc_1v8_sensor'], 'regulator-min-microvolt': [[1800000]], 'regulator-max-microvolt': [[1800000]], 'regulator-boot-on': True}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo9: False schema does not allow {'regulator-name': ['vcc_3v3_fuse'], 'regulator-min-microvolt': [[3300000]], 'regulator-max-microvolt': [[3300000]]}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo10: False schema does not allow {'regulator-name': ['vcc_3v1_touch'], 'regulator-min-microvolt': [[3100000]], 'regulator-max-microvolt': [[3100000]], 'regulator-boot-on': True}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo11: False schema does not allow {'regulator-name': ['vdd_3v3_hdmi'], 'regulator-min-microvolt': [[3300000]], 'regulator-max-microvolt': [[3300000]]}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo12: False schema does not allow {'regulator-name': ['vcc_2v8_sdio'], 'regulator-min-microvolt': [[2800000]], 'regulator-max-microvolt': [[2800000]], 'regulator-boot-on': True}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo13: False schema does not allow {'regulator-name': ['vcc_3v0_motor'], 'regulator-min-microvolt': [[3000000]], 'regulator-max-microvolt': [[3000000]]}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo14: False schema does not allow {'regulator-name': ['vcc_2v8_lcd'], 'regulator-min-microvolt': [[2800000]], 'regulator-max-microvolt': [[2800000]], 'regulator-boot-on': True}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo15: False schema does not allow {'regulator-name': ['vcc_3v3_temp'], 'regulator-min-microvolt': [[3300000]], 'regulator-max-microvolt': [[3300000]], 'regulator-boot-on': True}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo17: False schema does not allow {'regulator-name': ['vcc_1v2_mipi'], 'regulator-min-microvolt': [[1200000]], 'regulator-max-microvolt': [[1200000]]}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo18: False schema does not allow {'regulator-name': ['vcc_1v8_vi'], 'regulator-min-microvolt': [[1800000]], 'regulator-max-microvolt': [[1800000]]}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:ldo19: False schema does not allow {'regulator-name': ['vcc_1v8_touch'], 'regulator-min-microvolt': [[1800000]], 'regulator-max-microvolt': [[1800000]], 'regulator-boot-on': True}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:out5v: False schema does not allow {'regulator-name': ['usb0_vbus_reg'], 'regulator-min-microvolt': [[5000000]], 'regulator-max-microvolt': [[5000000]]}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:bbat: False schema does not allow {'regulator-name': ['vcc_bbat']}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:sdby: False schema does not allow {'regulator-name': ['vcc_rtc'], 'regulator-min-microvolt': [[950000]], 'regulator-max-microvolt': [[1300000]], 'regulator-always-on': True, 'regulator-boot-on': True}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
-Documentation/devicetree/bindings/regulator/maxim,max8907.example.dtb: pmic@3c (maxim,max8907): regulators:vrtc: False schema does not allow {'regulator-name': ['vrtc']}
-	from schema $id: http://devicetree.org/schemas/regulator/maxim,max8907.yaml
+Drop the example. It is incomplete and is not validated by anything.
 
-doc reference errors (make refcheckdocs):
+With that,
 
-See https://patchwork.kernel.org/project/devicetree/patch/20260927155745.187758-2-clamor95@gmail.com
+Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
 
-The base for the series is generally the latest rc1. A different dependency
-should be noted in *this* patch.
-
-If you already ran 'make dt_binding_check' and didn't see the above
-error(s), then make sure 'yamllint' is installed and dt-schema is up to
-date:
-
-pip3 install dtschema --upgrade
-
-Please check and re-submit after running the above command yourself. Note
-that DT_SCHEMA_FILES can be set to your schema file to speed up checking
-your schema. However, it must be unset to test all examples with your schema.
-
+Rob
