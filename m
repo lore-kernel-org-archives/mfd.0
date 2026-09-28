@@ -1,227 +1,92 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7CD1A4EE874;
-	Mon, 28 Sep 2026 16:33:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CABDE4EF130;
+	Mon, 28 Sep 2026 16:38:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790613188; cv=none; b=D+Zsc4aawj/c7h3N4N6I/uUJfNIzm7x7MRTwD5mZbyFOfCLg4hJSbYw3UxzzApEcl67U3AWMIkv/VhiWT+71Hi8YbsPDa3VdwgGGrjL7/0vi5v0+cTu0+x2b2YKfQrYMV1iVrUcMtXllc+ITiyqm4oZaMejXNigtfap0fHH3FLc=
+	t=1790613540; cv=none; b=m17IWHhb5WPJMqcYxJ0hiEqfCwixxzghkKVaHSGBcl8/la5Drn0xicr69uwqi51Pjf3AwatW+rL7IBb7TiOlOlh3XM3LSip6pq3L45LLN2I/EXnQ59YQ9d8JzIl6UujriZE4AJj4iNHzc4QM6hgT9pgv3KZG5P0fLmZWCe3GvOY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790613188; c=relaxed/simple;
-	bh=YN5oZf+nb1Abl2tW2AjgzdUMyCIGKfT451kkYbr32aw=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=KFXXPw2oWrlDqsC777YZVit7nBI/KKVsGHYfPqOfIltffLZqOO7hc5/Z47AHYW2/pIz8sB7Cvnb9VK2jQZf+Z/8Avh2E+uVqnI0lWWxUifbHUOb5mK/S4ZQHu51U2ra4tuRylkRniuz46lwvkItb1wvEnY8istJhXM2hGc0jH/k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SCyZajAx; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790613540; c=relaxed/simple;
+	bh=ZtFcD9dDy8Ns8wujRyXoCai7LHrcQP2Mng/vMzHQGYs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=C0DmHTJVy6TmAioMU1AH/7fX+eolxfwymFDfIc9DruGBAiKWyvOoKCHTQO9FzWGh+OiY3NQ5i0oGL7etbk2tzoVmBfMrdRobNgkcomkpRXLIzEu0kxX+RTbeykWCFTKMg0Meaf7erjOo/b7f+dLvITHuzo1Cg3DVTPVSawnhX1g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=go+gzpOp; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SCyZajAx"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB9531F000FF;
-	Mon, 28 Sep 2026 16:33:06 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="go+gzpOp"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4F26A1F000FF;
+	Mon, 28 Sep 2026 16:38:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790613187;
-	bh=2st5WPmMY1KRVxiNWWjebzO9dQdnaOGdWBjeDh3UJ/E=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=SCyZajAxT78YMyDxCQYTpzJ+O31Hi+Z0YQUGjLbN8jNvNrdh830zN7s9AfiHp/yXi
-	 f8QPRHjuGt71x6G8xzafUo+r7SNhSSODkicr1fi+kEj0XJ1ohskFb9zX8m3+tXeYt4
-	 5LjdwHo3ZSRH10/oi+7unzLqT3FIH1OVHRgd51TVhNrp0ESOcqkizL0aDVsJMcjEnb
-	 s0qAZgvaXJl0wHCpb5JnOli8hMrrrCuDR2SscyAW7J8AIr8EISWNly4Zq6R4qGlhk5
-	 4VMvzoZuhHSpjqhsaVVe9c8NIOiX13oFLS4MbXG6wHRp24n5Cnw9oW1SMn8FKiE/R7
-	 uRfeglD2MWKOw==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 1/2] dt-bindings: mfd: as3722: Convert to json-schema
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Thierry Reding" <thierry.reding@kernel.org>
-Cc: conor+dt@kernel.org, robh@kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20260928-as3722-bindings-v1-1-35f423a9f2b2@nvidia.com>
+	s=k20260515; t=1790613538;
+	bh=ZtFcD9dDy8Ns8wujRyXoCai7LHrcQP2Mng/vMzHQGYs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=go+gzpOpBvx1mGpjBYXWajUUizHF/j77bLG/W6wYn7pqtSJxctIALU3zYJdgC0QTs
+	 awtGSRHrNOQm7rCDKIRA7z/3BErK0lw08NcRU3MsqJLuZUvaOeHHUIH5IeB9MvtRsC
+	 Uyfgr3kbl+elnYZgCsCjCyha+G6I+NMM31VAYuAPUlvmrg6b361lfY7JnZ0OUmU4m4
+	 ibSivyuWyJvNyhUYnQcV2bq6UB1CBq1zXWpOjaoYjy/YNTdIKatbwjJJShpZ1Hc8FV
+	 lD4UvJN8Ks0odUDgGUcnrKNbPv60bfliFsp9my9ojZPz2kQMEfNkDUVZgO/F3kOSmI
+	 iviD54rZUJfOg==
+Date: Mon, 28 Sep 2026 17:38:50 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Thierry Reding <thierry.reding@kernel.org>
+Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Laxman Dewangan <ldewangan@nvidia.com>,
+	Jonathan Hunter <jonathanh@nvidia.com>, mfd@lists.linux.dev,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Thierry Reding <thierry.reding@gmail.com>,
+	linux-sound@vger.kernel.org, linux-tegra@vger.kernel.org,
+	Thierry Reding <treding@nvidia.com>
+Subject: Re: [PATCH 2/2] dt-bindings: sound: tegra-ahub: Convert to
+ json-schema
+Message-ID: <3f5e8785-692d-449a-b1c6-6a2b8679239e@sirena.org.uk>
 References: <20260928-as3722-bindings-v1-0-35f423a9f2b2@nvidia.com>
- <20260928-as3722-bindings-v1-1-35f423a9f2b2@nvidia.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 28 Sep 2026 16:33:06 +0000
-Message-Id: <20260928163306.BB9531F000FF@smtp.kernel.org>
+ <20260928-as3722-bindings-v1-2-35f423a9f2b2@nvidia.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="yXMPISHdeW+LmfrK"
+Content-Disposition: inline
+In-Reply-To: <20260928-as3722-bindings-v1-2-35f423a9f2b2@nvidia.com>
+X-Cookie: All is fear in love and war.
 
-Thank you for your contribution! Sashiko AI review found 5 potential issue(=
-s) to consider:
-- [Medium] dt-bindings: mfd: missing const constraint for gpio-cells
-- [Medium] dt-bindings: mfd: additionalProperties false breaks validation
-- [Medium] dt-bindings: mfd: missing core regulator schema reference in sub=
--nodes
-- [Medium] dt-bindings: mfd: missing additionalProperties in container nodes
-- [Low] dt-bindings: mfd: missing required GPIO provider properties
---
 
-commit 3390b1809db67797a4f31079a198e4285905107a
-Author: Thierry Reding <treding@nvidia.com>
-Date:   Mon Sep 28 16:24:40 2026 +0000
+--yXMPISHdeW+LmfrK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-    dt-bindings: mfd: as3722: Convert to json-schema
-   =20
-    Convert the AMS AS3722 PMIC bindings from the free-form text format to
-    json-schema.
+On Mon, Sep 28, 2026 at 06:24:41PM +0200, Thierry Reding wrote:
+> From: Thierry Reding <treding@nvidia.com>
+>=20
+> Convert Tegra AHUB bindings from the free-form text format to
+> json-schema.
 
-> diff --git a/Documentation/devicetree/bindings/mfd/ams,as3722.yaml b/Docu=
-mentation/devicetree/bindings/mfd/ams,as3722.yaml
-> new file mode 100644
-> index 0000000000000..6a64445003966
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/mfd/ams,as3722.yaml
-> @@ -0,0 +1,276 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
+Please submit patches using subject lines reflecting the style for the
+subsystem, this makes it easier for people to identify relevant patches.
+Look at what existing commits in the area you're changing are doing and
+make sure your subject lines visually resemble what they're doing.
+There's no need to resubmit to fix this alone.
 
-[ ... ]
+--yXMPISHdeW+LmfrK
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> +  # from gpio.yaml
-> +  gpio-controller: true
-> +  "#gpio-cells": true
+-----BEGIN PGP SIGNATURE-----
 
-[Severity: Medium]
-Does this schema allow invalid configurations for "#gpio-cells" (e.g., <1>
-or <3>) to silently pass validation instead of enforcing the hardware's
-actual requirements? The DT bindings subsystem guidelines mandate that
-each cell-count property must have a const constraint matching the hardware.
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmq6mBkACgkQJNaLcl1U
+h9BtmAf+MByjhamJChEoE4jSBrcxviNHKOCvYqv8inoXbjXe/SGDa013k4ogX4jK
+Nk4r5FgtLey4RUm16rFcDbhvoyWoY1GKdhbOYOCAehrlsj1AKZ9W9dE1dwmyniGF
+X/vK756vmpMTczkJnJNO246yw7hkGOWqY6jNYtoNRbjePKo0BaPGBeoyWoBtrdTv
+mr5tTKOWR5CSIE2gUfZBDRYc9al7oR7y40j+yBV8fokKkEp1nKEGQypGr6uwWT+J
+gLstLrC/Jl+2iO3q8B33LgaxRJQu3Ysdb4R+0NwoR9QXff3R1IPzVg5Znta2DJVf
+V0wSVAPmhPnUu3jRsxFdtyIgnc92Ig==
+=s+s/
+-----END PGP SIGNATURE-----
 
-> +
-> +  # optional properties
-> +  ams,enable-internal-int-pullup:
-
-[ ... ]
-
-> +  pinmux:
-> +    type: object
-> +    description: |
-> +      Device has 8 GPIO pins which can be configured as GPIO as well as =
-the
-> +      special IO functions.
-
-[Severity: Medium]
-Does this pinmux object definition omit additionalProperties: false? If
-omitted, invalid or misspelled child nodes under pinmux might be silently
-accepted instead of being flagged as errors since additionalProperties
-defaults to true.
-
-> +
-> +      Please refer to pinctrl-bindings.txt in this directory for details=
- of
-> +      the common pinctrl bindings used by client devices, including the
-
-[ ... ]
-
-> +        required:
-> +          - pins
-> +
-> +  regulators:
-> +    type: object
-> +    description: Device has multiple DCDC and LDOs. The node "regulators=
-" is
-> +      required if regulator functionality is needed.
-
-[Severity: Medium]
-Like the pinmux node above, does this regulators object also need
-additionalProperties: false to ensure invalid regulator nodes (e.g., sd7
-or ldo8) do not silently pass validation?
-
-> +
-> +    properties:
-> +      vsup-sd2-supply:
-
-[ ... ]
-
-> +      vin-ldo11-supply:
-> +        description: input supply for LDO11
-> +
-> +    patternProperties:
-> +      "^(sd[0-6]|ldo[0-7]|ldo9|ldo10|ldo11)$":
-> +        type: object
-> +        description: These sub-nodes must be named after one of the regu=
-lators
-> +          found on the AS3277. Each sub-node should contain the constrai=
-nts and
-> +          initialization information for that regulator.
-
-[Severity: Medium]
-Do these regulator sub-nodes need to link to the core regulator schema
-using a reference to /schemas/regulator/regulator.yaml#? Without this
-reference, standard regulator properties like regulator-min-microvolt
-are unvalidated and typos will be silently accepted by the schema checker.
-
-> +
-> +        properties:
-> +          ams,ext-control:
-
-[ ... ]
-
-> +          ams,enable-tracking:
-> +            $ref: /schemas/types.yaml#/definitions/flag
-> +            description: Enable tracking with SD1, only supported by LDO=
-3.
-> +
-> +additionalProperties: false
-
-[Severity: Medium]
-Will this strict filter fail to account for properties brought in by refs or
-standard core schemas like gpio.yaml? Using additionalProperties: false
-only evaluates properties explicitly listed in the local properties block,
-which will falsely reject valid standard properties. Should this be
-unevaluatedProperties: false instead?
-
-> +
-> +required:
-> +  - compatible
-> +  - reg
-> +  - interrupt-controller
-> +  - "#interrupt-cells"
-
-[Severity: Low]
-Does this required list omit the mandatory provider properties for a
-hardware device acting as a GPIO controller? The subsystem guidelines
-explicitly state that hardware provider capabilities must be included in
-the required list (e.g., gpio-controller, #gpio-cells), otherwise
-incomplete device tree nodes can pass schema validation.
-
-> +
-> +allOf:
-> +  - $ref: /schemas/gpio/gpio.yaml
-> +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/mfd/as3722.h>
-> +
-> +    i2c {
-> +        #address-cells =3D <1>;
-> +        #size-cells =3D <0>;
-> +
-> +        pmic@48 {
-> +            compatible =3D "ams,as3722";
-> +            reg =3D <0x48>;
-> +
-> +            ams,system-power-controller;
-> +
-> +            interrupt-parent =3D <&intc>;
-> +            interrupt-controller;
-> +            #interrupt-cells =3D <2>;
-> +
-> +            gpio-controller;
-> +            #gpio-cells =3D <2>;
-> +
-> +            pinctrl-names =3D "default";
-> +            pinctrl-0 =3D <&as3722_default>;
-
-[Severity: Medium]
-Will the inclusion of pinctrl-names and pinctrl-0 in this example trigger
-validation failures, since they are missing from the schema's local
-properties list and additionalProperties is set to false?
-
-> +
-> +            as3722_default: pinmux {
-> +                gpio0 {
-> +                    pins =3D "gpio0";
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260928-as3722-bin=
-dings-v1-0-35f423a9f2b2@nvidia.com?part=3D1
+--yXMPISHdeW+LmfrK--
