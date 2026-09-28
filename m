@@ -1,82 +1,131 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38F7F3DA7D1
-	for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 13:06:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 409984D1787
+	for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 13:43:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790600786; cv=none; b=VlDPz4SQvxl0bcEEOGVcTIOFkYfb50MAfk1nk1/odprajMGeFUY5oVdgWK2QdAa8+lAWG0NrHi9WApjooe7xUUqTGDG8yxwEPs5Pq9gIgPG3vhebbslckahgt8YEe7mQ/vWNdOsnsNgLrxCP04w5OqUrSFxoYd2VLqnEX1rpHoA=
+	t=1790602992; cv=none; b=KQDAiGmJVbvwnv8WnMbugbj15FKetgBZkxl5BIy879b65ATeRVGxwQUWRMArMku33OcvmV5XSX+y+OzMe9uSpZxgU/8/BtLNrboZEuHQ4nunYbJisBrnpo51o8GA0fA9yAHEH0oppEpfx/F5fwIJTiRcIwn/RLDytEce1Px/TUo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790600786; c=relaxed/simple;
-	bh=9MJT31aeINcZMGMVHLoFa3CZPYQ+ssR1QudYTkaEzaw=;
+	s=arc-20240116; t=1790602992; c=relaxed/simple;
+	bh=LAfG9aZjGdrhKCf/58E+Lupe9Ivg/F16AB6VzU/JCk0=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=d/5BtJ7zQdxy8thBR9eUt2WWN0BnKOssbn1C5PJ6I968Zr1zePaBfflODhkyXmZiud+/W7dOgNUmC6pOVZdUYksaAHagkle0VNWCzFO4GjHQfLmjKdzERhHMweUKbR8afPUq+KAt6A5znaOgOcx3zhu5GtpU+tENx3+r6nWLPc0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=C2Md9jrf; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=FZ3Uo4pHOpfIVzQ6FukIlr6a8OU6AjqX2cuVfETkiKUHemPh9wt4eAzRe9vQx/d1BigysKpEeP37Q4VspsDpdQCV05qFSpuL+w3kGukwnVM9RgMK9YO+xqmvu0FjMAxgngX2n7g4vj2xtwJAaZIs+CRL+Pe/FjAsdYDF9yL/BBY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XqgwPDhN; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="C2Md9jrf"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1AD641F008A1
-	for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 13:06:25 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XqgwPDhN"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D80431F0089B
+	for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 13:43:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790600785;
-	bh=dSg3kT2fLA3jr6CT33W9oAmxCzketncHCg6B1BQ+4Ok=;
+	s=k20260515; t=1790602988;
+	bh=KhMGxUvRlRgkjraFBvxRRPukh6cwxdgVureX0v0+n4g=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=C2Md9jrfeG+gaf4kKWnITeZFsM5oydYKb3uCLs1b0I3nbfSJ1+lCiYQzUuNF5DAgN
-	 h7X5wRRpdlYFG6I9T52EXK2mY1Y5UNmHbwYGfZtpg42ILb8GncC1ZdPLEez/cKNDBU
-	 /YPFnmIaLkI9cW83E9opMcrQ0uDIc/7bqYgqX9d0fuOlBcXEbSR8tfsyVvzJfzn2xl
-	 fNUtjZCmfywRoNynBI+n9IwvnAG2jtxYtRm7Y+eSlumuEmtKq6elhLfdpUkXSjqOk5
-	 Iumxni72nTMl9Y7DcYA4jl0BQntTUt9G/jfhGFXRqEoP1SpLYvDzyPndlQv3tDmmwM
-	 Mc+I28pyWlOhA==
-Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c294496989aso394144866b.3
-        for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 06:06:25 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBwtzoNG/Q4IImdHgBLwWoh7zD4CwYyJiTrR3KWQ6s5kvxBNlmyq0eKiwXYX8SDi8GNHL08=@lists.linux.dev
-X-Gm-Message-State: AFuF++lV5wtICPADRpRgXLMMnm0z3UIcg0fgGBY2KNP9yc17ROKgrPU3
-	4jc4GXC0BCP3EmANun3r71SbvejafcwhwgpO6dtScMFALHYloUb04OYSTKiwefGBN/WA8ULKW8X
-	mGJvrE5rmNw7u5k7Duuu/NlRw8tHXIw==
-X-Received: by 2002:a17:906:7946:b0:c26:1648:a06b with SMTP id
- a640c23a62f3a-c2ac2511a13mr1012188366b.38.1790600783728; Mon, 28 Sep 2026
- 06:06:23 -0700 (PDT)
+	b=XqgwPDhN/UCUkPF09xSf+JZzOnf+JLMeW+aF1DWSWGeSSdZjF0vTWKEoP/AZNss0x
+	 h2sggBfT0YCdHVdVc5t7BYeqx6OLpqdhTjx3xECXnFs9ofzNp+LzrHGSGNUVKzjgxy
+	 258QZwNIGi8BmRKb/Mt6XU4QHgD4uefN1BBXMmLtPMQenLPh2fc28zI5nOKnBDP6XJ
+	 GMDWgbwE2Iq+42tslszYitegdOoW4H0bHHZzz1gCYD5U5xMlXELp0Z2mH/As4gfK+5
+	 yroTVB5B+ukJzW/NA2d9lfFaXMoZLUD9J83TkGD8V/rG61Yhi7HuvX5tuI2G6rbVSO
+	 SVNptfreJTUEA==
+Received: by mail-ed2-f33.google.com with SMTP id 4fb4d7f45d1cf-6ac768bda6aso1619747a12.0
+        for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 06:43:08 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBzY8FRnD5cw9RR50RbO/SJy+SWrH0/dUfXj+4WKBC/2U7yuBfNClFWtYnd5zOhRdwQw2d0=@lists.linux.dev
+X-Gm-Message-State: AFq9FYJ9mksH9CLZMX8a4nlSc5gl/69r+cItH8uTp4zTWNwNnb10/thT
+	3ddrdzv2whJHiSJKXYUzg0ViMkVbwuuhSLfM/liJi6g2dddinpV504F3HGi4pL5FMKgapOM4l2+
+	vELUxDkyMdrMS6Ndvnri/v5DC3XNNruk=
+X-Received: by 2002:a05:6402:52d6:b0:6ac:9a44:d412 with SMTP id
+ 4fb4d7f45d1cf-6ac9a451421mr453774a12.7.1790602987498; Mon, 28 Sep 2026
+ 06:43:07 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260924-ti-tps6586x-v4-0-6c7a8fb8b646@gmail.com> <20260924-ti-tps6586x-v4-2-6c7a8fb8b646@gmail.com>
-In-Reply-To: <20260924-ti-tps6586x-v4-2-6c7a8fb8b646@gmail.com>
-From: Rob Herring <robh@kernel.org>
-Date: Mon, 28 Sep 2026 08:06:12 -0500
-X-Gmail-Original-Message-ID: <CAL_Jsq+gwYcjW6DuGTeRj5AHZHAwU3_5sohLR0c-QLVwpb38gQ@mail.gmail.com>
-X-Gm-Features: AclHuK936JmmOdyFrip_4yEB0zxMGhTS-Oy8SILUAvOVnvMI0ZJdPGR8zpJ133w
-Message-ID: <CAL_Jsq+gwYcjW6DuGTeRj5AHZHAwU3_5sohLR0c-QLVwpb38gQ@mail.gmail.com>
-Subject: Re: [PATCH v4 2/2] regulator: dt-bindings: Reference Tegra regulator
- coupling schema
-To: Bhargav Joshi <j.bhargav.u@gmail.com>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Thierry Reding <thierry.reding@avionic-design.de>, Lee Jones <lee@kernel.org>, 
-	Shree Ramamoorthy <s-ramamoorthy@ti.com>, Thierry Reding <thierry.reding@kernel.org>, 
-	Jonathan Hunter <jonathanh@nvidia.com>, Dmitry Osipenko <digetx@gmail.com>, 
-	Svyatoslav Ryhel <clamor95@gmail.com>, Laxman Dewangan <ldewangan@nvidia.com>, linux-kernel@vger.kernel.org, 
-	devicetree@vger.kernel.org, goledhruva@gmail.com, m-chawdhry@ti.com, 
-	daniel.baluta@gmail.com, simona.toaca@nxp.com, mfd@lists.linux.dev, 
-	Thierry Reding <treding@nvidia.com>, linux-tegra@vger.kernel.org
+References: <20260923084802.29508-1-zhaoqunqin@163.com>
+In-Reply-To: <20260923084802.29508-1-zhaoqunqin@163.com>
+From: Huacai Chen <chenhuacai@kernel.org>
+Date: Mon, 28 Sep 2026 21:42:56 +0800
+X-Gmail-Original-Message-ID: <CAAhV-H7+oXvoFbY1TDyRhYCgLXncRWNzpWrEBxpm6rwb_u8g5Q@mail.gmail.com>
+X-Gm-Features: AclHuK9T9s7VHBe8CzWdrIsP39KtE45HD6piVqFEHQ4lotnnM54AAYzrWUKy_1w
+Message-ID: <CAAhV-H7+oXvoFbY1TDyRhYCgLXncRWNzpWrEBxpm6rwb_u8g5Q@mail.gmail.com>
+Subject: Re: [PATCH v8 0/2] mfd: loongson-se: Add multi-node support and fix
+ miscellaneous issues
+To: Qunqin Zhao <zhaoqunqin@163.com>
+Cc: lee@kernel.org, zhaoqunqin@loongson.cn, linux-kernel@vger.kernel.org, 
+	loongarch@lists.linux.dev, linux-crypto@vger.kernel.org, mfd@lists.linux.dev
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 23, 2026 at 5:04=E2=80=AFPM Bhargav Joshi <j.bhargav.u@gmail.co=
-m> wrote:
->
-> Several PMICs used on Tegra boards TPS65910, TPS62360, and MAX77620 use
-> Tegra-specific regulator coupling properties. Update their dt bindings
-> to reference the shared nvidia,tegra-regulators-coupling.yaml schema.
->
-> Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
-> Signed-off-by: Bhargav Joshi <j.bhargav.u@gmail.com>
-> ---
->  Documentation/devicetree/bindings/mfd/ti,tps65910.yaml       | 12 ++++++=
-+++---
->  .../bindings/regulator/maxim,max77620-regulator.yaml         |  5 ++++-
->  Documentation/devicetree/bindings/regulator/ti,tps62360.yaml |  1 +
->  3 files changed, 14 insertions(+), 4 deletions(-)
+For the whole series,
+Reviewed-by: Huacai Chen <chenhuacai@loongson.cn>
 
-Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
+On Wed, Sep 23, 2026 at 4:48=E2=80=AFPM Qunqin Zhao <zhaoqunqin@163.com> wr=
+ote:
+>
+> From: Qunqin Zhao <zhaoqunqin@loongson.cn>
+>
+> - Patch 1 introduces the multi-node platform support.
+>
+>   v6-v8: no changes
+>   v5: Clear pending interrupts with S2LINT_CL before requesting IRQs,
+>        and move S2LINT_EN to after all interrupt handlers are registered.
+>   v4: Safely handling shared interrupt handler returns.
+>   v3: Using shared interrupts (IRQF_SHARED) instead of manually
+>       iterating through all devices to check for interrupts.
+>
+> - Patch 2 focuses on structural and error-path hardening for the
+>   pre-existing baseline code. This includes resolving critical issues
+>   discovered by the Sashiko Automation system such as: completion
+>   race conditions, missing engine completion initialization, spinlock
+>   held with interrupts disabled for up to 10 ms, EPROBE_DEFER
+>   handling, DMA buffer overflow validation, interrupt cleanup on
+>   probe failure, and device removal ordering.
+>
+>   v8:
+>        - Remove the poll_lock added in v7
+>
+>   v7:
+>        - Re-enable the interrupt under dev_lock in loongson_se_poll()
+>          instead of poll_lock, so both the mask and re-enable of
+>          SE_S2LINT_EN are protected by the same lock and cannot race
+>        - Wait for controller command completion with a bounded
+>          non-interruptible wait so a pending signal cannot leave the
+>          controller running while DMA buffers are torn down
+>        - Validate the id argument in loongson_se_init_engine() to
+>          reject engine 0 and out-of-bounds indices
+>        - Drop the redundant init_completion() in
+>          loongson_se_init_engine() now that probe() initializes all
+>          engine completions
+>   v6:
+>        - Mask the target interrupt, clear pending status, and
+>          reinitialize the completion under dev_lock before issuing a
+>          command, re-enabling the interrupt after triggering
+>        - Keep the original engine_init_lock scope instead of the
+>          broader cmd_lock mutex
+>        - Reuse loongson_se_send_controller_cmd() in the STOP path and
+>          register the stop handler before loongson_se_init()
+>        - Correct the dmam_size validation formula
+>   v5: Fix all issues reported by Sashiko analysis:
+>        - Initialize engine completions in probe to avoid NULL deref
+>        - Use cmd_lock mutex for command serialization, drop spin_lock_irq
+>        - Add reinit_completion to controller and engine command paths
+>        - Fix EPROBE_DEFER handling in platform_irq_count()
+>        - Validate dmam_size against minimum required size
+>        - Disable IRQs in probe error path after init failure
+>        - Add loongson_se_stop() devres cleanup with proper ordering
+>        - Use non-interruptible wait for STOP command
+>   v4: new patch
+>
+> Qunqin Zhao (2):
+>   mfd: loongson-se: Add multi-node support
+>   mfd: loongson-se: Fix miscellaneous issues
+>
+>  drivers/mfd/loongson-se.c       | 119 ++++++++++++++++++++++++++++----
+>  include/linux/mfd/loongson-se.h |   1 +
+>  2 files changed, 106 insertions(+), 14 deletions(-)
+>
+>
+> base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
+> --
+> 2.47.2
+>
