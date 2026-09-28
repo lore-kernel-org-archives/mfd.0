@@ -1,55 +1,55 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 891B93D4137
-	for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 13:05:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38F7F3DA7D1
+	for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 13:06:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790600705; cv=none; b=lVBr1LbLVpf6jlR48N76zneIcdJtX10sLAFPd31/mk6aRhti465T4iKYLSnbzEL24lcEP26EZhLwJoQYR44Lb+8D9VNW2eRRvWBAPYAW2jE2ZCWpItojBl5WFtpvo2RmLsE1yvAIEk7denSyQbMvmdIPOxa5CwIpKzkChHrUDi0=
+	t=1790600786; cv=none; b=VlDPz4SQvxl0bcEEOGVcTIOFkYfb50MAfk1nk1/odprajMGeFUY5oVdgWK2QdAa8+lAWG0NrHi9WApjooe7xUUqTGDG8yxwEPs5Pq9gIgPG3vhebbslckahgt8YEe7mQ/vWNdOsnsNgLrxCP04w5OqUrSFxoYd2VLqnEX1rpHoA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790600705; c=relaxed/simple;
-	bh=52j8945jlWgUfs7EXbllgzvVcw8lTaTuRBWLQUFKmCM=;
+	s=arc-20240116; t=1790600786; c=relaxed/simple;
+	bh=9MJT31aeINcZMGMVHLoFa3CZPYQ+ssR1QudYTkaEzaw=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=gc/ATgVX2gOYQn92lo3YDtyDscn4T1piKaWpb2NZRuYfR62ASgSvrNG8/5SixfDnNg98FHpxUqmnlw8s9ItGGxyuetIdEoDrdK3gPQzEbJvtxALs69yOVwx7zH2EEsg3S1WmNqFiaxEIbeg7yPjIFMMGAiq123KyOwvIacklbBA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=avR42vum; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=d/5BtJ7zQdxy8thBR9eUt2WWN0BnKOssbn1C5PJ6I968Zr1zePaBfflODhkyXmZiud+/W7dOgNUmC6pOVZdUYksaAHagkle0VNWCzFO4GjHQfLmjKdzERhHMweUKbR8afPUq+KAt6A5znaOgOcx3zhu5GtpU+tENx3+r6nWLPc0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=C2Md9jrf; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="avR42vum"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 464491F00893
-	for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 13:05:04 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="C2Md9jrf"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1AD641F008A1
+	for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 13:06:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790600704;
-	bh=auF1PGZG5FeNj0rD11SzUL3le7hplnl5FCbwZHCGXog=;
+	s=k20260515; t=1790600785;
+	bh=dSg3kT2fLA3jr6CT33W9oAmxCzketncHCg6B1BQ+4Ok=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=avR42vummbxAYHr8lyLj8YiH5LjxJQD912LYbEWoe6zyGuvhlgWsSiOrRiLgPwwUY
-	 ikkHL/h23xI+2DyIj97vMtLCXkqayBHl+RmU0mE7zC7nH7UHcHQHtD86gS/hqSyCuW
-	 eGtHCpdL7wqrAtwiweZt6akw6LKRm+xYn6bmxUfw4ORjIZ2L0pKRhpNnEEXmdpVw3R
-	 1hAMFN5LoW/Fs8X54sqGhwYprmdMI8JSE8/0jES9Cs2ekxw1Ut77kIzC793+BKDXFp
-	 eCMKhakENvdXMOxVcymVsYJkylXosRJ/Pr+ZqYxMhilMuXIdf7L5icvUCtVaOoBcNM
-	 Yuh4E7fdGgMYg==
-Received: by mail-ej2-f42.google.com with SMTP id a640c23a62f3a-c2aff2c45efso230872266b.3
-        for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 06:05:04 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBzcabsTYiBCpb8oc1LIfaNZK6/r+ZLYWyJg/1BLlxjLlTSedwsztl17oDrd8G9zPT0LGwI=@lists.linux.dev
-X-Gm-Message-State: AFq9FYKaKlsZMHHn53hUAhjNi2xyghhzA9g4X+RSXwmD+iSUVsOO1HY3
-	CIJNLJfejaTJjJmdpDkrUxt498chj4D249S44MSNme39YKXFYiB6Dj1JQ+oH2BpaygL6LxxZvmP
-	VjDL+7bU+DfJpgdMFegodvq5bAY1HcA==
-X-Received: by 2002:a17:907:9616:b0:c29:5d41:dfe8 with SMTP id
- a640c23a62f3a-c2ac25d87efmr1120379466b.43.1790600702883; Mon, 28 Sep 2026
- 06:05:02 -0700 (PDT)
+	b=C2Md9jrfeG+gaf4kKWnITeZFsM5oydYKb3uCLs1b0I3nbfSJ1+lCiYQzUuNF5DAgN
+	 h7X5wRRpdlYFG6I9T52EXK2mY1Y5UNmHbwYGfZtpg42ILb8GncC1ZdPLEez/cKNDBU
+	 /YPFnmIaLkI9cW83E9opMcrQ0uDIc/7bqYgqX9d0fuOlBcXEbSR8tfsyVvzJfzn2xl
+	 fNUtjZCmfywRoNynBI+n9IwvnAG2jtxYtRm7Y+eSlumuEmtKq6elhLfdpUkXSjqOk5
+	 Iumxni72nTMl9Y7DcYA4jl0BQntTUt9G/jfhGFXRqEoP1SpLYvDzyPndlQv3tDmmwM
+	 Mc+I28pyWlOhA==
+Received: by mail-ej2-f12.google.com with SMTP id a640c23a62f3a-c294496989aso394144866b.3
+        for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 06:06:25 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBwtzoNG/Q4IImdHgBLwWoh7zD4CwYyJiTrR3KWQ6s5kvxBNlmyq0eKiwXYX8SDi8GNHL08=@lists.linux.dev
+X-Gm-Message-State: AFuF++lV5wtICPADRpRgXLMMnm0z3UIcg0fgGBY2KNP9yc17ROKgrPU3
+	4jc4GXC0BCP3EmANun3r71SbvejafcwhwgpO6dtScMFALHYloUb04OYSTKiwefGBN/WA8ULKW8X
+	mGJvrE5rmNw7u5k7Duuu/NlRw8tHXIw==
+X-Received: by 2002:a17:906:7946:b0:c26:1648:a06b with SMTP id
+ a640c23a62f3a-c2ac2511a13mr1012188366b.38.1790600783728; Mon, 28 Sep 2026
+ 06:06:23 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260924-ti-tps6586x-v4-0-6c7a8fb8b646@gmail.com> <20260924-ti-tps6586x-v4-1-6c7a8fb8b646@gmail.com>
-In-Reply-To: <20260924-ti-tps6586x-v4-1-6c7a8fb8b646@gmail.com>
+References: <20260924-ti-tps6586x-v4-0-6c7a8fb8b646@gmail.com> <20260924-ti-tps6586x-v4-2-6c7a8fb8b646@gmail.com>
+In-Reply-To: <20260924-ti-tps6586x-v4-2-6c7a8fb8b646@gmail.com>
 From: Rob Herring <robh@kernel.org>
-Date: Mon, 28 Sep 2026 08:04:51 -0500
-X-Gmail-Original-Message-ID: <CAL_JsqLhhJYP9yP5i55dvBMUr_jqLr3CUvQrvdt__uYPJVNSHw@mail.gmail.com>
-X-Gm-Features: AclHuK9QEJ4uOQxPljBhZckKlXzAHfCFvrVCDh-aLNseE1t90L9tpQanxTIxWOs
-Message-ID: <CAL_JsqLhhJYP9yP5i55dvBMUr_jqLr3CUvQrvdt__uYPJVNSHw@mail.gmail.com>
-Subject: Re: [PATCH v4 1/2] regulator: dt-bindings: nvidia,tegra-regulators-coupling:
- Convert to DT schema
+Date: Mon, 28 Sep 2026 08:06:12 -0500
+X-Gmail-Original-Message-ID: <CAL_Jsq+gwYcjW6DuGTeRj5AHZHAwU3_5sohLR0c-QLVwpb38gQ@mail.gmail.com>
+X-Gm-Features: AclHuK936JmmOdyFrip_4yEB0zxMGhTS-Oy8SILUAvOVnvMI0ZJdPGR8zpJ133w
+Message-ID: <CAL_Jsq+gwYcjW6DuGTeRj5AHZHAwU3_5sohLR0c-QLVwpb38gQ@mail.gmail.com>
+Subject: Re: [PATCH v4 2/2] regulator: dt-bindings: Reference Tegra regulator
+ coupling schema
 To: Bhargav Joshi <j.bhargav.u@gmail.com>
 Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
 	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
@@ -66,29 +66,17 @@ Content-Transfer-Encoding: quoted-printable
 On Wed, Sep 23, 2026 at 5:04=E2=80=AFPM Bhargav Joshi <j.bhargav.u@gmail.co=
 m> wrote:
 >
-> Convert NVIDIA Tegra Regulators Coupling from legacy text to DT schema.
-> Set additionalProperties true as this is shared schema.
+> Several PMICs used on Tegra boards TPS65910, TPS62360, and MAX77620 use
+> Tegra-specific regulator coupling properties. Update their dt bindings
+> to reference the shared nvidia,tegra-regulators-coupling.yaml schema.
 >
+> Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
 > Signed-off-by: Bhargav Joshi <j.bhargav.u@gmail.com>
 > ---
->  .../regulator/nvidia,tegra-regulators-coupling.txt | 65 ----------------=
----
->  .../nvidia,tegra-regulators-coupling.yaml          | 74 ++++++++++++++++=
-++++++
->  2 files changed, 74 insertions(+), 65 deletions(-)
-
-[...]
-
-> +examples:
-> +  - |
-> +    pmic {
-> +        regulators {
-> +            core_vdd_reg: core {
-
-Drop the example. It is incomplete and is not validated by anything.
-
-With that,
+>  Documentation/devicetree/bindings/mfd/ti,tps65910.yaml       | 12 ++++++=
++++---
+>  .../bindings/regulator/maxim,max77620-regulator.yaml         |  5 ++++-
+>  Documentation/devicetree/bindings/regulator/ti,tps62360.yaml |  1 +
+>  3 files changed, 14 insertions(+), 4 deletions(-)
 
 Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
-
-Rob
