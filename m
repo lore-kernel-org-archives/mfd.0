@@ -1,49 +1,70 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BC7248CD50;
-	Mon, 28 Sep 2026 21:46:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 496964F96A0
+	for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 21:49:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.19
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790631988; cv=none; b=sKevnXyR2Iy0s0nlvXBan9vE4U83ie+5aGaO52kBNhR8QGCVmLgqTJAxU8f9Bebb8KTXuzcmec9L6F1oHs19hSRD6UPMsbOckg8iiH64578zc3+qrMTDgr+q8H4cqDaK9U06b3rrGZc6dfBVDlqwBncCCH/w5A5gMMV3H20FWEY=
+	t=1790632200; cv=none; b=cvuyKq3e/39Xp5sY4mna25spZ6+RbafNAPI8Z36+cNHcqthkk6exNUSwjwjl/BAEULo/8cuvbSfsXpJoP9e3VFqk/92TyLFz1jpLLBDd0ToxdoJ/cjvyE22TD9oVeGelRw9l+QxpQDCNEww8VGkEyhGWEmHylwUzTiP1Rgk6hk4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790631988; c=relaxed/simple;
-	bh=CQt49t+MN3sTKuxWLz8qmvE9j3U97SgYETRg8kRECvI=;
+	s=arc-20240116; t=1790632200; c=relaxed/simple;
+	bh=3A2k4B1MyyYGlKtnyMek8DNyKiLznOjV5xluhGSwX50=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Vsk3QTDz221s7H+0yQjFhLBG9s9NV1iJzcPZmy+b47+Pg4WgReOPVEEbfByUpuGRu4cSoMW5zJcxibDyEjuCoRy/NI0epCr4JIx0eOWRLIIZLFN3r/MUbG8nBmgALmPluJp8l4VsvZeIWWtI9vB4o85iakP3wRBCYNEtvxochgU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AIdFkN5a; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=FU4Rh+/swvShXZP3+dyrR0JulExH2MDTgykwVM9XN9SL+uwpb1in0VpyDRlaTsy+txfsDWFp0ZJHqG74nbWuRIcw4sQ7P5mjCZSFQ5+vWMrkrbvrf53qRpudKzExWHi4YM08GWrqj9830JIx5vi6JtpVDAXNaLs9IAkr0UA2pH0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=KzoB7SWm; arc=none smtp.client-ip=198.175.65.19
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AIdFkN5a"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3AAAC1F000FF;
-	Mon, 28 Sep 2026 21:46:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790631977;
-	bh=y/Atjq+YNbLepkXbAJsuUwkZd/yWBjBM/VM157Ek4w0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=AIdFkN5aWvrJGi3cUpaK044VDVPGSQ7lDaOlIWJpXpn1q/x0cHj8JFFpREvjSywle
-	 M0mD82XbcosKGoJrl8slWtLE0j33DGgcf5sd8hihNsBmQB1PV8yDfzUFzoNkr7lpCd
-	 eP976LWMkxemByOiMtWDdA6f8nW6JsRmYUu1eVqzl4QEa7AbqmL+wnZkCU5hncRGvz
-	 2hkOECiyrjp5biwxtEGAbjReBc+eEGhV2gTEFyb/Tmt8yF1uBOMQrecMXu0j7v3ruM
-	 tPoW2qnyI80WvzKqheJfp/c0Uxbhi3awSAKN012IgWLD+zszhAOizBUbabBupGt+my
-	 Mga+/Foe0zIOg==
-Date: Mon, 28 Sep 2026 16:46:15 -0500
-From: Rob Herring <robh@kernel.org>
-To: Thierry Reding <thierry.reding@kernel.org>
-Cc: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="KzoB7SWm"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1790632197; x=1822168197;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=3A2k4B1MyyYGlKtnyMek8DNyKiLznOjV5xluhGSwX50=;
+  b=KzoB7SWmvkclxeO9BF6RYEVP1a2ZSx0txCUWobXDZbhurGj42WqLrlqA
+   Wz9L4hLINisbEV7tNEscyhwOTX5k5wIDI+mCZz57ZnAFGdV5spGNNwWDJ
+   mOhp5x5vpEHB9eaanHce+ZwKLWqFV4321em9tzi25wQVkv+YikOKEZGz5
+   NdPHsVCtiNfgn6F5yuYm8arXZwHaW8/tQxoVOwi6bd39Yv5I3r/QG5TxQ
+   dm9cx+16ZYWrSKL9pvA1Z56aSEoiSbK8qiRQ5a19jrcbI0P2KePgE1zBn
+   DIFogY1fMd1x0Q+qfj7qq4FkpJ22yjkbcmzgJDR0sgOOB0l0BQWsjsVNw
+   A==;
+X-CSE-ConnectionGUID: 7kpxhYqFRNSO5aQCLnYAjQ==
+X-CSE-MsgGUID: EPgqF4ahTSi3jSZ1ddtgEg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11919"; a="90295162"
+X-IronPort-AV: E=Sophos;i="6.27,129,1787036400"; 
+   d="scan'208";a="90295162"
+Received: from orviesa003.jf.intel.com ([10.64.159.143])
+  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Sep 2026 14:49:56 -0700
+X-CSE-ConnectionGUID: agS7fjZAS8yA+UD6RGr5mQ==
+X-CSE-MsgGUID: LfT05oMtSsy/cY302rRjFQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,129,1787036400"; 
+   d="scan'208";a="278380629"
+Received: from conormcd-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.244.42])
+  by ORVIESA003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Sep 2026 14:49:52 -0700
+Date: Tue, 29 Sep 2026 00:49:49 +0300
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Ryan Brue <ryanbrue.dev@gmail.com>
+Cc: Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Laxman Dewangan <ldewangan@nvidia.com>,
-	Jonathan Hunter <jonathanh@nvidia.com>, mfd@lists.linux.dev,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Lee Jones <lee@kernel.org>, linux-iio@vger.kernel.org,
 	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	Thierry Reding <thierry.reding@gmail.com>,
-	linux-sound@vger.kernel.org, linux-tegra@vger.kernel.org,
-	Thierry Reding <treding@nvidia.com>
-Subject: Re: [PATCH 2/2] dt-bindings: sound: tegra-ahub: Convert to
- json-schema
-Message-ID: <20260928214615.GA886365-robh@kernel.org>
-References: <20260928-as3722-bindings-v1-0-35f423a9f2b2@nvidia.com>
- <20260928-as3722-bindings-v1-2-35f423a9f2b2@nvidia.com>
+	linux-arm-kernel@lists.infradead.org,
+	linux-mediatek@lists.infradead.org, mfd@lists.linux.dev,
+	Roman Vivchar <rva333@protonmail.com>,
+	Luca Leonardo Scorcia <l.scorcia@gmail.com>
+Subject: Re: [PATCH v4 2/3] iio: adc: mt6397-auxadc: add mt6397 PMIC AUXADC
+ driver
+Message-ID: <arrg_SBRTPbquCFA@ashevche-desk.local>
+References: <20260928-rbrue-suez-upstreaming-mt6397-auxadc-v4-0-23533a0d30e3@gmail.com>
+ <20260928-rbrue-suez-upstreaming-mt6397-auxadc-v4-2-23533a0d30e3@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -52,200 +73,36 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260928-as3722-bindings-v1-2-35f423a9f2b2@nvidia.com>
+In-Reply-To: <20260928-rbrue-suez-upstreaming-mt6397-auxadc-v4-2-23533a0d30e3@gmail.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On Mon, Sep 28, 2026 at 06:24:41PM +0200, Thierry Reding wrote:
-> From: Thierry Reding <treding@nvidia.com>
+On Mon, Sep 28, 2026 at 03:57:20PM -0500, Ryan Brue wrote:
+> The mt6397 AUXADC is a 10-bit ADC behind the SoC's PMIC wrapper. On boards
+> built around this PMIC it is the only way to read the battery: the SoC's
+> AUXADC is wired to board thermistors and the charger ICs these boards use
+> have no ADC of their own.
 > 
-> Convert Tegra AHUB bindings from the free-form text format to
-> json-schema.
-
-Pretty sure there was a prior version posted... Please check any 
-comments there.
-
+> Add a driver exposing the battery voltage and battery temperature
+> channels. Only those two are described, so a channel ID in the device tree
+> indexes the driver's channel array rather than the PMIC's channel number,
+> as mt6323-auxadc does. The ready bit lives in a channel's raw result
+> register, but the value comes from the chip's factory-calibrated copy.
 > 
-> Signed-off-by: Thierry Reding <treding@nvidia.com>
-> ---
->  .../bindings/sound/nvidia,tegra30-ahub.txt         |  88 -------
->  .../bindings/sound/nvidia,tegra30-ahub.yaml        | 260 +++++++++++++++++++++
->  2 files changed, 260 insertions(+), 88 deletions(-)
+> The battery voltage is measured through ISENSE, because a board with a
+> switching charger in the power path leaves BATSNS on the charger's system
+> rail instead of on the pack. The thermistor only reads correctly with the
+> PMIC's battery-detect bias and input buffer enabled, which take 20 ms to
+> settle. Both are switched back off afterwards.
 > 
-> diff --git a/Documentation/devicetree/bindings/sound/nvidia,tegra30-ahub.txt b/Documentation/devicetree/bindings/sound/nvidia,tegra30-ahub.txt
-> deleted file mode 100644
-> index 0e9a1895d7fb..000000000000
-> --- a/Documentation/devicetree/bindings/sound/nvidia,tegra30-ahub.txt
-> +++ /dev/null
-> @@ -1,88 +0,0 @@
-> -NVIDIA Tegra30 AHUB (Audio Hub)
-> -
-> -Required properties:
-> -- compatible : For Tegra30, must contain "nvidia,tegra30-ahub".  For Tegra114,
-> -  must contain "nvidia,tegra114-ahub".  For Tegra124, must contain
-> -  "nvidia,tegra124-ahub".  Otherwise, must contain "nvidia,<chip>-ahub",
-> -  plus at least one of the above, where <chip> is tegra132.
-> -- reg : Should contain the register physical address and length for each of
-> -  the AHUB's register blocks.
-> -  - Tegra30 requires 2 entries, for the APBIF and AHUB/AUDIO register blocks.
-> -  - Tegra114 requires an additional entry, for the APBIF2 register block.
-> -- interrupts : Should contain AHUB interrupt
-> -- clocks : Must contain an entry for each entry in clock-names.
-> -  See ../clocks/clock-bindings.txt for details.
-> -- clock-names : Must include the following entries:
-> -  - d_audio
-> -  - apbif
-> -- resets : Must contain an entry for each entry in reset-names.
-> -  See ../reset/reset.txt for details.
-> -- reset-names : Must include the following entries:
-> -  Tegra30 and later:
-> -  - d_audio
-> -  - apbif
-> -  - i2s0
-> -  - i2s1
-> -  - i2s2
-> -  - i2s3
-> -  - i2s4
-> -  - dam0
-> -  - dam1
-> -  - dam2
-> -  - spdif
-> -  Tegra114 and later additionally require:
-> -  - amx
-> -  - adx
-> -  Tegra124 and later additionally require:
-> -  - amx1
-> -  - adx1
-> -  - afc0
-> -  - afc1
-> -  - afc2
-> -  - afc3
-> -  - afc4
-> -  - afc5
-> -- ranges : The bus address mapping for the configlink register bus.
-> -  Can be empty since the mapping is 1:1.
-> -- dmas : Must contain an entry for each entry in clock-names.
-> -  See ../dma/dma.txt for details.
-> -- dma-names : Must include the following entries:
-> -  - rx0 .. rx<n>
-> -  - tx0 .. tx<n>
-> -  ... where n is:
-> -  Tegra30: 3
-> -  Tegra114, Tegra124: 9
-> -- #address-cells : For the configlink bus. Should be <1>;
-> -- #size-cells : For the configlink bus. Should be <1>.
-> -
-> -AHUB client modules need to specify the IDs of their CIFs (Client InterFaces).
-> -For RX CIFs, the numbers indicate the register number within AHUB routing
-> -register space (APBIF 0..3 RX, I2S 0..5 RX, DAM 0..2 RX 0..1, SPDIF RX 0..1).
-> -For TX CIFs, the numbers indicate the bit position within the AHUB routing
-> -registers (APBIF 0..3 TX, I2S 0..5 TX, DAM 0..2 TX, SPDIF TX 0..1).
-> -
-> -Example:
-> -
-> -ahub@70080000 {
-> -	compatible = "nvidia,tegra30-ahub";
-> -	reg = <0x70080000 0x200 0x70080200 0x100>;
-> -	interrupts = < 0 103 0x04 >;
-> -	nvidia,dma-request-selector = <&apbdma 1>;
-> -	clocks = <&tegra_car 106>, <&tegra_car 107>;
-> -	clock-names = "d_audio", "apbif";
-> -	resets = <&tegra_car 106>, <&tegra_car 107>, <&tegra_car 30>,
-> -		<&tegra_car 11>, <&tegra_car 18>, <&tegra_car 101>,
-> -		<&tegra_car 102>, <&tegra_car 108>, <&tegra_car 109>,
-> -		<&tegra_car 110>, <&tegra_car 10>;
-> -	reset-names = "d_audio", "apbif", "i2s0", "i2s1", "i2s2",
-> -		"i2s3", "i2s4", "dam0", "dam1", "dam2",
-> -		"spdif";
-> -	dmas = <&apbdma 1>, <&apbdma 1>;
-> -	       <&apbdma 2>, <&apbdma 2>;
-> -	       <&apbdma 3>, <&apbdma 3>;
-> -	       <&apbdma 4>, <&apbdma 4>;
-> -	dma-names = "rx0", "tx0", "rx1", "tx1", "rx2", "tx2", "rx3", "tx3";
-> -	ranges;
-> -	#address-cells = <1>;
-> -	#size-cells = <1>;
-> -};
-> diff --git a/Documentation/devicetree/bindings/sound/nvidia,tegra30-ahub.yaml b/Documentation/devicetree/bindings/sound/nvidia,tegra30-ahub.yaml
-> new file mode 100644
-> index 000000000000..c064a2acae5e
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/sound/nvidia,tegra30-ahub.yaml
-> @@ -0,0 +1,260 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/sound/nvidia,tegra30-ahub.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: NVIDIA Tegra30 AHUB (Audio Hub)
-> +
-> +maintainers:
-> +  - Thierry Reding <thierry.reding@gmail.com>
-> +  - Jon Hunter <jonathanh@nvidia.com>
-> +
-> +description: AHUB client modules need to specify the IDs of their CIFs (Client InterFaces). For RX
-> +  CIFs, the numbers indicate the register number within AHUB routing register space (APBIF 0..3 RX,
-> +  I2S 0..5 RX, DAM 0..2 RX 0..1, SPDIF RX 0..1). For TX CIFs, the numbers indicate the bit position
-> +  within the AHUB routing registers (APBIF 0..3 TX, I2S 0..5 TX, DAM 0..2 TX, SPDIF TX 0..1).
+> Reads average sixteen conversions in software; the chip's sample
+> accumulator makes no measurable difference at any setting, so it is left
+> at one sample per conversion.
 
-CR after 'description' and rewrap to 80 chars.
+Reviewed-by: Andy Shevchenko <andriy.shevchenko@intel.com>
 
-> +
-> +properties:
-> +  compatible:
-> +    enum:
-> +      - nvidia,tegra30-ahub
-> +      - nvidia,tegra114-ahub
-> +      - nvidia,tegra124-ahub
-> +
-> +  reg:
-> +    minItems: 2
-> +    maxItems: 3
-> +
-> +  interrupts:
-> +    maxItems: 1
-> +
-> +  clocks:
-> +    items:
-> +      - description: digital audio clock
-> +      - description: module clock
-> +
-> +  clock-names:
-> +    items:
-> +      - const: d_audio
-> +      - const: apbif
-> +
-> +  resets:
-> +    minItems: 11
-> +    maxItems: 21
-> +
-> +  reset-names:
-> +    minItems: 11
-> +    maxItems: 21
-> +
-> +  ranges: true
-> +
-> +  dmas:
-> +    minItems: 8
-> +    maxItems: 20
-> +
-> +  dma-names:
-> +    minItems: 8
-> +    maxItems: 20
-> +
-> +  "#address-cells":
-> +    enum: [ 1, 2 ]
-> +
-> +  "#size-cells":
-> +    enum: [ 1, 2 ]
-> +
-> +patternProperties:
-> +  "^i2s@[0-9a-f]+$":
-> +    type: object
+-- 
+With Best Regards,
+Andy Shevchenko
 
-       required:
-         - compatible
 
-Otherwise, we can't be sure it is validated. Or if there isn't a 
-compatible, then the schema needs to go here (directly or via a $ref).
-
-Rob
