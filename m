@@ -1,124 +1,121 @@
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj2-f39.google.com (mail-pj2-f39.google.com [74.125.227.167])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65F683C73E1;
-	Sun, 27 Sep 2026 21:48:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C76143FD06
+	for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 10:59:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.167
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790545737; cv=none; b=skNYejcysYOEbdL8YC+DewQ7gGoSx0ktpuvloyIX++gT+mLad1PsVmCCPKfu/xx7CjzdmR1DrP8gcTtQhXk1XsjxGkb3Xnt9W6+L1rR5jgxUcqtl8thJBA3f7hXSjWr8WlEtoei82lHIMTTFN2tHBVVMjyB+sZ3YIGz8p2muLeI=
+	t=1790593193; cv=none; b=kD5asFE21bceOvX8rYrJ4mO+hZtc9iMZIdqAdA6AvczZuQ2XPA/xHm+Jmo5dWBaabcTc91tpRdQUTrXNnCJKJSfA7g77vmyhEYsNxY4XIKaZR5mYxXsqRkfso4VwdI7ZAQTgbxWYh21nL12SHF4u5M4Ft1zXaNC6E2ddS5QWTEU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790545737; c=relaxed/simple;
-	bh=hgXl9jFT1aGKGx8bh635QnHT1vZdYsGxqcL8UGl5iRA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=hjS4pPTkvRjCavP8aWdd3+veLBW0YnvaJfXrjqVMQDI9l1VlnS7Te+liV8BhsmgtXu2Q29hKQmh7LZHtyzcREOde87tdHWGfn4ef8HWyWk753lGYzEmut0qVip+3qSEqpo392837e6YFT1j+LOlvkbcMzuXHbWJep0wI542d604=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=Oef4GSQI; arc=none smtp.client-ip=156.67.10.101
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+	s=arc-20240116; t=1790593193; c=relaxed/simple;
+	bh=Z/TbL+f5y66cEvFdcPui4A1BZw7D17pmKF753Ddweow=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=envsGM41X3f30TQLppbD4p4q5fpwgMZOxJAtNCtWeEBEVmNOceL8nTkvPD95kWPG2KmVnlZiI709mbUHT9pDT5VArO52jeOnvlNfz7sw/mrhncfz741jNsBVR27LNdHD2JccyI5YstZs4ClMK3OkDDWt1otHE417nA7pPitSa2I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QzoEtZRT; arc=none smtp.client-ip=74.125.227.167
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="Oef4GSQI"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=uRCO1hCvm+HcqUF0cIAAS7cPIp9rv+bSF/z0y9cWaHQ=; b=Oef4GSQIwPZhqB72EoCeNbmCAq
-	irFkql9KZPdDbyxsCkLuIvvPTBcEDaProqDUuRc/XEMrrz43SR/x9RNcawsFv2BRBxChM/DczMi4e
-	EmNeU5/fV2D+Jcox6GfO+YtEQV7awuKJOQKbUjo9CPeqGOjyKYGTnwRPtOm6g2+qRdFY=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1xAwjU-007ZW8-Q9; Sun, 27 Sep 2026 23:48:28 +0200
-Date: Sun, 27 Sep 2026 23:48:28 +0200
-From: Andrew Lunn <andrew@lunn.ch>
-To: Christian Marangi <ansuelsmth@gmail.com>
-Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Vladimir Oltean <olteanv@gmail.com>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	"Chester A. Unal" <chester.a.unal@arinc9.com>,
-	Daniel Golle <daniel@makrotopia.org>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Simon Horman <horms@kernel.org>,
-	linux-arm-kernel@lists.infradead.org,
-	linux-mediatek@lists.infradead.org, netdev@vger.kernel.org,
-	mfd@lists.linux.dev, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH net-next v23 8/9] net: dsa: mt7530: generalize and move
- common function to lib module
-Message-ID: <f4fb3c02-34ec-4ce4-8abe-d85e1d09cb5c@lunn.ch>
-References: <20260925182435.21207-1-ansuelsmth@gmail.com>
- <20260925182435.21207-9-ansuelsmth@gmail.com>
- <cd200dee-1bde-4cc2-a296-c93d704cb906@lunn.ch>
- <6ab97c6e.f5ac67e6.37e70.11e5@mx.google.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QzoEtZRT"
+Received: by mail-pj2-f39.google.com with SMTP id 98e67ed59e1d1-3a47d5764feso239324a91.2
+        for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 03:59:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790593192; x=1791197992; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=13W43cLXRXsI0d5QLq3dIA3hqC2euMzWoSZniybdW38=;
+        b=QzoEtZRTKFIihxNV8LPh6BqgEzuPKbl+091NAYYH3b+h3prfHl7Ns7is7ZFoICq0Gg
+         07GrSX4a6BvrXQbREy2LYbEHX4Gqo8auNIIIhvZBhZdZuBcdK9Tp6fKOxLCjc+GwlQBM
+         S4uHamHgem/5CinWqvNHZUxZN59B5oDbdpDWIZrBIRmxXjzNY1F3r+kunk1GFWkDycNt
+         49pAZ5fOBp79nqUHw2Bl97+0xvR1goctyo+iRbP9AYgJEo/U9cvcD9+5KrgAwR4PreUC
+         q4wdU5yiowtwh8/yTLKq/txmBFpW1alkbAfUWzODumxhq5PRLhjwCK8qFmZi4GIVtz1H
+         /sOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790593192; x=1791197992;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=13W43cLXRXsI0d5QLq3dIA3hqC2euMzWoSZniybdW38=;
+        b=QsaeT48qNRyCcwRuMN3EUedTvf4HoOxLkPfRhE0I5+sdbQ69pWK2eaq75W0N1OrToD
+         bRmuc8TPPp2P3cy1bHnhXOAimmILQhP/YyVBo4wLtU6c1hy+t1lhxvXpsDuEu+LkeAgW
+         0DrnTYmbWpUrOcVeaajboGO3nWw1+/U9ONLijfIzuXBbvuU/CS/tn9EmlPp/L/3UlcfZ
+         KpA9eb7SkjEWUQzeyl9CxyfGTs3UGk4xjhu2EmtiyEimmqa17VdKI+FkohwQgZweS6ua
+         kN4TcXfXBL6p2bYT8cAKaVcVLV4+6iK4Z/17+C3lw/Ltet/C/HfxZYq+Ns9SdC+n2Lz2
+         hzqw==
+X-Forwarded-Encrypted: i=1; AKwUvBzcjhGL8y2ULqWJUSsPom31lxd9Luwde2OjTmbqlAqL41jXjIEVvhTc6k5W/xzzjnATOP8=@lists.linux.dev
+X-Gm-Message-State: AFq9FYLfPFAEzbe0cVUm8oa1dAk7DE9SZtrRO0HfLhvz0RdoInEaGond
+	NgYuCWOO3chYio9RHb6yGGl/8j5CH6QhQpzlSq7daM7aBE6wh+5KzibE
+X-Gm-Gg: AYBFou2lJGUhCUSyu1fZOQzWxWDGVS1CF4YlGsEVAaUoIOZTF8kgK+bF/4zg5rd2ze7
+	enZfs653S8NGGdwpiCSrriVq927N4QFoLwLy64c3+9mHcOpmHC/ODk2Y5A766BjaGk8oeuidljL
+	8gLLs0PmnF4Mojf5XSgBhSbS6uS6NM3QZ0UgmTa6vPvcqC0t3TCbHqqOVpekHL3Jy1AjkMXhY2a
+	Ggt31GSNLvcg+QlfHpuB04cHTrEhQ4n+b5TfnHihDi0/ytXLnmBVTpMlWd6X8MseLa7UTE5NTRj
+	5WLIEih+Lci3KT/upS0yLLvEAz/5NfMrHsxT6CejvPivLkyRkZ0YvqlJSCQb4PW3mR/kBO/yV77
+	TNzfZr2SlOJpgDAgyGDIrBGaaV0KtNyhoP5Jgits2lTo6NC+yfFw8swDXr2Cas3Uyvud0zzrSZA
+	ms6khwpCrHXWInlC7JvitAnfaTWbTLK0Twx0TaWYtqoyuoxzOVy/DYU0IbSDNaWSU3BAz3W1xCx
+	LI2klQV7I7MIemJSGc3lX9Kv5OknCUL9dynDi0rdXaA1RzmrQoWOYgs2QCcKZlEXxKSNjXUYGTI
+	FLbz+jBTKOtX/DOjH932mztVnko9MV3lUSULtFKHEY3dWelfpap7VpwMAGrjalyyEWcVng==
+X-Received: by 2002:a17:90b:2250:b0:39d:f247:bb3 with SMTP id 98e67ed59e1d1-3a098b4b334mr10336489a91.21.1790593191490;
+        Mon, 28 Sep 2026 03:59:51 -0700 (PDT)
+Received: from spider.bream-herring.ts.net ([103.6.151.236])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a0cd1c4ec9sm15924651a91.16.2026.09.28.03.59.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 28 Sep 2026 03:59:51 -0700 (PDT)
+From: Matthias Goergens <matthias.goergens@gmail.com>
+To: Lee Jones <lee@kernel.org>
+Cc: Arnd Bergmann <arnd@arndb.de>,
+	mfd@lists.linux.dev
+Subject: [PATCH] MAINTAINERS: name the lee/mfd for-mfd-next branch
+Date: Mon, 28 Sep 2026 18:59:48 +0800
+Message-ID: <20260928105948.2186851-1-matthias.goergens@gmail.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <6ab97c6e.f5ac67e6.37e70.11e5@mx.google.com>
+Content-Transfer-Encoding: 8bit
 
-On Sun, Sep 27, 2026 at 10:28:25PM +0200, Christian Marangi wrote:
-> On Sun, Sep 27, 2026 at 09:02:09PM +0200, Andrew Lunn wrote:
-> > On Fri, Sep 25, 2026 at 08:24:30PM +0200, Christian Marangi wrote:
-> > > In preparation of support of DSA Switch from Airoha, create a mt7530
-> > > library module and move there all the common function.
-> > > 
-> > > Function are generalized to use the reg_field regmap API but still apply
-> > > the same exact logic. Every function is renamed to mt7530_lib prefix to
-> > > better identify it.
-> > > 
-> > > Minimum modification are needed to the register header and common enum and
-> > > macro are moved to the mt7530 library header to permit reuse.
-> > > 
-> > > A library struct is introduced with everything required for the common
-> > > functions.
-> > > 
-> > > The generalization and the introduction of reg_field regmap API have the
-> > > side effect of permitting to clean the mirror functions that required
-> > > special handling for MT7530 and MT7531 based switch that had different
-> > > registers. This is done by declaring a common MT7530 reg_field and a
-> > > specific one in the Switch match table.
-> > > 
-> > > No behaviour change is expected by this change as it's just a code move and
-> > > reimplementation.
-> > > 
-> > > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> > > ---
-> > >  drivers/net/dsa/Kconfig       |    4 +
-> > >  drivers/net/dsa/Makefile      |    1 +
-> > >  drivers/net/dsa/mt7530-lib.c  | 1128 +++++++++++++++++++++++++++
-> > >  drivers/net/dsa/mt7530-lib.h  |  391 ++++++++++
-> > >  drivers/net/dsa/mt7530-mdio.c |    4 +
-> > >  drivers/net/dsa/mt7530-mmio.c |    4 +
-> > >  drivers/net/dsa/mt7530.c      | 1368 ++++++++-------------------------
-> > >  drivers/net/dsa/mt7530.h      |  256 ++----
-> > 
-> > The number of mt* file keep going up. Is it time to move it into a
-> > subdirectory?
-> 
-> The problem as always is that mediatek directory will also contain airoha
-> stuff...
+The T: entries for MULTIFUNCTION DEVICES (MFD) and SYSTEM CONFIGURATION
+(SYSCON) name lee/mfd without a branch.  The repository's HEAD points to
+branch master, which mainline already contains.  linux-next merges the
+for-mfd-next branch of this repository (Next/Trees).  Name that branch
+in both entries.
 
-That is only a Marketing problem, and Mainline generally ignores
-marketing. Companies get bought and sold all the time. We don't rename
-anything because of that.
+Signed-off-by: Matthias Goergens <matthias.goergens@gmail.com>
+---
+This is part of a cleanup of all T: entries whose repository HEAD is
+not where development happens: one patch per repository, sent in small
+batches.  The plan is at [1], and why it goes out in batches at [2].
 
-> I would like to fix some trivial things pointed out by sashiko. Can I apply
-> those and keep the review tag? For this patch for example it's just the
-> typo for the multicast MIB.
-> 
-> For the other patch is also very trivial stuff. 
+[1] https://lore.kernel.org/all/20260924033200.3615554-1-matthias.goergens@gmail.com/
+[2] https://lore.kernel.org/all/20260924101844.2403008-1-matthias.goergens@gmail.com/
 
-Yes, not a problem. If you make major changes then drop it, but
-trivial stuff is fine.
+ MAINTAINERS | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-	Andrew
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 72294ddfa5b7..947bf56a51fd 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -18649,7 +18649,7 @@ MULTIFUNCTION DEVICES (MFD)
+ M:	Lee Jones <lee@kernel.org>
+ L:	mfd@lists.linux.dev
+ S:	Maintained
+-T:	git git://git.kernel.org/pub/scm/linux/kernel/git/lee/mfd.git
++T:	git git://git.kernel.org/pub/scm/linux/kernel/git/lee/mfd.git for-mfd-next
+ F:	Documentation/devicetree/bindings/mfd/
+ F:	drivers/mfd/
+ F:	include/dt-bindings/mfd/
+@@ -26588,7 +26588,7 @@ SYSTEM CONFIGURATION (SYSCON)
+ M:	Lee Jones <lee@kernel.org>
+ M:	Arnd Bergmann <arnd@arndb.de>
+ S:	Supported
+-T:	git git://git.kernel.org/pub/scm/linux/kernel/git/lee/mfd.git
++T:	git git://git.kernel.org/pub/scm/linux/kernel/git/lee/mfd.git for-mfd-next
+ F:	drivers/mfd/syscon.c
+ 
+ SYSTEM CONTROL & POWER/MANAGEMENT INTERFACE (SCPI/SCMI) Message Protocol drivers
+
+base-commit: fd179f8a05be3ccae366b9b96e176b51fbe54aab
+-- 
+2.55.0
+
