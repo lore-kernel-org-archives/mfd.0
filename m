@@ -1,131 +1,151 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 409984D1787
-	for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 13:43:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEA4D4D1791
+	for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 13:48:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790602992; cv=none; b=KQDAiGmJVbvwnv8WnMbugbj15FKetgBZkxl5BIy879b65ATeRVGxwQUWRMArMku33OcvmV5XSX+y+OzMe9uSpZxgU/8/BtLNrboZEuHQ4nunYbJisBrnpo51o8GA0fA9yAHEH0oppEpfx/F5fwIJTiRcIwn/RLDytEce1Px/TUo=
+	t=1790603337; cv=none; b=Tq1yp0XGZwK1eaCRzcN6PWjfbwzyzaXuuR/n62Dm6wl1RPJv2t7cb2srw5GMb2dKl14qyyrsG4ovzke1ZbigVju2xS99d8x1y4faDqZxXZXbKPm9c4yyo1JaE9quHxSb54b4Bgob+gQzg3b6QurIca+xB2bLnuYiW/GEsNlOBvM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790602992; c=relaxed/simple;
-	bh=LAfG9aZjGdrhKCf/58E+Lupe9Ivg/F16AB6VzU/JCk0=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=FZ3Uo4pHOpfIVzQ6FukIlr6a8OU6AjqX2cuVfETkiKUHemPh9wt4eAzRe9vQx/d1BigysKpEeP37Q4VspsDpdQCV05qFSpuL+w3kGukwnVM9RgMK9YO+xqmvu0FjMAxgngX2n7g4vj2xtwJAaZIs+CRL+Pe/FjAsdYDF9yL/BBY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XqgwPDhN; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790603337; c=relaxed/simple;
+	bh=My8qhm/R/I48nMduRq6Y3Wb0wDF0efpQI6u7GWjSksQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=f87MKfJQL18zUnaHU3U+WJNf8vjGLwSjKqJ5ZlTohR6bF8Wc5iEaphu+/E2quxodjyf2ADteO3ondk8JGD2dXzZTkAAO4jBIh7n7UwnQ09q8qHql5UY5Sf1LdBFhURF6P/jEGNR60lwn5EyUaI8epgouyTxdVzEhVvvbjQ1htks=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=FMmPCd9o; arc=none smtp.client-ip=198.175.65.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XqgwPDhN"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D80431F0089B
-	for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 13:43:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790602988;
-	bh=KhMGxUvRlRgkjraFBvxRRPukh6cwxdgVureX0v0+n4g=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=XqgwPDhN/UCUkPF09xSf+JZzOnf+JLMeW+aF1DWSWGeSSdZjF0vTWKEoP/AZNss0x
-	 h2sggBfT0YCdHVdVc5t7BYeqx6OLpqdhTjx3xECXnFs9ofzNp+LzrHGSGNUVKzjgxy
-	 258QZwNIGi8BmRKb/Mt6XU4QHgD4uefN1BBXMmLtPMQenLPh2fc28zI5nOKnBDP6XJ
-	 GMDWgbwE2Iq+42tslszYitegdOoW4H0bHHZzz1gCYD5U5xMlXELp0Z2mH/As4gfK+5
-	 yroTVB5B+ukJzW/NA2d9lfFaXMoZLUD9J83TkGD8V/rG61Yhi7HuvX5tuI2G6rbVSO
-	 SVNptfreJTUEA==
-Received: by mail-ed2-f33.google.com with SMTP id 4fb4d7f45d1cf-6ac768bda6aso1619747a12.0
-        for <mfd@lists.linux.dev>; Mon, 28 Sep 2026 06:43:08 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBzY8FRnD5cw9RR50RbO/SJy+SWrH0/dUfXj+4WKBC/2U7yuBfNClFWtYnd5zOhRdwQw2d0=@lists.linux.dev
-X-Gm-Message-State: AFq9FYJ9mksH9CLZMX8a4nlSc5gl/69r+cItH8uTp4zTWNwNnb10/thT
-	3ddrdzv2whJHiSJKXYUzg0ViMkVbwuuhSLfM/liJi6g2dddinpV504F3HGi4pL5FMKgapOM4l2+
-	vELUxDkyMdrMS6Ndvnri/v5DC3XNNruk=
-X-Received: by 2002:a05:6402:52d6:b0:6ac:9a44:d412 with SMTP id
- 4fb4d7f45d1cf-6ac9a451421mr453774a12.7.1790602987498; Mon, 28 Sep 2026
- 06:43:07 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="FMmPCd9o"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1790603335; x=1822139335;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=My8qhm/R/I48nMduRq6Y3Wb0wDF0efpQI6u7GWjSksQ=;
+  b=FMmPCd9owmfBc+s7HMPf6h3BQAcM13jiwySDOFjclgxchrmKvkpTDSVf
+   0aqRaIQQggekf4mVADyrFREvJ4aKc3VBS7O65Zh9kil0yunSiPXEvZcT/
+   30yfSj7agYA+1LhD2Y2G/d9gu0bvOyrWqFStv29yTMV/kseiElSLwgoxz
+   PGqE0Y0eEr/cHvV4DwZKLGBrbiU384o8BL/TjYV4n3Xjj+LIxYk0IAB11
+   n8O6bNT1+zDiD7VJRASVIMacWcU/wrcaC0b+kXXXOEQr5NWAqe49BtWzs
+   D5BFaZN48O2MLSimV3YyT/dyVcgw6C4fBJkJhur90zdHY4nrB96FphPUM
+   A==;
+X-CSE-ConnectionGUID: 0esdqP2YTSWtcRvarn5qbA==
+X-CSE-MsgGUID: 6OeY28LCQuyqmcYcxld/bA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11919"; a="101470483"
+X-IronPort-AV: E=Sophos;i="6.27,128,1787036400"; 
+   d="scan'208";a="101470483"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Sep 2026 06:48:54 -0700
+X-CSE-ConnectionGUID: OVMnR9oLSDmhCKU2ZPh1Vw==
+X-CSE-MsgGUID: g55aoMfMT/qL24203sLozw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,128,1787036400"; 
+   d="scan'208";a="278870188"
+Received: from black.igk.intel.com ([10.91.253.5])
+  by orviesa005.jf.intel.com with ESMTP; 28 Sep 2026 06:48:50 -0700
+Received: by black.igk.intel.com (Postfix, from userid 1008)
+	id 9827699; Mon, 28 Sep 2026 15:48:49 +0200 (CEST)
+Date: Mon, 28 Sep 2026 15:48:49 +0200
+From: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+To: david@ixit.cz
+Cc: Alexey Minnekhanov <alexeymin@minlexx.ru>,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Lee Jones <lee@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+	linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+	phone-devel@vger.kernel.org, mfd@lists.linux.dev
+Subject: Re: [PATCH RFC 01/12] usb: typec: tcpm: qcom: Release the connector
+ fwnode reference
+Message-ID: <arpwQaOfCXHrp4m3@black.igk.intel.com>
+References: <20260926-typec-v1-0-31adc19f32c6@ixit.cz>
+ <20260926-typec-v1-1-31adc19f32c6@ixit.cz>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260923084802.29508-1-zhaoqunqin@163.com>
-In-Reply-To: <20260923084802.29508-1-zhaoqunqin@163.com>
-From: Huacai Chen <chenhuacai@kernel.org>
-Date: Mon, 28 Sep 2026 21:42:56 +0800
-X-Gmail-Original-Message-ID: <CAAhV-H7+oXvoFbY1TDyRhYCgLXncRWNzpWrEBxpm6rwb_u8g5Q@mail.gmail.com>
-X-Gm-Features: AclHuK9T9s7VHBe8CzWdrIsP39KtE45HD6piVqFEHQ4lotnnM54AAYzrWUKy_1w
-Message-ID: <CAAhV-H7+oXvoFbY1TDyRhYCgLXncRWNzpWrEBxpm6rwb_u8g5Q@mail.gmail.com>
-Subject: Re: [PATCH v8 0/2] mfd: loongson-se: Add multi-node support and fix
- miscellaneous issues
-To: Qunqin Zhao <zhaoqunqin@163.com>
-Cc: lee@kernel.org, zhaoqunqin@loongson.cn, linux-kernel@vger.kernel.org, 
-	loongarch@lists.linux.dev, linux-crypto@vger.kernel.org, mfd@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260926-typec-v1-1-31adc19f32c6@ixit.cz>
 
-For the whole series,
-Reviewed-by: Huacai Chen <chenhuacai@loongson.cn>
+Hi David,
 
-On Wed, Sep 23, 2026 at 4:48=E2=80=AFPM Qunqin Zhao <zhaoqunqin@163.com> wr=
-ote:
->
-> From: Qunqin Zhao <zhaoqunqin@loongson.cn>
->
-> - Patch 1 introduces the multi-node platform support.
->
->   v6-v8: no changes
->   v5: Clear pending interrupts with S2LINT_CL before requesting IRQs,
->        and move S2LINT_EN to after all interrupt handlers are registered.
->   v4: Safely handling shared interrupt handler returns.
->   v3: Using shared interrupts (IRQF_SHARED) instead of manually
->       iterating through all devices to check for interrupts.
->
-> - Patch 2 focuses on structural and error-path hardening for the
->   pre-existing baseline code. This includes resolving critical issues
->   discovered by the Sashiko Automation system such as: completion
->   race conditions, missing engine completion initialization, spinlock
->   held with interrupts disabled for up to 10 ms, EPROBE_DEFER
->   handling, DMA buffer overflow validation, interrupt cleanup on
->   probe failure, and device removal ordering.
->
->   v8:
->        - Remove the poll_lock added in v7
->
->   v7:
->        - Re-enable the interrupt under dev_lock in loongson_se_poll()
->          instead of poll_lock, so both the mask and re-enable of
->          SE_S2LINT_EN are protected by the same lock and cannot race
->        - Wait for controller command completion with a bounded
->          non-interruptible wait so a pending signal cannot leave the
->          controller running while DMA buffers are torn down
->        - Validate the id argument in loongson_se_init_engine() to
->          reject engine 0 and out-of-bounds indices
->        - Drop the redundant init_completion() in
->          loongson_se_init_engine() now that probe() initializes all
->          engine completions
->   v6:
->        - Mask the target interrupt, clear pending status, and
->          reinitialize the completion under dev_lock before issuing a
->          command, re-enabling the interrupt after triggering
->        - Keep the original engine_init_lock scope instead of the
->          broader cmd_lock mutex
->        - Reuse loongson_se_send_controller_cmd() in the STOP path and
->          register the stop handler before loongson_se_init()
->        - Correct the dmam_size validation formula
->   v5: Fix all issues reported by Sashiko analysis:
->        - Initialize engine completions in probe to avoid NULL deref
->        - Use cmd_lock mutex for command serialization, drop spin_lock_irq
->        - Add reinit_completion to controller and engine command paths
->        - Fix EPROBE_DEFER handling in platform_irq_count()
->        - Validate dmam_size against minimum required size
->        - Disable IRQs in probe error path after init failure
->        - Add loongson_se_stop() devres cleanup with proper ordering
->        - Use non-interruptible wait for STOP command
->   v4: new patch
->
-> Qunqin Zhao (2):
->   mfd: loongson-se: Add multi-node support
->   mfd: loongson-se: Fix miscellaneous issues
->
->  drivers/mfd/loongson-se.c       | 119 ++++++++++++++++++++++++++++----
->  include/linux/mfd/loongson-se.h |   1 +
->  2 files changed, 106 insertions(+), 14 deletions(-)
->
->
-> base-commit: cee9395acd8043be0644b25c34bfa86623f2b935
-> --
-> 2.47.2
->
+On Sat, Sep 26, 2026 at 02:40:20PM +0200, David Heidelberg via B4 Relay wrote:
+> From: David Heidelberg <david@ixit.cz>
+> 
+> device_get_named_child_node() returns the connector node with its
+> reference count incremented, but the port probe never drops it. The node
+> is only needed for the VBUS regulator lookup, so release it right after.
+> 
+> Assisted-by: LLM
+> Fixes: 506927b6bf29 ("usb: typec: tcpm: qcom: prefer VBUS supply from the connector node")
+> Signed-off-by: David Heidelberg <david@ixit.cz>
+
+I think this should be send separately. Cc stable?
+
+Acked-by: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+
+Thanks,
+
+> ---
+>  drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
+> index bf985efe1cd6b..f8308d66b9d67 100644
+> --- a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
+> +++ b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
+> @@ -5,16 +5,17 @@
+>  
+>  #include <linux/delay.h>
+>  #include <linux/err.h>
+>  #include <linux/interrupt.h>
+>  #include <linux/kernel.h>
+>  #include <linux/module.h>
+>  #include <linux/of.h>
+>  #include <linux/platform_device.h>
+> +#include <linux/property.h>
+>  #include <linux/regmap.h>
+>  #include <linux/regulator/consumer.h>
+>  #include <linux/slab.h>
+>  #include <linux/string_choices.h>
+>  #include <linux/usb/tcpm.h>
+>  #include <linux/usb/typec_mux.h>
+>  #include <linux/workqueue.h>
+>  
+> @@ -723,16 +724,17 @@ int qcom_pmic_typec_port_probe(struct platform_device *pdev,
+>  
+>  	connector = device_get_named_child_node(dev, "connector");
+>  	if (!connector)
+>  		return -EINVAL;
+>  
+>  	pmic_typec_port->vdd_vbus = devm_of_regulator_get_optional(dev,
+>  								   to_of_node(connector),
+>  								   "vbus");
+> +	fwnode_handle_put(connector);
+>  	if (pmic_typec_port->vdd_vbus == ERR_PTR(-ENODEV))
+>  		pmic_typec_port->vdd_vbus = devm_regulator_get(dev, "vdd-vbus");
+>  	if (IS_ERR(pmic_typec_port->vdd_vbus))
+>  		return PTR_ERR(pmic_typec_port->vdd_vbus);
+>  
+>  	pmic_typec_port->dev = dev;
+>  	pmic_typec_port->base = base;
+>  	pmic_typec_port->regmap = regmap;
+> 
+> -- 
+> 2.55.0
+> 
+
+-- 
+heikki
