@@ -1,502 +1,166 @@
-Received: from cstnet.cn (smtp25.cstnet.cn [159.226.251.25])
-	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E55852E042
-	for <mfd@lists.linux.dev>; Tue, 29 Sep 2026 15:06:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.226.251.25
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0248C3D9543
+	for <mfd@lists.linux.dev>; Tue, 29 Sep 2026 15:34:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790694419; cv=none; b=XYnW7RAJ5yQc9AGQ2GTwrZJ+S27lJoxdx373Z8ixk+XjV5evmHU5qTsNrjfxQ+DSdi4hszBcaPkRhrWVZ+9FK2wj7W8zNUalnqBqypolYe/y9EiTXk7+jZk/Rg8kMkfW2tr3l7EL+ABVYWbVWxB/yTpO3CXNfwWqLdrnPyCm3os=
+	t=1790696097; cv=none; b=PYllowAOieE8ZgDuEKhjYPqaca7pbYolZYbqVzm61xc+oKmw4Q5PzS34rdMeD4Bg4T0Zef72FE5tvns38qZ2pFfpMYId25CVRXN9niuBHvzVjaoWoRVg0AbOdO2yb3tBMfKJ4RSiPowzQfmWFoh5l4TlYDmKZK07nwWiF932Dt0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790694419; c=relaxed/simple;
-	bh=aJZPvIfh5BHqrAG5zap6ruqNBG0ZnilEZ6S3nQfT9vA=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=JkPpWpIDFAbrGukBTxMrbpzFb9B7FRf6GujPCRMfF7tLFytKL2jATtrBkueoA2CjGlBL+ROW8MnfrSRnE+9W6eH9Urtsub6z9dno1uc3QXYNX94EU5upPVQ28lCl1pczd62Mg5i0LrUygAdCaNtQ86NYcTtvVduXID35kaCzXlo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.25
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iscas.ac.cn
-Received: from edelgard.fodlan.icenowy.me (unknown [112.94.101.54])
-	by APP-05 (Coremail) with SMTP id zQCowACHt0Hz07tqfp+vCQ--.6830S2;
-	Tue, 29 Sep 2026 23:06:28 +0800 (CST)
-Message-ID: <b5eb69f3f41a98b5a98694435df25a632babf05a.camel@iscas.ac.cn>
-Subject: Re: [PATCH v4 19/20] riscv: dts: starfive: jh7110: Update DT for
- display subsystem
-From: Icenowy Zheng <zhengxingda@iscas.ac.cn>
-To: Michal Wilczynski <m.wilczynski@samsung.com>, Vinod Koul
- <vkoul@kernel.org>,  Neil Armstrong <neil.armstrong@linaro.org>, Rob
- Herring <robh@kernel.org>, Krzysztof Kozlowski	 <krzk+dt@kernel.org>, Conor
- Dooley <conor+dt@kernel.org>, Andrzej Hajda	 <andrzej.hajda@intel.com>,
- Robert Foss <rfoss@kernel.org>, Laurent Pinchart	
- <Laurent.pinchart@ideasonboard.com>, Jonas Karlman <jonas@kwiboo.se>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Luca Ceresoli
- <luca.ceresoli@bootlin.com>, Maarten Lankhorst	
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, Lee Jones <lee@kernel.org>, Andy
- Yan <andy.yan@rock-chips.com>, Philipp Zabel	 <p.zabel@pengutronix.de>,
- Emil Renner Berthing <kernel@esmil.dk>, Hal Feng	
- <hal.feng@starfivetech.com>, Michael Turquette <mturquette@baylibre.com>, 
- Stephen Boyd <sboyd@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Paul
- Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
- <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,  Dominique
- Belhachemi	 <db@domibel.de>, Brian Masney <bmasney+clk@redhat.com>, Jerome
- Brunet	 <jbrunet+clk@baylibre.com>
-Cc: linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	mfd@lists.linux.dev, linux-clk@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, 
-	linux-riscv@lists.infradead.org, Marek Szyprowski
- <m.szyprowski@samsung.com>,  Maud Spierings <maud_spierings@murena.io>,
- Graham Markall <hello@big-grey.co.uk>, Chaoyi Chen	
- <chaoyi.chen@rock-chips.com>, Joshua Peisach <jpeisach@ubuntu.com>, Uwe
- =?ISO-8859-1?Q?Kleine-K=F6nig?=	 <u.kleine-koenig@baylibre.com>
-Date: Tue, 29 Sep 2026 23:06:26 +0800
-In-Reply-To: <20260915-jh7110-clean-send-v4-19-f0e4fd6f2cc8@samsung.com>
-References: <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
-	 <CGME20260915153248eucas1p27d8d2c9fa536bbd951e0102b04416dad@eucas1p2.samsung.com>
-	 <20260915-jh7110-clean-send-v4-19-f0e4fd6f2cc8@samsung.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.3 
+	s=arc-20240116; t=1790696097; c=relaxed/simple;
+	bh=CSu1cXiqbY/jfZtGsZTi+5MN622ll/b5t0C05YWaEAw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=CcKIZMzQD75J4/6V1RGyurY0mo7N16kaKehJu28yN99WiRsjSIKIAA7p3a2/z5NxvU/pRrXMsOL0nfMllJUzBYsP51qbRLusw+IvXsYMQL8lUZOY7dQSuI5aAQQ1n1heu1EZMXvrXk06/IgiueDuUauJrldGmOwtpFJ0MjpGYLM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=m7YIY0Ua; arc=none smtp.client-ip=74.125.225.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="m7YIY0Ua"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49b912d37b6so23960655e9.0
+        for <mfd@lists.linux.dev>; Tue, 29 Sep 2026 08:34:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1790696094; x=1791300894; darn=lists.linux.dev;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=bK1kRsPsOXdZFtj24JVUR5GYlNpzvwaq05tohnScRrQ=;
+        b=m7YIY0UaVeIifUkOlLLn7pZa4pFC5wN0+Q5kflGbYZdpGweEVDhwVXj/bN7XVlJv0e
+         VV66WO+ffLKBK3YC6q5DexCUUz2XMmQQWLybw3Q2OA+xAoRtN0k+f10skeTPLVfXGC5d
+         rVZnkcXYZalJGg3XdWw6ba7lVy4hqj7HgmIyrhUAt34uA3/JWOBWLSgX2oMsVaBX/zun
+         LJ3DmCikOz1jBBqQn7OfW1LGwvhZJjOu4H4/bcyEA9iEpIIBLX/RiZOjh9iZJu/N8u9M
+         edwZHHtKEkOoWI4maHw3rcnSpWzXYi9VjZxZBzqjyE8mAZn1KBeQXU3GslNuePTYT8uG
+         sUMA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790696094; x=1791300894;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=bK1kRsPsOXdZFtj24JVUR5GYlNpzvwaq05tohnScRrQ=;
+        b=nfAfpAk9P/jKAR5X5fqi5sZizSQR/NrJr9lr+i/7WCEY0bRJYfHY4HEGmD5lMoMIb0
+         IEmVwxxHxzKymh40cHFiBqbm+Mk9m4NkJ4p8ZZn8jj5UXngkvDupq60XDUdOeRP6AU1V
+         nWZgWUAonBZuOlV8cjzGSH0lOsOZIVabe9bBgwUVIfPIRfARszMFdAof2F61tIxsUqJO
+         cEKfc7f/pEaoZ2elKv+ANHK+jExZguxkacgpdPwxnfuLoszgQ9msxvbhqWpdpr7d9euM
+         KSbrCc4ibjcoKmflEIOjaD7aJKi5rJFCVU1M5YLzwgUk+eVv+EMM/k6WmeQg6Qd3HK9L
+         LgNQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwncK+fupgu/kA6i96Nz3g2aMpviK+J2AF1kUo2w9oTjq/HuzZfRfSJKSqFceYrCOYRymA=@lists.linux.dev
+X-Gm-Message-State: AFuF++nEjPHEKoQYn8ZNxr5WD3jJtuukpHDp70JSYzrAVdGmqQGV1JnG
+	mnMpp/nLvMHyng5Mre29pZVm0Af2z+LI2sLBodJO+/sjNyFl0s06yK5XOOEGC+WNeOU=
+X-Gm-Gg: AYBFou1KYW+/pDxS+T/jBl7SIc/vSh1g6wVPe/2CxYaUjuV52/7OAZU9nPspZKeih90
+	ZF80PMhHWyrLW1x+lem18kCuxh6gqhTUdCOIYIt+E6D4Bxy1gsnNxJLBzSYNt+2MCGoHWZA6e4p
+	ugJdC7M8NKi3NnhRF9avqzmjXxlSi+oq+GYyW3CJXNw1lcuKqsNGqXcRaZxposeLGImuWm7G7hZ
+	/BRmlRUDOJHHyVEF2FSKK7Mn+jQQnCAknkgDzJjDhk+gLqzzttAdQpWVcpifmPLirjikBRAiNQk
+	NmwNKcE7SLBNz2HN662d6kKDx+z7ZiTjK6TR246jb55eKJPKhNFyH2w7WsylhUGqivWIDrdzZV7
+	ALxdJRssA43wTjE2cuZpjTBmyURN9tUGGY8QG+hRWi6klO3z//gMU8ohZFIhNssbp0fQMC3zDYp
+	2S/8IuTz2ttFON++uUKrltUiIAcbTaDsr0Z2wvVUrVTDzjsbjdIDU+qzSVDNszMoRCwH4lbSX3h
+	yq3Ket8+r8Wh+piNPu0B4W6EQTc6I0fP2p7K++K3x6ins4VUkGPG0H5/prtt45swM9MLJvZ
+X-Received: by 2002:a05:600c:8b6c:b0:49f:ffd0:9a9a with SMTP id 5b1f17b1804b1-49fffd09b09mr145822235e9.25.1790696094266;
+        Tue, 29 Sep 2026 08:34:54 -0700 (PDT)
+Received: from localhost (p200300f65f19a904123cb16e9a8bb736.dip0.t-ipconnect.de. [2003:f6:5f19:a904:123c:b16e:9a8b:b736])
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4a00d0f442dsm81897025e9.13.2026.09.29.08.34.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 29 Sep 2026 08:34:53 -0700 (PDT)
+Date: Tue, 29 Sep 2026 17:34:52 +0200
+From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+To: Jisheng Zhang <jszhang@kernel.org>
+Cc: Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+	Jerome Brunet <jbrunet+clk@baylibre.com>, Andi Shyti <andi.shyti@kernel.org>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, Frank Li <Frank.Li@nxp.com>, Lee Jones <lee@kernel.org>, 
+	Linus Walleij <linusw@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, 
+	Mark Brown <broonie@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jiri Slaby <jirislaby@kernel.org>, 
+	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-clk@vger.kernel.org, linux-i2c@vger.kernel.org, linux-i3c@lists.infradead.org, 
+	mfd@lists.linux.dev, linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org, 
+	linux-spi@vger.kernel.org, linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH 14/20] pinctrl: berlin: support Synaptics SL261X SoCs
+Message-ID: <arvZnEsAdJ5R9mBi@monoceros>
+References: <20260929061417.20733-1-jszhang@kernel.org>
+ <20260929061417.20733-15-jszhang@kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-X-CM-TRANSID:zQCowACHt0Hz07tqfp+vCQ--.6830S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3Zw43AFyDKFy5Aw1xWr4kZwb_yoWDCr45pF
-	n2y34fGrZayrn7Aa1aqayUKFykKa4kC3Z09wnxWF1Fyr13XFyxtr4jywsxWa4UJrs7Jw12
-	qF1kZrWa9FnrKw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvKb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwV
-	C2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
-	0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUAVWUtwAv7VC2z280aVAFwI0_Jr0_Gr
-	1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4IIrI8v6xkF7I0E8cxan2IY04v7
-	MxkF7I0En4kS14v26rWY6Fy7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r
-	4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF
-	67AKxVWrXVW8Jr1lIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6x
-	IIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAI
-	cVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxh
-	VjvjDU0xZFpf9x07b-eOXUUUUU=
-X-CM-SenderInfo: x2kh0wp0lqwv3d6l2u1dvotugofq/
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="qdr5pu2vmyb2k4sk"
+Content-Disposition: inline
+In-Reply-To: <20260929061417.20733-15-jszhang@kernel.org>
 
-=E5=9C=A8 2026-09-15=E4=BA=8C=E7=9A=84 17:32 +0200=EF=BC=8CMichal Wilczynsk=
-i=E5=86=99=E9=81=93=EF=BC=9A
-> Activate the display subsystem by describing the video output
-> subsystem,
-> which the documentation calls dom_vout_top, as a bus node covering
-> the
-> whole 0x29400000 region, with dc8200, the HDMI block, the video
-> output
-> system controller and voutcrg as its children.
->=20
-> The subsystem node owns the resources its children share: the NoC
-> display
-> bus clock and reset that gate access to every register in the region,
-> and
-> the PD_VOUT power domain. Modelling it this way keeps a shared gate
-> owned
-> by the block that shares it rather than by whichever consumer happens
-> to
-> probe first, and lets dc8200 inherit dma-noncoherent for framebuffer
-> DMA
-> from the bus it sits on.
->=20
-> The monolithic hdmi node is in turn modelled as a container with
-> hdmi_phy
-> and hdmi_controller children. This lets the PHY (clock provider,
-> depending only on xin24m) and the controller (clock consumer) probe
-> independently, breaking the circular clock dependency with voutcrg.
->=20
-> voutcrg consumes the pixel clock from the &hdmi_phy node instead of
-> the
-> old fixed-clock, and dc8200 gets its pixel clocks from voutcrg's
-> MUXes.
-> The old, incorrect hdmitx0-pixel-clock fixed-clock node is removed.
->=20
-> The HDMI controller gets a phandle to the video output system
-> controller,
-> which holds the mux selecting the DC8200 output that drives the HDMI
-> transmitter.
->=20
-> CMA is enlarged and constrained to memory the display controller can
-> address, because the default pool is too small for its framebuffers.
->=20
-> Co-developed-by: Dominique Belhachemi <db@domibel.de>
-> Signed-off-by: Dominique Belhachemi <db@domibel.de>
-> Signed-off-by: Michal Wilczynski <m.wilczynski@samsung.com>
 
-```
-Tested-by: Icenowy Zheng <zhengxingda@iscas.ac.cn>
-```
+--qdr5pu2vmyb2k4sk
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH 14/20] pinctrl: berlin: support Synaptics SL261X SoCs
+MIME-Version: 1.0
 
-But,
+Hello,
 
-> ---
-> =C2=A0arch/riscv/boot/dts/starfive/jh7110-common.dtsi | 121
-> +++++++++++++++++++++++-
-> =C2=A0arch/riscv/boot/dts/starfive/jh7110.dtsi=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 | 105
-> ++++++++++++++++----
-> =C2=A02 files changed, 203 insertions(+), 23 deletions(-)
->=20
-> diff --git a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
-> b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
-> index
-> a7a1c09a2c9075711f3a214a49618911fdc7b421..a4c3daf712a63b177f744e8c613
-> 416d22e0c9dbd 100644
-> --- a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
-> +++ b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
-> @@ -33,6 +33,27 @@ memory@40000000 {
-> =C2=A0		bootph-pre-ram;
-> =C2=A0	};
-> =C2=A0
-> +	reserved-memory {
-> +		#address-cells =3D <2>;
-> +		#size-cells =3D <2>;
-> +		ranges;
-> +
-> +		/*
-> +		 * The display controller allocates its framebuffers
-> from CMA,
-> +		 * and the default pool is too small for them. Keep
-> the pool
-> +		 * inside the range the controller can address; it
-> fits in the
-> +		 * memory every VisionFive 2 variant has.
-> +		 */
-> +		linux,cma {
-> +			compatible =3D "shared-dma-pool";
-> +			reusable;
-> +			size =3D <0x0 0x20000000>;
-> +			alignment =3D <0x0 0x1000>;
-> +			alloc-ranges =3D <0x0 0x70000000 0x0
-> 0x20000000>;
-> +			linux,cma-default;
-> +		};
-> +	};
-> +
+On Tue, Sep 29, 2026 at 02:14:11PM +0800, Jisheng Zhang wrote:
+> +#include <linux/mod_devicetable.h>
 
-I don't know whether constraining the CMA pool in the DT is a good
-idea.
+Please rely on <linux/platform_device.h> to pull in the definition of
+of_device_id and drop the inclusion of <linux/mod_devicetable.h>.=20
 
-Thanks,
-Icenowy
+Including <linux/mod_devicetable.h> creates a bunch of unneeded
+dependencies on subsystems you will never need in this driver.
 
-> =C2=A0	gpio-restart {
-> =C2=A0		compatible =3D "gpio-restart";
-> =C2=A0		gpios =3D <&sysgpio 35 GPIO_ACTIVE_HIGH>;
-> @@ -73,12 +94,47 @@ codec {
-> =C2=A0			};
-> =C2=A0		};
-> =C2=A0	};
-> +
-> +	hdmi-connector {
-> +		compatible =3D "hdmi-connector";
-> +		type =3D "a";
-> +
-> +		port {
-> +			hdmi_con_in: endpoint {
-> +				remote-endpoint =3D <&hdmi_out_con>;
-> +			};
-> +		};
-> +	};
-> =C2=A0};
-> =C2=A0
-> =C2=A0&cpus {
-> =C2=A0	timebase-frequency =3D <4000000>;
-> =C2=A0};
-> =C2=A0
-> +&dc8200 {
-> +	status =3D "okay";
-> +
-> +	ports {
-> +		#address-cells =3D <1>;
-> +		#size-cells =3D <0>;
-> +
-> +		dpu_port0: port@0 {
-> +			reg =3D <0>;
-> +			#address-cells =3D <1>;
-> +			#size-cells =3D <0>;
-> +
-> +			dpu_out_dpi0: endpoint@0 {
-> +				reg =3D <0>;
-> +				remote-endpoint =3D <&hdmi_in>;
-> +			};
-> +		};
-> +
-> +		dpu_port1: port@1 {
-> +			reg =3D <1>;
-> +		};
-> +	};
+> [...]
+> +static const struct of_device_id sl261x_pinctrl_match[] =3D {
+> +	{
+> +		.compatible =3D "syna,sl261x-soc-pinctrl",
+> +		.data =3D &sl261x_soc_pinctrl_data,
+> +	},
+> +	{
+> +		.compatible =3D "syna,sl261x-system-pinctrl",
+> +		.data =3D &sl261x_sysmgr_pinctrl_data,
+> +	},
+> +	{}
+
+Please use { } (with a space) to match the most common style for these
+arrays.
+
 > +};
+> +MODULE_DEVICE_TABLE(of, sl261x_pinctrl_match);
 > +
-> =C2=A0&dvp_clk {
-> =C2=A0	clock-frequency =3D <74250000>;
-> =C2=A0};
-> @@ -99,8 +155,31 @@ &gmac1_rmii_refin {
-> =C2=A0	clock-frequency =3D <50000000>;
-> =C2=A0};
-> =C2=A0
-> -&hdmitx0_pixelclk {
-> -	clock-frequency =3D <297000000>;
-> +&hdmi_controller {
-> +	status =3D "okay";
-> +	pinctrl-names =3D "default";
-> +	pinctrl-0 =3D <&hdmi_pins>;
+> +static int sl261x_pinctrl_probe(struct platform_device *pdev)
+> +{
+> +	return berlin_pinctrl_probe(pdev, device_get_match_data(&pdev->dev));
+> +}
 > +
-> +	ports {
-> +		#address-cells =3D <1>;
-> +		#size-cells =3D <0>;
-> +
-> +		port@0 {
-> +			reg =3D <0>;
-> +
-> +			hdmi_in: endpoint {
-> +				remote-endpoint =3D <&dpu_out_dpi0>;
-> +			};
-> +		};
-> +
-> +		hdmi_out_port: port@1 {
-> +			reg =3D <1>;
-> +
-> +			hdmi_out_con: endpoint {
-> +				remote-endpoint =3D <&hdmi_con_in>;
-> +			};
-> +		};
-> +	};
-> =C2=A0};
-> =C2=A0
-> =C2=A0&i2srx_bclk_ext {
-> @@ -351,6 +430,40 @@ &syscrg {
-> =C2=A0};
-> =C2=A0
-> =C2=A0&sysgpio {
-> +	hdmi_pins: hdmi-0 {
-> +		hdmi-cec-pins {
-> +			pinmux =3D <GPIOMUX(14,
-> GPOUT_SYS_HDMI_CEC_SDA,
-> +					=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
-> GPOEN_SYS_HDMI_CEC_SDA,
-> +					=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0
-> GPI_SYS_HDMI_CEC_SDA)>;
-> +			input-enable;
-> +			bias-pull-up;
-> +		};
-> +
-> +		hdmi-hpd-pins {
-> +			pinmux =3D <GPIOMUX(15, GPOUT_LOW,
-> +					=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 GPOEN_DISABLE,
-> +					=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 GPI_SYS_HDMI_HPD)>;
-> +			input-enable;
-> +			bias-disable; /* external pull-up */
-> +		};
-> +
-> +		hdmi-scl-pins {
-> +			pinmux =3D <GPIOMUX(0, GPOUT_SYS_HDMI_DDC_SCL,
-> +					=C2=A0=C2=A0=C2=A0=C2=A0 GPOEN_SYS_HDMI_DDC_SCL,
-> +					=C2=A0=C2=A0=C2=A0=C2=A0 GPI_SYS_HDMI_DDC_SCL)>;
-> +			input-enable;
-> +			bias-pull-up;
-> +		};
-> +
-> +		hdmi-sda-pins {
-> +			pinmux =3D <GPIOMUX(1, GPOUT_SYS_HDMI_DDC_SDA,
-> +					=C2=A0=C2=A0=C2=A0=C2=A0 GPOEN_SYS_HDMI_DDC_SDA,
-> +					=C2=A0=C2=A0=C2=A0=C2=A0 GPI_SYS_HDMI_DDC_SDA)>;
-> +			input-enable;
-> +			bias-pull-up;
-> +		};
-> +	};
-> +
-> =C2=A0	i2c0_pins: i2c0-0 {
-> =C2=A0		i2c-pins {
-> =C2=A0			pinmux =3D <GPIOMUX(57, GPOUT_LOW,
-> @@ -629,3 +742,7 @@ &U74_3 {
-> =C2=A0&U74_4 {
-> =C2=A0	cpu-supply =3D <&vdd_cpu>;
-> =C2=A0};
-> +
-> +&voutcrg {
-> +	status =3D "okay";
-> +};
-> diff --git a/arch/riscv/boot/dts/starfive/jh7110.dtsi
-> b/arch/riscv/boot/dts/starfive/jh7110.dtsi
-> index
-> 9c3e4598747eb5541effe697044484715569a285..bc2470963520eef30d7524370fc
-> b013f0631f509 100644
-> --- a/arch/riscv/boot/dts/starfive/jh7110.dtsi
-> +++ b/arch/riscv/boot/dts/starfive/jh7110.dtsi
-> @@ -290,12 +290,6 @@ gmac1_rmii_refin: gmac1-rmii-refin-clock {
-> =C2=A0		#clock-cells =3D <0>;
-> =C2=A0	};
-> =C2=A0
-> -	hdmitx0_pixelclk: hdmitx0-pixel-clock {
-> -		compatible =3D "fixed-clock";
-> -		clock-output-names =3D "hdmitx0_pixelclk";
-> -		#clock-cells =3D <0>;
-> -	};
-> -
-> =C2=A0	i2srx_bclk_ext: i2srx-bclk-ext-clock {
-> =C2=A0		compatible =3D "fixed-clock";
-> =C2=A0		clock-output-names =3D "i2srx_bclk_ext";
-> @@ -352,6 +346,13 @@ tdm_ext: tdm-ext-clock {
-> =C2=A0		#clock-cells =3D <0>;
-> =C2=A0	};
-> =C2=A0
-> +	xin24m: xin24m-clock {
-> +		compatible =3D "fixed-clock";
-> +		#clock-cells =3D <0>;
-> +		clock-frequency =3D <24000000>;
-> +		clock-output-names =3D "xin24m";
-> +	};
-> +
-> =C2=A0	soc {
-> =C2=A0		compatible =3D "simple-bus";
-> =C2=A0		interrupt-parent =3D <&plic>;
-> @@ -1199,22 +1200,84 @@ csi_phy: phy@19820000 {
-> =C2=A0			#phy-cells =3D <0>;
-> =C2=A0		};
-> =C2=A0
-> -		voutcrg: clock-controller@295c0000 {
-> -			compatible =3D "starfive,jh7110-voutcrg";
-> -			reg =3D <0x0 0x295c0000 0x0 0x10000>;
-> -			clocks =3D <&syscrg JH7110_SYSCLK_VOUT_SRC>,
-> -				 <&syscrg
-> JH7110_SYSCLK_VOUT_TOP_AHB>,
-> -				 <&syscrg
-> JH7110_SYSCLK_VOUT_TOP_AXI>,
-> -				 <&syscrg
-> JH7110_SYSCLK_VOUT_TOP_HDMITX0_MCLK>,
-> -				 <&syscrg
-> JH7110_SYSCLK_I2STX0_BCLK>,
-> -				 <&hdmitx0_pixelclk>;
-> -			clock-names =3D "vout_src", "vout_top_ahb",
-> -				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "vout_top_axi",
-> "vout_top_hdmitx0_mclk",
-> -				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "i2stx0_bclk",
-> "hdmitx0_pixelclk";
-> -			resets =3D <&syscrg
-> JH7110_SYSRST_VOUT_TOP_SRC>;
-> -			#clock-cells =3D <1>;
-> -			#reset-cells =3D <1>;
-> +		vout_subsystem: display-subsystem@29400000 {
-> +			compatible =3D "starfive,jh7110-vout-
-> subsystem";
-> +			reg =3D <0x0 0x29400000 0x0 0x200000>;
-> +			ranges;
-> +			#address-cells =3D <2>;
-> +			#size-cells =3D <2>;
-> +			clocks =3D <&syscrg
-> JH7110_SYSCLK_NOC_BUS_DISP_AXI>;
-> +			dma-noncoherent;
-> =C2=A0			power-domains =3D <&pwrc JH7110_PD_VOUT>;
-> +			resets =3D <&syscrg
-> JH7110_SYSRST_NOC_BUS_DISP_AXI>;
-> +
-> +			dc8200: display@29400000 {
-> +				compatible =3D "starfive,jh7110-
-> dc8200", "verisilicon,dc";
-> +				reg =3D <0x0 0x29400000 0x0 0x2800>;
-> +				clocks =3D <&voutcrg
-> JH7110_VOUTCLK_DC8200_CORE>,
-> +					 <&voutcrg
-> JH7110_VOUTCLK_DC8200_AXI>,
-> +					 <&voutcrg
-> JH7110_VOUTCLK_DC8200_AHB>,
-> +					 <&voutcrg
-> JH7110_VOUTCLK_DC8200_PIX0>,
-> +					 <&voutcrg
-> JH7110_VOUTCLK_DC8200_PIX1>;
-> +				clock-names =3D "core", "axi", "ahb",
-> "pix0", "pix1";
-> +				assigned-clocks =3D <&voutcrg
-> JH7110_VOUTCLK_DC8200_PIX0>,
-> +						=C2=A0 <&voutcrg
-> JH7110_VOUTCLK_DC8200_PIX1>;
-> +				assigned-clock-parents =3D
-> <&hdmi_phy>, <&hdmi_phy>;
-> +				interrupts =3D <95>;
-> +				resets =3D <&voutcrg
-> JH7110_VOUTRST_DC8200_CORE>,
-> +					 <&voutcrg
-> JH7110_VOUTRST_DC8200_AXI>,
-> +					 <&voutcrg
-> JH7110_VOUTRST_DC8200_AHB>;
-> +				reset-names =3D "core", "axi", "ahb";
-> +			};
-> +
-> +			hdmi_subsystem: hdmi@29590000 {
-> +				compatible =3D "starfive,jh7110-hdmi-
-> subsystem";
-> +				reg =3D <0x0 0x29590000 0x0 0x4000>;
-> +
-> +				hdmi_controller: controller {
-> +					compatible =3D
-> +						"starfive,jh7110-
-> inno-hdmi-controller";
-> +					clocks =3D <&voutcrg
-> JH7110_VOUTCLK_HDMI_TX_SYS>,
-> +						 <&voutcrg
-> JH7110_VOUTCLK_HDMI_TX_MCLK>,
-> +						 <&voutcrg
-> JH7110_VOUTCLK_HDMI_TX_BCLK>,
-> +						 <&hdmi_phy>;
-> +					clock-names =3D "pclk",
-> "mclk", "bclk", "pixel";
-> +					interrupts =3D <99>;
-> +					phys =3D <&hdmi_phy>;
-> +					resets =3D <&voutcrg
-> JH7110_VOUTRST_HDMI_TX_HDMI>;
-> +					starfive,vout-syscon =3D
-> <&vout_syscon>;
-> +				};
-> +
-> +				hdmi_phy: phy {
-> +					compatible =3D
-> "starfive,jh7110-inno-hdmi-phy";
-> +					clocks =3D <&xin24m>;
-> +					#clock-cells =3D <0>;
-> +					#phy-cells =3D <0>;
-> +				};
-> +			};
-> +
-> +			vout_syscon: syscon@295b0000 {
-> +				compatible =3D "starfive,jh7110-vout-
-> syscon", "syscon";
-> +				reg =3D <0x0 0x295b0000 0x0 0x10000>;
-> +			};
-> +
-> +			voutcrg: clock-controller@295c0000 {
-> +				compatible =3D "starfive,jh7110-
-> voutcrg";
-> +				reg =3D <0x0 0x295c0000 0x0 0x10000>;
-> +				clocks =3D <&syscrg
-> JH7110_SYSCLK_VOUT_SRC>,
-> +					 <&syscrg
-> JH7110_SYSCLK_VOUT_TOP_AHB>,
-> +					 <&syscrg
-> JH7110_SYSCLK_VOUT_TOP_AXI>,
-> +					 <&syscrg
-> JH7110_SYSCLK_VOUT_TOP_HDMITX0_MCLK>,
-> +					 <&syscrg
-> JH7110_SYSCLK_I2STX0_BCLK>,
-> +					 <&hdmi_phy>;
-> +				clock-names =3D "vout_src",
-> "vout_top_ahb",
-> +					=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "vout_top_axi",
-> "vout_top_hdmitx0_mclk",
-> +					=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "i2stx0_bclk",
-> "hdmitx0_pixelclk";
-> +				power-domains =3D <&pwrc
-> JH7110_PD_VOUT>;
-> +				resets =3D <&syscrg
-> JH7110_SYSRST_VOUT_TOP_SRC>;
-> +				#clock-cells =3D <1>;
-> +				#reset-cells =3D <1>;
-> +			};
-> =C2=A0		};
-> =C2=A0
-> =C2=A0		pcie0: pcie@940000000 {
+> +static struct platform_driver sl261x_pinctrl_driver =3D {
+> +	.probe	=3D sl261x_pinctrl_probe,
 
+Not a fan on aligning the =3D, still more if it's done inconsistently in a
+single struct. If you ask me, just use a single space before the =3D.
+
+> +	.driver	=3D {
+> +		.name =3D "sl261x-pinctrl",
+> +		.of_match_table =3D sl261x_pinctrl_match,
+> +	},
+> +};
+> +module_platform_driver(sl261x_pinctrl_driver);
+
+Best regards
+Uwe
+
+--qdr5pu2vmyb2k4sk
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmq72pkACgkQj4D7WH0S
+/k6pzAf+PhNU58V7LTtOu13Q7FpXZuGYfITE5o06ZTODsXEE48OgW8ZdwP7VY1Rr
+OASvkk8I0b2igulZlmDQF6y/Uo8vr7BFFtBnDNLOlskSrwtGlRdlA+OxtblggT3/
+ZtDs4aXeswkygIA/WvR5ypgSrpFZbf3ulmLpJxoG7wyWd2z20AE0RMgHMxWnRRRK
+u1HPQWxqFS3vW0NsDLIGQ8yxAhuvL3DkQrfMVQONTNlqb9YbbJ5Ei9pHPDcYiggC
+2NvAR0+Iczq3x7p1plWpq1ism4qNBPatzP3vOw+KMQXMHzNrOEICQ0lR54jlGDtd
+U3aErEDsuZZpCY/HwikxQiabfzr3uA==
+=ieOW
+-----END PGP SIGNATURE-----
+
+--qdr5pu2vmyb2k4sk--
