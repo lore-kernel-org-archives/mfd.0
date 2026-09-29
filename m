@@ -1,64 +1,64 @@
-Received: from mail-pj2-f39.google.com (mail-pj2-f39.google.com [74.125.227.167])
+Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD6BB51DDFC
-	for <mfd@lists.linux.dev>; Tue, 29 Sep 2026 16:27:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.167
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F03551E42F
+	for <mfd@lists.linux.dev>; Tue, 29 Sep 2026 16:27:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790699260; cv=none; b=sYjXH0AYFwHN232caBrOb8yFJO9nZ3Lh2s8MzKvST7zHCwp/baELPaj7PbXxzPpX4W8G/SjKtuwue0QTUaTZw+AmBETkpiM6iBno2SpMBGATdo93D0SbUR9P2tUqT7bFqmRg5KTAja8ILEqeTA0xpRLAHeB3XGlGTawidYcxeH8=
+	t=1790699274; cv=none; b=un3W+REemfN+Bunoxi7Tm3cRWJHqD/fYXwN7JGlRH6QKow/+Z2qt7a0Zk3QdfjlMT1nC0AlKVXaPMYXlVzbkApzBwfsCiaHhKwhCuwFFFN5VxxEY+O5uMv1o9IkHg6dLcQuM462qj/uAFQczpj5rP9jSQe7JKpvr9dvbS5Zebas=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790699260; c=relaxed/simple;
-	bh=PMX1p5KQ1LljzZN0fjjRX/ggRrs5b9HbaoJ5+VgHJlw=;
+	s=arc-20240116; t=1790699274; c=relaxed/simple;
+	bh=TlF85b9FzlAi4FP/IT9hZjHLJeMqbT7XAEDuyX4ADf8=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=oBRB26g18eTPgxhekuHDtPNB2mxBEEUCnyek/yR0Beo7hQtpGsDatSyo5wLyRU2nfqVILqs6k91KeqjjglaL6d+cLqPqMxXac0GLPJPQfS/IpFczRZ8Zr9FT4EXfdsVygXNlbbViOxrm7airq9GFXVWESgPO43GNnOL+HSCrjOE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=o79O4+GM; arc=none smtp.client-ip=74.125.227.167
+	 MIME-Version; b=jYKA4RsQ33MOI0bfpZtmahzrCrRICveAI23fcvZIe5vANDpsZhBfK+aw8IOLRY2EPJ07uybYnLT0TfKb1QK54UCjksx3x2Oa3G6Jat8E1jaIyKOUvaJr6wLS5suZAakksZyWOkAH3VfPc7V5oaWB3m7kyqk+qt26qp8rI8APU9k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=GOz96tl4; arc=none smtp.client-ip=74.125.227.140
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="o79O4+GM"
-Received: by mail-pj2-f39.google.com with SMTP id 98e67ed59e1d1-3a49b6bb21eso862758a91.3
-        for <mfd@lists.linux.dev>; Tue, 29 Sep 2026 09:27:38 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GOz96tl4"
+Received: by mail-pj2-f12.google.com with SMTP id d9443c01a7336-2d747f05ffcso21243095ad.0
+        for <mfd@lists.linux.dev>; Tue, 29 Sep 2026 09:27:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790699258; x=1791304058; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1790699272; x=1791304072; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=PMX1p5KQ1LljzZN0fjjRX/ggRrs5b9HbaoJ5+VgHJlw=;
-        b=o79O4+GMoItIhdzptLylNyr8hWei8uLI9QDad0X14DTMw/OPc3LbVJ8/k9piXr2lN3
-         15pUvZSFzUHurxaEcN7H39InNAxm1H/ybftMkzrp19APGu5tokWfQn+zZDxfqLa3RD5f
-         mb876p/vcqNHFg0fameabJp0DiFdB0Ad3+fnO6EWo1uhdJnAaB/NRGMOenE476fr/w6T
-         joPmoc/vvWFYkvUWXIdiQQzT6hMtTlfsSYgHRV4NK9HEU+7omL4bVuLA2FH033IWCiES
-         u7L8XcoVDFTecJl1MdyBplKRpaVVzkxsH+6FvqyPFDRkmLZel1qSZmD3+bjV7mrXDklQ
-         +9IA==
+        bh=TlF85b9FzlAi4FP/IT9hZjHLJeMqbT7XAEDuyX4ADf8=;
+        b=GOz96tl4GvMUzOciCaZGCWeygBOFI6DHWUDaSt7VEUaJYxG/6sWK6Ro215xSHILTA5
+         bfzieQnldXD/VRUM+yGkULftwpwWeHtH0lOKEAJUf+tu9GVUHkHSUz7o0xnzHYzGXaEc
+         Qtje2NFnRGk0o+h15pjuTDW8vGD6mfhL7Z7DjCRXvSVMG4rUobp7mQRH0CY7aRKYfuDJ
+         03lb2wk7/s82fdudNuXjADmH2Q6S2VeWvlR8T91e7KcBE67HShaZF2lkWhUxNWbBRD0n
+         /q/nGb4NqXt3gPOZDQJ/dpUr4eb4qGItfmxDREctsjB9GAQcw8oP4Zu7U/Nrjj8ZiBVw
+         H45w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790699258; x=1791304058;
+        d=1e100.net; s=20260707; t=1790699272; x=1791304072;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PMX1p5KQ1LljzZN0fjjRX/ggRrs5b9HbaoJ5+VgHJlw=;
-        b=HSnhlcQrJGb8/CfcbrW01habSQ9rJ6ciamhvY7ebLDaXb7FqGPBplgBDCeYL50cxTD
-         1b/Y2OvEvZYK5k+W4H2q+bekN9hw0jW9PwfcA59/JZ8vE/w4CdHfATk28KNQ+Q+8VQy1
-         +I3d+OYGl9N6s7OGKlj1MDrQdBJD7BUR+kgs+w5jwthNFbRI1E5zx/ZHUDXpDrIE98Zo
-         EvkiOE+ztk7xvzPl+XLvpyWqhN7xJYRRD2WuxmXPNQZpWCv8MudU4NKzldxVQZT89xQz
-         l83beHiUHx1lEdnquzSFDgBH5fSSbRBsqqOBQOrk8lc3EE09g9e/b88a7nC50uEChugC
-         Wfmw==
-X-Forwarded-Encrypted: i=1; AKwUvBytq3ANyatjiCz3+qyw+wl68BbI1zJHEozO4k64IwnhB8/i7W0XEL6gvuaHe18wNvavvG4=@lists.linux.dev
-X-Gm-Message-State: AFq9FYLAwxKgH9IG8aDVQ5uiJraxeHBxi2Gqb6fMgYf/rMA5reHrtg6e
-	xe4K3TAUl4nM72F+OwQ8d8fjwiVorHJGPf/o9r/6nrn0g9RSPj5l5/aE
-X-Gm-Gg: AYBFou0hGEexunD6RnRWDM/ZUvAkrwE4yeaic588gYAQ17d/EMZh5dyRSACAyOg21Hb
-	atCoOOlOgAmz58t0NUv5i2Q/ZTRgNJ+4EWdfW83pbgyn8wPvD2TxO7QzUBzy8w2b+Lzar4yQTiU
-	x0hAfD42ZHDyGGNKv/ETpgyC+yeoMf5gIsHomP5wzGLSUq8SzxNnEFPpDUi6LEh6YZ8JhX4lWbu
-	Q4l0ogfuCESt0ARFa5G7UhVBYefRA/4FduEnXhOwNgx0JMFvk+5UZcp+XO7enlAoW02QgFPGhc4
-	4NtdPhbGnzL26uqSu/RMS1+KqVgMBMApSorZvNkbKFVZXP/WHXLSQiM4fdQrZPu+CZ2/tBGhNpd
-	8fX4/hrJ72rWZURaZFjSZS310a02ZnsGFA0biddF3jFO2cgaKZ60lwj5zwoHrqmlrNGJya3lfr1
-	xWFnLZls1+ec1KnqDVmrYU2OMV+Ep4Y4CLyDmk9GDqFUWuQdcDQJhonrrSdWzdPVFGM6LMqtbSd
-	LKjpnpVbkw=
-X-Received: by 2002:a17:90b:524a:b0:3a4:71b7:eb63 with SMTP id 98e67ed59e1d1-3a471b7f585mr3801721a91.10.1790699257948;
-        Tue, 29 Sep 2026 09:27:37 -0700 (PDT)
+        bh=TlF85b9FzlAi4FP/IT9hZjHLJeMqbT7XAEDuyX4ADf8=;
+        b=Bn+8E/Ct22FXVS5SPHQYuYjUTb1G0D7akmn/FMLg8SnQORBGCeQqvwIhfO4a3V+OJ7
+         XEebkSL/9a2OWyngebWSJfjRJnvEkgqgZl1W8+L3ASu11PZfUN8a6KAulji97Y5jBPm8
+         LWIll2F8Gn4DZ0C6KyrAbuRoQAqBj39GdOHCJdVPSRrALB2SdI7zjWj21l8d6vc1QRqY
+         x4ajdfp0wYU+TlDKSWWOWhL6EgkUvz60Ggvr+R6Fn0vff03VNwdq0/fbbQax68gBK4nW
+         Hg8YwHl4V2ZZyUz86QE8l4jVutaWxkoOMHdJrVWbmHET+Ny3aBsfieIuFgriI3e96ZvN
+         xxOQ==
+X-Forwarded-Encrypted: i=1; AKwUvBx4Y8tJ9SKNlSOoijjpXmhaa8i/NhN5tvPPXKKcD3QbF3Uv6JiXR4OAyVY90FsmGkvJBlY=@lists.linux.dev
+X-Gm-Message-State: AFq9FYJ4u5NxBqKsjO96lfaThfWtnK4/oEZixSlLmAkQdhqu4wb6zB43
+	drX3GS3ScaNBXinR2Qsbcfm+znb2+GmJTfwv3CmGuTX8vIRJ/4bWoGhD
+X-Gm-Gg: AYBFou2agJiik59mqZz23GAbGad4bT3rqYHLCHDvkMEgSjdxGBYmeJVs46Yxcfq9lYY
+	W3NKhQhM9JRsx91p/dGlj2d4lX1AiI1YQgjlpThr6E8lXgKK+5AHh9L5PrwBS1x/z8RW2EY88t7
+	DzNaB2mY1mrs4U+n8IZ4emzDXA9JJK3LD8wO7ssMqBlPZ9jzZjLyoYAt1QooKIynLSGiKt5flXy
+	S5aD7AYvjEWXYAYhFymVt5XPT2LkqHT2xniSJd/VWJ7Jtdu1YldulMkdTQSwnYWEHHhAy4peX4R
+	kcqqytZ1KDL/pszaQ+DOGazeidr6r9c29L0iFVVIMPQBwY+0fvvbCpHYuukBsY+zCrW0XYGXUR1
+	cbxTbXFVplFYmu6UCWqPYnL2Zg0wNRcJrMw2Fv5/NayXA6o0ApkP+h1yY0Md6bHOXSty7aNr3fM
+	uw/hNPk1Gw1NlaCiWLuQpzuaYsTWyABIcJmgP8COytxAwlpe/GjLopMBeX/GOeiHVtiioHOlCgR
+	n6w+cyRZ/0=
+X-Received: by 2002:a17:902:d4c8:b0:2dd:c100:80ba with SMTP id d9443c01a7336-2df7e669010mr133501945ad.53.1790699272230;
+        Tue, 29 Sep 2026 09:27:52 -0700 (PDT)
 Received: from Aaron-M6 ([188.253.120.162])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a497f23328sm6510887a91.10.2026.09.29.09.27.33
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df91475206sm59198875ad.82.2026.09.29.09.27.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Sep 2026 09:27:37 -0700 (PDT)
+        Tue, 29 Sep 2026 09:27:51 -0700 (PDT)
 From: Yaozhong Li <yaozhonguwl@gmail.com>
 To: sashiko-reviews@lists.linux.dev
 Cc: Lee Jones <lee@kernel.org>,
@@ -66,15 +66,13 @@ Cc: Lee Jones <lee@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
 	devicetree@vger.kernel.org,
 	mfd@lists.linux.dev,
-	Heiko Stuebner <heiko@sntech.de>,
-	linux-rockchip@lists.infradead.org,
 	Yaozhong Li <yaozhonguwl@gmail.com>
-Subject: Re: [RFC PATCH v3 3/3] arm64: dts: rockchip: fix power-off on Firefly-RK3399
-Date: Wed, 30 Sep 2026 00:27:24 +0800
-Message-ID: <20260929162724.1545-1-yaozhonguwl@gmail.com>
+Subject: Re: [RFC PATCH v3 1/3] dt-bindings: mfd: rk808: add board level power hold GPIOs
+Date: Wed, 30 Sep 2026 00:27:42 +0800
+Message-ID: <20260929162742.1374-1-yaozhonguwl@gmail.com>
 X-Mailer: git-send-email 2.55.0.windows.3
-In-Reply-To: <20260929141337.6F0321F000FF@smtp.kernel.org>
-References: <20260929140649.55-1-yaozhonguwl@gmail.com> <20260929140649.55-4-yaozhonguwl@gmail.com> <20260929141337.6F0321F000FF@smtp.kernel.org>
+In-Reply-To: <20260929141534.358FD1F00893@smtp.kernel.org>
+References: <20260929140649.55-1-yaozhonguwl@gmail.com> <20260929140649.55-2-yaozhonguwl@gmail.com> <20260929141534.358FD1F00893@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -83,37 +81,22 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-On 2026-09-29 14:13 UTC, sashiko-bot@kernel.org wrote:
-> By delegating this core power-off requirement to the optional
-> pwm-backlight driver, could the board reboot instead of powering off
-> if the backlight driver is inactive?
+On 2026-09-29 14:15 UTC, sashiko-bot@kernel.org wrote:
+> Does this update need to be applied to the other RK8xx family schemas
+> as well?
 
-I plan to keep the GPIO1_D0-only description in v4, and to make the
-commit message say what the backlight does and does not guarantee.
+Yes, I will change this in v4.
 
-On the emergency case: the PMIC's power-off prepare handler runs from
-kernel_power_off(), after device_shutdown(). orderly_poweroff() and
-the forced hardware-protection path both go through kernel_power_off().
-emergency_restart() does skip device_shutdown(), but it restarts and
-never runs this handler.
+rk8xx_probe() reads power-hold-gpios for every variant that is the
+system power controller, and all of rockchip,rk801, rk805, rk806,
+rk808, rk816, rk817 and rk818.yaml allow system-power-controller. The
+property should therefore be described in all seven. It is not only a
+theoretical case: Firefly's own BSP uses both pmic,stby-gpio and
+pmic,hold-gpio with an RK818 on the RK3128-based FirePrime.
 
-With pwm-backlight bound, it sets GPIO1_B5 low when it powers the
-backlight off, and its shutdown callback attempts that from
-device_shutdown(); the result of that GPIO write is not checked. On
-this board, with the backlight on at full brightness beforehand, the
-GPIO1_D0-only setup stayed off in 3 of 3 runs. GPIO1_B5 itself was
-not sampled at the PMIC handler in those runs.
-
-With pwm-backlight not bound, it does not claim GPIO1_B5. The pin was
-an input reading low on this board, and that setup also stayed off in
-3 of 3 runs. That is an observation on one board, not something the
-kernel guarantees. In particular, if a bootloader left GPIO1_B5 high
-and pwm-backlight failed to probe before setting the pin, it could
-remain high. I have not tested that case.
-
-The alternative, listing GPIO1_B5 in power-hold-gpios, means removing
-the backlight's enable-gpios, and I have no schematic showing that
-property is wrong. That is open question 4 in the cover letter.
+v4 will add power-hold-gpios and power-hold-delay-ms to all seven
+schemas, each with the dependency on whichever spelling of
+system-power-controller that schema accepts.
 
 Thanks,
 Yaozhong
