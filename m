@@ -1,102 +1,153 @@
-Received: from mail-pj2-f12.google.com (mail-pj2-f12.google.com [74.125.227.140])
+Received: from mail-dy2-f23.google.com (mail-dy2-f23.google.com [74.125.229.23])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F03551E42F
-	for <mfd@lists.linux.dev>; Tue, 29 Sep 2026 16:27:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.227.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3DC9039183B
+	for <mfd@lists.linux.dev>; Tue, 29 Sep 2026 19:30:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.229.23
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790699274; cv=none; b=un3W+REemfN+Bunoxi7Tm3cRWJHqD/fYXwN7JGlRH6QKow/+Z2qt7a0Zk3QdfjlMT1nC0AlKVXaPMYXlVzbkApzBwfsCiaHhKwhCuwFFFN5VxxEY+O5uMv1o9IkHg6dLcQuM462qj/uAFQczpj5rP9jSQe7JKpvr9dvbS5Zebas=
+	t=1790710208; cv=none; b=ewOphs0Vvqvk+FV9Nz1uYhqCNrjN4eYi+8fYZBX1v6Sc7cAe3WtzCB7xLNiuK/GgdCdq9H8AqysJbPhFOm2EzylE+v4KnS8OchoH7cnpyoHbObh/tXzYtu4bns/du+4/u9s5lA+wJGNETvGu1TY2BHSjMeUmp6Ar++rEoo5EtmA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790699274; c=relaxed/simple;
-	bh=TlF85b9FzlAi4FP/IT9hZjHLJeMqbT7XAEDuyX4ADf8=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=jYKA4RsQ33MOI0bfpZtmahzrCrRICveAI23fcvZIe5vANDpsZhBfK+aw8IOLRY2EPJ07uybYnLT0TfKb1QK54UCjksx3x2Oa3G6Jat8E1jaIyKOUvaJr6wLS5suZAakksZyWOkAH3VfPc7V5oaWB3m7kyqk+qt26qp8rI8APU9k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=GOz96tl4; arc=none smtp.client-ip=74.125.227.140
+	s=arc-20240116; t=1790710208; c=relaxed/simple;
+	bh=dcqC/R6KKT/sQfJIFw2LiQyMk+5YWArPLJR/2wCqPRA=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=a1u63SuGQwkN9eJm6Nw+bLhbQpi6pYuSqzZ709+Zj/FA6+8VvLZ0LnygPSXYkxnLHBEP+PUTRxiW3o1OlfDsUbTTrl3IQJgf4Ev5JSXr6QhOwDck2Dwchk0JGRK0LELP6WwbuVxJG+jmj53hMftDyuC08yccn77XVLHzF4TMy4Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=o6Z5/57F; arc=none smtp.client-ip=74.125.229.23
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GOz96tl4"
-Received: by mail-pj2-f12.google.com with SMTP id d9443c01a7336-2d747f05ffcso21243095ad.0
-        for <mfd@lists.linux.dev>; Tue, 29 Sep 2026 09:27:52 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="o6Z5/57F"
+Received: by mail-dy2-f23.google.com with SMTP id 5a478bee46e88-32be7127c64so514483eec.2
+        for <mfd@lists.linux.dev>; Tue, 29 Sep 2026 12:30:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790699272; x=1791304072; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=TlF85b9FzlAi4FP/IT9hZjHLJeMqbT7XAEDuyX4ADf8=;
-        b=GOz96tl4GvMUzOciCaZGCWeygBOFI6DHWUDaSt7VEUaJYxG/6sWK6Ro215xSHILTA5
-         bfzieQnldXD/VRUM+yGkULftwpwWeHtH0lOKEAJUf+tu9GVUHkHSUz7o0xnzHYzGXaEc
-         Qtje2NFnRGk0o+h15pjuTDW8vGD6mfhL7Z7DjCRXvSVMG4rUobp7mQRH0CY7aRKYfuDJ
-         03lb2wk7/s82fdudNuXjADmH2Q6S2VeWvlR8T91e7KcBE67HShaZF2lkWhUxNWbBRD0n
-         /q/nGb4NqXt3gPOZDQJ/dpUr4eb4qGItfmxDREctsjB9GAQcw8oP4Zu7U/Nrjj8ZiBVw
-         H45w==
+        d=gmail.com; s=20251104; t=1790710206; x=1791315006; darn=lists.linux.dev;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=8NtU6ZgB5rVnB2TieQI+YlMezMRHZXxmu9/97X08t/8=;
+        b=o6Z5/57FFYK+6xkQNVBOx6iXx3B+xDEHsXYHK77JQWSXD+52oOoQfJZGkGySV59DH+
+         7cstplFonVR0NzVBy2svs2Ms5MtsdIAyDab64dV3Vma1dXk5dSEogjDmHAKRG6RD+q7T
+         iNZaabGhD9y1OYfKVMZnggyDPrgmpuUIFaB6dAD+beSx5ZqGSY8rhdsJ52XxJhBCrhAL
+         0U2QF1SZyMQxkGTP8zk3TdsVlnLBi8unXXdy7jWZKWCB5zAqPXoLLgwGFDh5rR6H+z8v
+         I9r4NaT/wDbXgupiVhGNsxog6CB5qS/+3PMD0tVQ7Jc3KlRjguC/4PTyc2rK2+e9KGpE
+         pBhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790699272; x=1791304072;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=TlF85b9FzlAi4FP/IT9hZjHLJeMqbT7XAEDuyX4ADf8=;
-        b=Bn+8E/Ct22FXVS5SPHQYuYjUTb1G0D7akmn/FMLg8SnQORBGCeQqvwIhfO4a3V+OJ7
-         XEebkSL/9a2OWyngebWSJfjRJnvEkgqgZl1W8+L3ASu11PZfUN8a6KAulji97Y5jBPm8
-         LWIll2F8Gn4DZ0C6KyrAbuRoQAqBj39GdOHCJdVPSRrALB2SdI7zjWj21l8d6vc1QRqY
-         x4ajdfp0wYU+TlDKSWWOWhL6EgkUvz60Ggvr+R6Fn0vff03VNwdq0/fbbQax68gBK4nW
-         Hg8YwHl4V2ZZyUz86QE8l4jVutaWxkoOMHdJrVWbmHET+Ny3aBsfieIuFgriI3e96ZvN
-         xxOQ==
-X-Forwarded-Encrypted: i=1; AKwUvBx4Y8tJ9SKNlSOoijjpXmhaa8i/NhN5tvPPXKKcD3QbF3Uv6JiXR4OAyVY90FsmGkvJBlY=@lists.linux.dev
-X-Gm-Message-State: AFq9FYJ4u5NxBqKsjO96lfaThfWtnK4/oEZixSlLmAkQdhqu4wb6zB43
-	drX3GS3ScaNBXinR2Qsbcfm+znb2+GmJTfwv3CmGuTX8vIRJ/4bWoGhD
-X-Gm-Gg: AYBFou2agJiik59mqZz23GAbGad4bT3rqYHLCHDvkMEgSjdxGBYmeJVs46Yxcfq9lYY
-	W3NKhQhM9JRsx91p/dGlj2d4lX1AiI1YQgjlpThr6E8lXgKK+5AHh9L5PrwBS1x/z8RW2EY88t7
-	DzNaB2mY1mrs4U+n8IZ4emzDXA9JJK3LD8wO7ssMqBlPZ9jzZjLyoYAt1QooKIynLSGiKt5flXy
-	S5aD7AYvjEWXYAYhFymVt5XPT2LkqHT2xniSJd/VWJ7Jtdu1YldulMkdTQSwnYWEHHhAy4peX4R
-	kcqqytZ1KDL/pszaQ+DOGazeidr6r9c29L0iFVVIMPQBwY+0fvvbCpHYuukBsY+zCrW0XYGXUR1
-	cbxTbXFVplFYmu6UCWqPYnL2Zg0wNRcJrMw2Fv5/NayXA6o0ApkP+h1yY0Md6bHOXSty7aNr3fM
-	uw/hNPk1Gw1NlaCiWLuQpzuaYsTWyABIcJmgP8COytxAwlpe/GjLopMBeX/GOeiHVtiioHOlCgR
-	n6w+cyRZ/0=
-X-Received: by 2002:a17:902:d4c8:b0:2dd:c100:80ba with SMTP id d9443c01a7336-2df7e669010mr133501945ad.53.1790699272230;
-        Tue, 29 Sep 2026 09:27:52 -0700 (PDT)
-Received: from Aaron-M6 ([188.253.120.162])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2df91475206sm59198875ad.82.2026.09.29.09.27.49
+        d=1e100.net; s=20260707; t=1790710206; x=1791315006;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=8NtU6ZgB5rVnB2TieQI+YlMezMRHZXxmu9/97X08t/8=;
+        b=bkL6XkMlRHKbmmqCJCq2PKZAvQm1h8ZFFADgfcImUXHCtrC6X3Lgg+/ZUYvcIDJUXD
+         LBCDT3vEeEzqg0OJP3/et8ztLsouDezRYvupYghqaHkIV1UBNRZLC1aEzsHp9UJgIONe
+         F7g90B/U2jqiXrbxyCdpEpGdXAJZZIGv1zd7Ek8fW2ocCK/qv2JgLOesgBeDuvolZbU8
+         ovQ7GAIvXDevJCxv2dYpVNkRlrTAUn+m9Fjo9g3ABgWZZJPBPoeZWQ28YompaWTzx3TH
+         dVVK0K5FO3fI3uqFodprAn6ybVuXja5Cj36SO3kbTDOYBDkMjPsiBxF5IL/Yhmv3V3mK
+         AFEw==
+X-Forwarded-Encrypted: i=1; AKwUvBxDNQZKSKR9GVuwFrZy1nxCtHru6/0SSw2DxLOz5O+HXthHDJIeLHovVpSen2dEHr3Gca8=@lists.linux.dev
+X-Gm-Message-State: AFq9FYImjiXubS6uEODBmUfPHTB7EEch0c3Jo0Gm+CGOu6EoBf+Uh0bJ
+	ytshGKX/UEKdjn+X4RSuynrUWWan7kA0hDr5i0MikSSA9KD0XUpCHPmLpYygwA==
+X-Gm-Gg: AYBFou0S9X0YL6TgombBcTYGghRzfWTFk60Ly831W33MTGOwVfj1jhHPAyjrge++G4q
+	3fCzuzS66vPN/V53KPF2sDEAnyxD0wCgcn8SO58pG/QNXJG4TEvDYWVd0mOUlWH3bsSuprMmA/z
+	7pKu9kKASO8RODONygWTwT42IeWmypAargSpoU5iN2IcOGAq2N282KxUW6AWS5yFrcCQrfeIHQg
+	1mfbTG89c51GimWrbGzshEuPHFCzMJ7vi4oE59gXpbTKeLXYpHh/10PwfCju/yXg5HekgBZ8QXF
+	v2EqY0l3xk0eH4vSg7hRBX1VM6ZCL5ZEK1bVW2wFScNyZ2SINrug9qGBlWpbLwFmaG8Eeark5pk
+	lr5CNvBUb2fI8oLw38zgI9CT3Yu7rl8C9Qj79zrtSbTtLLo5VQ5ZgVuwwfKWnTWlhe5gbia4ldB
+	R07Z4kdViLGpL6S5CSh0+JfqkHq4Acc3z17iFOODhn8JWD4uyXpcYgtFMeN+qlJ9y8sJ3a+LiDE
+	ysnQZV0wg==
+X-Received: by 2002:a05:7301:4d12:b0:34c:3ae5:ebc with SMTP id 5a478bee46e88-34c6128bdf6mr606357eec.0.1790710206173;
+        Tue, 29 Sep 2026 12:30:06 -0700 (PDT)
+Received: from [10.211.86.252] ([2409:40c2:5054:69f0:5c6b:5195:5b7b:d414])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34c386b6bd9sm1275349eec.16.2026.09.29.12.29.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Sep 2026 09:27:51 -0700 (PDT)
-From: Yaozhong Li <yaozhonguwl@gmail.com>
-To: sashiko-reviews@lists.linux.dev
-Cc: Lee Jones <lee@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	devicetree@vger.kernel.org,
-	mfd@lists.linux.dev,
-	Yaozhong Li <yaozhonguwl@gmail.com>
-Subject: Re: [RFC PATCH v3 1/3] dt-bindings: mfd: rk808: add board level power hold GPIOs
-Date: Wed, 30 Sep 2026 00:27:42 +0800
-Message-ID: <20260929162742.1374-1-yaozhonguwl@gmail.com>
-X-Mailer: git-send-email 2.55.0.windows.3
-In-Reply-To: <20260929141534.358FD1F00893@smtp.kernel.org>
-References: <20260929140649.55-1-yaozhonguwl@gmail.com> <20260929140649.55-2-yaozhonguwl@gmail.com> <20260929141534.358FD1F00893@smtp.kernel.org>
+        Tue, 29 Sep 2026 12:30:05 -0700 (PDT)
+From: Bhargav Joshi <j.bhargav.u@gmail.com>
+Subject: [PATCH v5 0/2] regulator: dt-bindings: Tegra coupling DT
+ conversions and cleanup
+Date: Wed, 30 Sep 2026 00:59:41 +0530
+Message-Id: <20260930-ti-tps6586x-v5-0-aac0273b5da3@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/13NQQ6CMBCF4auYrq1hpsNQXHkP44KWVmtUDEWiM
+ dxdqjGCy5fM989TRNcGF8V68RSt60MMzWUc+XIh7KG67J0M9bgFZsiZRpBdkN01cq75Lk1OrgC
+ AEgorRnFtnQ/3d227++x4M0dnu5RIF4cQu6Z9vN/1kO6+ZZyVe5AgS2UNsVFosNjsz1U4rWxzF
+ qnc48+WwHOLMpMe0PraGyK2/1ZNbTm3arSs6hop88Sa/i1NLNLcUrK2qLQ32jDx1A7D8ALJkTC
+ 1bAEAAA==
+X-Change-ID: 20260821-ti-tps6586x-b54e7111917c
+To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Thierry Reding <thierry.reding@avionic-design.de>, 
+ Lee Jones <lee@kernel.org>, Shree Ramamoorthy <s-ramamoorthy@ti.com>, 
+ Thierry Reding <thierry.reding@kernel.org>, 
+ Jonathan Hunter <jonathanh@nvidia.com>, Dmitry Osipenko <digetx@gmail.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Laxman Dewangan <ldewangan@nvidia.com>
+Cc: linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
+ goledhruva@gmail.com, m-chawdhry@ti.com, daniel.baluta@gmail.com, 
+ simona.toaca@nxp.com, j.bhargav.u@gmail.com, mfd@lists.linux.dev, 
+ Thierry Reding <treding@nvidia.com>, linux-tegra@vger.kernel.org
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790710190; l=2057;
+ i=j.bhargav.u@gmail.com; h=from:subject:message-id;
+ bh=dcqC/R6KKT/sQfJIFw2LiQyMk+5YWArPLJR/2wCqPRA=;
+ b=ilhdseio2iTuo0yviwOatf83AM0VBGpCAYeK5Hkt5ozS9PWnQcn/FQ38a6gjWl/sMMFJAv/so
+ Qrz5Kae571TCPLKx5GN5PNmAJHRi2pb4fjqXH7eqQom3wILB2QDreKA
+X-Developer-Key: i=j.bhargav.u@gmail.com; a=ed25519;
+ pk=IqNDwUZKECEA+n8wXctFLBbYL9NhFstZNbOznm/nX1k=
 
-On 2026-09-29 14:15 UTC, sashiko-bot@kernel.org wrote:
-> Does this update need to be applied to the other RK8xx family schemas
-> as well?
+This series adds a shared DT schema for Tegra regulator coupling, 
+updates relevant PMICs to use it, and converts the TI TPS6586x 
+bindings to DT schema.
 
-Yes, I will change this in v4.
+Summary:
+- Patch 1: Fixes existing TPS65910 validation warnings.
+- Patch 2: Converts Tegra regulator coupling to DT schema.
+- Patch 3: Updates Tegra-related PMICs to reference the new schema.
+- Patch 4: Converts TI TPS6586x to DT schema.
 
-rk8xx_probe() reads power-hold-gpios for every variant that is the
-system power controller, and all of rockchip,rk801, rk805, rk806,
-rk808, rk816, rk817 and rk818.yaml allow system-power-controller. The
-property should therefore be described in all seven. It is not only a
-theoretical case: Firefly's own BSP uses both pmic,stby-gpio and
-pmic,hold-gpio with an RK818 on the RK3128-based FirePrime.
+Signed-off-by: Bhargav Joshi <j.bhargav.u@gmail.com>
+---
+Changes in v5:
+- Dropped example from nvidia,tegra-regulators-coupling binding.
+- Link to v4: https://lore.kernel.org/r/20260924-ti-tps6586x-v4-0-6c7a8fb8b646@gmail.com
 
-v4 will add power-hold-gpios and power-hold-delay-ms to all seven
-schemas, each with the dependency on whichever spelling of
-system-power-controller that schema accepts.
+Changes in v4:
+- Dropped applied patches 1 and 4
+- Rebased to broonie-regulator/for-7.4 to resolve conflicts
+- Link to v3: https://lore.kernel.org/r/20260919-ti-tps6586x-v3-0-63dd240f4684@gmail.com
 
-Thanks,
-Yaozhong
+Changes in v3:
+- Patch 2: Add '>' to description
+- Collect tags
+- Link to v2: https://lore.kernel.org/r/20260916-ti-tps6586x-v2-0-f12cfdfb446c@gmail.com
+
+Changes in v2:
+- Add patch 1 to resolve warnings from TPS65910.
+- Add patch 2 to convert nvidia,tegra-regulators-coupling to DT schema.
+- Add patch 3 to $ref to shared schema.
+- Patch 4: remove individual properties and add $ref to shared schema.
+- Link to v1: https://lore.kernel.org/r/20260822-ti-tps6586x-v1-1-93cb46b32b27@gmail.com
+
+---
+Bhargav Joshi (2):
+      regulator: dt-bindings: nvidia,tegra-regulators-coupling: Convert to DT schema
+      regulator: dt-bindings: Reference Tegra regulator coupling schema
+
+ .../devicetree/bindings/mfd/ti,tps65910.yaml       | 12 +++-
+ .../regulator/maxim,max77620-regulator.yaml        |  5 +-
+ .../regulator/nvidia,tegra-regulators-coupling.txt | 65 ----------------------
+ .../nvidia,tegra-regulators-coupling.yaml          | 38 +++++++++++++
+ .../devicetree/bindings/regulator/ti,tps62360.yaml |  1 +
+ 5 files changed, 52 insertions(+), 69 deletions(-)
+---
+base-commit: 05a3330f490cfa266831c0fc7f8c6df942866d59
+change-id: 20260821-ti-tps6586x-b54e7111917c
+
+Best regards,
+-- 
+Bhargav
+
