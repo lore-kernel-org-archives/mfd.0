@@ -1,68 +1,69 @@
-Received: from mail-dy2-f23.google.com (mail-dy2-f23.google.com [74.125.229.23])
+Received: from mail-dl2-f40.google.com (mail-dl2-f40.google.com [74.125.229.168])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3DC9039183B
-	for <mfd@lists.linux.dev>; Tue, 29 Sep 2026 19:30:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.229.23
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D80A37EFFB
+	for <mfd@lists.linux.dev>; Tue, 29 Sep 2026 19:30:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.229.168
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790710208; cv=none; b=ewOphs0Vvqvk+FV9Nz1uYhqCNrjN4eYi+8fYZBX1v6Sc7cAe3WtzCB7xLNiuK/GgdCdq9H8AqysJbPhFOm2EzylE+v4KnS8OchoH7cnpyoHbObh/tXzYtu4bns/du+4/u9s5lA+wJGNETvGu1TY2BHSjMeUmp6Ar++rEoo5EtmA=
+	t=1790710226; cv=none; b=md1e67n03+BfyDBDNE6EGtIkMMkBqa8QjIBAN4RXlRXWuuZy5ZlBDDMPBrVWLa8Vtnr3IFLIerpk/eMMXGdfG1Md6BviFdhgAPoOq6gb2kJKdTNzLpwBhnTwyOuSyZXZ+szp+4AGIq42xq74Pru1gwKTGojb7j/Y/kkdxN7dlVo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790710208; c=relaxed/simple;
-	bh=dcqC/R6KKT/sQfJIFw2LiQyMk+5YWArPLJR/2wCqPRA=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=a1u63SuGQwkN9eJm6Nw+bLhbQpi6pYuSqzZ709+Zj/FA6+8VvLZ0LnygPSXYkxnLHBEP+PUTRxiW3o1OlfDsUbTTrl3IQJgf4Ev5JSXr6QhOwDck2Dwchk0JGRK0LELP6WwbuVxJG+jmj53hMftDyuC08yccn77XVLHzF4TMy4Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=o6Z5/57F; arc=none smtp.client-ip=74.125.229.23
+	s=arc-20240116; t=1790710226; c=relaxed/simple;
+	bh=6D/zV/BjV8cJK2Je+v+NtgU8vRbHOOzx39ErHS1L0wg=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=QchIfKUSPcclpy7PqXyrh0aWBXhmKdQqZtbpd2Pts7/rbBq+ou7zvAuXKGCOnYgofj2xgJbTh2PGrwjFhX029IF35A49sNOUMCGj30Ibgtddio9DuCSuhNlhaCu65tNDqCUyn+2e4xBj8s4QPK6WkEOlaf8fT5/Q3HNtW85Wy3k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=kEKUmgtw; arc=none smtp.client-ip=74.125.229.168
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="o6Z5/57F"
-Received: by mail-dy2-f23.google.com with SMTP id 5a478bee46e88-32be7127c64so514483eec.2
-        for <mfd@lists.linux.dev>; Tue, 29 Sep 2026 12:30:07 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kEKUmgtw"
+Received: by mail-dl2-f40.google.com with SMTP id a92af1059eb24-14c96a4b7c7so16427c88.2
+        for <mfd@lists.linux.dev>; Tue, 29 Sep 2026 12:30:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790710206; x=1791315006; darn=lists.linux.dev;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=8NtU6ZgB5rVnB2TieQI+YlMezMRHZXxmu9/97X08t/8=;
-        b=o6Z5/57FFYK+6xkQNVBOx6iXx3B+xDEHsXYHK77JQWSXD+52oOoQfJZGkGySV59DH+
-         7cstplFonVR0NzVBy2svs2Ms5MtsdIAyDab64dV3Vma1dXk5dSEogjDmHAKRG6RD+q7T
-         iNZaabGhD9y1OYfKVMZnggyDPrgmpuUIFaB6dAD+beSx5ZqGSY8rhdsJ52XxJhBCrhAL
-         0U2QF1SZyMQxkGTP8zk3TdsVlnLBi8unXXdy7jWZKWCB5zAqPXoLLgwGFDh5rR6H+z8v
-         I9r4NaT/wDbXgupiVhGNsxog6CB5qS/+3PMD0tVQ7Jc3KlRjguC/4PTyc2rK2+e9KGpE
-         pBhA==
+        d=gmail.com; s=20251104; t=1790710223; x=1791315023; darn=lists.linux.dev;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=/UG3W2zvz26cOj2el4KNelGNWjE9fyh79XyScbN/3K0=;
+        b=kEKUmgtwA2jJJEJkW3fcmIkko8JOqFPJhd7VATcqTRO94IDpRzkSCv5jhEMp27ejO0
+         dqB+zZe0m6Jn+V6xu/lhJ7LeZA7JVojdQfWinH7QbjV9iM9Zpxp9K/lUftp+1IBwV0a0
+         yCXLB5oxkMwUfR1FEew4p8jk/ZJ2QBl/L/6VwFsrjett16ChxiEO+6IPAbg6ad1BT/vG
+         s06FnCez+lhQK2tZ37WblCDriz/h9ZrozW2r8P53vHWOJUXblTpiTo9GGoSQs9j/q2W+
+         8cGikMVFfVP8yXwSKL1m152KOBX798FMIQulfhPEVn68DF4G0uVMWfbLxmoCeKYW8KOp
+         1iZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790710206; x=1791315006;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=8NtU6ZgB5rVnB2TieQI+YlMezMRHZXxmu9/97X08t/8=;
-        b=bkL6XkMlRHKbmmqCJCq2PKZAvQm1h8ZFFADgfcImUXHCtrC6X3Lgg+/ZUYvcIDJUXD
-         LBCDT3vEeEzqg0OJP3/et8ztLsouDezRYvupYghqaHkIV1UBNRZLC1aEzsHp9UJgIONe
-         F7g90B/U2jqiXrbxyCdpEpGdXAJZZIGv1zd7Ek8fW2ocCK/qv2JgLOesgBeDuvolZbU8
-         ovQ7GAIvXDevJCxv2dYpVNkRlrTAUn+m9Fjo9g3ABgWZZJPBPoeZWQ28YompaWTzx3TH
-         dVVK0K5FO3fI3uqFodprAn6ybVuXja5Cj36SO3kbTDOYBDkMjPsiBxF5IL/Yhmv3V3mK
-         AFEw==
-X-Forwarded-Encrypted: i=1; AKwUvBxDNQZKSKR9GVuwFrZy1nxCtHru6/0SSw2DxLOz5O+HXthHDJIeLHovVpSen2dEHr3Gca8=@lists.linux.dev
-X-Gm-Message-State: AFq9FYImjiXubS6uEODBmUfPHTB7EEch0c3Jo0Gm+CGOu6EoBf+Uh0bJ
-	ytshGKX/UEKdjn+X4RSuynrUWWan7kA0hDr5i0MikSSA9KD0XUpCHPmLpYygwA==
-X-Gm-Gg: AYBFou0S9X0YL6TgombBcTYGghRzfWTFk60Ly831W33MTGOwVfj1jhHPAyjrge++G4q
-	3fCzuzS66vPN/V53KPF2sDEAnyxD0wCgcn8SO58pG/QNXJG4TEvDYWVd0mOUlWH3bsSuprMmA/z
-	7pKu9kKASO8RODONygWTwT42IeWmypAargSpoU5iN2IcOGAq2N282KxUW6AWS5yFrcCQrfeIHQg
-	1mfbTG89c51GimWrbGzshEuPHFCzMJ7vi4oE59gXpbTKeLXYpHh/10PwfCju/yXg5HekgBZ8QXF
-	v2EqY0l3xk0eH4vSg7hRBX1VM6ZCL5ZEK1bVW2wFScNyZ2SINrug9qGBlWpbLwFmaG8Eeark5pk
-	lr5CNvBUb2fI8oLw38zgI9CT3Yu7rl8C9Qj79zrtSbTtLLo5VQ5ZgVuwwfKWnTWlhe5gbia4ldB
-	R07Z4kdViLGpL6S5CSh0+JfqkHq4Acc3z17iFOODhn8JWD4uyXpcYgtFMeN+qlJ9y8sJ3a+LiDE
-	ysnQZV0wg==
-X-Received: by 2002:a05:7301:4d12:b0:34c:3ae5:ebc with SMTP id 5a478bee46e88-34c6128bdf6mr606357eec.0.1790710206173;
-        Tue, 29 Sep 2026 12:30:06 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1790710223; x=1791315023;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=/UG3W2zvz26cOj2el4KNelGNWjE9fyh79XyScbN/3K0=;
+        b=MZmDjEJ59qSdFJsgIAz+yCNiMYQ/01wecw0Btll8BSSp3vXWmLg46mUX2q8FD3QPg0
+         2DvyJlEEX2fg0SmgU6ahcaO2QtTv4ZJ1tp9kwMy/oYJCsz/PtJoPk4fXNwTSBXKuvkEI
+         rQFf9T7Ow3DJBEplGRbVvTExEHpfR0Kz5YkiWbS9KgOdkwFTmJFk7lm23d9jKANV3USq
+         S8EdiqP+iDH6nPMnCQvZmfthoTgXhkC9bZi45F6MPIW/0D/MNWh9L6Lv/bTFaM4hxVa7
+         hkykBZQ/QRNItqFaKA9qGmJLctXbe05hD3+ITbsgym7vF2DcNW2R6Gclw2jmVsdQ/lnW
+         qBow==
+X-Forwarded-Encrypted: i=1; AKwUvBzVOnnPjo8ruBphr1ecQdtK7pyzDAE48YGNx9NNxT2K9wXp/1k4PN7JJNJKvFr1uQ4QZF4=@lists.linux.dev
+X-Gm-Message-State: AFuF++nell6o3tBVLq+YfGfejs90Q0X2eLjf7yr3J8VSYPkDi3EzxEq/
+	xHG9rivYo/CtL/H6NBeCJjuFv3Gf3N7Pc0Vnp1dMwtnr/cOah6fvTzqV
+X-Gm-Gg: AYBFou06O18StV3UjomdMHLAL+PDPSo3k0UkTkAkC/8nxM20yNEDvZFQIu9NQMQChzM
+	kIVw0jizRUD1KwTn/eHv4BtmXCU0vAd3pNkqRfAQFbgPGioef0MQFacLMlBHOHQ8XlYEn33m4d+
+	1lYtyzl5D7lDxtCFBWyNmi0qMOj3rbfcoP2WIeI2l5aHeiZxkZQujdJW4Jos+nBI+shcUloSnQv
+	CCdIqrQiQKf4lgIv8sFkEHtAx2njNGqDmLrcsah0tXThZOXLchcOl2Bv9hSj8sxe4MD3i0TQq/l
+	eXrBf12R2OOZii2lQyKm+IvNXiOCyDQnGvDarD8DX/Cj/nIoymrem8CewwjtVGdAGZ/9rP86sJz
+	cEwar530JGodPEjs6MQ0mUtKrRMZ9XjldFDRnf1lqPuW8OtFXQ3cqihong0r3G5GADgx57DRSdZ
+	KHs9JCsbOuch1uOTEDzouHTsv9oa6DTG2rtEMbV1y4s/XyHjDp+jasrRSezPaUd9Rul6BRMeawl
+	A5lgy2+jw==
+X-Received: by 2002:a05:7301:7004:b0:33e:6714:3945 with SMTP id 5a478bee46e88-34c65f5670bmr486208eec.2.1790710223113;
+        Tue, 29 Sep 2026 12:30:23 -0700 (PDT)
 Received: from [10.211.86.252] ([2409:40c2:5054:69f0:5c6b:5195:5b7b:d414])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34c386b6bd9sm1275349eec.16.2026.09.29.12.29.50
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-34c386b6bd9sm1275349eec.16.2026.09.29.12.30.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Sep 2026 12:30:05 -0700 (PDT)
+        Tue, 29 Sep 2026 12:30:22 -0700 (PDT)
 From: Bhargav Joshi <j.bhargav.u@gmail.com>
-Subject: [PATCH v5 0/2] regulator: dt-bindings: Tegra coupling DT
- conversions and cleanup
-Date: Wed, 30 Sep 2026 00:59:41 +0530
-Message-Id: <20260930-ti-tps6586x-v5-0-aac0273b5da3@gmail.com>
+Date: Wed, 30 Sep 2026 00:59:42 +0530
+Subject: [PATCH v5 1/2] regulator: dt-bindings:
+ nvidia,tegra-regulators-coupling: Convert to DT schema
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -71,12 +72,9 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/13NQQ6CMBCF4auYrq1hpsNQXHkP44KWVmtUDEWiM
- dxdqjGCy5fM989TRNcGF8V68RSt60MMzWUc+XIh7KG67J0M9bgFZsiZRpBdkN01cq75Lk1OrgC
- AEgorRnFtnQ/3d227++x4M0dnu5RIF4cQu6Z9vN/1kO6+ZZyVe5AgS2UNsVFosNjsz1U4rWxzF
- qnc48+WwHOLMpMe0PraGyK2/1ZNbTm3arSs6hop88Sa/i1NLNLcUrK2qLQ32jDx1A7D8ALJkTC
- 1bAEAAA==
-X-Change-ID: 20260821-ti-tps6586x-b54e7111917c
+Message-Id: <20260930-ti-tps6586x-v5-1-aac0273b5da3@gmail.com>
+References: <20260930-ti-tps6586x-v5-0-aac0273b5da3@gmail.com>
+In-Reply-To: <20260930-ti-tps6586x-v5-0-aac0273b5da3@gmail.com>
 To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
  Conor Dooley <conor+dt@kernel.org>, 
@@ -91,63 +89,140 @@ Cc: linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
  simona.toaca@nxp.com, j.bhargav.u@gmail.com, mfd@lists.linux.dev, 
  Thierry Reding <treding@nvidia.com>, linux-tegra@vger.kernel.org
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790710190; l=2057;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790710190; l=4808;
  i=j.bhargav.u@gmail.com; h=from:subject:message-id;
- bh=dcqC/R6KKT/sQfJIFw2LiQyMk+5YWArPLJR/2wCqPRA=;
- b=ilhdseio2iTuo0yviwOatf83AM0VBGpCAYeK5Hkt5ozS9PWnQcn/FQ38a6gjWl/sMMFJAv/so
- Qrz5Kae571TCPLKx5GN5PNmAJHRi2pb4fjqXH7eqQom3wILB2QDreKA
+ bh=6D/zV/BjV8cJK2Je+v+NtgU8vRbHOOzx39ErHS1L0wg=;
+ b=bwFqmRHQ2OhNrqZV6NuV1o8SI1SN6Vo3ifa/hs6HvYRQ03J66So8GHbsMHHMQqbWeIKbHcAtU
+ dr7iYLy4qpEAkQCTMuryNhdPTSCLUgJS+vWyhQ28jyIe5EecStBVQzO
 X-Developer-Key: i=j.bhargav.u@gmail.com; a=ed25519;
  pk=IqNDwUZKECEA+n8wXctFLBbYL9NhFstZNbOznm/nX1k=
 
-This series adds a shared DT schema for Tegra regulator coupling, 
-updates relevant PMICs to use it, and converts the TI TPS6586x 
-bindings to DT schema.
+Convert NVIDIA Tegra Regulators Coupling from legacy text to DT schema.
+Set additionalProperties true as this is shared schema.
 
-Summary:
-- Patch 1: Fixes existing TPS65910 validation warnings.
-- Patch 2: Converts Tegra regulator coupling to DT schema.
-- Patch 3: Updates Tegra-related PMICs to reference the new schema.
-- Patch 4: Converts TI TPS6586x to DT schema.
-
+Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
 Signed-off-by: Bhargav Joshi <j.bhargav.u@gmail.com>
 ---
-Changes in v5:
-- Dropped example from nvidia,tegra-regulators-coupling binding.
-- Link to v4: https://lore.kernel.org/r/20260924-ti-tps6586x-v4-0-6c7a8fb8b646@gmail.com
-
-Changes in v4:
-- Dropped applied patches 1 and 4
-- Rebased to broonie-regulator/for-7.4 to resolve conflicts
-- Link to v3: https://lore.kernel.org/r/20260919-ti-tps6586x-v3-0-63dd240f4684@gmail.com
-
-Changes in v3:
-- Patch 2: Add '>' to description
-- Collect tags
-- Link to v2: https://lore.kernel.org/r/20260916-ti-tps6586x-v2-0-f12cfdfb446c@gmail.com
-
-Changes in v2:
-- Add patch 1 to resolve warnings from TPS65910.
-- Add patch 2 to convert nvidia,tegra-regulators-coupling to DT schema.
-- Add patch 3 to $ref to shared schema.
-- Patch 4: remove individual properties and add $ref to shared schema.
-- Link to v1: https://lore.kernel.org/r/20260822-ti-tps6586x-v1-1-93cb46b32b27@gmail.com
-
----
-Bhargav Joshi (2):
-      regulator: dt-bindings: nvidia,tegra-regulators-coupling: Convert to DT schema
-      regulator: dt-bindings: Reference Tegra regulator coupling schema
-
- .../devicetree/bindings/mfd/ti,tps65910.yaml       | 12 +++-
- .../regulator/maxim,max77620-regulator.yaml        |  5 +-
  .../regulator/nvidia,tegra-regulators-coupling.txt | 65 ----------------------
  .../nvidia,tegra-regulators-coupling.yaml          | 38 +++++++++++++
- .../devicetree/bindings/regulator/ti,tps62360.yaml |  1 +
- 5 files changed, 52 insertions(+), 69 deletions(-)
----
-base-commit: 05a3330f490cfa266831c0fc7f8c6df942866d59
-change-id: 20260821-ti-tps6586x-b54e7111917c
+ 2 files changed, 38 insertions(+), 65 deletions(-)
 
-Best regards,
+diff --git a/Documentation/devicetree/bindings/regulator/nvidia,tegra-regulators-coupling.txt b/Documentation/devicetree/bindings/regulator/nvidia,tegra-regulators-coupling.txt
+deleted file mode 100644
+index 4bf2dbf7c6cc0..0000000000000
+--- a/Documentation/devicetree/bindings/regulator/nvidia,tegra-regulators-coupling.txt
++++ /dev/null
+@@ -1,65 +0,0 @@
+-NVIDIA Tegra Regulators Coupling
+-================================
+-
+-NVIDIA Tegra SoC's have a mandatory voltage-coupling between regulators.
+-Thus on Tegra20 there are 3 coupled regulators and on NVIDIA Tegra30
+-there are 2.
+-
+-Tegra20 voltage coupling
+-------------------------
+-
+-On Tegra20 SoC's there are 3 coupled regulators: CORE, RTC and CPU.
+-The CORE and RTC voltages shall be in a range of 170mV from each other
+-and they both shall be higher than the CPU voltage by at least 120mV.
+-
+-Tegra30 voltage coupling
+-------------------------
+-
+-On Tegra30 SoC's there are 2 coupled regulators: CORE and CPU. The CORE
+-and CPU voltages shall be in a range of 300mV from each other and CORE
+-voltage shall be higher than the CPU by N mV, where N depends on the CPU
+-voltage.
+-
+-Required properties:
+-- nvidia,tegra-core-regulator: Boolean property that designates regulator
+-  as the "Core domain" voltage regulator.
+-- nvidia,tegra-rtc-regulator: Boolean property that designates regulator
+-  as the "RTC domain" voltage regulator.
+-- nvidia,tegra-cpu-regulator: Boolean property that designates regulator
+-  as the "CPU domain" voltage regulator.
+-
+-Example:
+-
+-	pmic {
+-		regulators {
+-			core_vdd_reg: core {
+-				regulator-name = "vdd_core";
+-				regulator-min-microvolt = <950000>;
+-				regulator-max-microvolt = <1300000>;
+-				regulator-coupled-with = <&rtc_vdd_reg &cpu_vdd_reg>;
+-				regulator-coupled-max-spread = <170000 550000>;
+-
+-				nvidia,tegra-core-regulator;
+-			};
+-
+-			rtc_vdd_reg: rtc {
+-				regulator-name = "vdd_rtc";
+-				regulator-min-microvolt = <950000>;
+-				regulator-max-microvolt = <1300000>;
+-				regulator-coupled-with = <&core_vdd_reg &cpu_vdd_reg>;
+-				regulator-coupled-max-spread = <170000 550000>;
+-
+-				nvidia,tegra-rtc-regulator;
+-			};
+-
+-			cpu_vdd_reg: cpu {
+-				regulator-name = "vdd_cpu";
+-				regulator-min-microvolt = <750000>;
+-				regulator-max-microvolt = <1125000>;
+-				regulator-coupled-with = <&core_vdd_reg &rtc_vdd_reg>;
+-				regulator-coupled-max-spread = <550000 550000>;
+-
+-				nvidia,tegra-cpu-regulator;
+-			};
+-		};
+-	};
+diff --git a/Documentation/devicetree/bindings/regulator/nvidia,tegra-regulators-coupling.yaml b/Documentation/devicetree/bindings/regulator/nvidia,tegra-regulators-coupling.yaml
+new file mode 100644
+index 0000000000000..f5637a5772137
+--- /dev/null
++++ b/Documentation/devicetree/bindings/regulator/nvidia,tegra-regulators-coupling.yaml
+@@ -0,0 +1,38 @@
++# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/regulator/nvidia,tegra-regulators-coupling.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: NVIDIA Tegra Regulators Coupling
++
++description: >
++  NVIDIA Tegra SoC's have a mandatory voltage-coupling between regulators. Thus
++  on Tegra20 there are 3 coupled regulators and on NVIDIA Tegra30 there are 2.
++
++  On Tegra20 SoC's - there are 3 coupled regulators:CORE, RTC and CPU. The CORE
++  and RTC voltages shall be in a range of 170mV from each other and they both
++  shall be higher than the CPU voltage by at least 120mV.
++
++  On Tegra30 SoC's - there are 2 coupled regulators:CORE and CPU. The CORE and
++  CPU voltages shall be in a range of 300mV from each other and CORE voltage
++  shall be higher than the CPU by N mV, where N depends on the CPU voltage.
++
++maintainers:
++  - Dmitry Osipenko <digetx@gmail.com>
++  - Thierry Reding <treding@nvidia.com>
++
++properties:
++  nvidia,tegra-core-regulator:
++    description: designates regulator as the "Core domain" voltage regulator.
++    type: boolean
++
++  nvidia,tegra-rtc-regulator:
++    description: designates regulator as the "RTC domain" voltage regulator.
++    type: boolean
++
++  nvidia,tegra-cpu-regulator:
++    description: designates regulator as the "CPU domain" voltage regulator.
++    type: boolean
++
++additionalProperties: true
+
 -- 
-Bhargav
+2.55.0
 
