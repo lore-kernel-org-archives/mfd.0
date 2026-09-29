@@ -1,77 +1,69 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 635E6438010;
-	Tue, 29 Sep 2026 10:16:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BFCBD4ED1A1;
+	Tue, 29 Sep 2026 10:19:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790677006; cv=none; b=HIVk1RJgraex9Hc7BIsPBixdJ8jkeLHZMxnekjV65mB5D3uZFnVYwJh6RuVWUd0zcocknWjBmutnA2V2GQLtw5LcJZ+iza03N6Mlbd5/hnwvwZAYFr0DGhw+ktNmfwPZnpHSg8AyhYFbPVrNkLvK2X6aYaXTiY3uTMJYP4G10cc=
+	t=1790677149; cv=none; b=T7n+2KsjCquDvwQwdzPIzLpjl+V6x/yPIWEx9mkY3V7S1y3OyRoqW2JkS6bvKezfM0t5NBg8zC68oIpr3woVBOROKfMfbqWwZe2pR6lHR1DPqfA9iXUn6LcUYzk9WnmfLBPhrw+08tw0AcQeNbt4DLUQd/Rk22uzh5BOk43Ai9U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790677006; c=relaxed/simple;
-	bh=Z9tLdjmh+/oHeGGd6nqozIari1RMlpQI3JFDPu3/koo=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=cGRVfi2yOIH5QNqolu/xmU3N4rkPXuKUtULb58pv/1m8YdT7s8umSeQsIbBMfVAqv7k9WM0+bYtTsd0Oo9mf8c9jIsYHVNhramdsBN32ndKz+wmhvPBq5ibaft7kbNdrgFLKmpG744CeELO+rUmQuLO/v4CEFj2sOh+6I96n0Uo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZiBzsEHT; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790677149; c=relaxed/simple;
+	bh=4Ty815WRXMLUa/jA8uK1KWIIDg2C5Eefw/FpCCiBNp0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=bSoUSpKFt+v/EL0WinoWtPB+ori4cO3kIlhuRBXyEdIBbHsClGP1T/TZTZFN/r619PUzaOFYbJd08bbsVahcsaoYhRhmUEdnDE6m5mUxwGVQ0Bf8pZZwJ/LLrtJQGsNZbOLUbS4sGly+undbsLsjoLIruhym3BYSxSQgS/9ITCg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SZBp1qng; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZiBzsEHT"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3EF81F000FF;
-	Tue, 29 Sep 2026 10:16:29 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SZBp1qng"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D727C1F000FF;
+	Tue, 29 Sep 2026 10:19:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790676992;
-	bh=nXjyn6rWbF63j0AVpylNhqNswer9m9ma/bfZhH0Gds0=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=ZiBzsEHTKCQVMOd0DsobFyLiTi9xAS07BJqrTMbHiqIxpkFC35Pn1nJmowG7CUPA3
-	 GEwtxz3DSr8NoKPkAq5fQ+1cMxFIYVswriQpq9A1vs01py/ekD/tybyhUS3dPGVAOE
-	 iVRXqko1gc1ZDAURZg+gtndSrdfIPNBRssokkRavYcNz1YBH+4btKy8oKnwaKJ9K+u
-	 IU3GycS5aQllA9F2n6MyI9AJZdjqB6jkmEx2GhIOxSCO6Cj/V2eYtNK54dOIUlr7RP
-	 cSVqyGDxUk6doVQQnL2ZjPk+DUb7Wog5FnycAV7zX6QHIJyAg3VIvSIz33Dq0Q8V4G
-	 Yj/T3qYIi+VzQ==
+	s=k20260515; t=1790677143;
+	bh=woeQLwJ8zy/nxVZgjqm/ZAltmJh8LE7sLrIC8/Tt350=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=SZBp1qngjocFHQgDiYcdRimMUuly/gj9OKiZuPzKVlvIWH4FLxMFj86coU+QnMBT1
+	 zkxqqhAn7Bqif3RFQUJ1SMcOeQVJUj10Pjhbb/pKnO1ozty/6+J4RtYIG0gxP0iIG0
+	 boJcKf8+12/D7yPrkRKqYQtQktbS8JIXAAGa+oydhU9TpW+84XEIhWBk+rRepPaMNz
+	 g9StLQXazmOS5MYSrTm3Uf8Bo6/l1CnrpG1rxT0caFEt2ZrqvKmDZOK97yhCHX0+9c
+	 cbgnYlUeD2bxH4dpI2HVJ91do5NWvziXygfGARSXdrlrkWTn6u8Xu5HGZgz9/tjt5C
+	 2jN+V9koogcxA==
+Date: Tue, 29 Sep 2026 11:18:59 +0100
 From: Lee Jones <lee@kernel.org>
-To: Jernej Skrabec <jernej.skrabec@gmail.com>, Lee Jones <lee@kernel.org>, 
- Arnd Bergmann <arnd@arndb.de>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- James Hilliard <james.hilliard1@gmail.com>
-Cc: Andrew Lunn <andrew@lunn.ch>, 
- "Jagielski, Jedrzej" <jedrzej.jagielski@intel.com>, 
- Andre Przywara <andre.przywara@arm.com>, Chen-Yu Tsai <wens@kernel.org>, 
- linux-sunxi@lists.linux.dev, mfd@lists.linux.dev, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Conor Dooley <conor.dooley@microchip.com>
-In-Reply-To: <20260922-submit-ac200-mfd-v13-0-8832afd2481c@gmail.com>
-References: <20260922-submit-ac200-mfd-v13-0-8832afd2481c@gmail.com>
-Subject: Re: [PATCH v13 0/2] mfd: add X-Powers AC200 support
-Message-Id: <179067698946.2930896.7110252222638220059.b4-ty@b4>
-Date: Tue, 29 Sep 2026 11:16:29 +0100
+To: Quchaosheng <quchaosheng000406@163.com>
+Cc: Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <ukleinek@kernel.org>,
+	devicetree@vger.kernel.org, mfd@lists.linux.dev,
+	linux-pwm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Rob Herring <robh@kernel.org>
+Subject: Re: [PATCH v2] dt-bindings: mfd: convert lp3943 to DT schema
+Message-ID: <20260929101859.GF2112133@google.com>
+References: <20260922061907.56372-1-quchaosheng000406@163.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.16-dev-ad80c
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260922061907.56372-1-quchaosheng000406@163.com>
 
-On Tue, 22 Sep 2026 10:34:33 -0600, James Hilliard wrote:
-> The X-Powers AC200 is an I2C-controlled mixed-signal companion IC with a
-> paged register map shared by its audio, video, RTC and Fast Ethernet PHY
-> functions.
+On Tue, 22 Sep 2026, Quchaosheng wrote:
+
+> Convert the LP3943 MFD binding from free-form text to DT schema.
 > 
-> Add a complete binding and an MFD provider with audio codec and TV encoder
-> cells. Describe the audio DAI, analog supply inputs, TV encoder display
-> graph and optional bandgap calibration in the parent node, without
-> separate function nodes.
+> The LP3943 is an I2C LED driver with two sub-devices, lp3943-gpio and
+> lp3943-pwm. The GPIO sub-device is covered by trivial-gpio.yaml, so only
+> the PWM sub-device gets a schema of its own.
 > 
-> [...]
+> The PWM schema documents ti,pwm0 and ti,pwm1, which select the output pins
+> of the two internal PWM channels and are read by pwm-lp3943.c with
+> of_property_read_u32_array().
+> 
+> Assisted-by: LLM
+> Signed-off-by: Quchaosheng <quchaosheng000406@163.com>
 
-Applied, thanks!
+You should use your full name for sign-offs.
 
-[1/2] dt-bindings: mfd: x-powers: Add AC200
-      commit: 687e666eeb2039f8720e27469d4b05b24eb4650b
-[2/2] mfd: ac200: Add X-Powers AC200 support
-      commit: 1d53aa3f574b77525a39c5d9c5a32882c6f699e7
+> Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
 
---
-Lee Jones [李琼斯]
-
+-- 
+Lee Jones
