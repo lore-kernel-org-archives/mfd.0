@@ -1,69 +1,347 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B689623ED60;
-	Tue, 29 Sep 2026 20:57:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1DD7369D5E
+	for <mfd@lists.linux.dev>; Wed, 30 Sep 2026 02:39:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.3
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790715456; cv=none; b=RmXNCfB8rPQIlh7MOP6f2YnZ2oEVAf0ymiRk57wYw5kRKwwyWzrDgOtMe105CHMfeOdGSWTh5VU55rb+KkGp1NZe7vcNbVP/nI12awPa/ANQtVqKB3ESDtdQYN6pzaXzTZ9wMAsS1Sk3U3mUNUhDkbM4W3kp7vd4Bqpvmf4Yj+U=
+	t=1790735981; cv=none; b=aPC0cErWfHoc4TUvoL0zDWELfmPDiCpjxBMSwm76eiFacsVAnya+WaPp1r0i0urGnHnnpbX/dsXzxEnUcI09xyQBDheLl38VcJ/7q9fXr/KD3Zt8RVFvOE8sO3vKSM9u6hJbAqhxkGn1Ouh2sjGxRjY+Oe1kqgS5n88pWaMUDOQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790715456; c=relaxed/simple;
-	bh=XR9On9yvlHrImub+7YcvPid98eHqiR9sjTTAKIJVVHo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=BQByTUo0hLwVNfYzDdjs+IJKFOK2xQppMqermn7Pbq7jRAlmpmQ82gY2rWSb4RMOAAW6U5eoAHwPhjM9IciOnGsfRcD1+WxF0Hh/ovF+61y5D6PSkKsLarXKIu0pcphEx0+SA0R0TDsVea7FVO5irmEfU4ZxQPZRbiSeT4t2SHw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eteCmMnl; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790735981; c=relaxed/simple;
+	bh=qDaZRO6Fbtq7pOrfZV+wp82DfniymbDqYaMQtKpQtB0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=VdtGw7Q05yaHxdK/sBP9VEaPnq9Wwxg0d35tSYyE6gBCqfj+QNJ0NI/k+yQwVWNe/Z26KwLpzKupr4CWq4bJGY7Vl5SuIT1dp2Djz1ZJLweX9v7bd8uRaB/xdzsCLqa41XV/CY+VA5pjWH6oAcxwyWNZSb/gzwIYcLuRw0T+AT8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=bGPRXnc4; arc=none smtp.client-ip=220.197.31.3
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eteCmMnl"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9C8F1F000FF;
-	Tue, 29 Sep 2026 20:57:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790715455;
-	bh=RdMYl/+FBs8+3dkIXmXG7fNOAukH2HxnfzLbOI0h0VU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=eteCmMnlmav3BV9VmIipEBehbu9MTFpWU7S6rlw/JRia+9yinMtesCNa1FJszhQBo
-	 9pIx9UwUPunvTDbQ3BMZ5HNOAm+FM8LDRAbDFUr3kZGlCt4stWQ92tAHor65iXCROs
-	 qF0XX+QQeO+JiSI7RDe4AKaTwyYk2c5YHhPMrqfL92pGtmZdeaUgG/1+R1Rr4+WB04
-	 zWr8ude4al162lAbvao9A9DnQeghEK66UGovrYWmDYyFFmx4iSiD0rYb+3R455grRn
-	 2VQ6ETuT9fth/ejrYazTM1W+EG44QopZ0ZzqJVBbDgkYSGICfwT0ULnyqDIT5Wqmjn
-	 5zFG7HfbqSx5g==
-Date: Tue, 29 Sep 2026 22:57:31 +0200
-From: Andi Shyti <andi.shyti@kernel.org>
-To: Jisheng Zhang <jszhang@kernel.org>
-Cc: Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
-	Jerome Brunet <jbrunet+clk@baylibre.com>, Alexandre Belloni <alexandre.belloni@bootlin.com>, 
-	Frank Li <Frank.Li@nxp.com>, Lee Jones <lee@kernel.org>, Linus Walleij <linusw@kernel.org>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Philipp Zabel <p.zabel@pengutronix.de>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Jiri Slaby <jirislaby@kernel.org>, Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-clk@vger.kernel.org, 
-	linux-i2c@vger.kernel.org, linux-i3c@lists.infradead.org, mfd@lists.linux.dev, 
-	linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org, linux-spi@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org
-Subject: Re: [PATCH 02/20] dt-bindings: i2c: dw: Add Synaptics sl261x i2c
-Message-ID: <arwmKWR0GD3RVr75@zenone.zhora.eu>
-References: <20260929061417.20733-1-jszhang@kernel.org>
- <20260929061417.20733-3-jszhang@kernel.org>
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="bGPRXnc4"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=Mm
+	T2xbsRvOqcJ/C8k2zXlWpYuCrCMICQHUtG2mPInws=; b=bGPRXnc4qIa8Ddhd7h
+	GEhU34RAyXZRIU4VfyWYNz9btO4p6DHjzvEQHPNtqB87hO7ZThLVRdE2rdg2B+RJ
+	SxWiEN5cnbDNUJblfRD79jU5JNqPY+mP46a+B5stCmMkK+hDhTCYjZx/g/K/Si4/
+	lGUVc5OwauyR9NZPHmV5FPWyQ=
+Received: from chaosheng-ASUS-TUF-Gaming-F16-FX607JV-FX607JV.lan (unknown [])
+	by gzsmtp3 (Coremail) with SMTP id PigvCgDXv95bdrxq3COaCA--.37743S2;
+	Wed, 30 Sep 2026 10:39:24 +0800 (CST)
+From: Chaosheng Qu <quchaosheng000406@163.com>
+To: Lee Jones <lee@kernel.org>,
+	=?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <ukleinek@kernel.org>
+Cc: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	devicetree@vger.kernel.org,
+	mfd@lists.linux.dev,
+	linux-pwm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v3] dt-bindings: mfd: convert lp3943 to DT schema
+Date: Wed, 30 Sep 2026 10:39:23 +0800
+Message-ID: <20260930023923.49917-1-quchaosheng000406@163.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260929061417.20733-3-jszhang@kernel.org>
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:PigvCgDXv95bdrxq3COaCA--.37743S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxuFWkAFy3Kry3tryxAF18Xwb_yoWxKr1Upa
+	4kC34xtF1IqF13Kw4Iga18ZF13Wrn7A3W8KF17tr1jga95G3Zxtr13Kr90v3WfGFWxWay7
+	XF1a9r1rtw4kAw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UDwIgUUUUU=
+X-CM-SenderInfo: xtxfxtprvkv0bjqqikiqw6il2tof0z/xtbC5B1+82q8dl3yswAA3I
 
-Hi Jisheng,
+Convert the LP3943 MFD binding from free-form text to DT schema.
 
-On Tue, Sep 29, 2026 at 02:13:59PM +0800, Jisheng Zhang wrote:
-> Add the compatible for the Synaptics SL261X SoC I2C controllers, which
-> are compatible with the Synopsys DesignWare I2C.
-> 
-> Signed-off-by: Jisheng Zhang <jszhang@kernel.org>
+The LP3943 is an I2C LED driver with two sub-devices, lp3943-gpio and
+lp3943-pwm. The GPIO sub-device is covered by trivial-gpio.yaml, so only
+the PWM sub-device gets a schema of its own.
 
-Acked-by: Andi Shyti <andi.shyti@kernel.org>
+The PWM schema documents ti,pwm0 and ti,pwm1, which select the output pins
+of the two internal PWM channels and are read by pwm-lp3943.c with
+of_property_read_u32_array().
 
-Thanks,
-Andi
+Assisted-by: LLM
+Signed-off-by: Chaosheng Qu <quchaosheng000406@163.com>
+Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
+
+---
+
+v3:
+ - Use the full name in From: and Signed-off-by:, as requested. No content
+   change; the Reviewed-by from v1 is carried over.
+
+v2:
+ - Add Assisted-by and the Reviewed-by tag received on v1. No content change.
+---
+ .../devicetree/bindings/mfd/lp3943.txt        | 33 --------
+ .../devicetree/bindings/mfd/ti,lp3943.yaml    | 64 +++++++++++++++
+ .../devicetree/bindings/pwm/pwm-lp3943.txt    | 58 --------------
+ .../devicetree/bindings/pwm/pwm-lp3943.yaml   | 80 +++++++++++++++++++
+ 4 files changed, 144 insertions(+), 91 deletions(-)
+ delete mode 100644 Documentation/devicetree/bindings/mfd/lp3943.txt
+ create mode 100644 Documentation/devicetree/bindings/mfd/ti,lp3943.yaml
+ delete mode 100644 Documentation/devicetree/bindings/pwm/pwm-lp3943.txt
+ create mode 100644 Documentation/devicetree/bindings/pwm/pwm-lp3943.yaml
+
+diff --git a/Documentation/devicetree/bindings/mfd/lp3943.txt b/Documentation/devicetree/bindings/mfd/lp3943.txt
+deleted file mode 100644
+index ca5324ed0..000000000
+--- a/Documentation/devicetree/bindings/mfd/lp3943.txt
++++ /dev/null
+@@ -1,33 +0,0 @@
+-TI/National Semiconductor LP3943 MFD driver
+-
+-Required properties:
+-  - compatible: "ti,lp3943"
+-  - reg: I2C slave address. From 0x60 to 0x67.
+-
+-LP3943 consists of two sub-devices, lp3943-gpio and lp3943-pwm.
+-
+-For the LP3943 GPIO properties please refer to:
+-Documentation/devicetree/bindings/gpio/trivial-gpio.yaml
+-
+-For the LP3943 PWM properties please refer to:
+-Documentation/devicetree/bindings/pwm/pwm-lp3943.txt
+-
+-Example:
+-
+-lp3943@60 {
+-	compatible = "ti,lp3943";
+-	reg = <0x60>;
+-
+-	gpioex: gpio {
+-		compatible = "ti,lp3943-gpio";
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-	};
+-
+-	pwm3943: pwm {
+-		compatible = "ti,lp3943-pwm";
+-		#pwm-cells = <2>;
+-		ti,pwm0 = <8 9 10>;
+-		ti,pwm1 = <15>;
+-	};
+-};
+diff --git a/Documentation/devicetree/bindings/mfd/ti,lp3943.yaml b/Documentation/devicetree/bindings/mfd/ti,lp3943.yaml
+new file mode 100644
+index 000000000..eff32b05c
+--- /dev/null
++++ b/Documentation/devicetree/bindings/mfd/ti,lp3943.yaml
+@@ -0,0 +1,64 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/mfd/ti,lp3943.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: TI/National Semiconductor LP3943 MFD driver
++
++maintainers:
++  - Chaosheng Qu <quchaosheng000406@163.com>
++
++description:
++  LP3943 is an integrated device capable of driving LEDs. It contains two
++  sub-devices, lp3943-gpio and lp3943-pwm, which are instantiated by the MFD
++  core from the child nodes described below.
++
++properties:
++  compatible:
++    const: ti,lp3943
++
++  reg:
++    maxItems: 1
++    description: I2C slave address, from 0x60 to 0x67
++
++patternProperties:
++  "^gpio":
++    type: object
++    $ref: /schemas/gpio/trivial-gpio.yaml#
++
++  "^pwm":
++    type: object
++    $ref: /schemas/pwm/pwm-lp3943.yaml#
++
++required:
++  - compatible
++  - reg
++
++additionalProperties: false
++
++examples:
++  - |
++    i2c {
++        #address-cells = <1>;
++        #size-cells = <0>;
++
++        lp3943: gpio@60 {
++            compatible = "ti,lp3943";
++            reg = <0x60>;
++
++            gpio {
++                compatible = "ti,lp3943-gpio";
++                gpio-controller;
++                #gpio-cells = <2>;
++            };
++
++            pwm {
++                compatible = "ti,lp3943-pwm";
++                #pwm-cells = <2>;
++                ti,pwm0 = <8 9 10>;
++                ti,pwm1 = <15>;
++            };
++        };
++    };
++...
+diff --git a/Documentation/devicetree/bindings/pwm/pwm-lp3943.txt b/Documentation/devicetree/bindings/pwm/pwm-lp3943.txt
+deleted file mode 100644
+index f214305a8..000000000
+--- a/Documentation/devicetree/bindings/pwm/pwm-lp3943.txt
++++ /dev/null
+@@ -1,58 +0,0 @@
+-TI/National Semiconductor LP3943 PWM controller
+-
+-Required properties:
+-  - compatible: "ti,lp3943-pwm"
+-  - #pwm-cells: Should be 2. See pwm.yaml in this directory for a
+-                description of the cells format.
+-                Note that this hardware limits the period length to the
+-                range 6250~1600000.
+-  - ti,pwm0 or ti,pwm1: Output pin number(s) for PWM channel 0 or 1.
+-    0 = output 0
+-    1 = output 1
+-    .
+-    .
+-    15 = output 15
+-
+-Example:
+-PWM 0 is for RGB LED brightness control
+-PWM 1 is for brightness control of LP8557 backlight device
+-
+-&i2c3 {
+-	lp3943@60 {
+-		compatible = "ti,lp3943";
+-		reg = <0x60>;
+-
+-		/*
+-		 * PWM 0 : output 8, 9 and 10
+-		 * PWM 1 : output 15
+-		 */
+-		pwm3943: pwm {
+-			compatible = "ti,lp3943-pwm";
+-			#pwm-cells = <2>;
+-			ti,pwm0 = <8 9 10>;
+-			ti,pwm1 = <15>;
+-		};
+-	};
+-
+-};
+-
+-/* LEDs control with PWM 0 of LP3943 */
+-pwmleds {
+-	compatible = "pwm-leds";
+-	rgb {
+-		label = "indi::rgb";
+-		pwms = <&pwm3943 0 10000>;
+-		max-brightness = <255>;
+-	};
+-};
+-
+-&i2c4 {
+-	/* Backlight control with PWM 1 of LP3943 */
+-	backlight@2c {
+-		compatible = "ti,lp8557";
+-		reg = <0x2c>;
+-
+-		pwms = <&pwm3943 1 10000>;
+-		pwm-names = "lp8557";
+-	};
+-};
+diff --git a/Documentation/devicetree/bindings/pwm/pwm-lp3943.yaml b/Documentation/devicetree/bindings/pwm/pwm-lp3943.yaml
+new file mode 100644
+index 000000000..3da5cd4b2
+--- /dev/null
++++ b/Documentation/devicetree/bindings/pwm/pwm-lp3943.yaml
+@@ -0,0 +1,80 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/pwm/pwm-lp3943.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: TI/National Semiconductor LP3943 PWM controller
++
++maintainers:
++  - Chaosheng Qu <quchaosheng000406@163.com>
++
++description:
++  LP3943 has two internal PWM channels. Each channel can be routed to one or
++  more of the 16 outputs of the device.
++
++  Note that the hardware limits the period length to the range 6250~1600000.
++
++allOf:
++  - $ref: pwm.yaml#
++
++properties:
++  compatible:
++    const: ti,lp3943-pwm
++
++  "#pwm-cells":
++    const: 2
++
++  ti,pwm0:
++    description: Output pin number(s) for PWM channel 0.
++    $ref: /schemas/types.yaml#/definitions/uint32-array
++    minItems: 1
++    maxItems: 16
++    items:
++      minimum: 0
++      maximum: 15
++
++  ti,pwm1:
++    description: Output pin number(s) for PWM channel 1.
++    $ref: /schemas/types.yaml#/definitions/uint32-array
++    minItems: 1
++    maxItems: 16
++    items:
++      minimum: 0
++      maximum: 15
++
++anyOf:
++  - required:
++      - ti,pwm0
++  - required:
++      - ti,pwm1
++
++required:
++  - compatible
++  - "#pwm-cells"
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    i2c {
++        #address-cells = <1>;
++        #size-cells = <0>;
++
++        gpio@60 {
++            compatible = "ti,lp3943";
++            reg = <0x60>;
++
++            /*
++             * PWM 0 : output 8, 9 and 10
++             * PWM 1 : output 15
++             */
++            pwm {
++                compatible = "ti,lp3943-pwm";
++                #pwm-cells = <2>;
++                ti,pwm0 = <8 9 10>;
++                ti,pwm1 = <15>;
++            };
++        };
++    };
++...
+
