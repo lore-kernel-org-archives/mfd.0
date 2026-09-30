@@ -1,109 +1,86 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41B644DE725;
-	Wed, 30 Sep 2026 14:38:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BFA57331EA4
+	for <mfd@lists.linux.dev>; Wed, 30 Sep 2026 14:41:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.84.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790779146; cv=none; b=Vk7ehMfigsxWvUKXXHh8QJMmc+tD4LaRXjc1Qn2hDt35gCNmDvzDgpb0F5QbpehXthuXx2MSoLx5dG/V7FFmypGuPGZuRfDCBAlU7ydEtgDLiAgsSsWwDWhsOMqbktT3t32zG1sDLeGRje1mNZ5wN+nONWL3h0S/kjOAluICb6c=
+	t=1790779300; cv=none; b=iSY0MDgAX82hrEuGNQReUk1ZdLmsiwfvff31YMCfE8d3554nqLJ6z8Nu4ZE9EldkEAeC/fNDjY0GkS1WdacP+vdtupjupdHD6cCjIC4y3sStN3hFkLkrHApTk+rOCiBUG1Jv43pgl55jje0gKyNDCKKQVM8sY9WOqAqhBDdhqsM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790779146; c=relaxed/simple;
-	bh=FuPPtGSHFU0HSyuu2mNWhA12dsfnCAWFjA6NZfdDpsU=;
+	s=arc-20240116; t=1790779300; c=relaxed/simple;
+	bh=9yqRRq23NwVKIqoGsC2Ia1qOKcGglHeQVUA6Im/RXrQ=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=LZuVhYue/G9T2YV46FGptKd/nkur72XzbNFfwT7pG/JuFV1YzrfZyJY4zCjge2Vdi32R1vBbDpDQA8x+6/W71GFvp9AGov9lGErwXIoiq98/vEGGVzDE4FZ+g50ahNwXoEG86tn3vUwWzjj6jpyaSyfEnmsvHf1SiKTSryy8EsA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mFAEBntT; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=Hslq3NdV1uPtEF18FnETFyPzsCfPIvcmPfgdw9FtWkaB1i18l4IBEPG5W//MAFWVZxVjgtCrH1U2zXhIvI5q8vgeX+szma0YpKcRUox2D2T/90ZytZevkuB2H4Zsg3ibN0AuJHVlWAWMosSd0DRoekXg6d6RynAz++tDESsTgBk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=ChSwMplb; arc=none smtp.client-ip=185.246.84.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mFAEBntT"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 20BAF1F00893;
-	Wed, 30 Sep 2026 14:38:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790779135;
-	bh=TLwqX0Jc4SEY+5d3H8Hlwyk9JbAaEYoiaByM1n6xaJQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=mFAEBntTWqsr9f+bZRPYoG8BMt2qUA16+CcPbet1ElNVDfz3duvMY1eTbRrBlpjaN
-	 cIon7vOp8BIBORn0wJUIWhj/PltI4gtxG8eVMwGsGdnFsiM1OZ9yBSyUxYUCrwRsTR
-	 L83NVeDeG/UuRlwckROIJvRhDJpenFVA2LR4r4OZ6e++EdeFVrohpm7StyCGVNDzLz
-	 czTL6ARYUk2MMhcoCzNQaPEsRgTGnwE4aTTjFOXXBs4rAv+XwTwnmbwd62P2bA3Vrs
-	 CpcI/r7ObWshXlQWe/q5qyYVT4HbL9j2Lo35umLnU0a1yzP3NPB7mv79ZGQYm/fKXL
-	 /HYh7QMDms0pw==
-Date: Wed, 30 Sep 2026 22:18:53 +0800
-From: Jisheng Zhang <jszhang@kernel.org>
-To: "Rob Herring (Arm)" <robh@kernel.org>
-Cc: linux-clk@vger.kernel.org, Mark Brown <broonie@kernel.org>,
-	linux-gpio@vger.kernel.org, Frank Li <Frank.Li@nxp.com>,
-	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Andi Shyti <andi.shyti@kernel.org>,
-	Philipp Zabel <p.zabel@pengutronix.de>, Lee Jones <lee@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>, devicetree@vger.kernel.org,
-	mfd@lists.linux.dev, Jerome Brunet <jbrunet+clk@baylibre.com>,
-	linux-spi@vger.kernel.org, Conor Dooley <conor+dt@kernel.org>,
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="ChSwMplb"
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 588461A1088;
+	Wed, 30 Sep 2026 14:41:21 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 1CCA560749;
+	Wed, 30 Sep 2026 14:41:21 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id D218010329695;
+	Wed, 30 Sep 2026 16:41:10 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1790779275; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 in-reply-to:references; bh=LGRPZRz2qsm3tuIDtA+8pDXAURoo45DF4vA0Hjc0ty8=;
+	b=ChSwMplbOA0jh3gZRg4sJXIc8pzoN66mFNZ0kTsmkGRvNO/y6gvWRNwa9PPGfzNghnossC
+	pHKvP+x5xNBkKWdpIszb8m75hgWfXzOeKfDPDyliKrKbAyHVacH9CX5ltVwmW8d7ht6PQ3
+	UzoHbe6ezxJV1E70LqTwBFYKmA2uV+vAQ8iAXmaIk19DZgavzQ111pgluC4by43U1bfCsu
+	UF/jZ4l75Jtja7QIvaHUx+5GCl2PgIk/vXvp7LajrB/bpUu+LOWEF/Zt5Cme+Gf+DMYoUc
+	CYbfpGgWM3veDFYJHrsDbSELrtmt25eg5PnvPIfKZzQ4n2yJo1PHiJX77s4zFQ==
+Date: Wed, 30 Sep 2026 16:41:10 +0200
+From: Alexandre Belloni <alexandre.belloni@bootlin.com>
+To: Sen Chu <sen.chu@mediatek.com>, Sean Wang <sean.wang@mediatek.com>,
+	Macpaul Lin <macpaul.lin@mediatek.com>, Lee Jones <lee@kernel.org>,
+	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-	linux-serial@vger.kernel.org, Linus Walleij <linusw@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Jiri Slaby <jirislaby@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-	linux-i3c@lists.infradead.org, linux-i2c@vger.kernel.org
-Subject: Re: [PATCH 15/20] dt-bindings: clock: add Synaptics SL261X clock
-Message-ID: <ar0aTV1GTWjMN4v_@xhacker>
-References: <20260929061417.20733-1-jszhang@kernel.org>
- <20260929061417.20733-16-jszhang@kernel.org>
- <179071488985.2683003.6376725914058156145.robh@kernel.org>
+	Conor Dooley <conor+dt@kernel.org>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Eddie Huang <eddie.huang@mediatek.com>,
+	Ryan Brue <ryanbrue.dev@gmail.com>
+Cc: linux-pm@vger.kernel.org, mfd@lists.linux.dev,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-mediatek@lists.infradead.org, linux-rtc@vger.kernel.org
+Subject: Re: [PATCH 0/2] rtc: mt6397: expose the RTC's spare bytes as nvmem
+Message-ID: <179077924632.411665.17496276815862670542.b4-ty@b4>
+References: <20260917-rbrue-suez-upstreaming-mt6397-rtc-nvmem-v1-0-558b8f95cfbc@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <179071488985.2683003.6376725914058156145.robh@kernel.org>
+In-Reply-To: <20260917-rbrue-suez-upstreaming-mt6397-rtc-nvmem-v1-0-558b8f95cfbc@gmail.com>
+X-Last-TLS-Session-Version: TLSv1.3
 
-On Tue, Sep 29, 2026 at 03:49:57PM -0500, Rob Herring (Arm) wrote:
+On Thu, 17 Sep 2026 23:57:45 -0500, Ryan Brue wrote:
+> Four of the MT6397 RTC's alarm registers use only their low bits. Each alarm
+> field lives in the low byte of its own register and the driver masks its
+> writes accordingly, so the high byte of four of them is storage the clock and
+> the alarm never touch. MediaTek's documentation names them RTC_NEW_SPARE0 to
+> RTC_NEW_SPARE3 and assigns the first to a fuel gauge, which is how its PMIC
+> battery drivers carry a state of charge across a reboot.
 > 
-> On Tue, 29 Sep 2026 14:14:12 +0800, Jisheng Zhang wrote:
-> > Add support for clocks, plls in Synaptics SL261X SoCs.
-> > 
-> > Signed-off-by: Jisheng Zhang <jszhang@kernel.org>
-> > ---
-> >  .../bindings/clock/syna,sl261x-clk.yaml       |  92 ++++++++++++
-> >  include/dt-bindings/clock/syna,sl261x.h       | 131 ++++++++++++++++++
-> >  2 files changed, 223 insertions(+)
-> >  create mode 100644 Documentation/devicetree/bindings/clock/syna,sl261x-clk.yaml
-> >  create mode 100644 include/dt-bindings/clock/syna,sl261x.h
-> > 
-> 
-> My bot found errors running 'make dt_binding_check' on your patch:
-> 
-> yamllint warnings/errors:
-> 
-> dtschema/dtc warnings/errors:
-> Documentation/devicetree/bindings/clock/syna,sl261x-clk.example.dtb: syscon@f7e10000 (syscon): compatible: ['syscon', 'simple-mfd'] is too short
-> 	from schema $id: http://devicetree.org/schemas/mfd/syscon-common.yaml
-> Documentation/devicetree/bindings/clock/syna,sl261x-clk.example.dtb: cpu-wrap@f7e30000 (syscon): compatible: ['syscon', 'simple-mfd'] is too short
-> 	from schema $id: http://devicetree.org/schemas/mfd/syscon-common.yaml
-> 
-> doc reference errors (make refcheckdocs):
+> [...]
 
-oops, I missed this dt example dt_binding_check, or in details -- I forget
-to update the example after fixing the soc dtsi syscon nodes. In newer
-version, I will move synaptics chip global block binding patch earlier
-and update the example
+Applied, thanks!
 
-> 
-> See https://patchwork.kernel.org/project/devicetree/patch/20260929061417.20733-16-jszhang@kernel.org
-> 
-> The base for the series is generally the latest rc1. A different dependency
-> should be noted in *this* patch.
-> 
-> If you already ran 'make dt_binding_check' and didn't see the above
-> error(s), then make sure 'yamllint' is installed and dt-schema is up to
-> date:
-> 
-> pip3 install dtschema --upgrade
-> 
-> Please check and re-submit after running the above command yourself. Note
-> that DT_SCHEMA_FILES can be set to your schema file to speed up checking
-> your schema. However, it must be unset to test all examples with your schema.
-> 
+[1/2] dt-bindings: mfd: mediatek: mt6397: describe the RTC's nvmem layout
+      https://git.kernel.org/abelloni/c/8423c476ab2a
+[2/2] rtc: mt6397: expose the spare bytes of the alarm registers as nvmem
+      https://git.kernel.org/abelloni/c/1aaaf94a61ee
+
+Best regards,
+
+-- 
+Alexandre Belloni, co-owner and COO, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
