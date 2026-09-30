@@ -1,64 +1,64 @@
-Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+Received: from mail-wr2-f42.google.com (mail-wr2-f42.google.com [74.125.225.106])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D509A45C719
-	for <mfd@lists.linux.dev>; Wed, 30 Sep 2026 07:15:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8FDE451980
+	for <mfd@lists.linux.dev>; Wed, 30 Sep 2026 07:15:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.106
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790752537; cv=none; b=r1u0Fscjl5xBC81F0qpvz7WCWw0kdhtdo+/v4Uw+kKZan6QqgFm5GCMZrsaVUsbkzHZxxcdzJK4VfxBQ9nX69e+Uhm9+pkYKPtp2QeQhqY3cL5Psl3SFs5bLVmDUoTtvUqwCiucERiKcOaULE+thiQmwIznk+/DTNJ3AwfljGDc=
+	t=1790752538; cv=none; b=es/ddJ+azwifVuyHQj1A4CohRGctR+AWtX4d73iEBVuoc6K/KOLNi9hnFuJup7oCLB0FPQrOQ+B5ZMZgG/zd/OxJ1BIQXRjGAcIdGOkhKT3FRBEFjewgpm0U5U7iv7rySZ4XvGH4whSncxFF/Wsmszxyc1rnCxlGggsV/8QkHGo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790752537; c=relaxed/simple;
-	bh=ownnF2eA8yjuB5F7r+YjnScn5LX/aUHmRE+jgVipf6Q=;
+	s=arc-20240116; t=1790752538; c=relaxed/simple;
+	bh=Uv8673BXW487YhAql7BVA6vApReuaTTxPWI2C9lkqJM=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=PlPaZQA1OL6Sia+5zkyR3fpW5Ck+IAJ2V3J5ATyaEw/z3Dhxry2Pep6UVnMxAnVk1keSRf62bR9QuJq16W3t5YYZrgSLZhSiCBbgQ9/ehP0DU5bFZ+8QDnAfmoWVegBeQNnPuUg7GD0TJO/r3xMX3KMc3fRAqjLgmYyHrqfZy8g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NQd1mAdZ; arc=none smtp.client-ip=74.125.225.140
+	 MIME-Version; b=srkuNp1+fMEF2wWDAX+edhLOaGp1wHr7elnFoK9+vtg1/R+3R0hIYlQmv4YGfQJM02WckEWtChE46J6iT4/GpdL5h0DAulfh0VBWI2UnWBcPgnrtj560W3Wg8kI38dGCAesr2xpLVcnHbU/VN0YUDiLKWYRC+10uB2VPw4VDOKE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ShUYTf/m; arc=none smtp.client-ip=74.125.225.106
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NQd1mAdZ"
-Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49ffa15f67fso23058315e9.2
-        for <mfd@lists.linux.dev>; Wed, 30 Sep 2026 00:15:29 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ShUYTf/m"
+Received: by mail-wr2-f42.google.com with SMTP id ffacd0b85a97d-4888598e4f9so3454634f8f.0
+        for <mfd@lists.linux.dev>; Wed, 30 Sep 2026 00:15:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790752525; x=1791357325; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1790752528; x=1791357328; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=bshOoGO6/a2WohdGzsO4t4N/wsEAXwivylUfNFmKjAo=;
-        b=NQd1mAdZ1L50Cudm8JPY8wqenaOt7x6RibjF0R+81/L9uFCF8WGiiWmyvBkqgV/iFX
-         d8K/fB3Wm+Pv9zClnn1Mkvs+SiF+1IP9KcpVEQ1yV4CKL74YiIm3te/Me/GjdPNpPZD5
-         gbPhK9JGoddERdBMBs0en8IWVOYQcdQ0OG/bku6iS/hP2giDdb+hQF3ExDRtSSCahUpk
-         mUWtJtytzUw5s1TfoOpScplG7PJQQRRnPoyggB1VJpFSsMWsvCiMcjpKTomcERkaQcMC
-         CqSZGYVA018sCUYSUyIp4qFa+OCohdD0eluyPhH3vYWxhUhGGBelzIceq/5kGhq7flTo
-         JCMw==
+        bh=91UgRJj2a9cqCekJgIMfhdUvCOQ/1gwR4pNIdWvIxRc=;
+        b=ShUYTf/mK3rSH7jYdQ4dPl1Ndd5z548+EFXoBcifsXiNMm1I+fjTlWCkh/ojFJCq5b
+         JqMxOPeRJutIUXJyGxqHJCNsVcj7cnhDvP2g8kPC24vLl7VxkUw7E42YK7z9PS3WZEDF
+         yQokgSkYFXAbdB61quVTfZyG11M+S1O7GQX5sZ+0PJLjBatJwrIeuVLa0g+3GmRAOM4W
+         L+rrhHVKNWKkTE1o9RRRJUVSFfWnAkk9xZ8oD/+VwNlaC8SWGFm3/SY9dp+93Z9ttub0
+         4V40AQXsNAfWuB2cOg7xpHtTUsKkZQzIt5MQrtn/ubK0OBhBn42sdGi/MZO1cB4tRCJ+
+         lGDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790752525; x=1791357325;
+        d=1e100.net; s=20260707; t=1790752528; x=1791357328;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=bshOoGO6/a2WohdGzsO4t4N/wsEAXwivylUfNFmKjAo=;
-        b=zcf5sIbwPk/nTfnu2zFROJ2kYpl+y2KZXo4TFk0Ry9qIAWYMxuz3vcNOuReL7HUgAB
-         Tb1pkNZq4IJuIFfbPsymrzz9TnOrGUf1zNN2e9L04DH4O0pEYHIxfWmNKfUux7zNDupV
-         4++P84bYR1JItyAX8Tt06/iSonCZHaSpbk7gbBuUXGTg6EdRyH2PH1LWEIQclJ9BUt74
-         N/JBPIpqQAxjCUIxfN71xaY4nQlN1PpvRSdxFZh7Je7I4hEsegdb99PipPUqRf+WRNW1
-         Ya3Cf+q30vHjsnWAWN8/OERjesyCFz3HYgZ6wFBWXNKQ9lDqx0vbYeZu8XpQtPSchEJc
-         /S9w==
-X-Forwarded-Encrypted: i=1; AKwUvBzEEFyAnXFxoNBAp6NpMfmiJztWfPH0+YNpXCcbYP3eeaPuD5oQi+kGuOx6u3zqY9jRog4=@lists.linux.dev
-X-Gm-Message-State: AFuF++k8xeNiGq11FwTtoNLEj1CBgEVjxPjkGVvzgN7AhaQKIIhE0ijn
-	rG8Hx3pcGVvMpLzXBJHU1IyKHQPnkN2rNRrkaTL2ebKR858QHYVvhD8Q
-X-Gm-Gg: AYBFou1XIVCBRgG4jz6xaI0Zg4D3Z+S+Za0PAgmeEnJe/kHIJDxj+jTEfZtuslvWupI
-	j90L/jUeFbkoo42goCrhfwHK5WuozCoZYX89MEUfq7xpYqL2RueZ5cFi5HrFP989ST52mF8mYM1
-	GlNfXHGzClFmHB1M2SBdXwx38CjFzT0/YJ0Haiye3TCp4PWXD2WIG9KcT3DQ1Uk7+6vaxO7oybJ
-	KmYocRklJHOh77aAs5AwgagdwNCMgPv1Jod1d7x4/+m6yE9um2ljdaI3tChMZPzsiTUt6jJJfiX
-	aXWfEfiaDhPs0kmyh4pZQAWDEBhNbgfp9QLc6kkWEztNpSx4EX5BoNzNMeRkjQ1oHcIns8FEhyu
-	taucKVbs+9XUNzMDMdK+JkwBShvB8LZstw8IJQpsTnL46e1PCBRwmJ3BRJLe4OiSPh/kOmcO+lA
-	6eTG89JRjuM/wHryWF98Gn/FTNRPVA1mKsi3hoEYYJvMEHTYb6S61kOTP+ozOs86FRqpAkizKvq
-	9hMLzLQD70OyVqqb2TE3S2HNIZa9X0=
-X-Received: by 2002:a05:600c:1c29:b0:49e:6c11:c4fc with SMTP id 5b1f17b1804b1-4a01aff0d75mr5571755e9.7.1790752525426;
-        Wed, 30 Sep 2026 00:15:25 -0700 (PDT)
+        bh=91UgRJj2a9cqCekJgIMfhdUvCOQ/1gwR4pNIdWvIxRc=;
+        b=lh32OB6VeSd2PGpcc8B+R+6Bbeje9t3mlyabKWLGDrM91RCvQuYtxaYZbRqs3DKMhW
+         mpRjEVxcru0ir+7t6dXlxiG9vZBtBo4P4oyYvWJdO+zgPaWzYmwFkpiW1OAoD9TNaMX2
+         HS6nqYbSeGPcZQ1LAM5wEG/UkJ/dnkUh8ERxfCg1x4OSCH+WSjYBUOx1LuynVtbBnRge
+         WmVoCcyT5+N1UUDaWMY1Bu2Frq9mqEgf6+TtKEBSu79qu9U4wgRyNk69fA43TLTwG3Wv
+         xlAiYVB/hspVW6D0TRIgCi5AcsIx0BFv3RYGYKhdC15YxJ1IWA6E/WvKgtTjARJbvtli
+         XW6w==
+X-Forwarded-Encrypted: i=1; AKwUvBw8bdCvkDRs9y9rPbLXOPSB1ermZqP1UwtNPw9uODoM4apZmhR6JaG+rdNcedCAMNZ1N8g=@lists.linux.dev
+X-Gm-Message-State: AFuF++mLbCg9gPjQL6leKiU5dniRBfW4EN3H5G0KLzyAp9z00wUEkT94
+	8PIUzlJFXZyVh7Hgekt5PFUir9AIQA/4PqgVRV6uAisxIXqIS9PDAxCK
+X-Gm-Gg: AYBFou3YI9CzwRT9evMPWOjKBrWMsPPHvjbhny6BSTgBFCnDSUg4EPEzAw47CKyE8ZT
+	qW488zWeBOmyo1mr7hgJCA8wYwqicr0m1iwgeep5n+A0EVCz3F0rpAAqgQ4lQwqWyQpCamJvW9i
+	zTHplEAuLfQegICGTN/bgkrZMSviTF8aI6ceanGGbcyiFFDeDK8uKXUMZVF2OZ+lnPbl0J/KxWf
+	ChIWiggrWyFEp1/faGfPnuN0+tdYX6as44CBIeWWMXmJ96MvhcC6riu+nZqvUlStW1TLFDtS+uA
+	Am+9d2wsfBoS5llb6DDDdVLA4u1bzW4SNcF8XskaNY+dIAZb5gZhda6Q1ict8sdQT4EKKGZXXBD
+	vKrjgdX+2V7Vla1WEflzqvJ/+wDWpZ4EKnyO9Ai+O5WaSMjhOoJDxQgWl/MfY4OXQLR+7sH7hZ/
+	0XDgcHQar8zJly1NdK7VyNiM+jcDQr+zq/5Rl3C6jQtQsz9hMf9Ifwl+X6WtANrDVPkIkXafkFD
+	drMglTFCCgx+ERt2pE=
+X-Received: by 2002:a05:600c:3b1a:b0:49f:c451:b4ab with SMTP id 5b1f17b1804b1-4a01b12b310mr5780705e9.29.1790752528575;
+        Wed, 30 Sep 2026 00:15:28 -0700 (PDT)
 Received: from xeon ([188.163.112.76])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48b029be7e4sm1256979f8f.12.2026.09.30.00.15.24
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48b029be7e4sm1256979f8f.12.2026.09.30.00.15.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Sep 2026 00:15:24 -0700 (PDT)
+        Wed, 30 Sep 2026 00:15:28 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Lee Jones <lee@kernel.org>,
 	Pavel Machek <pavel@kernel.org>,
@@ -75,9 +75,9 @@ Cc: linux-leds@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	mfd@lists.linux.dev,
 	dri-devel@lists.freedesktop.org
-Subject: [PATCH v1 1/3] dt-bindings: mfd: Document Skyworks AAT2870
-Date: Wed, 30 Sep 2026 10:15:11 +0300
-Message-ID: <20260930071513.54697-2-clamor95@gmail.com>
+Subject: [PATCH v1 3/3] mfd: aat2870: Add support for VIN and IN-LDO power supplies
+Date: Wed, 30 Sep 2026 10:15:13 +0300
+Message-ID: <20260930071513.54697-4-clamor95@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260930071513.54697-1-clamor95@gmail.com>
 References: <20260930071513.54697-1-clamor95@gmail.com>
@@ -89,148 +89,54 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Document Skyworks AAT2870 LED Backlight Driver and Multiple LDO Lighting
-Management Unit.
+The AAT2870 supports a dedicated main power supply input alongside parent
+power supply for its internal regulators.
+
+Add support for retrieving and managing these supply regulators
+(vin-supply and in-ldo-supply) using the regulator framework to ensure
+proper power supply dependencies and power-up sequencing.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- .../bindings/leds/skyworks,aat2870.yaml       | 127 ++++++++++++++++++
- 1 file changed, 127 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/leds/skyworks,aat2870.yaml
+ drivers/mfd/aat2870-core.c            | 5 +++++
+ drivers/regulator/aat2870-regulator.c | 1 +
+ 2 files changed, 6 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/leds/skyworks,aat2870.yaml b/Documentation/devicetree/bindings/leds/skyworks,aat2870.yaml
-new file mode 100644
-index 0000000000000..6dfcd1fa399ca
---- /dev/null
-+++ b/Documentation/devicetree/bindings/leds/skyworks,aat2870.yaml
-@@ -0,0 +1,127 @@
-+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/leds/skyworks,aat2870.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
+diff --git a/drivers/mfd/aat2870-core.c b/drivers/mfd/aat2870-core.c
+index 8f6d7956e79b2..a9a11be373916 100644
+--- a/drivers/mfd/aat2870-core.c
++++ b/drivers/mfd/aat2870-core.c
+@@ -17,6 +17,7 @@
+ #include <linux/mfd/core.h>
+ #include <linux/mfd/aat2870.h>
+ #include <linux/of_platform.h>
++#include <linux/regulator/consumer.h>
+ #include <linux/regulator/machine.h>
+ 
+ struct aat2870_register {
+@@ -309,6 +310,10 @@ static int aat2870_i2c_probe(struct i2c_client *client)
+ 
+ 	aat2870->reg_cache = aat2870_regs;
+ 
++	ret = devm_regulator_get_enable(&client->dev, "vin");
++	if (ret)
++		return dev_err_probe(&client->dev, ret, "Failed to enable regulator\n");
 +
-+title: AAT2870 LED Backlight Driver and Multiple LDO Lighting Management Unit
-+
-+maintainers:
-+  - Svyatoslav Ryhel <clamor95@gmail.com>
-+
-+properties:
-+  compatible:
-+    const: skyworks,aat2870
-+
-+  reg:
-+    maxItems: 1
-+
-+  enable-gpios:
-+    description: GPIO connected to EN pin.
-+    maxItems: 1
-+
-+  vin-supply:
-+    description: Regulator providing power to the "IN" pin.
-+
-+  backlight:
-+    $ref: /schemas/leds/backlight/common.yaml#
-+    unevaluatedProperties: false
-+
-+    properties:
-+      compatible:
-+        const: skyworks,aat2870-backlight
-+
-+      led-max-microamp:
-+        minimum: 450000
-+        maximum: 27900000
-+        default: 450000
-+
-+      max-brightness:
-+        default: 255
-+
-+      skyworks,channels:
-+        description: layout of active channels, where each bit represents
-+          one of 8 channels.
-+        $ref: /schemas/types.yaml#/definitions/uint8
-+        default: 0xff
-+
-+    required:
-+      - compatible
-+
-+  regulators:
-+    type: object
-+    additionalProperties: false
-+
-+    properties:
-+      compatible:
-+        const: skyworks,aat2870-regulator
-+
-+      in-ldo-supply:
-+        description: Phandle to parent supply of regulators populated under
-+          regulators node. They all share same parent.
-+
-+    patternProperties:
-+      "^(ldo-(a|b|c|d))$":
-+        $ref: /schemas/regulator/regulator.yaml#
-+        unevaluatedProperties: false
-+
-+    required:
-+      - compatible
-+
-+required:
-+  - compatible
-+  - reg
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/gpio/gpio.h>
-+
-+    i2c {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        led-controller@60 {
-+            compatible = "skyworks,aat2870";
-+            reg = <0x60>;
-+
-+            enable-gpios = <&gpio 139 GPIO_ACTIVE_HIGH>;
-+            vin-supply = <&vdd_3v3_vbat>;
-+
-+            backlight {
-+                compatible = "skyworks,aat2870-backlight";
-+
-+                skyworks,channels = /bits/ 8 <0xff>;
-+                led-max-microamp = <27900000>;
-+            };
-+
-+            regulators {
-+                compatible = "skyworks,aat2870-regulator";
-+
-+                in-ldo-supply = <&vdd_3v3_vbat>;
-+
-+                ldo-a {
-+                    regulator-min-microvolt = <1200000>;
-+                    regulator-max-microvolt = <1200000>;
-+                };
-+
-+                ldo-b {
-+                    regulator-min-microvolt = <3300000>;
-+                    regulator-max-microvolt = <3300000>;
-+                    regulator-always-on;
-+                };
-+
-+                ldo-c {
-+                    regulator-min-microvolt = <1800000>;
-+                    regulator-max-microvolt = <3300000>;
-+                    regulator-boot-on;
-+                };
-+
-+                ldo-d {
-+                    regulator-min-microvolt = <2700000>;
-+                    regulator-max-microvolt = <2800000>;
-+                };
-+            };
-+        };
-+    };
+ 	aat2870->en_pin = devm_gpiod_get_optional(&client->dev, "enable",
+ 						  GPIOD_OUT_HIGH);
+ 	if (IS_ERR(aat2870->en_pin))
+diff --git a/drivers/regulator/aat2870-regulator.c b/drivers/regulator/aat2870-regulator.c
+index 4d399d0486d19..4cbcb277ff20d 100644
+--- a/drivers/regulator/aat2870-regulator.c
++++ b/drivers/regulator/aat2870-regulator.c
+@@ -114,6 +114,7 @@ static const unsigned int aat2870_ldo_voltages[] = {
+ 	{						\
+ 		.desc = {				\
+ 			.name = #ids,			\
++			.supply_name = "in-ldo",	\
+ 			.id = AAT2870_ID_##ids,		\
+ 			.n_voltages = ARRAY_SIZE(aat2870_ldo_voltages),	\
+ 			.volt_table = aat2870_ldo_voltages, \
 -- 
 2.53.0
 
