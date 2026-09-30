@@ -1,87 +1,33 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0EEE63C378A
-	for <mfd@lists.linux.dev>; Wed, 30 Sep 2026 10:02:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1530471CED;
+	Wed, 30 Sep 2026 11:01:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790762546; cv=none; b=pSO9j0bpVVMUCZ3C9eeK95ex7v0mtOghUIfHFz4rjySbLkR8zEla+lmNoD4JTqmmr5KjcwGh65Ln3ajX3AhvvYb+YIlpDXqpe5ZBRlCDFDJsTHrxOcnXYMHPFxMzIQcCW9Fv9DhX5jjFSuAQ04DCHWTYiMq5tgdTUFWiyXFfcBc=
+	t=1790766123; cv=none; b=KG49fuxYS64z7+4UqvaYbEj+9pQPlsKB77+GHnEoXeudGdyTalFOuBEu97MeSFsE1k1NDxqKxzHyZ8RMu7+0fLC1KBRWFPiCmY/rT7go8PwOtvO0y0b3nES2jfyQVwbgxqzThwMr/76aO/zhLXRqTobJw4uPj7JR28m3sSolUJo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790762546; c=relaxed/simple;
-	bh=eJocVqgZC1LZ73uhvhGrTfsM5JBh1CAAbm6cuy+2k/Q=;
+	s=arc-20240116; t=1790766123; c=relaxed/simple;
+	bh=gN2wAZEyI0QCfylAcDuzb+cZBdumkN8wWPJuDCXFHyE=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=LUmzs1/Ik7HSZ61e0He3zfszXoglryQ95Q/tyWYYP371tVWkzAlUs4dQvaZWXxlXl7jQf3P+zltO+TDASmDQ9/ZNk+JUpjig0OqZsYdPltPZZcGKpDDpQyYBX0fC0XdpgHyfTqX3xzwKkxhrubCYPMftUWKXAR6SRXZubOQYewI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kK6mDofg; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gNRs4fb7; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=AYhZiMQdT3LEOoIyV+d/Jqu/ooImk/hl6FkTu+MclTbTiRwok2KZWeUbElDlAzRRB3MMgO2I//Zn9+wePOa8epmgeN31YRRGYawSXqwRl6cjE5KDeyRwjy1PPeuLaqWAsKatkyti0d1GRWET8TzFwLusTeZBg0pBUEGEAbhWehA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kwqcvJqG; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kK6mDofg";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gNRs4fb7"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68U7dWiU3489202
-	for <mfd@lists.linux.dev>; Wed, 30 Sep 2026 10:02:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	MPe77bI+fMFp1YsFWGh66THD7WQb0kpPqkpc9dkIEeY=; b=kK6mDofg1UYweraG
-	FTYCsXqg8/0YygMTj5WZt9+hbTg+7Qdmeq4YjzSfCCgwUrtRb+nOegy0a9kAPzhl
-	gdbIwnmL6JwOt8cAl1e0TA053uR8sK5zU4fmA8ejq2KuIUd2oHksgLk1cQWHU07T
-	g7bkBkZcD7zH9/CLMm1A+UqJ+y8XJsH18kU94M+YUFp4BX80Tx0PIcT6wfAzz3jS
-	1uidX+mWoPWTWpwIbxO4IuUpFIQv3Czert8/hGV/WVzYXwyr+144TK75VEgYwgR6
-	O+LRnzHd6fdo7L0AVbK4LCJCgdjKDwGhcq9z2faaf6XdCCukOp5j3XcqQUhchvRQ
-	d0sVew==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h0j97un7t-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <mfd@lists.linux.dev>; Wed, 30 Sep 2026 10:02:23 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38e54b6556aso5392391a91.2
-        for <mfd@lists.linux.dev>; Wed, 30 Sep 2026 03:02:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790762543; x=1791367343; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=MPe77bI+fMFp1YsFWGh66THD7WQb0kpPqkpc9dkIEeY=;
-        b=gNRs4fb7j7Hf3+dJrl0JPCyFNGheHdautT5te2VMZ7Nrim4s4eovtKN/0CqJ9Qdiyc
-         NVRd/IL1QfOOKii5KgA55/EoNaVqjvmJeJU/il1L6xQe6ST0i17tXJeX/5Y9c+J9oXyE
-         I8drkWgz1ubmLIkmcUZiqNVNGaWFC8U718pvk01+yP1mJ/3rUoBcVmbcsHV/i0vtdQ2e
-         V/bghZRKxVsz2VH7FQZJOL3vhbLDApQuTYfIpuJQ02TYTViCW5jO44yygcvm0yUYj2QH
-         5a/5EIxTUkxvjrGfcWeazsiU7yrpxV95+LIXysWQWNINtlNy+b/8FXj7gd/uq2rk9m5S
-         /FZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790762543; x=1791367343;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=MPe77bI+fMFp1YsFWGh66THD7WQb0kpPqkpc9dkIEeY=;
-        b=BtqB6NOrg7KzkK7DXN0eivCVOL9yIsngslmK4CaIeWk8VDjgNwFkL2O0A+sahUCTJV
-         lUxDAQ+wwOUuKYtozfOk+Flry54CJFJXRU5CQh/NnOTcTKTdtNFcVJUm/cIbuwMxNBlQ
-         rR0vqjggH+UvMOuJEOhxlVaTLzZtU15yCPcHWVUiS0miROXbu497IuONs0sIZwvgmzpF
-         D+xJ2xrLucbNl1zFA47oeJrOaSOfb8in0sFR0qFXw+WUB/jj4C2qwN2WE3tqUx29lFX/
-         kGWmPEAfGfgsXWt4aZrRHwIR7TswxNdactWKXTxzJ292vQ8cyfAi9DI3gfAuymmd36oA
-         KpUg==
-X-Forwarded-Encrypted: i=1; AKwUvBwPkiPa6alfen5SAMWrKQGPf3pX+MVmkFk/3DK/0dA6KO2kJD43yUqktI1ILj+6KEhATRA=@lists.linux.dev
-X-Gm-Message-State: AFq9FYJwj8p6BxLvoP75HwCcWGDmmoFnRsI+Px6s5bQ0NalWdV9Na0zm
-	I/jiU3C26P0iqp2xg0xlYD2njqUgOjix6np5RkY6LeIhEmu146dv+jttbUc//8Se3reXuuEQLNV
-	ufDOfNVYdvK63ZNWiDHY0nS2xEstbJahMG21BFUSBrMzFnPR7L0pIVUQ=
-X-Gm-Gg: AYBFou380QZryB8WAl3JaRMTf2UpzsBgo867STTib71ohef3fEYa9XKh8zc3Z14inHG
-	FdXjSDCfhPl8jIxPQJd41CaFZzRVoX2ZMtNfe0wR9S3VkfzlSiNsPQma1yL1HG/T3YypnZzdExz
-	yfYTGOKc4B8EqRTZ80/9IIfJJ6qr1igt85kIER8TZxQ6FbomdaaplQtBTzYu5HcF/KOUk91vqj8
-	fthzLB0yrVfMpmVA9KHAfeQibgFdrOlu/C0eY3Alzedx9Hmd7/BF21HhSlYeV6wXdxlTP65wvdT
-	7XIt5koBWuS8/WI8Bh55sQH3Z/C/36FshlZYGwVNzdvpJuNPeoGeE2oVpaZSXXPZmnp938OWPZi
-	+r4vYpd7YdRCJ9yo6b5plvmkO/84GT+YGVg==
-X-Received: by 2002:a17:90b:1d46:b0:3a4:cfc2:3517 with SMTP id 98e67ed59e1d1-3a4d1b5dee4mr770907a91.49.1790762542425;
-        Wed, 30 Sep 2026 03:02:22 -0700 (PDT)
-X-Received: by 2002:a17:90b:1d46:b0:3a4:cfc2:3517 with SMTP id 98e67ed59e1d1-3a4d1b5dee4mr770865a91.49.1790762541848;
-        Wed, 30 Sep 2026 03:02:21 -0700 (PDT)
-Received: from [10.92.215.224] ([202.46.23.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3a4cb194b86sm2880249a91.2.2026.09.30.03.02.15
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 30 Sep 2026 03:02:20 -0700 (PDT)
-Message-ID: <050bed16-c250-4cab-baab-d3b766668f17@oss.qualcomm.com>
-Date: Wed, 30 Sep 2026 15:32:11 +0530
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kwqcvJqG"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A6BFF1F000FF;
+	Wed, 30 Sep 2026 11:01:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790766109;
+	bh=9bi/i2/aWze1bEGDde8mb4HVoivi8jt5RnjoRegpme8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=kwqcvJqG1zng3JAdzZvvRl3xl1DseZ3TkRS3norZFgdnNiGjQ99aHK63nTWAW0LE+
+	 tj9QX+qvUi0Accx8sb2cHH5/p9/xlSCHc5fxa5schyZsasHCMdUg0VqHNkTUIVXG/k
+	 XGQu7lKCzB4d2zN1fjEWnaKg9ex9JIdVqlTLGWeWwoWiX8FXV/FeZ9+/s/4p8E88QL
+	 jmiN+T6isod3NKrstQORYbPJZCgqmYYngmP4Clg7mKDdKAcYf+vNsiXz8aJYlJVgLQ
+	 hH2+xV26luJZ29/dVp29GQUrnE2KuzIk+0cpyKoJAZXA+Jo8Pptui+LdRHGs+6ZhLn
+	 jFCQWevto44/w==
+Message-ID: <6cf9e611-bfc5-407b-8132-bd328f8b61fc@kernel.org>
+Date: Wed, 30 Sep 2026 13:01:30 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -89,109 +35,135 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 07/12] arm64: dts: qcom: pm8350c: Enable BCL sensor
- node
-To: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Cc: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
-        Abel Vesa <abelvesa@kernel.org>, linux-hwmon@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, mfd@lists.linux.dev,
-        Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
-References: <20260929-qcom-bcl-hwmon-v3-0-f5ca00889cf7@oss.qualcomm.com>
- <20260929-qcom-bcl-hwmon-v3-7-f5ca00889cf7@oss.qualcomm.com>
- <szrhaamkkvvhwcs67mrptuigkmgel5jixo2bqgk6rwi2kn3jdu@a275fnea2vlf>
+Subject: Re: [PATCH v4 01/20] dt-bindings: phy: Add
+ starfive,jh7110-inno-hdmi-phy
+To: Michal Wilczynski <m.wilczynski@samsung.com>
+Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Andrzej Hajda <andrzej.hajda@intel.com>,
+ Robert Foss <rfoss@kernel.org>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Luca Ceresoli <luca.ceresoli@bootlin.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Lee Jones <lee@kernel.org>, Andy Yan <andy.yan@rock-chips.com>,
+ Philipp Zabel <p.zabel@pengutronix.de>,
+ Emil Renner Berthing <kernel@esmil.dk>, Hal Feng
+ <hal.feng@starfivetech.com>, Michael Turquette <mturquette@baylibre.com>,
+ Stephen Boyd <sboyd@kernel.org>, Heiko Stuebner <heiko@sntech.de>,
+ Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
+ Dominique Belhachemi <db@domibel.de>, Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>, linux-phy@lists.infradead.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, mfd@lists.linux.dev,
+ linux-clk@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-rockchip@lists.infradead.org, linux-riscv@lists.infradead.org,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Maud Spierings <maud_spierings@murena.io>,
+ Graham Markall <hello@big-grey.co.uk>,
+ Icenowy Zheng <zhengxingda@iscas.ac.cn>,
+ Chaoyi Chen <chaoyi.chen@rock-chips.com>,
+ Joshua Peisach <jpeisach@ubuntu.com>,
+ =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+References: <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
+ <CGME20260915153214eucas1p2b548f3236ef98fb0cbf320e397420125@eucas1p2.samsung.com>
+ <20260915-jh7110-clean-send-v4-1-f0e4fd6f2cc8@samsung.com>
+ <20260917-mutant-chamois-of-competence-46ca77@quoll>
+ <1a1a9b49-430b-4218-b27d-e133d488e8d9@samsung.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
-From: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
-In-Reply-To: <szrhaamkkvvhwcs67mrptuigkmgel5jixo2bqgk6rwi2kn3jdu@a275fnea2vlf>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <1a1a9b49-430b-4218-b27d-e133d488e8d9@samsung.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: ugEqUZvch1KxTLvU0pY3_8CladuXIYpZ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDAzOSBTYWx0ZWRfX/uL+xBIn+SJK
- aV/LnL0fCVVSBYp5PiHMAcm8/91Sw4n9kyuRtuNKJaDphN0nXcDGAPcvoMC7JxBS6ALmjIhcYz4
- U1qt4vvApUcol8dYcy7a6uq1rE3fz0UCGi325Yt9e5Og7U9atVNVBnkUYyDZNFw2j5k2B2yFDjI
- +vAibd1Efb9YalWrEXiL5QOAUD3RuqGeL++y3Xh7AICkHoH+luJq/FMzLwdyL6Nw/aIc6TEmTt8
- lhiwHt41xgUEnEm/URi8fbfRziUtr9SJtYWTO14qF89QljKSx+VKC7ciUSApUL9IIRT+g83JSr9
- I2FQMleyZO0sUGHTU5D/roJBMz4+s5/BPdj3jtRKHotC1rAyjK/twxCF4dGV1nnuZT5tHEKolm4
- FCa8sINYt4jUAPRL2jKjv6gSb2OhvLawFL/Csaygul/9lFB8moYtlZNQ7mircQAxqkLItbcfxd8
- 8oMvQ4tshz8X8U8eKZQ==
-X-Proofpoint-ORIG-GUID: ugEqUZvch1KxTLvU0pY3_8CladuXIYpZ
-X-Authority-Analysis: v=2.4 cv=BPImP1QG c=1 sm=1 tr=0 ts=6abcde2f cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=9t18G-HS6d7wqxctyjgA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDAzOSBTYWx0ZWRfX7C01iVb5DmaP
- fL9UkF/Uw4h52mP09VzcrEyvKRL33UUYEAYRmjlzAoGNGRCODPigKvyiogmgbrK/LkgCp8m/KZx
- ym0zScsR59ZyZyUH10aUTUkQJymBuUU=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-30_01,2026-09-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 adultscore=0 phishscore=0 malwarescore=0 lowpriorityscore=0
- bulkscore=0 priorityscore=1501 suspectscore=0 impostorscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609300039
 
-Hi Abel,
-
-On 9/29/2026 6:45 PM, Abel Vesa wrote:
-> On 26-09-29 18:39:39, Manaf Meethalavalappu Pallikunhi wrote:
->> Add Battery Current Limiting (BCL) hardware monitor node for pm8350c
->> PMIC. The BCL monitors battery voltage and current, providing hardware
->> interrupts when configurable thresholds are violated.
+On 25/09/2026 23:05, Michal Wilczynski wrote:
+>>> +  clocks:
+>>> +    maxItems: 1
+>>> +    description: Reference oscillator.
 >>
->> Signed-off-by: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
->> ---
->>   arch/arm64/boot/dts/qcom/pm8350c.dtsi | 12 ++++++++++++
->>   1 file changed, 12 insertions(+)
+>> This barely counts as a resource, so usual question: no resources here?
+>> no MMIO? Even the user of this phy is the block itself.
 >>
->> diff --git a/arch/arm64/boot/dts/qcom/pm8350c.dtsi b/arch/arm64/boot/dts/qcom/pm8350c.dtsi
->> index 1a24e6439e36..52b5fc1ef9a3 100644
->> --- a/arch/arm64/boot/dts/qcom/pm8350c.dtsi
->> +++ b/arch/arm64/boot/dts/qcom/pm8350c.dtsi
->> @@ -20,6 +20,17 @@ pm8350c_temp_alarm: temp-alarm@a00 {
->>   			#thermal-sensor-cells = <0>;
->>   		};
->>   
->> +		sensor@4700 {
->> +			compatible = "qcom,pm8350c-bcl";
->> +			reg = <0x4700>;
->> +			interrupts = <0x2 0x47 0x0 IRQ_TYPE_EDGE_RISING>,
->> +				     <0x2 0x47 0x1 IRQ_TYPE_EDGE_RISING>,
->> +				     <0x2 0x47 0x2 IRQ_TYPE_EDGE_RISING>;
->> +			interrupt-names = "max-min",
->> +					  "critical",
->> +					  "emergency";
->> +		};
->> +
->>   		pm8350c_gpios: gpio@8800 {
->>   			compatible = "qcom,pm8350c-gpio", "qcom,spmi-gpio";
->>   			reg = <0x8800>;
->> @@ -41,6 +52,7 @@ pm8350c_pwm: pwm {
->>   			#pwm-cells = <2>;
->>   			status = "disabled";
->>   		};
->> +
+>> This makes me wonder if this should be a device node in the first place
+>> (instead folded into the parent).
 > 
-> Drop this new empty line.
+> The PHY has no reg because the reg is shared with the controller and
+> owned by the parent - patch 9 lets the bridge take its regmap from
+> there.
+> 
+> The user of the PHY is not only the block itself. It is the pixel clock
+> provider for the whole display subsystem, voutcrg takes hdmitx0_pixelclk
+> as the parent of its DC8200 pixel MUXes, and while HDMI output is active
+> it is the only intended source for that clock. The parent has to be
+> assigned explicitly so the general PLL does not end up driving the pixel
+> clock, and so a DSI user does not reach the HDMI PHY clock generator.
+> 
+> So it has to be its own node. The HDMI block has two independent
 
-Thanks for review, will fix it in next revision.
+I do not see the logic which lead to this conclusion. Pixel clock
+provider, so a clock controller, cannot be a user of a phy. Clock
+controller does not have a physical layer.
 
-Thanks,
-Manaf>
->>   	};
->>   };
->>   
->>
->> -- 
->> 2.43.0
->>
+And really, I have no clue what hdmitx0_pixelclk and voutcrg are. I
+could probably study the patches a lot to figure that out, but my review
+queue has still 200 more, so I'll skip.
 
+But nevertheless assigning clock parent of HDMI clock to PHY is
+standard, most of the platforms have it, thus it is not a justification
+for odd design.
+
+> functions with different clock inputs and one of them feeds back into
+> the SoC clock tree. The PHY generates hdmitx0_pixelclk which voutcrg
+> consumes the controller consumes pclk/mclk/bclk from voutcrg. Folded
+> into one node that node is both a provider to and a consumer of
+> voutcrg which is a cycle in the hardware description, not just in Linux.
+
+
+Best regards,
+Krzysztof
