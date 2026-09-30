@@ -1,61 +1,86 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A74C9502762;
-	Wed, 30 Sep 2026 14:17:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8FB4850EBE8
+	for <mfd@lists.linux.dev>; Wed, 30 Sep 2026 14:23:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790777868; cv=none; b=n3SZ2hhjpUT3Yml2pfLQ/logK3t75IuLQWNFyeT6+8MWlO1Dq3FpraWPs54EOb4I2SaTo9+2Ev//dgOkmhVaMB1MhsTk+LnDX/UUb5czfkvQuXWV1JSS/J0kf0wQEK060YhG8JdP7m7p98xtoWfQCLRZzghVCRnJyFgumam1wmc=
+	t=1790778212; cv=none; b=GexplRbww8R0q+TqgmE1P1Nkt6n81lAvC6kXM9Xjpb+KBufn5qPDyF8Z+Gi6BivJkOT3j0FSTfshibgph4MAWobQRNRh+UTHKKt+fZvN0iV9+n5AhE5VitnNAcVkMFQ7yUKtm5RlluxoxwbWnB6GDhVhUXwmtepG4de1hsW3Uy4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790777868; c=relaxed/simple;
-	bh=Fl3wZd+Kx6Db8Lp9IduNBST/8Lugbi0Rfh07Q0mu2gs=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=gWfZLYpNf8p5cBdW/Y8NPQTdbcLZic68Y/QIWoOK770xDrQN15+9S0TFYIu8VhD652OiWZr7UjSOaFEe0NUwHo0evZmc9Y1NhAh1VcNDTkiGQMOq/Ttst3I7JR5XeMCbNwSTLon+BU8qwakkNhSPme6sLWmKeYD+c+wYF4AALBI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZtfwSvMc; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790778212; c=relaxed/simple;
+	bh=abw2Ak9H06zSs5kFJJWubA/edrBQdUYZ170hxCs4e9w=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=j/Fcikl/iaKF2puDu6Oi64cRmGihGlMyfbLaE/0ozZQpn5Ua4cuXY4u7mK7RHwR4aDxD6ePbG3Vx4DhJahxaf2y9Zo89FzthWGJzmwahfYd2gut2jhUHgXcMPLx+HMGJbElMT8j/Qqd0YUFbG9b0a/BJMSjY2bgLuEWp8DpJAjc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=QQ/Eq8uz; arc=none smtp.client-ip=185.246.85.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZtfwSvMc"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E1FB1F00893;
-	Wed, 30 Sep 2026 14:17:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790777857;
-	bh=Fl3wZd+Kx6Db8Lp9IduNBST/8Lugbi0Rfh07Q0mu2gs=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=ZtfwSvMcwmQ/X1TMHFWYlmmEUnsLPOnfqxc94KY3yd9/g7ePCRmz/mo1Mnv2KKJrJ
-	 h/9X6RSnOTiX1ERLaCUpvvVNHFphcO14N87Fj4fNVh18QAqKbuZR4Ry6CUQibxAUR+
-	 hVCA9uIWuXaHMoIO98cVaDKxtzTzI0Mvosw9cXgOm1X4q32CM9Tg8LrurlOF1b9X2W
-	 loYZMlv83OL9m7NfxXMpr11VNgJ5JS04WU3PL3dychi+KC0DVkMNGHI+O0RfrTZ0Kk
-	 2XEFpWuOUdVX2mHxyQv6Q1zPBPWL533ScDfBYglNNeKTzjN0qK1jP/IaulSXylvHGq
-	 NXH6zILdsvuYg==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 3/3] arm64: tegra: Add Tegra132 specific compatible
- for AHUB
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Thierry Reding" <thierry.reding@kernel.org>
-Cc: mfd@lists.linux.dev, lee@kernel.org, robh@kernel.org, devicetree@vger.kernel.org, conor+dt@kernel.org
-In-Reply-To: <20260930-as3722-bindings-v2-3-a3bba649ebf9@nvidia.com>
-References: <20260930-as3722-bindings-v2-0-a3bba649ebf9@nvidia.com>
- <20260930-as3722-bindings-v2-3-a3bba649ebf9@nvidia.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 30 Sep 2026 14:17:36 +0000
-Message-Id: <20260930141737.6E1FB1F00893@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="QQ/Eq8uz"
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 0B5CE4E410D7;
+	Wed, 30 Sep 2026 14:23:21 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id C118D60749;
+	Wed, 30 Sep 2026 14:23:20 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id DB4281032985F;
+	Wed, 30 Sep 2026 16:23:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1790778199; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 in-reply-to:references; bh=tNMw6NTjdJJ4qvs+O1OY9kSbqUjNQiZ3YyQVzxT+H8w=;
+	b=QQ/Eq8uzh585JpJaXZ/L5B092QPaVtVG8QFNzjpNW7he9bQzz/Ve186eUQO1GLn0FOHDrg
+	Mmqc3pTZYncNf0mWxZAsq2pruquvUFtrh18XcEvJehZDZ01WvP7znOZ4mCuLzjK/M+3eDr
+	XE3Lcl0SC+tFfsm6Yd0+Zb8Fl986BKm/rW5lpdg2CuN0F2LQN+ZNtrs6Lp9HocgvXtfDea
+	LXdl8BjIGgvWqf5qz6Hhq0Vs2+sE9NK39I9XLbq1gjDMxjmZkHZaZv8dc5MA3jyATR4aKV
+	eghGk/fTgRzdeaClX6S90gXglzyykmdPBeypLVHzFOUVvw2NwwFgW1UAcq3tjw==
+Date: Wed, 30 Sep 2026 16:23:16 +0200
+From: Alexandre Belloni <alexandre.belloni@bootlin.com>
+To: linux-kernel@vger.kernel.org, linux-i3c@lists.infradead.org,
+	krzk+dt@kernel.org, robh@kernel.org, conor+dt@kernel.org,
+	devicetree@vger.kernel.org, broonie@kernel.org, mfd@lists.linux.dev,
+	lee@kernel.org, Frank.Li@nxp.com, lgirdwood@gmail.com,
+	Lakshay Piplani <lakshay.piplani@nxp.com>
+Cc: vikash.bansal@nxp.com, priyanka.jain@nxp.com, aman.kumarpandey@nxp.com
+Subject: Re: (subset) [PATCH v20 0/8] Add support for NXP P3H2x4x I3C hub
+ driver
+Message-ID: <179077818367.407330.1583527335918259957.b4-ty@b4>
+References: <20260922103551.2754613-1-lakshay.piplani@nxp.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260922103551.2754613-1-lakshay.piplani@nxp.com>
+X-Last-TLS-Session-Version: TLSv1.3
 
-> From: Thierry Reding <treding@nvidia.com>
->=20
-> The AHUB on Tegra132 is backwards-compatible with the one found on
-> Tegra124, but it needs a specific compatible string anyway, so add
-> one.
->=20
-> Signed-off-by: Thierry Reding <treding@nvidia.com>
+On Tue, 22 Sep 2026 16:05:42 +0530, Lakshay Piplani wrote:
+> This series adds support for the NXP P3H2x4x family of multi-port I3C
+> hub devices, including their on-die regulators and downstream I3C/SMBus
+> target ports.
+> 
+> The series introduces:
+> - Core I3C master enhancements required for hub support
+> - Generic I3C hub framework
+> - MFD driver with regulator and I3C hub child drivers for the P3H2x4x I3C hub
+> 
+> [...]
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+Applied, thanks!
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260930-as3722-bin=
-dings-v2-0-a3bba649ebf9@nvidia.com?part=3D3
+[1/8] i3c: master: Add APIs for I3C hub support
+      https://git.kernel.org/i3c/c/9d60a0eafae1
+[2/8] i3c: master: Add controller-only device operation helpers
+      https://git.kernel.org/i3c/c/8d0008260c32
+[3/8] dt-bindings: i3c: Add NXP P3H2x4x i3c-hub support
+      https://git.kernel.org/i3c/c/58c018414635
+[6/8] i3c: hub: Add support for the I3C interface in the I3C hub
+      https://git.kernel.org/i3c/c/b0cfe49a2e3b
 
+Best regards,
+
+-- 
+Alexandre Belloni, co-owner and COO, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
