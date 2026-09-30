@@ -1,113 +1,109 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A13BE3FD132;
-	Wed, 30 Sep 2026 14:12:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07B353BB100;
+	Wed, 30 Sep 2026 14:17:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790777531; cv=none; b=cAdnEiDU5/cAqoQ7j8byDJHBzaSQtj5k5tXfR/w7RytHsgsoruiAkm1xIPoctQEhs1AIktohu/WZQxTwHEpRl1h53V/Yv7ZBLqMO/uibiYe1RVkcJb/IkE2viR3UWctgCqIYL9sonpyfrAmmD2+1FEzgtBId+XviZeT2ynKgYRY=
+	t=1790777837; cv=none; b=q50Bs7+//NJFwePwjMiS2QHjGHCVY88rMiG36aHyITENvHTGtAluAwvw8LhzM0DffQVUSf0B6nqz/LPMViPLFf3pET+c7uPgvlCJZjQaoTVREyFyGfrKqq761p2DBoLjneGVV5FRC+jEA4SC+/nUPXor7pcoy2hASUCrf/VKwUk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790777531; c=relaxed/simple;
-	bh=jqaZ8ZEiZcgz4966tfJBT3hVOLy8rY8vy6TqqWDgKLY=;
+	s=arc-20240116; t=1790777837; c=relaxed/simple;
+	bh=wCcgxakG8qfp5X0N0+W5pUl3GxZxaKgg9sUvZuJ+Gjs=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=pRXx36xT2YbpY71whn0nXHecdyNO9HBTIyMnLNYKCObXcMvhb/IZhZsklbUSMBw82UFpoA7XATV0vVtF7efh57I7YDX88wW3Q0jim9wjH7wGYS0qeaeeeTLpyUFZn1Jbeu4E6tlmScEHBha/HuMF9n8zSIi1ZGCFGjC4KbbsDCA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dtQ6q8om; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=Bl+L2Pi66lbY/392O7/P+6F6iF7NNG9zKx1nDrJfvwljRDUwOWvNPXFH4ZMzcO7zWhUgn5c3h3yK4W5Yr7A2RJCUz5+NL1iSkSWkD54at4tBxv5N6fqwbyxU3P/rE/VZeAskoxDZ8HbunWVhy+mJKBwhXoHY+hbLXCzdor+Sjwo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JunjNJHw; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dtQ6q8om"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E3EF51F00898;
-	Wed, 30 Sep 2026 14:12:00 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JunjNJHw"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 529FB1F000FF;
+	Wed, 30 Sep 2026 14:17:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790777521;
-	bh=Ddp1Moo6lzDzDSK0+1MMkmEzxAI5WOAf4Bx8FgJwHmM=;
+	s=k20260515; t=1790777830;
+	bh=EAbQI2F8PI26Tl5IpQUZldVyoarPJbDqkbjf2GVFr5A=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=dtQ6q8omldAqcNoKyaGOvuCZXxRUp1a+E934ME0pkvQPkbXoTZqONq5EpJJuUc6Kd
-	 ZYOSt3KAgzUANyeFbSM+Y/wu6Twsy20neaDaiNkzAK9zb+/4CNg1SvMFTNmsrt8zSK
-	 7mG1xj7E5gh8kkLXjHYu0zN6Q8tiv+GaOB5F2TNVPX21OXeqZ0+ur9aiRrVEmCp0Kw
-	 AuCi1f7W+mUbsrBqoUPTPDFHRdqilNdznqHfrbae43l85LgSKShLzym5h6ARAWf3i/
-	 N3pZjhm1hBNJSeCWSQSt1pv42t1oOVMMJy6dmEf42oJNvxg7p/SEN3WlRp1w+sq7cq
-	 DIdBOO++9saSg==
+	b=JunjNJHw5cTZwfHNaKltg4BsIbp/uBsmmbj0BuV9md5pa1iVC8EZZY+/1ajdZEZr2
+	 sT1+acaezuZ+GPuFqZQjGH1a4O9wv0we3oP7O6cTcHwi3O9ope/bj0yb/BF5ywG2Uw
+	 h/+IfTEgWjm88Mt3SO0Dh5JabawEwDwo0pdio/PLE+C24EdhhJ0ge14sQFBssqY1Jw
+	 JwiP7UHRGSpGgLS+DkcQH+1VKHSDB8U0H5mLAk/jVjT843uFHV0IeKBffJVwGDdVl/
+	 MjR3LqnJGSbPumVn2Fna4Wa9O181h1omyxRratwVZ+MdYIXYBme2dMfOs/ZgwPyIq0
+	 T1LNHis0K7uJA==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 1/3] dt-bindings: mfd: as3722: Convert to json-schema
+Subject: Re: [PATCH v2 2/3] dt-bindings: sound: tegra-ahub: Convert to
+ json-schema
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Thierry Reding" <thierry.reding@kernel.org>
-Cc: lee@kernel.org, robh@kernel.org, devicetree@vger.kernel.org, conor+dt@kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20260930-as3722-bindings-v2-1-a3bba649ebf9@nvidia.com>
+Cc: robh@kernel.org, conor+dt@kernel.org, lee@kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20260930-as3722-bindings-v2-2-a3bba649ebf9@nvidia.com>
 References: <20260930-as3722-bindings-v2-0-a3bba649ebf9@nvidia.com>
- <20260930-as3722-bindings-v2-1-a3bba649ebf9@nvidia.com>
+ <20260930-as3722-bindings-v2-2-a3bba649ebf9@nvidia.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 30 Sep 2026 14:12:00 +0000
-Message-Id: <20260930141200.E3EF51F00898@smtp.kernel.org>
+Date: Wed, 30 Sep 2026 14:17:09 +0000
+Message-Id: <20260930141710.529FB1F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
-- [Medium] dt-bindings: mfd: as3722 strict 'pinmux' property name prevents =
-multiple pinctrl states
-- [Medium] dt-bindings: mfd: as3722 pinmux child node regex incorrectly rej=
-ects hyphens
+- [Medium] dt-bindings: schema bypass for tegra132 due to const instead of =
+contains
 --
 
-commit b7aefbb600a8c4a41917fc0749a39bff2e1a88d7
+commit cc353b75e1127a04e8bb3722f63443c9ec2f2daf
 Author: Thierry Reding <treding@nvidia.com>
 
-dt-bindings: mfd: as3722: Convert to json-schema
+dt-bindings: sound: tegra-ahub: Convert to json-schema
+   =20
+Convert Tegra AHUB bindings from the free-form text format to
+json-schema.
 
-This commit converts the AMS AS3722 PMIC bindings from the free-form text
-format to json-schema.
-
-> diff --git a/Documentation/devicetree/bindings/mfd/ams,as3722.yaml b/Docu=
-mentation/devicetree/bindings/mfd/ams,as3722.yaml
+> diff --git a/Documentation/devicetree/bindings/sound/nvidia,tegra30-ahub.=
+yaml b/Documentation/devicetree/bindings/sound/nvidia,tegra30-ahub.yaml
 > new file mode 100644
-> index 0000000000000..51910042c6216
+> index 0000000000000..4a7f5c74125c2
 > --- /dev/null
-> +++ b/Documentation/devicetree/bindings/mfd/ams,as3722.yaml
+> +++ b/Documentation/devicetree/bindings/sound/nvidia,tegra30-ahub.yaml
+> @@ -0,0 +1,288 @@
 [ ... ]
-> +  pinmux:
-> +    description:
-> +      Device has 8 GPIO pins which can be configured as GPIO as well as =
-the
-> +      special IO functions.
-> +
-> +    type: object
-> +    additionalProperties: false
+> +properties:
+> +  compatible:
+> +    oneOf:
+> +      - const: nvidia,tegra30-ahub
+> +      - const: nvidia,tegra114-ahub
+> +      - const: nvidia,tegra124-ahub
+> +      - items:
+> +          - const: nvidia,tegra132-ahub
+> +          - const: nvidia,tegra124-ahub
+[ ... ]
+> +  - if:
+> +      properties:
+> +        compatible:
+> +          const: nvidia,tegra124-ahub
 
 [Severity: Medium]
-Does strictly naming this property "pinmux" prevent device trees from
-declaring multiple unique pinctrl child nodes?
+Will this exact match condition fail when evaluated against the tegra132
+compatible sequence array?
 
-The original text binding supported pinctrl[0...n], but this strict naming =
-and
-additionalProperties: false will reject secondary pinctrl states like
-pinmux-sleep since sibling nodes must have unique names. Should this be a
-pattern property like "^(pinmux|pinctrl)(-[0-9a-z]+)?$" instead?
+Since JSON Schema const requires exact equality, this condition evaluates to
+false when checking the device tree array ["nvidia,tegra132-ahub",
+"nvidia,tegra124-ahub"].
 
-> +
-> +    patternProperties:
-> +      "^gpio[0-7_]+$":
+This causes hardware constraints (such as reg, resets, and dmas properties
+requirements) defined for tegra124-ahub to be silently skipped for
+tegra132-ahub device tree nodes, allowing incomplete configurations to pass
+schema validation.
 
-[Severity: Medium]
-Does this regex incorrectly reject hyphens in node names?
+Should this use contains: enum: or contains: const: instead of const:
+to correctly match fallback sequences?
 
-Existing device tree configurations such as gpio0-1-3-4-5-6 in
-arch/arm/boot/dts/nvidia/tegra124-apalis.dtsi use hyphens to group pins. Si=
-nce
-additionalProperties is set to false for the pinmux object, this regex will
-cause valid existing nodes to fail schema validation.
-
-> +        description:
-> +          Child nodes of the pinmux node represent some desired configur=
-ation
-> +          for a list of pins. This configuration can include the mux fun=
-ction
-> +          to select on those pin(s), and various pin configuration param=
-eters,
-> +          such as pull-up, open drain.
+> +    then:
+> +      properties:
+> +        reg:
+> +          items:
+> +            - description: APBIF registers
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260930-as3722-bin=
-dings-v2-0-a3bba649ebf9@nvidia.com?part=3D1
+dings-v2-0-a3bba649ebf9@nvidia.com?part=3D2
