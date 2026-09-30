@@ -1,169 +1,192 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1530471CED;
-	Wed, 30 Sep 2026 11:01:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFD414C6F1B
+	for <mfd@lists.linux.dev>; Wed, 30 Sep 2026 12:46:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790766123; cv=none; b=KG49fuxYS64z7+4UqvaYbEj+9pQPlsKB77+GHnEoXeudGdyTalFOuBEu97MeSFsE1k1NDxqKxzHyZ8RMu7+0fLC1KBRWFPiCmY/rT7go8PwOtvO0y0b3nES2jfyQVwbgxqzThwMr/76aO/zhLXRqTobJw4uPj7JR28m3sSolUJo=
+	t=1790772382; cv=none; b=OxkM/LYowGRGe6ALKaxoLLG4jsUBrmB8O52eesg/ix5RfV4OUpgIHhEY2uSXAEgA9jQaMKqlq+P+FGVyj6/29UVI1wkcMjOioqPjmk/URGb/aXOsPea89moAaomJEiZdWwrXNGrIhUcBUYebq5xRVXdvU9wxlgeZx68+LNB6pjg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790766123; c=relaxed/simple;
-	bh=gN2wAZEyI0QCfylAcDuzb+cZBdumkN8wWPJuDCXFHyE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=AYhZiMQdT3LEOoIyV+d/Jqu/ooImk/hl6FkTu+MclTbTiRwok2KZWeUbElDlAzRRB3MMgO2I//Zn9+wePOa8epmgeN31YRRGYawSXqwRl6cjE5KDeyRwjy1PPeuLaqWAsKatkyti0d1GRWET8TzFwLusTeZBg0pBUEGEAbhWehA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kwqcvJqG; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790772382; c=relaxed/simple;
+	bh=aTL4lw39PtnnQyOMulEmRhSSF0Yf6RJS/a2j4gCoSSE=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=iwUqa7JVav0+vNADilEcV0L/f15uB0mZLRQOD8969skWWUsxaFA7ZIzlLSA/jr//YFpnxHLhnAehB86RnkhGgHMIOq487FAfgouUhpK20sFTZpNM0hN58tcEQxHm2a9bPahUE4LR8TwXnq7BYtQ7T+fbO1O2OYfVxeHzXzgCP+w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ljaE3gmy; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Gx82dkeX; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kwqcvJqG"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A6BFF1F000FF;
-	Wed, 30 Sep 2026 11:01:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790766109;
-	bh=9bi/i2/aWze1bEGDde8mb4HVoivi8jt5RnjoRegpme8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=kwqcvJqG1zng3JAdzZvvRl3xl1DseZ3TkRS3norZFgdnNiGjQ99aHK63nTWAW0LE+
-	 tj9QX+qvUi0Accx8sb2cHH5/p9/xlSCHc5fxa5schyZsasHCMdUg0VqHNkTUIVXG/k
-	 XGQu7lKCzB4d2zN1fjEWnaKg9ex9JIdVqlTLGWeWwoWiX8FXV/FeZ9+/s/4p8E88QL
-	 jmiN+T6isod3NKrstQORYbPJZCgqmYYngmP4Clg7mKDdKAcYf+vNsiXz8aJYlJVgLQ
-	 hH2+xV26luJZ29/dVp29GQUrnE2KuzIk+0cpyKoJAZXA+Jo8Pptui+LdRHGs+6ZhLn
-	 jFCQWevto44/w==
-Message-ID: <6cf9e611-bfc5-407b-8132-bd328f8b61fc@kernel.org>
-Date: Wed, 30 Sep 2026 13:01:30 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ljaE3gmy";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Gx82dkeX"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 68UB8LhS2898217
+	for <mfd@lists.linux.dev>; Wed, 30 Sep 2026 12:46:19 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=fidXHPHvwOp5wic/6WE7FT
+	nm3CRScksILO2dTzE8xLw=; b=ljaE3gmyCtsc5PlvfQ7o8AU0kGlJR7QhNpvN0B
+	0TlS2HTIVtev723ZN5SgUIRuQhVwc3RXscPUg8XCazhwBHt6Bt6iolh3gbhqzL0c
+	diPTFiSAsIiHbgBKxEI5tCxN2Ppj5Cqp6jFxSBwTI4icbvvT0RyCNSQk2uxXmHTu
+	hZgUADJ3ecjlQFFvIP8+huzbSweLiQWWQAMA7CdQgEzi0JJeg6jnvHNefHvBpc6g
+	L6XdceIgSlGUSYp2TE2ZV3GZPOWo/tYIf9m4SkPAYca6WI28jHhQXihltFPX//1s
+	Y2R/NWdcpT9H6jTykGEWGrkTfQ1Y/lLIQlyY/NLHiDzObIkg==
+Received: from mail-vs1-f70.google.com (mail-vs1-f70.google.com [209.85.217.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h0tkn298d-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <mfd@lists.linux.dev>; Wed, 30 Sep 2026 12:46:19 +0000 (GMT)
+Received: by mail-vs1-f70.google.com with SMTP id ada2fe7eead31-7bf257e7b5eso136735137.2
+        for <mfd@lists.linux.dev>; Wed, 30 Sep 2026 05:46:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1790772378; x=1791377178; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=fidXHPHvwOp5wic/6WE7FTnm3CRScksILO2dTzE8xLw=;
+        b=Gx82dkeXSLtcZjEzN5utYaFbSxsVUjASVn3HSx5sAr0USaeom+NLZHCCpoj6eHSZS5
+         MiSsHQn5vFLtdVDF7giWuj+bhnBLD/OfzMHOTnozwcb7S1bXzIJsw+jMsg98/2hKCDpS
+         YSAJlHqWDVUAXfUM28QmqTuRsg6Y7PEjkNvuETq8PyBGEbwKJ45OVO10NEdxhRBJF4B6
+         tqbgERuW1ZNMnvkXKSg+VmaiO/G9pLu2QvuKUCvDfvEgNma5ngk+gYXS09W+lzDFjpjP
+         SL624TdknGOjD7Rhjqjy4E0D51UJZC5jrGNMKSImG+k5xIG2oN+xRvmnhDjlMmJtWzZN
+         rTMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790772378; x=1791377178;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=fidXHPHvwOp5wic/6WE7FTnm3CRScksILO2dTzE8xLw=;
+        b=Ay8vDzSNaWSQB8AyVhvUsjLXKR2w5zJxxpi/HRjUR64RvfwqaWkcxBPIFtae4aZDzH
+         q088+8+AphcipwGGnSyG0NfyTDGg3v9Kmb4nBNmkCiJ8woNAW2rV4ya0jT01ORVDHmjd
+         AWCJUrJ5j3QZRIE0x92tSBhf61uct+9iajDN7VPnXJdXAHpEaCq/AK2pZ9K0Tw/Le3zY
+         CEa2SpX+ccZOvPxLNgLXSHtQ4R9m11i300/zGr0YI46Rxpn+5ZoYl9JfWs2EtLuP5Nzu
+         BQfdOGL5UAX19q1lZ3/omcaunbLwsbaJp872hYngS3hqXmK6rBHbl4mjQZ9jeSgFaxP9
+         NVnQ==
+X-Forwarded-Encrypted: i=1; AKwUvBx3dMFrPfh5HIm1PLPejdD6NK1m3+Q0P/XQYMsFmWS3zmObpnw7Vflte2FQjoa61aQaHvI=@lists.linux.dev
+X-Gm-Message-State: AFq9FYLSt3pjnlAyjohKzZ+CTGoeZkTgVskQ2IXsiavA7ksQaeDNvdBu
+	Jd4FZ9fhgDwiyNTNwx4ibq9sOBVyQhExquJHUzl52gFSrwqqr35vf2FSAfO85avuLCi/QfldCDF
+	2kT02oYRW2vuBPmfplFZbKUSpnvgg7zKaUPnPcGfkL9/wCfsNR+G26Fw=
+X-Gm-Gg: AYBFou0a1X/eamxvpzlZf295ISF+ju51/pKZxqtJ8AUZn4kgInRPqYjo4TKrqimBnwf
+	KMkulnyCsVGwPcvM+3+TJ06aOQeG37z9BZDCPwXK+WmAN5Qgh1i7UG7+Ow8Q3IUTGMH4hXmS/dP
+	jLvl0Dp1tiRiU3VIPYsjdDSnAI7j9FTTJfxeRse8vUzIXxdCSfIII17aASK0zm1cwPG8ho9Qg8i
+	blgCU0FknjGcIj9dxnxWFEiFL2KMz+KEyYM1MqhRs/YXBdHIZW7jWt64cHsR5iaaf89NDw/Q7x/
+	SpgMT6zk+wkKegcG/dPidHZWMOL/MXfVRqlK1yla3LsSlA0a+UsN/QuRPSLkN8kvxkApFP96Ll9
+	ta7Udhh025ovC
+X-Received: by 2002:a05:6102:38cd:b0:7a7:198b:674b with SMTP id ada2fe7eead31-7be7457f41dmr297917137.32.1790772377995;
+        Wed, 30 Sep 2026 05:46:17 -0700 (PDT)
+X-Received: by 2002:a05:6102:38cd:b0:7a7:198b:674b with SMTP id ada2fe7eead31-7be7457f41dmr297889137.32.1790772377494;
+        Wed, 30 Sep 2026 05:46:17 -0700 (PDT)
+Received: from debian ([5.133.47.210])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a01b1e7a46sm32549195e9.0.2026.09.30.05.46.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 30 Sep 2026 05:46:16 -0700 (PDT)
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>, Abel Vesa <abelvesa@kernel.org>
+Cc: Alexey Klimov <alexey.klimov@linaro.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
+        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Subject: [PATCH v4 0/4] arm64: dts: arduino-imola: add support for sound
+Date: Wed, 30 Sep 2026 13:46:02 +0100
+Message-ID: <20260930124607.1109167-1-srinivas.kandagatla@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 01/20] dt-bindings: phy: Add
- starfive,jh7110-inno-hdmi-phy
-To: Michal Wilczynski <m.wilczynski@samsung.com>
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
- <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Andrzej Hajda <andrzej.hajda@intel.com>,
- Robert Foss <rfoss@kernel.org>,
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
- Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Luca Ceresoli <luca.ceresoli@bootlin.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Lee Jones <lee@kernel.org>, Andy Yan <andy.yan@rock-chips.com>,
- Philipp Zabel <p.zabel@pengutronix.de>,
- Emil Renner Berthing <kernel@esmil.dk>, Hal Feng
- <hal.feng@starfivetech.com>, Michael Turquette <mturquette@baylibre.com>,
- Stephen Boyd <sboyd@kernel.org>, Heiko Stuebner <heiko@sntech.de>,
- Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
- Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
- Dominique Belhachemi <db@domibel.de>, Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>, linux-phy@lists.infradead.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, mfd@lists.linux.dev,
- linux-clk@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-rockchip@lists.infradead.org, linux-riscv@lists.infradead.org,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Maud Spierings <maud_spierings@murena.io>,
- Graham Markall <hello@big-grey.co.uk>,
- Icenowy Zheng <zhengxingda@iscas.ac.cn>,
- Chaoyi Chen <chaoyi.chen@rock-chips.com>,
- Joshua Peisach <jpeisach@ubuntu.com>,
- =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
-References: <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
- <CGME20260915153214eucas1p2b548f3236ef98fb0cbf320e397420125@eucas1p2.samsung.com>
- <20260915-jh7110-clean-send-v4-1-f0e4fd6f2cc8@samsung.com>
- <20260917-mutant-chamois-of-competence-46ca77@quoll>
- <1a1a9b49-430b-4218-b27d-e133d488e8d9@samsung.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <1a1a9b49-430b-4218-b27d-e133d488e8d9@samsung.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=CKy/zhrD c=1 sm=1 tr=0 ts=6abd049b cx=c_pps
+ a=N1BjEkVkxJi3uNfLdpvX3g==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=qC_FGOx9AAAA:8 a=QeQcAra5hdC8VfecJqYA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=crWF4MFLhNY0qMRaF8an:22 a=fsdK_YakeE02zTmptMdW:22
+X-Proofpoint-ORIG-GUID: FKaXOzQ9pe_cUglu5t_hyBPqLTFIe571
+X-Proofpoint-GUID: FKaXOzQ9pe_cUglu5t_hyBPqLTFIe571
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTMwMDA1MCBTYWx0ZWRfX4mdaHGGM7kto
+ URMbvV2ZJ2J78l5LpOmTlabN3MyvgGaa/acXeqTbmIKIurKCBjbnjIyvYIHotRcy9D24LchrNne
+ PQ9DTIIN8cPCpbfkNxTzzR7TjGM0Z6l4ohuPkEaynDRDmY+D/E4t1h99bqQnd1FvHyotKrESa0/
+ MshWq27TCamCJdGTi9BbA5nphU/YNvOjVXpA3leLr3mS8zBC/81HAp4ibO4/LD10227pqzjxJM5
+ 9BUKa2/K7avKZiZb+g8xyWqPkbzNMZVCZ7gdCQegRkD/RErwhnfSxmqCEh9Z6jd25Oy1DYNMh2u
+ EnxI0eQ2MyLZoh+zzWXP6O2DtN2/l7ApnT+OvMkgotuCkkEiErQ9wwWRv6gkOJNvoo/RRZKvRC1
+ S9cC7tbYn/OYsHnE7WqKm5bcgTuKQubFxW6KyTAhIFxU57CE8+QxgBD072tTV2QxHrafsonhHlh
+ SYlRJs8CbkvHD3TK9Iw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTMwMDA1MCBTYWx0ZWRfXyHxGm1lMrVzz
+ Npmaz2uYWGmaP6nxeFwuTfqmU9lpHWebXLylO70NHNZZ/iAkEe74Adpnyrt2VEnoUtY8HZClShs
+ Wzb6pLTMknz6VUFABpjLryKt/9FAk/0=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-30_02,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 adultscore=0 bulkscore=0 lowpriorityscore=0 clxscore=1011
+ phishscore=0 spamscore=0 malwarescore=0 suspectscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609300050
 
-On 25/09/2026 23:05, Michal Wilczynski wrote:
->>> +  clocks:
->>> +    maxItems: 1
->>> +    description: Reference oscillator.
->>
->> This barely counts as a resource, so usual question: no resources here?
->> no MMIO? Even the user of this phy is the block itself.
->>
->> This makes me wonder if this should be a device node in the first place
->> (instead folded into the parent).
-> 
-> The PHY has no reg because the reg is shared with the controller and
-> owned by the parent - patch 9 lets the bridge take its regmap from
-> there.
-> 
-> The user of the PHY is not only the block itself. It is the pixel clock
-> provider for the whole display subsystem, voutcrg takes hdmitx0_pixelclk
-> as the parent of its DC8200 pixel MUXes, and while HDMI output is active
-> it is the only intended source for that clock. The parent has to be
-> assigned explicitly so the general PLL does not end up driving the pixel
-> clock, and so a DSI user does not reach the HDMI PHY clock generator.
-> 
-> So it has to be its own node. The HDMI block has two independent
+This patchset adds support for audio on Arduino-Imola platform which is
+based on Agatti SoC. Some of Alexey's patches are reworked and sent
+here as per previous review comments, mainly on the dt-bindings part.
 
-I do not see the logic which lead to this conclusion. Pixel clock
-provider, so a clock controller, cannot be a user of a phy. Clock
-controller does not have a physical layer.
+Base SoC-level dtsi bits are picked up from
+https://git.codelinaro.org/alexey.klimov/linux_next_tracking/-/commits/rb1_audio_wip_v3?ref_type=HEADS
 
-And really, I have no clue what hdmitx0_pixelclk and voutcrg are. I
-could probably study the patches a lot to figure that out, but my review
-queue has still 200 more, so I'll skip.
+Along with these changes, add sound nodes for Imola and a defconfig
+change.
 
-But nevertheless assigning clock parent of HDMI clock to PHY is
-standard, most of the platforms have it, thus it is not a justification
-for odd design.
+thanks,
+Srini
 
-> functions with different clock inputs and one of them feeds back into
-> the SoC clock tree. The PHY generates hdmitx0_pixelclk which voutcrg
-> consumes the controller consumes pclk/mclk/bclk from voutcrg. Folded
-> into one node that node is both a provider to and a consumer of
-> voutcrg which is a cycle in the hardware description, not just in Linux.
+Changes since v3:
+    - rebased on next-20260929.
+    - dropped "clk: qcom: fix SM6115 lpasscc register offset" — now
+      upstream (689364ac19e4).
+    - dt-bindings/mfd: rework the audio-codec pattern to use oneOf
+      with the pm4125-codec and pm8916-wcd-analog-codec $refs,
+    - dt-bindings/mfd: fix "pm4124" typo in subject; the compatible
+      is qcom,pm4125-codec.
+    - agatti.dtsi: fix lpasscc node unit-address to match reg
+      (@a7ec000 -> @a7e0000) after the driver register-offset fix.
+    - arduino-imola sound dts: mention "Ear Out" in commit log, per
+      Alexey.
+    - arduino-imola sound dts: carry Reviewed-by from Alexey.
+
+Changes since v2:
+    - dt-bindings/mfd: switch to properties.compatible.contains.enum
+      with required: compatible, per Rob.
+    - agatti.dtsi: collapse each <&q6afecc ...> clock cell onto a
+      single line, per Dmitry.
+    - keep qcom,sm6115-lpassaudiocc / qcom,sm6115-lpasscc compatibles;
+      Konrad Acked staying with the established practice.
+    - defconfig: carry Reviewed-by from Dmitry.
+    - rebase on next-20260917.
+
+Changes since v1:
+    - updated various register ranges as per documentation.
+    - added a fix for sm6115 lpasscc driver.
+    - updated commit log
+    - fixed various style issues in dt nodes.
+
+Alexey Klimov (1):
+  arm64: dts: qcom: agatti: add LPASS devices
+
+Srinivas Kandagatla (3):
+  dt-bindings: mfd: qcom,spmi-pmic: add compatibles for pm4125-codec
+  arm64: dts: arduino-imola: add support for sound
+  arm64: defconfig: Enable pm4125 audio codec driver
+
+ .../bindings/mfd/qcom,spmi-pmic.yaml          |   4 +-
+ arch/arm64/boot/dts/qcom/agatti.dtsi          | 157 ++++++++++++++++++
+ arch/arm64/boot/dts/qcom/pm4125.dtsi          |   7 +
+ .../boot/dts/qcom/qrb2210-arduino-imola.dts   | 134 +++++++++++++++
+ arch/arm64/configs/defconfig                  |   1 +
+ 5 files changed, 302 insertions(+), 1 deletion(-)
 
 
-Best regards,
-Krzysztof
+base-commit: 6474fa070f2b8013b4b87350b775b8c3be6e8aac
+-- 
+2.53.0
+
