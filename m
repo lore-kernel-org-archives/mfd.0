@@ -1,34 +1,35 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 508954E36F5;
-	Wed, 30 Sep 2026 14:01:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 014FD5038F7;
+	Wed, 30 Sep 2026 14:01:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790776915; cv=none; b=YG/exkYC9LoxhOg7xucZleHxgN39j0AL9c5M5Bp04DUiv9te5QSaClZa0EJZzd+J0EmCylpRwAkkGOQp5hKifuvWKGptDvvZ/VWj9CTwD9GNYUUP1FpTqT8RYnk8WOCnB5+t7SFl8On7iDO6kJxaMMxENG5VxI0nLSGo9Jju2UQ=
+	t=1790776934; cv=none; b=aUAaoSzaTfCN1RFuxqXsPgWFWRSfYpNnNKSlXRIMmLeCRocNbiu9snTc6aUSK1jzR6p1cmzmIYttk5oEAho9RtABz8sb9nhQu9eqddIT99WUsxRK8tr/tw0HRjf/5llZuOTS8IFkMQt1BDn+SWycxYrAmfPxQA2nt+DBZAlhh8g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790776915; c=relaxed/simple;
-	bh=dST97r3LAEaw/PyflLWS5Q9+HD1zA7kN1XtKOCgeuXs=;
+	s=arc-20240116; t=1790776934; c=relaxed/simple;
+	bh=li9Gd6IEvdkWM5kQp2z+UjbJiua2z6r21DfJ9XZjcbc=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=V+WNMI72dKlyMytlRWtCC8ijSGBUFm7nUYwPCW34ezDGi4nErgYypA+IP5Dqx3rIbed5OdgYJ/Ik5TVfFqXRjw6IrASWocmw1EIX+TrkV0UNyxRFl1pUlio8z/r/OIJQxYbW1/xgc6NjHMrooF94ArlDFMbchhAKy15uwII3DV0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=htCY9Rq9; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:To:Cc; b=tsdUcSQ/NqIGT81+7TevvAt8svTS1udO3oS9GwA59BPtbPbWev6FirvqS4HENUOJcX24SLR37VjuI0kmBJroHChGHGU6114D3WKai5HJU2C70UML6PqMAPNGzI80lHVPtEIdGs+C96/O6/P4fGdXlQtCjuQcXXHZjIGQGF1JyA8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Z2keKNTK; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="htCY9Rq9"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A66F31F00899;
-	Wed, 30 Sep 2026 14:01:37 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Z2keKNTK"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 696051F0089E;
+	Wed, 30 Sep 2026 14:01:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790776898;
-	bh=DU6bdit+raxlYp4VgYHrPLaGpqqt4jAicr7hgcaMNYc=;
+	s=k20260515; t=1790776901;
+	bh=oSShLLNQAbbsmVjZYBOU9ts4ZWD8xjX2kjI9CY6L7xw=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=htCY9Rq90mMYws9Hep8nUSWNtgDCxND05gNFqBGiOyF9ZOF1M1Kf8MjWNcFvE4+ke
-	 Sfw4gYbj7SgiJftoyV9kuy5VXI5oDEtP2venTVKqkh+vcMYceAdSgrzS+qJnIBA6y9
-	 djXSjfzDUsoS6w0hrjAr02+7Wjcuw9AwkR7Ndjibu+zKcTph1rGpH/IlKKKKKDdOdy
-	 Mgv0Xe4ZAeCECgMxqfWnl6IqCNMOt2D76tYfR76Td4v2mNOhLCuHxxE+dKjO6G7+3y
-	 ft0S2HUNttiZsVSOi3AQOj8X1QY+gZ5JOt8ue/m4UG5SQqvKhthG+3ICOqIC4U/BjY
-	 XF3Q+hzdmchzQ==
+	b=Z2keKNTKppBt4n8oWKIV9DXQQZds3DxffpCDYfrESuRWTOgpJkCmrfWzgYz7mr0DW
+	 wYNrA1IwTpyrdpN84w6iZ6QtsVAbXf+ZY5cMupVjCggaTvRgNIT6pX6pDP0cOEmVcE
+	 LtuZ0u626AwdImwW8NSc7RmvUft1/1/niw3FdSDTCFHxOSMobIXXybGgJijEb4leu3
+	 lQBzeypT52HKC1+TM35FBDJBIGy/vIvtBgbsop17XMIt90C/s0t1vfQsoP/AlsmI+g
+	 YSl8A6LJtxUgW8xcz/m/ZYUK+2fV6apPojzbta4HvMpTFd8x39WGKwpMLuyAegcCrc
+	 myxD8uWnlk8xg==
 From: Thierry Reding <thierry.reding@kernel.org>
-Date: Wed, 30 Sep 2026 16:01:23 +0200
-Subject: [PATCH v2 1/3] dt-bindings: mfd: as3722: Convert to json-schema
+Date: Wed, 30 Sep 2026 16:01:24 +0200
+Subject: [PATCH v2 2/3] dt-bindings: sound: tegra-ahub: Convert to
+ json-schema
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -37,7 +38,7 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260930-as3722-bindings-v2-1-a3bba649ebf9@nvidia.com>
+Message-Id: <20260930-as3722-bindings-v2-2-a3bba649ebf9@nvidia.com>
 References: <20260930-as3722-bindings-v2-0-a3bba649ebf9@nvidia.com>
 In-Reply-To: <20260930-as3722-bindings-v2-0-a3bba649ebf9@nvidia.com>
 To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
@@ -51,661 +52,430 @@ Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org,
  linux-sound@vger.kernel.org, linux-tegra@vger.kernel.org, 
  Thierry Reding <treding@nvidia.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=20801; i=treding@nvidia.com;
- h=from:subject:message-id; bh=LSLhGpFasvbos8uxwdw6Z4f3+bkCq8/HpYDDTtA7qBs=;
- b=owEBbQKS/ZANAwAKAd0jrNd/PrOhAcsmYgBqvRY80hRsmK+MCfaJuL6C5mdoj4Q/YiZwFLcg5
- vvYPVi+fl+JAjMEAAEKAB0WIQSI6sMIAUnM98CNyJ/dI6zXfz6zoQUCar0WPAAKCRDdI6zXfz6z
- odoZEAC68rSotK9+Fl6ZxwrHrsqnIIadIRa+pby7n/rOMn7ESeG/aAynOdgiR9tTw7pH0PregGp
- 4+8LaZJiQKUkXAnfCELorwQjWOy5EQVttgvoz9h8lq1fSo1IKcvhxPmpaxJPVnLUG4awG9p5k9o
- D3jLqF603Z0/Zl4sONsD6XohilMgdNz912kbS+LEDEx0+KvrmK6LAAy4FP1rgFLwqFut2x0x+ZM
- JIjpN7yCwY5kiRmMpJgTV7nGjiM/CN4S6xNLmcsG7Hr2DnS7lCvnKZA6CHjzAf7UlXnDuio+tXp
- lSSj9EAn4o/ZQ+2YcESbj903/GB4rtfQM8v5hlsD+gdlyqMUQFgMR0HlSMbYiMZ/BmRtgEpoz2L
- C40PU9iyo1Ip/4IYR0JGTX+2shujm88AAfg7l8+SLeEzDd37cIwQrxMoBj0SPkbvKApoJYWZ+Qg
- +h2JveRJnWID15055wS9YwesE6D91huQMyESNs7qu7RJmZSL4ObOIoG5t0DnLe8q17LqiQTkVKm
- c4Kp+OXP2Ld0pmoslfFgo7d/3kkbbLgOQXXoHYFcRhPO4KqbTigDPS2++9xGG3Rxezj3WaEHwLN
- HNnI7uqpIIa/qlhKPRTiuUx2nYA2qs7y8tmuDnYgXonQe3SS71p4YgNzAbAXg4qKgZigQPMmSsl
- zOlxwzQ8cI+uoQA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=11591; i=treding@nvidia.com;
+ h=from:subject:message-id; bh=Zm3W0UKPP0bEjx6pVJXeZSDuvBU9vof9E/T/2eOj25A=;
+ b=owEBbQKS/ZANAwAKAd0jrNd/PrOhAcsmYgBqvRY8sH+zn0k7HCOhFbJaWSTor+WTzTaniWvzh
+ vpvUw0p1DmJAjMEAAEKAB0WIQSI6sMIAUnM98CNyJ/dI6zXfz6zoQUCar0WPAAKCRDdI6zXfz6z
+ oQ3SD/wIMelLEuCcmm9GIBcE0UTGebQReSubatgUy8iMS/BQ1Oi/f6CU1o8qPPfHTg/Nv/YkUbT
+ vqrMIA3mmtTt04zAdZA2uUukAMzvBTw+LnrTNGDWVHh4nfZzOq8HI5/GcbJbA7ROJLkY9rWxEVb
+ X8w1BfjzvEXW1XLsWsORZxdChQZ64HKhlfObT1dKMqHqw+EH3QJFR+XCVd9SLpbpwmCA/sFNlNA
+ tmvkTOB3XmpQV2cs9lCnnjaWHmm/akYErL1HxSxeWmq9iOD1pxNbyFZxDbTr+QUnOv09dVi+GJr
+ 4ucMKDodJQPQY4ePgYsxjVWynSiEEJfhwdZaNF6pSs613bsxncPcz955CS83yfdQ0ipeuBlh++5
+ TQfY4EHOZ8Qz/clHcAEwCF0nVXmvaE2MKVDuxIBXvT1dEqPEpBDcoMscMi+evjIlJl6xnRLIxFB
+ 076L7PS2izuihKmCGXX0jwQ2EhhIwdeM3B5J9mIawge40a0fZ7o2wh4hW/C2ZlekJ9h9Y1RTF56
+ 2ous3xCcYV4Dh0hMdjYj2ESiVu20shLaamaSJ0vW12PB13QPXnphxCEB0xSocelfE6wQr0CVYEY
+ SoRNV5Vp1ycOYiZQa/5qMFW+4/sCtDAZpGj1jQAwB2BGN/u/cE5paREFaWa6HFOm0T9inqJy8wJ
+ rCItncEIBFsjoSg==
 X-Developer-Key: i=treding@nvidia.com; a=openpgp;
  fpr=88EAC3080149CCF7C08DC89FDD23ACD77F3EB3A1
 
 From: Thierry Reding <treding@nvidia.com>
 
-Convert the AMS AS3722 PMIC bindings from the free-form text format to
+Convert Tegra AHUB bindings from the free-form text format to
 json-schema.
 
 Signed-off-by: Thierry Reding <treding@nvidia.com>
 ---
 Changes in v2:
-- use pinmux-node.yaml, pincfg-node.yaml, gpio.yaml and regulator.yaml
-- add #gpio-cells and gpio-controller to list of required properties
-- remove some old and broken references from descriptions
-- use consistent formatting for description property
-- remove some duplicate type definitions
-- add missing additionalProperties
-- order properties consistently
-- constrain #gpio-cells to 2
+- add compatible to the list of required properties for i2s child nodes
+- use consistent style for description properties
+- add correct set of possible compatible strings
+- add per-SoC constraints for resets and dmas
+- wrap overly long lines
+- fix yamllint warnings
 ---
- .../devicetree/bindings/mfd/ams,as3722.yaml        | 293 +++++++++++++++++++++
- Documentation/devicetree/bindings/mfd/as3722.txt   | 214 ---------------
- .../bindings/regulator/as3722-regulator.txt        |  91 -------
- 3 files changed, 293 insertions(+), 305 deletions(-)
+ .../bindings/sound/nvidia,tegra30-ahub.txt         |  88 -------
+ .../bindings/sound/nvidia,tegra30-ahub.yaml        | 288 +++++++++++++++++++++
+ 2 files changed, 288 insertions(+), 88 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/mfd/ams,as3722.yaml b/Documentation/devicetree/bindings/mfd/ams,as3722.yaml
+diff --git a/Documentation/devicetree/bindings/sound/nvidia,tegra30-ahub.txt b/Documentation/devicetree/bindings/sound/nvidia,tegra30-ahub.txt
+deleted file mode 100644
+index 0e9a1895d7fb..000000000000
+--- a/Documentation/devicetree/bindings/sound/nvidia,tegra30-ahub.txt
++++ /dev/null
+@@ -1,88 +0,0 @@
+-NVIDIA Tegra30 AHUB (Audio Hub)
+-
+-Required properties:
+-- compatible : For Tegra30, must contain "nvidia,tegra30-ahub".  For Tegra114,
+-  must contain "nvidia,tegra114-ahub".  For Tegra124, must contain
+-  "nvidia,tegra124-ahub".  Otherwise, must contain "nvidia,<chip>-ahub",
+-  plus at least one of the above, where <chip> is tegra132.
+-- reg : Should contain the register physical address and length for each of
+-  the AHUB's register blocks.
+-  - Tegra30 requires 2 entries, for the APBIF and AHUB/AUDIO register blocks.
+-  - Tegra114 requires an additional entry, for the APBIF2 register block.
+-- interrupts : Should contain AHUB interrupt
+-- clocks : Must contain an entry for each entry in clock-names.
+-  See ../clocks/clock-bindings.txt for details.
+-- clock-names : Must include the following entries:
+-  - d_audio
+-  - apbif
+-- resets : Must contain an entry for each entry in reset-names.
+-  See ../reset/reset.txt for details.
+-- reset-names : Must include the following entries:
+-  Tegra30 and later:
+-  - d_audio
+-  - apbif
+-  - i2s0
+-  - i2s1
+-  - i2s2
+-  - i2s3
+-  - i2s4
+-  - dam0
+-  - dam1
+-  - dam2
+-  - spdif
+-  Tegra114 and later additionally require:
+-  - amx
+-  - adx
+-  Tegra124 and later additionally require:
+-  - amx1
+-  - adx1
+-  - afc0
+-  - afc1
+-  - afc2
+-  - afc3
+-  - afc4
+-  - afc5
+-- ranges : The bus address mapping for the configlink register bus.
+-  Can be empty since the mapping is 1:1.
+-- dmas : Must contain an entry for each entry in clock-names.
+-  See ../dma/dma.txt for details.
+-- dma-names : Must include the following entries:
+-  - rx0 .. rx<n>
+-  - tx0 .. tx<n>
+-  ... where n is:
+-  Tegra30: 3
+-  Tegra114, Tegra124: 9
+-- #address-cells : For the configlink bus. Should be <1>;
+-- #size-cells : For the configlink bus. Should be <1>.
+-
+-AHUB client modules need to specify the IDs of their CIFs (Client InterFaces).
+-For RX CIFs, the numbers indicate the register number within AHUB routing
+-register space (APBIF 0..3 RX, I2S 0..5 RX, DAM 0..2 RX 0..1, SPDIF RX 0..1).
+-For TX CIFs, the numbers indicate the bit position within the AHUB routing
+-registers (APBIF 0..3 TX, I2S 0..5 TX, DAM 0..2 TX, SPDIF TX 0..1).
+-
+-Example:
+-
+-ahub@70080000 {
+-	compatible = "nvidia,tegra30-ahub";
+-	reg = <0x70080000 0x200 0x70080200 0x100>;
+-	interrupts = < 0 103 0x04 >;
+-	nvidia,dma-request-selector = <&apbdma 1>;
+-	clocks = <&tegra_car 106>, <&tegra_car 107>;
+-	clock-names = "d_audio", "apbif";
+-	resets = <&tegra_car 106>, <&tegra_car 107>, <&tegra_car 30>,
+-		<&tegra_car 11>, <&tegra_car 18>, <&tegra_car 101>,
+-		<&tegra_car 102>, <&tegra_car 108>, <&tegra_car 109>,
+-		<&tegra_car 110>, <&tegra_car 10>;
+-	reset-names = "d_audio", "apbif", "i2s0", "i2s1", "i2s2",
+-		"i2s3", "i2s4", "dam0", "dam1", "dam2",
+-		"spdif";
+-	dmas = <&apbdma 1>, <&apbdma 1>;
+-	       <&apbdma 2>, <&apbdma 2>;
+-	       <&apbdma 3>, <&apbdma 3>;
+-	       <&apbdma 4>, <&apbdma 4>;
+-	dma-names = "rx0", "tx0", "rx1", "tx1", "rx2", "tx2", "rx3", "tx3";
+-	ranges;
+-	#address-cells = <1>;
+-	#size-cells = <1>;
+-};
+diff --git a/Documentation/devicetree/bindings/sound/nvidia,tegra30-ahub.yaml b/Documentation/devicetree/bindings/sound/nvidia,tegra30-ahub.yaml
 new file mode 100644
-index 000000000000..51910042c621
+index 000000000000..4a7f5c74125c
 --- /dev/null
-+++ b/Documentation/devicetree/bindings/mfd/ams,as3722.yaml
-@@ -0,0 +1,293 @@
++++ b/Documentation/devicetree/bindings/sound/nvidia,tegra30-ahub.yaml
+@@ -0,0 +1,288 @@
 +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
 +%YAML 1.2
 +---
-+$id: http://devicetree.org/schemas/mfd/ams,as3722.yaml#
++$id: http://devicetree.org/schemas/sound/nvidia,tegra30-ahub.yaml#
 +$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
-+title: AMS AS3722 Power Management IC
++title: NVIDIA Tegra30 AHUB (Audio Hub)
 +
 +maintainers:
-+  - Laxman Dewangan <ldewangan@nvidia.com>
-+  - Lee Jones <lee.jones@linaro.org>
++  - Thierry Reding <thierry.reding@gmail.com>
++  - Jon Hunter <jonathanh@nvidia.com>
++
++description:
++  AHUB client modules need to specify the IDs of their CIFs (Client
++  InterFaces). For RX CIFs, the numbers indicate the register number within
++  AHUB routing register space (APBIF 0..3 RX, I2S 0..5 RX, DAM 0..2 RX 0..1,
++  SPDIF RX 0..1). For TX CIFs, the numbers indicate the bit position within
++  the AHUB routing registers (APBIF 0..3 TX, I2S 0..5 TX, DAM 0..2 TX, SPDIF
++  TX 0..1).
 +
 +properties:
 +  compatible:
-+    const: ams,as3722
++    oneOf:
++      - const: nvidia,tegra30-ahub
++      - const: nvidia,tegra114-ahub
++      - const: nvidia,tegra124-ahub
++      - items:
++          - const: nvidia,tegra132-ahub
++          - const: nvidia,tegra124-ahub
 +
 +  reg:
-+    maxItems: 1
++    minItems: 2
++    maxItems: 3
 +
 +  interrupts:
 +    maxItems: 1
 +
-+  # standard properties
-+  interrupt-controller:
-+    description:
-+      The AS3722 has an internal interrupt controller which takes the interrupt
-+      request from internal sub-blocks like RTC, regulators, GPIOs as well as
-+      external input.
++  clocks:
++    items:
++      - description: digital audio clock
++      - description: module clock
 +
-+  "#interrupt-cells":
-+    description:
-+      The first cell is the IRQ number. IRQ numbers for different interrupt
-+      source of AS3722 are defined at dt-bindings/mfd/as3722.h. The second cell
-+      is the flags, as defined in dt-bindings/interrupt-controller/irq.h.
++  clock-names:
++    items:
++      - const: d_audio
++      - const: apbif
 +
-+    const: 2
++  resets:
++    minItems: 11
++    maxItems: 21
 +
-+  # from gpio.yaml
-+  gpio-controller: true
++  reset-names:
++    minItems: 11
++    maxItems: 21
 +
-+  "#gpio-cells":
-+    const: 2
++  ranges: true
 +
-+  # optional properties
-+  ams,enable-internal-int-pullup:
-+    description:
-+      Enable internal pullup on interrupt pin when present. Omitting this will
-+      disable internal pullup on INT pin.
++  dmas:
++    minItems: 8
++    maxItems: 20
 +
-+    $ref: /schemas/types.yaml#/definitions/flag
++  dma-names:
++    minItems: 8
++    maxItems: 20
 +
-+  ams,enable-internal-i2c-pullup:
-+    description:
-+      Enable internal pullup on I2C SCL/SDA pins when present. Omitting this
-+      will disable internal pullup on I2C SCL/SDA lines.
++  "#address-cells":
++    enum: [1, 2]
 +
-+    $ref: /schemas/types.yaml#/definitions/flag
++  "#size-cells":
++    enum: [1, 2]
 +
-+  ams,enable-ac-ok-power-on:
-+    description:
-+      When present, enable exit out of power off mode with AC_OK pin (pin
-+      enabled in power off mode).
-+
-+    $ref: /schemas/types.yaml#/definitions/flag
-+
-+  ams,system-power-controller:
-+    description:
-+      The AS3722 supports the system power off by turning off all its rails.
-+      The device node should contain this boolean property to enable this
-+      functionality.
-+
-+    $ref: /schemas/types.yaml#/definitions/flag
-+
-+  pinmux:
-+    description:
-+      Device has 8 GPIO pins which can be configured as GPIO as well as the
-+      special IO functions.
-+
++patternProperties:
++  "^i2s@[0-9a-f]+$":
 +    type: object
-+    additionalProperties: false
-+
-+    patternProperties:
-+      "^gpio[0-7_]+$":
-+        description:
-+          Child nodes of the pinmux node represent some desired configuration
-+          for a list of pins. This configuration can include the mux function
-+          to select on those pin(s), and various pin configuration parameters,
-+          such as pull-up, open drain.
-+
-+        type: object
-+        allOf:
-+          - $ref: ../pinctrl/pincfg-node.yaml#
-+          - $ref: ../pinctrl/pinmux-node.yaml#
-+        additionalProperties: false
-+
-+        properties:
-+          pins:
-+            items:
-+              enum: [ gpio0, gpio1, gpio2, gpio3, gpio4, gpio5, gpio6, gpio7 ]
-+
-+          function:
-+            enum: [ gpio, interrupt-out, gpio-in-interrupt,
-+                    vsup-vbat-low-undebounce-out, vsup-vbat-low-debounce-out,
-+                    voltage-in-standby, oc-pg-sd0, oc-pg-sd6, powergood-out,
-+                    pwm-in, pwm-out, clk32k-out, watchdog-in, soft-reset-in ]
-+
-+          bias-pull-up:
-+            type: boolean
-+
-+          bias-pull-down:
-+            type: boolean
-+
-+          bias-disable: true
-+          bias-high-impedance: true
-+          drive-open-drain: true
-+
-+        required:
-+          - pins
-+
-+  regulators:
-+    description:
-+      Device has multiple DCDC and LDOs. The node "regulators" is required if
-+      regulator functionality is needed.
-+
-+    type: object
-+    additionalProperties: false
-+
-+    properties:
-+      vsup-sd2-supply:
-+        description: input supply for SD2
-+
-+      vsup-sd3-supply:
-+        description: input supply for SD3
-+
-+      vsup-sd4-supply:
-+        description: input supply for SD4
-+
-+      vsup-sd5-supply:
-+        description: input supply for SD5
-+
-+      vin-ldo0-supply:
-+        description: input supply for LDO0
-+
-+      vin-ldo1-6-supply:
-+        description: input supply for LDO1 and LDO6
-+
-+      vin-ldo2-5-7-supply:
-+        description: input supply for LDO2, LDO5 and LDO7
-+
-+      vin-ldo3-4-supply:
-+        description: input supply for LDO3 and LDO4
-+
-+      vin-ldo9-10-supply:
-+        description: input supply for LDO9 and LDO10
-+
-+      vin-ldo11-supply:
-+        description: input supply for LDO11
-+
-+    patternProperties:
-+      "^(sd[0-6]|ldo[0-7]|ldo9|ldo10|ldo11)$":
-+        description:
-+          These sub-nodes must be named after one of the regulators found on
-+          the AS3277. Each sub-node should contain the constraints and
-+          initialization information for that regulator.
-+
-+        $ref: /schemas/regulator/regulator.yaml#
-+        unevaluatedProperties: false
-+        type: object
-+
-+        properties:
-+          ams,ext-control:
-+            description:
-+              External control of the rail. The value of this property will
-+              tell which external input is controlling this rail. Valid values
-+              are 0, 1, 2 ad 3. If this property does not exist, the default
-+              value is 0. The external control pin macros are defined in
-+              dt-bindings/mfd/as3722.h.
-+
-+            $ref: /schemas/types.yaml#/definitions/uint32
-+            oneOf:
-+              - description: there is no external control of this rail
-+                const: 0
-+              - description: rail is controlled by ENABLE1 input pin
-+                const: 1
-+              - description: rail is controlled by ENABLE2 input pin
-+                const: 2
-+              - description: rail is controlled by ENABLE3 input pin
-+                const: 3
-+            default: 0
-+
-+          ams,enable-tracking:
-+            description: Enable tracking with SD1, only supported by LDO3.
-+
-+            $ref: /schemas/types.yaml#/definitions/flag
-+
-+unevaluatedProperties: false
++    required:
++      - compatible
 +
 +required:
 +  - compatible
 +  - reg
-+  - interrupt-controller
-+  - "#interrupt-cells"
-+  - gpio-controller
-+  - "#gpio-cells"
++  - interrupts
++  - clocks
++  - clock-names
++  - resets
++  - reset-names
++  - ranges
++  - dmas
++  - dma-names
++  - "#address-cells"
++  - "#size-cells"
 +
 +allOf:
-+  - $ref: /schemas/gpio/gpio.yaml
++  - if:
++      properties:
++        compatible:
++          const: nvidia,tegra30-ahub
++    then:
++      properties:
++        reg:
++          items:
++            - description: APBIF registers
++            - description: AHUB/AUDIO registers
++
++        resets:
++          maxItems: 11
++
++        reset-names:
++          items:
++            - const: d_audio
++            - const: apbif
++            - const: i2s0
++            - const: i2s1
++            - const: i2s2
++            - const: i2s3
++            - const: i2s4
++            - const: dam0
++            - const: dam1
++            - const: dam2
++            - const: spdif
++
++        dmas:
++          maxItems: 8
++
++        dma-names:
++          items:
++            - const: rx0
++            - const: tx0
++            - const: rx1
++            - const: tx1
++            - const: rx2
++            - const: tx2
++            - const: rx3
++            - const: tx3
++
++  - if:
++      properties:
++        compatible:
++          const: nvidia,tegra114-ahub
++    then:
++      properties:
++        reg:
++          items:
++            - description: APBIF registers
++            - description: AHUB/AUDIO registers
++            - description: APBIF2 registers
++
++        resets:
++          minItems: 13
++          maxItems: 13
++
++        reset-names:
++          items:
++            - const: d_audio
++            - const: apbif
++            - const: i2s0
++            - const: i2s1
++            - const: i2s2
++            - const: i2s3
++            - const: i2s4
++            - const: dam0
++            - const: dam1
++            - const: dam2
++            - const: spdif
++            - const: amx
++            - const: adx
++
++        dmas:
++          minItems: 20
++
++        dma-names:
++          items:
++            - const: rx0
++            - const: tx0
++            - const: rx1
++            - const: tx1
++            - const: rx2
++            - const: tx2
++            - const: rx3
++            - const: tx3
++            - const: rx4
++            - const: tx4
++            - const: rx5
++            - const: tx5
++            - const: rx6
++            - const: tx6
++            - const: rx7
++            - const: tx7
++            - const: rx8
++            - const: tx8
++            - const: rx9
++            - const: tx9
++
++  - if:
++      properties:
++        compatible:
++          const: nvidia,tegra124-ahub
++    then:
++      properties:
++        reg:
++          items:
++            - description: APBIF registers
++            - description: AHUB/AUDIO registers
++            - description: APBIF2 registers
++
++        resets:
++          minItems: 21
++
++        reset-names:
++          items:
++            - const: d_audio
++            - const: apbif
++            - const: i2s0
++            - const: i2s1
++            - const: i2s2
++            - const: i2s3
++            - const: i2s4
++            - const: dam0
++            - const: dam1
++            - const: dam2
++            - const: spdif
++            - const: amx
++            - const: amx1
++            - const: adx
++            - const: adx1
++            - const: afc0
++            - const: afc1
++            - const: afc2
++            - const: afc3
++            - const: afc4
++            - const: afc5
++
++        dmas:
++          minItems: 20
++
++        dma-names:
++          items:
++            - const: rx0
++            - const: tx0
++            - const: rx1
++            - const: tx1
++            - const: rx2
++            - const: tx2
++            - const: rx3
++            - const: tx3
++            - const: rx4
++            - const: tx4
++            - const: rx5
++            - const: tx5
++            - const: rx6
++            - const: tx6
++            - const: rx7
++            - const: tx7
++            - const: rx8
++            - const: tx8
++            - const: rx9
++            - const: tx9
++
++additionalProperties: false
 +
 +examples:
 +  - |
-+    #include <dt-bindings/mfd/as3722.h>
++    #include <dt-bindings/clock/tegra30-car.h>
++    #include <dt-bindings/interrupt-controller/arm-gic.h>
 +
-+    i2c {
++    ahub@70080000 {
++        compatible = "nvidia,tegra30-ahub";
++        reg = <0x70080000 0x200>,
++              <0x70080200 0x100>;
++        interrupts = <GIC_SPI 103 IRQ_TYPE_LEVEL_HIGH>;
++        clocks = <&tegra_car TEGRA30_CLK_D_AUDIO>,
++                 <&tegra_car TEGRA30_CLK_APBIF>;
++        clock-names = "d_audio", "apbif";
++        resets = <&tegra_car 106>, <&tegra_car 107>, <&tegra_car 30>,
++                 <&tegra_car 11>, <&tegra_car 18>, <&tegra_car 101>,
++                 <&tegra_car 102>, <&tegra_car 108>, <&tegra_car 109>,
++                 <&tegra_car 110>, <&tegra_car 10>;
++        reset-names = "d_audio", "apbif", "i2s0", "i2s1", "i2s2",
++                "i2s3", "i2s4", "dam0", "dam1", "dam2",
++                "spdif";
++        dmas = <&apbdma 1>, <&apbdma 1>,
++               <&apbdma 2>, <&apbdma 2>,
++               <&apbdma 3>, <&apbdma 3>,
++               <&apbdma 4>, <&apbdma 4>;
++        dma-names = "rx0", "tx0", "rx1", "tx1", "rx2", "tx2", "rx3", "tx3";
++        ranges;
 +        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        pmic@48 {
-+            compatible = "ams,as3722";
-+            reg = <0x48>;
-+
-+            ams,system-power-controller;
-+
-+            interrupt-parent = <&intc>;
-+            interrupt-controller;
-+            #interrupt-cells = <2>;
-+
-+            gpio-controller;
-+            #gpio-cells = <2>;
-+
-+            pinctrl-names = "default";
-+            pinctrl-0 = <&as3722_default>;
-+
-+            as3722_default: pinmux {
-+                gpio0 {
-+                    pins = "gpio0";
-+                    function = "gpio";
-+                    bias-pull-down;
-+                };
-+
-+                gpio1_2_4_7 {
-+                    pins = "gpio1", "gpio2", "gpio4", "gpio7";
-+                    function = "gpio";
-+                    bias-pull-up;
-+                };
-+
-+                gpio5 {
-+                    pins = "gpio5";
-+                    function = "clk32k-out";
-+                };
-+            };
-+
-+            regulators {
-+                vsup-sd2-supply = <&vdd_5v0_sys>;
-+
-+                sd0 {
-+                    regulator-name = "vdd_cpu";
-+                    regulator-min-microvolt = <700000>;
-+                    regulator-max-microvolt = <1400000>;
-+                    regulator-always-on;
-+                    ams,ext-control = <2>;
-+                };
-+
-+                sd1 {
-+                    regulator-name = "vdd_core";
-+                    regulator-min-microvolt = <700000>;
-+                    regulator-max-microvolt = <1400000>;
-+                    regulator-always-on;
-+                    ams,ext-control = <1>;
-+                };
-+
-+                sd2 {
-+                    regulator-name = "vddio_ddr";
-+                    regulator-min-microvolt = <1350000>;
-+                    regulator-max-microvolt = <1350000>;
-+                    regulator-always-on;
-+                };
-+
-+                sd4 {
-+                    regulator-name = "avdd-hdmi-pex";
-+                    regulator-min-microvolt = <1050000>;
-+                    regulator-max-microvolt = <1050000>;
-+                    regulator-always-on;
-+                };
-+
-+                sd5 {
-+                    regulator-name = "vdd-1v8";
-+                    regulator-min-microvolt = <1800000>;
-+                    regulator-max-microvolt = <1800000>;
-+                    regulator-always-on;
-+                };
-+            };
-+        };
++        #size-cells = <1>;
 +    };
-diff --git a/Documentation/devicetree/bindings/mfd/as3722.txt b/Documentation/devicetree/bindings/mfd/as3722.txt
-deleted file mode 100644
-index 2a665741d7fe..000000000000
---- a/Documentation/devicetree/bindings/mfd/as3722.txt
-+++ /dev/null
-@@ -1,214 +0,0 @@
--* ams AS3722 Power management IC.
--
--Required properties:
---------------------
--- compatible: Must be "ams,as3722".
--- reg: I2C device address.
--- interrupt-controller: AS3722 has internal interrupt controller which takes the
--  interrupt request from internal sub-blocks like RTC, regulators, GPIOs as well
--  as external input.
--- #interrupt-cells: Should be set to 2 for IRQ number and flags.
--  The first cell is the IRQ number. IRQ numbers for different interrupt source
--  of AS3722 are defined at dt-bindings/mfd/as3722.h
--  The second cell is the flags, encoded as the trigger masks from binding document
--	interrupts.txt, using dt-bindings/irq.
--
--Optional properties:
----------------------
--- ams,enable-internal-int-pullup: Boolean property, to enable internal pullup on
--	interrupt pin. Missing this will disable internal pullup on INT pin.
--- ams,enable-internal-i2c-pullup: Boolean property, to enable internal pullup on
--	i2c scl/sda pins. Missing this will disable internal pullup on i2c
--	scl/sda lines.
--- ams,enable-ac-ok-power-on: Boolean property, to enable exit out of power off
--	mode with AC_OK pin (pin enabled in power off mode).
--
--Optional submodule and their properties:
--=======================================
--
--Pinmux and GPIO:
--===============
--Device has 8 GPIO pins which can be configured as GPIO as well as the special IO
--functions.
--
--Please refer to pinctrl-bindings.txt in this directory for details of the
--common pinctrl bindings used by client devices, including the meaning of the
--phrase "pin configuration node".
--
--Following are properties which is needed if GPIO and pinmux functionality
--is required:
--    Required properties:
--    -------------------
--	- gpio-controller: Marks the device node as a GPIO controller.
--	- #gpio-cells: Number of GPIO cells. Refer to binding document
--			gpio/gpio.txt
--
--    Optional properties:
--    --------------------
--	Following properties are require if pin control setting is required
--	at boot.
--	- pinctrl-names: A pinctrl state named "default" be defined, using the
--		bindings in pinctrl/pinctrl-bindings.txt.
--	- pinctrl[0...n]: Properties to contain the phandle that refer to
--		different nodes of pin control settings. These nodes represents
--		the pin control setting of state 0 to state n. Each of these
--		nodes contains different subnodes to represents some desired
--		configuration for a list of pins. This configuration can
--		include the mux function to select on those pin(s), and
--		various pin configuration parameters, such as pull-up,
--		open drain.
--
--		Each subnode have following properties:
--		Required properties:
--		    - pins: List of pins. Valid values of pins properties are:
--				gpio0, gpio1, gpio2, gpio3, gpio4, gpio5,
--				gpio6, gpio7
--
--		Optional properties:
--			function, bias-disable, bias-pull-up, bias-pull-down,
--			bias-high-impedance, drive-open-drain.
--
--			Valid values for function properties are:
--				gpio, interrupt-out, gpio-in-interrupt,
--				vsup-vbat-low-undebounce-out,
--				vsup-vbat-low-debounce-out,
--				voltage-in-standby, oc-pg-sd0, oc-pg-sd6,
--				powergood-out, pwm-in, pwm-out, clk32k-out,
--				watchdog-in, soft-reset-in
--
--Regulators:
--===========
--Device has multiple DCDC and LDOs. The node "regulators" is require if regulator
--functionality is needed.
--
--Following are properties of regulator subnode.
--
--    Optional properties:
--    -------------------
--	The input supply of regulators are the optional properties on the
--	regulator node. The input supply of these regulators are provided
--	through following properties:
--		vsup-sd2-supply: Input supply for SD2.
--		vsup-sd3-supply: Input supply for SD3.
--		vsup-sd4-supply: Input supply for SD4.
--		vsup-sd5-supply: Input supply for SD5.
--		vin-ldo0-supply: Input supply for LDO0.
--		vin-ldo1-6-supply: Input supply for LDO1 and LDO6.
--		vin-ldo2-5-7-supply: Input supply for LDO2, LDO5 and LDO7.
--		vin-ldo3-4-supply: Input supply for LDO3 and LDO4.
--		vin-ldo9-10-supply: Input supply for LDO9 and LDO10.
--		vin-ldo11-supply: Input supply for LDO11.
--
--    Optional sub nodes for regulators:
--    ---------------------------------
--	The subnodes name is the name of regulator and it must be one of:
--	sd[0-6], ldo[0-7], ldo[9-11]
--
--	Each sub-node should contain the constraints and initialization
--	information for that regulator. See regulator.txt for a description
--	of standard properties for these sub-nodes.
--	Additional optional custom properties  are listed below.
--		ams,ext-control: External control of the rail. The option of
--			this properties will tell which external input is
--			controlling this rail. Valid values are 0, 1, 2 ad 3.
--			0: There is no external control of this rail.
--			1: Rail is controlled by ENABLE1 input pin.
--			2: Rail is controlled by ENABLE2 input pin.
--			3: Rail is controlled by ENABLE3 input pin.
--			Missing this property on DT will be assume as no
--			external control. The external control pin macros
--			are defined @dt-bindings/mfd/as3722.h
--
--		ams,enable-tracking: Enable tracking with SD1, only supported
--			by LDO3.
--
--Power-off:
--=========
--AS3722 supports the system power off by turning off all its rails.
--The device node should have the following properties to enable this
--functionality
--ams,system-power-controller: Boolean, to enable the power off functionality
--        through this device.
--
--Example:
----------
--#include <dt-bindings/mfd/as3722.h>
--...
--ams3722 {
--	compatible = "ams,as3722";
--	reg = <0x48>;
--
--	ams,system-power-controller;
--
--	interrupt-parent = <&intc>;
--	interrupt-controller;
--	#interrupt-cells = <2>;
--
--	gpio-controller;
--	#gpio-cells = <2>;
--
--	pinctrl-names = "default";
--	pinctrl-0 = <&as3722_default>;
--
--	as3722_default: pinmux {
--			gpio0 {
--				pins = "gpio0";
--				function = "gpio";
--				bias-pull-down;
--			};
--
--			gpio1_2_4_7 {
--				pins = "gpio1", "gpio2", "gpio4", "gpio7";
--				function = "gpio";
--				bias-pull-up;
--			};
--
--			gpio5 {
--				pins = "gpio5";
--				function = "clk32k_out";
--			};
--	}
--
--	regulators {
--			vsup-sd2-supply = <...>;
--			...
--
--			sd0 {
--				regulator-name = "vdd_cpu";
--				regulator-min-microvolt = <700000>;
--				regulator-max-microvolt = <1400000>;
--				regulator-always-on;
--				ams,ext-control = <2>;
--			};
--
--			sd1 {
--				regulator-name = "vdd_core";
--				regulator-min-microvolt = <700000>;
--				regulator-max-microvolt = <1400000>;
--				regulator-always-on;
--				ams,ext-control = <1>;
--			};
--
--			sd2 {
--				regulator-name = "vddio_ddr";
--				regulator-min-microvolt = <1350000>;
--				regulator-max-microvolt = <1350000>;
--				regulator-always-on;
--			};
--
--			sd4 {
--				regulator-name = "avdd-hdmi-pex";
--				regulator-min-microvolt = <1050000>;
--				regulator-max-microvolt = <1050000>;
--				regulator-always-on;
--			};
--
--			sd5 {
--				regulator-name = "vdd-1v8";
--				regulator-min-microvolt = <1800000>;
--				regulator-max-microvolt = <1800000>;
--				regulator-always-on;
--			};
--			....
--	};
--};
-diff --git a/Documentation/devicetree/bindings/regulator/as3722-regulator.txt b/Documentation/devicetree/bindings/regulator/as3722-regulator.txt
-deleted file mode 100644
-index caad0c8a258d..000000000000
---- a/Documentation/devicetree/bindings/regulator/as3722-regulator.txt
-+++ /dev/null
-@@ -1,91 +0,0 @@
--Regulator of AMS AS3722 PMIC.
--Name of the regulator subnode must be "regulators".
--
--Optional properties:
----------------------
--The input supply of regulators are the optional properties on the
--regulator node. The AS3722 is having 7 DCDC step-down regulators as
--sd[0-6], 10 LDOs as ldo[0-7], ldo[9-11]. The input supply of these
--regulators are provided through following properties:
--vsup-sd2-supply: Input supply for SD2.
--vsup-sd3-supply: Input supply for SD3.
--vsup-sd4-supply: Input supply for SD4.
--vsup-sd5-supply: Input supply for SD5.
--vin-ldo0-supply: Input supply for LDO0.
--vin-ldo1-6-supply: Input supply for LDO1 and LDO6.
--vin-ldo2-5-7-supply: Input supply for LDO2, LDO5 and LDO7.
--vin-ldo3-4-supply: Input supply for LDO3 and LDO4.
--vin-ldo9-10-supply: Input supply for LDO9 and LDO10.
--vin-ldo11-supply: Input supply for LDO11.
--
--Optional nodes:
----------------
--- regulators : Must contain a sub-node per regulator from the list below.
--	       Each sub-node should contain the constraints and initialization
--	       information for that regulator. See regulator.txt for a
--	       description of standard properties for these sub-nodes.
--	       Additional custom properties  are listed below.
--	       sd[0-6], ldo[0-7], ldo[9-11].
--
--	       Optional sub-node properties:
--	       ----------------------------
--		ams,ext-control: External control of the rail. The option of
--			this properties will tell which external input is
--			controlling this rail. Valid values are 0, 1, 2 ad 3.
--			0: There is no external control of this rail.
--			1: Rail is controlled by ENABLE1 input pin.
--			2: Rail is controlled by ENABLE2 input pin.
--			3: Rail is controlled by ENABLE3 input pin.
--		ams,enable-tracking: Enable tracking with SD1, only supported
--			by LDO3.
--
--Example:
---------
--	ams3722: ams3722 {
--		compatible = "ams,as3722";
--		reg = <0x40>;
--		...
--
--		regulators {
--			vsup-sd2-supply = <...>;
--			...
--
--			sd0 {
--				regulator-name = "vdd_cpu";
--				regulator-min-microvolt = <700000>;
--				regulator-max-microvolt = <1400000>;
--				regulator-always-on;
--				ams,ext-control = <2>;
--			};
--
--			sd1 {
--				regulator-name = "vdd_core";
--				regulator-min-microvolt = <700000>;
--				regulator-max-microvolt = <1400000>;
--				regulator-always-on;
--				ams,ext-control = <1>;
--			};
--
--			sd2 {
--				regulator-name = "vddio_ddr";
--				regulator-min-microvolt = <1350000>;
--				regulator-max-microvolt = <1350000>;
--				regulator-always-on;
--			};
--
--			sd4 {
--				regulator-name = "avdd-hdmi-pex";
--				regulator-min-microvolt = <1050000>;
--				regulator-max-microvolt = <1050000>;
--				regulator-always-on;
--			};
--
--			sd5 {
--				regulator-name = "vdd-1v8";
--				regulator-min-microvolt = <1800000>;
--				regulator-max-microvolt = <1800000>;
--				regulator-always-on;
--			};
--			....
--		};
--	};
 
 -- 
 2.55.0
