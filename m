@@ -1,201 +1,117 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from fout-b2-smtp.messagingengine.com (fout-b2-smtp.messagingengine.com [202.12.124.145])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66A84457E66;
-	Wed, 30 Sep 2026 14:52:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA34E4D179B
+	for <mfd@lists.linux.dev>; Wed, 30 Sep 2026 15:02:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.12.124.145
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790779957; cv=none; b=Fxsrdd5uLPUpOb5hWSL85cskgPZQQTYaCCg987txhWc8JClXBbG0+GOOFmqnjvg5cK8zOQ5WBsOx0pqqYJtZSsMJSS4ixttU1po7+Wh0N36owOFzssWs4G6nhfv/BHbkFq0lEBjj1+1Sp+ItdSI0n80GH5llFJiH9HL+1tRhKRU=
+	t=1790780569; cv=none; b=gWGG1RT9a/RhgeeB0z2not4iSK+ezZHEs8AP5WoXHfRkFd4TJw/uGANRqDhxL2JI9+LFwKP2jYid9id+x0AyTX/JszWOtMhfgjvkN9CysXTvwfnccEYCP2QTu/+/JOv61x/rvWh7mir5s5EdGKQ3pBYM5J+WWdRC4knLRyHUeQA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790779957; c=relaxed/simple;
-	bh=pTDhLHv4nfV1/DMGA3AH7/YK8JGDK4xxxwHce5X45vE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=AGtA2fixEX0JLK5tr7LNRjke92D15ZMsDiS2g7Hg7gi2rr1TSvhV0pp/eupYBtkBCYCNII2RLOgEoZEWGES5w1Zb2kAXAkZAKS27yiH12xlGVUiTuK8kRBchC8nqM+SRbUOE/VczHYkOqUY23SaKToJ7Oaw29IpUEUv4/Yw4Gls=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=a/6hwOnY; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790780569; c=relaxed/simple;
+	bh=RWGQe0LM27LxjwEnZa9zrQ02vdeEAUrwlM+P6b97Id0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Jybi77GO3JuDrVBj7pE8wEswtIGZqHclkJhwsuV73bWoAhEcCAr9uaoXWuGNWAG0hSRih82W90/Zfqxr3zdsY1GuYkH/bDQ0XAn7kcVw7FjWphXS9+XSp6GKMAbE0LLkBD3HOZ9a6T3OKoP6HnBIGkx+8fmu5sSL2x+/P2kZpTs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kroah.com; spf=pass smtp.mailfrom=kroah.com; dkim=pass (2048-bit key) header.d=kroah.com header.i=@kroah.com header.b=D85DAJ7p; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=fvsJf/dB; arc=none smtp.client-ip=202.12.124.145
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kroah.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kroah.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="a/6hwOnY"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 957AA1F00893;
-	Wed, 30 Sep 2026 14:52:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790779941;
-	bh=HsDhMDVuh4cc6ye7ymG8hoMTg53LQnEshrzl/YQU85I=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=a/6hwOnY67kNI4nlzC/x1riFYpZ7PeyzDWmXi6WXlJTgR+sZi7Hsl7pNS6FNVmsv5
-	 NH7/5TEHK/HIAN0MYtMhJWB+nNyFH4hwIXvksH9eAlwM8dAoTfkCmoNgLBceRm7V3U
-	 sfUhqFpafZ+SnoR5JJCSDUzaNIB+LGVxVhyR0oA6+2VS4l/er2Vy5w6o2Vn1SZ5X+V
-	 x5l9ygNECiNiUgl9VZqjSW8X7ejj0gdM1HsOfnwHD05WX5hMy6wom1geor9g7sObxU
-	 mXf6YLv+uvSEQaz44WQFFkusmi+iARVTDm2N4rL8hYI4vKwW3bvGYvjEdGxDc6QXmQ
-	 rKb9WWzqU5j4Q==
-Date: Wed, 30 Sep 2026 22:32:11 +0800
-From: Jisheng Zhang <jszhang@kernel.org>
-To: Conor Dooley <conor@kernel.org>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Andi Shyti <andi.shyti@kernel.org>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	Frank Li <Frank.Li@nxp.com>, Lee Jones <lee@kernel.org>,
-	Linus Walleij <linusw@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jiri Slaby <jirislaby@kernel.org>,
-	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-clk@vger.kernel.org, linux-i2c@vger.kernel.org,
-	linux-i3c@lists.infradead.org, mfd@lists.linux.dev,
-	linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org,
-	linux-spi@vger.kernel.org, linux-arm-kernel@lists.infradead.org
-Subject: Re: [PATCH 00/20] arm64: add Synaptics SL261X SoCs and RDK boards
-Message-ID: <ar0da71zOeeYxURQ@xhacker>
-References: <20260929061417.20733-1-jszhang@kernel.org>
- <20260929-smoked-laurel-087d5a3523a3@spud>
+	dkim=pass (2048-bit key) header.d=kroah.com header.i=@kroah.com header.b="D85DAJ7p";
+	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="fvsJf/dB"
+Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
+	by mailfout.stl.internal (Postfix) with ESMTP id 3EFC61D0068A;
+	Wed, 30 Sep 2026 11:02:38 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+  by phl-compute-05.internal (MEProxy); Wed, 30 Sep 2026 11:02:38 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kroah.com; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm1; t=1790780558;
+	 x=1790866958; bh=o4/MDrLpqqukPxJrGeH59ZkNS3uDf8VfP6QaZ1QiIEs=; b=
+	D85DAJ7ppcUDTfcPTv/ifTOqVoxPuiiIifQBl6cLJJD0lFdB43Z2il2nvQacIoRj
+	SCYIjYvH5xbYRvMUY89qnyQvJ8CtKjZoyPK74qBOldqgY32xm4jVRHPRPdWhRBnM
+	GA6Q/6cevKEGbg6Bh48RAG9fofzfAINrPevQd6eqV6JJbNHsLKIQJGkkGdWqTQVe
+	LsR89JyRGs8VgwrifOYVrifUBP9/TytImEvLH/QNh1RZRjfghFu9kwv0rM0jP2a9
+	f8/HRv6azsd6DsMzqVpqJjA5VYdPExFZoUD62DlHijTN2pllHGO41UH8N4Itb15P
+	a7RuIgCNZ/IKqw2TsFrAkA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1790780558; x=
+	1790866958; bh=o4/MDrLpqqukPxJrGeH59ZkNS3uDf8VfP6QaZ1QiIEs=; b=f
+	vsJf/dBgrlyo6DC01qt41sIs9kkbO1qDGEd9x1cBNuOcgunpvqCsLG8e8o14kGpJ
+	gQFSMH8OWJNAHMTOpLPIgLjWwbzCMR9zq5rDhnVZhaYFdaCUfWDs7UeMFW2XTPm0
+	9S8Gpxwv34+56z5Vm8iurzCjhgEs+gsvPyaA0tCxbzXxeI/twJP09c2WagJ78dSF
+	Zuy8r+D8EDoj0I4fONRQkVKqmYyY9200dgAVLAR7Vcy8EhfeEBhtrDNq+ladIyFk
+	fGDn3HGx5qgx+Lh4pDYDqrPezd/24cd+RZYfAfgfexGUL4d6Zi9jMPG5lPF6tbkT
+	+f2sCea3Y18RgxqW9/kNg==
+X-ME-Sender: <xms:jSS9alXKjrEEGMwwwyQ6fR3FGtPiHGpyFEz3LxLOxmVs8rBbxNcDbA>
+    <xme:jSS9agijIK_gBC_tDo_ZPXIwHU__4fTfJzh1svWj_Gl8dj03sv0n9EHHO_ShPPpXq
+    EPtWlXCtHeYiqUs_JgvquOtvysc_wokYd_xBA2aoIBUyqjT-L_x>
+X-ME-Received: <xmr:jSS9agYRxyw59dCsysJ--ijOtI4DIn3sNYnxl0w6TqLea4Xt6Kq-DZdTVvMmhaAr-CNhN344UBDcxZeBHZM3ZmSEyi1hyeLI9BCz>
+X-ME-Proxy-Cause: dmFkZTE+SUe7cVWq+61PUWVJCm5TBZxxEorC/9ceCpWA3WooeJdRg7M6bOgklvSh7DBbEc
+    ys/3+XuhRemnlMVg4NXswSXLLZmIknrgu3Vh5+So6BUa3eeJDreJKkQxdlGzt1HM+cs59V
+    XdTvB1o63Xa0pabBqPUoEd+jbHA0KNw6DvBBZcBw50B/ru7UlO3hF2iaQI9LVv4F770dAe
+    CNgwVYgyqAXeNGFNZvD4YpDNK+9EiCjw7hN6Qzwwxgu8KovcLKS2C0PRPR5InQdiPsmWy0
+    xPo2/RAb9tLhKh07fB/b060WxzTe94o/HofkKfBa9P1qvCWTQJnDEMGOCTN7LErz6MCFRg
+    03G08HUKi2eDGkQYYBn5cR2TGy13AJGtrJw2nRlt6fKQ+vLK+TEIWhSRVAvsw34I4pfqei
+    3c7DLONBtwtPL0Orsji1rf3ednd4VXyu9jDHQuw2mZcW/phrACIN8rCgRyubBGUu7V00MT
+    2oOI2tm4ZJWhYfReoHn+APgW7BbwaKeRNvKwhf2tIyt+O2asgL3EjVM6RKusYiiKe/rVF3
+    zUevVs1L1O9gWnz45eNthhM1bhCWO3XR8AySDiPe5enbToNX8sbBwzN2SiZkCW1+9M+xgM
+    jOHfBFfEaqmBu7E8swd2Wfu/UFZaUMSqgJR0HEtldxlQ2+U9KwWv3BLJr/VA
+X-ME-Proxy: <xmx:jSS9atqnY87E3_IBB0E-EPsxUoQeHSf8a2G0QFlR6NYtbySB_YG2mg>
+    <xmx:jiS9atMveB0HMhuZyQ91y3Tz6sPJythXFKaAE-c5yj7Xw5Pjvi-o9g>
+    <xmx:jiS9agpdVybekkyYzjk7wcGdAx-Hi3kVngvSlvvDFl0809JIx9XQIw>
+    <xmx:jiS9aqdttokpF-mUQeBaGGYr-JUpmHFqR5jtEM4gXxRoJa98RQ3lWQ>
+    <xmx:jiS9ase578lfDjTtr9rnvgsXA662DY3JAvqJ5CAedperRqD_r3djTMJQ>
+Feedback-ID: i1d2843be:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 30 Sep 2026 11:02:37 -0400 (EDT)
+Message-ID: <c0318145-a999-43d0-b0fd-231256a89005@kroah.com>
+Date: Wed, 30 Sep 2026 17:02:35 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260929-smoked-laurel-087d5a3523a3@spud>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/1] leds: Add driver for MAX8907 LED cell
+To: Svyatoslav Ryhel <clamor95@gmail.com>, Lee Jones <lee@kernel.org>,
+ Pavel Machek <pavel@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-leds@vger.kernel.org,
+ mfd@lists.linux.dev
+References: <20260930072732.66578-1-clamor95@gmail.com>
+ <20260930072732.66578-2-clamor95@gmail.com>
+Content-Language: en-US
+From: Griffin Kroah-Hartman <griffin@kroah.com>
+In-Reply-To: <20260930072732.66578-2-clamor95@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Sep 29, 2026 at 08:38:52PM +0100, Conor Dooley wrote:
-> On Tue, Sep 29, 2026 at 02:13:57PM +0800, Jisheng Zhang wrote:
-> > Add initial support for the Synaptics SL261X SoCs and corresponding
-> > RDK boards.
-> > 
-> > The SL261X SoCs include five pin-to-pin compatible SoCs: SL2611, SL2613,
-> > SL2615, SL2617, and SL2619.
-> > 
-> > Only reset, pinctrl, clk/pll, uart, gpio, i2c, spi, i3c are included in
-> > this series. The support for Ethernet, USB, SDHCI, CAN, DMAC, XSPI will
-> > be submitted after this series is merged.
-> 
-> This series is filled with wildcard compatibles, which we don't permit
-> typically. The only case for SoCs that I've seen them accepted is when
-> the devices covered are actually just different binnings of the same
-> device. I took a look at the docs for this device, but it wasn't clear
-> to me if these are actually binnings or if there are different
-> integrations here. If they're binnings, I'd rather you used 0 as the
-> final digit, rather than x, since that matches the synaptics
-> documentation for the family. If they're not binnings, there's no
-> guarantee that they share the same errata etc, and must have different
-> compatibles.
+On 9/30/26 9:27 AM, Svyatoslav Ryhel wrote:
 
-BTW: May I query a qustion?
-After searching the maillist archieves, it seems now maintainers prefer
-spiliting this kind of SoC initial support series into separate patches
-for different subsystems, e.g uart, i2c, i3c, spi and so on, then the
-SoC pinctrl, clk, reset and dtsi/dts files, but AIUI, there will be
-dtb check failures with the SoC dts(i) files patch(es), what's
-the normal solution then?
+> Add a small driver to control the LED cell provided by the MAX8907 PMIC.
+> The LED does not require any specific configuration and is folded into the
+> PMIC's node.
+>
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> ---
+>   drivers/leds/Kconfig        |  7 ++++
+>   drivers/leds/Makefile       |  1 +
+>   drivers/leds/leds-max8907.c | 81 +++++++++++++++++++++++++++++++++++++
+>   drivers/mfd/max8907.c       |  1 +
+>   include/linux/mfd/max8907.h |  2 +-
+>   5 files changed, 91 insertions(+), 1 deletion(-)
+>   create mode 100644 drivers/leds/leds-max8907.c
 
-> 
-> Cheers,
-> Conor.
-> 
-> > 
-> > 
-> > Jisheng Zhang (20):
-> >   dt-bindings: serial: snps-dw-apb-uart: Add Synaptics sl261x uart
-> >   dt-bindings: i2c: dw: Add Synaptics sl261x i2c
-> >   spi: dt-bindings: snps,dw-apb-ssi: Add Synaptics sl261x spi
-> >   dt-bindings: i3c: dw: support up to two reset lines
-> >   i3c: dw: switch to array-based exclusive reset control
-> >   dt-bindings: i3c: Add Synaptics sl261x i3c
-> >   arm64: kconfig: let ARCH_BERLIN cover Synaptics arm64 SoCs
-> >   dt-bindings: reset: add Synaptics SL261X SoCs
-> >   reset: add Synaptics SL261x reset support
-> >   pinctrl: berlin: use u16 instead of u8 for the offset
-> >   pinctrl: berlin: enable module build support
-> >   pinctrl: berlin: add optional pinconf support
-> >   dt-bindings: pinctrl: berlin: Support Synaptics SL261X SoCs
-> >   pinctrl: berlin: support Synaptics SL261X SoCs
-> >   dt-bindings: clock: add Synaptics SL261X clock
-> >   clk: berlin: add Synaptics SL261X SoC clocks and plls
-> >   dt-bindings: mfd: Add Synaptics SL261x global block binding
-> >   regulator: dt-bindings: sy8827n: support standard properties
-> >   dt-bindings: arm: berlin: Add Synaptics SL261X SoC and RDK board
-> >   arm64: dts: synaptics: Add Synaptics SL261X SoC and RDK board
-> > 
-> >  .../bindings/arm/marvell,berlin.yaml          |  20 +
-> >  .../bindings/clock/syna,sl261x-clk.yaml       |  92 +++
-> >  .../bindings/i2c/snps,designware-i2c.yaml     |   1 +
-> >  .../bindings/i3c/snps,dw-i3c-master.yaml      |   6 +-
-> >  .../bindings/mfd/syna,sl261x-gbl.yaml         | 208 +++++
-> >  .../pinctrl/marvell,berlin2-soc-pinctrl.yaml  |  10 +-
-> >  .../bindings/regulator/silergy,sy8827n.yaml   |   5 +-
-> >  .../bindings/reset/syna,sl261x-reset.yaml     |  40 +
-> >  .../bindings/serial/snps-dw-apb-uart.yaml     |  12 +-
-> >  .../bindings/spi/snps,dw-apb-ssi.yaml         |   1 +
-> >  arch/arm64/Kconfig.platforms                  |   4 +-
-> >  arch/arm64/boot/dts/synaptics/Makefile        |   5 +
-> >  arch/arm64/boot/dts/synaptics/sl2611-rdk.dts  |  16 +
-> >  arch/arm64/boot/dts/synaptics/sl2611.dtsi     | 490 ++++++++++++
-> >  arch/arm64/boot/dts/synaptics/sl2613-rdk.dts  |  16 +
-> >  arch/arm64/boot/dts/synaptics/sl2613.dtsi     |  12 +
-> >  arch/arm64/boot/dts/synaptics/sl2615-rdk.dts  |  16 +
-> >  arch/arm64/boot/dts/synaptics/sl2615.dtsi     |  46 ++
-> >  arch/arm64/boot/dts/synaptics/sl2617-rdk.dts  |  16 +
-> >  arch/arm64/boot/dts/synaptics/sl2617.dtsi     |  46 ++
-> >  arch/arm64/boot/dts/synaptics/sl2619-rdk.dts  |  16 +
-> >  arch/arm64/boot/dts/synaptics/sl2619.dtsi     |  44 ++
-> >  .../boot/dts/synaptics/sl261x-rdk-common.dtsi | 135 ++++
-> >  drivers/clk/Kconfig                           |   1 +
-> >  drivers/clk/berlin/Kconfig                    |  25 +
-> >  drivers/clk/berlin/Makefile                   |   4 +
-> >  drivers/clk/berlin/sl-clk.c                   | 279 +++++++
-> >  drivers/clk/berlin/sl-clk.h                   |  31 +
-> >  drivers/clk/berlin/sl-sysmgr-clk.c            | 250 ++++++
-> >  drivers/clk/berlin/sl-sysmgr-clk.h            |  44 ++
-> >  drivers/clk/berlin/sl261x-clks.c              | 385 +++++++++
-> >  drivers/clk/berlin/sl261x-pll.c               | 145 ++++
-> >  drivers/clk/berlin/sl261x-pll.h               |  14 +
-> >  drivers/i3c/master/dw-i3c-master.c            |  24 +-
-> >  drivers/i3c/master/dw-i3c-master.h            |   2 +-
-> >  drivers/pinctrl/berlin/Kconfig                |   7 +
-> >  drivers/pinctrl/berlin/Makefile               |   1 +
-> >  drivers/pinctrl/berlin/berlin.c               | 259 +++++-
-> >  drivers/pinctrl/berlin/berlin.h               |  17 +-
-> >  drivers/pinctrl/berlin/pinctrl-sl261x.c       | 745 ++++++++++++++++++
-> >  drivers/reset/Kconfig                         |   6 +
-> >  drivers/reset/Makefile                        |   1 +
-> >  drivers/reset/reset-sl261x.c                  | 224 ++++++
-> >  include/dt-bindings/clock/syna,sl261x.h       | 131 +++
-> >  include/dt-bindings/reset/syna,sl261x-reset.h |  80 ++
-> >  45 files changed, 3899 insertions(+), 33 deletions(-)
-> >  create mode 100755 Documentation/devicetree/bindings/clock/syna,sl261x-clk.yaml
-> >  create mode 100644 Documentation/devicetree/bindings/mfd/syna,sl261x-gbl.yaml
-> >  create mode 100644 Documentation/devicetree/bindings/reset/syna,sl261x-reset.yaml
-> >  create mode 100644 arch/arm64/boot/dts/synaptics/sl2611-rdk.dts
-> >  create mode 100644 arch/arm64/boot/dts/synaptics/sl2611.dtsi
-> >  create mode 100644 arch/arm64/boot/dts/synaptics/sl2613-rdk.dts
-> >  create mode 100644 arch/arm64/boot/dts/synaptics/sl2613.dtsi
-> >  create mode 100644 arch/arm64/boot/dts/synaptics/sl2615-rdk.dts
-> >  create mode 100644 arch/arm64/boot/dts/synaptics/sl2615.dtsi
-> >  create mode 100644 arch/arm64/boot/dts/synaptics/sl2617-rdk.dts
-> >  create mode 100644 arch/arm64/boot/dts/synaptics/sl2617.dtsi
-> >  create mode 100644 arch/arm64/boot/dts/synaptics/sl2619-rdk.dts
-> >  create mode 100644 arch/arm64/boot/dts/synaptics/sl2619.dtsi
-> >  create mode 100644 arch/arm64/boot/dts/synaptics/sl261x-rdk-common.dtsi
-> >  create mode 100644 drivers/clk/berlin/Kconfig
-> >  create mode 100644 drivers/clk/berlin/sl-clk.c
-> >  create mode 100644 drivers/clk/berlin/sl-clk.h
-> >  create mode 100644 drivers/clk/berlin/sl-sysmgr-clk.c
-> >  create mode 100644 drivers/clk/berlin/sl-sysmgr-clk.h
-> >  create mode 100644 drivers/clk/berlin/sl261x-clks.c
-> >  create mode 100644 drivers/clk/berlin/sl261x-pll.c
-> >  create mode 100644 drivers/clk/berlin/sl261x-pll.h
-> >  create mode 100644 drivers/pinctrl/berlin/pinctrl-sl261x.c
-> >  create mode 100644 drivers/reset/reset-sl261x.c
-> >  create mode 100644 include/dt-bindings/clock/syna,sl261x.h
-> >  create mode 100644 include/dt-bindings/reset/syna,sl261x-reset.h
-> > 
-> > -- 
-> > 2.53.0
-> > 
+Sashiko said this does not apply, what tree did you make this against?
 
+https://sashiko.dev/#/patchset/20260930072732.66578-2-clamor95@gmail.com
+
+
+Thanks,
+
+Griffin
 
