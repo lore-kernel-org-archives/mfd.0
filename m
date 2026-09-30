@@ -1,118 +1,125 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10EC330E853;
-	Wed, 30 Sep 2026 13:01:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A8504DA9DC;
+	Wed, 30 Sep 2026 14:01:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790773301; cv=none; b=hIgYCsNuq32yS8MYXHGA8lm0DVmlDQ/Ys58QHSPVEa5KB7DCO8JBTOdLGmKPHS2dAQHkAfux2ZXd0lNhvppdanbJRNBiDZ7MLv7FLR4+ESUhDMDUz/nqmricAbtwoLF5deen1qNSq0s1dc5JS6jTgVU1KXPAYWBDCprHnBn2G+0=
+	t=1790776910; cv=none; b=Pf+wBQnP0yTeSCOTPQ24UFOigjRXJVIk6qlfLDK51tSQ4YuBkiwYtwz28XjamoRwwxWtTCduyPtPEk22EtM97jMjgMgI22KRkfz2XZQPuyvgjsK8B/gnsZ0WVvMNj07LyR6OxMNapg2rjFYJe81RKNa1MpcV/HNE9B8QwyQEGP8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790773301; c=relaxed/simple;
-	bh=c+JuntSWma6DBEmAJRjtJasLspJME7cGwHpNUIORnRA=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=A337ozvkOUHmlJ4qlKZWd5tjo6rlNZCbHHfYWF2DY/nkmOjF+jPa9971FwKa/T5UNHUEDlJ5S5222nnG8VpdV92NKb8E0yE/64nWFZFWP3ugTI7lwk3x+hRQT/uBdQBuBYd+ccC1khSEQ+b5yLM3JjBSe4Tx/CG5GzHH3O8mVYk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UrqcXUMh; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790776910; c=relaxed/simple;
+	bh=WzzV3Z90RUanWlFOxkw9NWDFepEehGCmrgVGV3640yQ=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=D4lkA5csD5TuGEPWifFsymt6Bfw+X+FZ4dgCZGUEuduuXzMHRuGEyz9AtRJ869kZp9Z/j0NVwOev92WmpI6F7KpMzodzkErXNWUnktF/ElNlSGD7rJx3uSLaXMmTwtlVY8zCXMzaAHxOns8qpT0JikI8cM2aDP0f/td/Lw9t60Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Rp6ny2Ub; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UrqcXUMh"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 75DFD1F000FF;
-	Wed, 30 Sep 2026 13:01:34 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Rp6ny2Ub"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E72FC1F0089D;
+	Wed, 30 Sep 2026 14:01:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790773294;
-	bh=Ezqwak9mWotGU9ViiQ+bNtjX+Ku24BZzX7AxIEMIE0Q=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=UrqcXUMhm7SPAl7hGfRvKotialytYTyAuKRFioGpF1GVjW7O2rYEvo5tANyBagK8p
-	 vpDtjqx+886pY8crPxj1/ReICwqSlfM4uy6KuUAmCCPpKe0sKt1EV4wC6IznA8UPrQ
-	 +avi9OEFbNh/jJSWPikulnqQdBJFH5ElH0GB1kZgK40JueakngCbGCBpmu98iJxJeP
-	 7QR1BLrz2tdknOJDkzMcvO4nxPsG6LuC1/MmW2pwAbF/ZZHQdgUuHH6FWzQ91DN2yX
-	 KE9EVS/v9zhqkTXppivqcQDLsFCUYIR7edbB4FO2hXnzCNn2jqv5fxWiBGI62fhoRz
-	 SRYvjWhhatALQ==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v4 3/4] arm64: dts: arduino-imola: add support for sound
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Srinivas Kandagatla" <srinivas.kandagatla@oss.qualcomm.com>
-Cc: devicetree@vger.kernel.org, robh@kernel.org, mfd@lists.linux.dev, conor+dt@kernel.org, lee@kernel.org
-In-Reply-To: <20260930124607.1109167-4-srinivas.kandagatla@oss.qualcomm.com>
-References: <20260930124607.1109167-1-srinivas.kandagatla@oss.qualcomm.com>
- <20260930124607.1109167-4-srinivas.kandagatla@oss.qualcomm.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 30 Sep 2026 13:01:33 +0000
-Message-Id: <20260930130134.75DFD1F000FF@smtp.kernel.org>
+	s=k20260515; t=1790776895;
+	bh=tVnOdIUfx+CYqGqkUsqNk8zTor7J74KOBz4r9FuUs4c=;
+	h=From:Subject:Date:To:Cc;
+	b=Rp6ny2UbYZf08B/kwTWRlQiHt2mscY6zoSJ4HYR0MU4113XICgRHC9jpHuBPOuJDR
+	 vxFH2ZpL6Tw9wEshb54hChTF2en2ihDyxhD8lRKWuQemEOFQVKmrF0cygG9K4ZFzi9
+	 cn0GlXY5E1IPIAJN/g9Fkylr3ze7Tmr4WvNDoOL2M2R9ushq+INnXYYjHb9SIbHWr5
+	 s9T/YOlE0LWaYbQu1pc4YpUVI0pmW53Zwe/YcWUl14yrcNZeWiKgV0nV9AWhaspFcF
+	 LbyEngghDLMY+J9cabdKIoKVA/8bYwlNSIEIsnlVNtWIGjPf7ynf/wnUYoHQJab3U3
+	 31idIhb1vGAPQ==
+From: Thierry Reding <thierry.reding@kernel.org>
+Subject: [PATCH v2 0/3] arm64: tegra: Fix DT validation issues for Tegra132
+Date: Wed, 30 Sep 2026 16:01:22 +0200
+Message-Id: <20260930-as3722-bindings-v2-0-a3bba649ebf9@nvidia.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WNQQ6CMBBFr0JmbQ0MItaV9zAs2jKFMbGQDjYaw
+ t0FXLt8yfvvzyAUmQSu2QyREgsPYQU8ZOB6EzpS3K4MmOM513hRRsoaUVkOLYdOFKFzdVFZrX0
+ F62qM5Pm9F+/Nj+VlH+SmLbMZPcs0xM9+mYrN+19PhcpVWfkTlkZ7tHgLiVs2Rzc8oVmW5QvVL
+ 7HpwQAAAA==
+X-Change-ID: 20260928-as3722-bindings-e2cc715b99f5
+To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, 
+ Mark Brown <broonie@kernel.org>, Laxman Dewangan <ldewangan@nvidia.com>, 
+ Thierry Reding <thierry.reding@kernel.org>, 
+ Jonathan Hunter <jonathanh@nvidia.com>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Thierry Reding <thierry.reding@gmail.com>, 
+ linux-sound@vger.kernel.org, linux-tegra@vger.kernel.org, 
+ Thierry Reding <treding@nvidia.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2064; i=treding@nvidia.com;
+ h=from:subject:message-id; bh=WzzV3Z90RUanWlFOxkw9NWDFepEehGCmrgVGV3640yQ=;
+ b=owEBbQKS/ZANAwAKAd0jrNd/PrOhAcsmYgBqvRY2GL7wRj9GQe5L7pSvJWi32cAaYeCLnKwKI
+ JBb4Ohwzs2JAjMEAAEKAB0WIQSI6sMIAUnM98CNyJ/dI6zXfz6zoQUCar0WNgAKCRDdI6zXfz6z
+ of2hD/4jfys5UEc1ud2AwWSOtvradHLkiW+YAf0VCoMRhl8JaRhDXsB4Wn9TiaAlJ6sK6hD2kwr
+ f7X2kXcNQ4otSRt76XpGQao4Gt5BSj/QHyhgrtXCBi4HmrucTpHFe3fQdt3np7ssSbcq8+kXaSc
+ NBiE9HRYXwkVyIlUHgp4bYOlLKC+T40K/eKyDVx7Om5N/JbKTT+zGzfu3iWR9QHoOn7A2CfhnUD
+ GTwIGP4sWFFcKPwzJw4ddZZzSa1Vqp+4WY0x398+WCRsIci4P7388Mlb+cdkqdyXA/uGoM7CkVI
+ lRcAtopy4CBd9k7eG6+pJmRfeZy9yS2myYB+bYwrbkFXlaMVpeR/DLqtaT/KI/ohrFCde7fS+gq
+ neH2JnpqrBw5vh0AKQl9xttH8IelP3r9PBz5oFN+W6dRq8OIxwKHe+7xmCYjqCuG59RoaUELPzF
+ OaxSHdPwHO47XGRMhiG7bDv0hlUD51tzk8iJBIYxxOrFyoAqzp/b/67c8GsRSJ+cD/AH293UD4p
+ K6CSP7OkxIjJxcGshwVBSrxD/hP73xPJfnWDNLAViuyqUVfhX9b70Gw+cocfD0qW2SCFm5J3spr
+ I1fiFYTu68an3j3dyd/VzXvp3j2Tvty3SCmUon3rOAu23We9e3n+sCaT74sWvLhmwft9M1YS7DB
+ 072YSUtdTY8ZkMg==
+X-Developer-Key: i=treding@nvidia.com; a=openpgp;
+ fpr=88EAC3080149CCF7C08DC89FDD23ACD77F3EB3A1
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
-- [Low] ASoC: qrb2210-sndcard: duplicate BE DAI links for RX_CODEC_DMA_RX_0
---
+The following set of changes fix all remaining issues on Tegra132 Norrin
+as well as some collaterals. The two json-schema conversions in this
+series are shared with some 32-bit ARM platforms and they fix similar
+issues there, too, and I've verified that no new issues are introduced.
 
-commit d222aeffc646b4d2645c81200f3c926432d5d57b
-Author: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+This brings down the total number of DT validation issues for Tegra to
+44 and 16 of them unique.
 
-arm64: dts: arduino-imola: add support for sound
+Thierry
 
-This commit adds sound support for the Arduino UNO Q board, enabling headset
-playback and record, lineout, and ear out functionalities. It updates the
-pm4125 device tree include and introduces audio routing and DAI links in the
-arduino-imola device tree.
+Signed-off-by: Thierry Reding <treding@nvidia.com>
+---
+Changes in v2:
+- address review comments from Rob, Mark and Sashiko
+- Link to v1: https://patch.msgid.link/20260928-as3722-bindings-v1-0-35f423a9f2b2@nvidia.com
 
-> diff --git a/arch/arm64/boot/dts/qcom/qrb2210-arduino-imola.dts b/arch/ar=
-m64/boot/dts/qcom/qrb2210-arduino-imola.dts
-> index c472e13fceca4..e99d2a56dc287 100644
-> --- a/arch/arm64/boot/dts/qcom/qrb2210-arduino-imola.dts
-> +++ b/arch/arm64/boot/dts/qcom/qrb2210-arduino-imola.dts
-[ ... ]
-> +		ear-playback-dai-link {
-> +			link-name =3D "Ear Out Playback";
-> +
-> +			codec {
-> +				sound-dai =3D <&pmic4125_codec 0>, <&swr1 0>, <&rxmacro 0>;
-> +			};
-> +
-> +			cpu {
-> +				sound-dai =3D <&q6afedai RX_CODEC_DMA_RX_0>;
-> +			};
-[ ... ]
-> +		hph-playback-dai-link {
-> +			link-name =3D "Headphones Playback";
-> +
-> +			codec {
-> +				sound-dai =3D <&pmic4125_codec 0>, <&swr1 0>, <&rxmacro 0>;
-> +			};
-> +
-> +			cpu {
-> +				sound-dai =3D <&q6afedai RX_CODEC_DMA_RX_0>;
-> +			};
-[ ... ]
-> +		lo-playback-dai-link {
-> +			link-name =3D "Line Out Playback";
-> +
-> +			codec {
-> +				sound-dai =3D <&pmic4125_codec 0>, <&swr1 0>, <&rxmacro 0>;
-> +			};
-> +
-> +			cpu {
-> +				sound-dai =3D <&q6afedai RX_CODEC_DMA_RX_0>;
-> +			};
+To: Lee Jones <lee@kernel.org>
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+To: Liam Girdwood <lgirdwood@gmail.com>
+To: Mark Brown <broonie@kernel.org>
+To: Laxman Dewangan <ldewangan@nvidia.com>
+To: Thierry Reding <thierry.reding@kernel.org>
+To: Jonathan Hunter <jonathanh@nvidia.com>
+Cc: mfd@lists.linux.dev
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Cc: Thierry Reding <thierry.reding@gmail.com>
+Cc: linux-sound@vger.kernel.org
+Cc: linux-tegra@vger.kernel.org
 
-[Severity: Low]
-Are we creating redundant backend DAI links for the exact same physical CPU
-DAI (RX_CODEC_DMA_RX_0) here?
+---
+Thierry Reding (3):
+      dt-bindings: mfd: as3722: Convert to json-schema
+      dt-bindings: sound: tegra-ahub: Convert to json-schema
+      arm64: tegra: Add Tegra132 specific compatible for AHUB
 
-In ASoC DPCM, dpcm_get_be() returns only the first RTD it matches for a giv=
-en
-widget. Because of this, it appears DPCM will strictly only use the=20
-ear-playback-dai-link, while the hph-playback-dai-link and=20
-lo-playback-dai-link will be ignored and their hardware operations will=20
-never execute concurrently.
+ .../devicetree/bindings/mfd/ams,as3722.yaml        | 293 +++++++++++++++++++++
+ Documentation/devicetree/bindings/mfd/as3722.txt   | 214 ---------------
+ .../bindings/regulator/as3722-regulator.txt        |  91 -------
+ .../bindings/sound/nvidia,tegra30-ahub.txt         |  88 -------
+ .../bindings/sound/nvidia,tegra30-ahub.yaml        | 288 ++++++++++++++++++++
+ arch/arm64/boot/dts/nvidia/tegra132.dtsi           |   2 +-
+ 6 files changed, 582 insertions(+), 394 deletions(-)
+---
+base-commit: 6c2cb8b8b843d216ab549b678a0d8831c43153e0
+change-id: 20260928-as3722-bindings-e2cc715b99f5
 
-Could these be consolidated into a single backend DAI link, relying on the
-pm4125 codec's internal DAPM graph to handle multiplexing the single backend
-stream to the Ear, Headphone, and Lineout pins?
+Best regards,
+--  
+Thierry Reding <treding@nvidia.com>
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260930124607.1109=
-167-1-srinivas.kandagatla@oss.qualcomm.com?part=3D3
