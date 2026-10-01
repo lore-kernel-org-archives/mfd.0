@@ -1,63 +1,48 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7F474C33C4;
-	Thu,  1 Oct 2026 21:16:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E4E84D4875;
+	Thu,  1 Oct 2026 23:00:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790889379; cv=none; b=gPMBUfFUfk5hCp34JN4pkwiW97YF60HQTV36/W64FD5psxnqNF87rsT185+N8JIQrvBSAUQ6RDN66ueS+tQCOZOSC+cpp4tEHVaARUa06D/3QzpPrm2ZoayaXZhFTXd4doDhotzYKU+So+VjQzR+D2Wy32QlqzfL5uzFNymsLAk=
+	t=1790895604; cv=none; b=t1u0t3XjPAyK5jZb1wevfi+Y8zQwEH/P4i3lsXBAiNY9oPKjHv7vHqPSS8QbXSRtbItKPTrUwajnTv/OVbsrXMXsPGfMGc9Sl+LJJNLdgLfl/ZSF0kShJkMc0i2mGPkNWOAAY1G9obTGN9rfO7H21A7mZ8HUApFoAHXVObjnBqs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790889379; c=relaxed/simple;
-	bh=j3tZSe6EjWvLL4etfciKqeLMj4yhwYHePqQZXrAv+es=;
+	s=arc-20240116; t=1790895604; c=relaxed/simple;
+	bh=MNyCXZy5ru3r4Fny/rb9dCIGjrACfAsA7/MvgYfiETU=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OpeviNuzI4POAtAoUfcNAT2AYtXsB52ylsS+LjfZ772RnRtMpYmWe7Gf8juluIbYgTxS9mwzZwJAvr5VISACgPUOdIvAcXMyG08RmLn1PL3lpDymLZKpCg3Y16CcFXYEXs9OS9JUb7CD3hjGnckKSS6edAcjG2Wp7v+3y6HhqnA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=P+jof2y/; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=NhddYqyUmLs5ynMp4oovn4/k+wZ3GctyIMWgUSUc9j0gnlPA9Nz/yNipvpfmwxrFvBZt+WC7Dkb88n3XdvY/NWCa8RXR0vVUJPfAEv5EYLNPth8HFfk+eezDcBqq+jEpUfnr9La2XWIqadNwp/GoolpTG6GZLa729WtDM6V/E4o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IZsUEa+M; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="P+jof2y/"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 924FB1F000FF;
-	Thu,  1 Oct 2026 21:16:03 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IZsUEa+M"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2187C1F000FF;
+	Thu,  1 Oct 2026 23:00:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790889368;
-	bh=j3tZSe6EjWvLL4etfciKqeLMj4yhwYHePqQZXrAv+es=;
+	s=k20260515; t=1790895603;
+	bh=OvXyZeFZqgoZv43AfR9lxtOXs/un1M9HwAQCfdVDuRA=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=P+jof2y/i9vG8bCW/VDqxjV0fYlsPcFcvV28SPkTi5EJkbAwebXlyhwbk/MQ368pc
-	 rdm8EYPgjhCtlAZJs+7OoyURvkpvTWYf0ZfXp/jnS9jZ3s4Y2Fewt00mMzHcQ5VguI
-	 7RvKWaUmQzXZBW/5JrzHPjcFhjVnANeuN260qA5Go4yg3zxY7w7j0IDgr3mgnUOO6Y
-	 GnY7M1Z7c17LDioDVv3RS0hpTYkR1+Neb4KRV4RwLnQqDDjnU29kwFjoJjx76cK42i
-	 7CDncrEAwGN+7bD0jTKHlNIdDigTs+QFArBhFGJjTbFUmE3GpONC/CHQarPyJYhOO8
-	 mcUX60w2LtQKg==
-Date: Thu, 1 Oct 2026 22:16:01 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Linus Walleij <linusw@kernel.org>
-Cc: longzhao@ambarella.com, Arnd Bergmann <arnd@arndb.de>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Jerome Brunet <jbrunet@baylibre.com>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Michael Walle <mwalle@kernel.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jiri Slaby <jirislaby@kernel.org>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, Long Zhao <zl020895@163.com>,
-	Lee Jones <lee@kernel.org>, mfd@lists.linux.dev,
-	devicetree@vger.kernel.org, linux-clk@vger.kernel.org,
-	linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v9 04/15] dt-bindings: gpio: pl061: add Ambarella CV75
- variant
-Message-ID: <20261001-snuggle-flying-e7180d4ac1e8@spud>
-References: <20261001-cv75-v5-v9-0-486cc289a4b8@ambarella.com>
- <20261001-cv75-v5-v9-4-486cc289a4b8@ambarella.com>
- <20261001-attempt-savior-5d4a0eed4320@spud>
- <CAD++jL=tsETOFvC-AdethTdrGtet5neVanj3KyyB4EtEOpJ_Gg@mail.gmail.com>
+	b=IZsUEa+MZoIpvMEisKnasesrXNQ0gxicq3vOHXtc0inX8fTiscPZlfCZrm2S5OE5t
+	 A/nuvt3ICdSXQhr8JU/cGzVwa/G9GTI4SFx6L1wLVfIl5lRQX+Em5GViBkuKglP3/r
+	 8hC2sJuPRrtOsaiPlZhLJKJpkeGOsdjFmkdc4wUaC4f7Egj/1dL1T3B1vAbeNrkUQS
+	 8zGs6ozL5n9p0a9Fm/YuKkzlXm6RSeMK8yfmyE0HAgxBrFvmZK6BNv6KzEvQLMfPmZ
+	 zXi1UfE/+Gzj/lVWfZualVFtTXABqU96i+bgvxH5uleKLaIFPNeLczJErkYuywIdqI
+	 xjmXI/+8Jk+Nw==
+Date: Fri, 2 Oct 2026 00:59:59 +0200
+From: Thierry Reding <thierry.reding@kernel.org>
+To: Bhargav Joshi <j.bhargav.u@gmail.com>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Thierry Reding <thierry.reding@avionic-design.de>, 
+	Lee Jones <lee@kernel.org>, Shree Ramamoorthy <s-ramamoorthy@ti.com>, 
+	Jonathan Hunter <jonathanh@nvidia.com>, Dmitry Osipenko <digetx@gmail.com>, 
+	Svyatoslav Ryhel <clamor95@gmail.com>, Laxman Dewangan <ldewangan@nvidia.com>, 
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, goledhruva@gmail.com, 
+	m-chawdhry@ti.com, daniel.baluta@gmail.com, simona.toaca@nxp.com, 
+	mfd@lists.linux.dev, Thierry Reding <treding@nvidia.com>, linux-tegra@vger.kernel.org
+Subject: Re: [PATCH v2 4/4] regulator: dt-bindings: ti,tps6586x: Convert to
+ DT schema
+Message-ID: <ar7lq50d4IcTCbkU@orome>
+References: <20260916-ti-tps6586x-v2-0-f12cfdfb446c@gmail.com>
+ <20260916-ti-tps6586x-v2-4-f12cfdfb446c@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -65,63 +50,77 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="1WD25rPQ8gIjRFJm"
+	protocol="application/pgp-signature"; boundary="abqtqkyhimdysw4w"
 Content-Disposition: inline
-In-Reply-To: <CAD++jL=tsETOFvC-AdethTdrGtet5neVanj3KyyB4EtEOpJ_Gg@mail.gmail.com>
+In-Reply-To: <20260916-ti-tps6586x-v2-4-f12cfdfb446c@gmail.com>
 
---1WD25rPQ8gIjRFJm
-Content-Type: text/plain; charset=utf-8
+
+--abqtqkyhimdysw4w
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v2 4/4] regulator: dt-bindings: ti,tps6586x: Convert to
+ DT schema
+MIME-Version: 1.0
 
-On Thu, Oct 01, 2026 at 09:36:50PM +0200, Linus Walleij wrote:
-> On Thu, Oct 1, 2026 at 9:23=E2=80=AFPM Conor Dooley <conor@kernel.org> wr=
-ote:
-> > On Thu, Oct 01, 2026 at 08:40:53PM +0800, Long Zhao via B4 Relay wrote:
-> > > From: Long Zhao <longzhao@ambarella.com>
-> > >
-> > > The CV75 GPIO banks sit on the AMBA PrimeCell bus but are not
-> > > register-compatible with the ARM PL061. Each bank is 32-bit and 32
-> > > lines, with extra mask/enable registers, so arm,pl061 must not be used
-> > > as a fallback compatible.
-> >
-> > What has this got in common with the pl061 beyond using the PrimeCell
-> > bus? Current reason for putting them together is a bit tenuous to me.
+On Wed, Sep 16, 2026 at 06:41:29PM +0530, Bhargav Joshi wrote:
+> Convert Texas Instruments tps6586x regulator binding from text to DT
+> schema. Reference to nvidia,tegra-regulators-coupling in child regulator
+> nodes.
 >=20
-> It was determined in early review that this is very clearly a modified
-> PL061 block. The basic registers are even named the same.
-> https://lore.kernel.org/linux-arm-kernel/CAD++jLk0LoOJk=3DTXin42AL3_z_7eV=
-VkvMnYr1S8090C6A_B+dQ@mail.gmail.com/
-
-Right. I think that'd be good to have in the commit message, because as
-an outsider reading this it sounds like it could well be an entirely
-different device.
-
-With that explanation,
-Acked-by: Conor Dooley <conor.dooley@microchip.com>
-but as things stand,
-pw-bot: changes-requested
-
-Thanks,
-Conor.
-
+> Signed-off-by: Bhargav Joshi <j.bhargav.u@gmail.com>
+> ---
+>  .../devicetree/bindings/regulator/ti,tps6586x.yaml | 196 +++++++++++++++=
+++++++
+>  .../devicetree/bindings/regulator/tps6586x.txt     | 135 --------------
+>  2 files changed, 196 insertions(+), 135 deletions(-)
 >=20
-> PL061 is different and quirky and could not use gpio-mmio, while
-> with these changes to gpio-regmap it can handle its pecularities
-> and use a library which is a good thing on its own.
->=20
-> Yours,
-> Linus Walleij
+> diff --git a/Documentation/devicetree/bindings/regulator/ti,tps6586x.yaml=
+ b/Documentation/devicetree/bindings/regulator/ti,tps6586x.yaml
+> new file mode 100644
+> index 000000000000..1f7c7b35066f
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/regulator/ti,tps6586x.yaml
+> @@ -0,0 +1,196 @@
+> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/regulator/ti,tps6586x.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: TI TPS6586x family of regulators
+> +
+> +maintainers:
+> +  - Thierry Reding <thierry.reding@avionic-design.de>
 
---1WD25rPQ8gIjRFJm
-Content-Type: application/pgp-signature; name=signature.asc
+Not sure if I'm an appropriate maintainer for this, but I guess I
+initially submitted the freeform text bindings. Anyway, that email is no
+longer valid, so this should be:
+
+	Thierry Reding <thierry.reding@kernel.org>
+
+instead.
+
+Thierry
+
+--abqtqkyhimdysw4w
+Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCar7NkQAKCRB4tDGHoIJi
-0iH7AQC+o17BgBwJe3k2EAZcRXfzE2tgNWgAPkP28V9wBeNGDwD/UAU1TinKSygv
-MtUtKTvPb1iV01w1PpMHV1VZJCr5NA8=
-=TwJs
+iQIzBAABCgAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmq+5esACgkQ3SOs138+
+s6Gbjw//b1TnlaW0WiXbta+vQVNVfxN6XgIcleOrTO+lfpFm2DMN8uiY/GdAFJwz
+0epfTz/kPVVqacGLxUnHMoq93s6S5mrBm9h0cm/KNOOhzt8R7Hr+0EkfL8deTCHY
+YiDNKAQVN7p2bILSFoajeX4BrcfFbJoOdzs47aiRTS+rb6wbiajdsdnKal48MiFr
+2xHnPP47eIUJAzmd678x0IoT6fsMrxzTWpmSWMIF9fpV8bS/QO1gt3SWkGBN0e73
+MQQD1q32HycjDgoqR0onGpidPfd9p+tGdJtSJTaDJgTFbtsJssQNXAIMPLVG1IK8
+WdI12CGtvxHe7YOq7c4DBaes5zuth2D6AvloHN4TQwgyBd7Xihf72tU92pjSP2EQ
+ujPZp11ofvuVy0USLlqZ4ymBJnsYBGk0R7k/96b2UPGZC5hesRrp+OHDVGtf8AdL
+uyorw1pOq6aS74TXt/b6NQgGhnVGTMgup4MqCdRc5et4T7K9MwOmKF6ADqXiLMZ9
+NkxRBzGeHiprXQirutYkFQq2Ltcspi3/DmBULfs2ReijJd0xaPudv0leFklpgeRw
+j9AUhmxY6CwmutB2uDO1eSTXUYhatWcw9mot8BtoIs53QyLjku+rJVwHKRMD0LVd
+MUQYvDucLfcQm5DbFK7o7ntX0vPpXDL9LPBWqYszE1/22fBQGGY=
+=Ng9S
 -----END PGP SIGNATURE-----
 
---1WD25rPQ8gIjRFJm--
+--abqtqkyhimdysw4w--
