@@ -1,170 +1,136 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm2-f12.google.com (mail-wm2-f12.google.com [74.125.225.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB8023AEF56;
-	Thu,  1 Oct 2026 12:56:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 600133ED3D8
+	for <mfd@lists.linux.dev>; Thu,  1 Oct 2026 13:30:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.140
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790859369; cv=none; b=VOP2NkMKIoHvOPEGXuWfsZU4p6M0QchS5lF+OcTBzPuIJi/Z3kUQ4Tv6nG5FL39j728ecDitsxwS/8+m4v9gCEUTII3J6A1mz+Xeb2hG54a07NnzGUnVC5LqiDbafJe/+7ZFkfcJF/KW0y9zpMG82P0H8Q+TYXX4Da6TlVkB4R4=
+	t=1790861438; cv=none; b=cKSGC/9ne3iXjDFe6mgwRx6hwUt7FFs3oGlWgzLi4A0uBp5l0N4rcm9VImSl1D/8LU2tqaSemt3ayeFAXFasBdIxwqVZ9a20QMuX7vmpVGJ0CChx8MDy8n5d/rrVaMCUvhToH23oLS3oC3bA3qAyA+myBc5uHJ1IuPIUEp2aOJw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790859369; c=relaxed/simple;
-	bh=lr8mhxzproW+Qgv7R7SpyFbt6jvUf0jjDsRWDMaQp7E=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=JsZUPNyhiGHZOpwtGvpm7nQacH+osTWhA0q6xQ3DRJR9hOZ9SKv4rwMPkGq277q7tV7n+BoFG22sO58lUKN40F/fIeFRy0f4p8yJqnVOXzvgHb4hdwTChyB0sdH2ZblMR4Gxp2jAQ5jKVTn+OjsfksaIQd/G6yqzdpT9NeR3VFE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OSh6vWIo; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790861438; c=relaxed/simple;
+	bh=LZvJdoqMiLFE1kDgHxNdu2ZkOJ6v87aLJyP7tgfMseo=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=IXsc7bZ0aGxi5oQYlOmavId43YT0LNTkYACSSuE8Xn0R8AQKQ8yDV180/WyukfC8EKD4Fg4v99e7bW+HwdWZduq9AC6sILrQsv/6ECyX0/jQWlD7aW2vLXR8Ob8y4JSwPbi7l7qo6lSAveleJGFqgwS+j9115NXi2YkvBVBbKrM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=flipper.net; spf=pass smtp.mailfrom=flipper.net; dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net header.b=ch8VN/UH; arc=none smtp.client-ip=74.125.225.140
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flipper.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OSh6vWIo"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D99071F000FF;
-	Thu,  1 Oct 2026 12:56:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790859367;
-	bh=R8qJWUn2+S7UJPBG1ZhM/jt62L4jpx3jXiyLqBVTUMI=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=OSh6vWIouumpWK+f+14lEyjM7ZPbL/MGuSU4k3GDwd/Iim+4pfx86lodna9KP2L6U
-	 YoKnYtTUAQ6vUMkmyxp7HWFEbU5CRbXwsM+9xEIES6F6C8jsPuQHQ8Y3HM5zXDBXVK
-	 j/NEtS1IG66MJAo0sHzMZdh3Pr6qrS97IiminKGuFb16Gjw5pCdqwGzNXg2kqDkItV
-	 lJQumbCHNwMSivTHV+huSnOh3gOB5JtauNFkzCQsQe5NOWZrO6hey7c5m0idNTDyjv
-	 D6UuAZLSqOZbz1Ab0oD9sFixb0jOoXdGV2q19/jsWI/G10YkuDSBMxTI6aGp3u0jM+
-	 lXm2IrABQ/xVQ==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v9 11/15] gpio: pl061: switch data path to gpio-regmap
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Long Zhao" <longzhao@ambarella.com>
-Cc: linux-serial@vger.kernel.org, robh@kernel.org, linux-clk@vger.kernel.org, lee@kernel.org, conor+dt@kernel.org, mfd@lists.linux.dev, devicetree@vger.kernel.org
-In-Reply-To: <20261001-cv75-v5-v9-11-486cc289a4b8@ambarella.com>
-References: <20261001-cv75-v5-v9-0-486cc289a4b8@ambarella.com>
- <20261001-cv75-v5-v9-11-486cc289a4b8@ambarella.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 01 Oct 2026 12:56:06 +0000
-Message-Id: <20261001125606.D99071F000FF@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=flipper.net header.i=@flipper.net header.b="ch8VN/UH"
+Received: by mail-wm2-f12.google.com with SMTP id 5b1f17b1804b1-49ffe281cb1so34152055e9.1
+        for <mfd@lists.linux.dev>; Thu, 01 Oct 2026 06:30:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=flipper.net; s=google; t=1790861432; x=1791466232; darn=lists.linux.dev;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=qVy4e5OGZI4MlIMiZQzW05oIlOjQRJp2AkRb/z+b38k=;
+        b=ch8VN/UH9/C70G0nlULJSxEFAJMw6ayQETyV07PFDbNhzZSK/C6nheBgPg2D0iM324
+         PDdfuKtGyMv9zgcN1ViErC7VmqxFHyqUTbD3lf8EId/V1ysJs0W3NyDmCF3y43l4Hkmj
+         ycZjRedLXihYmOdBv3pbcp7fiJv8CykOxXKs2cWJ+/kcVT2M97sjIFaE92io7EBUTZue
+         GtD5erXy8WbtzoTuleBQ5/RwsTRE7CkMHnKhfHPFq+486D+N0UeFHytkDPdzoCjlDTNu
+         efob4TZimKokzGWBug5kc1ERv8E39x26YiqVfwEQREHs88+dfzccGuhug+YJqSTTVegl
+         0KBQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790861432; x=1791466232;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=qVy4e5OGZI4MlIMiZQzW05oIlOjQRJp2AkRb/z+b38k=;
+        b=WzgkRubz0bMlt59ZAMVdfL4v5jn7NGGQAxUk4Ui+wifdnmFZ3Y1LpZZ6eB+63yGwSh
+         YYx42vyp6FV5f7OB0WeGft6ow3PSBekPDRCttSqQ/ootIwGVUlIjQpyrpkh4U/CZdWDY
+         dRYd/+yhNRbodUU2TrBUKyoQq6kXSjHUuNsILdEF4RTp0B6ewkOTtOxXqKDlsrDSxKaG
+         aaBdrhXvhU6+mdHNNjOzuYawn4Dz7Y0LFXe0cdQBRXjkO7tm3Yphk8jICA5iGefELX2B
+         d1bqZaLlR0VXodaloG6d18Eoli0r9jKRF1o448ncGQwlrkwhi8KcGfGxqr8kx+/XotqM
+         opIg==
+X-Gm-Message-State: AFuF++lybvH4Tj8TX6Bdg0zDIbuSI9hcHKJidHH4ILaoY34oLBt6wk+5
+	PpBJ/1oynKJwIrVYFLJNs1ShMSmF6lWqtuA3m5M3PvTe04zmSNaYYB6MyrZC2PnmZ+0=
+X-Gm-Gg: AYBFou0yi5liuLEOEW7NDucYEfTnM4IpWMX/tGZlulGZFOPYpvnnrUKTwDAMfv2Ou3h
+	h/gS1q2c/WA2T8vH+T4Rr4JAv4kIup87Lp94ABxpcTyCFzcPXVV733QcJjOkDbHGiNqI9c+G6nu
+	gxgHqQEflPaCdw2zhd/08RGc4ClBqp88kaYvPuZrWPYyhGdtAtJVgWCKpLJs12PWSO4izrmUL3S
+	O9dFmtHUa7UKf5HXtXMVnETBDrQrdBdVnFzsZZ73GWZP+MqaaLrMKnLTHlicIDVZ00Je5rAQftq
+	D3sW02oQN9+IOE7/UPDqTkL/Js80hb/LzdfpkBtAqUg1Cxq83Hgka3bYDtFIBAruNMMZpMcaiY0
+	xtQNhlQygfk4No7JtBDPRxDDNYuZJsUymn0jZRU+V5orSLxQg2JXZeJr7+HW+NL+0htrAAiXTXt
+	emky6qXsah4Uy0FwuYKUxD1lYRe7sTWQO4MWaksUnd0idnO8DYSNw1cR+3QvCNtKjnmgbMe/qGd
+	cqYFt8PJ+R/5y+8
+X-Received: by 2002:a05:600c:46d0:b0:4a0:1a18:b742 with SMTP id 5b1f17b1804b1-4a01ad909e9mr83128855e9.2.1790861432366;
+        Thu, 01 Oct 2026 06:30:32 -0700 (PDT)
+Received: from alchark-surface.localdomain ([5.194.93.183])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a0267ab7efsm1603395e9.2.2026.10.01.06.30.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 01 Oct 2026 06:30:31 -0700 (PDT)
+From: Alexey Charkov <alchark@flipper.net>
+Date: Thu, 01 Oct 2026 17:30:23 +0400
+Subject: [PATCH] mfd: bq257xx: Mark self-modifying BQ25792 registers
+ volatile
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261001-bq25792-volatile-v1-1-cb3d4ec8a414@flipper.net>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQqDQAxA4atI1g5MUqZqryIuNEaNiD8zKgXx7
+ p22y2/x3gVBvEqAV3KBl1ODLnMEpgnwUM+9GG2jgSw90Vo0zUYuK8icy1TvOomhll3+cJgxMsR
+ s9dLp+7csq7/D0YzC+/cD9/0BwFAEBXQAAAA=
+X-Change-ID: 20261001-bq25792-volatile-2dc583517c1c
+To: Lee Jones <lee@kernel.org>
+Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
+ stable@vger.kernel.org, Alexey Charkov <alchark@flipper.net>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1778; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=LZvJdoqMiLFE1kDgHxNdu2ZkOJ6v87aLJyP7tgfMseo=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTtSyidG+MSuFVlk8ieF78spmwt3XHkQPAmS/0DSl9kI
+ qWPnM6q75jIwiDGxWAppsgy99sS26lGfLN2eXh8hZnDygQyRFqkgQEIWBj4chPzSo10jPRMtQ31
+ DI10jHWMGLg4BWCqe9oZ/tnvSH0YLuSVvK1mllLKjcwi/kN/GZ/M32yvFzfp6crtxZKMDEvOf9O
+ 86KsXnPZwIcv5BLObHeuuTrOI1Duw5OO/aaHTDJgA
+X-Developer-Key: i=alchark@flipper.net; a=openpgp;
+ fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
-s) to consider:
-- [High] gpio: pl061: UAF due to LIFO devres cleanup ordering
-- [High] gpio: pl061: Missing GPIOCHIP_IRQ_RESOURCE_HELPERS allows HW confl=
-ict
-- [Medium] gpio: pl061: Missing synchronize_irq() causes UAF on module unlo=
-ad
---
+Some BQ25792 configuration registers change without being written: input
+source detection sets VINDPM and IINDPM at plug-in, plug-in also clears
+EN_HIZ, the FORCE_* bits clear once their operation starts or completes,
+EN_ACDRV1/2 follow input path changes, and ADC_EN clears after a one-shot
+conversion. Reading them from the cache returns stale values.
 
-commit 0dd970f78f76a57be040a10722f95f7c065440ed
-Author: Long Zhao <longzhao@ambarella.com>
+Mark these registers volatile, keeping the cache for the rest.
 
-gpio: pl061: switch data path to gpio-regmap
+Cc: stable@vger.kernel.org
+Fixes: 9adbe53e32cd ("mfd: bq257xx: Add BQ25792 support")
+Signed-off-by: Alexey Charkov <alchark@flipper.net>
+---
+ drivers/mfd/bq257xx.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-This commit migrates the PL061 driver to use gpio-regmap for its data path,
-handling the PL061 quirk where output values must be written after a direct=
-ion
-change. It sets up a custom irqchip and domain attached via gpio-regmap, and
-modifies the interrupt handler to appropriately check regmap reads.
+diff --git a/drivers/mfd/bq257xx.c b/drivers/mfd/bq257xx.c
+index 054342c60b73..01f5fc97f538 100644
+--- a/drivers/mfd/bq257xx.c
++++ b/drivers/mfd/bq257xx.c
+@@ -52,8 +52,18 @@ static const struct regmap_access_table bq25792_writeable_regs = {
+ };
+ 
+ static const struct regmap_range bq25792_volatile_reg_ranges[] = {
++	regmap_reg_range(BQ25792_REG05_INPUT_VOLTAGE_LIMIT,
++			 BQ25792_REG06_INPUT_CURRENT_LIMIT + 1),
++	regmap_reg_range(BQ25792_REG0F_CHARGER_CONTROL_0,
++			 BQ25792_REG0F_CHARGER_CONTROL_0),
++	regmap_reg_range(BQ25792_REG11_CHARGER_CONTROL_2,
++			 BQ25792_REG11_CHARGER_CONTROL_2),
++	regmap_reg_range(BQ25792_REG13_CHARGER_CONTROL_4,
++			 BQ25792_REG13_CHARGER_CONTROL_4),
+ 	regmap_reg_range(BQ25792_REG19_ICO_CURRENT_LIMIT,
+ 			 BQ25792_REG27_FAULT_FLAG_1),
++	regmap_reg_range(BQ25792_REG2E_ADC_CONTROL,
++			 BQ25792_REG2E_ADC_CONTROL),
+ 	regmap_reg_range(BQ25792_REG31_IBUS_ADC,
+ 			 BQ25792_REG47_DPDM_DRIVER),
+ };
 
-> diff --git a/drivers/gpio/gpio-pl061.c b/drivers/gpio/gpio-pl061.c
-> index c821a5117eede..08d45f8923c2a 100644
-> --- a/drivers/gpio/gpio-pl061.c
-> +++ b/drivers/gpio/gpio-pl061.c
-[ ... ]
-> -static const struct irq_chip pl061_irq_chip =3D {
-> +static const struct irq_chip pl061_irqchip =3D {
-> +	.name			=3D "pl061",
->  	.irq_ack		=3D pl061_irq_ack,
->  	.irq_mask		=3D pl061_irq_mask,
->  	.irq_unmask		=3D pl061_irq_unmask,
-> @@ -322,67 +256,187 @@ static const struct irq_chip pl061_irq_chip =3D {
->  	.irq_set_wake		=3D pl061_irq_set_wake,
->  	.irq_print_chip		=3D pl061_irq_print_chip,
->  	.flags			=3D IRQCHIP_IMMUTABLE,
-> -	GPIOCHIP_IRQ_RESOURCE_HELPERS,
-> -};
-> +};
+---
+base-commit: 6c2cb8b8b843d216ab549b678a0d8831c43153e0
+change-id: 20261001-bq25792-volatile-2dc583517c1c
 
-[Severity: High]
-Does the omission of GPIOCHIP_IRQ_RESOURCE_HELPERS from this irq_chip
-definition detach it from gpiolib's resource locking?
+Best regards,
+--  
+Alexey Charkov <alchark@flipper.net>
 
-Without these helpers, gpiochip_lock_as_irq() is never called when a pin
-is requested as an IRQ, so GPIOD_FLAG_USED_AS_IRQ is not set. Could this
-allow userspace to accidentally reconfigure an active IRQ pin as an output,
-causing hardware conflicts?
-
-> +
-> +static int pl061_irq_domain_map(struct irq_domain *d, unsigned int virq,
-[ ... ]
-> +static void pl061_remove_irq(void *data)
-> +{
-> +	struct pl061 *pl061 =3D data;
-> +
-> +	irq_set_chained_handler_and_data(pl061->parent_irq, NULL, NULL);
-
-[Severity: Medium]
-Is a call to synchronize_irq() needed here before proceeding?
-
-While the chained handler is cleared, there appears to be no synchronization
-with in-flight handlers. If pl061_irq_handler() is running concurrently
-on another CPU, it might still be executing when we proceed.
-
-> +
-> +	for (unsigned int i =3D 0; i < pl061->data->ngpio; i++) {
-> +		unsigned int virq;
-> +
-> +		virq =3D irq_find_mapping(pl061->irq_domain, i);
-> +		if (virq)
-> +			irq_dispose_mapping(virq);
-> +	}
-> +
-> +	irq_domain_remove(pl061->irq_domain);
-
-[Severity: Medium]
-If pl061_irq_handler() is still running, could it access this freed domain
-when it calls generic_handle_domain_irq(pl061->irq_domain, offset)?
-
-> +}
-[ ... ]
-> +static int pl061_probe(struct amba_device *adev, const struct amba_id *i=
-d)
-> +{
-[ ... ]
-> +	config.parent =3D dev;
-> +	config.regmap =3D pl061->regmap;
-> +	config.ngpio =3D data->ngpio;
-> +	config.reg_dat_base =3D GPIO_REGMAP_ADDR(regs->dat);
-> +	config.reg_set_base =3D GPIO_REGMAP_ADDR(regs->dat);
-> +	config.reg_dir_out_base =3D GPIO_REGMAP_ADDR(regs->dir);
-> +	config.reg_mask_xlate =3D data->reg_mask_xlate;
-> +	config.quirks =3D data->quirks;
-> +	config.irq_domain =3D pl061->irq_domain;
-> +	config.drvdata =3D pl061;
-> +
-> +	gpio_regmap =3D devm_gpio_regmap_register(dev, &config);
-> +	if (IS_ERR(gpio_regmap)) {
-> +		if (pl061->irq_domain)
-> +			irq_domain_remove(pl061->irq_domain);
-> +		return PTR_ERR(gpio_regmap);
-> +	}
-> +
-> +	if (irq) {
-> +		ret =3D devm_add_action_or_reset(dev, pl061_remove_irq, pl061);
-
-[Severity: High]
-Can this devres action registration order cause a use-after-free during
-driver unbind?
-
-Since devm_add_action_or_reset() is called after devm_gpio_regmap_register(=
-),
-devres will execute pl061_remove_irq() first during teardown because it uses
-LIFO ordering.
-
-This means pl061_remove_irq() will run and free pl061->irq_domain, but
-the gpiochip is still registered. When gpio_regmap subsequently unregisters
-the gpiochip, gpiochip_remove() will eventually call
-gpiochip_free_remaining_irqs(), which will attempt to use the already-freed
-irq.domain pointer.
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261001-cv75-v5-v9=
--0-486cc289a4b8@ambarella.com?part=3D11
