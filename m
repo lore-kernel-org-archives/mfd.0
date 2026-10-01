@@ -1,92 +1,112 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA243443C3B;
-	Thu,  1 Oct 2026 18:19:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCBBB5221F1
+	for <mfd@lists.linux.dev>; Thu,  1 Oct 2026 19:21:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790878788; cv=none; b=j13s4LqtIlV2YyVXH9GwpRhgKfGJCyJ51T9k1vhO6oY2js++DB1d2rnQFeXHO21aNF4BAjcmXEM23HwLpXC8uAwKLz15EpXnxTe9TUPu6tmlo073bQ+2ga22BdIQ81gqQIWgTTEEwlqlweor+IT9VxZYK5fSP9fh+o4C6fZXoFM=
+	t=1790882468; cv=none; b=SHqEBRBRviKLf7s++GpJVZWDVm9p19S581+M/XNelXC8EYsMb5+yUIfFJklqGVE9z3lqr+tVqgkPYm1eJI11MKwa3KNgubLwmLY2BufWmONFCvbTCEBhC8CujUWUr9zy/Q3WPHWgMMSko9KBuRE1gFFmHQCC/z8xxHVUKgQHsO0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790878788; c=relaxed/simple;
-	bh=GBQbR+R/+955LxdFaAVyP6WBQ4P39f0GwpBjz+Onw3k=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=aFyqjVS3y9OQGlX95yPTHid7MtJ+RhDSyeFERkL0g8JRurqCmvGtMipug0LTSOKdWF/d1WFmNS8KbeHU2YKuRlxTnZMwvWPmBaASt3fBtPwOjis2SclcIirmAqNla3rklZeTNAtEjE5KqZNJnWg8JiPtfUq13M4KdvqThKIkYSM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=W/ApQKNW; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790882468; c=relaxed/simple;
+	bh=FADf0IKjYIk+d71I+Acg+xKfQUbv7uBkMqU7iZW2Ooc=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=BVnUxkXGNosyIb8aJ1OZtNpBG2DYt/dTsqcohJiP0NmiW/XmC1nidZSWDQ8FehENCOyzYfykMHaqfAh9CtYOSDmGUoRbuBKqoO3SO6Hn3X3I+lLf3V+J2igVJR9ct3iDul+Nz0huUJI/TwAOPg/Yirsq3LA9YueEDky7xH+BkxM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fvm4NUKd; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="W/ApQKNW"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BE8F01F00898;
-	Thu,  1 Oct 2026 18:19:35 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fvm4NUKd"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8BCA01F0089F
+	for <mfd@lists.linux.dev>; Thu,  1 Oct 2026 19:21:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790878778;
-	bh=GBQbR+R/+955LxdFaAVyP6WBQ4P39f0GwpBjz+Onw3k=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=W/ApQKNW33/IhZUhLndAniQD4qxhIKD4ktBweRNMfieLXfZeMU+xNDxhskoLDt26S
-	 JPW+07kFvqPRA2Nq/ECWS3UF+c28ewMXb+gB5mRhuN/lWlpoZcYyHSo4g7vBEXjKaN
-	 z1VYpZnrRreqCZlxJONDIBoklUrqZsTf8myUObcSQRFz0H/41WZgT7L8M8N0gGXXuD
-	 /HbSwsVVDW3FxvGbw5MzV3pfC+HdsHAb0Tl8DUzsm5aiPyZk8TnTIItO0E3g0RRj5S
-	 CkfgIUiKbwhlvPT4U8nsWTnYo+oX1BYjDFTyI/sTQV4JwNLcG3lC9U7se+6LUlGHT/
-	 EqOtDLtPIubNQ==
-Date: Thu, 1 Oct 2026 19:19:33 +0100
-From: Mark Brown <broonie@kernel.org>
-To: Thierry Reding <thierry.reding@kernel.org>
-Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Laxman Dewangan <ldewangan@nvidia.com>,
-	Jonathan Hunter <jonathanh@nvidia.com>, mfd@lists.linux.dev,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	Thierry Reding <thierry.reding@gmail.com>,
-	linux-sound@vger.kernel.org, linux-tegra@vger.kernel.org,
-	Thierry Reding <treding@nvidia.com>
-Subject: Re: [PATCH v2 2/3] dt-bindings: sound: tegra-ahub: Convert to
- json-schema
-Message-ID: <4906079e-bcb9-49b3-b926-a38e004f53f0@sirena.org.uk>
-References: <20260930-as3722-bindings-v2-0-a3bba649ebf9@nvidia.com>
- <20260930-as3722-bindings-v2-2-a3bba649ebf9@nvidia.com>
+	s=k20260515; t=1790882465;
+	bh=BxCWISzbU0IXRc12DxDKUphueVrKbysRD9EKFe3TIvE=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=fvm4NUKds+Zu8wrn2D8F5EozOmlUF37voRlk7UMJjayTCs4tOMWvfu2czPLFecz8M
+	 Se2Id3O7FlBuTKPDKA8TmURR8yuCTXpt4Hi/xxr51q6GzPGcCyhWIM0L1Gyqfeyqow
+	 goPGMwlOgEw0dpAY/s1QtKs0yZika9BvUtr9eAEpz1FcVq9xdv3Sj8gCIIMaRI+1g6
+	 vJZu8zUxiyxz5voA5GesRL9ktiv1ePETwCkJrCdpVGjdzph5z1kBtI1MZ/wbJCW1k1
+	 5wardAfPmqPO6Pih64+/J+RfWWRf3dEI2rbeUZT32i7Z5cO6L8Hd2rpoQoNCGQZDdh
+	 TXHapX7sG4YLQ==
+Received: by mail-lf2-f12.google.com with SMTP id 2adb3069b0e04-5ba3d84150dso2238650e87.2
+        for <mfd@lists.linux.dev>; Thu, 01 Oct 2026 12:21:05 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBw03Apwl4eTnGxvCxM/FJ6NOkxas+1NAN6cFq3PY+xtbs1ic/8OQ+9wEBND61KXEbkshaQ=@lists.linux.dev
+X-Gm-Message-State: AFq9FYLp9J0oCNDxrqP4iv8cLR6s0/+A0S1vt1pbOk+dFuFJJtQY/GlK
+	NrH6JeGru9QbUnfBAjn2M4yfx8LY8qDc6g4SosGs1sN+RDh+QLQAUJLNEXMG8Uwxn/0mdiDVKlg
+	B47lzMwpyEJ2BDkcSaiUJshiVZLgxzjM=
+X-Received: by 2002:a05:6512:6681:10b0:5b8:f4ad:6e4b with SMTP id
+ 2adb3069b0e04-5bb9bb10485mr52668e87.18.1790882463996; Thu, 01 Oct 2026
+ 12:21:03 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="CiNrKFiNvWa0On5z"
-Content-Disposition: inline
-In-Reply-To: <20260930-as3722-bindings-v2-2-a3bba649ebf9@nvidia.com>
-X-Cookie: Do not stamp.
-
-
---CiNrKFiNvWa0On5z
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+References: <20261001-cv75-v5-v9-0-486cc289a4b8@ambarella.com>
+ <20261001-cv75-v5-v9-13-486cc289a4b8@ambarella.com> <2026100140-overbite-mundane-fc79@gregkh>
+In-Reply-To: <2026100140-overbite-mundane-fc79@gregkh>
+From: Linus Walleij <linusw@kernel.org>
+Date: Thu, 1 Oct 2026 21:20:51 +0200
+X-Gmail-Original-Message-ID: <CAD++jLnv1Q7ChHuLo=ad9edqhZL8MNaMab8huMAepK_LwqVzGQ@mail.gmail.com>
+X-Gm-Features: AclHuK-xwkb5oiKwTZeGukzhni2eOhkFeU3cVe4kmkvR6xpTKv4UHYXaQGsg3Rk
+Message-ID: <CAD++jLnv1Q7ChHuLo=ad9edqhZL8MNaMab8huMAepK_LwqVzGQ@mail.gmail.com>
+Subject: Re: [PATCH v9 13/15] serial: 8250_dw: add Ambarella CV75 quirks
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: longzhao@ambarella.com, Arnd Bergmann <arnd@arndb.de>, 
+	Krzysztof Kozlowski <krzk@kernel.org>, Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
+	Jerome Brunet <jbrunet@baylibre.com>, Bartosz Golaszewski <brgl@kernel.org>, 
+	Michael Walle <mwalle@kernel.org>, Jiri Slaby <jirislaby@kernel.org>, 
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
+	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Long Zhao <zl020895@163.com>, 
+	Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 30, 2026 at 04:01:24PM +0200, Thierry Reding wrote:
-> From: Thierry Reding <treding@nvidia.com>
->=20
-> Convert Tegra AHUB bindings from the free-form text format to
-> json-schema.
+On Thu, Oct 1, 2026 at 2:52=E2=80=AFPM Greg Kroah-Hartman
+<gregkh@linuxfoundation.org> wrote:
+> On Thu, Oct 01, 2026 at 08:41:02PM +0800, Long Zhao via B4 Relay wrote:
 
-Please submit patches using subject lines reflecting the style for the
-subsystem, this makes it easier for people to identify relevant patches.
-Look at what existing commits in the area you're changing are doing and
-make sure your subject lines visually resemble what they're doing.
-There's no need to resubmit to fix this alone.
+> > From: Long Zhao <longzhao@ambarella.com>
+> >
+> > The Ambarella CV75 UART is Ambarella IP, not a Synopsys DesignWare
+> > licensed block. At the register level it is close enough to DW APB UART
+> > that a full custom UART driver is unnecessary: reuse 8250_dw with a
+> > small platform quirk.
+> >
+> > Quirks:
+> > - keep IER ETOI (bit 5) set for RX timeout behaviour
+> > - skip set_rate; baud clock is managed outside the UART block
+> >
+> > Reviewed-by: Linus Walleij <linusw@kernel.org>
+> > Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+> > Reviewed-by: Ilpo J=C3=A4rvinen <ilpo.jarvinen@linux.intel.com>
+> > Signed-off-by: Long Zhao <longzhao@ambarella.com>
+> > ---
+> >  drivers/tty/serial/8250/8250_dw.c | 32 +++++++++++++++++++++++++++++++=
++
+> >  1 file changed, 32 insertions(+)
+>
+> When you submit lots of different subsystem patches all in one series,
+> it's hard, if not impossible, for subsystem maintainers to take them :(
 
---CiNrKFiNvWa0On5z
-Content-Type: application/pgp-signature; name="signature.asc"
+In my experience people do this in cases like this it is because they
+essentially dump out their "bring-up" tree, the thing they have
+booting on the hardware so they know the pieces work together.
 
------BEGIN PGP SIGNATURE-----
+Long: can you split it up in topic branches and work on e.g. the
+serial driver on a separate branch?
 
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmq+pDQACgkQJNaLcl1U
-h9AntQf/RKWOAXgdfPdxxCh+VtG88guPxz38qY6yYHlXJFT9iflYamy1BuzOwe7d
-zK6QWJ7RNhv829jG/OmL9lguYZMjXAee12pPSI+QZ+GFzL4gSJnyJ1YX8CRlIcux
-+f5WnVx1jke3DNiNETuVeZ/WpoD7JC+k9DRXFDl2jGLhWZCwYlg90r42dICMGS2J
-a//sCbxD+Jh1PjSyilyy2YQcv2h9bVqm3Q9vS6f9V5GSa04+fT7pPiF15ogRl96l
-EWg93tZKRTZrKXAZwZ24j4FWcb5p94idVhUbeSkdvytzRBm4N55ZeF7RtVcRYIig
-dsTEwc6vI24r9taZrlhWJ0DzYs37fg==
-=DOPs
------END PGP SIGNATURE-----
+A better way to test the whole set of patces is to just create a
+mixdown branch where you merge all the topic branched into
+one "test" branch, then you boot and test this before sending
+out each branch separately.
 
---CiNrKFiNvWa0On5z--
+Each topic branch can be versioned separately with b4.
+
+Yours,
+Linus Walleij
