@@ -1,84 +1,118 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E69E47F3D5;
-	Fri,  2 Oct 2026 10:30:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CF17477292
+	for <mfd@lists.linux.dev>; Fri,  2 Oct 2026 11:13:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790937056; cv=none; b=cfb0dDrUQLhDEPylPNbrHmUhgaeWAVKHj+nrk7gz0utGYglbcOSNatFBYBHQGSmycKeehp3+jgvzDKgm9YOhTj9XtJoMuf6SffyHaOWeDPHFfx22CXUtTWtc5eNTcQuDl2/O1uLJ60AGw2QX5DVyvFq+dma2Se4IENLS0VwK3RI=
+	t=1790939586; cv=none; b=LADRSfPzzSqh5N57Zq9XbnLa0k2DjpeXy7rm5cwtEJOX9o9K27nKWZ6+GVVK4+7eUYMHGvAFfhswxbDLixOG5uK0StCNo4ALHogaaNBRR+R712QLLlZdWgRG954+qYmHBmwnN0BOqDIY32ioWv0H1Gsj3hdtX1A20wchSmXfvVQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790937056; c=relaxed/simple;
-	bh=pIGH0V5kadC2PW1/kTwCEjTJea3M+mAnHiCuYdJOJL8=;
-	h=Date:From:To:cc:Subject:In-Reply-To:Message-ID:References:
-	 MIME-Version:Content-Type; b=AG1MuJkP6jLop5vmwN4NyVwvzHfxtbbl5WcUQqT53Ek9oXhoH7enbTzTuc3AKG63LyxBne/Jn8RPn3cICrYfeneZXD94MLfKvaDb2BZCdRKi4fhi6JSklccYGTD3FLXih6JSWSbubxj0m3aXwn6hwyxRyl1FJ3flC+X6+0RwA2Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FZ66Sp4o; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790939586; c=relaxed/simple;
+	bh=QE9Harzci5RFmrQqWEVp2gt5x43gSxsW3S3yRSOjdP8=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=VgMyJuReuPSwULAf61jl9DYuPkLTGjX5b5PJPF8Jws6rXNiWNMAo9hB0ATplhEyCotwKLT/LQTCPLXZXx056hjy2b/6yhXpa9bsq5e6JlWKvMgeXRJywLzm9SO7bNlYxPon3kSLwMXnBtdsJSVTdAH3qexT24pJpCPJr9C7uIlE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=wWMAd2g8; arc=none smtp.client-ip=185.246.85.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FZ66Sp4o"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9EFA21F00893;
-	Fri,  2 Oct 2026 10:30:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790937048;
-	bh=yc1IIMGlaCGdOYuzLXeOZBI2ciPC6+7oDnRuG9aAllo=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References;
-	b=FZ66Sp4o7Ynls3fytrnOjtk/CrgeHP9ASYQVydHFPboylqwYLdtqUery7iWpmi5K8
-	 9dnhkPkoZrQiSZzbnXUJ3pTL5WwfhXXb+ZZepfdF+2tal5DtNpBDrlhsecPoTB1aJh
-	 XLg+eVhtPbkIIV0ZipdVW+9nLkdbcOakEQ1lWTKYTE4VQb2lB1FBUkZf6r33JvqSmq
-	 aLdAZ8wxys3xapvDETxAhe/9moexdSv49/X7kQgZqaaL7cmSMnskwd8Jitqgw6MWYL
-	 RI6WRHijtD1Wrp3mIihow5l4Vr3rNOYfwgcKxJXtqnkY2CK0aclA2XPB8pSWnZ0+k0
-	 1o4nB+ayPjVPg==
-Date: Fri, 2 Oct 2026 12:29:43 +0200 (CEST)
-From: Imre Kaloz <kaloz@kernel.org>
-To: Lee Jones <lee@kernel.org>
-cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
-    linux-mips@vger.kernel.org, linux-kernel@vger.kernel.org, 
-    mfd@lists.linux.dev
-Subject: Re: [PATCH 31/38] mfd: ioc3: add IP34 system-board entry to
- ioc3_infos[]
-In-Reply-To: <20261002100204.GB13860@google.com>
-Message-ID: <6951329d-5ef5-b090-33e6-7af38e1d3893@kernel.org>
-References: <cover.1790857966.git.kaloz@kernel.org> <e9b125b8ab2422717072f447c318eff41062bd79.1790857966.git.kaloz@kernel.org> <20261002100204.GB13860@google.com>
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="wWMAd2g8"
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-03.galae.net (Postfix) with ESMTPS id A06C44E41109;
+	Fri,  2 Oct 2026 11:13:00 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 72DE7603DC;
+	Fri,  2 Oct 2026 11:13:00 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id D6048103282FC;
+	Fri,  2 Oct 2026 13:12:53 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1790939575; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding; bh=XvO1BNYN19Nln6gJEDYgUUR3tRUXH8L0avT4inZ0dLk=;
+	b=wWMAd2g8z9gt2dPZ2FydFzSM3OjCIl1K/8oy7NtjdzgA3btUv+vccQR07K8TnYTGCP8FW2
+	gurcx/ADKoEEZGBfHW49dqF847Wusc6XolnOBFB+lwKUZrDOhh/ZmZDQc4cnbYc17rJOQ/
+	iglxvLlFOTn79Eh5HLN5fiVUv89QafljPeeUb1lWGXqmZppmIYWDqYABQQk3Jat15YTMP/
+	14TFzwSv/bKdhiD4SA1r6FedmO/K8fPXYpEHgBB4d8n+EmzkPcKVAFDcghpwno6xCsrli/
+	uRPtKKNey9bC0cVYWCSQlszcOZrCCLcnzvy0qr96w/d6VFGSQAWCpDtnQFY3HQ==
+From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
+Subject: [PATCH v4 0/9] Congatec Board Controller: Add storage devices
+ support
+Date: Fri, 02 Oct 2026 13:12:38 +0200
+Message-Id: <20261002-cgbc-i2c-storage-devices-support-v4-0-eb42e0f1df59@bootlin.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII; format=flowed
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43OTQ6CMBAF4KuQrq3pDxVw5T2Mi3aYQhOl2CLRG
+ O5u0YUaF7J8M5nvzZ1EDA4j2WZ3EnB00fkuhXyVEWh11yB1dcpEMLFhBS8oNAaoE0Dj4INO+zp
+ dAUYaL33vw0CNRCwAtZSCkcT0Aa27Piv2h1cOeL6kpuE9bN3M3Z5vjHyevhpLlv9vHDll1GItS
+ 8XZpuCwM94PR9etwZ/IzI/ig+R8ASkSKdHqqiqRoVW/pHyT1SJSJlJVuVHSGlCov8lpmh7SK60
+ HjQEAAA==
+X-Change-ID: 20260717-cgbc-i2c-storage-devices-support-b3ee7cea3320
+To: Lee Jones <lee@kernel.org>, Andi Shyti <andi.shyti@kernel.org>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Werner Gartner <Werner.Gartner@congatec.com>, mfd@lists.linux.dev, 
+ linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org, 
+ "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>, 
+ stable@vger.kernel.org, Sashiko <sashiko-bot@kernel.org>
+X-Mailer: b4 0.16.0
+X-Last-TLS-Session-Version: TLSv1.3
 
-Hi Lee,
+In this v4, I moved struct cgbc_i2c_platform_data definition into MFD CGBC
+header file (was in linux/platform_data/). And now MFD_CELL_NAME macros is
+used.
 
-On Fri, 2 Oct 2026, Lee Jones wrote:
+Signed-off-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
+---
+Changes in v4:
+- Fix struct cgbc_i2c_platform_data comment (kernel-doc warning)
+- Move struct cgbc_i2c_platform_data from linux/platform_data/i2c-cgbc.h to
+  linux/mfd/cgbc.h
+- Use MFD_CELL_NAME macros.
+- Link to v3: https://patch.msgid.link/20260911-cgbc-i2c-storage-devices-support-v3-0-594b53fbc5ea@bootlin.com
 
-> On Thu, 01 Oct 2026, Imre Kaloz wrote:
->
->> Register the Fuel system board's on-board IOC3 and its M48T35, whose
->> year register counts from 1968 as on other IP35-family machines.
->> Bridge-side detection was already merged in commit 2c4288719806 ("MIPS:
->> PCI: Add detection of IOC3 on IO7, IO8, IO9 and Fuel"), which matches
->> the board part number "030-1707-"; the cell table had no entry to go
->> with it. Without one the IOC3 falls to the CAD DUO default, which
->> instantiates no serial cell, so Fuel comes up with no ttyS0.
->
-> I received 26 and 31.  Where is the rest of the set?
->
-> I'd like to have full context please.
->
+Changes in v3:
+- rebased on v7.3-rc2
+- use PLATFORM_DEVID_AUTO for child devices
+- move I2C bus and I2C device definition in the MFD driver
+- Link to v2: https://patch.msgid.link/20260811-cgbc-i2c-storage-devices-support-v2-0-3efa998e0ef5@bootlin.com
 
-Sorry about that, my send used get_maintainer per patch, so you only
-got the two mfd changes. The whole set with the cover letter is here:
+Changes in v2:
+- i2c: fix typo in CGBC BIOS EEPROM label.
+- mfd: make cgbc_devs const
+- Link to v1: https://patch.msgid.link/20260804-cgbc-i2c-storage-devices-support-v1-0-fed38510671c@bootlin.com
 
-https://lore.kernel.org/all/cover.1790857966.git.kaloz@kernel.org/
+To: Thomas Richard <thomas.richard@bootlin.com>
+To: Lee Jones <lee@kernel.org>
+To: Andi Shyti <andi.shyti@kernel.org>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+Cc: Werner Gartner <Werner.Gartner@congatec.com>
+Cc: mfd@lists.linux.dev
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-i2c@vger.kernel.org
 
-The series adds SGI IP35 (Fuel, Tezro, Origin 300/3000) support to
-the IP27 platform code. The two mfd patches are the IOC3 side of it:
-26 adds the IOC4 variant found on these boards and 31 adds the Fuel
-system board's cell table entry so its IOC3 gets a serial cell. They
-apply on mainline with nothing else from the set, 31 on top of 26,
-but are only useful together with the platform patches.
+---
+Thomas Richard (congatec GmbH) (9):
+      mfd: cgbc: Fix use of negative error code as valid session handle
+      mfd: cgbc: Add I2C platform data
+      i2c: cgbc: Use plateform data to get bus ID and adapter name
+      mfd: cgbc: Use PLATFORM_DEVID_AUTO for child device registration
+      mfd: cgbc: Use real I2C bus names
+      i2c: cgbc: Add support for fixed frequency buses
+      mfd: cgbc: Add virtual I2C bus support
+      mfd: cgbc: Add virtual storage devices on the virtual I2C bus
+      i2c: cgbc: Register known I2C devices on the bus
 
-Happy to resend the full series to you if you prefer to have it in
-your inbox.
+ drivers/i2c/busses/i2c-cgbc.c | 108 ++++++++++++------------
+ drivers/mfd/cgbc-core.c       | 186 +++++++++++++++++++++++++++++++++++++++---
+ include/linux/mfd/cgbc.h      |  16 ++++
+ 3 files changed, 243 insertions(+), 67 deletions(-)
+---
+base-commit: ce1e0223d8ad4211275c82a17ed6d43ab81e13d9
+change-id: 20260717-cgbc-i2c-storage-devices-support-b3ee7cea3320
 
+Best regards,
+--  
+Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
 
-Thanks,
-Imre
