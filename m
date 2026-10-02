@@ -1,77 +1,42 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6CD44718C1;
-	Fri,  2 Oct 2026 09:22:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCEFD4746C0;
+	Fri,  2 Oct 2026 10:02:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790932966; cv=none; b=RzztBvDjDipPHWbHKy12RTPwVEu99boaYNvaHWAcJeS9MoTKLQy3NvFgCqwF1eYMr+ZuXZRLPTy/qsWXjYKwZtknDdDmePXpIIeEC0oAMf+10qSWp8COHOaK4JAWNME+hSfgq+MafeS+dH3HKlWdJZVY3dqrN9rfDN0G9AGa288=
+	t=1790935328; cv=none; b=BVhmQgfyCCmZFgt5t+lUl3AfU9Fdk4N5nDvA8CD3XcOS8HfnIoxi/slti5JrfkRJbeM/DPmm4RlB3VxJAPSA59pludIwkm6H7dRJyW9O8SOxcoqbKxStc3AKy31xb/ENsTZFhLQg0xSTxGWAQLcNHYXk7bp5MECgY/m9dG6mqIc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790932966; c=relaxed/simple;
-	bh=fjiLNweLxwmozP439aS0ZNu1H6FrPKQa3Ai1bKR9ZlE=;
+	s=arc-20240116; t=1790935328; c=relaxed/simple;
+	bh=2qmJcoqiNXD49B1PmnaoTGVLX41DaXqByrpakOhFZ4A=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=hRSkOlQiKdBpMmIPWz+Ej6BdPlu9z4jFB+WazOQFl5ZCmPhEpzxaR19ENpvSnCWdSSb25OD0aFXwzFfXDdZUjZKUej9jVCoqr3pN2N1vhWmOLh8YuiRep5s2mMrXEMl2ELSI6bfhD1OHcXlmNWe63rdjuO2DA4v6GIvYM+mgYfA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=LdRYyhbw; arc=none smtp.client-ip=198.175.65.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=GmC9hkeoX5mJpRSOj/kTDpVAh56103jqm4Z049GYEshmRD8TD12FoRfAH4cjj9ZqAvOSoQIf7xnA8CGS7k5vL4NYrxG54AjAT4eWfjq08TvIGNBBfwqLCbXJEP4Ep3RjTixHFYFaw3JErpmMwiUhntTrCizz7xflU/tBkxaeJk0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RtBHZBSY; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="LdRYyhbw"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1790932965; x=1822468965;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=fjiLNweLxwmozP439aS0ZNu1H6FrPKQa3Ai1bKR9ZlE=;
-  b=LdRYyhbwjtEqAllMZnnUdIlQLD4P7oRusht+jqt4IF06wNlxK4NsMfwF
-   STPirGH1aRRLaY79CNcDoRuY2RgLLznJlPzctExPIzCjXsERQCuJKrbPu
-   Z0UD39/QDvqlZGb7UYX+yWmt5tBn/7om+U3G0q7sAROZ0OucrP4NQEona
-   ZWLMYJJ8NKV2WaFK61cuV5tTyy7AK8nJZv5gV7rxbmXvBweHIhDeDTiCJ
-   JdSfs/Zt7OZjuCSWiHBsyRY5CXaahEKu8MNBBSmTBijX84z4o9lxbZXkc
-   Hpe1lsNFGUHkpkaiV6o3Z4Duuw1E90kwfCtMP8+dZm6wVSnzXYMdKq+cv
-   g==;
-X-CSE-ConnectionGUID: ow5H8wKgQxWPUwF2VezaiQ==
-X-CSE-MsgGUID: A9XOwadnRdWC1Buayu9t2Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11922"; a="90728981"
-X-IronPort-AV: E=Sophos;i="6.27,136,1787036400"; 
-   d="scan'208";a="90728981"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
-  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Oct 2026 02:22:43 -0700
-X-CSE-ConnectionGUID: eNU2YW10T22FBc3/h+ZAhw==
-X-CSE-MsgGUID: y1/IruAGQNa1bH81g2tJsA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,136,1787036400"; 
-   d="scan'208";a="302464580"
-Received: from conormcd-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.244.188])
-  by fmviesa002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Oct 2026 02:22:37 -0700
-Date: Fri, 2 Oct 2026 12:22:34 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: longzhao@ambarella.com
-Cc: Arnd Bergmann <arnd@arndb.de>, Krzysztof Kozlowski <krzk@kernel.org>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Jerome Brunet <jbrunet@baylibre.com>,
-	Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Michael Walle <mwalle@kernel.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jiri Slaby <jirislaby@kernel.org>,
-	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, Long Zhao <zl020895@163.com>,
-	Lee Jones <lee@kernel.org>, mfd@lists.linux.dev,
-	devicetree@vger.kernel.org, linux-clk@vger.kernel.org,
-	linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v9 09/15] gpio: pl061: use IRQ_TYPE_LEVEL_MASK and
- IRQ_TYPE_EDGE_BOTH
-Message-ID: <ar932rg30_MnbRhf@ashevche-desk.local>
-References: <20261001-cv75-v5-v9-0-486cc289a4b8@ambarella.com>
- <20261001-cv75-v5-v9-9-486cc289a4b8@ambarella.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RtBHZBSY"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66A121F000FF;
+	Fri,  2 Oct 2026 10:02:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790935327;
+	bh=56E8XzZ+C/jYCSXWh8CtNSN85hX3wCL6QykMnsd9Zok=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=RtBHZBSY3QVswiPpTWH4a0r4EP9y1FfwAzmPEo3KRTqY6poOifJd7UGQkAPv/l8I1
+	 ECypJZ5wdTtaWSxXu3ix2AzBMSJeUWxJ+OpJmKBZ/SHxcAIhHpsXT9pNU3u+kWAz3D
+	 X1zS9MadaCLXPq/pDIEY0Ah5ocFU8Cn2qCYOLEu3EPM/35/gAV4oZHswa+tUZ2WMYB
+	 zmxXsJT4G0N9Zk0l3gWGvP+5ujvfRjhoW6eoZLVcECNmmLSrhxAIRQaXQtCODaAFqf
+	 NODD6expUi3ETyTziZTFX3JT7I/PLBwn1mOhIWTtdvLlZQX7378BbKQ8xwD7wh19T+
+	 Y7798FIWxAduA==
+Date: Fri, 2 Oct 2026 11:02:04 +0100
+From: Lee Jones <lee@kernel.org>
+To: Imre Kaloz <kaloz@kernel.org>
+Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	linux-mips@vger.kernel.org, linux-kernel@vger.kernel.org,
+	mfd@lists.linux.dev
+Subject: Re: [PATCH 31/38] mfd: ioc3: add IP34 system-board entry to
+ ioc3_infos[]
+Message-ID: <20261002100204.GB13860@google.com>
+References: <cover.1790857966.git.kaloz@kernel.org>
+ <e9b125b8ab2422717072f447c318eff41062bd79.1790857966.git.kaloz@kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -80,19 +45,21 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261001-cv75-v5-v9-9-486cc289a4b8@ambarella.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+In-Reply-To: <e9b125b8ab2422717072f447c318eff41062bd79.1790857966.git.kaloz@kernel.org>
 
-On Thu, Oct 01, 2026 at 08:40:58PM +0800, Long Zhao via B4 Relay wrote:
+On Thu, 01 Oct 2026, Imre Kaloz wrote:
 
-> Use the standard IRQ_TYPE_LEVEL_MASK and IRQ_TYPE_EDGE_BOTH helpers
-> instead of open-coded edge and level comparisons.
+> Register the Fuel system board's on-board IOC3 and its M48T35, whose
+> year register counts from 1968 as on other IP35-family machines.
+> Bridge-side detection was already merged in commit 2c4288719806 ("MIPS:
+> PCI: Add detection of IOC3 on IO7, IO8, IO9 and Fuel"), which matches
+> the board part number "030-1707-"; the cell table had no entry to go
+> with it. Without one the IOC3 falls to the CAD DUO default, which
+> instantiates no serial cell, so Fuel comes up with no ttyS0.
 
-Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+I received 26 and 31.  Where is the rest of the set?
+
+I'd like to have full context please.
 
 -- 
-With Best Regards,
-Andy Shevchenko
-
-
+Lee Jones
