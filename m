@@ -1,65 +1,73 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCEFD4746C0;
-	Fri,  2 Oct 2026 10:02:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2054B477291;
+	Fri,  2 Oct 2026 10:09:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790935328; cv=none; b=BVhmQgfyCCmZFgt5t+lUl3AfU9Fdk4N5nDvA8CD3XcOS8HfnIoxi/slti5JrfkRJbeM/DPmm4RlB3VxJAPSA59pludIwkm6H7dRJyW9O8SOxcoqbKxStc3AKy31xb/ENsTZFhLQg0xSTxGWAQLcNHYXk7bp5MECgY/m9dG6mqIc=
+	t=1790935748; cv=none; b=AGxOmTtuBSV4RleuxAhkeD25SYt0ZlZrXtyqiANfyTGdJzdONCDicgOPczTBWn41vTcbnqWmxqPC1jYYjEuccZtgz7CWrE3yiiERpwVDPqxr4NC+YEYK9ihkZLI9lBceHpA0tVstwmnd+eglQbjzH4TcLaDPNRkIVKrdZ6+skdY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790935328; c=relaxed/simple;
-	bh=2qmJcoqiNXD49B1PmnaoTGVLX41DaXqByrpakOhFZ4A=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=GmC9hkeoX5mJpRSOj/kTDpVAh56103jqm4Z049GYEshmRD8TD12FoRfAH4cjj9ZqAvOSoQIf7xnA8CGS7k5vL4NYrxG54AjAT4eWfjq08TvIGNBBfwqLCbXJEP4Ep3RjTixHFYFaw3JErpmMwiUhntTrCizz7xflU/tBkxaeJk0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RtBHZBSY; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790935748; c=relaxed/simple;
+	bh=nOXcDrUoaq7D3/iW07c5+YzJfmnlVVdbiOfZn8zRDFg=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=YZp36PJ/mIbk0NKtCynCTBLtsrceGKlsP9I2aFODz8foCp4LeNmO+qco3O+6f3GPsWSJqNJUHd5zPPkAEOwkeBQjHA0swn4NEWV05ioz3xdRai88N9Wvvdx0+5Ti9liiSXYgANyQl1fryoxJr1n0Kzh9ZUyO7A9sO4c4dIJWpsM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gtJhHLb8; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RtBHZBSY"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66A121F000FF;
-	Fri,  2 Oct 2026 10:02:06 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gtJhHLb8"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 05DE21F000FF;
+	Fri,  2 Oct 2026 10:09:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790935327;
-	bh=56E8XzZ+C/jYCSXWh8CtNSN85hX3wCL6QykMnsd9Zok=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=RtBHZBSY3QVswiPpTWH4a0r4EP9y1FfwAzmPEo3KRTqY6poOifJd7UGQkAPv/l8I1
-	 ECypJZ5wdTtaWSxXu3ix2AzBMSJeUWxJ+OpJmKBZ/SHxcAIhHpsXT9pNU3u+kWAz3D
-	 X1zS9MadaCLXPq/pDIEY0Ah5ocFU8Cn2qCYOLEu3EPM/35/gAV4oZHswa+tUZ2WMYB
-	 zmxXsJT4G0N9Zk0l3gWGvP+5ujvfRjhoW6eoZLVcECNmmLSrhxAIRQaXQtCODaAFqf
-	 NODD6expUi3ETyTziZTFX3JT7I/PLBwn1mOhIWTtdvLlZQX7378BbKQ8xwD7wh19T+
-	 Y7798FIWxAduA==
-Date: Fri, 2 Oct 2026 11:02:04 +0100
+	s=k20260515; t=1790935747;
+	bh=42gWHDf6qE5t6dpfm57PHhsfmnmVxaBF+alyU8miG1c=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=gtJhHLb86ean7gBFJFYA9TuiGzTM4C3FG+cKNU0ehBeWyMY9mQj7qECiCPDTH/9Jf
+	 Q5RdWgCoS0CXh1zl/9lkqSU/xsKooc11ZNO4PTMJp9C3KqbQdmaURA+kRlLaOMiREL
+	 2ZPDtk9cH86EAo81E6SWf1khi+SUhkQ6xbouCSAV7C2fq53O7hoYZcqhIWZHfQod1i
+	 07dWxCmaiTEiOwtLqv1Z4kblKmG0BcKxM0kGHIyLYmQ8+1MeXie58cYW4zTOkedJC/
+	 8f9rvsspwVQwfZYXZeke+lOxqSoDV/bSb4M0aeO25hR69BjrmuM18C694NZhEmBcGU
+	 PkwzBzJog49xw==
 From: Lee Jones <lee@kernel.org>
-To: Imre Kaloz <kaloz@kernel.org>
-Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-	linux-mips@vger.kernel.org, linux-kernel@vger.kernel.org,
-	mfd@lists.linux.dev
-Subject: Re: [PATCH 31/38] mfd: ioc3: add IP34 system-board entry to
- ioc3_infos[]
-Message-ID: <20261002100204.GB13860@google.com>
-References: <cover.1790857966.git.kaloz@kernel.org>
- <e9b125b8ab2422717072f447c318eff41062bd79.1790857966.git.kaloz@kernel.org>
+To: Lee Jones <lee@kernel.org>, 
+ =?utf-8?q?Uwe_Kleine-K=C3=B6nig?= <ukleinek@kernel.org>, 
+ Chaosheng Qu <quchaosheng000406@163.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org, 
+ mfd@lists.linux.dev, linux-pwm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <20260930023923.49917-1-quchaosheng000406@163.com>
+References: <20260930023923.49917-1-quchaosheng000406@163.com>
+Subject: Re: (subset) [PATCH v3] dt-bindings: mfd: convert lp3943 to DT
+ schema
+Message-Id: <179093574476.188646.6343142834887336950.b4-ty@b4>
+Date: Fri, 02 Oct 2026 11:09:04 +0100
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <e9b125b8ab2422717072f447c318eff41062bd79.1790857966.git.kaloz@kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
 
-On Thu, 01 Oct 2026, Imre Kaloz wrote:
+On Wed, 30 Sep 2026 10:39:23 +0800, Chaosheng Qu wrote:
+> Convert the LP3943 MFD binding from free-form text to DT schema.
+> 
+> The LP3943 is an I2C LED driver with two sub-devices, lp3943-gpio and
+> lp3943-pwm. The GPIO sub-device is covered by trivial-gpio.yaml, so only
+> the PWM sub-device gets a schema of its own.
+> 
+> The PWM schema documents ti,pwm0 and ti,pwm1, which select the output pins
+> of the two internal PWM channels and are read by pwm-lp3943.c with
+> of_property_read_u32_array().
+> 
+> [...]
 
-> Register the Fuel system board's on-board IOC3 and its M48T35, whose
-> year register counts from 1968 as on other IP35-family machines.
-> Bridge-side detection was already merged in commit 2c4288719806 ("MIPS:
-> PCI: Add detection of IOC3 on IO7, IO8, IO9 and Fuel"), which matches
-> the board part number "030-1707-"; the cell table had no entry to go
-> with it. Without one the IOC3 falls to the CAD DUO default, which
-> instantiates no serial cell, so Fuel comes up with no ttyS0.
+Applied, thanks!
 
-I received 26 and 31.  Where is the rest of the set?
+[1/1] dt-bindings: mfd: convert lp3943 to DT schema
+      commit: 88e0bfab55e131fb2179dc3eee5893e9f638926b
 
-I'd like to have full context please.
+--
+Lee Jones [李琼斯]
 
--- 
-Lee Jones
