@@ -1,71 +1,146 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C3C748F039
-	for <mfd@lists.linux.dev>; Fri,  2 Oct 2026 11:44:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 83F7F4D6C4A
+	for <mfd@lists.linux.dev>; Fri,  2 Oct 2026 15:08:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790941463; cv=none; b=qW5J3+sYnHmR7pJjH85PxK552Uo5aY8i0waSvBnd+ntskC09n9eMZ3SXwXrOWkMWc2/4wEklUgeQ/BtNcyOMcobx5pu34Nw29jLewgnc39rqfSajzweNgoJDiSqwo8vocIfJ3oBln21XIjqgoBfaLcjeda8xOuWIXf3/1yNECAU=
+	t=1790953722; cv=none; b=Og6r+wmv0GScNgZQ8w70GvKVC5KyjQwr/iJSV1Ok17K6r7DaSF0DNe9uipXQve8OmQwR54OzPWgJa6JvC/iaKrCLox8KT1E/VzzK/lU696FdrDgeGsyq7CbVwBKb3Y5ZmqdRGPVnLAaSMg5jMzkTchWqdtTpEmMSvFJuL12zUfs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790941463; c=relaxed/simple;
-	bh=aG+wtZqCDW13iFHSilhaDqEpzi2Ce9B3zDu2o0Eha3I=;
-	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=po0nx6p7RFeJFV2zXWpOy5TcxIVI7akb+o5eljvMnOUgUWGc49IECKWr1oG7nBPVqtBoJBUrDALv2BIANr2004NUnjLCySt+m4mTE6yVvB5kzwKbRWahQqNz5bXHY53OP3imFPtda4apDDXgTuKG82uJYSJevVIvltPFKGYNDLY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WhVSsTMY; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790953722; c=relaxed/simple;
+	bh=nzzaG++30e7eP7gzQKASjcC/CQNsfJv4ueyQSdSfHAU=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=FDzslWtb7JH18mITW67qzT+6ZXWB5dn22KqhuiiBk7Pw+LF7eerd1qcR5zgGSy9X4hoTFs9NRbTlLA72+2nXLKnZcrKGuOPf2UwQvGSG8aQ+O9CjwdT+QCatAXWPGxAfIwa9/EkYmb9iaFLvHqxN1ol6UmJ9p9pB0zXxTikIDvA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=hcjNzQyv; arc=none smtp.client-ip=170.10.129.124
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WhVSsTMY"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A203E1F000FF;
-	Fri,  2 Oct 2026 11:44:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790941459;
-	bh=aG+wtZqCDW13iFHSilhaDqEpzi2Ce9B3zDu2o0Eha3I=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=WhVSsTMY4WR/h1UiI8J6KO5r1OXqBMJ6wS69wPs0pkSvL4PiBnlLHLUVSRmpjXPnc
-	 F6ta5p86LwzvcVAnK0f51cTxujgqPdae+a4apkjB0cfTZN0hAW2KDWixHEKYXtLaIX
-	 yM5rdpS6iUCuJUM4D+fIPFGG8NT42JjAfbC0Om2Xan57pNez+vLUQe2QLZVo75peHO
-	 PHV1gE5atMT3YVg0Vmlxpfp4Fh/HgZdFLtPu4Yaj1zYZazF1bymZtnjSDL0dK6/Yy3
-	 qN7tbEffgtS6PYNaNH2lhm61BfWAj973rwy/vRAHRrDqZHnp5VR+CQ1XSfVV7Agaro
-	 Aod8aqmrK6ccA==
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v5 1/3] mfd: tps65217: Fix NULL pointer dereference on
- IRQ init failure
-Reply-To: sashiko-reviews@lists.linux.dev
-To: =?utf-8?b?0JbQsNC80LHQsNC60LjQtdCyINCg0LDQtNC40Lkg0KDQuNC60LDRgNC0?=
- =?utf-8?b?0LjQvdC+0LLQuNGH?= <r.zhambakiev@prosoftsystems.ru>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261002113624.178588-2-r.zhambakiev@prosoftsystems.ru>
-References: <20261002113624.178588-1-r.zhambakiev@prosoftsystems.ru>
- <20261002113624.178588-2-r.zhambakiev@prosoftsystems.ru>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Fri, 02 Oct 2026 11:44:19 +0000
-Message-Id: <20261002114419.A203E1F000FF@smtp.kernel.org>
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="hcjNzQyv"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1790953715;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=LD/A3nglaC31jBIMtUDrqXBiepN73OFs6DJpCa6dtO4=;
+	b=hcjNzQyvwZ9C8YvtW9BjAHysd6TJC2aKMmAt0nemkhqbbFihs8FP3vOuVT4YzjDFTO5+lT
+	gj4U+eVEKihypyn675/+IDDtnVpNQl5gp0SwyJ3hPORx4RXp0d7qicAoFd4PVn6V7tzEJT
+	tCuCkYiyFmwvs7DAVUJu5KZXrHoUm9w=
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-617-yBFLyVh4Namuy4R-8xctnA-1; Fri, 02 Oct 2026 11:08:34 -0400
+X-MC-Unique: yBFLyVh4Namuy4R-8xctnA-1
+X-Mimecast-MFC-AGG-ID: yBFLyVh4Namuy4R-8xctnA_1790953714
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-53397b6e05aso22218291cf.1
+        for <mfd@lists.linux.dev>; Fri, 02 Oct 2026 08:08:34 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790953714; x=1791558514;
+        h=content-transfer-encoding:content-type:mime-version:date:message-id
+         :subject:references:in-reply-to:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=LD/A3nglaC31jBIMtUDrqXBiepN73OFs6DJpCa6dtO4=;
+        b=vnEuAtfX77q0aym605SvRVZu40jwSg/1v4PevYn0SaP7Of0a9WBKF8Ynt8twz3xTxk
+         FZrOn9kWDt90mBJtTr3bm36KVb9qvaWDtqDwtpZBY4xfZqfl92r2fKF00c1f10FSIc/H
+         aODIeZ+nAsQHFvLgOeDPzVfA342ETtVKusNd1xXUqHo+AlgVxS8TtS6QMOjbzA3N4R6m
+         USZVL6WYS+Fvi3GF0xRvoCbhx+uG567/ldNdjcLqqdPqEplNW+4IPWWIQrxIH11uhPz5
+         EhhCjq7LNhN3AWcN8E4/CO5qL/crMselBlGgtVpH1hj6OTK+xpIyspm8Rtcw0iwOWnpJ
+         EzVw==
+X-Forwarded-Encrypted: i=1; AKwUvBzyKpmEo2Uz/U5RKJun+om6sZWmeZ1PXZhK+d+3irMaPaDJ4DuDnsONmKlNMgbXs1n2Xso=@lists.linux.dev
+X-Gm-Message-State: AFuF++n4cf9BviqVGvHzbN7BMKwqAuJzqf25a41t0FV4upV6TsIvXIz2
+	NoQDXv55xaT6kh5wnpyJrxdUYfAHa+wFK3GGgCfqoD5Jcn9dPFbN0PXtmf0eHqz4INFnBTBGgNn
+	wki8VgUG5J9lcFu1LNXK0sg4gd20V/ga9w33d4sqe2vJD10hzKNYiAg==
+X-Gm-Gg: AYBFou0dJLofMhRjWpWZEkBQxAz9lNNzktX4v0onKO57qFlwKDQjM2CzePXoefWuVIc
+	vlCdAMAdblLKKEqKFFW8RG2/KpxLexzCOcu4b72qkTqT68nyGYrZ9gFTg/rch9KN/Wla+zzxwrE
+	PbSSMq65iD16NqIcfUp15R3VAtbEtaOqN9vw3/a0WC+kTEzD5qWBT/9KWUJPr1hiQmAc60TT7OP
+	hq80i/04YZrA64e4UpFHnQsmzC5az3s+CF/vRuovSbYF6K8qBySwUla3wyQ5wrT+vQAT3Igx2gF
+	FahVJJlXMUBtQ3lvVF2LH6HlDyEjc2Mo0PRdAeIi4g9WQpuyhSYF72NLPC70JzbgOF+9Um0BGCG
+	nX9IY4JvcRCCoPu7GJ+TkKWjQnulu5oGjkHQ6OP5Gu3Xpxq3LC+k=
+X-Received: by 2002:a05:622a:1353:b0:533:3610:c5eb with SMTP id d75a77b69052e-533d96b6966mr49792471cf.53.1790953713779;
+        Fri, 02 Oct 2026 08:08:33 -0700 (PDT)
+X-Received: by 2002:a05:622a:1353:b0:533:3610:c5eb with SMTP id d75a77b69052e-533d96b6966mr49791681cf.53.1790953713259;
+        Fri, 02 Oct 2026 08:08:33 -0700 (PDT)
+Received: from bmasney-x1.rmtuswv.csb (c-73-183-53-213.hsd1.pa.comcast.net. [73.183.53.213])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-53398d128ccsm27596841cf.24.2026.10.02.08.08.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 02 Oct 2026 08:08:32 -0700 (PDT)
+From: Brian Masney <bmasney@redhat.com>
+To: Michael Turquette <mturquette@baylibre.com>, 
+ Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>, 
+ Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Russell King <linux@armlinux.org.uk>, Lee Jones <lee@kernel.org>, 
+ Brian Masney <bmasney+clk@redhat.com>, 
+ Jerome Brunet <jbrunet+clk@baylibre.com>, 
+ Manivannan Sadhasivam <mani@kernel.org>, 
+ =?utf-8?q?Stefan_D=C3=B6singer?= <stefandoesinger@gmail.com>
+Cc: linux-clk@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ linux-phy@lists.infradead.org, mfd@lists.linux.dev, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+In-Reply-To: <20260927-zx29clk-v13-0-70d8f673386c@gmail.com>
+References: <20260927-zx29clk-v13-0-70d8f673386c@gmail.com>
+Subject: Re: (subset) [PATCH v13 00/13] ZTE zx297520v3 clock bindings and
+ driver
+Message-Id: <179095369547.791677.11922932020340915175.b4-ty@b4>
+Date: Fri, 02 Oct 2026 11:08:15 -0400
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1464; i=bmasney@redhat.com;
+ s=20250903; h=from:subject:message-id;
+ bh=LWMTx7OVyEurkrK8gxvgvVLf0aBDX7nOCsHhfPnuLAk=;
+ b=owGbwMvMwCW2/dJd9di6A+2Mp9WSGLL2n3j1sCJv/pFzhTZJnIp6XLMW1T+Zsn17zf5NPhp2l
+ nuniVRzdZSyMIhxMciKKbIsyTUqiEhdZXvvjiYLzBxWJpAhDFycAjARdn2GP5ylRUdjm2eldZ5u
+ XD5jQ+j9xzleR9dJh/49fXhFlVPSDB9Ght0/fk9fsCKpqrNG5anMU3n7TWp/uuXyZ0pIxLpUpGv
+ P4wMA
+X-Developer-Key: i=bmasney@redhat.com; a=openpgp;
+ fpr=A46D32705865AA3DDEDC2904B7D2DD275D7EC087
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: BMNpOFltqVjr1t6GuYe2baZFZ5CLpzDSZF8UQkxfXKI_1790953714
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-> From: Radiy Zhambakiev <r.zhambakiev@prosoftsystems.ru>
->=20
-> tps65217_probe() ignores the return value of tps65217_irq_init(), so
-> when the irq domain creation fails the probe still completes and the
-> driver ends up bound with a NULL tps->irq_domain. Unloading the
-> module then makes tps65217_remove() call irq_domain_remove() on the
-> NULL pointer and oops the kernel. On top of that, irq_find_mapping()
-> may fall back to the default irq domain and dispose of mappings that
-> belong to other interrupt controllers.
->=20
-> Check the return value and abort the probe on failure so the error
-> is reported and no inconsistent state is left for removal.
->=20
-> Fixes: 6556bdacf646fcaa ("mfd: tps65217: Add support for IRQs")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Radiy Zhambakiev <r.zhambakiev@prosoftsystems.ru>
 
-Sashiko has reviewed this patch and found no issues. It looks great!
+On Sun, 27 Sep 2026 23:13:28 +0300, Stefan Dösinger wrote:
+> ZTE zx297520v3 clock bindings and driver
+> 
+> Hi,
+> 
+> I am sending version 13 of my zx297520v3 clock patch. It addresses review
+> comments for the MFD driver but has no other substantial changes
+> 
+> [...]
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261002113624.1785=
-88-1-r.zhambakiev@prosoftsystems.ru?part=3D1
+Applied, thanks!
+
+[01/13] dt-bindings: clk: zte: Add zx297520v3 top clock and reset controller
+        commit: 9b9e5daaea8febcdf67a656e76b3a7e1d0f2290a
+[02/13] dt-bindings: clk: zte: Add zx297520v3 matrix clock and reset controller
+        commit: 3847bc94d1746c1448c984338fcfdf1216db0827
+[03/13] dt-bindings: clk: zte: Add zx297520v3 LSP clock and reset controller
+        commit: 4500e2e361ecba42cb1abd6f6891a45d99f57741
+[06/13] clk: zte: Add Clock registration infrastructure
+        commit: ad5107a88e993b576b01761c6560e157519e0f84
+[07/13] clk: zte: Add regmap-based clocks
+        commit: 0f973ffd1038e2bca5ad89279412a508df62f44f
+[08/13] clk: zte: Add zx PLL support infrastructure
+        commit: 77732e66cd47e849031e4fc8999cbff0ec958deb
+[09/13] clk: zte: Introduce a driver for zx297520v3 top clocks
+        commit: 392a4957db5c2f2c37bf0191d9531710b3080dbf
+[10/13] clk: zte: Introduce a driver for zx297520v3 matrix clocks
+        commit: 4ea299afff42c6a09eb1aea1d29c678c3374b824
+[11/13] clk: zte: Introduce a driver for zx297520v3 LSP clocks
+        commit: f8a3cbf8678ab80d3aba5918f2f5e1acc1e7287d
+
+Best regards,
+-- 
+Brian Masney <bmasney@redhat.com>
 
