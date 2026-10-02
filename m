@@ -1,126 +1,113 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E4E84D4875;
-	Thu,  1 Oct 2026 23:00:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 404C413D891;
+	Fri,  2 Oct 2026 02:19:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.3
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790895604; cv=none; b=t1u0t3XjPAyK5jZb1wevfi+Y8zQwEH/P4i3lsXBAiNY9oPKjHv7vHqPSS8QbXSRtbItKPTrUwajnTv/OVbsrXMXsPGfMGc9Sl+LJJNLdgLfl/ZSF0kShJkMc0i2mGPkNWOAAY1G9obTGN9rfO7H21A7mZ8HUApFoAHXVObjnBqs=
+	t=1790907556; cv=none; b=d7hYkZKaKWi0h8IrSFDUgHpKxSFLMhj/5dnfvUvq4781T0UTzMgRtwYwm3pE00rZI2jQoaALhYcX9u9axnakX6f9NP7dD0Z76YakqTZRmGX98OpVz/Csqk00WKeTwgtJNH+aHxyyHJS9/spBw4euY5Ps9NIpTJB2ju3syXQdq+Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790895604; c=relaxed/simple;
-	bh=MNyCXZy5ru3r4Fny/rb9dCIGjrACfAsA7/MvgYfiETU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=NhddYqyUmLs5ynMp4oovn4/k+wZ3GctyIMWgUSUc9j0gnlPA9Nz/yNipvpfmwxrFvBZt+WC7Dkb88n3XdvY/NWCa8RXR0vVUJPfAEv5EYLNPth8HFfk+eezDcBqq+jEpUfnr9La2XWIqadNwp/GoolpTG6GZLa729WtDM6V/E4o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IZsUEa+M; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790907556; c=relaxed/simple;
+	bh=6M+UKP95uOCXtlBZBQ87VI3/zEbKTPu8471WPinWG1E=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
+	 MIME-Version:Message-ID; b=moMz+XfCOt9fEjDjk7IwzDzBhhiHwtbS9ok9cAfwmDiUUWYUkSE62kbuflQ2Oqtb1Sk+F8kHX7SrUv7GpZ4LnLK6L8HKBPTtcUp3QzrMek8kj+6nMfw0KVsOZzkJ/HUoNzkYWNsjSus2xiP4zJO/q3K6utnWnUR6fm5jk0fTvKs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=S2vsJkv3; arc=none smtp.client-ip=220.197.31.3
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IZsUEa+M"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2187C1F000FF;
-	Thu,  1 Oct 2026 23:00:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790895603;
-	bh=OvXyZeFZqgoZv43AfR9lxtOXs/un1M9HwAQCfdVDuRA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=IZsUEa+MZoIpvMEisKnasesrXNQ0gxicq3vOHXtc0inX8fTiscPZlfCZrm2S5OE5t
-	 A/nuvt3ICdSXQhr8JU/cGzVwa/G9GTI4SFx6L1wLVfIl5lRQX+Em5GViBkuKglP3/r
-	 8hC2sJuPRrtOsaiPlZhLJKJpkeGOsdjFmkdc4wUaC4f7Egj/1dL1T3B1vAbeNrkUQS
-	 8zGs6ozL5n9p0a9Fm/YuKkzlXm6RSeMK8yfmyE0HAgxBrFvmZK6BNv6KzEvQLMfPmZ
-	 zXi1UfE/+Gzj/lVWfZualVFtTXABqU96i+bgvxH5uleKLaIFPNeLczJErkYuywIdqI
-	 xjmXI/+8Jk+Nw==
-Date: Fri, 2 Oct 2026 00:59:59 +0200
-From: Thierry Reding <thierry.reding@kernel.org>
-To: Bhargav Joshi <j.bhargav.u@gmail.com>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Thierry Reding <thierry.reding@avionic-design.de>, 
-	Lee Jones <lee@kernel.org>, Shree Ramamoorthy <s-ramamoorthy@ti.com>, 
-	Jonathan Hunter <jonathanh@nvidia.com>, Dmitry Osipenko <digetx@gmail.com>, 
-	Svyatoslav Ryhel <clamor95@gmail.com>, Laxman Dewangan <ldewangan@nvidia.com>, 
-	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, goledhruva@gmail.com, 
-	m-chawdhry@ti.com, daniel.baluta@gmail.com, simona.toaca@nxp.com, 
-	mfd@lists.linux.dev, Thierry Reding <treding@nvidia.com>, linux-tegra@vger.kernel.org
-Subject: Re: [PATCH v2 4/4] regulator: dt-bindings: ti,tps6586x: Convert to
- DT schema
-Message-ID: <ar7lq50d4IcTCbkU@orome>
-References: <20260916-ti-tps6586x-v2-0-f12cfdfb446c@gmail.com>
- <20260916-ti-tps6586x-v2-4-f12cfdfb446c@gmail.com>
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="S2vsJkv3"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
+	Message-ID; bh=6M+UKP95uOCXtlBZBQ87VI3/zEbKTPu8471WPinWG1E=; b=S
+	2vsJkv3QYTUZBtD4qZ5KKZEy3Wt7v3iZeooJeD4KK2ke6DeaeheqnjTGWi3fTUPi
+	rwnPBv4Z8+0MkGSomU+EFbbuTRRSqfWH3UqDpcEkcrx4bodZ1jwgTt1kaFf1XP2t
+	EicZ4QercFKgb/7D/E8TZnHrd96UoQu5HugL1ZjGVs=
+Date: Fri, 2 Oct 2026 10:17:53 +0800 (CST)
+From: zl020895  <zl020895@163.com>
+To: "Linus Walleij" <linusw@kernel.org>
+Cc: "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+	longzhao@ambarella.com, "Arnd Bergmann" <arnd@arndb.de>,
+	"Krzysztof Kozlowski" <krzk@kernel.org>,
+	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
+	soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+	"Rob Herring" <robh@kernel.org>,
+	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
+	"Conor Dooley" <conor+dt@kernel.org>,
+	"Michael Turquette" <mturquette@baylibre.com>,
+	"Stephen Boyd" <sboyd@kernel.org>,
+	"Jerome Brunet" <jbrunet@baylibre.com>,
+	"Bartosz Golaszewski" <brgl@kernel.org>,
+	"Michael Walle" <mwalle@kernel.org>,
+	"Jiri Slaby" <jirislaby@kernel.org>,
+	"Andy Shevchenko" <andriy.shevchenko@linux.intel.com>,
+	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	"Catalin Marinas" <catalin.marinas@arm.com>,
+	"Will Deacon" <will@kernel.org>, "Lee Jones" <lee@kernel.org>,
+	mfd@lists.linux.dev, devicetree@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
+	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re:Re: [PATCH v9 13/15] serial: 8250_dw: add Ambarella CV75 quirks
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
+ 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
+In-Reply-To: <CAD++jLnv1Q7ChHuLo=ad9edqhZL8MNaMab8huMAepK_LwqVzGQ@mail.gmail.com>
+References: <20261001-cv75-v5-v9-0-486cc289a4b8@ambarella.com>
+ <20261001-cv75-v5-v9-13-486cc289a4b8@ambarella.com>
+ <2026100140-overbite-mundane-fc79@gregkh>
+ <CAD++jLnv1Q7ChHuLo=ad9edqhZL8MNaMab8huMAepK_LwqVzGQ@mail.gmail.com>
+X-NTES-SC: AL_Qu2SAvWbuEws5SSebekcn0wRhug/UMa4u/sm3YNXc8AFnCHm4xgjUkF5HHHP+cSgBSmMqBeOdRZX299KTblabN9UUWfBtPNqeWUCoV4bFw==
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="abqtqkyhimdysw4w"
-Content-Disposition: inline
-In-Reply-To: <20260916-ti-tps6586x-v2-4-f12cfdfb446c@gmail.com>
+Message-ID: <4405a61f.505.1a0fa675e43.Coremail.zl020895@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID:hSgvCgDnL_tRFL9qW95RAA--.9580W
+X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbCxhGjFWq-FFEAigAA37
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
 
-
---abqtqkyhimdysw4w
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v2 4/4] regulator: dt-bindings: ti,tps6586x: Convert to
- DT schema
-MIME-Version: 1.0
-
-On Wed, Sep 16, 2026 at 06:41:29PM +0530, Bhargav Joshi wrote:
-> Convert Texas Instruments tps6586x regulator binding from text to DT
-> schema. Reference to nvidia,tegra-regulators-coupling in child regulator
-> nodes.
->=20
-> Signed-off-by: Bhargav Joshi <j.bhargav.u@gmail.com>
-> ---
->  .../devicetree/bindings/regulator/ti,tps6586x.yaml | 196 +++++++++++++++=
-++++++
->  .../devicetree/bindings/regulator/tps6586x.txt     | 135 --------------
->  2 files changed, 196 insertions(+), 135 deletions(-)
->=20
-> diff --git a/Documentation/devicetree/bindings/regulator/ti,tps6586x.yaml=
- b/Documentation/devicetree/bindings/regulator/ti,tps6586x.yaml
-> new file mode 100644
-> index 000000000000..1f7c7b35066f
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/regulator/ti,tps6586x.yaml
-> @@ -0,0 +1,196 @@
-> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/regulator/ti,tps6586x.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: TI TPS6586x family of regulators
-> +
-> +maintainers:
-> +  - Thierry Reding <thierry.reding@avionic-design.de>
-
-Not sure if I'm an appropriate maintainer for this, but I guess I
-initially submitted the freeform text bindings. Anyway, that email is no
-longer valid, so this should be:
-
-	Thierry Reding <thierry.reding@kernel.org>
-
-instead.
-
-Thierry
-
---abqtqkyhimdysw4w
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmq+5esACgkQ3SOs138+
-s6Gbjw//b1TnlaW0WiXbta+vQVNVfxN6XgIcleOrTO+lfpFm2DMN8uiY/GdAFJwz
-0epfTz/kPVVqacGLxUnHMoq93s6S5mrBm9h0cm/KNOOhzt8R7Hr+0EkfL8deTCHY
-YiDNKAQVN7p2bILSFoajeX4BrcfFbJoOdzs47aiRTS+rb6wbiajdsdnKal48MiFr
-2xHnPP47eIUJAzmd678x0IoT6fsMrxzTWpmSWMIF9fpV8bS/QO1gt3SWkGBN0e73
-MQQD1q32HycjDgoqR0onGpidPfd9p+tGdJtSJTaDJgTFbtsJssQNXAIMPLVG1IK8
-WdI12CGtvxHe7YOq7c4DBaes5zuth2D6AvloHN4TQwgyBd7Xihf72tU92pjSP2EQ
-ujPZp11ofvuVy0USLlqZ4ymBJnsYBGk0R7k/96b2UPGZC5hesRrp+OHDVGtf8AdL
-uyorw1pOq6aS74TXt/b6NQgGhnVGTMgup4MqCdRc5et4T7K9MwOmKF6ADqXiLMZ9
-NkxRBzGeHiprXQirutYkFQq2Ltcspi3/DmBULfs2ReijJd0xaPudv0leFklpgeRw
-j9AUhmxY6CwmutB2uDO1eSTXUYhatWcw9mot8BtoIs53QyLjku+rJVwHKRMD0LVd
-MUQYvDucLfcQm5DbFK7o7ntX0vPpXDL9LPBWqYszE1/22fBQGGY=
-=Ng9S
------END PGP SIGNATURE-----
-
---abqtqkyhimdysw4w--
+SGkgR3JlZywgTGludXMsCgpUaGFua3MuCgpUaGlzIHNlcmllcyBmb2xsb3dzIHRoZSBuZXctdmVu
+ZG9yLCBuZXctU29DIHByb2Nlc3MgYW5kIGlzIHNlbnQKYXMgb25lIHNldCwgc28gdGhlIG5ldyBL
+Y29uZmlnIHN5bWJvbCBhbmQgdGhlIGRyaXZlcnMgdGhhdCB1c2UgaXQKbGFuZCB0b2dldGhlci4K
+CklmIGl0IGhhcyB0byBiZSBzcGxpdCwgdGhlIEdQSU8gcGF0Y2hlcyBhbmQgdGhlIFVBUlQgcGF0
+Y2hlcyBjYW4KZ28gb3V0IGFzIHRoZWlyIG93biBzZXJpZXMuIFRoZSBTb0MgcGF0Y2hlcyBhbmQg
+dGhlIENWNzUgY2xvY2sKZHJpdmVyIHNob3VsZCBzdGF5IGluIG9uZSBzZXJpZXM6IHRoZSBjbG9j
+ayBLY29uZmlnIGRlcGVuZHMgb24KQVJDSF9BTUJBUkVMTEEsIHdoaWNoIGlzIGFkZGVkIGJ5IHRo
+ZSBhcm02NCBwYXRjaC4KCldvdWxkIHRoYXQgc3BsaXQgYmUgYWNjZXB0YWJsZSBmb3IgeW91PwoK
+QmVzdCByZWdhcmRzLApMb25nIFpoYW8KCkF0IDIwMjYtMTAtMDIgMDM6MjA6NTEsICJMaW51cyBX
+YWxsZWlqIiA8bGludXN3QGtlcm5lbC5vcmc+IHdyb3RlOgo+T24gVGh1LCBPY3QgMSwgMjAyNiBh
+dCAyOjUy4oCvUE0gR3JlZyBLcm9haC1IYXJ0bWFuCj48Z3JlZ2toQGxpbnV4Zm91bmRhdGlvbi5v
+cmc+IHdyb3RlOgo+PiBPbiBUaHUsIE9jdCAwMSwgMjAyNiBhdCAwODo0MTowMlBNICswODAwLCBM
+b25nIFpoYW8gdmlhIEI0IFJlbGF5IHdyb3RlOgo+Cj4+ID4gRnJvbTogTG9uZyBaaGFvIDxsb25n
+emhhb0BhbWJhcmVsbGEuY29tPgo+PiA+Cj4+ID4gVGhlIEFtYmFyZWxsYSBDVjc1IFVBUlQgaXMg
+QW1iYXJlbGxhIElQLCBub3QgYSBTeW5vcHN5cyBEZXNpZ25XYXJlCj4+ID4gbGljZW5zZWQgYmxv
+Y2suIEF0IHRoZSByZWdpc3RlciBsZXZlbCBpdCBpcyBjbG9zZSBlbm91Z2ggdG8gRFcgQVBCIFVB
+UlQKPj4gPiB0aGF0IGEgZnVsbCBjdXN0b20gVUFSVCBkcml2ZXIgaXMgdW5uZWNlc3Nhcnk6IHJl
+dXNlIDgyNTBfZHcgd2l0aCBhCj4+ID4gc21hbGwgcGxhdGZvcm0gcXVpcmsuCj4+ID4KPj4gPiBR
+dWlya3M6Cj4+ID4gLSBrZWVwIElFUiBFVE9JIChiaXQgNSkgc2V0IGZvciBSWCB0aW1lb3V0IGJl
+aGF2aW91cgo+PiA+IC0gc2tpcCBzZXRfcmF0ZTsgYmF1ZCBjbG9jayBpcyBtYW5hZ2VkIG91dHNp
+ZGUgdGhlIFVBUlQgYmxvY2sKPj4gPgo+PiA+IFJldmlld2VkLWJ5OiBMaW51cyBXYWxsZWlqIDxs
+aW51c3dAa2VybmVsLm9yZz4KPj4gPiBSZXZpZXdlZC1ieTogQW5keSBTaGV2Y2hlbmtvIDxhbmRy
+aXkuc2hldmNoZW5rb0BsaW51eC5pbnRlbC5jb20+Cj4+ID4gUmV2aWV3ZWQtYnk6IElscG8gSsOk
+cnZpbmVuIDxpbHBvLmphcnZpbmVuQGxpbnV4LmludGVsLmNvbT4KPj4gPiBTaWduZWQtb2ZmLWJ5
+OiBMb25nIFpoYW8gPGxvbmd6aGFvQGFtYmFyZWxsYS5jb20+Cj4+ID4gLS0tCj4+ID4gIGRyaXZl
+cnMvdHR5L3NlcmlhbC84MjUwLzgyNTBfZHcuYyB8IDMyICsrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrCj4+ID4gIDEgZmlsZSBjaGFuZ2VkLCAzMiBpbnNlcnRpb25zKCspCj4+Cj4+IFdo
+ZW4geW91IHN1Ym1pdCBsb3RzIG9mIGRpZmZlcmVudCBzdWJzeXN0ZW0gcGF0Y2hlcyBhbGwgaW4g
+b25lIHNlcmllcywKPj4gaXQncyBoYXJkLCBpZiBub3QgaW1wb3NzaWJsZSwgZm9yIHN1YnN5c3Rl
+bSBtYWludGFpbmVycyB0byB0YWtlIHRoZW0gOigKPgo+SW4gbXkgZXhwZXJpZW5jZSBwZW9wbGUg
+ZG8gdGhpcyBpbiBjYXNlcyBsaWtlIHRoaXMgaXQgaXMgYmVjYXVzZSB0aGV5Cj5lc3NlbnRpYWxs
+eSBkdW1wIG91dCB0aGVpciAiYnJpbmctdXAiIHRyZWUsIHRoZSB0aGluZyB0aGV5IGhhdmUKPmJv
+b3Rpbmcgb24gdGhlIGhhcmR3YXJlIHNvIHRoZXkga25vdyB0aGUgcGllY2VzIHdvcmsgdG9nZXRo
+ZXIuCj4KPkxvbmc6IGNhbiB5b3Ugc3BsaXQgaXQgdXAgaW4gdG9waWMgYnJhbmNoZXMgYW5kIHdv
+cmsgb24gZS5nLiB0aGUKPnNlcmlhbCBkcml2ZXIgb24gYSBzZXBhcmF0ZSBicmFuY2g/Cj4KPkEg
+YmV0dGVyIHdheSB0byB0ZXN0IHRoZSB3aG9sZSBzZXQgb2YgcGF0Y2VzIGlzIHRvIGp1c3QgY3Jl
+YXRlIGEKPm1peGRvd24gYnJhbmNoIHdoZXJlIHlvdSBtZXJnZSBhbGwgdGhlIHRvcGljIGJyYW5j
+aGVkIGludG8KPm9uZSAidGVzdCIgYnJhbmNoLCB0aGVuIHlvdSBib290IGFuZCB0ZXN0IHRoaXMg
+YmVmb3JlIHNlbmRpbmcKPm91dCBlYWNoIGJyYW5jaCBzZXBhcmF0ZWx5Lgo+Cj5FYWNoIHRvcGlj
+IGJyYW5jaCBjYW4gYmUgdmVyc2lvbmVkIHNlcGFyYXRlbHkgd2l0aCBiNC4KPgo+WW91cnMsCj5M
+aW51cyBXYWxsZWlqCg==
