@@ -1,146 +1,322 @@
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 83F7F4D6C4A
-	for <mfd@lists.linux.dev>; Fri,  2 Oct 2026 15:08:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89D39253340;
+	Fri,  2 Oct 2026 15:55:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790953722; cv=none; b=Og6r+wmv0GScNgZQ8w70GvKVC5KyjQwr/iJSV1Ok17K6r7DaSF0DNe9uipXQve8OmQwR54OzPWgJa6JvC/iaKrCLox8KT1E/VzzK/lU696FdrDgeGsyq7CbVwBKb3Y5ZmqdRGPVnLAaSMg5jMzkTchWqdtTpEmMSvFJuL12zUfs=
+	t=1790956526; cv=none; b=EpmU0MP0lTIRU1BCSfhfzHczPu84Ly6uOR32Y8zzf8F6BXwH2jruS2eMitOWzjKfWIYka9hkbeGPww9aDYDq+2HDyCWOyXkN0OoCEpTNr9jD7bUdqw5JRk8IniUptgu21fxHZnOLKQa8b+emYMYo1bnMbxsB/D0rBJhfLGiAhiQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790953722; c=relaxed/simple;
-	bh=nzzaG++30e7eP7gzQKASjcC/CQNsfJv4ueyQSdSfHAU=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=FDzslWtb7JH18mITW67qzT+6ZXWB5dn22KqhuiiBk7Pw+LF7eerd1qcR5zgGSy9X4hoTFs9NRbTlLA72+2nXLKnZcrKGuOPf2UwQvGSG8aQ+O9CjwdT+QCatAXWPGxAfIwa9/EkYmb9iaFLvHqxN1ol6UmJ9p9pB0zXxTikIDvA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=hcjNzQyv; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+	s=arc-20240116; t=1790956526; c=relaxed/simple;
+	bh=KH1UWl5VeB6hAgaMlflVxWfiK3gRO3gxjWFR2LGVmBw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=srA6UN8KTK/LBBo3QKAHScRQHYw8EG9oBz/nX58gTFn9l1dYQPofKb2bMU2pPWnwAOGTyL/72BDNsu4/SM7gxEKFskgtH8JqPUZSe9jzuJgZ68DehP6d122I0DI+CuVl4GK3Sna5SbA30IMC5kUknGc9Qm9fcQneJaxHUbAjH1s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Qs/IrjqB; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="hcjNzQyv"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1790953715;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=LD/A3nglaC31jBIMtUDrqXBiepN73OFs6DJpCa6dtO4=;
-	b=hcjNzQyvwZ9C8YvtW9BjAHysd6TJC2aKMmAt0nemkhqbbFihs8FP3vOuVT4YzjDFTO5+lT
-	gj4U+eVEKihypyn675/+IDDtnVpNQl5gp0SwyJ3hPORx4RXp0d7qicAoFd4PVn6V7tzEJT
-	tCuCkYiyFmwvs7DAVUJu5KZXrHoUm9w=
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-617-yBFLyVh4Namuy4R-8xctnA-1; Fri, 02 Oct 2026 11:08:34 -0400
-X-MC-Unique: yBFLyVh4Namuy4R-8xctnA-1
-X-Mimecast-MFC-AGG-ID: yBFLyVh4Namuy4R-8xctnA_1790953714
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-53397b6e05aso22218291cf.1
-        for <mfd@lists.linux.dev>; Fri, 02 Oct 2026 08:08:34 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790953714; x=1791558514;
-        h=content-transfer-encoding:content-type:mime-version:date:message-id
-         :subject:references:in-reply-to:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=LD/A3nglaC31jBIMtUDrqXBiepN73OFs6DJpCa6dtO4=;
-        b=vnEuAtfX77q0aym605SvRVZu40jwSg/1v4PevYn0SaP7Of0a9WBKF8Ynt8twz3xTxk
-         FZrOn9kWDt90mBJtTr3bm36KVb9qvaWDtqDwtpZBY4xfZqfl92r2fKF00c1f10FSIc/H
-         aODIeZ+nAsQHFvLgOeDPzVfA342ETtVKusNd1xXUqHo+AlgVxS8TtS6QMOjbzA3N4R6m
-         USZVL6WYS+Fvi3GF0xRvoCbhx+uG567/ldNdjcLqqdPqEplNW+4IPWWIQrxIH11uhPz5
-         EhhCjq7LNhN3AWcN8E4/CO5qL/crMselBlGgtVpH1hj6OTK+xpIyspm8Rtcw0iwOWnpJ
-         EzVw==
-X-Forwarded-Encrypted: i=1; AKwUvBzyKpmEo2Uz/U5RKJun+om6sZWmeZ1PXZhK+d+3irMaPaDJ4DuDnsONmKlNMgbXs1n2Xso=@lists.linux.dev
-X-Gm-Message-State: AFuF++n4cf9BviqVGvHzbN7BMKwqAuJzqf25a41t0FV4upV6TsIvXIz2
-	NoQDXv55xaT6kh5wnpyJrxdUYfAHa+wFK3GGgCfqoD5Jcn9dPFbN0PXtmf0eHqz4INFnBTBGgNn
-	wki8VgUG5J9lcFu1LNXK0sg4gd20V/ga9w33d4sqe2vJD10hzKNYiAg==
-X-Gm-Gg: AYBFou0dJLofMhRjWpWZEkBQxAz9lNNzktX4v0onKO57qFlwKDQjM2CzePXoefWuVIc
-	vlCdAMAdblLKKEqKFFW8RG2/KpxLexzCOcu4b72qkTqT68nyGYrZ9gFTg/rch9KN/Wla+zzxwrE
-	PbSSMq65iD16NqIcfUp15R3VAtbEtaOqN9vw3/a0WC+kTEzD5qWBT/9KWUJPr1hiQmAc60TT7OP
-	hq80i/04YZrA64e4UpFHnQsmzC5az3s+CF/vRuovSbYF6K8qBySwUla3wyQ5wrT+vQAT3Igx2gF
-	FahVJJlXMUBtQ3lvVF2LH6HlDyEjc2Mo0PRdAeIi4g9WQpuyhSYF72NLPC70JzbgOF+9Um0BGCG
-	nX9IY4JvcRCCoPu7GJ+TkKWjQnulu5oGjkHQ6OP5Gu3Xpxq3LC+k=
-X-Received: by 2002:a05:622a:1353:b0:533:3610:c5eb with SMTP id d75a77b69052e-533d96b6966mr49792471cf.53.1790953713779;
-        Fri, 02 Oct 2026 08:08:33 -0700 (PDT)
-X-Received: by 2002:a05:622a:1353:b0:533:3610:c5eb with SMTP id d75a77b69052e-533d96b6966mr49791681cf.53.1790953713259;
-        Fri, 02 Oct 2026 08:08:33 -0700 (PDT)
-Received: from bmasney-x1.rmtuswv.csb (c-73-183-53-213.hsd1.pa.comcast.net. [73.183.53.213])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-53398d128ccsm27596841cf.24.2026.10.02.08.08.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 02 Oct 2026 08:08:32 -0700 (PDT)
-From: Brian Masney <bmasney@redhat.com>
-To: Michael Turquette <mturquette@baylibre.com>, 
- Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>, 
- Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Russell King <linux@armlinux.org.uk>, Lee Jones <lee@kernel.org>, 
- Brian Masney <bmasney+clk@redhat.com>, 
- Jerome Brunet <jbrunet+clk@baylibre.com>, 
- Manivannan Sadhasivam <mani@kernel.org>, 
- =?utf-8?q?Stefan_D=C3=B6singer?= <stefandoesinger@gmail.com>
-Cc: linux-clk@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- linux-phy@lists.infradead.org, mfd@lists.linux.dev, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-In-Reply-To: <20260927-zx29clk-v13-0-70d8f673386c@gmail.com>
-References: <20260927-zx29clk-v13-0-70d8f673386c@gmail.com>
-Subject: Re: (subset) [PATCH v13 00/13] ZTE zx297520v3 clock bindings and
- driver
-Message-Id: <179095369547.791677.11922932020340915175.b4-ty@b4>
-Date: Fri, 02 Oct 2026 11:08:15 -0400
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Qs/IrjqB"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0DEBB1F000FF;
+	Fri,  2 Oct 2026 15:55:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790956524;
+	bh=2ng9SKCBg1G/ma+Mp8f8fqCiS/P7/Xy23pBv8pxKv/4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Qs/IrjqB1Fc4QXRM78/IxqxrbUDRfXuKWx4/HkQc/Qf2RPMIY8kQ36WSK9afD395N
+	 ZTZ8FsvQ7uXl39Z7acfyIsMBim0yT+UDCv2ZKGTymhY3dXOe738+yuDCuxGXEx2nB0
+	 RTX8MgDZPm5lAvR9zGa3Tj/+rqrJKQxwh/cYF9aJBCy3MhG9oE7ifiiXMBBlIzBSa+
+	 4m6Hung47p0R1viXVIc01IsbDmq9PB8dGndCgFnROC3NdQ+7VbKkC8GaNBZ5rEV4nd
+	 +oWMBTMAq0Me/VNlktgtU/NTES73bNqhghGgjbDbmCO/CEOmqqr8+SecjlnKKx+RL/
+	 ri+Vw89AUx1MA==
+Date: Fri, 2 Oct 2026 23:35:23 +0800
+From: Jisheng Zhang <jszhang@kernel.org>
+To: Conor Dooley <conor@kernel.org>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney+clk@redhat.com>,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	Andi Shyti <andi.shyti@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Frank Li <Frank.Li@nxp.com>, Lee Jones <lee@kernel.org>,
+	Linus Walleij <linusw@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jiri Slaby <jirislaby@kernel.org>,
+	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-i2c@vger.kernel.org,
+	linux-i3c@lists.infradead.org, mfd@lists.linux.dev,
+	linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org,
+	linux-spi@vger.kernel.org, linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH 08/20] dt-bindings: reset: add Synaptics SL261X SoCs
+Message-ID: <ar_POzPRppAwK7ui@xhacker>
+References: <20260929061417.20733-1-jszhang@kernel.org>
+ <20260929061417.20733-9-jszhang@kernel.org>
+ <20260929-sprang-stir-af07a907ccb2@spud>
+ <ar0npPCHX1P5Gjzx@xhacker>
+ <20260930-legend-helium-ca5a0ff56709@spud>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1464; i=bmasney@redhat.com;
- s=20250903; h=from:subject:message-id;
- bh=LWMTx7OVyEurkrK8gxvgvVLf0aBDX7nOCsHhfPnuLAk=;
- b=owGbwMvMwCW2/dJd9di6A+2Mp9WSGLL2n3j1sCJv/pFzhTZJnIp6XLMW1T+Zsn17zf5NPhp2l
- nuniVRzdZSyMIhxMciKKbIsyTUqiEhdZXvvjiYLzBxWJpAhDFycAjARdn2GP5ylRUdjm2eldZ5u
- XD5jQ+j9xzleR9dJh/49fXhFlVPSDB9Ght0/fk9fsCKpqrNG5anMU3n7TWp/uuXyZ0pIxLpUpGv
- P4wMA
-X-Developer-Key: i=bmasney@redhat.com; a=openpgp;
- fpr=A46D32705865AA3DDEDC2904B7D2DD275D7EC087
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: BMNpOFltqVjr1t6GuYe2baZFZ5CLpzDSZF8UQkxfXKI_1790953714
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260930-legend-helium-ca5a0ff56709@spud>
 
-
-On Sun, 27 Sep 2026 23:13:28 +0300, Stefan Dösinger wrote:
-> ZTE zx297520v3 clock bindings and driver
+On Wed, Sep 30, 2026 at 05:49:18PM +0100, Conor Dooley wrote:
+> On Wed, Sep 30, 2026 at 11:15:48PM +0800, Jisheng Zhang wrote:
+> > On Tue, Sep 29, 2026 at 08:44:13PM +0100, Conor Dooley wrote:
+> > > On Tue, Sep 29, 2026 at 02:14:05PM +0800, Jisheng Zhang wrote:
+> > > > Add device tree bindings for the resets on Synaptics SL261X SoCs.
+> > > > 
+> > > > Signed-off-by: Jisheng Zhang <jszhang@kernel.org>
+> > > > ---
+> > > >  .../bindings/reset/syna,sl261x-reset.yaml     | 40 ++++++++++
+> > > >  include/dt-bindings/reset/syna,sl261x-reset.h | 80 +++++++++++++++++++
+> > > >  2 files changed, 120 insertions(+)
+> > > >  create mode 100644 Documentation/devicetree/bindings/reset/syna,sl261x-reset.yaml
+> > > >  create mode 100644 include/dt-bindings/reset/syna,sl261x-reset.h
+> > > > 
+> > > > diff --git a/Documentation/devicetree/bindings/reset/syna,sl261x-reset.yaml b/Documentation/devicetree/bindings/reset/syna,sl261x-reset.yaml
+> > > > new file mode 100644
+> > > > index 000000000000..8cfec17df800
+> > > > --- /dev/null
+> > > > +++ b/Documentation/devicetree/bindings/reset/syna,sl261x-reset.yaml
+> > > > @@ -0,0 +1,40 @@
+> > > > +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+> > > > +# Copyright (C) 2026 Synaptics Incorporated
+> > > > +%YAML 1.2
+> > > > +---
+> > > > +$id: http://devicetree.org/schemas/reset/syna,sl261x-reset.yaml#
+> > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > > > +
+> > > > +title: Synaptics SL261X reset controller
+> > > > +
+> > > > +maintainers:
+> > > > +  - Jisheng Zhang <jszhang@kernel.org>
+> > > > +
+> > > > +description: The reset controller node must be a sub-node of the chip
+> > > > +  controller node on SL261X SoCs.
+> > > > +
+> > > > +properties:
+> > > > +  compatible:
+> > > > +    enum:
+> > > > +      - syna,sl261x-soc-reset
+> > > > +      - syna,sl261x-system-reset
+> > > > +
+> > > > +  "#reset-cells":
+> > > > +    const: 1
+> > > > +
+> > > > +required:
+> > > > +  - compatible
+> > > > +  - "#reset-cells"
+> > > > +
+> > > > +additionalProperties: false
+> > > > +
+> > > > +examples:
+> > > > +  - |
+> > > > +    chip: chip-control@f7e10000 {
+> > > > +        reg = <0xf7e10000 0x1000>;
+> > > > +
+> > > > +        chip_rst: reset {
+> > > > +            compatible = "syna,sl261x-soc-reset";
+> > > > +            #reset-cells = <1>;
+> > > > +        };
+> > > 
+> > > Why can't this just be part of the parent node?
+> > 
+> > Good question! IMHO, the reasons are:
+> > 
+> > 1. the so called Gbls(Gbl means global) such as mcuGbl and
+> > chip control Gbl contain not only reset, pinctrl and clk/plls
+> > but also some other registers for different purposes, e.g in the
+> > chip control gbl, there are some registers to control eth phy sel(RMII
+> > or RGMII), and TXC 90 degree selection etc. These registers will
+> > be used by the Ethernet driver;
+> > 
+> > While there's no pinctrl regs in avioGbl and vppGbl. In the vppgbl,
+> > there are some registers for DPHYTX etc.
+> > 
+> > As can been, in different Gbls, there maybe different purposes registers, no
+> > obvious patterns.
+> > 
+> > So the question here is why not split the gbl into different register
+> > spaces, and abstract each space for each function group?
 > 
-> Hi,
+> No, you misunderstood. I'm not asking for the register space to be
+> split, I am asking why you cannot do
+> | syscon@f7e1000 {
+> | 	compatible = "syna,sl2610-soc-syscon", "syscon";
+> | 	reg = <0xf7e10000 0x1000>;
+> | 	#clock-cells = <1>;
+> | 	#reset-cells = <1>;
+> | };
+> With this kind of thing, you can either use the auxiliary bus or
+> MFD_CELL_NAME() to create the other devices. The latter is good if
+> you've got a region with clocks that also has resets thrown in, the
+> former is probably better if you have a syscon with a genuine
+> assortment of different functions that you're going to be looking up via
+> phandle.
+
+I see your points now. But there are two problems with this solution:
+
+1. Besides reset, pinctrl and clk, the so called "Gbl" also contains
+registers for other purpose, e.g DPHYTX, when we need the driver for
+DPHYTX, I assume I could also go with the auxiliary bus or MFD_CELL_NAME(),
+
+2. where should the driver(s) and dt-bindings doc be put?
+I assume drivers/soc/synaptics/ and
+Documentation/devicetree/bindings/soc/synaptics?
+
+Kindly correct me if I misunderstood something.
+
+Thanks
 > 
-> I am sending version 13 of my zx297520v3 clock patch. It addresses review
-> comments for the MFD driver but has no other substantial changes
+> > Two blocking
+> > points make this impossible and ugly: different reg space may not be
+> > aligned at 4KB boundary, e.g reset: 0x350 ~ 0x37c; eth phy sel:0xa18;
+> > some registers which belong to similar functionality, e.g clks, may not be
+> > adjacent.
 > 
-> [...]
+> This sort of thing, with non-adjacent clocks is still possible, you have
+> a regmap just like before.
+> 
+> > So the best way is to abstract these GBLs via. "syscon", "simple-mfd", and
+> > put necessary subnodes such as reset, pinctrl and clks under the GBL
+> > node. If the registers in GBL is misc control, pass the syscon phandle
+> > to the main driver, e.g I planed to pass the syscon phandle to GMAC
+> > driver to control the RMII/RGMII selection.
+> 
+> And you can get the regmap from other drivers by doing phandle or
+> compatible based lookups just like before.
+> 
+> > 
+> > 2.follow current bg2 and bg2q style
+> > e.g arch/arm/boot/dts/synaptics/berlin2q.dtsi
+> > 
+> > IMHO, why bg2 and bg2q dtsi files are implemented as current
+> > style is due to the above point 1.
+> 
+> Unfortunately, this is the berlin2q devicetree showing its age, we've
+> been pushing people away from nodes that exist just to probe a driver
+> and don't provide any additional value. Something like
+> | chip-control@f7e10000 {
+> |     reg = <0xf7e10000 0x1000>;
+> | 
+> |     chip_rst: reset {
+> |         compatible = "syna,sl261x-soc-reset";
+> |         #reset-cells = <1>;
+> |     };
+> | 
+> |     chip_clk: clock {
+> |         compatible = "syna,sl261x-soc-clock";
+> |         #clock-cells = <1>;
+> |     };
+> is exactly the pattern we are trying to avoid.
+> 
+> Cheers,
+> Conor.
+> 
+> > 
+> > Kindly let me know if there's a better solution.
+> > 
+> > > From a quick check of the dts, the node with this subnode didn't also
+> > > have a system-reset node too, so there's no conflict or anything of that
+> > > nature.
+> > > 
+> > > > +    };
+> > > > diff --git a/include/dt-bindings/reset/syna,sl261x-reset.h b/include/dt-bindings/reset/syna,sl261x-reset.h
+> > > > new file mode 100644
+> > > > index 000000000000..7034f58aae5b
+> > > > --- /dev/null
+> > > > +++ b/include/dt-bindings/reset/syna,sl261x-reset.h
+> > > > @@ -0,0 +1,80 @@
+> > > > +/* SPDX-License-Identifier: (GPL-2.0 OR MIT) */
+> > > > +/*
+> > > > + * Copyright (C) 2026 Synaptics Incorporated
+> > > > + *
+> > > > + * Author: Jisheng Zhang <jszhang@kernel.org>
+> > > > + */
+> > > > +
+> > > > +#ifndef _DT_BINDINGS_SL261X_RESET_H
+> > > > +#define _DT_BINDINGS_SL261X_RESET_H
+> > > > +
+> > > > +/* ACPU subsystem */
+> > > > +#define RST_SOC_SDIO0		0
+> > > > +#define RST_SOC_USB0		1
+> > > > +#define RST_SOC_EMMC		2
+> > > > +#define RST_SOC_GETH0		3
+> > > > +#define RST_SOC_SDIO1		4
+> > > > +#define RST_SOC_USB1		5
+> > > > +#define RST_SOC_GETH1		6
+> > > > +#define RST_SOC_USB0PHY		7
+> > > > +#define RST_SOC_USB0CORE	8
+> > > > +#define RST_SOC_USB0MAHB	9
+> > > > +#define RST_SOC_USB1PHY		10
+> > > > +#define RST_SOC_USB1CORE	11
+> > > > +#define RST_SOC_USB1MAHB	12
+> > > > +#define RST_SOC_UART0		13
+> > > > +#define RST_SOC_UART1		14
+> > > > +#define RST_SOC_UART2		15
+> > > > +#define RST_SOC_UART3		16
+> > > > +#define RST_SOC_I2C0		17
+> > > > +#define RST_SOC_I2C1		18
+> > > > +#define RST_SOC_SPI0		19
+> > > > +#define RST_SOC_SPI1		20
+> > > > +#define RST_SOC_SPI2		21
+> > > > +#define RST_SOC_SPI3		22
+> > > > +#define RST_SOC_APBTIMERS	23
+> > > > +#define RST_SOC_APBSYSCNT	24
+> > > > +#define RST_SOC_APBWDT		25
+> > > > +#define RST_SOC_APBGPIO		26
+> > > > +#define RST_SOC_APBDMA		27
+> > > > +#define RST_SOC_GPUCORE		28
+> > > > +#define RST_SOC_NPUCORE		29
+> > > > +#define RST_SOC_AVIOAIOG	30
+> > > > +#define RST_SOC_AVIOVPPG	31
+> > > > +#define RST_SOC_AVIOVIPG	32
+> > > > +
+> > > > +/* system subsystem */
+> > > > +#define RST_SM_ADCCORE		0
+> > > > +#define RST_SM_ADCPRST		1
+> > > > +#define RST_SM_CAN0PRST		2
+> > > > +#define RST_SM_CAN0SRST		3
+> > > > +#define RST_SM_CAN1PRST		4
+> > > > +#define RST_SM_CAN1SRST		5
+> > > > +#define RST_SM_GPIOPRST		6
+> > > > +#define RST_SM_GPIOSRST		7
+> > > > +#define RST_SM_I2CM0PRST	8
+> > > > +#define RST_SM_I2CM0SRST	9
+> > > > +#define RST_SM_I2CM1PRST	10
+> > > > +#define RST_SM_I2CM1SRST	11
+> > > > +#define RST_SM_I3CPRST		12
+> > > > +#define RST_SM_I3CSRST		13
+> > > > +#define RST_SM_PDMPRST		14
+> > > > +#define RST_SM_PDMSRST		15
+> > > > +#define RST_SM_PVTHSRST		16
+> > > > +#define RST_SM_PVTPRST		17
+> > > > +#define RST_SM_PWMPERIRST	18
+> > > > +#define RST_SM_PWMPRST		19
+> > > > +#define RST_SM_SPIMPRST		20
+> > > > +#define RST_SM_SPIMSRST		21
+> > > > +#define RST_SM_SPISPRST		22
+> > > > +#define RST_SM_SPISSRST		23
+> > > > +#define RST_SM_UART0PRST	24
+> > > > +#define RST_SM_UART0SRST	25
+> > > > +#define RST_SM_UART1PRST	26
+> > > > +#define RST_SM_UART1SRST	27
+> > > > +#define RST_SM_UART2PRST	28
+> > > > +#define RST_SM_UART2SRST	29
+> > > > +#define RST_SM_UART3PRST	30
+> > > > +#define RST_SM_UART3SRST	31
+> > > > +
+> > > > +#endif /* _DT_BINDINGS_SL261X_RESET_H */
+> > > > -- 
+> > > > 2.53.0
+> > > > 
+> > 
+> > 
 
-Applied, thanks!
-
-[01/13] dt-bindings: clk: zte: Add zx297520v3 top clock and reset controller
-        commit: 9b9e5daaea8febcdf67a656e76b3a7e1d0f2290a
-[02/13] dt-bindings: clk: zte: Add zx297520v3 matrix clock and reset controller
-        commit: 3847bc94d1746c1448c984338fcfdf1216db0827
-[03/13] dt-bindings: clk: zte: Add zx297520v3 LSP clock and reset controller
-        commit: 4500e2e361ecba42cb1abd6f6891a45d99f57741
-[06/13] clk: zte: Add Clock registration infrastructure
-        commit: ad5107a88e993b576b01761c6560e157519e0f84
-[07/13] clk: zte: Add regmap-based clocks
-        commit: 0f973ffd1038e2bca5ad89279412a508df62f44f
-[08/13] clk: zte: Add zx PLL support infrastructure
-        commit: 77732e66cd47e849031e4fc8999cbff0ec958deb
-[09/13] clk: zte: Introduce a driver for zx297520v3 top clocks
-        commit: 392a4957db5c2f2c37bf0191d9531710b3080dbf
-[10/13] clk: zte: Introduce a driver for zx297520v3 matrix clocks
-        commit: 4ea299afff42c6a09eb1aea1d29c678c3374b824
-[11/13] clk: zte: Introduce a driver for zx297520v3 LSP clocks
-        commit: f8a3cbf8678ab80d3aba5918f2f5e1acc1e7287d
-
-Best regards,
--- 
-Brian Masney <bmasney@redhat.com>
 
