@@ -1,99 +1,162 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE35B446BE0;
-	Fri,  2 Oct 2026 07:39:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10EDA412C0F;
+	Fri,  2 Oct 2026 07:41:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.17
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790926758; cv=none; b=dmZIZBfaJ6+hYFWH8TElzq57qEWSnsAYScvQoHYw8zOczss9W2WbM3t5I6llGTXEIIA5QcX5Mxro82/YLvA1+9U0+LL4yMLIVWH75v64Lz866C/ps1cU89i7miaXi7OY19sRw0lxlmXA65BMZBXE/YZyg1Jbxth8oJYH0Jbj/fE=
+	t=1790926897; cv=none; b=pCTpXL8b6e1Icl6LxU8cXbP02y6IZ5N47OK3kZzve3xT0uKq7Tjw/p0RxTr5E+S9faa7esXbJ0+paIYKjs+rV+ZCZAwkkVjv7xx+wilomk4Sbi0gRDU/L2Kc2i0JZF4SSaNwTYGTLur+tLfwGRPsnb5EoeRtqKV4eKHZH+YLLDQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790926758; c=relaxed/simple;
-	bh=X/L/98Axwn/uXnmFnrFOTIk61KxGSsua3yBHEUbtquE=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=OykgdK2hhwlwLeRhZG1EEKrjRL9vJBXgmUTjsQLXl8NRT5GPgIRZgWBg+M+o82zu2faFjBUOqD7b3T+/kZGg14dCeuP1S1D8gMZvJb9b1MFNREo2jERoZlr6Bp+7TwPp5eSgZuph+9KbcMMiI+//LfTI8+IbvLItUlNg+MJ76z4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OUMMd+qz; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1790926897; c=relaxed/simple;
+	bh=C/kv6wcM0+ohmmG/4GwabO9Kw2Wi6mMW0E4cJ8FNzUM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=M5+2Q5JbWHKedAXwMhIRTwRG6xLTTjhdP2CYboBeynfzCyA03qPCBSS9xz0t4kT13eLJfqn79QJ97fLVv9jcFO0tGvF4dj9tmUE/106Xd5W5ALsdcezjZYIAwqDMbeM777W5Deh3JZH+Te2flTNxuL0QLmyQ9rtvJ+1ZajbS/Oo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=O0Aijr7T; arc=none smtp.client-ip=198.175.65.17
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OUMMd+qz"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E74831F000FF;
-	Fri,  2 Oct 2026 07:39:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790926756;
-	bh=8Lj6q5XU6JhM44roHTVfqUiJhoqsZ3blqG5shOu900w=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=OUMMd+qzKJrWpIxVqdCHY1f/1EpZYvub86f2YYg6CHO5yGP2MDujwwP9Fn6Rpk8FJ
-	 Q9vbmY7+RSWef6gV1LENzQgWlRYrVRkei4qEDUQVMF1JgLxWTnyFlk95elho3YAA2M
-	 yxJwjG5fhsRDMLvvCaljkBhNFUjHLVcvIaf5JoFI1PJ5ty36Cew/+ZMEhbJnWPE83s
-	 VIiNX3ruJ+L8zt4uzUiQfFYUJ83fV9LWpGRrKVUsT4FFEOgqsCeYcXeucpBPsJTnc0
-	 IqxrKWh5HuN5ciuYUAKuN2YdqzZ8hy4H6dfKxXlFnhd9GDPmeAivQPKACQWhVHYF4l
-	 kSMArPNff9UaA==
-From: Thierry Reding <thierry.reding@kernel.org>
-Date: Fri, 02 Oct 2026 09:39:00 +0200
-Subject: [PATCH v3 3/3] arm64: tegra: Add Tegra132 specific compatible for
- AHUB
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="O0Aijr7T"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1790926895; x=1822462895;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=C/kv6wcM0+ohmmG/4GwabO9Kw2Wi6mMW0E4cJ8FNzUM=;
+  b=O0Aijr7T6JyIud/Ad9DCQ+/66RwaG1KTHRT4wcJZlQHrBWx3g+D0I4NC
+   UwwGqjxzkWfJVKN3CVbp+MUv+M+GBZE0+dbS907QYoiaF9BuaSJq1yRZV
+   wQpo4zLmlD64Whf6Lz0UH/Jed+bRm5Ymqe1eLyCOEHJJ/iUVjGsbjx51V
+   rdkqvUMcVQIPeqDU3xaRgzKQZ3xLgUvD3pQwgBmh2MrBwSO5awORFKAWH
+   f3F7AKMsD2CU8Oo4YWgLQtpvE3vBtyEUtPa5mKFo/LwAOeq60JRgluCXS
+   smUEKSImKT0UANKH1bLfN/tnHjAZSlBtGqyViW49UxmDhikVRfYggQybn
+   Q==;
+X-CSE-ConnectionGUID: +/M1YebaQjOFohK6dwfRBw==
+X-CSE-MsgGUID: uHMAExJoTum9p14C3VQmCg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11922"; a="90723488"
+X-IronPort-AV: E=Sophos;i="6.27,136,1787036400"; 
+   d="scan'208";a="90723488"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Oct 2026 00:41:34 -0700
+X-CSE-ConnectionGUID: Wr8ybAupREydeJzXx1ceWw==
+X-CSE-MsgGUID: VX/xtgwiQPOs9W6Qu5jQYg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,136,1787036400"; 
+   d="scan'208";a="280935559"
+Received: from conormcd-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.244.188])
+  by fmviesa004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Oct 2026 00:41:29 -0700
+Date: Fri, 2 Oct 2026 10:41:25 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: longzhao@ambarella.com
+Cc: Arnd Bergmann <arnd@arndb.de>, Krzysztof Kozlowski <krzk@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Michael Turquette <mturquette@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Jerome Brunet <jbrunet@baylibre.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Michael Walle <mwalle@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jiri Slaby <jirislaby@kernel.org>,
+	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>, Long Zhao <zl020895@163.com>,
+	Lee Jones <lee@kernel.org>, mfd@lists.linux.dev,
+	devicetree@vger.kernel.org, linux-clk@vger.kernel.org,
+	linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v9 07/15] gpiolib: regmap: add
+ GPIO_REGMAP_QUIRK_SET_AFTER_DIR
+Message-ID: <ar9gJRVZxExBwDyn@ashevche-desk.local>
+References: <20261001-cv75-v5-v9-0-486cc289a4b8@ambarella.com>
+ <20261001-cv75-v5-v9-7-486cc289a4b8@ambarella.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261002-as3722-bindings-v3-3-21c179b72a95@nvidia.com>
-References: <20261002-as3722-bindings-v3-0-21c179b72a95@nvidia.com>
-In-Reply-To: <20261002-as3722-bindings-v3-0-21c179b72a95@nvidia.com>
-To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, 
- Mark Brown <broonie@kernel.org>, Laxman Dewangan <ldewangan@nvidia.com>, 
- Thierry Reding <thierry.reding@kernel.org>, 
- Jonathan Hunter <jonathanh@nvidia.com>
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Thierry Reding <thierry.reding@gmail.com>, 
- linux-sound@vger.kernel.org, linux-tegra@vger.kernel.org, 
- Thierry Reding <treding@nvidia.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=844; i=treding@nvidia.com;
- h=from:subject:message-id; bh=7Ad9jY12fMOEkyY06XfEXlx3a1uy4HQfBw9/dyfFbsM=;
- b=owEBbQKS/ZANAwAKAd0jrNd/PrOhAcsmYgBqv1+Zl0Y2vb1ghaccjiZ+/pZsUgwtVpeFsOue6
- 7ditMZozfeJAjMEAAEKAB0WIQSI6sMIAUnM98CNyJ/dI6zXfz6zoQUCar9fmQAKCRDdI6zXfz6z
- ocd1D/9207Ic09i+kw+ro4g2kptiURJdGLHm3e9F7XYLiEhgBSk9kq+zRsBc4fWwi8olKCfWqCA
- nMsn8QD1Jymw9ck5RbqDOuY+I6h7ia23aaLC7CISFDDei110i3Jq9DQEqrm4eEZHaWdTg3iNlMv
- 6Zzt8hn9UxjvlWd2j88tSJqlRywz1tBqOTnKVw5m5fLahnMWGvqsawL/HdQyfBDWhv0Q88D37F0
- FxN+c47dwSbKgdWrnQeXLLit4knIKF9oPno5BlIjL+E1mdLjTi69Q2hYYkuCBb0jN6VaICSy/nG
- LD2dasBz2nfRvJdYN0j2SmXhu+qz5OmWn5FCjhX6lu5ocf84kkmdsKMQLefTcRFk4VTkUyvaisN
- O+YFBEFYNet22IsY3h0MXhhayz+3kL8URApqG8tZYULIG6hAVZJwFAuih8Jqbaam1JxYiWytIK+
- 4J39rolMtyzn4wObO6UeFuTJPOJ33sZVUNpXPQxN8ECXgxjzqaar6+UjTIb8+ct3lQrg5mYU/mi
- yRLC/9aLTfWC7jmIy0qrgxDxpxblk1L2sDdtv8MWixNFuHATGHxQw/AhVKiBjyxbhDGc6VT1aBC
- wba8Nh98XDsiAmlXuBWnEQ/UOg/WowPXTbL6WzVCkGTA84B0RAmN9iNbnvQYqoVbzrUMX8rg3oE
- mA7ePvNzkScmK/Q==
-X-Developer-Key: i=treding@nvidia.com; a=openpgp;
- fpr=88EAC3080149CCF7C08DC89FDD23ACD77F3EB3A1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261001-cv75-v5-v9-7-486cc289a4b8@ambarella.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-From: Thierry Reding <treding@nvidia.com>
+On Thu, Oct 01, 2026 at 08:40:56PM +0800, Long Zhao via B4 Relay wrote:
 
-The AHUB on Tegra132 is backwards-compatible with the one found on
-Tegra124, but it needs a specific compatible string anyway, so add
-one.
+> Some controllers ignore output writes while a line is still an input.
+> Add a behaviour flag so the output value is written after the direction
+> change. This is a legacy quirk. New hardware must not use it.
 
-Signed-off-by: Thierry Reding <treding@nvidia.com>
----
- arch/arm64/boot/dts/nvidia/tegra132.dtsi | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+A nit-pick below.
+In general looks good to me.
+Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 
-diff --git a/arch/arm64/boot/dts/nvidia/tegra132.dtsi b/arch/arm64/boot/dts/nvidia/tegra132.dtsi
-index 3463fa637b37..3e9e123eceeb 100644
---- a/arch/arm64/boot/dts/nvidia/tegra132.dtsi
-+++ b/arch/arm64/boot/dts/nvidia/tegra132.dtsi
-@@ -889,7 +889,7 @@ throttle_heavy: heavy {
- 	};
- 
- 	ahub@70300000 {
--		compatible = "nvidia,tegra124-ahub";
-+		compatible = "nvidia,tegra132-ahub", "nvidia,tegra124-ahub";
- 		reg = <0x0 0x70300000 0x0 0x200>,
- 		      <0x0 0x70300800 0x0 0x800>,
- 		      <0x0 0x70300200 0x0 0x600>;
+...
+
+> struct gpio_regmap {
+
+>  	unsigned int reg_clr_base;
+>  	unsigned int reg_dir_in_base;
+>  	unsigned int reg_dir_out_base;
+> +	unsigned long quirks;
+
+I think I have told at some point that this location is not the best, I woul put it...
+
+>  	unsigned long *fixed_direction_mask;
+>  	unsigned long *fixed_direction_output;
+
+...here, after the group of the direction related offsets and masks.
+
+> -	gpio_regmap_set(chip, offset, value);
+> +	if (!(gpio->quirks & GPIO_REGMAP_QUIRK_SET_AFTER_DIR))
+> +		gpio_regmap_set(chip, offset, value);
+>  
+> -	return gpio_regmap_set_direction(chip, offset, true);
+> +	ret = gpio_regmap_set_direction(chip, offset, true);
+> +	if (ret)
+> +		return ret;
+> +
+> +	if (gpio->quirks & GPIO_REGMAP_QUIRK_SET_AFTER_DIR)
+> +		gpio_regmap_set(chip, offset, value);
+> +
+> +	return 0;
+>  }
+
+...
+
+>  /**
+>   * struct gpio_regmap_config - Description of a generic regmap gpio_chip.
+>   * @parent:		The parent device
+
+>   * @ngpio:		(Optional) Number of GPIOs
+>   * @names:		(Optional) Array of names for gpios
+> + * @quirks:		(Optional) Behaviour flags, OR of GPIO_REGMAP_QUIRK_*.
+>   * @reg_dat_base:	(Optional) (in) register base address
+>   * @reg_set_base:	(Optional) set register base address
+>   * @reg_clr_base:	(Optional) clear register base address
+
+>  	int ngpio;
+>  	const char *const *names;
+>  
+> +	/* Regmap GPIO behaviour flags */
+> +	unsigned long quirks;
+> +
+>  	unsigned int reg_dat_base;
+>  	unsigned int reg_set_base;
+>  	unsigned int reg_clr_base;
+
+I would follow the same location as it's in the above struct, id est after
+
+	unsigned long *fixed_direction_output;
+
+member.
+
 
 -- 
-2.55.0
+With Best Regards,
+Andy Shevchenko
+
 
