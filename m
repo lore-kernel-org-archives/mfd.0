@@ -1,223 +1,175 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7DE12F39C2
-	for <mfd@lists.linux.dev>; Sat,  3 Oct 2026 00:47:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D8DF374E7F;
+	Sat,  3 Oct 2026 01:33:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1790988438; cv=none; b=vDFaFuq3nS98kALzQt56HMj4t6SV4ldJaaXOYJU3yBQfVhA0XN/M9ojw+VX/Ytph5u8ZHqt/y/VIp3OOo6PITeG8TIwyCqVa4uQv8eVG47eEYWGnDWrv2M7NKCgTJ8Adjjs+6ixpdbL9uQRINHuYtIjPZoqK0XoLrwRX4MI+qHg=
+	t=1790991197; cv=none; b=vErm64g4hP51AY0bhsdQZjBhH8Rfnl/f2NXxAWdVEmKRzXu93v/EvrnfiC0gdAIDa32m/UnfYgagFFNMZvipf/TJcFRmQ0NdwaXb+S/JLhSVO/EXS5r6IswReNLimRL8opwMbYJlqL4Kb4nPrjsjtjBn2OMD42qYtQwtij+kl6c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1790988438; c=relaxed/simple;
-	bh=yTZUC6jKZaCOtbJ/3nZWWXEu0NQbc2ytDJaD5GmrxC0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=YhAT3XMyOYNWyhz6WEfh3iDJcOkvlMCWSw60pSN7MOX9XEAawDh5V3jjIBnbzNm8woI7YpAWF4J6KDHW1eDnazf+3LYWq9PRWHNuUwAgEDDnK7PoGOGvqyTV0k/Qc+mmM2z6Ljrh8Ve3wpDAFKKR/lQTYq48vpobk3mihftATMY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MVAl5iG8; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iuSmjWxs; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1790991197; c=relaxed/simple;
+	bh=qPLcfKmG0ie8ZIPM6e5n3R5vqh74qkocTAMN6dWDXmk=;
+	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
+	 Message-Id; b=cRD8T0L0swTDu05KpJl9yQFh7mTtWtlCExpukZS6PUYL0LeW8FKFNo8O3oCYV4ccL16E9R/pPL4946vvTZm76MaGELupOAf1cZJCvbyNEEACwCtMFyA6STUB4U+AGKH78wj0TrrTXwDs9KZZEpE+HOr9/BT3wWD6TN1+43bGT8U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MJlwf1Gh; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MVAl5iG8";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iuSmjWxs"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6930KIi62791526
-	for <mfd@lists.linux.dev>; Sat, 3 Oct 2026 00:47:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	n+oeytl8ILE2lGP9tC08C8X3AyaLqZaWEZaYxX5SV4c=; b=MVAl5iG8Lo15jt5m
-	aeO2/4y4NEt2oIlneY7iMQe6SPm7IIkm4YUip77RwFIkhAgq1b3DC7UVkazVlyWS
-	409t6yFoHgIwQ8qaeBQKPURlGKJj8ZmU9TlgPjuq8Y+o8dRmh781mTMtT/9zRukg
-	aqejn/IrWOxKbonrlb424CnFjj+1i4hhgGOkMxu6XXX/ZJQWH4j9p05yrR+iJOQx
-	uKMlBYqVpHDoi5ZFbrGkrUlQ1gLyxAmnyUrxPeRT8xmJSu6rBufePqJzZycbBRy3
-	GZhkIc1A5q15OAAPUwl2nKBBAQ8lssJAibEHtkVwisgzX+ADk+xfVTXyW6rWqURf
-	3+SbBw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h2q2nr1yd-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <mfd@lists.linux.dev>; Sat, 03 Oct 2026 00:46:59 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93cc40759b2so14021885a.1
-        for <mfd@lists.linux.dev>; Fri, 02 Oct 2026 17:46:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1790988419; x=1791593219; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=n+oeytl8ILE2lGP9tC08C8X3AyaLqZaWEZaYxX5SV4c=;
-        b=iuSmjWxs/u2jomHDDWEjgvXeDLG8NWeixadnjDOTNI7qMS+h86JKanyOQWxeT3HdfC
-         mU7Fx45vxFM+3kuD+kAFX4ZOzk1iN/WtrEyJVi4usMBuBoWRcXNbE4YEdE22gzQU5CPM
-         pRxTTnEZ3BxbZgwPm3oMuQGPOkJdHgRq5jr+aBkXl+2sGVB8fgL2IBC2DjQcaoHeqs6p
-         OpWBO6xOKhFBAZNYkx5Phu9FhQ4PnHXiwJgB2uHN/2dA6vBjSrfs1/OyRgRfxZmKfzzR
-         VFgGCaK+3O6HO9ueN+MaBErTF1Hac4hJGDz/xM5R2waGQqI/UFQ7g1Z8qDs66F0rW63o
-         iP7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790988419; x=1791593219;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=n+oeytl8ILE2lGP9tC08C8X3AyaLqZaWEZaYxX5SV4c=;
-        b=0VZ8n2dMtlFZ4ItI5bwbEEIuEpCjkanfEbrHqBONu+jvq8YvIn+Llicrcp5SM2dmc+
-         qQD8T1lcSJQdf6h9t/WhD1KMZY26e6w+j2EE5YofssOAhM3kgT05D9mZZEeskmHav5bt
-         eCaNtDDKTY0kGR6fceqE3JQyILRKy3FHGTxnDYdwlDn1qkQMndMjh4Y7w6Rj7tCkSVcv
-         o7FTgxO++MflTNqzUpFTheifRhH9nmBooUoU7KgbUU0Md8VdRfpxkCiRsiL1xeazDdRr
-         HQmsm4SAAZ1MtBBnR3mZJfEdniLnSeUlMAfysoB+PLNWiQhQWFCLGce9sUuQd8XyQ9cG
-         WbYQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwCd6mPRaFH/Xfv6062IuTD5lR6EqzqWKYaw/fjDYoMNt2qxdUA6wuap+0904//ULxTSZM=@lists.linux.dev
-X-Gm-Message-State: AFuF++kdpECVCE+K1ovJvM0vk9nJcOtw9JUdkuwP49YHezv3j5tbYc1i
-	cKhKnGZOSpfuwvcfpnQaKsWWCFWWXvOJccWLZzZspZ8ETJInJRD1lgnJTTAybN7xNjT0EDxsis4
-	0C2nTK1GLYvSLx/Eia7MCpbhu2yVoi4wN4GFFjO2fbaUQafKa3+VRxTI=
-X-Gm-Gg: AYBFou04o6goA+m3dp52Rp3o77hJNU4jtXbIvWT40HjCaChTSCEOOk7oimZ0e2zrOt6
-	OvG7lmTArjFe+hK4r4fMgPcC3kFYIMoLayyN18fculltCWkZPb9NNO+cWNFGnhqCvFCVMFnTZUs
-	tMtzUBffaAulph1L6ofdEGVa4HcYtfCwqQ7xkzw7JyR05DSzW/hkywqIsOfAnxxtNP+IzKo0bS7
-	5zuGZtz6BL7BevhmcizUuHlJWV1u7YEIdsPg/MA5WcKIe75GJy59SlZITR7iTCpxFB9o4jpDOFU
-	gAHpRta6czvxPIVrozygN2ChlglUF7agnblHfLBk1C/VZ3kBbfLnvE4OX+G/1CQBKoqeuX3LFRZ
-	vW/eLL1NzpyNTF4lEtb9zTKOAuRxtkqeLUul8L0DJ0KJGbBVFbmHTtJnw4Jbo/keNkP03MDQRcp
-	Vs+zYS6Hj5ZZrw
-X-Received: by 2002:a05:620a:278a:b0:93b:d7a0:d9e7 with SMTP id af79cd13be357-93cf19d98b0mr819172385a.65.1790988419221;
-        Fri, 02 Oct 2026 17:46:59 -0700 (PDT)
-X-Received: by 2002:a05:620a:278a:b0:93b:d7a0:d9e7 with SMTP id af79cd13be357-93cf19d98b0mr819168185a.65.1790988418537;
-        Fri, 02 Oct 2026 17:46:58 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bb7c71911bsm1160748e87.11.2026.10.02.17.46.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 02 Oct 2026 17:46:57 -0700 (PDT)
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Srinivas Kandagatla <srini@kernel.org>, Ulf Hansson <ulfh@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
-        Robin Murphy <robin.murphy@arm.com>, Lee Jones <lee@kernel.org>,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Robert Marko <robimarko@gmail.com>,
-        Guru Das Srinagesh <linux@gurudas.dev>,
-        Amit Kucheria <amitk@kernel.org>,
-        Thara Gopinath <thara.gopinath@gmail.com>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-        Kees Cook <kees@kernel.org>, Tony Luck <tony.luck@intel.com>,
-        "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
-        Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-        Muzaffer Kadir <muzafferkadir@mainlining.org>
-Cc: David Heidelberg <david@ixit.cz>, phone-devel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mmc@vger.kernel.org, iommu@lists.linux.dev, mfd@lists.linux.dev,
-        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
-        Krzysztof Kozlowski <krzk@kernel.org>, linux-pm@vger.kernel.org,
-        linux-input@vger.kernel.org,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: Re: [PATCH v3 00/19] Add Initial Support For MSM8952, Add General Mobile Shamrock
-Date: Sat,  3 Oct 2026 03:46:52 +0300
-Message-ID: <179098834078.3641559.798772743228949994.b4-ty@b4>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260921-msm8952-initial-support-v3-0-b96fd3fe298b@mainlining.org>
-References: <20260921-msm8952-initial-support-v3-0-b96fd3fe298b@mainlining.org>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MJlwf1Gh"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AA8541F000FF;
+	Sat,  3 Oct 2026 01:33:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790991195;
+	bh=G2D8UEN24dTXan+vYlPB15K4SSQ7OVSpTTNwIi59SS8=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=MJlwf1GhwROfkmA0dMssI1Y2CkyuxxJAagHFzi6Eqw7n5V0IfMTkDL8BmQ96kARWy
+	 wTMeXNgX+sCTprM4N7TGhx5lFhj+X8/yyhkttQZiAIfnq9gt2wHr60312jAaMlRpnB
+	 +EVK3pvVpGkH1HlumCXv5GeOA3SvUGLoNDOG1hernyHIuFelio71ZgKmUDUvneJvUX
+	 Wk/5ecJ8aPejipQVXDnchUMou8HRlsP1v49zf8bzbsNlVud+ihuPXQlvgxxWVZhvWG
+	 WtyyBG62DUhPg99UsFeiUUlFLafGCz7fPmybp0gwGnIpIvHnvGnoTitoF/Ryf0dA2j
+	 ARTBuumena3pQ==
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH 26/38] mfd: ioc3: add support for IOC4
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Imre Kaloz" <kaloz@kernel.org>
+Cc: lee@kernel.org, linux-serial@vger.kernel.org, mfd@lists.linux.dev
+In-Reply-To: <ceef655fed6e8fdc2f7d34a82fd3e4eb21b64855.1790857966.git.kaloz@kernel.org>
+References: <cover.1790857966.git.kaloz@kernel.org>
+ <ceef655fed6e8fdc2f7d34a82fd3e4eb21b64855.1790857966.git.kaloz@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Sat, 03 Oct 2026 01:33:15 +0000
+Message-Id: <20261003013315.AA8541F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDAzMDAwMiBTYWx0ZWRfXzjb3obPAMvBS
- KECxIv1+w30hcXwq/qpktyjo3lPbBvhlpbjx9j639JOiSEmcx4XEiMji1RyOGzQExiZ1YZA6GCy
- 7AZsz0gAFtqFYRPstnkwd1kBcSjpcYo=
-X-Proofpoint-ORIG-GUID: 8hAmt3YLld_jspfEr1nvzVS9OdK-YMHR
-X-Proofpoint-GUID: 8hAmt3YLld_jspfEr1nvzVS9OdK-YMHR
-X-Authority-Analysis: v=2.4 cv=SKHXx+vH c=1 sm=1 tr=0 ts=6ac05083 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=e5mUnYsNAAAA:8
- a=sFPzMUYdAbi3-6yuofgA:9 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
- a=Vxmtnl_E_bksehYqCbjh:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDAzMDAwMiBTYWx0ZWRfX5POhXRLleTtp
- c2LPt03f5sj9Dw0x5lA/Lf9VYgN3LCM9CePV6TXri0MdEDuxDtVGm/g7FPGQu7rApf6ncMOaBaH
- xI6ZSla8zx56G7Q2IpHXk2p3G664NQI0xpmeNUWWNab1TVlDimRWKlT3Jv3ckx/3c24qZyqmRMO
- cnmR+GmprIE4XP7XnikngZf+lkmk3oDcDxhHUAqfL4G8XjdPbFpI0bkqCRGaCMNDEmb/KIXxGRL
- NHBkucLfLt21yyRyBENmGuqd3PrBjQI0NBt8fUd+pI0GplGaEGVVVGdxNI4/bVj9WvV3Ql3+53Z
- 9XSvvej0xnj6czHy0shmXZ8JsKgsWksNv3ohCxpH9Wvl1TcQ+u4YV3VBb+vzI1KfTWLuzBNzR7z
- i0Oio9q3T8ojCoA3dypJadPTKgHGl2w26SQYzKyFF7+yWMDpFNv+MrcMzmaaoqoZMXf8CCvbVtq
- pdZm3VtfriyDit65Y7A==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-02_07,2026-10-02_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 adultscore=0 suspectscore=0 spamscore=0 priorityscore=1501
- bulkscore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610030002
 
-On Mon, 21 Sep 2026 21:18:51 +0300, Muzaffer Kadir wrote:
-> MSM8952 is a SoC with 8 core cpu and Adreno 405 gpu.
-> 
-> Ported without uart connection. ramoops and usb
-> mainly used to debug.
-> USB is not enabled in this series because it
-> depends on the not yet upstreamed (and not developed by me)
-> pmi8950_smbcharger.
-> 
-> [...]
+Thank you for your contribution! Sashiko AI review found 3 potential issue(=
+s) to consider:
+- [High] mfd: NULL pointer dereference due to complex pointer in pci_device=
+_id match table
+- [Low] mfd: ioc4_cells array is not static const
+- [Low] mfd: ioc3: commit message capitalization violation
+--
 
-Applied to ttt, thanks!
+commit 6ec254319e574e5b3a17ca8a7e4c5206dfed5e04
+Author: Imre Kaloz <kaloz@kernel.org>
 
-[01/19] dt-bindings: clock: qcom: Add MSM8952 global clock controller
-        (no commit info)
-[02/19] clk: qcom: Add global clock controller driver for MSM8952
-        (no commit info)
-[03/19] dt-bindings: nvmem: Add compatible for MSM8952
-        (no commit info)
-[04/19] dt-bindings: power: rpmpd: Add MSM8952 power domains
-        (no commit info)
-[05/19] dt-bindings: mmc: sdhci-msm: Add MSM8952 compatible
-        (no commit info)
-[06/19] dt-bindings: vendor-prefixes: Add General Mobile
-        (no commit info)
-[07/19] dt-bindings: arm: qcom: Document MSM8952 SoC binding
-        (no commit info)
-[08/19] dt-bindings: iommu: qcom,iommu: Add MSM8952 IOMMU to SMMUv2 compatibles
-        (no commit info)
-[09/19] dt-bindings: mfd: qcom,tcsr: Add compatible for MSM8952
-        (no commit info)
-[10/19] dt-bindings: display/msm: qcom, mdp5: Add MSM8952 compatible
-        https://gitlab.freedesktop.org/lumag/msm/-/commit/df6ce9e6447e
-[11/19] dt-bindings: firmware: qcom,scm: Document MSM8952 SCM
-        (no commit info)
-[12/19] dt-bindings: clock: qcom,rpmcc: Add MSM8952 compatible
-        (no commit info)
-[13/19] drm: msm: mdp5: Add MDP5 configuration for MSM8952
-        https://gitlab.freedesktop.org/lumag/msm/-/commit/7af226f9aa59
-[14/19] soc: qcom: ubwc: Add UBWC config for MSM8952
-        (no commit info)
-[15/19] dt-bindings: thermal: tsens: Add MSM8952
-        (no commit info)
-[16/19] thermal: qcom: tsens: Add support for MSM8952 tsens
-        (no commit info)
-[17/19] arm64: dts: qcom: Add initial support for MSM8952
-        (no commit info)
-[18/19] dt-bindings: input: touchscreen: goodix: Add binding for GT970
-        (no commit info)
-[19/19] arm64: dts: qcom: generalmobile-shamrock: new device
-        (no commit info)
+mfd: ioc3: add support for IOC4
 
-Best regards,
--- 
-With best wishes
-Dmitry
+This commit adds support for IOC4, which is IOC3's successor on IP35 Origin
+350-class boards. It reuses the serial and PS/2 drivers of IOC3 and splits
+interrupt status into two banks.
 
+> mfd: ioc3: add support for IOC4
 
+[Severity: Low]
+Does this commit title violate the MFD subsystem formatting requirements?
+
+The MFD subsystem conventions mandate that the description after the subsys=
+tem
+prefix must always be capitalized (e.g., "mfd: ioc3: Add support...").
+
+> diff --git a/drivers/mfd/ioc3.c b/drivers/mfd/ioc3.c
+> index 5f8ac364b610e..fd50bae0f10b3 100644
+> --- a/drivers/mfd/ioc3.c
+> +++ b/drivers/mfd/ioc3.c
+
+[ ... ]
+
+> @@ -565,8 +605,11 @@ static int ioc3_setup(struct ioc3_priv_data *ipd)
+>  static int ioc3_mfd_probe(struct pci_dev *pdev,
+>  			  const struct pci_device_id *pci_id)
+>  {
+> +	const struct ioc3_variant *var =3D (void *)pci_id->driver_data;
+
+[Severity: High]
+Is it safe to blindly retrieve the pointer from driver_data?
+
+If the driver is bound to a device dynamically via the sysfs 'new_id'
+interface (where driver_data often defaults to 0), the 'var' pointer becomes
+NULL.
+
+>  	struct ioc3_priv_data *ipd;
+> -	struct ioc3 __iomem *regs;
+> +	void __iomem *base;
+> +	unsigned int i;
+> +	u16 cmd;
+>  	int ret;
+> =20
+>  	ret =3D pci_enable_device(pdev);
+> @@ -576,6 +619,12 @@ static int ioc3_mfd_probe(struct pci_dev *pdev,
+>  	pci_write_config_byte(pdev, PCI_LATENCY_TIMER, IOC3_LATENCY);
+>  	pci_set_master(pdev);
+> =20
+> +	if (var->pci_command) {
+
+[Severity: High]
+Does this cause a NULL pointer dereference if 'var' is NULL?
+
+As mentioned above, if 'driver_data' is 0, 'var' will be NULL, leading to a
+crash here. The MFD subsystem guidelines explicitly prohibit passing complex
+pointers through match data tables and mandate using an integer ID/enum,
+selecting the static const data in the probe function.
+
+[ ... ]
+
+> @@ -649,12 +708,152 @@ static void ioc3_mfd_remove(struct pci_dev *pdev)
+
+[ ... ]
+
+> +#define IOC4_SERIAL_CELL(port) {					\
+> +	.name =3D "ioc3-serial8250",					\
+> +	.resources =3D ioc4_uart_resources[port],				\
+> +	.num_resources =3D ARRAY_SIZE(ioc4_uart_resources[port]),		\
+> +	.platform_data =3D &ioc4_serial_pdata,				\
+> +	.pdata_size =3D sizeof(ioc4_serial_pdata),			\
+> +}
+> +
+> +static struct mfd_cell ioc4_cells[] =3D {
+
+[Severity: Low]
+Should this array be declared as 'static const'?
+
+The MFD subsystem guidelines strictly require that mfd_cell arrays must be
+defined as 'static const' to prevent dynamic platform data amendments and
+memory safety hazards. The newly introduced 'ioc4_cells' array is missing t=
+he
+'const' qualifier.
+
+> +	IOC4_SERIAL_CELL(0),
+> +	IOC4_SERIAL_CELL(1),
+
+[ ... ]
+
+> +static const struct ioc3_variant ioc4_variant =3D {
+> +	.name =3D "IOC4",
+> +	.chip =3D &ioc4_irq_chip,
+> +	.banks =3D ioc4_irq_banks,
+> +	.nr_banks =3D ARRAY_SIZE(ioc4_irq_banks),
+> +	.nr_irqs =3D IOC4_NUM_IRQS,
+> +	/* Parity and SERR# reporting, as the SN2 IOC4 core enabled them. */
+> +	.pci_command =3D PCI_COMMAND_PARITY | PCI_COMMAND_SERR,
+> +	.setup =3D ioc4_setup,
+> +};
+> +
+>  static struct pci_device_id ioc3_mfd_id_table[] =3D {
+> -	{ PCI_VENDOR_ID_SGI, PCI_DEVICE_ID_SGI_IOC3, PCI_ANY_ID, PCI_ANY_ID },
+> +	{ PCI_VENDOR_ID_SGI, PCI_DEVICE_ID_SGI_IOC3, PCI_ANY_ID, PCI_ANY_ID,
+> +	  0, 0, (kernel_ulong_t)&ioc3_variant },
+> +	{ PCI_VENDOR_ID_SGI, 0x100a, PCI_ANY_ID, PCI_ANY_ID,
+> +	  0, 0, (kernel_ulong_t)&ioc4_variant },
+>  	{ 0, },
+>  };
+
+[Severity: High]
+Is it safe to embed complex pointers in the match table?
+
+The patch passes a pointer to 'ioc3_variant' / 'ioc4_variant' through the
+pci_device_id match table's driver_data field. The MFD subsystem guidelines
+explicitly prohibit this and mandate using an integer ID/enum, selecting the
+static const data in the probe function instead.
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/cover.1790857966.gi=
+t.kaloz@kernel.org?part=3D26
