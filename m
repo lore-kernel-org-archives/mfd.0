@@ -1,255 +1,115 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr2-f35.google.com (mail-wr2-f35.google.com [74.125.225.99])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F85135CBD7;
-	Sun,  4 Oct 2026 07:15:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7D0C3B3C0E
+	for <mfd@lists.linux.dev>; Sun,  4 Oct 2026 16:41:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.225.99
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791098125; cv=none; b=I9tZKOEH5hrfqGGavwdiIwjEUiBKvNT6iotukC0sPHmljibOXlrQf5GNQ7Iiyxe92GTnYFQHkqT4+21ru2L/EhZt0MqjE//K8lSzjktapPDwoXYew4fWIfdvwdK0YlpvoXRuz/ubR19fnadzLgylh+ko1hrMA3Q6dvdgnEJWtF4=
+	t=1791132102; cv=none; b=TLgy0HqrJbouimoN0Oz7A2brvBUfe+IgEyIcLHp9wseKAWxnONuP1CtjVieNljRUPfa+d6pKMttDDBQII37hARpd0q4Go6pCkpwy4DUT5r8Xdz+jsT86k0y4o3xb9INBgjxftaTq6NDZ8CTJPMGcbMMZdQQ0gv3b+axMYyopi9E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791098125; c=relaxed/simple;
-	bh=hwlTaim7t3I726sD5rkMbvkHa9ze7MTuT0ID+eAajW8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fOUYzfi71c7+uOcISBTkSWKfZWrrCV32Bm85hNO/rDkVfTzIEQraXmvYs1Ee8gJVMH3pe/SsKBt+9M2J1OKoQd5hBXKikOoShdVjA2w+YtX4E1F4YzvmRivDl4UiwI1k8uMG99akZrU4OTbnbcZNdy5xFyRwkgnJQWfaFum6eik=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kn0TAw1q; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791132102; c=relaxed/simple;
+	bh=3k9GVNmC9fpGnUpd0cb5oMJrSKHcYAq6Yd3jt5gP8YY=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=DzunsGiWjQN6SRfAwWK95BJAIMVngPOSJpOOg9SG+frklreSZTczE85PcE7M0wprEjUalPBuKHk/EOx3TDNCACQIY/ECoQ2ifiguRc6AFeDw+NRRd3V3MBi1QdilcnwXitGqBY5wTnALf6e6SRvw6rz2hXOl3XYu2Ny8kKAtfWo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RGwAJkqN; arc=none smtp.client-ip=74.125.225.99
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kn0TAw1q"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7EBF51F000FF;
-	Sun,  4 Oct 2026 07:15:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791098124;
-	bh=1YLqc6z8LyeKl0+KHcGgxZtXD3B6g5rBKBLuGBPQUYU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=kn0TAw1qOPg5KYhpCD5VwxN5UsLsVZecc5X1+BlRO+/o/J0KyyUVCwJWD/DeTKK/E
-	 RYh5KVemaOG0bO5S4ZTiYG/rO+u7yoB1LVNJ2PrMNN87Sh+fHO+Hq2NFic5LVZSdNR
-	 StXIBQEf4ikYEcKOKN7jweHKB/e76NgzG1YzjtfmJvW5Ja9QS/+fdpD3Cv7OiopjY9
-	 snCT50OgtZ/e6e1g0T+tyndQn8GOvnTkD0WDMzLqDdlp3pU/mFxN5S9WqNFfz2OnG3
-	 gO2r9kpPI+glHqLVWBRh4vYaKeLHwwi5f/RIs3BogGDhK+P8plcxCS4Zt7KsoAs2O7
-	 btLDUv5erfrhA==
-Message-ID: <ac7b82e6-22ea-465c-8477-bbe0bd9c8c27@kernel.org>
-Date: Sun, 4 Oct 2026 09:15:11 +0200
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RGwAJkqN"
+Received: by mail-wr2-f35.google.com with SMTP id ffacd0b85a97d-48b05fdb2f9so828986f8f.0
+        for <mfd@lists.linux.dev>; Sun, 04 Oct 2026 09:41:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791132099; x=1791736899; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=hI0d17TUb2l8DVdqo6tZX+Y2V30OOpneqbxvA1IJE7k=;
+        b=RGwAJkqNjPwaWWbtVmV+zwXZTWVGKGPj11WVIGKCOtZkw3H58lrGkxFqD7Z2P65BPV
+         za7QRGU+lrl+OY617+2NBG3NqU+OvClxHbcLFB+aOXKHWXhy8S0+YZaK1BloOHD/I4/D
+         bLFRR4s02lSEfpXaUPa5Mmh8n7Xr3kCb6eFqW/TxYQKqplu1/oGjiTWdBdU8Uib1I8rP
+         ZsbRSVoBjg7wO8vn7qopfdl2P8tcyAk7izvjCh7rwywTgmOP/LbTwE4ujdof+zAM8DqL
+         rin7444uWsV+9RYQW5ffp0Z7dEf8WasSi6kxr/XjdmSPI5bwezBohXsyP85yxGdHvkWF
+         c4Vw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791132099; x=1791736899;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=hI0d17TUb2l8DVdqo6tZX+Y2V30OOpneqbxvA1IJE7k=;
+        b=jxSxaT52ecALcPJAzM3Y9GIWA18f75m3wX6N+XY51lg3OOXi/QCCIWvSMQyLFwGYhj
+         P49k3FhAy3wHWl5NJW9tGeXaPtd/QwBFyZD/mh4Cafpig7bZT10ySachyU51Xahxxv0g
+         3eHqf69u9GeDjOjlSXbTWwSOebuavsGnknuWoK/23sGwH/IE3ET2TW2hLJMdrNN5lRtG
+         CCN1qWiDK276JBcL7QZCGRz3JhpCX20uNQRRN6pzqs5UqWpQC1HC6EuIV9z5PO4EmPwn
+         w1K3YYgtFBfCWN7SnujmmZ3v3UopVpyO/KNqv0yuRJJG5wyy51DhaMUj4IW+G4UlYhO0
+         XdYg==
+X-Forwarded-Encrypted: i=1; AKwUvBxuBjZdoQhYXygJv6pByXfvd2O4BUdD/oUdZynUVy4i2CAA7/E8FjVc68ZrL+bTWiJ+tm0=@lists.linux.dev
+X-Gm-Message-State: AFq9FYIBBs1Ovbq6OLVW9db1zTuP7kmkAD0vvp0AHj08PJA0fai4wbN9
+	MCgofoP2rE/uWW5v98vr2y/NUIgF1loQCOh//IZuUgjCupd2XgzR2KsX
+X-Gm-Gg: AYBFou2LAkJxkoqJnWVb4ArqzvJ89s3p9cxKMBJZolNWTsbTAhM6vSmgr1JPPH6wP2P
+	vu9jdLGyjpKEggIwYZ+4zdWflloBoQvxORxMs2k0s/JuQOEVpdmIreKarrDwhAUuk8pjQSvP+Lx
+	eLK/32pWjY3TCsTLhwEiVpHlFlyJrEDvDawCEWK6CFJe4wLsq0yl40ao4yF/UMUrmZWXxDnWk3W
+	hq5C7Dgs5ZG0CaC+kKTTIXr0258wGBJFo95wgDE3+NMfXkEyEYsXWP9w9eT3K6uZsK09vQUCqhE
+	avs3qADnW9GMunvcQeDRVqI/O+LENGeq+A0g7uyVOHRZAEYiL0zb/+n5r69uxb4QBVtdkeiIKIU
+	WeFa7NuLo5yKfv4YW2mYko5TqYdl/555QhRET4mxUOtl2fkTHHrHf/bIsGxUraGGSAOjtXMBA60
+	lcggKdTJLCYbRnKUj02KVug3LO23eCXbOEAEYB0K98QH5ZH2ZU39gHKAh20s0eugWb19fhCUaRI
+	6sIRnZosTMzenP1j/c=
+X-Received: by 2002:a05:6000:40ce:b0:487:27f9:835 with SMTP id ffacd0b85a97d-48b1271ad90mr13914155f8f.42.1791132099009;
+        Sun, 04 Oct 2026 09:41:39 -0700 (PDT)
+Received: from xeon ([188.163.112.76])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48b380f07cdsm18765185f8f.10.2026.10.04.09.41.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 04 Oct 2026 09:41:38 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Lee Jones <lee@kernel.org>,
+	Pavel Machek <pavel@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Daniel Thompson <danielt@kernel.org>,
+	Jingoo Han <jingoohan1@gmail.com>,
+	Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: linux-leds@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	mfd@lists.linux.dev,
+	dri-devel@lists.freedesktop.org
+Subject: [PATCH v2 0/3] mfd: aat2870: Convert to use OF bindings
+Date: Sun,  4 Oct 2026 19:41:18 +0300
+Message-ID: <20261004164121.193514-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 01/20] dt-bindings: phy: Add
- starfive,jh7110-inno-hdmi-phy
-To: Michal Wilczynski <m.wilczynski@samsung.com>
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
- <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Andrzej Hajda <andrzej.hajda@intel.com>,
- Robert Foss <rfoss@kernel.org>,
- Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
- Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Luca Ceresoli <luca.ceresoli@bootlin.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Lee Jones <lee@kernel.org>, Andy Yan <andy.yan@rock-chips.com>,
- Philipp Zabel <p.zabel@pengutronix.de>,
- Emil Renner Berthing <kernel@esmil.dk>, Hal Feng
- <hal.feng@starfivetech.com>, Michael Turquette <mturquette@baylibre.com>,
- Stephen Boyd <sboyd@kernel.org>, Heiko Stuebner <heiko@sntech.de>,
- Paul Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>,
- Albert Ou <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,
- Dominique Belhachemi <db@domibel.de>, Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>, linux-phy@lists.infradead.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, mfd@lists.linux.dev,
- linux-clk@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-rockchip@lists.infradead.org, linux-riscv@lists.infradead.org,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Maud Spierings <maud_spierings@murena.io>,
- Graham Markall <hello@big-grey.co.uk>,
- Icenowy Zheng <zhengxingda@iscas.ac.cn>,
- Chaoyi Chen <chaoyi.chen@rock-chips.com>,
- Joshua Peisach <jpeisach@ubuntu.com>,
- =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
-References: <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
- <CGME20260915153214eucas1p2b548f3236ef98fb0cbf320e397420125@eucas1p2.samsung.com>
- <20260915-jh7110-clean-send-v4-1-f0e4fd6f2cc8@samsung.com>
- <20260917-mutant-chamois-of-competence-46ca77@quoll>
- <1a1a9b49-430b-4218-b27d-e133d488e8d9@samsung.com>
- <6cf9e611-bfc5-407b-8132-bd328f8b61fc@kernel.org>
- <eaba2fa9-a1ce-4dac-9bd6-e0b3a3dd01ef@samsung.com>
- <3ee91c92-4e3a-4bac-85cf-923f5d77ceff@kernel.org>
- <3c5c15d9-ea7e-49a2-adae-ec3e3c72594b@samsung.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <3c5c15d9-ea7e-49a2-adae-ec3e3c72594b@samsung.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 04/10/2026 00:35, Michal Wilczynski wrote:
-> 
-> 
-> On 10/3/26 22:45, Krzysztof Kozlowski wrote:
->> On 03/10/2026 17:36, Michal Wilczynski wrote:
->>>
->>>
->>> On 9/30/26 13:01, Krzysztof Kozlowski wrote:
->>>> On 25/09/2026 23:05, Michal Wilczynski wrote:
->>>>>>> +  clocks:
->>>>>>> +    maxItems: 1
->>>>>>> +    description: Reference oscillator.
->>>>>>
->>>>>> This barely counts as a resource, so usual question: no resources here?
->>>>>> no MMIO? Even the user of this phy is the block itself.
->>>>>>
->>>>>> This makes me wonder if this should be a device node in the first place
->>>>>> (instead folded into the parent).
->>>>>
->>>>> The PHY has no reg because the reg is shared with the controller and
->>>>> owned by the parent - patch 9 lets the bridge take its regmap from
->>>>> there.
->>>>>
->>>>> The user of the PHY is not only the block itself. It is the pixel clock
->>>>> provider for the whole display subsystem, voutcrg takes hdmitx0_pixelclk
->>>>> as the parent of its DC8200 pixel MUXes, and while HDMI output is active
->>>>> it is the only intended source for that clock. The parent has to be
->>>>> assigned explicitly so the general PLL does not end up driving the pixel
->>>>> clock, and so a DSI user does not reach the HDMI PHY clock generator.
->>>>>
->>>>> So it has to be its own node. The HDMI block has two independent
->>>>
->>>> I do not see the logic which lead to this conclusion. Pixel clock
->>>> provider, so a clock controller, cannot be a user of a phy. Clock
->>>> controller does not have a physical layer.
->>>
->>> Sorry I think the wording was not perfect. I meant the PHY node is a
->>> pixel clock provider. voutcrg consumes a clock not a PHY.
->>>
->>> voutcrg: clock-controller@295c0000 {
->>>          clocks = <&syscrg ...>, <&hdmi_phy>;
->>>          clock-names = ...,"hdmitx0_pixelclk";
->>> };
->>>
->>> The consumer of the PHY is only the hdmi controller.
->>>
->>> What matters for the node layout is where that clock goes. voutcrg is the
->>> SoC display clock controller - it is not part of the HDMI block:
->>>
->>> hdmi_phy -- pixel clock -> voutcrg
->>>                               |
->>>                               - pclk/mclk/bclk -> hdmi_controller
->>>                               - pix0/pix1 -> dc8200
->>>
->>> hdmi_phy and hdmi_controller are the same register block with one reg
->>> owned by the parent. So if that block is described as a single node:
->>>
->>> hdmi_node - pixel clock -> voutcrg
->>>      ^                          |
->>>      --- pclk/mclk/bclk --------
->>>
->>> the node provides a clock to voutcrg and consumes three clocks from
->>> voutcrg. That is a cycle in the device tree description.
->>
->> There is no cycle. Internal signals to the block are not represented in DT.
->>
->> What you have is a driver problem and you create some sort of DT
->> structure to solve that. DT purpose is NOT to solve your driver
->> dependencies or circular connections.
-> 
-> The structure is not something I added. The voutcrg binding has required
-> an input clock named hdmitx0_pixelclk since it was merged in 2023
-> a097a5ec14df ("dt-bindings: clock: Add StarFive JH7110 Video-Output
-> clock and reset generator") and this series does not touch that file:
-> 
-> Documentation/devicetree/bindings/clock/starfive,jh7110-voutcrg.yaml
->        - const: hdmitx0_pixelclk
-> 
-> Mainline satisfies it with a placeholder, because so far nothing provided the
-> real clock:
-> 
-> hdmitx0_pixelclk: hdmitx0-pixel-clock {
->             compatible = "fixed-clock";                                                                          
->             clock-output-names = "hdmitx0_pixelclk";
->             #clock-cells = <0>;
-> };
-> 
-> All this series does is point that existing input at the device that actually
-> generates it.
-> 
-> TRM [1] table 5-3  on page 529 lists the display CRG's input clocks. Most come from
-> dom_vout_top, but three come from IP blocks inside the subsystem:
-> 
-> clk_hdmitx0_pixelclk        297 MHz   u0_hdmi_tx.clk_pix
-> clk_mipitx_dphy_rxesc        10 MHz   u0_mipitx_dphy.clk_rxesc
-> clk_mipitx_dphy_txbytehs    297 MHz   u0_mipitx_dphy.clk_txbytehs
-> 
-> and on page 530 the CRG offers clk_hdmitx0_pixelclk as Source1 for:
-> 
-> u0_dc8200.clk_pix0      Source0 clk_dc8200_pix0  Source1 clk_hdmitx0_pixelclk
-> u0_dc8200.clk_pix1      Source0 clk_dc8200_pix0  Source1 clk_hdmitx0_pixelclk
-> u0_cdns_dsiTx.clk_dpi   Source0 clk_dc8200_pix0  Source1 clk_hdmitx0_pixelclk
-> 
-> The DC8200 and the DSI TX are separate devices, so the pixel clock
-> crosses two block boundaries to reach them.
-> 
-> That is also why the DT has to be able to name it. Those MUXes have two
-> parents and the selection is made in DT:
-> 
-> &dc8200 {
->           assigned-clocks = <&voutcrg JH7110_VOUTCLK_DC8200_PIX0>, ...;
->           assigned-clock-parents = <&hdmi_phy>, <&hdmi_phy>;
-> };
-> 
-> and voutcrg takes it as an input clock because that is what the hardware
-> does. If the PHY is folded into the HDMI node, that input phandle points at
-> a node which also consumes pclk/mclk/bclk from voutcrg. That is where the
-> cycle comes from - the hardware topology not the driver.
+Document Skyworks AAT2870 into schema, convert existing driver to
+use OF bindings and remove platform data, add support for
+in-supplies.
 
-Which is perfectly "fine" - present in many other SoCs as well. This is
-not different and your arguments are insufficient to give here
-exceptions. Why? Because again you use as an argument a Linux driver
-problem (cyclic dependency). Basically to solve Linux problem you
-introduce new empty nodes.
+---
+Changes in v2:
+- fixed led-max-microamp scaling
+- fixed max_brightness parsing
+- fixed regulator init_data and of_node passing
+- of_platform_populate > devm_of_platform_populate
+---
 
-Best regards,
-Krzysztof
+Svyatoslav Ryhel (3):
+  dt-bindings: mfd: Document Skyworks AAT2870
+  mfd: aat2870: Convert to use OF bindings
+  mfd: aat2870: Add support for VIN and IN-LDO power supplies
+
+ .../bindings/leds/skyworks,aat2870.yaml       | 127 ++++++++++++++++++
+ drivers/mfd/aat2870-core.c                    | 120 +++++------------
+ drivers/regulator/aat2870-regulator.c         |  77 ++++++++---
+ drivers/video/backlight/aat2870_bl.c          |  55 ++++----
+ include/linux/mfd/aat2870.h                   |  95 +------------
+ 5 files changed, 244 insertions(+), 230 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/leds/skyworks,aat2870.yaml
+
+-- 
+2.53.0
+
