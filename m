@@ -1,102 +1,60 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F8453C7685;
-	Sun,  4 Oct 2026 16:50:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AEE83BE175;
+	Sun,  4 Oct 2026 16:51:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791132658; cv=none; b=CF4rsDpFjXVu9NThCsN2dt7McQeKQsKxoASRTfN2bule+rQgQ12RU6dSP+jK7Z6G6BFSuzFtmx9yiDj7tC0XaTJ/QyP+uP6C/nej0yswCF+n/zckqJushxHo2GHQFtDdbhfRsIWfxRJ5jNKAZAkRaypUuFdV8QudznoZ791H1U4=
+	t=1791132684; cv=none; b=JM/PLn9oFcg3WTwTwOjOfzmkMhD3XbQvOf5SAlvtHO/zKspjvn3jky6jBjWB11W9HIFQF1ZNyYxPvvjdu2MYOdRsrg4JkskN7vMYrN4VTJpdW3CFdR2l6ley8brCPnAIDo+rlHEUPxyJ4KWNJ5kYTrj3hxo19YuQb5KXnSaGP9w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791132658; c=relaxed/simple;
-	bh=JXSPLFHFWp41xF4FlvC4+Wtb0mQxXkCErio9PDsMkfk=;
+	s=arc-20240116; t=1791132684; c=relaxed/simple;
+	bh=dYxqay679/z8vW37gE5Bw7OHlwaLo+SjHIfQAgtZygk=;
 	h=From:Subject:To:Cc:In-Reply-To:References:Content-Type:Date:
-	 Message-Id; b=EV0b0bZvocwYFclNH2OU7js6t354zF9p3kKge39qoxS59Fd2hRe9Lhrx3xjtmAU0BoGthAJWnve4NcusXXHs2VSoj/kYsFTFPMQOpEpQT2DzJ9IdRhH3CBymQDdxUP26+60hsloCcJU5hU341O7nV4ZgiTQhV0cK8vRArvaiNkQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IOfzX0q0; arc=none smtp.client-ip=100.103.45.18
+	 Message-Id; b=o0uAkghHkXZCZvBLkk5xMYUJRfzKCShnZw0ivdO08A1sVKGSBBJRmIggSC66pd7pta3Ue1iN+v8y9q3RqgcOd2fKpK8htwyB94pPdOt8buAVsmT7/JA5mue/9VuPdKQ/tr1Waw5iIheXWzgqy9aztUBQh1VBF7gPylVOcqpet0g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XnLBf12u; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IOfzX0q0"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 86DE01F00898;
-	Sun,  4 Oct 2026 16:50:56 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XnLBf12u"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 798461F000FF;
+	Sun,  4 Oct 2026 16:51:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791132657;
-	bh=5AdhvBZtdreGBBfmpt7FZcqlh2Deh824eypm0xyIOvo=;
+	s=k20260515; t=1791132682;
+	bh=dYxqay679/z8vW37gE5Bw7OHlwaLo+SjHIfQAgtZygk=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=IOfzX0q0fXUn9Sc5DYV52XXzTIAESBsA09hUyPpXTE2HuFjdVdpB9hr+5jlynu1tp
-	 AtpDcUAAR5m/HoiDqC2frk7sF1VjZzjkkNdAp62BLaSmZks0xlTxe4ypn+mVwbd6Uu
-	 pqpx/XaYgNG25y/W6OB2Ef0CpEfHiyyASvTS2sueJpniV6zEMK7+Sl/P889hIT1Nd3
-	 RFz09EusddKAdf808WYmCeJ/EZnFAx5eqroa78V7j8ze/TLmsfleTJyBfzh3HQ63aB
-	 gVd2JWVQTfRPi+x3NosarB3x9ltj/TqI6UgP2QmLilBH7f/2/XzKFHOygeFjjG32ie
-	 5YM7Mho9bJVuA==
+	b=XnLBf12uUP6jlScsWQF3rDA5Rl8HZaIjYifmkI8+Q9akOWKBjrtOwPeLdiSIiskRq
+	 Tmi6Doxio/GpViON/lG6MUq2vtA1R1DvDq556BYm29LPU+aMZFUPgMiIcLX58fx6jm
+	 /NeKUudaR30hFF/TMYMNoxb+qIoA4OuJw0QzTauTnqcYxFVDNwPzd1XWtxr6DyRWV5
+	 4wMYxNvb7BiDqkKIWpGc3EynHDLhfwbvjssfklEofP0VNDcy7/45OvtSiE451Rn/TE
+	 KoSeww8eEOvtD8USX9hmA7knLgkYEuETpx17sbWhPN+69MpHzEaelmLYA0xpZkKC8R
+	 7q7uEBqa2pcXg==
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 1/3] dt-bindings: mfd: Document Skyworks AAT2870
+Subject: Re: [PATCH v2 2/3] mfd: max8907: Remove platform_data based probing
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Svyatoslav Ryhel" <clamor95@gmail.com>
-Cc: lee@kernel.org, linux-leds@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, mfd@lists.linux.dev, devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org
-In-Reply-To: <20261004164121.193514-2-clamor95@gmail.com>
-References: <20261004164121.193514-1-clamor95@gmail.com>
- <20261004164121.193514-2-clamor95@gmail.com>
+Cc: mfd@lists.linux.dev, robh@kernel.org, conor+dt@kernel.org, lee@kernel.org, devicetree@vger.kernel.org
+In-Reply-To: <20261004164540.198446-3-clamor95@gmail.com>
+References: <20261004164540.198446-1-clamor95@gmail.com>
+ <20261004164540.198446-3-clamor95@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Sun, 04 Oct 2026 16:50:56 +0000
-Message-Id: <20261004165056.86DE01F00898@smtp.kernel.org>
+Date: Sun, 04 Oct 2026 16:51:22 +0000
+Message-Id: <20261004165122.798461F000FF@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
-- [Low] dt-bindings: missing `type: object` constraints for child nodes
---
+> There are no in-tree users of this driver, but it supports devicetree
+> based probing, which means external dtb files may exist that work with
+> this.
+>=20
+> Remove the unused legacy code and make this a DT-only driver.
+>=20
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 
-commit 44544968b5bc5130f1768962ce3f85c8bc12cfad
-Author: Svyatoslav Ryhel <clamor95@gmail.com>
-
-dt-bindings: mfd: Document Skyworks AAT2870
-
-Document Skyworks AAT2870 LED Backlight Driver and Multiple LDO Lighting
-Management Unit.
-
-> diff --git a/Documentation/devicetree/bindings/leds/skyworks,aat2870.yaml=
- b/Documentation/devicetree/bindings/leds/skyworks,aat2870.yaml
-> new file mode 100644
-> index 0000000000000..014678616076f
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/leds/skyworks,aat2870.yaml
-[ ... ]
-> +  vin-supply:
-> +    description: Regulator providing power to the "IN" pin.
-> +
-> +  backlight:
-> +    $ref: /schemas/leds/backlight/common.yaml#
-> +    unevaluatedProperties: false
-
-[Severity: Low]
-Does this node definition need an explicit type: object?
-
-Since this backlight property references /schemas/leds/backlight/common.yam=
-l#
-which does not define type: object at its root, the dt_binding_check schema
-validation tool will fail with a type is missing error when checking this
-new schema. In dt-schema, properties representing child nodes must explicit=
-ly
-declare type: object if it is not inherited from a $ref.
-
-[ ... ]
-> +    patternProperties:
-> +      "^(ldo-(a|b|c|d))$":
-> +        $ref: /schemas/regulator/regulator.yaml#
-> +        unevaluatedProperties: false
-
-[Severity: Low]
-Similarly, do these regulator subnodes matching ldo-[a-d] require a
-type: object constraint?
-
-Like the backlight node above, the referenced external schema
-(/schemas/regulator/regulator.yaml#) does not inherently provide type: obje=
-ct,
-which will also result in validation failures.
+Sashiko has reviewed this patch and found no issues. It looks great!
 
 --=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261004164121.1935=
-14-1-clamor95@gmail.com?part=3D1
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261004164540.1984=
+46-1-clamor95@gmail.com?part=3D2
+
