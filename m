@@ -1,286 +1,366 @@
-Received: from cstnet.cn (smtp21.cstnet.cn [159.226.251.21])
-	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44E8B2931F1
-	for <mfd@lists.linux.dev>; Mon,  5 Oct 2026 07:27:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.226.251.21
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A47A747A883;
+	Mon,  5 Oct 2026 10:50:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791185272; cv=none; b=CBhIcee2NBXTwTOAhYgba+52potWU1Vf2yWTd+k8jU1fA6c2BEPZZN4R7PjBceCLP1diZYFKcPwnDee0QfbZiOwxXd6AenDbuSjL6heQhZgCYIumL59nVT92zNxkChcc27i2wsViSYbznmtv0UE2m4aqwkRuRg99ERnK4o+6dBk=
+	t=1791197429; cv=none; b=rpm/EAwVRaFvdU8Q9RhS+c7nP99k5EpaOKycaXe+zRp8EyPWp0BDtDT6ctHO/drxkJnrmPhb4jNrlVtoEvlq9Yt5yhxrGadeAkt2ejvwUm9sx6DIxCEAhhp656Sli1nniVmjjgKd3PjGV+yAuoX5xy1ff+Q/+jZGwWqN1EA3Xz0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791185272; c=relaxed/simple;
-	bh=BU6r9ETSklSPrbVIstMQM7CQuv+fcmQeMbwRafanowQ=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=NVpx0oHRJvlDPjSxL5VBqe+bUokHBBC+YIo7P64wi+2N2KAEq0akPCCfUT+q0n1pa3lLRNjSwzODlzbB/yczbrsT0J4+TTpGSlLD8TsXpUjpKXIYYQpaLhHU304NrJe4SIhd4wC/2grr0PmuIh4XNBxAHIq7J+hwt9Zy4Pkmfek=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.21
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iscas.ac.cn
-Received: from edelgard.fodlan.icenowy.me (unknown [112.94.101.54])
-	by APP-01 (Coremail) with SMTP id qwCowAAX6u1IUcNqyUDqCQ--.9868S2;
-	Mon, 05 Oct 2026 15:27:07 +0800 (CST)
-Message-ID: <b22705108be21d1b267fa5964e6c084a08c1fba1.camel@iscas.ac.cn>
-Subject: Re: [PATCH v4 01/20] dt-bindings: phy: Add
- starfive,jh7110-inno-hdmi-phy
-From: Icenowy Zheng <zhengxingda@iscas.ac.cn>
-To: Michal Wilczynski <m.wilczynski@samsung.com>, Krzysztof Kozlowski
-	 <krzk@kernel.org>
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
- <neil.armstrong@linaro.org>,  Rob Herring <robh@kernel.org>, Krzysztof
- Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
- Andrzej Hajda <andrzej.hajda@intel.com>, Robert Foss <rfoss@kernel.org>,
- Laurent Pinchart	 <Laurent.pinchart@ideasonboard.com>, Jonas Karlman
- <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, Luca Ceresoli
- <luca.ceresoli@bootlin.com>, Maarten Lankhorst	
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
- Thomas Zimmermann <tzimmermann@suse.de>, Lee Jones <lee@kernel.org>, Andy
- Yan <andy.yan@rock-chips.com>, Philipp Zabel	 <p.zabel@pengutronix.de>,
- Emil Renner Berthing <kernel@esmil.dk>, Hal Feng	
- <hal.feng@starfivetech.com>, Michael Turquette <mturquette@baylibre.com>, 
- Stephen Boyd <sboyd@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Paul
- Walmsley <pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
- <aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>,  Dominique
- Belhachemi	 <db@domibel.de>, Brian Masney <bmasney+clk@redhat.com>, Jerome
- Brunet	 <jbrunet+clk@baylibre.com>, linux-phy@lists.infradead.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org, mfd@lists.linux.dev,
- linux-clk@vger.kernel.org, 	linux-arm-kernel@lists.infradead.org,
- linux-rockchip@lists.infradead.org, 	linux-riscv@lists.infradead.org, Marek
- Szyprowski <m.szyprowski@samsung.com>,  Maud Spierings
- <maud_spierings@murena.io>, Graham Markall <hello@big-grey.co.uk>, Chaoyi
- Chen	 <chaoyi.chen@rock-chips.com>, Joshua Peisach <jpeisach@ubuntu.com>,
- Uwe =?ISO-8859-1?Q?Kleine-K=F6nig?=	 <u.kleine-koenig@baylibre.com>
-Date: Mon, 05 Oct 2026 15:27:04 +0800
-In-Reply-To: <3c5c15d9-ea7e-49a2-adae-ec3e3c72594b@samsung.com>
-References: <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
-		<CGME20260915153214eucas1p2b548f3236ef98fb0cbf320e397420125@eucas1p2.samsung.com>
-		<20260915-jh7110-clean-send-v4-1-f0e4fd6f2cc8@samsung.com>
-		<20260917-mutant-chamois-of-competence-46ca77@quoll>
-		<1a1a9b49-430b-4218-b27d-e133d488e8d9@samsung.com>
-		<6cf9e611-bfc5-407b-8132-bd328f8b61fc@kernel.org>
-		<eaba2fa9-a1ce-4dac-9bd6-e0b3a3dd01ef@samsung.com>
-		<3ee91c92-4e3a-4bac-85cf-923f5d77ceff@kernel.org>
-	 <3c5c15d9-ea7e-49a2-adae-ec3e3c72594b@samsung.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.58.3 
+	s=arc-20240116; t=1791197429; c=relaxed/simple;
+	bh=YGDhlmcqxyB467cF+myHTsIJbcHCBo5ygBNyKyt1gHE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=TkY6TI6OYFWe5zCiSsZ8Vca887ghzhfe0O7uq19jZOSUSc2rrSQBFFqsle/VvJxqo0VVBAmV5fI2XGQAc5gHfSz5wja5dX4AJiF6EIrt++SqGUYWPI+lsEkeYiry4tD8oiJ8oCPfuz95CO5BI1FrPfbaJYe7J+kKCqe1874FVCI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NuV4R0Nd; arc=none smtp.client-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NuV4R0Nd"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ACC531F00893;
+	Mon,  5 Oct 2026 10:50:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791197427;
+	bh=dNNu6FxDNOOWjNZIXKqoN5QQzPfYosIUED3AJWJ62cA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=NuV4R0Ndzki6VgB4Om4UUR9MgwgrCfkDvYNpScrdMa8v6zgXtRhGbYNLY8o6xqR9X
+	 WZMwikc6KCkeH1v78mAGgD5+QpJvL8eYyNOXjE+BI1OfcfRcgjEVInuynXSqGyo5Ll
+	 KW91Nr3aNCxs4Yd3hApAAHQgw1NnnauvVWpzbvw8tJ828dbL51RmsPt6RfWZb3yQRW
+	 pbxpmsidwPYxW0bMYBtGuBnhwXVZinQcwSO9rXSiV6dskijym854NtJ5TXtzYd2QR1
+	 AtHLbhVf3r9ngpvLs0nDmVvEwShhjy1uECf8whixppree5lwxS+YOLwPZ5aH7A4PLc
+	 ACtkjOcCQT7/w==
+Date: Mon, 5 Oct 2026 11:50:19 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Jisheng Zhang <jszhang@kernel.org>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney+clk@redhat.com>,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	Andi Shyti <andi.shyti@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Frank Li <Frank.Li@nxp.com>, Lee Jones <lee@kernel.org>,
+	Linus Walleij <linusw@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jiri Slaby <jirislaby@kernel.org>,
+	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-i2c@vger.kernel.org,
+	linux-i3c@lists.infradead.org, mfd@lists.linux.dev,
+	linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org,
+	linux-spi@vger.kernel.org, linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH 08/20] dt-bindings: reset: add Synaptics SL261X SoCs
+Message-ID: <asOA6-r41fuoGkEo@squawk>
+References: <20260929061417.20733-1-jszhang@kernel.org>
+ <20260929061417.20733-9-jszhang@kernel.org>
+ <20260929-sprang-stir-af07a907ccb2@spud>
+ <ar0npPCHX1P5Gjzx@xhacker>
+ <20260930-legend-helium-ca5a0ff56709@spud>
+ <ar_POzPRppAwK7ui@xhacker>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-X-CM-TRANSID:qwCowAAX6u1IUcNqyUDqCQ--.9868S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3GF13Cr4furW8WrWkJFy3twb_yoW7Kw1xpr
-	18ta4UJryDZr18Xr1jqr1UXFy5tw1DA3W5Xr15JF18Jrn8tryIqF1UXr1jgFyDJrs7Aw17
-	tryUXrZrZr1DArUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvGb7Iv0xC_KF4lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwV
-	C2z280aVCY1x0267AKxVWxJr0_GcWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xv
-	F2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r
-	4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwACI402YVCY1x02628vn2kIc2xK
-	xwCY1x0262kKe7AKxVWrXVW3AwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJV
-	W8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF
-	1VAFwI0_Wrv_Gr1UMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcV
-	C0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY
-	6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa
-	73UjIFyTuYvjxU-HqcUUUUU
-X-CM-SenderInfo: x2kh0wp0lqwv3d6l2u1dvotugofq/
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="Gk8IWZpUcu6PCSl4"
+Content-Disposition: inline
+In-Reply-To: <ar_POzPRppAwK7ui@xhacker>
 
-=E5=9C=A8 2026-10-04=E6=97=A5=E7=9A=84 00:35 +0200=EF=BC=8CMichal Wilczynsk=
-i=E5=86=99=E9=81=93=EF=BC=9A
->=20
->=20
-> On 10/3/26 22:45, Krzysztof Kozlowski wrote:
-> > On 03/10/2026 17:36, Michal Wilczynski wrote:
-> > >=20
-> > >=20
-> > > On 9/30/26 13:01, Krzysztof Kozlowski wrote:
-> > > > On 25/09/2026 23:05, Michal Wilczynski wrote:
-> > > > > > > +=C2=A0 clocks:
-> > > > > > > +=C2=A0=C2=A0=C2=A0 maxItems: 1
-> > > > > > > +=C2=A0=C2=A0=C2=A0 description: Reference oscillator.
-> > > > > >=20
-> > > > > > This barely counts as a resource, so usual question: no
-> > > > > > resources here?
-> > > > > > no MMIO? Even the user of this phy is the block itself.
-> > > > > >=20
-> > > > > > This makes me wonder if this should be a device node in the
-> > > > > > first place
-> > > > > > (instead folded into the parent).
+--Gk8IWZpUcu6PCSl4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Oct 02, 2026 at 11:35:23PM +0800, Jisheng Zhang wrote:
+> On Wed, Sep 30, 2026 at 05:49:18PM +0100, Conor Dooley wrote:
+> > On Wed, Sep 30, 2026 at 11:15:48PM +0800, Jisheng Zhang wrote:
+> > > On Tue, Sep 29, 2026 at 08:44:13PM +0100, Conor Dooley wrote:
+> > > > On Tue, Sep 29, 2026 at 02:14:05PM +0800, Jisheng Zhang wrote:
+> > > > > Add device tree bindings for the resets on Synaptics SL261X SoCs.
 > > > > >=20
-> > > > > The PHY has no reg because the reg is shared with the
-> > > > > controller and
-> > > > > owned by the parent - patch 9 lets the bridge take its regmap
-> > > > > from
-> > > > > there.
+> > > > > Signed-off-by: Jisheng Zhang <jszhang@kernel.org>
+> > > > > ---
+> > > > >  .../bindings/reset/syna,sl261x-reset.yaml     | 40 ++++++++++
+> > > > >  include/dt-bindings/reset/syna,sl261x-reset.h | 80 +++++++++++++=
+++++++
+> > > > >  2 files changed, 120 insertions(+)
+> > > > >  create mode 100644 Documentation/devicetree/bindings/reset/syna,=
+sl261x-reset.yaml
+> > > > >  create mode 100644 include/dt-bindings/reset/syna,sl261x-reset.h
 > > > > >=20
-> > > > > The user of the PHY is not only the block itself. It is the
-> > > > > pixel clock
-> > > > > provider for the whole display subsystem, voutcrg takes
-> > > > > hdmitx0_pixelclk
-> > > > > as the parent of its DC8200 pixel MUXes, and while HDMI
-> > > > > output is active
-> > > > > it is the only intended source for that clock. The parent has
-> > > > > to be
-> > > > > assigned explicitly so the general PLL does not end up
-> > > > > driving the pixel
-> > > > > clock, and so a DSI user does not reach the HDMI PHY clock
-> > > > > generator.
-> > > > >=20
-> > > > > So it has to be its own node. The HDMI block has two
-> > > > > independent
+> > > > > diff --git a/Documentation/devicetree/bindings/reset/syna,sl261x-=
+reset.yaml b/Documentation/devicetree/bindings/reset/syna,sl261x-reset.yaml
+> > > > > new file mode 100644
+> > > > > index 000000000000..8cfec17df800
+> > > > > --- /dev/null
+> > > > > +++ b/Documentation/devicetree/bindings/reset/syna,sl261x-reset.y=
+aml
+> > > > > @@ -0,0 +1,40 @@
+> > > > > +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+> > > > > +# Copyright (C) 2026 Synaptics Incorporated
+> > > > > +%YAML 1.2
+> > > > > +---
+> > > > > +$id: http://devicetree.org/schemas/reset/syna,sl261x-reset.yaml#
+> > > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > > > > +
+> > > > > +title: Synaptics SL261X reset controller
+> > > > > +
+> > > > > +maintainers:
+> > > > > +  - Jisheng Zhang <jszhang@kernel.org>
+> > > > > +
+> > > > > +description: The reset controller node must be a sub-node of the=
+ chip
+> > > > > +  controller node on SL261X SoCs.
+> > > > > +
+> > > > > +properties:
+> > > > > +  compatible:
+> > > > > +    enum:
+> > > > > +      - syna,sl261x-soc-reset
+> > > > > +      - syna,sl261x-system-reset
+> > > > > +
+> > > > > +  "#reset-cells":
+> > > > > +    const: 1
+> > > > > +
+> > > > > +required:
+> > > > > +  - compatible
+> > > > > +  - "#reset-cells"
+> > > > > +
+> > > > > +additionalProperties: false
+> > > > > +
+> > > > > +examples:
+> > > > > +  - |
+> > > > > +    chip: chip-control@f7e10000 {
+> > > > > +        reg =3D <0xf7e10000 0x1000>;
+> > > > > +
+> > > > > +        chip_rst: reset {
+> > > > > +            compatible =3D "syna,sl261x-soc-reset";
+> > > > > +            #reset-cells =3D <1>;
+> > > > > +        };
 > > > >=20
-> > > > I do not see the logic which lead to this conclusion. Pixel
-> > > > clock
-> > > > provider, so a clock controller, cannot be a user of a phy.
-> > > > Clock
-> > > > controller does not have a physical layer.
+> > > > Why can't this just be part of the parent node?
 > > >=20
-> > > Sorry I think the wording was not perfect. I meant the PHY node
-> > > is a
-> > > pixel clock provider. voutcrg consumes a clock not a PHY.
+> > > Good question! IMHO, the reasons are:
 > > >=20
-> > > voutcrg: clock-controller@295c0000 {
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 clocks =3D <&syscrg =
-...>, <&hdmi_phy>;
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 clock-names =3D ...,=
-"hdmitx0_pixelclk";
-> > > };
+> > > 1. the so called Gbls(Gbl means global) such as mcuGbl and
+> > > chip control Gbl contain not only reset, pinctrl and clk/plls
+> > > but also some other registers for different purposes, e.g in the
+> > > chip control gbl, there are some registers to control eth phy sel(RMII
+> > > or RGMII), and TXC 90 degree selection etc. These registers will
+> > > be used by the Ethernet driver;
 > > >=20
-> > > The consumer of the PHY is only the hdmi controller.
+> > > While there's no pinctrl regs in avioGbl and vppGbl. In the vppgbl,
+> > > there are some registers for DPHYTX etc.
 > > >=20
-> > > What matters for the node layout is where that clock goes.
-> > > voutcrg is the
-> > > SoC display clock controller - it is not part of the HDMI block:
+> > > As can been, in different Gbls, there maybe different purposes regist=
+ers, no
+> > > obvious patterns.
 > > >=20
-> > > hdmi_phy -- pixel clock -> voutcrg
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 - pclk/mclk/bclk -> hdmi_controller
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 - pix0/pix1 -> dc8200
-> > >=20
-> > > hdmi_phy and hdmi_controller are the same register block with one
-> > > reg
-> > > owned by the parent. So if that block is described as a single
-> > > node:
-> > >=20
-> > > hdmi_node - pixel clock -> voutcrg
-> > > =C2=A0=C2=A0=C2=A0=C2=A0 ^=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |
-> > > =C2=A0=C2=A0=C2=A0=C2=A0 --- pclk/mclk/bclk --------
-> > >=20
-> > > the node provides a clock to voutcrg and consumes three clocks
-> > > from
-> > > voutcrg. That is a cycle in the device tree description.
+> > > So the question here is why not split the gbl into different register
+> > > spaces, and abstract each space for each function group?
 > >=20
-> > There is no cycle. Internal signals to the block are not
-> > represented in DT.
-> >=20
-> > What you have is a driver problem and you create some sort of DT
-> > structure to solve that. DT purpose is NOT to solve your driver
-> > dependencies or circular connections.
+> > No, you misunderstood. I'm not asking for the register space to be
+> > split, I am asking why you cannot do
+> > | syscon@f7e1000 {
+> > | 	compatible =3D "syna,sl2610-soc-syscon", "syscon";
+> > | 	reg =3D <0xf7e10000 0x1000>;
+> > | 	#clock-cells =3D <1>;
+> > | 	#reset-cells =3D <1>;
+> > | };
+> > With this kind of thing, you can either use the auxiliary bus or
+> > MFD_CELL_NAME() to create the other devices. The latter is good if
+> > you've got a region with clocks that also has resets thrown in, the
+> > former is probably better if you have a syscon with a genuine
+> > assortment of different functions that you're going to be looking up via
+> > phandle.
 >=20
-> The structure is not something I added. The voutcrg binding has
-> required
-> an input clock named hdmitx0_pixelclk since it was merged in 2023
-> a097a5ec14df ("dt-bindings: clock: Add StarFive JH7110 Video-Output
-> clock and reset generator") and this series does not touch that file:
+> I see your points now. But there are two problems with this solution:
 >=20
-> Documentation/devicetree/bindings/clock/starfive,jh7110-voutcrg.yaml
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 - const: hdmitx0_pixelclk
->=20
-> Mainline satisfies it with a placeholder, because so far nothing
-> provided the
-> real clock:
->=20
-> hdmitx0_pixelclk: hdmitx0-pixel-clock {
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 compat=
-ible =3D "fixed-
-> clock";=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=20
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 clock-=
-output-names =3D "hdmitx0_pixelclk";
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 #clock=
--cells =3D <0>;
-> };
->=20
-> All this series does is point that existing input at the device that
-> actually
-> generates it.
->=20
-> TRM [1] table 5-3=C2=A0 on page 529 lists the display CRG's input clocks.
-> Most come from
-> dom_vout_top, but three come from IP blocks inside the subsystem:
->=20
-> clk_hdmitx0_pixelclk=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 297 MHz=C2=
-=A0=C2=A0 u0_hdmi_tx.clk_pix
-> clk_mipitx_dphy_rxesc=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 10 MHz=C2=
-=A0=C2=A0 u0_mipitx_dphy.clk_rxesc
-> clk_mipitx_dphy_txbytehs=C2=A0=C2=A0=C2=A0 297 MHz=C2=A0=C2=A0 u0_mipitx_=
-dphy.clk_txbytehs
->=20
-> and on page 530 the CRG offers clk_hdmitx0_pixelclk as Source1 for:
->=20
-> u0_dc8200.clk_pix0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Source0 clk_dc8200_pix0=
-=C2=A0 Source1
-> clk_hdmitx0_pixelclk
-> u0_dc8200.clk_pix1=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Source0 clk_dc8200_pix0=
-=C2=A0 Source1
-> clk_hdmitx0_pixelclk
-> u0_cdns_dsiTx.clk_dpi=C2=A0=C2=A0 Source0 clk_dc8200_pix0=C2=A0 Source1
-> clk_hdmitx0_pixelclk
->=20
-> The DC8200 and the DSI TX are separate devices, so the pixel clock
-> crosses two block boundaries to reach them.
->=20
-> That is also why the DT has to be able to name it. Those MUXes have
-> two
-> parents and the selection is made in DT:
->=20
-> &dc8200 {
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 assigned-clocks =
-=3D <&voutcrg JH7110_VOUTCLK_DC8200_PIX0>,
-> ...;
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 assigned-clock-par=
-ents =3D <&hdmi_phy>, <&hdmi_phy>;
-> };
->=20
-> and voutcrg takes it as an input clock because that is what the
-> hardware
-> does. If the PHY is folded into the HDMI node, that input phandle
-> points at
-> a node which also consumes pclk/mclk/bclk from voutcrg. That is where
-> the
-> cycle comes from - the hardware topology not the driver.
+> 1. Besides reset, pinctrl and clk, the so called "Gbl" also contains
+> registers for other purpose, e.g DPHYTX, when we need the driver for
+> DPHYTX, I assume I could also go with the auxiliary bus or MFD_CELL_NAME(=
+),
 
-I think the common clock framework has a "orphaned clock" feature to
-solve this kind of cyclic clock dependency, although this could be a
-pandora's box if not properly used.
+Correct.
+
+>=20
+> 2. where should the driver(s) and dt-bindings doc be put?
+> I assume drivers/soc/synaptics/ and
+> Documentation/devicetree/bindings/soc/synaptics?
+
+Personally, this is where I put them in the MFD_CELL_NAME() case. In the
+aux bus case, there's generally no "parent" driver that just probes
+children, so it'd go into clock or whatever the main purpose is.
 
 Thanks,
-Icenowy
+Conor,.
 
 >=20
-> [1] -
-> https://doc-en.rvspace.org/JH7110/PDF/JH7110_TRM_StarFive_Preliminary_V2.=
-pdf
+> Kindly correct me if I misunderstood something.
 >=20
+> Thanks
 > >=20
-> > Best regards,
-> > Krzysztof
+> > > Two blocking
+> > > points make this impossible and ugly: different reg space may not be
+> > > aligned at 4KB boundary, e.g reset: 0x350 ~ 0x37c; eth phy sel:0xa18;
+> > > some registers which belong to similar functionality, e.g clks, may n=
+ot be
+> > > adjacent.
 > >=20
+> > This sort of thing, with non-adjacent clocks is still possible, you have
+> > a regmap just like before.
+> >=20
+> > > So the best way is to abstract these GBLs via. "syscon", "simple-mfd"=
+, and
+> > > put necessary subnodes such as reset, pinctrl and clks under the GBL
+> > > node. If the registers in GBL is misc control, pass the syscon phandle
+> > > to the main driver, e.g I planed to pass the syscon phandle to GMAC
+> > > driver to control the RMII/RGMII selection.
+> >=20
+> > And you can get the regmap from other drivers by doing phandle or
+> > compatible based lookups just like before.
+> >=20
+> > >=20
+> > > 2.follow current bg2 and bg2q style
+> > > e.g arch/arm/boot/dts/synaptics/berlin2q.dtsi
+> > >=20
+> > > IMHO, why bg2 and bg2q dtsi files are implemented as current
+> > > style is due to the above point 1.
+> >=20
+> > Unfortunately, this is the berlin2q devicetree showing its age, we've
+> > been pushing people away from nodes that exist just to probe a driver
+> > and don't provide any additional value. Something like
+> > | chip-control@f7e10000 {
+> > |     reg =3D <0xf7e10000 0x1000>;
+> > |=20
+> > |     chip_rst: reset {
+> > |         compatible =3D "syna,sl261x-soc-reset";
+> > |         #reset-cells =3D <1>;
+> > |     };
+> > |=20
+> > |     chip_clk: clock {
+> > |         compatible =3D "syna,sl261x-soc-clock";
+> > |         #clock-cells =3D <1>;
+> > |     };
+> > is exactly the pattern we are trying to avoid.
+> >=20
+> > Cheers,
+> > Conor.
+> >=20
+> > >=20
+> > > Kindly let me know if there's a better solution.
+> > >=20
+> > > > From a quick check of the dts, the node with this subnode didn't al=
+so
+> > > > have a system-reset node too, so there's no conflict or anything of=
+ that
+> > > > nature.
+> > > >=20
+> > > > > +    };
+> > > > > diff --git a/include/dt-bindings/reset/syna,sl261x-reset.h b/incl=
+ude/dt-bindings/reset/syna,sl261x-reset.h
+> > > > > new file mode 100644
+> > > > > index 000000000000..7034f58aae5b
+> > > > > --- /dev/null
+> > > > > +++ b/include/dt-bindings/reset/syna,sl261x-reset.h
+> > > > > @@ -0,0 +1,80 @@
+> > > > > +/* SPDX-License-Identifier: (GPL-2.0 OR MIT) */
+> > > > > +/*
+> > > > > + * Copyright (C) 2026 Synaptics Incorporated
+> > > > > + *
+> > > > > + * Author: Jisheng Zhang <jszhang@kernel.org>
+> > > > > + */
+> > > > > +
+> > > > > +#ifndef _DT_BINDINGS_SL261X_RESET_H
+> > > > > +#define _DT_BINDINGS_SL261X_RESET_H
+> > > > > +
+> > > > > +/* ACPU subsystem */
+> > > > > +#define RST_SOC_SDIO0		0
+> > > > > +#define RST_SOC_USB0		1
+> > > > > +#define RST_SOC_EMMC		2
+> > > > > +#define RST_SOC_GETH0		3
+> > > > > +#define RST_SOC_SDIO1		4
+> > > > > +#define RST_SOC_USB1		5
+> > > > > +#define RST_SOC_GETH1		6
+> > > > > +#define RST_SOC_USB0PHY		7
+> > > > > +#define RST_SOC_USB0CORE	8
+> > > > > +#define RST_SOC_USB0MAHB	9
+> > > > > +#define RST_SOC_USB1PHY		10
+> > > > > +#define RST_SOC_USB1CORE	11
+> > > > > +#define RST_SOC_USB1MAHB	12
+> > > > > +#define RST_SOC_UART0		13
+> > > > > +#define RST_SOC_UART1		14
+> > > > > +#define RST_SOC_UART2		15
+> > > > > +#define RST_SOC_UART3		16
+> > > > > +#define RST_SOC_I2C0		17
+> > > > > +#define RST_SOC_I2C1		18
+> > > > > +#define RST_SOC_SPI0		19
+> > > > > +#define RST_SOC_SPI1		20
+> > > > > +#define RST_SOC_SPI2		21
+> > > > > +#define RST_SOC_SPI3		22
+> > > > > +#define RST_SOC_APBTIMERS	23
+> > > > > +#define RST_SOC_APBSYSCNT	24
+> > > > > +#define RST_SOC_APBWDT		25
+> > > > > +#define RST_SOC_APBGPIO		26
+> > > > > +#define RST_SOC_APBDMA		27
+> > > > > +#define RST_SOC_GPUCORE		28
+> > > > > +#define RST_SOC_NPUCORE		29
+> > > > > +#define RST_SOC_AVIOAIOG	30
+> > > > > +#define RST_SOC_AVIOVPPG	31
+> > > > > +#define RST_SOC_AVIOVIPG	32
+> > > > > +
+> > > > > +/* system subsystem */
+> > > > > +#define RST_SM_ADCCORE		0
+> > > > > +#define RST_SM_ADCPRST		1
+> > > > > +#define RST_SM_CAN0PRST		2
+> > > > > +#define RST_SM_CAN0SRST		3
+> > > > > +#define RST_SM_CAN1PRST		4
+> > > > > +#define RST_SM_CAN1SRST		5
+> > > > > +#define RST_SM_GPIOPRST		6
+> > > > > +#define RST_SM_GPIOSRST		7
+> > > > > +#define RST_SM_I2CM0PRST	8
+> > > > > +#define RST_SM_I2CM0SRST	9
+> > > > > +#define RST_SM_I2CM1PRST	10
+> > > > > +#define RST_SM_I2CM1SRST	11
+> > > > > +#define RST_SM_I3CPRST		12
+> > > > > +#define RST_SM_I3CSRST		13
+> > > > > +#define RST_SM_PDMPRST		14
+> > > > > +#define RST_SM_PDMSRST		15
+> > > > > +#define RST_SM_PVTHSRST		16
+> > > > > +#define RST_SM_PVTPRST		17
+> > > > > +#define RST_SM_PWMPERIRST	18
+> > > > > +#define RST_SM_PWMPRST		19
+> > > > > +#define RST_SM_SPIMPRST		20
+> > > > > +#define RST_SM_SPIMSRST		21
+> > > > > +#define RST_SM_SPISPRST		22
+> > > > > +#define RST_SM_SPISSRST		23
+> > > > > +#define RST_SM_UART0PRST	24
+> > > > > +#define RST_SM_UART0SRST	25
+> > > > > +#define RST_SM_UART1PRST	26
+> > > > > +#define RST_SM_UART1SRST	27
+> > > > > +#define RST_SM_UART2PRST	28
+> > > > > +#define RST_SM_UART2SRST	29
+> > > > > +#define RST_SM_UART3PRST	30
+> > > > > +#define RST_SM_UART3SRST	31
+> > > > > +
+> > > > > +#endif /* _DT_BINDINGS_SL261X_RESET_H */
+> > > > > --=20
+> > > > > 2.53.0
+> > > > >=20
+> > >=20
+> > >=20
 >=20
-> Best regards,
+>=20
 
+--Gk8IWZpUcu6PCSl4
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEARYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCasOA6wAKCRB4tDGHoIJi
+0tAeAP9g4V0Uppa+RPpNSegPViM1PGFBb2qMlUfL3Eqtfqq5rwD8DNvWRbx6J1Y2
+bBUZpYZhNV0JSq2I6MV77ygY10S8cQ4=
+=9BJK
+-----END PGP SIGNATURE-----
+
+--Gk8IWZpUcu6PCSl4--
