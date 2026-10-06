@@ -1,306 +1,255 @@
-Received: from mail-dy2-f41.google.com (mail-dy2-f41.google.com [74.125.229.41])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1DF9B5208DF
-	for <mfd@lists.linux.dev>; Mon,  5 Oct 2026 17:18:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.229.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0FDAD3BBA01
+	for <mfd@lists.linux.dev>; Tue,  6 Oct 2026 08:53:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791220726; cv=pass; b=k8H4G9aLuT4kfBotWmSNL6qvnO5Gv+8ruVlVWbakBki639aPMqZ9DNzlpQ43l6rjkTcCwhmWNh72acBK57UD3Ri/7+Ufv+olHMqWQtuHM29lBXIgXFXB3/7ttL1NIiUhGuS5Vx6cgXNmlyoML3FhjwsAqSzYLSOHeYuLcmoSjRw=
+	t=1791276803; cv=pass; b=Sa+nlQFO9IjR/IoxQYvNXBHgksH+WPYk+XumcN2F5JYpQi7t1fwlD5X9CJKQE4/Ve6b0Z3IUihhDCMNl0VsE5Pbh/rB+29l9L8b1qNTPyETtAGYXJBu7/PzG36XOiQfb0e/WZurLd8HP7RVpwPDhpCDjv+SApZ1/9g32coRwFbU=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791220726; c=relaxed/simple;
-	bh=uuRxUEWAiTYG1xcsGVUJv5Gj+GudNMkgTE5oMCqx0vM=;
+	s=arc-20240116; t=1791276803; c=relaxed/simple;
+	bh=VLcjVIGQA/r1W3ldFK6WW8apuDX6mf7txYWwobfyjFI=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=iYxHGMCZqsbBByRi5+oTvvaQpbQ0pRXEQELCNyCniNN5+5Z8tHNaolz6IR7DU9Tnd4tVgSsE8H8QJ6yubZQwO5BKcBhd9pwUuOQcBZtBEtP9rQvU9COn5+JtFW6Tq4/2lV1higRdKYSR4z/ciYVCjI5SavSAr1G3Nrg5KeUBv0M=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RbbeEPyJ; arc=pass smtp.client-ip=74.125.229.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	 To:Cc:Content-Type; b=SJ1jxQtgmHKy2PiTj6AJsiV6QKzAX7r7i3xVL8CFqaNRvKwMobH6Sk0msHe2f5uCTwbCpx8cKSSVyVMWtM0KfYnyoPq4Z69pGiAJIkijY+v/Y1fJZ05ajOyT/pveiKePVeJ4PykTiP9Wod5rQQZGRTAgOO5P3XVMkMUQvL/OqEA=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=N11QSB1z; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=FVRwD8ch; arc=pass smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RbbeEPyJ"
-Received: by mail-dy2-f41.google.com with SMTP id 5a478bee46e88-34c4a0870d2so1382369eec.2
-        for <mfd@lists.linux.dev>; Mon, 05 Oct 2026 10:18:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1791220723; cv=none;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="N11QSB1z";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="FVRwD8ch"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6966eHts3903253
+	for <mfd@lists.linux.dev>; Tue, 6 Oct 2026 08:53:21 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=QQGtjGd8ssqWuv/V61Y20ONf
+	ksGn+OprzCvB7AXUQWs=; b=N11QSB1zHyJJcjTIZFpax126Tk7PweRduHBLIQfr
+	9WI/6tPVU6/1Sq7jSIhD7iJncx2dewrhweyDOeUxV7rS7YUMXPT4CrkLbzD5QgzM
+	2q+RyDEN71+5KHHvSjS5clpUzoAVcBcq//y305l50RsWDd6KAR//l+rjuKWZCW2+
+	wipkInHf7SGEizuN4h6jeybHNmEW2SJIBirz46aStIzpgr6hKBd8oLIihZDzjNR7
+	sb8BuFtQnbettKsV3vvYdZC4V6ZTrDJylyo07DXmfIVN3D37HZ2g3ECCIl7F5JQn
+	rUollOwbyfQoRHPqdxD6SfvQavDSjhPpLiyRB6m2GiM92g==
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4h4a7dvfsj-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <mfd@lists.linux.dev>; Tue, 06 Oct 2026 08:53:20 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2d55d8cd938so39916485ad.1
+        for <mfd@lists.linux.dev>; Tue, 06 Oct 2026 01:53:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791276800; cv=none;
         d=google.com; s=arc-20260327;
-        b=SROLwM7zep5KGIWItxXq0WeBEPXckxxV7faCMrcJUjmjGKMdRg2Xd5w/5zJfzm0fF6
-         wBgpDKG3bqe8bPBwGdtte/BCKsoQwQqmFeAv95edmQ9qOLGMTx9Bnt1koUWl8OYL3rGu
-         w16/B1e67VEiF/STx6AQhqCwf7mO99973k+lTsFaqUETVYOEXrq1/a8x1OclBwA+tJEX
-         /GwlcdlaE+ntm8Ewf5eEL8kPEtjnwGpPkXjXUgdjiTJLoWBVCY2dYaVEIitQoxg4QqyW
-         PDrwuuidy6BQTwlgnPR6T3NwcHPT5405Q1piMk+N873I+VZBmp8U2/2gEFPk+FqkjH2w
-         DC2g==
+        b=rv41IOhEpdr+63W4cXQJi70n93WSzXiY1e+2hfsRIFV8m8SaPMqONnNQlrnSngrtSi
+         vK1Jz7NGhLkTu3gKcFNf4St78corqRkjMbbakrklFZ5UIEjUN3ikrL5Cb3TSu8LI/A4D
+         twPP+rsnDvTsu1xf/7Yiet2WPArLd225qK5ry0GwMcJXIViRTl17tSUI/v8Eo9cf9mSZ
+         2/q6FKNRdvBzxRczf4Ty1VtXwReFh7oNUoHOVGkpaSDaMBy3PUnmFxhphBykuTmJSyKO
+         NCpUh5AteudQqyQR0GmedapT46DHph6TEfmSaJqyU73n1eAWwKlQ2/yhXuEJb902phnV
+         09+w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=FJFeJtfT8/aRZATxwvI0/pPdKdSmPKSztHUwOt17NCQ=;
-        fh=KxDGSPaepO++U6WkHt0DExPnx7NzCbv2Ms0hlw/LUHo=;
-        b=AgTMxrmhPKZnS8btwzTrb3ItT3otrI4DhkGmBUeXPCnX2b4QTeDgdui3FMrWrQ/mUu
-         RbYICKTL60Q0uim0d7vj8cJPII3lFLyCan8g0CsdMMaj+CrgZpqJWZQ3GODZWTvgPrMs
-         TIuG+AWwYoz+NYxTb2v36VF+RPbqj+RkclvT714a+2hphIPU0x3YPt1MAkIRhzYI6Zhe
-         HPZVuoZoeWUDuBYhrUTjtZNqtT8HkZvqFWMMoQ7ahhft9UZrTyZAbOecEsZ8bIMxcgkC
-         JalEfq7gCx8Mx9lHgNg6VZi+RTZWw3tb3fGoKbv9CYOiMKJX7IeLM3bSl9kfG0/WqNN9
-         DONg==;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=QQGtjGd8ssqWuv/V61Y20ONfksGn+OprzCvB7AXUQWs=;
+        fh=B3Z/rvGF0oXrdNyoBSnPj0YKEE3PgyieHtAhTBBvccY=;
+        b=qx224GV8gY1jWwD7KN4Ubr/S4rHudWoG8lMmoedjb1CDb4Me/xMpYxZb7SH8uI4MN4
+         XsmhDuVQ8LIUiz27A28oSXpjnxGCRjiraTlNMPwkYdrh0lkS7IqnPmov2TC00D6h0wjC
+         ie3NKajPS9ksAt4idHDvjlOeKDvJ37CL2KCVz8DVYoWhj91OVMTa/9f12HOxF5CqRGaw
+         VFC7c5BFiE0DQc/g6zy2PwFvD8TJosoX48qu7CRcka8Nt2h4zEsvLK29g4rE2+Xq+8Fy
+         K5ierRzrKBhQQVwdG3pvFRzkXBcvrxjtHDUXFzV9tCQAYZCdLaw+Djjk41Ma5eXZB3ea
+         THWg==;
         darn=lists.linux.dev
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791220723; x=1791825523; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=FJFeJtfT8/aRZATxwvI0/pPdKdSmPKSztHUwOt17NCQ=;
-        b=RbbeEPyJxvDXvAoPD869+sqwQ7sf3StXW5FT1/bAIO1Os0oCQLIIwH1rAj5rLFIdna
-         /etx1odXgpJh1DlzAIFh3lBgeXVUm1edgA46JL8pwVTItTK+zFHJZXWPU++8eu5F/JTF
-         FDRhGfEilnHKT89SfCLK6/bzbiBG5mxPaLbQTwpfhrxH2qX9GEieGmmZFfYqHy/0EdWz
-         0nNgrKywCOuice+iOh3XiHpxCI/JVYeLWjPmZC1Pq4xK6EMXoOJtz2ux6HtXPlpzxobG
-         5B9YcclbYrHe53kh4Us29BQrnGOiXJvvsMUOG++DS/F8yYzgridhtlGtgowOWu+HaFc8
-         zO0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791220723; x=1791825523;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1791276800; x=1791881600; darn=lists.linux.dev;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=FJFeJtfT8/aRZATxwvI0/pPdKdSmPKSztHUwOt17NCQ=;
-        b=cL1X4S1rBjwk2lEJG83IIJhk5mMXzv9X+Lp8YoICfL1V/VADRk37KoEBbbtakg66es
-         zOjk0B8UFND4SZ5p9dl/+YMn+fRaark4SBhTDCGGE9qTRavdpk+or2OKHYMUzet7ANGk
-         NiZu3itffrGkwwU7xnnU34tep9lOCggRXcJPmasijsk//UKvEBsmeqeOKZyya2YxuzW8
-         NJY/Vle/jHNvmqhUmjpQBJuZ33Wfd6ut5+C5WwRYXq4h6AbDv1sG20L1+P7979gZ3w/m
-         TCx4AUkB4BYCjsaX2FlLEC5bBb5FJETR9UfFH0ap5lgWcUTfRnwoUi4bbxExY/Mnbr6m
-         t3Cg==
-X-Forwarded-Encrypted: i=1; AKwUvByQY8zPhpgJ2fATOEUnCcm8YiAZBHv8hrwfAuzUnUZ3QEpmXK+cgswUe/dilY2q0xIFz3E=@lists.linux.dev
-X-Gm-Message-State: AFuF++nmecgNyLKN4DC7nYbGf1Xm35GftHp1fG5TV/UjAZ13qGAziJzy
-	uXg5ZD9GPTIidz0Q3SWby3qlEyN1uEmv6QoNO+W4MyXEWoF376k+WwF5UaXYRgESXnosR1+hLYY
-	my5KxzYgLYd2xfcJIbDb4zSfBR9eiRVY=
-X-Gm-Gg: AYBFou3hsqEEEUKlnAIxuwHT9x06/FmEJ07JfouS8tTXv7T9MdmNHUk+FITgzKunjfV
-	oEW8gv6Lw/JQA08HIYIA/BsGE05Jx9hMJqJjia1eds/BaKaM+BvsaSVEIn1xenCG0ZLfX8wmZL7
-	fZTAC+Zt8f3GZF/JzFYCt0Zy/Ul12KOrlaf+0X2gbIQtnR295/zITWs/QIfD0BKbzjWGGV8atra
-	b1rK0II+J6URIyjrBYXXviAjnJtYkV3bf8G+VbzcpxfWiY6n5Wfb+7QvMPjR9Bvy4zn7tC0F+TH
-	3tDR+86qF7MUlZVcHFFBG+LAyVMReOuqizH0nDsGqpvwOpZDdrKbytP7c0FNsnVAcKyVSd2XbZe
-	P3ygOBHx/R30/
-X-Received: by 2002:a05:693c:87d1:20b0:34c:1bc7:bcb with SMTP id
- 5a478bee46e88-34f159887a3mr13944123eec.22.1791220722737; Mon, 05 Oct 2026
- 10:18:42 -0700 (PDT)
+        bh=QQGtjGd8ssqWuv/V61Y20ONfksGn+OprzCvB7AXUQWs=;
+        b=FVRwD8chEjSG7lHD5i1vjrhVM79NyBDtCYUB6KQNyJBRF8Fyvs8u2t5AWeEPo5Tfrv
+         Vkwbp9HVIvoBDGmWXDkGZYBliQCtklWCgFmCSaXy0UAMu9Li4WiKCPVQLCXDw4Ov6JJ8
+         XWOB+EsKqqMRIKPtHmMc7KZ8Itg+JQbu9UmEkMMAe6r7Gz50betntvUapRslpk6ltg8v
+         CBi4o9cdA4WUcBjwH/7dMH/g2dpoBtIkBZqZvmtNc8Qelx3z4pYvOIFWmHTbCT6IICTI
+         fITmrnebTr07z+c+1iUNv42MpGcFrv7aNz+ZYhpyTQkF22HntCExWgIXkUllmQzohumo
+         mWMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791276800; x=1791881600;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=QQGtjGd8ssqWuv/V61Y20ONfksGn+OprzCvB7AXUQWs=;
+        b=o40IEE0a13pA8FFEdrveOazvSwTi/9ywBAWZVoP89TiwQhW6AiwXi0BUHqM43FAN3l
+         tJGfmjWuKwgtrY/BkRjiUibzG7bW/KGNWRAkK/lXEq7Cyaf1CRUxZoDvAa5G1PIX7JS5
+         VoPxXNex7HrN5J1j2pi1awzLSsiK2+wMkZZst4m6YBWULq8CKdER9IdUTvQUMya0mr4q
+         odimeDZ4YDLNMzFDuWmamNJIcKTYDiRqK2lhZ9/FKew54HsjXcsLcFsM3iEuCRZKMIvr
+         fSEvTx6G4OJeeMRhJ5gVPokhIAaDJuIZqxuVkHVWW+TZIJ2XI1j2Zd73CADuvZDrI2c1
+         WnpQ==
+X-Forwarded-Encrypted: i=1; AKwUvBySruOJRfHSC552f6RezuuPccGCyDaKy97YW94Xt7MU5qrxnyIjvBP7iP77Ow96T3pAYZk=@lists.linux.dev
+X-Gm-Message-State: AFq9FYL/h2KV8i0KO+Fn6AdZ80wdD1mzM/6LQZAPZA2Wb+kx6+BgBDWl
+	VPZcgkK3ptzJM+v8aZJxQ/1pj/1eWBlqhMNMC3320aRJ3X/FLUpZEflHlUQK8VR5/9CdrULIqD0
+	cp+Kq1rdFrX5SwJaSD2pC9bXMdvLR54Me2aSEqm05SRG+OA7YSzOXUBu0v/p2UfkYm4E50MHn3X
+	WBgnLDMYdA/y8Z57ifV5AjG+iFFK98nA==
+X-Gm-Gg: AYBFou36hCuvFywq7zSnBBiagX3PmjYB3aq8tfs0kdU/C3D0LtE06BO2lk/Y6F9Ffz1
+	0KIh40PcfFYhcOZJlIcGZz2o3vduDIOr/J/OV9A7+nzdYCuBUpJTEUFcuPgFQNGmA/KxVNEJTOS
+	+IGkYsdrOlk7DMkVfyuRBbqmVqJDeOZlLvtI+iKC1muiRGiTeWTRhxiI/Oqvu/aLltg7lb9zHvk
+	M+3ZkNmx2w/Gsc=
+X-Received: by 2002:a17:903:388f:b0:2e4:949b:1ea1 with SMTP id d9443c01a7336-2e5dcde4da4mr6597195ad.55.1791276799654;
+        Tue, 06 Oct 2026 01:53:19 -0700 (PDT)
+X-Received: by 2002:a17:903:388f:b0:2e4:949b:1ea1 with SMTP id
+ d9443c01a7336-2e5dcde4da4mr6596685ad.55.1791276799127; Tue, 06 Oct 2026
+ 01:53:19 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20261004164121.193514-1-clamor95@gmail.com> <20261004164121.193514-3-clamor95@gmail.com>
- <asPVmbvyslGgEsjk@aspen.lan>
-In-Reply-To: <asPVmbvyslGgEsjk@aspen.lan>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Mon, 5 Oct 2026 20:18:31 +0300
-X-Gm-Features: AclHuK8sdu976map0XQTAXXmXCzthY8nwPjOHGJ7oTbO_2PaU56B3jQ1t93eAwE
-Message-ID: <CAPVz0n29+1yOO0i057RdpUAu+z85hhnm9GGaHkqgf5XW1SPfeQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] mfd: aat2870: Convert to use OF bindings
-To: Daniel Thompson <danielt@kernel.org>
-Cc: Lee Jones <lee@kernel.org>, Pavel Machek <pavel@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Jingoo Han <jingoohan1@gmail.com>, linux-leds@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, mfd@lists.linux.dev, 
-	dri-devel@lists.freedesktop.org
+References: <20260921-msm8952-initial-support-v3-0-b96fd3fe298b@mainlining.org>
+ <179098834078.3641559.798772743228949994.b4-ty@b4> <e590764c-1ef7-4166-9c2d-a96a89029736@mainlining.org>
+In-Reply-To: <e590764c-1ef7-4166-9c2d-a96a89029736@mainlining.org>
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Date: Tue, 6 Oct 2026 10:53:07 +0200
+X-Gm-Features: AclHuK-hxeLXCCkrwwvQbFIYUVeIjRX4eEFvyGsggP4ez254hGL6BWI-C4KAx08
+Message-ID: <CAO9ioeVAf2GgS+wu9GiQ3kM-_1KnrdMfhcpVotxhiFegEiZP2A@mail.gmail.com>
+Subject: Re: [PATCH v3 00/19] Add Initial Support For MSM8952, Add General
+ Mobile Shamrock
+To: Muzaffer Kadir <muzafferkadir@mainlining.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Srinivas Kandagatla <srini@kernel.org>, Ulf Hansson <ulfh@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+        Robin Murphy <robin.murphy@arm.com>, Lee Jones <lee@kernel.org>,
+        Rob Clark <robin.clark@oss.qualcomm.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Robert Marko <robimarko@gmail.com>,
+        Guru Das Srinagesh <linux@gurudas.dev>,
+        Amit Kucheria <amitk@kernel.org>,
+        Thara Gopinath <thara.gopinath@gmail.com>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@kernel.org>,
+        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+        Kees Cook <kees@kernel.org>, Tony Luck <tony.luck@intel.com>,
+        "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
+        Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+        David Heidelberg <david@ixit.cz>, phone-devel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mmc@vger.kernel.org, iommu@lists.linux.dev, mfd@lists.linux.dev,
+        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+        Krzysztof Kozlowski <krzk@kernel.org>, linux-pm@vger.kernel.org,
+        linux-input@vger.kernel.org,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDA2MDAzNSBTYWx0ZWRfXw76rqyc17qe5
+ euwhHZCVm3O3YxBLIyjb49aiy+kwcIu4wY/YbO3pn7NZeu6NYPaqBU3dHol2rkt+2ivKg2IodYa
+ CDeWZOc1Mo6/eh3e/RrKcQpsMELWpLo=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDA2MDAzNSBTYWx0ZWRfX7fI+Su8wm30n
+ 9dzjtZi5jpS64/fc9usGazoH47kI+WhLhTERdC245bOyhQLKiIdgunXlknSsO976BFfoa0mHMjL
+ zVslDJ19AWQjZGJn9Lqtd2g8NafGTw941evRFK2YOp4oKYfmys1tyrDgZSgy9VhZgXqRKsa5t5G
+ gVOZB0f87EVLNPQEsN1PRZHMhJkKOcqfnA9aU9WFkD8JMkUIbJC3q8rEC2oIEdfS56n9wlaoc1X
+ +p/bfSBN4faAWGH67ez9LwdEG3WO3yLsBItwhQBdmT2vZuOMqHWI1Hr7hbEMNhvGeIIDLvTHv6p
+ t0GHzoFNvdsPvAe/foxXF7gX9xdElVpecYWooa8wUIjLHRqD6FnS39ABSwipI4sP0uR8Z3kGo11
+ TbWGfKBbno7A29GPhz5oSUXYBq5k7ryQUxstkkTOCfK31Xgxx8Sd9BLCMbPyMPq+F5fPPoWjsGj
+ mKWm/ec0MOddhgxSIWg==
+X-Proofpoint-GUID: 1xuKJvz-QvOzJCyaOQRghIUKcqnx5sv5
+X-Authority-Analysis: v=2.4 cv=SvwFe/O0 c=1 sm=1 tr=0 ts=6ac4b700 cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=ZpdpYltYx_vBUK5n70dp:22 a=e5mUnYsNAAAA:8 a=OuZLqq7tAAAA:8
+ a=wG-LvS21qxlCLh7KYX8A:9 a=QEXdDO2ut3YA:10 a=324X-CrmTo6CU4MGRt3R:22
+ a=Vxmtnl_E_bksehYqCbjh:22 a=AKGiAy9iJ-JzxKVHQNES:22
+X-Proofpoint-ORIG-GUID: 1xuKJvz-QvOzJCyaOQRghIUKcqnx5sv5
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-06_02,2026-10-05_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 bulkscore=0 lowpriorityscore=0 impostorscore=0 spamscore=0
+ adultscore=0 malwarescore=0 clxscore=1015 phishscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2610060035
 
-=D0=BF=D0=BD, 5 =D0=B6=D0=BE=D0=B2=D1=82. 2026=E2=80=AF=D1=80. =D0=BE 19:51=
- Daniel Thompson <danielt@kernel.org> =D0=BF=D0=B8=D1=88=D0=B5:
+On Mon, 5 Oct 2026 at 16:00, Muzaffer Kadir
+<muzafferkadir@mainlining.org> wrote:
 >
-> On Sun, Oct 04, 2026 at 07:41:20PM +0300, Svyatoslav Ryhel wrote:
-> > Conversion of the AAT2870 driver to use OF bindings requires a few comp=
-lex
-> > changes that should be done simultaneously.
+> On Sat,  3 Oct 2026 03:46:52 +0300, Dmitry Baryshkov wrote:
+> > On Mon, 21 Sep 2026 21:18:51 +0300, Muzaffer Kadir wrote:
+> >> MSM8952 is a SoC with 8 core cpu and Adreno 405 gpu.
+> >>
+> >> Ported without uart connection. ramoops and usb
+> >> mainly used to debug.
+> >> USB is not enabled in this series because it
+> >> depends on the not yet upstreamed (and not developed by me)
+> >> pmi8950_smbcharger.
+> >>
+> >> [...]
 > >
-> > The AAT2870 essentially provides two functions via child devices:
-> > backlight and regulators. Both functions are fairly self-sufficient and
-> > may not be populated on the final board. Consequently, the MFD
-> > registration API was replaced with of_platform_populate(), and each
-> > sub-device was given its own compatible string.
+> > Applied to ttt, thanks!
 > >
-> > Additionally, aat2870-core utilizes an enable GPIO. Obtaining this GPIO
-> > was converted to use modern gpiod/OF helpers, allowing the redundant
-> > aat2870_enable() and aat2870_disable() helpers to be removed.
-> >
-> > The aat2870-regulator driver was updated to register each of the four L=
-DOs
-> > from a dedicated OF node.
-> >
-> > The aat2870-backlight driver was changed to populate all required
-> > properties from a dedicated Device Tree node. Its channel map was updat=
-ed
-> > to use u8 instead of int. Furthermore, because the maximum current is n=
-ow
-> > parsed as an absolute value rather than an enum entry, the calculation =
-and
-> > application of the maximum current were updated accordingly.
-> >
-> > All of the changes above allow platform data to be removed entirely.
-> >
-> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > ---
-> >  drivers/mfd/aat2870-core.c            | 115 ++++++--------------------
-> >  drivers/regulator/aat2870-regulator.c |  76 ++++++++++++-----
-> >  drivers/video/backlight/aat2870_bl.c  |  55 ++++++------
-> >  include/linux/mfd/aat2870.h           |  95 +--------------------
-> >  4 files changed, 111 insertions(+), 230 deletions(-)
-> >
-> > [snip]
-> >
-> > diff --git a/drivers/video/backlight/aat2870_bl.c b/drivers/video/backl=
-ight/aat2870_bl.c
-> > index 8b790df1e842b..933a8f728f66a 100644
-> > --- a/drivers/video/backlight/aat2870_bl.c
-> > +++ b/drivers/video/backlight/aat2870_bl.c
-> > @@ -15,11 +15,19 @@
-> >  #include <linux/backlight.h>
-> >  #include <linux/mfd/aat2870.h>
-> >
-> > +/* Backlight has 8 channels, each bit represents one channel */
-> > +#define AAT2870_BL_CH_ALL    0xff
-> > +
-> > +/* Backlight current magnitude (uA), 450uA current is eq to 0 */
-> > +#define AAT2870_CURRENT_MIN  450
-> > +#define AAT2870_CURRENT_MAX  27900
-> > +#define AAT2870_CURRENT_STEP 900
-> > +
-> >  struct aat2870_bl_driver_data {
-> >       struct platform_device *pdev;
-> >       struct backlight_device *bd;
-> >
-> > -     int channels;
-> > +     u8 channels;
-> >       int max_current;
-> >       int brightness; /* current brightness */
-> >  };
-> > @@ -30,7 +38,7 @@ static inline int aat2870_brightness(struct aat2870_b=
-l_driver_data *aat2870_bl,
-> >       struct backlight_device *bd =3D aat2870_bl->bd;
-> >       int val;
-> >
-> > -     val =3D brightness * (aat2870_bl->max_current - 1);
-> > +     val =3D brightness * aat2870_bl->max_current;
-> >       val /=3D bd->props.max_brightness;
+> > [01/19] dt-bindings: clock: qcom: Add MSM8952 global clock controller
+> >         (no commit info)
+> > [02/19] clk: qcom: Add global clock controller driver for MSM8952
+> >         (no commit info)
+> > [03/19] dt-bindings: nvmem: Add compatible for MSM8952
+> >         (no commit info)
+> > [04/19] dt-bindings: power: rpmpd: Add MSM8952 power domains
+> >         (no commit info)
+> > [05/19] dt-bindings: mmc: sdhci-msm: Add MSM8952 compatible
+> >         (no commit info)
+> > [06/19] dt-bindings: vendor-prefixes: Add General Mobile
+> >         (no commit info)
+> > [07/19] dt-bindings: arm: qcom: Document MSM8952 SoC binding
+> >         (no commit info)
+> > [08/19] dt-bindings: iommu: qcom,iommu: Add MSM8952 IOMMU to SMMUv2 compatibles
+> >         (no commit info)
+> > [09/19] dt-bindings: mfd: qcom,tcsr: Add compatible for MSM8952
+> >         (no commit info)
+> > [10/19] dt-bindings: display/msm: qcom, mdp5: Add MSM8952 compatible
+> >         https://gitlab.freedesktop.org/lumag/msm/-/commit/df6ce9e6447e
+> > [11/19] dt-bindings: firmware: qcom,scm: Document MSM8952 SCM
+> >         (no commit info)
+> > [12/19] dt-bindings: clock: qcom,rpmcc: Add MSM8952 compatible
+> >         (no commit info)
+> > [13/19] drm: msm: mdp5: Add MDP5 configuration for MSM8952
+> >         https://gitlab.freedesktop.org/lumag/msm/-/commit/7af226f9aa59
+> > [14/19] soc: qcom: ubwc: Add UBWC config for MSM8952
+> >         (no commit info)
+> > [15/19] dt-bindings: thermal: tsens: Add MSM8952
+> >         (no commit info)
+> > [16/19] thermal: qcom: tsens: Add support for MSM8952 tsens
+> >         (no commit info)
+> > [17/19] arm64: dts: qcom: Add initial support for MSM8952
+> >         (no commit info)
+> > [18/19] dt-bindings: input: touchscreen: goodix: Add binding for GT970
+> >         (no commit info)
+> > [19/19] arm64: dts: qcom: generalmobile-shamrock: new device
+> >         (no commit info)
 >
-> What is the purpose of max_brightness?
+> Hi Dmitry,
 >
-> Normally it is used to limit brightness but max_current is already doing
-> that. Is it just being used to reduce the number of steps in the
-> brightness scale (and if so, why is that useful)?
+> Thanks for accepting MDP5 patches.
 >
+> The message lists all 19 patches, but only 10 and 13 have commit
+> links, the rest say "(no commit info)". Does this mean the whole
+> series was applied, or only the MDP5 ones?
 
-This is the original driver behavior; I did not modify it.
-
-The AAT2870 backlight intensity is regulated by the Main Backlight
-Current Magnitude register. It has 31 steps from 450uA (0) to 27.9mA
-(31), so even setting max_current to 0 will not disable the backlight.
-The max current value may be limited for some configurations, which is
-why this property exists.
-
-The max_brightness property determines the maximum number of steps the
-backlight can have and is mapped to the available current range
-provided by the hardware. The backlight is controlled in steps, not in
-uA.
+Only MDP5 ones.
 
 >
-> >
-> >       return val;
-> > @@ -42,7 +50,7 @@ static inline int aat2870_bl_enable(struct aat2870_bl=
-_driver_data *aat2870_bl)
-> >                       =3D dev_get_drvdata(aat2870_bl->pdev->dev.parent)=
-;
-> >
-> >       return aat2870->write(aat2870, AAT2870_BL_CH_EN,
-> > -                           (u8)aat2870_bl->channels);
-> > +                           aat2870_bl->channels);
-> >  }
-> >
-> >  static inline int aat2870_bl_disable(struct aat2870_bl_driver_data *aa=
-t2870_bl)
-> > @@ -96,24 +104,12 @@ static const struct backlight_ops aat2870_bl_ops =
-=3D {
-> >
-> >  static int aat2870_bl_probe(struct platform_device *pdev)
-> >  {
-> > -     struct aat2870_bl_platform_data *pdata =3D dev_get_platdata(&pdev=
-->dev);
-> >       struct aat2870_bl_driver_data *aat2870_bl;
-> >       struct backlight_device *bd;
-> >       struct backlight_properties props;
-> > +     u32 max_brightness =3D 0;
-> >       int ret =3D 0;
-> >
-> > -     if (!pdata) {
-> > -             dev_err(&pdev->dev, "No platform data\n");
-> > -             ret =3D -ENXIO;
-> > -             goto out;
-> > -     }
-> > -
-> > -     if (pdev->id !=3D AAT2870_ID_BL) {
-> > -             dev_err(&pdev->dev, "Invalid device ID, %d\n", pdev->id);
-> > -             ret =3D -EINVAL;
-> > -             goto out;
-> > -     }
-> > -
-> >       aat2870_bl =3D devm_kzalloc(&pdev->dev,
-> >                                 sizeof(struct aat2870_bl_driver_data),
-> >                                 GFP_KERNEL);
-> > @@ -140,18 +136,18 @@ static int aat2870_bl_probe(struct platform_devic=
-e *pdev)
-> >
-> >       aat2870_bl->bd =3D bd;
-> >
-> > -     if (pdata->channels > 0)
-> > -             aat2870_bl->channels =3D pdata->channels;
-> > -     else
-> > -             aat2870_bl->channels =3D AAT2870_BL_CH_ALL;
-> > +     aat2870_bl->channels =3D AAT2870_BL_CH_ALL;
-> > +     device_property_read_u8(&pdev->dev, "skyworks,channels", &aat2870=
-_bl->channels);
-> >
-> > -     if (pdata->max_current > 0)
-> > -             aat2870_bl->max_current =3D pdata->max_current;
-> > -     else
-> > -             aat2870_bl->max_current =3D AAT2870_CURRENT_27_9;
-> > +     device_property_read_u32(&pdev->dev, "led-max-microamp", &aat2870=
-_bl->max_current);
-> > +     aat2870_bl->max_current =3D clamp(aat2870_bl->max_current, AAT287=
-0_CURRENT_MIN,
-> > +                                     AAT2870_CURRENT_MAX);
-> > +     aat2870_bl->max_current /=3D AAT2870_CURRENT_STEP;
-> >
-> > -     if (pdata->max_brightness > 0)
-> > -             bd->props.max_brightness =3D pdata->max_brightness;
-> > +     /* If max-brightness property is missing or set to zero, use chip=
-'s max value */
-> > +     device_property_read_u32(&pdev->dev, "max-brightness", &max_brigh=
-tness);
-> > +     if (max_brightness)
-> > +             bd->props.max_brightness =3D max_brightness;
-> >       else
-> >               bd->props.max_brightness =3D 255;
+> Best regards,
+> Muzaffer Kadir
 >
-> IIUC max_current can be zero (since AAT2870_CURRENT_MIN <
-> AAT2870_CURRENT_STEP). Since that means aat2870_brightness() will
-> always return 0 then there might need to be a special case
-> max_brightness for this case.
->
->
-> > @@ -181,9 +177,16 @@ static void aat2870_bl_remove(struct platform_devi=
-ce *pdev)
-> >       backlight_update_status(bd);
-> >  }
-> >
-> > +static const struct of_device_id aat2870_bl_match_table[] =3D {
-> > +     { .compatible =3D "skyworks,aat2870-backlight" },
-> > +     { }
-> > +};
-> > +MODULE_DEVICE_TABLE(of, aat2870_bl_match_table);
-> > +
-> >  static struct platform_driver aat2870_bl_driver =3D {
-> >       .driver =3D {
-> >               .name   =3D "aat2870-backlight",
-> > +             .of_match_table =3D aat2870_bl_match_table,
-> >       },
-> >       .probe          =3D aat2870_bl_probe,
-> >       .remove         =3D aat2870_bl_remove,
->
->
-> Daniel.
+
+
+-- 
+With best wishes
+Dmitry
