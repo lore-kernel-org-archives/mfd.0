@@ -1,129 +1,185 @@
-Received: from mail-oa2-f0.google.com (mail-oa2-f0.google.com [74.125.231.64])
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE325335BB4
-	for <mfd@lists.linux.dev>; Wed,  7 Oct 2026 00:57:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.231.64
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52C274772B9
+	for <mfd@lists.linux.dev>; Wed,  7 Oct 2026 09:21:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.176
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791334630; cv=none; b=S2/mZZ6ON0YtxDoROQ3UyLCQnwc6prC6mP4uFlmaXViOoqX/wzW00KAJBkfHfyX4bdg/x+MR+F0CthtBnIOSuz7028R2tRlikN3PZ4+oB0ps+TNcB/JC72hCMnsY1pdEoM0bSpCy0UeZwRHhGhEdgogn2ASy5vwKJ3c9k7euD8c=
+	t=1791364919; cv=none; b=cKt2EDbNZrNMf4A1uiijdAFIsNgXWZoO4TXfgy2S4s6n1XL4jWVDK1AsHCUlq28A5PxuOxRZRQQksn20NYnXVgWIOJ1Y05vOXmc6iUh1JQFtevCuhpxsjytdxh/PoI8M6JJd069rofJ+cvIq7ElFOLsE7b+tWIBwgAyZnjWmNAY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791334630; c=relaxed/simple;
-	bh=7qihWULzhNXrMFY/3lzqq7H5HpmEEjJl5mAZAg5n+k0=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=BS3EJk4Ecq0epJJN9DuDFw1OzeAE8Fa79lSLhXthYuXpc/etY7PXCeuKFG0cexvl/zT9vgujKImxb4E22kWqC8qQWYi5L6ITfeq6C3aw/XePICaoO7/QOJOQ1XsF5WlhWig2JYLG8xDQR2LtlEohYIjZuAN8lAX7VXuQhWbyMME=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MBfy3o2n; arc=none smtp.client-ip=74.125.231.64
+	s=arc-20240116; t=1791364919; c=relaxed/simple;
+	bh=+Ju91HUYCrAJkLFhcR6F8nncRnW05DqCyv+NaE3hbFU=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version; b=GOQSTHSp1OAcm6I444Gnf9gI6fwSgt+E0q07R+AL2iaPrrrJhq99tI5BskwPJtJebZ7ni9ktOqgIqBQEXy5lkoWt0zXLqvK9zZvVuVJgTtWZmXN26ECbAMpvgm9t9DoF62j/ih32IispkUOe0rwry0Kxt0D24QJ3QThlJ7IBBTY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=sHE1RE+n; arc=none smtp.client-ip=209.85.214.176
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MBfy3o2n"
-Received: by mail-oa2-f0.google.com with SMTP id 586e51a60fabf-451e1066971so1376685fac.0
-        for <mfd@lists.linux.dev>; Tue, 06 Oct 2026 17:57:08 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="sHE1RE+n"
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2dd1dcdcf95so9822455ad.1
+        for <mfd@lists.linux.dev>; Wed, 07 Oct 2026 02:21:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791334627; x=1791939427; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=TAIWhhMv3PYHKISI/ix1jVDueQPVFVtzNluL37GORz0=;
-        b=MBfy3o2nU+tVcsNjIHsTt6ua/d3/OzVPgmAdYmyBm0X6Mch1IIq3mUDvl9H2KYu6v5
-         evHiXYwasRBbzDTjqSL1lqMX1cV/iH/1sGG/yEx/j1Ojsi4De0OfHr+xYhK9ovFCYRrl
-         m9EA/XLXOfBemjCRgY68CmIrrV3bOw0H8jCEJkGIiHHAPxMULRl7+w82JzD5++XNsaQg
-         2ZHzLpNGl53vmn2uhBHSTdV3oulXQRMZeT4NIJzLVcK7XrjV5f5yI/gOawB54kct87yl
-         IdhEZQHTg7pl2oPdu+YN13xWyoQXZ66DhJz+GRf+wkgkvG2ApqjjVl1u+ghhsyt8bGQj
-         xhfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791334627; x=1791939427;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1791364885; x=1791969685; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=TAIWhhMv3PYHKISI/ix1jVDueQPVFVtzNluL37GORz0=;
-        b=MwvA4b2OcuuNdObCTxWm1vSDKUvyZnrXCtW3vAQ65T02GKT/VJ6FAr/ZEioLcYUONf
-         YZ+s1XjG3beEEHWR0QZk5aTCyCZUl0d1xhh7Kh9Tefw5AhXYZlOOH1PWDJnJo4HQssyZ
-         LhWWVHGZ7ncuLN10po9cEUgDuQqPeOtUNPneDVIGp/CgWPog0ziDi4p4hi+GwdaRWSDP
-         /TWoj++3hcXSAHp7MpGhmDQhHJ1YwfWJux/Obyx60pE3sLahsq4m0hPmX7HH68of0vW4
-         umyOP0oPrTfHQJ2x6SFmeU3AjLyQMZTTEDV81qJXIEAM/iXdG/6piQ2Ft4BEn3G5uNI5
-         9UbQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxzI0JH9DxeEYu0jP+a84Dk/FuQSl/+FPFti1iZNzJ8LtsNlyZNcbcwRH2wtJBlIzGt0co=@lists.linux.dev
-X-Gm-Message-State: AFuF++liCUH1wwbXUs2wlsMbfYlZXCqrxepBM9wryCf9N6CDj+/3Eck8
-	kqZHUy7WfeP/0SAzglF9w1JKJUdqqPoJqRC8G+ypPbtGlcCs9OpE42AM
-X-Gm-Gg: AYBFou2DiRIlyAzbmHBHFPMIB/olEGr4gQz/DToWKDAN8sXYUvxltzL0WKf4YqI7D74
-	Q8QbW2h2eQUZ/JjiOTmrYZXJfFDllfdIZHgC6usiUV1HUXQstMRUshDQUx0wzHxCawwv7AtimBX
-	+bBQawK16CWDLwq80qdNYJQdZN6dlzF+LTaLi7gqRCInrb7sSW/G5rn059xWeWvCcg3ZfZ/V/hy
-	foHNdhdmQ56yWLYe5wiSDIux8/+wQjf7oyLV9u+Pt5YfrO/grPBCnQH9fZi8AG3uRkwJcTGEb7/
-	EUUNPE7m/vFT4aARNCyPUJWDeTvn/5EQ5oG4VaMYpyjrPAGLC76qO0jrUQNeVh5zLc6oG9TtUL1
-	NUkcoeX6ybhleiwYCRnGTq955N+PMrWV4DI+nAeSiiybulaDPvs0WCe4ZZ3Gcp6e+H61PkKVnzl
-	CbpXuKFDNl5OzHlAr3A3T43Zp3OTjwplpmVkZTBL+zQLmdhF3Ychot5OcH4DbRWv+3TELM90657
-	shl0nIqWEbbHlfck2H6BVp2WaBHc//H9SLvgYaisUxkXif6qTkL
-X-Received: by 2002:a4a:e90d:0:b0:6dc:e1c3:b2d5 with SMTP id 006d021491bc7-6e7a913602amr915341eaf.75.1791334627605;
-        Tue, 06 Oct 2026 17:57:07 -0700 (PDT)
-Received: from ?IPV6:2600:100b:b034:8212:4cd5:c80f:ba72:80cb? ([2600:100b:b034:8212:4cd5:c80f:ba72:80cb])
-        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-4a25722e3d8sm1005183fac.15.2026.10.06.17.57.02
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 06 Oct 2026 17:57:04 -0700 (PDT)
-Message-ID: <d3d3e7b3-eb8b-456d-9a2c-116334e86c14@gmail.com>
-Date: Tue, 6 Oct 2026 19:57:01 -0500
+        bh=TuYCd8BtK0Pu5eXwDtQHw6mxURWuNtr5LMlu4gmWNag=;
+        b=sHE1RE+neysB2brTsnnjialYAB5+BmHW3RRmkmSSdn7KJOkS/Ky4negkh+fyHnA+Pc
+         Ma6cKoFX6B/vXGXDQrgeHOg71veXq+njGR5n7/9+RcW8VSwW27mQom7MCeYvAhQk/IYt
+         9rixWuM4NNsM6X8M+nf6YL2ydho4gz9FbBYpgV2j9S4RcM0ysMc4SZDmS+hA0xkcfcFG
+         +fJpTl3+Nbc5ohQvoGRbTz1JyBYtqBhke40BGk6+5eRemitaodYPZOl16fe/7GpHP1sC
+         uKqFx33jq+OBdvnuAOi/5e49mNNTm8dELNDwQKMktgeKC1el/PBq2oN10icZ0adSF4d2
+         p50A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791364885; x=1791969685;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=TuYCd8BtK0Pu5eXwDtQHw6mxURWuNtr5LMlu4gmWNag=;
+        b=2hqcUgCH8RXmYaad51SORqMi6N0i488i4XiUmRhxA/YX0VMJjxccpo0ugyLtr6bIQd
+         ZQDBXlzerSj4KGNbISi8TKZaQhTEp4aBerZm25pBQJn2h6BLm4Z/8a4J4j50GsHeSUxb
+         XkxJosS2PPomQ05AgNODsa/yiYMoKDd7+yoIoUhiAK4Af/cyZyVz47uySL5gKnWgqFqV
+         GBF6dKPsu8kk3p/KVWAvumnvuxGiB3P9+C/S+75Xsl9wj5XddsDU9v27kUl6g0PFSSUn
+         wDNG7qIYRJ/DDyvst+bgNHLHKR5daCf9/pOREn9uqP58Jugp7JCAi1nUFsz0qh1XSOll
+         I1mQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwzrF2NGs6me9jbVE48qmhHppUAcgYlZVluPbw9I40axUp1IeILyzKjMRAYd80jFcaWnSU=@lists.linux.dev
+X-Gm-Message-State: AFq9FYLhiVCVDQdjUjlRfxPC1yWtoawUs4zzzv/I+iKdQmJkL4646vn+
+	2i4Xqq2F+k4WdbcbkywSYvuCB7U7qYPcR4hlmo87qmN/D0rN5Su8lCHA
+X-Gm-Gg: AYBFou2Dtm20m331+5QvfU65b9xzWoc69EQe0kv7NaGE804Y2aATG1LpPjgGrpf/HB4
+	vtC1Fa7uvXxmhiZW2oQ4yGhifl5G0THsdA+nFfJy07L7QV1w27465hk848R19pw4/0FOxthkbWg
+	x+b1dD2oAONXi0KqFNa1ETf7LbEFCkzgnEAk846VbT31uoem8QA+YP3wEAeVn2MXvY8+zce53bW
+	RQBGoyc0CLdttdfH+0ozVGz5lYqHZbtl6HbTs9W+Sf0CWlYzXDsAI1h0vtll++rj62wsokysas/
+	EPff2kUjraIWOs0wZ5IrB7rVkxfa5SI4m/xFeEbJLfRJxLOuhWSM8TCTV29qhK15r368Fv1g8G0
+	smBeQ7ICLJPRe742MROZVV9DFusA9AH1JBHaD5ohiSUZOPEheGzR+B/HrAF7AMdcCzVSqKhrBsL
+	4uq8Xz8R6Yce8QE5cfpVTgFE9LPhuUEEvw8vUolHpykn92/BrTwLJFSExqdwRTNPUkWH+oKw3ZS
+	Ne2uAjyC7Dci5+rYxMg2nC88XND94COQ2SRorqd
+X-Received: by 2002:a17:902:ea0b:b0:2df:8ff9:5160 with SMTP id d9443c01a7336-2e6005633d5mr12205635ad.34.1791364885451;
+        Wed, 07 Oct 2026 02:21:25 -0700 (PDT)
+Received: from hcdev-d520mt2.. (60-250-196-139.hinet-ip.hinet.net. [60.250.196.139])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2e6046fe0e8sm7180675ad.25.2026.10.07.02.21.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 07 Oct 2026 02:21:24 -0700 (PDT)
+From: a0282524688@gmail.com
+To: lee@kernel.org,
+	Ming Yu <tmyu0@nuvoton.com>
+Cc: linux-kernel@vger.kernel.org,
+	Ming Yu <a0282524688@gmail.com>,
+	mfd@lists.linux.dev
+Subject: [PATCH v8 02/13] mfd: nct6694: Validate the USB endpoints
+Date: Wed,  7 Oct 2026 17:20:51 +0800
+Message-Id: <20261007092102.3768818-3-a0282524688@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20261007092102.3768818-1-a0282524688@gmail.com>
+References: <20261007092102.3768818-1-a0282524688@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] pinctrl: mediatek: common-v1: Use a raw spinlock for the
- pinctrl regmap
-To: Chen-Yu Tsai <wenst@chromium.org>,
- Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-Cc: Mark Brown <broonie@kernel.org>, Lee Jones <lee@kernel.org>,
- Arnd Bergmann <arnd@arndb.de>, Sean Wang <sean.wang@kernel.org>,
- Linus Walleij <linusw@kernel.org>, Matthias Brugger
- <matthias.bgg@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Bartosz Golaszewski <brgl@kernel.org>, Clark Williams
- <clrkwllms@kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
- Yingjoe Chen <yingjoe.chen@mediatek.com>,
- Chaotian Jing <chaotian.jing@mediatek.com>,
- Hongzhou Yang <hongzhou.yang@mediatek.com>,
- linux-mediatek@lists.infradead.org, linux-gpio@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-rt-devel@lists.linux.dev, mfd@lists.linux.dev
-References: <20260929-rbrue-suez-upstreaming-mtk-pinctrl-raw-regmap-v1-1-db92943f42cb@gmail.com>
- <20260930080609.dnK1-Uta@linutronix.de>
- <CAGXv+5FssQL3Go3VDFbLAT6HP12RS3U3OgxhYOeapzs64QTdUw@mail.gmail.com>
-Content-Language: en-US
-From: Ryan Brue <ryanbrue.dev@gmail.com>
-In-Reply-To: <CAGXv+5FssQL3Go3VDFbLAT6HP12RS3U3OgxhYOeapzs64QTdUw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi Chen-Yu and Sebastian,
+From: Ming Yu <a0282524688@gmail.com>
 
-Thanks for looking at this.
+The probe reads endpoint[0] of the current altsetting without checking
+that the interface describes any endpoint, and the bulk endpoints used
+for the command transfers are never validated. A malformed device can
+make the driver read past the endpoint array or submit URBs to
+endpoints of the wrong type.
 
-On 9/30/26 3:17 AM, Chen-Yu Tsai wrote:
-> The syscon node is the provider of the regmap. You need to fix it there,
-> not duplicate it in the consumer.
+The interface exposes several interrupt and bulk endpoints, of which
+only EP1 IN, EP2 IN and EP3 OUT carry the command interface, so the
+endpoints cannot be looked up by type. Check that the expected
+endpoints are present with usb_check_{bulk,int}_endpoints(), and take
+the polling interval from the interrupt endpoint actually used.
 
-Unless I'm misunderstanding, no driver binds to that node, so its regmap 
-comes from the generic syscon code, and changing it there would affect 
-every syscon. Lee, Arnd, Mark, would that be acceptable?
+Define the interrupt endpoint by its number, like the bulk endpoints,
+as the pipe macros expect an endpoint number rather than an address.
 
-These are the options I see. Please let me know if there's a better one:
+Fixes: 51dad33ede63 ("mfd: Add core driver for Nuvoton NCT6694")
+Signed-off-by: Ming Yu <a0282524688@gmail.com>
+---
+Changes in v8:
+- Also validate the bulk endpoints. Keep the fixed endpoint numbers and
+  check them with usb_check_{bulk,int}_endpoints() instead of looking
+  up the first endpoint of each type, as the interface exposes several
+  interrupt and bulk endpoints.
+- Take the polling interval from the interrupt endpoint actually used,
+  and define it by its number like the bulk endpoints.
 
-- Do what Sebastian suggested and make syscon use a raw spinlock, except 
-when the node has a clock, since regmap-mmio calls clk_enable() under 
-the lock. Off PREEMPT_RT, nothing changes. On RT the lock would no 
-longer be preemptible for most syscons, including across bulk writes. 
-Most syscon users that do bulk writes only write a few registers, but 
-enabling the Amlogic G12A PCIe PLL writes a sequence with 40 us of 
-udelay() under the lock.
-- Have the pinctrl ioremap() the node a second time alongside syscon's 
-mapping and read the input register (DIN) with readl(). That read is the 
-only access the EINT code makes in raw context. This would go around the 
-syscon, and it requires that DIN never be written in a multi-step 
-sequence, which is currently the case.
+Changes in v7:
+- New patch.
 
-I'd like to know the best approach before sending out a v2.
+ drivers/mfd/nct6694.c       | 29 +++++++++++++++++------------
+ include/linux/mfd/nct6694.h |  2 +-
+ 2 files changed, 18 insertions(+), 13 deletions(-)
 
-Best regards,
-Ryan Brue
+diff --git a/drivers/mfd/nct6694.c b/drivers/mfd/nct6694.c
+index 308b2fda3055..b9526b22754c 100644
+--- a/drivers/mfd/nct6694.c
++++ b/drivers/mfd/nct6694.c
+@@ -273,13 +273,25 @@ static const struct irq_domain_ops nct6694_irq_domain_ops = {
+ static int nct6694_usb_probe(struct usb_interface *iface,
+ 			     const struct usb_device_id *id)
+ {
++	static const u8 bulk_ep_addr[] = {
++		USB_DIR_IN | NCT6694_BULK_IN_EP,
++		USB_DIR_OUT | NCT6694_BULK_OUT_EP,
++		0
++	};
++	static const u8 int_ep_addr[] = {
++		USB_DIR_IN | NCT6694_INT_IN_EP,
++		0
++	};
+ 	struct usb_device *udev = interface_to_usbdev(iface);
+-	struct usb_endpoint_descriptor *int_endpoint;
+-	struct usb_host_interface *interface;
+ 	struct device *dev = &iface->dev;
+ 	struct nct6694 *nct6694;
++	unsigned int int_pipe;
+ 	int ret;
+ 
++	if (!usb_check_bulk_endpoints(iface, bulk_ep_addr) ||
++	    !usb_check_int_endpoints(iface, int_ep_addr))
++		return -ENODEV;
++
+ 	nct6694 = devm_kzalloc(dev, sizeof(*nct6694), GFP_KERNEL);
+ 	if (!nct6694)
+ 		return -ENOMEM;
+@@ -318,17 +330,10 @@ static int nct6694_usb_probe(struct usb_interface *iface,
+ 	if (ret)
+ 		goto err_ida;
+ 
+-	interface = iface->cur_altsetting;
+-
+-	int_endpoint = &interface->endpoint[0].desc;
+-	if (!usb_endpoint_is_int_in(int_endpoint)) {
+-		ret = -ENODEV;
+-		goto err_ida;
+-	}
+-
+-	usb_fill_int_urb(nct6694->int_in_urb, udev, usb_rcvintpipe(udev, NCT6694_INT_IN_EP),
++	int_pipe = usb_rcvintpipe(udev, NCT6694_INT_IN_EP);
++	usb_fill_int_urb(nct6694->int_in_urb, udev, int_pipe,
+ 			 nct6694->int_buffer, sizeof(*nct6694->int_buffer), usb_int_callback,
+-			 nct6694, int_endpoint->bInterval);
++			 nct6694, usb_pipe_endpoint(udev, int_pipe)->desc.bInterval);
+ 
+ 	ret = usb_submit_urb(nct6694->int_in_urb, GFP_KERNEL);
+ 	if (ret)
+diff --git a/include/linux/mfd/nct6694.h b/include/linux/mfd/nct6694.h
+index 6eb9be2cd4a0..a5ad7be47bf9 100644
+--- a/include/linux/mfd/nct6694.h
++++ b/include/linux/mfd/nct6694.h
+@@ -10,7 +10,7 @@
+ 
+ #define NCT6694_VENDOR_ID	0x0416
+ #define NCT6694_PRODUCT_ID	0x200B
+-#define NCT6694_INT_IN_EP	0x81
++#define NCT6694_INT_IN_EP	0x01
+ #define NCT6694_BULK_IN_EP	0x02
+ #define NCT6694_BULK_OUT_EP	0x03
+ 
+-- 
+2.34.1
+
