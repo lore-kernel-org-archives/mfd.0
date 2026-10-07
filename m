@@ -1,146 +1,129 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-oa2-f0.google.com (mail-oa2-f0.google.com [74.125.231.64])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DED1F46D551;
-	Tue,  6 Oct 2026 15:52:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE325335BB4
+	for <mfd@lists.linux.dev>; Wed,  7 Oct 2026 00:57:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.231.64
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791301939; cv=none; b=tty1rwuiFHhRrszfyxn/oaZQ8Yoq/0dsuty5n03yILbiGfJXltjegLS35xDbASFdbhbtpFwRnLpvNdj9+bbyOxqwcQCQ4UvRMthEXqCZsU0C3VjII4WABSO2o6EoSZYuOOsCyDKJTGBXBZPQHT7rLEDZD2DmhzSwsZaBo9MJoos=
+	t=1791334630; cv=none; b=S2/mZZ6ON0YtxDoROQ3UyLCQnwc6prC6mP4uFlmaXViOoqX/wzW00KAJBkfHfyX4bdg/x+MR+F0CthtBnIOSuz7028R2tRlikN3PZ4+oB0ps+TNcB/JC72hCMnsY1pdEoM0bSpCy0UeZwRHhGhEdgogn2ASy5vwKJ3c9k7euD8c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791301939; c=relaxed/simple;
-	bh=twFaY/jlgIalOZ6sQjAlGf9KORPCSmeJkuzt3F0y0yU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=PxDV48PCtdpOjSZOxiN9P8u4xCV8J6V1VgRGyLNfs3ocLHYRIMbDLiBcD4Ikf+yry6TcyBPUFhFCeRV0Co7Q7v7+cdsHd0rLAD38X/WOzc7KVWgf1ZUC/ksop50PwUufJsjr6Evs+mR62Oq48m3GNnUtT3QjVGnjpbH2Dv320HY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KOX43lIH; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791334630; c=relaxed/simple;
+	bh=7qihWULzhNXrMFY/3lzqq7H5HpmEEjJl5mAZAg5n+k0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=BS3EJk4Ecq0epJJN9DuDFw1OzeAE8Fa79lSLhXthYuXpc/etY7PXCeuKFG0cexvl/zT9vgujKImxb4E22kWqC8qQWYi5L6ITfeq6C3aw/XePICaoO7/QOJOQ1XsF5WlhWig2JYLG8xDQR2LtlEohYIjZuAN8lAX7VXuQhWbyMME=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MBfy3o2n; arc=none smtp.client-ip=74.125.231.64
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KOX43lIH"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 455931F0089B;
-	Tue,  6 Oct 2026 15:52:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791301937;
-	bh=2Ub01gSpzkIPPc4VtXS/tUHnccetbhBgf8QWwTXERhw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=KOX43lIHXnXkOiPR8I7vX0iKTjhaYX1YpvjfUgBRcZYDu3hJU0USj+jKBrcKJnMcY
-	 Ph5T7kQ8XvvxDD/389E5TWK6DIRy+b4fxBwVa211/ZSpLoqTjEFLeY1ohgVBkWTO6B
-	 s5Mwrnjv0JfUixAu6KuzmciG0OUJbJI2idVC7h/hpeEmi/OqHs6MxY2+lnEaGoHpuO
-	 7JS4jaMRCs5GnPpb9/svHfMvW+zJjDppK6xW5xohEImdypQtfh1h+WITqlGmw8rq+X
-	 RDUkzM42SA5YNpl0Femws1pLptpj3T3EHvXrAy4BSm7iQDbhy+76QCUmf948ra1K/v
-	 fX/9qNmcyMrHQ==
-Date: Tue, 6 Oct 2026 10:52:16 -0500
-From: "Rob Herring (Arm)" <robh@kernel.org>
-To: Quchaosheng <quchaosheng000406@163.com>
-Cc: Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
-	mfd@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
-	Zhang Qing <zhangqing@rock-chips.com>,
-	linux-rockchip@lists.infradead.org, devicetree@vger.kernel.org,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Heiko Stuebner <heiko@sntech.de>, Chris Zhong <zyw@rock-chips.com>,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v5] dt-bindings: mfd: rockchip,rk805: Convert pinctrl to
- DT schema
-Message-ID: <179130193622.2397071.7473599240811145793.robh@kernel.org>
-References: <20260923083001.606935-1-quchaosheng000406@163.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MBfy3o2n"
+Received: by mail-oa2-f0.google.com with SMTP id 586e51a60fabf-451e1066971so1376685fac.0
+        for <mfd@lists.linux.dev>; Tue, 06 Oct 2026 17:57:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791334627; x=1791939427; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=TAIWhhMv3PYHKISI/ix1jVDueQPVFVtzNluL37GORz0=;
+        b=MBfy3o2nU+tVcsNjIHsTt6ua/d3/OzVPgmAdYmyBm0X6Mch1IIq3mUDvl9H2KYu6v5
+         evHiXYwasRBbzDTjqSL1lqMX1cV/iH/1sGG/yEx/j1Ojsi4De0OfHr+xYhK9ovFCYRrl
+         m9EA/XLXOfBemjCRgY68CmIrrV3bOw0H8jCEJkGIiHHAPxMULRl7+w82JzD5++XNsaQg
+         2ZHzLpNGl53vmn2uhBHSTdV3oulXQRMZeT4NIJzLVcK7XrjV5f5yI/gOawB54kct87yl
+         IdhEZQHTg7pl2oPdu+YN13xWyoQXZ66DhJz+GRf+wkgkvG2ApqjjVl1u+ghhsyt8bGQj
+         xhfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791334627; x=1791939427;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=TAIWhhMv3PYHKISI/ix1jVDueQPVFVtzNluL37GORz0=;
+        b=MwvA4b2OcuuNdObCTxWm1vSDKUvyZnrXCtW3vAQ65T02GKT/VJ6FAr/ZEioLcYUONf
+         YZ+s1XjG3beEEHWR0QZk5aTCyCZUl0d1xhh7Kh9Tefw5AhXYZlOOH1PWDJnJo4HQssyZ
+         LhWWVHGZ7ncuLN10po9cEUgDuQqPeOtUNPneDVIGp/CgWPog0ziDi4p4hi+GwdaRWSDP
+         /TWoj++3hcXSAHp7MpGhmDQhHJ1YwfWJux/Obyx60pE3sLahsq4m0hPmX7HH68of0vW4
+         umyOP0oPrTfHQJ2x6SFmeU3AjLyQMZTTEDV81qJXIEAM/iXdG/6piQ2Ft4BEn3G5uNI5
+         9UbQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxzI0JH9DxeEYu0jP+a84Dk/FuQSl/+FPFti1iZNzJ8LtsNlyZNcbcwRH2wtJBlIzGt0co=@lists.linux.dev
+X-Gm-Message-State: AFuF++liCUH1wwbXUs2wlsMbfYlZXCqrxepBM9wryCf9N6CDj+/3Eck8
+	kqZHUy7WfeP/0SAzglF9w1JKJUdqqPoJqRC8G+ypPbtGlcCs9OpE42AM
+X-Gm-Gg: AYBFou2DiRIlyAzbmHBHFPMIB/olEGr4gQz/DToWKDAN8sXYUvxltzL0WKf4YqI7D74
+	Q8QbW2h2eQUZ/JjiOTmrYZXJfFDllfdIZHgC6usiUV1HUXQstMRUshDQUx0wzHxCawwv7AtimBX
+	+bBQawK16CWDLwq80qdNYJQdZN6dlzF+LTaLi7gqRCInrb7sSW/G5rn059xWeWvCcg3ZfZ/V/hy
+	foHNdhdmQ56yWLYe5wiSDIux8/+wQjf7oyLV9u+Pt5YfrO/grPBCnQH9fZi8AG3uRkwJcTGEb7/
+	EUUNPE7m/vFT4aARNCyPUJWDeTvn/5EQ5oG4VaMYpyjrPAGLC76qO0jrUQNeVh5zLc6oG9TtUL1
+	NUkcoeX6ybhleiwYCRnGTq955N+PMrWV4DI+nAeSiiybulaDPvs0WCe4ZZ3Gcp6e+H61PkKVnzl
+	CbpXuKFDNl5OzHlAr3A3T43Zp3OTjwplpmVkZTBL+zQLmdhF3Ychot5OcH4DbRWv+3TELM90657
+	shl0nIqWEbbHlfck2H6BVp2WaBHc//H9SLvgYaisUxkXif6qTkL
+X-Received: by 2002:a4a:e90d:0:b0:6dc:e1c3:b2d5 with SMTP id 006d021491bc7-6e7a913602amr915341eaf.75.1791334627605;
+        Tue, 06 Oct 2026 17:57:07 -0700 (PDT)
+Received: from ?IPV6:2600:100b:b034:8212:4cd5:c80f:ba72:80cb? ([2600:100b:b034:8212:4cd5:c80f:ba72:80cb])
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-4a25722e3d8sm1005183fac.15.2026.10.06.17.57.02
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 06 Oct 2026 17:57:04 -0700 (PDT)
+Message-ID: <d3d3e7b3-eb8b-456d-9a2c-116334e86c14@gmail.com>
+Date: Tue, 6 Oct 2026 19:57:01 -0500
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260923083001.606935-1-quchaosheng000406@163.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] pinctrl: mediatek: common-v1: Use a raw spinlock for the
+ pinctrl regmap
+To: Chen-Yu Tsai <wenst@chromium.org>,
+ Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+Cc: Mark Brown <broonie@kernel.org>, Lee Jones <lee@kernel.org>,
+ Arnd Bergmann <arnd@arndb.de>, Sean Wang <sean.wang@kernel.org>,
+ Linus Walleij <linusw@kernel.org>, Matthias Brugger
+ <matthias.bgg@gmail.com>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+ Bartosz Golaszewski <brgl@kernel.org>, Clark Williams
+ <clrkwllms@kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
+ Yingjoe Chen <yingjoe.chen@mediatek.com>,
+ Chaotian Jing <chaotian.jing@mediatek.com>,
+ Hongzhou Yang <hongzhou.yang@mediatek.com>,
+ linux-mediatek@lists.infradead.org, linux-gpio@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-rt-devel@lists.linux.dev, mfd@lists.linux.dev
+References: <20260929-rbrue-suez-upstreaming-mtk-pinctrl-raw-regmap-v1-1-db92943f42cb@gmail.com>
+ <20260930080609.dnK1-Uta@linutronix.de>
+ <CAGXv+5FssQL3Go3VDFbLAT6HP12RS3U3OgxhYOeapzs64QTdUw@mail.gmail.com>
+Content-Language: en-US
+From: Ryan Brue <ryanbrue.dev@gmail.com>
+In-Reply-To: <CAGXv+5FssQL3Go3VDFbLAT6HP12RS3U3OgxhYOeapzs64QTdUw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
+Hi Chen-Yu and Sebastian,
 
-On Wed, 23 Sep 2026 16:30:01 +0800, Quchaosheng wrote:
-> pinctrl-rk805.txt describes the pinmux controller that is part of the
-> Rockchip RK805 PMIC. The PMIC itself is already described by
-> rockchip,rk805.yaml, so the pinmux part belongs there as well: the
-> pinctrl node is a child of the PMIC node, not a separate device.
-> 
-> Fold the pinmux description into rockchip,rk805.yaml and drop the
-> standalone text binding.
-> 
-> While doing so, add the missing child node schema. The rockchip,rk805.yaml
-> schema ends with 'additionalProperties: false' but did not describe the pin
-> configuration child nodes at all, so a valid pinmux node like the one shown
-> in pinctrl-rk805.txt was rejected:
-> 
->     pmic@18 (rockchip,rk805): 'rk805-default-pins' does not match any of
->     the regexes: '^pinctrl-[0-9]+$'
-> 
-> The pin configuration nodes require 'pins'; without it a node that names
-> no pin is accepted silently, while the text binding it replaces listed
-> 'pins' as required. The RK805 exposes two output-only GPIOs, so 'pins' is
-> an enum of gpio0 and gpio1 and a typo such as "gpio2" is caught.
-> 
-> The nodes may be direct children of the PMIC, or sit one level deeper
-> inside a "pinmux" grouping node, which is the layout the example of the
-> text binding used. pinctrl-bindings.txt allows the configuration nodes to
-> be grandchildren of the pin controller, and the driver reaches both
-> layouts: pinconf_generic_dt_node_to_map() parses the referenced node and
-> then walks its children. The example shows both.
-> 
-> The example also regains the gpio-controller and #gpio-cells lines that the
-> example of the text binding had.
-> 
-> Reported-by: Sashiko <sashiko-bot@kernel.org>
-> Link: https://sashiko.dev/#/patchset/20260923034245.396417-1-quchaosheng000406@163.com?part=1
-> Link: https://sashiko.dev/#/patchset/20260923062746.516666-1-quchaosheng000406@163.com?part=1
-> Link: https://sashiko.dev/#/patchset/20260923074337.575122-1-quchaosheng000406@163.com?part=1
-> Assisted-by: LLM
-> Signed-off-by: Quchaosheng <quchaosheng000406@163.com>
-> ---
-> Changes in v5:
-> - The child nodes of the "pinmux" node were matched with a patternProperties
->   entry guarded by "if: type: object". That has no "else", so a non-object
->   property of the grouping node, a misspelled "typo = <1>;" for instance,
->   matched the pattern and passed. Match them with additionalProperties
->   against the same definition instead. dtschema puts phandle and status into
->   the allowed properties there, so the grouping node keeps the phandle that
->   pinctrl-0 points at, and every other property has to be a pin
->   configuration node.
-> 
-> Changes in v4:
-> - Describe the pin configuration nodes both as direct children and inside a
->   "pinmux" grouping node. Only the flat form was described, so the layout
->   used by the example of the text binding this replaces was still rejected:
-> 
->     pmic@18 (rockchip,rk805): 'pinmux' does not match any of the regexes:
->       '-pins$', '^pinctrl-[0-9]+$'
-> 
->   The nodes are now one definition referenced from both places, and the
->   example shows the flat node and a "pinmux" node holding one.
-> - Name the binding in the summary, as
->   Documentation/devicetree/bindings/submitting-patches.rst shows for a
->   conversion ("dt-bindings: iio: adc: adi,ad7476: Convert to DT schema").
-> 
-> Changes in v3:
-> - Capitalize the summary phrase. dt-bindings: mfd: titles are capitalized
->   after the subsystem prefix (Add 61, Convert 20 against convert 6).
-> - Add gpio-controller and #gpio-cells to the example, which the text
->   binding's example had and the conversion dropped.
-> - gpio-controller and #gpio-cells are deliberately *not* added to the
->   required list. rv1108-evb, rv1108-elgin-r1 and rk3328-a1 do not set
->   them, so requiring them breaks three in-tree boards:
-> 
->     rv1108-evb.dtb: pmic@18 (rockchip,rk805): 'gpio-controller' is a required property
-> 
->   No rk8xx PMIC schema requires the pair, and gpio.yaml already enforces
->   that they appear together ("'#gpio-cells' is a dependency of
->   'gpio-controller'"). The pinctrl driver calls devm_gpiochip_add_data()
->   unconditionally, so the property is not what makes the GPIO controller
->   work either.
-> 
-> Changes in v2:
-> - Require 'pins' in the pin configuration nodes. Without it a node that
->   names no pin passes validation, while the text binding listed 'pins'
->   as required.
-> ---
->  .../bindings/mfd/rockchip,rk805.yaml          | 60 +++++++++++++++++-
->  .../bindings/pinctrl/pinctrl-rk805.txt        | 63 -------------------
->  2 files changed, 59 insertions(+), 64 deletions(-)
->  delete mode 100644 Documentation/devicetree/bindings/pinctrl/pinctrl-rk805.txt
-> 
+Thanks for looking at this.
 
-Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
+On 9/30/26 3:17 AM, Chen-Yu Tsai wrote:
+> The syscon node is the provider of the regmap. You need to fix it there,
+> not duplicate it in the consumer.
 
+Unless I'm misunderstanding, no driver binds to that node, so its regmap 
+comes from the generic syscon code, and changing it there would affect 
+every syscon. Lee, Arnd, Mark, would that be acceptable?
+
+These are the options I see. Please let me know if there's a better one:
+
+- Do what Sebastian suggested and make syscon use a raw spinlock, except 
+when the node has a clock, since regmap-mmio calls clk_enable() under 
+the lock. Off PREEMPT_RT, nothing changes. On RT the lock would no 
+longer be preemptible for most syscons, including across bulk writes. 
+Most syscon users that do bulk writes only write a few registers, but 
+enabling the Amlogic G12A PCIe PLL writes a sequence with 40 us of 
+udelay() under the lock.
+- Have the pinctrl ioremap() the node a second time alongside syscon's 
+mapping and read the input register (DIN) with readl(). That read is the 
+only access the EINT code makes in raw context. This would go around the 
+syscon, and it requires that DIN never be written in a multi-step 
+sequence, which is currently the case.
+
+I'd like to know the best approach before sending out a v2.
+
+Best regards,
+Ryan Brue
