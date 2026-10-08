@@ -1,126 +1,120 @@
-Received: from mail.alien8.de (mail.alien8.de [65.109.113.108])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF3823793D3
-	for <mfd@lists.linux.dev>; Wed,  7 Oct 2026 23:56:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=65.109.113.108
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D810547066
+	for <mfd@lists.linux.dev>; Thu,  8 Oct 2026 00:06:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791417420; cv=none; b=kSnUOFa06cyxTa5aKcL7X4YwtNsjjE1/27npnxepwXw5w+4ZhLypMTzA074Z77SD3UApz9S8xsdsQ1yL2yi+Ncdb4THnz1RoxqZZSZdBoSJHAaD8GflIYQbjQnxXKml+4vKFMWBw9b2mEL67X+hFtf/0bZnn6EU/6NCcOe4grzI=
+	t=1791418000; cv=none; b=aAGxrlEyIdV6Lr3sfMaqi0cWzpMHpGJEaub0ALYPZtCxyb1zhYYT84PCraX2WR5N1kv9H4/glfjxbgD0/0lLVuhzVMpc0fgZhW7LF2qooly+R3YQaohzHFGylBBSNs8VU3fMhGFFGJC+yJ96ouhEtvXx5oZs9jy9xFLlLb6sOkA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791417420; c=relaxed/simple;
-	bh=wTGQazFubLCqxbPldR9hbYLyDpFfXFskPDhC+8cX3/A=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition; b=nmM7G+YpFyM2kfQ3+IqbGNKT4QCploO2IfHS+F5OXv3HQrKpS16y2Nk/4d9fmdIQPsB4qpsmPeutkdwZ0Rbca2dlkChEstkRMplKGHEnaOr8CaZsUyUZlGYu8jBjLee2gVpRVcNS1hSECeRFTRkWlGCu24WVnpBJdZsHNXd0EaE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de; spf=pass smtp.mailfrom=alien8.de; dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b=DRnDyd3R; arc=none smtp.client-ip=65.109.113.108
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=alien8.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=alien8.de
+	s=arc-20240116; t=1791418000; c=relaxed/simple;
+	bh=0R7HamVOTL1HpHbMytRiO+NENG0FUF+SEe2JtHQ7Q/0=;
+	h=Message-ID:From:Subject:To:Cc:In-Reply-To:References:Content-Type:
+	 Date; b=Ytb2DSGuN8lnivsyrj/90AZp06buGhErgVJKols2hS2Bh1kaSdoCOy+g8GbeHj1dbLn0IjmIo4wDEUK1sXUL8oopDluQeH/FzAPUx/M0VUbAJfPbDJODEEqQiFcby/uFGHt73Wmr0lLwdto/4/KtzXAUqj0Qdw/hlyHo4pmns0w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JQZCLMiq; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (4096-bit key) header.d=alien8.de header.i=@alien8.de header.b="DRnDyd3R"
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 5DFCE40E0481;
-	Wed,  7 Oct 2026 23:56:54 +0000 (UTC)
-X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
-Authentication-Results: mail.alien8.de (amavisd-new); dkim=pass (4096-bit key)
-	header.d=alien8.de
-Received: from mail.alien8.de ([127.0.0.1])
-	by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
-	with ESMTP id rE-gsLgWQXQA; Wed,  7 Oct 2026 23:56:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
-	t=1791417403; bh=OTGkaKjdC3+t7UGrsk86HX6T2bTRGbBM62FdwZNwnjs=;
-	h=Date:From:To:Cc:Subject:From;
-	b=DRnDyd3RtO5JZnP0rDZKCy6uBY9ZSUzlGf14l8WtKHhfkPFXwTeiekWf5cvyBdAec
-	 BAsIdlf/iIMDejNmkVtkDcgSIg69RPdxn3ElP89JFO9nE2UTbcc4zXcgmSUfIpBCm5
-	 xUybtaAsHQpGax4TVBdUXtN4m8GuPXcYi+2n6P94G/FuKE/dLMI5LbTwvEdzIy4jHQ
-	 MoO6HRaQjDJpqXQRFyL5CFW3pAYt8FRiVbci2KmzK559k9w/yGCkTaWswJO1dPygRa
-	 FLDVQvew1CpuofIOGm3dhOqRzsavHky47uppeZD3LDC+ivwAvscBLRR+oAwqdLPOp2
-	 P8bwmZpBjNAvBNzoMHO+4Q4sXGZ2ySw7sSLEtjZDjIGBVcZcOiHgCDhcMGGlxg2t6E
-	 btPF+lQh2YtNAkGBUpZQdtk5gFjLi8DO3GTm9xxKq1JWD/js/GfOHAoCtVzx3PQQ4j
-	 HVv0RZ0xu6hxoZmqBraejb6veHwbn2WjU3Vqkm36jqzBQLppN5sVxoPRV7dngrOkxy
-	 1RpNyOMgFnPHG7spRnaFhFHA+iCLRvdGlP2QErJBNXtPLznQyq6rB6cpi8DXLMO2TG
-	 sXaYaEeyzQrh7q2eqNMznsC+z7oEvP5zLWfEoCpFyQqJ5k11uowZY6Zm8knZfsSU9A
-	 0/E2DzVwkrK5E3vQ4WGoU6o0=
-Received: from stx.tnic (unknown [IPv6:2600:1700:38ca:c00::3a])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest SHA256)
-	(No client certificate requested)
-	by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 3714C40E01B4;
-	Wed,  7 Oct 2026 23:56:38 +0000 (UTC)
-Date: Wed, 7 Oct 2026 16:56:35 -0700
-From: "Borislav Petkov (AMD)" <bp@alien8.de>
-To: Binbin Zhou <zhoubinbin@loongson.cn>,
-	Chong Qiao <qiaochong@loongson.cn>
-Cc: Lee Jones <lee@kernel.org>, mfd@lists.linux.dev,
-	LKML <linux-kernel@vger.kernel.org>
-Subject: [RFC PATCH] mfd: ls2kbmc: Fix stop_machine() function's retvals
-Message-ID: <20261007235635.GAasbcM53RNcTVfnu3@fat_crate.local>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JQZCLMiq"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E85A21F000FF;
+	Thu,  8 Oct 2026 00:06:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791417999;
+	bh=GnNUNbE0y2q20rqvNprDTzalK/Blsf9AGC7acO3pI0M=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=JQZCLMiqCu2zVxd/xuniwjkbP1HACCmTDU9impg3XdcnQdHmPh958ku7IED99ktk6
+	 7DLcsWqIfc2bHHoEUPRXkLqEpwe8J7kYcMHnikfACS1wpvJKPIY7lMZqoe5MvVNO6r
+	 8qcyY1t4JmZIocN/3/EO5G62thpshZFz/UIMZI59ALVwlwGnCftEYG0XEPvBZEZYsG
+	 MRAdCKfuhJ7Nq++RpH+T2l3TSI1MgcwVcHJ9na8e+l56UsJMWO151r4ZahJiaGl6TV
+	 TtKkvDvvd9mgrMByPHa79Mtlz7XF0mSougrGRN6xl+L3rO86gfQJ6GC9KXgSIl7swM
+	 6ogk8qMIt4kuA==
+Message-ID: <sashiko-outbox-163448@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [RFC PATCH] mfd: ls2kbmc: Fix stop_machine() function's retvals
+Reply-To: sashiko-reviews@lists.linux.dev
+To: =?utf-8?b?Qm9yaXNsYXYgUGV0a292IChBTUQp?= <bp@alien8.de>
+Cc: lee@kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20261007235635.GAasbcM53RNcTVfnu3@fat_crate.local>
+References: <20261007235635.GAasbcM53RNcTVfnu3@fat_crate.local>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Thu, 08 Oct 2026 00:06:38 +0000
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 
-Hi,
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
+s) to consider:
+- [Medium] mfd: ls2k-bmc: unhandled stop_machine() return value hides recov=
+ery errors
+--
 
-see below.
+commit 35e3836fd584a9475fdd4e4f63d584c98d5c1f04
+Author: Borislav Petkov (AMD) <bp@alien8.de>
 
-It is totally untested because I don't have the hardware but the issue should
-be clear.
+    mfd: ls2kbmc: Fix stop_machine() function's retvals
 
-Maybe the retvals should be tweaked, to denote even better what fails in
-the function when it happens.
+This commit updates ls2k_bmc_recover_pci_data() to return proper negative
+error codes (-ETIMEDOUT, -EINVAL) instead of false upon failure.
 
-Thx.
+> diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
+> index 408056bfb2fe7..306e444a592ae 100644
+> --- a/drivers/mfd/ls2k-bmc-core.c
+> +++ b/drivers/mfd/ls2k-bmc-core.c
+> @@ -268,18 +268,18 @@ static int ls2k_bmc_recover_pci_data(void *data)
+>  	}
+> =20
+>  	if (i =3D=3D 0)
+> -		return false;
+> +		return -ETIMEDOUT;
+> =20
+>  	ls2k_bmc_restore_bridge_pci_data(parent, ddata);
+> =20
+>  	/* Check if PCI-E is connected */
+>  	if (!ls2k_bmc_pcie_is_connected(parent, ddata))
+> -		return false;
+> +		return -EINVAL;
+> =20
+>  	/* Waiting for U-Boot and DDR ready */
+>  	mdelay(LS2K_BMC_RESET_WAIT_TIME);
+>  	if (!ls2k_bmc_bar0_addr_is_set(parent))
+> -		return false;
+> +		return -EINVAL;
+> =20
+>  	/* Restore LS2K BMC PCI-E config data */
+>  	pci_write_config_dword(pdev, PCI_COMMAND, ddata->bmc_pci_data.pci_comma=
+nd);
 
----
-stop_machine() takes a function to run @fn of type cpu_stop_fn_t as its
-first parameter, which returns an int. That int is either 0 on a success
-or non-zero on failure.
+[Severity: Medium]
+Since ls2k_bmc_events_fn() calls stop_machine(ls2k_bmc_recover_pci_data, ..=
+.)
+and doesn't check the return value, are these new error codes actually hand=
+led?
 
-The ls2k_bmc_recover_pci_data() function returns "false" instead to
-denote a failure, presumably, which gets promoted to a 0.
+Looking at ls2k_bmc_events_fn() in drivers/mfd/ls2k-bmc-core.c:
 
-Add proper negative return values to denote the different failures
-encountered.
+ls2k_bmc_events_fn() {
+    ...
+	stop_machine(ls2k_bmc_recover_pci_data, ddata, NULL);
 
-Signed-off-by: Borislav Petkov (AMD) <bp@alien8.de>
----
- drivers/mfd/ls2k-bmc-core.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+	if (IS_ENABLED(CONFIG_VT)) {
+		/* Re-push the display due to previous PCI-E loss. */
+		set_console(vt_move_to_console(MAX_NR_CONSOLES - 1, 1));
+	}
+    ...
+}
 
-diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-index 408056bfb2fe..306e444a592a 100644
---- a/drivers/mfd/ls2k-bmc-core.c
-+++ b/drivers/mfd/ls2k-bmc-core.c
-@@ -268,18 +268,18 @@ static int ls2k_bmc_recover_pci_data(void *data)
- 	}
- 
- 	if (i == 0)
--		return false;
-+		return -ETIMEDOUT;
- 
- 	ls2k_bmc_restore_bridge_pci_data(parent, ddata);
- 
- 	/* Check if PCI-E is connected */
- 	if (!ls2k_bmc_pcie_is_connected(parent, ddata))
--		return false;
-+		return -EINVAL;
- 
- 	/* Waiting for U-Boot and DDR ready */
- 	mdelay(LS2K_BMC_RESET_WAIT_TIME);
- 	if (!ls2k_bmc_bar0_addr_is_set(parent))
--		return false;
-+		return -EINVAL;
- 
- 	/* Restore LS2K BMC PCI-E config data */
- 	pci_write_config_dword(pdev, PCI_COMMAND, ddata->bmc_pci_data.pci_command);
--- 
-2.53.0
+When a hardware BMC reset interrupt triggers ls2k_bmc_events_fn(), it calls
+stop_machine(). If ls2k_bmc_recover_pci_data() times out waiting for BAR0
+or PCIe training, it will return an error that stop_machine() bubbles up,
+but that error is completely discarded here.
 
--- 
-Regards/Gruss,
-    Boris.
+Because the failure is unhandled, the driver silently proceeds to re-push
+the display via set_console(), which may attempt to access a dead PCIe link.
 
-https://people.kernel.org/tglx/notes-about-netiquette
+Should the return value of stop_machine() be checked or logged to ensure
+the PCIe recovery failure doesn't silently persist and cause a crash?
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261007235635.GAas=
+bcM53RNcTVfnu3@fat_crate.local?part=3D1
