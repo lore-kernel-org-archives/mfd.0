@@ -1,92 +1,120 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCF364C9E19;
-	Fri,  9 Oct 2026 11:22:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1FD94DAFAB;
+	Fri,  9 Oct 2026 11:48:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791544985; cv=none; b=Kp80dlxSz9WrjSxJvlkV+ZaieQ79lVfVpmaJFoWLY8bYH2l+V8uxY/nvWVuJawXvgTo3z7+SvFf8M6OUXmlZVsH8MtCy6aOyxDvndqOaOvkaqd9zNBJhk4Rxh+08y4sedAIQyYncTVMJLBZnDBDAPXEqE5yz7sv+YSPKRiOH/Qc=
+	t=1791546514; cv=none; b=nuIbti1M8vb57Ym8E+Zte7q89TMb3gMPJ7YDIV0m+p6rYePKMCdN2ZONR/ZKBbSt0l0tSm1EC/j3cPGnKiB7g6rwIBIDRCQ9YSntkQLpKkTwVmZYZPagJPbAu3rELzfM3mu8ISzmJX0bctgBmYOueeZ4IJ89Tsvy1dBvUdehDHc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791544985; c=relaxed/simple;
-	bh=/KNZkyv5Z00YkmnO8i7WhX2uJC8dA9oSFJ34Gbzh0Xg=;
-	h=Message-ID:From:Subject:To:Cc:In-Reply-To:References:Content-Type:
-	 Date; b=d+MOYdrqe7J73258eJeq+SJBj5nPwADBXOefiv/N2jUibO0eQYizT0mmYkMhPtsUn7eyJzXMo4TS1xzEn6jJebV1YHHsjVL8kOeMiqn9Crxvg74p+L2Sz/Sbapznl/+okJGOoqvloAdXy6I0fZHZR94xsyq1ZuFZi7u8flVzm2M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Wd85vwVv; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791546514; c=relaxed/simple;
+	bh=sbC84ywl60uxO1fomNf4+u/FyTv7QW6svV/vjNUSxMs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=SDAXpSLDupNlOdHimWH9NvVnw/xOjaYcrMrLRwo2+mSxB06Poyz31+6WftLgqx9mf2meZuw5F1x/ZN9JieZlgLC3EZENSdORITixpm140io9XPh2LXuKRUtFcPyTPTWTqLezDFh59xeYC9LuILLDX+1aVn2/C26eC5VD65PLltM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ILyM/A4m; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Wd85vwVv"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A0511F000FF;
-	Fri,  9 Oct 2026 11:22:58 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ILyM/A4m"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D9511F000FF;
+	Fri,  9 Oct 2026 11:48:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791544978;
-	bh=/KNZkyv5Z00YkmnO8i7WhX2uJC8dA9oSFJ34Gbzh0Xg=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Wd85vwVv1fMXCqYaBLsPb1NVONgroCYys0DjzpoVf/YAMrp0PLzdEKOVyB43nl8lb
-	 GpT8ANdLa4vkIAkcSYCzGyUa0aFIb6pqpGC9e0WTkhDjmRJSv0mWyLwe3+aukD/Z93
-	 6FaUv4+n5w/5ayn4LNnAFHlwcHmk1oVne5nOIUNds6VbZ17ySxd9L4glu2l5v3HFpQ
-	 bNV0sI8bdfXaKLrrMXHAsV2zYUWkK7wvwybaPPsc2ZW72Se9l1LAqvR0yDJSD3ETpw
-	 8g6y04mPEfi3sU2YcKnRWmssS2dxMZO+LvPJYaatvjGww5tJA6pV21l0ERiAoMJtAZ
-	 /+LfNiygJlYbw==
-Message-ID: <sashiko-outbox-165362@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 3/4] arm64: ambarella: add ARCH_AMBARELLA and CV75 EVK
- DT
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Long Zhao" <longzhao@ambarella.com>
-Cc: devicetree@vger.kernel.org, conor+dt@kernel.org, robh@kernel.org, mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261009-cv75-soc-v1-3-808330e93ff1@ambarella.com>
-References: <20261009-cv75-soc-v1-0-808330e93ff1@ambarella.com>
- <20261009-cv75-soc-v1-3-808330e93ff1@ambarella.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Fri, 09 Oct 2026 11:22:57 +0000
+	s=k20260515; t=1791546506;
+	bh=LC1HwwfjvxvR4jSmIsTM0pp1u6HZBzWpbqoP5PXoAr0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=ILyM/A4mGOq45kFYdSjjfi6/zboxlYmiueV+cIWoOTFqaY5x0n/eamuFab5FCGogH
+	 5Ync4L4aUMwHxXVHcbvBls9OkicGf5iMGIpoJhG/rwBXTWIFJ/tmVGaLADddUZMejq
+	 B0u0RIPg/AvWJM9MdoAonSD3vLwoI9vcXRMVA4jYd7wGxPWzFZbMiFK6CpE7firNzp
+	 dOJ4gfD24LI0XIV9Exm2eTwh3BiCA/W3VyxVCNQ2pMAKJbP9ZSa8g3bYuj4ujoPDsc
+	 Y5sKyT7TFjkgaJUCpX4XKddadwvzh+ivQU9mk5FdI+iXKEN9qBn1K64kNEnSf91HD7
+	 0uzZSDcMR9yfg==
+Message-ID: <0ce732d3-0ba0-4edc-8025-856e73c7327c@kernel.org>
+Date: Fri, 9 Oct 2026 13:48:19 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/4] arm64: ambarella: add ARCH_AMBARELLA and CV75 EVK DT
+To: longzhao@ambarella.com, Arnd Bergmann <arnd@arndb.de>,
+ Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+ Conor Dooley <conor+dt@kernel.org>, Catalin Marinas
+ <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
+ Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, devicetree@vger.kernel.org,
+ Long Zhao <zl020895@163.com>, linux-kernel@vger.kernel.org,
+ Linus Walleij <linusw@kernel.org>
+References: <20261009-cv75-soc-v1-0-808330e93ff1@ambarella.com>
+ <20261009-cv75-soc-v1-3-808330e93ff1@ambarella.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20261009-cv75-soc-v1-3-808330e93ff1@ambarella.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
-- [Low] build: missing dt-bindings header ambarella,cv75-rct.h causes devic=
-e tree build failure
---
+On 09/10/2026 13:00, Long Zhao via B4 Relay wrote:
+> From: Long Zhao <longzhao@ambarella.com>
+> 
+> Enable ARCH_AMBARELLA and add a minimal CV75 SoC / EVK device tree for
+> console bring-up with the RCT clocks, UART, pinctrl and GPIO banks.
+> 
+> Reviewed-by: Linus Walleij <linusw@kernel.org>
+> Signed-off-by: Long Zhao <longzhao@ambarella.com>
+> ---
+>  arch/arm64/Kconfig.platforms               |   6 +
+>  arch/arm64/boot/dts/Makefile               |   1 +
+>  arch/arm64/boot/dts/ambarella/Makefile     |   3 +
+>  arch/arm64/boot/dts/ambarella/cv75-evk.dts |  30 +++++
+>  arch/arm64/boot/dts/ambarella/cv75.dtsi    | 177 +++++++++++++++++++++++++++++
 
-commit a2925973f53816ca6808a0857931c68399b1d569
-Author: Long Zhao <longzhao@ambarella.com>
 
-arm64: ambarella: add ARCH_AMBARELLA and CV75 EVK DT
+I don't think this even builds. I don't understand why you decided to
+split the patchset, but if you do, then you must split it correctly.
 
-This commit enables the ARCH_AMBARELLA configuration and adds a minimal
-CV75 SoC and EVK device tree for console bring-up.
-
-> diff --git a/arch/arm64/boot/dts/ambarella/cv75.dtsi b/arch/arm64/boot/dt=
-s/ambarella/cv75.dtsi
-> new file mode 100644
-> index 0000000000000..c36b6af48237a
-> --- /dev/null
-> +++ b/arch/arm64/boot/dts/ambarella/cv75.dtsi
-> @@ -0,0 +1,177 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * Ambarella CV75 SoC
-> + *
-> + * Boot peripheral: UART0 console.
-> + * Clocks: a single ambarella,cv75-rct provider.
-> + */
-> +
-> +#include <dt-bindings/clock/ambarella,cv75-rct.h>
-
-[Severity: Low]
-Does this patch rely on a missing header file? The included header
-dt-bindings/clock/ambarella,cv75-rct.h does not appear to be present in the
-current tree or in this patch.
-
-If a build is attempted with CONFIG_ARCH_AMBARELLA enabled, will it fail
-with a fatal C preprocessor error since it cannot find this file to
-evaluate CV75_GCLK_UART0 and CV75_GCLK_APB?
-
-[ ... ]
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261009-cv75-soc-v=
-1-0-808330e93ff1@ambarella.com?part=3D3
+Best regards,
+Krzysztof
