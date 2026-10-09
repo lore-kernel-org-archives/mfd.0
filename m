@@ -1,190 +1,128 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8AE8037DAA9
-	for <mfd@lists.linux.dev>; Thu,  8 Oct 2026 07:45:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C86FF3B42EF;
+	Fri,  9 Oct 2026 06:17:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791445522; cv=none; b=Lv/sw1X8Ue/37aql/dLSF4KVQi0G5ewRqTKYIkl25JsT2k/QcwLZK+YxN/Z8vWY6MvJINMU81HFADgiPB3IEdW8AptCu3kiq/QJvzl++NGw2wNKhaBhKu6RfIFBBCApAVJ75Yd/uvJAq5SgONK8tbKKsFMSV13RG2+rrm+HN1sY=
+	t=1791526658; cv=none; b=Son+omePEwBxRSyEIA+1NjL6kHQA3ImkEJQ9Fwq1qJiuHKrisivqMjzlmbWI/6svY6fJE9pPjeSoXomiNik4swXPTnHzLu8vABgZO0q1CvdDNfTGe409TojKO2jrJCxHlBC+PnQvX4WXLbTDyTWvyWFv0imH0f0aj9Mw1P4PeTo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791445522; c=relaxed/simple;
-	bh=vBAwa6db1IDs6p6WtYNeaWN7RqYwqn3FUTym+bNVaQU=;
-	h=Message-ID:From:Subject:To:Cc:In-Reply-To:References:Content-Type:
-	 Date; b=LncUGcbiE1diLkROzmcwGZS1qmCm3n7QWjZvbA2GVN/SikUu758L32ziMNc5qVnv39oV57P5uWgCMZRzToSyCp7GfMiSYisNUizgBqrEZyu1Rgh66eIAwUkTHcvwF8HMj6VzuGHKGGSGgzZsHOdtAvmERd0UFUmCxGxa07W9PB4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GW319cL8; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791526658; c=relaxed/simple;
+	bh=g8HMS841Ml2LT1mVaPGCe0fKSKLbT1kX1rmB2BGpkCo=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=RcjhypPCQFz+vhnnipy3jYWdvQB+CN0Vs8Khrlju2GRqjY+gzC5KVy0mhzAyKNw2RmBmkYjUwWiP9gKFCRt31709c725FFAkUKlLYxwxabSYBxPa2hfcGtSIufyd/Rz9Xs5djFPzNIgwq4lvj0XXj04hcfZCO4SJJcBnDteelZg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RkkVlO2w; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GW319cL8"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 129741F000FF;
-	Thu,  8 Oct 2026 07:45:21 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RkkVlO2w"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CD4521F000FF;
+	Fri,  9 Oct 2026 06:17:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791445521;
-	bh=1wnK3XKGOOIQ0j0Ele9V/CW8TGWWjHUGEJkL2ODuXR8=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=GW319cL80EN1Jiae+ChvV65PsgC0JBea2+1WJN7pW411eKBPVuKFJxMICisamdM9Z
-	 YSwHqYebqdMuR1DxCU7+hlbSBbme0QlUO/Qkkn21vNKAjKRP2dN1CcEbQKjoyvtB5l
-	 8dOH30ynKW5m8/rUzFu4Aqoo5bW0/7daw60YQ2EYwpJ4qNPXqJrWJ8bHasnsugKftz
-	 5/MlmBzqqXGTEUHoh1hMunaawLDxul64yStUc+dP21pMJ9RcLXW600YmrqaBq4tkL3
-	 z/x4/cLmOsB0LH1+XdgbftP1F9FbA0kOfJXxjyx5ZBqqBZ/9zMD6IXVpNVK1oMn0mX
-	 GGsFdnBYXi+0w==
-Message-ID: <sashiko-outbox-163780@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v9 2/2] mfd: loongson-se: Fix miscellaneous issues
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Qunqin Zhao" <zhaoqunqin@163.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261008073151.15808-3-zhaoqunqin@163.com>
-References: <20261008073151.15808-1-zhaoqunqin@163.com>
- <20261008073151.15808-3-zhaoqunqin@163.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 08 Oct 2026 07:45:20 +0000
+	s=k20260515; t=1791526657;
+	bh=nax+qR3WkXrdd/17dR8KmIckTBU+DT+nvC3wPuMV13g=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=RkkVlO2wB4e44gpc0Tbozg2oRfskIKbDFnFuUNv9hl2LFo0gSipOXafhRVsL+hYqW
+	 znC7BvTwZ+48AvAZY/GLAJriX2IOONR8AJsTpwRGqkcDQZuF8YrOTkUYKnMf0Xi4Oc
+	 4u87/YFTmqwkzl0A3XtbRTXMJccHu+bfALE/8ZL6W4cjjfrb7u63zy/3d25QKiGSq2
+	 DFpX4t95bHn5fYTMDyLJsGR/ywUH2L3V4kDbym+/2JhqSnXnaq/AEfhXXzm6LbU/5W
+	 pwC3qE/+xNJdcE4EYkUqz8wabSFX2XRks64JbQGEOBFwLFEqPZP1SlMJ/8tTmfKet5
+	 azHr6SmyxBZZg==
+Message-ID: <b2256847-3ec1-47e8-ac79-ceca86eb09e7@kernel.org>
+Date: Fri, 9 Oct 2026 08:17:27 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 04/18] dt-bindings: pinctrl: add Ambarella CV75 pinctrl
+To: Linus Walleij <linusw@kernel.org>, longzhao@ambarella.com
+Cc: Arnd Bergmann <arnd@arndb.de>,
+ Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Michael Turquette <mturquette@baylibre.com>,
+ Stephen Boyd <sboyd@kernel.org>, Jerome Brunet <jbrunet@baylibre.com>,
+ Bartosz Golaszewski <brgl@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Jiri Slaby <jirislaby@kernel.org>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+ Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
+ Long Zhao <zl020895@163.com>, Lee Jones <lee@kernel.org>,
+ mfd@lists.linux.dev, devicetree@vger.kernel.org, linux-clk@vger.kernel.org,
+ linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org,
+ linux-kernel@vger.kernel.org,
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+References: <20260921-cv75-v5-v8-0-282ff5d98dda@ambarella.com>
+ <20260921-cv75-v5-v8-4-282ff5d98dda@ambarella.com>
+ <CAD++jLmKF5XxHsJX29sdXC_6JHKn-7HkE=N+TKtk5xODtQj3_w@mail.gmail.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <CAD++jLmKF5XxHsJX29sdXC_6JHKn-7HkE=N+TKtk5xODtQj3_w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
-s) to consider:
-- [High] mfd: loongson-se: hardware wedging due to interruptible wait in en=
-gine commands
-- [Medium] mfd: loongson-se: Bespoke parent-child accessors and inter-drive=
-r callbacks violate MFD API
---
+On 01/10/2026 09:03, Linus Walleij wrote:
+> On Mon, Sep 21, 2026 at 6:23 AM Long Zhao via B4 Relay
+> <devnull+longzhao.ambarella.com@kernel.org> wrote:
+> 
+>> From: Long Zhao <longzhao@ambarella.com>
+>>
+>> Document the CV75 pin controller binding using generic function and
+>> groups properties for pinmux configuration.
+>>
+>> Reviewed-by: Linus Walleij <linusw@kernel.org>
+>> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+>> Signed-off-by: Long Zhao <longzhao@ambarella.com>
+> 
+> This patch 4/18 applied to the pinctrl tree.
+> 
 
-commit 6e6ed05719359ac0c5fefbfd5ea2f85ac87b10f6
-Author: Qunqin Zhao <zhaoqunqin@loongson.cn>
-mfd: loongson-se: Fix miscellaneous issues
+There is a dependency, you cannot take this patch alone.
 
-This commit addresses multiple historical driver issues discovered by the
-Sashiko Automation system within the loongson_se_probe() initialization flow
-and the driver's interrupt service routines. It adds bounds checks,
-initializes completion structures, and handles errors more robustly.
-
-Link: https://lore.kernel.org/all/20260618095949.GB1672911@google.com/ [1]
-
-> diff --git a/drivers/mfd/loongson-se.c b/drivers/mfd/loongson-se.c
-> index 969378518065b..2fb5da85b2479 100644
-> --- a/drivers/mfd/loongson-se.c
-> +++ b/drivers/mfd/loongson-se.c
-[ ... ]
-> @@ -70,18 +101,31 @@ static int loongson_se_send_controller_cmd(struct lo=
-ongson_se *se,
->  	if (err)
->  		return err;
-> =20
-> -	return wait_for_completion_interruptible(&se->cmd_completion);
-> +	/*
-> +	 * Wait for the controller to complete the command.  Use a bounded
-> +	 * non-interruptible wait: a pending signal must not leave the
-> +	 * controller running while its DMA buffers are being torn down.
-> +	 * One second is far more than any controller command should take,
-> +	 * while still bounding the wait if the hardware wedges.
-> +	 */
-> +	if (!wait_for_completion_timeout(&se->cmd_completion, HZ))
-> +		return -ETIMEDOUT;
-> +
-> +	return 0;
->  }
-> =20
->  int loongson_se_send_engine_cmd(struct loongson_se_engine *engine)
->  {
-> +	int err;
-> +
-> +	loongson_se_reinit_completion(engine->se, &engine->completion, BIT(engi=
-ne->id));
-> +
-
-[Severity: Medium]
-This might not be a direct bug, but does exporting this driver-level callba=
-ck
-violate the MFD subsystem API guidelines?
-
-The MFD architectural guidelines specify that sibling or parent/child drive=
-rs
-should not use inter-driver callbacks. Instead of providing direct callback=
-s,
-child drivers should retrieve parent data using standard APIs and interact
-via standard subsystems like regmap.
-
-Could this be refactored to align with the standard subsystem APIs rather
-than continuing to use this architectural pattern?
-
-[Severity: High]
-This patch successfully fixes a hardware desynchronization flaw for
-controller commands above by switching to wait_for_completion_timeout(),
-but the engine command wait in loongson_se_send_engine_cmd() is left as
-wait_for_completion_interruptible().
-
-If wait_for_completion_interruptible() is interrupted by a signal, it retur=
-ns
--ERESTARTSYS without stopping the hardware engine, and the hardware continu=
-es
-performing DMA operations.
-
-Could this cause a race condition where an unprivileged user-space process
-sending a TPM command receives a signal (e.g., SIGINT), aborting the wait?
-When the TPM core releases its mutex, the application could immediately iss=
-ue
-a new command:
-
-drivers/char/tpm/tpm_loongson.c:tpm_loongson_send() {
-    ...
-    cmd->data_len =3D count;
-    memcpy(tpm_engine->data_buffer, buf, count);
-
-    return loongson_se_send_engine_cmd(tpm_engine);
-}
-
-This would overwrite engine->data_buffer and engine->command while the
-hardware is still processing the previous request.
-
-Can this easily triggerable path lead to DMA stream corruption and hardware
-wedging? Should loongson_se_send_engine_cmd() also use a bounded
-non-interruptible wait?
-
->  	/*
->  	 * After engine initialization, the controller already knows
->  	 * where to obtain engine commands from. Now all we need to
->  	 * do is notify the controller that the engine needs to be started.
->  	 */
-> -	int err =3D loongson_se_poll(engine->se, BIT(engine->id));
-> -
-> +	err =3D loongson_se_poll(engine->se, BIT(engine->id));
->  	if (err)
->  		return err;
-> =20
-> @@ -92,12 +136,17 @@ EXPORT_SYMBOL_GPL(loongson_se_send_engine_cmd);
->  struct loongson_se_engine *loongson_se_init_engine(struct device *dev, i=
-nt id)
->  {
->  	struct loongson_se *se =3D dev_get_drvdata(dev);
-> -	struct loongson_se_engine *engine =3D &se->engines[id];
-> -	struct loongson_se_controller_cmd cmd;
-> +	struct loongson_se_engine *engine;
-> +	struct loongson_se_controller_cmd cmd =3D {0};
-
-[Severity: Medium]
-Does the use of this bespoke accessor function also conflict with the MFD A=
-PI
-guidelines?
-
-The MFD subsystem architectural guidelines prohibit writing bespoke accesso=
-rs
-or helper functions in the parent MFD driver to pass state to child devices.
-Child drivers should retrieve parent data directly using standard APIs like
-dev_get_drvdata(pdev->dev.parent) and initialize their own resources.
-
-Could this be refactored so child devices directly handle their own
-initialization instead of relying on the parent to export this custom helpe=
-r?
-
-> +
-> +	/* Engine 0 does not exist and its data buffer is reused for commands */
-> +	if (id <=3D 0 || id >=3D SE_ENGINE_MAX)
-> +		return NULL;
-> +
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261008073151.1580=
-8-1-zhaoqunqin@163.com?part=3D2
+Best regards,
+Krzysztof
