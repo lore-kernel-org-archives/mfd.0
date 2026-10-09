@@ -1,130 +1,135 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 596A541DED5;
-	Fri,  9 Oct 2026 06:18:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1E094DBD95;
+	Fri,  9 Oct 2026 11:00:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791526718; cv=none; b=JoIxMl3EVN6ikgoKuqbxW7jgUSZgmAsuifi6M0xxAoz3Zln7Go6tnTg6VgVWfuR57YHWbIHdd3mq7OwKGrd+aEEes3scjecve4McTNXQLJlCSMN3r5wqKbx5c+Nu9N9g0Rk+oad4TbggyLx4/a73NAI26r2N9400904EqakXAFA=
+	t=1791543626; cv=none; b=NwQisXZhXV49yOTF6xRAeevPA29EOAjvvrNzTNNhCz1Dp8ylQ9KkBkMTOw7FcZSF0/gaz2EOSleoGXayH0eLlVRjh3osQwxB2Be+yZYATP/Tf9BLDnTFJZz09gPLZ/VW7fGtZZFdnLfMQ3vcf6jL/FLQUSXgVPzPg4uhRLb8P24=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791526718; c=relaxed/simple;
-	bh=jlVofPMWRTO6BNu+lrmDB/2BeEDBzeK8GVfASDwfDOI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Tb2czaCoTRgH9+p+RQhvie8+hW9VuRT+Cu1WYlTBZYv2MEOZJHEtC272phyawdj0csy4W8eF7OKCJq7H8ZYdcH3t7AZVzRmUPB4SXGfxdRU3GGcazT2bI4QkVQQtVaRZx5W5BhUGCQN0BqL3SeK3agQAeP2Ip+avUTbxB/0q3xw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FrJmr/HE; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791543626; c=relaxed/simple;
+	bh=+tZNSX5k1H+sKgRoo1wVaQVdEfZrw4ENU3AszdLQqmI=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=dW1R9UV5QBdO8Xq/C79ZKtyjJTjQfmxv2oQx61Xns2H9RTSUlQ+ywEHPrWfx1zdmnGdmYrztH86Twnb8q/CEPPsQoAU27yRrQPhmGvv7fB+GlQFKYBsvEZE2+4pevxVOFbe4Sk8yZM/IEIbvqzsFDlTI/TfLYPKWdHq6WJ/frE0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SwJZ+f9o; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FrJmr/HE"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 986CA1F000FF;
-	Fri,  9 Oct 2026 06:18:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791526716;
-	bh=aD5VNEXrsAZD09ITKSVZfH7wvD/HmRUW+GrH01TcdDI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=FrJmr/HEfyez54mezwhBgQlOjh5Ae3I38NYT1TRPE4Q0VEBY4Lqvvk9R6Y7CLuTA0
-	 xMDeVFfNG5gR4abR2z7FVagfqOIjRd0/t6HFHSA883iEJWqimaKC+5/FUfl+p8Qj4W
-	 srImSJRJgkKKHl2f597XlRpacu3eEoTjgtDfRpagJycxSbZPEw4Ub1BdIiziJCIM5o
-	 dx8GC4hFtn+r/+DiuhkqpAUqc24oDNUUeZ6Pxa9ljiOhDa57AnyFapOTxYhDR7r88l
-	 7XcMRd20YUXh/TFUirv1FSOUDg31O3xX4Rd7xAAJBsKaC7oWVfpqvPY99yowHZopj9
-	 Iq1IOMySNSgeA==
-Message-ID: <1161b935-6897-4724-a05f-998d0be6b9ed@kernel.org>
-Date: Fri, 9 Oct 2026 08:18:25 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SwJZ+f9o"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 78D81C2BCF4;
+	Fri,  9 Oct 2026 11:00:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1791543625;
+	bh=+tZNSX5k1H+sKgRoo1wVaQVdEfZrw4ENU3AszdLQqmI=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=SwJZ+f9omvsnBQqVSmEssUKkdPl7dItTYyIj0VFbzHx7r9NWtpEkaAMAVcWsFn+/+
+	 +Azzwf93NoGRHmn0GdGYG2HoaG2edVew+1lmp9jdmzQz6C/SZH2vqPiHwf9+oi3sXH
+	 uHBg93V8fNOASMTnmOPSSR7LKh7fnCT5ujnX3Rtg8+utCzanl1pPaiuVooPyEt/pOG
+	 4f0991FJvlzqaXzUZZS7SNXpytC/9NpSZpm3qDQhfMWRlE3UUVch+Ucbb0WIMTtc5G
+	 Ka6lQHXrkrtVhP/NOHNUTu+IFBW0rfb//5A3ykP5ZRk8ZEJZbcw7GKdv8cjZrfTnpf
+	 TjgU5xiF0k7xg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 65B40CA601D;
+	Fri,  9 Oct 2026 11:00:25 +0000 (UTC)
+From: Long Zhao via B4 Relay <devnull+longzhao.ambarella.com@kernel.org>
+Subject: [PATCH 0/4] arm64: add Ambarella CV75 SoC support
+Date: Fri, 09 Oct 2026 19:00:21 +0800
+Message-Id: <20261009-cv75-soc-v1-0-808330e93ff1@ambarella.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 00/18] Ambarella CV75 SoC minimal bring-up
-To: Bartosz Golaszewski <brgl@kernel.org>, longzhao@ambarella.com
-Cc: Long Zhao via B4 Relay <devnull+longzhao.ambarella.com@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
- <sboyd@kernel.org>, Jerome Brunet <jbrunet@baylibre.com>,
- Linus Walleij <linusw@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Jiri Slaby <jirislaby@kernel.org>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
- Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
- Long Zhao <zl020895@163.com>, Lee Jones <lee@kernel.org>,
- mfd@lists.linux.dev, devicetree@vger.kernel.org, linux-clk@vger.kernel.org,
- linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org,
- linux-kernel@vger.kernel.org,
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
- Arnd Bergmann <arnd@arndb.de>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev,
- linux-arm-kernel@lists.infradead.org
-References: <20260921-cv75-v5-v8-0-282ff5d98dda@ambarella.com>
- <CAMRc=Mf-0oLOPZsPboE0dzOGE2AzNE0LXmv9fcmgWO47FtGu1g@mail.gmail.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
- cFgcqTTuNHjAvxtUG8pQgGTHAObYs6xeYJtjUH0ZX6ndJ33FJYf5V3yXqqjcZ30FgHzJCFUu
- JMp7PSyMPzpUXfU12yfcRYVEMQrmplNZssmYhiTeVicuOOypWugZKVLGNm0IweVCaZ/DJDIH
- gNbpvVwjcKYrx85m9cBVEBUGaQP6AT7qlVCkrf50v8bofSIyVa2xmubbAwwFA1oxoOusjPIE
- J3iadrwpFvsZjF5uHAKS+7wHLoW9hVzOnLbX6ajk5Hf8Pb1m+VH/E8bPBNNYKkfTtypTDUCj
- NYcd27tjnXfG+SDs/EXNUAIRefCyvaRG7oRYF3Ec+2RgQDRnmmjCjoQNbFrJvJkFHlPeHaeS
- BosGY+XWKydnmsfY7SSnjAzLUGAFhLd/XDVpb1Een2XucPpKvt9ORF+48gy12FA5GduRLhQU
- vK4tU7ojoem/G23PcowM1CwPurC8sAVsQb9KmwTGh7rVz3ks3w/zfGBy3+WmLg++C2Wct6nM
- Pd8/6CBVjEWqD06/RjI2AnjIq5fSEH/BIfXXfC68nMp9BZoy3So4ZsbOlBmtAPvMYX6U8VwD
- TNeBxJu5Ex0Izf1NV9CzC3nNaFUYOY8KfN01X5SExAoVTr09ewARAQABzSVLcnp5c3p0b2Yg
- S296bG93c2tpIDxrcnprQGtlcm5lbC5vcmc+wsGPBBMBCgA5AhsDBgsJCAcDAgYVCAIJCgsE
- FgIDAQIeAQIXgBYhBJvQfg4MUfjVlne3VBuTQ307QWKbBQJp2mE8AAoJEBuTQ307QWKbeaIP
- /ihHTkTW4KsN/DQ945JJbyu5tI0J80Wue7QyyLPglyKfhgb5cLLNPpOC8cCIJsc7+W3i2P38
- s2c1cOH6CYGE7E9ur3Vfme8NW2S2I/Z8VC7bZnzyS23wT17LrsdS/qCpx4o8U+pt/xdXDKph
- EGRYrIEmMpUWvyYzyYKGIe25FtaayIIKpq8eZYyFcp2f/sG5IkOW5uZzHPMPdcm87jU7fyuQ
- rAU2vx9r+ulUfQ/q9Z2roC/ode3l7t2pN7BCBCsUDp6JCrUyZrtT1e7EbA0ZRP3aOBNk2P2E
- DQOgJGjGdO5Yx2Y9LFtltu6JbsBJHi1syGRX3AtQYOMc4Y1WGoeZJmMlvKj2ZqqXNkcWi2DS
- IQEWB0uW6CqFsBBIMGDa+6OzdaVO/uAVXWDWml02Men3CILdI1MbVjoh8ECqYUY7OQ+JJvNN
- vnliuq5WM3Ghd3jg/LZZrxXjdIginRHFQCjIJYLKpLZWm1/iDFedcfzqRNYmTtqscdCNHW41
- oT3Z7BmO9xwdjuwBS6nmS6JJwkbf5Ot2QR4pB/DRU7ZwjT1qHe+9r9gF32wXVQatHNGK/VVu
- sfwOnkdxCWkp/qb2gdQRmZh+SedStWshigH6sNfuHBloF/q+hjMRc8b2m326OZdrbSHwY1Sz
- vti8Hn7n8NjdHO9LKB7BIdjkA9DA5WsqOuVCzsFNBFVDXDQBEADNkrQYSREUL4D3Gws46JEo
- Z9HEQOKtkrwjrzlw/tCmqVzERRPvz2Xg8n7+HRCrgqnodIYoUh5WsU84N03KlLueMNsWLJBv
- BaubYN4JuJIdRr4dS4oyF1/fQAQPHh8Thpiz0SAZFx6iWKB7Qrz3OrGCjTPcW6eiOMheesVS
- 5hxietSmlin+SilmIAPZHx7n242u6kdHOh+/SyLImKn/dh9RzatVpUKbv34eP1wAGldWsRxb
- f3WP9pFNObSzI/Bo3kA89Xx2rO2roC+Gq4LeHvo7ptzcLcrqaHUAcZ3CgFG88CnA6z6lBZn0
- WyewEcPOPdcUB2Q7D/NiUY+HDiV99rAYPJztjeTrBSTnHeSBPb+qn5ZZGQwIdUW9YegxWKvX
- XHTwB5eMzo/RB6vffwqcnHDoe0q7VgzRRZJwpi6aMIXLfeWZ5Wrwaw2zldFuO4Dt91pFzBSO
- IpeMtfgb/Pfe/a1WJ/GgaIRIBE+NUqckM+3zJHGmVPqJP/h2Iwv6nw8U+7Yyl6gUBLHFTg2h
- YnLFJI4Xjg+AX1hHFVKmvl3VBHIsBv0oDcsQWXqY+NaFahT0lRPjYtrTa1v3tem/JoFzZ4B0
- p27K+qQCF2R96hVvuEyjzBmdq2esyE6zIqftdo4MOJho8uctOiWbwNNq2U9pPWmu4vXVFBYI
- GmpyNPYzRm0QPwARAQABwsF2BBgBCgAgAhsMFiEEm9B+DgxR+NWWd7dUG5NDfTtBYpsFAmna
- YUkACgkQG5NDfTtBYptX+BAApg32CkxwNucNEi8WfWA8oKkW0y8YDuY6ORMo9FWNGiT/OTy0
- vyJrLocrpn86zwfjVp+eCrssPYh8eqJfnWqmYv6ACQtHPYzPZQ3mSo8H97Z01oUxITzCxpXm
- ZkLgPIqtDPcC2E3dPM/fVxcyowM8XsaMA9wcsaUYrta8toOq2b9tKcjleKMfMrm0gQ9u7wUc
- QbLkwj6TCLOwucb07GXzLTNF9PZmaDUpKAZjMjmrW+le+SFvQbhamx0rxLWPR0NWntXpbCn+
- +ACch03p/JyTBVktxFsFyCt7pTPE1kEaeuXBTe/a2D9iQvRxRW19LvuO2e59/u1wYUiH/orz
- wbIC2S4dBsPAPihL3ztOU1yE86GPyQtSE0kU+/7snnLt4QGi6PChf3t5gnNjAzjUUovO8rgI
- c+5yN5heq5loYHgK6OQ9OlHzsPHO9e9MOQcKlFycs1pyijFGzDwdNUm/SchK8iWT2QApTx4A
- K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
- n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
- qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <CAMRc=Mf-0oLOPZsPboE0dzOGE2AzNE0LXmv9fcmgWO47FtGu1g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAEXJyGoC/yXMQQ5AMBCF4avIrDWpilZcRSyoKWPRSgeRiLsrl
+ l/yv3cBYyRkaLILIh7EFHxCkWdg595PKGhMBiWVLqQ0wh6mEhysQK1qV1bGSa0h5WtER+d31Xa
+ /eR8WtNu7h/t+AP0El3tsAAAA
+X-Change-ID: 20261007-cv75-soc-e628f357f066
+To: Arnd Bergmann <arnd@arndb.de>, Krzysztof Kozlowski <krzk@kernel.org>, 
+ Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev, 
+ linux-arm-kernel@lists.infradead.org
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, 
+ Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+ Long Zhao <longzhao@ambarella.com>, Long Zhao <zl020895@163.com>, 
+ linux-kernel@vger.kernel.org, Linus Walleij <linusw@kernel.org>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791543624; l=2687;
+ i=longzhao@ambarella.com; s=20260730; h=from:subject:message-id;
+ bh=+tZNSX5k1H+sKgRoo1wVaQVdEfZrw4ENU3AszdLQqmI=;
+ b=9A1njMKYc47+mS3RQO11zurFUDOCK/SFzr14TS4vhG6bLT+9X6m1jepTq0ByB83cTsLT272Ex
+ USgQZlGOvtMBv0vFKJc0cm7JWEmpH7Dx+2hfnOEfMKa0GI6NH1bzSQb
+X-Developer-Key: i=longzhao@ambarella.com; a=ed25519;
+ pk=/xGhPTOX0/eYsyTWzyjjgAIW1Z/YD+IlnOnvcdRozow=
+X-Endpoint-Received: by B4 Relay for longzhao@ambarella.com/20260730 with
+ auth_id=903
+X-Original-From: Long Zhao <longzhao@ambarella.com>
+Reply-To: longzhao@ambarella.com
 
-On 21/09/2026 12:31, Bartosz Golaszewski wrote:
-> On Mon, 21 Sep 2026 06:23:19 +0200, Long Zhao via B4 Relay
-> <devnull+longzhao.ambarella.com@kernel.org> said:
->> This series adds minimal Ambarella CV75 support for early bring-up with
->> a serial console: DT bindings, RCT clocks, pinctrl, PL061 GPIO via
->> gpio-regmap, 8250_dw UART quirks, ARCH_AMBARELLA, CV75 EVK DT, and
->> MAINTAINERS.
->>
->> This is a single unified series. Please apply via the SoC
->> tree; subsystem maintainers are Cc'd for their pieces.
->>
-> 
-> As I said before: this brings in a lot of potentially conflicting code into
-> drivers/gpio/ so I'll need an immutable branch to pull or I can queue the GPIO
-> part myself and provide an immutable branch to other trees.
+Split from the combined CV75 bring-up series. This series adds the
+ambarella vendor prefix, the board binding, the secure scratchpad
+syscon, ARCH_AMBARELLA, the CV75 EVK devicetree and MAINTAINERS.
 
-Just please do not take the patches which have dependencies, like
-bindings etc.
+The EVK devicetree includes dt-bindings/clock/ambarella,cv75-rct.h
+from the clock series, so it does not build until that header is
+applied. The devicetree also describes the CV75 pinctrl (already
+applied in the pinctrl tree), GPIO, UART and RCT clock. Those
+drivers are separate series.
+
+The MAINTAINERS entry lists all Ambarella files including the RCT
+clock files. If the clock series lands first, those files are
+briefly unmaintained until this series follows.
+
+The combined tree, including the other series, was booted on the
+CV75 EVK before this split.
+
+Link: https://patch.msgid.link/20261001-cv75-v5-v9-0-486cc289a4b8@ambarella.com
+
+To: Arnd Bergmann <arnd@arndb.de>
+To: Krzysztof Kozlowski <krzk@kernel.org>
+To: Alexandre Belloni <alexandre.belloni@bootlin.com>
+To: soc@lists.linux.dev
+To: linux-arm-kernel@lists.infradead.org
+Cc: Rob Herring <robh@kernel.org>
+Cc: Krzysztof Kozlowski <krzk+dt@kernel.org>
+Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Cc: Conor Dooley <conor+dt@kernel.org>
+Cc: Catalin Marinas <catalin.marinas@arm.com>
+Cc: Will Deacon <will@kernel.org>
+Cc: Lee Jones <lee@kernel.org>
+Cc: mfd@lists.linux.dev
+Cc: devicetree@vger.kernel.org
+Cc: Long Zhao <longzhao@ambarella.com>
+Cc: Long Zhao <zl020895@163.com>
+Cc: linux-kernel@vger.kernel.org
+
+Assisted-by: LLM
+Signed-off-by: Long Zhao <longzhao@ambarella.com>
+---
+Long Zhao (4):
+      dt-bindings: arm: add Ambarella CV75 platforms
+      dt-bindings: mfd: syscon: add Ambarella CV75 secure scratchpad
+      arm64: ambarella: add ARCH_AMBARELLA and CV75 EVK DT
+      MAINTAINERS: add ARM/AMBARELLA SoC support
+
+ .../devicetree/bindings/arm/ambarella.yaml         |  24 +++
+ Documentation/devicetree/bindings/mfd/syscon.yaml  |   1 +
+ .../devicetree/bindings/vendor-prefixes.yaml       |   2 +
+ MAINTAINERS                                        |  14 ++
+ arch/arm64/Kconfig.platforms                       |   6 +
+ arch/arm64/boot/dts/Makefile                       |   1 +
+ arch/arm64/boot/dts/ambarella/Makefile             |   3 +
+ arch/arm64/boot/dts/ambarella/cv75-evk.dts         |  30 ++++
+ arch/arm64/boot/dts/ambarella/cv75.dtsi            | 177 +++++++++++++++++++++
+ arch/arm64/configs/defconfig                       |   1 +
+ 10 files changed, 259 insertions(+)
+---
+base-commit: 34cf6dafc47441dfb6b356a095b89c3585a93714
+change-id: 20261007-cv75-soc-e628f357f066
 
 Best regards,
-Krzysztof
+--  
+Long Zhao <longzhao@ambarella.com>
+
+
