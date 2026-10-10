@@ -1,257 +1,175 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2101A373BFE;
-	Sat, 10 Oct 2026 16:11:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7C4735A395;
+	Sat, 10 Oct 2026 16:11:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791648705; cv=none; b=il6jWnV9PnY8ozOr0y9m+Bg1MBc7MQp5PHEnqwXdN/xpK/H0KvyvKA6WWbIxrQEbfakK67v7W49Uh6yQjP5dq0By9ki8truPCM9eEG7WDBG0ptwYNobLKpO4Qog8HM/M9smIQ5D3dsZNhvDjPrurQw/wh8s88SxAQC6PME+0Qoo=
+	t=1791648706; cv=none; b=Tw9QfL+qaDE8trrKCYrl8BuUJBprGm36AljXVM9HlxkMjRTxo16RUD9zAUtXDHFswtbrVOcYnCYRs0X3OfaKMLPkAxI7SJttFdf45PSUrHT7GmR94bMK+BK7U3gGndkkWr6berpqxWntXGQFC9xgzjsadMz8dZa4VHEX8C+84go=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791648705; c=relaxed/simple;
-	bh=NbwzkmffJAv8xlQ7bu0fGCCu1ptRWqScCSZBMmbX4hE=;
+	s=arc-20240116; t=1791648706; c=relaxed/simple;
+	bh=n4wndukQf2QeGyH+5aNFXasHVU9DIkOT4GcKNV+xRLo=;
 	h=Message-ID:From:Subject:To:Cc:In-Reply-To:References:Content-Type:
-	 Date; b=offa/0w5vUtC7MLWYclt8TuEaL4ZXViljtkxYipn1GnaNJe5m5rkO6ZSMHdZXcb3RWHLLLCUv8DENzxmlwoPXORd4sUcdbvv/tuMhtWBVMowheRMmTddFux/fhgYn642bCrX4nn94YUgrUxTV55yEtyp2LuH0vEadRX327UfJKA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WELyDbkM; arc=none smtp.client-ip=100.103.45.18
+	 Date; b=HXcTSuZG4Nt70+ssfoI/DKM57PMh4E+ADBMWDVyeTg5uC1VU5khXRweCCM5A8/El+Yh3IAeqBHoc3wvzDolv8pCvtvcQi4uAYycLAfosSFY6y1xo5eJkBs88KXjGoUo+8NVnDA+jzw4MBy6DeHxku9RmbdQ4dtXv4zxTWxpTp3Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=F1lqXTNT; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WELyDbkM"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 577A41F00893;
-	Sat, 10 Oct 2026 16:11:43 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="F1lqXTNT"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 566711F000FF;
+	Sat, 10 Oct 2026 16:11:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791648703;
-	bh=Mu8UZbE7uEwECuMp+KVX/mOhDvdLcakOdVaJhklDWHs=;
+	s=k20260515; t=1791648704;
+	bh=KDgtD9uNFHltL8JB6C+zXySBrayNpiD9/Bp0x6SizDk=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=WELyDbkMl5e1OKk+hGR365Mv66yon69HuDgBifk6l0acuP3cp1irRa/rYQ8/Psw+/
-	 pe3unXtQ5jjez/G8E6cakHw9iQlN3Os3L1n/HmAnU//wXd4H1e87T/lqEf+O1ppZZR
-	 n4C5/k3EYPfVILtZJfMvbMeoM4cjmaZVs11IaH+Z9H+t3UT4hof67nwi9uH1yFHqKh
-	 K/jmkew0p0InPVhzmRFZm8n2R9BrHKfI3Ka/FrUdlnETYg4bdOSpHdA+q7T1Fn5BHH
-	 1cXrRdAZcS770ywFnWeHFWT7aKLUW0WaDdunObSHA4SggqKifKVTXGJfcxzRv2f+Bg
-	 FHzi76qSqAErA==
-Message-ID: <sashiko-outbox-166723@kernel.org>
+	b=F1lqXTNTd9Or2JygmrQWhjD6gfmDiUshAvBNWE6IDyEJn6G/P2mw00Ch8zswmbx0d
+	 HTxT4T+9LXiePVWsOOB+ajUpwBye9ZbLUlz6mkDb0AZ5TJ4Kc1l+vauDcMXH8B0mP0
+	 k6PKQgmyJzi+GKAEt+1hmD8AOBxgSPKufY3h2MSKgutQsz3hMPcSTF38UWXlVOeoKF
+	 JOiZFmSiOc6VDfuplA/PBx2+Ey4H/JLjpFW8Y2EcbP6q5XbU6/655MtJ+k/GaBIo0F
+	 zE64RBS5y1eS6/ZYnWjJQ/yLQJynMOzqzpYvVuRZcRYEkjzam0R/q/4BtP5wWe3apv
+	 H34R0RDySXPtQ==
+Message-ID: <sashiko-outbox-166724@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH net-next v25 10/10] net: dsa: Add Airoha AN8855 5-Port
- Gigabit DSA Switch driver
+Subject: Re: [PATCH net-next v25 09/10] net: dsa: mt7530: generalize and
+ move common function to lib module
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Christian Marangi" <ansuelsmth@gmail.com>
-Cc: robh@kernel.org, lee@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev
-In-Reply-To: <20261009161102.38961-11-ansuelsmth@gmail.com>
+Cc: devicetree@vger.kernel.org, conor+dt@kernel.org, robh@kernel.org, mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20261009161102.38961-10-ansuelsmth@gmail.com>
 References: <20261009161102.38961-1-ansuelsmth@gmail.com>
- <20261009161102.38961-11-ansuelsmth@gmail.com>
+ <20261009161102.38961-10-ansuelsmth@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Sat, 10 Oct 2026 16:11:42 +0000
+Date: Sat, 10 Oct 2026 16:11:43 +0000
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 7 potential issue(=
+Thank you for your contribution! Sashiko AI review found 2 potential issue(=
 s) to consider:
-- [High] net: dsa: an8855: Port matrix is unconditionally zeroed out during=
- port_enable
-- [Medium] net: dsa: an8855: Unchecked regmap_read in an8855_phylink_mac_li=
-nk_up causes silent register corruption
-- [Medium] net: dsa: an8855: Uninitialized stack variable read in an8855_po=
-rt_fdb_dump()
-- [Medium] net: dsa: an8855: an8855_phylink_mac_enable_tx_lpi() leaves stal=
-e timer values on immediate LPI
-- [Medium] net: dsa: an8855: missing mtu_enforcement_ingress flag allows MT=
-U violation
-- [Low] net: dsa: an8855: Driver duplicates standard UAPI statistics as pri=
-vate ethtool strings
-- [Low] net: dsa: an8855: an8855_port_enable() leaves priv->ports[port].ena=
-ble true on error
+- [High] net: severe MDIO bus performance regression via sequential regmap_=
+field accesses
+- [Medium] net: dsa: mt7530: stale hardware bits preserved during VLAN setu=
+p due to RMW
 --
 
-commit d3cae945049e5b42ed716ab1ac6797e64ffa036c
+commit 9f9905cb3bdc569b54ef5ded23eb827e6ba6ffc2
 Author: Christian Marangi <ansuelsmth@gmail.com>
 
-net: dsa: Add Airoha AN8855 5-Port Gigabit DSA Switch driver
+net: dsa: mt7530: generalize and move common function to lib module
 
-This patch adds support for the Airoha AN8855 5-Port Gigabit DSA switch,
-including phylink MAC operations and standard switch functions. It supports
-multiple port speeds, though 5G speed is currently disabled pending PCS
-configuration support.
+This commit creates a mt7530 library module to share common functions in
+preparation for Airoha switch support. The functions are refactored to use
+the reg_field regmap API for register access while aiming to preserve the
+same logic. Minimum modifications are made to header files to permit reuse
+of common macros and enums.
 
-> diff --git a/drivers/net/dsa/mediatek/an8855.c b/drivers/net/dsa/mediatek=
-/an8855.c
+> diff --git a/drivers/net/dsa/mediatek/mt7530-lib.c b/drivers/net/dsa/medi=
+atek/mt7530-lib.c
+> new file mode 100644
+> index 0000000000000..098dd45d3ee9f
 > --- /dev/null
-> +++ b/drivers/net/dsa/mediatek/an8855.c
-> @@ -0,0 +1,1765 @@
-[ ... ]
-> +static const struct mt7530_mib_desc an8855_mib[] =3D {
-> +	MIB_DESC(MT7530_MIB_TX_DROP, -1, "TxDrop"),
-> +	MIB_DESC(MT7530_MIB_TX_CRC_ERR, -1, "TxCrcErr"),
-> +	MIB_DESC(MT7530_MIB_TX_COLLISION, -1, "TxCollision"),
-> +	MIB_DESC(AN8855_MIB_TX_OVERSIZE_DROP, -1, "TxOversizeDrop"),
-
-[Severity: Low]
-Is it necessary to expose these standard hardware counters through
-driver-private ethtool strings? The driver already implements the standard
-.get_eth_mac_stats interface. Exposing values like TxDrop and TxCrcErr
-via ethtool -S duplicates standard UAPI statistics, which goes against the
-Networking Drivers guidelines for standard statistics.
+> +++ b/drivers/net/dsa/mediatek/mt7530-lib.c
 
 [ ... ]
-> +static int an8855_port_fdb_dump(struct dsa_switch *ds, int port,
-> +				dsa_fdb_dump_cb_t *cb, void *data)
+
+> +static void mt7530_lib_fdb_write(struct mt7530_lib_priv *priv, u16 vid,
+> +				 u8 port_mask, const u8 *mac,
+> +				 u8 aging, u8 type)
 > +{
-> +	struct an8855_priv *priv =3D ds->priv;
-> +	int banks, count =3D 0;
-> +	u32 rsp;
-> +	int ret;
-> +	int i;
+> +	/* Clear ATWD registers from previous access */
+> +	regmap_field_write(priv->fields[__MT7530_ATWD1], 0);
+> +	regmap_field_write(priv->fields[__MT7530_ATWD2], 0);
+> +	regmap_field_write(priv->fields[__MT7530_ATWD3], 0);
 > +
-> +	mutex_lock(&priv->reg_mutex);
-> +
-> +	/* Load search port */
-> +	ret =3D regmap_write(priv->regmap, AN8855_ATWD2,
-> +			   FIELD_PREP(AN8855_ATWD2_PORT, BIT(port)));
-> +	if (ret)
-> +		goto exit;
-> +	ret =3D mt7530_lib_fdb_cmd(&priv->lib_priv, MT7530_FDB_START,
-> +				 AN8855_FDB_MAT_MAC_PORT, &rsp);
-> +	if (ret < 0)
-> +		goto exit;
-> +
-> +	do {
-> +		/* From response get the number of banks to read, exit if 0 */
-> +		banks =3D FIELD_GET(AN8855_ATC_HIT, rsp);
-
-[Severity: Medium]
-Could this read an uninitialized stack value? If mt7530_lib_fdb_cmd()
-succeeds but the final regmap_field_read(..., rsp) inside it fails, the
-function returns 0 without populating rsp. This would leave rsp
-uninitialized here, leading to unpredictable loop behavior when parsing FDB
-entries.
-
-[ ... ]
-> +static void an8855_phylink_mac_link_up(struct phylink_config *config,
-> +				       struct phy_device *phydev, unsigned int mode,
-> +				       phy_interface_t interface, int speed,
-> +				       int duplex, bool tx_pause, bool rx_pause)
-> +{
-> +	struct dsa_port *dp =3D dsa_phylink_to_port(config);
-> +	struct an8855_priv *priv =3D dp->ds->priv;
-> +	int port =3D dp->index;
-> +	u32 reg =3D 0;
-> +
-> +	mutex_lock(&priv->reg_mutex);
-> +
-> +	regmap_read(priv->regmap, AN8855_PMCR_P(port), &reg);
-
-[Severity: Medium]
-What happens if this regmap_read() fails? The return value is not checked,
-so reg would remain 0. The function then sets specific bits (speed, duplex,
-TX_EN, RX_EN) and writes it back, which could silently overwrite and
-corrupt other configuration bits (like MAC mode or backoff settings) that
-were configured in an8855_phylink_mac_config().
-
-[ ... ]
-> +static int an8855_port_enable(struct dsa_switch *ds, int port,
-> +			      struct phy_device *phy)
-> +{
-> +	struct dsa_port *dp =3D dsa_to_port(ds, port);
-> +	struct an8855_priv *priv =3D ds->priv;
-> +	int ret;
-> +
-> +	mutex_lock(&priv->reg_mutex);
-> +
-> +	/* Allow the user port gets connected to the cpu port and also
-> +	 * restore the port matrix if the port is the member of a certain
-> +	 * bridge.
-> +	 */
-> +	if (dsa_port_is_user(dp)) {
-> +		struct dsa_port *cpu_dp =3D dp->cpu_dp;
-> +
-> +		priv->ports[port].pm |=3D BIT(cpu_dp->index);
-> +	}
-> +	priv->ports[port].enable =3D true;
-> +	ret =3D regmap_fields_write(priv->lib_priv.fields[MT7530_PCR_MATRIX],
-> +				  port, 0);
+> +	regmap_field_write(priv->fields[MT7530_ATWD_CVID], vid);
+> +	regmap_field_write(priv->fields[MT7530_ATWD_IVL], 1);
 
 [Severity: High]
-Should this be passing priv->ports[port].pm instead of 0? Writing the
-literal 0 disables the port's forwarding matrix in hardware, effectively
-isolating the port and dropping all forwarded traffic, rather than
-applying the port matrix computed just above.
+Does this sequence of regmap_field_write() calls cause a severe performance
+regression on the MDIO bus?
 
-[Severity: Low]
-Also, if this regmap_fields_write() fails, the function jumps to the exit
-label and returns an error without reverting priv->ports[port].enable back
-to false. Can this desynchronize the software state from the hardware state
-and cause issues in loops that check priv->ports[i].enable (such as the LPI
-timer calculation)?
+Since the MDIO bus is inherently slow, taking around 20 to 30 microseconds
+per transaction, replacing a bulk 32-bit regmap_write() with individual
+regmap_field_write() operations expands a single register update into
+multiple Read-Modify-Write cycles.=20
 
-> +	if (ret)
-> +		goto exit;
-> +
-> +	ret =3D regmap_set_bits(priv->regmap, AN8855_PMCR_P(port),
-> +			      AN8855_PMCR_TX_EN | AN8855_PMCR_RX_EN);
-> +
-> +exit:
-> +	mutex_unlock(&priv->reg_mutex);
-> +
-> +	return ret;
-> +}
+It looks like this single FDB entry write will now execute up to 15 RMW
+operations instead of a single bulk update.
+
+> +	regmap_field_write(priv->fields[MT7530_ATWD_FID], FID_BRIDGED);
+> +	regmap_field_write(priv->fields[MT7530_ATWD_AGE_TIMER], aging);
+> +	regmap_field_write(priv->fields[MT7530_ATWD_PORT_MAP], port_mask);
+
 [ ... ]
-> +static int an8855_setup(struct dsa_switch *ds)
+
+> +void mt7530_lib_fdb_read(struct mt7530_lib_priv *priv, struct mt7530_fdb=
+ *fdb)
 > +{
-[ ... ]
-> +	/* Set min a max ageing value supported */
-> +	ds->ageing_time_min =3D AN8855_L2_AGING_MS_CONSTANT;
-> +	ds->ageing_time_max =3D FIELD_MAX(AN8855_AGE_CNT) *
-> +			      FIELD_MAX(AN8855_AGE_UNIT) *
-> +			      AN8855_L2_AGING_MS_CONSTANT;
+> +	u32 val =3D 0;
 > +
-> +	/* User reported problem with WiFi roaming and
-> +	 * ethernet port. Enabling assisted learning fix
-> +	 * the issue.
+> +	regmap_field_read(priv->fields[MT7530_ATRD_CVID], &val);
+> +	fdb->vid =3D val;
+> +	regmap_field_read(priv->fields[MT7530_ATRD_AGE_TIMER], &val);
+> +	fdb->aging =3D val;
+
+[Severity: High]
+Similarly, does this sequence expand a single 3-register access into 10
+separate MDIO read transactions?
+
+If a full FDB dump of 2048 entries is requested, or continuous stat polling
+occurs, this could multiply the bus traffic and cause severe latency and
+MDIO bus congestion.
+
+> +	regmap_field_read(priv->fields[MT7530_ATRD_PORT_MAP], &val);
+> +	fdb->port_mask =3D val;
+> +	regmap_field_read(priv->fields[MT7530_ATRD_MAC_BYTE_5], &val);
+> +	fdb->mac[5] =3D val;
+
+[ ... ]
+
+> +static void mt7530_hw_vlan_add(struct mt7530_lib_priv *priv,
+> +			       struct mt7530_hw_vlan_entry *entry)
+> +{
+> +	struct dsa_port *dp =3D dsa_to_port(priv->ds, entry->port);
+> +	u8 new_members;
+> +	u32 val;
+> +
+> +	new_members =3D entry->old_members | BIT(entry->port);
+> +
+> +	/* Validate the entry with independent learning, create egress tag per
+> +	 * VLAN and joining the port as one of the port members.
 > +	 */
-> +	ds->assisted_learning_on_cpu_port =3D true;
+> +	regmap_field_write(priv->fields[MT7530_VAWD_IVL_MAC], 1);
+> +	regmap_field_write(priv->fields[MT7530_VAWD_VTAG_EN], 1);
+> +	regmap_field_write(priv->fields[MT7530_VAWD_PORT_MEM],
+> +			   new_members);
+> +	regmap_field_write(priv->fields[MT7530_VAWD_FID],
+> +			   FID_BRIDGED);
+> +	regmap_field_write(priv->fields[MT7530_VAWD_VLAN_VALID], 1);
+
+[Severity: Medium]
+Can this sequence of regmap_field_write() calls preserve stale hardware bits
+and leak them into new VLAN entries?
+
+By using individual regmap_field_write() operations, this performs
+Read-Modify-Write cycles on the previously populated hardware register via
+RD_VID. The old implementation used a full 32-bit regmap_write() which
+safely cleared unspecified bits.
+
+It appears that any leftover hardware bits in MT7530_VAWD1, such as EG_CON
+or PORT_STAG from prior usages or bootloader states, will be preserved.
+
+Could this lead to corrupted egress tagging behaviors or STAG attributes on
+standard VLANs?
+
 > +
-> +	return 0;
-> +}
+> +	/* Decide whether adding tag or not for those outgoing packets from the
+> +	 * port inside the VLAN.
+> +	 * CPU port is always taken as a tagged port for serving more than one
 
-[Severity: Medium]
-Does this switch require the mtu_enforcement_ingress flag to be set here?
-Because mt7530_lib_port_change_mtu() configures the MTU limit globally
-based on the CPU port's requested MTU, user ports configured with smaller
-MTUs might accept oversized frames. Setting ds->mtu_enforcement_ingress =3D
-true would let the DSA core normalize bridged port MTUs.
-
-[ ... ]
-> +static int an8855_phylink_mac_enable_tx_lpi(struct phylink_config *confi=
-g,
-> +					    u32 timer, bool tx_clock_stop)
-> +{
-[ ... ]
-> +		ret =3D regmap_update_bits(priv->regmap, AN8855_CKGCR,
-> +					 AN8855_LPI_TXIDLE_THD_MASK, val);
-> +		mutex_unlock(&priv->reg_mutex);
-> +		if (ret) {
-> +			dev_err(dp->ds->dev, "failed to set global LPI timer\n");
-> +			return ret;
-> +		}
-> +	} else {
-> +		ret =3D regmap_set_bits(priv->regmap, AN8855_PMEEECR_P(port),
-> +				      AN8855_LPI_MODE_EN);
-
-[Severity: Medium]
-If timer =3D=3D 0 is requested to enter LPI immediately, the software array
-priv->tx_lpi_timer_ports[port] is not updated to 0. If the port previously
-had a non-zero timer, won't this leave a stale value in the array? Because
-the global LPI timer is derived from the maximum of all enabled ports, a
-stale non-zero value here could artificially inflate the global threshold.
-
-> +		if (ret) {
-> +			dev_err(dp->ds->dev, "failed to enable LPI for port %d\n",
-> +				port);
-> +			return ret;
-> +		}
-> +	}
 [ ... ]
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261009161102.3896=
-1-1-ansuelsmth@gmail.com?part=3D10
+1-1-ansuelsmth@gmail.com?part=3D9
