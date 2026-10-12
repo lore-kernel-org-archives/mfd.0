@@ -1,71 +1,100 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CF9F1C2324;
-	Sun, 11 Oct 2026 05:39:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D89244162A
+	for <mfd@lists.linux.dev>; Mon, 12 Oct 2026 07:06:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791697182; cv=none; b=ZeUpp6ss/Rq7Og04yB65xRVfyuMjD18USSw3tnokA7GSGeSMAvyt+Nb3pTTtMLa0bo5VT2TeFc4DRquzqU5njm7dIO+zizfM0fsJkGHYq1QZ9niCAciegzu6hAb7a3n33nXzyivbre/RJCvgN9szhHdyweC5NRyugPK3TCaWfNA=
+	t=1791788783; cv=none; b=rbgaPyrmoqIQHgq2RzoIY4dcXoKfLbAtdCtMbohTqZpDi8pAJtvUFeguffsroKqBpoj8pUG7Tj7PQBRLkWCAYIg9XvE1HrvcId33MlOInYH4FRngHbIg0U2c9/tawR+6EdZIhxXNU+GiZDTvziGV7npKxsoeHXK04X0Rt8BWCKk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791697182; c=relaxed/simple;
-	bh=36vHwUG3k3xUN+2RzJxHtp8ZAHm4sZbIFWGKecMdqhI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Ka5aaYqFI3FG/MXHZZomlcodAgS9Bbd38/DmM8zKvDFI8T3juGlVYO+3J64HifBcGbd/JhX+i12Pj8tiz7qS2UAR4fP3Fs2Riu36xUmZvqqDOM/qTBPYuNrFDO1Mwndx+xsB9+9GnELGGHunkS9bNDI7MD4r53Kfi53GBWkK1ZI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jxxhEbN/; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791788783; c=relaxed/simple;
+	bh=5Or7TLUPFjMr+wK/HbcxUvax7JxHwIuJv5EQuNkgXqs=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=b98S7SRpn7xpeKykRHjfXPTlTuknKM0gn6NyW7ZrkeGHT3kPQhdEoumIk37X7hUbF/aLKys2Xvdxmf1SbM5/XqNdCVdGW1xriuvAAcnMFQzXKdL6jfWmO7lVpveQwgS6XEwbialPyXk0f4vH+HYX7a2zN0Co7ZiIbjDo6YgzBz8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fTGyQ5kr; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jxxhEbN/"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E7D321F0089B;
-	Sun, 11 Oct 2026 05:39:39 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fTGyQ5kr"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA5FD1F0089E
+	for <mfd@lists.linux.dev>; Mon, 12 Oct 2026 07:06:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791697180;
-	bh=ZKMQU6XEmcUy4ixkaBXMRiZ7Ldlzsu7npbQrSJzCOVY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=jxxhEbN/QmLgMyPsUKIC/vx7tUkxyOcxVYxwPshgqmhmRVa9O5WhO4whAhri/hFzQ
-	 IbEfL1GqksGIztGPZb4+3wdpgASLN+Jp1mFQYuUf0swRM+zp2j2+eStJoJmc4ToJ7y
-	 1kZI5DpPrbixylt7hYK05YHOAeinK1gjIZAh6Lq5amXcWfBstmg7OmLlJRiU4FOYpv
-	 Zkm9OqIzJ2B9vSoLaUdAnPBkmW9DtHg6fWQsx3tENcnwT6gQQDmT2ICCwl05R/8Bpm
-	 r4/OrS+0m13UHW8zUFRHebdMaJTWeKcjG/MgWaXZVQG9zUj0FU5nVFMpsJaj0bqcnq
-	 OA9MCIQAfiWXg==
-Date: Sun, 11 Oct 2026 07:39:36 +0200
-From: Andi Shyti <andi.shyti@kernel.org>
-To: a0282524688@gmail.com
-Cc: lee@kernel.org, Ming Yu <tmyu0@nuvoton.com>, 
-	linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org, mfd@lists.linux.dev
-Subject: Re: [PATCH v8 11/13] mfd: nct6694: Introduce regmap-based transport
- abstraction
-Message-ID: <asshAYcQxlUVJoxU@zenone.zhora.eu>
-References: <20261007092102.3768818-1-a0282524688@gmail.com>
- <20261007092102.3768818-12-a0282524688@gmail.com>
+	s=k20260515; t=1791788781;
+	bh=5Or7TLUPFjMr+wK/HbcxUvax7JxHwIuJv5EQuNkgXqs=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=fTGyQ5krnt3K4KWTWK4hLtJ/elOPo9RESlojr5vWuuz5w790N2V2y1OAJAARJ/bGl
+	 Txgkjtj9O3ajJqQX8BdReV7OZVl2jRUiHbUSvH/Hwz62fNVKeXgAqyNbQ7A+nHTZDB
+	 cY8iDuCbPoIITXS1NgGkaBdVlq8jfvIb3J1lX9bjBuZorfOIiegkGv7MSGvvXCTMcc
+	 QBhBn8gdHLQkz1R+AGzjTl2nne7lSljP0chstwuUjW/N0cSBwdAK0lbp2xg+vpG7BJ
+	 69spnMWqt8ksZiSwy/4MJukY/TAgPon9IT5volsKgrLa306GaKymqyEQWeg6fqxAYf
+	 7B2CJZaBYzdDQ==
+Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-3a1f628b1d1so10823451fa.0
+        for <mfd@lists.linux.dev>; Mon, 12 Oct 2026 00:06:21 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBzf2V20lZ4m05TPTHHIgG4DfyP2HQz0ExoxUiXzogtpVwFQdu0fBOyUCy88BkInXqbXOIU=@lists.linux.dev
+X-Gm-Message-State: AFq9FYJDn9AYV7eEip8dN2jCj0CZ/pUbK34xvEsgret6d9qzf+iNTlzX
+	PHzsypt0SGgzRStZBeoG3L8wPe+Ulye6IVRf76ANzs0x//11tT5gRJC6PJWzj2K8PjmjcKDuK/X
+	WXjhyeUfszIS+/SGlPOP/6FdkEkebyEk=
+X-Received: by 2002:a05:651c:4206:b0:3a6:58fb:8540 with SMTP id
+ 38308e7fff4ca-3a9c5366e70mr19126061fa.19.1791788780083; Mon, 12 Oct 2026
+ 00:06:20 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261007092102.3768818-12-a0282524688@gmail.com>
+References: <20260921-cv75-v5-v8-0-282ff5d98dda@ambarella.com>
+ <20260921-cv75-v5-v8-4-282ff5d98dda@ambarella.com> <CAD++jLmKF5XxHsJX29sdXC_6JHKn-7HkE=N+TKtk5xODtQj3_w@mail.gmail.com>
+ <b2256847-3ec1-47e8-ac79-ceca86eb09e7@kernel.org>
+In-Reply-To: <b2256847-3ec1-47e8-ac79-ceca86eb09e7@kernel.org>
+From: Linus Walleij <linusw@kernel.org>
+Date: Mon, 12 Oct 2026 09:06:08 +0200
+X-Gmail-Original-Message-ID: <CAD++jLkrXXg9xrhAZ8HETc5Qcv5BbkY-ibjvzBmE5WZVqDEGWQ@mail.gmail.com>
+X-Gm-Features: AclHuK82cVgFxHKCaa4i6hk2Uz8RXgvi0_EuZ5dlLOwXcpR-STCWez8_fKxlZx4
+Message-ID: <CAD++jLkrXXg9xrhAZ8HETc5Qcv5BbkY-ibjvzBmE5WZVqDEGWQ@mail.gmail.com>
+Subject: Re: [PATCH v8 04/18] dt-bindings: pinctrl: add Ambarella CV75 pinctrl
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: longzhao@ambarella.com, Arnd Bergmann <arnd@arndb.de>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
+	Jerome Brunet <jbrunet@baylibre.com>, Bartosz Golaszewski <brgl@kernel.org>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jiri Slaby <jirislaby@kernel.org>, 
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
+	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Long Zhao <zl020895@163.com>, 
+	Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Ming,
+On Fri, Oct 9, 2026 at 8:17=E2=80=AFAM Krzysztof Kozlowski <krzk@kernel.org=
+> wrote:
+> On 01/10/2026 09:03, Linus Walleij wrote:
 
-On Wed, Oct 07, 2026 at 05:21:00PM +0800, a0282524688@gmail.com wrote:
-> From: Ming Yu <a0282524688@gmail.com>
-> 
-> Sub-device drivers call into the USB transport directly, so a second
-> transport cannot be added without touching all of them.
-> 
-> Wrap the transport behind a regmap bus. The command header is mapped
-> onto a single 32-bit register by packing the host control byte, the
-> module id and the 16-bit offset, so that the sub-device drivers can use
-> the regmap bulk accessors. The access_lock is dropped as regmap already
-> serialises the bus accesses.
-> 
-> Add nct6694_write_read_msg() for the commands that send a request and
-> read the reply back in the same firmware message, and use it for the
-> I2C deliver command.
-> 
-> Signed-off-by: Ming Yu <a0282524688@gmail.com>
+> > On Mon, Sep 21, 2026 at 6:23=E2=80=AFAM Long Zhao via B4 Relay
+> > <devnull+longzhao.ambarella.com@kernel.org> wrote:
+> >
+> >> From: Long Zhao <longzhao@ambarella.com>
+> >>
+> >> Document the CV75 pin controller binding using generic function and
+> >> groups properties for pinmux configuration.
+> >>
+> >> Reviewed-by: Linus Walleij <linusw@kernel.org>
+> >> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com=
+>
+> >> Signed-off-by: Long Zhao <longzhao@ambarella.com>
+> >
+> > This patch 4/18 applied to the pinctrl tree.
+>
+> There is a dependency, you cannot take this patch alone.
 
-Acked-by: Andi Shyti <andi.shyti@kernel.org>
+Oops, but is it a DTS dependency so if none of the other patches go in thro=
+ugh
+this merge window it'd still be OK right?
 
-Andi
+I think the other patches are still being reviewed and we are at -rc7 so..
+
+Yours,
+Linus Walleij
