@@ -1,78 +1,78 @@
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0ED8347F2EA
-	for <mfd@lists.linux.dev>; Mon, 12 Oct 2026 12:06:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9546A45FFC6
+	for <mfd@lists.linux.dev>; Mon, 12 Oct 2026 12:11:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791806814; cv=none; b=MaAOEa32y9x4rlDmAhx/uQascpIu8HDqxic4HJl/Zro/p6pf3uDNE+s1w8ecpOqnBmPHUCSjcLijTiD61jqFBav8hpYGxHjDeUeIp7KQpJ3tKnLNGszNHNRWqI7iH8VAPkr0c//hMOfO0WpBogllq//WWkycMDkVfj/4vWhAzHk=
+	t=1791807097; cv=none; b=PSeNWK6rxKJaQj5BbKupqxrdw/qjyi2ftKYdFjuq8v7xTyZLWIGt4WG0YrlW9UYPFG3BCgbLPvl9A/873Y8pGGvGjspylKtVKOyEL26kzl4wSia+HpVKTRrHb2Tm9rQxCiWzmjI5orsYX18Rd1POxMLMTSbsXQyVz4EuYoGoshk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791806814; c=relaxed/simple;
-	bh=fzvEhmTz+Ddb+QnUGyF3Qj1zyXPGB9qkQhLX+ZZL6Rk=;
+	s=arc-20240116; t=1791807097; c=relaxed/simple;
+	bh=oJKYKPvIWR1flQf3+9jxsrU2r2Nj7GtoPNUrw1rnnQg=;
 	h=Message-ID:Date:From:To:Cc:Subject:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=dCvBEtNPO8nXrSDuP1inG6HznuLU17NUAakl67s044Zjmk3D5mkkOC2DZ1B3sIMC5Nz5nTtVokFesHX4k34BPffdfxKDR9cHJmDXKnL1PHm4VCS7cY3uJ2uufDpb+fagNQUdUfLMIhD4jG27D6RsRX9Qr2jDLGuR7wzXDzazB4g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MJ0ZNFsI; arc=none smtp.client-ip=209.85.128.48
+	 Content-Type:Content-Disposition:In-Reply-To; b=Sm1CDZiz+1LObaFP8UKrv0qQpOlQj3vhpyNghFny0+aRAqv1T7qorqrWo5Gb9X3W/MRm7Bhv+ViAYwXq5/S8YOgdZgJ/Gh1hDUQzONJeyuQkUsERJlYNZTc3EdrdxtfdpOFgAdxOMyNgPt6CcQ9MKrxAdZ66kq8xXyy4pNo6Zk4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HdAxEMyH; arc=none smtp.client-ip=209.85.221.42
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MJ0ZNFsI"
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4a020e65269so10964475e9.2
-        for <mfd@lists.linux.dev>; Mon, 12 Oct 2026 05:06:49 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HdAxEMyH"
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-48b0d19cf7eso2613012f8f.1
+        for <mfd@lists.linux.dev>; Mon, 12 Oct 2026 05:11:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791806808; x=1792411608; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1791807094; x=1792411894; darn=lists.linux.dev;
         h=in-reply-to:content-transfer-encoding:content-disposition
          :content-type:mime-version:references:subject:cc:to:from:date
          :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=+MAsX1GK+o6Cv2vDUupjDjLycMwLJ2GJ82bbQpCaX0c=;
-        b=MJ0ZNFsIGe1rE8wCnvZXD3RdGWelJ3O40px+Dgs/cp9d80xJb3XMkvfP2HBtHHYdKb
-         chtgK7KVKftTS3o4Utud0HZILsfotMNC5KFv8QLGR8Me1UvQd2w2Lnca9kPtQQ1UTnAv
-         MpyrtQP+ZCgnGRGn2mfDQDQBeu7pODwwaAccY4tQ7SSoD+FzP0jkSMROlyuqcO3nbqmS
-         FML45qIhE4FuywH0obGAxQ0uzuYg6betjb50V2OCMApbEZqN++tXwdSlzUggayIjxMQA
-         FfQvV0ekw1+gLfQ/AJpXawOvn3/zCzU4kb6ON3SLzC93MyUFqRVXwVXUs1T+tanMU/yf
-         Crbg==
+        bh=Sc49qqhhEyUJuK0EGs99OT0N3reB0T/TTspKz6pJo38=;
+        b=HdAxEMyHfmXNHQgXoNeWjWheIkyVXcFZ8cIQXTcvxfOITttZCX3O/ngetCv3Ol898P
+         qP6uIIuVW5QLY/KyaGpZG0SYD6KKpSWB8zSUkipEEs+YwLcug8O1kqVVuhMA3EvK2WxL
+         Rwvl5jooO7vxMXScX96rXGuHTWQ2b5/a3AuRgzHlYLPzwt+5sDpUxInEHZgbIDK/dYqz
+         MyCU35mteIwmr4DMIszljNCWeiJJh/1VpNfyLQF4wdSwAIJmkLqaS0++4uM7X7liNNrl
+         6if3piMVMmUA3bPEsyql3VTyLx4bV7R0ZfPuJtbIVU9CKDxOtIWpAyBvqWLf41Qvgnvd
+         Qf6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791806808; x=1792411608;
+        d=1e100.net; s=20260707; t=1791807094; x=1792411894;
         h=in-reply-to:content-transfer-encoding:content-disposition
          :content-type:mime-version:references:subject:cc:to:from:date
          :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=+MAsX1GK+o6Cv2vDUupjDjLycMwLJ2GJ82bbQpCaX0c=;
-        b=nht7l1i6QlaoybdLoW2i7ay6LgrwWC8ABdk9GIiKcUh2TwxgZUOfCTUz9KZQygR70a
-         +OMUKAoxdZiKGsiZ7uvWN9OK38wQw5KmL/dawmtPFwFzijHHPZ5tH570V3EOOuLkfYik
-         r2iAW1Txyjj3EI14VZn98mnWSgTNtEoEGUfrAEaqmS1pFRD1+SEcw8Qj2cts3Abs3+SH
-         sAJN+SiGcmrnYq5RoIGV3HymgKcR/HyVMFGwdNsuPmzIh7Kiots3dKhghBhq1tNRgKBh
-         7eGIA2tltxwfzkct2lWKl2ET8SmXl8JJXqG6otrAa8CC7gj2evHoyKilPnBK8NINzy6/
-         I6Yg==
-X-Forwarded-Encrypted: i=1; AKwUvBxOpruEfaDpvmbAtDII7HEh/wx08n2OpKGKpxBaLZgYaWKhF8x0c0txYijG+Q81H7MHNI0=@lists.linux.dev
-X-Gm-Message-State: AFq9FYLqiGNyCZrMi1eA/PJA42Z9EmSdIy6uLwxCXUWHn/ecnw8clsAQ
-	5g+kN9lV+fGs86MTmJKAVIEIo9rH5OTP3w7Xb4Pi9btc/BNdwka5JxZA
-X-Gm-Gg: AYBFou3dgVzrQ4fTEDkuAMwUdizbc2yCXbVtXQxYGDaEkg6HhMLaG8pywOSxUXVVoH8
-	ub34O6MeUMl4rzjDH1Pa68LuJ7SSIStpO7HuRgc0nZLpfWH5Qa7tlNx4A9yUEk/Lmp+oEquSSuX
-	hTCINXVowmAEKM65y+h65ovjsVcWcLK3nG5lO0v3yWkung7rVo2E3b3Um1yn/OLmrShvDJgPSq0
-	XDvQSD7peqyLiVGuI+79FJg7wPvmDN0/jIoMa6fkKtM6QmSri0HGqI70oDZO0GyhLgnB1xWsGHI
-	KuyHwp3t5p8YR/9QY+0JEG1AUju0vJzA8gbW8Pv0glxX7umF5YfmKUENN7nL8gQF2crdaQTPggn
-	Rp1dN7fqQHEtrhkVcQezwaXVc66jjzPQfq0592XNMRdhdbJ0Oovi17FX5m37jfGsP/brFUxOU3v
-	7rgkNiBprtEGO0k+fwidr80M6oJfgbZw68lNNaQTA1Jh25uUL0ANCtB+Lb63EOFyS5RCAwfa0gg
-	44U6VXgEzsGky4SrVGVKH25ZvDsglDZT4J7kRW71BzBDjnbnA54A8g/81H+vqk7S5lA9tSbDa+T
-	oiAe
-X-Received: by 2002:a05:600c:83c9:b0:4a1:70f0:ac2 with SMTP id 5b1f17b1804b1-4a18e4ce9cfmr172319655e9.24.1791806807816;
-        Mon, 12 Oct 2026 05:06:47 -0700 (PDT)
+        bh=Sc49qqhhEyUJuK0EGs99OT0N3reB0T/TTspKz6pJo38=;
+        b=Ej+18il9VfxjDMMj5LorNRgdO+8hDeFNssDQ7W/y700XwjtkfsGWpVMxgXZcB5ULOZ
+         bjBByEhCpN4jzcgJ2+3czGCbFXFHpIlpgN+P4x42svdvJXjcfITM3UbQCYYzyTidB/sC
+         SFifztGXDm+b0kYHH9wJEy0sHJEyRJgG6Vi1cnQCLLIRUwlxyC80P+iOlvDhBGexOhkg
+         GpAY70SO1t8WfeKAqrhtOdiUus716yOYkdXg1qs66FpnNWODzsuIDUtWnWK8aaqZzU+I
+         jDhh5TUh1vRdz6/itQvdqCX3IlPW3VT6rhU4uqWKPrFAlkqp3AEfDToMzxj6SSH8QnZA
+         /L+Q==
+X-Forwarded-Encrypted: i=1; AKwUvBy7IXH7WHuDcgRjVd7FOsz95GePejdithCbUiAvbsd0eAb0VtNCZuquRMmZ/e9pgqj6aoY=@lists.linux.dev
+X-Gm-Message-State: AFq9FYJfxkE56yE26qqF6F+bgeb52Ej8mXLntcSVl/ZjoBUFBpzxIKG7
+	mSDlm3kdaVNhNk9Sr3j6fmyN5CLlIiQzUBjdMpcHqus8/lWyorYsenoo/yo3SQ==
+X-Gm-Gg: AYBFou1v+CXiO+M4GsMJB/N6ZR0IEJw7hjEewxk20wZINmX2Li7gkWDGAT43cZg/JHI
+	9AZHeL6DdQLowvbfgwp3R3vE3T0S+EKwQnltegqLTmgmcvww6Y7ANyPZTXVUZ7JfFPziLxrRGhH
+	xv6OGwYbRXdynA+DJorkpAOtf3KCR9XGN9bQmwOm3MPVplyWgxnl4U9/wO1/eeuW4m80sczAMN/
+	fory4vazlb0p6B7k72Jmy7y/in040bqWctBQ5L8kYD1H6IcWxS++o3T8EeQObxduz3cos70rs3U
+	iUgi1SlG+F9d1BkzNYjMzrP3H3Sp1Lq26avaXVb4LSu6pvLToNDDTiXdX4SE4cIiEy6DTVHK6eJ
+	mVIBtPholZEdyNTUgsUBu9xV3dQL737+92ft0WWE3dy1pgNZ+JLQkFeAfFj02qh88XFymeFn8O1
+	RxWC5UuOp92PT7v1719NaYJ0+nNfuwJGOdGNWu8aE2FjXL/wV5Tu26/DEYFyWS8M7qus30zMxCQ
+	bbbAkE3/yuGtqaxwI5BQljeTcuZ1cBTw1ellU+hiFkVw6fUabWgd/jni+Tg0FKLFAqf7IkeoSP7
+	b37LLg==
+X-Received: by 2002:a05:6000:4287:b0:48c:77ae:c39a with SMTP id ffacd0b85a97d-48db9475d10mr24395994f8f.15.1791807093405;
+        Mon, 12 Oct 2026 05:11:33 -0700 (PDT)
 Received: from Ansuel-XPS. (host-95-235-252-189.retail.telecomitalia.it. [95.235.252.189])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a19f249692sm155838215e9.3.2026.10.12.05.06.46
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48db9ab981asm19703461f8f.30.2026.10.12.05.11.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Oct 2026 05:06:47 -0700 (PDT)
-Message-ID: <6acccd57.bac20f7a.1310da.9a58@mx.google.com>
-X-Google-Original-Message-ID: <aszNVJ0JRbWH7Kf5@Ansuel-XPS.>
-Date: Mon, 12 Oct 2026 14:06:44 +0200
+        Mon, 12 Oct 2026 05:11:32 -0700 (PDT)
+Message-ID: <6accce74.66e4af69.1a0022.3cf3@mx.google.com>
+X-Google-Original-Message-ID: <aszOcm9IwHY0KKpc@Ansuel-XPS.>
+Date: Mon, 12 Oct 2026 14:11:30 +0200
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: sashiko-reviews@lists.linux.dev
-Cc: devicetree@vger.kernel.org, conor+dt@kernel.org, robh@kernel.org,
-	mfd@lists.linux.dev, lee@kernel.org
-Subject: Re: [PATCH net-next v25 09/10] net: dsa: mt7530: generalize and move
- common function to lib module
+Cc: robh@kernel.org, lee@kernel.org, conor+dt@kernel.org,
+	devicetree@vger.kernel.org, mfd@lists.linux.dev
+Subject: Re: [PATCH net-next v25 10/10] net: dsa: Add Airoha AN8855 5-Port
+ Gigabit DSA Switch driver
 References: <20261009161102.38961-1-ansuelsmth@gmail.com>
- <20261009161102.38961-10-ansuelsmth@gmail.com>
- <sashiko-outbox-166724@kernel.org>
+ <20261009161102.38961-11-ansuelsmth@gmail.com>
+ <sashiko-outbox-166723@kernel.org>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -82,142 +82,231 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <sashiko-outbox-166724@kernel.org>
+In-Reply-To: <sashiko-outbox-166723@kernel.org>
 
-On Sat, Oct 10, 2026 at 04:11:43PM +0000, sashiko-bot@kernel.org wrote:
-> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
-> - [High] net: severe MDIO bus performance regression via sequential regmap_field accesses
-> - [Medium] net: dsa: mt7530: stale hardware bits preserved during VLAN setup due to RMW
+On Sat, Oct 10, 2026 at 04:11:42PM +0000, sashiko-bot@kernel.org wrote:
+> Thank you for your contribution! Sashiko AI review found 7 potential issue(s) to consider:
+> - [High] net: dsa: an8855: Port matrix is unconditionally zeroed out during port_enable
+> - [Medium] net: dsa: an8855: Unchecked regmap_read in an8855_phylink_mac_link_up causes silent register corruption
+> - [Medium] net: dsa: an8855: Uninitialized stack variable read in an8855_port_fdb_dump()
+> - [Medium] net: dsa: an8855: an8855_phylink_mac_enable_tx_lpi() leaves stale timer values on immediate LPI
+> - [Medium] net: dsa: an8855: missing mtu_enforcement_ingress flag allows MTU violation
+> - [Low] net: dsa: an8855: Driver duplicates standard UAPI statistics as private ethtool strings
+> - [Low] net: dsa: an8855: an8855_port_enable() leaves priv->ports[port].enable true on error
 > --
 > 
-> commit 9f9905cb3bdc569b54ef5ded23eb827e6ba6ffc2
+> commit d3cae945049e5b42ed716ab1ac6797e64ffa036c
 > Author: Christian Marangi <ansuelsmth@gmail.com>
 > 
-> net: dsa: mt7530: generalize and move common function to lib module
+> net: dsa: Add Airoha AN8855 5-Port Gigabit DSA Switch driver
 > 
-> This commit creates a mt7530 library module to share common functions in
-> preparation for Airoha switch support. The functions are refactored to use
-> the reg_field regmap API for register access while aiming to preserve the
-> same logic. Minimum modifications are made to header files to permit reuse
-> of common macros and enums.
+> This patch adds support for the Airoha AN8855 5-Port Gigabit DSA switch,
+> including phylink MAC operations and standard switch functions. It supports
+> multiple port speeds, though 5G speed is currently disabled pending PCS
+> configuration support.
 > 
-> > diff --git a/drivers/net/dsa/mediatek/mt7530-lib.c b/drivers/net/dsa/mediatek/mt7530-lib.c
-> > new file mode 100644
-> > index 0000000000000..098dd45d3ee9f
+> > diff --git a/drivers/net/dsa/mediatek/an8855.c b/drivers/net/dsa/mediatek/an8855.c
 > > --- /dev/null
-> > +++ b/drivers/net/dsa/mediatek/mt7530-lib.c
-> 
+> > +++ b/drivers/net/dsa/mediatek/an8855.c
+> > @@ -0,0 +1,1765 @@
 > [ ... ]
+> > +static const struct mt7530_mib_desc an8855_mib[] = {
+> > +	MIB_DESC(MT7530_MIB_TX_DROP, -1, "TxDrop"),
+> > +	MIB_DESC(MT7530_MIB_TX_CRC_ERR, -1, "TxCrcErr"),
+> > +	MIB_DESC(MT7530_MIB_TX_COLLISION, -1, "TxCollision"),
+> > +	MIB_DESC(AN8855_MIB_TX_OVERSIZE_DROP, -1, "TxOversizeDrop"),
 > 
-> > +static void mt7530_lib_fdb_write(struct mt7530_lib_priv *priv, u16 vid,
-> > +				 u8 port_mask, const u8 *mac,
-> > +				 u8 aging, u8 type)
-> > +{
-> > +	/* Clear ATWD registers from previous access */
-> > +	regmap_field_write(priv->fields[__MT7530_ATWD1], 0);
-> > +	regmap_field_write(priv->fields[__MT7530_ATWD2], 0);
-> > +	regmap_field_write(priv->fields[__MT7530_ATWD3], 0);
-> > +
-> > +	regmap_field_write(priv->fields[MT7530_ATWD_CVID], vid);
-> > +	regmap_field_write(priv->fields[MT7530_ATWD_IVL], 1);
-> 
-> [Severity: High]
-> Does this sequence of regmap_field_write() calls cause a severe performance
-> regression on the MDIO bus?
-> 
-> Since the MDIO bus is inherently slow, taking around 20 to 30 microseconds
-> per transaction, replacing a bulk 32-bit regmap_write() with individual
-> regmap_field_write() operations expands a single register update into
-> multiple Read-Modify-Write cycles. 
-> 
-> It looks like this single FDB entry write will now execute up to 15 RMW
-> operations instead of a single bulk update.
+> [Severity: Low]
+> Is it necessary to expose these standard hardware counters through
+> driver-private ethtool strings? The driver already implements the standard
+> .get_eth_mac_stats interface. Exposing values like TxDrop and TxCrcErr
+> via ethtool -S duplicates standard UAPI statistics, which goes against the
+> Networking Drivers guidelines for standard statistics.
 >
 
-I think it's acceptable for the good generalization done here and also it's
-not exactly an hot path updating the FDB entry.
+Same tretement of MT7530, these MIB doesn't reflect the standard linux
+values.
  
-> > +	regmap_field_write(priv->fields[MT7530_ATWD_FID], FID_BRIDGED);
-> > +	regmap_field_write(priv->fields[MT7530_ATWD_AGE_TIMER], aging);
-> > +	regmap_field_write(priv->fields[MT7530_ATWD_PORT_MAP], port_mask);
-> 
 > [ ... ]
-> 
-> > +void mt7530_lib_fdb_read(struct mt7530_lib_priv *priv, struct mt7530_fdb *fdb)
+> > +static int an8855_port_fdb_dump(struct dsa_switch *ds, int port,
+> > +				dsa_fdb_dump_cb_t *cb, void *data)
 > > +{
-> > +	u32 val = 0;
+> > +	struct an8855_priv *priv = ds->priv;
+> > +	int banks, count = 0;
+> > +	u32 rsp;
+> > +	int ret;
+> > +	int i;
 > > +
-> > +	regmap_field_read(priv->fields[MT7530_ATRD_CVID], &val);
-> > +	fdb->vid = val;
-> > +	regmap_field_read(priv->fields[MT7530_ATRD_AGE_TIMER], &val);
-> > +	fdb->aging = val;
-> 
-> [Severity: High]
-> Similarly, does this sequence expand a single 3-register access into 10
-> separate MDIO read transactions?
-> 
-> If a full FDB dump of 2048 entries is requested, or continuous stat polling
-> occurs, this could multiply the bus traffic and cause severe latency and
-> MDIO bus congestion.
-> 
-> > +	regmap_field_read(priv->fields[MT7530_ATRD_PORT_MAP], &val);
-> > +	fdb->port_mask = val;
-> > +	regmap_field_read(priv->fields[MT7530_ATRD_MAC_BYTE_5], &val);
-> > +	fdb->mac[5] = val;
-> 
-> [ ... ]
-> 
-
-Same reason, it's acceptable.
-
-> > +static void mt7530_hw_vlan_add(struct mt7530_lib_priv *priv,
-> > +			       struct mt7530_hw_vlan_entry *entry)
-> > +{
-> > +	struct dsa_port *dp = dsa_to_port(priv->ds, entry->port);
-> > +	u8 new_members;
-> > +	u32 val;
+> > +	mutex_lock(&priv->reg_mutex);
 > > +
-> > +	new_members = entry->old_members | BIT(entry->port);
+> > +	/* Load search port */
+> > +	ret = regmap_write(priv->regmap, AN8855_ATWD2,
+> > +			   FIELD_PREP(AN8855_ATWD2_PORT, BIT(port)));
+> > +	if (ret)
+> > +		goto exit;
+> > +	ret = mt7530_lib_fdb_cmd(&priv->lib_priv, MT7530_FDB_START,
+> > +				 AN8855_FDB_MAT_MAC_PORT, &rsp);
+> > +	if (ret < 0)
+> > +		goto exit;
 > > +
-> > +	/* Validate the entry with independent learning, create egress tag per
-> > +	 * VLAN and joining the port as one of the port members.
-> > +	 */
-> > +	regmap_field_write(priv->fields[MT7530_VAWD_IVL_MAC], 1);
-> > +	regmap_field_write(priv->fields[MT7530_VAWD_VTAG_EN], 1);
-> > +	regmap_field_write(priv->fields[MT7530_VAWD_PORT_MEM],
-> > +			   new_members);
-> > +	regmap_field_write(priv->fields[MT7530_VAWD_FID],
-> > +			   FID_BRIDGED);
-> > +	regmap_field_write(priv->fields[MT7530_VAWD_VLAN_VALID], 1);
+> > +	do {
+> > +		/* From response get the number of banks to read, exit if 0 */
+> > +		banks = FIELD_GET(AN8855_ATC_HIT, rsp);
 > 
 > [Severity: Medium]
-> Can this sequence of regmap_field_write() calls preserve stale hardware bits
-> and leak them into new VLAN entries?
-> 
-> By using individual regmap_field_write() operations, this performs
-> Read-Modify-Write cycles on the previously populated hardware register via
-> RD_VID. The old implementation used a full 32-bit regmap_write() which
-> safely cleared unspecified bits.
-> 
-> It appears that any leftover hardware bits in MT7530_VAWD1, such as EG_CON
-> or PORT_STAG from prior usages or bootloader states, will be preserved.
-> 
-> Could this lead to corrupted egress tagging behaviors or STAG attributes on
-> standard VLANs?
+> Could this read an uninitialized stack value? If mt7530_lib_fdb_cmd()
+> succeeds but the final regmap_field_read(..., rsp) inside it fails, the
+> function returns 0 without populating rsp. This would leave rsp
+> uninitialized here, leading to unpredictable loop behavior when parsing FDB
+> entries.
 > 
 
-From what I can see the vlan entry gets read first for existance. This zero
-all these values addressing this concern.
+This is an almost impossible scenario. If ok I can address this with a
+followup.
 
+> [ ... ]
+> > +static void an8855_phylink_mac_link_up(struct phylink_config *config,
+> > +				       struct phy_device *phydev, unsigned int mode,
+> > +				       phy_interface_t interface, int speed,
+> > +				       int duplex, bool tx_pause, bool rx_pause)
+> > +{
+> > +	struct dsa_port *dp = dsa_phylink_to_port(config);
+> > +	struct an8855_priv *priv = dp->ds->priv;
+> > +	int port = dp->index;
+> > +	u32 reg = 0;
 > > +
-> > +	/* Decide whether adding tag or not for those outgoing packets from the
-> > +	 * port inside the VLAN.
-> > +	 * CPU port is always taken as a tagged port for serving more than one
+> > +	mutex_lock(&priv->reg_mutex);
+> > +
+> > +	regmap_read(priv->regmap, AN8855_PMCR_P(port), &reg);
 > 
+> [Severity: Medium]
+> What happens if this regmap_read() fails? The return value is not checked,
+> so reg would remain 0. The function then sets specific bits (speed, duplex,
+> TX_EN, RX_EN) and writes it back, which could silently overwrite and
+> corrupt other configuration bits (like MAC mode or backoff settings) that
+> were configured in an8855_phylink_mac_config().
+> 
+
+Similar to above, very unlikely scenario.
+
+> [ ... ]
+> > +static int an8855_port_enable(struct dsa_switch *ds, int port,
+> > +			      struct phy_device *phy)
+> > +{
+> > +	struct dsa_port *dp = dsa_to_port(ds, port);
+> > +	struct an8855_priv *priv = ds->priv;
+> > +	int ret;
+> > +
+> > +	mutex_lock(&priv->reg_mutex);
+> > +
+> > +	/* Allow the user port gets connected to the cpu port and also
+> > +	 * restore the port matrix if the port is the member of a certain
+> > +	 * bridge.
+> > +	 */
+> > +	if (dsa_port_is_user(dp)) {
+> > +		struct dsa_port *cpu_dp = dp->cpu_dp;
+> > +
+> > +		priv->ports[port].pm |= BIT(cpu_dp->index);
+> > +	}
+> > +	priv->ports[port].enable = true;
+> > +	ret = regmap_fields_write(priv->lib_priv.fields[MT7530_PCR_MATRIX],
+> > +				  port, 0);
+> 
+> [Severity: High]
+> Should this be passing priv->ports[port].pm instead of 0? Writing the
+> literal 0 disables the port's forwarding matrix in hardware, effectively
+> isolating the port and dropping all forwarded traffic, rather than
+> applying the port matrix computed just above.
+> 
+
+I can address this in follow-up patch if possible.
+
+> [Severity: Low]
+> Also, if this regmap_fields_write() fails, the function jumps to the exit
+> label and returns an error without reverting priv->ports[port].enable back
+> to false. Can this desynchronize the software state from the hardware state
+> and cause issues in loops that check priv->ports[i].enable (such as the LPI
+> timer calculation)?
+> 
+
+
+
+> > +	if (ret)
+> > +		goto exit;
+> > +
+> > +	ret = regmap_set_bits(priv->regmap, AN8855_PMCR_P(port),
+> > +			      AN8855_PMCR_TX_EN | AN8855_PMCR_RX_EN);
+> > +
+> > +exit:
+> > +	mutex_unlock(&priv->reg_mutex);
+> > +
+> > +	return ret;
+> > +}
+> [ ... ]
+> > +static int an8855_setup(struct dsa_switch *ds)
+> > +{
+> [ ... ]
+> > +	/* Set min a max ageing value supported */
+> > +	ds->ageing_time_min = AN8855_L2_AGING_MS_CONSTANT;
+> > +	ds->ageing_time_max = FIELD_MAX(AN8855_AGE_CNT) *
+> > +			      FIELD_MAX(AN8855_AGE_UNIT) *
+> > +			      AN8855_L2_AGING_MS_CONSTANT;
+> > +
+> > +	/* User reported problem with WiFi roaming and
+> > +	 * ethernet port. Enabling assisted learning fix
+> > +	 * the issue.
+> > +	 */
+> > +	ds->assisted_learning_on_cpu_port = true;
+> > +
+> > +	return 0;
+> > +}
+> 
+> [Severity: Medium]
+> Does this switch require the mtu_enforcement_ingress flag to be set here?
+> Because mt7530_lib_port_change_mtu() configures the MTU limit globally
+> based on the CPU port's requested MTU, user ports configured with smaller
+> MTUs might accept oversized frames. Setting ds->mtu_enforcement_ingress =
+> true would let the DSA core normalize bridged port MTUs.
+> 
+
+I will double check this.
+
+> [ ... ]
+> > +static int an8855_phylink_mac_enable_tx_lpi(struct phylink_config *config,
+> > +					    u32 timer, bool tx_clock_stop)
+> > +{
+> [ ... ]
+> > +		ret = regmap_update_bits(priv->regmap, AN8855_CKGCR,
+> > +					 AN8855_LPI_TXIDLE_THD_MASK, val);
+> > +		mutex_unlock(&priv->reg_mutex);
+> > +		if (ret) {
+> > +			dev_err(dp->ds->dev, "failed to set global LPI timer\n");
+> > +			return ret;
+> > +		}
+> > +	} else {
+> > +		ret = regmap_set_bits(priv->regmap, AN8855_PMEEECR_P(port),
+> > +				      AN8855_LPI_MODE_EN);
+> 
+> [Severity: Medium]
+> If timer == 0 is requested to enter LPI immediately, the software array
+> priv->tx_lpi_timer_ports[port] is not updated to 0. If the port previously
+> had a non-zero timer, won't this leave a stale value in the array? Because
+> the global LPI timer is derived from the maximum of all enabled ports, a
+> stale non-zero value here could artificially inflate the global threshold.
+> 
+
+I can address in follow-up patch.
+
+> > +		if (ret) {
+> > +			dev_err(dp->ds->dev, "failed to enable LPI for port %d\n",
+> > +				port);
+> > +			return ret;
+> > +		}
+> > +	}
 > [ ... ]
 > 
 > -- 
-> Sashiko AI review · https://sashiko.dev/#/patchset/20261009161102.38961-1-ansuelsmth@gmail.com?part=9
+> Sashiko AI review · https://sashiko.dev/#/patchset/20261009161102.38961-1-ansuelsmth@gmail.com?part=10
 
 -- 
 	Ansuel
