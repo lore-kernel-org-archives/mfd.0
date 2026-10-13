@@ -1,44 +1,44 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABE8D37A83D
-	for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 06:50:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE1E048033E
+	for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 06:51:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791874242; cv=none; b=RF0D3GoW2wcngvqddrcZYtPBLdb6cidEIt9F9DhMJtACsbTnLRBMQV8juD7ZaE0LMrBB+8SHvMWOkNgUefxrulMuPGtiYs95mNi2RcQAlQ1xxIqGWdm27KBA3Q8QUbf0BH5MGN0r14kltLvkZApFNzJPM9+0Uiuu0esF4g6ZBaw=
+	t=1791874269; cv=none; b=peX1O24WRVeSstXgdYm2zjjvzgu2TjwvmYHB1GB6TAdKNLyBOdpEm7FYf4LvwT49exacf7qPeIKtDZQpbI3mPkT+vXP3I0PbiAK6cYw/6OpD2yTzUlvShssZsIPkba9nmSo4suXSWgt0nlV7dyMNkCCyOhKfA0Pa25cHqCfAi8c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791874242; c=relaxed/simple;
-	bh=qNDoRg6x4x4keUvCxsuigJhn+2TtBVFyI5IEoOB1wVY=;
+	s=arc-20240116; t=1791874269; c=relaxed/simple;
+	bh=d8YaEZ3aHwVMiJFN+YofQ6ON/KCZg1lLIAihZvLJNw4=;
 	h=Message-ID:From:Subject:To:Cc:In-Reply-To:References:Content-Type:
-	 Date; b=XulbZitcYE6YA1+1ye6PUtcj5hNZnXSeWNzSNvE52LrXoFTA15eYhvXeV1CcfghOXDG6DPHV64DDGZXgGIvJ59qWwlzU6iHD/1PqbTe6fLUbzCJca4t9hG2RIy9TxmLNjlidVu7q9FR1Jw6Q93G+333ulVUOCYrQpY4ETCTH8Ok=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=m3UIuyFP; arc=none smtp.client-ip=100.103.45.18
+	 Date; b=hzdJATVCsHX81mCbiCapg3bze6nrgHo4Mm7W60cEwCdBBE9IbhfluerLpGdimH85YmRdaU+U8uTLeAWZqlUYmaSjGYW8W+gF7Mcn9dejLwy1G9tcr5uaPDGk+nUoAlpONYkw2aBnq2PKIU1PRWqgva4Zhy3WPMby+Hzv+xpMm/g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WSrhIxYP; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="m3UIuyFP"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE7331F000FF;
-	Tue, 13 Oct 2026 06:50:40 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WSrhIxYP"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 983581F000FF;
+	Tue, 13 Oct 2026 06:51:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791874241;
-	bh=tfRRvLApNTRj8QdCNrprkh6NGXba5RSxizVHwNeU/8M=;
+	s=k20260515; t=1791874266;
+	bh=S2qO3jwCg1knuCCd1wtUahqfgkgftouH5TRK3sYbL3c=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=m3UIuyFPJKxBPsITElzzzQFx4TGq5VvjMBEFEbpJ5T0LToy8j+OTBIyW/c8waPMnu
-	 bgkpjO4Ge1gyk75eNRxI/rqgjaxg2WjxFe6gMPq3pPQ5ll9476/LdWRbuUXFxE4HB6
-	 DJZ3bCcxoAMrYp5Cl4rOcLqJ8kfZl7D+mByWtLVT9myVZNplPatsM1e/WOGUP2ibeg
-	 gx0yUjGBar1xc9nUkD9KuQfsL9hhQIdVWmwezdIe1TQVpEoRyzmsdCVDXFeqWgc21G
-	 WyEufXpxfX7UPXsB4UjNZ/NU0uqZhOwdzOJv1HeACp7wGjFFlWg/ZA2uLBrcw/Q/ae
-	 yMILpj7ABroZQ==
-Message-ID: <sashiko-outbox-169141@kernel.org>
+	b=WSrhIxYPQIvE6Qk+qdgzQlmhOg1kiltA07DjX9gsrYzjVeDkJ9uIStISiy7ESMsug
+	 A6V2zwhvvgvHcqfpXbYRPLWdIzOHcawto72V85T++w+8yNY4zeIy6PkwxoSITmdmvr
+	 5y9jhsHP4hsUdd4lBFYZGWIXyrHF06vOa0TP5H5D0QHFpv8M4Tgi02yQ2Qv0jBskmO
+	 6FCPD5xA01PKWInx8QsJo+DDM8A5U4YQjmZLB+77IYYqlzyPpy183XSrCONj3aD8qm
+	 zCLQHRq7urT80oNEfvAzXvasC8KFvfVdNnPw2O+IPzJRg9fm4bJZa+1G1ZZdniGOIc
+	 b10IoAj/MeSOw==
+Message-ID: <sashiko-outbox-169142@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v9 07/12] mfd: nct6694: Rename USB transport functions
- with _usb_ prefix
+Subject: Re: [PATCH v9 09/12] mfd: nct6694: Extract core device management
+ into a separate module
 Reply-To: sashiko-reviews@lists.linux.dev
 To: a0282524688@gmail.com
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261013063259.2734757-8-a0282524688@gmail.com>
+In-Reply-To: <20261013063259.2734757-10-a0282524688@gmail.com>
 References: <20261013063259.2734757-1-a0282524688@gmail.com>
- <20261013063259.2734757-8-a0282524688@gmail.com>
+ <20261013063259.2734757-10-a0282524688@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 13 Oct 2026 06:50:40 +0000
+Date: Tue, 13 Oct 2026 06:51:06 +0000
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -47,56 +47,75 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
 Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
-- [Low] mfd: nct6694 driver name hardcodes implementation details
+- [High] mfd: sleeping lock inside atomic irq_chip callback on PREEMPT_RT
 --
 
-commit a9e777aed234c15a70849992110b510c5746f24d
+commit 73d41ff61bab9765dfc8120a108448da4e70e4f3
 Author: Ming Yu <a0282524688@gmail.com>
 
-mfd: nct6694: Rename USB transport functions with _usb_ prefix
+mfd: nct6694: Extract core device management into a separate module
 
-This commit adds a _usb_ prefix to the USB transport functions, tables, and
-driver name in preparation for core and HIF transport additions. It also ke=
-eps
-nct6694_{read,write}_msg() as static inline wrappers in the shared header.
+This commit extracts the IRQ domain and IDA handling from the USB driver
+into a new nct6694-core module. The USB driver now creates the IRQ domain
+before submitting the interrupt URB.
 
-> diff --git a/drivers/mfd/nct6694.c b/drivers/mfd/nct6694.c
-> index 6d75b1485350f..83e9c7ac9beea 100644
-> --- a/drivers/mfd/nct6694.c
-> +++ b/drivers/mfd/nct6694.c
+> diff --git a/drivers/mfd/nct6694-core.c b/drivers/mfd/nct6694-core.c
+> new file mode 100644
+> index 0000000000000..4b100882ae07b
+> --- /dev/null
+> +++ b/drivers/mfd/nct6694-core.c
+> @@ -0,0 +1,111 @@
 [ ... ]
-> @@ -441,20 +445,20 @@ static void nct6694_usb_disconnect(struct usb_inter=
-face *iface)
->  	usb_free_urb(usb_data->int_urb);
->  }
-> =20
-> -static const struct usb_device_id nct6694_ids[] =3D {
-> +static const struct usb_device_id nct6694_usb_ids[] =3D {
->  	{ USB_DEVICE_AND_INTERFACE_INFO(NCT6694_VENDOR_ID, NCT6694_PRODUCT_ID, =
-0xFF, 0x00, 0x00) },
->  	{ }
->  };
-> -MODULE_DEVICE_TABLE(usb, nct6694_ids);
-> +MODULE_DEVICE_TABLE(usb, nct6694_usb_ids);
-> =20
->  static struct usb_driver nct6694_usb_driver =3D {
-> -	.name		=3D "nct6694",
-> -	.id_table	=3D nct6694_ids,
-> +	.name		=3D "nct6694-usb",
+> +static void nct6694_irq_enable(struct irq_data *data)
+> +{
+> +	struct nct6694 *ddata =3D irq_data_get_irq_chip_data(data);
+> +	irq_hw_number_t hwirq =3D irqd_to_hwirq(data);
+> +
+> +	guard(spinlock_irqsave)(&ddata->irq_lock);
 
-[Severity: Low]
-Does this violate the MFD subsystem naming conventions by hard-coding
-the implementation detail ("usb") into the driver name? The subsystem
-guidelines specify that we should avoid including implementation details
-or the driver's own filename in names, as it creates rigid and non-reusable
-drivers.
+[Severity: High]
+Does taking this lock in an irq_chip callback violate lock nesting rules on
+PREEMPT_RT?
 
-> +	.id_table	=3D nct6694_usb_ids,
->  	.probe		=3D nct6694_usb_probe,
->  	.disconnect	=3D nct6694_usb_disconnect,
->  };
->  module_usb_driver(nct6694_usb_driver);
+Since this callback is invoked by the IRQ core (such as enable_irq()) with =
+the
+irq_desc->lock raw_spinlock held, it executes in atomic context. On PREEMPT=
+_RT,
+spinlock_t is converted to a sleeping rt_mutex, so taking a sleeping lock i=
+nside
+an atomic context causes a "scheduling while atomic" BUG and lockdep splat.
+
+Should ddata->irq_lock (declared in include/linux/mfd/nct6694.h) be convert=
+ed
+to a raw_spinlock_t to be safe inside atomic IRQ callbacks?
+
+> +
+> +	ddata->irq_enable |=3D BIT(hwirq);
+> +}
+> +
+> +static void nct6694_irq_disable(struct irq_data *data)
+> +{
+> +	struct nct6694 *ddata =3D irq_data_get_irq_chip_data(data);
+> +	irq_hw_number_t hwirq =3D irqd_to_hwirq(data);
+> +
+> +	guard(spinlock_irqsave)(&ddata->irq_lock);
+
+[Severity: High]
+Does taking this lock in an irq_chip callback violate lock nesting rules on
+PREEMPT_RT?
+
+Since this callback is invoked by the IRQ core with the irq_desc->lock
+raw_spinlock held, it executes in atomic context. On PREEMPT_RT, spinlock_t=
+ is
+converted to a sleeping rt_mutex, so taking a sleeping lock inside an atomic
+context causes a "scheduling while atomic" BUG.
+
+Could this be resolved by converting ddata->irq_lock to a raw_spinlock_t?
+
+> +
+> +	ddata->irq_enable &=3D ~BIT(hwirq);
+> +}
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261013063259.2734=
-757-1-a0282524688@gmail.com?part=3D7
+757-1-a0282524688@gmail.com?part=3D9
