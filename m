@@ -1,93 +1,122 @@
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70064526A8E;
-	Tue, 13 Oct 2026 17:53:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EAC2952ED28
+	for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 18:09:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791914032; cv=none; b=smwInugGzrV5WeE/RAVXf/GkiTq9u0bqcdDZfduF/Q1am91UC7IihlKwl6e0ChwJsvzZeBADjPDhXfvwPAffLIBPeMqgrpdHnN9yOAR68ECNgoQQ33BHoPGQTkrAnul3WyxlYAbEbtXnFtF9nqm66pCp89fEhJxOn7tQ+mo0LJI=
+	t=1791914988; cv=none; b=dHVO8v+ZCd0fr0U0cvakI7ruco1j91xxFD6rgAaSMjz9ZvvHpN2pPZ3+oj/OqGMEirBmkb+5XHHhfKe0eBtl6/fdNq4MBACGGKKTLRPmOwJssmkPj70HEOFmVkzIh83wx/djiSubGhlwYoIfQXqyf+LM6UQNJIpebb6QMwpcq/s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791914032; c=relaxed/simple;
-	bh=hp1dTw3hRxiZBvSzxIR3eaRSSMR6S7lRt7/KxcL7YmU=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
-	 MIME-Version:Message-ID; b=VbXiuYHW3BiB0lsbvRliFa6vSfejYykrn35KxTVFc1Jo4gc6Qk/cRKGLEnHp6q+6WT9sB7+QU016GC42a9x5pnqjQPDcqq22BnieKrD1+7KQ1Ezghf7s4ozV5t+RNLPr+D8TaOVoVtk5pTYJ8DPZRogizRUX7qc8mh/gBSE05bs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=OWFaVuM9; arc=none smtp.client-ip=117.135.210.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1791914988; c=relaxed/simple;
+	bh=N4LcWhqablCQy7AuG+dp47sWdEyawhDBW56fssZm3h8=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=iZr/ICuSdFcjn3y+ZAwrkaeybhOtVOrgCzwwzzGo5GL+hiAcgXY0ZzysjN9lkNUSbgQp9JGBb8xYIZ+c37H3W9f0Knri8+Hw9+T94AghMnnCfpkpvTH2LICydSidXeuvuwUjzBUMcalg1mEm9jkJSHVZ3hVyoD+WLAZnOL08P7k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=W7IH8H+B; arc=none smtp.client-ip=209.85.221.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="OWFaVuM9"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
-	Message-ID; bh=hp1dTw3hRxiZBvSzxIR3eaRSSMR6S7lRt7/KxcL7YmU=; b=O
-	WFaVuM93IWPWVHz1DROYW7egfZ3MO/d1MdS/gA7+Jxi5NWJd4PoZrmiHx15AKVZ2
-	4UM4Cwvntj02QhgfOh2yUzLuhNFwL2fTm+PsC0+Y4zrcQoHKQKUn5ibm288MEAes
-	5R0lW7gOOP+J72R9BCZBMfN7yGrWIPetla+gvN6Ux0=
-Date: Wed, 14 Oct 2026 01:51:46 +0800 (CST)
-From: zl020895  <zl020895@163.com>
-To: "Linus Walleij" <linusw@kernel.org>
-Cc: "Krzysztof Kozlowski" <krzk@kernel.org>, longzhao@ambarella.com,
-	"Arnd Bergmann" <arnd@arndb.de>,
-	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
-	soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
-	"Rob Herring" <robh@kernel.org>,
-	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
-	"Conor Dooley" <conor+dt@kernel.org>,
-	"Michael Turquette" <mturquette@baylibre.com>,
-	"Stephen Boyd" <sboyd@kernel.org>,
-	"Jerome Brunet" <jbrunet@baylibre.com>,
-	"Bartosz Golaszewski" <brgl@kernel.org>,
-	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
-	"Jiri Slaby" <jirislaby@kernel.org>,
-	"Andy Shevchenko" <andriy.shevchenko@linux.intel.com>,
-	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	"Catalin Marinas" <catalin.marinas@arm.com>,
-	"Will Deacon" <will@kernel.org>, "Lee Jones" <lee@kernel.org>,
-	mfd@lists.linux.dev, devicetree@vger.kernel.org,
-	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
-	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org,
-	"Krzysztof Kozlowski" <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: Re:Re: Re: [PATCH v8 04/18] dt-bindings: pinctrl: add Ambarella
- CV75 pinctrl
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
- 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
-In-Reply-To: <CAD++jLmrQwAT1Sb8HGgoM8x48rN9-pPT2RB1GE18h5YA7c4CwQ@mail.gmail.com>
-References: <20260921-cv75-v5-v8-0-282ff5d98dda@ambarella.com>
- <20260921-cv75-v5-v8-4-282ff5d98dda@ambarella.com>
- <CAD++jLmKF5XxHsJX29sdXC_6JHKn-7HkE=N+TKtk5xODtQj3_w@mail.gmail.com>
- <b2256847-3ec1-47e8-ac79-ceca86eb09e7@kernel.org>
- <CAD++jLkrXXg9xrhAZ8HETc5Qcv5BbkY-ibjvzBmE5WZVqDEGWQ@mail.gmail.com>
- <a0eca34d-5eb2-4730-b8c7-0f2302bcf265@kernel.org>
- <CAD++jLm=T-U07vAVCogMnfOfkDf=i9QhGGc8ok2N-ZUh50WLNA@mail.gmail.com>
- <56dc6c05-7fd6-43de-bc62-c353ae1dbcc3@kernel.org>
- <54b55ad7.9d3a.1a135b09587.Coremail.zl020895@163.com>
- <CAD++jLmrQwAT1Sb8HGgoM8x48rN9-pPT2RB1GE18h5YA7c4CwQ@mail.gmail.com>
-X-NTES-SC: AL_Qu2SA/WavEEr4CaeZekdnUoTj+Y/XMK0uvwk1YdVc8gEnjjMwxonRUZAE2Xr9+a2LgydoDuVWhh8yd55fo9x/FIZB3Lpfw2lhbgiuZUShQ==
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="W7IH8H+B"
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-48afbd2c386so1905471f8f.3
+        for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 11:09:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791914985; x=1792519785; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=4Ni5fu/M2p02kW2mgvbfBzY77o7xL0dnmXboaLsv73E=;
+        b=W7IH8H+B7y0gLs+v6/RP/3vtiFQC4MPRD9Jlz+xz2o/KtL5mJ1KarBwfpQJ98BNLMN
+         0NRopFSIuEkPrTyr4HYjxzAOkkr/pHy0TlIaA+Y/gHersYgETtS5UHGa+viIA7QIkikC
+         BQUjQ721OOh7gfFbalTSttghBRKbNJ81owEv672xe4+TUQ1UBxplg7eKyUAofhtLSxUG
+         BvA2MyiXC/fFqy/lg6iR2uzlpQJtdxKAPYyGDKol5TUjr/Qe03uf2CiNS+xlJ1h/Tior
+         xGe3n00gSk8ibLWSv5F+L49R1YYADz09FQkTuniJ4M9FuwkJyC2Gn2zZxaWfsZfGoawi
+         9aqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791914985; x=1792519785;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=4Ni5fu/M2p02kW2mgvbfBzY77o7xL0dnmXboaLsv73E=;
+        b=caD1HcFdSspPR+w5ajV4GK5J9wUajPnfFb+5jmvaQslqfL6SeXFSCWguqu+VywiGGQ
+         F8dmuiV32dIBXo9V/XlF/HFBR59qUa0FxMWFoaEcGJTBgm3/ofM0g0i1aqdpSIyXvGQZ
+         0kMyooR3QI6OLSIbs0j4fqW9gzSJMPUwEyD9j5Fux5EccwXu5p/dKETZilqL04jXqWPh
+         sf5bi7IZaFSBmArNkoIaRqliVr/wPHJMJ7n1K3vr50DbRj2WBvzrfTQWXJT91DpJb2ed
+         lnvsr+K4I7/bIjq0TGNU36T/QEgPwjC3GsyTefBOjhM3AWF1ClAUcxJA74OUnx7WlFmx
+         9/SQ==
+X-Forwarded-Encrypted: i=1; AKwUvByiNwlpdX4taVQty6/fAkLfDCOIdTeOmYNjTbhm8L2EyfW0TkFOQzPZxu9jAveC7+X7uug=@lists.linux.dev
+X-Gm-Message-State: AFq9FYLtuN7Vq9HPwXzupx36aOHVAZba0QGhhcvUWGft7P3G3kDe7H0X
+	cb+AjuOr1akGPqPPM7IhlcT+2qb3fuxYw+gLWYZfUlTCsesGLPZFf1X8
+X-Gm-Gg: AYBFou16qF15B/fYiUWAU++D2xS5ScuDWiCiH+IMHAbpqM3dFFql8+0V7Antjbxs04w
+	RO3J5WEtwykacoFdUlW28WKuTwCzVWujEFgA2uOwHdCLVVsxaOIhK8O1jjwKQDsBcdp9pgQeKL6
+	s0dQnMs6zH/ONxAKBMWyqWKsVaaXjKrc4siXqLdrNq8pEX20HHxo7AgswPvH/gzKoHsBX3RB4TB
+	Df+bcthh8vBJUTbN2VuRulhzpsOHcA6Mfyv8Hvq4r/ZnRfl6EsmW0anIPl3iWnpeJvEeaN6I7fg
+	9QbtU50MFGGJVBQ3xkx8UVdJ8Bi1qM4Ty4U1NrIn2mkEJM/jWPHUuMnzIQeXtVD54VD8oM8M/G7
+	hAxOxKL+Q8q/uKJYxSvAGncmofDCu8QFRc6PueE+3U8MF5S/rlovfbGbgGqD/0pxnxiuO7qzoGX
+	r74dEH1Y56KROL3jtZBnRNHGyLiJxp83Z1vqQYn3MM1uXKU/yXzQD2rXv5rGIEsHQAbKU+urHCk
+	gJS36xDP0OdQX9pmF7gZuNei+rwug==
+X-Received: by 2002:a5d:5545:0:b0:487:27f6:a4e5 with SMTP id ffacd0b85a97d-48dbad4b6d5mr19310156f8f.53.1791914985161;
+        Tue, 13 Oct 2026 11:09:45 -0700 (PDT)
+Received: from xeon ([188.163.112.62])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48de0aaaaebsm6854498f8f.14.2026.10.13.11.09.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 13 Oct 2026 11:09:44 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Lee Jones <lee@kernel.org>,
+	Pavel Machek <pavel@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Daniel Thompson <danielt@kernel.org>,
+	Jingoo Han <jingoohan1@gmail.com>,
+	Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: linux-leds@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	mfd@lists.linux.dev,
+	dri-devel@lists.freedesktop.org
+Subject: [PATCH v3 0/4] mfd: aat2870: Convert to use OF bindings
+Date: Tue, 13 Oct 2026 21:09:29 +0300
+Message-ID: <20261013180933.487013-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Message-ID: <69bf6d9d.a86d.1a1366451f1.Coremail.zl020895@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID:eygvCgD3NyGyb85qV71XAA--.16978W
-X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbC7hJWx2rOb7KL3QAA3C
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Content-Transfer-Encoding: 8bit
 
-CkF0IDIwMjYtMTAtMTQgMDA6Mzg6NDAsICJMaW51cyBXYWxsZWlqIiA8bGludXN3QGtlcm5lbC5v
-cmc+IHdyb3RlOgo+T24gVHVlLCBPY3QgMTMsIDIwMjYgYXQgNDozNuKAr1BNIHpsMDIwODk1IDx6
-bDAyMDg5NUAxNjMuY29tPiB3cm90ZToKPgo+PiBXb3VsZCB0aGlzIHdvcms/OiBJIHNlbmQgYSBz
-dGFuZGFsb25lCj4+ICJkdC1iaW5kaW5nczogdmVuZG9yLXByZWZpeGVzOiBhZGQgQW1iYXJlbGxh
-IiBwYXRjaCB0byBSb2Igd2l0aCBvbmx5Cj4+IHRoZSB0d28gbGluZXMgaW4gdmVuZG9yLXByZWZp
-eGVzLnlhbWwsIGFuZCBkcm9wIHRoYXQgaHVuayBmcm9tIHRoZQo+PiBTb0Mgc2VyaWVzLiBPbmNl
-IHRoZSBwcmVmaXggaXMgaW4gbGludXgtbmV4dCwgdGhlIHZlbmRvci1wcmVmaXgKPj4gd2Fybmlu
-Z3Mgc2hvdWxkIGJlIGZpeGVkLiBUaGUgcmVtYWluaW5nIGV4YW1wbGUgbWF0Y2hlcywgc3VjaCBh
-cwo+PiBhbWJhcmVsbGEsZHJpdmUtc3RyZW5ndGgtc3lzY29uLCBzdGlsbCBuZWVkIHRoZSBzZXBh
-cmF0ZQo+PiBHUElPL1VBUlQvcGluY3RybCBiaW5kaW5ncy4KPgo+VGhhdCB3b3JrcyBmb3IgbWUg
-YW5kIHNvbHZlcyBteSBwcm9ibGVtIHNvIGdvIGFoZWFkLgo+Cj5Zb3VycywKPkxpbnVzIFdhbGxl
-aWoKClNlbnQ6Cmh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2FsbC8yMDI2MTAxNC1jdjc1LXByZWZp
-eC12MS0xLWZlOTVlZDU2Nzg4MEBhbWJhcmVsbGEuY29tCgpCZXN0IHJlZ2FyZHMsCkxvbmcgWmhh
-bwo=
+Document Skyworks AAT2870 into schema, convert existing driver to
+use OF bindings and remove platform data, add support for
+in-supplies.
+
+---
+Changes in v2:
+- fixed led-max-microamp scaling
+- fixed max_brightness parsing
+- fixed regulator init_data and of_node passing
+- of_platform_populate > devm_of_platform_populate
+
+Changes in v3:
+- removed max-brightness property
+- switched from dedicated max_brightness property to dynamically
+  calculating brightness steps
+- update regulator registration to use mostly core regulator framework
+---
+
+Svyatoslav Ryhel (4):
+  dt-bindings: mfd: Document Skyworks AAT2870
+  mfd: aat2870: Derive brightness steps from max current
+  mfd: aat2870: Convert to use OF bindings
+  mfd: aat2870: Add support for VIN and IN-LDO power supplies
+
+ .../bindings/leds/skyworks,aat2870.yaml       | 124 ++++++++++++++
+ drivers/mfd/aat2870-core.c                    | 120 ++++---------
+ drivers/regulator/aat2870-regulator.c         | 160 ++++++++----------
+ drivers/video/backlight/aat2870_bl.c          |  77 ++++-----
+ include/linux/mfd/aat2870.h                   |  95 +----------
+ 5 files changed, 259 insertions(+), 317 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/leds/skyworks,aat2870.yaml
+
+-- 
+2.53.0
+
