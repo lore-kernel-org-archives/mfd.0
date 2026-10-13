@@ -1,137 +1,87 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EAC454F93B8;
-	Tue, 13 Oct 2026 14:36:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49A8A33936F
+	for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 16:38:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791902208; cv=none; b=J4FpzBmsVT4QFgUnwk65iTglCZjQCQ1Kxt7NUSIZQtwTZklqTwBcmYAYCGHKsLQnzXh4vMsmuPAakDBHyLfO4G9u9QdJVo6jBnBCDNrXIaivrWiWO8kFaNsnBOIrTXC26vujTszZtdB7Ub2vsnzBCNZUHnmlVWK9k51wCkcbShA=
+	t=1791909537; cv=none; b=dDUgElho5HBC4eP8uXXRaB+dDSzrPYDiCTogYSZph3ScznnGfka9UJPSIvx1lEvnnEkBgHJOB3LQXVrWF1MGH4wLrSXm1g3T7LsfN0i2EibTKZz9Ikd+GJRcfvVvaOao+DAoia0o5DqEUotg4RdlsOi/VG8sogr/F+JGhD66MNg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791902208; c=relaxed/simple;
-	bh=kNn8WAD/z/ZpM3QZ3VuE/IiEH4+BojK9Q7ut6WpHzeg=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
-	 MIME-Version:Message-ID; b=KWNOnal94Jw4kRL3PV/Yt/kanMXWVu+3cMq8EiekBfdj1zg6zIrLHu7wCg6Gd5Llg/ePdxN96ZAm4l6FHWBZDUYb+WH05l9UhzRyoauYTKl582uSbZeQIAyWvEGr1XRgZNcXNXh+mCKKZ6NeBI+tXxb/7N/nUmlsvr8f1amxZe8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=UUHXAkTA; arc=none smtp.client-ip=220.197.31.4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1791909537; c=relaxed/simple;
+	bh=aoc8nug3Q5d4idvy+yC0Mx43dQ2bXsa5/t1xC0cav2Y=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=mETAgokE3daD192YOkk6vznFmhiLH/PTu7CW84VIuwI+gNXB0e/LIM+mI52QdGPFhfY76gyREoNasCj19UOhS7lCE/JjyBM9u+plA2/y2Jc+DRdB4PcbvbSddMyu/PzjvwW/GP7oRmc9mcahbUPMr7qMwY+aKac7ht4zCDoUFII=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EIXr0/Nq; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="UUHXAkTA"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
-	Message-ID; bh=kNn8WAD/z/ZpM3QZ3VuE/IiEH4+BojK9Q7ut6WpHzeg=; b=U
-	UHXAkTACV9Ia7TC5OqFyzxf85WOEEMfpc9Qd76MWONAtJAw8HOnllf7GzEWhMZh9
-	dwXXgTfpeA9s9MHgTNuWfKsU9XS7lL0mugzzpPvukNgmvgm8rVPxIHcDamCLlRRu
-	/P/F3Lx9TTaJykuOylg1XI8pZuKx4dZWUqHAMOsRsE=
-Date: Tue, 13 Oct 2026 22:35:27 +0800 (CST)
-From: zl020895  <zl020895@163.com>
-To: "Krzysztof Kozlowski" <krzk@kernel.org>
-Cc: "Linus Walleij" <linusw@kernel.org>, longzhao@ambarella.com,
-	"Arnd Bergmann" <arnd@arndb.de>,
-	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
-	soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
-	"Rob Herring" <robh@kernel.org>,
-	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
-	"Conor Dooley" <conor+dt@kernel.org>,
-	"Michael Turquette" <mturquette@baylibre.com>,
-	"Stephen Boyd" <sboyd@kernel.org>,
-	"Jerome Brunet" <jbrunet@baylibre.com>,
-	"Bartosz Golaszewski" <brgl@kernel.org>,
-	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
-	"Jiri Slaby" <jirislaby@kernel.org>,
-	"Andy Shevchenko" <andriy.shevchenko@linux.intel.com>,
-	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	"Catalin Marinas" <catalin.marinas@arm.com>,
-	"Will Deacon" <will@kernel.org>, "Lee Jones" <lee@kernel.org>,
-	mfd@lists.linux.dev, devicetree@vger.kernel.org,
-	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
-	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org,
-	"Krzysztof Kozlowski" <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: Re:Re: [PATCH v8 04/18] dt-bindings: pinctrl: add Ambarella CV75
- pinctrl
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
- 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
-In-Reply-To: <56dc6c05-7fd6-43de-bc62-c353ae1dbcc3@kernel.org>
-References: <20260921-cv75-v5-v8-0-282ff5d98dda@ambarella.com>
- <20260921-cv75-v5-v8-4-282ff5d98dda@ambarella.com>
- <CAD++jLmKF5XxHsJX29sdXC_6JHKn-7HkE=N+TKtk5xODtQj3_w@mail.gmail.com>
- <b2256847-3ec1-47e8-ac79-ceca86eb09e7@kernel.org>
- <CAD++jLkrXXg9xrhAZ8HETc5Qcv5BbkY-ibjvzBmE5WZVqDEGWQ@mail.gmail.com>
- <a0eca34d-5eb2-4730-b8c7-0f2302bcf265@kernel.org>
- <CAD++jLm=T-U07vAVCogMnfOfkDf=i9QhGGc8ok2N-ZUh50WLNA@mail.gmail.com>
- <56dc6c05-7fd6-43de-bc62-c353ae1dbcc3@kernel.org>
-X-NTES-SC: AL_Qu2SA/WbvUkp4SSQZukdnUoTj+Y/XMK0uvwk1YdVc84FkSfp3wMjT35qOEXs9/qoFCWqvTu+SwFvxuB9c7JXVw4GgELw3hqsIakKQoG/Mw==
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EIXr0/Nq"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 27A621F00898
+	for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 16:38:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1791909536;
+	bh=aoc8nug3Q5d4idvy+yC0Mx43dQ2bXsa5/t1xC0cav2Y=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=EIXr0/NqPFBPFbx1LaDsMXlKsGpxcyH5MhiMvJJEZ0hq0e0/HC3jK3AP1NrWRjgJ0
+	 9d+nW7mdbCZJFLBgvbC5gEY/xtmIeMTs8CfOlk1pibY1P/VXzO6VDvkSex+a/sQXwN
+	 JnsYAeNzc+oKZ6PMto84QQDBwMXAHAxm5+0qr302BxdESzqlPu72UGNyXChQ4ZYlW7
+	 TBEzkfcGSCutzCxu3ePjH/mnwPyN0Z2BazHlesETGhJDeapcn82BQpOxKPnbkJzAYZ
+	 54GU+w60CWQYtSjOWvzvxPPDu7y+qTe8EdOGslq1DfkZhUdWbgDnzizxDKE5xj+M/q
+	 q9MeRX/XD/Ewg==
+Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-5bcb3726952so1440939e87.3
+        for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 09:38:56 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBzXN/8TaTNeOL1WEBYd4hrNOx9d5RWuzFhIG0IZhMcnTjbdtdAQcUM3Ed8rPalcmr9001k=@lists.linux.dev
+X-Gm-Message-State: AFq9FYL01qX2pbbs1iPLxIpeDMGt93VzPwONGxwakywJzA1pFHnu/OOK
+	gZkdg7xL1gO84vgJA2WjV4jh/qVMYVW/mbrMzXuS9KiIVgss54HCP77TOzQ1Yh2Z1EKcfPMRLtc
+	s+KjdD7mlHQ7PV7ed2nolTdvl7T1idoc=
+X-Received: by 2002:ac2:4e0c:0:b0:5ba:3b49:1ed4 with SMTP id
+ 2adb3069b0e04-5bcde8be31dmr4294291e87.44.1791909534950; Tue, 13 Oct 2026
+ 09:38:54 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Message-ID: <54b55ad7.9d3a.1a135b09587.Coremail.zl020895@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID:gygvCgD3f2qvQc5qnCghAA--.83W
-X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbC7g-JO2rOQa9TXQAA3X
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+References: <20260921-cv75-v5-v8-0-282ff5d98dda@ambarella.com>
+ <20260921-cv75-v5-v8-4-282ff5d98dda@ambarella.com> <CAD++jLmKF5XxHsJX29sdXC_6JHKn-7HkE=N+TKtk5xODtQj3_w@mail.gmail.com>
+ <b2256847-3ec1-47e8-ac79-ceca86eb09e7@kernel.org> <CAD++jLkrXXg9xrhAZ8HETc5Qcv5BbkY-ibjvzBmE5WZVqDEGWQ@mail.gmail.com>
+ <a0eca34d-5eb2-4730-b8c7-0f2302bcf265@kernel.org> <CAD++jLm=T-U07vAVCogMnfOfkDf=i9QhGGc8ok2N-ZUh50WLNA@mail.gmail.com>
+ <56dc6c05-7fd6-43de-bc62-c353ae1dbcc3@kernel.org> <54b55ad7.9d3a.1a135b09587.Coremail.zl020895@163.com>
+In-Reply-To: <54b55ad7.9d3a.1a135b09587.Coremail.zl020895@163.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Tue, 13 Oct 2026 18:38:40 +0200
+X-Gmail-Original-Message-ID: <CAD++jLmrQwAT1Sb8HGgoM8x48rN9-pPT2RB1GE18h5YA7c4CwQ@mail.gmail.com>
+X-Gm-Features: AclHuK-C40htUqR0sQkUyvXzKiDDbUaAdB38TRfKZGEWECC-r-8bfyITN0j8-AE
+Message-ID: <CAD++jLmrQwAT1Sb8HGgoM8x48rN9-pPT2RB1GE18h5YA7c4CwQ@mail.gmail.com>
+Subject: Re: Re: [PATCH v8 04/18] dt-bindings: pinctrl: add Ambarella CV75 pinctrl
+To: zl020895 <zl020895@163.com>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, longzhao@ambarella.com, Arnd Bergmann <arnd@arndb.de>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
+	Jerome Brunet <jbrunet@baylibre.com>, Bartosz Golaszewski <brgl@kernel.org>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jiri Slaby <jirislaby@kernel.org>, 
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
+	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Lee Jones <lee@kernel.org>, 
+	mfd@lists.linux.dev, devicetree@vger.kernel.org, linux-clk@vger.kernel.org, 
+	linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, 
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-SGkgS3J6eXN6dG9mLCBMaW51cywKClNvcnJ5IGZvciB0aGUgbWVzcy4gCgpXb3VsZCB0aGlzIHdv
-cms/OiBJIHNlbmQgYSBzdGFuZGFsb25lCiJkdC1iaW5kaW5nczogdmVuZG9yLXByZWZpeGVzOiBh
-ZGQgQW1iYXJlbGxhIiBwYXRjaCB0byBSb2Igd2l0aCBvbmx5CnRoZSB0d28gbGluZXMgaW4gdmVu
-ZG9yLXByZWZpeGVzLnlhbWwsIGFuZCBkcm9wIHRoYXQgaHVuayBmcm9tIHRoZQpTb0Mgc2VyaWVz
-LiBPbmNlIHRoZSBwcmVmaXggaXMgaW4gbGludXgtbmV4dCwgdGhlIHZlbmRvci1wcmVmaXgKd2Fy
-bmluZ3Mgc2hvdWxkIGJlIGZpeGVkLiBUaGUgcmVtYWluaW5nIGV4YW1wbGUgbWF0Y2hlcywgc3Vj
-aCBhcwphbWJhcmVsbGEsZHJpdmUtc3RyZW5ndGgtc3lzY29uLCBzdGlsbCBuZWVkIHRoZSBzZXBh
-cmF0ZQpHUElPL1VBUlQvcGluY3RybCBiaW5kaW5ncy4KCkJlc3QgcmVnYXJkcywKTG9uZyBaaGFv
-CgpBdCAyMDI2LTEwLTEzIDE3OjIyOjU2LCAiS3J6eXN6dG9mIEtvemxvd3NraSIgPGtyemtAa2Vy
-bmVsLm9yZz4gd3JvdGU6Cj5PbiAxMy8xMC8yMDI2IDEwOjQ0LCBMaW51cyBXYWxsZWlqIHdyb3Rl
-Ogo+PiBPbiBNb24sIE9jdCAxMiwgMjAyNiBhdCA5OjA44oCvQU0gS3J6eXN6dG9mIEtvemxvd3Nr
-aSA8a3J6a0BrZXJuZWwub3JnPiB3cm90ZToKPj4+IE9uIDEyLzEwLzIwMjYgMDk6MDYsIExpbnVz
-IFdhbGxlaWogd3JvdGU6Cj4+Pj4gT24gRnJpLCBPY3QgOSwgMjAyNiBhdCA4OjE34oCvQU0gS3J6
-eXN6dG9mIEtvemxvd3NraSA8a3J6a0BrZXJuZWwub3JnPiB3cm90ZToKPj4+Pj4gT24gMDEvMTAv
-MjAyNiAwOTowMywgTGludXMgV2FsbGVpaiB3cm90ZToKPj4+Pgo+Pj4+Pj4gT24gTW9uLCBTZXAg
-MjEsIDIwMjYgYXQgNjoyM+KAr0FNIExvbmcgWmhhbyB2aWEgQjQgUmVsYXkKPj4+Pj4+IDxkZXZu
-dWxsK2xvbmd6aGFvLmFtYmFyZWxsYS5jb21Aa2VybmVsLm9yZz4gd3JvdGU6Cj4+Pj4+Pgo+Pj4+
-Pj4+IEZyb206IExvbmcgWmhhbyA8bG9uZ3poYW9AYW1iYXJlbGxhLmNvbT4KPj4+Pj4+Pgo+Pj4+
-Pj4+IERvY3VtZW50IHRoZSBDVjc1IHBpbiBjb250cm9sbGVyIGJpbmRpbmcgdXNpbmcgZ2VuZXJp
-YyBmdW5jdGlvbiBhbmQKPj4+Pj4+PiBncm91cHMgcHJvcGVydGllcyBmb3IgcGlubXV4IGNvbmZp
-Z3VyYXRpb24uCj4+Pj4+Pj4KPj4+Pj4+PiBSZXZpZXdlZC1ieTogTGludXMgV2FsbGVpaiA8bGlu
-dXN3QGtlcm5lbC5vcmc+Cj4+Pj4+Pj4gUmV2aWV3ZWQtYnk6IEtyenlzenRvZiBLb3psb3dza2kg
-PGtyenlzenRvZi5rb3psb3dza2lAb3NzLnF1YWxjb21tLmNvbT4KPj4+Pj4+PiBTaWduZWQtb2Zm
-LWJ5OiBMb25nIFpoYW8gPGxvbmd6aGFvQGFtYmFyZWxsYS5jb20+Cj4+Pj4+Pgo+Pj4+Pj4gVGhp
-cyBwYXRjaCA0LzE4IGFwcGxpZWQgdG8gdGhlIHBpbmN0cmwgdHJlZS4KPj4+Pj4KPj4+Pj4gVGhl
-cmUgaXMgYSBkZXBlbmRlbmN5LCB5b3UgY2Fubm90IHRha2UgdGhpcyBwYXRjaCBhbG9uZS4KPj4+
-Pgo+Pj4+IE9vcHMsIGJ1dCBpcyBpdCBhIERUUyBkZXBlbmRlbmN5IHNvIGlmIG5vbmUgb2YgdGhl
-IG90aGVyIHBhdGNoZXMgZ28gaW4gdGhyb3VnaAo+Pj4KPj4+IE5vLCBpdCBpcyBhIGJpbmRpbmdz
-IGRlcGVuZGVuY3ksIGludHJvZHVjaW5nIG5ldyBEVCBiaW5kaW5ncyB3YXJuaW5nIGZvcgo+Pj4g
-Ym90aCB5b3VyIHRyZWUgYW5kIG5leHQuCj4+IAo+PiBJcyB0aGVyZSBhIHByb2JsZW0gd2l0aCB0
-aGUgYmluZGluZ3MgcGF0Y2ggaXRzZWxmPwo+PiAKPj4gSW4gdGhhdCBjYXNlIExvbmcgY2FuIGp1
-c3Qgc2VuZCBhbiBpbmNyZW1lbnRhbCBwYXRjaCB0bwo+PiBmaXggaXQgcmlnaHQ/Cj4+IAo+Pj4g
-WW91ciB0cmVlIGlzIGZpbmUgaW4gdGhpcyBjYXNlIGFzIGxvbmcgYXMgbmV4dAo+Pj4gaXMgYWxz
-byBmaW5lLi4uIGJ1dCBuZXh0IGlzIG5vdCwgYmVjYXVzZSB0aGF0IHBhdGNoIGRpZCBub3QgbWFr
-ZSBpdCB0aGVyZS4KPj4gCj4+IEJ1dCB0aGUgcGF0Y2ggaXMgaW4gLW5leHQ/Cj4+IAo+PiB+L2xp
-bnV4LW5leHQkIGxzCj4+IERvY3VtZW50YXRpb24vZGV2aWNldHJlZS9iaW5kaW5ncy9waW5jdHJs
-L2FtYmFyZWxsYSxjdjc1LXBpbmN0cmwueWFtbAo+PiBEb2N1bWVudGF0aW9uL2RldmljZXRyZWUv
-YmluZGluZ3MvcGluY3RybC9hbWJhcmVsbGEsY3Y3NS1waW5jdHJsLnlhbWwKPj4gCj4+PiBXZSBj
-YW5ub3QgaGF2ZSBhbnkgbmV3IERUIGJpbmRpbmdzIHdhcm5pbmdzIGluIG5leHQuCj4+IAo+PiBJ
-IGd1ZXNzIEkganVzdCBkb24ndCBnZXQgaXQgOkQKPj4gCj4+IFRvIG1lIGl0IHNlZW1zIGxpa2Ug
-YSBmYWlybHkgbm9ybWFsIHNpdHVhdGlvbjogQUNLZWQgYmluZGluZ3MgbWVyZ2VkCj4+IHRvZ2V0
-aGVyIHdpdGggdGhlIGRyaXZlciwgbm8gZGVwZW5kZW5jZSBvbiBhbnl0aGluZy4KPgo+QnV0IHRo
-ZXJlIGlzIGEgZGVwZW5kZW5jeS4gWW91ciBjb21taXQgdXNlcyB1bmRvY3VtZW50ZWQgdmVuZG9y
-IHByZWZpeAo+d2hpY2ggaW50cm9kdWNlcyB3YXJuaW5ncy4KPgo+TmV3IHdhcm5pbmdzOgo+RG9j
-dW1lbnRhdGlvbi9kZXZpY2V0cmVlL2JpbmRpbmdzL3BpbmN0cmwvYW1iYXJlbGxhLGN2NzUtcGlu
-Y3RybC5leGFtcGxlLmR0YjoKPnBpbmN0cmxAZTQwMTAwMDAgKGFtYmFyZWxsYSxjdjc1LXBpbmN0
-cmwpOgo+J2FtYmFyZWxsYSxkcml2ZS1zdHJlbmd0aC1zeXNjb24nLCAnYW1iYXJlbGxhLHB1bGwt
-c3lzY29uJyBkbyBub3QgbWF0Y2gKPmFueSBvZiB0aGUgcmVnZXhlczogJ14jLionLAo+aHR0cHM6
-Ly9naXRsYWIuY29tL3JvYmhlcnJpbmcvbGludXgtZHQvLS9qb2JzLzE3MDM4MzEwOTA5Cj4KPgo+
-Cj5CVFcsIHRoaXMgY29tbWl0IG9mIHlvdXJzOgo+OWMyOTMyYmFkY2QzZTNjMGZjNjMwZWFjNWZm
-MmJmZDVmYWRmOTNmMQo+Cj5kb2VzIG5vdCBldmVuIGJ1aWxkLCBzbyBhIG1ha2UgZXJyb3IuCj4K
-Pj4gCj4+IEJ1dCBpZiB5b3UgdGVsbCBtZSAicmV2ZXJ0IHRoZSBwYXRjaCIgSSB3aWxsIHNpbXBs
-eSByZXZlcnQgdGhlIHBhdGNoCj4+IGJlY2F1c2UgSSB0cnVzdCB5b3UsIGl0IGRvZXNuJ3QgcmVh
-bGx5IG1hdHRlciB3aHkuCj4KPkkgdGhpbmsgQW1iYXJlbGxhIHdvbid0IGJlIHBpY2tlZCB1cCwg
-YmVjYXVzZSBvZiB0b3RhbCBtZXNzIHdpdGgKPnBhdGNoc2V0cywgdGh1cyBSb2Igc2hvdWxkIGp1
-c3QgdGFrZSB0aGUgdmVuZG9yIHByZWZpeC4uLiBleGNlcHQgdGhlcmUKPmlzIG5vIHZlbmRvciBw
-cmVmaXggcGF0Y2ggdG8gdGFrZSwgc2luY2UgaXQgaXMgc3F1YXNoZWQgd2l0aCBvdGhlciB3b3Jr
-Lgo+Cj5JIGRvbid0IGdldCB3aHkgdGhpcyBiZWNhbWUgc28gbWVzc3kgYW5kIGhhdmUgbm8gY2x1
-ZSBob3cgdGhpcyBzaG91bGQgYmUKPmZpeGVkLCBleGNlcHQgcmV2ZXJ0IHdoaWNoIGlzIHNhZCBj
-aHVybi10eXBlIG9mIHdvcmsuCj4KPkJlc3QgcmVnYXJkcywKPktyenlzenRvZgo=
+On Tue, Oct 13, 2026 at 4:36=E2=80=AFPM zl020895 <zl020895@163.com> wrote:
+
+> Would this work?: I send a standalone
+> "dt-bindings: vendor-prefixes: add Ambarella" patch to Rob with only
+> the two lines in vendor-prefixes.yaml, and drop that hunk from the
+> SoC series. Once the prefix is in linux-next, the vendor-prefix
+> warnings should be fixed. The remaining example matches, such as
+> ambarella,drive-strength-syscon, still need the separate
+> GPIO/UART/pinctrl bindings.
+
+That works for me and solves my problem so go ahead.
+
+Yours,
+Linus Walleij
