@@ -1,117 +1,72 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3369B4B4043
-	for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 06:41:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D58814AEBC6
+	for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 06:42:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791873705; cv=none; b=Z3H2qJBPkUqNXJN5xyHTqLqo9UxXUe1pxIhCuNtGqIPn7bjz3ypSwl+VJx1G0vlPMYsc3yW7yZNgRwvLlP8wTkycThZjfiEPSBEX+JsSSpQD/k3lq7oplGWpQh9R46z/Tpvh6L+vtm2lSleuba1HZQJByZb+S0BseydK+rAX/F8=
+	t=1791873755; cv=none; b=fVRuI5DHnrWKqM+5isC9KJdbCOEwV2UQ3b/z5JaNnfbV82tfWulDrNUuHjM0L037Ed5FJAGt1GDZ1XABXgF13/+25Nu5Z513fBMII6E/EgpAOuh9rIUOR5kVDRtByw4+ZWALwKFZHCdp3HIVlt0k4lVAAbdNeOia/4E6PL2GNJc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791873705; c=relaxed/simple;
-	bh=3lrDpZyO7Scja9MyJcukoozYzhB1KrxDc+BkGHNp4hE=;
+	s=arc-20240116; t=1791873755; c=relaxed/simple;
+	bh=c9epgcTL6mtrH1FaJ7UbtdQDEPxAZw7mqj2t5EUSBYg=;
 	h=Message-ID:From:Subject:To:Cc:In-Reply-To:References:Content-Type:
-	 Date; b=bn7mBi64Hhv2W43i3bGjP0hoGoTp2M6qehyH4IzNVz4NuuCekbLXorYPqzih79LyZlzjCs73W56w4YvkXRzR5VwoUigspI8o3w1gQcz/Z8dBB6hq7qxKNDYcfMLS5wzesJnaBluqWJ7xuMkJpULhHbagH7zdllpD4v39WyzP6u4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QbADYOZv; arc=none smtp.client-ip=100.103.45.18
+	 Date; b=KPDUofwHlRrt1dJbB5FVwoCZCSl/cVFW+sKp5Kgp47bLlgFitBh0vxDuQ4tO2MelFjg1BeaSg72oewUdz1lMV+mvzaZK35DXBY+BbPzR5BVB6cN4apOtaLgmmDCjSO7T3Va1ji2XuCQDRLCv6np+Ks/pNljez2AW5MWtGu9DaG0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SkLKiFwx; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QbADYOZv"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8D0D81F000FF;
-	Tue, 13 Oct 2026 06:41:42 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SkLKiFwx"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 421AC1F000FF;
+	Tue, 13 Oct 2026 06:42:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791873702;
-	bh=g1iryVZL6cvf6vRJgloKUxohTwYSN4Uxkf6B8+k+Ohc=;
+	s=k20260515; t=1791873754;
+	bh=c9epgcTL6mtrH1FaJ7UbtdQDEPxAZw7mqj2t5EUSBYg=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=QbADYOZva4tsQtc4h6H0b8uF/JwOemMF3liqMFZ6RVnbOw57AgduRKvIAqFuEMdQJ
-	 vHoZeRvasvOurBSLTA4A8x3mbY+6R/jFaBMMDOfDfB3kfYBgXhsfjs9976rc4dem0Y
-	 GzUjTYqNDcSAMxqhajFgeYe3Hcr2lfb1xcxJoL04y9o6qCdGRtkoouqSGxu0qCPLGd
-	 4S6cRKOZq3tnWobbStMR+VnwE6Po+CTffnb2Pg1ahfH1HoZKfbDU+3xrfJMQtK25Fn
-	 jrfwWyApvkY4rLyxNDWbSZdqivnyrXgnGnJ/NkjjS5AIj4fTrRVUaswabUtswnsrkV
-	 HWEAqwuZDOFzA==
-Message-ID: <sashiko-outbox-169120@kernel.org>
+	b=SkLKiFwxXT2ol+/rfBMoPE3M72JxwCEFU+DqEf5M8NljI3ZEsYSD6IuGt2g1c0Aqv
+	 LNJ1dTEcrsnFYEdYHL80TcOEnQZBnBQ5GrH0bJnQrStSuAQZITkp7Peq+VlKlmzG2o
+	 98f1FKFv1Yykw3GUDIzokQ109XCusWsjkwsnZFAEnWUFyqAE/gM8SJYOHIlKbDgVyt
+	 Tb8p7J1kjZB09MIjk/o1IwjcEj9pujpnRHYjM3/n3fi8O4mVeJOUmP1IXbhdJ38ixv
+	 m3f/ZJgF6kx05ZgyY8jYJOck3gJ90tC1PetL3Xzh8g/CVtkPbBccav3ZnBfWsZz6X8
+	 3rgbgGi1Vf6rA==
+Message-ID: <sashiko-outbox-169122@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v9 06/12] mfd: nct6694: Refactor USB-specific data into
- nct6694_usb_data
+Subject: Re: [PATCH v9 01/12] mfd: nct6694: Validate the USB endpoints
 Reply-To: sashiko-reviews@lists.linux.dev
 To: a0282524688@gmail.com
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261013063259.2734757-7-a0282524688@gmail.com>
+In-Reply-To: <20261013063259.2734757-2-a0282524688@gmail.com>
 References: <20261013063259.2734757-1-a0282524688@gmail.com>
- <20261013063259.2734757-7-a0282524688@gmail.com>
+ <20261013063259.2734757-2-a0282524688@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 13 Oct 2026 06:41:42 +0000
+Date: Tue, 13 Oct 2026 06:42:33 +0000
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
-- [Medium] irq: lockdep wait-context violation on RT due to spinlock_t in i=
-rq_enable
---
+> From: Ming Yu <a0282524688@gmail.com>
+>=20
+> The probe reads endpoint[0] of the current altsetting without checking
+> that the interface describes any endpoint, and the bulk endpoints used
+> for the command transfers are never validated. A malformed device can
+> make the driver read past the endpoint array or submit URBs to
+> endpoints of the wrong type.
+>=20
+> The interface exposes several interrupt and bulk endpoints, of which
+> only EP1 IN, EP2 IN and EP3 OUT carry the command interface, so the
+> endpoints cannot be looked up by type. Check that the expected
+> endpoints are present with usb_check_{bulk,int}_endpoints(), and take
+> the polling interval from the interrupt endpoint actually used.
+>=20
+> Define the interrupt endpoint by its number, like the bulk endpoints,
+> as the pipe macros expect an endpoint number rather than an address.
+>=20
+> Fixes: 51dad33ede63 ("mfd: Add core driver for Nuvoton NCT6694")
+> Signed-off-by: Ming Yu <a0282524688@gmail.com>
 
-commit ff33329b6e251ea92cbe504a713ebdf7083e4bc2
-Author: Ming Yu <a0282524688@gmail.com>
-mfd: nct6694: Refactor USB-specific data into nct6694_usb_data
-
-This commit separates the USB transport fields from the core nct6694 struct=
-ure
-into a new nct6694_usb_data structure. It also uses consistent names for the
-USB device, buffers, and the core structure.
-
-> diff --git a/drivers/mfd/nct6694.c b/drivers/mfd/nct6694.c
-> index f9ae8476fcae9..6d75b1485350f 100644
-> --- a/drivers/mfd/nct6694.c
-> +++ b/drivers/mfd/nct6694.c
-
-[ ... ]
-
->  static void nct6694_irq_enable(struct irq_data *data)
->  {
-> -	struct nct6694 *nct6694 =3D irq_data_get_irq_chip_data(data);
-> +	struct nct6694 *ddata =3D irq_data_get_irq_chip_data(data);
->  	irq_hw_number_t hwirq =3D irqd_to_hwirq(data);
-> =20
-> -	guard(spinlock_irqsave)(&nct6694->irq_lock);
-> +	guard(spinlock_irqsave)(&ddata->irq_lock);
-
-[Severity: Medium]
-The kernel IRQ core holds the IRQ descriptor lock (desc->lock, which is a
-raw_spinlock_t) when invoking the .irq_enable callback.
-
-Since irq_lock is a spinlock_t, it maps to a preemptible, sleeping rt_mutex=
- on
-PREEMPT_RT systems. Acquiring a sleepable lock while holding a raw spinlock
-violates lock wait-context nesting rules and will trigger a lockdep BUG and
-priority inversion on RT kernels.
-
-Should irq_lock be converted to a raw_spinlock_t?
-
-> =20
-> -	nct6694->irq_enable |=3D BIT(hwirq);
-> +	ddata->irq_enable |=3D BIT(hwirq);
->  }
-> =20
->  static void nct6694_irq_disable(struct irq_data *data)
->  {
-> -	struct nct6694 *nct6694 =3D irq_data_get_irq_chip_data(data);
-> +	struct nct6694 *ddata =3D irq_data_get_irq_chip_data(data);
->  	irq_hw_number_t hwirq =3D irqd_to_hwirq(data);
-> =20
-> -	guard(spinlock_irqsave)(&nct6694->irq_lock);
-> +	guard(spinlock_irqsave)(&ddata->irq_lock);
-
-[Severity: Medium]
-Similarly, the .irq_disable callback is also called with the IRQ descriptor
-lock held. Does this also require a raw_spinlock_t to avoid the wait-context
-violation on PREEMPT_RT?
-
-> =20
-> -	nct6694->irq_enable &=3D ~BIT(hwirq);
-> +	ddata->irq_enable &=3D ~BIT(hwirq);
->  }
+Sashiko has reviewed this patch and found no issues. It looks great!
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261013063259.2734=
-757-1-a0282524688@gmail.com?part=3D6
+757-1-a0282524688@gmail.com?part=3D1
+
