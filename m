@@ -1,66 +1,93 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AFE8A52FE21;
-	Tue, 13 Oct 2026 17:49:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70064526A8E;
+	Tue, 13 Oct 2026 17:53:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791913793; cv=none; b=dg16/Xrh0uyOTWVhYhUHM58dvzFNMVCKLCJ79FC41acbbvPdOPh+3CHvVQ/RUAg+JCQye0JCDH+5HFtF3u3pAPDciEfoO0AoItXxFXfoIyIoI/aUPTLoTa5B5+QTk3ofzWrAjzhqyzCLuGabZhaodXP842C8pgfKiuyeHjbTjyo=
+	t=1791914032; cv=none; b=smwInugGzrV5WeE/RAVXf/GkiTq9u0bqcdDZfduF/Q1am91UC7IihlKwl6e0ChwJsvzZeBADjPDhXfvwPAffLIBPeMqgrpdHnN9yOAR68ECNgoQQ33BHoPGQTkrAnul3WyxlYAbEbtXnFtF9nqm66pCp89fEhJxOn7tQ+mo0LJI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791913793; c=relaxed/simple;
-	bh=UFtxQObQjIv5rptSTlhsIz/JwaE0ExuvEJb5WOQA2PQ=;
-	h=Message-ID:From:Subject:To:Cc:In-Reply-To:References:Content-Type:
-	 Date; b=Vo5DZXuAEQUUXF6xNrH9mo4liK0RKdX7qj+xqFeCRm9AZ3O0GYFvG40HiJGiQLMsBcBoJsAhNQh9EkRguJdIbgSiObpwKv0R6MELE+YysvO4sW2deZprnzAAf30/s4URu/2/OfqCiYqUU+sOe8T8qM2PrTIe4Ao60u3n33cVi7I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=h49ZJ+MO; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791914032; c=relaxed/simple;
+	bh=hp1dTw3hRxiZBvSzxIR3eaRSSMR6S7lRt7/KxcL7YmU=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
+	 MIME-Version:Message-ID; b=VbXiuYHW3BiB0lsbvRliFa6vSfejYykrn35KxTVFc1Jo4gc6Qk/cRKGLEnHp6q+6WT9sB7+QU016GC42a9x5pnqjQPDcqq22BnieKrD1+7KQ1Ezghf7s4ozV5t+RNLPr+D8TaOVoVtk5pTYJ8DPZRogizRUX7qc8mh/gBSE05bs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=OWFaVuM9; arc=none smtp.client-ip=117.135.210.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="h49ZJ+MO"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BEE581F00893;
-	Tue, 13 Oct 2026 17:49:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791913791;
-	bh=UFtxQObQjIv5rptSTlhsIz/JwaE0ExuvEJb5WOQA2PQ=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=h49ZJ+MONq5t0DrIZvoQoNhZzmgD+uug9ymFp8srok+T95dL0dXytRv3DFjOP54NY
-	 5PfEB8Md7TdhU7bKJkp+zjATru3tHj639YR9jRrjsDRc8t/zfaL7u+JiissikMJ0Fk
-	 y6QCFyZRgB9Gffcsz+d++PzugMhTsA3P7fANxQvORBpeRO4hDd0nB5psIz3EUEE3cy
-	 t0UExQ/SGQmAYykDd5uKG5BmEsz9fBQEf+qZ4lxhcLmu6ElUA699ZYQsT2gqFsLV5S
-	 ltgR+xZQM3LBEmvvrfI4BQRtkXUqCYT+IO2sNxzvePNKiSVYGWk7S4wE46kqxFK7Go
-	 4WhvKqnjTn87Q==
-Message-ID: <sashiko-outbox-170270@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v11 3/7] input: serio: Add driver for ASUS Transformer
- dock keyboard and touchpad
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Svyatoslav Ryhel" <clamor95@gmail.com>
-Cc: mfd@lists.linux.dev, linux-leds@vger.kernel.org, lee@kernel.org
-In-Reply-To: <20261013173504.451391-4-clamor95@gmail.com>
-References: <20261013173504.451391-1-clamor95@gmail.com>
- <20261013173504.451391-4-clamor95@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 13 Oct 2026 17:49:50 +0000
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="OWFaVuM9"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
+	Message-ID; bh=hp1dTw3hRxiZBvSzxIR3eaRSSMR6S7lRt7/KxcL7YmU=; b=O
+	WFaVuM93IWPWVHz1DROYW7egfZ3MO/d1MdS/gA7+Jxi5NWJd4PoZrmiHx15AKVZ2
+	4UM4Cwvntj02QhgfOh2yUzLuhNFwL2fTm+PsC0+Y4zrcQoHKQKUn5ibm288MEAes
+	5R0lW7gOOP+J72R9BCZBMfN7yGrWIPetla+gvN6Ux0=
+Date: Wed, 14 Oct 2026 01:51:46 +0800 (CST)
+From: zl020895  <zl020895@163.com>
+To: "Linus Walleij" <linusw@kernel.org>
+Cc: "Krzysztof Kozlowski" <krzk@kernel.org>, longzhao@ambarella.com,
+	"Arnd Bergmann" <arnd@arndb.de>,
+	"Alexandre Belloni" <alexandre.belloni@bootlin.com>,
+	soc@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+	"Rob Herring" <robh@kernel.org>,
+	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
+	"Conor Dooley" <conor+dt@kernel.org>,
+	"Michael Turquette" <mturquette@baylibre.com>,
+	"Stephen Boyd" <sboyd@kernel.org>,
+	"Jerome Brunet" <jbrunet@baylibre.com>,
+	"Bartosz Golaszewski" <brgl@kernel.org>,
+	"Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+	"Jiri Slaby" <jirislaby@kernel.org>,
+	"Andy Shevchenko" <andriy.shevchenko@linux.intel.com>,
+	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	"Catalin Marinas" <catalin.marinas@arm.com>,
+	"Will Deacon" <will@kernel.org>, "Lee Jones" <lee@kernel.org>,
+	mfd@lists.linux.dev, devicetree@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
+	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org,
+	"Krzysztof Kozlowski" <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: Re:Re: Re: [PATCH v8 04/18] dt-bindings: pinctrl: add Ambarella
+ CV75 pinctrl
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
+ 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
+In-Reply-To: <CAD++jLmrQwAT1Sb8HGgoM8x48rN9-pPT2RB1GE18h5YA7c4CwQ@mail.gmail.com>
+References: <20260921-cv75-v5-v8-0-282ff5d98dda@ambarella.com>
+ <20260921-cv75-v5-v8-4-282ff5d98dda@ambarella.com>
+ <CAD++jLmKF5XxHsJX29sdXC_6JHKn-7HkE=N+TKtk5xODtQj3_w@mail.gmail.com>
+ <b2256847-3ec1-47e8-ac79-ceca86eb09e7@kernel.org>
+ <CAD++jLkrXXg9xrhAZ8HETc5Qcv5BbkY-ibjvzBmE5WZVqDEGWQ@mail.gmail.com>
+ <a0eca34d-5eb2-4730-b8c7-0f2302bcf265@kernel.org>
+ <CAD++jLm=T-U07vAVCogMnfOfkDf=i9QhGGc8ok2N-ZUh50WLNA@mail.gmail.com>
+ <56dc6c05-7fd6-43de-bc62-c353ae1dbcc3@kernel.org>
+ <54b55ad7.9d3a.1a135b09587.Coremail.zl020895@163.com>
+ <CAD++jLmrQwAT1Sb8HGgoM8x48rN9-pPT2RB1GE18h5YA7c4CwQ@mail.gmail.com>
+X-NTES-SC: AL_Qu2SA/WavEEr4CaeZekdnUoTj+Y/XMK0uvwk1YdVc8gEnjjMwxonRUZAE2Xr9+a2LgydoDuVWhh8yd55fo9x/FIZB3Lpfw2lhbgiuZUShQ==
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Message-ID: <69bf6d9d.a86d.1a1366451f1.Coremail.zl020895@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID:eygvCgD3NyGyb85qV71XAA--.16978W
+X-CM-SenderInfo: d2oqjiqyzvqiywtou0bp/xtbC7hJWx2rOb7KL3QAA3C
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
 
-> From: Micha=C5=82 Miros=C5=82aw <mirq-linux@rere.qmqm.pl>
->=20
-> Add input driver for ASUS Transformer dock keyboard and touchpad.
->=20
-> Some keys in ASUS Dock report keycodes that don't make sense according to
-> their position, this patch modifies the incoming data that is sent to
-> serio to send proper scancodes.
->=20
-> Co-developed-by: Ion Agorria <ion@agorria.com>
-> Signed-off-by: Ion Agorria <ion@agorria.com>
-> Signed-off-by: Micha=C5=82 Miros=C5=82aw <mirq-linux@rere.qmqm.pl>
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-
-Sashiko has reviewed this patch and found no issues. It looks great!
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261013173504.4513=
-91-1-clamor95@gmail.com?part=3D3
-
+CkF0IDIwMjYtMTAtMTQgMDA6Mzg6NDAsICJMaW51cyBXYWxsZWlqIiA8bGludXN3QGtlcm5lbC5v
+cmc+IHdyb3RlOgo+T24gVHVlLCBPY3QgMTMsIDIwMjYgYXQgNDozNuKAr1BNIHpsMDIwODk1IDx6
+bDAyMDg5NUAxNjMuY29tPiB3cm90ZToKPgo+PiBXb3VsZCB0aGlzIHdvcms/OiBJIHNlbmQgYSBz
+dGFuZGFsb25lCj4+ICJkdC1iaW5kaW5nczogdmVuZG9yLXByZWZpeGVzOiBhZGQgQW1iYXJlbGxh
+IiBwYXRjaCB0byBSb2Igd2l0aCBvbmx5Cj4+IHRoZSB0d28gbGluZXMgaW4gdmVuZG9yLXByZWZp
+eGVzLnlhbWwsIGFuZCBkcm9wIHRoYXQgaHVuayBmcm9tIHRoZQo+PiBTb0Mgc2VyaWVzLiBPbmNl
+IHRoZSBwcmVmaXggaXMgaW4gbGludXgtbmV4dCwgdGhlIHZlbmRvci1wcmVmaXgKPj4gd2Fybmlu
+Z3Mgc2hvdWxkIGJlIGZpeGVkLiBUaGUgcmVtYWluaW5nIGV4YW1wbGUgbWF0Y2hlcywgc3VjaCBh
+cwo+PiBhbWJhcmVsbGEsZHJpdmUtc3RyZW5ndGgtc3lzY29uLCBzdGlsbCBuZWVkIHRoZSBzZXBh
+cmF0ZQo+PiBHUElPL1VBUlQvcGluY3RybCBiaW5kaW5ncy4KPgo+VGhhdCB3b3JrcyBmb3IgbWUg
+YW5kIHNvbHZlcyBteSBwcm9ibGVtIHNvIGdvIGFoZWFkLgo+Cj5Zb3VycywKPkxpbnVzIFdhbGxl
+aWoKClNlbnQ6Cmh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2FsbC8yMDI2MTAxNC1jdjc1LXByZWZp
+eC12MS0xLWZlOTVlZDU2Nzg4MEBhbWJhcmVsbGEuY29tCgpCZXN0IHJlZ2FyZHMsCkxvbmcgWmhh
+bwo=
