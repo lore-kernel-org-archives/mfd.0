@@ -1,40 +1,40 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91637526AB8;
-	Tue, 13 Oct 2026 13:19:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DBDCD52B1D1;
+	Tue, 13 Oct 2026 13:20:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791897587; cv=none; b=p3fbJ5W27tyyP53MYvDMbPQsL+7MHCj5TKKJW2/ldol/pBJfCekn5i9979PTS7mQTdwhB4fBdBq/jm1zRfILHHTwjwvkMmjqYnUOD8vQ73YQ0o3due9SFQZitqlQ8UilhV3x9Af6mcDUbe5fpif+UUL3Kav1Y3GNUsu/pAh6WPI=
+	t=1791897606; cv=none; b=C+M0NfMVSFwXhyo4UHjnmxixQ8ueL7TN7fzCe5ZqbEHa+p16ynUv/ciRksnsJb6PhB1iYgvTggJpFX3cuh1QOCDOlObup2v7O5HoCLgsOcnv6f0OjXQ4CMk03uobTJk6eP/87uoxbaqcl1UhQhWU/h+l/B0lD0Y6qJL6O/GRmxs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791897587; c=relaxed/simple;
-	bh=kzUQGL3xcHn+eWnNAJl0kkX+oXOB5j9w8XXL7WTPxSU=;
+	s=arc-20240116; t=1791897606; c=relaxed/simple;
+	bh=Z43gTV09WBJzMiJRzjF/kOfgtuw+6+OGfem94eldhKc=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=X1clTl9EL9+hnbaVIWtAoFxkwTb7qZNS9ZQ3eDDqgOGyh1m8FYddB6q9E9HPDgV0s62NUYiq+NA9kv+PIbcIB0ZthkZkRv1LLF3UgcP5mAj3Tgil5LVzv3hLAjOR2icXEVU9igwwcHsXnSlf9TcCDgEwqUC8qg1uIhqkYV25yOY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JeE/8vFD; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version; b=qfca5fg237tht2GMYKlY4hp2p11pfx/L+ItIxmBEdf8R/c6Y33mwqXmJHaHWKuqinK2bEd4YW4GPdZNszRDbfQ7rE2ZelR6b2jcE3d6cwtxOrqOQsqOjQgoXNCtl1jyadcLMBUtBDq2VODa0lf1/dc7fnolmoiFHpfgkND79mvQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jHef1GY7; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JeE/8vFD"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 120BA1F000FF;
-	Tue, 13 Oct 2026 13:19:44 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jHef1GY7"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 173391F000FF;
+	Tue, 13 Oct 2026 13:20:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791897586;
-	bh=/bhkKljz18VyBLU+Oxl90psgFVLNm9lPwBlk41Zg9OY=;
+	s=k20260515; t=1791897605;
+	bh=pUfK1+yPBspuGQGQTIODMMuZcWN4seT8rTN/PrlxJiU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=JeE/8vFD9DP/E7i5SimBmhvurtnSvRDZMsmUjZsfUNY3qM28nkdcyAX7mybnTqUed
-	 X+NBPJezuyE9THAk/L1IbngiumUjD+uWsEWqvop2EG6Ap8R0d94aA0SEHX7kXbRgSV
-	 rUzSs7lonAjQR/tksExTtmcqNvvjKvNJnLchKoAvSKyYN/km80jB0C8ZKLcOSGM3Ma
-	 ij1eEdaiE07wkXz6bGHLX2pvYQrC6ZLBYrAdFi1aE92TAGLqSvzJcT5k5zL9SsvN/P
-	 LyatAEuLgLprkZNp799yTHwGyBgHCNzHRfPKm5ZQ7f+874fPyDcIZzwdL3CnDE3akB
-	 99ixoe/OoOEZQ==
+	b=jHef1GY7mqUReMUk8r7GNCfM9MGsd8a+KyyI1R/NQQDf6jxcKBTab3C3wXMofd12O
+	 +SqToQ6Delg6WldEZxfGV1AG8GRzoB86oH9gvm3ljsCSu5+qlcNGu/bvKkG2iqzFU+
+	 XbEIPPvD0Zo+q1RdGZCGFki1d7EWDfNl3fI2YTbk1UZJQgAPQ6YBFKedXgKLER+vCQ
+	 zCdDo4lwUSQrBKyd80TqZ1wAPpQCIn3T1saOw6dzU6VptL8IZOihOF5zS7DASbvqaz
+	 6EEf/L1WMu9hMQgHVL8K57ldQLvkcXBtgtm7/XrWyN5c3KZ2S7Ib0yBotHMiaIi767
+	 1Zrg0KG5JibnA==
 From: Imre Kaloz <kaloz@kernel.org>
 To: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
 Cc: linux-mips@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Lee Jones <lee@kernel.org>,
 	mfd@lists.linux.dev
-Subject: [PATCH v2 37/53] mfd: ioc3: Cross the serial IRQs on the Origin 300 IO8
-Date: Tue, 13 Oct 2026 15:16:57 +0200
-Message-ID: <bc7275757db3f48bac90caa755feab957c57d196.1791890466.git.kaloz@kernel.org>
+Subject: [PATCH v2 46/53] mfd: ioc3: Add IOC4 ATA/ATAPI cell
+Date: Tue, 13 Oct 2026 15:17:06 +0200
+Message-ID: <754bae380c938b63eeaa87e3dccf9755314675ed.1791890466.git.kaloz@kernel.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <cover.1791890466.git.kaloz@kernel.org>
 References: <cover.1791890466.git.kaloz@kernel.org>
@@ -46,126 +46,85 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-On the IO8 base I/O board the 16550 at sregs.uarta raises
-SIO_IR_SB_INT and the one at sregs.uartb raises SIO_IR_SA_INT. With
-the usual mapping the console never receives, because the interrupt
-it enables is never asserted.
+Add an IOC4 cell for pata_sgiioc4: a DEFINE_RES_MEM() over struct
+ioc4_ata_regs and a DEFINE_RES_IRQ() for other_ir bit 0
+(IOC4_OTHER_IR_ATA_INT). It joins ioc4_cells[] between the kbd and rtc
+cells.
 
-Add an IO8 entry to ioc3_infos[] that registers the serial cells with
-the two IRQ resources exchanged. The board was matched as CAD DUO and
-printed "ioc3: CAD DUO"; it now prints "ioc3: IO8" and gets its serial
-ports.
+The ATA passthrough bit follows the drive's INTRQ line, which stays
+asserted until Status is read, unlike the discrete events on the rest
+of other_ir. Make it the one level-triggered bit of the other_ir bank.
+libata reads Status while servicing the interrupt, so ioc3_irq_ack()'s
+W1C write is the only ack needed.
 
 Signed-off-by: Imre Kaloz <kaloz@kernel.org>
 ---
- drivers/mfd/ioc3.c | 67 +++++++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 63 insertions(+), 4 deletions(-)
+ arch/mips/include/asm/sn/ioc4.h |  1 +
+ drivers/mfd/ioc3.c              | 19 +++++++++++++++++++
+ 2 files changed, 20 insertions(+)
 
+diff --git a/arch/mips/include/asm/sn/ioc4.h b/arch/mips/include/asm/sn/ioc4.h
+index 781fcfb81b5e..d23676ae82b4 100644
+--- a/arch/mips/include/asm/sn/ioc4.h
++++ b/arch/mips/include/asm/sn/ioc4.h
+@@ -129,6 +129,7 @@ struct ioc4 {
+ #define IOC4_OTHER_IR_GEN_INT		0xff000000	/* generic pins */
+ 
+ #define IOC4_OTHER_IR_KBD_INT_BIT	6	/* bit index */
++#define IOC4_OTHER_IR_ATA_INT_BIT	0	/* bit index */
+ 
+ #define IOC4_SSCR_DMA_EN	0x10000000	/* enable ring buffer DMA */
+ 
 diff --git a/drivers/mfd/ioc3.c b/drivers/mfd/ioc3.c
-index 95794dc9931c..01c919c18b06 100644
+index 01c919c18b06..b471c90e737c 100644
 --- a/drivers/mfd/ioc3.c
 +++ b/drivers/mfd/ioc3.c
-@@ -223,7 +223,37 @@ static struct mfd_cell ioc3_serial_cells[] = {
- 	}
- };
+@@ -850,6 +850,13 @@ static const struct ioc3_variant ioc3_variant = {
+ 	(IOC4_SIO_IR_PORT_INT(0) | IOC4_SIO_IR_PORT_INT(1) | \
+ 	 IOC4_SIO_IR_PORT_INT(2) | IOC4_SIO_IR_PORT_INT(3))
  
--static int ioc3_serial_setup(struct ioc3_priv_data *ipd)
 +/*
-+ * The UART at sregs.uarta raises IOC3_IRQ_SERIAL_B on the IO8 and
-+ * sregs.uartb raises IOC3_IRQ_SERIAL_A.
++ * In other_ir only ATA passthrough is level triggered. It follows the
++ * drive's INTRQ line, which stays asserted until the host reads Status;
++ * the other other_ir bits are discrete events.
 + */
-+static const struct resource ioc3_uarta_crossed_resources[] = {
-+	DEFINE_RES_MEM(offsetof(struct ioc3, sregs.uarta),
-+		       sizeof_field(struct ioc3, sregs.uarta)),
-+	DEFINE_RES_IRQ(IOC3_IRQ_SERIAL_B)
-+};
++#define IOC4_OTHER_LVL_MASK	IOC4_OTHER_IR_ATA_INT
 +
-+static const struct resource ioc3_uartb_crossed_resources[] = {
-+	DEFINE_RES_MEM(offsetof(struct ioc3, sregs.uartb),
-+		       sizeof_field(struct ioc3, sregs.uartb)),
-+	DEFINE_RES_IRQ(IOC3_IRQ_SERIAL_A)
-+};
-+
-+static const struct mfd_cell ioc3_serial_crossed_cells[] = {
-+	{
-+		.name = "ioc3-serial8250",
-+		.resources = ioc3_uarta_crossed_resources,
-+		.num_resources = ARRAY_SIZE(ioc3_uarta_crossed_resources),
-+	},
-+	{
-+		.name = "ioc3-serial8250",
-+		.resources = ioc3_uartb_crossed_resources,
-+		.num_resources = ARRAY_SIZE(ioc3_uartb_crossed_resources),
-+	}
-+};
-+
-+static int __ioc3_serial_setup(struct ioc3_priv_data *ipd,
-+			       const struct mfd_cell *cells, int num_cells)
- {
- 	struct ioc3 __iomem *regs = ipd->base;
- 	int ret;
-@@ -241,8 +271,8 @@ static int ioc3_serial_setup(struct ioc3_priv_data *ipd)
- 	udelay(1000); /* Wait until mode switch is done */
- 
- 	ret = mfd_add_devices(&ipd->pdev->dev, PLATFORM_DEVID_AUTO,
--			      ioc3_serial_cells, ARRAY_SIZE(ioc3_serial_cells),
--			      &ipd->pdev->resource[0], 0, ipd->domain);
-+			      cells, num_cells, &ipd->pdev->resource[0], 0,
-+			      ipd->domain);
- 	if (ret) {
- 		dev_err(&ipd->pdev->dev, "Failed to add 16550 subdevs\n");
- 		return ret;
-@@ -251,6 +281,12 @@ static int ioc3_serial_setup(struct ioc3_priv_data *ipd)
- 	return 0;
- }
- 
-+static int ioc3_serial_setup(struct ioc3_priv_data *ipd)
-+{
-+	return __ioc3_serial_setup(ipd, ioc3_serial_cells,
-+				   ARRAY_SIZE(ioc3_serial_cells));
-+}
-+
- static const struct resource ioc3_kbd_resources[] = {
- 	DEFINE_RES_MEM(offsetof(struct ioc3, serio),
- 		       sizeof_field(struct ioc3, serio)),
-@@ -601,6 +637,28 @@ static int ioc3_cad_duo_setup(struct ioc3_priv_data *ipd)
- 	return ioc3_kbd_setup(ipd);
- }
- 
-+static int ioc3_io8_setup(struct ioc3_priv_data *ipd)
-+{
-+	int ret, io_irq;
-+
-+	io_irq = ioc3_map_irq(ipd->pdev, PCI_SLOT(ipd->pdev->devfn),
-+			      PCI_INTERRUPT_INTB);
-+	ret = ioc3_irq_domain_setup(ipd, io_irq);
-+	if (ret)
-+		return ret;
-+
-+	ret = ioc3_eth_setup(ipd);
-+	if (ret)
-+		return ret;
-+
-+	ret = __ioc3_serial_setup(ipd, ioc3_serial_crossed_cells,
-+				  ARRAY_SIZE(ioc3_serial_crossed_cells));
-+	if (ret)
-+		return ret;
-+
-+	return ioc3_kbd_setup(ipd);
-+}
-+
- /* Helper macro for filling ioc3_info array */
- #define IOC3_SID(_name, _sid, _setup) \
- 	{								   \
-@@ -621,7 +679,8 @@ static struct {
- 	IOC3_SID("IP30 System Board", IP30_SYSBOARD, &ip30_sysboard_setup),
- 	IOC3_SID("IP34 System Board", IP34_SYSBOARD, &ip34_sysboard_setup),
- 	IOC3_SID("MENET", MENET, &ioc3_menet_setup),
--	IOC3_SID("MENET4", MENET4, &ioc3_menet4_setup)
-+	IOC3_SID("MENET4", MENET4, &ioc3_menet4_setup),
-+	IOC3_SID("IO8", IO8, &ioc3_io8_setup)
+ #define IOC4_UART_RES(port) {						\
+ 	DEFINE_RES_MEM(offsetof(struct ioc4, uart[port]),		\
+ 		       sizeof_field(struct ioc4, uart[port])),		\
+@@ -869,6 +876,12 @@ static const struct resource ioc4_kbd_resources[] = {
+ 	DEFINE_RES_IRQ(IOC4_IRQ_OTHER_BASE + IOC4_OTHER_IR_KBD_INT_BIT)
  };
- #undef IOC3_SID
+ 
++static const struct resource ioc4_ata_resources[] = {
++	DEFINE_RES_MEM(offsetof(struct ioc4, ata),
++		       sizeof_field(struct ioc4, ata)),
++	DEFINE_RES_IRQ(IOC4_IRQ_OTHER_BASE + IOC4_OTHER_IR_ATA_INT_BIT)
++};
++
+ static const struct resource ioc4_rtc_resources[] = {
+ 	DEFINE_RES_MEM(IOC4_BYTEBUS_DEV0, M48T35_REG_SIZE)
+ };
+@@ -898,6 +911,11 @@ static const struct mfd_cell ioc4_cells[] = {
+ 		.resources = ioc4_kbd_resources,
+ 		.num_resources = ARRAY_SIZE(ioc4_kbd_resources),
+ 	},
++	{
++		.name = "pata_sgiioc4",
++		.resources = ioc4_ata_resources,
++		.num_resources = ARRAY_SIZE(ioc4_ata_resources),
++	},
+ 	{
+ 		.name = "rtc-m48t35-ip35",
+ 		.resources = ioc4_rtc_resources,
+@@ -974,6 +992,7 @@ static const struct ioc3_irq_bank ioc4_irq_banks[] = {
+ 		.ir = offsetof(struct ioc4, other_ir),
+ 		.ies = offsetof(struct ioc4, other_ies),
+ 		.iec = offsetof(struct ioc4, other_iec),
++		.lvl_mask = IOC4_OTHER_LVL_MASK,
+ 	},
+ };
  
 -- 
 2.47.3
