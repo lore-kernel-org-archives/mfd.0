@@ -1,64 +1,64 @@
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35B755304B0
-	for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 18:09:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 768D9531626
+	for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 18:09:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791914992; cv=none; b=qiV0Hl+sznIL4QFIXhBccAsDQbf5M3WNJEr4hSLibIF18Qeoir0l3l7C8HIGEn51w1T5dwZKLF/8436jT+4lU/DqM6+u1o1xJ40kbyTrbQ8KErCMqOpEEMt0ScUsAkS1Uk1cubniH7YcJx4vyUT8yXYXf01bvZQpUkc2v47K7rU=
+	t=1791914998; cv=none; b=TU7kmZukx4gfu3yDVrzFuDedmVBkVRRXgmq1Anrf3ef4ovyFyHjkT7ondhSpQHxVixFf31uKPAuzFklBLGcjd6riDUNyxJzmckuTWdF9YHehpVtaRO8/vJQ3jN3MfnNnu7ZgwqIpJOfg3LCXS7GGoOlYoPzpb0TPmg8kZZPsD9U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791914992; c=relaxed/simple;
-	bh=8u6UgmlMcnxZT0MDTxqLLP61U4irzqcwFndOVAUV0ik=;
+	s=arc-20240116; t=1791914998; c=relaxed/simple;
+	bh=wFz9qtE4/v6AkxRE3jysvHKfWx3fP77bQotrkPc2bDI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=bhNdaeTs5NY9h27NjPC35bRW4M2V+6mXL1JgFziPWVYX2ixFDQ2x0pJR1o+ehJ5x4JWvLGR3aXHyOyifb/hnRWPyWV6b2rV9+orX138X3Xtu7QDWWPin5xsj9cETtp2gS2vjANNW6b+1v9D45fFU1RFkfPf3dRmAUcd22Q7PoMc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=TQ0jgXWI; arc=none smtp.client-ip=209.85.221.47
+	 MIME-Version; b=s525ghLsn9JOwoLadG2b7epWywFVDSJHmXYNn97dP3QLpqLzuX/XAg8N6sS7H6//Cp+GHpJcBhIu7dkDDRuemKJvbgXybTyVCQP4GzmoV4HVYb3UYIUYIj6WIA6W22lSU3NtNqrCuZHvxf/D/WIbuLebyWN/hXlKPeKLoLTAtAA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=cNxsbv94; arc=none smtp.client-ip=209.85.128.50
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="TQ0jgXWI"
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-48afbd2c386so1905500f8f.3
-        for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 11:09:49 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="cNxsbv94"
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-49ff680331aso1809295e9.3
+        for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 11:09:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791914988; x=1792519788; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1791914993; x=1792519793; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ZwqTFwjGa56BYbboUIBQ+4BPXdstI8K16QSmTD6KIFk=;
-        b=TQ0jgXWIX7clsTsvZCXBCR4K4TPwthqV6jiZ92C09+dFAWgbabT1pP+UnYcn7ukqdT
-         N4Z49rMVoKByW2k8g4ay5XESK8ObX/d6LB5Dttn04xxm97cDIFdOlVB6/xcfChQfRcL2
-         tDdzjiKvC2sNTezTQP72uqojdcYTGUiiqLPZh2oLfAiGrnhOLi6zjRoowxHle/kHjSz7
-         nzpHsXikJO5JXf7+leT9PaqX5NsL/l/0HLB7kBMxZZaO9xqEYkv8uW0ooSfFFJpA+RTT
-         2JO891gJPlwkZnAtG+CZSNRv7Fw3biFJKXSEzUZMpYQe/e7KKAon+z/ddVzRW638Oiwx
-         8cmQ==
+        bh=rIN9I4fxO+jG+4Tem3JpMlKcKCKDmfxcYWPCA9fO/20=;
+        b=cNxsbv949pqIFVD5ha4aXCihWSZU0kOIEej/CemQuEyiNdmVEqhBLJd6ex/puUIkYn
+         XywLPxdZAyjF0oBxQn4J8kJp4PTQ539+ZevCcPpWwyUy53GeOgYMBzqVIR0Zk2PbOns3
+         W58kwXfL2jgJL0p9h7xmvww7klLSxI8lSbbMaYf+v4idL0MgsFNqSwQTOKzjRK9MxTaN
+         GWjGPjuBjkgM95r9gJZ/h5Ta9uXqq0pc9/RB1IUOL8KYHC8zYAp63/XZBiHUzoHAsS2N
+         Ov3w3iXApLEcBcc+1a+ZWwtqLVsshyJmVqR8lZTrMwveSWBhmiE1dKnOue8lEERbuxtB
+         VVqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791914988; x=1792519788;
+        d=1e100.net; s=20260707; t=1791914993; x=1792519793;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ZwqTFwjGa56BYbboUIBQ+4BPXdstI8K16QSmTD6KIFk=;
-        b=OApKudTnyxnSFxefm0KZDeAAJugL6V1Ux1JYoTl3DathwIJ1Gq7iwAVo7CDW7bYLPm
-         KAEsp1LWNgdptwlD6nLbzAXRlszUjsNbLOXkNrC+K05N2cFAlRDDSk0SJ1ky1Tn3nXNA
-         NwNTpZXXol4HMkyCKTC2HmrglRowJcKQA1iqBiUdpps2Ealq17u5xFnt3vsZlGYu+k36
-         MuUKK6hraOOULgR4AV5PzUJHYS/hK5hozsOfymGaechFL9i3/yGS5ayZbHnrCoF56YsO
-         gzh+Tppkhjr1kHtwmR1slw+VCsEAu53cnlAMKdGB1Uw1iqgrwBDlQfKQSBgrhyD/hpQ/
-         4zAw==
-X-Forwarded-Encrypted: i=1; AKwUvBxVlRb81mBfsifnjxg5rvLlJloJwiGBlZ2cbyLufJT2No7jPfF6/y6R5QmpwlCGubl/578=@lists.linux.dev
-X-Gm-Message-State: AFq9FYKU68paooF9lp/IZHpXZ6Ddd7qStagE9sPkNQcIPANiLqwDZuGv
-	UcnLL+QcfHuQIDWecKL68simMWWAHwWrqfbK2Sjst5or6pnZU5n2BUWi
-X-Gm-Gg: AYBFou2U/hES1XL+IxiAAHN9ZdKip9xg585g/Nx/LZLHpDR51MbZ2B2YKXvZbrJEXQx
-	7f4mc+0SgvE6Hp3NZw8IATkRbIMXjg/WdarRcrzxaPMFTo66oBNJmSGbg6cGq+++bg4cjP5j0rW
-	eyCbltv/vhXnqNlEHhyFhT30kLkcceRADoKUISmhV+OkFiZoLxbMo5jalrWJTNBAc4fnH5f6jLz
-	Y9CNVjoxL8VltUxwfF7D1ugeqtZYhIut83qE/YY+ram8p7zW6TMTpAVfJUkcr59F60e4KGggbr+
-	CaK5uCKy8w5a5fBulAsyb9ZmZGPHUVsrm7he/o0oNCxln+0SPyhKCMTTZEO5HscPRzT2Mk2zsf1
-	deN0Ntiw6bViHyuYOSmPxJRKN7vs4CeC9YmQ4cJk0FHUunVUhPZRDcZVhGTI9FH+/3PAN0YSvkE
-	oY2HKDGt6RosNrufUMZgma/e+8TKU2eqXS8dzmZGdYwUpuTlSgrUMEKoJLIn4wI5d7qyxBh7cYy
-	subTPlfx6ZM9AHfDCQ=
-X-Received: by 2002:a05:6000:481b:b0:48b:11ee:de66 with SMTP id ffacd0b85a97d-48dbad1217fmr23545543f8f.34.1791914988401;
-        Tue, 13 Oct 2026 11:09:48 -0700 (PDT)
+        bh=rIN9I4fxO+jG+4Tem3JpMlKcKCKDmfxcYWPCA9fO/20=;
+        b=fS+u8yqcyl10Ric7NNOVlN393KCzhZoHaIvpkWh/TGmMLxLOz9GLoOuvocLR47pBbJ
+         gOtcrrRqRZTFnNcvNMN3r2m9Xr8bnBpfTwxSbtatlHSlRyAhLabVRuK/XC9yDWEQWF5T
+         AyeY9zC/RlJcPyXu66AyUuVonO2xDJ4Cf8X/EwOWNw1Qv0SK90YybB0qV+eTRVFyZ3NK
+         ddKDwpt2TNV8Hbzt993ACCBODnOvFsaaQe16JeoEzTS7IYuYoeZQpf+L4srzZ9vxO3h0
+         noVKM5QcqSiEvt2oJVa9GD4TaZznWT7kkOOlEAAr7e9sNbjYFzX2fM+iDQhNC0mebP1M
+         Ip+A==
+X-Forwarded-Encrypted: i=1; AKwUvBykpVvRe72OH/sATjMs3Tq4KnscQTUfOZMHJIgBkjByMRjkJy3KUgd45gFta58fp7MNNVE=@lists.linux.dev
+X-Gm-Message-State: AFq9FYItS3/K8s6sQUWMF2zxspAda9JfL5bbAr8MqWUu4oIyILys862p
+	X0iZr15MaKbQZBCm7ajcLBMosBjBoDA2dcz7imOvJp0Ey/QxTv6/zJF4
+X-Gm-Gg: AYBFou3pQOACrn4d8WKtwAyLVhivt7j4dDG74vJTm6sGiMcnAElrF7CJt3wGGjGXgNU
+	Of03W40O71BHlQ+0dI4Lct6HiQRioDX4zYETYEnUfKqmQPdYOJpkXsJW2N5xKelqTqvw/h6/e0D
+	tBkh2rr7m27NEegYLZNTFOH7+TTKVgPRIzTmbOHaiYEb5zsUoxoD29QQmyk1Fy1iPkbjHLm7O5a
+	qdHlzkKh6Db9+eVobScWND3t5X64pNxzYrQqPqVIrQZ12zu5mwOzK/3W8ZhRZI7LGyQWQZBpn2M
+	sx6gKFIxov9x8uqdE1VosIujFnfF5aJ3jaZEzfXPmz5QD53b7EtkHYbJwrqbHTuzPSzkLi6cjIB
+	ri250OAVFvsN4Z/w8zoWZ7OqcYlTjBls9gHtzLOtKoFQ9p0vkx7q+YmyG8ezYSGsROo1Nc5g5aK
+	CMQu76dqIEbd688T8u2Ra2nljqD/WlpCVDemm+D4DqX6/De/mlKKjsh+JA1+hlo14xYDbpCRXqA
+	5pbBveGyoulNVrunTw=
+X-Received: by 2002:a05:600c:1549:b0:4a0:25c:8af2 with SMTP id 5b1f17b1804b1-4a18e491051mr296577985e9.17.1791914992608;
+        Tue, 13 Oct 2026 11:09:52 -0700 (PDT)
 Received: from xeon ([188.163.112.62])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48de0aaaaebsm6854498f8f.14.2026.10.13.11.09.46
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48de0aaaaebsm6854498f8f.14.2026.10.13.11.09.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 13 Oct 2026 11:09:47 -0700 (PDT)
+        Tue, 13 Oct 2026 11:09:52 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Lee Jones <lee@kernel.org>,
 	Pavel Machek <pavel@kernel.org>,
@@ -75,9 +75,9 @@ Cc: linux-leds@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	mfd@lists.linux.dev,
 	dri-devel@lists.freedesktop.org
-Subject: [PATCH v3 2/4] mfd: aat2870: Derive brightness steps from max current
-Date: Tue, 13 Oct 2026 21:09:31 +0300
-Message-ID: <20261013180933.487013-3-clamor95@gmail.com>
+Subject: [PATCH v3 4/4] mfd: aat2870: Add support for VIN and IN-LDO power supplies
+Date: Tue, 13 Oct 2026 21:09:33 +0300
+Message-ID: <20261013180933.487013-5-clamor95@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261013180933.487013-1-clamor95@gmail.com>
 References: <20261013180933.487013-1-clamor95@gmail.com>
@@ -89,70 +89,54 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The AAT2870 allows only 32 steps of brightness, with this amount defined
-by the maximum supported current. Remove the need for max_brightness by
-calculating the allowed number of steps from the maximum current.
+The AAT2870 supports a dedicated main power supply input alongside parent
+power supply for its internal regulators.
+
+Add support for retrieving and managing these supply regulators
+(vin-supply and in-ldo-supply) using the regulator framework to ensure
+proper power supply dependencies and power-up sequencing.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/backlight/aat2870_bl.c | 30 ++++++++++------------------
- 1 file changed, 10 insertions(+), 20 deletions(-)
+ drivers/mfd/aat2870-core.c            | 5 +++++
+ drivers/regulator/aat2870-regulator.c | 1 +
+ 2 files changed, 6 insertions(+)
 
-diff --git a/drivers/video/backlight/aat2870_bl.c b/drivers/video/backlight/aat2870_bl.c
-index 8b790df1e842b..eb686e315921d 100644
---- a/drivers/video/backlight/aat2870_bl.c
-+++ b/drivers/video/backlight/aat2870_bl.c
-@@ -24,18 +24,6 @@ struct aat2870_bl_driver_data {
- 	int brightness; /* current brightness */
- };
+diff --git a/drivers/mfd/aat2870-core.c b/drivers/mfd/aat2870-core.c
+index 909c14ee60323..0bd430b90bc1b 100644
+--- a/drivers/mfd/aat2870-core.c
++++ b/drivers/mfd/aat2870-core.c
+@@ -17,6 +17,7 @@
+ #include <linux/mfd/core.h>
+ #include <linux/mfd/aat2870.h>
+ #include <linux/of_platform.h>
++#include <linux/regulator/consumer.h>
+ #include <linux/regulator/machine.h>
  
--static inline int aat2870_brightness(struct aat2870_bl_driver_data *aat2870_bl,
--				     int brightness)
--{
--	struct backlight_device *bd = aat2870_bl->bd;
--	int val;
--
--	val = brightness * (aat2870_bl->max_current - 1);
--	val /= bd->props.max_brightness;
--
--	return val;
--}
--
- static inline int aat2870_bl_enable(struct aat2870_bl_driver_data *aat2870_bl)
- {
- 	struct aat2870_data *aat2870
-@@ -69,10 +57,11 @@ static int aat2870_bl_update_status(struct backlight_device *bd)
- 	dev_dbg(&bd->dev, "brightness=%d, power=%d, state=%d\n",
- 		 bd->props.brightness, bd->props.power, bd->props.state);
+ struct aat2870_register {
+@@ -309,6 +310,10 @@ static int aat2870_i2c_probe(struct i2c_client *client)
  
--	ret = aat2870->write(aat2870, AAT2870_BLM,
--			     (u8)aat2870_brightness(aat2870_bl, brightness));
--	if (ret < 0)
--		return ret;
-+	if (brightness) {
-+		ret = aat2870->write(aat2870, AAT2870_BLM, (u8)brightness - 1);
-+		if (ret < 0)
-+			return ret;
-+	}
+ 	aat2870->reg_cache = aat2870_regs;
  
- 	if (brightness == 0) {
- 		ret = aat2870_bl_disable(aat2870_bl);
-@@ -150,10 +139,11 @@ static int aat2870_bl_probe(struct platform_device *pdev)
- 	else
- 		aat2870_bl->max_current = AAT2870_CURRENT_27_9;
- 
--	if (pdata->max_brightness > 0)
--		bd->props.max_brightness = pdata->max_brightness;
--	else
--		bd->props.max_brightness = 255;
-+	/*
-+	 * The maximum number of brightness steps is determined by the max current.
-+	 * The aat2870_current enum maps directly to the allowed brightness steps.
-+	 */
-+	bd->props.max_brightness = pdata->max_current;
- 
- 	aat2870_bl->brightness = 0;
- 	bd->props.power = BACKLIGHT_POWER_ON;
++	ret = devm_regulator_get_enable(&client->dev, "vin");
++	if (ret)
++		return dev_err_probe(&client->dev, ret, "Failed to enable regulator\n");
++
+ 	aat2870->en_pin = devm_gpiod_get_optional(&client->dev, "enable",
+ 						  GPIOD_OUT_HIGH);
+ 	if (IS_ERR(aat2870->en_pin))
+diff --git a/drivers/regulator/aat2870-regulator.c b/drivers/regulator/aat2870-regulator.c
+index 9b8eb8df220a7..6f19b19f694fd 100644
+--- a/drivers/regulator/aat2870-regulator.c
++++ b/drivers/regulator/aat2870-regulator.c
+@@ -105,6 +105,7 @@ static const unsigned int aat2870_ldo_voltages[] = {
+ #define AAT2870_LDO(ids, match, vsel, vmask) {		\
+ 	.name = #ids,					\
+ 	.of_match = (match),				\
++	.supply_name = "in-ldo",			\
+ 	.id = AAT2870_ID_##ids,				\
+ 	.n_voltages = ARRAY_SIZE(aat2870_ldo_voltages),	\
+ 	.volt_table = aat2870_ldo_voltages,		\
 -- 
 2.53.0
 
