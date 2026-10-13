@@ -1,91 +1,70 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E825A5013CF
-	for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 13:37:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3323D3EC2E3;
+	Tue, 13 Oct 2026 14:07:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791898653; cv=none; b=suRHcBM/R1yuQRD0qii6aQH5Bub4/9777BJq4+b2XLDN3PTP4x1xntIkyPa46JLzqjo9VjPEGWP6SzTe/Pj6qyjmG1KWtRGFNgWYSJhf5SC0P01cRkYYC6wBSwmNf9jpO+aTc5PBkqCQNlRLV371BCSE91RCvxh37W94AZ68nrg=
+	t=1791900457; cv=none; b=rs17jp+SNgftGGuB1GBXsxz4YYey/twWeayHbtEAKFKy7BM00Z2fGa1gSwKILfQlPOstSVAIVoj0BVMqVuXEXSW0N81dNIXlcYMtf9+rjLma+L+T4tk3kCipFyKmaNIxDeMtMC9pY06irTHq1jc+ogoMxhEkxVpjJ1Q+KLdS8aU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791898653; c=relaxed/simple;
-	bh=QoBODyQ6G8vIvuEuQar0BDtgJPSde7YXlduz1zgpCYU=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=aMNDB0fK7CQDKmAMf1z63tfx6YyWUCUsxJflau7K2KGTIQe1ZyrRWeYvB5BMPdcig4KZTGCll7+cc8DUAjqF+Wel1iS3ObN6CMnN7aI5FtwcHarvm8IsRtrD/6t/WA+iK9Rg6ZI3o8kN/0zZhb/gF4PMubLg6qlK4iKpwb4xvCg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IcEvCYCS; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791900457; c=relaxed/simple;
+	bh=TFjST6qOQp71YbhkVt/zU2XIY0PuiwgTGy9fYd8o6UE=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=en8Y9rUpmJOSOCibGE0YMvs2wjgVvLCW4Z3vwOjvbOvPcz82u8FsEQ8dK48cnZ4f2Km49bcJRLwXfPIb8+mfvHxcVte73h+Mj30nFNZfUcJLzDC7UdzULGk0W+Mr4EDjA4iLRujSSoavi7/A35arirQnvE8L4Hfc98VS+j5d400=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JydkQP68; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IcEvCYCS"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CE77D1F000FF
-	for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 13:37:32 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JydkQP68"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4B32A1F000FF;
+	Tue, 13 Oct 2026 14:07:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791898652;
-	bh=/jpYxod55y0lkvSUQsLB9QjZICIEkF1DnOojB5WeKro=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=IcEvCYCSzg9iyYqBYbZwOCepQr5fujYI6wF+4AXU/vwX3/qo+abij/6sRGUEI5wkH
-	 HSnrWYDh911kIGcAZNNws3aevXnP/OA4M8FyTsJmy7VMCnJyI3FnwsGGObArwm9+pQ
-	 qcjXGEuLFm4+LKQZO2G7Z1spFXexmntA9E6mNb6lFCm/cNIBECR79mCIYZOACn8RAM
-	 zW33mrqEK+tIPWjEUhxcJN2MKXsmmoLtLeZZ7WbYnAYcKLnTQI8Yjd0KQbJd3/08AE
-	 MKS9R32zFEk05ipQDzTXW6SEyIFYPYDeD846A2wS4KleXwWDSm1VyyUylqF6OvGaw6
-	 4Po1vAB30OlGQ==
-Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-3a777d4f321so25666901fa.0
-        for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 06:37:32 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBzhmVHfLGwnFvyS/nBIZe/84UZtn+gJPrS3SwjlN51ZwCA7AKQN9BiySXwCLpIVi58fuac=@lists.linux.dev
-X-Gm-Message-State: AFq9FYLHSgEonQPGo38KNxgUnJhClb/efzacYp9auphlCuMXC2d7YMYl
-	9iSvfr1mLvYWXIoS7vYNtACWI93ja9ZWxald/GEN3Huq8Eq67gJtrOCkgNduD0ukKj31ntkGjJk
-	X99g9YHw4Gn1vZkH3jykVLb2aIMNsXwHwKtnUXp7WHA==
-X-Received: by 2002:a2e:be91:0:b0:3a9:707e:ad95 with SMTP id
- 38308e7fff4ca-3a9c53b454bmr28581701fa.11.1791898651132; Tue, 13 Oct 2026
- 06:37:31 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 13 Oct 2026 14:37:29 +0100
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 13 Oct 2026 14:37:29 +0100
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <as4twfDzv23p25yU@ashevche-desk.local>
+	s=k20260515; t=1791900455;
+	bh=1mmQxqe2eOiDfxMlH7DwP9Y+43S/EZrHqcAdhn++fUQ=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=JydkQP68j++uBfAoGwcB3Ba8Qy/WqLIdKslceKRqp+Y79zTsfL5tJ+asxsG6nfQ2b
+	 YUgBzEMAJLxRyXPyACx609e2Bu7ECI65qpfSVrEsUFh2AEx17EEnUcGdbMn8tgPA7E
+	 HxyVaNlZPVHrdCJYhzSF/mIo/XQ92PUyigR+bcpN1eCsWvT7pKDwavzTi6VfYOgiHx
+	 ZsbKnMZHdZl5K8oyUtfiV3aSj+QAhI7KQRPMDYikbW/f7QxWvpCTOw1UFkPwbAHUuL
+	 /28dVi6A0/aKGi/RBlBfQAFdrFx9bGtqmu9+S4jLLZbelt46p+7U9bLnjBFRkCvJ5u
+	 rh9UMw+noquDg==
+From: Lee Jones <lee@kernel.org>
+To: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Renner Berthing <kernel@esmil.dk>, 
+ "Rob Herring (Arm)" <robh@kernel.org>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <20260921232639.3132083-1-robh@kernel.org>
+References: <20260921232639.3132083-1-robh@kernel.org>
+Subject: Re: (subset) [PATCH] dt-bindings: mfd: ti,tps65086: Make
+ regulators optional
+Message-Id: <179190045401.3946554.16358556662900390646.b4-ty@b4>
+Date: Tue, 13 Oct 2026 15:07:34 +0100
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20260715192415.1326037-1-andriy.shevchenko@linux.intel.com>
- <178418869936.4524.15759697748852640442.b4-ty@oss.qualcomm.com>
- <aliWiN1EaGziNZ7f@ashevche-desk.local> <CAMRc=Meen-m7FohCe-uU89R60SNU=gJFXkwpBjpTZMw+3+1b6A@mail.gmail.com>
- <as4twfDzv23p25yU@ashevche-desk.local>
-Date: Tue, 13 Oct 2026 14:37:29 +0100
-X-Gmail-Original-Message-ID: <CAMRc=MfTpaBT1-zwn4HP56v5FsRbu+tUkAYbtndouN+O4Et6gA@mail.gmail.com>
-X-Gm-Features: AclHuK90fHYsUWk38rjYtt9AkqfQk-T-NfZISx_5s5AZLDxBRQZVRsyFODpDEbE
-Message-ID: <CAMRc=MfTpaBT1-zwn4HP56v5FsRbu+tUkAYbtndouN+O4Et6gA@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] gpio: legacy: Kill gpio_set_value_cansleep()
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: linux-gpio@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Linus Walleij <linusw@kernel.org>, Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
-	Bartosz Golaszewski <brgl@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
 
-On Tue, 13 Oct 2026 15:10:25 +0200, Andy Shevchenko
-<andriy.shevchenko@linux.intel.com> said:
-> On Thu, Jul 16, 2026 at 01:35:18AM -0700, Bartosz Golaszewski wrote:
->> On Thu, 16 Jul 2026 10:30:00 +0200, Andy Shevchenko
->> <andriy.shevchenko@linux.intel.com> said:
->> > On Thu, Jul 16, 2026 at 09:58:42AM +0200, Bartosz Golaszewski wrote:
->> >>
->> >> On Wed, 15 Jul 2026 21:23:30 +0200, Andy Shevchenko wrote:
->> >> > No more users.
->> >>
->> >> Yes please! Thank you!
->> >
->> >> [1/1] gpio: legacy: Kill gpio_set_value_cansleep()
->> >>       https://git.kernel.org/brgl/c/aa4bc3b7d36d52caf7c3d3214ae4ce96d609e8c5
->> >
->> > Not sure, I put in the comment that this should be part of MFD, otherwise
->> > the one driver will fail (the conversion change in MFD tree only).
->>
->> Ah dang it, should have read what's below the commit message. Backed out now.
->
-> Now it can be applied, can't it?
->
+On Mon, 21 Sep 2026 18:26:38 -0500, Rob Herring (Arm) wrote:
+> The TPS65086 MFD driver adds the regulator child device
+> unconditionally, and the regulator driver registers the regulators
+> from the parent node even when there is no regulators child node
+> containing init data.
+> 
+> Do not require the regulators container in the binding. Existing
+> ZynqMP boards that only describe the PMIC core and GPIO function are
+> valid without regulator init data.
+> 
+> [...]
 
-Sure seems like it! :)
+Applied, thanks!
 
-Bartosz
+[1/1] dt-bindings: mfd: ti,tps65086: Make regulators optional
+      commit: b783c46fb685a38d1f5cde57f59e5ed520846ed7
+
+--
+Lee Jones [李琼斯]
+
