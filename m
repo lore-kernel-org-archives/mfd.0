@@ -1,117 +1,129 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB92C3E0C77
-	for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 07:02:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A1EA3BB104
+	for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 08:44:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791874941; cv=none; b=ZMUfe34dNyJaoYUguUEJGoOk6t6aBb7oZdX7NwVS0zoOcIl0MmRe5PrmCewXdGD2JfMeI3chPlxtHDiBPu7rmA35qD0D5/IGGbvGYRgfvJjjp/3z03aGh/FJRejSZ1ieUtZfTXP/pU7StnhxExqTr891ua6xRPLMe8iK1rXRB/0=
+	t=1791881087; cv=none; b=b1BLde6Zq6DMzIsvUcEzWYEheKl9tdbB4HOTwpcveMtok3aBA7xLQEORdosKyuQenZneugaobt/b87olfySMv4ZJQIoRVzcAJnX0qp11dWWSdyOceZvmKn3qJ/YW7dwENTsQidx0dr72+mTVVPdhb353PtjcIbdYVui7YXwFp6s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791874941; c=relaxed/simple;
-	bh=WlMjFmFK13uJeWsoDKd9D6ZjfLS2ddkK861miJGPi5o=;
-	h=Message-ID:From:Subject:To:Cc:In-Reply-To:References:Content-Type:
-	 Date; b=LqzXLY2aWJF3Tr+O7DiqXSKMRAPXg+674mnL3c96QZQdlp5/JzPPDxsjPXPxPhzQNa1HvJLFUrcQlcxp0oy6td0fZzkUtcDyGpBTDHFnjPqRJBnpIdAoZg+Rv7y3ZkBOWUvGoS9OyRDKp/3JpVO2JUYPp5FICQ+Dp5KjyMVbNAw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WH7yD/bZ; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791881087; c=relaxed/simple;
+	bh=vxqqcKeLdquDIj2KN23L6bIhx0QnUrefdPPqJUxyJLc=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=KGwa15J4bxASSan3Hub9Tx11c7PdMLVJCd94QWERq9dXY/rS6NDWSVlFz205PFLEAeSN2zn9NxEMb8MlmMBMZp+nm9mHejQFBQhbhNLBYreC9CmWaxIMFnsYlD7eOYjAWeSF2/5LU9v7sJee/7fsUUG8qIPoAIMoT8j2CmiHBqQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JBJto5vs; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WH7yD/bZ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7A3941F000FF;
-	Tue, 13 Oct 2026 07:02:20 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JBJto5vs"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 343751F008BD
+	for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 08:44:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791874940;
-	bh=FRKbf7XwdD9caCUX9VXNXlX3/TglR2IQcCAYn3zyehI=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=WH7yD/bZLcIqWnyfsjasyPexBT5iLUnfxdQ5ZX8TYsUJ7diYVqY0f+SLyCLbr3Sql
-	 EPcKxMdIGxmziP8xAH7NV6Y0RJDxXJ9FZZpAOUYlPBDdno1OZHR9N+qjdw5awhp/G3
-	 z7CbkFLieV1u597NZWuymIYLHr+bfPZFj+xrH8fHNuXWzNyc9Nm4FLUixAQ+4/L0WS
-	 CCMvj5Zwhnxv+H0G0N/k2Wgpo3FdI+BFTgePHmKw42/lzrqjxP9+9ElmW2MjmIKDRa
-	 P7Ds3attgHfg8PYWiK+qfdLMKCc/9rZ9vne2vYtAalO2sIde6p9HVs9KtPnje//XaH
-	 kCkjGI2TG6ebA==
-Message-ID: <sashiko-outbox-169155@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v9 12/12] mfd: nct6694: Add Host Interface (HIF) eSPI
- transport driver
-Reply-To: sashiko-reviews@lists.linux.dev
-To: a0282524688@gmail.com
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261013063259.2734757-13-a0282524688@gmail.com>
-References: <20261013063259.2734757-1-a0282524688@gmail.com>
- <20261013063259.2734757-13-a0282524688@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 13 Oct 2026 07:02:20 +0000
+	s=k20260515; t=1791881085;
+	bh=vxqqcKeLdquDIj2KN23L6bIhx0QnUrefdPPqJUxyJLc=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=JBJto5vs6Ta5E/laTRijxncLWHwZSeMl1+SClQ5oFUvXM0v718q+e20I6pYu0DfxG
+	 w/4fRxhonEgkDArXFln4ElPzOKrrcRqsZSUYu2sA4YrUbFnUE9/8M2Nfq3o4T30bj7
+	 7Y/IEqCfZlmcDKyap6K5e9RbVvosULTeXnkkcS9NSDl/k8EL2VWgbiClg+50O+sqBQ
+	 R9LHUbOIC2nEqLkWIQaNSlkAAQhg8DxTJuWeCljZPmF27WHT31I3sJvHfnzrf0STWR
+	 7qmGGRHb0aHs5PSjp7DSOsNQ+xxCV5dpANwf8GOPmcxRC8w8SM1S/g8H3NMfkwoXCw
+	 cjAe+fGH6sbBQ==
+Received: by mail-lj1-f172.google.com with SMTP id 38308e7fff4ca-3a1eb6fa0f4so28737571fa.2
+        for <mfd@lists.linux.dev>; Tue, 13 Oct 2026 01:44:45 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBxInpZyILRYoZ6CM0fCdzHrHw7dz16gS13WmASr1LLZLJsnu2tBtiKQaw4y45EMSPZ68BY=@lists.linux.dev
+X-Gm-Message-State: AFq9FYJAU5AGDPXTcwkKyNWjionRW9WbB5gtpmObKh6tRUxyT0bwC7bg
+	I6DUw95jO64A0nTKUC2UTBJ6+IcsA8CZ76Jjaps6bkO8aeRTZML6IHA1OvuXy8MtD01F078gTUJ
+	tptbAsXbmmCqjreK9g/PqDzs2xRkBexI=
+X-Received: by 2002:a2e:be0b:0:b0:3a9:abd6:1ab9 with SMTP id
+ 38308e7fff4ca-3a9c514fd25mr26402801fa.8.1791881083577; Tue, 13 Oct 2026
+ 01:44:43 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+References: <20260921-cv75-v5-v8-0-282ff5d98dda@ambarella.com>
+ <20260921-cv75-v5-v8-4-282ff5d98dda@ambarella.com> <CAD++jLmKF5XxHsJX29sdXC_6JHKn-7HkE=N+TKtk5xODtQj3_w@mail.gmail.com>
+ <b2256847-3ec1-47e8-ac79-ceca86eb09e7@kernel.org> <CAD++jLkrXXg9xrhAZ8HETc5Qcv5BbkY-ibjvzBmE5WZVqDEGWQ@mail.gmail.com>
+ <a0eca34d-5eb2-4730-b8c7-0f2302bcf265@kernel.org>
+In-Reply-To: <a0eca34d-5eb2-4730-b8c7-0f2302bcf265@kernel.org>
+From: Linus Walleij <linusw@kernel.org>
+Date: Tue, 13 Oct 2026 10:44:31 +0200
+X-Gmail-Original-Message-ID: <CAD++jLm=T-U07vAVCogMnfOfkDf=i9QhGGc8ok2N-ZUh50WLNA@mail.gmail.com>
+X-Gm-Features: AclHuK8uOkUyYpjHvZrw-87c6Tq4ZbkYSTxyMDm1V9n2PMOjyOCFsNCXto0ZE_s
+Message-ID: <CAD++jLm=T-U07vAVCogMnfOfkDf=i9QhGGc8ok2N-ZUh50WLNA@mail.gmail.com>
+Subject: Re: [PATCH v8 04/18] dt-bindings: pinctrl: add Ambarella CV75 pinctrl
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: longzhao@ambarella.com, Arnd Bergmann <arnd@arndb.de>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
+	Jerome Brunet <jbrunet@baylibre.com>, Bartosz Golaszewski <brgl@kernel.org>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jiri Slaby <jirislaby@kernel.org>, 
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
+	Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Long Zhao <zl020895@163.com>, 
+	Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
-- [High] mfd: nct6694: uninitialized kernel memory leak in regmap_read
---
+On Mon, Oct 12, 2026 at 9:08=E2=80=AFAM Krzysztof Kozlowski <krzk@kernel.or=
+g> wrote:
+> On 12/10/2026 09:06, Linus Walleij wrote:
+> > On Fri, Oct 9, 2026 at 8:17=E2=80=AFAM Krzysztof Kozlowski <krzk@kernel=
+.org> wrote:
+> >> On 01/10/2026 09:03, Linus Walleij wrote:
+> >
+> >>> On Mon, Sep 21, 2026 at 6:23=E2=80=AFAM Long Zhao via B4 Relay
+> >>> <devnull+longzhao.ambarella.com@kernel.org> wrote:
+> >>>
+> >>>> From: Long Zhao <longzhao@ambarella.com>
+> >>>>
+> >>>> Document the CV75 pin controller binding using generic function and
+> >>>> groups properties for pinmux configuration.
+> >>>>
+> >>>> Reviewed-by: Linus Walleij <linusw@kernel.org>
+> >>>> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.c=
+om>
+> >>>> Signed-off-by: Long Zhao <longzhao@ambarella.com>
+> >>>
+> >>> This patch 4/18 applied to the pinctrl tree.
+> >>
+> >> There is a dependency, you cannot take this patch alone.
+> >
+> > Oops, but is it a DTS dependency so if none of the other patches go in =
+through
+>
+> No, it is a bindings dependency, introducing new DT bindings warning for
+> both your tree and next.
 
-commit dd833ce9ad43ea52da90e8d6b619b3c19f22934e
-Author: Ming Yu <a0282524688@gmail.com>
+Is there a problem with the bindings patch itself?
 
-mfd: nct6694: Add Host Interface (HIF) eSPI transport driver
+In that case Long can just send an incremental patch to
+fix it right?
 
-This commit adds support for the Host Interface transport over eSPI for the
-Nuvoton NCT6694. It locates the Super-I/O to configure the shared memory
-base address and SIRQ, and implements a regmap bus that exchanges firmware
-commands through the shared memory window.
+> Your tree is fine in this case as long as next
+> is also fine... but next is not, because that patch did not make it there=
+.
 
-> diff --git a/drivers/mfd/nct6694-hif.c b/drivers/mfd/nct6694-hif.c
-> new file mode 100644
-> --- /dev/null
-> +++ b/drivers/mfd/nct6694-hif.c
+But the patch is in -next?
 
-[ ... ]
+~/linux-next$ ls
+Documentation/devicetree/bindings/pinctrl/ambarella,cv75-pinctrl.yaml
+Documentation/devicetree/bindings/pinctrl/ambarella,cv75-pinctrl.yaml
 
-> +static int nct6694_hif_xfer_msg(struct nct6694 *ddata,
-> +				const struct nct6694_cmd_header *cmd_hd,
-> +				u8 hctrl, const void *tx_buf, void *rx_buf)
-> +{
+> We cannot have any new DT bindings warnings in next.
 
-[ ... ]
+I guess I just don't get it :D
 
-> +	if (tx_buf)
-> +		memcpy_toio(data, tx_buf, data_len);
-> +
+To me it seems like a fairly normal situation: ACKed bindings merged
+together with the driver, no dependence on anything.
 
-[ ... ]
+But if you tell me "revert the patch" I will simply revert the patch
+because I trust you, it doesn't really matter why.
 
-> +static int nct6694_hif_regmap_read(void *context, const void *reg_buf,
-> +				   size_t reg_size, void *val_buf,
-> +				   size_t val_size)
-> +{
-> +	struct nct6694 *ddata =3D context;
-> +	struct nct6694_hif_data *hif_data =3D to_nct6694_hif_data(ddata);
-> +	u32 reg =3D get_unaligned_be32(reg_buf);
-> +	u8 hctrl =3D FIELD_GET(NCT6694_REG_HCTRL, reg);
-
-[ ... ]
-
-> +	return nct6694_hif_xfer_msg(ddata, &cmd_hd, hctrl,
-> +				    hctrl =3D=3D NCT6694_HCTRL_SET ? val_buf : NULL,
-> +				    val_buf);
-> +}
-
-[Severity: High]
-Does this code inadvertently copy uninitialized kernel memory to the device?
-
-Looking at nct6694_hif_regmap_read(), val_buf is an output buffer provided =
-by
-the regmap core and contains uninitialized memory.
-
-If a caller (such as debugfs) requests a read from a register offset where
-the NCT6694_HCTRL_SET bit is active in the hctrl variable, the driver passes
-the uninitialized val_buf as the tx_buf argument to nct6694_hif_xfer_msg().
-
-Since tx_buf is not NULL, nct6694_hif_xfer_msg() then copies it to device
-memory via memcpy_toio(). This would copy the uninitialized val_buf content
-directly to the hardware shared memory mailbox, potentially exposing kernel
-stack or heap data to the device firmware.
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261013063259.2734=
-757-1-a0282524688@gmail.com?part=3D12
+Yours,
+Linus Walleij
