@@ -1,139 +1,166 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0877A4BD370;
-	Wed, 14 Oct 2026 12:25:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E5BF538D8C;
+	Wed, 14 Oct 2026 14:00:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791980714; cv=none; b=pT/+sGFkDCgMdTxuR9hAd4KSqR1W5UmQdERIIM8OqjPAgHT4sX33PuYJgwbYX29FM3lwftn8vOdUM4ufzbmhg1Zb+BO6CW0EGGSufqeL4p3QKuntWM7ZT8DLGBDxgNmBF3LowFyFTrz5+BKeDud7K0WBFMtOJdzsw+9e3PmzCNM=
+	t=1791986448; cv=none; b=BrAQrVxoWjy0/4Gbvoe65DIF2ZzDvkGrMMpcmRFkYBf4ba2LD81/lRBVc/+SU7Dsd0HLW8gZ74mrYyifTOUchG9y8sLIzt7rJ1iv35mCP2gPGp6485TCYituuOcAgbsgaQSlDQfFTSoLrnHUGsx5h6MKc54Py+ipyqPHJ1noCAc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791980714; c=relaxed/simple;
-	bh=jbWhlhq7XDAQR8TndOhpYpwYC9W4fJVTUdvOYd2QnTo=;
-	h=Message-ID:From:Subject:To:Cc:In-Reply-To:References:Content-Type:
-	 Date; b=O9MSDf+lRr79hr7SvFn2ktQzgiMRnkgGUdzD7fBI00f97dOXkzWTt7rH7wz0dGb6mmo98MYFp9bL0MsQu4cl0VJ2pVaMK5OAe8IPMc/9gSRx/f+ARQpLzPEvaeTbmP1W5/RQFvSHt0GzMbo0L3B4gk2nkMg+9bY0IeiVujOlKLg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Voc/cZH/; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791986448; c=relaxed/simple;
+	bh=eC8NLukDIpBtuA2KwQr+tWlDW1EMq1FNkuG5GY3Niqo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=IOWmwisEDgdgwGN+BdptQhREAeWRMvPCnLMIwjIe6JSzeipSQzjL/zzb0VLpRFU5yh/hYRE2myXbf5ATFO7zh6io3xPC5rsysDcTP8vRnj9AWLE0hm5Bg+Y5c4i+ki9Ky/dRyWYnOPlotglkLQesz7LE5Nsgym/ngnAbttGKbp8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gmm388tk; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Voc/cZH/"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8967C1F000FF;
-	Wed, 14 Oct 2026 12:25:11 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gmm388tk"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5E041F00A2F;
+	Wed, 14 Oct 2026 14:00:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791980711;
-	bh=4tJK3Ja6yFuD15xGvwfL7N7QaVABv3U/G5A8GWe5v64=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Voc/cZH/0JJJKHPlVhD/mTPdIxPXaPzv0Z6rSQSQ/Pp7kNGup03+vrZH2rscTKlD8
-	 SrbS1ksg0O1xCcF5OcEeIqGzbMWOGjipqE7A9+SlgwvMcTaL3tw4HbtiTYhT6hEJIx
-	 8SoMvjmGWpHHc8vA6yA+fnq97cOwm4U9wQPOXAjWZ8Hi369c5TERQ4XochvMqP4ls+
-	 2UA4NYdLcFlY0pA18N/y2CaC2XesCd0In+F7mdQ5mYQD1EFMEg5oKAxJ3v4mbeS1MT
-	 lQcF8kXsXV92RGeUtd1cM+wk5c7FsueB5eZUw0X23FEqHrqTbT/hwEduNsmTKYLTC+
-	 4WZmFiEeeh0GA==
-Message-ID: <sashiko-outbox-171274@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 3/3 RESEND] mfd: max8907: Convert to use device
- managed poweroff handler
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Svyatoslav Ryhel" <clamor95@gmail.com>
-Cc: devicetree@vger.kernel.org, mfd@lists.linux.dev, robh@kernel.org, conor+dt@kernel.org, lee@kernel.org
-In-Reply-To: <20261014121544.138958-4-clamor95@gmail.com>
-References: <20261014121544.138958-1-clamor95@gmail.com>
- <20261014121544.138958-4-clamor95@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 14 Oct 2026 12:25:11 +0000
+	s=k20260515; t=1791986441;
+	bh=fshOZWlu5/9cxLtz9RzAY3nl628bQD8gTsbdb522wOY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=gmm388tk2yJYC+Js/eI2tlGqToe2qgh0bdGayGpszE3Z4TpWzsmbsUWP+vNnv2z1w
+	 PZpDWZXp5xdKMHkpXOPtHsjMBLDKIPvVrNcCNTs4uNRm5EcYsxUo3/XwLq9vCbCzkp
+	 A6CWiinPVtP33DiOuocr2ETRsVodtNVKdH9i3+OGIA3WpwqhVBlN9v89QnMrEK5rk3
+	 YMuu8MI4VMzxuiFK7+s2B6WLVz3EgigC6lwjHeXWh032teHlkeGmiSP/9vG85+iOmb
+	 3aaGAA8kWHiiGB6WYC/KEo9W6RaWhPig4UOy/3fOWWPSC/F3qYwn0XWiiU2suG0Y+B
+	 WkNmLLO+iooQw==
+Date: Wed, 14 Oct 2026 15:00:37 +0100
+From: Lee Jones <lee@kernel.org>
+To: Pengpeng Hou <hppiscas@163.com>
+Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
+	Aaron Kling <webgeek1234@gmail.com>
+Subject: Re: [PATCH v2] mfd: max77620: publish module aliases with variant
+ match data
+Message-ID: <179198324452.839288.10919510385745503720@kernel.org>
+References: <20261014032139.10971-1-hppiscas@163.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261014032139.10971-1-hppiscas@163.com>
+X-AI-Review-Draft: <20261014032139.10971-1-hppiscas@163.com>
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
-s) to consider:
-- [High] mfd: max8907: regmap mutex deadlock and sleep in atomic power-off
-- [Low] mfd: max8907: missing <linux/property.h> for device_property_read_b=
-ool()
-- [Low] mfd: max8907: misleading error message in power-off handler
---
+On Wed, 14 Oct 2026, Pengpeng Hou wrote:
 
-commit 5506b550cb60d6cb6be8b862f1268bdb1e810f08
-Author: Svyatoslav Ryhel <clamor95@gmail.com>
+Please review, explain or fix the Sashiko review(s).
 
-mfd: max8907: Convert to use device managed poweroff handler
-
-Replace the legacy global 'pm_power_off' function pointer assignment with
-the devm_register_sys_off_handler() helper.
-
-> diff --git a/drivers/mfd/max8907.c b/drivers/mfd/max8907.c
-> index 363ac80c0593b..9c40f0551a8ce 100644
-> --- a/drivers/mfd/max8907.c
-> +++ b/drivers/mfd/max8907.c
-[ ... ]
-> -static struct max8907 *max8907_pm_off;
-> -static void max8907_power_off(void)
-> +static int max8907_power_off(struct sys_off_data *data)
+> MAX77620 can be built as a module, but its I2C ID table is not exported
+> and it has no OF match table to provide OF aliases.
+>
+> Publish both tables and obtain the chip variant through
+> i2c_get_match_data(). Adding OF matching alone is insufficient: a fallback
+> compatible can match the OF table while client->name has no corresponding
+> I2C ID. Dereferencing i2c_client_get_device_id() would then be invalid.
+>
+> Use pointers to chip IDs in both tables. This also keeps MAX77620, whose
+> enum value is zero, distinguishable from missing match data. Leave the
+> variant-specific regmap configuration and child devices unchanged.
+>
+> The issue was found by our static-analysis tool and manually reviewed.
+>
+> Fixes: 0d084ee9ba87 ("mfd: max77620: Allow building as a module")
+> Assisted-by: gpt 5
+> Signed-off-by: Pengpeng Hou <hppiscas@163.com>
+> ---
+> Changes since v1:
+> - use the author's real name
+> - address the matching-path issue Lee asked to review: populate OF data
+>   and migrate probe to i2c_get_match_data() with a missing-data check
+> - use non-NULL pointers for all variants, including enum value zero
+>
+> Previous version:
+> https://lore.kernel.org/all/20260905134051.66545-1-hppiscas@163.com/
+>
+>  drivers/mfd/max77620.c |   29 ++++++++++++++++++++++++-----
+>  1 file changed, 24 insertions(+), 5 deletions(-)
+>
+> diff --git a/drivers/mfd/max77620.c b/drivers/mfd/max77620.c
+> index c4f89a9681f34792d24c5b75c4b88df84b3c2c66..4947ee96cc62cdeae37a15f65497d7f1013dbf11 100644
+> --- a/drivers/mfd/max77620.c
+> +++ b/drivers/mfd/max77620.c
+> @@ -496,7 +496,7 @@ static int max77620_pm_power_off(struct sys_off_data *data)
+>
+>  static int max77620_probe(struct i2c_client *client)
 >  {
-> -	regmap_update_bits(max8907_pm_off->regmap_gen, MAX8907_REG_RESET_CNFG,
-> -			MAX8907_MASK_POWER_OFF, MAX8907_MASK_POWER_OFF);
-> +	struct max8907 *max8907 =3D data->cb_data;
-> +	int ret;
-> +
-> +	ret =3D regmap_update_bits(max8907->regmap_gen, MAX8907_REG_RESET_CNFG,
-> +				 MAX8907_MASK_POWER_OFF, MAX8907_MASK_POWER_OFF);
-
-[Severity: High]
-Does this code risk a deadlock or sleep in an atomic context?
-
-The handler max8907_power_off() is registered with SYS_OFF_MODE_POWER_OFF.
-This means it will be called via an atomic notifier chain during system
-shutdown, after machine_power_off() stops CPUs and disables interrupts.
-However, regmap_update_bits() acquires a mutex and invokes I2C transfers
-that can sleep.
-
-Should this use SYS_OFF_MODE_POWER_OFF_PREPARE instead? That mode uses a
-blocking notifier chain and runs in process context before CPUs are stopped.
-
-> +	if (ret)
-> +		dev_err(max8907->dev, "failed to restart device!\n");
-
-[Severity: Low]
-Is this error message accurate?
-
-This error path logs a failure to "restart device", but max8907_power_off()
-is explicitly used for powering off the device, not restarting it.
-
-> +
-> +	return NOTIFY_DONE;
->  }
-> =20
->  static int max8907_i2c_probe(struct i2c_client *i2c)
->  {
->  	struct max8907 *max8907;
+> -	const struct i2c_device_id *id = i2c_client_get_device_id(client);
+> +	const enum max77620_chip_id *id = i2c_get_match_data(client);
+>  	const struct regmap_config *rmap_config;
+>  	struct max77620_chip *chip;
+>  	struct regmap_irq_chip *chip_desc;
+> @@ -504,6 +504,9 @@ static int max77620_probe(struct i2c_client *client)
+>  	int n_mfd_cells;
 >  	int ret;
-[ ... ]
-> @@ -204,6 +209,16 @@ static int max8907_i2c_probe(struct i2c_client *i2c)
->  		goto err_regmap_gen;
->  	}
-> =20
-> +	if (device_property_read_bool(&i2c->dev, "system-power-controller") ||
-> +	    device_property_read_bool(&i2c->dev, "maxim,system-power-controller=
-")) {
+>
+> +	if (!id)
+> +		return -ENODEV;
+> +
+>  	chip = devm_kzalloc(&client->dev, sizeof(*chip), GFP_KERNEL);
+>  	if (!chip)
+>  		return -ENOMEM;
+> @@ -519,7 +522,7 @@ static int max77620_probe(struct i2c_client *client)
+>
+>  	chip->dev = &client->dev;
+>  	chip->chip_irq = client->irq;
+> -	chip->chip_id = (enum max77620_chip_id)id->driver_data;
+> +	chip->chip_id = *id;
+>
+>  	switch (chip->chip_id) {
+>  	case MAX77620:
+> @@ -693,12 +696,27 @@ out:
+>  	return 0;
+>  }
+>
+> +static const enum max77620_chip_id max77620_chip_ids[] = {
+> +	[MAX77620] = MAX77620,
+> +	[MAX20024] = MAX20024,
+> +	[MAX77663] = MAX77663,
+> +};
 
-[Severity: Low]
-Could this lead to a build failure due to a missing header?
+What on earth is happening here?  Where have you seen this before?
 
-The patch replaces of_property_read_bool() with device_property_read_bool()
-in max8907_i2c_probe(). The new function is defined in <linux/property.h>,
-but that header is not explicitly included in this file. Relying on implicit
-transitive headers might break builds on some architectures or
-configurations.
+Please don't create an array of enums just to take the address of its
+elements.  Either ensure the enum in 'include/linux/mfd/max77620.h' does
+not start at 0, or cast directly via '(const void *)MAX77620' and
+'(uintptr_t)i2c_get_match_data(client)'.
 
-> +		ret =3D devm_register_sys_off_handler(&i2c->dev, SYS_OFF_MODE_POWER_OF=
-F,
-> +						    SYS_OFF_PRIO_DEFAULT,
-> +						    &max8907_power_off, max8907);
-> +		if (ret)
-> +			return dev_err_probe(&i2c->dev, ret,
-> +					     "failed to register poweroff handler\n");
-> +	}
+>  static const struct i2c_device_id max77620_id[] = {
+> -	{"max77620", MAX77620},
+> -	{"max20024", MAX20024},
+> -	{"max77663", MAX77663},
+> +	{"max77620", (kernel_ulong_t)&max77620_chip_ids[MAX77620]},
+> +	{"max20024", (kernel_ulong_t)&max77620_chip_ids[MAX20024]},
+> +	{"max77663", (kernel_ulong_t)&max77620_chip_ids[MAX77663]},
+>  	{},
+>  };
+> +MODULE_DEVICE_TABLE(i2c, max77620_id);
+> +
+> +static const struct of_device_id max77620_of_match[] = {
+> +	{ .compatible = "maxim,max77620", .data = &max77620_chip_ids[MAX77620] },
+> +	{ .compatible = "maxim,max20024", .data = &max77620_chip_ids[MAX20024] },
+> +	{ .compatible = "maxim,max77663", .data = &max77620_chip_ids[MAX77663] },
+> +	{ }
+> +};
+> +MODULE_DEVICE_TABLE(of, max77620_of_match);
+>
+>  static DEFINE_SIMPLE_DEV_PM_OPS(max77620_pm_ops,
+>  				max77620_i2c_suspend, max77620_i2c_resume);
+> @@ -706,6 +724,7 @@ static DEFINE_SIMPLE_DEV_PM_OPS(max77620_pm_ops,
+>  static struct i2c_driver max77620_driver = {
+>  	.driver = {
+>  		.name = "max77620",
+> +		.of_match_table = max77620_of_match,
+>  		.pm = pm_sleep_ptr(&max77620_pm_ops),
+>  	},
+>  	.probe = max77620_probe,
+>
+> base-commit: 319633b06ff2bfc2a7a60d2cfcab2e681a343b27
+>
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261014121544.1389=
-58-1-clamor95@gmail.com?part=3D3
+-- 
+Lee Jones
