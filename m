@@ -1,172 +1,163 @@
-Received: from mx0b-001ae601.pphosted.com (mx0b-001ae601.pphosted.com [67.231.152.168])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 912D6559CA2;
-	Wed, 14 Oct 2026 15:34:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=67.231.152.168
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791992085; cv=fail; b=FFrH74RTzSNKCWEfaxh1oo3uuryQl0usP5uPvxAf9agq1JIbZCVVoq64ITWuD+S42xu/koiB14fVw+UDakg/9rYBzfpE/gmV60GRPi17rQlr+bnGfl/VXVOWrT+VFBaxHiFFmmPJtD/mWDnmcuXzOvjMSvQyh0UtGUhRQuGC+R4=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791992085; c=relaxed/simple;
-	bh=vWGJyY0Tmu//R8Ksj8acrESVNUno2XG46m/Gb8z/lJQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=rLx1DV1QIOiE3oxsnIGqCIBJ5qWdYCgkvDCJY4vJMOdpsQ97We6GukSPaXHYq9uG9Ci7JieWfoHkKp7akR9/iyHQmpvfyIwyOlKsR6S068+Bj5gEHKUsgd7BYz8iw0TqouSHmhzl9xU3JpBBL4aFBHCGi+2elJ41JH/a5MqMDFA=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com; spf=pass smtp.mailfrom=opensource.cirrus.com; dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b=loNnp3iX; dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b=qEKRVrob; arc=fail smtp.client-ip=67.231.152.168
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=opensource.cirrus.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 433363ED12C;
+	Wed, 14 Oct 2026 16:11:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.4
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1791994267; cv=none; b=bmk5HmQlq2dkIRumf/k6KKp3wGDhS2bhIG3iLWBNtm3E95X68sl0N3fVeSQT5qxEGTsnLM8a5E/wbi1XLJBK5I8Nun/K1BvDW2LNHis5Mu6mSth1ufXg3HPTxw9PCT0uT5jotlcVnH2YqnvpPprGH6mOtt0pXzNgDEkRGuHRVYI=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1791994267; c=relaxed/simple;
+	bh=5zVPofWHhzcIGEaXG23OGwRbuySQ6OnDOtMmjK+5gKo=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=SPDWwhjbfYitLJgRflZiL976U73LQOXl2zACJb2Qoszy6+LL5E75968jKGMzC775Uli6GYDR0DCcHT2ybrel30B5Sj0kJWO7DjG8BkcA3aZDW0AcnbedCm9KMagmEHo9w2298ne7YHOP4sZLO9La2dKatt6wjOT80tuhMHuH8n4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=HuRHChRJ; arc=none smtp.client-ip=220.197.31.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b="loNnp3iX";
-	dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b="qEKRVrob"
-Received: from pps.filterd (m0077474.ppops.net [127.0.0.1])
-	by mx0b-001ae601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69EDh63a2754477;
-	Wed, 14 Oct 2026 10:34:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
-	:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=PODMain02222019; bh=8ZkSxa/7OPo/DrM9aN
-	WO2j694c41oLS63GIzl24lM2I=; b=loNnp3iXG9M+1FeNOXF0u6W3rxogBTCI2F
-	9+AmjlmdOSxF4wNJxdeAkCdOIvYomOWYOQu345GxzfhICgBsOgvENcmaqVO8H0Wx
-	4XDKlG+IULdb1riCMzP1kChe2HD/N/u+tJDAMwOpp9LNkBzzGLt4P+IXL5Pwbxas
-	X/1RJ30gs6rIALDBs5rbyEcclnF37mSYL/s2FA8eS2zpDPbhRUHCYL/o12Ih05jE
-	Wa2QOMNcTJm9jsWOHCHIbRXynz/Fyh66QBBmqKTBX7LGiTt8UDrX41cJeZmHxCss
-	BRklfO4p1qRKlyVDPqXtIaTsX/RbmqamA8Ps4pYwMahCL5Arx17Q==
-Received: from cy7pr03cu001.outbound.protection.outlook.com (mail-westcentralusazon11020117.outbound.protection.outlook.com [40.93.198.117])
-	by mx0b-001ae601.pphosted.com (PPS) with ESMTPS id 4h7hsg5yve-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Wed, 14 Oct 2026 10:34:34 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HtoVRjEQ/NbJx3kfjJpgZ9azrzqM/3613Acy45mDevQ5nXuoOIPExEN8qVu/qL9tZqHBPvxaHqOs1wCODMrd3J8gA/xPZ6AZQzwwtGf9o3qbYl8Wuwx9AvHw0i9jrQzf7eI7mCYRxHtoAVi062ZLqfEB7VZ2Gx15+dnTVtaSKdxA8f4FTVEnrcbp4GxWqCLJcsftmUlz99a7/JjLa/L1kYQ0tT6HoJNxAxo+ciJ6iyZ2oRkx1LIMydHTvUBH2IAfmngYgrLUtldfVj54WGJbBzkc9po8wTpV4jdWVr7SpxMu6RwNufB8yUALW3CAIyyj6vOPynPMtlDKFi65ST1x8Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8ZkSxa/7OPo/DrM9aNWO2j694c41oLS63GIzl24lM2I=;
- b=pwErh/0n58XmMzb5DVOvwIs+1EUfgscDg6FVu0QnJ+Ic5o6hNz7rUgwg1CzVJAW7RaTt8HiDkS8G77wRrmdr/rSLDtoclr9afhpXwItPTx+7fq6KNcso4rbrd9DQDgBaycvBEkeGtdCzstl3bN2A0ZN0pOVRfnogHUEKzZgxR/auZoGOFzhgLgW7g1mup6K2q7fR5tdYvdCU6loDihlixPCBD+tDOnqCZdBuLGm/xQJrw71HqQ77uWP2z1ukQevKf6+5wRrD6Z8XEY0vj75buUOvIxmjY6k9NUY/IVsNRCs00uWRamyaPvtoG6RhZnmfsfTFvGYYDaRTr4hLlk/IvQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 84.19.233.75) smtp.rcpttodomain=cirrus.com
- smtp.mailfrom=opensource.cirrus.com; dmarc=fail (p=reject sp=reject pct=100)
- action=oreject header.from=opensource.cirrus.com; dkim=none (message not
- signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cirrus4.onmicrosoft.com; s=selector2-cirrus4-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8ZkSxa/7OPo/DrM9aNWO2j694c41oLS63GIzl24lM2I=;
- b=qEKRVrobcfORLSebQ/uQJs5ZhkmM4hhuC6q8YFVshNVVuEd7U7wb01PqbBN73o31DluMC19c88zV9DoVSp9iF9dYnVlsF0T1vrVQ0kgaMNJmhtz3ixwEBd3HxBcGO1ewcktPxEEqWTI6M3L1Ub48bFxJs71Ge/KJ1vHFaugfk9A=
-Received: from MW4PR03CA0102.namprd03.prod.outlook.com (2603:10b6:303:b7::17)
- by DS6PR19MB589425.namprd19.prod.outlook.com (2603:10b6:8:411::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.12; Wed, 14 Oct
- 2026 15:34:28 +0000
-Received: from SJ1PEPF000026C6.namprd04.prod.outlook.com
- (2603:10b6:303:b7:cafe::72) by MW4PR03CA0102.outlook.office365.com
- (2603:10b6:303:b7::17) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.522.4 via Frontend Transport; Wed, 14
- Oct 2026 15:34:28 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=softfail (sender
- IP is 84.19.233.75) smtp.mailfrom=opensource.cirrus.com; dkim=none (message
- not signed) header.d=none;dmarc=fail action=oreject
- header.from=opensource.cirrus.com;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- opensource.cirrus.com discourages use of 84.19.233.75 as permitted sender)
-Received: from edirelay1.ad.cirrus.com (84.19.233.75) by
- SJ1PEPF000026C6.mail.protection.outlook.com (10.167.244.103) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.522.6
- via Frontend Transport; Wed, 14 Oct 2026 15:34:26 +0000
-Received: from ediswmail9.ad.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
-	by edirelay1.ad.cirrus.com (Postfix) with ESMTPS id 12229406540;
-	Wed, 14 Oct 2026 15:34:25 +0000 (UTC)
-Received: from opensource.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
-	by ediswmail9.ad.cirrus.com (Postfix) with ESMTPSA id EF0C582024C;
-	Wed, 14 Oct 2026 15:34:24 +0000 (UTC)
-Date: Wed, 14 Oct 2026 16:34:23 +0100
-From: Charles Keepax <ckeepax@opensource.cirrus.com>
-To: Lee Jones <lee@kernel.org>
-Cc: vkoul@kernel.org, yung-chuan.liao@linux.intel.com,
-        pierre-louis.bossart@linux.dev, linux-sound@vger.kernel.org,
-        patches@opensource.cirrus.com, mfd@lists.linux.dev,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 RESEND 2/2] mfd: cs42l43: Move to core detach helper
-Message-ID: <as+g/3Qb2SpP6G0f@opensource.cirrus.com>
-References: <20260924120520.2511081-1-ckeepax@opensource.cirrus.com>
- <20260924120520.2511081-3-ckeepax@opensource.cirrus.com>
- <20261014151800.GA1182143@google.com>
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="HuRHChRJ"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=o1
+	xNoGNlDuv8dcA05o9muZ1QtkmEswQhTqN6SrXTfWI=; b=HuRHChRJv/jlQNiIMf
+	16PHgfNcZnlrAjoqtMercf5+sXqdV8TdXJ89LDiYx5Ql2YslJqnDuglgj7gautHv
+	qNDVkCo+7lOsAJeZSrhHEXoFUOAWocWRGOdm490fyPYjLYSKsjjTDN9P29FSGaGj
+	fCmPdss/y1J0XEOk4CD29/m6Q=
+Received: from fedora (unknown [])
+	by gzga-smtp-mtada-g0-1 (Coremail) with SMTP id _____wD3v15Gqc9qxM0iAA--.40892S3;
+	Thu, 15 Oct 2026 00:09:54 +0800 (CST)
+From: Ju Nan <junan76@163.com>
+To: junan76@163.com,
+	antonio.borneo@foss.st.com,
+	bigeasy@linutronix.de,
+	linusw@kernel.org
+Cc: alexandre.torgue@foss.st.com,
+	arnd@arndb.de,
+	clrkwllms@kernel.org,
+	lee@kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-gpio@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-rt-devel@lists.linux.dev,
+	linux-stm32@st-md-mailman.stormreply.com,
+	mcoquelin.stm32@gmail.com,
+	mfd@lists.linux.dev,
+	rostedt@goodmis.org,
+	u.kleine-koenig@pengutronix.de
+Subject: [PATCH v4 1/2] pinctrl: stm32: Fix the unit of the hwspinlock timeout
+Date: Thu, 15 Oct 2026 00:09:17 +0800
+Message-ID: <20261014160917.139241-3-junan76@163.com>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261014160917.139241-2-junan76@163.com>
+References: <20261014160917.139241-2-junan76@163.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261014151800.GA1182143@google.com>
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000026C6:EE_|DS6PR19MB589425:EE_
-X-MS-Office365-Filtering-Correlation-Id: a1e4c82e-dd40-40c8-e99c-08df2a08a172
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|376014|82310400026|61400799027|23010399003|22082099003|18002099003|16102099003|10067099003|11063799006|261009223027099003|4143699003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	ZCcYDG43kaOUNl+8dWESNXgYE4b8fjA7lfi+y61ynXo98EXq1lNcfd7g3stj2jFMPDdz7Ihh8gfF+DtPcLnCBf5YREJfP3IjqyHFdkQSr/WIFj7oMpkZZ9mF+mWvfJ0gXC1MP2SNCsgCuH9T1in0sTvxGQvAv41pbyh8pWhGflUEIbQ7UbLLrzwghXjgd0Va35XcQjncry7SwJhdc+FjC3HCk+WtIE/STNingWdNge/gd+orpYvl4xBSfTlMcV8XdeZjudbBWykIGReDiIHyB4CRN3NYVIoebjop6rERC5qKD/4X9mE9XHOYyRGGdMcg4RqcCsAkRqDCxyEZfsskW8AaVjq3SqQIo9IKYGsamdkR9HauB/3chu5Na5hzBO4CuP5Z5lxCxaYRL2/yBXV2bHU2G4ZmxHOwjeABzg1v4MoDJae445mE8MvT8or31yQ+Zt4tT2tiR3PqjdL8FrktE09UdZoY0aN9beGHd4qWn2KH3/XXXCz3yGko+MKxaGjvxya7frni3VfkEDyLo4i2MYT5fdjQBs3heuLl1xv95AClD07Lvy5UcDxTMBi748Y9wC6ELGOxs6jY7qzQbYGW3qa3IeUgjABSvVFWbaX8MrM6bOkVan+QOasRKpArGuKCeyriZ1NNvMjRcSbEFbhD7w==
-X-Forefront-Antispam-Report:
-	CIP:84.19.233.75;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:edirelay1.ad.cirrus.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(376014)(82310400026)(61400799027)(23010399003)(22082099003)(18002099003)(16102099003)(10067099003)(11063799006)(261009223027099003)(4143699003)(56012099006);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	AQB/BHCFHWcKwYGEe8nSLv2VrfDKbCptJALTYoDUVLHuC+b5VPlje5Fxu7XVpgj1yafj+NGnsjWVBo5Q5DDZ9WfMgC8CcBYWXOPlqD3jD+RZ3YPWhzSy8LlFP1Qagwq9hHHjwcfubWbcXo/a/ezsepuV5X2hZjWTof5hK/hKLtqU3imTjY5a4QcCczNXeRVBpHso4fVus8m7upkhrhUVfUliVXdwUMgQnKdrX7u+GEp+UzIONwM9BZbs50S4wghVo2TDRXx9y6MeSbFBydnTEGtkaSGaV8tCktoKkOXauB1CUc+8TrfPCvN0S3LcTieZbwGUiq2I8VFiXxLCeqMkn664YVBRjRZ5NUsY2TP4V1pIfe9zCGJqxrLQ3OUDpw7o6rE3tYrxr9tMG7c8GOIjaYWgVEthIkxfWDWtzvdpl6fbnprnOfXaz8JVHquAeJWI
-X-Exchange-RoutingPolicyChecked:
-	vmYif8ULI8R0Cn7jJtE7LfcGmEUxSOpVrnOhXK4+qx4Wk4ENV7/uwO3mrDp0OZ2XESwdnKncxlY4c1TygBEOLCnEUaS+xbA2snpPhh9fpv4FFrxUdyWB56iTdhZC2jv4zR2XDjidCsdIiafRb49WxKY1UMAb5CyvqhC4K1+V8NUEQUPTQxb435auzDPEMr9W8xj4AfnUz9VmQUWh0kLQqXE7driJcJZQDR7pkrKwQ+9lpyNWs4NFcUlyt6AlTiGMobBjSCz1a/uG5RALWUMSkWBSe9zUsjSxl99rG7ULtTyxPoabwWNPQ2mNcDcYPLaNiYOnS3JuocbOSZlfqLaOhA==
-X-OriginatorOrg: opensource.cirrus.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2026 15:34:26.3503
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a1e4c82e-dd40-40c8-e99c-08df2a08a172
-X-MS-Exchange-CrossTenant-Id: bec09025-e5bc-40d1-a355-8e955c307de8
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bec09025-e5bc-40d1-a355-8e955c307de8;Ip=[84.19.233.75];Helo=[edirelay1.ad.cirrus.com]
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-SJ1PEPF000026C6.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS6PR19MB589425
-X-Proofpoint-ORIG-GUID: vF5v1xYBpAS7oLQyQ2TlWFU7Jo8iJjjr
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA2MSBTYWx0ZWRfX5cGkfAoONfju
- LISiRlJXtOMSgj5EYYL7+FN9Lvv/gwX0DAee3bIoIq0el9u/CgRhCmZ4s0OBE61W+GrdS3c8y9T
- mrRfVQuwaRVkUCPSm3l9Yi+Mgd5MAMY=
-X-Proofpoint-GUID: vF5v1xYBpAS7oLQyQ2TlWFU7Jo8iJjjr
-X-Authority-Analysis: v=2.4 cv=QufLTlyd c=1 sm=1 tr=0 ts=6acfa10a cx=c_pps
- a=UIcKv52QUy3ZqpRAVMOEHw==:117 a=h1hSm8JtM9GN1ddwPAif2w==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
- a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=s63m1ICgrNkA:10 a=RWc_ulEos4gA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=iX4cTi3TZMoOKdANLEfx:22 a=KfkQE9S9VqCBgivYGm0O:22
- a=VwQbUJbxAAAA:8 a=w1d2syhTAAAA:8 a=Dl6V7YuROPEoWudy9Z0A:9 a=CjuIK1q_8ugA:10
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA2MSBTYWx0ZWRfX5uer8Ts89Pmz
- 5LbRQZE38UqOqTIECwjZNjhBb6/U089QIb6xmrtkJUIcXzXLFhFbgJi/hUiuH82t18K72ugRkgr
- AVZQ1f6FE6MtcMskYxjspOAd17Vppc9A/pN68f4iHPKnrI5IBIOKleC2DCeacrvBDPIlban+hSJ
- YqsLARGCoaVCSjHKOtfIbDyQBGP7kONjd2VwuLVCvG5V7N0pJH0hzkJcBhRvAJE2gYW0a3FPhLK
- 9LKqWin2NHcoUpziZIV9+Q7WgyHHdeW9Qfa6v/HQ0+gnCPHBWVB7OFxT76SFyvSiL4nsBQhCbhO
- foCIa0o17fYFO+qDkrPWu1WQSB06US1pjjzoq+/gVenQxva/97fDfCg2s0RMEeFByit8Y4fUvF2
- +/JQe5riTIaruUi661MVqa5xpfxlFaTtxg8slRYef4StHyuvycwfkURskJpzmoLoFjmGtKdP5p8
- NVoMHPvI54HnQmUxP9Q==
-X-Proofpoint-Spam-Reason: safe
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:_____wD3v15Gqc9qxM0iAA--.40892S3
+X-Coremail-Antispam: 1Uf129KBjvJXoWxAFyDGw4kXr43uF47WFWxZwb_yoW5tw1fpF
+	Zagwn0yrs8XrW5Zw4DtF4q9rnxJa1Iyw4DJFWjqa48Zr1jqr95Ja1Sqa92yF12qas7J3ZI
+	qFW2q345ua1DAaUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0zEs2-8UUUUU=
+X-CM-SenderInfo: pmxqt0ixw6il2tof0z/xtbC0xINvmrPqVIcfQAA3N
 
-On Wed, Oct 14, 2026 at 04:18:00PM +0100, Lee Jones wrote:
-> On Thu, 24 Sep 2026, Charles Keepax wrote:
-> 
-> > Now the core has a helper to signal a device will detach from
-> > the SoundWire bus, there is no need for the cs42l43 driver code
-> > to separately track that. Switch to using the new core helper.
-> > 
-> > Reviewed-by: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
-> > Signed-off-by: Charles Keepax <ckeepax@opensource.cirrus.com>
-> > ---
-> >  drivers/mfd/cs42l43-sdw.c   |  2 --
-> >  drivers/mfd/cs42l43.c       | 15 +--------------
-> >  include/linux/mfd/cs42l43.h |  1 -
-> >  3 files changed, 1 insertion(+), 17 deletions(-)
-> 
-> Does this need to go in as a set?
+HWSPNLCK_TIMEOUT is passed to hwspin_lock_timeout_in_atomic(), whose
+timeout argument is in milliseconds, not microseconds:
 
-The MFD bit won't build without the SoundWire bit, so ideally.
-Vinod has acked the series, although the original rather than
-the resend.
+  atomic_delay += HWSPINLOCK_RETRY_DELAY_US;
+  if (atomic_delay > to * 1000)
+          return -ETIMEDOUT;
 
-https://lore.kernel.org/linux-sound/asC1SwHb4DZkJ4Pr@parshuram/
+The hwspinlock core documents this explicitly:
 
-Thanks,
-Charles
+  If the mode is HWLOCK_IN_ATOMIC (called from an atomic context) the
+  timeout is handled with busy-waiting delays, hence shall not exceed
+  few msecs.
+
+Fixes: 290a9f937e5a ("pinctrl: stm32: use the hwspin_lock_timeout_in_atomic() API")
+Signed-off-by: Ju Nan <junan76@163.com>
+---
+ drivers/pinctrl/stm32/pinctrl-stm32.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/pinctrl/stm32/pinctrl-stm32.c b/drivers/pinctrl/stm32/pinctrl-stm32.c
+index 6a99708a5a23..e71651d4fad4 100644
+--- a/drivers/pinctrl/stm32/pinctrl-stm32.c
++++ b/drivers/pinctrl/stm32/pinctrl-stm32.c
+@@ -87,7 +87,7 @@
+ #define gpio_range_to_bank(chip) \
+ 		container_of(chip, struct stm32_gpio_bank, range)
+ 
+-#define HWSPNLCK_TIMEOUT	1000 /* usec */
++#define HWSPNLCK_TIMEOUT_MS	1
+ 
+ static const char * const stm32_gpio_functions[] = {
+ 	"gpio", "af0", "af1",
+@@ -609,7 +609,7 @@ static int stm32_gpio_domain_activate(struct irq_domain *d,
+ 
+ 	if (pctl->hwlock) {
+ 		ret = hwspin_lock_timeout_in_atomic(pctl->hwlock,
+-						    HWSPNLCK_TIMEOUT);
++						    HWSPNLCK_TIMEOUT_MS);
+ 		if (ret) {
+ 			dev_err(pctl->dev, "Can't get hwspinlock\n");
+ 			return ret;
+@@ -946,7 +946,7 @@ static int stm32_pmx_set_mode(struct stm32_gpio_bank *bank,
+ 
+ 	if (pctl->hwlock) {
+ 		err = hwspin_lock_timeout_in_atomic(pctl->hwlock,
+-						    HWSPNLCK_TIMEOUT);
++						    HWSPNLCK_TIMEOUT_MS);
+ 		if (err) {
+ 			dev_err(pctl->dev, "Can't get hwspinlock\n");
+ 			goto unlock;
+@@ -1089,7 +1089,7 @@ static int stm32_pconf_set_driving(struct stm32_gpio_bank *bank,
+ 
+ 	if (pctl->hwlock) {
+ 		err = hwspin_lock_timeout_in_atomic(pctl->hwlock,
+-						    HWSPNLCK_TIMEOUT);
++						    HWSPNLCK_TIMEOUT_MS);
+ 		if (err) {
+ 			dev_err(pctl->dev, "Can't get hwspinlock\n");
+ 			goto unlock;
+@@ -1135,7 +1135,7 @@ static int stm32_pconf_set_speed(struct stm32_gpio_bank *bank,
+ 
+ 	if (pctl->hwlock) {
+ 		err = hwspin_lock_timeout_in_atomic(pctl->hwlock,
+-						    HWSPNLCK_TIMEOUT);
++						    HWSPNLCK_TIMEOUT_MS);
+ 		if (err) {
+ 			dev_err(pctl->dev, "Can't get hwspinlock\n");
+ 			goto unlock;
+@@ -1181,7 +1181,7 @@ static int stm32_pconf_set_bias(struct stm32_gpio_bank *bank,
+ 
+ 	if (pctl->hwlock) {
+ 		err = hwspin_lock_timeout_in_atomic(pctl->hwlock,
+-						    HWSPNLCK_TIMEOUT);
++						    HWSPNLCK_TIMEOUT_MS);
+ 		if (err) {
+ 			dev_err(pctl->dev, "Can't get hwspinlock\n");
+ 			goto unlock;
+@@ -1242,7 +1242,7 @@ static int stm32_pconf_set_advcfgr(struct stm32_gpio_bank *bank, int offset, u32
+ 	spin_lock_irqsave(&bank->lock, flags);
+ 
+ 	if (pctl->hwlock) {
+-		err = hwspin_lock_timeout_in_atomic(pctl->hwlock, HWSPNLCK_TIMEOUT);
++		err = hwspin_lock_timeout_in_atomic(pctl->hwlock, HWSPNLCK_TIMEOUT_MS);
+ 		if (err) {
+ 			dev_err(pctl->dev, "Can't get hwspinlock\n");
+ 			goto unlock;
+@@ -1320,7 +1320,7 @@ stm32_pconf_set_skew_delay(struct stm32_gpio_bank *bank, int offset, u32 delay,
+ 	spin_lock_irqsave(&bank->lock, flags);
+ 
+ 	if (pctl->hwlock) {
+-		err = hwspin_lock_timeout_in_atomic(pctl->hwlock, HWSPNLCK_TIMEOUT);
++		err = hwspin_lock_timeout_in_atomic(pctl->hwlock, HWSPNLCK_TIMEOUT_MS);
+ 		if (err) {
+ 			dev_err(pctl->dev, "Can't get hwspinlock\n");
+ 			goto unlock;
+-- 
+2.56.0
+
