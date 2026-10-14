@@ -1,40 +1,50 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E5BF538D8C;
-	Wed, 14 Oct 2026 14:00:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E26FE54CF6C;
+	Wed, 14 Oct 2026 15:04:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791986448; cv=none; b=BrAQrVxoWjy0/4Gbvoe65DIF2ZzDvkGrMMpcmRFkYBf4ba2LD81/lRBVc/+SU7Dsd0HLW8gZ74mrYyifTOUchG9y8sLIzt7rJ1iv35mCP2gPGp6485TCYituuOcAgbsgaQSlDQfFTSoLrnHUGsx5h6MKc54Py+ipyqPHJ1noCAc=
+	t=1791990266; cv=none; b=sCCJFZWSs/J2O5HJJ3NTr20+PdT/K7m4d93oGy8T384GVMdEgzeD3GwafGARFXRLoHHnB1s+VFkYld4I7clKOruT1quUGmd6WhOKO7It2GX6awKOlQavaJgClsh6FBwaLinEyvbLx5rh5qc1lwvNkHQXNDkx7QjihBXvmGHckb4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791986448; c=relaxed/simple;
-	bh=eC8NLukDIpBtuA2KwQr+tWlDW1EMq1FNkuG5GY3Niqo=;
+	s=arc-20240116; t=1791990266; c=relaxed/simple;
+	bh=R/lJHph2NtUZYSkB3YJAdRNztii7oc33NQoJj20zEjI=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=IOWmwisEDgdgwGN+BdptQhREAeWRMvPCnLMIwjIe6JSzeipSQzjL/zzb0VLpRFU5yh/hYRE2myXbf5ATFO7zh6io3xPC5rsysDcTP8vRnj9AWLE0hm5Bg+Y5c4i+ki9Ky/dRyWYnOPlotglkLQesz7LE5Nsgym/ngnAbttGKbp8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gmm388tk; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=YC/K1kVAWAAXn2IDqB2cED9nr+g0NJJYmmGfDQ411sii3l7Obc2NwRUcLHofDPCxh0WRIu0lfoLb7oYGmXDaS8+IOX/DXQp4kKL+fY0Ya2Uj4DMQcF69F+GvZwePsjpckSmoNYzS0Yu7WlTMQFCgmU1v9mtoSBMfmL7drkCnENY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HqTmKzh2; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gmm388tk"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5E041F00A2F;
-	Wed, 14 Oct 2026 14:00:40 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HqTmKzh2"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 868421F000C4;
+	Wed, 14 Oct 2026 15:04:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791986441;
-	bh=fshOZWlu5/9cxLtz9RzAY3nl628bQD8gTsbdb522wOY=;
+	s=k20260515; t=1791990263;
+	bh=Smuh1MWEePD3V5wu3Lx4JJ7s9l89/Q5ATH1FeAf43Lo=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=gmm388tk2yJYC+Js/eI2tlGqToe2qgh0bdGayGpszE3Z4TpWzsmbsUWP+vNnv2z1w
-	 PZpDWZXp5xdKMHkpXOPtHsjMBLDKIPvVrNcCNTs4uNRm5EcYsxUo3/XwLq9vCbCzkp
-	 A6CWiinPVtP33DiOuocr2ETRsVodtNVKdH9i3+OGIA3WpwqhVBlN9v89QnMrEK5rk3
-	 YMuu8MI4VMzxuiFK7+s2B6WLVz3EgigC6lwjHeXWh032teHlkeGmiSP/9vG85+iOmb
-	 3aaGAA8kWHiiGB6WYC/KEo9W6RaWhPig4UOy/3fOWWPSC/F3qYwn0XWiiU2suG0Y+B
-	 WkNmLLO+iooQw==
-Date: Wed, 14 Oct 2026 15:00:37 +0100
+	b=HqTmKzh2ax96W+Hb5Y283wXiKHe0QKklrroREGryeuNtFLmIdtOCbaUHVj6atdf+u
+	 lHMqK1YiwGcBZvkrYvN0UMtnUcjLJ59i+oHpr+RDsp06X31Ej1qzsYfS9CyvRgYyqv
+	 1uGyFHSyv6v0Gxndi8z7sm5hyPhMF/l5xOgyLCu0hETJCsSXKrPO7kQU/1JKZgiy8b
+	 5gZ9X0CEytrFTT1+BP+L/bEokOzH2WD8YzzpOAbG0AV0tYhShuICUuiTbHo4+duvDz
+	 YtaHUHyvfbnpIfdJ+qGIwyx+viYAY6C4faXzKvJAa/w1DKBvKOxWc5gwbD15fTKD6T
+	 lkQltugcsxFUw==
+Date: Wed, 14 Oct 2026 16:04:17 +0100
 From: Lee Jones <lee@kernel.org>
-To: Pengpeng Hou <hppiscas@163.com>
-Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
-	Aaron Kling <webgeek1234@gmail.com>
-Subject: Re: [PATCH v2] mfd: max77620: publish module aliases with variant
- match data
-Message-ID: <179198324452.839288.10919510385745503720@kernel.org>
-References: <20261014032139.10971-1-hppiscas@163.com>
+To: zain_zhou@realsil.com.cn
+Cc: Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Frank Li <Frank.Li@nxp.com>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Vikash Bansal <vikash.bansal@nxp.com>,
+	Aman Kumar Pandey <aman.kumarpandey@nxp.com>,
+	Lakshay Piplani <lakshay.piplani@nxp.com>,
+	devicetree@vger.kernel.org, linux-i3c@lists.infradead.org,
+	linux-kernel@vger.kernel.org, mfd@lists.linux.dev,
+	Wei Wang <wei_wang@realsil.com.cn>
+Subject: Re: [RFC PATCH 2/4] mfd: Add driver for Realtek RTS490x I3C hub
+Message-ID: <179198542200.839288.16069032392567490984@kernel.org>
+References: <20260920100501.4091351-1-zain_zhou@realsil.com.cn>
+ <20260920100501.4091351-3-zain_zhou@realsil.com.cn>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -43,123 +53,285 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261014032139.10971-1-hppiscas@163.com>
-X-AI-Review-Draft: <20261014032139.10971-1-hppiscas@163.com>
+In-Reply-To: <20260920100501.4091351-3-zain_zhou@realsil.com.cn>
+X-AI-Review-Draft: <20260920100501.4091351-3-zain_zhou@realsil.com.cn>
 
-On Wed, 14 Oct 2026, Pengpeng Hou wrote:
+On Sun, 20 Sep 2026, zain_zhou@realsil.com.cn wrote:
 
-Please review, explain or fix the Sashiko review(s).
-
-> MAX77620 can be built as a module, but its I2C ID table is not exported
-> and it has no OF match table to provide OF aliases.
+> From: Yin Zhou <zain_zhou@realsil.com.cn>
 >
-> Publish both tables and obtain the chip variant through
-> i2c_get_match_data(). Adding OF matching alone is insufficient: a fallback
-> compatible can match the OF table while client->name has no corresponding
-> I2C ID. Dereferencing i2c_client_get_device_id() would then be invalid.
+> Add the MFD core driver for the Realtek RTS490x family of I3C hubs.
+> The driver initializes the shared register map, identifies the hub
+> variant, and registers the regulator and I3C hub child devices.
 >
-> Use pointers to chip IDs in both tables. This also keeps MAX77620, whose
-> enum value is zero, distinguishable from missing match data. Leave the
-> variant-specific regmap configuration and child devices unchanged.
->
-> The issue was found by our static-analysis tool and manually reviewed.
->
-> Fixes: 0d084ee9ba87 ("mfd: max77620: Allow building as a module")
-> Assisted-by: gpt 5
-> Signed-off-by: Pengpeng Hou <hppiscas@163.com>
+> Signed-off-by: Yin Zhou <zain_zhou@realsil.com.cn>
 > ---
-> Changes since v1:
-> - use the author's real name
-> - address the matching-path issue Lee asked to review: populate OF data
->   and migrate probe to i2c_get_match_data() with a missing-data check
-> - use non-NULL pointers for all variants, including enum value zero
+>  MAINTAINERS                 |   2 +
+>  drivers/mfd/Kconfig         |  11 +++
+>  drivers/mfd/Makefile        |   1 +
+>  drivers/mfd/rts490x-core.c  | 131 ++++++++++++++++++++++++++++++++++++
+>  include/linux/mfd/rts490x.h |  53 +++++++++++++++
+>  5 files changed, 198 insertions(+)
+>  create mode 100644 drivers/mfd/rts490x-core.c
+>  create mode 100644 include/linux/mfd/rts490x.h
 >
-> Previous version:
-> https://lore.kernel.org/all/20260905134051.66545-1-hppiscas@163.com/
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index a2c171a28cd2..659f553420eb 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -22998,6 +22998,8 @@ L:	linux-i3c@lists.infradead.org
+>  L:	linux-kernel@vger.kernel.org
+>  S:	Maintained
+>  F:	Documentation/devicetree/bindings/i3c/realtek,rts490x.yaml
+> +F:	drivers/mfd/rts490x-core.c
+> +F:	include/linux/mfd/rts490x.h
 >
->  drivers/mfd/max77620.c |   29 ++++++++++++++++++++++++-----
->  1 file changed, 24 insertions(+), 5 deletions(-)
+>  REALTEK OTTO WATCHDOG
+>  M:	Sander Vanheule <sander@svanheule.net>
+> diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
+> index ee809b0c1b8f..6da8967de1a2 100644
+> --- a/drivers/mfd/Kconfig
+> +++ b/drivers/mfd/Kconfig
+> @@ -630,6 +630,17 @@ config MFD_P3H2X4X
+>  	  This driver provides support for I3C hub and regulator, each subdriver
+>  	  can be enabled independently depending on the required functionality.
 >
-> diff --git a/drivers/mfd/max77620.c b/drivers/mfd/max77620.c
-> index c4f89a9681f34792d24c5b75c4b88df84b3c2c66..4947ee96cc62cdeae37a15f65497d7f1013dbf11 100644
-> --- a/drivers/mfd/max77620.c
-> +++ b/drivers/mfd/max77620.c
-> @@ -496,7 +496,7 @@ static int max77620_pm_power_off(struct sys_off_data *data)
->
->  static int max77620_probe(struct i2c_client *client)
->  {
-> -	const struct i2c_device_id *id = i2c_client_get_device_id(client);
-> +	const enum max77620_chip_id *id = i2c_get_match_data(client);
->  	const struct regmap_config *rmap_config;
->  	struct max77620_chip *chip;
->  	struct regmap_irq_chip *chip_desc;
-> @@ -504,6 +504,9 @@ static int max77620_probe(struct i2c_client *client)
->  	int n_mfd_cells;
->  	int ret;
->
-> +	if (!id)
-> +		return -ENODEV;
+> +config MFD_RTS490X
+> +	tristate "Realtek RTS490x I3C hub"
+> +	depends on I3C
+> +	select MFD_CORE
+> +	select REGMAP_I3C
+> +	help
+> +	  Enable support for the Realtek RTS490x family of I3C hub devices.
+> +	  This driver provides the shared register map and parent state used by
+> +	  the I3C hub and regulator child drivers. The hub is connected to the
+> +	  host through I3C.
 > +
->  	chip = devm_kzalloc(&client->dev, sizeof(*chip), GFP_KERNEL);
->  	if (!chip)
->  		return -ENOMEM;
-> @@ -519,7 +522,7 @@ static int max77620_probe(struct i2c_client *client)
+>  config MFD_PF1550
+>  	tristate "NXP PF1550 PMIC Support"
+>  	depends on I2C=y && OF
+> diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
+> index ec4e093f3540..97988277bee9 100644
+> --- a/drivers/mfd/Makefile
+> +++ b/drivers/mfd/Makefile
+> @@ -124,6 +124,7 @@ obj-$(CONFIG_MFD_MC13XXX_I2C)	+= mc13xxx-i2c.o
 >
->  	chip->dev = &client->dev;
->  	chip->chip_irq = client->irq;
-> -	chip->chip_id = (enum max77620_chip_id)id->driver_data;
-> +	chip->chip_id = *id;
+>  obj-$(CONFIG_MFD_P3H2X4X)	+= p3h2840.o
+>  obj-$(CONFIG_MFD_PF1550)	+= pf1550.o
+> +obj-$(CONFIG_MFD_RTS490X)	+= rts490x-core.o
 >
->  	switch (chip->chip_id) {
->  	case MAX77620:
-> @@ -693,12 +696,27 @@ out:
->  	return 0;
->  }
+>  obj-$(CONFIG_MFD_NCT6694)	+= nct6694.o
 >
-> +static const enum max77620_chip_id max77620_chip_ids[] = {
-> +	[MAX77620] = MAX77620,
-> +	[MAX20024] = MAX20024,
-> +	[MAX77663] = MAX77663,
+> diff --git a/drivers/mfd/rts490x-core.c b/drivers/mfd/rts490x-core.c
+> new file mode 100644
+> index 000000000000..c10718397167
+> --- /dev/null
+> +++ b/drivers/mfd/rts490x-core.c
+> @@ -0,0 +1,131 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/* Copyright (c) 2025-2026 Realtek Semiconductor Corp. */
+> +
+> +#include <linux/bitfield.h>
+> +#include <linux/i3c/device.h>
+> +#include <linux/mfd/core.h>
+> +#include <linux/mfd/rts490x.h>
+> +#include <linux/regmap.h>
+> +
+> +struct rts490x_device_info {
+> +	const char *model;
+> +	u16 part_id;
+> +	u8 num_target_ports;
 > +};
-
-What on earth is happening here?  Where have you seen this before?
-
-Please don't create an array of enums just to take the address of its
-elements.  Either ensure the enum in 'include/linux/mfd/max77620.h' does
-not start at 0, or cast directly via '(const void *)MAX77620' and
-'(uintptr_t)i2c_get_match_data(client)'.
-
->  static const struct i2c_device_id max77620_id[] = {
-> -	{"max77620", MAX77620},
-> -	{"max20024", MAX20024},
-> -	{"max77663", MAX77663},
-> +	{"max77620", (kernel_ulong_t)&max77620_chip_ids[MAX77620]},
-> +	{"max20024", (kernel_ulong_t)&max77620_chip_ids[MAX20024]},
-> +	{"max77663", (kernel_ulong_t)&max77620_chip_ids[MAX77663]},
->  	{},
->  };
-> +MODULE_DEVICE_TABLE(i2c, max77620_id);
 > +
-> +static const struct of_device_id max77620_of_match[] = {
-> +	{ .compatible = "maxim,max77620", .data = &max77620_chip_ids[MAX77620] },
-> +	{ .compatible = "maxim,max20024", .data = &max77620_chip_ids[MAX20024] },
-> +	{ .compatible = "maxim,max77663", .data = &max77620_chip_ids[MAX77663] },
+> +static const struct rts490x_device_info rts490x_devices[] = {
+> +	{ "RTS4900", 0x4000, 4 },
+> +	{ "RTS4901", 0x4100, 4 },
+> +	{ "RTS4902", 0x8000, 8 },
+> +	{ "RTS4903", 0x8100, 8 },
+> +	{ "RTS4904", 0x4001, 4 },
+> +	{ "RTS4906", 0x8001, 8 },
+> +};
+> +
+> +static const struct mfd_cell rts490x_cells[] = {
+> +	MFD_CELL_NAME("rts490x-regulator"),
+> +	MFD_CELL_NAME("rts490x-i3c-hub"),
+> +};
+> +
+> +static const struct regmap_config rts490x_regmap_config = {
+> +	.reg_bits = 8,
+> +	.val_bits = 8,
+> +	.max_register = 0xff,
+> +};
+> +
+> +static int rts490x_read_device_info(struct device *dev, struct rts490x *rts490x)
+> +{
+> +	unsigned int value;
+> +	u16 part_id;
+> +	int ret;
+> +	int i;
+
+Please declare loop counters inside the 'for' statement.
+
+> +
+> +	ret = regmap_read(rts490x->regmap, RTS490X_DEV_INFO_0, &value);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "failed to read device information\n");
+> +
+> +	part_id = value << 8;
+> +
+> +	ret = regmap_read(rts490x->regmap, RTS490X_DEV_REV, &value);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "failed to read device revision\n");
+> +
+> +	part_id |= FIELD_GET(RTS490X_DEV_REV_LDO_MASK, value);
+> +
+> +	for (i = 0; i < ARRAY_SIZE(rts490x_devices); i++) {
+> +		if (rts490x_devices[i].part_id != part_id)
+> +			continue;
+> +
+> +		rts490x->model = rts490x_devices[i].model;
+> +		rts490x->part_id = part_id;
+> +		rts490x->num_target_ports = rts490x_devices[i].num_target_ports;
+> +		return 0;
+> +	}
+> +
+> +	return dev_err_probe(dev, -ENODEV,
+> +			     "unsupported RTS490x device ID 0x%04x\n", part_id);
+> +}
+> +
+> +static int rts490x_probe(struct i3c_device *i3cdev)
+> +{
+> +	struct device *dev = i3cdev_to_dev(i3cdev);
+> +	struct i3c_device_info info;
+> +	struct rts490x *rts490x;
+> +	int ret;
+> +
+> +	i3c_device_get_info(i3cdev, &info);
+> +	if (I3C_PID_MANUF_ID(info.pid) != RTS490X_MANUFACTURER_ID)
+> +		return -ENODEV;
+
+Doesn't 'rts490x_i3c_ids' already match on 'I3C_MATCH_MANUF' with
+'RTS490X_MANUFACTURER_ID'?   When would this check ever trigger?
+
+> +	rts490x = devm_kzalloc(dev, sizeof(*rts490x), GFP_KERNEL);
+> +	if (!rts490x)
+> +		return -ENOMEM;
+> +
+> +	ret = devm_mutex_init(dev, &rts490x->protected_reg_lock);
+> +	if (ret)
+> +		return ret;
+> +
+> +	rts490x->regmap = devm_regmap_init_i3c(i3cdev, &rts490x_regmap_config);
+> +	if (IS_ERR(rts490x->regmap))
+> +		return dev_err_probe(dev, PTR_ERR(rts490x->regmap),
+> +				     "failed to initialize regmap\n");
+> +
+> +	rts490x->i3cdev = i3cdev;
+> +	i3cdev_set_drvdata(i3cdev, rts490x);
+> +
+> +	ret = rts490x_read_device_info(dev, rts490x);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = devm_mfd_add_devices(dev, PLATFORM_DEVID_AUTO,
+> +				   rts490x_cells, ARRAY_SIZE(rts490x_cells),
+> +				   NULL, 0, NULL);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "failed to add child devices\n");
+> +
+> +	dev_info(dev, "%s I3C hub with %u target ports\n",
+> +		 rts490x->model, rts490x->num_target_ports);
+
+Keep the kernel log clean whenever possible please.
+
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct i3c_device_id rts490x_i3c_ids[] = {
+> +	{
+> +		.match_flags = I3C_MATCH_DCR | I3C_MATCH_MANUF,
+> +		.dcr = I3C_DCR_HUB,
+> +		.manuf_id = RTS490X_MANUFACTURER_ID,
+> +	},
 > +	{ }
 > +};
-> +MODULE_DEVICE_TABLE(of, max77620_of_match);
->
->  static DEFINE_SIMPLE_DEV_PM_OPS(max77620_pm_ops,
->  				max77620_i2c_suspend, max77620_i2c_resume);
-> @@ -706,6 +724,7 @@ static DEFINE_SIMPLE_DEV_PM_OPS(max77620_pm_ops,
->  static struct i2c_driver max77620_driver = {
->  	.driver = {
->  		.name = "max77620",
-> +		.of_match_table = max77620_of_match,
->  		.pm = pm_sleep_ptr(&max77620_pm_ops),
->  	},
->  	.probe = max77620_probe,
->
-> base-commit: 319633b06ff2bfc2a7a60d2cfcab2e681a343b27
+> +MODULE_DEVICE_TABLE(i3c, rts490x_i3c_ids);
+> +
+> +static struct i3c_driver rts490x_driver = {
+> +	.driver.name = "rts490x",
+> +	.probe = rts490x_probe,
+> +	.id_table = rts490x_i3c_ids,
+> +};
+> +module_i3c_driver(rts490x_driver);
+> +
+> +MODULE_AUTHOR("Yin Zhou <zain_zhou@realsil.com.cn>");
+> +MODULE_DESCRIPTION("Realtek RTS490x I3C hub MFD driver");
+
+Please drop "MFD" from the description.
+
+> +MODULE_LICENSE("GPL");
+> diff --git a/include/linux/mfd/rts490x.h b/include/linux/mfd/rts490x.h
+> new file mode 100644
+> index 000000000000..2af77d22dab9
+> --- /dev/null
+> +++ b/include/linux/mfd/rts490x.h
+> @@ -0,0 +1,53 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/* Copyright (c) 2025-2026 Realtek Semiconductor Corp. */
+> +#ifndef _LINUX_MFD_RTS490X_H
+> +#define _LINUX_MFD_RTS490X_H
+> +
+> +#include <linux/bits.h>
+> +#include <linux/mutex.h>
+> +#include <linux/types.h>
+> +
+> +#define RTS490X_MAX_TARGET_PORTS		8
+> +
+> +/* Device information registers shared by the MFD children. */
+> +#define RTS490X_DEV_INFO_0		0x00
+> +#define RTS490X_DEV_REV			0x0b
+> +#define RTS490X_DEV_REV_LDO_MASK	GENMASK(7, 6)
+> +
+> +/* Regulator registers shared with the regulator child. */
+> +#define RTS490X_LDO_CONF		0x16
+> +#define RTS490X_LDO_AND_PULLUP_CONF	0x19
+> +
+> +/* Protected-register access shared by the MFD children. */
+> +#define RTS490X_PROTECTION_CODE		0x10
+> +#define RTS490X_REGISTERS_LOCK_CODE	0x00
+> +#define RTS490X_REGISTERS_UNLOCK_CODE	0x69
+> +
+> +#define RTS490X_MANUFACTURER_ID		0x025d
+> +
+> +struct i3c_device;
+> +struct regmap;
+> +struct rts490x_hub;
+> +
+> +/**
+> + * struct rts490x - shared state for RTS490x MFD children
+> + * @i3cdev: upstream I3C device
+> + * @regmap: register map shared by all child drivers
+> + * @protected_reg_lock: serializes protected-register transactions
+> + * @model: detected chip model
+> + * @part_id: hardware part identifier
+> + * @num_target_ports: number of implemented target ports
+> + * @hub: hub child state used by the hub-device IBI handler
+> + */
+> +struct rts490x {
+> +	struct i3c_device *i3cdev;
+> +	struct regmap *regmap;
+> +	/* Serializes protected-register transactions across child drivers. */
+> +	struct mutex protected_reg_lock;
+> +	const char *model;
+> +	u16 part_id;
+> +	u8 num_target_ports;
+> +	struct rts490x_hub *hub;
+> +};
+> +
+> +#endif /* _LINUX_MFD_RTS490X_H */
+> -- 
+> 2.34.1
 >
 
 -- 
