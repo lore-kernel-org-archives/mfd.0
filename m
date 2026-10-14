@@ -1,143 +1,73 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A1654F30E3;
-	Wed, 14 Oct 2026 15:18:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B50E638838B;
+	Wed, 14 Oct 2026 15:20:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1791991087; cv=none; b=ao9ZidxXaDuhaSF91Z9u1WCSCXawhMN6eTMttdoQHNL2e2eZdtsz8dW3BbzikjhHQunCgPu467k/YzRqGzZ5iTwMm8pZtpCTT1URXNvVZJ4z1x54ev8mGdZGbDp1AuDpzE8lpZ9dTYSw3iognMAD19QPlVRb/B0zp7pITpPs3tk=
+	t=1791991213; cv=none; b=m3a2wjGhopDjc2M0MypV9NMGQpmi1eKPw6brO8kft8w2GpfuJHvIqV8xd/5Uvcd/pGj0VotlUDd6EgfcEoPoN45zHNeegKpIovsuXrMYIYpDWxivZoa9bhtYxqY+B3ndNLFjMEGgluxSTXippyePAfPjnDfqsK22Itcamijkwvk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1791991087; c=relaxed/simple;
-	bh=K3ZQhjpkDCd10uGgn9bM3pWcndLwacUwSXCjp5I8Pho=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=u+yFuufH6yi3dXL9HkzNfU+GTvoJ+VAy6xJwvobKMleJ+/zSpwS0Xwdpk60nWOozeylhMG6Z8D6QsKwcWRme4peiw0yyRwDtm5CXz1E5SHfk1eYuOQM4fXt1YrsELXrnJ9LEaacpuZyRvL+jq2y4FhbJAIMdMa5i8SMY1/VKxBI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UXnrRgUC; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1791991213; c=relaxed/simple;
+	bh=ZqABjc6D4Ao/BmE6SUrZuvp0EeRmvS1CofLj9UeUXkM=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=sw+1dhog63E9ju+TpRufgW0rWwbvCkpxbWrNGoEc1Xw9fO8QEFHvByFoU5i2K9qVN4SsB37XVIgvMM/biPhB6o9L7SkNNxfMnTYRZNaZpeMGZPG0B3dOvSOhdEivFyQhKDSP6wVGZE9+4lN8eQwrMKFe4oL5Oe0JIZ1A0wMB8TQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LtoWPpl0; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UXnrRgUC"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E09871F000C4;
-	Wed, 14 Oct 2026 15:18:03 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LtoWPpl0"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2BB4D1F000C4;
+	Wed, 14 Oct 2026 15:20:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791991085;
-	bh=7HzxTtSFTMkskMPYJB8U6e4H9U6jOaxLAn1OyG6O1Zg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=UXnrRgUCTuPoHFO1bsOIfq4XndwdFqNnP22yKTw5vnDn2nnIu4quNFs3szuaXq30d
-	 TOLHRjuheGvmZ7PqutAVnrwAyJ74j9qCXCuB5vOLGyyaAXKxh9hERam2EMvsuc95iO
-	 TEfNx5NX6GNoZ5oBWzBRc5FOWTN9q6uLOer4AUDorFku1IgFkSCcuK5MLpeFP0p++J
-	 Q2cWFtUjE3ozoOqKKnGO4npD8tNdskeKLcT2T3Z0NcANSkdCrS6xkN5gFbNojt0GBN
-	 hN31lqi5Et44orjniC3pSAPWXEkR2JeBWaUR+u5j2lSXmzpMUc6zHR0y/zCohgTV6m
-	 GbCzfdLiimwpw==
-Date: Wed, 14 Oct 2026 16:18:00 +0100
+	s=k20260515; t=1791991212;
+	bh=O3WyBIrOjeOhX1lO7ibQGpENf3bYQBgFUbIdhbIOHLM=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=LtoWPpl051yNcApac6fpfjnS+XgldKeifspPNP9fc4jIqE7zFLvtvuOyMmPO29/6R
+	 ZlpnxBS3wtEK+o0M4+ygOr4Ni6SLFU/UTXBC1qMCvbjevfrV46aK74tY7zhZ54ONnp
+	 rz9iTouQZmwvNXqLBj8+egPeBy3o20FPIx/gGrwbKIddUJ90HCFfCakA46ONtQoATI
+	 GQhy9/I496Y6+4xdFWmxpszve6fINsVSjVHmeveEUQSXoaBAl/6BNqagrtoIhEqjLo
+	 NHlHDaZSWZSu3vtMKQ7/1L9wGQG2WWlLM2FlRl+6WBb/p8SOs+U0FM6nEkPNfP49I1
+	 M1m8V5P3h3ZRA==
 From: Lee Jones <lee@kernel.org>
-To: Charles Keepax <ckeepax@opensource.cirrus.com>
-Cc: vkoul@kernel.org, yung-chuan.liao@linux.intel.com,
-	pierre-louis.bossart@linux.dev, linux-sound@vger.kernel.org,
-	patches@opensource.cirrus.com, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 RESEND 2/2] mfd: cs42l43: Move to core detach helper
-Message-ID: <20261014151800.GA1182143@google.com>
-References: <20260924120520.2511081-1-ckeepax@opensource.cirrus.com>
- <20260924120520.2511081-3-ckeepax@opensource.cirrus.com>
+To: Linus Walleij <linusw@kernel.org>, Lee Jones <lee@kernel.org>, 
+ Mattias Wallin <mattias.wallin@stericsson.com>, 
+ Ludovic Barre <ludovic.barre@stericsson.com>, 
+ Samuel Ortiz <sameo@linux.intel.com>, 
+ Julien Delacou <julien.delacou@stericsson.com>, 
+ Alexandre Torgue <alexandre.torgue@st.com>, 
+ linux-arm-kernel@lists.infradead.org, mfd@lists.linux.dev, 
+ linux-kernel@vger.kernel.org, Guangshuo Li <lgs201920130244@gmail.com>
+Cc: stable@vger.kernel.org
+In-Reply-To: <20260924144355.1604369-1-lgs201920130244@gmail.com>
+References: <20260924144355.1604369-1-lgs201920130244@gmail.com>
+Subject: Re: (subset) [PATCH v2] mfd: ab8500: fix child device leaks on
+ probe failure
+Message-Id: <179199120992.1194488.8547333779686899093.b4-ty@b4>
+Date: Wed, 14 Oct 2026 16:20:09 +0100
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260924120520.2511081-3-ckeepax@opensource.cirrus.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
 
-On Thu, 24 Sep 2026, Charles Keepax wrote:
-
-> Now the core has a helper to signal a device will detach from
-> the SoundWire bus, there is no need for the cs42l43 driver code
-> to separately track that. Switch to using the new core helper.
+On Thu, 24 Sep 2026 22:43:55 +0800, Guangshuo Li wrote:
+> ab8500_probe() registers MFD child devices before completing the
+> remaining device initialization. If a later MFD registration or sysfs
+> group creation fails, previously registered child devices are not
+> removed.
 > 
-> Reviewed-by: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
-> Signed-off-by: Charles Keepax <ckeepax@opensource.cirrus.com>
-> ---
->  drivers/mfd/cs42l43-sdw.c   |  2 --
->  drivers/mfd/cs42l43.c       | 15 +--------------
->  include/linux/mfd/cs42l43.h |  1 -
->  3 files changed, 1 insertion(+), 17 deletions(-)
-
-Does this need to go in as a set?
-
-> diff --git a/drivers/mfd/cs42l43-sdw.c b/drivers/mfd/cs42l43-sdw.c
-> index 0a6999453f325..f0825d6bf7b38 100644
-> --- a/drivers/mfd/cs42l43-sdw.c
-> +++ b/drivers/mfd/cs42l43-sdw.c
-> @@ -102,8 +102,6 @@ static int cs42l43_sdw_update_status(struct sdw_slave *sdw, enum sdw_slave_statu
->  		break;
->  	case SDW_SLAVE_UNATTACHED:
->  		dev_dbg(cs42l43->dev, "Device detach\n");
-> -
-> -		complete(&cs42l43->device_detach);
->  		break;
->  	default:
->  		break;
-> diff --git a/drivers/mfd/cs42l43.c b/drivers/mfd/cs42l43.c
-> index 4212ebcca60b5..f08ee598366d9 100644
-> --- a/drivers/mfd/cs42l43.c
-> +++ b/drivers/mfd/cs42l43.c
-> @@ -30,7 +30,6 @@
->  #define CS42L43_RESET_DELAY_MS			20
->  
->  #define CS42L43_SDW_ATTACH_TIMEOUT_MS		5000
-> -#define CS42L43_SDW_DETACH_TIMEOUT_MS		100
->  
->  #define CS42L43_MCU_BOOT_STAGE1			1
->  #define CS42L43_MCU_BOOT_STAGE2			2
-> @@ -555,7 +554,7 @@ static int cs42l43_soft_reset(struct cs42l43 *cs42l43)
->  		{ CS42L43_SFT_RESET, CS42L43_SFT_RESET_VAL },
->  	};
->  
-> -	reinit_completion(&cs42l43->device_detach);
-> +	sdw_slave_signal_unattach(cs42l43->sdw);
->  
->  	/*
->  	 * Apply cache only because the soft reset will cause the device to
-> @@ -566,17 +565,6 @@ static int cs42l43_soft_reset(struct cs42l43 *cs42l43)
->  
->  	msleep(CS42L43_RESET_DELAY_MS);
->  
-> -	if (cs42l43->sdw) {
-> -		unsigned long timeout = msecs_to_jiffies(CS42L43_SDW_DETACH_TIMEOUT_MS);
-> -		unsigned long time;
-> -
-> -		time = wait_for_completion_timeout(&cs42l43->device_detach, timeout);
-> -		if (!time) {
-> -			dev_err(cs42l43->dev, "Timed out waiting for device detach\n");
-> -			return -ETIMEDOUT;
-> -		}
-> -	}
-> -
->  	return -EAGAIN;
->  }
->  
-> @@ -1115,7 +1103,6 @@ int cs42l43_dev_probe(struct cs42l43 *cs42l43)
->  	dev_set_drvdata(cs42l43->dev, cs42l43);
->  
->  	mutex_init(&cs42l43->pll_lock);
-> -	init_completion(&cs42l43->device_detach);
->  	init_completion(&cs42l43->firmware_download);
->  	INIT_WORK(&cs42l43->boot_work, cs42l43_boot_work);
->  
-> diff --git a/include/linux/mfd/cs42l43.h b/include/linux/mfd/cs42l43.h
-> index 8e993fb535e68..798dc55149662 100644
-> --- a/include/linux/mfd/cs42l43.h
-> +++ b/include/linux/mfd/cs42l43.h
-> @@ -86,7 +86,6 @@ struct cs42l43 {
->  	struct regmap_irq_chip_data *irq_data;
->  
->  	struct work_struct boot_work;
-> -	struct completion device_detach;
->  	struct completion firmware_download;
->  	int firmware_error;
->  
-> -- 
-> 2.47.3
+> Use devm_mfd_add_devices() so registered MFD child devices are removed
+> when probe fails.
 > 
+> [...]
 
--- 
-Lee Jones
+Applied, thanks!
+
+[1/1] mfd: ab8500: fix child device leaks on probe failure
+      commit: 5bf2ae8b131d4ae9c0ed5f7aa02532645f512022
+
+--
+Lee Jones [李琼斯]
+
