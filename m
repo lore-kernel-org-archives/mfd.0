@@ -1,162 +1,201 @@
-Received: from cp2.siel.si (cp2.siel.si [46.19.12.180])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A62E1499F00;
-	Thu, 15 Oct 2026 08:47:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=46.19.12.180
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E08749EC68
+	for <mfd@lists.linux.dev>; Thu, 15 Oct 2026 08:58:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792054034; cv=none; b=iw8obqVxhb9cndam//+3vT6A4RgBE+wFWB7qHNJW7XbJNSGhg+ngvbvcmhBeDq41tT/Tw+qPKLLBVnw9QCuDt2EJ0UYrAyb0oQPAcGwSAoqSMMKzsn5f8Stw1BmhmuYP+SBpta5kdSurTN7nLhMrsxetPqKuWhT2N466oWSbWHA=
+	t=1792054733; cv=none; b=QOK1WmbIVtQQbe8y/Vs93D4J6JHxlKLS1PvIOSlIq8I41zeQ+M5Y7Uuxze/ak/xQ0jfQRgYjepIOHS7SBFTSII0QVLivrK6LWfZiECMLjETWUXLwnxOVAuCcOHEJohIsIid98Q8YGlfpMCp33IfVqJJEOPBGJuxhQOuavPxfEJk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792054034; c=relaxed/simple;
-	bh=F987hrawW6j3lj7eaAqLXa7a3paIzz8IWI/uyOLevBk=;
-	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
-	 In-Reply-To:Content-Type; b=r4SIj4GLEu6ynRmI0GRsJcDJ9478mRA9RjoaOf1mdtTAvll7F4SJaeed1vf1IzIiY2acGVkQ/IzYFewrFdkPWKcpcn5HbPFiCzo2/Py+2SHOzKOJgokEMSPAY6jsEAhtLLyd5ZYK2gWQz92kUXru+OXuAPCYFMz5Y0kdZJVDM3M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=norik.com; spf=pass smtp.mailfrom=norik.com; dkim=pass (2048-bit key) header.d=norik.com header.i=@norik.com header.b=GSR3PJut; arc=none smtp.client-ip=46.19.12.180
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=norik.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=norik.com
+	s=arc-20240116; t=1792054733; c=relaxed/simple;
+	bh=DzOAZZPP7V5LiM8vT34fJpQqdL8F6A0V377brE+YB8Y=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=pql2UPQhD9MNrvT6Z6jnxi53fSuC/RSrmiE4J7JkIDDfF1qFF5efxtDRjvAADYkGR1DI1dbcEhBx4PaAGtKOuaRpvg1+R7+niXfkThCaM1WyRIjdLd+0Er9cxqFDU6ALUVfsVCQqdlY3NI0x0/N1KABkWI4vVD9Qt5Qp4lcjgVc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=lQc/6Fzv; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=JadTri5f; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=norik.com header.i=@norik.com header.b="GSR3PJut"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com;
-	s=default; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:References:Cc
-	:To:From:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Unsubscribe-Post:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=LbAfMirCzUKHKrH2TtQXopkikcdlOcqjFyzU/qMzrOU=; b=GSR3PJutykAc6yW3SjzxCY9G6C
-	zh6votkzgnpbHj6UHP+0+TNf19NXZIOZE+cKqFdhWdP4cNptjwPm/Q0KaewBGsVMAnA0LZHDWuJiI
-	OwQkGUPJzpeoC+RU+YQRVJGtX/n9tA+VnoQ2hItR1mzDtGUVbUb4izDUj7RUQNPTHjDBbr13JRwLt
-	UANwA88lBGTbtl2/+SYANKvIiKL6vZCxgpT3wBbAfrkwFaIn/BZtTKHak9pfwfuzalntiZdMxrGtB
-	AnxldgwamoSo7TQtWm/ukxiGorxjIBv2jFryPXagJ7dtFU8MyTJuq7lXbQ6zycCC80Np1jYTskicI
-	h+8ixo5Q==;
-Received: from 89-212-21-243.static.t-2.net ([89.212.21.243]:46922 helo=[192.168.69.116])
-	by cp2.siel.si with esmtpsa  (TLS1.3) tls TLS_AES_128_GCM_SHA256
-	(Exim 4.100.1)
-	(envelope-from <primoz.fiser@norik.com>)
-	id 1xHH7B-00000002OC9-3Ybv;
-	Thu, 15 Oct 2026 10:47:05 +0200
-Message-ID: <ad97376a-8464-434c-b8c3-dffe395eef64@norik.com>
-Date: Thu, 15 Oct 2026 10:47:03 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="lQc/6Fzv";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JadTri5f"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69F3xdZx2738735
+	for <mfd@lists.linux.dev>; Thu, 15 Oct 2026 08:58:51 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=g2LOIKPWSqLofxnH5RVIx2
+	cwVtotRbWzdXgPnB3dv64=; b=lQc/6FzvBvy3z6GyVKobtHgHtUX2qoUGKyJida
+	UPmuNmF6YHeTDRnr1W6HnKy4xtHQAWWyk50Xebzjhy9Rcu4nbBfa9150zGRsgoYw
+	2fhvpXBnW4i2aZ3u+evUjEnnpGau+5sin3KOmywd0sMUoYiaG1sfMzQ2NMc13ruC
+	rDbfHgrWib8qxDK3qt6GsMnTJuhQ9g9dtbGnouG5kOq6UOtnj5YvEbUyJ0+PJ9Nt
+	bIAz//wkboz9Wk8hRQ8swcXrQj44Rcie3T7CGDcNZXwah80q3LHPUQ7XVWpvm296
+	feepIPkDVbfKvvsSYlH4+G8O+qfzZbyJyfu58OGq5CLSqZTg==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4haqds94g4-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <mfd@lists.linux.dev>; Thu, 15 Oct 2026 08:58:51 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93ae8e7e546so1083446185a.1
+        for <mfd@lists.linux.dev>; Thu, 15 Oct 2026 01:58:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1792054731; x=1792659531; darn=lists.linux.dev;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=g2LOIKPWSqLofxnH5RVIx2cwVtotRbWzdXgPnB3dv64=;
+        b=JadTri5fhPI/qxthbj25Ca1/kkkpY8a/+yJLK5TG+Av2BmmakDmMPbf6geK5dL3y14
+         cEA7IoZAEsSCoR2i4caSd+8EUVTZvwYD0PX42jKjjKx0IhvRq91AzdqbcOwWSUvoNSLV
+         L4R6rgOh7Dkg9CYq28DqkptkQyBb6Su58+Je7lOydNxdPoONxbqUjNu6Kv91HtEkCnPB
+         qRG8NjqjRSwrXQX8Mjvpw1rvIZ4hSrLEycTv9fd4XGps1EAzbwNTmc1At3GJelCKebzC
+         QCkedY2id4iioavyioulcdxoPN2frpKZepsa1RUeSDE+J5xJBa4D9DAEMq6OSIR+Anfx
+         ru1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792054731; x=1792659531;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=g2LOIKPWSqLofxnH5RVIx2cwVtotRbWzdXgPnB3dv64=;
+        b=AC2p3sh93wsbg5crGCFR1C4AaLVipZCrtUStqaNVJfNl4QOdgeeqRqiLAQR29b4adO
+         2HI/V1XNN9iNKbsxvysMTc4CcejsqxvWCG7DMP/ocyYvWuZQC6Xwn0DfCJCYL/IgtoHi
+         XPCxs2ws0x2hbPsBFiKrIorKMa3NcHyzka7qaWZ11gng6m+CQWHZvnij0Cbqg5zbEezD
+         HBmiIYbL3Zuvn8w8tsqXEa2l3o84R7SHGx3Iy2XUXX0j9/rcwXQn9L4k6k+mWGDiWLSY
+         +ZyBv45j3DQ7+IWPJ9I8jtsSJ1syVdhJcZKea1kdK4wo+WNaCvi0yHJOycTGIKqyrCb0
+         edog==
+X-Forwarded-Encrypted: i=1; AKwUvBzX0AE7TDVCbq1cZyKKNlW46PamXDrEF7J0j3vjutbTlSxHwOe83s08wU8CWfAizgo629Y=@lists.linux.dev
+X-Gm-Message-State: AFq9FYI4MMlbAw9zTlzKjDAK/tSxk80b1VXv+gJhZ9jZEr5X13RjJPO2
+	yhBI1jolToQi7WObkHrVSJIYYOV/LDRuzXTzy52jxw9jisVa9fv0ZpZ7KhC7CUxGYVMAVyA4O7G
+	+NTTKc//PS+OCB0q/kfeckQiyDgyCWrJiqM3hoHR3qPDHoIzi8mu0/tQ=
+X-Gm-Gg: AYBFou3o6Hc8yLXWCCY5Ijnn2MwBZic3pI/+atCXk2fUqvMbi6coeTOnZGs8BbL954f
+	nhfRkSndystGmlRHPTd5xO65BIL2mFwGkNJFq7WoTf5kbc2yLPcequpKbRk6qO83CDcVgvvC+Nc
+	Y9xhRKdPPKeOjw7xT31qSIlLKzIYroby+LE0s+wYMpYPnet4sv55WvN1fIsV1Hj3yjeFT/qNAyZ
+	Xo2IIzWmzTIPo0dwVhQxCnIc3xEpbIzpW/XCcsYHqUPYKNdiXtj1BT3ntFyhZIVr7lFULUL9O+X
+	cS7zBwQUPRRI7kvZNeOv4CnHKOmKwruuKkdljvkJc292RxhQ3n+Pohti5qLCEE1XuccAK7zStWm
+	hK2732d0wZRp9vZ9zUk8tdY85G7K2dYT5JcrqKVGCfFwcjuR4emW06FUMxyJsEBE7ygIjNG3TDl
+	8LOODHgWNIoIsK
+X-Received: by 2002:a05:620a:4586:b0:93e:7ec0:7c63 with SMTP id af79cd13be357-93ebd2751d8mr2809642585a.57.1792054730624;
+        Thu, 15 Oct 2026 01:58:50 -0700 (PDT)
+X-Received: by 2002:a05:620a:4586:b0:93e:7ec0:7c63 with SMTP id af79cd13be357-93ebd2751d8mr2809639485a.57.1792054730174;
+        Thu, 15 Oct 2026 01:58:50 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5be3b51fd1dsm371590e87.58.2026.10.15.01.58.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 15 Oct 2026 01:58:48 -0700 (PDT)
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Subject: [PATCH 0/9] arm64: qcom: enable display card support on SM8150 HDK
+Date: Thu, 15 Oct 2026 11:58:37 +0300
+Message-Id: <20261015-sm8150-display-card-v1-0-5c14928cef29@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/4] da9062/da9061 watchdog timeout mode
-From: Primoz Fiser <primoz.fiser@norik.com>
-To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>,
- Support Opensource <support.opensource@diasemi.com>,
- Lee Jones <lee@kernel.org>, Wim Van Sebroeck <wim@linux-watchdog.org>,
- Guenter Roeck <linux@roeck-us.net>
-Cc: devicetree@vger.kernel.org, imx@lists.linux.dev,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- mfd@lists.linux.dev, linux-watchdog@vger.kernel.org,
- upstream@lists.phytec.de, andrej.picej@norik.com
-References: <20260924065044.368341-1-primoz.fiser@norik.com>
-Content-Language: en-US
-Autocrypt: addr=primoz.fiser@norik.com; keydata=
- xjMEZrROOxYJKwYBBAHaRw8BAQdAADVOb5tiLVTUAC9nu/FUl4gj/+4fDLqbc3mk0Vz8riTN
- JVByaW1veiBGaXNlciA8cHJpbW96LmZpc2VyQG5vcmlrLmNvbT7CiQQTFggAMRYhBK2YFSAH
- ExsBZLCwJGoLbQEHbnBPBQJmtE47AhsDBAsJCAcFFQgJCgsFFgIDAQAACgkQagttAQducE+T
- gAD+K4fKlIuvH75fAFwGYG/HT3F9mN64majvqJqvp3gTB9YBAL12gu+cm11m9JMyOyN0l6Os
- jStsQFghPkzBSDWSDN0NzjgEZrROPBIKKwYBBAGXVQEFAQEHQP2xtEOhbgA+rfzvvcFkV1zK
- 6ym3/c/OUQObCp50BocdAwEIB8J4BBgWCAAgFiEErZgVIAcTGwFksLAkagttAQducE8FAma0
- TjwCGwwACgkQagttAQducE8ucAD9F1sXtQD4iA7Qu+SwNUAp/9x7Cqr37CSb2p6hbRmPJP8B
- AMYR91JYlFmOJ+ScPhQ8/MgFO+V6pa7K2ebk5xYqsCgA
-Organization: Norik systems d.o.o.
-In-Reply-To: <20260924065044.368341-1-primoz.fiser@norik.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cp2.siel.si
-X-AntiAbuse: Original Domain - lists.linux.dev
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - norik.com
-X-Get-Message-Sender-Via: cp2.siel.si: authenticated_id: primoz.fiser@norik.com
-X-Authenticated-Sender: cp2.siel.si: primoz.fiser@norik.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+X-B4-Tracking: v=1; b=H4sIAL2V0GoC/0WNwQ7CIBAFf6Xh7EaggLW/YjxQWBWVVlna1Bj/X
+ aomHid5b+bJCFNAYm31ZAmnQGHoC4hVxdzJ9keE4AszyaURXCig2AjNwQe6Xe0DnE0eUNWIuuO
+ NM4KV5y3hIcwf627/ZRq7M7q8qH6LhPex5PJ39q+11dLiQkogHxul4eQvsFXG6Jo7Jc2mndTi6
+ CwhuCHGkNuqxzmvo6WMie1frzez9dtC2AAAAA==
+X-Change-ID: 20261014-sm8150-display-card-e43ee5b08c61
+To: Lee Jones <lee@kernel.org>, Daniel Thompson <danielt@kernel.org>,
+        Jingoo Han <jingoohan1@gmail.com>, Helge Deller <deller@gmx.de>,
+        Kiran Gunda <quic_kgunda@quicinc.com>,
+        Subbaraman Narayanamurthy <quic_subbaram@quicinc.com>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        linux-fbdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+        devicetree@vger.kernel.org, mfd@lists.linux.dev
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2414;
+ i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
+ bh=DzOAZZPP7V5LiM8vT34fJpQqdL8F6A0V377brE+YB8Y=;
+ b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBq0JXARHgIXLonLZHieroeOkW3Oz63AObd9Cnuj
+ PzR2u7N6/KJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCatCVwAAKCRCLPIo+Aiko
+ 1QeuB/4yll4W1X8cb3TD+jh5awefNEjJGU1yDK+LpcAJK8YnshbKfyUpsC8K0gnrNsH6EBCOJuj
+ 18SCiCtLR6FdwlG9sgp9LBqTzpBfFvq//iKPUbmUo9NwI+mKYIUlqAVT8L1HpyI9Z3XNw08R3bR
+ UmNeYn3nHddT474pMst7IPa7lM4gkUZSQqwuF3X92CXyQEvi2dXiIpZMro1Hzywu/4dfPM/eep7
+ n4UTMbp6MIXGCCGrleo7gNytWnLJjaSs9KCjhGEr21u3UjRuLVaEWkm/b9Cp9chCFgNidIrNEoY
+ 7Y1N4XU/+28lq+Cn/x5ndNTAVKaQz9mX/M9Ujf4aXHyoxsvH
+X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
+ fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
+X-Proofpoint-ORIG-GUID: VJd8h8QAE69dCb81vSN7vNh8inSO0EIq
+X-Authority-Analysis: v=2.4 cv=fNusTpae c=1 sm=1 tr=0 ts=6ad095cb cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=4w3W_SM6jFQUSMShjksA:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE1MDAzNSBTYWx0ZWRfX7+kZAvYdbJi6
+ nm1keIWpIOCYFniicCrIatYf9HiAYqktBWkTIeLJqWgGx7UEDh0WNv9EaAoI5nobUIXMbj30pL4
+ LvLBcV8MKyW/snr/s4fiUEWmK04j4KLFnLEfOM7EW6NlYnwog2tU6UM1EsQn9nDwvrcnMmsSRgx
+ 0SEPIxnVTVdy9GNIFM1/+QWun9b/HTcDGCNXdNnj+spFWx1DrNCtgx8SIhZ6+k3Jk5Zi+90WGDG
+ 0gVlXTdCce3peBquM1GJLgqUA4xNz77nHLLLAcGc365h/1FyHedMxjhFU15NfFEwhcv+tp+GqaO
+ 5oAX7n+wKqodSxdG+3ol7rUEqFeTrFBtqF9CmveOdk9wnmhNXrNmPVNX5p4h1lek8kDP5jxvYvw
+ B02h+Itad0NNIb/aH6yrahke0EJXIKZAmGE+j+1CrvBSojiiyXzB7OQ3N3bpoh9gFJaT6AvLOZq
+ 6VLAvjFdGvJZXVfFh3w==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE1MDAzNSBTYWx0ZWRfXwrZ+G0cfb4Yq
+ 0JYm1JVc3UpU1xJF21fG5ePRgn2HkHLlsqkefR9UPAn4oSc+8w/7mexhJBR557q47SvoW9rEQRF
+ D2/h0m6zLcle5T/Yo+tLI5zcXMTAT6I=
+X-Proofpoint-GUID: VJd8h8QAE69dCb81vSN7vNh8inSO0EIq
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0 bulkscore=0 lowpriorityscore=0 impostorscore=0
+ spamscore=0 clxscore=1015 priorityscore=1501 adultscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610150035
 
-Hi,
+The Qualcomm SM8150 HDK can be equipped with an optional display card
+having the same panel as the display card for SDM845 HDK. Reuse the
+driver submitted at [1] and enable display card support on this HDK.
 
-gentle ping, can we get this applied soon?
+Unlike SDM845, this also requires a new LCDB driver, providing voltage
+for the panel and several fixes in the WLED driver. The FSA4480 address
+fix is independent and can be applied earlier.
 
-Or is there still something to fix?
+[1] https://lore.kernel.org/dri-devel/20261014-sdm845-hdk-v2-0-6d0b4b42f267@oss.qualcomm.com/
 
-BR,
-Primoz
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+---
+Dmitry Baryshkov (9):
+      backlight: qcom-wled: fix unbalanced OVP interrupt enable
+      backlight: qcom-wled: fix string detection brightness on WLED5
+      dt-bindings: regulator: add Qualcomm LCDB regulator
+      dt-bindings: mfd: qcom,spmi-pmic: add LCDB
+      regulator: add Qualcomm LCDB driver
+      arm64: dts: qcom: pm8150l: add LCDB regulators
+      arm64: dts: qcom: sm8150: add MDSS reset
+      arm64: dts: qcom: sm8150-hdk: fix FSA4480 address
+      arm64: dts: qcom: sm8150-hdk: add display card overlay
 
+ .../devicetree/bindings/mfd/qcom,spmi-pmic.yaml    |   4 +
+ .../bindings/regulator/qcom,pm8150l-lcdb.yaml      |  81 ++++
+ arch/arm64/boot/dts/qcom/Makefile                  |   4 +
+ arch/arm64/boot/dts/qcom/pm8150l.dtsi              |  18 +
+ .../boot/dts/qcom/sm8150-hdk-display-card.dtso     | 103 +++++
+ arch/arm64/boot/dts/qcom/sm8150-hdk.dts            |   4 +-
+ arch/arm64/boot/dts/qcom/sm8150.dtsi               |   1 +
+ drivers/regulator/Kconfig                          |   8 +
+ drivers/regulator/Makefile                         |   1 +
+ drivers/regulator/qcom-lcdb-regulator.c            | 475 +++++++++++++++++++++
+ drivers/video/backlight/qcom-wled.c                |  31 +-
+ 11 files changed, 723 insertions(+), 7 deletions(-)
+---
+base-commit: 1fffefb00cc0b0da1f2ae24e3d33364530ea6515
+change-id: 20261014-sm8150-display-card-e43ee5b08c61
+prerequisite-change-id: 20260122-sdm845-hdk-9466530c4267:v4
+prerequisite-patch-id: cb272273cdb260eb5049ba5cfffe13e7904e7a70
+prerequisite-patch-id: 118ae0e92f82e1d5be7b75cd310509388e6f5606
+prerequisite-patch-id: efe1cd41bd8c1ddf7c9491a6fca5aec877afce3d
+prerequisite-patch-id: 8759433719a8151e1a8399fe88036844f60f2ec8
+prerequisite-patch-id: e46e47c4d158362a382efc455438ef1fd5c95f42
 
-On 9/24/26 08:50, Primoz Fiser wrote:
-> This is a revival of a series originally posted by Andrej Picej in              
-> December 2021 [1]. It lets the DA9061/2 PMIC watchdog be configured via         
-> the "dlg,wdt-sd" DT property, to trigger a full SHUTDOWN instead of the         
-> default POWERDOWN on watchdog timeout, and enables that on the PHYTEC           
-> phyCORE-i.MX6 SOM.                                                              
->                                                                                 
-> From v5 of original series this resend drops patch 4/5 ("dt-bindings:           
-> watchdog: da9062: add watchdog timeout mode") because it already landed         
-> upstream as commit 382256b219fb, later converted from .txt to YAML by           
-> bd888a4377ae. Thus dlg,da9062-watchdog.yaml already documents dlg,wdt-sd        
-> property.                                                                       
->                                                                                 
-> Patches 1 and 2 (the mfd prerequisites making register CONFIG_I                 
-> writable) needed a rebase: an unrelated commit has since added                  
-> CONFIG_J, the register immediately adjacent to CONFIG_I, to the same            
-> writeable-range tables. Rather than reapplying the original single-             
-> register insert next to it, these merge CONFIG_I and CONFIG_J into one          
-> range, matching the existing CONFIG_G-CONFIG_K style already used in            
-> this file.                                                                      
->                                                                                 
-> Patch 3 (the watchdog driver support) still applies unmodified.                 
->                                                                                 
-> Patch 4 only needed its target path updated for the arch/arm/boot/dts           
-> vendor sub-directory move (imx6qdl-phytec-phycore-som.dtsi is now under         
-> nxp/imx/); its content is unchanged.
-> 
-> Changes in v2:
-> 
-> Patch 1 and 2: 
-> - capitalize subject description
->  
-> Patch 3:
-> - implement Guenter's remarks (code refactor and update commit message)
-> 
-> Patch 4:
-> - capitalize subject description
-> 
-> Link to v1: https://lore.kernel.org/all/20260923111719.2032012-1-primoz.fiser@norik.com/                                         
->                                                                                 
-> [1] https://lore.kernel.org/all/20211206064732.280375-1-andrej.picej@norik.com/
-> 
-> Andrej Picej (3):
->   mfd: da9061: Make register CONFIG_I writable
->   watchdog: da9062: Add support for dlg,wdt-sd property
->   ARM: dts: imx6: phycore-som: Set watchdog timeout mode to shutdown
-> 
-> Stefan Christ (1):
->   mfd: da9062: Make register CONFIG_I writable
-> 
->  .../nxp/imx/imx6qdl-phytec-phycore-som.dtsi    |  1 +
->  drivers/mfd/da9062-core.c                      |  4 ++--
->  drivers/watchdog/da9062_wdt.c                  | 18 ++++++++++++++++++
->  3 files changed, 21 insertions(+), 2 deletions(-)
-> 
-
--- 
-Primoz Fiser
-phone: +386-41-390-545
-email: primoz.fiser@norik.com
---
-Norik systems d.o.o.
-Your embedded software partner
-Slovenia, EU
-phone: +386-41-540-545
-email: info@norik.com
+Best regards,
+--  
+With best wishes
+Dmitry
 
