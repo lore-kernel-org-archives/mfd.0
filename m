@@ -1,33 +1,34 @@
-Received: from out28-101.mail.aliyun.com (out28-101.mail.aliyun.com [115.124.28.101])
+Received: from out28-2.mail.aliyun.com (out28-2.mail.aliyun.com [115.124.28.2])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 462F15208A9
-	for <mfd@lists.linux.dev>; Thu, 15 Oct 2026 12:39:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.28.101
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D810522EF3
+	for <mfd@lists.linux.dev>; Thu, 15 Oct 2026 12:39:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.28.2
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792067996; cv=none; b=Y1ywor3gBS5HBFx4khArlpeWmqa9ujhT0XwY374NQcTmUijMQexuVGFiBQAaH8aXfSITZ/lZq9YXhdVwyamCqPrgc5rMvjW6ZT/OiYmBggXMrNryEbthR/mY65pm24U97UeV+dBjKxaiBLWEzWT/sM8kgBDrrvliQVL386Tza3M=
+	t=1792067996; cv=none; b=W5vBx85RZFR9RPzDjeEuFX0wzjql7CM9ZjVw6honxtv9e4XFTGr3i7EbnzSDCdE6hK8IPn1AC4/Xr2uTSJwijBbqj0MALSiKV/7M0/K2DcsOWzzQDX5GvFpowReVDddqsbofFUKvZDMLxAQ/Cgwj/E6df4UCd9Io86mB82h0xpE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1792067996; c=relaxed/simple;
-	bh=xfqloxc207DM+3vrjBhxius1ZMSYVn/4xB0SR0ElFGA=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=aWQIJb73zXZR3IuKQbYTwg6xsL2SP+3wcGwA4/cBuTUTctQhZD8Vg40/0PoNoWzc8cHKTmi41iLtuYBEIZCkyiSOwj0P8DBROMAdn/fHhk6eL3cmS9pFg4BNKgZsNjSiOoQN4I38oPedU022q5hKNQ+demgq043RJ5TViL/W71w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=xiaopeng.com; spf=pass smtp.mailfrom=xiaopeng.com; dkim=pass (1024-bit key) header.d=xiaopeng.com header.i=@xiaopeng.com header.b=Eg2JKhzf; arc=none smtp.client-ip=115.124.28.101
+	bh=pZVExG4snKz3MfMYM2U0ZTXdnWpWL4PIR72QLsJfSZE=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 In-Reply-To:References:To:Cc; b=S7nTqgcbLUiKFerFfcvc8aNQDLIRvq5TMDyz8b/IIE3Z3vA99Ke4WUvY57dtap1QcMwW8rhN9Oj+T7OKwu+Kdrn4JwT82bZCJdrviIMzCQ53jA0SH4k6eSBic0skxORgJK57F/8OJgS7WNWloN6yyLOuw6o+9QIPBqMzFMaUIxQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=xiaopeng.com; spf=pass smtp.mailfrom=xiaopeng.com; dkim=pass (1024-bit key) header.d=xiaopeng.com header.i=@xiaopeng.com header.b=njLlpXed; arc=none smtp.client-ip=115.124.28.2
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=xiaopeng.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=xiaopeng.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=xiaopeng.com header.i=@xiaopeng.com header.b="Eg2JKhzf"
+	dkim=pass (1024-bit key) header.d=xiaopeng.com header.i=@xiaopeng.com header.b="njLlpXed"
 DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=xiaopeng.com; s=default;
-	t=1792067985; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
-	bh=Mq1uH6lmyEW8LmLn6qrjqg09TEW142OSbNDM2kTf6Eg=;
-	b=Eg2JKhzf1Br6/t86Xjh3Fi60xRkwkRE8H6i1VSYwLUSPrsmafc60yY3AD26hiaL54tEeUh1Ff+6CSkGfl1USO8o++sID2aIG7CZ765i890uH5tu+k6wOchsrnjHvRF0IVFFh0iT81zx4gOrbcwr+NMfQV+f7pPuuJcDzrLQtb5g=
-X-Alimail-AntiSpam:AC=CONTINUE;BC=0.0767712|-1;CH=green;DM=|CONTINUE|false|;DS=CONTINUE|ham_system_inform|0.00585194-0.00310147-0.991047;FP=3309286753990020273|0|0|0|0|-1|-1|-1;HT=maildocker-contentspam033045213054;MF=liuwb@xiaopeng.com;NM=1;PH=DS;RN=11;RT=11;SR=0;TI=SMTPD_---.jem-UEy_1792067984;
-Received: from 127.0.0.1(mailfrom:liuwb@xiaopeng.com fp:SMTPD_---.jem-UEy_1792067984 cluster:ay29)
+	t=1792067985; h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To;
+	bh=p7d52w5knl6aTU8FnTsiPgKYATWg6M9jCczahrtsNRA=;
+	b=njLlpXed1/xohWP3YFI2tAWL0PFQuYrsbw9U+u4LyFbDYpSz86sUGUMIcI239Gqy6Ig1+FA7yFClAYNHG+dGbG04YXal4RXO9J9tjs67iVZE4eyKFH87cUhaQ1WPyeaUDd2ZMpLnQteHfSj7HQn9ZP3drqeTKZptoofgHsy1R2o=
+X-Alimail-AntiSpam:AC=CONTINUE;BC=0.07668576|-1;CH=green;DM=|CONTINUE|false|;DS=CONTINUE|ham_regular_dialog|0.00357302-0.000210201-0.996217;FP=1006695008241323194|0|0|0|0|-1|-1|-1;HT=maildocker-contentspam033023018039;MF=liuwb@xiaopeng.com;NM=1;PH=DS;RN=11;RT=11;SR=0;TI=SMTPD_---.jem-UDp_1792067983;
+Received: from 127.0.0.1(mailfrom:liuwb@xiaopeng.com fp:SMTPD_---.jem-UDp_1792067983 cluster:ay29)
           by smtp.aliyun-inc.com;
-          Thu, 15 Oct 2026 20:39:45 +0800
+          Thu, 15 Oct 2026 20:39:44 +0800
 From: Weibin Liu <liuwb@xiaopeng.com>
-Date: Thu, 15 Oct 2026 20:33:12 +0800
-Subject: [PATCH v2 1/2] mfd: sprd-sc27xx: pass byte length to spi_read()
+Subject: [PATCH v2 0/2] mfd/spi: sprd: fix ADI transfer length handling
+Date: Thu, 15 Oct 2026 20:33:11 +0800
+Message-Id: <20261015-spi-sprd-adi-exactlen-v2-0-13203b6aef7e@xiaopeng.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -36,11 +37,13 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261015-spi-sprd-adi-exactlen-v2-1-13203b6aef7e@xiaopeng.com>
+X-B4-Tracking: v=1; b=H4sIAAjI0GoC/x2MywqAIBAAfyX23IIaCfUr0cHHVgthohGC9O9Jh
+ znMYaZCpsSUYe4qJHo48xWaqL4Dd5iwE7JvDkooLYUcMUduJI/GM1Ix7j4p4KStHISzWjoDrY2
+ JNi7/d1nf9wPDD/+WZwAAAA==
+X-Change-ID: 20261015-spi-sprd-adi-exactlen-96b130cb61ca
+In-Reply-To: <5e662ac5-efea-46dc-bd09-88a5a4841851@sirena.org.uk>
 References: <20261014-spi-sprd-adi-minlen-v1-1-77fee7e64259@xiaopeng.com>
  <5e662ac5-efea-46dc-bd09-88a5a4841851@sirena.org.uk>
- <20261015-spi-sprd-adi-exactlen-v2-0-13203b6aef7e@xiaopeng.com>
-In-Reply-To: <20261015-spi-sprd-adi-exactlen-v2-0-13203b6aef7e@xiaopeng.com>
 To: Baolin Wang <baolin.wang@linux.alibaba.com>,
  Orson Zhai <orsonzhai@gmail.com>, Mark Brown <broonie@kernel.org>,
  Lee Jones <lee@kernel.org>
@@ -50,44 +53,50 @@ Cc: Weibin Liu <liuwb@xiaopeng.com>, linux-kernel@vger.kernel.org,
  Guanglei Zhu <zhugl3@xiaopeng.com>
 X-Mailer: b4 0.14.3
 
-sprd_pmic_spi_read() passes 1 as the transfer length to spi_read(),
-but the length parameter is a byte count, and the ADI controller
-consumes a u32 register address from the buffer. The ADI driver
-ignores the transfer length and always operates on the first u32,
-so this happens to work with the 8-byte stack buffer, but the
-advertised length does not describe what the controller actually
-accesses.
+Thanks for the review.
 
-Pass sizeof(u32) so the length matches the bytes touched by the
-controller. The companion patch to the ADI driver rejects lengths
-that do not exactly match the ADI register access size.
+Both points are right. sprd_pmic_spi_read() passes a word count to
+spi_read(), not a byte length, so the v1 check would have broken the
+only in-tree user of this controller. The 4-byte minimum was also the
+wrong check: the driver only ever performs a 4-byte register read or
+an 8-byte register write, so any other length is a caller bug. Short
+transfers overrun the buffer, long ones are silently truncated.
 
-Tested in QEMU (aarch64 virt) together with the companion patch:
-the SC27xx driver's register transfers still pass the new length
-checks once it advertises the byte length.
+v2 splits the fix in two:
 
-Fixes: 25ca4ae43466 ("mfd: Add Spreadtrum SC27xx series PMICs driver")
-Cc: stable@vger.kernel.org # 4.15+
+- patch 1: sprd_pmic_spi_read() passes sizeof(u32) instead of 1.
+  Nothing changes at runtime -- the buffer is 8 bytes on the stack
+  and the controller only touches the first u32.
+
+- patch 2: the minimum-length check becomes an exact per-direction
+  check: reads must be sizeof(u32), writes 2 * sizeof(u32). This
+  also closes the 4..7 byte window v1 left open on the write path.
+
+On severity: this is hardening, not a live security bug. Nothing in
+a stock kernel reaches the out-of-bounds access, since spidev is not
+normally bound to the ADI controller. Both patches still carry
+Cc: stable.
+
+v1: https://lore.kernel.org/r/20261014-spi-sprd-adi-minlen-v1-1-77fee7e64259@xiaopeng.com
+
+Changes in v2:
+- new patch passing a byte length to spi_read()
+- exact per-direction length checks instead of the 4-byte minimum
+
 Signed-off-by: Weibin Liu <liuwb@xiaopeng.com>
-Reviewed-by: Guanglei Zhu <zhugl3@xiaopeng.com>
 ---
- drivers/mfd/sprd-sc27xx-spi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Weibin Liu (2):
+      mfd: sprd-sc27xx: pass byte length to spi_read()
+      spi: sprd-adi: enforce the exact transfer length
 
-diff --git a/drivers/mfd/sprd-sc27xx-spi.c b/drivers/mfd/sprd-sc27xx-spi.c
-index 9a8e6add8fca..8759cee052b0 100644
---- a/drivers/mfd/sprd-sc27xx-spi.c
-+++ b/drivers/mfd/sprd-sc27xx-spi.c
-@@ -156,7 +156,7 @@ static int sprd_pmic_spi_read(void *context,
- 
- 	/* Copy address to read from into first element of SPI buffer. */
- 	memcpy(rx_buf, reg, sizeof(u32));
--	ret = spi_read(spi, rx_buf, 1);
-+	ret = spi_read(spi, rx_buf, sizeof(u32));
- 	if (ret < 0)
- 		return ret;
- 
+ drivers/mfd/sprd-sc27xx-spi.c |  2 +-
+ drivers/spi/spi-sprd-adi.c    | 10 ++++++++++
+ 2 files changed, 11 insertions(+), 1 deletion(-)
+---
+base-commit: 24a19b953e2a3d0ea5a8c4951a0ab8f32720c907
+change-id: 20261015-spi-sprd-adi-exactlen-96b130cb61ca
 
+Best regards,
 -- 
-2.50.1
+Weibin Liu <liuwb@xiaopeng.com>
 
