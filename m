@@ -1,41 +1,48 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5ABD4A2E27;
-	Thu, 15 Oct 2026 15:06:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6108B53C3AD;
+	Thu, 15 Oct 2026 15:15:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792076792; cv=none; b=rHdg0T8s2Htel5qc2JFYJmlVMoC0No7CJJe3AAyfXg6/jaN8/c1Xh+oUTn8hW6AhsUflicpfOn505OV5U9Qx+DsFhu4fDse+LOaY3T8+qPg1/jLToMDABbHbpAoSAL5qIuG/PoUJCSV++ZzZ9otHDhMhzmPD5FLbaIbeKEtVnY0=
+	t=1792077360; cv=none; b=TK5l6JZuzWu6Y7QElv/FdKwKJGTYvJAB3/hgGZA2Vfsl2GGuO8KpyJj04IZsLzmsjZZMZUFPSe4ByjFPwJaoYV/QkmdaX+Y+VXSFb4E1VniOedoyKCq2D8qbpAUu2iqGqFkogwxxm0eF36YcWFZUM2nL3hitGd8CNUwEqARyJmM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792076792; c=relaxed/simple;
-	bh=44ObRLLeSJEZjlONSmEVnsFZ1XHrhH0KyZ3LV7lCCZw=;
+	s=arc-20240116; t=1792077360; c=relaxed/simple;
+	bh=YaFXb9WrWUM6jpC/C36tcWGukIgbzgS4MZDG5mC7HXU=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=DTcu1Us03DxyDYK+UgkQoDXq0/49Z/i5by/hulwa1NLm8iIAiEH4objmtBVoOOm2h18btPmiopqEupArA4NtrbZtaWc7XM4zeH6AjcYX59AS028mRtQjkckoY3dfntbZ5syr5JLnGaxqV8p+xHtyvhluFZlDdn8BJW/TlJIPZKY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RMQD5ome; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=GCmpcZocFSHsCCfiA5BY/FR11HgyHSZGNh9RQHwFGRzMfdWOSV2sOBHej7bKDSqWPvHdVKNitsRf4u3x9czfAuR0+EPc29r1OG0Fmh5q66uBnwYwiihDXQuDfISfe16NxPZ7346ZXTQbxrCx+y+rLPwaOEWQI/+HA6LxTgzJSR8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gS5dvHAv; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RMQD5ome"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4FE6A1F000C4;
-	Thu, 15 Oct 2026 15:06:30 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gS5dvHAv"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 637081F000C4;
+	Thu, 15 Oct 2026 15:15:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792076791;
-	bh=Bt2xHiRLuCEUEUjwNFd1YMNrjnY78GVVrs/wdHe6UPI=;
+	s=k20260515; t=1792077359;
+	bh=DmM0pT0QFpRuYUC1TYORapqWQiN3iK4gHA1id/5dZ4M=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=RMQD5omeVYZmDTStIvB+SQji/k4XirLOZuImSrmf7poXZIAji5j3jcLMb+ls0XIZu
-	 mW9Sl9BO08iYzHQCz6eUDueLEFjM8WcEMVGll9xqHJU1G0E8fts5BTuuEzeS8HjXOe
-	 hxfqc4bTVgyDPP6wStoHBicP3YLAwyW9/ST1KH/DrVmGVpiRwnjWb396Vc+dI8S975
-	 U0kZkuWlSkzooteUDh+xLkAgJ5T8rgINhnTJolN6N80v7I0WNc9oxTwgt73pDUE9MB
-	 3oLqjquRuvtgdHt+vQVZ7pIzJ6l4p+B82BZ5sJv81Wl8bxWdbJCgFnffnPLNnZKSEQ
-	 ejLN4AV6KWNQQ==
+	b=gS5dvHAvNQDgx+zBUiUX3AQfqSc5MSjoyXtmCTBcchTRTYhP75XQD1sNKt/yu0Ze/
+	 YxRD9lhZHZ2I+DhiWjYxrO/0ULk+vUbTAla5xFc4z7O02at5UBedCKKhn/mhUgVEKy
+	 tvhorsGHsnbCtw84Lk/uzhOGPh1GH88ioqGaOESrG6+tMEQCxHxPwlQC4KzUCdCtz6
+	 8Rqk1uHW3SLBmzARoiO6gz4aOPQserqFWaGKVBnYYItQJ1rx+Aq6VvBAsdnFbPfZuB
+	 DpqKu5NtBsNkmgULx8Y7Atk9c2Ryy9UTzKeGeIoBRD23nRpfEjMttIjHWJHtzLTb5q
+	 UNTPlzj8jrGNQ==
 From: Lee Jones <lee@kernel.org>
-To: Lee Jones <lee@kernel.org>, Alexey Charkov <alchark@flipper.net>
-Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
- stable@vger.kernel.org
-In-Reply-To: <20261001-bq25792-volatile-v1-1-cb3d4ec8a414@flipper.net>
-References: <20261001-bq25792-volatile-v1-1-cb3d4ec8a414@flipper.net>
-Subject: Re: (subset) [PATCH] mfd: bq257xx: Mark self-modifying BQ25792
- registers volatile
-Message-Id: <179207679007.2041061.16299423448287914984.b4-ty@b4>
-Date: Thu, 15 Oct 2026 16:06:30 +0100
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>, 
+ Stephen Boyd <sboyd@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Cc: Alexey Klimov <alexey.klimov@linaro.org>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ mfd@lists.linux.dev, linux-kernel@vger.kernel.org
+In-Reply-To: <20260930124607.1109167-2-srinivas.kandagatla@oss.qualcomm.com>
+References: <20260930124607.1109167-2-srinivas.kandagatla@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH v4 1/4] dt-bindings: mfd: qcom,spmi-pmic: add
+ compatibles for pm4125-codec
+Message-Id: <179207735616.2048081.9070663764163723294.b4-ty@b4>
+Date: Thu, 15 Oct 2026 16:15:56 +0100
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -46,21 +53,21 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-Mailer: b4 0.16-dev-ad80c
 
-On Thu, 01 Oct 2026 17:30:23 +0400, Alexey Charkov wrote:
-> Some BQ25792 configuration registers change without being written: input
-> source detection sets VINDPM and IINDPM at plug-in, plug-in also clears
-> EN_HIZ, the FORCE_* bits clear once their operation starts or completes,
-> EN_ACDRV1/2 follow input path changes, and ADC_EN clears after a one-shot
-> conversion. Reading them from the cache returns stale values.
+On Wed, 30 Sep 2026 13:46:03 +0100, Srinivas Kandagatla wrote:
+> Qualcomm Agatti SoC has PM4125 PMIC, which includes audio codec.
+> Audio codec has TX and RX soundwire slave devices to connect to on-chip
+> soundwire master.
 > 
-> Mark these registers volatile, keeping the cache for the rest.
+> Add missing qcom,pm4125-codec compatible to pattern of audio-codec node
+> properties in mfd qcom,spmi-pmic schema to complete the audio codec
+> support.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] mfd: bq257xx: Mark self-modifying BQ25792 registers volatile
-      commit: 56d974f3ad074a60bf877d131eab8b1df5b4f069
+[1/4] dt-bindings: mfd: qcom,spmi-pmic: add compatibles for pm4125-codec
+      commit: 4c06f3659671be3c95e18519bf40e32ecde21382
 
 --
 Lee Jones [李琼斯]
