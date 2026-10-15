@@ -1,53 +1,33 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from out28-101.mail.aliyun.com (out28-101.mail.aliyun.com [115.124.28.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55AB349EC7F;
-	Thu, 15 Oct 2026 12:18:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 462F15208A9
+	for <mfd@lists.linux.dev>; Thu, 15 Oct 2026 12:39:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.124.28.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792066683; cv=none; b=AqSYSsK3RyniJxdhO5Gpfb6YQ7TgJGiiHj8S4fqhiI2oBqs8TsnEjU6U0QcFO9R+XgLw0Gs8Gxuq9W9P+RGy8HD0JSlvwHguXz5y82vODMgSpxRDsqJO2UxBBGoDy/0DsN2KjGh6zeoJY1nfS+Emw1yvjS0yitvWupGFVmUZSDI=
+	t=1792067996; cv=none; b=Y1ywor3gBS5HBFx4khArlpeWmqa9ujhT0XwY374NQcTmUijMQexuVGFiBQAaH8aXfSITZ/lZq9YXhdVwyamCqPrgc5rMvjW6ZT/OiYmBggXMrNryEbthR/mY65pm24U97UeV+dBjKxaiBLWEzWT/sM8kgBDrrvliQVL386Tza3M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792066683; c=relaxed/simple;
-	bh=+fB34VuA7wpq6empWyJXVqzOVhVPkE7LZbcucVhE93Q=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=XQUq1key53WrNEWu+DxCCMSHsWb850Jm5W7WaThjFMZv6ziAiHVcd09o4MoJgX5QUn73/v0rr+nkd47kBw7cr9PU/JhHSUkNbG7fPqhroeWbQOtX/gCh5hm02ekeXdKbVs0CrM4W0UPMNJz4ErRTVOPh0O72x6njaf5hxdM4G4Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RIecqfOY; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1792067996; c=relaxed/simple;
+	bh=xfqloxc207DM+3vrjBhxius1ZMSYVn/4xB0SR0ElFGA=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=aWQIJb73zXZR3IuKQbYTwg6xsL2SP+3wcGwA4/cBuTUTctQhZD8Vg40/0PoNoWzc8cHKTmi41iLtuYBEIZCkyiSOwj0P8DBROMAdn/fHhk6eL3cmS9pFg4BNKgZsNjSiOoQN4I38oPedU022q5hKNQ+demgq043RJ5TViL/W71w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=xiaopeng.com; spf=pass smtp.mailfrom=xiaopeng.com; dkim=pass (1024-bit key) header.d=xiaopeng.com header.i=@xiaopeng.com header.b=Eg2JKhzf; arc=none smtp.client-ip=115.124.28.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=xiaopeng.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=xiaopeng.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RIecqfOY"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0EE7E1F000C5;
-	Thu, 15 Oct 2026 12:17:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792066681;
-	bh=qVEreEp0Hw8z9be2U0iUr/ECSYHh9yfdw1fSZ6anxtM=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=RIecqfOYt+nhoWwYu4s36KbOZQFld7TG/yeZsEz7i8hA2zroCZdfTU0tlxfDKa8gE
-	 VomsFUpwcjXV9TyKq4ZOnLV8fCdd/1W5pkgS6fqnsPh8N3u426OQiptvlO2uXmDRrl
-	 I1opyKbXyIglmsQxVUrTfIrRB5TLj9grUP9nOM/+lW7qXTJpzurUwbJkHJkllXZSU9
-	 m0w19amKjxkvMNkG/BPjaQxZsxZq0W1Y5fQ69roYVfvG5iZnElgnKEARcoapKNldp6
-	 exDjnjhR4fZ6n9HQe6ycHPbSE0jZp4aWWguUw6e9E7IRQ9lMILfb93NkQK5trbRe9+
-	 TX/L7hjYN2frw==
-From: Lee Jones <lee@kernel.org>
-To: Jonathan Cameron <jic23@kernel.org>, 
- David Lechner <dlechner@baylibre.com>, 
- =?utf-8?q?Nuno_S=C3=A1?= <nuno.sa@analog.com>, 
- Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Matthias Brugger <matthias.bgg@gmail.com>, 
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
- Lee Jones <lee@kernel.org>, Ryan Brue <ryanbrue.dev@gmail.com>
-Cc: linux-iio@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- linux-mediatek@lists.infradead.org, mfd@lists.linux.dev, 
- Roman Vivchar <rva333@protonmail.com>, 
- Luca Leonardo Scorcia <l.scorcia@gmail.com>, 
- Andy Shevchenko <andriy.shevchenko@intel.com>
-In-Reply-To: <20260928-rbrue-suez-upstreaming-mt6397-auxadc-v4-3-23533a0d30e3@gmail.com>
-References: <20260928-rbrue-suez-upstreaming-mt6397-auxadc-v4-3-23533a0d30e3@gmail.com>
-Subject: Re: (subset) [PATCH v4 3/3] mfd: mt6397-core: Add mt6397 AUXADC
- support
-Message-Id: <179206667779.1910726.5341177428334836457.b4-ty@b4>
-Date: Thu, 15 Oct 2026 13:17:57 +0100
+	dkim=pass (1024-bit key) header.d=xiaopeng.com header.i=@xiaopeng.com header.b="Eg2JKhzf"
+DKIM-Signature:v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=xiaopeng.com; s=default;
+	t=1792067985; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
+	bh=Mq1uH6lmyEW8LmLn6qrjqg09TEW142OSbNDM2kTf6Eg=;
+	b=Eg2JKhzf1Br6/t86Xjh3Fi60xRkwkRE8H6i1VSYwLUSPrsmafc60yY3AD26hiaL54tEeUh1Ff+6CSkGfl1USO8o++sID2aIG7CZ765i890uH5tu+k6wOchsrnjHvRF0IVFFh0iT81zx4gOrbcwr+NMfQV+f7pPuuJcDzrLQtb5g=
+X-Alimail-AntiSpam:AC=CONTINUE;BC=0.0767712|-1;CH=green;DM=|CONTINUE|false|;DS=CONTINUE|ham_system_inform|0.00585194-0.00310147-0.991047;FP=3309286753990020273|0|0|0|0|-1|-1|-1;HT=maildocker-contentspam033045213054;MF=liuwb@xiaopeng.com;NM=1;PH=DS;RN=11;RT=11;SR=0;TI=SMTPD_---.jem-UEy_1792067984;
+Received: from 127.0.0.1(mailfrom:liuwb@xiaopeng.com fp:SMTPD_---.jem-UEy_1792067984 cluster:ay29)
+          by smtp.aliyun-inc.com;
+          Thu, 15 Oct 2026 20:39:45 +0800
+From: Weibin Liu <liuwb@xiaopeng.com>
+Date: Thu, 15 Oct 2026 20:33:12 +0800
+Subject: [PATCH v2 1/2] mfd: sprd-sc27xx: pass byte length to spi_read()
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -55,19 +35,59 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.16-dev-ad80c
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261015-spi-sprd-adi-exactlen-v2-1-13203b6aef7e@xiaopeng.com>
+References: <20261014-spi-sprd-adi-minlen-v1-1-77fee7e64259@xiaopeng.com>
+ <5e662ac5-efea-46dc-bd09-88a5a4841851@sirena.org.uk>
+ <20261015-spi-sprd-adi-exactlen-v2-0-13203b6aef7e@xiaopeng.com>
+In-Reply-To: <20261015-spi-sprd-adi-exactlen-v2-0-13203b6aef7e@xiaopeng.com>
+To: Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Orson Zhai <orsonzhai@gmail.com>, Mark Brown <broonie@kernel.org>,
+ Lee Jones <lee@kernel.org>
+Cc: Weibin Liu <liuwb@xiaopeng.com>, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org, linux-spi@vger.kernel.org,
+ Chunyan Zhang <zhang.lyra@gmail.com>, mfd@lists.linux.dev,
+ Guanglei Zhu <zhugl3@xiaopeng.com>
+X-Mailer: b4 0.14.3
 
-On Mon, 28 Sep 2026 15:57:21 -0500, Ryan Brue wrote:
-> The mt6397 PMIC includes an AUXADC. Register the AUXADC in the mt6397
-> devices array to allow the corresponding driver to probe using compatible
-> string.
+sprd_pmic_spi_read() passes 1 as the transfer length to spi_read(),
+but the length parameter is a byte count, and the ADI controller
+consumes a u32 register address from the buffer. The ADI driver
+ignores the transfer length and always operates on the first u32,
+so this happens to work with the 8-byte stack buffer, but the
+advertised length does not describe what the controller actually
+accesses.
 
-Applied, thanks!
+Pass sizeof(u32) so the length matches the bytes touched by the
+controller. The companion patch to the ADI driver rejects lengths
+that do not exactly match the ADI register access size.
 
-[3/3] mfd: mt6397-core: Add mt6397 AUXADC support
-      commit: cc6597f4e3b752de42249879e0c7054fd23628a1
+Tested in QEMU (aarch64 virt) together with the companion patch:
+the SC27xx driver's register transfers still pass the new length
+checks once it advertises the byte length.
 
---
-Lee Jones [李琼斯]
+Fixes: 25ca4ae43466 ("mfd: Add Spreadtrum SC27xx series PMICs driver")
+Cc: stable@vger.kernel.org # 4.15+
+Signed-off-by: Weibin Liu <liuwb@xiaopeng.com>
+Reviewed-by: Guanglei Zhu <zhugl3@xiaopeng.com>
+---
+ drivers/mfd/sprd-sc27xx-spi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/mfd/sprd-sc27xx-spi.c b/drivers/mfd/sprd-sc27xx-spi.c
+index 9a8e6add8fca..8759cee052b0 100644
+--- a/drivers/mfd/sprd-sc27xx-spi.c
++++ b/drivers/mfd/sprd-sc27xx-spi.c
+@@ -156,7 +156,7 @@ static int sprd_pmic_spi_read(void *context,
+ 
+ 	/* Copy address to read from into first element of SPI buffer. */
+ 	memcpy(rx_buf, reg, sizeof(u32));
+-	ret = spi_read(spi, rx_buf, 1);
++	ret = spi_read(spi, rx_buf, sizeof(u32));
+ 	if (ret < 0)
+ 		return ret;
+ 
+
+-- 
+2.50.1
 
