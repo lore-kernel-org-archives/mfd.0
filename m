@@ -1,95 +1,105 @@
-Received: from rtits2.realtek.com.tw (rtits2.realtek.com [211.75.126.72])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.15])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A056148125C;
-	Fri, 16 Oct 2026 12:42:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=211.75.126.72
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E91722E266C
+	for <mfd@lists.linux.dev>; Fri, 16 Oct 2026 13:16:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.15
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792154579; cv=none; b=QlX6uipTTBJ0ZljTqz7H91ji8X45af00Zl+0yGYV6RiqPLDYOA5lmn3Eu7CoFWEH7wym8EQht2Q0y0jlMsgYwvcspvG9S1ub6v1cCDmNwkfGCKhKNEDSpLwWUopBRkqxoRbrP2AQLY0CfK6bbHBU6w2VkdInbTHSjxtK4VG7gfQ=
+	t=1792156586; cv=none; b=KSuOPKCG01wL4gs2QrgHRBidFBfTpDqhThZCgxFUCO5ejcXk61TBZovkJAUK8S7Zo7GPN+UE67Q/WGsaGLi3xWhDPcRbOauTPFh5DpZmzZ8J+DzK1eEDM11ob4uFhV1Ss3yHv6ci5CCN61Rgzzchh4/kSie2GDVZkKvO8uyVZ/0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792154579; c=relaxed/simple;
-	bh=dN4poJwAxvndcIKDOFh8WU9B90Vp9srEjyUPaDxtJmQ=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:MIME-Version; b=KS3MVQ+dU8Z7uskk/xYDRcrFoRuEee7ggpHvVGvSHUYMtjNaNkH1595uRRE+g1m/AsnI+2k1+RN/DLzOWoHrlIK0vNH5vkErlivcS8fH3BNv3XD88wIPVD6sz9YRwhv1mjX5fD5h1nD5Qrot3Ee+CRFax8kvd/X01qG9Gt6Z9s0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=realsil.com.cn; spf=pass smtp.mailfrom=realsil.com.cn; dkim=pass (2048-bit key) header.d=realsil.com.cn header.i=@realsil.com.cn header.b=go6XMcck; arc=none smtp.client-ip=211.75.126.72
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=realsil.com.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=realsil.com.cn
+	s=arc-20240116; t=1792156586; c=relaxed/simple;
+	bh=+Kn129w0gmug+NGjkG6FdvsaM9KLyoC8XLvmdxilZx0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=aTmgrtYdEnMAbuDwuGWlh/VqCmoFWVIkmx4+FgLFGEEQM1P5uRT/M6DF7IMfqwZDf5TpSgCyWHMzrfbmknJPmLEIQGX6eW8T3L3Bjnz5iEsVDsP6Aob5dsFnz05xuT4BhCm7OqQvzYlpoTOWJgFFJBiYx1EvN/KlSHpull37umc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=JFqb+wHH; arc=none smtp.client-ip=198.175.65.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=realsil.com.cn header.i=@realsil.com.cn header.b="go6XMcck"
-X-SpamFilter-By: ArmorX SpamTrap 5.80 with qID 69GCfcsyF3514165, This message is accepted by code: ctloc85258
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=realsil.com.cn;
-	s=dkim; t=1792154498;
-	bh=dN4poJwAxvndcIKDOFh8WU9B90Vp9srEjyUPaDxtJmQ=;
-	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:MIME-Version;
-	b=go6XMcckxmD36kMU6sNsGPKV/+CAcKUpxXY21xXr6d9uB6dpcBPZq8IZL/NvWKI6n
-	 Iz6ZmcexfoW97AIfn0o6n7l64gvZ6sQNR3KL0seSRPBY2tRjNDKjcXDLm2zoI0dYBM
-	 yWLwX3Bb7/DFKPlzH4c7MKvlz9tbuwXZH3+glXil4oTzXkm0A6YlX9CXugQYctDjvb
-	 mVfyQkvGylvXyLV80/4mS+ZMpLqyyMBgryGmYFLTuhqSz5I9YbJx6Sp7a/V9HR7X89
-	 L2wslEb9wkhzKczxghArI+9N2D7tndrEi6JYNcYIUFwNsM7dqnXQ7u1zSPlmEYbV1c
-	 m1hh1peHlr6sg==
-Received: from RS-EX-MBS3.realsil.com.cn ([172.29.17.103])
-	by rtits2.realtek.com.tw (8.15.2/3.29/5.94) with ESMTPS id 69GCfcsyF3514165
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 16 Oct 2026 20:41:38 +0800
-Received: from RS-EX-MBS2.realsil.com.cn (172.29.17.102) by
- RS-EX-MBS3.realsil.com.cn (172.29.17.103) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.49; Fri, 16 Oct 2026 20:41:38 +0800
-Received: from RS-EX-MBS2.realsil.com.cn ([fe80::d17c:2fd0:cf8e:635]) by
- RS-EX-MBS2.realsil.com.cn ([fe80::d17c:2fd0:cf8e:635%9]) with mapi id
- 15.02.2562.049; Fri, 16 Oct 2026 20:41:38 +0800
-From: =?gb2312?B?1tzS+g==?= <zain_zhou@realsil.com.cn>
-To: Lee Jones <lee@kernel.org>
-CC: Alexandre Belloni <alexandre.belloni@bootlin.com>, Frank Li
-	<Frank.Li@nxp.com>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski
-	<krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Liam Girdwood
-	<lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, Vikash Bansal
-	<vikash.bansal@nxp.com>, Aman Kumar Pandey <aman.kumarpandey@nxp.com>,
-	Lakshay Piplani <lakshay.piplani@nxp.com>, "devicetree@vger.kernel.org"
-	<devicetree@vger.kernel.org>, "linux-i3c@lists.infradead.org"
-	<linux-i3c@lists.infradead.org>, "linux-kernel@vger.kernel.org"
-	<linux-kernel@vger.kernel.org>, "mfd@lists.linux.dev" <mfd@lists.linux.dev>,
-	=?gb2312?B?zfXsvw==?= <wei_wang@realsil.com.cn>
-Subject: =?utf-8?B?5Zue5aSNOiBbUkZDIFBBVENIIDIvNF0gbWZkOiBBZGQgZHJpdmVyIGZvciBSZWFsdGVrIFJUUzQ5MHggSTNDIGh1Yg==?=
-Thread-Topic: [RFC PATCH 2/4] mfd: Add driver for Realtek RTS490x I3C hub
-Thread-Index: AQHdSOfJqQvAuTVpV0yzClLpyE4DErb8wqSAgAN+5ZA=
-Date: Fri, 16 Oct 2026 12:41:38 +0000
-Message-ID: <561f9d3886c94700bfad8ca8fc66b049@realsil.com.cn>
-References: <20260920100501.4091351-1-zain_zhou@realsil.com.cn>
- <20260920100501.4091351-3-zain_zhou@realsil.com.cn>
- <179198542200.839288.16069032392567490984@kernel.org>
-In-Reply-To: <179198542200.839288.16069032392567490984@kernel.org>
-Accept-Language: en-US, zh-CN
-Content-Language: zh-CN
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="JFqb+wHH"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1792156585; x=1823692585;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=+Kn129w0gmug+NGjkG6FdvsaM9KLyoC8XLvmdxilZx0=;
+  b=JFqb+wHHF41rgKDw2DY6DG2IzqaJdKVJ0KG4L9H7I4gDsoinMLSuR1Tv
+   TJEZP+zoDucK+SLeOHOwQsXn+BDLKb/7mgiapUOX0W/rmT2b9QRH2c57P
+   41qBamkCZkOuf6SKUKIgLJNjet5skrDyLq7rEs0MpPaSfsUtXPRZxMGe+
+   ZldaFI6mdCPqBZ3gmOeeJfdZpUBMZywNpu6R0TIngS3k8NjXPmrQESm3s
+   I35vbQuk5fT+eiiMI2y39CtwKXHpJwx3R2OkWAaH4wSSikL0BiMSFvoTe
+   +wrkdb6bCh9fm3Cy0fByJicbg30tSBrWrgwKrDZM3OpueoLnbKt3cpz0F
+   g==;
+X-CSE-ConnectionGUID: Oulku31vStGv/y2lf2FW0Q==
+X-CSE-MsgGUID: oTYNmwr3RI6Sg+fXOSyk3w==
+X-IronPort-AV: E=McAfee;i="6800,10657,11936"; a="935475"
+X-IronPort-AV: E=Sophos;i="6.27,161,1787036400"; 
+   d="scan'208";a="935475"
+Received: from orviesa008.jf.intel.com ([10.64.159.148])
+  by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Oct 2026 06:16:25 -0700
+X-CSE-ConnectionGUID: NjexObzuRUCICpXasVX4gw==
+X-CSE-MsgGUID: ds7mVd5QQ3GEKxBw4FvQ6A==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,161,1787036400"; 
+   d="scan'208";a="1844290"
+Received: from mkosciow-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.35])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Oct 2026 06:16:23 -0700
+Date: Fri, 16 Oct 2026 16:16:20 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Navon John Lukose <navonjohnlukose@gmail.com>,
+	Mika Westerberg <mika.westerberg@linux.intel.com>,
+	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>
+Cc: Lee Jones <lee@kernel.org>, mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH RFC] mfd: intel-lpss: Set d3hot_delay to 0
+Message-ID: <atIjpJn1Y0GPmQbP@ashevche-desk.local>
+References: <20261016114347.23633-1-navonjohnlukose@gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261016114347.23633-1-navonjohnlukose@gmail.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-T24gV2VkLCAxNCBPY3QgMjAyNiwgTGVlIEpvbmVzIHdyb3RlOg0KDQo+ID4gKwlpbnQgcmV0Ow0K
-PiA+ICsJaW50IGk7DQo+DQo+IFBsZWFzZSBkZWNsYXJlIGxvb3AgY291bnRlcnMgaW5zaWRlIHRo
-ZSAnZm9yJyBzdGF0ZW1lbnQuDQoNCldpbGwgZG8sIGFuZCBJJ2xsIGFwcGx5IHRoZSBzYW1lIHRv
-IHRoZSByZXN0IG9mIHRoZSBzZXJpZXMuDQoNCj4gPiArCWkzY19kZXZpY2VfZ2V0X2luZm8oaTNj
-ZGV2LCAmaW5mbyk7DQo+ID4gKwlpZiAoSTNDX1BJRF9NQU5VRl9JRChpbmZvLnBpZCkgIT0gUlRT
-NDkwWF9NQU5VRkFDVFVSRVJfSUQpDQo+ID4gKwkJcmV0dXJuIC1FTk9ERVY7DQo+DQo+IERvZXNu
-J3QgJ3J0czQ5MHhfaTNjX2lkcycgYWxyZWFkeSBtYXRjaCBvbiAnSTNDX01BVENIX01BTlVGJyB3
-aXRoDQo+ICdSVFM0OTBYX01BTlVGQUNUVVJFUl9JRCc/IFdoZW4gd291bGQgdGhpcyBjaGVjayBl
-dmVyIHRyaWdnZXI/DQoNCllvdSBhcmUgcmlnaHQsIGl0IG5ldmVyIHRyaWdnZXJzLiBJJ2xsIGRy
-b3AgaXQuDQoNCj4gPiArCWRldl9pbmZvKGRldiwgIiVzIEkzQyBodWIgd2l0aCAldSB0YXJnZXQg
-cG9ydHNcbiIsDQo+ID4gKwkJIHJ0czQ5MHgtPm1vZGVsLCBydHM0OTB4LT5udW1fdGFyZ2V0X3Bv
-cnRzKTsNCj4NCj4gS2VlcCB0aGUga2VybmVsIGxvZyBjbGVhbiB3aGVuZXZlciBwb3NzaWJsZSBw
-bGVhc2UuDQoNCldpbGwgZHJvcCBpdC4gV2l0aCB0aGF0IGdvbmUsIG5vdGhpbmcgcmVhZHMgdGhl
-IG1vZGVsIG5hbWUgb3IgdGhlIHBhcnQgSUQNCmFueSBtb3JlLCBzbyBpbiB0aGUgbmV4dCByZXZp
-c2lvbiBJIHBsYW4gdG8gZHJvcCB0aGUgcGFydC1JRCB0YWJsZSBhcw0Kd2VsbCBhbmQgcmVhZCB0
-aGUgcG9ydCBjb3VudCBmcm9tIHRoZSBUQVJHRVRfUE9SVF9DT1VOVCBmaWVsZCBvZiB0aGUNCmNh
-cGFiaWxpdHkgcmVnaXN0ZXIgKFJFRyMxMCksIGFzIGRlZmluZWQgYnkgdGhlIEkzQyBIdWIgQ29t
-bW9uDQpBcmNoaXRlY3R1cmUgU3BlY2lmaWNhdGlvbi4NCg0KPiA+ICtNT0RVTEVfREVTQ1JJUFRJ
-T04oIlJlYWx0ZWsgUlRTNDkweCBJM0MgaHViIE1GRCBkcml2ZXIiKTsNCj4NCj4gUGxlYXNlIGRy
-b3AgIk1GRCIgZnJvbSB0aGUgZGVzY3JpcHRpb24uDQoNCldpbGwgY2hhbmdlIGl0IHRvICJSZWFs
-dGVrIFJUUzQ5MHggSTNDIGh1YiBjb3JlIGRyaXZlciIuDQoNCkJlc3QgcmVnYXJkcywNClphaW4N
-Cg==
+On Fri, Oct 16, 2026 at 05:13:47PM +0530, Navon John Lukose wrote:
+> intel-lpss-pci already clears d3cold_delay, but every runtime resume of an
+> LPSS controller still sleeps the default 10 ms d3hot_delay in
+> pci_power_up().
+> 
+> On Arrow Lake-H (Lenovo Yoga Pro 7 14IAH10) the delay costs 8-16 ms per
+> resume of the touchpad's I2C controller, which lands on the first
+> touchpad report after each 1 s autosuspend. With d3hot_delay set to 0 the
+> power-up takes 64-256 us and the I2C transfers that follow complete
+> without errors.
+
+So, do you state that this patch fixes some bad touchpad behaviour? If so,
+please, provide some logs.
+
+> Commit 815b4448198f ("i3c: mipi-i3c-hci-pci: Set d3hot_delay to 0 for Intel
+> controllers") does the same for the Intel I3C controllers.
+
+Okay, it means they were tested.
+
+...
+
+> Notes:
+>     RFC because I could only test Arrow Lake-H, and this applies to every LPSS
+>     generation the driver handles, back to Sunrise Point. Andy, do any of the
+>     older ones need the D3hot->D0 delay? If so I can limit it to newer IDs
+>     through the driver data.
+
+AFAIK 10 ms for D3hot delay is in accordance with PCI specification.
+Yes, we use quirk_remove_d3hot_delay() for very old Intel Atom SoCs,
+but I have no idea about Skylake line of products.
+
+Mika, Ilpo, do you have any ideas or comments on this?
+
+-- 
+With Best Regards,
+Andy Shevchenko
+
+
