@@ -1,160 +1,143 @@
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFCAD313267
-	for <mfd@lists.linux.dev>; Fri, 16 Oct 2026 07:20:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1D9C4219E9;
+	Fri, 16 Oct 2026 07:40:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792135220; cv=none; b=P6UiA3rvli6m3I9vZ1NZkOreukb+MPBYLnr+3+fSxAGRyJtpncuLS5oYcTN4SQtNKR31OKArO4G9LXL4Or9E3UkLAgVdWygM+Pny4U0MOmbH9Vf08FRH6ebor6Qf83C1g8NBTCMAUzrmaLBJiUhm/W6davNUE9qCCEwLBbJhOvw=
+	t=1792136427; cv=none; b=kjnxXzxQ6mAUQ8qAP5A/wg680gU/fyQt99fdS7aC5ACFI1u2o6Bk6XDsf9CtntyRRlnmXcI/sMQcK2V9BVjv6evZ/9smeUjkiUHWTL+EpTFW69cj6vywqkAMUY3AInGkJEOD1POMq3Vp3XrPAqLg3T+Q7d6YP8AdgnXOJluiD1Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792135220; c=relaxed/simple;
-	bh=rRdkht83PecwdZYGF4/EuY654Yjjl+PVaSprnxYvdgs=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=kjLdV+oycqhkIeycQynj1ytZqv91ooLvB5l1TCyZ/ZUBfzHghN4dl9DSQfwKvgvdR58BcU+aMC5KEsBMVA364cKKndBOz76+jRZYIY0pA7kNY8CMLhphTTmb81FOL29gJXzvsE0+g+7Hadkl0Y3Mdf2acx0HZwV3x71HK6tulfw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Eeafm8+u; arc=none smtp.client-ip=209.85.221.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1792136427; c=relaxed/simple;
+	bh=mofmNipM2hWNiXPFaH0c8qRsysHiI60VRYo4uMGBz40=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=sr7KG3Uf88VACDRxL+TVbuKzQBbVUzuDlcBl1yCpOyc7z6lEYp1b0xqQXfPZbIOjlUGmR69uedUwk/+wy1x5HGTKWAhaUViKSu84Dsn/U/rOyaG+kWPyXORV9hrNs1wpTWA9wtcGqX4kIdBWJrm/63j/Ff/PzvOwkBGvGSvkj/U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SyaFapeX; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Eeafm8+u"
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-48dfc0421d9so437386f8f.1
-        for <mfd@lists.linux.dev>; Fri, 16 Oct 2026 00:20:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792135217; x=1792740017; darn=lists.linux.dev;
-        h=content-type:mime-version:references:in-reply-to:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=rRdkht83PecwdZYGF4/EuY654Yjjl+PVaSprnxYvdgs=;
-        b=Eeafm8+uyZ70IeRdHBwED7giH0Tj6PeL23jGGE1cmeGeJtbyyWJe+hSmf/1rdnaZ09
-         kRbp3BrAg8vlPUBQJuwciiVviYXT2CMn9m/EVUpumJiYVGEoR4ruQym6Qt4CZiB70o+z
-         eOmxyC95dVXcx9DjezFc8DJuTb3E5lkp7xVpxV3Kyx+wZdbIKcn8YqQ7IAdDQyMjbptP
-         gk4ssJCYJDj+0U/KjPcSudh6zC84viLoSy6CJwl04Ibmuf3riy/hv1tjv3iGS7qXVgy8
-         GYl+a/XyDwZGmabOBThLoKs9uew0zkJEbvq4m3PLrRD8t4ksLiMZ32ngGzPhtlYi8jtu
-         +keA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792135217; x=1792740017;
-        h=content-type:mime-version:references:in-reply-to:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=rRdkht83PecwdZYGF4/EuY654Yjjl+PVaSprnxYvdgs=;
-        b=sdx8mxLfCbJ+Me7DK6/90zSrclNZHG6nJQ2qXjrEh8K7JxppHDI8JVlSSPxY3/DCN7
-         YVKLyp2sGGPwNIC1dAX3mEdCvbPqMyITzC6c742dOrSO8kiiYisa/jFVIjVwwP4GBLCr
-         lpdTYjfdZrClDd3Sn5fWwhUf6PA+eMMYQdrcY9TsxFS5mHOnGk2qgw1mPPcUxU7JrXC9
-         xm/xZxnnpJD2M2P8a3UBUKXsMa3GOp3PBtXuv9OE7chqHXv72bZa9PcFtoDOItfD66l/
-         LvFMjwqMm6CXHbpiPr1/VA8maDrZy/4x2mOW7FZqzfFMTSj+HvOCSw/qtatITag3Rppr
-         VSdQ==
-X-Forwarded-Encrypted: i=1; AKwUvBx+7wkWdJ0E9KTiN7v/wMERm70yXq27ZR+0dr1sL+NWFLlBCjKqMNnEXJtlyfXrD2ArVU0=@lists.linux.dev
-X-Gm-Message-State: AFq9FYIoaylNKJgmn7GWiFzBtRtfLWj61WwkThS9j5lYnQ/OcIYvEPkc
-	9t0PR0JwdBy48dogoCeS/jIoT7kRZbP0Jot5A6a7Y+7I24/VdbkV34GK
-X-Gm-Gg: AYBFou0T3zhf8L4tWf59N2vxI6vPcAP5RfY2XeDUU1A2B0os9WCF2+LbDxj3GZA7fOW
-	YS9ZQ/3u9fUOdW+yZUWa/H/QQB8zVqBhjbrUnvbEEoUytvU0Uuw12bFo+2VfO7HjH78zrUE6uD0
-	Cc3BoBYoKtx7lBQKhJnFFWKuvUnHIumO4Fb7K0eduCZUwFs3VSBFUEO3+1dUSCVw9JRBcBJQanr
-	K90aY0wCoh1DrUmizDmJB/KVFuRw7n990n6g8ntIpn11boDEUP16+cXLLPaY+NUPuQTVBlgZtSZ
-	cou0YSHjyxt94WUMQkpNY5lsjlsOU87/YI8Sx1qWSM5ygpPJTzhUU0tHhwTqlMTlqxcXKbUWhDI
-	5ofjsunzQedyYc6VVy9Sbn7RdUXcd3kQia/djWced4Xik/B4QUGBppjS80B9XwwyqxUl/F/oGru
-	25RSoniZ9YAj5U8qNLBXa1u9PlXFTyRI8U/w8O1uhDESv8xZ1DWZ67JyfstQw8j6wcjUSu+sGQe
-	ZX/hgPVchFNO+9MRIhTnKtvW+vKfonRRYayAXQfi/4M34RB01xK3hCh
-X-Received: by 2002:adf:e194:0:b0:48d:db77:d124 with SMTP id ffacd0b85a97d-48ddb77d4ccmr30168211f8f.6.1792135216962;
-        Fri, 16 Oct 2026 00:20:16 -0700 (PDT)
-Received: from silicon.doe.home (194-118-146-41.hdsl.highway.telekom.at. [194.118.146.41])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd4f8d12sm3220071f8f.36.2026.10.16.00.20.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Oct 2026 00:20:15 -0700 (PDT)
-From: Stefan =?UTF-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>
-To: Lee Jones <lee@kernel.org>
-Cc: Michael Turquette <mturquette@baylibre.com>,
- Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
- Philipp Zabel <p.zabel@pengutronix.de>, Brian Masney <bmasney@redhat.com>,
- Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
- Russell King <linux@armlinux.org.uk>, Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>,
- Manivannan Sadhasivam <mani@kernel.org>, linux-clk@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-phy@lists.infradead.org,
- mfd@lists.linux.dev
-Subject:
- Re: [PATCH v13 04/13] mfd: zx297520v3: Add a clock and reset MFD driver
-Date: Fri, 16 Oct 2026 09:20:09 +0200
-Message-ID: <D_WXy70pRh6G3mLeAQ5LsQ@gmail.com>
-In-Reply-To: <179198492486.839288.18023026004912443161@kernel.org>
-References:
- <20260927-zx29clk-v13-0-70d8f673386c@gmail.com>
- <20260927-zx29clk-v13-4-70d8f673386c@gmail.com>
- <179198492486.839288.18023026004912443161@kernel.org>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SyaFapeX"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97F231F000C4;
+	Fri, 16 Oct 2026 07:40:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792136424;
+	bh=0pz30Arm3iXS3Q4cxaVxmL7XUFi944ujcvdwlwsKw8g=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=SyaFapeXtzdEUqy3FqVnI0LIHeSv0YjGBcQpFcVTeDZARn/2Fc2p8NQj4ynUgVLua
+	 7txCYI363gs516E6zngozBd30l3VtDvvgtuBHsi0hZ5Eo28hEyA9kEzct050FIs0LS
+	 Kp8mp8RDsCwJLAUVU/e+i0Ji6Tm/VK6rGooiEYMDvtL0XXdEGCkCRmwgn7smZ8FxrJ
+	 7unCgxsu6DrdjmCB3+r7i+kKSyCfoJNzlIWpoE6mxzJ0t0UgPPxzYKcWt7HBvFL3U+
+	 7b/q4GsQR6kQgRi5wVDRyTTUVc9moaSIShG/Q1K6hHNRg5Hk1Xdf6Z1kgodSUjMqXT
+	 MFpzm5BM+RMSw==
+Date: Fri, 16 Oct 2026 08:40:19 +0100
+From: Lee Jones <lee@kernel.org>
+To: Rosen Penev <rosenp@gmail.com>
+Cc: mfd@lists.linux.dev, Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>,
+	OMAP2+ SUPPORT <linux-omap@vger.kernel.org>,
+	open list <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH v3] mfd: twl-core: Allocate modules with twl_private
+Message-ID: <20261016074019.GB2093461@google.com>
+References: <20260926013325.75073-1-rosenp@gmail.com>
+ <179198497618.839288.9266863610003754798@kernel.org>
+ <CAKxU2N_b-wxOuugVm7wzgh4RN9oUCNf1jnHYkKN0--MxHHA_tQ@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="nextPartSBEYK6dqR3etXguuqPrywA";
- micalg="pgp-sha256"; protocol="application/pgp-signature"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAKxU2N_b-wxOuugVm7wzgh4RN9oUCNf1jnHYkKN0--MxHHA_tQ@mail.gmail.com>
 
---nextPartSBEYK6dqR3etXguuqPrywA
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"; protected-headers="v1"
-From: Stefan =?UTF-8?B?RMO2c2luZ2Vy?= <stefandoesinger@gmail.com>
-To: Lee Jones <lee@kernel.org>
-Date: Fri, 16 Oct 2026 09:20:09 +0200
-Message-ID: <D_WXy70pRh6G3mLeAQ5LsQ@gmail.com>
-In-Reply-To: <179198492486.839288.18023026004912443161@kernel.org>
-MIME-Version: 1.0
+--- checkpatch.pl (3 issues) ---
+Line 4: ERROR: Invalid commit separator - some tools may have problems applying this
+Line 32: WARNING: please, no spaces at the start of a line
+Line 41: WARNING: please, no spaces at the start of a line
+----------------------------------
 
-Am Donnerstag, 15. Oktober 2026, 17:34:06 Mitteleurop=C3=A4ische Sommerzeit=
- schrieb=20
-Lee Jones:
-> --- checkpatch.pl (3 issues) ---
-> Line 227: WARNING: DT compatible string "zte,zx297520v3-topcrm" appears
-> un-documented -- check ./Documentation/devicetree/bindings/ Line 228:
-> WARNING: DT compatible string "zte,zx297520v3-matrixcrm" appears
-> un-documented -- check ./Documentation/devicetree/bindings/ Line 229:
-> WARNING: DT compatible string "zte,zx297520v3-lspcrm" appears un-document=
-ed
-> -- check ./Documentation/devicetree/bindings/
-> ----------------------------------
->=20
-> Is Checkpatch right?
+--- checkpatch.pl (2 issues) ---
+Line 27: WARNING: please, no spaces at the start of a line
+Line 36: WARNING: please, no spaces at the start of a line
+----------------------------------
 
-No and yes - the bindings were the first 3 patches of my series. Since you =
-are=20
-cherry-picking the mfd patch only, the bindings will obviously be missing.
+On Thu, 15 Oct 2026, Rosen Penev wrote:
 
-The bindings got merged into the clk tree and made their way into Linux-nex=
-t=20
-already. I guess we can either ignore checkpatch and the issue will resolve=
-=20
-itself when the trees are merged together or I resubmit the mfd patch when =
-the=20
-bindings made their way into kernel/git/lee/mfd.git . At that point I can a=
-lso=20
-re-add the MAINTAINERS change and it should apply without conflict.
+> On Thu, Oct 15, 2026 at 5:05 AM Lee Jones <lee@kernel.org> wrote:
+> >
+> > On Fri, 25 Sep 2026, Rosen Penev wrote:
+> >
+> > > Use a flexible array member to allocate the twl_client array together
+> > > with struct twl_private. This removes a separate devm_kcalloc() and
+> > > keeps the module data tied to the main private structure.
+> > >
+> > > Signed-off-by: Rosen Penev <rosenp@gmail.com>
+> > > ---
+> > >  v3: Capitalize Allocate.
+> > >  v2: don't use twl_get_num_slaves().
+> > >  drivers/mfd/twl-core.c | 16 ++++------------
+> > >  1 file changed, 4 insertions(+), 12 deletions(-)
+> > >
+> > > diff --git a/drivers/mfd/twl-core.c b/drivers/mfd/twl-core.c
+> > > index f86df356d658..0b78fe30e047 100644
+> > > --- a/drivers/mfd/twl-core.c
+> > > +++ b/drivers/mfd/twl-core.c
+> > > @@ -159,7 +159,7 @@ struct twl_private {
+> > >       unsigned int twl_id;
+> > >
+> > >       struct twl_mapping *twl_map;
+> > > -     struct twl_client *twl_modules;
+> > > +     struct twl_client twl_modules[];
+> > >  };
+> > >
+> > >  static struct twl_private *twl_priv;
+> > > @@ -770,7 +770,9 @@ twl_probe(struct i2c_client *client)
+> > >               goto out;
+> > >       }
+> > >
+> > > -     twl_priv = devm_kzalloc(&client->dev, sizeof(struct twl_private),
+> > > +     num_slaves = (id->driver_data & TWL6030_CLASS) ? 3 : 4;
+> >
+> > What's wrong with twl_get_num_slaves()?
+> It relies on twl_priv already being allocated.
 
-I am still fairly new to this - is there an option or issue I missed?
+IMHO, this is too much hoop jumping to save on one pointer.  Code
+cleanliness remains much more important here.  And don't even get me
+started on that mess in include/linux/mfd/twl.h !
 
---nextPartSBEYK6dqR3etXguuqPrywA
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
+Just define TWL_MAX_SLAVES as 4 and have done:
 
------BEGIN PGP SIGNATURE-----
+        struct twl_client twl_modules[TWL_MAX_SLAVES];
 
-iQJPBAABCAA5FiEEQxb0tqoFWyeVMl1sPRO8yFRPGiIFAmrR0CkbFIAAAAAABAAO
-bWFudTIsMi41KzEuMTIsMywyAAoJED0TvMhUTxoivEIP/0vSfR3/njgy0m1LUgVO
-q+5cFYUtXHEkTjMCC9Q+aMIgABBs0SuqM6RR5Rl3VJe5Mv7oqMFg9y8bAu+8+fxn
-wc20CEh9mqrONVRIpI9XleietOAuGLQiOEA7TMLpBJUZcGgAbmmrWR5RFIbff7AX
-xTD2LumJqjHDxvFgzTpZCotBjcRdXbz9OdGDZktoolRSX7ytW0EpCMIbtMxHgjVp
-kXQs03o4E6LjFU5d72FpIFR2wKLMRah37age3BllAZt/34RtVjPb/KZtARSMAOGZ
-rpvXE6CjYhZ336gPYfcqEOFGcrix7X4krLw9HDCukXILHtMIcDAy/9d+42yL3gXf
-yqcQ9w9o8BBNpWoLM5FttbLXu+YgkAkdd4nLCnrZDRseJ+EeBRYM38ARM09q5yie
-GorF56gygRU5iua1+FzC/cPOsynDoXErJVeqf7uF5kmLjEDkW0HnWRTd4hMJ7GMI
-lb61VJSbCft1qkWXgwRbkOKAfjcW8F3oTWfKJmNJV/e/rTlfgiNAxoKjtfQ+SDNG
-BYcy06GCOI3ec0pSeGp6wJDr5/+/ULQr04Vm9t0CGvZXXhCy+r+jVa9gpT82iRbZ
-f9RTyjHnhjnsH4PZVOyqWQvE2zvimN7AwLp9LjFZosE5vyNOUHSaopJBzLy2En7T
-3XFhbOb1zyS57Sj8yBtDKIF2
-=pb5+
------END PGP SIGNATURE-----
+> > > +     twl_priv = devm_kzalloc(&client->dev,
+> > > +                             struct_size(twl_priv, twl_modules, num_slaves),
+> > >                               GFP_KERNEL);
+> > >       if (!twl_priv) {
+> > >               status = -ENOMEM;
+> > > @@ -787,16 +789,6 @@ twl_probe(struct i2c_client *client)
+> > >               twl_regmap_config = twl4030_regmap_config;
+> > >       }
+> > >
+> > > -     num_slaves = twl_get_num_slaves();
+> > > -     twl_priv->twl_modules = devm_kcalloc(&client->dev,
+> > > -                                      num_slaves,
+> > > -                                      sizeof(struct twl_client),
+> > > -                                      GFP_KERNEL);
+> > > -     if (!twl_priv->twl_modules) {
+> > > -             status = -ENOMEM;
+> > > -             goto out;
+> > > -     }
+> > > -
+> > >       for (i = 0; i < num_slaves; i++) {
+> > >               struct twl_client *twl = &twl_priv->twl_modules[i];
+> > >
+> > > --
+> > > 2.55.0
+> > >
+> >
+> > --
+> > Lee Jones
 
---nextPartSBEYK6dqR3etXguuqPrywA--
-
-
-
+-- 
+Lee Jones
