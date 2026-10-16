@@ -1,143 +1,66 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1D9C4219E9;
-	Fri, 16 Oct 2026 07:40:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A13CC3E832A;
+	Fri, 16 Oct 2026 08:17:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792136427; cv=none; b=kjnxXzxQ6mAUQ8qAP5A/wg680gU/fyQt99fdS7aC5ACFI1u2o6Bk6XDsf9CtntyRRlnmXcI/sMQcK2V9BVjv6evZ/9smeUjkiUHWTL+EpTFW69cj6vywqkAMUY3AInGkJEOD1POMq3Vp3XrPAqLg3T+Q7d6YP8AdgnXOJluiD1Q=
+	t=1792138638; cv=none; b=jkoCP0rsAuV2dXf6zLVkcqZEPs+WXnssOTmaNocm8Tu/yIVQBGvV65895EJI0eqwfVyNq2iRS/4YVuArp55HXdmyF8q5vKVREvM60Uk59/M/1MckJzaP1SRFXu3BJsMEGGdNOfP1XbIm/9+TAapXBFDS6EEkf2+DUD83GGDHfTs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792136427; c=relaxed/simple;
-	bh=mofmNipM2hWNiXPFaH0c8qRsysHiI60VRYo4uMGBz40=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=sr7KG3Uf88VACDRxL+TVbuKzQBbVUzuDlcBl1yCpOyc7z6lEYp1b0xqQXfPZbIOjlUGmR69uedUwk/+wy1x5HGTKWAhaUViKSu84Dsn/U/rOyaG+kWPyXORV9hrNs1wpTWA9wtcGqX4kIdBWJrm/63j/Ff/PzvOwkBGvGSvkj/U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SyaFapeX; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1792138638; c=relaxed/simple;
+	bh=AiwyrWDkUODXs8dl4zUFVskBDLUa/lBXzJI5hz0vAZs=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=WVqtQBNolkhnRHlatsjrFu5MgY3ZWS5KY+U1IgYeTAtVUv9CsSsslIx38bV1IR03139Xmtj9+KNo86Svqka3yk02g3Rv32hYFRjkxCMvs5Ux8DizopkFnYjuUJGO7/Wak6O1NYlzKB9PAlYkN2xuawBQn+DmGXketRSCWt46ApQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cXZwcUAo; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SyaFapeX"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97F231F000C4;
-	Fri, 16 Oct 2026 07:40:22 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cXZwcUAo"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 030361F000C4;
+	Fri, 16 Oct 2026 08:17:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792136424;
-	bh=0pz30Arm3iXS3Q4cxaVxmL7XUFi944ujcvdwlwsKw8g=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=SyaFapeXtzdEUqy3FqVnI0LIHeSv0YjGBcQpFcVTeDZARn/2Fc2p8NQj4ynUgVLua
-	 7txCYI363gs516E6zngozBd30l3VtDvvgtuBHsi0hZ5Eo28hEyA9kEzct050FIs0LS
-	 Kp8mp8RDsCwJLAUVU/e+i0Ji6Tm/VK6rGooiEYMDvtL0XXdEGCkCRmwgn7smZ8FxrJ
-	 7unCgxsu6DrdjmCB3+r7i+kKSyCfoJNzlIWpoE6mxzJ0t0UgPPxzYKcWt7HBvFL3U+
-	 7b/q4GsQR6kQgRi5wVDRyTTUVc9moaSIShG/Q1K6hHNRg5Hk1Xdf6Z1kgodSUjMqXT
-	 MFpzm5BM+RMSw==
-Date: Fri, 16 Oct 2026 08:40:19 +0100
+	s=k20260515; t=1792138635;
+	bh=niwuhZlVTOt+qv1gKnE+ldqS5I46ejBDnz5q59j54M0=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=cXZwcUAoR/bhHRyRB0AywNuxxW1CuRdhon4wOKuOCdr3TCzUgUn9etwqaJuLLbF8e
+	 Iql7LlbqqTyZSmOF5MBssIq3miyN0d4cR/Q5hAf8ZNPfhrcJYTlIywoopUcMpWaWvw
+	 AuAbkF+ICsXh0G9oNmJAEoVMjW+IxjzkCfy/Ry6WtUNHfDJhnBEXlFiVCV5+sVb/Cw
+	 mfGyGeO9NGFLo1xXvUSIQ2tzNFLJgbWAxZfqH6Pw5USloYE9NVIIsRay+gXhIc7Ybx
+	 98kRrtaqbt3tLM7ElYFy8OHlZ9xt3d+K49Ft+X0oRlZz7MlY2bzCP30hkzW/5vz5qJ
+	 XDCBpQ4k764eA==
 From: Lee Jones <lee@kernel.org>
-To: Rosen Penev <rosenp@gmail.com>
-Cc: mfd@lists.linux.dev, Aaro Koskinen <aaro.koskinen@iki.fi>,
-	Andreas Kemnade <andreas@kemnade.info>,
-	Kevin Hilman <khilman@baylibre.com>,
-	Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>,
-	OMAP2+ SUPPORT <linux-omap@vger.kernel.org>,
-	open list <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH v3] mfd: twl-core: Allocate modules with twl_private
-Message-ID: <20261016074019.GB2093461@google.com>
-References: <20260926013325.75073-1-rosenp@gmail.com>
- <179198497618.839288.9266863610003754798@kernel.org>
- <CAKxU2N_b-wxOuugVm7wzgh4RN9oUCNf1jnHYkKN0--MxHHA_tQ@mail.gmail.com>
+To: Arnd Bergmann <arnd@arndb.de>, Krzysztof Kozlowski <krzk@kernel.org>, 
+ Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev, 
+ linux-arm-kernel@lists.infradead.org, Long Zhao <longzhao@ambarella.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, 
+ Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+ Long Zhao <zl020895@163.com>, linux-kernel@vger.kernel.org
+In-Reply-To: <20261009-cv75-soc-v1-2-808330e93ff1@ambarella.com>
+References: <20261009-cv75-soc-v1-2-808330e93ff1@ambarella.com>
+Subject: Re: (subset) [PATCH 2/4] dt-bindings: mfd: syscon: add Ambarella
+ CV75 secure scratchpad
+Message-Id: <179213863179.2671759.15755325800663682230.b4-ty@b4>
+Date: Fri, 16 Oct 2026 09:17:11 +0100
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAKxU2N_b-wxOuugVm7wzgh4RN9oUCNf1jnHYkKN0--MxHHA_tQ@mail.gmail.com>
+X-Mailer: b4 0.16-dev-ad80c
 
---- checkpatch.pl (3 issues) ---
-Line 4: ERROR: Invalid commit separator - some tools may have problems applying this
-Line 32: WARNING: please, no spaces at the start of a line
-Line 41: WARNING: please, no spaces at the start of a line
-----------------------------------
+On Fri, 09 Oct 2026 19:00:23 +0800, Long Zhao wrote:
+> Allow ambarella,cv75-sec-scratchpad as a syscon for the shared secure
+> scratchpad registers on CV75.
 
---- checkpatch.pl (2 issues) ---
-Line 27: WARNING: please, no spaces at the start of a line
-Line 36: WARNING: please, no spaces at the start of a line
-----------------------------------
+Applied, thanks!
 
-On Thu, 15 Oct 2026, Rosen Penev wrote:
+[2/4] dt-bindings: mfd: syscon: add Ambarella CV75 secure scratchpad
+      commit: 1c92a441330ce392fb17b348c84fa50c60493b20
 
-> On Thu, Oct 15, 2026 at 5:05 AM Lee Jones <lee@kernel.org> wrote:
-> >
-> > On Fri, 25 Sep 2026, Rosen Penev wrote:
-> >
-> > > Use a flexible array member to allocate the twl_client array together
-> > > with struct twl_private. This removes a separate devm_kcalloc() and
-> > > keeps the module data tied to the main private structure.
-> > >
-> > > Signed-off-by: Rosen Penev <rosenp@gmail.com>
-> > > ---
-> > >  v3: Capitalize Allocate.
-> > >  v2: don't use twl_get_num_slaves().
-> > >  drivers/mfd/twl-core.c | 16 ++++------------
-> > >  1 file changed, 4 insertions(+), 12 deletions(-)
-> > >
-> > > diff --git a/drivers/mfd/twl-core.c b/drivers/mfd/twl-core.c
-> > > index f86df356d658..0b78fe30e047 100644
-> > > --- a/drivers/mfd/twl-core.c
-> > > +++ b/drivers/mfd/twl-core.c
-> > > @@ -159,7 +159,7 @@ struct twl_private {
-> > >       unsigned int twl_id;
-> > >
-> > >       struct twl_mapping *twl_map;
-> > > -     struct twl_client *twl_modules;
-> > > +     struct twl_client twl_modules[];
-> > >  };
-> > >
-> > >  static struct twl_private *twl_priv;
-> > > @@ -770,7 +770,9 @@ twl_probe(struct i2c_client *client)
-> > >               goto out;
-> > >       }
-> > >
-> > > -     twl_priv = devm_kzalloc(&client->dev, sizeof(struct twl_private),
-> > > +     num_slaves = (id->driver_data & TWL6030_CLASS) ? 3 : 4;
-> >
-> > What's wrong with twl_get_num_slaves()?
-> It relies on twl_priv already being allocated.
+--
+Lee Jones [李琼斯]
 
-IMHO, this is too much hoop jumping to save on one pointer.  Code
-cleanliness remains much more important here.  And don't even get me
-started on that mess in include/linux/mfd/twl.h !
-
-Just define TWL_MAX_SLAVES as 4 and have done:
-
-        struct twl_client twl_modules[TWL_MAX_SLAVES];
-
-> > > +     twl_priv = devm_kzalloc(&client->dev,
-> > > +                             struct_size(twl_priv, twl_modules, num_slaves),
-> > >                               GFP_KERNEL);
-> > >       if (!twl_priv) {
-> > >               status = -ENOMEM;
-> > > @@ -787,16 +789,6 @@ twl_probe(struct i2c_client *client)
-> > >               twl_regmap_config = twl4030_regmap_config;
-> > >       }
-> > >
-> > > -     num_slaves = twl_get_num_slaves();
-> > > -     twl_priv->twl_modules = devm_kcalloc(&client->dev,
-> > > -                                      num_slaves,
-> > > -                                      sizeof(struct twl_client),
-> > > -                                      GFP_KERNEL);
-> > > -     if (!twl_priv->twl_modules) {
-> > > -             status = -ENOMEM;
-> > > -             goto out;
-> > > -     }
-> > > -
-> > >       for (i = 0; i < num_slaves; i++) {
-> > >               struct twl_client *twl = &twl_priv->twl_modules[i];
-> > >
-> > > --
-> > > 2.55.0
-> > >
-> >
-> > --
-> > Lee Jones
-
--- 
-Lee Jones
