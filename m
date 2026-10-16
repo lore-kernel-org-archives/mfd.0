@@ -1,33 +1,33 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 11101374183;
-	Fri, 16 Oct 2026 14:19:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCE773890EE;
+	Fri, 16 Oct 2026 14:20:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792160398; cv=none; b=TspYoRzeMT0ZkPo2kEKGlH4rZvpvhyoQxSSeSGGFTrwiQgIL8fofNqtt/hYSuKOh9aam8w4a/SCcYgzpPwi+qFO8oiFxUMHoVQZyMppDDUzeTtO2T5N/14/MA1MSk/V7wpn7FsNK8D0uT76MuYiJCqA0B2juf6bd7i7WviPGIIo=
+	t=1792160457; cv=none; b=oPwWi7dGNCDI4X9SYQyXJEmEjrKsDc5Drb3JUZzW/wkwDavjAl30qOXR3q7xXj8AL2wCdIgJ1hJRlnryB37esZu86UspSQwU0a6VYvYE2ZF2qii4nDEWThV1FU+52YJAFHjNaP5kMJYIkBtRLShjjQ0rHf27+7RIC4owGdcihIQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792160398; c=relaxed/simple;
-	bh=e33pcWEj4NaIxtGiUMS0Yy2J38rPbgLDvznI1s2WW4Y=;
+	s=arc-20240116; t=1792160457; c=relaxed/simple;
+	bh=N2eK4UaZoM2JviA1HdF7k5CR/7cmuoKFs/Bd+2LBg1o=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=KUtZU3IxWeMp4Klh93jYE0AlSjZRGmBKqF7ja4m5S4rrhFSSBvhYThq2PDF8T0tP7c0aQUW0ZxGY3q2YjBCXaC7ljGxug/55BWDF8MnQHzkm4Ufvksa/0Yxe4sIcJA3OHkEILfMwLhFKFsmop0G9z+1Xj94rsIhlfPAxm6zQCOk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GI6wISk0; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=VQbwbe8KbdDu+rfb4EKUGxhlBnHQPDFEn9slLFyQREnPgCe/7XfYsjzawhvydGDJ90CO9DPZqca7EqYBNhDcIU615CE60TNNRnzs2cJOuWMB4ZlJ+uhRgHvG4VNj9OqUAP00lWRTIxuJbAswjatk60KK7wlBbJcAqBCasZE50Ig=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SbgM5Mp9; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GI6wISk0"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E6C741F000C4;
-	Fri, 16 Oct 2026 14:19:52 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SbgM5Mp9"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 22F611F000C5;
+	Fri, 16 Oct 2026 14:20:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792160396;
-	bh=83Aj4f+5NsBgyuf5dIR6BTfkkLlq/tnMxmCVHEhCh2o=;
+	s=k20260515; t=1792160456;
+	bh=WKJyEkx9kgNbinL4+LmYJ4S42zLQXtkBbdiBhPwyvE0=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=GI6wISk0D5sX15J9jlwNWrQpqHxp5vfV8yO1GxDv18ZphrJKZ89A4pYjnyVFB98JK
-	 /y0j/lejHHUNn8+QXcP3C/NCYqGJzLsBeMg33KqN20iX80mIUEeJr0vV3FfJmB+QkZ
-	 cAD7oakhLjw4XVBk7EjTO8W2xMqEFFYdJtYFLufDTPLOOkPuP74V9V0sZaIOBmTs/b
-	 x4mgZmEGY326qwfbyHnB0myxhMbutUVFtN6wvpSWy2KF1TpPmqmLbxb92yHGlLE9we
-	 IC+UohPD3MRE5MNhl75r1vyYpoE5T4phVFvt2DeEm81t+4Zrh8bNHPhO6vr0wRq/EB
-	 QfBGnmHYuD+Lw==
-Message-ID: <ddfe83b7-d4b8-4d56-a295-fde63519bdde@kernel.org>
-Date: Fri, 16 Oct 2026 16:19:50 +0200
+	b=SbgM5Mp9RwCdxmYB0lQ6Tn7MJ27/uDwphxmgMdrKCpJcVAMvKV7A+piTQ6hpgBZfK
+	 Hk8zSRh1cFFbLrQuyDzoR6l8lRa91cIrzc98qG9MnHSQrld0MWOZ6hQJRgadi46YTO
+	 Nq1QFhr116vy9PLYRfbkkMvFK+f/m+HMmllcR905XVEYfdPkBd4Y5eTJ6ObNNqqLLQ
+	 Pl66eIfpnwKpTO4I1ivFWFyBUAZgYB4AgEsFVxEJW1FsbvUSLnP2FUC0OfFFVDB2ni
+	 Dk8NGByNtlS1PflVnYTsoQ6HN2KMBrrq8C7zqEkKeIS0r04JiB317nTL45tH0SXG6T
+	 q2Xi9R7XmxCVA==
+Message-ID: <9ee8a8f1-5e32-4ecc-80dd-027f0424fda4@kernel.org>
+Date: Fri, 16 Oct 2026 16:20:51 +0200
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
@@ -35,8 +35,8 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 1/5] dt-bindings: mfd: Describe the BCM6846 PMC
- complex
+Subject: Re: [PATCH RFC 2/5] dt-bindings: soc: Describe the BCM6846 Processor
+ Monitor Bus
 To: Linus Walleij <linusw@kernel.org>, Lee Jones <lee@kernel.org>,
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
  Conor Dooley <conor+dt@kernel.org>,
@@ -51,7 +51,7 @@ To: Linus Walleij <linusw@kernel.org>, Lee Jones <lee@kernel.org>,
 Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org,
  linux-arm-kernel@lists.infradead.org
 References: <20261014-xg6846b-bcmbca-xrdp-reset-v1-0-daf5d177e113@kernel.org>
- <20261014-xg6846b-bcmbca-xrdp-reset-v1-1-daf5d177e113@kernel.org>
+ <20261014-xg6846b-bcmbca-xrdp-reset-v1-2-daf5d177e113@kernel.org>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -97,129 +97,36 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <20261014-xg6846b-bcmbca-xrdp-reset-v1-1-daf5d177e113@kernel.org>
+In-Reply-To: <20261014-xg6846b-bcmbca-xrdp-reset-v1-2-daf5d177e113@kernel.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 On 14/10/2026 11:48, Linus Walleij wrote:
-> The third generation Platform Management Controller (PMC3) has
-> different subdevices.
-> 
-> Identify the parent with Broadcom's "brcm,bca-pmc-3-1" compatible
-> for the version 3.1 complex.
-> 
-> Describe the complex as a simple-mfd with two system-controller children
-> and a bus child, each owning its register resource.
+> +  reset-controller:
+> +    $ref: /schemas/reset/brcm,bcm6846-pmb-reset.yaml#
 
-That's RFC, but I skimmed cover letter and did not find what you
-actually ask us for and why this is not ready for review, thus few
-things to spare you one more cycle when this is ready for review:
+No such file yet?
 
-> 
-> Assisted-by: LLM
-> Signed-off-by: Linus Walleij <linusw@kernel.org>
-> ---
->  .../devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml  | 98 ++++++++++++++++++++++
->  1 file changed, 98 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml b/Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml
-> new file mode 100644
-> index 000000000000..7ddf84b561aa
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml
-> @@ -0,0 +1,98 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/mfd/brcm,bcm6846-pmc.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Broadcom BCM6846 Platform Management Controller
-> +
-> +maintainers:
-> +  - Linus Walleij <linusw@kernel.org>
-> +
-> +description: |
-
-Drop |
-
-> +  The third generation Platform Management Controller (PMC3) contains
-> +  separate register banks for PMC control and message queues, the
-> +  Processor Monitor Bus (PMB) interface within Procmon, and the Maestro
-> +  processor control registers. Each child owns its register bank. The
-> +  parent provides address translation and does not own a register bank.
-> +
-> +properties:
-> +  compatible:
-> +    items:
-> +      - const: brcm,bca-pmc-3-1
-
-This should be rather SoC specific.
-
-> +      - const: simple-mfd
-> +
-> +  "#address-cells":
-> +    const: 1
-> +
-> +  "#size-cells":
-> +    const: 1
-> +
-> +  ranges:
-> +    maxItems: 1
-> +
-> +patternProperties:
-> +  '^system-controller@[0-9a-f]+$':
-> +    type: object
-> +    additionalProperties: false
-> +    description:
-> +      PMC control and message queue registers, or Maestro processor
-> +      control, status and interrupt registers
-> +
-> +    properties:
-> +      compatible:
-> +        enum:
-> +          - brcm,bcm6846-pmc-control
-> +          - brcm,bcm6846-pmc-maestro
-> +
-> +      reg:
-> +        maxItems: 1
-> +
-> +    required:
-> +      - compatible
-> +      - reg
-
-No resources here except address space, so I question whether these are
-really separate devices. I guess address space is at least big enough to
-mark this as really separate device?
-
-
-> +
-> +  '^bus@[0-9a-f]+$':
-> +    $ref: /schemas/soc/bcm/brcm,bcm6846-pmb.yaml#
-
-No such file. Are you sure this passes tests?
-
-> +    description: PMB configuration, keyhole and address mapping registers
 > +
 > +required:
 > +  - compatible
-> +  - '#address-cells'
-> +  - '#size-cells'
-> +  - ranges
+> +  - reg
 > +
 > +additionalProperties: false
 > +
 > +examples:
 > +  - |
-> +    system-controller@ffb00000 {
-> +        /* Broadcom BCA Platform Management Complex version 3.1 */
-> +        compatible = "brcm,bca-pmc-3-1", "simple-mfd";
-> +        #address-cells = <1>;
-> +        #size-cells = <1>;
-> +        ranges = <0x0 0xffb00000 0x21000>;
+> +    /* Called PMB Processor Monitor Bus in vendor tree */
+> +    bus@ffb20100 {
+> +        compatible = "brcm,bcm6846-pmb";
+> +        reg = <0xffb20100 0x200>;
+> +
+> +        reset-controller {
+> +            compatible = "brcm,bcm6846-pmb-reset";
+> +            #reset-cells = <1>;
 
-ranges should be the second.
-
+Anyway this tells - no resources here. This must be part of the parent
+node, not a separate device.
 
 Best regards,
 Krzysztof
