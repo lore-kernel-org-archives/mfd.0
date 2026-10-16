@@ -1,131 +1,168 @@
-Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B1A6457E4C
-	for <mfd@lists.linux.dev>; Thu, 15 Oct 2026 18:41:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.82.170
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84A9B33509B
+	for <mfd@lists.linux.dev>; Fri, 16 Oct 2026 04:38:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.43
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792089707; cv=pass; b=TXjJJIwm53RU9B0s30BtU1977yZT8aXRllfZP2zpdnWVgTx8nBQlQxw/xqrwxMWboX7KgGzWxDaQGe9+S43e5llT8TiZA3O9ZO5f8k2VPZ2gZbEZVKTCRws/TTPVov4lYqflK2Iu98HbfFFjYSofz79Z0kn2ANw0m8MKshnqGGY=
+	t=1792125504; cv=pass; b=RmgEfu6lcr++jh5j4MBv9T2XVSHHj3L8RbvZnzQMr05VlAV9cjqPjxjtWhLsiKHpDj8N2TjfPRqOc75KDaE2x5ofhPJx/AMUY3h7v4Xu2Z7mOBAIDPDc5kwMuROOL0O/jkzg4juDs46nbuTmLsszfzJ8KiXxVE+SGNBs8FP0OiU=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792089707; c=relaxed/simple;
-	bh=xauoRU92rayWXBiUnhY4lqEI/RzVYWTkJ5X0x3hjblE=;
+	s=arc-20240116; t=1792125504; c=relaxed/simple;
+	bh=2rlenAEdNau3gkuJLtqbh74S+Iv9a38jmstY8ig7buo=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=kQW1gZbISfsF+zlNuqZec9P57ZpOdUSIoJRA7SbmHsK2Z/z3SIKkzh8UP0P5bxBAlDo/4yn8oRlpilNGUUR6H1O/P6Vcc3eZcotm4HPcnDjU8Q8zKVEF2pFv/K5ljrcPxqwJOuhutzK2He3/Ic/YdfWWq/G/O1q/I0HhhLfRdj4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RBfm1Xr9; arc=pass smtp.client-ip=74.125.82.170
+	 To:Cc:Content-Type; b=bZlD6ohJW4ORiXKUL752BmS1CJYVw5Ytd+2CpqsMMINDfJYNLa1xmzgoE/h75wT6QzDPxC0GWw6SiOeipPxw3PTGRGRpVL6RBLIgI/hMks62QQFz/aEX9pc/YPZH5giFp6CpCjDrhPduMu1W7EW3bKBaNzgz1s6X/5VdfTy34/A=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NBAbUiI0; arc=pass smtp.client-ip=209.85.208.43
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RBfm1Xr9"
-Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-35cd4e8bdbdso6913584eec.1
-        for <mfd@lists.linux.dev>; Thu, 15 Oct 2026 11:41:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792089704; cv=none;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NBAbUiI0"
+Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-6ae305e3bd9so8884797a12.0
+        for <mfd@lists.linux.dev>; Thu, 15 Oct 2026 21:38:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792125502; cv=none;
         d=google.com; s=arc-20260327;
-        b=imdXYdLrB6b3tlxrrgvC3JRgfEoN1wS0WtqAlJFsGDE3ttWya6XzkjNliD4+DfYwXC
-         kZ71cvY2UWesyYooMy93uHQZMnnUFD6qIFE3sFA/CjhXGpo9MDvOnC+HtPxHay98nVZV
-         kRG0cjMzPyq5k2JG+mnxugZDG9R8QSzMxSfF8Ep7JZbK0QNcsV9gAkPjpFuUwNUZsyWx
-         e8JGR04Mad7uM6vrXHVXGysJDfQhJMLfYAGQa3qPxwAf54Nb1UXdDhXNXQh/2TBas7q9
-         vReNRlrAapZDqchxM5GEFEmRfgU1TJkrjOwuVk2PcObQsLRVXSbYl/SmXwK/NvVClLXQ
-         5xag==
+        b=Z1zuD/VKe5TgTk2zl5fleGjqbXuV0NLby3BFLHpQIrnRD55qmKybzgL+RRVUdeRcUP
+         5o1FtsXAGe5LnldYfsLaDk3yHAAa+W53/b/diyta6HcmMzytun3Mg0Wol3jsifuNROvz
+         J+ndtIBCsx85/DP7F7iJONZUKUH0eumsuQwvL+HSCpPHWry1+LEcHdCnyBtWPveZQr1r
+         UE6xsGI0iK1TGQ51FHrM0ksrB3S6m8ZNVpFGaILTCHJp+5gWLwQ6tPpcIgx2TFw0/NXd
+         19bpN8Lbda8WtQ0zAffFUWnMtfbs5vo+wJP1DWRjyMlmnZ2JRsERPwtcBz4VOlZLYdmJ
+         abFg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=rsIPZgYgrzIClGBhGTKauA1e1WQnsO82rJ+gDiB7nEg=;
-        fh=1gSbA9KnKbyynQh7Lg+JdKsEkRPoTE6QrF/RU/da4wg=;
-        b=OZ8cUOcnXA6QOspx91oBZ4cZLHYNc0WXaUUVTETOiXCojEY1kk0aF3bpF+tkdw/sCG
-         KV76SjCrq57m3wDIVfmuJVg5kAH6mN00qZ3F2lo4Nd1ITdv6hRHnwyZZqrMvSWX4Tjsd
-         vySNkm/X6fsPeGbeTqn99+4ZlinA35J1MxeeDlM/1HPzxsKqhOVd+Lf71gdxNhrfuFNS
-         0DNJ19R3BCAY1JLvw+wCZFLoqOy8SGu2gpezpTOmzSxaCOA24IVUboWjmWZGF2HaoF+N
-         CWeDaqQHvTZeqMMuOZf0XDikbqZzFtUhAomQLD98P+7PjniDAH4LOhmbbbxHQ37PPhPD
-         J1/g==;
+        bh=k50iRYZEHIeglzuFdsPLFoaxWBDTeuPE91tn2Q2sZzI=;
+        fh=6GVBBnUjXNTCQ1oFAIDphdXFtvSzC4kK0WQD2vOAwhM=;
+        b=Pyo2blJipdypcnYAoTSd+A6SVrxsa2dh27q55l84E9ohkZri/mVT0jNPolFEkGKCt1
+         50C0O0CzyOZm874Izl9BBN8UkfhAvyVXgPNYCveDTrVh5D2YV4Ovrd/E7zoaghx44YVb
+         RiTIZgclbIzXpFP8A2B2tm9RBKaNt0CwvM9WJRfYw0Mbv1QCILtAkhmkNE991JcL0D57
+         qJ6PXBq3QZ3j0pGieLkKNYViFEEV2v9v/9yMUNmp4Kglpmaou6tZAd0bs03lNYOOhdU/
+         +6iyxaNPhscNhv9PNeyup1vEHOEM4l83H8NJefmVm37r7zPd2xws1v8WIjOAcpEp1pPf
+         k3vA==;
         darn=lists.linux.dev
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792089704; x=1792694504; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1792125502; x=1792730302; darn=lists.linux.dev;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=rsIPZgYgrzIClGBhGTKauA1e1WQnsO82rJ+gDiB7nEg=;
-        b=RBfm1Xr9+VPSgubFY0nMKe9GLmreEa7ySlScBNU/vIB9Tx4GjMRSnSOXtR0kA9JHrg
-         tg9lyIHxaDIlda22+Hjl/hsqx9wB1zj4A7Bd2Vs1s+IHQtT3Lx3Ho9BT8PgR1K3QqJpO
-         uf21coiBN0CU7tZY2twAfsMo8PUZpCpUWXLPAs/2BZz1aYEFaao5pny1TabCFmz0pe44
-         PMtZMF9Z/lo0yikwFgBplcM8MN0FaRIaHq31IUWETuQD5W0+9M2cIaBlRZ3CQ50B0LUX
-         OjsY3xHI9cBZizNe3BII7n/hJBJn8Hu8WdGIbGbcJJ3vvjSTskbuj5/ILXXi+qxENvuu
-         jTfg==
+        bh=k50iRYZEHIeglzuFdsPLFoaxWBDTeuPE91tn2Q2sZzI=;
+        b=NBAbUiI0cBuj3Tp3+FAhqnCyMnfPDJn6b5boPWq9F1t2mzI2hK5cLnBa25RYZF7AFd
+         cMYRk3m/lq7WeZJ28ZLuDPpKY6cmtPx0IpdlINVGSURig2Re5M+PuDyxvg7KdmnFJXWU
+         juAnF8GUR8gp+ojTH8fHL1aqBjYLwuTA3nQaVQ/+poZ80G959mbK31tgNAEy8WgDGQvw
+         +xB8TgXNPCtboO2CoMHWKNO0AO8SfVxoUSoCMV+9Cnn4Ha8roKG3iOqpFqMb0H8Gpzl/
+         p2PhlqLAz9ylE3feRKaHvAA/fz0DqIjdTUoNPyW5QTcI/+DxzVV0AWzF4q+bMI5v0rxa
+         3/hA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792089704; x=1792694504;
+        d=1e100.net; s=20260707; t=1792125502; x=1792730302;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=rsIPZgYgrzIClGBhGTKauA1e1WQnsO82rJ+gDiB7nEg=;
-        b=FXdaNiRsgk45oJKqa0RiuUVjRYni+YK5iGtCudj4u2U7n2jp92nER1btRoip0NrwxE
-         PZhLp5RMiH0G0Tka8rO9UQ5u9PGxx+fC2a5ORVDRv3+Znc08kRZcgwzayNI4shefI9zu
-         aPTPwyALRrF6tbha7SdEuisuWFzewEe6rCxXhyzpwz+6ixeC7rf2duqFSu8iwPH33Ikc
-         rMSrsgKxAxBeLJxkJ+Dt0ax+yf379Lgcw+l9w3gkG0zXKlo12wbnNU9624FY8RXlhuIS
-         XTiRfw8t/ZayjypIPaJ2PkCDMee98UGWGi0nCHxbRdr/5ilDu8hBGE/7u1bPJNpdQWey
-         MSAg==
-X-Forwarded-Encrypted: i=1; AKwUvBxM5C8ldvL2RTMJ2SaO36vDDxuDNQjMLpXm+q0Wx0LOT5ubOa+ukDLYoVWI8xsEPUCcCUA=@lists.linux.dev
-X-Gm-Message-State: AFq9FYKCZ7fSlIUZgpFs3G+nT1RafqnczEFB4bOUmU86LCW9cdH9FrHL
-	kgnrVXLE2zf8SaWYAlFY+7a6SYvR4XUHYhBQ0d7M6mt8SBXhlH2cI9WzcVlVn4viVBtSniN7jIT
-	GLvgBYJwvS7Nxzs+J3KSfgwHAwpkNY7I=
-X-Gm-Gg: AYBFou0FT57v9bbXiH7a106jwF819K7UGAPHQwbC3MQnOQraoVF3ITLuIiFc3zBiO6b
-	074yhu3HA6CsaYt/RC/HwKNeIvqZ3enpd+ksLeiis1GG+/P/N133XxKS4byjxHNH6MSaJGX8dTs
-	j/AMp1So4Xet24tCSG7w0P/74PLFIkr9GhcKzdNxYfYnqD7CdgK8m6d0u4+KljlajqiEbcDdlEH
-	08vn42vu/z5PF7RA9lAYpRVBMYJ+wyb2WFRuNkRg9lDffEog+06qUflFRy3ba5iqAh5A0LRij0b
-	DDD5d/HzMdzcOHyx3nNDnpvk89xImbtXP40FYmq6GPYAeBol0q8r70BL3RAAHu0mX+CvbngPZtV
-	xjrj0Bw9pTVwO
-X-Received: by 2002:a05:693c:2a12:b0:35d:2c2b:215a with SMTP id
- 5a478bee46e88-35d2c2b2220mr10102451eec.35.1792089703889; Thu, 15 Oct 2026
- 11:41:43 -0700 (PDT)
+        bh=k50iRYZEHIeglzuFdsPLFoaxWBDTeuPE91tn2Q2sZzI=;
+        b=q2D1uxlgUEFUAIuwO46511YL9uw5C28hyY0j9azeewl1zHMoGxPZrSSUcqQHZl54jw
+         UfeNa6H12tPMgDzCy0Xn/m8v+UdEgtSBWuRVso+h36dWR3r/cufrBL8nsU5N08zgZr1e
+         y36usZ4DmP+jX1nnkfvj3m7+zNRQE3f740ue61fb7BZM7IyGCs8hXHwFtyd846dK8Hgr
+         2D7SIghnu24nSkKUD0kJVza4KKTKdHOU5AHMKbB/DH5mPrQ0nObX+ShE8k5lplJ6usbj
+         khA8GfUHmv/PznNS2GhnZIagZMjo4cNsxoqteE0Gn72FdhGKEHWj2jmTItExS8y0ZicN
+         YXWg==
+X-Gm-Message-State: AFq9FYJoGaf7j2jJTERyzcM43tpWfOUBcQBzDTpoRw3To0fi7CNRkcFA
+	qUMeQuY6gFOLxyeU6TIK/8zPdLGu1/wobh+9E3vAGebHGwO77e+aIyZXUSzgbCPmrtKuJV3uGqz
+	YS2DBC8Ig1x6GLMco+idtVQhsI8ebu7Y=
+X-Gm-Gg: AYBFou0QVf/Su3++hY0lR90TolB7i/Z8IG2vAzcjdqHvwYEYU9R9XxvO/kDSuYaGUaW
+	Ud6cDM2oy1IPlVs8Yn/MyXpUsRmuSIuxvZ4/exrZMyJJNlSZQxbMayhZGlTFXld+G3hWwzWSERh
+	jG77l5plnpCsNjkpxh0nN1wMOZ1c0PVDSiWl5HMMWEJx4TrfrUEgoZHg0PrdUoLtDL2cBQVGHTM
+	tfSgpV1x99GrF7G+V9QH9iNTIKsKu3llgkkEW5+rCLJaNDJ19YvF8kvz5etPC3m8S1OV9fXFDQf
+	alTzUK4Z/3pXIa/jieWFujrt2qLA+up8YWsFuXzuj2s3p9ZrTmAzKO/WLhw6yt8Z1zPCJ1IaUGZ
+	BmxoGQECjfA4ptZ1362BLkdN2GIh6rv5Xu8XDQp3NYrFwboHgjF0EWrJJOhSwXJaWWmVFsP+1Gg
+	pyQeZM7TM1NBpSexgNbs6lvgR+GaWS5S/IA/vZ6ykZ/Fj/4L5+WSM59Z73Apc3XZCICQ==
+X-Received: by 2002:a05:6402:c51a:10b0:6b1:801e:e01b with SMTP id
+ 4fb4d7f45d1cf-6b1801ee296mr11816181a12.20.1792125501771; Thu, 15 Oct 2026
+ 21:38:21 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-References: <20261013173504.451391-7-clamor95@gmail.com> <f26b6bba-2c2e-46b3-9350-0ba0785cf3ba@web.de>
-In-Reply-To: <f26b6bba-2c2e-46b3-9350-0ba0785cf3ba@web.de>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Thu, 15 Oct 2026 21:41:31 +0300
-X-Gm-Features: AclHuK-9dwgzuV_rOZ05ZsN-0-b2YgDg6QoraK02oNxRoGvJeYL0q4NRa-SbCE4
-Message-ID: <CAPVz0n2ubBgOGO5q4ZBYkw-eDSuNh-MpdBk7uoWW69m2QduSgQ@mail.gmail.com>
-Subject: Re: [PATCH v11 6/7] power: supply: Add driver for ASUS Transformer battery
-To: Markus Elfring <Markus.Elfring@web.de>
-Cc: =?UTF-8?B?TWljaGHFgiBNaXJvc8WCYXc=?= <mirq-linux@rere.qmqm.pl>, 
-	linux-pm@vger.kernel.org, linux-input@vger.kernel.org, 
-	linux-leds@vger.kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev, 
-	Conor Dooley <conor+dt@kernel.org>, Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
-	Florian Krischer <florian.krischer@fkr.dev>, Ion Agorria <ion@agorria.com>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Lee Jones <lee@kernel.org>, Pavel Machek <pavel@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Sebastian Reichel <sre@kernel.org>, LKML <linux-kernel@vger.kernel.org>
+References: <20260926013325.75073-1-rosenp@gmail.com> <179198497618.839288.9266863610003754798@kernel.org>
+In-Reply-To: <179198497618.839288.9266863610003754798@kernel.org>
+From: Rosen Penev <rosenp@gmail.com>
+Date: Thu, 15 Oct 2026 21:38:10 -0700
+X-Gm-Features: AclHuK_rJlPsw1gibHYA5u1PE6PZtVa-1YcLBoIsKBrVYTa4gD5TkF2K5Ui3F8s
+Message-ID: <CAKxU2N_b-wxOuugVm7wzgh4RN9oUCNf1jnHYkKN0--MxHHA_tQ@mail.gmail.com>
+Subject: Re: [PATCH v3] mfd: twl-core: Allocate modules with twl_private
+To: Lee Jones <lee@kernel.org>
+Cc: mfd@lists.linux.dev, Aaro Koskinen <aaro.koskinen@iki.fi>, 
+	Andreas Kemnade <andreas@kemnade.info>, Kevin Hilman <khilman@baylibre.com>, 
+	Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>, 
+	"OMAP2+ SUPPORT" <linux-omap@vger.kernel.org>, open list <linux-kernel@vger.kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-=D1=87=D1=82, 15 =D0=B6=D0=BE=D0=B2=D1=82. 2026=E2=80=AF=D1=80. =D0=BE 21:0=
-6 Markus Elfring <Markus.Elfring@web.de> =D0=BF=D0=B8=D1=88=D0=B5:
+On Thu, Oct 15, 2026 at 5:05=E2=80=AFAM Lee Jones <lee@kernel.org> wrote:
 >
-> =E2=80=A6
-> > +++ b/drivers/power/supply/asus-transformer-ec-battery.c
-> > @@ -0,0 +1,289 @@
-> =E2=80=A6
-> > +static const unsigned int asus_ec_battery_prop_offs[] =3D {
-> > +     [POWER_SUPPLY_PROP_STATUS] =3D 1,
-> =E2=80=A6
-> > +};
-> > +
-> > +static int asus_ec_battery_get_value(struct asus_ec_battery_data *priv=
-,
-> > +                                  enum power_supply_property psp)
-> > +{
-> > +     int ret, offs;
-> =E2=80=A6
+> On Fri, 25 Sep 2026, Rosen Penev wrote:
 >
-> The referenced array provides unsigned integers.
-> Would you like to specify a more appropriate data type for the correspond=
-ing variable?
+> > Use a flexible array member to allocate the twl_client array together
+> > with struct twl_private. This removes a separate devm_kcalloc() and
+> > keeps the module data tied to the main private structure.
+> >
+> > Signed-off-by: Rosen Penev <rosenp@gmail.com>
+> > ---
+> >  v3: Capitalize Allocate.
+> >  v2: don't use twl_get_num_slaves().
+> >  drivers/mfd/twl-core.c | 16 ++++------------
+> >  1 file changed, 4 insertions(+), 12 deletions(-)
+> >
+> > diff --git a/drivers/mfd/twl-core.c b/drivers/mfd/twl-core.c
+> > index f86df356d658..0b78fe30e047 100644
+> > --- a/drivers/mfd/twl-core.c
+> > +++ b/drivers/mfd/twl-core.c
+> > @@ -159,7 +159,7 @@ struct twl_private {
+> >       unsigned int twl_id;
+> >
+> >       struct twl_mapping *twl_map;
+> > -     struct twl_client *twl_modules;
+> > +     struct twl_client twl_modules[];
+> >  };
+> >
+> >  static struct twl_private *twl_priv;
+> > @@ -770,7 +770,9 @@ twl_probe(struct i2c_client *client)
+> >               goto out;
+> >       }
+> >
+> > -     twl_priv =3D devm_kzalloc(&client->dev, sizeof(struct twl_private=
+),
+> > +     num_slaves =3D (id->driver_data & TWL6030_CLASS) ? 3 : 4;
 >
-
-This is a nitpick, it does not affect anything.
-
-> Regards,
-> Markus
+> What's wrong with twl_get_num_slaves()?
+It relies on twl_priv already being allocated.
+>
+> > +     twl_priv =3D devm_kzalloc(&client->dev,
+> > +                             struct_size(twl_priv, twl_modules, num_sl=
+aves),
+> >                               GFP_KERNEL);
+> >       if (!twl_priv) {
+> >               status =3D -ENOMEM;
+> > @@ -787,16 +789,6 @@ twl_probe(struct i2c_client *client)
+> >               twl_regmap_config =3D twl4030_regmap_config;
+> >       }
+> >
+> > -     num_slaves =3D twl_get_num_slaves();
+> > -     twl_priv->twl_modules =3D devm_kcalloc(&client->dev,
+> > -                                      num_slaves,
+> > -                                      sizeof(struct twl_client),
+> > -                                      GFP_KERNEL);
+> > -     if (!twl_priv->twl_modules) {
+> > -             status =3D -ENOMEM;
+> > -             goto out;
+> > -     }
+> > -
+> >       for (i =3D 0; i < num_slaves; i++) {
+> >               struct twl_client *twl =3D &twl_priv->twl_modules[i];
+> >
+> > --
+> > 2.55.0
+> >
+>
+> --
+> Lee Jones
