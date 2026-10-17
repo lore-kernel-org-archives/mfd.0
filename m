@@ -1,92 +1,76 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA78C3D902D
-	for <mfd@lists.linux.dev>; Sat, 17 Oct 2026 07:20:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.2
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6175037DEBE;
+	Sat, 17 Oct 2026 16:37:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792221635; cv=none; b=EzYKwMnFlTVP4MlelUYSf3Naq9tEBg9v+cO424N4hBZoxTUSDmVC2cXn7x7MEFNmerkuSh2UxHF+ObQUd+Fw7AvNKYCDV2Rat17rzUUDAbsvkR9pxnsaH3qXdpxmH94zD/EHkjtIOW06Rel2lz/MesEpgbSaNLqB0scGd5ePd80=
+	t=1792255055; cv=none; b=cSUE01NliVNcBk2g9H6nykQYKpAvKhGooHp6MlaXpQZ5xeSAkX1cj8lYrU3rWsnRd2xBzI3rljZerppkkdJ0HS1voggS+AT1SUk1JTHBvTySAtYBegAXG8byMoo7Y5su8YtdXbw85QWwH9wabBNIfajoSFqBzpzNpEN1Ot2Ak/0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792221635; c=relaxed/simple;
-	bh=wK8zhpbKf03va39fLgZs7nlEQWK7EIsFXJx69/DDCyE=;
-	h=Date:From:To:Subject:In-Reply-To:References:Content-Type:
-	 MIME-Version:Message-ID; b=TJuztj3kxI1WYjd7za7EBQV2HuqWW5iwqZcMoV6wI3+KeR9ybygbMJ94UXTnM+LCf9Z8H+ZkegmPF3XrQ8uYv32JW2b/XcRcInEZ+8q5t4iqp+xAfiOCi/GyfdTuSjtRRQTComozAfJua68atAvKC8hsMgMMbg6JRUX/uvAoT2g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=X1Pnis5A; arc=none smtp.client-ip=220.197.31.2
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	s=arc-20240116; t=1792255055; c=relaxed/simple;
+	bh=Kxy3m8TYu9b7PA1MA5QaC7rocyw0sBLIPEymVIRi1DI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=PG76O4dKmRCPUGpzWPd1Q6N6edT0cjtEf4Vta2fNF5MKDRzxPwzDew+uEFv5UDhsWzFtg5iV1nWzb7b9VZdJHC1KZZY3gigyRPJirJomq/mQ/C/mt2FCAHia6l9YHsa73MqKpwk+dmuqp/2IpBqh5csFVhnJdGvOTIH5aJxtZuY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ajgpPwRD; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="X1Pnis5A"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=Date:From:To:Subject:Content-Type:MIME-Version:
-	Message-ID; bh=wK8zhpbKf03va39fLgZs7nlEQWK7EIsFXJx69/DDCyE=; b=X
-	1Pnis5AcuX2taFW48lw9jUk6msB3Pm1nsDtw3IivpOT3gMB6EmC6NZB8vk7ggosL
-	7jPRKaM32UUA6QCs2UzrrT2blVu1SeHCv/X0u2Y5nZ0ogMWfq5DQVhZ43toEiw70
-	/f5bakpt8NDGVTIoG7TIR8XhVVvtpGaJD/6HCTY+6Q=
-Date: Sat, 17 Oct 2026 15:20:25 +0800 (CST)
-From: "jiale yao" <19888972804@163.com>
-To: "Lee Jones" <lee@kernel.org>, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Subject: Re:[PATCH 2/2] mfd: tps65010: queue I/O work on freezable workqueue
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version 2023.4-cmXT build
- 20260511(2e539873) Copyright (c) 2002-2026 www.mailtech.cn 163com
-In-Reply-To: <20261016100503.2581955-3-yaojiale02@163.com>
-References: <20261016100503.2581955-1-yaojiale02@163.com>
- <20261016100503.2581955-3-yaojiale02@163.com>
-X-NTES-SC: AL_Qu2SAP6Zvk4p4yKRYukdnEkQgO0/WsS1vfQu2Y5Wc+wEgCbN4z0YdHxaDHHN8e6DOSarnDiOagNHzNRcb4JH/ks/6Tfh3fVMat4grsz6vQ==
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=GBK
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ajgpPwRD"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1BA291F000C5;
+	Sat, 17 Oct 2026 16:37:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792255054;
+	bh=5YQWSI4ybuP3+qZ2WIH2lJW4okdIiZktG/jNbRw5lxc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=ajgpPwRDVpSR9qx+gRAnR4zdOE14k/fr+tSCNxvDM9/65ngZPp1Ifrc7Ip9953irt
+	 Dr7Evyr7Ze7W+5VoACIzLie7isRpU6TtSFfFpVcvc+m2G8p1sau9lo9HZzh1h5i0Ip
+	 5difS6URCxy1Y9xpyryb4Rc2msfm9AYTzYzx7GfMAPMHI01c2ttXn9XJKxdtZhceoF
+	 1wmwj/SY01hBxkRr8Rl5iTuHIIit6IwmzaWT7SoOoTo3h29TsEgZ4Iu+JyS8AfCU9S
+	 W/ogJWye0OPYbC+FiuDh8ELsqPoeH8gT8IXip6qiat3mN8x0M3ZZ3PJAEx+gY8mKCC
+	 YBFouicgvrr4Q==
+Date: Sat, 17 Oct 2026 18:37:28 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Lee Jones <lee@kernel.org>, Daniel Thompson <danielt@kernel.org>, 
+	Jingoo Han <jingoohan1@gmail.com>, Helge Deller <deller@gmx.de>, 
+	Kiran Gunda <quic_kgunda@quicinc.com>, Subbaraman Narayanamurthy <quic_subbaram@quicinc.com>, 
+	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Stephen Boyd <sboyd@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+	Dmitry Baryshkov <lumag@kernel.org>, linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	linux-fbdev@vger.kernel.org, linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
+	mfd@lists.linux.dev
+Subject: Re: [PATCH 3/9] dt-bindings: regulator: add Qualcomm LCDB regulator
+Message-ID: <20261017-daffodil-buzzard-of-amplitude-9e817f@quoll>
+References: <20261015-sm8150-display-card-v1-0-5c14928cef29@oss.qualcomm.com>
+ <20261015-sm8150-display-card-v1-3-5c14928cef29@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Message-ID: <18acd2b2.17aa.1a148bbbbdc.Coremail.19888972804@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID:ZygvCgD3_3K5IdNqhPpaAA--.132W
-X-CM-SenderInfo: x1dryxhdohiji6rwjhhfrp/xtbCzRkGQGrTIbnsdgAA3p
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261015-sm8150-display-card-v1-3-5c14928cef29@oss.qualcomm.com>
 
-QXQgMjAyNi0xMC0xNiAxODowNTowMywgIkppYWxlIFlhbyIgPHlhb2ppYWxlMDJAMTYzLmNvbT4g
-d3JvdGU6Cj5UaGUgVFBTNjUwMTAgZXZlbnQgd29ya2VyIHBlcmZvcm1zIFNNQnVzIHRyYW5zZmVy
-cyBhbmQgY2FuIHJlc2NoZWR1bGUKPml0c2VsZiB0byBwb2xsIHRoZSBjaGFyZ2luZyBzdGF0ZS4g
-VGhlIHBvd2VyLWVmZmljaWVudCBzeXN0ZW0gd29ya3F1ZXVlCj5pcyBub3QgZnJlZXphYmxlLCBz
-byBwZW5kaW5nIHdvcmsgY2FuIGFjY2VzcyBhbiBJMkMgYWRhcHRlciBhZnRlciBpdCBoYXMKPmJl
-ZW4gc3VzcGVuZGVkLgo+Cj5Vc2UgdGhlIGZyZWV6YWJsZSBwb3dlci1lZmZpY2llbnQgd29ya3F1
-ZXVlIGZvciBldmVyeSBzY2hlZHVsaW5nIHBhdGguCj5UaGlzIHByZXNlcnZlcyB0aGUgcG93ZXIt
-ZWZmaWNpZW50IGJlaGF2aW9yIHdoaWxlIGZyZWV6aW5nIEkvTyBhY3Jvc3MKPnN5c3RlbSBzdXNw
-ZW5kLgo+CgpGaXhlczogNzJjZDc5OTU0NGYyICgiW1BBVENIXSBJMkM6IGFkZCBpMmMgZHJpdmVy
-IGZvciBUUFM2NTAxeCIpCgo+U2lnbmVkLW9mZi1ieTogSmlhbGUgWWFvIDx5YW9qaWFsZTAyQDE2
-My5jb20+Cj4tLS0KPiBkcml2ZXJzL21mZC90cHM2NTAxMC5jIHwgMTAgKysrKystLS0tLQo+IDEg
-ZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKyksIDUgZGVsZXRpb25zKC0pCj4KPmRpZmYgLS1n
-aXQgYS9kcml2ZXJzL21mZC90cHM2NTAxMC5jIGIvZHJpdmVycy9tZmQvdHBzNjUwMTAuYwo+aW5k
-ZXggOGExNDRlYzUyMjAxLi5iMDM4ZDY3ZmY3MTUgMTAwNjQ0Cj4tLS0gYS9kcml2ZXJzL21mZC90
-cHM2NTAxMC5jCj4rKysgYi9kcml2ZXJzL21mZC90cHM2NTAxMC5jCj5AQCAtMjMwLDcgKzIzMCw3
-IEBAIHN0YXRpYyBpbnQgZGJnX3Nob3coc3RydWN0IHNlcV9maWxlICpzLCB2b2lkICpfKQo+IAlz
-ZXFfcHJpbnRmKHMsICJtYXNrMiAgICAgJXNcbiIsIGJ1Zik7Cj4gCS8qIGlnbm9yZSBhY2tpbnQy
-ICovCj4gCj4tCXF1ZXVlX2RlbGF5ZWRfd29yayhzeXN0ZW1fcG93ZXJfZWZmaWNpZW50X3dxLCAm
-dHBzLT53b3JrLAo+KwlxdWV1ZV9kZWxheWVkX3dvcmsoc3lzdGVtX2ZyZWV6YWJsZV9wb3dlcl9l
-ZmZpY2llbnRfd3EsICZ0cHMtPndvcmssCj4gCQkJICAgUE9XRVJfUE9MTF9ERUxBWSk7Cj4gCj4g
-CS8qIFZNQUlOIHZvbHRhZ2UsIGVuYWJsZSBsb3dwb3dlciwgZXRjICovCj5AQCAtMzg4LDcgKzM4
-OCw3IEBAIHN0YXRpYyB2b2lkIHRwczY1MDEwX2ludGVycnVwdChzdHJ1Y3QgdHBzNjUwMTAgKnRw
-cykKPiAJCQkmJiAodHBzLT5jaGdzdGF0dXMgJiAoVFBTX0NIR19VU0J8VFBTX0NIR19BQykpKQo+
-IAkJcG9sbCA9IDE7Cj4gCWlmIChwb2xsKQo+LQkJcXVldWVfZGVsYXllZF93b3JrKHN5c3RlbV9w
-b3dlcl9lZmZpY2llbnRfd3EsICZ0cHMtPndvcmssCj4rCQlxdWV1ZV9kZWxheWVkX3dvcmsoc3lz
-dGVtX2ZyZWV6YWJsZV9wb3dlcl9lZmZpY2llbnRfd3EsICZ0cHMtPndvcmssCj4gCQkJCSAgIFBP
-V0VSX1BPTExfREVMQVkpOwo+IAo+IAkvKiBhbHNvIHBvdGVudGlhbGx5IGdwaW8taW4gcmlzZSBv
-ciBmYWxsICovCj5AQCAtNDM2LDcgKzQzNiw3IEBAIHN0YXRpYyBpcnFyZXR1cm5fdCB0cHM2NTAx
-MF9pcnEoaW50IGlycSwgdm9pZCAqX3RwcykKPiAKPiAJZGlzYWJsZV9pcnFfbm9zeW5jKGlycSk7
-Cj4gCXNldF9iaXQoRkxBR19JUlFfRU5BQkxFLCAmdHBzLT5mbGFncyk7Cj4tCXF1ZXVlX2RlbGF5
-ZWRfd29yayhzeXN0ZW1fcG93ZXJfZWZmaWNpZW50X3dxLCAmdHBzLT53b3JrLCAwKTsKPisJcXVl
-dWVfZGVsYXllZF93b3JrKHN5c3RlbV9mcmVlemFibGVfcG93ZXJfZWZmaWNpZW50X3dxLCAmdHBz
-LT53b3JrLCAwKTsKPiAJcmV0dXJuIElSUV9IQU5ETEVEOwo+IH0KPiAKPkBAIC02OTQsNyArNjk0
-LDggQEAgaW50IHRwczY1MDEwX3NldF92YnVzX2RyYXcodW5zaWduZWQgbUEpCj4gCQkJJiYgdGVz
-dF9hbmRfc2V0X2JpdCgKPiAJCQkJRkxBR19WQlVTX0NIQU5HRUQsICZ0aGVfdHBzLT5mbGFncykp
-IHsKPiAJCS8qIGdhZGdldCBkcml2ZXJzIGNhbGwgdGhpcyBpbl9pcnEoKSAqLwo+LQkJcXVldWVf
-ZGVsYXllZF93b3JrKHN5c3RlbV9wb3dlcl9lZmZpY2llbnRfd3EsICZ0aGVfdHBzLT53b3JrLAo+
-KwkJcXVldWVfZGVsYXllZF93b3JrKHN5c3RlbV9mcmVlemFibGVfcG93ZXJfZWZmaWNpZW50X3dx
-LAo+KwkJCQkgICAmdGhlX3Rwcy0+d29yaywKPiAJCQkJICAgMCk7Cj4gCX0KPiAJbG9jYWxfaXJx
-X3Jlc3RvcmUoZmxhZ3MpOwo+QEAgLTEwNTIsNCArMTA1MywzIEBAIHN0YXRpYyB2b2lkIF9fZXhp
-dCB0cHNfZXhpdCh2b2lkKQo+IAlpMmNfZGVsX2RyaXZlcigmdHBzNjUwMTBfZHJpdmVyKTsKPiB9
-Cj4gbW9kdWxlX2V4aXQodHBzX2V4aXQpOwo+LQo+LS0gCj4yLjM0LjEK
+On Thu, Oct 15, 2026 at 11:58:40AM +0300, Dmitry Baryshkov wrote:
+> Several Qualcomm PMICs have an LCDB block providing the positive and
+> negative bias rails for LCD panels. It is not supported by Linux, so
+> boards using it either model the rails as dummy fixed regulators and
+> depend on the state left by the bootloader.
+> 
+> Describe the LCDB regulator present on the PM8150L. Use it as a fallback
+> compatible for LCDB blocks on PMI632 and PM6150L. PM660L has a different
+> version of LCDB block, so it's not being covered.
+> 
+> Assisted-by: LLM
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> ---
+>  .../bindings/regulator/qcom,pm8150l-lcdb.yaml      | 81 ++++++++++++++++++++++
+>  1 file changed, 81 insertions(+)
+
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+
+Best regards,
+Krzysztof
+
