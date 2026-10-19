@@ -1,161 +1,107 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 777EC35C1B1;
-	Mon, 19 Oct 2026 02:13:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88621473C80
+	for <mfd@lists.linux.dev>; Mon, 19 Oct 2026 04:34:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792376020; cv=none; b=VtVeHdWYXKkpZkeuE1rV2jZkTmi/haIYr8J9EGh1edr7ZMFVtorSMJvNlFe7Q1hf5aHYUc9liS/+t0oRlATD7VU/10Urw9Jpubx9xoTmzXoChbYIQc+9ONWpUNOJtxqQKry7x0SdrLhsNJEBSEcs9PnsC/o7DdVOPHl+F5fCFHY=
+	t=1792384486; cv=none; b=QKfVOAOOpaLy6nQuScpcEVe6ugvtRsZLSC9f3XQlkou/wc2hgWSqzyl7WVKNxOp5MK7Ng2EFt9bqetlxbRdXvItt9AlPdQZNeeaZvReYk20d8WiZR0yc/rry01NUv/AVa7Y9lRzrFK0lqCKszgNE1oSfpmTAFK1DfB6mNRGPypw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792376020; c=relaxed/simple;
-	bh=wxDdBy0anSXi0XacyEa0RDHc47kzkwLEQAmg0kUTRwE=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=LqlJJytt5HwY1Tr8RT0XuTdGCyx9EziO0QXMGK7g3EgTlKLQjeX/AN5wF/F5YRL0Bf2QRH6qRbwq6Y1TdmXMdm0KHfvdAYJb/aAnpWFeIK8s0BqlE4HrEAkO5y5fOm30kqXB2Uge4CYNeMwj45bVJZga2w7/VFVpIGx9B/9c508=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GKU6Xjhh; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1792384486; c=relaxed/simple;
+	bh=mHhqrgsAoLJr5sWC8AoEBXHRf3BoJJXAUS79JWBs8AU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=EWu6+unMX/aKakBU6KwDuicv2VbBzb/Szw8r699NPskbWyxF+lD5dier/Yo5/Gpduu+a2V/u1jIIDqgf7jLc9Ja2T7jVxLxFSkh8wlF/PsCs9wE7ERQ9O7lcqKCXeIgnapIwggF5/wTVzkgjL/BzDsMnDTyNlDbmV90AB21cZNw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=jZT2KO2d; arc=none smtp.client-ip=198.175.65.18
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GKU6Xjhh"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F52E1F000C4;
-	Mon, 19 Oct 2026 02:13:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792376019;
-	bh=OTeAHhDu6rLdIC+c7Ig9cS6MPdi5FFeMFdNOO55dM1c=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=GKU6XjhhijXdkLvmKWqe2lHLbB69e8YJyKEBgRBXBX0UKQ9bA6S9G+Om7USxlUmSe
-	 0pQX1fEdIOiBPTfh2TQf6BFvoNNh9Ga0CwTWmPoeeEQcp3d9kVQVatwi84yNU75fD3
-	 rwxyaZcB1ozG7EuT5EpDA/o1xO+w/wN4s4C7IaxDzKSuZuC+TQJXSy2+EL9wOSJzM5
-	 AV+CEses5L1/LgQBDoJVCtXOCizpoHWfDmsJC/Nc1g9v11BEr+Z7/Xm2wfBPrTWM4x
-	 DkE92auy1x01Gcu2YXObxGdnKnjqOizVA83Mw/k7G3lFUiEJs+taTrAmvtC1vDggBi
-	 07MykhZB0Xhnw==
-Date: Mon, 19 Oct 2026 03:13:33 +0100
-From: Jonathan Cameron <jic23@kernel.org>
-To: Ryan Brue <ryanbrue.dev@gmail.com>
-Cc: David Lechner <dlechner@baylibre.com>, Nuno =?UTF-8?B?U8Oh?=
- <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, Rob Herring
- <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Lee
- Jones <lee@kernel.org>, linux-iio@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org,
- mfd@lists.linux.dev, Roman Vivchar <rva333@protonmail.com>, Luca Leonardo
- Scorcia <l.scorcia@gmail.com>, Andy Shevchenko
- <andriy.shevchenko@intel.com>
-Subject: Re: [PATCH v4 2/3] iio: adc: mt6397-auxadc: add mt6397 PMIC AUXADC
- driver
-Message-ID: <20261019031333.1010682f@jic23-hlaptop>
-In-Reply-To: <20260928-rbrue-suez-upstreaming-mt6397-auxadc-v4-2-23533a0d30e3@gmail.com>
-References: <20260928-rbrue-suez-upstreaming-mt6397-auxadc-v4-0-23533a0d30e3@gmail.com>
-	<20260928-rbrue-suez-upstreaming-mt6397-auxadc-v4-2-23533a0d30e3@gmail.com>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="jZT2KO2d"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1792384481; x=1823920481;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=mHhqrgsAoLJr5sWC8AoEBXHRf3BoJJXAUS79JWBs8AU=;
+  b=jZT2KO2dqqbaVNlg9ocCNhBYW/bnvzwCzOq7kn1u7w7KHdbOTzae+fxT
+   MfkT3oK9mMQedp2JPWPUzacCKWVZH3s0PVY/TzqYJljqMyHlJReR8A8Wk
+   tXC4rqFVVj3ptWEE1Je4T2CvIeVTw7bnetBM4dWdFkVZMnvTi9TiYv1VB
+   3ToHK6otcHCaB2H5sVIx5O6w7YvlkJV+jH+DFSzrvCBkEVmLisqCMVSKn
+   /pKCGfZxqWAGz+gzX5QkoZeo1NsGBJcs9z/2Yk68/GO2LisRQuX81V9ru
+   Xyq274GRlax0s5RQDecQM/hIDo/NMQk4Q6r5LN3Ff1asJr/EsK0cuFZzQ
+   Q==;
+X-CSE-ConnectionGUID: XFSWC15zSCWwANDW7rbYaA==
+X-CSE-MsgGUID: uQa2f2/BTha1GuBat0h/ZQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11939"; a="1069597"
+X-IronPort-AV: E=Sophos;i="6.27,166,1787036400"; 
+   d="scan'208";a="1069597"
+Received: from orviesa006.jf.intel.com ([10.64.159.146])
+  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Oct 2026 21:34:40 -0700
+X-CSE-ConnectionGUID: ODvNpmOmSFG17sEOfufQRw==
+X-CSE-MsgGUID: Sp7PrqLKSo+Eoxq4ZN4GFw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,166,1787036400"; 
+   d="scan'208";a="2495021"
+Received: from black.igk.intel.com ([10.91.253.5])
+  by orviesa006.jf.intel.com with ESMTP; 18 Oct 2026 21:34:39 -0700
+Received: by black.igk.intel.com (Postfix, from userid 1001)
+	id 4375C99; Mon, 19 Oct 2026 06:34:37 +0200 (CEST)
+Date: Mon, 19 Oct 2026 06:34:37 +0200
+From: Mika Westerberg <mika.westerberg@linux.intel.com>
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Navon John Lukose <navonjohnlukose@gmail.com>,
+	Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>,
+	Lee Jones <lee@kernel.org>, mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH RFC] mfd: intel-lpss: Set d3hot_delay to 0
+Message-ID: <20261019043437.GY176164@black.igk.intel.com>
+References: <20261016114347.23633-1-navonjohnlukose@gmail.com>
+ <atIjpJn1Y0GPmQbP@ashevche-desk.local>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <atIjpJn1Y0GPmQbP@ashevche-desk.local>
 
-On Mon, 28 Sep 2026 15:57:20 -0500
-Ryan Brue <ryanbrue.dev@gmail.com> wrote:
+Hi,
 
-> The mt6397 AUXADC is a 10-bit ADC behind the SoC's PMIC wrapper. On boards
-> built around this PMIC it is the only way to read the battery: the SoC's
-> AUXADC is wired to board thermistors and the charger ICs these boards use
-> have no ADC of their own.
+On Fri, Oct 16, 2026 at 04:16:20PM +0300, Andy Shevchenko wrote:
+> On Fri, Oct 16, 2026 at 05:13:47PM +0530, Navon John Lukose wrote:
+> > intel-lpss-pci already clears d3cold_delay, but every runtime resume of an
+> > LPSS controller still sleeps the default 10 ms d3hot_delay in
+> > pci_power_up().
+> > 
+> > On Arrow Lake-H (Lenovo Yoga Pro 7 14IAH10) the delay costs 8-16 ms per
+> > resume of the touchpad's I2C controller, which lands on the first
+> > touchpad report after each 1 s autosuspend. With d3hot_delay set to 0 the
+> > power-up takes 64-256 us and the I2C transfers that follow complete
+> > without errors.
 > 
-> Add a driver exposing the battery voltage and battery temperature
-> channels. Only those two are described, so a channel ID in the device tree
-> indexes the driver's channel array rather than the PMIC's channel number,
-> as mt6323-auxadc does. The ready bit lives in a channel's raw result
-> register, but the value comes from the chip's factory-calibrated copy.
+> So, do you state that this patch fixes some bad touchpad behaviour? If so,
+> please, provide some logs.
 > 
-> The battery voltage is measured through ISENSE, because a board with a
-> switching charger in the power path leaves BATSNS on the charger's system
-> rail instead of on the pack. The thermistor only reads correctly with the
-> PMIC's battery-detect bias and input buffer enabled, which take 20 ms to
-> settle. Both are switched back off afterwards.
+> > Commit 815b4448198f ("i3c: mipi-i3c-hci-pci: Set d3hot_delay to 0 for Intel
+> > controllers") does the same for the Intel I3C controllers.
 > 
-> Reads average sixteen conversions in software; the chip's sample
-> accumulator makes no measurable difference at any setting, so it is left
-> at one sample per conversion.
+> Okay, it means they were tested.
 > 
-> Assisted-by: LLM
-> Signed-off-by: Ryan Brue <ryanbrue.dev@gmail.com>
-Hi Ryan
+> ...
+> 
+> > Notes:
+> >     RFC because I could only test Arrow Lake-H, and this applies to every LPSS
+> >     generation the driver handles, back to Sunrise Point. Andy, do any of the
+> >     older ones need the D3hot->D0 delay? If so I can limit it to newer IDs
+> >     through the driver data.
+> 
+> AFAIK 10 ms for D3hot delay is in accordance with PCI specification.
+> Yes, we use quirk_remove_d3hot_delay() for very old Intel Atom SoCs,
+> but I have no idea about Skylake line of products.
+> 
+> Mika, Ilpo, do you have any ideas or comments on this?
 
-Sorry for the delay.
-
-Just one thing inline. If I wasn't tired from a long day
-of review I might just have made the change and asked you
-to check it. So bad luck on that!
-
-Thanks,
-
-Jonathan
-
-> diff --git a/drivers/iio/adc/mt6397-auxadc.c b/drivers/iio/adc/mt6397-auxadc.c
-> new file mode 100644
-> index 000000000000..8d1702658876
-> --- /dev/null
-> +++ b/drivers/iio/adc/mt6397-auxadc.c
-
-> +static void mt6397_auxadc_release(struct mt6397_auxadc *adc,
-> +				  const struct iio_chan_spec *chan)
-> +{
-> +	/* Lowering START leaves the converter unarmed between reads. */
-> +	regmap_clear_bits(adc->regmap, MT6397_AUXADC_CON1, MT6397_AUXADC_CON1_START);
-> +
-> +	if (chan->channel == MT6397_AUXADC_ISENSE)
-> +		mt6397_auxadc_isense_disable(adc);
-> +	else
-> +		mt6397_auxadc_battemp_bias_off(adc);
-> +}
-> +
-> +static int mt6397_auxadc_read_channel(struct iio_dev *indio_dev,
-> +				      const struct iio_chan_spec *chan,
-> +				      int *val)
-> +{
-> +	struct mt6397_auxadc *adc = iio_priv(indio_dev);
-> +	int ret;
-> +
-> +	mutex_lock(&adc->lock);
-> +
-> +	if (chan->channel == MT6397_AUXADC_ISENSE) {
-> +		ret = mt6397_auxadc_isense_enable(adc);
-> +		if (ret)
-> +			goto out_release;
-> +
-> +		fsleep(MT6397_AUXADC_ISENSE_SETTLE_US);
-> +	} else {
-> +		ret = mt6397_auxadc_battemp_bias_on(adc);
-> +		if (ret)
-> +			goto out_release;
-> +
-> +		fsleep(MT6397_AUXADC_BATTEMP_SETTLE_US);
-> +	}
-> +
-> +	ret = mt6397_auxadc_read_burst(adc, chan, val);
-> +
-> +out_release:
-> +	mt6397_auxadc_release(adc, chan);
-This ends up rather confusing.  Would you mind instead doing it as a pair of helpers
-and a top level bit of code that does.
-
-	guard(mutex)(&adc->lock);
-	if (chan->channel == MT6397_AUXADC_ISENSE) {
-		return mt6397_auxadc_isense_read();
-	else
-		return mt6397_auxadc_battemp_read();
-
-
-The only thing that get duplicated is the call to read_burst()
-which seems simpler than having a pair of if / else on the channel
-(one hidden in this release).
-
-> +	mutex_unlock(&adc->lock);
-> +
-> +	return ret;
-> +}
-
-
+Like you say it's requirement of the PCI spec. However, since these are
+really not PCI connected devices the delay likely is not needed as seen
+here. No objections from my side.
