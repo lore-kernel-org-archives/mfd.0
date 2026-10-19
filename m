@@ -1,38 +1,38 @@
-Received: from out-2z4y-a151.jellyfish.systems (out-2z4y-a151.jellyfish.systems [198.54.127.151])
+Received: from out-2z4y-a135.jellyfish.systems (out-2z4y-a135.jellyfish.systems [198.54.127.135])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A865C48DB25
-	for <mfd@lists.linux.dev>; Mon, 19 Oct 2026 07:32:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.54.127.151
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B19F4534B7
+	for <mfd@lists.linux.dev>; Mon, 19 Oct 2026 07:41:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.54.127.135
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792395131; cv=none; b=doLgTmmuVpPs8MQJSr3BfMcd5Z5eXi0zYpTB+EG2jkpXGSFh3/aLs98Q4At+EO4SNt1nW1/65EvFuC9FK0E6QDRmvYRMjeQL+fmjCiFW7/x+CMVjuAstTQgaWPrTOCNjaw8382G5a1+1z09oldpqItry8qy/CiKWhOArQB99pCs=
+	t=1792395706; cv=none; b=cINLO0KJAHHZRVefVdg3JJECuD7WVqVMtlr4KDhWhxlkFNnjGlDxyPChLE+JGOBC+QPIdCrtKRsK18ofjLiZjUiwouxe4mn1Zcve+kZlymQh9rFs74JQEe6cm5c53jgtrA6EejIGp4D/uGWl8xGuzOQth7vmYI97xgZNnz+N45s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792395131; c=relaxed/simple;
-	bh=zkr9P/yieVGKche40oAQyePfe4vUKpa6+ZShtoZvspI=;
+	s=arc-20240116; t=1792395706; c=relaxed/simple;
+	bh=8iCy8Dh2ohTt/d+rfWDZv4l8W4e8ADEiqK3sjs2xLB4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=rceMkdufD05uXx8v5wm6TPwMZKH/A7HPhy+kX8m4lRKCLPU5VQO2dXD6DyxeLLxq5IzjwEnn4lp8UznDEkdbiqknfWw8ijVMkC6LsAuE0u/0ePfaw9Jvc9Y3pxDgEdt/hMjTcNhWYfi4s+Zg+cxpN6rij13R9LmoU4uP2epHTzk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gurudas.dev; spf=pass smtp.mailfrom=gurudas.dev; dkim=pass (2048-bit key) header.d=gurudas.dev header.i=@gurudas.dev header.b=b02TRzge; arc=none smtp.client-ip=198.54.127.151
+	 Content-Type:Content-Disposition:In-Reply-To; b=BvLjZs4f/0SmL3lPTWC8TFrTdA+Ki5uVu6oyELscFHN6Y7l/e5d1GLLxVBeSUGBWQjWCiMsmhPIh72YR34CA7fGs1ZWLtU1SNSENUrB4OB6bQMKMvt8hQQSKAMdLhKPUv/u15+A/9Ws852yrbC5E4I4OiurHgK2UEqdnrfqGWao=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gurudas.dev; spf=pass smtp.mailfrom=gurudas.dev; dkim=pass (2048-bit key) header.d=gurudas.dev header.i=@gurudas.dev header.b=jB1NEoLr; arc=none smtp.client-ip=198.54.127.135
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gurudas.dev
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gurudas.dev
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gurudas.dev header.i=@gurudas.dev header.b="b02TRzge"
+	dkim=pass (2048-bit key) header.d=gurudas.dev header.i=@gurudas.dev header.b="jB1NEoLr"
 Received: from gurudas.dev (107-194-158-19.lightspeed.sntcca.sbcglobal.net [107.194.158.19])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mail.spacemail.com (Postfix) with ESMTPSA id 4j7S0s68sVz8sWR;
-	Mon, 19 Oct 2026 07:31:57 +0000 (UTC)
+	by mail.spacemail.com (Postfix) with ESMTPSA id 4j7SCs4fhBz2x99;
+	Mon, 19 Oct 2026 07:41:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gurudas.dev;
-	s=spacemail; t=1792395118;
-	bh=ydyG9CsFPpWnTKZ3v3+9TyJH8VRr2lJLleDf8sVV8A0=;
+	s=spacemail; t=1792395690;
+	bh=TDpuGLk4VdS+1BmydS1MckZ+DHA1iY5r82SIQvDgwj4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=b02TRzge7IPeiPH7rzBO6itl9G89sv7ypubRYXgvkAO7+uyitGkHtL+laYzQY1jwO
-	 vdNgSgM1hRq2mcoCbCyN7OE/cUhBE3QZB18VOjGnNh7nwLK+fK+HUpDwAoYdI1uieq
-	 7l73oLgiCYMKxGGGPLBzmI6QP9UBFthPaoHmREw/sl/RQolwzGZs/u0GvXOClfRbuW
-	 nY6IDuylt8k63EbpPTK2ZIIuoMFquzGgZgr8G7FxRMSmN6DJe11zjLyUnOnfcnals3
-	 8PtToNdUInl89gYTdIgJcwWyPZolssCn3ZrCoKGYzFzg8xVPADApqW1U1RKq85ZBBp
-	 n3mdvxn5c8rsQ==
-Date: Mon, 19 Oct 2026 00:31:55 -0700
+	b=jB1NEoLrQ7qDs8zGfIte9yrWhmSlN8soRpqyOZGcS9UkrK5kdRPfaaYiHx2+j8Ku7
+	 oTCDsD0WRS7pKDoTf608vG11yHFqZYSAPKi8pbqayb5ygGP01f2zXaiBtG8XqzBBQB
+	 4wVnBKuurGDqBe2z7YUn+qzS8H8rcWCEfK9X6LCxteuUStZxHhlp2w+4wIqDouAqGz
+	 9LqgTrii5U8xBn9OGxos74tcJHkTvsueBVGqIic3KN7F8VWuumSy8kOdVJVBp0dSN8
+	 dosFTWH11hHHAubaJsqaCWtlB15X6W/YJdRR/UA/BITo0AJKAdYP6wPeO+IDjZVzc6
+	 76Qr1A4SeHB3g==
+Date: Mon, 19 Oct 2026 00:41:27 -0700
 From: Guru Das Srinagesh <linux@gurudas.dev>
 To: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
 Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
@@ -48,7 +48,7 @@ Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
 	Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
 	Oleg Keri <okerixx@gmail.com>
 Subject: Re: [PATCH v2 3/7] regulator: qcom-pm8008: Add PM8010 mode support
-Message-ID: <atXHa8ZhwEaVUlGa@gurudas.dev>
+Message-ID: <atXJp5ct5jANeo0T@gurudas.dev>
 References: <20261014-pm8010_i2c_support-v2-0-b395d2b3f668@oss.qualcomm.com>
  <20261014-pm8010_i2c_support-v2-3-b395d2b3f668@oss.qualcomm.com>
 Precedence: bulk
@@ -78,39 +78,9 @@ On Wed, Oct 14, 2026 at 04:02:00PM +0530, Jishnu Prakash wrote:
 
 ...
 
->  static int pm8008_regulator_probe(struct platform_device *pdev)
->  {
->  	const struct pm8008_match_data *match_data;
-> @@ -155,6 +222,7 @@ static int pm8008_regulator_probe(struct platform_device *pdev)
->  	struct regulator_dev *rdev;
->  	struct regmap *regmap;
->  	unsigned int val;
-> +	bool is_pm8010;
->  	int ret, i;
->  
->  	id = platform_get_device_id(pdev);
-> @@ -169,6 +237,9 @@ static int pm8008_regulator_probe(struct platform_device *pdev)
->  	if (!regmap)
->  		return -EINVAL;
->  
-> +	is_pm8010 = of_device_is_compatible(dev->parent->of_node,
-> +					    "qcom,pm8010-i2c");
+Patches 2 and 3 both say "Add PM8010 mode support" in their subject lines and edit
+the same file. Could they either be squashed into one commit or have their subject
+lines amended appropriately to better reflect the changes they are making?
 
-Patch 2 adds a new `driver_data` match data struct for PM8010. Could this is_pm8010
-variable be avoided by stashing the regulator ops in the match data for each
-variant and using that instead?
-
-> +
->  	for (i = 0; i < match_data->num_regulators; i++) {
->  		data = &match_data->regulator_data[i];
->  
-> @@ -185,7 +256,9 @@ static int pm8008_regulator_probe(struct platform_device *pdev)
->  		desc->supply_name = data->supply_name;
->  		desc->of_match = data->name;
->  		desc->regulators_node = of_match_ptr("regulators");
-> -		desc->ops = &pm8008_regulator_ops;
-> +		desc->ops = is_pm8010 ? &pm8010_regulator_ops : &pm8008_regulator_ops;
-> +		if (is_pm8010)
-> +			desc->of_map_mode = pm8010_regulator_of_map_mode;
->  		desc->type = REGULATOR_VOLTAGE;
->  		desc->owner = THIS_MODULE;
+Also, patch 3 uses the wrong subject prefix "qcom-pm8008" when git log on the
+regulator driver reveals the convention is to use "pm8008".
