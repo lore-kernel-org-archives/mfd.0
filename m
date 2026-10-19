@@ -1,313 +1,121 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7CEA345EC0;
-	Mon, 19 Oct 2026 05:05:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF0CD485CDE
+	for <mfd@lists.linux.dev>; Mon, 19 Oct 2026 06:53:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792386319; cv=none; b=qHo0yJyijWUlgmxW1w9UyBhp3TuMtcz2TKRs6bEjLvm0CgfICR1FtVSYFj7y7Wr6TlrVh4JFYjpSnzuB3FsAnITYtNWZMziigmcFEXIhwkTwJcswRUxNppzS+tS6nt/Iy64Akw9Xzgd7W/nqFqunfW5XDvMCqonYuYDS7E3edIg=
+	t=1792392805; cv=none; b=NBvTyzXIEkACq1IpSoQl9Dl1Vv8Npy1qf3TLm30LHPhzXkL8hjIRdLyGp72kMg9qjpX2dOXAbKZlFWaG6VsPKyiWi9V60R699DqAvdz0VjZMpICQBWqITi4uul1pKB9gUs/Od9dfvwUOmqLjY2tQzrKd4zFtm51oFiokPMXmlR8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792386319; c=relaxed/simple;
-	bh=NxhcC/alXNWfyATTRqBnPlSXDbDsnR85ckwxuqEPl4g=;
-	h=Message-ID:From:Subject:To:Cc:In-Reply-To:References:Content-Type:
-	 Date; b=CJKK72KH2dT68WXjfFdZQsbitxQSDlK36QcLTsxJoiiicDmCc4Adn/RKMcl3Wg8esIZ7Q9qha7rRKLsbp8hVc9YBNmh6Z7A8+QdEd4dTVpY6mrB7aRimDXYGNhQ8iZV2oGi9KGwLzaotx3zzFc7GdITFS8iLmtuVWPa68sdNntA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZONV8F9c; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1792392805; c=relaxed/simple;
+	bh=XM0c64kJ5bkM6se9bFb6y1Q22QsXGV+KHZXfSxRlDPY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=W5SFQ68x3ifCSF5TfoTQBmQh3m7tZhslL60gbM6XrgTBPSUslLNcn7R/hr8AqcjZcmhp7SAgvK94Hhk5AowgUEWwCk4D6BLH3+ULfgLgfGhawpdAWBWkY22AC8e4DnZx1+r2P3y8C6qZ0Ldbdjemm1ME0U7whdBspZYD6BKC5Kg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=FTvL41Bh; arc=none smtp.client-ip=209.85.128.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZONV8F9c"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AEA351F000C4;
-	Mon, 19 Oct 2026 05:05:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792386313;
-	bh=GzsfRT1M+pGum/bxVHMbtI0D+TpCiJSveTAvOkF/h84=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=ZONV8F9c+NrPOIi0dpFys7e6KEqK9VKw/t7dS8PVesopPZp/sa75/AUqSE6uwVHKL
-	 RXCT0hNJHVH66g/vmDPyI8cg7c/UFZJzajSsL3SIvM6T6vI3iYg0KztL/Cke70m3gd
-	 64WxsKshSYqhX+8GacbjR3tQDWXTWW0JqW5QMsRdLZvOtWZus4LQqwJobXa0Le5cbl
-	 xMTQU71yLpp27LCQkoNxQuFF1f+VyGq6eeXL8O2C52WZluukdHY0AABgr0967jxqmy
-	 StY6P5WglhREgYdshGI1WWnQB9obzsSuOtp33XjAtBdmcIPhTmXpscMO3TltzIqB2f
-	 b8g+erVUhOo7w==
-Message-ID: <sashiko-outbox-176658@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v10 4/5] arm64: ambarella: add ARCH_AMBARELLA and CV75
- EVK DT
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Long Zhao" <longzhao@ambarella.com>
-Cc: linux-clk@vger.kernel.org, mfd@lists.linux.dev, devicetree@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, lee@kernel.org
-In-Reply-To: <20261019-cv75-soc-v10-4-d386065e2dd5@ambarella.com>
-References: <20261019-cv75-soc-v10-0-d386065e2dd5@ambarella.com>
- <20261019-cv75-soc-v10-4-d386065e2dd5@ambarella.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 19 Oct 2026 05:05:12 +0000
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="FTvL41Bh"
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4a018dc1f98so11806835e9.3
+        for <mfd@lists.linux.dev>; Sun, 18 Oct 2026 23:53:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1792392802; x=1792997602; darn=lists.linux.dev;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=XM0c64kJ5bkM6se9bFb6y1Q22QsXGV+KHZXfSxRlDPY=;
+        b=FTvL41BhQUAWOQJLfiMR3mF+Z7o+uljfWfx/mzwJxhLdHU/rVjExUGwoMVXgfdH/4A
+         U9feHGHWTAz/Rq36NzHei3rSAoOglnGelh/HyhtjkEJ1+Q3SP0wyNu2iqf6ZdjoE/bZv
+         btruwr07SCrmgokObLmnuWrpBI24j0YMb8CjzzzWMwU3oIgCB/UCQVtJKBNO/e1WPfVo
+         lKk0JcurjhpoGgwv4A34kMbSoItBFm/aBI1VRrNq2/KyiNFlYcg6zWYgFRiGek3eCEHz
+         /nZaHQELbYE1pvH5kYUzVM0BC8ELuVLAQLmtZusTrCQoK8NfPaHRS0j6dPKZphFiqvsH
+         FDKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792392802; x=1792997602;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=XM0c64kJ5bkM6se9bFb6y1Q22QsXGV+KHZXfSxRlDPY=;
+        b=oGgVsBZ8Z8oogJguJRm5PhtKpxu0UlSKp15PhOpuzi+1duTrATPA212Fwoydg3X1bq
+         VFR3l7VGPcgItQB3mNGF4O7Tzmxc9kk+rmkU/yWTvVmck2XxKVnU4iRq7k/XsyESZGlU
+         5hkDuecA2N8xJWjsHXZVW5mpOf/5k0sL902n0PsjczopU/eeLarcimOqkZuakKbB63Of
+         UJWHq/c7BgFzc1GJuI1kQaFyXeI2Njr8Bl+vLWWSBXBa5mQnebebGQEtoD8RORsgXXoR
+         UttAHErwvijyv9nfxRxYZBicseqtwD6cAyZMFJUa5kA6WNXEffMzzcnB9fFQYwxlwM4h
+         K3dA==
+X-Forwarded-Encrypted: i=1; AKwUvBxmBiYXgeDjZ2PX/NVxKvy3lExOm5D9JFYDaCdK4pD6ns3T81QVMrhAJ0pS3HLivj12ZyA=@lists.linux.dev
+X-Gm-Message-State: AFq9FYKvEJW4FwdFXUFrSmmVQn0T1+n1udzjTQzqHuSrPXBDiRcUXY+E
+	TpF0UlTISQCyKiT0ufllKOF/ASBGN150RtKwKhk/6MA2puitEZxmdh9xJcPWpDbxp60=
+X-Gm-Gg: AYBFou3bO1w9+zH+pIOGJ21bZgo1rz/BP7uFCF9ufW9QB0awho8MzHU/ZJEbJt5V4nj
+	slhZCZqbD56VeMZpjei7p0uMvfU86UpozAf2AxM2sFb6nPfaaFtFRYptMffJdhxpiKSZXsMjLK6
+	S+RH496R+xXwSZJi2WJWj2JJAOtHuH50EtEn9rQGknUKB9Tz76eRAyxPoArLoCO4DT3UudA1VTh
+	OWwXdFDF60A6FDjP/1OOMPMJGBHVikWoLT3IzkUcNO16qQioGv7sK1A8Oxw9nqV2bmMZKxQaG5K
+	ZtH2o3bFaVXRRoWkEs1kAd0G1ptqXr6g7Wgd6yiWMentQPchTmkl5Jw+C70LROTuQWDoBy2KUj2
+	xxwa+erP5Jq41NBjfU8tgvacEYRqlBZR4EiNbGBxQslGDV2Wt3pNBqWIStjyeuvaHm4p6dLHr5+
+	4jF3160siSZN6EKhxzlCm0WPAFtYDwWX+bakbYy+sRcYLdG+kKG9SrOgljlnWUuV4yJmZMp1XX2
+	d9ajdCFuMJr2cs2/P+mupfPcxigLQBMCsv9zYdYV+ooxy88AsXAGKvIRflmKtvEURJ1oOz/
+X-Received: by 2002:a05:600c:c0c7:b0:4a1:d743:77f1 with SMTP id 5b1f17b1804b1-4a1d7bc2e33mr89073635e9.24.1792392800952;
+        Sun, 18 Oct 2026 23:53:20 -0700 (PDT)
+Received: from localhost (p200300f65f19a9041674bacf58593a35.dip0.t-ipconnect.de. [2003:f6:5f19:a904:1674:bacf:5859:3a35])
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4a1c8de7230sm246009675e9.14.2026.10.18.23.53.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 18 Oct 2026 23:53:19 -0700 (PDT)
+Date: Mon, 19 Oct 2026 08:53:18 +0200
+From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+To: Lakshay Piplani <lakshay.piplani@nxp.com>
+Cc: linux-kernel@vger.kernel.org, linux-i3c@lists.infradead.org, 
+	alexandre.belloni@bootlin.com, krzk+dt@kernel.org, robh@kernel.org, conor+dt@kernel.org, 
+	devicetree@vger.kernel.org, broonie@kernel.org, mfd@lists.linux.dev, lee@kernel.org, 
+	Frank.Li@nxp.com, lgirdwood@gmail.com, linux-gpio@vger.kernel.org, 
+	linusw@kernel.org, brgl@kernel.org, vikash.bansal@nxp.com, priyanka.jain@nxp.com, 
+	aman.kumarpandey@nxp.com
+Subject: Re: [RFC PATCH 7/7] gpio: p3h2x4x: add GPIO expander for the NXP
+ P3H2x4x I3C hub
+Message-ID: <atW-DIGEbPMW4vY_@monoceros>
+References: <20261016164625.3166779-1-lakshay.piplani@nxp.com>
+ <20261016164625.3166779-8-lakshay.piplani@nxp.com>
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="rb2hybyhnj2upzg7"
+Content-Disposition: inline
+In-Reply-To: <20261016164625.3166779-8-lakshay.piplani@nxp.com>
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
-s) to consider:
-- [High] arm64: dts: ambarella: uart0 permanently defers probe due to missi=
-ng pinctrl
-- [Medium] arm64: dts: ambarella: undocumented compatible strings and prope=
-rties in cv75
-- [Medium] arm64: dts: ambarella: gpio nodes use unmatched periphid and unp=
-robed pinctrl
---
 
-commit 7e36a79675aa487cf1bb15e171011853976e17db
-Author: Long Zhao <longzhao@ambarella.com>
+--rb2hybyhnj2upzg7
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Subject: Re: [RFC PATCH 7/7] gpio: p3h2x4x: add GPIO expander for the NXP
+ P3H2x4x I3C hub
+MIME-Version: 1.0
 
-arm64: ambarella: add ARCH_AMBARELLA and CV75 EVK DT
+On Fri, Oct 16, 2026 at 10:16:25PM +0530, Lakshay Piplani wrote:
+> +#include <linux/mod_devicetable.h>
 
-This commit adds the ARCH_AMBARELLA platform configuration and introduces
-the device tree files for the Ambarella CV75 SoC and CV75 EVK board to
-support initial console bring-up.
+Please drop this header, <linux/platform_device.h> is enough to provide
+platform_device_id without pulling in a plethora of unneeded
+dependencies.
 
-> diff --git a/arch/arm64/Kconfig.platforms b/arch/arm64/Kconfig.platforms
-> index d2acfac730037..16d7e3a4c2d62 100644
-> --- a/arch/arm64/Kconfig.platforms
-> +++ b/arch/arm64/Kconfig.platforms
-> @@ -26,6 +26,12 @@ config ARCH_SUNXI
->  	help
->  	  This enables support for Allwinner sunxi based SoCs like the A64.
-> =20
-> +config ARCH_AMBARELLA
-> +	bool "Ambarella SoC family"
-> +	select PINCTRL
-> +	help
-> +	  This enables support for the ARM64 based Ambarella SoCs like CV75.
-> +
->  config ARCH_ALPINE
->  	bool "Annapurna Labs Alpine platform"
->  	select ALPINE_MSI if PCI
+Best regards
+Uwe
 
-[ ... ]
+--rb2hybyhnj2upzg7
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> diff --git a/arch/arm64/boot/dts/ambarella/cv75-evk.dts b/arch/arm64/boot=
-/dts/ambarella/cv75-evk.dts
-> new file mode 100644
-> index 0000000000000..42a0fe24b83bd
-> --- /dev/null
-> +++ b/arch/arm64/boot/dts/ambarella/cv75-evk.dts
-> @@ -0,0 +1,30 @@
+-----BEGIN PGP SIGNATURE-----
 
-[ ... ]
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmrVvlsACgkQj4D7WH0S
+/k7KdAf/Ymzfd5nUPGqul10/xb4Cdg8JZlVZwryGIATK15e0B7YEMqJyc+hQaVMu
+eVcZr42PEqPgIQlp1aDk2O+1SmuueV/EGkusU0B9jbFL4MYGYDMMX3UXgF93KsHG
+L5AztXgy413yo0IWCUZnXqXMjtPSAAOAoJu+9N7VxfWfo4fHLGbZ3AlVffRgev+8
+xFFzFPpPNgKNtO2wVYNE3H6K4gKwRMAU3asXySiV/XcnJWZxXoUndsDMpTVn79Wi
+kj+JHMF5D/GsSqgsCzVzMNmX4GaziZzgo8BjgIwrbg9TqDEp3zH6reKg55CGXpeD
+b49quyvlvKA2UBjz28ZWXDZ7/kEYSA==
+=X5cp
+-----END PGP SIGNATURE-----
 
-> +	chosen {
-> +		stdout-path =3D &uart0;
-> +	};
-> +
-> +	memory@200000 {
-> +		device_type =3D "memory";
-> +		reg =3D <0x0 0x00200000 0x0 0x07e00000>;
-> +	};
-> +};
-> +
-> +&uart0 {
-> +	status =3D "okay";
-> +};
-> diff --git a/arch/arm64/boot/dts/ambarella/cv75.dtsi b/arch/arm64/boot/dt=
-s/ambarella/cv75.dtsi
-> new file mode 100644
-> index 0000000000000..c36b6af48237a
-> --- /dev/null
-> +++ b/arch/arm64/boot/dts/ambarella/cv75.dtsi
-> @@ -0,0 +1,177 @@
-
-[ ... ]
-
-> +		ahb@ffe0000000 {
-> +			compatible =3D "simple-bus";
-> +			reg =3D <0xff 0xe0000000 0x0 0x01000000>;
-> +			ranges =3D <0xe0000000 0xff 0xe0000000 0x01000000>;
-> +			#address-cells =3D <1>;
-> +			#size-cells =3D <1>;
-> +
-> +			s_scratchpad_syscon: scratchpad@e002e000 {
-> +				compatible =3D "ambarella,cv75-sec-scratchpad", "syscon";
-> +				reg =3D <0xe002e000 0x1000>;
-> +			};
-> +		};
-> +
-> +		apb@ffe4000000 {
-> +			compatible =3D "simple-bus";
-> +			reg =3D <0xff 0xe4000000 0x0 0x01000000>;
-> +			ranges =3D <0xe4000000 0xff 0xe4000000 0x01000000>;
-> +			#address-cells =3D <1>;
-> +			#size-cells =3D <1>;
-> +
-> +			uart0: serial@e4000000 {
-> +				compatible =3D "ambarella,cv75-uart", "snps,dw-apb-uart";
-> +				reg =3D <0xe4000000 0x1000>;
-> +				clocks =3D <&rct CV75_GCLK_UART0>;
-> +				interrupts =3D <GIC_SPI 170 IRQ_TYPE_LEVEL_HIGH>;
-> +				reg-shift =3D <2>;
-> +				reg-io-width =3D <4>;
-> +				pinctrl-names =3D "default";
-> +				pinctrl-0 =3D <&uart0_pins>;
-> +
-> +				status =3D "disabled";
-> +			};
-> +
-> +			pinctrl: pinctrl@e4010000 {
-> +				compatible =3D "ambarella,cv75-pinctrl";
-> +				reg =3D <0xe4010000 0x1000>;
-> +				ambarella,drive-strength-syscon =3D <&rct>;
-> +				ambarella,pull-syscon =3D <&s_scratchpad_syscon>;
-> +
-> +				uart0_pins: uart0-pins {
-> +					function =3D "uart0";
-> +					groups =3D "uart0";
-> +				};
-> +			};
-
-[Severity: High]
-Will uart0 permanently defer probing on boot because no driver exists for
-"ambarella,cv75-pinctrl"?
-
-In arch/arm64/boot/dts/ambarella/cv75-evk.dts, uart0 is enabled as the
-console via stdout-path =3D &uart0. In cv75.dtsi, uart0 specifies
-pinctrl-0 =3D <&uart0_pins>, which is a child of pinctrl@e4010000
-(compatible =3D "ambarella,cv75-pinctrl"). However, there is no driver in
-the kernel tree matching "ambarella,cv75-pinctrl".
-
-With CONFIG_ARCH_AMBARELLA selecting CONFIG_PINCTRL and arm64 defconfig
-enabling CONFIG_MODULES=3Dy, fw_devlink (via parse_pinctrl_n() ->
-device_links_check_suppliers()) will hold off probing uart0 waiting for
-the pinctrl supplier. Even after fw_devlink times out or if fw_devlink=3Doff
-is passed, the probe path runs:
-
-really_probe()
-  -> pinctrl_bind_pins()
-    -> devm_pinctrl_get()
-      -> create_pinctrl()
-        -> pinctrl_dt_to_map()
-          -> dt_to_map_one_config()
-
-In drivers/pinctrl/devicetree.c:dt_to_map_one_config(), when
-get_pinctrl_dev_from_of_node() fails to find a registered pinctrl_dev for
-pinctrl@e4010000 and walks up to the root node without pinctrl-use-default
-set:
-
-		if (!np_pctldev || of_node_is_root(np_pctldev)) {
-			of_node_put(np_pctldev);
-			ret =3D -ENODEV;
-			/* keep deferring if modules are enabled */
-			if (IS_ENABLED(CONFIG_MODULES) && !allow_default && ret < 0)
-				ret =3D -EPROBE_DEFER;
-			return ret;
-		}
-
-This returns -EPROBE_DEFER to pinctrl_bind_pins(), aborting really_probe()
-before dw8250_probe() can bind the serial console. Should pinctrl-0 and
-pinctrl-names be omitted from uart0 (or the pinctrl node disabled/omitted)
-until the pinctrl driver is present?
-
-> +
-> +			gpio0: gpio@e4013000 {
-> +				compatible =3D "ambarella,cv75-gpio", "arm,primecell";
-> +				reg =3D <0xe4013000 0x1000>;
-> +				clocks =3D <&rct CV75_GCLK_APB>;
-> +				clock-names =3D "apb_pclk";
-> +				interrupts =3D <GIC_SPI 163 IRQ_TYPE_LEVEL_HIGH>;
-> +				gpio-controller;
-> +				#gpio-cells =3D <2>;
-> +				gpio-ranges =3D <&pinctrl 0 0 32>;
-> +				interrupt-controller;
-> +				#interrupt-cells =3D <2>;
-> +				arm,primecell-periphid =3D <0x000e8061>;
-> +			};
-> +
-> +			gpio1: gpio@e4014000 {
-> +				compatible =3D "ambarella,cv75-gpio", "arm,primecell";
-> +				reg =3D <0xe4014000 0x1000>;
-> +				clocks =3D <&rct CV75_GCLK_APB>;
-> +				clock-names =3D "apb_pclk";
-> +				interrupts =3D <GIC_SPI 164 IRQ_TYPE_LEVEL_HIGH>;
-> +				gpio-controller;
-> +				#gpio-cells =3D <2>;
-> +				gpio-ranges =3D <&pinctrl 0 32 32>;
-> +				interrupt-controller;
-> +				#interrupt-cells =3D <2>;
-> +				arm,primecell-periphid =3D <0x000e8061>;
-> +			};
-> +
-> +			gpio2: gpio@e4015000 {
-> +				compatible =3D "ambarella,cv75-gpio", "arm,primecell";
-> +				reg =3D <0xe4015000 0x1000>;
-> +				clocks =3D <&rct CV75_GCLK_APB>;
-> +				clock-names =3D "apb_pclk";
-> +				interrupts =3D <GIC_SPI 165 IRQ_TYPE_LEVEL_HIGH>;
-> +				gpio-controller;
-> +				#gpio-cells =3D <2>;
-> +				gpio-ranges =3D <&pinctrl 0 64 32>;
-> +				interrupt-controller;
-> +				#interrupt-cells =3D <2>;
-> +				arm,primecell-periphid =3D <0x000e8061>;
-> +			};
-> +		};
-
-[Severity: Medium]
-Are binding schemas missing for the newly introduced compatible strings and
-properties in cv75.dtsi?
-
-Running make dtbs_check on cv75-evk.dtb will fail validation because
-several compatible strings and vendor properties are not documented under
-Documentation/devicetree/bindings/:
-
-- scratchpad@e002e000 uses compatible =3D "ambarella,cv75-sec-scratchpad",
-  "syscon", which is not listed in
-  Documentation/devicetree/bindings/mfd/syscon.yaml.
-- serial@e4000000 uses compatible =3D "ambarella,cv75-uart",
-  "snps,dw-apb-uart", which is not listed in
-  Documentation/devicetree/bindings/serial/snps-dw-apb-uart.yaml.
-- pinctrl@e4010000 uses compatible =3D "ambarella,cv75-pinctrl" along with
-  ambarella,drive-strength-syscon and ambarella,pull-syscon, which have no
-  binding schema in the tree.
-- gpio@e4013000, gpio@e4014000, and gpio@e4015000 use
-  compatible =3D "ambarella,cv75-gpio", "arm,primecell", which is not
-  documented in any binding schema.
-
-[Severity: Medium]
-How are gpio0, gpio1, and gpio2 expected to bind to a driver with
-arm,primecell-periphid =3D <0x000e8061>?
-
-Because "arm,primecell" is in compatible, of_platform_bus_create()
-registers gpio0, gpio1, and gpio2 as struct amba_device instances on the
-AMBA bus, where amba_match() -> amba_lookup() matches exclusively against
-periphid. No amba_driver in the tree matches 0x000e8061; for example,
-drivers/gpio/gpio-pl061.c has:
-
-static const struct amba_id pl061_ids[] =3D {
-	{
-		.id	=3D 0x00041061,
-		.mask	=3D 0x000fffff,
-	},
-	{ 0, 0 },
-};
-
-(and PL061 only supports 8 GPIO lines per block rather than 32). In
-addition, gpio-ranges =3D <&pinctrl ... 32> references the unprobed
-pinctrl@e4010000 node, which would cause of_gpiochip_add_pin_range() ->
-of_pinctrl_get() to return -EPROBE_DEFER. Is there a separate GPIO and
-pinctrl driver series that these nodes depend on?
-
-[ ... ]
-
-> diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfig
-> index ad3bd3d9507b2..454f07a6a6a6f 100644
-> --- a/arch/arm64/configs/defconfig
-> +++ b/arch/arm64/configs/defconfig
-> @@ -36,6 +36,7 @@ CONFIG_CRASH_DUMP=3Dy
->  CONFIG_ARCH_ACTIONS=3Dy
->  CONFIG_ARCH_AIROHA=3Dy
->  CONFIG_ARCH_SUNXI=3Dy
-> +CONFIG_ARCH_AMBARELLA=3Dy
->  CONFIG_ARCH_ALPINE=3Dy
->  CONFIG_ARCH_APPLE=3Dy
->  CONFIG_ARCH_ARTPEC=3Dy
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261019-cv75-soc-v=
-10-0-d386065e2dd5@ambarella.com?part=3D4
+--rb2hybyhnj2upzg7--
