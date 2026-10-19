@@ -1,171 +1,161 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC8053E2770
-	for <mfd@lists.linux.dev>; Sun, 18 Oct 2026 23:53:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 777EC35C1B1;
+	Mon, 19 Oct 2026 02:13:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792367593; cv=none; b=LOv3uilhzJXYec4oVtkEBzfsLkbMaazau5JFt4NXOkyw+kbTK66QzLaZK/WdkZY+dKjOXNxPVGt2FDG4Du4RRIF0oz4QAWsXQvnfliwkb/VhWKpAvSTQ/Jfw0KaPx3CGsRNxMZcroxWTThYEehYyN1ESzid9NNQAPlGzu4WmqWQ=
+	t=1792376020; cv=none; b=VtVeHdWYXKkpZkeuE1rV2jZkTmi/haIYr8J9EGh1edr7ZMFVtorSMJvNlFe7Q1hf5aHYUc9liS/+t0oRlATD7VU/10Urw9Jpubx9xoTmzXoChbYIQc+9ONWpUNOJtxqQKry7x0SdrLhsNJEBSEcs9PnsC/o7DdVOPHl+F5fCFHY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792367593; c=relaxed/simple;
-	bh=6g5HKqFJHy+jPg5eI51EkhtmHAefO2ruYtPIveQKssg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=aNFqk1JPLQ52i+EELIVzJ3LeeobepCkWUG6dK2anKum60YkxbFiHn27TO05xcZsAx9jB31HVwUT1KpJAQ4WQEUDro8zQabBAmK42njPV0NFwlbJC6I2/NUgYxhXrFqQSnmMzlX4lc4qPL+5gL0bBPcS4yD6nXT634BcViM1tNc8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VvdU+p5P; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=E4sT+W+4; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1792376020; c=relaxed/simple;
+	bh=wxDdBy0anSXi0XacyEa0RDHc47kzkwLEQAmg0kUTRwE=;
+	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=LqlJJytt5HwY1Tr8RT0XuTdGCyx9EziO0QXMGK7g3EgTlKLQjeX/AN5wF/F5YRL0Bf2QRH6qRbwq6Y1TdmXMdm0KHfvdAYJb/aAnpWFeIK8s0BqlE4HrEAkO5y5fOm30kqXB2Uge4CYNeMwj45bVJZga2w7/VFVpIGx9B/9c508=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GKU6Xjhh; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VvdU+p5P";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="E4sT+W+4"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69ILjddi1312464
-	for <mfd@lists.linux.dev>; Sun, 18 Oct 2026 23:53:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=p0UcZjLCI5EsaKXVYEifEeVT
-	wnpPCrWb11gsbObd+YU=; b=VvdU+p5P2HVWGIS4IDl2/9rNdQMdmpu70XGjiIUY
-	9xHLxWOawWeirSqftTIKVKv6NbgJHmQWMi+0W/CKA+JzhkyWi+g3cy9Sm5yCSIhG
-	huY/BmDcqjOHV3qZPkCUoZWYK0ReofsIbivraCWuYwvXCwyCIFqO4Keu2tMwn6BC
-	dZeYzOA5OrY51NjeI7U5h/3mByROVrnmAb5SQDm+Lc4K32xxKsBJDRTLlMuk0K14
-	ivOLMc3VJYrLyTB5WhtjfhJ9p+dVs4BH62+U0afgjCtekfWdeTuLWZ/L7WBvFiKs
-	xq7Kd/M/HhlIuUPFznC0Wd0+k4ZjG6xh0s78LQm1nego9w==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hd5u1g81k-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <mfd@lists.linux.dev>; Sun, 18 Oct 2026 23:53:10 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93a082c014aso394913485a.0
-        for <mfd@lists.linux.dev>; Sun, 18 Oct 2026 16:53:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792367590; x=1792972390; darn=lists.linux.dev;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=p0UcZjLCI5EsaKXVYEifEeVTwnpPCrWb11gsbObd+YU=;
-        b=E4sT+W+40BN/Jy1IYUvL+GoMr0oaIiA25XjBwyRRwXi+TVFBARogkV0ySS5qRs6t1Y
-         yIbwCT9JkiPphirw2qB1X6Co9e/vhqdwiAcanq3CiBXrnUFWydDSra8fjG/li8oBgSCL
-         Zne7tbn9iBt8b4Ne41M9LyXFGmcMjDRHP+tnhhusd2MPqH0AWIPBI/tT+ZuNqEHMh9iZ
-         rT8hB+QcJBb1IfqIaE+rx+Gwtq/uRYrWWXJO5kIcBJBXeYK9IM48Jj+jMHtyDvw+kuVb
-         385U40u8lHqigKUweSw3T1OKHXd5wppPW4T9cVlSnhY6ZQbtex5uaQZ4X3CuFEkaluUK
-         ljDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792367590; x=1792972390;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=p0UcZjLCI5EsaKXVYEifEeVTwnpPCrWb11gsbObd+YU=;
-        b=yTdpVKCMO02DaEOAlrICLt1/ul4gP0h16u6ilzIaJTPXgrH+SUUhj2/U8HN7iad6Nt
-         GyHXIbHJwXKMAlejZl2dY1wrw48tiUTZaFgyRi9kOoDIfgpXUe0qFpVcGgCYMQ2Hc3Kj
-         SnIlsX55dO6P+To5b4NAFi1PRUqt+w9pDImZyoo8vf4w1Xd8MX35XIRwlxYdwTWxohBQ
-         /8t0DtRUD7/X/U5+t4/Tu9c7kk1+HV4OUCk5kZrJ6ZWG06wHFWpRrIvgwvY5sRvhS9uj
-         ZQiw7A/X1X9TKSqJGAgGillMvDVOKfjID13WqjQqDRaVv5dbidO51QWGjgymVYgmWvpP
-         wN1A==
-X-Forwarded-Encrypted: i=1; AKwUvBzzJMZ//v7lfw5L/MxpNV8fBFEABO0G8xNUGC3pyMra7QijrYvDc8uTTxwOeifmSxePNFA=@lists.linux.dev
-X-Gm-Message-State: AFq9FYKLCtH+9OMXwD6cvPJHj80BCYugqdcAxzsjx2aZOcG1RMoCzJ8g
-	8yYM1igWRB+xyoljv5/t/PkoZgrA7K50LzlpfAgySZ+ByoDqwGkaVLquyCU6Ugx05kP5FxfokVU
-	k1khMc/eEKnKR+XqLNfgmb2sQ/HqFixYrEMIqiSC81atoRknGQCVRPl4=
-X-Gm-Gg: AYBFou1r7erGDrxxY9jha6KgmDB0nfj3hzeR+DsVWCH8fENeYXXjPvKrh5FpUzDO762
-	lgSZJfj9dte2SLOUZZfAg/Aqii0/TN5SOOT3rh2HGz4phpPG0XjGrLMb6xe/z/Vgv3nw9K18FR1
-	DL+7oGJWOtIhKbyoN3gEgfLpCXFDV1BOr8Kc02SBrT6N7px6siRXuoYb5KFH8HowUlTSapDEGOg
-	HuFebC5nyc8mCKQB5Aknpu2Dq319yirwKACYe9pLXEUQIvBz8hEilTFepLURn+bHSlacFd7k6Dx
-	/1aD9I5JpnV7m4wsQB119p7cVGaxLU8pMh9tc3WyJVWyXnZqzGAvm+JxYaP7NnxW1OiCs1zXzga
-	YpWl76Ma1FBLvtf22X8NZjOSpSaTc1DygsiSrmv2/tC/Ji4v4eala2yy9l+xa0KRuCxAOalawez
-	BUPKBgZ1iDsuxM
-X-Received: by 2002:a05:620a:a181:20b0:93f:2479:2b4 with SMTP id af79cd13be357-93f247904fbmr734309185a.10.1792367590068;
-        Sun, 18 Oct 2026 16:53:10 -0700 (PDT)
-X-Received: by 2002:a05:620a:a181:20b0:93f:2479:2b4 with SMTP id af79cd13be357-93f247904fbmr734306785a.10.1792367589543;
-        Sun, 18 Oct 2026 16:53:09 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5be4a42ade9sm1616881e87.14.2026.10.18.16.53.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 18 Oct 2026 16:53:08 -0700 (PDT)
-Date: Mon, 19 Oct 2026 02:53:06 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Cc: David Heidelberg <david@ixit.cz>,
-        Alexey Minnekhanov <alexeymin@minlexx.ru>,
-        Heikki Krogerus <heikki.krogerus@linux.intel.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Lee Jones <lee@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-        linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        phone-devel@vger.kernel.org, mfd@lists.linux.dev
-Subject: Re: [PATCH RFC 00/12] Qualcomm Type-C support for 1st generation
-Message-ID: <eodzuccugtdn42basgpczett4yatyirog4nxwe5rhg5xf46ibp@jzcjmje4aqc3>
-References: <20260926-typec-v1-0-31adc19f32c6@ixit.cz>
- <voc4ie6fcegr3thk5n6dib4pkdxmracch4hhgjdih6pxrq2bfm@lq7mx4flowqk>
- <f85cdfb7-b797-4b4b-9937-670c6dfe52c3@ixit.cz>
- <zb3s4fmwx7vu3kcqigensacbgdqoaqnipfn4ntx4dh7ahrfr42@hvdw36dqb3qn>
- <5c41ef43-a065-46e3-9522-faaf3884b487@linaro.org>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GKU6Xjhh"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F52E1F000C4;
+	Mon, 19 Oct 2026 02:13:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792376019;
+	bh=OTeAHhDu6rLdIC+c7Ig9cS6MPdi5FFeMFdNOO55dM1c=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=GKU6XjhhijXdkLvmKWqe2lHLbB69e8YJyKEBgRBXBX0UKQ9bA6S9G+Om7USxlUmSe
+	 0pQX1fEdIOiBPTfh2TQf6BFvoNNh9Ga0CwTWmPoeeEQcp3d9kVQVatwi84yNU75fD3
+	 rwxyaZcB1ozG7EuT5EpDA/o1xO+w/wN4s4C7IaxDzKSuZuC+TQJXSy2+EL9wOSJzM5
+	 AV+CEses5L1/LgQBDoJVCtXOCizpoHWfDmsJC/Nc1g9v11BEr+Z7/Xm2wfBPrTWM4x
+	 DkE92auy1x01Gcu2YXObxGdnKnjqOizVA83Mw/k7G3lFUiEJs+taTrAmvtC1vDggBi
+	 07MykhZB0Xhnw==
+Date: Mon, 19 Oct 2026 03:13:33 +0100
+From: Jonathan Cameron <jic23@kernel.org>
+To: Ryan Brue <ryanbrue.dev@gmail.com>
+Cc: David Lechner <dlechner@baylibre.com>, Nuno =?UTF-8?B?U8Oh?=
+ <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Lee
+ Jones <lee@kernel.org>, linux-iio@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org,
+ mfd@lists.linux.dev, Roman Vivchar <rva333@protonmail.com>, Luca Leonardo
+ Scorcia <l.scorcia@gmail.com>, Andy Shevchenko
+ <andriy.shevchenko@intel.com>
+Subject: Re: [PATCH v4 2/3] iio: adc: mt6397-auxadc: add mt6397 PMIC AUXADC
+ driver
+Message-ID: <20261019031333.1010682f@jic23-hlaptop>
+In-Reply-To: <20260928-rbrue-suez-upstreaming-mt6397-auxadc-v4-2-23533a0d30e3@gmail.com>
+References: <20260928-rbrue-suez-upstreaming-mt6397-auxadc-v4-0-23533a0d30e3@gmail.com>
+	<20260928-rbrue-suez-upstreaming-mt6397-auxadc-v4-2-23533a0d30e3@gmail.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <5c41ef43-a065-46e3-9522-faaf3884b487@linaro.org>
-X-Proofpoint-ORIG-GUID: r4RSpLNvoQRpv5p4EvoaiIwGgqMplxOc
-X-Authority-Analysis: v=2.4 cv=NItAaE6g c=1 sm=1 tr=0 ts=6ad55be6 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=3RZNE-nbyhM6VGf7PbYA:9
- a=CjuIK1q_8ugA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE4MDA5NSBTYWx0ZWRfX6beAhm9CBZ7c
- +DNbCzosrjQvil244CR3OzYiTFIzWomANkdDmE8DM49kk6zCtczGXl1vM1dOL8ChehTGDbtK/yY
- UQhudsS+TJs43BPhcObWTLWwuHoGLeo=
-X-Proofpoint-GUID: r4RSpLNvoQRpv5p4EvoaiIwGgqMplxOc
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE4MDA5NSBTYWx0ZWRfXyC44c37VJe/+
- fxvve7bZJa5pRCuVRGe+KWcQCX2Xd4X3EUxYKhRhGGgrojTc/JHuJ+k7UMh5IX8w9ePEt2ilepP
- 6gg534r/Yy0LE6qvWFNPNkX1nq8YsVjojW0Ql9USUa1CYY9OGqXxog37WN9FEJpYkx7Of+uGctm
- OKWTPLLo+si2vHouuodf52YLJTuJPcsoAANn0WR5IXOi2AefdlwI27OC6hTLAvEdadJnWBV1Ib5
- WwlD6G/iDFXwVeE+F9KvJgWFYHA6BqMfK1KryrDe1eFAn1aEZy4IYAZnBjbNPTmTY2Xd9g+q+bA
- OYB9ZihmaXdIR74ZvvLypRL8+xZ9eTj0SM/2jC/zx7v0W0bs1IGr0J72DpDqGMcnkZl8K+fuEQT
- A2nJawG2Xs34H/cK3IOJj5l8A0T1s28m9LGjwTPEB7Ns6Rpm7v6tMsqt+YB961iRpvA/onLvIR0
- LLmDQEWDQV2SWo9VGMA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-18_05,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 bulkscore=0 malwarescore=0 impostorscore=0
- spamscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610180095
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Mon, Sep 28, 2026 at 04:54:08PM +0100, Bryan O'Donoghue wrote:
-> On 27/09/2026 17:33, Dmitry Baryshkov wrote:
-> > > > One major comment. As we see, on SMB2 PMICs parts of the Type-C
-> > > > functionality are provided by the charger / FG device. I guess that on
-> > > > SMB5 PMICs we will get the same problem once somebody tries to implement
-> > > > additional charger features. Would it make sense to rework the PMIC TCPM
-> > > > driver to be a composite driver, taking several components via the
-> > > > existing Linux interface?
-> > > As this gets decided from the QCOM side, I'm fine with whatever suits the
-> > > hardware best.
-> > Bryan, as you are a maintainer of the PMIC-TCPM? Would the use of
-> > components be fine?
+On Mon, 28 Sep 2026 15:57:20 -0500
+Ryan Brue <ryanbrue.dev@gmail.com> wrote:
+
+> The mt6397 AUXADC is a 10-bit ADC behind the SoC's PMIC wrapper. On boards
+> built around this PMIC it is the only way to read the battery: the SoC's
+> AUXADC is wired to board thermistors and the charger ICs these boards use
+> have no ADC of their own.
 > 
-> I mean maybe. Would it not make more sense to land the TCPM functionality
-> and then look into adding charging moving then ?
+> Add a driver exposing the battery voltage and battery temperature
+> channels. Only those two are described, so a channel ID in the device tree
+> indexes the driver's channel array rather than the PMIC's channel number,
+> as mt6323-auxadc does. The ready bit lives in a channel's raw result
+> register, but the value comes from the chip's factory-calibrated copy.
 > 
-> i.e. finish off adding this piece first
+> The battery voltage is measured through ISENSE, because a board with a
+> switching charger in the power path leaves BATSNS on the charger's system
+> rail instead of on the pack. The thermistor only reads correctly with the
+> PMIC's battery-detect bias and input buffer enabled, which take 20 ms to
+> settle. Both are switched back off afterwards.
+> 
+> Reads average sixteen conversions in software; the chip's sample
+> accumulator makes no measurable difference at any setting, so it is left
+> at one sample per conversion.
+> 
+> Assisted-by: LLM
+> Signed-off-by: Ryan Brue <ryanbrue.dev@gmail.com>
+Hi Ryan
 
-The problem is that we already have SMB2 charger, which accesses the
-same region. In theory it is possible to say that USB-C driver conflicts
-with the charger "for now". In practice, I think, it might be better to
-sort that out from the beginning. You didn't have this issue when
-working on PM8150B support since we never needed charger for that PMIC
-series.
+Sorry for the delay.
 
-But, then it's up to you and David.
+Just one thing inline. If I wasn't tired from a long day
+of review I might just have made the change and asked you
+to check it. So bad luck on that!
 
--- 
-With best wishes
-Dmitry
+Thanks,
+
+Jonathan
+
+> diff --git a/drivers/iio/adc/mt6397-auxadc.c b/drivers/iio/adc/mt6397-auxadc.c
+> new file mode 100644
+> index 000000000000..8d1702658876
+> --- /dev/null
+> +++ b/drivers/iio/adc/mt6397-auxadc.c
+
+> +static void mt6397_auxadc_release(struct mt6397_auxadc *adc,
+> +				  const struct iio_chan_spec *chan)
+> +{
+> +	/* Lowering START leaves the converter unarmed between reads. */
+> +	regmap_clear_bits(adc->regmap, MT6397_AUXADC_CON1, MT6397_AUXADC_CON1_START);
+> +
+> +	if (chan->channel == MT6397_AUXADC_ISENSE)
+> +		mt6397_auxadc_isense_disable(adc);
+> +	else
+> +		mt6397_auxadc_battemp_bias_off(adc);
+> +}
+> +
+> +static int mt6397_auxadc_read_channel(struct iio_dev *indio_dev,
+> +				      const struct iio_chan_spec *chan,
+> +				      int *val)
+> +{
+> +	struct mt6397_auxadc *adc = iio_priv(indio_dev);
+> +	int ret;
+> +
+> +	mutex_lock(&adc->lock);
+> +
+> +	if (chan->channel == MT6397_AUXADC_ISENSE) {
+> +		ret = mt6397_auxadc_isense_enable(adc);
+> +		if (ret)
+> +			goto out_release;
+> +
+> +		fsleep(MT6397_AUXADC_ISENSE_SETTLE_US);
+> +	} else {
+> +		ret = mt6397_auxadc_battemp_bias_on(adc);
+> +		if (ret)
+> +			goto out_release;
+> +
+> +		fsleep(MT6397_AUXADC_BATTEMP_SETTLE_US);
+> +	}
+> +
+> +	ret = mt6397_auxadc_read_burst(adc, chan, val);
+> +
+> +out_release:
+> +	mt6397_auxadc_release(adc, chan);
+This ends up rather confusing.  Would you mind instead doing it as a pair of helpers
+and a top level bit of code that does.
+
+	guard(mutex)(&adc->lock);
+	if (chan->channel == MT6397_AUXADC_ISENSE) {
+		return mt6397_auxadc_isense_read();
+	else
+		return mt6397_auxadc_battemp_read();
+
+
+The only thing that get duplicated is the call to read_burst()
+which seems simpler than having a pair of if / else on the channel
+(one hidden in this release).
+
+> +	mutex_unlock(&adc->lock);
+> +
+> +	return ret;
+> +}
+
+
