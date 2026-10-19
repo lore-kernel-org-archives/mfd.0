@@ -1,126 +1,117 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C93994C042B;
-	Mon, 19 Oct 2026 10:17:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FE624CA79E
+	for <mfd@lists.linux.dev>; Mon, 19 Oct 2026 10:18:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792405046; cv=none; b=GIrQ3LyphJVSO6+wwBhzDTWPJY+yOdZqNqq1Z4rql6HvE4HEdzW2b7QvoKVfuM8mOUHBbgmimVGJhB00+Y2cM++XJmGc8JAqa/sGsbLbqpeiXf/34OVC//LQ0IlJcUpzMk0vgehROxX1jBfcIhMx/2XDox7EEFE+lsxJmjDcrXI=
+	t=1792405083; cv=none; b=LQdZiHAsV5UiljFjetaruVOokJEqWdr1wh2Yq0df/mvmvGZhgGgGJneIhL9z92a4duXvTvSaQbFrDxSY58b5p7QAvQDcNwma31fwUMtNTsH3xiLcJHHBYEHZqsZC3otXId2mZsEwsgjy0uHa85xiQ6keILEb6vzWW8bSKQP8WZk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792405046; c=relaxed/simple;
-	bh=FAHqsoUg2810z5rSDiRI7iF8uxpnaV/Znr69GSjc0/M=;
-	h=Message-ID:From:Subject:To:Cc:In-Reply-To:References:Content-Type:
-	 Date; b=EdK01RnA7d5j4Hy4mgACygturVeV0xfI0H0MUwErKFnGpJGlweFA12NaZMYjyohQqVGGQmmIwEJun3MWbtPeGWgcxOVenBfzCQ0w8Le8+YYEfOwnIiaXJyX/QxSI7l37wB3bVlCjNU8VdlYnqMgOk3Azj4yu9JXm2xoV/JI0iGg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=l1r6FQ/9; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1792405083; c=relaxed/simple;
+	bh=J1xxRqlBh7boJ6+AATu8v1xS5H4zsaNU7gAePP3DFLo=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=odquUGhmf28HNjXowOWuK5PFz9CzRYEiBEcbSc1snaqLOgxTMP4vESgbbbpvtz68REuddp0+mlgchLQSIS8tWsd7+870/yZ9dz00mK0H+epvPDzyXCSbiUbhI0W4/L2ZdXnhy1FYjtp0JUJ187jqq3VdDP+JLgPtR8P1Q8fkNJo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NV0oS9M1; arc=none smtp.client-ip=209.85.221.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="l1r6FQ/9"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C95C81F000C7;
-	Mon, 19 Oct 2026 10:17:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792405045;
-	bh=47htpg6vnn4atX2n39sDrqJNFndcLxxZM44tBWxj6RU=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=l1r6FQ/9qmu+xrL7fbZNO9KOJhgp0ie/QKysBYApmYb+8OqcdKInarNMXmmS1IGPw
-	 zgajCxaRh/oexL86EGdIMYqrS1etd5ZIVVB0mfeJoiaV7RgpN8X95yxYEwh4V4AtzR
-	 aI24LKi8dnEF5LRHClLvbrSCZavOC93uyGCkfQCd8HRYj7MkTnkaE1PIuKjEPrOePg
-	 Vea0ENF30BPL39F28mkmCt7xVx7PVilrx4gEB4MR3hi7upnlV48cB23NVqMzmkOcd4
-	 t5MpTDl7FvColJlf0Mu+I3qxaHSNPJwAmXK79StI6nHuy4oymP4DyxXflUlWUy41AF
-	 Y4qn+iNWlIloA==
-Message-ID: <sashiko-outbox-176970@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v12 2/7] mfd: Add driver for ASUS Transformer embedded
- controller
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Svyatoslav Ryhel" <clamor95@gmail.com>
-Cc: devicetree@vger.kernel.org, linux-input@vger.kernel.org, mfd@lists.linux.dev, linux-leds@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, dmitry.torokhov@gmail.com, lee@kernel.org
-In-Reply-To: <20261019100406.103687-3-clamor95@gmail.com>
-References: <20261019100406.103687-1-clamor95@gmail.com>
- <20261019100406.103687-3-clamor95@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 19 Oct 2026 10:17:24 +0000
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NV0oS9M1"
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-48e0d1c095dso939460f8f.1
+        for <mfd@lists.linux.dev>; Mon, 19 Oct 2026 03:18:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792405080; x=1793009880; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=zQDkoaUO+6d9gZ51Qs77Gmj3Sntv3TlySXyax0SSKL0=;
+        b=NV0oS9M1gaFdGFhiSq3aTisFymYzcDrJvctpcqG+QITfodzYn4tLdyWzHjIryGLLG8
+         KQET0flLGgMU2xZVUk8/kTyjOVs0bONMzyoAITtrrPK7VY4atPRYTmCIH6bX3jdcx2wC
+         tsHxclZvDXhgbdQXPTZo4V89Iah1uo2SSVmBwrQ6F4DPHezqE0N3cvxSDe6079Rpxehw
+         o4iSf7DdKCfP+Z2fEPZZlyxIKmXvpah/cFBN4vVUsyicevr6Rs0twbBt5hzZEsBEywnJ
+         aKtpDJB+D4Eq4MozlyCdJZVBESvTysg4GRGoLLr2wfWZ8wNbS+8NGRq9qIPjXOy15YsR
+         n6dw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792405080; x=1793009880;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=zQDkoaUO+6d9gZ51Qs77Gmj3Sntv3TlySXyax0SSKL0=;
+        b=whyBlHxjJNc24JgLr7C4NEGSia2Uh8fxLCd5WYLIf+46M9UZzgGarMuEq6ntf/dzBf
+         HJl15mtd/zCiMBKmIBGw8T15wWHwei9uFRLwx/Q2G82zEezOR+smetqCcLHSBevZwx19
+         Uuu2BAGbKTzEPtLnIXU4YGK3+g5a2bBplU+0vV2V0BF/HlmN5VvoA5MmeRC+7iV9pj4v
+         G8yywrpp4pSm4vN1P/r+fZaEkn5l++j06mRusOy54d5QhNaDk3UUc5NaRWNwv8k0eSPu
+         +1IzSyyT7sUNgl6nZdzidIm9C6nsejKRe/lKMplFakHw7Ud5I6pnY3LI3YbRgc7cr/zj
+         aQMg==
+X-Forwarded-Encrypted: i=1; AKwUvBxh4DHbjo3LkSSYhhZjUAWv0yszoILrhSyz7DwaR1rMrsj2EusPQUr8DFzTlEnah5i00AY=@lists.linux.dev
+X-Gm-Message-State: AFq9FYIWq8WwlbtQfe6RWwZ6NmQeWMyI4xd+OYZKfvEgFAEGdjJ57gEf
+	fNFSX44UTb2iqRzV6eAZt0zWQ/6uSFV79bz/75EyZ5DFlpsMfgGeSL3l
+X-Gm-Gg: AYBFou30m9eG2nBppEuEuJ7cfc+dGajuy0bRqJgpGoPSkXuw7alqLa+6mDepYwXZZKF
+	u7nOVds/aR7QSOzDQcoMcPcXF/+HIaVEyEtWlS4DBARvABgevd4pUnSxR9sz28n1okAxZJIhnXi
+	SXwqmS1rJg1bo3KeRcIIWsZSFsV/KBW08iwZO7KkTuQJSs/b+B233y67gndYiS1ukvImzLVU37f
+	Hx4/2vP7N2awvufvrz3bLtmrg6Mmu75zlb2V8mvwW1vQ2mrBUEES6575OHPEwE3jeaBzQN3j/Fh
+	klgYn+RZ3zXDFFBTDeeZgdHHcAksb9iY2hZQELK8/m1pxCHpeazg+ye7ZRC9EdWpe32NswsUNVG
+	CBVahhBnbIS2btYS5C2bKiYZvTm0f9XIebgx6G80ibEQunxI6P/PKELeFRctahPz5E6sbmMdmDT
+	lxheGuhsw0XhAAg5Am8DbHqAT6yy799oZUlUEIH9GTVPYmmz3wIOjrB6OLnKtZ6Yi3vKm0azOqR
+	+47BxIoGOxnI/tdOTw=
+X-Received: by 2002:a05:6000:194b:b0:487:1256:ab80 with SMTP id ffacd0b85a97d-48e07fee915mr8782491f8f.57.1792405080272;
+        Mon, 19 Oct 2026 03:18:00 -0700 (PDT)
+Received: from xeon ([188.163.112.62])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48dfd4f576asm23913237f8f.32.2026.10.19.03.17.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 Oct 2026 03:17:59 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Lee Jones <lee@kernel.org>,
+	Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: linux-kernel@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	mfd@lists.linux.dev
+Subject: [PATCH v3 0/4] mfd: max8907: Schema, pdata and poweroff
+Date: Mon, 19 Oct 2026 13:17:46 +0300
+Message-ID: <20261019101750.125439-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
-- [Low] mfd: asus-transformer-ec: hard-coded cell IDs instead of PLATFORM_D=
-EVID_AUTO
---
+Convert existing txt documentation file to DF schema. Remove
+platform data use. Switch to device managed poweroff handler.
 
-commit 69f71ab310cf2527cceba8746f7a17bbb27f3ab4
-Author: Micha=C5=82 Miros=C5=82aw <mirq-linux@rere.qmqm.pl>
+Schema includes reference to pending tegra-regulators-coupling
+conversion. https://lore.kernel.org/lkml/20260924-ti-tps6586x-v4-1-6c7a8fb8b646@gmail.com/
 
-mfd: Add driver for ASUS Transformer embedded controller
+---
+Changes in v2:
+- fixed max8907_power_off return
 
-This commit adds an MFD core driver for the Nuvoton NPCE795-based embedded
-controller found in ASUS Transformer series tablets and keyboard docks. It
-handles I2C communication, firmware detection, interrupt notifications, and
-sub-device registration.
+Changes in v3:
+- added idata check in max8907_regulator_probe() for BBAT/SDBY/VRTC
+- added conversion to devm_ helpers commit
+- switch to devm_register_power_off_handler() and
+  of_device_is_system_power_controller()
+---
 
-> diff --git a/drivers/mfd/asus-transformer-ec.c b/drivers/mfd/asus-transfo=
-rmer-ec.c
-> new file mode 100644
-> index 0000000000000..15942ea59fe1a
-> --- /dev/null
-> +++ b/drivers/mfd/asus-transformer-ec.c
-> @@ -0,0 +1,569 @@
+Svyatoslav Ryhel (4):
+  regulator: dt-bindings: maxim,max8907: Convert to DT schema
+  mfd: max8907: Remove platform_data based probing
+  mfd: max8907: Switch to resource-managed versions of helpers
+  mfd: max8907: Convert to use device managed poweroff handler
 
-[ ... ]
+ .../devicetree/bindings/regulator/max8907.txt |  69 -----
+ .../bindings/regulator/maxim,max8907.yaml     | 285 ++++++++++++++++++
+ drivers/mfd/max8907.c                         | 160 ++++------
+ drivers/regulator/max8907-regulator.c         |  11 +-
+ include/linux/mfd/max8907.h                   |   5 -
+ 5 files changed, 350 insertions(+), 180 deletions(-)
+ delete mode 100644 Documentation/devicetree/bindings/regulator/max8907.txt
+ create mode 100644 Documentation/devicetree/bindings/regulator/maxim,max8907.yaml
 
-> +static const struct mfd_cell asus_ec_sl101_dock_mfd_devices[] =3D {
-> +	MFD_CELL_NAME("asus-transformer-ec-kbc"),
-> +};
-> +
-> +static const struct mfd_cell asus_ec_tf101_dock_mfd_devices[] =3D {
-> +	MFD_CELL_BASIC("asus-transformer-ec-battery", NULL, NULL, 0, 1),
-> +	MFD_CELL_BASIC("asus-transformer-ec-charger", NULL, NULL, 0, 1),
-> +	MFD_CELL_BASIC("asus-transformer-ec-led", NULL, NULL, 0, 1),
-> +	MFD_CELL_NAME("asus-transformer-ec-kbc"),
-> +	MFD_CELL_NAME("asus-transformer-ec-keys"),
-> +};
-> +
-> +static const struct mfd_cell asus_ec_tf201_pad_mfd_devices[] =3D {
-> +	MFD_CELL_NAME("asus-transformer-ec-battery"),
-> +	MFD_CELL_NAME("asus-transformer-ec-led"),
-> +};
-> +
-> +static const struct mfd_cell asus_ec_tf600t_pad_mfd_devices[] =3D {
-> +	MFD_CELL_NAME("asus-transformer-ec-battery"),
-> +	MFD_CELL_NAME("asus-transformer-ec-charger"),
-> +	MFD_CELL_NAME("asus-transformer-ec-led"),
-> +};
-> +
-> +static int asus_ec_probe(struct i2c_client *client)
-> +{
+-- 
+2.53.0
 
-[ ... ]
-
-> +	/* Parent I2C controller uses DMA, ASUS EC and child devices do not */
-> +	client->dev.coherent_dma_mask =3D 0;
-> +	client->dev.dma_mask =3D &client->dev.coherent_dma_mask;
-> +
-> +	return devm_mfd_add_devices(dev, 0, cells, num_cells, NULL, 0, NULL);
-> +}
-
-[Severity: Low]
-In asus_ec_probe(), devm_mfd_add_devices() is called with a hard-coded base
-ID of 0, while asus_ec_tf101_dock_mfd_devices[] manually sets a cell ID of
-1 via MFD_CELL_BASIC() for the battery, charger, and led subdevices to offs=
-et
-them from the pad EC cells (leaving kbc and keys at ID 0).
-
-Could devm_mfd_add_devices() pass PLATFORM_DEVID_AUTO instead of 0, so that
-asus_ec_tf101_dock_mfd_devices[] can use MFD_CELL_NAME() for all entries and
-rely on automatic cell indexing without risk of platform device name
-collisions in sysfs if multiple EC instances with identical cell IDs are
-registered?
-
-[ ... ]
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261019100406.1036=
-87-1-clamor95@gmail.com?part=3D2
