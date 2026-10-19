@@ -1,120 +1,110 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=10.30.226.211
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792421575;
-	b=IfoWvZqGyL6Zofl7rWqVRaxnnHAwdcI3U93b/AdO9cf45kyeUJFO6PXojRryVPBFUqaN
-	 vyNViBsgdXZWTaJ3rwCr3oNFq88Dto5YYg50SoVaVJCR9O7/73deJL/tXLlWQJrF52Rjh
-	 BaHBY2dBJTZ06cZiHP+wCoTsmLytuMhFYjtRvdEyeyzgIebfQ6hKMXkfq9ebuNwHs335Y
-	 jRSRuhxKIHvdHo4EUKMPosWIJxSER5ngPWrSLy7WxTicOYgLL8ICVPxRmVNV2Sd8uwWB1
-	 wnzWNidjZbjV/wT0XmUQEUnda8J1WxgriXdvPaDRb2hwlszQI6TvkFrhsk/V+ybmOWw==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792421575;
-	h=Received:Received:DKIM-Signature:Received:Received:DKIM-Signature:
-	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=ZAvTCsWSNng8EghTQUQu/Tg9x/AcCtimfJ8Eqqx+Ujg=;
-	b=i9EqEa81Fq18Y9t/mQRydwOvKdHq+HMyjzUB1v1o2hCE2oX2ZyEoT70L/zM6FnqOrUba
-	 5wWOo/+9cfdeBkuFK6Z1ke0PAKG9sXKeVW5VuNJImosLBIXwg5qfvs79MB1d+n9f9x9GN
-	 wYU3/Jrl4Td4S166g06R5YQgAlgswbZVrVopaFke/ncOOKoxEjSLLNWDqTjHsDXN+bYLu
-	 A9iRRf6g4ajp7CGt+H4javQ+2Vth7weKjsNetemoX03YrC+WZwKTQPWaTYaAgQ0GMuts5
-	 Kt8Ts+NUpC9HsDF4z0OlVPEyQs1ARRPlgom08eufUvd0Xu4rV8QtRltZhh11gBsgVUQ==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="o0H/27FL";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kDyUrcL0;
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
+ARC-Seal: i=3; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1792421717;
+	b=QyLCSSdwfPCxdzziSnbeRvpwRwEosOlZk0hrjd5Ce5lnna9pekq449P6lPp5QZbOXZIm
+	 CynTbWpBlq78ckymfPmIIzQQ8WNBZQ7xP50yG4pRSQ9Smrn5hJkRXRx6GygQmxfYZ/oq3
+	 X2T5NNPB3ZEUqq57d/TXInz5esFSNPaJyUTyLV7XxNBLCEA+X2zdfdLVoYLpC0fzqvcHf
+	 MHJT7mRy3VRIK3bZiQDxRjQjg5kEfymMI7hc01K3w9dN3sERRb2MJEEc29f8RuJBdp0eW
+	 JKP//UlHZPX8rZYRMKyHPSwyjxjmngA0MkOF/n9uhS/ys4VuboTyAQhT89FmJzzi8GQ==
+ARC-Message-Signature: i=3; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792421717;
+	h=Received:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=1JVa4anZLJXOQzT6DdFCFiAtwNU6Km/IK3O7kS1gknE=;
+	b=bvTJ3nduqTH5KXTePD9HxhrS6fhNorJJpoQlOHklBOoyXcSWdmrdNT7rs81mi1eAifso
+	 iPNoksO5eYVQr7xknRkTVFmjyfUZTD7re7jsaeOzEO9Hir7TjXEQIA//CFibnY3lHaKfi
+	 j6YNX0JAN2Ud7jbtDZGY9W7TjldK4Faz9kywrnFqLJbv+nbuyWTq8S1SW70SRVueo2F/N
+	 XWMsyZITp5GnsXUD6UhFOGC6V8O347b7UbQsp2HeDik011aWol4Ozo6ANct0n5Rk6vzE0
+	 2UERu57rzcPl/MA1SGOsptCqgCKszFnDiUgyTVXNSr8T74786esuINnlJgPLgjDdj7g==
+ARC-Authentication-Results: i=3; smtp.subspace.kernel.org; 
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=LepSe1wF;
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=10.30.226.211
 Received: from aws-us-west-2-korg-listserv-1.web.codeaurora.org (ip-10-30-226-211.us-west-2.compute.internal [10.30.226.211])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 57240606A33A
-	for <mfd.lists.linux.dev@localhost.mlmmj>; Mon, 19 Oct 2026 14:52:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 579F3606EFFD
+	for <mfd.lists.linux.dev@localhost.mlmmj>; Mon, 19 Oct 2026 14:55:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=o0H/27FL;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kDyUrcL0
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=LepSe1wF
+Received: from mail-dl1-f46.google.com (mail-dl1-f46.google.com [74.125.82.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0263C4C8461
-	for <mfd@lists.linux.dev>; Mon, 19 Oct 2026 14:52:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1792421575; cv=none; b=PQV3i95FCb7ATV9bx9hA58p2BM58IDKn5K/A5dD1w2buxGp6SqdR7nkQdn810RGnmeTALLVBl6PFp3H8Djp8bYUYXlpnQwCvJF5cK4wLTf459PT7CBchmwbH0kx5Ra9Qx1zu4i79v8c1lcE8PMcNk3uNB8LBEOluuuy/4Zpnquc=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1792421575; c=relaxed/simple;
-	bh=orrAvnQKodrO0KGN/q1mi3EWkwR/z2Dn0RbWC+AZp4g=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=bb88yRXUara6zRZ9LWErEJGGLhD+gL+zYKsVyMkvgX/TEPwDU38r6Yryf9+J/2u+GJFt/VSFhr5IHHAR9zEQA4ViU26X9cIulHqVouIMdSJOzjdZxwRDNRoLkbn+uTHjHpl3ILCRjxklqwadUQEzpnrxxsZlUWRWfFBoplyOhes=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=o0H/27FL; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=kDyUrcL0; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69JE0MfR3401433
-	for <mfd@lists.linux.dev>; Mon, 19 Oct 2026 14:52:52 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	ZAvTCsWSNng8EghTQUQu/Tg9x/AcCtimfJ8Eqqx+Ujg=; b=o0H/27FLsKCbcENd
-	zuuZBR/4NyfyMNXLYkNG7wfXWl9TJQc5wQtIiqdnMyD4LVcYUO/4FGlBTHEoFGCn
-	0mphYX1DZ4I3PFbjQD7EWFndAtFiXABmnzyH52QPRkSUWDYyh5DwbV3k13KMCwT2
-	3WcoPqGuke8/owFkINPYH+7vF/NzXVuUx0IMwlkS3cbRZ89zwqbOvvEE3uSr3XBS
-	nMV113UEy8Z+di+Z+3/ftstE2Wx5BXjBwzEaAV69Cahegn8ggIN0zO2Ydk8+nuJ+
-	SRGSUyi3yQXU7aWoYyqXPX1e8+GoPOO4jyLalOeZ76xjuCEdaBILAyMIhgOwm6Nf
-	KkOWpQ==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hdftn1hgh-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <mfd@lists.linux.dev>; Mon, 19 Oct 2026 14:52:52 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f3960dca5so24471085a.0
-        for <mfd@lists.linux.dev>; Mon, 19 Oct 2026 07:52:52 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD1E3533D6
+	for <mfd@lists.linux.dev>; Mon, 19 Oct 2026 14:55:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.82.46
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1792421717; cv=pass; b=sW8xp5JYYRlwkAyfzNFUeJa/ZtrYiUIYaxb7kx1IUE5C9r+WgqgoHoPzYm8DnU8k010ncjaCUEThGBsF2W1YnkUHABsVQISsHuHshsvLckNZvsvsxe7XLcWsibyq4dfZ1NGPe03zmtaaT2nX27gL/f51V51/4EEL3HKR5rR7634=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1792421717; c=relaxed/simple;
+	bh=AKW3t68ZOk81dPuxPw32ZX6gYuPNE52T8jj7L1+y7RM=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=ZRGGZo9PiLQePBLqtTYBpqrsSIuHkzXWLhQc3d7e2+v2fmvgazMVFOBFYeL7RX/Kj/XCvocC4e0ujeiaf/UnH7x3dOoBjlCFqB1FYrrN5oBVndJFHYdba/o0c55aDvDWhySbRb23lza+n+nYsv9IHGlKkdmGQueq0VSEB9iPybQ=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LepSe1wF; arc=pass smtp.client-ip=74.125.82.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Received: by mail-dl1-f46.google.com with SMTP id a92af1059eb24-17bc533fda3so2462587c88.1
+        for <mfd@lists.linux.dev>; Mon, 19 Oct 2026 07:55:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792421715; cv=none;
+        d=google.com; s=arc-20260327;
+        b=gPFu0g/fk52/nd0oHVVkviEBTGPlqnIJXmyYZyZNyhaV+K78YA9IknU0F35Y8lREvG
+         rwJbyXsdFGMACulNrmRL+QDCQO3ORCRwO9whx7XVmELSjmByv8BStBBQtkS8e6YKAXqB
+         UBKbDpLYdFUdsKlB9ZZxhTaIOwe3C5UnFrcsP5nIRmTnYhvsw3IFX06hGxQe0YNII4im
+         bLdth9IWa0mbbCVZ7u9AAFmxl9LYipdCS5NdsSFNBKG2SSri7Lx3Dy8eqXN/KBEOxutY
+         v5d67K/zP7x6yoL7cedz3fZRniQA9O8OjGhxpGFKL3jhcAAvT/Bg9Mo4GOQV8NbFjoF4
+         +/ZA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=1JVa4anZLJXOQzT6DdFCFiAtwNU6Km/IK3O7kS1gknE=;
+        fh=7QJl5XWodGJUnTMQJADOj5JoN5JioqgMNoIA/H0GtmA=;
+        b=Ssz0rJDwkOSPSYyIfguYtU3z552PotLjl4jouWUXe7XX4iWtDC7LC4TcWpA5W6r3IG
+         sZ0v++3jJ8M9K2v7qMB8HUxmNWn0hEOxvFhS+clSgW2mSSj7ppeaErpyqT18qsdHQaYG
+         ZpT/8dTFLGVprFRdN1RE0m4ne4OK4DcgVZr9PSMK95SCPIn8TaBIBtfx7MCO/Vo8rJBu
+         s3/1+4UbXqOx9rA4uIGoHMIrGroU8LtmthS9qOS/PKbMLl5HPVVnCxFl2RsjCA4n6Mw/
+         8FVyXIc6LGZDV4Q8dlfqsZL6rL2Fi2CEUzBvT6z3yFwOCVp7xMOf44aSqiE80brI99v7
+         Ielw==;
+        darn=lists.linux.dev
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1792421572; x=1793026372; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ZAvTCsWSNng8EghTQUQu/Tg9x/AcCtimfJ8Eqqx+Ujg=;
-        b=kDyUrcL0kbWyhUn4OGhZxKZr3Cr6R3aJy3VIdmL0KuzSnPhfFQAm2/zc4Ypg+yGJeF
-         GlHOagJv8bJRAixiPFLW28qWWvS/8rieqIz1dxeG/hnEbFNT0wDJhiAwx7Wx0mTgo8mB
-         uYMQMmPflCJBDkosGRwldcN6zmndaRmf/QTVNrMU9/2yjQ4Fs1CdVlqM71Y3TzImNIEh
-         s8UT+pPfgj4xqPffgSza9SzrSEVTCeKzCJdM/bwA3vyqo8/G2EqPuVQ54LCq+q/2jnnf
-         0XCzex5uZypVp24ptx3Ijve4JuJKVm4ZdL/seqRhSB6QKqfWBFaW+5WAC+aFkayKvVcX
-         s8Wg==
+        d=gmail.com; s=20251104; t=1792421715; x=1793026515; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=1JVa4anZLJXOQzT6DdFCFiAtwNU6Km/IK3O7kS1gknE=;
+        b=LepSe1wF4cJZXKu5Mgx4n4dBBU8FC1/hhkAJbGICqOapYpPiwaXLA3vVxfzvBrU0Xh
+         pCHtd3YosJkgJ1S+XB9082J57UpkyXeFcmDi7XfR5Y4M96AbRsAxQL2PjOd5eQZzD2s4
+         GRJO1peOuQgp114WHqysp112gdeeLFhWVLk4KeIq0Nf/ifQg2ZLooOmt4wSN65XQ0a+k
+         Ha0av3jrcAXMg6uZ/vIadO59IFTssm4FTAvUIGZe8Zt51kpyxoyOi2skT3NU8RVyLKvV
+         0x1qwr7zzVl+ePn0VhruGCzuTwPbpC6QzurTXbiHC5iiZQ18o3NKPaFShGNv4M9DCwwe
+         wbsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792421572; x=1793026372;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ZAvTCsWSNng8EghTQUQu/Tg9x/AcCtimfJ8Eqqx+Ujg=;
-        b=VuPENatJb8Bq/7b/OZtjvoLf5qYPqLriv6zY8ZgNitcsKv5sZgxuv1SfAHJmNGZCf5
-         F4DD9F5fnhihXgEk9MLaGQuMur94nCPXN6qT5wOqwfcsQRFmyYX7mkFq2ntrrEMv5L4e
-         Vivizr2peSM+iirPgK4afAFSqTJEc2zVFAjVVo24mI4Xd20D+qC4NkVdsr9R4G/1tou3
-         yXQMlUXYsqEhJqYvbK7YCvhZlmsKYOmTWWKHvLgh2qNV++7iC+NLxtdkul7A4GhYPT9c
-         3xrE7cVQP1B9lISPTU2xb12bGShF0a9g7NlZekXn6kEoMx8nSYNwowoZFUSnWlU443t3
-         S21w==
-X-Forwarded-Encrypted: i=1; AKwUvBx35vTPcFkV8+VHY8juBV7tngYz+/W7Yz7J7y+2ZWicHYPieAZ8SMph1fq8mpx8lQAwRCw=@lists.linux.dev
-X-Gm-Message-State: AFq9FYKyjv89eE1DW7/6EBtzUS1WciW8Sj2fq1hUSTNO33woIs+3LStY
-	K2NYes/bmmR7SXFKYStoMtIJSNTvesAHGvmG74AXHnrgbkSzxWn8OlR4bHHVJ+oTjWQdR7IHJ4s
-	AFx3/+277JOqY5tqMel5P42Nyah/cuCJnPwdtLKoCpEhNb2XmzZK0Jl4=
-X-Gm-Gg: AYBFou1VNEyHwabHmrBHLfMtXQK0MAyvf4H3kYa1avcUTVIsd+3wN3EWmKNb5a5PHmO
-	vnHS0hM/xdSvxeAuH+fZAL9tiSo0DSxe0eRwBW2hVZ/VSV/bG880E9Xdu49GhOFKcS/ByFXSLyT
-	vGmHBBvvlQw6peepTvWF/5pfUNRYllYXWXHaSpXV4L3n3uJZckRWjX9cfVwcxjDTHqZS91cL5Ie
-	LDNXQoMoOMx1Rljpm/RHVvGLADFdBxHRdewcmPHnC6ZueFFlWndixasY6+LTL/hMir4kmVwaL5d
-	5AFRFSPLwouO7QCApdRlTUo4WHDPwXG260//V0pyaTZY2Hu/RT0sreLyEA1DlUQq0kaN+2STpaF
-	ebyLvbkcK2E9G77OV9irImQ==
-X-Received: by 2002:a05:620a:17a2:b0:93f:1a1a:2974 with SMTP id af79cd13be357-93f29e1748emr1420800485a.6.1792421572218;
-        Mon, 19 Oct 2026 07:52:52 -0700 (PDT)
-X-Received: by 2002:a05:620a:17a2:b0:93f:1a1a:2974 with SMTP id af79cd13be357-93f29e1748emr1420796285a.6.1792421571699;
-        Mon, 19 Oct 2026 07:52:51 -0700 (PDT)
-Received: from [192.168.226.26] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c408e32c075sm380967066b.11.2026.10.19.07.52.48
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 19 Oct 2026 07:52:50 -0700 (PDT)
-Message-ID: <40bdd031-1d56-45ef-905c-32e706376d01@oss.qualcomm.com>
-Date: Mon, 19 Oct 2026 16:52:48 +0200
+        d=1e100.net; s=20260707; t=1792421715; x=1793026515;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=1JVa4anZLJXOQzT6DdFCFiAtwNU6Km/IK3O7kS1gknE=;
+        b=gLy2QDTgqPxvxF5GVfZFdkPI9lPiAiqBJMakDg055FU4Gbe+1oyS0SdSto5zPOXEC8
+         URXzni4JX4JHe7L6V862XEiCAT/5J1C84GYN+GR64qJxBKccB98ExuSvb9FC0hIHUTCm
+         RyP7Mdk6/+J2mezl3HJJeEGYwISEjUNnCjOI+ChlpVobwFdAcY5cEESYVFoZZBtOxNz/
+         pYzRrnVdN5ldWU8Wfmk2rH5BFrStPYgFQjIL+0Vno2rz9Yfuuj8hz94A4Qcb52u4nY4d
+         l+gqkilOOI9Lkg4EuQeLk65czF5tAJEfXbkiXa9txKGkG5CPZH4V0Op41+V0RHe9gRin
+         jdOA==
+X-Forwarded-Encrypted: i=1; AKwUvBwXqFDrk2RHeKx4HQjg2bcr1JK7L2CK9BmPBrhVn1fknwJo0FVsXqkuda/8gWteb9vvga4=@lists.linux.dev
+X-Gm-Message-State: AFq9FYK7M9a1+UOqmogMnli8P9Scwq+tPUWMfTOiIirYW3EdsqgCnPEB
+	V64BLmrAiC/F8vU+txKA6qNxtSwfv8duhKVUIg4ptcUNwKyjZOz+2RIvT85c8yIfE1U6g0QcHga
+	ZCSenYJs8eWJUzarg65EJpeyF80cc8FY=
+X-Gm-Gg: AYBFou3HN1MUc4HBX99ApCj/ALfiyEEwAA1z8UtmkpC9Jtfsr9sk9Gmru7DLGAksjMr
+	uXpuKSv/Vlw97UuP2bWOQK7nmuztgtz40EidOxa7T7r/eO7ssbl9aQSnHXumbdb8QTQM55znmkU
+	HQq+MmMxR87FLOfT4R3/0fLcuipCqFweA83hIa23vsJN0lSvnlUkV+O2fDOpO4MI4UGmWe9mtXD
+	VEEBpnO5O7Ub2Ew62E1pf8iFcaTS9tgHB+MPf5z8Z+q1z/ly5UrZD0dgF9rzMN61bebuZ6xbolm
+	qvOQivaAx/Mdj5dmUnWWo1Slvrva1EayliKracVBoZnGohMpkTBSlPXEtxXMOfeZ8fvNs5d5mAP
+	pC7gA7/onPQNS
+X-Received: by 2002:a05:693c:87ca:b0:35b:c1d2:eab9 with SMTP id
+ 5a478bee46e88-361a2e3d3abmr10553103eec.39.1792421714834; Mon, 19 Oct 2026
+ 07:55:14 -0700 (PDT)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -124,68 +114,126 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 05/12] arm64: dts: qcom: pm7550-eliza: Enable BCL
- sensor node
-To: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>,
-        Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
-        Abel Vesa <abelvesa@kernel.org>
-Cc: linux-hwmon@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        mfd@lists.linux.dev, Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>
-References: <20261005-qcom-bcl-hwmon-v4-0-50b9a8c730b7@oss.qualcomm.com>
- <20261005-qcom-bcl-hwmon-v4-5-50b9a8c730b7@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261005-qcom-bcl-hwmon-v4-5-50b9a8c730b7@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE5MDA1OSBTYWx0ZWRfX3Fz3Hudyxrqu
- +QdA3EuD6lkOA6nSncGydBrXVKCDAqYDdF4MAiUthlVfwdl/Ykj6XUyrEyp1vzXCJ/xAXs5+Xek
- zj0+KKL6RgzqhQm2njUarn1BKjkP+3U=
-X-Proofpoint-GUID: vQzYc2_XaAr3l1JyFBybBa9yCeKI1_Jp
-X-Proofpoint-ORIG-GUID: vQzYc2_XaAr3l1JyFBybBa9yCeKI1_Jp
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE5MDA1OSBTYWx0ZWRfX14Yw9JJrX+dU
- EN3giIjH0IoMzv+gAk20/mFzQ39TBFZFG/xJAosvqo9TCA/FYxA7wTdmb0QNHrEYSA3V2GgFOEL
- ne7qYCamjNQbvITegoESHAJ/fGj1/8JT1euYIuNwzekTTYf3LzH8fJSXgBS+0qay2WUNksqcgid
- JeTgdiXoviMxZ2gPcxjj5PwvT0ChSmupStGHzdJV9NBkcVt8C0pkgBsfLTJmPkaY/oq6TH1NrKv
- Li0wfAfaTF2zW0nuX0vpuZVRbcQZ3nHwY9nQvAeVB1se0YMb5ocETqHVu/9cWU8ki33yD/YLM1S
- qwlQ7ri4lu4FtU5DOxUE9hoaconcYX1cxbBoKTswRcC0tZlKdMKjp/cFGwchNN2bc3H/725Kk+F
- l1y/+zWZSImplwRHp9QO63XJDuZoa5+4wokxJi2G4E6QajqHys7LRQN8ilB1+tYdW1xQnooxRrA
- o/An9wgnDbnrxJztmZg==
-X-Authority-Analysis: v=2.4 cv=OvTaWC/t c=1 sm=1 tr=0 ts=6ad62ec4 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=EUspDBNiAAAA:8 a=GBzGvGGi_yB6IOxyoawA:9 a=QEXdDO2ut3YA:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-19_04,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 adultscore=0 lowpriorityscore=0
- priorityscore=1501 malwarescore=0 bulkscore=0 impostorscore=0 spamscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610080000
- definitions=main-2610190059
+References: <20261013180933.487013-1-clamor95@gmail.com> <20261013180933.487013-3-clamor95@gmail.com>
+ <179198332384.839288.13126529382772558553@kernel.org>
+In-Reply-To: <179198332384.839288.13126529382772558553@kernel.org>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Mon, 19 Oct 2026 17:55:03 +0300
+X-Gm-Features: AclHuK-mou-LoaLS3qywfc3GD7SbgOiLXnwqTE0Jl9qjYTR1SQVKYSakF-bo474
+Message-ID: <CAPVz0n14BhmK4P-tqnt6AMrAh=W-HPoBbP0ztdOrRd_JocRSqQ@mail.gmail.com>
+Subject: Re: [PATCH v3 2/4] mfd: aat2870: Derive brightness steps from max current
+To: Lee Jones <lee@kernel.org>
+Cc: Pavel Machek <pavel@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+	Daniel Thompson <danielt@kernel.org>, Jingoo Han <jingoohan1@gmail.com>, linux-leds@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, mfd@lists.linux.dev, 
+	dri-devel@lists.freedesktop.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 10/5/26 2:24 PM, Manaf Meethalavalappu Pallikunhi wrote:
-> Add Battery Current Limiting (BCL) hardware monitor node for
-> pm7550-eliza. The BCL monitors battery voltage and current, providing
-> hardware interrupts when configurable thresholds are violated.
-> 
-> Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-> Signed-off-by: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
-> ---
+=D0=BF=D0=BD, 19 =D0=B6=D0=BE=D0=B2=D1=82. 2026=E2=80=AF=D1=80. =D0=BE 17:4=
+4 Lee Jones <lee@kernel.org> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> Wrong subject line.
+>
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+What do you mean by "Wrong subject line"? Specify.
 
-Konrad
+> Please review, explain or fix the Sashiko review(s).
+> If this is a set, this request includes the other patches too.
+>
+> > The AAT2870 allows only 32 steps of brightness, with this amount define=
+d
+> > by the maximum supported current. Remove the need for max_brightness by
+> > calculating the allowed number of steps from the maximum current.
+> >
+> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> > ---
+> >  drivers/video/backlight/aat2870_bl.c | 30 ++++++++++------------------
+> >  1 file changed, 10 insertions(+), 20 deletions(-)
+> >
+> > diff --git a/drivers/video/backlight/aat2870_bl.c b/drivers/video/backl=
+ight/aat2870_bl.c
+> > index 8b790df1e842b..eb686e315921d 100644
+> > --- a/drivers/video/backlight/aat2870_bl.c
+> > +++ b/drivers/video/backlight/aat2870_bl.c
+> > @@ -24,18 +24,6 @@ struct aat2870_bl_driver_data {
+> >       int brightness; /* current brightness */
+> >  };
+> >
+> > -static inline int aat2870_brightness(struct aat2870_bl_driver_data *aa=
+t2870_bl,
+> > -                                  int brightness)
+> > -{
+> > -     struct backlight_device *bd =3D aat2870_bl->bd;
+> > -     int val;
+> > -
+> > -     val =3D brightness * (aat2870_bl->max_current - 1);
+> > -     val /=3D bd->props.max_brightness;
+> > -
+> > -     return val;
+> > -}
+> > -
+> >  static inline int aat2870_bl_enable(struct aat2870_bl_driver_data *aat=
+2870_bl)
+> >  {
+> >       struct aat2870_data *aat2870
+> > @@ -69,10 +57,11 @@ static int aat2870_bl_update_status(struct backligh=
+t_device *bd)
+> >       dev_dbg(&bd->dev, "brightness=3D%d, power=3D%d, state=3D%d\n",
+> >                bd->props.brightness, bd->props.power, bd->props.state);
+> >
+> > -     ret =3D aat2870->write(aat2870, AAT2870_BLM,
+> > -                          (u8)aat2870_brightness(aat2870_bl, brightnes=
+s));
+> > -     if (ret < 0)
+> > -             return ret;
+> > +     if (brightness) {
+> > +             ret =3D aat2870->write(aat2870, AAT2870_BLM, (u8)brightne=
+ss - 1);
+> > +             if (ret < 0)
+> > +                     return ret;
+> > +     }
+> >
+> >       if (brightness =3D=3D 0) {
+> >               ret =3D aat2870_bl_disable(aat2870_bl);
+> > @@ -150,10 +139,11 @@ static int aat2870_bl_probe(struct platform_devic=
+e *pdev)
+> >       else
+> >               aat2870_bl->max_current =3D AAT2870_CURRENT_27_9;
+> >
+> > -     if (pdata->max_brightness > 0)
+> > -             bd->props.max_brightness =3D pdata->max_brightness;
+> > -     else
+> > -             bd->props.max_brightness =3D 255;
+> > +     /*
+> > +      * The maximum number of brightness steps is determined by the ma=
+x current.
+> > +      * The aat2870_current enum maps directly to the allowed brightne=
+ss steps.
+> > +      */
+> > +     bd->props.max_brightness =3D pdata->max_current;
+>
+> What happens if 'pdata->max_current' is 0?  Above, we fall back to
+> AAT2870_CURRENT_27_9 when assigning 'aat2870_bl->max_current'.  Shouldn't=
+ this
+> use 'aat2870_bl->max_current' instead, and if 'aat2870_bl->max_current' i=
+s no
+> longer used anywhere else, should it be dropped from 'aat2870_bl_driver_d=
+ata'?
+>
+
+Resolved in v4
+
+https://lore.kernel.org/lkml/20261019100930.110954-1-clamor95@gmail.com/
+
+> >
+> >       aat2870_bl->brightness =3D 0;
+> >       bd->props.power =3D BACKLIGHT_POWER_ON;
+> > --
+> > 2.53.0
+> >
+>
+> --
+> Lee Jones
