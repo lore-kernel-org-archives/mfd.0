@@ -1,52 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792490383;
-	b=FbOArgY4kxcY3D4ohUMrYeDg3WNVe818sgIqfIYuQ2Yi8G1c/nitORnL+wrZSNiziyTF
-	 wy+GCPJbHO4ZQE3VKft8Y6xXa6U15fKSx2igOZlV3h37FjjLmTPxvW6OZzW8JUcMxa5LG
-	 kSD5e0JgWPZRwl7WTGGvgnth5M5xgQ3T5lG/AS0oWo3VO5b9dHJeTFe9NOzgYMCujEkIC
-	 1C6fR2Vt6jv6seUpS2hEz5000WHe0bc1BLzJL0FOOP78JvX79DKCQIlad6vamGz1H8MB3
-	 JWFt36WE46NR501hnhoa2qYSimOgVJyc6IGOrhHzSaw+Qfh4cUUeyCaIDdMrYbfjbCA==
+	t=1792495623;
+	b=2BP1x0RuTrhFgQ2BS6C/ANGH4P0wbNqf+ut6J689/PObAtkPa35YlNkIjUIkruZkZBY+
+	 8Qe+UQDXYt7pK8JPRQmyGhXzPcpiBFmXxMpa5dJk5HULKLjmM5bRqI217eCHi7eCOx2HS
+	 TGng5ELg+lWk8M12PNlqHtFT6o9+5HrJMfua5ffACHbbEdybn2i7zZWE1QibPASk1CDrq
+	 LQ3+RpmcS4r0ywdUs+YlOvVrA+kNZV61sTkwvv62s9/l6nIolZttkSpduK0UbZVeLNI4a
+	 6KmZPBp2oqpceTKjAY8xNmT1JNWp2nAFFf2bYfD8PZhJhpRMAyclcXS9W6Kv+ytPwpA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792490383;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792495623;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-AI-Review-Draft;
-	bh=wegGHguPpjDXqOighrktidC2a/mLT1H0KSiQtmKA+LE=;
-	b=36CYgsclZKKtnI6DLxikFpjqI6U+4ASTYOHy0RujQXkTnaIp9wJkl3fDco3sMBwIvM7M
-	 KoDoF6lqB8/+NUcSueRr7VLpz5gF0/k3jXyxnpK1SnY1T+sbt3BGE6GQhjh50O1FlDV9p
-	 4YGQoo9+Qs8IWWuhbxjdps1jc8Xg5PxSA8cloX9qBHnki8R9sEfhlKUZgoJwozYxdqKKK
-	 lCwld7E7CEkmZewjmVoQ+uit9MjSVnDzK+lyVngYw3ZJVFOTYgqDCa9y1gAKjo6GIgML4
-	 mwhd3jtUprxXEWLnv0rXTWMgfxsQ29acR9lDCSMZyC7RZW1x2ii6kjTwPOYt03FWNAg==
+	 References:MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To;
+	bh=9IuNGgu3+n8EnXEqNr9sfqGmADrlCNKPBop93Whvr/M=;
+	b=1mckYZgjE4D5DdyZcpeeY8pYoHCWduu/cL7pYOYFq/3Sj5JMs7RjT2z6NQh9uPVYRg72
+	 xV4z74E8wVSb0/1SBcaIsufbfgjlsXQtEN7NyV91CsZT3zxMU1+O3Mdogrd837SK6rFIn
+	 BZthvRsobme7Z9Q6stzoXYJxvHmN84W/U3LZcD/laypXiL4LQYWaFrzdBrAKndfg+qVHp
+	 GZ/WaOF2yc5fM3D1bi9/pOG9i5BfAn4RX6+RTy1c8yLiwTsi6tMd+OXzTiFlapeXTkGH/
+	 uimIPVGYSUC6N5N5VpnnHHA4SdjHnzBLUiJG8C2WRbyqZh7mGjhdjBlMSgyjDOjg3eA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Cqm7XafU;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kngWsQhr;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BAA4606A31A;
-	Tue, 20 Oct 2026 09:59:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2D16606A319;
+	Tue, 20 Oct 2026 11:27:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Cqm7XafU
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0BAD91F000C4;
-	Tue, 20 Oct 2026 09:59:41 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kngWsQhr
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 87E2B1F000C6;
+	Tue, 20 Oct 2026 11:27:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792490383;
-	bh=wegGHguPpjDXqOighrktidC2a/mLT1H0KSiQtmKA+LE=;
+	s=k20260515; t=1792495622;
+	bh=9IuNGgu3+n8EnXEqNr9sfqGmADrlCNKPBop93Whvr/M=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Cqm7XafU+k6yGCSr85lg9e40wayyPXMe2oBsPWL3PUgaa0nvfbifBVjvdh5e1etqv
-	 t2AlUmNCTzer+DWX34HuMiIAvcBtfWObNTgQaCWA0yLB51lgFnka/iMFL9LwrlaWaU
-	 NyWUUY9Vo0ZNQ/G2PyV4inAUNtKGFkOEm9g34T6NcxTyNBMxFlr7CfaYmc8dRd+4lk
-	 5l9D7GOO53DzTg7wQMSHkU/oLUqiCTnbSlphtH87ZfCG4RQoUCnAPFDhNieSdGSeCO
-	 C3+Qn4kjGNYwEuzfEzRZVtdcnWyrmeWOrZopp1vYE6/zqy5JhQV1sBxCCd+1CMT4P6
-	 3/gbLK6Wsc2jw==
-Date: Tue, 20 Oct 2026 10:59:39 +0100
+	b=kngWsQhrwAC3fMs5oD32NO1HRJe/5g7ROr0sWqh9Wkn8SnMApos/5zyXTX64BhcCd
+	 fR85L1zsQhl4kWmdZtxDF18lJjrJD9rh3BkLaEM0D7O6gaNdoe8Uaay1gMybd4saOI
+	 yOP4u8aOoOb8v0N7WPvj/O/JMCxv3+KTKUCwsv4gY9e8EXAJju0XkOsNML/hCpyAZh
+	 QpUAN6s8ZnLBNSnugIKmQPBrSdf2MuSHGycxs1EorkGzrug1eSh/elAiXr+mS4iqf8
+	 hePYSTpviLfqTF2nYPVq3hivBh4tjS3aUV3ijZRGfhattrZn+t6AFdywm5ekR7grxC
+	 aOwAxYWYY52Ug==
+Date: Tue, 20 Oct 2026 12:26:58 +0100
 From: Lee Jones <lee@kernel.org>
-To: Riccardo Oliva <oliva.scorza@gmail.com>
-Cc: linux-kernel@vger.kernel.org, mfd@lists.linux.dev
-Subject: Re: [PATCH] mfd: dln2: Fix use-after-free risk in list iterator
-Message-ID: <179198398105.839288.1873130512029656566@kernel.org>
-References: <20261012234230.17966-1-oliva.scorza@gmail.com>
+To: sashiko-reviews@lists.linux.dev
+Cc: Charles Keepax <ckeepax@opensource.cirrus.com>, mfd@lists.linux.dev
+Subject: Re: [PATCH v2 RESEND 1/2] soundwire: Add a helper function to
+ indicate a device will detach
+Message-ID: <20261020112658.GB1795367@google.com>
+References: <20260924120520.2511081-1-ckeepax@opensource.cirrus.com>
+ <20260924120520.2511081-2-ckeepax@opensource.cirrus.com>
+ <20260924121706.432811F000FF@smtp.kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -56,74 +59,81 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20261012234230.17966-1-oliva.scorza@gmail.com>
-X-AI-Review-Draft: <20261012234230.17966-1-oliva.scorza@gmail.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260924121706.432811F000FF@smtp.kernel.org>
 
-On Mon, 12 Oct 2026, Riccardo Oliva wrote:
+On Thu, 24 Sep 2026, sashiko-bot@kernel.org wrote:
 
-> In dln2_unregister_event_cb(), the iterator variable 'i' is used after
-> the list_for_each_entry() loop terminates to free memory.
+> Thank you for your contribution! Sashiko AI review found 1 potential issue(s) to consider:
+> - [High] soundwire: data race in sdw_slave_signal_unattach() with complete_all()
 
-How is this a use-after-free risk?  'i' is only ever used after the loop
-if 'found' is true, which means we broke out of the loop early while 'i'
-still points to a valid entry.
+Charles, did you answer this?
 
-Is this an actual bug or are we just silencing a static checker false
-positive?
+Maybe this is why Vinod isn't replying?
 
->
-> Fix this by introducing a dedicated 'target' pointer to hold the entry,
-> isolating the iterator to the loop scope and removing the 'found' bool.
->
-> Assisted-by: coccinelle sparse
-> Signed-off-by: Riccardo Oliva <oliva.scorza@gmail.com>
-> ---
->  drivers/mfd/dln2.c | 9 ++++-----
->  1 file changed, 4 insertions(+), 5 deletions(-)
->
-> diff --git a/drivers/mfd/dln2.c b/drivers/mfd/dln2.c
-> index 0b1e7fd7f..7cd64aad1 100644
-> --- a/drivers/mfd/dln2.c
-> +++ b/drivers/mfd/dln2.c
-> @@ -157,25 +157,24 @@ EXPORT_SYMBOL(dln2_register_event_cb);
->  void dln2_unregister_event_cb(struct platform_device *pdev, u16 id)
->  {
->  	struct dln2_dev *dln2 = dev_get_drvdata(pdev->dev.parent);
-> -	struct dln2_event_cb_entry *i;
-> +	struct dln2_event_cb_entry *i, *target = NULL;
-
-If we do keep this change as a cleanup, does it make sense to use
-'entry' instead of 'target' to match 'dln2_register_event_cb()' above?
-
->  	unsigned long flags;
-> -	bool found = false;
->
->  	spin_lock_irqsave(&dln2->event_cb_lock, flags);
->
->  	list_for_each_entry(i, &dln2->event_cb_list, list) {
->  		if (i->id == id) {
->  			list_del_rcu(&i->list);
-> -			found = true;
-> +			target = i;
->  			break;
->  		}
->  	}
->
->  	spin_unlock_irqrestore(&dln2->event_cb_lock, flags);
->
-> -	if (found) {
-> +	if (target) {
->  		synchronize_rcu();
-> -		kfree(i);
-> +		kfree(target);
->  	}
->  }
->  EXPORT_SYMBOL(dln2_unregister_event_cb);
+> --
+> 
+> commit 0022c8987af32edaf369ec5a75ade11e2d3a1ba3
+> Author: Charles Keepax <ckeepax@opensource.cirrus.com>
+> 
+> soundwire: Add a helper function to indicate a device will detach
+> 
+> Add a helper function that a driver can call to indicate it is about to
+> initiate an action that will cause the device to detach from the bus.
+> 
+> > diff --git a/include/linux/soundwire/sdw.h b/include/linux/soundwire/sdw.h
+> > index 707ca6bd1e23d..7d41df30561cf 100644
+> > --- a/include/linux/soundwire/sdw.h
+> > +++ b/include/linux/soundwire/sdw.h
+> 
+> [ ... ]
+> 
+> > @@ -1214,6 +1221,25 @@ static inline int sdw_update_no_pm(struct sdw_slave *slave, u32 addr, u8 mask, u
+> >  
+> >  #endif /* CONFIG_SOUNDWIRE */
+> >  
+> > +/**
+> > + * sdw_slave_signal_unattach - Signal that the peripheral is about to detach
+> > + * @slave: Pointer to the SoundWire peripheral.
+> > + *
+> > + * Inform the core that the peripheral is about to detach from the bus, this
+> > + * is usually due to some implementation defined reset mechanism. After this
+> > + * sdw_slave_wait_for_init() should be called to wait for the device to
+> > + * return.
+> > + */
+> > +static inline void sdw_slave_signal_unattach(struct sdw_slave *slave)
+> > +{
+> > +	if (!slave)
+> > +		return;
+> > +
+> > +	slave->unattach_request = SDW_UNATTACH_REQUEST_SLAVE_RESET;
+> > +	reinit_completion(&slave->enumeration_complete);
+> > +	reinit_completion(&slave->initialization_complete);
+> 
+> [Severity: High]
+> Is there a risk of a data race here in sdw_slave_signal_unattach() with
+> complete_all()?
+> 
+> Since reinit_completion() is non-atomic and executes locklessly here, a race
+> can occur if the bus ping thread concurrently processes a previous or bouncing
+> ATTACHED event in sdw_handle_slave_status(), which calls complete_all().
+> 
+> If complete_all() finishes after the zeroing, the completion remains marked
+> as done.
+> 
+> Would this cause subsequent calls to sdw_slave_wait_for_init() to return
+> immediately, and potentially lead the driver to perform I/O against a
+> detached device?
+> 
+> > +}
+> > +
+> >  /**
+> >   * sdw_slave_wait_for_init - Wait for device initialisation
+> 
 > -- 
-> 2.43.0
->
+> Sashiko AI review · https://sashiko.dev/#/patchset/20260924120520.2511081-1-ckeepax@opensource.cirrus.com?part=1
 
 -- 
 Lee Jones
