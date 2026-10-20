@@ -1,43 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792518241;
-	b=hoYe2q3bzUnFVWCoZJ3jeDcRvnJN6CTN9tDOD9EklqKH24hidTYofJIJJDdhC6l8lkDt
-	 Wnw0yiLfEy8U8r1t/dQgkj6ybQn2Yt8G1PF4b28xxvn9Ne5YQbRJN6bdbbWv2vzHw4kbQ
-	 n4IbGEqHeWd7jvXRg5D/oneSDJA0LaXDum/c9HOnFQnLdFGgW+7Yc5Xd+n4LXfw1hnVMP
-	 YWeN/cslIIEODWegqUhEowjTNLM/kq6IeQBy1wPTZy6KtVcuSyZrzlua4JpAj4mE+Iqsn
-	 ZUWrSnP2PD/+wDSnfPfm/VZcldejz5PItXmvO2QJy/gxa8MmAjl1b1FqXuQ3dKuAOWQ==
+	t=1792518293;
+	b=gvqqBaEVkGu6YqCR48gBMuu5Fi3Zx93z4ExvYjr11frPZOiwyenS3Wk4NFFVUpmJNNBP
+	 NrCSE9UBgQmf1FyDk6YAWU3g00pMIc1jS25X2eyXFAs04nMfw1k3/v6cHEmKFwxErfHpH
+	 FbX3r+VdgdKoka8Vbap842iFmQAZcWYvEp5qmWah4EpAiv13UGBQaJh0NtR4EUPjdDxBH
+	 EJWXMN0Qw0dQMm47elDuZl+p7qGDeuJ0oQwe5ZpyXfSF0XIpYbv8VVEQ8E1BBmwFFC6mx
+	 TjZVVIcj+5pyUbMCWztIyCexl3FvhovI4RHjb/GEPFM6x884mNRUmFESPOzDhlE++Ig==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792518241;
-	h=Received:Message-ID:From:Subject:Reply-To:To:Cc:In-Reply-To:
-	 References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=0qfI1ulEEfinW4SJBztjKQCz9P1onwkIIRF7zOVMM1o=;
-	b=OIGEaycj7CFoFyIypNO8lDsW+XXsEriqGdHhfFHQyJpkfWizUoWYMkMyCtJZb6UQQ0Ws
-	 CFEtGida8JideZUwRU9DblmkgQCR4piAvNT5eBUo4IOKI1T/HoMwtA97rcbxcFKOIMUZR
-	 tvjIPwPtyb2ld+XIMqOsrX2Ylwy8wij/Xde/0g+SyKzuxHxpKsIyyZGDAWhKlK3MiT2Lx
-	 Ux3hT2fxqVHT/jk854nSPzTnpkCl0ugmj6f3RHAXY8FrcGuyPsUCZEtVkKRVmyUlAdPg5
-	 9FxSapxvutww1SDLy5LioLTPv2xMWfwvFiH3aY+8WB9YkSOPAMJhFPCEU287liXK/Dw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792518293;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=gbdxaVeEJ/4XHQ/33XM4N2HNTKTTCvaqEHL/qghmKww=;
+	b=1ORqASi27NX5gFbgKdxzDiVTWAXo9+PWiNYnfv1s8H7B96QFNYhGkOpoE4FhvidCIaKK
+	 vE9ksmeTlxq22ZVh5GHyVi3e/KvvUt74w9uDEGhzvHjcC/WBrLV6IBgl7YGpUltCyg/Lx
+	 JLNfQnWpOU5x1y1Nqva+e+7WzpaU2xgdCt7SRqf/pbNIYg9yGw6OreopCYs+Wo/Byn6ol
+	 J/sa3rl6TNZSUr48nQ3jDEyd0HSdSpMfBYAT1dyX4Pom4lVVM9U2LkQjpjyIKIlYZpbPv
+	 YONFIk8uNHtp9eGuU2tGpNFwADfy9qZbDYNV3ChcC11GCsazG12JWMy2r33Yrpu+ERg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f4OODdLK;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D3F0606A31D
-	for <mfd@lists.linux.dev>; Tue, 20 Oct 2026 17:44:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 24F0C1F000C9;
-	Tue, 20 Oct 2026 17:44:01 +0000 (UTC)
-Message-ID: <sashiko-outbox-179439@kernel.org>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6B9C606A319
+	for <mfd@lists.linux.dev>; Tue, 20 Oct 2026 17:44:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f4OODdLK
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A22B1F000CA;
+	Tue, 20 Oct 2026 17:44:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792518292;
+	bh=gbdxaVeEJ/4XHQ/33XM4N2HNTKTTCvaqEHL/qghmKww=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=f4OODdLKbOVBEG5Y3xvPJ7JtjtS+Y9KyNtuxEPoYu+t7M3q9UVBhZ3fMn4riqCxl1
+	 LFnIgux3KsDSRrMGELEGVRXwQ7YXVrQG8P2h1wvTIW8PcK/U1mSCIW4XyCFfKgtJDu
+	 kps03+4P4JY+gEkKMCaLBMVNP3R/4ZTYYIrC9otN6mJ1aubkKnoKJfp4Q5YUWsUNlo
+	 PfNtVzgmlHkSPzl3kGn2YjmGRSYxPfVGuBh7Ut2NG17TeUm1kVNl5hOCrMYSc+xhey
+	 DxO2lNbyPp6Om49yjUSj+geHPnhKzd4DpkO7rG7v8R1VR0IqlX75WoLS0bfp94aGeu
+	 6qO2/cLa7bOJQ==
+Message-ID: <sashiko-outbox-179441@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RESEND v10 5/9] mfd: mt6397: Add support for MT6392 PMIC
+Subject: Re: [PATCH RESEND v10 1/9] dt-bindings: mfd: mt6397: Add MT6392
+ PMIC
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Luca Leonardo Scorcia" <l.scorcia@gmail.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261020173556.632798-6-l.scorcia@gmail.com>
+In-Reply-To: <20261020173556.632798-2-l.scorcia@gmail.com>
 References: <20261020173556.632798-1-l.scorcia@gmail.com>
- <20261020173556.632798-6-l.scorcia@gmail.com>
+ <20261020173556.632798-2-l.scorcia@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 20 Oct 2026 17:43:58 +0000
+Date: Tue, 20 Oct 2026 17:44:51 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -47,23 +61,15 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> From: Fabien Parent <parent.f@gmail.com>
+> Describe the MT6392 PMIC and its RTC and regulator devices. This device
+> is mostly based on MT6323 with some similarities to MT6397 and is usually
+> found on boards using the MT8516/MT8167 SoC.
 >=20
-> Align the MT6397 PMIC driver to other MFD drivers by passing only an
-> identifier through mt6397_of_match[*].data and add support for the MT6392
-> PMIC and its regulator, RTC, keys and pinctrl devices.
->=20
-> The keys device manages two buttons named PWRKEY and FCHR_ENB, the latter
-> is identified as "Force charging disable" in the data sheet but it also
-> says "Merge with HOMEKEY", so call it "Home" for consistency.
->=20
-> Signed-off-by: Fabien Parent <parent.f@gmail.com>
-> Signed-off-by: Val Packett <val@packett.cool>
 > Signed-off-by: Luca Leonardo Scorcia <l.scorcia@gmail.com>
 
 Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261020173556.6327=
-98-1-l.scorcia@gmail.com?part=3D5
+98-1-l.scorcia@gmail.com?part=3D1
 
