@@ -1,99 +1,75 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.52
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792523051;
-	b=cMqHSUH1M3fSE/BHB9d+7B1bwYsQ4BN+zA0EvUojyVs9cw4yrc4TMgWzM3NSywDjJ1Iu
-	 Rl5edFPAwCAD5jDNn3+haCSevOfqRvs5A2r2RRs+FIfEc6xMBnypKNNmkbBGXil16Dh8q
-	 C5ZoRtcmVQsHN5wVCeFgCyiTC0GU+6JcsWWFkYj9dVmlu8Px3bXiYw75Vm8f8K6duoiJO
-	 8q7PLgH7WV46cmkZvRiJL56bv4d2BkGZjE6MebrhlXlHc2RBlVNDGgL9vIBlPKnCaysq8
-	 l0X/rQ0AkO5vU/TtBVRrhlPMmRoLqbuRWNXazi9+88H7VsKUJNjjGTCsrpel/ECFb/A==
+	t=1792529008;
+	b=PnnbUFmVkmIAw2y5FMq09FxgiHIrvowGQZZDBxXEongMXVZsncv4Y0Z5qg0lhw/yiiH4
+	 k2b2UgptgJjG0eUxQWEBJD/3jCCkVveZrouSPx3mtuKooREmAm+DD0/td7lW77zs1aU0t
+	 Bhh+OAJ705SA/ABiXJ1zLR3DECpanMPeba+enMHJxOZpY2n2nWUGsg+5/dZ7vcQtRTbBo
+	 29k5EbmLb1goCSpG9nWquctWVkWlPg0ZyRocXMzdrvsiU0oBb6Y9yuGhnf1qCuUUuSMIH
+	 7EAW87a7BMz3xI4U368Nv1+9ElJswcUHMq6Za2i4MrC8spEjvNoB/mM0mPp3Mlt3HTw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792523051;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:Content-Transfer-Encoding:
-	 In-Reply-To;
-	bh=7NqznRIlKLn/pELhTMEco0REzkh4v7wlCaqZptITogI=;
-	b=p64opzXccPUcea3nXqYsjDOppN7NzKrL0DEnF5eMEUg1mTkUlRGzolGQAz0RI7UBn14D
-	 SEknYxLha7SKLxjPQWOX1b5R1eZFrZAFAIWivnHVf35VVcQitrcQ4tHq39MicylqKMFuV
-	 xzzqJ7LgEOBtlz3zaJuqAZ0m2F/DmoN1pI7MZH6pMbZ5RGOzCUVJGP2MSc5BpjoI0hxnX
-	 j4uXFNa//rtElQfgONAI9A4SgayNJnBxF6JQwgRuCzfBtgu86hF9jua7bjgJuyYvyiQhe
-	 y3S1Y+ktQfcjXH44fEIqHCJBhjdDiF4vZUzZ5p04O9n+2sMN5dclfc2/JuKv4xgMvgQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792529008;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
+	bh=T7BOKY6cJYNPNM9NANNC0B2ipfLfWlNxZfKW696+N+s=;
+	b=SHwCZ0JhwRUVlXXDbVJB50UQ5ub8JUYeemej3Yrc8HZc9wjqpUni2S8ahYgLDymY4DKi
+	 kZQGNLBHRPQgJTOUqa+bd38nNuxoIYWMr89idzptRMs0Y9ylOroL2eon3d3N4vCjhief7
+	 EQE50Oh6JiPOmc9sSvyqbtF/4zdMBNwnw7LMPNwU9kbeA+9tXlSFk30Vsyxi2r5SscpyL
+	 5OHfWVlmKBQsUTX1I8cWWkp2AwhnObYUJhdsSp3IGp6PzBI+VaaLZEZ/+rlbtObji0Ohe
+	 qBs5z/Tg1CWRuicJlH9wdTMYJKW+lPUg0vsiQU8l8u8wx6nfb5HT1crtvRHMv3Mna0g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=Ip8R+lGj;
-	arc=none smtp.remote-ip=74.125.82.52
-Received: from mail-dl1-f52.google.com (mail-dl1-f52.google.com [74.125.82.52])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AiVewjZA;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 343AF606A322
-	for <mfd@lists.linux.dev>; Tue, 20 Oct 2026 19:04:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 343AF606A322
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0B16606A31D;
+	Tue, 20 Oct 2026 20:43:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=Ip8R+lGj
-Received: by mail-dl1-f52.google.com with SMTP id a92af1059eb24-15ea896ddc8so4511504c88.0
-        for <mfd@lists.linux.dev>; Tue, 20 Oct 2026 12:04:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792523050; x=1793127850; darn=lists.linux.dev;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=7NqznRIlKLn/pELhTMEco0REzkh4v7wlCaqZptITogI=;
-        b=Ip8R+lGjHJzNiuHv0DZ66ZQF9pvSsKM/R7mE9Yqvar7RC4fmSnituGuKt7f5lhWjWe
-         ASkwkrifDOxVGvp5wV/VnNZcgSvjkRSQT8lc0MXkSN+mo4wC2aXh++JkecLvowDEAfZI
-         KEHQWVaAEzoEkYcK3UHt94BhhBd33Dg6eX6zZkrL8m2dOiLcC7v3wrc4pwfCaM+Vhe5Y
-         YOOrXPJ3bNnlHUyEsP+k4fD+jedgtl+q7xVb+72azfCvSb6vKqc1c0F1E7tnHFr2P7b2
-         CspmRA/9bXhoP+5KxWDzWni/9z39P5LnYB/qJ6K0qFQ3bHNpM3WRO/LHmNIza4M4AJNP
-         4Q4A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792523050; x=1793127850;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=7NqznRIlKLn/pELhTMEco0REzkh4v7wlCaqZptITogI=;
-        b=OKsca0XhbTyYR4SuQAgmi0007B0qon9KPscQRr+bc9211SPMIihH/w6rENlOqVP7F2
-         DVznEYht9XqAuc+v24k5diSqX2R4+wzkQoVHC0zqQz/WLIysaO58tt+PBJXKVfBhDpEv
-         GoJeXmWtE4Q2nWWLjkPDXvgEnTfmWl5MIc05d/eAgxEVf0Oyyp3PnQNhCWGWuYZM9rNb
-         cyV7kX9/YYoB30cIkTcSLnOIJUdJxJxeeWj91OYvn8GamxNuW7mIrqbdnd0JkBp54gj2
-         +0IwBmrlTc74CnLi8nwWGGcubBDgfuJGp6f4iR4cO+NEx6XPIF8ugU8hwuJcVb0yuR0d
-         mM0Q==
-X-Forwarded-Encrypted: i=1; AKwUvByiOZvILe9dhtGCYvonB/KQmoJDq0ts/Ov3lyBhb+6mN1A2sOBQjA+GCn2//Yaydnjmovw=@lists.linux.dev
-X-Gm-Message-State: AFq9FYLYY+BytMmsiMNw5nQjr9woCP14Zyu+ddcAWq8Or9/nN8vfpt39
-	QFyZU0dtAQMU0LIV0t+RRzAcZyTit9B5RAXm01vTdxzsbISao/b+AfZy
-X-Gm-Gg: AYBFou1NV8oG7WrfJbGgbY0rIrlmAL7XSIbsH4FY5DI+GsNNyT3ktKFcz0tVMTidRFP
-	nVni2Zdvp4I71It6IY97gF9EuYbiuEuvts0Ct9Ze85tIFZqoWJq1QnH2DTh36O8sB2Qnkmml97n
-	OaBD8gMbHgCMW0/yu3GFhOe58VBkkPRRGgJuG0cpMH6d4GAAG2HLpvzTVgRRuiECeBXQ9f4KJSu
-	ayTYNRZg0fqwKMZE08+oJKZoAc4Casx2wVqXOiSJqCV8bOatruLRJEdTykCbxxjMp1dwWLsYYG0
-	Riu8fIndOU6uKpHlUPVz4IKsNOOySSTnrov/mpA3kiNaZjt7breVIlV8tK+UT8a8Yziw3HSOWXo
-	giFp+Ym5zcCT63kSVpnzhTFgNurZEuj1iEgxAR8A3XuKpU71T5bHJqG2iyQ5MksuMEIYh9JKzUq
-	Tu2eSJ0/bSmcrZdtzWj5xfI2JmJlOwpKRS0RjVoXfKyJDVTWNW1JvRvWdowiMZmKLvpZmNnAeGE
-	isKx8b6QgycQuw42OJANgaVmAoUZ/i3/Uh1uhYtgRhqxpdkq8k=
-X-Received: by 2002:a05:7022:e804:b0:13b:3132:6e99 with SMTP id a92af1059eb24-18512c38164mr17695167c88.20.1792523049985;
-        Tue, 20 Oct 2026 12:04:09 -0700 (PDT)
-Received: from google.com ([2a00:79e0:2ebe:8:92d1:8038:c4e7:1f0c])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1903aefe90asm552320c88.9.2026.10.20.12.04.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 20 Oct 2026 12:04:09 -0700 (PDT)
-Date: Tue, 20 Oct 2026 12:04:05 -0700
-From: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>, 
-	Pavel Machek <pavel@kernel.org>, Sebastian Reichel <sre@kernel.org>, 
-	Ion Agorria <ion@agorria.com>, =?utf-8?B?TWljaGHFgiBNaXJvc8WCYXc=?= <mirq-linux@rere.qmqm.pl>, 
-	Florian Krischer <florian.krischer@fkr.dev>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-input@vger.kernel.org, mfd@lists.linux.dev, linux-leds@vger.kernel.org, 
-	linux-pm@vger.kernel.org
-Subject: Re: [PATCH v12 3/7] input: serio: Add driver for ASUS Transformer
- dock keyboard and touchpad
-Message-ID: <ate5K6ZdrSoBUI08@google.com>
-References: <20261019100406.103687-1-clamor95@gmail.com>
- <20261019100406.103687-4-clamor95@gmail.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AiVewjZA
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D68371F000C9;
+	Tue, 20 Oct 2026 20:43:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792529007;
+	bh=T7BOKY6cJYNPNM9NANNC0B2ipfLfWlNxZfKW696+N+s=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=AiVewjZAtL5zaicHA/GJW/2iGx6TcPYqWw5PFYTndJROPdl0xJD1Hp8SiuZsGvWfq
+	 7PfcOihd0FTtzrwD1hBbrv3ICm5vt0vOTHDVBUqKDu2K7FKnlhcdaeMKsweqP0WZwv
+	 cNql9vNSWLQFdxYOIW2v/RAqlXHhh0VAmclYzY0wB1YlCPv8dXk3JFOnlgENXRviYV
+	 qsXXyZ+YsHrSURnzeM2PBtf03K+Jd/NaOQunDvG6PCIxoiJQKSUgbt0qi2b4QW+k1I
+	 B0mMus6bh6qHdxqW5I3wA2ce6aKEAc5nZK1ikQScQpG5LHbjI5cYjVsAElqVrpEbBx
+	 MCUV1ClhHCEvw==
+From: Imre Kaloz <kaloz@kernel.org>
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	linux-mips@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Lee Jones <lee@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jiri Slaby <jirislaby@kernel.org>,
+	mfd@lists.linux.dev,
+	linux-serial@vger.kernel.org,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	linux-rtc@vger.kernel.org,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	netdev@vger.kernel.org,
+	Damien Le Moal <dlemoal@kernel.org>,
+	Niklas Cassel <cassel@kernel.org>,
+	linux-ide@vger.kernel.org,
+	Pavel Machek <pavel@kernel.org>,
+	linux-leds@vger.kernel.org,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	linux-pci@vger.kernel.org,
+	Christoph Hellwig <hch@lst.de>
+Subject: Re: [PATCH v2 00/53] MIPS: SGI-IP27: add support for the IP35 (Bedrock hub) machines
+Date: Tue, 20 Oct 2026 22:42:13 +0200
+Message-ID: <20261020204214.28625-1-kaloz@kernel.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20261020110619.12774a1c@kernel.org>
+References: <cover.1791890466.git.kaloz@kernel.org> <20261020110619.12774a1c@kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -103,65 +79,29 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20261019100406.103687-4-clamor95@gmail.com>
 
-On Mon, Oct 19, 2026 at 01:04:02PM +0300, Svyatoslav Ryhel wrote:
-> From: Michał Mirosław <mirq-linux@rere.qmqm.pl>
-> 
-> Add input driver for ASUS Transformer dock keyboard and touchpad.
-> 
-> Some keys in ASUS Dock report keycodes that don't make sense according to
-> their position, this patch modifies the incoming data that is sent to
-> serio to send proper scancodes.
-> 
-> Co-developed-by: Ion Agorria <ion@agorria.com>
-> Signed-off-by: Ion Agorria <ion@agorria.com>
-> Signed-off-by: Michał Mirosław <mirq-linux@rere.qmqm.pl>
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+On Tue, 20 Oct 2026 11:06:19 -0700 Jakub Kicinski wrote:
+> Why do we need support for machines discontinued 20+ years ago?
 
-Acked-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+For netdev the question is smaller than the series: patches 25 and 38,
+44 lines in ioc3-eth, a driver that is already in tree for the same
+part on IP27 and IP30. Patch 25 is a no-op on both of those (the bit it
+tests is always set behind a classic Bridge); patch 38 is a MAC-address
+fallback. I should have said in the cover that the series is meant to go
+through the MIPS tree and that I'm only after an Ack for those two --
+sorry for the noise on your queue.
 
-> +static int asus_ec_kbc_probe(struct platform_device *pdev)
-> +{
-> +	struct asusec_core *ec = dev_get_drvdata(pdev->dev.parent);
-> +	struct asus_ec_kbc_data *priv;
-> +	int error;
-> +
-> +	priv = devm_kzalloc(&pdev->dev, sizeof(*priv), GFP_KERNEL);
-> +	if (!priv)
-> +		return -ENOMEM;
-> +
-> +	platform_set_drvdata(pdev, priv);
-> +
-> +	priv->ec = ec;
-> +	priv->parent = to_i2c_client(pdev->dev.parent);
-> +
-> +	error = asus_ec_register_serio(pdev, 0, "Keyboard", 0);
-> +	if (error)
-> +		return error;
-> +
-> +	error = asus_ec_register_serio(pdev, 1, "Touchpad", I8042_CMD_AUX_SEND);
-> +	if (error)
-> +		return error;
-> +
-> +	priv->nb.notifier_call = asus_ec_kbc_notify;
-> +
-> +	error = blocking_notifier_chain_register(&ec->notify_list, &priv->nb);
-> +	if (error)
-> +		return dev_err_probe(&pdev->dev, error,
-> +				     "failed to register blocking notifier chain");
+As for why at all: same reason IP27, IP30 and IP32 are in tree. The
+hardware is in use, Thomas maintains the platform, and people run and
+test it; "discontinued" has never been the removal criterion, lack of
+maintainers has. IP35 is IP27's direct successor on the same
+Hub/XTalk/Bridge architecture with the same IOC3, plus its successor
+IOC4, so most of the series is teaching existing code about one more
+hub generation. And these boxes still earn their keep as a stress case
+for arch and core code -- e.g. the kmem_cache_destroy() race that just
+turned up on my Ultra 45:
+https://lore.kernel.org/all/atDCYwNfKW3m6YXh@thinkstation/
 
-I think sashiko is right that we need to register the notifier first,
-and in it check if serio ports are ready/registered or not. For that we
-probably need a lock and set pointers or flags in serio's start()/stop()
-or open()/close() methods.
 
-This can be done as a followup I think.
-
-Thanks.
-
--- 
-Dmitry
+Imre
