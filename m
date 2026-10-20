@@ -1,57 +1,45 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792518293;
-	b=gvqqBaEVkGu6YqCR48gBMuu5Fi3Zx93z4ExvYjr11frPZOiwyenS3Wk4NFFVUpmJNNBP
-	 NrCSE9UBgQmf1FyDk6YAWU3g00pMIc1jS25X2eyXFAs04nMfw1k3/v6cHEmKFwxErfHpH
-	 FbX3r+VdgdKoka8Vbap842iFmQAZcWYvEp5qmWah4EpAiv13UGBQaJh0NtR4EUPjdDxBH
-	 EJWXMN0Qw0dQMm47elDuZl+p7qGDeuJ0oQwe5ZpyXfSF0XIpYbv8VVEQ8E1BBmwFFC6mx
-	 TjZVVIcj+5pyUbMCWztIyCexl3FvhovI4RHjb/GEPFM6x884mNRUmFESPOzDhlE++Ig==
+	t=1792518327;
+	b=PI8xZTgbp2VYdhwsw3/fpNCVU3ItjF076yqU9mknBuTqdqIz3sOUdHE9ZTbKcdSogih6
+	 fmKPaiDcWZXq/jf8rdrlhq8na00J3gipjkov0IQw7GWP/rmmUhQnV7titjlsxS222NXg9
+	 /6WCchGS28lR7C9thMLzetRW0rbO5oex20WXn/5f/nX4r6zitnumM2uBVTtJVXngxmiG3
+	 UFEkwF4HDz/8eSKPGNx0ibuBIv1JzfJeZu4QU/VmpEauYX6I/zHbYz1tDLgEI+ZhymjWc
+	 XtLHJck2yG/smxAU8BkgfQX1FBMdFsG3JuDFgPGRli/8skYMlSlAIbZ6iBj1uveThug==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792518293;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=gbdxaVeEJ/4XHQ/33XM4N2HNTKTTCvaqEHL/qghmKww=;
-	b=1ORqASi27NX5gFbgKdxzDiVTWAXo9+PWiNYnfv1s8H7B96QFNYhGkOpoE4FhvidCIaKK
-	 vE9ksmeTlxq22ZVh5GHyVi3e/KvvUt74w9uDEGhzvHjcC/WBrLV6IBgl7YGpUltCyg/Lx
-	 JLNfQnWpOU5x1y1Nqva+e+7WzpaU2xgdCt7SRqf/pbNIYg9yGw6OreopCYs+Wo/Byn6ol
-	 J/sa3rl6TNZSUr48nQ3jDEyd0HSdSpMfBYAT1dyX4Pom4lVVM9U2LkQjpjyIKIlYZpbPv
-	 YONFIk8uNHtp9eGuU2tGpNFwADfy9qZbDYNV3ChcC11GCsazG12JWMy2r33Yrpu+ERg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792518327;
+	h=Received:Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To;
+	bh=PAqiBxOuUjcVVcRZ2MUwiiwHtGhdU4gm9a/O1b6JhhY=;
+	b=ButbI/upRNi1xNjCwtdQBbrdjq+8l1akzvYwcfmBQIzvKJUm5j3CRPwM/s4aOayLgAAz
+	 4tXWluTgKzKlfDLVqnqNcwuZPSAlB+B2IgazdSOJ1lzn2B7rSDd1+t2CYKDluQGaWquOJ
+	 GA3x4zeN/bVifUSG7MPTCyVI3MmVAY5NU5ipJdEkGIZLS2Dk4Uf+34oDoapJNl3/Dxv4K
+	 ApZ1enkUldsJ7oZFE3npQUfVOegnGLXPzQW+YloCndRMLXtfyAzu1w0V33YMW8EuXLHq4
+	 esQvQtkY5+6jkzgdzBmo3CR/MGsCfMJU9rSA24U/h1sQKVoOCu11N1LIF85hzP/V4Sg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f4OODdLK;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6B9C606A319
-	for <mfd@lists.linux.dev>; Tue, 20 Oct 2026 17:44:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=f4OODdLK
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A22B1F000CA;
-	Tue, 20 Oct 2026 17:44:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792518292;
-	bh=gbdxaVeEJ/4XHQ/33XM4N2HNTKTTCvaqEHL/qghmKww=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=f4OODdLKbOVBEG5Y3xvPJ7JtjtS+Y9KyNtuxEPoYu+t7M3q9UVBhZ3fMn4riqCxl1
-	 LFnIgux3KsDSRrMGELEGVRXwQ7YXVrQG8P2h1wvTIW8PcK/U1mSCIW4XyCFfKgtJDu
-	 kps03+4P4JY+gEkKMCaLBMVNP3R/4ZTYYIrC9otN6mJ1aubkKnoKJfp4Q5YUWsUNlo
-	 PfNtVzgmlHkSPzl3kGn2YjmGRSYxPfVGuBh7Ut2NG17TeUm1kVNl5hOCrMYSc+xhey
-	 DxO2lNbyPp6Om49yjUSj+geHPnhKzd4DpkO7rG7v8R1VR0IqlX75WoLS0bfp94aGeu
-	 6qO2/cLa7bOJQ==
-Message-ID: <sashiko-outbox-179441@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RESEND v10 1/9] dt-bindings: mfd: mt6397: Add MT6392
- PMIC
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Luca Leonardo Scorcia" <l.scorcia@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261020173556.632798-2-l.scorcia@gmail.com>
-References: <20261020173556.632798-1-l.scorcia@gmail.com>
- <20261020173556.632798-2-l.scorcia@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 20 Oct 2026 17:44:51 +0000
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33DB5606A31D;
+	Tue, 20 Oct 2026 17:45:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E4A4A1F000C9;
+	Tue, 20 Oct 2026 17:45:26 +0000 (UTC)
+Date: Tue, 20 Oct 2026 12:45:23 -0500
+From: "Rob Herring (Arm)" <robh@kernel.org>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Lee Jones <lee@kernel.org>, Daniel Thompson <danielt@kernel.org>,
+	devicetree@vger.kernel.org, Jingoo Han <jingoohan1@gmail.com>,
+	Mark Brown <broonie@kernel.org>, dri-devel@lists.freedesktop.org,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	linux-kernel@vger.kernel.org, Liam Girdwood <lgirdwood@gmail.com>,
+	linux-leds@vger.kernel.org, Conor Dooley <conor+dt@kernel.org>,
+	Pavel Machek <pavel@kernel.org>, mfd@lists.linux.dev
+Subject: Re: [PATCH v4 1/4] dt-bindings: mfd: Document Skyworks AAT2870
+Message-ID: <179251832264.345015.830998474723147925.robh@kernel.org>
+References: <20261019100930.110954-1-clamor95@gmail.com>
+ <20261019100930.110954-2-clamor95@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,16 +48,23 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261019100930.110954-2-clamor95@gmail.com>
 
-> Describe the MT6392 PMIC and its RTC and regulator devices. This device
-> is mostly based on MT6323 with some similarities to MT6397 and is usually
-> found on boards using the MT8516/MT8167 SoC.
->=20
-> Signed-off-by: Luca Leonardo Scorcia <l.scorcia@gmail.com>
 
-Sashiko has reviewed this patch and found no issues.
+On Mon, 19 Oct 2026 13:09:27 +0300, Svyatoslav Ryhel wrote:
+> Document Skyworks AAT2870 LED Backlight Driver and Multiple LDO Lighting
+> Management Unit.
+> 
+> Reviewed-by: Daniel Thompson (RISCstar) <danielt@kernel.org> # for backlight
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> ---
+>  .../bindings/leds/skyworks,aat2870.yaml       | 124 ++++++++++++++++++
+>  1 file changed, 124 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/leds/skyworks,aat2870.yaml
+> 
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261020173556.6327=
-98-1-l.scorcia@gmail.com?part=3D1
+Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
 
