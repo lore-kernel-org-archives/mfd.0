@@ -1,91 +1,71 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=158.120.86.30
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792457836;
-	b=c+C2njsK2smVU4l+JsEAr3FRxcWS8DLGNhylrz4U8QxlvGgLL29t/GuOwugcWHgN9BQ6
-	 DIQ37SARLGUED3mT509gLjsxI7W+Q25ciIh+xY3Ssk9FMvs/3HJA/ic8UbwM0vEgeXw1B
-	 cawOIqvNFOuMBxYOmKRkLI+1mCoRctczQ/XrKplc5VYi8xzv4Ig5SrgaPKq4ZOqTYQr/W
-	 B1dbHHP5XE1nd1hOrNOfgrmzxQn7LBTO6LE5r+WoLbxitpl93tx04J/GNyhobPHgmmmxY
-	 2mpvk+DjGgFBJYkNueiZjI6mOJMl6Hr8cc62MDKP82YIjX7Jx3qEe5apyFfXVqHe/8Q==
+	t=1792459324;
+	b=hS2nGNmqm2bwwUwfuwqvjVeKsxlW0e7Nm0cytpHNb0+la1eugEQ9oRwNZXhJhghfqB7G
+	 NvGfoR/DVNr68jSTdRBZipzQF0jkSiIqaBCR/xd91aoh6EHxiJzWJy+JGFH57W20SoU4w
+	 8WOroa1Tf7gfgmeXFGllYBAk29WquHcIBtnmQwS50uWO/6h06YolG8707lOWNLQbAolF9
+	 svB7w3tHQcrMlITiUDhP+qXzqyjV+MknQAYeC1koS7w3yu5yHaLp2GovXMdBn/RAcKxGc
+	 d9VPZWtksAC7Lmlin/ilc/X3D2j1pBhDKIJo8bmIii6k7Xu4rDCG7pwf1wVeG75dfoQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792457836;
-	h=DMARC-Filter:DKIM-Signature:Received:DKIM-Signature:Received:
-	 X-Report-Abuse:Feedback-ID:X-smtpcorp-track:Date:Message-ID:From:To:
-	 Cc:Subject:In-Reply-To:References:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=baFTI7feHfHjUs2Z1HfLPGTNQHlNGEUNjb1UhcudQe8=;
-	b=l9ztFn/wMHUNMUlfC2jH2NPNn3j9lhl3mK5pBPtWe/A7SnB14lT0/AwkrfZ8739KskAI
-	 JKOwxTVZINNiDpUqnrS3k65FgamFE3vNpjKi++lqT0r2qAVQsWHLUYQCkZI9iBgcIyYEh
-	 L0qjHamhG0m4PYeccGCXjZA6NFsCZySrzhrqzyHKPJ7sVKNG9DYqPjCro3uVWX+qY4qbP
-	 mCIQrOVu4vsaKeGSGX/xAEwTvvvAhihuigBBZzSrjZVLcqqdQLfTtOmXaYcCxc8hKzCjy
-	 TOqBxxVnhTqrFZPkg42qtgAMi0LDTowO4SNG2E8Gz9TtfVvGf2LoCV4hmqll4qQrSfw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792459324;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=Y5PuInUz/jG/sVc55vzwpQmtUc4DneWfMKEBS2B1HkA=;
+	b=h6Y+7FKdNjawAO5qvyB2A3c7KgTThQ8g3xx0t1rip0eiluFKzdf9mQ2/lh/SwP4vkHiw
+	 e7JWDmZbEUGJ/mKeFKtMg9pgHjLrqfHIN2I+feKE/ZLvtCWByqzo4OJC2coejqLG2uM7B
+	 XLRBA2jlOutMRi16yMo9OK916nL7zLZTnz1JaOjdZP8zO80ZaaYapysa4xDnzWujh+bFB
+	 0xtk852+JG3U2dlck5uOy3LAuyDdL0KsOnAdmRFp1BXwsXPTTq3Kkb969Q61TlKb3qVvp
+	 vxp6onemapaoG2ZNn50mW0gPLRd50+jH6I8zZ8jm4v6Ss6S0pLRMQsP/ktBUPvJXaQA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=fkr.dev;
-	spf=pass smtp.mailfrom=em1020969.fkr.dev;
-	dkim=pass header.d=fkr.dev header.i=@fkr.dev header.a=rsa-sha256 header.s=s1020969 header.b=gS6amaK3;
-	dkim=pass header.d=fkr.dev header.i=@fkr.dev header.a=rsa-sha256 header.s=default header.b=X5G4kOiQ;
-	arc=none smtp.remote-ip=158.120.86.30
-Received: from e3i542.smtp2go.com (e3i542.smtp2go.com [158.120.86.30])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="Ij/ZTfSV";
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3FD0606A31A
-	for <mfd@lists.linux.dev>; Tue, 20 Oct 2026 00:57:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A3FD0606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=fkr.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=em1020969.fkr.dev
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 552BA606A319;
+	Tue, 20 Oct 2026 01:22:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=fkr.dev header.i=@fkr.dev header.a=rsa-sha256 header.s=s1020969 header.b=gS6amaK3;
-	dkim=pass (2048-bit key, unprotected) header.d=fkr.dev header.i=@fkr.dev header.a=rsa-sha256 header.s=default header.b=X5G4kOiQ
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fkr.dev;
- i=@fkr.dev; q=dns/txt; s=s1020969; t=1792457827; h=from : subject : to
- : message-id : date : list-unsubscribe : list-unsubscribe-post;
- bh=baFTI7feHfHjUs2Z1HfLPGTNQHlNGEUNjb1UhcudQe8=;
- b=gS6amaK36XYk3q0GfHPTs+q1C5jzL7b7FSqdn9uu4K9C+cibzg76qJd6UtdJqSCf+KRHf
- CUPuxsXC5oD/DuiTcgPxKx/3S9F7h6h2gz6CYCAnRa88/fJWYxkC4ZND01mcynk5+QBF02s
- cAW0gHGHn8VOV06O+IZo7emscpNCTeoiOzGcwj4utpT9bXt0OZQ+p9Tfd78VkbFR9kqmCON
- oPSEQR83Hrn5c8uz3ColXQJCW/JZ031Y7m9tLT7obl62Yn8jyimvi99e7PtAXsXNFsh0JPB
- QhA9fH5vYMfMiDHEzqqpwPDevSV2dxH7MJN6qftpq09oQ3877McfueynZRYw==
-Received: from [10.244.246.9] (helo=fkr.dev)
-	by smtpcorp.com with esmtpsa (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128:X25519)
-	(Exim 4.100.1)
-	(envelope-from <florian.krischer@fkr.dev>)
-	id 1xIyA6-FnQW0hPvgRA-l4b6;
-	Tue, 20 Oct 2026 00:57:06 +0000
-DKIM-Signature: a=rsa-sha256; bh=baFTI7feHfHjUs2Z1HfLPGTNQHlNGEUNjb1UhcudQe8=; c=relaxed/relaxed; d=fkr.dev;
- h=Subject:Subject:Sender:To:To:Cc:Cc:From:From:Date:Date:MIME-Version:MIME-Version:Content-Type:Content-Type:Content-Transfer-Encoding:Content-Transfer-Encoding:Reply-To:In-Reply-To:In-Reply-To:Message-Id:Message-Id:References:References:Autocrypt:Openpgp;
- i=@fkr.dev; s=default; t=1792457824; v=1; x=1792889824;
- b=X5G4kOiQaw0oaWEFVOVcN8ACj5el/tE15KiCmx5ZmF7yp1Y1qajbyAJEPkpol0Zi4Sn4Yqfm
- L2HfKgXtNB5ChfTtM1CH5qd5GYisvgI9OSrkbowFKQeVZ1VJHvbEiFgCl8OqYPTMK+08+sxKgEA
- e7rd/f+ZnnyqRl9kNPUOQ26jr5a6XXaAsqqiirg4B3NzcZzWCau74dg97dlR0vE5cFL7qxZ7Y2U
- PBGn3KJRVR8qMQPV80hFuvk2ijpXtIEQZb4CpbNEptimpTHkU3JcNOgd3bQUjwEoDDcJ1JcU41I
- RQ8crMwUucd7sO249fwKG3ugn+c9wOUG9v+hGmYbCY4lg==
-Received: by fkr.dev (envelope-sender <florian.krischer@fkr.dev>) with
- ESMTPS id 5b88a664; Tue, 20 Oct 2026 00:57:04 +0000
-X-Report-Abuse: Please forward a copy of this message, including all headers, to <abuse-report@smtp2go.com>
-Feedback-ID: 1020969m:1020969amTSgpp:1020969sMMvfpqAzu
-X-smtpcorp-track: ZmoR_5X_cAVC.m46omOHvg0ns.LLTsmggrrOt
-Date: Tue, 20 Oct 2026 02:57:03 +0200
-Message-ID: <70f4c4d7f6263385d29ed8baa2106769@fkr.dev>
-From: "Florian Krischer" <florian.krischer@fkr.dev>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-	Lee Jones <lee@kernel.org>,
-	Pavel Machek <pavel@kernel.org>,
-	Sebastian Reichel <sre@kernel.org>,
-	Ion Agorria <ion@agorria.com>,
-	Michał Mirosław <mirq-linux@rere.qmqm.pl>,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-input@vger.kernel.org,
-	mfd@lists.linux.dev,
-	linux-leds@vger.kernel.org,
-	linux-pm@vger.kernel.org
-Subject: Re: [PATCH v12 0/7] mfd: Add support for Asus Transformer embedded controller
-In-Reply-To: <20261019100406.103687-1-clamor95@gmail.com>
-References: <20261019100406.103687-1-clamor95@gmail.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Ij/ZTfSV
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 36EE11F000C4;
+	Tue, 20 Oct 2026 01:21:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792459323;
+	bh=Y5PuInUz/jG/sVc55vzwpQmtUc4DneWfMKEBS2B1HkA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Ij/ZTfSVf2swDQKjpQY+M1H2I5MkLeX5CF4dH4/9XKE165jBsDdvEwhW81eUmMMjb
+	 Qa7Npvl6yBb17a13UvFrx+F558g8qtjW3Jx8HQ2wmPfgDecd4FVrr176Pvye0m7huB
+	 b8gB3PVWN+ieA2OWvMaqKqc1pFccggf6hGdppcfcNIIzPb4SLFLMiOICvTaBe8MAMo
+	 ccYqYzmJWOF0vh9T+5mTGwhv1K8ArNjqo22DC2bm6gpAiLDfN6Zb7V8wILCD7w7hbg
+	 OGRinhBbeU5+ZdzL+gEGhTHiNXTwxiIjthvTzVDhkDx0SgvL4YvUPNJZZ9WRLDx3D2
+	 G3K1Ev46o1B/g==
+Date: Tue, 20 Oct 2026 09:01:50 +0800
+From: Jisheng Zhang <jszhang@kernel.org>
+To: Philipp Zabel <p.zabel@pengutronix.de>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney+clk@redhat.com>,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	Andi Shyti <andi.shyti@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Frank Li <Frank.Li@nxp.com>, Lee Jones <lee@kernel.org>,
+	Linus Walleij <linusw@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jiri Slaby <jirislaby@kernel.org>,
+	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-i2c@vger.kernel.org,
+	linux-i3c@lists.infradead.org, mfd@lists.linux.dev,
+	linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org,
+	linux-spi@vger.kernel.org, linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH 05/20] i3c: dw: switch to array-based exclusive reset
+ control
+Message-ID: <ata9fqjAm09xnBQM@xhacker>
+References: <20260929061417.20733-1-jszhang@kernel.org>
+ <20260929061417.20733-6-jszhang@kernel.org>
+ <62860351b9ae360c174d36dd54d4110417f395ad.camel@pengutronix.de>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -95,15 +75,75 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <62860351b9ae360c174d36dd54d4110417f395ad.camel@pengutronix.de>
 
-I tested the v12 series on an ASUS Eee Pad Slider SL101 running Debian 13
-with the 7.0.1 postmarketOS Grate kernel.
+On Mon, Oct 19, 2026 at 02:55:21PM +0200, Philipp Zabel wrote:
+> On Di, 2026-09-29 at 14:14 +0800, Jisheng Zhang wrote:
+> > The Synopsys DesignWare I3C master controller can have multiple reset
+> > lines, such as a core reset and APB reset.
+> > 
+> > Refactor the driver to use devm_reset_control_array_get_exclusive()
+> > instead of a single named reset handle. This automatically manages all
+> > resets allocated to the device node sequentially.
+> 
+> Note that this does not guarantee any particular order. Are you sure
+> that this is good enough for all implementations of the DW I3C core?
 
-The system booted successfully. The EC identified as ASUS-EP102-DOCK,
-firmware SL101-0202. I verified keyboard key events from the EC keyboard
-and touchscreen contact and coordinate events from the tablet's maXTouch
-device.
-
-Tested-by: Florian Krischer <florian.krischer@fkr.dev>
+Per my understanding of the doc, it only requires the resets are
+asserted and de-asserted, didn't mention the order. And per my tests
+on syna SL2610 platforms, the DW I3C works perfectly no matter I
+reset apb reset or core reset firstly.
+> 
+> Otherwise it may be wise to at least specify the names in binding, to
+> be able to switch to the bulk API or individual control later, if
+> needed.
+> 
+> > Signed-off-by: Jisheng Zhang <jszhang@kernel.org>
+> > ---
+> >  drivers/i3c/master/dw-i3c-master.c | 24 ++++++++++++++++++------
+> >  drivers/i3c/master/dw-i3c-master.h |  2 +-
+> >  2 files changed, 19 insertions(+), 7 deletions(-)
+> > 
+> > diff --git a/drivers/i3c/master/dw-i3c-master.c b/drivers/i3c/master/dw-i3c-master.c
+> > index 4563d8761ba0..1c6c870f5bb3 100644
+> > --- a/drivers/i3c/master/dw-i3c-master.c
+> > +++ b/drivers/i3c/master/dw-i3c-master.c
+> > @@ -1657,6 +1657,11 @@ static const struct dw_i3c_platform_ops dw_i3c_platform_ops_default = {
+> >  	.set_dat_ibi = dw_i3c_platform_set_dat_ibi_nop,
+> >  };
+> >  
+> > +static void dw_i3c_resets_assert(void *data)
+> > +{
+> > +	reset_control_assert(data);
+> > +}
+> > +
+> >  int dw_i3c_common_probe(struct dw_i3c_master *master,
+> >  			struct platform_device *pdev)
+> >  {
+> > @@ -1696,10 +1701,17 @@ int dw_i3c_common_probe(struct dw_i3c_master *master,
+> >  	if (IS_ERR(master->pclk))
+> >  		return PTR_ERR(master->pclk);
+> >  
+> > -	master->core_rst = devm_reset_control_get_optional_exclusive_deasserted(&pdev->dev,
+> > -										NULL);
+> > -	if (IS_ERR(master->core_rst))
+> > -		return PTR_ERR(master->core_rst);
+> > +	master->resets = devm_reset_control_array_get_optional_exclusive(&pdev->dev);
+> > +	if (IS_ERR(master->resets))
+> > +		return PTR_ERR(master->resets);
+> > +
+> > +	ret = reset_control_deassert(master->resets);
+> > +	if (ret)
+> > +		return ret;
+> > +
+> > +	ret = devm_add_action_or_reset(&pdev->dev, dw_i3c_resets_assert, master->resets);
+> > +	if (ret)
+> > +		return ret;
+> 
+> This looks like we are missing
+> devm_reset_control_array_get_optional_exclusive_deasserted().
+> 
+> regards
+> Philipp
