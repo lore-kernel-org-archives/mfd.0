@@ -1,70 +1,47 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792459698;
-	b=o1qsoTBo9GnPH8eWBR+GCI2Qf9i9lV9g7VxD5fN5pT27bK1NyNbJBTYDxfDOgvyfoOhw
-	 pipdL7hN4KsXcYt1QvGHVjQhAABB1HhMaRsNtS0pGVRjv8dyijteEiOZtEX5gmkS1bIjS
-	 Jvbw0AkuqY17PCPuXd46rv7M6Tpi1oY7cunpYfofjHUkBzGNdBsWh8vY+tWqNQ+/4ECpR
-	 rJyyNmCNAhGIkUtojxusv1iZSBpqf8t9iDULRDflX+BHZOeESvkRxl2rt7jQBCcfhPD1b
-	 aIoaezpF/p6+IkzbIqU9HWcaugxXurwZHshemcwPjQb5p+K6KSa/Po1dh82eDtQf8VA==
+	t=1792475490;
+	b=CEaJ7CYP+M9+6DQDkrNBYfvjjNOh/epEFOgs/s0aUroAbeflAF9mMjKsa+mrqBIldlGy
+	 xnNsHsM5PkUfmOnXdWNuxZKa78vXj+VaYmj3CPmkM/shc2pUzPWD96HM8+9GB9Q/NonIM
+	 NSm+JnGmTMrSJOa2VZzgl5wQQ24OWaWjWjCM5Q6jII+N3gmBCGUv47TKQsD+VRD1uHvE+
+	 26vuJ1s6c1lsDU9JlOYJWtY0+du5QEFXklYPb1Twb/hJC7RjRPcXsY5w+ZBTiQCJYmkPY
+	 vQ2VvnKPS5Esf7wEqQ7h3cH8cEE0IMB0rDGGcQHRpSfagZXKjZQVPm6dLaG+YvIp8jQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792459698;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=5qUgLs+CjpBbZipOhT6HHA1szcA4CGwnixmqJCQRTuQ=;
-	b=cIlgJ5osXNshyLCuFFRRF7Pq9x7z0UOteDRTd+YbeucmW7JCXkEIeI+HYZW6oH5VPh6u
-	 niiD8Hrz7dp4fziSKMimkyEgIohD/u9sLN/vFIfWiIPBrT82QHPCaWoQq+H37kKz9js0Q
-	 0Az5LIhRcCZ2aaS7AGHLPsnpp3D2BUgslzV3IBY8f9+UYOiNdoQMN2W/UjH0uSIJsPfJc
-	 C+euDT+Dul6NjtJYpfTwvqfCIGDda+wAbbQAQJ/c3c0ifHLxebPtNZ8WyIidw8gwkzm5j
-	 mZzOFiU727GxQkM7tFNT+N6R6OLgcOYSF/HgfzvsS9oc1yX5NLdW7rppmRslT4RDbfg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792475490;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=zaYBirqJlNFDhtYAAgAIyKmleW4oIeh64C/jr9gyqY8=;
+	b=sW+SsNt4pBcjgfzygca1Fy+kQ66J3P/1AV1p5YqAwj4PPiY0v7IXeAum11mWChiBp6e/
+	 6p8MoYck7bEmH8xC1eNmCj5ylDMMN4lJ3OyFeA9vKWkGIPFgtyGr5ph33GqRc4PKsBswX
+	 ocyNu8lYFRiAdPdK+ZQ0PTYyRTyV4dJfAiYaQPbdr1+fEqPIrywk+t0TZzBX43qZLOvmr
+	 G71e8l18pOgEopJJobVqOws9oRGeTJJtd6cVnU3UZDPcLD8k5TjEaoFVZd5hLhopGEkia
+	 50Rtb75bGERZg9+rBBLaxtMl3oBE+nblq0jI7WsToA3fXxTbjmVQZxooBhUj0ERNYFQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Nr5uW3Qt;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="BqazRWI/";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7AE0D606A319;
-	Tue, 20 Oct 2026 01:28:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D6C5606A319;
+	Tue, 20 Oct 2026 05:51:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Nr5uW3Qt
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9E3A01F000C5;
-	Tue, 20 Oct 2026 01:28:12 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BqazRWI/
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 362F41F000C4;
+	Tue, 20 Oct 2026 05:51:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792459698;
-	bh=5qUgLs+CjpBbZipOhT6HHA1szcA4CGwnixmqJCQRTuQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Nr5uW3QtlmxoP4tox6wXnKraKe2Y/uT2upIvGqeVqRQNQurkI65qu2/74qwIj2tmm
-	 FC6ADKO5hnjDmn9Exb23lD9oAJpVTaq2ahFErEs+UD+/yp7375unDeYqydoPlts/Cx
-	 E+1wIPk/+SBcNYuCycNiLcKxDIMH9o1FjFjvOZ9hXb8APeuLO+JgmUir8FA8UsA7TX
-	 Mhe+E96RWfYOoxFNLiBPHr3S3lcSz4pDRwoptJPdKG6v+oJNurZWikAWd6ju98SX7d
-	 QIddXUrKr85C0TUkEnu/Z73Qbwcd2lRfqI74dpW5PZN6Yfzavn0d/p4y9vPfhZHd+/
-	 yUMRCBoYlhWwg==
-Date: Tue, 20 Oct 2026 09:08:08 +0800
-From: Jisheng Zhang <jszhang@kernel.org>
-To: Philipp Zabel <p.zabel@pengutronix.de>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Andi Shyti <andi.shyti@kernel.org>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	Frank Li <Frank.Li@nxp.com>, Lee Jones <lee@kernel.org>,
-	Linus Walleij <linusw@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jiri Slaby <jirislaby@kernel.org>,
-	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-clk@vger.kernel.org, linux-i2c@vger.kernel.org,
-	linux-i3c@lists.infradead.org, mfd@lists.linux.dev,
-	linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org,
-	linux-spi@vger.kernel.org, linux-arm-kernel@lists.infradead.org
-Subject: Re: [PATCH 04/20] dt-bindings: i3c: dw: support up to two reset lines
-Message-ID: <ata--JFFUzSoMock@xhacker>
-References: <20260929061417.20733-1-jszhang@kernel.org>
- <20260929061417.20733-5-jszhang@kernel.org>
- <80b084d130b7dc7406ae23e54a77706a4f42b606.camel@pengutronix.de>
+	s=k20260515; t=1792475490;
+	bh=zaYBirqJlNFDhtYAAgAIyKmleW4oIeh64C/jr9gyqY8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=BqazRWI/99gjeaPDDsQq8NwfyYs8JIXl/7d5eH2+9GFwYgpQGLhn8E4AU2LuofPzJ
+	 jqhgjFmoEPkUDiOZMvy6evFjCpVrVbDCCIPtTg/TBuMjDJrmAco+Ku/FksGklP3JnL
+	 wTPw2DX/Fyrpz1s64jW+33oqxhVUvHTp70NtitRXpoNcN/eCQf8hmXTn7HV57hq8w7
+	 DhTyC7e1r4d61gdMWmNZZ+4rV/YXkC0+HcZ3thehHqGpiaika1Gt+BDj4W5qGwmGk8
+	 wXxzrfzZWNmN0tIRJmdYAZbLIFn++cNHV+Oeq9TMSpp6VDxZk50vRqkEoEVnSSNH6w
+	 VA0tqZ67iUSCA==
+Message-ID: <d6d7c3ba-5329-4c90-8994-ea29cedd7c53@kernel.org>
+Date: Tue, 20 Oct 2026 07:51:23 +0200
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -74,22 +51,165 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <80b084d130b7dc7406ae23e54a77706a4f42b606.camel@pengutronix.de>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 3/8] dt-bindings: mfd: realtek,rtd1xxx: Add interrupt
+ controller child node
+To: =?UTF-8?B?WXUtQ2h1biBMaW4gW+ael+elkOWQm10=?= <eleanor.lin@realtek.com>
+Cc: "tglx@kernel.org" <tglx@kernel.org>, "radu@rendec.net" <radu@rendec.net>,
+ "robh@kernel.org" <robh@kernel.org>, "krzk+dt@kernel.org"
+ <krzk+dt@kernel.org>, "conor+dt@kernel.org" <conor+dt@kernel.org>,
+ "lee@kernel.org" <lee@kernel.org>, "afaerber@suse.com" <afaerber@suse.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+ "mfd@lists.linux.dev" <mfd@lists.linux.dev>,
+ "linux-arm-kernel@lists.infradead.org"
+ <linux-arm-kernel@lists.infradead.org>,
+ "linux-realtek-soc@lists.infradead.org"
+ <linux-realtek-soc@lists.infradead.org>,
+ =?UTF-8?B?SmFtZXMgVGFpIFvmiLTlv5fls7Bd?= <james.tai@realtek.com>,
+ =?UTF-8?B?Q1lfSHVhbmdb6buD6Ymm5pmPXQ==?= <cy.huang@realtek.com>,
+ =?UTF-8?B?U3RhbmxleSBDaGFuZ1vmmIzogrLlvrdd?= <stanley_chang@realtek.com>
+References: <20261018160653.3940371-1-eleanor.lin@realtek.com>
+ <20261018160653.3940371-4-eleanor.lin@realtek.com>
+ <20261019-prophetic-moth-of-youth-40dbd6@quoll>
+ <b12ff328ebca405f96a9b25decdb7c81@realtek.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
+ cFgcqTTuNHjAvxtUG8pQgGTHAObYs6xeYJtjUH0ZX6ndJ33FJYf5V3yXqqjcZ30FgHzJCFUu
+ JMp7PSyMPzpUXfU12yfcRYVEMQrmplNZssmYhiTeVicuOOypWugZKVLGNm0IweVCaZ/DJDIH
+ gNbpvVwjcKYrx85m9cBVEBUGaQP6AT7qlVCkrf50v8bofSIyVa2xmubbAwwFA1oxoOusjPIE
+ J3iadrwpFvsZjF5uHAKS+7wHLoW9hVzOnLbX6ajk5Hf8Pb1m+VH/E8bPBNNYKkfTtypTDUCj
+ NYcd27tjnXfG+SDs/EXNUAIRefCyvaRG7oRYF3Ec+2RgQDRnmmjCjoQNbFrJvJkFHlPeHaeS
+ BosGY+XWKydnmsfY7SSnjAzLUGAFhLd/XDVpb1Een2XucPpKvt9ORF+48gy12FA5GduRLhQU
+ vK4tU7ojoem/G23PcowM1CwPurC8sAVsQb9KmwTGh7rVz3ks3w/zfGBy3+WmLg++C2Wct6nM
+ Pd8/6CBVjEWqD06/RjI2AnjIq5fSEH/BIfXXfC68nMp9BZoy3So4ZsbOlBmtAPvMYX6U8VwD
+ TNeBxJu5Ex0Izf1NV9CzC3nNaFUYOY8KfN01X5SExAoVTr09ewARAQABzSVLcnp5c3p0b2Yg
+ S296bG93c2tpIDxrcnprQGtlcm5lbC5vcmc+wsGPBBMBCgA5AhsDBgsJCAcDAgYVCAIJCgsE
+ FgIDAQIeAQIXgBYhBJvQfg4MUfjVlne3VBuTQ307QWKbBQJp2mE8AAoJEBuTQ307QWKbeaIP
+ /ihHTkTW4KsN/DQ945JJbyu5tI0J80Wue7QyyLPglyKfhgb5cLLNPpOC8cCIJsc7+W3i2P38
+ s2c1cOH6CYGE7E9ur3Vfme8NW2S2I/Z8VC7bZnzyS23wT17LrsdS/qCpx4o8U+pt/xdXDKph
+ EGRYrIEmMpUWvyYzyYKGIe25FtaayIIKpq8eZYyFcp2f/sG5IkOW5uZzHPMPdcm87jU7fyuQ
+ rAU2vx9r+ulUfQ/q9Z2roC/ode3l7t2pN7BCBCsUDp6JCrUyZrtT1e7EbA0ZRP3aOBNk2P2E
+ DQOgJGjGdO5Yx2Y9LFtltu6JbsBJHi1syGRX3AtQYOMc4Y1WGoeZJmMlvKj2ZqqXNkcWi2DS
+ IQEWB0uW6CqFsBBIMGDa+6OzdaVO/uAVXWDWml02Men3CILdI1MbVjoh8ECqYUY7OQ+JJvNN
+ vnliuq5WM3Ghd3jg/LZZrxXjdIginRHFQCjIJYLKpLZWm1/iDFedcfzqRNYmTtqscdCNHW41
+ oT3Z7BmO9xwdjuwBS6nmS6JJwkbf5Ot2QR4pB/DRU7ZwjT1qHe+9r9gF32wXVQatHNGK/VVu
+ sfwOnkdxCWkp/qb2gdQRmZh+SedStWshigH6sNfuHBloF/q+hjMRc8b2m326OZdrbSHwY1Sz
+ vti8Hn7n8NjdHO9LKB7BIdjkA9DA5WsqOuVCzsFNBFVDXDQBEADNkrQYSREUL4D3Gws46JEo
+ Z9HEQOKtkrwjrzlw/tCmqVzERRPvz2Xg8n7+HRCrgqnodIYoUh5WsU84N03KlLueMNsWLJBv
+ BaubYN4JuJIdRr4dS4oyF1/fQAQPHh8Thpiz0SAZFx6iWKB7Qrz3OrGCjTPcW6eiOMheesVS
+ 5hxietSmlin+SilmIAPZHx7n242u6kdHOh+/SyLImKn/dh9RzatVpUKbv34eP1wAGldWsRxb
+ f3WP9pFNObSzI/Bo3kA89Xx2rO2roC+Gq4LeHvo7ptzcLcrqaHUAcZ3CgFG88CnA6z6lBZn0
+ WyewEcPOPdcUB2Q7D/NiUY+HDiV99rAYPJztjeTrBSTnHeSBPb+qn5ZZGQwIdUW9YegxWKvX
+ XHTwB5eMzo/RB6vffwqcnHDoe0q7VgzRRZJwpi6aMIXLfeWZ5Wrwaw2zldFuO4Dt91pFzBSO
+ IpeMtfgb/Pfe/a1WJ/GgaIRIBE+NUqckM+3zJHGmVPqJP/h2Iwv6nw8U+7Yyl6gUBLHFTg2h
+ YnLFJI4Xjg+AX1hHFVKmvl3VBHIsBv0oDcsQWXqY+NaFahT0lRPjYtrTa1v3tem/JoFzZ4B0
+ p27K+qQCF2R96hVvuEyjzBmdq2esyE6zIqftdo4MOJho8uctOiWbwNNq2U9pPWmu4vXVFBYI
+ GmpyNPYzRm0QPwARAQABwsF2BBgBCgAgAhsMFiEEm9B+DgxR+NWWd7dUG5NDfTtBYpsFAmna
+ YUkACgkQG5NDfTtBYptX+BAApg32CkxwNucNEi8WfWA8oKkW0y8YDuY6ORMo9FWNGiT/OTy0
+ vyJrLocrpn86zwfjVp+eCrssPYh8eqJfnWqmYv6ACQtHPYzPZQ3mSo8H97Z01oUxITzCxpXm
+ ZkLgPIqtDPcC2E3dPM/fVxcyowM8XsaMA9wcsaUYrta8toOq2b9tKcjleKMfMrm0gQ9u7wUc
+ QbLkwj6TCLOwucb07GXzLTNF9PZmaDUpKAZjMjmrW+le+SFvQbhamx0rxLWPR0NWntXpbCn+
+ +ACch03p/JyTBVktxFsFyCt7pTPE1kEaeuXBTe/a2D9iQvRxRW19LvuO2e59/u1wYUiH/orz
+ wbIC2S4dBsPAPihL3ztOU1yE86GPyQtSE0kU+/7snnLt4QGi6PChf3t5gnNjAzjUUovO8rgI
+ c+5yN5heq5loYHgK6OQ9OlHzsPHO9e9MOQcKlFycs1pyijFGzDwdNUm/SchK8iWT2QApTx4A
+ K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
+ n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
+ qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
+In-Reply-To: <b12ff328ebca405f96a9b25decdb7c81@realtek.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Mon, Oct 19, 2026 at 02:55:14PM +0200, Philipp Zabel wrote:
-> On Di, 2026-09-29 at 14:14 +0800, Jisheng Zhang wrote:
-> > The Synopsys DesignWare I3C master controller can have multiple reset
-> > lines, such as core reset, apb reset, and dma reset.
-> > 
-> > Update the DT binding documentation to increase maxItems for the resets
-> > property to 2.
+On 19/10/2026 13:19, Yu-Chun Lin [林祐君] wrote:
+> Hi Krzysztof,
 > 
-> The last sentence just listed three reset lines. Why increase to 2?
+>> On Mon, Oct 19, 2026 at 12:06:48AM +0800, Yu-Chun Lin wrote:
+>>> Allow an interrupt controller as a child node by referencing the
+>>> rtd1319-intc-iso schema, update additionalProperties to
+>>> unevaluatedProperties, and append a usage example.
+>>
+>> I do not see that "update".
+>>
+> 
+> Sorry about this. I updated the diff but missed updating the commit
+> message. Will fix.
+> 
+>>>
+>>> Signed-off-by: Yu-Chun Lin <eleanor.lin@realtek.com>
+>>> ---
+>>>  .../bindings/mfd/realtek,rtd1xxx.yaml         | 28
+>> +++++++++++++++++++
+>>>  1 file changed, 28 insertions(+)
+>>>
+>>> diff --git
+>>> a/Documentation/devicetree/bindings/mfd/realtek,rtd1xxx.yaml
+>>> b/Documentation/devicetree/bindings/mfd/realtek,rtd1xxx.yaml
+>>> index 717e29c37b36..b21e14df2879 100644
+>>> --- a/Documentation/devicetree/bindings/mfd/realtek,rtd1xxx.yaml
+>>> +++ b/Documentation/devicetree/bindings/mfd/realtek,rtd1xxx.yaml
+>>> @@ -65,6 +65,10 @@ properties:
+>>>      const: 1
+>>>
+>>>  patternProperties:
+>>> +  "^interrupt-controller":
+>>> +    $ref: /schemas/interrupt-controller/realtek,rtd1319-intc-iso.yaml
+>>> +    unevaluatedProperties: false
+>>> +
+>>>    '@[0-9a-f]+$':
+>>>      type: object
+>>
+>> What is this for then? Should it be removed?
+>>
+> 
+> The original syscon compatible has other child nodes that do have 'reg'
+> properties and unit addresses, so this pattern is still needed for them.
+> 
+>>>
+>>> @@ -76,3 +80,27 @@ required:
+>>>    - reg
+>>>
+>>>  additionalProperties: false
+>>> +
+>>> +examples:
+>>> +  - |
+>>> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
+>>> +    #include <dt-bindings/interrupt-controller/irq.h>
+>>> +
+>>> +    syscon@7000 {
+>>> +        compatible = "realtek,rtd1625-iso", "syscon", "simple-mfd";
+>>> +        reg = <0x7000 0x1000>;
+>>> +        ranges = <0x0 0x7000 0x1000>;
+>>> +        #address-cells = <1>;
+>>> +        #size-cells = <1>;
+>>
+>> Why do you have cells it your child has no addressing?
+>>
+>>> +
+>>> +        interrupt-controller {
+>>
+>> So the binding requires children with unit address, yes?
+>>
+> 
+> The interrupt-controller does not need a unit address because it accesses
+> the registers via the parent's regmap.
 
-Per the doc, the last one is dma reset, currently dw I3C driver doesn't support dma.
-And increasing it to 3 is still dt compatible. Maybe I misunderstood
-something. what's more, I don't have platforms with all 3 resets to test and verify.
+That's not really relevant. Child drivers still access via parent's
+regmap and have unit address. This binding has bus addressing for
+children, so use it. Do not add random or inconsistent code.
 
-If dt maintainers prefer 3 in one step, I will sent out a follow-up patch.
+> 
+> Will update the example to remove the unnecessary properties from the
+> parent as follows:
+> 
+> syscon@7000 {
+>     compatible = "realtek,rtd1625-iso", "syscon", "simple-mfd";
+>     reg = <0x7000 0x1000>;
+> 
+
+Still incomplete. Where are other devices?
+
+
+Best regards,
+Krzysztof
