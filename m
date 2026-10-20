@@ -1,56 +1,66 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792518540;
-	b=UsD/37+PCkxV2lJ6QFSCLcN3itTffIbIKUlYKJaJS2Q/tw+FzWJML+ijQXb1wFq5CRXH
-	 7H5tcYa7HhdrIco0zQY3sYgLnvdvwOAJmv5Ga2JNTZrMWpi1+xjuOirJp8h/Sf7kxVXvK
-	 LmULP7NMYltDT5P7o7y38DgZdDqMLsVrfe1AO5GRiyxOkaggESGpx9AVFBK8GUtLAzY9P
-	 UeoKOjSfV9MgF2SovPr/QaklW87SoIFQwZwzQzAHhz1+7OOcSQGu8ZIyw/WgAI3xupEXk
-	 wABadRhkL/MJua58ML5FjPTvupHAGudee0Qiy+BHEAi2kgPyvIJ0Uw4HsgvqkokBq5w==
+	t=1792519581;
+	b=yRxVG1cn2VDemaZX9X34VXm+aBqqsT38soHCB7l6vr+e0rdZ84YSBiLJAVplL0PUubQA
+	 pBalpFyoaEZLUH7rI/zB5wIfGLAIXbguXr4gTJ5/pm+1ctz5wW/FVcvOOGsngoqZaeQe1
+	 4VjLk71lzchdy1Bvb8/gTfF8nagOVDHbeq1omLtUBrZ9eR4OyUzIMZ6FwvAGQALNXtNC+
+	 sBR4ZC4pNbgl7puDHECxYy11fs3S7sbC5AkFsmp3+KfA3DGeAUilDxQAgzwT+I3l3dz3l
+	 fmvAuNdXY9Ogk9OSLzeII/7fN2ijoxQ5Te8mqrJveaJheZsU4lkuNz76Yy1rgi79F8g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792518540;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=M5rEvmXrfBoBjTv0yUsniidEuInq+pNnzfLGGWa+i24=;
-	b=AHWQijTNFY5N4cHL5cD9e9AtDFiSUBEYvmrH3nKt0G8cmTZFMy70qTFaxRLrFhr4WMK1
-	 0PcDuwmpXbd6pWpUpqNzpNXbouPWW6DDIKMxR6ByvoOFV+0Ot3rmRbrW/svfevDNI/Uzz
-	 kPGm3057+vzm8+HniUY6ahmNKr9Camqh+EkWoO6kjPdwEKRdv94Qo7YdhgQK0NSzGyhIt
-	 E7HzKzuhsF4dc3yKZnl+onkw/0PVJ19/+Ydpq2LliCwRfK+ixsgjikl3WsgDabmnvMsyv
-	 zjhiQ72JKg2w1nxrJ6vO+M30mRoL3cadKrnuYqzDhOF/vlAnlP/d1X6wja6eSxTUSGA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792519581;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 In-Reply-To:References:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=HVb+cZJd/B0SyswVrB5yNoiyhOraxVQrSwREAf5tTOE=;
+	b=teARR8Ol0RpM2q/I6oKAzG3P94nRztZZo0rStM9vgYTYSgh/5gM6i6ceD2/aPv8M43b7
+	 i/wb3vejoioWbSQ5dIYmRMdis7SutRBdRjkubh201pBm0T7BiOPP/T7ErhFf/+F/iDfDd
+	 CsbNt37bunaDxroi4eBnWVDBpirU9ExHDnXK4BR0zD7Pkq4/VNLpm+9rextk8vELFQuxp
+	 1PuYJyg3TxhYaQSRJU5Yxj3qEuEtuUS9xXWprEAyf1Qhan2bcVe6ICLpHGAyae17tZOFA
+	 pZ1Gkr901ji1Or1c/nGHaMBkp+tWMZrTnyZWE0GIHLmL/S47zTiBpRJwEv+THm6gVZA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=chjXc4qA;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VOSCLcav;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 861D4606A319;
-	Tue, 20 Oct 2026 17:49:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CAFA606A323;
+	Tue, 20 Oct 2026 18:06:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=chjXc4qA
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A6AB1F000C9;
-	Tue, 20 Oct 2026 17:48:59 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VOSCLcav
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 41F9B1F000C9;
+	Tue, 20 Oct 2026 18:06:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792518540;
-	bh=M5rEvmXrfBoBjTv0yUsniidEuInq+pNnzfLGGWa+i24=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=chjXc4qAETnD4VJQELmcQKY/u6qH974D2R065xAxVyPkDopxayIqEbdJpC52GSQaL
-	 8pydFBJ/Ql0G6dbM9fn7enoI3zLEJeACf5PjyPB7V+vKgefgI0bHe4OjUlPMHkrWhv
-	 fmqFGFYSP4OGEyGu6i2YSBsKVZE8/TqIOuekFombtkfCPcyHUYG0LFnacs4dPKJaSu
-	 D8tggGUYGUsCc4hqQbyn2b2X087hOPET98XAjrfokCr2+tRSK3A7JPhn5LT9puCkI5
-	 07cwehTD7fYj6h4Fmy8AS7GvSt+7rhX1hKyuM5je5yhRcQv4+/IojcU3b68xu6hbY3
-	 CTQQkzkVgwhFw==
-Message-ID: <sashiko-outbox-179446@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RESEND v10 8/9] regulator: Add MediaTek MT6392 regulator
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Luca Leonardo Scorcia" <l.scorcia@gmail.com>
-Cc: linux-input@vger.kernel.org, devicetree@vger.kernel.org, mfd@lists.linux.dev, linux-gpio@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, dmitry.torokhov@gmail.com, lee@kernel.org
-In-Reply-To: <20261020173556.632798-9-l.scorcia@gmail.com>
-References: <20261020173556.632798-1-l.scorcia@gmail.com>
- <20261020173556.632798-9-l.scorcia@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 20 Oct 2026 17:48:58 +0000
+	s=k20260515; t=1792519581;
+	bh=HVb+cZJd/B0SyswVrB5yNoiyhOraxVQrSwREAf5tTOE=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=VOSCLcav+2Q4vNjUNvhkr6i5DNiI17LtAqaaIRzCzrM8wZyC5l4KcdrlFDpvx5311
+	 SEo6MM2zhzIGkyPZXOnlvwBXy6MFWr3/RnJaISTv+py52eDkP3e4GcI070pM172tyA
+	 aN9qceol4RnuUJReHmdm/O+2skabYnJSxsPSNRHdhamkukSo5wMIWfncUJIpwQm6A1
+	 iZu/hz1oyXwCkgHMK8aqynuQK/TsdwJQ5k636/lNnJ3/8qBYlWEZ0bsE2odhTVdnJU
+	 /Os3eb+hvwQdYrZMQNU7V5fqPT3awKe8qb+OD5vIErPd7bWxHq17+Xs4tg8sbSyrMe
+	 zj9J8181KItxQ==
+Date: Tue, 20 Oct 2026 11:06:19 -0700
+From: Jakub Kicinski <kuba@kernel.org>
+To: Imre Kaloz <kaloz@kernel.org>
+Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ linux-mips@vger.kernel.org, linux-kernel@vger.kernel.org, Lee Jones
+ <lee@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jiri
+ Slaby <jirislaby@kernel.org>, mfd@lists.linux.dev,
+ linux-serial@vger.kernel.org, Alexandre Belloni
+ <alexandre.belloni@bootlin.com>, linux-rtc@vger.kernel.org, Andrew Lunn
+ <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, Eric
+ Dumazet <edumazet@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ netdev@vger.kernel.org, Damien Le Moal <dlemoal@kernel.org>, Niklas Cassel
+ <cassel@kernel.org>, linux-ide@vger.kernel.org, Pavel Machek
+ <pavel@kernel.org>, linux-leds@vger.kernel.org, Bjorn Helgaas
+ <bhelgaas@google.com>, linux-pci@vger.kernel.org, Christoph Hellwig
+ <hch@lst.de>
+Subject: Re: [PATCH v2 00/53] MIPS: SGI-IP27: add support for the IP35
+ (Bedrock hub) machines
+Message-ID: <20261020110619.12774a1c@kernel.org>
+In-Reply-To: <cover.1791890466.git.kaloz@kernel.org>
+References: <cover.1791890466.git.kaloz@kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,92 +69,12 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
-- [Medium] regulator: mt6392: OF node reference leak in mt6392_regulator_pr=
-obe()
---
+On Tue, 13 Oct 2026 15:16:20 +0200 Imre Kaloz wrote:
+> This series adds support for the SGI machines built around the Bedrock
+> hub (IP35), such as Fuel and Tezro, to the IP27 platform code.
 
-commit 04b22037bb949a80f26c6f5651752d61ee106b28
-Author: Fabien Parent <parent.f@gmail.com>
-
-regulator: Add MediaTek MT6392 regulator
-
-This commit adds a regulator driver for the MediaTek MT6392 PMIC.
-
-> diff --git a/drivers/regulator/mt6392-regulator.c b/drivers/regulator/mt6=
-392-regulator.c
-> new file mode 100644
-> index 0000000000000..3db52268363e0
-> --- /dev/null
-> +++ b/drivers/regulator/mt6392-regulator.c
-> @@ -0,0 +1,764 @@
-
-[ ... ]
-
-> +static int mt6392_regulator_probe(struct platform_device *pdev)
-> +{
-> +	struct mt6397_chip *mt6392 =3D dev_get_drvdata(pdev->dev.parent);
-> +	struct regulator_config config =3D {};
-> +	struct regulator_dev *rdev;
-> +	int i;
-> +
-> +	device_set_of_node_from_dev(&pdev->dev, pdev->dev.parent);
-> +
-> +	// Initialize the bucks' vsel_reg and vsel_mask according to current HW=
- state
-> +	if (mt6392_set_buck_vsel_reg(pdev))
-> +		return -EIO;
-> +
-> +	config.dev =3D mt6392->dev;
-> +	config.regmap =3D mt6392->regmap;
-
-[Severity: Medium]
-Does calling device_set_of_node_from_dev() here leak a reference on
-pdev->dev.parent->of_node when the platform device is released?
-
-In drivers/mfd/mt6397-core.c, the mt6392-regulator cell is defined without =
-an
-of_compatible string, so mfd_add_device() allocates the child device via
-platform_device_alloc() with pdev->dev.of_node and pdev->dev.fwnode set to
-NULL.
-
-Calling device_set_of_node_from_dev() in mt6392_regulator_probe() increments
-the reference count on pdev->dev.parent->of_node and assigns it to
-pdev->dev.of_node, without setting pdev->dev.fwnode:
-
-drivers/base/core.c:device_set_of_node_from_dev() {
-	of_node_put(dev->of_node);
-	dev->of_node =3D of_node_get(dev2->of_node);
-	dev_set_of_node_reused(dev);
-}
-
-When the platform device is later torn down, platform_device_release() only
-puts pa->pdev.dev.fwnode:
-
-drivers/base/platform.c:platform_device_release() {
-	...
-	if (!is_software_node(dev_fwnode(dev)))
-		fwnode_handle_put(pa->pdev.dev.fwnode);
-	...
-}
-
-Since pdev->dev.fwnode remains NULL, fwnode_handle_put() is a no-op and the
-reference on pdev->dev.of_node is never dropped.
-
-Also, since config.dev is already set to mt6392->dev (the parent device),
-which the regulator core uses for DT node and supply lookups, could the
-device_set_of_node_from_dev() call simply be dropped (or replaced with
-platform_device_set_of_node_from_dev() if needed)?
-
-[ ... ]
-
-> +	return 0;
-> +}
-
-[ ... ]
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261020173556.6327=
-98-1-l.scorcia@gmail.com?part=3D8
+Why do we need support for machines discontinued 20+ years ago?
