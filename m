@@ -1,55 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.84.56
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792603132;
-	b=R0F8oTknU1zCS6jQM2rUKHTxaIRWvO3a7neSH75WiK/5rfcfEgSEk58TEIHrNFnAXkc8
-	 F9KNfhVUJtqLFDZsjmHJ2KKNobblEutKKbalJogGa+m9xYCIqgKweU45NCmu7SvR5NK/W
-	 HMT3wn5XQwVp+GPyOkrfKldVIzSnrNtKammIrYnrbXwZbMxL32HLldarLZ58Bsst/nAun
-	 0YNVal6IOn14EdI2J+Hz6AbkfXJ38hS6oMYCyx8bQE3krM8iexw6i2W/TMhDXbH6Rlp7l
-	 WyLLUhK7YhRFpU3n11OotKiD27mJDhfc6AXFzEEwpRfjpcDYPq/HkE9elPUrmdkTn0A==
+	t=1792610390;
+	b=OgSFMGsNS55ifX8C/NcxpZjZAmZNRnX4Hzfsk3mx8pLPpWHyAkIunIV6yxqia4RvvnMl
+	 FHFVAYCyh1gdpV3tmQt8QtbK51h7U2krG62N8ZMC+uXQahlnQU62aTlDSu46ZBLfBd+u9
+	 t8xNhQaQGJebFoYRusCY1FtvbQoWJF6pfjblfMXMHioqD0iyBtW8IWC27S3CwWQ5GAys4
+	 nR730cTjKNpaEao2Z1qRdG4XQlZWXcrtYsyVAGx0dAkHiPnkpnL++tny41k5N+uy89OtP
+	 D1Us2q7CkB0z03V5vy3c3lUCNvIcClgsEzd4y86cv4Zx2S8RFNghVFBY1ZYgE+b3hkQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792603132;
-	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id:X-Mailer:X-Last-TLS-Session-Version;
-	bh=D5rcxsFZdOnBsChcn2OwDSeYiCmUrlk0I9zL6NmVr2E=;
-	b=YjNE+k3QfSkIrmvh54nTeljX5B0qZks14NqeW59u3Dh7H4Ergw4GBO65+KKRFFRJSnqU
-	 FjarlF9SzsxG2+uLdM6wYEfpybdRL/+FHnCLJD4/g1sh7xXaWUNkdmESyAf2ATG+9508q
-	 SntCz8w2HuUE+C1m9J1ZV/9FxnQNcI4NFC/2Txx5wKeAoXszm3Vx3lRCihGADrH7gIrF8
-	 y/z3ie3ar75/nDp3zV8FnfJbsy98LyhrzSEU+GV4Ngnmi8ebccJSZelPMBP9SQsbZDUAK
-	 0RmSyQvsXpXK3ms8S+tBvckqHpSWsccpvnQhnxqcuud3xZd69JSTb8nIHtApjjxOqRg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792610390;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=ubD8jlES2r9JS1ilGa+r04b+PuxqIhs9kd1HnDejkPY=;
+	b=sj+mKhOhgH0RIdwqQRwsojsXPMDndU84ggtJJDMng3Gje8ZdDTn0kl4clbtI4V9XPIQz
+	 TPcTez20GZ/OYqgh9mrJT/PAqCI4beHGZ3P8yTOVue5HDgnYGgvhC7CfBuQkCPNqN/J78
+	 QDN1MN6lTg/Y/NcDuBByLz2tEjrxgQz7IF4bfysF6ySyrXKLq7RgpQYukBb+SR20tWzCw
+	 1F2UcQ46eWsTySWOeO2TLuLbwyxlr8gEU3cbACfhyNtYaqDL1avsNsIstrx1LPPvDHwBA
+	 4C2X59+ZmHX2dsD7IPQTYz7nR5ayPtOduKJXjB8pAb7gr+yb54xvD8FjLBdHqpTr/6Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=bootlin.com;
-	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=ZEyYEg5A;
-	arc=none smtp.remote-ip=185.246.84.56
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BbA0vOuq;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1498606A31A
-	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 17:18:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E1498606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13DDD606A324;
+	Wed, 21 Oct 2026 19:19:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=ZEyYEg5A
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id 3BF9B1A12B1;
-	Wed, 21 Oct 2026 17:18:48 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id EB3FA606E3;
-	Wed, 21 Oct 2026 17:18:47 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 5A90710328D6E;
-	Wed, 21 Oct 2026 19:18:42 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1792603123; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=D5rcxsFZdOnBsChcn2OwDSeYiCmUrlk0I9zL6NmVr2E=;
-	b=ZEyYEg5AAcLne7uj/7uFyelWMlWfSvogrfZvUZynWS6BjP1w4XI1xtk7fskSKVjdBO6Bta
-	trFxXdN3IKVfXZaXBWJfYbTA4JAt1N24Q7iJcb5a9hHN27xXBul9wyKmBzNmLcQXm2QkUo
-	yeuvVRut28K5AuKMIgH100WCmY06rMN+4VhCYBNnXmsAq/fpXNzwjz/0fpaYMHaQGrtAhM
-	9fH523fCP/SgaoCkt9C529yLZ8y38bKLdgHAW3CxaAd6ZsRzr5mXLR9jorcbE8CvQOCLa4
-	TaVcSGxiLcXG5mAnIAmIrzTKGVx7Xs17miVOlp0+FQOcV2S/xdwVVq5RbN74BA==
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BbA0vOuq
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1A0E71F000C2;
+	Wed, 21 Oct 2026 19:19:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792610389;
+	bh=ubD8jlES2r9JS1ilGa+r04b+PuxqIhs9kd1HnDejkPY=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=BbA0vOuq4XksLwfEBfKH0Mg/HesUwrzRg3nbNBByJuoIfwSj//7JtxU8UX2urpuiC
+	 y9CD6iqC8wPLe24M9fSoQ2xx022IoaPUW5IxH0wRyb/NsVbvuEEqiVGyjaKg4Aq1EM
+	 m+qfMkt5WpvQtVgBW9uQoijmRNfqCAhn+CXpUvZrPZ5Inc1nVUO0TWy1yN91bAjvW0
+	 OQw+dWJ9Lvt4fF6XS6kWV8Zu5tvjIVOLZzxYX+GqPmC0lcEfcqZH1HjX1Qwnbb4ouf
+	 P2ZAzQhs7KqMHMkMfeFXIkJFi5pfVYStj779wXkEBjQvkonBRoH+eo2ssWNaDT4UcG
+	 t2cJpPkALSe/g==
+Date: Wed, 21 Oct 2026 20:19:43 +0100
+From: Jonathan Cameron <jic23@kernel.org>
+To: Lee Jones <lee@kernel.org>
+Cc: David Lechner <dlechner@baylibre.com>, Nuno =?UTF-8?B?U8Oh?=
+ <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, Dmitry Torokhov
+ <dmitry.torokhov@gmail.com>, Shi Hao <i.shihao.999@gmail.com>, Rachna Patil
+ <rachna@ti.com>, linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-input@vger.kernel.org, mfd@lists.linux.dev
+Subject: Re: [PATCH 28/28] mfd: ti_am335x_tscadc: Remove redundant
+ ti_tscadc_dev_get() helper
+Message-ID: <20261021201943.6159ecdf@jic23-hlaptop>
+In-Reply-To: <20261021121245.3111563-28-lee@kernel.org>
+References: <20261021121245.3111563-1-lee@kernel.org>
+	<20261021121245.3111563-28-lee@kernel.org>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,70 +64,71 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 09/28] mfd: cgbc: Zero-initialise version buffer in
- cgbc_get_version()
-From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
-To: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
-Cc: Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, 
- linux-kernel@vger.kernel.org, stable@vger.kernel.org
-In-Reply-To: <179260069841.1125687.16461366525950099809.b4-review@b4>
-References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-9-lee@kernel.org>
- <179260069841.1125687.16461366525950099809.b4-review@b4>
-Date: Wed, 21 Oct 2026 19:18:29 +0200
-Message-Id: <179260310903.1125687.4328531935004472672.b4-reply@b4>
-X-Mailer: b4 0.16.0
-X-Last-TLS-Session-Version: TLSv1.3
 
-On 2026-10-21 18:38:18+02:00, Thomas Richard (congatec GmbH) wrote:
-> > If the Board Controller returns a short response to the firmware
-> > revision query in cgbc_get_version(), cgbc_command() can succeed
-> > without populating all bytes of the stack-allocated data buffer.
-> > Those uninitialised stack bytes are then copied into cgbc->version
-> > and exposed to userspace via the cgbc_version sysfs attribute.
-> > 
-> > Zero-initialise the data buffer on the stack to prevent leaking
-> > uninitialised kernel stack memory.
-> > 
-> > Fixes: 6f1067cfbee7 ("mfd: Add Congatec Board Controller driver")
-> > Closes: https://sashiko.dev/#/bug/linux-8c473713-527e-4619-8404-689f28c7654d
-> > Cc: stable@vger.kernel.org
-> > Signed-off-by: Lee Jones <lee@kernel.org>
-> >
-> > diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
-> > index edfac2b60718..7513ba42eb96 100644
-> > --- a/drivers/mfd/cgbc-core.c
-> > +++ b/drivers/mfd/cgbc-core.c
-> > @@ -461,7 +461,7 @@ ATTRIBUTE_GROUPS(cgbc);
-> >  static int cgbc_get_version(struct cgbc_device_data *cgbc)
-> >  {
-> >  	u8 cmd = CGBC_CMD_GET_FW_REV;
-> > -	u8 data[4];
-> > +	u8 data[4] = {};
-> >  	int ret;
-> >  
-> >  	ret = cgbc_command(cgbc, &cmd, 1, &data, sizeof(data), NULL);
+On Wed, 21 Oct 2026 12:09:50 +0000
+Lee Jones <lee@kernel.org> wrote:
+
+> Now that ti_tscadc_dev_get() is a single-line wrapper around
+> dev_get_drvdata(p->dev.parent), remove the bespoke helper and retrieve
+> the parent driver data directly in the child ADC and touchscreen
+> drivers.
 > 
-> Yes Sashiko complained multiple times even if I already explained it cannot
-> happen if cgbc_command succeeds. Anyway I agree that things can be improved
-> but I would prefer in a generic way:
-> - add macros for cmd resp size (eg CGBC_CMD_GET_FW_REV_RESP_SIZE) in all cgbc
->   drivers
-> - cgbc_command() should return an error if data buffer size doesn't match
->   the number of bytes returned by the hardware, it is not the case today [1].
+> Signed-off-by: Lee Jones <lee@kernel.org>
+Acked-by: Jonathan Cameron <jonathan.cameron@oss.qualcomm.com>
 
-I mean return an error if data buffer size is smaller than the number of
-bytes returned by the hardware. Also cgbc_command() should initialize data
-buffer first (in case of it does not populate all bytes after), so no need
-to it from the callers. I also noticed we use cmd and data pointers, but we
-did not check if they are NULL.
+Seems moderately unlikely we will get a flurry of activity on
+this driver and if we do merge conflicts should be minimal
+so no need for an immutable I think.
 
-I'll send a series to address all of these issues. So you can drop this
-patch.
-
-Best Regards,
-Thomas
-
+J
+> ---
+>  drivers/iio/adc/ti_am335x_adc.c           | 2 +-
+>  drivers/input/touchscreen/ti_am335x_tsc.c | 2 +-
+>  include/linux/mfd/ti_am335x_tscadc.h      | 5 -----
+>  3 files changed, 2 insertions(+), 7 deletions(-)
+> 
+> diff --git a/drivers/iio/adc/ti_am335x_adc.c b/drivers/iio/adc/ti_am335x_adc.c
+> index 1516dd332f90..77ea59d6c6b7 100644
+> --- a/drivers/iio/adc/ti_am335x_adc.c
+> +++ b/drivers/iio/adc/ti_am335x_adc.c
+> @@ -636,7 +636,7 @@ static int tiadc_probe(struct platform_device *pdev)
+>  
+>  	adc_dev = iio_priv(indio_dev);
+>  
+> -	adc_dev->mfd_tscadc = ti_tscadc_dev_get(pdev);
+> +	adc_dev->mfd_tscadc = dev_get_drvdata(pdev->dev.parent);
+>  	tiadc_parse_dt(pdev, adc_dev);
+>  
+>  	indio_dev->name = dev_name(&pdev->dev);
+> diff --git a/drivers/input/touchscreen/ti_am335x_tsc.c b/drivers/input/touchscreen/ti_am335x_tsc.c
+> index 623546e80668..40ffdec9d207 100644
+> --- a/drivers/input/touchscreen/ti_am335x_tsc.c
+> +++ b/drivers/input/touchscreen/ti_am335x_tsc.c
+> @@ -418,7 +418,7 @@ static int titsc_probe(struct platform_device *pdev)
+>  {
+>  	struct titsc *ts_dev;
+>  	struct input_dev *input_dev;
+> -	struct ti_tscadc_dev *tscadc_dev = ti_tscadc_dev_get(pdev);
+> +	struct ti_tscadc_dev *tscadc_dev = dev_get_drvdata(pdev->dev.parent);
+>  	int err;
+>  
+>  	/* Allocate memory for device */
+> diff --git a/include/linux/mfd/ti_am335x_tscadc.h b/include/linux/mfd/ti_am335x_tscadc.h
+> index 4a048a897cf3..36d365b64fe6 100644
+> --- a/include/linux/mfd/ti_am335x_tscadc.h
+> +++ b/include/linux/mfd/ti_am335x_tscadc.h
+> @@ -175,11 +175,6 @@ struct ti_tscadc_dev {
+>  	struct adc_device *adc;
+>  };
+>  
+> -static inline struct ti_tscadc_dev *ti_tscadc_dev_get(struct platform_device *p)
+> -{
+> -	return dev_get_drvdata(p->dev.parent);
+> -}
+> -
+>  static inline bool ti_adc_with_touchscreen(struct ti_tscadc_dev *tscadc)
+>  {
+>  	return of_device_is_compatible(tscadc->dev->of_node,
 
