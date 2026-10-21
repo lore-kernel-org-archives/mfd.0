@@ -1,56 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792585429;
-	b=U3OejveiVm2UEr72UxuAIxsFGFYHPZW1shE50151MrW9pNBAGk7HaEVntnc15kJ1tNci
-	 U+vgVk104Z1PRYVFe4nMPCrboMs8ljYTxkOgI4DMIy704jr47P9uL7ZLu2Oc2TC4JDdY9
-	 ASrPcmQFvICQ0PwAJZsNLKnmL00geMy/uldtHmhhKuVInjFcoHtIgKOHGmuba6nyLGt4D
-	 cCoP5C4OYB8i1pPtVqyN5ukdZPD+oSKANUuRVYRaAh8Yn99iI0VTJ4reH4ALsDlEpbDfJ
-	 qEUNCcqVWr/yxdqtDfayujMoEmLkdeIggSeDhVGvajbH/v/UTQvYom5nlrBIYi4UgXg==
+	t=1792585445;
+	b=5IfRx13O9frDNz68HlJKn/C1hfFSpESWR2J3oJYhi6BH98BNJgU4Ismb6U9Y652XChKF
+	 dmWbtIDWHsA2qsZmqhy6+7fvkEYQS9s7SXrhzvb0HX5/nWNxbjq94CgGidUttwo8/3JJs
+	 Kxqawe3hL4HYtp/ptEv9d2T+RWTQzZ7+8ttFkAfFZwy9JWmleZzlO76wKQtvh/9StEZdo
+	 hfNfCM3vqsz46czT6zNKMHW7JEj6q9T9l1YBCTSWJxs+Bv1k9H524Ob/cB5iZ5L+Z7onM
+	 igpvoPhQoCtkABKOhpeENGqyAwHQ8XX1PX2bDBLpKmF9ERLkByzqDpiVgTQ87BZOsjg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792585429;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792585445;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=d84IUFEGmWLJRtOdCo5Oly0qbeaiInQgUuifPAXoop4=;
-	b=hyPgMGFpo+n+E+Jc+Sxq8WMNxXIdGIq/5YOTthH8Scy/LdUqCVc8KbCiwRYo2ios/0tm
-	 g++9jXqpyzmu98v2AibXqvRQPI5FVoNl8jyGP5kfprqK+DUCXuQgZ9oy1pyVh/3ajqq2U
-	 AjVopIz+X1D2XmNbfLMiSfTUn1d5CeKc79rlUWIsUURBQDFq0nRtGk2baSzRCxK+gOIxL
-	 zbVFZK0PixIomXyvT3MwcbKz+QdHGpTcZP4TgF+6U81ZDyNT8PX+CwcfD/N//bbthd/1L
-	 GZqF2+0PLDTagz+iJLAh7gcNaevk0SkmRCMmGeKO1QPpgf/AnOjH/sR5H3bBd676pVg==
+	bh=U12Wu/eAmGH3N05M3Z1ULrXO34kH81G6N0J08lDliS8=;
+	b=P4hON4fZ5C+MLyMD02MUZ94Lcdhdkk8xPiZ+msKOYR7x5QqA/0zL+6hM+wXqrC+6ovHA
+	 SVg2I14A4Aty6pNB1vrckHO8pkCqzBmuMRkdkM045MqpsVR1kU6Ngak8fuMr3s7SvRCKi
+	 LSYLrHnnv9y4wB90iqli62El5x8WtHixSvGsT/Yx69+AXT4nkKEB29J2x/HWCMid5R49n
+	 51Q44aIo7v7jjI9lWGdHt3odPgEON/WEQCdctb2yzOzZ8UBGD+fP+WzhLvomyLTZSW+wi
+	 aUjg9DnhG4sXXn4LaLlndq8wOq0gcBiyfrWr90WjNxeocYX1j76tmIBI1kPvb+6eanw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Hrhvc0Jy;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Zt1stO5s;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C87D606A31A
-	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 12:23:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1166D606A31B
+	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 12:24:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Hrhvc0Jy
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC8561F000C4;
-	Wed, 21 Oct 2026 12:23:48 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Zt1stO5s
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 863061F000C4;
+	Wed, 21 Oct 2026 12:24:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792585429;
-	bh=d84IUFEGmWLJRtOdCo5Oly0qbeaiInQgUuifPAXoop4=;
+	s=k20260515; t=1792585444;
+	bh=U12Wu/eAmGH3N05M3Z1ULrXO34kH81G6N0J08lDliS8=;
 	h=From:Subject:Reply-To:To:In-Reply-To:References:Date;
-	b=Hrhvc0JyODc5ehDXbnLmek+J155+Nt4HnI2Bkx821r7BSVYxCEwZ76L1NzshUSfDl
-	 /27joJK/e31xJ8pdBcC4MsPErmmZf6YPBzziP+EtpGiOQlhLXzFCBqGupfpC8mnuRh
-	 TVCyQIvetI2S2hpB0SZyuYttcwKqxfd7Y6R5ubeUp5nhioTnD3QgEa4Vqo//WeMWGV
-	 DQqZjIsI5FSYNu57CvS4VS8LKKoUWouXw+P6tONIbnv3luiNjk9Wdt6OC8IuR+mRBy
-	 Sh2AYezQIbcAdBGE2iQTwPWIhu7WUX2xhTXkCHO4XZwj5+275vy76eW3QSVUwuRW2q
-	 NdlMOoDNjnjIg==
-Message-ID: <sashiko-outbox-180242@kernel.org>
+	b=Zt1stO5srpik5PFhd0sw3MCLaKYV0h3YGueiEYEnIj2LdjU4/l6nMyXyYBp2DReES
+	 8tL33A7l9zBZ3CMr+hJSj2P1VVZj+mTsxHkd8v62UcwhOPPHokj9VrwBfAfyAqoCkl
+	 M1GuEesrdpp8dPAZz5AdQQQ5OBVNDw1bKCl4KHunNFsS9QuyP6AWO1RhHFEGBG+wNB
+	 2XEl8z5O0j5yny5O/GBhBKvB7/dQ11N8vIjq26eEbYn9Jwb2Xqvp0ybijHeMFCp+UN
+	 x0R+tZsYNm4HL3D+1okXoxHXV5iqDK2Rg2U33UokMFEuDE9tvfj/n9sURgWfkbhxS0
+	 OkSZcBq3SLavA==
+Message-ID: <sashiko-outbox-180243@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 26/28] mfd: mt6397: Unregister PM notifier on probe
- failure and unbind
+Subject: Re: [PATCH 14/28] mfd: twl-core: Clear twl_priv pointer on teardown
+ and probe failure
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Lee Jones" <lee@kernel.org>, mfd@lists.linux.dev
-In-Reply-To: <20261021121245.3111563-26-lee@kernel.org>
+In-Reply-To: <20261021121245.3111563-14-lee@kernel.org>
 References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-26-lee@kernel.org>
+ <20261021121245.3111563-14-lee@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 21 Oct 2026 12:23:48 +0000
+Date: Wed, 21 Oct 2026 12:24:04 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,19 +60,25 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> mt6397_irq_init() registers a power management notifier block embedded
-> in the devres-managed struct mt6397_chip via register_pm_notifier(),
-> but never unregisters it if mt6397_probe() later fails or when the
-> driver is unbound.  Once devres frees struct mt6397_chip, the dangling
-> notifier block corrupts the global PM notifier chain and causes a
-> use-after-free on subsequent suspend or resume transitions.
+> twl_probe() allocates the file-scope twl_priv state with devm_kzalloc()
+> and checks for a non-NULL twl_priv at entry to reject multiple device
+> instances.  However, twl_remove() and the early error paths in
+> twl_probe() never reset twl_priv to NULL, a failure when adding MFD
+> child devices bypasses twl_remove() by jumping to free instead of fail,
+> and twl_remove() tears down the IRQ domain and dummy I2C clients before
+> child devices are unregistered.  After devres frees the underlying
+> memory on probe failure or unbind, twl_priv remains a dangling pointer,
+> causing subsequent exported API calls to dereference freed memory and
+> blocking future probe attempts with -EBUSY.
 >=20
-> Check the return value of register_pm_notifier() and register a devres
-> action to unregister the PM notifier on probe failure or device unbind.
+> Unregister DT-populated and MFD child devices at the start of
+> twl_remove(), ensure mfd_add_devices() failures unwind via fail, and
+> reset twl_priv to NULL in twl_remove() and on probe error exit.
 >=20
-> Fixes: 4e2e7cfec13a ("mfd: mt6397: Modify suspend/resume behavior")
-> Closes: https://sashiko.dev/#/bug/linux-edb62fbc-213a-49a2-be55-c002e234e=
-554
+> Fixes: 80a97ccd33be ("mfd: twl-core: Collect global variables behind one =
+private structure (global)")
+> Closes: https://sashiko.dev/#/bug/linux-73e82f84-94de-4d08-82a4-f22d42a1d=
+edf
 > Cc: stable@vger.kernel.org
 > Signed-off-by: Lee Jones <lee@kernel.org>
 
@@ -80,5 +86,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261021121245.3111=
-563-1-lee@kernel.org?part=3D26
+563-1-lee@kernel.org?part=3D14
 
