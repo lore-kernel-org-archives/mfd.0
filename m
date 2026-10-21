@@ -1,68 +1,61 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792549967;
-	b=MmtHMPFRogwBadgtOqB1blRnGP8BtwtUPrNNUpWw94XzMucznAJuoXJecaVuwZak8Vvk
-	 H/EKomEkJoTgTXYyULScu7as2CcZ1Tplhu5Q/A7ARlrE+rqosusasyDNdc3LFi6hZp4OA
-	 92sApq9Vat+daT7F1Hu1LlVMwiT8OXwEL6vyqZXqompNdgDSUftDMc/Tf9Zlg+xo+p9Yq
-	 7JW+w28/SR5I8BjXfbvPkWWRTfHpCfb9RGbkHF8+jQQ1vfV892SBMKXNZXjLvfHzOgh2L
-	 7y+Oi7PHhsV0Gx5qI0HwnXPRHQazZmsLwEaZ6JWfyHntwThZy1rMVAE7008I2J0lFDw==
+	t=1792551961;
+	b=XDrKbPxdAC7nKZjGYiDZkJVvbaMAecqwW79VNicVySOP0Y41xFv/hTxRtTq6+5iPeZ9+
+	 efuMgbwlZULjc3Tw2I5qmnTV9jDIS6D31QtouuGK8WngugxbRir9fFoo1RpO+SzxAyFso
+	 xjqRaMzVcsheLk3AAF2xpFmy9CBoTKtklAhDz2zNcUrJODukI/9PwwsIViFDsOgjx5u5o
+	 jh1I3HcbNozVLs2Ievd6NqBx/q2s7IVfbCP3v0/Byhsf57H84dFl/l9OmzfWrxzXwU0HL
+	 Wy/0qj/B4dwwHH+I8WOZ+7riTJ3ytjyz2kSGvm7nGHWsbyD6PijQsnXPziv3IoN46xA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792549967;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792551961;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=5BIOTNs2nezs/HO6l5CjGvSoFAHf9bcbJ2W8/ufQESo=;
-	b=TQgyI0VOFlhKRjPDLP1K+hPNkXm/+8e9LTZRiWBjTzunJOAqdp/ch6BsuWssRxKhiWeY
-	 Pdek4ewB/ty6LZZk6ekT893krAOWUAbt8OCLEcLKG/BR65QfasOiwLE/cKPk1ujRsa/9e
-	 sG0/jhrY66U3c7ZudZeY64wHW+0qtR1+4LZ7aDAliS0XAYyfkuuXeW+aD0BOezCboh26m
-	 xbcPy+fnKBvYOanVTFgonh/YxvlE1OmmQ+5kooQN1iv7sMG5IuuCLvsHYBONDiJronACO
-	 HgNFJJN6SfkvlCuAmRghC25C+rQ+PDTmU6CUXikqPuHEwTdofuO0hQKuryWRdWGpmlA==
+	bh=YWCBZA77zc/p/5rLcj2aumPqvMgt4N1QGO7iyPGLOqs=;
+	b=g2woWanqd0JJfGUj4T4AboiBl2ZYiuTY3KxXGGESBWud088f9A2ICCnXqvXTRbBAntd/
+	 dNiKPQKVo69qKa40c/+I+CyVLYyqbpYyQBePlebvfKJwvh4KgboCiqAX933drmTu7al9R
+	 mq2C2rWdOrG1AY70NxX84pYpwWdYBdpRxW9rljqcOUUVj3lAqBaDBT8OCulxRY6CxD44a
+	 4gYEllJy2v7WDiwkpj0FFrebddCYEPu9ktZj7K6ayQKrk8U4dFvPPhb3EqhsHluRAdDI3
+	 E6d9+GLOhlncLGJHXlAGT4dV6hxjE7hFeAffShq5jU4Kjuwc5bLqhfidUaDV3t8e4WA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=diMBHzPq;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CMv2JSWj;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CA83606A319;
-	Wed, 21 Oct 2026 02:32:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 218A7606A319;
+	Wed, 21 Oct 2026 03:06:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=diMBHzPq
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7BDC51F000C9;
-	Wed, 21 Oct 2026 02:32:46 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CMv2JSWj
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C873A1F000C9;
+	Wed, 21 Oct 2026 03:06:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792549966;
-	bh=5BIOTNs2nezs/HO6l5CjGvSoFAHf9bcbJ2W8/ufQESo=;
+	s=k20260515; t=1792551961;
+	bh=YWCBZA77zc/p/5rLcj2aumPqvMgt4N1QGO7iyPGLOqs=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=diMBHzPqA9Vic4uQ8X89NL3ds5Erirm7bqnEMM9F8MaK4G/aHh7ZF7+0MNhKPS5hx
-	 61KHv4SAHm5DleXqB3A5Pb5b97wVpin7wwzKB/IhRpj100ytyHJOHe6yljwTwRgIpU
-	 Bnfmb1fiu/qCs8yx7OaHzQNHZjvPuAJJoMCtLaTlUVeI1N9NAd+d9vb5i73u4H74ij
-	 /ptFC2xgm/gSE/LtGv++LlJCqefvj9tWCaNWD2JSVKLXXM5Pp2M4vzAeSKRSuf9jUv
-	 7O4SHv3g7ONDCg75OLq/XCrHshK6pcEzM8AXFmF+JjKvgMeYDNDiE6X/ISW+SykxO7
-	 NTNYOoWHNSn7A==
-Date: Tue, 20 Oct 2026 21:32:45 -0500
+	b=CMv2JSWjRnAZ2/m4AEei3NrqIExmFUjFGQ1RY/thuH7p1SGY1bj5GCd14enqm6Ef7
+	 Sf65nQBJlLmx6elbTPwkhB/IxYoD6bdGI1ZkYIBdzJM9kZpL2T0lDQ84f1E4kOiyqN
+	 MY2UEqCt82KT7NTkTlqjviUzZrtr7tI3nWRAwJ0S1HwTjn4AaUcpFFstAvhm35Ob8q
+	 Gdx2kqBn5wdbxhPpCHdjLV854oQD1H9q2ocTp4HVU1zdiJZxGw7SmBZN6xqKTzMhkk
+	 KnRyuHFxmOxH7kgh3pMf9v9O2ehLKl2yKSjivHPvR+SzLgKV0eq092neBf+owZFfAg
+	 CvstQOvSTwohg==
+Date: Tue, 20 Oct 2026 22:06:00 -0500
 From: Rob Herring <robh@kernel.org>
-To: Luca Leonardo Scorcia <l.scorcia@gmail.com>
-Cc: linux-mediatek@lists.infradead.org,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Sen Chu <sen.chu@mediatek.com>,
-	Sean Wang <sean.wang@mediatek.com>,
-	Macpaul Lin <macpaul.lin@mediatek.com>, Lee Jones <lee@kernel.org>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>, Linus Walleij <linusw@kernel.org>,
-	Val Packett <val@packett.cool>, Fabien Parent <parent.f@gmail.com>,
-	Akari Tsuyukusa <akkun11.open@gmail.com>,
-	Chen Zhong <chen.zhong@mediatek.com>, linux-input@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-pm@vger.kernel.org, mfd@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, linux-gpio@vger.kernel.org
-Subject: Re: [PATCH RESEND v10 1/9] dt-bindings: mfd: mt6397: Add MT6392 PMIC
-Message-ID: <20261021023245.GA3650393-robh@kernel.org>
-References: <20261020173556.632798-1-l.scorcia@gmail.com>
- <20261020173556.632798-2-l.scorcia@gmail.com>
+To: Yaozhong Li <yaozhonguwl@gmail.com>
+Cc: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Heiko Stuebner <heiko@sntech.de>, Chris Zhong <zyw@rock-chips.com>,
+	Zhang Qing <zhangqing@rock-chips.com>,
+	Joseph Chen <chenjh@rock-chips.com>,
+	Sebastian Reichel <sebastian.reichel@collabora.com>,
+	mfd@lists.linux.dev, devicetree@vger.kernel.org,
+	linux-rockchip@lists.infradead.org,
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 1/3] dt-bindings: mfd: rk8xx: add board level power
+ hold GPIOs
+Message-ID: <20261021030600.GA3816650-robh@kernel.org>
+References: <20261020140127.720-1-yaozhonguwl@gmail.com>
+ <20261020140127.720-2-yaozhonguwl@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -74,128 +67,134 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261020173556.632798-2-l.scorcia@gmail.com>
+In-Reply-To: <20261020140127.720-2-yaozhonguwl@gmail.com>
 
-On Tue, Oct 20, 2026 at 07:33:22PM +0200, Luca Leonardo Scorcia wrote:
-> Describe the MT6392 PMIC and its RTC and regulator devices. This device
-> is mostly based on MT6323 with some similarities to MT6397 and is usually
-> found on boards using the MT8516/MT8167 SoC.
+On Tue, Oct 20, 2026 at 10:01:12PM +0800, Yaozhong Li wrote:
+> Some boards route "power hold" lines from the SoC into the board's power
+> circuitry. Those lines have to be held asserted while the system is
+> running and released before the PMIC shutdown request is written,
+> otherwise the rails can drop and come back up instead of staying off.
 > 
-> Signed-off-by: Luca Leonardo Scorcia <l.scorcia@gmail.com>
-> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-> Reviewed-by: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+> Add power-hold-gpios to describe those lines and power-hold-delay-ms for
+> the settle time. The driver reads them for every RK8xx variant that is
+> the system power controller, so add them to all seven RK8xx schemas.
+> 
+> The array is bounded at two entries. Firefly's vendor kernel handles
+> exactly two such lines, pmic,hold-gpio and pmic,stby-gpio, and its board
+> files use one or both of them, with an RK808 and with an RK818.
+> 
+> The lines are released from the PMIC's power-off path, so they are only
+> meaningful when the PMIC is the system power controller. Require that,
+> accepting whichever spellings of the property each schema allows.
+> 
+> Assisted-by: LLM
+> Signed-off-by: Yaozhong Li <yaozhonguwl@gmail.com>
 > ---
->  .../bindings/mfd/mediatek,mt6397.yaml         | 72 +++++++++++++++++++
->  1 file changed, 72 insertions(+)
-
-You need to reorder your patches to avoid errors.
-
+>  .../bindings/mfd/rockchip,rk801.yaml          | 23 +++++++++++++++
+>  .../bindings/mfd/rockchip,rk805.yaml          | 29 +++++++++++++++++++
+>  .../bindings/mfd/rockchip,rk806.yaml          | 23 +++++++++++++++
+>  .../bindings/mfd/rockchip,rk808.yaml          | 29 +++++++++++++++++++
+>  .../bindings/mfd/rockchip,rk816.yaml          | 23 +++++++++++++++
+>  .../bindings/mfd/rockchip,rk817.yaml          | 29 +++++++++++++++++++
+>  .../bindings/mfd/rockchip,rk818.yaml          | 29 +++++++++++++++++++
+>  7 files changed, 185 insertions(+)
 > 
-> diff --git a/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml b/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml
-> index 3cbc0dc12c31..06e93c545e3b 100644
-> --- a/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml
-> +++ b/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml
-> @@ -39,6 +39,7 @@ properties:
->            - mediatek,mt6328
->            - mediatek,mt6358
->            - mediatek,mt6359
-> +          - mediatek,mt6392
->            - mediatek,mt6397
->        - items:
->            - enum:
-> @@ -72,6 +73,10 @@ properties:
->                - mediatek,mt6331-rtc
->                - mediatek,mt6358-rtc
->                - mediatek,mt6397-rtc
-> +          - items:
-> +              - enum:
-> +                  - mediatek,mt6392-rtc
-> +              - const: mediatek,mt6323-rtc
->            - items:
->                - enum:
->                    - mediatek,mt6359-rtc
-> @@ -99,6 +104,7 @@ properties:
->                - mediatek,mt6331-regulator
->                - mediatek,mt6358-regulator
->                - mediatek,mt6359-regulator
-> +              - mediatek,mt6392-regulator
->                - mediatek,mt6397-regulator
->            - items:
->                - enum:
-> @@ -663,3 +669,69 @@ examples:
->              compatible = "mediatek,mt6397-rtc";
->          };
->      };
+> diff --git a/Documentation/devicetree/bindings/mfd/rockchip,rk801.yaml b/Documentation/devicetree/bindings/mfd/rockchip,rk801.yaml
+> index 7c71447..2f9554d 100644
+> --- a/Documentation/devicetree/bindings/mfd/rockchip,rk801.yaml
+> +++ b/Documentation/devicetree/bindings/mfd/rockchip,rk801.yaml
+> @@ -29,6 +29,25 @@ properties:
+>      description:
+>        Telling whether or not this PMIC is controlling the system power.
+>  
+> +  power-hold-gpios:
+> +    minItems: 1
+> +    maxItems: 2
+> +    description:
+> +      Board level power hold lines driven by the SoC. They have to be held
+> +      asserted while the system is running and released before the PMIC
+> +      shutdown request is written, otherwise the rails can drop and come
+> +      back up instead of staying off. Only meaningful when this PMIC is the
+> +      system power controller, as the lines are released as part of its
+> +      power-off path.
+> +      The lines are released in the order listed, and power-hold-delay-ms
+> +      elapses once, after the last of them.
 > +
-> +  - |
-> +    #include <dt-bindings/input/input.h>
-> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
+> +  power-hold-delay-ms:
+> +    default: 0
+> +    description:
+> +      Time to wait after releasing power-hold-gpios before the shutdown
+> +      request is written, to let the lines settle.
 > +
-> +    pmic {
-> +        compatible = "mediatek,mt6392";
+>    wakeup-source:
+>      type: boolean
+>      description:
+> @@ -71,6 +90,10 @@ properties:
+>          unevaluatedProperties: false
+>      additionalProperties: false
+>  
+> +dependencies:
+> +  power-hold-delay-ms: [ power-hold-gpios ]
+> +  power-hold-gpios: [ system-power-controller ]
+> +
+>  required:
+>    - compatible
+>    - reg
+> diff --git a/Documentation/devicetree/bindings/mfd/rockchip,rk805.yaml b/Documentation/devicetree/bindings/mfd/rockchip,rk805.yaml
+> index da23915..1a11c98 100644
+> --- a/Documentation/devicetree/bindings/mfd/rockchip,rk805.yaml
+> +++ b/Documentation/devicetree/bindings/mfd/rockchip,rk805.yaml
+> @@ -48,6 +48,26 @@ properties:
+>  
+>    system-power-controller: true
+>  
+> +  power-hold-gpios:
+> +    minItems: 1
+> +    maxItems: 2
+> +    description:
+> +      Board level power hold lines driven by the SoC. They have to be held
+> +      asserted while the system is running and released before the PMIC
+> +      shutdown request is written, otherwise the rails can drop and come
+> +      back up instead of staying off. Only meaningful when this PMIC is the
+> +      system power controller, through either system-power-controller or
+> +      the deprecated rockchip,system-power-controller, as the lines are
+> +      released as part of its power-off path.
+> +      The lines are released in the order listed, and power-hold-delay-ms
+> +      elapses once, after the last of them.
 
-Or drop the example. Is this one really different enough from the 
-existing example(s)?
+If you have paragraphs, you need a '>' modifier and blank line between 
+paragraphs.
 
 > +
-> +        interrupts-extended = <&pio 28 IRQ_TYPE_LEVEL_HIGH>;
-> +        interrupt-controller;
-> +        #interrupt-cells = <2>;
+> +  power-hold-delay-ms:
+> +    default: 0
+> +    description:
+> +      Time to wait after releasing power-hold-gpios before the shutdown
+> +      request is written, to let the lines settle.
 > +
-> +        keys {
-> +          compatible = "mediatek,mt6392-keys";
+>    wakeup-source:
+>      type: boolean
+>      description:
+> @@ -102,6 +122,15 @@ allOf:
+>          clock-output-names:
+>            maxItems: 2
+>  
+> +dependencies:
+
+If you are going to use dependentSchemas, then use dependentRequired 
+here.
+
+> +  power-hold-delay-ms: [ power-hold-gpios ]
 > +
-> +          key-power {
-> +            linux,keycodes = <KEY_POWER>;
-> +            wakeup-source;
-> +          };
-> +
-> +          key-home {
-> +            linux,keycodes = <KEY_HOME>;
-> +            wakeup-source;
-> +          };
-> +        };
-> +
-> +        pinctrl {
-> +          compatible = "mediatek,mt6392-pinctrl";
-> +
-> +          gpio-controller;
-> +          #gpio-cells = <2>;
-> +        };
-> +
-> +        regulators {
-> +          compatible = "mediatek,mt6392-regulator";
-> +
-> +          vproc {
-> +            regulator-allowed-modes = <0 1>;
-> +            regulator-initial-mode = <0>;
-> +            regulator-min-microvolt = < 700000>;
-> +            regulator-max-microvolt = <1350000>;
-> +            regulator-always-on;
-> +            regulator-boot-on;
-> +          };
-> +
-> +          // ...
-> +
-> +          vadc18 {
-> +            regulator-allowed-modes = <0 2>;
-> +            regulator-initial-mode = <0>;
-> +            regulator-min-microvolt = <1800000>;
-> +            regulator-max-microvolt = <1800000>;
-> +            regulator-boot-on;
-> +            regulator-always-on;
-> +          };
-> +
-> +          vefuse {
-> +            regulator-min-microvolt = <1800000>;
-> +            regulator-max-microvolt = <2000000>;
-> +          };
-> +        };
-> +
-> +        rtc {
-> +          compatible = "mediatek,mt6392-rtc", "mediatek,mt6323-rtc";
-> +        };
-> +    };
-> -- 
-> 2.43.0
-> 
+> +dependentSchemas:
+> +  power-hold-gpios:
+> +    anyOf:
+> +      - required: [ system-power-controller ]
+> +      - required: [ 'rockchip,system-power-controller' ]
+
+Presumably the latter is deprecated. If you are updating a DT to use 
+power-hold-gpios, then replace 'rockchip,system-power-controller' with 
+'system-power-controller' while you are doing that. Then this can be 
+just a dependentRequired entry.
+
+Rob
