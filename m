@@ -1,58 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.171.202.116
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792600450;
-	b=iF/0M6bgidfEdSPmEsiXP3zNVGMYI0BYtErXA19QjH8REXjGufQlscErpayLqYs2gka3
-	 Qo7gm+fCkYYrhRKkaLq0hSFb73hFiJJ3zkWDJz1x5DPpiO69i0emuj+T3MPKWwQlXvKdS
-	 Jt+xwvXBZpn6YWNyrQLEjh0iJmb98+r1ZY+ed1SbFSr17MYxmWLXyE1WJTOmGYUhsDvTW
-	 vfpGtOYhlEwqROv1ON3yhH+U6eMipMYtExBSu2vi93yUKlqfXMYkfd6IiVLza0jIU6EiL
-	 uBGS366k1jRMoqNO3tvFpdZoyrHGqul2JkeFS5zz7B8vBYt3m59XKa1Zt2i8huteFTg==
+	t=1792600713;
+	b=plyHE4rIpBTN2y8eSE9ZnmXdm9KLE3Dxpt09h96joAZE8/bRSoRG58Yx4pBkQiO3b+hs
+	 TmM8/0EXPGuCnPixgIxOaKDiepGtIzxSxr07shsrnA491/rTsLYf9f0UJc1llelahVp3b
+	 GHbtjbEg8JeOVDqQTccfUagBScV7de+cfSrst57ViI6ljKXXqBBWEJR37T2sLnX/TNFsV
+	 MgVS3QRV9QCEFkyqVaChOmiE8+32DEvk26oPl4KgKR/5sRSouOGhOxYKIrmmHqb/DEymb
+	 QRPlg53QYUt8KqBE3qD4VudJWUVKqafHTVKLYWIg5rAqL3oZLQP8d0PnftPoyO06C/w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792600450;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=odKDNtkbaGsEGggup2G4St8tDApvqwrM08BGj9fz1M4=;
-	b=RRE1YmP06s5cMqGm+ggc4Oolo1p60Q9Nbz2PlD6WOzrrLQk/MgsDR/ZlrubzoDtChIPT
-	 aaSoaZHkpO6PkZe/TkFciNjk331tL+0+xK3Hxyc0C7yaJLsZeYpdNPD1/sSfX0mBYH6hC
-	 dMzBbzKKTE92QmDW5A0G/j447enJPULZf/4VnKm90nfdBalmiD90FTKdxNZlIepvV/de/
-	 Se9Icm2kykFYF77UD3Jn3mKR5B37oSdgR3s+uCLHQIh9e80Dxo7fHNbPNY4NITPBYAE+W
-	 Z27emTv9RZitrzKa9OOtPwP7cXNZxVPLHnKZ9bG2M7GgnwbtwfSk6j5i562CFzEbdaA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792600713;
+	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:
+	 References:Date:Message-Id:X-Mailer:X-Last-TLS-Session-Version;
+	bh=C2WIUAy49gs6vfvzT/Qt5wlTvvXfJdz0ejU2p9NvaAc=;
+	b=MSuLuim+sf2sbLw/W3ygtx+c/ahfnfA5l8jlNb2YTb9Dj8/PtbEbQL1H1LikWCxluiPX
+	 fOAMg3Jtss76FMk/FFhMSRvwbP83ncpnur8gijmDy5vPnD9ncTc9EAPr27oK/NL31Y7p7
+	 AguVzNKR2PLsiVYNTdzePdBMQDKbFcqVNyUEI/+bmQdvcFQkrBHbmakfUlN/WYMGKsBf9
+	 C91/Q61UdhkGyupYpTMSg8692HjhNza9jL/7b+b00NgeQs27WsSVq6wbbUMcosdgW7L6q
+	 +S3WZZ25/cgYqu8wyKqHUgdIsPD1eObyEWYFoMhLL4tTCK4Fj7tv3Ksg+B2jbIDFkRg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YkCb19Sz;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=bootlin.com;
+	spf=pass smtp.mailfrom=bootlin.com;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=VugT8O2x;
+	arc=none smtp.remote-ip=185.171.202.116
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0F81606A31E;
-	Wed, 21 Oct 2026 16:34:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3C41606A319
+	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 16:38:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C3C41606A319
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YkCb19Sz
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C5D121F000C1;
-	Wed, 21 Oct 2026 16:34:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792600449;
-	bh=odKDNtkbaGsEGggup2G4St8tDApvqwrM08BGj9fz1M4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=YkCb19SzDz6qagE2Nr1xchf+djbBXfpDC/l/TbrhNWwywPm3vOQakNq6+aT3p0qFA
-	 ktTUjo5KinGKz+ApjNUWIbdgZjjPavKuDEkfgpG8bnpS8pph2KrO+5RpYBqOpCV54e
-	 ksjUpfJq+ub0PkGp5o9WD8EG8vUa1LXp3ibGVdRWtJSPymP0gUaqGtfajoJjqJwJ8E
-	 CO8ovjJPIgRl5xnyuxtBDxXF2HyHWxWAW0JxMX/PZYgZj41MX9Bed3AJ/Of62b1gp4
-	 U5wCfKOAI1v2Apmiifutz8HgpTLRpxH5DLbqLH4hB+QIg9bLn+/TlKfByaAPxAKIEc
-	 l+9Nck/vCeAGw==
-Date: Wed, 21 Oct 2026 17:34:05 +0100
-From: Lee Jones <lee@kernel.org>
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Binbin Zhou <zhoubinbin@loongson.cn>,
-	Chong Qiao <qiaochong@loongson.cn>,
-	Corey Minyard <corey@minyard.net>,
-	Huacai Chen <chenhuacai@kernel.org>, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Subject: Re: [PATCH 02/28] mfd: ls2kbmc: Unregister GPIO GSI via
- devm_add_action_or_reset()
-Message-ID: <20261021163405.GI1795367@google.com>
-References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-2-lee@kernel.org>
- <atjEyo2VkaJuecMh@ashevche-desk.local>
+	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=VugT8O2x
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 00FE0C5CD40;
+	Wed, 21 Oct 2026 16:39:28 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id E3392606E3;
+	Wed, 21 Oct 2026 16:38:28 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id A3ED2103289F5;
+	Wed, 21 Oct 2026 18:38:26 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1792600707; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=C2WIUAy49gs6vfvzT/Qt5wlTvvXfJdz0ejU2p9NvaAc=;
+	b=VugT8O2x9nWAg/rEXGCa17ZUQ6lahSz+Sl2WieyEiJ5IxxzVbP6J1H5lLIC78yFSJKFVHh
+	oPSXnqtRW6U6/nqUSg0ivNHBFQTeSYF5EU7FNHOkPf4vAUD528T4grFxWzoUVHgGDijnff
+	DiJoyGIa83mUIW5AR9CTfjl2gJaPFz4wEX1++7CmOMQz6/LyYTM7M3Wur1puttKXJCkCi7
+	u9HrDApj4JeLpKGr3HDAzggZ1bt5AbjOImw6jDskwkRyQewuTJS8FmItZzhKTMTGUw6vzV
+	ltaAmn17PKXcbCSe/4MOK+V6JD4eUlg3jwtQE7HKNKQe5sYwcnhdo9sa87AJAQ==
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -62,33 +59,64 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <atjEyo2VkaJuecMh@ashevche-desk.local>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH 09/28] mfd: cgbc: Zero-initialise version buffer in
+ cgbc_get_version()
+From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
+To: Lee Jones <lee@kernel.org>
+Cc: Thomas Richard <thomas.richard@bootlin.com>, mfd@lists.linux.dev, 
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+In-Reply-To: <20261021121245.3111563-9-lee@kernel.org>
+References: <20261021121245.3111563-1-lee@kernel.org>
+ <20261021121245.3111563-9-lee@kernel.org>
+Date: Wed, 21 Oct 2026 18:38:18 +0200
+Message-Id: <179260069841.1125687.16461366525950099809.b4-review@b4>
+X-Mailer: b4 0.16.0
+X-Last-TLS-Session-Version: TLSv1.3
 
-On Wed, 21 Oct 2026, Andy Shevchenko wrote:
+> If the Board Controller returns a short response to the firmware
+> revision query in cgbc_get_version(), cgbc_command() can succeed
+> without populating all bytes of the stack-allocated data buffer.
+> Those uninitialised stack bytes are then copied into cgbc->version
+> and exposed to userspace via the cgbc_version sysfs attribute.
+> 
+> Zero-initialise the data buffer on the stack to prevent leaking
+> uninitialised kernel stack memory.
+> 
+> Fixes: 6f1067cfbee7 ("mfd: Add Congatec Board Controller driver")
+> Closes: https://sashiko.dev/#/bug/linux-8c473713-527e-4619-8404-689f28c7654d
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Lee Jones <lee@kernel.org>
+>
+> diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
+> index edfac2b60718..7513ba42eb96 100644
+> --- a/drivers/mfd/cgbc-core.c
+> +++ b/drivers/mfd/cgbc-core.c
+> @@ -461,7 +461,7 @@ ATTRIBUTE_GROUPS(cgbc);
+>  static int cgbc_get_version(struct cgbc_device_data *cgbc)
+>  {
+>  	u8 cmd = CGBC_CMD_GET_FW_REV;
+> -	u8 data[4];
+> +	u8 data[4] = {};
+>  	int ret;
+>  
+>  	ret = cgbc_command(cgbc, &cmd, 1, &data, sizeof(data), NULL);
 
-> On Wed, Oct 21, 2026 at 12:09:24PM +0000, Lee Jones wrote:
-> > ls2k_bmc_init() unconditionally calls acpi_unregister_gsi() immediately
-> > after requesting the GPIO interrupt via devm_request_irq().  This
-> > prematurely disposes of the active IRQ mapping while the interrupt
-> > handler remains registered, breaking the GPIO watchdog interrupt and
-> > causing a use-after-free when devres later frees the disposed IRQ
-> > descriptor on probe failure or device unbind.
-> > 
-> > Register a devm_add_action_or_reset() callback before devm_request_irq()
-> > so that acpi_unregister_gsi() is invoked only after devres has freed the
-> > interrupt.
-> 
-> ...
-> 
-> > Fixes: d952bba3fbb5 ("mfd: ls2kbmc: Add Loongson-2K BMC reset function support")
-> > Closes: https://sashiko.dev/#/bug/linux-cab8bfb6-4077-46f3-a173-ac2e2042cf66
-> 
-> Don't we use the official Sachiko's email in Reported-by tag?
-> Reported-by: Sashiko <sashiko-bot@kernel.org>
+Yes Sashiko complained multiple times even if I already explained it cannot
+happen if cgbc_command succeeds. Anyway I agree that things can be improved
+but I would prefer in a generic way:
+- add macros for cmd resp size (eg CGBC_CMD_GET_FW_REV_RESP_SIZE) in all cgbc
+  drivers
+- cgbc_command() should return an error if data buffer size doesn't match
+  the number of bytes returned by the hardware, it is not the case today [1].
 
-Roman suggested Closes: when I reached out.
+[1] https://elixir.bootlin.com/linux/v7.3/source/drivers/mfd/cgbc-core.c#L194-L195
+
+I'll prepare a series if you are okay.
+
+Best Regards,
+Thomas
 
 -- 
-Lee Jones
+Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
