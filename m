@@ -1,99 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.remote-ip=74.125.224.54
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=fail;
-	t=1792564989;
-	b=WpIhzKHuULbIKYobizUAeR63riAMBgkHKqciCdP9dCh/l42T4Z1U3+Kc5pXHM+CMbaeb
-	 jjD+hPmEGTPSeBeapmJgeDCBVcmVTbFwF+13rfpLYNC9vbsf4tWVRxvpetFzB6mV+c4GP
-	 QBuePW7dpJiUb9/8bAWQGBBfJH8xQlyoFN9QBqKz78TKkTU114DoaYCvW9SvU4dPXf2Hy
-	 P8h6w0JsGxfb5AInyVcO0kP9Kzzqxqnfk0n9RgctYTFHRWQb94yJkgVB6ePXI9H7agW5E
-	 hkMJRaT1UJOZo4UsijQ78uIVBFeB2VSgbjDNPUYDA1viLxIVDW4/bNRQc4EZYgF0bqA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792564989;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
-	 Message-ID:Subject:To:Cc:Content-Type;
-	bh=75HaQkKBv/s4TtNxkrkKWGdW1y+fNkvn+Rmd7D3S10U=;
-	b=Sbbqe0RhZtHkIYYVbZiPfXyazVrLhbIiVo0HGOMHeEMBhjvCIIFklRXsoyB2G1TCQQrN
-	 ojyP7c8Xgd/Eqiw1Pw6JTdxjBLglKlHu36SCaRV35HMqwa0fnMwM+VG115VewCruPIvZb
-	 RJEpH9rBmp0+zPyaikYEM7y5rHMVa0v8VWvbGfxNy19BlbSYHuzA3QYwGOyDcPkq22q0h
-	 OZ/ZaWoJ/GzmoMPRAscp+6V/9c8hDIqC8wjWHdOR1/pJjPwmX55pa2m+cYvxVPZ5cILww
-	 TtdOArDHG1R7MjeiHYepm3ScNbRnOcSMFqFP7JnQ0cM+lgTThIM1euF0+0kUiDUnAiA==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=cRzSOSRH;
-	arc=fail smtp.remote-ip=74.125.224.54
-Received: from mail-yx1-f54.google.com (mail-yx1-f54.google.com [74.125.224.54])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1792565115;
+	b=3MRsqRn2g+aByP6NNhiq7WsRqlr0QW91jW27QQ4Q29AL5zF/2FoBR67ymK0/HAI8fIuw
+	 8gs0cm5OelqmzY1VDK+CjjJ7p4UcGbq3C/IedHo3CWKpoHPvgHtYubr6n2c+5536ae2jg
+	 KNYriZcGtIPDd9NBWNm7c2pUFjDX6yeiJ0l/zsK3/p91OO6+dA8B8l2hQq0KfGwaV2NU4
+	 Hvj83MLXDFhcFs4vyZxhb5tb9A8hhKoiFaxJ9Kf5jKEsn+7deHKoB3ScqVCxXvp++mwu/
+	 gL2mt3IRd/7kyVRDivUx+T3nD3RWXanUMg32Q38LtwNPe/WkQgbM9yZMJAnc3XWOZYg==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792565115;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=/nBCr6h7YTgWAZoSn0j8NWNpVm8yzhO/7LgcWw3A+rA=;
+	b=HtruvfB+2Bzr/SX3thIt5jIIANYAy85JSIkFVI1lATj/8FCBSwbd4Kcu7VJXk2IZ8FB1
+	 W6otogZIXiI8YIBM86yse721Mo+7eRoSAiJw/n70B29+HpB7r1YTsUiP22fNGkc+y/E9j
+	 A/HkFtAj4UuPBTE3omHBdc5qmgXm62NBRcAVwcta3Jbelre3sLGRmzarGsgl8z0hG2nAz
+	 U6ITQ9Ecu0uZ6kNzC1328REX/UJWO7+fJJJIJQSXFRURfL1oYdX1p23gSSqM3hG7lN+vj
+	 9n2gLi4BY3hnvpszW6j4/i6/5RppEvO+LMZHc0dZBRFUBbDm3kRGGPGEDX+yrTtSQdQ==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=na0xl22p;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18785606A31F
-	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 06:43:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 18785606A31F
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C75BD606A31E;
+	Wed, 21 Oct 2026 06:45:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=cRzSOSRH
-Received: by mail-yx1-f54.google.com with SMTP id 956f58d0204a3-676804a3a22so313556d50.1
-        for <mfd@lists.linux.dev>; Tue, 20 Oct 2026 23:43:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792564988; cv=none;
-        d=google.com; s=arc-20260327;
-        b=As3q81O+iNhFPZ6lS6JQ033ehfQXBrFsCMTbiftF4P6JWD72TUOfDzMz9WdW1QNaUY
-         6MO3JtidP+IzlDnNhMK+eRVi3bKLjXbJo/YyjHTAHXGCoSrAuZsUFMfuOj0O8VdpbZCq
-         Ct/RlWZylsf+aRGLrY2AtWeorTqCR9OD1Mx4TntgJHo2EqPhxgdVJDzzUo1i+apabpd5
-         JsUw5nngVOkoso7rZ/nTX0oT5L502v9h4Npq8La+3e+djKum4chjwsLcVewPH8ORBiJ5
-         ezud0g5YAyl3G0JKH/0ld63ktw4VthNqBBIYXrS2Y0Nl6f1WLwf3jW02OAecS3K2U00y
-         FPFA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=75HaQkKBv/s4TtNxkrkKWGdW1y+fNkvn+Rmd7D3S10U=;
-        fh=eTuy7pV69AuaQCf07WmIyxozBkpdj+Ov58wE5z4VO8Q=;
-        b=kQLQhgMMLHEHwfMNYu5Io3752SjAQKxijURCPsc4G4Hb2jFq3ecxNd9V4OnOyAQTd7
-         A3bcAvuaAySM40j7zw0UaisZNSPFE7kCtzTnzT+buuxDb51vqBkZ0lG/uWTy25rozrqT
-         MRVR14up7WtyNSjR6Rw5FRKxi8lIMeGFWjSw4WFXekqgzPYxrIa/xsJX4prymWrhQCAU
-         6pV515phWeOSCqx86Zd7aBH8pd+AcAXtyB6vCJhv7M4fro12jEMIn+aYRZ1qkgbAIWdQ
-         uvyTe5/VkeabU/kggK5UW3lxZOduAN/C+a2JgK9HExIjF9KaSZPNaUmoKwCp4/4XLi9Y
-         XO9Q==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792564988; x=1793169788; darn=lists.linux.dev;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=75HaQkKBv/s4TtNxkrkKWGdW1y+fNkvn+Rmd7D3S10U=;
-        b=cRzSOSRHFN0Ka1LXOU25F0eWIJ9Mgi2OoTGt6HDbcXz13jkcY7yY0u7HVgNkQkJ48k
-         UPPTmn9qd7FBnba0ryveJQC1dEMcvAFrAAhjH1S+4Rv2h80Cg2/l3P7nGUji5xpcMHiH
-         KCZ+oXC8N361nf7rFaNIX5BgXx+Gg+aySIM55SUjQmISeXLUvc+sKgmdZcakQIylURnm
-         rr121Pc+PxsIER70BEpWnCwp3VP56UIwgwEYOwFLy2I9EEO2O7CMp+TJkE7Ddgn+BgMT
-         QKMvTyYNNjZGUh5tAF/HewQXhl65kXZXvkXRKQ8JNrebT4BALwOVAqDHa6YBkw+/pxKu
-         0leA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792564988; x=1793169788;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=75HaQkKBv/s4TtNxkrkKWGdW1y+fNkvn+Rmd7D3S10U=;
-        b=k2PJ+TAcQInKw/lylkCKBK6RgPAO8dHgAsePDYgGbDQ3v+4CSgIvFF6Ii1SSCNNFZx
-         s/8aoQRl8pg0R8G+M7St6w042nVX297SVrBZij26W49hyofHB89rpACoiVgWupteIdWj
-         oFD6ACNYSv2XaCKea4WXX7x3xq3cJAOqRdaz4y1Kr4vnb7/Me/eO/M9Ryq9NiCHXgVC5
-         j//Yo97IbYEljGIqhPthWCWrev04107EClXqyLNAK2dNLuYGF4jxyreAAvve5gFrHsg+
-         dS++ttY8AiXHBT8KAItwB5ATcjO++84dVyft+/NjMkj6zYFRWfYI+AIfzR7mnJsL+xlS
-         EClw==
-X-Forwarded-Encrypted: i=1; AKwUvBxgFr+YZq7EnI+6rvIKigEEnFVrQraim2a33Hb6t1Sm+ldLELGuUTIogqTlEYLXKx9k4l8=@lists.linux.dev
-X-Gm-Message-State: AFq9FYJcvv8cL1deXOdSL9FWga8ZPVYyiwbd4ltYcpznweRjfbBcjnuz
-	y32xrgr7BUbXPF/DM2S/Y4Hk/TMGCQLkGvxajpSMWmWtpnUcudqU4OrmUQJdVUhfvAe8J6yktn6
-	9X2VFnUgWL/R/odG3BfYgwGj6rzK7CqA=
-X-Gm-Gg: AYBFou0Mbk4xLo6xooZ4hWSwf79vWr45pjyplTnP1ojkIQtqdBphPzokrMjqwTpW5yl
-	GMFi1c5jKCYN/WyvFtXSRXKeXJgA7QLVO0QK6p8YCTZB4fl5U8+eYBIc+EUF+hMviL9Jn6Gp+Dv
-	bgO1CyWW1KNW12DUaknzuLm/8OOosQiLihpiugF23vt2tAGxpYEYkL9x894bK1PRMEYnrrHz9bw
-	3Jv7wSt8XRjFoeKTKOp9fsD0wIvPu5nHd0x+7aBmqFtVOYrChibzPUVp1VF2IIIYhxCA0m6Wvqw
-	7TM6+zVS8aiW5ORFQVIWfSVy56penq8GMol7HLYqDF/IxvpoCPNLU8lfS7kYd0K7AYn8gQr9J+X
-	XAj6nLXPMdYXuF/b5TeuYK891/XXjVM8hNrc=
-X-Received: by 2002:a05:690e:b48:b0:677:db69:cc1a with SMTP id
- 956f58d0204a3-67a0e02fb85mr644184d50.7.1792564987934; Tue, 20 Oct 2026
- 23:43:07 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=na0xl22p
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 260061F000CB;
+	Wed, 21 Oct 2026 06:45:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792565114;
+	bh=/nBCr6h7YTgWAZoSn0j8NWNpVm8yzhO/7LgcWw3A+rA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=na0xl22pH13yPGxHmCd4cil7jTtNfouP+O6cSw3sPyuw4rhACDvcDIyov98+ugOUm
+	 9jL0wNivNztpF4ZvJHegRSJf2Ah0nCYNEnJubi58iSfryvLOvQ8AqiTOD+aTq/jAzM
+	 4GYeS1hcwApXvkiWHuh6P00/PI5mD3/eMBqKge4zZUHJ3gTTOSalJQ8Mum+EOVmXmn
+	 7YzYLQ9bxYJBumpZ8MHwmFgQVDru6HyFAvE0/oEjtQ4cnz7IPxLgHFszTPlaLsdHsn
+	 TD+c7D59NRG2vlG4lkRViKfJ6ZugiWtJzXDqNgwwpVhjQuarAz8YAHPLZ8d6cpjwX+
+	 zaAzezmxSV39w==
+Message-ID: <2426ffdd-9438-4166-a67b-96620650a59b@kernel.org>
+Date: Wed, 21 Oct 2026 08:45:06 +0200
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -103,40 +51,95 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261020173556.632798-1-l.scorcia@gmail.com> <20261020173556.632798-2-l.scorcia@gmail.com>
- <43b58ad7-5934-4895-b48d-5b5a7b92e253@kernel.org>
-In-Reply-To: <43b58ad7-5934-4895-b48d-5b5a7b92e253@kernel.org>
-From: Luca Leonardo Scorcia <l.scorcia@gmail.com>
-Date: Wed, 21 Oct 2026 08:42:54 +0200
-X-Gm-Features: AclHuK9RBvE_tu1JJML2kndZnV_iY7Vg0PVQd2A9ECqRfA0-uzrQqgVwLULojEo
-Message-ID: <CAORyz2JaJ40+F1oyrvY_0WdqH=fritbPuuQaZ98sXagVayZPLA@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH RESEND v10 1/9] dt-bindings: mfd: mt6397: Add MT6392 PMIC
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: linux-mediatek@lists.infradead.org, 
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Sen Chu <sen.chu@mediatek.com>, 
-	Sean Wang <sean.wang@mediatek.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
-	Lee Jones <lee@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Linus Walleij <linusw@kernel.org>, Val Packett <val@packett.cool>, Fabien Parent <parent.f@gmail.com>, 
-	Akari Tsuyukusa <akkun11.open@gmail.com>, Chen Zhong <chen.zhong@mediatek.com>, 
-	linux-input@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, mfd@lists.linux.dev, 
-	linux-arm-kernel@lists.infradead.org, linux-gpio@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+To: Luca Leonardo Scorcia <l.scorcia@gmail.com>
+Cc: linux-mediatek@lists.infradead.org,
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+ Dmitry Torokhov <dmitry.torokhov@gmail.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Sen Chu <sen.chu@mediatek.com>,
+ Sean Wang <sean.wang@mediatek.com>, Macpaul Lin <macpaul.lin@mediatek.com>,
+ Lee Jones <lee@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>,
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+ Linus Walleij <linusw@kernel.org>, Val Packett <val@packett.cool>,
+ Fabien Parent <parent.f@gmail.com>, Akari Tsuyukusa
+ <akkun11.open@gmail.com>, Chen Zhong <chen.zhong@mediatek.com>,
+ linux-input@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, mfd@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org, linux-gpio@vger.kernel.org
+References: <20261020173556.632798-1-l.scorcia@gmail.com>
+ <20261020173556.632798-2-l.scorcia@gmail.com>
+ <43b58ad7-5934-4895-b48d-5b5a7b92e253@kernel.org>
+ <CAORyz2JaJ40+F1oyrvY_0WdqH=fritbPuuQaZ98sXagVayZPLA@mail.gmail.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <CAORyz2JaJ40+F1oyrvY_0WdqH=fritbPuuQaZ98sXagVayZPLA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-> And here you write clear note about dependency, once you fixed
-> bisectability.
+On 21/10/2026 08:42, Luca Leonardo Scorcia wrote:
+>> And here you write clear note about dependency, once you fixed
+>> bisectability.
+> 
+> Just to confirm, would the same text I put in the cover email be ok:
+> 
+> "Please note that patch 0006 and 0008 depend on patch 0005 as they need the
+> registers.h file, but belong to different driver areas. Patch 0009
+> also depends on
+> patch 0003 because of mt6392-regulator.h."
+> 
+> or did I misunderstand which dependency you are referring to?
 
-Just to confirm, would the same text I put in the cover email be ok:
+The dependency of this patch. This one uses compatibles defined in other
+patch.
 
-"Please note that patch 0006 and 0008 depend on patch 0005 as they need the
-registers.h file, but belong to different driver areas. Patch 0009
-also depends on
-patch 0003 because of mt6392-regulator.h."
+Just apply it yourself and run full testing - you will see notice about
+undocumented compatibles.
 
-or did I misunderstand which dependency you are referring to?
-
-Thank you
+Best regards,
+Krzysztof
