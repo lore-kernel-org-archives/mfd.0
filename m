@@ -1,78 +1,82 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.16
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.8
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792591283;
-	b=IJRUzg/4bthW7Fmyyb+Kqsn5ATj7w551pdCa9lMzcmI960TuVkeUbl2oIVjgaiNarStw
-	 dsyALJ/GCqtCDsPxO9xaCZIaRgL3HGUOdc50Rh6qj7/FhyVDjWa+eqo5eO6Sbq31S79Sd
-	 v0Dwn+2UkLZOTuk3TE1XsxjvOsRgIuG6ltTFXZq9JIlifu46+w8A//Lq+WP1n+w0Lw7GX
-	 u77qYFkZVdyWAheeL7NokAOl8UfRQGNvIQA9Lagf6cIJBZN1dllIEn4tE9b42Q8+B2+5J
-	 X9jDKODzrVQNg3eASys7dmO9XmBibU3gUqIPIqtGh/qnFEeq8H0XEe16JmM0kiCWuyQ==
+	t=1792591374;
+	b=TDNfJHflcIZ94PM1JhmscNipHb3Okcb3BqjSTHdjrVu19BCdkqWaz1OA7SgEqYkVUTED
+	 LLpvwOo10izqCH5umS1y80omhIaxvdX5B/HDZ4DZDUNRXJyxnGpUU1vKREFASEIqiDf2m
+	 VRIculY8aGq2oL9F6ad0KGqATdNfGuzQUXu5kWDMliDlwMKV4D41T4wJHjaUl7RXIL6rz
+	 NYSZ3Fl10ouGe6I9/Gk15pWU1p6Mrlvf6gFYk2aIbO1k1almRnGAHyb6Rv2ZHWsuq2p58
+	 nciuW7bcaT3EH0ZL9t/Ga+hLdX4zpgNpiRboQV+FoOJAriP9TFfeZzXWbkQqgBK2bDA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792591283;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792591374;
 	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
 	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
 	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
 	 Subject:Message-ID:References:MIME-Version:Content-Type:
 	 Content-Disposition:In-Reply-To:Organization;
-	bh=VoW0QI8hkXkyGQEtNK9VxFVdZVV5lqLanjbqC2O8Y+c=;
-	b=rStuO8Z6rR04f/95CUhisOB/sX2Or346otx3cX9/vvGk7pUeaZi48xhogF6v9ek7yUHd
-	 qBmzFpU5iw/tJ2etezhDrkywc0bSg5W2hZQYtPDqQhk8zwH4npfLFD8bI6Uo71Uka5NIH
-	 AI1WAijEevItQIUCk83UM/l+9Oh8Mg8D+To71mtwgzk/wSs5achZUY1eCJ+yTQGdRoO69
-	 IiOqYrwzHFsV0zixjlpofpa4f7nnfPXjm0XwrJ6Gp2htuyAvkdykHVx2YoCEpvMQes85F
-	 bRRj9ooRUYCYXqOMaSqbYQrm85mNclV8p3AHC1euJxIMkYaf8+LC4aSxkv0vsPyQIoQ==
+	bh=fDLM2uSdaow9LokFw0VaDIv/9QOPzVgEmcb//BHgPyM=;
+	b=hXDIUrYaHRtiHdrH3BRngvolOaYY/DNY8n5ddeXESRe2T1pQ2X56YNCzbDFGUCz7+zmL
+	 vbciaRGkADyEMjJac9R0Bci2/CqA8IQEhlqgcUbrXZ2muiZ14olABazGnNfVj+J1tekBo
+	 Rpa9+OZ14dbR8iU0RqrLjxjmJBDQiuRieSvspKkkHbvq/E1RSnGH/ixjyYXzXKepCklvG
+	 JRO+JaxknX+w4jN5wmtSj6wGBpLSZGa5tRJnX8qmBYZwLtFlPV1uvDY+O6tyzopMW+0+9
+	 Qn6d+6WrDHjmd5GzMglsF3f7ngOCbKvjk09sMNEBL0iDusMnAczzJIpy2yjqJ+s0hOA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linux.intel.com;
-	spf=pass smtp.mailfrom=linux.intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=CgJARfT6;
-	arc=none smtp.remote-ip=192.198.163.16
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
+	dmarc=pass header.from=intel.com;
+	spf=pass smtp.mailfrom=intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=OUA8VE9V;
+	arc=none smtp.remote-ip=192.198.163.8
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BA19606A32A
-	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 14:01:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5BA19606A32A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98C57606A31A
+	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 14:02:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 98C57606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=CgJARfT6
+	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=OUA8VE9V
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1792591284; x=1824127284;
+  t=1792591374; x=1824127374;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=siTshYTdsj+SHwoheTZV3W1Go3kgTcFmgXq0YtxD4EQ=;
-  b=CgJARfT6Ba5YR7vwKUhOYuCPkvRAR1A66gyTX68r++crsZDlL8FZzmnU
-   XSoUWOZU1vnmKjUw1qlD6jD1hB1K0Al3U3h1DfN1gnY5ZLyqWkTrjxevj
-   SThnR+xQmdgx3rMZdXQodIaDWkpGCT70u2cm1pRVyw2vx0CUWwbrJnRYs
-   oVWORgQs6gkIni7MIBicrN/ZDt+vCKQP5s5oYYxsXqw6Ay2/R5o+36f/g
-   GBdllcLK3sezZ88ZHz75XAFTIwVpZRH8wfrbFwDKkia2apEwijga7/iw9
-   bpr90Wt62A5BCT7pKXcAjKvx3If/gMrZJmNZphLwMpKtZl6x/Py2RoIeW
-   A==;
-X-CSE-ConnectionGUID: kh2H+k+TQ4iHsbg2zQX5pA==
-X-CSE-MsgGUID: rSHjHE0aQ266LXWQczpj/A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11942"; a="1328671"
+  bh=6TcpUU+U6JP4MXD+j4bO+YP5IabLS7DHZ5gJkyB4Sa4=;
+  b=OUA8VE9VlomzQ9ySAxgQDPJtkfHVZW9TwNJXT9Ywx1oiCdAA8Ecd4Aef
+   EizK+tZE8RVNa+f5eHjVetBF0m1YWo2r8PtLGDE8r9fjngmRGRgx6nJVN
+   uQg90Cn5QIbz60ayEiLGDeTe3VOSGsZKYsvdSPUktNpUoPVY1XOAmdor2
+   f/7N4xQO2p3j1prVfWigHu9rbstQgko/xtsShO0qn0iKYPzWFgTbYfVEJ
+   RJJkcm19w+Bfp5lKh+4+4/VGWkisQvJ72Oqp8qrPiU58zzKwEZOfnTQLF
+   2j98t4c8KmrLk5EFqhEmtsuV5w9hBJS+8OgVAMCktq/Ozfijn0evHAxff
+   w==;
+X-CSE-ConnectionGUID: 2/TyX8ysRLWT/72e+MopTw==
+X-CSE-MsgGUID: O+dqot1GTliEr7eI+E3b9A==
+X-IronPort-AV: E=McAfee;i="6800,10657,11942"; a="1214491"
 X-IronPort-AV: E=Sophos;i="6.27,170,1787036400"; 
-   d="scan'208";a="1328671"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
-  by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2026 07:01:23 -0700
-X-CSE-ConnectionGUID: 9hSW0c7JRr+AYa3s3ruxmg==
-X-CSE-MsgGUID: yC7OOVkEShu09IXf5oLMxA==
+   d="scan'208";a="1214491"
+Received: from fmviesa001.fm.intel.com ([10.60.135.141])
+  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2026 07:02:51 -0700
+X-CSE-ConnectionGUID: JogAVmmJS02mlCCCTu7pTg==
+X-CSE-MsgGUID: iwCDsb9RRXOAkFMEYHMsEw==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.27,170,1787036400"; 
-   d="scan'208";a="3199584"
+   d="scan'208";a="3416326"
 Received: from cpetruta-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.24])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2026 07:01:20 -0700
-Date: Wed, 21 Oct 2026 17:01:18 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2026 07:02:48 -0700
+Date: Wed, 21 Oct 2026 17:02:46 +0300
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
 To: Lee Jones <lee@kernel.org>
-Cc: Mika Westerberg <mika.westerberg@linux.intel.com>,
-	Heikki Krogerus <heikki.krogerus@linux.intel.com>,
-	Jarkko Nikula <jarkko.nikula@linux.intel.com>, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Subject: Re: [PATCH 11/28] mfd: intel-lpss: Remove registered MFD child
- devices on probe failure
-Message-ID: <atjFroYp0Cp7eN8c@ashevche-desk.local>
+Cc: Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	Andy Shevchenko <andy@kernel.org>,
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+	Shi Hao <i.shihao.999@gmail.com>, Rachna Patil <rachna@ti.com>,
+	linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-input@vger.kernel.org, mfd@lists.linux.dev
+Subject: Re: [PATCH 28/28] mfd: ti_am335x_tscadc: Remove redundant
+ ti_tscadc_dev_get() helper
+Message-ID: <atjGBg9IAnPPBRmX@ashevche-desk.local>
 References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-11-lee@kernel.org>
+ <20261021121245.3111563-28-lee@kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -84,25 +88,20 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261021121245.3111563-11-lee@kernel.org>
+In-Reply-To: <20261021121245.3111563-28-lee@kernel.org>
 Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
  krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On Wed, Oct 21, 2026 at 12:09:33PM +0000, Lee Jones wrote:
-> When intel_lpss_has_idma() is true, intel_lpss_probe() registers the
-> iDMA64 child device via mfd_add_devices() before registering the host
-> controller cell.  If the second mfd_add_devices() call fails, the
-> err_remove_ltr error path returns without calling mfd_remove_devices(),
-> leaving the iDMA64 child device registered after the parent's
-> device-managed resources are freed.
-> 
-> Call mfd_remove_devices() on the probe error path to clean up any
-> previously registered MFD child devices, matching intel_lpss_remove().
+On Wed, Oct 21, 2026 at 12:09:50PM +0000, Lee Jones wrote:
+> Now that ti_tscadc_dev_get() is a single-line wrapper around
+> dev_get_drvdata(p->dev.parent), remove the bespoke helper and retrieve
+> the parent driver data directly in the child ADC and touchscreen
+> drivers.
 
-Good catch!
+I don't see more patches Cc'ed to me, so I don't know if this one makes sense
+or not, but OTOH I don't care much, both approaches are fine with me.
 
-Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-assuming you will add Reported-by: Sashiko...
+Acked-by: Andy Shevchenko <andriy.shevchenko@intel.com>
 
 -- 
 With Best Regards,
