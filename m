@@ -1,85 +1,95 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.12
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=156.67.10.101
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792602121;
-	b=FlFscuPvXS4b14/Ol6pGKz3dln7jlKIyTGP0O5fF0kPrvE49+3741WaxuYt2fpeAAc73
-	 I3O11xdcbAsabTqx3xbg7RGR9lq2l6lFdnSO2PHZy9XWnuxkcW6MmgNdO6i8QFDShELgY
-	 Zo2Nr7eEbAw30iJUK9AbsTc6vMg4OIbZnihiYE/kJ8IJhuyeZCY3FkrTtPsHW3rWr8a26
-	 6rz3tjkaKkMI4KiCD0Mhy/IPhmHHNUt6qcA+Va+Wcno/SK/DjRNb78Vw0IUej0VGPowTJ
-	 yloHNEjn5MDYoNOqdOXdfpwtKEhbNjLMB/MKQOJMFzzNAP8bchVJL+DytluPvQUNkfQ==
+	t=1792602590;
+	b=zatQU4BIQmCe3GEc/ape3T9G1Tra7xrVOToXkbcvPuN74I3LsfhE/DymvPIYt3GRuIwG
+	 gtoXCe0DBzih6/uIxXS+9W2yPILZfkggRoUUHcTBLwtkx23g+MNx2dpfPzOV9S7Km9gG4
+	 41R6YLEj5o40pbTE00Oa+KfInWv7F8iUGZlF5mLIaiYf+RoJLvSv0lJKhoEiDM9uEtibZ
+	 rEXXrcUrVzgyNmJPUegJ6NG47SjQA07irZdgA3jIo8ewMmY/Hl4yv2ZIQyDRWyp/dDtLo
+	 QzqWwlcagBMcQRhO4b3OKJhlkOHzA4fns9KqI0RjJkadl7AOEQxlUPY02uUQVq+ThSw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792602121;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:Organization;
-	bh=mePSPJATHsGdUfBbhs8qu+gZ9UWtO+tPw83R8tHqLNA=;
-	b=GQGHUczrRc/3rt6Fk0BcKcHNjeP6XD4C1b37WZChrzHswMoHfKxapsJFIHsZ/V4+E+Rz
-	 EXNq82GikzUELaZp5Df05iuz4pnj8Usrmo2GnrU5E6fm6QUCEd7TRyERYFkCXVpy8RvCr
-	 jQ/LSLBQrpOHc+sQdai+iy1jnZqLZRbU0l8vUdF815erp7YQfoU1AiCHBQDvORo2hFdx5
-	 3gZSFsiAZe0fTme9XGqxjrtKSBrCGxyQW4hH0URQMV8RhJlnok77Xq1J96YKtNpnxBY2t
-	 9IOOb3zQTWaH8+xmimcvfsTlgT3damzJN7OW6fH84QHcTelQfF24LvXM0fUUhApR7OQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792602590;
+	h=DMARC-Filter:DKIM-Signature:Received:Date:From:To:Cc:Subject:
+	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
+	 In-Reply-To;
+	bh=mFv5pCfeZJzksfug+IhiQDAbXtzLBXfiEtm++e+fXl4=;
+	b=MGsuTx3Xce44Z+4R0qsWt9BNzpxuWmzeRFfeqQopPNNiOsSD8L+E6bqv54IKxZbO8Pyl
+	 eONqZItsuy1RH/sWS5dOItv8ah9S1VVVPVREWPXMTKUCLuOY4yTPJPIGD4mundh5cU+6n
+	 z//dQe8maCRkSM3hVC1rtSjwAZxrDOqzcd+UdxKE3RPJ49bJc0XnZj6ZvHpCSggAyrKMh
+	 j6Z9EZT9Z/P/VV6V4g0HhH/a4bMZz7L2kD25yA0bMydqo7ythvlyKMeRVPDNyvEN6zMxv
+	 36RSOopOxmxfjyra5mu9OJ2oyQDtAqosuaf1+FfXiaZDCZACrP+oZq0jIJCX5HYLGXw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linux.intel.com;
-	spf=pass smtp.mailfrom=linux.intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=N+2zZgEv;
-	arc=none smtp.remote-ip=198.175.65.12
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=lunn.ch;
+	spf=pass smtp.mailfrom=lunn.ch;
+	dkim=pass header.d=lunn.ch header.i=@lunn.ch header.a=rsa-sha256 header.s=20171124 header.b=N0cW9jJh;
+	arc=none smtp.remote-ip=156.67.10.101
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B679F606A31D
-	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 17:02:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B679F606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFABD606A31E;
+	Wed, 21 Oct 2026 17:09:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CFABD606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=N+2zZgEv
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1792602121; x=1824138121;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=qampBoOPcfws+SCopvn4zE9DZ8QpoNbER85isk3vXMM=;
-  b=N+2zZgEvUXmacEeqaASTl8NdgBZzQXUzXQHyOT2bjMrFeJWY/u64125l
-   ctL0Phj2BuNr7NebzGrxS7JBXsS8FHi83al8TpC6Ipk8Bta0IBkLzhed7
-   l4OcTWo5eZ/QhRk4M5aJSfsZVgt7PhgYYvBIbKhen0UWhNE7q4Dkk6dZU
-   yAVUtU5qsX/QrQzlfkiR9sN+Gl4JE/dNCkEfNeNp8bDz5Umjn+o+hVIv4
-   jSXwx4oj/lamLk4pmXVVmrtObY3lUJ8HQQaNXDCBKWKC8aMbxxk3ukJtt
-   x6YNtKHszafKfdCLSiejx43wfMbuv7dxkbdtbwIwolwAAsNB0zbRPdQTO
-   A==;
-X-CSE-ConnectionGUID: y52JajdVT66UUx0Zdi1igg==
-X-CSE-MsgGUID: YcsdCDC/Tmeu2Xso2jesmA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11942"; a="1212379"
-X-IronPort-AV: E=Sophos;i="6.27,170,1787036400"; 
-   d="scan'208";a="1212379"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
-  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2026 10:01:26 -0700
-X-CSE-ConnectionGUID: I0th04K1QUizFfkakI+r4Q==
-X-CSE-MsgGUID: 0v22F7vLRDu7pmlv3+91rA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,170,1787036400"; 
-   d="scan'208";a="3083714"
-Received: from cpetruta-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.24])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2026 10:01:22 -0700
-Date: Wed, 21 Oct 2026 20:01:19 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Lee Jones <lee@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	Andy Whitcroft <apw@canonical.com>, Joe Perches <joe@perches.com>,
-	Roman Gushchin <roman.gushchin@linux.dev>,
-	Philip Li <philip.li@intel.com>, lkp@intel.com
-Cc: Mika Westerberg <mika.westerberg@linux.intel.com>,
-	Heikki Krogerus <heikki.krogerus@linux.intel.com>,
-	Jarkko Nikula <jarkko.nikula@linux.intel.com>, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Subject: Re: [PATCH 11/28] mfd: intel-lpss: Remove registered MFD child
- devices on probe failure
-Message-ID: <atjv3_Njp5gW7EUF@ashevche-desk.local>
-References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-11-lee@kernel.org>
- <atjFroYp0Cp7eN8c@ashevche-desk.local>
- <20261021163333.GH1795367@google.com>
- <atjtNCBf-geYL3yY@ashevche-desk.local>
+	dkim=pass (1024-bit key, unprotected) header.d=lunn.ch header.i=@lunn.ch header.a=rsa-sha256 header.s=20171124 header.b=N0cW9jJh
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=mFv5pCfeZJzksfug+IhiQDAbXtzLBXfiEtm++e+fXl4=; b=N0cW9jJhVDgBhyA7mkVjr84ZHZ
+	o6ImQUTsxEzTezoVDyMHzOq8hghs3gOCuNS8lTNLPIJwNtfHF6J7qym8rM3bRkp7/1xxRzCrk6ct7
+	V7Ng27LunL3z0yimFw4xYhp6vBuegAZvc/ZD22ZgM3X4IgVnjTZXoKoQ6Tf/tWr49cG4=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1xJZoS-00C8M0-Mc; Wed, 21 Oct 2026 19:09:16 +0200
+Date: Wed, 21 Oct 2026 19:09:16 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: 1579567540@qq.com
+Cc: Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Heiko Stuebner <heiko@sntech.de>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Elaine Zhang <zhangqing@rock-chips.com>, Lee Jones <lee@kernel.org>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Richard Cochran <richardcochran@gmail.com>,
+	Ulf Hansson <ulfh@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jiri Slaby <jirislaby@kernel.org>,
+	Jisheng Zhang <jszhang@kernel.org>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@kernel.org>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	David Wu <david.wu@rock-chips.com>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+	Maxime Chevallier <maxime.chevallier@bootlin.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
+	Jaehoon Chung <jh80.chung@samsung.com>,
+	Shawn Lin <shawn.lin@rock-chips.com>, linux-clk@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org,
+	mfd@lists.linux.dev, linux-gpio@vger.kernel.org,
+	netdev@vger.kernel.org, linux-pm@vger.kernel.org,
+	linux-i2c@vger.kernel.org, linux-serial@vger.kernel.org,
+	linux-mmc@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
+	linux-phy@lists.infradead.org, linux-usb@vger.kernel.org
+Subject: Re: [PATCH 16/27] net: stmmac: dwmac-rk: Add RK3572 support
+Message-ID: <b1ab0503-628c-4f96-af38-727d4be06f8a@lunn.ch>
+References: <20261022-add-board-ok3572-c-v1-0-0b0fd85a31ee@qq.com>
+ <20261022-add-board-ok3572-c-v1-16-0b0fd85a31ee@qq.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -91,49 +101,20 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <atjtNCBf-geYL3yY@ashevche-desk.local>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+In-Reply-To: <20261022-add-board-ok3572-c-v1-16-0b0fd85a31ee@qq.com>
 
-+Cc: Documentation people, checkpatch maintainers, and Roman and LKP folks
-
-On Wed, Oct 21, 2026 at 07:50:00PM +0300, Andy Shevchenko wrote:
-> On Wed, Oct 21, 2026 at 05:33:33PM +0100, Lee Jones wrote:
-> > On Wed, 21 Oct 2026, Andy Shevchenko wrote:
-> > > On Wed, Oct 21, 2026 at 12:09:33PM +0000, Lee Jones wrote:
-> > > > When intel_lpss_has_idma() is true, intel_lpss_probe() registers the
-> > > > iDMA64 child device via mfd_add_devices() before registering the host
-> > > > controller cell.  If the second mfd_add_devices() call fails, the
-> > > > err_remove_ltr error path returns without calling mfd_remove_devices(),
-> > > > leaving the iDMA64 child device registered after the parent's
-> > > > device-managed resources are freed.
-> > > > 
-> > > > Call mfd_remove_devices() on the probe error path to clean up any
-> > > > previously registered MFD child devices, matching intel_lpss_remove().
-> > > 
-> > > Good catch!
-> > > 
-> > > Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-> > > assuming you will add Reported-by: Sashiko...
-> > 
-> > Roman suggested Closes:.
+On Thu, Oct 22, 2026 at 12:11:13AM +0800, Cunhao Lu via B4 Relay wrote:
+> From: Cunhao Lu <1579567540@qq.com>
 > 
-> But Closes goes with Reported-by. The Submitting Patches says:
-> 
-> "The Reported-by tag gives credit to people who find bugs and report them and it
-> hopefully inspires them to help us again in the future. The tag is intended for
-> bugs; please do not use it to credit feature requests. The tag should be
-> followed by a Closes: tag pointing to the report, unless the report is not
-> available on the web."
-> 
-> Okay, you can argue on 'people', but the established practice includes 0day LKP
-> bot for a long time.
+> Configure RGMII delays and clocks for both RK3572 GMAC controllers,
+> using GMAC-specific GRF registers.
 
-OTOH, there are also examples for Closes: w/o Reported-by. I'm confused...
-So, what would be the best practice for all bots WRT Reported-by/Closes?
+You need to split this patches per subsystem. Please send all
+networking patches to netdev, once the merge window closes.
 
--- 
-With Best Regards,
-Andy Shevchenko
+https://www.kernel.org/doc/html/latest/process/maintainer-netdev.html
 
+    Andrew
 
+---
+pw-bot: cr
