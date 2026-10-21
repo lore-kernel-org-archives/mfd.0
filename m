@@ -1,68 +1,47 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792533373;
-	b=CDhK9dOLHAOAqUzeUOtSfOwE6joSiBofnE8gxrjCBbteeeJq/Giddszio4YQgJrvevsI
-	 CuE0X+Ff/5AuzNZQYOWifJ4Pzl1go/tDJAqy9hEfI3GhatfnZnBZ3Hss/mU9m1A5Rrngo
-	 4XbIwt+cHyXV64gaUPvDq4ZbwVtoH1CVRik+JgIuTrff3TR2jNF7ZbFWn28WlsXXVn6l9
-	 YfDeUd4/yR3ocfhPB14RYwuy3OARYJtb/2tIsi4ArwGfjId+p0Q12Hz7BFYfte22qdbps
-	 u4BrdjSgbCob3/tzsiQ9vH8lViFS6P6GWLb4XoJvMVlw6PrYLpSJnCtX/mmeZzlwJ9w==
+	t=1792548893;
+	b=IUoPYLVDvohlLbsnBdytnmxtuD+lTwHKcY7/zqjG6NZ/i30avIUg4xJ6WMR3L1CLmcvr
+	 qANX6DQ5sKXjYZMVu4Lp3Gey4W79WRa7wNlylOIqMYsV04pWy91YfTarnulJeLk6WQEDk
+	 yMdIjDAKZ8k0XvSYJpDCzr2Rc8VdimjB6sbdCJJLeD1VhRo7SmdmbypehnubxOnFwQrF0
+	 Nsz5GTvl9EAhTsqGYcTYsdsYOUxu+jucnnHB4ysNFr+7Hb1Sicl93vTm26rf099IYsPHg
+	 BANbGox+6sFyEROk9Yee19mn0J7rJq+FGO2N2VXdEm/ge6wQHOjsArK2Wx84i2OaNnw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792533373;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 In-Reply-To:References:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=RC3iU6EQa1/dBaJxMKqA5Cnd4YmN92OAMtq0Pq+n7O8=;
-	b=jSKaiObb3NAmzBEa2MOm6ZpAuK5qMy8pxLOqGoXkXavSAO5wgOTVEs/PvX9y2m+tCEsW
-	 5OT7DIknQaE7xqH7ZC0yaKH03dPBYOfMhYwehVnBj9H8nwAg0gcM3yP1hj0tWn/lkwmYl
-	 +Qh8B0onsvg8ZBJT34oqT8lrn2M8ZoKPPAoLI0zjIMlxgztnT0GzhhgO2UWq5CMopv0HN
-	 F+3kQs5PZD+tzR4cWDHG3fP3JMIUwf6kbYfQarCU4r2+8pX9CNXfL79M/8fuiy1kLUrFJ
-	 JNqND/QiQeEkz9WhlCFPLzsXNleO62jGBrWRUYmzPUdWWxzas5YWZ66fRsPvivP8lig==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792548893;
+	h=Received:DKIM-Signature:Date:Content-Type:Content-Transfer-Encoding:
+	 MIME-Version:From:Cc:To:In-Reply-To:References:Message-Id:Subject;
+	bh=fbPRryJ8n9XhLJpBCPRDsYKT7tAPTsmQIcGjUBmw0wA=;
+	b=aEp9Zhi3kYXQZBfv7UoTmiINvXjsbkZEPxylhcK5up8DhEFjA0rYxhKISV7V+HHAe0mC
+	 8fWr3ZjjB7IU3wBFyw0w2W/bPeb8JBND9UcbF7W4CdSjhfVnO8j10FQVtG4u1JchhChK1
+	 0ZgTwaCWJYlVc27874ArHXcnF1/E1dLgdCY1hxHNNl135mNBU4ig960PNoDBrazoadfqh
+	 d+0PLjsCX69PygoPvw2wbGsqs5M+0l+v3bUHjMPL31jIRagO4IbW1+fWKnsUwwMgs61qN
+	 3vlCe+/5zb4N8EqEQoHK0INK/vHUOyhsFLIk88HtYAchrEbhyl96kIEs2LE7/UVfqtA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DuUrn674;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="AQK54XH/";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01B4B606A319;
-	Tue, 20 Oct 2026 21:56:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36A4B606A31C;
+	Wed, 21 Oct 2026 02:14:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DuUrn674
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D229A1F000C9;
-	Tue, 20 Oct 2026 21:56:11 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AQK54XH/
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 29A871F000C9;
+	Wed, 21 Oct 2026 02:14:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792533372;
-	bh=RC3iU6EQa1/dBaJxMKqA5Cnd4YmN92OAMtq0Pq+n7O8=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=DuUrn674JMfXslg2ZVIwkEZJtPfpC7JU+qX2L2K8Oh2/xjnofe6PrmmX8ZxFxsTVl
-	 CJOnJDtdnjIXlGFq9CBRrcq2ueUjWplnyH5AncNdRDpLNGHRWpzIGomydnzupqLOlw
-	 FbTBqEUAveMFam6YnOpQTQ2/COE0/VT3wzF286C/7ye0i4M/CdCChU9ZLOk2i9EXSv
-	 Q+lY65xyMmC5+k2HSifJ14S7zMp6VcSauQcNjY3AHqv32NC+zsFhfpkmQnPH+Ey97p
-	 I/wIrP0EUbChYnjCb7+tAIweHRJRGK6ruc5DheKNK5rKsZGenGsEL9OuNluLdwEQoQ
-	 W3xcV/fHxt1jA==
-Date: Tue, 20 Oct 2026 14:56:11 -0700
-From: Jakub Kicinski <kuba@kernel.org>
-To: Imre Kaloz <kaloz@kernel.org>
-Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- linux-mips@vger.kernel.org, linux-kernel@vger.kernel.org, Lee Jones
- <lee@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jiri
- Slaby <jirislaby@kernel.org>, mfd@lists.linux.dev,
- linux-serial@vger.kernel.org, Alexandre Belloni
- <alexandre.belloni@bootlin.com>, linux-rtc@vger.kernel.org, Andrew Lunn
- <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, Eric
- Dumazet <edumazet@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- netdev@vger.kernel.org, Damien Le Moal <dlemoal@kernel.org>, Niklas Cassel
- <cassel@kernel.org>, linux-ide@vger.kernel.org, Pavel Machek
- <pavel@kernel.org>, linux-leds@vger.kernel.org, Bjorn Helgaas
- <bhelgaas@google.com>, linux-pci@vger.kernel.org, Christoph Hellwig
- <hch@lst.de>
-Subject: Re: [PATCH v2 00/53] MIPS: SGI-IP27: add support for the IP35
- (Bedrock hub) machines
-Message-ID: <20261020145611.4e277615@kernel.org>
-In-Reply-To: <20261020204214.28625-1-kaloz@kernel.org>
-References: <cover.1791890466.git.kaloz@kernel.org>
-	<20261020110619.12774a1c@kernel.org>
-	<20261020204214.28625-1-kaloz@kernel.org>
+	s=k20260515; t=1792548893;
+	bh=fbPRryJ8n9XhLJpBCPRDsYKT7tAPTsmQIcGjUBmw0wA=;
+	h=Date:From:Cc:To:In-Reply-To:References:Subject;
+	b=AQK54XH/NenajOYZnX0q/PdIt7svKjFZwieZ/EtVcj8PC4HrSuE3cZFlw8hW146TF
+	 Pknq2XyUVJ5rFTZ4OD0VNUTe1cqhjGsFUpR4vD0RIlWUYnzehEVj0I72y5dO6Z4jZu
+	 sDniZF6/CZmCTnPzBbtqXlgo5hgB33bTQF8tCnwaEgrFuE19HSrth8aWoVXpF0bNkS
+	 j4SCuHT38hfHqaTXJpJfYvNv5OfKhCgbYJ+YTq9Y+7Yf51NlTc2kmif4O8kTkJ8bv+
+	 Lo2f9sarltbTkplNxd+3C3Tbfh1UoWtPGM60U6qe5AOfOlu95vD9AyDttE1gckwYYd
+	 bmI50RAwkl+nA==
+Date: Tue, 20 Oct 2026 21:14:50 -0500
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -72,36 +51,71 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+From: "Rob Herring (Arm)" <robh@kernel.org>
+Cc: Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Sean Wang <sean.wang@mediatek.com>, linux-input@vger.kernel.org, 
+ Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
+ Matthias Brugger <matthias.bgg@gmail.com>, linux-pm@vger.kernel.org, 
+ Fabien Parent <parent.f@gmail.com>, linux-gpio@vger.kernel.org, 
+ linux-arm-kernel@lists.infradead.org, Mark Brown <broonie@kernel.org>, 
+ Sen Chu <sen.chu@mediatek.com>, Linus Walleij <linusw@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Val Packett <val@packett.cool>, 
+ devicetree@vger.kernel.org, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Conor Dooley <conor+dt@kernel.org>, Chen Zhong <chen.zhong@mediatek.com>, 
+ Akari Tsuyukusa <akkun11.open@gmail.com>, Lee Jones <lee@kernel.org>, 
+ linux-kernel@vger.kernel.org, Liam Girdwood <lgirdwood@gmail.com>, 
+ linux-mediatek@lists.infradead.org, 
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
+ mfd@lists.linux.dev
+To: Luca Leonardo Scorcia <l.scorcia@gmail.com>
+In-Reply-To: <20261020173556.632798-2-l.scorcia@gmail.com>
+References: <20261020173556.632798-1-l.scorcia@gmail.com>
+ <20261020173556.632798-2-l.scorcia@gmail.com>
+Message-Id: <179254885010.3549549.1306117296712722010.robh@kernel.org>
+Subject: Re: [PATCH RESEND v10 1/9] dt-bindings: mfd: mt6397: Add MT6392
+ PMIC
 
-On Tue, 20 Oct 2026 22:42:13 +0200 Imre Kaloz wrote:
-> On Tue, 20 Oct 2026 11:06:19 -0700 Jakub Kicinski wrote:
-> > Why do we need support for machines discontinued 20+ years ago?  
+
+On Tue, 20 Oct 2026 19:33:22 +0200, Luca Leonardo Scorcia wrote:
+> Describe the MT6392 PMIC and its RTC and regulator devices. This device
+> is mostly based on MT6323 with some similarities to MT6397 and is usually
+> found on boards using the MT8516/MT8167 SoC.
 > 
-> For netdev the question is smaller than the series: patches 25 and 38,
-> 44 lines in ioc3-eth, a driver that is already in tree for the same
-> part on IP27 and IP30. Patch 25 is a no-op on both of those (the bit it
-> tests is always set behind a classic Bridge); patch 38 is a MAC-address
-> fallback. I should have said in the cover that the series is meant to go
-> through the MIPS tree and that I'm only after an Ack for those two --
-> sorry for the noise on your queue.
+> Signed-off-by: Luca Leonardo Scorcia <l.scorcia@gmail.com>
+> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> Reviewed-by: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+> ---
+>  .../bindings/mfd/mediatek,mt6397.yaml         | 72 +++++++++++++++++++
+>  1 file changed, 72 insertions(+)
 > 
-> As for why at all: same reason IP27, IP30 and IP32 are in tree. The
-> hardware is in use, Thomas maintains the platform, and people run and
-> test it; "discontinued" has never been the removal criterion, lack of
-> maintainers has. IP35 is IP27's direct successor on the same
-> Hub/XTalk/Bridge architecture with the same IOC3, plus its successor
-> IOC4, so most of the series is teaching existing code about one more
-> hub generation. And these boxes still earn their keep as a stress case
-> for arch and core code -- e.g. the kmem_cache_destroy() race that just
-> turned up on my Ultra 45:
-> https://lore.kernel.org/all/atDCYwNfKW3m6YXh@thinkstation/
 
-I don't think you answered my question, or at least I'm too daft 
-to catch what you mean. IP35 was not supported so nobody is using
-it with Linux today. You're adding the support, and since it's 
-a platform discontinued 20 years ago there's 0 chance of real users 
-of any of this code.
+My bot found errors running 'make dt_binding_check' on your patch:
 
-What am I missing?
+yamllint warnings/errors:
+
+dtschema/dtc warnings/errors:
+Documentation/devicetree/bindings/mfd/mediatek,mt6397.example.dtb: pmic (mediatek,mt6392): keys:compatible: 'oneOf' conditional failed, one must be fixed:
+	['mediatek,mt6392-keys'] is too short
+	'mediatek,mt6392-keys' is not one of ['mediatek,mt6323-keys', 'mediatek,mt6328-keys', 'mediatek,mt6331-keys', 'mediatek,mt6357-keys', 'mediatek,mt6358-keys', 'mediatek,mt6359-keys', 'mediatek,mt6397-keys']
+	'mediatek,mt6392-keys' is not one of ['mediatek,mt6365-keys']
+	from schema $id: http://devicetree.org/schemas/mfd/mediatek,mt6397.yaml
+Documentation/devicetree/bindings/mfd/mediatek,mt6397.example.dtb: /example-3/pmic/keys: failed to match any schema with compatible: ['mediatek,mt6392-keys']
+
+doc reference errors (make refcheckdocs):
+
+See https://patchwork.kernel.org/project/devicetree/patch/20261020173556.632798-2-l.scorcia@gmail.com
+
+The base for the series is generally the latest rc1. A different dependency
+should be noted in *this* patch.
+
+If you already ran 'make dt_binding_check' and didn't see the above
+error(s), then make sure 'yamllint' is installed and dt-schema is up to
+date:
+
+pip3 install dtschema --upgrade
+
+Please check and re-submit after running the above command yourself. Note
+that DT_SCHEMA_FILES can be set to your schema file to speed up checking
+your schema. However, it must be unset to test all examples with your schema.
+
