@@ -1,56 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792585382;
-	b=OzRA03JI53nEY8/HnOD9da9rforLOpOEkQ8iKOg33AzyuJdpwjCir2+QpyzHnhgllaUj
-	 kksUZdmF/iPgwmkZ3D/a+n9tO53z0XtCdvOI+yj3MOIRp1UcTCdjEexuCxecZRo1K7aDz
-	 o3pYtg3E5ZuxcMtpF3Z2x8h53zh17bFLzGFzm+jyFr36sDeOQDkuxLPh/cEHjZo6wPOoq
-	 WGBpZJ9BcSPNt1E0bLy+iaW+NxQHJK6uf1TF1u/2Ik+BGGRHKMhK/x4ZX6CeHjsh9LzpO
-	 BFjVz8G69ocm9O1+rPPTg6y/ITYLCAk8fIVgpjP6mg28d8RO/IRJUtInkO5Qmr0Q47w==
+	t=1792585397;
+	b=n5YLwD31Py/79OpkiuwY8BOpyDLxNvRxfT6QEJC5p0jIE/NfekPnOQyXsDkIdLjrD/mS
+	 siaDV/wJOV12AmAXSIQWzieKvSPmE5s6/gShFSfjvjLu1RVuPvaVn627cRAiVx/ZZBUL+
+	 ATSfEdnbi7bmp09jI9cpLYXV+FgYXpKSQ6JG1sPw2oDyFkb2bhzNcrIUbc/k5RnRo9Gyb
+	 /lsuV3XBTNkphtRLR4V6D4FuuzO4CLOHp0vAJlp+8luWlIA6VxyKgrlzItWcBzkJ0foHR
+	 2VDid9o5yNTw9TcL+bfk5nZ4QT6WxCRRVMqlCWRNbYhfhzCOcNHSO35gOlEYYxv3hxA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792585382;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792585397;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=6XIWLGdI/VNm3CXQCfLB1vRHj5gCTpNdlKJCMGU+8/Q=;
-	b=33tsoSuATBVJNqylCazq3iV6uMJ/G7SWWTYKeCNA93QjEUjTlJv4DDmHEanCtfT4wKQ/
-	 QesximteV2Ub9FgA+9f7DRWVUcdiiu+ig/00CLFZHhsX4Ois5a9THIeAtlAVFKf2AciSO
-	 UpiSerofVN8pNUAaTL6KPPzVtIL9m1j9yGiBB0D1nTAYWX7S+XiPr4JpTh40/1SjaSku6
-	 BSI6aUoqY/5sPQ25jhCJJOWlL19BGej91EVtXPPXldxBwdsE+eNW3Zfcyd2pKlJoGWmQd
-	 K0fX95at2S01lVmy+rxEX5bhJYlACv8SLVhEykAPQcKyY5a6sAfjxZKI5SLXVeZtNKg==
+	bh=lIFvN5Agtdeqy+wFCO0w/xZT6FDBqAGDSq0iNMRrcS8=;
+	b=WdN0QHCa0531sUtGMrVSsRmyehp36ou1pn7W0Pkz2T+6sGziyDSnFgwECXhpz2/Z2QMm
+	 ouZ++SIMFjUOluVcDSaF+s1mMlC6dBuTZJl57XzjaAjM151Zog2agPIcV12m1WJucCvhu
+	 +0hpQMezWl/v2vMt1XZW0DXnwOWYAga5NrXyD+yEbuAPeDRW41BOYZ+Xjbf6QTAljChP7
+	 qyYTb+pxG0WncsMAdL346RGI8mCDK74JWo4AQ1bO9mNvdgO3nAKf138zTuUyyg/uzAs8C
+	 EOOj01O4jMh0AuowiHweqwExLM3nvg7Sr2jQ6RJbdT1FzAY76A8zx8bkB7ChhjNek9A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="UwR0ho/T";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RR6oJthP;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 300AD606A31B
-	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 12:23:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D435606A31A
+	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 12:23:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UwR0ho/T
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9FF3F1F000C4;
-	Wed, 21 Oct 2026 12:23:01 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RR6oJthP
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 454B91F000C4;
+	Wed, 21 Oct 2026 12:23:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792585381;
-	bh=6XIWLGdI/VNm3CXQCfLB1vRHj5gCTpNdlKJCMGU+8/Q=;
+	s=k20260515; t=1792585397;
+	bh=lIFvN5Agtdeqy+wFCO0w/xZT6FDBqAGDSq0iNMRrcS8=;
 	h=From:Subject:Reply-To:To:In-Reply-To:References:Date;
-	b=UwR0ho/T+HbfgCcdGxw2O+chAvDfwwqr1JtU98u4x0SROLkHsPQG148V8FdwbQAwJ
-	 XDfAuY6ZWM+SdZHcaW7TUIklJ5SWVonTIFHTFJpq+vMK0mzNqZTcgQQMkQ2wcSIF9p
-	 EX17KreVP4vdMQ4e7tnNRXnA/s9NBfEFI/DL749YoIYMh2Y57iS1kZXAJE2XGUP3FA
-	 rmpEqD5speM3W3oD6AtoyanOMBlUTI+IXw7UJzAX4lEhTD/WUVPDjLjKRQ5olrCQD4
-	 t5Ch5NWHekvzT2h+xLDxTaX1Z60r7vFdtlavl8NiAPsoPn5Jjf1mIX9kcZtwH75KjK
-	 Rl86gSw3u5QdQ==
-Message-ID: <sashiko-outbox-180239@kernel.org>
+	b=RR6oJthPGp3RZRSOy+aHEeZwDkBnPRByuWVMUWlyxukYe+2uP/Gd0Aeyf3pW4xM2E
+	 I6M+Ydsxc/m9I9/BKJx+rPY3noFpY0IMROiL83V6/vCti/idU+IQtQdRV5HAiALCPx
+	 CmM4g8ekKGejleo4JD8GLTZKjVnS+MKQOUPsg6hJPvi0u1WEs58YVr1otV5jhBcPVo
+	 TP17c288rODVpg9j3ExxowlOWM3gyed5WB1iKKiG3F0N23VDIhnXVs0j74wVlikUK1
+	 42/nfUOCLtg3igBf2Ee7DBmy/hJ5fJM+/BW+FX3EBkvX/cPbYgWFtH5yJQ9xk14JJ0
+	 ShGW8RsiPLo1w==
+Message-ID: <sashiko-outbox-180240@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 07/28] mfd: db8500-prcmu: Make AB8500 cell and IRQ
- resource static
+Subject: Re: [PATCH 22/28] mfd: abx500-core: Unregister device ops on devm
+ release
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Lee Jones" <lee@kernel.org>, mfd@lists.linux.dev
-In-Reply-To: <20261021121245.3111563-7-lee@kernel.org>
+In-Reply-To: <20261021121245.3111563-22-lee@kernel.org>
 References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-7-lee@kernel.org>
+ <20261021121245.3111563-22-lee@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 21 Oct 2026 12:23:01 +0000
+Date: Wed, 21 Oct 2026 12:23:16 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,25 +60,26 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> db8500_prcmu_register_ab8500() declares struct resource ab850x_resource
-> and the mfd_cell descriptors on the stack and assigns &ab850x_resource
-> to ab850x_cell->resources.  Although mfd_add_device() deep-copies the
-> resource table via platform_device_add_resources() before
-> db8500_prcmu_register_ab8500() returns, the shallow MFD cell copy
-> attached to the child platform device retains a stale pointer to the
-> expired stack frame.
+> abx500_register_ops() allocates struct abx500_device_entry via
+> devm_kzalloc() and links it into the global abx500_list without
+> registering a devres cleanup action.  If a caller's probe function
+> subsequently fails, devres frees the entry while it remains linked in
+> abx500_list, causing use-after-free and list corruption on later
+> traversals.
 >=20
-> Mark ab850x_resource as static and the ab8500_cell and ab8505_cell
-> descriptors as static const so the resource pointer remains valid for
-> the lifetime of the device.
+> Register a devm_add_action_or_reset() callback in abx500_register_ops()
+> to remove the entry from abx500_list before devres frees it.
 >=20
-> Closes: https://sashiko.dev/#/bug/linux-554f3a1f-ca41-4078-ae9e-66d0d7fb4=
-c9d
+> Fixes: c211b6b9c014 ("mfd: abx500-core: Convert to managed resources for =
+allocating memory")
+> Closes: https://sashiko.dev/#/bug/linux-6a9c6b8b-8f89-4af5-8cb1-102822e44=
+e6e
+> Cc: stable@vger.kernel.org
 > Signed-off-by: Lee Jones <lee@kernel.org>
 
 Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261021121245.3111=
-563-1-lee@kernel.org?part=3D7
+563-1-lee@kernel.org?part=3D22
 
