@@ -1,99 +1,99 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.222.171
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.219.48
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792565399;
-	b=2EMyTd+zbLJWlqs3hzFHOvXuGZKuqAWpj4sAh+7k40ZMK8Cx37NxW8yPSidS6gIIIJ+d
-	 z6UkH2IH4XL+FHGNo5jze9Mda9lc3qT+q1IhZC9YIs3cK+tizh7riGiNK4Z8TV0ymzwM+
-	 Q2DDUp8VmbrP30bR5OReUSZe+x+QGSLkJjMnMqtdaPBki9YENNGxq0pnewoAyK2h6RSvl
-	 iuxX5eZdYD6CU/lVzjx5TtfnIYcJmjqh6DR6KRMqfQ4EBYnproqwiX0ij3/rWos67XiLD
-	 MpC9jZieFTYd7aA8P77FaZUaLUIPhFgrexCbp7gGq4BY68v2xhzptUmGLHLRinxqLEA==
+	t=1792565458;
+	b=OlguZvk5Jw4onjWJldmiX4YffToV9w3r5B1eBG+nXr4lBb9oHu8g2po6JgOsBUjlFhIF
+	 BgS7KkRyrj93qRxDds6DgmnhbyKDbNKD6tMgdHwvbJVH3uZtmhZ3ns9+gDJIaMzbuMz9r
+	 xiHjGwu/xjrRD5Q0yOQHEWteDTyJ6duLh6y9/+RNOEMrsKYKkqQVrUfAiLJ9OC4+G6a6o
+	 88o5/ZcAdpC9HqQLrhl9i/12prK52a1ZDmSTP6bgfUkrl73lU0aIWyW6+yzDOX8T4FRAW
+	 b9d07SGNNoUhCkU2s9U/9+qi6OrLh8JeXoWzvvWE01rmHQOJOdYQNDwX3RmiRHvt9Ww==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792565399;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792565458;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
 	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
 	 Content-Type:Content-Transfer-Encoding;
-	bh=byop26hI00dKGF4kjtrv1czumNMi6PlxA5087mNvBAk=;
-	b=hbNhcijDqr4i957nPJtnDf2HZSKoW4djKga93F3BtEhME1Zcd8MxplfBS1oLj2mISjfq
-	 eCPSwexavfCPVnVz3xQvWJGDm6/aYppGWuGRWFBL7BvYSehOAD5sptrF3wXDnMnp+2R2p
-	 TwY+9I27mOafQvDj90GQRBhue1IXcygHRAhAGrnVun4hSZW8hJSz16zR/ujnSPfiBjsPY
-	 gT3ebP8Syca7m9RDtf4Hb8BJXfaylAH1ruykKCfIWdwIOOlBzlS6XZEtN22YqRuOiI2wo
-	 XENxpcOEbnfoXPKCvG/kFNEPTmU3Uw8X1isS6hUL61NXc/ZYtRBb3YSVZySMs7Ut9Qg==
+	bh=nZ4GrCrxZZ8zsc/ycY/qdK9MP/BYV/nhueSVtx0nY78=;
+	b=bp3qu8lZ8R5X/UGy9SPLXJPqXxRBkAegqa/6mxAj61mSg8YINS7HnRHb85nrGOmHZixn
+	 AVO1nxXOux0Q5dMpIz4yGCdER0hybYQDy+dCJMaOBzj8v2cpXR1xLRlIMmzuMLjPge/07
+	 thmD5mA+ZyyubxC3M7AasJgVUHDqZBD18AC6qTOzdrueSOdo7lGFTsYJ3hFCHdfGoB2tQ
+	 Eb6FqRtRohuqnpHTQ5loPmjLIbWRutlw5UVdgecVi4a3kECuvC325BOvQSrOmCU4U4WwG
+	 EoQosxjkEPenOr5fJ1RRPojJAwSchD8w3XypSz8SDkM1/r9pu41NJfl8Z5r4KQoblLw==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=Pxiobd6r;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.222.171
-Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=g80Jmac1;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.219.48
+Received: from mail-qv1-f48.google.com (mail-qv1-f48.google.com [209.85.219.48])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9FD1F606A319
-	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 06:49:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9FD1F606A319
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6093606A31C
+	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 06:50:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E6093606A31C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=Pxiobd6r
-Received: by mail-qk1-f171.google.com with SMTP id af79cd13be357-93f269e335eso44497885a.3
-        for <mfd@lists.linux.dev>; Tue, 20 Oct 2026 23:49:58 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792565397; cv=none;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=g80Jmac1
+Received: by mail-qv1-f48.google.com with SMTP id 6a1803df08f44-91b8306b9f8so6845476d6.3
+        for <mfd@lists.linux.dev>; Tue, 20 Oct 2026 23:50:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792565457; cv=none;
         d=google.com; s=arc-20260327;
-        b=svU94LEyDtwTH7HwhMKVb2a9j4FKqUb3LpxR/eTPfLGpk73iC8OP0+lKNBa4Lm5nme
-         Txt6C7BT6PJe5ohHO9tLrmTs5bJpU/goHlW0jukVb8i6vPXmqcFzAMz+5eX0+Cg64ptr
-         j+iK0qxp7U1DJHJjExdFcoI7bio5uMud0ylYq5pRwC0izt7RlRuOuaSqyKd/wWNPsWRi
-         nN5cnb0kUXFON+RthEKL65ms1MPgdaVWigfBmDn5HyPonYF0BOy+fANVV2xg/yBmJ9JR
-         q6eG1U30Jutv+HlCAIuumQtfCFqdjwqLBQJILD/3EbeUqvMzbk8vnAj1s9sI12u5EG2M
-         sERw==
+        b=R75eWNmyBpUwIfZz+ykCccX+k1fe+s/KWRwg7y9J5S/nqwh40kkv3Jx9L53TojBfi1
+         0vlf/3K1SSyX1tHjvF6sXgWkjHQRp+O8nmC9vBbpTHnFC4P5sgLSVCXhM/rqFWULjr0c
+         YsyADw0THfAIg+x+JCBpgeuya6Vqq/NZB7vcSUpag+yYWngoMpHgFLNlUokSE3tpulKo
+         G0OhqLXjBz6/h8D5g1u8fFQSTu1N4avQnoZw7Bpd6Bzf+lP/ithBaB3AdU9hbfLlqXeJ
+         YMKBM1+q/MuCqCxooVfpZGvDRzCtbbec3h5RI+NsieTrnbVxPC4WggjziByLXwxljNey
+         Xr6A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=byop26hI00dKGF4kjtrv1czumNMi6PlxA5087mNvBAk=;
+        bh=nZ4GrCrxZZ8zsc/ycY/qdK9MP/BYV/nhueSVtx0nY78=;
         fh=SKlRGCwKdtdyEF8Kb5l+vwcMyvzCcNyahRdpojZj6w8=;
-        b=k3kr0h8Zv3JiUrOieKTNXPaK2/qC6G2+WeTDQua+fEc0KtxAaQ0vO3ill2EHF06qV1
-         d9AagfXuwyS8a/0coUxIbpp4GwpaTk+l1Hje8+Qb2gnao4J2BVq73qqdhJMbQoW0dqby
-         X4mQJGemXJgVRTa7J8mNNQzqR7cVmNDAd6rDWplRyTgHwJUVre7YAGzU5MgrKkd1tkG9
-         WbvTIrAujwv8c3KvIza0AdvmJUOah4OorSwUaTwYepoMKdOU6b6x58sKcu/Skki8MpRV
-         aT79ibAwGreVhTJLISeqw8Xg0Py4qOZaM+sHkBMop+orxQcOw21E97DbD/RnRBTSPUrL
-         Vjxg==;
+        b=CrqWRiw/GSjpHS1n+QqDyTR1p9SgqC8bUP5A8GPQGPSuJi/YtrYSteQ3KIhB2/PPdB
+         38lZxBpKuz1Ot1od5JL55VFVCkJQgYbzUrQG1MI6R7vILenTm/N0J6AWQv/3wbkBljt6
+         M827eF+wp0jIaNyU1YHzlOA5iz7T/8e7uyxrl7XusrhAqcUwOkym7DR7K16DZeT8VD5b
+         jSgpGOEIb9qfSLb3JiJA51rM7qK/xtCQ0NOpmnNlwiqNs9cAe9alW/pLm3ejKeZvXQgE
+         5uPTPDJYcGOvr0bcMrx+BQdUl8umNhjBfgwXpaBBGxaiEhQWtl5zX2LtslXOvqyqXb4m
+         tRgQ==;
         darn=lists.linux.dev
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792565397; x=1793170197; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1792565457; x=1793170257; darn=lists.linux.dev;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=byop26hI00dKGF4kjtrv1czumNMi6PlxA5087mNvBAk=;
-        b=Pxiobd6re6rUtoRdXVHL2VWUAnsV+G9SMHfqBhnMoX68MMytoVEhqtjZcQWM7zaMlY
-         kAlUvLk7D1xDBO4MjfBo7cbDn9qjp64Hnv1CSEyfvWGsw1mzkUHDA+u1DMKi+57m5SnA
-         J2UEmGD6e6ujLqaFuBZWBjsK+KNd82DQ3FwdZbm+tv7CbSGeZVCQEbc4G1V0Az8eNTm7
-         emA9XmbXaysxZ6wx3KyNGFV9rOj52Qo0iUpKa8NopYvWqx7J4tZq1KUeF++mAH/TSHeh
-         2UpCNm8IF5+JZS9I3DVLHxiyUKXFRxGH5rL0XXQ/Pj46thoA0AExRK0tQ1B+EPRyzT2r
-         a06A==
+        bh=nZ4GrCrxZZ8zsc/ycY/qdK9MP/BYV/nhueSVtx0nY78=;
+        b=g80Jmac1DRf4eWKn3Vop8+wFJNy5ddCE7MEbGelbkScbYy1AVQyc65kOdL16b5eaOc
+         WoWYRQ1kKii5fFOAsna/KF+bqSjb9KEXPN92MA+EfHbyPGOiR4M99jZ2yWNA43BhSzak
+         TnoDUNxm1bbFJ7UMQaLL4o9pmnq0bOkFdcmToXmP6akxgEqPslTgmm73+vmLz2u04hJB
+         SQ1uM15ZwPRfJ72tnzIcr6JyXgJ5r8yLR612qieFvohCbyeoEgRA3LHC9IPgSmVzPcfV
+         PgTxGDIY8GYoONRfKB0kbfvvh+s4KiyRAE+73/mwwaF5jmPcF6tEiGrl6yMiexAhjhKy
+         wUlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792565397; x=1793170197;
+        d=1e100.net; s=20260707; t=1792565457; x=1793170257;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=byop26hI00dKGF4kjtrv1czumNMi6PlxA5087mNvBAk=;
-        b=boR5b+0s9bxu6349XL+6cIzGPDPxTotguI9Y6/1ARUT5pYM6FK/epFmhsOCWRHiqcv
-         B2iNu8NCQt4ccSdB3zzK/pzkHj9qlm0Dew/XMbJQvoEPmxGGI6Fz+5Oi2zdf1b02QApf
-         NmYfjes9BFQ1YxfuT5eQp5ibA6kHI0e3d7cqmuE/Rp++6VMZvkBceE3atUurUcoRbDPm
-         T303rSbI8jgcAgLuJ/GJeznztDTcjDkdLPdgPyBNdPycc5e+W2LgFpZRcRWitRBTcoAO
-         0COUboJGrsYrKGFym6TcSRWeOZs8ibnDSjn9IhW/OPtTUii/bn/J53N2zVaklAWDd15g
-         KHLA==
-X-Gm-Message-State: AFq9FYLFJWBMcml4lv4QqnE3IEKuoLeXatAdtTUGhTMRgsGK+fY6NKdg
-	74jRzPo8BJaeC9kHAKkdoRVDKTYLuvneCV5cWbkuDG/Eo4indV/bv+KMKQ053wN3c6lqFKePa/c
-	Dr1uoCHNvN8ioo19v2VfuCcf1ORpHc0c=
-X-Gm-Gg: AYBFou1pOyN29+iPBfOhtn+N5u1vP+Fclew+snMI5SFirLknNv2RuKIGOGbO/O7l8R4
-	iVs67SamOCXHwLVxk0Z/QyNouxQF1hrsPgMGXVsD7P2ZbcWmI8FyviklQhGQt/hvOticxRv0xoT
-	Sx+fMKCMuqPWJk/h6RaJCNt/LdKo17JFNORDYdHRSQRAdTm/+EUxsLQd3OuB/gbsCkkKxSfnbnO
-	3aYgiSLIWwJrRPZ9VOoAS2xW0RQo1Mx9yLVpw+IoyXXrSF/j+zQny91hRoiBsCgPlgI1k67EOqt
-	3FFTch90K3pms9ZtZad7YBzXCh3K/hdjEtsMSiIkoJ5ULw+/uRKqXDaiam4M3a6QFSo/Hsr8DKG
-	3cGojyeCgJy/o+Y1GBH8bXmJ5n2D5/SBeop2cYg==
-X-Received: by 2002:a05:620a:17a3:b0:93e:5e2c:8bf2 with SMTP id
- af79cd13be357-93f57f1efbemr275798885a.21.1792565397525; Tue, 20 Oct 2026
- 23:49:57 -0700 (PDT)
+        bh=nZ4GrCrxZZ8zsc/ycY/qdK9MP/BYV/nhueSVtx0nY78=;
+        b=gtcNIaDhShQ0eOCDSWrDgp6KNk0rjL5O/hkmTjPnUW43XMEiZsiIXKcHiZFHzipizp
+         PRnzXtVh2QRbcXqE894OTDUw6rmv2nk1e+OLyQetNHiOhZ9kWYaps8EqVNNycEcHCPhG
+         KBcpSm3JNrK8USSLPgHjNqtAirhCb7uzAP01RB3kPhuScKCmDt7+DF58L8jbFiSnNuov
+         3JqZFjzjLTFHzNA0Z5USmB/PnHGyELwxhANtxpBT0mO8rEaFvdgWvU0GGrg21aXkG3Mq
+         xojih87v1ycOxiGY/K4rJcnIroUYOFm4jgDhccJS0xGdQ7LON4GjTYJr63702bkkW8lq
+         MtQQ==
+X-Gm-Message-State: AFq9FYJbQOP8oylrONGYzG7B4ByQYt6jgqfEcNmqGKrcYpUF/9iWzRoF
+	UHON5qbzaKw/Ir3H6JcnP8O9K55B6TUaH8oia4+zPKYKIiMWjdLnM8C5TuXOY/DSnd/TRkyckdq
+	TstjVzPWK0QoV9Xo49eAVcW6jOtmWwSvF88vQ
+X-Gm-Gg: AYBFou1xNkREhDdXZkkPkMxFKQrVR2KH9kOPvW7PU3UBkpmOF+cyS0rouFsqfnz16Li
+	oGwWKREiExTR7UQwhLvf8m93YJXzT9x0tx50/D/g6ZtP4tNjePoOjG7EjDXO+pvnA21pQNiVxXk
+	a9dk9BhuBMQltsZY6BcgJpqynp2sooWZq5fyV7BhVJ5QYDaFQ5QnU6NGYJCKtIXHs/6ztuzL8Qh
+	lgCAvfxaEViPQMdPqp5dDFUT56FFRFk74FOZC7D5YBq6JhE3lmzpyjRR80VuMJCAIHdp/K+m0WP
+	77VFC/CwB8WlHsVWvpChs89bm8jO0in9tbfyZHSGBMAcxNaFvfnhehOq8lEHjRTIVgUgBcNznM/
+	DQxBXhSa1EnqUh9Ena6KB2shqMVgfy7fZi0i/pg==
+X-Received: by 2002:a05:6214:3bc5:b0:914:525b:8ff3 with SMTP id
+ 6a1803df08f44-91c12ee14ebmr19628896d6.23.1792565456830; Tue, 20 Oct 2026
+ 23:50:56 -0700 (PDT)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -104,80 +104,71 @@ List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
 References: <20261013063259.2734757-1-a0282524688@gmail.com>
- <20261013063259.2734757-10-a0282524688@gmail.com> <sashiko-outbox-169142@kernel.org>
-In-Reply-To: <sashiko-outbox-169142@kernel.org>
+ <20261013063259.2734757-13-a0282524688@gmail.com> <sashiko-outbox-169155@kernel.org>
+In-Reply-To: <sashiko-outbox-169155@kernel.org>
 From: Ming Yu <a0282524688@gmail.com>
-Date: Wed, 21 Oct 2026 14:49:46 +0800
-X-Gm-Features: AclHuK-nXMNcCny-Rh0EBmuIB8LxFqooM3YOtF1zoHaqSsrx1181Jjhs-i_POrQ
-Message-ID: <CAOoeyxVZ-shU+XgaaHR07dARtVokwstuVNcctSSPW-KaT8pwUA@mail.gmail.com>
-Subject: Re: [PATCH v9 09/12] mfd: nct6694: Extract core device management
- into a separate module
+Date: Wed, 21 Oct 2026 14:50:45 +0800
+X-Gm-Features: AclHuK8l-GakzbBBAFJIhdIP9XwIuXlTamlHLll5qwcy-5fawq88ReLULCKF1yw
+Message-ID: <CAOoeyxU3KT25s0V807xFtk3Yo5RNqtOcADNm9dyxJijjRuoaPw@mail.gmail.com>
+Subject: Re: [PATCH v9 12/12] mfd: nct6694: Add Host Interface (HIF) eSPI
+ transport driver
 To: sashiko-reviews@lists.linux.dev
 Cc: mfd@lists.linux.dev, lee@kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <sashiko-bot@kernel.org> =E6=96=BC 2026=E5=B9=B410=E6=9C=8813=E6=97=A5=E9=
-=80=B1=E4=BA=8C =E4=B8=8B=E5=8D=882:51=E5=AF=AB=E9=81=93=EF=BC=9A
+=80=B1=E4=BA=8C =E4=B8=8B=E5=8D=883:02=E5=AF=AB=E9=81=93=EF=BC=9A
 >
 > Thank you for your contribution! Sashiko AI review found 1 potential issu=
 e(s) to consider:
-> - [High] mfd: sleeping lock inside atomic irq_chip callback on PREEMPT_RT
+> - [High] mfd: nct6694: uninitialized kernel memory leak in regmap_read
 > --
 >
 > [ ... ]
-> > +static void nct6694_irq_enable(struct irq_data *data)
+>
+> > +static int nct6694_hif_regmap_read(void *context, const void *reg_buf,
+> > +                                size_t reg_size, void *val_buf,
+> > +                                size_t val_size)
 > > +{
-> > +     struct nct6694 *ddata =3D irq_data_get_irq_chip_data(data);
-> > +     irq_hw_number_t hwirq =3D irqd_to_hwirq(data);
-> > +
-> > +     guard(spinlock_irqsave)(&ddata->irq_lock);
+> > +     struct nct6694 *ddata =3D context;
+> > +     struct nct6694_hif_data *hif_data =3D to_nct6694_hif_data(ddata);
+> > +     u32 reg =3D get_unaligned_be32(reg_buf);
+> > +     u8 hctrl =3D FIELD_GET(NCT6694_REG_HCTRL, reg);
 >
-> [Severity: High]
-> Does taking this lock in an irq_chip callback violate lock nesting rules =
-on
-> PREEMPT_RT?
+> [ ... ]
 >
-> Since this callback is invoked by the IRQ core (such as enable_irq()) wit=
-h the
-> irq_desc->lock raw_spinlock held, it executes in atomic context. On PREEM=
-PT_RT,
-> spinlock_t is converted to a sleeping rt_mutex, so taking a sleeping lock=
- inside
-> an atomic context causes a "scheduling while atomic" BUG and lockdep spla=
-t.
->
-> Should ddata->irq_lock (declared in include/linux/mfd/nct6694.h) be conve=
-rted
-> to a raw_spinlock_t to be safe inside atomic IRQ callbacks?
->
-> > +
-> > +     ddata->irq_enable |=3D BIT(hwirq);
+> > +     return nct6694_hif_xfer_msg(ddata, &cmd_hd, hctrl,
+> > +                                 hctrl =3D=3D NCT6694_HCTRL_SET ? val_=
+buf : NULL,
+> > +                                 val_buf);
 > > +}
-> > +
-> > +static void nct6694_irq_disable(struct irq_data *data)
-> > +{
-> > +     struct nct6694 *ddata =3D irq_data_get_irq_chip_data(data);
-> > +     irq_hw_number_t hwirq =3D irqd_to_hwirq(data);
-> > +
-> > +     guard(spinlock_irqsave)(&ddata->irq_lock);
 >
 > [Severity: High]
-> Does taking this lock in an irq_chip callback violate lock nesting rules =
-on
-> PREEMPT_RT?
+> Does this code inadvertently copy uninitialized kernel memory to the devi=
+ce?
 >
-> Since this callback is invoked by the IRQ core with the irq_desc->lock
-> raw_spinlock held, it executes in atomic context. On PREEMPT_RT, spinlock=
-_t is
-> converted to a sleeping rt_mutex, so taking a sleeping lock inside an ato=
-mic
-> context causes a "scheduling while atomic" BUG.
+> Looking at nct6694_hif_regmap_read(), val_buf is an output buffer provide=
+d by
+> the regmap core and contains uninitialized memory.
 >
-> Could this be resolved by converting ddata->irq_lock to a raw_spinlock_t?
+> If a caller (such as debugfs) requests a read from a register offset wher=
+e
+> the NCT6694_HCTRL_SET bit is active in the hctrl variable, the driver pas=
+ses
+> the uninitialized val_buf as the tx_buf argument to nct6694_hif_xfer_msg(=
+).
+>
+> Since tx_buf is not NULL, nct6694_hif_xfer_msg() then copies it to device
+> memory via memcpy_toio(). This would copy the uninitialized val_buf conte=
+nt
+> directly to the hardware shared memory mailbox, potentially exposing kern=
+el
+> stack or heap data to the device firmware.
 >
 
-This is the same issue as reported on 6/12; this patch only moves the
-code into nct6694-core.c. The separate fix in v10 removes the
-callbacks and the lock, so the irq_chip moved here will no longer take
-irq_lock.
+This is intentional. A read of a NCT6694_HCTRL_SET register implements
+the firmware's write-then-read command, as documented above
+nct6694_write_read_msg(), so val_buf holds the request when the read
+starts. The only caller fills the buffer before the call, and regmap
+debugfs never accesses SET registers. No change is needed.
