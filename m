@@ -1,99 +1,99 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.219.48
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.208.41
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1792565458;
-	b=OlguZvk5Jw4onjWJldmiX4YffToV9w3r5B1eBG+nXr4lBb9oHu8g2po6JgOsBUjlFhIF
-	 BgS7KkRyrj93qRxDds6DgmnhbyKDbNKD6tMgdHwvbJVH3uZtmhZ3ns9+gDJIaMzbuMz9r
-	 xiHjGwu/xjrRD5Q0yOQHEWteDTyJ6duLh6y9/+RNOEMrsKYKkqQVrUfAiLJ9OC4+G6a6o
-	 88o5/ZcAdpC9HqQLrhl9i/12prK52a1ZDmSTP6bgfUkrl73lU0aIWyW6+yzDOX8T4FRAW
-	 b9d07SGNNoUhCkU2s9U/9+qi6OrLh8JeXoWzvvWE01rmHQOJOdYQNDwX3RmiRHvt9Ww==
+	t=1792566394;
+	b=aGorWhLLRu2ALVFLXEXbp/bG9HDW8sbzuuysTiRK2F8t8LRecnqznPpEwRRjVQUwDw/+
+	 ls0Nf10WGiDRdOca43Tx1eE0csmestZTitjy7W/XZtjou5r8/O5Q7X2hbgMhlDmwi5IfB
+	 0mwIxq4gsLEWXGsLROfGPMkOT63pWe3iW/aOlTSf2ff7OouQ8gZVGslbiE1ylTSUz9gCZ
+	 TG4Mqtms2N9XTIy4vYoo+fR4m7tb26e4tx0gk/aR1PpZNTKXAkS4yV19o8WKwq3y3n8IY
+	 TzIjMa0+X0fRiNd3eO+Ijgewu0MdnLhojgdZ8L3MBhXBSvyMydB6gXosQLe5MbpWOcw==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792565458;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792566394;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=nZ4GrCrxZZ8zsc/ycY/qdK9MP/BYV/nhueSVtx0nY78=;
-	b=bp3qu8lZ8R5X/UGy9SPLXJPqXxRBkAegqa/6mxAj61mSg8YINS7HnRHb85nrGOmHZixn
-	 AVO1nxXOux0Q5dMpIz4yGCdER0hybYQDy+dCJMaOBzj8v2cpXR1xLRlIMmzuMLjPge/07
-	 thmD5mA+ZyyubxC3M7AasJgVUHDqZBD18AC6qTOzdrueSOdo7lGFTsYJ3hFCHdfGoB2tQ
-	 Eb6FqRtRohuqnpHTQ5loPmjLIbWRutlw5UVdgecVi4a3kECuvC325BOvQSrOmCU4U4WwG
-	 EoQosxjkEPenOr5fJ1RRPojJAwSchD8w3XypSz8SDkM1/r9pu41NJfl8Z5r4KQoblLw==
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+	 Message-ID:Subject:To:Cc:Content-Type;
+	bh=MrXSvMObVmUzW/wExlXkMf3oMLCJJTWEEpBTKn/sJ+Y=;
+	b=TAvqszpZgSRXvW+ZmCSjHNWgQuqU7ZUDvR3Syztp7aZ8TrqLr89z6dXuqQC0MCAgRu2a
+	 hh+IudaWvyd/aGjQIJejc/Ikh/WrnFH7e6I3QXYws6/4jZqGR7SRTNrnuB0E138RePbTa
+	 KTjA40NOTk/9UkAhc2dSB5fnfo9HKz3vk9278IAAwyYHStQ9SYNF6abdhstKqvvCoP+Ps
+	 EKHXOOeeVm5a5PM03LLizFqkVdxDsJ/VCdYCub5nbMm8lXlEHceoLTiT9+5bGue9ix0+C
+	 kuPR9ZiVJnQoW0AAqMVRvTq6JpaSXWEHskBbRKtPP3NpvBFx7Iokcncfzib49YhlDHg==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=g80Jmac1;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.219.48
-Received: from mail-qv1-f48.google.com (mail-qv1-f48.google.com [209.85.219.48])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b="Tk/qLcxv";
+	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.208.41
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6093606A31C
-	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 06:50:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E6093606A31C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2753606A319
+	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 07:06:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B2753606A319
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=g80Jmac1
-Received: by mail-qv1-f48.google.com with SMTP id 6a1803df08f44-91b8306b9f8so6845476d6.3
-        for <mfd@lists.linux.dev>; Tue, 20 Oct 2026 23:50:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1792565457; cv=none;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=Tk/qLcxv
+Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-6b1dae0febeso442138a12.2
+        for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 00:06:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1792566387; cv=none;
         d=google.com; s=arc-20260327;
-        b=R75eWNmyBpUwIfZz+ykCccX+k1fe+s/KWRwg7y9J5S/nqwh40kkv3Jx9L53TojBfi1
-         0vlf/3K1SSyX1tHjvF6sXgWkjHQRp+O8nmC9vBbpTHnFC4P5sgLSVCXhM/rqFWULjr0c
-         YsyADw0THfAIg+x+JCBpgeuya6Vqq/NZB7vcSUpag+yYWngoMpHgFLNlUokSE3tpulKo
-         G0OhqLXjBz6/h8D5g1u8fFQSTu1N4avQnoZw7Bpd6Bzf+lP/ithBaB3AdU9hbfLlqXeJ
-         YMKBM1+q/MuCqCxooVfpZGvDRzCtbbec3h5RI+NsieTrnbVxPC4WggjziByLXwxljNey
-         Xr6A==
+        b=jlihGZDNMdH3xPP+vt2aXSMDvaQEaw5apZwAQaEEEuMG1+SuYnl7GT8PmTDJW5OwG7
+         1/hP1/0+eptqMhp+cBbadzS+4f9+CVRbMxAuox+e1ubNgftmXwAP1oqw90VrusHes5U1
+         8ItZHzBasGL7D+rYW5zZe7+zhjhlF9X9XLfYxc3nQZMQifeyD6bM4bfLlITd0djZd/yV
+         QHfWusHj5+4cq/5VEFzvvS6bNzOhdQnkpeobKNTBhANyObMFs5sTR4HY1hf/xtXD1ym7
+         b7h42dXeIDo5Y7pej7LknFSn15EEYwJf+Rz2Hg0AuHll9KlVHsBKduWI6p9qhp7K2TA9
+         VcOw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=nZ4GrCrxZZ8zsc/ycY/qdK9MP/BYV/nhueSVtx0nY78=;
-        fh=SKlRGCwKdtdyEF8Kb5l+vwcMyvzCcNyahRdpojZj6w8=;
-        b=CrqWRiw/GSjpHS1n+QqDyTR1p9SgqC8bUP5A8GPQGPSuJi/YtrYSteQ3KIhB2/PPdB
-         38lZxBpKuz1Ot1od5JL55VFVCkJQgYbzUrQG1MI6R7vILenTm/N0J6AWQv/3wbkBljt6
-         M827eF+wp0jIaNyU1YHzlOA5iz7T/8e7uyxrl7XusrhAqcUwOkym7DR7K16DZeT8VD5b
-         jSgpGOEIb9qfSLb3JiJA51rM7qK/xtCQ0NOpmnNlwiqNs9cAe9alW/pLm3ejKeZvXQgE
-         5uPTPDJYcGOvr0bcMrx+BQdUl8umNhjBfgwXpaBBGxaiEhQWtl5zX2LtslXOvqyqXb4m
-         tRgQ==;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=MrXSvMObVmUzW/wExlXkMf3oMLCJJTWEEpBTKn/sJ+Y=;
+        fh=z2orGtU4Eb5r4D97DAhNhPJroEjFvCQXk+I5B4AbXCk=;
+        b=K5kLmcRSlMR3c2khCnfopma/RWXH9PyjFIN9C2uU9gDoRMuYgENF4f+c7T/NOxYsnv
+         Qbcc5mCXbeNSu5U2sfgL5quuoKpgMoHyCDTtGYlFNr0WuNJHSDa13JbM4DdF8mO+7YJ5
+         BT2hoUUbogHnvVwvqO8w1MYJpHLL8X3HB0KP+9/0W6c/do9gczixlXFg9878JLK+YMyg
+         z8LzswESJ4fLoqk2EjnBcVGz+FXtVAu2s/phgnJ60DnNq3KoGws1QT8r6HyrD2ZQPgOS
+         Fh0kkgrwFzUg+fClfPScJyTb8WhThL1gyn2NcG2mJeHlwzuzgCoy48/d7s1eKdeb0Ggb
+         WmSg==;
         darn=lists.linux.dev
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792565457; x=1793170257; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=nZ4GrCrxZZ8zsc/ycY/qdK9MP/BYV/nhueSVtx0nY78=;
-        b=g80Jmac1DRf4eWKn3Vop8+wFJNy5ddCE7MEbGelbkScbYy1AVQyc65kOdL16b5eaOc
-         WoWYRQ1kKii5fFOAsna/KF+bqSjb9KEXPN92MA+EfHbyPGOiR4M99jZ2yWNA43BhSzak
-         TnoDUNxm1bbFJ7UMQaLL4o9pmnq0bOkFdcmToXmP6akxgEqPslTgmm73+vmLz2u04hJB
-         SQ1uM15ZwPRfJ72tnzIcr6JyXgJ5r8yLR612qieFvohCbyeoEgRA3LHC9IPgSmVzPcfV
-         PgTxGDIY8GYoONRfKB0kbfvvh+s4KiyRAE+73/mwwaF5jmPcF6tEiGrl6yMiexAhjhKy
-         wUlQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792565457; x=1793170257;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=gmail.com; s=20251104; t=1792566387; x=1793171187; darn=lists.linux.dev;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=nZ4GrCrxZZ8zsc/ycY/qdK9MP/BYV/nhueSVtx0nY78=;
-        b=gtcNIaDhShQ0eOCDSWrDgp6KNk0rjL5O/hkmTjPnUW43XMEiZsiIXKcHiZFHzipizp
-         PRnzXtVh2QRbcXqE894OTDUw6rmv2nk1e+OLyQetNHiOhZ9kWYaps8EqVNNycEcHCPhG
-         KBcpSm3JNrK8USSLPgHjNqtAirhCb7uzAP01RB3kPhuScKCmDt7+DF58L8jbFiSnNuov
-         3JqZFjzjLTFHzNA0Z5USmB/PnHGyELwxhANtxpBT0mO8rEaFvdgWvU0GGrg21aXkG3Mq
-         xojih87v1ycOxiGY/K4rJcnIroUYOFm4jgDhccJS0xGdQ7LON4GjTYJr63702bkkW8lq
-         MtQQ==
-X-Gm-Message-State: AFq9FYJbQOP8oylrONGYzG7B4ByQYt6jgqfEcNmqGKrcYpUF/9iWzRoF
-	UHON5qbzaKw/Ir3H6JcnP8O9K55B6TUaH8oia4+zPKYKIiMWjdLnM8C5TuXOY/DSnd/TRkyckdq
-	TstjVzPWK0QoV9Xo49eAVcW6jOtmWwSvF88vQ
-X-Gm-Gg: AYBFou1xNkREhDdXZkkPkMxFKQrVR2KH9kOPvW7PU3UBkpmOF+cyS0rouFsqfnz16Li
-	oGwWKREiExTR7UQwhLvf8m93YJXzT9x0tx50/D/g6ZtP4tNjePoOjG7EjDXO+pvnA21pQNiVxXk
-	a9dk9BhuBMQltsZY6BcgJpqynp2sooWZq5fyV7BhVJ5QYDaFQ5QnU6NGYJCKtIXHs/6ztuzL8Qh
-	lgCAvfxaEViPQMdPqp5dDFUT56FFRFk74FOZC7D5YBq6JhE3lmzpyjRR80VuMJCAIHdp/K+m0WP
-	77VFC/CwB8WlHsVWvpChs89bm8jO0in9tbfyZHSGBMAcxNaFvfnhehOq8lEHjRTIVgUgBcNznM/
-	DQxBXhSa1EnqUh9Ena6KB2shqMVgfy7fZi0i/pg==
-X-Received: by 2002:a05:6214:3bc5:b0:914:525b:8ff3 with SMTP id
- 6a1803df08f44-91c12ee14ebmr19628896d6.23.1792565456830; Tue, 20 Oct 2026
- 23:50:56 -0700 (PDT)
+        bh=MrXSvMObVmUzW/wExlXkMf3oMLCJJTWEEpBTKn/sJ+Y=;
+        b=Tk/qLcxvuNps53FRmmWpnC/74K7WWL4KTheDPkQTI7kDNNNtwdRmKEcIkxp1d61hZS
+         LXB99qbcf5UveJM/FbRFur2YUWWkX0wrsb9e1APienkEahzLI6/ZH8FeG+OglybBjfOn
+         6RIATFHlCn7xS4p5seLsMiziB8pX6cd1LqvjJURDa/VjKhtLGIrEYiKgMTm9VRmE1r0U
+         qEhXYV8djxolTvO5ruAiOcZwt8T4+N7gYzHkKze2iz+oMu96t84I4OCHTRd81iRfhMz1
+         HhYDJKS6DR5aYAIqUlGJzsfoUpj0WW/Dv/Zr7v5qsqEyKdZtPuO9C30SQdjClYCj/gy+
+         p9xA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792566387; x=1793171187;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=MrXSvMObVmUzW/wExlXkMf3oMLCJJTWEEpBTKn/sJ+Y=;
+        b=aXpnaLa+lCMuA1rJZZAyG4aGFJblj9UxueJhfqk4jI1ntpo5UuKQFeycUKMLQ+Wkoq
+         oTXvOX5Vrgh7k6B9wmmXmiJa9YWz7HtWC9NL0xtAq1tEwOBesChC1iwP7l7BeWvX/hik
+         0Tp+1G/vV5bkX2ujmq+dPJ4qh3fy0kYgb2PEoQSaJNX6fK71PLNdWiJQXDCMEtNVo08F
+         BCTW+TvudxbV6JFbLMeDy93MgIyuJYCqhX6gnq1lM79ck413qY97/GTjKhHqOCQcsmMz
+         MGxhUz7y7hvDTd0VR2F3BPd1XVNea+mZll6fexrA8SyeYEiNFI4o+a8ormpT8X4ZprV/
+         URwA==
+X-Forwarded-Encrypted: i=1; AKwUvBzhslSU+b9zxknxmjbzHPLp49SPve2NXFtPnoJwNr/Dn795wbG1yRL/Bw5RHikzc0yjFVA=@lists.linux.dev
+X-Gm-Message-State: AFq9FYIP+OZwlEqyjz7R5tVyRAUaGs0shC2yBT5yRRECSWZ8RYYu4Vyr
+	wJ4etWPQCUsTZm/2Y1YC0jvkWIta6kT25Zuh7MT2e3mD6xbbIPTh4BN+ipkfeKPc7YQT88ZRNPG
+	uQvzJKntnxLd6BOdQhhDoolkP5KrWbXg=
+X-Gm-Gg: AYBFou1auqswMt9ptfRyRq0kk/kmGcIqC5AF953Xb8Ccky8wL+ALXUVIMVxnIgJfmlz
+	kussADzREp4xwlLQkIkAuLTpHqHNF5hBaFBSS8Hlv6dXElb2yYAY2fOO8X4SajSTq0BJSTZRb6U
+	AHBiP6VzVa3MW0pq0fL2LWYixHP7m9902/tmHjpIZ22wrSI63ebxZmVylQmVH0doyGKE1XOaO5Y
+	wLqXUMtfR0ZUqZFABzESbFdVX35Zkb/vK8PMc8ZTdPbdre+cxR/ycoiKA6QMmSLEHBmlYkGlEIt
+	liyFzdbGezqsk/YIZeCUCk9hWwJOPBh2017oJTEI30YjOgOu3RlxBrIvttjWVVLAsiFJozB2liS
+	ldwoiWTNHeMZiOeWu8NKqquz7xeXyim23gFo=
+X-Received: by 2002:a05:6402:1585:b0:6b1:cea1:a011 with SMTP id
+ 4fb4d7f45d1cf-6b40893d0e9mr633902a12.0.1792566386899; Wed, 21 Oct 2026
+ 00:06:26 -0700 (PDT)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -103,72 +103,37 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261013063259.2734757-1-a0282524688@gmail.com>
- <20261013063259.2734757-13-a0282524688@gmail.com> <sashiko-outbox-169155@kernel.org>
-In-Reply-To: <sashiko-outbox-169155@kernel.org>
-From: Ming Yu <a0282524688@gmail.com>
-Date: Wed, 21 Oct 2026 14:50:45 +0800
-X-Gm-Features: AclHuK8l-GakzbBBAFJIhdIP9XwIuXlTamlHLll5qwcy-5fawq88ReLULCKF1yw
-Message-ID: <CAOoeyxU3KT25s0V807xFtk3Yo5RNqtOcADNm9dyxJijjRuoaPw@mail.gmail.com>
-Subject: Re: [PATCH v9 12/12] mfd: nct6694: Add Host Interface (HIF) eSPI
- transport driver
-To: sashiko-reviews@lists.linux.dev
-Cc: mfd@lists.linux.dev, lee@kernel.org
+References: <20261020173556.632798-1-l.scorcia@gmail.com> <20261020173556.632798-2-l.scorcia@gmail.com>
+ <43b58ad7-5934-4895-b48d-5b5a7b92e253@kernel.org> <CAORyz2JaJ40+F1oyrvY_0WdqH=fritbPuuQaZ98sXagVayZPLA@mail.gmail.com>
+ <2426ffdd-9438-4166-a67b-96620650a59b@kernel.org>
+In-Reply-To: <2426ffdd-9438-4166-a67b-96620650a59b@kernel.org>
+From: Luca Leonardo Scorcia <l.scorcia@gmail.com>
+Date: Wed, 21 Oct 2026 09:06:15 +0200
+X-Gm-Features: AclHuK9050nRGHSTN9753pi8bjuF0vHRU3cnUbJida-ygLIdS4pPdAAtcMwmgKA
+Message-ID: <CAORyz2KsozjmcDCd+KVfvLokuxs-YAP0E5yJawHECu9pbPQmKA@mail.gmail.com>
+Subject: Re: [PATCH RESEND v10 1/9] dt-bindings: mfd: mt6397: Add MT6392 PMIC
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: linux-mediatek@lists.infradead.org, 
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Sen Chu <sen.chu@mediatek.com>, 
+	Sean Wang <sean.wang@mediatek.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
+	Lee Jones <lee@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, 
+	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+	Linus Walleij <linusw@kernel.org>, Val Packett <val@packett.cool>, Fabien Parent <parent.f@gmail.com>, 
+	Akari Tsuyukusa <akkun11.open@gmail.com>, Chen Zhong <chen.zhong@mediatek.com>, 
+	linux-input@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, mfd@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, linux-gpio@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-<sashiko-bot@kernel.org> =E6=96=BC 2026=E5=B9=B410=E6=9C=8813=E6=97=A5=E9=
-=80=B1=E4=BA=8C =E4=B8=8B=E5=8D=883:02=E5=AF=AB=E9=81=93=EF=BC=9A
+> The dependency of this patch. This one uses compatibles defined in other
+> patch.
 >
-> Thank you for your contribution! Sashiko AI review found 1 potential issu=
-e(s) to consider:
-> - [High] mfd: nct6694: uninitialized kernel memory leak in regmap_read
-> --
->
-> [ ... ]
->
-> > +static int nct6694_hif_regmap_read(void *context, const void *reg_buf,
-> > +                                size_t reg_size, void *val_buf,
-> > +                                size_t val_size)
-> > +{
-> > +     struct nct6694 *ddata =3D context;
-> > +     struct nct6694_hif_data *hif_data =3D to_nct6694_hif_data(ddata);
-> > +     u32 reg =3D get_unaligned_be32(reg_buf);
-> > +     u8 hctrl =3D FIELD_GET(NCT6694_REG_HCTRL, reg);
->
-> [ ... ]
->
-> > +     return nct6694_hif_xfer_msg(ddata, &cmd_hd, hctrl,
-> > +                                 hctrl =3D=3D NCT6694_HCTRL_SET ? val_=
-buf : NULL,
-> > +                                 val_buf);
-> > +}
->
-> [Severity: High]
-> Does this code inadvertently copy uninitialized kernel memory to the devi=
-ce?
->
-> Looking at nct6694_hif_regmap_read(), val_buf is an output buffer provide=
-d by
-> the regmap core and contains uninitialized memory.
->
-> If a caller (such as debugfs) requests a read from a register offset wher=
-e
-> the NCT6694_HCTRL_SET bit is active in the hctrl variable, the driver pas=
-ses
-> the uninitialized val_buf as the tx_buf argument to nct6694_hif_xfer_msg(=
-).
->
-> Since tx_buf is not NULL, nct6694_hif_xfer_msg() then copies it to device
-> memory via memcpy_toio(). This would copy the uninitialized val_buf conte=
-nt
-> directly to the hardware shared memory mailbox, potentially exposing kern=
-el
-> stack or heap data to the device firmware.
->
+> Just apply it yourself and run full testing - you will see notice about
+> undocumented compatibles.
 
-This is intentional. A read of a NCT6694_HCTRL_SET register implements
-the firmware's write-then-read command, as documented above
-nct6694_write_read_msg(), so val_buf holds the request when the read
-starts. The only caller fills the buffer before the call, and regmap
-debugfs never accesses SET registers. No change is needed.
+Thank you, now I get it. I had already removed the example from my
+testing branch and removing the example also removed the dependency.
+I'll run another round of dt tests to be sure and resubmit without the example.
