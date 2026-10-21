@@ -1,57 +1,60 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792585011;
-	b=nGTPioEZGnCcL34sqscgeJtiU7RVHr4fJXe1I89+RCojyxnj5Sde61f41sD0tuN5bndi
-	 FrS2pX9GoGvh2+Piw+mZtTxSWr3bmnOPATuRXb5kRRMPqcmDCNi5131ykTRAvOHhSDqrp
-	 1yKu8xPwaS4ZmR5/Uy0qwzaa3VodMdqqMdAloN2i6/MjvfF2ScOJDXNAkWq1EvHFwUSP1
-	 YN3RiynZ3ETFgq2kU+lh8kp7my6AJACKsoVlWrBlztrUHRprKIPw1+2RVJ5DrJwqb3fyO
-	 uny8VgygvOCLN9owvhngQ2sPfTz7OSw3ekjA+sO1r3kAIVf2hYqKO+sDJhDoiDVE8DQ==
+	t=1792585031;
+	b=S60QL4fvmIEhXCG+bWxRd7JOkjCufGar2sHE8gCbQUZQu5cjnPHdKUnCP0K/qZ0BSWIK
+	 jKPxBZo8zIILHqUlslippXweXTJPQQiwZhXwz1AdLF1DimS9iA9ZBonoMtguOT78mdqxv
+	 l5Oz1YFJFn4N/U7WtxlyPvQZ2OozBtxXerTwFEApqMRc1Xn0STXWbkNbUhYbapdo/E+Ys
+	 vhh0BM1HnSM5NZjXSPcQdJhTNtKaQUU4qD98YzVbyPQnsOy+FlWgRwDkBy/fSHmgSx0fD
+	 99q6zPV89Nbe3wxBKMQN5qtZkrPXJFI3AffOuQx4aaCcPnPtp+s+InDKgAfac4UF4iQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792585011;
-	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	a=rsa-sha256; c=relaxed/relaxed; t=1792585031;
+	h=Received:DKIM-Signature:From:To:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=qDdj9EcXghdTHqmlPF4Y2JQuf4DTn5FtoR3j1bfxYpI=;
-	b=bnR4rXT7+X2UxEPFYQazk6un1RgHhwyLpfsx/FFIMoCbWzYxYFoUJsKthcEHsmD62Bcv
-	 C3K5GSBYEHkpNkSUEAOmpoJTWcmTKxrbRrx0NQJhjQiCDwjHM0ucWb9nwpvVtEfotnl1O
-	 acW0B7ZFvk3xdHXDcqrgnCcgVVYG+KHPAPrzZ8uVHENNQXphB4IOI0BPkP2zyKl5JXVNO
-	 QGiq9cYt7zsE9aQ6rGAwDrCJC2w4VENLAxCteNpS28eQvrUJhGZO6eXyCYa45z3v0aQxJ
-	 Rds3nvzr+FPh3ceSyC/Zor0gnRr/7ICkXqQxdlcrhi57T81qUu7LvfRxJoW4pYRqMVQ==
+	bh=E11iUFy/860ZlVvILirgoO4aU2Cl/yNZSYMwzdme8vE=;
+	b=rTBxa8rXH0ux4lEfueJTfjnDW80GUX+MO9jMu/KSViML6Z2Qi5kGsnA8ZZfwWdeUwsbC
+	 GHSwcYDa9vOm2Yf9qTHseSiz6hBaGlaZsXhYzudbDLal4Lqg3gYwrf9sYQoEWknnvS+vU
+	 NktjQuZHAw6J2xdaA4K7UF5zY0VWX6ZDR6lYTa//C8rEmRUrmBLKVSLJb+yqroXi6qfiN
+	 00E9mKEy50X9aPhweVL0G4OtEWiDQgAGmcCvM9Vj1fTGre0kr2ieitIdd/WIVVSFTQq4b
+	 KuF+je9y0yqRunqCUEe4oOjQ2GRKtTogJCFAUyNOcl6ngg/37Gm8v14MQoKArL4Hilw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SEGbK0x2;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LvccDvLA;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98B6F60A381A;
-	Wed, 21 Oct 2026 12:16:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A171606AB31;
+	Wed, 21 Oct 2026 12:17:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SEGbK0x2
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C56261F000C9;
-	Wed, 21 Oct 2026 12:16:49 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LvccDvLA
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3E591F000C6;
+	Wed, 21 Oct 2026 12:17:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792585011;
-	bh=qDdj9EcXghdTHqmlPF4Y2JQuf4DTn5FtoR3j1bfxYpI=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=SEGbK0x2M190Jkl7em3f5e6FsOIFjriiIc4I4TlIIZr9PFsuEj5ryTt9DoOm8sJFL
-	 xQvmW89g0vFRd6n+yDBSPf1p2fjHPe5F7D/OWD7XPxiqwZd2W9FFwfWpSRlZf37RYG
-	 srS6aJstdvljL7BzDIjAe+e83+Zxccbag2QfoVMINFcRTrQDlT8QsslAbrA7vpjCVD
-	 qk0qMnyPjZCfx+K4CI27mG4g26owXn79Kpk9W/9zsnetyPwdDsZH4IuTb2n3vEFEGG
-	 TpoeCwVTHWvkW8ac7hMipYe91ieIeVL/O80tadGGJaH9khVE0ojSD6+B/5EjeoKF7v
-	 GJ2pvHUVrqLXQ==
+	s=k20260515; t=1792585031;
+	bh=E11iUFy/860ZlVvILirgoO4aU2Cl/yNZSYMwzdme8vE=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=LvccDvLASiXrO4oxdFpgUrc6hZLZjYKNHH0R/KeL//r0pQDrtogZw6zjm5zOTJwuO
+	 UVtgwTMTbC1B8pZobu26MXlV5jpj++NcGAqh5SZWDLbF8+o7OfkenIbsp50gzbzI39
+	 qSNECRt/bVBlK2avV12RH6EBKuztFxNUOdW0CtXkGS/wZQNnPK6vx31B82J+cGUi9c
+	 QK1bEvk1rfNtZESAhrENAQliVoZEgVnVEf0P3+wWmtbW323HOWemLM2tcodM91vWIN
+	 WYwwAH8si3J8I62MkVS075asmjIC9bX4YLKfK62sBSdLH87b5y1af73mGOT1q5GAQj
+	 Qr0LmZn0ZAtyw==
 From: Lee Jones <lee@kernel.org>
 To: lee@kernel.org,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	Hsin-Hsiung Wang <hsin-hsiung.wang@mediatek.com>,
-	mfd@lists.linux.dev,
+	Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
+	Andy Shevchenko <andy@kernel.org>,
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+	Shi Hao <i.shihao.999@gmail.com>,
+	Rachna Patil <rachna@ti.com>,
+	linux-iio@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-mediatek@lists.infradead.org
-Cc: stable@vger.kernel.org
-Subject: [PATCH 26/28] mfd: mt6397: Unregister PM notifier on probe failure and unbind
-Date: Wed, 21 Oct 2026 12:09:48 +0000
-Message-ID: <20261021121245.3111563-26-lee@kernel.org>
+	linux-input@vger.kernel.org,
+	mfd@lists.linux.dev
+Subject: [PATCH 28/28] mfd: ti_am335x_tscadc: Remove redundant ti_tscadc_dev_get() helper
+Date: Wed, 21 Oct 2026 12:09:50 +0000
+Message-ID: <20261021121245.3111563-28-lee@kernel.org>
 X-Mailer: git-send-email 2.56.0.218.g1ec904b173-goog
 In-Reply-To: <20261021121245.3111563-1-lee@kernel.org>
 References: <20261021121245.3111563-1-lee@kernel.org>
@@ -66,55 +69,60 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-mt6397_irq_init() registers a power management notifier block embedded
-in the devres-managed struct mt6397_chip via register_pm_notifier(),
-but never unregisters it if mt6397_probe() later fails or when the
-driver is unbound.  Once devres frees struct mt6397_chip, the dangling
-notifier block corrupts the global PM notifier chain and causes a
-use-after-free on subsequent suspend or resume transitions.
+Now that ti_tscadc_dev_get() is a single-line wrapper around
+dev_get_drvdata(p->dev.parent), remove the bespoke helper and retrieve
+the parent driver data directly in the child ADC and touchscreen
+drivers.
 
-Check the return value of register_pm_notifier() and register a devres
-action to unregister the PM notifier on probe failure or device unbind.
-
-Fixes: 4e2e7cfec13a ("mfd: mt6397: Modify suspend/resume behavior")
-Closes: https://sashiko.dev/#/bug/linux-edb62fbc-213a-49a2-be55-c002e234e554
-Cc: stable@vger.kernel.org
 Signed-off-by: Lee Jones <lee@kernel.org>
 ---
- drivers/mfd/mt6397-irq.c | 15 +++++++++++++--
- 1 file changed, 13 insertions(+), 2 deletions(-)
+ drivers/iio/adc/ti_am335x_adc.c           | 2 +-
+ drivers/input/touchscreen/ti_am335x_tsc.c | 2 +-
+ include/linux/mfd/ti_am335x_tscadc.h      | 5 -----
+ 3 files changed, 2 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/mfd/mt6397-irq.c b/drivers/mfd/mt6397-irq.c
-index 58645dbd8095..bc7ca22d6f17 100644
---- a/drivers/mfd/mt6397-irq.c
-+++ b/drivers/mfd/mt6397-irq.c
-@@ -179,6 +179,13 @@ static void mt6397_irq_domain_remove(void *data)
- 	irq_domain_remove(chip->irq_domain);
- }
+diff --git a/drivers/iio/adc/ti_am335x_adc.c b/drivers/iio/adc/ti_am335x_adc.c
+index 1516dd332f90..77ea59d6c6b7 100644
+--- a/drivers/iio/adc/ti_am335x_adc.c
++++ b/drivers/iio/adc/ti_am335x_adc.c
+@@ -636,7 +636,7 @@ static int tiadc_probe(struct platform_device *pdev)
  
-+static void mt6397_unregister_pm_notifier(void *data)
-+{
-+	struct mt6397_chip *chip = data;
-+
-+	unregister_pm_notifier(&chip->pm_nb);
-+}
-+
- int mt6397_irq_init(struct mt6397_chip *chip)
+ 	adc_dev = iio_priv(indio_dev);
+ 
+-	adc_dev->mfd_tscadc = ti_tscadc_dev_get(pdev);
++	adc_dev->mfd_tscadc = dev_get_drvdata(pdev->dev.parent);
+ 	tiadc_parse_dt(pdev, adc_dev);
+ 
+ 	indio_dev->name = dev_name(&pdev->dev);
+diff --git a/drivers/input/touchscreen/ti_am335x_tsc.c b/drivers/input/touchscreen/ti_am335x_tsc.c
+index 623546e80668..40ffdec9d207 100644
+--- a/drivers/input/touchscreen/ti_am335x_tsc.c
++++ b/drivers/input/touchscreen/ti_am335x_tsc.c
+@@ -418,7 +418,7 @@ static int titsc_probe(struct platform_device *pdev)
  {
- 	int ret;
-@@ -247,6 +254,10 @@ int mt6397_irq_init(struct mt6397_chip *chip)
- 		return ret;
- 	}
+ 	struct titsc *ts_dev;
+ 	struct input_dev *input_dev;
+-	struct ti_tscadc_dev *tscadc_dev = ti_tscadc_dev_get(pdev);
++	struct ti_tscadc_dev *tscadc_dev = dev_get_drvdata(pdev->dev.parent);
+ 	int err;
  
--	register_pm_notifier(&chip->pm_nb);
--	return 0;
-+	ret = register_pm_notifier(&chip->pm_nb);
-+	if (ret)
-+		return ret;
-+
-+	return devm_add_action_or_reset(chip->dev,
-+					mt6397_unregister_pm_notifier, chip);
- }
+ 	/* Allocate memory for device */
+diff --git a/include/linux/mfd/ti_am335x_tscadc.h b/include/linux/mfd/ti_am335x_tscadc.h
+index 4a048a897cf3..36d365b64fe6 100644
+--- a/include/linux/mfd/ti_am335x_tscadc.h
++++ b/include/linux/mfd/ti_am335x_tscadc.h
+@@ -175,11 +175,6 @@ struct ti_tscadc_dev {
+ 	struct adc_device *adc;
+ };
+ 
+-static inline struct ti_tscadc_dev *ti_tscadc_dev_get(struct platform_device *p)
+-{
+-	return dev_get_drvdata(p->dev.parent);
+-}
+-
+ static inline bool ti_adc_with_touchscreen(struct ti_tscadc_dev *tscadc)
+ {
+ 	return of_device_is_compatible(tscadc->dev->of_node,
 -- 
 2.56.0.218.g1ec904b173-goog
 
