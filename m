@@ -1,56 +1,53 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792584883;
-	b=b/bENVKfK5Z2X9lr0uvK+azvzqltCDBlUkA+sR4/krfcQXWnYAD7yrJa8AVD+KOkXD/m
-	 B4+yDp53HOcHoCm+iIxYBOdGh2ZVxY9WgTr4ylYhAZ4TilsRhJa+cvJwL4CXS1+1iYlwX
-	 t2oWe1j1Ap5QRsQoBAffdKoV+QaFY6gYZpppugIRWZoTlvac6jU6DZQ9HjDViCqzwEQ/Y
-	 VvvM/rrfKJQvA4XCg8T89X0JFmi1kbIYwIzi+H2F0P5f3kh82rT3HHmuZ9er9b65z8xdK
-	 P6O5ngb9vRaNKPwUjaH+t1KoAtLfAGjNrkJYAcKvIxAyVVg5gMGQBgXEgNS2glIBKrg==
+	t=1792584888;
+	b=kcxJEWLfzd1/wy3cNYAG3rqksnZOSkJlwLf4kf7RTgeSWn9MjFUd7xTzsL9YL88QEf3a
+	 U+u+jiL0NnNoCK5tqQwy+moIXDaN6nRulbW9HKiDZe8ieDZyElFcd48aF4T2JwcE17vuq
+	 H0beteDxpiF2MzoXQcqWqgsgw7d8XCPI+Bl25LTI3cS0NUdba5pxVwddl+x5hgKzs8XcB
+	 y21g7FRxqt5iaHQG/ydbycRbQopbTjf0bDHht/QGDrZtFYX+cz9MkdIt3PwXDq+Dyqr1t
+	 pQzjaYlCC5moiBQ1ehu4uiJxGCmLycS7MfZ5kQuVlhfYxugvmSQfeJ+2hQ+TZRNJ9+w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792584883;
-	h=Received:DKIM-Signature:From:To:Subject:Date:Message-ID:X-Mailer:
+	a=rsa-sha256; c=relaxed/relaxed; t=1792584888;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=gqg9AUkKMFzGjca4P8T0j7dfc1PjK21o+l1aCM99D/M=;
-	b=Crz38BjxnIiwQrGBoovOWSEDChlw7/LEQ6XzXLRDZpUCa7H47KMzDmk99Epsz4kPN+bo
-	 HBzl5b4UV9IuAac5V3L33hP6zlo75EVp1ccut/8eUy4MSzPkiNHVtS0EivxVdeYqH03ou
-	 vNG2Hf+OWPuB1vpx3u3R1S5SWs3+JSZ6eUK82SRj6d96p253MFyzGvOAd/8igca+Uq87M
-	 yBbAsVkjv8QDDsb87t0ckBhyI4zAyXNB9rCcViesPFixLOYHrxyTVfvmbLc94yqJ07woA
-	 ffsNV0nHWfuH8rQQVMDBtSpHUtWaGH+YexEaRCfYgwk+SmgZn23x7FSKOSeaAO7Uo1A==
+	bh=S9BWyTKFqPfO+V5O5DmNko7gL56NdP2ZVImcVs8PdHM=;
+	b=ERr5Ee6O6jgstuhmGQMitXOZOtmFk2VXdeX3as4YFwGtWg5rpS+/HjMrjwQgAb10avBy
+	 ORTaJMlfkV0Dw+riav+FWaUa/V2bkm2bI6cvvBibh+QS+1msDQds7JUnJjM8D1fdQa0kb
+	 fP8rwatLn3akEWBnqzb05K0828s5mOSbMsTr9oTcTOYgEQIlyPYOCFTdySyfqRnyLbfJJ
+	 pHexEU7ZqbrM40Gs+rmwWIqfnRI5fiMzzQLTcMCucfzKrhTyJQtXAO0r27D0cbFYNxv9z
+	 V9Na4zbiFd3O1XDHPVfD0qDhdHJ3VlkxEjLTnRYOTclQK+BGKrBqvNBRCWD5JsXrf7Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZR2eirAs;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="T/JlXOhy";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 108F3606A319;
-	Wed, 21 Oct 2026 12:14:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38B84606A31E;
+	Wed, 21 Oct 2026 12:14:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZR2eirAs
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 235A41F000C6;
-	Wed, 21 Oct 2026 12:14:40 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=T/JlXOhy
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0A0AE1F000C4;
+	Wed, 21 Oct 2026 12:14:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792584882;
-	bh=gqg9AUkKMFzGjca4P8T0j7dfc1PjK21o+l1aCM99D/M=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=ZR2eirAseEOQSteV5fGTHuD7jgmvGErUNFgsPw7hP6u+VHrrIKQu8+DCOh7vRJ4sD
-	 SnSRuCBT3N7C3mTYMlFZL7atpBp5s2B8Lm9/LYE+jm09bW68zu8dStZevJ2CDOEaWv
-	 pKY0zWnxPXz5h/onSYAfHBfgoteb0/h0ebEnU9TfV6aC1H8QNGfoXi/XCRP9ZiP6v8
-	 3unjVDVtSrXXDHkHvQZywgMjoDSVmB0qkfOhaSb9pDS7dSMsikMP5oN0Fr7DlvwNIB
-	 CgsQTCkbuHAyUNu7+LVxg4oA3PhW8b0Q6eLfIGaI1L4HzMZZV47UP3Cvzofs0SriFD
-	 cHPlGtHXMh/Ag==
+	s=k20260515; t=1792584888;
+	bh=S9BWyTKFqPfO+V5O5DmNko7gL56NdP2ZVImcVs8PdHM=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=T/JlXOhyflSabvmEL56r3sUhB4uK5sNufsCIRff10Ag5oAF8zmifjnuMqLAJr6z6b
+	 /mS/rYzI73s2mg6apIcpy8e+NvKKFoWY8UWfjneo/jTDls4XXRN0bsksAgiQc65UOq
+	 HXENOy48cFMksJ76uiooVIrwpIIp6AriqxpEM3osFEEOtM76Lj54QaAd/RjmxW7OCo
+	 4W/a2gmLfGOhl831PuTqwP1tVCHUMuX+QMQIbFW0GsOboRx/4acYpHJrpE6Za/VM9M
+	 1f/yBpxVviKgJVRsDEsaEkk+4z2as9QlenEBfLdfedIY3muCl992hM64WBuIxPxMtd
+	 1EJersBgGg9cQ==
 From: Lee Jones <lee@kernel.org>
 To: lee@kernel.org,
-	Linus Walleij <linusw@kernel.org>,
-	Kumar Sanghvi <kumar.sanghvi@stericsson.com>,
-	Sundar Iyer <sundar.iyer@stericsson.com>,
-	Mattias Nilsson <mattias.i.nilsson@stericsson.com>,
-	linux-arm-kernel@lists.infradead.org,
+	Ming Yu <tmyu0@nuvoton.com>,
 	mfd@lists.linux.dev,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 07/28] mfd: db8500-prcmu: Make AB8500 cell and IRQ resource static
-Date: Wed, 21 Oct 2026 12:09:29 +0000
-Message-ID: <20261021121245.3111563-7-lee@kernel.org>
+Cc: stable@vger.kernel.org
+Subject: [PATCH 08/28] mfd: nct6694: Do not resubmit interrupt URB on endpoint stall (-EPIPE)
+Date: Wed, 21 Oct 2026 12:09:30 +0000
+Message-ID: <20261021121245.3111563-8-lee@kernel.org>
 X-Mailer: git-send-email 2.56.0.218.g1ec904b173-goog
 In-Reply-To: <20261021121245.3111563-1-lee@kernel.org>
 References: <20261021121245.3111563-1-lee@kernel.org>
@@ -65,56 +62,35 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-db8500_prcmu_register_ab8500() declares struct resource ab850x_resource
-and the mfd_cell descriptors on the stack and assigns &ab850x_resource
-to ab850x_cell->resources.  Although mfd_add_device() deep-copies the
-resource table via platform_device_add_resources() before
-db8500_prcmu_register_ab8500() returns, the shallow MFD cell copy
-attached to the child platform device retains a stale pointer to the
-expired stack frame.
+If the USB interrupt IN endpoint stalls (-EPIPE), usb_int_callback()
+falls through to the default case and immediately resubmits the URB from
+atomic completion context.  Because a stalled endpoint completes newly
+submitted URBs immediately with -EPIPE, this triggers a tight infinite
+resubmission loop.
 
-Mark ab850x_resource as static and the ab8500_cell and ab8505_cell
-descriptors as static const so the resource pointer remains valid for
-the lifetime of the device.
+Treat -EPIPE as a terminal URB status in usb_int_callback() alongside
+the existing teardown status codes, matching other USB MFD drivers.
 
-Closes: https://sashiko.dev/#/bug/linux-554f3a1f-ca41-4078-ae9e-66d0d7fb4c9d
+Fixes: 51dad33ede63 ("mfd: Add core driver for Nuvoton NCT6694")
+Closes: https://sashiko.dev/#/bug/linux-9d8d1902-140d-4559-b604-76ba76e778a2
+Cc: stable@vger.kernel.org
 Signed-off-by: Lee Jones <lee@kernel.org>
 ---
- drivers/mfd/db8500-prcmu.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ drivers/mfd/nct6694.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/mfd/db8500-prcmu.c b/drivers/mfd/db8500-prcmu.c
-index 6672c55f2ebc..cdfcbeb2a88c 100644
---- a/drivers/mfd/db8500-prcmu.c
-+++ b/drivers/mfd/db8500-prcmu.c
-@@ -2953,16 +2953,15 @@ static const struct mfd_cell db8500_prcmu_devs[] = {
- 
- static int db8500_prcmu_register_ab8500(struct device *parent)
- {
--	struct device_node *np;
--	struct resource ab850x_resource;
--	const struct mfd_cell ab8500_cell = {
-+	static struct resource ab850x_resource;
-+	static const struct mfd_cell ab8500_cell = {
- 		.name = "ab8500-core",
- 		.of_compatible = "stericsson,ab8500",
- 		.id = AB8500_VERSION_AB8500,
- 		.resources = &ab850x_resource,
- 		.num_resources = 1,
- 	};
--	const struct mfd_cell ab8505_cell = {
-+	static const struct mfd_cell ab8505_cell = {
- 		.name = "ab8505-core",
- 		.of_compatible = "stericsson,ab8505",
- 		.id = AB8500_VERSION_AB8505,
-@@ -2970,6 +2969,7 @@ static int db8500_prcmu_register_ab8500(struct device *parent)
- 		.num_resources = 1,
- 	};
- 	const struct mfd_cell *ab850x_cell;
-+	struct device_node *np;
- 
- 	if (!parent->of_node)
- 		return -ENODEV;
+diff --git a/drivers/mfd/nct6694.c b/drivers/mfd/nct6694.c
+index e2957e587d1b..40a29f8e0ff6 100644
+--- a/drivers/mfd/nct6694.c
++++ b/drivers/mfd/nct6694.c
+@@ -201,6 +201,7 @@ static void usb_int_callback(struct urb *urb)
+ 		break;
+ 	case -ECONNRESET:
+ 	case -ENOENT:
++	case -EPIPE:
+ 	case -ESHUTDOWN:
+ 		return;
+ 	default:
 -- 
 2.56.0.218.g1ec904b173-goog
 
