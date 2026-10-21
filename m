@@ -1,53 +1,53 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792585287;
-	b=vbDhyS0Cidf/Kt2A4Cgo3HDbato7Sz9IvBLUn6GEij5+gT57nAlWcHFVON5Vkec2YW2s
-	 oApikVa1IJJbkAIc5hkCe/9j0G4zfgwciQxwRZGm68NB1wCG9KXBGf66EIXMbED8Gu32Y
-	 bdCp1Wvm93l1hJah8UYhciLOKHwEKG2jYYFLiQCRl/I63ThOTsPWj6GHtHrp1FEXObUvM
-	 I+ILhIpEiZM+xJmPS/Tx/uQWgrECasVn1ic9SYzQnO8kEsyS5MpwzaUrqgFRjV1iNghPU
-	 yr7g0i8K7xLMcRtBgbIXCjo/qmWE6jmzhlYeZ+rvmPK1hJnkVSsQ1Y1cVUZBdZ8rznQ==
+	t=1792585289;
+	b=cZVobBWN8Y14j+xwQEcDaWy19Qhba8RvKMYbFKPuBZj/ScCL9GnCLCC7bgMQ0JbuBig/
+	 5FWLeC723kvMQ50ZF1oLtNLhS2oZfo/XlK4UPUhYN9PYKum9948cH9yob4t3dn9n28mpF
+	 P22ZoZuD7DChaHqQVsH8Ks8B5EnohIqNMNwtAuOyLgVJCjlGTyqG8hEImDC97AWfJdBD4
+	 PBl478+8a2JBQMo8s9o5/hx/LpvLjsDj14qyRGZnfHgO4APK1Fshr6GfUwPSDUcgnW6gJ
+	 3WsJagSLNHrz7Kt9foUyQrwbhqkRAsM7uKA4habNydqucuDrHN80hwCMWVB6wAXviCw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792585287;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792585289;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=N2oBfHOJIKAxlVgsU2kxkff214OwNf4PXdRLdzPwDac=;
-	b=BMPeRnn9jhHwHtKjYnzu5xiwiDmVxd1RRnfV+R+B7IrlhiNIHLHmFE1AwQ1Pu+qmQZ4z
-	 UyYXLokS5fnhQW4BzAIP2AyHP6oLmG7+JrqLU/9B84vuEiYHqCJgdKUVNpR+KYPlqZGDj
-	 jNkR4IGgT7ifwAsA8kYDeZqVPEnGYYvhbqYy7UbY6dqagx1bJ/IxCQah94HwzA70v6O7G
-	 fwSpKgJwirIVyOPM5A/+b1vxtVlbPvJPXoRB4uIrEmETukSDqHLaNu8MYhxY5rsc0/uxz
-	 Y0g76bx+coIBTVmjW2LUoOQuZEP8y1AhxW40dQUcPkTvyA7oQQ8FwRv5YQt2cycSPrA==
+	bh=J7Z8rdZNAkOrSp88Iq5ovK9tgcD7oDjpBvFD8qHctCI=;
+	b=jk+FBwSiKSI9mnyGWwIGOnKY65Xr2Bg7oKIHGg4jI7xy7xcydpiG6hQuJJ+7swioK0zZ
+	 D39CC6Smk2k3gNWchd35QS7zkv/U4i1xuPB8eZvizDFvjApaK11nhQt0nAHCYCSj0g0HL
+	 bMuRt8AwfN3Fh0IP0eel0ppRZwnOPUj7DOgRYU55zkEaMq8xPE5IPLMtweeG6LKYgzu1/
+	 MTQ7EfA6MVwfE0R4r4szoQe9eajpu3zLoXkgZUTOn9/pvighJhAJHkN214qs0sEy5QiPx
+	 wRbPSs0PdNH7P+w7kPwoLmbMb956MQH8RI4F3OzoqK2CiC1MW4fWBbvU8qcs5iG+m7g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TqcEYE8H;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=I+QX6aua;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 39532606A31B
-	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 12:21:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDB61606A319
+	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 12:21:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TqcEYE8H
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A7E5B1F000C4;
-	Wed, 21 Oct 2026 12:21:26 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=I+QX6aua
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73A011F000C5;
+	Wed, 21 Oct 2026 12:21:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792585286;
-	bh=N2oBfHOJIKAxlVgsU2kxkff214OwNf4PXdRLdzPwDac=;
+	s=k20260515; t=1792585288;
+	bh=J7Z8rdZNAkOrSp88Iq5ovK9tgcD7oDjpBvFD8qHctCI=;
 	h=From:Subject:Reply-To:To:In-Reply-To:References:Date;
-	b=TqcEYE8HrzipP9UkRsaAvRU3VYte39eECaJMhGmcw7BGN/wDGfsmY3dXcD7IHp4hA
-	 gFKtatbrYk7imW/b5AnQCTRz3Z8XRtREvVjZ8aZZGNru7RTJwsDE/ym/VyhpC5CMwk
-	 k3DNHmPAOurc4qRya56tQG3A+ejE1JGOEhunRjYRPhKxmiCetXZORKW3zW/RjM3rd+
-	 anLl1vAqIOD66kYaxAIfFvh4ek83Vuhj7YZOI0T2kbHfdyAmas56xrn/p1N8MxrdsS
-	 qPwVjBpN1RoFfxv3HxInWXgUL7LiM9uBZoMIg0e9LM1PqhFwAGJ8iOzdZY01nXPC87
-	 GLyTW7JnOIB0Q==
-Message-ID: <sashiko-outbox-180229@kernel.org>
+	b=I+QX6auaNm2FhY35SPylaYfwGQy5ISwottOM5pfdSA4QvCtQG0ywmaj9GNZRUnNO9
+	 VDfErWztyuwCBLXlo0ednRZsWVBW42r4m1fs3smupAJoeTHqukjTd3Bq7kCOCsw06x
+	 0+O5FlfH42IKl870c0mYy80+WDFXgCdXY/lssRPSfOLIULXxQAd51AGV3zv3i/k5/k
+	 G6HQ+5zoTDgJMWfk5DTpX2VlOs3HjLlazyrAZtSFFVgYK8AzMFlYd1R93sbT3MGaVa
+	 ibpbLRGqEQ+XigJFqDUGjWlsFgz9ZGUN39ix1NRph3Xcd2CEVvRH8T2THR+nX/JE7W
+	 WgtwH6JR8ap+g==
+Message-ID: <sashiko-outbox-180230@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 03/28] mfd: ls2kbmc: Cancel reset work on teardown via
- devm_work_autocancel()
+Subject: Re: [PATCH 12/28] mfd: max8907: Manage power-off handler via
+ devm_register_sys_off_handler()
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Lee Jones" <lee@kernel.org>, mfd@lists.linux.dev
-In-Reply-To: <20261021121245.3111563-3-lee@kernel.org>
+In-Reply-To: <20261021121245.3111563-12-lee@kernel.org>
 References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-3-lee@kernel.org>
+ <20261021121245.3111563-12-lee@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 Date: Wed, 21 Oct 2026 12:21:26 +0000
@@ -60,21 +60,21 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> ls2k_bmc_init() initialises bmc_reset_work with INIT_WORK() and
-> immediately requests the PCIe and GPIO interrupts via devm_request_irq().
-> If an interrupt fires and schedules bmc_reset_work before a subsequent
-> step in ls2k_bmc_probe() fails, or when the device is unbound, devres
-> frees ddata whilst bmc_reset_work remains queued, leading to a
-> use-after-free in ls2k_bmc_events_fn().
+> When the MAX8907 device is configured as the system power controller,
+> max8907_i2c_probe() assigns the devres-managed device context to
+> max8907_pm_off and registers max8907_power_off() as the global
+> pm_power_off handler.  However, max8907_i2c_remove() does not clear
+> these pointers upon device unbind, leaving pm_power_off and
+> max8907_pm_off dangling after devres frees the driver state.
 >=20
-> Initialise bmc_reset_work with devm_work_autocancel() before requesting
-> the interrupts so that devres cancels any pending work after the
-> interrupts are freed and before ddata is released.
+> Convert max8907_power_off() to a sys_off_handler callback registered via
+> devm_register_sys_off_handler() so the handler is automatically
+> unregistered on device unbind and the global max8907_pm_off pointer can
+> be dropped.
 >=20
-> Fixes: d952bba3fbb5 ("mfd: ls2kbmc: Add Loongson-2K BMC reset function su=
-pport")
-> Closes: https://sashiko.dev/#/bug/linux-3089d131-9fcf-4753-b183-eebe0a6e0=
-20e
+> Fixes: 9582fdcb6fcf ("mfd: max8907: Add power off control")
+> Closes: https://sashiko.dev/#/bug/linux-d73d6689-d160-447f-9b3c-710fd4c4b=
+6fb
 > Cc: stable@vger.kernel.org
 > Signed-off-by: Lee Jones <lee@kernel.org>
 
@@ -82,5 +82,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261021121245.3111=
-563-1-lee@kernel.org?part=3D3
+563-1-lee@kernel.org?part=3D12
 
