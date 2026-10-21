@@ -1,95 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.84.56
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792602909;
-	b=UhbwxaRz0nXBmdFss7sVKxgMaHYCR30TvoGXjabcosVEapbSBCIEzpKNnfXpyu+scdpE
-	 AeQMqZvZ+UheK0va51vdafeM1upws+ZdVvUHSIc0cZuXJ5cenfFtTpC45dDLdMRu+6SJ3
-	 T+0KcWuYlxOT3tRMU+1Rhoeb2gMEvcRcq9aRMybkAkINZpspivBvf4hMQj9mjP8vGidHA
-	 f0XIeSGKoFKQJ+53CTCf83lv1gGq6mu9MjI54NEke3W3XFMg3fOwawUIuAyHhRFei0wXq
-	 bKEtJ8I3Dzp+4d8EYZE+54hbIiW1Irh1NGeyxW1cWxWjLoyUUMD+M6TJtVgVxcc+Jcg==
+	t=1792603132;
+	b=R0F8oTknU1zCS6jQM2rUKHTxaIRWvO3a7neSH75WiK/5rfcfEgSEk58TEIHrNFnAXkc8
+	 F9KNfhVUJtqLFDZsjmHJ2KKNobblEutKKbalJogGa+m9xYCIqgKweU45NCmu7SvR5NK/W
+	 HMT3wn5XQwVp+GPyOkrfKldVIzSnrNtKammIrYnrbXwZbMxL32HLldarLZ58Bsst/nAun
+	 0YNVal6IOn14EdI2J+Hz6AbkfXJ38hS6oMYCyx8bQE3krM8iexw6i2W/TMhDXbH6Rlp7l
+	 WyLLUhK7YhRFpU3n11OotKiD27mJDhfc6AXFzEEwpRfjpcDYPq/HkE9elPUrmdkTn0A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792602909;
-	h=DMARC-Filter:DKIM-Signature:Received:Date:From:To:Cc:Subject:
-	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
-	 In-Reply-To;
-	bh=Fp5SMzjGwR8UTbVROtVUKvftRt8E5iWuXvuIAwCI39M=;
-	b=zRTnmi1sk8RDSo5vHWEK6/Kr6MRuhmwtxKU/71Qd7gJh4z+UastSljLW8lAft3iPFgcQ
-	 LScscMWwb4xMnduNAImQCFwgajqjpZQw6DLVWDMSPgY9TmpGIPtVjiPXaOjOU96DXdlbx
-	 tGTklakM+yrHod6loFRYquOrkoZSpot/F0rKyQ4HJyA7JD4MRI8WcUmbfYpurBEp6gVQZ
-	 BMZVLHLk/S3P+hND8R3IkxGyIGjov2WbGTWlE58wfi3vX3hgwC6xEZunWDczYzLyzREuS
-	 0BEQClduXsSRYwgUtoiquwbZtAMY+Z86+JDg37el1Wz5ObT1MQOsPUoJj/OhW3w/ARw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792603132;
+	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:
+	 References:Date:Message-Id:X-Mailer:X-Last-TLS-Session-Version;
+	bh=D5rcxsFZdOnBsChcn2OwDSeYiCmUrlk0I9zL6NmVr2E=;
+	b=YjNE+k3QfSkIrmvh54nTeljX5B0qZks14NqeW59u3Dh7H4Ergw4GBO65+KKRFFRJSnqU
+	 FjarlF9SzsxG2+uLdM6wYEfpybdRL/+FHnCLJD4/g1sh7xXaWUNkdmESyAf2ATG+9508q
+	 SntCz8w2HuUE+C1m9J1ZV/9FxnQNcI4NFC/2Txx5wKeAoXszm3Vx3lRCihGADrH7gIrF8
+	 y/z3ie3ar75/nDp3zV8FnfJbsy98LyhrzSEU+GV4Ngnmi8ebccJSZelPMBP9SQsbZDUAK
+	 0RmSyQvsXpXK3ms8S+tBvckqHpSWsccpvnQhnxqcuud3xZd69JSTb8nIHtApjjxOqRg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=lunn.ch;
-	spf=pass smtp.mailfrom=lunn.ch;
-	dkim=pass header.d=lunn.ch header.i=@lunn.ch header.a=rsa-sha256 header.s=20171124 header.b=pB0gOMT+;
-	arc=none smtp.remote-ip=156.67.10.101
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+	dmarc=pass header.from=bootlin.com;
+	spf=pass smtp.mailfrom=bootlin.com;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=ZEyYEg5A;
+	arc=none smtp.remote-ip=185.246.84.56
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB6C7606A32F;
-	Wed, 21 Oct 2026 17:15:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DB6C7606A32F
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1498606A31A
+	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 17:18:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E1498606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=lunn.ch header.i=@lunn.ch header.a=rsa-sha256 header.s=20171124 header.b=pB0gOMT+
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=Fp5SMzjGwR8UTbVROtVUKvftRt8E5iWuXvuIAwCI39M=; b=pB0gOMT+fyr6rtWEChBRV7r7IT
-	jKdlJAhyeHmefQZV1x+Z3xhu/kaR+8JuTGSXi53eInrvAAJE/6KGlf9cZ6sid/bPGmBeJyuiV2G63
-	+baotz7vL9WSkRAtWN4z2lJE8tnFheyeJnkUbqlG/v0qp67qEW6kXutLT+keqS4mDvkU=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1xJZtj-00C8Oq-Fd; Wed, 21 Oct 2026 19:14:43 +0200
-Date: Wed, 21 Oct 2026 19:14:43 +0200
-From: Andrew Lunn <andrew@lunn.ch>
-To: 1579567540@qq.com
-Cc: Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Heiko Stuebner <heiko@sntech.de>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Elaine Zhang <zhangqing@rock-chips.com>, Lee Jones <lee@kernel.org>,
-	Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Richard Cochran <richardcochran@gmail.com>,
-	Ulf Hansson <ulfh@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jiri Slaby <jirislaby@kernel.org>,
-	Jisheng Zhang <jszhang@kernel.org>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@kernel.org>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	David Wu <david.wu@rock-chips.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-	Maxime Chevallier <maxime.chevallier@bootlin.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Vinod Koul <vkoul@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
-	Jaehoon Chung <jh80.chung@samsung.com>,
-	Shawn Lin <shawn.lin@rock-chips.com>, linux-clk@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org,
-	mfd@lists.linux.dev, linux-gpio@vger.kernel.org,
-	netdev@vger.kernel.org, linux-pm@vger.kernel.org,
-	linux-i2c@vger.kernel.org, linux-serial@vger.kernel.org,
-	linux-mmc@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
-	linux-phy@lists.infradead.org, linux-usb@vger.kernel.org
-Subject: Re: [PATCH 14/27] dt-bindings: net: rockchip-dwmac: Add RK3572
-Message-ID: <09c223e6-6872-4bb6-a915-870c3ee614cb@lunn.ch>
-References: <20261022-add-board-ok3572-c-v1-0-0b0fd85a31ee@qq.com>
- <20261022-add-board-ok3572-c-v1-14-0b0fd85a31ee@qq.com>
+	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=ZEyYEg5A
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 3BF9B1A12B1;
+	Wed, 21 Oct 2026 17:18:48 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id EB3FA606E3;
+	Wed, 21 Oct 2026 17:18:47 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 5A90710328D6E;
+	Wed, 21 Oct 2026 19:18:42 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1792603123; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=D5rcxsFZdOnBsChcn2OwDSeYiCmUrlk0I9zL6NmVr2E=;
+	b=ZEyYEg5AAcLne7uj/7uFyelWMlWfSvogrfZvUZynWS6BjP1w4XI1xtk7fskSKVjdBO6Bta
+	trFxXdN3IKVfXZaXBWJfYbTA4JAt1N24Q7iJcb5a9hHN27xXBul9wyKmBzNmLcQXm2QkUo
+	yeuvVRut28K5AuKMIgH100WCmY06rMN+4VhCYBNnXmsAq/fpXNzwjz/0fpaYMHaQGrtAhM
+	9fH523fCP/SgaoCkt9C529yLZ8y38bKLdgHAW3CxaAd6ZsRzr5mXLR9jorcbE8CvQOCLa4
+	TaVcSGxiLcXG5mAnIAmIrzTKGVx7Xs17miVOlp0+FQOcV2S/xdwVVq5RbN74BA==
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -99,21 +59,70 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261022-add-board-ok3572-c-v1-14-0b0fd85a31ee@qq.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH 09/28] mfd: cgbc: Zero-initialise version buffer in
+ cgbc_get_version()
+From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
+To: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
+Cc: Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, 
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+In-Reply-To: <179260069841.1125687.16461366525950099809.b4-review@b4>
+References: <20261021121245.3111563-1-lee@kernel.org>
+ <20261021121245.3111563-9-lee@kernel.org>
+ <179260069841.1125687.16461366525950099809.b4-review@b4>
+Date: Wed, 21 Oct 2026 19:18:29 +0200
+Message-Id: <179260310903.1125687.4328531935004472672.b4-reply@b4>
+X-Mailer: b4 0.16.0
+X-Last-TLS-Session-Version: TLSv1.3
 
-On Thu, Oct 22, 2026 at 12:11:11AM +0800, Cunhao Lu via B4 Relay wrote:
-> From: Cunhao Lu <1579567540@qq.com>
+On 2026-10-21 18:38:18+02:00, Thomas Richard (congatec GmbH) wrote:
+> > If the Board Controller returns a short response to the firmware
+> > revision query in cgbc_get_version(), cgbc_command() can succeed
+> > without populating all bytes of the stack-allocated data buffer.
+> > Those uninitialised stack bytes are then copied into cgbc->version
+> > and exposed to userspace via the cgbc_version sysfs attribute.
+> > 
+> > Zero-initialise the data buffer on the stack to prevent leaking
+> > uninitialised kernel stack memory.
+> > 
+> > Fixes: 6f1067cfbee7 ("mfd: Add Congatec Board Controller driver")
+> > Closes: https://sashiko.dev/#/bug/linux-8c473713-527e-4619-8404-689f28c7654d
+> > Cc: stable@vger.kernel.org
+> > Signed-off-by: Lee Jones <lee@kernel.org>
+> >
+> > diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
+> > index edfac2b60718..7513ba42eb96 100644
+> > --- a/drivers/mfd/cgbc-core.c
+> > +++ b/drivers/mfd/cgbc-core.c
+> > @@ -461,7 +461,7 @@ ATTRIBUTE_GROUPS(cgbc);
+> >  static int cgbc_get_version(struct cgbc_device_data *cgbc)
+> >  {
+> >  	u8 cmd = CGBC_CMD_GET_FW_REV;
+> > -	u8 data[4];
+> > +	u8 data[4] = {};
+> >  	int ret;
+> >  
+> >  	ret = cgbc_command(cgbc, &cmd, 1, &data, sizeof(data), NULL);
 > 
-> Add the RK3572 GMAC compatible using the snps,dwmac-4.20a fallback.
+> Yes Sashiko complained multiple times even if I already explained it cannot
+> happen if cgbc_command succeeds. Anyway I agree that things can be improved
+> but I would prefer in a generic way:
+> - add macros for cmd resp size (eg CGBC_CMD_GET_FW_REV_RESP_SIZE) in all cgbc
+>   drivers
+> - cgbc_command() should return an error if data buffer size doesn't match
+>   the number of bytes returned by the hardware, it is not the case today [1].
 
-Since this is a new device, please don't allow tx_delay and rx_delay,
-which should be considered deprecated, replaced by
-rx-internal-delay-ps and tx-internal-delay-ps.
+I mean return an error if data buffer size is smaller than the number of
+bytes returned by the hardware. Also cgbc_command() should initialize data
+buffer first (in case of it does not populate all bytes after), so no need
+to it from the callers. I also noticed we use cmd and data pointers, but we
+did not check if they are NULL.
 
-We have to keep tx_delay and rx_delay for older devices because of
-backwards compatibility, but there is no reason new devices should use
-them.
+I'll send a series to address all of these issues. So you can drop this
+patch.
 
-	Andrew
+Best Regards,
+Thomas
+
+
