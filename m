@@ -1,47 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.14
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792589736;
-	b=3kIKq5Ag/uOJYM0gjJ3x7z58c/Be7/MwNZ7nhs7YiDSwkbPoP5PmtHx7NTY/HrkPw6by
-	 8FkA5uv2FlmLNKPrhWX3ALkmdGnYJfZ5MB2IJc9hfidI5zpBl33F+54S3y39lWTCGZux1
-	 MDzKmbJlTZ2vd/hIZtEMpM9MmRYL4pAJiYM4u8kxW1b3B3vo/DT41nqJhmoqZrShRWefm
-	 hFK0/oxM+ao2sl6JupzpitRLd4lnpraCEg10IbjWObb8/KtLD5bznQh/dLfbeI3BdaUD1
-	 FIbVZnfHiKL1sCahZXOog73LL6CHSnXwSbJtLzILKikVEGzzdEIwrA8K2kOsspsGiTA==
+	t=1792591057;
+	b=EnHOo8QJYXDkAWpj+Zx9gco4uRq0wN1bdZHIIZIUjE2i0I5mj/SvjScz5UOuCXCqxAHq
+	 UXni4bFgKABJhkV+rn1qFXLl9XCr/MsLcvQxrrjzMD+xs2sazff5kRwb4J4anMrOcRqZG
+	 TLdA20egdB9QynyPnIP2MVX79fTeZHXAwYM9V0YRyR4B7n9oIYSsUobNuSQjoPpaNQt58
+	 V3qqDuOF6sbsAO1O0/vFsuSf5NZbf9uQ3RUq6kqDk2W72A1oT6uROTS+s5shZgjV5OtDG
+	 RAzBac+cSJCStAa4Wruc3tUueN/Vs4T3cscAvqOGph24vz82iKmBzqwRY+0zLy2Gq4A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792589736;
-	h=Received:DKIM-Signature:Date:Content-Type:Content-Transfer-Encoding:
-	 MIME-Version:From:Cc:To:In-Reply-To:References:Message-Id:Subject;
-	bh=YHRQ66J0ycM2BkMm3oppEyXAyznPhNuSwZ7WOkiN094=;
-	b=aamUjZTISZCNHrXlcEAdJX8GI/aH5upg53Si5o9ffYeqxzA6mqAlybs4jmYKYeUOttxe
-	 5+IFevUztyRtjn+aeHWqqSq/573uJZC8SnZX/RPA0QEr0ZrKpzhcVMmNod7S5KNk9xBEF
-	 mn6TNCmGlvzlMX69BHVapCb+41E2u4psnnLPs3ogdAAU7m1TYr0Kj7mlzWtTIfPrMQEIo
-	 8bsWRWu2C3XoND3G7ARgv4VQ4+myfeKFALsJOr5dd0Db9cH7dyx42BScROJoGR8cjwsJ0
-	 7FUoZ7qLlcqql7CExX8Qhis/jfTeRi9wLlFRhudQ6FkmRXRpOLE/Tpn/jhuySvSt3+Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792591057;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:Organization;
+	bh=5W+iT+MkSvp3/KJA4Aq2SUM9unr+BuTaqOzLyaskO+o=;
+	b=J0yHYXyfqRBzxXmi2/g+W3HKucHLPNlykfHV9RQ7PPZ5S4NR9x0oAfHeD8gFAw1p536T
+	 KJkxtEFUyHgXiaBKMoOpkkyZi4i2IW5FJRiztkR2wfDZNLrikqnE8y70Xo2isHRDXpIN/
+	 n8TENHxiwl39T7h6LPnT6XVJ302Jm0dN6ZWsUAUs8SWm24r1QlhOT9DT9J+8wL2HR9uUV
+	 ty9LLgVh5RmMWmq5O+21uUJdZo4UjGTrFen2TU0mk4Zc0mqHacZEcFU0guhpLk1D9s+9M
+	 nM+WGVcWkMVs3izhaNENQcb8tmOB296H2XPw0GHTaFV3pMcVkCWNpD5+TqZUXq2HWLQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ifywKWVo;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=linux.intel.com;
+	spf=pass smtp.mailfrom=linux.intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=UyWaOkPC;
+	arc=none smtp.remote-ip=192.198.163.14
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.14])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7595C606A31A;
-	Wed, 21 Oct 2026 13:35:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A0C2606A31B
+	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 13:57:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4A0C2606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ifywKWVo
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 820451F000C4;
-	Wed, 21 Oct 2026 13:35:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792589736;
-	bh=YHRQ66J0ycM2BkMm3oppEyXAyznPhNuSwZ7WOkiN094=;
-	h=Date:From:Cc:To:In-Reply-To:References:Subject;
-	b=ifywKWVoH6rPr4qW+QJe/z+g+dXbeMzOgD6mVLQ5c/JVLZH4b1jaN4CFcWYgF4sTK
-	 siU/O8aQNcLNKCIFGbwiiu8yUZO+hAdTVuY1TkkdpAfx88Uo961jRZ0D3pchH6o/7x
-	 fBbr3o5jtG6TJVEIAzvjLnCL9dIZhf/WMhXCmEhoh6lXmUqX+BBl09iaVSmHK7DGi/
-	 kZ/xFeMg7Q1bufhhaO2cAoFSn8BzVPyg14XnWk2qLtXP/h3sC91TMbT+4aXv2Ktb2N
-	 p5TadN9ZuCOJ2vaxCwDT9Dpxb7sk8YeQ5dSP6WTDEhkVQsN0t9XWJUOtiCUtmjZyBM
-	 H+idlo9RbuyWA==
-Date: Wed, 21 Oct 2026 08:35:34 -0500
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=UyWaOkPC
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1792591057; x=1824127057;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=Br9EKJwhi7WcbmbtW8Y2iu+BL2cD1Vy7EQOi8VN93i0=;
+  b=UyWaOkPCmeSv+UKjF9lAK/rVkvlNAw3pTsXVz2CsBMs84jdAwZ8MtRhw
+   5bdWcVRRqqJejtL6QgiEiKvZ0qdX6Vj6VAtkzeO53EYZiFuWQIXpOeVOh
+   P3FxmQYprXdKfGgr9cdfz+vrvzf6TpNWd65gVweG6KgoF/63hxMQMISPE
+   IbEu+8d7Nj7hxBU2KM1pF3oMtlvxASDxMojMTSsMNMQoQFW77boi+ypGh
+   WF/eGl8OPBKD8qqW25LqZtQVvQZv8MUbNY7HJFmarReJix0yjDrWDxYzr
+   4guLsMqM/7jQOXh6C8UNvBHEIdmPfDSUfIFKkdcP82UC1GxsVAH2URUfy
+   Q==;
+X-CSE-ConnectionGUID: b+l+H9wQQB+ibrX4sHGwkQ==
+X-CSE-MsgGUID: /OVUjX/nTpiN5HgoQa3oaQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11942"; a="1332674"
+X-IronPort-AV: E=Sophos;i="6.27,170,1787036400"; 
+   d="scan'208";a="1332674"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+  by fmvoesa108.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2026 06:57:36 -0700
+X-CSE-ConnectionGUID: RAMc1K4zRf+2ZuLiFKfmCQ==
+X-CSE-MsgGUID: TgiW3nb/Sby1oVttqXa00Q==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,170,1787036400"; 
+   d="scan'208";a="3115929"
+Received: from cpetruta-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.24])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2026 06:57:33 -0700
+Date: Wed, 21 Oct 2026 16:57:30 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Lee Jones <lee@kernel.org>
+Cc: Binbin Zhou <zhoubinbin@loongson.cn>,
+	Chong Qiao <qiaochong@loongson.cn>,
+	Corey Minyard <corey@minyard.net>,
+	Huacai Chen <chenhuacai@kernel.org>, mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Subject: Re: [PATCH 02/28] mfd: ls2kbmc: Unregister GPIO GSI via
+ devm_add_action_or_reset()
+Message-ID: <atjEyo2VkaJuecMh@ashevche-desk.local>
+References: <20261021121245.3111563-1-lee@kernel.org>
+ <20261021121245.3111563-2-lee@kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -51,58 +83,36 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-From: "Rob Herring (Arm)" <robh@kernel.org>
-Cc: Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>, 
- mfd@lists.linux.dev, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-To: Christian Marangi <ansuelsmth@gmail.com>
-In-Reply-To: <20261021113419.283015-2-ansuelsmth@gmail.com>
-References: <20261021113419.283015-1-ansuelsmth@gmail.com>
- <20261021113419.283015-2-ansuelsmth@gmail.com>
-Message-Id: <179258971128.3919834.16686113021668771376.robh@kernel.org>
-Subject: Re: [RESEND PATCH 1/2] dt-bindings: mfd: Document support for
- Airoha AN8855 Switch SoC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261021121245.3111563-2-lee@kernel.org>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-
-On Wed, 21 Oct 2026 13:34:16 +0200, Christian Marangi wrote:
-> Document support for Airoha AN8855 Switch SoC. This SoC expose various
-> peripherals like an Ethernet Switch, a NVMEM provider and Ethernet PHYs.
+On Wed, Oct 21, 2026 at 12:09:24PM +0000, Lee Jones wrote:
+> ls2k_bmc_init() unconditionally calls acpi_unregister_gsi() immediately
+> after requesting the GPIO interrupt via devm_request_irq().  This
+> prematurely disposes of the active IRQ mapping while the interrupt
+> handler remains registered, breaking the GPIO watchdog interrupt and
+> causing a use-after-free when devres later frees the disposed IRQ
+> descriptor on probe failure or device unbind.
 > 
-> It does also support i2c and timers but those are not currently
-> supported/used.
-> 
-> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
-> ---
->  .../bindings/mfd/airoha,an8855.yaml           | 176 ++++++++++++++++++
->  1 file changed, 176 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/mfd/airoha,an8855.yaml
-> 
+> Register a devm_add_action_or_reset() callback before devm_request_irq()
+> so that acpi_unregister_gsi() is invoked only after devres has freed the
+> interrupt.
 
-My bot found errors running 'make dt_binding_check' on your patch:
+...
 
-yamllint warnings/errors:
+> Fixes: d952bba3fbb5 ("mfd: ls2kbmc: Add Loongson-2K BMC reset function support")
+> Closes: https://sashiko.dev/#/bug/linux-cab8bfb6-4077-46f3-a173-ac2e2042cf66
 
-dtschema/dtc warnings/errors:
-/builds/robherring/linux-dt-review/Documentation/devicetree/bindings/mfd/airoha,an8855.yaml: Unresolvable reference: /schemas/net/dsa/airoha,an8855-switch.yaml
-Documentation/devicetree/bindings/mfd/airoha,an8855.example.dtb: soc@1 (airoha,an8855): ethernet-switch: False schema does not allow {'compatible': ['airoha,an8855-switch'], 'ports': {'#address-cells': 1, '#size-cells': 0, 'port@0': {'reg': [[0]], 'label': ['lan1'], 'phy-mode': ['internal'], 'phy-handle': [[1]]}, 'port@1': {'reg': [[1]], 'label': ['lan2'], 'phy-mode': ['internal'], 'phy-handle': [[2]]}, 'port@5': {'reg': [[5]], 'label': ['cpu'], 'ethernet': [[4294967295]], 'phy-mode': ['2500base-x'], 'fixed-link': {'speed': 2500, 'full-duplex': True, 'pause': True}}}}
-	from schema $id: http://devicetree.org/schemas/mfd/airoha,an8855.yaml
-Documentation/devicetree/bindings/mfd/airoha,an8855.example.dtb: /example-0/mdio/soc@1/ethernet-switch: failed to match any schema with compatible: ['airoha,an8855-switch']
+Don't we use the official Sachiko's email in Reported-by tag?
+Reported-by: Sashiko <sashiko-bot@kernel.org>
 
-doc reference errors (make refcheckdocs):
+> Signed-off-by: Lee Jones <lee@kernel.org>
 
-See https://patchwork.kernel.org/project/devicetree/patch/20261021113419.283015-2-ansuelsmth@gmail.com
+-- 
+With Best Regards,
+Andy Shevchenko
 
-The base for the series is generally the latest rc1. A different dependency
-should be noted in *this* patch.
-
-If you already ran 'make dt_binding_check' and didn't see the above
-error(s), then make sure 'yamllint' is installed and dt-schema is up to
-date:
-
-pip3 install dtschema --upgrade
-
-Please check and re-submit after running the above command yourself. Note
-that DT_SCHEMA_FILES can be set to your schema file to speed up checking
-your schema. However, it must be unset to test all examples with your schema.
 
