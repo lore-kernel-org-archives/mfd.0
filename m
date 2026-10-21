@@ -1,55 +1,80 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.171.202.116
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.15
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792600713;
-	b=plyHE4rIpBTN2y8eSE9ZnmXdm9KLE3Dxpt09h96joAZE8/bRSoRG58Yx4pBkQiO3b+hs
-	 TmM8/0EXPGuCnPixgIxOaKDiepGtIzxSxr07shsrnA491/rTsLYf9f0UJc1llelahVp3b
-	 GHbtjbEg8JeOVDqQTccfUagBScV7de+cfSrst57ViI6ljKXXqBBWEJR37T2sLnX/TNFsV
-	 MgVS3QRV9QCEFkyqVaChOmiE8+32DEvk26oPl4KgKR/5sRSouOGhOxYKIrmmHqb/DEymb
-	 QRPlg53QYUt8KqBE3qD4VudJWUVKqafHTVKLYWIg5rAqL3oZLQP8d0PnftPoyO06C/w==
+	t=1792601401;
+	b=tSTRkEIpCPrD+GUQw6xQcY1D5bO6fXxygMJ0KmMmjEedw7XbqK8A8vV7L98d7KHMq9U6
+	 ddvT39gtf/ePde/4LckXBFqTgQzIaY/2gcyluUJUu0Ljcna/ZfeXizcjFDaww2NAfHoB2
+	 z2gbsTQeLxqfWvcFj47JEy6MuBPgx6OFQaD9bg2jg7M07X+hzOPmgKP/AOL3jx/Bz3AVw
+	 o6JdlC0xxTqA61v4pG9Ut3f1ANkPyUY0YkZmi4DiZL4Tg/R95O9TBe3+sFrfW+/4iPRu6
+	 F01NtnqQG0G0SFGzJjyrmBZZTlDyeyQk88PginydWct8snx8f8E16QiQ76AaCGLoR4Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792600713;
-	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id:X-Mailer:X-Last-TLS-Session-Version;
-	bh=C2WIUAy49gs6vfvzT/Qt5wlTvvXfJdz0ejU2p9NvaAc=;
-	b=MSuLuim+sf2sbLw/W3ygtx+c/ahfnfA5l8jlNb2YTb9Dj8/PtbEbQL1H1LikWCxluiPX
-	 fOAMg3Jtss76FMk/FFhMSRvwbP83ncpnur8gijmDy5vPnD9ncTc9EAPr27oK/NL31Y7p7
-	 AguVzNKR2PLsiVYNTdzePdBMQDKbFcqVNyUEI/+bmQdvcFQkrBHbmakfUlN/WYMGKsBf9
-	 C91/Q61UdhkGyupYpTMSg8692HjhNza9jL/7b+b00NgeQs27WsSVq6wbbUMcosdgW7L6q
-	 +S3WZZ25/cgYqu8wyKqHUgdIsPD1eObyEWYFoMhLL4tTCK4Fj7tv3Ksg+B2jbIDFkRg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792601401;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:Organization;
+	bh=pbQHvtP2agFCDLvgA6a8a1Qn0DguhjOVQOQh4hVyc1c=;
+	b=wwADyYAWTo9+4/LxFgDWuO1qKSWp62sMHh8eR0LFHnJdJsjRpQSFWyPCnABDvNTNEBJ9
+	 4MaLkiMEReS3EEW61ys6zmfYjIoQxlR1gX/UE8fOAeRRDt0QwK3ybwX6QqmXuQ8N3dULH
+	 yv8oc3Lu+tzM+VYvwb/d6JsmShXcrXDRu7s5uBhEYOs4tjbW8UBJYxavyeujUALQgOZex
+	 N41WWoTrtdDXpEyZDo84hNzCJXsxEPm74QwuGE/63zPFtCX5wbPTXuYgHJxmvQehfBZOm
+	 ABVTXOK5DIAc0fhfVINYB6lhhyrJeGILaEkmsYDx9SBs2jCahnk94Y1PEIaxojKTh6A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=bootlin.com;
-	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=VugT8O2x;
-	arc=none smtp.remote-ip=185.171.202.116
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=linux.intel.com;
+	spf=pass smtp.mailfrom=linux.intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=TtL3b4Qz;
+	arc=none smtp.remote-ip=192.198.163.15
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3C41606A319
-	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 16:38:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C3C41606A319
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6F2E606A319
+	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 16:50:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D6F2E606A319
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=VugT8O2x
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 00FE0C5CD40;
-	Wed, 21 Oct 2026 16:39:28 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id E3392606E3;
-	Wed, 21 Oct 2026 16:38:28 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id A3ED2103289F5;
-	Wed, 21 Oct 2026 18:38:26 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1792600707; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=C2WIUAy49gs6vfvzT/Qt5wlTvvXfJdz0ejU2p9NvaAc=;
-	b=VugT8O2x9nWAg/rEXGCa17ZUQ6lahSz+Sl2WieyEiJ5IxxzVbP6J1H5lLIC78yFSJKFVHh
-	oPSXnqtRW6U6/nqUSg0ivNHBFQTeSYF5EU7FNHOkPf4vAUD528T4grFxWzoUVHgGDijnff
-	DiJoyGIa83mUIW5AR9CTfjl2gJaPFz4wEX1++7CmOMQz6/LyYTM7M3Wur1puttKXJCkCi7
-	u9HrDApj4JeLpKGr3HDAzggZ1bt5AbjOImw6jDskwkRyQewuTJS8FmItZzhKTMTGUw6vzV
-	ltaAmn17PKXcbCSe/4MOK+V6JD4eUlg3jwtQE7HKNKQe5sYwcnhdo9sa87AJAQ==
+	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=TtL3b4Qz
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1792601401; x=1824137401;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=RsaIR9ZqUTnA7KEwP2H9857dgRToTlZ4wBXaAm3lM58=;
+  b=TtL3b4QzHR3c0pbIr/VYY2tYHXKcfsdUqkZxeP+1QsmelH85guwdi5NZ
+   +cZ+0M0B905NL0V3/KAyJcszmTfkFzHSncI5CRoJKL7vokPsE0CWjrd/s
+   8+gyGlWF3yXEtEThUiUsYgmCW8Uag4gufBFSpVrKH0SfKKCuRXHwyb6Sd
+   FP4pj+22OAvVQjNgcykx00vgr1DXsMbe8vzU2k2MR3Hp06RJjvs+6MiCi
+   GB5jCkAIuwEERmWxJQpip7RDJzrT5tPgH0iNawRZEJtkhMgNfG4kdgmpB
+   Cg7DHDGHfkDzmhFHv3gdVZn9edDbAYnnRxZWiMvz/T7UtR7usl4+ZADP1
+   A==;
+X-CSE-ConnectionGUID: WkeSK5/VQ4ODrf0JXKJwAA==
+X-CSE-MsgGUID: 3sOE/MUoS3ibjSua7ElrEg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11942"; a="1345891"
+X-IronPort-AV: E=Sophos;i="6.27,170,1787036400"; 
+   d="scan'208";a="1345891"
+Received: from orviesa008.jf.intel.com ([10.64.159.148])
+  by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2026 09:50:01 -0700
+X-CSE-ConnectionGUID: iChk2JnlSxK8bI30Mvmjrg==
+X-CSE-MsgGUID: ZR+AyCOiQgy61ICoW35aQw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,170,1787036400"; 
+   d="scan'208";a="3015296"
+Received: from cpetruta-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.24])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2026 09:49:58 -0700
+Date: Wed, 21 Oct 2026 19:49:56 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Lee Jones <lee@kernel.org>
+Cc: Mika Westerberg <mika.westerberg@linux.intel.com>,
+	Heikki Krogerus <heikki.krogerus@linux.intel.com>,
+	Jarkko Nikula <jarkko.nikula@linux.intel.com>, mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Subject: Re: [PATCH 11/28] mfd: intel-lpss: Remove registered MFD child
+ devices on probe failure
+Message-ID: <atjtNCBf-geYL3yY@ashevche-desk.local>
+References: <20261021121245.3111563-1-lee@kernel.org>
+ <20261021121245.3111563-11-lee@kernel.org>
+ <atjFroYp0Cp7eN8c@ashevche-desk.local>
+ <20261021163333.GH1795367@google.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,64 +84,45 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 09/28] mfd: cgbc: Zero-initialise version buffer in
- cgbc_get_version()
-From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
-To: Lee Jones <lee@kernel.org>
-Cc: Thomas Richard <thomas.richard@bootlin.com>, mfd@lists.linux.dev, 
- linux-kernel@vger.kernel.org, stable@vger.kernel.org
-In-Reply-To: <20261021121245.3111563-9-lee@kernel.org>
-References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-9-lee@kernel.org>
-Date: Wed, 21 Oct 2026 18:38:18 +0200
-Message-Id: <179260069841.1125687.16461366525950099809.b4-review@b4>
-X-Mailer: b4 0.16.0
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261021163333.GH1795367@google.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-> If the Board Controller returns a short response to the firmware
-> revision query in cgbc_get_version(), cgbc_command() can succeed
-> without populating all bytes of the stack-allocated data buffer.
-> Those uninitialised stack bytes are then copied into cgbc->version
-> and exposed to userspace via the cgbc_version sysfs attribute.
+On Wed, Oct 21, 2026 at 05:33:33PM +0100, Lee Jones wrote:
+> On Wed, 21 Oct 2026, Andy Shevchenko wrote:
+> > On Wed, Oct 21, 2026 at 12:09:33PM +0000, Lee Jones wrote:
+> > > When intel_lpss_has_idma() is true, intel_lpss_probe() registers the
+> > > iDMA64 child device via mfd_add_devices() before registering the host
+> > > controller cell.  If the second mfd_add_devices() call fails, the
+> > > err_remove_ltr error path returns without calling mfd_remove_devices(),
+> > > leaving the iDMA64 child device registered after the parent's
+> > > device-managed resources are freed.
+> > > 
+> > > Call mfd_remove_devices() on the probe error path to clean up any
+> > > previously registered MFD child devices, matching intel_lpss_remove().
+> > 
+> > Good catch!
+> > 
+> > Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+> > assuming you will add Reported-by: Sashiko...
 > 
-> Zero-initialise the data buffer on the stack to prevent leaking
-> uninitialised kernel stack memory.
-> 
-> Fixes: 6f1067cfbee7 ("mfd: Add Congatec Board Controller driver")
-> Closes: https://sashiko.dev/#/bug/linux-8c473713-527e-4619-8404-689f28c7654d
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Lee Jones <lee@kernel.org>
->
-> diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
-> index edfac2b60718..7513ba42eb96 100644
-> --- a/drivers/mfd/cgbc-core.c
-> +++ b/drivers/mfd/cgbc-core.c
-> @@ -461,7 +461,7 @@ ATTRIBUTE_GROUPS(cgbc);
->  static int cgbc_get_version(struct cgbc_device_data *cgbc)
->  {
->  	u8 cmd = CGBC_CMD_GET_FW_REV;
-> -	u8 data[4];
-> +	u8 data[4] = {};
->  	int ret;
->  
->  	ret = cgbc_command(cgbc, &cmd, 1, &data, sizeof(data), NULL);
+> Roman suggested Closes:.
 
-Yes Sashiko complained multiple times even if I already explained it cannot
-happen if cgbc_command succeeds. Anyway I agree that things can be improved
-but I would prefer in a generic way:
-- add macros for cmd resp size (eg CGBC_CMD_GET_FW_REV_RESP_SIZE) in all cgbc
-  drivers
-- cgbc_command() should return an error if data buffer size doesn't match
-  the number of bytes returned by the hardware, it is not the case today [1].
+But Closes goes with Reported-by. The Submitting Patches says:
 
-[1] https://elixir.bootlin.com/linux/v7.3/source/drivers/mfd/cgbc-core.c#L194-L195
+"The Reported-by tag gives credit to people who find bugs and report them and it
+hopefully inspires them to help us again in the future. The tag is intended for
+bugs; please do not use it to credit feature requests. The tag should be
+followed by a Closes: tag pointing to the report, unless the report is not
+available on the web."
 
-I'll prepare a series if you are okay.
-
-Best Regards,
-Thomas
+Okay, you can argue on 'people', but the established practice includes 0day LKP
+bot for a long time.
 
 -- 
-Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
+With Best Regards,
+Andy Shevchenko
+
+
