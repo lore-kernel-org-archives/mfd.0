@@ -1,86 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.41
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.54
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792579955;
-	b=awNMjjmxvuwl4II4jUOuy8ZnKNMLz5YCxowBwcyBIwwhKxmscHZlc8rHBp3/N8TlbHj5
-	 GauZbR2AjW+Yic/TqNiM8PthLSO7ninVrEhBFPu0GZg9T65XZ7PSXsNY44iz/GMGAfawQ
-	 6rt1ueodV2yv12hJCSdaorIwsM8iDzJgve7R5LQWumzjwhYTSx9QO4CJdp4BtXu1CeTH+
-	 WtMnatG3mOaddmJVn4+vtjHPJP6Ux/IwfPaZaBo1MJ4AKZeqGyHjNNUx0L7OsZGQtrOIj
-	 9+aJTWNvwBWWXQ6VjFsRVXwRsHqfV0yCG5SS+YeJgifjL93OAKeunlS+1cNMZgLrZbQ==
+	t=1792579975;
+	b=YG1buauoEz5ju/g+1BY3BwBzzt37tOrQHTkyYy8aUUs0SoHEg6HYde1SkkUNyMi2CfO9
+	 NBxFZ+E22DQgJp2ZPqfDSKgbNUznjn/hCVQXJR63XnohjdzQljplSEd19WuGIvQcuJhYq
+	 F2OLd5EaxPLyLRalXDEby0NAzON9J7zQUCXA1w0G7YMdZXLmxeyIRx+UnmljcHwl1Z2p5
+	 1ojUcOsQeqAR4V2zPJINpABztuB+EgT/O0FINCTk8nv1BV6qsNjDWh5RgF0QQiPZhv6Z1
+	 3yefdaV8zrL0kvu6BmO9/oRv7pmOAaevkP/TUrjX4RAU+2Ve2slhf7QOFzNlvwwaOcA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792579955;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792579975;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=F23t8iLTcn/LXqN2lEEgBTUnPAkeyO0taUnuYVGHe48=;
-	b=bjzJ9bMpbFry7+mg7yqkJeYuTU0JHYJR7XgIkANqyAQmZBrbs70B5SD9tBVlGoh1Ei9H
-	 tvg1NBRNhvDQ0tiBTWXEG4Z6qJOEP4rfSSM411Wl02FaFrKfWZa45E69M9XJey6jvlUqS
-	 WQ1Nh29hh/bSJDddFYQmfHaxGyEKrlq7v3JQ2xnEfVDGJAGv1Hn0ZDg+XxdwWmwZn6avd
-	 wXUu1StO1Ib49UAWlaHyjCL5wpt94KVPJSb+g+eng7+5wStu6STKb6q6215S98dg7Wbbl
-	 UoERoo82PHutx26/+YOMoUgUC9AukQlB7bERkLm9shXIPIPwYq7JmT63mJJNrh+0o+A==
+	bh=khjjDBK0J2xOtnMH1muymGK2fwTqPXy0k/z60K/0+xY=;
+	b=hsdnrMt/1RwD30X4gji0lN+CZgPPqsa5sIQj83C6MKU1Tgq4qXToU8WuCconMwmy5PoN
+	 Gmn4kYVBLAuNR8XsZqW3MvtKMp616DB4k5vDkIavnQMeFJVrpQ3Fg8nJ4AHseJ9YBG1EC
+	 OL2QyX0j3/EdYAosX+MU3Rp+NuDGxK+c+AuvurLxj2iwE/J3QzoL5FphUbCnsk00iFk8v
+	 ZwdbiAAc7TsqlnK0eZWZ8IylLRT8y1ZuzgUI8r0PtN5UxgnsqG9pGObhxcSWGO/t8lAOi
+	 M3yWcWcmKM2PmcCQRGsPee3e0tRzmy99Q4vQvHp6JUsuU0xOXqOdhYtiOhLDsRgBqow==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=Du3b4aiu;
-	arc=none smtp.remote-ip=209.85.128.41
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=XEu2NnXy;
+	arc=none smtp.remote-ip=209.85.128.54
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48EF2606A31E
-	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 10:52:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 48EF2606A31E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 263E3606A31E
+	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 10:52:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 263E3606A31E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=Du3b4aiu
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4a018dc1f98so4750435e9.3
-        for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 03:52:35 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=XEu2NnXy
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4a1ec92f655so6494435e9.0
+        for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 03:52:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792579954; x=1793184754; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1792579973; x=1793184773; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=F23t8iLTcn/LXqN2lEEgBTUnPAkeyO0taUnuYVGHe48=;
-        b=Du3b4aiuthq7DxwayglaSa5WarLu3GqC/bYdUlWevVXeur73cmA0ymqHRo0sgkKQ/V
-         B2k3lYWNLRx7+KCaAWvNcA1A4lHQP4/Xvd2iNrpjZl9otdtDnirAwq/QQi6LW2xZMZk0
-         2R8HTpHCYkk3IRv/nMbjGUqfXgz3nf1NtRROYUQkXQhAO7JQRQu7jyz83eLsYsFIIdP7
-         U66uxPOokSXyTwNfNj+R+wLvkzTQ9+vLGIUATEbkgnqPG5GLpRQ18TdSmrA9BjO2PJhA
-         /2s7NRKBhCIJhWj6MJG9dYSYT/QU3V6eoWWJv2WLYwzxQIiEJuKbECeF0fiSqTRpiCVX
-         lLDw==
+        bh=khjjDBK0J2xOtnMH1muymGK2fwTqPXy0k/z60K/0+xY=;
+        b=XEu2NnXy7gkAMhZONgGEoifpVtgzDq6g1UQzrqTR2cAMiz3kZsDV9aBtSAmFfgvkd+
+         eAHkgc02zHj+E620M8M4+FUMNjHyh5EDwcOKU2jD9VQwtRGYnKDHyADJl0fKrZIFFqb4
+         32DEHdOowFmeg+4bS/tqvaflnb8e5rbVZR+PNYgmpy2qacNX1gEFvxpxYc+yLbl86D1d
+         Hz3RWm2eyicc8aE2Jc9bGSQSy9Zky+MtZtkxLri4kGZfe9VN2ADyVAKbkibBNJSfjFEJ
+         6SBUMOfIyAtJPsyP62UbcomK0DPz81wwDoVh7XTKW+cgaLRAn7jgbKiUBUYvUbUe+CN0
+         vBdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792579954; x=1793184754;
+        d=1e100.net; s=20260707; t=1792579973; x=1793184773;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=F23t8iLTcn/LXqN2lEEgBTUnPAkeyO0taUnuYVGHe48=;
-        b=zskCsWByZnCZF5WvHhVLFg/3aMhHeb03I1UYEEDSXyMfjz63jFUWSDYw86dln7Y82D
-         7YxwoE0MAKC9Y0qPpiyKbyAiWAQribihXeWcWvEm5y39g2bAur5OImhrtv5WMzuSdL0Z
-         +qslNc8ix1f0zmJTFhKMQH2mEhu03TG3aqmui484V33V/vxUaMcqDC4i3I6HrWPR9BHq
-         ZVQl/ICI067MHesYZYHhAczg/+n0PEJddak2Zyw6Nf4o0OjydFdwTifWnmdG+nYmMpTD
-         1BnJ7nLus+ra+QvTcpVyo6Tuq/Hog1kj63KKxVltx6k92FguyU2ouzQ2BsEbuzbdjQNt
-         3b1Q==
-X-Forwarded-Encrypted: i=1; AKwUvByJmXi9rijltH0nkBsL4E2EiqXw4lSGk0uEEGeBS9OWBJz10/tv5C6Y18jKZ7Sox2WCo0k=@lists.linux.dev
-X-Gm-Message-State: AFq9FYIIZ+LaSkEjNdBZK+alzxvibXmNPrt/rLRRHJzOpgpSyGOS0tTj
-	y2kAWO/UgUtJrP3S5+WUUbmZuqHlSHDU80LmQnsqpwaXpdITyjpQH6nV
-X-Gm-Gg: AYBFou0nSj5Lph+NldZjcFmJaX/wGQKlxPqjdTdx0LsAs4nO31FzIhieYOzzSpfbtHR
-	IGInifZkof21xU4myHQlZs7pfIhxQkKGOBc2g4Khqps0yK+C2RyTYsL4hfhRj668rP4XyHS1J+N
-	egISPTEa/QU7LHZcnKhBm7yXykoAGJnk6TWAQ1Gaj98IHz6McOQTydTD0GlKwnay2ulv+f2cD7e
-	QbpCnr47RF1u1QBCi2orKdzV72mhEM0yzb54CSvuuHI8gAKS9aowdtb+J8W2OzZMJmHqOoirUvY
-	2KvhEIvP1yyFE9hx5g+8xd04hAHH2d4wrvy4xipuauAZ3UqCzL3MuIjaPv9gm2DBIGUAuSG5jNz
-	XSIN5MOcwLVcvxRmqWz6V8jpxxf3JU/kt9R5txlY7BGVgiyMuxHliMzM+hfOwYMt1Z52G9/HRg4
-	82i96bCIgiTWjnPvEUJowcFMuEVJTeo5Fh8C1boYkDHeKJ8dkYVB4NfLrL12HWOKkS9YnE5iE7m
-	C6mrKknnjQdMF28oI3gOM5lcNsbL92ReTpue7DOthDd5aN7/Zc=
-X-Received: by 2002:a05:600c:628d:b0:4a1:f377:5c6e with SMTP id 5b1f17b1804b1-4a1fdd20a24mr31171585e9.7.1792579953510;
-        Wed, 21 Oct 2026 03:52:33 -0700 (PDT)
+        bh=khjjDBK0J2xOtnMH1muymGK2fwTqPXy0k/z60K/0+xY=;
+        b=Id5Dh+F3dkrFsgk5sBGUfke52Bp1/gBz8dx3ataI4apLWHlBfTVYlaS555Iq1u0JSi
+         hbxBlTMdMyHyqpi5RxPfXfmpu3HIiSgE6Z1mUpLT+Yl2AbDHPWe7eaquFyrEXCeGTk+d
+         bOSPJdYfbPh/e1Um+xmVvhQo24pVOFqCVGIyqZXYTan3XFHQQh9pLOz+N7ps2+mCjMeZ
+         cHYpwDsOy5RycKi84BJC+AkgB2LkIL6M92a2dwcg8Nc7HrzqyNyiXZBN5hqOtusOwVkp
+         krGNTn4aJ5aXrVkGcvN++GQUrbvewExsVlFuEVHyyYNaCBnf+D7VlGN5KY6G1jmeNZ0s
+         /3Iw==
+X-Forwarded-Encrypted: i=1; AKwUvBwV1qy9VKIdEtyjB9x+a5+x0lwPFMXMYtPF2xGCoQ/0jgGD35HhBvVvwtek6jUIFJ57UrQ=@lists.linux.dev
+X-Gm-Message-State: AFq9FYK0Q/TK1ZOyd0gKYYROiJFxuSvcHXjFWHQOu9Zfl2/1XYOhBaFr
+	Lw+h1YquxUZmNFo41w06+NpOs6juZw7FkuuWEqpavy9fbnrVFj8JTkzD
+X-Gm-Gg: AYBFou3E6HNNBIaWq880akLi7ze0mvBa3penG4BJmsg4XE0p67yk+s0lrw7QYYrSlRI
+	pgW9K3B/iAQGUGEIkicqbSgkWuzBygMPDatqyiqFOs8rrLjTTkCbK0jSuXMx8eIDzMrJGjemF9D
+	0FDKMt9UkZkTZdRr0Jfnv/WvnJiZShlybJO+LGlxj556h/3Et8ZkNW2uubEiPOge0C2D2TfY3Gf
+	UnurcFn+DfaiQYHsODKZLIX5Y4J4VVK6MDBjBvERbJIAoEQBXGM6mKe5bqBwKPcthl3mpKV9+TQ
+	3BE5j/lzZSuvKtHPTIEYjf1y0sRKmyz36ucokooiVzCi30t04m5qKIn3kR6e42mK+XhWjlHH8Bn
+	9eU6yhOsF+8Gn3NypcTx1tlfZRV2z8VBl4kIUFRcMlFjGR0jPtRnw0aq9PNp+VSdYi2eF5tXCDp
+	fSH82OJKdMdDAcYJguflNpu43U07td88mc8i2VoF09Rc2i5NE9bhH5qQ2TN/QS5LWl4QEoYxvsr
+	gxUaYwg60Qv2BXdN1HcooZ97s1FGKTAcVeTQWeAgoTSythS0NQ=
+X-Received: by 2002:a05:600c:a0b:b0:4a1:efbe:529c with SMTP id 5b1f17b1804b1-4a1fdd2443bmr32691975e9.12.1792579973272;
+        Wed, 21 Oct 2026 03:52:53 -0700 (PDT)
 Received: from luca-vm.lan ([154.61.61.58])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1f2d6e2dbsm153388305e9.13.2026.10.21.03.52.32
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a1f2d6e2dbsm153388305e9.13.2026.10.21.03.52.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Oct 2026 03:52:33 -0700 (PDT)
+        Wed, 21 Oct 2026 03:52:52 -0700 (PDT)
 From: Luca Leonardo Scorcia <l.scorcia@gmail.com>
 To: linux-mediatek@lists.infradead.org
 Cc: Luca Leonardo Scorcia <l.scorcia@gmail.com>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
 	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
 	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
 	Rob Herring <robh@kernel.org>,
@@ -105,9 +104,9 @@ Cc: Luca Leonardo Scorcia <l.scorcia@gmail.com>,
 	mfd@lists.linux.dev,
 	linux-arm-kernel@lists.infradead.org,
 	linux-gpio@vger.kernel.org
-Subject: [PATCH v11 3/9] regulator: dt-bindings: Add MediaTek MT6392 PMIC
-Date: Wed, 21 Oct 2026 12:47:21 +0200
-Message-ID: <20261021105109.199886-4-l.scorcia@gmail.com>
+Subject: [PATCH v11 4/9] mfd: mt6397: Use MFD_CELL_* to describe sub-devices
+Date: Wed, 21 Oct 2026 12:47:22 +0200
+Message-ID: <20261021105109.199886-5-l.scorcia@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261021105109.199886-1-l.scorcia@gmail.com>
 References: <20261021105109.199886-1-l.scorcia@gmail.com>
@@ -122,166 +121,251 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add bindings for the regulators found in the MediaTek MT6392 PMIC,
-usually found in board designs using the MediaTek MT8516/MT8167 SoCs.
+Use the MFD_CELL_* macros to describe sub-devices. No functional changes.
 
 Signed-off-by: Luca Leonardo Scorcia <l.scorcia@gmail.com>
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 Reviewed-by: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
 ---
- .../regulator/mediatek,mt6392-regulator.yaml  | 112 ++++++++++++++++++
- .../regulator/mediatek,mt6392-regulator.h     |  23 ++++
- 2 files changed, 135 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/regulator/mediatek,mt6392-regulator.yaml
- create mode 100644 include/dt-bindings/regulator/mediatek,mt6392-regulator.h
+ drivers/mfd/mt6397-core.c | 207 ++++++++++++--------------------------
+ 1 file changed, 67 insertions(+), 140 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/regulator/mediatek,mt6392-regulator.yaml b/Documentation/devicetree/bindings/regulator/mediatek,mt6392-regulator.yaml
-new file mode 100644
-index 000000000000..d74721d8f2ff
---- /dev/null
-+++ b/Documentation/devicetree/bindings/regulator/mediatek,mt6392-regulator.yaml
-@@ -0,0 +1,112 @@
-+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/regulator/mediatek,mt6392-regulator.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: MediaTek MT6392 regulator
-+
-+maintainers:
-+  - Luca Leonardo Scorcia <l.scorcia@gmail.com>
-+
-+description:
-+  MT6392 is a power management system chip containing three buck converters and
-+  23 LDOs. All voltage regulators provided by the PMIC are described as
-+  sub-nodes of this node.
-+
-+properties:
-+  compatible:
-+    items:
-+      - const: mediatek,mt6392-regulator
-+
-+  vproc-supply:
-+    description: Supply for buck regulator vproc
-+  vcore-supply:
-+    description: Supply for buck regulator vcore
-+  vsys-supply:
-+    description: Supply for buck regulator vsys
-+  avddldo-supply:
-+    description:
-+      Supply for AVDD LDOs (vm, vio18, vcn18, vcamd, vcamio). According to the data sheet
-+      this is an internal supply derived from vsys.
-+  ldo1-supply:
-+    description: Supply for LDOs group 1 (vaud28, vxo22, vaud22, vadc18, vcama, vrtc)
-+  ldo2-supply:
-+    description: Supply for LDOs group 2 (vcn35, vio28, vmc, vmch, vefuse, vdig18)
-+  ldo3-supply:
-+    description: Supply for LDOs group 3 (vusb, vemc3v3, vcamaf, vgp1, vgp2, vm25)
-+
-+patternProperties:
-+  "^v(core|proc|sys)$":
-+    description: Buck regulators
-+    type: object
-+    $ref: regulator.yaml#
-+    unevaluatedProperties: false
-+    properties:
-+      regulator-allowed-modes:
-+        description:
-+          BUCK regulators can set regulator-allowed-modes to values specified in
-+          dt-bindings/regulator/mediatek,mt6392-regulator.h
-+        items:
-+          enum: [0, 1]
-+        minItems: 1
-+        maxItems: 2
-+      regulator-initial-mode:
-+        description:
-+          BUCK regulators can set regulator-initial-mode to values specified in
-+          dt-bindings/regulator/mediatek,mt6392-regulator.h
-+        enum: [0, 1]
-+
-+  "^v(adc18|camio|cn18|io18|xo22|m25|aud28|io28|usb)$":
-+    description: LDOs with fixed output and mode setting
-+    type: object
-+    $ref: regulator.yaml#
-+    unevaluatedProperties: false
-+    properties:
-+      regulator-allowed-modes:
-+        description:
-+          LDO regulators can set regulator-allowed-modes to values specified in
-+          dt-bindings/regulator/mediatek,mt6392-regulator.h
-+        items:
-+          enum: [0, 2]
-+        minItems: 1
-+        maxItems: 2
-+      regulator-initial-mode:
-+        description:
-+          LDO regulators can set regulator-initial-mode to values specified in
-+          dt-bindings/regulator/mediatek,mt6392-regulator.h
-+        enum: [0, 2]
-+
-+  "^v(cama|dig18|rtc)$":
-+    description: LDOs with fixed output without mode setting
-+    type: object
-+    $ref: regulator.yaml#
-+    unevaluatedProperties: false
-+    properties:
-+      regulator-allowed-modes: false
-+      regulator-initial-mode: false
-+
-+  "^v(aud22|camaf|camd|cn35|efuse|emc3v3|gp1|gp2|m|mc|mch)$":
-+    description: LDOs with adjustable output and mode setting
-+    type: object
-+    $ref: regulator.yaml#
-+    unevaluatedProperties: false
-+    properties:
-+      regulator-allowed-modes:
-+        description:
-+          LDO regulators can set regulator-allowed-modes to values specified in
-+          dt-bindings/regulator/mediatek,mt6392-regulator.h
-+        items:
-+          enum: [0, 2]
-+        minItems: 1
-+        maxItems: 2
-+      regulator-initial-mode:
-+        description:
-+          LDO regulators can set regulator-initial-mode to values specified in
-+          dt-bindings/regulator/mediatek,mt6392-regulator.h
-+        enum: [0, 2]
-+
-+required:
-+  - compatible
-+
-+additionalProperties: false
-diff --git a/include/dt-bindings/regulator/mediatek,mt6392-regulator.h b/include/dt-bindings/regulator/mediatek,mt6392-regulator.h
-new file mode 100644
-index 000000000000..2e1f41e0ebfe
---- /dev/null
-+++ b/include/dt-bindings/regulator/mediatek,mt6392-regulator.h
-@@ -0,0 +1,23 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-+
-+#ifndef _DT_BINDINGS_REGULATOR_MEDIATEK_MT6392_H_
-+#define _DT_BINDINGS_REGULATOR_MEDIATEK_MT6392_H_
-+
-+/*
-+ * Buck mode constants which may be used in devicetree properties (eg.
-+ * regulator-initial-mode, regulator-allowed-modes).
-+ * See the manufacturer's datasheet for more information on these modes.
-+ */
-+
-+#define MT6392_REGULATOR_MODE_NORMAL	0
-+#define MT6392_BUCK_MODE_FORCE_PWM	1
-+
-+/*
-+ * LDO mode constants which may be used in devicetree properties (eg.
-+ * regulator-initial-mode, regulator-allowed-modes).
-+ * See the manufacturer's datasheet for more information on these modes.
-+ */
-+
-+#define MT6392_LDO_MODE_LP		2
-+
-+#endif
+diff --git a/drivers/mfd/mt6397-core.c b/drivers/mfd/mt6397-core.c
+index 9ec951996588..3e08179002fa 100644
+--- a/drivers/mfd/mt6397-core.c
++++ b/drivers/mfd/mt6397-core.c
+@@ -124,165 +124,92 @@ static const struct resource mt6323_pwrc_resources[] = {
+ };
+ 
+ static const struct mfd_cell mt6323_devs[] = {
+-	{
+-		.name = "mt6323-auxadc",
+-		.of_compatible = "mediatek,mt6323-auxadc",
+-	}, {
+-		.name = "mt6323-efuse",
+-		.of_compatible = "mediatek,mt6323-efuse",
+-	}, {
+-		.name = "mt6323-rtc",
+-		.num_resources = ARRAY_SIZE(mt6323_rtc_resources),
+-		.resources = mt6323_rtc_resources,
+-		.of_compatible = "mediatek,mt6323-rtc",
+-	}, {
+-		.name = "mt6323-regulator",
+-		.of_compatible = "mediatek,mt6323-regulator"
+-	}, {
+-		.name = "mt6323-led",
+-		.of_compatible = "mediatek,mt6323-led"
+-	}, {
+-		.name = "mt6323-keys",
+-		.num_resources = ARRAY_SIZE(mt6323_keys_resources),
+-		.resources = mt6323_keys_resources,
+-		.of_compatible = "mediatek,mt6323-keys"
+-	}, {
+-		.name = "mt6323-pwrc",
+-		.num_resources = ARRAY_SIZE(mt6323_pwrc_resources),
+-		.resources = mt6323_pwrc_resources,
+-		.of_compatible = "mediatek,mt6323-pwrc"
+-	},
++	MFD_CELL_OF("mt6323-auxadc", NULL, NULL, 0, 0,
++		    "mediatek,mt6323-auxadc"),
++	MFD_CELL_OF("mt6323-efuse", NULL, NULL, 0, 0,
++		    "mediatek,mt6323-efuse"),
++	MFD_CELL_OF("mt6323-rtc", mt6323_rtc_resources, NULL, 0, 0,
++		    "mediatek,mt6323-rtc"),
++	MFD_CELL_OF("mt6323-regulator", NULL, NULL, 0, 0,
++		    "mediatek,mt6323-regulator"),
++	MFD_CELL_OF("mt6323-led", NULL, NULL, 0, 0,
++		    "mediatek,mt6323-led"),
++	MFD_CELL_OF("mt6323-keys", mt6323_keys_resources, NULL, 0, 0,
++		    "mediatek,mt6323-keys"),
++	MFD_CELL_OF("mt6323-pwrc", mt6323_pwrc_resources, NULL, 0, 0,
++		    "mediatek,mt6323-pwrc"),
+ };
+ 
+ static const struct mfd_cell mt6328_devs[] = {
+-	{
+-		.name = "mt6328-regulator",
+-		.of_compatible = "mediatek,mt6328-regulator"
+-	}, {
+-		.name = "mt6328-keys",
+-		.num_resources = ARRAY_SIZE(mt6328_keys_resources),
+-		.resources = mt6328_keys_resources,
+-		.of_compatible = "mediatek,mt6328-keys"
+-	},
++	MFD_CELL_OF("mt6328-regulator", NULL, NULL, 0, 0,
++		    "mediatek,mt6328-regulator"),
++	MFD_CELL_OF("mt6328-keys", mt6328_keys_resources, NULL, 0, 0,
++		    "mediatek,mt6328-keys"),
+ };
+ 
+ static const struct mfd_cell mt6357_devs[] = {
+-	{
+-		.name = "mt6359-auxadc",
+-		.of_compatible = "mediatek,mt6357-auxadc"
+-	}, {
+-		.name = "mt6357-regulator",
+-	}, {
+-		.name = "mt6357-rtc",
+-		.num_resources = ARRAY_SIZE(mt6357_rtc_resources),
+-		.resources = mt6357_rtc_resources,
+-		.of_compatible = "mediatek,mt6357-rtc",
+-	}, {
+-		.name = "mt6357-sound",
+-		.of_compatible = "mediatek,mt6357-sound"
+-	}, {
+-		.name = "mt6357-keys",
+-		.num_resources = ARRAY_SIZE(mt6357_keys_resources),
+-		.resources = mt6357_keys_resources,
+-		.of_compatible = "mediatek,mt6357-keys"
+-	},
++	MFD_CELL_OF("mt6359-auxadc", NULL, NULL, 0, 0,
++		    "mediatek,mt6357-auxadc"),
++	MFD_CELL_NAME("mt6357-regulator"),
++	MFD_CELL_OF("mt6357-rtc", mt6357_rtc_resources, NULL, 0, 0,
++		    "mediatek,mt6357-rtc"),
++	MFD_CELL_OF("mt6357-sound", NULL, NULL, 0, 0,
++		    "mediatek,mt6357-sound"),
++	MFD_CELL_OF("mt6357-keys", mt6357_keys_resources, NULL, 0, 0,
++		    "mediatek,mt6357-keys"),
+ };
+ 
+ /* MT6331 is always used in combination with MT6332 */
+ static const struct mfd_cell mt6331_mt6332_devs[] = {
+-	{
+-		.name = "mt6331-rtc",
+-		.num_resources = ARRAY_SIZE(mt6331_rtc_resources),
+-		.resources = mt6331_rtc_resources,
+-		.of_compatible = "mediatek,mt6331-rtc",
+-	}, {
+-		.name = "mt6331-regulator",
+-		.of_compatible = "mediatek,mt6331-regulator"
+-	}, {
+-		.name = "mt6332-regulator",
+-		.of_compatible = "mediatek,mt6332-regulator"
+-	}, {
+-		.name = "mt6331-keys",
+-		.num_resources = ARRAY_SIZE(mt6331_keys_resources),
+-		.resources = mt6331_keys_resources,
+-		.of_compatible = "mediatek,mt6331-keys"
+-	},
++	MFD_CELL_OF("mt6331-rtc", mt6331_rtc_resources, NULL, 0, 0,
++		    "mediatek,mt6331-rtc"),
++	MFD_CELL_OF("mt6331-regulator", NULL, NULL, 0, 0,
++		    "mediatek,mt6331-regulator"),
++	MFD_CELL_OF("mt6332-regulator", NULL, NULL, 0, 0,
++		    "mediatek,mt6332-regulator"),
++	MFD_CELL_OF("mt6331-keys", mt6331_keys_resources, NULL, 0, 0,
++		    "mediatek,mt6331-keys"),
+ };
+ 
+ static const struct mfd_cell mt6358_devs[] = {
+-	{
+-		.name = "mt6359-auxadc",
+-		.of_compatible = "mediatek,mt6358-auxadc"
+-	}, {
+-		.name = "mt6358-regulator",
+-		.of_compatible = "mediatek,mt6358-regulator"
+-	}, {
+-		.name = "mt6358-rtc",
+-		.num_resources = ARRAY_SIZE(mt6358_rtc_resources),
+-		.resources = mt6358_rtc_resources,
+-		.of_compatible = "mediatek,mt6358-rtc",
+-	}, {
+-		.name = "mt6358-sound",
+-		.of_compatible = "mediatek,mt6358-sound"
+-	}, {
+-		.name = "mt6358-keys",
+-		.num_resources = ARRAY_SIZE(mt6358_keys_resources),
+-		.resources = mt6358_keys_resources,
+-		.of_compatible = "mediatek,mt6358-keys"
+-	},
++	MFD_CELL_OF("mt6359-auxadc", NULL, NULL, 0, 0,
++		    "mediatek,mt6358-auxadc"),
++	MFD_CELL_OF("mt6358-regulator", NULL, NULL, 0, 0,
++		    "mediatek,mt6358-regulator"),
++	MFD_CELL_OF("mt6358-rtc", mt6358_rtc_resources, NULL, 0, 0,
++		    "mediatek,mt6358-rtc"),
++	MFD_CELL_OF("mt6358-sound", NULL, NULL, 0, 0,
++		    "mediatek,mt6358-sound"),
++	MFD_CELL_OF("mt6358-keys", mt6358_keys_resources, NULL, 0, 0,
++		    "mediatek,mt6358-keys"),
+ };
+ 
+ static const struct mfd_cell mt6359_devs[] = {
+-	{
+-		.name = "mt6359-auxadc",
+-		.of_compatible = "mediatek,mt6359-auxadc"
+-	},
+-	{ .name = "mt6359-regulator", },
+-	{
+-		.name = "mt6359-rtc",
+-		.num_resources = ARRAY_SIZE(mt6358_rtc_resources),
+-		.resources = mt6358_rtc_resources,
+-		.of_compatible = "mediatek,mt6358-rtc",
+-	},
+-	{ .name = "mt6359-sound", },
+-	{
+-		.name = "mt6359-keys",
+-		.num_resources = ARRAY_SIZE(mt6359_keys_resources),
+-		.resources = mt6359_keys_resources,
+-		.of_compatible = "mediatek,mt6359-keys"
+-	},
+-	{
+-		.name = "mt6359-accdet",
+-		.of_compatible = "mediatek,mt6359-accdet",
+-		.num_resources = ARRAY_SIZE(mt6359_accdet_resources),
+-		.resources = mt6359_accdet_resources,
+-	},
++	MFD_CELL_OF("mt6359-auxadc", NULL, NULL, 0, 0,
++		    "mediatek,mt6359-auxadc"),
++	MFD_CELL_NAME("mt6359-regulator"),
++	MFD_CELL_OF("mt6359-rtc", mt6358_rtc_resources, NULL, 0, 0,
++		    "mediatek,mt6358-rtc"),
++	MFD_CELL_NAME("mt6359-sound"),
++	MFD_CELL_OF("mt6359-keys", mt6359_keys_resources, NULL, 0, 0,
++		    "mediatek,mt6359-keys"),
++	MFD_CELL_OF("mt6359-accdet", mt6359_accdet_resources, NULL, 0, 0,
++		    "mediatek,mt6359-accdet"),
+ };
+ 
+ static const struct mfd_cell mt6397_devs[] = {
+-	{
+-		.name = "mt6397-rtc",
+-		.num_resources = ARRAY_SIZE(mt6397_rtc_resources),
+-		.resources = mt6397_rtc_resources,
+-		.of_compatible = "mediatek,mt6397-rtc",
+-	}, {
+-		.name = "mt6397-regulator",
+-		.of_compatible = "mediatek,mt6397-regulator",
+-	}, {
+-		.name = "mt6397-codec",
+-		.of_compatible = "mediatek,mt6397-codec",
+-	}, {
+-		.name = "mt6397-clk",
+-		.of_compatible = "mediatek,mt6397-clk",
+-	}, {
+-		.name = "mt6397-pinctrl",
+-		.of_compatible = "mediatek,mt6397-pinctrl",
+-	}, {
+-		.name = "mt6397-keys",
+-		.num_resources = ARRAY_SIZE(mt6397_keys_resources),
+-		.resources = mt6397_keys_resources,
+-		.of_compatible = "mediatek,mt6397-keys"
+-	}
++	MFD_CELL_OF("mt6397-rtc", mt6397_rtc_resources, NULL, 0, 0,
++		    "mediatek,mt6397-rtc"),
++	MFD_CELL_OF("mt6397-regulator", NULL, NULL, 0, 0,
++		    "mediatek,mt6397-regulator"),
++	MFD_CELL_OF("mt6397-codec", NULL, NULL, 0, 0,
++		    "mediatek,mt6397-codec"),
++	MFD_CELL_OF("mt6397-clk", NULL, NULL, 0, 0,
++		    "mediatek,mt6397-clk"),
++	MFD_CELL_OF("mt6397-pinctrl", NULL, NULL, 0, 0,
++		    "mediatek,mt6397-pinctrl"),
++	MFD_CELL_OF("mt6397-keys", mt6397_keys_resources, NULL, 0, 0,
++		    "mediatek,mt6397-keys"),
+ };
+ 
+ struct chip_data {
 -- 
 2.43.0
 
