@@ -1,63 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792585031;
-	b=S60QL4fvmIEhXCG+bWxRd7JOkjCufGar2sHE8gCbQUZQu5cjnPHdKUnCP0K/qZ0BSWIK
-	 jKPxBZo8zIILHqUlslippXweXTJPQQiwZhXwz1AdLF1DimS9iA9ZBonoMtguOT78mdqxv
-	 l5Oz1YFJFn4N/U7WtxlyPvQZ2OozBtxXerTwFEApqMRc1Xn0STXWbkNbUhYbapdo/E+Ys
-	 vhh0BM1HnSM5NZjXSPcQdJhTNtKaQUU4qD98YzVbyPQnsOy+FlWgRwDkBy/fSHmgSx0fD
-	 99q6zPV89Nbe3wxBKMQN5qtZkrPXJFI3AffOuQx4aaCcPnPtp+s+InDKgAfac4UF4iQ==
+	t=1792585183;
+	b=vPGSAJVJvF+EbZdjxM6dLArl/TGaH+U2bUSuH5XSn4z2YD8qYlkYG3G9Tqj99FwiisRk
+	 jNjwwVTUXnesCkmdu1bG0kFLW6ZFHxlASCV1YWAY8H8fmQBJ87ug8KEIhj9lZrfNJ10r8
+	 8Y1h9QZmtD7wVwU90HvZEXj+TvEykBoaooHKQ3UpJfuwv42jKrhiueQjgZ+N3jpHeXyUK
+	 VL3Zp8lIjVeDzQkDaKxzdD+ErOTTe95yvmYb0wYn720LXrhLzjA3DxXDuk5uro/kNoXXp
+	 Ug9UP8exCCkoNB/Ay2onOQTezy9GFft0EDg4XFOmCGGMm6btaJWqzBTLWaWKhLcLj3Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792585031;
-	h=Received:DKIM-Signature:From:To:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=E11iUFy/860ZlVvILirgoO4aU2Cl/yNZSYMwzdme8vE=;
-	b=rTBxa8rXH0ux4lEfueJTfjnDW80GUX+MO9jMu/KSViML6Z2Qi5kGsnA8ZZfwWdeUwsbC
-	 GHSwcYDa9vOm2Yf9qTHseSiz6hBaGlaZsXhYzudbDLal4Lqg3gYwrf9sYQoEWknnvS+vU
-	 NktjQuZHAw6J2xdaA4K7UF5zY0VWX6ZDR6lYTa//C8rEmRUrmBLKVSLJb+yqroXi6qfiN
-	 00E9mKEy50X9aPhweVL0G4OtEWiDQgAGmcCvM9Vj1fTGre0kr2ieitIdd/WIVVSFTQq4b
-	 KuF+je9y0yqRunqCUEe4oOjQ2GRKtTogJCFAUyNOcl6ngg/37Gm8v14MQoKArL4Hilw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792585183;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=D2WIgvLsL9mX149sVNYh2KDyf6SGJz+o+FC6r9bq+oM=;
+	b=RquVjilHhSYagz1ld2ZBi8kLqceOZaidS0iGQ81wTLCJtQU5U9B0P0JOnW8jU/H3a4n6
+	 OPqh3V/R1kLyB+CcCq7ABw8u+iox4aLjhaQhcFWadkMoyl5L/HdwlUoSobte7zREiOrxC
+	 HG6gEzDXWQ+tR+YJWbdw7ZqM8Jhh/1rx1R5ugl3/w+ta3B4pH52WgOO/uHTxy4TpTwqME
+	 T/PALRpMvm8MWS82idaZoyEyiD3DLqC968vWY03YvtOFdZiA3YWrXGjfgwLFpxI/yFyDZ
+	 9dID53ekJjxrtSZpfNgZ6nag39asSglYBx5oLj6u36ao5ROooCafHeoplwnML2qFZ4Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LvccDvLA;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fvhLq3Xr;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A171606AB31;
-	Wed, 21 Oct 2026 12:17:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1225E606A31E
+	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 12:19:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LvccDvLA
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C3E591F000C6;
-	Wed, 21 Oct 2026 12:17:08 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fvhLq3Xr
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8271D1F000C4;
+	Wed, 21 Oct 2026 12:19:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792585031;
-	bh=E11iUFy/860ZlVvILirgoO4aU2Cl/yNZSYMwzdme8vE=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=LvccDvLASiXrO4oxdFpgUrc6hZLZjYKNHH0R/KeL//r0pQDrtogZw6zjm5zOTJwuO
-	 UVtgwTMTbC1B8pZobu26MXlV5jpj++NcGAqh5SZWDLbF8+o7OfkenIbsp50gzbzI39
-	 qSNECRt/bVBlK2avV12RH6EBKuztFxNUOdW0CtXkGS/wZQNnPK6vx31B82J+cGUi9c
-	 QK1bEvk1rfNtZESAhrENAQliVoZEgVnVEf0P3+wWmtbW323HOWemLM2tcodM91vWIN
-	 WYwwAH8si3J8I62MkVS075asmjIC9bX4YLKfK62sBSdLH87b5y1af73mGOT1q5GAQj
-	 Qr0LmZn0ZAtyw==
-From: Lee Jones <lee@kernel.org>
-To: lee@kernel.org,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
-	Andy Shevchenko <andy@kernel.org>,
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-	Shi Hao <i.shihao.999@gmail.com>,
-	Rachna Patil <rachna@ti.com>,
-	linux-iio@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-input@vger.kernel.org,
-	mfd@lists.linux.dev
-Subject: [PATCH 28/28] mfd: ti_am335x_tscadc: Remove redundant ti_tscadc_dev_get() helper
-Date: Wed, 21 Oct 2026 12:09:50 +0000
-Message-ID: <20261021121245.3111563-28-lee@kernel.org>
-X-Mailer: git-send-email 2.56.0.218.g1ec904b173-goog
-In-Reply-To: <20261021121245.3111563-1-lee@kernel.org>
+	s=k20260515; t=1792585181;
+	bh=D2WIgvLsL9mX149sVNYh2KDyf6SGJz+o+FC6r9bq+oM=;
+	h=From:Subject:Reply-To:To:In-Reply-To:References:Date;
+	b=fvhLq3XrUuuMmLzWVL7Ro+Jg/Cdt7ffYeh/6Zv+8BDhnLp/kOBvWvJ0ITfBWJDsiv
+	 CXYA82VK227JPZ6imsZhmJcdK6TwJ8W6gzmFi0nL9n7v6spdj5mKAVKvW1qgrSUa3Z
+	 dkpk3GEbFXjKWZRp21OIIC/Y3Fpg08KmioL6uRClDUKncH33bLihSPVXuYTkWK5R2W
+	 vpLcoDij7Q3+SgAGejvEaPG0iDfM4QloSfAYNcTKMAwfroZgbxEGlZOKIlZScpKJUa
+	 MHxCVziLpIjQupVdDIKbzidSnY5FovRbwd1qw0wVjcvR43JGgJhSp3BrIJaP9Z35rc
+	 +8GBeJ6cDfyTg==
+Message-ID: <sashiko-outbox-180221@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH 15/28] mfd: loongson-se: Check return value of
+ dma_set_mask_and_coherent()
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Lee Jones" <lee@kernel.org>, mfd@lists.linux.dev
+In-Reply-To: <20261021121245.3111563-15-lee@kernel.org>
 References: <20261021121245.3111563-1-lee@kernel.org>
+ <20261021121245.3111563-15-lee@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Wed, 21 Oct 2026 12:19:41 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -66,63 +59,22 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 
-Now that ti_tscadc_dev_get() is a single-line wrapper around
-dev_get_drvdata(p->dev.parent), remove the bespoke helper and retrieve
-the parent driver data directly in the child ADC and touchscreen
-drivers.
+> loongson_se_probe() ignores the return value of
+> dma_set_mask_and_coherent() when requesting a 64-bit DMA mask before
+> allocating coherent DMA memory.  Check the return value and abort probe
+> if the platform cannot satisfy the 64-bit DMA mask requirement.
+>=20
+> Fixes: e551fa3159e3 ("mfd: Add support for Loongson Security Engine chip =
+controller")
+> Closes: https://sashiko.dev/#/bug/linux-6685ee0c-b7ed-4f21-8800-cc705cec4=
+49b
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Lee Jones <lee@kernel.org>
 
-Signed-off-by: Lee Jones <lee@kernel.org>
----
- drivers/iio/adc/ti_am335x_adc.c           | 2 +-
- drivers/input/touchscreen/ti_am335x_tsc.c | 2 +-
- include/linux/mfd/ti_am335x_tscadc.h      | 5 -----
- 3 files changed, 2 insertions(+), 7 deletions(-)
+Sashiko has reviewed this patch and found no issues.
 
-diff --git a/drivers/iio/adc/ti_am335x_adc.c b/drivers/iio/adc/ti_am335x_adc.c
-index 1516dd332f90..77ea59d6c6b7 100644
---- a/drivers/iio/adc/ti_am335x_adc.c
-+++ b/drivers/iio/adc/ti_am335x_adc.c
-@@ -636,7 +636,7 @@ static int tiadc_probe(struct platform_device *pdev)
- 
- 	adc_dev = iio_priv(indio_dev);
- 
--	adc_dev->mfd_tscadc = ti_tscadc_dev_get(pdev);
-+	adc_dev->mfd_tscadc = dev_get_drvdata(pdev->dev.parent);
- 	tiadc_parse_dt(pdev, adc_dev);
- 
- 	indio_dev->name = dev_name(&pdev->dev);
-diff --git a/drivers/input/touchscreen/ti_am335x_tsc.c b/drivers/input/touchscreen/ti_am335x_tsc.c
-index 623546e80668..40ffdec9d207 100644
---- a/drivers/input/touchscreen/ti_am335x_tsc.c
-+++ b/drivers/input/touchscreen/ti_am335x_tsc.c
-@@ -418,7 +418,7 @@ static int titsc_probe(struct platform_device *pdev)
- {
- 	struct titsc *ts_dev;
- 	struct input_dev *input_dev;
--	struct ti_tscadc_dev *tscadc_dev = ti_tscadc_dev_get(pdev);
-+	struct ti_tscadc_dev *tscadc_dev = dev_get_drvdata(pdev->dev.parent);
- 	int err;
- 
- 	/* Allocate memory for device */
-diff --git a/include/linux/mfd/ti_am335x_tscadc.h b/include/linux/mfd/ti_am335x_tscadc.h
-index 4a048a897cf3..36d365b64fe6 100644
---- a/include/linux/mfd/ti_am335x_tscadc.h
-+++ b/include/linux/mfd/ti_am335x_tscadc.h
-@@ -175,11 +175,6 @@ struct ti_tscadc_dev {
- 	struct adc_device *adc;
- };
- 
--static inline struct ti_tscadc_dev *ti_tscadc_dev_get(struct platform_device *p)
--{
--	return dev_get_drvdata(p->dev.parent);
--}
--
- static inline bool ti_adc_with_touchscreen(struct ti_tscadc_dev *tscadc)
- {
- 	return of_device_is_compatible(tscadc->dev->of_node,
--- 
-2.56.0.218.g1ec904b173-goog
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261021121245.3111=
+563-1-lee@kernel.org?part=3D15
 
