@@ -1,82 +1,70 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.8
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792591374;
-	b=TDNfJHflcIZ94PM1JhmscNipHb3Okcb3BqjSTHdjrVu19BCdkqWaz1OA7SgEqYkVUTED
-	 LLpvwOo10izqCH5umS1y80omhIaxvdX5B/HDZ4DZDUNRXJyxnGpUU1vKREFASEIqiDf2m
-	 VRIculY8aGq2oL9F6ad0KGqATdNfGuzQUXu5kWDMliDlwMKV4D41T4wJHjaUl7RXIL6rz
-	 NYSZ3Fl10ouGe6I9/Gk15pWU1p6Mrlvf6gFYk2aIbO1k1almRnGAHyb6Rv2ZHWsuq2p58
-	 nciuW7bcaT3EH0ZL9t/Ga+hLdX4zpgNpiRboQV+FoOJAriP9TFfeZzXWbkQqgBK2bDA==
+	t=1792593563;
+	b=hpnHewK0kxbMtbFAtQJcC/uYKxSfNY5kIvfuo1NJUOUXSB9msRUKv9vb9gH3AxbKAmoB
+	 UVZB00dRmGqHz5HesMTUhqQ3f1+hC4ldiNkk8K9QWfkbAWDfWzmM3jOaLML/W7lUgpThZ
+	 HhMJnYVl98AsMM2qyVuP6w4VMMspDfGtsmf2pRnR9eK9KelSh27cQiSa6EIyW1zvUnU3n
+	 dFMWiAyzI0d1FOb7vWfXdqdYvHgSCWi1wtctAohQB+hlK2mPCoe9KcT5vwnXS6nqrYsfC
+	 e+rf47JsbpmvixXDiPK38nqVIjEemmCx72HIVIMhNlQdA563PgBVyH5OSZXXUoUW1ag==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792591374;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:Organization;
-	bh=fDLM2uSdaow9LokFw0VaDIv/9QOPzVgEmcb//BHgPyM=;
-	b=hXDIUrYaHRtiHdrH3BRngvolOaYY/DNY8n5ddeXESRe2T1pQ2X56YNCzbDFGUCz7+zmL
-	 vbciaRGkADyEMjJac9R0Bci2/CqA8IQEhlqgcUbrXZ2muiZ14olABazGnNfVj+J1tekBo
-	 Rpa9+OZ14dbR8iU0RqrLjxjmJBDQiuRieSvspKkkHbvq/E1RSnGH/ixjyYXzXKepCklvG
-	 JRO+JaxknX+w4jN5wmtSj6wGBpLSZGa5tRJnX8qmBYZwLtFlPV1uvDY+O6tyzopMW+0+9
-	 Qn6d+6WrDHjmd5GzMglsF3f7ngOCbKvjk09sMNEBL0iDusMnAczzJIpy2yjqJ+s0hOA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792593563;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 In-Reply-To:References:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=2FZ6WSldowIQ5CGzRVSQzX5RHQEHuI8rIa0QlGDiTMI=;
+	b=BlRimoVfquKEJg7yi+2AOC+Dsye2ghoCTNp115uXOvGJVJbwp6E23KbxHRqMl9YGUYWK
+	 sGL4ok10X6xotDKSJAobktE27QJwF9JuuDLsO6s+ysICRUbt7cIS4Y0lIXMUuJA8iNjrs
+	 vAQOY/5mWlHLZXCxoi2tzNEn0zJT4QgjDexfY07gG+j3iRgh87dubnVCQFrRtuLNV27uo
+	 ryNHmpuseii7Gbn/sLjMN1TzYhbsz0xyfwjZAM5ixMdNX2v2AUAwJLo3coFCKZK61rIuz
+	 LB2HlMF6IHoL2FbBb3frruC17nohPhu4QwnboKvIJu/mWnWlZMYqrVAw0fybODj+0KQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=OUA8VE9V;
-	arc=none smtp.remote-ip=192.198.163.8
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UJ4Tfzsb;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98C57606A31A
-	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 14:02:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 98C57606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03041606A31F;
+	Wed, 21 Oct 2026 14:39:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=OUA8VE9V
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1792591374; x=1824127374;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=6TcpUU+U6JP4MXD+j4bO+YP5IabLS7DHZ5gJkyB4Sa4=;
-  b=OUA8VE9VlomzQ9ySAxgQDPJtkfHVZW9TwNJXT9Ywx1oiCdAA8Ecd4Aef
-   EizK+tZE8RVNa+f5eHjVetBF0m1YWo2r8PtLGDE8r9fjngmRGRgx6nJVN
-   uQg90Cn5QIbz60ayEiLGDeTe3VOSGsZKYsvdSPUktNpUoPVY1XOAmdor2
-   f/7N4xQO2p3j1prVfWigHu9rbstQgko/xtsShO0qn0iKYPzWFgTbYfVEJ
-   RJJkcm19w+Bfp5lKh+4+4/VGWkisQvJ72Oqp8qrPiU58zzKwEZOfnTQLF
-   2j98t4c8KmrLk5EFqhEmtsuV5w9hBJS+8OgVAMCktq/Ozfijn0evHAxff
-   w==;
-X-CSE-ConnectionGUID: 2/TyX8ysRLWT/72e+MopTw==
-X-CSE-MsgGUID: O+dqot1GTliEr7eI+E3b9A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11942"; a="1214491"
-X-IronPort-AV: E=Sophos;i="6.27,170,1787036400"; 
-   d="scan'208";a="1214491"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
-  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2026 07:02:51 -0700
-X-CSE-ConnectionGUID: JogAVmmJS02mlCCCTu7pTg==
-X-CSE-MsgGUID: iwCDsb9RRXOAkFMEYHMsEw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,170,1787036400"; 
-   d="scan'208";a="3416326"
-Received: from cpetruta-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.24])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Oct 2026 07:02:48 -0700
-Date: Wed, 21 Oct 2026 17:02:46 +0300
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Lee Jones <lee@kernel.org>
-Cc: Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
-	Andy Shevchenko <andy@kernel.org>,
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-	Shi Hao <i.shihao.999@gmail.com>, Rachna Patil <rachna@ti.com>,
-	linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-input@vger.kernel.org, mfd@lists.linux.dev
-Subject: Re: [PATCH 28/28] mfd: ti_am335x_tscadc: Remove redundant
- ti_tscadc_dev_get() helper
-Message-ID: <atjGBg9IAnPPBRmX@ashevche-desk.local>
-References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-28-lee@kernel.org>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UJ4Tfzsb
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D53DA1F000C1;
+	Wed, 21 Oct 2026 14:39:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792593562;
+	bh=2FZ6WSldowIQ5CGzRVSQzX5RHQEHuI8rIa0QlGDiTMI=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=UJ4TfzsbvdADPiJX+OB0+tvGgRkc1n8Cd4A+lMCi1apFYuz/IexXW/1dOy9xSi3YI
+	 liX/1X1GNN+m22ia5nzltzu2Nq3VYIvZ7PKI6yRMzjKf0Dgx+uB5mIaPutT+y1aATw
+	 Ra1CMqwgw0npxTCHYHSkxA2wVYL5qBEm0vpxYtgHJn59mWnvDQCHHKpIui2HdK/iuD
+	 /B/fKZ7Jbsk1Aswcs1InTrdFePxLaci3TAIzju2T7oQGYoTbaV9R8lXTKDnMZywoRb
+	 pS+hyP5bc0htYA29ZogtUZzcMj8GNwzQGneUNpKkRVYne4YM6dw99sUXkE7haOIyl3
+	 8LvkUzy5nzrBg==
+Date: Wed, 21 Oct 2026 07:39:21 -0700
+From: Jakub Kicinski <kuba@kernel.org>
+To: Imre Kaloz <kaloz@kernel.org>
+Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ linux-mips@vger.kernel.org, linux-kernel@vger.kernel.org, Lee Jones
+ <lee@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jiri
+ Slaby <jirislaby@kernel.org>, mfd@lists.linux.dev,
+ linux-serial@vger.kernel.org, Alexandre Belloni
+ <alexandre.belloni@bootlin.com>, linux-rtc@vger.kernel.org, Andrew Lunn
+ <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, Eric
+ Dumazet <edumazet@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ netdev@vger.kernel.org, Damien Le Moal <dlemoal@kernel.org>, Niklas Cassel
+ <cassel@kernel.org>, linux-ide@vger.kernel.org, Pavel Machek
+ <pavel@kernel.org>, linux-leds@vger.kernel.org, Bjorn Helgaas
+ <bhelgaas@google.com>, linux-pci@vger.kernel.org, Christoph Hellwig
+ <hch@lst.de>
+Subject: Re: [PATCH v2 00/53] MIPS: SGI-IP27: add support for the IP35
+ (Bedrock hub) machines
+Message-ID: <20261021073921.07632a37@kernel.org>
+In-Reply-To: <20261021090556.21168-1-kaloz@kernel.org>
+References: <cover.1791890466.git.kaloz@kernel.org>
+	<20261020110619.12774a1c@kernel.org>
+	<20261020204214.28625-1-kaloz@kernel.org>
+	<20261020145611.4e277615@kernel.org>
+	<20261021090556.21168-1-kaloz@kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -86,25 +74,36 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261021121245.3111563-28-lee@kernel.org>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Wed, Oct 21, 2026 at 12:09:50PM +0000, Lee Jones wrote:
-> Now that ti_tscadc_dev_get() is a single-line wrapper around
-> dev_get_drvdata(p->dev.parent), remove the bespoke helper and retrieve
-> the parent driver data directly in the child ADC and touchscreen
-> drivers.
+On Wed, 21 Oct 2026 11:05:55 +0200 Imre Kaloz wrote:
+> On Tue, 20 Oct 2026 14:56:11 -0700 Jakub Kicinski wrote:
+> > I don't think you answered my question, or at least I'm too daft 
+> > to catch what you mean. IP35 was not supported so nobody is using
+> > it with Linux today. You're adding the support, and since it's 
+> > a platform discontinued 20 years ago there's 0 chance of real users 
+> > of any of this code.
+> > 
+> > What am I missing?  
+> 
+> The users are the people running these machines, the same population
+> as for IP27 and IP30, and the ioc3-eth driver in net/ exists for them
+> today. The series was developed and tested on a Fuel and a Tezro in
+> regular use, so "nobody is using it with Linux" is true only in the
+> sense that the support isn't merged yet; that was equally true of IP30
+> when it went in for 5.5, and of every port before it.
 
-I don't see more patches Cc'ed to me, so I don't know if this one makes sense
-or not, but OTOH I don't care much, both approaches are fine with me.
+Not sure if you followed the discussions at the recent maintainer
+summit but we are now allowed to be more opinionated about code
+we merge. Merging code just to test that code seems like entertainment
+for the authors, not useful development.
 
-Acked-by: Andy Shevchenko <andriy.shevchenko@intel.com>
+> The kernel's test for a platform isn't commercial relevance, it's a
+> maintainer, which Thomas is, and testers, which this series has. If
+> netdev doesn't want to spend time on it, say so and I'll ask Thomas to
+> take the two ioc3-eth patches through the MIPS tree.
 
--- 
-With Best Regards,
-Andy Shevchenko
-
-
+Not how subsystem boundaries work. You have to repost the two
+networking patches to get them merged via net-next. Our CIs
+will not trigger for partial posting to netdev.
