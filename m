@@ -1,56 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792585528;
-	b=HTAau+oSbHnsnHm2mGjcUHud+jBejq/tSDoI7ViEl9MniRu3iVYJr4asW9mzUyo1x/dk
-	 SwTOPZ/cDUBqzfscS7GZyCBRpEJ+uYejw9MBzc8ZIC5E5HGbTbz/99nDN8EnCuVqlldco
-	 tmWIh/iN0smhN69vZYi0OLyPM8XsKdoF0CUhh+0omLHYBcerapf1yw8aUWeOkqmSXTAs2
-	 9T9uCd1d0ml5c1JHlFnOVN00nDTSO1h3e5H8WYZ2vK3KG24JTDGP8Zm3ucyRG9D4f2Psz
-	 bBLyGFywgh6hmJLNrj5EyzUMJAMBfAtGbNBBmhzd7BVGy0rcmTlbx4ky3qN5xKint5A==
+	t=1792585715;
+	b=0aI2mTKA4L/hDXNfwqA4psznpE0F2EbmF9hSgsR4NKn4MWmJOlEq5rCcAy4qPW8PcGul
+	 DMKk5ImSplE570S5wK1Fq4z1nRLuCBT4lix6icFk+L27s3/dZHNYYvfgMIEL+ZB46f1NO
+	 Uo+6ELN8v+YudYvY5SQkORPSG/FWv5zXC8ZwsVYex23zxsgdj1IYkrs+WIkLulT/KGWq5
+	 DSql3PFmR07eUvtjV0TUtbyiscTURMrnSV7RbFHPXKeT5gQBIHxUxRLfxSxTkP0N2cb1P
+	 UOo5sloZ3v6qPu0ONAokpkiE2j0gMKgXmEXlaKx7iIv5A2PYyeXu8388NkBOJTzfMTQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792585528;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792585715;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=PABLCC2C/zybdpbymfvZkIdE+MK3Ak6XqarfiBr3Cuw=;
-	b=dRVyGaoeiHIsusCqupm6ZCNiXUhHkhTgHhjQ3ETxibhhiGIdJVupX8SAdcEf6k1CD23P
-	 Nmhl/rM7J7KeLB/14dpLgS5hgANOHjEsgjLHfDEtW42ys9B+n4vwYNbVbqeUvmyaOosKv
-	 f21ExNvLC+RaHfdpwUT4Ohn5EIIPZWRPPdjFlGsRJi5InGCamsNleW0eVI8AMuc67AEFu
-	 YQLuBGiXx1d8onzsE7M+q9eQUq/FWRGz8Ag+L6PV9Lz1T3DU61syde5ObSo1Pi3qB4o6g
-	 79nsGBj1wEVhWiKE7ukWqZ4bWHEPyOPbvWTfnN5yDIDLUpgzAQMoP9xz4XPbQQdpMow==
+	bh=QsZcvYfgtL+rhVwFtTEFCLhfEVzafTCRkUObbIlceJw=;
+	b=VYfe7rqj1+xojXdDbQaNifUSyO8LHyujP087+FzfIdZ00m3hRyn+/FuWsg14VjGWActw
+	 V3ZO5ofDVj1JxvIn+E5e5HPjkpGpNaw1OeZDCn/lsPbOQJMgH29tiqM3rK5/e9ws2JSD9
+	 f1AQeFeNnjq/E3Eg4jk/P7yGHkjzLrNthNZaK4RAHtbs5UIRSPEBUiSDN/smlAoLjPUoh
+	 RP9z/GbvjOJvPFGHua5iCJw9yigl9/TPvF95IHWLZc7XkTjhseICRJfwry0eD3VSkIZrk
+	 t4IqGapcAfJ/w3F8geOAmg3g1gcU/7r4mGTEVhMKFrMxc2SD7CuviqlxjUlTSWJDVnA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QN9L3GSs;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Nm0Q56k5;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05F91606A319
-	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 12:25:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1AF5C606A319
+	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 12:28:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QN9L3GSs
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B0D351F000C4;
-	Wed, 21 Oct 2026 12:25:27 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Nm0Q56k5
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8FE011F000C4;
+	Wed, 21 Oct 2026 12:28:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792585527;
-	bh=PABLCC2C/zybdpbymfvZkIdE+MK3Ak6XqarfiBr3Cuw=;
+	s=k20260515; t=1792585714;
+	bh=QsZcvYfgtL+rhVwFtTEFCLhfEVzafTCRkUObbIlceJw=;
 	h=From:Subject:Reply-To:To:In-Reply-To:References:Date;
-	b=QN9L3GSsnNT5MYuAOnLHVrzu1jK2qKTlFBLj9Vcq9ao0fHeA4r0sGe/6oJg1S5deP
-	 AQIwt/L2QrwhzTTz5z1oPxReCsxTZPbAD2ZeGC+1MwC5Rd9inxi5Z9rrpdNXaO+4G2
-	 MkGrmCbsEfcMc4JAoeFgmrDe2JtGAjgtS8PNa4GGIv+WKr1vc9dtWJJz2mFFydg5V2
-	 JyaFXGy+yhPsdJxwyKGfODFUjIP8ozSyvbWbh0LEefNY2SamZeDuvexjBcnxjLl3+n
-	 WKZIG6wuQ3K2U6XwsZdzA9yevyprtzwjYhcScOmHgXQklILdJsQdk2OtuUI2X6FuKH
-	 ZPcEKBV4yq5/Q==
-Message-ID: <sashiko-outbox-180248@kernel.org>
+	b=Nm0Q56k5TlaQOUM9L6ua0O276F43I+lcaUG7cI/BXHZ3q1Inh5cdEc0wRnLLyWgyf
+	 /gvrqcLf8tsCI8OKfH7HtbP4VZenRDije7g76T7nwtuaUUG4BxsXWFiHmySw8KkVOK
+	 t100yweFYfKpzwhgOBXye3TPGD8FzGgsF0Hryql1uVkn+ddQCHfTn/vvoUV+dK7emf
+	 EZZXbZCf3tr+qeIM4dF1jD0xm2xGDCBwJY0yi30Lc+oD1j+Jn6WRADjgvySB364oUj
+	 dL6jcpF/qXuLf732q0dO1RDamQID2R0icpnlsy72uCREspclYKYfA6a/aTM0O5IjCe
+	 GJPGu9DxojU0Q==
+Message-ID: <sashiko-outbox-180251@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 20/28] mfd: loongson-se: Stop controller and mask
- interrupts on teardown and shutdown
+Subject: Re: [PATCH 25/28] mfd: mt6397: Manage IRQ domain lifecycle with
+ devres
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Lee Jones" <lee@kernel.org>, mfd@lists.linux.dev
-In-Reply-To: <20261021121245.3111563-20-lee@kernel.org>
+In-Reply-To: <20261021121245.3111563-25-lee@kernel.org>
 References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-20-lee@kernel.org>
+ <20261021121245.3111563-25-lee@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 21 Oct 2026 12:25:27 +0000
+Date: Wed, 21 Oct 2026 12:28:34 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,25 +60,23 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> loongson_se_probe() enables hardware interrupts before registering IRQ
-> handlers and starts the controller via loongson_se_init(), but provides
-> no teardown or shutdown handler to stop the controller and mask
-> interrupts.  If probe fails after loongson_se_init(), if the driver is
-> unbound, or during a system reboot or kexec transition, the controller
-> remains active with DMA configured to memory that is reclaimed.
+> mt6397_irq_init() and mt6358_irq_init() create chip->irq_domain with
+> irq_domain_create_linear() before registering the parent interrupt via
+> devm_request_threaded_irq().  If devm_mfd_add_devices() fails in
+> mt6397_probe(), irq_domain_remove() is called before devres frees the
+> threaded IRQ and without disposing child IRQ mappings, allowing an
+> in-flight interrupt handler or late IRQ lookup to dereference the
+> removed domain.  Conversely, when the driver is unbound, the IRQ
+> mappings and domain are never removed at all.
 >=20
-> Clear pending interrupts before requesting IRQs, unmask interrupts only
-> after IRQ handlers are registered, clean up on failure inside
-> loongson_se_init(), register a devres action after loongson_se_init()
-> succeeds to issue SE_CMD_STOP and mask interrupts on teardown, and wire
-> up the platform driver .shutdown callback.
+> Register a devres action immediately after irq_domain_create_linear() to
+> dispose all mapped hardware interrupts and remove chip->irq_domain so
+> that the domain is torn down after child MFD devices and the managed IRQ
+> handler have been released on both probe failure and unbind.
 >=20
-> Fixes: e551fa3159e3 ("mfd: Add support for Loongson Security Engine chip =
-controller")
-> Closes: https://sashiko.dev/#/bug/linux-15511672-7569-4eac-96a0-c08581925=
-710
-> Closes: https://sashiko.dev/#/bug/linux-e6ed8d33-d641-4969-a5ea-959f21ae3=
-696
+> Fixes: 6df8dd5c185b ("mfd: Add support for the MediaTek MT6397 PMIC")
+> Closes: https://sashiko.dev/#/bug/linux-b296fbe4-6e83-40c0-91c7-2c31e8d22=
+6d0
 > Cc: stable@vger.kernel.org
 > Signed-off-by: Lee Jones <lee@kernel.org>
 
@@ -86,5 +84,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261021121245.3111=
-563-1-lee@kernel.org?part=3D20
+563-1-lee@kernel.org?part=3D25
 
