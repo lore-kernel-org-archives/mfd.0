@@ -1,56 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792585183;
-	b=vPGSAJVJvF+EbZdjxM6dLArl/TGaH+U2bUSuH5XSn4z2YD8qYlkYG3G9Tqj99FwiisRk
-	 jNjwwVTUXnesCkmdu1bG0kFLW6ZFHxlASCV1YWAY8H8fmQBJ87ug8KEIhj9lZrfNJ10r8
-	 8Y1h9QZmtD7wVwU90HvZEXj+TvEykBoaooHKQ3UpJfuwv42jKrhiueQjgZ+N3jpHeXyUK
-	 VL3Zp8lIjVeDzQkDaKxzdD+ErOTTe95yvmYb0wYn720LXrhLzjA3DxXDuk5uro/kNoXXp
-	 Ug9UP8exCCkoNB/Ay2onOQTezy9GFft0EDg4XFOmCGGMm6btaJWqzBTLWaWKhLcLj3Q==
+	t=1792585213;
+	b=e1Cmd8y/4uqnRZ46isZVcJIbiAc7TjaB70mpBQR1+E0/ke4Yml6sarPMijd+DWMmfVuu
+	 aTgfCqckb8ZPbnRlb+QYSMJIj1eG61Cx0ig8plcD914tro7uFnxtKSTGwcqY4YOWEzy1y
+	 sDjcrEmvJOPM517EaAaJXB1T4jaZ6aVEDQDHhc7RLuh4o2nNgrrVilNIZ9OcMjqIXAkIr
+	 1/luHat7UPXgQY+5yPD5vpPCIMcZAX++tZTkr6UbB/WbVIw2zNCPzqkV8d7vyzH1qKQRU
+	 mVJyuMxbUKd2B/Z1OXF1wYtB7Zs24jHpxjdjeWSV+/Ywh7W5jdaKXtErKYvxS4zOKnA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792585183;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792585213;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=D2WIgvLsL9mX149sVNYh2KDyf6SGJz+o+FC6r9bq+oM=;
-	b=RquVjilHhSYagz1ld2ZBi8kLqceOZaidS0iGQ81wTLCJtQU5U9B0P0JOnW8jU/H3a4n6
-	 OPqh3V/R1kLyB+CcCq7ABw8u+iox4aLjhaQhcFWadkMoyl5L/HdwlUoSobte7zREiOrxC
-	 HG6gEzDXWQ+tR+YJWbdw7ZqM8Jhh/1rx1R5ugl3/w+ta3B4pH52WgOO/uHTxy4TpTwqME
-	 T/PALRpMvm8MWS82idaZoyEyiD3DLqC968vWY03YvtOFdZiA3YWrXGjfgwLFpxI/yFyDZ
-	 9dID53ekJjxrtSZpfNgZ6nag39asSglYBx5oLj6u36ao5ROooCafHeoplwnML2qFZ4Q==
+	bh=0vhRuS1DwJ9hEjeo5AWaNjhCq9wm/IGGmCtMujPGjKE=;
+	b=IDZcT+baV50z/BQ5PQlotF5YNcZ6UIQqEMbfr57TvXo4O/xrcDiAxMzWYQceqRHOzR3M
+	 IPQEqQqE+Op9S2WUKs7aKBHJMd/vZfrGMOIuzUArnTxjTVRnScbqNQpdJ8m6TQOCIoC8Q
+	 O8meWP+6pryJXMMzNdaJqdBZvs8U8tu54J37qKfUPhoXIJ9fHqC3dmm8NETB9B5hXEah/
+	 WHHBJcSODyGS4fFnPzVj7HwwzzPaNeUEfQKwpZwOn2F3BNTUWhG5aTpkbgiXEpBxFggU7
+	 KsDFiJ8BC8bQAjaktLS/BMgdACBhx3Dc7hVi/yf1oebbBMFDVft/E8fKNpFOGRrzFAA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fvhLq3Xr;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="PSJmP/Vt";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1225E606A31E
-	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 12:19:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D52A8606A327
+	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 12:20:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fvhLq3Xr
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8271D1F000C4;
-	Wed, 21 Oct 2026 12:19:41 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PSJmP/Vt
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5650A1F000C6;
+	Wed, 21 Oct 2026 12:20:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792585181;
-	bh=D2WIgvLsL9mX149sVNYh2KDyf6SGJz+o+FC6r9bq+oM=;
+	s=k20260515; t=1792585212;
+	bh=0vhRuS1DwJ9hEjeo5AWaNjhCq9wm/IGGmCtMujPGjKE=;
 	h=From:Subject:Reply-To:To:In-Reply-To:References:Date;
-	b=fvhLq3XrUuuMmLzWVL7Ro+Jg/Cdt7ffYeh/6Zv+8BDhnLp/kOBvWvJ0ITfBWJDsiv
-	 CXYA82VK227JPZ6imsZhmJcdK6TwJ8W6gzmFi0nL9n7v6spdj5mKAVKvW1qgrSUa3Z
-	 dkpk3GEbFXjKWZRp21OIIC/Y3Fpg08KmioL6uRClDUKncH33bLihSPVXuYTkWK5R2W
-	 vpLcoDij7Q3+SgAGejvEaPG0iDfM4QloSfAYNcTKMAwfroZgbxEGlZOKIlZScpKJUa
-	 MHxCVziLpIjQupVdDIKbzidSnY5FovRbwd1qw0wVjcvR43JGgJhSp3BrIJaP9Z35rc
-	 +8GBeJ6cDfyTg==
-Message-ID: <sashiko-outbox-180221@kernel.org>
+	b=PSJmP/VtmanvhXlZSQsbIh0tVK3Th1MEp0VfxEjyXc0VtM6oZXgORXdA9LWbYuNZa
+	 cMjZasr7j0GPLCrhx9ZrSOGpmzOkjUM27d3vnkSQYpg0FuRNNvTmxKVRQlPLDgpbGL
+	 1Bal+You3dg5QGXizv9Ph5ilwCuEs54CHltpvybq5zP9pLwZ8VrQtB7VMy1qN0PjwT
+	 OZ/3sZzTnl+onfijpgNh11Qm+g3AW9ztRWqNVii7R/BNViy8+tWS1i5UXhKbA5SwIG
+	 nDm9jnW5jnC16zRFruQJ6dgPeJoD4B1WF6F5NiuHmfFYAsAwr5P6ElkrMfYa8D/B6Y
+	 4JSiXmrL4ujXQ==
+Message-ID: <sashiko-outbox-180222@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 15/28] mfd: loongson-se: Check return value of
- dma_set_mask_and_coherent()
+Subject: Re: [PATCH 09/28] mfd: cgbc: Zero-initialise version buffer in
+ cgbc_get_version()
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Lee Jones" <lee@kernel.org>, mfd@lists.linux.dev
-In-Reply-To: <20261021121245.3111563-15-lee@kernel.org>
+In-Reply-To: <20261021121245.3111563-9-lee@kernel.org>
 References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-15-lee@kernel.org>
+ <20261021121245.3111563-9-lee@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 21 Oct 2026 12:19:41 +0000
+Date: Wed, 21 Oct 2026 12:20:11 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,15 +60,18 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> loongson_se_probe() ignores the return value of
-> dma_set_mask_and_coherent() when requesting a 64-bit DMA mask before
-> allocating coherent DMA memory.  Check the return value and abort probe
-> if the platform cannot satisfy the 64-bit DMA mask requirement.
+> If the Board Controller returns a short response to the firmware
+> revision query in cgbc_get_version(), cgbc_command() can succeed
+> without populating all bytes of the stack-allocated data buffer.
+> Those uninitialised stack bytes are then copied into cgbc->version
+> and exposed to userspace via the cgbc_version sysfs attribute.
 >=20
-> Fixes: e551fa3159e3 ("mfd: Add support for Loongson Security Engine chip =
-controller")
-> Closes: https://sashiko.dev/#/bug/linux-6685ee0c-b7ed-4f21-8800-cc705cec4=
-49b
+> Zero-initialise the data buffer on the stack to prevent leaking
+> uninitialised kernel stack memory.
+>=20
+> Fixes: 6f1067cfbee7 ("mfd: Add Congatec Board Controller driver")
+> Closes: https://sashiko.dev/#/bug/linux-8c473713-527e-4619-8404-689f28c76=
+54d
 > Cc: stable@vger.kernel.org
 > Signed-off-by: Lee Jones <lee@kernel.org>
 
@@ -76,5 +79,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261021121245.3111=
-563-1-lee@kernel.org?part=3D15
+563-1-lee@kernel.org?part=3D9
 
