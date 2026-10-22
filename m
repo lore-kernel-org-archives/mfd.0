@@ -1,57 +1,61 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=78.133.224.34
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792685608;
-	b=K9ZBh0JykWmF9VzBTy8wddMmB8CiwuNacQW06j29XWhhTHkEhED2m2sCWAbN6tUw+hLo
-	 bFYMWy12s1+OhKbuMthhZXOBESS524IhseHKS9R4y2tnP8JjyWZOE62Zoab7aAed/QX1z
-	 JDd9Ku4WxtTjyuakuYjt374Q25TeoHpwega7o6S87C/NFOr3DeamhNrPhLaSwK4BY+mOr
-	 gpp32MisAjdiybI37jCHskOiSJXpX4PJfnbcdvAli2zULmbpx0d5y2ApGw87xEq4L7as8
-	 PaS9PTj/xd1HVxDwsBhJW1fCJwAgeZvlDPZLUxgr1R3vnhkzGW7goUqkCR6zPb7hbXQ==
+	t=1792697311;
+	b=utEGyZqnD+vAX8QskInCHdxdid7bkyC4VOjrAMt3rMisJyLgshWDZfJq7ML+NhGtOFMr
+	 apMr5KssXuuM2EszwHBVuT9Wv5zBSMbyZc8XJ9yGywsVdDyzSAMWcKFCiHvm9trJyt0SC
+	 Sm5brpy5uAalCjtOB6jcFjUiltRuzTjkJhEw893UyF9ALdq8Q95VQ1bc7sPwhZhLHYNDW
+	 b7zdBsxweImUwUMcdkpwW0KMrL3o1ItD2f5YbHkDbDhPZ3F0h3Z6sZsbhs2qPerTDwUxQ
+	 fAmCqkG2B4eA/8wMtUmYZ7yMG2ydrOMyrNM2ZchlETdhN2aWwkR1C5TMnQoBp/dEamg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792685608;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=oH4b0ZeSypmggHVhN0K9PBizuWvC5Dm2QKKWJlgxz74=;
-	b=uFDJ/t//YpLJTHgqAXZMJntnCIippI/VmBCqGyYDI3z19UY4DZG+DEOFigOY4HyS4EIw
-	 2MEpN5uXm1oemgx/nqSNxoQu2gyU3UR0Fvid5mMlRJzQpKG6Y6KQW6BMA2porKRUWXEty
-	 0QYeHwrgaQgds5kq0iEujE92eNgHQz9XjUEbAtyPro+DpgOhVEgCW5PyNyWlDjEQIBH5D
-	 ktDZLkQFGBRkWfLhDMTBJuSoFxmhz1uY6c0FF32EpPnnkWKl2BkvAVQ95MfIbRrAzDJdY
-	 pLWxFUdI9CYiP+YIEDPehUAgwJmsuY20J4BKHa/RtvQFMaaorwZOzcwhCuTH19BlNsw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792697311;
+	h=DMARC-Filter:Received:Received:Date:From:To:cc:Subject:In-Reply-To:
+	 Message-ID:References:User-Agent:MIME-Version:Content-Type;
+	bh=MzbjIiGq5wiJfmZJ63aC+LL2BZBa5CdrmsF8cqDfJW4=;
+	b=cvqLTrNQDv6XBgdq7Cr2sOAkcbGSwmly+2t0/ThbCdwfaTeLj7PyCAP35NMV4hPhc9Ne
+	 bxXv8YM8fN0FuZ3QUbKtBTbZs7V4YxBAaKV5/XDBrWvl9tAz9p9/zOCZH9gYRiWWY7UVQ
+	 2pxVIuE5Bg1CHOHtM+GSJVC+2HVEjac1LvOxVNkBqqozhtVJhHTdgp58WRPaqs8eOQ5L+
+	 azTd3xZKwk1OmbwZpDR614Rl4YpUF67nByFD+SoWQVK2XjkUSMhBM1YIYaf2MDX1wkAsm
+	 RTC2ITDeNu2XEZs/9T3wEKfXl5YM0g2E0JwbSQ5gxeH77AJjRp4TLSLsx7c/thxPCkQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="GOmdfq/e";
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F0730606A32C;
-	Thu, 22 Oct 2026 16:13:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GOmdfq/e
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 729D71F01828;
-	Thu, 22 Oct 2026 16:13:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792685602;
-	bh=oH4b0ZeSypmggHVhN0K9PBizuWvC5Dm2QKKWJlgxz74=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=GOmdfq/eHcoY7Tp6CZg+VGxVsxWzzHYmAVidotEZpiPrceYf43HOqzP43Fzowi5Ve
-	 0rd/uxJxtQBnclU7ZFXSDI4SgT+ylRHxgqPX6qEpIkqgUFJdrVKM4q/VPBqZITXRhy
-	 tR5sCwxRQ2j+FFpqZZXbO1SQsO4tKaDhDx0/tPKLbFaJaRPtwJGKe9IAAmK2kkbdiB
-	 /pYwU308mituXMi2vCcNIjMDWYCB7Q+Pb8gUbOvQVdWgPcyrKE1k66mDp5kD4r0fAP
-	 4ip5M9mYvOvUrXgOQHNgmuGT2puyFa+sBlZ4fGprp6nk+5ozGOx72wvlvphwudV4JZ
-	 dK/arj9rFIRPw==
-Message-ID: <sashiko-outbox-181787@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 23/27] usb: dwc3: Configure RK3572 PIPE port before
- discovery
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Cunhao Lu" <1579567540@qq.com>
-Cc: mfd@lists.linux.dev, linux-serial@vger.kernel.org, linux-usb@vger.kernel.org, lee@kernel.org
-In-Reply-To: <20261022-add-board-ok3572-c-v1-23-0b0fd85a31ee@qq.com>
-References: <20261022-add-board-ok3572-c-v1-0-0b0fd85a31ee@qq.com>
- <20261022-add-board-ok3572-c-v1-23-0b0fd85a31ee@qq.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 22 Oct 2026 16:13:22 +0000
+	dmarc=none header.from=orcam.me.uk;
+	spf=none smtp.mailfrom=orcam.me.uk;
+	arc=none smtp.remote-ip=78.133.224.34
+Received: from angie.orcam.me.uk (angie.orcam.me.uk [78.133.224.34])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BF939606A320
+	for <mfd@lists.linux.dev>; Thu, 22 Oct 2026 19:28:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BF939606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=orcam.me.uk
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=orcam.me.uk
+Received: by angie.orcam.me.uk (Postfix, from userid 500)
+	id 65FAB9200B3; Thu, 22 Oct 2026 21:28:25 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by angie.orcam.me.uk (Postfix) with ESMTP id 5F8E692009E;
+	Thu, 22 Oct 2026 20:28:25 +0100 (BST)
+Date: Thu, 22 Oct 2026 20:28:25 +0100 (BST)
+From: "Maciej W. Rozycki" <macro@orcam.me.uk>
+To: Jakub Kicinski <kuba@kernel.org>
+cc: Imre Kaloz <kaloz@kernel.org>, 
+    Thomas Bogendoerfer <tsbogend@alpha.franken.de>, 
+    linux-mips@vger.kernel.org, linux-kernel@vger.kernel.org, 
+    Lee Jones <lee@kernel.org>, 
+    Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+    Jiri Slaby <jirislaby@kernel.org>, mfd@lists.linux.dev, 
+    linux-serial@vger.kernel.org, 
+    Alexandre Belloni <alexandre.belloni@bootlin.com>, 
+    linux-rtc@vger.kernel.org, Andrew Lunn <andrew+netdev@lunn.ch>, 
+    "David S. Miller" <davem@davemloft.net>, 
+    Eric Dumazet <edumazet@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+    netdev@vger.kernel.org, Damien Le Moal <dlemoal@kernel.org>, 
+    Niklas Cassel <cassel@kernel.org>, linux-ide@vger.kernel.org, 
+    Pavel Machek <pavel@kernel.org>, linux-leds@vger.kernel.org, 
+    Bjorn Helgaas <bhelgaas@google.com>, linux-pci@vger.kernel.org, 
+    Christoph Hellwig <hch@lst.de>
+Subject: Re: [PATCH v2 00/53] MIPS: SGI-IP27: add support for the IP35 (Bedrock
+ hub) machines
+In-Reply-To: <20261021073921.07632a37@kernel.org>
+Message-ID: <alpine.DEB.2.21.2610222009000.22065@angie.orcam.me.uk>
+References: <cover.1791890466.git.kaloz@kernel.org> <20261020110619.12774a1c@kernel.org> <20261020204214.28625-1-kaloz@kernel.org> <20261020145611.4e277615@kernel.org> <20261021090556.21168-1-kaloz@kernel.org> <20261021073921.07632a37@kernel.org>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,17 +64,36 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 
-> From: Cunhao Lu <1579567540@qq.com>
->=20
-> Firmware may leave the USB3 PIPE port disabled, causing DWC3 to discover
-> only USB2. Configure the port before reading controller capabilities.
->=20
-> Signed-off-by: Cunhao Lu <1579567540@qq.com>
+On Wed, 21 Oct 2026, Jakub Kicinski wrote:
 
-Sashiko has reviewed this patch and found no issues.
+> > The users are the people running these machines, the same population
+> > as for IP27 and IP30, and the ioc3-eth driver in net/ exists for them
+> > today. The series was developed and tested on a Fuel and a Tezro in
+> > regular use, so "nobody is using it with Linux" is true only in the
+> > sense that the support isn't merged yet; that was equally true of IP30
+> > when it went in for 5.5, and of every port before it.
+> 
+> Not sure if you followed the discussions at the recent maintainer
+> summit but we are now allowed to be more opinionated about code
+> we merge. Merging code just to test that code seems like entertainment
+> for the authors, not useful development.
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261022-add-board-=
-ok3572-c-v1-0-0b0fd85a31ee@qq.com?part=3D23
+ I thought the event was by invitation only.
 
+ Anyway, this seems to me like discouraging enthusiasts who do their work 
+outside their day job from making contributions.  Their natural target are 
+commercially worthless systems, since working for free on commercially 
+valuable systems would be taking away someone's bread and I think grossly 
+undeserved support for corporations.  Taking this stance effectively would 
+be cutting Linux off from its origins and making it a commercial project.
+
+ Please let's not go down this route and only base the acceptance, or not, 
+of submissions on quality merits.  Many of us took this route to Linux, by 
+showing competence in public with work done for free, and some of us still 
+enjoy such side project even if we do have a day job now that involves 
+Linux development.  Let's not close this option to people.
+
+  Maciej
