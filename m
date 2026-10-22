@@ -1,56 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792685590;
-	b=DzFtogb+Q5SLamETvFUHQJIPO+qrHwNSLe6YaRaKqHyLZk1behVqVttU80IaifBURr3O
-	 8OGl6o1RIIg67FEas431x1VK1hr0zxi6N2mpgXKzm7ysNABOgds89iQeePMMDsWW2qS/E
-	 X2oP521e/c115aLrMTkXVB8G+NFbA9skDJYe9DJv3ivqYhtygAHxALA6BD1yNsSXytE+P
-	 +Gun7OmaeA4KDqSOZHIAGdg6XKodmipyIAhmFZ3PxszEKOT9tDrISll4hJEp5Adhc4gea
-	 bRnGCD4xUOek2sl3Rdsk9h3xefd1eCl9VF2WFLmBb5ZI5/yl3/aSnvvletsTwLGwG9Q==
+	t=1792685591;
+	b=DTRMdYE4Kzf1zrhhhcGXLy70oQlyYB0LUAjUyHmwrh5/Xb0YWpGJvuei1iEFnZ/Q/9Lh
+	 KYoFNtWqrp0szcG+yziCh/Pkk3FaA9iKcUqWx6F13FrZkeTh4bkUJk/QOPPUjudIxiDys
+	 w2BX6ucdTWhHNdOpsGEM2ojrBMUYl0SxomboqfIF0sdDje/O2Q74fcoZKEbG44qXff+7L
+	 UJPRna91KaTbUMU2c4rnI55Tq7EXPFShTj95BVE+1BguuhGCXAwjwMCsRoV98ptGhs5I2
+	 tk08YNjwjMBIZGACVCmCnUa078Sb2DeCS7ZoavB5ULGLP2PFkPGqoJ+XiqrR7/uSYCA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792685590;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792685591;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=azoMIcJ3x4Fvz+6dWWV9H6mgNGUvVkZFe5SNxZfs6NU=;
-	b=5lyjoQJagHOrFzL+NOdnzjaArF1CYW/Cz57ndR/un/bmOZFIKQLAHsCMeaJNn5m1IAdC
-	 IT7QwZZg2CUlPCaxjS2ddOCllpAOvkrCplH+/MFoUmJ9K618qDV5CEdJUWVqPybcB+F3r
-	 m0/BMZDN+mO85Jp6QJ2/4tCaCXcCFh1slOC2dlz1TQLVSqj3hatlHb8GRz3CC+K/dP8gx
-	 mgu/lcy+rMfLF/6Ws4v553jHYpr9xEaq0pGMD5P28PuwWnINyi8kmdHNx3TJY9yM/v+qs
-	 R6HZgdnVOXlFGgq3pypK7Yn55SyHazafiMDhLHJyMNGJ+OX5ezDyU3d+X07Rdmj8qYA==
+	bh=ID1WUZWPShbGJj7kh+s83X1k6nYw8JhotNoLF5kbVj4=;
+	b=R2ovA57VDtq+yMEv/7jVO0rgQ37XasZLycsMxkN2udM6HGr+HjnStAYGpDsh6E1UT31m
+	 mEZYbARFGr7DjEp/ElxQJEeDg53UWgAmkWISkvb/C7VES4Z6LF97MMPy38nosqX80hbZo
+	 nz6OM3jOQCjDws98gbt5+hGIEE58ce2njDeY4Sm9A5+NHAgY1i8VNYmzMyOak0TPzvje/
+	 VyDvEzZwHiugp7XPErTcQubgrZlI+6HTw83uMntk//khjeTR8u+GD3UVXrZCzm922O9Id
+	 b30efR7nKkyVjp/st5dFnWJX3Jz1J0IEIs4cL92mIe9sgnq23P630dYFF9iN6xN8/Rw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="F6k1/YWp";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UeWLkhyl;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9F82606A338;
-	Thu, 22 Oct 2026 16:13:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C83F6606A31D;
+	Thu, 22 Oct 2026 16:13:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=F6k1/YWp
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5636A1F01825;
-	Thu, 22 Oct 2026 16:13:09 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UeWLkhyl
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4FA831F01828;
+	Thu, 22 Oct 2026 16:13:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792685589;
-	bh=azoMIcJ3x4Fvz+6dWWV9H6mgNGUvVkZFe5SNxZfs6NU=;
+	s=k20260515; t=1792685585;
+	bh=ID1WUZWPShbGJj7kh+s83X1k6nYw8JhotNoLF5kbVj4=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=F6k1/YWp8TIVbS4pVcrLu9eXZOp3mZo2Zfoety/ws1Bjz+XqWbkUANZenhqDfo9ni
-	 7AtsjXmauY6WmX4Bn4CCSOxeCA5h9CytpP9DroeE9SgMgJaWtJliwrYDAyIL+SoSxb
-	 kRnW7fDvaghoJ9wUSyv4mjIf6+k3mDgqw8oAWuruDEwSe+AttL7ypfkI1geGldGn4A
-	 RCo1J0PmT7r4hGY4QRJGIQksMRWg7V8M/9jdy1mPnS0E2HMjK+7cTZMyVbRRXsPlvc
-	 Fb7y2FhXRdWtcj8Qa+NZ+EnepRUS7IswreyBL2qvsRWYXMYZwUoUcfeQC3l220aCCI
-	 Hq+KRyuuXGEEQ==
-Message-ID: <sashiko-outbox-181775@kernel.org>
+	b=UeWLkhylSKQWGQiz+D53AZdzgeb2th45+6/FB29ga2bW7RmOFImji77GAqWfxZ0dS
+	 6+Xl6DCFs1PmNHls4NGD5mBUIOTrNJkXqi2ETLJK8+y6SFx4xiyb5aOcikeMVmMUmz
+	 NK+b7RAKDyM1uTHewEw5DCrQGyhhlSSVO/KGWbhWvkFmxnte21f3SKmgHauAe9ijno
+	 N/ahyCbeAEqua63p2JxL87Z5+tR0qqnoBQ+GPBXTI33j5LfjykvVVr2sr/0GXH7vSX
+	 p/Vq9Au4h4M/M6OixCj8hlBIinsoUHOhCkCjiarq8dGYaPPjxUs/9qtHJGlwywFK6c
+	 w7FCGeIsGl/MQ==
+Message-ID: <sashiko-outbox-181772@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 11/27] dt-bindings: i2c: rk3x: Add RK3572
+Subject: Re: [PATCH 08/27] pinctrl: rockchip: Add RK3572 support
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Cunhao Lu" <1579567540@qq.com>
 Cc: mfd@lists.linux.dev, linux-serial@vger.kernel.org, linux-usb@vger.kernel.org, lee@kernel.org
-In-Reply-To: <20261022-add-board-ok3572-c-v1-11-0b0fd85a31ee@qq.com>
+In-Reply-To: <20261022-add-board-ok3572-c-v1-8-0b0fd85a31ee@qq.com>
 References: <20261022-add-board-ok3572-c-v1-0-0b0fd85a31ee@qq.com>
- <20261022-add-board-ok3572-c-v1-11-0b0fd85a31ee@qq.com>
+ <20261022-add-board-ok3572-c-v1-8-0b0fd85a31ee@qq.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 22 Oct 2026 16:13:08 +0000
+Date: Thu, 22 Oct 2026 16:13:04 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -62,7 +62,8 @@ Precedence: list
 
 > From: Cunhao Lu <1579567540@qq.com>
 >=20
-> Add the RK3572 I2C compatible using the RK3399 fallback.
+> Support RK3572 pinmux, bias, drive-strength, and Schmitt controls.
+> Enable input buffers during mux changes for the RGMII receive clocks.
 >=20
 > Signed-off-by: Cunhao Lu <1579567540@qq.com>
 
@@ -70,5 +71,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261022-add-board-=
-ok3572-c-v1-0-0b0fd85a31ee@qq.com?part=3D11
+ok3572-c-v1-0-0b0fd85a31ee@qq.com?part=3D8
 
