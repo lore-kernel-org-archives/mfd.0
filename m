@@ -1,55 +1,94 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.173
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792626162;
-	b=0htOXR465Qdrw8NR5FCMMg7/myBztvsNofn4FIh693m0T5rGpJE4c+mtHefrMb+2wc/0
-	 V7C/MWLnurrAxG4Kj0lWVbnw5YHqL4RrRkqbeRRceUOMz1AzEUvyd9Zi2n2FdgyC9hK4Z
-	 oewqhIi7goo2UnYggDbnMAxKoZGJw0N/YKGd19QVBYkSt7xZOOeBGwO2ZA51Z5ZmBj1/b
-	 QKy9WppIy9VdQmIBNzi5iX75opsYAMfaLbVGOORyEnkARGROUmfynZAy22jQUYgygTn4o
-	 9AnMSg/UjFMt/vzs/xSpqUgfdJPGY+sksHc2slH6YPF6Vf28ME3QcpFaNrU8aWRKUtw==
+	t=1792641901;
+	b=pfYbppNh1E0GQvWsg1DcHEHnYe99AOT0iOb9vRbntZgdpDOD4UmgoYepT24cucIpst3M
+	 lqWyVgsmT91Brn+7txIV+4JJYyALYj1v4QT93hlqJ5dagD8HlcqWllZO1jp/32T8YX736
+	 r8EHEZTtQLYriFj0M3EcjxzZe5Lmy4lI4KfbvqhwraDiuTyu585KWo5AFLQdBcBskXcYQ
+	 3MRs/3FK9UDbG1GTLbSMs30Jqtf7lRCdkEhK6fncgCHIVaPYs6JNk5emiZ01vY6UvYqSB
+	 A1ht8SccVvol2fE0E18THONNsqh15KExi3kVGrYqqMI4S1F4aamXjBM/gIIKQFceuEg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792626162;
-	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
-	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
-	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=FCttpM/mIWeoisgI4Oe2UgAbsAorju2aXD0ZdeQI/eU=;
-	b=YKH37+Ku3thfqOiBgvuXfoM5KeMtx8SIKe+Kd3oXbXSZ9SiCwtMSup8HN44n5UUMQjwi
-	 0pzp5GsSZdOAGsElVF27xeGZkvrfxNSSRHtpRTklhlMhIR/hB4bdExLQSk6Y5/RzQFaOt
-	 yr0Pu/BmYbOAZu9bNn788hxdrn0Vr3HXYW6uid2bKWd5qQOvoIn/5xvuCmb4CicKCMuR+
-	 1nw55kx6lBUR+THvJ8PSQIF6pz8bn0JMW3DQ1A4AB9ylulYmQjySaMi3Y0qLpTC1/XrtI
-	 cJPsPfxaE97x3JhrtQXcenfJTodO5w/3dbl0SrBMzq4afPRfQ6zWUvX1Jf1GLAKaU3Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792641901;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=5Xa/115bcglogo2Lde3OroJ4iJzU0zzKruxbGyxC3XM=;
+	b=EAjhJn+4HY8xS9yK0d++YlPeNvc8mMEXpgZGKESTMH/YxJCgKrCamArEKWXRjl5x31Eq
+	 4FXhtdFareX7A9Dhk5VIngSgagPwWz8UuOJh3vbDtN38v0+ibS16xPbhcldZDn148uL3b
+	 PzqUoJ0hl7XaJkxOtSQPEa8dJNvbZOlP8EGV3LihS2QtJeOyafjdQM9QEsqYZnhbxp+gS
+	 oPDOm2Tem31GX/Kl7Cz1mQZpDKfWzWZzw1WzXocuciinrXxgCM6Vk889iDoO2KmIoMVzm
+	 wRE1f+80lNMgMY/IcHKGQudXPTlyLrD2f+h9gWRrqdpLw4qAcdxls3ArexJ1XZGH1XQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cGY3K1M7;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=VUssPJ5e;
+	arc=none smtp.remote-ip=74.125.82.173
+Received: from mail-dy1-f173.google.com (mail-dy1-f173.google.com [74.125.82.173])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EECF606A31B
-	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 23:42:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21D63606A321
+	for <mfd@lists.linux.dev>; Thu, 22 Oct 2026 04:05:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 21D63606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cGY3K1M7
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 15E481F000C2
-	for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 23:42:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792626162;
-	bh=FCttpM/mIWeoisgI4Oe2UgAbsAorju2aXD0ZdeQI/eU=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=cGY3K1M7fCHt+Twn9BLTTxRcWwHGXe/n/oshtl388cWfeDxu9OoK6OywwiaavpZ84
-	 dM5o9tAl9k8qM2pWUnYQl/zBYKFpouhsneqjvoz7jfgcG1RSPR3pGlzP5zLmP0f2ZP
-	 zFmtKN6geV1ZKWVyRGz0ebSnuG5QimrsLqw2qk6DX5RhUdGiEmY2ZzLqDiFaQbH4gx
-	 Rl2CXMZpi7GtzfCHCUDobVvkY8vuBmBn7A2+gHFHB3W4zCW/pzOxI/3wNaOqcAMwyZ
-	 9hEpBKfGb2clVN0MkRmVipfUya7IG4rTBPUvKvXHtt3W62+MSd9m4fwkW0Un5pxb5t
-	 ipnX66rl7+m3g==
-Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-5be47aa555cso1363704e87.3
-        for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 16:42:42 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBzwN8dKte1LvyozxBJ+mYf75IYVOJVFH93tajOX+AfR8CdmlbmLRIJn5iePTRkUJ6L8n/k=@lists.linux.dev
-X-Gm-Message-State: AFq9FYISL4V3z/B2W7xdFTFDS5pOzYo07GbtB6qbD/4vwUHqr4M/1mjU
-	MFhMGKT6MvU+U3+EwMl5iL0zIk8uPDizuLhi8U7+9d3Ronlt5/0KDToLEFfZVRG7N1Bgrq69unk
-	VQu8GCt0Q+e8RXYwijk6Z3yPzIp7gFp0=
-X-Received: by 2002:a05:6512:23a2:b0:5be:478e:c5d2 with SMTP id
- 2adb3069b0e04-5bfa1cdba7emr1474028e87.29.1792626160903; Wed, 21 Oct 2026
- 16:42:40 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=VUssPJ5e
+Received: by mail-dy1-f173.google.com with SMTP id 5a478bee46e88-3646e6de3e8so95933eec.1
+        for <mfd@lists.linux.dev>; Wed, 21 Oct 2026 21:05:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792641900; x=1793246700; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=5Xa/115bcglogo2Lde3OroJ4iJzU0zzKruxbGyxC3XM=;
+        b=VUssPJ5e51jURxKYG33r7F98qXeTOAeCHa9RZBK4xUUGJSnYrNDxocGyqDbM2opnkr
+         VCwxVDazjPyKFLpJlq+/+yfarGg1l1EMJFvSF8R69c/9n09DeZFzliKSTclJNt9po1T2
+         ZjIPT0do9kCpZxMs18pX1r6TEVb/8Y2LziNKBBkhrUa+/qTqmbrcEuHo2XNipNHjrjvA
+         88IU1uBhBUVJe9dVuSluFyTJEMn/HSSi4gCltufkY0pIkhDylH3n2jnVgA1wDnbxXJQp
+         XJS4DMK0H7W9Lg+bZuS/Voqzhgq4Gw9h5uBlw6SPCKTgpAiJYc7lvy59cHr7RPIi8/fo
+         e2Hw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792641900; x=1793246700;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=5Xa/115bcglogo2Lde3OroJ4iJzU0zzKruxbGyxC3XM=;
+        b=nCp0OKt3PSQ1Dd+WWOeIByrOiq9i/glyOHVCmq+3/2/eoHpAxXmQvfZ3lGp9WzY0VI
+         W6DXoYLXga87hXpt/T8GZzJPOAxiFbkFoPTI/0yDoU5a6pz7tQ+L/5q62WjWyfTrlGYw
+         Z8YRPIZtryBWVK6yatY0vWR9BfD3d3zfI80/Us2EFeMae9YbPg6d0PHOZZ81vnCxiqpZ
+         4vHd25tDbRErtHfoGCHzDJhj2u9sDBO9Hmyj9fP9K8CIuo1++mJTMtwALDQAJ8WB+K0N
+         xDx8s8L/TZsiIcZZetgxQPDS8vY19wUggjzcsfri6ECKcykHLo1boXOhlYW6eFn9msyn
+         eUCg==
+X-Forwarded-Encrypted: i=1; AKwUvBw11Ad6bo1MxMw2qS+U8ZlNfbDYD6jeaNr1aKjqf8qZ3QO/vPyZo6vLONzgZ1KHJnj9+oA=@lists.linux.dev
+X-Gm-Message-State: AFq9FYIR1UE5TsUJbz3pVX+oXY612LyIupQoVNdoW+P9hKyMljrlWqFu
+	yHOwvpmOoX/mKxxhX2SYUJxEH4NknC6u88GWhlNv1bFwI/88C06kuapq
+X-Gm-Gg: AYBFou0FTmSlwkBnlhbjCUb8iN8QX+Ayr9n/IE016581Ii3AihF7+Nm8yNnKSk+MJDR
+	BgDxs0QQp37jd7hBSY7tGm3SgRa3B+jrOlrG+RJN9N6VTdT0acQ8kr+AoXrZHsimaDrJrBjLiLC
+	6/OLEp04x2p2OiLQnkE0+m5obJKdaOueduWbhHcsqOov0wVMnQof6YcYDjhRea3OJy3K7K53XH+
+	HTrhmxlBZJWo5MrRruUsUdlSpnN1zrB8boAYQw0VQ/FUK0AzQIACSRskjKE8gNe1PDFHe2v3I2s
+	XWgFPFowSOTrl3lwd0jlpgpIn4bKmJ8IPgDQUokniFZ6vQmSO8AWIvUa5ZKC2Sg2wjIaVNYp0Mm
+	fZ+izUXef3kXmVlZ+TC8BeSlHMjhTckXfzmNw3ROcYAokcJ4H8lazUSZOBEtJu4j4/MAf+dFk+T
+	C3mPYnLZ1B162WjUypGWri5r4hyawFwECjIiiCQE0YipIdhXGQLdRGHC5wgCIeUbff/tN3WynAd
+	20OEuWTQZ6LT8aJzoqqvzCgoFjQ6JkNGljk9tHWgvr4+nh/EA7R/XYxNg5aG4JgzIdGZqIPy6P0
+	iCZTiVVMLHbltiCxEEeqfaaM7w+LEFs7oobDvbleuKi7oDPbm5J21KukL3fvkcR6N3zBfaDJoTY
+	=
+X-Received: by 2002:a05:701b:4301:b0:190:e602:c769 with SMTP id a92af1059eb24-190e602c831mr7355159c88.1.1792641900034;
+        Wed, 21 Oct 2026 21:05:00 -0700 (PDT)
+Received: from cachyos-aura ([45.112.149.26])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1903d3ae06fsm10950539c88.19.2026.10.21.21.04.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 21 Oct 2026 21:04:59 -0700 (PDT)
+From: Navon John Lukose <navonjohnlukose@gmail.com>
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Lee Jones <lee@kernel.org>
+Cc: Mika Westerberg <mika.westerberg@linux.intel.com>,
+	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v2] mfd: intel-lpss: Set d3hot_delay to 0
+Date: Thu, 22 Oct 2026 09:34:53 +0530
+Message-ID: <20261022040453.45797-1-navonjohnlukose@gmail.com>
+X-Mailer: git-send-email 2.56.0
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,41 +98,50 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261021121245.3111563-1-lee@kernel.org> <20261021121245.3111563-22-lee@kernel.org>
-In-Reply-To: <20261021121245.3111563-22-lee@kernel.org>
-From: Linus Walleij <linusw@kernel.org>
-Date: Thu, 22 Oct 2026 01:42:27 +0200
-X-Gmail-Original-Message-ID: <CAD++jLmfKFG7uWWUQg42+vvaRg2NO8GGOji_qT9O+nabf8Q5+Q@mail.gmail.com>
-X-Gm-Features: AclHuK-bW_sOqMKCXDtKCtW_jSZo6X1GW1kVojPPLhylF6_iQYgXHCX5xCW8YWM
-Message-ID: <CAD++jLmfKFG7uWWUQg42+vvaRg2NO8GGOji_qT9O+nabf8Q5+Q@mail.gmail.com>
-Subject: Re: [PATCH 22/28] mfd: abx500-core: Unregister device ops on devm release
-To: Lee Jones <lee@kernel.org>
-Cc: Mattias Wallin <mattias.wallin@stericsson.com>, Samuel Ortiz <sameo@linux.intel.com>, 
-	linux-arm-kernel@lists.infradead.org, mfd@lists.linux.dev, 
-	linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Wed, Oct 21, 2026 at 2:16=E2=80=AFPM Lee Jones <lee@kernel.org> wrote:
+intel-lpss-pci already clears d3cold_delay, but every runtime resume of an
+LPSS controller still sleeps the default 10 ms d3hot_delay in
+pci_power_up().
 
-> abx500_register_ops() allocates struct abx500_device_entry via
-> devm_kzalloc() and links it into the global abx500_list without
-> registering a devres cleanup action.  If a caller's probe function
-> subsequently fails, devres frees the entry while it remains linked in
-> abx500_list, causing use-after-free and list corruption on later
-> traversals.
->
-> Register a devm_add_action_or_reset() callback in abx500_register_ops()
-> to remove the entry from abx500_list before devres frees it.
->
-> Fixes: c211b6b9c014 ("mfd: abx500-core: Convert to managed resources for =
-allocating memory")
-> Closes: https://sashiko.dev/#/bug/linux-6a9c6b8b-8f89-4af5-8cb1-102822e44=
-e6e
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Lee Jones <lee@kernel.org>
+The PCI spec asks for those 10 ms on D3hot->D0. Mika pointed out that the
+LPSS controllers are not really PCI-connected devices, so the delay is
+likely not needed. quirk_remove_d3hot_delay() drops it on several older
+Intel chipsets, Cherry Trail among them, and commit 815b4448198f ("i3c:
+mipi-i3c-hci-pci: Set d3hot_delay to 0 for Intel controllers") does the
+same for the Intel I3C controllers.
 
-Reviewed-by: Linus Walleij <linusw@kernel.org>
+Nothing misbehaves with the delay in place, so this only shortens resume.
+On Arrow Lake-H (Lenovo Yoga Pro 7 14IAH10) the touchpad's I2C controller
+autosuspends after 1 s idle, and the first report afterwards waits for the
+resume. With d3hot_delay set to 0 the i2c-hid interrupt handler for that
+report takes 1.1-1.9 ms instead of 12.6-14.4 ms, with no I2C errors. Only
+Arrow Lake-H was tested.
 
-Yours,
-Linus Walleij
+Signed-off-by: Navon John Lukose <navonjohnlukose@gmail.com>
+---
+
+Notes:
+    Changes since RFC:
+    - Drop RFC and add the review discussion to the changelog (Andy).
+    
+    RFC: https://lore.kernel.org/r/20261016114347.23633-1-navonjohnlukose@gmail.com
+
+ drivers/mfd/intel-lpss-pci.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/mfd/intel-lpss-pci.c b/drivers/mfd/intel-lpss-pci.c
+index 63a3fb58566..5672f033e5c 100644
+--- a/drivers/mfd/intel-lpss-pci.c
++++ b/drivers/mfd/intel-lpss-pci.c
+@@ -70,6 +70,7 @@ static int intel_lpss_pci_probe(struct pci_dev *pdev,
+ 		info->quirks = quirk_pci_info->driver_data;
+ 
+ 	pdev->d3cold_delay = 0;
++	pdev->d3hot_delay = 0;
+ 
+ 	/* Probably it is enough to set this for iDMA capable devices only */
+ 	pci_set_master(pdev);
+-- 
+2.56.0
+
