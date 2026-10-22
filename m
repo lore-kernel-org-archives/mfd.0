@@ -1,57 +1,66 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=162.62.58.211
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792656266;
-	b=tVYCw4IUTqwFWU6bq38ksrajCbzUK1jzBD28GWXLlzmolIyrKvPzT3UBomsLpt6kKB7v
-	 G3MloSZBwkCBQoWr6JBo6OYSom2SUet3pdqvNVCjpF5E7biuPlFbeLi0BzgpOeOlFPpsq
-	 tb7BdtURHJ6ZHHwb3izgfMyhLnxvpCKGc9hgZlF+DnYMg9QCUsQb+Ui36vDT8eurJ9/ZB
-	 QJXuM79xS78BeIymPqoLkUsnVVGyzr2gt8pjQGOB3qJteSzPy00nrfQOkZtjVA6QezrTq
-	 WKV5QXWjK4BwpsSzODp2XPNkDrN9Od5QD0NcOk8DWIu5bvDiCXgKRnwmC+tXjaLIx1w==
+	t=1792657897;
+	b=YT6NpDDCb+fKTnCw6iScc7mK4ZBsBA+QkhJL8IK8bGsis7dfgAY1tuGUF9TTF2sk7tOY
+	 fplnIbGUJytJ4R7jnye0/L9TTTPU0QoaqWKfVxh5kA209z7GJ4aD1ipaQ8IR39URzKtjZ
+	 OlpQLR3qS4/MI7771TRgyiZMQSAnutkRCuR4usaTfFHHfA2wXdhZgJzhE0BtTbmNpyG0P
+	 YiH5SurtY9w91ZwwYpGWfhqv/OV+ev0X9dTYn4BDH/XET+tJaARIoIcqGgetpxHvfphwG
+	 VhrxS5ha+NjIFfyLWHgS/z8r2Y7kCtCDUXSgkW3DzKVQ1S/eVUAH2FreIrEmQBHDOsw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792656266;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=ObSE3ZJGUhfkRtxVmU63FjbVACj6XxFRRqFqlkv9Dmc=;
-	b=Sr5KWV1aPLrWy4WObGvjb+crC7HPUcp9Vrrj6M+PijnlrrGlF/WUrI1cbC9/bFptu4Gt
-	 AfqQB06I0tB36ToHpZJt4QnQR4jL5ID0r1NHDhTv/0GlOUT8tqwA9Oiyp0QqrFUjCh80g
-	 8JoH9upV/fEAIrq5KfUpLcjhJGx7WCVEqLgBnIOdvXgqyRdDZeqhxpfi4mdyDF1AT3XyO
-	 garz33hA0mlBmZkvRo0/+IHoqRMfzgRjz/HeukpVgDeCgs0O2wjJWywK9pag1AhHWIDj/
-	 N41OoTqK+Lo2REZPjoQtsVYxZt3ngcyvOvIoxHb5hirkApybfSRnsRDE/PpxSRl8tvw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792657897;
+	h=DMARC-Filter:DKIM-Signature:X-QQ-XMRINFO:X-QQ-XMAILINFO:From:To:Cc:
+	 Subject:Mime-Version:Content-Type:Content-Transfer-Encoding:Date:
+	 X-Priority:Message-ID:X-QQ-MIME:X-Mailer:X-QQ-Mailer:References:
+	 In-Reply-To:X-QQ-mid;
+	bh=STANDc24tjLvIjwpWVUmAsj3lx2tDmc6YgtW+icG3B4=;
+	b=GN9NJshBKBMHdERa5KC+JK47Zd8jh84dsjLFsVMzEKULuWW9W68MjtLLBd9yrrkWvZaG
+	 i/iZH+N6UbbJnYRWFT0tFrGI6K1eux5HYMkMazlQWfbbqVhgvBG1qx90y5bqCaeAyKGUY
+	 q0b3PHg3w6VHbWYK3z+hHVq9DIEUEPHH/07sZiMA8sOp6fGTKdHrWumzYmzS5x+TISpqB
+	 YNxlkRDDiDaHzw55hQ0xtXnkSzSwbKKS4/GDdxQ4uyUHQ9VxePlj47wB2NUqs7WLvcX4P
+	 o1zspXYxsWUNYnn1GYogiZa0tLH2t/C+xQoWubfuDRJclk73nYQ/9NYbv9LxIwQsZoQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Kbs7jHKJ;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=qq.com;
+	spf=pass smtp.mailfrom=qq.com;
+	dkim=pass header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=fUyjrIWN;
+	arc=none smtp.remote-ip=162.62.58.211
+Received: from out162-62-58-211.mail.qq.com (out162-62-58-211.mail.qq.com [162.62.58.211])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86689606A31A
-	for <mfd@lists.linux.dev>; Thu, 22 Oct 2026 08:04:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 558A5606A319
+	for <mfd@lists.linux.dev>; Thu, 22 Oct 2026 08:31:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 558A5606A319
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qq.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Kbs7jHKJ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E63711F000C1;
-	Thu, 22 Oct 2026 08:04:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792656266;
-	bh=ObSE3ZJGUhfkRtxVmU63FjbVACj6XxFRRqFqlkv9Dmc=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Kbs7jHKJX59XobewvQE1dHXuN7EEKAoSvOoMxc6fbZ71gMjkxnyd19XvjaTeMb6iF
-	 AqRgq7tDERG+ZKSTcjzrHlBihfqa7YcAn734FeMLieavin0OC0BUNQv35BnZEseTB2
-	 MZRhCabJMmL/fpTGD1tN3DYrOdKetghexwjShRQm2Uy5qr51oUcrdNZ4JccZZ1XRsi
-	 V8taHXU8nlcpcAqFE2qX+41LkZm48jDdIjJO8dTXtHILlOtscDq6/UuRGkpBsEDA1H
-	 dneQQOcT0W3X8Rt2F9+oSzAbt3XjyFvD9CbP3r6Upvma/C/qbXfXn4a58NO3e50T2y
-	 3jY/iodoEgKdA==
-Message-ID: <sashiko-outbox-181152@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH] mfd: wm8994: Enable runtime PM before registering IRQ
- chip and children
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Marek Szyprowski" <m.szyprowski@samsung.com>, mfd@lists.linux.dev
-Cc: lee@kernel.org
-In-Reply-To: <20261022075938.625795-1-m.szyprowski@samsung.com>
-References: <CGME20261022075950eucas1p24096817dd7f79071a41320d9cf2d1c30@eucas1p2.samsung.com>
- <20261022075938.625795-1-m.szyprowski@samsung.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 22 Oct 2026 08:04:25 +0000
+	dkim=pass (1024-bit key, unprotected) header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=fUyjrIWN
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+	t=1792657892; bh=STANDc24tjLvIjwpWVUmAsj3lx2tDmc6YgtW+icG3B4=;
+	h=From:To:Cc:Subject:Date:References:In-Reply-To;
+	b=fUyjrIWNZngROUclxWWKZVyN/bRgeThQB4k/DjoUpctc/a8tx8gCiSYfCCsdEKoOT
+	 eI6Fcpgm5nbNe6p1TI3zdXAuoVAgFwv97ir6Fo0KXMCbikO9gAi1ZiyB5afHEPF11I
+	 YMmMjBP4xH0nfUlUFSPm7uP4PbORqu3v0foxg+a8=
+X-QQ-XMRINFO: MSVp+SPm3vtSI1QTLgDHQqIV1w2oNKDqfg==
+X-QQ-XMAILINFO: MdmyWVu0InhAZ8CuOl+WbGFKb0ebdFMF3mPSDUyiHYO6r7cCGW4mjYzB3NBROn
+	 A9jpVSF4u5EGvEY+hd9HqK0oJrog5xvbOMlpipPRJufSIYbzcDiHl7z1PQMAap6nUQRMYmsXXrTj2
+	 tk0tu+feORbWkh2MZvFlU6kFWGBDTovA9C78iIph96PStjs9Es57Lo5xtDOysKUKMazNBnBIRzXyV
+	 MrDMJ/nR6ENpT11vObm03xfcgHiUZmvbLYBNxYzkM9rWk/c8kXIUlrVRHSrjx1mJjWSwuR5ikLS90
+	 IA9oWFvjt5F1LrALDB8oYuhsvLYKtLJ5ZkmJZCMyfCvCIOrYeHecIvDsFyx+oo5L4n3vgJ4ILNe7w
+	 IWF/UoBKpSMC6IECVj2Z9f319IRWT7EtoQ3/KSPMVurUnn/z6RI9NhVutrd7FEEPyf2psClNX8xxs
+	 s3PodM+x6fnfX+HsW82g3vD8H2txXYRk7zN+9LrD09FtOt6JshsmPGwwAeMukpJ98J91aFKfwVtXG
+	 hBG+k2dK0PJajAwkc9bcbgYtz+Q2QR/RrNM6mtAf6w1rBmXaym1TMdQrgHoBFJdV2Yq2POKQKAvme
+	 EL86NXj9H2XUOECt/ikrQ4GvvRhc0W9Wo5HM2Kne7g8Tierj5RJN8KGA9QCQrgBYDnaAMIirrE89H
+	 /jI/jnpkPoEF6rQGbKH3V/RamkwDMVcm5rYvbUthGDSPKmiwUJk1kKo+Iyv/ZHZrmPUxG48EfbqTn
+	 HwXwLKP5guQm5Gr592nEMxLOh8CzkPL9PdfBHto0MAlW9nSWwpa6DmlElREMdAJrqEaSDrqmzII0S
+	 sRL9obZFk6mBkHY4RseG3hqBrBd+TNy0yz+nfoR6xF3WORhgAZbTIwwUQwf4/zUhc5WO6AamzLy7e
+	 JEZv0CDUEAtadJBWrvTVq+ZCI77/7ajFV0NgGLf9cPk9NrxnZnSqBHWuF/1iL6D3H7rwgSZ5puDA8
+	 FC5wND+fVe7bNKWVf/B3mWtxt6n1/TKztIPBU/DRVcT1NTS4JlKx6oT9ngX/okTR18+YLz8bG04q4
+	 K40wSnuLyRd1DNII7GNYR7vz6pxerbM2KyZCwhtwsaRd49zRlHj2xiYVP5iDbcjjkWk/Vy7nD++zK
+	 zkFHOwuBXxHfZg==
+From: "=?utf-8?B?Q3VuaGFvIEx1?=" <1579567540@qq.com>
+To: "=?utf-8?B?SGVpa28gU3TDvGJuZXI=?=" <heiko@sntech.de>
+Cc: "=?utf-8?B?RWxhaW5lIFpoYW5n?=" <zhangqing@rock-chips.com>, "=?utf-8?B?bGludXgtY2xr?=" <linux-clk@vger.kernel.org>, "=?utf-8?B?ZGV2aWNldHJlZQ==?=" <devicetree@vger.kernel.org>, "=?utf-8?B?bGludXgtYXJtLWtlcm5lbA==?=" <linux-arm-kernel@lists.infradead.org>, "=?utf-8?B?bGludXgtcm9ja2NoaXA=?=" <linux-rockchip@lists.infradead.org>, "=?utf-8?B?bGludXgta2VybmVs?=" <linux-kernel@vger.kernel.org>, "=?utf-8?B?bWZk?=" <mfd@lists.linux.dev>, "=?utf-8?B?bGludXgtZ3Bpbw==?=" <linux-gpio@vger.kernel.org>, "=?utf-8?B?bmV0ZGV2?=" <netdev@vger.kernel.org>, "=?utf-8?B?bGludXgtcG0=?=" <linux-pm@vger.kernel.org>, "=?utf-8?B?bGludXgtaTJj?=" <linux-i2c@vger.kernel.org>, "=?utf-8?B?bGludXgtc2VyaWFs?=" <linux-serial@vger.kernel.org>, "=?utf-8?B?bGludXgtbW1j?=" <linux-mmc@vger.kernel.org>, 
+	"=?utf-8?B?bGludXgtc3RtMzI=?=" <linux-stm32@st-md-mailman.stormreply.com>, "=?utf-8?B?bGludXgtcGh5?=" <linux-phy@lists.infradead.org>, "=?utf-8?B?bGludXgtdXNi?=" <linux-usb@vger.kernel.org>
+Subject: Re: [PATCH 07/27] clk: rockchip: Add RK3572 clock and reset support
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,36 +69,33 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+Mime-Version: 1.0
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
+Date: Thu, 22 Oct 2026 16:31:30 +0800
+X-Priority: 3
+Message-ID: <tencent_48E1098E2322016888397E2F4D1D34343208@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
+References: <20261022-add-board-ok3572-c-v1-0-0b0fd85a31ee@qq.com>
+ <2339330.72vocr9iq0@diego>
+ <tencent_791C8CE4050020CEF9E536C9D3B4CA9C250A@qq.com>
+	<2117228.PIDvDuAF1L@diego>
+In-Reply-To: <2117228.PIDvDuAF1L@diego>
+X-QQ-mid: xmsezb41-0t1792657890ti513lphq
 
-> The wm8994 regmap IRQ chip is registered with runtime_pm set, so
-> regmap_irq_sync_unlock() calls pm_runtime_get_sync() on the wm8994
-> device whenever an interrupt is requested or its mask is changed.
-> However wm8994_device_init() enables runtime PM only after
-> mfd_add_devices() has returned.
->=20
-> If the sound card is already waiting for the codec, it gets bound
-> synchronously as soon as the wm8994-codec child registers its component,
-> so the codec requests its interrupts from within mfd_add_devices(). At
-> that point runtime PM is still disabled and pm_runtime_get_sync() fails
-> with -EACCES, e.g. on Exynos4412 Trats2 board:
->=20
->   wm8994 4-001a: IRQ sync failed to resume: -13
->   wm8994 4-001a: IRQ sync failed to resume: -13
->   ...
->=20
-> Fix this by enabling runtime PM before registering the IRQ chip and the
-> child devices. Hold a usage reference while doing that, so the device
-> is not runtime suspended before the probe completes, and drop it at the
-> end, replacing the former pm_runtime_idle() call. Also disable runtime
-> PM on the error path.
->=20
-> Fixes: 7a97637988c3 ("mfd: wm8994: Flag the interrupt block as requiring =
-runtime PM be enabled")
-> Signed-off-by: Marek Szyprowski <m.szyprowski@samsung.com>
-
-Sashiko has reviewed this patch and found no issues.
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261022075938.6257=
-95-1-m.szyprowski@samsung.com?part=3D1
+SGkgSGVpa28sCgo+IFJvY2tjaGlwIGhhcyBwdWJsaXNoZWQgYSBkZXZlbG9wbWVudCBicmFu
+Y2ggYmFzZWQgb24gNi4xMiBvbiBnaXRodWIgWzBdIC4KPiBUaGlzIGluY2x1ZGVzIHRoaXMg
+Y2xvY2sgZHJpdmVyIFsxXSBhbmQgbW9zdCBsaWtlbHkgYWxsIHRoZSBvdGhlciBwYXJ0cyBh
+cyB3ZWxsLgo+IFlvdSBjYW4gdXNlIHRoaXMgdG8gY3Jvc3MtcmVmZXJlbmNlLgo+Cj4gSWYg
+dGhlcmUgYXJlIG11bHRpcGxlIGF1dGhvcnMgY2hhbmdpbmcgdGhlIHJrMzU3Mi1zcGVjaWZp
+YyBwYXJ0cyBvZiBhIGZpbGUsCj4gcGxlYXNlIHVzZSB0aGUgZmlyc3QgcGF0Y2ggYXV0aG9y
+IGZyb20gdGhhdCBoaXN0b3J5IGZvciB5b3VyIHBhdGNoLCBhcyB3ZQo+IGRvbid0IHdhbnQg
+dG8gcmVwbGljYXRlIHRoZSBkZXZlbG9wbWVudCBoaXN0b3J5IGZyb20gdGhhdCB2ZW5kb3Ig
+a2VybmVsCj4gdHJlZS4KClRoYW5rIHlvdSBmb3IgdGhlIGxpbmsgYW5kIGNsYXJpZmljYXRp
+b24uCgpJJ2xsIGNyb3NzLXJlZmVyZW5jZSB0aGUgUkszNTcyIGNoYW5nZXMgd2l0aDoKICBy
+b2NrY2hpcC1saW51eC9rZXJuZWw6ZGV2ZWxvcC02LjEyCgpCZXN0IHJlZ2FyZHMsCkN1bmhh
+bwo=
 
