@@ -1,55 +1,110 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=103.168.172.151
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793017136;
-	b=cMBsZZ6yJfwxIEqH0IJLknFh63OWJNa5ekQafwyjIxbM6FtjW9kVuj+hwLsEo5/7WWAH
-	 0CE31ziqy7sIIP+1Jkcgj0y5zy7bv76qu18jo+m4ijTuKaOOLoAjgLFmw3FP24LAviXcA
-	 wcoArSCSG4+V+s2FDony5EyPbVjHJofVbMMYhc9ugKnj0sHM0efAMyC2fQu5iXWwDNwnl
-	 x9ZgjRQeoqy+POrRcjdLML7hzruvIWSbacCQhiIuhFU7PSakiFhiWaVFo+QiGfnCYHC+3
-	 3mgnK6PzpOFeki1gRhW6FK0ugkJYfAo5a4ORV9uutLJEpcpsI2NABVeBvQ2VVhcNLUA==
+	t=1793022720;
+	b=T+j05+1ab2obosIgNwdmsuLkREBafjBGTnJWC0Pj284Fm7Ghy2Uz1pI/KSBcFa3a098a
+	 dgc1OLXmaY0BL+0CcSFxAA9UUUjzRmiOgNgShTLrQLmyEVnmu1qyh+WiX1aoE409048H/
+	 mj/nT38qoE0lRJKIqcNZVPzhFjYkafwAOs/Er564aL9b5LLoUA057uSh28k9XfEL6CrtF
+	 Chk393NPwY7QQjQfxox6yIPAg4PmF6jPXiehXqYvpSiJoe+tIrljCdsLTLb+0Uw0y2H4g
+	 TmM8N/2amcM++wF8FzxwYnPGMOeXuvul5ybeP7etLpe86ZgDo9OCos6S8C/X7sDBr0w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793017136;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=yaXI3Nbh5+pJ3mo/ViTuOATYZaNQKD2VP/LefhS5CWg=;
-	b=xpTdlxTBbNUvMoGWP7FBh7MXZA2O+SooYn5m7lxTOrjXYAApjkpiXWfREyd5y6GD2PcD
-	 W3Bt/kkyKvvh9mhmQhnawyyuOkYweyHuDYhPnLlcmDiTviaaEx7xnc7yBWJALUZ249J3U
-	 38Cxj83fhMSBr7wZiL04uu9Efq3/kuFWIjLr3IxfPBUq80baHQ6qHjZ8gEPlLjCMKn5rX
-	 pjPStrUD8dEhR4nX89rbzWQEODJDp0J9hWe2Iz+pYtoyC8GBmoC+wfedSUk33qkqquz6K
-	 +Yc+tUt+FeQgfXoAzpUAumFJgJb6rVW81KGmOID4T39vUHLj+f+M0KIOInfS8InWNwg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793022720;
+	h=DMARC-Filter:Received:Received:DKIM-Signature:DKIM-Signature:
+	 X-DKIM2-Info:DKIM2-Signature:X-DKIM2-Info:Message-Instance:
+	 X-ME-Sender:X-ME-Proxy-Cause:X-ME-Proxy:Feedback-ID:Received:X-Mailer:
+	 MIME-Version:X-ThreadId:Date:From:To:Cc:Message-Id:In-Reply-To:
+	 References:Subject:Content-Type:Content-Transfer-Encoding;
+	bh=Q3DEVqrZHjQPZv56tDkM43SEEr29dhJWwVMxvej/8Yc=;
+	b=2cCF+DTxIG/kti5zgTx9NY455hDZ4Ufebjg5CAvgYOeuCcu0YYbKdj+kHj+H5dsEDPkp
+	 Hkp94fkfxO0HR5wtivHga3if561ABaawGHPiqKJ2m27rhcbpiXP2kQBoH87K43Y44Ox/N
+	 UQng5GI436fgpd3sRvZ13g4dMzX/pJeEYPdKX1sJRcmozyZa3dNSrZd1YBP7kGsJzkBZ6
+	 7JWOsi3x7Ek42ui3XIBQIbcOMP/COR+vJbsRtav0pG9LyItE5UDuCbvUoXoKqt5luWPRH
+	 J79BszSQQupokC0r8RAhfax5uAX0MAcsTAEUu/OT4obc+fx6+aAM2YTl71QysMFomcw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="D5u1emH/";
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=arndb.de;
+	spf=pass smtp.mailfrom=arndb.de;
+	dkim=pass header.d=arndb.de header.i=@arndb.de header.a=rsa-sha256 header.s=fm2 header.b="hxEh/ZsV";
+	dkim=pass header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm2 header.b="t/Npa1R0";
+	arc=none smtp.remote-ip=103.168.172.151
+Received: from fout-a8-smtp.messagingengine.com (fout-a8-smtp.messagingengine.com [103.168.172.151])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDCD2606A31A;
-	Mon, 26 Oct 2026 12:18:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01C61606A31A
+	for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 13:51:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 01C61606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arndb.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arndb.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=D5u1emH/
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BE17B1F01825;
-	Mon, 26 Oct 2026 12:18:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793017135;
-	bh=yaXI3Nbh5+pJ3mo/ViTuOATYZaNQKD2VP/LefhS5CWg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=D5u1emH/+RwuN4KyRpoLdlAQ+i0twajuafBFFPM3PCQbwovNzap3epOHMECow+/5U
-	 gHepCpFQFVinkhWkxeZLs8qnZ/jXv87iPpn8VtWDA4Ae0bKK5tqYySOePHg6t1jtRU
-	 yD4gjpgeFc1z4qC1SeqyFpqtm0AbxAVgJR/xw9bj1SpyOUWz6iXI72ixXRNIzBm8dg
-	 ixIKioGwxgguq0+wzud+WjI9igYwbhbraOA2ROu5QeEaA8gK0hoChwFzLsuMUDmQuk
-	 ze0U3MIQHhlHXSvxFRkicZb3629lYYtzFv2patU7DnhUUNiMcPZa9mbMF3PjdMcaiO
-	 O2liRjR/abElQ==
-Date: Mon, 26 Oct 2026 12:18:51 +0000
-From: Lee Jones <lee@kernel.org>
-To: Matti Vaittinen <mazziesaccount@gmail.com>
-Cc: cover.1712920132.git.mazziesaccount@gmail.com, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 05/28] mfd: bd96801: Allocate watchdog IRQ resource on
- the heap
-Message-ID: <20261026121851.GA17910@google.com>
-References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-5-lee@kernel.org>
- <24bf0964-dd2f-4688-bbf4-cc891c674d3e@gmail.com>
+	dkim=pass (2048-bit key, unprotected) header.d=arndb.de header.i=@arndb.de header.a=rsa-sha256 header.s=fm2 header.b=hxEh/ZsV;
+	dkim=pass (2048-bit key, unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm2 header.b=t/Npa1R0
+Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
+	by mailfout.phl.internal (Postfix) with ESMTP id F3471EC010B
+	for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 09:51:58 -0400 (EDT)
+Received: from ams-imap-03 ([10.64.2.23])
+  by ams-compute-02.internal (MEProxy); Mon, 26 Oct 2026 09:51:59 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm2; t=1793022713;
+	 x=1793109113; bh=Q3DEVqrZHjQPZv56tDkM43SEEr29dhJWwVMxvej/8Yc=; b=
+	hxEh/ZsVMXx0VaMd/+M8Z96je/vs1Zp8GiGfwLUU3sMVKxrSEqFM1LWqRrwVWgxD
+	ic0sjz+MicnBUw5CZJPlx0Im3sJpaRjNc/HJGDjCajNWx4gGJdpwfkIQYj6wNBgt
+	e+eBnu22SH8Y13GRb32d0cm7GJHJYhAaN3NtprW97s/y44jdKzmoaT39V/9RtiVL
+	lgSBIebc6e8J0HOOX/kHDyFaCPKp11iqSuPK/+z/Z1sc7CsYx0MNLVw0B5TzOJEa
+	gkEOLtE9ere9nNr543UjbRUwyLo/hIH2Tb02YqGaI11nMi6nMznFeQ5tAhWomJwg
+	xhQZsW0krpAfTW46v/PmQA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1793022713; x=
+	1793109113; bh=Q3DEVqrZHjQPZv56tDkM43SEEr29dhJWwVMxvej/8Yc=; b=t
+	/Npa1R0HkfQ14yvATXInKphJDtSyIRV5l1q/k/issD2KJKlkaDH69zU27cQn31VR
+	H/FdlWiJIZjeUOxC5j4CEIeFRIQx04x8vxSKD+BnbxlKq/MnpFi+LAh8jRGMfd4p
+	fkywLOY6ZkHPeBjcsrMyhy05dVvMtGODDM3QTKzc2OkJ5z1p5YAZkqxjhpFWlmde
+	zRW7wyDzFw7qtTunUW4h7T3yrEQLuu+UMsWuWq5cIrRgH4qglLFfojmgY0XeKJTr
+	CyW8svbnP5DaX2g7vzUefeiuA2V3xw/alfRwqv/kCN7yCXqTd+3u9gLDb589PkGD
+	zGpTnWmH5v+LDlhzK7Cbg==
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-07;
+	repo=github.com/dkim2wg/interop; date=2026-10-18; sw=lmtpprox;
+	action=sign d=arndb.de a=rsa-sha256;
+DKIM2-Signature: i=1; m=1; t=1793022713; d=arndb.de;
+	mf=PGFybmRAYXJuZGIuZGU+; rt=PG1mZEBsaXN0cy5saW51eC5kZXY+;
+	s=fm2:rsa-sha256:P7ROxgXO/joCpW/yfC1VmUZD2cRBDn/YXQPi2mNooW9/PHb
+	KcaJtk/dW4Rhw5Ir0qpCjupKxjzYTMa2Ob+alBRUz+iOquNY96+ISN7PoT9hikMB
+	8f14q6ZYgoQrN1Ejoa41AG9OslaktE0kAqKzSIhn3SrwcQ+HBgF2SDavj2/8e42s
+	qXO2pWTEMCAFK1oxjN4/fxo4QcihB9deIEVXVOmKCUflRFMyUxdetXEkP12YQsqQ
+	5MA6cpQz6pamMSh5XUnKITd8mpGh+g7uO/WfXSR4dXSAb//VowNbe+8UnjmrKyv2
+	LZ3KZMjZmx2oLo2mrwCG+A+QWws4pLI+DaUQctQ==;
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-07;
+	repo=github.com/dkim2wg/interop; date=2026-10-18; sw=lmtpprox;
+	action=mi-m=1; hc=12;
+	hn=cc,content-transfer-encoding,content-type,date,feedback-id,
+	from,in-reply-to,message-id,mime-version,references,subject,to;
+Message-Instance: m=1; h=sha256:Oy/howkruMFXJD3laxRsMr4nOnclTbF4SNSQ6L93fKU=:KtX4k3ya7RcU8NJ3EsCTbOk4F9OmT8AIpqn6aAliyFk=;
+X-ME-Sender: <xms:81rfaljJJ3gxVsOVJ5b0Iz5j0m47vRpWtVSiAphiT1Etk6luBcYQMQ>
+    <xme:81rfak2ehLAhgKTK5zig3tDAtZ1co2alavnEDhfKb4XkER8uQ8U6KVrtGuTxQzR66
+    J2dmDyQE6m0GIlPem8cM79NX1Z3JbFKQBEd1U0fZ9uKzquF7OrXOJKz_g>
+X-ME-Proxy-Cause: dmFkZTE10nT9aBR7VZGvooOUSEy9GXDTiA4fuLwAGQk8gcKjnfNQfW7SSsRSjF46yJnilC
+    ug+nAoOlsm9ni3ebzgzSGJQTNboxVBBt0rTBObzgYi41jG1ILiJdkgROT/uof9eFptJse5
+    A/btnyQRsPuQSDLUJUyv+dDyIWiP2iy5NVIt+T7Uh/uddWL3I90XhDupPX5M2vCqxcXQSq
+    DwEcdDZqwm/UTSkgzVRlQ3pVQizQ7FMRRau9ixulXaj32FeKpkicStKj4YiY4HslYkiAaw
+    goJG1x5bgtcelQrzM8UffY+pZItrjSQfzVqS/KifCHl8bsUOm3U37cipWrWqSXt4182EWf
+    Eik/LS5y0fz+oAnEp9bUrQWhuYEjFQKeLzSREa89M4D8HV6rRTfQ0mqBsM9qcJUgYPmxMe
+    sEyVhxNgO6AxEuWlZeLmqotx/P8Bhcb6RxrvkNzQVnmEUzebcZEplqJxS+KuEYomjiS2GY
+    cN72nYbIOtIGEIRDJ9etf0A2gGSlwKw6m3Rgk2Dkc5/Cb/yZchesW11dNuIuPxudNvPKED
+    dKhQaWo3Js5LXQqwCzEdIu0bDGLWP4TSJCa+ZPEA6SwlcCTEZwrwzLY57F0AUf655SM5SG
+    S5NeYVsEIA3aUIzcD4sCrp4UTGkR0cY0NljKqhKlc/BzwBjgvzdO2/ArwPzQ
+X-ME-Proxy: <xmx:9lrfai7MMHWvIpkcN7Ex5paFsEknNsUPslrfZRwafLq-NQEsd0Rnpw>
+    <xmx:9lrfamkcRv4lrYDS2g6ntYkeiTSDdVz0R2bpb4U2gCkPS39zq66rZw>
+    <xmx:9lrfaoEh7Ix8f1v3crW6hERWF3Um-x7HKNkbpV6FpuGkSX8Bd8LnIg>
+    <xmx:9lrfaqHFuIS2W1vz-hDVLSax1chdktmSPzQjFRWyAEF-LETbuYAkYg>
+    <xmx:-VrfagmAfe00RPWSkxcZJ3xx5c7E_MlNrP2HqaJaTR3cSUgzjJdapRYy>
+Feedback-ID: i56a14606:Fastmail
+Received: by mailuser.ams.internal (Postfix, from userid 501)
+	id 3F1D932A0093; Mon, 26 Oct 2026 09:51:47 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,30 +114,61 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <24bf0964-dd2f-4688-bbf4-cc891c674d3e@gmail.com>
+X-ThreadId: AIMzr2H-57Yw
+Date: Mon, 26 Oct 2026 14:51:16 +0100
+From: "Arnd Bergmann" <arnd@arndb.de>
+To: "Dmitry Torokhov" <dmitry.torokhov@gmail.com>,
+ "Lee Jones" <lee@kernel.org>, "Krzysztof Kozlowski" <krzk@kernel.org>,
+ "Peter Griffin" <peter.griffin@linaro.org>,
+ "Alim Akhtar" <alim.akhtar@samsung.com>,
+ "Russell King" <linux@armlinux.org.uk>, "Mark Brown" <broonie@kernel.org>,
+ "Charles Keepax" <ckeepax@opensource.cirrus.com>,
+ "Linus Walleij" <linusw@kernel.org>, "Bartosz Golaszewski" <brgl@bgdev.pl>
+Cc: mfd@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, patches@opensource.cirrus.com,
+ linux-kernel@vger.kernel.org,
+ "Bartosz Golaszewski" <bartosz.golaszewski@oss.qualcomm.com>
+Message-Id: <a6df6043-9f0d-4b03-8efc-d3e47a82f096@app.fastmail.com>
+In-Reply-To: <20261024-samsung-kp-v4-0-e21253295e68@gmail.com>
+References: <20261024-samsung-kp-v4-0-e21253295e68@gmail.com>
+Subject: Re: [PATCH v4 0/4] ARM: s3c: crag6410: Convert to software nodes and
+ properties
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Mon, 26 Oct 2026, Matti Vaittinen wrote:
+On Sun, Oct 25, 2026, at 06:03, Dmitry Torokhov wrote:
+> Hi,
+>
+> This series converts the Cragganmore 6410 board to generic software nodes
+> and device properties, allowing the removal of legacy GPIO lookup tables.
+>
+> We add software node propagation support to the wm831x MFD core to route
+> DVS GPIOs to the PMIC regulator, and convert the peripherals on the
+> Cragganmore board (PMIC DVS GPIO, basic-mmio-gpio, LEDs, WM1250, and SPI0)
+> from legacy GPIO lookup tables to software nodes and properties. This
+> eliminates the legacy GPIO lookup tables on the board and fixes incorrect
+> GPIO chip names from previous conversions.
+>
+> Hopefully Krzysztof can finish merging the series through the soc tree
+> once Lee acks the MFD part.
 
-> On 21/10/2026 15:09, Lee Jones wrote:
-> > bd96801_i2c_probe() declares struct resource wdg_irq on the stack and
-> > assigns its address to ddata->cells[WDG_CELL].resources.  Although
-> > mfd_add_device() deep-copies the resource table via
-> > platform_device_add_resources() before bd96801_i2c_probe() returns, the
-> > shared cell template and the shallow MFD cell copy attached to the child
-> > platform device retain a stale pointer to the expired stack frame.
-> > 
-> > Allocate wdg_irq on the heap via devm_kzalloc() alongside regulator_res
-> > so the stored pointer remains valid for the lifetime of the device.
-> > 
-> > Signed-off-by: Lee Jones <lee@kernel.org>
-> 
-> Does this warrant a fixes-tag?
+Hi Dmitry,
 
-Not sure why this one doesn't have one.
+This all looks good to me,
 
-I'll look into it and apply one if appropriate, thanks.
+Acked-by: Arnd Bergmann <arnd@arndb.de>
 
--- 
-Lee Jones
+I'm a bit unsure about how this fits into your wider plan, i.e. why it
+is helpful to replace the lookup tables with device properties in
+this file:
+Are you working towards eliminating all gpio lookup tables from
+the ~50 files currently defining them, or is there an immediate
+benefit to doing this one in particular even without the others?
+
+Do you plan to also eliminate the uses of the legacy gpio
+interfaces in mach-s3c, e.g. the hardcoded numbers
+in {pca953x,wm831x}_platform_data, crag6410_lcd_power_set(),
+crag6410_machine_init(), or the pin config in
+s3c64xx_i2s_cfg_gpio()?
+
+     Arnd
