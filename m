@@ -1,96 +1,67 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.216.43
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793025327;
-	b=gVGoin22mMXcpR3Q+lJEU4OLhn8NwaR2qkodNxHnsYTEgMzsbFhau+vINyEdZ8znTLzC
-	 gHy6d8cB4cMc6ToyuIDaEnsi/+M7gWbNLrtskTDJJGsBRb0yyWv5v9gWlqm1SiPPheNIc
-	 Cyj3+UrT9tfe3SCuWvEB+ezXWEEnwoypMsFoN9vLeYBzce+Dy7YTQVNmCzi2Z0YQdwsxC
-	 DoBUI3P1353H/i5LXkqbGyroffAM0PfDNzRab2DAW7l2h58H3MweUFTqCzJxSqsHGSz7B
-	 e65YzXYy+tTpgNbhx/uD8GiDv0d6RcqzPr3R0Ylt8n0B4zLXgLLpZfm9EJCKtClVTPg==
+	t=1793027093;
+	b=lnmE5YXrjURWSfygM9wQMprzrE7Y95iZxP6jTcn0u6PW/LvldVWNwYavEmZZlMC4Q8vt
+	 vGeJo7Hpi9tPHkwHxxetxhfZ04v+o/+oPVkAx+KBPVEB7RCnvHNYZ+GOJQhS9J4PIGlWm
+	 pxWh411GjUxAFwvXUHTb5g08gGmC96zxvnoAeWm49uQk1gjvwKWPGB9IU6NLgB5p+ZhXC
+	 4l55whsM95u4qSfUZfVp19tW0LaQ43+IQkQAebDkSEp+g2IqYg8xaCo2RVts6M3ZOlkwd
+	 4Z5Z/R8tvDcc4Qz7Gc2cU9vVqhy+OFqIAb0qaxd7tEj0Oab8QxeZJEqDcYd+5xrNNmw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793025327;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Sender:Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To;
-	bh=3nXYf+vZdz1X4ceYTBG7b3k1LMVkfZE8bc94nKl4oNc=;
-	b=1gRiSrzvEspL25NZlVSVuEtbMfe/W1Y/5RmxIgHlngFYyNLvcElWDUVkAjL2Bcjeu+Ea
-	 W6wrKPaZ538Pkeq2uPa/rIeH9oAcmnuK8/kAdd2PqrDx0sUDKNm4VHQ5maIVJAFbSAAIE
-	 YSSzNSmEa+QLGLKvFb+k2g/b+g3U6uT29dm0L2XGIO2DEkyTVTjjV+KlPQk/cE4l5UFpY
-	 f5Ia/gNGVBpeLcKOm9FQ5HQgXP4N0HNH++1cdGLgRdoiXrhBFhWThgP+njQMNYO9I4EFT
-	 Elik49vpZ7OgbAlcGGDaZH1mRcUAo9Oa+x2u50alDW60/XqvzZdkLxfCcxnHqor+NJw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793027093;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=9XE2j6DUb6n5+qYI4Bd75SEMcPwHROZ60jDXuopARVE=;
+	b=sSA8xEudTUVbjLxa9z/CjND2F4oOQwU06nMq+sP/rarcfKznx6FY3poqolA6g8Qy4mqm
+	 cdxHAzwLmBtav/80LEfEAKu9xY4j98Q2slDepCY9/y19B6a582ynB/JMc5Bg8dGN2BLLE
+	 wecF7aS+xjIQywWLIA9E5R26nGb8aHEMseq9BffcXzCHRrT3EtGK8YEmiURkvmxe8i5Ny
+	 KkKSWeW5DrdTG/Rq6XW9A2O3p1g76Py+Wfi9mGQ7HIZ0NDzr6yzOsB2GgMhqLshdjaxyt
+	 sEhvvceV0c0ImGfXdyoq6YAnA6N03DLc70zd+O45GI8rU2FnYeJ7Y2i0c3Eq7rcd7MA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=roeck-us.net;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=ahWAAfGr;
-	arc=none smtp.remote-ip=209.85.216.43
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=l3qz8qhW;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46A98606A31A
-	for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 14:35:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 46A98606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2FDA606A32C;
+	Mon, 26 Oct 2026 15:04:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=ahWAAfGr
-Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-3acd21ba21aso2385655a91.1
-        for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 07:35:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793025327; x=1793630127; darn=lists.linux.dev;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:sender:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=3nXYf+vZdz1X4ceYTBG7b3k1LMVkfZE8bc94nKl4oNc=;
-        b=ahWAAfGrhqM7WNhinh1eg7Evw5M3lhuUigq4ak2ACORi/Uutpfq91/PKG8cFI3rZx+
-         dMYYC2uAhoPKLMoaaIynt20hndbSC3RMfykWdH1OLR510c09GTsCPDI63CltdRbjzS+P
-         A+RFez8Ir2Aqs1RydxmlBzueXXvlF4ABXmDV6h3k+Q3sNxSymiALZUwfLpuhWjrO5LgO
-         BTMV6b7elIVS2YeM5oqhTTX/SmhoLZYW5pg0nMxM8XK60ZngK3pWT90az0b1RCDcRhfD
-         elXRsw7fCw7jZh3FU8EyrZ0q1b2T2ELhq6O6mjsMPA7MvbK6FQlV9DFt2RznFC4LMH28
-         quBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793025327; x=1793630127;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:sender:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=3nXYf+vZdz1X4ceYTBG7b3k1LMVkfZE8bc94nKl4oNc=;
-        b=q4jVgdSDdD9WjMkUx6U+rh/jV2p2Q01cGoOjc6wVgX9agGt2Ysa++lmZLhOaam79nP
-         XQY9rVzJrct6P2MJnHUQSps4x06K64VgI1V9d7Yovl/PPaRdiL//OZN9ZjOc+9tLQsdV
-         Uo10Z6869trGnOFQ3qYMWXTUGn9nacsVkw+ShxwZlq+3fJGrbahsN0ATZcGh56KWr6rE
-         ttux7qfzBm2WRxvLdqPHq86Zvk6dG8ofB4G5ZJq4iemJf1FwmQHwJvnbCGwGSpFdZ2l9
-         +GG/3dUxhwExAwknsA2fSmcZ3XDOSM7VzP59K00W6fXqilKR/hyY5drfyKEcXd5TvKwv
-         Zq1A==
-X-Forwarded-Encrypted: i=1; AKwUvByMUMIQ0GtDp0F74H+Cx3JD/ZXxnylznzlhAA/Pox0+n128P+lWK63JCfcb48nxJZNszDE=@lists.linux.dev
-X-Gm-Message-State: AFq9FYLPYgV6jIw+Q77ug3NaBtb2kJaDJuF0v97Sb7sLHUnbtCYkT1pr
-	dYhamzjh5ZYFN4a8MBvK86dEMPX//ByduAiHoiw7sbRKnc5CyAcG46jd
-X-Gm-Gg: AYBFou09lUYo7N7Kyyu8b6d2Tb8rwVkGMq11Up9/e+5k97yXvE9leuFALgCQRD+2E0s
-	hvDOe7B1moaVXb4cOkCBcaari+8gbdhsrqW4+cu7dZ57tf7577T3e+w/+ZpjnB65NXUZCu7t+Lv
-	R2culj7GZq4BkbBlSbrH/dj5n8nAAd2x2xhohHZd4NUgpBkv18a0awVFL0LWz/ffWKRR2+aZkvm
-	CP4ZYB1JOMTW70EhkE5gUHUN+80qSCNIGXKXVRHqMLItzKhI7gze1TAVCN6v1qG1sznx+kwdqsr
-	4CFhxE6QISoT4pY9fMdCrAJOGMVAftGPBNwDXz+864nCww6XPacz+hEFDh9Dle7buli5nLVvceZ
-	32ChAL6UFGRvxCgLSCtnMN1+KBn/xe3zMwlUrWQ85Jjc5d8LORDEnLI0AYg+JZjnueSLXejUPj+
-	xFpKepmMwFf3j0B7RZOrm6aa4UluUzk2x+h7GcddTQ6eJVFV30kMerrcN1GejMNfeBpJqdRZYGH
-	O7rglHzKq2nzRSoYLyL2+JuhL5CsGYNP8hl+MHOJDxBuKoYHX9Yl9rU4JtHYBbSNQfpPTk=
-X-Received: by 2002:a17:90b:280c:b0:3ad:818f:3daf with SMTP id 98e67ed59e1d1-3adeac05c76mr5804256a91.14.1793025326567;
-        Mon, 26 Oct 2026 07:35:26 -0700 (PDT)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3adeba32e38sm9259927a91.2.2026.10.26.07.35.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Oct 2026 07:35:26 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Mon, 26 Oct 2026 07:35:24 -0700
-From: Guenter Roeck <linux@roeck-us.net>
-To: Pablo Mazzini <pmazzini@gmail.com>
-Cc: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
-	Lee Jones <lee@kernel.org>,
-	Alistair Francis <alistair@alistair23.me>,
-	Andreas Kemnade <andreas@kemnade.info>, linux-hwmon@vger.kernel.org,
-	mfd@lists.linux.dev, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 5/7] regulator: sy7636a: report the temperature
-Message-ID: <f68279bc-20f1-41a9-ba5c-92b974785cd8@roeck-us.net>
-References: <20261026003918.155321-1-pmazzini@gmail.com>
- <20261026003918.155321-6-pmazzini@gmail.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=l3qz8qhW
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 781DA1F031E2;
+	Mon, 26 Oct 2026 15:04:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793027092;
+	bh=9XE2j6DUb6n5+qYI4Bd75SEMcPwHROZ60jDXuopARVE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=l3qz8qhWyTMcNtsxWqOvXSdiIexDlTpz+mnt0gK0cuC05exPRrvBp/Y4p33zXmj+0
+	 JqM4JGmm9QT/UdL35MMf0Tsn2bJN4sfvniApV8hcOi506oA1nG6kjv2tCiPpsCV/JB
+	 y13Qalef/ToGeb6FFcQzJ2Rz6xTF++/GWeNkOr4rSirhkNtnc+OhD88PCDdBBsJbNF
+	 bX/MLFXdwn6vaix51RJiX96VG21VfyLWrA05Gfk9BE4eBmqheAGzcC0vQdBqsory19
+	 ktKpAMZERper+2TzZ2JCdVUHTfZzK0Wee269MPWSSpIgVkuRAuOWPNNEdSiZHyB3zH
+	 D+Rw2Wizteeqw==
+Date: Mon, 26 Oct 2026 15:04:46 +0000
+From: Lee Jones <lee@kernel.org>
+To: Lakshay Piplani <lakshay.piplani@nxp.com>
+Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"linux-i3c@lists.infradead.org" <linux-i3c@lists.infradead.org>,
+	"alexandre.belloni@bootlin.com" <alexandre.belloni@bootlin.com>,
+	"krzk+dt@kernel.org" <krzk+dt@kernel.org>,
+	"robh@kernel.org" <robh@kernel.org>,
+	"conor+dt@kernel.org" <conor+dt@kernel.org>,
+	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+	"broonie@kernel.org" <broonie@kernel.org>,
+	"mfd@lists.linux.dev" <mfd@lists.linux.dev>,
+	Frank Li <frank.li@nxp.com>,
+	"lgirdwood@gmail.com" <lgirdwood@gmail.com>,
+	Vikash Bansal <vikash.bansal@nxp.com>,
+	Priyanka Jain <priyanka.jain@nxp.com>,
+	Aman Kumar Pandey <aman.kumarpandey@nxp.com>
+Subject: Re: [PATCH v20 4/8] mfd: p3h2x4x: Add driver for NXP P3H2x4x i3c hub
+ and on-die regulator
+Message-ID: <20261026150446.GB2195460@google.com>
+References: <20260922103551.2754613-1-lakshay.piplani@nxp.com>
+ <20260922103551.2754613-5-lakshay.piplani@nxp.com>
+ <AS4PR04MB9362E4F3E5E69CE45BE436E9FB642@AS4PR04MB9362.eurprd04.prod.outlook.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -102,19 +73,153 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261026003918.155321-6-pmazzini@gmail.com>
+In-Reply-To: <AS4PR04MB9362E4F3E5E69CE45BE436E9FB642@AS4PR04MB9362.eurprd04.prod.outlook.com>
 
-On Mon, Oct 26, 2026 at 12:39:16AM +0000, Pablo Mazzini wrote:
-> The separate hwmon cell enables VCOM at probe. Report the temperature
-> from here, as the TPS65185 and FP9931 drivers do, and under the chip
-> name as they do: read it while the rails are on and return -ENODATA
-> otherwise. Boards that need the rails on mark VCOM always-on. Drop the
-> hwmon driver.
+On Fri, 23 Oct 2026, Lakshay Piplani wrote:
 
-This is going the wrong way. The correct solution would be to convert
-the hwmon driver to an auxiliary driver. I am not going to approve
-this patch. I am not giving an official NACK (yet).
+> 
+> NXP Confidential
 
-"Other drivers do the same wrong thing" is not an argument.
+Really?
 
-Guenter
+> > -----Original Message-----
+> > From: Lakshay Piplani <lakshay.piplani@nxp.com>
+> > Sent: Tuesday, September 22, 2026 4:06 PM
+> > To: linux-kernel@vger.kernel.org; linux-i3c@lists.infradead.org;
+> > alexandre.belloni@bootlin.com; krzk+dt@kernel.org; robh@kernel.org;
+> > conor+dt@kernel.org; devicetree@vger.kernel.org; broonie@kernel.org;
+> > mfd@lists.linux.dev; lee@kernel.org; Frank Li <frank.li@nxp.com>;
+> > lgirdwood@gmail.com
+> > Cc: Vikash Bansal <vikash.bansal@nxp.com>; Priyanka Jain
+> > <priyanka.jain@nxp.com>; Aman Kumar Pandey
+> > <aman.kumarpandey@nxp.com>; Lakshay Piplani
+> > <lakshay.piplani@nxp.com>
+> > Subject: [PATCH v20 4/8] mfd: p3h2x4x: Add driver for NXP P3H2x4x i3c hub
+> > and on-die regulator
+
+Why is your mailer adding headers?  Please configure it properly.
+
+> > From: Aman Kumar Pandey <aman.kumarpandey@nxp.com>
+> >
+> > Add core MFD support for the NXP P3H2x4x
+> > (P3H2440/P3H2441/P3H2840/P3H2841) family of multiport I3C hub devices.
+> > These devices connect to a host via I3C/I2C/SMBus and expose multiple
+> > downstream target ports.
+> >
+> > All variants share the same register interface. Read the implemented target-
+> > port count from DEV_CAPAB, so no per-compatible driver data is required.
+> >
+> > Signed-off-by: Aman Kumar Pandey <aman.kumarpandey@nxp.com>
+> > Signed-off-by: Vikash Bansal <vikash.bansal@nxp.com>
+> > Signed-off-by: Lakshay Piplani <lakshay.piplani@nxp.com>
+> > Reviewed-by: Frank Li <Frank.Li@nxp.com>
+> >
+> > ---
+> > Changes in v20:
+> >  - No change
+> >
+> > Changes in v19:
+> >  - Retain only nxp,p3h2840 in the OF match table because the other
+> >    variants use it as their fallback compatible
+> >
+> > Changes in v18:
+> >  - Rebased onto v7.3-rc1; no intended driver behaviour changes
+> >
+> > Changes in v17:
+> >  - No change
+> >
+> > Changes in v16:
+> >  - Use a named initializer for struct i2c_device_id
+> >   ({ .name = "nxp-i3c-hub" })
+> >  - Keep the shared header in include/linux/mfd/ (struct p3h2x4x is shared by
+> >    the mfd parent and its regulator/i3c-hub children). The i3c_hub_priv
+> >    back-pointer is retained for IBI routing, with documented publish/clear
+> >    ordering
+> >
+> > Changes in v15:
+> >  - Read the device capability register to determine whether the device has
+> >    four or eight target ports
+> >  - Store the detected target-port count in the shared MFD data
+> >  - Add OF match entries for all P3H2440, P3H2441, P3H2840 and P3H2841
+> >    variants
+> >  - Add a shared hub-context pointer for use by the IBI handler without
+> >    overwriting the MFD parent's driver data
+> >
+> > Changes in v14:
+> >  - Clean up MFD driver comments, formatting, variable names and author
+> >    information
+> >  - Define and document the I3C hub DCR value in hexadecimal form
+> >  - Use direct regmap bit-width values instead of local macros
+> >  - Add a shared protected_reg_lock for protected register accesses across
+> >    P3H2X4X child drivers
+> >
+> > Changes in v13:
+> >  - Use i3c_device helpers (i3cdev_to_dev()) instead of direct struct access
+> >    to maintain API abstraction
+> >  - Avoid including internal I3C headers and use public device headers instead
+> >  - Ensure proper device matching by relying on manufacturer ID checks in
+> > probe
+> >
+> > Changes in v12:
+> >  - No change, added Reviewed-By tag
+> >
+> > Changes in v11:
+> >  - Use MFD_CELL_NAME() for child device registration
+> >  - Rename local variables for consistency
+> >  - Rename driver names to follow subsystem conventions:
+> >    - Use '-' instead of '_' in driver names
+> >    - Drop the "_drv" suffix from driver names
+> >
+> > Changes in v10:
+> >  - Drop redundant is_p3h2x4x_in_i3c flag
+> >
+> > Changes in v9:
+> >  - Renamed macros to follow consistent uppercase naming conventions
+> >  - Made REGMAP selects in the P3H2X4X MFD Kconfig conditional,
+> >    to avoid I3C/I2C dependency issues
+> >
+> > Changes in v8:
+> >  - No change
+> >
+> > Changes in v7:
+> >  - Use new config I3C_OR_I2C
+> >
+> > Changes in v6:
+> >  - No change
+> >
+> > Changes in v5:
+> >  - Corrected the ordering in the Makefile and Kconfig for MFD_P3H2X4X
+> >  - Updated dev_err_probe() for regmap_init failure.
+> >  - Updated module description
+> >
+> > Changes in v4:
+> >  - Split the driver into three separate patches(mfd, regulator and I3C hub)
+> >  - Added support for NXP P3H2x4x MFD functionality
+> > ---
+> > ---
+> >  MAINTAINERS                 |   2 +
+> >  drivers/mfd/Kconfig         |  13 +++
+> >  drivers/mfd/Makefile        |   1 +
+> >  drivers/mfd/p3h2840.c       | 164 ++++++++++++++++++++++++++++++++++++
+> >  include/linux/i3c/device.h  |   2 +
+> >  include/linux/mfd/p3h2840.h |  41 +++++++++
+> >  6 files changed, 223 insertions(+)
+> >  create mode 100644 drivers/mfd/p3h2840.c  create mode 100644
+> > include/linux/mfd/p3h2840.h
+> >
+> 
+> Hi Lee,
+> 
+> Alexandre has already applied patches 1/8, 2/8, 3/8 and 6/8 from the v20 series.
+> 
+> Patches 4/8, 5/8, 7/8 and 8/8 remain outstanding, with patch 4/8 providing the MFD core required by the remaining patches.
+> 
+> Do you plan to pick patch 4/8 through the MFD tree, or would you prefer it to go through the I3C tree with your Reviewed-by?
+
+I'd be happy to apply the MFD patch and the dependents.
+
+However, right now it looks like you have a bunch of Sahiko issues
+pending.  Is that the case?
+
+-- 
+Lee Jones
