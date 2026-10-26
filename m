@@ -1,41 +1,87 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=114.242.206.163
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792989393;
-	b=TB+kxQDr4m+JY4qCpRXkKQ0E+1HwBBCnhZoTT9aYfMpY0aXSdolddAdyml2HKMrU8SLo
-	 kA1ZhtZ3F1mVCYrXbSAloc5TOiiu4/Ws9ztkh6Trt0kmNxXAo40h0rnYeJNGaeJEfK7XS
-	 qJG3is4gDCWpOhKsf85Ajlv76fY0FeBiEjVx5ZQjMxKDGvcGw4+Mnd8unZ2R9AKF4UvTI
-	 9b7skqsXcUwY2g0Q+BIleijC/aJBgJctkxhZ50WmNBQoWc13MsFKUTvOH3uP2Z/tvpqwx
-	 ioodLfDTuxU2An5F7s6UR7VC+h1Rl87KW25LB8vzrIznPuqsbQ/gdbV5l9FOrRJyUwQ==
+	t=1792997774;
+	b=gCZPdtLnYPLh6ic/USnxV4Yu5qJ8PUK6LKtfc4452BqfgngpqhbzfNS1X0zzQoFV2gnS
+	 oBgQVuwGZ0ieMVU1q+sY2+5MshMNbN77XixaFoPb5lAs8w6Z/DgG3z7mf6JzQN/s7BIjd
+	 Di0BP/HfNYnCmaHy9wZDpS3ZQWWiAN2bmamwgFfh5Rh6MPVH7sCMRKAi1g52n3w9r1xYT
+	 I0UBxvrWVckNBzVnIzcL5Sme1dOkfl45W4VSOcdCYSA0mh4z3zBjB1O0HTtPRX4lWsdrA
+	 CzPLKf1HtGfJ9ThzPiU1+8LHjvsJ91oz7qEPZYuDW0oXtLZmIA/HyHvcDeIGXgG7y0A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792989393;
-	h=DMARC-Filter:Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:References:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-CM-TRANSID:X-CM-SenderInfo:
-	 X-Coremail-Antispam;
-	bh=fkjASHhjHD9dtcL2FTJk6qqQRP9PpHcbiVA7YApl7Ho=;
-	b=sMGq0BzrHQSgpV1ouOGEGooh6ZphsQaxlGZrvkJlXOX7cFaTx0uaGhrfKdwk3+UN3iVt
-	 sQY3GEeDVOkqkGXl629VHo2e9pxy8Zwj+Wd++XhwJCrQG6Z3RXKOrko5Ja7aECc9uLLI8
-	 tyx+nUiflkCbJmJ9g1nJFtMBVDfpIboLpsNWUB1CmmE88uVBmrvjxfCcMnF2ZLOiluGq/
-	 HU1WrCXquVAKkhJby5hSU0MYEp/onNcQGgS2x1+rvuhp11KjuO88vjMheUgpY5ruD2As8
-	 XHezlp14Q7imf/ou6YPTqz7pAAVcHMRVEoWfiQtqdRWBtK4VXnKTnWQsoOunRORlN8A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792997774;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=XUKCZGSOsmkTZezLt/menhKq9E8Hwz9jGRuCv99W484=;
+	b=xXgyRn6O7EMAJae9fLhFROHkk4SeHwkyRmnN14ZTT7q4YpVzxIaAWl2Tnx66n1Yj/pj8
+	 njK8jruH+hzemMciU8FbNt/KKa2VcJOus+zVBdQUSxV4wtGn7X7d5leuCizLWYfSEt1nw
+	 LflSoqRMraa7w27pALleaHMHyYiC/4sCh1/yB18KaKm9GAlujglIsJY1YsmVCr2WTgitH
+	 usXh5sSJZ1C95kwgjC5+EZowMk14PuVNLMpM346bi5yohyb4Uh6IR++wWG356oFIXP5GS
+	 JKmCrALDW5mDK4ZoR78bLfaBqMA4da2XMIzTliGUCAYQ3Q0tfHAilSACohlW4ehXOgg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=loongson.cn;
-	spf=pass smtp.mailfrom=loongson.cn;
-	arc=none smtp.remote-ip=114.242.206.163
-Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6568F606A31A
-	for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 04:36:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6568F606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
-Received: from loongson.cn (unknown [223.64.69.17])
-	by gateway (Coremail) with SMTP id _____8Axj9HO2N5qHF4ZAA--.8494S3;
-	Mon, 26 Oct 2026 12:36:30 +0800 (CST)
-Received: from [127.0.0.1] (unknown [223.64.69.17])
-	by front1 (Coremail) with SMTP id qMiowJCx9czM2N5qODkwAA--.7944S2;
-	Mon, 26 Oct 2026 12:36:29 +0800 (CST)
-Message-ID: <b5044747-0f3a-4a63-9446-829379f3915f@loongson.cn>
-Date: Mon, 26 Oct 2026 12:36:28 +0800
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=EF1sVuFw;
+	arc=none smtp.remote-ip=209.85.167.46
+Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com [209.85.167.46])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDAF8606A31D
+	for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 06:56:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EDAF8606A31D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=EF1sVuFw
+Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-5bfbc25a76aso772459e87.0
+        for <mfd@lists.linux.dev>; Sun, 25 Oct 2026 23:56:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792997771; x=1793602571; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=XUKCZGSOsmkTZezLt/menhKq9E8Hwz9jGRuCv99W484=;
+        b=EF1sVuFwWag3eosBErbaBI45QyJNcfmgtGHOkcAE4uaoNXuEvJK2yyl2fBdD+lN8EQ
+         IxjnE9agv6iFbo5v9vY7m1oyFdCYwwmWuFgDgDgY8emx3udJC1VE5ryBCP+4uFdxIYrP
+         y49WTtY7ylJcEZrvLW9CzApeCKoKN4ai8r2d/DRDWAUIpvPO/NsZ5EXphiQZ6Q3EM2gT
+         ZdApY/72m6xHSnGjcNYqcr3ZL0mHRc67iv95LdjHxLmxuCGVNy1B43ZkHT3qecyzXbn8
+         2zd1Vv2ycds1kWj/d34jCmork2Msk+9wk5BkGnzToP5E0O32tkmE9Eh0GX/fflr6t2sM
+         7NGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792997771; x=1793602571;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=XUKCZGSOsmkTZezLt/menhKq9E8Hwz9jGRuCv99W484=;
+        b=u2m+MkCrKI1tYKzTgqvZBgY4T1uTyVhhv2q6TZ99ISR8DDW9fzAMIYilQe7XH83IlC
+         pj4L1jedV89LH9B7y6pugOQdm/WThW/pgQS5eVgvJysHTD8zjRfu8x+++zyoMkcCvsbw
+         OJF+CQFWrgPJiP4xjZdXnnq/m7YGsun+zq4hUn+dcqM3Q0lu1tGEkb97LR3RuFCLd+0R
+         1BpY3nrWKfAon8iiC/7NX2kkKXHsSxQsfsEIkW65cWlvEieIqGK/5zYvQaocnvtzthCg
+         +OW1+3I1rx5IYgxFMRH5GfCth9b/6J21J71Nq4RAECwK6NFph/jwWwbcF8dAvSb+u6Uj
+         tdmQ==
+X-Forwarded-Encrypted: i=1; AKwUvBw8GVnr5a27n9sLSjkP/vgivLfEQCxuZJY4q1YGekMqW7J4fb0ShH4phxB6UZA8ICE2NoA=@lists.linux.dev
+X-Gm-Message-State: AFq9FYJ2PeDWz8tZYNMZnAi8HAnrISMw6dalbcnOESExs0ZBUthUHigQ
+	CkTf0/a329ij6eQ3tf2/ssrtsH+Fj0PYrYJ9K2YhJK4uogNEjg0b/t9p
+X-Gm-Gg: AYBFou3k+bjla82cwUxpbCeck1E2k4fGxODkDLStavJACCbInTIVs5GKlM2TAgv8yYV
+	K+9Jo75CnyKhCkYEXAJw+vlm9Fc/1OlLc9SjHL/LDLkXcb05OZIdUriwDIazWF8yLZQ0guJ0JNV
+	m/L/hQrJ/hU/MfZ3Itc5yIwg8enTAKsLOK7j4yu2+jCgqFYJvUE6301UrWPP+DhOHIF0L3Wigfb
+	ucEUF4TmiOwePJxdOM9+NWwb5LrCAwIASaHc3hEA+7H4kJKG+wtNE9jtfiOe3qQscXrXDntv+wI
+	ofJ8w3B9xqSIuJf1+kxD9OrYiv8MFXf+DsJJknKtfaexrBCsrczqFb4Mm+wcQbrRITfcO3WaJ0c
+	XkA1WJIafTd8jaqdA3FmIGkI9ULavtb2kMnT/sBJaE/kDuhPJgfKyOxpJvKFVardC6RzPdXWIYK
+	V0ecITVwqs7NKzR3uPOXCkmB4IRQSIcjMp8SjqvW0YT96wf14V9HIN2q8vj4hHAK8U8dBMEuKwr
+	yS5IUk0ZpSCe2ZTlrT2exug62Drx/m8MpjEKsVLw5oKy6ptpCvBDLGxoz63MRhVzJeaK99mRCrE
+	SpcL1E4EbNXdCGLGRuFjcgHkhX8Zc5WS5l47
+X-Received: by 2002:a2e:9816:0:b0:3a9:8775:5f11 with SMTP id 38308e7fff4ca-3ac6fcbfba3mr9796481fa.4.1792997770891;
+        Sun, 25 Oct 2026 23:56:10 -0700 (PDT)
+Received: from ?IPV6:2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703? ([2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5bfb7a6b051sm1356960e87.14.2026.10.25.23.56.08
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 25 Oct 2026 23:56:08 -0700 (PDT)
+Message-ID: <24bf0964-dd2f-4688-bbf4-cc891c674d3e@gmail.com>
+Date: Mon, 26 Oct 2026 08:56:07 +0200
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -46,93 +92,45 @@ List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/28] mfd: ls2kbmc: Allocate simplefb platform_data on
- the heap
-To: Lee Jones <lee@kernel.org>, Chong Qiao <qiaochong@loongson.cn>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>, mfd@lists.linux.dev,
+Subject: Re: [PATCH 05/28] mfd: bd96801: Allocate watchdog IRQ resource on the
+ heap
+To: Lee Jones <lee@kernel.org>,
+ cover.1712920132.git.mazziesaccount@gmail.com, mfd@lists.linux.dev,
  linux-kernel@vger.kernel.org
 References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-4-lee@kernel.org>
-From: Binbin Zhou <zhoubinbin@loongson.cn>
-In-Reply-To: <20261021121245.3111563-4-lee@kernel.org>
+ <20261021121245.3111563-5-lee@kernel.org>
+Content-Language: en-US, en-AU, en-GB, en-BW
+From: Matti Vaittinen <mazziesaccount@gmail.com>
+In-Reply-To: <20261021121245.3111563-5-lee@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-CM-TRANSID:qMiowJCx9czM2N5qODkwAA--.7944S2
-X-CM-SenderInfo: p2kr3uplqex0o6or00hjvr0hdfq/1tbiAgEMCGrexPwvHwAAs7
-X-Coremail-Antispam: 1Uk129KBj93XoW7KFy5CFWDJF1rJF4kCr1rGrX_yoW8tryDpF
-	ykCa43AFs5KFy29a47Gr1kuryYkwsFv340gF93Xa4S93s8J348KFWrKFy8uas3trykJ3W7
-	Xr1DtF45uFZ8ZFcCm3ZEXasCq-sJn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7ZEXa
-	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
-	0xBIdaVrnRJUUUkqb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
-	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
-	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
-	0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E
-	14v26r4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF0cIa020Ex4CE44
-	I27wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Wrv_ZF1lYx0Ex4A2
-	jsIE14v26F4j6r4UJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41l42xK82IYc2
-	Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s02
-	6x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0x
-	vE2Ix0cI8IcVAFwI0_Ar0_tr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4UJVWxJr1lIxAI
-	cVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26F4j6r4UJwCI42IY6I8E87
-	Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7IU0beOPUUUUU==
 
-
-
-On 2026/10/21 20:09, Lee Jones wrote:
-> ls2k_bmc_probe() declares struct simplefb_platform_data on the stack and
-> assigns its address to the display MFD cell.  Although mfd_add_device()
-> deep-copies platform_data via platform_device_add_data() before
-> ls2k_bmc_probe() returns, the shallow mfd_cell copy attached to the
-> child platform device retains a stale pointer to the expired stack
-> frame.
+On 21/10/2026 15:09, Lee Jones wrote:
+> bd96801_i2c_probe() declares struct resource wdg_irq on the stack and
+> assigns its address to ddata->cells[WDG_CELL].resources.  Although
+> mfd_add_device() deep-copies the resource table via
+> platform_device_add_resources() before bd96801_i2c_probe() returns, the
+> shared cell template and the shallow MFD cell copy attached to the child
+> platform device retain a stale pointer to the expired stack frame.
 > 
-> Allocate the simplefb_platform_data structure on the heap via
-> devm_kzalloc() prior to devm_mfd_add_devices() so the pointer remains
-> valid for the lifetime of the child platform device.
+> Allocate wdg_irq on the heap via devm_kzalloc() alongside regulator_res
+> so the stored pointer remains valid for the lifetime of the device.
 > 
-> Closes: https://sashiko.dev/#/bug/linux-4e2dd9cb-310b-4bba-b305-ffacc738285c
 > Signed-off-by: Lee Jones <lee@kernel.org>
 
-Acked-by: Binbin Zhou <zhoubinbin@loongson.cn>
-> ---
->   drivers/mfd/ls2k-bmc-core.c | 12 ++++++++----
->   1 file changed, 8 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-> index e245bdee8226..3e3bc835262e 100644
-> --- a/drivers/mfd/ls2k-bmc-core.c
-> +++ b/drivers/mfd/ls2k-bmc-core.c
-> @@ -470,7 +470,7 @@ static int ls2k_bmc_parse_mode(struct pci_dev *pdev, struct simplefb_platform_da
->   
->   static int ls2k_bmc_probe(struct pci_dev *dev, const struct pci_device_id *id)
->   {
-> -	struct simplefb_platform_data pd;
-> +	struct simplefb_platform_data *pd;
->   	struct ls2k_bmc_ddata *ddata;
->   	resource_size_t base;
->   	int ret;
-> @@ -489,12 +489,16 @@ static int ls2k_bmc_probe(struct pci_dev *dev, const struct pci_device_id *id)
->   	if (ret)
->   		return ret;
->   
-> -	ret = ls2k_bmc_parse_mode(dev, &pd);
-> +	pd = devm_kzalloc(&dev->dev, sizeof(*pd), GFP_KERNEL);
-> +	if (!pd)
-> +		return -ENOMEM;
-> +
-> +	ret = ls2k_bmc_parse_mode(dev, pd);
->   	if (ret)
->   		return ret;
->   
-> -	ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data = &pd;
-> -	ls2k_bmc_cells[LS2K_BMC_DISPLAY].pdata_size = sizeof(pd);
-> +	ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data = pd;
-> +	ls2k_bmc_cells[LS2K_BMC_DISPLAY].pdata_size = sizeof(*pd);
->   	base = pci_resource_start(dev, 0) + LS2K_DISPLAY_RES_START;
->   
->   	/* Remove conflicting efifb device */
+Does this warrant a fixes-tag?
+
+Other than that,
+Reviewed-by: Matti Vaittinen <mazziesaccount@gmail.com>
+
+Thanks for fixing this!
+
+Yours,
+	-- Matti
 
 -- 
-Thanks.
-Binbin
+Matti Vaittinen
+Linux kernel developer at ROHM Semiconductors
+Oulu Finland
 
+~~ When things go utterly wrong vim users can always type :help! ~~
