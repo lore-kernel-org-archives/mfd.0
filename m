@@ -1,55 +1,104 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792958876;
-	b=1gog+xc9E7W9sHdZ2f/4a2tqfzXfPD+iPQ34eusUKubhe0yGIfT00l/rgfhwfwYAmgx9
-	 7T7RJ9SQELlGr2BKdxqPPz57BB0eTl/okPd6caZTy5keFoCXziZxbIyZrwgfih67ewg2q
-	 HWgVS0FIWkut4jj76eQXT69RejaABmzUSFHMQVdDQXleqnRtcHmGBkZ/aCpJSZ7H2ObhC
-	 N+0Ikfd8HpHM/hqwm8p/PSs2txRCjt/xxtGA3lIU4NzGNp+JaWnyOgyRhVFarsy1EMTfU
-	 AgnXUmzA3RS4p+PIMKqZ6fs5xx39/Ba66jq1B3qhe/j7rhL/zIgGgCWRvvaJytEpyXQ==
+	t=1792975273;
+	b=pbi8nXVsyAwEWR2++zq46ukm6pGlfntRUvscxApsfsPDgBvf/vrHnWcWT5p3cmjEBdfj
+	 DtrgoyHCptjMWbxnfoeBsHDvLslnVUmEeFE5wo79RtjPEYyMWDr6aAwmElWZSV/eWFnKG
+	 HZBg0eysHeXIzK9/5F6B5YHsbaFOl/uWjIweQQ1gnbMTiTHX6tH/Pk1HofCR7gbaFnzb0
+	 +KsxZaW8NYKqF3fS6s78uRKGUUwF7nM9856+s1BehPjoV5JQzD6SGTlgnY25H4d+lyC2p
+	 Dl665kg2tR6mwn9hvTHm28GYhXHYo8LF//czt+Iw2XfhkV2RU77S8L7V+YKUoicL38A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792958876;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=PtuPN1i+sNRPp+y81g2GlSSVyogHTn2ceWFXJcpWsrY=;
-	b=V1+3lV2P7HyV+OwaBXLnxX4IUZvOtp1EoCxP2VPvIDw5mVjz/oUg1nN96gNijkQSrPIT
-	 GBEGJsbuJIOi9fLxl897pWTJXLHJ3FE6U6WozH4hbZa0hdDVA2v8mX1gH8JkdTfkhOd0e
-	 YsDEwDxWxYsxQ8qC8GFD9zzk3DxrcBnawuUzyIdF/RV7trq3tmGsewLddsCGcb2jIMrjp
-	 KRQtfpDwc+Y4FTnZy/X62VDelA0Xsd7yHuv9IJ69tIiJp7903Cigm9om8CYfjPEDjrTEq
-	 r7DrgE1DN8OTldRbJSBCHhqhcFqUHKdgp1Mmr2vzA0bG/XOLrGkPXnN11cLo2iJvXQQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1792975273;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=PFobPJXVsXDz19LQO+RLD3R/7cNmq2aYjbNBSXJLmQE=;
+	b=TkpJ4GBmlUJt1kmxmLQBUGTXlon8uoEYlYQ5nChgaGfAGUcLO+fo2O/CJTpxV+3+Lctg
+	 vxil5wPqMnEx8Rf8eSITOja82UYZiUTksf/n4zMuLlUkf3GP+7Le59Aul2c5WZjBQCG5X
+	 2uf3ja1cCqqCrpD219AF8q6vU+CDMHbEQXyIGbMBWxcbbvuNi88CNKVDBat1m/Mg2SCtH
+	 PINqOVjwh/oJ8zMai0TZfzOcT/qnDzmErBIeUrrLUbjGvxV5z2CJyTYa0PLS11P9XREMd
+	 /vpXSIhSWsDc6Vhfp7ChdhXrJkrNZHO0mSHrvUJ3P7ePc38fbgr5EYFNGAN3aQ8Infw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lVm7ywgZ;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=egzVC3pM;
+	arc=none smtp.remote-ip=209.85.128.46
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04758606A31B
-	for <mfd@lists.linux.dev>; Sun, 25 Oct 2026 20:07:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2D8A606A31E
+	for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 00:41:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A2D8A606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lVm7ywgZ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6CA811F01825;
-	Sun, 25 Oct 2026 20:07:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792958875;
-	bh=PtuPN1i+sNRPp+y81g2GlSSVyogHTn2ceWFXJcpWsrY=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=lVm7ywgZfulj59nha55uJ9jg4AvtL2Dd2bg+x9pMIIKywKZaLnBaH0kMTZVBdUrsa
-	 Fx9b3lvf1CaiYjMeFbR9JAJX8c8DKXJOKBM/0ADVZhMGcCIsK6zbubkCRg/QX9DB32
-	 8QNQlhGJZqJ+dXKKrebLxvfjxXmlgx+IcahUyoJMPgAatNohiBiagSzlnngqdeRKWQ
-	 CHzG+bav/JMIQWzFvZRulguA0nNJ89lAusI2NVOrKluzCGzYRQVxXxpgbxTXdS3VFH
-	 TWS1RZ35rwSoQkw2wV0tzUplsPoSYq7swOy8/jjpMPBrKyPj+lviBNbH3Jps/vOi77
-	 M8GU+jYCAfwdg==
-Message-ID: <sashiko-outbox-184407@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3] mfd: intel-lpss: Set d3hot_delay to 0
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Navon John Lukose" <navonjohnlukose@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261025193613.278610-1-navonjohnlukose@gmail.com>
-References: <20261025193613.278610-1-navonjohnlukose@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Sun, 25 Oct 2026 20:07:54 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=egzVC3pM
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4a5177d78c7so7445745e9.2
+        for <mfd@lists.linux.dev>; Sun, 25 Oct 2026 17:41:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792975270; x=1793580070; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=PFobPJXVsXDz19LQO+RLD3R/7cNmq2aYjbNBSXJLmQE=;
+        b=egzVC3pMMbFx6L+PEcoVrWM/wO/0loR73eL1egF61Nnp6AMZwWmpLgsnqP88H3iKn2
+         1YdmvLHj9fmbDEuwI5vKU9gYNYOYIG8IymxCXTG/XzJiDWJ8qxcb+34ItYCgYn5dDK0w
+         uqdVkvQK/v8FxHlYQ9uQH7kVlKcaj7T4PE9fpDovTaRz9ZBjULz5hcpRmuB1rM1Sbi3v
+         G7+qTUQxJ5YER637wKGEA1nOzFOqTZ5I8bCvxHJral3nX6IscIkJg3tICEQB6hT/l8gK
+         TgRqgbRuROr30O60XnQxVK0WBj3yFXt58JCFx1NdNnYENKbgs7bSyxVHeFmRSgSQx4eA
+         vPxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792975270; x=1793580070;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=PFobPJXVsXDz19LQO+RLD3R/7cNmq2aYjbNBSXJLmQE=;
+        b=pHjpWB9JD7TKd0UKSVqJfXv2T2smj63AcQfzbTsRwq4bycyoKU17P3ZksaDQ/mSaGs
+         nYWwnZobYIfHveBKb+iuyJwBC2znGTz7Vn6ha7Qvc514jm0i3MbcYaiTHlMFtSMuy0Pg
+         hQY3wmdQlEWXqHzTQXGHYgJDUmyWQh7hS0/4Uv4v2Q6UPX+8LseSLwY7ldZnGxRmvadK
+         wcK8TjAOVYE4lANVQqFWBnIO1QqZ/J9beBubl3b2Gg0k3RkXkyLD8OiFCC6qaJDxaqhi
+         BeElO3Nwu3WUd7t24Efk9MsAOGjh1LrvPsHDSE6e6NPvxPR4jxSjSr7KWokdmq2GRfMg
+         emyA==
+X-Forwarded-Encrypted: i=1; AKwUvByQOYdQ4raE2CO1snkmKKJ3JZQFTW+mGhI9r88bFXi90hmV5poYpKPUmxwSLitPWZ2QzdU=@lists.linux.dev
+X-Gm-Message-State: AFq9FYKbhk725bwBaFBzbTczyfySTFkDxoavVewBHdFC/iwFhWhIJDYT
+	uN3TMeoA2jHH4XdbO8Jn/0dchpDrTdaYZ/tZ/iGvPamjSDE7c5IAnOeK
+X-Gm-Gg: AYBFou3qjXsJjRHNAlEcUbfeVdgziR64YvUg7cTNXBVkEFgFxysJf49PklLEcaubm2D
+	mBwp2vwxwtuOEVrdYFQiqXpsf+RgUaPUsDat21vdegnx79S7C2vyRlSp3+NOhuD9CrIwN7/0+0z
+	HtG8cuHtcy9QbHC5trVMMUWGqr8HPspw/Gm/a7nz3nRnupZuX6//SOQkk6jV4XohX5S4c3B7o9T
+	5o2goki0sY1vRLz61CJv3qppVA92nWsMD3KwSMEpg+dFUT27X2wiuSctbRzMv+ivepZVxo9ZNHu
+	L4tV61RWteBVK4FifoEanBGLI2CFyyvD6y/jwcl/1nWFcWlTDWITWces2ivs/yzmM2y2NGLu4O6
+	xH305lfmBqSi4kbF5LROpzt92qYkQ8w3ycKMI97rR3IhFVgYrC8x+cRHKFMWj4eyE/h8YTXgp8o
+	rai3ThEi13GeHThyuEg2fegcOeI3HH+BsKoUbNfu+yHkEzs1yrYTTPfLW8kUYUsymLmwgQ3Vy+k
+	fNXhGkXW5k9gxryOS9oABJqIwzlxL5kbrHUHZXv2d+lZ5vwOoh4E+SyYW1bCiYMobG9+J04fptz
+	BW9MW3lwxC1khA==
+X-Received: by 2002:a05:600c:1c1b:b0:4a2:1a:a116 with SMTP id 5b1f17b1804b1-4a35aae5c48mr101973045e9.0.1792975270272;
+        Sun, 25 Oct 2026 17:41:10 -0700 (PDT)
+Received: from debian (ip-78-137-176-146.broadband.digiweb.ie. [78.137.176.146])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a07ebc0sm74574555e9.3.2026.10.25.17.41.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 25 Oct 2026 17:41:09 -0700 (PDT)
+From: Pablo Mazzini <pmazzini@gmail.com>
+To: Mark Brown <broonie@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Lee Jones <lee@kernel.org>,
+	Frank Li <Frank.Li@nxp.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>
+Cc: Pablo Mazzini <pmazzini@gmail.com>,
+	Alistair Francis <alistair@alistair23.me>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	devicetree@vger.kernel.org,
+	imx@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org,
+	linux-hwmon@vger.kernel.org,
+	mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 0/7] sy7636a: power the panel only during updates
+Date: Mon, 26 Oct 2026 00:39:11 +0000
+Message-ID: <20261026003918.155321-1-pmazzini@gmail.com>
+X-Mailer: git-send-email 2.53.0
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -58,31 +107,49 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-> Every runtime resume of an LPSS controller waits the default 10 ms
-> d3hot_delay in pci_power_up() for the D3hot->D0 transition. Nothing
-> misbehaves, but the wait adds latency. On Arrow Lake-H (Lenovo Yoga Pro 7
-> 14IAH10) the touchpad's I2C controller autosuspends after 1 s idle, and
-> the i2c-hid interrupt handler for the first report afterwards takes
-> 12.6-14.4 ms.
->=20
-> The PCI spec asks for those 10 ms, but Mika Westerberg pointed out that
-> the LPSS controllers are not really PCI-connected devices, so the delay
-> is likely not needed. intel-lpss-pci already clears d3cold_delay,
-> quirk_remove_d3hot_delay() drops d3hot_delay on several older Intel
-> chipsets, Cherry Trail among them, and commit 815b4448198f ("i3c:
-> mipi-i3c-hci-pci: Set d3hot_delay to 0 for Intel controllers") does the
-> same for the Intel I3C controllers.
->=20
-> Set d3hot_delay to 0 as well. The handler above then takes 1.1-1.9 ms,
-> with no I2C errors. Only Arrow Lake-H was tested.
->=20
-> Acked-by: Mika Westerberg <mika.westerberg@linux.intel.com>
-> Signed-off-by: Navon John Lukose <navonjohnlukose@gmail.com>
+The SY7636A hwmon driver keeps VCOM on from probe, so a display driver
+can not power the panel only during updates.
 
-Sashiko has reviewed this patch and found no issues.
+Read the temperature in the regulator driver instead, as the TPS65185
+and FP9931 drivers do, and remove the hwmon driver. Boards that relied
+on VCOM staying on mark it always-on. The regulator also switches VCOM
+with VCOM_EN, gains VCOM voltage control and binds to the I2C device
+directly.
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261025193613.2786=
-10-1-navonjohnlukose@gmail.com?part=3D1
+Tested on a PocketBook Verse (B288).
+
+Pablo Mazzini (7):
+  ARM: dts: imx: keep the SY7636A VCOM on
+  regulator: sy7636a: fix the chip name
+  regulator: sy7636a: add VCOM voltage control
+  regulator: sy7636a: wait for power good, then switch VCOM_EN
+  regulator: sy7636a: report the temperature
+  regulator: sy7636a: bind to the I2C device directly
+  ARM: imx_v6_v7_defconfig: drop the SY7636A MFD and hwmon options
+
+ Documentation/hwmon/index.rst                 |   1 -
+ Documentation/hwmon/sy7636a-hwmon.rst         |  26 --
+ arch/arm/boot/dts/nxp/imx/e70k02.dtsi         |   1 +
+ .../boot/dts/nxp/imx/imx7d-remarkable2.dts    |   1 +
+ arch/arm/configs/imx_v6_v7_defconfig          |   2 -
+ drivers/hwmon/Kconfig                         |  10 -
+ drivers/hwmon/Makefile                        |   1 -
+ drivers/hwmon/sy7636a-hwmon.c                 | 102 --------
+ drivers/mfd/Kconfig                           |  10 -
+ drivers/mfd/simple-mfd-i2c.c                  |  11 -
+ drivers/regulator/Kconfig                     |   6 +-
+ drivers/regulator/sy7636a-regulator.c         | 240 +++++++++++++++---
+ include/linux/mfd/sy7636a.h                   |  34 ---
+ 13 files changed, 205 insertions(+), 240 deletions(-)
+ delete mode 100644 Documentation/hwmon/sy7636a-hwmon.rst
+ delete mode 100644 drivers/hwmon/sy7636a-hwmon.c
+ delete mode 100644 include/linux/mfd/sy7636a.h
+
+
+base-commit: aac26bee2287c88af5be5a5ff96d783b19a28790
+-- 
+2.52.0
 
