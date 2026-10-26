@@ -1,41 +1,41 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=114.242.206.163
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792984933;
-	b=B6fHolwGy7+z0oLiiH9xAV+xLDWPKrPEXvQitGEw3qS7mn92xiur+kMgCUEzvi6jp+eU
-	 a02SCRqjd+WePGfJETyD+GBN2i9AovZNbHcwcHr1kROp57hhPhQK0ukp1nAFSopCzAYUT
-	 Ri1sLP0kD20Pn+v08EjwIoHQ6rEPdBjh7x4ezyQaqNFHlHM2IwzzyHXHTjHgUgUxBwg+s
-	 qACMPefbTioMH4a1ZDn22tjuarcZUELGaeVgYfHsMOFhjLdslp7B+IzbbBaH2QwQabMqE
-	 XHiFoXDS189A+5c3YpildVM/7GDDdNXPLYh2raz3LsyNMfagxgyWtlxGAgRgl0ZnKTw==
+	t=1792989393;
+	b=TB+kxQDr4m+JY4qCpRXkKQ0E+1HwBBCnhZoTT9aYfMpY0aXSdolddAdyml2HKMrU8SLo
+	 kA1ZhtZ3F1mVCYrXbSAloc5TOiiu4/Ws9ztkh6Trt0kmNxXAo40h0rnYeJNGaeJEfK7XS
+	 qJG3is4gDCWpOhKsf85Ajlv76fY0FeBiEjVx5ZQjMxKDGvcGw4+Mnd8unZ2R9AKF4UvTI
+	 9b7skqsXcUwY2g0Q+BIleijC/aJBgJctkxhZ50WmNBQoWc13MsFKUTvOH3uP2Z/tvpqwx
+	 ioodLfDTuxU2An5F7s6UR7VC+h1Rl87KW25LB8vzrIznPuqsbQ/gdbV5l9FOrRJyUwQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792984933;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792989393;
 	h=DMARC-Filter:Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:From:In-Reply-To:Content-Type:
+	 User-Agent:Subject:To:References:From:In-Reply-To:Content-Type:
 	 Content-Transfer-Encoding:X-CM-TRANSID:X-CM-SenderInfo:
 	 X-Coremail-Antispam;
-	bh=uAVUMEmtFiZlBzh2Kd9CRP7rcnQ+Nf7H4f2OSYsP6pc=;
-	b=IPNxCsGODbqAxuOV5V8gLN+ZzK/lVPNCGmosFcZeedAP7HcBEhVg3umQvz2fkvyiQldo
-	 /kMZXpiX5Nl+Ug31tQnuCtG0YdXhMqVPAQHDDnxbJYo0PhJf1eXnBfaWEEFjZ4MsOz6aI
-	 QuWn4fK7LBbjpZalPscNVeR6TuhD1d4LPDLCfnhbzf2tw1Tu9HLISkr747e3hqHzBw5j6
-	 6XvPmZUWxRcKRgU2PdWEC10FI/0U6lCtY/06h343W2AS5zQRpoLBo/HnjtiiIXTztwLTI
-	 DmqxgBQ9t75zzwJNAedg52JYkNQmrw4/lIyD7kU49z0fvuKzs4wHv5zozpw1zkEiz9w==
+	bh=fkjASHhjHD9dtcL2FTJk6qqQRP9PpHcbiVA7YApl7Ho=;
+	b=sMGq0BzrHQSgpV1ouOGEGooh6ZphsQaxlGZrvkJlXOX7cFaTx0uaGhrfKdwk3+UN3iVt
+	 sQY3GEeDVOkqkGXl629VHo2e9pxy8Zwj+Wd++XhwJCrQG6Z3RXKOrko5Ja7aECc9uLLI8
+	 tyx+nUiflkCbJmJ9g1nJFtMBVDfpIboLpsNWUB1CmmE88uVBmrvjxfCcMnF2ZLOiluGq/
+	 HU1WrCXquVAKkhJby5hSU0MYEp/onNcQGgS2x1+rvuhp11KjuO88vjMheUgpY5ruD2As8
+	 XHezlp14Q7imf/ou6YPTqz7pAAVcHMRVEoWfiQtqdRWBtK4VXnKTnWQsoOunRORlN8A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=none header.from=loongson.cn;
 	spf=pass smtp.mailfrom=loongson.cn;
 	arc=none smtp.remote-ip=114.242.206.163
 Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2F81A606A326
-	for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 03:22:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2F81A606A326
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 6568F606A31A
+	for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 04:36:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6568F606A31A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
 Received: from loongson.cn (unknown [223.64.69.17])
-	by gateway (Coremail) with SMTP id _____8DxpvBix95qVloZAA--.8358S3;
-	Mon, 26 Oct 2026 11:22:10 +0800 (CST)
+	by gateway (Coremail) with SMTP id _____8Axj9HO2N5qHF4ZAA--.8494S3;
+	Mon, 26 Oct 2026 12:36:30 +0800 (CST)
 Received: from [127.0.0.1] (unknown [223.64.69.17])
-	by front1 (Coremail) with SMTP id qMiowJDxRs1hx95qDzUwAA--.22181S2;
-	Mon, 26 Oct 2026 11:22:09 +0800 (CST)
-Message-ID: <22766db4-fc47-47bd-8062-239f3873fc84@loongson.cn>
-Date: Mon, 26 Oct 2026 11:22:09 +0800
+	by front1 (Coremail) with SMTP id qMiowJCx9czM2N5qODkwAA--.7944S2;
+	Mon, 26 Oct 2026 12:36:29 +0800 (CST)
+Message-ID: <b5044747-0f3a-4a63-9446-829379f3915f@loongson.cn>
+Date: Mon, 26 Oct 2026 12:36:28 +0800
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -46,84 +46,91 @@ List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/28] mfd: ls2kbmc: Cancel reset work on teardown via
- devm_work_autocancel()
+Subject: Re: [PATCH 04/28] mfd: ls2kbmc: Allocate simplefb platform_data on
+ the heap
 To: Lee Jones <lee@kernel.org>, Chong Qiao <qiaochong@loongson.cn>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Huacai Chen <chenhuacai@kernel.org>, Corey Minyard <corey@minyard.net>,
- mfd@lists.linux.dev, linux-kernel@vger.kernel.org
-Cc: stable@vger.kernel.org
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, mfd@lists.linux.dev,
+ linux-kernel@vger.kernel.org
 References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-3-lee@kernel.org>
+ <20261021121245.3111563-4-lee@kernel.org>
 From: Binbin Zhou <zhoubinbin@loongson.cn>
-In-Reply-To: <20261021121245.3111563-3-lee@kernel.org>
+In-Reply-To: <20261021121245.3111563-4-lee@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-CM-TRANSID:qMiowJDxRs1hx95qDzUwAA--.22181S2
-X-CM-SenderInfo: p2kr3uplqex0o6or00hjvr0hdfq/1tbiAQEMCGretPgBWQABsl
-X-Coremail-Antispam: 1Uk129KBj93XoW7uw1fXw1fCw1xtw4DWryUArc_yoW8ZF4UpF
-	Z0kFWjyrs5Ja4UJa4DCryI9FyYgr4YyFW8KryIq3W7Xr13Kwn2vF1FvF9IqFn8ArWkJayY
-	grW3Xayxua45ZFXCm3ZEXasCq-sJn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7ZEXa
+X-CM-TRANSID:qMiowJCx9czM2N5qODkwAA--.7944S2
+X-CM-SenderInfo: p2kr3uplqex0o6or00hjvr0hdfq/1tbiAgEMCGrexPwvHwAAs7
+X-Coremail-Antispam: 1Uk129KBj93XoW7KFy5CFWDJF1rJF4kCr1rGrX_yoW8tryDpF
+	ykCa43AFs5KFy29a47Gr1kuryYkwsFv340gF93Xa4S93s8J348KFWrKFy8uas3trykJ3W7
+	Xr1DtF45uFZ8ZFcCm3ZEXasCq-sJn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7ZEXa
 	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
-	0xBIdaVrnRJUUUyCb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
-	IYs7xG6rWj6s0DM7CIcVAFz4kK6r106r15M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
-	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
-	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_
-	Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx1l5I
-	8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r126r1DMcIj6I8E87Iv67AK
-	xVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41l42xK82IYc2Ij64vIr4
-	1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK
-	67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI
-	8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAv
-	wI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14
-	v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x07j1LvtUUUUU=
+	0xBIdaVrnRJUUUkqb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E
+	14v26r4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF0cIa020Ex4CE44
+	I27wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Wrv_ZF1lYx0Ex4A2
+	jsIE14v26F4j6r4UJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41l42xK82IYc2
+	Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s02
+	6x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0x
+	vE2Ix0cI8IcVAFwI0_Ar0_tr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4UJVWxJr1lIxAI
+	cVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26F4j6r4UJwCI42IY6I8E87
+	Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7IU0beOPUUUUU==
 
 
 
 On 2026/10/21 20:09, Lee Jones wrote:
-> ls2k_bmc_init() initialises bmc_reset_work with INIT_WORK() and
-> immediately requests the PCIe and GPIO interrupts via devm_request_irq().
-> If an interrupt fires and schedules bmc_reset_work before a subsequent
-> step in ls2k_bmc_probe() fails, or when the device is unbound, devres
-> frees ddata whilst bmc_reset_work remains queued, leading to a
-> use-after-free in ls2k_bmc_events_fn().
+> ls2k_bmc_probe() declares struct simplefb_platform_data on the stack and
+> assigns its address to the display MFD cell.  Although mfd_add_device()
+> deep-copies platform_data via platform_device_add_data() before
+> ls2k_bmc_probe() returns, the shallow mfd_cell copy attached to the
+> child platform device retains a stale pointer to the expired stack
+> frame.
 > 
-> Initialise bmc_reset_work with devm_work_autocancel() before requesting
-> the interrupts so that devres cancels any pending work after the
-> interrupts are freed and before ddata is released.
+> Allocate the simplefb_platform_data structure on the heap via
+> devm_kzalloc() prior to devm_mfd_add_devices() so the pointer remains
+> valid for the lifetime of the child platform device.
 > 
-> Fixes: d952bba3fbb5 ("mfd: ls2kbmc: Add Loongson-2K BMC reset function support")
-> Closes: https://sashiko.dev/#/bug/linux-3089d131-9fcf-4753-b183-eebe0a6e020e
-> Cc: stable@vger.kernel.org
+> Closes: https://sashiko.dev/#/bug/linux-4e2dd9cb-310b-4bba-b305-ffacc738285c
 > Signed-off-by: Lee Jones <lee@kernel.org>
+
 Acked-by: Binbin Zhou <zhoubinbin@loongson.cn>
 > ---
->   drivers/mfd/ls2k-bmc-core.c | 5 ++++-
->   1 file changed, 4 insertions(+), 1 deletion(-)
+>   drivers/mfd/ls2k-bmc-core.c | 12 ++++++++----
+>   1 file changed, 8 insertions(+), 4 deletions(-)
 > 
 > diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-> index 23c774a09842..e245bdee8226 100644
+> index e245bdee8226..3e3bc835262e 100644
 > --- a/drivers/mfd/ls2k-bmc-core.c
 > +++ b/drivers/mfd/ls2k-bmc-core.c
-> @@ -12,6 +12,7 @@
->   #include <linux/aperture.h>
->   #include <linux/bitfield.h>
->   #include <linux/delay.h>
-> +#include <linux/devm-helpers.h>
->   #include <linux/errno.h>
->   #include <linux/init.h>
->   #include <linux/iopoll.h>
-> @@ -376,7 +377,9 @@ static int ls2k_bmc_init(struct ls2k_bmc_ddata *ddata)
+> @@ -470,7 +470,7 @@ static int ls2k_bmc_parse_mode(struct pci_dev *pdev, struct simplefb_platform_da
 >   
->   	ls2k_bmc_save_pci_data(pdev, ddata);
+>   static int ls2k_bmc_probe(struct pci_dev *dev, const struct pci_device_id *id)
+>   {
+> -	struct simplefb_platform_data pd;
+> +	struct simplefb_platform_data *pd;
+>   	struct ls2k_bmc_ddata *ddata;
+>   	resource_size_t base;
+>   	int ret;
+> @@ -489,12 +489,16 @@ static int ls2k_bmc_probe(struct pci_dev *dev, const struct pci_device_id *id)
+>   	if (ret)
+>   		return ret;
 >   
-> -	INIT_WORK(&ddata->bmc_reset_work, ls2k_bmc_events_fn);
-> +	ret = devm_work_autocancel(ddata->dev, &ddata->bmc_reset_work, ls2k_bmc_events_fn);
-> +	if (ret)
-> +		return ret;
+> -	ret = ls2k_bmc_parse_mode(dev, &pd);
+> +	pd = devm_kzalloc(&dev->dev, sizeof(*pd), GFP_KERNEL);
+> +	if (!pd)
+> +		return -ENOMEM;
+> +
+> +	ret = ls2k_bmc_parse_mode(dev, pd);
+>   	if (ret)
+>   		return ret;
 >   
->   	ret = devm_request_irq(&pdev->dev, pdev->irq, ls2k_bmc_interrupt,
->   			       IRQF_SHARED | IRQF_TRIGGER_FALLING, "ls2kbmc pcie", ddata);
+> -	ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data = &pd;
+> -	ls2k_bmc_cells[LS2K_BMC_DISPLAY].pdata_size = sizeof(pd);
+> +	ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data = pd;
+> +	ls2k_bmc_cells[LS2K_BMC_DISPLAY].pdata_size = sizeof(*pd);
+>   	base = pci_resource_start(dev, 0) + LS2K_DISPLAY_RES_START;
+>   
+>   	/* Remove conflicting efifb device */
 
 -- 
 Thanks.
