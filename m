@@ -1,41 +1,69 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=114.242.206.163
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=161.97.139.27
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793007344;
-	b=MA8LefFqaOXcyZqqsVNkI47LXMo+E435YjNiuCEPNKgwMno/b5iObjKBjGKObfYaupFJ
-	 aBa3hOsajkb5Mlqb9xR5AwVOljvfvGxmCVPZzw+yqv27ZmAlnHRmaR9LXblVnTGkK3uuk
-	 RzLjjyKMVA2oeI1Jd07PY2Eeah8rowdrIy98x1V0Xry6NQFDzGkEogIitHn/ajs8TUItb
-	 wS0JgHgMAeLMaCgqF/iB8XMyW5ducqLhZyudbGIe33WRb5FOvoF4s3ffJoNNi/l3V8Tqe
-	 3POnNjA59cXDGFMNbTJqx3IymFUtymvMS0z6T7CXVkzWSFqg1bUQHv5G0djezEqojwA==
+	t=1793007471;
+	b=aDKnYVAOTic4Z+Nz12EPQOnkcv6/JyMHyQIIQlscFOOSQ/YXbq+ziw9k47teOO5iTMHG
+	 JJwNP6dmSf9EzHDbecwcL7oG7J0BIo1uWD/qQoDLEqAI8y9F6Fln2dEZ9xuja4lj/FHEF
+	 jH9KAb/oOAHa3Wzf0af3uBXZAVzIATDoohPWZwKVSckZ57fKPV6XZuGyvz7TOzSaGk9m5
+	 pp6xL/44hsw9kx/0vku7/fuBHIJSM3aQx11M/tnyQONnZ1Gcv3C7qvZpEwdshUTEzyoOE
+	 wesvo/eCHk0onEbbY7NVg1An4axI8pBu3HUrtaYn1taDh60k77iJl0xaZ05QKjSuuaA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793007344;
-	h=DMARC-Filter:Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-CM-TRANSID:X-CM-SenderInfo:
-	 X-Coremail-Antispam;
-	bh=IktkEx4zX4zWwoAqU3vLL+1o7cLskiaczwDJ/WCeiYI=;
-	b=SzrlSw0LkzGjECXARwdLp5GQSVONGq63i/FIQMv6IOdue9qgzIs7I9PAKZvNM473w1+i
-	 3bg8y/wevER/ZAevSdRPzp5dcuqQiCDQLM8wT8Zy5ZgE+T8xgAeRvBT/s7OlqPl7FA0+V
-	 DrkVgSfNtLfxE/HxZtBy3bvt+YdJk+suuZpaDKcGT/tWdgez3OGe2Ljk3CH0Cla716iy7
-	 jVc7jpgUhrEIdEQDlwpSc+d+ymoylrFc0gn3uxCeiW0/I+TFKigbtHyLPx4Ju5ApywRcJ
-	 jLL9+v09KRS0HTr8di5a5V2HMBz79aBIib3bUO/ufA4pCnbkQ//ReRX5YdKcKQaU7Jw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793007471;
+	h=DMARC-Filter:Received:DKIM-Signature:Date:From:To:Cc:Subject:
+	 Message-ID:In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=UmXjLJOP0mzdBm7GFoPR8yYMqhsvVQOQgwUqLKU0OJM=;
+	b=pvHSKoQfW3q/ufMiRK6U0cujYJ7/2ONLNUP3PMCrz8XS6afE8vbtfu1SpjHCz1dFMeYa
+	 EYB0MZojYW5L+wlWh+sSdxscEBRqAtlGaEqfaoLbR4vQuQccsXSNieN3GNgxRjfLlP08y
+	 tkuvEeec4saDBlxeREjmd0HzQMJrcri9L3BWQ2Dwpw4fXIHb+u2GckUh7cwLH5jvfy66I
+	 DC7K/dWAFhCxMyFSDUOvIOGw7YkO7wxVcFn69VnH+i6OJcBaqrHk9FhtGMIVopF3jH0kT
+	 irfyoG5lD6EKRvhwfZI1o40J7GPWmJ2LlEdqgAi7TnVME594Ry1u+AngCu7p9Ypo03g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=loongson.cn;
-	spf=pass smtp.mailfrom=loongson.cn;
-	arc=none smtp.remote-ip=114.242.206.163
-Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 99C25606A321
-	for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 09:35:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 99C25606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
-Received: from loongson.cn (unknown [10.20.42.102])
-	by gateway (Coremail) with SMTP id _____8BxLtPtHt9qVW4ZAA--.8133S3;
-	Mon, 26 Oct 2026 17:35:41 +0800 (CST)
-Received: from [127.0.0.1] (unknown [127.0.0.1])
-	by front1 (Coremail) with SMTP id qMiowJAx3c7qHt9qlEwwAA--.35470S2;
-	Mon, 26 Oct 2026 17:35:40 +0800 (CST)
-Message-ID: <15af8b62-9461-46b0-8359-4db597b96d66@loongson.cn>
-Date: Mon, 26 Oct 2026 17:32:53 +0800
+	dmarc=pass header.from=kemnade.info;
+	spf=pass smtp.mailfrom=kemnade.info;
+	dkim=pass header.d=kemnade.info header.i=@kemnade.info header.a=rsa-sha256 header.s=20220719 header.b=YGY7ti4c;
+	arc=none smtp.remote-ip=161.97.139.27
+Received: from mail2.andi.de1.cc (vmd64148.contaboserver.net [161.97.139.27])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0EFD2606A320;
+	Mon, 26 Oct 2026 09:37:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0EFD2606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kemnade.info
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=kemnade.info header.i=@kemnade.info header.a=rsa-sha256 header.s=20220719 header.b=YGY7ti4c
+Received: from mail.andi.de1.cc ([2a02:c205:3004:2154::1])
+	by mail2.andi.de1.cc with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.98.2)
+	(envelope-from <andreas@kemnade.info>)
+	id 1xLH9I-00000000j4B-28f0;
+	Mon, 26 Oct 2026 10:37:48 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=kemnade.info; s=20220719; h=References:In-Reply-To:Subject:Cc:To:From:
+	Reply-To:Content-ID:Content-Description;
+	bh=UmXjLJOP0mzdBm7GFoPR8yYMqhsvVQOQgwUqLKU0OJM=; t=1793007468; x=1794217068; 
+	b=YGY7ti4cym1iwvhu1O3tPuJmwf+BrpXUBcBhRRZQag5UlJo3bTCiSivUb29ju5204v4WFPYduG9
+	Wunqr+d+dCPYye+UEMbFO/KXnVJ4q2fh/7pM+Xr1ZcDCAw9Yymd0vmqb8IaJ9UNcbQmwaDpI8DiLz
+	hoWVJ0Z7SL9h8D0avCORgUN6ivOC0ZtL+EebvdfYw5gArSSVX/o+ZNonoc9tdfPBEzi71JqRfFabP
+	9ofuYfLQRUKPtMes0srGEAE7vhXUk9i0CzO+tK6Q1FXWNkzCwhnbTzHN6//LahxVJcve496N9RDFF
+	mJZKvFYNBE7ZuHFn//NsfNazX/77ExigHiKA==;
+Date: Mon, 26 Oct 2026 10:37:30 +0100
+From: Andreas Kemnade <andreas@kemnade.info>
+To: Pablo Mazzini <pmazzini@gmail.com>
+Cc: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+ Guenter Roeck <linux@roeck-us.net>, Lee Jones <lee@kernel.org>, Frank Li
+ <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, Alistair Francis
+ <alistair@alistair23.me>, Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, devicetree@vger.kernel.org,
+ imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+ linux-hwmon@vger.kernel.org, mfd@lists.linux.dev,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/7] sy7636a: power the panel only during updates
+Message-ID: <20261026103730.3a79c2e6@kemnade.info>
+In-Reply-To: <20261026003918.155321-1-pmazzini@gmail.com>
+References: <20261026003918.155321-1-pmazzini@gmail.com>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; aarch64-unknown-linux-gnu)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -45,60 +73,30 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 16/28] mfd: loongson-se: Zero-initialise controller
- command structures
-To: Lee Jones <lee@kernel.org>
-Cc: stable@vger.kernel.org, Yinggang Gu <guyinggang@loongson.cn>,
- Huacai Chen <chenhuacai@kernel.org>, linux-crypto@vger.kernel.org,
- mfd@lists.linux.dev, linux-kernel@vger.kernel.org
-References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-16-lee@kernel.org>
-Content-Language: en-US
-From: Qunqin Zhao <zhaoqunqin@loongson.cn>
-In-Reply-To: <20261021121245.3111563-16-lee@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:qMiowJAx3c7qHt9qlEwwAA--.35470S2
-X-CM-SenderInfo: 52kd01pxqtx0o6or00hjvr0hdfq/
-X-Coremail-Antispam: 1Uk129KBj9xXoWruFW5AF13GFWUJFW3XryxJFc_yoWfJFX_Aa
-	y3KF95C34kCr4vk3sYqF1fZFZI9a48J3WIk3WDtr4rW3ZYqw4FvryIk3yI93W3Krs8ArnI
-	9w18u3yvkr4UZosvyTuYvTs0mTUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUj1kv1TuYvT
-	s0mT0YCTnIWjqI5I8CrVACY4xI64kE6c02F40Ex7xfYxn0WfASr-VFAUDa7-sFnT9fnUUI
-	cSsGvfJTRUUUb78YFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I6I8E6xAIw20EY4v20x
-	vaj40_Wr0E3s1l1IIY67AEw4v_JrI_Jryl8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxS
-	w2x7M28EF7xvwVC0I7IYx2IY67AKxVWUJVWUCwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxV
-	WUJVW8JwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v2
-	6r4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF0cIa020Ex4CE44I27w
-	Aqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE
-	14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCF04k20xvY0x0EwI
-	xGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480
-	Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_JF0_Jw1lIxkGc2Ij64vIr41lIxAIcVC0I7
-	IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k2
-	6cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxV
-	AFwI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZEXa7IU8wNVDUUUUU==
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
+On Mon, 26 Oct 2026 00:39:11 +0000
+Pablo Mazzini <pmazzini@gmail.com> wrote:
 
-在 2026/10/21 20:09, Lee Jones 写道:
-> loongson_se_init() and loongson_se_init_engine() declare struct
-> loongson_se_controller_cmd on the stack without zero-initialising it
-> and only populate a subset of its fields before
-> loongson_se_send_controller_cmd() writes all eight 32-bit words to the
-> controller MMIO registers.  Zero-initialise the stack command structures
-> so that unused words do not leak residual kernel stack contents to the
-> hardware.
->
-> Fixes: e551fa3159e3 ("mfd: Add support for Loongson Security Engine chip controller")
-> Closes: https://sashiko.dev/#/bug/linux-b81dca3d-6812-43b6-9ad9-912727674154
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Lee Jones <lee@kernel.org>
+> The SY7636A hwmon driver keeps VCOM on from probe, so a display driver
+> can not power the panel only during updates.
+> 
+Yes, that is the common use case, power things on, tune update process
+to the temperature, update, power off. So it makes completely sense.
 
-Reviewed-by: Qunqin Zhao <zhaoqunqin@loongson.cn>
+> Read the temperature in the regulator driver instead, as the TPS65185
+> and FP9931 drivers do, and remove the hwmon driver. Boards that relied
+> on VCOM staying on mark it always-on. The regulator also switches VCOM
+> with VCOM_EN, gains VCOM voltage control and binds to the I2C device
+> directly.
+> 
+> Tested on a PocketBook Verse (B288).
+> 
+Which kernel do you use? Just curious, maybe some further upstreaming
+actions might be coordinated or cross-reviewed.
+There was discussion about in-kernel hwmon readout interface like it
+exists for iio.
 
-Thanks for fixing this!
-
-
-Best Regards,
-
-Qunqin.
-
+Regards,
+Andreas
