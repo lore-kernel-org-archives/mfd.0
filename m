@@ -1,104 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.54
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1792975273;
-	b=pbi8nXVsyAwEWR2++zq46ukm6pGlfntRUvscxApsfsPDgBvf/vrHnWcWT5p3cmjEBdfj
-	 DtrgoyHCptjMWbxnfoeBsHDvLslnVUmEeFE5wo79RtjPEYyMWDr6aAwmElWZSV/eWFnKG
-	 HZBg0eysHeXIzK9/5F6B5YHsbaFOl/uWjIweQQ1gnbMTiTHX6tH/Pk1HofCR7gbaFnzb0
-	 +KsxZaW8NYKqF3fS6s78uRKGUUwF7nM9856+s1BehPjoV5JQzD6SGTlgnY25H4d+lyC2p
-	 Dl665kg2tR6mwn9hvTHm28GYhXHYo8LF//czt+Iw2XfhkV2RU77S8L7V+YKUoicL38A==
+	t=1792975394;
+	b=SxgnqZLtEOPEQ70Mr7qaOoa7QGfQAlWhPj7/mpr5Pif08gMqI6HEzeVuot3VebjzwuH9
+	 ZAi7JUAV00f0hcUxAzNLKy731V4ok1mZqm88aFXypB2SD2ocn2AICLT2D6co4+z2dfXCt
+	 4kfF2eBwsZbm6kJ7tCHrH0mUnoXAdGMBtRCUooYPetzY5F8PelotRO5lKWXmsMsODSM1w
+	 UGf8GSXEckzZaW3rEqmSOkOxupelNnf1gKKUotah0WAq/+lHER2UELD9jrmfgBN+pzQ9J
+	 Qayg0H3vJHHzomz5PzgHFtw0DZpN0XR3G/THvQwigc4oJ7GqypHZQmWZgVGAI/NzgsQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1792975273;
+	a=rsa-sha256; c=relaxed/relaxed; t=1792975394;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=PFobPJXVsXDz19LQO+RLD3R/7cNmq2aYjbNBSXJLmQE=;
-	b=TkpJ4GBmlUJt1kmxmLQBUGTXlon8uoEYlYQ5nChgaGfAGUcLO+fo2O/CJTpxV+3+Lctg
-	 vxil5wPqMnEx8Rf8eSITOja82UYZiUTksf/n4zMuLlUkf3GP+7Le59Aul2c5WZjBQCG5X
-	 2uf3ja1cCqqCrpD219AF8q6vU+CDMHbEQXyIGbMBWxcbbvuNi88CNKVDBat1m/Mg2SCtH
-	 PINqOVjwh/oJ8zMai0TZfzOcT/qnDzmErBIeUrrLUbjGvxV5z2CJyTYa0PLS11P9XREMd
-	 /vpXSIhSWsDc6Vhfp7ChdhXrJkrNZHO0mSHrvUJ3P7ePc38fbgr5EYFNGAN3aQ8Infw==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=sUMIJmos47K/ON/JXzczpaI6QwrXCf8XYNqYo34Qadc=;
+	b=eGyV0GGGiuZfr4D6FtUaQEp5euvKWCvcI97uDZQ6AXGs+uOPmbccM+Is0JSG6iyvIbGd
+	 glWf8x9omRv5Tp7J9iPQyJgAapM1nWSVdzawEp3sH8Nb8PpjvSqrL+XR4COsu8lzlf7Ry
+	 rHRlJPItfd8J1VtF2Snuaj/zCVYLc2MO/GJPf3qTNJt1dWquMVOguQjHpGxJfsm9Zk9BQ
+	 +5YDBw/juoAMCuqjM0n/lJxPGTxthXhSVtke+VXTcsju0naSJaW4FMND1HPGqhMxaoAC3
+	 VKGTLoX8c+r0vbg0JfYt7eLF2IHGNbbuA7jJw4xWq/aZnmXfaxEVZvJBUbiB7WlEKdg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=egzVC3pM;
-	arc=none smtp.remote-ip=209.85.128.46
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b="e/5giREV";
+	arc=none smtp.remote-ip=209.85.128.54
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2D8A606A31E
-	for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 00:41:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A2D8A606A31E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1EE7606A31B
+	for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 00:43:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B1EE7606A31B
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=egzVC3pM
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4a5177d78c7so7445745e9.2
-        for <mfd@lists.linux.dev>; Sun, 25 Oct 2026 17:41:12 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=e/5giREV
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4a218c463d1so14092215e9.0
+        for <mfd@lists.linux.dev>; Sun, 25 Oct 2026 17:43:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792975270; x=1793580070; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PFobPJXVsXDz19LQO+RLD3R/7cNmq2aYjbNBSXJLmQE=;
-        b=egzVC3pMMbFx6L+PEcoVrWM/wO/0loR73eL1egF61Nnp6AMZwWmpLgsnqP88H3iKn2
-         1YdmvLHj9fmbDEuwI5vKU9gYNYOYIG8IymxCXTG/XzJiDWJ8qxcb+34ItYCgYn5dDK0w
-         uqdVkvQK/v8FxHlYQ9uQH7kVlKcaj7T4PE9fpDovTaRz9ZBjULz5hcpRmuB1rM1Sbi3v
-         G7+qTUQxJ5YER637wKGEA1nOzFOqTZ5I8bCvxHJral3nX6IscIkJg3tICEQB6hT/l8gK
-         TgRqgbRuROr30O60XnQxVK0WBj3yFXt58JCFx1NdNnYENKbgs7bSyxVHeFmRSgSQx4eA
-         vPxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792975270; x=1793580070;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1792975392; x=1793580192; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=PFobPJXVsXDz19LQO+RLD3R/7cNmq2aYjbNBSXJLmQE=;
-        b=pHjpWB9JD7TKd0UKSVqJfXv2T2smj63AcQfzbTsRwq4bycyoKU17P3ZksaDQ/mSaGs
-         nYWwnZobYIfHveBKb+iuyJwBC2znGTz7Vn6ha7Qvc514jm0i3MbcYaiTHlMFtSMuy0Pg
-         hQY3wmdQlEWXqHzTQXGHYgJDUmyWQh7hS0/4Uv4v2Q6UPX+8LseSLwY7ldZnGxRmvadK
-         wcK8TjAOVYE4lANVQqFWBnIO1QqZ/J9beBubl3b2Gg0k3RkXkyLD8OiFCC6qaJDxaqhi
-         BeElO3Nwu3WUd7t24Efk9MsAOGjh1LrvPsHDSE6e6NPvxPR4jxSjSr7KWokdmq2GRfMg
-         emyA==
-X-Forwarded-Encrypted: i=1; AKwUvByQOYdQ4raE2CO1snkmKKJ3JZQFTW+mGhI9r88bFXi90hmV5poYpKPUmxwSLitPWZ2QzdU=@lists.linux.dev
-X-Gm-Message-State: AFq9FYKbhk725bwBaFBzbTczyfySTFkDxoavVewBHdFC/iwFhWhIJDYT
-	uN3TMeoA2jHH4XdbO8Jn/0dchpDrTdaYZ/tZ/iGvPamjSDE7c5IAnOeK
-X-Gm-Gg: AYBFou3qjXsJjRHNAlEcUbfeVdgziR64YvUg7cTNXBVkEFgFxysJf49PklLEcaubm2D
-	mBwp2vwxwtuOEVrdYFQiqXpsf+RgUaPUsDat21vdegnx79S7C2vyRlSp3+NOhuD9CrIwN7/0+0z
-	HtG8cuHtcy9QbHC5trVMMUWGqr8HPspw/Gm/a7nz3nRnupZuX6//SOQkk6jV4XohX5S4c3B7o9T
-	5o2goki0sY1vRLz61CJv3qppVA92nWsMD3KwSMEpg+dFUT27X2wiuSctbRzMv+ivepZVxo9ZNHu
-	L4tV61RWteBVK4FifoEanBGLI2CFyyvD6y/jwcl/1nWFcWlTDWITWces2ivs/yzmM2y2NGLu4O6
-	xH305lfmBqSi4kbF5LROpzt92qYkQ8w3ycKMI97rR3IhFVgYrC8x+cRHKFMWj4eyE/h8YTXgp8o
-	rai3ThEi13GeHThyuEg2fegcOeI3HH+BsKoUbNfu+yHkEzs1yrYTTPfLW8kUYUsymLmwgQ3Vy+k
-	fNXhGkXW5k9gxryOS9oABJqIwzlxL5kbrHUHZXv2d+lZ5vwOoh4E+SyYW1bCiYMobG9+J04fptz
-	BW9MW3lwxC1khA==
-X-Received: by 2002:a05:600c:1c1b:b0:4a2:1a:a116 with SMTP id 5b1f17b1804b1-4a35aae5c48mr101973045e9.0.1792975270272;
-        Sun, 25 Oct 2026 17:41:10 -0700 (PDT)
+        bh=sUMIJmos47K/ON/JXzczpaI6QwrXCf8XYNqYo34Qadc=;
+        b=e/5giREVI9kBJENMn/2nDLFEgvDumMqg1Q8R7yHfxvOAotklNEhMpqD/nz/gUGWUNP
+         aaJw3G3gtCosIL5dDD2bKfSrSiDrEHmYdVg0yQutxY7vVAiXep4YkuBER3Vxy5EjVn79
+         e6I10O41wfbV8HiGOWAdqV9tAK5fF/xuqNlDFzeeEObhIukwBx/CUAN8u2ctulbufZLW
+         ICZrShwhsn5yaI8ZpWuluSiX3uJ76dC5dUxatMmAuqslzNCLkdqNldhRStGpOXzgRSA6
+         c1TnAExr7Yxs5bb7Jc8/wNdTQpJv2hD27YIWYgAOC0mDXTGkfFz+rBvZVPss7aCc/WJP
+         U+xg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792975392; x=1793580192;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=sUMIJmos47K/ON/JXzczpaI6QwrXCf8XYNqYo34Qadc=;
+        b=mTy2O+6ddMRLqMti7slKUvCFmz0BMZ3h1QES6u6bT4iNXcCtd/1fUhi48cXbylmrcH
+         jQZB8656vwmFWNVAv+QvCHRcRkvnkJezgwBTK+vu55+uIXRvsNM7b8RQDB3Lu3BNVlP3
+         Op2dVVli5lgGwcjUxmFesw5LyNYb9nMfjeBTMlrSVWGutY39YEdFLpcOSXrWGGo58ciu
+         wTAOvAH67Nyi/jH+YOI/RS1oV0aPBavUs5u/NzD3peBLoQH36HiNQL/EtHT0DD8QvDSQ
+         /T8jV3VJeR65t/hs9G9YiUKgy0HT1k3U48yr4w+egrYWWvZgB6Fu54DDXcC0ADegoTaW
+         2fQg==
+X-Forwarded-Encrypted: i=1; AKwUvBzX88jbHj1F5XjnMRKcDEgpohp3tCFD/6SS1EWHVheIAL61nN/NYjGfCtzXLOmq8Lrvilc=@lists.linux.dev
+X-Gm-Message-State: AFq9FYIBTUuF/85VFu3twgDyTD8uMqMlAIzVmjlKJlKshCU+vymFBOxz
+	6sPJTnhIGvHZBqUwQTYbUSkLMoOVoRJuLpxDR3mGJRDUU9C0Pc/iMQZP
+X-Gm-Gg: AYBFou1yEP+z6V2t2zNHY7wbDbB3i+cov9zwOzhDMm6lL259tbklXVOzB9Znaq7lyfW
+	QGXdCcxVSJAs5ZBZBJpIf9hXwZnRpYfegNNH5U2hNrYZ6gYJNTw7TQKRGBoDTxK74+tRYUAFmZq
+	Xp9Co6FMMgB4dmsuXVoeuJyGZAnOtKq/xfLGnwWUQnjSVMYBOd6nNj0TvzNiQ5qBHm7vp1G3M2W
+	SDQPI3luqA0B+YgdrOBWYQjvyDteKYRjx0AYEKuMgPWLiYub1U8ox4VvbDw2DYFnEHE2P3nUw7t
+	uwMYhe/pYA+ma2xmamUzEHhKQSY5Pw1Lh0Q//h+0ZmUQd/jOHsHl9x/Ayz5J1wFpeS+RSHNM3gN
+	i0jQriWVxLGO3KlN1ZkoyKmYwPOU0ajGNg+hEd1O7JkEJLfqKmhdBXFXdRpnbIH9RYSsE0VGwvJ
+	YznA9wh59k2nsLDn3aXYjxyLnZ0CcKxVRVvbkt6Y1gvyI/P4wAYyUn0duisG4/pcpyeQAevT/sJ
+	QA+CU7MGmCi8L5Yfjx7902xgdwpwx7e9HyRE//IODZCdVYkdr6xlDlHLlBerQc31AY0biV2fzkY
+	+xyejh+lbr2M+g==
+X-Received: by 2002:a05:600c:4f55:b0:4a2:a9:ed5a with SMTP id 5b1f17b1804b1-4a35ac9a6d5mr107733175e9.8.1792975392082;
+        Sun, 25 Oct 2026 17:43:12 -0700 (PDT)
 Received: from debian (ip-78-137-176-146.broadband.digiweb.ie. [78.137.176.146])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a07ebc0sm74574555e9.3.2026.10.25.17.41.07
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4a35a07ebc0sm74574555e9.3.2026.10.25.17.43.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 25 Oct 2026 17:41:09 -0700 (PDT)
+        Sun, 25 Oct 2026 17:43:11 -0700 (PDT)
 From: Pablo Mazzini <pmazzini@gmail.com>
 To: Mark Brown <broonie@kernel.org>,
 	Liam Girdwood <lgirdwood@gmail.com>,
 	Guenter Roeck <linux@roeck-us.net>,
-	Lee Jones <lee@kernel.org>,
-	Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>
+	Lee Jones <lee@kernel.org>
 Cc: Pablo Mazzini <pmazzini@gmail.com>,
 	Alistair Francis <alistair@alistair23.me>,
 	Andreas Kemnade <andreas@kemnade.info>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	devicetree@vger.kernel.org,
-	imx@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org,
 	linux-hwmon@vger.kernel.org,
 	mfd@lists.linux.dev,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH 0/7] sy7636a: power the panel only during updates
-Date: Mon, 26 Oct 2026 00:39:11 +0000
-Message-ID: <20261026003918.155321-1-pmazzini@gmail.com>
+Subject: [PATCH 5/7] regulator: sy7636a: report the temperature
+Date: Mon, 26 Oct 2026 00:39:16 +0000
+Message-ID: <20261026003918.155321-6-pmazzini@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261026003918.155321-1-pmazzini@gmail.com>
+References: <20261026003918.155321-1-pmazzini@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -110,46 +106,316 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The SY7636A hwmon driver keeps VCOM on from probe, so a display driver
-can not power the panel only during updates.
+The separate hwmon cell enables VCOM at probe. Report the temperature
+from here, as the TPS65185 and FP9931 drivers do, and under the chip
+name as they do: read it while the rails are on and return -ENODATA
+otherwise. Boards that need the rails on mark VCOM always-on. Drop the
+hwmon driver.
 
-Read the temperature in the regulator driver instead, as the TPS65185
-and FP9931 drivers do, and remove the hwmon driver. Boards that relied
-on VCOM staying on mark it always-on. The regulator also switches VCOM
-with VCOM_EN, gains VCOM voltage control and binds to the I2C device
-directly.
-
-Tested on a PocketBook Verse (B288).
-
-Pablo Mazzini (7):
-  ARM: dts: imx: keep the SY7636A VCOM on
-  regulator: sy7636a: fix the chip name
-  regulator: sy7636a: add VCOM voltage control
-  regulator: sy7636a: wait for power good, then switch VCOM_EN
-  regulator: sy7636a: report the temperature
-  regulator: sy7636a: bind to the I2C device directly
-  ARM: imx_v6_v7_defconfig: drop the SY7636A MFD and hwmon options
-
- Documentation/hwmon/index.rst                 |   1 -
- Documentation/hwmon/sy7636a-hwmon.rst         |  26 --
- arch/arm/boot/dts/nxp/imx/e70k02.dtsi         |   1 +
- .../boot/dts/nxp/imx/imx7d-remarkable2.dts    |   1 +
- arch/arm/configs/imx_v6_v7_defconfig          |   2 -
- drivers/hwmon/Kconfig                         |  10 -
- drivers/hwmon/Makefile                        |   1 -
- drivers/hwmon/sy7636a-hwmon.c                 | 102 --------
- drivers/mfd/Kconfig                           |  10 -
- drivers/mfd/simple-mfd-i2c.c                  |  11 -
- drivers/regulator/Kconfig                     |   6 +-
- drivers/regulator/sy7636a-regulator.c         | 240 +++++++++++++++---
- include/linux/mfd/sy7636a.h                   |  34 ---
- 13 files changed, 205 insertions(+), 240 deletions(-)
+Signed-off-by: Pablo Mazzini <pmazzini@gmail.com>
+---
+ Documentation/hwmon/index.rst         |   1 -
+ Documentation/hwmon/sy7636a-hwmon.rst |  26 -------
+ drivers/hwmon/Kconfig                 |  10 ---
+ drivers/hwmon/Makefile                |   1 -
+ drivers/hwmon/sy7636a-hwmon.c         | 102 --------------------------
+ drivers/mfd/simple-mfd-i2c.c          |   1 -
+ drivers/regulator/Kconfig             |   1 +
+ drivers/regulator/sy7636a-regulator.c |  56 ++++++++++++++
+ 8 files changed, 57 insertions(+), 141 deletions(-)
  delete mode 100644 Documentation/hwmon/sy7636a-hwmon.rst
  delete mode 100644 drivers/hwmon/sy7636a-hwmon.c
- delete mode 100644 include/linux/mfd/sy7636a.h
 
-
-base-commit: aac26bee2287c88af5be5a5ff96d783b19a28790
+diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
+index 199ca79621e9..43aecc4e49cd 100644
+--- a/Documentation/hwmon/index.rst
++++ b/Documentation/hwmon/index.rst
+@@ -265,7 +265,6 @@ Hardware Monitoring Kernel Drivers
+    sq24860
+    stpddc60
+    surface_fan
+-   sy7636a-hwmon
+    tc654
+    tc74
+    tda38740
+diff --git a/Documentation/hwmon/sy7636a-hwmon.rst b/Documentation/hwmon/sy7636a-hwmon.rst
+deleted file mode 100644
+index 03d866aba6e8..000000000000
+--- a/Documentation/hwmon/sy7636a-hwmon.rst
++++ /dev/null
+@@ -1,26 +0,0 @@
+-.. SPDX-License-Identifier: GPL-2.0-or-later
+-
+-Kernel driver sy7636a-hwmon
+-===========================
+-
+-Supported chips:
+-
+- * Silergy SY7636A PMIC
+-
+-
+-Description
+------------
+-
+-This driver adds hardware temperature reading support for
+-the Silergy SY7636A PMIC.
+-
+-The following sensors are supported
+-
+-  * Temperature
+-      - Temperature of external NTC in milli-degree C
+-
+-sysfs-Interface
+----------------
+-
+-temp1_input
+-	- Temperature of external NTC (milli-degree C)
+diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
+index 18c682e1a475..36e08c333e01 100644
+--- a/drivers/hwmon/Kconfig
++++ b/drivers/hwmon/Kconfig
+@@ -2104,16 +2104,6 @@ config SENSORS_SIS5595
+ 	  This driver can also be built as a module. If so, the module
+ 	  will be called sis5595.
+ 
+-config SENSORS_SY7636A
+-	tristate "Silergy SY7636A"
+-	depends on MFD_SY7636A
+-	help
+-	  If you say yes here you get support for the thermistor readout of
+-	  the Silergy SY7636A PMIC.
+-
+-	  This driver can also be built as a module.  If so, the module
+-	  will be called sy7636a-hwmon.
+-
+ config SENSORS_DME1737
+ 	tristate "SMSC DME1737, SCH311x and compatibles"
+ 	depends on HAS_IOPORT
+diff --git a/drivers/hwmon/Makefile b/drivers/hwmon/Makefile
+index d4c345ed7261..537fb0bc1778 100644
+--- a/drivers/hwmon/Makefile
++++ b/drivers/hwmon/Makefile
+@@ -234,7 +234,6 @@ obj-$(CONFIG_SENSORS_SPD5118)	+= spd5118.o
+ obj-$(CONFIG_SENSORS_STTS751)	+= stts751.o
+ obj-$(CONFIG_SENSORS_SURFACE_FAN)+= surface_fan.o
+ obj-$(CONFIG_SENSORS_SURFACE_TEMP)+= surface_temp.o
+-obj-$(CONFIG_SENSORS_SY7636A)	+= sy7636a-hwmon.o
+ obj-$(CONFIG_SENSORS_AMC6821)	+= amc6821.o
+ obj-$(CONFIG_SENSORS_TC74)	+= tc74.o
+ obj-$(CONFIG_SENSORS_THMC50)	+= thmc50.o
+diff --git a/drivers/hwmon/sy7636a-hwmon.c b/drivers/hwmon/sy7636a-hwmon.c
+deleted file mode 100644
+index d51daaf63d63..000000000000
+--- a/drivers/hwmon/sy7636a-hwmon.c
++++ /dev/null
+@@ -1,102 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Functions to access SY3686A power management chip temperature
+- *
+- * Copyright (C) 2021 reMarkable AS - http://www.remarkable.com/
+- *
+- * Authors: Lars Ivar Miljeteig <lars.ivar.miljeteig@remarkable.com>
+- *          Alistair Francis <alistair@alistair23.me>
+- */
+-
+-#include <linux/err.h>
+-#include <linux/hwmon.h>
+-#include <linux/init.h>
+-#include <linux/module.h>
+-#include <linux/platform_device.h>
+-#include <linux/regmap.h>
+-#include <linux/regulator/machine.h>
+-
+-#include <linux/mfd/sy7636a.h>
+-
+-static int sy7636a_read(struct device *dev, enum hwmon_sensor_types type,
+-			u32 attr, int channel, long *temp)
+-{
+-	struct regmap *regmap = dev_get_drvdata(dev);
+-	int ret, reg_val;
+-
+-	ret = regmap_read(regmap,
+-			  SY7636A_REG_TERMISTOR_READOUT, &reg_val);
+-	if (ret)
+-		return ret;
+-
+-	*temp = reg_val * 1000;
+-
+-	return 0;
+-}
+-
+-static umode_t sy7636a_is_visible(const void *data,
+-				  enum hwmon_sensor_types type,
+-				  u32 attr, int channel)
+-{
+-	if (type != hwmon_temp)
+-		return 0;
+-
+-	if (attr != hwmon_temp_input)
+-		return 0;
+-
+-	return 0444;
+-}
+-
+-static const struct hwmon_ops sy7636a_hwmon_ops = {
+-	.is_visible = sy7636a_is_visible,
+-	.read = sy7636a_read,
+-};
+-
+-static const struct hwmon_channel_info * const sy7636a_info[] = {
+-	HWMON_CHANNEL_INFO(chip, HWMON_C_REGISTER_TZ),
+-	HWMON_CHANNEL_INFO(temp, HWMON_T_INPUT),
+-	NULL
+-};
+-
+-static const struct hwmon_chip_info sy7636a_chip_info = {
+-	.ops = &sy7636a_hwmon_ops,
+-	.info = sy7636a_info,
+-};
+-
+-static int sy7636a_sensor_probe(struct platform_device *pdev)
+-{
+-	struct regmap *regmap = dev_get_regmap(pdev->dev.parent, NULL);
+-	struct device *hwmon_dev;
+-	int err;
+-
+-	if (!regmap)
+-		return -EPROBE_DEFER;
+-
+-	err = devm_regulator_get_enable(&pdev->dev, "vcom");
+-	if (err)
+-		return err;
+-
+-	hwmon_dev = devm_hwmon_device_register_with_info(&pdev->dev,
+-							 "sy7636a_temperature", regmap,
+-							 &sy7636a_chip_info, NULL);
+-
+-	if (IS_ERR(hwmon_dev)) {
+-		err = PTR_ERR(hwmon_dev);
+-		dev_err(&pdev->dev, "Unable to register hwmon device, returned %d\n", err);
+-		return err;
+-	}
+-
+-	return 0;
+-}
+-
+-static struct platform_driver sy7636a_sensor_driver = {
+-	.probe = sy7636a_sensor_probe,
+-	.driver = {
+-		.name = "sy7636a-temperature",
+-	},
+-};
+-module_platform_driver(sy7636a_sensor_driver);
+-
+-MODULE_DESCRIPTION("SY7636A sensor driver");
+-MODULE_LICENSE("GPL");
+-MODULE_ALIAS("platform:sy7636a-temperature");
+diff --git a/drivers/mfd/simple-mfd-i2c.c b/drivers/mfd/simple-mfd-i2c.c
+index ef3ce4bdf98b..168b4cf49b8c 100644
+--- a/drivers/mfd/simple-mfd-i2c.c
++++ b/drivers/mfd/simple-mfd-i2c.c
+@@ -69,7 +69,6 @@ static int simple_mfd_i2c_probe(struct i2c_client *i2c)
+ 
+ static const struct mfd_cell sy7636a_cells[] = {
+ 	{ .name = "sy7636a-regulator", },
+-	{ .name = "sy7636a-temperature", },
+ };
+ 
+ static const struct simple_mfd_data silergy_sy7636a = {
+diff --git a/drivers/regulator/Kconfig b/drivers/regulator/Kconfig
+index 88ba2770e378..f0d8d1319a1b 100644
+--- a/drivers/regulator/Kconfig
++++ b/drivers/regulator/Kconfig
+@@ -1624,6 +1624,7 @@ config REGULATOR_SY7636A
+ 	depends on MFD_SY7636A
+ 	help
+ 	  This driver supports Silergy SY7636A voltage regulator.
++	  If HWMON is enabled, it also provides temperature measurement.
+ 
+ config REGULATOR_SY8106A
+ 	tristate "Silergy SY8106A regulator"
+diff --git a/drivers/regulator/sy7636a-regulator.c b/drivers/regulator/sy7636a-regulator.c
+index 5705599d1b55..816df7716c0e 100644
+--- a/drivers/regulator/sy7636a-regulator.c
++++ b/drivers/regulator/sy7636a-regulator.c
+@@ -9,6 +9,7 @@
+ 
+ #include <linux/completion.h>
+ #include <linux/gpio/consumer.h>
++#include <linux/hwmon.h>
+ #include <linux/i2c.h>
+ #include <linux/interrupt.h>
+ #include <linux/mfd/sy7636a.h>
+@@ -147,6 +148,52 @@ static const struct regulator_desc desc = {
+ 	.of_match = of_match_ptr("vcom"),
+ };
+ 
++static int sy7636a_hwmon_read(struct device *dev, enum hwmon_sensor_types type,
++			      u32 attr, int channel, long *temp)
++{
++	struct sy7636a_data *data = dev_get_drvdata(dev);
++	unsigned int mode, val;
++	int ret;
++
++	ret = regmap_read(data->regmap, SY7636A_REG_OPERATION_MODE_CRL, &mode);
++	if (ret)
++		return ret;
++
++	/* the thermistor is only sampled while the rails are on */
++	if (!(mode & SY7636A_OPERATION_MODE_CRL_ONOFF))
++		return -ENODATA;
++
++	ret = regmap_read(data->regmap, SY7636A_REG_TERMISTOR_READOUT, &val);
++	if (ret)
++		return ret;
++
++	*temp = (s8)val * 1000;
++
++	return 0;
++}
++
++static umode_t sy7636a_hwmon_is_visible(const void *data, enum hwmon_sensor_types type,
++					u32 attr, int channel)
++{
++	return 0444;
++}
++
++static const struct hwmon_channel_info * const sy7636a_hwmon_info[] = {
++	HWMON_CHANNEL_INFO(chip, HWMON_C_REGISTER_TZ),
++	HWMON_CHANNEL_INFO(temp, HWMON_T_INPUT),
++	NULL
++};
++
++static const struct hwmon_ops sy7636a_hwmon_ops = {
++	.is_visible = sy7636a_hwmon_is_visible,
++	.read = sy7636a_hwmon_read,
++};
++
++static const struct hwmon_chip_info sy7636a_hwmon_chip_info = {
++	.ops = &sy7636a_hwmon_ops,
++	.info = sy7636a_hwmon_info,
++};
++
+ static int sy7636a_regulator_probe(struct platform_device *pdev)
+ {
+ 	struct regmap *regmap = dev_get_regmap(pdev->dev.parent, NULL);
+@@ -235,6 +282,15 @@ static int sy7636a_regulator_probe(struct platform_device *pdev)
+ 		return PTR_ERR(rdev);
+ 	}
+ 
++	if (IS_REACHABLE(CONFIG_HWMON)) {
++		struct device *hwmon_dev;
++
++		hwmon_dev = devm_hwmon_device_register_with_info(&pdev->dev, "sy7636a", data,
++								 &sy7636a_hwmon_chip_info, NULL);
++		if (IS_ERR(hwmon_dev))
++			dev_notice(&pdev->dev, "failed to register hwmon\n");
++	}
++
+ 	return 0;
+ }
+ 
 -- 
 2.52.0
 
