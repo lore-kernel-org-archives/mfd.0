@@ -1,47 +1,41 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=114.242.206.163
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793007115;
-	b=rvyPU/x8SnrSpQYekfaQoh1BdpShjzVfr9E9bRCf94qErAdJQyT+dQyiKxazTxUw8xqM
-	 bxad0T7kb+PMEiIPQpEXEcVf1kXa92EAspynLfJK4ULaOw/M+g6t2o8SW0ZMMbQFg0xCH
-	 MEJ9Xa/jRpC+0wJRrpUtOyN+3mU9p3+djzjXPLfbkF0guD9Ve2icGdw1pADWNmLK1mUEV
-	 PdsLKXxCjS+OdeibaWMRjr9emvVRVvET+/5E5H7VFb+q0jFCgIVzqHBdxugxyoETvymRC
-	 OyzFqLm8UxxzRxS7kaM2+NSgaaI6/4ChEBO6en2MwtmpNEqtiKCCmjOEaudcLfe/Rog==
+	t=1793007344;
+	b=MA8LefFqaOXcyZqqsVNkI47LXMo+E435YjNiuCEPNKgwMno/b5iObjKBjGKObfYaupFJ
+	 aBa3hOsajkb5Mlqb9xR5AwVOljvfvGxmCVPZzw+yqv27ZmAlnHRmaR9LXblVnTGkK3uuk
+	 RzLjjyKMVA2oeI1Jd07PY2Eeah8rowdrIy98x1V0Xry6NQFDzGkEogIitHn/ajs8TUItb
+	 wS0JgHgMAeLMaCgqF/iB8XMyW5ducqLhZyudbGIe33WRb5FOvoF4s3ffJoNNi/l3V8Tqe
+	 3POnNjA59cXDGFMNbTJqx3IymFUtymvMS0z6T7CXVkzWSFqg1bUQHv5G0djezEqojwA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793007115;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:From:To:Cc:References:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=fTHiEsQJS5VYBz3EM1bA5RuDNtGEG5MQKrJP6RK0j7M=;
-	b=1Wp5EGRlIQOe6846KNlv/zl2hjEih7EDNkc7IGTDr6QH2sEIAoM418yxZZnl8eLHX5k3
-	 fw8kwUF3JKOVCGKceU0V7Y2Vkjw12TrS8/hKi9XqU9cWZQlzTLIsF3EH5+Nn+bXE1kII9
-	 z9uKFxuGe4ci6FTZTptQXUV4HqreXQxWCVjmukAmAewKSNoKJG7CaDICtO/LdxEic8h52
-	 GbEGBbzwxz6hmFyBDtBaDnf3HsYrg7eWK/+MpAkvDW/zLGuTyg9F9aR0eG1UGJqatHjsH
-	 XQ48Jl1FeNIENdb2eH8zCb/3dtq6294W3WVuNI5h0F9YZEyqcPd+vY0NZwBGv9ypleQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793007344;
+	h=DMARC-Filter:Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-CM-TRANSID:X-CM-SenderInfo:
+	 X-Coremail-Antispam;
+	bh=IktkEx4zX4zWwoAqU3vLL+1o7cLskiaczwDJ/WCeiYI=;
+	b=SzrlSw0LkzGjECXARwdLp5GQSVONGq63i/FIQMv6IOdue9qgzIs7I9PAKZvNM473w1+i
+	 3bg8y/wevER/ZAevSdRPzp5dcuqQiCDQLM8wT8Zy5ZgE+T8xgAeRvBT/s7OlqPl7FA0+V
+	 DrkVgSfNtLfxE/HxZtBy3bvt+YdJk+suuZpaDKcGT/tWdgez3OGe2Ljk3CH0Cla716iy7
+	 jVc7jpgUhrEIdEQDlwpSc+d+ymoylrFc0gn3uxCeiW0/I+TFKigbtHyLPx4Ju5ApywRcJ
+	 jLL9+v09KRS0HTr8di5a5V2HMBz79aBIib3bUO/ufA4pCnbkQ//ReRX5YdKcKQaU7Jw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=I2ITqUwV;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 827DA606A31A;
-	Mon, 26 Oct 2026 09:31:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=I2ITqUwV
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 508B61F01825;
-	Mon, 26 Oct 2026 09:31:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793007115;
-	bh=fTHiEsQJS5VYBz3EM1bA5RuDNtGEG5MQKrJP6RK0j7M=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To;
-	b=I2ITqUwVfg8GjqCMCjq+3mJjbj6NU+OAQAJ83ZXHpa7YzCDT65BDCp21TR992rQyj
-	 D2+OZne55iCMA7Ors5Tvn5gOvYNstmlix+QT02y97seXNw9PDJrmM05nU7Od0MJ4QZ
-	 h/J3v2fSvYnenx1UCAFCm6mi2isfviv8RWe0dCkJJJlyYlrQclflkNvTI9l4SnoEO7
-	 7YdLQ0uVXzcpiZZbDuZPWR3p3im4ryzG4a+8IUaBi3aMAnqfzN8JqBzHi4sEdfiUHR
-	 yOjeYiwBk7T2ZW8F1Fc6SBTzSg1ksWs1EoCamm5aEKaQUISPCdmmHqkM0QMKS2gn8i
-	 WvRhfG0jn1rmg==
-Message-ID: <104e41a2-3451-4f7b-9723-3c05ceaa64af@kernel.org>
-Date: Mon, 26 Oct 2026 10:31:51 +0100
+	dmarc=none header.from=loongson.cn;
+	spf=pass smtp.mailfrom=loongson.cn;
+	arc=none smtp.remote-ip=114.242.206.163
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 99C25606A321
+	for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 09:35:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 99C25606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
+Received: from loongson.cn (unknown [10.20.42.102])
+	by gateway (Coremail) with SMTP id _____8BxLtPtHt9qVW4ZAA--.8133S3;
+	Mon, 26 Oct 2026 17:35:41 +0800 (CST)
+Received: from [127.0.0.1] (unknown [127.0.0.1])
+	by front1 (Coremail) with SMTP id qMiowJAx3c7qHt9qlEwwAA--.35470S2;
+	Mon, 26 Oct 2026 17:35:40 +0800 (CST)
+Message-ID: <15af8b62-9461-46b0-8359-4db597b96d66@loongson.cn>
+Date: Mon, 26 Oct 2026 17:32:53 +0800
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -52,112 +46,59 @@ List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/7] dt-bindings: mfd: x-powers,axp152: Add the AXP2101
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Olivier Louvignes <olivier@mgcrea.io>
-Cc: Lee Jones <lee@kernel.org>, Chen-Yu Tsai <wens@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, mfd@lists.linux.dev,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20261023100401.67592-1-olivier@mgcrea.io>
- <20261023100401.67592-2-olivier@mgcrea.io>
- <20261026-brawny-gleaming-grasshopper-813f7d@quoll>
+Subject: Re: [PATCH 16/28] mfd: loongson-se: Zero-initialise controller
+ command structures
+To: Lee Jones <lee@kernel.org>
+Cc: stable@vger.kernel.org, Yinggang Gu <guyinggang@loongson.cn>,
+ Huacai Chen <chenhuacai@kernel.org>, linux-crypto@vger.kernel.org,
+ mfd@lists.linux.dev, linux-kernel@vger.kernel.org
+References: <20261021121245.3111563-1-lee@kernel.org>
+ <20261021121245.3111563-16-lee@kernel.org>
 Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20261026-brawny-gleaming-grasshopper-813f7d@quoll>
+From: Qunqin Zhao <zhaoqunqin@loongson.cn>
+In-Reply-To: <20261021121245.3111563-16-lee@kernel.org>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:qMiowJAx3c7qHt9qlEwwAA--.35470S2
+X-CM-SenderInfo: 52kd01pxqtx0o6or00hjvr0hdfq/
+X-Coremail-Antispam: 1Uk129KBj9xXoWruFW5AF13GFWUJFW3XryxJFc_yoWfJFX_Aa
+	y3KF95C34kCr4vk3sYqF1fZFZI9a48J3WIk3WDtr4rW3ZYqw4FvryIk3yI93W3Krs8ArnI
+	9w18u3yvkr4UZosvyTuYvTs0mTUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUj1kv1TuYvT
+	s0mT0YCTnIWjqI5I8CrVACY4xI64kE6c02F40Ex7xfYxn0WfASr-VFAUDa7-sFnT9fnUUI
+	cSsGvfJTRUUUb78YFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I6I8E6xAIw20EY4v20x
+	vaj40_Wr0E3s1l1IIY67AEw4v_JrI_Jryl8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxS
+	w2x7M28EF7xvwVC0I7IYx2IY67AKxVWUJVWUCwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxV
+	WUJVW8JwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v2
+	6r4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF0cIa020Ex4CE44I27w
+	Aqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE
+	14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCF04k20xvY0x0EwI
+	xGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480
+	Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_JF0_Jw1lIxkGc2Ij64vIr41lIxAIcVC0I7
+	IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k2
+	6cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxV
+	AFwI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZEXa7IU8wNVDUUUUU==
 
-On 26/10/2026 10:30, Krzysztof Kozlowski wrote:
-> On Fri, Oct 23, 2026 at 12:03:55PM +0200, Olivier Louvignes wrote:
->> The AXP2101's interrupt line is optional, as for the AXP313A and the
->> AXP15060: the driver then registers only the regulators. It has no DCDC
->> frequency setting.
->>
->> Signed-off-by: Olivier Louvignes <olivier@mgcrea.io>
->> ---
->>  Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml | 3 +++
->>  1 file changed, 3 insertions(+)
->>
->> diff --git a/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml b/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
->> index 45f015d63df1..f5e2c8232581 100644
->> --- a/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
->> +++ b/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
->> @@ -68,6 +68,7 @@ allOf:
->>            compatible:
->>              contains:
->>                enum:
->> +                - x-powers,axp2101
-> 
-> Why breaking the order? Keep natural sorted.
-> 
->>                  - x-powers,axp15060
->>                  - x-powers,axp305
->>                  - x-powers,axp313a
->> @@ -84,6 +85,7 @@ allOf:
->>              enum:
->>                - x-powers,axp313a
->>                - x-powers,axp323
->> +              - x-powers,axp2101
-> 
-> Sorting is broken in original code but you placed it completely odd.
-> Neither keeping sorting of 3xx variants nor, between 15060 and 717.
-> What's the logic?
-> 
->>                - x-powers,axp15060
->>                - x-powers,axp717
->>  
->> @@ -108,6 +110,7 @@ properties:
->>            - x-powers,axp806
->>            - x-powers,axp809
->>            - x-powers,axp813
->> +          - x-powers,axp2101
-> 
-> Placement of these entries makes no sense.
 
-Ah, this one is actually sorted by natural sort.
+在 2026/10/21 20:09, Lee Jones 写道:
+> loongson_se_init() and loongson_se_init_engine() declare struct
+> loongson_se_controller_cmd on the stack without zero-initialising it
+> and only populate a subset of its fields before
+> loongson_se_send_controller_cmd() writes all eight 32-bit words to the
+> controller MMIO registers.  Zero-initialise the stack command structures
+> so that unused words do not leak residual kernel stack contents to the
+> hardware.
+>
+> Fixes: e551fa3159e3 ("mfd: Add support for Loongson Security Engine chip controller")
+> Closes: https://sashiko.dev/#/bug/linux-b81dca3d-6812-43b6-9ad9-912727674154
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Lee Jones <lee@kernel.org>
 
-Best regards,
-Krzysztof
+Reviewed-by: Qunqin Zhao <zhaoqunqin@loongson.cn>
+
+Thanks for fixing this!
+
+
+Best Regards,
+
+Qunqin.
+
