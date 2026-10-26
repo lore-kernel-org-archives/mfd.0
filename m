@@ -1,74 +1,67 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=161.97.139.27
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793054090;
-	b=hOPSWizYvXoXdUkrd3+WDrr980zJoj/1MI20jJTKxvfDOhIbFNxaphRtoq9+du3ez0P9
-	 BktqDtlsALEAQMcY64zN5U+MkhkWAzSEj6wUGk7TxSm9ZOWtK7XCRPI8GI+zQ5epTlF3C
-	 E5+2kLrTObUyNuHk5jzPDLJ9U1De1x5p/81f075G8yVXiq+KGXZQ3HJ5jdPhPWpGj7idV
-	 JosIyv51ebUZQ/K/pszwkYaSe5GI9prVek9F6SKP+d3G8S0etihyT8w41/6KdoaDZBYJ2
-	 kW/nxnbOMnXmLDQOd32YmdhgHWYGFfQs9Hd3ZVwyREqbKBA6JXRTl1ao9z3Zj2nUEvQ==
+	t=1793057215;
+	b=5EzRYcyILMVljTYTDe1uBXvJy0bfVoU9nENwvBIv77GsBX2h2A+Yur7RsG/fyi2npOC2
+	 Kc1i+pUkbRD91lrr5+pV6MJsAQ7TvtsZEM5VGqKKkIOCj7VcKnv/3zHa/5C/cR5C+ouJK
+	 d/7hl8i95GYvhjn4MK/VVtxnZqv8dmdf+JN0DCCVEiXqbr0msUwvRnX0p9hfXE/2gaIZM
+	 c0VFg9ZZ4h85HHX5N1hlh8uyMDm4uWTcQOCa2oqQukqqVeZPSL42E/G0JNw0SUnKLAZPV
+	 mrobkc1O2Qdl5S+hF6Rmtw01+4x6hKyETKl1yQCqdltaepMlh2jsUZktG2+JzEhxKhg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793054090;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=v2Nrgywn65NL+RE7paBhmd1KoquJfEvns7IjUonmCkc=;
-	b=Okysfav3LdbuHBVVtOc7Ti1WwVFqTRX+XXmoK12xmjIiSfnCclUDW+LyKERTqgN+ow1h
-	 MA9IicOgcVuIM6NDTJezIje/gbpt835NHcw406+JcZczA+ogw+evoIi2RZLYEi/DU046v
-	 JJWQSn9BDiEX/U40sspFiZaqawJngJr5+Sa9hUvTuhM5tJC8b+jkBqKkIyZfRYrb+nbXY
-	 3H1t4djQO7O1sLqzGC6kp7iZjY80uybaow3senheMYJuE+M6pygUiCbzAVqeXzN2fWOPq
-	 LSE2BFGZ29x2nUjI8smyvMwB56Pv53U3Lr75TveFWvvwdUgRvwjmjBYvwIHYcn1iuEQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793057215;
+	h=DMARC-Filter:Received:DKIM-Signature:Date:From:To:Cc:Subject:
+	 Message-ID:In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=TuMxpuKm0GqZ9iLgROZ0NfIBSu1Y+sVk0Mx1hT6klxU=;
+	b=SypXdbCcfJF69qrxCLCnPhX+yXXYRXqjIsMVqWoAu9kZkDr+fgcyenbinU94jhhLRGPR
+	 OtmIa7Z1rJofTjJPXci+2EpNYl5aMVixvtU6N5qjsT+yN+7tNlusgHPXIPrYwtG2rpdwc
+	 OnjL2AfxoViP11VuqlhK1QIr7Yp1loiDO/SEnl4Ztlf8l55QPkIYnqkZ77Ag4SjwWBOmE
+	 jVr1ToFZgMLOGVq6/dI8X1t7tlC8eTTgepNBc/t0xI0VvP9Ju0hiFrLaT1s23z7gHnfrL
+	 pnzorErTSiw7amohDKPvLtgjX2xxTLeysLDha9KK58+jY+wui99FP52A+/uR8beVSbg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jfr1jagI;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=kemnade.info;
+	spf=pass smtp.mailfrom=kemnade.info;
+	dkim=pass header.d=kemnade.info header.i=@kemnade.info header.a=rsa-sha256 header.s=20220719 header.b="y/f7HyOL";
+	arc=none smtp.remote-ip=161.97.139.27
+Received: from mail2.andi.de1.cc (vmd64148.contaboserver.net [161.97.139.27])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40C13606A31F;
-	Mon, 26 Oct 2026 22:34:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA10A606A327
+	for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 23:26:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org AA10A606A327
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kemnade.info
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jfr1jagI
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 255931F01828;
-	Mon, 26 Oct 2026 22:34:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793054089;
-	bh=v2Nrgywn65NL+RE7paBhmd1KoquJfEvns7IjUonmCkc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=jfr1jagI2Pt7wvdiivuSrWwaHZsjr7u7Ggk+4UrVhiB5fU4Je/W8tTTJCjIxJpK1J
-	 Tzeb1RBUqdUJfpPxa1yyfqbGUkdK04/mN2ACZgCpTU6LHGP/tBhQfJllPNAePmdlgv
-	 w2FMqcuwbZKetfkBm18RKMOUZLiTglEecAMrH8KVJRgxWcALpS1wsHMbbxGetnnn8x
-	 iyLLIEa5I5iQ7M1jTzvYZuPkJcIxab5Z+kank8/A6ajRzxrW+QNFbHS/XuOJAQJLq9
-	 4nGIAS98j6N+ECXwN3QSrQGmckdeTHGPoT0dOuN0TAuyngnPnRE0glbUHmUA/vBlCL
-	 /oGT3gc4ZA0sw==
-Date: Mon, 26 Oct 2026 23:34:46 +0100
-From: Andi Shyti <andi.shyti@kernel.org>
-To: 1579567540@qq.com
-Cc: Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
-	Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Heiko Stuebner <heiko@sntech.de>, Philipp Zabel <p.zabel@pengutronix.de>, 
-	Elaine Zhang <zhangqing@rock-chips.com>, Lee Jones <lee@kernel.org>, Linus Walleij <linusw@kernel.org>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Richard Cochran <richardcochran@gmail.com>, 
-	Ulf Hansson <ulfh@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Jiri Slaby <jirislaby@kernel.org>, Jisheng Zhang <jszhang@kernel.org>, 
-	Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@kernel.org>, Jakub Kicinski <kuba@kernel.org>, 
-	Paolo Abeni <pabeni@redhat.com>, David Wu <david.wu@rock-chips.com>, 
-	"Rafael J. Wysocki" <rafael@kernel.org>, Daniel Lezcano <daniel.lezcano@kernel.org>, 
-	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>, 
-	Maxime Chevallier <maxime.chevallier@bootlin.com>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
-	Alexandre Torgue <alexandre.torgue@foss.st.com>, Vinod Koul <vkoul@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
-	Shawn Lin <shawn.lin@rock-chips.com>, linux-clk@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, 
-	mfd@lists.linux.dev, linux-gpio@vger.kernel.org, netdev@vger.kernel.org, 
-	linux-pm@vger.kernel.org, linux-i2c@vger.kernel.org, linux-serial@vger.kernel.org, 
-	linux-mmc@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, 
-	linux-phy@lists.infradead.org, linux-usb@vger.kernel.org
-Subject: Re: [PATCH 11/27] dt-bindings: i2c: rk3x: Add RK3572
-Message-ID: <at_VaLUwxn7h3Dal@zenone.zhora.eu>
-References: <20261022-add-board-ok3572-c-v1-0-0b0fd85a31ee@qq.com>
- <20261022-add-board-ok3572-c-v1-11-0b0fd85a31ee@qq.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kemnade.info header.i=@kemnade.info header.a=rsa-sha256 header.s=20220719 header.b=y/f7HyOL
+Received: from mail.andi.de1.cc ([2a02:c205:3004:2154::1])
+	by mail2.andi.de1.cc with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.98.2)
+	(envelope-from <andreas@kemnade.info>)
+	id 1xLU5c-00000000nRq-0BYN;
+	Tue, 27 Oct 2026 00:26:52 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=kemnade.info; s=20220719; h=References:In-Reply-To:Subject:Cc:To:From:
+	Reply-To:Content-ID:Content-Description;
+	bh=TuMxpuKm0GqZ9iLgROZ0NfIBSu1Y+sVk0Mx1hT6klxU=; t=1793057212; x=1794266812; 
+	b=y/f7HyOLsJbq3+w7fGskXBqBoB1B6yu61N0X8TjX943vue31BNYpoLhBXyTR4Bjzo5ky+/Hut2N
+	dg1yaT08WVmZUvsJZ75EBrLyLOWxK2IvVjg8LzSlWnZBmSV9RjqIrlvfI05oNRbUWKTOCZTiJwmPU
+	08ZO4aiIaRGntwholEwxwRYK+UI31+fI8+QICPyUDBDW6Q09xGm3q0lFYLiNSZIgEhdVvcM0OZ6V6
+	gZUyz4oUpex9bxbr3W8jaXelJfZPiYCGj7KW4Fqjm8i5SMLiTvdKNBdRJIY/6+pVgaSbqiCylBis1
+	BX18UPlVrMvQm49bNqZoBO5wEUv/3vT0oowA==;
+Date: Tue, 27 Oct 2026 00:26:35 +0100
+From: Andreas Kemnade <andreas@kemnade.info>
+To: Guenter Roeck <linux@roeck-us.net>
+Cc: Pablo Mazzini <pmazzini@gmail.com>, Mark Brown <broonie@kernel.org>,
+ Liam Girdwood <lgirdwood@gmail.com>, Lee Jones <lee@kernel.org>, Alistair
+ Francis <alistair@alistair23.me>, linux-hwmon@vger.kernel.org,
+ mfd@lists.linux.dev, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 5/7] regulator: sy7636a: report the temperature
+Message-ID: <20261027002635.6b831c0b@kemnade.info>
+In-Reply-To: <f68279bc-20f1-41a9-ba5c-92b974785cd8@roeck-us.net>
+References: <20261026003918.155321-1-pmazzini@gmail.com>
+	<20261026003918.155321-6-pmazzini@gmail.com>
+	<f68279bc-20f1-41a9-ba5c-92b974785cd8@roeck-us.net>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; aarch64-unknown-linux-gnu)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -78,20 +71,64 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261022-add-board-ok3572-c-v1-11-0b0fd85a31ee@qq.com>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Hi Cunhao,
+On Mon, 26 Oct 2026 07:35:24 -0700
+Guenter Roeck <linux@roeck-us.net> wrote:
 
-On Thu, Oct 22, 2026 at 12:11:08AM +0800, Cunhao Lu via B4 Relay wrote:
-> From: Cunhao Lu <1579567540@qq.com>
+> On Mon, Oct 26, 2026 at 12:39:16AM +0000, Pablo Mazzini wrote:
+> > The separate hwmon cell enables VCOM at probe. Report the temperature
+> > from here, as the TPS65185 and FP9931 drivers do, and under the chip
+> > name as they do: read it while the rails are on and return -ENODATA
+> > otherwise. Boards that need the rails on mark VCOM always-on. Drop the
+> > hwmon driver.  
 > 
-> Add the RK3572 I2C compatible using the RK3399 fallback.
+> This is going the wrong way. The correct solution would be to convert
+> the hwmon driver to an auxiliary driver. I am not going to approve
+> this patch. I am not giving an official NACK (yet).
 > 
-> Signed-off-by: Cunhao Lu <1579567540@qq.com>
 
-Acked-by: Andi Shyti <andi.shyti@kernel.org>
+First we need the problem defined, then the solution, and then we can
+talk about what is the correct solution. The commit message does not
+name a problem.
 
-Thanks,
-Andi
+So what we have:
+one bit to turn on a bunch of things,
+after one time to sample (< 1ms), fresh values are provided on the ADC
+register periodically.
+after some more time (max. 50ms), several voltage outputs are ready.
+Powering on those things is expensive, so you would not use this as an
+ordinary temperature sensor.
+
+The problems I see in the sensor driver this patch might want to solve:
+- problems if the regulator driver is registered earlier.
+- not having powered on the regulator all the time (that is described
+  in the cover letter)
+
+The way the patch handles it does not require any structural change,
+availabitily of the regmap is given. So it would be a separate cleanup
+patch. 
+
+But it introduces another race condition.
+The temperature might be read too early.
+1ms delay should suffice.
+
+The  SY7636A_OPERATION_MODE_CRL_ONOFF flag might be reset before 
+reading the temperature. If that register does not reset to zero
+but just keeps the temperature last read, then we have no problem.
+
+If not, there needs to be some synchronisation between the regulator
+part and the sensor part, probably a mutex saved in a common structure.
+And in that case, structural change of the drivers is needed which
+I see the following possibilities:
+
+a) non-simple mfd driver
+b) aux device as a child of the regulator driver.
+c) regulator driver containing everything.
+
+No strong personal opinion here.
+
+Regards,
+Andreas
+
