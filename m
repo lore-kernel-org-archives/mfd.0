@@ -1,56 +1,71 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793044697;
-	b=vxAlnlSmTgYQnxCWf0JcE4pPbIbHmQN+aAK2Nmfk+MTR+wi1NGqxVrvMDoHESIPOzNHf
-	 EtReJqcVs7XVi81v03QqZutJ/IguwYlpMibahfrH/Kt/tY499ERgQ+Ynt/xI5biKCgNZG
-	 d43CdJygxAeYIolRd6o8m3VcKjXVwph1uqgussDw1/DA+jW2rOaszA0Mo1MxhJg/Q84X0
-	 fImq47qKvycOhLMRL+jL5OkH+vqxAKvksmDSfsRfFiiMbWj5YfXkFvl4mS1OaASKmWjkm
-	 NHU4BuQ6SLlbGrh5rI9BMI/9631Ho/tCt64kUBmJSIR+gzFnADifLFDtoHurIzTublg==
+	t=1793051446;
+	b=uJy74Jq2/2sX1cGFaUyMt01hXf0ahlfHbZbGVU2PlVgQVBygpyQJmJsd1uAVx7fncESg
+	 uyLUXmWTP1r2ot3rbuWY4j1GeHJIaKKxTj95Pwp6WkqjS2bbDjueFKIVqF16TgLMZHYYB
+	 d27v5MB8FzK50FM4edWcl4WW23thVF8yqkIs7aAMs7b8Q+BSapi8Y33MYL8Nz58rR+WrU
+	 RnxGlOvJe+T8R/emzw+y+1Lp+YJHKVGMOakWynDG54ruNEGExpu2ymLFFR6IjO+7PLt0t
+	 Apgtx8ifoM+EZhG7tN/LguQBtrQpwcs8nJgpCywM6LR+Mjb8RweQckOGm1dlu+ZuARg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793044697;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=0MJBURpKlr67JcBda9O/tqxBXjRsH3w0cNpSHJWCUpc=;
-	b=gT1enp6RsV+Lo2JpGICWiA3/x7h/bYcLalRnMC5bNNixmO/oGAYcH4PGocOr84v72Rzm
-	 3C1qfi9hFatzkD4RtXceU7iDF8AF0tRWfXj6bpUfZCu+EKBuLC/sQvDSKKoxol1k8f94Q
-	 YgcC2oRvZOgnkoF58wnu0WuLT76nE51ZJ1Vlem4YAXyPSccT/Y9jSNglPnA+ziVyzOZ7Y
-	 VuMvPs5fNe6UmY/Ph2oHVzEbljepvlfejtYeHOTQkLfLCzCDK0EHHA73/0ZtdN5B12HYL
-	 V03riBoSzC233qCm32wxLU5d7E+KVpSgiS9aHaK667zV55Ox7KQZ4JIyDjPGUmhYMQg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793051446;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=AXVCbgunRdxiEzfKOtZOu4w7+1IOuyahlSkNVvnhSu0=;
+	b=GBEhHXeE7iw3vcEjgRWFbAkdH801NTwgHchj9DaFVHtYDbgyPar4ginMBFmAjuZTjeqI
+	 Rs/dp6c6HFnrojqKJrlpkSwXTOJtyB5HGiylqO02u3Ggr7MtCQ+F2fqNfJEaEikGop1iv
+	 6Ei5qqhWWxshC2fOcEGZqfL3SEgVa/T+ArVegbiYZ/7SAupFvFVHtmKj/5lmsTzxHriQI
+	 73wMyXSvsi4gB9x5g6jJbmEdJt08J/7lVv3wnQ4awPZTN6rLH+EkmeTXB4oaRC/u3XvLX
+	 xdF44wxmSZoAMdYktwsHh/WFazKEm1FctiyNfQHv4+Iob1cFK9PEQ94mv2xsB5CSvZA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="UoYu5/Hw";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EuMJQh8j;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57535606A31A
-	for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 19:58:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF347606A31A;
+	Mon, 26 Oct 2026 21:50:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UoYu5/Hw
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B4A9A1F01825;
-	Mon, 26 Oct 2026 19:58:16 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EuMJQh8j
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 33BB21F01829;
+	Mon, 26 Oct 2026 21:50:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793044696;
-	bh=0MJBURpKlr67JcBda9O/tqxBXjRsH3w0cNpSHJWCUpc=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=UoYu5/HwEKVkXNgia78dSmkgZkC+o1PDrJX3BTECc/h4w4CaP1y3giQ8TnkrLYYQY
-	 mCUIyho/qs+OtA+hFPYAuwbDLh3E8PnCgpAxZqmnbecRS+ZWffmOimvpIMt1NuoqUE
-	 73/ZweXKyJy9gbvTBCOYAxWFqjUJCrRlaHVJ1w8wRDgbymwmv4CCqTCyD4SQZXK6yV
-	 Ts0RYj/L/dkevmvi7uMrQKMZ5zy8TdSabYV5pVmRVS51GbrBzr5/c0XvivxbBlzSGl
-	 EP2BUlnnH1Ch80miL2ZDW7UMzQDUKKdzBm9Dlo7+9WAPoEvs4ivR7Ngg/vkB5NH0Kt
-	 xPBkMD4Rr0V1w==
-Message-ID: <sashiko-outbox-185696@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH] mfd: twl4030-irq: Fix a lock leak in
- twl4030_sih_bus_sync_unlock()
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Bart Van Assche" <bvanassche@acm.org>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <8aec913c6a80c26c4cf5a1ce590f8439c997dafc.1793044546.git.bvanassche@acm.org>
-References: <8aec913c6a80c26c4cf5a1ce590f8439c997dafc.1793044546.git.bvanassche@acm.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 26 Oct 2026 19:58:16 +0000
+	s=k20260515; t=1793051445;
+	bh=AXVCbgunRdxiEzfKOtZOu4w7+1IOuyahlSkNVvnhSu0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=EuMJQh8jrNFztkuD9QGjD9IOj3BqpOWIn4ZLfMqp0axPNgGHyX6ygQBg11SPqk2IN
+	 HPpQpYKB9+oaLHcz/oXyjCaNY/7hG0ZrJ7RhnLWY1M3m7uF/wvlXeTTOa+nz/Lb/68
+	 EqHJRl1eKye9fjZVphj+G2J1xF/2dnWT4BTuM1rwaxZ75GvqRZZtn7HXLGL38zXl/d
+	 eRARHpowxT6oVh+EW6FqS6FtOIxH+Qq82wApQZSpsyGER4BTVjuMClPmJ3TRjB9H2a
+	 QwlkvEHU+j1hC0glM0B8FDVcr6yiBS6VWlhyoKrh4l+Rea7bTqqgxeUDqGiyT+LrT+
+	 cK/TSg7YtXRYw==
+Date: Mon, 26 Oct 2026 16:50:42 -0500
+From: "Rob Herring (Arm)" <robh@kernel.org>
+To: Jisheng Zhang <jszhang@kernel.org>
+Cc: Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
+	linux-serial@vger.kernel.org, Liam Girdwood <lgirdwood@gmail.com>,
+	linux-kernel@vger.kernel.org, Mark Brown <broonie@kernel.org>,
+	Frank Li <Frank.Li@nxp.com>, mfd@lists.linux.dev,
+	Brian Masney <bmasney+clk@redhat.com>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	linux-arm-kernel@lists.infradead.org,
+	Jiri Slaby <jirislaby@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, linux-i2c@vger.kernel.org,
+	linux-gpio@vger.kernel.org,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>, linux-clk@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-spi@vger.kernel.org,
+	Lee Jones <lee@kernel.org>, linux-i3c@lists.infradead.org,
+	Andi Shyti <andi.shyti@kernel.org>,
+	Linus Walleij <linusw@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>
+Subject: Re: [PATCH 19/20] dt-bindings: arm: berlin: Add Synaptics SL261X SoC
+ and RDK board
+Message-ID: <179305144215.3880355.17021264203914650157.robh@kernel.org>
+References: <20260929061417.20733-1-jszhang@kernel.org>
+ <20260929061417.20733-20-jszhang@kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,18 +74,26 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260929061417.20733-20-jszhang@kernel.org>
 
-> If reading the EDR registers fails, twl4030_sih_bus_sync_unlock()
-> returns without unlocking agent->irq_lock. Fix this by jumping to a new
-> label in front of the mutex_unlock() call. This bug has been detected by
-> the Clang thread-safety analyzer.
->=20
-> Fixes: 2f2a7d5ef764 ("mfd: Drop twl4030-irq's edge_work")
-> Signed-off-by: Bart Van Assche <bvanassche@acm.org>
 
-Sashiko has reviewed this patch and found no issues.
+On Tue, 29 Sep 2026 14:14:16 +0800, Jisheng Zhang wrote:
+> Add devicetree binding for the Synaptics SL261X SoCs and corresponding
+> RDK boards.
+> 
+> The SL261X include five pin-to-pin compatible SoCs: SL2611, SL2613,
+> SL2615, SL2617, and SL2619.
+> 
+> The corresponding RDK boards are based on the these SoCs.
+> 
+> Signed-off-by: Jisheng Zhang <jszhang@kernel.org>
+> ---
+>  .../bindings/arm/marvell,berlin.yaml          | 20 +++++++++++++++++++
+>  1 file changed, 20 insertions(+)
+> 
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/8aec913c6a80c26c4cf=
-5a1ce590f8439c997dafc.1793044546.git.bvanassche@acm.org?part=3D1
+Acked-by: Rob Herring (Arm) <robh@kernel.org>
 
