@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793091236;
-	b=JZcfFcfTnl141xDGJQ9kYiyVph5KIpkmXGQ/KQRyc/XwsMSja/Md2mWf/lBDyN0lMbRm
-	 bPi061D0ZWKabGb+9PhtMzG8LR9jX32GLMeykVqaoM89EYL1douQ7ULXoeEPc3iZ5Wl8g
-	 6Bnqr9lUO2krGDnJS0CS7IYXnYh6DmH3MGMGJ00bBDpoMY9jBIsuf22dUJkPadu2U9Bq7
-	 S1VPsRDkzQ2nn26iN4xkXehYkqlzYSAIdeBACFW9ucMXacfrnWlIj2hnz8h/QyFnTzYUh
-	 kDseKY9W+ENlsprB1+JntPpOFghNH62kilC27HNr3tSTTjm5M63rEzq4tmXZKWxCfoA==
+	t=1793091327;
+	b=LVEbNhrwi8uLcfaXtfUcuiAO4luqq9gaxqj5/GLD6fVNm4G7eETsLY9xXvvef/BYluC3
+	 9c85TxXAIBEm9v+CjCIEG8igohZfzASvuVEk0vNkV/y2F67iseoGcmFGMK7TI+R52S1jQ
+	 fA8tVAgWxKnvTYtCB3clq4F17zmi0+ofqLaaTrdAqWBxJaIua6Qn0bWL8rVuZVOFHYK8c
+	 fERMWx51pTZi1mLgpmCBJR/BZ/GDcXCcZ0Hb772cCyPQVURWRox9nlNAF1mMHOMNks5mq
+	 5BaVh3Nbu0JVV8GjviQ83r6HBRvQtNxZnUgaiLSWQVKXNpzjwSRZHl5hLZMEB04r/4Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793091236;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793091327;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=yNBJTkMGaQWJR7537+FXiL3KuVd7EpygbChLg0HosmA=;
-	b=oSkl06OlNBazyJeclKBv093DHrkWc3Pc1vgUhkPefogX9F/owvIxYSaKHc7YTidjPaKp
-	 Vj8uN3GqaL5aQ1IPFIhfM6P+xIP9hTJij7FqYyqebFPeCZINPzhgEi+yQ2MvJ8uxArnJ9
-	 8Y0hjgdewE6DHOW2cUI0OxNECkMvL2/cLMJrgfH1GNUU2f/2RRS7Ka0gNQOJHKPEuRN7i
-	 wfbVor6DGHhAh/r2Ni7Tthc8HJ3UQYolhlFuosLkC64jex1MR4fIMIUBoRlhAO8SIzijR
-	 l7j/W9lEeVnWOCVhS+s7c5PECcC1IX00Rr12T2pvWJ9902qO3rEp/QJ1EodNbC44sWg==
+	bh=Rg9IBRAqIGNAot6WIn6+tg7TYZQkmUdtnGTX42kjeUs=;
+	b=b/MFOwomXlerzUpIeWbbXc1LFdELtbL8KpkyhYuAsxKrFP8+uq7qG9GXQkViGssmylxI
+	 ZYZ7FWTVfG8OQlMCbHsHuHpWY9KhcyyvNBMcIRLJAijti7ZnxPONEt1IZtu+yZ37TribR
+	 u7KPD4KfJq1lHBiILPgC4tpO6BJTlmZLS3cWIZvvjOpGj1kHoV370Dz+qIzYNVCNV6mQD
+	 yuZi3siGSJq2wh7iQDMeumRYaPSOzbRQxHH0/hjgTPLfkJS3nPfRxxRAgIQiMwzQCFnms
+	 bOc6NoKXd5WdFuXre7G5IukCvQ45mFVl2sUP9KqRvuKxmBwUbbaPo9AUOv16QPUfdPA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Gj9FMtfs;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SRwpbVJp;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40A52606A32E
-	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 08:53:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B764606A31F;
+	Tue, 27 Oct 2026 08:55:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Gj9FMtfs
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9AFD01F01825;
-	Tue, 27 Oct 2026 08:53:55 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SRwpbVJp
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 723991F01829;
+	Tue, 27 Oct 2026 08:55:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793091235;
-	bh=yNBJTkMGaQWJR7537+FXiL3KuVd7EpygbChLg0HosmA=;
+	s=k20260515; t=1793091326;
+	bh=Rg9IBRAqIGNAot6WIn6+tg7TYZQkmUdtnGTX42kjeUs=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Gj9FMtfstUPtDUunv9opHCemZXAYhGaTMZv78sQ6sLStSJ0UZsN05agD366RzQuhH
-	 mMggq2F7lrjRhOffq6+h5gapA41zAaeSQhf3tEJDjM3nbrd7QTof3sBf/mxEcISI3+
-	 5heQpR9RlPP4ek2hF59b8wskCsSG8pUHLTX3/84fM8xHb/SNkNItyv17n+ZDXIeVKW
-	 nZdn7QTyPnP3G2wH3vsScZNbYjTJEcdu55G2cAVI9q1D4hcE+EvIBz47amHH2Fnigm
-	 4t1p1veW6e5tRbraR6xA5Vkv0IrRJqUtWAq9l7iV0HRza0SzXz/uMDOYiSoI2n1Bni
-	 oSbdcFaBL+uvg==
-Message-ID: <sashiko-outbox-186308@kernel.org>
+	b=SRwpbVJpXeMKYQwoiHFvp6ek174mmHYfcKNuvqLmn3UUDC6pk6Z3vzODNlk94EsID
+	 YgzuzI6WvHDXsq7tU0CMLKY56BH9nBdN8fA88zSWm8ptOLSuXfmBXdLQ561tQJ7ZO/
+	 hLqKnCWXWGSq7L1zofX8d+MiTq60cm1BRUs8Am+XOQdk5uDxkn9+c3J9do370csR/J
+	 EOcPoKVREurcAM2lc6lSVt06UPwUZElGA7KVzclCsK6eVUu8A5fB5gepyA2ysGAppG
+	 NGnAntAYsSCYIDFkyg1O9hOvhvjqOP9vEOCuI79Ki2erryjjDDQq72FXaS87ATqsaX
+	 hoiSoBOZIk79g==
+Message-ID: <sashiko-outbox-186310@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v5 2/3] mfd: rk8xx: Release the power hold GPIOs before
- powering off
+Subject: Re: [PATCH v5 1/3] dt-bindings: mfd: rk8xx: add board level power
+ hold GPIOs
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Yaozhong Li" <yaozhonguwl@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261027084511.1992-3-yaozhonguwl@gmail.com>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, lee@kernel.org
+In-Reply-To: <20261027084511.1992-2-yaozhonguwl@gmail.com>
 References: <20261027084511.1992-1-yaozhonguwl@gmail.com>
- <20261027084511.1992-3-yaozhonguwl@gmail.com>
+ <20261027084511.1992-2-yaozhonguwl@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 27 Oct 2026 08:53:55 +0000
+Date: Tue, 27 Oct 2026 08:55:26 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,31 +61,77 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> rk808_power_off() writes the PMIC's shutdown bit directly. On boards where
-> lines driven by the SoC gate the PMIC's power-off path, a shutdown
-> performed this way does not stick: the rails drop and immediately come
-> back up, so the board restarts instead of staying off. U-Boot reports the
-> result as a power-on reset.
->=20
-> Take those lines as an optional GPIO array, hold them asserted while the
-> system runs and release them - waiting power-hold-delay-ms - before
-> writing the shutdown bit. Device trees without the property retain the
-> existing behaviour.
->=20
-> The array is claimed before any child device is registered, so that a
-> -EPROBE_DEFER from the GPIO provider does not tear down the regulators,
-> RTC and clocks that devm_mfd_add_devices() has already registered.
->=20
-> On a Firefly-RK3399 the shutdown stuck when such a line went from high to
-> low before the shutdown bit was written, and did not when the line was
-> never driven.
->=20
-> Assisted-by: LLM
-> Signed-off-by: Yaozhong Li <yaozhonguwl@gmail.com>
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
+s) to consider:
+- [Medium] dt-bindings: mfd: rk8xx: board power-hold GPIOs modeled as PMIC =
+properties
+--
 
-Sashiko has reviewed this patch and found no issues.
+commit 2f97d8ee4039bd6ee8ced1ebc89f3ae0764e0214
+Author: Yaozhong Li <yaozhonguwl@gmail.com>
+
+dt-bindings: mfd: rk8xx: add board level power hold GPIOs
+
+This commit adds power-hold-gpios and power-hold-delay-ms properties to
+all seven Rockchip RK8xx PMIC Devicetree binding schemas (rk801, rk805,
+rk806, rk808, rk816, rk817, and rk818) to describe board-level power hold
+lines driven by the SoC and released before PMIC shutdown.
+
+> diff --git a/Documentation/devicetree/bindings/mfd/rockchip,rk801.yaml b/=
+Documentation/devicetree/bindings/mfd/rockchip,rk801.yaml
+> index 7c71447200ba4..bfba394b23f7c 100644
+> --- a/Documentation/devicetree/bindings/mfd/rockchip,rk801.yaml
+> +++ b/Documentation/devicetree/bindings/mfd/rockchip,rk801.yaml
+> @@ -29,6 +29,26 @@ properties:
+>      description:
+>        Telling whether or not this PMIC is controlling the system power.
+> =20
+> +  power-hold-gpios:
+> +    minItems: 1
+> +    maxItems: 2
+> +    description: >
+> +      Board level power hold lines driven by the SoC. They have to be he=
+ld
+> +      asserted while the system is running and released before the PMIC
+> +      shutdown request is written, otherwise the rails can drop and come
+> +      back up instead of staying off. Only meaningful when this PMIC is =
+the
+> +      system power controller, as the lines are released as part of its
+> +      power-off path.
+> +
+> +      The lines are released in the order listed, and power-hold-delay-ms
+> +      elapses once, after the last of them.
+> +
+> +  power-hold-delay-ms:
+> +    default: 0
+> +    description:
+> +      Time to wait after releasing power-hold-gpios before the shutdown
+> +      request is written, to let the lines settle.
+
+[Severity: Medium]
+Should these board-level power circuitry GPIOs and OS shutdown sequencing
+delays be modeled as properties on the RK8xx PMIC nodes across
+Documentation/devicetree/bindings/mfd/rockchip,rk801.yaml,
+rockchip,rk805.yaml, rockchip,rk806.yaml, rockchip,rk808.yaml,
+rockchip,rk816.yaml, rockchip,rk817.yaml, and rockchip,rk818.yaml?
+
+As noted in the commit message and the power-hold-gpios description, these
+lines are routed from the SoC into external board power circuitry rather
+than into pins on the RK801, RK805, RK806, RK808, RK809, RK816, RK817, or
+RK818 PMICs themselves.
+
+In addition, adding these properties to all seven schemas because they share
+the Linux drivers/mfd/rk8xx-core.c driver, bounding maxItems at 2 to match
+the vendor kernel's pmic,hold-gpio and pmic,stby-gpio properties, and
+encoding the release order and power-hold-delay-ms settle time prior to the
+PMIC shutdown write appear to describe driver-specific shutdown sequencing
+rather than the PMIC hardware.
+
+Would it be more appropriate to describe the actual board-level power
+switches or regulators in the Devicetree and handle their shutdown ordering
+through standard kernel power-off or regulator mechanisms instead of adding
+these properties to the PMIC bindings?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261027084511.1992=
--1-yaozhonguwl@gmail.com?part=3D2
-
+-1-yaozhonguwl@gmail.com?part=3D1
