@@ -1,57 +1,59 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793102519;
-	b=MF/u98g7aRAhqeILLPLJ07Y39KPjAgIrwhu7N4EggLRwYZCxip3APVy16h3t0ZqvEbvx
-	 j3dSGqIA4Xlyg0SO5wdqb7Ib2GJ2VJG1ba4c2ruMnguk0cLjkzZxYYjwFUD0otzoEFPxv
-	 frg7SRuTtFyBcMP32M7RGwkrNn0rkOs+WU2FsOpXVP65ui5z46nX3dYR7V3mauQ0D3dAF
-	 wNLUah42e72mvnjyONYKPQaycr2XY9PMIjmUqSg4ZT9hr9FcDZyEEEfJ3ByFdOgnER3oB
-	 eRMLp+4gdHS08y9E4kJbkdlh6tB0XwfNFwSR/17jNK6gC5uJiLM/ZXBXJ2vZMgRipkw==
+	t=1793111443;
+	b=HIAZ/ph+0OIqbDNDEkrivcydkpHbmweZfiCAW5E/Ed8K2lSpHg3p0PVhgb2iBas9N3ZG
+	 WNOjz4VWRoWVLSZ03LQk5GUkhPdDtJoSkXYqIX3GApUReiu6yubnbmqFzrWXwLJa4H5vG
+	 rqOrMUCQUF4nRyUtPm2DylHBy6Ym3qtCJdXuqXLnUxX7BbPngqDftEY54BkAmTbdeDr7Z
+	 vNGqTQch+yj9hMHnMqR6NCp9MNs972Wv+/+n3OKbeeDCe2sGzlNA1b5UXSjyZEfU8DwM4
+	 ybfRgAePBVMmAohY1oSqV/kVNt+FhixKE7JmqWls5RrFC2qnoWzC2s7dNAKfVnQpyKg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793102519;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=3Gjz1jUGyIG0bSaaBsaJ/g0SPnUUbN/xAGVKycObgC8=;
-	b=feXCRKYrsRdrcfsrns82SnFbXGFBwbRIZYf8ogfrw0MTbOmv3dwX0F+3nvMWQtO621ks
-	 3NJWIn7+FybEc6ujncoXGfaC5oMjN1Tdb3uJS0i0PnZwsI6ioYxUnRic0zQqKW0Zwc/qX
-	 H2hwz7oI4bzLtB/1708D54elxccGyj7HNbKv1UOkReBguEfxN8vegZ7LtCuQtuOZvR/ts
-	 IBg21nrnQZqBOBPJgzIsYf2JLLzCB2EZ9B/bs787ya3fvKcL6O/HFPlAl6e1COUfMuULv
-	 jkK/4ShgZicLuEf65maAKkQPj/B+lqfyxaSdKVQ1Wvg24WvvQcvIV7wA7xzhMEbi2ng==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793111443;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-AI-Review-Draft;
+	bh=875c48MPp5tNhjkEcrdTRwt1cE10gnl1fAKukqWl4zY=;
+	b=sOZNjad+ofCQRwS7/lwfeQoiEDeq+H7bFU4nK8yy28dwXfh9/ZVjn6iSZyaB1FP3bHwP
+	 +G1Ek+ppCvYyPda8RBYLz5paIQCJ8NhOACuWjKMwxOvmcXx4sn+A6mVaT/HsapYlkFNJV
+	 0Zd2hMfkjPyOQmeB5TbndFAdYp+LzvgAr2A7vtQYP18XXnzTp9wCGIF6kmuE6x5KssMcV
+	 C8/GPcw3/YEYDIWAIPkhd+lkjc/SDnMcwMpgpQrI1vtSTD3US1diwbMOSOo9DZ/HVtPUd
+	 a+r/beDzjebxIhXbSriRw5m+4i4l2QORCjFKdUhyl52c7RkZHilK03IKmVdYhBmzCrg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HkKnYGYX;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oMaG+KSM;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F315760A3836
-	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 12:01:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E86D606A33B;
+	Tue, 27 Oct 2026 14:30:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HkKnYGYX
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D0E61F0124A;
-	Tue, 27 Oct 2026 12:01:58 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oMaG+KSM
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E551E1F031ED;
+	Tue, 27 Oct 2026 14:30:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793102518;
-	bh=3Gjz1jUGyIG0bSaaBsaJ/g0SPnUUbN/xAGVKycObgC8=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=HkKnYGYXE4FkuKBeFvWyQ+9dFANjx71XTchxf7Gu0KGrfJYc6SE+DbIIZTxZTABGY
-	 8D2F+VH6UzGpk/w1rJELihsIKeIF54LpLCTkt4RSv/c77uxEXfdPnP3qv7axYZWZDr
-	 jlPGONu6XVIw9XPbXCBwxGfDRZFM7UXpEgyXf9+VqaOaE9j/DunnotSREbeGS0IEk0
-	 LMkXzU/JPMw/mkDewnt+1UV7vBZ3m+JFW8O6/U+4a72uhgWAwZBjk+EqyN/QoUxEaR
-	 ykgEglZm9T094nA7CtAy58C8oKVfquCpdlWt2XYPloMx3exc5kKeTtRmurq0TihvX+
-	 kcKqPAzhPsG4A==
-Message-ID: <sashiko-outbox-186494@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v4 1/4] regulator: dt-bindings: maxim,max8907: Convert
- to DT schema
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Svyatoslav Ryhel" <clamor95@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261027114634.79706-2-clamor95@gmail.com>
-References: <20261027114634.79706-1-clamor95@gmail.com>
- <20261027114634.79706-2-clamor95@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 27 Oct 2026 12:01:58 +0000
+	s=k20260515; t=1793111442;
+	bh=875c48MPp5tNhjkEcrdTRwt1cE10gnl1fAKukqWl4zY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=oMaG+KSMuG4kEPWwYTx4NbPcyBiFPOlNPta0gG59lyw/Q0tgutRZJgiE4s6S069qM
+	 DuuUxN1ktE5ccRCZLCFeap9sT5nXL6ZlVNsFxRbLTRmlTXsdLaqzvlsaxx4mkZf/PX
+	 U2uj3q2LfU4AJzBQFoBI4iEJa7h1xcy27SFj/5xq6XRGztX70n1588iqu4H5Q2ja5v
+	 4WzWXBhJ1y3My+1lqVrKCp8oQ67v3pHx7vmvmir5fkltiHVRB/wjaN0WgRHE9jrNUB
+	 8HqmMyOnNLGdM9QraTJ5IKjoqOif+y6oV2+K52FrrnSoH2rJW8gVaqVC71daw2QFI2
+	 MIfnyDNWNqWqQ==
+Date: Tue, 27 Oct 2026 14:30:38 +0000
+From: Lee Jones <lee@kernel.org>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>,
+	Dmitry Osipenko <digetx@gmail.com>, linux-omap@vger.kernel.org,
+	mfd@lists.linux.dev, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v1 1/2] mfd: tps65910: Use
+ devm_register_power_off_handler()
+Message-ID: <179206477112.1869456.15984957352026081702@kernel.org>
+References: <20261015102320.23760-1-clamor95@gmail.com>
+ <20261015102320.23760-2-clamor95@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,15 +62,95 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261015102320.23760-2-clamor95@gmail.com>
+X-AI-Review-Draft: <20261015102320.23760-2-clamor95@gmail.com>
 
-> Convert Maxim MAX8907 regulator binding from text to DT schema. Reference
-> to nvidia,tegra-regulators-coupling in child regulator nodes.
->=20
+--- checkpatch.pl: clean (0 issues) ---
+
+On Thu, 15 Oct 2026, Svyatoslav Ryhel wrote:
+
+> From: Dmitry Osipenko <digetx@gmail.com>
+>
+> Use devm_register_power_off_handler() that replaces global pm_power_off
+> variable and allows to register multiple power-off handlers.
+>
+> Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> ---
+>  drivers/mfd/tps65910.c | 18 +++++++++++++-----
+>  1 file changed, 13 insertions(+), 5 deletions(-)
+>
+> diff --git a/drivers/mfd/tps65910.c b/drivers/mfd/tps65910.c
+> index 6243b66b1b6f2..18b76359046b8 100644
+> --- a/drivers/mfd/tps65910.c
+> +++ b/drivers/mfd/tps65910.c
+> @@ -16,6 +16,7 @@
+>  #include <linux/irq.h>
+>  #include <linux/irqdomain.h>
+>  #include <linux/mfd/core.h>
+> +#include <linux/reboot.h>
+>  #include <linux/regmap.h>
+>  #include <linux/mfd/tps65910.h>
+>  #include <linux/of.h>
+> @@ -425,9 +426,9 @@ struct tps65910_board *tps65910_parse_dt(struct i2c_client *client,
+>  }
+>  #endif
+>
+> -static struct i2c_client *tps65910_i2c_client;
+> -static void tps65910_power_off(void)
+> +static int tps65910_power_off(struct sys_off_data *data)
+>  {
+> +	struct i2c_client *tps65910_i2c_client = data->cb_data;
+>  	struct tps65910 *tps65910;
+>
+>  	tps65910 = dev_get_drvdata(&tps65910_i2c_client->dev);
 
-Sashiko has reviewed this patch and found no issues.
+Why not pass 'tps65910' directly as 'cb_data' instead of 'i2c' and save this
+lookup?
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261027114634.7970=
-6-1-clamor95@gmail.com?part=3D1
+> @@ -435,6 +436,8 @@ static void tps65910_power_off(void)
+>  	regmap_update_bits(tps65910->regmap, TPS65910_DEVCTRL,
+>  			   DEVCTRL_DEV_OFF_MASK | DEVCTRL_DEV_ON_MASK,
+>  			   DEVCTRL_DEV_OFF_MASK);
+> +
+> +	return NOTIFY_DONE;
+>  }
+>
+>  static int tps65910_i2c_probe(struct i2c_client *i2c)
+> @@ -501,7 +504,7 @@ static int tps65910_i2c_probe(struct i2c_client *i2c)
+>  	tps65910_ck32k_init(tps65910, pmic_plat_data);
+>  	tps65910_sleepinit(tps65910, pmic_plat_data);
+>
+> -	if (pmic_plat_data->pm_off && !pm_power_off) {
+> +	if (pmic_plat_data->pm_off) {
+>  		/*
+>  		 * The PWR_OFF bit needs to be set separately, before
+>  		 * transitioning to the OFF state. It enables the "sequential"
+> @@ -515,8 +518,13 @@ static int tps65910_i2c_probe(struct i2c_client *i2c)
+>  			return ret;
+>  		}
+>
+> -		tps65910_i2c_client = i2c;
+> -		pm_power_off = tps65910_power_off;
+> +		ret = devm_register_power_off_handler(&i2c->dev,
+> +						      tps65910_power_off, i2c);
+> +		if (ret) {
+> +			dev_err(&i2c->dev,
+> +				"failed to register power-off handler: %d\n", ret);
+> +			return ret;
+> +		}
 
+dev_err_probe()?
+
+>  	}
+>
+>  	ret = devm_mfd_add_devices(tps65910->dev, -1,
+> -- 
+> 2.53.0
+>
+
+-- 
+Lee Jones
