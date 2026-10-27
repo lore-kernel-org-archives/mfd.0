@@ -1,100 +1,68 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.214.175
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793086344;
-	b=tILl5QMm7A3fn30EZ0hGpOavGfdUoPQzBnzP+lPPbpusfEibnc5GYYhyNHEBbux/HGCG
-	 +8HYLhSOSE3DeKe4+k2aOtYyyWT1kogqUN+4/T4LvGNGP/K4FR1c0I98hgm9uGoZa25ha
-	 QttN2hx6lsm2wddR1yoG/GmtMyuYF4pxZu8mQMvFNkj2KTFcGUmp64npcUrpG9gBH5U7r
-	 NByAqRGC/kmo67WOqh9UdBHALRAQ39cASXY8pPm5VFC8/XQtazOeMPZYlINeHG884Fns3
-	 BnpfCMOtSNut3cemQAGhZUkzpTaQE/6A0LzxrV31jkFsdElvA4CVGadkBRk/5g88Tcg==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793086344;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
-	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=PlM8k58acyW5zFw4kquAsGUaXk88HzstxAu1xKTj+EE=;
-	b=VJLnoz2xVhxHby1glF8vvMIWGwn8+q3IZJmQfnGVZWJEUI3vdpjse2TVDZUwQZze9zJD
-	 6FmBy80ExOoiqe6wFx1/wdtrwt0DtTbD69bMIZ5iICw2GJt0Vc296HR1INK17tuLGZvjj
-	 Z8vs6jJDLf/V3BvpLOaemWJ9ckGSR5R7dIyz9XxhZDi+z77eFD8brVUNOgUtzRImuZCLh
-	 5NLZ7oFvCPA0RuUT2ETd6gG83vuw/DMW3RrwJ2umkW7maUA7cS0q0mpFRg6EakgCOboeC
-	 0S2Ai2D7CTQnuDOxCcsXztfYfc2JTgQnQm7LctS+J1viYgilwGnjEsHxFAYdYM3qb/Q==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=FUfbw+pq;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.214.175
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=203.205.221.190
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793088855;
+	b=eg5nTXQ34RikBfDSlEt5K/YZcnGA9iEflYIMv7jf2q75CwJgeGbdAdSEPhfaHIZgd2rt
+	 jqUdmBnwdwr7aQ6DyKyRiyY1HdE5RmhrVHrL39nj3/JxkZpNkGk6TT7o6ubFL07dJk/jr
+	 LWONKmnK3eQ/xtRP5qG5B1ULsnM5JZ1rP2qzzIHR/mPVs53/yqY6MtuurIHDm0AFV7C2s
+	 b4QaXN1M3Gb3vu3ttIh3afRBhbSZtHa56BNWey8zLvl5amUoySXTP7x07nI41W7IyTktx
+	 wnW8GA5f7BryZX5zh6rJUXs9tmh4OoValjQ+5ZzdQ4ulliViyCUGPAtw21UeDiqZ9Tg==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793088855;
+	h=DMARC-Filter:DKIM-Signature:X-QQ-XMRINFO:X-QQ-XMAILINFO:From:To:Cc:
+	 Subject:Mime-Version:Content-Type:Content-Transfer-Encoding:Date:
+	 X-Priority:Message-ID:X-QQ-MIME:X-Mailer:X-QQ-Mailer:References:
+	 In-Reply-To:X-QQ-mid;
+	bh=nGbu4upuJLgm2lXKD/Z91nFxrjKCKZHpwQrOt6s2bDY=;
+	b=OCLoIm+2e0wpB0MRjCljEOKweeerroFDOwMGKZFyFl9JQMzTR+EUmWmLBlnT+laqvjdx
+	 x/hChRgt4+vPUtYRozVwx1Le+jiBV1K5XOPOinVHrirc4iyvZVqkPF9I6hteHYAiG9g6n
+	 +/RFFHbLzoMCHp3RM1s2U0l2mt7QgFUEi19HaIYOb+u1FGu3Vzgs0VXsAkUz4SfW+U8tI
+	 a53aKAUdszVj30Y+eO2gweTXOQznNCbd0483nGJw1LQsp04Nj+0j0gAl8gWdWFt4N6saY
+	 qV868ea9rECqkYzfTJVRImlv4SG5UL04OWxOQLfvLT8qU4SeuEuY4foPnStS3Rw+ccQ==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=qq.com;
+	spf=pass smtp.mailfrom=qq.com;
+	dkim=pass header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=ZRB1vNch;
+	arc=none smtp.remote-ip=203.205.221.190
+Received: from out203-205-221-190.mail.qq.com (out203-205-221-190.mail.qq.com [203.205.221.190])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7E7E606A31E
-	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 07:32:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E7E7E606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67C7B606A32E
+	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 08:14:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 67C7B606A32E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qq.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=FUfbw+pq
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2e9eb579c0eso21682975ad.3
-        for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 00:32:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1793086343; cv=none;
-        d=google.com; s=arc-20260327;
-        b=RXPgW/mfFzstDp9G/nR+lbEzxrDDj/8PbR9UbZwptsZ5MekS4gacpBgMXivsvGwFVC
-         Dbc9ivfukNNQ7YppXku+f4Ed0957XBZEba4nkHtslNCpMclC04Rqf8OzqQOBHqOmPXfh
-         sRy6E4GOBcmGFdJa4YJ2hGE7U6+7bd7cIOQZH7Vxl6t0yNwtz0n0XnytKVt9GGLfCEZb
-         1/8YeeThVsuLu/phJqXNBWTgD/4oxtNIkjkGItIiN5FGJ6qKdfD+Vmm7NAjBb1t4nEQ1
-         YiIVF7/kojJgVOIl5faUWhIMR8lm5BnZ5o/kYQZ09G0QB4BYJz/FqLDM4/RU9PYYjO3d
-         VbXQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=PlM8k58acyW5zFw4kquAsGUaXk88HzstxAu1xKTj+EE=;
-        fh=0hTryfRc9+obTyMkeSwLERCOHxjDT7HLqmvyTkVDXnc=;
-        b=kE31Hg5HSb3GLQ1Qd46z3c/ntYpfEsgGBopaAODgq4IUJktEK9fhpW46mGm3GaBwLz
-         YaKvHDBCz798MGVMs5hC+XEBRbUZ508Manq7eETVXPJ0dtGd5JIYnIgTHrh7l6s+rtds
-         69xOfSgjYFSwl7LU5HOv9LUuRntBJSvQBTWKbmeETm9ZvVFmgOhVgwO5qWcZgSjwQlcR
-         /VPMMXt4v3PjcKbcCPjWIkjZkzyj9Sgaa3I4kO3yNpinx5NRUt1VXpAICujq0Z9T3T+7
-         0h3hoBHpHc+hXNLzXL/51+Kl9uAgo1gqDaW1FKsyz5xUQMz6RKf7Qu0Q2oDJwHhUD0Jz
-         CPKA==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793086343; x=1793691143; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=PlM8k58acyW5zFw4kquAsGUaXk88HzstxAu1xKTj+EE=;
-        b=FUfbw+pqdEHyt3qroK5GevXaruoEKXNjqJi/DK04BMkjsW8e846emnERqZsQ5nokak
-         pex0X8QhG5a0mw5dXlh1M56WJ+bNNV0s+v0Ce/4VtvuDXHPbRdsZCimpqSxkOvkEoaH6
-         zZ+BlJAmLPiyf+ASa0Z61+fNXB2mIkeneUl3EfNiUPBcxrQs31H8YhgPh61aaFsJNfFT
-         3JojqzkbrdIk1xc3drOKP+0uV/aL1sbgX8mnfDxLlSrKtwAIxqZIcgzxlf3JbT1ZdW1o
-         N9Mdqyjz+oowuS367DBulHrymjDc75am7Q0Qhpx6zgwv8icY4N8JrywfsrUeKeN7K3ON
-         m7nA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793086343; x=1793691143;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=PlM8k58acyW5zFw4kquAsGUaXk88HzstxAu1xKTj+EE=;
-        b=qsRcm/oqLL+vkVRO1xyNiB1ss1srFJAE4mZ7HdC6e2Ya9Q5mSoNz84HksHd2Jeo1pD
-         bKEwoyuSQ9vkEf6lpj+axPWBxkmzPnbca2f/tTrGFJPTlhwHtDEl5IkQsDIuAhvnakKr
-         4Rd33sbzqd8kh/Tbv9xk1RRdWyp7DJQDLvIs+f2q+nZMiLDLVwN4SwXN8Ha24iIEKAt9
-         s+gwFE3/yyrD+x76AoQvS0xSxEC5x/Dds9DkZ6i7T02aBLruR4ATjRwU8h/XpdTDm1Y4
-         sBZ53OYjOYO1OrcUXCqVcz/1w7PfPFKKli6pe1fWrxWIizYtG3KC7bb2mdct4aFH1BXc
-         J1WQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzHmxtVpf77DTUoAnnIuR+4C6iqomXGAtTKkO8pus64CFqe5FRSeP+PmgE/mQdhkvKvUvU=@lists.linux.dev
-X-Gm-Message-State: AFq9FYLRcB0ZiRQ76hufpbiI82VtbBLIH3FrlVF+3B11zBr7+6xP99Ib
-	4Cw2GdeojPUcTbg0culJMY865mxER54kHiECF0l7gpVivG1rJXLqbswe30q4DR6Ux1mIzOveHEA
-	g59rmfk4znizKYjUsGt76hVIoFWG/6VE=
-X-Gm-Gg: AYBFou1OJKeUnmeGqPnyzMRikMRWMWVT0qZ/tV6LhESwYpzmwaNWcPVM1BQDykfg0XZ
-	hYSk6b8Ej3pyceYS6oQ8/Ujj6ZS/hPFtX7zB8Qs1GG1Fw7Mm+9CXcbL6DJ49iKIwWX8a0j1Kvv6
-	4m2mT2FPtgq2WyrsiBVOGLZX9K5F/NxlxbTd4Nqf5qUedTVXlT651H8GRVDrGkF0BmHM/Zc2EfK
-	IHkOn1RU+pHrkYXWZ3sjd0Dqe5gb9++QfFzzZdU4mr4MOpSbmlWf8HsW/6+pLNoc6XH/CgY/w2B
-	E5ZV1sWx5JnWPeGk+imGLGfFa+xV5wEOgrJ88ltlYM7NugtAD8OPyeIVlKtkSG++poyASp5s661
-	MqSXxoCg0tHmXV1tNT73GP64VK2hre6FBBRrLG8EcODqBJGASJTRP
-X-Received: by 2002:a17:902:cf12:b0:2e9:66c4:1713 with SMTP id
- d9443c01a7336-2ea9c917ba4mr66194015ad.58.1793086343005; Tue, 27 Oct 2026
- 00:32:23 -0700 (PDT)
+	dkim=pass (1024-bit key, unprotected) header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=ZRB1vNch
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+	t=1793088845; bh=nGbu4upuJLgm2lXKD/Z91nFxrjKCKZHpwQrOt6s2bDY=;
+	h=From:To:Cc:Subject:Date:References:In-Reply-To;
+	b=ZRB1vNchEBn1xTDidt7KlotYbtlRGWLoegdUkgm34YutKGqGFS1vndGuabXwuQZ90
+	 /f0QxD6nmcPMBlMpQq6BxhjlE6opBg1xCkYHbn2pqTPsi40cCO5nyYQN/e07PWbv1P
+	 526lVXWyA9AKXODNJhPhJr8lZw09DmYOIJjw38go=
+X-QQ-XMRINFO: OWPUhxQsoeAVwkVaQIEGSKwwgKCxK/fD5g==
+X-QQ-XMAILINFO: M/8oWtQ8RXooJTRnGxFYe36RnPXjfz6V34oARLY5ztdCgTVzwe4zrpt0OZIqiV
+	 6WOy1tfKUMOwIp89CO5v2jtf8fTEeOq5mi2JUzH4Nef7OjAKvx4xPiylH90reQ6IHIXTUg6D63e0T
+	 481ZvsLL6TnnEWH6cGafWPYXdPkOaWIDYmQaR1TyCkbo1JAipqPJjLWdkJ7c5f9Ntm6rE/Vc85MFA
+	 6/0Yv3GuE058KwOnH34QUKfrzxTwP4bBI/d4wotgx7yzEXWjSCUkxlS5SsVZOnxqFUStijqTic+NF
+	 aNvSUUJDUS18HxXkxELs9NR1BNaF9SEdq07pweT3dgStQMYxIOxFwsx6Ap79t3P7Wda50cBNlyUzK
+	 L0nGZYeXMmxra3ro1YB2pEadf81VxEf50WmhVY2f7ZPN8y/UM4PdbyPXVRvhxVv5nxNg2J/hfK3Kw
+	 pSUJyHx1xsdjaUc/Gnio/6cqfs97icdTwq6NCBZO/byU2hnjUaTaSt9AEwM87gAki9zbOe1yZScN+
+	 PYFSmvDn44vv/ex5eNUA78ks2mSVtzQxrO7o6vvSIaJ6tqOmxNsMswoV+th2FwjbUQUCw5dIurGYx
+	 UiC98zYj+8M80tQd0v5a55xNOCWrzJMcpL9u6ctYYBOGjDYnmGgQj5BgHu3DucOOtbhhIP6iVdcse
+	 NZTX916vUU0yg5PAavrQyQmT52VA/r5Xy6Ozbu+A1EzoVqgRPIIiO+pX5cRNy8l9R/uK/vKiFdjfS
+	 Ky3dE5tvMSNS1KhWn0R+OuSWPkiRCjFJy5irVQouqZ4/77IVsPighdskAl4O9q7fgA02C+iRFllws
+	 TrKDgHhDDjWkiTzDvbHNZ+Xui1Lnl5aLZBJ/0ZBY97G6jebO3CJGueOksuo4EaO36eMoHjNsEs7jF
+	 gP2WMOd83oGx+87D1EJrlBu4GKZGwED07/KKJKyeCzvvIAfQ9zrQH9ERkrMRJD8C0oXuiXNt8am21
+	 KQeoVpouoyLgDKb99Ev+/BEPpEcXH07BurkkWIUVwhaRz5pdTGd6RB/IhJuRgQajP6VGsNTm4Hw8p
+	 61dj2p8TsB+wovP+gd5bvf5tjSyip3s4Xa6VnLxgzG1xCV2ekXBbBh4XrhkKmA+tZOsI4QpyF03f0
+	 IPelgJyNvew7LQ==
+From: "=?utf-8?B?Q3VuaGFvIEx1?=" <1579567540@qq.com>
+To: "=?utf-8?B?U2hhd24gTGlu?=" <shawn.lin@rock-chips.com>, "=?utf-8?B?U3RlcGhlbiBCb3lk?=" <sboyd@kernel.org>, "=?utf-8?B?QnJpYW4gTWFzbmV5?=" <bmasney+clk@redhat.com>, "=?utf-8?B?SmVyb21lIEJydW5ldA==?=" <jbrunet+clk@baylibre.com>, "=?utf-8?B?Um9iIEhlcnJpbmc=?=" <robh@kernel.org>, "=?utf-8?B?S3J6eXN6dG9mIEtvemxvd3NraQ==?=" <krzk+dt@kernel.org>, "=?utf-8?B?Q29ub3IgRG9vbGV5?=" <conor+dt@kernel.org>, "=?utf-8?B?SGVpa28gU3R1ZWJuZXI=?=" <heiko@sntech.de>, "=?utf-8?B?UGhpbGlwcCBaYWJlbA==?=" <p.zabel@pengutronix.de>, "=?utf-8?B?RWxhaW5lIFpoYW5n?=" <zhangqing@rock-chips.com>, "=?utf-8?B?TGVlIEpvbmVz?=" <lee@kernel.org>, "=?utf-8?B?TGludXMgV2FsbGVpag==?=" <linusw@kernel.org>, "=?utf-8?B?QmFydG9zeiBHb2xhc3pld3NraQ==?=" <brgl@kernel.org>, "=?utf-8?B?UmljaGFyZCBDb2NocmFu?=" <richardcochran@gmail.com>, 
+	"=?utf-8?B?VWxmIEhhbnNzb24=?=" <ulfh@kernel.org>, "=?utf-8?B?QW5kaSBTaHl0aQ==?=" <andi.shyti@kernel.org>, "=?utf-8?B?R3JlZyBLcm9haC1IYXJ0bWFu?=" <gregkh@linuxfoundation.org>, "=?utf-8?B?SmlyaSBTbGFieQ==?=" <jirislaby@kernel.org>, "=?utf-8?B?SmlzaGVuZyBaaGFuZw==?=" <jszhang@kernel.org>, "=?utf-8?B?QW5kcmV3IEx1bm4=?=" <andrew+netdev@lunn.ch>, "=?utf-8?B?RGF2aWQgUy4gTWlsbGVy?=" <davem@davemloft.net>, "=?utf-8?B?RXJpYyBEdW1hemV0?=" <edumazet@kernel.org>, "=?utf-8?B?SmFrdWIgS2ljaW5za2k=?=" <kuba@kernel.org>, "=?utf-8?B?UGFvbG8gQWJlbmk=?=" <pabeni@redhat.com>, "=?utf-8?B?RGF2aWQgV3U=?=" <david.wu@rock-chips.com>, "=?utf-8?B?UmFmYWVsIEouIFd5c29ja2k=?=" <rafael@kernel.org>, "=?utf-8?B?RGFuaWVsIExlemNhbm8=?=" <daniel.lezcano@kernel.org>, "=?utf-8?B?WmhhbmcgUnVp?=" <rui.zhang@intel.com>, 
+	"=?utf-8?B?THVrYXN6IEx1YmE=?=" <lukasz.luba@arm.com>, "=?utf-8?B?TWF4aW1lIENoZXZhbGxpZXI=?=" <maxime.chevallier@bootlin.com>, "=?utf-8?B?TWF4aW1lIENvcXVlbGlu?=" <mcoquelin.stm32@gmail.com>, "=?utf-8?B?QWxleGFuZHJlIFRvcmd1ZQ==?=" <alexandre.torgue@foss.st.com>, "=?utf-8?B?Vmlub2QgS291bA==?=" <vkoul@kernel.org>, "=?utf-8?B?TmVpbCBBcm1zdHJvbmc=?=" <neil.armstrong@linaro.org>, "=?utf-8?B?TWFuaXZhbm5hbiBTYWRoYXNpdmFt?=" <mani@kernel.org>, "=?utf-8?B?VGhpbmggTmd1eWVu?=" <Thinh.Nguyen@synopsys.com>, "=?utf-8?B?SmFlaG9vbiBDaHVuZw==?=" <jh80.chung@samsung.com>
+Cc: "=?utf-8?B?c2hhd24ubGlu?=" <shawn.lin@rock-chips.com>, "=?utf-8?B?bGludXgtY2xr?=" <linux-clk@vger.kernel.org>, "=?utf-8?B?ZGV2aWNldHJlZQ==?=" <devicetree@vger.kernel.org>, "=?utf-8?B?bGludXgtYXJtLWtlcm5lbA==?=" <linux-arm-kernel@lists.infradead.org>, "=?utf-8?B?bGludXgtcm9ja2NoaXA=?=" <linux-rockchip@lists.infradead.org>, "=?utf-8?B?bGludXgta2VybmVs?=" <linux-kernel@vger.kernel.org>, "=?utf-8?B?bWZk?=" <mfd@lists.linux.dev>, "=?utf-8?B?bGludXgtZ3Bpbw==?=" <linux-gpio@vger.kernel.org>, "=?utf-8?B?bmV0ZGV2?=" <netdev@vger.kernel.org>, "=?utf-8?B?bGludXgtcG0=?=" <linux-pm@vger.kernel.org>, "=?utf-8?B?bGludXgtaTJj?=" <linux-i2c@vger.kernel.org>, "=?utf-8?B?bGludXgtc2VyaWFs?=" <linux-serial@vger.kernel.org>, "=?utf-8?B?bGludXgtbW1j?=" <linux-mmc@vger.kernel.org>, 
+	"=?utf-8?B?bGludXgtc3RtMzI=?=" <linux-stm32@st-md-mailman.stormreply.com>, "=?utf-8?B?bGludXgtcGh5?=" <linux-phy@lists.infradead.org>, "=?utf-8?B?bGludXgtdXNi?=" <linux-usb@vger.kernel.org>
+Subject: Re: [PATCH 24/27] mmc: dw_mmc-rockchip: Keep RK3572 NVM domain powered
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -103,106 +71,47 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-References: <20261026003918.155321-1-pmazzini@gmail.com> <20261026003918.155321-6-pmazzini@gmail.com>
- <f68279bc-20f1-41a9-ba5c-92b974785cd8@roeck-us.net> <20261027002635.6b831c0b@kemnade.info>
-In-Reply-To: <20261027002635.6b831c0b@kemnade.info>
-From: Pablo Mazzini <pmazzini@gmail.com>
-Date: Tue, 27 Oct 2026 07:32:14 +0000
-X-Gm-Features: AclHuK8Ysr_hMD-q4J-bxGC_qjlgkxL35TncLn6mKe9lS8sJrvJ37KNEcPQTV5s
-Message-ID: <CAAxh=jsKe95EsKnTypXtfTxGhYCMO1E7U=hWb3y6DBpgoiOVUw@mail.gmail.com>
-Subject: Re: [PATCH 5/7] regulator: sy7636a: report the temperature
-To: Andreas Kemnade <andreas@kemnade.info>, Guenter Roeck <linux@roeck-us.net>
-Cc: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, Lee Jones <lee@kernel.org>, 
-	Alistair Francis <alistair@alistair23.me>, linux-hwmon@vger.kernel.org, mfd@lists.linux.dev, 
-	linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Mime-Version: 1.0
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: base64
+Date: Tue, 27 Oct 2026 16:14:00 +0800
+X-Priority: 3
+Message-ID: <tencent_0431D34CCA9424908F2C068820D6F9C1370A@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
+References: <20261022-add-board-ok3572-c-v1-0-0b0fd85a31ee@qq.com>
+ <20261022-add-board-ok3572-c-v1-24-0b0fd85a31ee@qq.com>
+	<bb38e2c8-1868-4a66-9e0d-78d9f68ab4be@rock-chips.com>
+In-Reply-To: <bb38e2c8-1868-4a66-9e0d-78d9f68ab4be@rock-chips.com>
+X-QQ-mid: xmsezb41-0t1793088840t5jwsbqnj
 
-Hi Guenter, Andreas,
+SGkgU2hhd24sCgo+IEJlZm9yZSB5b3VyIHYyIGFib3V0IHRoaXMgcGF0aCwgSSB3b3VsZCBs
+aWtlIHRvIGFzayB3aHkgeW91IG5lZWQgdGhpcz8KPiBUaGUgZHdfbW1jLXJvY2tjaGlwIGNv
+bnRyb2xsZXIgaXMgYWx3YXlzIHVuZGVyIEEgcG93ZXIgZG9tYWluIG9uIGV2ZXJ5Cj4gU29D
+LCBub25lIG9mIHRoZSBwcmVkZWNlc3NvcnMgbmVlZCB0aGlzIGtpbmQgb2YgY2hhbmdlLiBJ
+ZiB5b3Ugc2VlCj4gc29tZSBlcnJvcnMgZHVyaW5nIFJQTSwgcGVyaGFwcyB5b3Ugc2hvdWxk
+IGhhdmUgYSBsb29rWzFdIGFuZCBjaGVjayB5b3VyCj4gRFRTLgoKVGhhbmsgeW91IHZlcnkg
+bXVjaCBmb3IgcG9pbnRpbmcgb3V0IG15IG1pc3Rha2UuCgpJIHdyb3RlIHRoaXMgcGF0Y2gg
+YWZ0ZXIgb2JzZXJ2aW5nIHJlcGVhdGVkIFNEIGNhcmQgcmVzZXRzIGFuZCByZWNvdmVyeS4K
+QWZ0ZXIgc2V2ZXJhbCB0ZXN0cywgSSBmb3VuZCB0aGF0IGtlZXBpbmcgTlZNMSBwb3dlcmVk
+IHByZXZlbnRlZCB0aGUKcHJvYmxlbS4gSSBjaGVja2VkIHRoZSBTRCBzdXBwbHkgYW5kIHBp
+biBzZXR0aW5ncyBhZ2FpbnN0IEZvcmxpbngncwp2ZW5kb3IgRFRTLiBUaGUgc2V0dGluZ3Mg
+bWF0Y2hlZC4KCkkgdGhlbiBzZWFyY2hlZCB0aGUgbWFpbmxpbmUgaGlzdG9yeSBmb3IgUksz
+NTc2IGFuZCBmb3VuZCBpdHMgU0RIQ0kKd29ya2Fyb3VuZCB0aGF0IGtlZXBzIFBEX05WTSBw
+b3dlcmVkLiBJIHRoZXJlZm9yZSBhc3N1bWVkIHRoaXMgd2FzIGEKc2hhcmVkIGRlc2lnbiBp
+c3N1ZSBpbiB0aGUgUkszNTd4IGZhbWlseS4KCkFmdGVyIHlvdXIgZW1haWwsIEkgY2FyZWZ1
+bGx5IHJldmlld2VkIGFuZCBjb21wYXJlZCB0aGUgRm9ybGlueApPSzM1NzItQyBzY2hlbWF0
+aWMgYW5kIERUUy4KClRoZSBPSzM1NzItQ19MaW51eDYuMTIuNThfQWxwaGExIEJTUCBpbmNv
+cnJlY3RseSByZWZlcmVuY2VzIFJLODA2IFBMRE80CmFzIHRoZSBTRCBjYXJkIHN1cHBseS4g
+VGhlIGNhcmQgYWN0dWFsbHkgdXNlcyBhIHNlcGFyYXRlIDMuMyBWIHN1cHBseQp0aHJvdWdo
+IGEgc3dpdGNoIGNvbnRyb2xsZWQgYnkgR1BJTzBfQjYuIFRoZSBvcmlnaW5hbCBEVFMgdXNl
+cyBuYXRpdmUKUFdSRU4sIHdoaWNoIGxvc2VzIHRoZSBlbmFibGUgc3RhdGUgd2hlbiBOVk0x
+IHBvd2VycyBkb3duLgoKSSBpbmNvcnJlY3RseSBhc3N1bWVkIHRoYXQgRm9ybGlueCBoYWQg
+dmFsaWRhdGVkIGl0cyB2ZW5kb3Iga2VybmVsCmFuZCB0aGUgY29ycmVzcG9uZGluZyBkZXZp
+Y2UgdHJlZS4KSSBhbSB2ZXJ5IHNvcnJ5IGZvciB0aGlzIGluY29ycmVjdCBhc3N1bXB0aW9u
+LgoKSSB3aWxsIHJlcG9ydCB0aGlzIGlzc3VlIHRvIEZvcmxpbnggYW5kIHJlcGxhY2UgdGhp
+cyBwYXRjaCB3aXRoIHRoZSBEVFMKZml4IGluIHRoZSBuZXh0IHJldmlzaW9uLgoKQmVzdCBy
+ZWdhcmRzLApDdW5oYW8K
 
-On Mon, Oct 26, 2026 at 07:35:24AM -0700, Guenter Roeck wrote:
-> This is going the wrong way. The correct solution would be to convert
-> the hwmon driver to an auxiliary driver.
-
-Understood. In v2 the hwmon driver stays in drivers/hwmon and becomes an
-auxiliary driver of the regulator, which binds the I2C device directly.
-
-On Tue, 27 Oct 2026 00:26:35 +0100, Andreas Kemnade wrote:
-> But it introduces another race condition.
-> The temperature might be read too early.
-> 1ms delay should suffice.
->
-> The  SY7636A_OPERATION_MODE_CRL_ONOFF flag might be reset before
-> reading the temperature. If that register does not reset to zero
-> but just keeps the temperature last read, then we have no problem.
-
-Good points. For v2 I read power good (0x07) and the temperature (0x08)
-in one I2C transfer, and return -ENODATA unless power good is set, so no
-locking is needed.
-
-Thanks,
-Pablo
-
-On Mon, Oct 26, 2026 at 11:26=E2=80=AFPM Andreas Kemnade <andreas@kemnade.i=
-nfo> wrote:
->
-> On Mon, 26 Oct 2026 07:35:24 -0700
-> Guenter Roeck <linux@roeck-us.net> wrote:
->
-> > On Mon, Oct 26, 2026 at 12:39:16AM +0000, Pablo Mazzini wrote:
-> > > The separate hwmon cell enables VCOM at probe. Report the temperature
-> > > from here, as the TPS65185 and FP9931 drivers do, and under the chip
-> > > name as they do: read it while the rails are on and return -ENODATA
-> > > otherwise. Boards that need the rails on mark VCOM always-on. Drop th=
-e
-> > > hwmon driver.
-> >
-> > This is going the wrong way. The correct solution would be to convert
-> > the hwmon driver to an auxiliary driver. I am not going to approve
-> > this patch. I am not giving an official NACK (yet).
-> >
->
-> First we need the problem defined, then the solution, and then we can
-> talk about what is the correct solution. The commit message does not
-> name a problem.
->
-> So what we have:
-> one bit to turn on a bunch of things,
-> after one time to sample (< 1ms), fresh values are provided on the ADC
-> register periodically.
-> after some more time (max. 50ms), several voltage outputs are ready.
-> Powering on those things is expensive, so you would not use this as an
-> ordinary temperature sensor.
->
-> The problems I see in the sensor driver this patch might want to solve:
-> - problems if the regulator driver is registered earlier.
-> - not having powered on the regulator all the time (that is described
->   in the cover letter)
->
-> The way the patch handles it does not require any structural change,
-> availabitily of the regmap is given. So it would be a separate cleanup
-> patch.
->
-> But it introduces another race condition.
-> The temperature might be read too early.
-> 1ms delay should suffice.
->
-> The  SY7636A_OPERATION_MODE_CRL_ONOFF flag might be reset before
-> reading the temperature. If that register does not reset to zero
-> but just keeps the temperature last read, then we have no problem.
->
-> If not, there needs to be some synchronisation between the regulator
-> part and the sensor part, probably a mutex saved in a common structure.
-> And in that case, structural change of the drivers is needed which
-> I see the following possibilities:
->
-> a) non-simple mfd driver
-> b) aux device as a child of the regulator driver.
-> c) regulator driver containing everything.
->
-> No strong personal opinion here.
->
-> Regards,
-> Andreas
->
