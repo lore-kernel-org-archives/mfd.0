@@ -1,44 +1,44 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793097391;
-	b=e7dJ3vB8bAIRkMUj3tfMhwcP+pSXaGmFpytcPcEgTFIaCFXhwVeN673HMGrR80syx4fW
-	 4c1ZqlOFTZ4Rlxn+a/YUe1Dxdsv+pVBGrHaXmnrw63rmPBVQRrChqc+3/yuSh6sTz0OVc
-	 qlQRHYJIXhMr2UEui4N+2geYTwHVour56ExtuJETDH71gIrapRY1+qTFqqcmTPMrFHIUX
-	 SYLnagilOJ6fqdb7QvvQfI5sH2bfpVfBQImZgbR5VFI0Kg7m+Pi9nN9Q481kVQG3jl9hM
-	 P8Mh46F8KAkvVZ20fa24w2VuQ7q3uyHy8/c1lKqKngVImLWK7fHamPW7EUYP2qmETjA==
+	t=1793097396;
+	b=LsuGmMBDXCB9lnPbD/0l10d+zfAPMpTOCI/dKXJ/hBdllHfXlMKvY26NHHixSwLrOYtv
+	 3pMCvXpy8yQs93ND0T7yhNZVkH08rxxwcZTDXklj9KG4MQqQLxPFd6JjIW+HmM5NWOGNf
+	 WL1OpCd1Ra+MqucWRZM/XPhPGrZ5j4+34GHRwsgjIWBP1lOcWRthy4Cyeh9tVs/eWMpdu
+	 tANnELXiB1W8zUTO+DQs0Io0d6ckrObICRtj0e259k1b458pg6Moj6929a7U47MPS2lZ4
+	 pje2q2kaKZ+X4Jw5JE8wDopyy/fDCPtKeaoMQXLWL5vD3ccooxIScDgRKsGRfvNgw1w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793097391;
-	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	a=rsa-sha256; c=relaxed/relaxed; t=1793097396;
+	h=Received:DKIM-Signature:From:To:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=XK28uNsYnR2yFi3mVI+5oVuaCmk2yFzJ0DXrrVLzrR8=;
-	b=w7Pvc6lKhQHvS1DcBYDrrUkLqv/jeX9pf1M7Fcg19r+CgpauuZKBvEO9YmT3EkrnGX+w
-	 473i5APcf5bGV/w4xTLZfUc/K9eT43gYDfqFXoJU+X21vBrW3J8Wo/8RwvLvjUR4+0MYN
-	 M7aIvdl1RsOZLWDud93cIulvXD6ee0mS2/W61KsFRWQPudXVtEz6n7wy8LeWBMQPiNLIO
-	 QZ8oLGjmtx+nSV46O6VAo5wzstjPJ/7bVk4eqP/Ib3WWbZtSJGv+6S8PSIEqnd+BdmUgy
-	 vVtkuRSdJJ04SEmodq1bUe3hk8L5xpZ3yN9+lz3O48BsOus3jyT/bm2FfYqh/vzIt9Q==
+	bh=PhZYi99haeVwLl/xerdQBoJ2WYUBPvmlYKxW8sH+X34=;
+	b=4mshUlUrvbMV9jgnzLbWxqvzYkDTAuQ0njcexnTjwnq+hCnkzS8hB5WE32HfPVk+hpBz
+	 NSb3nYVqm0kfjTxdpLeWQB8xEB+pby37dIxS6C/WrLOD5Rcd/ii8M51SU9GPw56Z8OClX
+	 WlzcSX8U8FRKs782+lX8IySuYqNYmeatRfkNy/6Acc/uiXUFBvecRaQjEd16hWO2HY5iF
+	 VASLftLmqhrpk8CA9QI6SkCOdWHopAxbRxTK7mQVvSPkIWAuisTNzyQ+iaef7PBXd2/Kk
+	 sihVoZCK5PKarU5M/xsrKTV9PoSeHDBbsSU0ujro2k4GMNNw52Dc0hj1wh2vobfidJA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BAz9nvvu;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NyN1r9G5;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB5D4606A323;
-	Tue, 27 Oct 2026 10:36:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87F13606A32A;
+	Tue, 27 Oct 2026 10:36:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BAz9nvvu
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0EC961F01829;
-	Tue, 27 Oct 2026 10:36:28 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NyN1r9G5
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF8701F031E3;
+	Tue, 27 Oct 2026 10:36:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793097390;
-	bh=XK28uNsYnR2yFi3mVI+5oVuaCmk2yFzJ0DXrrVLzrR8=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=BAz9nvvuG3xf5XBPHlxXYSc8glY0kc/4AuQgl6t8XZT4b0MDYEGUQkcwdoFblWp7K
-	 Op2Ir8JqPlhqlVYZU96THJEbmpJFJuCRZYjvXNqoEa1PZshZ6XGHigzoWN6k2bMOVH
-	 7ubbxHVGRI0Xo5LIf4oIYIc/L1lEAUKW+C+twDP+l6VKQoSb9/ZCMdi3N49nqdkxoC
-	 MKovN1hPctCwuUWOKye0ZMgfJBSP4GXqpsGYjFEUg2ITjPp4j70y2lnlR1vLV5b7ht
-	 Vc6M1ky+b0c9GdU4o2C+FQoffyTpZVLgXmuFqjiFfqPPsrKuDYuWH1384qVUrBRzv9
-	 w52Ov87b85oZA==
+	s=k20260515; t=1793097396;
+	bh=PhZYi99haeVwLl/xerdQBoJ2WYUBPvmlYKxW8sH+X34=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=NyN1r9G592TA+Kxpe7XMkGZq031N7inRgzyv8n4M3NLiJi7Yw38cOj13afIGK+++G
+	 Hi0XtNkJsRzuR0sRZe00JcFRf6E+nJSREnWqT0Kwxn1PijQc/1pV62yA2xMahNUVdC
+	 x6FArKYdC1BT+pCAlBsF0sZKHF9K8YXUR4mhSNRN3X5v2pdp8aBFnb/vSmPqwpAfIN
+	 n2TF31TbRpRKwsW1FCJH8Rn2FFCUCCkXw0/GYslOJdX3yQdyjf3B9gwKsD9q8L6tNs
+	 50uthOA+2Njri91n/MwxWZZ2+armXh7zMhv/qAFdJqWdFomXJOZtr+Y9rIGJp6IqPG
+	 ynSa314IH/3xQ==
 From: Lee Jones <lee@kernel.org>
 To: lee@kernel.org,
 	Binbin Zhou <zhoubinbin@loongson.cn>,
@@ -48,10 +48,9 @@ To: lee@kernel.org,
 	Huacai Chen <chenhuacai@kernel.org>,
 	mfd@lists.linux.dev,
 	linux-kernel@vger.kernel.org
-Cc: stable@vger.kernel.org
-Subject: [PATCH v2 03/27] mfd: ls2kbmc: Cancel reset work on teardown via devm_work_autocancel()
-Date: Tue, 27 Oct 2026 09:30:32 +0000
-Message-ID: <20261027093306.2812695-4-lee@kernel.org>
+Subject: [PATCH v2 04/27] mfd: ls2kbmc: Allocate simplefb platform_data on the heap
+Date: Tue, 27 Oct 2026 09:30:33 +0000
+Message-ID: <20261027093306.2812695-5-lee@kernel.org>
 X-Mailer: git-send-email 2.56.0.307.g5fe7bd680c-goog
 In-Reply-To: <20261027093306.2812695-1-lee@kernel.org>
 References: <20261027093306.2812695-1-lee@kernel.org>
@@ -66,50 +65,59 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-ls2k_bmc_init() initialises bmc_reset_work with INIT_WORK() and
-immediately requests the PCIe and GPIO interrupts via devm_request_irq().
-If an interrupt fires and schedules bmc_reset_work before a subsequent
-step in ls2k_bmc_probe() fails, or when the device is unbound, devres
-frees ddata whilst bmc_reset_work remains queued, leading to a
-use-after-free in ls2k_bmc_events_fn().
+ls2k_bmc_probe() declares struct simplefb_platform_data on the stack and
+assigns its address to the display MFD cell.  Although mfd_add_device()
+deep-copies platform_data via platform_device_add_data() before
+ls2k_bmc_probe() returns, the shallow mfd_cell copy attached to the
+child platform device retains a stale pointer to the expired stack
+frame.
 
-Initialise bmc_reset_work with devm_work_autocancel() before requesting
-the interrupts so that devres cancels any pending work after the
-interrupts are freed and before ddata is released.
+Allocate the simplefb_platform_data structure on the heap via
+devm_kzalloc() prior to devm_mfd_add_devices() so the pointer remains
+valid for the lifetime of the child platform device.
 
-Fixes: d952bba3fbb5 ("mfd: ls2kbmc: Add Loongson-2K BMC reset function support")
-Closes: https://sashiko.dev/#/bug/linux-3089d131-9fcf-4753-b183-eebe0a6e020e
-Cc: stable@vger.kernel.org
+Fixes: 0d64f6d1ffe9 ("mfd: ls2kbmc: Introduce Loongson-2K BMC core driver")
+Closes: https://sashiko.dev/#/bug/linux-4e2dd9cb-310b-4bba-b305-ffacc738285c
 Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 Acked-by: Binbin Zhou <zhoubinbin@loongson.cn>
 Signed-off-by: Lee Jones <lee@kernel.org>
 ---
- drivers/mfd/ls2k-bmc-core.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ drivers/mfd/ls2k-bmc-core.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-index 23c774a09842..e245bdee8226 100644
+index e245bdee8226..3e3bc835262e 100644
 --- a/drivers/mfd/ls2k-bmc-core.c
 +++ b/drivers/mfd/ls2k-bmc-core.c
-@@ -12,6 +12,7 @@
- #include <linux/aperture.h>
- #include <linux/bitfield.h>
- #include <linux/delay.h>
-+#include <linux/devm-helpers.h>
- #include <linux/errno.h>
- #include <linux/init.h>
- #include <linux/iopoll.h>
-@@ -376,7 +377,9 @@ static int ls2k_bmc_init(struct ls2k_bmc_ddata *ddata)
+@@ -470,7 +470,7 @@ static int ls2k_bmc_parse_mode(struct pci_dev *pdev, struct simplefb_platform_da
  
- 	ls2k_bmc_save_pci_data(pdev, ddata);
+ static int ls2k_bmc_probe(struct pci_dev *dev, const struct pci_device_id *id)
+ {
+-	struct simplefb_platform_data pd;
++	struct simplefb_platform_data *pd;
+ 	struct ls2k_bmc_ddata *ddata;
+ 	resource_size_t base;
+ 	int ret;
+@@ -489,12 +489,16 @@ static int ls2k_bmc_probe(struct pci_dev *dev, const struct pci_device_id *id)
+ 	if (ret)
+ 		return ret;
  
--	INIT_WORK(&ddata->bmc_reset_work, ls2k_bmc_events_fn);
-+	ret = devm_work_autocancel(ddata->dev, &ddata->bmc_reset_work, ls2k_bmc_events_fn);
-+	if (ret)
-+		return ret;
+-	ret = ls2k_bmc_parse_mode(dev, &pd);
++	pd = devm_kzalloc(&dev->dev, sizeof(*pd), GFP_KERNEL);
++	if (!pd)
++		return -ENOMEM;
++
++	ret = ls2k_bmc_parse_mode(dev, pd);
+ 	if (ret)
+ 		return ret;
  
- 	ret = devm_request_irq(&pdev->dev, pdev->irq, ls2k_bmc_interrupt,
- 			       IRQF_SHARED | IRQF_TRIGGER_FALLING, "ls2kbmc pcie", ddata);
+-	ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data = &pd;
+-	ls2k_bmc_cells[LS2K_BMC_DISPLAY].pdata_size = sizeof(pd);
++	ls2k_bmc_cells[LS2K_BMC_DISPLAY].platform_data = pd;
++	ls2k_bmc_cells[LS2K_BMC_DISPLAY].pdata_size = sizeof(*pd);
+ 	base = pci_resource_start(dev, 0) + LS2K_DISPLAY_RES_START;
+ 
+ 	/* Remove conflicting efifb device */
 -- 
 2.56.0.307.g5fe7bd680c-goog
 
