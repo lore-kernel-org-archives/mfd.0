@@ -1,56 +1,70 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=84.42.129.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=161.97.139.27
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793131830;
-	b=xF5JY7nX8JdsNdesurHMESJykQSGryYRxYZBIGIY9mvAORrjthkGXPuwS81d0z7Yq/S9
-	 hV2BJgxfxzWhHB+OX9ZrvU5dFJlcZSU6x965AEN4wjiz0TSm1acpPJW4NCB0XmOYwGT3Z
-	 8Q/2JYNDGv3/0LFOgg1YH1QxDrK5wxlt87j7KHCg33h1ilnSTi+bpM+n23GEZWfQK8RD7
-	 MBXS/c4gxBv7uT6YHOqcDEdB7MCLM5Oxr3WR8pQyI/aBX9WpaIxR8ZMSp+E2ozJeK6Qev
-	 5HvXDAqnaSc3oDFYjCxcBsSUiJSgJOQcesLNHGZp9b5Aq7qIWGTO+vZkhrmNGHphMgQ==
+	t=1793136915;
+	b=hyagMwVYSCIk61UdVpPecDN5yl8gWvMhNSYxLMJevkdcyB3jftKs8PCQreTi0H/Xw2I7
+	 QVXHO+8a+CHJHe6/in2BupEGuNJphUyvT3WbI1kFgvdbnSeI7IAhCr4+VDssmD0OCFZmh
+	 sI5xGN5+od/KZ/8AAB3Iu/J66hlwNDk/su4V3rJ16fDZJ6P7HQlWQxSjAbZ9ts0W3u0D/
+	 I/f1yL5OZ4XgOotiTxuikohN0gx0aP9RrFn/8wSeq3Oj5yMN/7QFu9iDbV+x0ynvOoCmB
+	 Rm/XCP8K36IPbBWvfZyjWriR5tva3G8eRJ1DsYeiOGvwgahGtsGTzgLVh+IUedZ4dQw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793131830;
-	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
-	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=Zs8+7dqFRjW6RKjJ6/I76FxDxXQBC+jlTIwYBbsLR+M=;
-	b=Zjtb7CvGqmiZwzmMPNx9X6bG+u6NJlAHbVXTKGm5hPzoVcfcgT1F/MgQRkRxdK+st+Df
-	 RuQJTgoeEzHvyp9AojQQknnPAm6eY1hdx9zXhtYZqsVdovrKoGbFJ4MkxIN9e2PGVLNHt
-	 EEM01CZ55pL1pvXPQFyTHXeACSy1hD9ULGHtXuUX568j3a3cha27oEgLeZ9SLIY5Yt+RZ
-	 S5XEZDOvFiYopPAHvFaWObqBXUEuNpBhq6Q6N0I5Dl1GTbdmz2dz47MKGXdYAiHhzopLu
-	 49E09SXtY1g45qCkUUKg82W2HDKnhVAidsIRdyxVAGTHusv1/Q6wDYeVTbFBF93Ytcg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793136915;
+	h=DMARC-Filter:Received:DKIM-Signature:Date:From:To:Cc:Subject:
+	 Message-ID:In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=wllQShmR/JuCZFw5HFfsjOJ/1ZX6yyXsqzheMstswmQ=;
+	b=sTF4+27+BvED06YC9eLiT7lwBvO90ibB/Wizgtgtc9zMi10tedMe6E68WQlY/kBgt1gw
+	 Qji5bYhUCjUDAEgrPjkwwVMHsBOQaCfClLRIPgOcQvjlnXgtVmKhURCuxHHm2MLlFgMIg
+	 Q1kao08FdtTWVI0PAl/3sPyQ8nu7q424BeyJE/akaAcqSb6Q2c81mmunfXDj6JWlK/U04
+	 bAAb5KmkAWftltl37ymqjVOsMGoKNrd53M61GHKGQLpGzAuFP4LNqa4rxS6qzJffJA7EK
+	 rXjImMIcZQ/8BSWQa4MuC+W8SSf3JjFSSyfHidHrEO/535XURVNBDGAJa6lQO55Yh6w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=ixit.cz;
-	spf=pass smtp.mailfrom=ixit.cz;
-	dkim=pass header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=AMSDWnv+;
-	arc=none smtp.remote-ip=84.42.129.46
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+	dmarc=pass header.from=kemnade.info;
+	spf=pass smtp.mailfrom=kemnade.info;
+	dkim=pass header.d=kemnade.info header.i=@kemnade.info header.a=rsa-sha256 header.s=20220719 header.b=GP54efQe;
+	arc=none smtp.remote-ip=161.97.139.27
+Received: from mail2.andi.de1.cc (vmd64148.contaboserver.net [161.97.139.27])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2156606A31D
-	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 20:10:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C2156606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4622B606A31A
+	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 21:35:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4622B606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kemnade.info
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=AMSDWnv+
-Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id 0F01A53401D6;
-	Tue, 27 Oct 2026 21:10:27 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1793131827;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=Zs8+7dqFRjW6RKjJ6/I76FxDxXQBC+jlTIwYBbsLR+M=;
-	b=AMSDWnv+eT86kaPcLmdSSrGcPVkvj/ZcO4jb+7yLClOxs7tcuY9TQP2Ip6cowhu5cqsPG+
-	8TcIFM2qm3SNf2+p7C42SuA3rwNNL6QPqP5LqVRlccpUY1LuNGzaj60MvEARGysJbHme0+
-	tEOGW66lGAGo5gU4GW3ZeBn55pZ7rPw=
-Message-ID: <a60e8a48-9a02-404b-b4f4-8b8f0a4fec9b@ixit.cz>
-Date: Tue, 27 Oct 2026 21:10:26 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=kemnade.info header.i=@kemnade.info header.a=rsa-sha256 header.s=20220719 header.b=GP54efQe
+Received: from mail.andi.de1.cc ([178.238.236.174])
+	by mail2.andi.de1.cc with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.98.2)
+	(envelope-from <andreas@kemnade.info>)
+	id 1xLop6-00000000ud4-2ymu;
+	Tue, 27 Oct 2026 22:35:12 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=kemnade.info; s=20220719; h=References:In-Reply-To:Subject:Cc:To:From:
+	Reply-To:Content-ID:Content-Description;
+	bh=wllQShmR/JuCZFw5HFfsjOJ/1ZX6yyXsqzheMstswmQ=; t=1793136912; x=1794346512; 
+	b=GP54efQeihiZvAhjjSl+Tt0hDB23kGc7ufzLYPPOd+/hShrP0Zxv8FtveQbIvGvUQWuwJ6gaDLd
+	YznO3pl9w8E2obx2DdUDxh011j7glRrIFvZAZzGDbE5a1yyJ3HzCsvZqEyknUgjfry3awthQK4KOs
+	aBfthiqi9rzL8qbnekS1D2YoLRPpQKw+B2/uHRoy4NtRXp9FoxZBQJN3woP5P9rtB1uL8/60s5WWp
+	de9BuNo6giFTzaD3iUXTjHNm0o9pgR3knKeL/rCwlmsWFnqYPRQUVWxIVPSkYyJP+7bd+I+nl/aN6
+	scqzadQwqoidYhctsfhE9h4vqax0t7lCrFvw==;
+Date: Tue, 27 Oct 2026 22:32:52 +0100
+From: Andreas Kemnade <andreas@kemnade.info>
+To: Pablo Mazzini <pmazzini@gmail.com>
+Cc: Guenter Roeck <linux@roeck-us.net>, Mark Brown <broonie@kernel.org>,
+ Liam Girdwood <lgirdwood@gmail.com>, Lee Jones <lee@kernel.org>, Alistair
+ Francis <alistair@alistair23.me>, linux-hwmon@vger.kernel.org,
+ mfd@lists.linux.dev, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 5/7] regulator: sy7636a: report the temperature
+Message-ID: <20261027223252.044bb5b5@kemnade.info>
+In-Reply-To: <20261027101852.39b9031a@kemnade.info>
+References: <20261026003918.155321-1-pmazzini@gmail.com>
+	<20261026003918.155321-6-pmazzini@gmail.com>
+	<f68279bc-20f1-41a9-ba5c-92b974785cd8@roeck-us.net>
+	<20261027002635.6b831c0b@kemnade.info>
+	<CAAxh=jsKe95EsKnTypXtfTxGhYCMO1E7U=hWb3y6DBpgoiOVUw@mail.gmail.com>
+	<20261027101852.39b9031a@kemnade.info>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; aarch64-unknown-linux-gnu)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,123 +74,30 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 00/12] Qualcomm Type-C support for 1st generation
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Cc: Alexey Minnekhanov <alexeymin@minlexx.ru>,
- Heikki Krogerus <heikki.krogerus@linux.intel.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Lee Jones <lee@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
- linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
- phone-devel@vger.kernel.org, mfd@lists.linux.dev
-References: <20260926-typec-v1-0-31adc19f32c6@ixit.cz>
- <voc4ie6fcegr3thk5n6dib4pkdxmracch4hhgjdih6pxrq2bfm@lq7mx4flowqk>
- <f85cdfb7-b797-4b4b-9937-670c6dfe52c3@ixit.cz>
- <zb3s4fmwx7vu3kcqigensacbgdqoaqnipfn4ntx4dh7ahrfr42@hvdw36dqb3qn>
- <5c41ef43-a065-46e3-9522-faaf3884b487@linaro.org>
- <eodzuccugtdn42basgpczett4yatyirog4nxwe5rhg5xf46ibp@jzcjmje4aqc3>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <eodzuccugtdn42basgpczett4yatyirog4nxwe5rhg5xf46ibp@jzcjmje4aqc3>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On 19/10/2026 01:53, Dmitry Baryshkov wrote:
-> On Mon, Sep 28, 2026 at 04:54:08PM +0100, Bryan O'Donoghue wrote:
->> On 27/09/2026 17:33, Dmitry Baryshkov wrote:
->>>>> One major comment. As we see, on SMB2 PMICs parts of the Type-C
->>>>> functionality are provided by the charger / FG device. I guess that on
->>>>> SMB5 PMICs we will get the same problem once somebody tries to implement
->>>>> additional charger features. Would it make sense to rework the PMIC TCPM
->>>>> driver to be a composite driver, taking several components via the
->>>>> existing Linux interface?
->>>> As this gets decided from the QCOM side, I'm fine with whatever suits the
->>>> hardware best.
->>> Bryan, as you are a maintainer of the PMIC-TCPM? Would the use of
->>> components be fine?
->>
->> I mean maybe. Would it not make more sense to land the TCPM functionality
->> and then look into adding charging moving then ?
->>
->> i.e. finish off adding this piece first
+On Tue, 27 Oct 2026 10:18:52 +0100
+Andreas Kemnade <andreas@kemnade.info> wrote:
+
+> On Tue, 27 Oct 2026 07:32:14 +0000
+> Pablo Mazzini <pmazzini@gmail.com> wrote:
 > 
-> The problem is that we already have SMB2 charger, which accesses the
-> same region. In theory it is possible to say that USB-C driver conflicts
-> with the charger "for now". In practice, I think, it might be better to
-> sort that out from the beginning. You didn't have this issue when
-> working on PM8150B support since we never needed charger for that PMIC
-> series.
-
-I looked into the smbx vs Type-C overlaps.
-
-I see that charger DCIN (0x1400) is mostly mirrors (both address and values) the 
-register set of USBIN (0x1300), thus I assume charger accessing these registers 
-is correct.
-
-Type-C driver accesses 0x1300 but mostly different registers (with some 
-exception of initialization and smbx.c 'FIXME: This will be handled by the 
-type-c driver').
-
-So that leads me to the conclusion that smbx should continue to access 0x1300 
-range, while Type-C must access the range. Only things which needs to be moved 
-from smbx to type-c is the type-c initialization.
-
-Do I get it correctly?
-
-Thanks
-David
-
+> > Hi Guenter, Andreas,
+> > 
+> > On Mon, Oct 26, 2026 at 07:35:24AM -0700, Guenter Roeck wrote:  
+> > > This is going the wrong way. The correct solution would be to convert
+> > > the hwmon driver to an auxiliary driver.    
+> > 
+> > Understood. In v2 the hwmon driver stays in drivers/hwmon and becomes an
+> > auxiliary driver of the regulator, which binds the I2C device directly.
+> >   
+> But that is a cleanup action, which is at least a separate patch (maybe
+> replacing and exending your patch 6). So the other patches can go into
+> their separate trees.
 > 
-> But, then it's up to you and David.
-> 
+looked again, I was wrong here,  vin-supply should be enabled before
+i2c transfers, so we need the aux device approach.
 
+Regards,
+Andreas
