@@ -1,100 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.52
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793114695;
-	b=I1Fh2gCGSosuFQcl/ILy5o0Q4hwEzhuS5C1N42BQ3b7UvjmnZhI3OqxJ3K4nyZL3vq+H
-	 RdsksxU3R/nrvmMQP/UDPGFrwNyvuGnEEuheADwNw6AfJ8GvVQlntjAG6a6PKdtNh6nK3
-	 +C1jfL+2Po6JqllGZNZlVbbk8DLvkYSX8QXGu7W/ZH0t2tiSVIuC/NAafD7VR5wuKfwgE
-	 v0D5La6hpgpRUZbwCnIbDY6B/d12VHjFXwwyN3R/HP/gUdaFFgTynFuI1XCjLVDugBTE4
-	 AqdAfvEK380oDT+YQm107d0Dz7sOpcelyZ5RyRU1I0GY7hbL8YF4wQ/cnE5PQ1uUEiw==
+	t=1793114795;
+	b=B4t612HIQef1wUW3WXw1mwZoNoHLl4fP0fSff9DEEaDLf7J9aYvK4CKmYpSmzq9T/756
+	 +WXwFCgDMV9Df8BCnPBEI5zwGcWYTnCoIl58Yv51AemYPxOHyJB0ZJclRzPa7OK86i8Dv
+	 M5hR5YUdr0JI9mhdVxk9eKtU3SbMXzMwIKYrEMiSTrlrMNBIuyFoHqQpLWUBBqFxohPCj
+	 8seRuCbrmBuJsC4sg1WD38xEgIlyA94HWhK7W/efWzYxoFA6YkF1klQ+yAYv7Bm2fhlDA
+	 AKd6dL3Xg9MeVQmHbPQh51w7ZnKVxJhZ5It6zc8vxvG+xkdDHseE8pZGrtYHzMEwx6w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793114695;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=vjqSPFjUdrt8PscvM9fFZjHp8A1xWrb3rVaClebLZKU=;
-	b=HBTqWkdcnYY41N2Eon8wXjyWmFvUCEFunNe4jNGhBWo33FYWaBGLSyU065k8PL1e/afB
-	 DgFoEhdEXSlK6liDGsfU7HLj77YhXKJpza4K/qv930EkxG4M+ooIld4iaHmXMbBahewqs
-	 wiISI+xo3CX7yAeyaQJkA6FofEamVLVCzcm/okIw++EdJwMzq8ejtbRZLEcqUrkCZ1Sp/
-	 QwHBZSQadhSzqX44W83CGunlQiCYyuCM29X+SscIuuOmBJSXbJi1UnDJ8IwWTtJGABGFJ
-	 VXIFIK4oRTvV3wOuCp7zdvCeRmTnTjODx+pt3T5AOlLMopOM6JFmYr324/f0u/0y9vA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793114795;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=UTZ0KdxtrRAJmu9V7A4LrovnqYfB1lyRM9tdslCmQOE=;
+	b=b9i7i3oSpUfXp7vmnMoV+jjZlhu81AZ4lBziwqGfa9sGl5Akuo6QSvKrQ6XXVJAsRMKQ
+	 6fJbp4XIZ7QD5I18qWrJEKbrxahxVFA0u7djoJ0gHoTBZwRPL0R8kW3jPUOZ2dWT1ndAU
+	 7rT7MHLqHESSuEPrSTUcR8MnikcggjZWw6UAnGUr+iI+d7C/Du5dfpfxBpx63eu7jLpMV
+	 lqRVWDOaYva3CX8p5NIcvbRQugR82rJGHdo9FOKJfVCSYkIHCRjek2GJFiVM4RtIslmk/
+	 2ycbTvuQlwqlMiGakcEBta7hvKHNTLrFjJYhy6Fl2ffTfGI7wFhf7cCw2hprqe48ICg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Zy04aziz;
-	arc=none smtp.remote-ip=209.85.208.52
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Cz20H7dV;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3257606A31B
-	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 15:24:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A3257606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6349A606A31B;
+	Tue, 27 Oct 2026 15:26:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Zy04aziz
-Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-6b1f31c63ebso1869897a12.0
-        for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 08:24:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793114693; x=1793719493; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=vjqSPFjUdrt8PscvM9fFZjHp8A1xWrb3rVaClebLZKU=;
-        b=Zy04azizf5o2Jluf3s5ezCMz1J+UuS41aCVCVIQ1qp2L4Y2V7F49YwPGVsikQS0nOX
-         BbzCQmQFpeYJYLuAEfsYKx6+07ldKBa43hIZGedQb70P6zKDlR5IWik5ysraAebv/18g
-         fUWpvnBsSKcxa0BLjQiTudK+Dwws3xLs5c504NCwlBkztcz9Psf1je2uhQu+e/JxyWsn
-         gCykg4hOwi6XisX5FUgpl8iFUcknoF6gy15m9JDKRVMPrHOeajsxP1VlVXAwHSZf6Dqh
-         Cpj8hzrMvJW+bCdF0JlXkpBPRA6qU8mroOcABEuTfZBZHgb13cnsD1DHHexH09ItqwtU
-         YxgQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793114693; x=1793719493;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=vjqSPFjUdrt8PscvM9fFZjHp8A1xWrb3rVaClebLZKU=;
-        b=YYTGTUYQ5J0aT5DgePXvqzhSDzwxrr/x/w6Pmfj+/r0uoAqt+WRXT7LZxlEWXXTnMB
-         GUNm2TpyL/uH29RuTWzfZ81LulUw3Y8mcxHcIofwzC21eidv7XmLKhiGkPwRLOE6XAHX
-         9dHGOpqthi6LV7yG0YBLPVMj6OuQK4nHBhnyGp1ZOQCGbxsjkMmpSdnkMCdxGBB18N3j
-         X3mcV8vYRedEn+C8hqZ7JzV8ZnJhDFNfron+cw0N9wZG9fAzf+30E/J1yFNLQ7WoJUrJ
-         f17CBTpO5sPDDTWbP7cbRc82kFpiNCcZGkKPbpf6IVCY5gmV8DthBzyibwLEVg8Y7ct+
-         aFVg==
-X-Forwarded-Encrypted: i=1; AKwUvBzcdJHMI3A4BqCDIt4s3q1yGAmvLiocjFolU4vjxmrfz3S507Y8LJUHb731Xp8Vq2EjZMQ=@lists.linux.dev
-X-Gm-Message-State: AFq9FYIi8IHNgJa4Fw+LlaVoRnbb4rWeikGiTK7gwR0S5E+XDLUKcV2L
-	IF/WU2sfTMSPOl89iP642AniWh7gpolekMJnJGX9+7gepFZTjE1E8juq
-X-Gm-Gg: AYBFou12h11CR2YZVx7oU0q3NOdULR89vZ0Klagk38P1U7W5wZMDv1mvHWjX3oh3wiV
-	/i31u56DSBLBuRthVKtkBUxHeqyzPspGChraAZ/rEDg5l9F8/SVL7wy50Q5unksuYEJQf0cdUyJ
-	MN/0Cv669qqWrNhrIMMWG0XU5MRIK0HVSKhE29S63fif+c8Ac4gji0BowudQxL6La06BLoJm8fS
-	t8+Uf34XA+A1w74e2UkY7YuJJR1Y0I9eBNHTaIoWcs6NQH3tfYP6iGuUAeZMB/oNO4yBo9doRF8
-	XAPg+ry/4Yyk7c6CvLRDaVCNhJCZ/sS7kR/sQFHBNmJP4KA+BQnZ4vIqCA7tGd8TGyd0wq+yswa
-	j+2bW6/FoUQypTx363OT9/Xqs8GAAJBIDNoy1kwllRwkHgDTt4NnoAWI/wP2/Yihc6YN3iFTR1Z
-	S8an6oTB7USf58D5ImqokHc5Y8h8sniYHlrIU4ASLewdA3/RIzgY3L1svIFgFsCLV6ROTxhojaB
-	RVNFMUO3HCtb3MaJRtFZ8RJ4mWYtndhOYI0XZ36GhvozZXtAEBWCYojfwnOK1VmlgMLKaEa7bUk
-X-Received: by 2002:a17:907:7b8b:b0:c42:4f89:13 with SMTP id a640c23a62f3a-c49a73d41d4mr297034266b.15.1793114693026;
-        Tue, 27 Oct 2026 08:24:53 -0700 (PDT)
-Received: from xeon ([188.163.112.62])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46bd529b3csm467303866b.37.2026.10.27.08.24.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 08:24:52 -0700 (PDT)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Lee Jones <lee@kernel.org>,
-	Aaro Koskinen <aaro.koskinen@iki.fi>,
-	Andreas Kemnade <andreas@kemnade.info>,
-	Kevin Hilman <khilman@baylibre.com>,
-	Roger Quadros <rogerq@kernel.org>,
-	Tony Lindgren <tony@atomide.com>,
-	Dmitry Osipenko <digetx@gmail.com>,
-	Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: linux-omap@vger.kernel.org,
-	mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 2/2] mfd: tps65910: Add restart handler
-Date: Tue, 27 Oct 2026 17:24:22 +0200
-Message-ID: <20261027152423.194794-3-clamor95@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261027152423.194794-1-clamor95@gmail.com>
-References: <20261027152423.194794-1-clamor95@gmail.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Cz20H7dV
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D47581F01825;
+	Tue, 27 Oct 2026 15:26:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793114795;
+	bh=UTZ0KdxtrRAJmu9V7A4LrovnqYfB1lyRM9tdslCmQOE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=Cz20H7dVfruPuCw51mSYdVyCPbrpCTynDlQLVGuyE0Z4H2gbUeozix32jwaRqNzNH
+	 HZG5n1nbBnVVb8JEypNidBmOx59Az8AOJc9ddcjXeC/M8NsjsfNTn2XS440cA+R6CB
+	 xfTFgZbEiYKWoHz0UElxawnMEav4ecovlIsW5UG0UI7C1cCqZhzTX2g01BHcKkxHW2
+	 zgtyu1EkFlu58DwcsdLOtUKGyNJ4d4yPQcleKpC05XE9qc0xwYidlUP3MsaVKBDR9s
+	 hStH4gI6qhuaxozRwP0yrjU0d6uVGuvgVDfXlGdZ764fKIw8UT011tDmEt8stlUfme
+	 LwrNKMecP1s0w==
+Message-ID: <9ef05c62-1067-459f-8dab-2b0fbe70178d@kernel.org>
+Date: Tue, 27 Oct 2026 16:26:30 +0100
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -104,55 +51,84 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mfd: da9150: fix IRQ action memory leak on removal
+To: Guangshuo Li <lgs201920130244@gmail.com>,
+ Support Opensource <support.opensource@diasemi.com>,
+ Lee Jones <lee@kernel.org>,
+ Adam Thomson <Adam.Thomson.Opensource@diasemi.com>, mfd@lists.linux.dev,
+ linux-kernel@vger.kernel.org
+Cc: stable@vger.kernel.org
+References: <20261027030803.118131-1-lgs201920130244@gmail.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20261027030803.118131-1-lgs201920130244@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Dmitry Osipenko <digetx@gmail.com>
+On 27/10/2026 04:08, Guangshuo Li wrote:
+> da9150_remove() currently removes the regmap IRQ chip before removing
+> the MFD child devices. regmap_del_irq_chip() disposes the child IRQ
+> mappings and removes their IRQ descriptors.
+> 
+> The GPADC child registers an interrupt handler using
+> devm_request_threaded_irq(). When the child device is subsequently
+> removed, its device-managed cleanup calls free_irq(), which can no
+> longer find the corresponding IRQ descriptor. As a result, the
+> allocated struct irqaction is not freed, causing a memory leak.
+> The associated IRQ thread also cannot be stopped normally.
+> 
+> Remove the MFD child devices first so their interrupt handlers are
+> released while the IRQ mappings are still valid. Then remove the
+> regmap IRQ chip and its IRQ domain.
+> 
+> This issue was found by our static analysis tool under development.
 
-Add restart handler to reset hardware properly on system reboot.
+So you just keep ignoring and ignoring our feedback. It's just bot, so
+little point to discuss with bot.
 
-Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # ASUS TF201
-Tested-by: Maxim Schwalm <maxim.schwalm@gmail.com> # ASUS TF700T
-Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- drivers/mfd/tps65910.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
-
-diff --git a/drivers/mfd/tps65910.c b/drivers/mfd/tps65910.c
-index 97855bd9cc3c8..ce7ecba504b3f 100644
---- a/drivers/mfd/tps65910.c
-+++ b/drivers/mfd/tps65910.c
-@@ -437,6 +437,17 @@ static int tps65910_power_off(struct sys_off_data *data)
- 	return NOTIFY_DONE;
- }
- 
-+static int tps65910_restart(struct sys_off_data *data)
-+{
-+	struct tps65910 *tps65910 = data->cb_data;
-+
-+	regmap_update_bits(tps65910->regmap, TPS65910_DEVCTRL,
-+			   DEVCTRL_DEV_OFF_RST_MASK | DEVCTRL_DEV_ON_MASK,
-+			   DEVCTRL_DEV_OFF_RST_MASK);
-+
-+	return NOTIFY_DONE;
-+}
-+
- static int tps65910_i2c_probe(struct i2c_client *i2c)
- {
- 	const struct i2c_device_id *id = i2c_client_get_device_id(i2c);
-@@ -520,6 +531,12 @@ static int tps65910_i2c_probe(struct i2c_client *i2c)
- 		if (ret)
- 			return dev_err_probe(&i2c->dev, ret,
- 					     "failed to register power-off handler\n");
-+
-+		ret = devm_register_restart_handler(&i2c->dev,
-+						    tps65910_restart, tps65910);
-+		if (ret)
-+			return dev_err_probe(&i2c->dev, ret,
-+					     "failed to register restart handler\n");
- 	}
- 
- 	ret = devm_mfd_add_devices(tps65910->dev, -1,
--- 
-2.53.0
-
+Best regards,
+Krzysztof
