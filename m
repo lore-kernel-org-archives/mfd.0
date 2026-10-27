@@ -1,47 +1,47 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793119383;
-	b=5av7BXuAOgDK+pl5P7AZIkqMwe+ah4TRhwsdPhzgQViasf6hstQErrLBgsJ0VJbOcgZ7
-	 O/q5qR6zPC9zANLO9G8wrYXXp6+svRIoemgL8TFgYBEvDg4wC1KyxBzgtyBgq6SlqzpsV
-	 /Lc10v5eevEL4/8xNWnVuKF15GJYtDAX7WB6jBR0gzXDQwpz7pEbx9En5Tzv6Bf6flqbh
-	 CPlPk/Ex5EhX0pE/bxvUcGwO4X97BIXyEN493zfT1y69lT3YukN2rzxSxj7/91lDjp9dd
-	 69tulUgwinuaYJuHMu0zTkEfiJpvL4RIZZ851OGlhXqVRADEGSrZ8pMmlJBJasi9hOA==
+	t=1793119464;
+	b=KXfbwk150aYZbJ/yvdMFJBON8Mokq8YlYRnRsd5us5nNN4J3T6Qho0QgNy9QBYCjtB+G
+	 W0ltPekvZ3aUDW/1I4jhd/9T8QWuFwwmMuVkw7kvfmOYusUyLAYSmtSUo0mbG2OcPQNGm
+	 wk0Vl5IAlVjR7iV23uO28+t2BoCeZoS8PFukrexNNsB/UFFAKSiE5Ez5SW8HA/EztC4Wo
+	 BCzJCYbGYbdQvfE7/9eoE0UjeHIzWXDfVkYsNhwHQO2FiD+A6ZkGGrBLTkjbzzS1PW8Od
+	 ssUIk9ccWe9d6zb/WlAVUDn31J72aMvgcdvPTrkpxAPipxUSCyUVeCI5EyOPTisZq/w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793119383;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793119464;
 	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
 	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
 	 Content-Type:Content-Transfer-Encoding;
-	bh=E1wXN/PUqUObJwX0JLlBqoqe7zckeMgtQBlkKAPsC4U=;
-	b=ZEZhK+s2BBf8LxrDncdieKM46WFDlkQLZ1OuG9JGHzpJ/tmPZwwhptfKwziF9mAGEXB8
-	 qc58Rxj4Wl/i4oA5Of8DGxMax0fACrmhNYluIHL+wzgiNFyucHkFb9bc9/B6ax8cqH31b
-	 lFOZ+TeyvupRDNjTMidbCrT/BEqE7YqzMz3w5BR/BqUrvkV4GKaHt0O4wY5hmLZEdgXd9
-	 w/KjOPR2z6FPQ6ORakWc66IymNBVBAN84tJm9j9o85nBvtd6lHhJaV2GViDW9c8wq/yCn
-	 bURD7siNe4oMs5PcDK2pDjEJY7TO31dhAMCSPCyy3rJ2t8uz9LQc66Sdr8R2NOzq3TQ==
+	bh=PByByqtjwpf2F1B4j8nkJ/iNBLtHOWJlMjMnw9UUR8I=;
+	b=cHMvZ+40Er6/uwtbxzyLT4IrZBTBM5zTw04SHjcM8I26fNMSwXkCOgWRuOl8jPIuB0LR
+	 q3kEojjcIGpMVXVlUH9hhDyetT7e2NpxMPqKGgwLcbZL8PW8x3PeY1E2+j9l1gOQKUTOd
+	 47dCd4fCw+m2amy1PP8UJRRypQEE5H9jWEsc/dOS36Ok4A+S9CUqBIBp7fxWbPGS3hrJC
+	 YB7HEQSWGLiAtIpVo1kGQis8Pefe46AT2gXud67SJBJoh8tAFucUWylilgsA4Hv1/yBJX
+	 XhjqAYW6CSwG5bbCMMH1LNz6DRFZ9kZeUAN9cHyMzv+5JnlxIpv8RBkNFGHiEE5tT9Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="P7/w1DUf";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cCWy3KHF;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C752606A31D;
-	Tue, 27 Oct 2026 16:43:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFAED606A31D;
+	Tue, 27 Oct 2026 16:44:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=P7/w1DUf
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C0C931F01825;
-	Tue, 27 Oct 2026 16:43:00 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cCWy3KHF
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 640501F01825;
+	Tue, 27 Oct 2026 16:44:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793119382;
-	bh=E1wXN/PUqUObJwX0JLlBqoqe7zckeMgtQBlkKAPsC4U=;
+	s=k20260515; t=1793119463;
+	bh=PByByqtjwpf2F1B4j8nkJ/iNBLtHOWJlMjMnw9UUR8I=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=P7/w1DUfoTRy34mWn1naIkcYYpGGZf47p5kFeCWFa/1Y4OT2v+jsQ/TU2gpN0/gKQ
-	 ZLtpo/IZmUNFYbuDu2KHboM+lN+Lg/bo+Ni0AVu2JMZPYtIoSTdlGgFkuw+8QkL0Wz
-	 BHHnWkf5x7W19zu/KZcI6Cl+2GrWf3GhqZEshbW6D/KZggHp5Gc7cTywv9fTDqMAvC
-	 /KpeZDY4z2FlJb8ppioZr3XCI6rf5P3BZCzmqpgSoEql4ZVTvh6RxESLDLI9/pTtji
-	 I8/Mf0B4AeIUE2HCwsPou/tluQRnbEaqImPlij51YhWMa0+81sHkGWxAYsqCVq/ahy
-	 Bj9UWBENUVZWg==
-Message-ID: <57142d18-fc5c-4b9f-97f0-27116d4bb154@kernel.org>
-Date: Tue, 27 Oct 2026 17:42:58 +0100
+	b=cCWy3KHFhNHmxagXyNBnkL9vclGpi+tM4IdV8nE5yJ7dAv9Y2Ky+LQvEnJekkmDtj
+	 u9KJVnhAB33dWLgqx5E+yUFtJiWWyOiBTaiAt31ZLCNJ2s3GmJT4UVCXTkCLmPS1Mq
+	 ZewG5/hI+9dIhAKt2ZuK3sgbvSPE0xnlah0zxwjzq9GSuE/IWvo9MCCav/8rjnie9t
+	 lyrlrSSVk6KTheK/1a7twfU5fgdHhGhmE2nODekvPEPJ9jHlKzDrtzVkD4L+MHhh3K
+	 /9etIo5uLDf9lJDKBy9SVVQgKf//edO/IENZJB50yJR3BPl26pXS36VtjN43E7dH51
+	 miqHW0x9qdmBw==
+Message-ID: <585b45bb-a9b8-424b-abd4-66d53076b501@kernel.org>
+Date: Tue, 27 Oct 2026 17:44:17 +0100
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -52,14 +52,18 @@ List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mfd: hi655x-pmic: fix IRQ action memory leak on removal
-To: Lee Jones <lee@kernel.org>
-Cc: Guangshuo Li <lgs201920130244@gmail.com>,
- John Stultz <john.stultz@linaro.org>, mfd@lists.linux.dev,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org
-References: <20261027024609.117371-1-lgs201920130244@gmail.com>
- <c04f2ba8-fc83-4118-a26a-76ea8cbee518@kernel.org>
- <20261027162324.GI2195460@google.com>
+Subject: Re: [PATCH] mfd: twl6040: fix IRQ action memory leaks during teardown
+To: Guangshuo Li <lgs201920130244@gmail.com>
+Cc: Aaro Koskinen <aaro.koskinen@iki.fi>,
+ Andreas Kemnade <andreas@kemnade.info>, Kevin Hilman <khilman@baylibre.com>,
+ Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>,
+ Lee Jones <lee@kernel.org>, Mark Brown
+ <broonie@opensource.wolfsonmicro.com>, Samuel Ortiz <sameo@linux.intel.com>,
+ Peter Ujfalusi <peter.ujfalusi@ti.com>, linux-omap@vger.kernel.org,
+ mfd@lists.linux.dev, linux-kernel@vger.kernel.org, stable@vger.kernel.org
+References: <20261027032609.119226-1-lgs201920130244@gmail.com>
+ <f342a5e4-82b3-4044-85a3-10cad08595e4@kernel.org>
+ <CANUHTR-SJTiQvo__wbqosSQV958fkHGY33YTRFor2=EwDTdXPg@mail.gmail.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -105,41 +109,62 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <20261027162324.GI2195460@google.com>
+In-Reply-To: <CANUHTR-SJTiQvo__wbqosSQV958fkHGY33YTRFor2=EwDTdXPg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 27/10/2026 17:23, Lee Jones wrote:
-> On Tue, 27 Oct 2026, Krzysztof Kozlowski wrote:
+On 27/10/2026 17:22, Guangshuo Li wrote:
+> Hi Krzysztof,
 > 
->> On 27/10/2026 03:46, Guangshuo Li wrote:
->>> hi655x_pmic_remove() currently removes the regmap IRQ chip before
->>> removing the MFD child devices. regmap_del_irq_chip() disposes the
->>> child IRQ mappings and removes their IRQ descriptors.
+> On Tue, 27 Oct 2026 at 23:33, Krzysztof Kozlowski <krzk@kernel.org> wrote:
+>>
+>> On 27/10/2026 04:26, Guangshuo Li wrote:
+>>> twl6040_remove() currently removes the regmap IRQ chip before
+>>> removing the MFD child devices. This destroys the IRQ mappings
+>>> before the child drivers can release their interrupt handlers.
 >>>
->>> The hi65xx-powerkey child registers interrupt handlers using
->>> devm_request_any_context_irq(). During child device removal, the
->>> device-managed cleanup calls free_irq(), but the corresponding IRQ
->>> descriptors are no longer available. As a result, the allocated
->>> struct irqaction objects referenced by irq_desc->action are not
->>> freed, causing a memory leak.
+>>> The parent driver also registers READY and thermal interrupt
+>>> handlers using devm_request_threaded_irq(). These handlers are
+>>> normally released by device-managed cleanup after remove returns,
+>>> when the corresponding IRQ descriptors have already been removed.
 >>>
->>> Remove the MFD child devices first, allowing their device-managed
->>> IRQ handlers to be released while the IRQ mappings are still valid.
->>> Then remove the regmap IRQ chip and its IRQ domain.
+>>> Consequently, free_irq() cannot find the IRQ descriptors and the
+>>> allocated struct irqaction objects are not freed. The associated
+>>> IRQ threads also cannot be stopped through the normal cleanup path.
 >>>
->>> This issue was found by our static analysis tool under development.
+>>> The probe error paths have a similar issue, as they destroy the IRQ
+>>> chip before the device-managed IRQ handlers are released.
+>>>
+>>> Remove the MFD child devices first, then explicitly free the
+>>> parent's READY and thermal IRQ handlers using devm_free_irq()
+>>> before removing the regmap IRQ chip.
+>>>
+>>> Also update the probe error paths to release successfully requested
+>>> IRQs before destroying their mappings.
+>>>
 >>
 >> More of postings by bot ignoring any feedback.
+>>
+>> Best regards,
+>> Krzysztof
 > 
-> What did I miss?
+> Thank you for your feedback, and I apologize if our recent submissions
+> gave the impression that we were ignoring your previous comments.
 > 
-> This person seems to be answering to my feedback:
+> We did take your earlier suggestions into account and subsequently
+> submitted a patch series accordingly.
 > 
-> https://lore.kernel.org/r/CANUHTR9B84LoCjOtS5N5qGO0KXSXUbZkrKZ3_GFTwXmVoPQ0SA@mail.gmail.com
+> For the more recent patches, however, since they address issues in
+> different drivers, we thought it would be more appropriate to submit
+> them separately rather than group them into a single series.
 
-To mine not really. This all is again spread patch-per-patch, exactly
-like I asked to fix last time, more than once.
+How this that differ from last time, explain me please.
+
+Last time you sent x separate patches for subsystem foo. I asked to send
+them as patchset.
+
+Now you sent y separate patches for subsystem bar. You keep repeating
+the same.
 
 Best regards,
 Krzysztof
