@@ -1,83 +1,82 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.45
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.42
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793100779;
-	b=LaSRvOof1WTGFnFwRqXb2WdQ827HfV5DWo1iOLTg7ysCVv01eDyE1PEdsr3xx9/0ZUoX
-	 NOOS7AW0FhmMr81IDTo+XYEZ4QxUoBmRoBhbJSonRlr3yVibH4rXK8GVIuvm9b9EOnUb6
-	 V3nSW3faPDEe4X5J5LWnLBnzyZOcrQj5lwKg/Icd7rKmS9hvgjFPtSOYnDpHdnHVSHo7f
-	 Cb7quoZMnOX6tHQp9cNUiIBAegHaY+VC65zSGUGopGxzq7pbXyz1+0IblvquXCbPwuW8f
-	 v1WPL0NCuyZoTnVPesLQAlxA/zow5a0PyfjwFOdbs38hot/7B3RuAlKuaWS91VZOP6g==
+	t=1793100781;
+	b=WEIWZvl0WRsUbvHP45rEqIpI4hcLEqixhIdHijC9wPN8ga3gNx8GeZBwz/yd1+krBpAw
+	 vDXaiHq0djs/sC4Waq+VKILcy0rN3Tdwx2vAia0h+aV5mr2nwqP1QT7Mu09H69QDUTJQc
+	 xXk65R3syXr3WTbnHkGEXCCwaUJcE8l7R3JMvETsiC+Hjo1Nez/8Dk/yBg/eJKcNryKHf
+	 wKGf8uo88Mn7Y17DdVeVlJsuKLxf0ih+OAiWPPsHv0lAX6Gx4aZjl4ra9k1/eLnBuAXLE
+	 5JQSGdKHTYk0jA1VLsKsHT2EmXS8LwXuSo0Pl/Pwr2Ql3yp7XPb4NS7Vw2imZzaee/Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793100779;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793100781;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=Iy7P7JxIeb97wll2bqsvtF7KrwzoKUoHiHips6wUWyw=;
-	b=uOPMWJ5UCPZEKaKbCun9yRoDrihOn2XAilwni17uVegAqOvCNmKi8tzDE/9DTR2Qz6Pq
-	 9d6E+7fh2CMgF1ZQZuzQmvXz8KbsR4yfvg8sv+K3hc7nP/UKf907UCoUgQ2GQHZXowtva
-	 Tmz8un8i/m5M6DH0wNID1o0J7F+gDiE4NxjQ/Cu7G6ZCxWiFN3CotkAP6iuvFkkP5ZuG3
-	 6sKP6BHDuGoyZ8Vokg5RdNMcdb3cUBQ3jql6bNdnND0vBEm+UbT0wneOUchmtK1E2rRDO
-	 aAicNKNJ/6dG3I7bsJLosYiMghxU2mTk6KHcwDqJ8FfrKYczm1hw1khYsOp5dkaJjhQ==
+	bh=IlABjifCqSqzPKHch40gU1r/EoFeoTHIM67lGBUV2nM=;
+	b=XMlKFb9xM4M8BG6Xm7cyENxY+j7JsWDFBj2XpS/KTE5dCzCoMMM+DMHRFtyY7lfZ5o33
+	 fii514ZzR+jRS0kd8f+sQq5qS8Vdof2yPs2TR5pqrKlFdYuG4HWciiYYEOCSntk/KqZRx
+	 05f991I5j6wSMN2YYRGuoA78RZ8Ukf3rq10caIyumNrIJumluRyaVZ30ifEJnQkj+ZT5D
+	 YsDm3atETQr7F/Vcsg9WLPiESazQH1RhdoOdsNaLVGJJA+b6uWUyAfRxmMWUJLO7chknt
+	 OheixOYfXr/iXYgZnEuSLWWfb60Ih0xtoFg14K2r21UcYNJXbN10NFGhqFl5raU2K/A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=QgI1b3vJ;
-	arc=none smtp.remote-ip=209.85.208.45
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=dYCbNOfw;
+	arc=none smtp.remote-ip=209.85.218.42
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FB8060A3824
-	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 11:32:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3FB8060A3824
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8246760A3836
+	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 11:33:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8246760A3836
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=QgI1b3vJ
-Received: by mail-ed1-f45.google.com with SMTP id 4fb4d7f45d1cf-6b21cf1a580so4964109a12.1
-        for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 04:32:59 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=dYCbNOfw
+Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-c445c95d553so525793166b.1
+        for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 04:33:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793100778; x=1793705578; darn=lists.linux.dev;
+        d=gmail.com; s=20251104; t=1793100779; x=1793705579; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Iy7P7JxIeb97wll2bqsvtF7KrwzoKUoHiHips6wUWyw=;
-        b=QgI1b3vJfIf9HCpbRbyns44rWX83/L8c4+08FH4Zgpa89Kw+8P3s2N7a6WzFXjxr/a
-         jnlwwxLgDm1vKae/60iYA2De0o8vEWoXJVijPp2m6MWJhlkq8/ZnjKhGGw8n0+Q8MuHr
-         peL69TO5tHWps9SpYNT+x0uIBLHUE7+Xx63HK1QqduFeJ3H24juuZ2h+gpYCWw2WnEJQ
-         MN/ctdPJ6bRuigdOm/w/HwJvBHCOXnHzrGdJcuNmXQgDOc3GG2nOVUoZZdEZaHP2T5R7
-         rtp7xW4e76c7iG0mfijQSdDYkSNTfUI0s5+t8U5WDsWfg8v3EiDVEVNYhEz/5lDW1DHH
-         +rAA==
+        bh=IlABjifCqSqzPKHch40gU1r/EoFeoTHIM67lGBUV2nM=;
+        b=dYCbNOfwNDutbrnT1xUcWluxZkJWaa5K9H26dZ5pXF87E/0sq98Lf1PEGeg7GLZuIE
+         NGhNY+9H/jxSmC9O1LRw1lcB1TA9UYm0marcsQ5IcHQvaIfPNTxm3Zx/EB1FH34DYuwQ
+         kb7Oi6SR1esnJZ+RPZSfWTyygsmAeB55pJhfgtucZ0P7Nn740Fai79Y0bpjcX0sGRBH6
+         pa617Ys5m2ER4r7UivV/yR21126esHPjidRz8d3sVRacFVyg2cacxITwXQhL3OCZN/K8
+         Vreiz9zp+perNRrUKuaKN2sku2J+KyCYWtWxwa1qmgep8wJpw9NE3Qqf7fk57offdM63
+         ShGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793100778; x=1793705578;
+        d=1e100.net; s=20260707; t=1793100779; x=1793705579;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Iy7P7JxIeb97wll2bqsvtF7KrwzoKUoHiHips6wUWyw=;
-        b=aWFyQKeyQHNsRROGqQpQ/54y/QzSfSl+7ZvHzJmEkZnBoaucYcsmqrQZZAm3JqeTbB
-         MGgK9hQijH6Z5tpVPyk7b14wYyBXXRv7qTqdYEBAk4x71X6JeplvDhsNM4gTB/91jhtl
-         INBzQIDJstLk/j9XfxVjY3G2qDfF0ZD0qk6xNBhVpryaKasoBSxjY4gnnxQMjoSFTY5P
-         rDMhNuCQ55j4jzHOTbF8z9vQtLA2gIJ9cRC/qTrEFUu+jj4tSeSZs70xqK3WjBFziDhB
-         XaA+ZqoDY9uW5bc4A8wocUkEoJiFwZxSQJ1DiwuBs9ad1iUW6Dp2chGCK1fdDu6IhbRI
-         j94g==
-X-Forwarded-Encrypted: i=1; AKwUvBxRS19/IJaXynNEgFi3EyVEChiIxsPitvavTWr/jVrQVx+wxyOJz+fvBhRdjPRYDa3eiow=@lists.linux.dev
-X-Gm-Message-State: AFq9FYJ5uMEhRQZyOCaG5vk8/W60Tl30BYwie0GXhOBKQ5o1AqX53i2j
-	niyYzwzEUwzgmLJhPmd9VY25PIbuwT35kbZk6pExYoKbUgySml/VCjNb
-X-Gm-Gg: AYBFou0eBhJyZT+JWDIcfnl7/f3F/184HhJHHZr5Yz8TzoM3n0NhnWMK/QmNRiJLn8A
-	pP7nxl+Svp8ewSmDDfsKk4P44Eune3qf2gmwaoZthEcAbVojplkkoluwsjJ0V6QxGcPRFs36KpE
-	UPQrwE58Doseb/noYb3kUED0UWnmJyOp9cyZdkdOkYSrbbQHOsF9atnnQXngACpvpSGTUqS6/hs
-	/qHbbCb4UdaxA9PDPQIbsHHKmaS1YkQlKxjfRnng8DfoufImt1d1dr460rXOaBbzk9HpS3dxGjk
-	ylI/4DJCAByxZJij1b/vZBm7JK+p4xbFXB7TAh3pKAr5tn0f5Kz97nWdkvwybpMDWQT7neXRvyB
-	+FDPflbpSkbennXzucNA4/S6XdTUtzP+X7Vc6QtpY4KsxJX5es0OqNDvKj5z6dpRMPQgLsBmh5z
-	USkI0M7Qt9UgaEwiQzv0dUH3acKQUiXLlZqeSyBb0hyaN2Js63WNpBjk49EUe2MnQIIwySGf8Z3
-	N0ofNFw3jSAfp8Ulit/napnWz7z76z0/hc7rsK8AcDwWCvatotuSMRvZhVdaKuVZeJHNXlvekdf
-	HlymDAyEGxw3PIqzU5W4JQ==
-X-Received: by 2002:a17:906:d555:b0:c31:8cfe:9a25 with SMTP id a640c23a62f3a-c46bdc2aa9amr1053254366b.9.1793100777455;
-        Tue, 27 Oct 2026 04:32:57 -0700 (PDT)
+        bh=IlABjifCqSqzPKHch40gU1r/EoFeoTHIM67lGBUV2nM=;
+        b=xounp87HwK3O/VNutVv61QtfhAl3GP+M9rYyZEowXnA9fvLb2izhR62l+hjjwqJcyF
+         +EOCBi0djn7xSQr3OMN1+EgHh1/bNlcfXVf6B4qRBCMEnESIRC62DmJSBTWg8YjkR3VN
+         8MhxrVmUxyBxdRTrpr0lVtojP4L2f5KwyVAcghFeamDUNGpaqQkLLBieIAjkdW3cuuHz
+         ivbW8HN9FKuDVaFj5MiFQK5y+RyIt7MGBfSiSqm4NztWdhCqhZZNZwxS7T0/AasPLzfW
+         QeR7KyAAy+GSAlGF5pybiJv6SXzuc5cQ6PzA1yxLGY4vCJ1zjtqYh9XL+XzCWeVX6jp6
+         a/9Q==
+X-Forwarded-Encrypted: i=1; AKwUvBxes7XyXuRba6q4CCIIp5ka+2egQGlPpaUN5uX41G8J4ImpPaHcm/VPZbpQpZcZRSaSm/g=@lists.linux.dev
+X-Gm-Message-State: AFq9FYLFSUg0oYx9Ny4AcNJl59LvqXwGCLN+f096ArUPFpP2SMVDkI62
+	q7bNJ64k/mngoC03mBCX/ps7RChtZ+BSWebFoW1eHn/22ci5Xaw+5xih
+X-Gm-Gg: AYBFou0e49LFHAYIIkBi07BIQcibvtKLTgH4s51ugsF82ltEmE+HDnBEjH5TtS/cAIu
+	Xtq/jiTPsxFqm8NFooTGT46KVAp6T0V6ThxRMphGsiHuAuOvyLRxgiV2fxiQLfz4Vf3Wcxf7TzI
+	LB4jU8eCOl4K5mm29pM88k/7jVuafKg4aOd3e7PGyF8lCdnU8HmQXpHHppIZWGHmUHWKYxC+nzF
+	jDMWPYogoScf73YX81AQAoz9GjFJc/rRubo2lMXug87qLIMA0bR63Qsk+u+l75U24DF5iFIhbkp
+	OC5ZH+UmZYBijL1E4i1hKcB4ssSGSq8q2Sn4HxwmzcQ6oJtR9DdtA0xpy7xrV4kT3hLTqz3CRlR
+	KpODsyDiH9OGGzmIq5otmxGbMMxLrTlv283iJd/4BTpyyr2ePLMFTLmAho9QM9f8uxrBvLiwAJH
+	IwWPL8BokR7nrVXePUXFotLUoLUN7GKfe6NRQAGv5Sl+EJ1bp1kady7W/VrvpJLKNuuSRTj1mex
+	YblSCfdBiWJosSKiFiB7efMt/oDynRGzJKO05lYE7htT3dVWHEoCWGSI3Tf+Qu0RVIZ0SmCUPto
+X-Received: by 2002:a17:907:6092:b0:c31:7495:e57 with SMTP id a640c23a62f3a-c46bde9a0eamr971176066b.44.1793100778881;
+        Tue, 27 Oct 2026 04:32:58 -0700 (PDT)
 Received: from xeon ([188.163.112.62])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46bd4ea608sm428920566b.21.2026.10.27.04.32.56
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46bd4ea608sm428920566b.21.2026.10.27.04.32.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Oct 2026 04:32:56 -0700 (PDT)
+        Tue, 27 Oct 2026 04:32:58 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Lee Jones <lee@kernel.org>,
 	Pavel Machek <pavel@kernel.org>,
@@ -94,9 +93,9 @@ Cc: linux-leds@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	mfd@lists.linux.dev,
 	dri-devel@lists.freedesktop.org
-Subject: [PATCH v5 3/4] mfd: aat2870: Convert to use OF bindings
-Date: Tue, 27 Oct 2026 13:32:29 +0200
-Message-ID: <20261027113230.47538-4-clamor95@gmail.com>
+Subject: [PATCH v5 4/4] mfd: aat2870: Add support for VIN and IN-LDO power supplies
+Date: Tue, 27 Oct 2026 13:32:30 +0200
+Message-ID: <20261027113230.47538-5-clamor95@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261027113230.47538-1-clamor95@gmail.com>
 References: <20261027113230.47538-1-clamor95@gmail.com>
@@ -111,705 +110,54 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Conversion of the AAT2870 driver to use OF bindings requires a few complex
-changes that should be done simultaneously.
+The AAT2870 supports a dedicated main power supply input alongside parent
+power supply for its internal regulators.
 
-The AAT2870 essentially provides two functions via child devices:
-backlight and regulators. Both functions are fairly self-sufficient and
-may not be populated on the final board. Consequently, the MFD
-registration API was replaced with of_platform_populate(), and each
-sub-device was given its own compatible string.
+Add support for retrieving and managing these supply regulators
+(vin-supply and in-ldo-supply) using the regulator framework to ensure
+proper power supply dependencies and power-up sequencing.
 
-Additionally, aat2870-core utilizes an enable GPIO. Obtaining this GPIO
-was converted to use modern gpiod/OF helpers, allowing the redundant
-aat2870_enable() and aat2870_disable() helpers to be removed.
-
-The aat2870-regulator driver was updated to register each of the four LDOs
-from a dedicated OF node using modern regulator framework.
-
-The aat2870-backlight driver was changed to populate all required
-properties from a dedicated Device Tree node. Its channel map was updated
-to use u8 instead of int. Furthermore, because the maximum current is now
-parsed as an absolute value rather than an enum entry, the calculation and
-application of the maximum current were updated accordingly.
-
-All of the changes above allow platform data to be removed entirely.
-
-Reviewed-by: Daniel Thompson (RISCstar) <danielt@kernel.org> # for backlight
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/mfd/aat2870-core.c            | 128 +++++----------------
- drivers/regulator/aat2870-regulator.c | 159 +++++++++++---------------
- drivers/video/backlight/aat2870_bl.c  |  51 +++++----
- include/linux/mfd/aat2870.h           |  95 +--------------
- 4 files changed, 127 insertions(+), 306 deletions(-)
+ drivers/mfd/aat2870-core.c            | 5 +++++
+ drivers/regulator/aat2870-regulator.c | 1 +
+ 2 files changed, 6 insertions(+)
 
 diff --git a/drivers/mfd/aat2870-core.c b/drivers/mfd/aat2870-core.c
-index 0d56cd6fbc6a5..6b1040c65373f 100644
+index 6b1040c65373f..657ccbb9a9dc5 100644
 --- a/drivers/mfd/aat2870-core.c
 +++ b/drivers/mfd/aat2870-core.c
-@@ -6,17 +6,23 @@
-  * Author: Jin Park <jinyoungp@nvidia.com>
-  */
- 
--#include <linux/kernel.h>
--#include <linux/init.h>
- #include <linux/debugfs.h>
--#include <linux/slab.h>
--#include <linux/uaccess.h>
--#include <linux/i2c.h>
- #include <linux/delay.h>
--#include <linux/gpio/legacy.h>
--#include <linux/mfd/core.h>
-+#include <linux/gpio/consumer.h>
-+#include <linux/i2c.h>
-+#include <linux/init.h>
-+#include <linux/kernel.h>
+@@ -14,6 +14,7 @@
+ #include <linux/kernel.h>
  #include <linux/mfd/aat2870.h>
-+#include <linux/of_platform.h>
+ #include <linux/of_platform.h>
++#include <linux/regulator/consumer.h>
  #include <linux/regulator/machine.h>
-+#include <linux/slab.h>
-+#include <linux/uaccess.h>
-+
-+struct aat2870_register {
-+	bool readable;
-+	bool writeable;
-+	u8 value;
-+};
- 
- static struct aat2870_register aat2870_regs[AAT2870_REG_NUM] = {
- 	/* readable, writeable, value */
-@@ -61,34 +67,6 @@ static struct aat2870_register aat2870_regs[AAT2870_REG_NUM] = {
- 	{ 0, 1, 0x00 },	/* 0x26 AAT2870_LDO_EN */
- };
- 
--static struct mfd_cell aat2870_devs[] = {
--	{
--		.name = "aat2870-backlight",
--		.id = AAT2870_ID_BL,
--		.pdata_size = sizeof(struct aat2870_bl_platform_data),
--	},
--	{
--		.name = "aat2870-regulator",
--		.id = AAT2870_ID_LDOA,
--		.pdata_size = sizeof(struct regulator_init_data),
--	},
--	{
--		.name = "aat2870-regulator",
--		.id = AAT2870_ID_LDOB,
--		.pdata_size = sizeof(struct regulator_init_data),
--	},
--	{
--		.name = "aat2870-regulator",
--		.id = AAT2870_ID_LDOC,
--		.pdata_size = sizeof(struct regulator_init_data),
--	},
--	{
--		.name = "aat2870-regulator",
--		.id = AAT2870_ID_LDOD,
--		.pdata_size = sizeof(struct regulator_init_data),
--	},
--};
--
- static int __aat2870_read(struct aat2870_data *aat2870, u8 addr, u8 *val)
- {
- 	int ret;
-@@ -196,22 +174,6 @@ static int aat2870_update(struct aat2870_data *aat2870, u8 addr, u8 mask,
- 	return ret;
- }
- 
--static inline void aat2870_enable(struct aat2870_data *aat2870)
--{
--	if (aat2870->en_pin >= 0)
--		gpio_set_value(aat2870->en_pin, 1);
--
--	aat2870->is_enable = 1;
--}
--
--static inline void aat2870_disable(struct aat2870_data *aat2870)
--{
--	if (aat2870->en_pin >= 0)
--		gpio_set_value(aat2870->en_pin, 0);
--
--	aat2870->is_enable = 0;
--}
--
- #ifdef CONFIG_DEBUG_FS
- static ssize_t aat2870_dump_reg(struct aat2870_data *aat2870, char *buf)
- {
-@@ -332,9 +294,7 @@ static inline void aat2870_init_debugfs(struct aat2870_data *aat2870)
- 
- static int aat2870_i2c_probe(struct i2c_client *client)
- {
--	struct aat2870_platform_data *pdata = dev_get_platdata(&client->dev);
- 	struct aat2870_data *aat2870;
--	int i, j;
- 	int ret = 0;
- 
- 	aat2870 = devm_kzalloc(&client->dev, sizeof(struct aat2870_data),
-@@ -348,60 +308,27 @@ static int aat2870_i2c_probe(struct i2c_client *client)
+ #include <linux/slab.h>
+ #include <linux/uaccess.h>
+@@ -308,6 +309,10 @@ static int aat2870_i2c_probe(struct i2c_client *client)
  
  	aat2870->reg_cache = aat2870_regs;
  
--	if (pdata->en_pin < 0)
--		aat2870->en_pin = -1;
--	else
--		aat2870->en_pin = pdata->en_pin;
-+	aat2870->en_pin = devm_gpiod_get_optional(&client->dev, "enable",
-+						  GPIOD_OUT_HIGH);
-+	if (IS_ERR(aat2870->en_pin))
-+		return dev_err_probe(&client->dev, PTR_ERR(aat2870->en_pin),
-+				     "Failed to get EN GPIO\n");
- 
--	aat2870->init = pdata->init;
--	aat2870->uninit = pdata->uninit;
- 	aat2870->read = aat2870_read;
- 	aat2870->write = aat2870_write;
- 	aat2870->update = aat2870_update;
- 
- 	mutex_init(&aat2870->io_lock);
- 
--	if (aat2870->init)
--		aat2870->init(aat2870);
--
--	if (aat2870->en_pin >= 0) {
--		ret = devm_gpio_request_one(&client->dev, aat2870->en_pin,
--					GPIOF_OUT_INIT_HIGH, "aat2870-en");
--		if (ret < 0) {
--			dev_err(&client->dev,
--				"Failed to request GPIO %d\n", aat2870->en_pin);
--			return ret;
--		}
--	}
--
--	aat2870_enable(aat2870);
--
--	for (i = 0; i < pdata->num_subdevs; i++) {
--		for (j = 0; j < ARRAY_SIZE(aat2870_devs); j++) {
--			if ((pdata->subdevs[i].id == aat2870_devs[j].id) &&
--					!strcmp(pdata->subdevs[i].name,
--						aat2870_devs[j].name)) {
--				aat2870_devs[j].platform_data =
--					pdata->subdevs[i].platform_data;
--				break;
--			}
--		}
--	}
--
--	ret = mfd_add_devices(aat2870->dev, 0, aat2870_devs,
--			      ARRAY_SIZE(aat2870_devs), NULL, 0, NULL);
--	if (ret != 0) {
--		dev_err(aat2870->dev, "Failed to add subdev: %d\n", ret);
--		goto out_disable;
-+	ret = devm_of_platform_populate(&client->dev);
-+	if (ret) {
-+		gpiod_set_value_cansleep(aat2870->en_pin, 0);
-+		return dev_err_probe(&client->dev, ret, "Failed to populate cells\n");
- 	}
- 
- 	aat2870_init_debugfs(aat2870);
- 
- 	return 0;
--
--out_disable:
--	aat2870_disable(aat2870);
--	return ret;
- }
- 
- static int aat2870_i2c_suspend(struct device *dev)
-@@ -409,7 +336,7 @@ static int aat2870_i2c_suspend(struct device *dev)
- 	struct i2c_client *client = to_i2c_client(dev);
- 	struct aat2870_data *aat2870 = i2c_get_clientdata(client);
- 
--	aat2870_disable(aat2870);
-+	gpiod_set_value_cansleep(aat2870->en_pin, 0);
- 
- 	return 0;
- }
-@@ -421,7 +348,7 @@ static int aat2870_i2c_resume(struct device *dev)
- 	struct aat2870_register *reg = NULL;
- 	int i;
- 
--	aat2870_enable(aat2870);
-+	gpiod_set_value_cansleep(aat2870->en_pin, 1);
- 
- 	/* restore registers */
- 	for (i = 0; i < AAT2870_REG_NUM; i++) {
-@@ -436,6 +363,12 @@ static int aat2870_i2c_resume(struct device *dev)
- static DEFINE_SIMPLE_DEV_PM_OPS(aat2870_pm_ops, aat2870_i2c_suspend,
- 				aat2870_i2c_resume);
- 
-+static const struct of_device_id aat2870_match_table[] = {
-+	{ .compatible = "skyworks,aat2870" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, aat2870_match_table);
++	ret = devm_regulator_get_enable(&client->dev, "vin");
++	if (ret)
++		return dev_err_probe(&client->dev, ret, "Failed to enable regulator\n");
 +
- static const struct i2c_device_id aat2870_i2c_id_table[] = {
- 	{ "aat2870" },
- 	{ }
-@@ -444,6 +377,7 @@ static const struct i2c_device_id aat2870_i2c_id_table[] = {
- static struct i2c_driver aat2870_i2c_driver = {
- 	.driver = {
- 		.name			= "aat2870",
-+		.of_match_table		= aat2870_match_table,
- 		.pm			= pm_sleep_ptr(&aat2870_pm_ops),
- 		.suppress_bind_attrs	= true,
- 	},
+ 	aat2870->en_pin = devm_gpiod_get_optional(&client->dev, "enable",
+ 						  GPIOD_OUT_HIGH);
+ 	if (IS_ERR(aat2870->en_pin))
 diff --git a/drivers/regulator/aat2870-regulator.c b/drivers/regulator/aat2870-regulator.c
-index 970d86f2bbb81..73b6d06858cff 100644
+index 73b6d06858cff..896f39e345379 100644
 --- a/drivers/regulator/aat2870-regulator.c
 +++ b/drivers/regulator/aat2870-regulator.c
-@@ -15,73 +15,74 @@
- #include <linux/regulator/driver.h>
- #include <linux/regulator/machine.h>
- #include <linux/mfd/aat2870.h>
--
--struct aat2870_regulator {
--	struct aat2870_data *aat2870;
--	struct regulator_desc desc;
--
--	u8 enable_addr;
--	u8 enable_shift;
--	u8 enable_mask;
--
--	u8 voltage_addr;
--	u8 voltage_shift;
--	u8 voltage_mask;
-+#include <linux/regulator/of_regulator.h>
-+
-+#define AAT2870_LDO_AB_A_MASK    GENMASK(7, 4)
-+#define AAT2870_LDO_AB_B_MASK    GENMASK(3, 0)
-+#define AAT2870_LDO_CD_C_MASK    GENMASK(7, 4)
-+#define AAT2870_LDO_CD_D_MASK    GENMASK(3, 0)
-+
-+/* Device IDs */
-+enum aat2870_regulator_id {
-+	AAT2870_ID_LDOA,
-+	AAT2870_ID_LDOB,
-+	AAT2870_ID_LDOC,
-+	AAT2870_ID_LDOD
- };
- 
- static int aat2870_ldo_set_voltage_sel(struct regulator_dev *rdev,
- 				       unsigned selector)
- {
--	struct aat2870_regulator *ri = rdev_get_drvdata(rdev);
--	struct aat2870_data *aat2870 = ri->aat2870;
-+	struct aat2870_data *aat2870 = rdev_get_drvdata(rdev);
-+	const struct regulator_desc *rdesc = rdev->desc;
- 
--	return aat2870->update(aat2870, ri->voltage_addr, ri->voltage_mask,
--			       selector << ri->voltage_shift);
-+	return aat2870->update(aat2870, rdesc->vsel_reg, rdesc->vsel_mask,
-+			       (selector << __ffs(rdesc->vsel_mask)) & rdesc->vsel_mask);
- }
- 
- static int aat2870_ldo_get_voltage_sel(struct regulator_dev *rdev)
- {
--	struct aat2870_regulator *ri = rdev_get_drvdata(rdev);
--	struct aat2870_data *aat2870 = ri->aat2870;
-+	struct aat2870_data *aat2870 = rdev_get_drvdata(rdev);
-+	const struct regulator_desc *rdesc = rdev->desc;
- 	u8 val;
- 	int ret;
- 
--	ret = aat2870->read(aat2870, ri->voltage_addr, &val);
-+	ret = aat2870->read(aat2870, rdesc->vsel_reg, &val);
- 	if (ret)
- 		return ret;
- 
--	return (val & ri->voltage_mask) >> ri->voltage_shift;
-+	return (val & rdesc->vsel_mask) >> __ffs(rdesc->vsel_mask);
- }
- 
- static int aat2870_ldo_enable(struct regulator_dev *rdev)
- {
--	struct aat2870_regulator *ri = rdev_get_drvdata(rdev);
--	struct aat2870_data *aat2870 = ri->aat2870;
-+	struct aat2870_data *aat2870 = rdev_get_drvdata(rdev);
-+	const struct regulator_desc *rdesc = rdev->desc;
- 
--	return aat2870->update(aat2870, ri->enable_addr, ri->enable_mask,
--			       ri->enable_mask);
-+	return aat2870->update(aat2870, rdesc->enable_reg, rdesc->enable_mask,
-+			       rdesc->enable_mask);
- }
- 
- static int aat2870_ldo_disable(struct regulator_dev *rdev)
- {
--	struct aat2870_regulator *ri = rdev_get_drvdata(rdev);
--	struct aat2870_data *aat2870 = ri->aat2870;
-+	struct aat2870_data *aat2870 = rdev_get_drvdata(rdev);
-+	const struct regulator_desc *rdesc = rdev->desc;
- 
--	return aat2870->update(aat2870, ri->enable_addr, ri->enable_mask, 0);
-+	return aat2870->update(aat2870, rdesc->enable_reg, rdesc->enable_mask, 0);
- }
- 
- static int aat2870_ldo_is_enabled(struct regulator_dev *rdev)
- {
--	struct aat2870_regulator *ri = rdev_get_drvdata(rdev);
--	struct aat2870_data *aat2870 = ri->aat2870;
-+	struct aat2870_data *aat2870 = rdev_get_drvdata(rdev);
-+	const struct regulator_desc *rdesc = rdev->desc;
- 	u8 val;
- 	int ret;
- 
--	ret = aat2870->read(aat2870, ri->enable_addr, &val);
-+	ret = aat2870->read(aat2870, rdesc->enable_reg, &val);
- 	if (ret)
- 		return ret;
- 
--	return val & ri->enable_mask ? 1 : 0;
-+	return (val & rdesc->enable_mask) >> __ffs(rdesc->enable_mask);
- }
- 
- static const struct regulator_ops aat2870_ldo_ops = {
-@@ -101,84 +102,60 @@ static const unsigned int aat2870_ldo_voltages[] = {
- 	3000000, 3100000, 3200000, 3300000,
- };
- 
--#define AAT2870_LDO(ids)				\
--	{						\
--		.desc = {				\
--			.name = #ids,			\
--			.id = AAT2870_ID_##ids,		\
--			.n_voltages = ARRAY_SIZE(aat2870_ldo_voltages),	\
--			.volt_table = aat2870_ldo_voltages, \
--			.ops = &aat2870_ldo_ops,	\
--			.type = REGULATOR_VOLTAGE,	\
--			.owner = THIS_MODULE,		\
--		},					\
--	}
-+#define AAT2870_LDO(ids, match, vsel, vmask) {		\
-+	.name = #ids,					\
-+	.of_match = (match),				\
-+	.id = AAT2870_ID_##ids,				\
-+	.n_voltages = ARRAY_SIZE(aat2870_ldo_voltages),	\
-+	.volt_table = aat2870_ldo_voltages,		\
-+	.ops = &aat2870_ldo_ops,			\
-+	.type = REGULATOR_VOLTAGE,			\
-+	.owner = THIS_MODULE,				\
-+	.vsel_reg = (vsel),				\
-+	.vsel_mask = (vmask),				\
-+	.enable_reg = AAT2870_LDO_EN,			\
-+	.enable_mask = BIT(AAT2870_ID_##ids),		\
-+}
- 
--static struct aat2870_regulator aat2870_regulators[] = {
--	AAT2870_LDO(LDOA),
--	AAT2870_LDO(LDOB),
--	AAT2870_LDO(LDOC),
--	AAT2870_LDO(LDOD),
-+static const struct regulator_desc aat2870_regulators[] = {
-+	AAT2870_LDO(LDOA, "ldo-a", AAT2870_LDO_AB, AAT2870_LDO_AB_A_MASK),
-+	AAT2870_LDO(LDOB, "ldo-b", AAT2870_LDO_AB, AAT2870_LDO_AB_B_MASK),
-+	AAT2870_LDO(LDOC, "ldo-c", AAT2870_LDO_CD, AAT2870_LDO_CD_C_MASK),
-+	AAT2870_LDO(LDOD, "ldo-d", AAT2870_LDO_CD, AAT2870_LDO_CD_D_MASK),
- };
- 
--static struct aat2870_regulator *aat2870_get_regulator(int id)
--{
--	struct aat2870_regulator *ri = NULL;
--	int i;
--
--	for (i = 0; i < ARRAY_SIZE(aat2870_regulators); i++) {
--		ri = &aat2870_regulators[i];
--		if (ri->desc.id == id)
--			break;
--	}
--
--	if (i == ARRAY_SIZE(aat2870_regulators))
--		return NULL;
--
--	ri->enable_addr = AAT2870_LDO_EN;
--	ri->enable_shift = id - AAT2870_ID_LDOA;
--	ri->enable_mask = 0x1 << ri->enable_shift;
--
--	ri->voltage_addr = (id - AAT2870_ID_LDOA) / 2 ?
--			   AAT2870_LDO_CD : AAT2870_LDO_AB;
--	ri->voltage_shift = (id - AAT2870_ID_LDOA) % 2 ? 0 : 4;
--	ri->voltage_mask = 0xF << ri->voltage_shift;
--
--	return ri;
--}
--
- static int aat2870_regulator_probe(struct platform_device *pdev)
- {
--	struct aat2870_regulator *ri;
-+	struct device *dev = &pdev->dev;
- 	struct regulator_config config = { };
- 	struct regulator_dev *rdev;
- 
--	ri = aat2870_get_regulator(pdev->id);
--	if (!ri) {
--		dev_err(&pdev->dev, "Invalid device ID, %d\n", pdev->id);
--		return -EINVAL;
--	}
--	ri->aat2870 = dev_get_drvdata(pdev->dev.parent);
--
--	config.dev = &pdev->dev;
--	config.driver_data = ri;
--	config.init_data = dev_get_platdata(&pdev->dev);
-+	config.dev = dev;
-+	config.driver_data = dev_get_drvdata(dev->parent);
- 
--	rdev = devm_regulator_register(&pdev->dev, &ri->desc, &config);
--	if (IS_ERR(rdev)) {
--		dev_err(&pdev->dev, "Failed to register regulator %s\n",
--			ri->desc.name);
--		return PTR_ERR(rdev);
-+	for (int i = 0; i < ARRAY_SIZE(aat2870_regulators); i++) {
-+		rdev = devm_regulator_register(dev, &aat2870_regulators[i], &config);
-+		if (IS_ERR(rdev)) {
-+			return dev_err_probe(dev, PTR_ERR(rdev),
-+					     "Failed to register regulator %s\n",
-+					     aat2870_regulators[i].name);
-+		}
- 	}
--	platform_set_drvdata(pdev, rdev);
- 
- 	return 0;
- }
- 
-+static const struct of_device_id aat2870_regulator_match_table[] = {
-+	{ .compatible = "skyworks,aat2870-regulator" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, aat2870_regulator_match_table);
-+
- static struct platform_driver aat2870_regulator_driver = {
- 	.driver = {
- 		.name	= "aat2870-regulator",
- 		.probe_type = PROBE_PREFER_ASYNCHRONOUS,
-+		.of_match_table = aat2870_regulator_match_table,
- 	},
- 	.probe	= aat2870_regulator_probe,
- };
-diff --git a/drivers/video/backlight/aat2870_bl.c b/drivers/video/backlight/aat2870_bl.c
-index e85f2b4d81068..8e889e35621bb 100644
---- a/drivers/video/backlight/aat2870_bl.c
-+++ b/drivers/video/backlight/aat2870_bl.c
-@@ -15,11 +15,19 @@
- #include <linux/backlight.h>
- #include <linux/mfd/aat2870.h>
- 
-+/* Backlight has 8 channels, each bit represents one channel */
-+#define AAT2870_BL_CH_ALL	0xff
-+
-+/* Backlight current magnitude (uA), 450uA current is eq to 0 */
-+#define AAT2870_CURRENT_MIN	450
-+#define AAT2870_CURRENT_MAX	27900
-+#define AAT2870_CURRENT_STEP	900
-+
- struct aat2870_bl_driver_data {
- 	struct platform_device *pdev;
- 	struct backlight_device *bd;
- 
--	int channels;
-+	u8 channels;
- 	int brightness; /* current brightness */
- };
- 
-@@ -29,7 +37,7 @@ static inline int aat2870_bl_enable(struct aat2870_bl_driver_data *aat2870_bl)
- 			= dev_get_drvdata(aat2870_bl->pdev->dev.parent);
- 
- 	return aat2870->write(aat2870, AAT2870_BL_CH_EN,
--			      (u8)aat2870_bl->channels);
-+			      aat2870_bl->channels);
- }
- 
- static inline int aat2870_bl_disable(struct aat2870_bl_driver_data *aat2870_bl)
-@@ -84,24 +92,12 @@ static const struct backlight_ops aat2870_bl_ops = {
- 
- static int aat2870_bl_probe(struct platform_device *pdev)
- {
--	struct aat2870_bl_platform_data *pdata = dev_get_platdata(&pdev->dev);
- 	struct aat2870_bl_driver_data *aat2870_bl;
- 	struct backlight_device *bd;
- 	struct backlight_properties props;
-+	u32 max_current;
- 	int ret = 0;
- 
--	if (!pdata) {
--		dev_err(&pdev->dev, "No platform data\n");
--		ret = -ENXIO;
--		goto out;
--	}
--
--	if (pdev->id != AAT2870_ID_BL) {
--		dev_err(&pdev->dev, "Invalid device ID, %d\n", pdev->id);
--		ret = -EINVAL;
--		goto out;
--	}
--
- 	aat2870_bl = devm_kzalloc(&pdev->dev,
- 				  sizeof(struct aat2870_bl_driver_data),
- 				  GFP_KERNEL);
-@@ -128,19 +124,19 @@ static int aat2870_bl_probe(struct platform_device *pdev)
- 
- 	aat2870_bl->bd = bd;
- 
--	if (pdata->channels > 0)
--		aat2870_bl->channels = pdata->channels;
--	else
--		aat2870_bl->channels = AAT2870_BL_CH_ALL;
-+	aat2870_bl->channels = AAT2870_BL_CH_ALL;
-+	device_property_read_u8(&pdev->dev, "skyworks,channels", &aat2870_bl->channels);
-+
-+	device_property_read_u32(&pdev->dev, "led-max-microamp", &max_current);
-+	max_current = clamp(max_current, AAT2870_CURRENT_MIN, AAT2870_CURRENT_MAX);
-+	max_current /= AAT2870_CURRENT_STEP;
- 
- 	/*
- 	 * The maximum number of brightness steps is determined by the max current.
--	 * The aat2870_current enum maps directly to the allowed brightness steps.
-+	 * The max_current value calculated above maps to the allowed brightness
-+	 * steps with +1 offset since max_current 0 is still 450uA.
- 	 */
--	if (pdata->max_current > 0)
--		bd->props.max_brightness = pdata->max_current;
--	else
--		bd->props.max_brightness = AAT2870_CURRENT_27_9;
-+	bd->props.max_brightness = max_current + 1;
- 
- 	aat2870_bl->brightness = 0;
- 	bd->props.power = BACKLIGHT_POWER_ON;
-@@ -168,9 +164,16 @@ static void aat2870_bl_remove(struct platform_device *pdev)
- 	backlight_update_status(bd);
- }
- 
-+static const struct of_device_id aat2870_bl_match_table[] = {
-+	{ .compatible = "skyworks,aat2870-backlight" },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(of, aat2870_bl_match_table);
-+
- static struct platform_driver aat2870_bl_driver = {
- 	.driver = {
- 		.name	= "aat2870-backlight",
-+		.of_match_table = aat2870_bl_match_table,
- 	},
- 	.probe		= aat2870_bl_probe,
- 	.remove		= aat2870_bl_remove,
-diff --git a/include/linux/mfd/aat2870.h b/include/linux/mfd/aat2870.h
-index c7a3c53eba681..a7b482b790b4e 100644
---- a/include/linux/mfd/aat2870.h
-+++ b/include/linux/mfd/aat2870.h
-@@ -54,80 +54,13 @@
- #define AAT2870_LDO_EN		0x26
- #define AAT2870_REG_NUM		0x27
- 
--/* Device IDs */
--enum aat2870_id {
--	AAT2870_ID_BL,
--	AAT2870_ID_LDOA,
--	AAT2870_ID_LDOB,
--	AAT2870_ID_LDOC,
--	AAT2870_ID_LDOD
--};
--
--/* Backlight channels */
--#define AAT2870_BL_CH1		0x01
--#define AAT2870_BL_CH2		0x02
--#define AAT2870_BL_CH3		0x04
--#define AAT2870_BL_CH4		0x08
--#define AAT2870_BL_CH5		0x10
--#define AAT2870_BL_CH6		0x20
--#define AAT2870_BL_CH7		0x40
--#define AAT2870_BL_CH8		0x80
--#define AAT2870_BL_CH_ALL	0xFF
--
--/* Backlight current magnitude (mA) */
--enum aat2870_current {
--	AAT2870_CURRENT_0_45 = 1,
--	AAT2870_CURRENT_0_90,
--	AAT2870_CURRENT_1_80,
--	AAT2870_CURRENT_2_70,
--	AAT2870_CURRENT_3_60,
--	AAT2870_CURRENT_4_50,
--	AAT2870_CURRENT_5_40,
--	AAT2870_CURRENT_6_30,
--	AAT2870_CURRENT_7_20,
--	AAT2870_CURRENT_8_10,
--	AAT2870_CURRENT_9_00,
--	AAT2870_CURRENT_9_90,
--	AAT2870_CURRENT_10_8,
--	AAT2870_CURRENT_11_7,
--	AAT2870_CURRENT_12_6,
--	AAT2870_CURRENT_13_5,
--	AAT2870_CURRENT_14_4,
--	AAT2870_CURRENT_15_3,
--	AAT2870_CURRENT_16_2,
--	AAT2870_CURRENT_17_1,
--	AAT2870_CURRENT_18_0,
--	AAT2870_CURRENT_18_9,
--	AAT2870_CURRENT_19_8,
--	AAT2870_CURRENT_20_7,
--	AAT2870_CURRENT_21_6,
--	AAT2870_CURRENT_22_5,
--	AAT2870_CURRENT_23_4,
--	AAT2870_CURRENT_24_3,
--	AAT2870_CURRENT_25_2,
--	AAT2870_CURRENT_26_1,
--	AAT2870_CURRENT_27_0,
--	AAT2870_CURRENT_27_9
--};
--
--struct aat2870_register {
--	bool readable;
--	bool writeable;
--	u8 value;
--};
--
- struct aat2870_data {
- 	struct device *dev;
- 	struct i2c_client *client;
- 
- 	struct mutex io_lock;
- 	struct aat2870_register *reg_cache; /* register cache */
--	int en_pin; /* enable GPIO pin (if < 0, ignore this value) */
--	bool is_enable;
--
--	/* init and uninit for platform specified */
--	int (*init)(struct aat2870_data *aat2870);
--	void (*uninit)(struct aat2870_data *aat2870);
-+	struct gpio_desc *en_pin;
- 
- 	/* i2c io funcntions */
- 	int (*read)(struct aat2870_data *aat2870, u8 addr, u8 *val);
-@@ -135,30 +68,4 @@ struct aat2870_data {
- 	int (*update)(struct aat2870_data *aat2870, u8 addr, u8 mask, u8 val);
- };
- 
--struct aat2870_subdev_info {
--	int id;
--	const char *name;
--	void *platform_data;
--};
--
--struct aat2870_platform_data {
--	int en_pin; /* enable GPIO pin (if < 0, ignore this value) */
--
--	struct aat2870_subdev_info *subdevs;
--	int num_subdevs;
--
--	/* init and uninit for platform specified */
--	int (*init)(struct aat2870_data *aat2870);
--	void (*uninit)(struct aat2870_data *aat2870);
--};
--
--struct aat2870_bl_platform_data {
--	/* backlight channels, default is AAT2870_BL_CH_ALL */
--	int channels;
--	/* backlight current magnitude, default is AAT2870_CURRENT_27_9 */
--	int max_current;
--	/* maximum brightness, default is 255 */
--	int max_brightness;
--};
--
- #endif /* __LINUX_MFD_AAT2870_H */
+@@ -105,6 +105,7 @@ static const unsigned int aat2870_ldo_voltages[] = {
+ #define AAT2870_LDO(ids, match, vsel, vmask) {		\
+ 	.name = #ids,					\
+ 	.of_match = (match),				\
++	.supply_name = "in-ldo",			\
+ 	.id = AAT2870_ID_##ids,				\
+ 	.n_voltages = ARRAY_SIZE(aat2870_ldo_voltages),	\
+ 	.volt_table = aat2870_ldo_voltages,		\
 -- 
 2.53.0
 
