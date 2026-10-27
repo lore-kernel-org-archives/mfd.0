@@ -1,101 +1,41 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.41
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=114.242.206.163
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793071578;
-	b=KZPqcodtVbsN9SF9zOGOZYtf0hvB7cqbaLa/PMrAc44cV7KOjKke7Qnd1sXsF+WrGbk+
-	 6nxo6HR/Br0+jniAmoSoT6M2gQRAXdSNCr16B+RY8Bz9XY3qljlevbGBgzrGHRiIfWZLy
-	 ybhCVvyQ9njlUfzoaNmBkdZ53BNRud07gdzE0bIoiY2yZZTlqgf6WWBzP2Rdfotnr/2sV
-	 ZO3ikOX6aJWrEqrNYWQGk+ISqRyb/x+X4hIpbtuPpxdk8q63AvpUbpEr9m0eHIVl2QeYE
-	 TkJxdt1GuBMw6pypfzQQYGpQK/RvBovXNp8mPobDs0o2qg4WZS4958kxmbPKmWs392g==
+	t=1793071727;
+	b=FiEHvW466QKPReULE6zw9PGDDhYl3GA4ys0lcwFXt4o1t+fx3Ut/xhJIJnW0w6qIzjnd
+	 SZWiqrZnzO2le6mv7X+kzYZntfxu17eoIwzPsxZbn/PFxWPJ+62Trko+xBfu1QQmClJ1K
+	 Uysz9L21UwySHvEs7XabKUZz/FDSIV+VrlzPMMbC/Y96kYH00Zx1eICV58uS5hEVAGYtk
+	 21o+gPGzv1eQJTXPr6eogrm9bBENIoI1EX3UhxRMBhu7+riRxMEpVdufBzeLwl61G36I1
+	 hRgRB3vQamboiwUW8ynA1vO3+lWCPXjgS4FwZvpTRk1i3gIkq/klH9ZTEs0vIYctsFw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793071578;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=2QK2iE7noXFpUwQUNk0LfJ3uQv+Asv37AvrfE0uGxCo=;
-	b=RTgvr5J5ioaa7r/8uSj/ohcFovPkNjgTFNr0k9zBaPjE4JpIrdgDZy8hFweHX8oECC16
-	 LZ7cvG3iRwV3x5f51egCDIYC8d+cF6Jo7kKaiE2AwB22CBrs9oGes/Khi1x+qvXPg4QZx
-	 iIMtSwJzw7IfHMuz7VCVxwUCizTZpUQ5Wxv0mbm8MI0kyRgIoAs9NH2AB0Rp5tYkPSOMS
-	 ooDV8jX39Rr7TRkWrfCPq2Gx8heHQzD/1bhGJHdnvY0RhpBOtqw0Z/3xtQ2ys2gLYY72x
-	 zCtZLRHt8xOhaic8hvMY24llN4/q4gNP15zVcWphHhbPr18xwLez7TMuBWNB0M7PeWQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793071727;
+	h=DMARC-Filter:Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-CM-TRANSID:X-CM-SenderInfo:
+	 X-Coremail-Antispam;
+	bh=sb+RKkGHy3e/r4gLHkfytASA7lsn8w/DIKciO5unH5I=;
+	b=dq4QD1yJPU7KWpQ0ez14zOlODzLHyv2XbEpkEjpLYv43/db28aBEBlNtQKAGzjuXBid5
+	 84nyUavsDObRBeDtx5PyMUbxbgrktlwa6bJr2EieqY91A2kjB/+alOzIOtoGWCY/s7a7E
+	 /MH+BIAkx/DQ0eORVeJN5/Jm5P7uzwGtuNDTfao/h6dRw2j2L6fE3P2w+SBDN/1Sm+PMw
+	 uvDv2apUV1uPGR/OiC1hv0A+90xlXdc3I7UrzN9vTbwXvQjPotGrhQHycDyU5wMA/Nig9
+	 rmJLwikuKpbS+YZuvvuJI1B54F90bAHY4Lcpo5f+d6bG3xCSQ4cI9PrssKkBm3ExHMg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=MAT16F8O;
-	arc=none smtp.remote-ip=74.125.82.41
-Received: from mail-dl1-f41.google.com (mail-dl1-f41.google.com [74.125.82.41])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBEBA606A31D
-	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 03:26:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BBEBA606A31D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=MAT16F8O
-Received: by mail-dl1-f41.google.com with SMTP id a92af1059eb24-18cdcfc05ffso4526169c88.1
-        for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 20:26:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793071577; x=1793676377; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2QK2iE7noXFpUwQUNk0LfJ3uQv+Asv37AvrfE0uGxCo=;
-        b=MAT16F8OY9cpPhYNbioLS5c6zYYY3BtpymU5vCuntENARUTwb1cB01illv3uzblzWO
-         OFh50tuhH/zhl8pQh6RE8FBZk7ShpCwWtOECXv38SnfHz3R0M7+U4rUc2rL2CHMCIKvP
-         YV6xz+tnlSVC8aNcFIBaSaovOLRGjgKbxyBOP+raGk3dYfoEbM03h5kGqon33qBl7LDu
-         zDMn8SqFeMUV64qGXXd5DRXLsCQQFI2oyNL2Iy9WkzuZuDI+8y1sk77KT/5jVHkRaLoP
-         15FjzPkZudg7yvMS7L439tGWUL+h4dqRyaf57FVX7g7ileUFr1XdFQNWAVaHcw442Wx9
-         b6YQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793071577; x=1793676377;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=2QK2iE7noXFpUwQUNk0LfJ3uQv+Asv37AvrfE0uGxCo=;
-        b=iUyFkOpphTIqwTxPGLmVbRnqA+djh2Uu9YrwA07ztjI8BP0Hp47dTE5MNvOUEWOwhO
-         PhSt1w1OefqfFytO+rnrhVEvGHG7CU0/SYOnNx7uEJcUTFP8NN6dSoO4FlLveWji0nR7
-         BdQJ0XqUddrZ11G0jg5Vpmf/fQyozX2o1uYJf0/XtwevG55+fiOmMDfrE8t5k821hlY0
-         rQ22GpBys8Zj+amG/dD7uB6hwfL3cA5HlyITbkFFrE+SFnJj6wQbVNTWIex5fEuWqfNX
-         0LcK2eOoIIBYrqHS0Xonsi6oYJkDms0Nj/x9VeQ/4Rjkp6WI6NbJUbIkdj+mRd5qnRUc
-         W5lw==
-X-Forwarded-Encrypted: i=1; AKwUvBxxcouqZmrxcOueQd7Em2/hGX+C8GA2JhPsevagitvrOPkThnewyl/ieJakVcFyn6M0CSA=@lists.linux.dev
-X-Gm-Message-State: AFq9FYKOG0jeyT4RfBn4HPW1z2GilkeL0/bT+/ffyTVNAl0AVF6inHsM
-	BqsrIkMpWugeVP1WJEQqAOh5HuQ2A0nq7aMoPsJ1bMqh8iEk5D8tzEki
-X-Gm-Gg: AYBFou0herE1kY4PV8hVnRxmvPprpPF4+kyaSIsj2IalCdy3hXvF4aAfr1oXWOy9qzb
-	hn6yUyqx6OOWNENVMKCFdV/3St+bDVkp8psehKOXL8ladGTQ+9Ms8M+WPf6YVU+cCpGU91hhr+t
-	t6XrJduCXNk/mcNZOHiyC6arcP0M/MeV0B0gsD/9m/5jod6bAo+GBkVxUua6xA5mPmAKR0lxaCv
-	6dvV5tiK1JE947214FFQdpqRipYyk0Hnt6YTg4jd3AQ7hR3VJQY2GGoj6UXnZ413ZIBm1sbWWdH
-	wQfG7JniP6Mt9TLOmgotzW3uz6OMxGRAtEi/y76lffo62cIRKuBkGcA9avisI152KGERK7HIc99
-	EByoegLTSJCU7qGFxJXboHfvmRmcSio6d7z4CENB/f55qzaImt2E7mLCCCFtKAZDuNaPTBp1QIJ
-	WR648fgsP/upR5fEfgwPs4IX/bzByH8OFcJzXlFcX7jTdXlmbHy+hbEwKXuJCKFeJbA/iCzbjS7
-	RonRUmQ3NF2uyXk5LI6QROAvyTkK7JGzf5RfIEUXQupI6bfQzZ66PuLS5xtBxBmZWWKQkTcR89T
-	ISN3+lN1M/PJH4uraA==
-X-Received: by 2002:a05:7022:b886:b0:16a:b995:dc7c with SMTP id a92af1059eb24-19935be80e7mr11905109c88.21.1793071576759;
-        Mon, 26 Oct 2026 20:26:16 -0700 (PDT)
-Received: from lgs.. ([47.82.67.49])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-198a0d98660sm32317865c88.9.2026.10.26.20.26.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 26 Oct 2026 20:26:16 -0700 (PDT)
-From: Guangshuo Li <lgs201920130244@gmail.com>
-To: Aaro Koskinen <aaro.koskinen@iki.fi>,
-	Andreas Kemnade <andreas@kemnade.info>,
-	Kevin Hilman <khilman@baylibre.com>,
-	Roger Quadros <rogerq@kernel.org>,
-	Tony Lindgren <tony@atomide.com>,
-	Lee Jones <lee@kernel.org>,
-	Mark Brown <broonie@opensource.wolfsonmicro.com>,
-	Samuel Ortiz <sameo@linux.intel.com>,
-	Peter Ujfalusi <peter.ujfalusi@ti.com>,
-	linux-omap@vger.kernel.org,
-	mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Cc: Guangshuo Li <lgs201920130244@gmail.com>,
-	stable@vger.kernel.org
-Subject: [PATCH] mfd: twl6040: fix IRQ action memory leaks during teardown
-Date: Tue, 27 Oct 2026 11:26:08 +0800
-Message-ID: <20261027032609.119226-1-lgs201920130244@gmail.com>
-X-Mailer: git-send-email 2.43.0
+	dmarc=none header.from=loongson.cn;
+	spf=pass smtp.mailfrom=loongson.cn;
+	arc=none smtp.remote-ip=114.242.206.163
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E9263606A31B
+	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 03:28:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E9263606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
+Received: from loongson.cn (unknown [10.20.42.102])
+	by gateway (Coremail) with SMTP id _____8CxvtJkGuBqGLAZAA--.8959S3;
+	Tue, 27 Oct 2026 11:28:37 +0800 (CST)
+Received: from [127.0.0.1] (unknown [127.0.0.1])
+	by front1 (Coremail) with SMTP id qMiowJCxPs9hGuBqhYowAA--.35389S2;
+	Tue, 27 Oct 2026 11:28:35 +0800 (CST)
+Message-ID: <7c3d56c7-5764-4c4a-9fbc-1e70c95df0b0@loongson.cn>
+Date: Tue, 27 Oct 2026 11:25:48 +0800
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -105,82 +45,141 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 21/28] mfd: loongson-se: Validate engine ID, DMA buffer
+ size, and IRQ registration
+To: Lee Jones <lee@kernel.org>
+Cc: stable@vger.kernel.org, Huacai Chen <chenhuacai@kernel.org>,
+ Yinggang Gu <guyinggang@loongson.cn>, linux-crypto@vger.kernel.org,
+ mfd@lists.linux.dev, linux-kernel@vger.kernel.org
+References: <20261021121245.3111563-1-lee@kernel.org>
+ <20261021121245.3111563-21-lee@kernel.org>
+Content-Language: en-US
+From: Qunqin Zhao <zhaoqunqin@loongson.cn>
+In-Reply-To: <20261021121245.3111563-21-lee@kernel.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:qMiowJCxPs9hGuBqhYowAA--.35389S2
+X-CM-SenderInfo: 52kd01pxqtx0o6or00hjvr0hdfq/
+X-Coremail-Antispam: 1Uk129KBj93XoWxXFWDGF4rXw4kGFWfuFWfZwc_yoW5tFW5pF
+	45Aa4Ykr4Yyr4xuwsxJrZ8AF1YyFyrJry7Ca9rta1IkFyDXw18Wry5WFyUWFZ3ArWUJF1f
+	XFWkGFs5uF1rGFgCm3ZEXasCq-sJn29KB7ZKAUJUUUU5529EdanIXcx71UUUUU7KY7ZEXa
+	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+	0xBIdaVrnRJUUUvjb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_
+	Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx1l5I
+	8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1Y6r17McIj6I8E87Iv67AK
+	xVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc7CjxVAaw2AFwI0_JF
+	0_Jw1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AK
+	xVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrx
+	kI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v2
+	6r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJw
+	CI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxU2a9aDUUU
+	U
 
-twl6040_remove() currently removes the regmap IRQ chip before
-removing the MFD child devices. This destroys the IRQ mappings
-before the child drivers can release their interrupt handlers.
 
-The parent driver also registers READY and thermal interrupt
-handlers using devm_request_threaded_irq(). These handlers are
-normally released by device-managed cleanup after remove returns,
-when the corresponding IRQ descriptors have already been removed.
+在 2026/10/21 20:09, Lee Jones 写道:
+> Harden input and error checking in loongson_se_init_engine() and
+> loongson_se_probe():
+>
+> - Reject out-of-bounds engine IDs and engine 0 in
+>   loongson_se_init_engine() before indexing se->engines.
+> - Store dmam_size as u32 to match device_property_read_u32() and verify
+>   that it is large enough to hold the command buffers of all engines
+>   within engine 0's data region.
+> - Propagate negative error codes from platform_irq_count(),
+>   platform_get_irq(), and devm_request_irq() instead of ignoring IRQ
+>   registration failures or masking -EPROBE_DEFER.
+>
+> Fixes: e551fa3159e3 ("mfd: Add support for Loongson Security Engine chip controller")
+> Closes: https://sashiko.dev/#/bug/linux-89bf25f5-ecd9-40e3-bb4c-bd26d07c53a1
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Lee Jones <lee@kernel.org>
 
-Consequently, free_irq() cannot find the IRQ descriptors and the
-allocated struct irqaction objects are not freed. The associated
-IRQ threads also cannot be stopped through the normal cleanup path.
+Reviewed-by: Qunqin Zhao <zhaoqunqin@loongson.cn>
 
-The probe error paths have a similar issue, as they destroy the IRQ
-chip before the device-managed IRQ handlers are released.
+Thanks for fixing this!
 
-Remove the MFD child devices first, then explicitly free the
-parent's READY and thermal IRQ handlers using devm_free_irq()
-before removing the regmap IRQ chip.
 
-Also update the probe error paths to release successfully requested
-IRQs before destroying their mappings.
+Best Regards,
 
-This issue was found by our static analysis tool under development.
+Qunqin.
 
-Fixes: ab7edb149c75 ("mfd: twl6040: Convert to use regmap_irq")
-Cc: stable@vger.kernel.org
-Signed-off-by: Guangshuo Li <lgs201920130244@gmail.com>
----
- drivers/mfd/twl6040.c | 13 +++++++++----
- 1 file changed, 9 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/mfd/twl6040.c b/drivers/mfd/twl6040.c
-index 562a0f939f6e..7b05d21cd17d 100644
---- a/drivers/mfd/twl6040.c
-+++ b/drivers/mfd/twl6040.c
-@@ -745,7 +745,7 @@ static int twl6040_probe(struct i2c_client *client)
- 					"twl6040_irq_th", twl6040);
- 	if (ret) {
- 		dev_err(twl6040->dev, "Thermal IRQ request failed: %d\n", ret);
--		goto readyirq_err;
-+		goto thirq_err;
- 	}
- 
- 	/*
-@@ -791,10 +791,14 @@ static int twl6040_probe(struct i2c_client *client)
- 	ret = mfd_add_devices(&client->dev, -1, twl6040->cells, children,
- 			      NULL, 0, NULL);
- 	if (ret)
--		goto readyirq_err;
-+		goto mfd_err;
- 
- 	return 0;
- 
-+mfd_err:
-+	devm_free_irq(twl6040->dev, twl6040->irq_th, twl6040);
-+thirq_err:
-+	devm_free_irq(twl6040->dev, twl6040->irq_ready, twl6040);
- readyirq_err:
- 	regmap_del_irq_chip(twl6040->irq, twl6040->irq_data);
- gpio_err:
-@@ -809,9 +813,10 @@ static void twl6040_remove(struct i2c_client *client)
- 	if (twl6040->power_count)
- 		twl6040_power(twl6040, 0);
- 
--	regmap_del_irq_chip(twl6040->irq, twl6040->irq_data);
--
- 	mfd_remove_devices(&client->dev);
-+	devm_free_irq(twl6040->dev, twl6040->irq_th, twl6040);
-+	devm_free_irq(twl6040->dev, twl6040->irq_ready, twl6040);
-+	regmap_del_irq_chip(twl6040->irq, twl6040->irq_data);
- 
- 	regulator_bulk_disable(TWL6040_NUM_SUPPLIES, twl6040->supplies);
- }
--- 
-2.43.0
+> ---
+>  drivers/mfd/loongson-se.c | 23 ++++++++++++++++++-----
+>  1 file changed, 18 insertions(+), 5 deletions(-)
+>
+> diff --git a/drivers/mfd/loongson-se.c b/drivers/mfd/loongson-se.c
+> index bdbab4b91729..23af05d388aa 100644
+> --- a/drivers/mfd/loongson-se.c
+> +++ b/drivers/mfd/loongson-se.c
+> @@ -26,7 +26,7 @@ struct loongson_se {
+>  	struct completion cmd_completion;
+>  
+>  	void *dmam_base;
+> -	int dmam_size;
+> +	u32 dmam_size;
+>  
+>  	struct mutex engine_init_lock;
+>  	struct loongson_se_engine engines[SE_ENGINE_MAX];
+> @@ -101,8 +101,13 @@ EXPORT_SYMBOL_GPL(loongson_se_send_engine_cmd);
+>  struct loongson_se_engine *loongson_se_init_engine(struct device *dev, int id)
+>  {
+>  	struct loongson_se *se = dev_get_drvdata(dev);
+> -	struct loongson_se_engine *engine = &se->engines[id];
+>  	struct loongson_se_controller_cmd cmd = {};
+> +	struct loongson_se_engine *engine;
+> +
+> +	if (id <= 0 || id >= SE_ENGINE_MAX)
+> +		return NULL;
+> +
+> +	engine = &se->engines[id];
+>  
+>  	engine->se = se;
+>  	engine->id = id;
+> @@ -186,7 +191,7 @@ static void loongson_se_stop(void *data)
+>  	mutex_unlock(&se->engine_init_lock);
+>  }
+>  
+> -static int loongson_se_init(struct loongson_se *se, dma_addr_t addr, int size)
+> +static int loongson_se_init(struct loongson_se *se, dma_addr_t addr, u32 size)
+>  {
+>  	struct loongson_se_controller_cmd cmd = {};
+>  	int err;
+> @@ -249,6 +254,9 @@ static int loongson_se_probe(struct platform_device *pdev)
+>  	if (device_property_read_u32(dev, "dmam_size", &se->dmam_size))
+>  		return -ENODEV;
+>  
+> +	if ((se->dmam_size / SE_ENGINE_MAX) < (SE_ENGINE_MAX * 2 * SE_ENGINE_CMD_SIZE))
+> +		return -EINVAL;
+> +
+>  	se->dmam_base = dmam_alloc_coherent(dev, se->dmam_size, &paddr, GFP_KERNEL);
+>  	if (!se->dmam_base)
+>  		return -ENOMEM;
+> @@ -258,16 +266,21 @@ static int loongson_se_probe(struct platform_device *pdev)
+>  		return PTR_ERR(se->base);
+>  
+>  	nr_irq = platform_irq_count(pdev);
+> -	if (nr_irq <= 0)
+> +	if (!nr_irq)
+>  		return -ENODEV;
+> +	if (nr_irq < 0)
+> +		return nr_irq;
+>  
+>  	writel(SE_INT_ALL, se->base + SE_S2LINT_CL);
+>  
+>  	for (i = 0; i < nr_irq; i++) {
+>  		irq = platform_get_irq(pdev, i);
+> +		if (irq < 0)
+> +			return irq;
+> +
+>  		err = devm_request_irq(dev, irq, se_irq_handler, 0, "loongson-se", se);
+>  		if (err)
+> -			dev_err(dev, "failed to request IRQ: %d\n", irq);
+> +			return dev_err_probe(dev, err, "Failed to request IRQ: %d\n", irq);
+>  	}
+>  
+>  	writel(SE_INT_ALL, se->base + SE_S2LINT_EN);
 
