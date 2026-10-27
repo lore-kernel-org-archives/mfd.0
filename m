@@ -1,41 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=114.242.206.163
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793073589;
-	b=DiwtLb4cUz4QiQqnSGMQfuGu0MrCyQ4QUbjiXoUYBzK40zfik2C427dkdgD93FcS8oBV
-	 QgQaeGS0Wlhtft/U5L4/4iJjYAIVyOh5QZNVw+NT1PQoR2+V2TdoMs25BszBrnvWfWEBP
-	 B7UY+uC3Ng+8SDVB+sgQ/4LFKT3ET8JV9477+GfvXVC6a8G4UysLOrXM5TnkIMdSK8ngZ
-	 DCrjoRhGW93VH78M1CFdJ2yowwG9yq/rZwN7r0GEUARjeBD9qHs7v9PXUnxjW0OnONd0c
-	 L5M7Et5KdTLrL7zpc/kpPq5ZX4FD1M8Uh54GePq5RHtCJzqPB4jlcEwtI819P9hg1vg==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793073589;
-	h=DMARC-Filter:Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-CM-TRANSID:X-CM-SenderInfo:
-	 X-Coremail-Antispam;
-	bh=yNjVGzNCe/dUhA+Uvzx9OfKhmHV1qkPYX987us1hODA=;
-	b=FoJYGLaI23DHW3qsViyn02RaK2ab13O+ZY+g/r+mreoNZ1gxzC0NTmlkPRYtlU4/G5Vf
-	 yu9iihpYsZH8G2qGjtHJxhAY0KI9KyPtZh4hbT6Sycr8KRdAiQf7gTpUP4FVcCKOlGyG5
-	 I9x4HmjNKo0GzKHQ8bOpdUdyaVRQ/j4raz3qZD6bUFM2+JGXI+cOlgz9zY2vQClPBlc1L
-	 Ju9demg2niv5uDyUY2YR/RXjE+Xo8ZS8sZu1e15GF0G5feWp2OUHdId9zOevLfT+NvBUY
-	 UfrZKCzzRC4ybGz7gb/Xb/yLp8fsIKz4bV9XgrMS4uibhxAT/iadqWqW/b4CdOhlSTA==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=loongson.cn;
-	spf=pass smtp.mailfrom=loongson.cn;
-	arc=none smtp.remote-ip=114.242.206.163
-Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4CEB4606A31B
-	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 03:59:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4CEB4606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
-Received: from loongson.cn (unknown [10.20.42.102])
-	by gateway (Coremail) with SMTP id _____8DxpvCxIeBqULIZAA--.9351S3;
-	Tue, 27 Oct 2026 11:59:45 +0800 (CST)
-Received: from [127.0.0.1] (unknown [127.0.0.1])
-	by front1 (Coremail) with SMTP id qMiowJBxpMyrIeBqK40wAA--.9167S2;
-	Tue, 27 Oct 2026 11:59:42 +0800 (CST)
-Message-ID: <aa36b32b-5702-42e9-b27a-19dcf373b777@loongson.cn>
-Date: Tue, 27 Oct 2026 11:56:54 +0800
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.214.175
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1793086344;
+	b=tILl5QMm7A3fn30EZ0hGpOavGfdUoPQzBnzP+lPPbpusfEibnc5GYYhyNHEBbux/HGCG
+	 +8HYLhSOSE3DeKe4+k2aOtYyyWT1kogqUN+4/T4LvGNGP/K4FR1c0I98hgm9uGoZa25ha
+	 QttN2hx6lsm2wddR1yoG/GmtMyuYF4pxZu8mQMvFNkj2KTFcGUmp64npcUrpG9gBH5U7r
+	 NByAqRGC/kmo67WOqh9UdBHALRAQ39cASXY8pPm5VFC8/XQtazOeMPZYlINeHG884Fns3
+	 BnpfCMOtSNut3cemQAGhZUkzpTaQE/6A0LzxrV31jkFsdElvA4CVGadkBRk/5g88Tcg==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793086344;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=PlM8k58acyW5zFw4kquAsGUaXk88HzstxAu1xKTj+EE=;
+	b=VJLnoz2xVhxHby1glF8vvMIWGwn8+q3IZJmQfnGVZWJEUI3vdpjse2TVDZUwQZze9zJD
+	 6FmBy80ExOoiqe6wFx1/wdtrwt0DtTbD69bMIZ5iICw2GJt0Vc296HR1INK17tuLGZvjj
+	 Z8vs6jJDLf/V3BvpLOaemWJ9ckGSR5R7dIyz9XxhZDi+z77eFD8brVUNOgUtzRImuZCLh
+	 5NLZ7oFvCPA0RuUT2ETd6gG83vuw/DMW3RrwJ2umkW7maUA7cS0q0mpFRg6EakgCOboeC
+	 0S2Ai2D7CTQnuDOxCcsXztfYfc2JTgQnQm7LctS+J1viYgilwGnjEsHxFAYdYM3qb/Q==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=FUfbw+pq;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.214.175
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7E7E606A31E
+	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 07:32:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E7E7E606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=FUfbw+pq
+Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-2e9eb579c0eso21682975ad.3
+        for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 00:32:23 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1793086343; cv=none;
+        d=google.com; s=arc-20260327;
+        b=RXPgW/mfFzstDp9G/nR+lbEzxrDDj/8PbR9UbZwptsZ5MekS4gacpBgMXivsvGwFVC
+         Dbc9ivfukNNQ7YppXku+f4Ed0957XBZEba4nkHtslNCpMclC04Rqf8OzqQOBHqOmPXfh
+         sRy6E4GOBcmGFdJa4YJ2hGE7U6+7bd7cIOQZH7Vxl6t0yNwtz0n0XnytKVt9GGLfCEZb
+         1/8YeeThVsuLu/phJqXNBWTgD/4oxtNIkjkGItIiN5FGJ6qKdfD+Vmm7NAjBb1t4nEQ1
+         YiIVF7/kojJgVOIl5faUWhIMR8lm5BnZ5o/kYQZ09G0QB4BYJz/FqLDM4/RU9PYYjO3d
+         VbXQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=PlM8k58acyW5zFw4kquAsGUaXk88HzstxAu1xKTj+EE=;
+        fh=0hTryfRc9+obTyMkeSwLERCOHxjDT7HLqmvyTkVDXnc=;
+        b=kE31Hg5HSb3GLQ1Qd46z3c/ntYpfEsgGBopaAODgq4IUJktEK9fhpW46mGm3GaBwLz
+         YaKvHDBCz798MGVMs5hC+XEBRbUZ508Manq7eETVXPJ0dtGd5JIYnIgTHrh7l6s+rtds
+         69xOfSgjYFSwl7LU5HOv9LUuRntBJSvQBTWKbmeETm9ZvVFmgOhVgwO5qWcZgSjwQlcR
+         /VPMMXt4v3PjcKbcCPjWIkjZkzyj9Sgaa3I4kO3yNpinx5NRUt1VXpAICujq0Z9T3T+7
+         0h3hoBHpHc+hXNLzXL/51+Kl9uAgo1gqDaW1FKsyz5xUQMz6RKf7Qu0Q2oDJwHhUD0Jz
+         CPKA==;
+        darn=lists.linux.dev
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1793086343; x=1793691143; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=PlM8k58acyW5zFw4kquAsGUaXk88HzstxAu1xKTj+EE=;
+        b=FUfbw+pqdEHyt3qroK5GevXaruoEKXNjqJi/DK04BMkjsW8e846emnERqZsQ5nokak
+         pex0X8QhG5a0mw5dXlh1M56WJ+bNNV0s+v0Ce/4VtvuDXHPbRdsZCimpqSxkOvkEoaH6
+         zZ+BlJAmLPiyf+ASa0Z61+fNXB2mIkeneUl3EfNiUPBcxrQs31H8YhgPh61aaFsJNfFT
+         3JojqzkbrdIk1xc3drOKP+0uV/aL1sbgX8mnfDxLlSrKtwAIxqZIcgzxlf3JbT1ZdW1o
+         N9Mdqyjz+oowuS367DBulHrymjDc75am7Q0Qhpx6zgwv8icY4N8JrywfsrUeKeN7K3ON
+         m7nA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793086343; x=1793691143;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=PlM8k58acyW5zFw4kquAsGUaXk88HzstxAu1xKTj+EE=;
+        b=qsRcm/oqLL+vkVRO1xyNiB1ss1srFJAE4mZ7HdC6e2Ya9Q5mSoNz84HksHd2Jeo1pD
+         bKEwoyuSQ9vkEf6lpj+axPWBxkmzPnbca2f/tTrGFJPTlhwHtDEl5IkQsDIuAhvnakKr
+         4Rd33sbzqd8kh/Tbv9xk1RRdWyp7DJQDLvIs+f2q+nZMiLDLVwN4SwXN8Ha24iIEKAt9
+         s+gwFE3/yyrD+x76AoQvS0xSxEC5x/Dds9DkZ6i7T02aBLruR4ATjRwU8h/XpdTDm1Y4
+         sBZ53OYjOYO1OrcUXCqVcz/1w7PfPFKKli6pe1fWrxWIizYtG3KC7bb2mdct4aFH1BXc
+         J1WQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzHmxtVpf77DTUoAnnIuR+4C6iqomXGAtTKkO8pus64CFqe5FRSeP+PmgE/mQdhkvKvUvU=@lists.linux.dev
+X-Gm-Message-State: AFq9FYLRcB0ZiRQ76hufpbiI82VtbBLIH3FrlVF+3B11zBr7+6xP99Ib
+	4Cw2GdeojPUcTbg0culJMY865mxER54kHiECF0l7gpVivG1rJXLqbswe30q4DR6Ux1mIzOveHEA
+	g59rmfk4znizKYjUsGt76hVIoFWG/6VE=
+X-Gm-Gg: AYBFou1OJKeUnmeGqPnyzMRikMRWMWVT0qZ/tV6LhESwYpzmwaNWcPVM1BQDykfg0XZ
+	hYSk6b8Ej3pyceYS6oQ8/Ujj6ZS/hPFtX7zB8Qs1GG1Fw7Mm+9CXcbL6DJ49iKIwWX8a0j1Kvv6
+	4m2mT2FPtgq2WyrsiBVOGLZX9K5F/NxlxbTd4Nqf5qUedTVXlT651H8GRVDrGkF0BmHM/Zc2EfK
+	IHkOn1RU+pHrkYXWZ3sjd0Dqe5gb9++QfFzzZdU4mr4MOpSbmlWf8HsW/6+pLNoc6XH/CgY/w2B
+	E5ZV1sWx5JnWPeGk+imGLGfFa+xV5wEOgrJ88ltlYM7NugtAD8OPyeIVlKtkSG++poyASp5s661
+	MqSXxoCg0tHmXV1tNT73GP64VK2hre6FBBRrLG8EcODqBJGASJTRP
+X-Received: by 2002:a17:902:cf12:b0:2e9:66c4:1713 with SMTP id
+ d9443c01a7336-2ea9c917ba4mr66194015ad.58.1793086343005; Tue, 27 Oct 2026
+ 00:32:23 -0700 (PDT)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -45,196 +104,105 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 20/28] mfd: loongson-se: Stop controller and mask
- interrupts on teardown and shutdown
-To: Lee Jones <lee@kernel.org>
-Cc: Yinggang Gu <guyinggang@loongson.cn>, Huacai Chen
- <chenhuacai@kernel.org>, linux-crypto@vger.kernel.org, mfd@lists.linux.dev,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org
-References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-20-lee@kernel.org>
-Content-Language: en-US
-From: Qunqin Zhao <zhaoqunqin@loongson.cn>
-In-Reply-To: <20261021121245.3111563-20-lee@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:qMiowJBxpMyrIeBqK40wAA--.9167S2
-X-CM-SenderInfo: 52kd01pxqtx0o6or00hjvr0hdfq/
-X-Coremail-Antispam: 1Uk129KBj93XoW3XrW7uF4DWF48Gw4ftryxJFc_yoW7Wr48pF
-	4DAa4a9r4Yyr42kwsxXrZ09F1Y934ftry7CrZ7Ww4xCryDtw18Wry5KF18GFs3Cr4UXF48
-	XrW8GrZ5CF48uFgCm3ZEXasCq-sJn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7ZEXa
-	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
-	0xBIdaVrnRJUUUyEb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
-	IYs7xG6rWj6s0DM7CIcVAFz4kK6r106r15M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
-	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
-	0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_
-	Gr1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07AIYIkI8VC2zVCFFI0UMc
-	02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAF
-	wI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JMxAIw28IcxkI7VAKI4
-	8JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xv
-	wVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwIxGrwCI42IY6xIIjx
-	v20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20E
-	Y4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267
-	AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU8PCzJUUUUU==
+References: <20261026003918.155321-1-pmazzini@gmail.com> <20261026003918.155321-6-pmazzini@gmail.com>
+ <f68279bc-20f1-41a9-ba5c-92b974785cd8@roeck-us.net> <20261027002635.6b831c0b@kemnade.info>
+In-Reply-To: <20261027002635.6b831c0b@kemnade.info>
+From: Pablo Mazzini <pmazzini@gmail.com>
+Date: Tue, 27 Oct 2026 07:32:14 +0000
+X-Gm-Features: AclHuK8Ysr_hMD-q4J-bxGC_qjlgkxL35TncLn6mKe9lS8sJrvJ37KNEcPQTV5s
+Message-ID: <CAAxh=jsKe95EsKnTypXtfTxGhYCMO1E7U=hWb3y6DBpgoiOVUw@mail.gmail.com>
+Subject: Re: [PATCH 5/7] regulator: sy7636a: report the temperature
+To: Andreas Kemnade <andreas@kemnade.info>, Guenter Roeck <linux@roeck-us.net>
+Cc: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, Lee Jones <lee@kernel.org>, 
+	Alistair Francis <alistair@alistair23.me>, linux-hwmon@vger.kernel.org, mfd@lists.linux.dev, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+Hi Guenter, Andreas,
 
-在 2026/10/21 20:09, Lee Jones 写道:
-> loongson_se_probe() enables hardware interrupts before registering IRQ
-> handlers and starts the controller via loongson_se_init(), but provides
-> no teardown or shutdown handler to stop the controller and mask
-> interrupts.  If probe fails after loongson_se_init(), if the driver is
-> unbound, or during a system reboot or kexec transition, the controller
-> remains active with DMA configured to memory that is reclaimed.
+On Mon, Oct 26, 2026 at 07:35:24AM -0700, Guenter Roeck wrote:
+> This is going the wrong way. The correct solution would be to convert
+> the hwmon driver to an auxiliary driver.
+
+Understood. In v2 the hwmon driver stays in drivers/hwmon and becomes an
+auxiliary driver of the regulator, which binds the I2C device directly.
+
+On Tue, 27 Oct 2026 00:26:35 +0100, Andreas Kemnade wrote:
+> But it introduces another race condition.
+> The temperature might be read too early.
+> 1ms delay should suffice.
 >
-> Clear pending interrupts before requesting IRQs, unmask interrupts only
-> after IRQ handlers are registered, clean up on failure inside
-> loongson_se_init(), register a devres action after loongson_se_init()
-> succeeds to issue SE_CMD_STOP and mask interrupts on teardown, and wire
-> up the platform driver .shutdown callback.
+> The  SY7636A_OPERATION_MODE_CRL_ONOFF flag might be reset before
+> reading the temperature. If that register does not reset to zero
+> but just keeps the temperature last read, then we have no problem.
+
+Good points. For v2 I read power good (0x07) and the temperature (0x08)
+in one I2C transfer, and return -ENODATA unless power good is set, so no
+locking is needed.
+
+Thanks,
+Pablo
+
+On Mon, Oct 26, 2026 at 11:26=E2=80=AFPM Andreas Kemnade <andreas@kemnade.i=
+nfo> wrote:
 >
-> Fixes: e551fa3159e3 ("mfd: Add support for Loongson Security Engine chip controller")
-> Closes: https://sashiko.dev/#/bug/linux-15511672-7569-4eac-96a0-c08581925710
-> Closes: https://sashiko.dev/#/bug/linux-e6ed8d33-d641-4969-a5ea-959f21ae3696
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Lee Jones <lee@kernel.org>
-
-Reviewed-by: Qunqin Zhao <zhaoqunqin@loongson.cn>
-
-Thanks for fixing this!
-
-
-Best Regards,
-
-Qunqin.
-
-> ---
->  drivers/mfd/loongson-se.c       | 51 +++++++++++++++++++++++++++++----
->  include/linux/mfd/loongson-se.h |  1 +
->  2 files changed, 46 insertions(+), 6 deletions(-)
+> On Mon, 26 Oct 2026 07:35:24 -0700
+> Guenter Roeck <linux@roeck-us.net> wrote:
 >
-> diff --git a/drivers/mfd/loongson-se.c b/drivers/mfd/loongson-se.c
-> index 10af13c3b7cc..bdbab4b91729 100644
-> --- a/drivers/mfd/loongson-se.c
-> +++ b/drivers/mfd/loongson-se.c
-> @@ -169,6 +169,23 @@ static irqreturn_t se_irq_handler(int irq, void *dev_id)
->  	return IRQ_HANDLED;
->  }
->  
-> +static void loongson_se_stop(void *data)
-> +{
-> +	struct loongson_se *se = data;
-> +	struct loongson_se_controller_cmd cmd = {};
-> +
-> +	mutex_lock(&se->engine_init_lock);
-> +
-> +	cmd.command_id = SE_CMD_STOP;
-> +	loongson_se_send_controller_cmd(se, &cmd);
-> +
-> +	spin_lock_irq(&se->dev_lock);
-> +	writel(0, se->base + SE_S2LINT_EN);
-> +	spin_unlock_irq(&se->dev_lock);
-> +
-> +	mutex_unlock(&se->engine_init_lock);
-> +}
-> +
->  static int loongson_se_init(struct loongson_se *se, dma_addr_t addr, int size)
->  {
->  	struct loongson_se_controller_cmd cmd = {};
-> @@ -176,15 +193,23 @@ static int loongson_se_init(struct loongson_se *se, dma_addr_t addr, int size)
->  
->  	cmd.command_id = SE_CMD_START;
->  	err = loongson_se_send_controller_cmd(se, &cmd);
-> -	if (err)
-> +	if (err) {
-> +		writel(0, se->base + SE_S2LINT_EN);
->  		return err;
-> +	}
->  
->  	cmd.command_id = SE_CMD_SET_DMA;
->  	cmd.info[0] = lower_32_bits(addr);
->  	cmd.info[1] = upper_32_bits(addr);
->  	cmd.info[2] = size;
->  
-> -	return loongson_se_send_controller_cmd(se, &cmd);
-> +	err = loongson_se_send_controller_cmd(se, &cmd);
-> +	if (err) {
-> +		loongson_se_stop(se);
-> +		return err;
-> +	}
-> +
-> +	return 0;
->  }
->  
->  static const struct mfd_cell engines[] = {
-> @@ -192,6 +217,13 @@ static const struct mfd_cell engines[] = {
->  	{ .name = "tpm_loongson" },
->  };
->  
-> +static void loongson_se_shutdown(struct platform_device *pdev)
-> +{
-> +	struct loongson_se *se = platform_get_drvdata(pdev);
-> +
-> +	loongson_se_stop(se);
-> +}
-> +
->  static int loongson_se_probe(struct platform_device *pdev)
->  {
->  	struct device *dev = &pdev->dev;
-> @@ -225,12 +257,12 @@ static int loongson_se_probe(struct platform_device *pdev)
->  	if (IS_ERR(se->base))
->  		return PTR_ERR(se->base);
->  
-> -	writel(SE_INT_ALL, se->base + SE_S2LINT_EN);
-> -
->  	nr_irq = platform_irq_count(pdev);
->  	if (nr_irq <= 0)
->  		return -ENODEV;
->  
-> +	writel(SE_INT_ALL, se->base + SE_S2LINT_CL);
-> +
->  	for (i = 0; i < nr_irq; i++) {
->  		irq = platform_get_irq(pdev, i);
->  		err = devm_request_irq(dev, irq, se_irq_handler, 0, "loongson-se", se);
-> @@ -238,10 +270,16 @@ static int loongson_se_probe(struct platform_device *pdev)
->  			dev_err(dev, "failed to request IRQ: %d\n", irq);
->  	}
->  
-> +	writel(SE_INT_ALL, se->base + SE_S2LINT_EN);
-> +
->  	err = loongson_se_init(se, paddr, se->dmam_size);
->  	if (err)
->  		return err;
->  
-> +	err = devm_add_action_or_reset(dev, loongson_se_stop, se);
-> +	if (err)
-> +		return err;
-> +
->  	return devm_mfd_add_devices(dev, PLATFORM_DEVID_NONE, engines,
->  				    ARRAY_SIZE(engines), NULL, 0, NULL);
->  }
-> @@ -253,8 +291,9 @@ static const struct acpi_device_id loongson_se_acpi_match[] = {
->  MODULE_DEVICE_TABLE(acpi, loongson_se_acpi_match);
->  
->  static struct platform_driver loongson_se_driver = {
-> -	.probe   = loongson_se_probe,
-> -	.driver  = {
-> +	.probe    = loongson_se_probe,
-> +	.shutdown = loongson_se_shutdown,
-> +	.driver   = {
->  		.name  = "loongson-se",
->  		.acpi_match_table = loongson_se_acpi_match,
->  	},
-> diff --git a/include/linux/mfd/loongson-se.h b/include/linux/mfd/loongson-se.h
-> index 2d0a8b1e5c9e..dbe5992bd435 100644
-> --- a/include/linux/mfd/loongson-se.h
-> +++ b/include/linux/mfd/loongson-se.h
-> @@ -11,6 +11,7 @@
->  #define SE_SEND_CMD_REG_LEN		0x8
->  /* Controller command ID */
->  #define SE_CMD_START			0x0
-> +#define SE_CMD_STOP			0x1
->  #define SE_CMD_SET_DMA			0x3
->  #define SE_CMD_SET_ENGINE_CMDBUF	0x4
->  
-
+> > On Mon, Oct 26, 2026 at 12:39:16AM +0000, Pablo Mazzini wrote:
+> > > The separate hwmon cell enables VCOM at probe. Report the temperature
+> > > from here, as the TPS65185 and FP9931 drivers do, and under the chip
+> > > name as they do: read it while the rails are on and return -ENODATA
+> > > otherwise. Boards that need the rails on mark VCOM always-on. Drop th=
+e
+> > > hwmon driver.
+> >
+> > This is going the wrong way. The correct solution would be to convert
+> > the hwmon driver to an auxiliary driver. I am not going to approve
+> > this patch. I am not giving an official NACK (yet).
+> >
+>
+> First we need the problem defined, then the solution, and then we can
+> talk about what is the correct solution. The commit message does not
+> name a problem.
+>
+> So what we have:
+> one bit to turn on a bunch of things,
+> after one time to sample (< 1ms), fresh values are provided on the ADC
+> register periodically.
+> after some more time (max. 50ms), several voltage outputs are ready.
+> Powering on those things is expensive, so you would not use this as an
+> ordinary temperature sensor.
+>
+> The problems I see in the sensor driver this patch might want to solve:
+> - problems if the regulator driver is registered earlier.
+> - not having powered on the regulator all the time (that is described
+>   in the cover letter)
+>
+> The way the patch handles it does not require any structural change,
+> availabitily of the regmap is given. So it would be a separate cleanup
+> patch.
+>
+> But it introduces another race condition.
+> The temperature might be read too early.
+> 1ms delay should suffice.
+>
+> The  SY7636A_OPERATION_MODE_CRL_ONOFF flag might be reset before
+> reading the temperature. If that register does not reset to zero
+> but just keeps the temperature last read, then we have no problem.
+>
+> If not, there needs to be some synchronisation between the regulator
+> part and the sensor part, probably a mutex saved in a common structure.
+> And in that case, structural change of the drivers is needed which
+> I see the following possibilities:
+>
+> a) non-simple mfd driver
+> b) aux device as a child of the regulator driver.
+> c) regulator driver containing everything.
+>
+> No strong personal opinion here.
+>
+> Regards,
+> Andreas
+>
