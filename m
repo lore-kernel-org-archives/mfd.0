@@ -1,47 +1,91 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=44.202.169.37
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793114825;
-	b=g/uFI9vs4Z90BaxbEKA0q0D5VVCAGKnMbZKR71SU7Mgd0v2lQvEBEvf+4uapuVIGItJj
-	 nH/KMkGiR6dxjBm6ne2D7CWgKT3zR4d/fH6QgQzRd1RW1m7wt/8zGvwxgQEUEQ4YdKrif
-	 hRHduPij/OilltqDYvT3ANpafvrKUW54JKCv0ceXhTmcbZVy5ZHMmZW+ahkEGD4hjZqFg
-	 IAwUgy+t8An46Xj1Ce1FWnXBwnAdiQzJxEOcTpakfL+ThM471NQ2l5LWF+Cex32rjB2st
-	 OH1pUIOVA8fXJAQ7BYBOuir9M8YTXCkAhRdhbYnaIESo98zjmHujbOXKVynZSKPnDRQ==
+	t=1793114833;
+	b=tTc18a3Qv47+YDd7ZpQpw3WDDJn2ma5ny+4XFqIiBqhE90Vb5fkhpGSNG5p3uIf1AKWu
+	 6l7S1baNA7esyvQ7V/b2qdANXU6pXAjAAeKWj1t73q2GtCTOELhGf+frERAg/4dZWrNCV
+	 i0P4PBhTYFNwitqFR2kSRbKYtoYkxJH/YY+5llasYHt0f5+3YvIW/v2JHVb6LNvrCtS8i
+	 KOQHDX1i+2UIw4p7iwgEIM/luEXakOZv/2bT2NxN9G4+H4QCLujvW6MKiO/o5L1uLFjti
+	 qXYafKf2JZx3nzT0qsygzpIdZSYOtthQrJ1Df0SQ/+O1ue6IzMIP+GYi6K0KiRhJEjA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793114825;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=wi0StJVtvw/zinVc4sKSY3h0wecMwn/MhOcHTKAD02s=;
-	b=TiP3e6I9DhFeC0FU92VuPQvze10gHPJfe9IEqZuOuUFVDHB6/OAHWUOe9Ifc2wSt1qQ3
-	 IJh3fW2Lckl0coLVbWuvyHjNrQx+MGyZtDZ9zXY+zL5C931B07jStjDjNUam5iEMNHdT8
-	 0tBeb22zxqaLEPsscCaYdmxg5iVo6K8O0k6M9FJARCTTghSfvbtB4EtjD/F8aO7garo/v
-	 aS5NTlzf1G2dnIp+AsY4t+ubNEFuZFYbf2Rpj9dH2OyEvhwR9xYmatMWtz04MpQjIo576
-	 yHZZ5OPv1GmwJ7VWMTrOiaIV9/0+1H8XvsRDYTLjk/yuoVv8lrUPm23SiClgcaCvliA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793114833;
+	h=DMARC-Filter:Received:Received:X-Authority-Analysis:DKIM-Signature:
+	 Received:Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To:X-AntiAbuse:X-AntiAbuse:
+	 X-AntiAbuse:X-AntiAbuse:X-AntiAbuse:X-BWhitelist:X-Source-IP:
+	 X-Source-L:X-Exim-ID:X-Source:X-Source-Args:X-Source-Dir:
+	 X-Source-Sender:X-Source-Auth:X-Email-Count:X-Org:X-Source-Cap:
+	 X-Local-Domain:X-CMAE-Envelope;
+	bh=hcVetJ3j4Yw0L4vaeF4Sin3e+Kqt87+IIjhgJbDSvlc=;
+	b=A/k0qFUAsARlfUWENBSh0vKHnLr6vxDXZ1R+HLIajiwODWTo5d4UoGjyl2bURoxvdCY5
+	 tu04+esjZSb/K9Hmw8haKj29F+MbGwwhJKZx+6/xH1CfFZns2cfyP14RhmTb2LKJP66b6
+	 ZtG/BxhVmBxdzMHUaK0lYsN4EmohQlN562Fga3xv4sku/st/PKLSF7cQYfUuRavmvuaA3
+	 XS7RhZ4vGO4/gXD3LPmmePKj3qmDh4u8cFwjN4AEtFl6nfP7ZWSOP/vNHTaqz9Dk/EtPL
+	 B3QK/Bz7e/cOVBvMXle6QEfR+H9EuMCcJkzA5ziIdgJsasGVsx3MdmlMQ50iGOach3A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=F9thClYQ;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=none header.from=roeck-us.net;
+	spf=fail smtp.mailfrom=roeck-us.net;
+	dkim=pass header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=FmxUwmAs;
+	arc=none smtp.remote-ip=44.202.169.37
+Received: from omta038.useast.a.cloudfilter.net (omta038.useast.a.cloudfilter.net [44.202.169.37])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 073AE606A31A;
-	Tue, 27 Oct 2026 15:27:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59B90606A324
+	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 15:27:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 59B90606A324
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=roeck-us.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=F9thClYQ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 81D0A1F01825;
-	Tue, 27 Oct 2026 15:27:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793114824;
-	bh=wi0StJVtvw/zinVc4sKSY3h0wecMwn/MhOcHTKAD02s=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=F9thClYQkOQH0DL1SCEgrbzYuEQiLDXX04oG3zeeQiS9/a3WqSz0HLsb81+jWLl0Q
-	 VuOSq3y9r7DNp5PQcCzV/sa4iw3dxDA1RzLz47QtrwNJVo+seqFS7BblE9h+31apgG
-	 7wEhg5JOS4GPxodIMZ2Iyop6JPEOTqLjJ69YFpGOmg/TbKzGm6x5Q5BBi6AoAFvPI8
-	 F+b3zPpymGiuT51zSVXzkTa2V3ICWBTnyWKVK0IIzD0TxYOVUUJ4B1TCRxi+JvqdRk
-	 Wuq/rOZPJn0OxbY0peUoiYPnM6yp2kHKKTIQAtv5BRDTtSSjTByBrE2gz73slJy67V
-	 Ysy8utH+sZJ7A==
-Message-ID: <c04f2ba8-fc83-4118-a26a-76ea8cbee518@kernel.org>
-Date: Tue, 27 Oct 2026 16:27:00 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=FmxUwmAs
+Received: from eig-obgw-5003b.ext.cloudfilter.net ([10.0.29.155])
+	by cmsmtp with ESMTPS
+	id Li8mxZofJJFmFLj4yxKAhJ; Tue, 27 Oct 2026 15:27:12 +0000
+Received: from 162-215-252-36.unifiedlayer.com ([208.91.199.152])
+	by cmsmtp with ESMTPS
+	id Lj4xxWPMSf4wOLj4yx33JZ; Tue, 27 Oct 2026 15:27:12 +0000
+X-Authority-Analysis: v=2.4 cv=db2A3WXe c=1 sm=1 tr=0 ts=6ae0c2d0
+ a=QNED+QcLUkoL9qulTODnwA==:117 a=2cfIYNtKkjgZNaOwnGXpGw==:17
+ a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=M0FbrtG7MMAA:10 a=xkLUNt4dAAAA:8
+ a=zk4-lHRcAAAA:8 a=X3a0BiUdAAAA:8 a=_jlGtV7tAAAA:8 a=OpKgjLFNguK3uynLL7kA:9
+ a=CjuIK1q_8ugA:10 a=A2EApc-QTtVVSfvlwUcc:22 a=7cv85riZL9-k45RWW8P6:22
+ a=aWu3muFgq6otJbhCXpL5:22 a=nlm17XC03S6CtCLSeiRr:22 a=KPbNTLLc3YvdawN95zVk:22
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=roeck-us.net; s=default; h=In-Reply-To:Content-Type:MIME-Version:References
+	:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding
+	:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Unsubscribe-Post:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=hcVetJ3j4Yw0L4vaeF4Sin3e+Kqt87+IIjhgJbDSvlc=; b=FmxUwmAs7mF4dF4b3MQBl8bdVb
+	tiCn1dYzKJ0/5zMuy3Dkl5KtJ1CdWrSMhaagLq87Gx1uPeduOFJAZZReNPm7krFrp0E60KhUlLIDc
+	70bByHiXUwq6iK+SuZfP+qFgtQERObuDjcXRMpBCSrAB+a4BQNBCvwyL7kA0dqv78KyQ6qQWLmyRA
+	Hq42mLTB+P7mkwhAHTZEbxhOIJ8RQ+dr6VZLeMOToBzgTx990t+r2R8igmo3YeZYI720aXTIoEzEs
+	LnG2PVoLpX07aKgbwkJl8Q9l2uD8LdzNHoRsOylbfZGPe9Q4HIZozVgI9EWjY8N/Ouib2/Lj2x8ET
+	IhcPGRCw==;
+Received: from 108-223-40-66.lightspeed.sntcca.sbcglobal.net ([108.223.40.66]:41180 helo=server.roeck-us.net)
+	by bh-25.webhostbox.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.100.1)
+	(envelope-from <linux@roeck-us.net>)
+	id 1xLj4v-00000000Fjr-01VO;
+	Tue, 27 Oct 2026 20:57:09 +0530
+Date: Tue, 27 Oct 2026 08:27:07 -0700
+From: Guenter Roeck <linux@roeck-us.net>
+To: Primoz Fiser <primoz.fiser@norik.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Support Opensource <support.opensource@diasemi.com>,
+	Lee Jones <lee@kernel.org>,
+	Wim Van Sebroeck <wim@linux-watchdog.org>,
+	devicetree@vger.kernel.org, imx@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+	mfd@lists.linux.dev, linux-watchdog@vger.kernel.org,
+	upstream@lists.phytec.de, andrej.picej@norik.com
+Subject: Re: [PATCH v2 3/4] watchdog: da9062: Add support for dlg,wdt-sd
+ property
+Message-ID: <2365680e-3319-4ee1-90f4-33041e8f701b@roeck-us.net>
+References: <20260924065044.368341-1-primoz.fiser@norik.com>
+ <20260924065044.368341-4-primoz.fiser@norik.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -51,81 +95,55 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mfd: hi655x-pmic: fix IRQ action memory leak on removal
-To: Guangshuo Li <lgs201920130244@gmail.com>, Lee Jones <lee@kernel.org>,
- John Stultz <john.stultz@linaro.org>, mfd@lists.linux.dev,
- linux-kernel@vger.kernel.org
-Cc: stable@vger.kernel.org
-References: <20261027024609.117371-1-lgs201920130244@gmail.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20261027024609.117371-1-lgs201920130244@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260924065044.368341-4-primoz.fiser@norik.com>
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - bh-25.webhostbox.net
+X-AntiAbuse: Original Domain - lists.linux.dev
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - roeck-us.net
+X-BWhitelist: no
+X-Source-IP: 108.223.40.66
+X-Source-L: No
+X-Exim-ID: 1xLj4v-00000000Fjr-01VO
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: 108-223-40-66.lightspeed.sntcca.sbcglobal.net (server.roeck-us.net) [108.223.40.66]:41180
+X-Source-Auth: guenter@roeck-us.net
+X-Email-Count: 23
+X-Org: HG=direseller_whb_net_legacy;ORG=directi;
+X-Source-Cap: cm9lY2s7YWN0aXZzdG07YmgtMjUud2ViaG9zdGJveC5uZXQ=
+X-Local-Domain: yes
+X-CMAE-Envelope: MS4xfKaV5Gqm/kMHUSBfIf9/uNXDRW6R7EpRRqvKNZ1GE+anyJXmq+VfPqVyIfI5/ctcMJcm/p1VQQjzVVGKm4Td6h8mgueybZ5Lkh5F+wnr9HH+0rzbCAcb
+ U8j9frrkz5ss7ueOsQMe2dc5y3TZWKAMruwXX6r45sQ8TPsE16ZlVqzmPH/ZZvjzmJgMZH7UxNGq9a3sAVpLW7RbWwqhVtA52nM=
 
-On 27/10/2026 03:46, Guangshuo Li wrote:
-> hi655x_pmic_remove() currently removes the regmap IRQ chip before
-> removing the MFD child devices. regmap_del_irq_chip() disposes the
-> child IRQ mappings and removes their IRQ descriptors.
+On Thu, Sep 24, 2026 at 08:50:43AM +0200, Primoz Fiser wrote:
+> From: Andrej Picej <andrej.picej@norik.com>
 > 
-> The hi65xx-powerkey child registers interrupt handlers using
-> devm_request_any_context_irq(). During child device removal, the
-> device-managed cleanup calls free_irq(), but the corresponding IRQ
-> descriptors are no longer available. As a result, the allocated
-> struct irqaction objects referenced by irq_desc->action are not
-> freed, causing a memory leak.
+> Implement a method to change watchdog timeout configuration based on the
+> "dlg,wdt-sd" devicetree property. Setting the WATCHDOG_SD bit enables
+> SHUTDOWN mode, and clearing it enables POWERDOWN mode on watchdog
+> timeout.
 > 
-> Remove the MFD child devices first, allowing their device-managed
-> IRQ handlers to be released while the IRQ mappings are still valid.
-> Then remove the regmap IRQ chip and its IRQ domain.
+> If no devicetree property is specified, the WATCHDOG_SD bit stays in the
+> default configuration, not breaking behaviour of devices which might
+> depend on default fuse configuration.
 > 
-> This issue was found by our static analysis tool under development.
+> Signed-off-by: Andrej Picej <andrej.picej@norik.com>
+> Tested-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+> Reviewed-by: Adam Thomson <Adam.Thomson.Opensource@diasemi.com>
+> Acked-by: Guenter Roeck <linux@roeck-us.net>
+> Reviewed-by: Guenter Roeck <linux@roeck-us.net>
+> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
 
-More of postings by bot ignoring any feedback.
+Applied.
 
-Best regards,
-Krzysztof
+Note that this depends on the mfd patches making CONFIG_I writeable. Those
+patches have been accepted but are (as of this writing) not yet upstream.
+Assumption is that both this and the CONFIG_I patches will be applied
+with the 7.5 merge window.
+
+Thanks,
+Guenter
