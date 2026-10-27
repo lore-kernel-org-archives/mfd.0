@@ -1,41 +1,94 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=114.242.206.163
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.216.49
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793069446;
-	b=4r0pkFlHOm42RFsI2OEqUZ3vyTZY6TGCYNW5m7rH9ugeqKVywpKn3bOkGM1bcoyfLMSz
-	 g/9fX4cdZ1Jwcg2Et1HbF294X42hrn09TzYhdl0onXkcqNR9q9duDBs7dxBnSn2IESjx8
-	 Elqe+6Na0rgG+AmpzL/L8FUbtG3gfSCEMw+p24crPvNYMxd9UxTLxvK6KtAxZOrfsq8qp
-	 Mdqc7iqbAroXRVmeirrc6d475kRdbcreP18yWtz7R/ScIsH9/Pd5P/7atanXqDEBpZwoL
-	 tVCJHLMVEaSVm6yCTI3ovR1CzJ7Yhrsdu72K2JMakwLrAUy9Al1HzJ04ink+cg9hWsQ==
+	t=1793070490;
+	b=uEYnYPfV4UD1zy+gsfkCeV+LJPaQJheN6InlfXMbFr/kAbC1Hv7HmLI0RoEPlDsmk573
+	 8a92aneqtDVfk2pFl9CGfRnKka7Z6YW9ocXMiGunlrBtS29TrLx3HrCpqOfEOs5fX9nf/
+	 nQf88aMdgxyF+k2oC1syZ950re9RqI+c4TtORU4HupuTab1TSUccrZcCWkeRZVFJXd3aG
+	 U+6O6cS+rG0hsqU1G2P+L+ph8fKqxosXLZZtWunq4aAtaouZ/a0WlbLIHTDhx8zWJGRu4
+	 6S2fp2FJzJFOhDhc7O4vl/3tHAIhBAoRtMoqd8Jb6NHr60Y1cE/f0jsKDsCCK3/i/kg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793069446;
-	h=DMARC-Filter:Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-CM-TRANSID:X-CM-SenderInfo:
-	 X-Coremail-Antispam;
-	bh=yp5lwm6B1KcrGTQodF+hkNMZvE12OPY0D+ZFleJb6Vo=;
-	b=f/x9li/bSYKGrkDPv+jQIYZ0yzUQ2v0jKZt9xppYX1eJBaVD6HmnJYG0hTmp36aHPU9U
-	 CGoX4Sxd766/JWCpyp8ZkrjdpS9cMu2z4IkevW/5cERwPx2R+i0RgN4eJiViqovFiiQQb
-	 MNH+Q8mbAlm/Uva6yFEUEnBbJT7PPrKbMNrB1RQpNdooB3Kc8a7JSOn9eP45pSMVJPvm6
-	 v1+xnv9k+0YiqiZikvNqZtcsgIWSKw8vjqL/4PPAxu2/NqvEa1bKRxVkQJ37nfydcmjcc
-	 VUMurDlza0NuZINNR2Mm/kaqHySWCpDRBNgRlzV9GUgzYBcNPPkbkT9ODnM8Ft9Ulrg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793070490;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=igNgupZEn7aKjw+PjHHDoJ6CuNjmPliTKlApfHrxbJo=;
+	b=O93/IdAupuY/BuXRBvL6SOHCe9UZwg2u8iEwANIT7dWawzvY2/Xyo+CpsuvpLiwrJE3y
+	 voH0Q5LQsK6z6Jx3Bsm+L69o3cCcgwG9uYgkis5LISrOx4emTUZgiJchwYZnPFWOYlrE1
+	 DRaSm6xIurAJVZ0rohefTgPRqEIqA312p07GQVAClB/u8qy9LKav1PZvHHDjMA8d3FHnp
+	 M8W7nr7DCZoRqOcD5+eKyBi3Z+TcKosv53w5UgACJ2QGLh3+fo7PHHwqV0Gz/+IKWkyTa
+	 MK1jY1g21kyVkC10lKctV3/ugzP9Haz3nUi+Ts382KhsweM5jHqkhUEglCidjLkMQIw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=loongson.cn;
-	spf=pass smtp.mailfrom=loongson.cn;
-	arc=none smtp.remote-ip=114.242.206.163
-Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9E580606A31A
-	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 02:50:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9E580606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
-Received: from loongson.cn (unknown [10.20.42.102])
-	by gateway (Coremail) with SMTP id _____8AxX9ODEeBqJK4ZAA--.9095S3;
-	Tue, 27 Oct 2026 10:50:43 +0800 (CST)
-Received: from [127.0.0.1] (unknown [127.0.0.1])
-	by front1 (Coremail) with SMTP id qMiowJAxlMyAEeBqJogwAA--.8723S2;
-	Tue, 27 Oct 2026 10:50:42 +0800 (CST)
-Message-ID: <bf429747-eaea-47d5-a341-f74251321d09@loongson.cn>
-Date: Tue, 27 Oct 2026 10:47:55 +0800
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=gbtvgpMU;
+	arc=none smtp.remote-ip=209.85.216.49
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92B7F606A31B
+	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 03:08:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 92B7F606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=gbtvgpMU
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-3ae0852df46so387940a91.0
+        for <mfd@lists.linux.dev>; Mon, 26 Oct 2026 20:08:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1793070489; x=1793675289; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=igNgupZEn7aKjw+PjHHDoJ6CuNjmPliTKlApfHrxbJo=;
+        b=gbtvgpMU+PQhYYe29dp3RAPRsCujMatcTpDmnX/SU93rDDhJQrJx4zcPEPzWxfFWnJ
+         unzB8ccvyC7C44pP8GaGuBDTRuWhYVQ/fkNwlOg55EuhjJxLy7HUpt+HdNavyYurpRfi
+         LyHJ5W3F7RIEWuShoWWnOtYN/4H61ol+uLhzTTS4xhwam4LAULe80v1O/Rp1m+5kvewk
+         xdJDjHxJzk4eNML24dFfXEThhFqklfHIksYMR8fL/PdlgFAovbAP+AZEpizIkFjqoiYy
+         qDsoDxfZ4JQ7XMxLB6vG5R4t/DVNUX+/o8FezWcJZo8qS5QnEthNtoZLSP3nF4gH8Ti4
+         9xeA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793070489; x=1793675289;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=igNgupZEn7aKjw+PjHHDoJ6CuNjmPliTKlApfHrxbJo=;
+        b=XcsF22MaZ/ZynEnlarQJwI+x5N5Kj03s7PmG5YEr9o3KbPm7mu3V5XSCWi6uqynXeX
+         44j1vwSoZMOt27VduFe85b2vF4St08FI73lb5J6mxOZ21dr6DYTAzOF4oxY6v6a7Fmf4
+         tZV9jwiHcMGN12JCHd7+QNx3W3bkTkawy8RH9K7XiFebpj5wxk1JfxLNl7+eKttFyzmi
+         oGdCqJvuZax3MEd4i/ptPqyaHhA+ctr4e9eHA9mqwleI3+YgjG2LGt2KdT7EW97wVk6n
+         xDkd938kq+Hcg3ZL8/HwF2IVzpthxbly0rzWtR/oPeozIc444cEI/58nFod4S2cg55wx
+         v8rw==
+X-Forwarded-Encrypted: i=1; AKwUvBwOV8DYuMzEUyMk0jjrx7FQy3ddrrGRfAgrTSxKYpTyN35gLaI2e9wwKY/Twk5zGX2nu9o=@lists.linux.dev
+X-Gm-Message-State: AFq9FYKfwhkfkVzw7wzSumElt9PF+95mi5gJZ+hhzK1eiN3DM87iM/Qx
+	08+ZIswT2F8rpSw2pcAKJlT2BZ11JZTFUk3YskSo9WMRKLCXuFqr9HtqwkVWqSHwAUw=
+X-Gm-Gg: AYBFou39ZjXSRR27D84k4GtgrfwuliPAFNGYN1i2r3Z6qucNfYQG1yg4Qe2VI/+LkR4
+	ewidQ2lni1d0FP8+gFuib+AzLtAHIaLkSpAK+a2D/MBr8NQjlDV6AqCSo+slYuM3cQEgSRFaraK
+	abam37JcXv1A8svbE/z8vIowk3DJhBd337hp7goYnZj4ruyGdDgzC6xqyxQBnat+DkDYlY8Ps2E
+	opY+rAcozhNAtFvR0IwLwnswlDUE4Xy4OPj8m3ILXYeyQUz43pDoS/Woml9h5whlMaOqA0GgH4w
+	LpEn0hel9Y5ETHbiQg1p2r6R5NatO3A64LI3E+7RMVnBqEptPUCLfwxu2+K3Nfeb9c5wW4v2PDm
+	oRQtGE9H5ZyGMDQKHDFUCBDCp28BFXZYyq4eo41Z7J9/+5mqIi4ssIvdCG6WpQOq1KW+6krUVWP
+	me4jzYoE7fLU5IqYALOCvfSq198pKVqGWSlpZLJbJKapz6XD+mA93S78tusHKhJIPtKTUtxhKwB
+	xQh2ZEwzuLSbpQD7Cq2kPbHQL/0eaKPH5/Wv7YYOd1W4LJ97zmXdQRfHEj1oTGja5UGzMtKRPhO
+	5omeVD9ysJtUQN18x5Td2iDLkMM=
+X-Received: by 2002:a17:90b:3142:b0:3a0:e568:ed63 with SMTP id 98e67ed59e1d1-3ae40268bbemr736527a91.8.1793070488963;
+        Mon, 26 Oct 2026 20:08:08 -0700 (PDT)
+Received: from lgs.. ([101.76.249.61])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3adebafacd4sm5767362a91.2.2026.10.26.20.08.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 26 Oct 2026 20:08:08 -0700 (PDT)
+From: Guangshuo Li <lgs201920130244@gmail.com>
+To: Support Opensource <support.opensource@diasemi.com>,
+	Lee Jones <lee@kernel.org>,
+	Adam Thomson <Adam.Thomson.Opensource@diasemi.com>,
+	mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Cc: Guangshuo Li <lgs201920130244@gmail.com>,
+	stable@vger.kernel.org
+Subject: [PATCH] mfd: da9150: fix IRQ action memory leak on removal
+Date: Tue, 27 Oct 2026 11:08:02 +0800
+Message-ID: <20261027030803.118131-1-lgs201920130244@gmail.com>
+X-Mailer: git-send-email 2.43.0
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -45,108 +98,46 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 19/28] mfd: loongson-se: Prevent out-of-bounds engine
- access in se_irq_handler()
-To: Lee Jones <lee@kernel.org>
-Cc: stable@vger.kernel.org, Yinggang Gu <guyinggang@loongson.cn>,
- Huacai Chen <chenhuacai@kernel.org>, linux-crypto@vger.kernel.org,
- mfd@lists.linux.dev, linux-kernel@vger.kernel.org
-References: <20261021121245.3111563-1-lee@kernel.org>
- <20261021121245.3111563-19-lee@kernel.org>
-Content-Language: en-US
-From: Qunqin Zhao <zhaoqunqin@loongson.cn>
-In-Reply-To: <20261021121245.3111563-19-lee@kernel.org>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:qMiowJAxlMyAEeBqJogwAA--.8723S2
-X-CM-SenderInfo: 52kd01pxqtx0o6or00hjvr0hdfq/
-X-Coremail-Antispam: 1Uk129KBj93XoW7uw1DCrWDGF48Cr45AFy8tFc_yoW5Jr1DpF
-	WDCa4jyr4qkF47Cw1ayF98Kw13W3y7Jr9rCFZFgr4UZan7tw1xGr1jkFy3Grs8urWkJFWI
-	vF98Wrs5uFW8XabCm3ZEXasCq-sJn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7ZEXa
-	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
-	0xBIdaVrnRJUUUyKb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
-	IYs7xG6rWj6s0DM7CIcVAFz4kK6r106r15M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
-	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
-	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_
-	Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx1l5I
-	8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r126r1DMcIj6I8E87Iv67AK
-	xVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41l42xK82IYc2Ij64vIr4
-	1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK
-	67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI
-	8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAv
-	wI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14
-	v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxU7MmhUUUUU
 
+da9150_remove() currently removes the regmap IRQ chip before removing
+the MFD child devices. regmap_del_irq_chip() disposes the child IRQ
+mappings and removes their IRQ descriptors.
 
-在 2026/10/21 20:09, Lee Jones 写道:
-> loongson_se_probe() enables all 32 interrupt bits via SE_INT_ALL
-> (0xffffffff), and se_irq_handler() uses the set bit index from the
-> 32-bit status register directly to index se->engines, which only holds
-> SE_ENGINE_MAX (16) entries.  Any interrupt bit asserted at index 16 or
-> above triggers an out-of-bounds access on se->engines.
->
-> Restrict SE_INT_ALL to GENMASK(SE_ENGINE_MAX - 1, 0) and bounds-check
-> the bit index against SE_ENGINE_MAX before completing the engine in
-> se_irq_handler().
->
-> Fixes: e551fa3159e3 ("mfd: Add support for Loongson Security Engine chip controller")
-> Closes: https://sashiko.dev/#/bug/linux-bc962408-5c42-40af-8111-a8463a05ccdf
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Lee Jones <lee@kernel.org>
+The GPADC child registers an interrupt handler using
+devm_request_threaded_irq(). When the child device is subsequently
+removed, its device-managed cleanup calls free_irq(), which can no
+longer find the corresponding IRQ descriptor. As a result, the
+allocated struct irqaction is not freed, causing a memory leak.
+The associated IRQ thread also cannot be stopped normally.
 
-Reviewed-by: Qunqin Zhao <zhaoqunqin@loongson.cn>
+Remove the MFD child devices first so their interrupt handlers are
+released while the IRQ mappings are still valid. Then remove the
+regmap IRQ chip and its IRQ domain.
 
-Thanks for fixing this!
+This issue was found by our static analysis tool under development.
 
+Fixes: b8fce55c09d3 ("mfd: Add support for DA9150 combined charger & fuel-gauge device")
+Cc: stable@vger.kernel.org
+Signed-off-by: Guangshuo Li <lgs201920130244@gmail.com>
+---
+ drivers/mfd/da9150-core.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Best Regards,
-
-Qunqin.
-
-> ---
->  drivers/mfd/loongson-se.c       | 3 ++-
->  include/linux/mfd/loongson-se.h | 7 ++++---
->  2 files changed, 6 insertions(+), 4 deletions(-)
->
-> diff --git a/drivers/mfd/loongson-se.c b/drivers/mfd/loongson-se.c
-> index 187ebbed0422..10af13c3b7cc 100644
-> --- a/drivers/mfd/loongson-se.c
-> +++ b/drivers/mfd/loongson-se.c
-> @@ -158,7 +158,8 @@ static irqreturn_t se_irq_handler(int irq, void *dev_id)
->  	/* For engines */
->  	while (int_status) {
->  		id = __ffs(int_status);
-> -		complete(&se->engines[id].completion);
-> +		if (id < SE_ENGINE_MAX)
-> +			complete(&se->engines[id].completion);
->  		int_status &= ~BIT(id);
->  		writel(BIT(id), se->base + SE_S2LINT_CL);
->  	}
-> diff --git a/include/linux/mfd/loongson-se.h b/include/linux/mfd/loongson-se.h
-> index 07afa0c2524d..2d0a8b1e5c9e 100644
-> --- a/include/linux/mfd/loongson-se.h
-> +++ b/include/linux/mfd/loongson-se.h
-> @@ -4,6 +4,8 @@
->  #ifndef __MFD_LOONGSON_SE_H__
->  #define __MFD_LOONGSON_SE_H__
->  
-> +#include <linux/bits.h>
-> +
->  #define LOONGSON_ENGINE_CMD_TIMEOUT_US	10000
->  #define SE_SEND_CMD_REG			0x0
->  #define SE_SEND_CMD_REG_LEN		0x8
-> @@ -18,10 +20,9 @@
->  #define SE_L2SINT_STAT			0x98
->  #define SE_L2SINT_SET			0xa0
->  
-> -#define SE_INT_ALL			0xffffffff
-> -#define SE_INT_CONTROLLER		BIT(0)
-> -
->  #define SE_ENGINE_MAX			16
-> +#define SE_INT_ALL			GENMASK(SE_ENGINE_MAX - 1, 0)
-> +#define SE_INT_CONTROLLER		BIT(0)
->  #define SE_ENGINE_RNG			1
->  #define SE_CMD_RNG			0x100
->  
+diff --git a/drivers/mfd/da9150-core.c b/drivers/mfd/da9150-core.c
+index 5c59cc869fb3..1b6dbbed60e7 100644
+--- a/drivers/mfd/da9150-core.c
++++ b/drivers/mfd/da9150-core.c
+@@ -474,8 +474,8 @@ static void da9150_remove(struct i2c_client *client)
+ {
+ 	struct da9150 *da9150 = i2c_get_clientdata(client);
+ 
+-	regmap_del_irq_chip(da9150->irq, da9150->regmap_irq_data);
+ 	mfd_remove_devices(da9150->dev);
++	regmap_del_irq_chip(da9150->irq, da9150->regmap_irq_data);
+ 	i2c_unregister_device(da9150->core_qif);
+ }
+ 
+-- 
+2.43.0
 
