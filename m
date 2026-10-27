@@ -1,53 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793097401;
-	b=Q6EVlcUL2cqv0Bwe2mdsiB0QVqpRjAqrn07Wc1MzCAEQVFqhWrYVdy0zbMPTLl2yNh79
-	 1mLnrOrIE3VVmWKl5GWmcx92gLfuiy82DLofgXtRg4PvoDA54+h62SNZLUsbr/lUhm2Ke
-	 iai6LR7znTFi4BTvxCu7S6JPrHBqaOeMFU0k2x9Dyi+jF4jr/DKooKGiBLfC81nLb46Rd
-	 kXEWIercrLAXXOIGeQa00kvkkJsz0FCtPVcLziJpuKvebVXwV3THZUz9vQXx/BXZnd4KC
-	 UcWqQ4MOweaW3nhEpLpucX0foUyCTYZU82t/MxSIRq54i3rtmLoSUIm+AWVWK8r+eXw==
+	t=1793097410;
+	b=p2ZPoO4yEXtpkZm9GRgkKdBQpWar+YtSWV0HSFHZqGvOq2lGfmjwmMDNyI0P9Q0Dx81l
+	 WJKCEc+irrxlXU2o9NlqfKBYyWinohv2RmhpIaPhfWslztDUI+LM0wq45+TEp25vIKAIX
+	 JOoK46bMXQdYypsezYy3KZenWi/SCkNdZfct+crcFX0IqXFP5UIrc1i+er3FeK4vNXJyB
+	 ALvjacL3zSC85lTQgqN3hzg2bjdLoAMWLp0HPPSxmu509svnQ8YeO2paNXM0oMzyBT7su
+	 EH/pED0Zoac3v2nPxoSVPMLRnkCiSg+OsiYn3ROQslXGs5g0K5GllqgheYyXpW7oO1w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793097401;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793097410;
 	h=Received:DKIM-Signature:From:To:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=2ui3EKnv9a1jjzXC0mHa+737oalhDe7nkxscAeMHHtU=;
-	b=P6jhjToYimP5lXiX1hPmNezL6Y1DEN1IC9rz4w3mdV5FrBijQb2L4dM76ROpV3YK7QkF
-	 QDwVpd3IJnjtxPhTDzC529f0EXn0p+0k5+nHW6lrFOWIaMslDw7BgIkzv5tQuxZPezXva
-	 B9MnEBe1KdH0U+uc4aABPad2fPe0GgeohlknMnwIaKhu7tAEZQnXgjoUwXgqlTPmSeIdt
-	 AUnW8PftQ6mdohF1bA6pCzPV+ydGmC2R/lFxs86JAmVQDxex3r48uM/lNRmNgb3iL+ZLf
-	 vmYgKH+C+xTBKgaThUJkq+uTdEgFcjirczNMQyLwTf8mbbC7e/YcwVoYSD0f2o8YWLg==
+	bh=n3Kp2y440zQOXcQZ6MfG/c3d1gw0REC1gxRRl/jFmDs=;
+	b=h9+JtzHEDdGiGl1PgQH8PtojOeJWXY/gH8PSuXbvaXF+A4/e8tQACrxaYAxjKYleaneN
+	 QmNy64C4RJcvOk0k3S6l9Wb/TJk0TryoSHFFtUzxztkN5gcQ7PeZ/OIoSb8VOJpcj4CIl
+	 snP89ap/Lax365dKt83j5494E41plIMktNGO94ilhmiVMmvar5pbhntjO7DAMpXzAp3OO
+	 CbAbMKpzmI1OjLab4gZy95gglt33OokwuQyWy9bcMVSp2BGgVD9PvqQl5KsgLvgpzHirF
+	 9sQ+uUdV0LuUPiMPU2PDzOvyd7SiYzQ3hiPVJvbsOoaWj96fc551DtBolEZCjlJ3Tjw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Nt6J0XE8;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=aUdMk3go;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 58AB4606A31B;
-	Tue, 27 Oct 2026 10:36:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A4A3606A31A;
+	Tue, 27 Oct 2026 10:36:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Nt6J0XE8
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 455A91F01828;
-	Tue, 27 Oct 2026 10:36:40 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=aUdMk3go
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F0CA01F01829;
+	Tue, 27 Oct 2026 10:36:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793097401;
-	bh=2ui3EKnv9a1jjzXC0mHa+737oalhDe7nkxscAeMHHtU=;
+	s=k20260515; t=1793097410;
+	bh=n3Kp2y440zQOXcQZ6MfG/c3d1gw0REC1gxRRl/jFmDs=;
 	h=From:To:Subject:Date:In-Reply-To:References;
-	b=Nt6J0XE84L5OF0Wve8X2If+68JaBdZHCj99dRJ6KGR+NHqG0RVGOyDUYAe82e33Ko
-	 5xTcqfw3u/XkADXLOtCgfJujdmwxBZf98a8ZHZbHlNWwWOAI6u3584JjNgbvYcAsxa
-	 n1VDQIYvQy39gFEdpBVL9rzCAOiWQNQAodZxuIFmkGsYLmGrcPF56xvQaF+lnYH4g9
-	 VirXX6lfvfgEuALsKoftS86HADKpG4tapwqC6ay2eXDws+bks6Eyf4xZAmR2m5Ze46
-	 pL1nuQjJ2xxLXJnzVwba+G+o0jIDguEEBL8J/Jj3/s94pceF3xAJU74RCpBcesC1UB
-	 65F9f0rOV60MA==
+	b=aUdMk3gowDv3YaTRbsQcWTSyrJnudqQTcSpLbvGv8HxMHmpq1BJ5dwXY7v5eM7Jzz
+	 6Lq84aa1CjUogI//esFI21z7caUvwmCrvmvenXBi42+KLKZidAKjxGOzkEl7O9QeEi
+	 hwVqDN7LeEsSYAJ+dOMWDyTp/LbifK4LxiIXyG/x5vyy4IV6uaWI6mM3/xtl/eR8s0
+	 0yOFqXdO3EQ2UgCWJSg4Bh/zLla57O6MYXu0eMM0hc+HSElt7jRBrWU2NpMWd51h3Q
+	 lPyvZdNa4BoI4xWzEDfxOGw472nGBzXU+0iiJc3lpAG4NbiMAoDssUSIjSdwNkBAvV
+	 q6XnYN0ccR4Fw==
 From: Lee Jones <lee@kernel.org>
 To: lee@kernel.org,
-	Matti Vaittinen <mazziesaccount@gmail.com>,
-	cover.1712920132.git.mazziesaccount@gmail.com,
+	Rachna Patil <rachna@ti.com>,
+	Pantelis Antoniou <panto@antoniou-consulting.com>,
+	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+	Felipe Balbi <balbi@ti.com>,
 	mfd@lists.linux.dev,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 05/27] mfd: bd96801: Allocate watchdog IRQ resource on the heap
-Date: Tue, 27 Oct 2026 09:30:34 +0000
-Message-ID: <20261027093306.2812695-6-lee@kernel.org>
+Subject: [PATCH v2 06/27] mfd: ti_am335x_tscadc: Retrieve parent driver data via dev_get_drvdata()
+Date: Tue, 27 Oct 2026 09:30:35 +0000
+Message-ID: <20261027093306.2812695-7-lee@kernel.org>
 X-Mailer: git-send-email 2.56.0.307.g5fe7bd680c-goog
 In-Reply-To: <20261027093306.2812695-1-lee@kernel.org>
 References: <20261027093306.2812695-1-lee@kernel.org>
@@ -62,60 +64,73 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-bd96801_i2c_probe() declares struct resource wdg_irq on the stack and
-assigns its address to ddata->cells[WDG_CELL].resources.  Although
-mfd_add_device() deep-copies the resource table via
-platform_device_add_resources() before bd96801_i2c_probe() returns, the
-shared cell template and the shallow MFD cell copy attached to the child
-platform device retain a stale pointer to the expired stack frame.
+ti_tscadc_probe() stores the address of the local pointer variable
+tscadc (&tscadc) into cell->platform_data so child devices can retrieve
+the parent struct ti_tscadc_dev pointer via ti_tscadc_dev_get().
+Although mfd_add_device() deep-copies platform_data before
+ti_tscadc_probe() returns, both tscadc->cells[].platform_data and the
+shallow MFD cell copy attached to the child platform devices retain a
+stale pointer to the expired stack frame.
 
-Allocate wdg_irq on the heap via devm_kzalloc() alongside regulator_res
-so the stored pointer remains valid for the lifetime of the device.
+Set the parent platform driver data before registering the MFD child
+devices, update ti_tscadc_dev_get() to retrieve the parent driver data
+via dev_get_drvdata(p->dev.parent), and drop the redundant cell
+platform_data assignment.
 
-Fixes: 894d915d23b9 ("mfd: bd96801: Add ERRB IRQ")
-Reviewed-by: Matti Vaittinen <mazziesaccount@gmail.com>
+Fixes: 24d5c82f8227 ("mfd: ti_tscadc: deal with partial activation")
 Signed-off-by: Lee Jones <lee@kernel.org>
 ---
- drivers/mfd/rohm-bd96801.c | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ drivers/mfd/ti_am335x_tscadc.c       | 7 ++-----
+ include/linux/mfd/ti_am335x_tscadc.h | 4 +---
+ 2 files changed, 3 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/mfd/rohm-bd96801.c b/drivers/mfd/rohm-bd96801.c
-index 66fa017ad568..eb7a7376ea89 100644
---- a/drivers/mfd/rohm-bd96801.c
-+++ b/drivers/mfd/rohm-bd96801.c
-@@ -642,8 +642,7 @@ static int bd96801_i2c_probe(struct i2c_client *i2c)
- 	struct irq_domain *intb_domain, *errb_domain;
- 	const struct bd968xx *ddata;
- 	const struct fwnode_handle *fwnode;
--	struct resource *regulator_res;
--	struct resource wdg_irq;
-+	struct resource *regulator_res, *wdg_irq;
- 	struct regmap *regmap;
- 	int intb_irq, errb_irq, num_errb = 0;
- 	int num_regu_irqs, wdg_irq_no;
-@@ -692,6 +691,10 @@ static int bd96801_i2c_probe(struct i2c_client *i2c)
- 	if (!regulator_res)
- 		return -ENOMEM;
- 
-+	wdg_irq = devm_kzalloc(&i2c->dev, sizeof(*wdg_irq), GFP_KERNEL);
-+	if (!wdg_irq)
-+		return -ENOMEM;
-+
- 	regmap = devm_regmap_init_i2c(i2c, ddata->regmap_config);
- 	if (IS_ERR(regmap))
- 		return dev_err_probe(&i2c->dev, PTR_ERR(regmap),
-@@ -723,9 +726,9 @@ static int bd96801_i2c_probe(struct i2c_client *i2c)
+diff --git a/drivers/mfd/ti_am335x_tscadc.c b/drivers/mfd/ti_am335x_tscadc.c
+index 068c25401c6c..4afa9928eba5 100644
+--- a/drivers/mfd/ti_am335x_tscadc.c
++++ b/drivers/mfd/ti_am335x_tscadc.c
+@@ -268,8 +268,6 @@ static	int ti_tscadc_probe(struct platform_device *pdev)
+ 		cell = &tscadc->cells[cell_idx++];
+ 		cell->name = tscadc->data->secondary_feature_name;
+ 		cell->of_compatible = tscadc->data->secondary_feature_compatible;
+-		cell->platform_data = &tscadc;
+-		cell->pdata_size = sizeof(tscadc);
  	}
  
- 	wdg_irq_no = irq_create_mapping(intb_domain, BD96801_WDT_ERR_STAT);
--	wdg_irq = DEFINE_RES_IRQ_NAMED(wdg_irq_no, "bd96801-wdg");
-+	*wdg_irq = DEFINE_RES_IRQ_NAMED(wdg_irq_no, "bd96801-wdg");
+ 	/* ADC Cell */
+@@ -277,16 +275,15 @@ static	int ti_tscadc_probe(struct platform_device *pdev)
+ 		cell = &tscadc->cells[cell_idx++];
+ 		cell->name = tscadc->data->adc_feature_name;
+ 		cell->of_compatible = tscadc->data->adc_feature_compatible;
+-		cell->platform_data = &tscadc;
+-		cell->pdata_size = sizeof(tscadc);
+ 	}
  
--	ddata->cells[WDG_CELL].resources = &wdg_irq;
-+	ddata->cells[WDG_CELL].resources = wdg_irq;
- 	ddata->cells[WDG_CELL].num_resources = 1;
++	platform_set_drvdata(pdev, tscadc);
++
+ 	err = mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO,
+ 			      tscadc->cells, cell_idx, NULL, 0, NULL);
+ 	if (err < 0)
+ 		goto err_disable_clk;
  
- 	if (!num_errb)
+-	platform_set_drvdata(pdev, tscadc);
+ 	return 0;
+ 
+ err_disable_clk:
+diff --git a/include/linux/mfd/ti_am335x_tscadc.h b/include/linux/mfd/ti_am335x_tscadc.h
+index 4063b0614d90..4a048a897cf3 100644
+--- a/include/linux/mfd/ti_am335x_tscadc.h
++++ b/include/linux/mfd/ti_am335x_tscadc.h
+@@ -177,9 +177,7 @@ struct ti_tscadc_dev {
+ 
+ static inline struct ti_tscadc_dev *ti_tscadc_dev_get(struct platform_device *p)
+ {
+-	struct ti_tscadc_dev **tscadc_dev = p->dev.platform_data;
+-
+-	return *tscadc_dev;
++	return dev_get_drvdata(p->dev.parent);
+ }
+ 
+ static inline bool ti_adc_with_touchscreen(struct ti_tscadc_dev *tscadc)
 -- 
 2.56.0.307.g5fe7bd680c-goog
 
