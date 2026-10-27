@@ -1,58 +1,97 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.51
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793111489;
-	b=4hgPor3BfS7YERZkazJWKd1siFnstE9wraXS9o+UYCWx0NK9ZzR0Xz41BfZ52N6Iczan
-	 eArmMukITWniLRvtGMh1m9vRhRbQ1ouf0J2Gzw4Ky4H0s3KaRKJxsC9QjF3s8VbJdNv3u
-	 ga/zD2l/g3H4yYbJwN0T4GSFJBb7psCZ0kFfHBUF2BhXfsqR/xu8KkA9Vxdfa7OH+qoLO
-	 4UdepjVwiGWOVvy++ph+E0X1k4G5tH5WTFQfTS7e8jgchKhaqmA5LKOg2c1lA+/niuZwH
-	 PMgR3NCL4VfOZLX7TsdtQgZcADgT1RjLieUuTgkeUghrvWiWVSujZM+h4eO2YUosibg==
+	t=1793114692;
+	b=R2qt/ap9GBRw+GrRhoI1otPO8bVCKGn0L40oL68GP15NRIMhVTFYfMgDa9PoHv8EshXk
+	 m9Jmo7mjnOVYcLZ7B9OXCBszLwQhAK3GK7xrun52NsjuuHBCne75ynrOsUgLr6o3Zyesm
+	 b/gn/XS/j64W/xMVLnP6YhTmAiVBo9xO1jUZz9CH4ZH+aDvOR9BNDEpiC4Q2ujVsCvYNx
+	 GrINv/S5ZLYJLcapz8S+moIhBf1BzMDo4b0/OZe2SXZAW9ALh8AXwkQYZC4Scten6vg4r
+	 iWRY3+X6jBtVJ3/1VQ4HlF8s2DxZguAZBrerIXGQn1btdFYxHkNV+hCVN7vQaZRDWOg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793111489;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-AI-Review-Draft;
-	bh=b1g0szBCeXDxU9FyY8J94lKomFprzrjStJo4frqTB60=;
-	b=vDM2yBfOugGBqK+wKg6eBy0Gu6nbnvxFtBn30vxAQ9RS6U82qCEwOCdfBd2OZuhzyOaW
-	 ME1za1CkSQBHeR4bgWwb1IcHf7xr4NUrnDJ1TUz2x5FPEXtuqkRM4EQVMEPnroeRr9Q9V
-	 4BH3vh28Occ1G1kRHKIUcD+WVvjWVIKKBuY5SJNX3rqTbYTVKeHqvhyfqhoPN3N7/2vor
-	 MAzhEMJHA1h3tdCHAJj8Rwc5vwcPmB+9EQfe/S6C68QjAjxZSUQX2TVEi/SR3axsLv1Ze
-	 YeV6k+MDobDjuR1vXjGegq+nzdVvCEg9XHJtgh9EyI5fH6mijDn0V5mChS7MRw5Ee9w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793114692;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=BstRdR26uz2xpntyFZiBdMeXA3JFymkoz+BLyzJwrsM=;
+	b=dO/OthF3T2nrkVinRjKajMqeUnJdGOAl/BJ+8yiDvl8A0j5D7/nLIiT4O4R/IPXe90bP
+	 bZBt5jR2gRGMaYA3b15myGhgNu6u4iq63cOp9zcb/UyEW9apMgqtyPkieM7hQcpO1ryxy
+	 GARFIMPpszo7vtXVTlgJNiJUSNNmKuU3SbfppBdFrt3qG3/uuiPmhDdYhRxOFn33zcDSP
+	 x/XxNKE9ywqHXFDAjsD2D3CmGpFXCjqHR5G2BL+Yjbtq/KC5GnK/CVQK15gG3xaSZzrQA
+	 Xlu6LfX2yHBQ9sWGV3qkK3iW+MUAK8AAaeYF24KArXtu/LIPsR3G/Y9+IYjx2UIx3pg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ETXZBDFs;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=EZxYG2wN;
+	arc=none smtp.remote-ip=209.85.208.51
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E5E9606A324;
-	Tue, 27 Oct 2026 14:31:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D822606A326
+	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 15:24:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6D822606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ETXZBDFs
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 047801F01825;
-	Tue, 27 Oct 2026 14:31:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793111488;
-	bh=b1g0szBCeXDxU9FyY8J94lKomFprzrjStJo4frqTB60=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=ETXZBDFsCSirDEPc2jx2POeuny1OazaVyHnLgIqMvCX4j5iOVSgQ4WiEfDA7ryzHf
-	 mkNA7y1g41MCcTAPQW8/ALcjiyRMNo3HterpajlfUOggaOOhp0tP2GMVTZXW14flu5
-	 qJVPtKpcpMtACstCPb9Jude0JHMpBlx438jJsLtMjSkeeAHGytq9ydj9tQ2xLqTb+x
-	 93UTYhfyS9pnhtCFk43whjtndCi0oxYIQzsgxIwx7SpSVtgWwIKE2Vh4OVOrjQfJl7
-	 xEi0/oxgT+oQ27aSn7yWaEhM5kMEA8caZZ1zaj/BwFfHilWqSt8MEXt0szkslGLCUZ
-	 U1F1sX071eJyQ==
-Date: Tue, 27 Oct 2026 14:31:24 +0000
-From: Lee Jones <lee@kernel.org>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Aaro Koskinen <aaro.koskinen@iki.fi>,
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=EZxYG2wN
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-6b429f71dbeso19323a12.1
+        for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 08:24:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793114691; x=1793719491; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=BstRdR26uz2xpntyFZiBdMeXA3JFymkoz+BLyzJwrsM=;
+        b=EZxYG2wNF5P7qlHfFe1SwNlAnOmwz6KsTOZc0fdHXaqC943d1e8sM1qcdJXesgzE2c
+         1ImfwbCNGpHrjTmdJgD538TdOocVwc+opZVg+jurWSMM+mcm30jg6iovf7fAcmSf8k7g
+         +ID5+F2zTLRXnSy6bCV2fxDYKG609JG1ZxZFfHin5NTUQtTZpCA951vaJrQl6/PXbBuc
+         8ccFHtBwEtvZ3FuboS1K6J8ipwfIjxbxwaW6OLGOpE3y8sBbd7mvkps6qVtkOyPfuoXM
+         t4Gf2fkHXYknLAW5dTKIPTYDAPtdHq0GYgQLzKLxHI+RwxgSVcu23SJw94rjoKxFy5qH
+         Jp1A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793114691; x=1793719491;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=BstRdR26uz2xpntyFZiBdMeXA3JFymkoz+BLyzJwrsM=;
+        b=ihGsvOU6Lg8ThufRpiGX38hZsS8Kk4Tf4/tZnBQWhrEyfmkWvqWRJLIUfRuGwlb6r4
+         AExd1wap4MsnvSsOfzFgp4jAW6MCPjb3DVvRAGl4iv97l4nm+IWRoG5+w7WFKz34OxlQ
+         Ecb7OkL6LjX9NeTLov70izx0WSj5p92EFPhd3kTaKL+hNqP7Cizc1dPbSf/ATF4uFFvL
+         4ol2a5O2nUNtuT6uYtMSNP3aJGK1S4XwSXu18Br57cDpVr0WudsDAgSyTZd4Ww29uH+0
+         o45PVcBURRHyhSgb2cyRGJ2tNhpSn6ya8hxDLrAEqCig4G6c4F9dxerX19f8bgs0l2sh
+         CXcA==
+X-Forwarded-Encrypted: i=1; AKwUvByP6F8BAOUIuQNtTcRHXLMr9pwHop6VThFlyMHEIhBtF/wj65fK9XytLt+aDV/lkWURRzU=@lists.linux.dev
+X-Gm-Message-State: AFq9FYIceJuwFSGgXnMmPtE9QWjZ3rQNtKszx/HvLv5LyQXAJH2hY6AH
+	ZU+CuF5mujTDhtC43y022KCxZVpj7Rcm5hu2oJsiLm7utROle+6emXxr
+X-Gm-Gg: AYBFou3AAJoz+dpljCARh49q6oGbCflaAdS8dFiITfooef2rreguLJqK4FMwcDNjavf
+	EUXVN6+vq+bcgBZ9GwZkvD7YWh8nYSCGBlUpXa/l2dUZdGW1IN+3lmwIp01YzmW0lMGdZg2mPi8
+	FJleksdF7+SwgwGaEVdC0EGb887zA6OEzDSKdLKUUsVyLWmnLnunTPizhRQuRM42Rgtu56gfLIw
+	hcPO4xlHUn5JTC8qrA2fTIgGrfmA62OCIa5JW3NwcAMOZE74eHCIYanwt08kfDH8useYDhw1IcH
+	UMxcTE2g92Hr07+1tWMsGwkDQyU0kH0pQ4KVxh2oJR+86Up032t4TVaIEmvjvHlzOODaYm9mBw0
+	yBWQFdSH0nxYfyUjCgQQZaabk8KuZDQkmMJIXWvbDLn5+JhgUzYVzXmmG0MJBWRXSER0g33Ibq8
+	CSUvv/l42sA+YwwVH/1GHJ5nOTu98FzWBnMldtgMwUkkQNK77UEp6R77MncURnOihrVhd+859/k
+	fRCjCaGfv9cUjXZlPugk+QZLUd3sboKra2F26qNbPqpsU4rRiJmxO89kj33qERnFMjO1BPjrxsE
+X-Received: by 2002:a17:907:9619:b0:c26:1649:47ad with SMTP id a640c23a62f3a-c46bde828afmr1015997566b.35.1793114690459;
+        Tue, 27 Oct 2026 08:24:50 -0700 (PDT)
+Received: from xeon ([188.163.112.62])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c46bd529b3csm467303866b.37.2026.10.27.08.24.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 27 Oct 2026 08:24:49 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Lee Jones <lee@kernel.org>,
+	Aaro Koskinen <aaro.koskinen@iki.fi>,
 	Andreas Kemnade <andreas@kemnade.info>,
 	Kevin Hilman <khilman@baylibre.com>,
-	Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>,
-	Dmitry Osipenko <digetx@gmail.com>, linux-omap@vger.kernel.org,
-	mfd@lists.linux.dev, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v1 2/2] mfd: tps65910: Add restart handler
-Message-ID: <179206474862.1869456.3359147212046371469@kernel.org>
-References: <20261015102320.23760-1-clamor95@gmail.com>
- <20261015102320.23760-3-clamor95@gmail.com>
+	Roger Quadros <rogerq@kernel.org>,
+	Tony Lindgren <tony@atomide.com>,
+	Dmitry Osipenko <digetx@gmail.com>,
+	Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: linux-omap@vger.kernel.org,
+	mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v2 0/2] mfd: tps65910: Use modern API for poweroff and restart
+Date: Tue, 27 Oct 2026 17:24:20 +0200
+Message-ID: <20261027152423.194794-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.53.0
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -62,76 +101,23 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261015102320.23760-3-clamor95@gmail.com>
-X-AI-Review-Draft: <20261015102320.23760-3-clamor95@gmail.com>
+Content-Transfer-Encoding: 8bit
 
---- checkpatch.pl: clean (0 issues) ---
+Switch to modern way of registering poweroff call and add restart call.
 
-On Thu, 15 Oct 2026, Svyatoslav Ryhel wrote:
+---
+Changes in v2:
+- swapped to use dev_err_probe
+- ddata is passed directly into handler
+---
 
-> From: Dmitry Osipenko <digetx@gmail.com>
->
-> Add restart handler to reset hardware properly on system reboot.
->
-> Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # ASUS TF201
-> Tested-by: Maxim Schwalm <maxim.schwalm@gmail.com> # ASUS TF700T
-> Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> ---
->  drivers/mfd/tps65910.c | 22 ++++++++++++++++++++++
->  1 file changed, 22 insertions(+)
->
-> diff --git a/drivers/mfd/tps65910.c b/drivers/mfd/tps65910.c
-> index 18b76359046b8..a1734fee1485a 100644
-> --- a/drivers/mfd/tps65910.c
-> +++ b/drivers/mfd/tps65910.c
-> @@ -440,6 +440,20 @@ static int tps65910_power_off(struct sys_off_data *data)
->  	return NOTIFY_DONE;
->  }
->
-> +static int tps65910_restart(struct sys_off_data *data)
-> +{
-> +	struct i2c_client *tps65910_i2c_client = data->cb_data;
-> +	struct tps65910 *tps65910;
-> +
-> +	tps65910 = dev_get_drvdata(&tps65910_i2c_client->dev);
+Dmitry Osipenko (2):
+  mfd: tps65910: Use devm_register_power_off_handler()
+  mfd: tps65910: Add restart handler
 
-Same here.
-
-> +
-> +	regmap_update_bits(tps65910->regmap, TPS65910_DEVCTRL,
-> +			   DEVCTRL_DEV_OFF_RST_MASK | DEVCTRL_DEV_ON_MASK,
-> +			   DEVCTRL_DEV_OFF_RST_MASK);
-> +
-> +	return NOTIFY_DONE;
-> +}
-> +
->  static int tps65910_i2c_probe(struct i2c_client *i2c)
->  {
->  	const struct i2c_device_id *id = i2c_client_get_device_id(i2c);
-> @@ -525,6 +539,14 @@ static int tps65910_i2c_probe(struct i2c_client *i2c)
->  				"failed to register power-off handler: %d\n", ret);
->  			return ret;
->  		}
-> +
-> +		ret = devm_register_restart_handler(&i2c->dev,
-> +						    tps65910_restart, i2c);
-> +		if (ret) {
-> +			dev_err(&i2c->dev,
-> +				"failed to register restart handler: %d\n", ret);
-> +			return ret;
-
-And here.
-
-> +		}
->  	}
->
->  	ret = devm_mfd_add_devices(tps65910->dev, -1,
-> -- 
-> 2.53.0
->
+ drivers/mfd/tps65910.c | 36 ++++++++++++++++++++++++++++--------
+ 1 file changed, 28 insertions(+), 8 deletions(-)
 
 -- 
-Lee Jones
+2.53.0
+
