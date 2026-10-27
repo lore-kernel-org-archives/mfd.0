@@ -1,60 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=210.118.77.11
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=84.42.129.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793125551;
-	b=j8iik7HmJ6/poSWrwNjPignkSVNOYpJqyQ7XRkUtux5KOY+L3Nf33wKVezSXhGwBISea
-	 zR2SvWt72qHli1IAXtXPGVg6AuM/6o93kRsdsNsTybYTxzL5mFesZIe1L3HBBJgGm/W7M
-	 pHQVNHY09TYzDBYukY99wUpYilfynclZ2AUW54r9aZ9qp5z9NQjU+Fcwve/Uzta+oqpx8
-	 p5aw4r4tXbuJIu6yrFvD8ztAGWZL1Pqt2dGJdYYWI0Rd4pEixZAai8jR4utSrZUNNbl1Q
-	 Uw0t9WF+s8yAoTXBFgbmjkKSIl5/Jeqb/5zk5InnAwN/FAPEcdIwjg6cKjO+7QggfhA==
+	t=1793131830;
+	b=xF5JY7nX8JdsNdesurHMESJykQSGryYRxYZBIGIY9mvAORrjthkGXPuwS81d0z7Yq/S9
+	 hV2BJgxfxzWhHB+OX9ZrvU5dFJlcZSU6x965AEN4wjiz0TSm1acpPJW4NCB0XmOYwGT3Z
+	 8Q/2JYNDGv3/0LFOgg1YH1QxDrK5wxlt87j7KHCg33h1ilnSTi+bpM+n23GEZWfQK8RD7
+	 MBXS/c4gxBv7uT6YHOqcDEdB7MCLM5Oxr3WR8pQyI/aBX9WpaIxR8ZMSp+E2ozJeK6Qev
+	 5HvXDAqnaSc3oDFYjCxcBsSUiJSgJOQcesLNHGZp9b5Aq7qIWGTO+vZkhrmNGHphMgQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793125551;
-	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
-	 Content-Language:From:In-Reply-To:Content-Transfer-Encoding:
-	 X-CMS-MailID:X-Msg-Generator:Content-Type:X-RootMTR:X-EPHeader:
-	 X-CMS-RootMailID:References;
-	bh=yYVnZVngw4wIyvUedHrp/RCi4DEk87r28LIRWXpCLH0=;
-	b=p7rph0M/bvqw8KtwxbvE1WBuoJKs9eV6nPLTlFU6CFYEGgw3G2FFyeHGtFQAAZYAc1mF
-	 BzRVfyD3d7S4EZTbHT2u6GRaeQBHuyC4R7vCa2l17DRALKffs75morRGjler/oo3W+c7t
-	 sIj2wtVjZCXqUC7xL6oILjaKVowYixW48PSfaSL6PTj7kafPYiuxjCV+l0Fx/HIQm4KHr
-	 MPmZDcvMqF1bMbjYviNpod39/DuEuPHDJmBrwykocF/nBUUxQqGm+NpkCyklHnoT0WsAB
-	 6Yllmk/GBTgoVnBXiAapiTITCTKQ58W2b5gTdEg4B4e+Qw0pr7ArGR1lpIPfytsb7rA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793131830;
+	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
+	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=Zs8+7dqFRjW6RKjJ6/I76FxDxXQBC+jlTIwYBbsLR+M=;
+	b=Zjtb7CvGqmiZwzmMPNx9X6bG+u6NJlAHbVXTKGm5hPzoVcfcgT1F/MgQRkRxdK+st+Df
+	 RuQJTgoeEzHvyp9AojQQknnPAm6eY1hdx9zXhtYZqsVdovrKoGbFJ4MkxIN9e2PGVLNHt
+	 EEM01CZ55pL1pvXPQFyTHXeACSy1hD9ULGHtXuUX568j3a3cha27oEgLeZ9SLIY5Yt+RZ
+	 S5XEZDOvFiYopPAHvFaWObqBXUEuNpBhq6Q6N0I5Dl1GTbdmz2dz47MKGXdYAiHhzopLu
+	 49E09SXtY1g45qCkUUKg82W2HDKnhVAidsIRdyxVAGTHusv1/Q6wDYeVTbFBF93Ytcg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=samsung.com;
-	spf=pass smtp.mailfrom=samsung.com;
-	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=bCe0DApS;
-	arc=none smtp.remote-ip=210.118.77.11
-Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=ixit.cz;
+	spf=pass smtp.mailfrom=ixit.cz;
+	dkim=pass header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=AMSDWnv+;
+	arc=none smtp.remote-ip=84.42.129.46
+Received: from ixit.cz (ixit.cz [84.42.129.46])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17BF0606A31A
-	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 18:25:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 17BF0606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2156606A31D
+	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 20:10:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C2156606A31D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=bCe0DApS
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
-	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20261027182540euoutp01808e2a0784b22e974d6c8ffe88c8195c~idi3U5q2O1070810708euoutp01J;
-	Tue, 27 Oct 2026 18:25:40 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20261027182540euoutp01808e2a0784b22e974d6c8ffe88c8195c~idi3U5q2O1070810708euoutp01J
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1793125540;
-	bh=yYVnZVngw4wIyvUedHrp/RCi4DEk87r28LIRWXpCLH0=;
-	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
-	b=bCe0DApSTMa5hEEGgVvneqzfJYakD7qrG9r1rRA787dJcmFkxZeM041kJvQzf1sWi
-	 mFAb6eOSUU0Yw/Y6KAUriZpeXdgumQlCNkdGsLLdF/sfW7mYHnWBx2d7wOenrOEkLR
-	 zJJaDP1dZxSCFavYWwIcrbMKnu0ZvjvRL33YUuUE=
-Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
-	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
-	20261027182539eucas1p2af97fa5bad6b7de6ca761cb86172737b~idi2gJHhp1120011200eucas1p2b;
-	Tue, 27 Oct 2026 18:25:39 +0000 (GMT)
-Received: from [192.168.1.44] (unknown [106.210.136.40]) by
-	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
-	20261027182538eusmtip2789b0e5587293524b9c364f453c89396~idi03PmTX1528615286eusmtip2f;
-	Tue, 27 Oct 2026 18:25:38 +0000 (GMT)
-Message-ID: <5fec923f-36bb-4dcc-bf3a-13be3eaa8f83@samsung.com>
-Date: Tue, 27 Oct 2026 19:25:37 +0100
+	dkim=pass (1024-bit key, unprotected) header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=AMSDWnv+
+Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id 0F01A53401D6;
+	Tue, 27 Oct 2026 21:10:27 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1793131827;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=Zs8+7dqFRjW6RKjJ6/I76FxDxXQBC+jlTIwYBbsLR+M=;
+	b=AMSDWnv+eT86kaPcLmdSSrGcPVkvj/ZcO4jb+7yLClOxs7tcuY9TQP2Ip6cowhu5cqsPG+
+	8TcIFM2qm3SNf2+p7C42SuA3rwNNL6QPqP5LqVRlccpUY1LuNGzaj60MvEARGysJbHme0+
+	tEOGW66lGAGo5gU4GW3ZeBn55pZ7rPw=
+Message-ID: <a60e8a48-9a02-404b-b4f4-8b8f0a4fec9b@ixit.cz>
+Date: Tue, 27 Oct 2026 21:10:26 +0100
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -65,168 +61,122 @@ List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 19/20] riscv: dts: starfive: jh7110: Update DT for
- display subsystem
-To: Icenowy Zheng <zhengxingda@iscas.ac.cn>, Vinod Koul <vkoul@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
-	<conor+dt@kernel.org>, Andrzej Hajda <andrzej.hajda@intel.com>, Robert Foss
-	<rfoss@kernel.org>, Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
-	Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Luca Ceresoli <luca.ceresoli@bootlin.com>, Maarten Lankhorst
-	<maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>, Lee Jones <lee@kernel.org>, Andy
-	Yan <andy.yan@rock-chips.com>, Philipp Zabel <p.zabel@pengutronix.de>, Emil
-	Renner Berthing <kernel@esmil.dk>, Hal Feng <hal.feng@starfivetech.com>,
-	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
-	<sboyd@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Paul Walmsley
-	<pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
-	<aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, Dominique
-	Belhachemi <db@domibel.de>, Brian Masney <bmasney+clk@redhat.com>, Jerome
-	Brunet <jbrunet+clk@baylibre.com>
-Cc: linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	mfd@lists.linux.dev, linux-clk@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org,
-	linux-riscv@lists.infradead.org, Marek Szyprowski
-	<m.szyprowski@samsung.com>, Maud Spierings <maud_spierings@murena.io>,
-	Graham Markall <hello@big-grey.co.uk>, Chaoyi Chen
-	<chaoyi.chen@rock-chips.com>, Joshua Peisach <jpeisach@ubuntu.com>,
-	=?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
-Content-Language: en-US
-From: Michal Wilczynski <m.wilczynski@samsung.com>
-In-Reply-To: <b5eb69f3f41a98b5a98694435df25a632babf05a.camel@iscas.ac.cn>
-Content-Transfer-Encoding: 8bit
-X-CMS-MailID: 20261027182539eucas1p2af97fa5bad6b7de6ca761cb86172737b
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20260915153248eucas1p27d8d2c9fa536bbd951e0102b04416dad
-X-EPHeader: CA
-X-CMS-RootMailID: 20260915153248eucas1p27d8d2c9fa536bbd951e0102b04416dad
-References: <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
-	<CGME20260915153248eucas1p27d8d2c9fa536bbd951e0102b04416dad@eucas1p2.samsung.com>
-	<20260915-jh7110-clean-send-v4-19-f0e4fd6f2cc8@samsung.com>
-	<b5eb69f3f41a98b5a98694435df25a632babf05a.camel@iscas.ac.cn>
+Subject: Re: [PATCH RFC 00/12] Qualcomm Type-C support for 1st generation
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Cc: Alexey Minnekhanov <alexeymin@minlexx.ru>,
+ Heikki Krogerus <heikki.krogerus@linux.intel.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Lee Jones <lee@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+ linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+ phone-devel@vger.kernel.org, mfd@lists.linux.dev
+References: <20260926-typec-v1-0-31adc19f32c6@ixit.cz>
+ <voc4ie6fcegr3thk5n6dib4pkdxmracch4hhgjdih6pxrq2bfm@lq7mx4flowqk>
+ <f85cdfb7-b797-4b4b-9937-670c6dfe52c3@ixit.cz>
+ <zb3s4fmwx7vu3kcqigensacbgdqoaqnipfn4ntx4dh7ahrfr42@hvdw36dqb3qn>
+ <5c41ef43-a065-46e3-9522-faaf3884b487@linaro.org>
+ <eodzuccugtdn42basgpczett4yatyirog4nxwe5rhg5xf46ibp@jzcjmje4aqc3>
+Content-Language: en-US, cs-CZ
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <eodzuccugtdn42basgpczett4yatyirog4nxwe5rhg5xf46ibp@jzcjmje4aqc3>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-
-
-On 9/29/26 17:06, Icenowy Zheng wrote:
-> 在 2026-09-15二的 17:32 +0200，Michal Wilczynski写道：
->> Activate the display subsystem by describing the video output
->> subsystem,
->> which the documentation calls dom_vout_top, as a bus node covering
->> the
->> whole 0x29400000 region, with dc8200, the HDMI block, the video
->> output
->> system controller and voutcrg as its children.
+On 19/10/2026 01:53, Dmitry Baryshkov wrote:
+> On Mon, Sep 28, 2026 at 04:54:08PM +0100, Bryan O'Donoghue wrote:
+>> On 27/09/2026 17:33, Dmitry Baryshkov wrote:
+>>>>> One major comment. As we see, on SMB2 PMICs parts of the Type-C
+>>>>> functionality are provided by the charger / FG device. I guess that on
+>>>>> SMB5 PMICs we will get the same problem once somebody tries to implement
+>>>>> additional charger features. Would it make sense to rework the PMIC TCPM
+>>>>> driver to be a composite driver, taking several components via the
+>>>>> existing Linux interface?
+>>>> As this gets decided from the QCOM side, I'm fine with whatever suits the
+>>>> hardware best.
+>>> Bryan, as you are a maintainer of the PMIC-TCPM? Would the use of
+>>> components be fine?
 >>
->> The subsystem node owns the resources its children share: the NoC
->> display
->> bus clock and reset that gate access to every register in the region,
->> and
->> the PD_VOUT power domain. Modelling it this way keeps a shared gate
->> owned
->> by the block that shares it rather than by whichever consumer happens
->> to
->> probe first, and lets dc8200 inherit dma-noncoherent for framebuffer
->> DMA
->> from the bus it sits on.
+>> I mean maybe. Would it not make more sense to land the TCPM functionality
+>> and then look into adding charging moving then ?
 >>
->> The monolithic hdmi node is in turn modelled as a container with
->> hdmi_phy
->> and hdmi_controller children. This lets the PHY (clock provider,
->> depending only on xin24m) and the controller (clock consumer) probe
->> independently, breaking the circular clock dependency with voutcrg.
->>
->> voutcrg consumes the pixel clock from the &hdmi_phy node instead of
->> the
->> old fixed-clock, and dc8200 gets its pixel clocks from voutcrg's
->> MUXes.
->> The old, incorrect hdmitx0-pixel-clock fixed-clock node is removed.
->>
->> The HDMI controller gets a phandle to the video output system
->> controller,
->> which holds the mux selecting the DC8200 output that drives the HDMI
->> transmitter.
->>
->> CMA is enlarged and constrained to memory the display controller can
->> address, because the default pool is too small for its framebuffers.
->>
->> Co-developed-by: Dominique Belhachemi <db@domibel.de>
->> Signed-off-by: Dominique Belhachemi <db@domibel.de>
->> Signed-off-by: Michal Wilczynski <m.wilczynski@samsung.com>
+>> i.e. finish off adding this piece first
 > 
-> ```
-> Tested-by: Icenowy Zheng <zhengxingda@iscas.ac.cn>
-> ```
-> 
-> But,
-> 
->> ---
->>  arch/riscv/boot/dts/starfive/jh7110-common.dtsi | 121
->> +++++++++++++++++++++++-
->>  arch/riscv/boot/dts/starfive/jh7110.dtsi        | 105
->> ++++++++++++++++----
->>  2 files changed, 203 insertions(+), 23 deletions(-)
->>
->> diff --git a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
->> b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
->> index
->> a7a1c09a2c9075711f3a214a49618911fdc7b421..a4c3daf712a63b177f744e8c613
->> 416d22e0c9dbd 100644
->> --- a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
->> +++ b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
->> @@ -33,6 +33,27 @@ memory@40000000 {
->>  		bootph-pre-ram;
->>  	};
->>  
->> +	reserved-memory {
->> +		#address-cells = <2>;
->> +		#size-cells = <2>;
->> +		ranges;
->> +
->> +		/*
->> +		 * The display controller allocates its framebuffers
->> from CMA,
->> +		 * and the default pool is too small for them. Keep
->> the pool
->> +		 * inside the range the controller can address; it
->> fits in the
->> +		 * memory every VisionFive 2 variant has.
->> +		 */
->> +		linux,cma {
->> +			compatible = "shared-dma-pool";
->> +			reusable;
->> +			size = <0x0 0x20000000>;
->> +			alignment = <0x0 0x1000>;
->> +			alloc-ranges = <0x0 0x70000000 0x0
->> 0x20000000>;
->> +			linux,cma-default;
->> +		};
->> +	};
->> +
-> 
-> I don't know whether constraining the CMA pool in the DT is a good
-> idea.
-> 
-> Thanks,
-> Icenowy
->
+> The problem is that we already have SMB2 charger, which accesses the
+> same region. In theory it is possible to say that USB-C driver conflicts
+> with the charger "for now". In practice, I think, it might be better to
+> sort that out from the beginning. You didn't have this issue when
+> working on PM8150B support since we never needed charger for that PMIC
+> series.
 
-So I've tested the version without alloc-ranges and some of the modetest
-runs failed especially the higher resolutions. It seems this is because
-without alloc-ranges __reserved_mem_alloc_size() allocates top down with
-MEMBLOCK_ALLOC_ANYWHERE so the pool lands above 4 GB, which the DC8200
-cannot reach - vs_dc.c sets a 32-bit DMA mask.
+I looked into the smbx vs Type-C overlaps.
 
-25 of the 42 advertised modes failed with "failed to create dumb buffer:
-Cannot allocate memory" - every 4K and 1080p mode, down to 1360x768.
-Only 1280x800 and below survive.
+I see that charger DCIN (0x1400) is mostly mirrors (both address and values) the 
+register set of USBIN (0x1300), thus I assume charger accessing these registers 
+is correct.
 
-So the range seems to be a hardware limit which is why I think it
-belongs in the DT. I'd like to keep it in v6.
+Type-C driver accesses 0x1300 but mostly different registers (with some 
+exception of initialization and smbx.c 'FIXME: This will be handled by the 
+type-c driver').
 
-Best regards,
--- 
-Michal Wilczynski <m.wilczynski@samsung.com>
+So that leads me to the conclusion that smbx should continue to access 0x1300 
+range, while Type-C must access the range. Only things which needs to be moved 
+from smbx to type-c is the type-c initialization.
+
+Do I get it correctly?
+
+Thanks
+David
+
+> 
+> But, then it's up to you and David.
+> 
 
