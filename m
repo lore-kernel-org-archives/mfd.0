@@ -1,57 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.84.56
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793091327;
-	b=LVEbNhrwi8uLcfaXtfUcuiAO4luqq9gaxqj5/GLD6fVNm4G7eETsLY9xXvvef/BYluC3
-	 9c85TxXAIBEm9v+CjCIEG8igohZfzASvuVEk0vNkV/y2F67iseoGcmFGMK7TI+R52S1jQ
-	 fA8tVAgWxKnvTYtCB3clq4F17zmi0+ofqLaaTrdAqWBxJaIua6Qn0bWL8rVuZVOFHYK8c
-	 fERMWx51pTZi1mLgpmCBJR/BZ/GDcXCcZ0Hb772cCyPQVURWRox9nlNAF1mMHOMNks5mq
-	 5BaVh3Nbu0JVV8GjviQ83r6HBRvQtNxZnUgaiLSWQVKXNpzjwSRZHl5hLZMEB04r/4Q==
+	t=1793092320;
+	b=3zxS1NzGMdnIJaHzeZitN+tAULyGQFgVIQtlf2Y269EHDXvSiWWvE4Ae+FgXuKRMisxq
+	 lrpX0WFLodBPb5MN7/8JzNoL/9h7yQ/hQg36j1vEd7nuVAcajSTyaFXMopEM8RPr2hmGI
+	 i1ivFGKVLDbGUpLkjVZDnNY9w2CGfG3hJ7nI+EtSqYmGxLBb66gGCrmBAKjp5guL/UAFc
+	 6dV6fdeGsNwuWwB1+M8duaoRJNmnnHcmh/ftpZu/fecYvYLwqjTI9ApGXBOINwB2tJ4HW
+	 hSBWMZbf6cvHg/CictVBUmtzmzwSxLbb3USCmE+wsrOJNpriCQ/eEZx+ZRhJ04GVbPw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793091327;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=Rg9IBRAqIGNAot6WIn6+tg7TYZQkmUdtnGTX42kjeUs=;
-	b=b/MFOwomXlerzUpIeWbbXc1LFdELtbL8KpkyhYuAsxKrFP8+uq7qG9GXQkViGssmylxI
-	 ZYZ7FWTVfG8OQlMCbHsHuHpWY9KhcyyvNBMcIRLJAijti7ZnxPONEt1IZtu+yZ37TribR
-	 u7KPD4KfJq1lHBiILPgC4tpO6BJTlmZLS3cWIZvvjOpGj1kHoV370Dz+qIzYNVCNV6mQD
-	 yuZi3siGSJq2wh7iQDMeumRYaPSOzbRQxHH0/hjgTPLfkJS3nPfRxxRAgIQiMwzQCFnms
-	 bOc6NoKXd5WdFuXre7G5IukCvQ45mFVl2sUP9KqRvuKxmBwUbbaPo9AUOv16QPUfdPA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793092320;
+	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:Organization:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Last-TLS-Session-Version;
+	bh=T79Dr75s1wvEXUoDZaE7cn4PwcHACPes5COGJi8oy7U=;
+	b=wGSqKEI5hLcB5E17JuZxltNf66ZPbHCYEqXh/Cq9PizmYFZr5EKWwXJ+o/ezoO+ZfRg9
+	 ZnrFltdVi9EkwYhnTJFF4rrenXV2ny/qbt6A9E0lgo63C6Li4PHRoTWMnz+n+L7giTvEo
+	 4lAlI4O3NVhGj10ojrSgVj4PYWi/zzGcp9P3wSuvgRfE9HgJavW+3zao6UT5Y9roBolTK
+	 2n6e9jAmDe0+91UpcRsS9c3fy0VrZBEf54JsHgRpQO9KJxa4CAcAkX0CBhoehdHUw+ZyA
+	 YAaIAQOEcw4moSaKWXbUMPXZPJwlUphpqSOAiP12J0Ki2ZTRElGj+tPrUsjeQVaFt7w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SRwpbVJp;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=bootlin.com;
+	spf=pass smtp.mailfrom=bootlin.com;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b="UuR7/ceK";
+	arc=none smtp.remote-ip=185.246.84.56
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B764606A31F;
-	Tue, 27 Oct 2026 08:55:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66D21606A327
+	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 09:11:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 66D21606A327
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SRwpbVJp
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 723991F01829;
-	Tue, 27 Oct 2026 08:55:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793091326;
-	bh=Rg9IBRAqIGNAot6WIn6+tg7TYZQkmUdtnGTX42kjeUs=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=SRwpbVJpXeMKYQwoiHFvp6ek174mmHYfcKNuvqLmn3UUDC6pk6Z3vzODNlk94EsID
-	 YgzuzI6WvHDXsq7tU0CMLKY56BH9nBdN8fA88zSWm8ptOLSuXfmBXdLQ561tQJ7ZO/
-	 hLqKnCWXWGSq7L1zofX8d+MiTq60cm1BRUs8Am+XOQdk5uDxkn9+c3J9do370csR/J
-	 EOcPoKVREurcAM2lc6lSVt06UPwUZElGA7KVzclCsK6eVUu8A5fB5gepyA2ysGAppG
-	 NGnAntAYsSCYIDFkyg1O9hOvhvjqOP9vEOCuI79Ki2erryjjDDQq72FXaS87ATqsaX
-	 hoiSoBOZIk79g==
-Message-ID: <sashiko-outbox-186310@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v5 1/3] dt-bindings: mfd: rk8xx: add board level power
- hold GPIOs
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Yaozhong Li" <yaozhonguwl@gmail.com>
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, lee@kernel.org
-In-Reply-To: <20261027084511.1992-2-yaozhonguwl@gmail.com>
-References: <20261027084511.1992-1-yaozhonguwl@gmail.com>
- <20261027084511.1992-2-yaozhonguwl@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 27 Oct 2026 08:55:26 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=UuR7/ceK
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 63EAD1A12AA;
+	Tue, 27 Oct 2026 09:11:51 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 2E838603BD;
+	Tue, 27 Oct 2026 09:11:51 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id C36211032904F;
+	Tue, 27 Oct 2026 10:11:38 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1793092309; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:content-language:in-reply-to:references;
+	bh=T79Dr75s1wvEXUoDZaE7cn4PwcHACPes5COGJi8oy7U=;
+	b=UuR7/ceKR3WvRHfZBPIedxhdV4OfAZXNIaXp3g8W7wt1efy1uoDsg0DMZTk5cRNDiNtala
+	Omvkg8mIONIePJs1AXs12/YATeNT0fD5h/EXQZicnjbXevpQ2CpHVhz/8haGqX0ZlIo+JA
+	EG6OC5DHxEGXP9hOB3ylx3BkmW4u5czjzb4XHEq4dL9KXjgmT9wjq8veuW4iAgbI/Q6kOE
+	Tq92N6JhK2VGV1QVFyN8UjliNVqXShOUtGsP3SZLgsFopKDji/FB71MDawONogQloIyLEt
+	h9rUVj8ZpDSYFZlyEq+sOxwNupUnHhkapAE3hbDZlc4ft2t38vmFeyK1r2tU1Q==
+Message-ID: <42d26a0b-c517-4fc5-8d19-e0b7c4506cbf@bootlin.com>
+Date: Tue, 27 Oct 2026 10:11:37 +0100
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,78 +61,86 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 13/20] dt-bindings: pinctrl: berlin: Support Synaptics
+ SL261X SoCs
+To: Jisheng Zhang <jszhang@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+ Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>, Andi Shyti
+ <andi.shyti@kernel.org>, Alexandre Belloni <alexandre.belloni@bootlin.com>,
+ Frank Li <Frank.Li@nxp.com>, Lee Jones <lee@kernel.org>,
+ Linus Walleij <linusw@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+ Mark Brown <broonie@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Jiri Slaby <jirislaby@kernel.org>,
+ Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>
+Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-clk@vger.kernel.org, linux-i2c@vger.kernel.org,
+ linux-i3c@lists.infradead.org, mfd@lists.linux.dev,
+ linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org,
+ linux-spi@vger.kernel.org, linux-arm-kernel@lists.infradead.org
+References: <20260929061417.20733-1-jszhang@kernel.org>
+ <20260929061417.20733-14-jszhang@kernel.org>
+Content-Language: en-US, fr
+From: Richard GENOUD <richard.genoud@bootlin.com>
+Organization: Bootlin
+In-Reply-To: <20260929061417.20733-14-jszhang@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
-- [Medium] dt-bindings: mfd: rk8xx: board power-hold GPIOs modeled as PMIC =
-properties
---
-
-commit 2f97d8ee4039bd6ee8ced1ebc89f3ae0764e0214
-Author: Yaozhong Li <yaozhonguwl@gmail.com>
-
-dt-bindings: mfd: rk8xx: add board level power hold GPIOs
-
-This commit adds power-hold-gpios and power-hold-delay-ms properties to
-all seven Rockchip RK8xx PMIC Devicetree binding schemas (rk801, rk805,
-rk806, rk808, rk816, rk817, and rk818) to describe board-level power hold
-lines driven by the SoC and released before PMIC shutdown.
-
-> diff --git a/Documentation/devicetree/bindings/mfd/rockchip,rk801.yaml b/=
-Documentation/devicetree/bindings/mfd/rockchip,rk801.yaml
-> index 7c71447200ba4..bfba394b23f7c 100644
-> --- a/Documentation/devicetree/bindings/mfd/rockchip,rk801.yaml
-> +++ b/Documentation/devicetree/bindings/mfd/rockchip,rk801.yaml
-> @@ -29,6 +29,26 @@ properties:
->      description:
->        Telling whether or not this PMIC is controlling the system power.
-> =20
-> +  power-hold-gpios:
-> +    minItems: 1
-> +    maxItems: 2
-> +    description: >
-> +      Board level power hold lines driven by the SoC. They have to be he=
-ld
-> +      asserted while the system is running and released before the PMIC
-> +      shutdown request is written, otherwise the rails can drop and come
-> +      back up instead of staying off. Only meaningful when this PMIC is =
-the
-> +      system power controller, as the lines are released as part of its
-> +      power-off path.
+Le 29/09/2026 à 08:14, Jisheng Zhang a écrit :
+> Document the dt-bindings for pinctrl in Synaptics SL261X SoCs.
+> 
+> Signed-off-by: Jisheng Zhang <jszhang@kernel.org>
+> ---
+>   .../bindings/pinctrl/marvell,berlin2-soc-pinctrl.yaml  | 10 ++++++++--
+>   1 file changed, 8 insertions(+), 2 deletions(-)
+> 
+> diff --git a/Documentation/devicetree/bindings/pinctrl/marvell,berlin2-soc-pinctrl.yaml b/Documentation/devicetree/bindings/pinctrl/marvell,berlin2-soc-pinctrl.yaml
+> index 6ace3bf5433b..fb60a310a24e 100644
+> --- a/Documentation/devicetree/bindings/pinctrl/marvell,berlin2-soc-pinctrl.yaml
+> +++ b/Documentation/devicetree/bindings/pinctrl/marvell,berlin2-soc-pinctrl.yaml
+> @@ -37,6 +37,8 @@ properties:
+>             - marvell,berlin4ct-soc-pinctrl
+>             - marvell,berlin4ct-system-pinctrl
+>             - syna,as370-soc-pinctrl
+> +          - syna,sl261x-soc-pinctrl
+> +          - syna,sl261x-system-pinctrl
+>   
+>     reg:
+>       maxItems: 1
+> @@ -44,8 +46,10 @@ properties:
+>   additionalProperties:
+>     description: Pin group configuration subnodes.
+>     type: object
+> -  $ref: /schemas/pinctrl/pinmux-node.yaml#
+> -  additionalProperties: false
 > +
-> +      The lines are released in the order listed, and power-hold-delay-ms
-> +      elapses once, after the last of them.
+> +  allOf:
+> +    - $ref: /schemas/pinctrl/pinmux-node.yaml#
+> +    - $ref: /schemas/pinctrl/pincfg-node.yaml#
+
+The special value bias-pull-up=2 is handled has a strong pull-up in the 
+code, maybe that's something that needs a documentation in the binding
+(or the strong pull up value is really 2 Ohms, and in this case, 
+everything is ok)
+
+>   
+>     properties:
+>       groups:
+> @@ -60,6 +64,8 @@ additionalProperties:
+>       - groups
+>       - function
+>   
+> +  unevaluatedProperties: false
 > +
-> +  power-hold-delay-ms:
-> +    default: 0
-> +    description:
-> +      Time to wait after releasing power-hold-gpios before the shutdown
-> +      request is written, to let the lines settle.
+>   allOf:
+>     - if:
+>         properties:
 
-[Severity: Medium]
-Should these board-level power circuitry GPIOs and OS shutdown sequencing
-delays be modeled as properties on the RK8xx PMIC nodes across
-Documentation/devicetree/bindings/mfd/rockchip,rk801.yaml,
-rockchip,rk805.yaml, rockchip,rk806.yaml, rockchip,rk808.yaml,
-rockchip,rk816.yaml, rockchip,rk817.yaml, and rockchip,rk818.yaml?
-
-As noted in the commit message and the power-hold-gpios description, these
-lines are routed from the SoC into external board power circuitry rather
-than into pins on the RK801, RK805, RK806, RK808, RK809, RK816, RK817, or
-RK818 PMICs themselves.
-
-In addition, adding these properties to all seven schemas because they share
-the Linux drivers/mfd/rk8xx-core.c driver, bounding maxItems at 2 to match
-the vendor kernel's pmic,hold-gpio and pmic,stby-gpio properties, and
-encoding the release order and power-hold-delay-ms settle time prior to the
-PMIC shutdown write appear to describe driver-specific shutdown sequencing
-rather than the PMIC hardware.
-
-Would it be more appropriate to describe the actual board-level power
-switches or regulators in the Devicetree and handle their shutdown ordering
-through standard kernel power-off or regulator mechanisms instead of adding
-these properties to the PMIC bindings?
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261027084511.1992=
--1-yaozhonguwl@gmail.com?part=3D1
+Regards,
+Richard
