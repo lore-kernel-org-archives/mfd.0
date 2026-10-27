@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793091110;
-	b=WLrEyH0cdperZ6ap+9M9wTj499cpn4mZ0dM36/It+B0RcUS8+sI2eoyiAROgAyfZZBuW
-	 xtYDeC2nJC0sxXOPk7zCOfWxMdir3dLXCEUcJUPYTmZOYumu/SkjWJT/snK1JwQiy26gv
-	 dv9BAPl/J2ibqqlOSy5WMHv33aL3ALDanO+ev/PJmNTuVoIs6HFb3WXt50OHvTvca2MNs
-	 dLGTVsp/8UmRQf6O4LKwlQIIRXP5kH3iaFNQ+pfl13ZFa5qzzulDfmdv4tTyyW+czFCu/
-	 H0/sfR5l7Jn4JP4pljDCYJyii7KpsLw+KtA6rJgA/ANQAT4X0jalnZxV0Nd1vsqcC4w==
+	t=1793091236;
+	b=JZcfFcfTnl141xDGJQ9kYiyVph5KIpkmXGQ/KQRyc/XwsMSja/Md2mWf/lBDyN0lMbRm
+	 bPi061D0ZWKabGb+9PhtMzG8LR9jX32GLMeykVqaoM89EYL1douQ7ULXoeEPc3iZ5Wl8g
+	 6Bnqr9lUO2krGDnJS0CS7IYXnYh6DmH3MGMGJ00bBDpoMY9jBIsuf22dUJkPadu2U9Bq7
+	 S1VPsRDkzQ2nn26iN4xkXehYkqlzYSAIdeBACFW9ucMXacfrnWlIj2hnz8h/QyFnTzYUh
+	 kDseKY9W+ENlsprB1+JntPpOFghNH62kilC27HNr3tSTTjm5M63rEzq4tmXZKWxCfoA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793091110;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793091236;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=l+94lKtvulLfljwfu5ajB7X4S4HKcHl/rIebL+JDuZQ=;
-	b=UNZdiJyT55smH0X6hsFj8QeO09XU2mG89R1Z2DUmS3xngZBQB/kDzAlsJZM4I0KjyRF4
-	 JMGg8nkUZhMLz4IUNEPK0cUqt2cUV0erODMz9x9MoJbxICRGAxctEnRc51pZNEgzs5cRu
-	 GudhoUW4etUVoXJfjTr2g6OazlVusD/8zTVCE+D2rS3Wm/zDUD2SdNmQtx8hR5o+hGtXl
-	 QjFg/DKbRGdBLAemI38rogLV6IHnbPhb0sWIX+QfkvjKFojzyfNOQni8Fbp9I/mLfnnJ8
-	 b15BASVC4Nn48myBa5/3beeujFCYXspgEw4fJ+ixaKKwWxmXC4Tm0EqyGw8FOOkeVWA==
+	bh=yNBJTkMGaQWJR7537+FXiL3KuVd7EpygbChLg0HosmA=;
+	b=oSkl06OlNBazyJeclKBv093DHrkWc3Pc1vgUhkPefogX9F/owvIxYSaKHc7YTidjPaKp
+	 Vj8uN3GqaL5aQ1IPFIhfM6P+xIP9hTJij7FqYyqebFPeCZINPzhgEi+yQ2MvJ8uxArnJ9
+	 8Y0hjgdewE6DHOW2cUI0OxNECkMvL2/cLMJrgfH1GNUU2f/2RRS7Ka0gNQOJHKPEuRN7i
+	 wfbVor6DGHhAh/r2Ni7Tthc8HJ3UQYolhlFuosLkC64jex1MR4fIMIUBoRlhAO8SIzijR
+	 l7j/W9lEeVnWOCVhS+s7c5PECcC1IX00Rr12T2pvWJ9902qO3rEp/QJ1EodNbC44sWg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ACSCHga7;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Gj9FMtfs;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C689606A31D
-	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 08:51:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40A52606A32E
+	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 08:53:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ACSCHga7
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AB86B1F01825;
-	Tue, 27 Oct 2026 08:51:49 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Gj9FMtfs
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9AFD01F01825;
+	Tue, 27 Oct 2026 08:53:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793091109;
-	bh=l+94lKtvulLfljwfu5ajB7X4S4HKcHl/rIebL+JDuZQ=;
+	s=k20260515; t=1793091235;
+	bh=yNBJTkMGaQWJR7537+FXiL3KuVd7EpygbChLg0HosmA=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=ACSCHga7PQ9GpdyfRr/qZc2PVs7TYexdNedKy8/2KhGu+lXykjbjTaG67Oto2XIx7
-	 z19oMjYvALt4pOerta0m7mW1yvClBdE0WX7Wpahhz5lwnv9VAlLsDikc25Z72a8Wm+
-	 knhfZ0s2xsJZ53FwloJiAsf/FGCIK1UyRd8n3U2ruNUphyy4zGs34oJaWo5BxG77c4
-	 nfSB2ntqOvMnvFwlV2wZz2gZM8BnVwsZfbBE6rwgzFz9KyZKS/HDgpEMJi5b9NaTci
-	 UoqR5VheuzI1T3xBHF/ODv/AgUDdZumSd7A1OrAEIHgfeYWVY1f8HOxG0mGGrNFZFC
-	 YRCnz8oFvINlQ==
-Message-ID: <sashiko-outbox-186306@kernel.org>
+	b=Gj9FMtfstUPtDUunv9opHCemZXAYhGaTMZv78sQ6sLStSJ0UZsN05agD366RzQuhH
+	 mMggq2F7lrjRhOffq6+h5gapA41zAaeSQhf3tEJDjM3nbrd7QTof3sBf/mxEcISI3+
+	 5heQpR9RlPP4ek2hF59b8wskCsSG8pUHLTX3/84fM8xHb/SNkNItyv17n+ZDXIeVKW
+	 nZdn7QTyPnP3G2wH3vsScZNbYjTJEcdu55G2cAVI9q1D4hcE+EvIBz47amHH2Fnigm
+	 4t1p1veW6e5tRbraR6xA5Vkv0IrRJqUtWAq9l7iV0HRza0SzXz/uMDOYiSoI2n1Bni
+	 oSbdcFaBL+uvg==
+Message-ID: <sashiko-outbox-186308@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v5 3/3] arm64: dts: rockchip: fix power-off on
- Firefly-RK3399
+Subject: Re: [PATCH v5 2/3] mfd: rk8xx: Release the power hold GPIOs before
+ powering off
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Yaozhong Li" <yaozhonguwl@gmail.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261027084511.1992-4-yaozhonguwl@gmail.com>
+In-Reply-To: <20261027084511.1992-3-yaozhonguwl@gmail.com>
 References: <20261027084511.1992-1-yaozhonguwl@gmail.com>
- <20261027084511.1992-4-yaozhonguwl@gmail.com>
+ <20261027084511.1992-3-yaozhonguwl@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 27 Oct 2026 08:51:49 +0000
+Date: Tue, 27 Oct 2026 08:53:55 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,28 +61,25 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> poweroff on this board drops the rails and immediately brings them back
-> up, so it reboots instead of staying off and U-Boot reports a power-on
-> reset.
+> rk808_power_off() writes the PMIC's shutdown bit directly. On boards where
+> lines driven by the SoC gate the PMIC's power-off path, a shutdown
+> performed this way does not stick: the rails drop and immediately come
+> back up, so the board restarts instead of staying off. U-Boot reports the
+> result as a power-on reset.
 >=20
-> Firefly's BSP drives GPIO1_D0 high while the system runs and low during
-> shutdown, before writing the RK808's shutdown bit. Mainline does not
-> describe GPIO1_D0 at all, so nothing drives it and the shutdown does not
-> stick. Describe it in the PMIC node, with the settle time the vendor
-> uses.
+> Take those lines as an optional GPIO array, hold them asserted while the
+> system runs and release them - waiting power-hold-delay-ms - before
+> writing the shutdown bit. Device trees without the property retain the
+> existing behaviour.
 >=20
-> The BSP releases GPIO1_B5 in the same sequence, and in testing the board
-> came back up when that pin was still high as the shutdown bit was
-> written. Mainline describes GPIO1_B5 as the backlight enable GPIO.
-> pwm-backlight drives its enable GPIO low whenever it turns the backlight
-> off, including from its shutdown callback in device_shutdown(), which
-> runs before the PMIC's power-off prepare handler. When pwm-backlight is
-> not bound, nothing claims the pin; on this board it is then an input
-> reading low, which also lets the shutdown stick, although that is not
-> guaranteed on every board. The pin is therefore left to the backlight.
+> The array is claimed before any child device is registered, so that a
+> -EPROBE_DEFER from the GPIO provider does not tear down the regulators,
+> RTC and clocks that devm_mfd_add_devices() has already registered.
 >=20
-> Fixes: 171582e00db1 ("arm64: dts: rockchip: add support for firefly-rk339=
-9 board")
+> On a Firefly-RK3399 the shutdown stuck when such a line went from high to
+> low before the shutdown bit was written, and did not when the line was
+> never driven.
+>=20
 > Assisted-by: LLM
 > Signed-off-by: Yaozhong Li <yaozhonguwl@gmail.com>
 
@@ -90,5 +87,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261027084511.1992=
--1-yaozhonguwl@gmail.com?part=3D3
+-1-yaozhonguwl@gmail.com?part=3D2
 
