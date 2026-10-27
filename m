@@ -1,56 +1,41 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=114.242.206.163
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793072258;
-	b=nphupljOuvS2lTX1ctZqjJSA8dSfKCvuEgbugLLXdeiGwf0K/3T0QW6jQqgO9RZr3DfZ
-	 Hu5NcqcW36qj57BS4PkShqUqmtxX+6xxvdg2X/NILt5h0Uj2gsn/Ah9fBmT/lqPl6wnWc
-	 +mHQY03096uSXq7uTs6smH+Nf7h9nbQxY1JE8T5AsvgWLS8cCAeSWQDqoxTvr9IHuH4MZ
-	 RRxMmr+d5yCdYIQyfV0JdAF4Bm2z/qM8TyoCBDD6wjZJk1au9DxEOUNsOenqVKArjbchb
-	 SWY12JUtN0DqLQsFtEd/1ZqZP8QB6x8b8tBo/AOfJ3tZ4d4ZK3lTMPe6/8yZIIMo5cA==
+	t=1793073589;
+	b=DiwtLb4cUz4QiQqnSGMQfuGu0MrCyQ4QUbjiXoUYBzK40zfik2C427dkdgD93FcS8oBV
+	 QgQaeGS0Wlhtft/U5L4/4iJjYAIVyOh5QZNVw+NT1PQoR2+V2TdoMs25BszBrnvWfWEBP
+	 B7UY+uC3Ng+8SDVB+sgQ/4LFKT3ET8JV9477+GfvXVC6a8G4UysLOrXM5TnkIMdSK8ngZ
+	 DCrjoRhGW93VH78M1CFdJ2yowwG9yq/rZwN7r0GEUARjeBD9qHs7v9PXUnxjW0OnONd0c
+	 L5M7Et5KdTLrL7zpc/kpPq5ZX4FD1M8Uh54GePq5RHtCJzqPB4jlcEwtI819P9hg1vg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793072258;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=nPXSGSBZGZ90t+9pV7ld0SIwqlXMZ0hKy2DHTbJP7iY=;
-	b=wGwuhMb2cAGvEEp+2DLqPyOyVxb8G8nxv+XFIeTew+Np1GeRFLhtDs03/quBmGHqBz3s
-	 XKqqir5ZtF5RI5T0WdhN9jG/ft8/6anSF5HL3P74qjxrjdceXpLXKdJFEKNxtntqAIMWY
-	 bcQWc8psV0C/secQQfEss2/uiTRWYyg1YZmvwNj5KZSD3gvKiASFUjajnjPzCLPYigCJO
-	 NZKql/HOxRk3XSYB8OzUYh3P/csInZRKIITpGZkX5OtjN2n9cmGnh5LnFM/VLNZZdygsN
-	 o9snk0vKdTIfpRpEJ5LDVmU8skrowaw80K2ENBjH8qI8Yjsj3YRGvrr8cR1oVqAhgyw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793073589;
+	h=DMARC-Filter:Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-CM-TRANSID:X-CM-SenderInfo:
+	 X-Coremail-Antispam;
+	bh=yNjVGzNCe/dUhA+Uvzx9OfKhmHV1qkPYX987us1hODA=;
+	b=FoJYGLaI23DHW3qsViyn02RaK2ab13O+ZY+g/r+mreoNZ1gxzC0NTmlkPRYtlU4/G5Vf
+	 yu9iihpYsZH8G2qGjtHJxhAY0KI9KyPtZh4hbT6Sycr8KRdAiQf7gTpUP4FVcCKOlGyG5
+	 I9x4HmjNKo0GzKHQ8bOpdUdyaVRQ/j4raz3qZD6bUFM2+JGXI+cOlgz9zY2vQClPBlc1L
+	 Ju9demg2niv5uDyUY2YR/RXjE+Xo8ZS8sZu1e15GF0G5feWp2OUHdId9zOevLfT+NvBUY
+	 UfrZKCzzRC4ybGz7gb/Xb/yLp8fsIKz4bV9XgrMS4uibhxAT/iadqWqW/b4CdOhlSTA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="WMC+/kXm";
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F2FC606A31A
-	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 03:37:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WMC+/kXm
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 90B4D1F01825;
-	Tue, 27 Oct 2026 03:37:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793072257;
-	bh=nPXSGSBZGZ90t+9pV7ld0SIwqlXMZ0hKy2DHTbJP7iY=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=WMC+/kXmSSu3wSXzD5+h3TJSy/IvbjLmhQquGTJIwWrX1sys9LyeFDBU7DD+Gejmq
-	 43vyIaktbmNYSLat6V1TptjaFwXsQuSgQ6ymllGp1ePAHX5clB4KBEVVSGKWWPXzl3
-	 vd9311PjRu/EbxE/l8XQjESa/HZK7M8iGzkdlIX0YWxm1Xy9rkB/M/Kk4IwV28GsWk
-	 pAHsJQsOfdsZ8rYUKlQZ0ACoOXIRWmC7KeLGCYVTF+b4GyrgYsQAwAFjepemGamP0X
-	 edLAykc906g5Yrz4iaNx2464mbTA9Hwwl2o7aSx42qoZwA8EA6RIWxBtS8TQfI7eVC
-	 mEq3CLeWKhvrQ==
-Message-ID: <sashiko-outbox-186056@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH] mfd: twl6040: fix IRQ action memory leaks during
- teardown
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Guangshuo Li" <lgs201920130244@gmail.com>, mfd@lists.linux.dev
-Cc: lee@kernel.org
-In-Reply-To: <20261027032609.119226-1-lgs201920130244@gmail.com>
-References: <20261027032609.119226-1-lgs201920130244@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 27 Oct 2026 03:37:37 +0000
+	dmarc=none header.from=loongson.cn;
+	spf=pass smtp.mailfrom=loongson.cn;
+	arc=none smtp.remote-ip=114.242.206.163
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4CEB4606A31B
+	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 03:59:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4CEB4606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
+Received: from loongson.cn (unknown [10.20.42.102])
+	by gateway (Coremail) with SMTP id _____8DxpvCxIeBqULIZAA--.9351S3;
+	Tue, 27 Oct 2026 11:59:45 +0800 (CST)
+Received: from [127.0.0.1] (unknown [127.0.0.1])
+	by front1 (Coremail) with SMTP id qMiowJBxpMyrIeBqK40wAA--.9167S2;
+	Tue, 27 Oct 2026 11:59:42 +0800 (CST)
+Message-ID: <aa36b32b-5702-42e9-b27a-19dcf373b777@loongson.cn>
+Date: Tue, 27 Oct 2026 11:56:54 +0800
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,59 +44,197 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 20/28] mfd: loongson-se: Stop controller and mask
+ interrupts on teardown and shutdown
+To: Lee Jones <lee@kernel.org>
+Cc: Yinggang Gu <guyinggang@loongson.cn>, Huacai Chen
+ <chenhuacai@kernel.org>, linux-crypto@vger.kernel.org, mfd@lists.linux.dev,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+References: <20261021121245.3111563-1-lee@kernel.org>
+ <20261021121245.3111563-20-lee@kernel.org>
+Content-Language: en-US
+From: Qunqin Zhao <zhaoqunqin@loongson.cn>
+In-Reply-To: <20261021121245.3111563-20-lee@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:qMiowJBxpMyrIeBqK40wAA--.9167S2
+X-CM-SenderInfo: 52kd01pxqtx0o6or00hjvr0hdfq/
+X-Coremail-Antispam: 1Uk129KBj93XoW3XrW7uF4DWF48Gw4ftryxJFc_yoW7Wr48pF
+	4DAa4a9r4Yyr42kwsxXrZ09F1Y934ftry7CrZ7Ww4xCryDtw18Wry5KF18GFs3Cr4UXF48
+	XrW8GrZ5CF48uFgCm3ZEXasCq-sJn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7ZEXa
+	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+	0xBIdaVrnRJUUUyEb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r106r15M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_
+	Gr1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc804VCY07AIYIkI8VC2zVCFFI0UMc
+	02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAF
+	wI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JMxAIw28IcxkI7VAKI4
+	8JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xv
+	wVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwIxGrwCI42IY6xIIjx
+	v20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20E
+	Y4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267
+	AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU8PCzJUUUUU==
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
-- [Low] mfd: twl6040: uncapitalized commit subject description after prefix
---
 
-commit 8ed2bf2661be49ca78d760d94439552c3d69696d
-Author: Guangshuo Li <lgs201920130244@gmail.com>
+在 2026/10/21 20:09, Lee Jones 写道:
+> loongson_se_probe() enables hardware interrupts before registering IRQ
+> handlers and starts the controller via loongson_se_init(), but provides
+> no teardown or shutdown handler to stop the controller and mask
+> interrupts.  If probe fails after loongson_se_init(), if the driver is
+> unbound, or during a system reboot or kexec transition, the controller
+> remains active with DMA configured to memory that is reclaimed.
+>
+> Clear pending interrupts before requesting IRQs, unmask interrupts only
+> after IRQ handlers are registered, clean up on failure inside
+> loongson_se_init(), register a devres action after loongson_se_init()
+> succeeds to issue SE_CMD_STOP and mask interrupts on teardown, and wire
+> up the platform driver .shutdown callback.
+>
+> Fixes: e551fa3159e3 ("mfd: Add support for Loongson Security Engine chip controller")
+> Closes: https://sashiko.dev/#/bug/linux-15511672-7569-4eac-96a0-c08581925710
+> Closes: https://sashiko.dev/#/bug/linux-e6ed8d33-d641-4969-a5ea-959f21ae3696
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Lee Jones <lee@kernel.org>
 
-mfd: twl6040: fix IRQ action memory leaks during teardown
+Reviewed-by: Qunqin Zhao <zhaoqunqin@loongson.cn>
 
-This commit updates twl6040_probe() error paths and twl6040_remove() in
-drivers/mfd/twl6040.c to remove MFD child devices and free requested
-parent IRQs before calling regmap_del_irq_chip().
+Thanks for fixing this!
 
->     mfd: twl6040: fix IRQ action memory leaks during teardown
->    =20
->     twl6040_remove() currently removes the regmap IRQ chip before
->     removing the MFD child devices. This destroys the IRQ mappings
->     before the child drivers can release their interrupt handlers.
->    =20
->     The parent driver also registers READY and thermal interrupt
->     handlers using devm_request_threaded_irq(). These handlers are
->     normally released by device-managed cleanup after remove returns,
->     when the corresponding IRQ descriptors have already been removed.
->    =20
->     Consequently, free_irq() cannot find the IRQ descriptors and the
->     allocated struct irqaction objects are not freed. The associated
->     IRQ threads also cannot be stopped through the normal cleanup path.
->    =20
->     The probe error paths have a similar issue, as they destroy the IRQ
->     chip before the device-managed IRQ handlers are released.
->    =20
->     Remove the MFD child devices first, then explicitly free the
->     parent's READY and thermal IRQ handlers using devm_free_irq()
->     before removing the regmap IRQ chip.
->    =20
->     Also update the probe error paths to release successfully requested
->     IRQs before destroying their mappings.
->    =20
->     This issue was found by our static analysis tool under development.
->    =20
->     Fixes: ab7edb149c75 ("mfd: twl6040: Convert to use regmap_irq")
->     Cc: stable@vger.kernel.org
->     Signed-off-by: Guangshuo Li <lgs201920130244@gmail.com>
 
-[Severity: Low]
-This isn't a bug, but in the MFD subsystem commit subject lines normally
-capitalize the first word of the description after the prefix. Could the
-subject line be updated to:
+Best Regards,
 
-  mfd: twl6040: Fix IRQ action memory leaks during teardown
+Qunqin.
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261027032609.1192=
-26-1-lgs201920130244@gmail.com?part=3D1
+> ---
+>  drivers/mfd/loongson-se.c       | 51 +++++++++++++++++++++++++++++----
+>  include/linux/mfd/loongson-se.h |  1 +
+>  2 files changed, 46 insertions(+), 6 deletions(-)
+>
+> diff --git a/drivers/mfd/loongson-se.c b/drivers/mfd/loongson-se.c
+> index 10af13c3b7cc..bdbab4b91729 100644
+> --- a/drivers/mfd/loongson-se.c
+> +++ b/drivers/mfd/loongson-se.c
+> @@ -169,6 +169,23 @@ static irqreturn_t se_irq_handler(int irq, void *dev_id)
+>  	return IRQ_HANDLED;
+>  }
+>  
+> +static void loongson_se_stop(void *data)
+> +{
+> +	struct loongson_se *se = data;
+> +	struct loongson_se_controller_cmd cmd = {};
+> +
+> +	mutex_lock(&se->engine_init_lock);
+> +
+> +	cmd.command_id = SE_CMD_STOP;
+> +	loongson_se_send_controller_cmd(se, &cmd);
+> +
+> +	spin_lock_irq(&se->dev_lock);
+> +	writel(0, se->base + SE_S2LINT_EN);
+> +	spin_unlock_irq(&se->dev_lock);
+> +
+> +	mutex_unlock(&se->engine_init_lock);
+> +}
+> +
+>  static int loongson_se_init(struct loongson_se *se, dma_addr_t addr, int size)
+>  {
+>  	struct loongson_se_controller_cmd cmd = {};
+> @@ -176,15 +193,23 @@ static int loongson_se_init(struct loongson_se *se, dma_addr_t addr, int size)
+>  
+>  	cmd.command_id = SE_CMD_START;
+>  	err = loongson_se_send_controller_cmd(se, &cmd);
+> -	if (err)
+> +	if (err) {
+> +		writel(0, se->base + SE_S2LINT_EN);
+>  		return err;
+> +	}
+>  
+>  	cmd.command_id = SE_CMD_SET_DMA;
+>  	cmd.info[0] = lower_32_bits(addr);
+>  	cmd.info[1] = upper_32_bits(addr);
+>  	cmd.info[2] = size;
+>  
+> -	return loongson_se_send_controller_cmd(se, &cmd);
+> +	err = loongson_se_send_controller_cmd(se, &cmd);
+> +	if (err) {
+> +		loongson_se_stop(se);
+> +		return err;
+> +	}
+> +
+> +	return 0;
+>  }
+>  
+>  static const struct mfd_cell engines[] = {
+> @@ -192,6 +217,13 @@ static const struct mfd_cell engines[] = {
+>  	{ .name = "tpm_loongson" },
+>  };
+>  
+> +static void loongson_se_shutdown(struct platform_device *pdev)
+> +{
+> +	struct loongson_se *se = platform_get_drvdata(pdev);
+> +
+> +	loongson_se_stop(se);
+> +}
+> +
+>  static int loongson_se_probe(struct platform_device *pdev)
+>  {
+>  	struct device *dev = &pdev->dev;
+> @@ -225,12 +257,12 @@ static int loongson_se_probe(struct platform_device *pdev)
+>  	if (IS_ERR(se->base))
+>  		return PTR_ERR(se->base);
+>  
+> -	writel(SE_INT_ALL, se->base + SE_S2LINT_EN);
+> -
+>  	nr_irq = platform_irq_count(pdev);
+>  	if (nr_irq <= 0)
+>  		return -ENODEV;
+>  
+> +	writel(SE_INT_ALL, se->base + SE_S2LINT_CL);
+> +
+>  	for (i = 0; i < nr_irq; i++) {
+>  		irq = platform_get_irq(pdev, i);
+>  		err = devm_request_irq(dev, irq, se_irq_handler, 0, "loongson-se", se);
+> @@ -238,10 +270,16 @@ static int loongson_se_probe(struct platform_device *pdev)
+>  			dev_err(dev, "failed to request IRQ: %d\n", irq);
+>  	}
+>  
+> +	writel(SE_INT_ALL, se->base + SE_S2LINT_EN);
+> +
+>  	err = loongson_se_init(se, paddr, se->dmam_size);
+>  	if (err)
+>  		return err;
+>  
+> +	err = devm_add_action_or_reset(dev, loongson_se_stop, se);
+> +	if (err)
+> +		return err;
+> +
+>  	return devm_mfd_add_devices(dev, PLATFORM_DEVID_NONE, engines,
+>  				    ARRAY_SIZE(engines), NULL, 0, NULL);
+>  }
+> @@ -253,8 +291,9 @@ static const struct acpi_device_id loongson_se_acpi_match[] = {
+>  MODULE_DEVICE_TABLE(acpi, loongson_se_acpi_match);
+>  
+>  static struct platform_driver loongson_se_driver = {
+> -	.probe   = loongson_se_probe,
+> -	.driver  = {
+> +	.probe    = loongson_se_probe,
+> +	.shutdown = loongson_se_shutdown,
+> +	.driver   = {
+>  		.name  = "loongson-se",
+>  		.acpi_match_table = loongson_se_acpi_match,
+>  	},
+> diff --git a/include/linux/mfd/loongson-se.h b/include/linux/mfd/loongson-se.h
+> index 2d0a8b1e5c9e..dbe5992bd435 100644
+> --- a/include/linux/mfd/loongson-se.h
+> +++ b/include/linux/mfd/loongson-se.h
+> @@ -11,6 +11,7 @@
+>  #define SE_SEND_CMD_REG_LEN		0x8
+>  /* Controller command ID */
+>  #define SE_CMD_START			0x0
+> +#define SE_CMD_STOP			0x1
+>  #define SE_CMD_SET_DMA			0x3
+>  #define SE_CMD_SET_ENGINE_CMDBUF	0x4
+>  
+
