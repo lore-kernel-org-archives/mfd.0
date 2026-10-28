@@ -1,57 +1,69 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=161.97.139.27
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793199597;
-	b=xIki68awzPf1F3oUJbug6XBJ7VthI4L8ueb03JHAbky6XommYMgZB98CLlYSn0u1KcUY
-	 AtSqPiQoaVGzg0m1vsC0sZyshrKIbLzrqTAOrGQ+etdOIhFdJkVg8tGFq5tBFN+Ps1QTo
-	 /goHI3C8BSo9sHo7byD7c3MUA53Lfbg5Prw3oVLyQUUPVVaPcIdGtKqndMJiC2bZmrpmh
-	 Dv5yRsl+b9syKTKD1Ed9kE8IzWmQZdXB384d0vr2AVt2cfvNWjLNLidCdsENgGtIC4ooB
-	 284gDjR/ZHrh7D2E5QR3nyd+qGknRAMlko66SEnn+TGKBlsoJsojQdtBLU+b09ILTTA==
+	t=1793202627;
+	b=k8p1jrp++nqwh54gquB+NdK/CElQ0JfcPkSJqw4bOgVQZ48GlR/jLigYksk6+VAV0QV8
+	 NFd2l9UB3p1zNG+yNDIxWqsKoCyLJlDE5A6TrmmwS7PxGCOQDr8wRdyuCxeFnL+IAfpoZ
+	 DkxY4qDWyjJgVWwqY/dzGDhp4TjV8bFIuhtF4ClGI6Lm3diDBxufVKHQVIfMYXQ7JjR9a
+	 cHX59/Tj5XTw6CvWfOwahQHNVkeIa33aQ71/sFDjIUxQ1tgpGIft18efxYkblJB4TV48N
+	 6VGU/D6c1drYCBBpOcCgvIi/LnrXNBT7kwKNzU+NTsQ8LFEaBsdorAFL/BT+VzvFzag==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793199597;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To;
-	bh=NSb6a/pDw1kg0BISDKF7FpWlMPPEDSnf/hJXicQJYVw=;
-	b=nuhEo5+AXvHnlx3GoOFfPQQlo88/7xph/Y2fB+LMVtikGmj9zdlmu6hnP9ODrthdLznt
-	 nmW6dFHv79kEYKjZpFMI03NBStpEsrkipq7rh1Zmv/Q+5zFMH58r8fpdl+igULgFOXXOD
-	 k2KT+NTJDArMngE3D2mPAUJqyu1ZVjG7FpiwA4rUJdPdNWpNPxdDL0ufOZZnFURkFIpAh
-	 SU+W79635AMX84e+sxbpl7ba51SqXmf+ICcf1MKH/+5QHZmd7diV/bjzD4GF42Rr9qxj0
-	 YexAEcjd9nHIJ6lOormwHlEJw6wSwMyM9U379s67sEFQkQ3XdpGC2fiwGn9Ci63qOnQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793202627;
+	h=DMARC-Filter:Received:DKIM-Signature:Date:From:To:Cc:Subject:
+	 Message-ID:In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=P5gHNQzeRGB5ay4L4jhyXK5TgEBlTihVO3XydtF8iLo=;
+	b=w0tDLf2Xzuxs75oo35YaPl9QcElcaZnlcCd6HAcPqqWBOvZOnxAKmnuIN6OMYS5dHCgE
+	 e9E6XOdCpqzPClZzqRMhLt8NdQb4y2vi1oZTXgVVR4zdnhxk8RLc8trLnbZlOTNlku8vV
+	 nZlEOMRdQcCcgGW/TEzsoA8QKJycu0nZhgxcJXZbsIosTRoEnfdcrUeugPlOQczRd0RWR
+	 R2pjNUIgPuaiKQOVbMUtR7qdu3aD4WIdxr9BEs9tFRpcr8YwkWfeZ44UR3PhbFr6gtk2Y
+	 E1cHO5puILMPwNVeUTKSJK2V3EZfK5S9Py/5hCjChWiBJfNTjC2A47tn9XEoZH0TZ4w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jgUOXVxE;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=kemnade.info;
+	spf=pass smtp.mailfrom=kemnade.info;
+	dkim=pass header.d=kemnade.info header.i=@kemnade.info header.a=rsa-sha256 header.s=20220719 header.b="XZ0/f7o2";
+	arc=none smtp.remote-ip=161.97.139.27
+Received: from mail2.andi.de1.cc (vmd64148.contaboserver.net [161.97.139.27])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 510A1606A31A;
-	Wed, 28 Oct 2026 14:59:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34294606A325
+	for <mfd@lists.linux.dev>; Wed, 28 Oct 2026 15:50:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 34294606A325
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kemnade.info
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jgUOXVxE
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 74FDD1F01828;
-	Wed, 28 Oct 2026 14:59:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793199597;
-	bh=NSb6a/pDw1kg0BISDKF7FpWlMPPEDSnf/hJXicQJYVw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=jgUOXVxES0RtRhBDD5vjPlJx8U4HEZ7aqAILOTNCPBEbA0FgKh+iooXbxMPg1Cq9R
-	 f3hVu1uOGjh9Ofeeph6srH+EuC+y9sIsXaYCQwPZ5NC7VoEqiyQ0jdQlrogzHZ68X4
-	 InAkxl/K94Aq+hAu+BKTAO5BsrnPfep3MJFBPxlildgaC/SzVfIaXRdpmyb6j2e6my
-	 7EoCnJwd7BO9KW5SmD1EMpig8TjfY+FAI3BMMf3mMFLU6ISeDPR9iC5e6p0PkyUbNc
-	 WUmJrXE+3GL2j/1feyPSiFNmUIAIV3+zy3dIx5FZn9EZ8Rj9AaezMHVZPa+Q+9HGRb
-	 o1oAR7x1gmj1Q==
-Date: Wed, 28 Oct 2026 14:59:53 +0000
-From: Lee Jones <lee@kernel.org>
-To: sashiko-reviews@lists.linux.dev
-Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
-	mfd@lists.linux.dev, robh@kernel.org, conor+dt@kernel.org
-Subject: Re: [PATCH v2 1/8] backlight: qcom-wled: fix string detection
- brightness on WLED5
-Message-ID: <20261028145953.GD3605912@google.com>
-References: <20261019-sm8150-display-card-v2-0-86c05068efc5@oss.qualcomm.com>
- <20261019-sm8150-display-card-v2-1-86c05068efc5@oss.qualcomm.com>
- <sashiko-outbox-177041@kernel.org>
+	dkim=pass (2048-bit key, unprotected) header.d=kemnade.info header.i=@kemnade.info header.a=rsa-sha256 header.s=20220719 header.b=XZ0/f7o2
+Received: from mail.andi.de1.cc ([2a02:c205:3004:2154::1])
+	by mail2.andi.de1.cc with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.98.2)
+	(envelope-from <andreas@kemnade.info>)
+	id 1xM5us-000000010hs-1jOV;
+	Wed, 28 Oct 2026 16:50:18 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=kemnade.info; s=20220719; h=References:In-Reply-To:Subject:Cc:To:From:
+	Reply-To:Content-ID:Content-Description;
+	bh=P5gHNQzeRGB5ay4L4jhyXK5TgEBlTihVO3XydtF8iLo=; t=1793202618; x=1794412218; 
+	b=XZ0/f7o2veiuVc7pLXDBWByqEM0mfFXxeJixN7FLhuyCt5/gYuSrETpW+OySaErn2xUcfQtpukg
+	nITnlVtwDKFwj3V0gra8EYwYQWyNRBONCFLrMxo5ioJs0nlSVNZ1QQu28xFeVClOfAMSmL5vqVIk+
+	LocTxowgpYZKN3sbfrGOE95+QJguZ+hTolak6MRxOD+yH+/NkASk4R+b1mm/UOj/B9aqMTrSwdx93
+	6piDB4ssoUGu/xqdoe549MrOpbc5kOI8gwnE5Au5CgJLGCBXfWKhyMbr/d6At6C05V8NhMY9JD6JC
+	R88jzXfK5Az1zVNMYnDtu6z0F2DqLyI0OxfQ==;
+Date: Wed, 28 Oct 2026 16:50:03 +0100
+From: Andreas Kemnade <andreas@kemnade.info>
+To: Lee Jones <lee@kernel.org>
+Cc: Aaro Koskinen <aaro.koskinen@iki.fi>, Kevin Hilman
+ <khilman@baylibre.com>, Roger Quadros <rogerq@kernel.org>, Tony Lindgren
+ <tony@atomide.com>, Kai Svahn <kai.svahn@nokia.com>, syed khasim
+ <x0khasim@ti.com>, Peter Ujfalusi <peter.ujfalusi@ti.com>, Samuel Ortiz
+ <sameo@linux.intel.com>, linux-omap@vger.kernel.org, mfd@lists.linux.dev,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Subject: Re: [PATCH v2 13/27] mfd: twl-core: Clear twl_priv pointer on
+ teardown and probe failure
+Message-ID: <20261028165003.60d0c033@kemnade.info>
+In-Reply-To: <20261027093306.2812695-14-lee@kernel.org>
+References: <20261027093306.2812695-1-lee@kernel.org>
+	<20261027093306.2812695-14-lee@kernel.org>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; aarch64-unknown-linux-gnu)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,87 +73,34 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <sashiko-outbox-177041@kernel.org>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Mon, 19 Oct 2026, sashiko-bot@kernel.org wrote:
+On Tue, 27 Oct 2026 09:30:42 +0000
+Lee Jones <lee@kernel.org> wrote:
 
-> Thank you for your contribution! Sashiko AI review found 1 potential issue(s) to consider:
-> - [Medium] backlight: qcom-wled: wled5_set_brightness() clamps 0 to low_limit on restore
+> twl_probe() allocates the file-scope twl_priv state with devm_kzalloc()
+> and checks for a non-NULL twl_priv at entry to reject multiple device
+> instances.  However, twl_remove() and the early error paths in
+> twl_probe() never reset twl_priv to NULL, a failure when adding MFD
+> child devices bypasses twl_remove() by jumping to free instead of fail,
+> and twl_remove() tears down the IRQ domain and dummy I2C clients before
+> child devices are unregistered.  After devres frees the underlying
+> memory on probe failure or unbind, twl_priv remains a dangling pointer,
+> causing subsequent exported API calls to dereference freed memory and
+> blocking future probe attempts with -EBUSY.
+> 
+> Unregister DT-populated and MFD child devices at the start of
+> twl_remove(), ensure mfd_add_devices() failures unwind via fail, and
+> reset twl_priv to NULL in twl_remove() and on probe error exit.
+> 
+> Fixes: 80a97ccd33be ("mfd: twl-core: Collect global variables behind one private structure (global)")
+> Closes: https://sashiko.dev/#/bug/linux-73e82f84-94de-4d08-82a4-f22d42a1dedf
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Lee Jones <lee@kernel.org>
 
-This needs a response.
+Hmm, couldn't we use devm_add_action_or_reset() for resetting the
+twl_priv pointer? Feels more clean for me.
 
-> --
-> 
-> commit 1866e6688066844d34f7f3f1d2a0c521bb917107
-> Author: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> 
-> backlight: qcom-wled: fix string detection brightness on WLED5
-> 
-> This commit updates wled_auto_string_detection() to use the per-version
-> wled_set_brightness() callback instead of hardcoding wled4_set_brightness(),
-> and moves the WLED5 module sync toggle into wled5_set_brightness().
-> 
-> > diff --git a/drivers/video/backlight/qcom-wled.c b/drivers/video/backlight/qcom-wled.c
-> > index ca350f320e177..c5243a6d547e5 100644
-> > --- a/drivers/video/backlight/qcom-wled.c
-> > +++ b/drivers/video/backlight/qcom-wled.c
-> 
-> [ ... ]
-> 
-> > @@ -791,7 +783,7 @@ static void wled_auto_string_detection(struct wled *wled)
-> >  	}
-> >  
-> >  	/* Restore brightness */
-> > -	rc = wled4_set_brightness(wled, wled->brightness);
-> > +	rc = wled->wled_set_brightness(wled, wled->brightness);
-> >  	if (rc < 0) {
-> >  		dev_err(wled->dev, "Failed to set brightness after auto detection rc=%d\n",
-> >  			rc);
-> 
-> [Severity: Medium]
-> When wled_auto_string_detection() runs during probe via
-> wled_probe() -> wled5_setup() -> wled_auto_detection_at_init(),
-> wled_read_brightness() has not run yet, so wled->brightness is still 0.
-> 
-> Previously, wled4_set_brightness() only clamped non-zero brightness values:
-> 
-> 	/* WLED4's lower limit of operation is 0.4% */
-> 	if (brightness > 0 && brightness < low_limit)
-> 		brightness = low_limit;
-> 
-> However, wled5_set_brightness() unconditionally clamps brightness == 0 up to
-> low_limit (0.1% of max_brightness):
-> 
-> 	/* WLED5's lower limit is 0.1% */
-> 	if (brightness < low_limit)
-> 		brightness = low_limit;
-> 
-> With this change, restoring wled->brightness (0) at the end of
-> wled_auto_string_detection() on WLED5 writes and latches low_limit into the
-> modulator brightness register before enabling WLED3_CTRL_REG_MOD_EN.
-> 
-> When wled_probe() subsequently calls wled_read_brightness():
-> 
-> 	rc = wled_read_brightness(wled);
-> 	if (rc < 0)
-> 		return rc;
-> 
-> 	wled->brightness = rc;
-> 	...
-> 	props.brightness = wled->brightness ?: val;
-> 
-> will it read back low_limit instead of 0, leaving ovp_irq enabled in
-> wled_configure_ovp_irq() and initializing props.brightness to low_limit
-> instead of default-brightness?
-> 
-> Should wled5_set_brightness() check brightness > 0 && brightness < low_limit
-> like wled4_set_brightness() does?
-> 
-> -- 
-> Sashiko AI review · https://sashiko.dev/#/patchset/20261019-sm8150-display-card-v2-0-86c05068efc5@oss.qualcomm.com?part=1
-
--- 
-Lee Jones
+Regards,
+Andreas
