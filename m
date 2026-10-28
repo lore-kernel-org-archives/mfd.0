@@ -1,60 +1,61 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=210.118.77.12
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793178800;
-	b=m3Oeyo6/qWe7ygiF+BVlEjoK0PBAFsjZSd//kWR+gemgyv9x/jxxdCNUvJ9Qz9prD5/T
-	 rnOL2XCD2KFqJfgjjNNVWWeC7GMIDlmOWgH4fugBiopfXuuuY2SCX9FQTwjb+kQcVZFd4
-	 F2PYNswlCxzXyEKvj4YrBF9Ti930yUt3ZZCtLIbDJP4t6oYXw6h1umplHIkgaJFyi3g2j
-	 fSldzjvR2uMd9/exxY9C/Fut2N5+X1qK39+ivUTaDKhHR+txeuPgNTEdE7WXBdJCcfz4d
-	 CS9KJjYxKaDr4Xw35yMcQq5BxwMHRAnyDKJaYRt5r7/dH8cH4M44YYFqbB7ACyVDVfQ==
+	t=1793180231;
+	b=EDhHUm5huKdw/Crmmxf1/UseaMCOa8u4+e7bILkBNUMOb2L15oVaOWTrq9jsrj81OU28
+	 V2u04RcEPjcHTF4N7O988Ag50OEqF1D80QHfMr/nx6sb+9+3LwM4uajYDzb1lY9PpMbsM
+	 0o9WD1IWFoGvfOR5ab90tRt1u5qSuOLBnh2uI3bLeBZ5vz0UCxKZbUb8SvU3hlNZijeNr
+	 Uhz/Q9rKs3d4p4tisldjZGHaNUruBBRSTpVricCfvPCqWzIM8/g46jgonC8MWJjnrFVmj
+	 NMlDDqkOdvS4rsC+sE1TAPMykL3b5ZdkEO0u44VAqxSs4Ar9R4/cCtYaZrs91me5gbQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793178800;
-	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:From:To:Cc:
-	 Content-Language:In-Reply-To:Content-Transfer-Encoding:X-CMS-MailID:
-	 X-Msg-Generator:Content-Type:X-RootMTR:X-EPHeader:X-CMS-RootMailID:
-	 References;
-	bh=3W2zW/ASI3Ufo+rdp+J+HzrLBLxCU9YgEhL1tFo9JN8=;
-	b=E386NHW46tj2LxrlKClufvprAtSg1XJoScZPuXnj6C3XNFlOXLpSlgoLXFmrsFqpkFbf
-	 Qc3Ek/dvJCrkZO1zWIh+1oYW/sQQ0/J9c2r1X+mIwXS6kU21uE5ZLeYGTJQLKRY6m1XL4
-	 +x1X7nVc6bCqHAltWOldfGHoAElD1y2BiW4i8Hlvu5ln5bIpPm+M1x5A7Ho671iVBq96q
-	 Pox7LsDEYFnnM1nG1KkW9DHQ7oTmAgGUISoi+Bm0fUrT+GrNZs2DUjhjU4kT0dzGhA9Bt
-	 Vdo7MTdV6b1Ut6TEgKhqzxQLDsXe5t1FxopIA1eMYhugmh+d78aFrDXO9AjK9XoW9MQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793180231;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=hkt3J7o6BQgO40vmJfQcUjJjdHsbv2iE23eksw80Rug=;
+	b=Ditz8HRQLnd22HBrHCC3NUhcfO6RAvO0cfNF8+OffaAN0JB2VOeqcaxbCfpfqCApm208
+	 qekuFBhF9Z2LCh7eBwaPZb5cB9Bj/3jNnN6LhS7ezyfqJDkDsDclrr/DiLp8UpOmGMrgv
+	 kPGsD6AU0FG8kJ02BnKVbNKfPZ+eA90wn+UooPCwDOW79iyHpXOM+v2eqtitehShtqI3G
+	 w4TI0CgZcbRg2DSozGRZuN0WqXuQ8+XvLyDY030aeLIBmSBnnMBkePqnYijRVdDq/hX7E
+	 MyF3shlrVaTIl8tIMRck3hRXCkk519EThPwY5x3oGnmpRXSuX8GELY+gCTicbTTyDtA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=samsung.com;
-	spf=pass smtp.mailfrom=samsung.com;
-	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=YD3seNv1;
-	arc=none smtp.remote-ip=210.118.77.12
-Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gWzv57eo;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8356B606A31C
-	for <mfd@lists.linux.dev>; Wed, 28 Oct 2026 09:13:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8356B606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35DD5606A327;
+	Wed, 28 Oct 2026 09:37:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=YD3seNv1
-Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
-	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20261028091311euoutp024819ef823fab2c20689b5890d7ddf5ae~ippwwUXVb2349923499euoutp02J;
-	Wed, 28 Oct 2026 09:13:11 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20261028091311euoutp024819ef823fab2c20689b5890d7ddf5ae~ippwwUXVb2349923499euoutp02J
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1793178791;
-	bh=3W2zW/ASI3Ufo+rdp+J+HzrLBLxCU9YgEhL1tFo9JN8=;
-	h=Date:Subject:From:To:Cc:In-Reply-To:References:From;
-	b=YD3seNv1lTl6lfYw3bfwIkC48J0uPe3B+5wKAZPK+XeWBwINFgBm5MPb9sVHecN7v
-	 XByNXwrD0JsSH1+jN75BcFsO8ELTz7OD2T7aTRqKuYUS05jwwSQTiJ5lwYNNLhOdCb
-	 QW+IPyyDcEgIBTrDIHHnlhBaaSr8YKqqFO/n8FO4=
-Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
-	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
-	20261028091310eucas1p1df77aa99909e0c12fcd259596f1f2163~ippv92h803159131591eucas1p1d;
-	Wed, 28 Oct 2026 09:13:10 +0000 (GMT)
-Received: from [192.168.1.44] (unknown [106.210.136.40]) by
-	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
-	20261028091308eusmtip25984a31eb02ec800271e9985aaee42c8~ippuC0ldb0063200632eusmtip2x;
-	Wed, 28 Oct 2026 09:13:08 +0000 (GMT)
-Message-ID: <f6474690-adba-43ff-90f8-cdddf857286b@samsung.com>
-Date: Wed, 28 Oct 2026 10:13:07 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gWzv57eo
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 82A121F031E3;
+	Wed, 28 Oct 2026 09:37:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793180231;
+	bh=hkt3J7o6BQgO40vmJfQcUjJjdHsbv2iE23eksw80Rug=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=gWzv57eoVREIE6uyRZgZdIiciEl7WLnQhOONFi+w9KDK3Uw2DwGDKIqmwozZ5u164
+	 G2OU1cFTYutESW96OZgJMn/OT8s1QMfi015khHuFvNahrjuFJVsgyX7HcUtZBUXkVa
+	 SJQPChGv6ukztUUTlkXWIm6FiS7k2Hez40MBg7Ml7wFjlWw6vtgUdjXfWG6DFr40Iw
+	 O3xCIvQevAQOTO6mVEmTBaSNyNltMjtPzq4bQZtTsR6g7NcupBtxzAm0AsCcxDOTDh
+	 9kyF6FOzzK4pXsZF3pjixNiFjUS0gXRzfl0mUwtxnUGx9ukcHRtM/XHGFL4/hhU/Pq
+	 hp3koq66nDdhw==
+Date: Wed, 28 Oct 2026 09:37:05 +0000
+From: Lee Jones <lee@kernel.org>
+To: Guangshuo Li <lgs201920130244@gmail.com>
+Cc: Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>,
+	Mark Brown <broonie@opensource.wolfsonmicro.com>,
+	Samuel Ortiz <sameo@linux.intel.com>,
+	Peter Ujfalusi <peter.ujfalusi@ti.com>, linux-omap@vger.kernel.org,
+	mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: Re: [PATCH] mfd: twl6040: fix IRQ action memory leaks during teardown
+Message-ID: <20261028093705.GK2195460@google.com>
+References: <20261027032609.119226-1-lgs201920130244@gmail.com>
+ <179310015976.2808517.13064510476219400398@kernel.org>
+ <CANUHTR8Ypwpm+Qqmk-fob1=e040rRH5QGTs7gN6MWRKQYyOdCw@mail.gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -64,79 +65,111 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 16/20] phy: Add common Innosilicon HDMI PHY helpers
-From: Michal Wilczynski <m.wilczynski@samsung.com>
-To: Vinod Koul <vkoul@kernel.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring
-	<robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
-	<conor+dt@kernel.org>, Andrzej Hajda <andrzej.hajda@intel.com>, Robert Foss
-	<rfoss@kernel.org>, Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
-	Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Luca Ceresoli <luca.ceresoli@bootlin.com>, Maarten Lankhorst
-	<maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>, Lee Jones <lee@kernel.org>, Andy
-	Yan <andy.yan@rock-chips.com>, Philipp Zabel <p.zabel@pengutronix.de>, Emil
-	Renner Berthing <kernel@esmil.dk>, Hal Feng <hal.feng@starfivetech.com>,
-	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
-	<sboyd@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Paul Walmsley
-	<pjw@kernel.org>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou
-	<aou@eecs.berkeley.edu>, Alexandre Ghiti <alex@ghiti.fr>, Dominique
-	Belhachemi <db@domibel.de>, Brian Masney <bmasney+clk@redhat.com>, Jerome
-	Brunet <jbrunet+clk@baylibre.com>, linux-phy@lists.infradead.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, mfd@lists.linux.dev,
-	linux-clk@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-rockchip@lists.infradead.org, linux-riscv@lists.infradead.org, Marek
-	Szyprowski <m.szyprowski@samsung.com>, Maud Spierings
-	<maud_spierings@murena.io>, Graham Markall <hello@big-grey.co.uk>, Icenowy
-	Zheng <zhengxingda@iscas.ac.cn>, Chaoyi Chen <chaoyi.chen@rock-chips.com>,
-	Joshua Peisach <jpeisach@ubuntu.com>, =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?=
-	<u.kleine-koenig@baylibre.com>
-Content-Language: en-US
-In-Reply-To: <943aa2e7-3945-48f9-9a87-9c963f97099d@samsung.com>
-Content-Transfer-Encoding: 7bit
-X-CMS-MailID: 20261028091310eucas1p1df77aa99909e0c12fcd259596f1f2163
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20260915153242eucas1p1394a6a5e272f106b9cab2a0f709ddeb8
-X-EPHeader: CA
-X-CMS-RootMailID: 20260915153242eucas1p1394a6a5e272f106b9cab2a0f709ddeb8
-References: <20260915-jh7110-clean-send-v4-0-f0e4fd6f2cc8@samsung.com>
-	<CGME20260915153242eucas1p1394a6a5e272f106b9cab2a0f709ddeb8@eucas1p1.samsung.com>
-	<20260915-jh7110-clean-send-v4-16-f0e4fd6f2cc8@samsung.com>
-	<asEPmpQTwXYADwTk@parshuram>
-	<943aa2e7-3945-48f9-9a87-9c963f97099d@samsung.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CANUHTR8Ypwpm+Qqmk-fob1=e040rRH5QGTs7gN6MWRKQYyOdCw@mail.gmail.com>
 
+On Wed, 28 Oct 2026, Guangshuo Li wrote:
 
-
-On 10/26/26 10:13, Michal Wilczynski wrote:
-> Hi Vinod,
+> Hi Lee,
 > 
-> On 10/3/26 16:22, Vinod Koul wrote:
->> On 15-09-26, 17:32, Michal Wilczynski wrote:
->>> The Innosilicon HDMI PHY IP is used by several SoCs. They differ in
->>> where the PHY register block sits in the register space and in which
->>> pixel clocks they support, but the pre-PLL programming sequence and the
->>> layout of its registers are the same.
->>>
->>> Add a small library holding that shared part: the pre-PLL configuration
->>> table format, a lookup, clk_ops determine_rate and recalc_rate helpers,
->>> and the pre-PLL register programming. Callers pass a regmap, a register
->>> offset for the PHY block, and their own pixel clock table.
->>>
->>> No driver uses it yet; the users are converted separately.
->>
->> Is there anything in phy patches here that has dependency with rest? If
->> not consider splitting it up...
+> On Wed, 28 Oct 2026 at 00:26, Lee Jones <lee@kernel.org> wrote:
+> >
+> > On Tue, 27 Oct 2026, Guangshuo Li wrote:
+> >
+> > > twl6040_remove() currently removes the regmap IRQ chip before
+> > > removing the MFD child devices. This destroys the IRQ mappings
+> > > before the child drivers can release their interrupt handlers.
+> > >
+> > > The parent driver also registers READY and thermal interrupt
+> > > handlers using devm_request_threaded_irq(). These handlers are
+> > > normally released by device-managed cleanup after remove returns,
+> > > when the corresponding IRQ descriptors have already been removed.
+> > >
+> > > Consequently, free_irq() cannot find the IRQ descriptors and the
+> > > allocated struct irqaction objects are not freed. The associated
+> > > IRQ threads also cannot be stopped through the normal cleanup path.
+> > >
+> > > The probe error paths have a similar issue, as they destroy the IRQ
+> > > chip before the device-managed IRQ handlers are released.
+> > >
+> > > Remove the MFD child devices first, then explicitly free the
+> > > parent's READY and thermal IRQ handlers using devm_free_irq()
+> > > before removing the regmap IRQ chip.
+> > >
+> > > Also update the probe error paths to release successfully requested
+> > > IRQs before destroying their mappings.
+> > >
+> > > This issue was found by our static analysis tool under development.
+> > >
+> > > Fixes: ab7edb149c75 ("mfd: twl6040: Convert to use regmap_irq")
+> > > Cc: stable@vger.kernel.org
+> > > Signed-off-by: Guangshuo Li <lgs201920130244@gmail.com>
+> > > ---
+> > >  drivers/mfd/twl6040.c | 13 +++++++++----
+> > >  1 file changed, 9 insertions(+), 4 deletions(-)
+> > >
+> > > diff --git a/drivers/mfd/twl6040.c b/drivers/mfd/twl6040.c
+> > > index 562a0f939f6e..7b05d21cd17d 100644
+> > > --- a/drivers/mfd/twl6040.c
+> > > +++ b/drivers/mfd/twl6040.c
+> > > @@ -745,7 +745,7 @@ static int twl6040_probe(struct i2c_client *client)
+> > >                                       "twl6040_irq_th", twl6040);
+> > >       if (ret) {
+> > >               dev_err(twl6040->dev, "Thermal IRQ request failed: %d\n", ret);
+> > > -             goto readyirq_err;
+> > > +             goto thirq_err;
+> > >       }
+> > >
+> > >       /*
+> > > @@ -791,10 +791,14 @@ static int twl6040_probe(struct i2c_client *client)
+> > >       ret = mfd_add_devices(&client->dev, -1, twl6040->cells, children,
+> > >                             NULL, 0, NULL);
+> > >       if (ret)
+> > > -             goto readyirq_err;
+> > > +             goto mfd_err;
+> > >
+> > >       return 0;
+> > >
+> > > +mfd_err:
+> > > +     devm_free_irq(twl6040->dev, twl6040->irq_th, twl6040);
+> > > +thirq_err:
+> > > +     devm_free_irq(twl6040->dev, twl6040->irq_ready, twl6040);
+> > >  readyirq_err:
+> > >       regmap_del_irq_chip(twl6040->irq, twl6040->irq_data);
+> > >  gpio_err:
+> > > @@ -809,9 +813,10 @@ static void twl6040_remove(struct i2c_client *client)
+> > >       if (twl6040->power_count)
+> > >               twl6040_power(twl6040, 0);
+> > >
+> > > -     regmap_del_irq_chip(twl6040->irq, twl6040->irq_data);
+> > > -
+> > >       mfd_remove_devices(&client->dev);
+> > > +     devm_free_irq(twl6040->dev, twl6040->irq_th, twl6040);
+> > > +     devm_free_irq(twl6040->dev, twl6040->irq_ready, twl6040);
+> > > +     regmap_del_irq_chip(twl6040->irq, twl6040->irq_data);
+> >
+> > Why not use more devm_*() handlers?
+> >
+> > devm_regmap_add_irq_chip()
+> >
+> > devm_free* eeks me out.  The point of devm_*() is that it's managed.
+> >
+> > >       regulator_bulk_disable(TWL6040_NUM_SUPPLIES, twl6040->supplies);
+> > >  }
+> > > --
+> > > 2.43.0
+> > >
+> >
+> > --
+> > Lee Jones
 > 
+> Thanks for your suggestion. I'll look into using devm_*() APIs in v2.
+> 
+> Would you prefer that I submit the twl6040 and hi655x-pmic fixes as a
+> single patch series in v2, or separately?
 
-On second thought, I agree it will be easier for maintainers to merge,
-so I'll split it in v6. The PHY patches (the binding, the helpers, the
-Rockchip conversion and the JH7110 PHY driver) will go as a separate
-mini series.
+I'm not overly concerned.
 
-Best regards,
 -- 
-Michal Wilczynski <m.wilczynski@samsung.com>
-
+Lee Jones
