@@ -1,70 +1,95 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=161.97.139.27
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.160.171
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793136915;
-	b=hyagMwVYSCIk61UdVpPecDN5yl8gWvMhNSYxLMJevkdcyB3jftKs8PCQreTi0H/Xw2I7
-	 QVXHO+8a+CHJHe6/in2BupEGuNJphUyvT3WbI1kFgvdbnSeI7IAhCr4+VDssmD0OCFZmh
-	 sI5xGN5+od/KZ/8AAB3Iu/J66hlwNDk/su4V3rJ16fDZJ6P7HQlWQxSjAbZ9ts0W3u0D/
-	 I/f1yL5OZ4XgOotiTxuikohN0gx0aP9RrFn/8wSeq3Oj5yMN/7QFu9iDbV+x0ynvOoCmB
-	 Rm/XCP8K36IPbBWvfZyjWriR5tva3G8eRJ1DsYeiOGvwgahGtsGTzgLVh+IUedZ4dQw==
+	t=1793153859;
+	b=dTS4GglDEnQJE0ZfRV2wybLNK0HQXUFph38p8o/PSzxFsvHJVWEI8UG70cw540uAnn+u
+	 6l6GqK4I90oSQnM3Bf85iAUwo56QQf6BHFr0JhYOiyYwG5k8woehCPt1NRcsuZDpPg8ig
+	 qnuPGXuwwIh4auz8Vmplkl9S6rIg6HOdPK0csl/4fCE4V9kzmKzMeZOmHijg7WDYatVrL
+	 Q7qX4thMLjcuWjBq3/wTrPgG5PD2izE53TAhma4y5JMUpCzGlULdhTmVl3AZf2QNfAAlM
+	 OwjhrORpDivaWhLIiyW8bFMcit39yksWAX6gZJxa0TEHAl9V17LgrI9Lkj2tjlo7TcQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793136915;
-	h=DMARC-Filter:Received:DKIM-Signature:Date:From:To:Cc:Subject:
-	 Message-ID:In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	a=rsa-sha256; c=relaxed/relaxed; t=1793153859;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=wllQShmR/JuCZFw5HFfsjOJ/1ZX6yyXsqzheMstswmQ=;
-	b=sTF4+27+BvED06YC9eLiT7lwBvO90ibB/Wizgtgtc9zMi10tedMe6E68WQlY/kBgt1gw
-	 Qji5bYhUCjUDAEgrPjkwwVMHsBOQaCfClLRIPgOcQvjlnXgtVmKhURCuxHHm2MLlFgMIg
-	 Q1kao08FdtTWVI0PAl/3sPyQ8nu7q424BeyJE/akaAcqSb6Q2c81mmunfXDj6JWlK/U04
-	 bAAb5KmkAWftltl37ymqjVOsMGoKNrd53M61GHKGQLpGzAuFP4LNqa4rxS6qzJffJA7EK
-	 rXjImMIcZQ/8BSWQa4MuC+W8SSf3JjFSSyfHidHrEO/535XURVNBDGAJa6lQO55Yh6w==
+	bh=cP51aETFJLolZBQiqlTw2VFExTNDGMiywN+ARlpv7nY=;
+	b=XMdLmRHgjdkkcbZfBwl+t2n27jHzyAZnbgUY35sstEkoKdd8uwYcXtkHedKV6zr98WV1
+	 8vr7va0XEd5Py/Zrky6DysY5M5P3dNww664t1o2cGAQ48Pspsbm9mNdMslDBxMpvlthh9
+	 PhvX5/w94c+rI1DX0r7tmpjio8hyRzCiGLHjArIrg0ezO27JbDzn6NgSrW6rXna0VXmyK
+	 Dx1qpXBIKeHNwLutmLTbtl7r3oLz2U462A3HBJmAdfDAY3hiD3UeJEyuVKOWioescgACJ
+	 OOG5AnDHqirScHReLHU3lHmkALSR4ZUHkg1JwKX1Zp4+BHEq9Kz4pvvzYRRguLjw1hA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=kemnade.info;
-	spf=pass smtp.mailfrom=kemnade.info;
-	dkim=pass header.d=kemnade.info header.i=@kemnade.info header.a=rsa-sha256 header.s=20220719 header.b=GP54efQe;
-	arc=none smtp.remote-ip=161.97.139.27
-Received: from mail2.andi.de1.cc (vmd64148.contaboserver.net [161.97.139.27])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=nZK6++0G;
+	arc=none smtp.remote-ip=209.85.160.171
+Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com [209.85.160.171])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4622B606A31A
-	for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 21:35:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4622B606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kemnade.info
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95865606A31A
+	for <mfd@lists.linux.dev>; Wed, 28 Oct 2026 02:17:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 95865606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kemnade.info header.i=@kemnade.info header.a=rsa-sha256 header.s=20220719 header.b=GP54efQe
-Received: from mail.andi.de1.cc ([178.238.236.174])
-	by mail2.andi.de1.cc with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.98.2)
-	(envelope-from <andreas@kemnade.info>)
-	id 1xLop6-00000000ud4-2ymu;
-	Tue, 27 Oct 2026 22:35:12 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=kemnade.info; s=20220719; h=References:In-Reply-To:Subject:Cc:To:From:
-	Reply-To:Content-ID:Content-Description;
-	bh=wllQShmR/JuCZFw5HFfsjOJ/1ZX6yyXsqzheMstswmQ=; t=1793136912; x=1794346512; 
-	b=GP54efQeihiZvAhjjSl+Tt0hDB23kGc7ufzLYPPOd+/hShrP0Zxv8FtveQbIvGvUQWuwJ6gaDLd
-	YznO3pl9w8E2obx2DdUDxh011j7glRrIFvZAZzGDbE5a1yyJ3HzCsvZqEyknUgjfry3awthQK4KOs
-	aBfthiqi9rzL8qbnekS1D2YoLRPpQKw+B2/uHRoy4NtRXp9FoxZBQJN3woP5P9rtB1uL8/60s5WWp
-	de9BuNo6giFTzaD3iUXTjHNm0o9pgR3knKeL/rCwlmsWFnqYPRQUVWxIVPSkYyJP+7bd+I+nl/aN6
-	scqzadQwqoidYhctsfhE9h4vqax0t7lCrFvw==;
-Date: Tue, 27 Oct 2026 22:32:52 +0100
-From: Andreas Kemnade <andreas@kemnade.info>
-To: Pablo Mazzini <pmazzini@gmail.com>
-Cc: Guenter Roeck <linux@roeck-us.net>, Mark Brown <broonie@kernel.org>,
- Liam Girdwood <lgirdwood@gmail.com>, Lee Jones <lee@kernel.org>, Alistair
- Francis <alistair@alistair23.me>, linux-hwmon@vger.kernel.org,
- mfd@lists.linux.dev, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 5/7] regulator: sy7636a: report the temperature
-Message-ID: <20261027223252.044bb5b5@kemnade.info>
-In-Reply-To: <20261027101852.39b9031a@kemnade.info>
-References: <20261026003918.155321-1-pmazzini@gmail.com>
-	<20261026003918.155321-6-pmazzini@gmail.com>
-	<f68279bc-20f1-41a9-ba5c-92b974785cd8@roeck-us.net>
-	<20261027002635.6b831c0b@kemnade.info>
-	<CAAxh=jsKe95EsKnTypXtfTxGhYCMO1E7U=hWb3y6DBpgoiOVUw@mail.gmail.com>
-	<20261027101852.39b9031a@kemnade.info>
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; aarch64-unknown-linux-gnu)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=nZK6++0G
+Received: by mail-qt1-f171.google.com with SMTP id d75a77b69052e-5364c951da4so5620821cf.1
+        for <mfd@lists.linux.dev>; Tue, 27 Oct 2026 19:17:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793153857; x=1793758657; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=cP51aETFJLolZBQiqlTw2VFExTNDGMiywN+ARlpv7nY=;
+        b=nZK6++0G2KGWwbR7aEyVuVjEedJ8vBa0XlIr8Clms21wHbmp+h/TNu2jqXM1a6gk4K
+         FBHyTuWCpqn6uCRZE7/iT+FurfGz9QSa8CoE3fs5Em1SJtJk0Fag7Go7Ihummb4io7lf
+         yMHcVl65bJzGzsaPnCLJ8fAqLsK08Vbo5VGyTM+dn1Oj1YO0kY+2WM+TiLrrvmoJ/s60
+         hVtwpRYyuLMVdgadSXdpXhqYjNmW306hbYiF5WbHvYVrufqmhS5/bEfCJoNa1vUoeVC5
+         xwadbDlX4gjNRr4K4uRuxIpcqQ7srcPy0t3XLJg88GqUZDbDxA2NUXWmlL9Cp9C77aPY
+         ZFvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793153857; x=1793758657;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=cP51aETFJLolZBQiqlTw2VFExTNDGMiywN+ARlpv7nY=;
+        b=Bm2qu1L1NI4KI5znVOS1ON1NUGpf95RnGU3gkdP2CFL3vWUTCqoeq2FxEIhauPAYYy
+         gj+qAlIuuFyTSD0qk1lFgxkcLvYx6J+RfSaBp9S+EeXp4aJJuNBfbdV5q4IQGMf04uEi
+         prhYqruKDjej81i63Z0UA1CSHjxA9WBtwBQ4a8N815KnU0kV8rn4V9TXVllcK9EuHwQJ
+         19MiukaNjbbLvopiuRD38xmxFyZbp0XQocfRZqqaN+tnAbolPtntaQc8LDRJ8LrcaIpB
+         3cf7kqkPjGT4jFivdZNM8ltRvi6X/3ot846fjmdNEbFuVm8KKsE8TFunw+Jn7jDgcKR5
+         PrHg==
+X-Gm-Message-State: AFq9FYIkno6Rnmq1chpDshuZWcjws9VIacBFY/Eyfp5Z/PPfhH6dl9NF
+	Yx88nuqGzF4h3NIoheX1oD9NFqKuSSeLKYTbIOBnQa1Rc7Hw4ii2msvZ
+X-Gm-Gg: AYBFou38M4ezSkFYpJmSwo4gPhHv84doWbx6aZZt5V4pGEzZYnxvSUAJMB1F8DsjDKu
+	XeDakAiC07exLQ4rQxEYNCIJw+X+SekWrZm23yteYY+YV1t5y4GPgxwxBh9A6Mn8vH4xzNsm7d9
+	PLrcpVAdQLF8DFKZ6smhicC8Hu2C60S98srySlCwnqKV/I5fxXQkeFVV1jjvPRp7v1GySDHkTJ/
+	5h1bgnyAcVp9Bube/BOS06RsZ8TbUOv0t0LytdeyKQlbf/E63WtvmjzyIoicMJvQh1XWNvHxgpH
+	ifvoBdNJHltzFqGV1yLu1OnUPHdEAeeuzSzzspDX5b2E3JFvVTLbbFbPGMkGxHf8D7ayizVo4la
+	Y3YHb5z1Yl2i2fyz06fkVJX9hLt3p9g1aIVzrDQTsFH5SrgMwfjTIb/5mpYHn3k6+V03SWKZdF/
+	65WCGXsy/ZVFxwmb80D1+IhlRpBR363YnVIg+dzCHEQd7hLJfmK+i3rmyqWcwq9wLVeD8uHnP/K
+	wsL13lPyyehreFCVgM3ujPB23l7XAzLkivelZ8pV8kndYUuz5F/HDNCseI5vsWC3bIFzQ+lEx0J
+	rFL2Y7juOlog3/aCzH160EAExv4hm+qlXRKZ4fYeaDT8BLyxp69QelUB/j5IsRukymTUJDVZRfN
+	KXZUtG4w+M6cbH4bNNRYibMyVHJxlm7oGjtzPa8sg+VGE2aurUAFvQ3gYUocKltEr8gT7WeE26u
+	JDpW0bO4BH+9Kf9/zrfsvC9/R0HHayX5CqDAwMugGq9H0CnfySpMZkte0=
+X-Received: by 2002:ac8:5d8b:0:b0:536:64a3:aaca with SMTP id d75a77b69052e-53fcc6caf38mr19690551cf.62.1793153857267;
+        Tue, 27 Oct 2026 19:17:37 -0700 (PDT)
+Received: from localhost.localdomain (wnpgmb0311w-ds01-161-139-200.dynamic.bellmts.net. [142.161.139.200])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-91c47c96375sm119234946d6.33.2026.10.27.19.17.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 27 Oct 2026 19:17:36 -0700 (PDT)
+From: Riccardo Oliva <oliva.scorza@gmail.com>
+To: lee@kernel.org
+Cc: mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	Riccardo Oliva <oliva.scorza@gmail.com>
+Subject: [PATCH v2] mfd: dln2: Clean up dln2_unregister_event_cb() loop logic
+Date: Tue, 27 Oct 2026 21:15:56 -0500
+Message-ID: <20261028021556.11988-1-oliva.scorza@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <179198398105.839288.1873130512029656566@kernel.org>
+References: <179198398105.839288.1873130512029656566@kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -74,30 +99,57 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On Tue, 27 Oct 2026 10:18:52 +0100
-Andreas Kemnade <andreas@kemnade.info> wrote:
+Streamline dln2_unregister_event_cb() by using a dedicated 'entry'
+pointer to store the matching event callback. This removes the need
+for the 'found' boolean flag, restricts the iterator scope, and matches
+the pattern used in dln2_register_event_cb().
 
-> On Tue, 27 Oct 2026 07:32:14 +0000
-> Pablo Mazzini <pmazzini@gmail.com> wrote:
-> 
-> > Hi Guenter, Andreas,
-> > 
-> > On Mon, Oct 26, 2026 at 07:35:24AM -0700, Guenter Roeck wrote:  
-> > > This is going the wrong way. The correct solution would be to convert
-> > > the hwmon driver to an auxiliary driver.    
-> > 
-> > Understood. In v2 the hwmon driver stays in drivers/hwmon and becomes an
-> > auxiliary driver of the regulator, which binds the I2C device directly.
-> >   
-> But that is a cleanup action, which is at least a separate patch (maybe
-> replacing and exending your patch 6). So the other patches can go into
-> their separate trees.
-> 
-looked again, I was wrong here,  vin-supply should be enabled before
-i2c transfers, so we need the aux device approach.
+Assisted-by: coccinelle sparse
+Signed-off-by: Riccardo Oliva <oliva.scorza@gmail.com>
+---
+v2:
+- Rephrase commit log: Clarified this is a cleanup rather than a bug fix
+- Rename 'target' to 'entry' for consistency
 
-Regards,
-Andreas
+ drivers/mfd/dln2.c | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/mfd/dln2.c b/drivers/mfd/dln2.c
+index 0b1e7fd7f..2a9d83d32 100644
+--- a/drivers/mfd/dln2.c
++++ b/drivers/mfd/dln2.c
+@@ -157,25 +157,24 @@ EXPORT_SYMBOL(dln2_register_event_cb);
+ void dln2_unregister_event_cb(struct platform_device *pdev, u16 id)
+ {
+ 	struct dln2_dev *dln2 = dev_get_drvdata(pdev->dev.parent);
+-	struct dln2_event_cb_entry *i;
++	struct dln2_event_cb_entry *i, *entry = NULL;
+ 	unsigned long flags;
+-	bool found = false;
+ 
+ 	spin_lock_irqsave(&dln2->event_cb_lock, flags);
+ 
+ 	list_for_each_entry(i, &dln2->event_cb_list, list) {
+ 		if (i->id == id) {
+ 			list_del_rcu(&i->list);
+-			found = true;
++			entry = i;
+ 			break;
+ 		}
+ 	}
+ 
+ 	spin_unlock_irqrestore(&dln2->event_cb_lock, flags);
+ 
+-	if (found) {
++	if (entry) {
+ 		synchronize_rcu();
+-		kfree(i);
++		kfree(entry);
+ 	}
+ }
+ EXPORT_SYMBOL(dln2_unregister_event_cb);
+-- 
+2.43.0
+
