@@ -1,61 +1,61 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793180231;
-	b=EDhHUm5huKdw/Crmmxf1/UseaMCOa8u4+e7bILkBNUMOb2L15oVaOWTrq9jsrj81OU28
-	 V2u04RcEPjcHTF4N7O988Ag50OEqF1D80QHfMr/nx6sb+9+3LwM4uajYDzb1lY9PpMbsM
-	 0o9WD1IWFoGvfOR5ab90tRt1u5qSuOLBnh2uI3bLeBZ5vz0UCxKZbUb8SvU3hlNZijeNr
-	 Uhz/Q9rKs3d4p4tisldjZGHaNUruBBRSTpVricCfvPCqWzIM8/g46jgonC8MWJjnrFVmj
-	 NMlDDqkOdvS4rsC+sE1TAPMykL3b5ZdkEO0u44VAqxSs4Ar9R4/cCtYaZrs91me5gbQ==
+	t=1793180294;
+	b=Reo3VuXmQwSJX2DAAmoeFA6NUe8EFpKAVByuMyVARUg/0qs6GE2wf619mKTD2Wovk1lY
+	 ewrkYlQZO/Aq9MaCPHCmKbD5VqnsTPQsjkjQY1Rr20LcR/iMoLyJ+r/UnO3JnNcP8grZn
+	 dD3aN70P6l51wSZM866JbwtfDoTDP4u8Qk01VpT8XFTNIf3bjqb/qOkhbKHRdK3oqp6uD
+	 0bcOvIAEELx+5QiiWWjx/EKfiTBmaujLYzltTtk/79I6CX76HQfwYGk27vDYnribWNOdi
+	 rDB924QPF8B8zCHd+AfzjNjV1dfOfHO1B+NefKGXE4RnpofQNFANPU5q/44OQaPj+2A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793180231;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=hkt3J7o6BQgO40vmJfQcUjJjdHsbv2iE23eksw80Rug=;
-	b=Ditz8HRQLnd22HBrHCC3NUhcfO6RAvO0cfNF8+OffaAN0JB2VOeqcaxbCfpfqCApm208
-	 qekuFBhF9Z2LCh7eBwaPZb5cB9Bj/3jNnN6LhS7ezyfqJDkDsDclrr/DiLp8UpOmGMrgv
-	 kPGsD6AU0FG8kJ02BnKVbNKfPZ+eA90wn+UooPCwDOW79iyHpXOM+v2eqtitehShtqI3G
-	 w4TI0CgZcbRg2DSozGRZuN0WqXuQ8+XvLyDY030aeLIBmSBnnMBkePqnYijRVdDq/hX7E
-	 MyF3shlrVaTIl8tIMRck3hRXCkk519EThPwY5x3oGnmpRXSuX8GELY+gCTicbTTyDtA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793180294;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:Received:Received:From:In-Reply-To:
+	 MIME-Version:References:Date:X-Gmail-Original-Message-ID:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type;
+	bh=/337IpE5KTxyqcxql/1j4KDMdfOcExSPgOP5KC4FMmQ=;
+	b=FooaIeMT0mbNH6tsdtg7MsmkKREgjiVDDAQbh/9eq3fRXXn/UxnRSd+OIxMn0egsZ5Wo
+	 b22SV6Oopb1qEy03V06vHrm+oI1fxBFRT0folm2t92bT8lV5bEQVF6zZptkupH7qsqw9j
+	 tXxDlBHHwxSPCPyrEnyT6otmqcF1ywbGnjild796WVLYk0EmPS1thU0vRXM9XyhPW1+Np
+	 lsnAAFYpqcA3ljGJd8YOChh1plfl0PZ+voYBIgwKWxSOynb5PhSE+fIErXFpToHejt6Kg
+	 MlhT9uwD5EXgz5Qqv7/IuHnkkXKHOX/lpfA/4W2trgYt2zxi8Q72/eQxFVvCINaS6LQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gWzv57eo;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="KMg/f8po";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35DD5606A327;
-	Wed, 28 Oct 2026 09:37:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C624606A31D
+	for <mfd@lists.linux.dev>; Wed, 28 Oct 2026 09:38:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gWzv57eo
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 82A121F031E3;
-	Wed, 28 Oct 2026 09:37:08 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=KMg/f8po
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3FFC91F031E6
+	for <mfd@lists.linux.dev>; Wed, 28 Oct 2026 09:38:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793180231;
-	bh=hkt3J7o6BQgO40vmJfQcUjJjdHsbv2iE23eksw80Rug=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=gWzv57eoVREIE6uyRZgZdIiciEl7WLnQhOONFi+w9KDK3Uw2DwGDKIqmwozZ5u164
-	 G2OU1cFTYutESW96OZgJMn/OT8s1QMfi015khHuFvNahrjuFJVsgyX7HcUtZBUXkVa
-	 SJQPChGv6ukztUUTlkXWIm6FiS7k2Hez40MBg7Ml7wFjlWw6vtgUdjXfWG6DFr40Iw
-	 O3xCIvQevAQOTO6mVEmTBaSNyNltMjtPzq4bQZtTsR6g7NcupBtxzAm0AsCcxDOTDh
-	 9kyF6FOzzK4pXsZF3pjixNiFjUS0gXRzfl0mUwtxnUGx9ukcHRtM/XHGFL4/hhU/Pq
-	 hp3koq66nDdhw==
-Date: Wed, 28 Oct 2026 09:37:05 +0000
-From: Lee Jones <lee@kernel.org>
-To: Guangshuo Li <lgs201920130244@gmail.com>
-Cc: Aaro Koskinen <aaro.koskinen@iki.fi>,
-	Andreas Kemnade <andreas@kemnade.info>,
-	Kevin Hilman <khilman@baylibre.com>,
-	Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>,
-	Mark Brown <broonie@opensource.wolfsonmicro.com>,
-	Samuel Ortiz <sameo@linux.intel.com>,
-	Peter Ujfalusi <peter.ujfalusi@ti.com>, linux-omap@vger.kernel.org,
-	mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: Re: [PATCH] mfd: twl6040: fix IRQ action memory leaks during teardown
-Message-ID: <20261028093705.GK2195460@google.com>
-References: <20261027032609.119226-1-lgs201920130244@gmail.com>
- <179310015976.2808517.13064510476219400398@kernel.org>
- <CANUHTR8Ypwpm+Qqmk-fob1=e040rRH5QGTs7gN6MWRKQYyOdCw@mail.gmail.com>
+	s=k20260515; t=1793180293;
+	bh=/337IpE5KTxyqcxql/1j4KDMdfOcExSPgOP5KC4FMmQ=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=KMg/f8poVuF+OYYPg2we+k9iKYhNdzzwEXevZXPuMFYAaiLTlZFRzurPDpsiRIA6r
+	 qLN1YK2LwoyVaOu7Cdy3S9Htjl0OIBaayZEpGzl8lI4++ZLgj534gb/BgWiIY6iVXG
+	 FWGk00+epgjbssmL3PjakXWdSicxCzL+H/TvG+M+6uKZX+AXfuuvdY/9UUxMosk8SQ
+	 /fiBgKRohC+iL4XCrhjFTGJ+WoVq5m8oCDJrRcGg68uNTQwsIxovttjBgkYu60BdWo
+	 gM+kcfRCO6oKdEmiS8CTEZcPamFqUl041qLLO2EgPF0ajyw3VjptY3FUJHg252a49a
+	 jAENpJ3EsZzTg==
+Received: by mail-lj1-f170.google.com with SMTP id 38308e7fff4ca-3a595487d43so5596111fa.3
+        for <mfd@lists.linux.dev>; Wed, 28 Oct 2026 02:38:13 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AKwUvBzNnjH5fY8PxLeD9so9k5frXUWGqeFWdbbTVZPe8XepvzzN47JryHkPDHItZk4pVc40mDc=@lists.linux.dev
+X-Gm-Message-State: AFq9FYIE8gngcm+/35nRYs7/jABFy5K3PnYHB2iZm9MGm9fqBMry+3RR
+	Ra+YeZNNyG1kYPFXU+FOa1m16avAFz+H0wXosQl2orVW3gzyU5wOoa0+Zj05iefWpQXZRid6XNb
+	TeSvwfsGNtjufHzd9pQ5cbYqkkxbW0tolrZa7S4bzgQ==
+X-Received: by 2002:a05:651c:3605:b0:3a8:bd3d:549a with SMTP id
+ 38308e7fff4ca-3ac9cf08a40mr4333801fa.7.1793180291927; Wed, 28 Oct 2026
+ 02:38:11 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 28 Oct 2026 02:38:10 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 28 Oct 2026 02:38:10 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20261024-samsung-kp-v4-2-e21253295e68@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -65,111 +65,32 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CANUHTR8Ypwpm+Qqmk-fob1=e040rRH5QGTs7gN6MWRKQYyOdCw@mail.gmail.com>
+References: <20261024-samsung-kp-v4-0-e21253295e68@gmail.com> <20261024-samsung-kp-v4-2-e21253295e68@gmail.com>
+Date: Wed, 28 Oct 2026 02:38:10 -0700
+X-Gmail-Original-Message-ID: <CAMRc=MdtxtssfPrwXVGxLe1tyyfUxdOKcNmczn=gzESRNE5+oQ@mail.gmail.com>
+X-Gm-Features: AclHuK8XdDJnZKMQhT5pgCqqGCu9vzYOmcLsT73Wl1aen1LlgEEs17VBcSWb8bE
+Message-ID: <CAMRc=MdtxtssfPrwXVGxLe1tyyfUxdOKcNmczn=gzESRNE5+oQ@mail.gmail.com>
+Subject: Re: [PATCH v4 2/4] ARM: s3c: crag6410: convert PMIC DVS GPIO to
+ software properties
+To: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+Cc: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>, 
+	Peter Griffin <peter.griffin@linaro.org>, Alim Akhtar <alim.akhtar@samsung.com>, 
+	Russell King <linux@armlinux.org.uk>, Mark Brown <broonie@kernel.org>, 
+	Charles Keepax <ckeepax@opensource.cirrus.com>, Linus Walleij <linusw@kernel.org>, 
+	Bartosz Golaszewski <brgl@bgdev.pl>, Arnd Bergmann <arnd@arndb.de>, mfd@lists.linux.dev, 
+	linux-samsung-soc@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	patches@opensource.cirrus.com, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-On Wed, 28 Oct 2026, Guangshuo Li wrote:
+On Sun, 25 Oct 2026 06:03:13 +0100, Dmitry Torokhov
+<dmitry.torokhov@gmail.com> said:
+> Convert the PMIC DVS GPIO configuration from a legacy lookup table to
+> software properties. We use the new 'dcdc_swnodes' field in 'struct
+> wm831x_pdata' to pass the software node to the regulator driver.
+> We keep the DVS configuration parameters (control source, startup
+> state) in the platform data.
+>
+> Signed-off-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+> ---
 
-> Hi Lee,
-> 
-> On Wed, 28 Oct 2026 at 00:26, Lee Jones <lee@kernel.org> wrote:
-> >
-> > On Tue, 27 Oct 2026, Guangshuo Li wrote:
-> >
-> > > twl6040_remove() currently removes the regmap IRQ chip before
-> > > removing the MFD child devices. This destroys the IRQ mappings
-> > > before the child drivers can release their interrupt handlers.
-> > >
-> > > The parent driver also registers READY and thermal interrupt
-> > > handlers using devm_request_threaded_irq(). These handlers are
-> > > normally released by device-managed cleanup after remove returns,
-> > > when the corresponding IRQ descriptors have already been removed.
-> > >
-> > > Consequently, free_irq() cannot find the IRQ descriptors and the
-> > > allocated struct irqaction objects are not freed. The associated
-> > > IRQ threads also cannot be stopped through the normal cleanup path.
-> > >
-> > > The probe error paths have a similar issue, as they destroy the IRQ
-> > > chip before the device-managed IRQ handlers are released.
-> > >
-> > > Remove the MFD child devices first, then explicitly free the
-> > > parent's READY and thermal IRQ handlers using devm_free_irq()
-> > > before removing the regmap IRQ chip.
-> > >
-> > > Also update the probe error paths to release successfully requested
-> > > IRQs before destroying their mappings.
-> > >
-> > > This issue was found by our static analysis tool under development.
-> > >
-> > > Fixes: ab7edb149c75 ("mfd: twl6040: Convert to use regmap_irq")
-> > > Cc: stable@vger.kernel.org
-> > > Signed-off-by: Guangshuo Li <lgs201920130244@gmail.com>
-> > > ---
-> > >  drivers/mfd/twl6040.c | 13 +++++++++----
-> > >  1 file changed, 9 insertions(+), 4 deletions(-)
-> > >
-> > > diff --git a/drivers/mfd/twl6040.c b/drivers/mfd/twl6040.c
-> > > index 562a0f939f6e..7b05d21cd17d 100644
-> > > --- a/drivers/mfd/twl6040.c
-> > > +++ b/drivers/mfd/twl6040.c
-> > > @@ -745,7 +745,7 @@ static int twl6040_probe(struct i2c_client *client)
-> > >                                       "twl6040_irq_th", twl6040);
-> > >       if (ret) {
-> > >               dev_err(twl6040->dev, "Thermal IRQ request failed: %d\n", ret);
-> > > -             goto readyirq_err;
-> > > +             goto thirq_err;
-> > >       }
-> > >
-> > >       /*
-> > > @@ -791,10 +791,14 @@ static int twl6040_probe(struct i2c_client *client)
-> > >       ret = mfd_add_devices(&client->dev, -1, twl6040->cells, children,
-> > >                             NULL, 0, NULL);
-> > >       if (ret)
-> > > -             goto readyirq_err;
-> > > +             goto mfd_err;
-> > >
-> > >       return 0;
-> > >
-> > > +mfd_err:
-> > > +     devm_free_irq(twl6040->dev, twl6040->irq_th, twl6040);
-> > > +thirq_err:
-> > > +     devm_free_irq(twl6040->dev, twl6040->irq_ready, twl6040);
-> > >  readyirq_err:
-> > >       regmap_del_irq_chip(twl6040->irq, twl6040->irq_data);
-> > >  gpio_err:
-> > > @@ -809,9 +813,10 @@ static void twl6040_remove(struct i2c_client *client)
-> > >       if (twl6040->power_count)
-> > >               twl6040_power(twl6040, 0);
-> > >
-> > > -     regmap_del_irq_chip(twl6040->irq, twl6040->irq_data);
-> > > -
-> > >       mfd_remove_devices(&client->dev);
-> > > +     devm_free_irq(twl6040->dev, twl6040->irq_th, twl6040);
-> > > +     devm_free_irq(twl6040->dev, twl6040->irq_ready, twl6040);
-> > > +     regmap_del_irq_chip(twl6040->irq, twl6040->irq_data);
-> >
-> > Why not use more devm_*() handlers?
-> >
-> > devm_regmap_add_irq_chip()
-> >
-> > devm_free* eeks me out.  The point of devm_*() is that it's managed.
-> >
-> > >       regulator_bulk_disable(TWL6040_NUM_SUPPLIES, twl6040->supplies);
-> > >  }
-> > > --
-> > > 2.43.0
-> > >
-> >
-> > --
-> > Lee Jones
-> 
-> Thanks for your suggestion. I'll look into using devm_*() APIs in v2.
-> 
-> Would you prefer that I submit the twl6040 and hi655x-pmic fixes as a
-> single patch series in v2, or separately?
-
-I'm not overly concerned.
-
--- 
-Lee Jones
+Acked-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
