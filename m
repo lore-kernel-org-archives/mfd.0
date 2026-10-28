@@ -1,61 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.85.4
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793182572;
-	b=YqTiGVhKxkKjve37eryQXS2miKBLJ3W1qmreJoEw+wIQdoYdHVC5olmvNeF3toYUqOuj
-	 kpkdl5J0ne3DfOPdWEWFk1m4qPeCFM+F+EtEk3nd8ZoHHfMx9HfUVTVRL8/s4SCMWrj9U
-	 EY0FhkLMtVqUoFpfEviIr2EqJVPgLEP1O09yhp270doCRERN2VzGU0kh9iwBDM2fcCv95
-	 v643txaXAVWCMb9iK+Ztwe+18Lt/wrHDS7MGTWpCCLXkfEk0yuvq52S26PtoXEc6d0mRa
-	 x3p09DRxIrXzEsgKhcEl2IU8U217eo4vnLCVDaOIyvYjfN0smEUSLZnPtv1MWUQVtMA==
+	t=1793197956;
+	b=TdC/09A3KPOtUlBcT5o+WUiqXfb3CHvI6XfMXQ2T/M3yKiKpTQiwhxXtN4HelxZFdSEB
+	 wTsu7zkeysO4ecJS5fWw9cSzQFetPHgc1ClNib5iVVhh1/WG/oDYq2pjpmDZhgcj8vCc7
+	 l5TDaPhHsnIZYUSuEMzQDMs5Cb1dcCp+J57Xn+vGtKeoOhiCPjlCxvcXan+uhHwsLFQIf
+	 tkr4m8RQrvIFEFimfrs6eXFUC1GeG3qigKEaWMgO8zD357wWMUnaDnWxWYKwi9xtHeBE9
+	 uu89NhZ8ukdjNbjlskcXcFTrlIN1fPjEM9i+bq9f/xfXdkql2vo+pDbmHXNoPBYhErQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793182572;
-	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Received:Received:Received:From:In-Reply-To:
-	 MIME-Version:References:Date:X-Gmail-Original-Message-ID:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:Content-Type;
-	bh=bjLe+3f9gc9bVK8rm2L9uAXKG4i5uaLi17dzEkbJ/vQ=;
-	b=gizIb0NbZTLab7GZPJ/IkDLIpgTHTcNxqP82OsyyKeB8Lc18WHMlBhpNg7QsFs3TFnNp
-	 tdhhs6BjmmtXuiNsw8THUj4YgX+xX05/Fm6dHOJaXqcdTlmfunWfCZx1wfnJSMGMusdTg
-	 xgTL+9wNax+kcj/vjYl1LV/ABP90UCnh9h02L7G2xUD7IbQ9TsnVfRkyXpxkdTvQ08+67
-	 Qdofmc45FNSX4dmdEQeG3lcyQc4uUaPYv3xskhgcV+/prKZ6CWjFVNdwtE0+9aHjIYkSM
-	 fZ+LTC1Vumcw0C/NNLkrUrKeUzqSRImAJEP6XY5Z/a8HTja4Y8QVXrk9rZzl2dpgOWA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793197956;
+	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:Organization:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Last-TLS-Session-Version;
+	bh=+vj3JXaH73DAc9DdU35ASSRyg7WAvYyKv+vce4COULM=;
+	b=vmOu4a7qIklZqOQsmj3K0dlRD5c5IYtLeGgR4Ikl66N8g9yVeajNzcl2bUorevBJkJwb
+	 qLpVvRR0nA2aFN2665YRiOakMtPazW+zZiSGg8HE+7rjIAIq/tYq9oSRBDWlmmpo88MKk
+	 G8cCmGFipKB7Jgq2DmoPFr3kTp/W6igtHDoI4rT0pDqr5fAwouu41cfRv6xX12RIGVkhm
+	 4oLk7F/oaOFNcNtuOUkUOeEq6hTPJySDxbpExAhGTNoYl3POLx2+HL/i9GegftFoXcGZ2
+	 vsHsI1+f6zT+evRJtC8509/K01TZ9df2pFULnBlBop6R4QYO0kq/v+Qsjg9uBF1xdDg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fcejuAl6;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=bootlin.com;
+	spf=pass smtp.mailfrom=bootlin.com;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=PrNxJIoI;
+	arc=none smtp.remote-ip=185.246.85.4
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 54398606A31D
-	for <mfd@lists.linux.dev>; Wed, 28 Oct 2026 10:16:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77322606A31C
+	for <mfd@lists.linux.dev>; Wed, 28 Oct 2026 14:32:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 77322606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fcejuAl6
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE14D1F031E8
-	for <mfd@lists.linux.dev>; Wed, 28 Oct 2026 10:16:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793182572;
-	bh=bjLe+3f9gc9bVK8rm2L9uAXKG4i5uaLi17dzEkbJ/vQ=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=fcejuAl6E4+V7xpS9ChrGL6mM/mq7hcNzQluumHdQux62jySqCF1hHjVt/inV4WhP
-	 YkcxJallI2I9HjuB/SJN2TuKyWpXcDGV4NliF2UVO51IilJkj69fziE8klAjqeYvXI
-	 vd9eDg5YAMfF/eITBfogHCsQQ1vYLNJJO4+W7vRR08b80LRqLo4CPFjsJT3a32j+gm
-	 SwRXbA0YlETrDg8O/K+RHgvR1z9WcTv0QMUqmoxsjzShDw3RGZFmuZvUFke+pixq+R
-	 e+KvpTllvcCmHmKZ34vI7UCecYUU6kY0r8RzZzoh15qsAzAVg8GC2B8EwKsT9IZirE
-	 20hYSGa0G2pag==
-Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-3a9e87ba696so5928171fa.0
-        for <mfd@lists.linux.dev>; Wed, 28 Oct 2026 03:16:11 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AKwUvBxDtDQrzASieXlLKDxdjPmQt/8UoBzxATz0aRiLdqfwG0U1PY4h3aEynSWnPCGE2FJn4MU=@lists.linux.dev
-X-Gm-Message-State: AFq9FYKEoVOU8jG2Ho6WdlH6OshWWY6tZKkUlt+UWzcRxi30xUv6CYLe
-	Y1U5LntegwdHBgUxtQ8Y3QhouIlnCd1drkBO60lv70GCIaayivK1IcV7+tqnMJ7v1a7jcenQKk7
-	3skiLucxZh/gmpXHMZVk/F9takexsGuAERZD7XWA6TQ==
-X-Received: by 2002:a05:651c:509:b0:3ab:37ee:aab6 with SMTP id
- 38308e7fff4ca-3ac9cf6327cmr3565321fa.17.1793182570561; Wed, 28 Oct 2026
- 03:16:10 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 28 Oct 2026 03:16:09 -0700
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 28 Oct 2026 03:16:09 -0700
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20261022-add-board-ok3572-c-v1-9-0b0fd85a31ee@qq.com>
+	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=PrNxJIoI
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 8FF284E41366;
+	Wed, 28 Oct 2026 14:32:31 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 5F5B860769;
+	Wed, 28 Oct 2026 14:32:31 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id C3E6B103290D1;
+	Wed, 28 Oct 2026 15:32:19 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1793197945; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:content-language:in-reply-to:references;
+	bh=+vj3JXaH73DAc9DdU35ASSRyg7WAvYyKv+vce4COULM=;
+	b=PrNxJIoIaUyhY8Zqt4SrJf4ec9/mtkg2tiyqW/XNHd1snpJ3Ho9quFY5u9M6HNrg3pe4DJ
+	rEoBT0F3Mq7YaJMxOzPhZiJ4KGmGoe9sjxvUOuV2n6qPLG2XzN05gBCubNZ1sHNqWnQBXl
+	LRmFcPNn37UP3qhOdV3tjyLwibLn8KorGjx5y5VWBzsoxMT0/oVLBKudz/EmG0A7o/PPWW
+	NCdUf//rOnMSiE3qewS9q2nksK0+jikBkQsq+OemhIk3kyGwTEiL22QBuFxNfXE8gQEKmN
+	rA5dGwbBYGMHOdRe/O2j379Co6IiS+ImdN4CA5Dgx96FKJwh3EawJv7Nihzgsw==
+Message-ID: <880e67e2-3f29-4dfd-84ee-09006dc86574@bootlin.com>
+Date: Wed, 28 Oct 2026 15:32:18 +0100
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -65,287 +62,346 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261022-add-board-ok3572-c-v1-0-0b0fd85a31ee@qq.com> <20261022-add-board-ok3572-c-v1-9-0b0fd85a31ee@qq.com>
-Date: Wed, 28 Oct 2026 03:16:09 -0700
-X-Gmail-Original-Message-ID: <CAMRc=MeNF_=T2Yb6wzsQFFcpO+w7sLgaKR=sZhZRzRDFcpgumw@mail.gmail.com>
-X-Gm-Features: AclHuK_BQRJk4TIxkYuHqPCftlY-tqaqteyj8aBVDFPyNxJaNTje36_cX4YFAeQ
-Message-ID: <CAMRc=MeNF_=T2Yb6wzsQFFcpO+w7sLgaKR=sZhZRzRDFcpgumw@mail.gmail.com>
-Subject: Re: [PATCH 09/27] gpio: rockchip: Add RK3572 GPIO support
-To: 1579567540@qq.com
-Cc: Cunhao Lu via B4 Relay <devnull+1579567540.qq.com@kernel.org>, linux-clk@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, 
-	mfd@lists.linux.dev, linux-gpio@vger.kernel.org, netdev@vger.kernel.org, 
-	linux-pm@vger.kernel.org, linux-i2c@vger.kernel.org, 
-	linux-serial@vger.kernel.org, linux-mmc@vger.kernel.org, 
-	linux-stm32@st-md-mailman.stormreply.com, linux-phy@lists.infradead.org, 
-	linux-usb@vger.kernel.org, Stephen Boyd <sboyd@kernel.org>, 
-	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Heiko Stuebner <heiko@sntech.de>, Philipp Zabel <p.zabel@pengutronix.de>, 
-	Elaine Zhang <zhangqing@rock-chips.com>, Lee Jones <lee@kernel.org>, 
-	Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
-	Richard Cochran <richardcochran@gmail.com>, Ulf Hansson <ulfh@kernel.org>, 
-	Andi Shyti <andi.shyti@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Jiri Slaby <jirislaby@kernel.org>, Jisheng Zhang <jszhang@kernel.org>, 
-	Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@kernel.org>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
-	David Wu <david.wu@rock-chips.com>, "Rafael J. Wysocki" <rafael@kernel.org>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
-	Lukasz Luba <lukasz.luba@arm.com>, Maxime Chevallier <maxime.chevallier@bootlin.com>, 
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
-	Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Manivannan Sadhasivam <mani@kernel.org>, Thinh Nguyen <Thinh.Nguyen@synopsys.com>, 
-	Jaehoon Chung <jh80.chung@samsung.com>, Shawn Lin <shawn.lin@rock-chips.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 12/20] pinctrl: berlin: add optional pinconf support
+To: Jisheng Zhang <jszhang@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+ Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>, Andi Shyti
+ <andi.shyti@kernel.org>, Alexandre Belloni <alexandre.belloni@bootlin.com>,
+ Frank Li <Frank.Li@nxp.com>, Lee Jones <lee@kernel.org>,
+ Linus Walleij <linusw@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+ Mark Brown <broonie@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Jiri Slaby <jirislaby@kernel.org>,
+ Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>
+Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-clk@vger.kernel.org, linux-i2c@vger.kernel.org,
+ linux-i3c@lists.infradead.org, mfd@lists.linux.dev,
+ linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org,
+ linux-spi@vger.kernel.org, linux-arm-kernel@lists.infradead.org
+References: <20260929061417.20733-1-jszhang@kernel.org>
+ <20260929061417.20733-13-jszhang@kernel.org>
+From: Richard GENOUD <richard.genoud@bootlin.com>
+Content-Language: en-US, fr
+Organization: Bootlin
+In-Reply-To: <20260929061417.20733-13-jszhang@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 
-On Wed, 21 Oct 2026 18:11:06 +0200, Cunhao Lu via B4 Relay
-<devnull+1579567540.qq.com@kernel.org> said:
-> From: Cunhao Lu <1579567540@qq.com>
->
-> Support GPIO V2.7, four parent interrupts, and firmware-provided
-> interrupt-group masks. Keep all pins on the primary interrupt when group
-> queries are unavailable.
->
-> Signed-off-by: Cunhao Lu <1579567540@qq.com>
+Le 29/09/2026 à 08:14, Jisheng Zhang a écrit :
+> Add pinconf support for newer Synaptics SoCs.
+> 
+> Signed-off-by: Jisheng Zhang <jszhang@kernel.org>
 > ---
->  drivers/gpio/gpio-rockchip.c        | 91 +++++++++++++++++++++++++++++++++----
->  drivers/pinctrl/pinctrl-rockchip.h  |  8 +++-
->  include/soc/rockchip/rockchip_sip.h |  5 ++
->  3 files changed, 92 insertions(+), 12 deletions(-)
->
-> diff --git a/drivers/gpio/gpio-rockchip.c b/drivers/gpio/gpio-rockchip.c
-> index 77b239a9a601e..35894a68b5446 100644
-> --- a/drivers/gpio/gpio-rockchip.c
-> +++ b/drivers/gpio/gpio-rockchip.c
-> @@ -6,6 +6,7 @@
->   * Copyright (c) 2021 Rockchip Electronics Co. Ltd.
->   */
->
-> +#include <linux/arm-smccc.h>
->  #include <linux/bitops.h>
->  #include <linux/clk.h>
->  #include <linux/device.h>
-> @@ -21,6 +22,7 @@
->  #include <linux/pinctrl/pinconf-generic.h>
->  #include <linux/platform_device.h>
->  #include <linux/regmap.h>
-> +#include <soc/rockchip/rockchip_sip.h>
->
->  #include "../pinctrl/core.h"
->  #include "../pinctrl/pinctrl-rockchip.h"
-> @@ -35,6 +37,7 @@
->  #define GPIO_TYPE_V2		(0x01000C2B)
->  #define GPIO_TYPE_V2_1		(0x0101157C)
->  #define GPIO_TYPE_V2_2		(0x010219C8)
-> +#define GPIO_TYPE_V2_7		(0x01074D2E)
->
->  static const struct rockchip_gpio_regs gpio_regs_v1 = {
->  	.port_dr = 0x00,
-> @@ -209,12 +212,27 @@ static int rockchip_gpio_set_debounce(struct gpio_chip *gc,
->  	if (bank->gpio_type == GPIO_TYPE_V2 && !IS_ERR(bank->db_clk)) {
->  		div_debounce_support = true;
->  		freq = clk_get_rate(bank->db_clk);
-> -		max_debounce = (GENMASK(23, 0) + 1) * 2 * 1000000 / freq;
-> -		if (debounce > max_debounce)
-> -			return -EINVAL;
->
-> -		div = debounce * freq;
-> -		div_reg = DIV_ROUND_CLOSEST_ULL(div, 2 * USEC_PER_SEC) - 1;
-> +		if (of_device_is_compatible(bank->of_node, "rockchip,rk3572-gpio-bank")) {
-> +			if (!freq)
-> +				return -EINVAL;
+>   drivers/pinctrl/berlin/berlin.c | 232 +++++++++++++++++++++++++++++++-
+>   1 file changed, 228 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/pinctrl/berlin/berlin.c b/drivers/pinctrl/berlin/berlin.c
+> index 0c2179b98629..06c67f00c527 100644
+> --- a/drivers/pinctrl/berlin/berlin.c
+> +++ b/drivers/pinctrl/berlin/berlin.c
+> @@ -13,6 +13,8 @@
+>   #include <linux/of.h>
+>   #include <linux/of_address.h>
+>   #include <linux/of_device.h>
+> +#include <linux/pinctrl/pinconf-generic.h>
+> +#include <linux/pinctrl/pinconf.h>
+>   #include <linux/pinctrl/pinctrl.h>
+>   #include <linux/pinctrl/pinmux.h>
+>   #include <linux/platform_device.h>
+> @@ -20,9 +22,24 @@
+>   #include <linux/slab.h>
+>   
+>   #include "../core.h"
+> +#include "../pinconf.h"
+>   #include "../pinctrl-utils.h"
+>   #include "berlin.h"
+>   
+> +#define PINCFG_DS_10BIT		GENMASK(3, 0)
+> +#define PINCFG_IE_10BIT		BIT(4)
+> +#define PINCFG_PE_10BIT		BIT(5)
+> +#define PINCFG_PS_10BIT		BIT(6)
+> +#define PINCFG_SL_10BIT		BIT(7)
+> +#define PINCFG_SPU_10BIT	BIT(8)
+> +#define PINCFG_ST_10BIT		BIT(9)
+> +#define PINCFG_DS_8BIT		GENMASK(2, 0)
+> +#define PINCFG_IE_8BIT		BIT(3)
+> +#define PINCFG_PD_8BIT		BIT(4)
+> +#define PINCFG_PU_8BIT		BIT(5)
+> +#define PINCFG_SL_8BIT		BIT(6)
+> +#define PINCFG_ST_8BIT		BIT(7)
 > +
-> +			div = (u64)(GENMASK(23, 0) + 1) * USEC_PER_SEC;
-> +			max_debounce = div_u64(div, 2 * freq);
-> +			if (debounce > max_debounce)
-> +				return -EINVAL;
-> +
-> +			div = (u64)debounce * freq * 2;
-> +			div_reg = DIV_ROUND_CLOSEST_ULL(div, USEC_PER_SEC);
-> +			div_reg = div_reg ? div_reg - 1 : 0;
-> +		} else {
-> +			max_debounce = (GENMASK(23, 0) + 1) * 2 * 1000000 / freq;
-> +			if (debounce > max_debounce)
-> +				return -EINVAL;
-> +
-> +			div = debounce * freq;
-> +			div_reg = DIV_ROUND_CLOSEST_ULL(div, 2 * USEC_PER_SEC) - 1;
-> +		}
->  	} else {
->  		div_debounce_support = false;
->  	}
-> @@ -342,6 +360,12 @@ static void rockchip_irq_demux(struct irq_desc *desc)
->  	chained_irq_enter(chip, desc);
->
->  	pending = readl_relaxed(bank->reg_base + bank->gpio_regs->int_status);
-
-Please sprinkle in some newlines for readability here...
-
-> +	for (unsigned int i = 0; i < bank->nr_irqs; i++) {
-> +		if (bank->irqs[i] == irq_desc_get_irq(desc)) {
-> +			pending &= bank->irq_masks[i];
-> +			break;
-> +		}
+>   struct berlin_pinctrl {
+>   	struct regmap *regmap;
+>   	struct device *dev;
+> @@ -56,6 +73,8 @@ static int berlin_pinctrl_dt_node_to_map(struct pinctrl_dev *pctrl_dev,
+>   	struct property *prop;
+>   	const char *function_name, *group_name;
+>   	unsigned reserved_maps = 0;
+> +	unsigned long *configs = NULL;
+> +	unsigned int num_configs = 0;
+>   	int ret, ngroups;
+>   
+>   	*map = NULL;
+> @@ -75,11 +94,19 @@ static int berlin_pinctrl_dt_node_to_map(struct pinctrl_dev *pctrl_dev,
+>   		return -EINVAL;
+>   	}
+>   
+> +	ret = pinconf_generic_parse_dt_config(node, pctrl_dev, &configs,
+> +					      &num_configs);
+> +	if (ret < 0) {
+> +		dev_err(pctrl->dev, "%s: could not parse node property\n",
+> +			node->name);
+> +		return ret;
 > +	}
-
-... here ...
-
->  	for_each_set_bit(irq, &pending, 32) {
->  		dev_dbg(bank->dev, "handling irq %d\n", irq);
->
-> @@ -568,8 +592,9 @@ static int rockchip_interrupts_register(struct rockchip_pin_bank *bank)
->  	rockchip_gpio_writel(bank, 0xffffffff, bank->gpio_regs->int_en);
->  	gc->mask_cache = 0xffffffff;
->
-> -	irq_set_chained_handler_and_data(bank->irq,
-> -					 rockchip_irq_demux, bank);
-> +	for (unsigned int i = 0; i < bank->nr_irqs; i++)
-> +		irq_set_chained_handler_and_data(bank->irqs[i],
-> +						 rockchip_irq_demux, bank);
->
->  	return 0;
->  }
-> @@ -645,6 +670,36 @@ static void rockchip_clk_put(void *data)
->  	clk_put(clk);
->  }
->
-> +static int rockchip_gpio_read_irq_groups(struct rockchip_pin_bank *bank)
+> +
+>   	ret = pinctrl_utils_reserve_map(pctrl_dev, map, &reserved_maps,
+> -					num_maps, ngroups);
+> +					num_maps, ngroups * (num_configs + 1));
+>   	if (ret) {
+>   		dev_err(pctrl->dev, "can't reserve map: %d\n", ret);
+> -		return ret;
+> +		goto exit;
+>   	}
+>   
+>   	of_property_for_each_string(node, "groups", prop, group_name) {
+> @@ -88,11 +115,22 @@ static int berlin_pinctrl_dt_node_to_map(struct pinctrl_dev *pctrl_dev,
+>   						function_name);
+>   		if (ret) {
+>   			dev_err(pctrl->dev, "can't add map: %d\n", ret);
+> -			return ret;
+> +			goto exit;
+> +		}
+> +
+> +		if (num_configs) {
+> +			ret = pinctrl_utils_add_map_configs(pctrl_dev, map,
+> +					&reserved_maps, num_maps, group_name,
+> +					configs, num_configs,
+> +					PIN_MAP_TYPE_CONFIGS_GROUP);
+> +			if (ret < 0)
+> +				goto exit;
+>   		}
+>   	}
+>   
+> -	return 0;
+> +exit:
+> +	kfree(configs);
+> +	return ret;
+>   }
+>   
+>   static const struct pinctrl_ops berlin_pinctrl_ops = {
+> @@ -177,6 +215,191 @@ static const struct pinmux_ops berlin_pinmux_ops = {
+>   	.set_mux		= &berlin_pinmux_set,
+>   };
+>   
+> +static int berlin_pinconf_group_get(struct pinctrl_dev *pctrl_dev,
+> +				    unsigned int group, unsigned long *configs)
 > +{
-> +	struct arm_smccc_res res;
-> +	u32 assigned = 0;
-> +	int status;
+> +	enum pin_config_param param = pinconf_to_config_param(*configs);
+> +	struct berlin_pinctrl *pctrl = pinctrl_dev_get_drvdata(pctrl_dev);
+> +	const struct berlin_desc_group *group_desc = pctrl->desc->groups + group;
+> +	bool enabled;
+> +	u32 val;
+> +	int ret;
+> +	u8 conf_bits = group_desc->conf_bits;
 > +
-> +	for (unsigned int i = 1; i < bank->nr_irqs; i++) {
-> +		arm_smccc_smc(ROCKCHIP_SIP_GPIO_CONFIG, ROCKCHIP_SIP_GPIO_GET_GROUP,
-> +			      bank->bank_num, i, 0, 0, 0, 0, &res);
-> +		status = (int)res.a0;
-> +		if (i == 1 && (status == SMCCC_RET_NOT_SUPPORTED ||
-> +			       status == ROCKCHIP_SIP_RET_NOT_SUPPORTED)) {
-> +			/* Older firmware leaves all pins on the primary IRQ. */
-> +			dev_dbg(bank->dev, "GPIO group query unsupported: %d\n",
-> +				status);
-> +			break;
-> +		}
-> +		if (status)
-> +			return dev_err_probe(bank->dev, -EIO,
-> +					     "cannot read interrupt group %u: %d\n",
-> +					     i, status);
-> +		bank->irq_masks[i] = res.a1;
-> +		if (assigned & bank->irq_masks[i])
-> +			return -EINVAL;
-> +		assigned |= bank->irq_masks[i];
-> +	}
-
-... here, etc.
-
-> +	bank->irq_masks[0] = ~assigned;
-> +	return 0;
-> +}
+> +	if (!conf_bits)
+> +		return -EOPNOTSUPP;
 > +
->  static int rockchip_get_bank_data(struct rockchip_pin_bank *bank)
->  {
->  	struct platform_device *pdev = to_platform_device(bank->dev);
-> @@ -654,10 +709,23 @@ static int rockchip_get_bank_data(struct rockchip_pin_bank *bank)
->  	if (IS_ERR(bank->reg_base))
->  		return PTR_ERR(bank->reg_base);
->
-> -	ret = platform_get_irq(pdev, 0);
-> +	ret = platform_irq_count(pdev);
->  	if (ret < 0)
->  		return ret;
-> -	bank->irq = ret;
-> +	if (ret != (of_device_is_compatible(bank->of_node,
-> +					    "rockchip,rk3572-gpio-bank") ? 4 : 1))
-> +		return -EINVAL;
-> +	bank->nr_irqs = ret;
-> +	for (unsigned int i = 0; i < bank->nr_irqs; i++) {
-> +		ret = platform_get_irq(pdev, i);
-> +		if (ret < 0)
-> +			return ret;
-> +		bank->irqs[i] = ret;
-> +	}
-> +
-> +	ret = rockchip_gpio_read_irq_groups(bank);
+> +	ret = regmap_read(pctrl->regmap, group_desc->conf_offset, &val);
 > +	if (ret)
 > +		return ret;
->
->  	bank->clk = devm_clk_get_enabled(bank->dev, NULL);
->  	if (IS_ERR(bank->clk))
-> @@ -669,6 +737,7 @@ static int rockchip_get_bank_data(struct rockchip_pin_bank *bank)
->  	case GPIO_TYPE_V2:
->  	case GPIO_TYPE_V2_1:
->  	case GPIO_TYPE_V2_2:
-> +	case GPIO_TYPE_V2_7:
->  		bank->gpio_regs = &gpio_regs_v2;
->  		bank->gpio_type = GPIO_TYPE_V2;
->  		bank->db_clk = of_clk_get(bank->of_node, 1);
-> @@ -797,7 +866,8 @@ static void rockchip_gpio_remove(struct platform_device *pdev)
->  {
->  	struct rockchip_pin_bank *bank = platform_get_drvdata(pdev);
->
-> -	irq_set_chained_handler_and_data(bank->irq, NULL, NULL);
-> +	for (unsigned int i = 0; i < bank->nr_irqs; i++)
-> +		irq_set_chained_handler_and_data(bank->irqs[i], NULL, NULL);
->  	if (bank->domain) {
->  		irq_domain_remove_generic_chips(bank->domain);
->  		irq_domain_remove(bank->domain);
-> @@ -807,6 +877,7 @@ static void rockchip_gpio_remove(struct platform_device *pdev)
->
->  static const struct of_device_id rockchip_gpio_match[] = {
->  	{ .compatible = "rockchip,gpio-bank", },
-> +	{ .compatible = "rockchip,rk3572-gpio-bank" },
->  	{ .compatible = "rockchip,rk3188-gpio-bank0" },
->  	{ },
->  };
-> diff --git a/drivers/pinctrl/pinctrl-rockchip.h b/drivers/pinctrl/pinctrl-rockchip.h
-> index 553197f6dc690..058b58dcde404 100644
-> --- a/drivers/pinctrl/pinctrl-rockchip.h
-> +++ b/drivers/pinctrl/pinctrl-rockchip.h
-> @@ -302,7 +302,9 @@ struct rockchip_drv {
->   *	    bank has its own IOC block
->   * @clk: clock of the gpio bank
->   * @db_clk: clock of the gpio debounce
-> - * @irq: interrupt of the gpio bank
-> + * @irqs: parent interrupts of the GPIO bank
-> + * @irq_masks: pins assigned to each parent interrupt
-> + * @nr_irqs: number of parent interrupts
->   * @saved_masks: Saved content of GPIO_INTEN at suspend time.
->   * @pin_base: first pin number
->   * @nr_pins: number of pins in this bank
-> @@ -331,7 +333,9 @@ struct rockchip_pin_bank {
->  	struct regmap			*regmap_ioc;
->  	struct clk			*clk;
->  	struct clk			*db_clk;
-> -	int				irq;
-> +	unsigned int			irqs[4];
-> +	u32				irq_masks[4];
-> +	unsigned int			nr_irqs;
->  	u32				saved_masks;
->  	u32				pin_base;
->  	u8				nr_pins;
-> diff --git a/include/soc/rockchip/rockchip_sip.h b/include/soc/rockchip/rockchip_sip.h
-
-The changes in headers in other subsystems should be in separate patches.
-
-> index 501ad1fedb201..984272ede3baf 100644
-> --- a/include/soc/rockchip/rockchip_sip.h
-> +++ b/include/soc/rockchip/rockchip_sip.h
-> @@ -20,4 +20,9 @@
->  #define ROCKCHIP_SIP_CONFIG_DRAM_SET_PARAM	0x07
->  #define ROCKCHIP_SIP_CONFIG_DRAM_SET_ODT_PD	0x08
->
-> +#define ROCKCHIP_SIP_RET_NOT_SUPPORTED		-2
 > +
-> +#define ROCKCHIP_SIP_GPIO_CONFIG		0x8200002c
-> +#define ROCKCHIP_SIP_GPIO_GET_GROUP		0
+> +	switch (param) {
+> +	case PIN_CONFIG_BIAS_DISABLE:
+> +		if (conf_bits == 10)
+> +			enabled = !(val & PINCFG_PE_10BIT);
+> +		else
+> +			enabled = !(val & (PINCFG_PD_8BIT | PINCFG_PU_8BIT));
+> +		val = 0;
+> +		break;
+> +	case PIN_CONFIG_BIAS_PULL_DOWN:
+> +		if (conf_bits == 10)
+> +			enabled = (val & (PINCFG_PE_10BIT | PINCFG_PS_10BIT)) == PINCFG_PE_10BIT;
+> +		else
+> +			enabled = val & PINCFG_PD_8BIT;
+> +		val = enabled ? 1 : 0;
+> +		break;
+> +	case PIN_CONFIG_BIAS_PULL_UP:
+> +		if (conf_bits == 10) {
+> +			if ((val & (PINCFG_PE_10BIT | PINCFG_PS_10BIT)) == (PINCFG_PE_10BIT | PINCFG_PS_10BIT)) {
+> +				enabled = true;
+> +				if (val & PINCFG_SPU_10BIT)
+> +					val = 2;
+> +				else
+> +					val = 1;
+> +			} else {
+> +				enabled = false;
+> +				val = 0;
+> +			}
+> +		} else {
+> +			enabled = val & PINCFG_PU_8BIT;
+> +			val = enabled ? 1 : 0;
+> +		}
+> +		break;
+> +	case PIN_CONFIG_DRIVE_STRENGTH:
+> +		enabled = true;
+> +		if (conf_bits == 10)
+> +			val = FIELD_GET(PINCFG_DS_10BIT, val);
+> +		else
+> +			val = FIELD_GET(PINCFG_DS_8BIT, val);
+> +		break;
+> +	case PIN_CONFIG_INPUT_ENABLE:
+> +		if (conf_bits == 10)
+> +			enabled = val & PINCFG_IE_10BIT;
+> +		else
+> +			enabled = val & PINCFG_IE_8BIT;
+> +		val = enabled ? 1 : 0;
+> +		break;
+> +	case PIN_CONFIG_INPUT_SCHMITT_ENABLE:
+> +		if (conf_bits == 10)
+> +			enabled = val & PINCFG_ST_10BIT;
+> +		else
+> +			enabled = val & PINCFG_ST_8BIT;
+> +		val = enabled ? 1 : 0;
+> +		break;
+> +	case PIN_CONFIG_SLEW_RATE:
+> +		if (conf_bits == 10)
+> +			enabled = val & PINCFG_SL_10BIT;
+> +		else
+> +			enabled = val & PINCFG_SL_8BIT;
+> +		val = enabled ? 1 : 0;
+> +		break;
+> +	default:
+> +		return -EOPNOTSUPP;
+> +	}
 > +
->  #endif
->
-> --
-> 2.34.1
->
->
->
+> +	*configs = pinconf_to_config_packed(param, val);
+> +	return enabled ? 0 : -EINVAL;
+> +}
+> +
+> +static int berlin_pinconf_group_set(struct pinctrl_dev *pctrl_dev,
+> +				    unsigned int group, unsigned long *configs,
+> +				    unsigned int nconfigs)
+> +{
+> +	struct berlin_pinctrl *pctrl = pinctrl_dev_get_drvdata(pctrl_dev);
+> +	const struct berlin_desc_group *group_desc = pctrl->desc->groups + group;
+> +	u8 conf_bits = group_desc->conf_bits;
+> +	u32 mask = 0, val = 0;
+> +	int i;
+> +
+> +	if (!conf_bits)
+> +		return -EOPNOTSUPP;
+> +
+> +	for (i = 0; i < nconfigs; i++) {
+> +		enum pin_config_param param =
+> +					pinconf_to_config_param(configs[i]);
+> +		u32 arg = pinconf_to_config_argument(configs[i]);
+> +
+> +		switch (param) {
+> +		case PIN_CONFIG_BIAS_DISABLE:
+> +			if (conf_bits == 10)
+> +				mask |= (PINCFG_PE_10BIT | PINCFG_PS_10BIT | PINCFG_SPU_10BIT);
+> +			else
+> +				mask |= (PINCFG_PU_8BIT | PINCFG_PD_8BIT);
+> +			break;
+> +		case PIN_CONFIG_BIAS_PULL_DOWN:
+> +			if (conf_bits == 10) {
+> +				mask |= (PINCFG_PE_10BIT | PINCFG_PS_10BIT | PINCFG_SPU_10BIT);
+> +				val |= PINCFG_PE_10BIT;
+> +			} else {
+> +				mask |= (PINCFG_PU_8BIT | PINCFG_PD_8BIT);
+> +				val |= PINCFG_PD_8BIT;
+> +			}
+> +			break;
+> +		case PIN_CONFIG_BIAS_PULL_UP:
+> +			if (conf_bits == 10) {
+> +				mask |= (PINCFG_PE_10BIT | PINCFG_PS_10BIT | PINCFG_SPU_10BIT);
+> +				val |= (PINCFG_PE_10BIT | PINCFG_PS_10BIT);
+> +				if (arg == 2)
+> +					val |= PINCFG_SPU_10BIT;
+The value 2 Ohms is hijacked to be used as strong pull up.
+The more I look at that, the more it feels hacky.
 
-Bart
+> +			} else {
+> +				mask |= (PINCFG_PU_8BIT | PINCFG_PD_8BIT);
+> +				val |= PINCFG_PU_8BIT;
+> +			}
+> +			break;
+> +		case PIN_CONFIG_DRIVE_STRENGTH:
+> +			if (conf_bits == 10)
+> +				mask |= PINCFG_DS_10BIT;
+> +			else
+> +				mask |= PINCFG_DS_8BIT;
+> +			val |= arg;
+The drive strength is assumed to be lsb (which is the case), but maybe 
+something like:
+	if (arg > FIELD_MAX(mask))
+		return -EINVAL;
+	val |= FIELD_PREP(mask, arg);
+would be more generic.
+
+> +			break;
+> +		case PIN_CONFIG_INPUT_ENABLE:
+> +			if (conf_bits == 10) {
+> +				mask |= PINCFG_IE_10BIT;
+> +				if (arg)
+> +					val |= PINCFG_IE_10BIT;
+> +			} else {
+> +				mask |= PINCFG_IE_8BIT;
+> +				if (arg)
+> +					val |= PINCFG_IE_8BIT;
+> +			}
+> +			break;
+> +		case PIN_CONFIG_INPUT_SCHMITT_ENABLE:
+> +			if (conf_bits == 10) {
+> +				mask |= PINCFG_ST_10BIT;
+> +				if (arg)
+> +					val |= PINCFG_ST_10BIT;
+> +			} else {
+> +				mask |= PINCFG_ST_8BIT;
+> +				if (arg)
+> +					val |= PINCFG_ST_8BIT;
+> +			}
+> +			break;
+> +		case PIN_CONFIG_SLEW_RATE:
+> +			if (conf_bits == 10) {
+> +				mask |= PINCFG_SL_10BIT;
+> +				if (arg)
+> +					val |= PINCFG_SL_10BIT;
+> +			} else {
+> +				mask |= PINCFG_SL_8BIT;
+> +				if (arg)
+> +					val |= PINCFG_SL_8BIT;
+> +			}
+> +			break;
+> +		default:
+> +			return -EOPNOTSUPP;
+> +		}
+> +	}
+> +
+> +	return regmap_update_bits(pctrl->regmap, group_desc->conf_offset, mask, val);
+> +}
+> +
+> +static const struct pinconf_ops berlin_confops = {
+> +	.is_generic = true,
+> +	.pin_config_group_get = berlin_pinconf_group_get,
+> +	.pin_config_group_set = berlin_pinconf_group_set,
+> +};
+> +
+>   static int berlin_pinctrl_add_function(struct berlin_pinctrl *pctrl,
+>   				       const char *name)
+>   {
+> @@ -287,6 +510,7 @@ static const struct pinctrl_desc berlin_pctrl_desc = {
+>   	.name		= "berlin-pinctrl",
+>   	.pctlops	= &berlin_pinctrl_ops,
+>   	.pmxops		= &berlin_pinmux_ops,
+> +	.confops	= &berlin_confops,
+>   	.owner		= THIS_MODULE,
+>   };
+>   
+Regards,
+Richard
