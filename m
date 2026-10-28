@@ -1,58 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.85.4
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793197956;
-	b=TdC/09A3KPOtUlBcT5o+WUiqXfb3CHvI6XfMXQ2T/M3yKiKpTQiwhxXtN4HelxZFdSEB
-	 wTsu7zkeysO4ecJS5fWw9cSzQFetPHgc1ClNib5iVVhh1/WG/oDYq2pjpmDZhgcj8vCc7
-	 l5TDaPhHsnIZYUSuEMzQDMs5Cb1dcCp+J57Xn+vGtKeoOhiCPjlCxvcXan+uhHwsLFQIf
-	 tkr4m8RQrvIFEFimfrs6eXFUC1GeG3qigKEaWMgO8zD357wWMUnaDnWxWYKwi9xtHeBE9
-	 uu89NhZ8ukdjNbjlskcXcFTrlIN1fPjEM9i+bq9f/xfXdkql2vo+pDbmHXNoPBYhErQ==
+	t=1793198097;
+	b=f4PG4qoM6wSmouzumbrX/wPLkZznyc/LnXc5JXv7qtHoRgUvGXPwxCm5bOCwOAHts/3W
+	 glq5601X00O/016xqgIggHEY1qBS4nZhtRcIFh0/ze9b1JZjzC/KJZBi5ZrolOV1z3+E+
+	 HkdwL7xKe0wGIswzMa3HVZexHRsgVKrOPCHtfOQjq4wph/HRH3JzcrEcqXYki72mkoXlf
+	 9nmadZ1svCTlKJAGFeZ9KDPsSdMNgk8XFDPcbXM/oUYAeVt8MezogZtv3QRozOLqGEydi
+	 YawgFovCJ6PAqk0mDGRe3glecHim+Wv4f2Mf3nYkTl/Y9OPmkw8OjAAWD4iUicx31hA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793197956;
-	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:Organization:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Last-TLS-Session-Version;
-	bh=+vj3JXaH73DAc9DdU35ASSRyg7WAvYyKv+vce4COULM=;
-	b=vmOu4a7qIklZqOQsmj3K0dlRD5c5IYtLeGgR4Ikl66N8g9yVeajNzcl2bUorevBJkJwb
-	 qLpVvRR0nA2aFN2665YRiOakMtPazW+zZiSGg8HE+7rjIAIq/tYq9oSRBDWlmmpo88MKk
-	 G8cCmGFipKB7Jgq2DmoPFr3kTp/W6igtHDoI4rT0pDqr5fAwouu41cfRv6xX12RIGVkhm
-	 4oLk7F/oaOFNcNtuOUkUOeEq6hTPJySDxbpExAhGTNoYl3POLx2+HL/i9GegftFoXcGZ2
-	 vsHsI1+f6zT+evRJtC8509/K01TZ9df2pFULnBlBop6R4QYO0kq/v+Qsjg9uBF1xdDg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793198097;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer;
+	bh=vGJwTqYdbrZtckhZYhD/RIzHIRbhV2RUl+NlHGXe2VM=;
+	b=U9C6RtnRPlP6phhNTsr6yhdDCza4B2bDPTB/bv21LeecrWJBWi5UEVdEwTaJwMcIGfuE
+	 DxjXlFGLl4aQewhdVsq7V0PgmKFpz/ShiLFPRA5NdA6GBNEteZ5HA3N1OXrLsQbI3KuJD
+	 Dfq40hmaqTdIGrntCUYshQiZca84Z5cm5hm4UMYjpl+os/mU6c+KYjVaC6vuAx3eRluz8
+	 8cLD7I3F6tgXPq6PwkMZDOGQJGc6WVmJJaF7Jhjgg38ZynhnOwfIERAK5YEipr0ix0xEn
+	 mAgARD19DakQkIFdHRPW/xe67Hr5rZ1nXl3Yg4rkJZB9/LJrnN8u3CM/3roHPriygIQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=bootlin.com;
-	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=PrNxJIoI;
-	arc=none smtp.remote-ip=185.246.85.4
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Y0+VX3Z9;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77322606A31C
-	for <mfd@lists.linux.dev>; Wed, 28 Oct 2026 14:32:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 77322606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 537C0606A31A;
+	Wed, 28 Oct 2026 14:34:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=PrNxJIoI
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 8FF284E41366;
-	Wed, 28 Oct 2026 14:32:31 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 5F5B860769;
-	Wed, 28 Oct 2026 14:32:31 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id C3E6B103290D1;
-	Wed, 28 Oct 2026 15:32:19 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1793197945; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:content-language:in-reply-to:references;
-	bh=+vj3JXaH73DAc9DdU35ASSRyg7WAvYyKv+vce4COULM=;
-	b=PrNxJIoIaUyhY8Zqt4SrJf4ec9/mtkg2tiyqW/XNHd1snpJ3Ho9quFY5u9M6HNrg3pe4DJ
-	rEoBT0F3Mq7YaJMxOzPhZiJ4KGmGoe9sjxvUOuV2n6qPLG2XzN05gBCubNZ1sHNqWnQBXl
-	LRmFcPNn37UP3qhOdV3tjyLwibLn8KorGjx5y5VWBzsoxMT0/oVLBKudz/EmG0A7o/PPWW
-	NCdUf//rOnMSiE3qewS9q2nksK0+jikBkQsq+OemhIk3kyGwTEiL22QBuFxNfXE8gQEKmN
-	rA5dGwbBYGMHOdRe/O2j379Co6IiS+ImdN4CA5Dgx96FKJwh3EawJv7Nihzgsw==
-Message-ID: <880e67e2-3f29-4dfd-84ee-09006dc86574@bootlin.com>
-Date: Wed, 28 Oct 2026 15:32:18 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Y0+VX3Z9
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 52A7E1F01828;
+	Wed, 28 Oct 2026 14:34:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793198097;
+	bh=vGJwTqYdbrZtckhZYhD/RIzHIRbhV2RUl+NlHGXe2VM=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=Y0+VX3Z9uZSAHU0mZ8PYqiCsNyI5hBqywsEMhb1le3hLmJsz6YS7Hs7V3XkEYLbyx
+	 kmCq3CcfiTu8Txa+pAhaaNlPF6OIJ+tW3xuPcei942b51Q4qmfKFNtpKSBOxzCSRjc
+	 ELt4sxgakcqZXrtPRCqBLWkMvlukXKgw5EsvvETKyKEA5s1SBf2xal3NEk5jp7GO4u
+	 qeF2j0qEy+7rOGL4IG8u/zZpRgXDzLq0lBVy2Xrr4ns0h5tf5AumzAuf1JqZ0Ueh3j
+	 Ehmc4dXS9B8RoeVYMdikDkubgqoMnYRT+Jm265Aw0ivflPLE3g6hBUMmYa2hbuhLAK
+	 aGZUAdoPZACcQ==
+From: Lee Jones <lee@kernel.org>
+To: mfd@lists.linux.dev, Rosen Penev <rosenp@gmail.com>
+Cc: Aaro Koskinen <aaro.koskinen@iki.fi>, 
+ Andreas Kemnade <andreas@kemnade.info>, Kevin Hilman <khilman@baylibre.com>, 
+ Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>, 
+ Lee Jones <lee@kernel.org>, linux-omap@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <20261017004758.1256875-1-rosenp@gmail.com>
+References: <20261017004758.1256875-1-rosenp@gmail.com>
+Subject: Re: (subset) [PATCH v4] mfd: twl-core: Embed the twl_client array
+ in twl_private
+Message-Id: <179319809509.3743962.8693833243810954971.b4-ty@b4>
+Date: Wed, 28 Oct 2026 14:34:55 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -62,346 +62,21 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 12/20] pinctrl: berlin: add optional pinconf support
-To: Jisheng Zhang <jszhang@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
- Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>, Andi Shyti
- <andi.shyti@kernel.org>, Alexandre Belloni <alexandre.belloni@bootlin.com>,
- Frank Li <Frank.Li@nxp.com>, Lee Jones <lee@kernel.org>,
- Linus Walleij <linusw@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
- Mark Brown <broonie@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Jiri Slaby <jirislaby@kernel.org>,
- Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>
-Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-clk@vger.kernel.org, linux-i2c@vger.kernel.org,
- linux-i3c@lists.infradead.org, mfd@lists.linux.dev,
- linux-gpio@vger.kernel.org, linux-serial@vger.kernel.org,
- linux-spi@vger.kernel.org, linux-arm-kernel@lists.infradead.org
-References: <20260929061417.20733-1-jszhang@kernel.org>
- <20260929061417.20733-13-jszhang@kernel.org>
-From: Richard GENOUD <richard.genoud@bootlin.com>
-Content-Language: en-US, fr
-Organization: Bootlin
-In-Reply-To: <20260929061417.20733-13-jszhang@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+X-Mailer: b4 0.16-dev-ad80c
 
-Le 29/09/2026 à 08:14, Jisheng Zhang a écrit :
-> Add pinconf support for newer Synaptics SoCs.
-> 
-> Signed-off-by: Jisheng Zhang <jszhang@kernel.org>
-> ---
->   drivers/pinctrl/berlin/berlin.c | 232 +++++++++++++++++++++++++++++++-
->   1 file changed, 228 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/pinctrl/berlin/berlin.c b/drivers/pinctrl/berlin/berlin.c
-> index 0c2179b98629..06c67f00c527 100644
-> --- a/drivers/pinctrl/berlin/berlin.c
-> +++ b/drivers/pinctrl/berlin/berlin.c
-> @@ -13,6 +13,8 @@
->   #include <linux/of.h>
->   #include <linux/of_address.h>
->   #include <linux/of_device.h>
-> +#include <linux/pinctrl/pinconf-generic.h>
-> +#include <linux/pinctrl/pinconf.h>
->   #include <linux/pinctrl/pinctrl.h>
->   #include <linux/pinctrl/pinmux.h>
->   #include <linux/platform_device.h>
-> @@ -20,9 +22,24 @@
->   #include <linux/slab.h>
->   
->   #include "../core.h"
-> +#include "../pinconf.h"
->   #include "../pinctrl-utils.h"
->   #include "berlin.h"
->   
-> +#define PINCFG_DS_10BIT		GENMASK(3, 0)
-> +#define PINCFG_IE_10BIT		BIT(4)
-> +#define PINCFG_PE_10BIT		BIT(5)
-> +#define PINCFG_PS_10BIT		BIT(6)
-> +#define PINCFG_SL_10BIT		BIT(7)
-> +#define PINCFG_SPU_10BIT	BIT(8)
-> +#define PINCFG_ST_10BIT		BIT(9)
-> +#define PINCFG_DS_8BIT		GENMASK(2, 0)
-> +#define PINCFG_IE_8BIT		BIT(3)
-> +#define PINCFG_PD_8BIT		BIT(4)
-> +#define PINCFG_PU_8BIT		BIT(5)
-> +#define PINCFG_SL_8BIT		BIT(6)
-> +#define PINCFG_ST_8BIT		BIT(7)
-> +
->   struct berlin_pinctrl {
->   	struct regmap *regmap;
->   	struct device *dev;
-> @@ -56,6 +73,8 @@ static int berlin_pinctrl_dt_node_to_map(struct pinctrl_dev *pctrl_dev,
->   	struct property *prop;
->   	const char *function_name, *group_name;
->   	unsigned reserved_maps = 0;
-> +	unsigned long *configs = NULL;
-> +	unsigned int num_configs = 0;
->   	int ret, ngroups;
->   
->   	*map = NULL;
-> @@ -75,11 +94,19 @@ static int berlin_pinctrl_dt_node_to_map(struct pinctrl_dev *pctrl_dev,
->   		return -EINVAL;
->   	}
->   
-> +	ret = pinconf_generic_parse_dt_config(node, pctrl_dev, &configs,
-> +					      &num_configs);
-> +	if (ret < 0) {
-> +		dev_err(pctrl->dev, "%s: could not parse node property\n",
-> +			node->name);
-> +		return ret;
-> +	}
-> +
->   	ret = pinctrl_utils_reserve_map(pctrl_dev, map, &reserved_maps,
-> -					num_maps, ngroups);
-> +					num_maps, ngroups * (num_configs + 1));
->   	if (ret) {
->   		dev_err(pctrl->dev, "can't reserve map: %d\n", ret);
-> -		return ret;
-> +		goto exit;
->   	}
->   
->   	of_property_for_each_string(node, "groups", prop, group_name) {
-> @@ -88,11 +115,22 @@ static int berlin_pinctrl_dt_node_to_map(struct pinctrl_dev *pctrl_dev,
->   						function_name);
->   		if (ret) {
->   			dev_err(pctrl->dev, "can't add map: %d\n", ret);
-> -			return ret;
-> +			goto exit;
-> +		}
-> +
-> +		if (num_configs) {
-> +			ret = pinctrl_utils_add_map_configs(pctrl_dev, map,
-> +					&reserved_maps, num_maps, group_name,
-> +					configs, num_configs,
-> +					PIN_MAP_TYPE_CONFIGS_GROUP);
-> +			if (ret < 0)
-> +				goto exit;
->   		}
->   	}
->   
-> -	return 0;
-> +exit:
-> +	kfree(configs);
-> +	return ret;
->   }
->   
->   static const struct pinctrl_ops berlin_pinctrl_ops = {
-> @@ -177,6 +215,191 @@ static const struct pinmux_ops berlin_pinmux_ops = {
->   	.set_mux		= &berlin_pinmux_set,
->   };
->   
-> +static int berlin_pinconf_group_get(struct pinctrl_dev *pctrl_dev,
-> +				    unsigned int group, unsigned long *configs)
-> +{
-> +	enum pin_config_param param = pinconf_to_config_param(*configs);
-> +	struct berlin_pinctrl *pctrl = pinctrl_dev_get_drvdata(pctrl_dev);
-> +	const struct berlin_desc_group *group_desc = pctrl->desc->groups + group;
-> +	bool enabled;
-> +	u32 val;
-> +	int ret;
-> +	u8 conf_bits = group_desc->conf_bits;
-> +
-> +	if (!conf_bits)
-> +		return -EOPNOTSUPP;
-> +
-> +	ret = regmap_read(pctrl->regmap, group_desc->conf_offset, &val);
-> +	if (ret)
-> +		return ret;
-> +
-> +	switch (param) {
-> +	case PIN_CONFIG_BIAS_DISABLE:
-> +		if (conf_bits == 10)
-> +			enabled = !(val & PINCFG_PE_10BIT);
-> +		else
-> +			enabled = !(val & (PINCFG_PD_8BIT | PINCFG_PU_8BIT));
-> +		val = 0;
-> +		break;
-> +	case PIN_CONFIG_BIAS_PULL_DOWN:
-> +		if (conf_bits == 10)
-> +			enabled = (val & (PINCFG_PE_10BIT | PINCFG_PS_10BIT)) == PINCFG_PE_10BIT;
-> +		else
-> +			enabled = val & PINCFG_PD_8BIT;
-> +		val = enabled ? 1 : 0;
-> +		break;
-> +	case PIN_CONFIG_BIAS_PULL_UP:
-> +		if (conf_bits == 10) {
-> +			if ((val & (PINCFG_PE_10BIT | PINCFG_PS_10BIT)) == (PINCFG_PE_10BIT | PINCFG_PS_10BIT)) {
-> +				enabled = true;
-> +				if (val & PINCFG_SPU_10BIT)
-> +					val = 2;
-> +				else
-> +					val = 1;
-> +			} else {
-> +				enabled = false;
-> +				val = 0;
-> +			}
-> +		} else {
-> +			enabled = val & PINCFG_PU_8BIT;
-> +			val = enabled ? 1 : 0;
-> +		}
-> +		break;
-> +	case PIN_CONFIG_DRIVE_STRENGTH:
-> +		enabled = true;
-> +		if (conf_bits == 10)
-> +			val = FIELD_GET(PINCFG_DS_10BIT, val);
-> +		else
-> +			val = FIELD_GET(PINCFG_DS_8BIT, val);
-> +		break;
-> +	case PIN_CONFIG_INPUT_ENABLE:
-> +		if (conf_bits == 10)
-> +			enabled = val & PINCFG_IE_10BIT;
-> +		else
-> +			enabled = val & PINCFG_IE_8BIT;
-> +		val = enabled ? 1 : 0;
-> +		break;
-> +	case PIN_CONFIG_INPUT_SCHMITT_ENABLE:
-> +		if (conf_bits == 10)
-> +			enabled = val & PINCFG_ST_10BIT;
-> +		else
-> +			enabled = val & PINCFG_ST_8BIT;
-> +		val = enabled ? 1 : 0;
-> +		break;
-> +	case PIN_CONFIG_SLEW_RATE:
-> +		if (conf_bits == 10)
-> +			enabled = val & PINCFG_SL_10BIT;
-> +		else
-> +			enabled = val & PINCFG_SL_8BIT;
-> +		val = enabled ? 1 : 0;
-> +		break;
-> +	default:
-> +		return -EOPNOTSUPP;
-> +	}
-> +
-> +	*configs = pinconf_to_config_packed(param, val);
-> +	return enabled ? 0 : -EINVAL;
-> +}
-> +
-> +static int berlin_pinconf_group_set(struct pinctrl_dev *pctrl_dev,
-> +				    unsigned int group, unsigned long *configs,
-> +				    unsigned int nconfigs)
-> +{
-> +	struct berlin_pinctrl *pctrl = pinctrl_dev_get_drvdata(pctrl_dev);
-> +	const struct berlin_desc_group *group_desc = pctrl->desc->groups + group;
-> +	u8 conf_bits = group_desc->conf_bits;
-> +	u32 mask = 0, val = 0;
-> +	int i;
-> +
-> +	if (!conf_bits)
-> +		return -EOPNOTSUPP;
-> +
-> +	for (i = 0; i < nconfigs; i++) {
-> +		enum pin_config_param param =
-> +					pinconf_to_config_param(configs[i]);
-> +		u32 arg = pinconf_to_config_argument(configs[i]);
-> +
-> +		switch (param) {
-> +		case PIN_CONFIG_BIAS_DISABLE:
-> +			if (conf_bits == 10)
-> +				mask |= (PINCFG_PE_10BIT | PINCFG_PS_10BIT | PINCFG_SPU_10BIT);
-> +			else
-> +				mask |= (PINCFG_PU_8BIT | PINCFG_PD_8BIT);
-> +			break;
-> +		case PIN_CONFIG_BIAS_PULL_DOWN:
-> +			if (conf_bits == 10) {
-> +				mask |= (PINCFG_PE_10BIT | PINCFG_PS_10BIT | PINCFG_SPU_10BIT);
-> +				val |= PINCFG_PE_10BIT;
-> +			} else {
-> +				mask |= (PINCFG_PU_8BIT | PINCFG_PD_8BIT);
-> +				val |= PINCFG_PD_8BIT;
-> +			}
-> +			break;
-> +		case PIN_CONFIG_BIAS_PULL_UP:
-> +			if (conf_bits == 10) {
-> +				mask |= (PINCFG_PE_10BIT | PINCFG_PS_10BIT | PINCFG_SPU_10BIT);
-> +				val |= (PINCFG_PE_10BIT | PINCFG_PS_10BIT);
-> +				if (arg == 2)
-> +					val |= PINCFG_SPU_10BIT;
-The value 2 Ohms is hijacked to be used as strong pull up.
-The more I look at that, the more it feels hacky.
+On Fri, 16 Oct 2026 17:47:58 -0700, Rosen Penev wrote:
+> At most four I2C slave addresses are ever used (TWL4030 class), so
+> there is no need to allocate the twl_client array separately. Embed a
+> fixed array of TWL_MAX_SLAVES entries in struct twl_private and drop the
+> extra devm_kcalloc() and its error handling.
 
-> +			} else {
-> +				mask |= (PINCFG_PU_8BIT | PINCFG_PD_8BIT);
-> +				val |= PINCFG_PU_8BIT;
-> +			}
-> +			break;
-> +		case PIN_CONFIG_DRIVE_STRENGTH:
-> +			if (conf_bits == 10)
-> +				mask |= PINCFG_DS_10BIT;
-> +			else
-> +				mask |= PINCFG_DS_8BIT;
-> +			val |= arg;
-The drive strength is assumed to be lsb (which is the case), but maybe 
-something like:
-	if (arg > FIELD_MAX(mask))
-		return -EINVAL;
-	val |= FIELD_PREP(mask, arg);
-would be more generic.
+Applied, thanks!
 
-> +			break;
-> +		case PIN_CONFIG_INPUT_ENABLE:
-> +			if (conf_bits == 10) {
-> +				mask |= PINCFG_IE_10BIT;
-> +				if (arg)
-> +					val |= PINCFG_IE_10BIT;
-> +			} else {
-> +				mask |= PINCFG_IE_8BIT;
-> +				if (arg)
-> +					val |= PINCFG_IE_8BIT;
-> +			}
-> +			break;
-> +		case PIN_CONFIG_INPUT_SCHMITT_ENABLE:
-> +			if (conf_bits == 10) {
-> +				mask |= PINCFG_ST_10BIT;
-> +				if (arg)
-> +					val |= PINCFG_ST_10BIT;
-> +			} else {
-> +				mask |= PINCFG_ST_8BIT;
-> +				if (arg)
-> +					val |= PINCFG_ST_8BIT;
-> +			}
-> +			break;
-> +		case PIN_CONFIG_SLEW_RATE:
-> +			if (conf_bits == 10) {
-> +				mask |= PINCFG_SL_10BIT;
-> +				if (arg)
-> +					val |= PINCFG_SL_10BIT;
-> +			} else {
-> +				mask |= PINCFG_SL_8BIT;
-> +				if (arg)
-> +					val |= PINCFG_SL_8BIT;
-> +			}
-> +			break;
-> +		default:
-> +			return -EOPNOTSUPP;
-> +		}
-> +	}
-> +
-> +	return regmap_update_bits(pctrl->regmap, group_desc->conf_offset, mask, val);
-> +}
-> +
-> +static const struct pinconf_ops berlin_confops = {
-> +	.is_generic = true,
-> +	.pin_config_group_get = berlin_pinconf_group_get,
-> +	.pin_config_group_set = berlin_pinconf_group_set,
-> +};
-> +
->   static int berlin_pinctrl_add_function(struct berlin_pinctrl *pctrl,
->   				       const char *name)
->   {
-> @@ -287,6 +510,7 @@ static const struct pinctrl_desc berlin_pctrl_desc = {
->   	.name		= "berlin-pinctrl",
->   	.pctlops	= &berlin_pinctrl_ops,
->   	.pmxops		= &berlin_pinmux_ops,
-> +	.confops	= &berlin_confops,
->   	.owner		= THIS_MODULE,
->   };
->   
-Regards,
-Richard
+[1/1] mfd: twl-core: Embed the twl_client array in twl_private
+      commit: 73f3a89d27c3da9ea28750a420fa2567c0bc1701
+
+--
+Lee Jones [李琼斯]
+
