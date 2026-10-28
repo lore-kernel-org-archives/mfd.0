@@ -1,58 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793198097;
-	b=f4PG4qoM6wSmouzumbrX/wPLkZznyc/LnXc5JXv7qtHoRgUvGXPwxCm5bOCwOAHts/3W
-	 glq5601X00O/016xqgIggHEY1qBS4nZhtRcIFh0/ze9b1JZjzC/KJZBi5ZrolOV1z3+E+
-	 HkdwL7xKe0wGIswzMa3HVZexHRsgVKrOPCHtfOQjq4wph/HRH3JzcrEcqXYki72mkoXlf
-	 9nmadZ1svCTlKJAGFeZ9KDPsSdMNgk8XFDPcbXM/oUYAeVt8MezogZtv3QRozOLqGEydi
-	 YawgFovCJ6PAqk0mDGRe3glecHim+Wv4f2Mf3nYkTl/Y9OPmkw8OjAAWD4iUicx31hA==
+	t=1793198328;
+	b=BDF6Ygoh6AnDC9DntaoFdpumrOSQVRv3aLTeIHT80Ft1BSuy0kGMSRuSsU/zHcatkN6+
+	 0pbp/icWQfsSnPai0YtEUNUXKM5hR72UCWCHi8biY/RCIpq2yU/vcbh/2s3TDuGsdOzYK
+	 g+x4XJptNj03qVSdqv7qPaWUXX4lzXPf8yk2KTg55gOJx6bEkBYNJna2hfJt+9xAC1J7E
+	 yLM+hMnoEqa2HDOeHsuj8sedx/KxJVBqo46yVJ2vuaDr/NLdrwjPa5RMhcBhhmyy7vVX2
+	 t+f3EvrRaX6DSQY4jxFhm6EzWn0u03VGH1MNEYJcbVQl2n8i+w5BRg3UvIiu9vmOtvQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793198097;
-	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer;
-	bh=vGJwTqYdbrZtckhZYhD/RIzHIRbhV2RUl+NlHGXe2VM=;
-	b=U9C6RtnRPlP6phhNTsr6yhdDCza4B2bDPTB/bv21LeecrWJBWi5UEVdEwTaJwMcIGfuE
-	 DxjXlFGLl4aQewhdVsq7V0PgmKFpz/ShiLFPRA5NdA6GBNEteZ5HA3N1OXrLsQbI3KuJD
-	 Dfq40hmaqTdIGrntCUYshQiZca84Z5cm5hm4UMYjpl+os/mU6c+KYjVaC6vuAx3eRluz8
-	 8cLD7I3F6tgXPq6PwkMZDOGQJGc6WVmJJaF7Jhjgg38ZynhnOwfIERAK5YEipr0ix0xEn
-	 mAgARD19DakQkIFdHRPW/xe67Hr5rZ1nXl3Yg4rkJZB9/LJrnN8u3CM/3roHPriygIQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793198328;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To;
+	bh=SnfC11lBqSwGEZV+IjWp8V4OqIU6oUVstiBOgog+6c4=;
+	b=eiXNnk8NsEFI+f4pjmaHSwzGGoiREg4rcRlzknOKMgIUjd0LgzZPThWLgxYV2lX4rpWZ
+	 cHIPws9rbk7jmUG12yacwT7n1VX7RWTRHxXtwH7Unjq+N9WSavw7l5aUcghAtmrj8i2QM
+	 xHKxnJ8EKoI2DGUFoC65c1seWxezH1piIp56nY233/wPscA0gL8cEH40rMP0qYN0ifnXN
+	 ErveXrmZhQpuJArpKeoF81xeBHXQ59Qx2D5PnGTB8ayqobaZDdXFmISWnVrR9nA8Ngygn
+	 8lfQk5nBsnA4g99VR4oW0/AL5pAb7D9LU01KpP2SiT3VdNeJ7mLi7Ntl5kCK73QiN5g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Y0+VX3Z9;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="dJBU/nlW";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 537C0606A31A;
-	Wed, 28 Oct 2026 14:34:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B82EE606A31C;
+	Wed, 28 Oct 2026 14:38:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Y0+VX3Z9
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 52A7E1F01828;
-	Wed, 28 Oct 2026 14:34:55 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dJBU/nlW
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9E2CE1F01825;
+	Wed, 28 Oct 2026 14:38:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793198097;
-	bh=vGJwTqYdbrZtckhZYhD/RIzHIRbhV2RUl+NlHGXe2VM=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=Y0+VX3Z9uZSAHU0mZ8PYqiCsNyI5hBqywsEMhb1le3hLmJsz6YS7Hs7V3XkEYLbyx
-	 kmCq3CcfiTu8Txa+pAhaaNlPF6OIJ+tW3xuPcei942b51Q4qmfKFNtpKSBOxzCSRjc
-	 ELt4sxgakcqZXrtPRCqBLWkMvlukXKgw5EsvvETKyKEA5s1SBf2xal3NEk5jp7GO4u
-	 qeF2j0qEy+7rOGL4IG8u/zZpRgXDzLq0lBVy2Xrr4ns0h5tf5AumzAuf1JqZ0Ueh3j
-	 Ehmc4dXS9B8RoeVYMdikDkubgqoMnYRT+Jm265Aw0ivflPLE3g6hBUMmYa2hbuhLAK
-	 aGZUAdoPZACcQ==
+	s=k20260515; t=1793198327;
+	bh=SnfC11lBqSwGEZV+IjWp8V4OqIU6oUVstiBOgog+6c4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=dJBU/nlWWQHKNVaRdNkkaRFDgtvbedlBauV5VCi4/IvPiXBceFOSotrwouY7k9X8K
+	 XikIvFl+bJt+3WeEGBHEJarNa8gXOXWJQQdp3hmjIS4lyQNCUd8oK15B5ZmFRdFzx1
+	 jdn4t2UYY0hLKxgCOBgwMlWCb0do8F2xNYdfr7B+TWGc0ArCBAPGmJF83HiX3zUaPw
+	 I59ecVSZo8zZMGefVZ3obNjL4TE52Fk5ErVGfVjET/CqLRTJqZ871H2JiRcN25svw6
+	 XmF2ULR9Xs8lJGWlT2NKIR4CXiMMIcsm6ReX2h12Y1LnH6/0lCItelkrNukA3D2ZXU
+	 i22s03wS8b0Rw==
+Date: Wed, 28 Oct 2026 14:38:44 +0000
 From: Lee Jones <lee@kernel.org>
-To: mfd@lists.linux.dev, Rosen Penev <rosenp@gmail.com>
-Cc: Aaro Koskinen <aaro.koskinen@iki.fi>, 
- Andreas Kemnade <andreas@kemnade.info>, Kevin Hilman <khilman@baylibre.com>, 
- Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>, 
- Lee Jones <lee@kernel.org>, linux-omap@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <20261017004758.1256875-1-rosenp@gmail.com>
-References: <20261017004758.1256875-1-rosenp@gmail.com>
-Subject: Re: (subset) [PATCH v4] mfd: twl-core: Embed the twl_client array
- in twl_private
-Message-Id: <179319809509.3743962.8693833243810954971.b4-ty@b4>
-Date: Wed, 28 Oct 2026 14:34:55 +0000
+To: sashiko-reviews@lists.linux.dev
+Cc: Jiale Yao <yaojiale02@163.com>, mfd@lists.linux.dev
+Subject: Re: [PATCH 1/2] mfd: si476x: queue polling work on freezable
+ workqueue
+Message-ID: <20261028143844.GB3605912@google.com>
+References: <20261016100503.2581955-1-yaojiale02@163.com>
+ <20261016100503.2581955-2-yaojiale02@163.com>
+ <sashiko-outbox-174149@kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -62,21 +59,84 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.16-dev-ad80c
+In-Reply-To: <sashiko-outbox-174149@kernel.org>
 
-On Fri, 16 Oct 2026 17:47:58 -0700, Rosen Penev wrote:
-> At most four I2C slave addresses are ever used (TWL4030 class), so
-> there is no need to allocate the twl_client array separately. Embed a
-> fixed array of TWL_MAX_SLAVES entries in struct twl_private and drop the
-> extra devm_kcalloc() and its error handling.
+On Fri, 16 Oct 2026, sashiko-bot@kernel.org wrote:
 
-Applied, thanks!
+> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
+> - [Medium] mfd: si476x: cross-device race on static io_errors_count
 
-[1/1] mfd: twl-core: Embed the twl_client array in twl_private
-      commit: 73f3a89d27c3da9ea28750a420fa2567c0bc1701
+This needs an answer.
 
---
-Lee Jones [李琼斯]
+> - [Low] mfd: commit message description capitalization
+> --
+> 
+> commit 42712fe1738df7fa331aa622d7a9ed0967efc78f
+> Author: Jiale Yao <yaojiale02@163.com>
+> 
+>     mfd: si476x: queue polling work on freezable workqueue
+> 
+> This commit changes the polling work for SI476x devices to use the freezable
+> system workqueue. This ensures that the continuous I2C polling stops before
+> device suspend and properly resumes afterward, preventing transfers after the
+> adapter has been suspended.
+> 
+> >     mfd: si476x: queue polling work on freezable workqueue
+> 
+> [Severity: Low]
+> This isn't a bug, but the MFD subsystem requires capitalizing the description
+> after the subsystem prefix. Should "queue" be "Queue"?
+> 
+> > diff --git a/drivers/mfd/si476x-i2c.c b/drivers/mfd/si476x-i2c.c
+> > index 9bce720a0a082..8d952113f8a6f 100644
+> > --- a/drivers/mfd/si476x-i2c.c
+> > +++ b/drivers/mfd/si476x-i2c.c
+> 
+> [ ... ]
+> 
+> > @@ -97,8 +98,8 @@ static int si476x_core_config_pinmux(struct si476x_core *core)
+> >  
+> >  static inline void si476x_core_schedule_polling_work(struct si476x_core *core)
+> >  {
+> > -	schedule_delayed_work(&core->status_monitor,
+> > -			      usecs_to_jiffies(SI476X_STATUS_POLL_US));
+> > +	queue_delayed_work(system_freezable_wq, &core->status_monitor,
+> > +			   usecs_to_jiffies(SI476X_STATUS_POLL_US));
+> >  }
+> 
+> [Severity: Medium]
+> Will this polling work cause regressions if multiple si476x devices are present?
+> 
+> Looking at si476x_core_i2c_xfer(), which is called during the polling loop to
+> check device status:
+> 
+> drivers/mfd/si476x-i2c.c:si476x_core_i2c_xfer() {
+>     ...
+> 	static int io_errors_count;
+> 	int err;
+>     ...
+> 	if (err < 0) {
+> 		if (io_errors_count++ > SI476X_MAX_IO_ERRORS)
+> 			si476x_core_pronounce_dead(core);
+> 	} else {
+> 		io_errors_count = 0;
+> 	}
+>     ...
+> }
+> 
+> Because io_errors_count is static and accessed without locking, won't
+> concurrent I2C transfers from different devices race to modify it?
+> 
+> A successful read on one device could falsely reset the error count for a
+> failing device, preventing it from being pronounced dead. Conversely,
+> concurrent errors across multiple devices could accumulate together and
+> falsely trigger si476x_core_pronounce_dead() prematurely.
+> 
+> -- 
+> Sashiko AI review � https://sashiko.dev/#/patchset/20261016100503.2581955-1-yaojiale02@163.com?part=1
 
+-- 
+Lee Jones
