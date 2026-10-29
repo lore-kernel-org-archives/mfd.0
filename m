@@ -1,56 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793268697;
-	b=pDKmVlAVtS60waoRcLcEt8HQd1EgU0vldPTHhNeKjC0YEX2JaK01EIhmxAq6tpCr0/k9
-	 eevKv8hg3EnYPQa0ihzJXpJnfrYBfyj450ZNavVER9Y4TBtHFNfqF5JRTVrV0dLj5sMKY
-	 ae0Ubqv606yjvTMeAePpIzFdcoccYQZNexDSOMa0OSN0xzzx6I4EC713VRmfZaN4Qeox5
-	 FSH9PofR2WGJ7ePgblUGq+Yvopk9Eg32uEFGn2Fq/xM0hyXh66rz6mOYuI8fPA61zl931
-	 JR18gouPNUrjV8wF08iNua11vRyewguvs9Jris665F7GjnDY78IEi1Wt/MpRDV+J4OQ==
+	t=1793268753;
+	b=OSO9W2eVEcwjDuKuxAtq3ild73IPJqJ2uMpzGkkNlGsZBOzJxwbmgxvFupiLLEguTRM/
+	 9BQQysxLHpzXm7MjqTAFjWw5YuE1ltqSC5TFq8OQAUVo5DVJS/cvDIBwYrwF+bGgSjoWJ
+	 ReCpPfh4K3EgdgPnvEFTU4ru1pWA7Ehl6n/3GHEvMRBkejqP9POSapFEjyp39isd3Aq5N
+	 GUrCXslOArQf4Kws5v8BqQNSLcnn07IlkK5YcjDAEh22dtYJLUuMdbL2/6Ku+/yEVCH9y
+	 b9UG6i6/f10c7mR2btCFVTd9ieXenXokneMC5k8h0kpVO64dEsOAkv8RCxJjXM3g/XA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793268697;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793268753;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=b8iu8NNCf5thBEGTxmTFdzvLS5kC2lRllJjKBzdxi4s=;
-	b=S4E5jMh5FD/1BjoYrkOgRwYunWSOyq85nnwER/W/TnAg3Pw12EG5GOYwujyFOh9yLQgp
-	 z0BS8jny6S3kEtd0iYEw2AyVFfG9l9GT5mn/GSLRyLXA2EBTfm1mo4XOUvucAsYkVdq78
-	 dzpWxA/eSiIgzAUMVWrmbBKcejqNaXxEwNlVF+6gWJsRYrqSq45imBjpcPiYRqdXVLjHO
-	 sru/2TVgXWHaI/E9/MNFLLEuh+YIEiaLwWtKt8QGJfxSlMTm5NyzgWMmW75IroQ43e1iL
-	 reAsm5bUNGuR7Rr7xWSNT5UGJ8IlDN/a3IJPD311L8qvyxPin8InmYzpGSWC0OYgFQw==
+	bh=QYcvzUZRnBc7zNQmxnxWT1AJJ1vDV5WJHB3fJ3jge2E=;
+	b=rvt4aVMOaFL0JJM8UK7cElcUCtgrlsTwhBW9GuZuc7qAGJOaMW1X9f4LzAixg28di/3L
+	 4RN+ltBom1AvwfwHVZYtdb/PIV72IhD4c0Ap6myO3AhCyZr40taLwiBJ0tNGot2i0zpZN
+	 VYQBru6qZwdSDLkn9tXy02K8+jr418Eo55GPFnZCWI49vkho5ysX/xFylL6iY67nly9hi
+	 3mCMfAflKjRJlr/Nkiwsn+Lm4h4LqAi5iPgbKsB11twZsc06fdoImRE4Yr4sP4jTTfvkS
+	 3FfkiaoeCuRMtGG7aDJLmU+yniZjAvWBBuCZSc7NAxZzLFmNlKGkXzTGl+8NCtpomZQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="VChF7/Vq";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=V3hxrERB;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F06C7606A322
-	for <mfd@lists.linux.dev>; Thu, 29 Oct 2026 10:11:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDCB8606A31D
+	for <mfd@lists.linux.dev>; Thu, 29 Oct 2026 10:12:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VChF7/Vq
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5E0481F01828;
-	Thu, 29 Oct 2026 10:11:36 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=V3hxrERB
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3411B1F031E5;
+	Thu, 29 Oct 2026 10:12:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793268696;
-	bh=b8iu8NNCf5thBEGTxmTFdzvLS5kC2lRllJjKBzdxi4s=;
+	s=k20260515; t=1793268752;
+	bh=QYcvzUZRnBc7zNQmxnxWT1AJJ1vDV5WJHB3fJ3jge2E=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=VChF7/VqhTpY77wFxMRrdJcohGzLHdWYuzlHFCMLy043EKUa8pJ6+Z4kgg4Myx7TS
-	 j+uL/meE9dcuXkyHkPoIsU5tZa64y/9w6S90D37RR4t8Yh2s6Hm4Ip6XtLqyQO4MpW
-	 vfIfSRVlsV3A5G8DZg+jy08FQTSCVSUtsBbo936JIA4Pli5l9SM1i9V3Am6UWN30le
-	 /mVhfH5mjsfszzc2HcG26M9+GQK9Eq+w1lzYeu0qIVeGvxDlcwYMcRVQfVO9aPZGJq
-	 BAdesYzSURkopNwSc7Y6krjOuFjmKAeFnTtgLZ5miGBlhyAKoSe+WX5LCjKUI9NOrT
-	 rB4cZd+ho7F7A==
-Message-ID: <sashiko-outbox-189101@kernel.org>
+	b=V3hxrERBNW76m0U5h4zNYtCq/xNI1YcXK+EthsUjjVrpFuQd3GI/yOF/gonJf+wIP
+	 a7Mmx+8Wg/XwEIb14R3D6qaogLa4E8eFd9bMff02AZUz/e6OPeA7lDwjxZQclYBEE0
+	 0Ba56TOlDt+cui5Wt4DbadoNLrPwN+CxNqha4UrWSlnDsI+E0A+jZE5xmc6tBEgGIz
+	 NwoZ6QQVcKBMFPs3yb6EKvI/Uo32TiLxZnCMBd/vFoxrjQV7H0eTV465eO7ABL/ISU
+	 m365ZnyIAUGCWG2l60NAhN6plfasssq5+Kp5UWe+94BKSVJLL9LX4KZd2LhSn5kCOd
+	 nZn+S4pwVuurA==
+Message-ID: <sashiko-outbox-189103@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 3/4] mfd: rk8xx-spi: add system sleep PM ops
+Subject: Re: [PATCH 1/4] Input: rk805-pwrkey - enable the wakeup interrupt
+ during system suspend
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Jakob Unterwurzacher" <jakobunt@gmail.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-3-cb12621c1fb4@cherry.de>
+In-Reply-To: <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-1-cb12621c1fb4@cherry.de>
 References: <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-0-cb12621c1fb4@cherry.de>
- <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-3-cb12621c1fb4@cherry.de>
+ <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-1-cb12621c1fb4@cherry.de>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 29 Oct 2026 10:11:35 +0000
+Date: Thu, 29 Oct 2026 10:12:31 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -62,17 +63,28 @@ Precedence: list
 
 > From: Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
 >=20
-> Unlike rk8xx-i2c, the SPI driver does not hook up rk8xx_suspend() and
-> rk8xx_resume(), so the RK806 never gets its system sleep handling, e.g.
-> keeping its interrupt disabled while the SPI controller is suspended.
+> The driver marks the device as wakeup capable, but never enables the
+> power key interrupt as a wakeup interrupt. As a consequence, the PMIC
+> interrupt line is masked during system suspend and the power key cannot
+> wake up the system, e.g. from suspend-to-ram on RK3588 with an RK806.
 >=20
-> Add the same PM ops as rk8xx-i2c.
+> Enable the interrupt as wakeup interrupt in the suspend callback if the
+> device may wake up the system, and disable it again on resume.
 >=20
-> Fixes: 210f418f8ace ("mfd: rk8xx: Add rk806 support")
+> This is done in the regular suspend phase on purpose, rather than with
+> dev_pm_set_wake_irq(), which arms the wakeup in the noirq phase: there,
+> enabling it updates the PMIC's interrupt registers through regmap-irq,
+> which fails when the PMIC is connected via SPI:
+>=20
+>   spi_master spi2: Failed to power device: -13
+>   rk8xx-spi spi2.0: Failed to sync masks in 7a
+>=20
+> Fixes: 5a35b85c2d92 ("Input: add power key driver for Rockchip RK805 PMIC=
+")
 
 Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261029-dev-tiger-=
-v7-4-pre-20261028-tiger-suspend-b4-v1-0-cb12621c1fb4@cherry.de?part=3D3
+v7-4-pre-20261028-tiger-suspend-b4-v1-0-cb12621c1fb4@cherry.de?part=3D1
 
