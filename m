@@ -1,83 +1,84 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.170
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.174
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793264300;
-	b=q34LOTHlobSh0nLs2qh3F7qA8d5koKAWkOQtssKu9pS+SlUHunCH8WpENrKke7QQR0Xs
-	 bUjxx3ng6EBS2zxp3M00Xp3kvA4hs4t2+y+qrO0jnappdvvEUQ5F9DSShbO1xrcm0ZnqE
-	 OiVdMLmWDPNUWxgCmu9RxXZf60Cq+h0vX8QXcH/y+it8vYcSJ8tThHDsMo/Hw0eUuxa7k
-	 rolbnZTINfHEjDiISyk4GAuh6EOh7JRvP+nhUC9uvaEkF2gOqWt+5lNIOCwIg27hMh31h
-	 J5DJ0aY7Fea+kYpwXnuMrQOwTyfl4/AYo3WQ45dULcc/Sd+zq776uEZy64GGQkQo3zQ==
+	t=1793264328;
+	b=tgoQjJh4Sbdj920SbH+HLS8TRFS4q/9dU6iQLjPlr4I5w22f3joVjKw3rkx0tHkNF9ZU
+	 vQJqw+QGu42CSJpeRxJQKsLwyTgSv/FIBuBr2NcrHf7i9tEEuQc3delKPNxMvKyzpbq2r
+	 L57S7NJzfN14mE3qYOSSErr89zOKllPof0CDa3BsMw21ZJs3OZoZeNOrRKT5JDO3+OQYo
+	 El66r+atMYW/fqAPu/o6uB9IzMJPoVepk7rf18JqA5ikNsqf77wuMdTEBYnyzVxZmduE+
+	 xTAX16G5zq1F4f2OEggH7POROFGqy0TLNUe/C1jSFgZq8sRBIocbEGCQCZWU0Tm+OaA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793264300;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793264328;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=aLiKz2BhC5RSo/yb+qOUrvZd9mNsTY8Su064dE1oXf0=;
-	b=f1gNIlV+yzCkJqUFfONnN7uGQSB0s+X3lVLe9yfDl6xC9IyqAm3pdpFjU2WjBybkUzSW
-	 Hvgfr+BqU4OhocKxYBtnm8s+ZB+4lWWtuPdLARCXe7cDlV40LR/BoEm+1qsuz5aKyf2FB
-	 Oya/GkfOWOmBScpHCqoWyPIQugwjG7dDhbwt5/LSWMtoIbcgrO8T5ZSUMdsQZy7ikxhr8
-	 954CbXq609+giG808aBoY70gr0fkpR4BNJ0S/Miroc4l5k7Y0/35VGmQxdF05oddNUbxy
-	 5NdL9oU088eoXbaqcmin41OqNNnniPK+5nfoaib8yv4edACsjn9zQ9cGTgCLA9azKBg==
+	bh=MA1va5T9XE5xJNcHi+mBsnQRuzOaQ1MDpEcJoNwX+FE=;
+	b=ad9Bls4YhAOJw2QV02d250mgOWoxMnlu1TZESUEryPkUjqjEYq0KQCAyUkh1Bq4o5LFK
+	 TVluzWO7OdVFYjTn3fpkoIFc7ALTb0vqIraIuRMKr49WMp7HPTHrX5SwM0oHSQraz5H0f
+	 8HZ0uQ3xqS6qUs931vVl/V6/oXhMThGh2m+0e+//SUMd12yBNALuSMLVhCNxVJ3HAqdk2
+	 SDgXalh0J5nuN6wVYb5K3N3THM7duiFBu1djcbqFiXl1kcPKKqrOkWibogJxCpVaJA5zV
+	 KixFlm1PQCn5BYZDzcFTos6MeaLeOj7/ezQliUxIafvUt5qj2RSPGv9hFfMxTxcPhjw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=zd5iGjIC;
-	arc=none smtp.remote-ip=74.125.82.170
-Received: from mail-dy1-f170.google.com (mail-dy1-f170.google.com [74.125.82.170])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DGJMzKjf;
+	arc=none smtp.remote-ip=74.125.82.174
+Received: from mail-dy1-f174.google.com (mail-dy1-f174.google.com [74.125.82.174])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B00AF606A323
-	for <mfd@lists.linux.dev>; Thu, 29 Oct 2026 08:58:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B00AF606A323
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A675606A31D
+	for <mfd@lists.linux.dev>; Thu, 29 Oct 2026 08:58:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2A675606A31D
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=zd5iGjIC
-Received: by mail-dy1-f170.google.com with SMTP id 5a478bee46e88-35cd4e8bdbdso2349631eec.1
-        for <mfd@lists.linux.dev>; Thu, 29 Oct 2026 01:58:19 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DGJMzKjf
+Received: by mail-dy1-f174.google.com with SMTP id 5a478bee46e88-3282db206d3so736525eec.0
+        for <mfd@lists.linux.dev>; Thu, 29 Oct 2026 01:58:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793264299; x=1793869099; darn=lists.linux.dev;
+        d=gmail.com; s=20260707; t=1793264327; x=1793869127; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=aLiKz2BhC5RSo/yb+qOUrvZd9mNsTY8Su064dE1oXf0=;
-        b=zd5iGjICi8x1LylexLKIMsdkI/HpMplySq9tQzj1qx4wFs0Ka4BAg1Vqpz54FMZfwi
-         dWfFQVOtfu2NkeBvdIUR8Q+kG5nrvnbgejU6fO5Et/4cWLEw2zSs5XJH0aYODL6n7QIx
-         BeoX+OrDqOmckbDequfjqPu2Z2lQ0t6YNnDeFuFZq5+mCeAWBzLtBhyZ6K9kJNzAHzzh
-         itFo77f6Bi+tKQfJyfuvlak8kGbwRuvM25Hwt1ONEVmW4lby2oEd78gQqb8YytKf9Bu1
-         tZ35Oc1QcV284kaFFjepP/YEdnU8mklp4NDwKLtcEJQJle2h0Sh0UAoo4Q169XxjXdrJ
-         yrIg==
+        bh=MA1va5T9XE5xJNcHi+mBsnQRuzOaQ1MDpEcJoNwX+FE=;
+        b=DGJMzKjf5czlcX93tUZBvefEHvgGn6iFjVK1vkH3oBvbBFGEXgwhzDHYsakcM4Vi1+
+         bdb+RY9EUAjMMplxCpV4zKp3Ut8RIJYtRIG7MK9hFH4FnhhfISi/diMtD6rU2Nkzgl6k
+         4CqRN8fX0rLtcRxP05/npFKmx1q/4LnPKlDqaIHqMAhAHNNm0FnZFz3aUzvTQ1Xigchl
+         IOkl/qECaBsUpSMQ8mpay5du+wffSsOFeH3IdGa33ZO8iGMUl+DioRUMm4bd/BAlvb/n
+         McWPXPiAWfeDiNO781w92Ulr5YjIiKOi2YhxGdTCiyz4+MU65oTQed4ZnxOMW1xroRUC
+         Tphw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793264299; x=1793869099;
+        d=1e100.net; s=20260707; t=1793264327; x=1793869127;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=aLiKz2BhC5RSo/yb+qOUrvZd9mNsTY8Su064dE1oXf0=;
-        b=08KTNaDWCnot2yG5WunE+fxH8q2Ns58MyEfw/SwVb8rjIMWTVb8J9BQ2FVi46snNra
-         YxSTCAyCtn41kUK3k4OLHaNqfyE7YPeHrGxhp9qxqlBBegCQ5Dmk/xl/Ek3NhvLngdie
-         Obcc80uK+5cEYKPeOiq15OI6W/zdp+pWJU0VqGI8nIDd9rPjE52vI0302tpfkxmFHb5+
-         Xjnc0iAgdN0FxsWvyolIA1iyv/1xaziHGc9o3LfK3cJwXmvpX6W2bZ1KBdmZhFsZihNg
-         /0SNhx+jEMeJfzoBiy31PLYDOotOP1nXVr0RLd92ejKLXlaE9MDVfegy/tWXcrSrg85F
-         nF8Q==
-X-Forwarded-Encrypted: i=1; AKwUvBynasz7UjJ1QYQHVBLDWQ5BEbxdRkfteEKytI3Ui2cXXrvVtOzJekpv+wbb9+YTKYLRen4=@lists.linux.dev
-X-Gm-Message-State: AFq9FYLkayy45e0gKpv+WptaKUJuv9ixtjq0ULC9rmteCBCbzVR6Nh5z
-	sv0RgF8y1c9HcyVdfm+TdA5x7URuv5ovOnw5Lf1F7kh/mqm5yvYPDQE=
-X-Gm-Gg: AYBFou102+bCHxbVfP2E5oxKzIp2YB0a1PQsJUg/xA7tWxlwY4B9ND5tIioEx93dzn4
-	ifn7bzfLuJ5ntnmoMRZW9kBIJurrEt8kdM9RN64e884kdhBAjAkPP7yYRWyHEKDnnKwTVdtj3Dj
-	GrPswzwPj+/2sMxWJuEIGzFwLsIpgPap56t6mlPrmMGjmfdSnk51iRV6TnDzJ44s60/FW7H8DfV
-	b0hI1da8vCXAKCcMmUt43KRdFDZOYs8j61sRQNBLiHMmlePrand5FcuUl7impyu0SxGm/NijNBj
-	n0DC6m5FAqLVt3ALCs5XoelJ+8X6EyqJaAnHp6VmcrskzLbirGX2LklRxtd/dExnr1DVDweMrAD
-	An5wy1HeZhUc67JYdwUmNUbFSoeMNdipCO0l3iHMmvSTfZZC0fF0YTEz81GRoIPW6LSk5/HYsd7
-	oWfN60xTwsw9PHpX3lTvDteA0Z4HXks9RHdMljecx3onkXcUR71TR6CxyXxe7q7G9QMy0XXftbZ
-	cSPCkisqj82lIw2+5Mw52tpCB+cl7W2UfAhQSTmNBCQ4SE9TQnA9YjYCdLLR/N3e81c0IsUk8xr
-	aM8ahT2rtRvL0kFodFw1PTMTB6YopenGUobHpbDV6OLCO3BjSTlAcFq3qH3d5Q==
-X-Received: by 2002:a05:693c:8944:10b0:369:2f25:33a7 with SMTP id 5a478bee46e88-36a200beec9mr6691678eec.15.1793264298696;
-        Thu, 29 Oct 2026 01:58:18 -0700 (PDT)
+        bh=MA1va5T9XE5xJNcHi+mBsnQRuzOaQ1MDpEcJoNwX+FE=;
+        b=1zCWBi8MqaqnUfK9E7UNX8BpFJjlthUvzCdRdDur4eYBYGMZFyI406pK5Rfj086BNd
+         4Ph8xmwsw6TqIUxvcl8D6vChhPPs10TEzWMg6YzNJeJaa7Wj3wDpZKXobgdDmFPnnw9o
+         w3lgcGrItaD637IHshpKY0MDFqkmJs+H0lbeDxNBl+deI8tYNGQaAVt0E7ttnfYFutPT
+         dy8XVrki9WeUDuaBkXTU7S34zAoxDFH2MiszT4U+Wl9mEuBZEG2T3YKN1027DOZbLFy1
+         cUhVivSHuQ2jj4CmzqAPb6e0HLORyhxBtfk28m6E7k8SLGcv+mcS5Oy0bnG1WfLXDmVI
+         oNrw==
+X-Forwarded-Encrypted: i=1; AKwUvBxYfUqQ8CY2i2vBepHsQOWr4GlAwNUgSIAWatYE+A84it8Gu9H01eXz2sVJ5FxJu0EHsmc=@lists.linux.dev
+X-Gm-Message-State: AFq9FYK36NW+JBC3bG3IAbrJY41GGxRGe0zpIHgXkz+f+T8k+nt5qXyF
+	r7Pq8nJ3lvNjEN3+kUtLxlOqC4ngtxmcZ6IOM0AsPGKO9SkCmEs4vv0=
+X-Gm-Gg: AYBFou31GxB1gZ/AKG9qx0gjRfKlq1wWDJ4aq/w4gj8mIle0Qkyd6sVPQfkTy3wUcqD
+	Yf64vCLONey1nz6bsuz7hoEhSCIZvoy57pcT12HxMK9auleX+jTPkHQvJZMsqIYQdwor7hwbLRa
+	YU+aFd6nyr3kRuwCmudDK7jUjiGndgywndpwzzyzjS0jaBVSQOks9CMe3ec8LGAU1g2cuL4qRde
+	g4G+CF0gQoKHg75MbtDiXhDT6Q/Fh2Ed3tnLMACKIlO4PhLFqpCkFIKB+1lM3oNO1nvnZMrd9Pf
+	WezOFptaA4CHoSHBQEA5p7ExJB75gamAJxPsPX2kRXGZVQmJXlh6eac0vpjcPI1SAXTVtA9etjA
+	M0ByUPR7oGSuugugKDSz1R2uaKQeQwyPg58Djxj2d1jEqD4FJ7q3WAImGupZwoZEs0dRspyjqRd
+	55qWejlzX0Fm6x/iV4kHyNNBqPHHugEgPjY9owVgYfdHqHGKsT/X2hGf3U513Yx5NC5siCV8/JV
+	gOcpE7oB4B3+jrdF7hlDEukrCbPkw33WYVz1o3Oyt+APc0V8Jhej/hZDKbzMUfS9640T0CenA87
+	ClDNOClj256lXjN3DhZvPRfVqvZivnBqHqv4Q8XEyGL1m1yOAJN3JzSG6U27yl7T76pyf4DFxNH
+	ErnHqTpIM
+X-Received: by 2002:a05:693c:2411:b0:359:9302:a526 with SMTP id 5a478bee46e88-36a203ad100mr6959524eec.7.1793264327087;
+        Thu, 29 Oct 2026 01:58:47 -0700 (PDT)
 Received: from at-Standard-PC-Q35-ICH9-2009 ([27.60.20.232])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a23641e78sm16497937eec.0.2026.10.29.01.58.01
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a23641e78sm16497937eec.0.2026.10.29.01.58.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Oct 2026 01:58:17 -0700 (PDT)
+        Thu, 29 Oct 2026 01:58:46 -0700 (PDT)
 From: Atharva Tiwari <atharvatiwarilinuxdev@gmail.com>
 To: 
 Cc: Atharva Tiwari <atharvatiwarilinuxdev@gmail.com>,
@@ -133,9 +134,9 @@ Cc: Atharva Tiwari <atharvatiwarilinuxdev@gmail.com>,
 	linux-integrity@vger.kernel.org,
 	keyrings@vger.kernel.org,
 	linux-security-module@vger.kernel.org
-Subject: [RFC PATCH 05/14] iio/accel: add driver for apple SMS
-Date: Thu, 29 Oct 2026 04:52:02 -0400
-Message-ID: <20261029085504.3547-6-atharvatiwarilinuxdev@gmail.com>
+Subject: [RFC PATCH 06/14] leds: add support for macsmc kbl
+Date: Thu, 29 Oct 2026 04:52:03 -0400
+Message-ID: <20261029085504.3547-7-atharvatiwarilinuxdev@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261029085504.3547-1-atharvatiwarilinuxdev@gmail.com>
 References: <20261029085504.3547-1-atharvatiwarilinuxdev@gmail.com>
@@ -150,330 +151,151 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a driver for the Sudden Motion Sensor accelerometer,
-exposed through IIO. It reports the three axes and also
-drop, orientation and shock events.
+Add a LED class driver to control the keyboard backlight.
 
-This replaces the motion sensor support in applesmc.
+This replaces the keyboard backlight support in applesmc.
 
 Signed-off-by: Atharva Tiwari <atharvatiwarilinuxdev@gmail.com>
 ---
- drivers/iio/accel/Kconfig        |  10 ++
- drivers/iio/accel/Makefile       |   1 +
- drivers/iio/accel/macsmc-accel.c | 248 +++++++++++++++++++++++++++++++
- drivers/mfd/macsmc-core.c        |  10 ++
- 4 files changed, 269 insertions(+)
- create mode 100644 drivers/iio/accel/macsmc-accel.c
+ drivers/leds/Kconfig       | 11 ++++++
+ drivers/leds/Makefile      |  1 +
+ drivers/leds/leds-macsmc.c | 69 ++++++++++++++++++++++++++++++++++++++
+ drivers/mfd/macsmc-core.c  | 11 ++++++
+ 4 files changed, 92 insertions(+)
+ create mode 100644 drivers/leds/leds-macsmc.c
 
-diff --git a/drivers/iio/accel/Kconfig b/drivers/iio/accel/Kconfig
-index 141ac9842..50bc127a4 100644
---- a/drivers/iio/accel/Kconfig
-+++ b/drivers/iio/accel/Kconfig
-@@ -532,6 +532,16 @@ config KXCJK1013
+diff --git a/drivers/leds/Kconfig b/drivers/leds/Kconfig
+index 7ec2c8d78..30cd64d41 100644
+--- a/drivers/leds/Kconfig
++++ b/drivers/leds/Kconfig
+@@ -729,6 +729,17 @@ config LEDS_ADP5520
  	  To compile this driver as a module, choose M here: the module will
- 	  be called kxcjk-1013.
+ 	  be called leds-adp5520.
  
-+config MACSMC_ACCEL
-+	tristate "Apple SMC Motion Sensor Driver"
++config LEDS_MACSMC
++	tristate "Keyboard Backlight support for Intel-Macs"
++	depends on LEDS_CLASS
 +	depends on MACSMC_ACPI
 +	help
-+	  Say yes here if you want support for Apple Motion Sensors, that uses
-+	  the System Management Controller.
++	  This option enables support for the Keyboard backlight in
++	  Intel-Macs using macsmc.
 +
 +	  To compile this driver as a module, choose M here: the module will
-+	  be called macsmc-accel.
++	  be called leds-macsmc.
 +
- config MC3230
- 	tristate "mCube MC3230 Digital Accelerometer Driver"
- 	depends on I2C
-diff --git a/drivers/iio/accel/Makefile b/drivers/iio/accel/Makefile
-index fa440a859..52fe661de 100644
---- a/drivers/iio/accel/Makefile
-+++ b/drivers/iio/accel/Makefile
-@@ -54,6 +54,7 @@ obj-$(CONFIG_KXSD9)	+= kxsd9.o
- obj-$(CONFIG_KXSD9_SPI)	+= kxsd9-spi.o
- obj-$(CONFIG_KXSD9_I2C)	+= kxsd9-i2c.o
- obj-$(CONFIG_MC3230)	+= mc3230.o
-+obj-$(CONFIG_MACSMC_ACCEL)	+= macsmc-accel.o
- 
- obj-$(CONFIG_MMA7455)		+= mma7455_core.o
- obj-$(CONFIG_MMA7455_I2C)	+= mma7455_i2c.o
-diff --git a/drivers/iio/accel/macsmc-accel.c b/drivers/iio/accel/macsmc-accel.c
+ config LEDS_MAX5970
+ 	tristate "LED Support for Maxim 5970"
+ 	depends on LEDS_CLASS
+diff --git a/drivers/leds/Makefile b/drivers/leds/Makefile
+index 4d4b08915..7c38dbef4 100644
+--- a/drivers/leds/Makefile
++++ b/drivers/leds/Makefile
+@@ -12,6 +12,7 @@ obj-$(CONFIG_LEDS_KUNIT_TEST)		+= led-test.o
+ obj-$(CONFIG_LEDS_88PM860X)		+= leds-88pm860x.o
+ obj-$(CONFIG_LEDS_ACER_A500)		+= leds-acer-a500.o
+ obj-$(CONFIG_LEDS_ADP5520)		+= leds-adp5520.o
++obj-$(CONFIG_LEDS_MACSMC)		+= leds-macsmc.o
+ obj-$(CONFIG_LEDS_AN30259A)		+= leds-an30259a.o
+ obj-$(CONFIG_LEDS_APU)			+= leds-apu.o
+ obj-$(CONFIG_LEDS_ARIEL)		+= leds-ariel.o
+diff --git a/drivers/leds/leds-macsmc.c b/drivers/leds/leds-macsmc.c
 new file mode 100644
-index 000000000..0abf81e7b
+index 000000000..f38ef2113
 --- /dev/null
-+++ b/drivers/iio/accel/macsmc-accel.c
-@@ -0,0 +1,248 @@
-+// SPDX-License-Identifier: GPL-2.0-only OR MIT
++++ b/drivers/leds/leds-macsmc.c
+@@ -0,0 +1,69 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
 +/*
-+ * Apple SMC sudden motion sensor (SMS) driver
++ * Apple SMC Keyboard backlight driver
 + *
 + * Copyright (C) 2026 Atharva Tiwari <atharvatiwarilinuxdev@gmail.com>
 + *
-+ * Based on drivers/hwmon/applesmc.c:
++ * Based on drivers/hwmon/applesmc.c
 + * Copyright (C) 2007 Nicolas Boichat <nicolas@boichat.ch>
 + * Copyright (C) 2010 Henrik Rydberg <rydberg@euromail.se>
++ *
 + */
 +
-+#include <linux/delay.h>
-+#include <linux/byteorder/generic.h>
-+#include <linux/iio/events.h>
-+#include <linux/iio/iio.h>
++#include <linux/leds.h>
 +#include <linux/mfd/macsmc.h>
 +#include <linux/platform_device.h>
-+#include <linux/pm.h>
 +
-+struct macsmc_accel {
++struct macsmc_led {
++	struct led_classdev cdev;
 +	struct apple_smc *smc;
-+	struct iio_dev *indio_dev;
-+	struct notifier_block nb;
++	u8 brightness;
 +};
 +
-+enum {
-+	SMS_DROP = 0,
-+	SMS_ORIENTATION,
-+	SMS_SHOCK,
-+};
-+
-+static int macsmc_accel_read(struct macsmc_accel *drv, smc_key key, s16 *p)
++static enum led_brightness macsmc_led_get_brightness(struct led_classdev *cdev)
 +{
-+	int ret;
++	struct macsmc_led *drv = container_of(cdev, struct macsmc_led, cdev);
 +
-+	ret = apple_smc_read_s16(drv->smc, key, p);
-+	if (ret < 0)
-+		return ret;
-+
-+	*p = (s16)be16_to_cpu(*p);
-+	return 0;
++	return drv->brightness;
 +}
 +
-+static int macsmc_accel_dev_init(struct macsmc_accel *drv)
++static void macsmc_led_set_brightness(struct led_classdev *cdev, enum led_brightness value)
 +{
-+	int ret, total;
-+	u16 buf;
++	struct macsmc_led *drv = container_of(cdev, struct macsmc_led, cdev);
 +
-+	for (total = 0; total < 100; total++) {
-+		ret = apple_smc_read_u16(drv->smc, SMC_KEY(MOCN), &buf);
-+		if (!ret && buf)
-+			return 0;
++	drv->brightness = (u8) value;
 +
-+		buf = 0xE0;
-+		apple_smc_write_u16(drv->smc, SMC_KEY(MOCN), buf);
-+		msleep(50);
-+	}
-+
-+	return -ENODEV;
++	apple_smc_write_u16(drv->smc, SMC_KEY(LKSB), drv->brightness);
 +}
 +
-+static int macsmc_accel_read_raw(struct iio_dev *indio_dev, struct iio_chan_spec const *chan,
-+		int *val, int *val2, long mask)
++static int macsmc_led_probe(struct platform_device *pdev)
 +{
-+	struct macsmc_accel *drv = iio_priv(indio_dev);
-+	int ret;
-+	s16 buf;
++	struct macsmc_led *drv;
 +
-+	if (mask != IIO_CHAN_INFO_RAW)
-+		return -EINVAL;
-+
-+	switch (chan->channel2) {
-+	case IIO_MOD_X:
-+		ret = macsmc_accel_read(drv, SMC_KEY(MO_X), &buf);
-+		if (ret < 0)
-+			return ret;
-+
-+		*val = buf;
-+		return IIO_VAL_INT;
-+	case IIO_MOD_Y:
-+		ret = macsmc_accel_read(drv, SMC_KEY(MO_Y), &buf);
-+		if (ret < 0)
-+			return ret;
-+
-+		*val = buf;
-+		return IIO_VAL_INT;
-+	case IIO_MOD_Z:
-+		ret = macsmc_accel_read(drv, SMC_KEY(MO_Z), &buf);
-+		if (ret < 0)
-+			return ret;
-+
-+		*val = buf;
-+		return IIO_VAL_INT;
-+	}
-+
-+	return -EINVAL;
-+}
-+
-+static int macsmc_accel_event(struct notifier_block *nb, unsigned long event, void *data)
-+{
-+	struct macsmc_accel *drv = container_of(nb, struct macsmc_accel, nb);
-+	u64 code;
-+
-+	/* check if event is for us */
-+	if (event != 0x60 && event != 0x69 && event != 0x6F)
-+		return NOTIFY_DONE;
-+
-+	switch (event) {
-+	case 0x60:
-+		code = IIO_UNMOD_EVENT_CODE(IIO_ACCEL, SMS_DROP,
-+					    IIO_EV_TYPE_CHANGE,
-+					    IIO_EV_DIR_NONE);
-+		break;
-+	case 0x69:
-+		code = IIO_UNMOD_EVENT_CODE(IIO_ACCEL, SMS_ORIENTATION,
-+					    IIO_EV_TYPE_CHANGE,
-+					    IIO_EV_DIR_NONE);
-+		break;
-+	case 0x6F:
-+		code = IIO_UNMOD_EVENT_CODE(IIO_ACCEL, SMS_SHOCK,
-+					    IIO_EV_TYPE_CHANGE,
-+					    IIO_EV_DIR_NONE);
-+		break;
-+	}
-+
-+	iio_push_event(drv->indio_dev, code, iio_get_time_ns(drv->indio_dev));
-+	return NOTIFY_OK;
-+}
-+
-+static void macsmc_accel_unregister_notifier(void *data)
-+{
-+	struct macsmc_accel *drv = data;
-+
-+	blocking_notifier_chain_unregister(drv->smc->event_handlers,
-+					&drv->nb);
-+}
-+
-+static const struct iio_event_spec macsmc_accel_event_spec = {
-+	.type = IIO_EV_TYPE_CHANGE,
-+	.dir = IIO_EV_DIR_NONE,
-+	.mask_separate = BIT(IIO_EV_INFO_ENABLE),
-+};
-+
-+static const struct iio_chan_spec macsmc_accel_channels[] = {
-+	{
-+		.type = IIO_ACCEL,
-+		.modified = 1,
-+		.channel2 = IIO_MOD_X,
-+		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
-+	},
-+	{
-+		.type = IIO_ACCEL,
-+		.modified = 1,
-+		.channel2 = IIO_MOD_Y,
-+		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
-+	},
-+	{
-+		.type = IIO_ACCEL,
-+		.modified = 1,
-+		.channel2 = IIO_MOD_Z,
-+		.info_mask_separate = BIT(IIO_CHAN_INFO_RAW),
-+	},
-+	{
-+		.type = IIO_ACCEL,
-+		.channel = SMS_DROP,
-+		.event_spec = &macsmc_accel_event_spec,
-+		.num_event_specs = 1,
-+	},
-+	{
-+		.type = IIO_ACCEL,
-+		.channel = SMS_ORIENTATION,
-+		.event_spec = &macsmc_accel_event_spec,
-+		.num_event_specs = 1,
-+	},
-+	{
-+		.type = IIO_ACCEL,
-+		.channel = SMS_SHOCK,
-+		.event_spec = &macsmc_accel_event_spec,
-+		.num_event_specs = 1,
-+	},
-+};
-+
-+static const struct iio_info macsmc_accel_info = {
-+	.read_raw = macsmc_accel_read_raw
-+};
-+
-+static int macsmc_accel_restore(struct device *dev)
-+{
-+	struct macsmc_accel *drv = dev_get_drvdata(dev);
-+
-+	return macsmc_accel_dev_init(drv);
-+}
-+
-+static const struct dev_pm_ops macsmc_accel_pm_ops = {
-+	.restore = macsmc_accel_restore,
-+};
-+
-+static int macsmc_accel_probe(struct platform_device *pdev)
-+{
-+	struct macsmc_accel *drv;
-+	struct iio_dev *indio_dev;
-+	int ret;
-+
-+	indio_dev = devm_iio_device_alloc(&pdev->dev, sizeof(*drv));
-+	if (!indio_dev)
++	drv = devm_kzalloc(&pdev->dev, sizeof(*drv), GFP_KERNEL);
++	if (!drv)
 +		return -ENOMEM;
 +
-+	drv = iio_priv(indio_dev);
 +	drv->smc = dev_get_drvdata(pdev->dev.parent);
 +
-+	ret = macsmc_accel_dev_init(drv);
-+	if (ret)
-+		return ret;
++	drv->cdev.name = "macsmc-led";
++	drv->cdev.max_brightness = 255;
++	drv->cdev.brightness_get = macsmc_led_get_brightness;
++	drv->cdev.brightness_set = macsmc_led_set_brightness;
++	drv->cdev.dev = &pdev->dev;
 +
-+	drv->indio_dev = indio_dev;
-+	drv->nb.notifier_call = macsmc_accel_event;
-+	ret = blocking_notifier_chain_register(drv->smc->event_handlers, &drv->nb);
-+	if (ret)
-+		return ret;
-+
-+	ret = devm_add_action_or_reset(&pdev->dev, macsmc_accel_unregister_notifier, drv);
-+	if (ret)
-+		return ret;
-+
-+	platform_set_drvdata(pdev, drv);
-+
-+	indio_dev->name = "macsmc-accel";
-+	indio_dev->modes = INDIO_DIRECT_MODE;
-+	indio_dev->info = &macsmc_accel_info;
-+	indio_dev->channels = macsmc_accel_channels;
-+	indio_dev->num_channels = ARRAY_SIZE(macsmc_accel_channels);
-+
-+	return devm_iio_device_register(&pdev->dev, indio_dev);
++	return devm_led_classdev_register(&pdev->dev, &drv->cdev);
 +}
 +
-+static struct platform_driver macsmc_accel_driver = {
-+	.probe = macsmc_accel_probe,
++static struct platform_driver macsmc_led_driver = {
++	.probe = macsmc_led_probe,
 +	.driver = {
-+		.name = "macsmc-accel",
-+		.pm = &macsmc_accel_pm_ops,
++		.name = "macsmc-led",
 +	},
 +};
-+module_platform_driver(macsmc_accel_driver);
++module_platform_driver(macsmc_led_driver);
 +
 +MODULE_AUTHOR("Atharva Tiwari <atharvatiwarilinuxdev@gmail.com>");
-+MODULE_DESCRIPTION("Apple SMC Motion Sensor Driver");
++MODULE_DESCRIPTION("LED keyboard backlight driver for Intel-macs using macsmc");
 +MODULE_LICENSE("Dual MIT/GPL");
-+MODULE_ALIAS("platform:macsmc-accel");
++MODULE_ALIAS("platform:macsmc-led");
 diff --git a/drivers/mfd/macsmc-core.c b/drivers/mfd/macsmc-core.c
-index 6014df4fe..6567d2f1f 100644
+index 6567d2f1f..bc4200f57 100644
 --- a/drivers/mfd/macsmc-core.c
 +++ b/drivers/mfd/macsmc-core.c
-@@ -24,6 +24,10 @@ static const struct mfd_cell apple_smc_rtkit_devs[] = {
-  * There isn't device tree on acpi backend, so we need to use
-  * apple_smc_key_exists to register mfd devs
-  */
-+static const struct mfd_cell apple_smc_acpi_accel[] = {
-+	MFD_CELL_NAME("macsmc-accel"),
+@@ -33,6 +33,10 @@ static const struct mfd_cell apple_smc_acpi_common[] = {
+ 	MFD_CELL_NAME("macsmc-power"),
+ };
+ 
++static const struct mfd_cell apple_smc_acpi_led[] = {
++	MFD_CELL_NAME("macsmc-led"),
 +};
 +
- static const struct mfd_cell apple_smc_acpi_common[] = {
- 	MFD_CELL_NAME("macsmc-hwmon"),
- 	MFD_CELL_NAME("macsmc-power"),
-@@ -169,6 +173,12 @@ int apple_smc_probe(struct device *dev, const struct apple_smc_backend_ops *ops,
+ static const struct mfd_cell apple_smc_acpi_light[] = {
+ 	MFD_CELL_NAME("macsmc-light"),
+ };
+@@ -179,6 +183,13 @@ int apple_smc_probe(struct device *dev, const struct apple_smc_backend_ops *ops,
+ 			if (ret < 0)
  				return ret;
  		}
- 
-+		if (apple_smc_key_exists(smc, SMC_KEY(MOCN))) {
-+			ret = devm_mfd_add_devices(dev, -1, apple_smc_acpi_accel,
-+				ARRAY_SIZE(apple_smc_acpi_accel), NULL, 0, NULL);
++
++		if (apple_smc_key_exists(smc, SMC_KEY(LKSB))) {
++			ret = devm_mfd_add_devices(dev, -1, apple_smc_acpi_led,
++				ARRAY_SIZE(apple_smc_acpi_led), NULL, 0, NULL);
 +			if (ret < 0)
 +				return ret;
 +		}
