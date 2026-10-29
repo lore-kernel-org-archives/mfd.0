@@ -1,108 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.8
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793280625;
-	b=MneW89NmNkpiShOPj2fYgW9RGqiEK0yZHBZKBE8a1ozLsthHdMgUBrjTt+n0FZq0z4zj
-	 7fd7CqC3WlJfLmEd7QeibE1aMfm5iiDnwBrSTLQAgfjvPjeEr+dwkdT8nHK+iZTheXSXZ
-	 U69gCDamsE7pniuh2071ZOu8TvyX+8qH3X9zOdm+t6kCX1kpXUc/F2lQgP+14AosFsWXK
-	 WrrZC9EpQNB/lnbVYwqMZ3fF8X5InARaWEc+qd5H+n/3K4SsJYvBkVIqBvH7NoBR8RMuh
-	 Ycz9Z9Z03R5f3X9qRP0STzupJKNr2vx0QxtmyKBgOf3ELr9xy5DAaH1tnPcsQIHS5Hw==
+	t=1793282086;
+	b=0s65U9C0fOkXIzqpMuikctlyijt9bK5axAL++aaikatacGLiHELhGI/KROr/7ktBmlRE
+	 1AvFcZPo95pGVIDZw7bZYsxGMOsEeVDKXQPhF06dEnaX7MUdOA7B+ahKoDmlbLNJTks3o
+	 SZavwXpSmpp5RSkzgkLy6pRRHcNtE12rsChA2WkcSTSC3XZwQUUe4SvG8OQ4Acwdc+N8a
+	 w+xPp9W4+AEDtIaIBnvkGMMQSzGV6b9YJl4L3VmBoZ09jYW2p1BZWfLN5GAUtDxbDeVHI
+	 1QgBL87H0cpMX29sUSVaPV0hEsR2Pha2iVxx8+2EdRwzwrI16s58F7dYe/vwP8+m9AA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793280625;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:Organization;
-	bh=Mb2nUQU4M00SSUzZJSeoQpnNXAraCq7x3LdAKS30Euw=;
-	b=mgsCmX3d4l4CQrdjBbUky7ZvyEisiWxTkFI5OO7/7QMg2detrX5jfGmM5FJaJNwGFI2t
-	 72JWzTPT6q7Hvh0hgfzpWO88zZ3d38BxYnwRAqhglqKWnmybLQY3JQ++E+Rt5lF7lFKOV
-	 sUNGkZp540BTf8FTY8n2ex7PmpAcY1n+g6qnw7aRZEXXly4+FQcpjv3VxrETSEZlSlwtm
-	 PBBcggC19l3dam6HtTOhTWZoXrgfD9SwfmqtjXyyI9wY/cYER1k+p38W2QY9UOs0B9fxB
-	 TSP+7wCbUZYVDn3B2d7nIVMZh8lDDsQkcCmLBDBexObPGrtiuMYmDJzfCiTd3B7HaBg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793282086;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=9pamEexFG6/52egXa9hLLeSrQGqwFqspA1svbb9YVk4=;
+	b=KuQqgIo6+5dyNldhD48kN4zO/ORQkC6mbZIKt25frVNyUnX/TDvH2gvta/zhyeUw4cD2
+	 6U4A5PzhYA71qUvL1T0h/dIVjrVIYPYaQhKZlqrN2RJGFxM99Urr2fQlf96tJrWHg+Dwy
+	 QNhX4p2hP50DjNHZMvCeK2YyW4G71ZTHg/TS1dj5OqehLrMwxCkRctDsBtdz3Ux27+gHk
+	 IRv/TqwIhswaP4PILXMVUz+1fmWP4in179GI5Op0vrnSFMOlw0EzGzEXmscULkUNkDmQ6
+	 b/koC/rKaT5Zk7OmeBxQzur2JyrICooGdA9BBe+xG2hXP/mbCokg6qNhmJOuhxLp+Jg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=moKhVdIW;
-	arc=none smtp.remote-ip=192.198.163.8
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Ga5NksAI;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67908606A323;
-	Thu, 29 Oct 2026 13:30:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 67908606A323
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 341BD606A31A;
+	Thu, 29 Oct 2026 13:54:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=moKhVdIW
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1793280624; x=1824816624;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=XiB/P3z67uNi54hQwr+HoGceAi4KeJ58DpxovBSc0bg=;
-  b=moKhVdIWHTlYBTM27yPpptcYvWfZxeoV5vQDl8tROPJHxcy1XOyrsLiH
-   UEC0pOG8yTIBOxOxX+8Sx3MfPvthNhhSVbg7hmXMLdY75L0ynvudB2qUB
-   xwDw8dlq+JFqmrEH1vF2p5uZ15A+7QpDyhHdm3QkceUndx7CjaFFhUM69
-   MGYS36fDRAR2PqPL1vCXsKjhaE/atqXAWFvoXUpwofjuL2spLHNDxelfM
-   4s5Iqm0+JQ+1YT0Rz6kf+pLQU6USwnYQL+Zb3tysqKRg5FvDcKhZdVdhv
-   IUM8pJpk+riQyMmNtQTeyuROg0DxK1r+WJdKbdMqvpLe47T3qLyVJqwQX
-   A==;
-X-CSE-ConnectionGUID: WgLZBweCSey1+R0zx1doag==
-X-CSE-MsgGUID: nxyQcc88QfG51RKjac9uqA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11949"; a="1915306"
-X-IronPort-AV: E=Sophos;i="6.27,184,1787036400"; 
-   d="scan'208";a="1915306"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
-  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Oct 2026 06:30:23 -0700
-X-CSE-ConnectionGUID: pazyI6DLSZO+QuLDn2CgVg==
-X-CSE-MsgGUID: Eiw0OS5rRee86K4uWKSdfA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,184,1787036400"; 
-   d="scan'208";a="5273644"
-Received: from ncintean-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.129])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Oct 2026 06:30:12 -0700
-Date: Thu, 29 Oct 2026 15:30:09 +0200
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Atharva Tiwari <atharvatiwarilinuxdev@gmail.com>
-Cc: Bjorn Helgaas <bhelgaas@google.com>, Thomas Gleixner <tglx@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Len Brown <lenb@kernel.org>, Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>, Sven Peter <sven@kernel.org>,
-	Janne Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
-	Andy Shevchenko <andy@kernel.org>, Lee Jones <lee@kernel.org>,
-	Pavel Machek <pavel@kernel.org>,
-	Griffin Kroah-Hartman <griffin@kroah.com>,
-	Hans de Goede <hansg@kernel.org>,
-	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Sebastian Reichel <sre@kernel.org>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	Wim Van Sebroeck <wim@linux-watchdog.org>,
-	Jarkko Sakkinen <jarkko@kernel.org>,
-	Mimi Zohar <zohar@linux.ibm.com>,
-	Roberto Sassu <roberto.sassu@huawei.com>,
-	Dmitry Kasatkin <dmitry.kasatkin@gmail.com>,
-	Eric Snowberg <eric.snowberg@oracle.com>,
-	Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>,
-	"Serge E. Hallyn" <serge@hallyn.com>, linux-kernel@vger.kernel.org,
-	linux-pci@vger.kernel.org, linux-acpi@vger.kernel.org,
-	linux-gpio@vger.kernel.org, asahi@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, linux-hwmon@vger.kernel.org,
-	linux-iio@vger.kernel.org, linux-leds@vger.kernel.org,
-	mfd@lists.linux.dev, platform-driver-x86@vger.kernel.org,
-	linux-pm@vger.kernel.org, linux-rtc@vger.kernel.org,
-	linux-watchdog@vger.kernel.org, linux-integrity@vger.kernel.org,
-	keyrings@vger.kernel.org, linux-security-module@vger.kernel.org
-Subject: Re: [RFC PATCH 03/14] watchdog: add driver for apple smc
-Message-ID: <auNKYRpfqrtKa50O@ashevche-desk.local>
-References: <20261029085504.3547-1-atharvatiwarilinuxdev@gmail.com>
- <20261029085504.3547-4-atharvatiwarilinuxdev@gmail.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Ga5NksAI
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 646171F01825;
+	Thu, 29 Oct 2026 13:54:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793282085;
+	bh=9pamEexFG6/52egXa9hLLeSrQGqwFqspA1svbb9YVk4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=Ga5NksAIKx9E5rhS+Wmw4j7v1i3706sDmtjVdgHnMsH2v6wWruI6K8kWZ47fD+PJV
+	 d/onsiIsW3iX7h/LweN3yLS17eVB6bXCyL6OysbyDVnH/Et+Gks7S3syohiUZr9+5t
+	 WZO3wDHX5VprTB4dRDeXExDyF5x3g1KPiOvHVrF5gzld7qZnbUc0xQqVZ+47ATNiFo
+	 t6K6Fi+CNO49KUpE45Vr7qZ0n6zVQiPhlY6kGXm6hNxjSyCkBYxYASTJGa5MIUA0ih
+	 4FJoUxBi6pnavShQf3DWPS92HlYoBagp+Eow+lxYmHOC5M9KbsdKmRUWxqn4bc+bxg
+	 p7ag0S872AfiA==
+Message-ID: <e3c9087e-fea5-4ec6-852a-a0e0e33ce461@kernel.org>
+Date: Thu, 29 Oct 2026 14:54:35 +0100
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -112,78 +51,157 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261029085504.3547-4-atharvatiwarilinuxdev@gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] dt-bindings: mfd: introduce the TC9564 config syscon
+To: Alex Elder <elder@riscstar.com>, robh@kernel.org
+Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
+ krzk+dt@kernel.org, conor+dt@kernel.org, lee@kernel.org,
+ andersson@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org,
+ kees@kernel.org, gustavoars@kernel.org, p.zabel@pengutronix.de,
+ daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
+ lorenzo.bianconi@oss.qualcomm.com, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, mfd@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, linux-hardening@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260918165234.687224-1-elder@riscstar.com>
+ <20260918165234.687224-2-elder@riscstar.com>
+ <20260920-fiery-fanatic-manticore-6abf0a@quoll>
+ <85b0e7de-e4a8-4e08-b801-a9664d366e1a@riscstar.com>
+ <7e32063f-f1a4-4259-96c9-fcbdd25c7f2f@riscstar.com>
+ <fbeac5ba-a28d-4d34-8d23-4946aef515ea@kernel.org>
+ <4bb9c85e-f991-484e-861f-1940b8263890@riscstar.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <4bb9c85e-f991-484e-861f-1940b8263890@riscstar.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, Oct 29, 2026 at 04:52:00AM -0400, Atharva Tiwari wrote:
-> Add a watchdog driver for the SMC on Intel Macs. It can
-> reset the machine if the system stops responding. It works
-> on both newer and older SMC versions.
+On 28/09/2026 16:52, Alex Elder wrote:
+> On 9/23/26 2:25 AM, Krzysztof Kozlowski wrote:
+>> I think nothing behind PCI EP should be described in DT, because
+>> everything is internal to the device and implied by compatible (or
+>> vid/pid). We do describe internals of devices in DT usually for complex
+>> devices (like some display blocks with multiple subblocks) or when they
+>> are used outside of that device. That's why I asked how are all these
+>> clocks and resets exposed to the host. If the syscon is used only by the
+>> device itself, I don't quite get the benefits of describing it in DT.
+> 
+> You say you think "nothing behind PCI EP should be described in DT".
+> However the mere existence of the PCI endpoint bus as an option
+> contradicts that statement, by providing a means of doing *exactly*
+> that:  using devicetree to describe things behind a PCI endpoint.
+> This is the model we are using.
 
-...
+No, the existence does not contradict. We allow further description as
+long as things are not autodiscoverable and are necessary for the host
+to deal with the device, like power sequencing. Same we did for
+"onboard" USB hubs.
 
-> --- a/drivers/watchdog/Kconfig
-> +++ b/drivers/watchdog/Kconfig
-> @@ -1810,6 +1810,17 @@ config SIEMENS_SIMATIC_IPC_WDT
->  	  To compile this driver as a module, choose M here: the module will be
->  	  called simatic-ipc-wdt.
->  
-> +config MACSMC_WDT
-> +	tristate "Apple SMC Watchdog"
-> +	depends on X86 && MACSMC_ACPI
-> +	select WATCHDOG_CORE
-> +	help
-> +	  This driver adds support for Watchdogs in Intel macs Using
-> +	  Apple SMC.
-> +
-> +	  To compile this driver as a module, choose M here: the module will be
-> +	  called macsmc_wdt.
-> +
->  # M68K Architecture
->  
->  config M54xx_WATCHDOG
-> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-> index 9ac406677..f142a5d8d 100644
-> --- a/drivers/watchdog/Makefile
-> +++ b/drivers/watchdog/Makefile
-> @@ -158,7 +158,7 @@ obj-$(CONFIG_NIC7018_WDT) += nic7018_wdt.o
->  obj-$(CONFIG_MLX_WDT) += mlx_wdt.o
->  obj-$(CONFIG_KEEMBAY_WATCHDOG) += keembay_wdt.o
->  obj-$(CONFIG_SIEMENS_SIMATIC_IPC_WDT) += simatic-ipc-wdt.o
-> -
-> +obj-$(CONFIG_MACSMC_WDT) += macsmc_wdt.o
->  # M68K Architecture
->  obj-$(CONFIG_M54xx_WATCHDOG) += m54xx_wdt.o
+You are however describing internals of the device like syscon, which is
+way beyond what is necessary for the host to instantiate that device.
 
-In moth files the entries seems misplaced to me. Also, why did you touch
-the blank line?
+> 
+> In June we switched over to using the pci-ep-bus model based on a
+> suggestion from Rob Herring (and Mani Sadhasivam).  Rob felt our
+> previous auxiliary device approach wasn't right for the peripherals
+> found within the SoC, given we were accessing them via PCI BARs.
+>    https://lore.kernel.org/lkml/20260605144032.GA3659201-robh@kernel.org/
 
-...
+Oh, that's good, so let's quote:
 
-> +struct macsmc_wdt {
-> +	struct apple_smc *smc;
-> +	bool has_oswd; /* Newer version of watchdogs in macsmc */
-> +	struct watchdog_device wdd;
-> +};
+"The ethernet nodes should be just these PCI function nodes."
 
-Try with `pahole`.
+"And really, a DT node for them should be completely optional (unless
+there's some power on ctrl needed)."
 
-...
+"Everything else like SPI, GPIO, UART, etc. should be under the PCIe
+switch upstream node in a pci-ep-bus."
+Sure, but you add syscon. That's completely internal stuff.
 
-> +	.probe = macsmc_wdt_probe,
-> +	.driver = {
-> +		.name = "macsmc-wdt"
+> We found that using pci-ep-bus provided a very natural and familiar
+> way of representing the organization of the TC9564 SoC, and used
+> it to represent all of the peripherals (including XGMAC).  It
+> nicely partitions the hardware design, as well as providing a
+> well-understood connection with the software.
+> 
+> The switch involved quite a bit of work, and the result is a set
+> of basically independent platform drivers that are modular and
+> easily reviewed.  I really would rather not go back to to what
+> we had before.
+> 
+> Do you have criteria for what in a chip/SoC is sufficiently
+> "complex" to warrant allowing devicetree to describe some of
+> its internal details?
 
-Always add a comma to non-terminator entries in the initializers
-(yes, there are some exceptions, but it's not the case here).
+For me criteria are the resources from the host. I think I said it
+already, we do not describe internals of I2C or SPI devices: their
+internal clocks, internal power supplies. We only describe the inputs
+from the host. You can map it into the pins.
 
-> +	},
+Same here, IMO.
 
--- 
-With Best Regards,
-Andy Shevchenko
+> 
+> I believe the TC9564 *is* such a "complex" SoC.  And in any case,
+> anywhere pci-ep-bus is used, it implies that some chip internals
+> would be described using devicetree.
+> 
+> Would incorporating the chip internals in a devicetree *overlay*
+> have any effect on your opinion on this?  I.e., the "main"
+> devicetree nodes would simply define the PCI device hierarchy,
+> but anything behind an endpoint would be described in an overlay.
+> This way, pci-ep-bus on a PCI endpoint just provides an external
+> interface onto which a very complex device could be "mounted"
+> (and described in an overlay).
+> 
+> I'd like to continue to move ahead with upstreaming support for
+> this SoC, but to me it seems you have basic doubts about
+> pci-ep-bus and I'd like to get past that.
 
+Well, Rob might understand this better, so maybe review from him will
+solve these questions.
 
+Best regards,
+Krzysztof
