@@ -1,89 +1,142 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.231.130
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.174
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793219442;
-	b=JTwUPZAEUbNcIflMzxgou6P/1D0wbauT8+E4viktw9MSjmFpBNdMgwEl4Q1d9Yt4vMa6
-	 ThHy19Vh4YCgm2UWHSHI5kIa/vC4ccVjA599munaPzuUA/BIavOwb4iODVJAn8lcDCrUy
-	 5E8UTwKBhGfzTGTF9jphokDBVYEVdghZpfXqEVAv+5tXiozxEGP5jTPcaLRex4m2nn5O3
-	 nehfRUSpVVSJHCO7Ak27x+3heuYZxkuJbQC/PZFPg1O5Oy+gi2YFD7DFO+dT5RScziKc1
-	 Q3qg4P9YVP7MeK05J3o4uqh6YLBXYKdSh71jwo/hcc66HVmCzJfm3LXFbevkrI8hGBQ==
+	t=1793264154;
+	b=HC+CuVo+vlxeZOCQ+FfgFSAAt3GhYf/g7vWFLntajMbQBcMJ6vSGFaX3IBkXjxMeLKhW
+	 TQZM7LueiqtWkBXbRVTItg0hixrWLjkIBp4VR4gH1hF/6GThJAOUx1nTA1eQkuEwaIwp6
+	 2J0oDzI5rTCZI4r2WMspJyRDN064PEH1lKAOVCJdhkU4HwbENo+CYO8u20i34aAqt5yr7
+	 2Kemuhtkzdz06C0FeT31JTbl3plDJa6p2PssyizL8MpFlj0QdBkIeZ+bP+K7aebJD7IuC
+	 oKzroZJEn5+dD60HGnxAbN/yVLgyLoB2gU8tgzIMiqz20Cw/7l2czSTH1Xvvlxl1gEw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793219442;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793264154;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=SagG7hnlNkBMWrHHVXZ8fa/+eusWUEksklF+xlNh03I=;
-	b=1AeJAChmFGt4DkMOBH2bwKDTxLQitBEgJdzYvOpVedrr9Q7lcl3rcfu8vQZ20SdD+ofX
-	 N1XNmNEbgTH8sceYxcEABiuhF9/ult8D4otH/CRD+Nz5dVeMolNRBl6opqVnTeemhYhOl
-	 6Zp3WIW5qZ/WLezd1z3/3ISZfCBDJaUqxkw1+z4ML72/57+U8dmlbY6jMkCm95NB9e+yt
-	 cghpEok8jumJHUGHvbJMit2hZNRNedG2ELjOmvsQtdX2h7UHpkBS7lMNsU+wMYvGoOhk4
-	 /LCCnTfTAiqpe+XAc0Y2CjwQgJ9yBNomdo0aebi9XaIJOhmJc6NGbYx26x6KbhBjrcg==
+	bh=YYDnw0w3VJ1m8RLFL/nZJuly2Onkx72MVUQSXk8vs44=;
+	b=PnDn+Mb0V88bNAFw5x2wD/szNiSYEeQvX1rdNdLYUT4+TJCG7cDIWFuoB3gN3plFOD7F
+	 IXNKOAWBWg5RBup1owA8TqgtWheY2UcDAhO499cog/oJSjc6QqYoZspNnxp7kmF7p8UVO
+	 8Fcw8bWFvI5WJ7sslSZ0LKgm6cCnPWlonREyhUKlhNYyCOXT8BaL0cZGsLbfNOvQ+/53w
+	 YRuw8rX0/rtvc/3hCVvVLVncFAH7HXoanGgHHeOKbAgjT7RZhPobRvlrdI4Q8cBC6mbQJ
+	 s9+T0G//UMZ4UB9DXikmA3ukIcn1aQmcMFmMZhtmV0rL5J2A2Jl5/fCIYHyNizKdh0A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=XnG61BgV;
-	arc=none smtp.remote-ip=74.125.231.130
-Received: from mail-oo2-f2.google.com (mail-oo2-f2.google.com [74.125.231.130])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Vto1LPpF;
+	arc=none smtp.remote-ip=74.125.82.174
+Received: from mail-dy1-f174.google.com (mail-dy1-f174.google.com [74.125.82.174])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A883606A31A
-	for <mfd@lists.linux.dev>; Wed, 28 Oct 2026 20:30:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9A883606A31A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A96A606A32A
+	for <mfd@lists.linux.dev>; Thu, 29 Oct 2026 08:55:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0A96A606A32A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=XnG61BgV
-Received: by mail-oo2-f2.google.com with SMTP id 46e09a7af769-84abe8ecec8so475999a34.1
-        for <mfd@lists.linux.dev>; Wed, 28 Oct 2026 13:30:41 -0700 (PDT)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Vto1LPpF
+Received: by mail-dy1-f174.google.com with SMTP id 5a478bee46e88-35cd4e8bdbdso2347268eec.1
+        for <mfd@lists.linux.dev>; Thu, 29 Oct 2026 01:55:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793219440; x=1793824240; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=SagG7hnlNkBMWrHHVXZ8fa/+eusWUEksklF+xlNh03I=;
-        b=XnG61BgVPJUeE+5vPSb+QwM42wDInGnowESkxUK27qSvDeiZ9M0n78e42BtLXk83/J
-         dg4K7lV/UMsztTCvNzLeIzwfYNSaSLnYWikslAEfUlWRYycvpoaHqK6fOTWcdiGJ91J0
-         S2xKYO5xt+2I9ZcPo+Bx7ezSlxAnGaFGY2EIL79Y1qmb+01eOpUETZMhadV5Dh6/dJdt
-         6rh/gKPw2ZLKXMJGAtZZXCBohq3sQkXcy7Wx1yEKmTjJSz/Vor2XYXnBHaAr44bzo9M0
-         qDCLLXKR1+17Bhpv7yUic7q6TBfIleOaFp/GWbj0bPuEd9xVCecqsmleGQtWZcgQVSst
-         C/1w==
+        d=gmail.com; s=20260707; t=1793264152; x=1793868952; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=YYDnw0w3VJ1m8RLFL/nZJuly2Onkx72MVUQSXk8vs44=;
+        b=Vto1LPpFOpWyoTfP5Sq3GiNEcz/MJqsX78cpWTh5p7T9LfYkg3JWrRDCssfTV+khc6
+         bYBOoHtZvdo+/tamZO1BzN+eXhOU12qbdHa25IqBUQyOXSlRtjRREAH9SwXJ2/zs6li6
+         y61JU4NnNwSxEEX4hfgKM7UgfUKXRZsGFqBUE9tI0T9D7oMos4A9AENaOChU8U18mFYZ
+         D6iae4TVEum27SEazZz9+lcTD/7vyufOp8DNgNugcHuEPssrBwNrSVo+cIqwSajqUipz
+         GD3JWRuQ4+iDtv22X/RpXofTHZoV3p4qt2wpdHavIrGri6M0RlPTFa1MnqtkheKHF1/T
+         PyEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793219440; x=1793824240;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1793264152; x=1793868952;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=SagG7hnlNkBMWrHHVXZ8fa/+eusWUEksklF+xlNh03I=;
-        b=R7f/LP11/qsg1aRsCqPSNQMi082S70fwPsxIEMslIjk4A+NLXJ8OT0NM1J461Co7Ex
-         cG2TZtTAdub572qnBzdsQBj2/yi0kZdzIf9fD3oQz8AQXXhuMTrxpAMIcpMJ9Ux0p134
-         lmKzLEIsc1lPJsa3LCWI1Fqre8FLCssHR/C8hV3qqWGMDAnkGPTR1NcpDQIWK+via31Q
-         oN26bqJ58ueIHBJFoQKi6qKy2ggVGfHh0ZelwLzPfnmynxNvUkwp5et6NDiXCwYxDu1b
-         5FCdR2H+cSKog1sSPDFYAQPFPMl+jNvSxIh/vK4V29Q/j/ma4OH5q2hxaeME/6EYgH3/
-         Y5/g==
-X-Forwarded-Encrypted: i=1; AKwUvBya5vKIm+A1OHIDPi7ym4dPVL1QPA2oM5XDUr9lvux+xzczyXLyGL9+XLqlIg7B4jBvkAg=@lists.linux.dev
-X-Gm-Message-State: AFq9FYJhQF4GLrKOedvAsAKDZJKbZWC2iXtQvZACHVBELTUtzdr2c0sq
-	7DrHCbV3oN13GKYoTRCxOAEaWgjo/bfACSXl/ji/VlNKx0ao3RP/UvWp
-X-Gm-Gg: AYBFou1FWG2wMrMHUJ20D9X65GqJ4fq/j75NxmnybuazTRaaQzdthkegZ/6HBCusDse
-	bmPkl3D8XjXTwEcuZFvdEHj8pDLNXnIGZ3hLOcg8RqgLQm7rDqAgvemi0ouwnCO2HVAnZGU+R8J
-	al+L8vdW8ywQXDAluBNy1q0i7PSPhSjyNY5fwK+FRzN0N9BhB8O53SUlp6T5YqrQFrgwYVofqD8
-	ti/UfNrqkCFZY/RU0d7Kdqr0B1/E/aG1VCPnqlYyqiQOKM8zhWuW6FrY8GyXiMF/Wbbt4bKPBy2
-	pHPVZZ01f15gpEPlKu9YdVj57I/pXyRDV2UAXKdVFkcpwdSGdMB6UK1F+7SBqU+6e9DUlp4KJ9P
-	yhMVIScT4kLNL+36lc9YHMNu6n/uC6jyyBr+m2bZjJ5KQIwz7qpu04+oFwialQrPoQEn8kBwazE
-	CwXa+csJX6iCFmMBi75yNu24ww9oVIK27zZwrLcZP5Qc39IM3PT2t2rPx/laAnKhJ/LCBJx1Enu
-	JBaOaPYAuoiWSe/WUoVywDHUv2tq+AuJCNAm7KMjrhTCYQL3AB/VDi43NnMdZHEKybvenFJbzSi
-	J1Bl7XpoK2GePeWYuMkc17DIKdrUQTqpSLJQnSpwxbmBIMMSLbHeSad9Scvbqwk4IAj0N1Ha/RV
-	awwr+mRbRUZgxBwSapUO4u83hJYB9yBYNacDb1OMxcQ==
-X-Received: by 2002:a05:6830:680f:b0:81c:a8c5:633c with SMTP id 46e09a7af769-85ab7b0d6b0mr3330153a34.17.1793219440535;
-        Wed, 28 Oct 2026 13:30:40 -0700 (PDT)
-Received: from [10.10.121.179] (wsip-64-207-253-118.tu.ok.cox.net. [64.207.253.118])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-85b1d363390sm2618813a34.1.2026.10.28.13.30.39
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 28 Oct 2026 13:30:39 -0700 (PDT)
-Message-ID: <7981f7c6-c949-42e6-ad53-15e6530588cb@gmail.com>
-Date: Wed, 28 Oct 2026 15:30:38 -0500
+        bh=YYDnw0w3VJ1m8RLFL/nZJuly2Onkx72MVUQSXk8vs44=;
+        b=V0xdurB3a/cA5XHsx8on8Sg+uNXpZH1Y+NVFKKoxmQSNhuAZHhCl/mM49ELK7TqJq0
+         GKPsJj7Ewv18x2gTpT9Hv86TlIOOFbElG5ukCmGAKqK3rGAehK1ORVlqHDOMcPN6An/h
+         MM+DC31x++cxhz7CJ41T6gIsMcZwstqfhg2jhQ1eGFhr6B4GbDyrvRVI2TpXHDakCYH2
+         7HhnK3D7Pe0mMnlRJhI1exiRhbKWuVFDWvg7a8e6Ft/3HypVkqbmO5NO1hSL/HkxsIoY
+         6x4wH1Eud2RJKndtmZm4MQ2UVfe7hTwXmAtDqxG2/FlUDqYKm3rv1rQidD1nNx+pcGdA
+         VIUg==
+X-Forwarded-Encrypted: i=1; AKwUvBzMa7rgv6Q/ddolVi1BUErbHTSfVU8siMNnhtWA2m8cZeQslQplNcqemDVXl7cqNayF8vw=@lists.linux.dev
+X-Gm-Message-State: AFq9FYKI2WB/i5YIRizc/aPM/3D2UCrab3IJdaJbQxYXqk8jDJvhNgrl
+	4VH4dyufCWlA9jEwvN5zP9D/Or5wHYUF9Um3OUNoqFEZjo68jzOWXew=
+X-Gm-Gg: AYBFou2hywMU4IZjqrAu1AeO0wsvkz+TNe4apvCNVwxuFL9i3EnWmHEfFGeU/bxaV5R
+	R8B/fcHylY9FS1bgYrwMCGqhixC76szyRsarHNdHnQaXlVXY4NB9s3TiPLHH9kWw+ZMQww2BM4Z
+	lNIGKfsHY7hTIhoLnNCUyGK0XENKPr75EzXDUZTp/UnP37ujG6mIH3/EtsTqyzpapTYv11LMeUI
+	sdAEPm0Qz661ogTAgc6OCwxbpMl9p4lKx0XzZd8Df20iMT3rdCuIATuGcuzD0Ego5EkOPQaXwsG
+	hiAdcYWHmDVVIj/VFMOqTKNP+dspDX5z/sytyc8mxdka0dDVpryUR2u/QTtW+b4Eomp1RJNiJos
+	CihB8Q27tl2YP7DofjDwAkFcpOmStJE2AMP46lNX6XbARiJkOgZOuLknDQ+/hsSDEnt5a6n3Y24
+	hfKYRuV24gNIIEul69+9Xd9TAAF9NMcMByi3Yfgdm1bHPNInGCNmn1wVNCAESRR65sVxuhx6PEy
+	TKw6PTaHuNfv3MRYSUkiqKOc0TeXmj6pEVg8vUBnsR37xHlVVzEC8N40bRPPxKpIDDjI7j9DBv7
+	JUyw/CJAtSSKrtVhSNwaly7FOwOaJip0i4A/9AJpdR//nmOgZn7H6Scm9t56wqE3NH33Ph3Oo+P
+	gD5CUuFs=
+X-Received: by 2002:a05:7301:7c12:b0:35c:ba31:6fef with SMTP id 5a478bee46e88-36a2016c61dmr10086277eec.36.1793264151721;
+        Thu, 29 Oct 2026 01:55:51 -0700 (PDT)
+Received: from at-Standard-PC-Q35-ICH9-2009 ([27.60.20.232])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36a23641e78sm16497937eec.0.2026.10.29.01.55.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 29 Oct 2026 01:55:51 -0700 (PDT)
+From: Atharva Tiwari <atharvatiwarilinuxdev@gmail.com>
+To: 
+Cc: Atharva Tiwari <atharvatiwarilinuxdev@gmail.com>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Thomas Gleixner <tglx@kernel.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Len Brown <lenb@kernel.org>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Sven Peter <sven@kernel.org>,
+	Janne Grunau <j@jannau.net>,
+	Neal Gompa <neal@gompa.dev>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
+	Andy Shevchenko <andy@kernel.org>,
+	Lee Jones <lee@kernel.org>,
+	Pavel Machek <pavel@kernel.org>,
+	Griffin Kroah-Hartman <griffin@kroah.com>,
+	Hans de Goede <hansg@kernel.org>,
+	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	Sebastian Reichel <sre@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Wim Van Sebroeck <wim@linux-watchdog.org>,
+	Jarkko Sakkinen <jarkko@kernel.org>,
+	Mimi Zohar <zohar@linux.ibm.com>,
+	Roberto Sassu <roberto.sassu@huawei.com>,
+	Dmitry Kasatkin <dmitry.kasatkin@gmail.com>,
+	Eric Snowberg <eric.snowberg@oracle.com>,
+	Paul Moore <paul@paul-moore.com>,
+	James Morris <jmorris@namei.org>,
+	"Serge E. Hallyn" <serge@hallyn.com>,
+	linux-kernel@vger.kernel.org,
+	linux-pci@vger.kernel.org,
+	linux-acpi@vger.kernel.org,
+	linux-gpio@vger.kernel.org,
+	asahi@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org,
+	linux-hwmon@vger.kernel.org,
+	linux-iio@vger.kernel.org,
+	linux-leds@vger.kernel.org,
+	mfd@lists.linux.dev,
+	platform-driver-x86@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	linux-rtc@vger.kernel.org,
+	linux-watchdog@vger.kernel.org,
+	linux-integrity@vger.kernel.org,
+	keyrings@vger.kernel.org,
+	linux-security-module@vger.kernel.org
+Subject: [RFC PATCH 00/14] Add macsmc support for Intel Macs, replacing applesmc
+Date: Thu, 29 Oct 2026 04:51:57 -0400
+Message-ID: <20261029085504.3547-1-atharvatiwarilinuxdev@gmail.com>
+X-Mailer: git-send-email 2.55.0
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -93,62 +146,123 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] pinctrl: mediatek: common-v1: Use a raw spinlock for the
- pinctrl regmap
-To: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-Cc: Chen-Yu Tsai <wenst@chromium.org>, Mark Brown <broonie@kernel.org>,
- Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
- Sean Wang <sean.wang@kernel.org>, Linus Walleij <linusw@kernel.org>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Bartosz Golaszewski <brgl@kernel.org>, Clark Williams
- <clrkwllms@kernel.org>, Steven Rostedt <rostedt@goodmis.org>,
- Yingjoe Chen <yingjoe.chen@mediatek.com>,
- Chaotian Jing <chaotian.jing@mediatek.com>,
- Hongzhou Yang <hongzhou.yang@mediatek.com>,
- linux-mediatek@lists.infradead.org, linux-gpio@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-rt-devel@lists.linux.dev, mfd@lists.linux.dev
-References: <20260929-rbrue-suez-upstreaming-mtk-pinctrl-raw-regmap-v1-1-db92943f42cb@gmail.com>
- <20260930080609.dnK1-Uta@linutronix.de>
- <CAGXv+5FssQL3Go3VDFbLAT6HP12RS3U3OgxhYOeapzs64QTdUw@mail.gmail.com>
- <d3d3e7b3-eb8b-456d-9a2c-116334e86c14@gmail.com>
- <20261020073236.dDVmd3BW@linutronix.de>
-Content-Language: en-US
-From: Ryan Brue <ryanbrue.dev@gmail.com>
-In-Reply-To: <20261020073236.dDVmd3BW@linutronix.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 10/20/26 2:32 AM, Sebastian Andrzej Siewior wrote:
-> bulk writes could be a concern. The 40us delay is within the lock
-> acquired? If so, could this be done without the lock? I assume this is
-> part of the init sequence so nothing should use the HW so the writes
-> should not be interrupted by other writes to the device.
+applesmc is very old, and all of its code is lumped into one
+driver. Fan control, sensors, the light sensor, the motion
+sensor and the keyboard backlight in a single file
+with its own way of talking to the SMC. It is hard to extend
+and to support new machines.
 
-Yes, it's under the lock. regmap_multi_reg_write() holds the regmap lock 
-for the whole sequence, and since an MMIO syscon's regmap can't sleep, 
-the delays are udelay()s. The PLL's enable runs that sequence (13 
-writes, 40 us of delays) whenever the PLL goes from off to on, retrying 
-up to 10 times until it locks.
+This series adds Intel Mac support to the macsmc drivers that
+were written for Apple Silicon (the Asahi implementation).
+The SMC works the same way on both platforms, so we share a
+lot of code with Asahi. Only the way of talking to the SMC
+differs.
 
-In practice it's init-time, though. The G12A USB3/PCIe PHY takes the PLL 
-with devm_clk_get_enabled() at probe and keeps it on, so it runs only 
-once. Nothing else writes the PLL then, but the lock is the HHI 
-syscon's, so on RT the other clocks in that block would wait it out. 
-Running it without the lock would mean changing how the meson PLL code 
-writes its init sequence, which I wouldn't want to take on in a pinctrl 
-fix (unless that were preferred).
+To make that work, patch 1 splits the macsmc driver into a
+common core and a backend. The existing RTKit code moves into
+its own backend. Patch 2 adds an ACPI backend for Intel Macs
+with I/O port, MMIO and interrupt support. After that, each
+function gets its own small driver using the standard kernel
+interfaces (hwmon, IIO, LEDs, power supply, RTC, watchdog),
+instead of one large driver doing everything.
 
-> So it would be safe for now…
-Yes, that's the trade-off with the second option, which relies on the 
-DIN never being written in a multi-step sequence. Nothing enforces that 
-though.
+On Intel Macs these drivers replace applesmc (hwmon, light
+sensor, motion sensor and keyboard backlight) and acpi-sbs
+(battery and adapter). They are mutually exclusive with the
+drivers they replace, so only one is used at a time.
 
-I'd like to send a v2 after -rc1, but I don't know the best option for 
-the fix. Still waiting on Lee, Arnd, and Mark to pitch in if they have a 
-preference, or any option I've missed.
+This is an RFC to get early feedback on the design. The macsmc
+split and the Intel Mac backend touch fundamental parts, so I
+would rather change them now if maintainers ask. After that I
+will test the series on more macsand send it upstream as a
+proper series.
 
-Best regards,
-Ryan Brue
+The series is organised as follows:
+
+  1      Split macsmc into a core and backends
+  2      ACPI backend for Intel Macs
+  3-6    New drivers: watchdog, IIO light and accelerometer,
+         keyboard backlight LED
+  7-9    RTC support for T2 Macs, a T2 detection flag, and
+         disabling the broken ACPI RTCs
+  10-11  Power supply support, replacing acpi-sbs
+  12-13  hwmon support for Intel Macs
+  14     ioctl for userspace access to SMC keys
+
+
+Tested-on: MacBookPro16,1 , iMac20,1 , MacBookAir4,2 , MacBookPro12,1 ,
+MacBookPro15,1
+
+NOTE: Almost all drivers have been tested except the motion sensor
+driver as i was not able to find any device that had one.
+
+Atharva Tiwari (14):
+  treewide: Add backend for macsmc
+  platform/x86: add backend for macsmc in intel macs
+  watchdog: add driver for apple smc
+  iio/light: add new driver for macsmc
+  iio/accel: add driver for apple SMS
+  leds: add support for macsmc kbl
+  rtc: add support for x86 macs in macsmc-rtc
+  treewide: Add a flag to detect the Apple T2 chip
+  treewide: disable other rtc's in t2 macs
+  power/supply: add support for x86 macs in macsmc-power
+  acpi: disable battery and adapter for x86 apple machines
+  hwmon/macsmc: add more types
+  hwmon: add support for x86 macs in macsmc-hwmon
+  mfd/macsmc: add ioctl to access smc keys
+
+ MAINTAINERS                                   |    2 +-
+ arch/x86/kernel/quirks.c                      |   37 +
+ drivers/acpi/acpi_tad.c                       |    4 +
+ drivers/acpi/sbs.c                            |   17 +-
+ drivers/acpi/x86/utils.c                      |    4 +
+ drivers/gpio/Kconfig                          |    2 +-
+ drivers/gpio/gpio-macsmc.c                    |   13 +-
+ drivers/hwmon/Kconfig                         |    7 +-
+ drivers/hwmon/macsmc-hwmon.c                  | 1126 ++++++++++++++++-
+ drivers/iio/accel/Kconfig                     |   10 +
+ drivers/iio/accel/Makefile                    |    1 +
+ drivers/iio/accel/macsmc-accel.c              |  248 ++++
+ drivers/iio/light/Kconfig                     |   11 +
+ drivers/iio/light/Makefile                    |    1 +
+ drivers/iio/light/macsmc-light.c              |  189 +++
+ drivers/leds/Kconfig                          |   11 +
+ drivers/leds/Makefile                         |    1 +
+ drivers/leds/leds-macsmc.c                    |   69 +
+ drivers/mfd/Kconfig                           |   15 +-
+ drivers/mfd/Makefile                          |    2 +-
+ drivers/mfd/macsmc-core.c                     |  362 ++++++
+ drivers/platform/x86/Kconfig                  |   10 +
+ drivers/platform/x86/Makefile                 |    1 +
+ drivers/platform/x86/macsmc-acpi.c            |  642 ++++++++++
+ drivers/power/reset/Kconfig                   |    2 +-
+ drivers/power/supply/Kconfig                  |    2 +-
+ drivers/power/supply/macsmc-power.c           |  751 ++++++++---
+ drivers/rtc/Kconfig                           |    2 +-
+ drivers/rtc/rtc-cmos.c                        |    4 +
+ drivers/rtc/rtc-macsmc.c                      |  126 +-
+ drivers/soc/apple/Kconfig                     |   14 +
+ drivers/soc/apple/Makefile                    |    2 +
+ .../macsmc.c => soc/apple/macsmc-rtkit.c}     |  185 ++-
+ drivers/watchdog/Kconfig                      |   11 +
+ drivers/watchdog/Makefile                     |    2 +-
+ drivers/watchdog/macsmc_wdt.c                 |  140 ++
+ include/linux/mfd/macsmc.h                    |  104 +-
+ include/linux/platform_data/x86/apple.h       |    5 +
+ .../platform_certs/keyring_handler.h          |    8 -
+ security/integrity/platform_certs/load_uefi.c |   38 +-
+ 40 files changed, 3786 insertions(+), 395 deletions(-)
+ create mode 100644 drivers/iio/accel/macsmc-accel.c
+ create mode 100644 drivers/iio/light/macsmc-light.c
+ create mode 100644 drivers/leds/leds-macsmc.c
+ create mode 100644 drivers/mfd/macsmc-core.c
+ create mode 100644 drivers/platform/x86/macsmc-acpi.c
+ rename drivers/{mfd/macsmc.c => soc/apple/macsmc-rtkit.c} (70%)
+ create mode 100644 drivers/watchdog/macsmc_wdt.c
+
+-- 
+2.55.0
+
