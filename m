@@ -1,52 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=77.81.229.115
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793285621;
-	b=LdtEglh7r8m/ArqIlymbdM+tCxHLtU2aBR+9AXXh9H3YLe8WHKXBSIKtPuw6k0DN3tRm
-	 G59fZOPGCnfAXPggtUCzmcw7+AS3gbzNWJWBOLeeJmzSqY6jChItGC16kwTMxopWQ4Cyb
-	 oai71jjPQ2KFMJf+UAE3pe3A/i2uUNZJzfZ+io1O0Y1jddhplQm9/MPfA63N9ECDbM+Wm
-	 O3eqCmqD03SWHK8m4i6jycuWMA8zs2U7d64OHpbbgEfvfTtbdEcXtOLM2n7bJiumK4BBu
-	 KiwWgCIYJ/AFq/lKYxouz7kXDJwxwwk/6D8pDQw/YtqHl1+dxKLWaN+leZl2A6rTNeg==
+	t=1793285699;
+	b=EgRvD8fyKmyq61pm13y1oWn7QWkhvkE67Ib1h4oicgVA0blOV0zQU28XR/sqJoKuVgF7
+	 UeTpEHmLKh0Ba5si19sBMQWkknKRW3IIOx5Jt1wr8c8wqX62HmBSklspZ0XKIHPu/DLyl
+	 Xu8Uq8i9+zSzJov5oZ+Lx372HoxECxosbTt6+RdK/hTzuE8RNcf2GRDu4CbypuR/2oMil
+	 AsrKpdZz2sIuseZ3YnblIj91TI8r91kpFNGZkcIWVCkTzyNvp1uhtmLzUm6J46XC39UpK
+	 cgbv/DKfMtEUoGZe5imuPVtmKkToRhESYbXh0Cge7bn2ogt68EZKtjjhwK5bng6CyIw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793285621;
-	h=DMARC-Filter:Received:DKIM-Signature:Content-Type:MIME-Version:
-	 Subject:From:In-Reply-To:Date:Cc:Content-Transfer-Encoding:Message-Id:
-	 References:To;
-	bh=UbSiEL7++BWQVToI7FmOqiyK9zuBqGN72UpL4qL+D0U=;
-	b=Q7+vqAoYqSUQRneQ0Shhewj5av85XHkGdWRJWEAeNOV28LsTQPk1n71atIoM2V8o8kcM
-	 LHlepLdnXnT+TWM7BAcz9b4tsLdWj2luhcBKj5L0NyN1nlITwQscNuHDmh8c/Gy4VRxgo
-	 5NPqxCStsWUGur/CzzMCZ7ejQFzlXg41NU/hwgYrygggWBWayyy0NKpHcobyNZ4oK3c6T
-	 wboxd8DF2n8P1SzXLPXW74OZd+mn4rOmYAAUu7zvWKE4hMecsLxrkMqkVj8wdi4+x+7d2
-	 RaCJS2Fl6IFCN10M7p7Ro9PvOZFbXa+WYwhm6P6S8zV94gG72Sj7E2TN6bYd9izKNAA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793285699;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=1pLK8Y9oFyrrAeii39TsMIuWjANvy9SWizA21KobJCI=;
+	b=yPNEIYxJJl5fzUtXuzaX3IRT9CbufNYMfNtkBLBs59D3Ex1anVTclxob+U5esno/3OE1
+	 LOczxbBentm/YR+8QNKRgMec9LoXqIifEqzDyYSUggVPQqxi0qrFUxVa+v4xuZhw7h2A3
+	 4A/Gd9sFbuLqsLrXYKffreFIkMxJXgtXaMLYv0LhF+GprcX/AiPfJ6JasER4nBVw/rOHx
+	 ko+U3xiB7e57yU3mull5QEV+JvJ7dxEv3Jb8IaoJ9RdUsmbE3wI7S5haX7IvD0W4Oy1Nl
+	 NVX9N8qkMV5GAT1O65y2QXuH+rVfhITU5es/QkGjc3HtvjpWHTYPigiEdRrOCOLyixA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=chaosmail.tech;
-	spf=pass smtp.mailfrom=chaosmail.tech;
-	dkim=pass header.d=chaosmail.tech header.i=@chaosmail.tech header.a=rsa-sha256 header.s=mail header.b=JB0kqTmV;
-	arc=none smtp.remote-ip=77.81.229.115
-Received: from chaosmail.tech (chaosmail.tech [77.81.229.115])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HKtio6eV;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE643606A323;
-	Thu, 29 Oct 2026 14:53:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BE643606A323
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=chaosmail.tech
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chaosmail.tech
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BB6D606A31D
+	for <mfd@lists.linux.dev>; Thu, 29 Oct 2026 14:54:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=chaosmail.tech header.i=@chaosmail.tech header.a=rsa-sha256 header.s=mail header.b=JB0kqTmV
-Received: by chaosmail.tech (Postfix) id AA44C1C8AAF;
-	Thu, 29 Oct 2026 14:53:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chaosmail.tech;
-	s=mail; t=1793285617;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=UbSiEL7++BWQVToI7FmOqiyK9zuBqGN72UpL4qL+D0U=;
-	b=JB0kqTmVG4H4ja0Pp0Eah0YzrRch2nw5+T2+ML1Vpc13jMJHEYCHgQdssFpAxSYtsF+Vhc
-	lxr/E6ukKsAYSFkTL14uCwyPFc9tJHoY58kAIAacAdrjWZvC2+VU0K1J2hjatCqtQu2uKP
-	ianM2iZH8ZTIgpcbtXl0LW2Vy85GaGE=
-Content-Type: text/plain;
-	charset=us-ascii
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HKtio6eV
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E53261F01825;
+	Thu, 29 Oct 2026 14:54:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793285699;
+	bh=1pLK8Y9oFyrrAeii39TsMIuWjANvy9SWizA21KobJCI=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=HKtio6eVl+AWuQIfSbYADBTTALnbjUqAqok5an9EU2s+jAc6RYODstRhCyPzvo5R0
+	 hMguNUu4CXKTjUS2RDyGE6JEgzwx996+Z8Nx97vmPxTc8VqvbDxCuFkNRsEolkTwZ4
+	 2B8hdv0RmqsjcmcIryKBSrdsZf3RUT4noDWVtGHSezaxEKNVu8piV3dLi/l/48yPK1
+	 hpBJXVGo0RXJldqFfsF/OzbXCebUKrVw4a8bdSaLPDcv9qmNMYK71AqYDzRVGm9hvw
+	 aEe3EE1c4HRtC7E5DUK3dZtom/0ao68MrFqJpSXvf/rVosCJrdQaDDyea4ypLv19FP
+	 b/vy3+rFIqRnQ==
+Message-ID: <sashiko-outbox-189557@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v9 3/4] gpio: aaeon: Add GPIO driver for SRG-IMX8P MCU
+Reply-To: sashiko-reviews@lists.linux.dev
+To: =?utf-8?b?VGhvbWFzIFBlcnJvdCAoU2NobmVpZGVyIEVsZWN0cmljKQ==?= <thomas.perrot@bootlin.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20261029-dev-b4-aaeon-mcu-driver-v9-3-f9b6d0cc180d@bootlin.com>
+References: <20261029-dev-b4-aaeon-mcu-driver-v9-0-f9b6d0cc180d@bootlin.com>
+ <20261029-dev-b4-aaeon-mcu-driver-v9-3-f9b6d0cc180d@bootlin.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Thu, 29 Oct 2026 14:54:58 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -55,95 +59,29 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-Subject: Re: [RFC PATCH 14/14] mfd/macsmc: add ioctl to access smc keys
-From: Sasha Finkelstein <k@chaosmail.tech>
-In-Reply-To: <20261029143926.1246-1-atharvatiwarilinuxdev@gmail.com>
-Date: Thu, 29 Oct 2026 15:53:23 +0100
-Cc: alexandre.belloni@bootlin.com,
- andy@kernel.org,
- asahi@lists.linux.dev,
- bhelgaas@google.com,
- bp@alien8.de,
- brgl@kernel.org,
- dave.hansen@linux.intel.com,
- dlechner@baylibre.com,
- dmitry.kasatkin@gmail.com,
- eric.snowberg@oracle.com,
- griffin@kroah.com,
- hansg@kernel.org,
- hpa@zytor.com,
- ilpo.jarvinen@linux.intel.com,
- j@jannau.net,
- jarkko@kernel.org,
- jic23@kernel.org,
- jmorris@namei.org,
- lee@kernel.org,
- lenb@kernel.org,
- linusw@kernel.org,
- linux-acpi@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org,
- linux-gpio@vger.kernel.org,
- linux-hwmon@vger.kernel.org,
- linux-kernel@vger.kernel.org,
- linux-pci@vger.kernel.org,
- linux-pm@vger.kernel.org,
- linux-rtc@vger.kernel.org,
- linux-watchdog@vger.kernel.org,
- linux@roeck-us.net,
- mfd@lists.linux.dev,
- mingo@redhat.com,
- neal@gompa.dev,
- nuno.sa@analog.com,
- paul@paul-moore.com,
- pavel@kernel.org,
- platform-driver-x86@vger.kernel.org,
- rafael@kernel.org,
- roberto.sassu@huawei.com,
- serge@hallyn.com,
- sre@kernel.org,
- sven@kernel.org,
- tglx@kernel.org,
- wim@linux-watchdog.org,
- x86@kernel.org,
- zohar@linux.ibm.com
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <0683C803-C578-4C55-B893-BC03EBF9A9F1@chaosmail.tech>
-References: <525E5B4D-A947-4567-9FCD-5FFF2CA8B161@chaosmail.tech>
- <20261029143926.1246-1-atharvatiwarilinuxdev@gmail.com>
-To: Atharva Tiwari <atharvatiwarilinuxdev@gmail.com>
 
-On Oct 29, 2026, at 15:39, Atharva Tiwari =
-<atharvatiwarilinuxdev@gmail.com> wrote:
-> 1. The patch is required, atleast on intel macs, as without writing =
-GPU and CPU
-> states to smc, the system gives PROCHOT signal under small load
-> , and heats up a lot.
-
-In that case, why are you exposing a generic smc key interface instead
-of one that just does that? If you think that this data should be set
-from userspace - whitelist the set of keys that are needed.
-
-
-> 2. the smc dosent expose keys of nature that can physically damage the =
-system
-> it only exposes power/volt data, and the most you can poke is reboot
-> keys and gpu/cpu p-states.
-
-Are you willing to make that claim for every smc-equipped device, not
-just T2? Are you willing to make the same claim for future versions of
-smc firmware?
-
-> 3. If a person is randomly touching keys, Its their problem and not =
-ours.
+> Add GPIO driver for the Aaeon SRG-IMX8P embedded controller. This
+> driver supports 7 GPO (General Purpose Output) pins and 12 GPIO pins
+> that can be configured as inputs or outputs.
 >=20
-> 4. There are a lot of things that can mess the system way more and =
-permanently
-> than smc (undervolting for example), but they are not safe guarded, =
-why
-> should this be then?
+> The driver implements proper state management for GPO pins (which are
+> output-only) and full direction control for GPIO pins. During probe,
+> all pins are reset to a known state (GPOs low, GPIOs as inputs) to
+> prevent undefined behavior across system reboots, as the MCU does not
+> reset GPIO states on soft reboot.
+>=20
+> Co-developed-by: J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <jere=
+mie.dautheribes@bootlin.com>
+> Signed-off-by: J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <jeremi=
+e.dautheribes@bootlin.com>
+> Acked-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> Reviewed-by: Linus Walleij <linusw@kernel.org>
+> Signed-off-by: Thomas Perrot (Schneider Electric) <thomas.perrot@bootlin.=
+com>
 
-I think it is inadvisable to leave a loaded footgun around and then
-blame the user for using it. As an "OS Vendor" you have a duty of care
-to your users.
+Sashiko has reviewed this patch and found no issues.
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261029-dev-b4-aae=
+on-mcu-driver-v9-0-f9b6d0cc180d@bootlin.com?part=3D3
 
