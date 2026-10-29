@@ -1,57 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793268666;
-	b=w3FzZ6GEtAgczhSj49Xc/EaeI3101RrSHsff1bg8r0YWC9sOjw5IkClZ8EAB81i0hAtA
-	 dekGsVwYc7mHTXfpkc5PoHiJl7B48VQ6XHKgFiSGpKAxC6/AGit22McaC9fv1ndKRjmxw
-	 HPaxutLpGyafq7Rng3Q1tI43bUekJ1c5v9zQ1t71yEWG7KGCJ23btubFEfjKKjZBY8vGw
-	 jdHLiZO3oyaboE615beQiZ7/CT4wZcY+dwwknnGE9u5FvvxkMSLM8Cn3i6VA2CZ/Vf5En
-	 W6Ea8R5zWcFTrvvN/9/QOk9Z+rW77uokGCqfutvQN6n4FZP7HX0Hd6R2WAf9j8IDQ6w==
+	t=1793268697;
+	b=pDKmVlAVtS60waoRcLcEt8HQd1EgU0vldPTHhNeKjC0YEX2JaK01EIhmxAq6tpCr0/k9
+	 eevKv8hg3EnYPQa0ihzJXpJnfrYBfyj450ZNavVER9Y4TBtHFNfqF5JRTVrV0dLj5sMKY
+	 ae0Ubqv606yjvTMeAePpIzFdcoccYQZNexDSOMa0OSN0xzzx6I4EC713VRmfZaN4Qeox5
+	 FSH9PofR2WGJ7ePgblUGq+Yvopk9Eg32uEFGn2Fq/xM0hyXh66rz6mOYuI8fPA61zl931
+	 JR18gouPNUrjV8wF08iNua11vRyewguvs9Jris665F7GjnDY78IEi1Wt/MpRDV+J4OQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793268666;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793268697;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=vJDW1uZZ6V1XUTCm1DqMbtqc0609OPl+me2kIvxDucg=;
-	b=J9m2x3/7hWFvkEMxWLqEBq3TMW/icHhNtquLfe5azqT+2MnENrx+WnnK2tdC6tMr0nWZ
-	 lt4aQHpA9/bE/Axi41M7m09QAbvcBNwrZP+3UgG5l0MzgkUM8pKPWNrQQHddavl3LIUCW
-	 P+WuCF2LUKGE4/sdr4WBQQ0UbZ6p3eqDuIHI2QvGPULStCfl5nWkikZVZkP9CwCGCzsv3
-	 14QcPqXuZX0UwSHGut+YBH+A1K81kdqALuWQPtgCyiIbIhD/hNUWwGD6vo1LMLGWQu7gQ
-	 lzC+Fyh1u2FzQ3bn+sN8blZdWxFFQhFPNtO6roo29QxQte1mlDuIJEjaGKuaF5jBCqw==
+	bh=b8iu8NNCf5thBEGTxmTFdzvLS5kC2lRllJjKBzdxi4s=;
+	b=S4E5jMh5FD/1BjoYrkOgRwYunWSOyq85nnwER/W/TnAg3Pw12EG5GOYwujyFOh9yLQgp
+	 z0BS8jny6S3kEtd0iYEw2AyVFfG9l9GT5mn/GSLRyLXA2EBTfm1mo4XOUvucAsYkVdq78
+	 dzpWxA/eSiIgzAUMVWrmbBKcejqNaXxEwNlVF+6gWJsRYrqSq45imBjpcPiYRqdXVLjHO
+	 sru/2TVgXWHaI/E9/MNFLLEuh+YIEiaLwWtKt8QGJfxSlMTm5NyzgWMmW75IroQ43e1iL
+	 reAsm5bUNGuR7Rr7xWSNT5UGJ8IlDN/a3IJPD311L8qvyxPin8InmYzpGSWC0OYgFQw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kx5CFGTJ;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="VChF7/Vq";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2AD40606A321
-	for <mfd@lists.linux.dev>; Thu, 29 Oct 2026 10:11:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F06C7606A322
+	for <mfd@lists.linux.dev>; Thu, 29 Oct 2026 10:11:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kx5CFGTJ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A40B81F01825;
-	Thu, 29 Oct 2026 10:11:05 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VChF7/Vq
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5E0481F01828;
+	Thu, 29 Oct 2026 10:11:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793268665;
-	bh=vJDW1uZZ6V1XUTCm1DqMbtqc0609OPl+me2kIvxDucg=;
+	s=k20260515; t=1793268696;
+	bh=b8iu8NNCf5thBEGTxmTFdzvLS5kC2lRllJjKBzdxi4s=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=kx5CFGTJnxK5Fd+kWZQQ3FZ4csagVpVRVpa567nS9UKlLXOrTPIc8YVT2CvvLKS/+
-	 H2/H3fdljPUxahwp6C43OOGdJy29iRIKfwsOr/RRZCRV2FQj2FYZnS2BMnQMEeJVbq
-	 9eH4zNIT7ds0ZahYFYyBhpK9p32buOlVPKM4ZUseMzu5JCB3wpuswENfLQvv30cS8Q
-	 a0/mT3QsX8P+yUbs3bZNoQ5OaL3jNat3/8PNyiS6boNeTDEvSodTXzlbCCox8aaE6O
-	 RnZLxqmsN+X4uaO3bhgzBbEMxsEAByJDrcbr3aCXCvKp5VbLwI5zLnapapL/gOgdD0
-	 I9SPDT5Ayd3Bg==
-Message-ID: <sashiko-outbox-189100@kernel.org>
+	b=VChF7/VqhTpY77wFxMRrdJcohGzLHdWYuzlHFCMLy043EKUa8pJ6+Z4kgg4Myx7TS
+	 j+uL/meE9dcuXkyHkPoIsU5tZa64y/9w6S90D37RR4t8Yh2s6Hm4Ip6XtLqyQO4MpW
+	 vfIfSRVlsV3A5G8DZg+jy08FQTSCVSUtsBbo936JIA4Pli5l9SM1i9V3Am6UWN30le
+	 /mVhfH5mjsfszzc2HcG26M9+GQK9Eq+w1lzYeu0qIVeGvxDlcwYMcRVQfVO9aPZGJq
+	 BAdesYzSURkopNwSc7Y6krjOuFjmKAeFnTtgLZ5miGBlhyAKoSe+WX5LCjKUI9NOrT
+	 rB4cZd+ho7F7A==
+Message-ID: <sashiko-outbox-189101@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 4/4] arm64: dts: rockchip: put the PMIC into sleep mode
- in suspend on RK3588 Tiger
+Subject: Re: [PATCH 3/4] mfd: rk8xx-spi: add system sleep PM ops
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Jakob Unterwurzacher" <jakobunt@gmail.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-4-cb12621c1fb4@cherry.de>
+In-Reply-To: <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-3-cb12621c1fb4@cherry.de>
 References: <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-0-cb12621c1fb4@cherry.de>
- <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-4-cb12621c1fb4@cherry.de>
+ <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-3-cb12621c1fb4@cherry.de>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 29 Oct 2026 10:11:05 +0000
+Date: Thu, 29 Oct 2026 10:11:35 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -63,24 +62,17 @@ Precedence: list
 
 > From: Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
 >=20
-> The RK806's PWRCTRL1 pin is connected to the SoC's pmic_sleep1 output,
-> which the firmware (TF-A) asserts when the SoC enters suspend-to-ram.
-> It is configured for no function, though, so the PMIC ignores it: all
-> regulators stay on in suspend and the regulator-state-mem settings have
-> no effect.
+> Unlike rk8xx-i2c, the SPI driver does not hook up rk8xx_suspend() and
+> rk8xx_resume(), so the RK806 never gets its system sleep handling, e.g.
+> keeping its interrupt disabled while the SPI controller is suspended.
 >=20
-> Configure the pin for the sleep function instead, like other RK806
-> boards do.
+> Add the same PM ops as rk8xx-i2c.
 >=20
-> Measured on RK3588 Tiger on Haikou, suspend-to-ram with the logic
-> domain powered off by the firmware, module supply current (5 V):
->=20
->   PMIC pin with no function: 0.218 A (1.09 W)
->   PMIC pin with sleep function: 0.086 A (0.43 W)
+> Fixes: 210f418f8ace ("mfd: rk8xx: Add rk806 support")
 
 Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261029-dev-tiger-=
-v7-4-pre-20261028-tiger-suspend-b4-v1-0-cb12621c1fb4@cherry.de?part=3D4
+v7-4-pre-20261028-tiger-suspend-b4-v1-0-cb12621c1fb4@cherry.de?part=3D3
 
