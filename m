@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793268753;
-	b=OSO9W2eVEcwjDuKuxAtq3ild73IPJqJ2uMpzGkkNlGsZBOzJxwbmgxvFupiLLEguTRM/
-	 9BQQysxLHpzXm7MjqTAFjWw5YuE1ltqSC5TFq8OQAUVo5DVJS/cvDIBwYrwF+bGgSjoWJ
-	 ReCpPfh4K3EgdgPnvEFTU4ru1pWA7Ehl6n/3GHEvMRBkejqP9POSapFEjyp39isd3Aq5N
-	 GUrCXslOArQf4Kws5v8BqQNSLcnn07IlkK5YcjDAEh22dtYJLUuMdbL2/6Ku+/yEVCH9y
-	 b9UG6i6/f10c7mR2btCFVTd9ieXenXokneMC5k8h0kpVO64dEsOAkv8RCxJjXM3g/XA==
+	t=1793269283;
+	b=GFFlUG8fPcWF5zeoIHsmBu059yIIOuLuE0Y4BVPxqXNc11d5XHcSQJRRE3Hf/B4WgCT5
+	 ojhrPrrU3trB1g1EgHuy2WgZkX3A4olHB1N1z0mjJw4V+5WrQouzvFisviJ6i8Minh13V
+	 wo/4hS+ei65bU4t0gee3z6+AbY9dTDN2g+tanxPPX4a8YrZs3gKjm/d9Ei7PH+UNJhmHB
+	 JPp7lzkdQ7luTc+lNbbV9eYag9B7izXspY+z/SqGpzhtwB9aOT0Ml7RwqSDyNXOPWyoRe
+	 S7bD/a8zYIpC/LXLLcx6qjxsdcnPMsxct6hIU1+jyIeafxta+GSbe4BuRsc/ZMvoQqQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793268753;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793269283;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=QYcvzUZRnBc7zNQmxnxWT1AJJ1vDV5WJHB3fJ3jge2E=;
-	b=rvt4aVMOaFL0JJM8UK7cElcUCtgrlsTwhBW9GuZuc7qAGJOaMW1X9f4LzAixg28di/3L
-	 4RN+ltBom1AvwfwHVZYtdb/PIV72IhD4c0Ap6myO3AhCyZr40taLwiBJ0tNGot2i0zpZN
-	 VYQBru6qZwdSDLkn9tXy02K8+jr418Eo55GPFnZCWI49vkho5ysX/xFylL6iY67nly9hi
-	 3mCMfAflKjRJlr/Nkiwsn+Lm4h4LqAi5iPgbKsB11twZsc06fdoImRE4Yr4sP4jTTfvkS
-	 3FfkiaoeCuRMtGG7aDJLmU+yniZjAvWBBuCZSc7NAxZzLFmNlKGkXzTGl+8NCtpomZQ==
+	bh=5YOfeKqsJ6UIlUZa8Twb8YE/HvF3w/5fU5ttJFp47WM=;
+	b=L24BrlBsZo0mXAG+tMKmx/vM3bBkevH2BeQb24BK96V1dNkD4gc/26HDvqLNoke6tTXN
+	 0ivQVHBgrIFuClyTe7pk3AuTfHhb6wVD4xoDGPuKAljd/DBGZnETKncfr/5l4DHmuOX03
+	 SgdffqOypP+5wXNMHD+/E/77BWv7vDI4IoTpsh01psgAobYOG4sV6TwB9pcSc8mBpURie
+	 eEXh6cRvX1WBPNJ7AXkGDQS1r7sVXpe6NEA+eP7kyFVwFnQ2I8pU4BplpsSOTqgAkyg4D
+	 efA9V2rsxiqroHg5HJCWcn2w/78g/Hw3Hf+rXJMG3GAcTIHrbUaBpWnog59EKvQbg5w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=V3hxrERB;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=n0u4s8L1;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDCB8606A31D
-	for <mfd@lists.linux.dev>; Thu, 29 Oct 2026 10:12:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55D38606A31D;
+	Thu, 29 Oct 2026 10:21:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=V3hxrERB
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3411B1F031E5;
-	Thu, 29 Oct 2026 10:12:32 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=n0u4s8L1
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 905161F031E1;
+	Thu, 29 Oct 2026 10:21:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793268752;
-	bh=QYcvzUZRnBc7zNQmxnxWT1AJJ1vDV5WJHB3fJ3jge2E=;
+	s=k20260515; t=1793269282;
+	bh=5YOfeKqsJ6UIlUZa8Twb8YE/HvF3w/5fU5ttJFp47WM=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=V3hxrERBNW76m0U5h4zNYtCq/xNI1YcXK+EthsUjjVrpFuQd3GI/yOF/gonJf+wIP
-	 a7Mmx+8Wg/XwEIb14R3D6qaogLa4E8eFd9bMff02AZUz/e6OPeA7lDwjxZQclYBEE0
-	 0Ba56TOlDt+cui5Wt4DbadoNLrPwN+CxNqha4UrWSlnDsI+E0A+jZE5xmc6tBEgGIz
-	 NwoZ6QQVcKBMFPs3yb6EKvI/Uo32TiLxZnCMBd/vFoxrjQV7H0eTV465eO7ABL/ISU
-	 m365ZnyIAUGCWG2l60NAhN6plfasssq5+Kp5UWe+94BKSVJLL9LX4KZd2LhSn5kCOd
-	 nZn+S4pwVuurA==
-Message-ID: <sashiko-outbox-189103@kernel.org>
+	b=n0u4s8L16SC1PjNUFpJnMxDjH+6Sh39L1ogHY5kH350k35lmuJstRncWI/ZmveCnJ
+	 EbrcjaSnC0hFZODjmHTtNEPaXVN8LOrOlCTUkS2JOoXdXzHTe16/5cA8MsFFBleVJq
+	 bUQVMpU9x7AzUxseOsaCeSSehpT5RsS+XFAhAgRI0pv2Mhr0zSIc1BcV6P/ooWo23Z
+	 lrYtDR7kmAXV8NR//c8mw3JIPV2azRP0MaRTRFXm6VIsL5j9AY1Xl7IteIwinzvc6v
+	 5Pjrhei3bwedCY1Sq27V+r+rRM9BgDZwSGigIMZnfDyU6GkReoJgHOvZpm1q+buI4B
+	 ZvZMWQ6RVYU8g==
+Message-ID: <sashiko-outbox-189114@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 1/4] Input: rk805-pwrkey - enable the wakeup interrupt
+Subject: Re: [PATCH 2/4] mfd: rk8xx-core: keep the PMIC interrupt disabled
  during system suspend
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Jakob Unterwurzacher" <jakobunt@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-1-cb12621c1fb4@cherry.de>
+Cc: linux-input@vger.kernel.org, mfd@lists.linux.dev, devicetree@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, dmitry.torokhov@gmail.com, lee@kernel.org
+In-Reply-To: <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-2-cb12621c1fb4@cherry.de>
 References: <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-0-cb12621c1fb4@cherry.de>
- <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-1-cb12621c1fb4@cherry.de>
+ <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-2-cb12621c1fb4@cherry.de>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 29 Oct 2026 10:12:31 +0000
+Date: Thu, 29 Oct 2026 10:21:22 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,30 +61,106 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> From: Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
->=20
-> The driver marks the device as wakeup capable, but never enables the
-> power key interrupt as a wakeup interrupt. As a consequence, the PMIC
-> interrupt line is masked during system suspend and the power key cannot
-> wake up the system, e.g. from suspend-to-ram on RK3588 with an RK806.
->=20
-> Enable the interrupt as wakeup interrupt in the suspend callback if the
-> device may wake up the system, and disable it again on resume.
->=20
-> This is done in the regular suspend phase on purpose, rather than with
-> dev_pm_set_wake_irq(), which arms the wakeup in the noirq phase: there,
-> enabling it updates the PMIC's interrupt registers through regmap-irq,
-> which fails when the PMIC is connected via SPI:
->=20
->   spi_master spi2: Failed to power device: -13
->   rk8xx-spi spi2.0: Failed to sync masks in 7a
->=20
-> Fixes: 5a35b85c2d92 ("Input: add power key driver for Rockchip RK805 PMIC=
-")
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
+s) to consider:
+- [High] mfd: rk8xx-core: disable_irq() in rk8xx_suspend() breaks s2idle wa=
+keup
+--
 
-Sashiko has reviewed this patch and found no issues.
+commit 1642fdff105aee2817fbf318588a972d4d3d49a4
+Author: Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
+
+mfd: rk8xx-core: keep the PMIC interrupt disabled during system suspend
+
+This commit disables the PMIC interrupt at the end of rk8xx_suspend() and
+re-enables it at the start of rk8xx_resume() so that wakeup interrupts are
+not handled before the parent bus controller has resumed.
+
+> diff --git a/drivers/mfd/rk8xx-core.c b/drivers/mfd/rk8xx-core.c
+> index 3dcf6abfda74f..3a68a7974ed06 100644
+> --- a/drivers/mfd/rk8xx-core.c
+> +++ b/drivers/mfd/rk8xx-core.c
+
+[ ... ]
+
+> @@ -929,7 +931,20 @@ int rk8xx_suspend(struct device *dev)
+>  		break;
+>  	}
+> =20
+> -	return ret;
+> +	if (ret)
+> +		return ret;
+> +
+> +	/*
+> +	 * Keep the interrupt disabled while the bus to the PMIC may be
+> +	 * suspended: otherwise a wakeup event (e.g. the power key) is handled
+> +	 * as soon as interrupts are re-enabled on resume, before the bus has
+> +	 * resumed, and reading/acking the interrupt status fails. If the
+> +	 * interrupt is a wakeup source, it stays armed, and the pending event
+> +	 * is replayed by enable_irq() on resume.
+> +	 */
+> +	disable_irq(rk808->irq);
+
+[Severity: High]
+Does calling disable_irq(rk808->irq) in rk8xx_suspend() break wakeup from
+suspend-to-idle (s2idle) on Rockchip platforms?
+
+On Rockchip SoCs, the PMIC interrupt parent is the Rockchip GPIO irqchip in
+drivers/gpio/gpio-rockchip.c, which implements rockchip_irq_disable() to ma=
+sk
+the pin in hardware and does not set the irqchip wakeup-on-suspend flag:
+
+drivers/gpio/gpio-rockchip.c:rockchip_irq_disable() {
+	irq_gc_mask_set_bit(d);
+}
+
+When disable_irq(rk808->irq) runs during dpm_suspend() -> rk8xx_suspend(),
+it invokes __disable_irq() -> irq_disable() -> __irq_disable() ->
+rockchip_irq_disable(), masking the interrupt line in the GPIO int_mask
+register and marking the descriptor disabled.
+
+Later in dpm_suspend_noirq() -> suspend_device_irqs(),
+kernel/irq/pm.c:suspend_device_irq() only re-enables a disabled wakeup
+interrupt in the irqchip if that flag is set on the chip:
+
+kernel/irq/pm.c:suspend_device_irq() {
+	if (irqd_is_wakeup_set(irqd)) {
+		irqd_set(irqd, IRQD_WAKEUP_ARMED);
+
+		if ((chipflags & IRQCHIP_ENABLE_WAKEUP_ON_SUSPEND) &&
+		     irqd_irq_disabled(irqd)) {
+			__enable_irq(desc);
+			irqd_set(irqd, IRQD_IRQ_ENABLED_ON_SUSPEND);
+		}
+}
+
+During suspend-to-RAM, syscore_suspend() subsequently runs irq_gc_suspend()=
+ ->
+rockchip_irq_suspend(), which writes ~gc->wake_active to int_mask:
+
+drivers/gpio/gpio-rockchip.c:rockchip_irq_suspend() {
+	struct irq_chip_generic *gc =3D irq_data_get_irq_chip_data(d);
+	struct rockchip_pin_bank *bank =3D gc->private;
+
+	bank->saved_masks =3D irq_reg_readl(gc, bank->gpio_regs->int_mask);
+	irq_reg_writel(gc, ~gc->wake_active, bank->gpio_regs->int_mask);
+}
+
+However, during suspend-to-idle, kernel/power/suspend.c:suspend_enter() ent=
+ers
+s2idle_loop() and jumps to Platform_wake without calling syscore_suspend():
+
+kernel/power/suspend.c:suspend_enter() {
+	if (state =3D=3D PM_SUSPEND_TO_IDLE) {
+		s2idle_loop();
+		goto Platform_wake;
+	}
+}
+
+Wouldn't that leave rk808->irq masked in the GPIO hardware throughout
+s2idle_loop(), preventing the PMIC power key or RTC alarm from waking the
+system from s2idle?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261029-dev-tiger-=
-v7-4-pre-20261028-tiger-suspend-b4-v1-0-cb12621c1fb4@cherry.de?part=3D1
-
+v7-4-pre-20261028-tiger-suspend-b4-v1-0-cb12621c1fb4@cherry.de?part=3D2
