@@ -1,57 +1,102 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.9
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793269283;
-	b=GFFlUG8fPcWF5zeoIHsmBu059yIIOuLuE0Y4BVPxqXNc11d5XHcSQJRRE3Hf/B4WgCT5
-	 ojhrPrrU3trB1g1EgHuy2WgZkX3A4olHB1N1z0mjJw4V+5WrQouzvFisviJ6i8Minh13V
-	 wo/4hS+ei65bU4t0gee3z6+AbY9dTDN2g+tanxPPX4a8YrZs3gKjm/d9Ei7PH+UNJhmHB
-	 JPp7lzkdQ7luTc+lNbbV9eYag9B7izXspY+z/SqGpzhtwB9aOT0Ml7RwqSDyNXOPWyoRe
-	 S7bD/a8zYIpC/LXLLcx6qjxsdcnPMsxct6hIU1+jyIeafxta+GSbe4BuRsc/ZMvoQqQ==
+	t=1793278823;
+	b=eWS9nUtjFCKaktxGlTn5h+Mg5lavNUrR5XdaL/2+SJtLIPpBAtUuBOSNgyoE6ELCeA7y
+	 B1Q/uv3pOgya08U3aUPwV46lUYrgyBOm3P+P+zpIHNcktpP9maYgDzb4UZOXwX63TWBsT
+	 UStgZFdxZwytn1/Ge4JMMwyiM27/ciMGbXnnae9oImlNZP/pbjdAi3uJzQi++RkB3ZHpP
+	 7HKt8vByhTQ6zlog/LyA50Fc+a1QgG6kuCqRwIa2jqxjB1LKV7MV716dsRkoaorDqcCY2
+	 bu0S1915mELU+dqLetF8as/bW6qO+rruYUt3NCIw1R6TPe62ZViU5LnBkaAuVkGYJag==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793269283;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=5YOfeKqsJ6UIlUZa8Twb8YE/HvF3w/5fU5ttJFp47WM=;
-	b=L24BrlBsZo0mXAG+tMKmx/vM3bBkevH2BeQb24BK96V1dNkD4gc/26HDvqLNoke6tTXN
-	 0ivQVHBgrIFuClyTe7pk3AuTfHhb6wVD4xoDGPuKAljd/DBGZnETKncfr/5l4DHmuOX03
-	 SgdffqOypP+5wXNMHD+/E/77BWv7vDI4IoTpsh01psgAobYOG4sV6TwB9pcSc8mBpURie
-	 eEXh6cRvX1WBPNJ7AXkGDQS1r7sVXpe6NEA+eP7kyFVwFnQ2I8pU4BplpsSOTqgAkyg4D
-	 efA9V2rsxiqroHg5HJCWcn2w/78g/Hw3Hf+rXJMG3GAcTIHrbUaBpWnog59EKvQbg5w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793278823;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:From:Date:To:cc:
+	 Subject:In-Reply-To:Message-ID:References:MIME-Version:Content-Type;
+	bh=e8owfEJpSE9Jnys+2aSeIDroUxjHdfvyjJl6Hc7Zcjs=;
+	b=NQzSfGLPql8vVoSAZm8mB//7+8cl/3lbHDC6sNbZYL7LgrzATdN1TujLLuVv+HnzUPrL
+	 PAYnSRw29JR7BsIxDv4O1FD7BFEC/3HqnjK2x//NVWgAPgeZb+2MMzbxsrfT/enk6Zcwb
+	 mGNRWMLXqOtkuYICg2r8L1PxHAE0RCA7aJIz6O9kekujeDMlBP+MDtP81nNBmZuFfs5zM
+	 wk9AycYJ3HJwooLlwwUyzK6OFNVVOA+N+TZ20yxpfb7BBJ/jPqpk6paXicCXbALRms7Jo
+	 GJXMAZ3IwPIFxCm2op24A5cFzlazxuH/ZSjch/l2mlmSm8NefHc/fKUYJJ9aTCAfw+A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=n0u4s8L1;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=linux.intel.com;
+	spf=pass smtp.mailfrom=linux.intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=iV15jqlQ;
+	arc=none smtp.remote-ip=192.198.163.9
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55D38606A31D;
-	Thu, 29 Oct 2026 10:21:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EABA1606A31D;
+	Thu, 29 Oct 2026 13:00:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EABA1606A31D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=n0u4s8L1
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 905161F031E1;
-	Thu, 29 Oct 2026 10:21:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793269282;
-	bh=5YOfeKqsJ6UIlUZa8Twb8YE/HvF3w/5fU5ttJFp47WM=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=n0u4s8L16SC1PjNUFpJnMxDjH+6Sh39L1ogHY5kH350k35lmuJstRncWI/ZmveCnJ
-	 EbrcjaSnC0hFZODjmHTtNEPaXVN8LOrOlCTUkS2JOoXdXzHTe16/5cA8MsFFBleVJq
-	 bUQVMpU9x7AzUxseOsaCeSSehpT5RsS+XFAhAgRI0pv2Mhr0zSIc1BcV6P/ooWo23Z
-	 lrYtDR7kmAXV8NR//c8mw3JIPV2azRP0MaRTRFXm6VIsL5j9AY1Xl7IteIwinzvc6v
-	 5Pjrhei3bwedCY1Sq27V+r+rRM9BgDZwSGigIMZnfDyU6GkReoJgHOvZpm1q+buI4B
-	 ZvZMWQ6RVYU8g==
-Message-ID: <sashiko-outbox-189114@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 2/4] mfd: rk8xx-core: keep the PMIC interrupt disabled
- during system suspend
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Jakob Unterwurzacher" <jakobunt@gmail.com>
-Cc: linux-input@vger.kernel.org, mfd@lists.linux.dev, devicetree@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, dmitry.torokhov@gmail.com, lee@kernel.org
-In-Reply-To: <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-2-cb12621c1fb4@cherry.de>
-References: <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-0-cb12621c1fb4@cherry.de>
- <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-2-cb12621c1fb4@cherry.de>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 29 Oct 2026 10:21:22 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=iV15jqlQ
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1793278823; x=1824814823;
+  h=from:date:to:cc:subject:in-reply-to:message-id:
+   references:mime-version;
+  bh=pQZ5jTIQQgWy5IOQkc0GctjtqZcLd8xfFvrDyC/7bpA=;
+  b=iV15jqlQKLZfwR6gLD/x+HiOokKRqI18wRYY9PWs9witz2QGwST5WqIk
+   y8+3GuJjbN0hiMTf1zM6uc3dk2o1mm6NXgMB7NBFSETgnVUn1zaQ2RxSb
+   WCHatC+B7vBDM3RgrZyqVnbkEB1hOpg2kEDJWrUNv6yLcwJFM3M+GaE2F
+   qpMBm0USPjZ3C7TX9icg1iKW0yPGGS0YWq9F/hXfwr9Mt/r40S7GqRVqB
+   8k217e4l5ShqDlD8+EN7CXjAlOuitCTjv58oEX3Q7RFadP+O97ZeNHEqd
+   Gdi6UGiyPFaLkcChlihX+YHUiHbs5kSxRUWbhRTZV4NcQV/JjkctyOsZZ
+   Q==;
+X-CSE-ConnectionGUID: NdK/ahGTS1qA6srjBlMZuw==
+X-CSE-MsgGUID: gOB39yNCR6e2ZXpSMDhNCQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11949"; a="1903122"
+X-IronPort-AV: E=Sophos;i="6.27,184,1787036400"; 
+   d="scan'208";a="1903122"
+Received: from fmviesa003.fm.intel.com ([10.60.135.143])
+  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Oct 2026 06:00:21 -0700
+X-CSE-ConnectionGUID: aglSvOwORVS4Qiyuh8Rc+w==
+X-CSE-MsgGUID: T9hQ0FJ4QB+MqSRu3PqRdQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,184,1787036400"; 
+   d="scan'208";a="5243206"
+Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.149])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Oct 2026 06:00:04 -0700
+From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
+Date: Thu, 29 Oct 2026 14:59:59 +0200 (EET)
+To: Atharva Tiwari <atharvatiwarilinuxdev@gmail.com>
+cc: Bjorn Helgaas <bhelgaas@google.com>, Thomas Gleixner <tglx@kernel.org>, 
+    Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+    Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+    "H. Peter Anvin" <hpa@zytor.com>, "Rafael J. Wysocki" <rafael@kernel.org>, 
+    Len Brown <lenb@kernel.org>, Linus Walleij <linusw@kernel.org>, 
+    Bartosz Golaszewski <brgl@kernel.org>, Sven Peter <sven@kernel.org>, 
+    Janne Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>, 
+    Guenter Roeck <linux@roeck-us.net>, Jonathan Cameron <jic23@kernel.org>, 
+    David Lechner <dlechner@baylibre.com>, 
+    =?ISO-8859-15?Q?Nuno_S=E1?= <nuno.sa@analog.com>, 
+    Andy Shevchenko <andy@kernel.org>, Lee Jones <lee@kernel.org>, 
+    Pavel Machek <pavel@kernel.org>, Griffin Kroah-Hartman <griffin@kroah.com>, 
+    Hans de Goede <hansg@kernel.org>, Sebastian Reichel <sre@kernel.org>, 
+    Alexandre Belloni <alexandre.belloni@bootlin.com>, 
+    Wim Van Sebroeck <wim@linux-watchdog.org>, 
+    Jarkko Sakkinen <jarkko@kernel.org>, Mimi Zohar <zohar@linux.ibm.com>, 
+    Roberto Sassu <roberto.sassu@huawei.com>, 
+    Dmitry Kasatkin <dmitry.kasatkin@gmail.com>, 
+    Eric Snowberg <eric.snowberg@oracle.com>, Paul Moore <paul@paul-moore.com>, 
+    James Morris <jmorris@namei.org>, "Serge E. Hallyn" <serge@hallyn.com>, 
+    LKML <linux-kernel@vger.kernel.org>, linux-pci@vger.kernel.org, 
+    linux-acpi@vger.kernel.org, linux-gpio@vger.kernel.org, 
+    asahi@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
+    linux-hwmon@vger.kernel.org, linux-iio@vger.kernel.org, 
+    linux-leds@vger.kernel.org, mfd@lists.linux.dev, 
+    platform-driver-x86@vger.kernel.org, linux-pm@vger.kernel.org, 
+    linux-rtc@vger.kernel.org, linux-watchdog@vger.kernel.org, 
+    linux-integrity@vger.kernel.org, keyrings@vger.kernel.org, 
+    linux-security-module@vger.kernel.org
+Subject: Re: [RFC PATCH 02/14] platform/x86: add backend for macsmc in intel
+ macs
+In-Reply-To: <20261029085504.3547-3-atharvatiwarilinuxdev@gmail.com>
+Message-ID: <0cba7eea-ed39-d4d8-8587-f1c07cb5b03f@linux.intel.com>
+References: <20261029085504.3547-1-atharvatiwarilinuxdev@gmail.com> <20261029085504.3547-3-atharvatiwarilinuxdev@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,107 +105,807 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 
-Thank you for your contribution! Sashiko AI review found 1 potential issue(=
-s) to consider:
-- [High] mfd: rk8xx-core: disable_irq() in rk8xx_suspend() breaks s2idle wa=
-keup
---
+On Thu, 29 Oct 2026, Atharva Tiwari wrote:
 
-commit 1642fdff105aee2817fbf318588a972d4d3d49a4
-Author: Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
+> Add a backend that talks to the SMC on Intel Macs over ACPI.
+> It supports the old I/O port interface, and also MMIO and
+> interrupt-driven completion, which applesmc doesn't have.
+> If an interrupt is missed it falls back to polling.
+> 
+> This is the base that lets the macsmc drivers replace
+> applesmc.
 
-mfd: rk8xx-core: keep the PMIC interrupt disabled during system suspend
+You have 72-75 chars. Don't split intentionally at . unless you really
+start another paragraph.
 
-This commit disables the PMIC interrupt at the end of rk8xx_suspend() and
-re-enables it at the start of rk8xx_resume() so that wakeup interrupts are
-not handled before the parent bus controller has resumed.
+> 
+> Signed-off-by: Atharva Tiwari <atharvatiwarilinuxdev@gmail.com>
+> ---
+>  drivers/platform/x86/Kconfig       |  10 +
+>  drivers/platform/x86/Makefile      |   1 +
+>  drivers/platform/x86/macsmc-acpi.c | 642 +++++++++++++++++++++++++++++
+>  3 files changed, 653 insertions(+)
+>  create mode 100644 drivers/platform/x86/macsmc-acpi.c
+> 
+> diff --git a/drivers/platform/x86/Kconfig b/drivers/platform/x86/Kconfig
+> index 4851bf451..448aa2db6 100644
+> --- a/drivers/platform/x86/Kconfig
+> +++ b/drivers/platform/x86/Kconfig
+> @@ -202,6 +202,16 @@ config ADV_SWBUTTON
+>  	  To compile this driver as a module, choose M here. The module will
+>  	  be called adv_swbutton.
+>  
+> +config MACSMC_ACPI
+> +	tristate "Apple SMC (System Management Controller) ACPI Backend"
+> +	depends on MFD_MACSMC_CORE && ACPI && !SENSORS_APPLESMC
+> +	help
+> +	  This driver allows communication with the SMC (System Management Controller)
+> +	  on Intel-Macs. It is used to control fans, control battery, and more.
+> +
+> +	  To compile this driver as a module, choose M here. The module will
+> +	  be called macsmc_acpi.
+> +
+>  config APPLE_GMUX
+>  	tristate "Apple Gmux Driver"
+>  	depends on ACPI && PCI
+> diff --git a/drivers/platform/x86/Makefile b/drivers/platform/x86/Makefile
+> index cab20a414..933aed4a8 100644
+> --- a/drivers/platform/x86/Makefile
+> +++ b/drivers/platform/x86/Makefile
+> @@ -28,6 +28,7 @@ obj-y				+= amd/
+>  obj-$(CONFIG_ADV_SWBUTTON)	+= adv_swbutton.o
+>  
+>  # Apple
+> +obj-$(CONFIG_MACSMC_ACPI)	+= macsmc-acpi.o
+>  obj-$(CONFIG_APPLE_GMUX)	+= apple-gmux.o
+>  
+>  # ASUS
+> diff --git a/drivers/platform/x86/macsmc-acpi.c b/drivers/platform/x86/macsmc-acpi.c
+> new file mode 100644
+> index 000000000..a06ec921a
+> --- /dev/null
+> +++ b/drivers/platform/x86/macsmc-acpi.c
+> @@ -0,0 +1,642 @@
+> +// SPDX-License-Identifier: GPL-2.0-only OR MIT
+> +/*
+> + * Apple SMC ACPI backend
+> + * Copyright (C) 2026 Atharva Tiwari <atharvatiwarilinuxdev@gmail.com>
+> + *
+> + * PIO code taken from drivers/hwmon/applesmc.c:
+> + * Copyright (C) 2007 Nicolas Boichat <nicolas@boichat.ch>
+> + * Copyright (C) 2010 Henrik Rydberg <rydberg@euromail.se>
+> + */
+> +
+> +#include <linux/acpi.h>
+> +#include <linux/byteorder/generic.h>
+> +#include <linux/completion.h>
+> +#include <linux/delay.h>
+> +#include <linux/device.h>
+> +#include <linux/interrupt.h>
+> +#include <linux/io.h>
+> +#include <linux/kfifo.h>
+> +#include <linux/mfd/macsmc.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/reboot.h>
+> +#include <linux/spinlock.h>
+> +#include <linux/unaligned.h>
+> +#include <linux/workqueue.h>
+> +
+> +#define SMC_IO_DATA_PORT	0
+> +#define SMC_IO_CMD_PORT		4
+> +#define SMC_IO_NR_PORTS		32
+> +
+> +#define SMC_IO_STATUS_AWAITING_DATA	BIT(0)
+> +#define SMC_IO_STATUS_IB_CLOSED		BIT(1)
+> +#define SMC_IO_STATUS_BUSY		BIT(2)
 
-> diff --git a/drivers/mfd/rk8xx-core.c b/drivers/mfd/rk8xx-core.c
-> index 3dcf6abfda74f..3a68a7974ed06 100644
-> --- a/drivers/mfd/rk8xx-core.c
-> +++ b/drivers/mfd/rk8xx-core.c
+Add include.
 
-[ ... ]
+> +
+> +#define SMC_MMIO_KEY_DATA		0
+> +#define SMC_MMIO_KEY_INTERRUPT_STATUS	0x4000
+> +#define SMC_MMIO_KEY_STATUS		0x4005
+> +#define SMC_MMIO_KEY_NAME		0x78
+> +#define SMC_MMIO_KEY_DATA_LEN		0x7D
+> +#define SMC_MMIO_KEY_SMC_ID		0x7E
+> +#define SMC_MMIO_KEY_CMD		0x7F
+> +#define SMC_MMIO_MIN_SIZE		0x4006
+> +
+> +#define SMC_TIMEOUT_MS			1000
+> +
+> +struct apple_smc_acpi {
+> +	struct device *dev;
+> +
+> +	u8 __iomem *iomem_base;
+> +	u32 iomem_base_addr, iomem_base_size;
+> +	bool is_mmio;
+> +
+> +	u16 port_base;
+> +	bool has_port;
+> +
+> +	bool has_interrupt;
+> +	bool interrupt_enabled;
+> +	struct completion cmd_done;
+> +
+> +	struct blocking_notifier_head event_handlers;
+> +	struct work_struct shutdown_work;
+> +	struct work_struct notifier_work;
+> +
+> +	DECLARE_KFIFO(event_fifo, u8, 64);
+> +	spinlock_t event_lock;
 
-> @@ -929,7 +931,20 @@ int rk8xx_suspend(struct device *dev)
->  		break;
->  	}
-> =20
-> -	return ret;
+You must document what the lock protects.
+
+> +};
+> +
+> +
+> +static int apple_smc_acpi_port_wait(struct apple_smc_acpi *smc, u8 val, u8 mask)
+> +{
+> +	int ms;
+> +
+> +	for (ms = SMC_TIMEOUT_MS; ms != 0; ms--) {
+> +		if ((inb(smc->port_base + SMC_IO_CMD_PORT) & mask) == val)
+> +			return 0;
+> +
+> +		fsleep(1000);
+> +	}
+
+Something from iopoll.h should suffice for this.
+
+> +	dev_dbg(smc->dev, "port/wait: timeout value:%u, mask:%u\n", val, mask);
+
+Add include.
+
+> +	return -ETIMEDOUT;
+> +}
+> +
+> +static int apple_smc_acpi_port_write_byte(struct apple_smc_acpi *smc, u8 buf)
+> +{
+> +	int ret;
+> +
+> +	ret = apple_smc_acpi_port_wait(smc, 0, SMC_IO_STATUS_IB_CLOSED) ? :
+> +		apple_smc_acpi_port_wait(smc, SMC_IO_STATUS_BUSY, SMC_IO_STATUS_BUSY);
+
+Split this please.
+
 > +	if (ret)
 > +		return ret;
 > +
-> +	/*
-> +	 * Keep the interrupt disabled while the bus to the PMIC may be
-> +	 * suspended: otherwise a wakeup event (e.g. the power key) is handled
-> +	 * as soon as interrupts are re-enabled on resume, before the bus has
-> +	 * resumed, and reading/acking the interrupt status fails. If the
-> +	 * interrupt is a wakeup source, it stays armed, and the pending event
-> +	 * is replayed by enable_irq() on resume.
-> +	 */
-> +	disable_irq(rk808->irq);
+> +	outb(buf, smc->port_base + SMC_IO_DATA_PORT);
+> +	return 0;
+> +}
+> +
+> +static int apple_smc_acpi_port_write_cmd(struct apple_smc_acpi *smc, u8 buf)
+> +{
+> +	int ret;
+> +
+> +	ret = apple_smc_acpi_port_wait(smc, 0, SMC_IO_STATUS_IB_CLOSED);
+> +	if (ret)
+> +		return ret;
+> +
+> +	outb(buf, smc->port_base + SMC_IO_CMD_PORT);
+> +	return 0;
+> +}
+> +
+> +static int apple_smc_acpi_port_write_key(struct apple_smc_acpi *smc, smc_key key)
+> +{
+> +	int i;
+> +
+> +	for (i = 3; i >= 0; i--) {
+> +		if (apple_smc_acpi_port_write_byte(smc, (u8)(key >> (i * 8))))
 
-[Severity: High]
-Does calling disable_irq(rk808->irq) in rk8xx_suspend() break wakeup from
-suspend-to-idle (s2idle) on Rockchip platforms?
+I'd prefer ANDing with 0xff instead of relying on the cast.
 
-On Rockchip SoCs, the PMIC interrupt parent is the Rockchip GPIO irqchip in
-drivers/gpio/gpio-rockchip.c, which implements rockchip_irq_disable() to ma=
-sk
-the pin in hardware and does not set the irqchip wakeup-on-suspend flag:
+> +			return -EIO;
+> +	}
+> +	return 0;
+> +}
+> +
+> +static int apple_smc_acpi_port_valid(struct apple_smc_acpi *smc)
+> +{
+> +	int ret;
+> +
+> +	ret = apple_smc_acpi_port_wait(smc, 0, SMC_IO_STATUS_BUSY);
+> +	if (!ret)
+> +		return ret;
+> +
+> +	ret = apple_smc_acpi_port_write_cmd(smc, SMC_MSG_READ_KEY);
+> +	if (ret)
+> +		return ret;
+> +
+> +	return apple_smc_acpi_port_wait(smc, 0, SMC_IO_STATUS_BUSY);
+> +}
+> +
+> +static int apple_smc_acpi_port_read(struct apple_smc_acpi *smc, u8 cmd, smc_key key,
+> +				void *buffer, size_t len)
+> +{
+> +	int ret;
+> +
+> +	ret = apple_smc_acpi_port_valid(smc);
+> +	if (ret)
+> +		return ret;
+> +
+> +	if (apple_smc_acpi_port_write_cmd(smc, cmd) || apple_smc_acpi_port_write_key(smc, key)) {
+> +		dev_dbg(smc->dev, "port/read: read argument failed, key: 0x%X, cmd: 0x%X\n",
+> +				key, cmd);
+> +		return -EIO;
+> +	}
+> +
+> +	if (apple_smc_acpi_port_write_byte(smc, len)) {
+> +		dev_dbg(smc->dev, "port/read: read len failed, key: 0x%X, len: 0x%lX\n", key, len);
+> +		return -EIO;
+> +	}
+> +
+> +	for (ret = 0; ret < len; ret++) {
+> +		if (apple_smc_acpi_port_wait(smc,
+> +				SMC_IO_STATUS_AWAITING_DATA | SMC_IO_STATUS_BUSY,
+> +				SMC_IO_STATUS_AWAITING_DATA | SMC_IO_STATUS_BUSY)) {
+> +			dev_dbg(smc->dev, "port/read: read failed, key: 0x%X\n", key);
+> +			return -EIO;
+> +		}
+> +		((u8 *)buffer)[ret] = inb(smc->port_base + SMC_IO_DATA_PORT);
 
-drivers/gpio/gpio-rockchip.c:rockchip_irq_disable() {
-	irq_gc_mask_set_bit(d);
-}
+Why is buffer void * and not u8 *?
 
-When disable_irq(rk808->irq) runs during dpm_suspend() -> rk8xx_suspend(),
-it invokes __disable_irq() -> irq_disable() -> __irq_disable() ->
-rockchip_irq_disable(), masking the interrupt line in the GPIO int_mask
-register and marking the descriptor disabled.
+> +	}
+> +
+> +	return apple_smc_acpi_port_wait(smc, 0, SMC_IO_STATUS_BUSY);
+> +}
+> +
+> +static int apple_smc_acpi_port_write(struct apple_smc_acpi *smc, smc_key key, const void *buffer,
+> +		size_t len)
+> +{
+> +	int ret;
+> +
+> +	ret = apple_smc_acpi_port_valid(smc);
+> +	if (ret)
+> +		return ret;
+> +
+> +	if (apple_smc_acpi_port_write_cmd(smc, SMC_MSG_WRITE_KEY) ||
+> +			apple_smc_acpi_port_write_key(smc, key)) {
+> +		dev_dbg(smc->dev, "port/write: write argument failed, key: 0x%X\n", key);
+> +		return -EIO;
+> +	}
+> +
+> +	if (apple_smc_acpi_port_write_byte(smc, len)) {
+> +		dev_dbg(smc->dev, "port/write: write len failed, key: 0x%X, len: 0x%lX\n",
+> +				key, len);
+> +		return -EIO;
+> +	}
+> +
+> +	for (ret = 0; ret < len; ret++) {
+> +		if (apple_smc_acpi_port_write_byte(smc, ((const u8 *)buffer)[ret])) {
 
-Later in dpm_suspend_noirq() -> suspend_device_irqs(),
-kernel/irq/pm.c:suspend_device_irq() only re-enables a disabled wakeup
-interrupt in the irqchip if that flag is set on the chip:
+Why is the buffer void *?
 
-kernel/irq/pm.c:suspend_device_irq() {
-	if (irqd_is_wakeup_set(irqd)) {
-		irqd_set(irqd, IRQD_WAKEUP_ARMED);
+> +			dev_dbg(smc->dev, "port/write: write failed, key: 0x%X\n", key);
+> +			return -EIO;
+> +		}
+> +	}
+> +	return apple_smc_acpi_port_wait(smc, 0, SMC_IO_STATUS_BUSY);
+> +}
+> +
+> +static int apple_smc_acpi_port_get_key_info(struct apple_smc_acpi *smc,
+> +			smc_key key, struct apple_smc_key_info *info)
+> +{
+> +	u8 buf[6];
+> +
+> +	if (apple_smc_acpi_port_read(smc, SMC_MSG_GET_KEY_INFO, key, buf, 6))
 
-		if ((chipflags & IRQCHIP_ENABLE_WAKEUP_ON_SUSPEND) &&
-		     irqd_irq_disabled(irqd)) {
-			__enable_irq(desc);
-			irqd_set(irqd, IRQD_IRQ_ENABLED_ON_SUSPEND);
-		}
-}
+sizeof(buf)
 
-During suspend-to-RAM, syscore_suspend() subsequently runs irq_gc_suspend()=
- ->
-rockchip_irq_suspend(), which writes ~gc->wake_active to int_mask:
+> +		return -EIO;
+> +
+> +	if (!info)
+> +		return 0;
+> +
+> +	info->size = buf[0];
+> +	info->type_code = get_unaligned_be32(&buf[1]);
 
-drivers/gpio/gpio-rockchip.c:rockchip_irq_suspend() {
-	struct irq_chip_generic *gc =3D irq_data_get_irq_chip_data(d);
-	struct rockchip_pin_bank *bank =3D gc->private;
+Please use a proper endianness type. It would be preferrable to make a 
+(__packed) struct out of this so you can properly name and type the 
+members. It would also get rid if magic number offsets.
 
-	bank->saved_masks =3D irq_reg_readl(gc, bank->gpio_regs->int_mask);
-	irq_reg_writel(gc, ~gc->wake_active, bank->gpio_regs->int_mask);
-}
+Don't forget add include if you use __packed.
 
-However, during suspend-to-idle, kernel/power/suspend.c:suspend_enter() ent=
-ers
-s2idle_loop() and jumps to Platform_wake without calling syscore_suspend():
+> +	info->flags = buf[5];
+> +
+> +	return 0;
+> +}
+> +
+> +static void apple_smc_acpi_mmio_clear(struct apple_smc_acpi *smc)
+> +{
+> +	if (ioread8(smc->iomem_base + SMC_MMIO_KEY_STATUS))
+> +		return iowrite8(0, smc->iomem_base + SMC_MMIO_KEY_STATUS);
+> +}
+> +
+> +static int apple_smc_acpi_mmio_wait(struct apple_smc_acpi *smc)
+> +{
+> +	int ms = SMC_TIMEOUT_MS;
+> +
+> +	if (smc->interrupt_enabled) {
+> +		if (wait_for_completion_timeout(&smc->cmd_done,
+> +					msecs_to_jiffies(SMC_TIMEOUT_MS)) > 0)
+> +			return 0;
+> +
+> +		smc->interrupt_enabled = 0;
+> +		dev_dbg(smc->dev, "mmio/wait: interrupt missed, reverting to polling\n");
+> +	}
+> +
+> +	for (ms = SMC_TIMEOUT_MS; ms != 0; ms--) {
+> +		if (ioread8(smc->iomem_base + SMC_MMIO_KEY_STATUS) & 0x20)
 
-kernel/power/suspend.c:suspend_enter() {
-	if (state =3D=3D PM_SUSPEND_TO_IDLE) {
-		s2idle_loop();
-		goto Platform_wake;
-	}
-}
+Name the literal with a define.
 
-Wouldn't that leave rk808->irq masked in the GPIO hardware throughout
-s2idle_loop(), preventing the PMIC power key or RTC alarm from waking the
-system from s2idle?
+> +			return 0;
+> +
+> +		fsleep(1000);
+> +	}
+> +	dev_dbg(smc->dev, "mmio/wait: timeout");
+> +	return -ETIMEDOUT;
+> +}
+> +
+> +static int apple_smc_acpi_mmio_read(struct apple_smc_acpi *smc, u8 cmd, smc_key key,
+> +		void *buffer, size_t len)
+> +{
+> +	u8 ret;
+> +
+> +	reinit_completion(&smc->cmd_done);
+> +	apple_smc_acpi_mmio_clear(smc);
+> +	iowrite32be(key, smc->iomem_base + SMC_MMIO_KEY_NAME);
+> +	iowrite8(0, smc->iomem_base + SMC_MMIO_KEY_SMC_ID);
+> +	iowrite8(cmd, smc->iomem_base + SMC_MMIO_KEY_CMD);
+> +
+> +	if (apple_smc_acpi_mmio_wait(smc))
+> +		return -EIO;
+> +
+> +	ret = ioread8(smc->iomem_base + SMC_MMIO_KEY_CMD);
+> +	if (ret) {
+> +		dev_dbg(smc->dev, "mmio/read: read failed, ret: 0x%X, key: 0x%X\n", ret, key);
+> +		return -ret;
+> +	}
+> +
+> +	memcpy_fromio(buffer, smc->iomem_base + SMC_MMIO_KEY_DATA, len);
+> +	return 0;
+> +}
+> +
+> +static int apple_smc_acpi_mmio_write(struct apple_smc_acpi *smc, smc_key key, const void *buffer,
+> +		size_t len)
+> +{
+> +	u8 ret;
+> +
+> +	reinit_completion(&smc->cmd_done);
+> +	apple_smc_acpi_mmio_clear(smc);
+> +	iowrite32be(key, smc->iomem_base + SMC_MMIO_KEY_NAME);
+> +	memcpy_toio(smc->iomem_base + SMC_MMIO_KEY_DATA, buffer, len);
+> +	iowrite8(len, smc->iomem_base + SMC_MMIO_KEY_DATA_LEN);
+> +	iowrite8(0, smc->iomem_base + SMC_MMIO_KEY_SMC_ID);
+> +	iowrite8(SMC_MSG_WRITE_KEY, smc->iomem_base + SMC_MMIO_KEY_CMD);
+> +
+> +	if (apple_smc_acpi_mmio_wait(smc))
+> +		return -EIO;
+> +
+> +	ret = ioread8(smc->iomem_base + SMC_MMIO_KEY_CMD);
+> +	if (ret) {
+> +		dev_dbg(smc->dev, "mmio/write: write failed, ret: 0x%X, key: 0x%X\n", ret, key);
+> +		return -ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int apple_smc_acpi_mmio_get_key_info(struct apple_smc_acpi *smc, smc_key key,
+> +					struct apple_smc_key_info *info)
+> +{
+> +	u8 ret;
+> +
+> +	reinit_completion(&smc->cmd_done);
+> +	apple_smc_acpi_mmio_clear(smc);
+> +	iowrite32be(key, smc->iomem_base + SMC_MMIO_KEY_NAME);
+> +	iowrite8(0, smc->iomem_base + SMC_MMIO_KEY_SMC_ID);
+> +	iowrite8(SMC_MSG_GET_KEY_INFO, smc->iomem_base + SMC_MMIO_KEY_CMD);
+> +	if (apple_smc_acpi_mmio_wait(smc))
+> +		return -EIO;
+> +
+> +	ret = ioread8(smc->iomem_base + SMC_MMIO_KEY_CMD);
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261029-dev-tiger-=
-v7-4-pre-20261028-tiger-suspend-b4-v1-0-cb12621c1fb4@cherry.de?part=3D2
+Don't name non-return-value variables "ret".
+
+> +	if (ret) {
+> +		dev_dbg(smc->dev, "mmio/get_key_info failed, ret: 0x%X, key: 0x%X\n", ret, key);
+> +		return -ret;
+> +	}
+
+Largely identical to another function above? Add a helper?
+
+> +	if (!info)
+> +		return 0;
+> +	info->type_code = cpu_to_be32(ioread32(smc->iomem_base + SMC_MMIO_KEY_DATA));
+> +	info->size = ioread8(smc->iomem_base + 5);
+> +	info->flags = ioread8(smc->iomem_base + 6);
+
+Name the literal indexes with defines.
+
+> +
+> +	return 0;
+> +}
+> +
+> +static void apple_smc_acpi_shutdown_work(struct work_struct *work)
+> +{
+> +	orderly_poweroff(true);
+> +}
+> +
+> +static void apple_smc_acpi_notifier_work(struct work_struct *work)
+> +{
+> +	struct apple_smc_acpi *smc =
+> +		container_of(work, struct apple_smc_acpi, notifier_work);
+> +
+> +	unsigned long flags;
+> +	uint8_t event;
+
+Kernel uses u8 for internal variables.
+
+> +
+> +	for (;;) {
+> +		spin_lock_irqsave(&smc->event_lock, flags);
+> +
+> +		if (!kfifo_get(&smc->event_fifo, &event)) {
+> +			spin_unlock_irqrestore(&smc->event_lock, flags);
+
+Please use scoped_guard() to avoid having to split unlock paths.
+
+> +			break;
+> +		}
+> +		spin_unlock_irqrestore(&smc->event_lock, flags);
+> +
+> +		blocking_notifier_call_chain(&smc->event_handlers, event, NULL);
+> +	}
+> +}
+> +
+> +static irqreturn_t apple_smc_acpi_irq(int irq, void *data)
+> +{
+> +	struct apple_smc_acpi *smc = data;
+> +	uint8_t status = 0, int_id = 0;
+> +	unsigned long flags;
+> +
+> +	if (smc->is_mmio) {
+> +		status = ioread8(smc->iomem_base + SMC_MMIO_KEY_INTERRUPT_STATUS);
+> +		if ((status & 0x20) == 0 && status != 0)
+> +			return IRQ_HANDLED;
+> +	} else {
+> +		status = inb(smc->port_base + SMC_IO_CMD_PORT);
+> +		if ((status & 0x40) == 0 && status != 0)
+
+Name the literals with a define x2
+
+(...) == 0 => !(...)
+
+> +			return IRQ_HANDLED;
+> +	}
+> +
+> +	int_id = inb(smc->port_base + 0x1F);
+> +	switch (int_id) {
+> +	case 0x4B: // SMC Command done
+
+Don't add comments like this at all but make all those named defines,
+you clearly seem to know about they are so name them accordingly.
+
+> +		complete(&smc->cmd_done);
+> +		break;
+> +	case 0x40: // Shutdown Imminet
+> +		schedule_work(&smc->shutdown_work);
+> +		break;
+> +	case 0x41: // bridgeOS Crash
+> +		dev_crit(smc->dev, "BridgeOS Crashed!!!\n");
+> +		break;
+> +	case 0x2A: // ALS Change
+> +	case 0x54: // Thermal Level Changed
+> +	case 0x55: // PlatformFuntion
+> +	case 0x60: // SMS Drop
+> +	case 0x69: // SMS Orientation
+> +	case 0x6F: // SMS Shock
+> +	case 0x80: // PLimit Changed
+> +		spin_lock_irqsave(&smc->event_lock, flags);
+> +		if (!kfifo_put(&smc->event_fifo, int_id))
+> +			dev_warn_ratelimited(smc->dev, "Notification lost: %u\n", int_id);
+> +
+> +		spin_unlock_irqrestore(&smc->event_lock, flags);
+> +
+> +		schedule_work(&smc->notifier_work);
+> +		break;
+> +	}
+> +
+> +	return IRQ_HANDLED;
+> +}
+> +
+> +static acpi_status apple_smc_acpi_walk_resources(struct acpi_resource *res,
+> +	void *data)
+
+Please align to ( or just use one line (you have long lines below anyway 
+so I don't know why you split this one).
+
+> +{
+> +	struct apple_smc_acpi *smc = data;
+> +	int ret = 0;
+
+Why you need to init this?
+
+> +
+> +	switch (res->type) {
+> +	case ACPI_RESOURCE_TYPE_IO:
+> +		if (!smc->has_port) {
+> +			if (res->data.io.address_length < SMC_IO_NR_PORTS)
+> +				return AE_ERROR;
+> +			smc->port_base = res->data.io.minimum;
+> +			smc->has_port = true;
+> +		}
+> +		return AE_OK;
+> +
+> +	case ACPI_RESOURCE_TYPE_FIXED_MEMORY32:
+> +		if (!smc->is_mmio) {
+> +			if (res->data.fixed_memory32.address_length < SMC_MMIO_MIN_SIZE) {
+> +				dev_dbg(smc->dev, "found mmio support but its too small: %u\n",
+> +					res->data.fixed_memory32.address_length);
+> +				return AE_OK;
+> +			}
+> +			smc->iomem_base_addr = res->data.fixed_memory32.address;
+> +			smc->iomem_base_size = res->data.fixed_memory32.address_length;
+> +			smc->is_mmio = true;
+> +		}
+> +		return AE_OK;
+> +
+> +	case ACPI_RESOURCE_TYPE_IRQ:
+> +		ret = devm_request_irq(smc->dev, res->data.irq.interrupts[0],
+> +					apple_smc_acpi_irq,
+> +					0, "macsmc-acpi", smc);
+
+Align to (
+
+> +		if (ret < 0) {
+> +			dev_dbg(smc->dev, "Unable to register interrupts\n");
+> +			smc->has_interrupt = false;
+> +			return AE_OK;
+> +		}
+> +		smc->has_interrupt = true;
+> +		return AE_OK;
+> +
+> +	case ACPI_RESOURCE_TYPE_END_TAG:
+> +		if (smc->has_port)
+> +			return AE_OK;
+> +		else
+> +			return AE_NOT_FOUND;
+
+Preferrably handle error first by reversing the logic.
+
+Using else in such a construct unnecessary and should be dropped.
+
+> +
+> +	default:
+> +		return AE_OK;
+> +	}
+> +}
+> +
+> +static void apple_smc_acpi_try_enable_mmio(struct apple_smc_acpi *smc)
+> +{
+> +	if (!smc->is_mmio)
+> +		return;
+> +
+> +	u8 ldkn;
+
+Wrong place.
+
+> +
+> +	smc->iomem_base = ioremap(smc->iomem_base_addr, smc->iomem_base_size);
+> +	if (!smc->iomem_base)
+> +		goto out;
+> +
+> +	if (ioread8(smc->iomem_base + SMC_MMIO_KEY_STATUS) == 0xFF) {
+> +		dev_dbg(smc->dev, "mmio enable failed: init status is 0xff\n");
+> +		goto out_iomem;
+> +	}
+> +
+> +	if (apple_smc_acpi_mmio_read(smc, SMC_MSG_READ_KEY, SMC_KEY(LDKN), &ldkn, 1)) {
+
+sizeof(ldkn) ?
+
+> +		dev_dbg(smc->dev, "mmio enable failed: ldkn read failed\n");
+> +		goto out_iomem;
+> +	}
+> +
+> +	if (ldkn < 2) {
+> +		dev_dbg(smc->dev, "mmio enable failed: ldkn version less than 2\n");
+> +		goto out_iomem;
+> +	}
+> +	return;
+> +
+> +out_iomem:
+> +	iounmap(smc->iomem_base);
+> +out:
+> +	smc->is_mmio = false;
+> +}
+> +
+> +static void apple_smc_acpi_try_enable_interrupts(struct apple_smc_acpi *smc)
+> +{
+> +	if (!smc->has_interrupt)
+> +		return;
+> +
+> +	const u8 enable = 1;
+> +	int ret;
+
+These are in wrong place.
+
+> +
+> +	if (smc->is_mmio)
+> +		ret = apple_smc_acpi_mmio_write(smc, SMC_KEY(NTOK), &enable, 1);
+> +	else
+> +		ret = apple_smc_acpi_port_write(smc, SMC_KEY(NTOK), &enable, 1);
+> +
+> +	if (ret < 0) {
+> +		dev_dbg(smc->dev, "Unable to enable interrupts\n");
+> +		smc->interrupt_enabled = 0;
+> +		return;
+> +	}
+> +
+> +	smc->interrupt_enabled = 1;
+> +}
+> +
+> +static int apple_smc_acpi_read(void *cookie, smc_key key, void *buf, size_t size)
+> +{
+> +	struct apple_smc_acpi *smc = cookie;
+> +	int ret;
+> +
+> +	if (smc->is_mmio)
+> +		ret = apple_smc_acpi_mmio_read(smc, SMC_MSG_READ_KEY,
+> +			key, buf, size);
+> +	else
+> +		ret = apple_smc_acpi_port_read(smc, SMC_MSG_READ_KEY,
+> +			key, buf, size);
+> +
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	return size;
+> +
+> +}
+> +
+> +static int apple_smc_acpi_write(void *cookie, smc_key key, const void *buf, size_t size)
+> +{
+> +	struct apple_smc_acpi *smc = cookie;
+> +	int ret;
+> +
+> +	if (smc->is_mmio)
+> +		ret = apple_smc_acpi_mmio_write(smc, key, buf, size);
+> +	else
+> +		ret = apple_smc_acpi_port_write(smc, key, buf, size);
+> +
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	return size;
+> +}
+> +
+> +static int apple_smc_acpi_get_key_by_index(void *cookie, int index, smc_key *key)
+> +{
+> +	struct apple_smc_acpi *smc = cookie;
+> +
+> +	if (smc->is_mmio)
+> +		return apple_smc_acpi_mmio_read(smc, SMC_MSG_GET_KEY_BY_INDEX, (smc_key) index,
+> +				key, 4);
+> +	else
+> +		return apple_smc_acpi_port_read(smc, SMC_MSG_GET_KEY_BY_INDEX, (smc_key) index,
+> +				key, 4);
+> +
+> +}
+> +
+> +static int apple_smc_acpi_get_key_info(void *cookie, smc_key key,
+> +		struct apple_smc_key_info *info)
+> +{
+> +	struct apple_smc_acpi *smc = cookie;
+> +
+> +	if (smc->is_mmio)
+> +		return apple_smc_acpi_mmio_get_key_info(smc, key, info);
+> +	else
+> +		return apple_smc_acpi_port_get_key_info(smc, key, info);
+> +
+> +}
+> +
+> +static void apple_smc_acpi_notifications(void *cookie)
+> +{
+> +	const u8 buf = 0;
+> +
+> +	apple_smc_acpi_write(cookie, SMC_KEY(NTOK), &buf, 1);
+
+sizeof()
+
+> +}
+> +
+> +static const struct apple_smc_backend_ops apple_smc_acpi_be_ops = {
+> +	.read = apple_smc_acpi_read,
+> +	.write = apple_smc_acpi_write,
+> +	.get_key_by_index = apple_smc_acpi_get_key_by_index,
+> +	.get_key_info = apple_smc_acpi_get_key_info,
+> +	.disable_notifications = apple_smc_acpi_notifications,
+> +};
+> +
+> +static int apple_smc_acpi_probe(struct platform_device *pdev)
+> +{
+> +	struct acpi_device *adev = ACPI_COMPANION(&pdev->dev);
+> +	struct apple_smc_acpi *smc;
+> +	acpi_status status;
+> +
+> +	smc = devm_kzalloc(&pdev->dev, sizeof(*smc), GFP_KERNEL);
+> +	if (!smc)
+> +		return -ENOMEM;
+> +
+> +	smc->dev = &pdev->dev;
+> +	init_completion(&smc->cmd_done);
+> +	status = acpi_walk_resources(adev->handle, METHOD_NAME__CRS,
+> +				apple_smc_acpi_walk_resources, smc);
+> +
+> +	if (ACPI_FAILURE(status))
+> +		return -ENODEV;
+> +
+> +	apple_smc_acpi_try_enable_mmio(smc);
+> +	BLOCKING_INIT_NOTIFIER_HEAD(&smc->event_handlers);
+> +	INIT_WORK(&smc->shutdown_work, apple_smc_acpi_shutdown_work);
+> +	INIT_WORK(&smc->notifier_work, apple_smc_acpi_notifier_work);
+
+Don't these need cancelling on remove?
+
+> +	spin_lock_init(&smc->event_lock);
+> +	INIT_KFIFO(smc->event_fifo);
+> +	apple_smc_acpi_try_enable_interrupts(smc);
+> +
+> +	return apple_smc_probe(smc->dev, &apple_smc_acpi_be_ops, smc, &smc->event_handlers, true);
+> +}
+> +
+> +static int apple_smc_acpi_resume(struct device *dev)
+> +{
+> +	struct apple_smc *smc = dev_get_drvdata(dev);
+> +	struct apple_smc_acpi *smc_acpi = smc->be_cookie;
+> +
+> +	/* NTOK may be set to 0 on resume */
+> +	if (smc_acpi->interrupt_enabled) {
+> +		smc_acpi->interrupt_enabled = 0;
+> +		apple_smc_acpi_try_enable_interrupts(smc_acpi);
+> +	}
+> +	return 0;
+> +}
+> +
+> +static const struct dev_pm_ops apple_smc_acpi_ops = {
+> +	.resume = apple_smc_acpi_resume,
+> +};
+> +
+> +static const struct acpi_device_id apple_smc_acpi_ids[] = {
+> +	{"APP0001", 0},
+> +	{"", 0},
+
+{}
+
+No comma on the terminator.
+
+> +};
+> +MODULE_DEVICE_TABLE(acpi, apple_smc_acpi_ids);
+> +
+> +static struct platform_driver apple_smc_acpi_driver = {
+> +	.probe = apple_smc_acpi_probe,
+> +	.driver = {
+> +		.name = "macsmc-acpi",
+> +		.acpi_match_table = apple_smc_acpi_ids,
+> +		.pm = &apple_smc_acpi_ops,
+> +	},
+> +};
+> +module_platform_driver(apple_smc_acpi_driver);
+> +
+> +MODULE_AUTHOR("Atharva Tiwari <atharvatiwarilinuxdev@gmail.com>");
+> +MODULE_LICENSE("Dual MIT/GPL");
+> +MODULE_DESCRIPTION("Apple SMC ACPI backend");
+> +MODULE_DEVICE_TABLE(acpi, apple_smc_acpi_ids);
+> 
+
+-- 
+ i.
+
