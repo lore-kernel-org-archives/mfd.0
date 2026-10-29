@@ -1,56 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793285699;
-	b=EgRvD8fyKmyq61pm13y1oWn7QWkhvkE67Ib1h4oicgVA0blOV0zQU28XR/sqJoKuVgF7
-	 UeTpEHmLKh0Ba5si19sBMQWkknKRW3IIOx5Jt1wr8c8wqX62HmBSklspZ0XKIHPu/DLyl
-	 Xu8Uq8i9+zSzJov5oZ+Lx372HoxECxosbTt6+RdK/hTzuE8RNcf2GRDu4CbypuR/2oMil
-	 AsrKpdZz2sIuseZ3YnblIj91TI8r91kpFNGZkcIWVCkTzyNvp1uhtmLzUm6J46XC39UpK
-	 cgbv/DKfMtEUoGZe5imuPVtmKkToRhESYbXh0Cge7bn2ogt68EZKtjjhwK5bng6CyIw==
+	t=1793285841;
+	b=j1WfAjzpGQV9/RI+fkK7J23YsiLIw3WaQ7RIUm3UwzrKXokoLpOEM2KmVla8DgwP/XTq
+	 voCEgRrKEOvgozbWqhBPgY9ZTf9wzNqvmQfz/h7pyuUlTjINmMVWqxBJyuXSgoPkXGyRR
+	 LeLvuCujfmthGyFQGZTjb+b2XOuRVMqjxidtHumzyr1X1QZcS4tJd/GrusbN5C1jfAXjv
+	 uRDXe3+fyETagfldkZD464hd8SCZcUyorHjoCkPMrDsV8//kECEiQQibVcuEb9WjGV8A1
+	 jkTAwauasIy2OmCwHo4zHweI+zJzuJ6bwBT1E36baQ32gxMle6r1KfWpN1hJNzWMNmQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793285699;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793285841;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=1pLK8Y9oFyrrAeii39TsMIuWjANvy9SWizA21KobJCI=;
-	b=yPNEIYxJJl5fzUtXuzaX3IRT9CbufNYMfNtkBLBs59D3Ex1anVTclxob+U5esno/3OE1
-	 LOczxbBentm/YR+8QNKRgMec9LoXqIifEqzDyYSUggVPQqxi0qrFUxVa+v4xuZhw7h2A3
-	 4A/Gd9sFbuLqsLrXYKffreFIkMxJXgtXaMLYv0LhF+GprcX/AiPfJ6JasER4nBVw/rOHx
-	 ko+U3xiB7e57yU3mull5QEV+JvJ7dxEv3Jb8IaoJ9RdUsmbE3wI7S5haX7IvD0W4Oy1Nl
-	 NVX9N8qkMV5GAT1O65y2QXuH+rVfhITU5es/QkGjc3HtvjpWHTYPigiEdRrOCOLyixA==
+	bh=U+2ydOmNxdFcp2uzdWp9Gv/U50gZkw/vvEZzNifIXlo=;
+	b=SHPyURPqzcME2qfxc+j85CVPvWg/jIqEiKQWwLrdUtn7m1JqSo5lIIvTABtGSA74GuEv
+	 nX7bC1mn/Q7ws9wIFDAqd7YVDVB94v1zI2TSLQ6cNEHyrb/VRZvSzgLim7KACb6L4Zi6A
+	 ddo6HtaojH5eKh4+eqiP6HWqXNuoPagsoACtLXU/yqETmFBmPA8wCJCRNEu3ae+VS+4zp
+	 svRJwAvQX2yBJLYzW9Xyt9AEZwAM+7cLDWa3AoyDZIu+B9YA5vJKEAY0+yKcQxily+gOr
+	 8OXhZt5k0Ph5aXu4rVfoPN11D1qM+kWlOQ1ZvSDDz1CqwYY8LktehX7pztyUcp1nZPA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HKtio6eV;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=e87iFxTe;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BB6D606A31D
-	for <mfd@lists.linux.dev>; Thu, 29 Oct 2026 14:54:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76785606A31F;
+	Thu, 29 Oct 2026 14:57:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HKtio6eV
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E53261F01825;
-	Thu, 29 Oct 2026 14:54:58 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=e87iFxTe
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C0E81F01825;
+	Thu, 29 Oct 2026 14:57:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793285699;
-	bh=1pLK8Y9oFyrrAeii39TsMIuWjANvy9SWizA21KobJCI=;
+	s=k20260515; t=1793285841;
+	bh=U+2ydOmNxdFcp2uzdWp9Gv/U50gZkw/vvEZzNifIXlo=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=HKtio6eVl+AWuQIfSbYADBTTALnbjUqAqok5an9EU2s+jAc6RYODstRhCyPzvo5R0
-	 hMguNUu4CXKTjUS2RDyGE6JEgzwx996+Z8Nx97vmPxTc8VqvbDxCuFkNRsEolkTwZ4
-	 2B8hdv0RmqsjcmcIryKBSrdsZf3RUT4noDWVtGHSezaxEKNVu8piV3dLi/l/48yPK1
-	 hpBJXVGo0RXJldqFfsF/OzbXCebUKrVw4a8bdSaLPDcv9qmNMYK71AqYDzRVGm9hvw
-	 aEe3EE1c4HRtC7E5DUK3dZtom/0ao68MrFqJpSXvf/rVosCJrdQaDDyea4ypLv19FP
-	 b/vy3+rFIqRnQ==
-Message-ID: <sashiko-outbox-189557@kernel.org>
+	b=e87iFxTeM3BaGTTSEFSGjZwq6NojB9gGZQIQHFRm/lUiarzF8f7u5ziby3ipkmH3Y
+	 F2tLvGlte0ZBRGWJ0C0aNjshFcEGEq4B2x1NiW/Pc0KuneJKkqCXRQA7iCjaBmnxTN
+	 Tuv2SnbRRzHp1MyZjVoe9q/C3x/yiZ0vTMHOEjp76V8nbR+Q42cY7DfU1SXc14BT0L
+	 ITtq/r8Vg0WlI8fY9DY/ing+vwy9Kc9kOFayWUp9zIeJCN2pNRhwMA5Y7dibeSPHn9
+	 Ok1ka4t6Y4J3B2YYtzhFZ3bzs8ppkZRJ5BMguHdebyD2LiyWt4ft+xWWaJVZEvmtkr
+	 8nya3YnjoPQLg==
+Message-ID: <sashiko-outbox-189560@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v9 3/4] gpio: aaeon: Add GPIO driver for SRG-IMX8P MCU
+Subject: Re: [PATCH v9 4/4] watchdog: aaeon: Add watchdog driver for
+ SRG-IMX8P MCU
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?VGhvbWFzIFBlcnJvdCAoU2NobmVpZGVyIEVsZWN0cmljKQ==?= <thomas.perrot@bootlin.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261029-dev-b4-aaeon-mcu-driver-v9-3-f9b6d0cc180d@bootlin.com>
+Cc: devicetree@vger.kernel.org, linux-gpio@vger.kernel.org, imx@lists.linux.dev, linux-watchdog@vger.kernel.org, mfd@lists.linux.dev, robh@kernel.org, conor+dt@kernel.org, Frank.Li@kernel.org, lee@kernel.org
+In-Reply-To: <20261029-dev-b4-aaeon-mcu-driver-v9-4-f9b6d0cc180d@bootlin.com>
 References: <20261029-dev-b4-aaeon-mcu-driver-v9-0-f9b6d0cc180d@bootlin.com>
- <20261029-dev-b4-aaeon-mcu-driver-v9-3-f9b6d0cc180d@bootlin.com>
+ <20261029-dev-b4-aaeon-mcu-driver-v9-4-f9b6d0cc180d@bootlin.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 29 Oct 2026 14:54:58 +0000
+Date: Thu, 29 Oct 2026 14:57:20 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,28 +61,62 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> Add GPIO driver for the Aaeon SRG-IMX8P embedded controller. This
-> driver supports 7 GPO (General Purpose Output) pins and 12 GPIO pins
-> that can be configured as inputs or outputs.
->=20
-> The driver implements proper state management for GPO pins (which are
-> output-only) and full direction control for GPIO pins. During probe,
-> all pins are reset to a known state (GPOs low, GPIOs as inputs) to
-> prevent undefined behavior across system reboots, as the MCU does not
-> reset GPIO states on soft reboot.
->=20
-> Co-developed-by: J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <jere=
-mie.dautheribes@bootlin.com>
-> Signed-off-by: J=C3=A9r=C3=A9mie Dautheribes (Schneider Electric) <jeremi=
-e.dautheribes@bootlin.com>
-> Acked-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-> Reviewed-by: Linus Walleij <linusw@kernel.org>
-> Signed-off-by: Thomas Perrot (Schneider Electric) <thomas.perrot@bootlin.=
-com>
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
+s) to consider:
+- [Low] watchdog: aaeon: missing kernel-parameters.txt entry for timeout pa=
+ram
+--
 
-Sashiko has reviewed this patch and found no issues.
+commit 56cdb5c8b2505a3a5bbfb7ace81364353e737628
+Author: Thomas Perrot (Schneider Electric) <thomas.perrot@bootlin.com>
+
+watchdog: aaeon: Add watchdog driver for SRG-IMX8P MCU
+
+This commit adds a watchdog driver for the Aaeon SRG-IMX8P onboard
+microcontroller, supporting configurable software timeouts via ioctl,
+Device Tree, or a module parameter.
+
+[ ... ]
+
+> diff --git a/drivers/watchdog/aaeon_mcu_wdt.c b/drivers/watchdog/aaeon_mc=
+u_wdt.c
+> new file mode 100644
+> index 0000000000000..beded3d6326fd
+> --- /dev/null
+> +++ b/drivers/watchdog/aaeon_mcu_wdt.c
+> @@ -0,0 +1,171 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Aaeon MCU Watchdog driver
+> + *
+> + * Copyright (C) 2026 Bootlin
+> + * Author: J=C3=A9r=C3=A9mie Dautheribes <jeremie.dautheribes@bootlin.co=
+m>
+> + * Author: Thomas Perrot <thomas.perrot@bootlin.com>
+> + */
+> +
+> +#include <linux/mfd/aaeon-mcu.h>
+> +#include <linux/module.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/regmap.h>
+> +#include <linux/watchdog.h>
+> +
+> +#define AAEON_MCU_PING_WDT		0x73
+> +
+> +#define AAEON_MCU_WDT_TIMEOUT		240
+> +#define AAEON_MCU_WDT_HEARTBEAT_MS	25000
+> +/* The MCU cannot expire earlier than its fixed heartbeat. */
+> +#define AAEON_MCU_WDT_MIN_TIMEOUT	(AAEON_MCU_WDT_HEARTBEAT_MS / 1000)
+> +
+> +static unsigned int timeout;
+> +module_param(timeout, uint, 0);
+> +MODULE_PARM_DESC(timeout, "Watchdog timeout in seconds");
+
+[Severity: Low]
+Should this new timeout module parameter (accessible on the kernel command
+line as aaeon_mcu_wdt.timeout) also be documented in
+Documentation/admin-guide/kernel-parameters.txt?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261029-dev-b4-aae=
-on-mcu-driver-v9-0-f9b6d0cc180d@bootlin.com?part=3D3
-
+on-mcu-driver-v9-0-f9b6d0cc180d@bootlin.com?part=3D4
