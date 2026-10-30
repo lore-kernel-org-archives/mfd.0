@@ -1,114 +1,72 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=44.202.169.35
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793374109;
-	b=tdjr5FdogUhUyX03Yn1Pfh0Az8nFSz/jEbnqq6OXyEGTtsxHztokyC+IRoW1EQvw3Zfi
-	 HOySXHX6E14GmTMi3sghKzsZaSEcgUSLLDlZTDhOd5D0wQTN5vR5+VbIdh4FKHmMfBhbc
-	 igui2P1mUqyEsg0bruQJ1z2/ApP7NQb88m6xJM/Z0hDdWQco4uRVgovbuC1BqQjExnUT/
-	 KZcuadogtgw8RJWwNM4Xc5MbRFrFlgAmvYYze1MFPFfjPVrFddwRA6zIY2xJp82Ga53Q8
-	 OlGx375LZJpzENPhQFsMn2jnD+0j9Kvg+FrtfQOKt/vJXV/x/PrdkJ4sL38D5t6nqhw==
+	t=1793374671;
+	b=d43Ixg1MwVGI/4Mlktnx+q4Q8IdX5icKPJNJMw+741yKfMYi2zX7LdoosT4SOLDE98PA
+	 r7WqnQ5Pd//LnpzvxluJgxX1+T7AtBNvcSsScdOqdWv5zObKxqgwZxrTxcKzq/KWMQl9h
+	 Kc60DRFL+EMxW5zYtJFR88o09yWzOBvOv3saue1mkp9b6U6M4th6A3cYeMJom7udjPb9a
+	 N5xm7kwLfhmXa2F8So29hlcAhPe9Ik769nIMAeztSOY0YOBkaI89r/IhZDvO1Zw0MFuPW
+	 7vHDnHbPbVxlBlYS8Wi/7B0+oiYIdpLsOARR4hw8XOehs3z64qkoVubaVznHJ9e6qPw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793374109;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
-	 Subject:Date:Message-ID:X-Mailer:MIME-Version:X-Developer-Signature:
-	 X-Developer-Key:Content-Transfer-Encoding:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=zbO/9T2WTPunnoMhOWAiSp41nG3mYh7EnFdKhIIYMKc=;
-	b=x+vPgRgt2PFkH3Y6HNYpHmDkTnNOSD40QrjG+7VyN3WssDM4pv47IqfO8YvjduIUTM5U
-	 hGapwyjgf5BfVmRjeaWWI2WWN0ask5ewBueNictPc9eRUK0TPvKe1q9KMWmzg69U5saFI
-	 1aAT8IWM5dMR2LkQvEanQx+uR5t5CzUeDyIUBPwzOmLe9JtGER1ogLCMN2CRUCvpTL/iD
-	 9ZVayNfDkDiMaV06Dsjt8aM+H8KZ2spkan82WhjfjOmY+busbMOXGKqhD75pyq0z/O9qO
-	 ci1e++CsiXYm1LKTlu94iUbqS+Pj/BAaHJnKVshDQyLd3c4LMuO6SmesdwIiiDwoiUg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793374671;
+	h=DMARC-Filter:Received:Received:X-Authority-Analysis:DKIM-Signature:
+	 Received:Message-ID:Date:MIME-Version:User-Agent:Subject:To:
+	 References:Content-Language:From:Autocrypt:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-AntiAbuse:X-AntiAbuse:X-AntiAbuse:
+	 X-AntiAbuse:X-AntiAbuse:X-BWhitelist:X-Source-IP:X-Source-L:X-Exim-ID:
+	 X-Source:X-Source-Args:X-Source-Dir:X-Source-Sender:X-Source-Auth:
+	 X-Email-Count:X-Org:X-Source-Cap:X-Local-Domain:X-CMAE-Envelope;
+	bh=Eb083Lhc9S6Iyxxmprup0mjMXvghWUY0aQYzPG3iQiA=;
+	b=uKJCf1sqoXfWifsPX6Hw84V8zZ6jDx+5qAfQ8FM5Bv4g+b+C8Zh/Xz5FTh9tjFqIkMnQ
+	 /fufLjo8voL8uf/2zlEwS9EkWNjR49drI2NvgMNqgddY83QnxvamPsiUiPupnhVo3G7LX
+	 PUmnRByZ4OAUcSYrivFmgdqoCEnlIOoDHQcVFF6zQaNPBFB5Gsu/aCXUEPCamKe6WuG4s
+	 xus1pzgCXq0qkubMGYQpncsXK4Uw45pA0nMUcIdHsh2PRFTGW6cDOidXb7nZjqhMPZPpR
+	 9D9xKCjCVr1GFAhrU7U9ll3fBuU2gfZujYdKxhGjAB3LgvJbGSOFFtD/AZSr97CDt7w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=U+3+fxFw;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=WPunMv3m;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=none header.from=roeck-us.net;
+	spf=fail smtp.mailfrom=roeck-us.net;
+	dkim=pass header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=4rrdJh7a;
+	arc=none smtp.remote-ip=44.202.169.35
+Received: from omta036.useast.a.cloudfilter.net (omta036.useast.a.cloudfilter.net [44.202.169.35])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C0B6606A31F
-	for <mfd@lists.linux.dev>; Fri, 30 Oct 2026 15:28:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5C0B6606A31F
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CC11606A322
+	for <mfd@lists.linux.dev>; Fri, 30 Oct 2026 15:37:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4CC11606A322
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=roeck-us.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=U+3+fxFw;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=WPunMv3m
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 69UERM5J2968204
-	for <mfd@lists.linux.dev>; Fri, 30 Oct 2026 15:28:28 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=zbO/9T2WTPunnoMhOWAiSp41nG3mYh7EnFd
-	KhIIYMKc=; b=U+3+fxFwbUycfEfDWzdEZEkezQkkmX5LhHYrXiKTKDmXAhAZAmX
-	Ouc0e4EpDLJZ+tRPg5gGMM0QOnCKLEHj2+0TtUo1I1zMZ0ISFR2xN66sXTJzP4YW
-	LoeoUnS8frQyxbD65ILv9il06sYulY5YGkY47LHB8VANKEN+T17I6C4AvklrZ2+E
-	ZZOLiATmnONCPYJeFcHYab3hmFG7ekIH4KdEFn78kcSqgoBF8WRD15e+Dw8ITAp9
-	5x4d/70RGHVNITYdJrtQY1t6KMpgqxyFZXE4t6CT2ntYHwPp9c1L+QaV4cX9QRaE
-	Ski4NR74OILZ29kreLLAGIo0TdXc7iSxxkw==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hme6qkrdy-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <mfd@lists.linux.dev>; Fri, 30 Oct 2026 15:28:28 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93ce7a85f04so158329285a.0
-        for <mfd@lists.linux.dev>; Fri, 30 Oct 2026 08:28:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793374107; x=1793978907; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=zbO/9T2WTPunnoMhOWAiSp41nG3mYh7EnFdKhIIYMKc=;
-        b=WPunMv3mLj7ag3yWjjwRKyUTgKE2oSDDKd1Z/Qfri1KSl/6Ro52+fbsKmKxBdBRAl9
-         VKwOKeKigmztW9bl2+g/Wd1LbM+1KeujZbienx5QWJDvSiEtldYouU7jd3YxNuFZdI1K
-         ttqkH3ARLeMgOf3wQGzPY37YYvPbh0V6XefDlpVciAd1b51UMuiWbVEaU2LJNHJgWEAX
-         2AGFHa+TxHjPHdom+E/cQx8DZPO4lhvNEjfNC3YjTLfttsyyxFKOBCmH+rWRgLTniB+q
-         +Swphj9hQF+r3zkOQ1NwCrXzhoJ2XmaE0/XnjkDOMSubjaVA4znjhaoEJin1DalBCpHK
-         OulQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793374107; x=1793978907;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=zbO/9T2WTPunnoMhOWAiSp41nG3mYh7EnFdKhIIYMKc=;
-        b=miphKP9rcdTMU2GHZb4MA1RCLwrWu0RW4KJP69/esHCCXsR3cirCdPEfqAIa5rzIvU
-         6HQQJiuVfjNOVzpc85ZZIjSajCydipjstoaL/S/avaAAZ4f5smB/m+u0//x74wdU9lQq
-         ihVzdBq3wq7xnPuaosTTUQx9Bk43W+I9ZWeJDKiN2RO3SIPbUb8LWXG7P2/78OYA9d0Y
-         uExrufc/bNCanQAEqd4iT/y9/ujiE9bKCqC35XuYRHU7kET4q9kegFuy6DYgFGqHGtsC
-         Z7zXPlsiI8Z4uBVkzW+cnfZuDtTM8DGXP6/ONKTEgjyXWvjFziCQhJMvJ2U+QQqwEJxG
-         uGZw==
-X-Forwarded-Encrypted: i=1; AKwUvBwn6qsQQQDZcecq2HV3drZ8uxlc357y8RxLraXFJjGpVMw6LOAe+YQCZ10WNGc3zF86YlE=@lists.linux.dev
-X-Gm-Message-State: AFq9FYLMV+NWw2CprCsAamm27lQ369aCkFLN7BkWn4SVXXDXAq9xBo2s
-	/VUIVzU0xQgeWCWNBbowmHf7Doa+iHnK1nRxw4sFH3Meu8d5s0cT5sbbBX7/lEi//dByg2rp6fd
-	DIXHT6mOvk8BtaTuSEQ5uD0AitnATQRq+oPpsyzSVdwVBRhrW7CK2n4Q=
-X-Gm-Gg: AYBFou3J167Nk8tXXMA3X1czXanTQydcOzau7KCWwLKNEo7Vp6wcCnn8YYdSowvPX2t
-	JXa4ZVkw1ThS9VqDWRjQU0VUxtlELIZ9V3KGCFKzct1kp+U4WyB5WpQk3u8JYSpcgK+JKP67D6m
-	SD58os2HKjH+z8Eb+RmcHb/mtFzF8sUuwFahgdWbeEDvouEGPCBGvUpJxUC7mmaN5vQc8KF3EDx
-	DQoQT1ecif2QEyE57JE7wReNH6NUn6xbikvEuGtHUle2tnKmYMg4PpUsGsIvv7hUGY/In47Q0tg
-	P5ILnv+kPiepL5Lkp9n7Bb+wfxOjjLMnp4JeFOjYds9DYmi1rbQkY9KPcd/9Di8AfKb6EabFGs5
-	q3TNKEaswOxX0f5XlC5AD2kwxZiPRpUyw1BmYKv4F2kWe7MmxIEFPqmf8mO3oNg==
-X-Received: by 2002:a05:620a:480b:b0:93e:5fff:db07 with SMTP id af79cd13be357-9442175c1bemr457807085a.40.1793374107373;
-        Fri, 30 Oct 2026 08:28:27 -0700 (PDT)
-X-Received: by 2002:a05:620a:480b:b0:93e:5fff:db07 with SMTP id af79cd13be357-9442175c1bemr457799685a.40.1793374106734;
-        Fri, 30 Oct 2026 08:28:26 -0700 (PDT)
-Received: from quoll ([178.197.218.7])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4abf368bff7sm68611655e9.2.2026.10.30.08.28.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 Oct 2026 08:28:25 -0700 (PDT)
-From: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-To: Lee Jones <lee@kernel.org>, Guenter Roeck <linux@roeck-us.net>,
-        Wim Van Sebroeck <wim@linux-watchdog.org>, mfd@lists.linux.dev,
-        linux-kernel@vger.kernel.org, linux-hwmon@vger.kernel.org,
-        linux-watchdog@vger.kernel.org
-Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: [PATCH] MAINTAINERS: mfd: Drop MEN F21BMC (bouncing email)
-Date: Fri, 30 Oct 2026 16:28:22 +0100
-Message-ID: <20261030152821.283215-2-krzysztof.kozlowski@oss.qualcomm.com>
-X-Mailer: git-send-email 2.53.0
+	dkim=pass (2048-bit key, unprotected) header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=4rrdJh7a
+Received: from eig-obgw-5006b.ext.cloudfilter.net ([10.0.29.217])
+	by cmsmtp with ESMTPS
+	id MmlIxN4XELvgbMofuxPkat; Fri, 30 Oct 2026 15:37:50 +0000
+Received: from 162-215-252-36.unifiedlayer.com ([208.91.199.152])
+	by cmsmtp with ESMTPS
+	id Moftxp6KyNSXiMoftxNiVQ; Fri, 30 Oct 2026 15:37:50 +0000
+X-Authority-Analysis: v=2.4 cv=JvXxrN4C c=1 sm=1 tr=0 ts=6ae4b9ce
+ a=QNED+QcLUkoL9qulTODnwA==:117 a=2cfIYNtKkjgZNaOwnGXpGw==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=M0FbrtG7MMAA:10 a=EUspDBNiAAAA:8
+ a=_jlGtV7tAAAA:8 a=VwQbUJbxAAAA:8 a=ehfqsZ6UyqGNEVwpBysA:9 a=QEXdDO2ut3YA:10
+ a=nlm17XC03S6CtCLSeiRr:22 a=KPbNTLLc3YvdawN95zVk:22
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=roeck-us.net; s=default; h=Content-Transfer-Encoding:Content-Type:
+	In-Reply-To:From:References:To:Subject:MIME-Version:Date:Message-ID:Sender:
+	Reply-To:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+	List-Unsubscribe:List-Unsubscribe-Post:List-Subscribe:List-Post:List-Owner:
+	List-Archive; bh=Eb083Lhc9S6Iyxxmprup0mjMXvghWUY0aQYzPG3iQiA=; b=4rrdJh7acYmG
+	CXCYblfhWCeYV2jFGxSlDOq0j35sSrQcluKiiOOzoCIvwM/6EodrtGOMj5nkc+PdKXQ6d3PQ5AV8k
+	EMeV2S5OEP0Xt34UCMLFKZgJL+l1AniObzwXX8Gn8fVU+wOG40gfijeI54j6o/W4tCdYx/FmXy9Tv
+	lwd/COPSb+Ctc1wG31apOjCXAW16I4AMmrw4kGUzrPTDJ9vlQj+vk5cFJ+ZFT0SMkoKbjNtNFDi0x
+	pk27jBhxusmHYlu5ukH8qqnjexALbOWlSIZFsb0m9e+KS+tKmW0ZmunS4vf1aRy7Sb7wtrM/IQ6Fv
+	gfH7ntK1UQOZ1AeIg2vv2w==;
+Received: from 108-223-40-66.lightspeed.sntcca.sbcglobal.net ([108.223.40.66]:39764)
+	by bh-25.webhostbox.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.100.1)
+	(envelope-from <linux@roeck-us.net>)
+	id 1xMoft-00000001ayA-1Z98;
+	Fri, 30 Oct 2026 21:07:49 +0530
+Message-ID: <4b64860b-322b-4646-b132-0b75efb0086d@roeck-us.net>
+Date: Fri, 30 Oct 2026 08:37:48 -0700
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -118,82 +76,120 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1052; i=krzysztof.kozlowski@oss.qualcomm.com;
- h=from:subject; bh=kmNdPJPVrDCm9e0u73KRmJcOPX1/jig+MXW5yF+K7Dw=;
- b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBq5LeW67VWmOyJl9abzEjB7AZHf33RHGV+iUb9V
- o3xT37t19GJAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCauS3lgAKCRDBN2bmhouD
- 12TLD/9UHhzB9Z2iclhe4fo+vxrjjRArNxuOUcSc99LCrx/pP6rmMi851ehP1mZm9863/6NI7rP
- 9JiIol3rVgs1ak+t8fTNHW2KmiTKVUV/KUrAwjnee74F4/yfn92XwfJuQ+oPKHiVAfqgOkpaWVD
- k7zmsJrb2Bnu6KfvDzo1y5Oe4kjpsm7Un2+bHtPWBuuKi4T8HzcUSOn5xxLROvrp841M3H9j/m2
- 0b7Zgr5LWI76z+ITgmpNINDoJtTbUL0nZ4ebxk+ShswE4/OjJ03C+Fup5LonLaoessEACzVXxaL
- J45SWgIOBOU0mFZCmcmwhDWZH+/onIumakKmocioSQEL8d80e44NlUyDehk4F5ZJMIoe90rAy6O
- tQtUtjoWjJiqLRWUqdosDwq077Zfw0QVavmXC8TXVPf/tuckcEHtoEPxzumhWDDYTJOCquBXRxx
- wOdVRkcM2beCYpoZhSAE70Flps6QGuLQCsZAcAyiXCdp97MWwQxMJV4RDD111RKbDehYwYxUZkJ
- 0IijTO6Sw1AgXT2oYulLQj5HNfV8tBFaueHE41GorN0ueaEjz89SwRb3yA3itaTTlnqcFiu2D0B
- cG+O5Nne8q2rMBNQE4Gr7OF+UKbpvo4rVE0xlUGgOlMbhH1ry+aQ8poskus8B0glPkvPHhV1RJr c7uOwSrR+EZvlQw==
-X-Developer-Key: i=krzysztof.kozlowski@oss.qualcomm.com; a=openpgp; fpr=9BD07E0E0C51F8D59677B7541B93437D3B41629B
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDMwMDA2MSBTYWx0ZWRfX3HFq1CJey5X/
- GqIhMzCtUtMbEmP36rD7mCnGOakdemKTr5Gbc0GHDwvVAsdDopTCeTzuR/IG/kQpUM9s0EkgDz3
- Gr8gakg+B2AOoAYusmst8YVla4J0G+yN/fEMGO4M0kBBvkMyYBe+vaFp+iKN1cfWhiecMamg6Iu
- 1b0HH+X44SaVmoDcW/EHynAQQg2qi5W+O24CJdTaROPBQcqlFHDh/zgmN4DQ/rVQW8SOtobEPVD
- mNyoHVpZWbxFOw2H0Eh5S7mk3QLZR3cbHpu9NJ597HR6DZ6uu/yd+4WRH2Chp5FKg6AnA+mE/Mt
- OHvw1oXSga98SaQaPYNV/FJFztECAkMKp7PKteuUXR8fI+ytvhXYS0d1EjWShiR1e3H9kt/qb9A
- wh2ZlSVIBFtOQdRlhojLb85NY+oFWD51bvLL0Fe4NhLl57PA2rlUP/wIgKZo9UQaKhTd9NMHIvg
- I191Q4OPXE1147WoJ/A==
-X-Proofpoint-GUID: h9M-tobr0k3Ca27TOHRnjS0lXDFIvcRK
-X-Proofpoint-ORIG-GUID: h9M-tobr0k3Ca27TOHRnjS0lXDFIvcRK
-X-Authority-Analysis: v=2.4 cv=IumL47/g c=1 sm=1 tr=0 ts=6ae4b79c cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=uyPgTw0bjBTS2cVxpiNm5w==:17
- a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
- a=VwQbUJbxAAAA:8 a=2haQ2MhrNbTofsgfN2sA:9 a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDMwMDA2MSBTYWx0ZWRfX1h+i36LSHyS9
- 8utX82PE1Fc7vVlo05a3KPyGakfNtIp6+BEWsa51pldQAqQg8kYyOZmXquzazkxlfPSV/VYihON
- PBjLAbALRvvRBGMVKJ4X/kejd2agtII=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-30_05,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 adultscore=0 clxscore=1015 spamscore=0 bulkscore=0
- malwarescore=0 phishscore=0 lowpriorityscore=0 impostorscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610300061
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] MAINTAINERS: mfd: Drop MEN F21BMC (bouncing email)
+To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+ Lee Jones <lee@kernel.org>, Wim Van Sebroeck <wim@linux-watchdog.org>,
+ mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
+ linux-hwmon@vger.kernel.org, linux-watchdog@vger.kernel.org
+References: <20261030152821.283215-2-krzysztof.kozlowski@oss.qualcomm.com>
+Content-Language: en-US
+From: Guenter Roeck <linux@roeck-us.net>
+Autocrypt: addr=linux@roeck-us.net; keydata=
+ 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
+ np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
+In-Reply-To: <20261030152821.283215-2-krzysztof.kozlowski@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - bh-25.webhostbox.net
+X-AntiAbuse: Original Domain - lists.linux.dev
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - roeck-us.net
+X-BWhitelist: no
+X-Source-IP: 108.223.40.66
+X-Source-L: No
+X-Exim-ID: 1xMoft-00000001ayA-1Z98
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: 108-223-40-66.lightspeed.sntcca.sbcglobal.net [108.223.40.66]:39764
+X-Source-Auth: guenter@roeck-us.net
+X-Email-Count: 17
+X-Org: HG=direseller_whb_net_legacy;ORG=directi;
+X-Source-Cap: cm9lY2s7YWN0aXZzdG07YmgtMjUud2ViaG9zdGJveC5uZXQ=
+X-Local-Domain: yes
+X-CMAE-Envelope: MS4xfPeeyQ+VVeXf1NnjnaLsqLm/HbOk6NkdWHQBZB+YMHCvfsJySrldhZRouWlSEZ3x2mLIjv3ObRACh7xata3CizK0D6G8C+j7YH+y5L3HHQbndhIf7Zdp
+ T1lQsgAcQ5FbfMoqdI4GimDuvIPd7E7b79hrHNI4VE7UcYXieP2c8w4s+76C4bJODb+D0bygtuJLoV3KsAFE2KdHSiXfbDsJ39M=
 
-Emails to Andreas Werner bounce ("reason: 550 5.4.1 Recipient address
-rejected: Access denied.), so apparently driver is not supported
-anymore.  Last emails from Andreas Werner are from 2016.  Drop the entry
-completely.
+On 10/30/26 08:28, Krzysztof Kozlowski wrote:
+> Emails to Andreas Werner bounce ("reason: 550 5.4.1 Recipient address
+> rejected: Access denied.), so apparently driver is not supported
+> anymore.  Last emails from Andreas Werner are from 2016.  Drop the entry
+> completely.
+> 
+> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> 
 
-Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Makes sense.
 
----
+Acked-by: Guenter Roeck <linux@roeck-us.net>
 
-Maybe this can go via MFD tree?
----
- MAINTAINERS | 9 ---------
- 1 file changed, 9 deletions(-)
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 365bec8eb7fb..51673747ab91 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -17998,15 +17998,6 @@ F:	Documentation/driver-api/men-chameleon-bus.rst
- F:	drivers/mcb/
- F:	include/linux/mcb.h
- 
--MEN F21BMC (Board Management Controller)
--M:	Andreas Werner <andreas.werner@men.de>
--S:	Supported
--F:	Documentation/hwmon/menf21bmc.rst
--F:	drivers/hwmon/menf21bmc_hwmon.c
--F:	drivers/leds/leds-menf21bmc.c
--F:	drivers/mfd/menf21bmc.c
--F:	drivers/watchdog/menf21bmc_wdt.c
--
- MEN Z069 WATCHDOG DRIVER
- M:	Johannes Thumshirn <jth@kernel.org>
- L:	linux-watchdog@vger.kernel.org
--- 
-2.53.0
+> ---
+> 
+> Maybe this can go via MFD tree?
+> ---
+>   MAINTAINERS | 9 ---------
+>   1 file changed, 9 deletions(-)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 365bec8eb7fb..51673747ab91 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -17998,15 +17998,6 @@ F:	Documentation/driver-api/men-chameleon-bus.rst
+>   F:	drivers/mcb/
+>   F:	include/linux/mcb.h
+>   
+> -MEN F21BMC (Board Management Controller)
+> -M:	Andreas Werner <andreas.werner@men.de>
+> -S:	Supported
+> -F:	Documentation/hwmon/menf21bmc.rst
+> -F:	drivers/hwmon/menf21bmc_hwmon.c
+> -F:	drivers/leds/leds-menf21bmc.c
+> -F:	drivers/mfd/menf21bmc.c
+> -F:	drivers/watchdog/menf21bmc_wdt.c
+> -
+>   MEN Z069 WATCHDOG DRIVER
+>   M:	Johannes Thumshirn <jth@kernel.org>
+>   L:	linux-watchdog@vger.kernel.org
 
