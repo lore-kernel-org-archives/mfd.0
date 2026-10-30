@@ -1,55 +1,61 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.85.4
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793356015;
-	b=jU2hbGzqQtn3571KrkSm2zCl0Bk1cdMhyj+SD6n2pAG3indikPqenlf9GpgxNEOlW5rK
-	 zz1pCARQ0Ugytuv34DW6Z92lM4T82A8HH9PISufXsz/3TozbOgEMzTSP5EWEJcTwykmjZ
-	 lHiiKKHgT/rn9bk+/64no0ryHvfX4bZbWbruZok60gA96vDtZ1Z4D/R1Y1M7r0Is9lQP3
-	 eMRTeYLv5NFz3k/gMTfj+mxLZWRp0UgbpMh4tiHecESY6ze+ds/OU4YN65ShFdjwVD2Ap
-	 sKhzBVGoPmbz8ZGm43mwDnRCv7JZZ1QgyL/RSAdFLSCPHeiWbWQEkvfuuxcjkaweT6g==
+	t=1793357293;
+	b=Ia/UHGjVqrr19Cm3gcG1k768hrGKZQGak/aXx5MMtxxFaAYqFi47BYR1cUfzL0+ny2r7
+	 3t3LFr5q+7Vm+92OUpZy0r8V1mSHZgkHkq+znZKPkH63fbkrlyUs9+K0OODOdvdyxnrf9
+	 GbVETjKaMnYsCc6RmNujTKX4Nbrm4+7ZPNS00cahGY3XRc/c8Yd85NYhPT0JcNHAOBuxA
+	 xiYq6xXs+ya6Wmz2UKS22An/TEur2LHjq9OtH9ryg53eBFuia6MQHwPZMYCoFpinO1lfg
+	 93cna8A+Gni6QEzasKDuBwMe8YGBTVIII0VFBkY7/01X7uRIwWfRYEQgw/T5rIdPkFA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793356015;
-	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id:X-Mailer:X-Last-TLS-Session-Version;
-	bh=RR1F54y5drcv+A4tIQHG4ZfpQR+6/k3IO0e9rn0QE3s=;
-	b=LtZnk9vKtty5sRc8cO9dQcF3rIAkaXmWi5JhT36O0GTk1Zhe9/Aw0+RjK6w4EqvZsAii
-	 5dfpLRDXlruLe1Cf5rpqOjO/IwE3Gre2lUAZZ6nwebAY85v4hLEK6EPmjOLvH4y+aG0Lc
-	 RlOwwj88CJNzhOchFqnSglTH4p5Dgloled5ntPNFpw97jj57DpKeL1V+vKuE8SbXShz8p
-	 KumzQomG3QTuUdMq5PFiH2LTVeAg6Lvt9g4BZnSAphm5JJhoxSmtLT88Cxla/lWKHCZyK
-	 /K8v8yh9AimZb0pXQoW00yfDf3T0eAhNfosNu22lGy5Y3cmHi8E7mShfg/RZohWPqkg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793357293;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=Y/EYB0/9MsM5P2ptIQrhRFyMMNFz7gDKfR7zADjLWVc=;
+	b=PTk21ETlW7UlE1OoT/TDnrysU3nBc0ZiOn47pPw/+uyQ7745oyR8+yTQp4kivSmOesCo
+	 FqDBoXvGPlBByB1Bihd4EF04wbqeatMG8bV/ECitE7NuIAHLOgXR8ToRVGfSIdDh1bnip
+	 WkZo9h0672SM855zMfAeADlU+hcVdc5IjriN+1WbAFHScr6irOJTlOHSKzMkCKCQSumci
+	 8yBwsleJNN4OWadGlo4p9pykczlHRlOL6dVXEAU0VMY9ecx6Bj8Zxv26TmU6wJ+4HfCg7
+	 hINYC99/YXn+rEo4PhGWJ4V2UGArYRgGz9Oyac3Vh7rwL5ecxz5erGQmtv0iA/5kItQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=bootlin.com;
-	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=vumznZ4o;
-	arc=none smtp.remote-ip=185.246.85.4
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=n+ErgFMb;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A997606A320;
-	Fri, 30 Oct 2026 10:26:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8A997606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBF7A606A31E;
+	Fri, 30 Oct 2026 10:48:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=vumznZ4o
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id D45464E41396;
-	Fri, 30 Oct 2026 10:26:52 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id A6731603C2;
-	Fri, 30 Oct 2026 10:26:52 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 75DD9103287DA;
-	Fri, 30 Oct 2026 11:26:43 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1793356011; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=RR1F54y5drcv+A4tIQHG4ZfpQR+6/k3IO0e9rn0QE3s=;
-	b=vumznZ4o/YhlDqvCPO6TgB6PpQPi7eFbzUumgVXbHN1PjGkAtHgef055JQtH86dxpVLhfV
-	RCWeW4I/yhu2/s5jt/rkUjJfqtmDgUbvSWx9e29C8twC9wB+IjKbno0jHm1/5gtiHuMJko
-	fmQYZW2y0sfgyTLpwEQt4zUcNAd7gsR59iOXSaLF9+tUs/PAloTCTYIWlQTpz/gv0BM6L0
-	HeZQ8SyncywSA7zRbQLI/i8pHhngmF/JL6std7clx3aA35WWkikJnZeyO4SwavDaby8pEX
-	jXKzceH6iEo5LXPNfqwuyfM64tMERtEbEb8NXhpfboohUqRyYg35c2NhIFLh8w==
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=n+ErgFMb
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 41BA91F000C1;
+	Fri, 30 Oct 2026 10:48:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793357292;
+	bh=Y/EYB0/9MsM5P2ptIQrhRFyMMNFz7gDKfR7zADjLWVc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=n+ErgFMbwCPIcU9V0z9/u98FGG20OmGSFWjLu7X2sPtSYYyhk3dpHEWEJ5hT4a+JO
+	 1a6+nIShM1Llo5RSqey0aIE8YsfOzC/xC9EK2cVElujM4rmoDtmzQgziyxbwhcCc1Y
+	 68lfBTE8fh4KjEeH2yzvNNuWTwC+/ZmAzOIr32XAQ5NPFDIv4GwZyrSM9ZtEvJq2e5
+	 u/ocT1pa6p/z92jJRcSOs/uzs7J15RikjKWtmy+IU11cn6DfdLjM7fP+seGLP+gE+n
+	 f3n7ydd0+uPcBX8m0isufuo1SC2qEsb+AjCMDtRTseWMwEkrlrv7tlkTw1nIVZyGVe
+	 ox90c8Te5gsxA==
+Date: Fri, 30 Oct 2026 10:48:06 +0000
+From: Lee Jones <lee@kernel.org>
+To: Andreas Kemnade <andreas@kemnade.info>
+Cc: Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>,
+	Kai Svahn <kai.svahn@nokia.com>, syed khasim <x0khasim@ti.com>,
+	Peter Ujfalusi <peter.ujfalusi@ti.com>,
+	Samuel Ortiz <sameo@linux.intel.com>, linux-omap@vger.kernel.org,
+	mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: Re: [PATCH v2 13/27] mfd: twl-core: Clear twl_priv pointer on
+ teardown and probe failure
+Message-ID: <20261030104806.GC3774906@google.com>
+References: <20261027093306.2812695-1-lee@kernel.org>
+ <20261027093306.2812695-14-lee@kernel.org>
+ <20261028165003.60d0c033@kemnade.info>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,40 +65,43 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 1/2] mfd: Constify mfd_cell arrays
-From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
-To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Cc: Lee Jones <lee@kernel.org>, Chen-Yu Tsai <wens@kernel.org>, 
- Thomas Richard <thomas.richard@bootlin.com>, 
- Andy Shevchenko <andy@kernel.org>, Chanwoo Choi <cw00.choi@samsung.com>, 
- Krzysztof Kozlowski <krzk@kernel.org>, 
- Andreas Werner <andreas.werner@men.de>, Frank Li <Frank.Li@nxp.com>, 
- Sascha Hauer <s.hauer@pengutronix.de>, 
- Pengutronix Kernel Team <kernel@pengutronix.de>, 
- Fabio Estevam <festevam@gmail.com>, 
- Matti Vaittinen <mazziesaccount@gmail.com>, 
- Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
- Alexandre Torgue <alexandre.torgue@foss.st.com>, 
- Liviu Dudau <liviu.dudau@arm.com>, Sudeep Holla <sudeep.holla@kernel.org>, 
- Lorenzo Pieralisi <lpieralisi@kernel.org>, mfd@lists.linux.dev, 
- linux-kernel@vger.kernel.org, imx@lists.linux.dev, 
- linux-arm-kernel@lists.infradead.org, 
- linux-stm32@st-md-mailman.stormreply.com, patches@opensource.cirrus.com
-In-Reply-To: <20261030071137.100954-3-krzysztof.kozlowski@oss.qualcomm.com>
-References: <20261030071137.100954-3-krzysztof.kozlowski@oss.qualcomm.com>
-Date: Fri, 30 Oct 2026 11:26:32 +0100
-Message-Id: <179335599226.822489.13265784162305522111.b4-review@b4>
-X-Mailer: b4 0.16.0
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261028165003.60d0c033@kemnade.info>
 
-> mfd_add_devices() takes pointer to const, so 'struct mfd_cell' arrays
-> can be constified whenever driver does not modify it in the probe.
+On Wed, 28 Oct 2026, Andreas Kemnade wrote:
 
-Acked-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com> # cgbc-core
+> On Tue, 27 Oct 2026 09:30:42 +0000
+> Lee Jones <lee@kernel.org> wrote:
+> 
+> > twl_probe() allocates the file-scope twl_priv state with devm_kzalloc()
+> > and checks for a non-NULL twl_priv at entry to reject multiple device
+> > instances.  However, twl_remove() and the early error paths in
+> > twl_probe() never reset twl_priv to NULL, a failure when adding MFD
+> > child devices bypasses twl_remove() by jumping to free instead of fail,
+> > and twl_remove() tears down the IRQ domain and dummy I2C clients before
+> > child devices are unregistered.  After devres frees the underlying
+> > memory on probe failure or unbind, twl_priv remains a dangling pointer,
+> > causing subsequent exported API calls to dereference freed memory and
+> > blocking future probe attempts with -EBUSY.
+> > 
+> > Unregister DT-populated and MFD child devices at the start of
+> > twl_remove(), ensure mfd_add_devices() failures unwind via fail, and
+> > reset twl_priv to NULL in twl_remove() and on probe error exit.
+> > 
+> > Fixes: 80a97ccd33be ("mfd: twl-core: Collect global variables behind one private structure (global)")
+> > Closes: https://sashiko.dev/#/bug/linux-73e82f84-94de-4d08-82a4-f22d42a1dedf
+> > Cc: stable@vger.kernel.org
+> > Signed-off-by: Lee Jones <lee@kernel.org>
+> 
+> Hmm, couldn't we use devm_add_action_or_reset() for resetting the
+> twl_priv pointer? Feels more clean for me.
+
+Nice!  Thanks for the suggestion.
+
+To keep this fix minimal for Stable backporting (and avoid resending a
+27-patch series), I'll take this one as-is and send a follow-up patch
+converting twl_priv to use devm_add_action_or_reset().
 
 -- 
-Best Regards,
-Thomas Richard
-
+Lee Jones
