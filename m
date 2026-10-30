@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793336075;
-	b=2Ozrl5o+m9lGmHlKFRs/DHqzTOI/THC2BCwKh8yDnNo6SCm/xzbHUAJtthk335IMYcPC
-	 xI0Il5GSdajjt1SAZV4lxwYlPP9j9l/mvBSXSSWByZJSaonFrp4qpdmAqrsAAWezXBrMb
-	 lJHZduMmygy2cPslhOOpGNtYw/aaHkM8pJJQvMDgR0JhGMCPeqyTj7gCt4zIjAc56O+VU
-	 Wjdokz9Fsnbj8l9p96GSDowVYzp4faIag2rJxX+OXgojBLmbQOvYJ8ErwjvxxwvZpbjry
-	 6vuQ18JEgvws9pAItKUKY+cXpQD5RfMGpXOVndXgY3vIBCsTTyC8vsy3OiqvPJJNogw==
+	t=1793336076;
+	b=SP/5fOFYNRqjS06AU0X+hP67K9oq0qd0DZkpjMJtggDXqhdmNN5XBYrsPumX/QoyTySm
+	 jOGmIZa60qEkrXOp7tCmfLgAd9q30i8dcZFIZkUnH+AQ9tOApdYpzzruNZYWEr12vuTC5
+	 asoK+QA8n90IbhZPJLvDAvZhkxacH3tDlLEEURHFcjty/Nt6J5PPnWppFPimeG5X1exif
+	 Dq+GZnbkvd5q5IhDP3Ez1Fm1e4OeZ0ykolQ5sHf4p2ZkpXK4Yp/mY5CMC6Ql18+U+T1HL
+	 304rPsmmWW/KwFFQ7Ag23J/iqKnI+y75yUpt0+It+f+4/myeCb+JE30Jo1oc4M6xPOQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793336075;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793336076;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=7+Jz593Q6OH3Hhe+kVDMJztSDofMLamphTdc8et2aXI=;
-	b=m3DiU0PVipESwaJ02W1jaVzA3hwpmU5Nf7RmZSm6wRwSptqXmBOt/LEPJblocQA+2D+E
-	 rNAStlONO87G9lx9SHb1t9a1myEf5NtwSz3/3rpkWg5zU/YgWLpVbVg62DJ4af+KNuD5z
-	 OIBxYB7RbE9TmjcRtIOeyOh+ZulDIKDmHJ6fXB3/dpVg607joeN5QVzSi8joa5Amh5+HP
-	 27rQZmJi0DknkxhtiAOA2hpXjkJN4r5RmqqP6Xbbp/mZv7JlHmEL9Xec4cgkRucIvapHD
-	 Mtg2h9PcX+M30qL+3XDkCbbxCkfXIEqDhRZk180GY0AJgbp38YUmQz1Ofgsq0hCpUcw==
+	bh=XDR+z05wAJMvHf3aWYv837eS/J43xs5HpTX4trXbpOg=;
+	b=AMzish8FAYIVrwUSh9gCbgVCalsAJoIIDxcVjbilwxRFAZ9hI3eZ3UNvFwGCnvhhGIJS
+	 csXgcb91idT2vo4l6EE/3AxeqJTGglcyJmxsGYW8coWdl5OEKjsX3bwEUCtYI8JozK1RW
+	 KkqeEiD1r8oTor/SDeMjmedYGwEbIjD2vNYVW2EjuREQJzvRtg9oKzPPRlV8sUe2Ag29f
+	 J6RKF59XZW+MZf9SUYlOtQQCRsCicrYNBevtlFQjJs6C6y8/MQEo/eNemwNf210Ztxk+M
+	 xPKeqN2eaN/ycJoPQ1uG5HM34wqrV9kdX6IN24Am03JdD32q6Bdo0kOcMyjWnz2cddQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mh3qUWxi;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=R3AVsP3J;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A810606A320;
-	Fri, 30 Oct 2026 04:54:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79BB2606A326;
+	Fri, 30 Oct 2026 04:54:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mh3qUWxi
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1AAE51F000C1;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=R3AVsP3J
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E5D691F0093A;
 	Fri, 30 Oct 2026 04:54:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793336075;
-	bh=7+Jz593Q6OH3Hhe+kVDMJztSDofMLamphTdc8et2aXI=;
+	s=k20260515; t=1793336076;
+	bh=XDR+z05wAJMvHf3aWYv837eS/J43xs5HpTX4trXbpOg=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=mh3qUWxiNZYqRmWVbbzls/G/MK9HU3uV/QaMpDrqOjNjqeLIk7NEHVtDegfVe4goM
-	 bzCcIAf3RS54KAVLQAqB+E8Nq7n+cihHjdvOqD/dbz4QPeMeUbolJWNr4AYDefC7NK
-	 CKAW9/iZyX3yes47Na8DA1Xbh1bJK46ttkjFtCOSzUATlQIXKbu1n2YCGjGj+nOMmr
-	 4uvybiJlhAPUYJto73K7mLOYUtM1tdj7ozLrqpJRGyNCM2YgdaLlP6IfdXiR+K5eDH
-	 YOczH6w2W1DBAiAurRuWKeG4lbWOlzwlC7s2JfBLxhXJF1umKVnmjgqcKi5V6DaaXI
-	 0DS2meLolcc0Q==
-Message-ID: <sashiko-outbox-190512@kernel.org>
+	b=R3AVsP3J02Vt4mw0UhSILgq5UhwMqVNMRtMfrWFPSNZXXZ7GGeEJHiRl5pMHOlHB+
+	 XRR6Srv5SPEmALKAKGmPo4lP1CQA3zB6Kb1IKu/o0VG8iwOGy3KuL4qfOBFLpM/PS5
+	 UGoTaIXid8onCMpqa8Zv4IcY2OqEYvfu9xD9CIVH7Go5sZEWJhrehsfcpKNI862/Gz
+	 mQloWAfqlsxEZfAEyC8MTPBAvoBfk12VT4tPRXiB9ZMzPFj3yhWBOl4I5ENZ6RmVqh
+	 hBphxl/oXIbpmT+sQtqmDCIW61IwnMZY+J0swJYXvJDyJTNw5t4vHoK7M3jb/XQMDt
+	 MxZ6AtnLKMEmg==
+Message-ID: <sashiko-outbox-190513@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH net-next v22 4/9] mfd: an8855: Add support for Airoha
- AN8855 Switch
+Subject: Re: [PATCH net-next v22 5/9] net: phy: Add Airoha AN8855 Internal
+ Switch Gigabit PHY
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Christian Marangi" <ansuelsmth@gmail.com>, mfd@lists.linux.dev, devicetree@vger.kernel.org
 Cc: robh@kernel.org, conor+dt@kernel.org, lee@kernel.org
-In-Reply-To: <20260915123812.14747-5-ansuelsmth@gmail.com>
+In-Reply-To: <20260915123812.14747-6-ansuelsmth@gmail.com>
 References: <20260915123812.14747-1-ansuelsmth@gmail.com>
- <20260915123812.14747-5-ansuelsmth@gmail.com>
+ <20260915123812.14747-6-ansuelsmth@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Fri, 30 Oct 2026 04:54:34 +0000
+Date: Fri, 30 Oct 2026 04:54:35 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,111 +61,136 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
+Thank you for your contribution! Sashiko AI review found 3 potential issue(=
 s) to consider:
-- [High] mfd: airoha-an8855: use-after-free of phy_np fwnode handle
-- [Medium] mfd: airoha-an8855: memory leak of mdio_np on error path
+- [High] net/phy: flawed calibration lookup logic corrupts valid efuse valu=
+es
+- [Medium] net/phy: phy_write_mmd zeroing out adjacent fields in RXADC regi=
+sters
+- [Low] net/phy: downshift tunable ignores requested count violating ethtoo=
+l API
 --
 
-commit 1917f4cbbcfe1c5b1f8816f88eed9bb439f23478
+commit 86e9fad6319a9402e15a273e59be80e0d645c59c
 Author: Christian Marangi <ansuelsmth@gmail.com>
 
-mfd: an8855: Add support for Airoha AN8855 Switch
+net: phy: Add Airoha AN8855 Internal Switch Gigabit PHY
 
-This commit adds support for the Airoha AN8855 switch, which provides a DSA=
-=20
-switch and an NVMEM provider. It introduces MDIO-based regmaps for each=20
-internal PHY, allowing them to act as both standard PHYs and access points=
-=20
-for the switch fabric.
+This commit adds a simple PHY driver to support the Airoha AN8855
+Internal Switch Gigabit PHY, including configuration and calibration
+using NVMEM cells.
 
-> diff --git a/drivers/mfd/airoha-an8855.c b/drivers/mfd/airoha-an8855.c
+> diff --git a/drivers/net/phy/air_an8855.c b/drivers/net/phy/air_an8855.c
 > new file mode 100644
-> index 0000000000000..2b3b5f4a5a21e
+> index 0000000000000..bc22256fd5f95
 > --- /dev/null
-> +++ b/drivers/mfd/airoha-an8855.c
+> +++ b/drivers/net/phy/air_an8855.c
 [ ... ]
-> +static int an8855_phy_bus_register(struct device *dev, struct an8855_cor=
-e_priv *priv,
-> +				   struct device_node *phy_np,
-> +				   struct an8855_phy_bus *phy_bus_info)
+> +static int an8855_get_r50ohm_val(struct device *dev, const char *calib_n=
+ame,
+> +				 u8 *dest)
 > +{
-[ ... ]
-> +	phy_bus_info->bus =3D bus;
-> +	phy_bus_info->addr =3D addr;
-> +	phy_bus_info->node =3D of_fwnode_handle(phy_np);
-
-[Severity: High]
-Does this leave the fwnode handle without an active reference?
-
-The device node phy_np is supplied by a scoped iterator in
-an8855_mdio_register(), which automatically drops the reference on each
-iteration or loop exit.
-
-Because of_node_get() is not used here to acquire an additional reference, =
-the
-node is saved without incrementing the reference count. This can lead to a
-use-after-free later in an8855_core_probe() when the stale fwnode pointer is
-passed to fwnode_mdiobus_register_phy().
-
+> +	u32 shift_sel, val;
+> +	int ret;
+> +	int i;
+> +
+> +	ret =3D nvmem_cell_read_u32(dev, calib_name, &val);
+> +	if (ret)
+> +		return ret;
+> +
+> +	shift_sel =3D FIELD_GET(AN8855_SWITCH_EFUSE_R50O, val);
+> +	for (i =3D 0; i < ARRAY_SIZE(dsa_r50ohm_table); i++)
+> +		if (dsa_r50ohm_table[i] =3D=3D shift_sel)
+> +			break;
+> +
+> +	if (i < 8 || i >=3D ARRAY_SIZE(dsa_r50ohm_table))
+> +		*dest =3D dsa_r50ohm_table[25];
+> +	else
+> +		*dest =3D dsa_r50ohm_table[i - 8];
 > +
 > +	return 0;
 > +}
-> +
-> +static int an8855_mdio_register(struct device *dev, struct an8855_core_p=
-riv *priv,
-> +				struct an8855_phy_bus *phy_bus_infos)
+
+[Severity: High]
+Does this logic incorrectly map valid top-end EFUSE values to a fallback?
+
+If the hardware EFUSE provides 127 (which is the first entry in
+dsa_r50ohm_table), the loop immediately matches at i =3D 0. The code then
+evaluates if (i < 8) as true, forcing dest to a hardcoded fallback of
+dsa_r50ohm_table[25] (which is 94).=20
+
+However, a slightly lower value like 126 matches at i =3D 17, bypasses the
+check, and maps to dsa_r50ohm_table[9] (which correctly yields 127). Will
+this discontinuity erroneously penalize top-end calibration values and
+drop them to 94, potentially corrupting PHY TX pair calibration?
+
+[ ... ]
+> +static int an8855_set_downshift(struct phy_device *phydev, u8 cnt)
 > +{
-> +	struct device_node *mdio_np;
-> +	int ret =3D 0;
-> +	int i =3D 0;
+> +	u16 ds =3D cnt !=3D DOWNSHIFT_DEV_DISABLE ? AN8855_PHY_EN_DOWN_SHIFT : =
+0;
 > +
-> +	mdio_np =3D of_get_child_by_name(dev->of_node, "mdio");
-> +	if (!mdio_np)
-> +		return -ENODEV;
+> +	return phy_modify_paged(phydev, AN8855_PHY_PAGE_EXTENDED_1,
+> +				AN8855_PHY_EXT_REG_14, AN8855_PHY_EN_DOWN_SHIFT,
+> +				ds);
+> +}
+
+[Severity: Low]
+Does this downshift tunable ignore the requested retry count?
+
+The ethtool API for ETHTOOL_PHY_DOWNSHIFT accepts a specific retry count via
+the cnt parameter, but here cnt !=3D DOWNSHIFT_DEV_DISABLE is used as a sim=
+ple
+boolean toggle.=20
+
+If userspace requests a specific unsupported downshift count, won't the dri=
+ver
+enable the hardware default and return 0 (success) instead of rejecting the
+invalid count with -EOPNOTSUPP or -EINVAL?
+
+[ ... ]
+> +static int an8855_config_init(struct phy_device *phydev)
+> +{
+[ ... ]
+> +	/* Apply values to reduce signal noise */
+> +	ret =3D phy_modify_mmd(phydev, MDIO_MMD_VEND1, AN8855_PHY_TX_PAIR_DLY_S=
+EL_GBE,
+> +			     AN8855_PHY_CR_DA_TX_PAIR_DELAY_SEL_A_GBE |
+> +			     AN8855_PHY_CR_DA_TX_PAIR_DELAY_SEL_C_GBE,
+> +			     FIELD_PREP(AN8855_PHY_CR_DA_TX_PAIR_DELAY_SEL_A_GBE, 0x4) |
+> +			     FIELD_PREP(AN8855_PHY_CR_DA_TX_PAIR_DELAY_SEL_C_GBE, 0x4));
+> +	if (ret)
+> +		return ret;
+> +	ret =3D phy_set_bits_mmd(phydev, MDIO_MMD_VEND1, AN8855_PHY_RXADC_CTRL,
+> +			       AN8855_PHY_RG_AD_SAMPLE_PHSEL_A |
+> +			       AN8855_PHY_RG_AD_SAMPLE_PHSEL_C);
+> +	if (ret)
+> +		return ret;
+> +	ret =3D phy_write_mmd(phydev, MDIO_MMD_VEND1, AN8855_PHY_RXADC_REV_0,
+> +			    FIELD_PREP(AN8855_PHY_RG_AD_RESERVE0_A, 0x1));
+> +	if (ret)
+> +		return ret;
+> +	ret =3D phy_write_mmd(phydev, MDIO_MMD_VEND1, AN8855_PHY_RXADC_REV_1,
+> +			    FIELD_PREP(AN8855_PHY_RG_AD_RESERVE0_C, 0x1));
+> +	if (ret)
+> +		return ret;
 > +
-> +	for_each_available_child_of_node_scoped(mdio_np, phy_np) {
-> +		if (i >=3D AN8855_MAX_PHY_PORT)
-> +			return -EINVAL;
+> +	return 0;
+> +}
 
 [Severity: Medium]
-Does this early return leak the mdio_np reference?
+Will phy_write_mmd() inadvertently zero out adjacent fields in these
+RXADC registers?
 
-When returning -EINVAL directly, the function bypasses the of_node_put(mdio=
-_np)
-cleanup at the end of the function. This permanently leaks the device node
-reference that was acquired by of_get_child_by_name() before the loop.
+Earlier in this function, phy_modify_mmd() and phy_set_bits_mmd() are used
+to carefully preserve the state of pairs B and D. But for the REV_0 and
+REV_1 registers, phy_write_mmd() completely overwrites the 16-bit register.
 
-> +
-> +		ret =3D an8855_phy_bus_register(dev, priv, phy_np,
-> +					      &phy_bus_infos[i]);
-> +		if (ret)
-> +			break;
-> +
-> +		i++;
-> +	}
-> +
-> +	of_node_put(mdio_np);
-> +	return ret ? ret : i;
-> +}
-[ ... ]
-> +static int an8855_core_probe(struct mdio_device *mdiodev)
-> +{
-[ ... ]
-> +	/* Register virtual MDIO for each PHY */
-> +	num_phys =3D an8855_mdio_register(dev, priv, phy_bus_infos);
-> +	if (num_phys < 0)
-> +		return num_phys;
-[ ... ]
-> +	/* Register PHYs */
-> +	for (i =3D 0; i < num_phys; i++) {
-> +		ret =3D fwnode_mdiobus_register_phy(phy_bus_infos[i].bus,
-> +						  phy_bus_infos[i].node,
-> +						  phy_bus_infos[i].addr);
-> +		if (ret)
-> +			return ret;
-> +	}
+By writing FIELD_PREP(AN8855_PHY_RG_AD_RESERVE0_A, 0x1) directly, won't this
+implicitly zero out the adjacent AN8855_PHY_RG_AD_RESERVE0_B (bits 7:0),
+breaking the read-modify-write pattern and wiping out hardware defaults for
+pairs B and D?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260915123812.1474=
-7-1-ansuelsmth@gmail.com?part=3D4
+7-1-ansuelsmth@gmail.com?part=3D5
