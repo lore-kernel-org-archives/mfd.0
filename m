@@ -1,89 +1,71 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.51
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=217.140.110.172
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793371459;
-	b=YMVYkwKL8qiiUHlrzFEwq2s3S1AuFaaK5iFlqJ2sWiHFHVfaMIVOZPKhl0GrIii4kJkX
-	 nYRgs7L+Dlzey4UdM9AwuvhbjnjzwFVWb+UsmFc3nZf9L/xaeICfR+SeNWGLMvg9SS2jH
-	 TGM0Frj25BHZHScHOLfH2cz7nJvxBK9Vz7Ns8L4SrT3IFNqmQx5TjHl/q5VxdKGkJ0dWn
-	 MRAxhrSE2NPqQ03YUCqHRhHBApXithKLpHx378q0U4sjxepKc47r//1VR4BhuFl2sZKE7
-	 c1k2DD7WOQ5Gz0t90/EsyXopoZsEcocLtTIu3z5BlD3Ms+k9QgXzh42cc6PHxDbjD+A==
+	t=1793371858;
+	b=tK2Wgng6kWZQDEP913nLLbmFIzw5t4yhinP011/980eDGv9wqT6gxetLcCIXCSAH8CVs
+	 MRZSX6Fj0XhNiX5Nz4vk4OssCSX05zS+3xNP+USX3vNtYrxlWJ3wVV+zr7+/9+h3vNkTp
+	 /UgH/4U6b4svxcMcYge6hlbrJdhE6Qf7ARP3dbAMi+hjRaUinJO+Pdl+iZLKF3lOhw/qL
+	 YuYEnnw18IDM2viyD4lvWvy4/uxuS7035vUYx7xFg1MVFyuv0ZlWEeSrmGDTIUa6D4sVy
+	 UEhE1G+0XgH1e4Eg795XNBsQmxQ+cAKM2jXtqbHftSruNWbjefT/vfzoFg/eqWhfugQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793371459;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=UtnA/zteumxQwftTkhrGmioZkrzpjA4GBLPRv/xbLwQ=;
-	b=rHXBfRpyuGfDsQBsQS47XSlsJImWjNpdfzFt0AISERATkAZCKpz5W2AOtZkMiHrVN+Nn
-	 wSJ8LL9RU0tn/tPO17JGYGe9Z0diVsFdOQAL2yeHl/1dOC/UnVGbmv+eXXWsZKkHMr41P
-	 mogby04Zj5eubw6x/PLc1BkAnCxr1FZhRZ5AEnxbGBL4K2onU8L/fsh4lA56WRaDtIqYt
-	 5r1Nb1R+ehNzgqXwrQA3jbBKcrj/6lFUyn8rRo4tCuzAU9Bm3WIebp1iq3P1b6JZHM2U2
-	 QIm20JwbTqg3vJ06fXBUvz5uGIkU1/oiPQZp3MG9q1r5dMhWPMjosUIYEujaIxRoHfw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793371858;
+	h=DMARC-Filter:Received:Received:DKIM-Signature:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:Content-Transfer-Encoding:In-Reply-To;
+	bh=jGWtdlbWMHGNgloX7EqfHV279r2fDcsDj1Rd/d1NoRs=;
+	b=Ngn0RfOgREJnjuxW1Pq4IHZGN4nXzVJLe4kPXvbcLOvZjrEUZPeQ2XkqbwKV1lWuAP+1
+	 LgGjXgY6pLXuXweL+ZspFu75NKv02evb8707rUf/NDWYgukKnRTYpRhI79+0te6CFBmIm
+	 zvcLMAXJRp/r0/JWhRif58IxkK8J2SWEzsTtBdo57pDTP98E1vD/m7Ro8D56T76jg112m
+	 47/gnTUtze/yZzZBkrqu5O2RXdm5YfHehjbjL/xx9nujZprlxazet2oSh2FNsCUBDfOLE
+	 z0x62mTNTT7l6LXnRjxLt+T0Zg596YGON1LbHzVjVfQimQT15rFgOL2pCBNEzQ2ms0g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=vwY3fa6J;
-	arc=none smtp.remote-ip=209.85.218.51
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 485D9606A320
-	for <mfd@lists.linux.dev>; Fri, 30 Oct 2026 14:44:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 485D9606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	dmarc=pass header.from=arm.com;
+	spf=pass smtp.mailfrom=arm.com;
+	dkim=pass header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b="rsq/8jxD";
+	arc=none smtp.remote-ip=217.140.110.172
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E0BC6606A31F
+	for <mfd@lists.linux.dev>; Fri, 30 Oct 2026 14:50:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E0BC6606A31F
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=vwY3fa6J
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-c445c95d553so103379966b.1
-        for <mfd@lists.linux.dev>; Fri, 30 Oct 2026 07:44:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793371457; x=1793976257; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=UtnA/zteumxQwftTkhrGmioZkrzpjA4GBLPRv/xbLwQ=;
-        b=vwY3fa6JeWPHq/0HrnKX2ulCYiHi/goqBwz2cIlAW+Qbf5BZnQ2thIMRltomVFcFBE
-         ccJiJKqNQ7SpAzHhrHaEp2KHG1za5RTtp2gY2UQ8youq6DXOQXBppbKAAV5KHlMW5qyl
-         H5zcVeAai05RYi8NgjuK3w9rGKZCHKqDoFuoSOGN91Q7lCCl5XAt/9222Jm253Jp+C5e
-         G9ZwQHItswtMIWwzfxL3m7w5u0k8IqFs1YVlVb8RGHK0JXzJmKLmyJ17B8uhd1cSZsro
-         AjCilReKfiXgH7TTefA9v6hOd/1Gwx56uxeGq5xiXwDtHnpG6Sp2M6V27IF1fG2vFY6I
-         KLVA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793371457; x=1793976257;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=UtnA/zteumxQwftTkhrGmioZkrzpjA4GBLPRv/xbLwQ=;
-        b=RiT772T+eNwm3MvvAuyt1PEAsJwcKPI540LFKiaxSufpqFcCrSaq1CdMH+99Fiq0Q+
-         Thi4tWpanw7a9XWe8Cu9QNmFZviW0JfUL3ERqPF58Q0W3GDd4omNZbIFP+StWUi8hkPo
-         Leav+JM2iyhiy7olFChHXCMlEuSIjl7GNT0HEG7bnehtAU+Cw8JimMrYPSvD4cab/UqS
-         AXb7Gv+a3G5cuq+H3jneuOWIGzk1x6n2K1c2I0dOX9h6wHyqu8zyfaUBaS4VWUobrvhd
-         8TcFKb9Botm1PVcYI+9T53mC1je3HQtuhV191Jfn+c6hYxW+55yfXnner8z/ETTeY2Mj
-         TjTw==
-X-Forwarded-Encrypted: i=1; AKwUvBx5hgom9A3SvCvh9VmOjK7CdISXuQica5Qrep+gznXIP0KNKmDuCWU3DfFqqAO7FgCXoNw=@lists.linux.dev
-X-Gm-Message-State: AFq9FYIRyGb8F2UX6t1sisAFTy9ZtqGXnX7je8n1Ez3Cd8Ch9aPguZfA
-	Ae6gfZZq34eaabO8pmMua7mJ5NdqALw1eiD59Q8k5h/9WKnidxnf1pNp
-X-Gm-Gg: AYBFou2IOVoFs+gjrYRckLpVJLFuKBbPy864N9pg+62eVR8XFDvbJP1ENRbA1EPJuFV
-	+lESXPEPRhSjoNxdBw5m9pA9kXdWJabN1y24/TY3ItU3HAlyG33gvvmK/DxnkfaWbphaGyk27fn
-	CQlSNFgHCHTMPbkeyfcKGQGVJX3JpNhEenfa1/L5CXzEvCMerm2ZxPcz66gcue2HY9q4IJem5MM
-	2gPkJ5oo1IAZRFeu9RVstrfVAl980oT5d96hYiMDYbP+488EiTA4ajZrl8b30Y1a22kcEMod11Z
-	0VxAMTNhaX/IXEhGhD5IGwXju2scCWIqri7LQdhyZgBt8UmLa8CoaKnPgXOFdJOCu2ELEBq7/+L
-	9/UPuCV6c30I0dh38hNVG2vfn2CYWjycoxrg3VZDi+0yWKFZFptkiIX+KZCp8SRTG6yaU+1d95q
-	1ChB9Vdk/Nujetl36O0zgVrobuPxS8rjNOtHwaEb+R68InAZ0m0+TIjAU/JsdXAYdE++KJfwAUZ
-	yBIE72AuOlo+wZhHGE4lxyDpmlhY9oeMz4tcJlNoIgaI8ATRwx07fBcg0tMs/rWvwL/Duf49HoR
-	nmpGKYVYLrWKwDN288TwkNjaiJsMObiaFiHELTuUy7zkE0oqVb/S4YNTYpuAqfCEnouF2whxWqs
-	=
-X-Received: by 2002:a17:907:3e0c:b0:c37:c0dd:6642 with SMTP id a640c23a62f3a-c4ca7ad13ebmr240192666b.37.1793371456921;
-        Fri, 30 Oct 2026 07:44:16 -0700 (PDT)
-Received: from [10.142.16.156] (62-101-160-75.telecomgroupservice.com. [62.101.160.75])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c4cabe5006dsm69844266b.64.2026.10.30.07.44.15
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 30 Oct 2026 07:44:16 -0700 (PDT)
-Message-ID: <c18fe7d6-c738-4049-ab88-c12817f0108e@gmail.com>
-Date: Fri, 30 Oct 2026 17:44:13 +0300
+	dkim=pass (1024-bit key, unprotected) header.d=arm.com header.i=@arm.com header.a=rsa-sha256 header.s=foss header.b=rsq/8jxD
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1ABCD15A1
+	for <mfd@lists.linux.dev>; Fri, 30 Oct 2026 07:50:53 -0700 (PDT)
+Received: from [192.168.0.1] (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 07A633F673
+	for <mfd@lists.linux.dev>; Fri, 30 Oct 2026 07:50:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1793371856; bh=ZS2k+FypBHiuo5+SFtfW7Gv767dr3RvQc3r5rKZYMBo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=rsq/8jxDzTM+nmPNgh+MHbcnE7BD+UlEBuQ5XSBuPhJg06VCUxgWLyzWUKv9KqKud
+	 IHtZajlLzeVfht8P9yQDVgTaVsoATuUtcV21eMquAgy6qYG0hGX0fYjRddU/orP6d+
+	 GhGAPyZw2v2N3XcjggijIjZXHX2EKa5xDRNaGpac=
+Date: Fri, 30 Oct 2026 14:50:35 +0000
+From: Liviu Dudau <liviu.dudau@arm.com>
+To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Cc: Lee Jones <lee@kernel.org>, Chen-Yu Tsai <wens@kernel.org>,
+	Thomas Richard <thomas.richard@bootlin.com>,
+	Andy Shevchenko <andy@kernel.org>,
+	Chanwoo Choi <cw00.choi@samsung.com>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Andreas Werner <andreas.werner@men.de>, Frank Li <Frank.Li@nxp.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Matti Vaittinen <mazziesaccount@gmail.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Sudeep Holla <sudeep.holla@kernel.org>,
+	Lorenzo Pieralisi <lpieralisi@kernel.org>, mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org, imx@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	Charles Keepax <ckeepax@opensource.cirrus.com>
+Subject: Re: [PATCH v2 1/2] mfd: Constify mfd_cell arrays
+Message-ID: <auSuu45DB5QTQuUX@e142607>
+References: <20261030140240.211786-3-krzysztof.kozlowski@oss.qualcomm.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -93,56 +75,341 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mfd/rk8xx: fix sleep during RCU read side critical
- section
-To: Eric Anderson <ejona86@gmail.com>
-Cc: lee@kernel.org, mfd@lists.linux.dev, linux-kernel@vger.kernel.org
-References: <20261029192223.462367-1-paskripkin@gmail.com>
- <CAFyMnzbvDVvDuNfYgD26ThSyWDqt5u0TLHxF+Tp4=h8fkyepug@mail.gmail.com>
-Content-Language: en-US
-From: Pavel Skripkin <paskripkin@gmail.com>
-In-Reply-To: <CAFyMnzbvDVvDuNfYgD26ThSyWDqt5u0TLHxF+Tp4=h8fkyepug@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20261030140240.211786-3-krzysztof.kozlowski@oss.qualcomm.com>
 
-Hi Eric,
-
-Eric Anderson <ejona86@gmail.com> says:
-> On Thu, Oct 29, 2026 at 12:22 PM Pavel Skripkin <paskripkin@gmail.com> wrote:
->> SPI does not support atomic transfers, so it's dangerous to call from
->> atomic notif chains, since it can cause stall during reboot on
->> orangepi5 (see trace below).
+On Fri, Oct 30, 2026 at 03:02:41PM +0100, Krzysztof Kozlowski wrote:
+> mfd_add_devices() takes pointer to const, so 'struct mfd_cell' arrays
+> can be constified whenever driver does not modify it in the probe.
 > 
-> For my curiosity, is the hang during reboot/shutdown random or consistent?
+> Acked-by: Chen-Yu Tsai <wens@kernel.org> # ac100 & axp20x
+> Acked-by: Charles Keepax <ckeepax@opensource.cirrus.com>
+> Acked-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com> # cgbc-core
+> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> 
+> ---
+> 
+> Changes in v2:
+> 1. Add tags
+> 2. Drop wm97xx-core.c, it was not intended to be committed
+> ---
+>  drivers/mfd/ac100.c                   | 2 +-
+>  drivers/mfd/axp20x.c                  | 4 ++--
+>  drivers/mfd/cgbc-core.c               | 2 +-
+>  drivers/mfd/cs5535-mfd.c              | 2 +-
+>  drivers/mfd/intel_soc_pmic_bxtwc.c    | 2 +-
+>  drivers/mfd/intel_soc_pmic_chtdc_ti.c | 2 +-
+>  drivers/mfd/intel_soc_pmic_chtwc.c    | 2 +-
+>  drivers/mfd/intel_soc_pmic_crc.c      | 6 +++---
+>  drivers/mfd/max77705.c                | 2 +-
+>  drivers/mfd/menf21bmc.c               | 2 +-
+>  drivers/mfd/mxs-lradc.c               | 6 +++---
+>  drivers/mfd/rohm-bd718x7.c            | 6 +++---
+>  drivers/mfd/rsmu_core.c               | 8 ++++----
+>  drivers/mfd/stmfx.c                   | 2 +-
+>  drivers/mfd/vexpress-sysreg.c         | 2 +-
+
+For the vexpress-sysreg.c:
+
+Reviewed-by: Liviu Dudau <liviu.dudau@arm.com>
+
+Best regards,
+Liviu
+
+>  15 files changed, 25 insertions(+), 25 deletions(-)
+> 
+> diff --git a/drivers/mfd/ac100.c b/drivers/mfd/ac100.c
+> index 8f47c392cbd1..51b4d468c51d 100644
+> --- a/drivers/mfd/ac100.c
+> +++ b/drivers/mfd/ac100.c
+> @@ -75,7 +75,7 @@ static const struct regmap_config ac100_regmap_config = {
+>  	.cache_type	= REGCACHE_MAPLE,
+>  };
+>  
+> -static struct mfd_cell ac100_cells[] = {
+> +static const struct mfd_cell ac100_cells[] = {
+>  	{
+>  		.name		= "ac100-codec",
+>  		.of_compatible	= "x-powers,ac100-codec",
+> diff --git a/drivers/mfd/axp20x.c b/drivers/mfd/axp20x.c
+> index 50df66de24e0..4d770e718716 100644
+> --- a/drivers/mfd/axp20x.c
+> +++ b/drivers/mfd/axp20x.c
+> @@ -1055,13 +1055,13 @@ static const struct mfd_cell axp152_cells[] = {
+>  	},
+>  };
+>  
+> -static struct mfd_cell axp313a_cells[] = {
+> +static const struct mfd_cell axp313a_cells[] = {
+>  	/* AXP323 is sometimes paired with AXP717 as sub-PMIC */
+>  	MFD_CELL_BASIC("axp20x-regulator", NULL, NULL, 0, 1),
+>  	MFD_CELL_RES("axp313a-pek", axp313a_pek_resources),
+>  };
+>  
+> -static struct mfd_cell axp717_cells[] = {
+> +static const struct mfd_cell axp717_cells[] = {
+>  	MFD_CELL_NAME("axp20x-regulator"),
+>  	MFD_CELL_RES("axp20x-pek", axp717_pek_resources),
+>  	MFD_CELL_OF("axp717-adc",
+> diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
+> index 2becaf797646..3460c50047ea 100644
+> --- a/drivers/mfd/cgbc-core.c
+> +++ b/drivers/mfd/cgbc-core.c
+> @@ -231,7 +231,7 @@ int cgbc_command(struct cgbc_device_data *cgbc, void *cmd, unsigned int cmd_size
+>  }
+>  EXPORT_SYMBOL_GPL(cgbc_command);
+>  
+> -static struct mfd_cell cgbc_devs[] = {
+> +static const struct mfd_cell cgbc_devs[] = {
+>  	{ .name = "cgbc-wdt"	},
+>  	{ .name = "cgbc-gpio"	},
+>  	{ .name = "cgbc-i2c", .id = 1 },
+> diff --git a/drivers/mfd/cs5535-mfd.c b/drivers/mfd/cs5535-mfd.c
+> index f3becbef19f5..d91d60dc5416 100644
+> --- a/drivers/mfd/cs5535-mfd.c
+> +++ b/drivers/mfd/cs5535-mfd.c
+> @@ -37,7 +37,7 @@ const struct software_node cs5535_gpio_swnode = {
+>  };
+>  EXPORT_SYMBOL_NS(cs5535_gpio_swnode, "CS5535");
+>  
+> -static struct mfd_cell cs5535_mfd_cells[] = {
+> +static const struct mfd_cell cs5535_mfd_cells[] = {
+>  	{
+>  		.name = "cs5535-smb",
+>  		.num_resources = 1,
+> diff --git a/drivers/mfd/intel_soc_pmic_bxtwc.c b/drivers/mfd/intel_soc_pmic_bxtwc.c
+> index 117517c171b5..5aa9e52401f0 100644
+> --- a/drivers/mfd/intel_soc_pmic_bxtwc.c
+> +++ b/drivers/mfd/intel_soc_pmic_bxtwc.c
+> @@ -245,7 +245,7 @@ static const struct resource tmu_resources[] = {
+>  	DEFINE_RES_IRQ_NAMED(BXTWC_TMU_IRQ, "TMU"),
+>  };
+>  
+> -static struct mfd_cell bxt_wc_dev[] = {
+> +static const struct mfd_cell bxt_wc_dev[] = {
+>  	{
+>  		.name = "bxt_wcove_thermal",
+>  		.num_resources = ARRAY_SIZE(thermal_resources),
+> diff --git a/drivers/mfd/intel_soc_pmic_chtdc_ti.c b/drivers/mfd/intel_soc_pmic_chtdc_ti.c
+> index 6daf33e07ea0..8412a25d37ff 100644
+> --- a/drivers/mfd/intel_soc_pmic_chtdc_ti.c
+> +++ b/drivers/mfd/intel_soc_pmic_chtdc_ti.c
+> @@ -53,7 +53,7 @@ static const struct resource battery_resources[] = {
+>  	DEFINE_RES_IRQ(CHTDC_TI_CCEOCAL),
+>  };
+>  
+> -static struct mfd_cell chtdc_ti_dev[] = {
+> +static const struct mfd_cell chtdc_ti_dev[] = {
+>  	{
+>  		.name = "chtdc_ti_pwrbtn",
+>  		.num_resources = ARRAY_SIZE(power_button_resources),
+> diff --git a/drivers/mfd/intel_soc_pmic_chtwc.c b/drivers/mfd/intel_soc_pmic_chtwc.c
+> index aa71a7d83fcd..f27985a58c87 100644
+> --- a/drivers/mfd/intel_soc_pmic_chtwc.c
+> +++ b/drivers/mfd/intel_soc_pmic_chtwc.c
+> @@ -50,7 +50,7 @@ static const struct resource cht_wc_ext_charger_resources[] = {
+>  	DEFINE_RES_IRQ(CHT_WC_EXT_CHGR_IRQ),
+>  };
+>  
+> -static struct mfd_cell cht_wc_dev[] = {
+> +static const struct mfd_cell cht_wc_dev[] = {
+>  	{
+>  		.name = "cht_wcove_pwrsrc",
+>  		.num_resources = ARRAY_SIZE(cht_wc_pwrsrc_resources),
+> diff --git a/drivers/mfd/intel_soc_pmic_crc.c b/drivers/mfd/intel_soc_pmic_crc.c
+> index 627a89334908..ce4c9ef59198 100644
+> --- a/drivers/mfd/intel_soc_pmic_crc.c
+> +++ b/drivers/mfd/intel_soc_pmic_crc.c
+> @@ -54,7 +54,7 @@ static const struct resource gpio_resources[] = {
+>  	DEFINE_RES_IRQ_NAMED(CRYSTAL_COVE_IRQ_GPIO, "GPIO"),
+>  };
+>  
+> -static struct mfd_cell crystal_cove_byt_dev[] = {
+> +static const struct mfd_cell crystal_cove_byt_dev[] = {
+>  	{
+>  		.name = "crystal_cove_pwrsrc",
+>  		.num_resources = ARRAY_SIZE(pwrsrc_resources),
+> @@ -93,7 +93,7 @@ static struct mfd_cell crystal_cove_byt_dev[] = {
+>  	},
+>  };
+>  
+> -static struct mfd_cell crystal_cove_cht_dev[] = {
+> +static const struct mfd_cell crystal_cove_cht_dev[] = {
+>  	{
+>  		.name = "crystal_cove_gpio",
+>  		.num_resources = ARRAY_SIZE(gpio_resources),
+> @@ -142,7 +142,7 @@ static struct pwm_lookup crc_pwm_lookup[] = {
+>  
+>  struct crystal_cove_config {
+>  	unsigned long irq_flags;
+> -	struct mfd_cell *cell_dev;
+> +	const struct mfd_cell *cell_dev;
+>  	int n_cell_devs;
+>  	const struct regmap_config *regmap_config;
+>  	const struct regmap_irq_chip *irq_chip;
+> diff --git a/drivers/mfd/max77705.c b/drivers/mfd/max77705.c
+> index 2e9b81f26414..771015c229c8 100644
+> --- a/drivers/mfd/max77705.c
+> +++ b/drivers/mfd/max77705.c
+> @@ -15,7 +15,7 @@
+>  #include <linux/regmap.h>
+>  #include <linux/of.h>
+>  
+> -static struct mfd_cell max77705_devs[] = {
+> +static const struct mfd_cell max77705_devs[] = {
+>  	MFD_CELL_OF("max77705-rgb", NULL, NULL, 0, 0, "maxim,max77705-rgb"),
+>  	MFD_CELL_OF("max77705-charger", NULL, NULL, 0, 0, "maxim,max77705-charger"),
+>  	MFD_CELL_OF("max77705-haptic", NULL, NULL, 0, 0, "maxim,max77705-haptic"),
+> diff --git a/drivers/mfd/menf21bmc.c b/drivers/mfd/menf21bmc.c
+> index 0f24de516d72..252d5c81db6b 100644
+> --- a/drivers/mfd/menf21bmc.c
+> +++ b/drivers/mfd/menf21bmc.c
+> @@ -17,7 +17,7 @@
+>  #define BMC_CMD_REV_MINOR	0x81
+>  #define BMC_CMD_REV_MAIN	0x82
+>  
+> -static struct mfd_cell menf21bmc_cell[] = {
+> +static const struct mfd_cell menf21bmc_cell[] = {
+>  	{ .name = "menf21bmc_wdt", },
+>  	{ .name = "menf21bmc_led", },
+>  	{ .name = "menf21bmc_hwmon", }
+> diff --git a/drivers/mfd/mxs-lradc.c b/drivers/mfd/mxs-lradc.c
+> index 64afc7631790..71ad5184f7e0 100644
+> --- a/drivers/mfd/mxs-lradc.c
+> +++ b/drivers/mfd/mxs-lradc.c
+> @@ -90,7 +90,7 @@ static struct resource mx28_touchscreen_resources[] = {
+>  	DEFINE_RES_IRQ_NAMED(MX28_LRADC_CH7_IRQ, "mxs-lradc-channel7"),
+>  };
+>  
+> -static struct mfd_cell mx23_cells[] = {
+> +static const struct mfd_cell mx23_cells[] = {
+>  	{
+>  		.name = "mxs-lradc-adc",
+>  		.resources = mx23_adc_resources,
+> @@ -103,7 +103,7 @@ static struct mfd_cell mx23_cells[] = {
+>  	},
+>  };
+>  
+> -static struct mfd_cell mx28_cells[] = {
+> +static const struct mfd_cell mx28_cells[] = {
+>  	{
+>  		.name = "mxs-lradc-adc",
+>  		.resources = mx28_adc_resources,
+> @@ -128,7 +128,7 @@ static int mxs_lradc_probe(struct platform_device *pdev)
+>  	struct device *dev = &pdev->dev;
+>  	struct device_node *node = dev->of_node;
+>  	struct mxs_lradc *lradc;
+> -	struct mfd_cell *cells = NULL;
+> +	const struct mfd_cell *cells = NULL;
+>  	struct resource *res;
+>  	int ret = 0;
+>  	u32 ts_wires = 0;
+> diff --git a/drivers/mfd/rohm-bd718x7.c b/drivers/mfd/rohm-bd718x7.c
+> index 0b0f8e27e329..bd087004dde8 100644
+> --- a/drivers/mfd/rohm-bd718x7.c
+> +++ b/drivers/mfd/rohm-bd718x7.c
+> @@ -19,12 +19,12 @@
+>  
+>  #include "rohm-pwrbutton.h"
+>  
+> -static struct mfd_cell bd71837_mfd_cells[] = {
+> +static const struct mfd_cell bd71837_mfd_cells[] = {
+>  	{ .name = "bd71837-clk", },
+>  	{ .name = "bd71837-pmic", },
+>  };
+>  
+> -static struct mfd_cell bd71847_mfd_cells[] = {
+> +static const struct mfd_cell bd71847_mfd_cells[] = {
+>  	{ .name = "bd71847-clk", },
+>  	{ .name = "bd71847-pmic", },
+>  };
+> @@ -113,7 +113,7 @@ static int bd718xx_i2c_probe(struct i2c_client *i2c)
+>  	struct irq_domain *irq_domain;
+>  	int ret;
+>  	unsigned int chip_type;
+> -	struct mfd_cell *mfd;
+> +	const struct mfd_cell *mfd;
+>  	int cells;
+>  
+>  	if (!i2c->irq) {
+> diff --git a/drivers/mfd/rsmu_core.c b/drivers/mfd/rsmu_core.c
+> index fd04a6e5dfa3..02bfb84653ae 100644
+> --- a/drivers/mfd/rsmu_core.c
+> +++ b/drivers/mfd/rsmu_core.c
+> @@ -22,7 +22,7 @@ enum {
+>  	RSMU_N_DEVS = 2,
+>  };
+>  
+> -static struct mfd_cell rsmu_cm_devs[] = {
+> +static const struct mfd_cell rsmu_cm_devs[] = {
+>  	[RSMU_PHC] = {
+>  		.name = "8a3400x-phc",
+>  	},
+> @@ -31,7 +31,7 @@ static struct mfd_cell rsmu_cm_devs[] = {
+>  	},
+>  };
+>  
+> -static struct mfd_cell rsmu_sabre_devs[] = {
+> +static const struct mfd_cell rsmu_sabre_devs[] = {
+>  	[RSMU_PHC] = {
+>  		.name = "82p33x1x-phc",
+>  	},
+> @@ -40,7 +40,7 @@ static struct mfd_cell rsmu_sabre_devs[] = {
+>  	},
+>  };
+>  
+> -static struct mfd_cell rsmu_sl_devs[] = {
+> +static const struct mfd_cell rsmu_sl_devs[] = {
+>  	[RSMU_PHC] = {
+>  		.name = "8v19n85x-phc",
+>  	},
+> @@ -51,7 +51,7 @@ static struct mfd_cell rsmu_sl_devs[] = {
+>  
+>  int rsmu_core_init(struct rsmu_ddata *rsmu)
+>  {
+> -	struct mfd_cell *cells;
+> +	const struct mfd_cell *cells;
+>  	int ret;
+>  
+>  	switch (rsmu->type) {
+> diff --git a/drivers/mfd/stmfx.c b/drivers/mfd/stmfx.c
+> index f683fdb6ece6..b0db33c0a7f2 100644
+> --- a/drivers/mfd/stmfx.c
+> +++ b/drivers/mfd/stmfx.c
+> @@ -73,7 +73,7 @@ static const struct resource stmfx_ts_resources[] = {
+>  	DEFINE_RES_IRQ(STMFX_REG_IRQ_SRC_EN_TS_OVF),
+>  };
+>  
+> -static struct mfd_cell stmfx_cells[] = {
+> +static const struct mfd_cell stmfx_cells[] = {
+>  	{
+>  		.of_compatible = "st,stmfx-0300-pinctrl",
+>  		.name = "stmfx-pinctrl",
+> diff --git a/drivers/mfd/vexpress-sysreg.c b/drivers/mfd/vexpress-sysreg.c
+> index f49cee91f71c..c5f375cd22ae 100644
+> --- a/drivers/mfd/vexpress-sysreg.c
+> +++ b/drivers/mfd/vexpress-sysreg.c
+> @@ -69,7 +69,7 @@ static const struct software_node vexpress_sysreg_sys_flash_swnode = {
+>  	.properties = vexpress_sysreg_sys_flash_props,
+>  };
+>  
+> -static struct mfd_cell vexpress_sysreg_cells[] = {
+> +static const struct mfd_cell vexpress_sysreg_cells[] = {
+>  	{
+>  		.name = "basic-mmio-gpio",
+>  		.of_compatible = "arm,vexpress-sysreg,sys_led",
+> -- 
+> 2.53.0
 > 
 
-They are basically the same, since they both trigger sleeping SPI I/O. I 
-agree, I should have used studown/reboot more consistently in commit 
-message...
-
-> You are explicitly mentioning reboot, although the stack trace is for
-> shutdown. I'd have expected reboot to have always been broken for you.
-
-Likely. I've just bought it, so cannot say if it was always broken. 
-Based on code I believe that it was indeed broken from the beginning. 
-Also I've found previous attempt to fix it [1], so looks like problem is 
-known for quite a long time
-
-> In my change I noticed that reboot and shutdown didn't agree on
-> whether to use _PREPARE, and my change adjusted shutdown to agree with
-> reboot. Since you apparently need the opposite, prior to my change I'd
-> assume shutdown was working but reboot broken.
-> 
- >> I don't have rk3288 board to test. However, I strongly suspect 
-that>> patch does not affect your case.
-> 
-> I'll test it this weekend. I suspect it would work fine on Veyron/rk3288.
-
-
-[1] 
-https://lists.infradead.org/pipermail/linux-rockchip/2024-July/049312.html
-
-
-With regards,
-Pavel Skripkin
+-- 
+====================
+| I would like to |
+| fix the world,  |
+| but they're not |
+| giving me the   |
+ \ source code!  /
+  ---------------
+    ¯\_(ツ)_/¯
