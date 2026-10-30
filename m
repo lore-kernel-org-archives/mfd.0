@@ -1,56 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793341530;
-	b=p1gZFqqxN3+Eiz/wwC7WVvxDzrKGElimgiLPVVmoWbhXE9erFZv+FpxNzxSS9t7AtyTX
-	 FxD/+tomUe4q3uXfrewLz3URoogOOwj6O/80/0M9fd843GHChmO6cX1GT0ezSYrgQtQv4
-	 X+2Qwvps+0LgHssSb6u2kVgcRyqnrtq1KVLNxdj7vkmAYcVgKcDOAlO7LCieuDh3i4mU7
-	 ejh/lXwqllgp3++Y8m4qLhKkZ1LTqKuVTs4D+BVJSS18ExpMlZPIPjdx/0MJmUDkKP+rD
-	 aGiXAgklCuFmD5gN5Lv8CfUyCLGVSETqGDYi/jBGOT1QKer0DIyluMfKATXnZqds56A==
+	t=1793341546;
+	b=PaO85Qg0zsBUPjxdmzuXkjhi7BiuVJSM7P+65sVVkZg9qF0wTZZyKB0UQ8lAsK/ysQgD
+	 jtg9sXGkuX5rEHDfpeCBX/w7trywFjhP6vebKuh8Yv0rBu12Uz1AFft36DsYA6muUyKs2
+	 U2q5/pBznxpc0BZrT8GVi1SvlPVD9olOh9XL+78foiVTWl95fuM2oogpr9XxammHGiP2N
+	 Pz0V6d80GN1w5IO87CSsoYaKS/BKdlTCA9whr39LZKIihLY8S9ypiM051Z4dvbeZbNaJ+
+	 gHIul1gPa59NdvXqvuQf8s9N3Ri+/2jmwGIoHPfsN9nMGOQylzmr9NQqBpwDT5/04QA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793341530;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793341546;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=cGSGkl79+Pyh10ynSCn9yoH9Ohm3NPnHa9AtfqcRDb4=;
-	b=hnzpPAnVCOgZFJyx1SYS0Oi/6Y2+TGBc9RBXgYjYt2QjVIjlkFQ+ZWdwo92HIcicOttr
-	 WEYKWzD7hFfgfufoFgK24MWYHm79G48KeFQCvBDoo43muMLd3bvZTrwqBML8QpdXWxX1D
-	 P3kzlTqVyoVxHYxOo3nZ0GNf9edObfcAelhuAbekzhOoUd0L5btYH6VJOn2L+dP5b8gC/
-	 qA/gs2qJYQlylfESt9WevUHgIsY3XlHtKGkwCjLVXWjw1BF83EERZR34/eo6rb96SR2vv
-	 Gd84PNxWOVcQWLzjePdUmKDTQHxVUtvQU361Ald+laSirADApGISkc/PnPlaO9amEtQ==
+	bh=oeFbFCh/kFo2zGGRXUOc9VK2ACAjuedkw2HSJijoomI=;
+	b=Ut4XhA2/aa084FQKbdZRMelvZ1lcvX9BB7oD+PH/RrWD41tG0PnFG0Qo4RmkOuk/DbVF
+	 s7U5eam42v/3dFaz1wEF/yzkzlOBlwFkNOfVGEQZ1YsTP758KJs/n3gH0+3TNM4tOCTY2
+	 24+LfCHGqY6k61aqM1MM8hSOSez1PVGElyWU+nUAMggmY/TAP4RKS3qtiq/m2ds+bMj8v
+	 OVp3ODPjKFFzwc7lo3za94Yu//2f9Gq07xq0MA5UwLkh6ShNNdpW7Z8auV49nQGt9TH5R
+	 f5ZnxWsNwo0Lln4dqh2o43JEfkI68UQvTPsqNfM06ig0aVcHxYdf+9s5ze8XNHwhJ/A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=asrgagzA;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Y0tjx1vN;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6F03D606A31A
-	for <mfd@lists.linux.dev>; Fri, 30 Oct 2026 06:25:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A5EF606A31A
+	for <mfd@lists.linux.dev>; Fri, 30 Oct 2026 06:25:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=asrgagzA
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1FC6C1F000C1;
-	Fri, 30 Oct 2026 06:25:30 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Y0tjx1vN
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BAB301F000C1;
+	Fri, 30 Oct 2026 06:25:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793341530;
-	bh=cGSGkl79+Pyh10ynSCn9yoH9Ohm3NPnHa9AtfqcRDb4=;
+	s=k20260515; t=1793341545;
+	bh=oeFbFCh/kFo2zGGRXUOc9VK2ACAjuedkw2HSJijoomI=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=asrgagzAwpI9AvmBi75uELAhC/uuASQICmlgeaCnRN3keMfrpdhkhuZgcAKCI4LLO
-	 J/Qkn8UwZuwI4CLeDVn+Ij6fWkxnnjvTM1hafijQPzh1LPlv38k6SfnySC36E16V8o
-	 iICjNwKYQxPt+wZeHOElgP+edxlcB6pA7HZU3gHbWgPt9ILGyfu53eQ9Nv7b3+mXvn
-	 il+DIWzZ0D1AjUgbAWRVa6y1SKazfNy7nnaaHjR/X/MqYXScDUCwhUagAx0mJOIZHy
-	 lAw2dPXhhQSvwCjDN0DPfNnDpsEVRSyumlp4iz5G+kZcDX9nOvyWdlh2lnlCLs0eAp
-	 xNDeeqeyond8g==
-Message-ID: <sashiko-outbox-190595@kernel.org>
+	b=Y0tjx1vNSwPKZ+QbDsVgQJjHr3k7wWFMPAiKk5P+GNjn+TBPYOt73EU4h4gBH5SCq
+	 HDsIMSDHEQctKiflr96MSyzGTCu/POgHMfsk+zIjO60NIkIsjNvfI+qtwecpbmOg27
+	 OwX4c/LmgEEKj7Nb9JL2D/gniTtAx4J1uYUgQ6Q9tFjzcd2nK2CFrirqSbiRCz/PA2
+	 7keqXgCcMZgv3pGGIwe2xw3vv4YFvHC1ugUR80ghSjSVIg50QPAxBerFfgLs4QmEuN
+	 ZVc33JIvWXBC0KGpLXJ7Ax5QDCE6gEGVAW2LMmhNfk/rnwdzu9fQbbsP6wrxOb5rK8
+	 wyVbuTImh27dQ==
+Message-ID: <sashiko-outbox-190596@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 2/7] regulator: pm8008: Add PM8010 support
+Subject: Re: [PATCH v3 5/7] mfd: qcom-pm8008: Add PM8010 support
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Jishnu Prakash" <jishnu.prakash@oss.qualcomm.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261030-pm8010_i2c_support-v3-2-995ed1ec7a72@oss.qualcomm.com>
+In-Reply-To: <20261030-pm8010_i2c_support-v3-5-995ed1ec7a72@oss.qualcomm.com>
 References: <20261030-pm8010_i2c_support-v3-0-995ed1ec7a72@oss.qualcomm.com>
- <20261030-pm8010_i2c_support-v3-2-995ed1ec7a72@oss.qualcomm.com>
+ <20261030-pm8010_i2c_support-v3-5-995ed1ec7a72@oss.qualcomm.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Fri, 30 Oct 2026 06:25:29 +0000
+Date: Fri, 30 Oct 2026 06:25:45 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -62,22 +62,19 @@ Precedence: list
 
 > From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 >=20
-> PM8010 is effectively the next generation of PM8008.
+> PM8010 is effectively the next generation of PM8008. The device is
+> generally designed to serve the exact same function - power camera
+> sensors and the associated supporting hardware.
 >=20
-> Like PM8008, PM8010 also has 7 LDOs under it which are used to power
-> camera sensors. The PM8010 LDO are of different types from the PM8008
-> ones and have different voltage dropout values. PM8010 LDOs do not have
-> a voltage step rate configuration register.
+> PM8010 supports both I2C and SPMI communications. The latter case is
+> already handled, since it reuses the same peripherals as other PMICs.
+> The I2C front-end is more less the same to the one of PM8008.
 >=20
-> Add the necessary changes to support PM8010 LDOs.
+> Plumb in the necessary changes to support it.
 >=20
 > Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 > Co-developed-by: Dhruvin Rajpura <drajpura@qti.qualcomm.com>
 > Signed-off-by: Dhruvin Rajpura <drajpura@qti.qualcomm.com>
-> Tested-by: Oleg Keri <okerixx@gmail.com> # Lenovo Yoga Slim 7x Gen 11 (Gl=
-ymur)
-> Tested-by: Burke Cates <burke.cates@gmail.com> # ASUS Zenbook A16 (UX3607=
-OA)
 > Co-developed-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
 > Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
 
@@ -85,5 +82,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261030-pm8010_i2c=
-_support-v3-0-995ed1ec7a72@oss.qualcomm.com?part=3D2
+_support-v3-0-995ed1ec7a72@oss.qualcomm.com?part=3D5
 
