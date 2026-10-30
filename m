@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793336076;
-	b=SP/5fOFYNRqjS06AU0X+hP67K9oq0qd0DZkpjMJtggDXqhdmNN5XBYrsPumX/QoyTySm
-	 jOGmIZa60qEkrXOp7tCmfLgAd9q30i8dcZFIZkUnH+AQ9tOApdYpzzruNZYWEr12vuTC5
-	 asoK+QA8n90IbhZPJLvDAvZhkxacH3tDlLEEURHFcjty/Nt6J5PPnWppFPimeG5X1exif
-	 Dq+GZnbkvd5q5IhDP3Ez1Fm1e4OeZ0ykolQ5sHf4p2ZkpXK4Yp/mY5CMC6Ql18+U+T1HL
-	 304rPsmmWW/KwFFQ7Ag23J/iqKnI+y75yUpt0+It+f+4/myeCb+JE30Jo1oc4M6xPOQ==
+	t=1793336078;
+	b=iZPa5wRmS0SwKYb3Kce5GowsUF/tL3HdzLo90s/8qwxLIvxbuEJvdL4XGh2VFact+7zE
+	 0n2tCE7TXxs06LCDXYjOGFmrZl43iOq0ZxPIANNUEK8UYp+yK82geHhX107OAEjNo60ib
+	 ktaMeHpv+5K7MZwqd5yjGnkjL0ixxXQJ61E2K8fzyLgFO604xjj+jc1Yb98lGhbgkek81
+	 7WO9p3rr1cNl/tU/mN2morQNCGVwJvWOkaWtUiM5o1puoXcuJHrqXL4iV0Vb0rFiP0hL6
+	 /6G0h2+aNXpeEKhWJBvqo2YPL3ZlJ4OwvPEUF9j7ozO6OSsXTWVV+zDj/YkDrbNzttA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793336076;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793336078;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=XDR+z05wAJMvHf3aWYv837eS/J43xs5HpTX4trXbpOg=;
-	b=AMzish8FAYIVrwUSh9gCbgVCalsAJoIIDxcVjbilwxRFAZ9hI3eZ3UNvFwGCnvhhGIJS
-	 csXgcb91idT2vo4l6EE/3AxeqJTGglcyJmxsGYW8coWdl5OEKjsX3bwEUCtYI8JozK1RW
-	 KkqeEiD1r8oTor/SDeMjmedYGwEbIjD2vNYVW2EjuREQJzvRtg9oKzPPRlV8sUe2Ag29f
-	 J6RKF59XZW+MZf9SUYlOtQQCRsCicrYNBevtlFQjJs6C6y8/MQEo/eNemwNf210Ztxk+M
-	 xPKeqN2eaN/ycJoPQ1uG5HM34wqrV9kdX6IN24Am03JdD32q6Bdo0kOcMyjWnz2cddQ==
+	bh=cpVmLAkXUEKk1gtTsJfO0NQgZBTsyiKIKho12225nQ8=;
+	b=Y5geSVbpqkVS44KfopBX1SNjCNh3opjn9kDws5jrTznTNKkP8+XeECKf9GVWI8oQJefA
+	 SSFlRXehPPdf5kQRFXPv0HjwPjYkIQ34LBrXT3sux/zHytEEuF4iiZHV6rVT3NzKtkwkT
+	 nM1AqhqndCTyTfMPZqq07KE/WbcBdDFd58MchQvmle9Z3CaWrKhvS+ySAjbMgp3ZtyAWY
+	 vLkF7jGK24+wsnx7Ka0Lczef5QygGGN6D9NrXrZxOKbaPPNX0cVUdY7gUF3GVCOLWoP3o
+	 e7PlP5JYm/bmX/E7l7j3usNiMRvlXhr/UWNMuHj4y+Rlm4v8z1kzwJCtHU2QUEBvriA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=R3AVsP3J;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=m0rjqH4N;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 79BB2606A326;
-	Fri, 30 Oct 2026 04:54:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6782606A325;
+	Fri, 30 Oct 2026 04:54:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=R3AVsP3J
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E5D691F0093A;
-	Fri, 30 Oct 2026 04:54:35 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=m0rjqH4N
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C9D541F000C1;
+	Fri, 30 Oct 2026 04:54:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793336076;
-	bh=XDR+z05wAJMvHf3aWYv837eS/J43xs5HpTX4trXbpOg=;
+	s=k20260515; t=1793336077;
+	bh=cpVmLAkXUEKk1gtTsJfO0NQgZBTsyiKIKho12225nQ8=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=R3AVsP3J02Vt4mw0UhSILgq5UhwMqVNMRtMfrWFPSNZXXZ7GGeEJHiRl5pMHOlHB+
-	 XRR6Srv5SPEmALKAKGmPo4lP1CQA3zB6Kb1IKu/o0VG8iwOGy3KuL4qfOBFLpM/PS5
-	 UGoTaIXid8onCMpqa8Zv4IcY2OqEYvfu9xD9CIVH7Go5sZEWJhrehsfcpKNI862/Gz
-	 mQloWAfqlsxEZfAEyC8MTPBAvoBfk12VT4tPRXiB9ZMzPFj3yhWBOl4I5ENZ6RmVqh
-	 hBphxl/oXIbpmT+sQtqmDCIW61IwnMZY+J0swJYXvJDyJTNw5t4vHoK7M3jb/XQMDt
-	 MxZ6AtnLKMEmg==
-Message-ID: <sashiko-outbox-190513@kernel.org>
+	b=m0rjqH4NxpmPUW2XwSWB5rt5Rntl0Svo766Hc3hXQigqjUmaLUR/FvGNW/+aVjH6T
+	 rKkWA8BNWd3Q2wQMidinQjDvyX5n94HgxgYVOb2yx3lCAKTK8G6qfR3eLcJsSsBvgS
+	 QAEEGKPmfE+PDYHfCuo994Wpq83IXQmr0FjW5y6hIrxzH39UB8UzTR5ZvzOosyshNB
+	 xnGMY8oQ1GbaTNK6jiwbHL6mF4RS4G3wiH0fARalezOD/2ZlVdzgiCv6cxLFEV7Bf4
+	 avt/3Cpa6iAYsudS4bDvEerroeK08Pkh+VF2ttiqdSLhQ/E4YlmOH59K1JKsujHHOo
+	 1/VCM9yTjTCiA==
+Message-ID: <sashiko-outbox-190514@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH net-next v22 5/9] net: phy: Add Airoha AN8855 Internal
- Switch Gigabit PHY
+Subject: Re: [PATCH net-next v22 6/9] net: dsa: tag_mtk: add Airoha variant
+ usage of this TAG
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Christian Marangi" <ansuelsmth@gmail.com>, mfd@lists.linux.dev, devicetree@vger.kernel.org
 Cc: robh@kernel.org, conor+dt@kernel.org, lee@kernel.org
-In-Reply-To: <20260915123812.14747-6-ansuelsmth@gmail.com>
+In-Reply-To: <20260915123812.14747-7-ansuelsmth@gmail.com>
 References: <20260915123812.14747-1-ansuelsmth@gmail.com>
- <20260915123812.14747-6-ansuelsmth@gmail.com>
+ <20260915123812.14747-7-ansuelsmth@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Fri, 30 Oct 2026 04:54:35 +0000
+Date: Fri, 30 Oct 2026 04:54:36 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,136 +61,65 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
 s) to consider:
-- [High] net/phy: flawed calibration lookup logic corrupts valid efuse valu=
-es
-- [Medium] net/phy: phy_write_mmd zeroing out adjacent fields in RXADC regi=
-sters
-- [Low] net/phy: downshift tunable ignores requested count violating ethtoo=
-l API
+- [High] net: dsa: missing DSA_TAG_PROTO_AIROHA in eth drivers breaks offlo=
+ads
 --
 
-commit 86e9fad6319a9402e15a273e59be80e0d645c59c
+commit aaecc61a677f69e71544a1c2a64947df3cc03f58
 Author: Christian Marangi <ansuelsmth@gmail.com>
 
-net: phy: Add Airoha AN8855 Internal Switch Gigabit PHY
+net: dsa: tag_mtk: add Airoha variant usage of this TAG
+   =20
+Add variant of the MTK TAG for Airoha Switch and comments about difference
+between Airoha AN8855 and Mediatek tag bitmap.
 
-This commit adds a simple PHY driver to support the Airoha AN8855
-Internal Switch Gigabit PHY, including configuration and calibration
-using NVMEM cells.
-
-> diff --git a/drivers/net/phy/air_an8855.c b/drivers/net/phy/air_an8855.c
-> new file mode 100644
-> index 0000000000000..bc22256fd5f95
-> --- /dev/null
-> +++ b/drivers/net/phy/air_an8855.c
-[ ... ]
-> +static int an8855_get_r50ohm_val(struct device *dev, const char *calib_n=
-ame,
-> +				 u8 *dest)
-> +{
-> +	u32 shift_sel, val;
-> +	int ret;
-> +	int i;
-> +
-> +	ret =3D nvmem_cell_read_u32(dev, calib_name, &val);
-> +	if (ret)
-> +		return ret;
-> +
-> +	shift_sel =3D FIELD_GET(AN8855_SWITCH_EFUSE_R50O, val);
-> +	for (i =3D 0; i < ARRAY_SIZE(dsa_r50ohm_table); i++)
-> +		if (dsa_r50ohm_table[i] =3D=3D shift_sel)
-> +			break;
-> +
-> +	if (i < 8 || i >=3D ARRAY_SIZE(dsa_r50ohm_table))
-> +		*dest =3D dsa_r50ohm_table[25];
-> +	else
-> +		*dest =3D dsa_r50ohm_table[i - 8];
-> +
-> +	return 0;
-> +}
+> diff --git a/include/net/dsa.h b/include/net/dsa.h
+> index 7507d632e7c6d..c5659e9ab6d35 100644
+> --- a/include/net/dsa.h
+> +++ b/include/net/dsa.h
+> @@ -75,6 +76,7 @@ enum dsa_tag_protocol {
+>  	DSA_TAG_PROTO_KSZ9893		=3D DSA_TAG_PROTO_KSZ9893_VALUE,
+>  	DSA_TAG_PROTO_LAN9303		=3D DSA_TAG_PROTO_LAN9303_VALUE,
+>  	DSA_TAG_PROTO_MTK		=3D DSA_TAG_PROTO_MTK_VALUE,
+> +	DSA_TAG_PROTO_AIROHA		=3D DSA_TAG_PROTO_AIROHA_VALUE,
 
 [Severity: High]
-Does this logic incorrectly map valid top-end EFUSE values to a fallback?
+Does adding this new protocol break hardware offloads in the ethernet MAC
+drivers?
 
-If the hardware EFUSE provides 127 (which is the first entry in
-dsa_r50ohm_table), the loop immediately matches at i =3D 0. The code then
-evaluates if (i < 8) as true, forcing dest to a hardcoded fallback of
-dsa_r50ohm_table[25] (which is 94).=20
+The Mediatek and Airoha ethernet drivers explicitly check for
+DSA_TAG_PROTO_MTK to enable hardware DSA tag extraction and PPE offloading.
 
-However, a slightly lower value like 126 matches at i =3D 17, bypasses the
-check, and maps to dsa_r50ohm_table[9] (which correctly yields 127). Will
-this discontinuity erroneously penalize top-end calibration values and
-drop them to 94, potentially corrupting PHY TX pair calibration?
+For example, in airoha_get_dsa_tag() in
+drivers/net/ethernet/airoha/airoha_eth.c:
 
-[ ... ]
-> +static int an8855_set_downshift(struct phy_device *phydev, u8 cnt)
-> +{
-> +	u16 ds =3D cnt !=3D DOWNSHIFT_DEV_DISABLE ? AN8855_PHY_EN_DOWN_SHIFT : =
-0;
-> +
-> +	return phy_modify_paged(phydev, AN8855_PHY_PAGE_EXTENDED_1,
-> +				AN8855_PHY_EXT_REG_14, AN8855_PHY_EN_DOWN_SHIFT,
-> +				ds);
-> +}
+    if (dev->dsa_ptr->tag_ops->proto !=3D DSA_TAG_PROTO_MTK)
+        return 0;
 
-[Severity: Low]
-Does this downshift tunable ignore the requested retry count?
+Because DSA_TAG_PROTO_AIROHA is not matched, the MAC drivers will skip DSA
+tag extraction, leaving the tag in the payload. Will this cause the hardware
+to miscalculate IP header offsets and break checksum offloads?
 
-The ethtool API for ETHTOOL_PHY_DOWNSHIFT accepts a specific retry count via
-the cnt parameter, but here cnt !=3D DOWNSHIFT_DEV_DISABLE is used as a sim=
-ple
-boolean toggle.=20
+Similar checks exist in mtk_uses_dsa() in
+drivers/net/ethernet/mediatek/mtk_eth_soc.c:
 
-If userspace requests a specific unsupported downshift count, won't the dri=
-ver
-enable the hardware default and return 0 (success) instead of rejecting the
-invalid count with -EOPNOTSUPP or -EINVAL?
+    return netdev_uses_dsa(dev) &&
+           dev->dsa_ptr->tag_ops->proto =3D=3D DSA_TAG_PROTO_MTK;
 
-[ ... ]
-> +static int an8855_config_init(struct phy_device *phydev)
-> +{
-[ ... ]
-> +	/* Apply values to reduce signal noise */
-> +	ret =3D phy_modify_mmd(phydev, MDIO_MMD_VEND1, AN8855_PHY_TX_PAIR_DLY_S=
-EL_GBE,
-> +			     AN8855_PHY_CR_DA_TX_PAIR_DELAY_SEL_A_GBE |
-> +			     AN8855_PHY_CR_DA_TX_PAIR_DELAY_SEL_C_GBE,
-> +			     FIELD_PREP(AN8855_PHY_CR_DA_TX_PAIR_DELAY_SEL_A_GBE, 0x4) |
-> +			     FIELD_PREP(AN8855_PHY_CR_DA_TX_PAIR_DELAY_SEL_C_GBE, 0x4));
-> +	if (ret)
-> +		return ret;
-> +	ret =3D phy_set_bits_mmd(phydev, MDIO_MMD_VEND1, AN8855_PHY_RXADC_CTRL,
-> +			       AN8855_PHY_RG_AD_SAMPLE_PHSEL_A |
-> +			       AN8855_PHY_RG_AD_SAMPLE_PHSEL_C);
-> +	if (ret)
-> +		return ret;
-> +	ret =3D phy_write_mmd(phydev, MDIO_MMD_VEND1, AN8855_PHY_RXADC_REV_0,
-> +			    FIELD_PREP(AN8855_PHY_RG_AD_RESERVE0_A, 0x1));
-> +	if (ret)
-> +		return ret;
-> +	ret =3D phy_write_mmd(phydev, MDIO_MMD_VEND1, AN8855_PHY_RXADC_REV_1,
-> +			    FIELD_PREP(AN8855_PHY_RG_AD_RESERVE0_C, 0x1));
-> +	if (ret)
-> +		return ret;
-> +
-> +	return 0;
-> +}
+And in mtk_foe_entry_commit_subflow() in
+drivers/net/ethernet/mediatek/mtk_ppe.c:
 
-[Severity: Medium]
-Will phy_write_mmd() inadvertently zero out adjacent fields in these
-RXADC registers?
+    if (!netdev_uses_dsa(skb->dev) ||
+        skb->dev->dsa_ptr->tag_ops->proto !=3D DSA_TAG_PROTO_MTK)
+        goto out;
 
-Earlier in this function, phy_modify_mmd() and phy_set_bits_mmd() are used
-to carefully preserve the state of pairs B and D. But for the REV_0 and
-REV_1 registers, phy_write_mmd() completely overwrites the 16-bit register.
-
-By writing FIELD_PREP(AN8855_PHY_RG_AD_RESERVE0_A, 0x1) directly, won't this
-implicitly zero out the adjacent AN8855_PHY_RG_AD_RESERVE0_B (bits 7:0),
-breaking the read-modify-write pattern and wiping out hardware defaults for
-pairs B and D?
+This could entirely disable PPE hardware offloading for the new Airoha swit=
+ch
+protocol. Should these drivers be updated to also match DSA_TAG_PROTO_AIROH=
+A?
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20260915123812.1474=
-7-1-ansuelsmth@gmail.com?part=3D5
+7-1-ansuelsmth@gmail.com?part=3D6
