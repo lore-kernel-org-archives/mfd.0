@@ -1,55 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.171.202.116
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.85.4
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793354483;
-	b=t1NZmE1ifRX5l/TJZAzqGaSWs8LRKn2fZzc66yYD2G8qWigrtVYa4AEnX33XhGDSVvD8
-	 Aem2xqzy1YC5tVKih8IrVFuBbZsFLKWeVCcT3LhqwgsbhYcMiUQfbLHCznyexHf0CbnJ4
-	 w+GqV+WfxoFfk+iwYHh0YVQR0YWoogLjMnwubWE5np5rpAA2tJDIgCpSDupHny55KAe51
-	 9qSsqO/AbOr+BkiY6N2qImUt5D4TMmxy9kEoJsRV/lLXQX8dBxVRbjbEOhHB2OHHbjw1q
-	 ExqbS/1/UsyJ79MQdw9deVf4vN0yS+FgswQn+1E7n38gztfa6aO62knyIhwDAvvfvKg==
+	t=1793356015;
+	b=jU2hbGzqQtn3571KrkSm2zCl0Bk1cdMhyj+SD6n2pAG3indikPqenlf9GpgxNEOlW5rK
+	 zz1pCARQ0Ugytuv34DW6Z92lM4T82A8HH9PISufXsz/3TozbOgEMzTSP5EWEJcTwykmjZ
+	 lHiiKKHgT/rn9bk+/64no0ryHvfX4bZbWbruZok60gA96vDtZ1Z4D/R1Y1M7r0Is9lQP3
+	 eMRTeYLv5NFz3k/gMTfj+mxLZWRp0UgbpMh4tiHecESY6ze+ds/OU4YN65ShFdjwVD2Ap
+	 sKhzBVGoPmbz8ZGm43mwDnRCv7JZZ1QgyL/RSAdFLSCPHeiWbWQEkvfuuxcjkaweT6g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793354483;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793356015;
 	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:
 	 References:Date:Message-Id:X-Mailer:X-Last-TLS-Session-Version;
-	bh=GL+scJfnHWYGcb5ZDCDZq1DsFM4XmLZLO7gXJFvI4SE=;
-	b=aPLd1M8bnDrm1mApg3mOSZn2tDmJhJgbc1lJ/cQqRixp14rx7bRbHr28pL564xM6eY8r
-	 lovLlzandh9wKOMUFvEI9lWzoU1r4Vj/QlEqpr0THC76aEgWrzo5Ok027o9fA6/GvTuKV
-	 cRpFmH8QuM+x4LhzeJrP+BJrBVHqL4Q3ZqBT6q/ugJJA5W4imuuc6sXbwlCAeTlBq9ssc
-	 sdRwvFKSOfD4VIFCpwynaKkC5Q8ogREvPbctFRWhTYdyzbxOds9pViA9wjen09FdEa9Yh
-	 kQA9vc6LlLZHJk9Ya4frfwIfovmZfXtRYq7MxEgTta2UCAa+JBosqc4p6GdYn5Mi/iw==
+	bh=RR1F54y5drcv+A4tIQHG4ZfpQR+6/k3IO0e9rn0QE3s=;
+	b=LtZnk9vKtty5sRc8cO9dQcF3rIAkaXmWi5JhT36O0GTk1Zhe9/Aw0+RjK6w4EqvZsAii
+	 5dfpLRDXlruLe1Cf5rpqOjO/IwE3Gre2lUAZZ6nwebAY85v4hLEK6EPmjOLvH4y+aG0Lc
+	 RlOwwj88CJNzhOchFqnSglTH4p5Dgloled5ntPNFpw97jj57DpKeL1V+vKuE8SbXShz8p
+	 KumzQomG3QTuUdMq5PFiH2LTVeAg6Lvt9g4BZnSAphm5JJhoxSmtLT88Cxla/lWKHCZyK
+	 /K8v8yh9AimZb0pXQoW00yfDf3T0eAhNfosNu22lGy5Y3cmHi8E7mShfg/RZohWPqkg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=bootlin.com;
 	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=UL6qCozx;
-	arc=none smtp.remote-ip=185.171.202.116
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=vumznZ4o;
+	arc=none smtp.remote-ip=185.246.85.4
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94EFB606A31C
-	for <mfd@lists.linux.dev>; Fri, 30 Oct 2026 10:01:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 94EFB606A31C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A997606A320;
+	Fri, 30 Oct 2026 10:26:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8A997606A320
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=UL6qCozx
+	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=vumznZ4o
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 8EB3DC49F5E;
-	Fri, 30 Oct 2026 10:02:21 +0000 (UTC)
+	by smtpout-03.galae.net (Postfix) with ESMTPS id D45464E41396;
+	Fri, 30 Oct 2026 10:26:52 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id C4E19603C2;
-	Fri, 30 Oct 2026 10:01:18 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 1BBD910328D09;
-	Fri, 30 Oct 2026 11:01:07 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id A6731603C2;
+	Fri, 30 Oct 2026 10:26:52 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 75DD9103287DA;
+	Fri, 30 Oct 2026 11:26:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1793354476; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1793356011; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=GL+scJfnHWYGcb5ZDCDZq1DsFM4XmLZLO7gXJFvI4SE=;
-	b=UL6qCozxlBY7caFOEQgPh5XeTPxe0uKsEO4bkWj9MyqY+iB6UMEjvRtH21o5vvUXcVKUI/
-	CcysYI7iXZOapAOxnIb6BQjZdAGx1qYjrMvBt0YRs7+E6O4aDVwGHjCk7OhzXkeZhDVO23
-	TQHECJhi0LcZgT1o+KpDTc7YN8L1J5L2EKzanWVej8oZEGJ6Vzsn4R5joPQ/BlfzljTve8
-	PmVSOem/IiDXooQmrkdr7+6vYj1l1oO978SJdcSMrim3K4XcjL2JGzD7Q4YBKbsHs433CU
-	FcHLSyrQvT1ygOs2bTiBRo350ax7+Z/O+9J+3YqY0rAvCHSzf0Ekv2GDiK8KUA==
+	bh=RR1F54y5drcv+A4tIQHG4ZfpQR+6/k3IO0e9rn0QE3s=;
+	b=vumznZ4o/YhlDqvCPO6TgB6PpQPi7eFbzUumgVXbHN1PjGkAtHgef055JQtH86dxpVLhfV
+	RCWeW4I/yhu2/s5jt/rkUjJfqtmDgUbvSWx9e29C8twC9wB+IjKbno0jHm1/5gtiHuMJko
+	fmQYZW2y0sfgyTLpwEQt4zUcNAd7gsR59iOXSaLF9+tUs/PAloTCTYIWlQTpz/gv0BM6L0
+	HeZQ8SyncywSA7zRbQLI/i8pHhngmF/JL6std7clx3aA35WWkikJnZeyO4SwavDaby8pEX
+	jXKzceH6iEo5LXPNfqwuyfM64tMERtEbEb8NXhpfboohUqRyYg35c2NhIFLh8w==
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,7 +61,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH 2/2] mfd: cgbc: Allow compile testing
+Subject: Re: [PATCH 1/2] mfd: Constify mfd_cell arrays
 From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
 To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 Cc: Lee Jones <lee@kernel.org>, Chen-Yu Tsai <wens@kernel.org>, 
@@ -80,34 +80,17 @@ Cc: Lee Jones <lee@kernel.org>, Chen-Yu Tsai <wens@kernel.org>,
  linux-kernel@vger.kernel.org, imx@lists.linux.dev, 
  linux-arm-kernel@lists.infradead.org, 
  linux-stm32@st-md-mailman.stormreply.com, patches@opensource.cirrus.com
-In-Reply-To: <20261030071137.100954-4-krzysztof.kozlowski@oss.qualcomm.com>
+In-Reply-To: <20261030071137.100954-3-krzysztof.kozlowski@oss.qualcomm.com>
 References: <20261030071137.100954-3-krzysztof.kozlowski@oss.qualcomm.com>
- <20261030071137.100954-4-krzysztof.kozlowski@oss.qualcomm.com>
-Date: Fri, 30 Oct 2026 11:00:48 +0100
-Message-Id: <179335444849.822489.8403085231738038338.b4-review@b4>
+Date: Fri, 30 Oct 2026 11:26:32 +0100
+Message-Id: <179335599226.822489.13265784162305522111.b4-review@b4>
 X-Mailer: b4 0.16.0
 X-Last-TLS-Session-Version: TLSv1.3
 
-> cgbc-core.c driver does not use any X86-specific headers, so looks like
-> it can be build tested everywhere for increased build coverage.
-> 
-> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
->
-> diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
-> index 87ed55c155f0..de957f574056 100644
-> --- a/drivers/mfd/Kconfig
-> +++ b/drivers/mfd/Kconfig
-> @@ -255,7 +255,7 @@ config MFD_AXP20X_RSB
->  config MFD_CGBC
->  	tristate "Congatec Board Controller"
->  	select MFD_CORE
-> -	depends on X86
-> +	depends on X86 || COMPILE_TEST
->  	help
->  	  This is the core driver of the Board Controller found on some Congatec
->  	  SMARC modules. The Board Controller provides functions like watchdog,
+> mfd_add_devices() takes pointer to const, so 'struct mfd_cell' arrays
+> can be constified whenever driver does not modify it in the probe.
 
-Reviewed-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
+Acked-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com> # cgbc-core
 
 -- 
 Best Regards,
