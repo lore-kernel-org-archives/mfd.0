@@ -1,92 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.14
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.171.202.116
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793353751;
-	b=p887ukLrl4EbitDvX4kcjS7xZl/bqwOW6GX2V/uy44Lfr2oG+Ww5hKZQwby5X/v64/UV
-	 IuiTFl7Hmg8dMTlfZJFiVJRwk+mtM+vU6PMpVdYjd1FlFOHPgFWBW3P4DM2JZ/aXACiGu
-	 1yTeAzYlTWoZhpL2F+/vfrw3QadNirRW+qgZGmRhmaVUKXvZQCpKfe90Iom8UU8G0JR5P
-	 GyhaokdkAcyaYfkbZe5UEfEFEk3GUWbGPg3XgQuod4v2MRAsXLkIAzyWdhMpBKIKiKHRW
-	 EShgOdTIeKxvq8JnyWYdS7RO+TMP+9nGsP2WQzJmQo5I0PmTbWsIbtUfxhLsEwytsoA==
+	t=1793354483;
+	b=t1NZmE1ifRX5l/TJZAzqGaSWs8LRKn2fZzc66yYD2G8qWigrtVYa4AEnX33XhGDSVvD8
+	 Aem2xqzy1YC5tVKih8IrVFuBbZsFLKWeVCcT3LhqwgsbhYcMiUQfbLHCznyexHf0CbnJ4
+	 w+GqV+WfxoFfk+iwYHh0YVQR0YWoogLjMnwubWE5np5rpAA2tJDIgCpSDupHny55KAe51
+	 9qSsqO/AbOr+BkiY6N2qImUt5D4TMmxy9kEoJsRV/lLXQX8dBxVRbjbEOhHB2OHHbjw1q
+	 ExqbS/1/UsyJ79MQdw9deVf4vN0yS+FgswQn+1E7n38gztfa6aO62knyIhwDAvvfvKg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793353751;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:Organization;
-	bh=6ZOljdu8PCNHDLPQ7ccqFPbKaSthLFzVQZs1PlArnbM=;
-	b=n7RboRU+9hUO5C4iBqwr8/PbrtNMk0G8s50h1lVrck0Cy45mg24VbHhBt2aW255V3kQS
-	 G4wifrzkm2rhdkPrPJQeOvX9PvGyXMZsoAk7svPKhEho9ZCNAXj/Xiw4kTAf6E/FSDeHU
-	 YEtGNGTrfY1KZZqSnIN8O+QY3fbedSvQS36MQUlDF5Mwl7XOXvlAFU9X4I/ivosbbzZdY
-	 FpPEFwxSViuegaFZDa3tPLtdyn+ueQZj771vbnsttuLAidw0JV9vKQ9/Reo94XXE8JtW3
-	 bUSU22FxGabYd5rRRHzWRJuLWQINUD5JqwRhsAKf1Wacnrx9SjJsSasC/SbRu4W/9Vg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793354483;
+	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:
+	 References:Date:Message-Id:X-Mailer:X-Last-TLS-Session-Version;
+	bh=GL+scJfnHWYGcb5ZDCDZq1DsFM4XmLZLO7gXJFvI4SE=;
+	b=aPLd1M8bnDrm1mApg3mOSZn2tDmJhJgbc1lJ/cQqRixp14rx7bRbHr28pL564xM6eY8r
+	 lovLlzandh9wKOMUFvEI9lWzoU1r4Vj/QlEqpr0THC76aEgWrzo5Ok027o9fA6/GvTuKV
+	 cRpFmH8QuM+x4LhzeJrP+BJrBVHqL4Q3ZqBT6q/ugJJA5W4imuuc6sXbwlCAeTlBq9ssc
+	 sdRwvFKSOfD4VIFCpwynaKkC5Q8ogREvPbctFRWhTYdyzbxOds9pViA9wjen09FdEa9Yh
+	 kQA9vc6LlLZHJk9Ya4frfwIfovmZfXtRYq7MxEgTta2UCAa+JBosqc4p6GdYn5Mi/iw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=MO3gD3bq;
-	arc=none smtp.remote-ip=192.198.163.14
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.14])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=bootlin.com;
+	spf=pass smtp.mailfrom=bootlin.com;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=UL6qCozx;
+	arc=none smtp.remote-ip=185.171.202.116
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 834C6606A33D;
-	Fri, 30 Oct 2026 09:49:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 834C6606A33D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94EFB606A31C
+	for <mfd@lists.linux.dev>; Fri, 30 Oct 2026 10:01:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 94EFB606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=MO3gD3bq
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1793353751; x=1824889751;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=fOyskiLXbaCfkBWt175bxZvK8XJFZ16jsOxbYDqe0W0=;
-  b=MO3gD3bqhoqbZEpunGBxUIdWnv0SZdtMvVWvgwLV1f66YsRn/ICUvLcy
-   i5bs0FuDnj4FIDB9ARQxATPnVZUQKdXHFpqHxvgGecucGWjvKqzxsrT7A
-   ASxua0l+TOZWPB2ND08tq1Hsxk+2DotkxWJGVfgRqK+VvmrTmXgoYG6jw
-   QXjtvbTGXlT3KVBO4sQ9JI+h8cs/LyuYKzbzNJckSizgSLVtNcjeIc3Hs
-   Ji2aod6pT22WJaeOugAY5B7Ovjixrj7YIHdhD2Ia4ahzhnfteThEpNHDh
-   lbJTU7yL0CEhKPPXsK8c0Ua5APaKW9QxaoIGme6Fhgvfj2m97+s/dd968
-   Q==;
-X-CSE-ConnectionGUID: LgymQRafRpOn2XAymZ7v7Q==
-X-CSE-MsgGUID: LBhccRyqRS+9FxN+w2m4nA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11950"; a="2144612"
-X-IronPort-AV: E=Sophos;i="6.27,186,1787036400"; 
-   d="scan'208";a="2144612"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
-  by fmvoesa108.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Oct 2026 02:49:10 -0700
-X-CSE-ConnectionGUID: MM6DeHpZRfq954A8xK+Xlw==
-X-CSE-MsgGUID: +7g8jGl5TraXtiM2AUHwHQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,186,1787036400"; 
-   d="scan'208";a="5733794"
-Received: from ettammin-mobl3.ger.corp.intel.com (HELO localhost) ([10.245.245.247])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Oct 2026 02:49:05 -0700
-Date: Fri, 30 Oct 2026 11:49:02 +0200
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Cc: Lee Jones <lee@kernel.org>, Chen-Yu Tsai <wens@kernel.org>,
-	Thomas Richard <thomas.richard@bootlin.com>,
-	Andy Shevchenko <andy@kernel.org>,
-	Chanwoo Choi <cw00.choi@samsung.com>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Andreas Werner <andreas.werner@men.de>, Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	Matti Vaittinen <mazziesaccount@gmail.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Liviu Dudau <liviu.dudau@arm.com>,
-	Sudeep Holla <sudeep.holla@kernel.org>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org, imx@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	patches@opensource.cirrus.com
-Subject: Re: [PATCH 2/2] mfd: cgbc: Allow compile testing
-Message-ID: <auRoDuFUMLsjgIvo@ashevche-desk.local>
-References: <20261030071137.100954-3-krzysztof.kozlowski@oss.qualcomm.com>
- <20261030071137.100954-4-krzysztof.kozlowski@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=UL6qCozx
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 8EB3DC49F5E;
+	Fri, 30 Oct 2026 10:02:21 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id C4E19603C2;
+	Fri, 30 Oct 2026 10:01:18 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 1BBD910328D09;
+	Fri, 30 Oct 2026 11:01:07 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1793354476; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=GL+scJfnHWYGcb5ZDCDZq1DsFM4XmLZLO7gXJFvI4SE=;
+	b=UL6qCozxlBY7caFOEQgPh5XeTPxe0uKsEO4bkWj9MyqY+iB6UMEjvRtH21o5vvUXcVKUI/
+	CcysYI7iXZOapAOxnIb6BQjZdAGx1qYjrMvBt0YRs7+E6O4aDVwGHjCk7OhzXkeZhDVO23
+	TQHECJhi0LcZgT1o+KpDTc7YN8L1J5L2EKzanWVej8oZEGJ6Vzsn4R5joPQ/BlfzljTve8
+	PmVSOem/IiDXooQmrkdr7+6vYj1l1oO978SJdcSMrim3K4XcjL2JGzD7Q4YBKbsHs433CU
+	FcHLSyrQvT1ygOs2bTiBRo350ax7+Z/O+9J+3YqY0rAvCHSzf0Ekv2GDiK8KUA==
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -96,21 +59,57 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH 2/2] mfd: cgbc: Allow compile testing
+From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
+To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Cc: Lee Jones <lee@kernel.org>, Chen-Yu Tsai <wens@kernel.org>, 
+ Thomas Richard <thomas.richard@bootlin.com>, 
+ Andy Shevchenko <andy@kernel.org>, Chanwoo Choi <cw00.choi@samsung.com>, 
+ Krzysztof Kozlowski <krzk@kernel.org>, 
+ Andreas Werner <andreas.werner@men.de>, Frank Li <Frank.Li@nxp.com>, 
+ Sascha Hauer <s.hauer@pengutronix.de>, 
+ Pengutronix Kernel Team <kernel@pengutronix.de>, 
+ Fabio Estevam <festevam@gmail.com>, 
+ Matti Vaittinen <mazziesaccount@gmail.com>, 
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+ Alexandre Torgue <alexandre.torgue@foss.st.com>, 
+ Liviu Dudau <liviu.dudau@arm.com>, Sudeep Holla <sudeep.holla@kernel.org>, 
+ Lorenzo Pieralisi <lpieralisi@kernel.org>, mfd@lists.linux.dev, 
+ linux-kernel@vger.kernel.org, imx@lists.linux.dev, 
+ linux-arm-kernel@lists.infradead.org, 
+ linux-stm32@st-md-mailman.stormreply.com, patches@opensource.cirrus.com
 In-Reply-To: <20261030071137.100954-4-krzysztof.kozlowski@oss.qualcomm.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+References: <20261030071137.100954-3-krzysztof.kozlowski@oss.qualcomm.com>
+ <20261030071137.100954-4-krzysztof.kozlowski@oss.qualcomm.com>
+Date: Fri, 30 Oct 2026 11:00:48 +0100
+Message-Id: <179335444849.822489.8403085231738038338.b4-review@b4>
+X-Mailer: b4 0.16.0
+X-Last-TLS-Session-Version: TLSv1.3
 
-On Fri, Oct 30, 2026 at 08:11:39AM +0100, Krzysztof Kozlowski wrote:
 > cgbc-core.c driver does not use any X86-specific headers, so looks like
 > it can be build tested everywhere for increased build coverage.
+> 
+> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+>
+> diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
+> index 87ed55c155f0..de957f574056 100644
+> --- a/drivers/mfd/Kconfig
+> +++ b/drivers/mfd/Kconfig
+> @@ -255,7 +255,7 @@ config MFD_AXP20X_RSB
+>  config MFD_CGBC
+>  	tristate "Congatec Board Controller"
+>  	select MFD_CORE
+> -	depends on X86
+> +	depends on X86 || COMPILE_TEST
+>  	help
+>  	  This is the core driver of the Board Controller found on some Congatec
+>  	  SMARC modules. The Board Controller provides functions like watchdog,
 
-Yep, good one.
-Reviewed-by: Andy Shevchenko <andriy.shevchenko@intel.com>
+Reviewed-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
 
 -- 
-With Best Regards,
-Andy Shevchenko
-
+Best Regards,
+Thomas Richard
 
