@@ -1,91 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.19
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.222.174
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793457518;
-	b=dCLZgY0v3lK1s1DOCsQCLYEyQZt4znGIx1BcZSSSemEaayBQECel6C0W29UD/mIm4TXY
-	 tDmcgm9eMsgbLwfuXIjBCGfcEXtvwTHL0pAy0e3H2PtDA33nje/JaSTJ/YYPF57hkh8jj
-	 4gc0UDgpvUyX8UDy9wBxr011dkvSSaLB3v1TghWPUeBSqNwYKxGJpgQKMOjmXYIOgIdN7
-	 Y02PwoLo9LtcQvPeit22oMMyCrhcsB1DK4KSwUn2CrKMmYrLGxw+fLMwt6MXf5WDtq6lk
-	 ons1N+wjrYDnpalconDFFK+BwYH433G8v8QUXQdU57uJoyx9t1nZfs1iuRHNlMyKwMg==
+	t=1793463876;
+	b=ui4ufL4OB9TAh73UwtGhbWEGBb/Edn7dvfW9SrQdtKsUKPtKZxiSo5O3RFXs0DtsUEky
+	 oSSs7x1gKWPZ/sZ/tV4mpC1qQarbPXCbiApc42IoDIF+rqJNq2kc9vTPvWJbOOc5tSDtv
+	 azjOSySCoVAlGY7kbHpsUKpD8F1cTFbRnTOpysQ4wiLB8ATSVHE+tN0ipf0fBan1eiDuu
+	 r1xtZjzrv3H85MuudQsMjYn8BsPkzQlZzhNLwhEr+B9gubzfkx/o6AB4p+/KkN+ZZ/ZD+
+	 +WFixsCKCrIvB+JiV/8Xgj9YoCwoRgR+bWKkFx4V3TmyAgvRJOWTqF0vnpnTgM2rTJg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793457518;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:Organization;
-	bh=bnsrfRvGRM2qgoxDq8KtlUhs37rsslMeY4OUYqDf+Pc=;
-	b=QHgRBOIpAJhY9ZpjYgTdc4+6aJ9yyUq9e2sfyA2WJ8PaAsg04BSMIiECebYB+UXnXUxi
-	 IRfCehpVCXpLEG5NMrrYr2L3WdN5Gvs1h7tgfrdlcQKUq5KcmTs4sbLjwXAW4qY2w5rpi
-	 LnHLEDq9Adv7iTRwstekbnhdFoyk+Iu0hGnRehuNzGH7npPEDAieogB38TvkFQzKdrjih
-	 0PwNIzzIye98oiE1SHo+JQUgfD55h9FWmVqWjbO81uD+p2XdswcVFBmSjqS/86T71sMzz
-	 weMD5VOWtL6caF/d57HiwiiOscNpPS67HVQJgOqBgT8yybNtObvCPTsNCMVrMk7eUXw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793463876;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 Content-Type:MIME-Version:Content-Transfer-Encoding;
+	bh=6exMPjzPlDYktg7Qt1ZlrxsNxMuURpKWW9XowflKwXc=;
+	b=van1IWZlQniWMuBtyUYvB1Ho129rphz7wER9Al3H0fSqEgPACb/eKGHmEyMOX8l7qouR
+	 V6PcJpnE2yM68plmpwZhC8AzojkWGIzqcBEdib6CLAODSR/723Cm54sgtV0onlb4kZRm2
+	 9qG8QVdZp/7Em2t6/6wcDkXeOoNthWNlyRIIroES9Io45130icmkAIWSDNwkdnwC5skzz
+	 dcQ5J0Mq4DXeJHTMxUFZkeilM4M7AUwl5rTi3nDZb1x4mxFrdMZt3jRNhLyzQ6qlUF2pW
+	 hxE6Q26CiPwFLf11GqcC3J2DqBQmxfo/VEOP2UWo64BgVHmCa3XY4X0IrgFQJLSTF2Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=IXWrpn6W;
-	arc=none smtp.remote-ip=192.198.163.19
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=aHw5R90f;
+	arc=none smtp.remote-ip=209.85.222.174
+Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 140B8606A31A;
-	Sat, 31 Oct 2026 14:38:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 140B8606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 413BA606A325
+	for <mfd@lists.linux.dev>; Sat, 31 Oct 2026 16:24:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 413BA606A325
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=IXWrpn6W
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1793457516; x=1824993516;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=mOGtJbZAYHQiSqbGrp4D+HVhIDhcTQHgl9gip1W8AZU=;
-  b=IXWrpn6W7vNkZUoDlbZc0O27qEc1ZdVgbafvBcP5vapVWbRy912/RwRZ
-   i8omSBIIdiGs+Y38J6g2SvGSGqG6hqfbKfLA5QgWHbA66ihLzLlbQhqtO
-   7tw4ciPhKbmqa8XAZmcNiHnxe28Lh3lXwMRqX8T5F+oTULYPHrFQEvFZB
-   7ySr/wvGeBXb5+s/uuZ6iJ4UvviVmu/vvFeqaYKTZQ6Idb3LtrhY0Bhvm
-   cbzTKqM07xgVXMLrbmoMJYj8UIy3G4frVws/pQbcC+X/uva8vruRzoub5
-   zNtShOKHr3j1BTlDKPpDRuXii/B9pgRGnmWRyFhLGmGmAyQhNPQP7wOQb
-   w==;
-X-CSE-ConnectionGUID: lfx0PIw3RIebcWvL04Zz8A==
-X-CSE-MsgGUID: 3hSXlQD8TQ6A/LAfi0Ak4Q==
-X-IronPort-AV: E=McAfee;i="6800,10657,11952"; a="2308908"
-X-IronPort-AV: E=Sophos;i="6.27,188,1787036400"; 
-   d="scan'208";a="2308908"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
-  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 Oct 2026 07:38:35 -0700
-X-CSE-ConnectionGUID: EO4jmSpvTPKIPl3mo+BHxw==
-X-CSE-MsgGUID: VGkjYBofTQioetwaJ3ILPQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,188,1787036400"; 
-   d="scan'208";a="5759414"
-Received: from slindbla-desk.ger.corp.intel.com (HELO localhost) ([10.245.244.127])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 31 Oct 2026 07:38:30 -0700
-Date: Sat, 31 Oct 2026 16:38:27 +0200
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Cc: Lee Jones <lee@kernel.org>, Chen-Yu Tsai <wens@kernel.org>,
-	Thomas Richard <thomas.richard@bootlin.com>,
-	Andy Shevchenko <andy@kernel.org>,
-	Chanwoo Choi <cw00.choi@samsung.com>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Andreas Werner <andreas.werner@men.de>, Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	Matti Vaittinen <mazziesaccount@gmail.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Liviu Dudau <liviu.dudau@arm.com>,
-	Sudeep Holla <sudeep.holla@kernel.org>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>, mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org, imx@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	Charles Keepax <ckeepax@opensource.cirrus.com>
-Subject: Re: [PATCH v2 1/2] mfd: Constify mfd_cell arrays
-Message-ID: <auX9Yz0txOxbFSSf@ashevche-desk.local>
-References: <20261030140240.211786-3-krzysztof.kozlowski@oss.qualcomm.com>
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=aHw5R90f
+Received: by mail-qk1-f174.google.com with SMTP id af79cd13be357-9440304604aso183066885a.0
+        for <mfd@lists.linux.dev>; Sat, 31 Oct 2026 09:24:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793463875; x=1794068675; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:content-type:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=6exMPjzPlDYktg7Qt1ZlrxsNxMuURpKWW9XowflKwXc=;
+        b=aHw5R90fCuBq+4+Nekk1/3P8maPIuLjCynIyNWh5lXfnErzJn8hES/ePYB2aRqpZMx
+         D2QWaWA9/KmzCgGjL1kY84hNoudMDLLl6eA1RwLKXEHv/3+KoFWHbYirwCH3VZlRon5T
+         TAAJFdDQjth5XFQ0LqHJaCxGFj1ORm9DSg+Z4Ncf9g4YyUUcrfVsU21WFBnHTXX0E9Wa
+         uGMHC1qVffWzFinb985b7a4+O0fmoRI/oosfBPuqPLUKJ+Eplt28Ek4mDwqOBPrWvCUN
+         pMQjw8rOYwxB1lFaIfoAIJ3Sgi2McA/k/oF59Ew9TheNBGNEnTwYcSBxlrOnULJ8JP7h
+         Sy/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793463875; x=1794068675;
+        h=content-transfer-encoding:mime-version:content-type:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=6exMPjzPlDYktg7Qt1ZlrxsNxMuURpKWW9XowflKwXc=;
+        b=Rj7lZc4U809Rb1XQtj2v4KKtTCTM+i5L4ODHKvsylm5Ci2jITTXFKd1OcqwCsmc7HX
+         ndhZE2oud5Lh7W+xIAvIuNVIgUVp/YgKbpGHF2e5hUhTi7BMV4OMsNLkOdsMo5HjEhgt
+         GUwjTSj5WXjn2mWE76P4weMIFjI5v/WRNuMzvfMyFrXy/tyLe5G+j4i0tKydFsOiRRsX
+         /YfNC3GZ666G29Y7A2ahP6jRIZbq4lMybDsxDd/wp9w/wDQksdwJ8/uSUgdcochY5nJb
+         IB2HMyHOuGSV5NPmu0byyCf+Aj5fX8MHgg+g8lejIyUV8tDnJ6gW4hIrvpwyABUcizg4
+         3W7Q==
+X-Forwarded-Encrypted: i=1; AKwUvBzZZ/NT7CYPOryzpkQXQ/9ji6U3yGgiBj+WpY9hTXGy4yr00t8cRmodUYKDE0krK+rFPsk=@lists.linux.dev
+X-Gm-Message-State: AFq9FYLoP4XUQTzMIjRTpCawUrmq95GF0RnJEz2EUeNWeOWTE+cbR481
+	L2u70TB1Xapc6owuxckba8PKyExp0qHl7tyg2v9iCA0tAK/Z5Ofb0amn
+X-Gm-Gg: AYBFou0LTX3oh4O03AHHnMcy3Z9rlwp8lU3hrqCUVUUwOLx9x7j8ZiSeFERQ8ELBQYy
+	C8KwlVz1My1+tChmNLmh8mkf41OH/l9TaSpDjoXO2N/EIIkK8ksBEfehALBxfs+0fDoWOyaax0p
+	YMUakP6v/5q//38xjX6mQBjcMjcIzBd/SzgLdS/wGzGQm1FnUdI/rg7wE6wdJ44WIFqfbz99OzW
+	g8FyifZ9GVEulKXFN/jLiBM+ej69eX44Tj4XGkBk0O5k2Sm9AQpVo5Rq5peJKowxo4XTAhfr8cQ
+	xbGZhwnJXkrSpbjhyUUHygWlsaiBecyOHntRpMY0X05sDM5AEBj4fKY1P7Y+edbgM1pi13saLRu
+	L5TqAr4wDsi/bjcJ6joT2saVhHHFj44xvFS30VhwWDz1eXC279MzzbjR6xkyGrsIb/UWoT0UreL
+	YseMLYmnygdLfdoH+HKexWLCdFl+dLgsIU6Q4x/LwpZZAzH4L6ZhIZ5UQmOltXpztzlwFIXTuSm
+	Hblwt5BIw1/uWJ1ZJsDGAg6CFsSDu5B6fQTa8eURSdlMwoy9lsTqM24TECbkg782+ct25StMbJg
+	7FTNMxMq2b1M5J2bBf0tMHACZNMHrJZTNFj+AiBOXoFZUQTnISvdiOeQur/8wgCxM/oy5nsRyaS
+	8jBar2Q==
+X-Received: by 2002:a05:620a:1999:b0:93c:891b:90f1 with SMTP id af79cd13be357-944133ab8aemr1377062085a.26.1793463875288;
+        Sat, 31 Oct 2026 09:24:35 -0700 (PDT)
+Received: from localhost (h159-112-31-107.euclwi.broadband.dynamic.tds.net. [159.112.31.107])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-94425ad7431sm414076885a.40.2026.10.31.09.24.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 31 Oct 2026 09:24:35 -0700 (PDT)
+From: Christian Cortner <ccortner@gmail.com>
+To: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
+	Lee Jones <lee@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Guru Das Srinagesh <linux@gurudas.dev>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	mfd@lists.linux.dev,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Dhruvin Rajpura <drajpura@qti.qualcomm.com>,
+	Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+	Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+	Oleg Keri <okerixx@gmail.com>,
+	Burke Cates <burke.cates@gmail.com>
+Subject: Re: [PATCH v3 0/7] mfd: qcom-pm8008: Add support for PM8010 over I2C
+Date: Sat, 31 Oct 2026 11:24:34 -0500
+Message-ID: <179346368316.44447.5094215662368347048.x2e-share-pm8010@gmail.com>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261030-pm8010_i2c_support-v3-0-995ed1ec7a72@oss.qualcomm.com>
+References: <20261030-pm8010_i2c_support-v3-0-995ed1ec7a72@oss.qualcomm.com>
+Content-Type: text/plain; charset="us-ascii"
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -95,99 +115,9 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261030140240.211786-3-krzysztof.kozlowski@oss.qualcomm.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Content-Transfer-Encoding: 8bit
 
-On Fri, Oct 30, 2026 at 03:02:41PM +0100, Krzysztof Kozlowski wrote:
-> mfd_add_devices() takes pointer to const, so 'struct mfd_cell' arrays
-> can be constified whenever driver does not modify it in the probe.
+Tested-by: Christian Cortner <ccortner@gmail.com> # Asus Zenbook A16 (UX3607OA)
 
-...
-
->  drivers/mfd/intel_soc_pmic_bxtwc.c    | 2 +-
->  drivers/mfd/intel_soc_pmic_chtdc_ti.c | 2 +-
->  drivers/mfd/intel_soc_pmic_chtwc.c    | 2 +-
->  drivers/mfd/intel_soc_pmic_crc.c      | 6 +++---
-
-> --- a/drivers/mfd/intel_soc_pmic_bxtwc.c
-> +++ b/drivers/mfd/intel_soc_pmic_bxtwc.c
-> @@ -245,7 +245,7 @@ static const struct resource tmu_resources[] = {
->  	DEFINE_RES_IRQ_NAMED(BXTWC_TMU_IRQ, "TMU"),
->  };
->  
-> -static struct mfd_cell bxt_wc_dev[] = {
-> +static const struct mfd_cell bxt_wc_dev[] = {
->  	{
->  		.name = "bxt_wcove_thermal",
->  		.num_resources = ARRAY_SIZE(thermal_resources),
-> diff --git a/drivers/mfd/intel_soc_pmic_chtdc_ti.c b/drivers/mfd/intel_soc_pmic_chtdc_ti.c
-> index 6daf33e07ea0..8412a25d37ff 100644
-> --- a/drivers/mfd/intel_soc_pmic_chtdc_ti.c
-> +++ b/drivers/mfd/intel_soc_pmic_chtdc_ti.c
-> @@ -53,7 +53,7 @@ static const struct resource battery_resources[] = {
->  	DEFINE_RES_IRQ(CHTDC_TI_CCEOCAL),
->  };
->  
-> -static struct mfd_cell chtdc_ti_dev[] = {
-> +static const struct mfd_cell chtdc_ti_dev[] = {
->  	{
->  		.name = "chtdc_ti_pwrbtn",
->  		.num_resources = ARRAY_SIZE(power_button_resources),
-> diff --git a/drivers/mfd/intel_soc_pmic_chtwc.c b/drivers/mfd/intel_soc_pmic_chtwc.c
-> index aa71a7d83fcd..f27985a58c87 100644
-> --- a/drivers/mfd/intel_soc_pmic_chtwc.c
-> +++ b/drivers/mfd/intel_soc_pmic_chtwc.c
-> @@ -50,7 +50,7 @@ static const struct resource cht_wc_ext_charger_resources[] = {
->  	DEFINE_RES_IRQ(CHT_WC_EXT_CHGR_IRQ),
->  };
->  
-> -static struct mfd_cell cht_wc_dev[] = {
-> +static const struct mfd_cell cht_wc_dev[] = {
->  	{
->  		.name = "cht_wcove_pwrsrc",
->  		.num_resources = ARRAY_SIZE(cht_wc_pwrsrc_resources),
-> diff --git a/drivers/mfd/intel_soc_pmic_crc.c b/drivers/mfd/intel_soc_pmic_crc.c
-> index 627a89334908..ce4c9ef59198 100644
-> --- a/drivers/mfd/intel_soc_pmic_crc.c
-> +++ b/drivers/mfd/intel_soc_pmic_crc.c
-> @@ -54,7 +54,7 @@ static const struct resource gpio_resources[] = {
->  	DEFINE_RES_IRQ_NAMED(CRYSTAL_COVE_IRQ_GPIO, "GPIO"),
->  };
->  
-> -static struct mfd_cell crystal_cove_byt_dev[] = {
-> +static const struct mfd_cell crystal_cove_byt_dev[] = {
->  	{
->  		.name = "crystal_cove_pwrsrc",
->  		.num_resources = ARRAY_SIZE(pwrsrc_resources),
-> @@ -93,7 +93,7 @@ static struct mfd_cell crystal_cove_byt_dev[] = {
->  	},
->  };
->  
-> -static struct mfd_cell crystal_cove_cht_dev[] = {
-> +static const struct mfd_cell crystal_cove_cht_dev[] = {
->  	{
->  		.name = "crystal_cove_gpio",
->  		.num_resources = ARRAY_SIZE(gpio_resources),
-> @@ -142,7 +142,7 @@ static struct pwm_lookup crc_pwm_lookup[] = {
->  
->  struct crystal_cove_config {
->  	unsigned long irq_flags;
-> -	struct mfd_cell *cell_dev;
-> +	const struct mfd_cell *cell_dev;
->  	int n_cell_devs;
->  	const struct regmap_config *regmap_config;
->  	const struct regmap_irq_chip *irq_chip;
-
-I haven't compiled, but I checked the code in the actual drivers and my reading
-confirms that these structures may need to be marked with const qualifier.
-
-Reviewed-by: Andy Shevchenko <andriy.shevchenko@intel.com> # Intel SoC PMIC drivers
-
--- 
-With Best Regards,
-Andy Shevchenko
-
-
+PM8010 at 0x08 on i2c5, no interrupt in DT: it probes, and its
+LDO4 and LDO7 power the front camera (ov02c10, 720p at 30 fps).
