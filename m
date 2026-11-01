@@ -1,56 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793564258;
-	b=d9u47SXe6hpj3GXjfB1Q+IiNslvofjh0XuMdK1ZNskVaqxjx13LaA5uZFiCbYQytYXto
-	 LBROuWMyVsGTxHFomT3JfDW+kSM1OeijyOZv9nnn/4qPnUq/VXNu2PLOCEn12bj0nnuZo
-	 NLYwYy8fQsNbfg1HeZiW3n4jtOweBOlsPSruY7G0AD+0Q7o/TZySRi6dFUmu94yo7mVCj
-	 Ipi1qlT7X/uisquB4UU/exnH32K6ka4RlCwsBfykM5ayD9238UBy1XjSOLDPm8IJs1LVS
-	 EUC0WgTwdrDRx8zoSX/dvQdVImBAPazH8vY2V8wLtxaUACfsBnbZabF4nhjCRSmJd6w==
+	t=1793567989;
+	b=FXAgZpNmxeIfKJnUj0Vk9eSxXzt66hbJC0xz2GrnTxcGZoFElwUvzwulBsbLrFomgTFR
+	 jLo+0Ug5QYOkGrAdgu2V5fNmi2l/owgNOrQEiwjJNrGwVIW1RB7AzI9HzCKv3p2VKmgll
+	 AzbYrmH2IqjDciDlRrPNL+HY12VvJG0kWvXuhD0PEZnPE30uWfepThg6bHfG+ONoqLmtU
+	 sMmrXiFL/lI++XYJvXIxCbUz+Fs439lDFJWt4pPPJTH7w0er+Vumg7NXhKlt/oGV6vrTL
+	 dm1mNI7HN2aopJJSi8UhjzM2RezufUiGLMxQuCu64XlOQr3RfIIAvSDy0tzxzNfkFEA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793564258;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=nWcrASPBn8pnf+hzTwSmfuYEIY/HgAsgp1V6nelmFD4=;
-	b=unCUG423kwMcGK8LfezQO79EMyq2sAtqT5cTkx1lsxyth3Q1sUuU+LdUfJqHdrVYM8cI
-	 UyVUogG6Qknmc2Vw5VjOiWWg2v0E9rrc/YJH9b7kxjVzpy0/jk219B/+gzo/ZT0XUuwJ4
-	 ajK27x9p8dZxbaJwhhzp3L3YTqPEmSAsozp714tAcUA+OGagsuzZdC5KmsEIf1YOYPteU
-	 FtG8edp9jU934aS/+Fr3wHqxjIn9Jz/LDSetIeDADvpuka9uXMSaP/3A5daX50L7TWMTq
-	 WAfyLwVqc++IvIIjol3CofbANf9ibSLBr4bq62Kfhxe7VVcwtX0z3NDZEDfdJCiN6Kg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793567989;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=og55u5n1Gdmul4ausS8JyuamV2xgkOuH347fjM0yp7w=;
+	b=GJiohQdgvBtJSricEofUtddQtOHfevRXeM4LVht9e7qVo/oeKUaxSGABrPCle4STPF05
+	 gI3XNsUFSJo909eYbxfNFFKbV30HrSVc70xtBHoUPwiPYAxDBjtdRss8aZvwFM7xei7St
+	 qdiXf9f3gE/13AXTp86uoXPWfUna8NWPkf28m+h7cd+mIkI/z/OWirnqHNESs1Q4gvtQ6
+	 LnSJHJHKi7x2FgI6RegL1wvUqueKSIefTkKhEMCrK5DhszA+elk+sW33K3qwh3+vZEQtu
+	 smi2Y4s3KhmxZ84uD2RktyCthGksoVtnKK6ccMohHR1wXhhTcRZw7/Nz+N/unIsyFIA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=N9VIh10l;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YywL5wq7;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4AC3606A324;
-	Sun,  1 Nov 2026 20:17:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01EA0606A325
+	for <mfd@lists.linux.dev>; Sun,  1 Nov 2026 21:19:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=N9VIh10l
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ECC191F000C1;
-	Sun,  1 Nov 2026 20:17:36 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YywL5wq7
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 86EA81F00A1E
+	for <mfd@lists.linux.dev>; Sun,  1 Nov 2026 21:19:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793564257;
-	bh=nWcrASPBn8pnf+hzTwSmfuYEIY/HgAsgp1V6nelmFD4=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=N9VIh10lTkVlGK97cnbls45ZJeg/cXyUZi0IwWkxZJcByT0zh6bgaA9TKXYC1qbrv
-	 qUCD/mHwSPcEqFc0JzFMh3WRHsDzyLXbWEZcCaAqxGvJwdDCm+W/pLePlUEw+R4V3C
-	 hv2wwvadKWpgR29cnlIfeR395yUbZR1Cko4jST8a5EOiaXjshnRTznLPnCSuAGWcg0
-	 RLjpOKuQnqUp/rSqu+hN8k2gr8sRGNg9V7dLGRDD/spG0hnzq03LEoEtbHstfhvbir
-	 sxCjYqrThWMgqUKUpULHwTX8FnSizGmvxdcgNHuro2rKdF3AAEo1DUNu0v7X/l2stM
-	 WS6wD4hk+bm/g==
-Message-ID: <sashiko-outbox-192661@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 3/3] arm64: dts: imx91_93_common: Enable BBNSM NVMEM
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Stefan Wahren" <wahrenst@gmx.net>
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, imx@lists.linux.dev, robh@kernel.org, conor+dt@kernel.org, Frank.Li@kernel.org, lee@kernel.org
-In-Reply-To: <20261101200140.141642-4-wahrenst@gmx.net>
-References: <20261101200140.141642-1-wahrenst@gmx.net>
- <20261101200140.141642-4-wahrenst@gmx.net>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Sun, 01 Nov 2026 20:17:36 +0000
+	s=k20260515; t=1793567988;
+	bh=og55u5n1Gdmul4ausS8JyuamV2xgkOuH347fjM0yp7w=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=YywL5wq7YoRgBo0wqKFw5cxBW9i7ZWpgqdFhBBeh3ttths0AddZtuwFw6zHS2KNmj
+	 r+8qOvUt8UqhKgoX7TijG9rSW8jKSMsSqhAINGtRy48wgj9aeZvV2tXiX9OEAGamoB
+	 8+ibqcGfJvRzuS2FW8yb/ezHbrJitsDSbVz6eYgdpr9OlmJU4otkylCuUwe9NFSYpX
+	 gGxZqyWjNdi74GiWdGVtZyM46GzOAsaBvcMBUliBQx23ypdldJMdg6wSBwMZY/pyMF
+	 OseIRvv8hKno+pMVugCipuaV/AVxP9mR+vvi/91lOsFj3DJNK/gNL72t/xIsqe098q
+	 JxybrAyuDCG2Q==
+Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-3ab28f3e4dcso29108651fa.0
+        for <mfd@lists.linux.dev>; Sun, 01 Nov 2026 13:19:48 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AKwUvBxPH6e6J+Z+wyAzKbUxzgwq7fQ97tFsgSXcGyxaPxbvIB1I8Ajb2CTcFip2nyEeGrFXii0=@lists.linux.dev
+X-Gm-Message-State: APuU4Z8o2rYoeCFjDDd1W9RuCVmmxku0l9AzUuHvCpTO+Zx8HoizLeXj
+	F9vjji5A3L8rqlWZI7VEet1sZSttqKl/ZVvIJOSBqLcKPiFVX7urr/Gkoa/Q7+5E6JRh7fedhBz
+	7MURSc/gjfdNwjibt6csm/WokRHMVPuM=
+X-Received: by 2002:a05:651c:1b8c:b0:3a9:d111:6520 with SMTP id
+ 38308e7fff4ca-3aca55f2846mr26417331fa.0.1793567987240; Sun, 01 Nov 2026
+ 13:19:47 -0800 (PST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,153 +58,224 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+References: <20261014-xg6846b-bcmbca-xrdp-reset-v1-0-daf5d177e113@kernel.org>
+ <20261014-xg6846b-bcmbca-xrdp-reset-v1-5-daf5d177e113@kernel.org> <90c5efa22600044657e67b9e1297bda2fb53f60c.camel@pengutronix.de>
+In-Reply-To: <90c5efa22600044657e67b9e1297bda2fb53f60c.camel@pengutronix.de>
+From: Linus Walleij <linusw@kernel.org>
+Date: Sun, 1 Nov 2026 22:19:34 +0100
+X-Gmail-Original-Message-ID: <CAD++jL==hUSGDryCDuoQrfh=s+ZnRojVcuhneMGWFvkSNePbMw@mail.gmail.com>
+X-Gm-Features: AclHuK9qYHSbdW0qFPKPlvZIS7KY8pzu0qIZa_AZ9GRrGb6SLD_bdgD5vQv0EP0
+Message-ID: <CAD++jL==hUSGDryCDuoQrfh=s+ZnRojVcuhneMGWFvkSNePbMw@mail.gmail.com>
+Subject: Re: [PATCH RFC 5/5] reset: Add BCMBCA block resets through the PMB
+To: Philipp Zabel <p.zabel@pengutronix.de>
+Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	William Zhang <william.zhang@broadcom.com>, Anand Gore <anand.gore@broadcom.com>, 
+	Kursad Oney <kursad.oney@broadcom.com>, Florian Fainelli <florian.fainelli@broadcom.com>, 
+	=?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, mfd@lists.linux.dev, 
+	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thank you for your contribution! Sashiko AI review found 2 potential issue(=
-s) to consider:
-- [Medium] arm64: dts: imx91_93_common: invalid #address-cells/#size-cells =
-on bbnsm_nvmem
-- [Medium] nvmem: imx-bbnsm: select MFD_SYSCON instead of REGMAP_MMIO in Kc=
-onfig
---
+Hi Philipp,
 
-commit 0a2632d30940d432e106da0e2de92818ce87b154
-Author: Stefan Wahren <wahrenst@gmx.net>
+addressing comments before reposting the patches.
 
-arm64: dts: imx91_93_common: Enable BBNSM NVMEM
+On Wed, Oct 14, 2026 at 1:14=E2=80=AFPM Philipp Zabel <p.zabel@pengutronix.=
+de> wrote:
 
-This series adds devicetree bindings and an NVMEM driver for the i.MX9
-Battery-Backed Non-Secure Module (BBNSM) general purpose registers, and
-enables the BBNSM NVMEM node in imx91_93_common.dtsi.
+> > +struct bcmbca_pmb_reset_group {
+> > +     const char *name;
+> > +     int (*reset)(struct bcmbca_pmb_reset *rst,
+> > +                  const struct bcmbca_pmb_reset_group *group);
+>
+> What is the point of this indirection?
+>
+> There is only a single array of struct bcmbca_pmb_reset_group and all
+> entries use the same bcmbca_pmb_reset_sequence().
 
-> diff --git a/Documentation/devicetree/bindings/mfd/nxp,bbnsm.yaml b/Docum=
-entation/devicetree/bindings/mfd/nxp,bbnsm.yaml
-> index b1ade64a15541..4c4b7c3fff2a2 100644
-> --- a/Documentation/devicetree/bindings/mfd/nxp,bbnsm.yaml
-> +++ b/Documentation/devicetree/bindings/mfd/nxp,bbnsm.yaml
-> @@ -31,6 +31,20 @@ properties:
->    reg:
->      maxItems: 1
-> =20
-> +  nvmem:
-> +    type: object
-> +    $ref: /schemas/nvmem/nvmem.yaml#
-> +
-> +    properties:
-> +      compatible:
-> +        enum:
-> +          - nxp,imx93-bbnsm-nvmem
-> +
-> +    required:
-> +      - compatible
-> +
-> +    additionalProperties: false
-> +
->    rtc:
->      type: object
->      $ref: /schemas/rtc/rtc.yaml#
-> @@ -88,6 +102,12 @@ examples:
->          compatible =3D "nxp,imx93-bbnsm", "syscon", "simple-mfd";
->          reg =3D <0x44440000 0x10000>;
-> =20
-> +        nvmem {
-> +            compatible =3D "nxp,imx93-bbnsm-nvmem";
-> +            #address-cells =3D <1>;
-> +            #size-cells =3D <1>;
-> +        };
-> +
->          bbnsm_rtc: rtc {
->              compatible =3D "nxp,imx93-bbnsm-rtc";
->              interrupts =3D <GIC_SPI 73 IRQ_TYPE_LEVEL_HIGH>;
-> diff --git a/arch/arm64/boot/dts/freescale/imx91_93_common.dtsi b/arch/ar=
-m64/boot/dts/freescale/imx91_93_common.dtsi
-> index a1a7e6a0571bd..12a505a2c1546 100644
-> --- a/arch/arm64/boot/dts/freescale/imx91_93_common.dtsi
-> +++ b/arch/arm64/boot/dts/freescale/imx91_93_common.dtsi
-> @@ -357,6 +357,12 @@ bbnsm: bbnsm@44440000 {
->  				compatible =3D "nxp,imx93-bbnsm", "syscon", "simple-mfd";
->  				reg =3D <0x44440000 0x10000>;
-> =20
-> +				bbnsm_nvmem: nvmem {
-> +					compatible =3D "nxp,imx93-bbnsm-nvmem";
-> +					#address-cells =3D <1>;
-> +					#size-cells =3D <1>;
-> +				};
+No... one of them use bcm6846_xrdp_reset() instead?
 
-[Severity: Medium]
-Should the nvmem schema in Documentation/devicetree/bindings/mfd/nxp,bbnsm.=
-yaml
-use unevaluatedProperties: false instead of additionalProperties: false, and
-should #address-cells and #size-cells be dropped from both the binding exam=
-ple
-and bbnsm_nvmem in arch/arm64/boot/dts/freescale/imx91_93_common.dtsi?
+> > +static int bcmbca_pmb_reset_sequence(struct bcmbca_pmb_reset *rst,
+> > +                                  const struct bcmbca_pmb_reset_group =
+*group);
+> > +
+> > +static const struct bcmbca_pmb_reset_block bcm6846_xrdp_resets[] =3D {
+> > +     /* Keep the XRDP bus interfaces out of reset. */
+>
+> What does this comment refer to? assert_value being GENMASK(2, 0)
+> instead of 0?
 
-Because properties.nvmem in Documentation/devicetree/bindings/mfd/nxp,bbnsm=
-.yaml
-references /schemas/nvmem/nvmem.yaml# via $ref and specifies
-additionalProperties: false with only compatible listed under properties, a=
-ny
-other property inherited from nvmem.yaml (such as #address-cells, #size-cel=
-ls,
-or nvmem-layout) is rejected during dt_binding_check and dtbs_check.
+Indeed. I fixed up the comment so it's clear what is going on.
 
-In addition, imx_bbnsm_probe() in drivers/nvmem/imx-bbnsm.c registers the
-device without setting add_legacy_fixed_of_cells:
 
-drivers/nvmem/imx-bbnsm.c:imx_bbnsm_probe() {
-	...
-	priv->cfg.stride =3D 4;
-	priv->cfg.word_size =3D 4;
-	priv->cfg.size =3D gpr_words * sizeof(u32);
-	priv->cfg.reg_read =3D imx_bbnsm_read;
-	priv->cfg.reg_write =3D imx_bbnsm_write;
 
-	nvmem =3D devm_nvmem_register(dev, &priv->cfg);
-}
+> > +     {
+> > +             .bus =3D 1,
+> > +             .device =3D 12,
+> > +             .offset =3D 5,
+> > +             .mask =3D GENMASK(27, 0),
+> > +             .assert_value =3D GENMASK(2, 0),
+> > +             .deassert_value =3D GENMASK(27, 0),
+>
+> Are the four different devices the packet engine and the tree runner
+> cores mentioned in the dt-bindings patch?
 
-Since nvmem_register() only parses direct child cell nodes when
-config->add_legacy_fixed_of_cells is true (and nxp,bbnsm.yaml does not
-reference nvmem-deprecated-cells.yaml), cells defined directly under
-bbnsm_nvmem are ignored at runtime, while defining cells inside an
-nvmem-layout subnode will trigger dtc avoid_unnecessary_addr_size warnings =
-if
-#address-cells and #size-cells remain on the parent bbnsm_nvmem node.
+Yes.
 
-[ ... ]
+> Do the 28 bits refer to 28 different resets?
 
-> diff --git a/drivers/nvmem/Kconfig b/drivers/nvmem/Kconfig
-> index c36c2a4c2a0b7..8d492d05f1602 100644
-> --- a/drivers/nvmem/Kconfig
-> +++ b/drivers/nvmem/Kconfig
-> @@ -185,6 +185,18 @@ config NVMEM_BRCM_NVRAM
->  	  This driver provides support for Broadcom's NVRAM that can be accessed
->  	  using I/O mapping.
-> =20
-> +config NVMEM_IMX_BBNSM
-> +	tristate "i.MX BBNSM general purpose register support"
-> +	depends on ARCH_MXC || COMPILE_TEST
-> +	depends on OF
-> +	select REGMAP_MMIO
+The only driver I have writes 0x0fffffff to all four registers
+to release the resets, and this being Broadcom that means
+that is also the only documentation.(I don't work for them,
+my mission here is to have a working platform.) I could of course
+experiment with different values but that turns out to
+be more of a hardware safari, I made it like this because
+I don't want to fix something that's not broken.
 
-[Severity: Medium]
-Should NVMEM_IMX_BBNSM select MFD_SYSCON (and depend on HAS_IOMEM) instead =
-of
-selecting REGMAP_MMIO?
+> > +/* Bits 6 and 7 select the lane configuration and must remain unchange=
+d. */
+> > +static const struct bcmbca_pmb_reset_block bcm6846_pcie_resets[] =3D {
+> > +     {
+> > +             .bus =3D 0,
+> > +             .device =3D 18,
+> > +             .offset =3D 5,
+> > +             .mask =3D GENMASK(5, 0),
+> > +             .assert_value =3D GENMASK(5, 0),
+>
+> Same here, are these 6 different resets? Does the hardware require them
+> to be asserted/deasserted at the same time?
 
-In drivers/nvmem/imx-bbnsm.c, imx_bbnsm_probe() obtains its regmap via
-syscon_node_to_regmap(parent):
+Same here, this is what the Broadcom driver does. If you insist,
+we can do hardware safari, but there are no docs or other examples.
 
-	priv->regmap =3D syscon_node_to_regmap(parent);
-	of_node_put(parent);
-	if (IS_ERR(priv->regmap))
-		return PTR_ERR(priv->regmap);
+When I look closer at the PCIe support it has some more weird
+sequencing going on, so I'll drop PCIe support from the patch
+series for now.
 
-If CONFIG_MFD_SYSCON is not enabled, syscon_node_to_regmap() falls back to =
-the
-stub in include/linux/mfd/syscon.h that returns ERR_PTR(-ENOTSUPP), causing
-imx_bbnsm_probe() to fail at runtime. Selecting MFD_SYSCON (which itself
-selects REGMAP_MMIO and depends on HAS_IOMEM) also avoids selecting
-REGMAP_MMIO on architectures without HAS_IOMEM under COMPILE_TEST.
+> > +     },
+> > +     {
+> > +             .bus =3D 0,
+> > +             .device =3D 19,
+> > +             .offset =3D 5,
+> > +             .mask =3D GENMASK(5, 0),
+> > +             .assert_value =3D GENMASK(5, 0),
+> > +     },
+> > +};
+>
+> Why put these in an array?
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261101200140.1416=
-42-1-wahrenst@gmx.net?part=3D3
+Right there is just two of them. Individual taste I assume,
+I dropped these anyway.
+
+> > +/* Best effort with both locks held; never restart a partially reset g=
+roup. */
+> > +static void bcmbca_pmb_reset_cleanup(struct bcmbca_pmb_reset *rst,
+> > +                                  const struct bcmbca_pmb_reset_group =
+*group)
+> > +{
+> > +     const struct bcmbca_pmb_reset_block *block;
+> > +     unsigned int i;
+> > +     u32 value;
+> > +     int ret;
+> > +
+> > +     for (i =3D 0; i < group->num_blocks; i++) {
+> > +             block =3D &group->blocks[i];
+> > +             ret =3D bcmbca_pmb_read(rst->pmb, block->bus, block->devi=
+ce,
+> > +                                   block->offset, &value);
+> > +             if (!ret) {
+> > +                     value &=3D ~block->mask;
+> > +                     value |=3D block->assert_value;
+> > +                     ret =3D bcmbca_pmb_write(rst->pmb, block->bus, bl=
+ock->device,
+> > +                                            block->offset, value);
+> > +             }
+>
+> Could the PMB bus driver provide an _update_bits() function for these
+> read-modify-write sequences? It is the one handling the locking anyway.
+>
+> This whole driver feels a bit like if PMB could just export a regmap,
+> it would collapse into a few regmap_multi_reg_write()s.
+
+You're damn right about that.
+
+I will rinse and repeat.
+
+>
+> > +             if (ret)
+> > +                     dev_err(rst->rcdev.dev,
+> > +                             "failed to hold PMB bus %u device %u in r=
+eset: %d\n",
+> > +                             block->bus, block->device, ret);
+> > +     }
+> > +}
+> > +
+> > +/* Called with both PMB locks held, including during error cleanup. */
+>
+> Which two locks are "both"? pmb->lock mutex and the PMB_MUTEX hardware
+> lock?
+
+Fixed with regmap abstraction!
+
+> > +static int bcmbca_pmb_reset_sequence(struct bcmbca_pmb_reset *rst,
+> > +                                  const struct bcmbca_pmb_reset_group =
+*group)
+> > +{
+> > +     const struct bcmbca_pmb_reset_block *block;
+> > +     unsigned int i;
+> > +     u32 value;
+> > +     int ret, pass;
+> > +
+> > +     if (!group->num_blocks)
+> > +             return -EINVAL;
+> > +
+> > +     /* Assert every block before releasing any of them. */
+> > +     for (pass =3D 0; pass < 2; pass++) {
+>
+> Maybe   for (pass =3D PASS_ASSERT; pass <=3D PASS_DEASSERT
+
+OK I'll take a stab and see how it looks.
+
+> > +             for (i =3D 0; i < group->num_blocks; i++) {
+> > +                     block =3D &group->blocks[i];
+> > +                     ret =3D bcmbca_pmb_read(rst->pmb, block->bus, blo=
+ck->device,
+> > +                                           block->offset, &value);
+> > +                     if (ret)
+> > +                             goto release;
+> > +                     value &=3D ~block->mask;
+> > +                     value |=3D pass ? block->deassert_value : block->=
+assert_value;
+> > +                     ret =3D bcmbca_pmb_write(rst->pmb, block->bus, bl=
+ock->device,
+> > +                                            block->offset, value);
+> > +                     if (ret)
+> > +                             goto release;
+> > +             }
+> > +             if (!pass && group->assert_us)
+> > +                     usleep_range(group->assert_us, group->assert_us *=
+ 2);
+>
+> Is that assertion delay the time the reset needs to stay asserted or is
+> this really a delay that needs to be observed between successive
+> assertions in a group?
+
+The former. I will rename the variable and add a comment so
+this is clear.
+
+> > +release:
+> > +     if (ret) {
+> > +             dev_err(rst->rcdev.dev, "%s %s failed at PMB bus %u devic=
+e %u: %d\n",
+> > +                     group->name, pass ? "release" : "assert",
+>
+> Please use "deassert" to avoid possible confusion with the
+> reset_control_release() meaning of "release".
+
+OK
+
+Yours,
+Linus Walleij
