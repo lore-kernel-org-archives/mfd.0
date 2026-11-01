@@ -1,55 +1,50 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793567989;
-	b=FXAgZpNmxeIfKJnUj0Vk9eSxXzt66hbJC0xz2GrnTxcGZoFElwUvzwulBsbLrFomgTFR
-	 jLo+0Ug5QYOkGrAdgu2V5fNmi2l/owgNOrQEiwjJNrGwVIW1RB7AzI9HzCKv3p2VKmgll
-	 AzbYrmH2IqjDciDlRrPNL+HY12VvJG0kWvXuhD0PEZnPE30uWfepThg6bHfG+ONoqLmtU
-	 sMmrXiFL/lI++XYJvXIxCbUz+Fs439lDFJWt4pPPJTH7w0er+Vumg7NXhKlt/oGV6vrTL
-	 dm1mNI7HN2aopJJSi8UhjzM2RezufUiGLMxQuCu64XlOQr3RfIIAvSDy0tzxzNfkFEA==
+	t=1793571284;
+	b=t5o+N65YAFz/xNZDXc3TOJgzOhmmm9kAGBIagSwMmSppJSwr/H9ltHfvNixagjLZFlJ3
+	 M3zjrdLi7TQ/7rSTOUg3FPwjTCHzbo6sSjHjuT1yCLJ5G4Vo4JzH0SRhSuU+dinSbvsU4
+	 S6RGYS5wFT8Jb33Onjoeoe/dF48tQix235Peozvcsew9Tk71pSpG/gC0m2Nnx3hScCKgm
+	 rVKUCDEgKaXFGlqPJVu43PN4EQKpx8LXuPr0nlPXkKdiY1VyI2tSv8v/v8Cec/U1SEgyU
+	 KlBKTELhEX2jTu9PzqEgI3WwyW7hmtjEOBYhxysFCO/crkvUTOi1NstaYjAnmUnseTg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793567989;
-	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
-	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
-	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=og55u5n1Gdmul4ausS8JyuamV2xgkOuH347fjM0yp7w=;
-	b=GJiohQdgvBtJSricEofUtddQtOHfevRXeM4LVht9e7qVo/oeKUaxSGABrPCle4STPF05
-	 gI3XNsUFSJo909eYbxfNFFKbV30HrSVc70xtBHoUPwiPYAxDBjtdRss8aZvwFM7xei7St
-	 qdiXf9f3gE/13AXTp86uoXPWfUna8NWPkf28m+h7cd+mIkI/z/OWirnqHNESs1Q4gvtQ6
-	 LnSJHJHKi7x2FgI6RegL1wvUqueKSIefTkKhEMCrK5DhszA+elk+sW33K3qwh3+vZEQtu
-	 smi2Y4s3KhmxZ84uD2RktyCthGksoVtnKK6ccMohHR1wXhhTcRZw7/Nz+N/unIsyFIA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793571284;
+	h=Received:DKIM-Signature:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer;
+	bh=lrsjzjehIG+LsU8wpx0+lgcbIIx5YCUiOoTNxMaQY7I=;
+	b=r2pIZf9/RXXMf5DY27jylPN5RM1aDsochEWdIU6bAzZ1RtwSoY/jT0Vt815642fvX9bc
+	 4yfHtSMLRkLTFVGcEZGFpz7DXrM0cjMkjIYDxvwCc6s+aE7XGc2fI+oNvD2wiPSZKqC8o
+	 JmNMhlsCXdCF1RVh5z7ug0Lm1jqKuo/zBHPgy6l2BBgqS56od19wJk95MdPIOwr/sDvOA
+	 M/oFwDiDgnAfrp44rG/Rtr7q8Bc+1IllbDYXEx8ke1FS6RvIyAvdNi+37OM+bAc47NUGI
+	 hKDy4rY0i5M3BM8hMnnw/SVpqIw9Cn0vJCW52p/VgBGq5I0rEBN4enRBt7nbVwGGx7g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YywL5wq7;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QeCwmY0I;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01EA0606A325
-	for <mfd@lists.linux.dev>; Sun,  1 Nov 2026 21:19:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29DBA606A324;
+	Sun,  1 Nov 2026 22:14:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YywL5wq7
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 86EA81F00A1E
-	for <mfd@lists.linux.dev>; Sun,  1 Nov 2026 21:19:48 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QeCwmY0I
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E57EC1F000C1;
+	Sun,  1 Nov 2026 22:14:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793567988;
-	bh=og55u5n1Gdmul4ausS8JyuamV2xgkOuH347fjM0yp7w=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=YywL5wq7YoRgBo0wqKFw5cxBW9i7ZWpgqdFhBBeh3ttths0AddZtuwFw6zHS2KNmj
-	 r+8qOvUt8UqhKgoX7TijG9rSW8jKSMsSqhAINGtRy48wgj9aeZvV2tXiX9OEAGamoB
-	 8+ibqcGfJvRzuS2FW8yb/ezHbrJitsDSbVz6eYgdpr9OlmJU4otkylCuUwe9NFSYpX
-	 gGxZqyWjNdi74GiWdGVtZyM46GzOAsaBvcMBUliBQx23ypdldJMdg6wSBwMZY/pyMF
-	 OseIRvv8hKno+pMVugCipuaV/AVxP9mR+vvi/91lOsFj3DJNK/gNL72t/xIsqe098q
-	 JxybrAyuDCG2Q==
-Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-3ab28f3e4dcso29108651fa.0
-        for <mfd@lists.linux.dev>; Sun, 01 Nov 2026 13:19:48 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AKwUvBxPH6e6J+Z+wyAzKbUxzgwq7fQ97tFsgSXcGyxaPxbvIB1I8Ajb2CTcFip2nyEeGrFXii0=@lists.linux.dev
-X-Gm-Message-State: APuU4Z8o2rYoeCFjDDd1W9RuCVmmxku0l9AzUuHvCpTO+Zx8HoizLeXj
-	F9vjji5A3L8rqlWZI7VEet1sZSttqKl/ZVvIJOSBqLcKPiFVX7urr/Gkoa/Q7+5E6JRh7fedhBz
-	7MURSc/gjfdNwjibt6csm/WokRHMVPuM=
-X-Received: by 2002:a05:651c:1b8c:b0:3a9:d111:6520 with SMTP id
- 38308e7fff4ca-3aca55f2846mr26417331fa.0.1793567987240; Sun, 01 Nov 2026
- 13:19:47 -0800 (PST)
+	s=k20260515; t=1793571284;
+	bh=lrsjzjehIG+LsU8wpx0+lgcbIIx5YCUiOoTNxMaQY7I=;
+	h=From:Subject:Date:To:Cc;
+	b=QeCwmY0IHi5Vid6QnU9QJJOM8+a31UrK/+W6Wp1KtD0ViHY27N9BKLWTTZbh3ZPLk
+	 rugC49LAhSYg1T1CbTXIAnXOk9EvEABHIueZrKzMs+3DGsIfmAFE7GV+/R+xARxXo/
+	 qGsf4h++YnphpxRaARiFAnBOBE/sbYYju6OQrAunkDBOhkeTq0uV1IjAiILZLr1gxD
+	 chuqiR71cR5en3Vf5k/16mkXwi6aCYmgMDLk57yiA2+1g/ZegUv1OkYTcTgJR0gb64
+	 zF/lc5TfjoLOWSc3eRv2K3r+RW42br/WIJL7bxBOuUqNXhaOgrtILUAnWDAL07kLIK
+	 GvWvc3jERlrzQ==
+From: Linus Walleij <linusw@kernel.org>
+Subject: [PATCH v2 0/7] BCMBCA PMB clock, reset and hardware monitoring
+ support
+Date: Sun, 01 Nov 2026 23:14:33 +0100
+Message-Id: <20261101-xg6846b-bcmbca-xrdp-reset-v2-0-455fe9eed5ee@kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,223 +54,130 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261014-xg6846b-bcmbca-xrdp-reset-v1-0-daf5d177e113@kernel.org>
- <20261014-xg6846b-bcmbca-xrdp-reset-v1-5-daf5d177e113@kernel.org> <90c5efa22600044657e67b9e1297bda2fb53f60c.camel@pengutronix.de>
-In-Reply-To: <90c5efa22600044657e67b9e1297bda2fb53f60c.camel@pengutronix.de>
-From: Linus Walleij <linusw@kernel.org>
-Date: Sun, 1 Nov 2026 22:19:34 +0100
-X-Gmail-Original-Message-ID: <CAD++jL==hUSGDryCDuoQrfh=s+ZnRojVcuhneMGWFvkSNePbMw@mail.gmail.com>
-X-Gm-Features: AclHuK9qYHSbdW0qFPKPlvZIS7KY8pzu0qIZa_AZ9GRrGb6SLD_bdgD5vQv0EP0
-Message-ID: <CAD++jL==hUSGDryCDuoQrfh=s+ZnRojVcuhneMGWFvkSNePbMw@mail.gmail.com>
-Subject: Re: [PATCH RFC 5/5] reset: Add BCMBCA block resets through the PMB
-To: Philipp Zabel <p.zabel@pengutronix.de>
-Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	William Zhang <william.zhang@broadcom.com>, Anand Gore <anand.gore@broadcom.com>, 
-	Kursad Oney <kursad.oney@broadcom.com>, Florian Fainelli <florian.fainelli@broadcom.com>, 
-	=?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, mfd@lists.linux.dev, 
-	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32NSw6CQBAFr2J6bZvp4RtX3sOwmE8DExVIDyEYw
+ t0dSdy6rEpevQ0iS+AI19MGwkuIYRwS6PMJXG+GjjH4xKCVLklRhmtX1nlp0bqXdQZX8RMKR57
+ Rc0W2Vk4XJoe0n4TbsB7te5O4D3Ee5X1cLfS1v2r+p7oQKvSmLTxVFRNltwfLwM/LKB00+75/A
+ G/R+JvDAAAA
+X-Change-ID: 20261013-xg6846b-bcmbca-xrdp-reset-de71b80c25a4
+To: Linus Walleij <linusw@kernel.org>, Lee Jones <lee@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ William Zhang <william.zhang@broadcom.com>, 
+ Anand Gore <anand.gore@broadcom.com>, 
+ Kursad Oney <kursad.oney@broadcom.com>, 
+ Florian Fainelli <florian.fainelli@broadcom.com>, 
+ =?utf-8?q?Rafa=C5=82_Mi=C5=82ecki?= <rafal@milecki.pl>, 
+ Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+ Jerome Brunet <jbrunet+clk@baylibre.com>, 
+ Guenter Roeck <linux@roeck-us.net>, Philipp Zabel <p.zabel@pengutronix.de>, 
+ Jonathan Corbet <corbet@lwn.net>, Randy Dunlap <rdunlap@infradead.org>, 
+ Benjamin Larsson <benjamin.larsson@genexis.eu>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+ linux-arm-kernel@lists.infradead.org, linux-clk@vger.kernel.org, 
+ linux-hwmon@vger.kernel.org
+X-Mailer: b4 0.16.0
 
-Hi Philipp,
+This is another of these big upfront design binding and driver hoards
+that is the consequence of adding new SoC support.
 
-addressing comments before reposting the patches.
+My stake is to be able to boot and test a full featured Cortex-A7
+system and the BCM6846 XG6846B is one such system on my desk.
 
-On Wed, Oct 14, 2026 at 1:14=E2=80=AFPM Philipp Zabel <p.zabel@pengutronix.=
-de> wrote:
+It's been cooking for a while in various prototype forms.
 
-> > +struct bcmbca_pmb_reset_group {
-> > +     const char *name;
-> > +     int (*reset)(struct bcmbca_pmb_reset *rst,
-> > +                  const struct bcmbca_pmb_reset_group *group);
->
-> What is the point of this indirection?
->
-> There is only a single array of struct bcmbca_pmb_reset_group and all
-> entries use the same bcmbca_pmb_reset_sequence().
+IMPLEMENTATION:
 
-No... one of them use bcm6846_xrdp_reset() instead?
+The PMC contains various stuff so this needs to be a simple MFD node
+so more things can be added into it later.
 
-> > +static int bcmbca_pmb_reset_sequence(struct bcmbca_pmb_reset *rst,
-> > +                                  const struct bcmbca_pmb_reset_group =
-*group);
-> > +
-> > +static const struct bcmbca_pmb_reset_block bcm6846_xrdp_resets[] =3D {
-> > +     /* Keep the XRDP bus interfaces out of reset. */
->
-> What does this comment refer to? assert_value being GENMASK(2, 0)
-> instead of 0?
+Inside the PMC is the PMB, the processor monitor bus. This bridges
+to several individual peripherals which are very clearly distinct
+devices on that bus.
 
-Indeed. I fixed up the comment so it's clear what is going on.
+Handle the PMB with an MFD driver with clock, reset and hwmon
+providers.
 
+The BCM6846 XRDP reset sequence enabled full-MTU traffic on all four LAN
+ports and copper WAN and has been tested on that series. The zone
+power-up sequence also passed direct CFE flash boot in the Linux 6.18
+OpenWrt port; this folded v7.3-rc1 revision still needs hardware testing.
 
+MERGE STRATEGY:
 
-> > +     {
-> > +             .bus =3D 1,
-> > +             .device =3D 12,
-> > +             .offset =3D 5,
-> > +             .mask =3D GENMASK(27, 0),
-> > +             .assert_value =3D GENMASK(2, 0),
-> > +             .deassert_value =3D GENMASK(27, 0),
->
-> Are the four different devices the packet engine and the tree runner
-> cores mentioned in the dt-bindings patch?
+Through an MFD immutable branch once everyone ACKs the subdrivers,
+it will take time I guess. All patches except the last one (DTS file)
+to be queued in MFD.
 
-Yes.
+The patches were authored with the assistance of an LLM.
 
-> Do the 28 bits refer to 28 different resets?
+Signed-off-by: Linus Walleij <linusw@kernel.org>
+---
+Changes in v2:
+- Use a shared PMB regmap in all child drivers, keeping keyhole semaphore
+  handling and timeout recovery inside the MFD provider.
+- Drop PCIe reset IDs and sequences pending proper power and lane
+  configuration handling.
+- Power up the XRDP, Runner and WAN zones before the XRDP reset pulse,
+  preserving the sequence tested with direct CFE flash boot in OpenWrt.
+- Describe clock, reset and PVTMON PMB child nodes with separate
+  compatibles.
+- Move the PMB transport and accessor header under MFD and register
+  clock, reset and PVTMON MFD cells matched to their child DT nodes.
+  Select reset variants through OF match data.
+- Add PMB clock support and give PVTMON clock and reset resources.
+- Add PVTMON hwmon support for temperature and all seven voltage inputs,
+  retaining the zero-cell thermal sensor through the hwmon bridge.
+- Add a separate BCM6846 clocks and monitoring DTS patch.
+- Drop the unnecessary literal block marker from the PMC description.
+- Use the BCM6846-specific "brcm,bcm6846-pmc" compatible.
+- Expand PMC as "Power Management Controller" throughout.
+- Move the LLM assistance disclosure from trailers to the cover letter.
+- Drop the RFC prefix.
+- Link to v1: https://patch.msgid.link/20261014-xg6846b-bcmbca-xrdp-reset-v1-0-daf5d177e113@kernel.org
 
-The only driver I have writes 0x0fffffff to all four registers
-to release the resets, and this being Broadcom that means
-that is also the only documentation.(I don't work for them,
-my mission here is to have a working platform.) I could of course
-experiment with different values but that turns out to
-be more of a hardware safari, I made it like this because
-I don't want to fix something that's not broken.
+---
+Linus Walleij (7):
+      dt-bindings: mfd: Describe the BCM6846 PMC complex
+      dt-bindings: soc: Describe the BCM6846 Processor Monitor Bus
+      mfd: Add a shared BCMBCA PMC3 PMB transport
+      reset: Add BCMBCA block resets through the PMB
+      clk: bcm: Add BCMBCA PMB clocks
+      hwmon: Add Broadcom PMB PVTMON monitoring
+      ARM: dts: broadcom: Add BCM6846 PMB clocks and hardware monitoring
 
-> > +/* Bits 6 and 7 select the lane configuration and must remain unchange=
-d. */
-> > +static const struct bcmbca_pmb_reset_block bcm6846_pcie_resets[] =3D {
-> > +     {
-> > +             .bus =3D 0,
-> > +             .device =3D 18,
-> > +             .offset =3D 5,
-> > +             .mask =3D GENMASK(5, 0),
-> > +             .assert_value =3D GENMASK(5, 0),
->
-> Same here, are these 6 different resets? Does the hardware require them
-> to be asserted/deasserted at the same time?
+ .../bindings/clock/brcm,bcm6846-pmb-clock.yaml     |  39 +++
+ .../bindings/hwmon/brcm,bcm6846-pmb-pvtmon.yaml    |  42 +++
+ .../devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml  |  82 +++++
+ .../bindings/reset/brcm,bcm6846-pmb-reset.yaml     |  31 ++
+ .../bindings/soc/bcm/brcm,bcm6846-pmb.yaml         |  80 +++++
+ Documentation/hwmon/bcm_pmb_pvtmon.rst             |  53 +++
+ Documentation/hwmon/index.rst                      |   1 +
+ MAINTAINERS                                        |  16 +
+ arch/arm/boot/dts/broadcom/bcm6846.dtsi            |  47 +++
+ drivers/clk/bcm/Kconfig                            |  11 +
+ drivers/clk/bcm/Makefile                           |   1 +
+ drivers/clk/bcm/clk-bcmbca-pmb.c                   | 389 +++++++++++++++++++++
+ drivers/hwmon/Kconfig                              |  18 +
+ drivers/hwmon/Makefile                             |   1 +
+ drivers/hwmon/bcm_pmb_pvtmon.c                     | 232 ++++++++++++
+ drivers/mfd/Kconfig                                |  11 +
+ drivers/mfd/Makefile                               |   1 +
+ drivers/mfd/bcmbca_pmc3_pmb.c                      | 297 ++++++++++++++++
+ drivers/reset/Kconfig                              |  13 +
+ drivers/reset/Makefile                             |   1 +
+ drivers/reset/reset-bcmbca-pmb.c                   | 309 ++++++++++++++++
+ include/dt-bindings/clock/brcm,bcm6846-pmb.h       |  42 +++
+ include/dt-bindings/reset/brcm,bcm6846-pmb.h       |  11 +
+ include/linux/mfd/bcmbca-pmb.h                     |  11 +
+ 24 files changed, 1739 insertions(+)
+---
+base-commit: 6628e7d4c6b25c8d18f1345e3a20d21829aae7e4
+change-id: 20261013-xg6846b-bcmbca-xrdp-reset-de71b80c25a4
 
-Same here, this is what the Broadcom driver does. If you insist,
-we can do hardware safari, but there are no docs or other examples.
+Best regards,
+--  
+Linus Walleij <linusw@kernel.org>
 
-When I look closer at the PCIe support it has some more weird
-sequencing going on, so I'll drop PCIe support from the patch
-series for now.
-
-> > +     },
-> > +     {
-> > +             .bus =3D 0,
-> > +             .device =3D 19,
-> > +             .offset =3D 5,
-> > +             .mask =3D GENMASK(5, 0),
-> > +             .assert_value =3D GENMASK(5, 0),
-> > +     },
-> > +};
->
-> Why put these in an array?
-
-Right there is just two of them. Individual taste I assume,
-I dropped these anyway.
-
-> > +/* Best effort with both locks held; never restart a partially reset g=
-roup. */
-> > +static void bcmbca_pmb_reset_cleanup(struct bcmbca_pmb_reset *rst,
-> > +                                  const struct bcmbca_pmb_reset_group =
-*group)
-> > +{
-> > +     const struct bcmbca_pmb_reset_block *block;
-> > +     unsigned int i;
-> > +     u32 value;
-> > +     int ret;
-> > +
-> > +     for (i =3D 0; i < group->num_blocks; i++) {
-> > +             block =3D &group->blocks[i];
-> > +             ret =3D bcmbca_pmb_read(rst->pmb, block->bus, block->devi=
-ce,
-> > +                                   block->offset, &value);
-> > +             if (!ret) {
-> > +                     value &=3D ~block->mask;
-> > +                     value |=3D block->assert_value;
-> > +                     ret =3D bcmbca_pmb_write(rst->pmb, block->bus, bl=
-ock->device,
-> > +                                            block->offset, value);
-> > +             }
->
-> Could the PMB bus driver provide an _update_bits() function for these
-> read-modify-write sequences? It is the one handling the locking anyway.
->
-> This whole driver feels a bit like if PMB could just export a regmap,
-> it would collapse into a few regmap_multi_reg_write()s.
-
-You're damn right about that.
-
-I will rinse and repeat.
-
->
-> > +             if (ret)
-> > +                     dev_err(rst->rcdev.dev,
-> > +                             "failed to hold PMB bus %u device %u in r=
-eset: %d\n",
-> > +                             block->bus, block->device, ret);
-> > +     }
-> > +}
-> > +
-> > +/* Called with both PMB locks held, including during error cleanup. */
->
-> Which two locks are "both"? pmb->lock mutex and the PMB_MUTEX hardware
-> lock?
-
-Fixed with regmap abstraction!
-
-> > +static int bcmbca_pmb_reset_sequence(struct bcmbca_pmb_reset *rst,
-> > +                                  const struct bcmbca_pmb_reset_group =
-*group)
-> > +{
-> > +     const struct bcmbca_pmb_reset_block *block;
-> > +     unsigned int i;
-> > +     u32 value;
-> > +     int ret, pass;
-> > +
-> > +     if (!group->num_blocks)
-> > +             return -EINVAL;
-> > +
-> > +     /* Assert every block before releasing any of them. */
-> > +     for (pass =3D 0; pass < 2; pass++) {
->
-> Maybe   for (pass =3D PASS_ASSERT; pass <=3D PASS_DEASSERT
-
-OK I'll take a stab and see how it looks.
-
-> > +             for (i =3D 0; i < group->num_blocks; i++) {
-> > +                     block =3D &group->blocks[i];
-> > +                     ret =3D bcmbca_pmb_read(rst->pmb, block->bus, blo=
-ck->device,
-> > +                                           block->offset, &value);
-> > +                     if (ret)
-> > +                             goto release;
-> > +                     value &=3D ~block->mask;
-> > +                     value |=3D pass ? block->deassert_value : block->=
-assert_value;
-> > +                     ret =3D bcmbca_pmb_write(rst->pmb, block->bus, bl=
-ock->device,
-> > +                                            block->offset, value);
-> > +                     if (ret)
-> > +                             goto release;
-> > +             }
-> > +             if (!pass && group->assert_us)
-> > +                     usleep_range(group->assert_us, group->assert_us *=
- 2);
->
-> Is that assertion delay the time the reset needs to stay asserted or is
-> this really a delay that needs to be observed between successive
-> assertions in a group?
-
-The former. I will rename the variable and add a comment so
-this is clear.
-
-> > +release:
-> > +     if (ret) {
-> > +             dev_err(rst->rcdev.dev, "%s %s failed at PMB bus %u devic=
-e %u: %d\n",
-> > +                     group->name, pass ? "release" : "assert",
->
-> Please use "deassert" to avoid possible confusion with the
-> reset_control_release() meaning of "release".
-
-OK
-
-Yours,
-Linus Walleij
