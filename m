@@ -1,57 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.45
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793572338;
-	b=g3B3KBlsPH4BWNzC46AkcFvvQng2BWF59tkH7PPLLV5+SXPfq0bUi3OvILRspORPE/oA
-	 kI5RzvzHgNFmDUcY/mm8EPCnruWZF4DWpWVNHIKuQOMX4BdKQHWYEBSvgNZ2pCY/5cmv3
-	 DyEqxJFzyJLOoSZaONLlYTk76oHoJ007c5djFhz2wh+tIPqr0/XM8ofk736Z+ml8gg/QH
-	 /aYNbxBLuY3oJrvS4hr5sAVDqdFVK2VMdY/zM26VpNHwabbiWYLAP1a3JUngTYyTnDHKX
-	 f2XN3Up0AfJsDyoqvBT4ckAUrjBmaqFx2EMrG9/2KjTpsNgzv+hWr/z00/gVD0GFgXQ==
+	t=1793572343;
+	b=SAZa5V7ARNwCsEg/22iZKYf08X2i+gW0D1lyNB6pRs2xqcQ6HoNX/xdmh++QtrRa5vjZ
+	 iMGnoYIvJxWeKwco6ajVG4P8ACGNaL7MH/0E1Ue2Il+HIlw7uTHJ5/OxW1DVZipmd+IsG
+	 nh06TG2y7XO+3pFBbwTRVnVMuiVgpeKfNBYHLWFQi+yoRI/jg1p22p5g/7/UybTWe4K3P
+	 Nk2zPDec1gzLQkUNl+IFmBtEH+vjIQPlReRw7HcOdtsT502uge0caC4IebDiX3/z/4zt5
+	 hAZooL4k76J7rVii1uq1qTLErRA42gsNOSoDbMqijKNkIjrhxHUw5vnGUZMaRcZOc9w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793572338;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=jw2ZdFoQ6ZM9vaYuZ7JP56kRgCq/+vpMvmfDEsQ1Dtw=;
-	b=gdkpkbNBsQZTERcY4BolP7imlMmNE5hIvKj4CiPcg3xFHse68qabfOqdCFjWjlMuQoxW
-	 WFbBF/OT6vzu5lCsGRu8sF+VbZ9iZ60hs5iZ85VExDoBcbo6w3dcJV1B33amqwulIyFCw
-	 9hK60U/5NMtTYnOChEkFfW3cuq3sMwNLS/sfftVTC49vMSXLHombX3IMaaA2CFYYUMz3r
-	 uaSCzuGblFIpyu756l+I6ROPVb4KdBrhla5+pt1MmIG/rP0sFr/TMPNflkeaEpHgAXPAa
-	 Qjy4MvuQz1Uu/qfuSKRvHO4HrmTwFgof+Xv4ZP4DgiPUk8AgpLDVG9XEmlrsQIYXV5A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793572343;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=vaC1Gh4sjnOn6hOZnUu5njQ81qisZCO27sC/NoNta/4=;
+	b=Hj4yh153ASIngYVqCfWvJbvKesTvd/IlqEUbLbMCBQQvGKlI/IVsSfarkCXzdP2c56Pu
+	 6aPU1pfw/EYZ4cEECi7bP+lEkc8pmkxekLfcxpEh4ZHrU1839ii4OfnDkKHO9Oc+L9tVp
+	 mNcS8SKFgyPDZEW1/DiiuepqX++KSc7rjltLoSZlJBlV7KiG8qsI3W/JM6cATZ8VB+CrD
+	 irq+dMGtuA/SLjPA+9UE3B7p+EEqf3vtfzDGIzHMo5DXOawDcsptpfx6624ntpYKtHqZ2
+	 ujvt+XtwFdg/a/QGhIrZ2JLCl5DAAgsuHFCZP4YeFVQ2PMbM/FlGtaud5ouL1t4iIoQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PqXreblo;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ILWjRSMQ;
+	arc=none smtp.remote-ip=209.85.128.45
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8167F60A2602;
-	Sun,  1 Nov 2026 22:32:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF8E060A261B
+	for <mfd@lists.linux.dev>; Sun,  1 Nov 2026 22:32:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EF8E060A261B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PqXreblo
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C70DE1F0093A;
-	Sun,  1 Nov 2026 22:32:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793572338;
-	bh=jw2ZdFoQ6ZM9vaYuZ7JP56kRgCq/+vpMvmfDEsQ1Dtw=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=PqXreblo5xC8j7BeMqGVoA0hKJCCMPEl8b0czNO/r8ZjYFb09njIHZOdQlR/TIwQ3
-	 Qmg0Hjspodh0pJMcx7dIQ3ukWmO9uW1g9vKi1H5nN7K6hFImBMP0hmDxINUyh1ll8I
-	 nghpAzjBPtoo4X0vpJepvbMG9PVgVlfQEKG9dMfFYeI4WQboywQwpNLZRbeEj0ewsb
-	 9XywfsA+TU53nn1PIx73/gPoElKY4/3q7mB6FYjKukGvAFrdWWCNVm31oihRT3HB+t
-	 W98a1MwapoF6bQzi34ah+HYUwI9ABXoDLdPFNgkVYor6oR3dST0Q13x8QUuEhLJQSp
-	 8vyTy4ALIqy9w==
-Message-ID: <sashiko-outbox-192714@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 2/7] dt-bindings: soc: Describe the BCM6846 Processor
- Monitor Bus
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Linus Walleij" <linusw@kernel.org>
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, linux-clk@vger.kernel.org, linux-hwmon@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, lee@kernel.org
-In-Reply-To: <20261101-xg6846b-bcmbca-xrdp-reset-v2-2-455fe9eed5ee@kernel.org>
-References: <20261101-xg6846b-bcmbca-xrdp-reset-v2-0-455fe9eed5ee@kernel.org>
- <20261101-xg6846b-bcmbca-xrdp-reset-v2-2-455fe9eed5ee@kernel.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Sun, 01 Nov 2026 22:32:17 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ILWjRSMQ
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4a4d7ae1ae9so21829945e9.1
+        for <mfd@lists.linux.dev>; Sun, 01 Nov 2026 14:32:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793572340; x=1794177140; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=vaC1Gh4sjnOn6hOZnUu5njQ81qisZCO27sC/NoNta/4=;
+        b=ILWjRSMQY7cK3odJBtv/ovvCwlkTRTqtWwsGChgw3HToRTcM1/0tVMLbvKRjo7wS95
+         2iggpWjvK+UvweQczkL8rhmjpuJObeYZLXHcnn5A0or1TGtT6KY/M3u2RPpJO34e/Aum
+         0Sl/A26LiAKEwPg97c8LKNeR9qse8vwZqTmxD82/jCZoVsVJ0V3Ge3L9eUl0cbf7Y2hc
+         CGre/rYq4h1Bh5kuH5b4BTSKj/hS9J0NbYC+3RGAj2kw4lTXas+QDIElUrn73ckZQIHf
+         vo1QQqvamkqZd2f9wp5P381VpLtl2KoBmdsK9j4EoMZms9O7HjdUeabEKmgpho6zi5Dz
+         tm6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793572340; x=1794177140;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=vaC1Gh4sjnOn6hOZnUu5njQ81qisZCO27sC/NoNta/4=;
+        b=hJGqOWcjW8Nf7WihVQg4WYT+c4HBdCOA5guQREBykA6Bk7H/ywLnrAbbEC06GBI4Xt
+         x/NPaNvxb8OpQUo9v+2wEjbVMMka2ZHwoxBjGIjvOXxHmiLHuCxAqItE6w7T1ky8+Flg
+         qP/tgSOXKQY1ElWRLMWQ6cp5OaZckT1E0whiMXOI2AvM2I3Lr0eQQH2TuHQk8vkwYQN0
+         sVxU4+h9blropdzcpsLahT16PWbOJEc2TJBe2gl/RyMINLj0omktnYrHQZKm2I3KhWZD
+         Ntub0V/pizpL5e3stIg3nlsD1Fk/hAALTsK6b0ytOApI6UUXLdIkqjQpejPOStf8QBzd
+         grSQ==
+X-Forwarded-Encrypted: i=1; AKwUvByq1TE6oCBAewGWcawnYlBSnTq8gGU43hW0IqnC3+GtAUwCRf5Wm7BlaEAQ/pPkOiBYxVk=@lists.linux.dev
+X-Gm-Message-State: AFq9FYJ679KZ9JyT76WV8Hkia1yvxXCbmysppeoIxL93M3hBvG6x7spR
+	1U/0J2KKEI99BkCcW9QqBAtviWcOKrRT62FxqzGQjsG8qkLCxP1JOKP5
+X-Gm-Gg: AYBFou0780Je9wPbLUVTw5bkYuno/6V8OtQZffSqeGmcOY+8Ay1HC6b3eIBPHSVaWCO
+	tImyVLQT2Sofb4PHRKZShgvVAP6BUIR2XLkua774JW5Jr7MWYtHkOt6v/oQ/un0O+s6Ey4gm73e
+	KoMbxYnBTJWmB4Z2u+CjKM3jLp5ZDs8M6k4VT0OWuwJmDIrnE2jMLSS02ioTMZc6h1VBZYy5l/C
+	4lo8onwSoUo3c/WIqBsSrCzPXQ+RvX9mtAm7gTjiwYO+46tNfWcg8DB6vG6BvltO20wjlKOw/fr
+	UnQYR7jqsdijlXfg00mqNBazdTT5gDeXBBfpdW7j7GbZadZd4Ov3tMfd6pRIUkAu/qhJbq0B5Ax
+	uSIWnMibTlPGifXgtmw1kWlEGrgJNkmb4bFB8jc80nX1+O7+YwZM6RKw6+v9zN7NZLpxuK2Pi5R
+	spRIeytqbFK/IM2PryAs3t4Vk8JEtrr6xf2bucwet2dZJLJqCu63kvs7ChIkwvrbXF1GASj8nys
+	z6tyGVKj0PKdDgYj7HkDoYN1fxi0Hr6SIqpFjCQtBmEekYI8SG4NZkiZTA7yEGzqGAs7KfrMEGw
+	scB4Zpm7nRfb4NRlfHg3os3Tvszx43e5NYzVk7KQQR/AW3FksJye35BIjaNxeRg=
+X-Received: by 2002:a05:600c:4e02:b0:4a3:59c9:a758 with SMTP id 5b1f17b1804b1-4ac19705e02mr183853655e9.32.1793572340332;
+        Sun, 01 Nov 2026 14:32:20 -0800 (PST)
+Received: from debian (ip-78-137-176-146.broadband.digiweb.ie. [78.137.176.146])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e71b78f95sm14904805f8f.28.2026.11.01.14.32.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 01 Nov 2026 14:32:19 -0800 (PST)
+From: Pablo Mazzini <pmazzini@gmail.com>
+To: Mark Brown <broonie@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Lee Jones <lee@kernel.org>
+Cc: Pablo Mazzini <pmazzini@gmail.com>,
+	Alistair Francis <alistair@alistair23.me>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	linux-hwmon@vger.kernel.org,
+	mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v2 6/7] regulator: sy7636a: bind to the I2C device directly
+Date: Sun,  1 Nov 2026 22:31:24 +0000
+Message-ID: <20261101223125.302001-7-pmazzini@gmail.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261101223125.302001-1-pmazzini@gmail.com>
+References: <20261101223125.302001-1-pmazzini@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,172 +103,400 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Thank you for your contribution! Sashiko AI review found 5 potential issue(=
-s) to consider:
-- [Low] dt-bindings: soc: brcm,bcm6846-pmb ordered after dependent brcm,bcm=
-6846-pmc
-- [Low] dt-bindings: hwmon: brcm,bcm6846-pmb-pvtmon uses additionalProperti=
-es with $ref
-- [Low] dt-bindings: soc: brcm,bcm6846-pmb example child nodes out of alpha=
-betical order
-- [Low] MAINTAINERS: missing S: status tag in BROADCOM BCMBCA PMC3 PMB DRIV=
-ER entry
-- [Low] dt-bindings: reset: non-contiguous reset IDs in brcm,bcm6846-pmb.h
---
+Bind the regulator to the chip directly, as the TPS65185 and FP9931
+drivers do, and have it create an auxiliary device for the hwmon driver,
+instead of simple-mfd-i2c creating a cell for each. Drop the MFD glue
+and header. It now probes before the GPIOs may be ready, so report the
+power good GPIO with dev_err_probe(). The hwmon driver then only
+accesses the chip after vin-supply is enabled.
 
-commit 44e16c21f8b2ce99a2b8f758565676392f84eec0
-Author: Linus Walleij <linusw@kernel.org>
+Signed-off-by: Pablo Mazzini <pmazzini@gmail.com>
+---
+ drivers/hwmon/Kconfig                 |  2 +-
+ drivers/hwmon/sy7636a-hwmon.c         | 33 +++++-----
+ drivers/mfd/Kconfig                   | 10 ----
+ drivers/mfd/simple-mfd-i2c.c          | 11 ----
+ drivers/regulator/Kconfig             |  4 +-
+ drivers/regulator/sy7636a-regulator.c | 86 ++++++++++++++++-----------
+ include/linux/mfd/sy7636a.h           | 34 -----------
+ 7 files changed, 73 insertions(+), 107 deletions(-)
+ delete mode 100644 include/linux/mfd/sy7636a.h
 
-dt-bindings: soc: Describe the BCM6846 Processor Monitor Bus
+diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
+index 18c682e1a475..247507a4ddde 100644
+--- a/drivers/hwmon/Kconfig
++++ b/drivers/hwmon/Kconfig
+@@ -2106,7 +2106,7 @@ config SENSORS_SIS5595
+ 
+ config SENSORS_SY7636A
+ 	tristate "Silergy SY7636A"
+-	depends on MFD_SY7636A
++	depends on REGULATOR_SY7636A
+ 	help
+ 	  If you say yes here you get support for the thermistor readout of
+ 	  the Silergy SY7636A PMIC.
+diff --git a/drivers/hwmon/sy7636a-hwmon.c b/drivers/hwmon/sy7636a-hwmon.c
+index 475aff997c2d..14d9516f15e7 100644
+--- a/drivers/hwmon/sy7636a-hwmon.c
++++ b/drivers/hwmon/sy7636a-hwmon.c
+@@ -8,14 +8,15 @@
+  *          Alistair Francis <alistair@alistair23.me>
+  */
+ 
++#include <linux/auxiliary_bus.h>
++#include <linux/bits.h>
+ #include <linux/err.h>
+ #include <linux/hwmon.h>
+-#include <linux/init.h>
+ #include <linux/module.h>
+-#include <linux/platform_device.h>
+ #include <linux/regmap.h>
+ 
+-#include <linux/mfd/sy7636a.h>
++#define SY7636A_REG_FAULT_FLAG		0x07
++#define SY7636A_FAULT_FLAG_PG		BIT(0)
+ 
+ static int sy7636a_read(struct device *dev, enum hwmon_sensor_types type,
+ 			u32 attr, int channel, long *temp)
+@@ -70,36 +71,40 @@ static const struct hwmon_chip_info sy7636a_chip_info = {
+ 	.info = sy7636a_info,
+ };
+ 
+-static int sy7636a_sensor_probe(struct platform_device *pdev)
++static int sy7636a_sensor_probe(struct auxiliary_device *adev,
++				const struct auxiliary_device_id *id)
+ {
+-	struct regmap *regmap = dev_get_regmap(pdev->dev.parent, NULL);
++	struct regmap *regmap = dev_get_regmap(adev->dev.parent, NULL);
+ 	struct device *hwmon_dev;
+ 	int err;
+ 
+ 	if (!regmap)
+-		return -EPROBE_DEFER;
++		return -ENODEV;
+ 
+-	hwmon_dev = devm_hwmon_device_register_with_info(&pdev->dev,
++	hwmon_dev = devm_hwmon_device_register_with_info(&adev->dev,
+ 							 "sy7636a", regmap,
+ 							 &sy7636a_chip_info, NULL);
+ 
+ 	if (IS_ERR(hwmon_dev)) {
+ 		err = PTR_ERR(hwmon_dev);
+-		dev_err(&pdev->dev, "Unable to register hwmon device, returned %d\n", err);
++		dev_err(&adev->dev, "Unable to register hwmon device, returned %d\n", err);
+ 		return err;
+ 	}
+ 
+ 	return 0;
+ }
+ 
+-static struct platform_driver sy7636a_sensor_driver = {
++static const struct auxiliary_device_id sy7636a_sensor_ids[] = {
++	{ .name = "sy7636a_regulator.hwmon" },
++	{ }
++};
++MODULE_DEVICE_TABLE(auxiliary, sy7636a_sensor_ids);
++
++static struct auxiliary_driver sy7636a_sensor_driver = {
+ 	.probe = sy7636a_sensor_probe,
+-	.driver = {
+-		.name = "sy7636a-temperature",
+-	},
++	.id_table = sy7636a_sensor_ids,
+ };
+-module_platform_driver(sy7636a_sensor_driver);
++module_auxiliary_driver(sy7636a_sensor_driver);
+ 
+ MODULE_DESCRIPTION("SY7636A sensor driver");
+ MODULE_LICENSE("GPL");
+-MODULE_ALIAS("platform:sy7636a-temperature");
+diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
+index 87ed55c155f0..c7ff8997beb1 100644
+--- a/drivers/mfd/Kconfig
++++ b/drivers/mfd/Kconfig
+@@ -1319,16 +1319,6 @@ config MFD_SPMI_PMIC
+ 	  Say M here if you want to include support for the SPMI PMIC
+ 	  series as a module.  The module will be called "qcom-spmi-pmic".
+ 
+-config MFD_SY7636A
+-	tristate "Silergy SY7636A voltage regulator"
+-	depends on I2C
+-	select MFD_SIMPLE_MFD_I2C
+-	help
+-	  Enable support for Silergy SY7636A voltage regulator.
+-
+-	  To enable support for building sub-devices as modules,
+-	  choose M here.
+-
+ config MFD_RDC321X
+ 	tristate "RDC R-321x southbridge"
+ 	select MFD_CORE
+diff --git a/drivers/mfd/simple-mfd-i2c.c b/drivers/mfd/simple-mfd-i2c.c
+index ef3ce4bdf98b..0c9162034899 100644
+--- a/drivers/mfd/simple-mfd-i2c.c
++++ b/drivers/mfd/simple-mfd-i2c.c
+@@ -67,16 +67,6 @@ static int simple_mfd_i2c_probe(struct i2c_client *i2c)
+ 	return ret;
+ }
+ 
+-static const struct mfd_cell sy7636a_cells[] = {
+-	{ .name = "sy7636a-regulator", },
+-	{ .name = "sy7636a-temperature", },
+-};
+-
+-static const struct simple_mfd_data silergy_sy7636a = {
+-	.mfd_cell = sy7636a_cells,
+-	.mfd_cell_size = ARRAY_SIZE(sy7636a_cells),
+-};
+-
+ static const struct mfd_cell max5970_cells[] = {
+ 	{ .name = "max5970-regulator", },
+ 	{ .name = "max5970-iio", },
+@@ -124,7 +114,6 @@ static const struct of_device_id simple_mfd_i2c_of_match[] = {
+ 	{ .compatible = "maxim,max5970", .data = &maxim_max5970 },
+ 	{ .compatible = "maxim,max5978", .data = &maxim_max5970 },
+ 	{ .compatible = "maxim,max77705-battery", .data = &maxim_mon_max77705 },
+-	{ .compatible = "silergy,sy7636a", .data = &silergy_sy7636a },
+ 	{ .compatible = "spacemit,p1", .data = &spacemit_p1 },
+ 	{}
+ };
+diff --git a/drivers/regulator/Kconfig b/drivers/regulator/Kconfig
+index 88ba2770e378..6039abec0c37 100644
+--- a/drivers/regulator/Kconfig
++++ b/drivers/regulator/Kconfig
+@@ -1621,7 +1621,9 @@ config REGULATOR_SUN20I
+ 
+ config REGULATOR_SY7636A
+ 	tristate "Silergy SY7636A voltage regulator"
+-	depends on MFD_SY7636A
++	depends on I2C
++	select AUXILIARY_BUS
++	select REGMAP_I2C
+ 	help
+ 	  This driver supports Silergy SY7636A voltage regulator.
+ 
+diff --git a/drivers/regulator/sy7636a-regulator.c b/drivers/regulator/sy7636a-regulator.c
+index f87144e921da..709e90517821 100644
+--- a/drivers/regulator/sy7636a-regulator.c
++++ b/drivers/regulator/sy7636a-regulator.c
+@@ -7,18 +7,26 @@
+ // Authors: Lars Ivar Miljeteig <lars.ivar.miljeteig@remarkable.com>
+ //          Alistair Francis <alistair@alistair23.me>
+ 
++#include <linux/auxiliary_bus.h>
+ #include <linux/completion.h>
+ #include <linux/gpio/consumer.h>
+ #include <linux/i2c.h>
+ #include <linux/interrupt.h>
+-#include <linux/mfd/sy7636a.h>
+ #include <linux/module.h>
+-#include <linux/platform_device.h>
+ #include <linux/regulator/consumer.h>
+ #include <linux/regulator/driver.h>
+ #include <linux/regulator/machine.h>
+ #include <linux/regmap.h>
+ 
++#define SY7636A_REG_OPERATION_MODE_CRL		0x00
++#define SY7636A_OPERATION_MODE_CRL_ONOFF	BIT(7)
++#define SY7636A_REG_VCOM_ADJUST_CTRL_L		0x01
++#define SY7636A_REG_VCOM_ADJUST_CTRL_H		0x02
++#define SY7636A_REG_POWER_ON_DELAY_TIME		0x06
++
++#define VCOM_ADJUST_CTRL_MASK	0x1ff
++#define VCOM_ADJUST_CTRL_SCAL	10000
++
+ #define PGOOD_TIMEOUT_MSECS 200
+ 
+ struct sy7636a_data {
+@@ -133,50 +141,54 @@ static const struct regulator_desc desc = {
+ 	.of_match = of_match_ptr("vcom"),
+ };
+ 
+-static int sy7636a_regulator_probe(struct platform_device *pdev)
++static const struct regmap_config sy7636a_regmap_config = {
++	.reg_bits = 8,
++	.val_bits = 8,
++};
++
++static int sy7636a_regulator_probe(struct i2c_client *client)
+ {
+-	struct regmap *regmap = dev_get_regmap(pdev->dev.parent, NULL);
++	struct device *dev = &client->dev;
+ 	struct regulator_config config = { };
++	struct auxiliary_device *adev;
+ 	struct regulator_dev *rdev;
+ 	struct gpio_desc *gdp;
+ 	struct sy7636a_data *data;
++	struct regmap *regmap;
+ 	int irq, ret;
+ 
+-	if (!regmap)
+-		return -EPROBE_DEFER;
+-
+-	device_set_of_node_from_dev(&pdev->dev, pdev->dev.parent);
++	regmap = devm_regmap_init_i2c(client, &sy7636a_regmap_config);
++	if (IS_ERR(regmap))
++		return dev_err_probe(dev, PTR_ERR(regmap), "failed to allocate regmap\n");
+ 
+-	gdp = devm_gpiod_get(&pdev->dev, "epd-pwr-good", GPIOD_IN);
+-	if (IS_ERR(gdp)) {
+-		dev_err(&pdev->dev, "Power good GPIO fault %ld\n", PTR_ERR(gdp));
+-		return PTR_ERR(gdp);
+-	}
++	gdp = devm_gpiod_get(dev, "epd-pwr-good", GPIOD_IN);
++	if (IS_ERR(gdp))
++		return dev_err_probe(dev, PTR_ERR(gdp), "Power good GPIO fault\n");
+ 
+-	data = devm_kzalloc(&pdev->dev, sizeof(struct sy7636a_data), GFP_KERNEL);
++	data = devm_kzalloc(dev, sizeof(struct sy7636a_data), GFP_KERNEL);
+ 	if (!data)
+ 		return -ENOMEM;
+ 
+ 	data->regmap = regmap;
+ 	data->pgood_gpio = gdp;
+ 
+-	ret = devm_regulator_get_enable_optional(&pdev->dev, "vin");
++	ret = devm_regulator_get_enable_optional(dev, "vin");
+ 	if (ret)
+-		return dev_err_probe(&pdev->dev, ret,
++		return dev_err_probe(dev, ret,
+ 				     "failed to get vin regulator\n");
+ 
+-	data->en_gpio = devm_gpiod_get_optional(&pdev->dev, "enable",
++	data->en_gpio = devm_gpiod_get_optional(dev, "enable",
+ 						GPIOD_OUT_HIGH);
+ 	if (IS_ERR(data->en_gpio))
+-		return dev_err_probe(&pdev->dev,
++		return dev_err_probe(dev,
+ 				     PTR_ERR(data->en_gpio),
+ 				     "failed to get en gpio\n");
+ 
+ 	/* Let VCOM just follow the default power on sequence */
+-	data->vcom_en_gpio = devm_gpiod_get_optional(&pdev->dev,
++	data->vcom_en_gpio = devm_gpiod_get_optional(dev,
+ 						     "vcom-en", GPIOD_OUT_LOW);
+ 	if (IS_ERR(data->vcom_en_gpio))
+-		return dev_err_probe(&pdev->dev,
++		return dev_err_probe(dev,
+ 				     PTR_ERR(data->vcom_en_gpio),
+ 				     "failed to get vcom-en gpio\n");
+ 
+@@ -184,54 +196,56 @@ static int sy7636a_regulator_probe(struct platform_device *pdev)
+ 	if (data->en_gpio)
+ 		usleep_range(2500, 4000);
+ 
+-	platform_set_drvdata(pdev, data);
++	i2c_set_clientdata(client, data);
+ 
+ 	ret = regmap_write(regmap, SY7636A_REG_POWER_ON_DELAY_TIME, 0x0);
+ 	if (ret) {
+-		dev_err(pdev->dev.parent, "Failed to initialize regulator: %d\n", ret);
++		dev_err(dev, "Failed to initialize regulator: %d\n", ret);
+ 		return ret;
+ 	}
+ 
+ 	irq = gpiod_to_irq(data->pgood_gpio);
+ 	if (irq < 0)
+-		return dev_err_probe(&pdev->dev, irq, "no power good interrupt\n");
++		return dev_err_probe(dev, irq, "no power good interrupt\n");
+ 
+ 	init_completion(&data->pgood_completion);
+-	ret = devm_request_threaded_irq(&pdev->dev, irq, NULL, sy7636a_pgood_handler,
++	ret = devm_request_threaded_irq(dev, irq, NULL, sy7636a_pgood_handler,
+ 					IRQF_TRIGGER_RISING | IRQF_ONESHOT,
+ 					"sy7636a-pgood", data);
+ 	if (ret)
+-		return dev_err_probe(&pdev->dev, ret,
+-				     "failed to request power good interrupt\n");
++		return dev_err_probe(dev, ret, "failed to request power good interrupt\n");
+ 
+-	config.dev = &pdev->dev;
++	config.dev = dev;
+ 	config.regmap = regmap;
+ 
+-	rdev = devm_regulator_register(&pdev->dev, &desc, &config);
++	rdev = devm_regulator_register(dev, &desc, &config);
+ 	if (IS_ERR(rdev)) {
+-		dev_err(pdev->dev.parent, "Failed to register %s regulator\n",
+-			pdev->name);
++		dev_err(dev, "Failed to register %s regulator\n", desc.name);
+ 		return PTR_ERR(rdev);
+ 	}
+ 
++	adev = devm_auxiliary_device_create(dev, "hwmon", NULL);
++	if (!adev)
++		return dev_err_probe(dev, -ENODEV, "failed to create hwmon device\n");
++
+ 	return 0;
+ }
+ 
+-static const struct platform_device_id sy7636a_regulator_id_table[] = {
+-	{ .name = "sy7636a-regulator" },
++static const struct of_device_id sy7636a_of_match[] = {
++	{ .compatible = "silergy,sy7636a" },
+ 	{ }
+ };
+-MODULE_DEVICE_TABLE(platform, sy7636a_regulator_id_table);
++MODULE_DEVICE_TABLE(of, sy7636a_of_match);
+ 
+-static struct platform_driver sy7636a_regulator_driver = {
++static struct i2c_driver sy7636a_regulator_driver = {
+ 	.driver = {
+ 		.name = "sy7636a-regulator",
+ 		.probe_type = PROBE_PREFER_ASYNCHRONOUS,
++		.of_match_table = sy7636a_of_match,
+ 	},
+ 	.probe = sy7636a_regulator_probe,
+-	.id_table = sy7636a_regulator_id_table,
+ };
+-module_platform_driver(sy7636a_regulator_driver);
++module_i2c_driver(sy7636a_regulator_driver);
+ 
+ MODULE_AUTHOR("Lars Ivar Miljeteig <lars.ivar.miljeteig@remarkable.com>");
+ MODULE_DESCRIPTION("SY7636A voltage regulator driver");
+diff --git a/include/linux/mfd/sy7636a.h b/include/linux/mfd/sy7636a.h
+deleted file mode 100644
+index 22f03b2f851e..000000000000
+--- a/include/linux/mfd/sy7636a.h
++++ /dev/null
+@@ -1,34 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-/*
+- * Functions to access SY3686A power management chip.
+- *
+- * Copyright (C) 2021 reMarkable AS - http://www.remarkable.com/
+- */
+-
+-#ifndef __MFD_SY7636A_H
+-#define __MFD_SY7636A_H
+-
+-#define SY7636A_REG_OPERATION_MODE_CRL		0x00
+-/* It is set if a gpio is used to control the regulator */
+-#define SY7636A_OPERATION_MODE_CRL_VCOMCTL	BIT(6)
+-#define SY7636A_OPERATION_MODE_CRL_ONOFF	BIT(7)
+-#define SY7636A_REG_VCOM_ADJUST_CTRL_L		0x01
+-#define SY7636A_REG_VCOM_ADJUST_CTRL_H		0x02
+-#define SY7636A_REG_VCOM_ADJUST_CTRL_MASK	0x01ff
+-#define SY7636A_REG_VLDO_VOLTAGE_ADJULST_CTRL	0x03
+-#define SY7636A_REG_POWER_ON_DELAY_TIME		0x06
+-#define SY7636A_REG_FAULT_FLAG			0x07
+-#define SY7636A_FAULT_FLAG_PG			BIT(0)
+-#define SY7636A_REG_TERMISTOR_READOUT		0x08
+-
+-#define SY7636A_REG_MAX				0x08
+-
+-#define VCOM_ADJUST_CTRL_MASK	0x1ff
+-// Used to shift the high byte
+-#define VCOM_ADJUST_CTRL_SHIFT	8
+-// Used to scale from VCOM_ADJUST_CTRL to mv
+-#define VCOM_ADJUST_CTRL_SCAL	10000
+-
+-#define FAULT_FLAG_SHIFT	1
+-
+-#endif /* __LINUX_MFD_SY7636A_H */
+-- 
+2.52.0
 
-This commit adds Device Tree binding schemas and header files for the
-Broadcom BCM6846 Processor Monitor Bus (PMB) and its child clock, reset,
-and PVTMON hardware monitor controllers.
-
->     dt-bindings: soc: Describe the BCM6846 Processor Monitor Bus
->    =20
->     The third generation Power Management Controller (PMC3) accesses SoC
->     block control and reset registers through the Processor Monitor Bus
->     (PMB). Describe the BCM6846 PMC and PMB.
->    =20
->     Signed-off-by: Linus Walleij <linusw@kernel.org>
-
-[Severity: Low]
-Should this commit be ordered before commit 39aa42d4e944 ("dt-bindings:
-mfd: Describe the BCM6846 PMC complex"), and should the commit message drop
-"PMC and"?
-
-In the parent commit 39aa42d4e944,
-Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml references
-/schemas/soc/bcm/brcm,bcm6846-pmb.yaml# via $ref and includes
-dt-bindings/clock/brcm,bcm6846-pmb.h and
-dt-bindings/reset/brcm,bcm6846-pmb.h in its example before they are added
-here, which causes make dt_binding_check to fail at the parent commit
-during bisection.
-
-> diff --git a/Documentation/devicetree/bindings/hwmon/brcm,bcm6846-pmb-pvt=
-mon.yaml b/Documentation/devicetree/bindings/hwmon/brcm,bcm6846-pmb-pvtmon.=
-yaml
-> new file mode 100644
-> index 0000000000000..9bf52cf097a32
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/hwmon/brcm,bcm6846-pmb-pvtmon.yaml
-> @@ -0,0 +1,42 @@
-[ ... ]
-> +allOf:
-> +  - $ref: /schemas/thermal/thermal-sensor.yaml#
-> +
-> +properties:
-> +  compatible:
-> +    const: brcm,bcm6846-pmb-pvtmon
-> +
-> +  clocks:
-> +    maxItems: 1
-> +    description: PVTMON acquisition clock
-> +
-> +  resets:
-> +    maxItems: 1
-> +    description: PVTMON analog-acquisition reset
-> +
-> +  '#thermal-sensor-cells':
-> +    const: 0
-> +
-> +required:
-> +  - compatible
-> +  - clocks
-> +  - resets
-> +  - '#thermal-sensor-cells'
-> +
-> +additionalProperties: false
-
-[Severity: Low]
-Since this schema includes /schemas/thermal/thermal-sensor.yaml# via allOf,
-should it use unevaluatedProperties: false instead of additionalProperties:
-false so that properties from the referenced schema are evaluated properly?
-
-> diff --git a/Documentation/devicetree/bindings/soc/bcm/brcm,bcm6846-pmb.y=
-aml b/Documentation/devicetree/bindings/soc/bcm/brcm,bcm6846-pmb.yaml
-> new file mode 100644
-> index 0000000000000..a4a77fed94d05
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/soc/bcm/brcm,bcm6846-pmb.yaml
-> @@ -0,0 +1,80 @@
-[ ... ]
-> +        pmb_clk: clock-controller {
-> +            compatible =3D "brcm,bcm6846-pmb-clock";
-> +            clocks =3D <&osc50m>;
-> +            clock-names =3D "ref";
-> +            #clock-cells =3D <1>;
-> +        };
-> +
-> +        pmb_reset: reset-controller {
-> +            compatible =3D "brcm,bcm6846-pmb-reset";
-> +            #reset-cells =3D <1>;
-> +        };
-> +
-> +        hwmon {
-> +            compatible =3D "brcm,bcm6846-pmb-pvtmon";
-> +            clocks =3D <&pmb_clk BCM6846_CLK_PVTMON>;
-> +            resets =3D <&pmb_reset BCM6846_RESET_PVTMON>;
-> +            #thermal-sensor-cells =3D <0>;
-> +        };
-> +    };
-
-[Severity: Low]
-Should the unaddressed hwmon child node be placed before reset-controller
-in the example so that the child nodes are in alphabetical order and pass
-scripts/dtc/dt-check-style --mode=3Dstrict without a child-name-order
-warning?
-
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index eb4b3b631e82c..fa95f2dec63c5 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -5446,7 +5446,13 @@ N:	bcm[9]?6878
-> =20
->  BROADCOM BCMBCA PMC3 PMB DRIVER
->  M:	Linus Walleij <linusw@kernel.org>
-> +F:	Documentation/devicetree/bindings/clock/brcm,bcm6846-pmb-clock.yaml
-> +F:	Documentation/devicetree/bindings/hwmon/brcm,bcm6846-pmb-pvtmon.yaml
->  F:	Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml
-> +F:	Documentation/devicetree/bindings/reset/brcm,bcm6846-pmb-reset.yaml
-> +F:	Documentation/devicetree/bindings/soc/bcm/brcm,bcm6846-pmb.yaml
-> +F:	include/dt-bindings/clock/brcm,bcm6846-pmb.h
-> +F:	include/dt-bindings/reset/brcm,bcm6846-pmb.h
-
-[Severity: Low]
-Should the BROADCOM BCMBCA PMC3 PMB DRIVER entry in MAINTAINERS include an
-S: status tag (such as S: Maintained) so that scripts/get_maintainer.pl
---self-test=3Dsections does not warn about a section without status?
-
-> diff --git a/include/dt-bindings/reset/brcm,bcm6846-pmb.h b/include/dt-bi=
-ndings/reset/brcm,bcm6846-pmb.h
-> new file mode 100644
-> index 0000000000000..6b1a6baac1c60
-> --- /dev/null
-> +++ b/include/dt-bindings/reset/brcm,bcm6846-pmb.h
-> @@ -0,0 +1,11 @@
-> +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-> +#ifndef _DT_BINDINGS_RESET_BRCM_BCM6846_PMB_H
-> +#define _DT_BINDINGS_RESET_BRCM_BCM6846_PMB_H
-> +
-> +/* XRDP packet engine and its three Runner cores. */
-> +#define BCM6846_RESET_XRDP	0
-> +
-> +/* Process, voltage and temperature monitor analog acquisition reset. */
-> +#define BCM6846_RESET_PVTMON	3
-> +
-> +#endif
-
-[Severity: Low]
-Since these reset constants represent abstract logical reset group IDs
-rather than hardware register offsets or bit positions, should
-BCM6846_RESET_PVTMON be defined as 1 instead of 3 so that the IDs in this
-new binding header are contiguous starting from 0 and
-bcm6846_pmb_reset_groups[] in drivers/reset/reset-bcmbca-pmb.c does not
-carry two unused entries at indices 1 and 2?
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261101-xg6846b-bc=
-mbca-xrdp-reset-v2-0-455fe9eed5ee@kernel.org?part=3D2
