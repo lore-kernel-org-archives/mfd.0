@@ -1,49 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793571325;
-	b=4WB78IzWghTBls6LSfd9E+t61qv8MWH2zBDP/VAU3XFu6v3qwb/Wenh1rJiLb//0xrf9
-	 iQ50lJ0bCeCryROTRabJT2uMEmfxUYO1jqbjn8cvOpcXhvFEIsMNJ7Z/JSn89MtkGslEN
-	 gD5AWrCiU2jr+oQIEn7s/ivWiIJ1UeiyJwdSaOV6tocLugjq8t9lqQB3JdWBt1PIVJtxM
-	 aPGE11BoxEIhI2eORj4X5sLwse1z8Qi2CM7+LhYLHJOtRkJNepQj8yghXI16mARagdKeQ
-	 q82+RvSoAWzEktRVo0hx1nlAVfCB1/encf+ZPh2bSw6l2BAW+655lb7UGmit6dyz6/w==
+	t=1793571649;
+	b=Qjn6OrxIk2rPv8E+Nvxtf8Tb6Na/8s9TcqQWFzpf71Ic6wTR3WMdW6EtIOVC0t6Wtgx5
+	 TL4xLUWFvS7ctcZPlzP7YKZJm4u+EpwIM6sAyaVgUdFRhLmt83GwhEULQE0J09nU/x7kn
+	 JoOOTbouOTUMoAis8Ijo9ouGf3gjeqbHIwOaNF0E3HTgus/OEMKr8Knw4tISTaVp0eUEF
+	 XFG0nNxg9vgvP87RRdp4KsgXoEcLLjYBWEIYQ0+4tqlMqkqCeH4jd0+1XknbX3fVMf2Fx
+	 IpKy1INNYOrxF33tYJLGR//0maoWUUiNxEAOVnnHq6HJOQrzqFIwwWFsJg3BY4h0KIA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793571325;
-	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer;
-	bh=S3lcyIX5M+D9oaMxMnqcLepq9hdIlj33lYjarpJr4ic=;
-	b=uCTHT5LB2nRdQMSMxb9lZdlOvFmKZD+OV6FlG/2kGgi4+hNOM3bksYfcSCvt1UTUgXmC
-	 9xSyFsRcTtN1kc57Q1XN4uG1hqdCjOBZMVgKPqgl0Yjt5y9q/Lg+zF3dYgaRklb6wBhrc
-	 w/aB1JQBTMGzzL3SKuDFy+t6es78Uqzlee9KcjDgtKetihm7Hb5rUgi71NPqOzJzsnkpg
-	 XcqfWi4yjCKXVMty3QZKZA68oG72iy0BrQ8pzNZpNgIfapUPjCo4wfvQqZsuiaU/NLOFW
-	 0oEjd/gGrtkWNuyv48sWWZIubhAEYUq26K54KcjmApRnhHAHWKFu8z0ZOlb1raSncBQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793571649;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=U0hFfZFqkn7CoDWwgk8yDqp8fa+VP07aEXq9RW+yvIk=;
+	b=1dJiS6R7porwHG7ijQBHvyMWpqOGr14lFAu0wMgkvJenV0pAUsogICY9Y6ZHT9quPzbD
+	 uzpUXYfif9IgD1ig4xWmaOzllT+8poLe6tPaHBAo6eUxiiaJpOMKowdIYwmhd/6oClzny
+	 Y6A+ddV4hSa2K/OQRk2t0MxjwSO4NY8KkCnS0WnTrwT10cj9sqfgjDPL3g6kZwhZCnXUC
+	 SuI0R19BX6Gz1vUbgCV9uaL6T43N3jAI5qgobBaAOpu2zsDsxJVuM3VS1wcRnj6Xa8yF6
+	 /z35kjM/VcPLXBDV82IVOm4xCwaUykWYzbFgsuiT2aeAPTEBArc/c0lzpn3jRvI1/OQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CHaOgXuE;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=b5zbtFJU;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09F7B606A326;
-	Sun,  1 Nov 2026 22:15:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF3ED606A32D;
+	Sun,  1 Nov 2026 22:20:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CHaOgXuE
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 780C31F000C1;
-	Sun,  1 Nov 2026 22:15:19 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=b5zbtFJU
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3CEBF1F000C1;
+	Sun,  1 Nov 2026 22:20:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793571324;
-	bh=S3lcyIX5M+D9oaMxMnqcLepq9hdIlj33lYjarpJr4ic=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=CHaOgXuEOszpcFCzgxWhOugudfo85K2qYm/UkvJds7hTV31/NTxkpEvX5k0lgLQlE
-	 8IvflPjJkW7U6ZILo5XVKFue4NzP8sMsGDZgLmpYpPc1lUdZWRrxk6M6i+5slC1rck
-	 EuteLDR0ogjJq+Zb4I1ODq1VKMZ/oQ1mq3KZb+kUNyh6J3BoR+UeUWUC5I4B5upvyl
-	 YRAQzoDExynaG9vB9bfXdzNEjN8IfqH+sEwmcDXGFfbAutlrtkjSQT4eXa6WE0WYqj
-	 P/P7vgeh2cGPCr+4UM45Sr7DGfq0sGnfy+uOBn4D60xD7f3tj3hGVHqS1zaKriBP1l
-	 XFOoJuwtrAfXw==
-From: Linus Walleij <linusw@kernel.org>
-Date: Sun, 01 Nov 2026 23:14:40 +0100
-Subject: [PATCH v2 7/7] ARM: dts: broadcom: Add BCM6846 PMB clocks and
- hardware monitoring
+	s=k20260515; t=1793571648;
+	bh=U0hFfZFqkn7CoDWwgk8yDqp8fa+VP07aEXq9RW+yvIk=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=b5zbtFJUox77/qiH81MzGEqFAAZqchI14dcoMcPHQLeg+4UjIuDlVUHxEs8ZjUWjW
+	 v0J9u9bk6ehqHlJ/wx2vRD5UnVHNHd0Xl2IbRS3k3DbAKHS36e3z6pJ+UNGNc9UTr8
+	 ow/IFMLiyY0tG3RNEHBFOc5wRsLa/JdP+/MXng2YTrdoec76PXPRpx/EZWBb87ASSj
+	 d1W8zZ5dS3+AayDam+VloTjhD8bbmV3Qb1FE6X/2F1OFx9Cf/0LL9aa1Y4OVzIeo9S
+	 PqFmAnRrL0VjcDdNy9MrdSElYCF5GT50rK0zd10747zRQRTizHHG5oujKtODPkGOk6
+	 IEvrOWIuxsVTA==
+Message-ID: <sashiko-outbox-192706@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v2 6/7] hwmon: Add Broadcom PMB PVTMON monitoring
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Linus Walleij" <linusw@kernel.org>
+Cc: mfd@lists.linux.dev, linux-hwmon@vger.kernel.org, lee@kernel.org
+In-Reply-To: <20261101-xg6846b-bcmbca-xrdp-reset-v2-6-455fe9eed5ee@kernel.org>
+References: <20261101-xg6846b-bcmbca-xrdp-reset-v2-0-455fe9eed5ee@kernel.org>
+ <20261101-xg6846b-bcmbca-xrdp-reset-v2-6-455fe9eed5ee@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Sun, 01 Nov 2026 22:20:47 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -52,126 +59,22 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261101-xg6846b-bcmbca-xrdp-reset-v2-7-455fe9eed5ee@kernel.org>
-References: <20261101-xg6846b-bcmbca-xrdp-reset-v2-0-455fe9eed5ee@kernel.org>
-In-Reply-To: <20261101-xg6846b-bcmbca-xrdp-reset-v2-0-455fe9eed5ee@kernel.org>
-To: Linus Walleij <linusw@kernel.org>, Lee Jones <lee@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- William Zhang <william.zhang@broadcom.com>, 
- Anand Gore <anand.gore@broadcom.com>, 
- Kursad Oney <kursad.oney@broadcom.com>, 
- Florian Fainelli <florian.fainelli@broadcom.com>, 
- =?utf-8?q?Rafa=C5=82_Mi=C5=82ecki?= <rafal@milecki.pl>, 
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
- Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
- Jerome Brunet <jbrunet+clk@baylibre.com>, 
- Guenter Roeck <linux@roeck-us.net>, Philipp Zabel <p.zabel@pengutronix.de>, 
- Jonathan Corbet <corbet@lwn.net>, Randy Dunlap <rdunlap@infradead.org>, 
- Benjamin Larsson <benjamin.larsson@genexis.eu>
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
- linux-arm-kernel@lists.infradead.org, linux-clk@vger.kernel.org, 
- linux-hwmon@vger.kernel.org
-X-Mailer: b4 0.16.0
 
-Describe the PMC complex and its PMB interface, including clock, reset
-and hwmon child nodes. Supply the PMB clock controller with
-its 50 MHz reference and connect PVTMON to its clock and reset
-resources. Add a SoC thermal zone referencing the sensor child with a
-one-second polling interval.
+> Expose the BCM6846 die temperature and seven voltage inputs through
+> hwmon using the shared Processor Monitor Bus (PMB) regmap.
+>=20
+> Register the temperature channel with the thermal framework so
+> existing zero-cell device-tree thermal sensor references work.
+>=20
+> Poll for valid samples with a bounded timeout, releasing the PMB lock
+> between reads. Report temperature in millidegrees Celsius, including
+> negative values, and voltages in millivolts.
+>=20
+> Signed-off-by: Linus Walleij <linusw@kernel.org>
 
-Leave trip points and cooling maps unspecified because the available
-BCM6846 documentation does not establish suitable temperature limits.
+Sashiko has reviewed this patch and found no issues.
 
-Signed-off-by: Linus Walleij <linusw@kernel.org>
----
- arch/arm/boot/dts/broadcom/bcm6846.dtsi | 47 +++++++++++++++++++++++++++++++++
- 1 file changed, 47 insertions(+)
-
-diff --git a/arch/arm/boot/dts/broadcom/bcm6846.dtsi b/arch/arm/boot/dts/broadcom/bcm6846.dtsi
-index 47f177323c18..e9775dfc5d1b 100644
---- a/arch/arm/boot/dts/broadcom/bcm6846.dtsi
-+++ b/arch/arm/boot/dts/broadcom/bcm6846.dtsi
-@@ -3,8 +3,10 @@
-  * Copyright 2022 Broadcom Ltd.
-  */
- 
-+#include <dt-bindings/clock/brcm,bcm6846-pmb.h>
- #include <dt-bindings/interrupt-controller/arm-gic.h>
- #include <dt-bindings/interrupt-controller/irq.h>
-+#include <dt-bindings/reset/brcm,bcm6846-pmb.h>
- 
- / {
- 	compatible = "brcm,bcm6846", "brcm,bcmbca";
-@@ -57,6 +59,12 @@ pmu: pmu {
- 	};
- 
- 	clocks: clocks {
-+		osc50m: clock-50mhz {
-+			compatible = "fixed-clock";
-+			#clock-cells = <0>;
-+			clock-frequency = <50000000>;
-+		};
-+
- 		periph_clk: periph-clk {
- 			compatible = "fixed-clock";
- 			#clock-cells = <0>;
-@@ -75,6 +83,14 @@ psci {
- 		method = "smc";
- 	};
- 
-+	thermal-zones {
-+		soc_thermal: soc-thermal {
-+			polling-delay-passive = <1000>;
-+			polling-delay = <1000>;
-+			thermal-sensors = <&pvtmon>;
-+		};
-+	};
-+
- 	axi@81000000 {
- 		compatible = "simple-bus";
- 		#address-cells = <1>;
-@@ -263,5 +279,36 @@ pl081_dma: dma-controller@59000 {
- 			clock-names = "apb_pclk";
- 			#dma-cells = <2>;
- 		};
-+
-+		pmc: system-controller@300000 {
-+			compatible = "brcm,bcm6846-pmc", "simple-mfd";
-+			ranges = <0x0 0x300000 0x21000>;
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+
-+			pmb: bus@20100 {
-+				compatible = "brcm,bcm6846-pmb";
-+				reg = <0x20100 0x200>;
-+
-+				pmb_clk: clock-controller {
-+					compatible = "brcm,bcm6846-pmb-clock";
-+					clocks = <&osc50m>;
-+					clock-names = "ref";
-+					#clock-cells = <1>;
-+				};
-+
-+				pmb_reset: reset-controller {
-+					compatible = "brcm,bcm6846-pmb-reset";
-+					#reset-cells = <1>;
-+				};
-+
-+				pvtmon: hwmon {
-+					compatible = "brcm,bcm6846-pmb-pvtmon";
-+					clocks = <&pmb_clk BCM6846_CLK_PVTMON>;
-+					resets = <&pmb_reset BCM6846_RESET_PVTMON>;
-+					#thermal-sensor-cells = <0>;
-+				};
-+			};
-+		};
- 	};
- };
-
--- 
-2.56.0
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261101-xg6846b-bc=
+mbca-xrdp-reset-v2-0-455fe9eed5ee@kernel.org?part=3D6
 
