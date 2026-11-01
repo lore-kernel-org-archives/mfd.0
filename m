@@ -1,103 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.52
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793572302;
-	b=Nd+aUueRDbcqGx8Ez7uVczUzNnoHQrVipwU9iAXyrMh06sYm0w68gmUQDvngGG9bKfdf
-	 3P3gSeP//yPn4YX421GD8UGUitwR2XuS0/R5Ini7U0xBqZXN0dnT3mjrg+ih2HmKcBvwe
-	 xycLvFmZA6GFHXqvx5zLRpiIcAJLYC+Vrroco40bZ4VOuTAUushyzbYPuWSAh1gfxTA8M
-	 YzInX/JHWx7uPZJiCwpG95RADQzAArXH98zG4SYd1IjPf9kSLHVzZ2YM7ypkbidkX2Ba/
-	 Mt0l0jhucy9DJHtl/VwiQaeVCw/IYRmk5FpzDMTKCMcKaO4UsYEISDwoit4dQUM9NZQ==
+	t=1793572338;
+	b=g3B3KBlsPH4BWNzC46AkcFvvQng2BWF59tkH7PPLLV5+SXPfq0bUi3OvILRspORPE/oA
+	 kI5RzvzHgNFmDUcY/mm8EPCnruWZF4DWpWVNHIKuQOMX4BdKQHWYEBSvgNZ2pCY/5cmv3
+	 DyEqxJFzyJLOoSZaONLlYTk76oHoJ007c5djFhz2wh+tIPqr0/XM8ofk736Z+ml8gg/QH
+	 /aYNbxBLuY3oJrvS4hr5sAVDqdFVK2VMdY/zM26VpNHwabbiWYLAP1a3JUngTYyTnDHKX
+	 f2XN3Up0AfJsDyoqvBT4ckAUrjBmaqFx2EMrG9/2KjTpsNgzv+hWr/z00/gVD0GFgXQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793572302;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=YleZPiS3GFEE1Ucc2aPYXMZVD+vgRoqW68GLZ8Ewqjo=;
-	b=hXfV4/pwX+sVtmFE6DjrNlJC0Br3qSK3ahYEAJRMQWw/lMjcA7wbqEK+dwC180xrk4X5
-	 RjJl/dhUTrV70qdHGdBlB9WGJRI8mwy9LwK88e3YyR33a2fsak+Mv3UQEkWdTuEViK//y
-	 66vJhKOzy7pInkcP07JAhIMpjTc5Tgg44ZXWfnffj1W1+WuOXz3NmhmSRis24NfL2uLNX
-	 s71ZDSjg0QlOKw0t6BlNF/swCzhqqoLP/LuSeX4e6TrjBePNdNIrkKsLmX4W4rdjslu7d
-	 0XT6Vgzau3b2oADXk5S3Mks9jOxS2vCuFv0sOVaGTr8nxStJnjtVdzDRX/hiFIAPh/g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793572338;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=jw2ZdFoQ6ZM9vaYuZ7JP56kRgCq/+vpMvmfDEsQ1Dtw=;
+	b=gdkpkbNBsQZTERcY4BolP7imlMmNE5hIvKj4CiPcg3xFHse68qabfOqdCFjWjlMuQoxW
+	 WFbBF/OT6vzu5lCsGRu8sF+VbZ9iZ60hs5iZ85VExDoBcbo6w3dcJV1B33amqwulIyFCw
+	 9hK60U/5NMtTYnOChEkFfW3cuq3sMwNLS/sfftVTC49vMSXLHombX3IMaaA2CFYYUMz3r
+	 uaSCzuGblFIpyu756l+I6ROPVb4KdBrhla5+pt1MmIG/rP0sFr/TMPNflkeaEpHgAXPAa
+	 Qjy4MvuQz1Uu/qfuSKRvHO4HrmTwFgof+Xv4ZP4DgiPUk8AgpLDVG9XEmlrsQIYXV5A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="TRp/RIok";
-	arc=none smtp.remote-ip=209.85.221.52
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PqXreblo;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28350606A326
-	for <mfd@lists.linux.dev>; Sun,  1 Nov 2026 22:31:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 28350606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8167F60A2602;
+	Sun,  1 Nov 2026 22:32:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=TRp/RIok
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-48c4d99c32bso1637297f8f.1
-        for <mfd@lists.linux.dev>; Sun, 01 Nov 2026 14:31:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793572300; x=1794177100; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=YleZPiS3GFEE1Ucc2aPYXMZVD+vgRoqW68GLZ8Ewqjo=;
-        b=TRp/RIokMvoqBJwofCmuJcqtD112d8bwDhkwjZVFhQbv/bz8LW1U1t40wC5QgYl2OX
-         a3pBT8pkOB/HurkSkNf+VUEgE55rg5lihvXRk5dpzrtKqY0IRDu3KcYUY0/qoXIezriT
-         7ovKeXehuq8fN+8o7olEbnA3JD58excSrAwLnKDI30Gfjn3WMEAy9a7R4BjGCnxP3J+A
-         S3wJHn8XmisS0AuFqvOUVQ3DIwqhJPT0GfHffPGelw+rmb8PodJxuAgfDz/pl4+fyom/
-         TjiBDAbcYQilBEowEnJ++PiiACum46wERaJleUNXPaGGVSoQtF9fjn7nOMnNCm6hlD//
-         1uKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793572300; x=1794177100;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=YleZPiS3GFEE1Ucc2aPYXMZVD+vgRoqW68GLZ8Ewqjo=;
-        b=Y8PxfG1WfXtua4E/YfrnKpmY183ohTncOsSprK229rYZCgo54vRIcskdTbBS/5Xb2e
-         QT0JZmHaxnTVYJd9pPvagyKmprtlLKF+THZ4tqYwmD/yco+qVT8R8DiRNyqP9ylBVsqn
-         /yXLZZLb/0kt1qD8DrYrlFRL/YVet3mq0OnfFMufvI9RiKhc4ukvHzKenMUbSNfCCKSK
-         iQoo+iA47IaMPm01ADb+z3NlfSa2gOHGuio/Z8/JwGfUk/V/NRdCSh7XouEqzXzYoChS
-         anIrOZWVXd0Mjpf52ht3YVevW2ezyX+X4I44iiAwPXZkvZBUqoNdQtGIlPO9Y5enhekN
-         Azlg==
-X-Forwarded-Encrypted: i=1; AKwUvBwIKv1vV+6DfaEHsbM2nxu/MhVIVJsN5sZOBnrrAA9znupqE3vOxbgs38uTrtTpMFtvy68=@lists.linux.dev
-X-Gm-Message-State: APuU4Z/QbKYvSwHTJ6l0fY80Kv6p8GePUzP17RtTdwp4KWjHpI8vFhzK
-	lDJq8l52C2Hm2J+bMtBei/gJPLRj4hPMnWehRTNtZISOmvW56ZrIJYQP
-X-Gm-Gg: AYBFou2MBLBMHIuRUhZIfX7xuGnXz6oc4nHobXu1xAlmdfTiFZfurgUsI8pj+W8BnYM
-	cFvfmw31LNSeKwKkUSH2+sM6nEkU5T0lGDI6iyilL02oYAAdRc8Rq277vR17Q6SbAFD4dH9R2Y1
-	p+UUOlybSU+rDVlvoN5FZXAmg7fvRHCmr1/FBssl8UCw2R2CKmi0Bi+5odub5IyYSnxa66Gwkof
-	M8IAqkF+8S6eivDCzY+6mCpIxwl3vkuyuaDsVTqGVRGAmQUNf6axyGKq4eKUBAmhpXFzbS0x7bp
-	77SMY9CMjkRXkdqJzMvql/WSUMWwQXpJ8jpjjlNcwHoLFdp5YicMvhJepNXpPIWfz59X8PnxR2z
-	bXMBK0gUsRuhvR/lt3dPrz/5RIkgVHN0Ulee/UOqRgWNEM1kNDNtYtGbVMG9K1xh5mH4ui10jmD
-	Oa6HqgU2FaxjBg2uaOFp3dUxUB0UVzRPdWPGsS+/BbRgNzQavKn95Kj5/XaSfqqMTBHF76sB66b
-	vQjkAgadU6HL+C8zpOKyn6VUxoimlHSMvrPHoR3xB4EUmLLGgA6SekGLOEf2vTqaNGv7ayBZNcy
-	paDkLcgAafnYzIpt96T+g0CgKXoj3EDfxgrBie5A7p93wTseO3DTuxTQaYJHqnw=
-X-Received: by 2002:adf:e001:0:20b0:48e:d88:55f4 with SMTP id ffacd0b85a97d-48e6e2bc855mr15509231f8f.2.1793572300404;
-        Sun, 01 Nov 2026 14:31:40 -0800 (PST)
-Received: from debian (ip-78-137-176-146.broadband.digiweb.ie. [78.137.176.146])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-48e71b78f95sm14904805f8f.28.2026.11.01.14.31.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 Nov 2026 14:31:38 -0800 (PST)
-From: Pablo Mazzini <pmazzini@gmail.com>
-To: Mark Brown <broonie@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Lee Jones <lee@kernel.org>,
-	Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>
-Cc: Pablo Mazzini <pmazzini@gmail.com>,
-	Alistair Francis <alistair@alistair23.me>,
-	Andreas Kemnade <andreas@kemnade.info>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	linux-hwmon@vger.kernel.org,
-	mfd@lists.linux.dev,
-	imx@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 0/7] sy7636a: power the panel only during updates
-Date: Sun,  1 Nov 2026 22:31:18 +0000
-Message-ID: <20261101223125.302001-1-pmazzini@gmail.com>
-X-Mailer: git-send-email 2.53.0
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PqXreblo
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C70DE1F0093A;
+	Sun,  1 Nov 2026 22:32:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793572338;
+	bh=jw2ZdFoQ6ZM9vaYuZ7JP56kRgCq/+vpMvmfDEsQ1Dtw=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=PqXreblo5xC8j7BeMqGVoA0hKJCCMPEl8b0czNO/r8ZjYFb09njIHZOdQlR/TIwQ3
+	 Qmg0Hjspodh0pJMcx7dIQ3ukWmO9uW1g9vKi1H5nN7K6hFImBMP0hmDxINUyh1ll8I
+	 nghpAzjBPtoo4X0vpJepvbMG9PVgVlfQEKG9dMfFYeI4WQboywQwpNLZRbeEj0ewsb
+	 9XywfsA+TU53nn1PIx73/gPoElKY4/3q7mB6FYjKukGvAFrdWWCNVm31oihRT3HB+t
+	 W98a1MwapoF6bQzi34ah+HYUwI9ABXoDLdPFNgkVYor6oR3dST0Q13x8QUuEhLJQSp
+	 8vyTy4ALIqy9w==
+Message-ID: <sashiko-outbox-192714@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v2 2/7] dt-bindings: soc: Describe the BCM6846 Processor
+ Monitor Bus
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Linus Walleij" <linusw@kernel.org>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, linux-clk@vger.kernel.org, linux-hwmon@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, lee@kernel.org
+In-Reply-To: <20261101-xg6846b-bcmbca-xrdp-reset-v2-2-455fe9eed5ee@kernel.org>
+References: <20261101-xg6846b-bcmbca-xrdp-reset-v2-0-455fe9eed5ee@kernel.org>
+ <20261101-xg6846b-bcmbca-xrdp-reset-v2-2-455fe9eed5ee@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Sun, 01 Nov 2026 22:32:17 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -106,54 +60,172 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 
-The SY7636A hwmon driver keeps VCOM on from probe, so a display driver
-can not power the panel only during updates.
+Thank you for your contribution! Sashiko AI review found 5 potential issue(=
+s) to consider:
+- [Low] dt-bindings: soc: brcm,bcm6846-pmb ordered after dependent brcm,bcm=
+6846-pmc
+- [Low] dt-bindings: hwmon: brcm,bcm6846-pmb-pvtmon uses additionalProperti=
+es with $ref
+- [Low] dt-bindings: soc: brcm,bcm6846-pmb example child nodes out of alpha=
+betical order
+- [Low] MAINTAINERS: missing S: status tag in BROADCOM BCMBCA PMC3 PMB DRIV=
+ER entry
+- [Low] dt-bindings: reset: non-contiguous reset IDs in brcm,bcm6846-pmb.h
+--
 
-Read the temperature only while the rails are on instead, and bind the
-regulator to the I2C device directly, with the hwmon driver as its
-auxiliary driver. The regulator also gains VCOM voltage control and
-waits for power good on enable.
+commit 44e16c21f8b2ce99a2b8f758565676392f84eec0
+Author: Linus Walleij <linusw@kernel.org>
 
-Patch 6 depends on patches 1-5 and touches the regulator, hwmon and
-MFD drivers.
+dt-bindings: soc: Describe the BCM6846 Processor Monitor Bus
 
-Tested on a PocketBook Verse (B288).
+This commit adds Device Tree binding schemas and header files for the
+Broadcom BCM6846 Processor Monitor Bus (PMB) and its child clock, reset,
+and PVTMON hardware monitor controllers.
 
-v2:
-- drop the DT patch keeping VCOM always-on (Andreas)
-- patch 3: only wait for power good, VCOM_EN stays as it was (Andreas)
-- new patch 4: fix negative temperatures
-- keep the temperature in drivers/hwmon as an auxiliary driver of the
-  regulator, instead of moving it into the regulator driver (Guenter,
-  Andreas)
-- patch 5: no VCOM enable at probe, which also removes the probe race
-- patch 5: read power good and the temperature in one transfer (Andreas)
+>     dt-bindings: soc: Describe the BCM6846 Processor Monitor Bus
+>    =20
+>     The third generation Power Management Controller (PMC3) accesses SoC
+>     block control and reset registers through the Processor Monitor Bus
+>     (PMB). Describe the BCM6846 PMC and PMB.
+>    =20
+>     Signed-off-by: Linus Walleij <linusw@kernel.org>
 
-Pablo Mazzini (7):
-  regulator: sy7636a: fix the chip name
-  regulator: sy7636a: add VCOM voltage control
-  regulator: sy7636a: wait for power good on enable
-  hwmon: sy7636a: fix negative temperatures
-  hwmon: sy7636a: read the temperature only while the rails are on
-  regulator: sy7636a: bind to the I2C device directly
-  ARM: imx_v6_v7_defconfig: drop the SY7636A MFD option
+[Severity: Low]
+Should this commit be ordered before commit 39aa42d4e944 ("dt-bindings:
+mfd: Describe the BCM6846 PMC complex"), and should the commit message drop
+"PMC and"?
 
- arch/arm/configs/imx_v6_v7_defconfig  |   1 -
- drivers/hwmon/Kconfig                 |   2 +-
- drivers/hwmon/sy7636a-hwmon.c         |  58 +++++----
- drivers/mfd/Kconfig                   |  10 --
- drivers/mfd/simple-mfd-i2c.c          |  11 --
- drivers/regulator/Kconfig             |   6 +-
- drivers/regulator/sy7636a-regulator.c | 163 ++++++++++++++++++++------
- include/linux/mfd/sy7636a.h           |  34 ------
- 8 files changed, 162 insertions(+), 123 deletions(-)
- delete mode 100644 include/linux/mfd/sy7636a.h
+In the parent commit 39aa42d4e944,
+Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml references
+/schemas/soc/bcm/brcm,bcm6846-pmb.yaml# via $ref and includes
+dt-bindings/clock/brcm,bcm6846-pmb.h and
+dt-bindings/reset/brcm,bcm6846-pmb.h in its example before they are added
+here, which causes make dt_binding_check to fail at the parent commit
+during bisection.
 
+> diff --git a/Documentation/devicetree/bindings/hwmon/brcm,bcm6846-pmb-pvt=
+mon.yaml b/Documentation/devicetree/bindings/hwmon/brcm,bcm6846-pmb-pvtmon.=
+yaml
+> new file mode 100644
+> index 0000000000000..9bf52cf097a32
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/hwmon/brcm,bcm6846-pmb-pvtmon.yaml
+> @@ -0,0 +1,42 @@
+[ ... ]
+> +allOf:
+> +  - $ref: /schemas/thermal/thermal-sensor.yaml#
+> +
+> +properties:
+> +  compatible:
+> +    const: brcm,bcm6846-pmb-pvtmon
+> +
+> +  clocks:
+> +    maxItems: 1
+> +    description: PVTMON acquisition clock
+> +
+> +  resets:
+> +    maxItems: 1
+> +    description: PVTMON analog-acquisition reset
+> +
+> +  '#thermal-sensor-cells':
+> +    const: 0
+> +
+> +required:
+> +  - compatible
+> +  - clocks
+> +  - resets
+> +  - '#thermal-sensor-cells'
+> +
+> +additionalProperties: false
 
-base-commit: 6628e7d4c6b25c8d18f1345e3a20d21829aae7e4
--- 
-2.52.0
+[Severity: Low]
+Since this schema includes /schemas/thermal/thermal-sensor.yaml# via allOf,
+should it use unevaluatedProperties: false instead of additionalProperties:
+false so that properties from the referenced schema are evaluated properly?
 
+> diff --git a/Documentation/devicetree/bindings/soc/bcm/brcm,bcm6846-pmb.y=
+aml b/Documentation/devicetree/bindings/soc/bcm/brcm,bcm6846-pmb.yaml
+> new file mode 100644
+> index 0000000000000..a4a77fed94d05
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/soc/bcm/brcm,bcm6846-pmb.yaml
+> @@ -0,0 +1,80 @@
+[ ... ]
+> +        pmb_clk: clock-controller {
+> +            compatible =3D "brcm,bcm6846-pmb-clock";
+> +            clocks =3D <&osc50m>;
+> +            clock-names =3D "ref";
+> +            #clock-cells =3D <1>;
+> +        };
+> +
+> +        pmb_reset: reset-controller {
+> +            compatible =3D "brcm,bcm6846-pmb-reset";
+> +            #reset-cells =3D <1>;
+> +        };
+> +
+> +        hwmon {
+> +            compatible =3D "brcm,bcm6846-pmb-pvtmon";
+> +            clocks =3D <&pmb_clk BCM6846_CLK_PVTMON>;
+> +            resets =3D <&pmb_reset BCM6846_RESET_PVTMON>;
+> +            #thermal-sensor-cells =3D <0>;
+> +        };
+> +    };
+
+[Severity: Low]
+Should the unaddressed hwmon child node be placed before reset-controller
+in the example so that the child nodes are in alphabetical order and pass
+scripts/dtc/dt-check-style --mode=3Dstrict without a child-name-order
+warning?
+
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index eb4b3b631e82c..fa95f2dec63c5 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -5446,7 +5446,13 @@ N:	bcm[9]?6878
+> =20
+>  BROADCOM BCMBCA PMC3 PMB DRIVER
+>  M:	Linus Walleij <linusw@kernel.org>
+> +F:	Documentation/devicetree/bindings/clock/brcm,bcm6846-pmb-clock.yaml
+> +F:	Documentation/devicetree/bindings/hwmon/brcm,bcm6846-pmb-pvtmon.yaml
+>  F:	Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml
+> +F:	Documentation/devicetree/bindings/reset/brcm,bcm6846-pmb-reset.yaml
+> +F:	Documentation/devicetree/bindings/soc/bcm/brcm,bcm6846-pmb.yaml
+> +F:	include/dt-bindings/clock/brcm,bcm6846-pmb.h
+> +F:	include/dt-bindings/reset/brcm,bcm6846-pmb.h
+
+[Severity: Low]
+Should the BROADCOM BCMBCA PMC3 PMB DRIVER entry in MAINTAINERS include an
+S: status tag (such as S: Maintained) so that scripts/get_maintainer.pl
+--self-test=3Dsections does not warn about a section without status?
+
+> diff --git a/include/dt-bindings/reset/brcm,bcm6846-pmb.h b/include/dt-bi=
+ndings/reset/brcm,bcm6846-pmb.h
+> new file mode 100644
+> index 0000000000000..6b1a6baac1c60
+> --- /dev/null
+> +++ b/include/dt-bindings/reset/brcm,bcm6846-pmb.h
+> @@ -0,0 +1,11 @@
+> +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+> +#ifndef _DT_BINDINGS_RESET_BRCM_BCM6846_PMB_H
+> +#define _DT_BINDINGS_RESET_BRCM_BCM6846_PMB_H
+> +
+> +/* XRDP packet engine and its three Runner cores. */
+> +#define BCM6846_RESET_XRDP	0
+> +
+> +/* Process, voltage and temperature monitor analog acquisition reset. */
+> +#define BCM6846_RESET_PVTMON	3
+> +
+> +#endif
+
+[Severity: Low]
+Since these reset constants represent abstract logical reset group IDs
+rather than hardware register offsets or bit positions, should
+BCM6846_RESET_PVTMON be defined as 1 instead of 3 so that the IDs in this
+new binding header are contiguous starting from 0 and
+bcm6846_pmb_reset_groups[] in drivers/reset/reset-bcmbca-pmb.c does not
+carry two unused entries at indices 1 and 2?
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261101-xg6846b-bc=
+mbca-xrdp-reset-v2-0-455fe9eed5ee@kernel.org?part=3D2
