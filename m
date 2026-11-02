@@ -1,55 +1,54 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793608563;
-	b=fb9XNILmPRrU3EmWq9OE76UUrjYwubk/aX3WyvFP+CFbLvnAtWGXINyELzdZlrQZU8cF
-	 9FwG/OzXgvKD8UvPVtoobo0L5V3E0NQXCuk0ze2mSMhWtYctRZPE+OtibvIwfr6XzpMWh
-	 kCKXF8GrOo9OwtSJciZNnd9izOyxPC6SuL5ytro2Tvy4iwrxm7V5zxjdPY1yY5f75uCxj
-	 hS4zprZpTtLJP8RzvhotlnROIc5cF9CJrwdVJf8Uj5U6GyeT8OF/LfWR2iV5B4ai28Poe
-	 0/F1DF3z3PX87WTOiUEHvJBufHrYY1jX6S0bdz7/uyCFtznd79HriK0gs5Jt5yfkYRA==
+	t=1793612542;
+	b=Rfc5sww+qSys48eLolcUInJgajc1oyYMOMtps1iG06jDwAjsfP2TLO+Ln0EeEFsWUf01
+	 cWeG/phoDgJai+0UIv7BWW8Mvv7pjm5pDO/guRV9gcNXCIs5qegeX2yHgsvEw1+2kZzJK
+	 kFbv4GkI6CNLkN5bm8zqYSqLo44KikVkzS16qUCMYtCbvRC55nnAWttyl1asTu6R7DsxM
+	 fRtRN1gnHQF2pMvzsrGS5UxSKkeF9vkN6Yz2BQxl54QjoWGles7uIU5V/ShE7VmJp7NJV
+	 8vhCVTOEfOg0ysy6VDmH8iuvna6EnST/gBJllFKryhg7YCqCHFcDVr/4PUCaTwLqj+g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793608563;
-	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
-	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
-	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=3I1uuTK8iNGnY6KeDyQT2SJpiIheh8weAr6k39okB38=;
-	b=w1+ru114IO4hmjr48uKUNZI5lUeBGCNyKe15OMnMRN0pROyjfUiNBqKYKTv6GAlgNd13
-	 0I6rU00uN8WIvNgWbPvtuNZ31ARKFjqgIyiuYkRVHqqOp6vDiQLq6wtZZrkkiSxVfz6lI
-	 072G7kYkJgyqCYKyN7DLr/nsgOa0n8WFZyVfVVciU7ukx4ITP8kVva6YAkd4PIbljLd0n
-	 C3aFqveS8iuuy/aIz5lObhRquDT9BzBhPEDg9QnVbvVQ4aLuEBvywXhfbRTxeVFj9Ij0j
-	 G8BdCt+M4cy47/v96JPVC2ClMadvfDPS8C1VSy1Vc6u1mlO5BYPXVGZJwOErzpNRqlg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793612542;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=PYlyse4le/dgjm/MY/0rBhG+Z5H7yxQFmMu0lC/crqY=;
+	b=F1vbAh1OF94AeNcsHPpYyfIUs+88aQ2sEythWMegu6Mi6QvcE61G20dD3YzA8Dmeo8VT
+	 hDJvokpFMxjgCI48lbLShCC3aeMf+JkiZr533sopMnd480ZIa18Gl9ZBKSvs3JHBO1tTL
+	 3LieFiUJ/bZt14MwZC4zjb/OLm20El82CKptyNvzqUDmhC+VEkwMbJZPextTerE56vrl9
+	 6v+mib/xrwOrZqpwwMzugHtVmJIBChIZOxF62F70KWNtyM9SnnBSX5eCCww7zVMPLo7ND
+	 8fzGDeq//gHRzcjswf8XV4h+QuW0Ec7JHh6Q3W67Ly04/kc+tuGobNIUZDozBOs5nmg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hdABaKXz;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iYJOBYCY;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDA49606A327
-	for <mfd@lists.linux.dev>; Mon,  2 Nov 2026 08:36:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 58C3C606A324;
+	Mon,  2 Nov 2026 09:42:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hdABaKXz
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C0D4F1F00A24
-	for <mfd@lists.linux.dev>; Mon,  2 Nov 2026 08:36:02 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iYJOBYCY
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C24841F000C1;
+	Mon,  2 Nov 2026 09:42:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793608562;
-	bh=3I1uuTK8iNGnY6KeDyQT2SJpiIheh8weAr6k39okB38=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=hdABaKXzq0B4SwXeyHCCqSwSU3vJyC+ldceFfAJyMRZWrIBdsakGPUYRfdxQx/ypE
-	 Lpg/33AhBWlgmr8oRRige0T+yKHd9hK5JoTEkn8Nx9Asi3ZpDFHYK0BIrUEdlyvbDa
-	 L2+50CwShXR8ZwouotMTjvXXhPAy9RUeoCDKiBtVGL+gHclt7+pjxliMQHFJy3n52H
-	 NCmyMKf7GHzRDKoyAKBewfsj520ZY9JXITED0b6Sb+RDozE0fdFnMjRSCij9e88nPV
-	 qVGT0UON20kxht6fzLa/EcWlJOCQ16jZ7lXpXxUmAkx54mZv9+JbOjUG6xQDZBDYVS
-	 6t6li/Ov/DBIw==
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5bfa686881fso2126528e87.2
-        for <mfd@lists.linux.dev>; Mon, 02 Nov 2026 00:36:02 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AKwUvBwOkQe3TLXt24knQPb2LX0YmwqrGsIpqUBa/xz1kRdAYwKoMBgWiUTZ8wck7RF03lmioEk=@lists.linux.dev
-X-Gm-Message-State: APuU4Z/BktCE+uQEENhLfBire79/iUs+cmq4g6SROu3mlcmEk7alyquH
-	ghXeJZ6fMebnAZ/Nef1+SJiUpV13wERbt5dfYQXp/MC53E+mvRkzXKWbDpIZ2UwvXBAPT11p8d3
-	qYDg/j1LhvNW3XOFG4AcpvfrDH3DI2J8=
-X-Received: by 2002:a05:6512:131c:b0:5bf:d10a:f36 with SMTP id
- 2adb3069b0e04-5bfd9587203mr3108280e87.33.1793608561349; Mon, 02 Nov 2026
- 00:36:01 -0800 (PST)
+	s=k20260515; t=1793612542;
+	bh=PYlyse4le/dgjm/MY/0rBhG+Z5H7yxQFmMu0lC/crqY=;
+	h=From:To:Cc:Subject:Date;
+	b=iYJOBYCYoEtMmCDIu07v+IC7rSwgeciMbF2PsEcsvYUHzzl9DXuhaWnxjKA2HM7I6
+	 t/X5OxcVKejJpcGEw3sHZQ0Iob9T+Ez5ms+hKJJ4I5UlEYGy3HDT6RtIRa/wCAJPHS
+	 vGgDy8Tas4OW7yWgl4eCkRvq1hRK/SUaHhOFGl+dce+uW/joDnQHi0raWrgD++x/Vx
+	 0zwTxJ2lbafDdWDkr6euVUiz1wQKcd3ul7x8DdXyrakgbsnzhNGmnqYP1weDxAGY+T
+	 MMJoo+CHJV8RMh9unylVkqCjPyx4FvapFNiaZ7VrLZajfHH6L7GbcoIGvqMqgTUb9Y
+	 EXZqRPm9T+uyQ==
+From: Imre Kaloz <kaloz@kernel.org>
+To: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
+Cc: linux-mips@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Lee Jones <lee@kernel.org>,
+	mfd@lists.linux.dev
+Subject: [PATCH v2 0/2] MIPS: SGI-IP30: power off through the RTC
+Date: Mon,  2 Nov 2026 10:41:03 +0100
+Message-ID: <20261102094106.21300-1-kaloz@kernel.org>
+X-Mailer: git-send-email 2.47.3
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,45 +58,44 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261101-xg6846b-bcmbca-xrdp-reset-v2-0-455fe9eed5ee@kernel.org>
- <CAHi4H7GOMM9K6XG15vPyFMLOza3QQ7QPxUkCi85jA_e9D6YbKg@mail.gmail.com> <CAD++jLkqAXYTT5Y1iXjxc-W4s62OZJidsxJc-i9YsOOHW3MzUQ@mail.gmail.com>
-In-Reply-To: <CAD++jLkqAXYTT5Y1iXjxc-W4s62OZJidsxJc-i9YsOOHW3MzUQ@mail.gmail.com>
-From: Linus Walleij <linusw@kernel.org>
-Date: Mon, 2 Nov 2026 09:35:47 +0100
-X-Gmail-Original-Message-ID: <CAD++jLmSaQvhb88T-Htbxo5Zraw-rWExtwd+xyKeh_e_nx6vcw@mail.gmail.com>
-X-Gm-Features: AclHuK9G3q47tXvjcobM5d9UVt8ByEn8Or5PP0D0xsQOLYPH6bGFA6p8ZVR0NF4
-Message-ID: <CAD++jLmSaQvhb88T-Htbxo5Zraw-rWExtwd+xyKeh_e_nx6vcw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/7] BCMBCA PMB clock, reset and hardware monitoring support
-To: William Zhang <william.zhang@broadcom.com>
-Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Anand Gore <anand.gore@broadcom.com>, Kursad Oney <kursad.oney@broadcom.com>, 
-	Florian Fainelli <florian.fainelli@broadcom.com>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
-	Guenter Roeck <linux@roeck-us.net>, Philipp Zabel <p.zabel@pengutronix.de>, 
-	Jonathan Corbet <corbet@lwn.net>, Randy Dunlap <rdunlap@infradead.org>, 
-	Benjamin Larsson <benjamin.larsson@genexis.eu>, mfd@lists.linux.dev, 
-	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-clk@vger.kernel.org, linux-hwmon@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Mon, Nov 2, 2026 at 8:50=E2=80=AFAM Linus Walleij <linusw@kernel.org> wr=
-ote:
-> On Mon, Nov 2, 2026 at 5:33=E2=80=AFAM William Zhang <william.zhang@broad=
-com.com> wrote:
->
-> > > Inside the PMC is the PMB, the processor monitor bus. This bridges
->
-> > Should have pointed this out last time.  PMB: Power Management Bus
->
-> I think you did point it out, I just didn't manage to change it everywher=
-e,
-> hopefully I only missed this one...
+The Octane's power supply is switched by its DS1687 RTC. Patch 1 uses
+it for power-off and halt. Patch 2 turns a power button press into an
+orderly power-off, and adds the hook to the IOC3 RTC platform data in
+drivers/mfd/ioc3.c.
 
-Ah no, it was the PMC3 I corrected. OK fixed this everywhere now
-for v3, thanks William!
+Both take effect only with CONFIG_RTC_DRV_DS1685_FAMILY=y, which
+ip30_defconfig sets with "MIPS: SGI-IP30: fix the defconfig defaults
+for the Bridge PROM and RTC" from the "MIPS: SGI fixes" series. They
+build without it. Patch 2 drives the RTC with interrupts disabled, so
+at run time it needs "rtc: ds1685: do not sleep in the power-off
+handler" from the rtc-ds1685 v2 series sent to the RTC tree.
 
-Yours,
-Linus Walleij
+v1 was tested on an Octane with poweroff, one and two power button
+presses, and a stalled shutdown.
+
+Changes in v2:
+- Patch 1: drop the device reference when the RTC has no driver data.
+- Patch 2: only the first power-off drives the RTC and later callers
+  wait for the power to drop; the 120 second timeout holds the device
+  lock against an unbind of rtc-ds1685. The RTC's power-off message
+  is printed from the power-off context, as the console thread cannot
+  run once interrupts are off.
+
+v1: https://lore.kernel.org/all/20261013115820.13293-1-kaloz@kernel.org/
+
+Imre Kaloz (2):
+  MIPS: SGI-IP30: power off through the DS1687 RTC
+  MIPS: SGI-IP30: shut down cleanly on a power button press
+
+ arch/mips/include/asm/sgi/heart.h |  2 +
+ arch/mips/sgi-ip30/ip30-power.c   | 94 +++++++++++++++++++++++++++++++
+ drivers/mfd/ioc3.c                |  6 ++
+ 3 files changed, 102 insertions(+)
+
+
+base-commit: 24a19b953e2a3d0ea5a8c4951a0ab8f32720c907
+-- 
+2.47.3
+
