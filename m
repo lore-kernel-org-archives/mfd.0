@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793614487;
-	b=UBsVijDwx2EzoDQ521BoD+rKv502tJ0tw+X4vyQSaL8kAaVg+TgF9rmqBl8lq4pHUucl
-	 H7mDzabnJoq6WvSK9VfUoib8lPOqoCg/ISbGBf2nRqZSoSU8xQUFFxIsUQsfJO1aiLU9D
-	 xAldtxFT9YZWntzzKT4RW6VSOglikGRy/xngjDkeH1T0nVPHvVXrzuPwc9hih/mo2/v21
-	 7DXLr8cIwpnm105usvJgVzU444tVNQJuWTzP9RNgMQeNGircpnOhBlYth+C2lyruyEY12
-	 KC86TKCCqeD+af6wSa1ReUgt1y5wUJFTeUmHmCHpvd/8ydpuZFsY5Nbjnao3bG0U9DQ==
+	t=1793619047;
+	b=x/gOltdM+Z7EhMyXfmHfSTbkh0GuHC+8OV2bpnKJqBAonmAxJKAg2RFDwDQVuJenzqzU
+	 44Dw+gl0Rwx93xtzAOozt3pdqFyyDSPe/xe97eV2Zwz89t06wh3CyH32M0yHZp3XMGIsh
+	 5Dd13uCfEbj6PcH1uLtpVb2dSRNSZoMRMX7IIQl6AEvORmBSxvhQCpyCtTAEUhDGc6wXh
+	 xgwC57DW8+u4eOU+5UEZQjhZcQVAIJeOQix2dG5TzTW9kQ5QisM9uMpzm5+BJMfgkRlJT
+	 9LGGTa9T+EQRTK2piLtUlPNjNC1Ze/Sg6S3Md/9E7ieb7M5zVpJQkXPnNnW8oVLmkSg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793614487;
-	h=Received:DKIM-Signature:From:To:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer;
-	bh=S7XSI/+U+6ivNuzR0geAXKanTAFISUKZFrCD8FXCF0I=;
-	b=WqSF2BRiZm+aukzqcqmxQ75H4Ka4h8YP6+6Des5odsoCV4aofk4R49osLnaXNsRUZpO8
-	 cMkPaOS9vsKcYfwOB+r/TlenkIp562kvhKIKeWA+wKImNzrzlsCX0zVM7kUfXE9eKHL6+
-	 29IZD03XtyE+6UQ0gxdLxPS0NDx2hDNNTV39J0kKNuaLzbPW8zr9CLuDldXcnRAnTRu1q
-	 9bKzMo//AsINjCiOxnWiiecLEtHNitBiBMfpy/6amWmEjpMMWv8JU8jnBKqzRKF5cXBeY
-	 oMLss1vL79KPZ4BNscqbqG9VDIMKtRqG7rrzU2EWD8b2H8pYiII2v8fLXd4ZzXBxTMw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793619047;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
+	bh=aHJBn+g0eARKwK9BkSxKf1f6PPt9smBz3JX0wAyqVaA=;
+	b=HqB6SBrm2P3aza8M3c75Zsup6RjdIPy/gWDhJW7gZpHzhxqEr+k7tmVm0kOknxgFdwEL
+	 xVxPeqaorsDaJ1pMDoeeLub5meb5RrPWGppnNZkuc2+0eZTkK8PIJFuwIZ1Mdruhyarwr
+	 AJX4SvzHDVZu5tx1spMw5ANDyaBWS1m4LllLIM1xv2I2ZKKV3yPXAsVy1uci4apxx2DAa
+	 37eAmJZjjS9tUD4rUpOg8mTlQybknlbjtFev/x1+IDwCRnAdRxXvfC0GZHko84VPZBTEw
+	 vkB6ChOctgTDHP4YMYlJtnbIoFqZjjRP4n3e4Lv6srFoht2TGZrgpxBfIZH1OkhyHwg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ng2BDioR;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dNuGD8Lg;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1600606A338;
-	Mon,  2 Nov 2026 10:14:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 309B3606A327;
+	Mon,  2 Nov 2026 11:30:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ng2BDioR
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BE0701F00919;
-	Mon,  2 Nov 2026 10:14:45 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dNuGD8Lg
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 302971F00A17;
+	Mon,  2 Nov 2026 11:30:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793614487;
-	bh=S7XSI/+U+6ivNuzR0geAXKanTAFISUKZFrCD8FXCF0I=;
-	h=From:To:In-Reply-To:References:Subject:Date;
-	b=ng2BDioR3f9LpTH/zqdww8JTurWyUa0rXijgN1Utkx6SsLWPton9MtnoQebL02NEM
-	 RukTASa9Chs6W3brcUiawVszyxkUwH+9zOedZpQBh0w0Y/GHmgp/yx0TOURPaiYRcq
-	 oFNc9hhRiDxf+00k4mMOk/ltMGD/sXm0ZaTY7VYACEQ4CJ9kJ8TGGLjB5f1bKJWkUp
-	 iUJ8GT2+9GmgwQViFw/TxpQnexYfPqCu0VbXdth7Uhni1etEjDeQ1fzA8lESmh6ftp
-	 wfRjKwkB41Up6TRHOTaUi+uWcZkD4sOiGjWeO7/8dML5pw2hb6TUaTLD6wMy3xpDeV
-	 6K5Tx6crNd5rA==
-From: Lee Jones <lee@kernel.org>
-To: Lee Jones <lee@kernel.org>, Guenter Roeck <linux@roeck-us.net>, 
- Wim Van Sebroeck <wim@linux-watchdog.org>, mfd@lists.linux.dev, 
- linux-kernel@vger.kernel.org, linux-hwmon@vger.kernel.org, 
- linux-watchdog@vger.kernel.org, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-In-Reply-To: <20261030152821.283215-2-krzysztof.kozlowski@oss.qualcomm.com>
-References: <20261030152821.283215-2-krzysztof.kozlowski@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH] MAINTAINERS: mfd: Drop MEN F21BMC (bouncing
- email)
-Message-Id: <179361448552.127624.3807018457471483638.b4-ty@b4>
-Date: Mon, 02 Nov 2026 10:14:45 +0000
+	s=k20260515; t=1793619046;
+	bh=aHJBn+g0eARKwK9BkSxKf1f6PPt9smBz3JX0wAyqVaA=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=dNuGD8LgQODzYeOxXHK8a7uruefObPbN0BlknZpcU5RPuvHOFVu2CPGIsXnK+UDDB
+	 Smjj/mXtfNoNC0qw9LOiyoSa5mn2vNjNmplNUDxqNgjGAUP41v/Azp1p9hM65Ht2yV
+	 mjcJnVFNqEvLHUfknlID0dsJvq2vMR2s//59l6G7JfVmDniRIW3XiK8DIVXQLT9Oxg
+	 9jd0GTkpCqww/OjsAcOhbMoOVLe5s2yz57bPE6Zu9WWar2a8BMcZSIS6im+xiMHnbI
+	 IDyp63bgiHh17M5ifC2FbLKKIHPXURhAZjAZfnyVWrj5PAgcI8m9eMZ7+30Grrg0jA
+	 yXHrzjsci8sWw==
+From: Imre Kaloz <kaloz@kernel.org>
+To: sashiko-bot@kernel.org
+Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	linux-mips@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Lee Jones <lee@kernel.org>,
+	mfd@lists.linux.dev
+Subject: Re: [PATCH v2 2/2] MIPS: SGI-IP30: shut down cleanly on a power button press
+Date: Mon,  2 Nov 2026 12:29:29 +0100
+Message-ID: <20261102112930.18911-1-kaloz@kernel.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <sashiko-outbox-193229@kernel.org>
+References: <20261102094106.21300-1-kaloz@kernel.org> <20261102094106.21300-3-kaloz@kernel.org> <sashiko-outbox-193229@kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,21 +61,44 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.16-dev-ad80c
 
-On Fri, 30 Oct 2026 16:28:22 +0100, Krzysztof Kozlowski wrote:
-> Emails to Andreas Werner bounce ("reason: 550 5.4.1 Recipient address
-> rejected: Access denied.), so apparently driver is not supported
-> anymore.  Last emails from Andreas Werner are from 2016.  Drop the entry
-> completely.
+>> +	local_irq_disable();
+>> +	if (atomic_xchg(&ip30_power_off_claimed, 1))
+>> +		for (;;)
+>> +			cpu_relax();
+>
+> As reported by Sashiko on v1 [1], can another CPU still race on the
+> indirect RTC index/data registers and bank selection while
+> ds1685_rtc_poweroff() is running?
 
-Applied, thanks!
+On dual-CPU Octanes the second CPU can still move the index or the
+bank. v3 will stop the other CPU with smp_send_stop() before touching
+HEART or the RTC.
 
-[1/1] MAINTAINERS: mfd: Drop MEN F21BMC (bouncing email)
-      commit: f2a695d1020d766ed2b9c2cd53bce989357bc2ba
+>>  	ds1685_rtc_poweroff(to_platform_device(dev));
+>
+> Doesn't ds1685_rtc_poweroff() sleep in msleep(20) before cutting power,
+> violating the atomic context established by local_irq_disable() and
+> nbcon_cpu_emergency_enter()?
 
---
-Lee Jones [李琼斯]
+Not with the dependency named in the cover letter. Commit 21a829af60a7
+("rtc: ds1685: do not sleep in the power-off handler"), in v7.4-rc1,
+replaces that msleep() with mdelay().
 
+>> +#ifdef CONFIG_SGI_IP30
+>> +	.plat_prepare_poweroff = ip30_prepare_poweroff,
+>> +#endif
+>
+> What happens on a power button press when CONFIG_SGI_IP30=y and
+> CONFIG_RTC_DRV_DS1685_FAMILY=m?
+
+The button stops cutting the power, as the built-in
+ip30_machine_power_off() cannot reach the module. v3 will set the hook
+only when rtc-ds1685 is built in, so a modular driver will power off
+on a press as it did before this series, and the second-press branch
+will return.
+
+
+Thanks,
+Imre
