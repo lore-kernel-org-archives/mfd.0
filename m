@@ -1,57 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793619047;
-	b=x/gOltdM+Z7EhMyXfmHfSTbkh0GuHC+8OV2bpnKJqBAonmAxJKAg2RFDwDQVuJenzqzU
-	 44Dw+gl0Rwx93xtzAOozt3pdqFyyDSPe/xe97eV2Zwz89t06wh3CyH32M0yHZp3XMGIsh
-	 5Dd13uCfEbj6PcH1uLtpVb2dSRNSZoMRMX7IIQl6AEvORmBSxvhQCpyCtTAEUhDGc6wXh
-	 xgwC57DW8+u4eOU+5UEZQjhZcQVAIJeOQix2dG5TzTW9kQ5QisM9uMpzm5+BJMfgkRlJT
-	 9LGGTa9T+EQRTK2piLtUlPNjNC1Ze/Sg6S3Md/9E7ieb7M5zVpJQkXPnNnW8oVLmkSg==
+	t=1793619441;
+	b=rWoYnvV8Q4qecqL7ujGsjhAe9rkjCoJ+iC0XvTlxd/nMSi6/lUFC38vY/oYgH7jfJ9in
+	 b3jHseakPm+C/QF0P53geSkVOojwEcq/UNZ3h7zNOjRLpr4Duwv590RsvtrDCvrIdFthc
+	 kQNUHIKYO+W/TTYEv+hCL0i4BHy2/5m+UTxQA6Dg616VG8Mz31Q7BuVQtdRQ7EpO+09ZV
+	 erFQxsXkVpAL9q1/hjh7eX0yMWxQ7fxQZh4PRmagB+4xEl1hpmOYFkDTnKpTslzt1sMP1
+	 GUHymoYhXxLPjL8Q68l/K7OS3p6PcY/B1Hv/LFrFUu82eKDE66VHGhCXKkyNI0Fk1ZA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793619047;
-	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=aHJBn+g0eARKwK9BkSxKf1f6PPt9smBz3JX0wAyqVaA=;
-	b=HqB6SBrm2P3aza8M3c75Zsup6RjdIPy/gWDhJW7gZpHzhxqEr+k7tmVm0kOknxgFdwEL
-	 xVxPeqaorsDaJ1pMDoeeLub5meb5RrPWGppnNZkuc2+0eZTkK8PIJFuwIZ1Mdruhyarwr
-	 AJX4SvzHDVZu5tx1spMw5ANDyaBWS1m4LllLIM1xv2I2ZKKV3yPXAsVy1uci4apxx2DAa
-	 37eAmJZjjS9tUD4rUpOg8mTlQybknlbjtFev/x1+IDwCRnAdRxXvfC0GZHko84VPZBTEw
-	 vkB6ChOctgTDHP4YMYlJtnbIoFqZjjRP4n3e4Lv6srFoht2TGZrgpxBfIZH1OkhyHwg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793619441;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=MNiGsrHToyaVJ/zYmtsH9eEes+/+LeMLhdggw3eFzDs=;
+	b=uAzbeAt6WLO3aZ5FwPxcLOcF/LOWIdrbYqVQC+BZMh5EeLXiPlgeXRSHKKoUlB6EPTYJ
+	 8Wk5G7xLAjmh4WaRWWbQbe//FXRp8Fk1L1WSz+rgA0Gj4PvC83HKX2DM5AUvZt7clpvr0
+	 051Yhzq4f0cyah1mPaCUNBWHZd21zKlxmlTRDQcOaCd+F13baM3nJeD3a7LxnQOXYJ8DZ
+	 D7MKhPNQsFUArpoKGSFjnpmznszS/qLYehWzELW9fXiZM6XQECisR7DyD0XAPfBPvUv0A
+	 REOeJ8Yb2+WE5GNhawz26ShG3Sfox9zzd717UMC4+uzDweFrcbz4xYIViRAqDt02Xyg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dNuGD8Lg;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EHlkzm0F;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 309B3606A327;
-	Mon,  2 Nov 2026 11:30:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70DF8606A326;
+	Mon,  2 Nov 2026 11:37:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dNuGD8Lg
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 302971F00A17;
-	Mon,  2 Nov 2026 11:30:44 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EHlkzm0F
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 336461F00A16;
+	Mon,  2 Nov 2026 11:37:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793619046;
-	bh=aHJBn+g0eARKwK9BkSxKf1f6PPt9smBz3JX0wAyqVaA=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=dNuGD8LgQODzYeOxXHK8a7uruefObPbN0BlknZpcU5RPuvHOFVu2CPGIsXnK+UDDB
-	 Smjj/mXtfNoNC0qw9LOiyoSa5mn2vNjNmplNUDxqNgjGAUP41v/Azp1p9hM65Ht2yV
-	 mjcJnVFNqEvLHUfknlID0dsJvq2vMR2s//59l6G7JfVmDniRIW3XiK8DIVXQLT9Oxg
-	 9jd0GTkpCqww/OjsAcOhbMoOVLe5s2yz57bPE6Zu9WWar2a8BMcZSIS6im+xiMHnbI
-	 IDyp63bgiHh17M5ifC2FbLKKIHPXURhAZjAZfnyVWrj5PAgcI8m9eMZ7+30Grrg0jA
-	 yXHrzjsci8sWw==
-From: Imre Kaloz <kaloz@kernel.org>
-To: sashiko-bot@kernel.org
-Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-	linux-mips@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Lee Jones <lee@kernel.org>,
-	mfd@lists.linux.dev
-Subject: Re: [PATCH v2 2/2] MIPS: SGI-IP30: shut down cleanly on a power button press
-Date: Mon,  2 Nov 2026 12:29:29 +0100
-Message-ID: <20261102112930.18911-1-kaloz@kernel.org>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <sashiko-outbox-193229@kernel.org>
-References: <20261102094106.21300-1-kaloz@kernel.org> <20261102094106.21300-3-kaloz@kernel.org> <sashiko-outbox-193229@kernel.org>
+	s=k20260515; t=1793619441;
+	bh=MNiGsrHToyaVJ/zYmtsH9eEes+/+LeMLhdggw3eFzDs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=EHlkzm0F7/JaL2mUzUGHFgDZVibnUgMdixKA/V3u1vAHt0hY7J218j5xyIr4QCLKA
+	 drBt4KuOCz5qWA709Tp4lr9PTBvr7cbHNrRyea7z7zt/BDzMGKOW6s/qxmOWHo7h/m
+	 FHP4W3BHeTTxo0bgaR22v3c2+AQn5/0DIho0ZW9K7gKEaLPz86N44smHRLRgJZB4U0
+	 ycpJXhkTkX5LeXyeGymvOspy7bXOE9gsiIcVxuSKTqlBw71j1tErStVNOvm8Ne6CXd
+	 y9C3g9/80RVbtDLQO05h37sRLGM32WoiupsaxTRVANzaDzQGHhXp9LwFO5+V5VhhEX
+	 fORlUS0+J/I/Q==
+Date: Mon, 2 Nov 2026 12:37:17 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Jun Yan <jerrysteve1101@gmail.com>
+Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Chris Morgan <macromorgan@hotmail.com>, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] dt-bindings: mfd: bq25703a: fix input current limit
+ default
+Message-ID: <20261102-thankful-spiked-agama-fa2deb@quoll>
+References: <20261101085754.277830-1-jerrysteve1101@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,44 +59,25 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261101085754.277830-1-jerrysteve1101@gmail.com>
 
->> +	local_irq_disable();
->> +	if (atomic_xchg(&ip30_power_off_claimed, 1))
->> +		for (;;)
->> +			cpu_relax();
->
-> As reported by Sashiko on v1 [1], can another CPU still race on the
-> indirect RTC index/data registers and bank selection while
-> ds1685_rtc_poweroff() is running?
+On Sun, Nov 01, 2026 at 04:57:52PM +0800, Jun Yan wrote:
+> Section 8.6.6.1 "Input Current Registers" of the BQ25703A datasheet
+> states that "The default current limit is 3.3 A", while the binding
+> documents 3.25 A.
+> 
+> Use the documented value.  It also matches BQ25703_IINDPM_DEFAULT_UA,
+> which the driver falls back to when input-current-limit-microamp is
+> absent, so the binding and the driver now agree.
+> 
+> Fixes: 76bc2203a46e ("dt-bindings: mfd: ti,bq25703a: Add TI BQ25703A Charger")
+> Link: https://www.ti.com/lit/ds/symlink/bq25703a.pdf
+> Signed-off-by: Jun Yan <jerrysteve1101@gmail.com>
 
-On dual-CPU Octanes the second CPU can still move the index or the
-bank. v3 will stop the other CPU with smp_send_stop() before touching
-HEART or the RTC.
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
->>  	ds1685_rtc_poweroff(to_platform_device(dev));
->
-> Doesn't ds1685_rtc_poweroff() sleep in msleep(20) before cutting power,
-> violating the atomic context established by local_irq_disable() and
-> nbcon_cpu_emergency_enter()?
+Best regards,
+Krzysztof
 
-Not with the dependency named in the cover letter. Commit 21a829af60a7
-("rtc: ds1685: do not sleep in the power-off handler"), in v7.4-rc1,
-replaces that msleep() with mdelay().
-
->> +#ifdef CONFIG_SGI_IP30
->> +	.plat_prepare_poweroff = ip30_prepare_poweroff,
->> +#endif
->
-> What happens on a power button press when CONFIG_SGI_IP30=y and
-> CONFIG_RTC_DRV_DS1685_FAMILY=m?
-
-The button stops cutting the power, as the built-in
-ip30_machine_power_off() cannot reach the module. v3 will set the hook
-only when rtc-ds1685 is built in, so a modular driver will power off
-on a press as it did before this series, and the second-press branch
-will return.
-
-
-Thanks,
-Imre
