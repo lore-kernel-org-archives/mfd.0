@@ -1,63 +1,72 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793706195;
-	b=Me9IabNLYSSq9WrNoK7yIbMjjnXSvviSdwQP+F2PCVcJqFVOt5C35UlLN1JTh1JqCFk4
-	 ZJFE7BMXPNHqy2Kd8fT2zhRTy5DYvTTyn0TE+nvB7cLCKemXNeUFm+fMQNILs89/XinTU
-	 7C/4/gTTIxCF9TRfakcL/1oUBvu4Zm34GF37D60JsF3+RZmeFfMcpubNBmq2tKk3dfNPG
-	 7p7t+nkx3Ba9/WioX8cRV+HDpwPT0YDBqle8d5NG3oM6fjRP4j8fB08xsFzijAjozCS9m
-	 3yFOtmGPDDUvykUCSmHixQzNS57wjZYNDkCpaDH7H5FWupTZKeZH1Hk4SBLoa1tMQUA==
+	t=1793706843;
+	b=NIUxckRA7sDfPHTwW9JsrQ7M3y0MNFBAhmcR3EDxhA7v4H8EjI/YVhX00iKQXXc6HurC
+	 8PUwh2H0hl8Oc7lWge9rXCBMHQ/lBRryNDFk7cHXPZZjwecGgkiP8qC6Or+vpyJ9+z7Ra
+	 MnWHin+9a1+ragjqAHPpybsZ9Y2V6+Y2uj0MciYvjt9Gm9hzKGNlWSKnCtwb9+6hm5s9K
+	 BeQNlFfJMAeHMLKbhoTyNVv6ytFB73JKnqAxz/j8byQe0/PrD3+FJCg5Ci5atWq+JcP/T
+	 QJVVQsrI8TaRg0sOgccGtryJeeQ79Z3D8QP0WfXc5J9cHAcsxqdpBi3i/q2aK6TFsjQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793706195;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To:X-AI-Review-Draft;
-	bh=oAKEq7+BRpGvpBSsBEayKf/a7ZevUUTupaXX5UTwYd0=;
-	b=puwjbtLk9sFJ+LTrcTGeQDaDd6Fw6I1x7mYJVZr6Pj005u10Gj51Szapr9hxePk18DKM
-	 uOKUgnlBOdSkTAcUJRbjvqniPIqS8UH+YoATAHp81zaf4uERFmquDRzewqHK+qtUUelPw
-	 oaIK/GEdoZ6SmCd0WprahPQ0uOmyP+hLCF4wlASzdogm1VucIDGFp4Ldqy4Cw4D7fVHCf
-	 dlEIrdTzpQgzUhyntaRcaTzPM4tfu0JAB+AlRh7QgZG6vm8N80C15WcnjBB0YrSg4McpV
-	 LXOZ5kBUBx2SzkUhQaTGYrYaIdP/4l2OkwRgmM400EMcvzxY5bfO5cs8PoACoJqETMw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793706843;
+	h=Received:DKIM-Signature:Received:From:To:Cc:In-Reply-To:References:
+	 Subject:Message-Id:Date:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-Mailer:X-Developer-Signature:
+	 X-Developer-Key;
+	bh=G1wnrmAx6UKYvtzrJ7pGlQnyDEoN4L09wwQrnXzgcqk=;
+	b=BMw33rQiwnMrBIKN7a/WGRYb1bntHHrWexUQJ14UPR8c6mKNcVY7JdrSCn1Mgyt6Aat7
+	 u+BcmkDDLEnqJs49SQvA+Tcv384HhgUJAVr8Fcbr3Mw0n4SEeC47RyA79lvnhweL/IDmm
+	 lDF22GXKNVGJN4ftyAxYKs4dmJERH5a446aZT3cM3WYz2AmagdNSxZ+hWt7HiqQiRIkb+
+	 xjjrTnfjWo7JY4F4YlBj+AzQxi/AAor6Y+ONAo6DbE25QxBWPNIpnoeCX4UAXtIJPTnfq
+	 f2hIdPu1XUPAAhn1f2hCEKteMahsIaj97GZJxhFNcD0on7zH16Uwcdt7vavAAgqRkxg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=D3Re9nEX;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DYajrT6U;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 494F96082BD3;
-	Tue,  3 Nov 2026 11:43:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 58B2B606D805;
+	Tue,  3 Nov 2026 11:54:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=D3Re9nEX
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 698921F00919;
-	Tue,  3 Nov 2026 11:43:12 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DYajrT6U
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9DD761F00A02;
+	Tue,  3 Nov 2026 11:54:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793706195;
-	bh=oAKEq7+BRpGvpBSsBEayKf/a7ZevUUTupaXX5UTwYd0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=D3Re9nEXxDEqekdLNIVGqpGr2AVGbtN5bTu62y6bkxpSfNHVfRE8UZ5Z9c9JH0Vek
-	 EXO+dgInLFcdO7vp6Zyk72NeixIba8haUOaM1pkt8feK9C6fkJn4z2oMx8EonacOSn
-	 5vkfGe09bvojQPdQvnDLN6dszvvJCNgpcdkiew/EPgj/mPUqs4Z8dfWknf8Jgyn12O
-	 5tynCQsL0rjTAY4Us33cxpepLJjsFWydtaoT8A6ljfkYn9u4zyXqrj72UdVaAZlAzO
-	 PwFUeeejCRkOw2z71ZLcdJith91Xnb1LQrBTE5ySw6DSzGSzaw5+opnKcCut6w/Nui
-	 ikvRjKVRn/tQg==
-Date: Tue, 3 Nov 2026 11:43:09 +0000
-From: Lee Jones <lee@kernel.org>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-	Pavel Machek <pavel@kernel.org>, Sebastian Reichel <sre@kernel.org>,
-	Ion Agorria <ion@agorria.com>,
-	=?utf-8?B?TWljaGHFgiBNaXJvc8WCYXc=?= <mirq-linux@rere.qmqm.pl>,
-	Florian Krischer <florian.krischer@fkr.dev>,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-input@vger.kernel.org, mfd@lists.linux.dev,
-	linux-leds@vger.kernel.org, linux-pm@vger.kernel.org
-Subject: Re: [PATCH v12 2/7] mfd: Add driver for ASUS Transformer embedded
- controller
-Message-ID: <179249578293.1833288.15514260998480602004@kernel.org>
-References: <20261019100406.103687-1-clamor95@gmail.com>
- <20261019100406.103687-3-clamor95@gmail.com>
+	s=k20260515; t=1793706842;
+	bh=G1wnrmAx6UKYvtzrJ7pGlQnyDEoN4L09wwQrnXzgcqk=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=DYajrT6UnCaA2QaHVM6Oq6Ej8fHn/k+mNdjVnvuE2HH2MIfgeZpcFPRCTr7VFMFoF
+	 axET584bGA77w57DX5sgiDR1LABwuFTVb/byivkS4Zlko4yqMRpbsM1fYnH3BcU16l
+	 NMHcGkH2yT+wgEU2IXwVSCvKjea1lK0Gc1bNPBTXVwBqka5nUAIDv1LTCsAFoc7nGA
+	 Eo93yXlNeQxgBS+ZRCuogUb5/MWbEpinwteL4sLWqdkNBomEa+QJsgvSi+VxDVmfOf
+	 5Ge12PoxPGmwfFu0rOHod4zwmnJmMGvR0sCxX/iyq1jvm1n3KecYx7Vh+o88tR8vb5
+	 vASUaAK2j8eRg==
+Received: from traversing.sirena.org.uk (localhost [IPv6:::1])
+	by traversing.sirena.org.uk (Postfix) with ESMTP id D84A6253A672;
+	Tue, 03 Nov 2026 11:54:00 +0000 (GMT)
+From: Mark Brown <broonie@kernel.org>
+To: Lee Jones <lee@kernel.org>, Daniel Thompson <danielt@kernel.org>, 
+ Jingoo Han <jingoohan1@gmail.com>, Helge Deller <deller@gmx.de>, 
+ Kiran Gunda <quic_kgunda@quicinc.com>, 
+ Subbaraman Narayanamurthy <quic_subbaram@quicinc.com>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ linux-fbdev@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ devicetree@vger.kernel.org, mfd@lists.linux.dev, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+In-Reply-To: <20261019-sm8150-display-card-v2-0-86c05068efc5@oss.qualcomm.com>
+References: <20261019-sm8150-display-card-v2-0-86c05068efc5@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH v2 0/8] arm64: qcom: enable display card
+ support on SM8150 HDK
+Message-Id: <179365864580.2186205.7754433993357235376.b4-ty@b4>
+Date: Mon, 02 Nov 2026 22:30:45 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -67,158 +76,58 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20261019100406.103687-3-clamor95@gmail.com>
-X-AI-Review-Draft: <20261019100406.103687-3-clamor95@gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1677; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=33J6wCN/4BjmBIY6abHmDR1XKIu9W+IsNR/tzfBzFHE=;
+ b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLJeno7Qr2TfX7wqVGcWo6bhS+29a94UL7U5GvFksuvDh
+ WvmJAos6yhlYRDjYpAVU2SJy+J+WV/yeg3fwYVtMHNYmUCGMHBxCsBELjxn+J/j4m/sGFbi9aem
+ tL3T6bnPMZPa5H4OSaebQs+827nPf2dk6NrPNnmRaXH2t8PZzitlLRllLp86oVJzz9xY3H16UUA
+ 8DwA=
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
---- checkpatch.pl (4 issues) ---
-Line 607: WARNING: DT compatible string "asus,sl101-ec-dock" appears un-documented -- check ./Documentation/devicetree/bindings/
-Line 610: WARNING: DT compatible string "asus,tf101-ec-dock" appears un-documented -- check ./Documentation/devicetree/bindings/
-Line 613: WARNING: DT compatible string "asus,tf201-ec-pad" appears un-documented -- check ./Documentation/devicetree/bindings/
-Line 616: WARNING: DT compatible string "asus,tf600t-ec-pad" appears un-documented -- check ./Documentation/devicetree/bindings/
-----------------------------------
+On Mon, 19 Oct 2026 14:25:36 +0300, Dmitry Baryshkov wrote:
+> arm64: qcom: enable display card support on SM8150 HDK
+> 
+> The Qualcomm SM8150 HDK can be equipped with an optional display card
+> having the same panel as the display card for SDM845 HDK. Reuse the
+> driver submitted at [1] and enable display card support on this HDK.
+> 
+> Unlike SDM845, this also requires a new LCDB driver, providing voltage
+> for the panel and several fixes in the WLED driver. The FSA4480 address
+> fix is independent and can be applied earlier.
+> 
+> [...]
 
-On Mon, 19 Oct 2026, Svyatoslav Ryhel wrote:
-> From: Michał Mirosław <mirq-linux@rere.qmqm.pl>
->
-> Support Nuvoton NPCE795-based ECs as used in Asus Transformer TF201,
-> TF300T, TF300TG, TF300TL and TF700T pad and dock, as well as TF101 dock
-> and TF600T, P1801-T and TF701T pad. This is a glue driver handling
-> detection and common operations for EC's functions.
->
-> Co-developed-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> Signed-off-by: Michał Mirosław <mirq-linux@rere.qmqm.pl>
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> ---
->  drivers/mfd/Kconfig                     |  16 +
->  drivers/mfd/Makefile                    |   1 +
->  drivers/mfd/asus-transformer-ec.c       | 569 ++++++++++++++++++++++++
->  include/linux/mfd/asus-transformer-ec.h | 100 +++++
->  4 files changed, 686 insertions(+)
->  create mode 100644 drivers/mfd/asus-transformer-ec.c
->  create mode 100644 include/linux/mfd/asus-transformer-ec.h
+Applied to
 
-[...]
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/regulator.git for-7.5
 
-> +static int asus_ec_reset(struct asus_ec_data *ddata)
-> +{
-> +	int retry, ret;
-> +
-> +	guard(mutex)(&ddata->ecreq_lock);
-> +
-> +	for (retry = 0; retry < ASUSEC_RETRY_MAX; retry++) {
+Thanks!
 
-As mentioned on v8, 'for (int retry = 0; ...)' is generally preferred for
-throw-away loop variables.
+[2/8] regulator: dt-bindings: add Qualcomm LCDB regulator
+      https://git.kernel.org/broonie/regulator/c/487f55870c60
+[4/8] regulator: add Qualcomm LCDB driver
+      https://git.kernel.org/broonie/regulator/c/be8c26474857
 
-> +		ret = i2c_smbus_write_word_data(ddata->client, ASUSEC_WRITE_BUF,
-> +						ASUSEC_RESET);
-> +		if (!ret)
-> +			return 0;
-> +
-> +		msleep(ASUSEC_ACCESS_TIMEOUT);
-> +	}
-> +
-> +	return ret;
-> +}
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
 
-[...]
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
 
-> +static int asus_ec_probe(struct i2c_client *client)
-> +{
-> +	struct device *dev = &client->dev;
-> +	struct asus_ec_data *ddata;
-> +	const struct mfd_cell *cells;
-> +	unsigned int num_cells;
-> +	unsigned long irqflags;
-> +	int ret;
-> +
-> +	if (!i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_I2C_BLOCK))
-> +		return dev_err_probe(dev, -ENXIO,
-> +			"I2C bus is missing required SMBus block mode support\n");
-> +
-> +	ddata = devm_kzalloc(dev, sizeof(*ddata), GFP_KERNEL);
-> +	if (!ddata)
-> +		return -ENOMEM;
-> +
-> +	ddata->info = device_get_match_data(dev);
-> +	if (!ddata->info)
-> +		return -ENODEV;
-> +
-> +	switch (ddata->info->variant) {
-> +	case ASUSEC_SL101_DOCK:
-> +		cells = asus_ec_sl101_dock_mfd_devices;
-> +		num_cells = ARRAY_SIZE(asus_ec_sl101_dock_mfd_devices);
-> +		break;
-> +	case ASUSEC_TF101_DOCK:
-> +		cells = asus_ec_tf101_dock_mfd_devices;
-> +		num_cells = ARRAY_SIZE(asus_ec_tf101_dock_mfd_devices);
-> +		break;
-> +	case ASUSEC_TF201_PAD:
-> +		cells = asus_ec_tf201_pad_mfd_devices;
-> +		num_cells = ARRAY_SIZE(asus_ec_tf201_pad_mfd_devices);
-> +		break;
-> +	case ASUSEC_TF600T_PAD:
-> +		cells = asus_ec_tf600t_pad_mfd_devices;
-> +		num_cells = ARRAY_SIZE(asus_ec_tf600t_pad_mfd_devices);
-> +		break;
-> +	default:
-> +		return dev_err_probe(dev, -EINVAL,
-> +				     "unknown device variant %d\n",
-> +				     ddata->info->variant);
-> +	}
-> +
-> +	i2c_set_clientdata(client, ddata);
-> +	ddata->client = client;
-> +
-> +	ddata->ec.dockram = devm_asus_dockram_get(dev);
-> +	if (IS_ERR(ddata->ec.dockram))
-> +		return dev_err_probe(dev, PTR_ERR(ddata->ec.dockram),
-> +				     "failed to get dockram\n");
-> +
-> +	ddata->ecreq_gpio = devm_gpiod_get(dev, "request", GPIOD_OUT_LOW);
-> +	if (IS_ERR(ddata->ecreq_gpio))
-> +		return dev_err_probe(dev, PTR_ERR(ddata->ecreq_gpio),
-> +				     "failed to get EC request GPIO\n");
-> +
-> +	BLOCKING_INIT_NOTIFIER_HEAD(&ddata->ec.notify_list);
-> +	mutex_init(&ddata->ecreq_lock);
-> +
-> +	asus_ec_signal_request(ddata);
-> +
-> +	ret = asus_ec_detect(ddata);
-> +	if (ret)
-> +		return dev_err_probe(dev, ret, "failed to detect EC version\n");
-> +
-> +	ret = asus_ec_init(ddata);
-> +	if (ret)
-> +		return dev_err_probe(dev, ret, "failed to init EC\n");
-> +
-> +	/*
-> +	 * Systems using device tree should set up interrupt via DTS,
-> +	 * the rest will use the default low interrupt.
-> +	 */
-> +	irqflags = dev->of_node ? 0 : IRQF_TRIGGER_LOW;
-> +
-> +	ret = devm_request_threaded_irq(dev, client->irq, NULL,
-> +					&asus_ec_interrupt,
-> +					IRQF_ONESHOT | irqflags,
-> +					client->name, ddata);
-> +	if (ret)
-> +		return dev_err_probe(dev, ret, "failed to register IRQ\n");
-> +
-> +	/* Parent I2C controller uses DMA, ASUS EC and child devices do not */
-> +	client->dev.coherent_dma_mask = 0;
-> +	client->dev.dma_mask = &client->dev.coherent_dma_mask;
-> +
-> +	return devm_mfd_add_devices(dev, 0, cells, num_cells, NULL, 0, NULL);
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
 
-Why not use 'PLATFORM_DEVID_NONE' or 'PLATFORM_DEVID_AUTO' here instead of a raw
-'0' and hard-coded cell IDs in 'asus_ec_tf101_dock_mfd_devices'?
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
 
-> +}
+Thanks,
+Mark
 
--- 
-Lee Jones
