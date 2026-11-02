@@ -1,87 +1,162 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=193.142.43.55
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793631819;
-	b=l8jyZxApnk1a+X6Gb8/xBDK2lVMUCIi6GrLg8heh0jiwzlGKubE8V8YHfkOaobhda5Kw
-	 SqYUlsRHfBhOODzIuAu/N+xY7Bo1Zt9dUvgZdNRtEfLujsjYzFVOeaY56F9b+t9Rmk9OX
-	 L5g+5q/QLQBzC/yKM4dkTvQw8Dx/i48gTmsQh35LVsIETDIMqBEGvYRhoGqaMpZIPJRFu
-	 djK19bl24FBgiPob9X/9J+ho8lIEbrXBBA6VTTm2H1ETD68y2xcvny1o14pwcBIou7HjQ
-	 fEo1C5RUbkMyDdnuAPWN5NRAkpx7P/T//cs0uYTXgXxrmba0Pw9YdNpo7cHP/0a0bvA==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793631819;
-	h=DMARC-Filter:Date:DKIM-Signature:DKIM-Signature:From:To:Cc:Subject:
-	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To;
-	bh=vmeP5yEnqnkyVoHBFqgCtuQIbq8hDW1r9WecfwOSwuQ=;
-	b=r/Fs6dhO3pqg9p9hC2qCo5gPFng/RZi7YBAOeCZz5JEJIX9+coLCVLhpHe2E8IU+A4gT
-	 jXjY1kHmE5VQ7Tfh034rj4kkunx77Qw8omZA3PV911zn4pg/jo/ii0hmRthyobaBihwZt
-	 bxGFLBH/IeSu1btj2DMv98IjDc04TRBQRXIljYjxIHo0LcdKAI8prqxCUYXOvHAA61aqK
-	 9Cq4fsQfxSsKFxnsQ6wBka4U5J+ck13G19MXrWxSmUa9B2dqo6gmROtMTKN5Fu80c07i7
-	 TmwYqFbeIL61rDyAbF7jmwIODOwSEJetJlsT4htJBUfsFnmiWS3KrODP8+yeDCUxP8Q==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linutronix.de;
-	spf=pass smtp.mailfrom=linutronix.de;
-	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=UO6wl9m7;
-	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=ed25519-sha256 header.s=2020e header.b=cjq+t5yW;
-	arc=none smtp.remote-ip=193.142.43.55
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=40.107.162.65
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1793637659;
+	b=aRLdxPBDshDIi/PbRJprYVgYy8uqPKGhixnLFsuIy3DTaLKHa/OKCaWUanZcgjFNYZkH
+	 RPr37jGw6yDksuiwMjsb3gU3ucxH/Hc/HP9Jb8wUEVAsht8UMQEfqCp4tlhris1S4Iae6
+	 yeg8K8/4iHYVnmFv+kenT8TaWVljcYxUh6ZRZjroh/Aduz5hjEu1GOTgQmxmsE49Xs+kj
+	 H1/GAVUmOqlaZztPulBGq53t33YOrWZdnXDHpetb36qNuuOvtfcvUhopmYIIurxJdMITg
+	 A6QUtFLPDzD/qkuYP+CrA1NkUMaa6oD6k5owtejrznknkPsyAIcHlYvTqGZmDhTb5Pw==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793637659;
+	h=DMARC-Filter:DKIM-Signature:Received:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:Content-Type:Content-Disposition:
+	 In-Reply-To:X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+	bh=0AZEXm4C/DMSzFUg9+vViNaMwpucOgErMY5P1OzWIXE=;
+	b=YRRAungQYR5G6I7ENHvA9z2Z6GZPh9RMY9N0UW3EyIk4GLPwbCbyr2yJvPAn+B8WxF4A
+	 BciULORmvKFcKuteRC2qrlk5BydQXMr4Cs5fV8yuZ8WaqKHh53gaie50cc1Zd0j2yUGkg
+	 G8HvsQtxJ3S6ucLYlpcN8xDNjb9FAqapafpsipxbPO087r6M5prxLzae2X6omes6+8SgC
+	 DGuh5qmGGb/3Ow0OpdwbnQeZDXLNzK+oYpT+S3TzbX3G67keoQb8MS2FKsi2L1vZK727f
+	 FLf7+DVyalyOYKpdVY4dNH8KXvbXzflpwA0D6d2M/oaIUhs9ws7r0dK8dDsoZ+OuV0w==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.nxp.com;
+	spf=pass smtp.mailfrom=oss.nxp.com;
+	dkim=pass header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=V3ykH38V;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=40.107.162.65
+Received: from PA4PR04CU001.outbound.protection.outlook.com (mail-francecentralazon11013065.outbound.protection.outlook.com [40.107.162.65])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71A46606AB88;
-	Mon,  2 Nov 2026 15:03:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 71A46606AB88
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7277F606B0FF;
+	Mon,  2 Nov 2026 16:40:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7277F606B0FF
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linutronix.de header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=UO6wl9m7;
-	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=ed25519-sha256 header.s=2020e header.b=cjq+t5yW
-Date: Mon, 2 Nov 2026 16:03:34 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1793631816;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=vmeP5yEnqnkyVoHBFqgCtuQIbq8hDW1r9WecfwOSwuQ=;
-	b=UO6wl9m7RBHrJieOiZZvN4brHRib9ZtQyiwmHyHaWuAYRG64DM5WGvmVptZLI4u3WKDJnF
-	M71KpRdCjGEYRQ0ZNyuUrg2MBf6G/0h8AtNOtxhd609crQRWsn9ULFz1c0bdVFLsOo+Ghl
-	MxtJ5voXI2MjoMbwE0/348BYH4kSOiCqUbcKQKAueZveDDZ/i81+/UswGenDgvc4Hrk7ho
-	0OGIHcI9bOYmI2VW1SPwAumWkw28Y5/C1tLPFAGAX+/wylYCKe8tauPeEQB4FvI/4TGv85
-	vD/54DUZTKSuMkHRKk5V75A01BIW35D4ajgKmrXW7lzY0S8uv9iWtC9sayWk8Q==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1793631816;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=vmeP5yEnqnkyVoHBFqgCtuQIbq8hDW1r9WecfwOSwuQ=;
-	b=cjq+t5yW0qbGlmcj6omOC7sdr5+cqnKu1szT+dy1lmE74Kt1pDmVGyuE1tjvvm6Sp7AedD
-	0pwVWf/K/m4EnjCQ==
-From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-To: Ryan Brue <ryanbrue.dev@gmail.com>
-Cc: Chen-Yu Tsai <wenst@chromium.org>, Mark Brown <broonie@kernel.org>,
-	Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-	Sean Wang <sean.wang@kernel.org>, Linus Walleij <linusw@kernel.org>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Clark Williams <clrkwllms@kernel.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Yingjoe Chen <yingjoe.chen@mediatek.com>,
-	Chaotian Jing <chaotian.jing@mediatek.com>,
-	Hongzhou Yang <hongzhou.yang@mediatek.com>,
-	linux-mediatek@lists.infradead.org, linux-gpio@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-rt-devel@lists.linux.dev, mfd@lists.linux.dev
-Subject: Re: [PATCH] pinctrl: mediatek: common-v1: Use a raw spinlock for the
- pinctrl regmap
-Message-ID: <20261102150334.9q83qkpM@linutronix.de>
-References: <20260929-rbrue-suez-upstreaming-mtk-pinctrl-raw-regmap-v1-1-db92943f42cb@gmail.com>
- <20260930080609.dnK1-Uta@linutronix.de>
- <CAGXv+5FssQL3Go3VDFbLAT6HP12RS3U3OgxhYOeapzs64QTdUw@mail.gmail.com>
- <d3d3e7b3-eb8b-456d-9a2c-116334e86c14@gmail.com>
- <20261020073236.dDVmd3BW@linutronix.de>
- <7981f7c6-c949-42e6-ad53-15e6530588cb@gmail.com>
+	dkim=pass (2048-bit key, unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-NXP1-onmicrosoft-com header.b=V3ykH38V
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=UUahqT6OH80SrFgl+J8Dl0qQuEn9rpBY/sf6cMIiybmTtPW/B0oQ8mpWx/3hFmjH5kM3BorOwqSSuQeNYkik1ZDQNpQmWvoYIoWtmK0U8pLVqhvucBo9oVRJhSztrB3rpJKKQWoAQF5Cq6L7jyeurjP6RzoQ+Ua3B6z+fM+m+D7m3Dpyhq1C+qbH5bgzIVqRrLMt7U6KX2atZK38B0xIK7Kl306xFeFPSkelpw5FBHPrpDaTcV4B6s2TQxkI3kh6pCGMT37TbGrJVTbyLmeLGwS0Cxuo5GIVoM1ZiNl36tC35ESLTD9fRUaa767TI2vjZjQcUlmQf3BBeUbqmZHqCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0AZEXm4C/DMSzFUg9+vViNaMwpucOgErMY5P1OzWIXE=;
+ b=PrK0rnU2MQXRwPgJUUNGCRXQUyJZbjYp9VdLV86LlUg7HKLRtSypXjYL8GjRJ1PTh5HvCp1FDYBwAk67NfLbsc2171siuwW6Vukja1xYMHayoW8Rm6EEY3epYw21AX2UozOsMkJEK/GElQXfRg1PRaV5WAHK9VAWGaoC39ugw16XpPrgRc/nz+4bz9ElG4nFtSMUp7VpLaiZgclBf9KHaOcwyfVtgYZDoo47EsFn0wFBVuUTQQqfsifVyL/kX2ZP8ZglrxrF2KZb8vyto1FBtHBDQspIF2BWUkS8tsUD09nZwBQENMSDtX0c6CMzabo30vOQgUDq3leqETIR6QSdeA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0AZEXm4C/DMSzFUg9+vViNaMwpucOgErMY5P1OzWIXE=;
+ b=V3ykH38VVd8brV2cpxqM1yZIcyzF4+A+yXTcS+Y08BhlXL8iCqyoF1CGucLJ0jjpUzZB9MY787jCeghPRfcXGTdFd7dRAf8GpjP/X3qHOnbZpuikYmwa8IjPyjldv0Be1F47Qdm1F3Xzh/WHSzmxyoJlLLsiop21RzwzwdEyGO2cDNUwc77Yo+11q3D2+sNSwXOHSMSUN4VUjtcC7GV5ZUJ62QAgBRlsm93KXdBfz6CvMAeL/O7l6Rbid5eO8/WdsUa1jgoo1N8pSOTL03memeUBbtREi+uXasKnsrrWGNW/yGKlO4tGvKf64bgR8rKwct+1FAjeKF65dE/dDW/6IA==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from MI3PR04MB12438.eurprd04.prod.outlook.com (2603:10a6:290:76::14)
+ by AMBPR04MB468013.eurprd04.prod.outlook.com (2603:10a6:20b:7dc::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Mon, 2 Nov
+ 2026 16:40:54 +0000
+Received: from MI3PR04MB12438.eurprd04.prod.outlook.com
+ ([fe80::c715:c32:8bb1:b70b]) by MI3PR04MB12438.eurprd04.prod.outlook.com
+ ([fe80::c715:c32:8bb1:b70b%6]) with mapi id 15.21.0569.011; Mon, 2 Nov 2026
+ 16:40:54 +0000
+Date: Mon, 2 Nov 2026 10:40:32 -0600
+From: Frank Li <Frank.li@oss.nxp.com>
+To: "Rob Herring (Arm)" <robh@kernel.org>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Vadim Fedorenko <vadim.fedorenko@linux.dev>,
+	Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>,
+	Jiri Pirko <jiri@resnulli.us>, Ivan Vecera <ivecera@redhat.com>,
+	Benson Leung <bleung@chromium.org>,
+	Guenter Roeck <groeck@chromium.org>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>, Frank Li <Frank.Li@nxp.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	Andy Shevchenko <andy@kernel.org>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Olivier Moysan <olivier.moysan@foss.st.com>,
+	Arnaud Pouliquen <arnaud.pouliquen@foss.st.com>,
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+	Thierry Reding <thierry.reding@kernel.org>,
+	Jonathan Hunter <jonathanh@nvidia.com>,
+	Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+	Lee Jones <lee@kernel.org>, Srinivas Kandagatla <srini@kernel.org>,
+	Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+	Ulf Hansson <ulfh@kernel.org>,
+	Hans Ulli Kroll <ulli.kroll@googlemail.com>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Ray Jui <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+	Orson Zhai <orsonzhai@gmail.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Chunyan Zhang <zhang.lyra@gmail.com>,
+	Paul Kocialkowski <paul.kocialkowski@bootlin.com>,
+	Shawn Guo <shawnguo@kernel.org>,
+	Chanh Nguyen <chanh@os.amperecomputing.com>,
+	Alistair Francis <alistair@alistair23.me>,
+	Julius Werner <jwerner@chromium.org>,
+	Paul Cercueil <paul@crapouillou.net>,
+	Dmitry Osipenko <digetx@gmail.com>,
+	Florian Fainelli <f.fainelli@gmail.com>,
+	Thierry Reding <thierry.reding@gmail.com>,
+	Ray Jui <ray.jui@broadcom.com>,
+	Scott Branden <scott.branden@broadcom.com>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
+	chrome-platform@lists.linux.dev, linux-gpio@vger.kernel.org,
+	imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
+	linux-hwmon@vger.kernel.org, linux-iio@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-sound@vger.kernel.org, linux-input@vger.kernel.org,
+	linux-tegra@vger.kernel.org, mfd@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org, linux-mmc@vger.kernel.org,
+	linux-phy@lists.infradead.org, linux-pm@vger.kernel.org
+Subject: Re: [PATCH] dt-bindings: Use hex unit address patterns
+Message-ID: <aui9AFUS3JpDKZGP@SMW015318>
+References: <20261102135330.2493332-1-robh@kernel.org>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261102135330.2493332-1-robh@kernel.org>
+X-ClientProxiedBy: DM6PR08CA0037.namprd08.prod.outlook.com
+ (2603:10b6:5:1e0::11) To MI3PR04MB12438.eurprd04.prod.outlook.com
+ (2603:10a6:290:76::14)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -91,58 +166,75 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <7981f7c6-c949-42e6-ad53-15e6530588cb@gmail.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MI3PR04MB12438:EE_|AMBPR04MB468013:EE_
+X-MS-Office365-Filtering-Correlation-Id: 710964e4-aa24-4f3f-656a-08df39000ff5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|366016|23010399003|7416014|376014|19092799006|11063799006|56012099006|261009223027099003|261026121527099003|10067099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	713wdXmk0i3UHxEIluM11rOJcS4OyrF7QOCTSCmsWR3F+SjkAdWZMFG3VRd0RCZKsqzpwX79lW1ZURuA3XEG7NIHBOZkV4JnrBWaysJUjfdr0OUhol0yuECzmr5wd3Nm/UzUM5EwqVAR+QYj4W+SmtI761IP9KN6lWHWjbg/n6SjJOTOZ6msklaDfkH5hHnQP5StAKVHT9W9gsJqjzuHxfg+rf0Iy0mWgbFk/+2WbI9v3juaCvw7xc4DzCXO8QDOsKOf0JTc/cU+xocxpGBsM3RFG3QMuHAC7orJV2D4pCTGg+taaQlyWzi0XNsiASg4QbYrJjzl7BXz43cgvH2MI86i/EDbP3gel5zoG6yTkwuvQvt57UY/UKg10W3NY2jmRzvt3Yj4M0JT5rf+2tRzdGe4URWejHSMwBbt4nx1cepRuoiWpUjX9gRbpsw/QEpefuZoAaSV/BzdgQH0DnOqHyFkedCnbiZg2+NPQilXv15wWhHxWqVJo3gJyR3aPKC6jr75/ssgaUgLkJHrhSeVflsAaQPz210v76AxAOM8DUIj6uv3N/6DLX4v+06x+XEACqAiCrg7bAtQkMqY7vhViG9Xsn+83/QhcG5Aa+mQ0s+Ug8NVT1qTZHFSqjoL2yS2Oej19qpGLZNAe/mS3BTFlfVA9NqYnddes7uOh97mW6M=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MI3PR04MB12438.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(7416014)(376014)(19092799006)(11063799006)(56012099006)(261009223027099003)(261026121527099003)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?miViUnAHLHlSfVvNykj6itq4LYyZuvFGajuF5/WfPyzRO2cwd46TenQEyCr6?=
+ =?us-ascii?Q?Bk4r20OdtHVg4+E7+ONinqI5X1cdimy1a4RAJrw7ype9obM1asQI7C6wVGex?=
+ =?us-ascii?Q?Df1a+opO+isY+bZYbPK+5uq9C0EPVS8XTio1wzxbktQqXm4DPSyMNlHwhDK2?=
+ =?us-ascii?Q?aYIg/lsjPz5d0+J5Aq1tyf3Ql4rkk1IC/h2HDxCOqOnAv34JyclhCPcgiNbR?=
+ =?us-ascii?Q?alQr1FUqDeJ0JZBNQQCyAFKUUPhc+Sp10sDhkY8MhLqeqclUPZaiGWh1G25u?=
+ =?us-ascii?Q?/tnG5n8jk6GeM6ikrfrLEzOq4eFDktSaxonpzwhdZHHO/RpL/moKzOktaioj?=
+ =?us-ascii?Q?bwvNWJ8kslkjWCVbXk34R+W9nFzirZrw1OgNcjeXw6WWP8nN+wVCTC3SwFsK?=
+ =?us-ascii?Q?lqlMYYK4UUkLl8I10PH5DXJ/+b5zKdD0WRQpHrQKj6dTkT8I6lHNtIMs1aR9?=
+ =?us-ascii?Q?SZm+gZOod+VCue2X7ykMd3vGD0ODjAUWC/H4hZN6dqtP2BWtPIKP/qldFX/W?=
+ =?us-ascii?Q?gfMpxNPGxoRgkEWOHNIgcYZVOCpdSqID+31il65/Bcybng6IbJMsM7dBiKpA?=
+ =?us-ascii?Q?Rtb38dq4PZU0FUeVKK3Vz/z080KxNNnFskrpNkpQcRbpWFcdMmkrQzJ8ZKrO?=
+ =?us-ascii?Q?nYPU7BFNOrqUb27tqERv6Xs756Uy5lA2ZlkbXpLXAGPBvQ5YvhF0q8EWINPM?=
+ =?us-ascii?Q?INXukbJB3rJzOSDgtYaLwDvjYt5jxBHIztmfDtfTLP3RhFrBGRl54GzrtQGD?=
+ =?us-ascii?Q?GBMtwe77nUkzYN+Frpk8YjRQI1D49KpKlCz4km3foInJ5woh43Q+nnOamqVw?=
+ =?us-ascii?Q?iNg3mJYCUzNLErYW3KrJK2Vug/N2aO9qtVWorfrspwxETpQFe1uyAf4sYncg?=
+ =?us-ascii?Q?p54Wa7UuTfCtdCdZqoeDgk5IC4np4oFKL8L8k1pOzzDWS39CARqFI/8vJCGh?=
+ =?us-ascii?Q?yRx+sBbeP7pH94bqiOUnrNIWxqQsh+JOvf8w1amHOYmYW0MaVFl9xivXCvtA?=
+ =?us-ascii?Q?1StguKNayIluWpa5ZP98xmjQ4TZYHWjqktNNmQ0s7Dd3+uEy4AlkKZlrv+Gt?=
+ =?us-ascii?Q?AwVCvMGHPG8LC+HfNdzDm3O+kPFZ/lbwg53ZLBWNbbL6+4YQh+L+1f5/m4n5?=
+ =?us-ascii?Q?ZrHWXUBCzlhJzIvkFu0LkcXOx1IimA8eG0Fn/GFwOn+BnWHLonse0k38EsnB?=
+ =?us-ascii?Q?SOryFVi1m+3pEWpDYg/CHmkfIfeV2XgQo5bMrQ1ljgiteO6/cR19/BGEUTRM?=
+ =?us-ascii?Q?XGV7505tjTA8t+KETQsjdbh2WWr/hgWIjAcCWjK676y/o1Mz4sE5PSWmvqH3?=
+ =?us-ascii?Q?w4zOWqbwBy594KUxDz8BjNgoHIW7eKWwhnBdt0hnYOmS3VuWwL5RNS0tfy4H?=
+ =?us-ascii?Q?XswApNiAAjdTiaqz1dpu1PkoXwpLAZb4YTswjQ8O1inKWhW+uKlLqUO41O2H?=
+ =?us-ascii?Q?p/DbllPNiHLg0WzdGQ8giUOBU84ga1119QfWGX2j5MPov+ToQ3aOZyZxaRMi?=
+ =?us-ascii?Q?504bKjsTVvHpfPvhqOzUD8vWeqWfeI8vz4dFKOQ9v6/wLnWNUmgeNURUYGKC?=
+ =?us-ascii?Q?Z2wQBjPnoF3Qd7xhB9WAv2uFCSKazrD7kudcoq5yLrZHn2uTlzt2nuOrXCMj?=
+ =?us-ascii?Q?4ee5Q5NyAp8kxg9QZM+Vxjq+p7qNrg63cwOBY0tQh7FZTQRLWmbXYnHJCFGa?=
+ =?us-ascii?Q?jtDpxtDJFM/z8+TqgBrLmYj15xcMy4P1rhaPvLbngkWw24YHQmK7COJY2OfR?=
+ =?us-ascii?Q?YrfL1GNcONRkuUNhApZMdmxAbyCn3FxiBAYU608PkRryqUCh0Wgd?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 710964e4-aa24-4f3f-656a-08df39000ff5
+X-MS-Exchange-CrossTenant-AuthSource: MI3PR04MB12438.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2026 16:40:54.2384
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8fnO+R+KwExK8plb8UKHkb7CwqdyiR8BlWlu9O+f9zFhqX8xE8pSb4waLCfO7C9oxjAZQ1G2O3uYmut5fG5dOLhTOrhSgilIYT7HZsW1Lg8Yl0rUHI5yaM00tF9J8zP6
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBPR04MB468013
 
-On 2026-10-28 15:30:38 [-0500], Ryan Brue wrote:
-> On 10/20/26 2:32 AM, Sebastian Andrzej Siewior wrote:
-> > bulk writes could be a concern. The 40us delay is within the lock
-> > acquired? If so, could this be done without the lock? I assume this is
-> > part of the init sequence so nothing should use the HW so the writes
-> > should not be interrupted by other writes to the device.
->=20
-> Yes, it's under the lock. regmap_multi_reg_write() holds the regmap lock =
-for
-> the whole sequence, and since an MMIO syscon's regmap can't sleep, the
-> delays are udelay()s. The PLL's enable runs that sequence (13 writes, 40 =
-us
-> of delays) whenever the PLL goes from off to on, retrying up to 10 times
-> until it locks.
+On Mon, Nov 02, 2026 at 07:53:22AM -0600, Rob Herring (Arm) wrote:
+> Unit-addresses by default (and most commonly) are hexadecimal. There's a
+> number of cases using decimal patterns. Fix all of them, limiting the
+> pattern to match the 'reg' limits if there are any.
+>
+> Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
+> ---
+>  .../bindings/display/xylon,logicvc-display.yaml      |  2 +-
+>  .../devicetree/bindings/dpll/dpll-device.yaml        |  2 +-
+>  .../bindings/embedded-controller/google,cros-ec.yaml |  4 ++--
+>  .../intel,ixp4xx-network-processing-engine.yaml      |  2 +-
+>  Documentation/devicetree/bindings/gpio/gpio-mxs.yaml |  4 ++--
 
-If this is only at boot-up then it is less of a problem. It would be
-more of a problem if a driver, such as SPI, would use this to fill its
-entire FIFO during a regular transfer. This would then spike up during
-the transfer.
+for gpio-mxs.xml
 
-> In practice it's init-time, though. The G12A USB3/PCIe PHY takes the PLL
-> with devm_clk_get_enabled() at probe and keeps it on, so it runs only onc=
-e.
-> Nothing else writes the PLL then, but the lock is the HHI syscon's, so on=
- RT
-> the other clocks in that block would wait it out. Running it without the
-> lock would mean changing how the meson PLL code writes its init sequence,
-> which I wouldn't want to take on in a pinctrl fix (unless that were
-> preferred).
+Acked-by: Frank Li <Frank.Li@nxp.com>
 
-Okay.
-
-> > So it would be safe for now=E2=80=A6
-> Yes, that's the trade-off with the second option, which relies on the DIN
-> never being written in a multi-step sequence. Nothing enforces that thoug=
-h.
->=20
-> I'd like to send a v2 after -rc1, but I don't know the best option for the
-> fix. Still waiting on Lee, Arnd, and Mark to pitch in if they have a
-> preference, or any option I've missed.
-
-This is (I think) the second time the syscon mapping becomes a problem.
-I would be a bit worried if the same mapping/ regs could be accessed by
-different drivers under different locks.
-But yeah=E2=80=A6
-
-> Best regards,
-> Ryan Brue
-
-Sebastian
