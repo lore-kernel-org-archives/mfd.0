@@ -1,57 +1,52 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793613728;
-	b=ELPrLbc5B5DDGWR/ehZLI13Rprx4sfV8pWH+auGOPoXX2omTZYKBzswC++jh73pHCK4u
-	 MyasheUs2vyTAc7ZRm/rFBC3saPb343XEqlerf2EwzFYXD1RBDdz0eUvv8uqutTY7ps5D
-	 GJNgQVjR0AaYrK6gQwc1CA/U/lzYsCkMxb2GKMtFAF0JUBZaE7jEf8yG70Zip/ol4XJRG
-	 JSwvn4zxs18x5h3lD31oE6xjYTgbqfRWZ8OLgkP3EWAB+Cm/EfHEkno/Yyrkiwhp8fpHY
-	 HejAQH/TFiR0uHcCwIJxcM21NiOhoXPHQFui9cDacYVWCMExwz/b+LiqvUv/OkKVIGw==
+	t=1793614385;
+	b=R3Rrgnd4HveH/nUkjAA4aMhKtTAV9ga4yRGK7UcyQ9g1UyBaUq882jW5dkP9u2NDtWyF
+	 3vooysxv7pokNjaHXBz13KvwnELfPYa/hIJ+n3DzDesjPXnr5X8AUlrGcEPyHSbjyQCSl
+	 M9a25bitaFHYs6jSf/DwldsEt0BDC6fF7jmgxCFYRZ/nwvvuubuM3hwJo1blp/oZZ9oQk
+	 QU8e6KFC8n95BMcK+kMwEeJYhfpT+A/WKV8V1wsuP9G7lzTD2t18ec2H/1E7C7+9lGkXx
+	 QCLPEwYLdpYqC83Gl19T3oVdOvz1VJ/C+DOBq1M2hTPa0mWiUzT8pcXUtfqrqlmyizA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793613728;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=BqDm/3zC3tWJLoG5EdnbQryR/I3N2frivTlPHItZLyg=;
-	b=fiJQJc+PJChpmU2BOf71ohGxw800pDezt2p8swJ3WQan07PvJNoOEw0P173lgEoGQ9EO
-	 7OXc2wZiX1AhMUm1Ww2fw4KAzJW+2I3qVna+7XH8SeJRIAi1AwOsKyufq5AZN0jUlg2J/
-	 wPRA17gnaXwx0rh3Sk25TTdrxJ1/Jm39koqePWtdptQ8orjQcLLW9bEbs9UZ7jRO5xmyy
-	 1tWBZ7SzEOyeO8M8Ed25PD4PJMU/Q+4kp+2UC0SfTRfQp21k0GfxUJUwKx65UslKsOCGL
-	 luw4/6x82s+vqIX4vr0U05j9Jj9Qxs77nZe//2TbQ2V/u5MciwG/TYG7kOIP0PfQZCQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793614385;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=C/rEuinMCfbUrXPWZJGbZBm6SE6/AvXvnmCXC2u+vkI=;
+	b=MTopGyR1Pm2QNshT5Cu5/pTyMPPP8o8BOAOVUQZW2Sl19/HquTv6YzE2X0zWzVOMSbC0
+	 kGZ8kTARw+pATWDLq/IrO/Ua5upr+fLThcTemlrGxo6+7hiUJftsdATh9SsMfEYhQupg6
+	 duAT4wHhCMRilHfc4Hz78fLgihoiYUbz5EnDmlE61UtJdvju0vtkpXtwImNp0lLyJGsV9
+	 uSqmHV4/8InFV1QuWXtVZbWRT5QNMJrpFyfZhxLuQ5xJK54BZplLjfCJrUcvrp3YUqE8y
+	 pUjH9ZAoOmIIOiwAi9umaHqVHFiMaTzA9uaF3MetQZd8/Q9aFRPdlLDAIv0nhdE4WAA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SgTvop9b;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=asncqXBl;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F47D606A337
-	for <mfd@lists.linux.dev>; Mon,  2 Nov 2026 10:02:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C420E606A334;
+	Mon,  2 Nov 2026 10:13:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SgTvop9b
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 141201F00A15;
-	Mon,  2 Nov 2026 10:02:07 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=asncqXBl
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B9AA81F0093A;
+	Mon,  2 Nov 2026 10:13:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793613727;
-	bh=BqDm/3zC3tWJLoG5EdnbQryR/I3N2frivTlPHItZLyg=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=SgTvop9bILCGWKTJsLDqjMaBAAI/zxn5lzzTKcfR/4KEOMd7S8B696chF9XOYodLl
-	 F/TfY7ze53pG5Q4nclA7G5rOIgmN3pvTfLkC6qls9rWNff14oz/OFLj1IKk/g+ygH9
-	 oy6q9IITOyfOSzd6UWSDRdxlWeFUjcAr650ZvAi47QF4CrVfSXLRPeVfibE3we65FD
-	 jIsiM51s+XefO+lKpCxwZ17XQ3VXy+RX9zdE+rxfp7OOYP0c82H6zgLMo4NkPVSebD
-	 SB9AvjDQ6e4k3DqZjqbjInFaBik9sxhU/l9yR0HexUwC36fN8Qf9oteYhFX/PePlsG
-	 GnKpvhmgWMZXQ==
-Message-ID: <sashiko-outbox-193229@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 2/2] MIPS: SGI-IP30: shut down cleanly on a power
- button press
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Imre Kaloz" <kaloz@kernel.org>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261102094106.21300-3-kaloz@kernel.org>
-References: <20261102094106.21300-1-kaloz@kernel.org>
- <20261102094106.21300-3-kaloz@kernel.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 02 Nov 2026 10:02:06 +0000
+	s=k20260515; t=1793614384;
+	bh=C/rEuinMCfbUrXPWZJGbZBm6SE6/AvXvnmCXC2u+vkI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=asncqXBlegDWEwCbD6PaXtPtQsNKAqjrkIKsLqMX1ZfPlLb3jdvIMYu0cPqXvrAWn
+	 sA5KZfFiXMSq2iWOkKDZyMFzttewzenYvU90UP5v4vhFSYWDSBOCYa5U/+RM049UWv
+	 k9kd3MvD7vsB3ke8BVj9bv4C6msCZ1OoR4h9lY5teE56xDECXWpjwskSV9URXtyaQU
+	 lk/i3okYymeZqrLG63RsvOhaqR+uyhYhm/KVBZMuoKGmDP0Ycs01qf3gRJPj2Gqpkg
+	 Xw94ilnGWvUhozS3k/aackHEZ4JUorHGVEBOEZItoPeEp+HLR5/DrScbwpXnDd6HJt
+	 WySZphCC5fwHA==
+Date: Mon, 2 Nov 2026 10:13:01 +0000
+From: Lee Jones <lee@kernel.org>
+To: Pavel Skripkin <paskripkin@gmail.com>
+Cc: ejona86@gmail.com, mfd@lists.linux.dev, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] mfd/rk8xx: fix sleep during RCU read side critical
+ section
+Message-ID: <20261102101301.GC13023@google.com>
+References: <20261029192223.462367-1-paskripkin@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,254 +55,194 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261029192223.462367-1-paskripkin@gmail.com>
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
-s) to consider:
-- [High] MIPS: SGI-IP30: atomic sleep and deadlock in ip30_machine_power_of=
-f()
-- [High] MIPS: SGI-IP30: broken modular RTC power-off in ip30_prepare_power=
-off()
-- [High] MIPS: SGI-IP30: unserialized indirect RTC register access in power=
-off
---
+Nit for when you resubmit this.
 
-commit dd15dcc6768c98c5a5f42977da8413212870ba81
-Author: Imre Kaloz <kaloz@kernel.org>
+The subject line does not match the expected format for the subsystem.
 
-MIPS: SGI-IP30: shut down cleanly on a power button press
+<end>
 
-This patch supplies a plat_prepare_poweroff hook for SGI IP30 that initiates
-an orderly shutdown via userspace on the first power button press and forces
-an immediate power-off on a second press or after a 120-second timeout. It
-also serializes concurrent callers of ip30_machine_power_off() and enters an
-nbcon emergency section before invoking ds1685_rtc_poweroff().
+On Thu, 29 Oct 2026, Pavel Skripkin wrote:
 
-> diff --git a/arch/mips/sgi-ip30/ip30-power.c b/arch/mips/sgi-ip30/ip30-po=
-wer.c
-> index b1b33c9cfd761..cff8f48754292 100644
-> --- a/arch/mips/sgi-ip30/ip30-power.c
-> +++ b/arch/mips/sgi-ip30/ip30-power.c
-[ ... ]
-> @@ -32,6 +35,8 @@ static void __noreturn ip30_machine_restart(char *cmd)
->  	unreachable();
+> SPI does not support atomic transfers, so it's dangerous to call from
+> atomic notif chains, since it can cause stall during reboot on
+> orangepi5 (see trace below).
+> 
+> Commit 128115b520c6 ("mfd: rk8xx: Register poweroff handler in atomic phase")
+> moved shutdown methods to atomic notif chain, since i2c transfer didn't
+> work during PREPARE step. I don't have an access to rk3288 based boards and
+> patch reasoning is not completely clear.
+> 
+> That's why this patch hacks notifier registration only for SPI based
+> PMICs.
+> 
+> 66.145226] reboot: Power down
+> [  266.145581] ------------[ cut here ]------------
+> [  266.145986] Voluntary context switch within RCU read-side critical section!
+> [  266.146007] WARNING: kernel/rcu/tree_plugin.h:330 at rcu_note_context_switch+0x3dc/0x5d8, CPU#0: systemd-shutdow/1
+> [  266.147525] Modules linked in:
+> [  266.147800] CPU: 0 UID: 0 PID: 1 Comm: systemd-shutdow Not tainted 7.3.0-opi5-test+ #2 PREEMPT
+> [  266.148560] Hardware name: Xunlong Orange Pi 5 (DT)
+> [  266.148987] pstate: 604000c9 (nZCv daIF +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+> [  266.149596] pc : rcu_note_context_switch+0x3dc/0x5d8
+> [  266.150034] lr : rcu_note_context_switch+0x3dc/0x5d8
+> [  266.150472] sp : ffff80008005b4e0
+> [  266.150764] x29: ffff80008005b4e0 x28: ffff000100903000 x27: ffffc7018d616000
+> [  266.151393] x26: 0000c4fe4deb68c0 x25: ffffc7018d639260 x24: 0000000000000000
+> [  266.152021] x23: ffff000100903000 x22: ffff0002fee4ef80 x21: ffffc7018d616f80
+> [  266.152649] x20: 0000000000000000 x19: ffff000100903000 x18: 0000000000000000
+> [  266.153277] x17: ffff80008005b8b8 x16: 0000000000000000 x15: 0000000000000000
+> [  266.153904] x14: 0000000000000a37 x13: ffffc7018d82a478 x12: ffff390171838000
+> [  266.154532] x11: ffff0002fee3a198 x10: 0000000000000001 x9 : ffffc7018d6642d0
+> [  266.155161] x8 : 0000000100000001 x7 : 0000000000000000 x6 : 7261746e756c6f56
+> [  266.155789] x5 : ffffc7018d93e807 x4 : ffffc7018cd48369 x3 : ffff80008005b058
+> [  266.156416] x2 : 00000000000002a8 x1 : 0000000000000001 x0 : 000000000000003f
+> [  266.157044] Call trace:
+> [  266.157262]  rcu_note_context_switch+0x3dc/0x5d8 (P)
+> [  266.157703]  __schedule+0x80/0x1540
+> [  266.158015]  schedule+0x5c/0xe0
+> [  266.158296]  schedule_timeout+0x7c/0xe8
+> [  266.158636]  wait_for_common+0xbc/0x188
+> [  266.158977]  wait_for_completion_timeout+0x1c/0x30
+> [  266.159401]  spi_transfer_one_message+0x2c0/0x838
+> [  266.159819]  __spi_pump_transfer_message+0x1f0/0x448
+> [  266.160258]  __spi_sync+0x224/0x450
+> [  266.160569]  spi_write_then_read+0x134/0x1b8
+> [  266.160947]  rk806_spi_bus_read+0x4c/0x70
+> [  266.161304]  _regmap_raw_read+0x1a0/0x368
+> [  266.161661]  _regmap_bus_read+0x48/0x88
+> [  266.162001]  _regmap_read+0x17c/0x260
+> [  266.162326]  _regmap_update_bits+0x7c/0x138
+> [  266.162696]  regmap_update_bits_base+0x6c/0xa8
+> [  266.163089]  rk808_power_off+0xec/0x120
+> [  266.163429]  sys_off_notify+0x34/0x50
+> [  266.163756]  atomic_notifier_call_chain+0x78/0x170
+> [  266.164178]  do_kernel_power_off+0xf0/0x170
+> [  266.164549]  machine_power_off+0x20/0x38
+> [  266.164900]  kernel_power_off+0xf4/0x110
+> [  266.165248]  __arm64_sys_reboot+0x27c/0x290
+> [  266.165619]  invoke_syscall+0x4c/0xf8
+> [  266.165944]  el0_svc_common+0x94/0xe8
+> [  266.166268]  do_el0_svc+0x24/0x38
+> [  266.166562]  el0_svc+0x34/0x90
+> [  266.166833]  el0t_64_sync_handler+0x68/0xe0
+> [  266.167203]  el0t_64_sync+0x17c/0x180
+> [  266.167528] ---[ end trace 0000000000000000 ]---
+> 
+> CC: Eric Anderson <ejona86@gmail.com>
+> Fixes: 128115b520c6 ("mfd: rk8xx: Register poweroff handler in atomic phase")
+> Signed-off-by: Pavel Skripkin <paskripkin@gmail.com>
+> ---
+> 
+> Hey Eric!
+> 
+> I don't have rk3288 board to test. However, I strongly suspect that
+> patch does not affect your case.
+> 
+> I've tried to track down root cause of i2c hung, but no luck. Based on
+> FDT i2c is directly connected to GIC, so IRQs must be enabled during
+> PREPARE step.
+> 
+> Would be great if you test that patch.
+> 
+> ---
+>  drivers/mfd/rk8xx-core.c  | 19 ++++++++++++++++---
+>  drivers/mfd/rk8xx-i2c.c   |  2 +-
+>  drivers/mfd/rk8xx-spi.c   |  2 +-
+>  include/linux/mfd/rk808.h |  2 +-
+>  4 files changed, 19 insertions(+), 6 deletions(-)
+> 
+> diff --git a/drivers/mfd/rk8xx-core.c b/drivers/mfd/rk8xx-core.c
+> index 21182df45d1b..c4c5907c9fcd 100644
+> --- a/drivers/mfd/rk8xx-core.c
+> +++ b/drivers/mfd/rk8xx-core.c
+> @@ -761,7 +761,7 @@ void rk8xx_shutdown(struct device *dev)
 >  }
-> =20
-> +static atomic_t ip30_power_off_claimed =3D ATOMIC_INIT(0);
-> +
->  static void ip30_machine_power_off(void)
+>  EXPORT_SYMBOL_GPL(rk8xx_shutdown);
+>  
+> -int rk8xx_probe(struct device *dev, int variant, unsigned int irq, struct regmap *regmap)
+> +int rk8xx_probe(struct device *dev, int variant, unsigned int irq, struct regmap *regmap, bool spi)
 >  {
->  	struct device *dev;
-> @@ -48,14 +53,69 @@ static void ip30_machine_power_off(void)
->  		return;
->  	}
-> =20
-> +	/*
-> +	 * The RTC registers are reached through an index/data pair, so one
-> +	 * CPU at a time may drive them, and a second button press, the
-> +	 * timeout and pm_power_off can arrive together.  Interrupts go off
-> +	 * first so the claimant cannot be preempted by a waiter on its CPU;
-> +	 * the waiters spin until the power drops.
-> +	 */
-> +	local_irq_disable();
-> +	if (atomic_xchg(&ip30_power_off_claimed, 1))
-> +		for (;;)
-> +			cpu_relax();
-
-[Severity: High]
-As reported by Sashiko on v1 [1], can another CPU still race on the
-indirect RTC index/data registers and bank selection while
-ds1685_rtc_poweroff() is running?
-
-On SGI IP30, the DS1687 is accessed in indirect register mode
-(ds1685_reg_indirect), where every ds1685_indirect_read() and
-ds1685_indirect_write() performs two separate MMIO accesses to rtc->regs and
-rtc->data, and RTC_EXT_CTRL_4A (0x4a) is only accessible while Bank 1 is
-selected.
-
-Claiming ip30_power_off_claimed only serializes callers of
-ip30_machine_power_off() against each other; it does not stop other CPUs or
-acquire rtc_lock(rtc->dev), and ds1685_rtc_poweroff() only calls
-disable_irq_nosync(rtc->irq_num):
-
-  1. If a second power button interrupt starts ds1685_rtc_extended_irq() on
-     another CPU before HEART interrupts are masked, that handler sleeps in
-     msleep(500) and wakes via the per-CPU CP0 timer interrupt (which is not
-     routed through HEART). It then accesses RTC_EXT_CTRL_4B via rtc->regs
-     and rtc->data before calling rtc->prepare_poweroff():
-
-     drivers/rtc/rtc-ds1685.c:ds1685_rtc_extended_irq() {
-         ...
-         msleep(500);
-         rtc->write(rtc, RTC_EXT_CTRL_4B,
-                    (rtc->read(rtc, RTC_EXT_CTRL_4B) |
-                     RTC_CTRL_4B_KSE));
-
-         if (rtc->prepare_poweroff !=3D NULL)
-             rtc->prepare_poweroff();
-         ...
-         ds1685_rtc_switch_to_bank0(rtc);
-     }
-
-  2. After ip30_prepare_poweroff() returns on the first press,
-     ds1685_rtc_extended_irq() calls ds1685_rtc_switch_to_bank0(rtc), which
-     can race with a concurrent pm_power_off() call.
-
-  3. During ip30_power_timeout() or userspace shutdown (such as hwclock on
-     another CPU), normal RTC ops, NVRAM accesses, or sysfs/procfs reads
-     acquire rtc_lock(rtc->dev), drive rtc->regs and rtc->data, and switch
-     the chip back to Bank 0.
-
-If another CPU changes the index register or switches the RTC back to Bank 0
-before ds1685_rtc_poweroff() writes RTC_CTRL_4A_PAB to RTC_EXT_CTRL_4A,
-wouldn't that write corrupt battery-backed Bank 0 NVRAM at offset 0x4a and
-leave the system spinning forever without cutting power?
-
+>  	struct rk808 *rk808;
+>  	const struct rk808_reg_data *pre_init_reg;
+> @@ -874,8 +874,21 @@ int rk8xx_probe(struct device *dev, int variant, unsigned int irq, struct regmap
+>  
+>  	if (device_property_read_bool(dev, "system-power-controller") ||
+>  	    device_property_read_bool(dev, "rockchip,system-power-controller")) {
+> +		/* There is no support for atomic SPI transfers (yet?). Thus it's not possible to
+> +		 * perform SPI i/o during atomic notify handler.
+> +		 *
+> +		 * Patch 128115b520c6 claims that i2c does not work during _PREPARE state, so be
+> +		 * extra careful while changing modes here.
+> +		 */
+> +		enum sys_off_mode off_mode =
+> +			spi ? SYS_OFF_MODE_POWER_OFF_PREPARE :
+> +			      SYS_OFF_MODE_POWER_OFF;
+> +		enum sys_off_mode restart_mode =
+> +			spi ? SYS_OFF_MODE_RESTART_PREPARE :
+> +			      SYS_OFF_MODE_RESTART;
 > +
->  	/* Devices losing power may still interrupt; keep their handlers out. */
->  	for (cpu =3D 0; cpu < HEART_MAX_CPUS; cpu++)
->  		heart_write(HEART_CLR_ALL_MASK, &heart_regs->imr[cpu]);
->  	heart_write(HEART_ACK_ALL_MASK, &heart_regs->clear_isr);
-> =20
-> +	/*
-> +	 * Nothing schedules before the power drops, so the RTC's message must
-> +	 * be printed from this context, not left to the console thread.  The
-> +	 * emergency section is never left.
-> +	 */
-> +	nbcon_cpu_emergency_enter();
->  	ds1685_rtc_poweroff(to_platform_device(dev));
+>  		ret = devm_register_sys_off_handler(dev,
+> -				    SYS_OFF_MODE_POWER_OFF, SYS_OFF_PRIO_HIGH,
+> +				    off_mode, SYS_OFF_PRIO_HIGH,
+>  				    &rk808_power_off, rk808);
+>  		if (ret)
+>  			return dev_err_probe(dev, ret,
+> @@ -885,7 +898,7 @@ int rk8xx_probe(struct device *dev, int variant, unsigned int irq, struct regmap
+>  		case RK809_ID:
+>  		case RK817_ID:
+>  			ret = devm_register_sys_off_handler(dev,
+> -							    SYS_OFF_MODE_RESTART, SYS_OFF_PRIO_HIGH,
+> +							    restart_mode, SYS_OFF_PRIO_HIGH,
+>  							    &rk808_restart, rk808);
+>  			if (ret)
+>  				dev_warn(dev, "failed to register rst handler, %d\n", ret);
+> diff --git a/drivers/mfd/rk8xx-i2c.c b/drivers/mfd/rk8xx-i2c.c
+> index 161b25fbe146..f6e137ba394f 100644
+> --- a/drivers/mfd/rk8xx-i2c.c
+> +++ b/drivers/mfd/rk8xx-i2c.c
+> @@ -243,7 +243,7 @@ static int rk8xx_i2c_probe(struct i2c_client *client)
+>  		return dev_err_probe(&client->dev, PTR_ERR(regmap),
+>  				     "regmap initialization failed\n");
+>  
+> -	return rk8xx_probe(&client->dev, data->variant, client->irq, regmap);
+> +	return rk8xx_probe(&client->dev, data->variant, client->irq, regmap, false);
 >  }
-
-[Severity: High]
-Doesn't ds1685_rtc_poweroff() sleep in msleep(20) before cutting power,
-violating the atomic context established by local_irq_disable() and
-nbcon_cpu_emergency_enter()?
-
-In drivers/rtc/rtc-ds1685.c, ds1685_rtc_poweroff() calls msleep(20) right
-before setting RTC_CTRL_4A_PAB:
-
-drivers/rtc/rtc-ds1685.c:ds1685_rtc_poweroff() {
-    ...
-    /* Set PAB to 1 in Control 4A to power the system down. */
-    dev_warn(&pdev->dev, "Powerdown.\n");
-    msleep(20);
-    rtc->write(rtc, RTC_EXT_CTRL_4A,
-               (ctrl4a | RTC_CTRL_4A_PAB));
-}
-
-Because ip30_machine_power_off() disables local interrupts and calls
-nbcon_cpu_emergency_enter() (which disables preemption and increments the
-per-CPU emergency nesting count), calling msleep(20) -> schedule() triggers=
- a
-scheduling-while-atomic bug, context-switches with the per-CPU nbcon
-emergency nesting count elevated, and re-enables local interrupts when the
-scheduler unlocks the runqueue.
-
-Furthermore, while the claimant task is sleeping in msleep(20), if a
-concurrent caller of ip30_machine_power_off() (such as ip30_power_timeout(),
-poweroff_work from orderly_poweroff(), or the RTC IRQ thread on a second
-button press) gets scheduled onto the same CPU, it will call
-local_irq_disable(), see ip30_power_off_claimed =3D=3D 1, and spin forever =
-in
-cpu_relax() with interrupts disabled. Wouldn't that prevent the 20ms timer
-wakeup from ever completing and permanently deadlock the machine before
-RTC_CTRL_4A_PAB is written?
-
-> =20
-> +#define IP30_POWERDOWN_TIMEOUT	120	/* seconds */
-> +
-> +static bool ip30_shutting_down;
-> +
-> +static void ip30_power_timeout(struct work_struct *work)
-> +{
-> +	struct device *dev;
-> +
-> +	dev =3D bus_find_device_by_name(&platform_bus_type, NULL, "rtc-ds1685");
-> +	if (!dev)
-> +		return;
-> +
-> +	/*
-> +	 * Unbinding rtc-ds1685 frees the RTC under the device lock, so hold
-> +	 * it across the drvdata check and the power-off.
-> +	 */
-> +	device_lock(dev);
-> +	ip30_machine_power_off();
-> +	device_unlock(dev);
-> +	put_device(dev);
-> +}
-> +
-> +static DECLARE_DELAYED_WORK(ip30_power_work, ip30_power_timeout);
-> +
-> +/* Called by the RTC driver when the power button is pressed. */
-> +void ip30_prepare_poweroff(void)
-> +{
-> +	/* A second press powers off at once. */
-> +	if (ip30_shutting_down)
-> +		ip30_machine_power_off();
-> +
-> +	/* Shut down through userspace, powering off anyway if it stalls. */
-> +	ip30_shutting_down =3D true;
-> +	orderly_poweroff(true);
-> +	schedule_delayed_work(&ip30_power_work, IP30_POWERDOWN_TIMEOUT * HZ);
-> +}
-> +
->  static int __init ip30_reboot_setup(void)
->  {
->  	_machine_restart =3D ip30_machine_restart;
-> diff --git a/drivers/mfd/ioc3.c b/drivers/mfd/ioc3.c
-> index 5f8ac364b610e..8f603651cc8e5 100644
-> --- a/drivers/mfd/ioc3.c
-> +++ b/drivers/mfd/ioc3.c
-[ ... ]
-> @@ -321,6 +324,9 @@ static struct ds1685_rtc_platform_data ip30_rtc_platf=
-orm_data =3D {
->  	.no_irq =3D false,
->  	.uie_unsupported =3D true,
->  	.access_type =3D ds1685_reg_indirect,
-> +#ifdef CONFIG_SGI_IP30
-> +	.plat_prepare_poweroff =3D ip30_prepare_poweroff,
-> +#endif
+>  
+>  static void rk8xx_i2c_shutdown(struct i2c_client *client)
+> diff --git a/drivers/mfd/rk8xx-spi.c b/drivers/mfd/rk8xx-spi.c
+> index bb85fe60518f..fba4b0582c8b 100644
+> --- a/drivers/mfd/rk8xx-spi.c
+> +++ b/drivers/mfd/rk8xx-spi.c
+> @@ -94,7 +94,7 @@ static int rk8xx_spi_probe(struct spi_device *spi)
+>  		return dev_err_probe(&spi->dev, PTR_ERR(regmap),
+>  				     "Failed to init regmap\n");
+>  
+> -	return rk8xx_probe(&spi->dev, RK806_ID, spi->irq, regmap);
+> +	return rk8xx_probe(&spi->dev, RK806_ID, spi->irq, regmap, true);
+>  }
+>  
+>  static const struct of_device_id rk8xx_spi_of_match[] = {
+> diff --git a/include/linux/mfd/rk808.h b/include/linux/mfd/rk808.h
+> index 7ffc904c864c..c55aa2effd18 100644
+> --- a/include/linux/mfd/rk808.h
+> +++ b/include/linux/mfd/rk808.h
+> @@ -1469,7 +1469,7 @@ struct rk808 {
 >  };
+>  
+>  void rk8xx_shutdown(struct device *dev);
+> -int rk8xx_probe(struct device *dev, int variant, unsigned int irq, struct regmap *regmap);
+> +int rk8xx_probe(struct device *dev, int variant, unsigned int irq, struct regmap *regmap, bool spi);
+>  int rk8xx_suspend(struct device *dev);
+>  int rk8xx_resume(struct device *dev);
+>  
+> -- 
+> 2.55.0
+> 
 
-[Severity: High]
-What happens on a power button press when CONFIG_SGI_IP30=3Dy and
-CONFIG_RTC_DRV_DS1685_FAMILY=3Dm?
-
-Previously, ip30_rtc_platform_data.plat_prepare_poweroff was NULL, so when
-rtc-ds1685 was built as a module, ds1685_rtc_extended_irq() fell back to
-calling ds1685_rtc_poweroff(pdev) directly inside the module.
-
-With this change, ip30_rtc_platform_data.plat_prepare_poweroff is wired up
-whenever CONFIG_SGI_IP30 is enabled, overriding the direct
-ds1685_rtc_poweroff(pdev) fallback. However, in built-in
-arch/mips/sgi-ip30/ip30-power.c, IS_REACHABLE(CONFIG_RTC_DRV_DS1685_FAMILY)
-is false when CONFIG_RTC_DRV_DS1685_FAMILY=3Dm:
-
-arch/mips/sgi-ip30/ip30-power.c:ip30_machine_power_off() {
-    if (!IS_REACHABLE(CONFIG_RTC_DRV_DS1685_FAMILY))
-        return;
-    ...
-}
-
-As a result, pm_power_off is not registered and ip30_machine_power_off() is
-a no-op, so neither orderly_poweroff(true), ip30_power_timeout(), nor a
-second power button press can cut power.
-
-In addition, in ip30_prepare_poweroff(), the second-press path:
-
-	if (ip30_shutting_down)
-		ip30_machine_power_off();
-
-has no return statement, so whenever ip30_machine_power_off() returns early
-(for example when !IS_REACHABLE(CONFIG_RTC_DRV_DS1685_FAMILY) or if the
-rtc-ds1685 device is unbound), execution falls through and re-runs
-orderly_poweroff(true) and schedule_delayed_work(). Should plat_prepare_pow=
-eroff
-only be set when IS_REACHABLE(CONFIG_RTC_DRV_DS1685_FAMILY) (or Kconfig
-updated so ip30-power.c can always reach the driver), and should the
-second-press branch in ip30_prepare_poweroff() return?
-
-[1] https://lore.kernel.org/r/20261013115820.13293-3-kaloz@kernel.org
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261102094106.2130=
-0-1-kaloz@kernel.org?part=3D2
+-- 
+Lee Jones
