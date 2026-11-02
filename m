@@ -1,57 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793639126;
-	b=EdybyG9dysXimYbbXnG8sb7q6zzOYZ30h8f0P2xRhoDFBxs6tXl//m3edvdS3Hzc25rb
-	 Of7Y7cpK2nJoMZ+Bw9fHRyEivJADqbHjomf5XhRXyufhdfbwQnw16QcJNIQ46j4kyL4+6
-	 ZnkiZx1ub6Fw4GTLacdusC0U4vZ1xS9LPlNeTsu2mcbpFElhKX9HC7oOagFY42VM7Grxv
-	 zIQxMmKoNVXLfYEzfCrk2QTTAy9+ngusyYlth5yokyL0HS8L5GbSzb+VlFmWeJ6/cIMMX
-	 HzlTrO6Wn8pwSPQw8IZcP4rB3TDAFlB7VkOI4dJA7rIuQzs8MSwv2mngVjJ/0LHGz5A==
+	t=1793639141;
+	b=297KIJUXSJaxJmOUTJ3Rd/GODk5T6sGIJunKkf6HVApdJAX2v946UNPiHOAKpkpqBT95
+	 nh8PuuqyYb4id7Ubw9dbjMFffupGVRkSiKRbdkM0pU1YaM3sfFCWzjQ5eX8yxdGu6m2Ue
+	 PrmkrwNpqcdn7OBIoKPQwlV46lUGBr2OJUcryLxFJe6L+qKZWW3oobdcK0l43QrTcU9SI
+	 vcW1ZbkgxWXDUPTxgKFB0doaFRJTOGwe0IrnOe076bwJ1YOPsOiRoYL3whMQdYLQnyLWH
+	 M/ZafUftgd6btHMLnmudK3bq/CykpXpCngH5iV1fFmAu8MIzNvgaMWqmerueT+xLgKg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793639126;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793639141;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=EVBdiXBvrUuBkfkVcn+e69xb0XKOS9YBC+A+wJafZU8=;
-	b=M7J8F/zDhsd+dm7GaplnWJko+ZyVxAiUXdTbTfNC13QoZH+71Bv7ZtC+Qb+Y4fxjdXQr
-	 6CO69IJxFB0HEZlDooiYRNx1nmSBO3fSGqfw9RbWQO8PMhzfaTz6A4FDjW7iO2xKsZ0Hr
-	 /K8UnHnV8Epilwm+19p8Jjtbt0JRQpryp5NiecxSIIVG5Vg3Tr/+PeskOGCAizA0aa+JY
-	 +/rBX7BdwTd4jrjcB6nRHwqjIwp3JzLg5cE/Om/Z82sSH7PSQdHr7pTQfl1FjsMvrrSe6
-	 ptxnEoHEQ+opFBISY/u6DtN7660XwMtGHxLg4vF+kHVgjnmfq21mdbMp8Auu82XoZdQ==
+	bh=E5TsINuo+d/ne8AiNPnSBDoofcagxdx9s+ITBMZr7nc=;
+	b=0CJhx7b7em8s5jpQ8tXFImsVDe8fbm4tuesZHNJ22K7tn/+tY79c3CvPB5LdGST8zuRH
+	 UzlSr/rdir88cmkM30jn3FyD061TjlT4ch9Lo8GFjEKfPld4aXLvb3Ta3ZPA69+b8oMrI
+	 q/1/WkCbUCwhCqO++x+zVIOoxkmLTuI2TbHVHg7YR6rn6SuuPloAmXbclbm4eiubqQ5c8
+	 GBM/jFODuSubZuH/EIvhjF1IusL3fAHwYzch7tzKx1eiZTDnSSJY7LtHdoYey57LlKwhw
+	 9C2pX4QFIJF+r2huwDuurHUnxwEpFbsGEb4Ww9hUwB5K5orFeS8t/fKGNMVqqa/Gljg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="DFsEM8/g";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=d2FvbaON;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4897606A909;
-	Mon,  2 Nov 2026 17:05:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7646A606A909
+	for <mfd@lists.linux.dev>; Mon,  2 Nov 2026 17:05:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DFsEM8/g
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 267C61F00A16;
-	Mon,  2 Nov 2026 17:05:25 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=d2FvbaON
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D98B01F00A1F;
+	Mon,  2 Nov 2026 17:05:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793639125;
-	bh=EVBdiXBvrUuBkfkVcn+e69xb0XKOS9YBC+A+wJafZU8=;
+	s=k20260515; t=1793639141;
+	bh=E5TsINuo+d/ne8AiNPnSBDoofcagxdx9s+ITBMZr7nc=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=DFsEM8/ghn6Cv/rZ9P/aeKKt8P7zs2BfUegqlRmI6Xb6jsN0bYwVQRPj+IfqV1066
-	 RDlsBytLDSkWD4BQURF6ZG5FV3nNU+eu4kxM3Ws3VqWrxKMPq7Lk2BRJPgSkF1sh25
-	 QFLYoe8h5X6NDr0nE0sJpf/VdU5LgpZ3frfE7VN0GAHwBOFAA0oJQvm5D+ERtBuoLb
-	 3cGahD03YOguAbHgjBlU5OIzYYZ0g+hVAj2Fa1KkH5AHkfS9NgBl6SrOq0QO5mTeE2
-	 MBJbpC3HgBmPabEcOlysEGy4+sYvGHz7VyzsOT+h2c+j4bJWNYmH8/2tp7WYDSjSgc
-	 9CHeAijcwYFNg==
-Message-ID: <sashiko-outbox-193796@kernel.org>
+	b=d2FvbaON8p+N9OvM91H976x48vwWKlrBX0uscoEcjEGNMh3QRFOCza11kxgKiZPW+
+	 pgGqsywtqokVURj9co9SsKZkJqAdoVDtqWYijPBZk9P9a7riU3mlCzCKGfNyjIB/JT
+	 jWierd32KZxljZdTtJukeWU1TKWg6yfXPLmy6r1TdZsKjXxBmiDi+KFW+XRCQvNRL2
+	 QG/DZM1aWx0DwuuZjKJsuVAg2SaJ9IT/VQBbJgROxBl92HbrauxS7wkTw31JZA4FBf
+	 wbUMzEE9fvccyW0okIfMPb5HIOw4CyF8etykJPbbeCJfp9/Czxd0NIOU1p1NqC2fQJ
+	 UwcCFMT4939CQ==
+Message-ID: <sashiko-outbox-193797@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 2/2] rtc: mt6397: provide the 32 kHz output as a
- clock
+Subject: Re: [PATCH v2 RESEND 2/2] mfd: cs42l43: Move to core detach helper
 Reply-To: sashiko-reviews@lists.linux.dev
-To: "Ryan Brue" <ryanbrue.dev@gmail.com>
-Cc: mfd@lists.linux.dev, linux-rtc@vger.kernel.org, "Alexandre Belloni" <alexandre.belloni@bootlin.com>, lee@kernel.org
-In-Reply-To: <20261102-rbrue-suez-upstreaming-mt6397-rtc-32k-v2-2-19ca72815374@gmail.com>
-References: <20261102-rbrue-suez-upstreaming-mt6397-rtc-32k-v2-0-19ca72815374@gmail.com>
- <20261102-rbrue-suez-upstreaming-mt6397-rtc-32k-v2-2-19ca72815374@gmail.com>
+To: "Charles Keepax" <ckeepax@opensource.cirrus.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20261102164157.4010002-3-ckeepax@opensource.cirrus.com>
+References: <20261102164157.4010002-1-ckeepax@opensource.cirrus.com>
+ <20261102164157.4010002-3-ckeepax@opensource.cirrus.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Mon, 02 Nov 2026 17:05:24 +0000
+Date: Mon, 02 Nov 2026 17:05:40 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,19 +60,16 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> The RTC's 32 kHz output is gated by RTC_CON.F32KOB, which the vendor
-> kernel clears before it powers the Wi-Fi/Bluetooth combo chip. Mainline
-> never touches it, so on a board whose bootloader leaves it set, such a
-> chip has no sleep clock and does not come up.
+> Now the core has a helper to signal a device will detach from
+> the SoundWire bus, there is no need for the cs42l43 driver code
+> to separately track that. Switch to using the new core helper.
 >=20
-> Register the output as a clock when the RTC node has #clock-cells, so
-> the chip's power sequence can enable it.
->=20
-> Signed-off-by: Ryan Brue <ryanbrue.dev@gmail.com>
+> Reviewed-by: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
+> Signed-off-by: Charles Keepax <ckeepax@opensource.cirrus.com>
 
 Sashiko has reviewed this patch and found no issues.
 
 --=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261102-rbrue-suez=
--upstreaming-mt6397-rtc-32k-v2-0-19ca72815374@gmail.com?part=3D2
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261102164157.4010=
+002-1-ckeepax@opensource.cirrus.com?part=3D2
 
