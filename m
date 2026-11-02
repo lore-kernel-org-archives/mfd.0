@@ -1,72 +1,94 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=35.89.44.33
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.215.228
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793588764;
-	b=a2IgW41wf3pif1EYguGhT2nRNNceCGND5UIwpobpVe1VeiCX8RjCpMXAIqAV/gKZu90z
-	 zb99X0gXO4SSIbttu+OJreI3vPTAvQQOjqRrMF5t9jxpmW0+JQuidiG9hNYe/dFN4X3I8
-	 a88bWDfLesbtz3d5b+cvntDbICbSZBR1aMn7Ah1rCZbMYSzNgDt4o//P4+n4CFHIm29zt
-	 BPxjg9eCUo4+JX4aN1Vv+OnPtuLFgbp0tnXyl+BMDtnA0nD5YOiIS52DBxxieb5/Gv/SY
-	 smInbVBK0c87XvvLtzdyzpdye3dnw1ocFRtqT3Y9KUH6wLraWw/HskCI141Fp9klzoA==
+	t=1793593993;
+	b=Dpcc6UqNcE2BSwDur8ebdIJGXa3psmjwjH2JGypSof+f+dPfo6LIdfTPjUusoQkHvp11
+	 PlFv2sSrxzvHlWSWLlJkQohWGIKW5q1vp0CiBdbn21m62NlbAWsTT/S89Tnly90l9b6xr
+	 EPTFzbshA2hTz3+0kseXkTd0Ucq1tOOuRDMwm7oPyRl6ly9mJ4oTgNchPe2Ab2b+o7FU9
+	 eeI0191wlsShDtfyiy0joDwD0lFSWH718WOHxS8+1MbVtrtHuJx/Ot+2uLA0OqLTTWWh6
+	 BYeS9efGCS4mX96znK54aCazONRr4+uTEscfXJnkjnZkOYg4jOsuLTkCo+zBj7g7nYQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793588764;
-	h=DMARC-Filter:Received:Received:X-Authority-Analysis:DKIM-Signature:
-	 Received:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
-	 References:Content-Language:From:Autocrypt:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-AntiAbuse:X-AntiAbuse:X-AntiAbuse:
-	 X-AntiAbuse:X-AntiAbuse:X-BWhitelist:X-Source-IP:X-Source-L:X-Exim-ID:
-	 X-Source:X-Source-Args:X-Source-Dir:X-Source-Sender:X-Source-Auth:
-	 X-Email-Count:X-Org:X-Source-Cap:X-Local-Domain:X-CMAE-Envelope;
-	bh=OyjZ+N4a9qefmJo7byV/+mRX+hSQfs4A6Vsng69VtNY=;
-	b=EfRHOtwLMs8CCUO/G1WTwVWcONQypq2MYnzAtNd8PZpM2ETUqLqVZtnLbdNPzEWscKMs
-	 wUPQgimKE7vOdgF1PouR0kNJH30Uv/e4zaeiWDSt0dFQtQB8FsPTZ/5tG5VqS2x+oioD0
-	 yvWbrZXZxPzlBakmvVXFsrmcjbYPcQH3pozE//BXOdl481j+uiRHHStTrva6bGPfWqZN6
-	 MxqMvV02wsZaL58tLARAVC3QaCOAItY9B6jl+HHUndqKvDQQjjSUZLOhYDiq22CiiX1Ac
-	 iJvJhl1uHtl6juDMgeiXi/KVDWgEqAUZN4KOzAJtrTejLDwyqZC8NWttGAKCFSO4bYw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793593993;
+	h=DMARC-Filter:Received:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:X-Relaying-Domain:
+	 X-CFilter-Loop:Received:DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Received:X-Received:MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gm-Features:Message-ID:Subject:To:Cc:X-DetectorID-Processed:
+	 Content-Type;
+	bh=fRbf0Z+1fiqy9u/Fr2KM+zxkBlrG8mxbHJE8AZ9wMqk=;
+	b=FxSPz12YZgGBxo5bPnimenzaGDLUT/Ov5LqtvT7OvGCEUi4EdqgR3uIaNS5w8x5OOxpG
+	 e2JKx9S30EN++KSnhdz6A0T0WQEQ6WXYJfzIZbO4U1ayMGY8df7M1v/tIN9aYXj2IQvij
+	 1y7kAu4n6IjOOLcdvAffLNyZGHu3YR/y/uQbQ09ar6NFFi8C8G1sd4Rk5ht8o6zJ1eaAO
+	 LqPlvkyGprE7GTQas8AVHNjIPulHsmDGKiTJVSIYvPKtfhgwsiRwMtyAVD30rznEzcVzb
+	 lMdFwzy/Bh6j5tNBLWXuJcrs7Wi6wFJhphoXyTOnoJjIpXRZs79WUxU6uVO9hwqWE3w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=roeck-us.net;
-	spf=fail smtp.mailfrom=roeck-us.net;
-	dkim=pass header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=Jj0McUwA;
-	arc=none smtp.remote-ip=35.89.44.33
-Received: from omta34.uswest2.a.cloudfilter.net (omta34.uswest2.a.cloudfilter.net [35.89.44.33])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=broadcom.com;
+	spf=fail smtp.mailfrom=broadcom.com;
+	dkim=pass header.d=broadcom.com header.i=@broadcom.com header.a=rsa-sha256 header.s=google header.b=EXob7rDT;
+	arc=none smtp.remote-ip=209.85.215.228
+Received: from mail-pg1-f228.google.com (mail-pg1-f228.google.com [209.85.215.228])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C78D4606A326
-	for <mfd@lists.linux.dev>; Mon,  2 Nov 2026 03:06:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C78D4606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=roeck-us.net
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2C57606A329
+	for <mfd@lists.linux.dev>; Mon,  2 Nov 2026 04:33:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E2C57606A329
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=broadcom.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=broadcom.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=Jj0McUwA
-Received: from eig-obgw-5006b.ext.cloudfilter.net ([10.0.29.217])
-	by cmsmtp with ESMTPS
-	id NNfoxB3TMaC0UNiN1xPDWI; Mon, 02 Nov 2026 03:06:03 +0000
-Received: from 162-215-252-36.unifiedlayer.com ([208.91.199.152])
-	by cmsmtp with ESMTPS
-	id NiN0xLB1WNSXiNiN0xhybR; Mon, 02 Nov 2026 03:06:02 +0000
-X-Authority-Analysis: v=2.4 cv=JvXxrN4C c=1 sm=1 tr=0 ts=6ae7fe1a
- a=QNED+QcLUkoL9qulTODnwA==:117 a=2cfIYNtKkjgZNaOwnGXpGw==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=M0FbrtG7MMAA:10 a=VwQbUJbxAAAA:8
- a=_jlGtV7tAAAA:8 a=BA9JajvoVav3SfIcZTsA:9 a=QEXdDO2ut3YA:10
- a=nlm17XC03S6CtCLSeiRr:22 a=KPbNTLLc3YvdawN95zVk:22
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=roeck-us.net; s=default; h=Content-Transfer-Encoding:Content-Type:
-	In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
-	:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-	List-Unsubscribe:List-Unsubscribe-Post:List-Subscribe:List-Post:List-Owner:
-	List-Archive; bh=OyjZ+N4a9qefmJo7byV/+mRX+hSQfs4A6Vsng69VtNY=; b=Jj0McUwAXo72
-	pfdTEsKRTiyHHnfMuY0EpKvuuYzwKf1wBSkOWqxJTrWG+5+XSfwlEPykzWGNjCsI/0G/ChziK2DVr
-	WWoZUjT9g53xKRG4Yss2N+Q9IF9wcRSGxQlRXtIIspcLiVMod3WoqtzJ5I6Ws5Tvb4pl4MgYuq4C8
-	0GO0QC9yqCtN3nkk99CalXkv5j4Rp9WuxWl36IIfZsuhXxNldTaaVkPr9sHR1wBB0zogdUl3gXFq+
-	f4csWBgI+74/0LSNhDRps/fgtIlCknx/PNkzfTQ/rQMlXD/T+SMkdSzSYlZwh2xKoKGjLp5bgBLft
-	AKvPH0T3+3KmgyHM+NKGtA==;
-Received: from 108-223-40-66.lightspeed.sntcca.sbcglobal.net ([108.223.40.66]:39052)
-	by bh-25.webhostbox.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.100.1)
-	(envelope-from <linux@roeck-us.net>)
-	id 1xNiMy-000000012bx-0sK1;
-	Mon, 02 Nov 2026 08:36:00 +0530
-Message-ID: <b65ef6c6-cbcf-4793-9ba1-7c5cb270f574@roeck-us.net>
-Date: Sun, 1 Nov 2026 19:05:56 -0800
+	dkim=pass (1024-bit key, unprotected) header.d=broadcom.com header.i=@broadcom.com header.a=rsa-sha256 header.s=google header.b=EXob7rDT
+Received: by mail-pg1-f228.google.com with SMTP id 41be03b00d2f7-cd60c5da24cso1523219a12.0
+        for <mfd@lists.linux.dev>; Sun, 01 Nov 2026 20:33:12 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793593992; x=1794198792;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:dkim-signature:x-gm-gg:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=fRbf0Z+1fiqy9u/Fr2KM+zxkBlrG8mxbHJE8AZ9wMqk=;
+        b=c3n8mdP/d2oBjgzZAHPqcUyxTDqJxZEUDRsZb0+gWQpzpTnyOekLsQt7hPrnT69FN7
+         XYdnos//WivfqipvjfL88QWXJpFGtcWM7MQ2WwOZWzELy8Xd2jaEGXDxkFFpCFjQkLEq
+         ypVCzWwr3TN1nOq9FD4yKHxr02qU3u4EN5M6om+jX5uL0MNSlu27nkIzcfHb1oWcFv4R
+         tAvOb8aA2YXPaYiLwgeVXG5f9wnsPAG7sEkT4J19vNZCeGo3Yqu7vVl+fxruHI7Y5I4X
+         o0/mugPWBAdZyIsRdEEe3LEMQtJ0S3Hp8PwDBM4QHjTVk4cGPnEaBmlt1VM+xAgA9tdO
+         JzYg==
+X-Forwarded-Encrypted: i=1; AKwUvBz/YFa51u4iu6RfsQAULs3dFh02MKwaR3H5FPUWP0OiqvH5LLesPsNZ75KwLIaDyw0r/Zg=@lists.linux.dev
+X-Gm-Message-State: APuU4Z+7LscygC0aHhyYlhkpC4HSEhl3UJDqumnpq7h6kTQgeYMRUM20
+	cJzsdMeXadG5EuXHwzQR+0uC7CSwMVLJCP8LRMOT41LbyB0E3pMGlafyOugm51+kmg9l6K8ECrN
+	GiKOyk8tMMxYcCHX/3P5o7sIeHhsJx/Er/Pa8uwXMl+mWcahSgGqxnfxHjhk/IQtHCfp1ECIdjV
+	SauM07CKnU27g6Ynoj/r6HUsWBBO8z4IAotbNUSwJlWM7LdNhOPkOTxMTYY0YmKUon1y5rhX8x5
+	xaJ9dQ8
+X-Gm-Gg: AYBFou0eRoYFNjrenn5NU5jRfYOfhuYaZU0b4ATLhPaIRFDgTNNlPTqEmrH6Mwrs/Mf
+	MfwBR2pxjr3nh7pWTxV2qwtDZ5PTgZIQzZGusYkoO3EITvFZTi9rKE+FuragwIeSeMDQ3sOJ+NL
+	WS9bNC3EiB8E6JmDYqEzdjPEIGs2jAQIFHGQDnHIE6yY1r/E2rL6/cM90EoOKZGjKaa96C/sYI0
+	XaWFyjp/m32e5eKV9JuZGtYOBoJi1zl+eVIVZjULebJ2cGZdYNnukpyPlebIH6yR+4MqyO3YmMm
+	waXam7V1RQpq8SMCaBAgrrPO2YTbPGthqWS6TXkGrfFZ2JAoZwsIcWcPNLZx+q90ll/2GHL2F4m
+	w3fTA7+s7OEDk0cm/9ORowDdlIEmj9VVdRo0LX5gf0P9xqJV+lE7GDQ4u3fILM0XM93Tn0N1NZt
+	LMTAco2h4kQoCfsNNVLAfD6EZDJ1L6XDQpllGo
+X-Received: by 2002:a17:90b:5686:b0:3a4:b061:2765 with SMTP id 98e67ed59e1d1-3ae89724af0mr7526355a91.15.1793593992148;
+        Sun, 01 Nov 2026 20:33:12 -0800 (PST)
+Received: from smtp-us-east1-p01-i01-si01.dlp.protect.broadcom.com (address-144-49-247-28.dlp.protect.broadcom.com. [144.49.247.28])
+        by smtp-relay.gmail.com with ESMTPS id 98e67ed59e1d1-3ae87fdda54sm2254665a91.3.2026.11.01.20.33.11
+        for <mfd@lists.linux.dev>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Sun, 01 Nov 2026 20:33:12 -0800 (PST)
+X-Relaying-Domain: broadcom.com
+X-CFilter-Loop: Reflected
+Received: by mail-yw1-f198.google.com with SMTP id 00721157ae682-8ab43f7f5faso45133707b3.2
+        for <mfd@lists.linux.dev>; Sun, 01 Nov 2026 20:33:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=broadcom.com; s=google; t=1793593990; x=1794198790; darn=lists.linux.dev;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=fRbf0Z+1fiqy9u/Fr2KM+zxkBlrG8mxbHJE8AZ9wMqk=;
+        b=EXob7rDTQFnzEHRw/Voymr4HCh72T6KimTMnsNCqUe3cgZMAfLiffWSPyUBJbl59A2
+         khtqkxCXwljsPv74SV2UW/2HKVKlafo6FV6n97tC67b0UfV40wjs+thkZU5pFByA1B14
+         bnnOdgtGteH4OUCFwJ0+1uCs7vdA7zyLM1tHY=
+X-Forwarded-Encrypted: i=1; AKwUvByX5Nta3WHazkYTQEp0Ew7fWt5MAN89zopAEgsLnVBYnYRKqjhgHWv5jGTKDXVkHM/0J2A=@lists.linux.dev
+X-Received: by 2002:a05:690c:6e87:b0:8b0:cdf4:94a9 with SMTP id 00721157ae682-8b2b66da1f7mr50565507b3.16.1793593990353;
+        Sun, 01 Nov 2026 20:33:10 -0800 (PST)
+X-Received: by 2002:a05:690c:6e87:b0:8b0:cdf4:94a9 with SMTP id
+ 00721157ae682-8b2b66da1f7mr50565277b3.16.1793593989824; Sun, 01 Nov 2026
+ 20:33:09 -0800 (PST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -76,490 +98,245 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/7] hwmon: Add Broadcom PMB PVTMON monitoring
-To: Linus Walleij <linusw@kernel.org>, Lee Jones <lee@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>,
- William Zhang <william.zhang@broadcom.com>,
- Anand Gore <anand.gore@broadcom.com>, Kursad Oney
- <kursad.oney@broadcom.com>, Florian Fainelli
- <florian.fainelli@broadcom.com>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?=
- <rafal@milecki.pl>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>, Stephen Boyd <sboyd@kernel.org>,
- Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>,
- Philipp Zabel <p.zabel@pengutronix.de>, Jonathan Corbet <corbet@lwn.net>,
- Randy Dunlap <rdunlap@infradead.org>,
- Benjamin Larsson <benjamin.larsson@genexis.eu>
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-clk@vger.kernel.org,
- linux-hwmon@vger.kernel.org
 References: <20261101-xg6846b-bcmbca-xrdp-reset-v2-0-455fe9eed5ee@kernel.org>
- <20261101-xg6846b-bcmbca-xrdp-reset-v2-6-455fe9eed5ee@kernel.org>
-Content-Language: en-US
-From: Guenter Roeck <linux@roeck-us.net>
-Autocrypt: addr=linux@roeck-us.net; keydata=
- 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
- np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
-In-Reply-To: <20261101-xg6846b-bcmbca-xrdp-reset-v2-6-455fe9eed5ee@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - bh-25.webhostbox.net
-X-AntiAbuse: Original Domain - lists.linux.dev
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - roeck-us.net
-X-BWhitelist: no
-X-Source-IP: 108.223.40.66
-X-Source-L: No
-X-Exim-ID: 1xNiMy-000000012bx-0sK1
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Source-Sender: 108-223-40-66.lightspeed.sntcca.sbcglobal.net [108.223.40.66]:39052
-X-Source-Auth: guenter@roeck-us.net
-X-Email-Count: 24
-X-Org: HG=direseller_whb_net_legacy;ORG=directi;
-X-Source-Cap: cm9lY2s7YWN0aXZzdG07YmgtMjUud2ViaG9zdGJveC5uZXQ=
-X-Local-Domain: yes
-X-CMAE-Envelope: MS4xfKHkGCyx3a9MXv8zPTHWJb4/tQ0SWT+eWwUn+VbHhceNBQVFOJqIbgpU3FVWnMeAZJLM9wvHsZnuDAhq4cTRIgzh1hTe9ld3oGULIkM3zQJfzt6lfYt2
- 6nML77Z6paYXWessuuOfwrsZtqo38UXv12xoPBMfHP+ffGTopQPiHM5vdIk7TSfXnyX8p4CERFYkDHKMcB4t4znqVrKk7pcRhLQ=
+In-Reply-To: <20261101-xg6846b-bcmbca-xrdp-reset-v2-0-455fe9eed5ee@kernel.org>
+From: William Zhang <william.zhang@broadcom.com>
+Date: Sun, 1 Nov 2026 20:32:57 -0800
+X-Gm-Features: AclHuK_ne7sIGwbtN3g2bUrDWVSMY6o8zRUq6PJsjGey8b4K4Tzi1qGEETgvuks
+Message-ID: <CAHi4H7GOMM9K6XG15vPyFMLOza3QQ7QPxUkCi85jA_e9D6YbKg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/7] BCMBCA PMB clock, reset and hardware monitoring support
+To: Linus Walleij <linusw@kernel.org>
+Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Anand Gore <anand.gore@broadcom.com>, Kursad Oney <kursad.oney@broadcom.com>, 
+	Florian Fainelli <florian.fainelli@broadcom.com>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Stephen Boyd <sboyd@kernel.org>, 
+	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
+	Guenter Roeck <linux@roeck-us.net>, Philipp Zabel <p.zabel@pengutronix.de>, 
+	Jonathan Corbet <corbet@lwn.net>, Randy Dunlap <rdunlap@infradead.org>, 
+	Benjamin Larsson <benjamin.larsson@genexis.eu>, mfd@lists.linux.dev, 
+	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-clk@vger.kernel.org, linux-hwmon@vger.kernel.org
+X-DetectorID-Processed: b00c1d49-9d2e-4205-b15f-d015386d3d5e
+Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
+	boundary="000000000000b31f87065f43a4bf"
 
-On 11/1/26 14:14, Linus Walleij wrote:
-> Expose the BCM6846 die temperature and seven voltage inputs through
-> hwmon using the shared Processor Monitor Bus (PMB) regmap.
-> 
-> Register the temperature channel with the thermal framework so
-> existing zero-cell device-tree thermal sensor references work.
-> 
-> Poll for valid samples with a bounded timeout, releasing the PMB lock
-> between reads. Report temperature in millidegrees Celsius, including
-> negative values, and voltages in millivolts.
-> 
+--000000000000b31f87065f43a4bf
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, Nov 1, 2026 at 2:14=E2=80=AFPM Linus Walleij <linusw@kernel.org> wr=
+ote:
+>
+> This is another of these big upfront design binding and driver hoards
+> that is the consequence of adding new SoC support.
+>
+> My stake is to be able to boot and test a full featured Cortex-A7
+> system and the BCM6846 XG6846B is one such system on my desk.
+>
+> It's been cooking for a while in various prototype forms.
+>
+> IMPLEMENTATION:
+>
+> The PMC contains various stuff so this needs to be a simple MFD node
+> so more things can be added into it later.
+>
+> Inside the PMC is the PMB, the processor monitor bus. This bridges
+Should have pointed this out last time.  PMB: Power Management Bus
+
+> to several individual peripherals which are very clearly distinct
+> devices on that bus.
+>
+> Handle the PMB with an MFD driver with clock, reset and hwmon
+> providers.
+>
+> The BCM6846 XRDP reset sequence enabled full-MTU traffic on all four LAN
+> ports and copper WAN and has been tested on that series. The zone
+> power-up sequence also passed direct CFE flash boot in the Linux 6.18
+> OpenWrt port; this folded v7.3-rc1 revision still needs hardware testing.
+>
+> MERGE STRATEGY:
+>
+> Through an MFD immutable branch once everyone ACKs the subdrivers,
+> it will take time I guess. All patches except the last one (DTS file)
+> to be queued in MFD.
+>
+> The patches were authored with the assistance of an LLM.
+>
 > Signed-off-by: Linus Walleij <linusw@kernel.org>
-
-Acked-by: Guenter Roeck <linux@roeck-us.net>
-
-Please let me know if you want me to take this patch through
-the hwmon subsystem.
-
-Thanks,
-Guenter
-
 > ---
->   Documentation/hwmon/bcm_pmb_pvtmon.rst |  53 ++++++++
->   Documentation/hwmon/index.rst          |   1 +
->   MAINTAINERS                            |   2 +
->   drivers/hwmon/Kconfig                  |  18 +++
->   drivers/hwmon/Makefile                 |   1 +
->   drivers/hwmon/bcm_pmb_pvtmon.c         | 232 +++++++++++++++++++++++++++++++++
->   6 files changed, 307 insertions(+)
-> 
-> diff --git a/Documentation/hwmon/bcm_pmb_pvtmon.rst b/Documentation/hwmon/bcm_pmb_pvtmon.rst
-> new file mode 100644
-> index 000000000000..7dba658bdc76
-> --- /dev/null
-> +++ b/Documentation/hwmon/bcm_pmb_pvtmon.rst
-> @@ -0,0 +1,53 @@
-> +.. SPDX-License-Identifier: GPL-2.0-only
-> +
-> +Kernel driver bcm_pmb_pvtmon
-> +============================
-> +
-> +Supported chips:
-> +
-> +  * Broadcom BCM6846 PVTMON
-> +
-> +    Access: Processor Monitor Bus (PMB), bus 1, device 6
-> +
-> +Author: Linus Walleij <linusw@kernel.org>
-> +
-> +Description
-> +-----------
-> +
-> +The process, voltage and temperature monitor (PVTMON) measures die
-> +temperature and seven voltage inputs. The driver uses the shared PMB MFD
-> +transport and obtains its clock and reset from the sibling providers.
-> +
-> +With CONFIG_THERMAL_OF enabled, the temperature channel also supplies
-> +device-tree thermal zones. The PVTMON node uses #thermal-sensor-cells = <0>;
-> +voltage inputs do not have thermal sensor indices.
-> +
-> +Sysfs attributes
-> +----------------
-> +
-> +All attributes are read-only. Temperature is reported in millidegrees
-> +Celsius and voltages in millivolts, using the BCM6846 vendor conversion
-> +formulas and input-divider ratios.
-> +
-> +================ ================================
-> +Attribute        Description
-> +================ ================================
-> +temp1_input      Die temperature
-> +in0_input        First 0.85 V input
-> +in1_input        Second 0.85 V input
-> +in2_input        VIN input
-> +in3_input        1.0 V input
-> +in4_input        1.8 V input
-> +in5_input        3.3 V input
-> +in6_input        Diagnostic test input
-> +in0_label        V0.85_1
-> +in1_label        V0.85_2
-> +in2_label        VIN
-> +in3_label        V1.0
-> +in4_label        V1.8
-> +in5_label        V3.3
-> +in6_label        Vtest
-> +================ ================================
-> +
-> +Labels follow the vendor channel names. Vtest is a diagnostic ADC input,
-> +not a supply rail. The driver does not change the analog test routing.
-> diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-> index 199ca79621e9..5a579391cf9e 100644
-> --- a/Documentation/hwmon/index.rst
-> +++ b/Documentation/hwmon/index.rst
-> @@ -54,6 +54,7 @@ Hardware Monitoring Kernel Drivers
->      axiado-pwm-fan
->      axiado-tsadc
->      bcm54140
-> +   bcm_pmb_pvtmon
->      bel-pfe
->      bpa-rs600
->      cgbc-hwmon
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 74f0783d512f..124d67ea1582 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -5451,7 +5451,9 @@ F:	Documentation/devicetree/bindings/hwmon/brcm,bcm6846-pmb-pvtmon.yaml
->   F:	Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml
->   F:	Documentation/devicetree/bindings/reset/brcm,bcm6846-pmb-reset.yaml
->   F:	Documentation/devicetree/bindings/soc/bcm/brcm,bcm6846-pmb.yaml
-> +F:	Documentation/hwmon/bcm_pmb_pvtmon.rst
->   F:	drivers/clk/bcm/clk-bcmbca-pmb.c
-> +F:	drivers/hwmon/bcm_pmb_pvtmon.c
->   F:	drivers/mfd/bcmbca_pmc3_pmb.c
->   F:	drivers/reset/reset-bcmbca-pmb.c
->   F:	include/dt-bindings/clock/brcm,bcm6846-pmb.h
-> diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
-> index 18c682e1a475..7e2bc32628d4 100644
-> --- a/drivers/hwmon/Kconfig
-> +++ b/drivers/hwmon/Kconfig
-> @@ -334,6 +334,24 @@ config SENSORS_AXIADO_TSADC
->   	  This driver can also be built as a module. If so, the module
->   	  will be called axiado-tsadc.
->   
-> +config SENSORS_BCM_PMB_PVTMON
-> +	tristate "Broadcom PMB PVTMON hardware monitoring"
-> +	depends on ARCH_BCMBCA || COMPILE_TEST
-> +	depends on MFD_BCMBCA_PMB
-> +	depends on COMMON_CLK
-> +	depends on RESET_CONTROLLER
-> +	select CLK_BCMBCA_PMB
-> +	select RESET_BCMBCA_PMB
-> +	select REGMAP
-> +	default MFD_BCMBCA_PMB
-> +	help
-> +	  Enable temperature and voltage monitoring through the Processor
-> +	  Monitor Bus on Broadcom BCM6846. With THERMAL_OF enabled, the
-> +	  temperature channel also supplies the thermal zones described in
-> +	  the device tree.
-> +
-> +	  This driver can also be built as a module called bcm_pmb_pvtmon.
-> +
->   config SENSORS_K8TEMP
->   	tristate "AMD Athlon64/FX or Opteron temperature sensor"
->   	depends on X86 && PCI
-> diff --git a/drivers/hwmon/Makefile b/drivers/hwmon/Makefile
-> index d4c345ed7261..edf8e8d2f345 100644
-> --- a/drivers/hwmon/Makefile
-> +++ b/drivers/hwmon/Makefile
-> @@ -62,6 +62,7 @@ obj-$(CONFIG_SENSORS_ATXP1)	+= atxp1.o
->   obj-$(CONFIG_SENSORS_AXI_FAN_CONTROL) += axi-fan-control.o
->   obj-$(CONFIG_SENSORS_AXIADO_PWM_FAN) += axiado-pwm-fan.o
->   obj-$(CONFIG_SENSORS_AXIADO_TSADC)	+= axiado-tsadc.o
-> +obj-$(CONFIG_SENSORS_BCM_PMB_PVTMON) += bcm_pmb_pvtmon.o
->   obj-$(CONFIG_SENSORS_CGBC)	+= cgbc-hwmon.o
->   obj-$(CONFIG_SENSORS_CHIPCAP2) += chipcap2.o
->   obj-$(CONFIG_SENSORS_CORETEMP)	+= coretemp.o
-> diff --git a/drivers/hwmon/bcm_pmb_pvtmon.c b/drivers/hwmon/bcm_pmb_pvtmon.c
-> new file mode 100644
-> index 000000000000..8b95dac83994
-> --- /dev/null
-> +++ b/drivers/hwmon/bcm_pmb_pvtmon.c
-> @@ -0,0 +1,232 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Broadcom BCM6846 process, voltage and temperature monitor (PVTMON).
-> + */
-> +
-> +#include <linux/bitfield.h>
-> +#include <linux/clk.h>
-> +#include <linux/hwmon.h>
-> +#include <linux/mfd/bcmbca-pmb.h>
-> +#include <linux/mod_devicetable.h>
-> +#include <linux/module.h>
-> +#include <linux/platform_device.h>
-> +#include <linux/regmap.h>
-> +#include <linux/reset.h>
-> +
-> +#define PVTMON_BUS		1
-> +#define PVTMON_DEVICE		6
-> +
-> +/* PMB register offsets are in 32-bit words. */
-> +#define PVTMON_CONFIG		17
-> +#define PVTMON_RESET_N		BIT(0)
-> +#define PVTMON_POWER_DOWN		BIT(1)
-> +
-> +#define PVTMON_ACQ_CONFIG		20
-> +#define PVTMON_ACCUM_ENABLE	BIT(0)
-> +#define PVTMON_SKIP_LENGTH	GENMASK(11, 8)
-> +
-> +#define PVTMON_CHANNEL_BASE	24
-> +#define PVTMON_NUM_CHANNELS	8
-> +#define PVTMON_VALUE		GENMASK(9, 0)
-> +#define PVTMON_VALID		BIT(18)
-> +#define PVTMON_SAMPLES		GENMASK(26, 24)
-> +#define PVTMON_CHANNEL_ENABLE	BIT(31)
-> +
-> +/* Voltage labels and divider ratios follow the BCM6846 vendor definitions. */
-> +static const struct {
-> +	const char *label;
-> +	unsigned int divisor;
-> +} bcm6846_pvtmon_voltages[] = {
-> +	{ "V0.85_1", 10 },
-> +	{ "V0.85_2", 10 },
-> +	{ "VIN", 7 },
-> +	{ "V1.0", 7 },
-> +	{ "V1.8", 4 },
-> +	{ "V3.3", 2 },
-> +	{ "Vtest", 10 },
-> +};
-> +
-> +static int bcm_pmb_pvtmon_init(struct regmap *regmap,
-> +			       struct reset_control *reset)
-> +{
-> +	unsigned int reg = BCMBCA_PMB_REG(PVTMON_BUS, PVTMON_DEVICE, PVTMON_CONFIG);
-> +	u32 config, acq, channel;
-> +	unsigned int i;
-> +	int ret;
-> +
-> +	ret = regmap_read(regmap, reg, &config);
-> +	if (ret)
-> +		return ret;
-> +
-> +	/* Do not reset acquisition already running for the PMC firmware. */
-> +	if ((config & (PVTMON_RESET_N | PVTMON_POWER_DOWN)) != PVTMON_RESET_N) {
-> +		ret = regmap_update_bits(regmap, reg, PVTMON_POWER_DOWN, 0);
-> +		if (ret)
-> +			return ret;
-> +		ret = reset_control_reset(reset);
-> +		if (ret)
-> +			return ret;
-> +	}
-> +
-> +	ret = regmap_read(regmap, BCMBCA_PMB_REG(PVTMON_BUS, PVTMON_DEVICE,
-> +						 PVTMON_ACQ_CONFIG), &acq);
-> +	if (ret)
-> +		return ret;
-> +
-> +	for (i = 0; i < PVTMON_NUM_CHANNELS; i++) {
-> +		reg = BCMBCA_PMB_REG(PVTMON_BUS, PVTMON_DEVICE, PVTMON_CHANNEL_BASE + i);
-> +		ret = regmap_read(regmap, reg, &channel);
-> +		if (ret)
-> +			return ret;
-> +
-> +		if (channel & PVTMON_CHANNEL_ENABLE)
-> +			continue;
-> +
-> +		/* Average 32 samples, matching the vendor acquisition setup. */
-> +		ret = regmap_update_bits(regmap, reg, PVTMON_CHANNEL_ENABLE | PVTMON_SAMPLES,
-> +					 PVTMON_CHANNEL_ENABLE | FIELD_PREP(PVTMON_SAMPLES, 5));
-> +		if (ret)
-> +			return ret;
-> +	}
-> +
-> +	if (!(acq & PVTMON_ACCUM_ENABLE))
-> +		return regmap_update_bits(regmap,
-> +					  BCMBCA_PMB_REG(PVTMON_BUS, PVTMON_DEVICE,
-> +							 PVTMON_ACQ_CONFIG),
-> +					  PVTMON_SKIP_LENGTH | PVTMON_ACCUM_ENABLE,
-> +					  PVTMON_ACCUM_ENABLE | FIELD_PREP(PVTMON_SKIP_LENGTH, 8));
-> +
-> +	return 0;
-> +}
-> +
-> +static int bcm_pmb_pvtmon_read(struct device *dev, enum hwmon_sensor_types type,
-> +			       u32 attr, int channel, long *val)
-> +{
-> +	struct regmap *map = dev_get_drvdata(dev);
-> +	unsigned int index;
-> +	u32 value;
-> +	int ret;
-> +
-> +	switch (type) {
-> +	case hwmon_temp:
-> +		if (attr != hwmon_temp_input)
-> +			return -EOPNOTSUPP;
-> +		index = 0;
-> +		break;
-> +	case hwmon_in:
-> +		if (attr != hwmon_in_input)
-> +			return -EOPNOTSUPP;
-> +		index = channel + 1;
-> +		break;
-> +	default:
-> +		return -EOPNOTSUPP;
-> +	}
-> +
-> +	/* Release the PMB between samples so other clients can make progress. */
-> +	ret = regmap_read_poll_timeout(map,
-> +				       BCMBCA_PMB_REG(PVTMON_BUS, PVTMON_DEVICE,
-> +						      PVTMON_CHANNEL_BASE + index),
-> +				       value, value & PVTMON_VALID, 1000, 100000);
-> +	if (ret)
-> +		return ret;
-> +
-> +	value = FIELD_GET(PVTMON_VALUE, value);
-> +	if (type == hwmon_temp) {
-> +		/* Signed arithmetic allows temperatures below zero Celsius. */
-> +		*val = (41335000 - 49055 * (int)value) / 100;
-> +	} else {
-> +		/* 880 mV ADC reference, accounting for each input divider. */
-> +		*val = 880 * value * 10 /
-> +			(bcm6846_pvtmon_voltages[channel].divisor * 1024);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int bcm_pmb_pvtmon_read_string(struct device *dev,
-> +				      enum hwmon_sensor_types type, u32 attr,
-> +				      int channel, const char **str)
-> +{
-> +	if (type != hwmon_in || attr != hwmon_in_label)
-> +		return -EOPNOTSUPP;
-> +
-> +	*str = bcm6846_pvtmon_voltages[channel].label;
-> +	return 0;
-> +}
-> +
-> +static const struct hwmon_ops bcm_pmb_pvtmon_ops = {
-> +	.visible = 0444,
-> +	.read = bcm_pmb_pvtmon_read,
-> +	.read_string = bcm_pmb_pvtmon_read_string,
-> +};
-> +
-> +static const struct hwmon_channel_info * const bcm_pmb_pvtmon_info[] = {
-> +	HWMON_CHANNEL_INFO(chip, HWMON_C_REGISTER_TZ),
-> +	HWMON_CHANNEL_INFO(temp, HWMON_T_INPUT),
-> +	HWMON_CHANNEL_INFO(in,
-> +			   HWMON_I_INPUT | HWMON_I_LABEL,
-> +			   HWMON_I_INPUT | HWMON_I_LABEL,
-> +			   HWMON_I_INPUT | HWMON_I_LABEL,
-> +			   HWMON_I_INPUT | HWMON_I_LABEL,
-> +			   HWMON_I_INPUT | HWMON_I_LABEL,
-> +			   HWMON_I_INPUT | HWMON_I_LABEL,
-> +			   HWMON_I_INPUT | HWMON_I_LABEL),
-> +	NULL
-> +};
-> +
-> +static const struct hwmon_chip_info bcm_pmb_pvtmon_chip_info = {
-> +	.ops = &bcm_pmb_pvtmon_ops,
-> +	.info = bcm_pmb_pvtmon_info,
-> +};
-> +
-> +static int bcm_pmb_pvtmon_probe(struct platform_device *pdev)
-> +{
-> +	struct device *dev = &pdev->dev;
-> +	struct regmap *regmap = dev_get_regmap(dev->parent, NULL);
-> +	struct device *hwmon;
-> +	struct reset_control *reset;
-> +	struct clk *clk;
-> +	int ret;
-> +
-> +	if (!regmap)
-> +		return -ENODEV;
-> +
-> +	reset = devm_reset_control_get_exclusive(dev, NULL);
-> +	if (IS_ERR(reset))
-> +		return dev_err_probe(dev, PTR_ERR(reset), "failed to get PVTMON reset\n");
-> +
-> +	clk = devm_clk_get_enabled(dev, NULL);
-> +	if (IS_ERR(clk))
-> +		return dev_err_probe(dev, PTR_ERR(clk), "failed to enable PVTMON clock\n");
-> +
-> +	ret = bcm_pmb_pvtmon_init(regmap, reset);
-> +	if (ret)
-> +		return dev_err_probe(dev, ret, "failed to initialize PVTMON\n");
-> +
-> +	hwmon = devm_hwmon_device_register_with_info(dev, "bcm6846_pvtmon", regmap,
-> +						     &bcm_pmb_pvtmon_chip_info, NULL);
-> +	if (IS_ERR(hwmon))
-> +		return dev_err_probe(dev, PTR_ERR(hwmon), "failed to register hwmon device\n");
-> +
-> +	/* Acquisition remains enabled for the PMC firmware after unbinding. */
-> +	return 0;
-> +}
-> +
-> +static const struct of_device_id bcm_pmb_pvtmon_of_match[] = {
-> +	{ .compatible = "brcm,bcm6846-pmb-pvtmon" },
-> +	{ }
-> +};
-> +MODULE_DEVICE_TABLE(of, bcm_pmb_pvtmon_of_match);
-> +
-> +static struct platform_driver bcm_pmb_pvtmon_driver = {
-> +	.probe = bcm_pmb_pvtmon_probe,
-> +	.driver = {
-> +		.name = "bcm6846-pmb-pvtmon",
-> +		.of_match_table = bcm_pmb_pvtmon_of_match,
-> +	},
-> +};
-> +module_platform_driver(bcm_pmb_pvtmon_driver);
-> +
-> +MODULE_AUTHOR("Linus Walleij <linusw@kernel.org>");
-> +MODULE_DESCRIPTION("Broadcom PMB PVTMON hardware monitoring driver");
-> +MODULE_LICENSE("GPL");
-> 
+> Changes in v2:
+> - Use a shared PMB regmap in all child drivers, keeping keyhole semaphore
+>   handling and timeout recovery inside the MFD provider.
+> - Drop PCIe reset IDs and sequences pending proper power and lane
+>   configuration handling.
+> - Power up the XRDP, Runner and WAN zones before the XRDP reset pulse,
+>   preserving the sequence tested with direct CFE flash boot in OpenWrt.
+> - Describe clock, reset and PVTMON PMB child nodes with separate
+>   compatibles.
+> - Move the PMB transport and accessor header under MFD and register
+>   clock, reset and PVTMON MFD cells matched to their child DT nodes.
+>   Select reset variants through OF match data.
+> - Add PMB clock support and give PVTMON clock and reset resources.
+> - Add PVTMON hwmon support for temperature and all seven voltage inputs,
+>   retaining the zero-cell thermal sensor through the hwmon bridge.
+> - Add a separate BCM6846 clocks and monitoring DTS patch.
+> - Drop the unnecessary literal block marker from the PMC description.
+> - Use the BCM6846-specific "brcm,bcm6846-pmc" compatible.
+> - Expand PMC as "Power Management Controller" throughout.
+> - Move the LLM assistance disclosure from trailers to the cover letter.
+> - Drop the RFC prefix.
+> - Link to v1: https://patch.msgid.link/20261014-xg6846b-bcmbca-xrdp-reset=
+-v1-0-daf5d177e113@kernel.org
+>
+> ---
+> Linus Walleij (7):
+>       dt-bindings: mfd: Describe the BCM6846 PMC complex
+>       dt-bindings: soc: Describe the BCM6846 Processor Monitor Bus
+>       mfd: Add a shared BCMBCA PMC3 PMB transport
+>       reset: Add BCMBCA block resets through the PMB
+>       clk: bcm: Add BCMBCA PMB clocks
+>       hwmon: Add Broadcom PMB PVTMON monitoring
+>       ARM: dts: broadcom: Add BCM6846 PMB clocks and hardware monitoring
+>
+>  .../bindings/clock/brcm,bcm6846-pmb-clock.yaml     |  39 +++
+>  .../bindings/hwmon/brcm,bcm6846-pmb-pvtmon.yaml    |  42 +++
+>  .../devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml  |  82 +++++
+>  .../bindings/reset/brcm,bcm6846-pmb-reset.yaml     |  31 ++
+>  .../bindings/soc/bcm/brcm,bcm6846-pmb.yaml         |  80 +++++
+>  Documentation/hwmon/bcm_pmb_pvtmon.rst             |  53 +++
+>  Documentation/hwmon/index.rst                      |   1 +
+>  MAINTAINERS                                        |  16 +
+>  arch/arm/boot/dts/broadcom/bcm6846.dtsi            |  47 +++
+>  drivers/clk/bcm/Kconfig                            |  11 +
+>  drivers/clk/bcm/Makefile                           |   1 +
+>  drivers/clk/bcm/clk-bcmbca-pmb.c                   | 389 +++++++++++++++=
+++++++
+>  drivers/hwmon/Kconfig                              |  18 +
+>  drivers/hwmon/Makefile                             |   1 +
+>  drivers/hwmon/bcm_pmb_pvtmon.c                     | 232 ++++++++++++
+>  drivers/mfd/Kconfig                                |  11 +
+>  drivers/mfd/Makefile                               |   1 +
+>  drivers/mfd/bcmbca_pmc3_pmb.c                      | 297 +++++++++++++++=
++
+>  drivers/reset/Kconfig                              |  13 +
+>  drivers/reset/Makefile                             |   1 +
+>  drivers/reset/reset-bcmbca-pmb.c                   | 309 +++++++++++++++=
++
+>  include/dt-bindings/clock/brcm,bcm6846-pmb.h       |  42 +++
+>  include/dt-bindings/reset/brcm,bcm6846-pmb.h       |  11 +
+>  include/linux/mfd/bcmbca-pmb.h                     |  11 +
+>  24 files changed, 1739 insertions(+)
+> ---
+> base-commit: 6628e7d4c6b25c8d18f1345e3a20d21829aae7e4
+> change-id: 20261013-xg6846b-bcmbca-xrdp-reset-de71b80c25a4
+>
+> Best regards,
+> --
+> Linus Walleij <linusw@kernel.org>
+>
 
+--000000000000b31f87065f43a4bf
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
+
+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
+PRi27wH/XHTDMdyL0Org+kxniXue6MSNJvcQwaLO/UQrmgTygBlVGa+Qg9ZFfS00xvuqeYH7tImO
+48WiXeu9rgn5KTH0IWP1+R74KIgxJQ+65la+caZvxwC9V3ik5p/LOGA2qS4GEjGuaYF8QKhRTR4h
+/QBSktqZLbzVxpjJXrqFTA2BLlYRp9hPhqNxbn46WuLufpMWhFtjUoQi/8fRRWRsMAY0o1J0f+kB
+6EI8FoxPTOpvuLRonqHIWMHk5YRnDdqJ3G5Oc8zmV+UCAwEAAaOCAd4wggHaMA4GA1UdDwEB/wQE
+AwIFoDAMBgNVHRMBAf8EAjAAMIGTBggrBgEFBQcBAQSBhjCBgzBGBggrBgEFBQcwAoY6aHR0cDov
+L3NlY3VyZS5nbG9iYWxzaWduLmNvbS9jYWNlcnQvZ3NnY2NyNnNtaW1lY2EyMDIzLmNydDA5Bggr
+BgEFBQcwAYYtaHR0cDovL29jc3AuZ2xvYmFsc2lnbi5jb20vZ3NnY2NyNnNtaW1lY2EyMDIzMGUG
+A1UdIAReMFwwCQYHZ4EMAQUDAzALBgkrBgEEAaAyASgwQgYKKwYBBAGgMgoDAjA0MDIGCCsGAQUF
+BwIBFiZodHRwczovL3d3dy5nbG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzBBBgNVHR8EOjA4MDag
+NKAyhjBodHRwOi8vY3JsLmdsb2JhbHNpZ24uY29tL2dzZ2NjcjZzbWltZWNhMjAyMy5jcmwwJQYD
+VR0RBB4wHIEad2lsbGlhbS56aGFuZ0Bicm9hZGNvbS5jb20wEwYDVR0lBAwwCgYIKwYBBQUHAwQw
+HwYDVR0jBBgwFoAUACk2nlx6ug+vLVAt26AjhRiwoJIwHQYDVR0OBBYEFHjI7pbQZurVKsSRE/a9
+7gUEyVCkMA0GCSqGSIb3DQEBCwUAA4ICAQCFA4fU1GnG8sY7kyUXp5tle+VeWveoWb272jPauU5R
+w+udkhVXmnR0Kg7RgkCD00PLTKHNRyegXXDMArs3N9NhO3s9eSp9KjDh+h3WuQWCJH3QBHLGW0qE
+fyV87wUtBIy/QsHwO4S8OlOZiXECR7V1EGIF6t3s0W+3UzgYeHL+Ttuhda+2wIVY0EbS0eNH9Vob
+4YG17VTBBe7hyobXFpd9d1JGENFzIWncPUshOE0Wv7KlkrRc6aBOpL4p5xO1pHi9h9w8utyHkMoV
+nefXixkn5YVHnuV/jbSF/IM4Mlqt0E+n/TRp2c0eR+1AauZKENV2syNBo4aMa0BkmikBjLSnDjt/
+TYQdwHNWdV495n71idvueWwTFUhUsnudYcnh42eZENopBOYjVu2WhsffyrNz0hsuR85LriqSuBbf
+drd9DMo3DgtfJ7hh4sEAhSw/x/Br86rfLBftZMU02htlnkOI9Tp1QuDsr9+MsqY6AjKeXAy67m7H
+TVAZ9uyO9N20yU0p7igESOWKR1ccL1TPA1jrSHK18Y75ot5199FNWeE/UKoDKSML39iPZho9XPh/
+/RlsfRFiVOPrI5Gwi4YfIfi0jjEWf310/CYEmA5jrp5gUQSdo/+FgfXLKDFiEHCf5b3B1l70r6bR
+WkDCNNacYJWZtSp87i6jmw+l5xx7OkEJ9DGCAlcwggJTAgEBMGIwUjELMAkGA1UEBhMCQkUxGTAX
+BgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gR0NDIFI2IFNNSU1F
+IENBIDIwMjMCDD2ooFIye/WiO3KgZTANBglghkgBZQMEAgEFAKCBxzAvBgkqhkiG9w0BCQQxIgQg
+WL73HYMBjgKbRy7APQ9J08nbtmyMYigvD9nXlR0eLHkwGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEH
+ATAcBgkqhkiG9w0BCQUxDxcNMjYxMTAyMDQzMzEwWjBcBgkqhkiG9w0BCQ8xTzBNMAsGCWCGSAFl
+AwQBKjALBglghkgBZQMEARYwCwYJYIZIAWUDBAECMAoGCCqGSIb3DQMHMAsGCSqGSIb3DQEBBzAL
+BglghkgBZQMEAgEwDQYJKoZIhvcNAQEBBQAEggEAnd9zZ8coVwiodH/cLJ94dfhdrmwQ3hK2I5QR
+0+3ToA3i2loYx6+4MXDTXPfPsMy0sDaCchL82+n3kDwRoaUzDcN1pgDZm/JD+0jgs19oRhFjvl+K
+CRSq9EpK/3x2SRZkuc0uwX4mP6yILvkCt3gU//7Vrk4n0RE7ALCO7JvbmBaCZu8jjNVOwYa7klKe
+EZLXEixcg1HsIOwz1+tpGk/G6NnPgQNw0tqFQO5ib2PiT44CV37H/yqpLIPUv4vMxYgfl/Gs7aog
+ucS2mbcEggvMU9HSUw5kDKEbagpm6EZWoj8nCXd3nqu9AR/vtw3kSEBOP/I1lxPf4NoeLT8oNBlk
+4w==
+--000000000000b31f87065f43a4bf--
