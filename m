@@ -1,89 +1,89 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.231.132
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793597634;
-	b=oDFkg4ms7cj/3JW76NTTvdQYL4ZF2s/F3rWugVBtE9gGPwHqwu+VIdP8TC3cmYZ8rXwy
-	 iru6Ckrr1YOTqiThV7FV28JlnneUaMiOPW/VVsmBnxWHmtu4xv+lAFJeHHrBML7IxoqhS
-	 OLEw2F/b8FPvfszykydwkE7jqf39/L6m2NiDz55p55PAtA0FyC3i2aOXUqtVAt0Dop4Iy
-	 UVIQlovJgXoJzVI7mTYJ7oBjc8Lm5464a6qIGXitbl47KsafoXPbkSZIZPbmK+DdB6j42
-	 POdh9D5qK022wCDQn56eIUP9iT9Fmc199cV/iy0pPW7cv2xZyBZrqm7La4xcjEG2nQQ==
+	t=1793597637;
+	b=Vjq9eJd3Qz7T1q6F6l/zIOL8FW1K/OUz34bxa/MPUA67O9XKyNrb38bwwfWrSjiThdyC
+	 YyyLJcDQGUtPu+8FX77r6m/NyD549NDjqJ6jeEqg1Lqki2INle2/ZmZ9AgICv20CzbEAs
+	 mQmEOhbZZzswRueTAU3yjYpnhVaYju+SsFLrZdwTUyrqAK84cRSFeYk7GijAdxhYSn+S7
+	 Xb5O5AchNEaJfhw071WSMq5w+tpejp+JocFX4PSFfA14MBO69VeRrBVmNaVw9v0RjfzAD
+	 vubkLciliqiYWEOnKbnfw/3H6raktXV6I2t9ffRR7u+I6AK5XbLMZpmYp8L+pwPxB2w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793597634;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793597637;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:Subject:Date:Message-Id:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key;
-	bh=I5XmwGd7P9E6+oiwB7TsngJgYsa5mbeAvM601lSlbzM=;
-	b=zB52gXtgRC5mAmfV3FwzFTHwLGRbk9bZ40YN0fAH2yUoHOxTI/YczifLvhtgEQ/QUreJ
-	 33EAK14CF4A58pkxmVGOD8gAvOEHLXX/zGSNCub1DSPGtdohlIzlbG3Tt0l9Q29xuwpmS
-	 HPK3YsCXOa793CrfZnXjS38AeFjMk0CaqSinKzAJ6KHdgfsiZf38gNKGLGrofqVd7Rrnz
-	 WSJ6lA/MHkHaOkeYOIBmqU0IeOd0lp00Im0Lv8IeDz5nFA5SKRuZG6xDI3WEQWNA8G8rF
-	 XU7GrdgD0VRh+laoRLrqF9ZpVt9JlencBBpJDjy02GChOrmkqPzxkbXZvZMzmpkCq7w==
+	bh=fzpgC5Iq6UmNwAV/YxFMKMcnuTBJ158cMfcPvMXN/0k=;
+	b=k57DEtYcT7JsdwuyExs4vsFzFQgQu7jZpuFq7e2NQP+IXvIVU+98tvQ/C3I9f3CaraKc
+	 mAqJ5IaHTuxkGW8Q+gIK2FRo4z4yNj4r17q3hGvHBeGqSB6r/IXSdep+XB5/sG1BzFhmw
+	 VRfWXBPN3k3MTR8lYqCsVsRq4Bk1MKmmFOQkarfX9nXE0dLhxxv1r3vwdzpx3Grhhd19L
+	 PYQwccK/VMaoM9cMX/0Tnfj0GBytHhwoiTUBjbPllGhGFevPx0uRfSUxyCGs6HJerweXk
+	 na5GnOhSDyZnl0MU4iDhCSTZsUVWCG2kzn0vlYwFNZ3Sb9zdI+hJB+5Ea1cBSIjdsXg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=YTbfx91Y;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=w97k00Om;
 	arc=none smtp.remote-ip=74.125.231.132
 Received: from mail-oo2-f4.google.com (mail-oo2-f4.google.com [74.125.231.132])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE250606A330
-	for <mfd@lists.linux.dev>; Mon,  2 Nov 2026 05:33:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CE250606A330
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12BD9606A337
+	for <mfd@lists.linux.dev>; Mon,  2 Nov 2026 05:33:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 12BD9606A337
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=YTbfx91Y
-Received: by mail-oo2-f4.google.com with SMTP id 006d021491bc7-70399d7f076so1215964eaf.1
-        for <mfd@lists.linux.dev>; Sun, 01 Nov 2026 21:33:53 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=w97k00Om
+Received: by mail-oo2-f4.google.com with SMTP id 006d021491bc7-702f1150a16so316434eaf.1
+        for <mfd@lists.linux.dev>; Sun, 01 Nov 2026 21:33:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793597633; x=1794202433; darn=lists.linux.dev;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=I5XmwGd7P9E6+oiwB7TsngJgYsa5mbeAvM601lSlbzM=;
-        b=YTbfx91YmFcknSoBBd7BFdTCpIwU3DEtciP39dmP0oIIN0bTOHzFgkTUKYRTi0CTON
-         ogg8hXa9vYPX3b7J21LYrWZ3sljVlM9faU8nDI6lhYN5ZPnC1aN3Urksh32xymrhu+3K
-         Dup/uxN3NTHDI1XVsP+vKadNdp3QxfsrO2u5dBKdVCCJ50gcAuawPUOSQfIhdnfBaPM8
-         Cdd58fpH2US1av7I9ELQI3zK4XF8RUlGq2kmteej1mSWTzXrYEDE+eZthpUoKk8GhvZ2
-         M6EHxmfjBg2NOZW/Y8qu/ir04T2XeYTKJGa8YUTLHoI64O6vY1/iqZrCztxnmyJNiLZf
-         AAGA==
+        d=gmail.com; s=20260707; t=1793597636; x=1794202436; darn=lists.linux.dev;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=fzpgC5Iq6UmNwAV/YxFMKMcnuTBJ158cMfcPvMXN/0k=;
+        b=w97k00OmSa2PqxhVJsxyrsLyp4FYWsLMCvgYphiI5dG1/4Pfxr1q4rNX3niDg4S9+f
+         NJmdAiXYDJNSDPeua7LBi/LKCxmPmISevOvmY+n3nGzyJAfEKnHVbh5AsDBeYdD1d0Wx
+         l20Nka9fo0AljfAfAu6HfKzkcYh40S5J0YwGfDcmg55fkyAGJYujUku/fkIIiaHe39Rn
+         zA4UpLAbNmaMpy2NCABUGcWa6BRldHSfKmSHQWdnzU1NDfo9AdycSewDKGq4GawbeU/7
+         Ph3sIkLHv9LipP+ICVkMuRWtfNy62dCC9RiNOmsUuMpKctv/THvcquv9JGkBWVUzR/07
+         xdtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793597633; x=1794202433;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=I5XmwGd7P9E6+oiwB7TsngJgYsa5mbeAvM601lSlbzM=;
-        b=0VkB+F7gFT5hwgFTH3Idipzm5QPFPmyd6O7nZ1hk34NQMnMqrjks9y60xr8/JQiR2c
-         3ZhqiMJkOrNmRlxz6VT2XBJVsT1cjYpOvCpUeC0r9Y0cGvmA5FwJX/um5a6fKxQkWS29
-         h8ZBrBPpoSHnZ8x4o8QFxqSvNJMtqEZDrlWE+DBRga4AGvcdPp+A/zuxcp96Z2kBHmDl
-         87NGOQ6mzWfAQvNCZhHI896C1FQt2PIf6Tvl3rl4wJhMizWPFmy8re7ohBZKziZEKsub
-         vJOJVSVsaGfQGgeQlnnDb/cfEendWHkpD9T6EfqgXlCt1FnXsB8+gpJ84XURMj7n+PW1
-         xRQw==
-X-Forwarded-Encrypted: i=1; AKwUvBySk8586nK4IkyslUu3rZ5Yo6LDohNr+/+F92xjdG5V7lz0NXgnWS/nUomK+Mut41cNaBI=@lists.linux.dev
-X-Gm-Message-State: AFq9FYLzqgAAB2eCa/GphRZnbtlYxkPsxMEjr43u9g5nB2+MM4laO5bd
-	J8wnCKAHF4lL/PpsbpqwMJtsklWVCnnuaSxzeOMRG5gdcou+RHxZ/L4h
-X-Gm-Gg: AYBFou0WJcDnnMgc2oZjyUEpfRF93MoD0DQO8ihcpFZGNNFNK7Rh1P7RBb9ayrB+LWp
-	rGPog3RL6y8hS812T6UZqikJVrcde0TT8T6nsrzh8AFcmSPq9S4zLRkF0odSHSnvyAg7ZwQxPwq
-	xoPFtd4huD5glCg6mOHudfnCMfeqkxewcfaAxiCdZD6uuDV2p80mv8lFnywPQeGBHEsQ33vq7QI
-	ZhjIaF7Y6NF7HhpJwg/xjFuKCIdQEcBYJs+yKWleb7IpqAQPOLG5YHqBXngQcBsbJ6ucCU7+eMU
-	7Wr2UyKRokgTwCX92VeLCZVNKrSal7XHzdLNSftUkp3dYgOO6cL5xGMlMD90u+l7YfVdumcRcff
-	JkZl0OvtI5tZkwtYMh5NKcNOUZozK3wo1Xu1AZAU8y20xOTkK5caXpwKjCUcBwSXcHb2PkXk6Xz
-	mkhko7y66PUXe1YVqVI37H5zgrLJxpvDj6rUlbI12ZqT9yWSkwJ4tuHFm0tEL8ix5D5z8B/vtat
-	xPohvUSgr9q4aTqkgrgog9skWfOjOnoI8ocNZmRyy6eEtTKnge5HNH+hFPtfqQgquxWJWOT836G
-	RkiUPfjgMBq8F223wJPQ1RaT
-X-Received: by 2002:a05:6820:208c:b0:6f8:2346:cd78 with SMTP id 006d021491bc7-714f24fb531mr4934585eaf.5.1793597632682;
-        Sun, 01 Nov 2026 21:33:52 -0800 (PST)
+        d=1e100.net; s=20260707; t=1793597636; x=1794202436;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=fzpgC5Iq6UmNwAV/YxFMKMcnuTBJ158cMfcPvMXN/0k=;
+        b=ZjmZdZmjwDhS7kKrPcbfTfckF6hbUsflFf1De9abb/aMgUileohIp58acS88HgbIMT
+         txEo57pS4EcFRXfOxXIeAHyRkKpBFp6/45EoNwcH/f5K/QWoN6Yjt3ZIgcYPlfippigz
+         VVHXPgAnNwWtdu4mrI6XbT2EZacL/Bhmqo/YuQC9x3XuKq/LCub9p9c39qj7sjEPpdX+
+         PbRn6ftz2WSKwvU9VXh+Mami3nLdRboY7mF07npNRrQDUSn66MJxZi9jzEZ2FgKMCDH1
+         cozSsH+HmSWdCLhM5PfE/Qw8jQ7/NEbJ3+xvMJ3dNnW9SnmLbtETdSi4vxSfxN39i9PN
+         79Ww==
+X-Forwarded-Encrypted: i=1; AKwUvBySs3U7GTqqulcuF4tIOVYuQ1Hs0ldqGUXUy7siYFisahym3jeDrqEQkIit4HPgxH0qvt0=@lists.linux.dev
+X-Gm-Message-State: AFq9FYLGeDvmEZDFFaATwFKpo/NzjuwMR8ECDlA6aM/8DAjhJd4DurWd
+	N4edRKWkSCrTQkgjXT5e0oY3dC//Zr8hlhVPz+keG/pvmhTgDAEssLFO
+X-Gm-Gg: AYBFou3HogZCXFukA86SGFKvuY7HN8dUKMoPUhMf3LT7dmvMbRwsaGCIjpI4qn/562Y
+	3HSUvkQUdUQeNeMl6sjNhfEUZ3u2e4DL0SwKq2E77zxvWMHxl65SG2ni9catQID9aDKmYMfTGq6
+	5JFB4GmRS12bgj44FnWe9CNDd0lM9aVQAPs+j3EL39ZsqOQsAkk5KMxsmAuWDw9Z0swgTTJJPZP
+	RyzF7ckm1l0hKRUP/7TN/bWQBybAH1xjasSnYKy7cXa6TWvU7jkDMnVHBGLehkTJIGu3bC6jnwm
+	vxOLFSfslziXjQOMT/3g6IPTr83I4wACH8aDcVbuTQwR0ttzLsSW47wSiqrJptgZc7EkHzqa2kk
+	Yn3Hf1be54zfd6tEBZFMuHHjHfy35Dtu45sFjqtP0I0WzV11RHPD9wZf8vaFLs8UyR3T7G0Ra1q
+	fI0gRcN8c6BSUI/Hqrr5KoW+ybU07scRoeRiHkUyQwhznNq32ramZ5llJZjRjs4WrJeR9vZyuKM
+	Poxh6esoMEWJ0JPjQtpGIgsweX/0WIE9ivJVm0TVXSb4K2MCP5IjHLSat0EK0TquSiOQTXthzM1
+	S9NXVVqeq34/XPtOKXWySqZc
+X-Received: by 2002:a05:6820:1343:b0:70e:3e8e:efdf with SMTP id 006d021491bc7-714f2ae369bmr4807837eaf.89.1793597635764;
+        Sun, 01 Nov 2026 21:33:55 -0800 (PST)
 Received: from [192.168.18.164] ([2600:8804:5716:d800::f01a])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-714f2a818b9sm8321164eaf.1.2026.11.01.21.33.49
+        by smtp.gmail.com with ESMTPSA id 006d021491bc7-714f2a818b9sm8321164eaf.1.2026.11.01.21.33.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 01 Nov 2026 21:33:51 -0800 (PST)
+        Sun, 01 Nov 2026 21:33:54 -0800 (PST)
 From: Ryan Brue <ryanbrue.dev@gmail.com>
-Subject: [PATCH 0/2] rtc: mt6397: provide the RTC's 32 kHz output as a
- clock
-Date: Sun, 01 Nov 2026 23:33:45 -0600
-Message-Id: <20261101-rbrue-suez-upstreaming-mt6397-rtc-32k-v1-0-9758f38d7053@gmail.com>
+Date: Sun, 01 Nov 2026 23:33:46 -0600
+Subject: [PATCH 1/2] dt-bindings: mfd: mediatek: mt6397: describe the RTC's
+ 32 kHz output
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -95,10 +95,9 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAA/x3NUQrCMAwA0KuUfC/QNqNqryJ+dDWbQVZH2oo4d
- nfBd4G3Q2UVrhDNDspvqfIqEI0bDORHKguj3CEa8NYHZ/2IOmlnrJ2/2LfalNMqZcG1BbqcUFt
- G8k+0yWUX5kB0JhgMbMqzfP7P9XYcPwxqctd3AAAA
-X-Change-ID: 20261024-rbrue-suez-upstreaming-mt6397-rtc-32k-0a1c16f63383
+Message-Id: <20261101-rbrue-suez-upstreaming-mt6397-rtc-32k-v1-1-9758f38d7053@gmail.com>
+References: <20261101-rbrue-suez-upstreaming-mt6397-rtc-32k-v1-0-9758f38d7053@gmail.com>
+In-Reply-To: <20261101-rbrue-suez-upstreaming-mt6397-rtc-32k-v1-0-9758f38d7053@gmail.com>
 To: Sen Chu <sen.chu@mediatek.com>, Sean Wang <sean.wang@mediatek.com>, 
  Macpaul Lin <macpaul.lin@mediatek.com>, Lee Jones <lee@kernel.org>, 
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
@@ -112,57 +111,49 @@ Cc: linux-pm@vger.kernel.org, mfd@lists.linux.dev,
  linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, 
  linux-rtc@vger.kernel.org, Ryan Brue <ryanbrue.dev@gmail.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793597629; l=2043;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793597629; l=1164;
  i=ryanbrue.dev@gmail.com; s=20260906; h=from:subject:message-id;
- bh=+AH9smEBqnGEd7Be3eQjkLdg1eIcwhdAuP4jWupgQ64=;
- b=eov85h6Nzm1K0qbn0yx99tHtOauCX37OjFlOU3aSi5SRuzvUuLcnssjUB6YtD+fdgUHfOIXME
- oIzVcU1KxpLA/SNkK/Wou5Q7v2zxcnGEVyrhCx3FDnngfTHaWMF3e7u
+ bh=GgCulyiRe8JqnSbuYJBNp+S895kQy071XDUKSDOt2BQ=;
+ b=UE2preFnWrcfBUGQB9fs2ZLD6a5Iic6l7jXV2HPJqVzl40mf4eCBFIpiaxRBYwOVNNpkVcGzQ
+ NP955JBBzvAD5zz3cEjRiUa5q86u2PzDOoj38Yx6ZzP9oKolUFV8h/8
 X-Developer-Key: i=ryanbrue.dev@gmail.com; a=ed25519;
  pk=KsUvVaP//v/2q+ZBuacc7cLbsyEYn+AD71Sn28oZWKo=
 
-The MT6397 RTC drives a 32 kHz clock out of the PMIC, which boards use as
-the sleep clock of a Wi-Fi/Bluetooth combo chip. RTC_CON.F32KOB gates it,
-and mainline never touches that bit, so the chip only works if the
-bootloader happened to turn the output on.
+The MT6397 RTC drives its 32 kHz clock out of the PMIC, where boards
+use it as the sleep clock of a Wi-Fi/Bluetooth combo chip. The output
+is off unless something turns it on.
 
-On the Amazon Fire HD 10 (2017), which can boot through U-Boot instead of
-the vendor's LK, nothing sets it in the former - the bit is set at every
-boot, and the MT6630 combo chip's Wi-Fi and Bluetooth never come up.
-Letting the RTC provide the output as a clock lets the chip's
-mmc-pwrseq-simple enable it. With the clock wired up both came up on that
-board in two boots out of two, and in none of three without it.
-
-The driver registers the clock only when the RTC node has #clock-cells,
-so no existing board changes. The MT6323 shares the MT6397's driver data
-and gets it too; every MediaTek PMIC RTC whose registers I could read has
-F32KOB at bit 5 of RTC_CON, but for the MT6323 that is inferred from the
-shared driver data rather than read from a datasheet.
-
-Both patches apply on top of the RTC nvmem layout pair, new in
-v7.4-rc1. That pair went through both rtc and mfd, so I'd suggest these
-two go through rtc only, with Lee's ack on patch 1, if that works for
-everyone.
-
-The board's devicetree that uses the clock is not upstream yet and follows
-separately.
-
-This series was developed with the help of an LLM.
+Let the RTC node provide it as a clock.
 
 Signed-off-by: Ryan Brue <ryanbrue.dev@gmail.com>
 ---
-Ryan Brue (2):
-      dt-bindings: mfd: mediatek: mt6397: describe the RTC's 32 kHz output
-      rtc: mt6397: provide the 32 kHz output as a clock
+ Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
- .../devicetree/bindings/mfd/mediatek,mt6397.yaml   |  6 ++
- drivers/rtc/rtc-mt6397.c                           | 85 ++++++++++++++++++++++
- include/linux/mfd/mt6397/rtc.h                     |  6 ++
- 3 files changed, 97 insertions(+)
----
-base-commit: 6628e7d4c6b25c8d18f1345e3a20d21829aae7e4
-change-id: 20261024-rbrue-suez-upstreaming-mt6397-rtc-32k-0a1c16f63383
+diff --git a/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml b/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml
+index 055625362951..3bfe1ad60d2d 100644
+--- a/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml
++++ b/Documentation/devicetree/bindings/mfd/mediatek,mt6397.yaml
+@@ -84,6 +84,11 @@ properties:
+ 
+       start-year: true
+ 
++      "#clock-cells":
++        description:
++          The 32 kHz clock the RTC drives out to other chips.
++        const: 0
++
+       nvmem-layout:
+         $ref: /schemas/nvmem/layouts/nvmem-layout.yaml
+         description:
+@@ -694,5 +699,6 @@ examples:
+ 
+         rtc {
+             compatible = "mediatek,mt6397-rtc";
++            #clock-cells = <0>;
+         };
+     };
 
-Best regards,
 -- 
-Ryan Brue <ryanbrue.dev@gmail.com>
+2.55.0
 
