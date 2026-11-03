@@ -1,100 +1,70 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.82.43
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793717275;
-	b=RREUamyN9qHCp/z/wD0ZqqB9BtY0yEP47e8CD7GXtezpmA74i7DBldc9XZGV/2KZhrzr
-	 OlI3r9hdgacc4qzqGCwEqwq6hQ75OamQ/u/ivUxyJ8Iyfwmz8N8QKVmNc0LgXcd1vwkwi
-	 eHdn3lrUTIw2N8Ri47cp4z7ukDrKJf28aA0Q1y59Tkv2TJqJ6Zlcv4t/2Lmv9vI/CrFmE
-	 U/PBgbAmLW1lj1gVUQuGtkKpRz2YnduiGROxWX7r+m3IE8k+JXKLIuelyhqJsgiZmpxjl
-	 KoYVA1axIl6E/maNJFCjowEyn/y4st28Cy/jblW3T1j0bPF/HbYLNnnM9oEnNeioDAg==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793717275;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
-	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=EmwaoLyEu5PNjBx2vvNAolYKonR5/swVcE8YNHDBpts=;
-	b=pSuN9Tp+sNV3w3rWL+6yHq1iaAYC4TDpDaWDuE2SP0UL5d612IIrm+C8FnqHGUzBQQ6K
-	 h3ElcDV8AwkaM+HkVJL70iJ7dDUClPE/QRxnv2FNEt1vPwGf3nku+Sjs2rfVVW5x9rC/w
-	 RtEKyrBl3fcpWLXRLkshQC8cYUSRko+UVAMXAEYz2qOR5Hp7Cad1K6CbmcUniByg7JnBA
-	 s0h0knw7Pcnll6AVSpelIM++krxcnjaxG00fnuCo+P/xDPKNazAtF6HBw1EJ2d90f3J9L
-	 vIxfuyj5Q9WSmeOxYs/AIZE/8SroEoNPkUrxIMwR3V6s6j5uDgrIUK3edlymtsG394w==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=LaM3TLEC;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.82.43
-Received: from mail-dl1-f43.google.com (mail-dl1-f43.google.com [74.125.82.43])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793718556;
+	b=A6d84S4d8rGyFD5xW0EmnHHxQC7hXVjMcWG3lvRkOyxYQngZtHUqUNb2i3jS3JwhfG1u
+	 cNVqTMhgarH6KPxbg9Q/gzAZWwxfoGZllTA/TUyUQ/G6Vi402ESs5+IoQBXWEARdsIkIS
+	 HEfPKCDbYyO+lRa1BBRIgkXeMmZuQE3iQXnkU1PAeVdFeXylNBt4MqXoE7jddJVInPT1Y
+	 eAfb37sJfexGRFtkZaQGiWA4t8KZgzvUGcgqVnkl6QfrmN128m2gW4+4EwF2PLAyDwpTU
+	 p9Jcb0nzksCWjUnVrpZHGoDyJDOC70s4h7HYriPPP83FUHZDQ5FK7GyA0wXRZlLQClA==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793718556;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-AI-Review-Draft;
+	bh=04sRIO3MjeYbz6CJp5GZCOCBS65b5l82fPhVgQ5j8Ig=;
+	b=V21CmhC2D5EL1JcCpLToV0V4oQB5pb6Gcjmv1hwR8wN0XFS0+Kw1WkJ+Hg1pz7hiNWM/
+	 EXMJABwjcyikgiMmsizundS4nJMzwoqVB63dKnx8VM6Id0rAeoRfbgInNYoFNL/xZisT8
+	 74gFaICbKCgbaK0B0Lq9O8Ak21XrbbjnV6zpviLqh6gisFrF+kSc6eikMliB3gtmQxgNe
+	 GSJH4xZaPZGmiRRIkrqMF4n2/Hzr0HCpdUawa2OIG3FkQt1fxarfTr1tjAFqahs1PFHPJ
+	 mq9MXrn+HGkZh2mYy7p62FyxCi9kXyx93AlwfM/VEccwy1nBx6C+hwedaNnhylejL8Q==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Ka8mU0zm;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D068A6083618
-	for <mfd@lists.linux.dev>; Tue,  3 Nov 2026 14:47:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D068A6083618
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E6186606B277;
+	Tue,  3 Nov 2026 15:09:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=LaM3TLEC
-Received: by mail-dl1-f43.google.com with SMTP id a92af1059eb24-1ae18eb9ad0so4353165c88.1
-        for <mfd@lists.linux.dev>; Tue, 03 Nov 2026 06:47:54 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1793717274; cv=none;
-        d=google.com; s=arc-20260327;
-        b=pcZvG7VTSzY7TC3K6zqBHG/goLFD1Z+4HVU/zsXVuN0VaUj9ZnKjXiTckTDoAnrn6P
-         vzG8BxYHCdKvwpA6GsM2ElO0ZN7xaGrZw59C6ml9NG1PhF3qsDBALdOJ0OQxlkLx5zgj
-         6OEt/c8vDULiSUk+mi0uebP1nxyGFHVtSfXuDQ0Z8qPAYY8R0/KlbgjNLD8mxrHbsVAb
-         i+m0NmZjUaSWoMyuZhrVN8bBthgdg9QOABSH7tlnbgaaM0xKr6r7jRqGHw0tYoCyStS2
-         Rwgvo1IkqUYWoca+y6zA6igF9I3O7VQokZQ4NpZcs2PtI7C9uzJpPKTZtefzfkGXpiwn
-         Hrew==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=EmwaoLyEu5PNjBx2vvNAolYKonR5/swVcE8YNHDBpts=;
-        fh=1JJZgJlCDjHPy266CfHXwFQ9VEpo1SV6LGQrT9lPy6Q=;
-        b=UfpdNI/47/Vfuhsn5J/mD7eBjQYFurqW4qMSZ25I2/mUM1szjMpCyd+lIITeUoJ4Dp
-         VZmoxhA1vlu9aAF7xZmVc3GJ18jrNRTsw/uZ+VuD2efMQqOSJq/9q+gDDLaQrxLJeACF
-         CCIwcf59ZL/2bEPH4PAKJGcZZupHWGHR6aND9pu4eKc39BpvQ1H2EwbPlvqmc5eB8bdy
-         Ste1sffNpkeymKak2SyryTw4Z4zKPs4AsodnVxoXUIshGprQmdIZdnkJR1ThwxbaR36O
-         amhdSzOoYBBNZiEXAru65/IOWxnJMb4yY3Ker9C8x0XE7C8m8GcHofEMG5UtTYeAtFX8
-         jkeQ==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793717274; x=1794322074; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=EmwaoLyEu5PNjBx2vvNAolYKonR5/swVcE8YNHDBpts=;
-        b=LaM3TLECPTEm6Z+llgVXBbeBrJ16IjhtRlo26xaKKTtTPZCs1sRxETHXVhwi5jzTvH
-         s2yX3zpMcb++uhmNraZo9DGRd5B35eb/dZzEbxUG4sYPmwwUPRVvNW0fpv9rmjX3pIiF
-         /AUpbvHD10G3L/BLFZDloJMI4t89jO0oz24/JQYUIlm6Hxstd/WGJ9HQN8BIkBodBSDw
-         ulmESGC8+Y7ic2rVNBw6vo092m3apdlaDxxBUcOofL8EdAKBdTyvGP9bQ5K7Mj3Fiug+
-         K/+Y7A8jskE8kDZrwqf28ppC/g2510hWFb0Ubn7CSs/jeYeYefUOfMfFG8k0FF8sfJzf
-         ZLvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793717274; x=1794322074;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=EmwaoLyEu5PNjBx2vvNAolYKonR5/swVcE8YNHDBpts=;
-        b=B1Yy9/ABhHLczLq0SXFa+PlJPyRuDUVC/PPZI/+V+15un0jNM/oNInvWo7yoCHtRkp
-         UbS678uSlh2BRjRNQbEg8OCrAeIYDnKxsMIJ2B8ZVRVS0rz/vTRa3pdqa3rFXj4sZ+dV
-         R2x4MGGbsnIc262HTDdocvqWnsIN3dGVrLSlV7IIMzK3/q9AZ6MjLsBXcceUcrm7eKc7
-         0iM9YaKdk8lWwNnv/JW/5gyBpCnhxyukDCTJvkMeDo40FiW2tUczai0dIkS9wa+8bAwR
-         sNTR8nCBK8gq4Imc3h/pryggyoiN39LQI/BQN1TaJhFCmwjgUp3GIq6RKGMO1JXR8LN+
-         i7HQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwk4lqh4zQmks2fiU4O5PDLW/CY8SAGjfLRqrzZ5ynLBBcL9/npcXWBBHRIu9QyNIWf2g4=@lists.linux.dev
-X-Gm-Message-State: APuU4Z/lBVPUUk39yKAGM/a+G7en4NTRVXZk9CwJhBI6gNkkpY9jNlkk
-	w/hPqBWP+GC5P+7h0N3JIWrKUIVDgDFEQPzjBIsnhX++HjDq7hcHant8lXCx2OrhZC4au5WRpu/
-	zZ4+G14HqU/Ud/pWXJ01DS9ZfMIHmAFKID7ES
-X-Gm-Gg: AYBFou0MC/awTcgL7rpHIV06iR4xwbJtT/9E4hIyPAM9D2CwNe5qNfE6g7qbBGy6gsC
-	Kty5KYLDqGb33l9/6hmRKQHbQNA3QIaRfLe+8TsQrEm2UF/t0QJUlhVzyfIvi7J0hc8aNWzaWay
-	r6iTNuzPXnFG8wR58WyNN05Dng5zK0b36ar6QkHRoCkSrly13Mg7FSW0nvQVACsOcUrAPr0Mhs4
-	DLpnakwz/NeCjHEXV9+xfzx69Cel2tyGTLlfBSSjNXDlS5DUOvbvJ6FH0d7XWbxZUrKQgElKnP2
-	moPOpPwP05qTYtfMulSoV5qcF8jFYbSeS/regoZxetpwUuJgP70oN4gJHS53uZTgXx2jm2vdKm3
-	skj8VEkXvvpBncxQSm887YIkdg3DquvMtrwI1E/lMGsQSwHzoSNudk5IfjqEX8vxlw6hObg==
-X-Received: by 2002:a05:7023:90b:b0:14c:8461:b3ef with SMTP id
- a92af1059eb24-1ac5e6f5132mr25490470c88.24.1793717273733; Tue, 03 Nov 2026
- 06:47:53 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Ka8mU0zm
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 351961F000C1;
+	Tue,  3 Nov 2026 15:09:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793718555;
+	bh=04sRIO3MjeYbz6CJp5GZCOCBS65b5l82fPhVgQ5j8Ig=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Ka8mU0zmAxKLwL2fFpD9CSalT3tGxn8R2vJaJEvx62sO5knzmnr8o+jvl3A4PXUYQ
+	 Dxf4yVxdNUJRaSMFUbZXUszVhxd0knfdDWS6zjzIFpMB5n4bUVioUR8MiiThYK+RXG
+	 oLntR6Y938oN1l2HEEGZwVORgG5aTsGwv/MxrYlWW+xz+HzsxFHbe8bsiksmJN+Eeg
+	 st24vgn2YKrHIvg0UlZHV1ThyeHHuIY6Xm64crEiMYg8cxKwttwDLZNXlk3pCT3Gzq
+	 wy9AdFSWAhMox5u4djhZqr3O3sxbk/vCdfLhvYIRh52/cce/Q/j73nK2lIrQ1r3h0O
+	 ape4Kv2DAzHkg==
+Date: Tue, 3 Nov 2026 15:09:07 +0000
+From: Lee Jones <lee@kernel.org>
+To: Luca Leonardo Scorcia <l.scorcia@gmail.com>
+Cc: linux-mediatek@lists.infradead.org,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Sen Chu <sen.chu@mediatek.com>,
+	Sean Wang <sean.wang@mediatek.com>,
+	Macpaul Lin <macpaul.lin@mediatek.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>, Linus Walleij <linusw@kernel.org>,
+	Val Packett <val@packett.cool>, Fabien Parent <parent.f@gmail.com>,
+	Akari Tsuyukusa <akkun11.open@gmail.com>,
+	Chen Zhong <chen.zhong@mediatek.com>, linux-input@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-pm@vger.kernel.org, mfd@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org, linux-gpio@vger.kernel.org
+Subject: Re: [PATCH v11 4/9] mfd: mt6397: Use MFD_CELL_* to describe
+ sub-devices
+Message-ID: <179310028255.2808517.13933580516140278450@kernel.org>
+References: <20261021105109.199886-1-l.scorcia@gmail.com>
+ <20261021105109.199886-5-l.scorcia@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -104,276 +74,266 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261019100406.103687-1-clamor95@gmail.com> <20261019100406.103687-6-clamor95@gmail.com>
- <179249575817.1833288.1089755405582445022@kernel.org>
-In-Reply-To: <179249575817.1833288.1089755405582445022@kernel.org>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Tue, 3 Nov 2026 16:47:40 +0200
-X-Gm-Features: AclHuK9ZpOIriaiTNLrTV18kT4HaNtHT339MXb6YEPw-7495gnOAW9awk73Le-M
-Message-ID: <CAPVz0n0=6Z7E9iSc84xL6Jt=Xi=a=qmSwVsT5g-LMZ+mENFkzg@mail.gmail.com>
-Subject: Re: [PATCH v12 5/7] leds: Add driver for ASUS Transformer LEDs
-To: Lee Jones <lee@kernel.org>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
-	Pavel Machek <pavel@kernel.org>, Sebastian Reichel <sre@kernel.org>, Ion Agorria <ion@agorria.com>, 
-	=?UTF-8?B?TWljaGHFgiBNaXJvc8WCYXc=?= <mirq-linux@rere.qmqm.pl>, 
-	Florian Krischer <florian.krischer@fkr.dev>, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-input@vger.kernel.org, 
-	mfd@lists.linux.dev, linux-leds@vger.kernel.org, linux-pm@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261021105109.199886-5-l.scorcia@gmail.com>
+X-AI-Review-Draft: <20261021105109.199886-5-l.scorcia@gmail.com>
 
-=D0=B2=D1=82, 3 =D0=BB=D0=B8=D1=81=D1=82. 2026=E2=80=AF=D1=80. =D0=BE 16:03=
- Lee Jones <lee@kernel.org> =D0=BF=D0=B8=D1=88=D0=B5:
+On Wed, 21 Oct 2026, Luca Leonardo Scorcia wrote:
+
+> Use the MFD_CELL_* macros to describe sub-devices. No functional changes.
 >
-> On Mon, 19 Oct 2026, Svyatoslav Ryhel wrote:
-> > From: Micha=C5=82 Miros=C5=82aw <mirq-linux@rere.qmqm.pl>
-> >
-> > ASUS Transformer tablets have a green and an amber LED on both the Pad
-> > and the Dock. If both LEDs are enabled simultaneously, the emitted ligh=
-t
-> > will be yellow.
-> >
-> > Co-developed-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > Signed-off-by: Micha=C5=82 Miros=C5=82aw <mirq-linux@rere.qmqm.pl>
-> > ---
-> >  drivers/leds/Kconfig                    |  11 +++
-> >  drivers/leds/Makefile                   |   1 +
-> >  drivers/leds/leds-asus-transformer-ec.c | 125 ++++++++++++++++++++++++
-> >  3 files changed, 137 insertions(+)
-> >  create mode 100644 drivers/leds/leds-asus-transformer-ec.c
-> >
-> > diff --git a/drivers/leds/Kconfig b/drivers/leds/Kconfig
-> > index 7ec2c8d785426..788e689fe875c 100644
-> > --- a/drivers/leds/Kconfig
-> > +++ b/drivers/leds/Kconfig
-> > @@ -120,6 +120,17 @@ config LEDS_OSRAM_AMS_AS3668
-> >         To compile this driver as a module, choose M here: the module
-> >         will be called leds-as3668.
-> >
-> > +config LEDS_ASUS_TRANSFORMER_EC
-> > +     tristate "LED Support for Asus Transformer charging LED"
-> > +     depends on LEDS_CLASS
-> > +     depends on MFD_ASUS_TRANSFORMER_EC
-> > +     help
-> > +       This option enables support for charging indicator on
-> > +       Asus Transformer's Pad and its Dock.
-> > +
-> > +       To compile this driver as a module, choose M here: the module
-> > +       will be called leds-asus-transformer-ec.
-> > +
-> >  config LEDS_AW200XX
-> >       tristate "LED support for Awinic AW20036/AW20054/AW20072/AW20108"
-> >       depends on LEDS_CLASS
-> > diff --git a/drivers/leds/Makefile b/drivers/leds/Makefile
-> > index 4d4b089156e24..3da746279bb81 100644
-> > --- a/drivers/leds/Makefile
-> > +++ b/drivers/leds/Makefile
-> > @@ -15,6 +15,7 @@ obj-$(CONFIG_LEDS_ADP5520)          +=3D leds-adp5520=
-.o
-> >  obj-$(CONFIG_LEDS_AN30259A)          +=3D leds-an30259a.o
-> >  obj-$(CONFIG_LEDS_APU)                       +=3D leds-apu.o
-> >  obj-$(CONFIG_LEDS_ARIEL)             +=3D leds-ariel.o
-> > +obj-$(CONFIG_LEDS_ASUS_TRANSFORMER_EC)       +=3D leds-asus-transforme=
-r-ec.o
-> >  obj-$(CONFIG_LEDS_OSRAM_AMS_AS3668)  +=3D leds-as3668.o
-> >  obj-$(CONFIG_LEDS_AW200XX)           +=3D leds-aw200xx.o
-> >  obj-$(CONFIG_LEDS_AW2013)            +=3D leds-aw2013.o
-> > diff --git a/drivers/leds/leds-asus-transformer-ec.c b/drivers/leds/led=
-s-asus-transformer-ec.c
-> > new file mode 100644
-> > index 0000000000000..1b129247ea6c6
-> > --- /dev/null
-> > +++ b/drivers/leds/leds-asus-transformer-ec.c
-> > @@ -0,0 +1,125 @@
-> > +// SPDX-License-Identifier: GPL-2.0-only
-> > +
-> > +#include <linux/err.h>
-> > +#include <linux/leds.h>
-> > +#include <linux/mfd/asus-transformer-ec.h>
-> > +#include <linux/module.h>
-> > +#include <linux/platform_device.h>
-> > +#include <linux/slab.h>
-> > +
-> > +enum {
-> > +     ASUSEC_LED_AMBER,
-> > +     ASUSEC_LED_GREEN,
-> > +     ASUSEC_LED_MAX
-> > +};
-> > +
-> > +struct asus_ec_led_config {
-> > +     const char *name;
-> > +     unsigned int color;
-> > +     u64 ctrl_bit;
-> > +};
-> > +
-> > +struct asus_ec_led {
-> > +     struct asus_ec_leds_data *ddata;
+> Signed-off-by: Luca Leonardo Scorcia <l.scorcia@gmail.com>
+> Reviewed-by: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+> ---
+>  drivers/mfd/mt6397-core.c | 207 ++++++++++++--------------------------
+>  1 file changed, 67 insertions(+), 140 deletions(-)
 >
+> diff --git a/drivers/mfd/mt6397-core.c b/drivers/mfd/mt6397-core.c
+> index 9ec951996588..3e08179002fa 100644
+> --- a/drivers/mfd/mt6397-core.c
+> +++ b/drivers/mfd/mt6397-core.c
+> @@ -124,165 +124,92 @@ static const struct resource mt6323_pwrc_resources[] = {
+>  };
 >
-> Why do we need 'struct ' at all?
+>  static const struct mfd_cell mt6323_devs[] = {
+> -	{
+> -		.name = "mt6323-auxadc",
+> -		.of_compatible = "mediatek,mt6323-auxadc",
+> -	}, {
+> -		.name = "mt6323-efuse",
+> -		.of_compatible = "mediatek,mt6323-efuse",
+> -	}, {
+> -		.name = "mt6323-rtc",
+> -		.num_resources = ARRAY_SIZE(mt6323_rtc_resources),
+> -		.resources = mt6323_rtc_resources,
+> -		.of_compatible = "mediatek,mt6323-rtc",
+> -	}, {
+> -		.name = "mt6323-regulator",
+> -		.of_compatible = "mediatek,mt6323-regulator"
+> -	}, {
+> -		.name = "mt6323-led",
+> -		.of_compatible = "mediatek,mt6323-led"
+> -	}, {
+> -		.name = "mt6323-keys",
+> -		.num_resources = ARRAY_SIZE(mt6323_keys_resources),
+> -		.resources = mt6323_keys_resources,
+> -		.of_compatible = "mediatek,mt6323-keys"
+> -	}, {
+> -		.name = "mt6323-pwrc",
+> -		.num_resources = ARRAY_SIZE(mt6323_pwrc_resources),
+> -		.resources = mt6323_pwrc_resources,
+> -		.of_compatible = "mediatek,mt6323-pwrc"
+> -	},
+> +	MFD_CELL_OF("mt6323-auxadc", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6323-auxadc"),
+> +	MFD_CELL_OF("mt6323-efuse", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6323-efuse"),
+> +	MFD_CELL_OF("mt6323-rtc", mt6323_rtc_resources, NULL, 0, 0,
+> +		    "mediatek,mt6323-rtc"),
+> +	MFD_CELL_OF("mt6323-regulator", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6323-regulator"),
+> +	MFD_CELL_OF("mt6323-led", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6323-led"),
+> +	MFD_CELL_OF("mt6323-keys", mt6323_keys_resources, NULL, 0, 0,
+> +		    "mediatek,mt6323-keys"),
+> +	MFD_CELL_OF("mt6323-pwrc", mt6323_pwrc_resources, NULL, 0, 0,
+
+Nit: This is non-blocking, but if you have to respin, please use the
+100-char limit to keep these on single lines where possible. Same for
+all the others below.
+
+> +		    "mediatek,mt6323-pwrc"),
+>  };
 >
-> If we put 'const struct asusec_core *ec;' directly into 'struct
-> asus_ec_led', we can drop the outer wrapper struct and the back-pointer
-> completely.
+>  static const struct mfd_cell mt6328_devs[] = {
+> -	{
+> -		.name = "mt6328-regulator",
+> -		.of_compatible = "mediatek,mt6328-regulator"
+> -	}, {
+> -		.name = "mt6328-keys",
+> -		.num_resources = ARRAY_SIZE(mt6328_keys_resources),
+> -		.resources = mt6328_keys_resources,
+> -		.of_compatible = "mediatek,mt6328-keys"
+> -	},
+> +	MFD_CELL_OF("mt6328-regulator", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6328-regulator"),
+> +	MFD_CELL_OF("mt6328-keys", mt6328_keys_resources, NULL, 0, 0,
+> +		    "mediatek,mt6328-keys"),
+>  };
+>
+>  static const struct mfd_cell mt6357_devs[] = {
+> -	{
+> -		.name = "mt6359-auxadc",
+> -		.of_compatible = "mediatek,mt6357-auxadc"
+> -	}, {
+> -		.name = "mt6357-regulator",
+> -	}, {
+> -		.name = "mt6357-rtc",
+> -		.num_resources = ARRAY_SIZE(mt6357_rtc_resources),
+> -		.resources = mt6357_rtc_resources,
+> -		.of_compatible = "mediatek,mt6357-rtc",
+> -	}, {
+> -		.name = "mt6357-sound",
+> -		.of_compatible = "mediatek,mt6357-sound"
+> -	}, {
+> -		.name = "mt6357-keys",
+> -		.num_resources = ARRAY_SIZE(mt6357_keys_resources),
+> -		.resources = mt6357_keys_resources,
+> -		.of_compatible = "mediatek,mt6357-keys"
+> -	},
+> +	MFD_CELL_OF("mt6359-auxadc", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6357-auxadc"),
+> +	MFD_CELL_NAME("mt6357-regulator"),
+> +	MFD_CELL_OF("mt6357-rtc", mt6357_rtc_resources, NULL, 0, 0,
+> +		    "mediatek,mt6357-rtc"),
+> +	MFD_CELL_OF("mt6357-sound", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6357-sound"),
+> +	MFD_CELL_OF("mt6357-keys", mt6357_keys_resources, NULL, 0, 0,
+> +		    "mediatek,mt6357-keys"),
+>  };
+>
+>  /* MT6331 is always used in combination with MT6332 */
+>  static const struct mfd_cell mt6331_mt6332_devs[] = {
+> -	{
+> -		.name = "mt6331-rtc",
+> -		.num_resources = ARRAY_SIZE(mt6331_rtc_resources),
+> -		.resources = mt6331_rtc_resources,
+> -		.of_compatible = "mediatek,mt6331-rtc",
+> -	}, {
+> -		.name = "mt6331-regulator",
+> -		.of_compatible = "mediatek,mt6331-regulator"
+> -	}, {
+> -		.name = "mt6332-regulator",
+> -		.of_compatible = "mediatek,mt6332-regulator"
+> -	}, {
+> -		.name = "mt6331-keys",
+> -		.num_resources = ARRAY_SIZE(mt6331_keys_resources),
+> -		.resources = mt6331_keys_resources,
+> -		.of_compatible = "mediatek,mt6331-keys"
+> -	},
+> +	MFD_CELL_OF("mt6331-rtc", mt6331_rtc_resources, NULL, 0, 0,
+> +		    "mediatek,mt6331-rtc"),
+> +	MFD_CELL_OF("mt6331-regulator", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6331-regulator"),
+> +	MFD_CELL_OF("mt6332-regulator", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6332-regulator"),
+> +	MFD_CELL_OF("mt6331-keys", mt6331_keys_resources, NULL, 0, 0,
+> +		    "mediatek,mt6331-keys"),
+>  };
+>
+>  static const struct mfd_cell mt6358_devs[] = {
+> -	{
+> -		.name = "mt6359-auxadc",
+> -		.of_compatible = "mediatek,mt6358-auxadc"
+> -	}, {
+> -		.name = "mt6358-regulator",
+> -		.of_compatible = "mediatek,mt6358-regulator"
+> -	}, {
+> -		.name = "mt6358-rtc",
+> -		.num_resources = ARRAY_SIZE(mt6358_rtc_resources),
+> -		.resources = mt6358_rtc_resources,
+> -		.of_compatible = "mediatek,mt6358-rtc",
+> -	}, {
+> -		.name = "mt6358-sound",
+> -		.of_compatible = "mediatek,mt6358-sound"
+> -	}, {
+> -		.name = "mt6358-keys",
+> -		.num_resources = ARRAY_SIZE(mt6358_keys_resources),
+> -		.resources = mt6358_keys_resources,
+> -		.of_compatible = "mediatek,mt6358-keys"
+> -	},
+> +	MFD_CELL_OF("mt6359-auxadc", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6358-auxadc"),
+> +	MFD_CELL_OF("mt6358-regulator", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6358-regulator"),
+> +	MFD_CELL_OF("mt6358-rtc", mt6358_rtc_resources, NULL, 0, 0,
+> +		    "mediatek,mt6358-rtc"),
+> +	MFD_CELL_OF("mt6358-sound", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6358-sound"),
+> +	MFD_CELL_OF("mt6358-keys", mt6358_keys_resources, NULL, 0, 0,
+> +		    "mediatek,mt6358-keys"),
+>  };
+>
+>  static const struct mfd_cell mt6359_devs[] = {
+> -	{
+> -		.name = "mt6359-auxadc",
+> -		.of_compatible = "mediatek,mt6359-auxadc"
+> -	},
+> -	{ .name = "mt6359-regulator", },
+> -	{
+> -		.name = "mt6359-rtc",
+> -		.num_resources = ARRAY_SIZE(mt6358_rtc_resources),
+> -		.resources = mt6358_rtc_resources,
+> -		.of_compatible = "mediatek,mt6358-rtc",
+> -	},
+> -	{ .name = "mt6359-sound", },
+> -	{
+> -		.name = "mt6359-keys",
+> -		.num_resources = ARRAY_SIZE(mt6359_keys_resources),
+> -		.resources = mt6359_keys_resources,
+> -		.of_compatible = "mediatek,mt6359-keys"
+> -	},
+> -	{
+> -		.name = "mt6359-accdet",
+> -		.of_compatible = "mediatek,mt6359-accdet",
+> -		.num_resources = ARRAY_SIZE(mt6359_accdet_resources),
+> -		.resources = mt6359_accdet_resources,
+> -	},
+> +	MFD_CELL_OF("mt6359-auxadc", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6359-auxadc"),
+> +	MFD_CELL_NAME("mt6359-regulator"),
+> +	MFD_CELL_OF("mt6359-rtc", mt6358_rtc_resources, NULL, 0, 0,
+> +		    "mediatek,mt6358-rtc"),
+> +	MFD_CELL_NAME("mt6359-sound"),
+> +	MFD_CELL_OF("mt6359-keys", mt6359_keys_resources, NULL, 0, 0,
+> +		    "mediatek,mt6359-keys"),
+> +	MFD_CELL_OF("mt6359-accdet", mt6359_accdet_resources, NULL, 0, 0,
+> +		    "mediatek,mt6359-accdet"),
+>  };
+>
+>  static const struct mfd_cell mt6397_devs[] = {
+> -	{
+> -		.name = "mt6397-rtc",
+> -		.num_resources = ARRAY_SIZE(mt6397_rtc_resources),
+> -		.resources = mt6397_rtc_resources,
+> -		.of_compatible = "mediatek,mt6397-rtc",
+> -	}, {
+> -		.name = "mt6397-regulator",
+> -		.of_compatible = "mediatek,mt6397-regulator",
+> -	}, {
+> -		.name = "mt6397-codec",
+> -		.of_compatible = "mediatek,mt6397-codec",
+> -	}, {
+> -		.name = "mt6397-clk",
+> -		.of_compatible = "mediatek,mt6397-clk",
+> -	}, {
+> -		.name = "mt6397-pinctrl",
+> -		.of_compatible = "mediatek,mt6397-pinctrl",
+> -	}, {
+> -		.name = "mt6397-keys",
+> -		.num_resources = ARRAY_SIZE(mt6397_keys_resources),
+> -		.resources = mt6397_keys_resources,
+> -		.of_compatible = "mediatek,mt6397-keys"
+> -	}
+> +	MFD_CELL_OF("mt6397-rtc", mt6397_rtc_resources, NULL, 0, 0,
+> +		    "mediatek,mt6397-rtc"),
+> +	MFD_CELL_OF("mt6397-regulator", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6397-regulator"),
+> +	MFD_CELL_OF("mt6397-codec", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6397-codec"),
+> +	MFD_CELL_OF("mt6397-clk", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6397-clk"),
+> +	MFD_CELL_OF("mt6397-pinctrl", NULL, NULL, 0, 0,
+> +		    "mediatek,mt6397-pinctrl"),
+> +	MFD_CELL_OF("mt6397-keys", mt6397_keys_resources, NULL, 0, 0,
+> +		    "mediatek,mt6397-keys"),
+>  };
+>
+>  struct chip_data {
+> -- 
+> 2.43.0
 >
 
-You propose to allocate asus_ec_led for each led in a loop? I have not
-seen this done by other leds. The asus_ec_leds_data is driver ddata,
-asus_ec_led is each led individual structure.
-
-> > +     struct led_classdev cdev;
-> > +     u64 ctrl_bit;
-> > +};
-> > +
-> > +struct asus_ec_leds_data {
-> > +     const struct asusec_core *ec;
-> > +     struct asus_ec_led leds[ASUSEC_LED_MAX];
-> > +};
-> > +
-> > +static const struct asus_ec_led_config asus_ec_leds[] =3D {
-> > +     [ASUSEC_LED_AMBER] =3D {
-> > +             .name =3D "amber",
-> > +             .color =3D LED_COLOR_ID_AMBER,
-> > +             .ctrl_bit =3D ASUSEC_CTL_LED_AMBER,
-> > +     },
-> > +     [ASUSEC_LED_GREEN] =3D {
-> > +             .name =3D "green",
-> > +             .color =3D LED_COLOR_ID_GREEN,
-> > +             .ctrl_bit =3D ASUSEC_CTL_LED_GREEN,
-> > +     },
-> > +};
-> > +
-> > +static enum led_brightness asus_ec_led_get_brightness(struct led_class=
-dev *cdev)
-> > +{
-> > +     struct asus_ec_led *led =3D container_of(cdev, struct asus_ec_led=
-, cdev);
-> > +     const struct asusec_core *ec =3D led->ddata->ec;
-> > +     u64 ctl;
-> > +     int ret;
-> > +
-> > +     ret =3D asus_dockram_access_ctl(ec->dockram, &ctl, 0, 0);
->
-> As requested on v6 and v8, why are we still using this bespoke accessor i=
-nstead
-> of Regmap?
->
-
-https://lore.kernel.org/lkml/CAPVz0n0imF_ESoGMJSrEX7NOnBShFj8wehDtQKXZV_DMc=
-Gqq=3DA@mail.gmail.com/
-
-> > +     if (ret)
-> > +             return LED_OFF;
-> > +
-> > +     return ctl & led->ctrl_bit ? LED_ON : LED_OFF;
-> > +}
-> > +
-> > +static int asus_ec_led_set_brightness(struct led_classdev *cdev,
-> > +                                   enum led_brightness brightness)
-> > +{
-> > +     struct asus_ec_led *led =3D container_of(cdev, struct asus_ec_led=
-, cdev);
-> > +     const struct asusec_core *ec =3D led->ddata->ec;
-> > +
-> > +     if (brightness)
-> > +             return asus_dockram_access_ctl(ec->dockram, NULL,
-> > +                                            led->ctrl_bit, led->ctrl_b=
-it);
->
-> Use 100-chars throughout to prevent early wrapping.
->
-> > +     return asus_dockram_access_ctl(ec->dockram, NULL, led->ctrl_bit, =
-0);
-> > +}
-> > +
-> > +static int asus_ec_led_probe(struct platform_device *pdev)
-> > +{
-> > +     const struct asusec_core *ec =3D dev_get_drvdata(pdev->dev.parent=
-);
-> > +     struct asus_ec_leds_data *ddata;
-> > +     struct device *dev =3D &pdev->dev;
-> > +     int ret;
-> > +
-> > +     ddata =3D devm_kzalloc(dev, sizeof(*ddata), GFP_KERNEL);
-> > +     if (!ddata)
-> > +             return -ENOMEM;
-> > +
-> > +     platform_set_drvdata(pdev, ddata);
->
-> What consumes this?
->
-
-Seems to be an overlook, must have forgotten to remove it during 12
-iterations over last 10 month
-
-> > +     ddata->ec =3D ec;
-> > +
-> > +     for (int i =3D 0; i < ASUSEC_LED_MAX; i++) {
->
-> `i` isn't just a random iterator here - maybe call it `led`?
->
-
-This is just a disposable iterator.
-
-> > +             const struct asus_ec_led_config *cfg =3D &asus_ec_leds[i]=
-;
-> > +             struct asus_ec_led *led =3D &ddata->leds[i];
-> > +
-> > +             led->cdev.name =3D devm_kasprintf(dev, GFP_KERNEL, "%s:%s=
-",
-> > +                                             ddata->ec->name, cfg->nam=
-e);
-> > +             if (!led->cdev.name)
-> > +                     return -ENOMEM;
-> > +
-> > +             led->cdev.max_brightness =3D 1;
-> > +             led->cdev.color =3D cfg->color;
-> > +             led->cdev.flags =3D LED_CORE_SUSPENDRESUME | LED_RETAIN_A=
-T_SHUTDOWN;
-> > +             led->cdev.brightness_get =3D asus_ec_led_get_brightness;
-> > +             led->cdev.brightness_set_blocking =3D asus_ec_led_set_bri=
-ghtness;
-> > +
-> > +             led->ddata =3D ddata;
-> > +             led->ctrl_bit =3D cfg->ctrl_bit;
-> > +
-> > +             ret =3D devm_led_classdev_register(dev, &led->cdev);
-> > +             if (ret)
-> > +                     return dev_err_probe(dev, ret,
-> > +                                          "Failed to register %s LED\n=
-",
-> > +                                          cfg->name);
-> > +     }
-> > +
-> > +     return 0;
-> > +}
-> > +
-> > +static struct platform_driver asus_ec_led_driver =3D {
-> > +     .driver.name =3D "asus-transformer-ec-led",
->
-> Clever!  But, I'd prefer we still to the usual format to be honest.
->
-> > +     .probe =3D asus_ec_led_probe,
-> > +};
-> > +module_platform_driver(asus_ec_led_driver);
-> > +
-> > +MODULE_ALIAS("platform:asus-transformer-ec-led");
-> > +MODULE_AUTHOR("Micha=C5=82 Miros=C5=82aw <mirq-linux@rere.qmqm.pl>");
-> > +MODULE_AUTHOR("Svyatoslav Ryhel <clamor95@gmail.com>");
-> > +MODULE_DESCRIPTION("ASUS Transformer's charging LED driver");
-> > +MODULE_LICENSE("GPL");
-> > --
-> > 2.53.0
-> >
->
-> --
-> Lee Jones
-
-v7 seem fine https://lore.kernel.org/lkml/20260702162425.GD2108533@google.c=
-om/
-v9 as well https://lore.kernel.org/lkml/20260702162425.GD2108533@google.com=
-/
-
-Yet again complains and nits
+-- 
+Lee Jones
