@@ -1,59 +1,59 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.171.202.116
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
 	t=1793724573;
-	b=GPvtewtiYpRUJPaZCtV9l5aBmquWMCKzPuAYoYNpHPB82T8u62YO5pindrXhY9I1vYTC
-	 4+pazPbtFQN16AkIzi20aV9wX8sxTczyY449zt8nf2r/CBSJ7zeQqQXU/XB9el6isCC+H
-	 kK3RV6L2QZx+2ZGjGldzQB2x1TxSrJLYloiGp247oE2WSkU8qmMuY7BC91+xbKXlMFDqM
-	 f3kYZ5IaIiICHk3b+BH126Kyj9ndkchnYfxUyMCLfJ1naooAFFmc5H/WLyFdO9JZNWNLS
-	 +E52F51XBr5yhdQAZTEKrpZ/1joDq8sap2p+sKDBgiaDrMKW7Oejx7kU+FPfh9/xYPA==
+	b=vw+YdSF0IK8esO8awf8sRQG1gE5FIh04JzTDlRdmOps9qnk1GTJsaTQ4IeXIuMHUTgdF
+	 81VQle+WdkQt44qENqw1FReFKymTuDig+ZMNExkpHYkeGOay54Il55NklxITTRpIUX1bf
+	 sjX451VmZ5BOH4tyvnVcJOyjHGPbZ3UpNLrmWG02eeiyZU6rN8UAIGgb2Um/e+pf3TFDE
+	 7RrcplQE58RzD14xMc1A4j7d2MIasWOu8loqISxaTQvBRvhM8MKOILzg4QS77ZJ9DM2Pd
+	 rB/emj7Fx9eqAyOhCoPBwbu2KwN1wEbgzXEb762nkkzPXqaJmPLiFvisqs9shebXkLQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	a=rsa-sha256; c=relaxed/relaxed; t=1793724573;
 	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:From:Date:
 	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Last-TLS-Session-Version;
-	bh=ocCyZzcJxZjGS6tyJsGEy72scc8t6Fmko28IUolWCcI=;
-	b=RQ1L5r4qqQL0+Uixpx0cr2IRXEMXQMZT/JIduvNbuRP9ag/j8BiJJ8tGYAUOASOB87vy
-	 er7FRp0V+cLcIeRSDlwrwE5KHgxWyF5jGbT9nczKpdZjPWHiACPAELAG7e1vF/k76H45g
-	 PN2xU4dcO3/+MAP8vk3+pZs8JILi+/fUrqqHDNfiRZKgEN5wi8MQGxtIn/6579ngAi8nn
-	 AakGa/xjzhFPW087yYgYnQ+wtC0THAYSl+o2X09N4y+6QhfaLmZu81n+HBlVGMGG1iSik
-	 +Vgsz+7r2zxiQMj5blVOB6ZHPf6p1kNEnUKw3CUv0mdx12Gi/KBEA8KqX/MCpUZIFkw==
+	bh=np7p/6NbTxeJslZosMV0zK5KJlcaQZxijqGp2JarPLU=;
+	b=e4kOnIeLK3fTalmd0xqotw5rU+MG6AuvI3X2GaxIJ8pA1RyF4Z+jttLHzJOcsUf4dCjt
+	 FlXS+VMAExPK+LtuNNH66C4umRJ/fon8Vj5meQxspXq7AS7FuGd6uMPf7mVHiwHss8qE5
+	 fmCtnFb5rf1c/BIL2YEue6263x8G+BM0lbO45VoQEqdWPiQHmyxpXL2gzOi/H3JgsiEFY
+	 EPSyXFQLIHh5F/VvURDl+m9tt+g19Sv1QplDgd2eX6GfM/OaXyNqKgiVXA7c3FxHYfL/J
+	 cbI/Mg3x/KHjJiDUR3IrwZ49zSux0+rLZ0ht3loRk4TxQzOTnhUrSv9MPMWamZJScLg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=bootlin.com;
 	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b="XrgK/pK/";
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=o0UG9xjN;
 	arc=none smtp.remote-ip=185.171.202.116
 Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70A9F606A324
-	for <mfd@lists.linux.dev>; Tue,  3 Nov 2026 16:49:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 70A9F606A324
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8903606D817
+	for <mfd@lists.linux.dev>; Tue,  3 Nov 2026 16:49:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D8903606D817
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=XrgK/pK/
+	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=o0UG9xjN
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id C959FC8F463;
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 1A708C8F460;
 	Tue,  3 Nov 2026 16:50:35 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 275766046C;
-	Tue,  3 Nov 2026 16:49:31 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 8D4B4103291EA;
-	Tue,  3 Nov 2026 17:49:29 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 7C5F96046C;
+	Tue,  3 Nov 2026 16:49:30 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 87D67103291A7;
+	Tue,  3 Nov 2026 17:49:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1793724570; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1793724569; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=ocCyZzcJxZjGS6tyJsGEy72scc8t6Fmko28IUolWCcI=;
-	b=XrgK/pK/jCAdrRVBiH4Ib+u/DMKUkTkma1OYsHQlkv6egMUR7lRohVG5p5xTcOFbZoY6cB
-	8Ug/0pbkaqwxZR4JHtxn6U2ICB+mX0O33XXU5Vr11FPNK5rvBGqRL2k86a45evRky/tY0J
-	RM1BO+zHDA5BMZH7ROqIRXJWx+u964c+E4kHArz89eSDsOe5GktBjvKnSj/MfVBjNg12+7
-	J30qNmq7SAfnPtHZGiCVzFA5FRVSGqagI9bs2pLuJKomIm1Yt6b0cu5Lm59Ni0vpg0+dPP
-	appoEBS10nbbuEOw0V1mRTZ5CZqhCZbpJlNVKThuK95Yud12cgzUlnWBmLpLyA==
+	bh=np7p/6NbTxeJslZosMV0zK5KJlcaQZxijqGp2JarPLU=;
+	b=o0UG9xjNgeYBvqnjrJ/ZgHAa8ZNAl8VTBAtW3ZHiuLiXxWkPgyFX9NlzKkydGu+Ow68MOK
+	zfOYRB25MlqyM7PjhsY2DQiREcTbTdYx3tOGOJMV0AQw7HTewiRigXN7baB4Dyt/EP5ID4
+	7kEQmrt+FaYYJkeEIvdPsPPdJVUcfQtfDkPoifxcomib8v63AayFXAsSHs86QCnnH8OT5w
+	fBPsWTXi1T8Cksn3gHsWm9R48/nDWBf7luicKuBYTSQzH5OWHXmBha/I6JGkzE0tPZx/+1
+	Onabc7fZIWpJ3pguchXr/64O3552jsioBf2qPoyOlNI7wowS/8fYz5VnYkRzLA==
 From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
-Date: Tue, 03 Nov 2026 17:49:11 +0100
-Subject: [PATCH v5 3/9] mfd: cgbc: Add I2C platform data
+Date: Tue, 03 Nov 2026 17:49:10 +0100
+Subject: [PATCH v5 2/9] i2c: cgbc: Use real I2C bus names
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -65,103 +65,54 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261103-cgbc-i2c-storage-devices-support-v5-3-ac11f23fae51@bootlin.com>
+Message-Id: <20261103-cgbc-i2c-storage-devices-support-v5-2-ac11f23fae51@bootlin.com>
 References: <20261103-cgbc-i2c-storage-devices-support-v5-0-ac11f23fae51@bootlin.com>
 In-Reply-To: <20261103-cgbc-i2c-storage-devices-support-v5-0-ac11f23fae51@bootlin.com>
 To: Lee Jones <lee@kernel.org>, Andi Shyti <andi.shyti@kernel.org>
 Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
  Werner Gartner <Werner.Gartner@congatec.com>, mfd@lists.linux.dev, 
  linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org, 
- "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
+ "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>, 
+ stable@vger.kernel.org
 X-Mailer: b4 0.16.0
 X-Last-TLS-Session-Version: TLSv1.3
 
-Define I2C platform data for each I2C bus in the cgbc MFD driver. Platform
-data passes per-bus parameters to the I2C driver, rather than being defined
-inside the i2c-cgbc driver itself. This makes the i2c-cgbc driver more
-generic.
+The adapter names described the expected purpose of the buses ("General
+Purpose I2C adapter", "Power Management I2C adapter") on conga-sa7 board
+rather than their actual names on the Board Controller.
 
+Rename them to the real bus names "cgbc-i2c0" and "cgbc-ddc0", matching
+the naming used by Congatec.
+
+Cc: stable@vger.kernel.org
+Fixes: 6894f640b8f3 ("i2c: Congatec Board Controller i2c bus driver")
 Signed-off-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
 ---
- drivers/mfd/cgbc-core.c  | 38 +++++++++++++++++++++++++++++---------
- include/linux/mfd/cgbc.h | 10 ++++++++++
- 2 files changed, 39 insertions(+), 9 deletions(-)
+ drivers/i2c/busses/i2c-cgbc.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
-index 02a8c0078287..777930d1169e 100644
---- a/drivers/mfd/cgbc-core.c
-+++ b/drivers/mfd/cgbc-core.c
-@@ -55,6 +55,35 @@
- 
- static struct platform_device *cgbc_pdev;
- 
-+static const struct cgbc_i2c_platform_data cgbc_i2c_i2c0_pdata = {
-+	.name = "cgbc-i2c0",
-+	.cgbc_bus_id = 0,
-+};
-+
-+static const struct cgbc_i2c_platform_data cgbc_i2c_ddc0_pdata = {
-+	.name  = "cgbc-ddc0",
-+	.cgbc_bus_id = 4,
-+};
-+
-+static const struct mfd_cell cgbc_devs[] = {
-+	MFD_CELL_NAME("cgbc-backlight"),
-+	MFD_CELL_NAME("cgbc-gpio"),
-+	MFD_CELL_NAME("cgbc-hwmon"),
-+	{
-+		.name = "cgbc-i2c",
-+		.id = 1,
-+		.platform_data = &cgbc_i2c_i2c0_pdata,
-+		.pdata_size = sizeof(cgbc_i2c_i2c0_pdata),
-+	},
-+	{
-+		.name = "cgbc-i2c",
-+		.id = 2,
-+		.platform_data = &cgbc_i2c_ddc0_pdata,
-+		.pdata_size = sizeof(cgbc_i2c_ddc0_pdata),
-+	},
-+	MFD_CELL_NAME("cgbc-wdt"),
-+};
-+
- /* Wait the Board Controller is ready to receive some session commands */
- static int cgbc_wait_device(struct cgbc_device_data *cgbc)
- {
-@@ -236,15 +265,6 @@ int cgbc_command(struct cgbc_device_data *cgbc, void *cmd, unsigned int cmd_size
- }
- EXPORT_SYMBOL_GPL(cgbc_command);
- 
--static const struct mfd_cell cgbc_devs[] = {
--	{ .name = "cgbc-wdt"	},
--	{ .name = "cgbc-gpio"	},
--	{ .name = "cgbc-i2c", .id = 1 },
--	{ .name = "cgbc-i2c", .id = 2 },
--	{ .name = "cgbc-hwmon"	},
--	{ .name = "cgbc-backlight" },
--};
--
- static int cgbc_map(struct cgbc_device_data *cgbc)
- {
- 	struct device *dev = cgbc->dev;
-diff --git a/include/linux/mfd/cgbc.h b/include/linux/mfd/cgbc.h
-index 91f501e76c8f..4b6e41b9ca4a 100644
---- a/include/linux/mfd/cgbc.h
-+++ b/include/linux/mfd/cgbc.h
-@@ -41,4 +41,14 @@ struct cgbc_device_data {
- int cgbc_command(struct cgbc_device_data *cgbc, void *cmd, unsigned int cmd_size,
- 		 void *data, unsigned int data_size, u8 *status);
- 
-+/**
-+ * struct cgbc_i2c_platform_data - Platform data of the CGBC I2C driver
-+ * @name:		I2C adapter name
-+ * @cgbc_bus_id:	I2C bus ID (from Board Controller point of view)
-+ */
-+struct cgbc_i2c_platform_data {
-+	const char *name;
-+	int cgbc_bus_id;
-+};
-+
- #endif /*_LINUX_MFD_CGBC_H_*/
+diff --git a/drivers/i2c/busses/i2c-cgbc.c b/drivers/i2c/busses/i2c-cgbc.c
+index 9909c25f0b18..ac23435b731b 100644
+--- a/drivers/i2c/busses/i2c-cgbc.c
++++ b/drivers/i2c/busses/i2c-cgbc.c
+@@ -358,7 +358,7 @@ static struct i2c_algo_cgbc_data cgbc_i2c_algo_data[] = {
+ static const struct i2c_adapter cgbc_i2c_adapter[] = {
+ 	{
+ 		.owner		= THIS_MODULE,
+-		.name		= "Congatec General Purpose I2C adapter",
++		.name		= "cgbc-i2c0",
+ 		.class		= I2C_CLASS_DEPRECATED,
+ 		.algo		= &cgbc_i2c_algorithm,
+ 		.algo_data	= &cgbc_i2c_algo_data[0],
+@@ -366,7 +366,7 @@ static const struct i2c_adapter cgbc_i2c_adapter[] = {
+ 	},
+ 	{
+ 		.owner		= THIS_MODULE,
+-		.name		= "Congatec Power Management I2C adapter",
++		.name		= "cgbc-ddc0",
+ 		.class		= I2C_CLASS_DEPRECATED,
+ 		.algo		= &cgbc_i2c_algorithm,
+ 		.algo_data	= &cgbc_i2c_algo_data[1],
 
 -- 
 2.53.0
