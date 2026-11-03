@@ -1,60 +1,59 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.171.202.116
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.84.56
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793724574;
-	b=2r2zF/r32HnHLnCofmkKfM1spQXkU7UElsvBwJEgfCh4slyIA9WCQZDWBavHzcFg5IGt
-	 hVMzGDn8/GznqvwMkmxp3yXxEFSbWPOXNYh48bFn25gOEOEwvsCb2kkBKZTwfhJukfhLO
-	 L8C8HfxTwLeC/KXKqFtMGgwR18TTTp8RkaQ+wcB+xa4ohJhyle9uFLgIg5yQC/t1R2LoP
-	 GfxZP+9bPz+U8qOAxcaVumBb/D8UP6uM508fQJIZCUEjNjNYtgSzFKzznphk5Pg60a0z1
-	 GhsxZcoD4TgrWnv8O2RE9QRnGe7c2DxlpvX/xxJeiyn1fXZZBKmf5bW+QLLAsgJXW+w==
+	t=1793724576;
+	b=eWIL3AepByL5q2FwKpgTSRvmFmZ38+o0b+SxESsPpjp8TvoU0IEWFAi7mf0F5/I4wdtX
+	 AiGWuiowIUU2zFDEtn94DP+8fWb5EMpxM2satSLQT50UqGQ+aIK/9Og6y6Eu0biXcQuly
+	 1gPDMxJBOHXvgohsK5ZBAax/0La5ww5FDfWuJR7/kJpkvfKkkRD9P4Zlh2oWWrdXmWdLm
+	 pZ/fRJwDVjLAyD0Zkh4WDOnZsBvSzSkkRESLGHXJi6qcZgeTjoDCMA1P2DVtvwBJaN/qK
+	 lFfDndl15dSR+is2ZzNKZHXx0kl60S31lBGcVfgX4dIo2off4+YgAj09gV7AebEkROw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793724574;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793724576;
 	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:From:Date:
 	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Last-TLS-Session-Version;
-	bh=ubpxFXcGelEbnwoa2InvY9UP99/HYatKKNT8MLzTmr0=;
-	b=0w2bnOWwZsG3tiBg8gAMHm6KX8X9gKNZSKGJy1e+BRM8c91OYN6ypmukpBPC97xofCnZ
-	 px3aQNjdvts9gMEpkjP3Lw69F8mak/x42Jyk9wB8eyCBBDgeKsOQdyN5yCFJ+5hak2SqZ
-	 vfhErFsnaalFQzKA/mCKSU5zWF++nnuvD7X6PKCODA5aZp0TqqFz6vdr4Li0aMtQfyEj4
-	 o5rc+3PVbeWQYvUQjVx983+tP3g/AZoHSekm97HSuRvDalNxkUcLXPzXughbx9Lrbzayo
-	 3Wx2cnk7Z+Sb+c/bIagHKwGf0BGHGr/aB/75WuJUntT1WkERZi+zi9xjuzTTofz1ALQ==
+	bh=sXXXhM2EDu3ROCdH3F3m73DJX0EM4Yoi8JjSeuI9o0o=;
+	b=Kz42t+keL9FHCvbmqZPzWgEdYo+p5SO36mTHvfdjLX9PmbjI1bGaSdhAusQomY8bP/u+
+	 jX4+3JHODAX0KnriEV1mWsISgNtRx6KS651eG+4ei75O1h6GoOKadAQvclsAVBu2LbB3+
+	 VmU81WYgAT24ncjCqL5+EcXPe6MHJhsgimhwWNHaESSAfuEf+sdeHDwoB3Mu2u7eM+88M
+	 BztMTmpQ+jxoz58KJg02PIzRUiRwdVIQSJVmgJl+QKB51jc8GIqwATJMUQrmnTBl/G0JX
+	 pf/iA1dSVIF/6q0MXLpYhFJRb7vVxsrA/CTTfW8c7vEKX10PfZMCFllFYS6cQy8z+Cg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=bootlin.com;
 	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=aAKEw3ms;
-	arc=none smtp.remote-ip=185.171.202.116
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=24abW0uw;
+	arc=none smtp.remote-ip=185.246.84.56
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C173606A330
-	for <mfd@lists.linux.dev>; Tue,  3 Nov 2026 16:49:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6C173606A330
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77ADA606EE92
+	for <mfd@lists.linux.dev>; Tue,  3 Nov 2026 16:49:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 77ADA606EE92
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=aAKEw3ms
+	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=24abW0uw
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id C8B92C49F46;
-	Tue,  3 Nov 2026 16:50:37 +0000 (UTC)
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 383641A143B;
+	Tue,  3 Nov 2026 16:49:34 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 3503E6046C;
-	Tue,  3 Nov 2026 16:49:33 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 981DA10328C5E;
-	Tue,  3 Nov 2026 17:49:31 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 063E26046C;
+	Tue,  3 Nov 2026 16:49:34 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id B678010329123;
+	Tue,  3 Nov 2026 17:49:32 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1793724572; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1793724573; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=ubpxFXcGelEbnwoa2InvY9UP99/HYatKKNT8MLzTmr0=;
-	b=aAKEw3msVBTBZ0MkuLAwRwDUiL/I+M14tddqYD/j6oN4Gut80MUoQwOASpP1mbKYOpEKx2
-	2ZAx1EEM3ao7zHhO9X3ei7g4o1Apr2fRf8ZFcRprmjWPtqN8UklU1TRkowzcSeS84zTsuw
-	R6VfGNhMTW02qSj/NnmhlAeDUjQ2d4TphdoaJQ7lgTnYLeQDu0xrfNOJkA8Uj3qwoSkeUZ
-	A+5+08IGq+8yql9sa1iSAUzS6ErYITHbuPa/iJzRBmBd8HBMcfoQOdj/IWiScPVcp/bc5u
-	CkPhzQ8MyBXf12VSE/N44LIHopn+bsNbv6sTf4sPwGJIFrFuMpAK3ubbrLG1xw==
+	bh=sXXXhM2EDu3ROCdH3F3m73DJX0EM4Yoi8JjSeuI9o0o=;
+	b=24abW0uwGAt/GUNqQN9K7Az4wWphNaIDpoewyGbbT3QZ/4crC22Skoc427CgbRKeoevdr1
+	vrcnyetszcTDWX8FrIcEkX9tW0kJtcBYZVZrsvHAHswV2m05WYz2rgq1zcQeS6ODjYroEC
+	ya0s3iOYLnOBAX+FfxL+N4GvivqMyWxLfj7IWMstndcXPVJiC/4rQgpfGnuT6ohRjkMw8n
+	w5OmML7jWKTi409rc03AUwUapqUqSCa2qNBQmy7PMRifwAUCd36QzDScUV/pXIil8QhINp
+	3xbWoIwu1Ho10yzIBuxwAmTcR/4cG6szORXNov/RtjECoLpTKHiex6coPJJ91w==
 From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
-Date: Tue, 03 Nov 2026 17:49:13 +0100
-Subject: [PATCH v5 5/9] mfd: cgbc: Use PLATFORM_DEVID_AUTO for child device
- registration
+Date: Tue, 03 Nov 2026 17:49:14 +0100
+Subject: [PATCH v5 6/9] i2c: cgbc: Add support for fixed frequency buses
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -66,7 +65,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261103-cgbc-i2c-storage-devices-support-v5-5-ac11f23fae51@bootlin.com>
+Message-Id: <20261103-cgbc-i2c-storage-devices-support-v5-6-ac11f23fae51@bootlin.com>
 References: <20261103-cgbc-i2c-storage-devices-support-v5-0-ac11f23fae51@bootlin.com>
 In-Reply-To: <20261103-cgbc-i2c-storage-devices-support-v5-0-ac11f23fae51@bootlin.com>
 To: Lee Jones <lee@kernel.org>, Andi Shyti <andi.shyti@kernel.org>
@@ -77,45 +76,98 @@ Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 X-Mailer: b4 0.16.0
 X-Last-TLS-Session-Version: TLSv1.3
 
-Since parameters are now passed to the i2c-cgbc driver via platform
-data, the I2C driver no longer depends on the platform device ID to probe
-the correct I2C buses. Drop the hardcoded cell ID in favor of
-PLATFORM_DEVID_AUTO.
+Some I2C buses run at a fixed frequency. Add a fixed_freq flag to struct
+cgbc_i2c_platform_data to identify them. But the frequency is still needed
+to compute read_maxtime_us, so split cgbc_i2c_set_frequency() into two
+functions:
+- cgbc_i2c_set_frequency(): sets the bus frequency (skipped for
+  fixed-frequency buses).
+- cgbc_i2c_get_frequency(): reads the bus frequency and computes
+  read_maxtime_us.
 
 Signed-off-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
 ---
- drivers/mfd/cgbc-core.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ drivers/i2c/busses/i2c-cgbc.c | 30 +++++++++++++++++++-----------
+ include/linux/mfd/cgbc.h      |  2 ++
+ 2 files changed, 21 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/mfd/cgbc-core.c b/drivers/mfd/cgbc-core.c
-index 777930d1169e..7f512b4f07f7 100644
---- a/drivers/mfd/cgbc-core.c
-+++ b/drivers/mfd/cgbc-core.c
-@@ -71,13 +71,11 @@ static const struct mfd_cell cgbc_devs[] = {
- 	MFD_CELL_NAME("cgbc-hwmon"),
- 	{
- 		.name = "cgbc-i2c",
--		.id = 1,
- 		.platform_data = &cgbc_i2c_i2c0_pdata,
- 		.pdata_size = sizeof(cgbc_i2c_i2c0_pdata),
- 	},
- 	{
- 		.name = "cgbc-i2c",
--		.id = 2,
- 		.platform_data = &cgbc_i2c_ddc0_pdata,
- 		.pdata_size = sizeof(cgbc_i2c_ddc0_pdata),
- 	},
-@@ -350,8 +348,8 @@ static int cgbc_init_device(struct cgbc_device_data *cgbc)
- 	if (ret)
- 		goto release_session;
+diff --git a/drivers/i2c/busses/i2c-cgbc.c b/drivers/i2c/busses/i2c-cgbc.c
+index 40ffab4fd0bc..8623a5d03636 100644
+--- a/drivers/i2c/busses/i2c-cgbc.c
++++ b/drivers/i2c/busses/i2c-cgbc.c
+@@ -128,7 +128,6 @@ static int cgbc_i2c_set_frequency(struct i2c_adapter *adap,
+ 	struct cgbc_i2c_data *i2c = i2c_get_adapdata(adap);
+ 	struct cgbc_device_data *cgbc = i2c->cgbc;
+ 	u8 cmd[2], data;
+-	int ret;
  
--	ret = mfd_add_devices(cgbc->dev, -1, cgbc_devs, ARRAY_SIZE(cgbc_devs),
--			      NULL, 0, NULL);
-+	ret = mfd_add_devices(cgbc->dev, PLATFORM_DEVID_AUTO, cgbc_devs,
-+			      ARRAY_SIZE(cgbc_devs), NULL, 0, NULL);
- 	if (ret)
- 		goto release_session;
+ 	if (bus_frequency > CGBC_I2C_FREQ_MAX_HZ ||
+ 	    bus_frequency < CGBC_I2C_FREQ_MIN_HZ) {
+@@ -139,18 +138,21 @@ static int cgbc_i2c_set_frequency(struct i2c_adapter *adap,
+ 	cmd[0] = CGBC_I2C_CMD_SPEED | i2c->bus_id;
+ 	cmd[1] = cgbc_i2c_freq_to_reg(bus_frequency);
  
+-	ret = cgbc_command(cgbc, &cmd, sizeof(cmd), &data, 1, NULL);
+-	if (ret)
+-		return dev_err_probe(i2c->dev, ret,
+-				     "Failed to initialize I2C bus %s",
+-				     adap->name);
++	return cgbc_command(cgbc, &cmd, sizeof(cmd), &data, 1, NULL);
++}
+ 
+-	cmd[1] = 0x00;
++static int cgbc_i2c_get_frequency(struct i2c_adapter *adap)
++{
++	struct cgbc_i2c_data *i2c = i2c_get_adapdata(adap);
++	struct cgbc_device_data *cgbc = i2c->cgbc;
++	u8 cmd[2] = { CGBC_I2C_CMD_SPEED | i2c->bus_id };
++	unsigned int bus_frequency;
++	u8 data;
++	int ret;
+ 
+ 	ret = cgbc_command(cgbc, &cmd, sizeof(cmd), &data, 1, NULL);
+ 	if (ret)
+-		return dev_err_probe(i2c->dev, ret,
+-				     "Failed to get I2C bus frequency");
++		return ret;
+ 
+ 	bus_frequency = cgbc_i2c_reg_to_freq(data);
+ 
+@@ -373,9 +375,15 @@ static int cgbc_i2c_probe(struct platform_device *pdev)
+ 	i2c_set_adapdata(&i2c->adap, i2c);
+ 	platform_set_drvdata(pdev, i2c);
+ 
+-	ret = cgbc_i2c_set_frequency(&i2c->adap, I2C_MAX_STANDARD_MODE_FREQ);
++	if (!pdata->fixed_freq) {
++		ret = cgbc_i2c_set_frequency(&i2c->adap, I2C_MAX_STANDARD_MODE_FREQ);
++		if (ret)
++			return dev_err_probe(dev, ret, "Failed to set I2C bus frequency");
++	}
++
++	ret = cgbc_i2c_get_frequency(&i2c->adap);
+ 	if (ret)
+-		return ret;
++		return dev_err_probe(i2c->dev, ret, "Failed to get I2C bus frequency");
+ 
+ 	return i2c_add_numbered_adapter(&i2c->adap);
+ }
+diff --git a/include/linux/mfd/cgbc.h b/include/linux/mfd/cgbc.h
+index 4b6e41b9ca4a..63fdf16fec95 100644
+--- a/include/linux/mfd/cgbc.h
++++ b/include/linux/mfd/cgbc.h
+@@ -45,10 +45,12 @@ int cgbc_command(struct cgbc_device_data *cgbc, void *cmd, unsigned int cmd_size
+  * struct cgbc_i2c_platform_data - Platform data of the CGBC I2C driver
+  * @name:		I2C adapter name
+  * @cgbc_bus_id:	I2C bus ID (from Board Controller point of view)
++ * @fixed_freq:		I2C bus has a fixed frequency
+  */
+ struct cgbc_i2c_platform_data {
+ 	const char *name;
+ 	int cgbc_bus_id;
++	bool fixed_freq;
+ };
+ 
+ #endif /*_LINUX_MFD_CGBC_H_*/
 
 -- 
 2.53.0
