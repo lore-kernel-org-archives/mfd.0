@@ -1,57 +1,59 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.84.56
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793721239;
-	b=oULvhHh+CxjhlwRyXQN3i4G/7FPUA4yAS3x3+hIYQ//PZDyERhjEq1yM/ssOhUvaLEqh
-	 DyYEIpEVbu4lij/Fq/1kCPBGmI9ieSqY3kRdBpQ9dUsUb3HBCQkBC9PTrCxewexGYpbHI
-	 5hOmrV1v/fQV1D4niAa0TglfwutkFxg+8UZtcGg5huEvWHHAPIuZ1S6LGsAaWVztOeObD
-	 5UTr7sr5qGbQTJ1CGN0HtDNYmYUxzOSt8HI4sB4qOWwgRmZq9rvxnCnVkaIvUfzBh2Zb/
-	 YqUT5QoxVni2hxQDfqApciSGLURzyhqfBgkG5qigybd968hqoJVhCwMjIdQ0WopjICQ==
+	t=1793724571;
+	b=tVbtf4o4ikqU56vlnVRhGQxPDwQgMZ4HRQKdtnb0nB12M8hJ1V+WeSbBO0FDLe/QwAuU
+	 +lPk8lStCaQBF2PGkNvLMpD9gpQKtfmD4V/+FVS4cO7CylcntxpAktCpAkJhbw105YonE
+	 trKwqaS+RC76t34p57dPmVj1XW60RwDc5jxUvwQSJIXqBKunpTlLSHc4GmuPGiMbcPXy3
+	 4njGdILOI9X7Oreb3HzG0WLudUEG7eSDm4as5cjmRfRTZCTtf2aIQfA8ytR8iBngYcyMY
+	 EqBvmm09Snh+yp3Eu7yZkfXW4qjX8B9gPWeddlasDkuWmfXkbTC2XILQ4VQsfEVHtTg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793721239;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=zreHo2ISt+zlnynvOv871jjIeLdVjPJtM/vYuS7vP7U=;
-	b=5pWeNhTZKmyrMQgrMszGJf9vu0F2my1kEghc8pSWLYyF5SsAJXo2gwFdvYXfjioUdzbp
-	 KGUdS04vbJTe2iKBC6ROwb6IkrVUf7S2bfsO9Ffhp+7oQQD7BX/9aRzNPgcak8nTHaVsQ
-	 Jr4Wc/xjHk/I/LJlBO0JpXuo7Wz4xKSCnTe6E5jmZZy6a+kyKEgqA5Z0ixMypWKH9VuMk
-	 V2VUNBmVLuoEgds2dvEp1XlUdhktB6fKMiPnXynXBJYF4ULLRoBD/w2zP3sFkAvNhgkXu
-	 Iv+7/9Kr4G2A7rXEf0tVvDf0L/P2swCqgrHXcXg7Ohwij3ofeWmRNo6t70tbFdE/Kzg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793724571;
+	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:From:Subject:
+	 Date:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Last-TLS-Session-Version;
+	bh=5dGb8WXTIZvpvRNeR8lBF+8mxozMxifiVbHhgx0PdyY=;
+	b=Mg/7+3mRdkFL6+HPmyFWi2iJZ1U0rT4BlOCxHvkRVV+TntcxJA+I6mYQFq0YHpxkF7Jk
+	 PP3JZDNnMB7fO1W9RL4pEtkIb+XJF14Hq70MDArjkrqk7ZuEouP6TQs3E6rBafT7TUbiu
+	 p7T6RVPFmIZc+kRQYgbVA6kn0FdNdo1ptnB36Z2EF/pubk/byA+U53EQ1n1Vo7K8BFkCR
+	 hBUUs0xygJFatlT9Y+rScwPI4Ldh943E26ygjtptidDVT0sVbsxLeI2rT8jRq0VeWl1yg
+	 vvxCn9cfLLwzDilYL6QDQKNikT8MFnB0aVbpxYtWThrx47wwq33x1B99GyvAIyxeWvQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=U+6uxV+z;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=bootlin.com;
+	spf=pass smtp.mailfrom=bootlin.com;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=MIwJML6Z;
+	arc=none smtp.remote-ip=185.246.84.56
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1892606A326
-	for <mfd@lists.linux.dev>; Tue,  3 Nov 2026 15:53:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE94B606A333
+	for <mfd@lists.linux.dev>; Tue,  3 Nov 2026 16:49:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BE94B606A333
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=U+6uxV+z
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 506781F000C1;
-	Tue,  3 Nov 2026 15:53:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793721238;
-	bh=zreHo2ISt+zlnynvOv871jjIeLdVjPJtM/vYuS7vP7U=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=U+6uxV+z8jYlke34mjk0did347NDEeEw6mX5do8lYZDbMJdm78OLTT97gH7vbsx/Y
-	 pxyAP+CrYcPZGj2d9GwlNT/B0Pb6ZHNcYTd8+/c4pqJmdksFnUX3hCL61M5aeUvSii
-	 D8ksAAhY0XNReNF5Q8mhn7BB197DzMswo6Rkw1xKjkPr8xFlkikemM5a5VLlnm6Dqs
-	 yf3XPxmsX4TT8lqw/DjXstMy7mXQXb2gpGjYkpGMxB12hSBfBMGrvx1sZhtvuB21d2
-	 HxJ9DFUFGnbn6VR/NoXIg8SElXKoejY7tJkucZqfB9ca/I8JvZDadJQYzvmEkXcQiA
-	 qpqid5BFAI3Kg==
-Message-ID: <sashiko-outbox-195662@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 1/1] mfd: stm32-timers: Use
- dmaengine_desc_set_callback()
-Reply-To: sashiko-reviews@lists.linux.dev
-To: Frank.Li@oss.nxp.com, =?utf-8?b?b3BlbiBsaXN0Ok1VTFRJRlVOQ1RJT04gREVW?=
- =?utf-8?b?SUNFUyAoTUZEKQ==?= <mfd@lists.linux.dev>
-Cc: lee@kernel.org
-In-Reply-To: <20261103155059.1247139-1-Frank.Li@oss.nxp.com>
-References: <20261103155059.1247139-1-Frank.Li@oss.nxp.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 03 Nov 2026 15:53:57 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=MIwJML6Z
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-02.galae.net (Postfix) with ESMTPS id 4910D1A1435;
+	Tue,  3 Nov 2026 16:49:28 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 150F76046C;
+	Tue,  3 Nov 2026 16:49:28 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 28C0D10328C5E;
+	Tue,  3 Nov 2026 17:49:24 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1793724567; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding; bh=5dGb8WXTIZvpvRNeR8lBF+8mxozMxifiVbHhgx0PdyY=;
+	b=MIwJML6ZrlML9gz4Da6Q/pl+r7yvzkdB1t99vQCrz9KcnpBFz6rKO4/9fh/7X8eejWR3En
+	C3YsFzJs/+s0kA7YGKSralaozX2IWSwrEtAMNWLlcmU1xChHsX5L6rrKONeeAei7H7Xywk
+	RRP2mVeed8iMRMHRhS07fIAQXPGlBj7hD5N4enabnNV3CiMKjnaHdBoobtNQtmw7WTDTld
+	6rhbW+Vsze5lLum/0OTl0e18R0x3Ex0aQq330KScu9UyzZJSA/v9hrFVfnwOaI9TamqqtY
+	/gvUMDEsnvBBfPlXeAlFDIQ+ZjXiuS/2Az8m/J+BggJQog6bag0vcYCx0XnyeA==
+From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
+Subject: [PATCH v5 0/9] Congatec Board Controller: Add storage devices
+ support
+Date: Tue, 03 Nov 2026 17:49:08 +0100
+Message-Id: <20261103-cgbc-i2c-storage-devices-support-v5-0-ac11f23fae51@bootlin.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,21 +62,128 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43QzW7CMAwH8FdBOS+VnTT94MR7TDukqQNRSwNJ6
+ QaId19aJLaJw7hEciL//nauLFJwFNl6dWWBJhedH1Kh3lbM7PSwJe7aVDMBooASS262jeFOGB5
+ HH3R6b1OXocjj6XDwYeSNJCoNaSkFsMQcAln3tUS8f9zrQMdTShrvl2xPMeolab2acxBECbWUU
+ GSiQlHUiiPviTYdhYH6zIftDD+3ScAcRA6ZQCyrgkvehcs5XkZvs85fev8ZO7fxMWbHk+6N3++
+ zdLB5qp2b9zkv/zDhMtaycgX5/ytPyIFbamWlEIoSzabxfuzd8OAn8YtEfIEUiZRkdV1XBGTVM
+ yl/yPolUiZS1XmjpG2MIv1M5g8SAcQLZJ5IanJBYLG1qv5L3m63bzDq4x5hAgAA
+X-Change-ID: 20260717-cgbc-i2c-storage-devices-support-b3ee7cea3320
+To: Lee Jones <lee@kernel.org>, Andi Shyti <andi.shyti@kernel.org>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Werner Gartner <Werner.Gartner@congatec.com>, mfd@lists.linux.dev, 
+ linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org, 
+ "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>, 
+ stable@vger.kernel.org, Sashiko <sashiko-bot@kernel.org>
+X-Mailer: b4 0.16.0
+X-Last-TLS-Session-Version: TLSv1.3
 
-> From: Frank Li <Frank.Li@nxp.com>
->=20
-> Replace open-coded assignments to callback and callback_param fields
-> of struct dma_async_tx_descriptor with a call to the
-> dmaengine_desc_set_callback() helper.
->=20
-> No functional change intended. Prepare make to struct
-> dma_async_tx_descriptor private to the DMA engine.
->=20
-> Signed-off-by: Frank Li <Frank.Li@nxp.com>
+In this v5, I re-ordered a bit the patches to fix I2C bus names first.
+I also made an error message more user friendly.
 
-Sashiko has reviewed this patch and found no issues.
+Lee, this series conflicts with some other ongoing patches series:
+- mfd: Assorted resource lifetime, teardown, and error-handling fixes [1]
+- mfd: Constify mfd_cell arrays [2]
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261103155059.1247=
-139-1-Frank.Li@oss.nxp.com?part=3D1
+To make your life easier I rebased this series on top of them. Please let
+me know if you want to proceed in an other way. 
+
+[1] https://lore.kernel.org/all/20261027093306.2812695-1-lee@kernel.org/
+[2] https://lore.kernel.org/all/20261030071137.100954-3-krzysztof.kozlowski@oss.qualcomm.com/
+
+Best Regards,
+Thomas
+
+Signed-off-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
+---
+Changes in v5:
+- mfd: fix error message in case we fail to get session handle.
+- fix I2C bus names earlier in the series.
+- Link to v4: https://patch.msgid.link/20261002-cgbc-i2c-storage-devices-support-v4-0-eb42e0f1df59@bootlin.com
+
+Changes in v4:
+- Fix struct cgbc_i2c_platform_data comment (kernel-doc warning)
+- Move struct cgbc_i2c_platform_data from linux/platform_data/i2c-cgbc.h to
+  linux/mfd/cgbc.h
+- Use MFD_CELL_NAME macros.
+- Link to v3: https://patch.msgid.link/20260911-cgbc-i2c-storage-devices-support-v3-0-594b53fbc5ea@bootlin.com
+
+Changes in v3:
+- rebased on v7.3-rc2
+- use PLATFORM_DEVID_AUTO for child devices
+- move I2C bus and I2C device definition in the MFD driver
+- Link to v2: https://patch.msgid.link/20260811-cgbc-i2c-storage-devices-support-v2-0-3efa998e0ef5@bootlin.com
+
+Changes in v2:
+- i2c: fix typo in CGBC BIOS EEPROM label.
+- mfd: make cgbc_devs const
+- Link to v1: https://patch.msgid.link/20260804-cgbc-i2c-storage-devices-support-v1-0-fed38510671c@bootlin.com
+
+To: Thomas Richard <thomas.richard@bootlin.com>
+To: Lee Jones <lee@kernel.org>
+To: Andi Shyti <andi.shyti@kernel.org>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+Cc: Werner Gartner <Werner.Gartner@congatec.com>
+Cc: mfd@lists.linux.dev
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-i2c@vger.kernel.org
+
+---
+Thomas Richard (congatec GmbH) (9):
+      mfd: cgbc: Fix use of negative error code as valid session handle
+      i2c: cgbc: Use real I2C bus names
+      mfd: cgbc: Add I2C platform data
+      i2c: cgbc: Use plateform data to get bus ID and adapter name
+      mfd: cgbc: Use PLATFORM_DEVID_AUTO for child device registration
+      i2c: cgbc: Add support for fixed frequency buses
+      mfd: cgbc: Add virtual I2C bus support
+      mfd: cgbc: Add virtual storage devices on the virtual I2C bus
+      i2c: cgbc: Register known I2C devices on the bus
+
+ drivers/i2c/busses/i2c-cgbc.c | 108 ++++++++++++------------
+ drivers/mfd/cgbc-core.c       | 187 +++++++++++++++++++++++++++++++++++++++---
+ include/linux/mfd/cgbc.h      |  16 ++++
+ 3 files changed, 244 insertions(+), 67 deletions(-)
+---
+base-commit: d3dfdb6b429a5b99bfd47176bf07cad0956f14ed
+change-id: 20260717-cgbc-i2c-storage-devices-support-b3ee7cea3320
+prerequisite-message-id: 20261027093306.2812695-1-lee@kernel.org
+prerequisite-patch-id: 7d50ed21b2d5d1bb25290d19c46b4668073feddf
+prerequisite-patch-id: 45cdf12f5527ab86a560ba98c02cc447bf6eee4e
+prerequisite-patch-id: 6148da531ee7713f8afb7bec90fb3f548b562d28
+prerequisite-patch-id: fb0c30c409ef451192973c417a0585f989f8917b
+prerequisite-patch-id: 8403fcd8efcd44138f139767624773fa654a5a2f
+prerequisite-patch-id: 434546741519ecd3032e19f3acf2c5370e9a454c
+prerequisite-patch-id: 29540ca5739d6f6f3e2d3fe5b87893ad31f6c3ee
+prerequisite-patch-id: a33adadb2e2efe82d2a14417c1c35c579bf212d0
+prerequisite-patch-id: dd53f1e6db35d71b51061dad45de28dde9ebc70f
+prerequisite-patch-id: 85a1da1285d64ce3fc78c8ae7969fbb0dc7c3cd7
+prerequisite-patch-id: e9b952ebc380d058ac2144771c780a0b08c3b7c3
+prerequisite-patch-id: 1f0dcc7a8c5df7ae1c8bfb5a1c8f62b441704286
+prerequisite-patch-id: 077a4ef70d74321711e2efd4e016e01a1d41c818
+prerequisite-patch-id: 4dcd6cc156bb6ba43684605972fb179557a3891e
+prerequisite-patch-id: 62e87491674feaae09327a99a5ff1b4ed368f221
+prerequisite-patch-id: ab1eac435fd40cdb3d9a8d453a12852a105f57c4
+prerequisite-patch-id: 1cbcc3b666db27cbe9f3fa6c6ead2f49a0d459da
+prerequisite-patch-id: ecb566a7bea44600e9d7e9617e280c994773e3dd
+prerequisite-patch-id: 20e295db85a31587d342471a3c341615c8eb0fd7
+prerequisite-patch-id: 06118bf6e5affc234e7edbdb5c0aae9b05412b33
+prerequisite-patch-id: 17afeb13c5012348feee8eb739ff058e84ed2df8
+prerequisite-patch-id: 27693bdeffbc7a0a295c165912b89af5ca3264aa
+prerequisite-patch-id: 8313fe2293eaf0e69ffd2f0017e18fde64ca68f7
+prerequisite-patch-id: fc53af34353efecb4490087ed066ccb256a74695
+prerequisite-patch-id: 02ad8a3b1fddb4f4e806939d36ae642c01004c36
+prerequisite-patch-id: 7b9b8460613f4240492ffe11ee7ee0e6c0b6ded8
+prerequisite-patch-id: 699c068a32ac9d3171e7a494fb2ca5522045779a
+prerequisite-message-id: 20261030140240.211786-3-krzysztof.kozlowski@oss.qualcomm.com
+prerequisite-patch-id: f6cf975bf90acb029fa985ecd659b59076fdc0cd
+prerequisite-patch-id: 4f16ad80662de796ae1454904c938e7e85115fbd
+
+Best regards,
+--  
+Best Regards,
+Thomas Richard
 
