@@ -1,57 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793739649;
-	b=q+II2yCLdyuT+mghe7fOXBjO0OHE6skXleHfkBp4kFD4meMQp17ZN2uVxAfNq9m+GCOn
-	 E7HWAKbZAgXkEq2jdHFw2vQN+LqnChhplHV2/NxD5fRIi6hvfyZ7yXdMCIQ+pbjOfIXif
-	 uQV6PUID45JZhIhkpatjvu/YN9U2L666Ka87SM552QHEjnyz8ScK//neC1/DpRlw8R0PN
-	 0abKiBmf/k+8opzXS0WgYg+WKuQImgYpJJPS6UoevxujiuBweSThEwHF5uKcp6UrwQo/+
-	 jN7a3tV9vRQDI7p7x3UezrGBVaeJ3W00WIdmMha+buuigm3cwS8x9IomwteLQToFHuA==
+	t=1793743074;
+	b=qLUhm9iZuXpQK/HnHzZJB/5NaJKM6DAwkT9CaSZuOMhTZCr0lJZBriUplWVLRTPIQAXB
+	 9ceFgs2/bHuSBC/DTnO4xBgNgtuAY5ae606LcZDshlVJi/Xz9F45XwXGRh7RGH7qIcs1y
+	 GwcV7qk8l7oG87zO4O6Gf6oGJgh8+/7F81v0JQL2c2Q7iFtQNnZqZPpmlwsNO15jN3y69
+	 4TegbWZG7VeCf88hcT3i37sQMYTirvUIU4gUG4YGTYKQdWUo9LYVxbnHOimkOh0S31XBA
+	 yizNGrHw/QqbWQ/8Brbgg3wLpGhuXFisPaMLOuBBSo41veecbfKR4NbBTxSRv6RGNjw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793739649;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=/nxwRG5rAZoL/7GtvzUCB0RYpU9Jmn6Vvd+h+u+iHz4=;
-	b=dWHJ9nPYGQRamU8TlUCeA1BOJx0VWcK4x0AQ8IRFLvglSDDIrxoubCIikuURD8MVyRNn
-	 trPjgG0EppQtj9/LUeKh7vVzwF6+I+xT4DrFssSi6G7In4cFWSUPXqpyvsqvfvBFBJLyD
-	 2l9Esl4dv/2VwV78gawvQ8P/i6nVlBzvrjJl+RuPF1zSNOQe0kvHU1lq99e70OEAe9+yD
-	 VXP+WR1ovMo/PW6y//sJ8ODfjs+bgqjKM+3vI9B1hKQ5axNpyg95Wsq7Zveo6wItiapYA
-	 xUmHJug7WmZ0OatIdjlguEjgQAKFFkMWr+KD3PMd+pFqkaZvxHqsFRIW+phK6maCwZg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793743074;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=4H8eU6z2JR3iXPnaXPV2uTwunMPI539+3YmBBPsTqq8=;
+	b=nSJx3fSPu5l37PMhgthD4FC9U6+rZkIJ3SGZE/dtLXk63j3OEo466W/iYisAWAsH1fhY
+	 BWbcDAcGejVnfilmXwwOEqEoVKW81irtBrlT2nimdOYei7TxocRKbnPIinmuFPnzj04iQ
+	 Xw7szYKBJxY9RTjHApYpU2Qx1d15ggUdXs6etsDqzA7QzN2V+bW02p6IcW0VK6SZp4tSt
+	 +J0FPtrfRdJDJZa0erVcBi6w8OhhKx0sOx5U4Ts9VR0byToFlR2e9iMTs9OC9q4e8+xVk
+	 jsjaIWNhS3JK6QuR/Zkx34yoF23ZZqjzEL69CGuLPV+JotLpomFSuThaoiI1Zpi44aA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WVGRMX7V;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NN4zXVrv;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F213C606A324;
-	Tue,  3 Nov 2026 21:00:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 516D0606D805
+	for <mfd@lists.linux.dev>; Tue,  3 Nov 2026 21:57:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WVGRMX7V
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A7DD1F00A02;
-	Tue,  3 Nov 2026 21:00:47 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NN4zXVrv
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1E2861F00A24
+	for <mfd@lists.linux.dev>; Tue,  3 Nov 2026 21:57:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793739648;
-	bh=/nxwRG5rAZoL/7GtvzUCB0RYpU9Jmn6Vvd+h+u+iHz4=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=WVGRMX7V9YGoWJkAZ8/gfbD7GbXcyYYqTX8sTAlc3DVE7zDRTPeKfrFiQX9BgEz57
-	 mAqIAIi+vpm3SpjrJPdcQrPuXJE0erDnov//fMaQxQOWia9+qzkPVWQw1QyBx5N3SQ
-	 Zpi3hGTHisfS4eVIVqqYI4yqNV9f/ULxJW8kZKzH8wJpBJ8Rlb5RqfhDEBcVJ8ryUW
-	 xqXF9xzxYyYyP9py/KBZCM8aXJzFXeuWpsuH4dOBZv8ls3Paz5NbGiLzpBLgbb+7fb
-	 Uca6w9W/LP/+EbCjKU8J2Gjke7z6zf/Bs+NOQFA6zxEeCMVs1c3nlgm/W7Qf/6zp+B
-	 MSbaTaYX1096A==
-Message-ID: <sashiko-outbox-196023@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 2/2] mfd: an8855: Add support for Airoha AN8855
- Switch
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Christian Marangi" <ansuelsmth@gmail.com>, mfd@lists.linux.dev, devicetree@vger.kernel.org
-Cc: robh@kernel.org, conor+dt@kernel.org, lee@kernel.org
-In-Reply-To: <20261103203034.12869-3-ansuelsmth@gmail.com>
-References: <20261103203034.12869-1-ansuelsmth@gmail.com>
- <20261103203034.12869-3-ansuelsmth@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 03 Nov 2026 21:00:46 +0000
+	s=k20260515; t=1793743074;
+	bh=4H8eU6z2JR3iXPnaXPV2uTwunMPI539+3YmBBPsTqq8=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=NN4zXVrv4HX75rNjDW8n2rGhpIdcwT226SOYEzZIJkf4wky///aAUqXsW/LNjWIkB
+	 +jqhBmbKEGHqpB/RfJ3IOme2x4Uro3Y6FFkYU7Lcb9k3EYVAL1RdZOfZBIO6UiCdmd
+	 KU9/YPoFAEbimG8yPTj0+ET9beRolcznhTqYs/aM+V+aZskkRu62idx1+KnN4AwSau
+	 1qKaj1M79st+FVG6mdkANAoRT1WY2ezZ902n3LEXe1SUMJ3M1nio7P61uGsrtysmqO
+	 t+l8RFDh+9jqGqOg9Z/Kt58ZxPm2v6e40EATAVtiGV3R2E35gTnJzuKbjPNba1LZpc
+	 +CFP4IuYefF8g==
+Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-5ba3fba0080so5403e87.1
+        for <mfd@lists.linux.dev>; Tue, 03 Nov 2026 13:57:54 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AKwUvBy4XvhZyPyq7aXV36uoeRmXJxLtuh8Qcr580LnXzWkBpgEdYvek7IFh32M98yH8SRHjinI=@lists.linux.dev
+X-Gm-Message-State: APuU4Z9Pnwk+TxmLU8/NI1+HQPMxIFn+sdIed+jizPzRXfgAMedZU7tY
+	PODsouw1ARq6Ii8PkgzUb7/YgHkHepHE1c7V5AHhX5eVo7vgNQ8Vu2m7Q8eKpsKcGTSzUrZHvvV
+	AJvLTZz0v68veaYad3Q+Mafe8MObIJgE=
+X-Received: by 2002:a05:6512:a94:b0:5bf:b246:87a2 with SMTP id
+ 2adb3069b0e04-5bfd957b610mr4953868e87.10.1793743072116; Tue, 03 Nov 2026
+ 13:57:52 -0800 (PST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,238 +58,73 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+References: <20261102135330.2493332-1-robh@kernel.org>
+In-Reply-To: <20261102135330.2493332-1-robh@kernel.org>
+From: Linus Walleij <linusw@kernel.org>
+Date: Tue, 3 Nov 2026 22:57:39 +0100
+X-Gmail-Original-Message-ID: <CAD++jLm10TL4FkkyhvyF-CKNREA-mOSjbR5zKUisC_Wx1-nqgg@mail.gmail.com>
+X-Gm-Features: AclHuK-xZTzLWXlPWAOCiWHBj5C4K-MSmY2Fnjjj517UPimoWDCn2vjwhrapfPU
+Message-ID: <CAD++jLm10TL4FkkyhvyF-CKNREA-mOSjbR5zKUisC_Wx1-nqgg@mail.gmail.com>
+Subject: Re: [PATCH] dt-bindings: Use hex unit address patterns
+To: "Rob Herring (Arm)" <robh@kernel.org>
+Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Vadim Fedorenko <vadim.fedorenko@linux.dev>, 
+	Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>, Jiri Pirko <jiri@resnulli.us>, 
+	Ivan Vecera <ivecera@redhat.com>, Benson Leung <bleung@chromium.org>, 
+	Guenter Roeck <groeck@chromium.org>, Bartosz Golaszewski <brgl@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, Jonathan Cameron <jic23@kernel.org>, 
+	David Lechner <dlechner@baylibre.com>, =?UTF-8?B?TnVubyBTw6E=?= <nuno.sa@analog.com>, 
+	Andy Shevchenko <andy@kernel.org>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+	Alexandre Torgue <alexandre.torgue@foss.st.com>, Olivier Moysan <olivier.moysan@foss.st.com>, 
+	Arnaud Pouliquen <arnaud.pouliquen@foss.st.com>, Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
+	Thierry Reding <thierry.reding@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>, 
+	Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Lee Jones <lee@kernel.org>, 
+	Srinivas Kandagatla <srini@kernel.org>, Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>, 
+	Ulf Hansson <ulfh@kernel.org>, Hans Ulli Kroll <ulli.kroll@googlemail.com>, 
+	Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, 
+	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+	Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
+	Manivannan Sadhasivam <mani@kernel.org>, Ray Jui <rjui@broadcom.com>, 
+	Scott Branden <sbranden@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
+	Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, Masami Hiramatsu <mhiramat@kernel.org>, 
+	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+	"Rafael J. Wysocki" <rafael@kernel.org>, Daniel Lezcano <daniel.lezcano@kernel.org>, 
+	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>, 
+	Orson Zhai <orsonzhai@gmail.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
+	Chunyan Zhang <zhang.lyra@gmail.com>, Paul Kocialkowski <paul.kocialkowski@bootlin.com>, 
+	Shawn Guo <shawnguo@kernel.org>, Chanh Nguyen <chanh@os.amperecomputing.com>, 
+	Alistair Francis <alistair@alistair23.me>, Julius Werner <jwerner@chromium.org>, 
+	Paul Cercueil <paul@crapouillou.net>, Dmitry Osipenko <digetx@gmail.com>, 
+	Florian Fainelli <f.fainelli@gmail.com>, Thierry Reding <thierry.reding@gmail.com>, 
+	Ray Jui <ray.jui@broadcom.com>, Scott Branden <scott.branden@broadcom.com>, 
+	Krzysztof Kozlowski <krzk@kernel.org>, dri-devel@lists.freedesktop.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	netdev@vger.kernel.org, chrome-platform@lists.linux.dev, 
+	linux-gpio@vger.kernel.org, imx@lists.linux.dev, 
+	linux-arm-kernel@lists.infradead.org, linux-hwmon@vger.kernel.org, 
+	linux-iio@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, 
+	linux-sound@vger.kernel.org, linux-input@vger.kernel.org, 
+	linux-tegra@vger.kernel.org, mfd@lists.linux.dev, 
+	linux-arm-msm@vger.kernel.org, linux-mmc@vger.kernel.org, 
+	linux-phy@lists.infradead.org, linux-pm@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thank you for your contribution! Sashiko AI review found 3 potential issue(=
-s) to consider:
-- [High] mfd: an8855: missing reset-gpios handling in an8855_probe()
-- [High] mfd: an8855: missing PHY_MAX_ADDR check in an8855_phy_bus_register=
-()
-- [Medium] mfd: an8855: register internal PHYs after an8855-efuse to avoid =
-genphy fallback
---
+On Mon, Nov 2, 2026 at 2:53=E2=80=AFPM Rob Herring (Arm) <robh@kernel.org> =
+wrote:
 
-commit b751ed12fefc10d7bebaac0f5731b709d5c0d2bd
-Author: Christian Marangi <ansuelsmth@gmail.com>
+> Unit-addresses by default (and most commonly) are hexadecimal. There's a
+> number of cases using decimal patterns. Fix all of them, limiting the
+> pattern to match the 'reg' limits if there are any.
+>
+> Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 
-mfd: an8855: Add support for Airoha AN8855 Switch
+Acked-by: Linus Walleij <linusw@kernel.org>
 
-This commit adds an MFD core driver for the Airoha AN8855 switch, registeri=
-ng
-virtual MDIO buses via mdio-regmap for the internal PHYs and MFD cells for =
-the
-DSA switch and NVMEM provider.
-
-> diff --git a/drivers/mfd/airoha-an8855.c b/drivers/mfd/airoha-an8855.c
-> new file mode 100644
-> index 0000000000000..6a270555db5cf
-> --- /dev/null
-> +++ b/drivers/mfd/airoha-an8855.c
-> @@ -0,0 +1,579 @@
-
-[ ... ]
-
-> +#include <linux/bitfield.h>
-> +#include <linux/fwnode_mdio.h>
-> +#include <linux/gpio/consumer.h>
-> +#include <linux/mfd/core.h>
-
-[ ... ]
-
-> +static int an8855_phy_bus_register(struct device *dev, struct an8855 *dd=
-ata,
-> +				   struct device_node *phy_np,
-> +				   struct an8855_phy_bus *phy_bus_info)
-> +{
-> +	struct mdio_regmap_config mrc =3D { };
-> +	struct an8855_phy *phy_ddata;
-> +	struct regmap *regmap;
-> +	u32 addr, phy_offset;
-> +	struct mii_bus *bus;
-> +	int ret;
-> +
-> +	ret =3D of_property_read_u32(phy_np, "reg", &addr);
-> +	if (ret)
-> +		return ret;
-> +
-> +	phy_offset =3D addr - ddata->switch_addr;
-> +	if (phy_offset >=3D AN8855_MAX_PHY_PORT)
-> +		return -EINVAL;
-
-[Severity: High]
-Can this cause out-of-bounds accesses on bus->irq[] and bus->mdio_map[] if
-ddata->switch_addr is between 28 and 31 and a child PHY node specifies a reg
-value >=3D 32 (PHY_MAX_ADDR)?
-
-In drivers/mfd/airoha-an8855.c, an8855_phy_bus_register() reads addr via
-of_property_read_u32() and only checks that addr - ddata->switch_addr is le=
-ss
-than AN8855_MAX_PHY_PORT (5), without checking that addr < PHY_MAX_ADDR (32)
-or using of_mdio_parse_addr().
-
-When an8855_probe() subsequently passes phy_bus_infos[i].addr to
-fwnode_mdiobus_register_phy() for a node with an ethernet-phy-id compatible
-string, the call chain:
-
-  an8855_probe()
-    fwnode_mdiobus_register_phy()
-      fwnode_mdiobus_phy_device_register()
-        phy_device_register()
-          mdiobus_register_device()
-
-indexes mdio->irq[addr] and mdiodev->bus->mdio_map[mdiodev->addr] (both siz=
-ed
-PHY_MAX_ADDR) and evaluates 1 << addr without bounds checking:
-
-  drivers/net/mdio/fwnode_mdio.c:fwnode_mdiobus_phy_device_register() {
-      ...
-      if (rc > 0) {
-          phy->irq =3D rc;
-          mdio->irq[addr] =3D rc;
-      } else {
-          phy->irq =3D mdio->irq[addr];
-      }
-
-      if (fwnode_property_read_bool(child, "broken-turn-around"))
-          mdio->phy_ignore_ta_mask |=3D 1 << addr;
-      ...
-  }
-
-  drivers/net/phy/mdio_device.c:mdiobus_register_device() {
-      if (mdiodev->bus->mdio_map[mdiodev->addr])
-          return -EBUSY;
-      ...
-  }
-
-Should an8855_phy_bus_register() also verify that addr < PHY_MAX_ADDR (or u=
-se
-of_mdio_parse_addr()) before accepting the PHY address?
-
-[ ... ]
-
-> +static int an8855_probe(struct mdio_device *mdiodev)
-> +{
-> +	struct an8855_phy_bus phy_bus_infos[AN8855_MAX_PHY_PORT] =3D { };
-> +	struct device *dev =3D &mdiodev->dev;
-> +	struct regmap *regmap;
-> +	struct an8855 *ddata;
-> +	int num_phys;
-> +	int i, ret;
-
-[ ... ]
-
-> +	/* Reset PHY page for switch address */
-> +	mutex_lock_nested(&ddata->bus->mdio_lock, MDIO_MUTEX_NESTED);
-> +	ret =3D an8855_mii_set_page(ddata, ddata->switch_addr,
-> +				  AN8855_PHY_PAGE_STANDARD);
-> +	mutex_unlock(&ddata->bus->mdio_lock);
-> +	if (ret)
-> +		goto err_put_fwnodes;
-> +
-> +	ret =3D an8855_read_switch_id(dev, regmap);
-> +	if (ret)
-> +		goto err_put_fwnodes;
-> +
-> +	/* Release global PHY power down */
-> +	ret =3D regmap_write(regmap, AN8855_RG_GPHY_AFE_PWD, 0x0);
-> +	if (ret)
-> +		goto err_put_fwnodes;
-
-[Severity: High]
-Does an8855_probe() need to request and deassert reset-gpios before accessi=
-ng
-the switch registers over MDIO?
-
-Documentation/devicetree/bindings/mfd/airoha,an8855.yaml defines reset-gpios
-on the airoha,an8855 node, and drivers/mfd/airoha-an8855.c includes
-linux/gpio/consumer.h, but never requests or deasserts the GPIO.
-
-Because airoha,an8855 is a generic MDIO device rather than a PHY device,
-__of_mdiobus_parse_phys() registers it via of_mdiobus_register_device()
-without MDIO_DEVICE_FLAG_PHY set. In drivers/net/phy/mdio_device.c,
-mdiobus_register_device() only registers reset lines for PHY devices:
-
-  if (mdiodev->flags & MDIO_DEVICE_FLAG_PHY) {
-      err =3D mdio_device_register_reset(mdiodev);
-      if (err)
-          return err;
-
-      /* Assert the reset signal */
-      mdio_device_reset(mdiodev, 1);
-  }
-
-As a result, the MDIO core does not manage reset-gpios for this device. If =
-the
-reset line is asserted when an8855_probe() runs, the MDIO accesses in
-an8855_mii_set_page() and an8855_read_switch_id() will fail; conversely, if=
- a
-child MFD driver toggles reset-gpios later during devm_mfd_add_devices(), it
-would reset the switch and wipe out the AN8855_RG_GPHY_AFE_PWD write and
-internal PHY state initialized here in an8855_probe().
-
-> +
-> +	/* Register PHYs */
-> +	for (i =3D 0; i < num_phys; i++) {
-> +		ret =3D fwnode_mdiobus_register_phy(phy_bus_infos[i].bus,
-> +						  phy_bus_infos[i].node,
-> +						  phy_bus_infos[i].addr);
-> +		fwnode_handle_put(phy_bus_infos[i].node);
-> +		phy_bus_infos[i].node =3D NULL;
-> +
-> +		if (ret)
-> +			goto err_put_fwnodes;
-> +	}
-> +
-> +	return devm_mfd_add_devices(dev, PLATFORM_DEVID_AUTO, an8855_cells,
-> +				    ARRAY_SIZE(an8855_cells), NULL, 0,
-> +				    NULL);
-
-[Severity: Medium]
-Can registering the internal PHYs before the an8855-efuse MFD cell cause
-phy_attach_direct() to bind the fallback genphy_driver instead of the
-dedicated PHY driver?
-
-In Documentation/devicetree/bindings/mfd/airoha,an8855.yaml, each internal
-ethernet-phy node consumes nvmem-cells from the an8855-efuse child node, wh=
-ich
-causes fw_devlink to create supplier links from the efuse node to the PHY
-nodes.
-
-In an8855_probe(), fwnode_mdiobus_register_phy() is called for all internal
-PHYs before devm_mfd_add_devices() creates the an8855-efuse and an8855-swit=
-ch
-devices. During fwnode_mdiobus_register_phy() -> phy_device_register() ->
-device_add(), each PHY defers probe with -EPROBE_DEFER because its nvmem
-supplier (an8855-efuse) has not been registered yet, leaving
-phydev->mdio.dev.driver as NULL on deferred_probe_pending_list.
-
-Immediately afterwards, devm_mfd_add_devices() registers an8855-efuse (which
-queues deferred_probe_work asynchronously) and then synchronously registers
-an8855-switch. Because phy-handle is not tracked by fw_devlink, an8855-swit=
-ch
-can probe and call dsa_register_switch() -> phylink_of_phy_connect() ->
-phy_attach_direct() before deferred_probe_work runs. When phy_attach_direct=
-()
-sees that d->driver is NULL, it forcibly binds genphy_driver and removes the
-PHY from the deferred probe list:
-
-  drivers/net/phy/phy_device.c:phy_attach_direct() {
-      ...
-      if (!d->driver) {
-          if (phydev->is_c45)
-              d->driver =3D &genphy_c45_driver.mdiodrv.driver;
-          else
-              d->driver =3D &genphy_driver.mdiodrv.driver;
-
-          phydev->is_genphy_driven =3D 1;
-      }
-      ...
-  }
-
-Should an8855-efuse be registered before fwnode_mdiobus_register_phy() (or =
-the
-PHYs registered before an8855-switch after an8855-efuse is available) so the
-internal PHYs can bind to their dedicated driver without deferring?
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261103203034.1286=
-9-1-ansuelsmth@gmail.com?part=3D2
+Yours,
+Linus Walleij
