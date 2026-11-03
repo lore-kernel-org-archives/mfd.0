@@ -1,67 +1,58 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793718585;
-	b=gremXeleSSiBV6FucVfwiD1VDtkPLYvIuuoCCBKZ8jA9c6zjXib333BAbT/MG4fpIsU1
-	 QxL3ZSNhKvBdNHlFcEEgvmSdTgYMW/aWpF29gYXW85BY6j04xC12lTnlY5/5aSvLkl+Mq
-	 QxYZTstkstmbbD3H7TGpa0ZQ3wW6cx/qTc07QLS+Z9LGTW/wJaUUn5mIME65AKUyzshmI
-	 ILTS3weeAQ5UFOB+PXgWWqoOUwDEdjD+74scxAigK4f29SaYlE8lq2acFXMYFKZhBkBX8
-	 XlW9S5SN50FjTZXDdD9Ts6XM/L2Qnjt6sgGr3WDxqhFJFkVV5grZFpaxQzn64PHDxbQ==
+	t=1793718736;
+	b=UKS4zvoM3GR65y+Y1Nh1dL9CjBOGNQejkdSR6dIHRLuA1rGnEPQqEipLmDqfyn9sFfya
+	 kz5Lcjvu98Ls/rUPlS2R1WikE4wJ6URuDY9LBkr9Fay7WqgodRlGYM9Ge3BKCmHJkBYXf
+	 JjpIbVdrfv7hTVA71DxJ0a0zC58ncNkPgNy4kNa3Y8CM9l08PBKdH4jpiYOXtuwCfVkCu
+	 qR2ckSy0rypop8gCvKyvajKkHBbcuWuaUfzE6DltxfLsnaNfWwcwCAluwevCnUJqWRgyQ
+	 2p3NlmS2UhCTpMlpNHG8gdWZ1Og8WUY2J3XnwvyCRq/q9VQS0zWbN+I35M67AiBf4LA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793718585;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=UDbbd2s1kje1R8JXsCA8wjTjZn+i3rEJu4K17fxuP2M=;
-	b=G7tNcmcXqiJIrLt9zLoGvp7UppYWdS0xI+xcrvyvarjuaMJp2/RSPW1IssK9gnrTNRhw
-	 1s5S7SjpVyodZdoHD0hrsnWpqOcyBrcV5PurMc6n7RId0oxW6+n1CS53s7/DRB61kZ3Qo
-	 pZJcluJbAJImfaBokjeNdENoPpdOj14Y9qqcsvrAEKHNOlkPRzhfUOhtBAPOnKfNMWNDB
-	 Nne2wdFYAiIxB4omNoBkxTjbwrgel3dN6Egck+uEUg7ioFrJLPDaRmjOp8qpJdNBoNXSJ
-	 SuTo4/iD6s4j/tJXZhrfzsr2xRJMlXj0XYVBlQwPkVhMBhWdXiqq4S9dhmUs6VByoPw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793718736;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer;
+	bh=Zba8UDgvOupp+mJLfkKzmKmg1o1us1OCczbPj5To2sU=;
+	b=OqcB2Y6JI5NaJRNvCsm1e3N42jR4emenLzDsCsXPZz5wvpVSZLBpPargM73zoZ/SpN/c
+	 dA1peiGKROTj42t+zRXDeK+fHVY2YFDeCDRBHkGQ/AQmv105/rVycAJBoYfVXET8hj0Mp
+	 02KbToigHIgqhuoY7DFOtXx3CRWI9YZgcDY/YGvJMASzZ8FBUHkEgIcxdXtKbvpo95Bmf
+	 hn1QvVPzuvew5gBKoTxq7ARtFc25JbVR5u34j/0SIMEFG2cKLAQXMYHcsPivR3CWGxuv6
+	 SClGKBuhvQXTByPyOHeSh0j38Vo8GR+AItVk2Zey3IxKytsDtUWN6kaP0r7l+wijjoA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RbqzLtDf;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kjMjSy9H;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27FA0606B255;
-	Tue,  3 Nov 2026 15:09:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15945606B266
+	for <mfd@lists.linux.dev>; Tue,  3 Nov 2026 15:12:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RbqzLtDf
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 07D291F000C1;
-	Tue,  3 Nov 2026 15:09:38 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kjMjSy9H
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3E4941F00A1E;
+	Tue,  3 Nov 2026 15:12:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793718584;
-	bh=UDbbd2s1kje1R8JXsCA8wjTjZn+i3rEJu4K17fxuP2M=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=RbqzLtDfuoS+yk3Cb9NL+IELKSZJt5jyCcuWm3dyPp2z77xlQoGsnAiFaicmfoOrF
-	 3tgpEeKBcAqoNvTQovNT6CrpXBmMMM2iV8B9lFhp3KZNOIJhrSy8Bd0rotbMBLv3LC
-	 +KnLNaHF5xU7Gm9oRwo9GghzU3Kwp2hul1uCUPrmsDDGuE9oDVNcjOetBn13FDuJSP
-	 VuZNdd720uPcLjizBpMDdLoO83Aq6TNCWalB9VWUfyu1zT+rbRsjpq30wJ2kYu1LRe
-	 7yvTOetvukkh2IlBcVrCOBnLjRttzzCYUyPXbkYfYGI+AW7om0VeLAPMy1OEm86zWQ
-	 Z84ArQ3Wl9KRg==
-Date: Tue, 3 Nov 2026 15:09:36 +0000
+	s=k20260515; t=1793718735;
+	bh=Zba8UDgvOupp+mJLfkKzmKmg1o1us1OCczbPj5To2sU=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=kjMjSy9HVtnHa0nxkEjmXuiL2Ok6TCs5raDcYHGgoYzloif4gkj8c6EF4qBRXxrw0
+	 QqAms7hYi4OPP/HtQoT3hcDaZwL2uGY/lVWkta+r+DjMpozsMjlLtB7stBByHgcNzv
+	 cXBzmOJsz80Qtwu/BQ2faCpz4vxg4Bq+M44ezc904zhfMhY7pkY7OC5k90IViL2Oh6
+	 l38bDUnD6/dHrSVben5YtCEcUKf1Tbp8B1qwye1VC9FIEH1ns0TJTZMZqN14I5jqTn
+	 FM8+pGHEQ+dHEAHUP9/AP3mcsKAw7pAEwHfgFTjpJAibDx+FkgE41v3qDU0yF8BPM3
+	 wt6t23j6tuIyA==
 From: Lee Jones <lee@kernel.org>
-To: Luca Leonardo Scorcia <l.scorcia@gmail.com>
-Cc: linux-mediatek@lists.infradead.org,
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Sen Chu <sen.chu@mediatek.com>,
-	Sean Wang <sean.wang@mediatek.com>,
-	Macpaul Lin <macpaul.lin@mediatek.com>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>, Linus Walleij <linusw@kernel.org>,
-	Val Packett <val@packett.cool>, Fabien Parent <parent.f@gmail.com>,
-	Akari Tsuyukusa <akkun11.open@gmail.com>,
-	Chen Zhong <chen.zhong@mediatek.com>, linux-input@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-pm@vger.kernel.org, mfd@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, linux-gpio@vger.kernel.org
-Subject: Re: [PATCH v11 0/9] Add support for MT6392 PMIC
-Message-ID: <20261103150936.GB792264@google.com>
-References: <20261021105109.199886-1-l.scorcia@gmail.com>
+To: patches@opensource.cirrus.com, mfd@lists.linux.dev, 
+ Marek Szyprowski <m.szyprowski@samsung.com>
+Cc: Lee Jones <lee@kernel.org>, Mark Brown <broonie@kernel.org>, 
+ Sylwester Nawrocki <s.nawrocki@samsung.com>, 
+ Charles Keepax <ckeepax@opensource.cirrus.com>, 
+ Artur Weber <aweber.kernel@gmail.com>
+In-Reply-To: <20261022075938.625795-1-m.szyprowski@samsung.com>
+References: <20261022075938.625795-1-m.szyprowski@samsung.com>
+Subject: Re: (subset) [PATCH] mfd: wm8994: Enable runtime PM before
+ registering IRQ chip and children
+Message-Id: <179371873399.1078893.13243475012454495090.b4-ty@b4>
+Date: Tue, 03 Nov 2026 15:12:13 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -71,16 +62,30 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261021105109.199886-1-l.scorcia@gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
 
-On Wed, 21 Oct 2026, Luca Leonardo Scorcia wrote:
+On Thu, 22 Oct 2026 09:59:36 +0200, Marek Szyprowski wrote:
+> The wm8994 regmap IRQ chip is registered with runtime_pm set, so
+> regmap_irq_sync_unlock() calls pm_runtime_get_sync() on the wm8994
+> device whenever an interrupt is requested or its mask is changed.
+> However wm8994_device_init() enables runtime PM only after
+> mfd_add_devices() has returned.
+> 
+> If the sound card is already waiting for the codec, it gets bound
+> synchronously as soon as the wm8994-codec child registers its component,
+> so the codec requests its interrupts from within mfd_add_devices(). At
+> that point runtime PM is still disabled and pm_runtime_get_sync() fails
+> with -EACCES, e.g. on Exynos4412 Trats2 board:
+> 
+> [...]
 
-> The MediaTek MT6392 PMIC is usually found on devices powered by
-> the MT8516/MT8167 SoC and is yet another MT6323/MT6397 variant.
+Applied, thanks!
 
-How many more Acks do you need now?
+[1/1] mfd: wm8994: Enable runtime PM before registering IRQ chip and children
+      commit: daf6dfff68daebc85deaf75c2fe403bac2b0bbde
 
--- 
-Lee Jones
+--
+Lee Jones [李琼斯]
+
