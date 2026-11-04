@@ -1,59 +1,58 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793790745;
-	b=OIwfN5/RH2p76IQqzXzkBtw4ejEXyC9qj+ZpdRG+xHMjfQ31LxTN+22kmGbG6avrm+LT
-	 hvFPn8o0YZNUc58meBevgKewI7qWMPIYXBFHbhgHU0paB/ghut/7JEcal6GwV4xGDj9lP
-	 01w5DtaR6IxckpRDnadL6n+5w5p1ITgivSOq8DN7jcK0uoK4KUHdHefN0aT7gRw/LkvLs
-	 Igb9mBwyIzmh245fcK/VX7YatzU9Dzf4mEOpx8QZprvv9ZTN1dNLo8HHCrD0xURIleA0L
-	 LynUK6V/EVXhjHKH/GvxW6MGKK8GbvaMC+SQ4h/WQ4zHcVdYTL7Jo87jZmlYjcWMeMg==
+	t=1793791368;
+	b=IlI4V8sYW2U2U8TNKa54P9M9PvA/6QJeN5NYkrbDQy7gRYdg/u5KBkJrQBDfZ3R+xi2N
+	 6LEDo9SURrvnrB3ssl3yI/9+HXYyCZy/di1zynqN9wNdfBlww0FmnyhBGH3/seFHj4eHx
+	 2SxeXt178Iqx2g/OF6AwPQcDv/45G2TIDET6GxTe/2XKJTdQ2XpiS39YuxlBP2bXKAi6Q
+	 y51lsqt1/alnJRxjrkBzPZaKFd+Lkxa+he/HVYLa2NHb3Qz0Kz7IumLzOAagJUSwp5Nvj
+	 rWVLUng2eTakKWf38i7ASz3KD/I/vdMgw9z8idw4LxKHOunS7tf86IbzkshRG7V5lCA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793790745;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793791368;
 	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
 	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 X-Mailer;
-	bh=gyF7dm9FS0Ed8e/c54ZznUYgKNg5Co9xtbwrpOLqJKQ=;
-	b=oDKAznUAWT4ut/fvc4IZVfgnzYK69IFWPvUElybsfzwDVq6gJTDlY95OZUsGwQcgwGlE
-	 MQOrF18bocPOndUSG6bENqNqq3KV54mKTsvl/mc4n0696HfpvESsNtf7iobS04SS8AXfG
-	 tub93oZ/de2WRjfvO0c0SVJm41LepmVIoUAY2ezbMQuAwWpWlfDTpoJLRRpYVq0zLYCa8
-	 N+eiRI0G5opICNBy+iQrYYhhmSnTuN6FOFCu6aSN3KpYbg2tlb4rKn2DxLH8GoOT2299C
-	 HQcmfd4BebRBgSy7bQnHm61DFAA7jhC+4HPlETzu+scgcU7UvL/RMS4H06jPQfvyL4w==
+	bh=azj6je3Tauy8PqvAOV9GF0M1ghGb3gi86TBsOZQKuHI=;
+	b=smA8py+LBVnuZDfzeo7uEatXlB0MQylTOH8TksP1nq+wDBqs2SInVyFDRHWhl0SykOo4
+	 p8JuJEFKQokk+tUBV9EgohMIouynLOFACunCE0phboCXIdTZfNkbilggo8s64DamVXwdv
+	 purN0q96Bl+WtmV6/t1Z3GH39owPo1kspzvhN9p7AG5IXlRucqkt7VE8sbwmCR0f3Ve6Q
+	 R0s3q/MTLtY5lXbu+i9Nnv7QcVPbDtd7nJ7Omc0y38NeHqqDLulM9fhVMRCQBOWRim1dM
+	 MUOSQ5h5Ts+OkgENP6xPAEPVg0Qe/6uaS9s6Lsy5Im1qmEL7OZO8JhhELx8clu3AGkw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GeExwbS7;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dR6JifXy;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4517E606A335;
-	Wed,  4 Nov 2026 11:12:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01A56606A33C;
+	Wed,  4 Nov 2026 11:22:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GeExwbS7
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B7DDC1F0093A;
-	Wed,  4 Nov 2026 11:12:22 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dR6JifXy
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A47121F00A16;
+	Wed,  4 Nov 2026 11:22:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793790744;
-	bh=gyF7dm9FS0Ed8e/c54ZznUYgKNg5Co9xtbwrpOLqJKQ=;
+	s=k20260515; t=1793791367;
+	bh=azj6je3Tauy8PqvAOV9GF0M1ghGb3gi86TBsOZQKuHI=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=GeExwbS7o374ZK7sDRGyPrVxoFtqqtf/KzVPfo3JtRcw/vVAclyNmmWzKI0gSgqlt
-	 Rit3VzS4pQ3eP7o/fL/+YBDgnU0jrv5a4L25M97rmyELXtGvDCwZCb1y3DLI32pCE/
-	 3WzoQgujJEj5wgog5V1QEiuaOuACi6HIVhZscMxMUfKGoTJwV5hDaVGM+KIcuSaGAY
-	 nBEzp8po7y3Vii4ZpuTxrpv+GisplKyT7FedZP1mGP9FwUZbcwdhvROioHjUtS/yfk
-	 JWWu5f/zXAiCkcrqM9oGMQykcJ9JBVBjJJa3tYveyk87gAxsqSd6ZEDUIR91PFwlZQ
-	 4OlZRqQKMzsbw==
+	b=dR6JifXyfU9+Y+e04PesO3E++kcxRx69CrNmSGquGaUV1ySlmdnmSjlqY9OoxG/Hj
+	 mWtZzk0cQfCdyaCV7O57wwJFeE/6sw35rZkll+/dLiMvNg1o6olImYUvB634Fu24fM
+	 vQsqA5hyNW2hwx64i7HsIWjT2Uk+K7hl1Zite2vL4n6u3fwysMo6BWn6W2UIReJH03
+	 dqq11TVUEGjAa76UN06pRnWl63W3cAfo37m2dC+Rs6cmHHd79pjHnxAWeCj+f7l/cm
+	 26bUN7KDFrYjBKzRa/AEFxTLNLKE7q5WCZNfD6gJTFb8OgCjQY+cwegiLR4LZnOhOI
+	 +b1S8pxaSiP+Q==
 From: Lee Jones <lee@kernel.org>
-To: Baolin Wang <baolin.wang@linux.alibaba.com>, 
- Orson Zhai <orsonzhai@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Lee Jones <lee@kernel.org>, Weibin Liu <liuwb@xiaopeng.com>
-Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
- linux-spi@vger.kernel.org, Chunyan Zhang <zhang.lyra@gmail.com>, 
- mfd@lists.linux.dev, Guanglei Zhu <zhugl3@xiaopeng.com>, 
- Sashiko <sashiko-bot@kernel.org>
-In-Reply-To: <20261026153253.689525-2-liuwb@xiaopeng.com>
-References: <20261026153253.689525-2-liuwb@xiaopeng.com>
-Subject: Re: (subset) [PATCH v3 1/2] mfd: sprd-sc27xx: Pass byte length to
- spi_read()
-Message-Id: <179379074248.1651659.15467348960119051443.b4-ty@b4>
-Date: Wed, 04 Nov 2026 11:12:22 +0000
+To: Lee Jones <lee@kernel.org>, Bart Van Assche <bvanassche@acm.org>
+Cc: Aaro Koskinen <aaro.koskinen@iki.fi>, 
+ Andreas Kemnade <andreas@kemnade.info>, Kevin Hilman <khilman@baylibre.com>, 
+ Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>, 
+ Mark Brown <broonie@kernel.org>, mfd@lists.linux.dev, 
+ linux-omap@vger.kernel.org, linux-kernel@vger.kernel.org
+In-Reply-To: <8aec913c6a80c26c4cf5a1ce590f8439c997dafc.1793044546.git.bvanassche@acm.org>
+References: <8aec913c6a80c26c4cf5a1ce590f8439c997dafc.1793044546.git.bvanassche@acm.org>
+Subject: Re: (subset) [PATCH] mfd: twl4030-irq: Fix a lock leak in
+ twl4030_sih_bus_sync_unlock()
+Message-Id: <179379136541.1658386.17812950773017437620.b4-ty@b4>
+Date: Wed, 04 Nov 2026 11:22:45 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -67,21 +66,16 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-Mailer: b4 0.16-dev-ad80c
 
-On Mon, 26 Oct 2026 23:32:52 +0800, Weibin Liu wrote:
-> sprd_pmic_spi_read() passes 1 as the transfer length to spi_read(),
-> but the length parameter is a byte count, and the ADI controller
-> consumes a u32 register address from the buffer. The ADI driver
-> ignores the transfer length and always operates on the first u32,
-> so this happens to work with the 8-byte stack buffer, but the
-> advertised length does not describe what the controller actually
-> accesses.
-> 
-> [...]
+On Mon, 26 Oct 2026 12:55:46 -0700, Bart Van Assche wrote:
+> If reading the EDR registers fails, twl4030_sih_bus_sync_unlock()
+> returns without unlocking agent->irq_lock. Fix this by jumping to a new
+> label in front of the mutex_unlock() call. This bug has been detected by
+> the Clang thread-safety analyzer.
 
 Applied, thanks!
 
-[1/2] mfd: sprd-sc27xx: Pass byte length to spi_read()
-      commit: aa474d0abf753cadb1fce6f1d129eefa39ec223e
+[1/1] mfd: twl4030-irq: Fix a lock leak in twl4030_sih_bus_sync_unlock()
+      commit: aed393ea3707fd3573b78449037e2749e9b30245
 
 --
 Lee Jones [李琼斯]
