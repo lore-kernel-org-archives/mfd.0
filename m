@@ -1,55 +1,87 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.52
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793808160;
-	b=rsUz+ocE1bHSqc7SMtAgEc9b61KdFhvU14iW7s4xDY0H30GPrmCspcuwCZ437DnEszmH
-	 rRr27WG3oOnF+Gx2AKSzUoEhvea5loHnz8fSOIB+6MAIycp4PwI8l7WeFXdDRyqrcxnFw
-	 Jw0/yAuPBA21aM3M1lI2ilUkPD0ncJ4+3fH2n7+1rXqASbP/TZsvrf+loXe/+dZSCvZ0o
-	 z9t5qUOE7X1ENoUT4mTzH83hYn9a5WoV7ntu+D8IbQgrFJz/kUs7GAO6NHUY/rKHoE2Yo
-	 hcHUalmw+g8NEJbyWjRWWTIiyxfzfIHyWgDYSPD1MnD2n86RyUpLGaQsEkxGcND+9LA==
+	t=1793808581;
+	b=2zW16Ri3GSxw0fzm2dnwwbudco15Y1/mnHFYeMCKOs8kvV5peaaY+VCUOIqthjCOqFL7
+	 QuTYrkfjs2G7PTi4Bnf2UOAsMbV6aNSVQxyAWKORMGw2CTFawodlD6+AnYuuzc0iHyg9R
+	 NOVZZG+O0BRpELZz9LFTuA+wfUNG5fkyLHTdcAC7zd4X54XP3l5hLsp4Y4PtxoDjEkgej
+	 3xaO9GO/ak1JsDOY06Um0F2R2+72146pTbhBtwLUuDdGS5uliTvjQh5h8LK7V20S5emH9
+	 fiwAgMeImo+eZ9IImmQx2X/9mQSUe8PVZ86qp/qCRZK/VcQdN5glbQCq/OW/Ums/Nsw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793808160;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To;
-	bh=ycwbKwDj/fxHGNkqL7CNY4kveDzFmdd4NptkEEAAK/Q=;
-	b=sEjvWRuxeRXDtqC3walvSfg4Bey48bPb0ePL5NApr1oxrxWUBWvc67kq8qcL6PfDWeU/
-	 sT4f2K9yqW9RPy3akbFB8T1neJGQmYPcbsQgABWd54/Zy7Ee0O620Du3M0og8f/bA2CbD
-	 vsUeq4cN5dBcGOm3ruSgwdrdyMiYu7ns+voMEI5YhfVqbHYATG/SuZLW0bLnHCJZWaGqC
-	 4ZqY5lT0Mb3RX2fEv5FkU435QQNEi6FAs6xnlHqRed+gO4FJ1Lte88IIuUXcs8hW8mpL4
-	 LPtFUBV3/Z0XYu0gwCqpLV+7ygJvxF6UuFRWiwxYnU3pMz3JQ0XCN9ReLzPe/ZdGxug==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793808581;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
+	 Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+	 X-Developer-Key;
+	bh=1INLi47J6sX/9lLM2V2LXwNIoIOyuzH9kEeqmJr0oEc=;
+	b=XuD+/GkvbycxWhZcA1oC40z+TXuL8PjBlP7vRkj4mYiU1FzzEQ3CMyW49iZ+FmHE9+Fp
+	 BiO44+Eu9MmN2xQBYR25rXiJnm1ee3+LgsSFta4Khp0dJRhtQgdMH4ZMGsGKmJjWWpUTr
+	 SDsYLWNs0oL2dyklghfCTha6taRbasyca22WBh2Czkf9E6gBx2okH13mvv8nrJTXlTNYi
+	 BUWPGL36a819K7H2M49LOUfgNj+zzodHotHBNhUoa0nCC7cQpDxZLpm8aMuXCLzDW1Y+D
+	 IxMLkNBuIAbQE2hlnMJIzKx1PdjXNE/j1jryjejlyN/mJrhvxEq1/c1xaBqfX5h7Ylw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kkNbG23w;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=none header.from=thegoodpenguin.co.uk;
+	spf=pass smtp.mailfrom=thegoodpenguin.co.uk;
+	dkim=pass header.d=thegoodpenguin-co-uk.20260707.gappssmtp.com header.i=@thegoodpenguin-co-uk.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=Kypuxapp;
+	arc=none smtp.remote-ip=209.85.128.52
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F241606A326;
-	Wed,  4 Nov 2026 16:02:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5F65606A32D
+	for <mfd@lists.linux.dev>; Wed,  4 Nov 2026 16:09:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A5F65606A32D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thegoodpenguin.co.uk
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kkNbG23w
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B14E61F000C1;
-	Wed,  4 Nov 2026 16:02:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793808159;
-	bh=ycwbKwDj/fxHGNkqL7CNY4kveDzFmdd4NptkEEAAK/Q=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=kkNbG23w+udGdBwh3QGFn880qmKgQQXDcx1nIZLBX0P0+0WmCRo0q4Oat8EGC8qS9
-	 6VqaVsj2+H33buXlJ3jYwPJvRyGsUMVUKaMO3el5kS5gHbx/lBtT81bZfqFyhEUokc
-	 9Q+uc1JXhQzH/6hbNT/SwhmU90JQr/osAsIF4qmsl00FV6kfyASEqq1y7j+M/DXn8T
-	 vSbvrL0ev4xw2UW2Pvuq6QZONl3BzEOiRjwfvfS1XvOkoiqqjUFPMDjejZRfypkM7H
-	 6jkgvMb+IH87h7FOyTxUmPjg6f5OAIL9dC/mgdgyDTviNsoXF+nMdpWPvc1zFflNt0
-	 CRPrJthTW0fvg==
-Date: Wed, 4 Nov 2026 16:02:36 +0000
-From: Lee Jones <lee@kernel.org>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Pavel Machek <pavel@kernel.org>, linux-kernel@vger.kernel.org,
-	linux-leds@vger.kernel.org, mfd@lists.linux.dev
-Subject: Re: [PATCH v4] leds: Add driver for MAX8907 LED cell
-Message-ID: <20261104160236.GC1650678@google.com>
-References: <20261027115006.86032-1-clamor95@gmail.com>
- <179318844110.3606039.5801345229436270811@kernel.org>
- <CAPVz0n05rXtBJzPZo4k9=ns52n10rAKpW83gbwpQwZQW3i-u6Q@mail.gmail.com>
+	dkim=pass (2048-bit key, unprotected) header.d=thegoodpenguin-co-uk.20260707.gappssmtp.com header.i=@thegoodpenguin-co-uk.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=Kypuxapp
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4afe2d546f9so10570685e9.3
+        for <mfd@lists.linux.dev>; Wed, 04 Nov 2026 08:09:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=thegoodpenguin-co-uk.20260707.gappssmtp.com; s=20260707; t=1793808579; x=1794413379; darn=lists.linux.dev;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=1INLi47J6sX/9lLM2V2LXwNIoIOyuzH9kEeqmJr0oEc=;
+        b=Kypuxapp+pxOl3HK8w9kApF/xfeX327wdlVO3oqtPERJi0LRb3KkJVrPJyo6uFO6eA
+         qaTJbCLP8vcSqFXyiK9dCcwN5SlgZOgqPe4J2Jr8qUCE3QBXM+jzQbFJtOi+V7QTwtHe
+         uEZuiLr5u2S03x/6hkdMzzMtFT1dhXO3LIkT4t6jupy1/2eDluSjsClBQKmib7juQrzh
+         n459kHuHhOLLTsz2S2pYFpZmDkx+KcJ15jl6KkIQdoxM0Qq3QTCnrf0xUwP4shicfpmW
+         yfACMjpjLz/+50MxyfbNnD6Z/YDegt++1qfO2R2a+mvAML4FlpYPjEeQ4Orqlc5EKb4+
+         zlFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793808579; x=1794413379;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=1INLi47J6sX/9lLM2V2LXwNIoIOyuzH9kEeqmJr0oEc=;
+        b=Wxl74FajFNibqA0JWjVbtXkulUHpIdxbQgvqspsW5sWqxlz9KupmD3mK4do+sJKORA
+         D8hbyB3jdUrFpK9kRiP9r5fMui9ip43EwdeS0xPYgggCXk0V+KGRPnWTvStgqxq2ltpz
+         o0e2Yt6x6rJN8L3UFBbIbB4YvdDN1LeRFOWP+g7khAYqa955nytA40L6rNeRrqSl6DM8
+         m9QJdaqqoT+uz/4IaBSgBw5YH/FYmoTI+jpjgq/HCXECNMlM66Z68pOeZyHrelof0yOY
+         2fpcC0uwo+W4MHkF1oqvC6VkAAwmJBFj8X+AoUFfX5FxKupZqrmkVnREalFMN4maNBBE
+         jpVA==
+X-Gm-Message-State: APuU4Z/Ke/RYDwYjLpntI5C0B1O6V59YuAEGU8GkVihqRjmGE5DKcGnq
+	JjpzUUBXyMtBiqaFIECo6ERunbEz/ezJJ/O+6JFekzQI7G4ghUMPiLaPkFoB2KAWmtw=
+X-Gm-Gg: AYBFou0k8ReDBn7Xcj+RKnI5IheVFO7WCbaXahQQUr1w9sZhZt0Wfh8sYZxUg9j9xfg
+	9mp7w+zNo7SF9evA17/s7CJyCYF5PtPjxNDbobFH0k7k1fTxRhX5t8U/A2YED7wI0BQgEfzTxVT
+	IXMLqzvdovfuh1JwKPErsDwr/Ey1gIzeRSbzWE+iBHe7u6+uqZh36f1yo6Ehybg/sxkXPReghoe
+	I1r+1VhMnuQudwrbkKq21jSj2KaYwauuUYhF9HcOKI5nkdpXJBsrDhew8sbb7VEYm93OgbmK0xp
+	R43tUnj2EbjYBWaDOt1hUWdHhio19zPBWyXMzHO66jyUIzG1rpyA/3nrkgqUoyhpvZy71O4c0Wd
+	21IC0kUoRgnc8d0mw+x0PwcwZagSdEB/QxvC95o/84iw01Ia0B/VMHH1mFEvqY4//GFeYRD5l4p
+	oWAIehHmz4cXmbPOLCrgD6MkQ1iTycLj8y7Zx2cxmhNuWx1SsS8CfihmwpUf9zzVIo6UKJ7wzp5
+	h8bofj97IHxZfOiSVrjuDqy6rsMPCgfZCl4kuK+07bYWNL0kGRXsi+me+q6d2wItN/JKoG65AvA
+	NdBWn6+s055njb4QBjMK083KljT+HSMBAVnEDf7a68e20Q==
+X-Received: by 2002:a05:600c:1d02:b0:4a0:1c94:7042 with SMTP id 5b1f17b1804b1-4ac16bc4731mr408199185e9.8.1793808579070;
+        Wed, 04 Nov 2026 08:09:39 -0800 (PST)
+Received: from [10.42.0.1] ([2a00:23c7:1d1a:9c01:458e:d526:4eee:2f63])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4b4527fed5bsm85089815e9.3.2026.11.04.08.09.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Nov 2026 08:09:38 -0800 (PST)
+From: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+Subject: [PATCH v2 0/2] mfd: use designated initializers for acpi_device_id
+Date: Wed, 04 Nov 2026 16:09:29 +0000
+Message-Id: <20261104-acpi-mfd-v2-0-64b9dee3baaf@thegoodpenguin.co.uk>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,238 +91,113 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAPVz0n05rXtBJzPZo4k9=ns52n10rAKpW83gbwpQwZQW3i-u6Q@mail.gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/0WNQQ6CMBBFr0JmbUmnJlVceQ/DorQDjMaWtEA0h
+ LtbYOHyJe+/v0CiyJTgViwQaebEwWdQpwJsb3xHgl1mUFJplGcpjB1YvFsnjDa2cqj1BRvI+hC
+ p5c+eetQHp6l5kh23/Wb0nMYQv/vXjJt3ZFGqf3ZGgcLlL1VVuUzX+9hTF4IbyHcT+9KGcnpBv
+ a7rD6JmhzW9AAAA
+X-Change-ID: 20261030-acpi-mfd-a6ac9d16671b
+To: Lee Jones <lee@kernel.org>, Chen-Yu Tsai <wens@kernel.org>, 
+ David Rhodes <david.rhodes@cirrus.com>, 
+ Richard Fitzgerald <rf@opensource.cirrus.com>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+ Mika Westerberg <mika.westerberg@linux.intel.com>, 
+ Zha Qipeng <qipeng.zha@intel.com>, Qunqin Zhao <zhaoqunqin@loongson.cn>, 
+ Thomas Richard <thomas.richard@bootlin.com>, 
+ Andy Shevchenko <andy@kernel.org>
+Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
+ linux-sound@vger.kernel.org, patches@opensource.cirrus.com, 
+ linux-crypto@vger.kernel.org, 
+ Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>, 
+ Charles Keepax <ckeepax@opensource.cirrus.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793808577; l=3284;
+ i=pzalewski@thegoodpenguin.co.uk; s=20260430; h=from:subject:message-id;
+ bh=VoE1Fm0xZu0mayKQlGhQQZLIaRumf/QdmutseQMZPwA=;
+ b=uybqUEyxjF7iAKy9pKtXAKAQ4dhu98wji8c2TC5h8NLcf/sZMMgMUqqVTNiO6oIJkkWAN26vq
+ nWMg9/1QuTnB3bWLAzs8CkPtkkNt8REQo+74FNLy12d6dPmtivfG8A+
+X-Developer-Key: i=pzalewski@thegoodpenguin.co.uk; a=ed25519;
+ pk=vHq4n9IonORH2GTzLv8r6CWAFHzgfBuNkQPXA8NSly0=
 
-On Wed, 04 Nov 2026, Svyatoslav Ryhel wrote:
+This series is converting lists that contain the acpi_device_id struct,
+which is defined in the include/linux/device-id/acpi.h to make use of named
+initializers (which they do not use currently). This work is part of the on
+going effort in the kernel associated with device-ids [1]
 
-> ср, 4 лист. 2026 р. о 17:16 Lee Jones <lee@kernel.org> пише:
-> >
-> > --- checkpatch.pl (1 issue) ---
-> > Line 38: WARNING: please write a help paragraph that fully describes the config symbol with at least 4 lines
-> > ----------------------------------
-> >
-> > On Tue, 27 Oct 2026, Svyatoslav Ryhel wrote:
-> >
-> > > Add a small driver to control the LED cell provided by the MAX8907 PMIC.
-> > > The LED does not require any specific configuration and is folded into the
-> > > PMIC's node.
-> > >
-> > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > > ---
-> > > Changes in v2:
-> > > - rebased so patch is now applicable to linux/next
-> > >
-> > > Changes in v3:
-> > > - added check if led is off for get callback
-> > > - added dedicated MAX8907_REG_WLED_MODE_ON mask
-> > > - switched to devm_led_classdev_register_ext
-> > >
-> > > Changes in v4:
-> > > - platform_set_drvdata dropped
-> > > - init_data.devicename dropped
-> > > - added MODULE_ALIAS
-> > > ---
-> > >  drivers/leds/Kconfig        |  7 +++
-> > >  drivers/leds/Makefile       |  1 +
-> > >  drivers/leds/leds-max8907.c | 90 +++++++++++++++++++++++++++++++++++++
-> > >  drivers/mfd/max8907.c       |  1 +
-> > >  include/linux/mfd/max8907.h |  2 +-
-> > >  5 files changed, 100 insertions(+), 1 deletion(-)
-> > >  create mode 100644 drivers/leds/leds-max8907.c
-> > >
-> > > diff --git a/drivers/leds/Kconfig b/drivers/leds/Kconfig
-> > > index 788e689fe875c..3796c562919fe 100644
-> > > --- a/drivers/leds/Kconfig
-> > > +++ b/drivers/leds/Kconfig
-> > > @@ -813,6 +813,13 @@ config LEDS_MAX77705
-> > >       help
-> > >         LED driver for MAX77705 PMIC from Maxim Integrated.
-> > >
-> > > +config LEDS_MAX8907
-> > > +     tristate "LED support for MAX8907 PMIC"
-> > > +     depends on LEDS_CLASS && MFD_MAX8907
-> > > +     help
-> > > +       This option enables support for on-chip LED drivers on
-> > > +       MAXIM MAX8907 PMIC.
-> >
-> > As requested on v3, please expand this help text to at least 4 lines to satisfy
-> > 'checkpatch.pl'.
-> >
-> > > +
-> > >  config LEDS_MAX8997
-> > >       tristate "LED support for MAX8997 PMIC"
-> > >       depends on LEDS_CLASS && MFD_MAX8997
-> > > diff --git a/drivers/leds/Makefile b/drivers/leds/Makefile
-> > > index 3da746279bb81..24efda3fbaa44 100644
-> > > --- a/drivers/leds/Makefile
-> > > +++ b/drivers/leds/Makefile
-> > > @@ -67,6 +67,7 @@ obj-$(CONFIG_LEDS_LTC3220)          += leds-ltc3220.o
-> > >  obj-$(CONFIG_LEDS_MAX5970)           += leds-max5970.o
-> > >  obj-$(CONFIG_LEDS_MAX77650)          += leds-max77650.o
-> > >  obj-$(CONFIG_LEDS_MAX77705)          += leds-max77705.o
-> > > +obj-$(CONFIG_LEDS_MAX8907)           += leds-max8907.o
-> > >  obj-$(CONFIG_LEDS_MAX8997)           += leds-max8997.o
-> > >  obj-$(CONFIG_LEDS_MC13783)           += leds-mc13783.o
-> > >  obj-$(CONFIG_LEDS_MENF21BMC)         += leds-menf21bmc.o
-> > > diff --git a/drivers/leds/leds-max8907.c b/drivers/leds/leds-max8907.c
-> > > new file mode 100644
-> > > index 0000000000000..a5c445f75d1b1
-> > > --- /dev/null
-> > > +++ b/drivers/leds/leds-max8907.c
-> > > @@ -0,0 +1,90 @@
-> > > +// SPDX-License-Identifier: GPL-2.0-only
-> > > +
-> > > +#include <linux/err.h>
-> > > +#include <linux/leds.h>
-> > > +#include <linux/mfd/max8907.h>
-> > > +#include <linux/module.h>
-> > > +#include <linux/platform_device.h>
-> > > +#include <linux/property.h>
-> > > +#include <linux/regmap.h>
-> > > +
-> > > +#define MAX8907_REG_WLED_MODE_ON     BIT(0)
-> > > +
-> > > +struct max8907_led_data {
-> > > +     struct max8907 *max8907;
-> >
-> > As asked on v3, what is 'max8907' used for?
-> >
-> > > +     struct regmap *regmap;
-> > > +     struct led_classdev cdev;
-> > > +};
-> > > +
-> > > +static enum led_brightness max8907_led_get_brightness(struct led_classdev *cdev)
-> > > +{
-> > > +     struct max8907_led_data *ddata = container_of(cdev, struct max8907_led_data, cdev);
-> > > +     unsigned int brightness_lvl;
-> > > +     int ret;
-> > > +
-> > > +     ret = regmap_read(ddata->regmap, MAX8907_REG_WLED_MODE_CNTL, &brightness_lvl);
-> > > +     if (ret || !(brightness_lvl & MAX8907_REG_WLED_MODE_ON))
-> > > +             return LED_OFF;
-> > > +
-> > > +     ret = regmap_read(ddata->regmap, MAX8907_REG_WLED_CNTL, &brightness_lvl);
-> > > +     if (ret)
-> > > +             return LED_OFF;
-> > > +
-> > > +     return brightness_lvl;
-> > > +}
-> > > +
-> > > +static int max8907_led_set_brightness(struct led_classdev *cdev,
-> > > +                                   enum led_brightness brightness)
-> > > +{
-> > > +     struct max8907_led_data *ddata = container_of(cdev, struct max8907_led_data, cdev);
-> > > +     int brightness_lvl, ret;
-> > > +
-> > > +     brightness_lvl = clamp(brightness, LED_OFF, LED_FULL);
-> > > +
-> > > +     if (brightness_lvl) {
-> > > +             ret = regmap_write(ddata->regmap, MAX8907_REG_WLED_CNTL, brightness_lvl);
-> > > +             if (ret)
-> > > +                     return ret;
-> > > +     }
-> > > +
-> > > +     return regmap_update_bits(ddata->regmap, MAX8907_REG_WLED_MODE_CNTL,
-> > > +                               MAX8907_REG_WLED_MODE_ON,
-> > > +                               brightness_lvl ? MAX8907_REG_WLED_MODE_ON : 0);
-> > > +}
-> > > +
-> > > +static int max8907_led_probe(struct platform_device *pdev)
-> > > +{
-> > > +     struct device *dev = &pdev->dev;
-> > > +     struct max8907 *max8907 = dev_get_drvdata(dev->parent);
-> > > +     struct led_init_data init_data = { };
-> > > +     struct max8907_led_data *ddata;
-> > > +
-> > > +     ddata = devm_kzalloc(dev, sizeof(*ddata), GFP_KERNEL);
-> > > +     if (!ddata)
-> > > +             return -ENOMEM;
-> > > +
-> > > +     ddata->max8907 = max8907;
-> > > +     ddata->regmap = max8907->regmap_gen;
-> > > +
-> > > +     init_data.fwnode = dev_fwnode(dev->parent);
-> >
-> > This will evaluate to 'pmic'.  The sysfs attribute will be incorrect.
-> >
-> > Since there is no child node, why not set 'ddata->cdev.name' directly
-> > and use 'devm_led_classdev_register()'?
-> >
-> > > +
-> > > +     ddata->cdev.brightness = LED_OFF;
-> > > +     ddata->cdev.flags = LED_CORE_SUSPENDRESUME;
-> > > +     ddata->cdev.max_brightness = LED_FULL;
-> > > +
-> > > +     ddata->cdev.brightness_get = max8907_led_get_brightness;
-> > > +     ddata->cdev.brightness_set_blocking = max8907_led_set_brightness;
-> > > +
-> > > +     return devm_led_classdev_register_ext(dev, &ddata->cdev, &init_data);
-> > > +}
-> > > +
-> > > +static struct platform_driver max8907_led_driver = {
-> > > +     .driver.name = "max8907-leds",
-> >
-> > Cute.  But please expand.
-> >
-> > > +     .probe = max8907_led_probe,
-> > > +};
-> > > +module_platform_driver(max8907_led_driver);
-> > > +
-> > > +MODULE_ALIAS("platform:max8907-leds");
-> > > +MODULE_AUTHOR("Svyatolsav Ryhel <clamor95@gmail.com>");
-> >
-> > Your name is misspelt here.
-> >
-> > > +MODULE_DESCRIPTION("MAX8907 LED driver");
-> > > +MODULE_LICENSE("GPL");
-> > > diff --git a/drivers/mfd/max8907.c b/drivers/mfd/max8907.c
-> > > index e282dd82ece69..826d7768fd8d0 100644
-> > > --- a/drivers/mfd/max8907.c
-> > > +++ b/drivers/mfd/max8907.c
-> > > @@ -20,6 +20,7 @@
-> > >  #include <linux/slab.h>
-> > >
-> > >  static const struct mfd_cell max8907_cells[] = {
-> > > +     { .name = "max8907-leds", },
-> >
-> > Separate patch.
-> >
-> 
-> All valid, but way adding led requires a separate patch? Just to know.
+The plan is to convert acpi_device_id::driver_data to have an anonymous
+union, similarly to what was introduced for PCI and I2C device ID tables.
+The goal is to increase type-safety (most of the existing casts are gone),
+to improve readability and to make use intent a bit more clear:
 
-Build-deps only.
+```
+union {
+	kernel_ulong_t driver_data;
+	const void *driver_data_ptr;
+}
+```
 
-> The max8907.h change can be left with leds change? It changes reg name
-> used by led cell.
+But for that to work all lists containing the structs need to use named
+initializers first to avoid triggering -Wmissing-braces. I already have
+patches that implement this and touching a lot of kernel subsystmes that
+use the acpi_device_id struct and that list keeps on growing. Therefore,
+I have decided to split the series per every subsystem into:
+- pre-clean-ups that convert the lists to use named initializers
+  (which is this series)
+- actual implementations that make some of the modules use the new
+  driver_data_ptr member
 
-Yes.  That's a build-dep.
+That way the task can be fragmented into manageable and independent chunks
+of work and makes this effort easier to review.
 
-> > >       { .name = "max8907-regulator", },
-> > >       { .name = "max8907-rtc", },
-> > >  };
-> > > diff --git a/include/linux/mfd/max8907.h b/include/linux/mfd/max8907.h
-> > > index e222250f0cc1e..35b2ede54f856 100644
-> > > --- a/include/linux/mfd/max8907.h
-> > > +++ b/include/linux/mfd/max8907.h
-> > > @@ -112,7 +112,7 @@
-> > >  #define MAX8907_REG_CHG_IRQ2_MASK    0x81
-> > >  #define MAX8907_REG_CHG_STAT         0x82
-> > >  #define MAX8907_REG_WLED_MODE_CNTL   0x84
-> > > -#define MAX8907_REG_ILED_CNTL                0x84
-> > > +#define MAX8907_REG_WLED_CNTL                0x85
-> > >  #define MAX8907_REG_II1RR            0x8E
-> > >  #define MAX8907_REG_II2RR            0x8F
-> > >  #define MAX8907_REG_LDOCTL20         0x9C
-> > > --
-> > > 2.53.0
-> > >
-> > >
-> >
-> > --
-> > Lee Jones
+[1] https://lore.kernel.org/all/cover.1780048925.git.u.kleine-koenig@baylibre.com/
 
--- 
-Lee Jones
+Signed-off-by: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+---
+Changes in v2:
+- Split Intel LPSS into its own patch.
+- Added a review tag from V1.
+- Link to v1: https://patch.msgid.link/20261102-acpi-mfd-v1-1-d61029971be8@thegoodpenguin.co.uk
+
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Lee Jones <lee@kernel.org>
+To: Chen-Yu Tsai <wens@kernel.org>
+To: David Rhodes <david.rhodes@cirrus.com>
+To: Richard Fitzgerald <rf@opensource.cirrus.com>
+To: Mika Westerberg <mika.westerberg@linux.intel.com>
+To: Zha Qipeng <qipeng.zha@intel.com>
+To: Andy Shevchenko <andy@kernel.org>
+To: Qunqin Zhao <zhaoqunqin@loongson.cn>
+To: Thomas Richard <thomas.richard@bootlin.com>
+Cc: mfd@lists.linux.dev
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-sound@vger.kernel.org
+Cc: patches@opensource.cirrus.com
+Cc: linux-crypto@vger.kernel.org
+
+---
+Pawel Zalewski (2):
+      mfd: intel-lpss-acpi: Use named initializers for acpi_device_id
+      mfd: Use named initializers for acpi_device_id
+
+ drivers/mfd/axp20x-i2c.c              |  2 +-
+ drivers/mfd/cs42l43-i2c.c             |  8 ++---
+ drivers/mfd/intel-lpss-acpi.c         | 58 +++++++++++++++++------------------
+ drivers/mfd/intel_pmc_bxt.c           |  2 +-
+ drivers/mfd/intel_soc_pmic_bxtwc.c    |  2 +-
+ drivers/mfd/intel_soc_pmic_chtdc_ti.c |  4 +--
+ drivers/mfd/intel_soc_pmic_chtwc.c    |  2 +-
+ drivers/mfd/intel_soc_pmic_crc.c      |  4 +--
+ drivers/mfd/intel_soc_pmic_mrfld.c    |  4 +--
+ drivers/mfd/kempld-core.c             |  6 ++--
+ drivers/mfd/loongson-se.c             |  2 +-
+ drivers/mfd/upboard-fpga.c            |  6 ++--
+ 12 files changed, 50 insertions(+), 50 deletions(-)
+---
+base-commit: 05441d697f7f9a927264f4058cbbc6a03dfcac9d
+change-id: 20261030-acpi-mfd-a6ac9d16671b
+
+Best regards,
+--  
+Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+
