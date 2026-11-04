@@ -1,63 +1,67 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=161.97.139.27
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793816075;
-	b=2Met7IFwexdsykQzQZoqprUc8VO5KobrAzqvv/UXgXZZ44wD/pBz0qKeis6AjqZnmNf+
-	 CGB5+jqbcQ8n20+NI2QSPXJ9gqeXY7mnuyQZQD2dXaXuedBZlOQk+C3ZuLX7gCHBNkCha
-	 EQv437Hv/nADbfrzQaNJMg//j5CTVXnbFAbKfKQf9AM4vYIqC30EyaN/1aOPX0cj7gFQ1
-	 3hRLTq/L2qPnOmGKd8QO9lQmR/QcfX3AMphlNvh1lPCYlGMQmS5OzaFgu4IPypagvzupY
-	 Gs9r1aJK1/ZNz0GJgQJs5rU6VAhnO45qIpWMKrh6Wd6XSaHCHk+KS6R5ZFVRxE4DCKQ==
+	t=1793816950;
+	b=GVW643jhOnxq7lnvIifdv6xGB1vZEKQMWUhUK2gfOH2431oVI1H6JF4Z+58UC+KlNl4M
+	 0NDtRwV7naKzHpDIko3uoV9gm8VYwqvJfACNf1S9UN4s4XRn6axcUo9eBr/xhhhiI1/Sp
+	 dtfkE/Q7Rt2EczTBiGrQSv65Ub9LzfIxVzyjssXuEkBHp2DwYjHSc6YI03+zqfi62BWyP
+	 mdBVmKUQujjWy9kXPlZJXq24uFjKk8Sl12wTFdX0MfmQnB/Xqxa86vwh8o3WGiHm4j2hi
+	 ewqAuop65M0zThlb+FRLFYM62i7erTnQLTN20QU5Xq/8FGoXB4kejFou1Ikwt/dp49A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793816075;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=3vEf+vYwX1hHqFnM7XUYCb2YLUrJ0anEL19nMME3t6o=;
-	b=CjJXRvpj5VaUFokGtjW7row5zKNi/2z+gLGsQxSNuTQXC6Xa+YY8xP2JI45Aij6ju0LS
-	 Tals007fqLoMCXWOfCovWwdc35P8srsvP5OdoLlcxN1mjyKWaJQIXPv8Wu83hZOTTxDw7
-	 V86JOpTL3tPuVdEiC3ZuKYx+2qaWQ7QOPeYzz06ZyG3/vDCIY5KzGkiKiFtoAc6OJ8aEy
-	 +E+8i1gMDL++zeJqMSzIVwzO8LlgSWxO01bVknjC4UlyEYEHM3zAYjJcyWiRg7ywhSZxX
-	 V2dhqp3jGeEPwuXpnVIyEy1VBl9F540idWZOl8Ewro/s95jndAjq8N0FcI65zyFA4HA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793816950;
+	h=DMARC-Filter:Received:DKIM-Signature:Date:From:To:Cc:Subject:
+	 Message-ID:In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=SFJwlUyqlnW4DRbVzxxL9VU7f1wu/pDUPInWa0d30zE=;
+	b=shDe6bycVcKGJfZFyFy9BIVfITMHV8SCU6SHl9LQZ1BhAi/KOC29N1HUhU5qT1mD0Jox
+	 B4lIbWr/2hXqcd4yYFnueClikgvbEFp4OmxGQv4/cvJIaCiX2tkfiTxb30kw3ADjY92bP
+	 iZAFbKSIw6KGPIsYKZBqKbWmPYwfxiu80uEyknJvpF1hnXknBmtqTocEetDZ5y+qPYSMu
+	 864gAuPYsWrZBqi5xrmkqljqpOPiilfTvp9P5+5iIzYoMY3fkM0vlIe2/0pNEtAuHDL5M
+	 JZ+aGbpWcNVo88ysMRWCJiWO7MmudJ/+czYZNLEHVr9ZQG1svnBsvNPCFYp+vRAmxAg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TVzyqcSu;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=kemnade.info;
+	spf=pass smtp.mailfrom=kemnade.info;
+	dkim=pass header.d=kemnade.info header.i=@kemnade.info header.a=rsa-sha256 header.s=20220719 header.b=VeZgqkQh;
+	arc=none smtp.remote-ip=161.97.139.27
+Received: from mail2.andi.de1.cc (vmd64148.contaboserver.net [161.97.139.27])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ACD7F606A326;
-	Wed,  4 Nov 2026 18:14:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5A83606A31B
+	for <mfd@lists.linux.dev>; Wed,  4 Nov 2026 18:29:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B5A83606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=kemnade.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=kemnade.info
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TVzyqcSu
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8E791F000C1;
-	Wed,  4 Nov 2026 18:14:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793816074;
-	bh=3vEf+vYwX1hHqFnM7XUYCb2YLUrJ0anEL19nMME3t6o=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=TVzyqcSuF1PVT8ycEgOsBf03CoKbEElh0ICRsA70khRVt6jQiJqosC6oikwG5DMgV
-	 sxnddqQk5RM+Yqv8c+AKtibwY71XD9gV4jnu+nGF376zwBJbCKF3/rJNNMuqYoWfT6
-	 rtEZTztKSdnOU7KGq1V49jXYUchm6abelorGZQHUO0v5oM8eIHrFBJpoNYvVulJx+W
-	 EmEeU4efluLzS0q7d2BgzdYaK2bTROTA61QjrvBWvaCVbGZWR8aL/W8fC5v9sJ3cPk
-	 u063LFC6K5k8eqVxBmZH42TnJkpJkYxqO4E+tGnKAycwAusd5jKbIkHR8WaetsNxa7
-	 BCjDLaI3JPErw==
-Date: Wed, 4 Nov 2026 18:14:29 +0000
-From: Lee Jones <lee@kernel.org>
-To: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>,
-	Peter Griffin <peter.griffin@linaro.org>,
-	Alim Akhtar <alim.akhtar@samsung.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Mark Brown <broonie@kernel.org>,
-	Charles Keepax <ckeepax@opensource.cirrus.com>,
-	Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@bgdev.pl>, Arnd Bergmann <arnd@arndb.de>,
-	mfd@lists.linux.dev, linux-samsung-soc@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, patches@opensource.cirrus.com,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 1/4] mfd: wm831x: Support software nodes for DCDC
- regulators
-Message-ID: <20261104181429.GE1650678@google.com>
-References: <20261024-samsung-kp-v4-0-e21253295e68@gmail.com>
- <20261024-samsung-kp-v4-1-e21253295e68@gmail.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kemnade.info header.i=@kemnade.info header.a=rsa-sha256 header.s=20220719 header.b=VeZgqkQh
+Received: from mail.andi.de1.cc ([2a02:c205:3004:2154::1])
+	by mail2.andi.de1.cc with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.98.2)
+	(envelope-from <andreas@kemnade.info>)
+	id 1xOfjJ-000000022oO-21Ik;
+	Wed, 04 Nov 2026 19:29:01 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=kemnade.info; s=20220719; h=References:In-Reply-To:Subject:Cc:To:From:
+	Reply-To:Content-ID:Content-Description;
+	bh=SFJwlUyqlnW4DRbVzxxL9VU7f1wu/pDUPInWa0d30zE=; t=1793816941; x=1795026541; 
+	b=VeZgqkQhKf5KuTM6IjrnUlvvNLP/i7wBO84ZgfcPGkl28xz1JMnm3odlVKau9r2zNGUHWtAe01y
+	nNY6GU8gXC3JzRGo3i7uJzrNafVWKxAIxQqIjphGEFGHtdfQzO/QJQIshUnB/tym3et+XJnG4eyCz
+	oyTopQ+rwrz6gMbWMR3hl3nxV11M5xTllyPy9TPHRfAfyA+WmLU6oMPSaz0E7JfdqYOghiIHj5QOW
+	MIh+tEjcx7HgujT8u1tDQ1gxOMM7ArYvRlMe4qInWLS9XZ3vi6mQItn4Ie4959aVSHmhUkfT+Ix9V
+	gIGSLtImSx/XEv16oB1r3nDg2Voxw38QLurA==;
+Date: Wed, 4 Nov 2026 19:28:45 +0100
+From: Andreas Kemnade <andreas@kemnade.info>
+To: Pablo Mazzini <pmazzini@gmail.com>
+Cc: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+ Guenter Roeck <linux@roeck-us.net>, Lee Jones <lee@kernel.org>, Alistair
+ Francis <alistair@alistair23.me>, linux-hwmon@vger.kernel.org,
+ mfd@lists.linux.dev, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 6/7] regulator: sy7636a: bind to the I2C device
+ directly
+Message-ID: <20261104192845.41b086ea@kemnade.info>
+In-Reply-To: <20261101223125.302001-7-pmazzini@gmail.com>
+References: <20261101223125.302001-1-pmazzini@gmail.com>
+	<20261101223125.302001-7-pmazzini@gmail.com>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.49; aarch64-unknown-linux-gnu)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -67,75 +71,69 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261024-samsung-kp-v4-1-e21253295e68@gmail.com>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Sat, 24 Oct 2026, Dmitry Torokhov wrote:
+On Sun,  1 Nov 2026 22:31:24 +0000
+Pablo Mazzini <pmazzini@gmail.com> wrote:
 
-> Allow passing software nodes to wm831x DCDC regulators via PMIC platform
-> data. This is useful for non-DT/non-ACPI platforms that want to
-> associate device properties (like DVS GPIOs) with the regulator devices
-> using software nodes.
-> 
-> Add software node pointers to the PMIC platform data and have the MFD
-> core assign them to the buckv cells.
-> 
-> Signed-off-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-> ---
->  drivers/mfd/wm831x-core.c        | 47 ++++++++++++++++++++++++++++++----------
->  include/linux/mfd/wm831x/pdata.h |  2 ++
->  2 files changed, 37 insertions(+), 12 deletions(-)
-> 
-> diff --git a/drivers/mfd/wm831x-core.c b/drivers/mfd/wm831x-core.c
-> index df8e76e000cc..c4793be419ba 100644
-> --- a/drivers/mfd/wm831x-core.c
-> +++ b/drivers/mfd/wm831x-core.c
-> @@ -14,6 +14,7 @@
->  #include <linux/delay.h>
->  #include <linux/mfd/core.h>
->  #include <linux/slab.h>
-> +#include <linux/string.h>
->  #include <linux/err.h>
+[...]
+> -	ret = devm_regulator_get_enable_optional(&pdev->dev, "vin");
+> +	ret = devm_regulator_get_enable_optional(dev, "vin");
+>  	if (ret)
+> -		return dev_err_probe(&pdev->dev, ret,
+> +		return dev_err_probe(dev, ret,
+>  				     "failed to get vin regulator\n");
 >  
->  #include <linux/mfd/wm831x/core.h>
-> @@ -1449,6 +1450,32 @@ const struct of_device_id wm831x_of_match[] = {
->  };
->  EXPORT_SYMBOL_GPL(wm831x_of_match);
->  
-> +static int wm831x_add_devices(struct wm831x *wm831x, int wm831x_num,
-> +			      const struct mfd_cell *cells, int num_cells)
-> +{
-> +	struct wm831x_pdata *pdata = &wm831x->pdata;
-> +	int i;
-> +
-> +	struct mfd_cell *local_cells __free(kfree) =
-> +		kmemdup_array(cells, num_cells, sizeof(*cells), GFP_KERNEL);
-> +	if (!local_cells)
-> +		return -ENOMEM;
-> +
-> +	for (i = 0; i < num_cells; i++) {
-> +		struct mfd_cell *cell = &local_cells[i];
-> +
-> +		if (strcmp(cell->name, "wm831x-buckv") == 0) {
-> +			int id = cell->id - 1;
-> +
-> +			if (id >= 0 && id < WM831X_MAX_DCDC)
-> +				cell->swnode = pdata->dcdc_swnodes[id];
-> +		}
-> +	}
+we need that regulator enabled for i2c access, if Patch 5 is merged before
+this it will happily try to access the device without it being accessible.
 
-I can't begin to tell you how much I hate this.
+But it then is just another error code than ENODATA.
 
-Why are we duplicating massive static const structs just to add a S/W
-node?  Is there no other way we can do this statically?
+So if that is considered harmful,  probably this patch needs to be reordered.
 
-Since pdata is being populated already, why not just pass that on to the
-consuming child device (the regulator)?
+[...]
+> --- a/include/linux/mfd/sy7636a.h
+> +++ /dev/null
 
-> +	return mfd_add_devices(wm831x->dev, wm831x_num, local_cells, num_cells,
-> +			       NULL, 0, NULL);
-> +}
+but if it goes in first, this part will make trouble.
 
--- 
-Lee Jones
+Regards,
+Andreas
+
+> @@ -1,34 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0-only */
+> -/*
+> - * Functions to access SY3686A power management chip.
+> - *
+> - * Copyright (C) 2021 reMarkable AS - http://www.remarkable.com/
+> - */
+> -
+> -#ifndef __MFD_SY7636A_H
+> -#define __MFD_SY7636A_H
+> -
+> -#define SY7636A_REG_OPERATION_MODE_CRL		0x00
+> -/* It is set if a gpio is used to control the regulator */
+> -#define SY7636A_OPERATION_MODE_CRL_VCOMCTL	BIT(6)
+> -#define SY7636A_OPERATION_MODE_CRL_ONOFF	BIT(7)
+> -#define SY7636A_REG_VCOM_ADJUST_CTRL_L		0x01
+> -#define SY7636A_REG_VCOM_ADJUST_CTRL_H		0x02
+> -#define SY7636A_REG_VCOM_ADJUST_CTRL_MASK	0x01ff
+> -#define SY7636A_REG_VLDO_VOLTAGE_ADJULST_CTRL	0x03
+> -#define SY7636A_REG_POWER_ON_DELAY_TIME		0x06
+> -#define SY7636A_REG_FAULT_FLAG			0x07
+> -#define SY7636A_FAULT_FLAG_PG			BIT(0)
+> -#define SY7636A_REG_TERMISTOR_READOUT		0x08
+> -
+> -#define SY7636A_REG_MAX				0x08
+> -
+> -#define VCOM_ADJUST_CTRL_MASK	0x1ff
+> -// Used to shift the high byte
+> -#define VCOM_ADJUST_CTRL_SHIFT	8
+> -// Used to scale from VCOM_ADJUST_CTRL to mv
+> -#define VCOM_ADJUST_CTRL_SCAL	10000
+> -
+> -#define FAULT_FLAG_SHIFT	1
+> -
+> -#endif /* __LINUX_MFD_SY7636A_H */
+
