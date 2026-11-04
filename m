@@ -1,78 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.9
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793788695;
-	b=0oubIA9oKiMEyhjc21r1zKMu0UmUHyv4M4v4OMSpfCA5ZxJHZJLgwLgRjLDsHt6bD7PB
-	 O+Yzt4a6drfaNuYiKj/Y6YhD15zeycSsKSza2GndsSF5CAPEnOF7K9zJ24/cEteE3ikgk
-	 4qOuYT59RXgwD1l2r9/WSIvlEEYwbNqCPXBYmCSwNwajihs6+a6CvgquCuyxUjwDYiQP/
-	 Njiku91ZcK1CRjBN5CCmhxQLJ45A5RHvan/xGJshqxcHcU9whEFISkiSSbVlVGwyA43c1
-	 vrqxfQO3s3M8XGGThVzrt/Shu01xVSf523gn5QzNJKcvBpCvquW8xU7q/h0LjaUtJEA==
+	t=1793788845;
+	b=VJ8B9FuvrigKIoJhPuX7FoEAUbJpGgpBpp9XMc5OW+F4FcyLoBuOQV8sNUo3yf7aAJoS
+	 TzHs9dpP+FVL+mewU1o3Lik31g2WPnRD5S/hhFysCCTz+yzwPQRmeBnoNHzdxx5I46fLO
+	 r05E+1qF7riY6Ym/5vc8UlYCxRbtn6c9KGLykAg0FW9qpqX48jdg76Eiw8zg0Sjg/Z1RO
+	 p171Kb24giyBi9bopo1f1IDWQ2F3MwzqEahdeCN0FTxNLoKqeDDxQzI8V7Ri/7VF+E6Dq
+	 sbr2hH+BKD/EJoQhfebKC9CUCPltb1vKqS3e3B9hZnIwHEWdUYzogC388HibzQGbzwQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793788695;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:MIME-Version:Organization:
-	 Content-Transfer-Encoding;
-	bh=Bky+z94GjBhGuHRVzoeUOOEZJsIpZL6CWBksx0pMhcI=;
-	b=l8EzHdodok1ocNNMRbTq8GG2GGMbvc0FJduq2+SxCi/M+78A5uXHw7V1DXLyTl3pLZB1
-	 ZVCNb+AIUXZYUNuqbcn21zx5O0etyW4E7k2yx3OFYU5ZDnFfCzj3EOpr6y4Ev6LiXzNOk
-	 aT/W6pBokyIC2kAWBfGm7ExOYx8YqbkFwhnt4uFk38mCSq54TkHDhOqkRkECQm5uCuSW1
-	 YqZMklH9PcI17JqdSZRH2kbfOTojcPBTcZy9HB4i5J+eRLgHwBc778ZEqgEbaiTtPDFlG
-	 0Zc/PRf32RjNvV6BNNT/x9l5ZGH6oNGMQcGmK4x5EkqzmsMSQcBVElBAJ6FKyHB5JSQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793788845;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=6nNJseUpPWduPyQ2LIQ8+03rrWz7xWtDnJFiuZlMSKk=;
+	b=WqZLyKe9lfBiiudRMLZSsjQlEAMOJcg2vyXxaxVmQU0sF3SLtyS2sMnFItasQrDqJ+9E
+	 Qh0QtWz2RXGxHzTeoctCsmpgL8aT8GUyZKXl6ignhMd/gPNO7N4KhAQERDBLrn0ms/nol
+	 7ePtSPEQpb3byucNWKcfDX6X9RSmID8LtQENG52WbnpQ/bwjpJNoC9opRut25VR7o3Ffp
+	 saK9MhfAYMiWNQf5yfqvHGcBQ2srMrb00uJH8pEbXYQ4DEMyn+ayuxk9KIshyGrmnnB4O
+	 gUS1H0i9Zx7n/R8I4VSuLbW+ItD1LI3nfBemapMdcnLKuelaPC9ZpsHzRrF7IkSfscQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linux.intel.com;
-	spf=pass smtp.mailfrom=linux.intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=XbHSzHRz;
-	arc=none smtp.remote-ip=192.198.163.9
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fHFVGwv2;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4F02606A328
-	for <mfd@lists.linux.dev>; Wed,  4 Nov 2026 10:38:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C4F02606A328
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6215606A31B
+	for <mfd@lists.linux.dev>; Wed,  4 Nov 2026 10:40:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=XbHSzHRz
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1793788694; x=1825324694;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=aOGzTuu2joxxtbxKzL4dHVBDbu15VwOAO4OF8srkPsM=;
-  b=XbHSzHRzAm2rnwRHd7vB8V1Qc+88tBsUrSv2zvJOZaBqtc0GHJ71XFU0
-   MFhAkmc2lQqrXMpsNSkYshzccff7Sd4ATzjNUOYye0AfI1yLriML2aYlU
-   F1FZvjHo64/kmylSNmgWhiQ1x4TqFpFve4jOMghGc5/9XE8SkFAKKF3HA
-   l6kBqHLWiowO6GecyGtJdmao9dG+yJgfSJYtXP5jSjQJ6/SpCJEuvdHGg
-   udhDO+ugv1OSj4NTdbwcSnURx9K2U/I9plfhmaatqzQmhgecfHxXmhPgJ
-   Ffxq1sv0XcQvp+E/0TCAouRR7eoP+bG/Uj9kC1+mjsrMruWGwALpIp3pM
-   Q==;
-X-CSE-ConnectionGUID: xiopD3daQr60PkkvDbw50A==
-X-CSE-MsgGUID: YAZcXyeEQzeojVLn1llUEQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11955"; a="2412953"
-X-IronPort-AV: E=Sophos;i="6.27,195,1787036400"; 
-   d="scan'208";a="2412953"
-Received: from orviesa003.jf.intel.com ([10.64.159.143])
-  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Nov 2026 02:38:13 -0800
-X-CSE-ConnectionGUID: +o7S5iu8SKeIiX9Wt7GSfA==
-X-CSE-MsgGUID: 8J3dyKC6Q4eTbNPj8Cjt7A==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,195,1787036400"; 
-   d="scan'208";a="6569104"
-Received: from gklab-103a-129.igk.intel.com ([10.91.103.129])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Nov 2026 02:38:12 -0800
-From: Dawid Glazik <dawid.glazik@linux.intel.com>
-To: Lee Jones <lee@kernel.org>
-Cc: mfd@lists.linux.dev,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-aspeed@lists.ozlabs.org,
-	dawid.glazik@linux.intel.com,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: [RESEND] dt-bindings: mfd: syscon: add aspeed,ast2600-i3c-global compatible
-Date: Wed,  4 Nov 2026 12:32:06 +0100
-Message-ID: <20261104113206.3243865-1-dawid.glazik@linux.intel.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fHFVGwv2
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3744E1F000C1;
+	Wed,  4 Nov 2026 10:40:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793788844;
+	bh=6nNJseUpPWduPyQ2LIQ8+03rrWz7xWtDnJFiuZlMSKk=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=fHFVGwv2EjBiEHC3pwmUz07Pn36mjH81+yDtsP+VCdcjFYAcChkmcycusW8qn1pa8
+	 Ln3KYgPbqHLGi0Rc0rv5UHr/s2vKFhXofvqHbjcAgF+wAk9HD8gypORDnPT5ZV3k57
+	 mSloIojnRJuy+ukxF/snEKrwGIx2+HH3Ts16qRdTv/pXxmEm/9/Z9ZvdF5z6QjsHdN
+	 GL4NCQRupa4I9hMLYmDnxWiZ3DkEmI/MSCfmDiEn0ekh1//Hvacf8UXYCs6NnlJMdF
+	 K8NSDbpxxjcwgUNYPbnzWVdN57Bi1a3enKLJ0sByBIBdfTk/SxxmszinIfpMTbpMMC
+	 7dLjG0DXjQYtQ==
+Message-ID: <sashiko-outbox-197109@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [RESEND] dt-bindings: mfd: syscon: add
+ aspeed,ast2600-i3c-global compatible
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Dawid Glazik" <dawid.glazik@linux.intel.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20261104113206.3243865-1-dawid.glazik@linux.intel.com>
+References: <20261104113206.3243865-1-dawid.glazik@linux.intel.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Wed, 04 Nov 2026 10:40:43 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -81,41 +59,19 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-Organization: Intel Technology Poland sp. z o.o. - ul. Slowackiego 173, 80-298 Gdansk - KRS 101882 - NIP 957-07-52-316
-Content-Transfer-Encoding: 8bit
 
-Add aspeed,ast2600-i3c-global to the syscon binding compatible list to
-document the AST2600 I3C global register syscon node, which is already
-used in aspeed-g6.dtsi.
+> Add aspeed,ast2600-i3c-global to the syscon binding compatible list to
+> document the AST2600 I3C global register syscon node, which is already
+> used in aspeed-g6.dtsi.
+>=20
+> Without it, dtbs_check reports this node as failing to match any schema
+> on every AST2600-based board.
+>=20
+> Signed-off-by: Dawid Glazik <dawid.glazik@linux.intel.com>
 
-Without it, dtbs_check reports this node as failing to match any schema
-on every AST2600-based board.
+Sashiko has reviewed this patch and found no issues.
 
-Signed-off-by: Dawid Glazik <dawid.glazik@linux.intel.com>
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
----
-Resend of [1]. It was accepted on the list but is not in upstream.
-
-[1] https://lore.kernel.org/all/41d66492e1a1d42f6888459288311094c8b7bc51.1777058942.git.dawid.glazik@linux.intel.com/
----
- Documentation/devicetree/bindings/mfd/syscon.yaml | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/Documentation/devicetree/bindings/mfd/syscon.yaml b/Documentation/devicetree/bindings/mfd/syscon.yaml
-index 80ff0e1caca2..dae706ca7642 100644
---- a/Documentation/devicetree/bindings/mfd/syscon.yaml
-+++ b/Documentation/devicetree/bindings/mfd/syscon.yaml
-@@ -47,6 +47,7 @@ properties:
-               - apm,xgene-mcb
-               - apm,xgene-rb
-               - apm,xgene-scu
-+              - aspeed,ast2600-i3c-global
-               - atmel,sama5d2-sfrbu
-               - atmel,sama5d3-nfc-io
-               - atmel,sama5d3-sfrbu
-
-base-commit: 6628e7d4c6b25c8d18f1345e3a20d21829aae7e4
--- 
-2.43.0
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261104113206.3243=
+865-1-dawid.glazik@linux.intel.com?part=3D1
 
