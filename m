@@ -1,112 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793796029;
-	b=38l3PcLgb0Dj/2zMVk5s0u7yEOKxGNGPrHn7h+iepgHkDT5OVFRtrly9eMJigcuF6Mt7
-	 TsE/ncFQw6qcXckE5imMel8VY7e8BwB6QL2jfyMBhLN1dd0MPi01bdmdRfDRJqFVVTgoC
-	 IvPO1w7GcpXQ0yfmewdVLvpMeEjmgjp2CkGoT+SSgthr3WyAkT8V+fX41+ROf7hyMC7yG
-	 9Ew2cGVpVVMbAa6JeaqCE1AI3OAgBefLHlG85WZBPBYWKbgLrkoO994aeFwFwz0I9hei2
-	 Ia9C/iCVEKD30mDIvWo8s6pAjmKB7ixBHZAJTnOSsQCzw3ZO8wjcuPaU+z8z2vRJgSQ==
+	t=1793796046;
+	b=UlaJr+xIMoXjlW+tbp2jx++KDz3mlQ8f6tM3zH17rlmbgPYEF0rDiuztkv/dYrCk1UL9
+	 0goSYiD1xsu3jLQwuVN+C/ivuTOnNnag6InOhGGETPxfYCoXKs8kYiuKd6LbNZCR0frDN
+	 Iz9Vxt1l/nESPgYkPyGm1DSZn+8141bOady00o713hcK5NgWhqB9Q0GMLEeE4lqfQMJek
+	 E4lV1/lvxZOM4WI0lNAZCeFJq2Yst/kynxRBY6xUKSxeA8IoFhbz77zOV86xN0OUEPOig
+	 qGRg02s8aHAxxQ31G0R1WsvqLV5S9eJZ0GwDjKmmgmkIuX+PKe2h8F1rDdzjZ9/GJIQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793796029;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=3JK3zLqAxgD4t3oDKY8+G+aUNHzEUIyP3YZKLoNRsEg=;
-	b=mQY+C6UKJhkQAD1mHCKPQ+jwTDhV8+dQkrBIKDLxXvqm3b2A7+ICilYtCo+gOljbIPlG
-	 puHDc1GWyjDXJZ0/y70Fp187qy7GySi9X3SrEtcUC545+JJkHxeC8hZpf6OIEaJMABGEV
-	 LA8l7XW9ONBQmoQ9yviLZfz+T76A84Yr/+1vvnJqF+Ih6Tej4G3Bi68iWB4/fqxWkxreb
-	 PjprVSeHkuONoS6yk85tGaDPbECc8MnnE53ArxzZn14/wLU19lLvxY2fb+2Sah8qq8lc1
-	 vR2P6ClF5ASabVYv0QbRfVE+cBy5BQpCSYz9eAziKmCtc8TBLQnWxbieT+LynIOozWw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793796046;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=L0zQlxDmOGobbEbvtBPiR2UkkBFYt7715ct0OxHv4qA=;
+	b=MVl1Td89M6oZ1aDqeTukECOXhCok1XEuTZLksomeACCdxMXdu4i5FBq+XHHKEQ7YMHBN
+	 4FWPMiQZKgJW3G5YzP0RBycMDgsCHx4rJzLm3sxNgmVdTS36IIr/jVuANf4DYjbSEDc/2
+	 zIcEJcDkK1l7UKQEuen5wJVLt1ZnZpLvKPV5Q9egVUtxnJU4TCa7HiYurio92qBoPpc0l
+	 CP9xcx9kCwEFi/rV5iJT765eb1UJtnTW5VUR+fYzHlL/nnuddKC44RPS+C0hmpAmEOopm
+	 TwmUHIHDXgrhr+sjjtBPw5XC1gaoSCXOHIbjbIZ7WLKfjrqKHazsjV9D0sjyNrwQfYg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=iwNMbCnV;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="YfQ7y/cL";
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SfQ66bCQ;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 39B64606A32D
-	for <mfd@lists.linux.dev>; Wed,  4 Nov 2026 12:40:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 39B64606A32D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0C17606A31B;
+	Wed,  4 Nov 2026 12:40:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=iwNMbCnV;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=YfQ7y/cL
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6A4Ba9rN1700607
-	for <mfd@lists.linux.dev>; Wed, 4 Nov 2026 12:40:27 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	3JK3zLqAxgD4t3oDKY8+G+aUNHzEUIyP3YZKLoNRsEg=; b=iwNMbCnVEl0qopmM
-	z26LlSp/6onxPzfFrIGHpglgjNeNDGufF9VXPf93ENI+VyvjD9pF29uTSDT1XaiO
-	lz2rCK2D8eIjdEZ8do4oxZyV/YxdxJKcPGsfAXU9cUsmkxKQVPatRYat/4steeZd
-	FCPo0mFOC2nvDHg+nD9FvIoN6VdK+7qgaVIRWu60CH62c38fg9CLLhR5jexEGg2k
-	SenFpC1jxWAd4oCysGV+rNVRxv/qKg0CTHLLIpIV76buG4Lu2OJaUpBHcpigcrA9
-	Zf83vafsU4zKsKCUnyITXUGrWlCBXYXL2nwoK9mN9UQP1kgzn361F4zIYNY6FKFv
-	AhMwKw==
-Received: from mail-oo1-f70.google.com (mail-oo1-f70.google.com [209.85.161.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hr3pygaba-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <mfd@lists.linux.dev>; Wed, 04 Nov 2026 12:40:27 +0000 (GMT)
-Received: by mail-oo1-f70.google.com with SMTP id 006d021491bc7-7035f069837so625179eaf.3
-        for <mfd@lists.linux.dev>; Wed, 04 Nov 2026 04:40:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793796026; x=1794400826; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=3JK3zLqAxgD4t3oDKY8+G+aUNHzEUIyP3YZKLoNRsEg=;
-        b=YfQ7y/cLXIVrtGIHeolRW4UyV/5Vh3uuI/j09XDa+NG/o0dWwDj11uf7lSYphxENkt
-         mT9lOqyQkKsE6RguOOuaQ87mMnCDV9W9hFBWVoBhcdUQgH8n5gfu86Q4RNOwDsM1vq+H
-         fgs0F0+tlZGCwYocyxlQeDvJcaazX7TIK+rlgcWbsfaWsXb5COggforhJtF6H2MPqxVr
-         66OU6n1ctqHuvSNdb0rInGXoJfbYBZt7UXxVHH4ajV1BcXhvkrrXzHwAX81lxbbNNScE
-         r6idL30W0zRXEVxmUnxxdpNWmEwUMbhS6pip3a2mCQTydAsoDTF4LzErxafLPluDs2uT
-         TjaA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793796026; x=1794400826;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=3JK3zLqAxgD4t3oDKY8+G+aUNHzEUIyP3YZKLoNRsEg=;
-        b=RWasfa6ynJzKNtqTXBwa6ieiR7v+cNsc+s73D036eNqLNDdt7jYS8CnI+WH1P+EN7H
-         Ac/OkkzYCuvYkbQEQsinW7Tc7YiRjoOihnhbHihB7OR4vSZWnJMFNN6rmCH1DSesAKsZ
-         dXtHuUoC5JldSKWsq5p+rWK5rTpoYKTbSFhYydi2ucUUJDndXQxB7M3fgg0Fb7KM1LkV
-         7vovocmfkWuSAHPpJ3bG3wJxCSYRLiwpYITqhzp1EcvXgwDY6f0cwWluR2BSLPdynaot
-         wdLw7vqyiyOVxXeCCanw4Pea9K3zAToiG74KKWDxHmlvojc9yzThgfRJCMv0ccLMv4w9
-         xf/Q==
-X-Forwarded-Encrypted: i=1; AKwUvByneKbcaiDx2hQ1lrrtshE+yaYj/UcD6m9lL8A/ni09PZXkkmsYiLdO69VBP5RQ8mfxlEw=@lists.linux.dev
-X-Gm-Message-State: APuU4Z/UJIRFnKcFQ1olp9Xk6pZb5knK260/rjaymcG4Dg2gDSbuAp8S
-	DKdcsfFidDwznxbhHIZ1V5Px8a5RSgRv8HUHcFUDRwXHx0HkqnKlLeL4N1R2w/mmExqIJoB2n5L
-	+6i8xeLa+W4H6eMuI6KNsiAl4FTS952eoinPVDa1mH9YyGRGt1nr1YDM=
-X-Gm-Gg: AYBFou29X60u6phosksuMPPHAK10xwDDqoRaQ/v7JZ7FAnnZWe2M+1GI3ltTU+IK4MI
-	wShAC24atWwp1aWdakKlmWZEvcCILknGoLlpp2H6Lq2UPGH/iOdcRjfZItg1VCCFqfSJ2WbINTY
-	FOYtjr237MkgkhyameEoCGcIvqjFNFKpEzN1iTdsAWOYvONG8Bi6DfFf1qhIktVrg8UAMIgXeAm
-	UyH9VtZ1U5bAuzThzquvT04wrTnVybh+OorBEA6dwneEKTPF0Uibr8rqurl9syzQcnw6Mt0pW/P
-	jwLFowJm1lt0E+Rfw18yMPH11d6WcdDTbbhy+yBgZfjcjzj067Z18cYbk/SSoYQcBSmyBfPPKni
-	KRAnEKIl3j9qXx9TN4svJhEGcAxQbT6EoaHOptRlcKjeymPRfsNK/NRuRdz5BJZoFdqHylekrJ9
-	PxG4N7sQ==
-X-Received: by 2002:a05:6820:55c9:10b0:708:ec28:6fd1 with SMTP id 006d021491bc7-714f256cde8mr6042777eaf.66.1793796026364;
-        Wed, 04 Nov 2026 04:40:26 -0800 (PST)
-X-Received: by 2002:a05:6820:55c9:10b0:708:ec28:6fd1 with SMTP id 006d021491bc7-714f256cde8mr6042773eaf.66.1793796025883;
-        Wed, 04 Nov 2026 04:40:25 -0800 (PST)
-Received: from [10.92.198.106] ([202.46.23.19])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-716c12d1f36sm1517007eaf.8.2026.11.04.04.40.18
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 04 Nov 2026 04:40:24 -0800 (PST)
-Message-ID: <3463f5b6-e498-4d06-89e7-8b0fb873f3da@oss.qualcomm.com>
-Date: Wed, 4 Nov 2026 18:10:15 +0530
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SfQ66bCQ
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08C391F000C1;
+	Wed,  4 Nov 2026 12:40:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793796045;
+	bh=L0zQlxDmOGobbEbvtBPiR2UkkBFYt7715ct0OxHv4qA=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=SfQ66bCQNJi8JP7xKqrVfvAGtutM77y5u410VMSielq0gf5Vf0de84HykDpZgvoWi
+	 sPX8ufSpzDMO1lSuceCCKsuC4MXEdolK+QXGkJYCGdoF9ZPyzPjddwU/TmwQlcopSt
+	 173MFaeWU+t+dLiOFs53O1e3d2bcb4auIoS77OgHYaCYnZ5Gv5B6C84AF3Ij/zmC6z
+	 ydc5lxww83ofhs5xpKreUMnBGOl4i/0sW1JcuMNVADVrNlJN7s0TMupKNV9vL7zldl
+	 TW3z7iuT642SD+GQlnOdvCNHru0h8/H87ZpvdkPijBSERr58uXumIZss85A/X5X4pi
+	 IBXtWjHuZ9ucQ==
+Message-ID: <sashiko-outbox-197282@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v13 4/7] input: keyboard: Add driver for ASUS
+ Transformer dock multimedia keys
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Svyatoslav Ryhel" <clamor95@gmail.com>
+Cc: devicetree@vger.kernel.org, linux-input@vger.kernel.org, mfd@lists.linux.dev, linux-leds@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, dmitry.torokhov@gmail.com, lee@kernel.org
+In-Reply-To: <20261104122606.215629-5-clamor95@gmail.com>
+References: <20261104122606.215629-1-clamor95@gmail.com>
+ <20261104122606.215629-5-clamor95@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Wed, 04 Nov 2026 12:40:44 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -115,103 +60,132 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 03/12] arm64: dts: qcom: hamoa-pmic: Enable BCL sensor
- node
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
-        Abel Vesa <abelvesa@kernel.org>
-Cc: linux-hwmon@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        mfd@lists.linux.dev, Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>
-References: <20261005-qcom-bcl-hwmon-v4-0-50b9a8c730b7@oss.qualcomm.com>
- <20261005-qcom-bcl-hwmon-v4-3-50b9a8c730b7@oss.qualcomm.com>
- <43a57f69-caa2-4943-90a5-729e0f378b21@oss.qualcomm.com>
-Content-Language: en-US
-From: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
-In-Reply-To: <43a57f69-caa2-4943-90a5-729e0f378b21@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=ZbmIpcVA c=1 sm=1 tr=0 ts=6aeb27bb cx=c_pps
- a=lkkFf9KBb43tY3aOjL++dA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=IhMxsDTVYy43m0kJnUIA:9 a=QEXdDO2ut3YA:10
- a=k4UEASGLJojhI9HsvVT1:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA0MDA1MCBTYWx0ZWRfX8UsAeTP5qXAI
- PzegKWbSKW3YLvrGCGctG9qVBSINmKkTFKr5YeMUGwjSMJduYcih6/gVYlZAuDaxYpvGXgmSG7b
- nSbZ8pT5oe6E2hZf72JB10WxVwWCChuUIE9i+m1w10dk4a1uvCB+Nvy8YyFJopTdXdDgZyo2fZz
- No4MrtwdV5QxqI6Eit0gCUWoy1/XvtFqs5kJ5oJxVLNyGIw4YnnQKyy19G7yprS6/iv5NTnXiGU
- twsYa02MUGHZIIi3nkAk37Y+3O+63owOso3itmnsBNz9YMsZD6WF+jHD25xi58tfs69Xh++c1rU
- utTPyXyP/UhtIzSYc00ydADsk+ZWpwnsJ1yj+8uGsRiCQdGTUi1vxCwEMc5SgCroN2XZQBUw1RH
- Gu88Hj0Tg6UbCmsZMKhxCwZ9YcgINCaem6n+YxagJZTSuU87JE6pFTXyNt98uXOs4Q22ixb8Lze
- ig9oAi1jG7sMGIfq34Q==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA0MDA1MCBTYWx0ZWRfX2aoxs1DQ/vqP
- W9EPpCr2Dp3ATihdfn0dAsuRHRylJ6F1NNuama+bJrV2d7wmoDrK2bysXf73JY7bSkdwhwwmqBy
- 9uGKkwm5AX9MscJ1Vsp7wb3Wk8b/TS8=
-X-Proofpoint-ORIG-GUID: 2EQfi61BeQFYz2O8nOhj1neWkkvPM8oX
-X-Proofpoint-GUID: 2EQfi61BeQFYz2O8nOhj1neWkkvPM8oX
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-04_04,2026-11-03_04,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 impostorscore=0 spamscore=0 priorityscore=1501 clxscore=1015
- phishscore=0 suspectscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611040050
 
-Hi Konrad,
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
+s) to consider:
+- [Medium] input: keyboard: u8 overflow and page mixup in asus_ec_keys_proc=
+ess_key()
+--
 
-On 10/19/2026 8:21 PM, Konrad Dybcio wrote:
-> On 10/5/26 2:24 PM, Manaf Meethalavalappu Pallikunhi wrote:
->> Add Battery Current Limiting (BCL) hardware monitor node for
->> hamoa-pmic. The BCL monitors battery voltage and current, providing
->> hardware interrupts when configurable thresholds are violated.
->>
->> Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
->> Signed-off-by: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
->> ---
-> 
-> [...]
-> 
->> @@ -674,6 +685,17 @@ smb2360_0: pmic@7 {
->>   
->>   		status = "disabled";
->>   
->> +		sensor@4700 {
-> 
-> Is it not there on the 4 other SMB2360s?
+commit ba1df1a44a7f539aae799312892bb55d53afd18c
+Author: Micha=C5=82 Miros=C5=82aw <mirq-linux@rere.qmqm.pl>
 
-No. The BCL peripheral is enabled only on the first SMB2360. AFAIK, the 
-other four are used only for USB functionality.
+input: keyboard: Add driver for ASUS Transformer dock multimedia keys
 
-Thanks,
-Manaf
+This commit adds an input driver for the ASUS Transformer Mobile Dock
+multimedia top button row, defaulting to F1-F12 function keys and allowing
+switching to multimedia keys with ScreenLock + AltGr.
 
-> 
-> Konrad
-> 
->> +			compatible = "qcom,smb2360-bcl";
->> +			reg = <0x4700>;
->> +			interrupts = <0x7 0x47 0x0 IRQ_TYPE_EDGE_RISING>,
->> +				     <0x7 0x47 0x1 IRQ_TYPE_EDGE_RISING>,
->> +				     <0x7 0x47 0x2 IRQ_TYPE_EDGE_RISING>;
->> +			interrupt-names = "max-min",
->> +					  "critical",
->> +					  "emergency";
->> +		};
->> +
->>   		smb2360_0_eusb2_repeater: phy@fd00 {
->>   			compatible = "qcom,smb2360-eusb2-repeater";
->>   			reg = <0xfd00>;
->>
+> diff --git a/drivers/input/keyboard/asus-transformer-ec-keys.c b/drivers/=
+input/keyboard/asus-transformer-ec-keys.c
+> new file mode 100644
+> index 0000000000000..5a8fb86a97555
+> --- /dev/null
+> +++ b/drivers/input/keyboard/asus-transformer-ec-keys.c
+> @@ -0,0 +1,216 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +
+> +#include <linux/array_size.h>
+> +#include <linux/err.h>
+> +#include <linux/i2c.h>
+> +#include <linux/input.h>
+> +#include <linux/mfd/asus-transformer-ec.h>
+> +#include <linux/module.h>
+> +#include <linux/platform_device.h>
+> +
+> +#define ASUSEC_EXT_KEY_CODES		0x20
+> +
+> +struct asus_ec_keys_data {
+> +	struct notifier_block nb;
+> +	struct asusec_core *ec;
+> +	struct input_dev *xidev;
+> +	unsigned short keymap[ASUSEC_EXT_KEY_CODES * 2];
+> +	bool special_key_mode;
+> +};
 
+[ ... ]
+
+> +static int asus_ec_keys_process_key(struct input_dev *dev, u8 code)
+> +{
+> +	struct asus_ec_keys_data *priv =3D dev_get_drvdata(dev->dev.parent);
+> +	unsigned int key =3D 0;
+> +
+> +	if (code =3D=3D 0)
+> +		return NOTIFY_DONE;
+> +
+> +	if (priv->ec->right_alt_pressed) {
+> +		priv->ec->special_combo_triggered =3D true;
+> +
+> +		/* Flip special key mode state when pressing SCREEN LOCK + R ALT */
+> +		if (code =3D=3D 1) {
+> +			priv->special_key_mode =3D !priv->special_key_mode;
+> +			return NOTIFY_OK;
+> +		}
+> +	}
+> +
+> +	/*
+> +	 * Relocate code to second "page" if pressed state XOR's mode state
+> +	 * This way special key will invert the current mode
+> +	 */
+> +	if (priv->special_key_mode ^ priv->ec->right_alt_pressed)
+> +		code +=3D ASUSEC_EXT_KEY_CODES;
+> +
+> +	if (code < dev->keycodemax) {
+> +		unsigned short *map =3D dev->keycode;
+> +
+> +		key =3D map[code];
+> +	}
+> +
+> +	if (!key)
+> +		key =3D KEY_UNKNOWN;
+> +
+> +	asus_ec_keys_report_key(dev, code, key, 1);
+> +	asus_ec_keys_report_key(dev, code, key, 0);
+> +
+> +	return NOTIFY_OK;
+> +}
+
+[Severity: Medium]
+Should asus_ec_keys_process_key() validate that code < ASUSEC_EXT_KEY_CODES
+before setting priv->ec->special_combo_triggered and offsetting code by
+ASUSEC_EXT_KEY_CODES?
+
+In asus_ec_keys_setup_keymap(), dev->keycodemax is set to
+ARRAY_SIZE(priv->keymap) (0x40), spanning both keymap pages:
+
+drivers/input/keyboard/asus-transformer-ec-keys.c:asus_ec_keys_setup_keymap=
+() {
+	...
+	dev->keycode =3D priv->keymap;
+	dev->keycodesize =3D sizeof(*priv->keymap);
+	dev->keycodemax =3D ARRAY_SIZE(priv->keymap);
+	...
+}
+
+When asus_ec_keys_notify() passes data[2] to asus_ec_keys_process_key() wit=
+h a
+raw code >=3D ASUSEC_EXT_KEY_CODES (0x20), a few issues can occur:
+
+1. If priv->ec->right_alt_pressed is true, priv->ec->special_combo_triggere=
+d is
+   set to true even for out-of-range codes.
+
+2. When (priv->special_key_mode ^ priv->ec->right_alt_pressed) is false, a =
+raw
+   code in 0x20..0x3f passes code < dev->keycodemax (0x40) and indexes into
+   the second page (multimedia keys) in map[code] instead of reporting
+   KEY_UNKNOWN.
+
+3. When (priv->special_key_mode ^ priv->ec->right_alt_pressed) is true, add=
+ing
+   ASUSEC_EXT_KEY_CODES (0x20) to the 8-bit u8 code overflows for raw codes=
+ in
+   0xe0..0xff, wrapping code into 0x00..0x1f (the first page of map[]) and
+   reporting the wrapped value via MSC_SCAN instead of KEY_UNKNOWN. For raw
+   codes in 0x20..0xdf, MSC_SCAN is also reported with code + 0x20 rather t=
+han
+   the raw code.
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261104122606.2156=
+29-1-clamor95@gmail.com?part=3D4
