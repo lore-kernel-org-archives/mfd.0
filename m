@@ -1,56 +1,68 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=170.10.133.124
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793806302;
-	b=OOOyH0jsWL9QMMun6NtDSsLRtC9NuvBLbrZT9ENYe7HHRSrRMWXJm/ok/dpRzS2sbOlR
-	 TA/UCK0utLC2ve+qo97hHXozUw5kTVuhjS13V8z4OyhhcyQWXntXwJdxhF5qzSMgz+szE
-	 GSZkLyD/3H9czxZv5JqydQsHkfnf3KhMN0Z37OWnNunQGg/VOsHOciZfr0gPdHJErqWMF
-	 laG2TxI+z6pU9O3nD7vtRvR5ID1PuvWBnE6mafPwmcddMwokxVWeLupXi1N+83EgXlDY9
-	 NLSBuIQ24LCARLIod87+QQhQGSnE/zCkDlTu2rYlMImYqXKfEU79+IO1o9Km/xA+23w==
+	t=1793806645;
+	b=BEZ4T7m7+s5QLpyeEx4KX0bIwUVjoD6UB2so/H37YHd6tUGjKn4irf7oO9iQq0vGpKqW
+	 A0XO5FtVOc7XByleRsZagdeYv6yGhoJlDm+AE67DX3dPQWwe5yoqoWgp48HB+P4/gypOg
+	 951THQlOhX3Y8UyVflEzoPucqR4ZQGQC3z1RzRotIIjHI24LKfm9RgXZjzJ8iENq9vMcD
+	 FqisiVUSOc6RYFzzVwLTNfbnn3wL6BSFRTBmtywopF2bDBorouiX83gjoeyF5a+lSTUvY
+	 ix3dIGs4jFqaHpnRv7dM3Tq/JIs9l7ShPeJw27UomcCFCkhjSJuCXyZbXTSw1rGAgpg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793806302;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=k2iiQK3f85Qlr393A9TttaLIVgMhFvsKqdsf+QHpCns=;
-	b=JQ/lum2NdFhvnxjODowQ3uOordFGGQvA9n3rJvL5jX7B25Hd94QlMfudAXbHAzNli/3/
-	 1GqaqQXfg9Pu5XftkYIhn8rzgaOTraB8GSEQsNd81nI/e++adh/yTTY2dvTVHLDs8XADU
-	 bKArLQHwv32w40QcAyJo3FDiAuXOkgmhFhrcPkyAUT7CjELECLMtIDNom4Tp8mLkzpSzA
-	 OYq8wQEbHkCN6XGTT7vbvuj5+mp19YKjoxAU5OvBnBGdJyjBDOAMXmJaGN6WEQoToi3+p
-	 8RlijRDQzgvqSiEAN5ZvYPLwbZVbQMakYTlgaP6Ur6tMPCqNAwDoPIzL3aufeg0v/6w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793806645;
+	h=DMARC-Filter:DKIM-Signature:Received:X-MC-Unique:
+	 X-Mimecast-MFC-AGG-ID:Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:From:In-Reply-To:X-Scanned-By:
+	 X-Mimecast-MFC-PROC-ID:X-Mimecast-Originator:Content-Language:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=6gr+1hN5mr88TUb6c1EFHl/+fcbV3ZF/wh6O3QIfUwQ=;
+	b=VDgy5elImeRomdkSaq4hJpBcsp24t/zG0SamrQLZj4l/BzgIxfhgq0n3nsbw2lQSPWG4
+	 /pwiWvh8ND7M/9KbyXF60EaXeIMM+ylWHxWhmGY9Jbn3CHDuipE8RqBGvn4XcGMCexLfh
+	 RtxwRes6R0NgZBLeNpAoYC/GlXlyJk+j0fOcrbZTLDNvFMF1jCdFbOKH6YZ3A1b8plAge
+	 QwR2qq6H8VZJVP1elsEM5XcIGoMPtgJrWzwaVn8CHLog/IaEi/76x1TwmFouKEjaPhI/H
+	 T7UcGVtEU2nVnDGvZcDwhE0/eESe+qB7Bl07HlfH+4HdecPuuR70djI74IE2YqO/Tog==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=k28mOaCv;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=redhat.com;
+	spf=pass smtp.mailfrom=redhat.com;
+	dkim=pass header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=KN61e88G;
+	arc=none smtp.remote-ip=170.10.133.124
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 781CB606A328;
-	Wed,  4 Nov 2026 15:31:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E302260A5BE5
+	for <mfd@lists.linux.dev>; Wed,  4 Nov 2026 15:37:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E302260A5BE5
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=k28mOaCv
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 199B41F000C1;
-	Wed,  4 Nov 2026 15:31:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793806302;
-	bh=k2iiQK3f85Qlr393A9TttaLIVgMhFvsKqdsf+QHpCns=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=k28mOaCv81HNgLKT4zK/GHU7yyZwzU0Q2GutM97yst02AI6AjEsV5RbZZdSSgyl3M
-	 ouI1BV1B7VbpDcOz5I8Im02rGOKQLBVX2OS6ypkhVd3i6Sq15HowgIuu6Oy8+nokE5
-	 vjkUZd8IiX741VYRIQIyUlb3iYkgeHUXmJ2iGDhsLxmxmPOftO0Smaa5rVkETnyT33
-	 QdgH90ODJiUuMJxt1kNRn99ry4SDuHzaEoY6bec3hJd1uJNzOtrRlEFK6EeIB+hea5
-	 dirnoWZLtrzelD5bZUeHSAcblGII4r7GlMRqXZS7QY0PHoJdvq2X06pRIcJuf4Fxq0
-	 roM1nguPIzFkQ==
-Date: Wed, 4 Nov 2026 15:31:37 +0000
-From: Lee Jones <lee@kernel.org>
-To: Icenowy Zheng <zhengxingda@iscas.ac.cn>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Drew Fustini <fustini@kernel.org>, Guo Ren <guoren@kernel.org>,
-	Fu Wei <wefu@redhat.com>, mfd@lists.linux.dev,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-riscv@lists.infradead.org, Icenowy Zheng <uwu@icenowy.me>
-Subject: Re: [PATCH] dt-bindings: mfd: syscon: add T-Head TH1520 compatibles
-Message-ID: <20261104153137.GB1650678@google.com>
-References: <20261103054716.1767730-1-zhengxingda@iscas.ac.cn>
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=KN61e88G
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1793806644;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=6gr+1hN5mr88TUb6c1EFHl/+fcbV3ZF/wh6O3QIfUwQ=;
+	b=KN61e88GHymiqeTYBUd3ypghxhi8P9fyj/o1QaVbwHBSF/oa2Poesn+TYJshq8brLKHyDr
+	tVvXf2ypzygIOY766WibMCx3gWQx8AYdnRKk458BRY8xuz6vgBlPum7gLowjGaSoXm3jfF
+	R3YZhaI877CQVcYPQM3pf3fNG2nZOjg=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-498-khiY1PBXPvuBLjBHwqeKGA-1; Wed,
+ 04 Nov 2026 10:37:19 -0500
+X-MC-Unique: khiY1PBXPvuBLjBHwqeKGA-1
+X-Mimecast-MFC-AGG-ID: khiY1PBXPvuBLjBHwqeKGA_1793806624
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS id 8F010180059B;
+	Wed,  4 Nov 2026 15:37:02 +0000 (UTC)
+Received: from [100.91.101.41] (headnet04.pony-001.prod.iad2.dc.redhat.com [10.2.32.116])
+	by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP id D01FD1955F06;
+	Wed,  4 Nov 2026 15:36:38 +0000 (UTC)
+Message-ID: <8f74bba9-6484-4faf-a409-ce31cb42a63c@redhat.com>
+Date: Wed, 4 Nov 2026 16:36:37 +0100
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,46 +72,85 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261103054716.1767730-1-zhengxingda@iscas.ac.cn>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] dt-bindings: Use hex unit address patterns
+To: "Rob Herring (Arm)" <robh@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Vadim Fedorenko <vadim.fedorenko@linux.dev>,
+ Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>,
+ Jiri Pirko <jiri@resnulli.us>, Benson Leung <bleung@chromium.org>,
+ Guenter Roeck <groeck@chromium.org>, Linus Walleij <linusw@kernel.org>,
+ Bartosz Golaszewski <brgl@kernel.org>, Frank Li <Frank.Li@nxp.com>,
+ Sascha Hauer <s.hauer@pengutronix.de>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, Jonathan Cameron <jic23@kernel.org>,
+ David Lechner <dlechner@baylibre.com>, =?UTF-8?Q?Nuno_S=C3=A1?=
+ <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>,
+ Olivier Moysan <olivier.moysan@foss.st.com>,
+ Arnaud Pouliquen <arnaud.pouliquen@foss.st.com>,
+ Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+ Thierry Reding <thierry.reding@kernel.org>,
+ Jonathan Hunter <jonathanh@nvidia.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Lee Jones <lee@kernel.org>,
+ Srinivas Kandagatla <srini@kernel.org>,
+ Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>, Ulf Hansson <ulfh@kernel.org>,
+ Hans Ulli Kroll <ulli.kroll@googlemail.com>,
+ Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
+ <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Manivannan Sadhasivam <mani@kernel.org>, Ray Jui <rjui@broadcom.com>,
+ Scott Branden <sbranden@broadcom.com>,
+ Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Masami Hiramatsu <mhiramat@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+ Mark Brown <broonie@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>,
+ Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+ Lukasz Luba <lukasz.luba@arm.com>, Orson Zhai <orsonzhai@gmail.com>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Chunyan Zhang <zhang.lyra@gmail.com>,
+ Paul Kocialkowski <paul.kocialkowski@bootlin.com>,
+ Shawn Guo <shawnguo@kernel.org>, Chanh Nguyen
+ <chanh@os.amperecomputing.com>, Alistair Francis <alistair@alistair23.me>,
+ Julius Werner <jwerner@chromium.org>, Paul Cercueil <paul@crapouillou.net>,
+ Dmitry Osipenko <digetx@gmail.com>, Florian Fainelli <f.fainelli@gmail.com>
+Cc: Thierry Reding <thierry.reding@gmail.com>, Ray Jui
+ <ray.jui@broadcom.com>, Scott Branden <scott.branden@broadcom.com>,
+ Krzysztof Kozlowski <krzk@kernel.org>, dri-devel@lists.freedesktop.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ netdev@vger.kernel.org, chrome-platform@lists.linux.dev,
+ linux-gpio@vger.kernel.org, imx@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org, linux-hwmon@vger.kernel.org,
+ linux-iio@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
+ linux-sound@vger.kernel.org, linux-input@vger.kernel.org,
+ linux-tegra@vger.kernel.org, mfd@lists.linux.dev,
+ linux-arm-msm@vger.kernel.org, linux-mmc@vger.kernel.org,
+ linux-phy@lists.infradead.org, linux-pm@vger.kernel.org
+References: <20261102135330.2493332-1-robh@kernel.org>
+From: Ivan Vecera <ivecera@redhat.com>
+In-Reply-To: <20261102135330.2493332-1-robh@kernel.org>
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+X-Mimecast-MFC-PROC-ID: ZqIsE8MEptdDZkfHOH22VhWEUcNzx9K-oxO7WItyR_M_1793806624
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, 03 Nov 2026, Icenowy Zheng wrote:
-
-> T-Head TH1520 has multiple system controllers for the "subsystems" on
-> the chip.
+On 11/2/26 14:53, Rob Herring (Arm) wrote:
+> Unit-addresses by default (and most commonly) are hexadecimal. There's a
+> number of cases using decimal patterns. Fix all of them, limiting the
+> pattern to match the 'reg' limits if there are any.
 > 
-> Add them to the syscon binding.
-> 
-> Signed-off-by: Icenowy Zheng <zhengxingda@iscas.ac.cn>
+> Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 > ---
->  Documentation/devicetree/bindings/mfd/syscon.yaml | 7 +++++++
->  1 file changed, 7 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/mfd/syscon.yaml b/Documentation/devicetree/bindings/mfd/syscon.yaml
-> index 80ff0e1caca22..b9d45f98345f2 100644
-> --- a/Documentation/devicetree/bindings/mfd/syscon.yaml
-> +++ b/Documentation/devicetree/bindings/mfd/syscon.yaml
-> @@ -126,6 +126,13 @@ properties:
->                - st,spear1340-misc
->                - stericsson,nomadik-pmu
->                - starfive,jh7100-sysmain
-> +              - thead,th1520-syscon-ao
-> +              - thead,th1520-syscon-ap
-> +              - thead,th1520-syscon-dsp
-> +              - thead,th1520-syscon-misc
-> +              - thead,th1520-syscon-vo
-> +              - thead,th1520-syscon-vi
-> +              - thead,th1520-syscon-vp
+>   .../bindings/display/xylon,logicvc-display.yaml      |  2 +-
+>   .../devicetree/bindings/dpll/dpll-device.yaml        |  2 +-
 
-Nit: These should be lexicographical.
+Reviewed-by: Ivan Vecera <ivecera@redhat.com>
 
->                - ti,am62-opp-efuse-table
->                - ti,am62-usb-phy-ctrl
->                - ti,am625-dss-oldi-io-ctrl
-> -- 
-> 2.56.0
-> 
-
--- 
-Lee Jones
