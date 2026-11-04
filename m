@@ -1,56 +1,59 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793790520;
-	b=HkTKL3ZriywkgxyoT5ICK/lc8DUrMGgx7uh5ZzfkdILMOh5fn7275otRUYjecGcBXqW8
-	 1D58pjusai4oKRn7HEWPIq5gCinmzxn7Xol2gK1PbBPUMXdBFA4vTzQO3Sx8l9TZnu43s
-	 kep61vckJqoWSVwT9j0gNPIxc5P9Sd4upJzr1mM2e+HfLwZBKXlL6FhrtC7Dhw7GpKkN/
-	 6RFTQphOw0P8sORTEilJoTqu4ftnU/0jlFibH3lvK33kyzOVMLiNNjQ6/OULewxykYFtq
-	 xAfqfo1S3pUCcJ6vvI3UuGDsv7JS/GoTYKebZBfBcGExJspGqIR1EWIoergV0q+w14Q==
+	t=1793790745;
+	b=OIwfN5/RH2p76IQqzXzkBtw4ejEXyC9qj+ZpdRG+xHMjfQ31LxTN+22kmGbG6avrm+LT
+	 hvFPn8o0YZNUc58meBevgKewI7qWMPIYXBFHbhgHU0paB/ghut/7JEcal6GwV4xGDj9lP
+	 01w5DtaR6IxckpRDnadL6n+5w5p1ITgivSOq8DN7jcK0uoK4KUHdHefN0aT7gRw/LkvLs
+	 Igb9mBwyIzmh245fcK/VX7YatzU9Dzf4mEOpx8QZprvv9ZTN1dNLo8HHCrD0xURIleA0L
+	 LynUK6V/EVXhjHKH/GvxW6MGKK8GbvaMC+SQ4h/WQ4zHcVdYTL7Jo87jZmlYjcWMeMg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793790520;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793790745;
 	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
 	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 X-Mailer;
-	bh=nqSqo3pEw1u92shsfe+adVghkfzPO8m64RinvGZAuZg=;
-	b=zCpRm+Tg78/TNIZl8qYXXk3M5e+ywZ9oDVUPtAvdRsNdQhS5oXGddxK+YqdfIo2RkFk9
-	 FuVoHNInlrVRtxkWCbaPSexrbDWENX1hOJ93J4x9Bx5w9be0mmhMNmwrTyfWsBHPrw4Yn
-	 4jEtlXtgmqY9zDq0n5osdktjgNpOZvbzVhKrh3VFcP16/hxNQc+atTA4wcuhZwR1adk35
-	 J7Spq5HPmv09Q4/Wc6J59l1wyQlOMZODl/0Bc4QcHe85zxk+0hb4rWQ2C+uCvYbNjlwDj
-	 ck6ANNneB4f6xkm3luwQldhp/MqotODIdW0P5NT873fJoMGEM9gyqwAf2xaouXUZsZg==
+	bh=gyF7dm9FS0Ed8e/c54ZznUYgKNg5Co9xtbwrpOLqJKQ=;
+	b=oDKAznUAWT4ut/fvc4IZVfgnzYK69IFWPvUElybsfzwDVq6gJTDlY95OZUsGwQcgwGlE
+	 MQOrF18bocPOndUSG6bENqNqq3KV54mKTsvl/mc4n0696HfpvESsNtf7iobS04SS8AXfG
+	 tub93oZ/de2WRjfvO0c0SVJm41LepmVIoUAY2ezbMQuAwWpWlfDTpoJLRRpYVq0zLYCa8
+	 N+eiRI0G5opICNBy+iQrYYhhmSnTuN6FOFCu6aSN3KpYbg2tlb4rKn2DxLH8GoOT2299C
+	 HQcmfd4BebRBgSy7bQnHm61DFAA7jhC+4HPlETzu+scgcU7UvL/RMS4H06jPQfvyL4w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IzFo7zbW;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GeExwbS7;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF9F4606A32E;
-	Wed,  4 Nov 2026 11:08:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4517E606A335;
+	Wed,  4 Nov 2026 11:12:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IzFo7zbW
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 396B11F00A17;
-	Wed,  4 Nov 2026 11:08:38 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GeExwbS7
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B7DDC1F0093A;
+	Wed,  4 Nov 2026 11:12:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793790519;
-	bh=nqSqo3pEw1u92shsfe+adVghkfzPO8m64RinvGZAuZg=;
+	s=k20260515; t=1793790744;
+	bh=gyF7dm9FS0Ed8e/c54ZznUYgKNg5Co9xtbwrpOLqJKQ=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=IzFo7zbWGgBEgelPJ4LaN4WYA6HyZarqqh715wxjZwtQHGvRmczD5vc6kTPQU1L4L
-	 Jv9tFF0Zgi8Xt2S0CKQYq/CHkiCbwNroRRCEbUUzKldxL/LV2/R3zJ7+46e8TY41SH
-	 l74ppbHawiA3udLXM9ZY3aphthjwKiwUsfbEV71Vxcr99txrEaQsgkbbsNSwmj4Iiq
-	 4Qy0tA4NWr4UMM0eVf7t0dMzW+Hgt+YsLfPfSJH84aDzxIRLhAl1pL67WOr9UVyvb3
-	 TD4qyEq8xGSn9tj5GvJCsltYIN1qHe4xDqjyoosllg4mvC2SVnHCHqRjJWaB8JUTtG
-	 oSEB+fC3j77kg==
+	b=GeExwbS7o374ZK7sDRGyPrVxoFtqqtf/KzVPfo3JtRcw/vVAclyNmmWzKI0gSgqlt
+	 Rit3VzS4pQ3eP7o/fL/+YBDgnU0jrv5a4L25M97rmyELXtGvDCwZCb1y3DLI32pCE/
+	 3WzoQgujJEj5wgog5V1QEiuaOuACi6HIVhZscMxMUfKGoTJwV5hDaVGM+KIcuSaGAY
+	 nBEzp8po7y3Vii4ZpuTxrpv+GisplKyT7FedZP1mGP9FwUZbcwdhvROioHjUtS/yfk
+	 JWWu5f/zXAiCkcrqM9oGMQykcJ9JBVBjJJa3tYveyk87gAxsqSd6ZEDUIR91PFwlZQ
+	 4OlZRqQKMzsbw==
 From: Lee Jones <lee@kernel.org>
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
- Lee Jones <lee@kernel.org>, Navon John Lukose <navonjohnlukose@gmail.com>
-Cc: Mika Westerberg <mika.westerberg@linux.intel.com>, 
- =?utf-8?q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
- mfd@lists.linux.dev, linux-kernel@vger.kernel.org
-In-Reply-To: <20261025193613.278610-1-navonjohnlukose@gmail.com>
-References: <20261025193613.278610-1-navonjohnlukose@gmail.com>
-Subject: Re: (subset) [PATCH v3] mfd: intel-lpss: Set d3hot_delay to 0
-Message-Id: <179379051799.1648707.14294292191445276936.b4-ty@b4>
-Date: Wed, 04 Nov 2026 11:08:37 +0000
+To: Baolin Wang <baolin.wang@linux.alibaba.com>, 
+ Orson Zhai <orsonzhai@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Lee Jones <lee@kernel.org>, Weibin Liu <liuwb@xiaopeng.com>
+Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
+ linux-spi@vger.kernel.org, Chunyan Zhang <zhang.lyra@gmail.com>, 
+ mfd@lists.linux.dev, Guanglei Zhu <zhugl3@xiaopeng.com>, 
+ Sashiko <sashiko-bot@kernel.org>
+In-Reply-To: <20261026153253.689525-2-liuwb@xiaopeng.com>
+References: <20261026153253.689525-2-liuwb@xiaopeng.com>
+Subject: Re: (subset) [PATCH v3 1/2] mfd: sprd-sc27xx: Pass byte length to
+ spi_read()
+Message-Id: <179379074248.1651659.15467348960119051443.b4-ty@b4>
+Date: Wed, 04 Nov 2026 11:12:22 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -64,20 +67,21 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-Mailer: b4 0.16-dev-ad80c
 
-On Mon, 26 Oct 2026 01:06:13 +0530, Navon John Lukose wrote:
-> Every runtime resume of an LPSS controller waits the default 10 ms
-> d3hot_delay in pci_power_up() for the D3hot->D0 transition. Nothing
-> misbehaves, but the wait adds latency. On Arrow Lake-H (Lenovo Yoga Pro 7
-> 14IAH10) the touchpad's I2C controller autosuspends after 1 s idle, and
-> the i2c-hid interrupt handler for the first report afterwards takes
-> 12.6-14.4 ms.
+On Mon, 26 Oct 2026 23:32:52 +0800, Weibin Liu wrote:
+> sprd_pmic_spi_read() passes 1 as the transfer length to spi_read(),
+> but the length parameter is a byte count, and the ADI controller
+> consumes a u32 register address from the buffer. The ADI driver
+> ignores the transfer length and always operates on the first u32,
+> so this happens to work with the 8-byte stack buffer, but the
+> advertised length does not describe what the controller actually
+> accesses.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] mfd: intel-lpss: Set d3hot_delay to 0
-      commit: 51510cef4708652a074fc6a4344299a14f07ec98
+[1/2] mfd: sprd-sc27xx: Pass byte length to spi_read()
+      commit: aa474d0abf753cadb1fce6f1d129eefa39ec223e
 
 --
 Lee Jones [李琼斯]
