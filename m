@@ -1,57 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793797247;
-	b=u9/220SQMb9UYpX9FT5ukb1K4CuNfXx0hKP4e6TGFzSaWeDrzbq4W02iLbgi0mgJTRYI
-	 y088glLUqdEqjvmGH+GTIZWGzIOJIZMD4DgY0cf/HY6GmwVt7kZmkQRuLjhsND4YIWBuh
-	 8R2VzqFLMbe9MU4nuJdqQ57fjKqHckMno17n4prWO57bCJlBliG7pXLmvEJ0mtWojluAO
-	 RZeIQHsXoOsPSZae65XYVEJPNcyihxxRWyrYYjL4EKwzVADpoq4a9I5/85Wubh2MQTcO4
-	 WuAO/YpDhMbZEvEX8pnaHLRw2vYdfkN9CueGuW5eVB5pfiLFKH9265vsiXctdXOXodQ==
+	t=1793797466;
+	b=TGuBn70LiwQxvFxPmnB8bChozoHIxYoZCLcg/SQBc1+WQSNkIUyDNNx5IolsTepPI/zJ
+	 Jpw91kyDMC8RCGod/DKFKBzM8N8Fv2AT3t5e5TSorWArKnVRoTRcfpou3kNe6c7QByYHN
+	 SFr1trIzMfphouQFC2ETqoXDL9mdyBDiQ4TQr2cWkIHwGFTTcMDDnr1MoRKU20p0MqEKQ
+	 xgQ6opdkq8D37oe8H8ruNlX4dOHWuQRKh03zLuSGc9mPtf9yllocD+rwIoqfAelopy+JZ
+	 NWWpbOqU+j/Z5apvikkymMnCtlpNOmUN00kJGLx6lu45kHrXpebBSMVPhN8kf80DPzw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793797247;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=+Cn8ahprs3RaJAyG+U0wmKU9tL22BM3bndqijDLdfrg=;
-	b=4GpC6DNgxLCrIgKwVQ0Dh10oxwUfEnfyKBx1t+WzDdMgxyjrjtZM00K/PVfiLT2iOJcN
-	 pSaEojJYoI1y9lk9slTgKrWwFRtitvNeGi3luQe1VCIQQK9HBBFw4jgGZWHD1Tld884sf
-	 eUFGCjrceCHv0bPkoGRkFgLHQayrDtsE9uJ8m26MIvSDmrtWnvrMqcp2CS+2xtWUXxHC/
-	 cGAK/1WVClOl6GnsaKcX2ayfGr0hClQPe7QPzQAotHV2GGECWphkUpgASuTlF+UO/ENtV
-	 WZuOIc880Q+bbW/hUDbZK++DWbxWba9ej3cMkl2oUB/0wrU1asL+xqaRD5x5llWvI2A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793797466;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=0gGIxmVj15HwpHlgucVC67kzMBeDjNiHcqiz6hAOrv8=;
+	b=5gcN7p4ne4uNmcR/LYxzViVCQdvpTqulJCEQZ3AW64Fi+PM1m/nvBMj1rHIaWqmKsqBE
+	 8SanC9I7oGcj0iDbhN2Zbz+SSBUd51uZqzdP1cQAdpGSL/tsiGMcDj0PEOwM2LGshQBSq
+	 SSe9yR8TR8kIlxrWMlqXb33n/nx2sIOFKCuQLCqHBmQKmQ4vx7gCuUDPzh8JDZVbuyCFq
+	 ef/3yDSv96hZRAsB1Gz6+y7zDQrMzZ6EzeK9ghqxoJH+5U+E51lfgNxbM2B6XTSXJDOqG
+	 YfVCz5LqZiTtkNwz7lGMRLHiKs1msv//yzWErD4FiqrUBtlP2gbWwtaNWuLDdb5xoQQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZTTuzIN7;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=C182rFoz;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA46E606D809;
-	Wed,  4 Nov 2026 13:00:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34126606A31B
+	for <mfd@lists.linux.dev>; Wed,  4 Nov 2026 13:04:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZTTuzIN7
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 45C9C1F00A18;
-	Wed,  4 Nov 2026 13:00:46 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=C182rFoz
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0FBCA1F00A1A
+	for <mfd@lists.linux.dev>; Wed,  4 Nov 2026 13:04:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793797246;
-	bh=+Cn8ahprs3RaJAyG+U0wmKU9tL22BM3bndqijDLdfrg=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=ZTTuzIN7md1OVoUwJiCEQNUtRZdqjVmfWzEmblJBhX9NJtxstRr78cpWyfX1+kgZf
-	 fJh1RrAaQ+FZqIHSufmZu9TGxImHg393RCK2emZdjXHOrwP7gVRmCjyFGB5VTEaaz/
-	 YcGx7pN3ychj3NuJGpbSZ8otZoL7YlxXUcJaAgNVUGkT3ZPzCx9lTU1Vc7xBDaxKqS
-	 mTYDMrXRnGEoaUOSXNas7TBt8K1LMA7Z0ntKTYeVQhegjyh+GVI5jV+kGj3VgoqxUo
-	 lS2ulrOM89XGoHSuOWVNHCoH+a+pN5Z1bQsWeHKxRxaFs8UvInc6Mwkupng3mdqYKZ
-	 7XuE2HeXLMVhA==
-Message-ID: <sashiko-outbox-197317@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v6 4/4] mfd: aat2870: Add support for VIN and IN-LDO
- power supplies
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Svyatoslav Ryhel" <clamor95@gmail.com>
-Cc: linux-leds@vger.kernel.org, mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261104123714.234634-5-clamor95@gmail.com>
-References: <20261104123714.234634-1-clamor95@gmail.com>
- <20261104123714.234634-5-clamor95@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 04 Nov 2026 13:00:45 +0000
+	s=k20260515; t=1793797466;
+	bh=0gGIxmVj15HwpHlgucVC67kzMBeDjNiHcqiz6hAOrv8=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=C182rFozjpn+i/0Ts1DVq3b+ldJzLaYXncXGSKU5f4XCAI4+yQi49mycFeAVy/gy7
+	 8i034pd2KQtcZ+CDX7gNbb1ARO9RfgRTbhmouZunnvcULJfaG9HPLVwZ3ytUngroM8
+	 egwAbMwpz9XNDrjkbvaFb7ks4aeC1jnf/7xgjiQSSRWyIkLiOi9LhuCZ0m05jFhICK
+	 nr+140ioY7Z+vWkH+hoTBBLG9p9apDmaJAyXwiVWq7Jj1yLXp7seJxi3P3EtW934rg
+	 oWpdYy+4j+63c1HAegqRqhpSl5cl6n6imJzOTlCBDI2RliYbTkTkC1EonSRTyah1Td
+	 f1twz4w1M1Eww==
+Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-5be42ae8eadso444123e87.3
+        for <mfd@lists.linux.dev>; Wed, 04 Nov 2026 05:04:25 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AKwUvByMxTpj+9D1ADhrv12LJsfmtDwmht/Ff5aC5duHZwRtxgrc8p2+ObNMI4aJlKWUj9yduPA=@lists.linux.dev
+X-Gm-Message-State: APuU4Z8jVcXPKtwmJkDQmBEv/g3ajaZTaumKH8+zj4KGoxoY/30QhvsL
+	2gmXbS7JoBnOmNnmgucX1SF0y8BNWuPAYPFLe3rGS6Gc0f/wcuEJWJTjkiL18b+mRrZvVXP60bk
+	S5X3Scj16OQGLh3aD6AM8P+uM+vSsVow=
+X-Received: by 2002:a05:6512:39cd:b0:5bf:b166:f58b with SMTP id
+ 2adb3069b0e04-5bfd95782a4mr5476115e87.55.1793797464785; Wed, 04 Nov 2026
+ 05:04:24 -0800 (PST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,19 +58,54 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+References: <20261022-add-board-ok3572-c-v1-0-0b0fd85a31ee@qq.com> <20261022-add-board-ok3572-c-v1-5-0b0fd85a31ee@qq.com>
+In-Reply-To: <20261022-add-board-ok3572-c-v1-5-0b0fd85a31ee@qq.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Wed, 4 Nov 2026 14:04:12 +0100
+X-Gmail-Original-Message-ID: <CAD++jL=2Z3hP74dHRyE3Aabp+PvpcHX_90PQy+a_HMQwBdNx6g@mail.gmail.com>
+X-Gm-Features: AclHuK9_TlXav34NYeX4rfS2IYWnnq1y5c9wSfeOajfltWQaA7IZMQ4oBhaALpc
+Message-ID: <CAD++jL=2Z3hP74dHRyE3Aabp+PvpcHX_90PQy+a_HMQwBdNx6g@mail.gmail.com>
+Subject: Re: [PATCH 05/27] dt-bindings: pinctrl: rockchip: Add RK3572
+To: 1579567540@qq.com
+Cc: Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+	Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Heiko Stuebner <heiko@sntech.de>, Philipp Zabel <p.zabel@pengutronix.de>, 
+	Elaine Zhang <zhangqing@rock-chips.com>, Lee Jones <lee@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Richard Cochran <richardcochran@gmail.com>, 
+	Ulf Hansson <ulfh@kernel.org>, Andi Shyti <andi.shyti@kernel.org>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jiri Slaby <jirislaby@kernel.org>, 
+	Jisheng Zhang <jszhang@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>, 
+	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, David Wu <david.wu@rock-chips.com>, 
+	"Rafael J. Wysocki" <rafael@kernel.org>, Daniel Lezcano <daniel.lezcano@kernel.org>, 
+	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>, 
+	Maxime Chevallier <maxime.chevallier@bootlin.com>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+	Alexandre Torgue <alexandre.torgue@foss.st.com>, Vinod Koul <vkoul@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+	Shawn Lin <shawn.lin@rock-chips.com>, linux-clk@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, 
+	mfd@lists.linux.dev, linux-gpio@vger.kernel.org, netdev@vger.kernel.org, 
+	linux-pm@vger.kernel.org, linux-i2c@vger.kernel.org, 
+	linux-serial@vger.kernel.org, linux-mmc@vger.kernel.org, 
+	linux-stm32@st-md-mailman.stormreply.com, linux-phy@lists.infradead.org, 
+	linux-usb@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> The AAT2870 supports a dedicated main power supply input alongside parent
-> power supply for its internal regulators.
->=20
-> Add support for retrieving and managing these supply regulators
-> (vin-supply and in-ldo-supply) using the regulator framework to ensure
-> proper power supply dependencies and power-up sequencing.
->=20
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+On Wed, Oct 21, 2026 at 6:12=E2=80=AFPM Cunhao Lu via B4 Relay
+<devnull+1579567540.qq.com@kernel.org> wrote:
 
-Sashiko has reviewed this patch and found no issues.
+> From: Cunhao Lu <1579567540@qq.com>
+>
+> Add the RK3572 pinctrl compatible.
+>
+> Signed-off-by: Cunhao Lu <1579567540@qq.com>
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261104123714.2346=
-34-1-clamor95@gmail.com?part=3D4
+This patch 5/27 applied to the pinctrl tree.
 
+Yours,
+Linus Walleij
