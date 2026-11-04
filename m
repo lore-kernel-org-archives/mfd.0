@@ -1,92 +1,87 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.11.138.130
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793798801;
-	b=xRsDMmZ26SYFt1ye5HSKf2LPz/7l57tUv7DoEz09WNVnmxUJCeT73EfUUexo+15avyzJ
-	 2nV1tTu/DiX2jJ34VFp/5N7VDT+WHHglOKk2NaWDzGGnwgqJRzt/GJqEpJlYUiHKNJl5o
-	 9mKyYVCTItEwhSuDomMqGMZw6qdZH5CsMECoM7PWlLPV+xyivfwMDQFHbROENyh/jMTEA
-	 +1VptgjQFJKa2XJ5d+ARJ/VeF5qlr9CexSCC0NmDD4v5wV9eYXmlwyby17TWG9SAXY5FC
-	 D8aBvOH6iVHkvoV8+cnkDBhktJvfsFEGA7KRsQJ1zwo7vNd3ANm5EkcLTmB8irBJmPQ==
+	t=1793801390;
+	b=mARfgcJH+MgwHKZAbxeWFcodz05feeI2seo5l8D5GNQdlNsrTWuK6NS9TzhzSnhevtLi
+	 qAt2hekvZL1kTWJVeE3nPdPIMUYLQDMmTxErM3J1aPSEH5apFFKXBFIRkuGJ8w98ALGbV
+	 nhcMZr4IcBO69lHkSSmgrTGn8sw4dFOJfozZFilmJPO+TJz1Rkw365IMXhHWUI2y8xuMK
+	 nupCn2/triA6h6Y+s18rwll1xNP24SkssF27HYPoJYpoddq/cPUj5VNg3qQ3sp3wQxO0I
+	 MwU3OT9dxdHOMzqSdWtg5HbG3hewNbum6S1mFRoSsYgbmUQla5x0WA/ZzCU5ijmSWJA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793798801;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=MPUiLFnTBdf7QRRqKCZEZSjQLoEuxmOxaBmyWSCYZVk=;
-	b=xZHBqtPtr1fuZBYOjohK/EV2gfimgZjWPwEacWR6xQpqDAbhNGZ3ZAXI8JU5MGohXma3
-	 9V0mcAYl8392fx6kM9HDu/rVFm3kgQhgP3Ggds10u+Lm2iRlvi3gj7wDAgGgmN1JURZe5
-	 HmqbCTSVimIPXSltvx/FBzrDnwMtXTbHR420+L2H1BN6hOSiPAhHchZbVSxxC8igKFDNu
-	 gCrOEgBAG3ATOOB+dW0cmrdNBWYCmI66ATgPJTKrxVFciDzw8P8IXpCgrc3fNsH4QfwTw
-	 TiXSWuh4rydalndKMhcWr/8Spv4y5c+yTNls61IUB1WBWd0GJpFzQAk+jL6qrbOb9pg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793801390;
+	h=DMARC-Filter:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:
+	 Content-Type;
+	bh=Rja63v8SvhDJ5Nc3/E8dKLOwWZaN1vZYvJXp3TIYRyU=;
+	b=W51iHSQuiVFv/VifUMmI8iptnvdteV4vYkMBswZ0c643duySmRplkgmSgJIwonf6nCPG
+	 Cjyy4zzow0ze3O5sAjJSxygWyFDy5BCo1DrM9DMakdavA8E2RmWDCrss/K6RoYDZnshmL
+	 mExE8wrju4i/hiV3NKM2m6PpEpnZ1DqG/XCL2XbAcSmpPDxnMfbUWjAd9RmcKLfukg7jq
+	 XkEfp9oPMTBHYqJl+UTowvvKh+tu2L0LzRv8ZFAkJ/TEx2Bo6zOV/OVV01pfZf576/JJ3
+	 o6zXYbxIkElYl0/kLMtGo5BDABChy/PLcV0pU3vhOCP8zAaRTCP0TSFcCfc8Ef5jNPw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GGP57dCQ;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=sntech.de;
+	spf=pass smtp.mailfrom=sntech.de;
+	dkim=pass header.d=sntech.de header.i=@sntech.de header.a=rsa-sha256 header.s=gloria202408 header.b=gvk23y7k;
+	arc=none smtp.remote-ip=185.11.138.130
+Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C99B606D82D;
-	Wed,  4 Nov 2026 13:26:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7524606A31B;
+	Wed,  4 Nov 2026 14:09:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B7524606A31B
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=sntech.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sntech.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GGP57dCQ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D24C31F0093A;
-	Wed,  4 Nov 2026 13:26:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793798800;
-	bh=MPUiLFnTBdf7QRRqKCZEZSjQLoEuxmOxaBmyWSCYZVk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=GGP57dCQEvsELH0NCmMeNo9OYSLBlBr1CuaxanS9gitq0f13zE16Rj4HEg912BA3a
-	 jHAi0xgnf5mbwOvcFAqnxoTWo/uFCPp17dN+EOptGveLGJja2ISTiRvaAZqFzjXV4f
-	 jy+F3e4iKr6uWbeNGs4mnwgP57FbK+kogGG9a3Wto4Rt5KD5bug71IQBxB2F8xsD2p
-	 VFh4oL1WG13peDWe+KFd7Oh2xSJbJ5/uxq0pdKCYmBN5/K54Ak8t/uIKlzxPQP03lr
-	 kspb/xXqgBTpLDcB5XW6w5IsrQjlO6ZsLq2PjV9K98Wx6vv5U0To5OAyVcKfhN8ki3
-	 vuQeMPtWatfww==
-Date: Wed, 4 Nov 2026 14:26:38 +0100
-From: Thierry Reding <thierry.reding@kernel.org>
-To: "Rob Herring (Arm)" <robh@kernel.org>
-Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Vadim Fedorenko <vadim.fedorenko@linux.dev>, Arkadiusz Kubalewski <arkadiusz.kubalewski@intel.com>, 
-	Jiri Pirko <jiri@resnulli.us>, Ivan Vecera <ivecera@redhat.com>, 
-	Benson Leung <bleung@chromium.org>, Guenter Roeck <groeck@chromium.org>, 
-	Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
-	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, 
-	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
-	Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
-	Nuno =?utf-8?B?U8Oh?= <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, 
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
-	Olivier Moysan <olivier.moysan@foss.st.com>, Arnaud Pouliquen <arnaud.pouliquen@foss.st.com>, 
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>, Jonathan Hunter <jonathanh@nvidia.com>, 
-	Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Lee Jones <lee@kernel.org>, 
-	Srinivas Kandagatla <srini@kernel.org>, Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>, 
-	Ulf Hansson <ulfh@kernel.org>, Hans Ulli Kroll <ulli.kroll@googlemail.com>, 
-	Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, 
-	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
-	Paolo Abeni <pabeni@redhat.com>, Vinod Koul <vkoul@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Ray Jui <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, 
-	Mark Brown <broonie@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
-	Lukasz Luba <lukasz.luba@arm.com>, Orson Zhai <orsonzhai@gmail.com>, 
-	Baolin Wang <baolin.wang@linux.alibaba.com>, Chunyan Zhang <zhang.lyra@gmail.com>, 
-	Paul Kocialkowski <paul.kocialkowski@bootlin.com>, Shawn Guo <shawnguo@kernel.org>, 
-	Chanh Nguyen <chanh@os.amperecomputing.com>, Alistair Francis <alistair@alistair23.me>, 
-	Julius Werner <jwerner@chromium.org>, Paul Cercueil <paul@crapouillou.net>, 
-	Dmitry Osipenko <digetx@gmail.com>, Florian Fainelli <f.fainelli@gmail.com>, 
-	Thierry Reding <thierry.reding@gmail.com>, Ray Jui <ray.jui@broadcom.com>, 
-	Scott Branden <scott.branden@broadcom.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
-	dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	netdev@vger.kernel.org, chrome-platform@lists.linux.dev, linux-gpio@vger.kernel.org, 
-	imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
-	linux-hwmon@vger.kernel.org, linux-iio@vger.kernel.org, 
-	linux-stm32@st-md-mailman.stormreply.com, linux-sound@vger.kernel.org, linux-input@vger.kernel.org, 
-	linux-tegra@vger.kernel.org, mfd@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
-	linux-mmc@vger.kernel.org, linux-phy@lists.infradead.org, linux-pm@vger.kernel.org
-Subject: Re: [PATCH] dt-bindings: Use hex unit address patterns
-Message-ID: <ausydkb2etcFJbYf@orome>
-References: <20261102135330.2493332-1-robh@kernel.org>
+	dkim=pass (2048-bit key, unprotected) header.d=sntech.de header.i=@sntech.de header.a=rsa-sha256 header.s=gloria202408 header.b=gvk23y7k
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de;
+	s=gloria202408; h=Content-Type:Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Reply-To;
+	bh=Rja63v8SvhDJ5Nc3/E8dKLOwWZaN1vZYvJXp3TIYRyU=; b=gvk23y7kJEBYZNbym5UkxTlO9P
+	MKtLMuI1GtzOfwN8IgqVVjghpttW9kmneskZ3WPq/IFiVAablWLBNFk56LfxqEGZgOvXx8WvwGT05
+	uz4Sv81J0cHGguIvDSvduHmMhSIfNBAj95p3wTrNBPahDYaU9e+A9h0uVd/bhcK5g/9mK3KfQIBKH
+	hamk2TPUX/tBy/e/UwM9Y16TZr6/oAnzSdpM+1QIsPJEsWK7mFUS2XPS7jTH9CWyW9D2brNDFzJkQ
+	mgaSr75asaqS8r0T2ezs8RyHv5WLRJu5WgA44hEXYBdaaw90q4zsL9XLuyJPoEi1oMbczaK+4tdt1
+	0yC29Khw==;
+From: Heiko =?UTF-8?B?U3TDvGJuZXI=?= <heiko@sntech.de>
+To: Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+ Philipp Zabel <p.zabel@pengutronix.de>,
+ Elaine Zhang <zhangqing@rock-chips.com>, Lee Jones <lee@kernel.org>,
+ Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>,
+ Richard Cochran <richardcochran@gmail.com>, Ulf Hansson <ulfh@kernel.org>,
+ Andi Shyti <andi.shyti@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Jiri Slaby <jirislaby@kernel.org>, Jisheng Zhang <jszhang@kernel.org>,
+ Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>,
+ Eric Dumazet <edumazet@kernel.org>, Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>, David Wu <david.wu@rock-chips.com>,
+ "Rafael J. Wysocki" <rafael@kernel.org>,
+ Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+ Lukasz Luba <lukasz.luba@arm.com>,
+ Maxime Chevallier <maxime.chevallier@bootlin.com>,
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>,
+ Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Manivannan Sadhasivam <mani@kernel.org>,
+ Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Shawn Lin <shawn.lin@rock-chips.com>,
+ linux-rockchip@lists.infradead.org
+Cc: Cunhao Lu <1579567540@qq.com>, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org,
+ mfd@lists.linux.dev, linux-gpio@vger.kernel.org, netdev@vger.kernel.org,
+ linux-pm@vger.kernel.org, linux-i2c@vger.kernel.org,
+ linux-serial@vger.kernel.org, linux-mmc@vger.kernel.org,
+ linux-stm32@st-md-mailman.stormreply.com, linux-phy@lists.infradead.org,
+ linux-usb@vger.kernel.org, 1579567540@qq.com
+Subject: Re: [PATCH 08/27] pinctrl: rockchip: Add RK3572 support
+Date: Wed, 04 Nov 2026 15:09:01 +0100
+Message-ID: <4309904.anssfa2V6d@diego>
+In-Reply-To: <20261022-add-board-ok3572-c-v1-8-0b0fd85a31ee@qq.com>
+References:
+ <20261022-add-board-ok3572-c-v1-0-0b0fd85a31ee@qq.com>
+ <20261022-add-board-ok3572-c-v1-8-0b0fd85a31ee@qq.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -96,42 +91,389 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="3alpfpswkxhlvmej"
-Content-Disposition: inline
-In-Reply-To: <20261102135330.2493332-1-robh@kernel.org>
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+
+Am Mittwoch, 21. Oktober 2026, 18:11:05 Mitteleurop=C3=A4ische Normalzeit s=
+chrieb Cunhao Lu via B4 Relay:
+> From: Cunhao Lu <1579567540@qq.com>
+>=20
+> Support RK3572 pinmux, bias, drive-strength, and Schmitt controls.
+> Enable input buffers during mux changes for the RGMII receive clocks.
+>=20
+> Signed-off-by: Cunhao Lu <1579567540@qq.com>
+
+Reviewed-by: Heiko Stuebner <heiko@sntech.de>
+
+> ---
+>  drivers/pinctrl/pinctrl-rockchip.c | 230 +++++++++++++++++++++++++++++++=
++++++-
+>  drivers/pinctrl/pinctrl-rockchip.h |   1 +
+>  2 files changed, 230 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/pinctrl/pinctrl-rockchip.c b/drivers/pinctrl/pinctrl=
+=2Drockchip.c
+> index ba47b6f323cc..6d9a6510b343 100644
+> --- a/drivers/pinctrl/pinctrl-rockchip.c
+> +++ b/drivers/pinctrl/pinctrl-rockchip.c
+> @@ -1363,6 +1363,10 @@ static int rockchip_get_mux(struct rockchip_pin_ba=
+nk *bank, int pin)
+>  	if (bank->recalced_mask & BIT(pin))
+>  		rockchip_get_recalced_mux(bank, pin, &reg, &bit, &mask);
+> =20
+> +	if (ctrl->type =3D=3D RK3572 && bank->bank_num =3D=3D 0 &&
+> +	    pin >=3D RK_PB4 && pin <=3D RK_PB7)
+> +		reg +=3D 0x2000;
+> +
+>  	if (ctrl->type =3D=3D RK3576) {
+>  		if ((bank->bank_num =3D=3D 0) && (pin >=3D RK_PB4) && (pin <=3D RK_PB7=
+))
+>  			reg +=3D 0x1ff4; /* GPIO0_IOC_GPIO0B_IOMUX_SEL_H */
+> @@ -1421,6 +1425,24 @@ static int rockchip_verify_mux(struct rockchip_pin=
+_bank *bank,
+>  	return 0;
+>  }
+> =20
+> +static int rk3572_enable_input(struct rockchip_pin_bank *bank, int pin)
+> +{
+> +	static const u32 offsets[] =3D { 0x300, 0x10310, 0x12320, 0x14330, 0x14=
+340 };
+> +	struct rockchip_pinctrl *info =3D bank->drvdata;
+> +	u32 reg, bit =3D pin % 8;
+> +
+> +	if (bank->bank_num >=3D ARRAY_SIZE(offsets))
+> +		return -EINVAL;
+> +
+> +	reg =3D offsets[bank->bank_num] + pin / 8 * 4;
+> +	if (bank->bank_num =3D=3D 0 && pin >=3D RK_PB4)
+> +		reg +=3D 0x2000;
+> +	else if (bank->bank_num =3D=3D 4 && pin >=3D RK_PC0)
+> +		reg -=3D 0x10000;
+> +
+> +	return regmap_write(info->regmap_base, reg, BIT(bit + 16) | BIT(bit));
+> +}
+> +
+>  /*
+>   * Set a new mux function for a pin.
+>   *
+> @@ -1498,6 +1520,10 @@ static int rockchip_set_mux(struct rockchip_pin_ba=
+nk *bank, int pin, int mux)
+>  	if (bank->recalced_mask & BIT(pin))
+>  		rockchip_get_recalced_mux(bank, pin, &reg, &bit, &mask);
+> =20
+> +	if (ctrl->type =3D=3D RK3572 && bank->bank_num =3D=3D 0 &&
+> +	    pin >=3D RK_PB4 && pin <=3D RK_PB7)
+> +		reg +=3D 0x2000;
+> +
+>  	if (ctrl->type =3D=3D RK3576) {
+>  		if ((bank->bank_num =3D=3D 0) && (pin >=3D RK_PB4) && (pin <=3D RK_PB7=
+))
+>  			reg +=3D 0x1ff4; /* GPIO0_IOC_GPIO0B_IOMUX_SEL_H */
+> @@ -1568,8 +1594,13 @@ static int rockchip_set_mux(struct rockchip_pin_ba=
+nk *bank, int pin, int mux)
+>  	rmask =3D data | (data >> 16);
+>  	data |=3D (mux & mask) << bit;
+>  	ret =3D regmap_update_bits(regmap, reg, rmask, data);
+> +	if (ret)
+> +		return ret;
+> =20
+> -	return ret;
+> +	if (ctrl->type =3D=3D RK3572)
+> +		return rk3572_enable_input(bank, pin);
+> +
+> +	return 0;
+>  }
+> =20
+>  #define PX30_PULL_PMU_OFFSET		0x10
+> @@ -3097,6 +3128,151 @@ static int rk3568_calc_drv_reg_and_bit(struct roc=
+kchip_pin_bank *bank,
+>  	return 0;
+>  }
+> =20
+> +#define RK3572_DRV_BITS_PER_PIN		4
+> +#define RK3572_DRV_PINS_PER_REG		4
+> +#define RK3572_DRV_GPIO0_OFFSET		0x100
+> +#define RK3572_DRV_GPIO1_OFFSET		0x10120
+> +#define RK3572_DRV_GPIO2_OFFSET		0x12140
+> +#define RK3572_DRV_GPIO3_OFFSET		0x14160
+> +#define RK3572_DRV_GPIO4_OFFSET		0x14180
+> +
+> +static int rk3572_calc_drv_reg_and_bit(struct rockchip_pin_bank *bank,
+> +				       int pin_num, struct regmap **regmap,
+> +				       int *reg, u8 *bit)
+> +{
+> +	struct rockchip_pinctrl *info =3D bank->drvdata;
+> +
+> +	*regmap =3D info->regmap_base;
+> +
+> +	switch (bank->bank_num) {
+> +	case 0:
+> +		*reg =3D RK3572_DRV_GPIO0_OFFSET;
+> +		if (pin_num >=3D 12)
+> +			*reg +=3D 0x2000;
+> +		break;
+> +	case 1:
+> +		*reg =3D RK3572_DRV_GPIO1_OFFSET;
+> +		break;
+> +	case 2:
+> +		*reg =3D RK3572_DRV_GPIO2_OFFSET;
+> +		break;
+> +	case 3:
+> +		*reg =3D RK3572_DRV_GPIO3_OFFSET;
+> +		break;
+> +	case 4:
+> +		*reg =3D RK3572_DRV_GPIO4_OFFSET;
+> +		if (pin_num >=3D 16)
+> +			*reg -=3D 0x10000;
+> +		break;
+> +	default:
+> +		dev_err(info->dev, "unsupported bank_num %d\n", bank->bank_num);
+> +		return -EINVAL;
+> +	}
+> +
+> +	*reg +=3D ((pin_num / RK3572_DRV_PINS_PER_REG) * 4);
+> +	*bit =3D pin_num % RK3572_DRV_PINS_PER_REG;
+> +	*bit *=3D RK3572_DRV_BITS_PER_PIN;
+> +
+> +	return 0;
+> +}
+> +
+> +#define RK3572_PULL_BITS_PER_PIN	2
+> +#define RK3572_PULL_PINS_PER_REG	8
+> +#define RK3572_PULL_GPIO0_OFFSET	0x200
+> +#define RK3572_PULL_GPIO1_OFFSET	0x10210
+> +#define RK3572_PULL_GPIO2_OFFSET	0x12220
+> +#define RK3572_PULL_GPIO3_OFFSET	0x14230
+> +#define RK3572_PULL_GPIO4_OFFSET	0x14240
+> +
+> +static int rk3572_calc_pull_reg_and_bit(struct rockchip_pin_bank *bank,
+> +					int pin_num, struct regmap **regmap,
+> +					int *reg, u8 *bit)
+> +{
+> +	struct rockchip_pinctrl *info =3D bank->drvdata;
+> +
+> +	*regmap =3D info->regmap_base;
+> +
+> +	switch (bank->bank_num) {
+> +	case 0:
+> +		*reg =3D RK3572_PULL_GPIO0_OFFSET;
+> +		if (pin_num >=3D 12)
+> +			*reg +=3D 0x2000;
+> +		break;
+> +	case 1:
+> +		*reg =3D RK3572_PULL_GPIO1_OFFSET;
+> +		break;
+> +	case 2:
+> +		*reg =3D RK3572_PULL_GPIO2_OFFSET;
+> +		break;
+> +	case 3:
+> +		*reg =3D RK3572_PULL_GPIO3_OFFSET;
+> +		break;
+> +	case 4:
+> +		*reg =3D RK3572_PULL_GPIO4_OFFSET;
+> +		if (pin_num >=3D 16)
+> +			*reg -=3D 0x10000;
+> +		break;
+> +	default:
+> +		dev_err(info->dev, "unsupported bank_num %d\n", bank->bank_num);
+> +		return -EINVAL;
+> +	}
+> +
+> +	*reg +=3D ((pin_num / RK3572_PULL_PINS_PER_REG) * 4);
+> +	*bit =3D pin_num % RK3572_PULL_PINS_PER_REG;
+> +	*bit *=3D RK3572_PULL_BITS_PER_PIN;
+> +
+> +	return 0;
+> +}
+> +
+> +#define RK3572_SMT_BITS_PER_PIN		1
+> +#define RK3572_SMT_PINS_PER_REG		8
+> +#define RK3572_SMT_GPIO0_OFFSET		0x400
+> +#define RK3572_SMT_GPIO1_OFFSET		0x10410
+> +#define RK3572_SMT_GPIO2_OFFSET		0x12420
+> +#define RK3572_SMT_GPIO3_OFFSET		0x14430
+> +#define RK3572_SMT_GPIO4_OFFSET		0x14440
+> +
+> +static int rk3572_calc_schmitt_reg_and_bit(struct rockchip_pin_bank *ban=
+k,
+> +					   int pin_num,
+> +					   struct regmap **regmap,
+> +					   int *reg, u8 *bit)
+> +{
+> +	struct rockchip_pinctrl *info =3D bank->drvdata;
+> +
+> +	*regmap =3D info->regmap_base;
+> +
+> +	switch (bank->bank_num) {
+> +	case 0:
+> +		*reg =3D RK3572_SMT_GPIO0_OFFSET;
+> +		if (pin_num >=3D 12)
+> +			*reg +=3D 0x2000;
+> +		break;
+> +	case 1:
+> +		*reg =3D RK3572_SMT_GPIO1_OFFSET;
+> +		break;
+> +	case 2:
+> +		*reg =3D RK3572_SMT_GPIO2_OFFSET;
+> +		break;
+> +	case 3:
+> +		*reg =3D RK3572_SMT_GPIO3_OFFSET;
+> +		break;
+> +	case 4:
+> +		*reg =3D RK3572_SMT_GPIO4_OFFSET;
+> +		if (pin_num >=3D 16)
+> +			*reg -=3D 0x10000;
+> +		break;
+> +	default:
+> +		dev_err(info->dev, "unsupported bank_num %d\n", bank->bank_num);
+> +		return -EINVAL;
+> +	}
+> +
+> +	*reg +=3D ((pin_num / RK3572_SMT_PINS_PER_REG) * 4);
+> +	*bit =3D pin_num % RK3572_SMT_PINS_PER_REG;
+> +	*bit *=3D RK3572_SMT_BITS_PER_PIN;
+> +
+> +	return 0;
+> +}
+> +
+>  #define RK3576_DRV_BITS_PER_PIN		4
+>  #define RK3576_DRV_PINS_PER_REG		4
+>  #define RK3576_DRV_GPIO0_AL_OFFSET	0x10
+> @@ -3441,6 +3617,18 @@ static int rockchip_get_drive_perpin(struct rockch=
+ip_pin_bank *bank,
+>  	if (ret)
+>  		return ret;
+> =20
+> +	if (ctrl->type =3D=3D RK3572) {
+> +		ret =3D regmap_read(regmap, reg, &data);
+> +		if (ret)
+> +			return ret;
+> +		data >>=3D bit;
+> +		if ((bank->bank_num =3D=3D 0 && pin_num < 12) ||
+> +		    (bank->bank_num =3D=3D 4 && (pin_num =3D=3D 24 || pin_num =3D=3D 2=
+5)))
+> +			return ((data & BIT(1)) >> 1) | ((data & BIT(0)) << 1);
+> +		return ((data & BIT(2)) >> 2) | ((data & BIT(0)) << 2) |
+> +		       (data & BIT(1));
+> +	}
+> +
+>  	switch (drv_type) {
+>  	case DRV_TYPE_IO_1V8_3V0_AUTO:
+>  	case DRV_TYPE_IO_3V3_ONLY:
+> @@ -3559,6 +3747,22 @@ static int rockchip_set_drive_perpin(struct rockch=
+ip_pin_bank *bank,
+>  		rmask_bits =3D RK3568_DRV_BITS_PER_PIN;
+>  		ret =3D (1 << (strength + 1)) - 1;
+>  		goto config;
+> +	} else if (ctrl->type =3D=3D RK3572) {
+> +		if (strength < 0 || strength > 7)
+> +			return -EINVAL;
+> +		rmask_bits =3D RK3572_DRV_BITS_PER_PIN;
+> +		if ((bank->bank_num =3D=3D 0 && pin_num < 12) ||
+> +		    (bank->bank_num =3D=3D 4 && (pin_num =3D=3D 24 || pin_num =3D=3D 2=
+5))) {
+> +			/* Only four drive-strength levels are supported. */
+> +			if (strength > 3)
+> +				return -EINVAL;
+> +			ret =3D ((strength & BIT(1)) >> 1) | ((strength & BIT(0)) << 1);
+> +		} else {
+> +			ret =3D ((strength & BIT(2)) >> 2) |
+> +			      ((strength & BIT(0)) << 2) |
+> +			      (strength & BIT(1));
+> +		}
+> +		goto config;
+>  	} else if (ctrl->type =3D=3D RK3576) {
+>  		rmask_bits =3D RK3576_DRV_BITS_PER_PIN;
+>  		ret =3D ((strength & BIT(2)) >> 2) | ((strength & BIT(0)) << 2) | (str=
+ength & BIT(1));
+> @@ -3717,6 +3921,7 @@ static int rockchip_get_pull(struct rockchip_pin_ba=
+nk *bank, int pin_num)
+>  	case RK3528:
+>  	case RK3562:
+>  	case RK3568:
+> +	case RK3572:
+>  	case RK3576:
+>  	case RK3588:
+>  		pull_type =3D bank->pull_type[pin_num / 8];
+> @@ -3786,6 +3991,7 @@ static int rockchip_set_pull(struct rockchip_pin_ba=
+nk *bank,
+>  	case RK3528:
+>  	case RK3562:
+>  	case RK3568:
+> +	case RK3572:
+>  	case RK3576:
+>  	case RK3588:
+>  		pull_type =3D bank->pull_type[pin_num / 8];
+> @@ -4084,6 +4290,7 @@ static bool rockchip_pinconf_pull_valid(struct rock=
+chip_pin_ctrl *ctrl,
+>  	case RK3528:
+>  	case RK3562:
+>  	case RK3568:
+> +	case RK3572:
+>  	case RK3576:
+>  	case RK3588:
+>  		return (pull !=3D PIN_CONFIG_BIAS_PULL_PIN_DEFAULT);
+> @@ -4296,6 +4503,7 @@ static const struct pinconf_ops rockchip_pinconf_op=
+s =3D {
+> =20
+>  static const struct of_device_id rockchip_bank_match[] =3D {
+>  	{ .compatible =3D "rockchip,gpio-bank" },
+> +	{ .compatible =3D "rockchip,rk3572-gpio-bank" },
+>  	{ .compatible =3D "rockchip,rk3188-gpio-bank0" },
+>  	{},
+>  };
+> @@ -5643,6 +5851,24 @@ static struct rockchip_pin_ctrl rk3568_pin_ctrl =
+=3D {
+>  					       PULL_TYPE_IO_1V8_ONLY,	\
+>  					       PULL_TYPE_IO_1V8_ONLY)
+> =20
+> +static struct rockchip_pin_bank rk3572_pin_banks[] =3D {
+> +	RK3576_PIN_BANK(0, "gpio0", 0, 0x8, 0x2010, 0x2018),
+> +	RK3576_PIN_BANK(1, "gpio1", 0x10020, 0x10028, 0x10030, 0x10038),
+> +	RK3576_PIN_BANK(2, "gpio2", 0x12040, 0x12048, 0x12050, 0x12058),
+> +	RK3576_PIN_BANK(3, "gpio3", 0x14060, 0x14068, 0x14070, 0x14078),
+> +	RK3576_PIN_BANK(4, "gpio4", 0x14080, 0x14088, 0x4090, 0x4098),
+> +};
+> +
+> +static struct rockchip_pin_ctrl rk3572_pin_ctrl __maybe_unused =3D {
+> +	.pin_banks		=3D rk3572_pin_banks,
+> +	.nr_banks		=3D ARRAY_SIZE(rk3572_pin_banks),
+> +	.label			=3D "RK3572-GPIO",
+> +	.type			=3D RK3572,
+> +	.pull_calc_reg		=3D rk3572_calc_pull_reg_and_bit,
+> +	.drv_calc_reg		=3D rk3572_calc_drv_reg_and_bit,
+> +	.schmitt_calc_reg	=3D rk3572_calc_schmitt_reg_and_bit,
+> +};
+> +
+>  static struct rockchip_pin_bank rk3576_pin_banks[] =3D {
+>  	RK3576_PIN_BANK(0, "gpio0", 0, 0x8, 0x2004, 0x200C),
+>  	RK3576_PIN_BANK(1, "gpio1", 0x4020, 0x4028, 0x4030, 0x4038),
+> @@ -5727,6 +5953,8 @@ static const struct of_device_id rockchip_pinctrl_d=
+t_match[] =3D {
+>  		.data =3D &rk3562_pin_ctrl },
+>  	{ .compatible =3D "rockchip,rk3568-pinctrl",
+>  		.data =3D &rk3568_pin_ctrl },
+> +	{ .compatible =3D "rockchip,rk3572-pinctrl",
+> +		.data =3D &rk3572_pin_ctrl },
+>  	{ .compatible =3D "rockchip,rk3576-pinctrl",
+>  		.data =3D &rk3576_pin_ctrl },
+>  	{ .compatible =3D "rockchip,rk3588-pinctrl",
+> diff --git a/drivers/pinctrl/pinctrl-rockchip.h b/drivers/pinctrl/pinctrl=
+=2Drockchip.h
+> index 950097699643..553197f6dc69 100644
+> --- a/drivers/pinctrl/pinctrl-rockchip.h
+> +++ b/drivers/pinctrl/pinctrl-rockchip.h
+> @@ -203,6 +203,7 @@ enum rockchip_pinctrl_type {
+>  	RK3528,
+>  	RK3562,
+>  	RK3568,
+> +	RK3572,
+>  	RK3576,
+>  	RK3588,
+>  };
+>=20
+>=20
 
 
---3alpfpswkxhlvmej
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Subject: Re: [PATCH] dt-bindings: Use hex unit address patterns
-MIME-Version: 1.0
 
-On Mon, Nov 02, 2026 at 07:53:22AM -0600, Rob Herring (Arm) wrote:
-[...]
->  .../memory-controllers/nvidia,tegra20-emc.yaml       |  4 ++--
 
-Acked-by: Thierry Reding <treding@nvidia.com>
-
---3alpfpswkxhlvmej
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmrrMo4ACgkQ3SOs138+
-s6EKABAAqndqQDSMCzJ51pelaVEYbun/pEAy9SCFq/gar34Nw6/PUqr+4Ae8fNKG
-58DhWW5IKP0zFCmAz4Lg7vzWcf8pcqjEqor4P/6uGt4Sa/keBlY96dhT7fXB7vUU
-+Y4/cAb5vN2M+cj5QKI3/N2xjmH4vcTgMxzpR2oZINWc5q3SpBCYpH4dHWdZX5ON
-NU3IkE+IwIuBt/lTX256XDA2qocpbqk4PfhDPXDEgwHzw1KUGjW9mngNi7ReGJ7X
-h58XLcmeowbjEg3418OfZogzqIrg1IowSD/1kTwDb/BONZtAFXstReG/03FgHBDC
-TfXFyQRuzQpC9ry8hSrTY3AfmVE+br7dxxhHl/mTpK6xVTnygAdFj7r2eOEtKQuZ
-/71SgGxHyuMPxVhqWntmrNQe5bSouxg7K1qTjVERnNG/43QDs1Ak2ELHBVD2RsBc
-lh9RUpYN+TMPms8D1jVgFsj0uOeeTEniDuXCWH7B32tqyyYPNEue+BzP/MsSMMIB
-xNFF26OqFEjYj3sHYR6s5D7EjwvTEHxF3zkNRgMSbeRpfjQKQOGIJCfPKP/Chrf9
-nywLoaWqGVHoNzEGQdjjkR6VQ0RTmBHnBGjoUU8SgFesfF0+0UT3lvASBsDH8VJ5
-94axmWcy8Sg7LmNOo7vOf7+TW7Fumpqu/30f4HiRtFAecTTqHJQ=
-=MRzn
------END PGP SIGNATURE-----
-
---3alpfpswkxhlvmej--
