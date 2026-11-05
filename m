@@ -1,89 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.214.177
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793896070;
-	b=sQGapmfphknEqtxQWLcSsiXLK9TnHSm5W31ueYvUsK/Ibv1+BGAoKoWPtSMicKl1RRs1
-	 1ncaTjHR89QI+4l2dBiLShWr2ulS+qP2MXTX7AV9Qh/is+9OQQynphrwhmtwjVOulRRT1
-	 3syesAOSFANZ1f1paGMJ53GgiOSyijZLxdq6apXi+ptWTzH+RDOqI0uDSZT+76/ybEXpv
-	 /frSPofKliHRkFAZDBSL1vEMEyA+XRWZ3FCzX0xsDTcFIVqs/OoSylyO8pnwMO8ltrwnZ
-	 6pN1S8mZB/bcOw1bwsAptqoF6rYqZSYewdWbP5tfNapQU2vLAOqjf0U2qmRGLdXb5pg==
+	t=1793896745;
+	b=XlTaATVoPsf8uKUYqbuEN3wvHPNGGWfhXCTuRjInmWnbAzpq+6+NAhl+eTjtxn7ubBYI
+	 VoslI4Srg7rxDjGQkKENhJ0NVyRMzvfULMuZwOp9qX8D0P+IhiG99Jwgv+q/5FZ/TROfE
+	 NMNwhmqe2/7j++HpBo92DkNat3oK7Ix07SSnmLLfd1Bqsg5RKA+QosT9qo59kZleYmKI2
+	 AT+6noKX5dv5Eiidq1ouMQ6zm4vGlwYJNBCXgjk7WfF8yeLaqFtIIDcYgSouLcj2T/w7Z
+	 W6v1WnRBArFaHOWRR2BHu1nq6rnObR6Q4NJZ3zYDZD9F2vYTOJwLVSsH+oSRaWRGkOA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793896070;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
-	bh=LU+RiqQFh2f5Ka89JSx/cG6xgtNv7ffTWhetPZC5TwM=;
-	b=TsX4YvRO1fc6NBdeDjAYzeiP1ou67mE0ca97QqfY03M8Bg74zb1OasCrTLSlyhbiDtfu
-	 1nNo71TMq+xx1TbZgvrmLaXeN9+LCvt74E0KdHtw3EMXI1+AEKlZeaBwAaYLPjMfBx3Uv
-	 LA3UX2ZcLsxA473OkScn+7LTc/6t75vBWdIu/khcdovqPxlgEYr5ueLZ6O8C9pU+zLU1R
-	 ThKm4+6zc3boZWpg+Qy3iO12fKS+ux5H0NwDSfemeKcalD+wrxh7+8AGNVN+FtnmW0VAV
-	 bL4z2p2GDOy2aiIMX9ZPja8qugl6M0t3OGzLCoy9mnkOIdBXpNO6G1PIHMmx2tBVBzA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793896745;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=ULjmTEbROdJQVZEfS/t3oTBVzuiWguDK7u7YZ/yTH3I=;
+	b=ayccR1kKvoufP1etH6PdRYhtXz/NswnE0DRC3WAZ2yp60sPzPbW/kL8RgqPxUZQz1Gel
+	 lRUvUulEzxuGXy4efeA2cEn6OhjHl0DewfgxsJsfhys+3vrmoj+WeYT71hADCjmFI9FM7
+	 Yu5u1Yi0BkjRFVQoKQjXEV/5Kg0cftulqkRRTIXKYRYvhXC1XzX+dFun1W6KboSt2YkjU
+	 sm7+MV9pojbauOMRU+pf5b/OM86zw7RtEIW0x4AjXUWRQnX0vo2cVM+W70Bp0Q8+amzVg
+	 bQpdkZ92AWnAwgtxEMlwYrngBLN04cHnBI7wq5QGP9TM2AOZB9OyNgLLga4waJJiipw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qXayIAXI;
-	arc=none smtp.remote-ip=209.85.214.177
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Df7kv+Cp;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 198B1606A328
-	for <mfd@lists.linux.dev>; Thu,  5 Nov 2026 16:27:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 198B1606A328
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1077606A337
+	for <mfd@lists.linux.dev>; Thu,  5 Nov 2026 16:39:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qXayIAXI
-Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2ed1f1a7695so6201495ad.2
-        for <mfd@lists.linux.dev>; Thu, 05 Nov 2026 08:27:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793896069; x=1794500869; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=LU+RiqQFh2f5Ka89JSx/cG6xgtNv7ffTWhetPZC5TwM=;
-        b=qXayIAXIyTlDykBFvU9GDZJ2BNrzO93YhxUhWi1kbvsX3NKT48nvunZ89JHRGJMAqR
-         aP/WmjvWF42oJDVkEQ68EucoTlHDcQRgBNCY156VyKY6aKgzoDmH4nA8Kq6gSGBTtuVk
-         DyCKarfAoVdVe4tZevlogrPCKNjyzwV4vBUxYQXGfbWslNFlvsBTXD6/jelPay4dqlpt
-         G1MAZyleIqzI7Ghwg2aK7ZSjmTYCPN7hxSas0PFUVTWDsI2gmRoGMrLukd0MCVusx3Ta
-         xJqk5dGc7dRgWJK7W2lAvb7Arocae7n/ZSM/cOO06Vnf+OLGT+QXHGutLPOVEIgg9QZc
-         3Rag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793896069; x=1794500869;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=LU+RiqQFh2f5Ka89JSx/cG6xgtNv7ffTWhetPZC5TwM=;
-        b=q/buwc9VnKBwtD1F+tOTdyEvePc/aSnn3CE3PMl5d3ZLF0xJbosagPNhycYNfc/O6m
-         GOreyQMCdzdeqsPltak7k4HI8kdzPBXPYpCvfCZd5M3aHdD/L/n7DR/NxO9h9qrlbtiM
-         zr7dbLHyGerfWvO47hKVzSJjl+H7EwHazrtHeSd1f53s52YK3tOaVL7nTBLoC/HOwWI8
-         KPAlk0hYn/Xoq3i0k/mgZTPsdu3FUp3Y47t54pFtoCua4F9p6c/Utlhlb04Q9N+DFziO
-         qqQ/iEh28xsPcr1+R/QpHy2NtAuJAxg+tLCdFAA3nHWFVTzjFHqayVu7EIvtpXhmu8/f
-         FitA==
-X-Gm-Message-State: APuU4Z9W49LKBX+b9BBktHPaoJm9FhkCzpiSshehXt9uchgVOROd23tR
-	V3uItQfTxZRfUSpBYIH628ERmaP0l58IBETZ8TNLwoBBg15c2WniVKw7
-X-Gm-Gg: AYBFou319YOK7/DHhuwYXJbpZILbcILTu1nDQ+5dmyM4oSyoejqPjFIqnKyel/qf2oL
-	yAqiyywD+OU2CaOUi+a9wjoISjXIElHkDGpNcgb+7f6Puq3Ytv9zcsGl4/nUIMYsF/wqTke3EOu
-	ytETFR2jyhHTZof6nQZ2lTvdaE6Z8GXaXnHNYBZ23cjvLA/fvOvdF6wk8anpvoiRBJHFTrgRl3b
-	FqXYYoXvPjFA5K6AhRt8nOWYwCa2aV5EnK1YDxFdYRmt2zKqff7Hmruw2sFs3sZkQIsonk2ZICJ
-	B1GN24xEpbo5R9EBkqOcBUYNFDC7ewOCwtMKBDxCTOyEIeEs7dYN5usWHrTZIOu4/oqhiMqxkxT
-	ISti4N3cLEGS6CH4T8yyW7kKQo4JzrknyqmmHAMsXfVWKjR5LTkGkIvEbZiluX3z6Ajf85uBXTj
-	ff0q8pE3JgUn+OKOkq3+1OALH6B3qXgWXBsfBVM4ZTtdUZ1sbtC2n+CdrFtMAvp4813JXtpK2tp
-	epL0CQ2B82PZ1TZsDa0ZFv30+jhMAtCTpqE3kIOtWRPMMytftH87/UDPZjL5QZaMGYL+AqQ1VbZ
-	tjjuouGnonY9nr9KAfSFaAXpVHPQVO7Ik0kJxBzBquUy/fh34g==
-X-Received: by 2002:a17:903:1af0:b0:2e9:52dc:4c10 with SMTP id d9443c01a7336-2ed40989b5cmr1416925ad.18.1793896069261;
-        Thu, 05 Nov 2026 08:27:49 -0800 (PST)
-Received: from hj.. ([163.239.22.29])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ed08fe463fsm19859075ad.24.2026.11.05.08.27.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Nov 2026 08:27:48 -0800 (PST)
-From: hyunjungg <hj351016@gmail.com>
-To: Lee Jones <lee@kernel.org>
-Cc: mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org,
-	Hyunjung Ko <hj351016@gmail.com>
-Subject: [PATCH] mfd: si476x-i2c: cancel RDS drainer work before freeing RDS FIFO
-Date: Fri,  6 Nov 2026 01:27:22 +0900
-Message-ID: <20261105162722.1688960-1-hj351016@gmail.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Df7kv+Cp
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 684EC1F000C1;
+	Thu,  5 Nov 2026 16:39:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793896744;
+	bh=ULjmTEbROdJQVZEfS/t3oTBVzuiWguDK7u7YZ/yTH3I=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=Df7kv+CpBSgjFGB+sGhI/Qg6GdGGJ6m6tgdqQN2tq2SNk85bSH+UuOb9RXxhK04QJ
+	 mMF8aRFyVwxx+n99SDPN9qkZkrdJ6et9GndtS0UvIDQR5RpRXzSJZqCmx0Rvo7L9IQ
+	 3Eh+Rs4PEl8o7W2uOa5/eWZFfhYCSnRY+uQ+Yh6SI2NP/d9b4d9TAD9/Xro0FuGay9
+	 /OVQ3aKS9MrTbY4qQJI8rMcKgtO2sWlF39ctmMImy9hVKUrlcWgPArQ9ifAucx8Kj5
+	 wMi2R0rxSddRaYBCiZ59GoxjV93oBVuNbVbTtXeu/8apwIEZtDSqXMyww+xDV1T2z0
+	 x3Sdapi+yUPdw==
+Message-ID: <sashiko-outbox-199510@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH] mfd: si476x-i2c: cancel RDS drainer work before freeing
+ RDS FIFO
+Reply-To: sashiko-reviews@lists.linux.dev
+To: hyunjungg <hj351016@gmail.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20261105162722.1688960-1-hj351016@gmail.com>
+References: <20261105162722.1688960-1-hj351016@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Thu, 05 Nov 2026 16:39:03 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -92,65 +59,82 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 
-From: Hyunjung Ko <hj351016@gmail.com>
+Thank you for your contribution! Sashiko AI review found 1 potential issue(=
+s) to consider:
+- [Low] mfd: si476x-i2c: uncapitalized commit subject description after pre=
+fix
+--
 
-The RDS FIFO drainer work (core->rds_fifo_drainer) is scheduled from the
-interrupt dispatcher si476x_core_get_and_signal_status() whenever an
-SI476X_FM_RDS_INT interrupt is seen:
+commit 0681987cd726a1a3d6c3c547f0ac0af0aee3c7e7
+Author: Hyunjung Ko <hj351016@gmail.com>
 
-	if (status & SI476X_FM_RDS_INT)
-		si476x_core_start_rds_drainer_once(core);
+mfd: si476x-i2c: cancel RDS drainer work before freeing RDS FIFO
 
-si476x_core_start_rds_drainer_once() runs the work on the shared system
-workqueue via schedule_work(&core->rds_fifo_drainer). The work handler
-si476x_core_drain_rds_fifo() dereferences @core and reads from
-core->rds_fifo.
+This commit cancels core->rds_fifo_drainer synchronously in
+si476x_core_remove() before freeing core->rds_fifo to prevent a potential
+use-after-free when an SI476X_FM_RDS_INT interrupt schedules the drainer wo=
+rk
+shortly before device removal.
 
-si476x_core_remove() does not cancel this work. It disables the interrupt
-(or, in polling mode, cancels only the sibling core->status_monitor
-delayed work) and then frees the RDS FIFO:
+>     mfd: si476x-i2c: cancel RDS drainer work before freeing RDS FIFO
+>    =20
+>     The RDS FIFO drainer work (core->rds_fifo_drainer) is scheduled from =
+the
+>     interrupt dispatcher si476x_core_get_and_signal_status() whenever an
+>     SI476X_FM_RDS_INT interrupt is seen:
+>    =20
+>             if (status & SI476X_FM_RDS_INT)
+>                     si476x_core_start_rds_drainer_once(core);
+>    =20
+>     si476x_core_start_rds_drainer_once() runs the work on the shared syst=
+em
+>     workqueue via schedule_work(&core->rds_fifo_drainer). The work handler
+>     si476x_core_drain_rds_fifo() dereferences @core and reads from
+>     core->rds_fifo.
+>    =20
+>     si476x_core_remove() does not cancel this work. It disables the inter=
+rupt
+>     (or, in polling mode, cancels only the sibling core->status_monitor
+>     delayed work) and then frees the RDS FIFO:
+>    =20
+>             if (client->irq)
+>                     disable_irq(client->irq);
+>             else
+>                     cancel_delayed_work_sync(&core->status_monitor);
+>    =20
+>             kfifo_free(&core->rds_fifo);
+>    =20
+>     disable_irq() waits for the interrupt handler to finish but does not =
+flush
+>     or cancel work that the handler has already queued. A drainer work it=
+em
+>     that was scheduled just before (or is still running at) remove time c=
+an
+>     therefore run after kfifo_free() and after the devm-allocated @core i=
+tself
+>     is freed, dereferencing freed memory and operating on a freed kfifo
+>     (use-after-free). The sibling status_monitor work is drained on teard=
+own
+>     but this one is not.
+>    =20
+>     Drain the RDS drainer work before freeing the FIFO (and before the
+>     devm-managed @core is released) to close the window.
+>    =20
+>     Found by code review; not runtime-reproduced (requires si476x AM/FM r=
+adio
+>     hardware and an RDS interrupt racing device removal).
+>    =20
+>     Signed-off-by: Hyunjung Ko <hj351016@gmail.com>
 
-	if (client->irq)
-		disable_irq(client->irq);
-	else
-		cancel_delayed_work_sync(&core->status_monitor);
+[Severity: Low]
+This isn't a bug in si476x_core_remove() in drivers/mfd/si476x-i2c.c, but t=
+he
+mfd subsystem convention is to capitalize the commit description after the
+driver prefix. Could the subject line be updated to:
 
-	kfifo_free(&core->rds_fifo);
+  mfd: si476x-i2c: Cancel RDS drainer work before freeing RDS FIFO
 
-disable_irq() waits for the interrupt handler to finish but does not flush
-or cancel work that the handler has already queued. A drainer work item
-that was scheduled just before (or is still running at) remove time can
-therefore run after kfifo_free() and after the devm-allocated @core itself
-is freed, dereferencing freed memory and operating on a freed kfifo
-(use-after-free). The sibling status_monitor work is drained on teardown
-but this one is not.
-
-Drain the RDS drainer work before freeing the FIFO (and before the
-devm-managed @core is released) to close the window.
-
-Found by code review; not runtime-reproduced (requires si476x AM/FM radio
-hardware and an RDS interrupt racing device removal).
-
-Signed-off-by: Hyunjung Ko <hj351016@gmail.com>
----
- drivers/mfd/si476x-i2c.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/drivers/mfd/si476x-i2c.c b/drivers/mfd/si476x-i2c.c
-index 0000000..1111111 100644
---- a/drivers/mfd/si476x-i2c.c
-+++ b/drivers/mfd/si476x-i2c.c
-@@ -831,6 +831,8 @@ static void si476x_core_remove(struct i2c_client *client)
- 	if (client->irq)
- 		disable_irq(client->irq);
- 	else
- 		cancel_delayed_work_sync(&core->status_monitor);
-
-+	cancel_work_sync(&core->rds_fifo_drainer);
-+
- 	kfifo_free(&core->rds_fifo);
- }
-
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261105162722.1688=
+960-1-hj351016@gmail.com?part=3D1
