@@ -1,55 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793887728;
-	b=N4tpNkjsMMeRdv5OKBVu9/2hdq01GRhLvAsVsDZ5yZ5ZUKPB2l21/n0AKG4E8kAbdgvp
-	 78nilBNv5aLlv58Pv1HjIo6WI9yDid/F1UfaT1Dsosj5R8bXYUAM3Kk0XEfTZrEGKqEk7
-	 Ag3WkP2CC4sRig5mdQK6vu6irxeE5y0mu5mhbF/qGHMvbP7gaKcDHGlYGfIuJxRTFIqXw
-	 sNjKZKuir3FOUbixpIfbjp5/ilfA8vg5C4dy5US2wHNWW6gHgTZPKS+ZYEadCCB22qQNi
-	 F0NOQP2hMviXhSPcZbB0B4OCePASr8BF7LPHHxGj+I8u3zUZlc/tX5dbQ69KPAvbZgg==
+	t=1793887769;
+	b=5dsK9fS7X83KRjkkQ8b1Nhep519zIOR21v+bAZHY+Ti7tJn8qjqSDHnbzBTAeH2cBYU8
+	 zivjhYfYou8YQnNen9a7/r09y12Hm/RrqW46e6Pi9f+DT8trXskPwm5T+dNScz/SWXHLI
+	 Gq8+/0sblBiteZCsh3gXgnNGWBb5yH7aXnvYj1umpFmtL5W9N2W1ck8DdIeVaTAdROjCg
+	 vQsJOkf2/wKeoRNq0p8oSb2BqkhE0zf98NkHNGZ1v/suOWmFeLKrnj7hrz3LpyB83TmSL
+	 9m2ZZjDQbucqp516Jfig7xc44O+v1GBOGHPIk0YTvmMAv70En5r5bGAwafHtcGRo/Xg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793887728;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To;
-	bh=iuLFuIw5Iem7k5S/fx3Ljd28tX075xbqBILluDGIpc0=;
-	b=xdr2/D7HK1r2PbW8Q1HBQK4zKZWpb/ZgaIk8a3PO3RNUiolBAFMeAGhUpKJG1KcDJLJz
-	 CvuKkGKzcfgvXrnyO1R+B37JSJYL2yVxuLohzbRNQBVoPCrjqYldlb+gMBQ3zhxxCrp4o
-	 GIiQT8AFULtg6xLMEzDFHmEj0zBtN/1SCiM09u054Hl8UkLTMpkCsGrQJ0caBBgAKlJK3
-	 UUWM/Hiwf+c1h2W8umJQkz8GSquZmAhOioPakWrtnusxAP+hsxUwNCcXti9jznAdMLsr5
-	 yMuZNKvK6okBl89rrGtbvhwqfUSb3UcRFHpSzs/dAMlXMelF3IC3T08qF00JxbjfboQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793887769;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=uWZDC+jKR50KkuL/m90FaOZS23uCXLeIovjpwO7U69c=;
+	b=fLbm9XmGjOG6aQ9b/H7qCUdE7VtZWJYPpO/NjY+MXLi4+q5UCqOEm/iTyASNBrPPBjsN
+	 JcW6I/b/IKpFJO/PAwFxQqBP4a15a9QvnKc0tnCAWo1j8hbcwQEldmGBnUzuqSTV02Q/I
+	 3kWdtUBaAd6a7Dh3fyUMg/hE1MkwM9JLda1UtOAdGQWOM8hcnZEMwG8GS33GldrqtfMwU
+	 TmXZIROfO6KE0XfuTtPpEmHX/n1UpiOfA8oFNBdoHaZpRNO2gx5C5Z8xdgUAzc3nJVAX1
+	 FYCPy6rWYXRjmvwuD/z0en/LOQk1FAza3tz60FQ1YpZo/BC1TVwu7Z3NKFAxlquSgbg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cbTtLybB;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gEIc2vgX;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2FBF606A31B;
-	Thu,  5 Nov 2026 14:08:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 260AC606A32F
+	for <mfd@lists.linux.dev>; Thu,  5 Nov 2026 14:09:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cbTtLybB
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 15FAB1F000C1;
-	Thu,  5 Nov 2026 14:08:45 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gEIc2vgX
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 044241F00A15
+	for <mfd@lists.linux.dev>; Thu,  5 Nov 2026 14:09:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793887727;
-	bh=iuLFuIw5Iem7k5S/fx3Ljd28tX075xbqBILluDGIpc0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=cbTtLybBelTsXD1tTnTKMAcyrEKzUTkMcpawV1ZkQtEZ4/yy6EMU/xBFH0435s2ov
-	 LiwAKRR4h9bM7Tzjv+YdavLP2X1DhkEYXlDb81g/LjXAff5iV/LKFGqMUKETlpyKBt
-	 ZxgNzh9vu/FEQWfWzwgLwVBu4v9j1yJn0AkrZdd9FoJcIXTewL7hzPT9I+ZAjwER6I
-	 ZzUCp0i5/cA04qbCtpfjCf3YPOPajjSOfPAVkQe+siGtdgWEGLhrTQyFa+giXJGNRh
-	 h3sEbxr9iUTzezYFOTtPGudXGbjFZzghJqQlAGHMf2jcq905VsLDXP7nKXsOinK3MP
-	 btRywJw1TwiTQ==
-Date: Thu, 5 Nov 2026 14:08:43 +0000
-From: Lee Jones <lee@kernel.org>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Pavel Machek <pavel@kernel.org>, linux-kernel@vger.kernel.org,
-	linux-leds@vger.kernel.org, mfd@lists.linux.dev
-Subject: Re: [PATCH v4] leds: Add driver for MAX8907 LED cell
-Message-ID: <20261105140843.GK1650678@google.com>
-References: <20261027115006.86032-1-clamor95@gmail.com>
- <179318844110.3606039.5801345229436270811@kernel.org>
- <CAPVz0n3tR8R5xe_F20kChnHHrWG40o7prwY6kCYXM-UtYPFKLQ@mail.gmail.com>
+	s=k20260515; t=1793887769;
+	bh=uWZDC+jKR50KkuL/m90FaOZS23uCXLeIovjpwO7U69c=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=gEIc2vgXojaI7fLQe2A1eMM5vENRX6IJ9jAXk4+aXPqJGYuaF7IslkQbHL19df884
+	 ogA2YlzVBJKq2xnUxIwT1vmileZSCUoP1Nb4OgxAHNwO2RzJsk9lTMbvDwDc5fgHQl
+	 ZiHGw3Z578ERPzNkl7ZstfGTIRDC1lITQD9Z7NoTSmkKtWwmz76no80L39/9Tdn4fH
+	 CE3/T5QKcatW/sO/NVg2JBzw13sqs0aJxutYOy0W7YD7OcZUXpXGOATS397JiaKLRj
+	 5Zw+lrJk41UK6dR4VxKg6dzeNJFlI9s+G+G5QwR7JUL2GXg4d3Iw2VVKl9RlldTTqF
+	 OFNr/26fZ/2Tg==
+Received: by mail-lj1-f177.google.com with SMTP id 38308e7fff4ca-3ac91f5aa89so17166361fa.1
+        for <mfd@lists.linux.dev>; Thu, 05 Nov 2026 06:09:28 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AKwUvByWP43+EiF9fsneAroX2DaGGi5RkZUq6Dn09f6mhyYDKICiDWMkvlGvf7hiVPnStiCRw1o=@lists.linux.dev
+X-Gm-Message-State: APuU4Z8J/9w3ch6W3JO5zvPQC2DoUAhCLUGVN7vF3MMO6cUgDTJuWPDJ
+	aBnaWiL5MQEkSmWn6ahHaCzvr1CKRaSaKiApRn+iyptHyiP3x7LbX3A60RvpFADl+YsBuyIbpcz
+	JS0G2vHU8oS/mPF32afpPqaLMTv1OAbA=
+X-Received: by 2002:a05:6512:688b:20b0:5bf:e4e6:7f78 with SMTP id
+ 2adb3069b0e04-5bfe4e68c03mr2949831e87.39.1793887767615; Thu, 05 Nov 2026
+ 06:09:27 -0800 (PST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,191 +59,61 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAPVz0n3tR8R5xe_F20kChnHHrWG40o7prwY6kCYXM-UtYPFKLQ@mail.gmail.com>
+References: <20261101-xg6846b-bcmbca-xrdp-reset-v2-0-455fe9eed5ee@kernel.org>
+ <20261101-xg6846b-bcmbca-xrdp-reset-v2-4-455fe9eed5ee@kernel.org> <340843f896db387a7c3ff4d6a06ef7c2155d1f98.camel@pengutronix.de>
+In-Reply-To: <340843f896db387a7c3ff4d6a06ef7c2155d1f98.camel@pengutronix.de>
+From: Linus Walleij <linusw@kernel.org>
+Date: Thu, 5 Nov 2026 15:09:14 +0100
+X-Gmail-Original-Message-ID: <CAD++jL=sYc2_Pj5k-5d4QqcqNpFjQkcTKJFv4oDhXCHo9kymSw@mail.gmail.com>
+X-Gm-Features: AclHuK-xb4f0QrVUB5hiQs77kNWFtdOJD63XyBZhuUtDoapdcW_U4E9f6qqA4pg
+Message-ID: <CAD++jL=sYc2_Pj5k-5d4QqcqNpFjQkcTKJFv4oDhXCHo9kymSw@mail.gmail.com>
+Subject: Re: [PATCH v2 4/7] reset: Add BCMBCA block resets through the PMB
+To: Philipp Zabel <p.zabel@pengutronix.de>
+Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	William Zhang <william.zhang@broadcom.com>, Anand Gore <anand.gore@broadcom.com>, 
+	Kursad Oney <kursad.oney@broadcom.com>, Florian Fainelli <florian.fainelli@broadcom.com>, 
+	=?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Stephen Boyd <sboyd@kernel.org>, 
+	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
+	Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>, 
+	Randy Dunlap <rdunlap@infradead.org>, Benjamin Larsson <benjamin.larsson@genexis.eu>, mfd@lists.linux.dev, 
+	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-clk@vger.kernel.org, linux-hwmon@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 04 Nov 2026, Svyatoslav Ryhel wrote:
+On Tue, Nov 3, 2026 at 12:28=E2=80=AFPM Philipp Zabel <p.zabel@pengutronix.=
+de> wrote:
 
-> ср, 4 лист. 2026 р. о 17:16 Lee Jones <lee@kernel.org> пише:
-> >
-> > --- checkpatch.pl (1 issue) ---
-> > Line 38: WARNING: please write a help paragraph that fully describes the config symbol with at least 4 lines
-> > ----------------------------------
-> >
-> > On Tue, 27 Oct 2026, Svyatoslav Ryhel wrote:
-> >
-> > > Add a small driver to control the LED cell provided by the MAX8907 PMIC.
-> > > The LED does not require any specific configuration and is folded into the
-> > > PMIC's node.
-> > >
-> > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > > ---
-> > > Changes in v2:
-> > > - rebased so patch is now applicable to linux/next
-> > >
-> > > Changes in v3:
-> > > - added check if led is off for get callback
-> > > - added dedicated MAX8907_REG_WLED_MODE_ON mask
-> > > - switched to devm_led_classdev_register_ext
-> > >
-> > > Changes in v4:
-> > > - platform_set_drvdata dropped
-> > > - init_data.devicename dropped
-> > > - added MODULE_ALIAS
-> > > ---
-> > >  drivers/leds/Kconfig        |  7 +++
-> > >  drivers/leds/Makefile       |  1 +
-> > >  drivers/leds/leds-max8907.c | 90 +++++++++++++++++++++++++++++++++++++
-> > >  drivers/mfd/max8907.c       |  1 +
-> > >  include/linux/mfd/max8907.h |  2 +-
-> > >  5 files changed, 100 insertions(+), 1 deletion(-)
-> > >  create mode 100644 drivers/leds/leds-max8907.c
-> > >
-> > > diff --git a/drivers/leds/Kconfig b/drivers/leds/Kconfig
-> > > index 788e689fe875c..3796c562919fe 100644
-> > > --- a/drivers/leds/Kconfig
-> > > +++ b/drivers/leds/Kconfig
-> > > @@ -813,6 +813,13 @@ config LEDS_MAX77705
-> > >       help
-> > >         LED driver for MAX77705 PMIC from Maxim Integrated.
-> > >
-> > > +config LEDS_MAX8907
-> > > +     tristate "LED support for MAX8907 PMIC"
-> > > +     depends on LEDS_CLASS && MFD_MAX8907
-> > > +     help
-> > > +       This option enables support for on-chip LED drivers on
-> > > +       MAXIM MAX8907 PMIC.
-> >
-> > As requested on v3, please expand this help text to at least 4 lines to satisfy
-> > 'checkpatch.pl'.
-> >
-> > > +
-> > >  config LEDS_MAX8997
-> > >       tristate "LED support for MAX8997 PMIC"
-> > >       depends on LEDS_CLASS && MFD_MAX8997
-> > > diff --git a/drivers/leds/Makefile b/drivers/leds/Makefile
-> > > index 3da746279bb81..24efda3fbaa44 100644
-> > > --- a/drivers/leds/Makefile
-> > > +++ b/drivers/leds/Makefile
-> > > @@ -67,6 +67,7 @@ obj-$(CONFIG_LEDS_LTC3220)          += leds-ltc3220.o
-> > >  obj-$(CONFIG_LEDS_MAX5970)           += leds-max5970.o
-> > >  obj-$(CONFIG_LEDS_MAX77650)          += leds-max77650.o
-> > >  obj-$(CONFIG_LEDS_MAX77705)          += leds-max77705.o
-> > > +obj-$(CONFIG_LEDS_MAX8907)           += leds-max8907.o
-> > >  obj-$(CONFIG_LEDS_MAX8997)           += leds-max8997.o
-> > >  obj-$(CONFIG_LEDS_MC13783)           += leds-mc13783.o
-> > >  obj-$(CONFIG_LEDS_MENF21BMC)         += leds-menf21bmc.o
-> > > diff --git a/drivers/leds/leds-max8907.c b/drivers/leds/leds-max8907.c
-> > > new file mode 100644
-> > > index 0000000000000..a5c445f75d1b1
-> > > --- /dev/null
-> > > +++ b/drivers/leds/leds-max8907.c
-> > > @@ -0,0 +1,90 @@
-> > > +// SPDX-License-Identifier: GPL-2.0-only
-> > > +
-> > > +#include <linux/err.h>
-> > > +#include <linux/leds.h>
-> > > +#include <linux/mfd/max8907.h>
-> > > +#include <linux/module.h>
-> > > +#include <linux/platform_device.h>
-> > > +#include <linux/property.h>
-> > > +#include <linux/regmap.h>
-> > > +
-> > > +#define MAX8907_REG_WLED_MODE_ON     BIT(0)
-> > > +
-> > > +struct max8907_led_data {
-> > > +     struct max8907 *max8907;
-> >
-> > As asked on v3, what is 'max8907' used for?
-> >
-> > > +     struct regmap *regmap;
-> > > +     struct led_classdev cdev;
-> > > +};
-> > > +
-> > > +static enum led_brightness max8907_led_get_brightness(struct led_classdev *cdev)
-> > > +{
-> > > +     struct max8907_led_data *ddata = container_of(cdev, struct max8907_led_data, cdev);
-> > > +     unsigned int brightness_lvl;
-> > > +     int ret;
-> > > +
-> > > +     ret = regmap_read(ddata->regmap, MAX8907_REG_WLED_MODE_CNTL, &brightness_lvl);
-> > > +     if (ret || !(brightness_lvl & MAX8907_REG_WLED_MODE_ON))
-> > > +             return LED_OFF;
-> > > +
-> > > +     ret = regmap_read(ddata->regmap, MAX8907_REG_WLED_CNTL, &brightness_lvl);
-> > > +     if (ret)
-> > > +             return LED_OFF;
-> > > +
-> > > +     return brightness_lvl;
-> > > +}
-> > > +
-> > > +static int max8907_led_set_brightness(struct led_classdev *cdev,
-> > > +                                   enum led_brightness brightness)
-> > > +{
-> > > +     struct max8907_led_data *ddata = container_of(cdev, struct max8907_led_data, cdev);
-> > > +     int brightness_lvl, ret;
-> > > +
-> > > +     brightness_lvl = clamp(brightness, LED_OFF, LED_FULL);
-> > > +
-> > > +     if (brightness_lvl) {
-> > > +             ret = regmap_write(ddata->regmap, MAX8907_REG_WLED_CNTL, brightness_lvl);
-> > > +             if (ret)
-> > > +                     return ret;
-> > > +     }
-> > > +
-> > > +     return regmap_update_bits(ddata->regmap, MAX8907_REG_WLED_MODE_CNTL,
-> > > +                               MAX8907_REG_WLED_MODE_ON,
-> > > +                               brightness_lvl ? MAX8907_REG_WLED_MODE_ON : 0);
-> > > +}
-> > > +
-> > > +static int max8907_led_probe(struct platform_device *pdev)
-> > > +{
-> > > +     struct device *dev = &pdev->dev;
-> > > +     struct max8907 *max8907 = dev_get_drvdata(dev->parent);
-> > > +     struct led_init_data init_data = { };
-> > > +     struct max8907_led_data *ddata;
-> > > +
-> > > +     ddata = devm_kzalloc(dev, sizeof(*ddata), GFP_KERNEL);
-> > > +     if (!ddata)
-> > > +             return -ENOMEM;
-> > > +
-> > > +     ddata->max8907 = max8907;
-> > > +     ddata->regmap = max8907->regmap_gen;
-> > > +
-> > > +     init_data.fwnode = dev_fwnode(dev->parent);
-> >
-> > This will evaluate to 'pmic'.  The sysfs attribute will be incorrect.
-> >
-> > Since there is no child node, why not set 'ddata->cdev.name' directly
-> > and use 'devm_led_classdev_register()'?
-> >
-> 
-> This is required to be able to reference led in the device tree. Since
-> led node is folded into pmic's node, pmic's node is used to bind led.
+> > +     unsigned int i, zone;
+> > +     int ret;
+> > +
+> > +     for (i =3D 0; i < ARRAY_SIZE(power); i++) {
+> > +             for (zone =3D 0; zone < power[i].zones; zone++) {
+> > +                     ret =3D bcm6846_power_on_zone(rst, power[i].devic=
+e, zone);
+> > +                     if (ret) {
+> > +                             dev_err(rst->rcdev.dev,
+> > +                                     "XRDP power-up failed at PMB bus =
+1 device %u zone %u: %d\n",
+> > +                                     power[i].device, zone, ret);
+> > +                             bcmbca_pmb_reset_cleanup(rst, group);
+> > +                             return ret;
+> > +                     }
+> > +             }
+> > +     }
+>
+> This doesn't look like it belongs in the reset controller driver.
+> Are these power domains?
 
-Right, so you need device_set_node() called in led_classdev_register_ext()
-so fwnode_led_get() can look up the LED via the parent PMIC phandle.
+Indeed.
 
-However, passing only 'init_data.fwnode = dev_fwnode(dev->parent)' into
-led_compose_name() when the parent PMIC node has no 'label', 'function'
-or 'color' properties causes it to fall through to:
+I was trying several times to restrict the scope of the MFD subdrivers
+but they have this tendency to all require each other so I'll just bite the
+bullet and implement the power domains too :D
 
-    } else if (is_of_node(fwnode)) {
-        n = snprintf(led_classdev_name, LED_MAX_NAME_SIZE, "%s",
-                 to_of_node(fwnode)->name);
+I'll fix the rest of the review comments.
 
-Which registers the LED in sysfs as '/sys/class/leds/pmic' (and fails
-with -EINVAL if 'fwnode' is NULL on non-DT platforms).
-
-To bind the parent fwnode while avoiding the node-name fallback, please
-also populate 'devicename' and 'default_label' (similar to
-drivers/leds/leds-tps6105x.c):
-
-    init_data.fwnode = dev_fwnode(dev->parent);
-    init_data.devicename = "max8907";
-    init_data.default_label = ":wled"; /* or "white:backlight" */
-
--- 
-Lee Jones
+Yours,
+Linus Walleij
