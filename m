@@ -1,101 +1,69 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.218.45
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1793888938;
-	b=EAPBUlWltsSobIEVFCtiwLSwqYMWvAeOdOXLgw+BIH6sC/hh0HcyQoOxelVZf65Z+Zp4
-	 7mHQaKe9Y835bo5f8bukyXZ0K+Co/AQWDcotNorqkePuXHH1gk0CEq/fDTaUhCtQ7ARgm
-	 yLnmptYeGzJFR6DBQOqGhxT0c28/MdV4xvxPNUPZp8dM4IqTMvw6rVNm035HqZeHGViyz
-	 kUTZlP7zFa9lXTpz2usxTTXYOgo4CbCDYi+Za4FXyftJPpxjwj4S+ZwCdviJKs0VyZLes
-	 e59XOWZ4VAbjAlF6Hi/Yx7GndGCVVITCadQoex0JVvuE5+DsPIyoI+t8+5cfx4i/WSQ==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793888938;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
-	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=jM7yD+UvZhCvYafkuTtfLIsJ/x+7XGZ5ALQNkyFmFdc=;
-	b=r3GIjj8w1HeqouB/jx09xbkGe4rQpZjJEkPbOpgj5uZdmqF4BpLrMqyifVQKaIH6cArs
-	 p3GpbK3qH1wQ5BGgECxonCArMa9+tvA3yTYREUy9BeSNO4Znja/Mmq+dVVLqsKbkFRuWW
-	 NLBj9TELznKM10rIrDbNhwLgYXIidH9ZOn+7msITUCfu1u0Rs5DIU82kmrOb6PlOFAaZq
-	 AqHC0gb7fcXOpA1gKuwrtrsstwtjBGXlKAWBj16ZkFUuUeXctuFftCKbAGXH6WCvdxUAG
-	 JbQoJUjV0lmt7HXOFCQMUxPHNwNXrWbHxgFXVSrw4s6HGuoBjldpXDtNEExVgObvklA==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=cuWMMq+h;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.218.45
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1793888960;
+	b=v/8jhQn7NQiRk0IrwZUauU5Pd9D0IR70A4nCeUcq7swdF7iqCOqvz7GnBZ1hHfUuDZtE
+	 z3QiAb10x06yWkkfP7tNytlvc4wr3GTXsPlworzYKcuXMTjgA052YdgXNxHSOzY6MDMb9
+	 tAA8ler6WLg8wTVxHifrmhZSC5esHBmTa+S/kazLkdsDXJ/QtxvURT9WN9keR/2c8idg9
+	 kMgUv+oxk8TJJNSxo+qH/9Gnz8TvPMayYmIjqh21jgOFTwW0RdfJGRCjpw4KZFaabU6ky
+	 uHKvllLqIz4bl/2pqhBSLFso+9kw7SltiTG6+Klq+nHEnehRg+UvjfK3J64t7HGNpbg==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793888960;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:
+	 Content-Transfer-Encoding:In-Reply-To:X-AI-Review-Draft;
+	bh=A3wa5CvpyG7Bv+3nyw/J1JeS+qybhpRhQxCSuvYcfwk=;
+	b=MJJLeNM5tDIQSdbKF/NyOFBizE93BLDntCqZTW+FCsSBDWe2COYRaLkeazO7jVrgjrBv
+	 oyNT5ucAqB6XNqrRSQnoigv9mnBVzJ/sCTdRG4OwPpiGOZX95gz5+3djPtpwyCR1mfm9O
+	 ovTeHjlW5G1LkSMsTvhzKmL27LMR5xH+F4v9mUUglPUImVtisisyWh/QhZsCFVcpbszjW
+	 1pZgKPNZ5iWvExesb4yUTDYX4RdOK4oLjhKsHgnZO5jb1ovDgV3CwMPAJ9ElxzuOsHWHl
+	 7pHswUq5Igt5lkWMC8buT/mj8u+obbbdv1uubDJ96wwfMM6+r5pY/sGrcntjGBVyITw==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=E9oaO+Na;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8385B606A31B
-	for <mfd@lists.linux.dev>; Thu,  5 Nov 2026 14:28:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8385B606A31B
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CA0E606A32D;
+	Thu,  5 Nov 2026 14:29:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=cuWMMq+h
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-c49c32650adso137982966b.0
-        for <mfd@lists.linux.dev>; Thu, 05 Nov 2026 06:28:57 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1793888936; cv=none;
-        d=google.com; s=arc-20260327;
-        b=nUJ/2an6HdyCbC5bU59mWD5EsubA/vEmjToRfhsc9xwgVrJ5FBdR7tVw6W0oYGVTq3
-         oSGHbjPGU5uzMWv3qTKG3yKEVu7Qd/534ojVAE1+3yrjxOGz3TLOU7qeqkmPbe6ZRviu
-         zGiqa3NLGiqC6fK+FQdAlZh0x+NKAzFslHXGqgAuV3SoY8G4QEPQg/7RnrBYDlr0xAO4
-         WW3HCUjjcIEevEGljfQjZeNrfTMuJMnHIhFEYFn9uvJWO4ErCG/TQAmfswxSrLXMxIDy
-         HmRgIJapNnjkkAxzKXYcS30F80n6CX37Z5pDx7y8hniuP8Etar/pUv4yDKPlDptZ5CkL
-         qDug==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=jM7yD+UvZhCvYafkuTtfLIsJ/x+7XGZ5ALQNkyFmFdc=;
-        fh=sZsH7ZoJ0hC6AQDYQUlm7e/sXMvp4gYHZ7nk4IQ3Tbg=;
-        b=RIa9ZCJmjmbIt4zqf3c28Htnkzm2BaW0tGsFBB2jeGgxOdUi3vUjOfvxLvfeuuzrQH
-         nZ5ap4GKC2TVy2gwbfHNjjrZ2BoaGyDxJ7U+nZdfKK8a/iQOQl8LuVJs6Be0PBpGRMXO
-         uPPY9t8KxLX38+amRAG1W3nRCKqj+oGxwNGKNA2SZfh5MqErfeWY9CwdniCW06VQhjv2
-         rjwPuAbKsx8ixUvYqXvS9VolxtBh7mxYCkYbs2kDnCIbtv3okKbGyJzGkYIir+RGFdOV
-         gXL9CZZXUkSNxNxT5JaIX8TQtHldobQ2bmCORSW2yurTC8GfRPI6zrho2Bx8W3wAtnCS
-         g4gQ==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793888936; x=1794493736; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=jM7yD+UvZhCvYafkuTtfLIsJ/x+7XGZ5ALQNkyFmFdc=;
-        b=cuWMMq+hm7F7tWcjgdaiNdKFh6jcmOWQy3tsZUGmlTA/R7AKyJ/9CmVrJshHeKGzgl
-         AJnVlHNtlEc7eudagHvOHcSn0M+Jf3Iq++0nx1db8frROlPAZf1vLfZx32SPD5Ua3qNe
-         +vGp63afGAfd0qoii7l3WEby5sqj8nRc5mzac6E1cvvUpPAoAPfFqZR4TeE87Ejbu1wn
-         2FNJuO0J1ebkPl5K95iaBauXK9aAyUMKxQWsKkgjG2GaG2cGBu+nFzn+supT0YtnrCte
-         GyuQQ3p6MPmXvZyuEYP/oPQfpgtHrRtM6QRVn9XgT3c8yh1qnxDsVT1ksKhwk1NC5EN+
-         7/nw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793888936; x=1794493736;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=jM7yD+UvZhCvYafkuTtfLIsJ/x+7XGZ5ALQNkyFmFdc=;
-        b=Ns21C0wUuPhsiIMuFiYbuVOJU6f2goILMwaJkICWL8QTBzza7+Ub+T6ZPIVEeOuAKK
-         F7sKkUOgQRLvOphWlv/ylsk9C1fZu0lpMU7K9FOPozmC2QUKZcnJo53JV0izI/CfX/Gl
-         I0+Aqir+WFLGjLejhiRUi9PFQS1szLPz4NNtIsMOHBINNhxJJqphixBxF+ssrVe7SGSP
-         cxRhl4r6Pf9t1D4OO7JXbTXhLfaDvZTfcktcdNicXRpSB9IWuIXGs1JxkyFrea4YKRjE
-         OMlfU6RetwclWzfHRCiAM7tnIE8vw+xEcI9E+PmYyowIZkpYVPitpafvGAGfu/GHAKiW
-         ADEA==
-X-Forwarded-Encrypted: i=1; AKwUvByw6vAwGG3HsTXxXRyhbyYNSwRhrIUaEcwaKrPciFMZ3Q+Q5olc5dS2HNLGZBncYV4KymQ=@lists.linux.dev
-X-Gm-Message-State: APuU4Z9STXduThxutymUOOGdCtIyJIVZjLac/mCszstvK6dxHsN17RjM
-	9C+ylViHw14+XZYMW6WJi2KabYX2BhudjxHq4OvMJu4yaBbwEMmKrRH22MKDA6xBNmK8dXrNLs3
-	2zNuwhPP1pJtFbZvGnRc2boVqj0YXAr8=
-X-Gm-Gg: AYBFou2/YlzHfKZiU8JlQBj5Et0zZ2AZrqQGBsu16b53YGoeu5lDg5Z7D4dgd3FQ2wR
-	sRv3xvZkOoTjuq+XgpVZJzBZ4KddCgX8vojKIbgcXGJOlEZyzCTfVztY1v47qXNsVSyTBmJ8/Cl
-	/wHG/pQZvFJTwkzFbdbjcQ3eiUgxIfSKVta1KYvyvDUU5nZq+utnRN2Cs3mhPf1oUNNBquSLyFa
-	UWyWL345IHShz+ZiwOFPQ8T7WKHyheOt5yqxCaEzjNp+VKZnfqNgymAWNJBHTlA7Ca8faVZdxxd
-	P+CQCAnHU3ysyhsjxo61HEQoy6MFjsCz5uJMvxnQQSHxNHYTlAinrTVoRi1uX44ciu1ZRhGoC22
-	mCng0Q7BvnwP5eWJNwiCKfwGtAMXetnzqXpLh3vJC8Emux2dM52PoBZGm72pVk0eG9tWFMu8G9a
-	LMRNPGKfW3SGvbot7nDIYnmLfNVCHD/WybOFYGXmTV6eqcGI4X2FY=
-X-Received: by 2002:a17:906:b10f:b0:c4c:f85f:aa2b with SMTP id
- a640c23a62f3a-c4cf85fb079mr528297866b.24.1793888935580; Thu, 05 Nov 2026
- 06:28:55 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=E9oaO+Na
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3B4BF1F00A18;
+	Thu,  5 Nov 2026 14:29:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793888959;
+	bh=A3wa5CvpyG7Bv+3nyw/J1JeS+qybhpRhQxCSuvYcfwk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=E9oaO+Naww29VHVnNJYLHH2NZLzrkucxWXbicUL99iwVV2j6hEBgtf14CELtGtFVB
+	 RUXLo5DB4+hpDhTtD1BrDQNIZZC2nB19+0QArVauTW0Cp0wY9KjzL8w5snuLuSYhW1
+	 QrGiOcOJA8o+u3HmjoJtUKWg5T5VFNduYyJHdl9wQdxE3I6cxoHFGZJ9xFze2o5I+l
+	 rNQizRf4fm7Y/fbdsgab+lrhP2ZkGeHJczT6ZmDYXNLjrhrHb+XnCp65rcNhpToxdW
+	 gklch/oS040pSuB855YNqVR2DSzbsgPnJVSvQJJUhlB1zP4FMJWCt2N0Hm445XvMMb
+	 Y23nS1eLlSfVA==
+Date: Thu, 5 Nov 2026 14:29:12 +0000
+From: Lee Jones <lee@kernel.org>
+To: Thomas Perrot <thomas.perrot@bootlin.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Shawn Guo <shawnguo@kernel.org>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	=?iso-8859-1?Q?J=E9r=E9mie?= Dautheribes <jeremie.dautheribes@bootlin.com>,
+	Wim Van Sebroeck <wim@linux-watchdog.org>,
+	Guenter Roeck <linux@roeck-us.net>, Frank Li <Frank.Li@nxp.com>,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-gpio@vger.kernel.org, imx@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org,
+	linux-watchdog@vger.kernel.org,
+	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+	Miquel Raynal <miquel.raynal@bootlin.com>, mfd@lists.linux.dev
+Subject: Re: [PATCH v9 2/4] mfd: aaeon: Add SRG-IMX8P MCU driver
+Message-ID: <179370051070.793788.9316421428527145334@kernel.org>
+References: <20261029-dev-b4-aaeon-mcu-driver-v9-0-f9b6d0cc180d@bootlin.com>
+ <20261029-dev-b4-aaeon-mcu-driver-v9-2-f9b6d0cc180d@bootlin.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -105,238 +73,396 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261027115006.86032-1-clamor95@gmail.com> <179318844110.3606039.5801345229436270811@kernel.org>
- <CAPVz0n3tR8R5xe_F20kChnHHrWG40o7prwY6kCYXM-UtYPFKLQ@mail.gmail.com> <20261105140843.GK1650678@google.com>
-In-Reply-To: <20261105140843.GK1650678@google.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Thu, 5 Nov 2026 16:28:42 +0200
-X-Gm-Features: AclHuK-5D29V0k3q5Pq6uMwZ9kKLHCkv3_XM79rEU9L5CC_QQ2cj_fenaRjE_co
-Message-ID: <CAPVz0n0dqrJa5ih8pcgRpxG3e3rBrBr2AkAoNY=dwq8LJcj77w@mail.gmail.com>
-Subject: Re: [PATCH v4] leds: Add driver for MAX8907 LED cell
-To: Lee Jones <lee@kernel.org>
-Cc: Pavel Machek <pavel@kernel.org>, linux-kernel@vger.kernel.org, 
-	linux-leds@vger.kernel.org, mfd@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20261029-dev-b4-aaeon-mcu-driver-v9-2-f9b6d0cc180d@bootlin.com>
+X-AI-Review-Draft: <20261029-dev-b4-aaeon-mcu-driver-v9-2-f9b6d0cc180d@bootlin.com>
 
-=D1=87=D1=82, 5 =D0=BB=D0=B8=D1=81=D1=82. 2026=E2=80=AF=D1=80. =D0=BE 16:08=
- Lee Jones <lee@kernel.org> =D0=BF=D0=B8=D1=88=D0=B5:
+--- checkpatch.pl (2 issues) ---
+Line 301: WARNING: DT compatible string "aaeon,srg-imx8p-mcu" appears un-documented -- check ./Documentation/devicetree/bindings/
+Line 301: WARNING: DT compatible string vendor "aaeon" appears un-documented -- check ./Documentation/devicetree/bindings/vendor-prefixes.yaml
+----------------------------------
+
+On Thu, 29 Oct 2026, Thomas Perrot (Schneider Electric) wrote:
+
+> Add a driver for the Aaeon SRG-IMX8P embedded controller. This driver
+> provides the core I2C communication interface and registers child
+> devices (GPIO and watchdog controllers).
 >
-> On Wed, 04 Nov 2026, Svyatoslav Ryhel wrote:
+> The driver implements a custom regmap bus over I2C to match the MCU's
+> fixed 3-byte command format [opcode, arg, value]. Register addresses
+> are encoded as 16-bit values (opcode << 8 | arg) using the
+> AAEON_MCU_REG() macro defined in the shared header. The regmap
+> instance is shared with child drivers via dev_get_regmap(). Concurrent
+> I2C accesses from child drivers are serialized by regmap's built-in
+> locking.
 >
-> > =D1=81=D1=80, 4 =D0=BB=D0=B8=D1=81=D1=82. 2026=E2=80=AF=D1=80. =D0=BE 1=
-7:16 Lee Jones <lee@kernel.org> =D0=BF=D0=B8=D1=88=D0=B5:
-> > >
-> > > --- checkpatch.pl (1 issue) ---
-> > > Line 38: WARNING: please write a help paragraph that fully describes =
-the config symbol with at least 4 lines
-> > > ----------------------------------
-> > >
-> > > On Tue, 27 Oct 2026, Svyatoslav Ryhel wrote:
-> > >
-> > > > Add a small driver to control the LED cell provided by the MAX8907 =
-PMIC.
-> > > > The LED does not require any specific configuration and is folded i=
-nto the
-> > > > PMIC's node.
-> > > >
-> > > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > > > ---
-> > > > Changes in v2:
-> > > > - rebased so patch is now applicable to linux/next
-> > > >
-> > > > Changes in v3:
-> > > > - added check if led is off for get callback
-> > > > - added dedicated MAX8907_REG_WLED_MODE_ON mask
-> > > > - switched to devm_led_classdev_register_ext
-> > > >
-> > > > Changes in v4:
-> > > > - platform_set_drvdata dropped
-> > > > - init_data.devicename dropped
-> > > > - added MODULE_ALIAS
-> > > > ---
-> > > >  drivers/leds/Kconfig        |  7 +++
-> > > >  drivers/leds/Makefile       |  1 +
-> > > >  drivers/leds/leds-max8907.c | 90 +++++++++++++++++++++++++++++++++=
-++++
-> > > >  drivers/mfd/max8907.c       |  1 +
-> > > >  include/linux/mfd/max8907.h |  2 +-
-> > > >  5 files changed, 100 insertions(+), 1 deletion(-)
-> > > >  create mode 100644 drivers/leds/leds-max8907.c
-> > > >
-> > > > diff --git a/drivers/leds/Kconfig b/drivers/leds/Kconfig
-> > > > index 788e689fe875c..3796c562919fe 100644
-> > > > --- a/drivers/leds/Kconfig
-> > > > +++ b/drivers/leds/Kconfig
-> > > > @@ -813,6 +813,13 @@ config LEDS_MAX77705
-> > > >       help
-> > > >         LED driver for MAX77705 PMIC from Maxim Integrated.
-> > > >
-> > > > +config LEDS_MAX8907
-> > > > +     tristate "LED support for MAX8907 PMIC"
-> > > > +     depends on LEDS_CLASS && MFD_MAX8907
-> > > > +     help
-> > > > +       This option enables support for on-chip LED drivers on
-> > > > +       MAXIM MAX8907 PMIC.
-> > >
-> > > As requested on v3, please expand this help text to at least 4 lines =
-to satisfy
-> > > 'checkpatch.pl'.
-> > >
-> > > > +
-> > > >  config LEDS_MAX8997
-> > > >       tristate "LED support for MAX8997 PMIC"
-> > > >       depends on LEDS_CLASS && MFD_MAX8997
-> > > > diff --git a/drivers/leds/Makefile b/drivers/leds/Makefile
-> > > > index 3da746279bb81..24efda3fbaa44 100644
-> > > > --- a/drivers/leds/Makefile
-> > > > +++ b/drivers/leds/Makefile
-> > > > @@ -67,6 +67,7 @@ obj-$(CONFIG_LEDS_LTC3220)          +=3D leds-ltc=
-3220.o
-> > > >  obj-$(CONFIG_LEDS_MAX5970)           +=3D leds-max5970.o
-> > > >  obj-$(CONFIG_LEDS_MAX77650)          +=3D leds-max77650.o
-> > > >  obj-$(CONFIG_LEDS_MAX77705)          +=3D leds-max77705.o
-> > > > +obj-$(CONFIG_LEDS_MAX8907)           +=3D leds-max8907.o
-> > > >  obj-$(CONFIG_LEDS_MAX8997)           +=3D leds-max8997.o
-> > > >  obj-$(CONFIG_LEDS_MC13783)           +=3D leds-mc13783.o
-> > > >  obj-$(CONFIG_LEDS_MENF21BMC)         +=3D leds-menf21bmc.o
-> > > > diff --git a/drivers/leds/leds-max8907.c b/drivers/leds/leds-max890=
-7.c
-> > > > new file mode 100644
-> > > > index 0000000000000..a5c445f75d1b1
-> > > > --- /dev/null
-> > > > +++ b/drivers/leds/leds-max8907.c
-> > > > @@ -0,0 +1,90 @@
-> > > > +// SPDX-License-Identifier: GPL-2.0-only
-> > > > +
-> > > > +#include <linux/err.h>
-> > > > +#include <linux/leds.h>
-> > > > +#include <linux/mfd/max8907.h>
-> > > > +#include <linux/module.h>
-> > > > +#include <linux/platform_device.h>
-> > > > +#include <linux/property.h>
-> > > > +#include <linux/regmap.h>
-> > > > +
-> > > > +#define MAX8907_REG_WLED_MODE_ON     BIT(0)
-> > > > +
-> > > > +struct max8907_led_data {
-> > > > +     struct max8907 *max8907;
-> > >
-> > > As asked on v3, what is 'max8907' used for?
-> > >
-> > > > +     struct regmap *regmap;
-> > > > +     struct led_classdev cdev;
-> > > > +};
-> > > > +
-> > > > +static enum led_brightness max8907_led_get_brightness(struct led_c=
-lassdev *cdev)
-> > > > +{
-> > > > +     struct max8907_led_data *ddata =3D container_of(cdev, struct =
-max8907_led_data, cdev);
-> > > > +     unsigned int brightness_lvl;
-> > > > +     int ret;
-> > > > +
-> > > > +     ret =3D regmap_read(ddata->regmap, MAX8907_REG_WLED_MODE_CNTL=
-, &brightness_lvl);
-> > > > +     if (ret || !(brightness_lvl & MAX8907_REG_WLED_MODE_ON))
-> > > > +             return LED_OFF;
-> > > > +
-> > > > +     ret =3D regmap_read(ddata->regmap, MAX8907_REG_WLED_CNTL, &br=
-ightness_lvl);
-> > > > +     if (ret)
-> > > > +             return LED_OFF;
-> > > > +
-> > > > +     return brightness_lvl;
-> > > > +}
-> > > > +
-> > > > +static int max8907_led_set_brightness(struct led_classdev *cdev,
-> > > > +                                   enum led_brightness brightness)
-> > > > +{
-> > > > +     struct max8907_led_data *ddata =3D container_of(cdev, struct =
-max8907_led_data, cdev);
-> > > > +     int brightness_lvl, ret;
-> > > > +
-> > > > +     brightness_lvl =3D clamp(brightness, LED_OFF, LED_FULL);
-> > > > +
-> > > > +     if (brightness_lvl) {
-> > > > +             ret =3D regmap_write(ddata->regmap, MAX8907_REG_WLED_=
-CNTL, brightness_lvl);
-> > > > +             if (ret)
-> > > > +                     return ret;
-> > > > +     }
-> > > > +
-> > > > +     return regmap_update_bits(ddata->regmap, MAX8907_REG_WLED_MOD=
-E_CNTL,
-> > > > +                               MAX8907_REG_WLED_MODE_ON,
-> > > > +                               brightness_lvl ? MAX8907_REG_WLED_M=
-ODE_ON : 0);
-> > > > +}
-> > > > +
-> > > > +static int max8907_led_probe(struct platform_device *pdev)
-> > > > +{
-> > > > +     struct device *dev =3D &pdev->dev;
-> > > > +     struct max8907 *max8907 =3D dev_get_drvdata(dev->parent);
-> > > > +     struct led_init_data init_data =3D { };
-> > > > +     struct max8907_led_data *ddata;
-> > > > +
-> > > > +     ddata =3D devm_kzalloc(dev, sizeof(*ddata), GFP_KERNEL);
-> > > > +     if (!ddata)
-> > > > +             return -ENOMEM;
-> > > > +
-> > > > +     ddata->max8907 =3D max8907;
-> > > > +     ddata->regmap =3D max8907->regmap_gen;
-> > > > +
-> > > > +     init_data.fwnode =3D dev_fwnode(dev->parent);
-> > >
-> > > This will evaluate to 'pmic'.  The sysfs attribute will be incorrect.
-> > >
-> > > Since there is no child node, why not set 'ddata->cdev.name' directly
-> > > and use 'devm_led_classdev_register()'?
-> > >
-> >
-> > This is required to be able to reference led in the device tree. Since
-> > led node is folded into pmic's node, pmic's node is used to bind led.
+> The MCU wants a STOP between a command and its response, so they are
+> two separate transfers. Both are issued under the I2C segment lock so
+> that no other transfer on the same I2C segment can land in between.
 >
-> Right, so you need device_set_node() called in led_classdev_register_ext(=
-)
-> so fwnode_led_get() can look up the LED via the parent PMIC phandle.
+> I2C transfers use heap-allocated DMA-safe buffers rather than
+> stack-allocated ones, as required by I2C controllers that perform DMA.
 >
-> However, passing only 'init_data.fwnode =3D dev_fwnode(dev->parent)' into
-> led_compose_name() when the parent PMIC node has no 'label', 'function'
-> or 'color' properties causes it to fall through to:
+> Regmap caching is enabled (REGCACHE_MAPLE) with a volatile_reg
+> callback that marks GPIO input read registers (opcode 0x72) and the
+> watchdog status register (opcode 0x63, arg 0x02) as volatile. All
+> other registers written by the driver (GPIO direction,
+> GPO state, watchdog control) are stable and can be safely cached.
 >
->     } else if (is_of_node(fwnode)) {
->         n =3D snprintf(led_classdev_name, LED_MAX_NAME_SIZE, "%s",
->                  to_of_node(fwnode)->name);
+> Only those two kinds of registers are readable. Any other opcode is a
+> command, and the frame sent for a read is the same as the one used to
+> write it, so reading it, for instance through the regmap debugfs
+> registers file, would execute the command.
 >
-> Which registers the LED in sysfs as '/sys/class/leds/pmic' (and fails
-> with -EINVAL if 'fwnode' is NULL on non-DT platforms).
+> Co-developed-by: Jérémie Dautheribes (Schneider Electric) <jeremie.dautheribes@bootlin.com>
+> Signed-off-by: Jérémie Dautheribes (Schneider Electric) <jeremie.dautheribes@bootlin.com>
+> Signed-off-by: Thomas Perrot (Schneider Electric) <thomas.perrot@bootlin.com>
+> ---
+>  MAINTAINERS                   |   2 +
+>  drivers/mfd/Kconfig           |  11 +++
+>  drivers/mfd/Makefile          |   1 +
+>  drivers/mfd/aaeon-mcu.c       | 221 ++++++++++++++++++++++++++++++++++++++++++
+>  include/linux/mfd/aaeon-mcu.h |  40 ++++++++
+>  5 files changed, 275 insertions(+)
 >
-> To bind the parent fwnode while avoiding the node-name fallback, please
-> also populate 'devicename' and 'default_label' (similar to
-> drivers/leds/leds-tps6105x.c):
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 3f85e2a8b192..55fc12c283fa 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -192,6 +192,8 @@ M:	Thomas Perrot <thomas.perrot@bootlin.com>
+>  R:	Jérémie Dautheribes <jeremie.dautheribes@bootlin.com>
+>  S:	Maintained
+>  F:	Documentation/devicetree/bindings/mfd/aaeon,srg-imx8p-mcu.yaml
+> +F:	drivers/mfd/aaeon-mcu.c
+> +F:	include/linux/mfd/aaeon-mcu.h
 >
->     init_data.fwnode =3D dev_fwnode(dev->parent);
->     init_data.devicename =3D "max8907";
->     init_data.default_label =3D ":wled"; /* or "white:backlight" */
+>  AAEON UPBOARD FPGA MFD DRIVER
+>  M:	Thomas Richard <thomas.richard@bootlin.com>
+> diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
+> index 87ed55c155f0..72bca7026cee 100644
+> --- a/drivers/mfd/Kconfig
+> +++ b/drivers/mfd/Kconfig
+> @@ -1581,6 +1581,17 @@ config ABX500_CORE
+>  	  remain unchanged when IC changes. Binding of the functions to
+>  	  actual register access is done by the IC core driver.
+>
+> +config MFD_AAEON_MCU
+> +	tristate "Aaeon SRG-IMX8P MCU Driver"
+> +	depends on I2C
+> +	select MFD_CORE
+> +	select REGMAP
+> +	help
+> +	  Select this option to enable support for the Aaeon SRG-IMX8P
+> +	  onboard microcontroller (MCU). This driver provides the core
+> +	  functionality to communicate with the MCU over I2C. The MCU
+> +	  provides GPIO and watchdog functionality.
+> +
+>  config AB8500_CORE
+>  	bool "ST-Ericsson AB8500 Mixed Signal Power Management chip"
+>  	depends on ABX500_CORE && MFD_DB8500_PRCMU
+> diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
+> index f8101d2a9ce9..166b25638f7f 100644
+> --- a/drivers/mfd/Makefile
+> +++ b/drivers/mfd/Makefile
+> @@ -8,6 +8,7 @@ obj-$(CONFIG_MFD_88PM860X)	+= 88pm860x.o
+>  obj-$(CONFIG_MFD_88PM800)	+= 88pm800.o 88pm80x.o
+>  obj-$(CONFIG_MFD_88PM805)	+= 88pm805.o 88pm80x.o
+>  obj-$(CONFIG_MFD_88PM886_PMIC)	+= 88pm886.o
+> +obj-$(CONFIG_MFD_AAEON_MCU)	+= aaeon-mcu.o
+>  obj-$(CONFIG_MFD_ACT8945A)	+= act8945a.o
+>  obj-$(CONFIG_MFD_SM501)		+= sm501.o
+>  obj-$(CONFIG_ARCH_BCM2835)	+= bcm2835-pm.o
+> diff --git a/drivers/mfd/aaeon-mcu.c b/drivers/mfd/aaeon-mcu.c
+> new file mode 100644
+> index 000000000000..e7470023265d
+> --- /dev/null
+> +++ b/drivers/mfd/aaeon-mcu.c
+> @@ -0,0 +1,221 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Aaeon MCU driver
+> + *
+> + * Copyright (C) 2026 Bootlin
+> + * Author: Jérémie Dautheribes <jeremie.dautheribes@bootlin.com>
+> + * Author: Thomas Perrot <thomas.perrot@bootlin.com>
+> + */
+> +
+> +#include <linux/err.h>
+> +#include <linux/i2c.h>
+> +#include <linux/mfd/aaeon-mcu.h>
+> +#include <linux/mfd/core.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/regmap.h>
+> +#include <linux/slab.h>
+> +
+> +struct aaeon_mcu {
+> +	struct i2c_client *client;
+> +	u8 *cmd;      /* DMA-safe 3-byte write buffer [opcode, arg, value] */
+> +	u8 *response; /* DMA-safe 1-byte read buffer for MCU acknowledgment */
+> +};
+> +
+> +static const struct mfd_cell aaeon_mcu_devs[] = {
+> +	MFD_CELL_BASIC("aaeon-mcu-wdt", NULL, NULL, 0, 0),
+> +	MFD_CELL_BASIC("aaeon-mcu-gpio", NULL, NULL, 0, 0),
+> +};
+> +
+> +/* Number of bytes in a MCU command: [opcode, arg, value] */
+> +#define AAEON_MCU_CMD_LEN      3
+> +
+> +/*
+> + * Custom regmap bus for the Aaeon MCU I2C protocol.
+> + *
+> + * The MCU uses a fixed 3-byte command format [opcode, arg, value] followed
+> + * by a 1-byte response. It requires a STOP condition between the command
+> + * write and the response read, so two separate transfers are issued. The
+> + * I2C segment lock is held across both so that no other transfer on the
+> + * same I2C segment can land between the command and its response. The
+> + * regmap lock serialises concurrent accesses from the GPIO and watchdog
+> + * child drivers.
+> + *
+> + * Register addresses are encoded as a 16-bit big-endian value where the
+> + * high byte is the opcode and the low byte is the argument, matching the
+> + * wire layout produced by regmap for reg_bits=16.
+> + */
+> +
+> +/*
+> + * Send the command held in mcu->cmd and read the 1-byte response into
+> + * mcu->response. Both buffers are heap-allocated and thus DMA-safe.
+> + */
+> +static int aaeon_mcu_xfer(struct aaeon_mcu *mcu)
+> +{
+> +	struct i2c_adapter *adap = mcu->client->adapter;
+> +	struct i2c_msg msg = {
+> +		.addr	= mcu->client->addr,
+> +		.flags	= I2C_M_DMA_SAFE,
+> +		.buf	= mcu->cmd,
+> +		.len	= AAEON_MCU_CMD_LEN,
+> +	};
+> +	int ret;
+> +
+> +	i2c_lock_bus(adap, I2C_LOCK_SEGMENT);
+> +
+> +	ret = __i2c_transfer(adap, &msg, 1);
+> +	if (ret == 1) {
+> +		msg.flags = I2C_M_RD | I2C_M_DMA_SAFE;
+> +		msg.buf   = mcu->response;
+> +		msg.len   = 1;
+> +		ret = __i2c_transfer(adap, &msg, 1);
+> +	}
+> +
+> +	i2c_unlock_bus(adap, I2C_LOCK_SEGMENT);
+> +
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	return ret == 1 ? 0 : -EIO;
+> +}
+> +
+> +static int aaeon_mcu_regmap_write(void *context, const void *data, size_t count)
+> +{
+> +	struct aaeon_mcu *mcu = context;
+> +
+> +	/*
+> +	 * use_single_write guarantees one register per call: a 2-byte
+> +	 * address followed by a 1-byte value.
+> +	 */
+> +	if (count != AAEON_MCU_CMD_LEN)
+> +		return -EINVAL;
+> +
+> +	memcpy(mcu->cmd, data, count);
+> +
+> +	/* The MCU always sends a response byte after each command; discard it. */
+> +	return aaeon_mcu_xfer(mcu);
+> +}
+> +
+> +static int aaeon_mcu_regmap_read(void *context, const void *reg_buf,
+> +				 size_t reg_size, void *val_buf, size_t val_size)
+> +{
+> +	struct aaeon_mcu *mcu = context;
+> +	int ret;
+> +
+> +	/*
+> +	 * reg_buf holds the 2-byte big-endian register address [opcode, arg].
+> +	 * Append a trailing 0x00 to form the full 3-byte MCU command.
+> +	 */
+
+What about 'reg_size != 2 || val_size != 1' here, for the same reason as
+the checks in *_write()?
+
+> +	mcu->cmd[0] = ((u8 *)reg_buf)[0];
+> +	mcu->cmd[1] = ((u8 *)reg_buf)[1];
+> +	mcu->cmd[2] = 0x00;
+> +
+> +	ret = aaeon_mcu_xfer(mcu);
+> +	if (ret)
+> +		return ret;
+> +
+> +	/*
+> +	 * val_buf is owned by the regmap caller and is not necessarily
+> +	 * DMA-safe, so go through the driver's response buffer.
+> +	 * use_single_read guarantees val_size == 1.
+> +	 */
+> +	*(u8 *)val_buf = *mcu->response;
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct regmap_bus aaeon_mcu_regmap_bus = {
+> +	.write = aaeon_mcu_regmap_write,
+> +	.read  = aaeon_mcu_regmap_read,
+> +};
+> +
+> +static bool aaeon_mcu_volatile_reg(struct device *dev, unsigned int reg)
+> +{
+> +	/*
+> +	 * GPIO input registers are driven by external signals and can change
+> +	 * at any time without CPU involvement, always read from hardware.
+> +	 *
+> +	 * The watchdog status register reflects hardware state and can change
+> +	 * autonomously.
+> +	 *
+> +	 * All other registers are written by the driver and their values are
+> +	 * stable, so they can be safely cached.
+> +	 */
+> +	if ((reg >> 8) == AAEON_MCU_READ_GPIO_OPCODE)
+> +		return true;
+> +	if (reg == AAEON_MCU_REG(AAEON_MCU_CONTROL_WDT_OPCODE, 0x02))
+
+No magic numbers please.
+
+> +		return true;
+> +	return false;
+> +}
+> +
+> +static bool aaeon_mcu_readable_reg(struct device *dev, unsigned int reg)
+> +{
+> +	/*
+> +	 * Every opcode but the GPIO input read and the watchdog status is a
+> +	 * command: the frame sent for a read is identical to the one used to
+> +	 * write it, so reading such a register would execute the command.
+> +	 * Only the registers reflecting hardware state may be read.
+> +	 */
+> +	return aaeon_mcu_volatile_reg(dev, reg);
+> +}
+> +
+> +static const struct regmap_config aaeon_mcu_regmap_config = {
+> +	.reg_bits          = 16,
+> +	.val_bits          = 8,
+> +	.reg_format_endian = REGMAP_ENDIAN_BIG,
+> +	.max_register      = AAEON_MCU_MAX_REGISTER,
+> +	.readable_reg      = aaeon_mcu_readable_reg,
+> +	.volatile_reg      = aaeon_mcu_volatile_reg,
+> +	.cache_type        = REGCACHE_MAPLE,
+> +	.use_single_write  = true,
+> +	.use_single_read   = true,
+> +};
+> +
+> +static int aaeon_mcu_probe(struct i2c_client *client)
+> +{
+> +	struct aaeon_mcu *ddata;
+> +	struct regmap *regmap;
+> +
+> +	ddata = devm_kzalloc(&client->dev, sizeof(*ddata), GFP_KERNEL);
+> +	if (!ddata)
+> +		return -ENOMEM;
+> +
+> +	ddata->client = client;
+> +
+> +	ddata->cmd = devm_kcalloc(&client->dev, AAEON_MCU_CMD_LEN, sizeof(*ddata->cmd),
+> +				  GFP_KERNEL);
+> +	if (!ddata->cmd)
+> +		return -ENOMEM;
+> +
+> +	ddata->response = devm_kzalloc(&client->dev, sizeof(*ddata->response), GFP_KERNEL);
+> +	if (!ddata->response)
+> +		return -ENOMEM;
+
+Why do 'cmd' and 'response' need two separate heap allocations?  Since
+'struct aaeon_mcu' is allocated via 'devm_kzalloc()' and Regmap
+serialises all accesses, could you just embed fixed-size arrays directly
+inside 'struct aaeon_mcu' and drop these two extra 'devm_k*alloc()'s?
+
+> +	regmap = devm_regmap_init(&client->dev, &aaeon_mcu_regmap_bus,
+> +				  ddata, &aaeon_mcu_regmap_config);
+> +	if (IS_ERR(regmap))
+> +		return dev_err_probe(&client->dev, PTR_ERR(regmap),
+> +				     "failed to initialize regmap\n");
+> +
+> +	return devm_mfd_add_devices(&client->dev, PLATFORM_DEVID_AUTO,
+> +				    aaeon_mcu_devs, ARRAY_SIZE(aaeon_mcu_devs),
+> +				    NULL, 0, NULL);
+> +}
+> +
+> +static const struct of_device_id aaeon_mcu_of_match[] = {
+> +	{ .compatible = "aaeon,srg-imx8p-mcu" },
+> +	{},
+> +};
+> +MODULE_DEVICE_TABLE(of, aaeon_mcu_of_match);
+> +
+> +static struct i2c_driver aaeon_mcu_driver = {
+> +	.driver = {
+> +		.name = "aaeon-mcu",
+> +		.of_match_table = aaeon_mcu_of_match,
+> +	},
+> +	.probe = aaeon_mcu_probe,
+> +};
+> +module_i2c_driver(aaeon_mcu_driver);
+> +
+> +MODULE_DESCRIPTION("Aaeon MCU Driver");
+> +MODULE_AUTHOR("Jérémie Dautheribes <jeremie.dautheribes@bootlin.com>");
+> +MODULE_LICENSE("GPL");
+> diff --git a/include/linux/mfd/aaeon-mcu.h b/include/linux/mfd/aaeon-mcu.h
+> new file mode 100644
+> index 000000000000..3a1aeec85d60
+> --- /dev/null
+> +++ b/include/linux/mfd/aaeon-mcu.h
+> @@ -0,0 +1,40 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +/*
+> + * Aaeon MCU driver definitions
+> + *
+> + * Copyright (C) 2026 Bootlin
+> + * Author: Jérémie Dautheribes <jeremie.dautheribes@bootlin.com>
+> + * Author: Thomas Perrot <thomas.perrot@bootlin.com>
+> + */
+> +
+> +#ifndef __LINUX_MFD_AAEON_MCU_H
+> +#define __LINUX_MFD_AAEON_MCU_H
+> +
+> +/*
+> + * MCU register address: the high byte is the command opcode, the low
+> + * byte is the argument.  This matches the 3-byte wire format
+> + * [opcode, arg, value] used by the MCU I2C protocol.
+> + */
+> +#define AAEON_MCU_REG(op, arg)		(((op) << 8) | (arg))
+> +
+> +/*
+> + * Opcode for GPIO input reads. These registers are volatile, their values
+> + * are driven by external signals and can change without CPU involvement.
+> + * Used by the MFD driver's volatile_reg callback to bypass the regmap cache.
+> + */
+> +#define AAEON_MCU_READ_GPIO_OPCODE	0x72
+> +
+> +/*
+> + * Opcode for watchdog control and status commands.
+> + * The status register (arg=0x02) reflects hardware state and is volatile.
+> + */
+> +#define AAEON_MCU_CONTROL_WDT_OPCODE	0x63
+> +
+> +/*
+> + * Highest register address in the MCU register map.
+> + * The WRITE_GPIO opcode (0x77) with the highest GPIO argument (0x0B = 11,
+> + * i.e. MAX_GPIOS - 1) produces the largest encoded address.
+> + */
+> +#define AAEON_MCU_MAX_REGISTER		AAEON_MCU_REG(0x77, 0x0B)
+> +
+> +#endif /* __LINUX_MFD_AAEON_MCU_H */
+>
+> -- 
+> 2.56.0
 >
 
-Thank you for your suggestion. I was tinkering a bit and got to
-conclusion that adding dedicated LED node will be beneficial.
-
-My idea is to add led node without compatible (since it is redundant,
-pmic has only a single led anyway).
-
-Driver will check for this node and return -ENODEV if node is not present.
-
-Then I will use devm_led_classdev_register_ext but will pass led node
-and then most of your concerns should be addressed. What do you think
-about this?
-
-As a prerequisite, this change would require
-https://lore.kernel.org/lkml/20261027114634.79706-1-clamor95@gmail.com/
-
-I have answered your concerns regarding Sashiko finding.
-
-> --
-> Lee Jones
+-- 
+Lee Jones
