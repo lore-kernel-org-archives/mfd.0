@@ -1,102 +1,89 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.52
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.214.177
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793890042;
-	b=RgLfB1ePzwHld5AwNMfCDvQHknMdAJKcwe95M8PGin2Ui7dyAaI+NsJKtK4AY3kx7YmL
-	 IGMgNgllbrtphOBd7HRfUJccMg/ngODd153n1K6NErBUay0E9Yy61KjEAl0y+fByQagoC
-	 S4cXzwaVuwfoHWilnxJuwQtpox+xIpxJqyZrNJ2Hs4SPltUiRT3JkOT5tq/G8s36O4CtA
-	 cKevn3FDwRlyEB+yUr29Ui2ePL2u8EfoBJey+qRQUNRr8Ulnmp/jIuozoQIAe1C9fRWiQ
-	 8UUJOrzMhIpY+4Fqz6KvDuRi3euEFhEGbIe5x2zNkFL2GRBb5e+1REc1X1CVKfO8LNg==
+	t=1793896070;
+	b=sQGapmfphknEqtxQWLcSsiXLK9TnHSm5W31ueYvUsK/Ibv1+BGAoKoWPtSMicKl1RRs1
+	 1ncaTjHR89QI+4l2dBiLShWr2ulS+qP2MXTX7AV9Qh/is+9OQQynphrwhmtwjVOulRRT1
+	 3syesAOSFANZ1f1paGMJ53GgiOSyijZLxdq6apXi+ptWTzH+RDOqI0uDSZT+76/ybEXpv
+	 /frSPofKliHRkFAZDBSL1vEMEyA+XRWZ3FCzX0xsDTcFIVqs/OoSylyO8pnwMO8ltrwnZ
+	 6pN1S8mZB/bcOw1bwsAptqoF6rYqZSYewdWbP5tfNapQU2vLAOqjf0U2qmRGLdXb5pg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793890042;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793896070;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To;
-	bh=jhh3rOfmt9+8e7tXOxSG5bPIHbOH/EzZ/+Q3I0eOuA4=;
-	b=yWOM2zRfGiscpfXIUpO7qQSD8QsXEU2i+X8SSklbxSyFjhZ1QCS36TmNJ7tGHXojZ8UG
-	 39S8OZ4R2jRCEE4RIU9OI9bF7ktD7BBDeoLLxUvNCicqqyOjAs40xA1J22GjLJ0y0vLGP
-	 x3B+DPf5i7Qm4je3sHbwhlt9aQVwZotHUXkpubDAjIA/EHxDB5PG7+c4tHkoXEBLTDc2k
-	 HCdKZ7GX7zO5SdxDFS1IoD8Y7WJ2pQR7Os9XC+E4OV8lM06rb83NBIz8c7sPgJqlNoHP3
-	 A4OmJZUht9lMrFb8UQTNxIIlXPrz6cyNI541Xk4I4Na0YhCReX5rb66zvFttVZod8Nw==
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
+	bh=LU+RiqQFh2f5Ka89JSx/cG6xgtNv7ffTWhetPZC5TwM=;
+	b=TsX4YvRO1fc6NBdeDjAYzeiP1ou67mE0ca97QqfY03M8Bg74zb1OasCrTLSlyhbiDtfu
+	 1nNo71TMq+xx1TbZgvrmLaXeN9+LCvt74E0KdHtw3EMXI1+AEKlZeaBwAaYLPjMfBx3Uv
+	 LA3UX2ZcLsxA473OkScn+7LTc/6t75vBWdIu/khcdovqPxlgEYr5ueLZ6O8C9pU+zLU1R
+	 ThKm4+6zc3boZWpg+Qy3iO12fKS+ux5H0NwDSfemeKcalD+wrxh7+8AGNVN+FtnmW0VAV
+	 bL4z2p2GDOy2aiIMX9ZPja8qugl6M0t3OGzLCoy9mnkOIdBXpNO6G1PIHMmx2tBVBzA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=baylibre.com;
-	spf=pass smtp.mailfrom=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=kgXO7R8G;
-	arc=none smtp.remote-ip=209.85.128.52
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qXayIAXI;
+	arc=none smtp.remote-ip=209.85.214.177
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03954606A32F
-	for <mfd@lists.linux.dev>; Thu,  5 Nov 2026 14:47:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 03954606A32F
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 198B1606A328
+	for <mfd@lists.linux.dev>; Thu,  5 Nov 2026 16:27:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 198B1606A328
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=kgXO7R8G
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4a208d93758so22658365e9.3
-        for <mfd@lists.linux.dev>; Thu, 05 Nov 2026 06:47:20 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qXayIAXI
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-2ed1f1a7695so6201495ad.2
+        for <mfd@lists.linux.dev>; Thu, 05 Nov 2026 08:27:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1793890039; x=1794494839; darn=lists.linux.dev;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=jhh3rOfmt9+8e7tXOxSG5bPIHbOH/EzZ/+Q3I0eOuA4=;
-        b=kgXO7R8GvadB9wEx5pbQN3383QdSK1gvIsGfparOEebuWfiY/sHX6REKmNqJrc0Qlk
-         spZuZqDuokk8RNE93CkqkottUhzobxtL4s2ojMtv1YBHfHEUCCTDc7k6EEP1tmlfp0uO
-         bXi8MPug/qRA7JPE89MHlcw8GPG4cTyLJqYORzsvG3cWJSrvHBbDtCMhKVlrth7NZCae
-         XNZJ5/v7OAbINi4Ul8elTnmjuy6MwNhRbxyH/BS1/PM5ChWthM0Uk0WeWlJ+fEDPeRrd
-         owErtuelGDA9YxgoLs3myaQM3RT5pkGS+APyIGSduzSAoSExAE9fjG/hIiX6Q2a/hGnL
-         lZJA==
+        d=gmail.com; s=20260707; t=1793896069; x=1794500869; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=LU+RiqQFh2f5Ka89JSx/cG6xgtNv7ffTWhetPZC5TwM=;
+        b=qXayIAXIyTlDykBFvU9GDZJ2BNrzO93YhxUhWi1kbvsX3NKT48nvunZ89JHRGJMAqR
+         aP/WmjvWF42oJDVkEQ68EucoTlHDcQRgBNCY156VyKY6aKgzoDmH4nA8Kq6gSGBTtuVk
+         DyCKarfAoVdVe4tZevlogrPCKNjyzwV4vBUxYQXGfbWslNFlvsBTXD6/jelPay4dqlpt
+         G1MAZyleIqzI7Ghwg2aK7ZSjmTYCPN7hxSas0PFUVTWDsI2gmRoGMrLukd0MCVusx3Ta
+         xJqk5dGc7dRgWJK7W2lAvb7Arocae7n/ZSM/cOO06Vnf+OLGT+QXHGutLPOVEIgg9QZc
+         3Rag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793890039; x=1794494839;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=jhh3rOfmt9+8e7tXOxSG5bPIHbOH/EzZ/+Q3I0eOuA4=;
-        b=FydtK5tSjWN2142Cq9WnWp4VycaC7ph5yOWM3IXwrERK7adDnD1nHgvbMOWIvdLaMh
-         FNrNaVlUcVwBpds7MP4z1lEe/mpSLzyuqsHSeuNamekqiAfduS53XrPUCefOOBBURKhb
-         AESdW1UDGHsWRs6xnkVFzC4ulleVflRQNuqOH+3OVCLjC74QfZfOElUfCVnS0Z2O5TuE
-         KTGKQqAfPs5Nd4HusoPbNBGxGSQlka35qCvoo1IvqVAlb65LEXv3Lnvsw/SiPsMNuJXK
-         SZtLZtQuo63HqB7PfN2bLQS5ck+spnMy9NDQb+08/74zx52dGNswMOK74UtCcV2D/vxl
-         CS1A==
-X-Forwarded-Encrypted: i=1; AKwUvBwymxYHyCCDCvRoHHqFKAWLTU53dtQshd2U62ct+WmQl4ceyXqOPdrYohzg+eTPg/P/7rA=@lists.linux.dev
-X-Gm-Message-State: APuU4Z/+MDlIY3gFFOmy5UbhL8Vh9Yda9zus6hlYd4sEukhwlgX+9NWD
-	+uMH6U6vjp7CghWcBHW/G2GIJKI8Zoki6P5Vr1I805yFmoqYNEWBBNzg3CteHWCEGDU=
-X-Gm-Gg: AYBFou0qLb1TvbJQvETAyhob+Jo7LX7zxYM8qvCEZRIPuuRtp2kYnxVfKriCApFtB7K
-	ZOAHsx0F8kU4h6kcEqqMEc9PCppciRA/H20yFFkCVn4zmxdVP4/t3bAKwE4JRO9IRVthWvyPJoz
-	sgHrJL63QqYiwALmUN4I7hFRZTclQwgObehbiQnud2w5zSeF1U6NZ6/VfIko0YsMR0J6TSQVh83
-	+XF8a1h29riS3d5Gl3UfjzLmxScrQOiIJ5DgXBsvc+n78yNKpXOUACVp4h9JIepytUXQLBdvm53
-	sZUALr5+mmZzNuxotYhnLEnymPlVXeOTEpuVJ/nnX4msCy1EZ7Dd6USKetCWmJ6CcfmsplzQZrp
-	gfZwhLyEM4UZLbDsBSpIBe9O6SjcNms9kD+HTmlWvKo0mrxdZ+0ka/0i66izvVJpodceNKzJLuh
-	3K76XFbqsycGD17Hbz4m6yx5hEnJ7Jp4tIChNcczbzkvEiulYwwBNMGhukT0NRZEthe0VjkJgeJ
-	gTqB9bb01RI9MDzgelVi2hjHFaWKpFk2vvrBo+YTMLk08f4ZDPWUfZeUGVMuuCjLGJfHP6/ANA7
-	2VxyTf+DpTp4nuCRtBQ/4vJtTePOZQ8r1VkYBDQpmfFjT6FsU+gkQ9o=
-X-Received: by 2002:a05:600c:3556:b0:4a1:c6fd:4db0 with SMTP id 5b1f17b1804b1-4ac187a80b4mr460893955e9.19.1793890039475;
-        Thu, 05 Nov 2026 06:47:19 -0800 (PST)
-Received: from localhost (p50915710.dip0.t-ipconnect.de. [80.145.87.16])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4b56eb4da1esm115774655e9.6.2026.11.05.06.47.13
+        d=1e100.net; s=20260707; t=1793896069; x=1794500869;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=LU+RiqQFh2f5Ka89JSx/cG6xgtNv7ffTWhetPZC5TwM=;
+        b=q/buwc9VnKBwtD1F+tOTdyEvePc/aSnn3CE3PMl5d3ZLF0xJbosagPNhycYNfc/O6m
+         GOreyQMCdzdeqsPltak7k4HI8kdzPBXPYpCvfCZd5M3aHdD/L/n7DR/NxO9h9qrlbtiM
+         zr7dbLHyGerfWvO47hKVzSJjl+H7EwHazrtHeSd1f53s52YK3tOaVL7nTBLoC/HOwWI8
+         KPAlk0hYn/Xoq3i0k/mgZTPsdu3FUp3Y47t54pFtoCua4F9p6c/Utlhlb04Q9N+DFziO
+         qqQ/iEh28xsPcr1+R/QpHy2NtAuJAxg+tLCdFAA3nHWFVTzjFHqayVu7EIvtpXhmu8/f
+         FitA==
+X-Gm-Message-State: APuU4Z9W49LKBX+b9BBktHPaoJm9FhkCzpiSshehXt9uchgVOROd23tR
+	V3uItQfTxZRfUSpBYIH628ERmaP0l58IBETZ8TNLwoBBg15c2WniVKw7
+X-Gm-Gg: AYBFou319YOK7/DHhuwYXJbpZILbcILTu1nDQ+5dmyM4oSyoejqPjFIqnKyel/qf2oL
+	yAqiyywD+OU2CaOUi+a9wjoISjXIElHkDGpNcgb+7f6Puq3Ytv9zcsGl4/nUIMYsF/wqTke3EOu
+	ytETFR2jyhHTZof6nQZ2lTvdaE6Z8GXaXnHNYBZ23cjvLA/fvOvdF6wk8anpvoiRBJHFTrgRl3b
+	FqXYYoXvPjFA5K6AhRt8nOWYwCa2aV5EnK1YDxFdYRmt2zKqff7Hmruw2sFs3sZkQIsonk2ZICJ
+	B1GN24xEpbo5R9EBkqOcBUYNFDC7ewOCwtMKBDxCTOyEIeEs7dYN5usWHrTZIOu4/oqhiMqxkxT
+	ISti4N3cLEGS6CH4T8yyW7kKQo4JzrknyqmmHAMsXfVWKjR5LTkGkIvEbZiluX3z6Ajf85uBXTj
+	ff0q8pE3JgUn+OKOkq3+1OALH6B3qXgWXBsfBVM4ZTtdUZ1sbtC2n+CdrFtMAvp4813JXtpK2tp
+	epL0CQ2B82PZ1TZsDa0ZFv30+jhMAtCTpqE3kIOtWRPMMytftH87/UDPZjL5QZaMGYL+AqQ1VbZ
+	tjjuouGnonY9nr9KAfSFaAXpVHPQVO7Ik0kJxBzBquUy/fh34g==
+X-Received: by 2002:a17:903:1af0:b0:2e9:52dc:4c10 with SMTP id d9443c01a7336-2ed40989b5cmr1416925ad.18.1793896069261;
+        Thu, 05 Nov 2026 08:27:49 -0800 (PST)
+Received: from hj.. ([163.239.22.29])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ed08fe463fsm19859075ad.24.2026.11.05.08.27.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Nov 2026 06:47:18 -0800 (PST)
-Date: Thu, 5 Nov 2026 15:42:56 +0100
-From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
-To: Linus Walleij <linusw@kernel.org>
-Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	William Zhang <william.zhang@broadcom.com>, Anand Gore <anand.gore@broadcom.com>, 
-	Kursad Oney <kursad.oney@broadcom.com>, Florian Fainelli <florian.fainelli@broadcom.com>, 
-	=?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
-	Guenter Roeck <linux@roeck-us.net>, Philipp Zabel <p.zabel@pengutronix.de>, 
-	Jonathan Corbet <corbet@lwn.net>, Randy Dunlap <rdunlap@infradead.org>, 
-	Benjamin Larsson <benjamin.larsson@genexis.eu>, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-clk@vger.kernel.org, linux-hwmon@vger.kernel.org
-Subject: Re: [PATCH v2 3/7] mfd: Add a shared BCMBCA PMC3 PMB transport
-Message-ID: <auyL6UF8WWwXsXrS@monoceros>
-References: <20261101-xg6846b-bcmbca-xrdp-reset-v2-0-455fe9eed5ee@kernel.org>
- <20261101-xg6846b-bcmbca-xrdp-reset-v2-3-455fe9eed5ee@kernel.org>
+        Thu, 05 Nov 2026 08:27:48 -0800 (PST)
+From: hyunjungg <hj351016@gmail.com>
+To: Lee Jones <lee@kernel.org>
+Cc: mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	Hyunjung Ko <hj351016@gmail.com>
+Subject: [PATCH] mfd: si476x-i2c: cancel RDS drainer work before freeing RDS FIFO
+Date: Fri,  6 Nov 2026 01:27:22 +0900
+Message-ID: <20261105162722.1688960-1-hj351016@gmail.com>
+X-Mailer: git-send-email 2.43.0
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -106,50 +93,64 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="mag5oduzqhp4hkyd"
-Content-Disposition: inline
-In-Reply-To: <20261101-xg6846b-bcmbca-xrdp-reset-v2-3-455fe9eed5ee@kernel.org>
+Content-Transfer-Encoding: 8bit
 
+From: Hyunjung Ko <hj351016@gmail.com>
 
---mag5oduzqhp4hkyd
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Subject: Re: [PATCH v2 3/7] mfd: Add a shared BCMBCA PMC3 PMB transport
-MIME-Version: 1.0
+The RDS FIFO drainer work (core->rds_fifo_drainer) is scheduled from the
+interrupt dispatcher si476x_core_get_and_signal_status() whenever an
+SI476X_FM_RDS_INT interrupt is seen:
 
-Hello Linus,
+	if (status & SI476X_FM_RDS_INT)
+		si476x_core_start_rds_drainer_once(core);
 
-On Sun, Nov 01, 2026 at 11:14:36PM +0100, Linus Walleij wrote:
-> +#include <linux/mod_devicetable.h>
-> [...]
-> +#include <linux/platform_device.h>
+si476x_core_start_rds_drainer_once() runs the work on the shared system
+workqueue via schedule_work(&core->rds_fifo_drainer). The work handler
+si476x_core_drain_rds_fifo() dereferences @core and reads from
+core->rds_fifo.
 
-Please don't include <linux/mod_devicetable.h>.
-<linux/platform_device.h> already provides of_device_id. Alternatively
-if you insist on full iwyu, include <linux/device-id/of.h> instead.
+si476x_core_remove() does not cancel this work. It disables the interrupt
+(or, in polling mode, cancels only the sibling core->status_monitor
+delayed work) and then frees the RDS FIFO:
 
-<linux/mod_devicetable.h> pulls in many definitions that are unused in
-this driver and thus introduces unneeded build dependencies.
+	if (client->irq)
+		disable_irq(client->irq);
+	else
+		cancel_delayed_work_sync(&core->status_monitor);
 
-The same applies to several other patches in this series.
+	kfifo_free(&core->rds_fifo);
 
-Best regards
-Uwe
+disable_irq() waits for the interrupt handler to finish but does not flush
+or cancel work that the handler has already queued. A drainer work item
+that was scheduled just before (or is still running at) remove time can
+therefore run after kfifo_free() and after the devm-allocated @core itself
+is freed, dereferencing freed memory and operating on a freed kfifo
+(use-after-free). The sibling status_monitor work is drained on teardown
+but this one is not.
 
---mag5oduzqhp4hkyd
-Content-Type: application/pgp-signature; name="signature.asc"
+Drain the RDS drainer work before freeing the FIFO (and before the
+devm-managed @core is released) to close the window.
 
------BEGIN PGP SIGNATURE-----
+Found by code review; not runtime-reproduced (requires si476x AM/FM radio
+hardware and an RDS interrupt racing device removal).
 
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmrsle0ACgkQj4D7WH0S
-/k4ILwgAu4/aIJ4jmqqXgp8ctE1FUWAaormLaedGkha0tPWWUWZFCWXzzflrAPQp
-x3SQdXc7pbe9QPylO/FE1FtFum1V1mELFB8lRrsWaexQxDdOJtfgg9sa2EtNyzON
-d0vLNNlqRg+eDysFNiyOOcwYa8AN9IWbE+14HBuzIKAdtfixCwirKoJ07ZKtQEsb
-FghiifffoIz93iEIJWklhWkMmMWHCyo7KwUjlW+YCncCdVnLfqR8fbdBo+58IcXx
-2dgAHS38lq0GpaZqg7vx8x/QrRgOxOqj6KgK724ffND0DJzxlFGTTLCkDD4AgELB
-fCGGyZ3gyhvkLj7YEXBO+Gb9upim6w==
-=fVHs
------END PGP SIGNATURE-----
+Signed-off-by: Hyunjung Ko <hj351016@gmail.com>
+---
+ drivers/mfd/si476x-i2c.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
---mag5oduzqhp4hkyd--
+diff --git a/drivers/mfd/si476x-i2c.c b/drivers/mfd/si476x-i2c.c
+index 0000000..1111111 100644
+--- a/drivers/mfd/si476x-i2c.c
++++ b/drivers/mfd/si476x-i2c.c
+@@ -831,6 +831,8 @@ static void si476x_core_remove(struct i2c_client *client)
+ 	if (client->irq)
+ 		disable_irq(client->irq);
+ 	else
+ 		cancel_delayed_work_sync(&core->status_monitor);
+
++	cancel_work_sync(&core->rds_fifo_drainer);
++
+ 	kfifo_free(&core->rds_fifo);
+ }
+
