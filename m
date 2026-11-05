@@ -1,106 +1,45 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.51
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793841346;
-	b=tqzlhazmOaNZl9RfPJm+vG/WWvhDm0Ub8MB/juBoOUR2J/3O8/fcjB2v1Cia+M3y1XwF
-	 J51KAr/qwEVqVYhManix0JHIr0DTQ+2m6G8eNPsJCYm5PQkWO2YJ1CdddpjbIu+U1SQNQ
-	 cVBU6g8ZFOY8oHHRCahlg2za9++RRFWbm+DsLPragt0EMSyjtCDrhcBj3iA8cs5BDr/CI
-	 hQ5hdg8lmsso7tLbKTt+fls/AT/niDu/PbrWlOB4xK0DSBJpR/L7ujL9kw0rCJl+Y46Kx
-	 iDrgMULap/+7Tx4Ox6EwPmybTGmRh2GgEN1mqIbsz5Im6x24GVKbhqss/ltYGpOV3ag==
+	t=1793841552;
+	b=RRNo8P7LAc1QzZroJBAkEuMdUHV1P8+32h5C0rDZXJH+Bbmq6lQcEdWyZ47zwtjEJJRU
+	 cMbs8tvQmGb+/H6jrr5swva18m81T3HiBBuo8GvcjIbGHyjgFRRY5gCbzNYi3he7xeI3k
+	 Gg2/vJdb2b7tkIFdcJGq3mMlR79n3dvSHnoT3NNBGEc/T1CsAbtLCZ601Y7lG3zjSka8i
+	 If0An+b+RyekYUZ42BQXQ4fPnzk43w5TVYfjArWeN1C4eKlT0A1Ll+QBI587qxMDxMZ4N
+	 xYZ7VGfK7gaoJZ0Is4YX6pe3Oq6C4xDSbtSfx2d3JwQNQCLTbjuhu3GHk6arri+Dryg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793841346;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Date:Message-ID:From:To:Cc:Subject:In-Reply-To:References:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Content-Disposition;
-	bh=hofK0JryGgKL/fZhmAQm61x9/fz9wA6S77HE9ruycGk=;
-	b=y9VO0OeAjNJdEuMn2/2L9lsOOHnX802uUAzxy6zzECgAOnKpHoL7rbbp7UsZqH9E2OGJ
-	 I6qBYE7shse05Uvp2Sll6PX3F8BMQFNcm3plW9iI4VXpsUj/T5nilJUA4avcUaLqqAnIA
-	 xeP6aUr8PUP6jEy3LAQgyJEVpyAybiCEZUbXoDosYFxp1OaShzpWG2wzN9xT2GYsZCmxY
-	 CXYwtVhaGszempjBlbpbZNIjgjFqvtGdJ3ZA8E3ZjakH64ufdXfIoJOB5ujv2w5a3Kzel
-	 1Uhh9NAiRtwx02XssTVx9FiPCdjU18kb7TYYiZoDFaqRtX9NNZnhVVZTbe0DH3eLYFA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793841552;
+	h=Received:DKIM-Signature:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
+	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=OkA2J4cWWfdO1QYKzzP5dgQJ3QPDgjBDtOkiI8OGYYs=;
+	b=UnT+RcjjDwwEGDauEEkr3MlDepPe0wheUc0aKm7Tz/gADYMKOXqMuigI1ngJQLOwTp24
+	 Qap6iLlUKQFerTN+11m8/T7yM2/6G7j+LvLtPPhf1OpjdY2kKBbgxrLk69IWefdUKwfdx
+	 gSgrAPpIEwWVo4Jo+vqZrsDptpbInxbwPhRB2KJybARgpYyz8NYJmi+1l4z02Pt5m+q8T
+	 e21RsBbahr0XDeDjJNjaID/jclOFxodUkCmu1ZNdml9nI4izz39aJK0JyvXGZ+9cjOVNL
+	 bd1taKaOV+m+GnrU61uXnhFm+mtIubkkYaWC+Iin5yVJnBw9L24k3tCs4p8TNd00RIw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xFyUs4es;
-	arc=none smtp.remote-ip=74.125.82.51
-Received: from mail-dl1-f51.google.com (mail-dl1-f51.google.com [74.125.82.51])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=KUVpWTTp;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99DA3606A326
-	for <mfd@lists.linux.dev>; Thu,  5 Nov 2026 01:15:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 99DA3606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C84F7606D82A;
+	Thu,  5 Nov 2026 01:19:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=xFyUs4es
-Received: by mail-dl1-f51.google.com with SMTP id a92af1059eb24-14394530ec6so1912896c88.1
-        for <mfd@lists.linux.dev>; Wed, 04 Nov 2026 17:15:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1793841345; x=1794446145; darn=lists.linux.dev;
-        h=content-disposition:content-transfer-encoding:content-type
-         :mime-version:references:in-reply-to:subject:cc:to:from:message-id
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hofK0JryGgKL/fZhmAQm61x9/fz9wA6S77HE9ruycGk=;
-        b=xFyUs4esI/cCAdIVclZiPVNXiXV4dt/nZSIdIAg1UoatNP49Oy1tpbcxwyF5MmhKhk
-         szXsFMMlLP7ZiELK6G9Nu69uIhn8HPQUMh5OusL6uXprWIbuPR90bQ6XcRhqePETW4hZ
-         RXKX05wkNq5HJJQmWBSYH+omBggf7AheEmHSsUyeD6+6p5wPVuodyept47B+Cj/XHUvv
-         yA4fp+Extad8L29B7u41qsXtAxjC5drQCTY4BS7ugi3K0sOeNe4kzmxSfoFGnIUbyJAK
-         1OVasLLAXgW3O6WRWZ/KtOaQD7IvGjm96Y7aHidq6RcjujtjWIBInmGfymRpJbm71c0r
-         Qo4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793841345; x=1794446145;
-        h=content-disposition:content-transfer-encoding:content-type
-         :mime-version:references:in-reply-to:subject:cc:to:from:message-id
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=hofK0JryGgKL/fZhmAQm61x9/fz9wA6S77HE9ruycGk=;
-        b=lo4RRSfCrbDai2WCqipM6+HO9uPbhCAS2Fw1fdeoNtuAiLheHJjQBVCiGZ7fwB8OH9
-         /R1hHCBeZZj4j2v/L60VcJ3DZYiO0H1J1pvb190gNVeLwI65NpsNASgZroNKX1XCJ/y6
-         uHx12awpm+7DugL7KTMQ2owVRdq6//l/84dcZB6ej1T32b7bfUrCY74TcbMWYbm+lX4M
-         BUIZ3/2YZiVl3bs2DiVhLEvZTpHatM66pJI+XUDlIvo5usFJnKd93662qCuCp58BZCHo
-         ZUfkKrhV15P/H8jVbYViFi2qA9PEzn5v589yZkhk7DDgghnipdUX+ZdC8ByioT2XQwa9
-         akCw==
-X-Forwarded-Encrypted: i=1; AKwUvBz0BSVx5vX9aPYjaJOJziDnrAZjxK8rwzsYqzk5hs2wP17mR6Sa9LXfvA6ScTcgKvqkBwM=@lists.linux.dev
-X-Gm-Message-State: APuU4Z+ZrzsqLUkXtpC7oINYKJaBxZ51XnofAgF2eAXRJNKwbfJEt4Le
-	qmz29YjoVzbo3VsgR6Fy4sJiQTDNarb0pzUUxKKvCv7XBxruWFX/IBjg
-X-Gm-Gg: AYBFou3FnINCyzzl3JvwRo+APayrIRUloPtKh4LiZgyCF5AxR5i7sOA/sg+92zaECi4
-	9ghqMHeOtvFnPjap/R+0Q2osvgcBdJA5vd7yltYf50HHgFMR8YlMLOLzJsjhWYghXdASoAYtQqe
-	QsCaVNU/Qp6PKwvte60PkOYZPuu11OJEUqHEFpT1iEwc6T8pgVDcbPEPjGfFG1uuBVe/ymoyr7z
-	30lL3gMgx9HEuyq2Bail6gHTKdi7FV8V002wbxRyvf6X9ExH8tcFC2/CaOhx5dBgJfnO4721iXr
-	YqURBm2VrGhBc9nr1lPpBWjWJJUm+3OlmjBwakrlPCrmgBogH+GpjyBqoZB9rKZBVahCDvR9OsN
-	LNoDZhP2y4/1PqOn15wPE5AwC2xqlKgE+tmhIG2i6cS/QqHgV1xo6y0xvcvWBqgF4sLkWLZB0Fj
-	vCp1Zw3Vzt7kfhJ7fS5A/25UuG+BjpVfJ1w0CyFM06LM7RdW/2p5uRtNbx9K0gZjc5CeWGvf52P
-	ziu8D40BpolgHPTLtr8qCE61qfRjL8G5hFwEO7XOGYLUrpiazmkHRW8XFVEI9BZ/qq8MiFYHkSs
-	o9thQTFFkvB04yIJjIwXiUfQyL8kIYNqVatE9f1DpZwRDI/2fSSXVmy8ReNajhYEnHQLWg==
-X-Received: by 2002:a05:7022:3c87:b0:1ad:4ef5:ffed with SMTP id a92af1059eb24-1aea05f4bcfmr18283181c88.38.1793841344539;
-        Wed, 04 Nov 2026 17:15:44 -0800 (PST)
-Received: from localhost ([2a00:79e0:2ebe:8:c8f4:b7d9:252f:4483])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b245c1c283sm12146627c88.4.2026.11.04.17.15.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Nov 2026 17:15:43 -0800 (PST)
-Date: Wed, 04 Nov 2026 17:15:42 -0800
-Message-ID: <ad02069b0cdede7ae191e4a3df57f33a@gmail.com>
-From: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-To: Lee Jones <lee@kernel.org>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>,
-	Peter Griffin <peter.griffin@linaro.org>,
-	Alim Akhtar <alim.akhtar@samsung.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Mark Brown <broonie@kernel.org>,
-	Charles Keepax <ckeepax@opensource.cirrus.com>,
-	Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@bgdev.pl>,
-	Arnd Bergmann <arnd@arndb.de>,
-	mfd@lists.linux.dev,
-	linux-samsung-soc@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	patches@opensource.cirrus.com,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 1/4] mfd: wm831x: Support software nodes for DCDC regulators
-In-Reply-To: <20261104181429.GE1650678@google.com>
-References: <20261024-samsung-kp-v4-0-e21253295e68@gmail.com> <20261024-samsung-kp-v4-1-e21253295e68@gmail.com> <20261104181429.GE1650678@google.com>
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=KUVpWTTp
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 902A41F000C1;
+	Thu,  5 Nov 2026 01:19:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793841551;
+	bh=OkA2J4cWWfdO1QYKzzP5dgQJ3QPDgjBDtOkiI8OGYYs=;
+	h=Subject:From:To:Cc:In-Reply-To:References:Date;
+	b=KUVpWTTp3Ji+rba/gwLYaE9B0XWKQrDEL4aXOHOe5oGVgGzxS5AxZPaxtcBhWPxqG
+	 gy97o8I3WPlqKyJMTwNBK6UEJPSDUn5qfM13olT2lLypgJQZiE8lKb49KglRTnlHee
+	 IjavHoyNvnN9BohmxPI+V+Jh6jVLrBLsIF4kkUZFLN1Uui8ZoeQb3sLSr/+TrTb9Z3
+	 JHAXP5tK2W0FxUb80Z1Cgo9+cFfUvNQ65rmDwrthzwCintC+OKH0U62CPApDaDlL0+
+	 eJmKYjs4ayCz2tGKIhQRRZC8JDrds0f2YAgeA+PwUUIkHaHNpCuQ2mDoZKGLKsnaUe
+	 4I2vCs7pa6EOg==
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -110,91 +49,487 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Subject: Re: [PATCH v10 3/5] clk: ambarella: add CV75 RCT clock controller
+From: Brian Masney <masneyb@kernel.org>
+To: Long Zhao <longzhao@ambarella.com>
+Cc: Arnd Bergmann <arnd@arndb.de>, Krzysztof Kozlowski <krzk@kernel.org>, 
+ Alexandre Belloni <alexandre.belloni@bootlin.com>, soc@lists.linux.dev, 
+ linux-arm-kernel@lists.infradead.org, 
+ Michael Turquette <mturquette@baylibre.com>, 
+ Stephen Boyd <sboyd@kernel.org>, Jerome Brunet <jbrunet@baylibre.com>, 
+ linux-clk@vger.kernel.org, Brian Masney <masneyb@kernel.org>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, 
+ Lee Jones <lee@kernel.org>, mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+ Long Zhao <zl020895@163.com>, linux-kernel@vger.kernel.org
+In-Reply-To: <20261019-cv75-soc-v10-3-d386065e2dd5@ambarella.com>
+References: <20261019-cv75-soc-v10-0-d386065e2dd5@ambarella.com>
+ <20261019-cv75-soc-v10-3-d386065e2dd5@ambarella.com>
+Date: Wed, 04 Nov 2026 20:18:50 -0500
+Message-Id: <179384153085.753765.4632795421510452040.b4-review@b4>
+X-Mailer: b4 0.17-dev-7ca47
+X-Developer-Signature: v=1; a=openpgp-sha256; l=13512; i=masneyb@kernel.org;
+ s=20250903; h=from:subject:message-id;
+ bh=Hk4NUB4ozzTPRRRYYlp0JI8mRe1gJmy5y0KHDDyC0HA=;
+ b=owGbwMvMwCW2/dJd9di6A+2Mp9WSGLJe36wN+r0yddFXj04evle8x64y8Z14t29DYXHYwamTp
+ aN6u7dVdpSyMIhxMciKKbIsyTUqiEhdZXvvjiYLzBxWJpAhDFycAjCR++IM/1N8gj5EvfskfLGk
+ i91YMGPj11X31wnEO/CtUKo32u+x/zPD/yCzmc1fZIwtUv/sb37jK+yy/g3rG58b8eYm6eflWbe
+ LcAIA
+X-Developer-Key: i=masneyb@kernel.org; a=openpgp;
+ fpr=A46D32705865AA3DDEDC2904B7D2DD275D7EC087
 
-Hi Lee,
+Hi Long,
 
-On Wed, Nov 04, 2026 at 06:14:29PM +0000, Lee Jones wrote:
-> On Sat, 24 Oct 2026, Dmitry Torokhov wrote:
-> > +static int wm831x_add_devices(struct wm831x *wm831x, int wm831x_num,
-> > +			      const struct mfd_cell *cells, int num_cells)
-> > +{
-> > +	struct wm831x_pdata *pdata = &wm831x->pdata;
-> > +	int i;
-> > +
-> > +	struct mfd_cell *local_cells __free(kfree) =
-> > +		kmemdup_array(cells, num_cells, sizeof(*cells), GFP_KERNEL);
-> > +	if (!local_cells)
-> > +		return -ENOMEM;
-> > +
-> > +	for (i = 0; i < num_cells; i++) {
-> > +		struct mfd_cell *cell = &local_cells[i];
-> > +
-> > +		if (strcmp(cell->name, "wm831x-buckv") == 0) {
-> > +			int id = cell->id - 1;
-> > +
-> > +			if (id >= 0 && id < WM831X_MAX_DCDC)
-> > +				cell->swnode = pdata->dcdc_swnodes[id];
-> > +		}
-> > +	}
+> Add a table-driven CCF driver for the CV75 root clock tree. Register
+> the core PLL, AHB/APB fixed factors and UART0 composite clock, with
+> osc supplied via clk_parent_data.
+> 
+> Signed-off-by: Long Zhao <longzhao@ambarella.com>
+> ---
+>  drivers/clk/Kconfig              |   1 +
+>  drivers/clk/Makefile             |   1 +
+>  drivers/clk/ambarella/Kconfig    |   9 +
+>  drivers/clk/ambarella/Makefile   |   3 +
+>  drivers/clk/ambarella/clk-cv75.c | 361 +++++++++++++++++++++++++++++++++++++++
+>  5 files changed, 375 insertions(+)
 >
-> I can't begin to tell you how much I hate this.
->
-> Why are we duplicating massive static const structs just to add a S/W
-> node?  Is there no other way we can do this statically?
+> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+> index 37a8e35d4178..6bfa2c8fffe1 100644
+> --- a/drivers/clk/Kconfig
+> +++ b/drivers/clk/Kconfig
+> @@ -510,6 +510,7 @@ config COMMON_CLK_RPMI
+>  	  the RISC-V platform management interface (RPMI) specification.
+>  
+>  source "drivers/clk/actions/Kconfig"
+> +source "drivers/clk/ambarella/Kconfig"
+>  source "drivers/clk/analogbits/Kconfig"
+>  source "drivers/clk/anlogic/Kconfig"
+>  source "drivers/clk/aspeed/Kconfig"
+> diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+> index 52d138d4ffc8..99377a13ebc5 100644
+> --- a/drivers/clk/Makefile
+> +++ b/drivers/clk/Makefile
+> @@ -125,6 +125,7 @@ obj-$(CONFIG_COMMON_CLK_XGENE)		+= clk-xgene.o
+>  
+>  # please keep this section sorted lexicographically by directory path name
+>  obj-y					+= actions/
+> +obj-y					+= ambarella/
+>  obj-y					+= analogbits/
+>  obj-y					+= anlogic/
+>  obj-y					+= aspeed/
+> diff --git a/drivers/clk/ambarella/Kconfig b/drivers/clk/ambarella/Kconfig
+> new file mode 100644
+> index 000000000000..720eebdc5c9c
+> --- /dev/null
+> +++ b/drivers/clk/ambarella/Kconfig
+> @@ -0,0 +1,9 @@
+> +# SPDX-License-Identifier: GPL-2.0-only
+> +
+> +config CLK_AMBARELLA_CV75
+> +	bool "Ambarella CV75 RCT clock controller"
 
-The software node itself is defined statically in the board file
-(crag_dcdc1_swnode in arch/arm/mach-s3c/mach-crag6410.c in patch 2/4),
-as it describes board-specific and PMIC-instance-specific wiring -
-specifically the host SoC GPIO wired to the PMIC's DVS pin (GPK(0) on
-Cragganmore 6410).
+This uses module_platform_driver(), so this should be a tristate here.
+Or this needs to use builtin_platform_driver().
 
-Because wm831x-core.c is a generic PMIC driver that can be instantiated
-on different boards or even multiple times on the same board (for
-example, Cragganmore 6410 has two WM831x PMIC instances, only one of
-which has a DVS GPIO wired to DCDC1), the shared static mfd_cell arrays
-in wm831x-core.c cannot point to a board's software node at compile
-time.
+> +	depends on ARCH_AMBARELLA || COMPILE_TEST
+> +	default ARCH_AMBARELLA
+> +	help
+> +	  Say Y to enable the Ambarella CV75 RCT clock controller for
+> +	  early bring-up clocks (core PLL, AHB, APB, UART0).
+> diff --git a/drivers/clk/ambarella/Makefile b/drivers/clk/ambarella/Makefile
+> new file mode 100644
+> index 000000000000..29555e452441
+> --- /dev/null
+> +++ b/drivers/clk/ambarella/Makefile
+> @@ -0,0 +1,3 @@
+> +# SPDX-License-Identifier: GPL-2.0-only
+> +
+> +obj-$(CONFIG_CLK_AMBARELLA_CV75) += clk-cv75.o
+> diff --git a/drivers/clk/ambarella/clk-cv75.c b/drivers/clk/ambarella/clk-cv75.c
+> new file mode 100644
+> index 000000000000..6a8f80571958
+> --- /dev/null
+> +++ b/drivers/clk/ambarella/clk-cv75.c
+> @@ -0,0 +1,361 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Ambarella CV75 RCT clock controller
+> + *
+> + * Copyright (C) 2026 Ambarella, Inc.
+> + */
+> +
+> +#include <linux/array_size.h>
+> +#include <linux/bitfield.h>
+> +#include <linux/bits.h>
+> +#include <linux/clk-provider.h>
+> +#include <linux/container_of.h>
+> +#include <linux/device.h>
+> +#include <linux/err.h>
+> +#include <linux/io.h>
+> +#include <linux/math64.h>
+> +#include <linux/module.h>
+> +#include <linux/overflow.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/slab.h>
+> +#include <linux/spinlock.h>
+> +#include <linux/types.h>
+> +
+> +#include <dt-bindings/clock/ambarella,cv75-rct.h>
+> +
+> +#define CV75_NUM_CLKS		(CV75_GCLK_APB + 1)
+> +
+> +#define PLL_CTRL_BYPASS		BIT(2)
+> +#define PLL_CTRL_FRAC_MODE	BIT(3)
+> +#define PLL_CTRL_FORCE_RESET	BIT(4)
+> +#define PLL_CTRL_POWER_DOWN	BIT(5)
+> +#define PLL_CTRL_HALT_VCO	BIT(6)
+> +#define PLL_CTRL_SDIV		GENMASK(15, 12)
+> +#define PLL_CTRL_SOUT		GENMASK(19, 16)
+> +#define PLL_CTRL_INTP		GENMASK(30, 24)
+> +
+> +#define PLL_CTRL2_VCODIV_DIV2	BIT(8)
+> +#define PLL_CTRL2_FSDIV_DIV2	BIT(9)
+> +#define PLL_CTRL2_FSOUT_DIV2	BIT(11)
+> +#define PLL_CTRL2_BYPASS_HSDIV	BIT(12)
+> +
+> +struct cv75_pll_regs {
+> +	u32 ctrl;
+> +	u32 frac;
+> +	u32 ctrl2;
+> +};
+> +
+> +struct cv75_pll_hw {
+> +	struct clk_hw hw;
+> +	struct cv75_pll_regs regs;
+> +};
+> +
+> +struct cv75_clk {
+> +	void __iomem *base;
+> +	spinlock_t lock;
+> +	struct cv75_pll_hw core;
+> +	struct cv75_pll_hw enet;
+> +	struct cv75_pll_hw sd;
+> +};
+> +
+> +struct cv75_pll {
+> +	const char *name;
+> +	struct cv75_pll_hw *hw;
+> +	unsigned long flags;
+> +	struct cv75_pll_regs regs;
+> +	int id;
+> +};
+> +
+> +struct cv75_fixed_factor {
+> +	const char *name;
+> +	u32 id;
+> +	struct u16_fract ratio;
+> +};
+> +
+> +struct cv75_composite {
+> +	const char *name;
+> +	const struct clk_parent_data *parents;
+> +	unsigned long flags;
+> +	u32 id;
+> +	u16 mux_reg;
+> +	u16 div_reg;
+> +	u8 num_parents;
+> +	u8 mux_shift;
+> +	u8 mux_width;
+> +	u8 div_shift;
+> +	u8 div_width;
+> +};
+> +
+> +struct cv75_composite_hw {
+> +	struct clk_mux mux;
+> +	struct clk_divider div;
+> +	struct clk_gate gate;
+> +};
+> +
+> +static struct cv75_clk cv75_ccu;
+> +
+> +#define CV75_PLL(_id, _name, _ctrl, _frac, _ctrl2, _flags, _hw) {	\
+> +	.name	= _name,						\
+> +	.hw	= _hw,							\
+> +	.flags	= _flags,						\
+> +	.regs	= {							\
+> +		.ctrl = _ctrl,						\
+> +		.frac = _frac,						\
+> +		.ctrl2 = _ctrl2,					\
+> +	},								\
+> +	.id	= _id,							\
+> +}
+> +
+> +static const struct cv75_pll cv75_plls[] = {
+> +	CV75_PLL(CV75_GCLK_CORE, "core", 0x000, 0x004, 0x100,
+> +		 CLK_IS_CRITICAL, &cv75_ccu.core),
 
-Note that local_cells is annotated with __free(kfree), so the duplicate
-array only lives for the duration of the mfd_add_devices() call (which
-makes its own per-device copy of each mfd_cell anyway) and is freed
-immediately before wm831x_add_devices() returns.
+cv75_pll_ops only implements .recalc_rate. With no .prepare/.enable ops,
+CLK_IS_CRITICAL has no effect.
 
-> Since pdata is being populated already, why not just pass that on to the
-> consuming child device (the regulator)?
+> +	CV75_PLL(-1, "pll_enet", 0x520, 0x524, 0x528,
+> +		 0, &cv75_ccu.enet),
+> +	CV75_PLL(-1, "pll_sd", 0x4ac, 0x4b0, 0x4b4,
+> +		 0, &cv75_ccu.sd),
+> +};
+> +
+> +static const struct cv75_fixed_factor cv75_fixed_factors[] = {
+> +	{ .id = CV75_GCLK_AHB, .name = "ahb", .ratio = { 1, 2 } },
+> +	{ .id = CV75_GCLK_APB, .name = "apb", .ratio = { 1, 4 } },
+> +};
+> +
+> +static const struct clk_parent_data cv75_uart_parents[] = {
+> +	{ .fw_name = "osc" },
+> +	{ .hw = &cv75_ccu.core.hw },
+> +	{ .hw = &cv75_ccu.enet.hw },
+> +	{ .hw = &cv75_ccu.sd.hw },
+> +};
+> +
+> +#define CV75_COMPOSITE(_id, _name, _parents, _mreg, _mshift, _mwidth,	\
+> +		       _dreg, _dshift, _dwidth, _flags)			\
+> +{									\
+> +	.id		= _id,						\
+> +	.name		= _name,					\
+> +	.parents	= _parents,					\
+> +	.num_parents	= ARRAY_SIZE(_parents),				\
+> +	.mux_reg	= _mreg,					\
+> +	.mux_shift	= _mshift,					\
+> +	.mux_width	= _mwidth,					\
+> +	.div_reg	= _dreg,					\
+> +	.div_shift	= _dshift,					\
+> +	.div_width	= _dwidth,					\
+> +	.flags		= _flags,					\
+> +}
+> +
+> +static const struct cv75_composite cv75_composites[] = {
+> +	CV75_COMPOSITE(CV75_GCLK_UART0, "uart0", cv75_uart_parents,
+> +		       0x1c8, 0, 2, 0x038, 0, 24,
+> +		       CLK_SET_RATE_NO_REPARENT),
+> +};
+> +
+> +#define to_cv75_pll(_hw) container_of(_hw, struct cv75_pll_hw, hw)
+> +
+> +static unsigned long cv75_pll_recalc_rate(struct clk_hw *hw,
+> +					  unsigned long parent_rate)
+> +{
+> +	struct cv75_pll_hw *pll = to_cv75_pll(hw);
+> +	u32 ctrl, ctrl2, frac_val;
+> +	u32 vcodiv, fsdiv, fsout;
+> +	u32 intp, sdiv, sout;
+> +	u64 vco, frac = 0;
+> +
+> +	ctrl = readl_relaxed(cv75_ccu.base + pll->regs.ctrl);
+> +	if (ctrl & (PLL_CTRL_POWER_DOWN | PLL_CTRL_HALT_VCO | PLL_CTRL_FORCE_RESET))
+> +		return 0;
+> +
+> +	if (ctrl & PLL_CTRL_BYPASS)
+> +		return parent_rate;
+> +
+> +	ctrl2 = readl_relaxed(cv75_ccu.base + pll->regs.ctrl2);
+> +	intp = FIELD_GET(PLL_CTRL_INTP, ctrl) + 1;
+> +	sdiv = FIELD_GET(PLL_CTRL_SDIV, ctrl) + 1;
+> +	sout = FIELD_GET(PLL_CTRL_SOUT, ctrl) + 1;
+> +	vcodiv = (ctrl2 & PLL_CTRL2_VCODIV_DIV2) ? 2 : 1;
+> +	fsdiv = (ctrl2 & PLL_CTRL2_FSDIV_DIV2) ? 2 : 1;
+> +	fsout = (ctrl2 & PLL_CTRL2_FSOUT_DIV2) ? 2 : 1;
+> +
+> +	vco = (u64)parent_rate * vcodiv * fsdiv * intp * sdiv;
+> +	if (ctrl & PLL_CTRL_FRAC_MODE) {
+> +		frac_val = readl_relaxed(cv75_ccu.base + pll->regs.frac);
+> +		frac = mul_u64_u32_shr((u64)parent_rate * vcodiv * fsdiv * sdiv,
+> +				       frac_val, 32);
+> +		vco += frac;
+> +	}
+> +
+> +	if (!(ctrl2 & PLL_CTRL2_BYPASS_HSDIV))
+> +		vco = div_u64(vco, (u64)vcodiv * fsout * sout);
 
-The regulator driver (wm831x_buckv_dvs_init() in
-drivers/regulator/wm831x-dcdc.c) acquires the DVS GPIO using
-devm_gpiod_get(&pdev->dev, "dvs", ...). When converting the board file
-away from legacy gpiod_lookup_table to software nodes (to drop the
-fragile MFD device name matching and fix the GPIO chip label lookup),
-gpiolib resolves the "dvs-gpios" property against the consumer device's
-fwnode (&pdev->dev), so the software node needs to be attached to the
-wm831x-buckv platform device.
+div_u64() takes a u32 divisor, so this (u64) cast is misleading.
 
-In v2 of this series I actually tried passing the software_node pointer
-through wm831x_buckv_pdata and attaching it to &pdev->dev inside the
-regulator driver's probe() [1]. However, attaching a software node to
-an already-registered platform device inside probe() is awkward and
-requires manual teardown in the child driver, whereas mfd-core already
-has built-in support for cell->swnode in mfd_add_device() (attaching
-the node via device_add_software_node() before platform_device_add(),
-and cleaning it up via device_remove_software_node() on error or
-removal). Populating cell->swnode lets mfd-core manage the software
-node lifecycle cleanly and keeps the regulator driver untouched.
+> +
+> +	return vco;
+> +}
+> +
+> +static const struct clk_ops cv75_pll_ops = {
+> +	.recalc_rate = cv75_pll_recalc_rate,
+> +};
+> +
+> +static int cv75_register_plls(struct device *dev,
+> +			      struct clk_hw_onecell_data *data)
+> +{
+> +	struct clk_parent_data parent_data = { .fw_name = "osc" };
+> +
+> +	for (unsigned int i = 0; i < ARRAY_SIZE(cv75_plls); i++) {
+> +		const struct cv75_pll *desc = &cv75_plls[i];
+> +		struct cv75_pll_hw *pll = desc->hw;
+> +		struct clk_init_data init = {};
+> +		int ret;
+> +
+> +		pll->regs = desc->regs;
+> +
+> +		init.name = desc->name;
+> +		init.ops = &cv75_pll_ops;
+> +		init.parent_data = &parent_data;
+> +		init.num_parents = 1;
+> +		init.flags = desc->flags;
+> +		pll->hw.init = &init;
+> +
+> +		ret = devm_clk_hw_register(dev, &pll->hw);
+> +		if (ret)
+> +			return ret;
+> +
+> +		if (desc->id >= 0)
+> +			data->hws[desc->id] = &pll->hw;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int cv75_register_fixed_factors(struct device *dev,
+> +				       struct clk_hw_onecell_data *data)
+> +{
+> +	for (unsigned int i = 0; i < ARRAY_SIZE(cv75_fixed_factors); i++) {
+> +		const struct cv75_fixed_factor *f = &cv75_fixed_factors[i];
+> +		struct clk_hw *hw;
+> +
+> +		hw = devm_clk_hw_register_fixed_factor_parent_hw(dev, f->name,
+> +								 &cv75_ccu.core.hw, 0,
+> +								 f->ratio.numerator,
+> +								 f->ratio.denominator);
+> +		if (IS_ERR(hw))
+> +			return PTR_ERR(hw);
+> +
+> +		data->hws[f->id] = hw;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static struct clk_hw *cv75_register_composite(struct device *dev,
+> +					      const struct cv75_composite *c)
+> +{
+> +	const struct clk_ops *mux_ops = NULL, *div_ops = NULL, *gate_ops = NULL;
+> +	struct clk_hw *mux_hw = NULL, *div_hw = NULL, *gate_hw = NULL;
+> +	struct cv75_composite_hw *comp;
+> +
+> +	comp = devm_kzalloc(dev, sizeof(*comp), GFP_KERNEL);
+> +	if (!comp)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	if (c->mux_width) {
+> +		comp->mux.reg = cv75_ccu.base + c->mux_reg;
+> +		comp->mux.shift = c->mux_shift;
+> +		comp->mux.mask = GENMASK(c->mux_width - 1, 0);
+> +		comp->mux.lock = &cv75_ccu.lock;
+> +		mux_hw = &comp->mux.hw;
+> +		mux_ops = &clk_mux_ops;
+> +	}
+> +
+> +	if (c->div_width) {
+> +		comp->div.reg = cv75_ccu.base + c->div_reg;
+> +		comp->div.shift = c->div_shift;
+> +		comp->div.width = c->div_width;
+> +		comp->div.flags = CLK_DIVIDER_ONE_BASED;
+> +		comp->div.lock = &cv75_ccu.lock;
+> +		div_hw = &comp->div.hw;
+> +		div_ops = &clk_divider_ops;
+> +
+> +		comp->gate.reg = cv75_ccu.base + c->div_reg;
+> +		comp->gate.bit_idx = c->div_shift + c->div_width;
+> +		comp->gate.flags = CLK_GATE_SET_TO_DISABLE;
+> +		comp->gate.lock = &cv75_ccu.lock;
+> +		gate_hw = &comp->gate.hw;
+> +		gate_ops = &clk_gate_ops;
+> +	}
+> +
+> +	return devm_clk_hw_register_composite_pdata(dev, c->name, c->parents,
+> +						    c->num_parents,
+> +						    mux_hw, mux_ops,
+> +						    div_hw, div_ops,
+> +						    gate_hw, gate_ops, c->flags);
+> +}
+> +
+> +static int cv75_register_composites(struct device *dev,
+> +				    struct clk_hw_onecell_data *data)
+> +{
+> +	for (unsigned int i = 0; i < ARRAY_SIZE(cv75_composites); i++) {
+> +		const struct cv75_composite *c = &cv75_composites[i];
+> +		struct clk_hw *hw;
+> +
+> +		hw = cv75_register_composite(dev, c);
+> +		if (IS_ERR(hw))
+> +			return PTR_ERR(hw);
+> +
+> +		data->hws[c->id] = hw;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int cv75_rct_probe(struct platform_device *pdev)
+> +{
+> +	struct clk_hw_onecell_data *data;
+> +	struct device *dev = &pdev->dev;
+> +	int ret;
+> +
+> +	cv75_ccu.base = devm_platform_ioremap_resource(pdev, 0);
+> +	if (IS_ERR(cv75_ccu.base))
+> +		return PTR_ERR(cv75_ccu.base);
+> +
+> +	data = devm_kzalloc(dev, struct_size(data, hws, CV75_NUM_CLKS), GFP_KERNEL);
+> +	if (!data)
+> +		return -ENOMEM;
+> +	data->num = CV75_NUM_CLKS;
+> +
+> +	spin_lock_init(&cv75_ccu.lock);
+> +
+> +	ret = cv75_register_plls(dev, data);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "failed to register plls\n");
+> +
+> +	ret = cv75_register_fixed_factors(dev, data);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "failed to register fixed factors\n");
+> +
+> +	ret = cv75_register_composites(dev, data);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "failed to register composites\n");
+> +
+> +	ret = devm_of_clk_add_hw_provider(dev, of_clk_hw_onecell_get, data);
+> +	if (ret)
+> +		return dev_err_probe(dev, ret, "failed to add clock provider\n");
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct of_device_id cv75_rct_match[] = {
+> +	{ .compatible = "ambarella,cv75-rct" },
+> +	{ }
+> +};
+> +MODULE_DEVICE_TABLE(of, cv75_rct_match);
+> +
+> +static struct platform_driver cv75_rct_driver = {
+> +	.probe = cv75_rct_probe,
+> +	.driver = {
+> +		.name = "ambarella-cv75-rct",
+> +		.of_match_table = cv75_rct_match,
 
-If you prefer not to kmemdup the full cell table, another option would
-be to split the buckv cells out of the main wm831x cell arrays and
-register them via a separate mfd_add_devices() call, though that seemed
-more intrusive across wm8310/wm8311/wm8312/wm8320. Please let me know
-what you would prefer here.
+.suppress_bind_attrs = true
 
-[1] https://lore.kernel.org/all/20260708-samsung-kp-v2-7-3c6ed4c9b3b6@gmail.com/
+> +	},
+> +};
+> +module_platform_driver(cv75_rct_driver);
+> +
+> +MODULE_AUTHOR("Cao Rongrong <rrcao@ambarella.com>");
 
-Thanks.
+I don't see a Co-Developed by and a Signed-off-by from Cao. Either that,
+or this line needs to be updated.
+
+Brian
 
 -- 
-Dmitry
+Brian Masney <masneyb@kernel.org>
