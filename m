@@ -1,57 +1,63 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793877306;
-	b=ulJ0CZO/4qHeSRJqJp29HGVa28088r1ZpdYGDsbVqaNu2ojd6GgZs+cd7hAHf8rcIdcu
-	 S1zYOxAQqmLk/Blv/9k2AEufewRkRA7Qnf7VnsaO6Hh1gUkMEgw0OTt/qgQokgnbQ3o+q
-	 QuVdIF5A5yGwOR6F5a7ZeS346NrgXzjS+eM8PCDEog9wub3qTZSIa2FAQaSCW4MqTOZ3j
-	 D7Z+eiiA9YXW1IYNr99mQfGfFjrRQL59As4Cqij8xKc/WuMYIN1HCvI4IrMRKRXBcZ2oW
-	 erecExM+Fy+/OkZf9uBg3j2fYgmZ0tWmy8OpVCTSBogg0cG9pLJ8TxFUJUII1m+wuBA==
+	t=1793877595;
+	b=BPyo8VRjA1XmY26lyg6W9sEW4C9Ln5970hK1YxKQ6fXYqyVOqlO2XBaQ6bVHCSO4BB55
+	 dUyuT7OSubz+fXGEazO6yz3lwjlk5clPdXblrjx+QrRs2DwbCPwDv1TXtMMUJmeBQ/zQ9
+	 f+T0fDfgF9JkgvWTFqlVewzL7FQETfAeEmHfTC/Ju3MbjEdiFFOcZ7EzqNWgza8hfwgkb
+	 FPhbnKMVy+yZCEOp9kB29qzHikFAhSm0kHPBu1RjoNmkwSOpo2kNVm/qZI5YhY2bgPNCs
+	 DlydKOvqs6+JGz0dJZuPWPFbi/9T5zsXVI5e6fZkzgeTXl8VRPI0czHJ6/MfVz1u1FQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793877306;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=3CPhC3vTTxr4dWXw/s8Mq5xwSc7oqRK0QNEH2vh3z34=;
-	b=4olLT6UA7ohvdRkbRUDf69tD1G/Z1HwLOUDu6TMraicep4JooDuFDfSOOL7UY+mVKs4r
-	 DphYfzKGTi4kCv6GC5KcF8Go17t8CcuSQipcXCWudqAOE4YJQ3tGejPdAnBKhQr0o60Mh
-	 dC8QTfPVrCWVDDYTrJtX5uNWE/ygW9wyK+eWyJl26SdaCyk/uLlMsIyKSdxC8PT9SQT+v
-	 rInJ9F189cRX3ZTOWHTIqNLt8Iwl8IHq4+L1EtyJXi7qBwdjWDZsMrBzSsH8U87F+Nejd
-	 tq13/TyjeBf1tJd0nM1EgkQh/5fBDEERCeF5AmjGnODzQooO+B9M+ZYNYbjjs0QXPyQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793877595;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer;
+	bh=Xo2TeNYm3Y+NU4DLM/Wdmt98w6AupRWkAbW2xAINB7s=;
+	b=RFQJe+PTS2e93I5484XHWxHrLmqdbN0qfLU6nEEP4wm4kCVnVYJ9oW/FgqEARQCUjRBX
+	 u/3DG5CHgo4bSF8n3oJWsPVoQOTaIB1o/dt9QDD1X+RiubTL0MlCamGEjXb/jCz599+SY
+	 EXrG/avDIJAPeMzARJTIz5JEgQN/feNoPR4j/IRek32aeKRyWynvh1gRP9/vcniJI97FT
+	 KK+iVqmunCLMQXwYZbyzulXrVsmGwQHTvQ6cPyWaIn8Nho3U3Eyc8Bz9SPQ5rE4rKIgH4
+	 aqKXFrS5x8OD5/v8c3yuwRmjiYo+wB3/MDiSJ6GYRJjupfTfnKwqi/pZ02p0aPB5sEg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=L9K8mHCV;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZIz192A6;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E858606A326
-	for <mfd@lists.linux.dev>; Thu,  5 Nov 2026 11:15:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C68CB606A32D;
+	Thu,  5 Nov 2026 11:19:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=L9K8mHCV
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AD9241F000C1;
-	Thu,  5 Nov 2026 11:15:05 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZIz192A6
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A5641F00919;
+	Thu,  5 Nov 2026 11:19:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793877306;
-	bh=3CPhC3vTTxr4dWXw/s8Mq5xwSc7oqRK0QNEH2vh3z34=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=L9K8mHCVh4kAouDoGwnk0YERWBM8PyBmxb53ukJR1tTxiljkPH+yRwa2u4xdGhTep
-	 cbbZfa43qh4MhYLQSy19UbNIEadVmb1zR6bC8da9gK08dfmvxg9YUT1eEIcU/XBlMv
-	 gqDoUhvW/qG+DW6fPsHsycxDa9JjJLDR40vVnz+bC0R+VbokM8a1ov5IMD2oluTOvc
-	 JYjx4mF2YEAqxTH417+I459SINpK1Dpef69auOjUM+1ncl6/TDc4YxTp85pRK9b7bL
-	 RX2n571cFm/zzJL3P32UU6wQI71xUpjVDhyuSYMtB4Q+l9WxVxgJ/ufjSp1Ixu/es6
-	 meVmW79judB+A==
-Message-ID: <sashiko-outbox-198929@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH RFC 1/3] dt-bindings: mfd: syscon: Add Qualcomm Nord
- Titan CAM_TOP
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Wenmeng Liu" <wenmeng.liu@oss.qualcomm.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261105-ccu-v1-1-3accc4b901de@oss.qualcomm.com>
-References: <20261105-ccu-v1-0-3accc4b901de@oss.qualcomm.com>
- <20261105-ccu-v1-1-3accc4b901de@oss.qualcomm.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 05 Nov 2026 11:15:05 +0000
+	s=k20260515; t=1793877594;
+	bh=Xo2TeNYm3Y+NU4DLM/Wdmt98w6AupRWkAbW2xAINB7s=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=ZIz192A6fQlHC/7KKwSUPIBtzVxXwVY3LMJ8un1ogis3DOElJiYACdBDHf9e5vgQj
+	 wOncDENcOuCCg1akE0rc6KI+dGG3jIM3ROAjSi4/3HzGoegq/FvSss7NyUQf2BSoQ+
+	 qoqDgEVNdNrvBi4Zje/2MhcOg1s38afsfDgsihl2vRV9o+n1s3jb2ApKpBQ8L9/M+U
+	 FiTzZYMrk+2zfColytZVPcmFrg20eLxDD1+2lXBSMW1zed9uZbaS9COEFayf2HFYmC
+	 kEpey+4bBY7onGEbYYRvYlBL6EgcwyBxSncPDimAFCM0npsM7+9Yv4OApS1LFTm/MC
+	 2mw32+ceHeVkQ==
+From: Lee Jones <lee@kernel.org>
+To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Dmitry Torokhov <dmitry.torokhov@gmail.com>, Lee Jones <lee@kernel.org>, 
+ Pavel Machek <pavel@kernel.org>, Griffin Kroah-Hartman <griffin@kroah.com>, 
+ Sebastian Reichel <sre@kernel.org>, Ion Agorria <ion@agorria.com>, 
+ =?utf-8?q?Micha=C5=82_Miros=C5=82aw?= <mirq-linux@rere.qmqm.pl>, 
+ Florian Krischer <florian.krischer@fkr.dev>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-input@vger.kernel.org, mfd@lists.linux.dev, 
+ linux-leds@vger.kernel.org, linux-pm@vger.kernel.org
+In-Reply-To: <20261104122606.215629-1-clamor95@gmail.com>
+References: <20261104122606.215629-1-clamor95@gmail.com>
+Subject: Re: [PATCH v13 0/7] mfd: Add support for Asus Transformer embedded
+ controller
+Message-Id: <179387759097.2453405.11589718445889906023.b4-ty@b4>
+Date: Thu, 05 Nov 2026 11:19:50 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,19 +66,32 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
 
-> The CAM_TOP block in the Nord Titan camera subsystem contains
-> registers shared by several camera blocks, including the CCU output
-> mux used to route the CCI I2C ports.
->=20
-> The block is outside of the CCI and CAMSS register ranges, so describe
-> it as a syscon for its users to reference.
->=20
-> Signed-off-by: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
+On Wed, 04 Nov 2026 14:25:59 +0200, Svyatoslav Ryhel wrote:
+> Add support for embedded controller used in Asus Transformers for
+> managing power and input functions.
 
-Sashiko has reviewed this patch and found no issues.
+Applied, thanks!
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261105-ccu-v1-0-3=
-accc4b901de@oss.qualcomm.com?part=3D1
+[1/7] dt-bindings: embedded-controller: document ASUS Transformer EC
+      commit: 2880926d48fe884042a1b7b64b431f9ee9531806
+[2/7] mfd: Add driver for ASUS Transformer embedded controller
+      commit: ccb21236e307ff60ce6b96d2f9925abf0274ce8e
+[3/7] input: serio: Add driver for ASUS Transformer dock keyboard and touchpad
+      commit: 3fefdd9a8931eb3b8cade87193c81293256031f0
+[4/7] input: keyboard: Add driver for ASUS Transformer dock multimedia keys
+      commit: 4ace8a63a1612f8142cfdf5d6d4b8e1be37cce3b
+[5/7] leds: Add driver for ASUS Transformer LEDs
+      commit: 04819cdb3912f31586516ef6fc007daa3d976234
+[6/7] power: supply: Add driver for ASUS Transformer battery
+      commit: cd72536270e725b4f1d56df6287c4c34efe953a8
+[7/7] power: supply: Add charger driver for Asus Transformers
+      commit: db6674a08304d03a194f5e09b7543323462b3516
+
+--
+Lee Jones [李琼斯]
 
