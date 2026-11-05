@@ -1,55 +1,68 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793887769;
-	b=5dsK9fS7X83KRjkkQ8b1Nhep519zIOR21v+bAZHY+Ti7tJn8qjqSDHnbzBTAeH2cBYU8
-	 zivjhYfYou8YQnNen9a7/r09y12Hm/RrqW46e6Pi9f+DT8trXskPwm5T+dNScz/SWXHLI
-	 Gq8+/0sblBiteZCsh3gXgnNGWBb5yH7aXnvYj1umpFmtL5W9N2W1ck8DdIeVaTAdROjCg
-	 vQsJOkf2/wKeoRNq0p8oSb2BqkhE0zf98NkHNGZ1v/suOWmFeLKrnj7hrz3LpyB83TmSL
-	 9m2ZZjDQbucqp516Jfig7xc44O+v1GBOGHPIk0YTvmMAv70En5r5bGAwafHtcGRo/Xg==
+	t=1793887997;
+	b=SxUMDWa2kOJdTwtRaRbksF7uCdsWqxiIfUdxHDVWOlrc84wSmNXsl41N0MbiYQhBccp9
+	 2fm6AZrbUMZ5fHkA2/H2kDu5cDERaX64RwXdjvbYMH2x2xjvzmEEOIi565YbBWW6bCYx5
+	 4ucvaXtvTzlfkh3F8Vyb8Xx6IdfI8zMfnAs7rAGEeJMJV+Cbk8hfcBDVHcI9aOQ417DIN
+	 FmCt96qiJVvzK3dklPr5qADAM1Ns4Kt4vKj+TcZbuMP+G7NEx1cDxu/c5nyzKkvZ6HJ9O
+	 AzhTbe7e5uQMg200TCjS/Qf0vw7e9CbxmXl82uTLLAmR6/Y5N4McbfJo4jwy9PZKwdg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793887769;
-	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
-	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
-	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=uWZDC+jKR50KkuL/m90FaOZS23uCXLeIovjpwO7U69c=;
-	b=fLbm9XmGjOG6aQ9b/H7qCUdE7VtZWJYPpO/NjY+MXLi4+q5UCqOEm/iTyASNBrPPBjsN
-	 JcW6I/b/IKpFJO/PAwFxQqBP4a15a9QvnKc0tnCAWo1j8hbcwQEldmGBnUzuqSTV02Q/I
-	 3kWdtUBaAd6a7Dh3fyUMg/hE1MkwM9JLda1UtOAdGQWOM8hcnZEMwG8GS33GldrqtfMwU
-	 TmXZIROfO6KE0XfuTtPpEmHX/n1UpiOfA8oFNBdoHaZpRNO2gx5C5Z8xdgUAzc3nJVAX1
-	 FYCPy6rWYXRjmvwuD/z0en/LOQk1FAza3tz60FQ1YpZo/BC1TVwu7Z3NKFAxlquSgbg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793887997;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=vhaMFCmITRvdlEmOVhab1Mlft/tMQfl2s1RAannTexY=;
+	b=eaTQI6C0BZqllgxWM/oco9K0YaKqtQMapgw4K8TBxBQBhpuIW0PMXVKeJjuxNqrvzOsy
+	 iTrGKaRI46Hd5FMJ2ar33VzRc+UIdpYzaxz618EJvewS2cauLe1covxWG9rtwnrONoUxf
+	 VOSzE9MqsfAcPu4odB/0vGsU+YtZR76NdV3hmIZVQDFYf5K1nLqN7CxSm+yjfd+JQxFjS
+	 m4843pY2TOSe1kezuaKrktC9E32NG5fPuR+VUW4RuhuybexS+idxklie9cnbPp5/EowFZ
+	 OhPRTy6bTuyvta8vFdFDv9ExgthB2J9F9QEiuqP79ojKD/9m0FCxERNS90dMsMyWhJw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gEIc2vgX;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AV5U+7nJ;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 260AC606A32F
-	for <mfd@lists.linux.dev>; Thu,  5 Nov 2026 14:09:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F338606D805;
+	Thu,  5 Nov 2026 14:13:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gEIc2vgX
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 044241F00A15
-	for <mfd@lists.linux.dev>; Thu,  5 Nov 2026 14:09:29 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AV5U+7nJ
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9051D1F00919;
+	Thu,  5 Nov 2026 14:13:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793887769;
-	bh=uWZDC+jKR50KkuL/m90FaOZS23uCXLeIovjpwO7U69c=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=gEIc2vgXojaI7fLQe2A1eMM5vENRX6IJ9jAXk4+aXPqJGYuaF7IslkQbHL19df884
-	 ogA2YlzVBJKq2xnUxIwT1vmileZSCUoP1Nb4OgxAHNwO2RzJsk9lTMbvDwDc5fgHQl
-	 ZiHGw3Z578ERPzNkl7ZstfGTIRDC1lITQD9Z7NoTSmkKtWwmz76no80L39/9Tdn4fH
-	 CE3/T5QKcatW/sO/NVg2JBzw13sqs0aJxutYOy0W7YD7OcZUXpXGOATS397JiaKLRj
-	 5Zw+lrJk41UK6dR4VxKg6dzeNJFlI9s+G+G5QwR7JUL2GXg4d3Iw2VVKl9RlldTTqF
-	 OFNr/26fZ/2Tg==
-Received: by mail-lj1-f177.google.com with SMTP id 38308e7fff4ca-3ac91f5aa89so17166361fa.1
-        for <mfd@lists.linux.dev>; Thu, 05 Nov 2026 06:09:28 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AKwUvByWP43+EiF9fsneAroX2DaGGi5RkZUq6Dn09f6mhyYDKICiDWMkvlGvf7hiVPnStiCRw1o=@lists.linux.dev
-X-Gm-Message-State: APuU4Z8J/9w3ch6W3JO5zvPQC2DoUAhCLUGVN7vF3MMO6cUgDTJuWPDJ
-	aBnaWiL5MQEkSmWn6ahHaCzvr1CKRaSaKiApRn+iyptHyiP3x7LbX3A60RvpFADl+YsBuyIbpcz
-	JS0G2vHU8oS/mPF32afpPqaLMTv1OAbA=
-X-Received: by 2002:a05:6512:688b:20b0:5bf:e4e6:7f78 with SMTP id
- 2adb3069b0e04-5bfe4e68c03mr2949831e87.39.1793887767615; Thu, 05 Nov 2026
- 06:09:27 -0800 (PST)
+	s=k20260515; t=1793887997;
+	bh=vhaMFCmITRvdlEmOVhab1Mlft/tMQfl2s1RAannTexY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=AV5U+7nJyY2hDS2LZLnNqkvzwtaZN9HFjMh+dqmA2Mn+hXgWQ5u7YfNttOsb+ku8F
+	 yJe6d7FRUgxuwXotQ32bNxyonWdscEaZnLyWpTAgqdFxt+ZWsV/3QX2oJe9Jt8IxoX
+	 PW0e0ndTIhwh5xG/SIdJmfKj4ioos6ViPcc+MAy4wHQunAWaghYQE9aolrOKEJl2GA
+	 wArS2mKgHYmxczgrSDCLEdOHWr8E6f2CK/RfSPQxHchVWtpIUkeLGTJ7DGYGGWSae3
+	 I1nu9+qeijUjVhvxpSWQ8aIJbzjfeKklb1wamfJiBVqySUQqkhu/izowr5cGY1CpqQ
+	 mhelaRKYT4eGg==
+Date: Thu, 5 Nov 2026 14:13:12 +0000
+From: Lee Jones <lee@kernel.org>
+To: Charles Keepax <ckeepax@opensource.cirrus.com>
+Cc: Arnd Bergmann <arnd@arndb.de>,
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Peter Griffin <peter.griffin@linaro.org>,
+	Alim Akhtar <alim.akhtar@samsung.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Mark Brown <broonie@kernel.org>, Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@bgdev.pl>, mfd@lists.linux.dev,
+	linux-samsung-soc@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, patches@opensource.cirrus.com,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 1/4] mfd: wm831x: Support software nodes for DCDC
+ regulators
+Message-ID: <20261105141312.GL1650678@google.com>
+References: <20261024-samsung-kp-v4-0-e21253295e68@gmail.com>
+ <20261024-samsung-kp-v4-1-e21253295e68@gmail.com>
+ <20261104181429.GE1650678@google.com>
+ <ad02069b0cdede7ae191e4a3df57f33a@gmail.com>
+ <20261105085321.GG1650678@google.com>
+ <85817548-28f8-45ed-987d-a4996c2bc4ce@app.fastmail.com>
+ <auyK50dqvwxIGIar@opensource.cirrus.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,61 +72,30 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261101-xg6846b-bcmbca-xrdp-reset-v2-0-455fe9eed5ee@kernel.org>
- <20261101-xg6846b-bcmbca-xrdp-reset-v2-4-455fe9eed5ee@kernel.org> <340843f896db387a7c3ff4d6a06ef7c2155d1f98.camel@pengutronix.de>
-In-Reply-To: <340843f896db387a7c3ff4d6a06ef7c2155d1f98.camel@pengutronix.de>
-From: Linus Walleij <linusw@kernel.org>
-Date: Thu, 5 Nov 2026 15:09:14 +0100
-X-Gmail-Original-Message-ID: <CAD++jL=sYc2_Pj5k-5d4QqcqNpFjQkcTKJFv4oDhXCHo9kymSw@mail.gmail.com>
-X-Gm-Features: AclHuK-xb4f0QrVUB5hiQs77kNWFtdOJD63XyBZhuUtDoapdcW_U4E9f6qqA4pg
-Message-ID: <CAD++jL=sYc2_Pj5k-5d4QqcqNpFjQkcTKJFv4oDhXCHo9kymSw@mail.gmail.com>
-Subject: Re: [PATCH v2 4/7] reset: Add BCMBCA block resets through the PMB
-To: Philipp Zabel <p.zabel@pengutronix.de>
-Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	William Zhang <william.zhang@broadcom.com>, Anand Gore <anand.gore@broadcom.com>, 
-	Kursad Oney <kursad.oney@broadcom.com>, Florian Fainelli <florian.fainelli@broadcom.com>, 
-	=?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
-	Guenter Roeck <linux@roeck-us.net>, Jonathan Corbet <corbet@lwn.net>, 
-	Randy Dunlap <rdunlap@infradead.org>, Benjamin Larsson <benjamin.larsson@genexis.eu>, mfd@lists.linux.dev, 
-	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-clk@vger.kernel.org, linux-hwmon@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <auyK50dqvwxIGIar@opensource.cirrus.com>
 
-On Tue, Nov 3, 2026 at 12:28=E2=80=AFPM Philipp Zabel <p.zabel@pengutronix.=
-de> wrote:
+On Thu, 05 Nov 2026, Charles Keepax wrote:
 
-> > +     unsigned int i, zone;
-> > +     int ret;
-> > +
-> > +     for (i =3D 0; i < ARRAY_SIZE(power); i++) {
-> > +             for (zone =3D 0; zone < power[i].zones; zone++) {
-> > +                     ret =3D bcm6846_power_on_zone(rst, power[i].devic=
-e, zone);
-> > +                     if (ret) {
-> > +                             dev_err(rst->rcdev.dev,
-> > +                                     "XRDP power-up failed at PMB bus =
-1 device %u zone %u: %d\n",
-> > +                                     power[i].device, zone, ret);
-> > +                             bcmbca_pmb_reset_cleanup(rst, group);
-> > +                             return ret;
-> > +                     }
-> > +             }
-> > +     }
->
-> This doesn't look like it belongs in the reset controller driver.
-> Are these power domains?
+> On Thu, Nov 05, 2026 at 02:43:17PM +0100, Arnd Bergmann wrote:
+> > On Thu, Nov 5, 2026, at 09:53, Lee Jones wrote:
+> > > On Wed, 04 Nov 2026, Dmitry Torokhov wrote:
+> > >> On Wed, Nov 04, 2026 at 06:14:29PM +0000, Lee Jones wrote:
+> > >> > On Sat, 24 Oct 2026, Dmitry Torokhov wrote:
+> > - if there is a reason to expect any future user of the driver,
+> >   extend the wlf,arizona.yaml binding to cover wm831x as well,
+> >   replace all the platform data with swnode properties according
+> >   to that binding and have the drivers use those.
+> 
+> I really don't like adding wm831x to the Arizona binding. Fine if
+> we want to create a new binding in a similar style but Arizona is
+> a binding for a specific series of audio parts, wm831x predates
+> those and is a pmic. Trying to combine them feels likely to cause
+> problems.
 
-Indeed.
+I don't personally mind how this gets resolved, as long as we avoid the
+monstrosity suggested in the original submission.  =:-]
 
-I was trying several times to restrict the scope of the MFD subdrivers
-but they have this tendency to all require each other so I'll just bite the
-bullet and implement the power domains too :D
-
-I'll fix the rest of the review comments.
-
-Yours,
-Linus Walleij
+-- 
+Lee Jones
