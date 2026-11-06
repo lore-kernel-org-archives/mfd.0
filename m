@@ -1,47 +1,73 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793969873;
-	b=FaqkPyYISCE6l8zhlI5P44dM2XRl8R0qWCovMyHDJ/2aq6ta443HWHZRRv4xFbaJ95HK
-	 yiPZAcR6PMzxILGpNGFDpULqHdt7t18UG+nSUH2nu7jjL1J7zQ+2PiSmQ70EL/sjosCZN
-	 nXdak1h56lb1it8GC4dY25Sz7Ps2A93XlXaif9IPvztoDz+FieW9usBKSZP3Mqt5KeBZ1
-	 CUS2uGyZaRN0OFgXs9D10YwdZe6UX7Yf25vrISVFCZNGpKQbo+nC06wtL31bew9nIYFC1
-	 3UstIhVUViX+uT2o1VXV0rINHaRrholTsFTQY9oVcepWpXxM9DjJ1ucaAFjGG509YXw==
+	t=1793974061;
+	b=rsorPETMQ9cIE6pNxQbmEQREi47zCGtAx/NjBSCBeGeBjWnnA8bB62lSddipidmEgktM
+	 1MQ0f8Cl8/yjPiQuP4+QZGETZSN3kOgQcqPTJMFz/0nrNOGqMNTefhxLI0Z9Q3QzYy0B7
+	 38gJi5Z9Emrif/RHxOMz9Y/44xGYAnwtDkGmJQOb27YEGJe8dgaKAg0u0OW3B7vu/dT7z
+	 Tkf+J2A9j3rIMAi/bZKlf+UsWww/69gY9aXjYRphmG9jDGDCWHc9ILGDA/rgBpbCeZVU5
+	 N5IMSruePXSxpo/WZo/rXXaqM2buO1bQ+N25nD5V40xBLYrhoNJaXhVdVKH67w+WHxQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793969873;
-	h=Received:DKIM-Signature:Date:Content-Type:Content-Transfer-Encoding:
-	 MIME-Version:From:Cc:To:In-Reply-To:References:Message-Id:Subject;
-	bh=bdazGzEMHpNo/xFZo4UuACj+NPbyfyXOOELqau7KKIc=;
-	b=Vc+KyaXEAXS0V+A40KdIDB9TOah7kUdFWAS/+9KeAmAKHcJwq/D86b/7i5uItPzudR95
-	 9oMm09tvHJu56qBHnkYeIG6W/9ZqwMCV+PFqFHdvhHsbWG0gaOVSbqGmZlEgOrBY46XY9
-	 mTe8giAuP03wPXp3P/VxFqO9ugAuAPhCkFJ71LsVIapI5i170hYMRR1Tyj1m5yi83v/d/
-	 MXC8lX4FgLSpYkQU25LXkQhF0/3J+hQakDQzYprhNQq40L/vM9vhr7keiz3mM/A1J7JPD
-	 6CEoebJlJnbbieEMTdcps6fDhIfGXyJqYw/zTrupPNVdie408+3NWJsOq6UqHwXMw3w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793974061;
+	h=Received:DKIM-Signature:Received:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Cookie;
+	bh=QzOeMyW9XoRvbL1S4yq9b+nOF7kq8iH2OCoxesNStc0=;
+	b=R/v6AEz4NSEucJ7FWGBf2j5G9pTO9goRctVf3A/jcXbbpuMPBx8EQS12fQc+z3qC3F0L
+	 Bkw2YsG56jbq/yWz6b2ZXG0mm+gfTYBpeESM2vPWsKb/8QnIdoZ9ULDVvWOk+yOgik1Il
+	 +1jLBt+weC5J9DMWSiIRzofYlLM9TzzsySPFn7n4wJrL+TKEf6xlCcCiM7KibQT/uxJqD
+	 lkEwNqzlH64eRn1J2janjMryepPVcfyyi+ABVI39wdcLginaK7nkQWHry0HKC1t/RVEiF
+	 GwQbe9iKA3PMT/h9nLKXrGinzuHJX0uyfxQwBv9LS2HGmQBYeyDmD4yBOIo5+h2CYuw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dEVygYOq;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Qhno8iJx;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1DB9606A326;
-	Fri,  6 Nov 2026 12:57:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEAB2606A326;
+	Fri,  6 Nov 2026 14:07:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dEVygYOq
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0D98F1F0089F;
-	Fri,  6 Nov 2026 12:57:52 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Qhno8iJx
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1E7731F0089F;
+	Fri,  6 Nov 2026 14:07:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793969872;
-	bh=bdazGzEMHpNo/xFZo4UuACj+NPbyfyXOOELqau7KKIc=;
-	h=Date:From:Cc:To:In-Reply-To:References:Subject;
-	b=dEVygYOqnRrT/sVNMu9qV4SOCkeLfSYdyomWHU2oiXdUiH9en1YWEYdmgfqcgbeS6
-	 txS1KoPhhLGfx6EZmUw+giNlzPy4MFm1GCz+fngS9NM0ZUDHEnxt7vO5SFN73eTSeX
-	 xp7c8Zrb3W+Z+Z2duQVDEFf3Kk6Y/FZ1oLyFNHveJOg20rJHSdf8yvlNA7iTQZmw9Y
-	 rgknbdP7HeCFl4+3rABR7i77LhbDR7CpdYp6Ts9sVSgerBTQBq/AgZLLiQDtCMedHo
-	 nzU0NiJq9EfXXM9WQNp4OfhY69bLuRoyyVwCwCNIl4157mEb4FM0mkRleIFrofs1iy
-	 Sj9e6EIQQR1xw==
-Date: Fri, 06 Nov 2026 06:57:49 -0600
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	s=k20260515; t=1793974060;
+	bh=QzOeMyW9XoRvbL1S4yq9b+nOF7kq8iH2OCoxesNStc0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Qhno8iJxw2PadLSFZky+/AlnZ7Q017lTPrVDL4fbT2GTUeVao5XPwtcZB2VCgWfhc
+	 MBRRIYCwqMu0/IoTN09+hRzXBRaUw0UBz2V1T2wx96q9sfp9jGAZLOYLr8FiIM+2mz
+	 nasuwKznXigrY+jESlC7T7o4DgaVeyn7W/PMPbucwWG+8T6ipieOurAtwQIq+Qgos7
+	 6VqhUgNCRHeWo65aKfH1OozZK64et5f+BNt5//V53/V8MlRLSoJrI8t3T6/wrhSvfk
+	 ETcY8XsjE8FnJCoSaY2A8IHQGbEJRNMxDnbsrIvzDJQ7Jmyt/Iq7LpNXLDWEIczxNH
+	 /pRtG8PiDOhLA==
+Received: by traversing.sirena.org.uk (Postfix, from userid 1000)
+	id C8ED22808F5E; Fri, 06 Nov 2026 14:07:31 +0000 (GMT)
+Date: Fri, 6 Nov 2026 14:07:31 +0000
+From: Mark Brown <broonie@kernel.org>
+To: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+Cc: Arnd Bergmann <arnd@arndb.de>, Lee Jones <lee@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Peter Griffin <peter.griffin@linaro.org>,
+	Alim Akhtar <alim.akhtar@samsung.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Charles Keepax <ckeepax@opensource.cirrus.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@bgdev.pl>, mfd@lists.linux.dev,
+	linux-samsung-soc@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, patches@opensource.cirrus.com,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 1/4] mfd: wm831x: Support software nodes for DCDC
+ regulators
+Message-ID: <c159ace7-17b8-46ae-9551-d0eec6e051be@sirena.org.uk>
+References: <20261024-samsung-kp-v4-0-e21253295e68@gmail.com>
+ <20261024-samsung-kp-v4-1-e21253295e68@gmail.com>
+ <20261104181429.GE1650678@google.com>
+ <ad02069b0cdede7ae191e4a3df57f33a@gmail.com>
+ <20261105085321.GG1650678@google.com>
+ <85817548-28f8-45ed-987d-a4996c2bc4ce@app.fastmail.com>
+ <auy4Qbxg-pW_X37E@google.com>
+ <ad9ec396-aab1-4950-8ea6-dd72d8938464@sirena.org.uk>
+ <auzFQkIPZScADEeb@google.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -51,79 +77,44 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-From: "Rob Herring (Arm)" <robh@kernel.org>
-Cc: linux-arm-kernel@lists.infradead.org, 
- Benjamin Larsson <benjamin.larsson@genexis.eu>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Philipp Zabel <p.zabel@pengutronix.de>, linux-clk@vger.kernel.org, 
- Jonathan Corbet <corbet@lwn.net>, Anand Gore <anand.gore@broadcom.com>, 
- Florian Fainelli <florian.fainelli@broadcom.com>, 
- devicetree@vger.kernel.org, 
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
- Stephen Boyd <sboyd@kernel.org>, Kursad Oney <kursad.oney@broadcom.com>, 
- =?utf-8?q?Rafa=C5=82_Mi=C5=82ecki?= <rafal@milecki.pl>, 
- Randy Dunlap <rdunlap@infradead.org>, linux-pm@vger.kernel.org, 
- Guenter Roeck <linux@roeck-us.net>, Lee Jones <lee@kernel.org>, 
- Ulf Hansson <ulfh@kernel.org>, William Zhang <william.zhang@broadcom.com>, 
- linux-hwmon@vger.kernel.org, mfd@lists.linux.dev, 
- Brian Masney <bmasney+clk@redhat.com>, Conor Dooley <conor+dt@kernel.org>, 
- Jerome Brunet <jbrunet+clk@baylibre.com>
-To: Linus Walleij <linusw@kernel.org>
-In-Reply-To: <20261106-xg6846b-bcmbca-xrdp-reset-v3-1-d6adeb71afc9@kernel.org>
-References: <20261106-xg6846b-bcmbca-xrdp-reset-v3-0-d6adeb71afc9@kernel.org>
- <20261106-xg6846b-bcmbca-xrdp-reset-v3-1-d6adeb71afc9@kernel.org>
-Message-Id: <179396957046.2456734.10877146693637618600.robh@kernel.org>
-Subject: Re: [PATCH v3 1/7] dt-bindings: mfd: Describe the BCM6846 PMC
- complex
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="ThW1+an2rN+EXP3+"
+Content-Disposition: inline
+In-Reply-To: <auzFQkIPZScADEeb@google.com>
+X-Cookie: Whoever dies with the most toys wins.
 
 
-On Fri, 06 Nov 2026 09:26:44 +0100, Linus Walleij wrote:
-> The third generation Power Management Controller (PMC3) has
-> different subdevices.
-> 
-> Identify the parent with the BCM6846-specific "brcm,bcm6846-pmc"
-> compatible.
-> 
-> Describe the complex as a simple-mfd with a PMB bus child owning its
-> register resource. Include the PMB clock and reset controllers and
-> PVTMON, with its acquisition clock and reset resources.
-> 
-> Signed-off-by: Linus Walleij <linusw@kernel.org>
-> ---
->  .../devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml  | 82 ++++++++++++++++++++++
->  MAINTAINERS                                        |  5 ++
->  2 files changed, 87 insertions(+)
-> 
+--ThW1+an2rN+EXP3+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-My bot found errors running 'make dt_binding_check' on your patch:
+On Thu, Nov 05, 2026 at 10:07:06AM -0800, Dmitry Torokhov wrote:
 
-yamllint warnings/errors:
+> Hopefully you do not need to pay too much attention to them as they are
+> hidden in the legacy board code.
 
-dtschema/dtc warnings/errors:
-/builds/robherring/linux-dt-review/Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml: Unresolvable reference: /schemas/soc/bcm/brcm,bcm6846-pmb.yaml#
-Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.example.dts:18:18: fatal error: dt-bindings/clock/brcm,bcm6846-pmb.h: No such file or directory
-   18 |         #include <dt-bindings/clock/brcm,bcm6846-pmb.h>
-      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-compilation terminated.
-make[2]: *** [scripts/Makefile.dtbs:140: Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.example.dtb] Error 1
-make[2]: *** Waiting for unfinished jobs....
-make[1]: *** [/builds/robherring/linux-dt-review/Makefile:1726: dt_binding_check] Error 2
-make: *** [Makefile:248: __sub-make] Error 2
+Which does get reduced error checking and questionable readability
+benefits :/
 
-doc reference errors (make refcheckdocs):
+> The benefit is that using them makes the driver exercise the same code
+> paths as it would on DT system (unless you insist that the driver is
+> very special and should only use of_* API) and allows dropping support
+> for bespoke platform data (in most cases).
 
-See https://patchwork.kernel.org/project/devicetree/patch/20261106-xg6846b-bcmbca-xrdp-reset-v3-1-d6adeb71afc9@kernel.org
+IIRC all those drivers handle DT by parsing it into a platform data
+struct or just don't have DT bindings anyway, and it's worth being aware
+that ACPI has some rather different ideas about how audio should look to
+DT.
 
-The base for the series is generally the latest rc1. A different dependency
-should be noted in *this* patch.
+--ThW1+an2rN+EXP3+
+Content-Type: application/pgp-signature; name="signature.asc"
 
-If you already ran 'make dt_binding_check' and didn't see the above
-error(s), then make sure 'yamllint' is installed and dt-schema is up to
-date:
+-----BEGIN PGP SIGNATURE-----
 
-pip3 install dtschema --upgrade
+iHUEABYKAB0WIQReagvpf3TrrA7BoYYv73Ows9A4iQUCau3fIwAKCRAv73Ows9A4
+ifRsAP4tUq7tN/TDsRfXjjcTur1dwpJtgrTdWOmPwnkeVlQY3gD/QkqMpRqix/0Z
+tBrIqRL9sg0hSaLIScndH+eFnbaH1g4=
+=t+xL
+-----END PGP SIGNATURE-----
 
-Please check and re-submit after running the above command yourself. Note
-that DT_SCHEMA_FILES can be set to your schema file to speed up checking
-your schema. However, it must be unset to test all examples with your schema.
-
+--ThW1+an2rN+EXP3+--
