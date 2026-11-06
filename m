@@ -1,56 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793943764;
-	b=uICQGUpUJ7Kk5tdgMH7mHGHc5nnoPEGzQpJN3wPoddu5Cm+TdupsTop2aZMUGGRAhDcE
-	 pQq4LHXtTw+jDKBLQHLSOC1OzwDMsWYqADfbyaD0jloB1ccTCWhvNVsvy2TBCPrQaSEW8
-	 V4w+65/5n3OOCvuYtpf5xt9TJ8bXQo5Q4RA5zGTFmKs4DxHeSUORx9l2GlKq7lOeBqkM/
-	 jdICnqm8HF/4K/mzpJJJEkYbl+dwIOnrpB42QWQlUeA3bijp2nDKB/s8/WUVIt5SlVvzM
-	 F2M+DlKSNXSlfY6Rx+B3tCaC2tTHqR8lEmHmBs7MKL5zCFWH7xROKrrpYcmVYtCabFg==
+	t=1793943939;
+	b=b7VIxB24Fi++JWKz5xXKq1NO9X3Zt5LsHhbfjXTwJNJXv108yb7AfVaKbuVINQKMSGIG
+	 +JhminZD8YLThulWd1NhGhetH+Qpl6jqdXH1vn/eq0AgRHd9osBni0Gt0JL3hU/F1jiTz
+	 h7rE/fLF8/3DLqr1Ou0QEfstt5qoqZ3+EUWofnOWi91gYe4S0aXJNdss+w8tjBeXcCRDp
+	 GDYiP9xEEM4RT4EALRkcmVbxPy5HFf/KjT0ddU6DTjU5SoGGeMTI0nqwzZVobUWEApc2V
+	 +P/+5YBHNDcpvxuCe4kyGcqGjICRuI+vqHpLDi7zr9HCerN1Xdutg1cSw9lA4/59Ztw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793943764;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793943939;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=MV5jKfRk8O1qwf0ZMdAdvXep+B41orDrNp/ZfPVSnsE=;
-	b=bsTh76l6G8eVBvby3vK4fQNY1TNPMIj0yJDX6P3YIGkbq9iMftdhnXfy3zfYBhrIQ/OB
-	 rMowmLuHF9McsKhJm2yiEsRr1fLUrSF4bn/xJ3tVWRtbfwLa+QcXEldW+ONOvhzNB9CRq
-	 qnsgCCkqZNZFFtpHz8F9i575OfgMuWNA9s+d1IBRsnS1inIvrw1D4xYparZZEtTGjH7Vb
-	 BQ0h1BBAuLlOjLec4S/lPSAa0n5n58ULXR8r+PWeyQ3O9/LO4yLZglCyYMeFAojdopiPL
-	 vUSvNsGp/6IathNz6Xg7I+aUJSLu/s3H6fc9cReqKssmHjK+o0CMnYKCFlnrr45mOBg==
+	bh=Af6N8TMYJXlnWgQgLz8THGwbiJSgO5l2uE+3uITqO5E=;
+	b=a2qadopnBGE092cN6zjfV2lQzODmPs0D7lB2ItJqhwJY2QHU+dWupoLKX2p2VkDZ77io
+	 1abkKJVV17dqsHsAsPTgILo5XUS5kKjSeV3U3QWLBlUHBu7vMUdeqCirRu8xndyp18Eis
+	 stPThnrXJLvHWCpT1guOU3ENteOT0cKWx9vOw72WZ4fNa1RC9vbBgQTgUUG4Ml97mcoZ1
+	 0f4vg83On/2skBPbm17Llx3JXbXpR9PMAEIMVOdt6fdw7NygVdfDQMrq9AxmYMkMiHaAA
+	 VF6C67VGxah5g1bKyVTjA0CQWymJjFfv9v2+ulcMJeXsB5YsEemKM3aTvcKlCGj07XA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=aL61QYj6;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eJYtB6RR;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 42E83606D809
-	for <mfd@lists.linux.dev>; Fri,  6 Nov 2026 05:42:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B579606A332
+	for <mfd@lists.linux.dev>; Fri,  6 Nov 2026 05:45:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=aL61QYj6
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AEA9C1F008A1;
-	Fri,  6 Nov 2026 05:42:43 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eJYtB6RR
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A79F61F0089F;
+	Fri,  6 Nov 2026 05:45:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793943763;
-	bh=MV5jKfRk8O1qwf0ZMdAdvXep+B41orDrNp/ZfPVSnsE=;
+	s=k20260515; t=1793943938;
+	bh=Af6N8TMYJXlnWgQgLz8THGwbiJSgO5l2uE+3uITqO5E=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=aL61QYj6pdciJdvU+uSgwoE+4tdRHIpzis2K92MNX3OlhpYjz1U48S2r7O5aDmoZ4
-	 Lh2OYahpUqPaioGW/W4LE8Yw/v6ZsD6lTzHvAjK+HcmvAXi3hiN5s+qTqLebG7C9G1
-	 JVbIxhjxa9MkaCtVm36nGSpKQK9WUkM+yRykx+8htvHDY4zlrGSHJVfprQG4IteRCK
-	 F6mngjrcedslnswa7ocubVUHXJ9Fo83tN2sC9IVmc4GnIhtNYC48WfzNjRahFoeJyh
-	 KuzH3bmHMF4SLXfunvZEQiwlaDqosJliVJa0hBWv61S8HUCNssXCwsjYf61Sky9PlP
-	 mkrQRXZv65djA==
-Message-ID: <sashiko-outbox-200848@kernel.org>
+	b=eJYtB6RRYc12W4CuHCYDAYYCqKH23oDQqtgnjQxAqN2MHvOGBk6xYdeVTeSkswAB/
+	 dtJwUFfKj0+CSIhcwbUKMMoiPe3SaaJ3BgdbL1LCXRPohBLlT5ChtiWmwv51h9LMpX
+	 8IWAIYoA3RII27Kkey5NWIHMjAUP06klSG6Vh5hVMmDM4S4KnFChGw/WKGDgE7X2uR
+	 VJhsY8WFYQTYqVr9Q80A3Zt4UJ7fbuAYCU7vm/JuAe0wd3dG2rSBnyOUcU/+l201bI
+	 cXuMR1O+zTEoSqZjMJQf++OHHfMU9cuxB8SpQzE4c4BLJpnrj3i8HZ/qqqD6NQ9rOI
+	 e+U3sl5mnRIsA==
+Message-ID: <sashiko-outbox-200852@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 4/4] ASoC: arizona: clean up coding style and formatting
+Subject: Re: [PATCH 3/4] ASoC: arizona: drop unused HPDET accessory ID
+ support
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Dmitry Torokhov" <dmitry.torokhov@gmail.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261105-arizona-asoc-v1-4-25ec7338446e@gmail.com>
+In-Reply-To: <20261105-arizona-asoc-v1-3-25ec7338446e@gmail.com>
 References: <20261105-arizona-asoc-v1-0-25ec7338446e@gmail.com>
- <20261105-arizona-asoc-v1-4-25ec7338446e@gmail.com>
+ <20261105-arizona-asoc-v1-3-25ec7338446e@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Fri, 06 Nov 2026 05:42:43 +0000
+Date: Fri, 06 Nov 2026 05:45:38 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,9 +61,12 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> Clean up minor coding style issues in the Arizona jack detection
-> driver, removing redundant parentheses and fixing argument continuation
-> alignment.
+> Nothing in the kernel sets hpdet_acc_id or hpdet_acc_id_line in
+> struct arizona_pdata, and neither has any Device Tree or ACPI bindings.
+>=20
+> Remove both platform data fields and all exclusively connected HPDET
+> accessory identification logic, work items, GPIO lookup, and state from
+> the Arizona jack detection driver.
 >=20
 > Signed-off-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
 
@@ -70,5 +74,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261105-arizona-as=
-oc-v1-0-25ec7338446e@gmail.com?part=3D4
+oc-v1-0-25ec7338446e@gmail.com?part=3D3
 
