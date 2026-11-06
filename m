@@ -1,94 +1,59 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.215.228
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=212.227.17.20
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793984603;
-	b=5FnuisB/i66f0/xUhB9pJSAmZ4yhBDBrmwcMXvP0nWBmQXdNMebeE8DwdCFS7Zh3FdSs
-	 5qUbnJfeTO2wipGmtIwqoWH15JMapfcIs2CGb2DhdLWscHrKoYIU7nOW8dqY6hH/gQRH9
-	 oyjxfJfBMvVqf8SGGDLxkOgN3OoeYcoyri6leMcz2cX2p8DYHZMaQPS0hSC2+MfIhPsYg
-	 jz25n+qDbg85DN24M7Ywkp5LZhYp13qMVLj6yUTU4mWYXL1qpWx9670HL660l/arLT6Xe
-	 Qx7PMcYORN+jGSXy0vzHSsNw0NxnNejdQkhhbW0+TsMZ7QY1ymnz40EamvvdQEhE0GQ==
+	t=1793993224;
+	b=EhwoBOBwByxF8ww2qSMXugIhu5gBoyHHpsZPfH3uw/67PiXN89BLrleJsd103g/uKZMP
+	 ZbcrwMmgNb+GHHnyfnxlFx77EKgbOl6p3xDFGvTdEVS040UwhHP/5oCsIfGwyPMQOOU/J
+	 bYSLmCDucY9b9Zq/sRL0T+5lYshf8oooewGjKRBXch+9UgVT0TWtv2Zq4PnpupdOiR8ph
+	 Qe/GoTV/QmlEwvopMV4BqnO2SmJ5A96ur66fm30c1vtgnk39I7IpQGQAbhTXcXVpf/cDu
+	 qEgrcZnKAOuqFw14lVyU6Zo4VIdZxq8rr1SU1CScNCl3jVSno8rqlXEGXpBN6jeFy6Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793984603;
-	h=DMARC-Filter:Received:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:X-Relaying-Domain:
-	 X-CFilter-Loop:Received:DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Received:X-Received:MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gm-Features:Message-ID:Subject:To:Cc:X-DetectorID-Processed:
-	 Content-Type;
-	bh=WggBGV5BJEnJ3PEDxpzRdy2pHjKOPNNmpp0XJ/NXgI4=;
-	b=LUZ1apCeznyl/lziazAzx+WmwjnyRxYcU+Cf4SrZ6R8l+PNU+WfaGSKKR1bMRWIW4pal
-	 AAoBLZrHIYi8suAmjgWkpY1njAWrBfv0TFcI0saOCJ6qkHUvfDFQiOFjHAbwd0i5bRcbc
-	 SMLsXO+4qS6tmdoznEIlTwvM9zuVvBaAIculArvGuHICAbR8qT67JLKN5VHhGgCIGSQyS
-	 y2ec74DHYJiLCKI5aTV2LYKSHLTn223sUTuZCzVtQDls+jjPHja+np+/KTLRsiNzmq6B7
-	 FuKLwp4GEDHxqJLkVea9H3CP92vC/evNUUBPw9Wdc3j2Tk7yEaXMnw4lmRuqpCG8mJg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793993224;
+	h=DMARC-Filter:DKIM-Signature:X-UI-Sender-Class:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Provags-ID:X-Spam-Flag:UI-OutboundReport;
+	bh=QZ5nNzUoS74KZwDflFqEIaSrMQBfynDlbjgfN6yh+Y8=;
+	b=C/Rdw71Z5cIwMZ5t6wCNBbjP0fpkzxQ0p1Y4jh7/Ybtqsxex2XgmXyNcxZ3tk4SanwCG
+	 yvhGn8/2xekXy/gjIhYwHvTvqBQ0Xxe+/yoIDYWOuJtIoDmmP/jGVyMGo3XCeepUC4gUH
+	 qJzszJH6au7tLB7Rs117n0Z/Ic312TN7gjgCjxj/6yxhxiU0KvJ6trUYHu3ndV82Zd+SB
+	 CBjA3pDdzAeoTvsDMDDXnwtm3tRsCrlOu2VbBP2uWHoUlqxzRL7iyRI06FdnXPI7Kr+6N
+	 95XrYbvhMhZhde6hjlMQsMTlHIGgbQ+lsoSlmVVNz9ZT/XQn4Gu7bmH0yN7HFi60Mcg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=broadcom.com;
-	spf=fail smtp.mailfrom=broadcom.com;
-	dkim=pass header.d=broadcom.com header.i=@broadcom.com header.a=rsa-sha256 header.s=google header.b=fRXuiO3X;
-	arc=none smtp.remote-ip=209.85.215.228
-Received: from mail-pg1-f228.google.com (mail-pg1-f228.google.com [209.85.215.228])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=gmx.net;
+	spf=pass smtp.mailfrom=gmx.net;
+	dkim=pass header.d=gmx.net header.i=wahrenst@gmx.net header.a=rsa-sha256 header.s=s31663417 header.b="HPq/+bW9";
+	arc=none smtp.remote-ip=212.227.17.20
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87537606A32C
-	for <mfd@lists.linux.dev>; Fri,  6 Nov 2026 17:03:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 87537606A32C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=broadcom.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=broadcom.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5B53606A326;
+	Fri,  6 Nov 2026 19:27:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E5B53606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gmx.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmx.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=broadcom.com header.i=@broadcom.com header.a=rsa-sha256 header.s=google header.b=fRXuiO3X
-Received: by mail-pg1-f228.google.com with SMTP id 41be03b00d2f7-cd69954c755so589968a12.3
-        for <mfd@lists.linux.dev>; Fri, 06 Nov 2026 09:03:22 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793984602; x=1794589402;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:dkim-signature:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=WggBGV5BJEnJ3PEDxpzRdy2pHjKOPNNmpp0XJ/NXgI4=;
-        b=VTtYQHG1JxYX960ABBrhx8bAQJ+u63lPkYvd8S6cwAJW+e43SDDT0WhQmYF13YeyBW
-         UfyJkpqt+KLFPuZfEBFX2fMl5+aAN+lZjHKBP9HtxSK7oV5cgZ7DIhWhLr39iIu48be/
-         oV2Rx3P8pO27abMIhadlfeqn5Grl3tilujokB1tsbATRxngYwNb1jg8o2PBngYDMvsDv
-         k3V1UOHVeFQjsUCUtsR4vMtuvYuj6+n3jBzxHHBAr++QC2iAmYUJBBDfLSV9Ok9WlQ0g
-         ILYOW6HJo2a1TjkVa7su2YZ6rlgzuuCtDeoWIJAsNqRhuL6icBe3lE+KsE6N7pI4eOKd
-         ZpJw==
-X-Forwarded-Encrypted: i=1; AL+hErHCFRAOGXcJeKJDg+7DcjUAMR8SrXE+ykW78fjaoY1lMlZvmAhLRJHSAQSLzdO/QdlT7ss=@lists.linux.dev
-X-Gm-Message-State: APuU4Z9cVsbc5WvPx1L7f/RYDAebxMmuvhAfq1A61wLv1J1X/J/5Gdc6
-	IfZCU1VrV14XINYVoj/WXXF10uqlTfky7KhyouF8iQQWfzhc6g/NelTrQ8TaoEmiGOVLoCoqrW6
-	0owM4LwQyarn7vUIggohAlNtv78CbOOa79gtmPbn/sxF6AqOp4CN8FAk5mCckEXEvbPNPXffnO3
-	ygyf5fbo7w9s4C+5kU2SCV617VFA4fviNY8aZTcbR5VX9MU3mOnA5Mo3AVFguNnvx+Go+z/30Fd
-	5L9NKIx
-X-Gm-Gg: AYBFou1PrKRR2Pf4NaO1xeyfX3UOTVAeai2wDVCtQo/ijePYKxd9MIvxnurPEYoBkVk
-	0psBeZXTePaNSPnG/WeCla2I4PdCMqXdLJal3GjF8V7YkpDwZqOoOXyIH3656oJKFg1YczeIh1u
-	UfagjbOFEQoZn3x1hKkpYfEqg5sFV4M5zikW11Vjqq5mW512G04CwxxUen8oJA0wKfeskEqXP3o
-	PdvAw+poSnj0gWNck8+rrBxzhehEwpvFrvAwBAZNgpzWuE3TKMQq9uqy0g4H3dr7CZyHsa8s4Ck
-	TNRfZENszjYBeMFHyStZuTeA71RleTrSQXWLU5l2Z4KgNsvwY9FVnQ0bBPhe8Lti9jl3Z2qoNjX
-	Ej8ZABQvZYDBaLRjE/2BdFT4h/CAOO7gbNAKDFpDkdoeojYEUUd5OC9sOJ3ePR7zGs5hxJYaPYk
-	urGgG/7peCMXCNz9Jz3KQ32Huy9VyY1OLloyjT
-X-Received: by 2002:a17:90b:448e:b0:3a4:adea:50ad with SMTP id 98e67ed59e1d1-3b0db6c33f1mr3274866a91.27.1793984601769;
-        Fri, 06 Nov 2026 09:03:21 -0800 (PST)
-Received: from smtp-us-east1-p01-i01-si01.dlp.protect.broadcom.com (address-144-49-247-13.dlp.protect.broadcom.com. [144.49.247.13])
-        by smtp-relay.gmail.com with ESMTPS id 98e67ed59e1d1-3b0d7e2676asm2008097a91.7.2026.11.06.09.03.21
-        for <mfd@lists.linux.dev>
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Fri, 06 Nov 2026 09:03:21 -0800 (PST)
-X-Relaying-Domain: broadcom.com
-X-CFilter-Loop: Reflected
-Received: by mail-ot1-f72.google.com with SMTP id 46e09a7af769-844bc76180bso1049645a34.2
-        for <mfd@lists.linux.dev>; Fri, 06 Nov 2026 09:03:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=broadcom.com; s=google; t=1793984600; x=1794589400; darn=lists.linux.dev;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=WggBGV5BJEnJ3PEDxpzRdy2pHjKOPNNmpp0XJ/NXgI4=;
-        b=fRXuiO3XCf5YpIIMAIkY8GtbZbTYIiELzieT8PKSzksOsw9noybVlTE0TOY5Plst4b
-         sqs374Ybsz1JEzjshhJEB/Rg5dzdz0VpDB+UM5sgZMVsJDZf6T7QgT3Hhfq8YGTbFDc/
-         xAXyX+LuYPLppY+5R316PekKnuRXQq4dddEks=
-X-Forwarded-Encrypted: i=1; AKwUvBw3+6Mg9v6Itph/t850zpN/OOsfpDDHuMn3wUbWNL1C6s1y/NTu1ZcvDW/2VllzKJioV54=@lists.linux.dev
-X-Received: by 2002:a05:6808:509f:b0:504:5fe1:c8d4 with SMTP id 5614622812f47-567e1848b93mr2236515b6e.59.1793984599575;
-        Fri, 06 Nov 2026 09:03:19 -0800 (PST)
-X-Received: by 2002:a05:6808:509f:b0:504:5fe1:c8d4 with SMTP id
- 5614622812f47-567e1848b93mr2236457b6e.59.1793984599023; Fri, 06 Nov 2026
- 09:03:19 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=gmx.net header.i=wahrenst@gmx.net header.a=rsa-sha256 header.s=s31663417 header.b=HPq/+bW9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.net;
+	s=s31663417; t=1793993220; x=1794598020; i=wahrenst@gmx.net;
+	bh=QZ5nNzUoS74KZwDflFqEIaSrMQBfynDlbjgfN6yh+Y8=;
+	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+	 References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:cc:content-transfer-encoding:
+	 content-type:date:from:message-id:mime-version:reply-to:subject:
+	 to;
+	b=HPq/+bW9kKUZBctSD5Yi9mCwGeHXQhhpsmF6S53IOIxZ/K3Nxl6nuoan5H3bJVxi
+	 P495l1Rhhms6oB/CLzYT1neTSwqqDT1B9F0XMUiyE82miZBsu3aoEiC5+OCbxZjxn
+	 gYR21qsllL51jLL9ATj0Zf5zXGbkzNciBBP8MrriO/m3nXUDN3ENTjHyLXJ+eO78K
+	 eZt411wrK0WiQeKnPOcUmP/3Sg0RPD5lHLPmqw6598FNPrbeaMhKZq/ZXv/VaY+iq
+	 HS5s0auzfex4rjyV3+EvYBjsU3JM0LmLhfNJVJoXRKqS2KL6jAg8SXRqU1FUCWHxv
+	 ttbJhyZB524E5VXE5g==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M1Hdq-1xMeR42NRq-009LmY; Fri, 06
+ Nov 2026 20:27:00 +0100
+Message-ID: <695aba52-0307-4d83-997e-663781b24ba7@gmx.net>
+Date: Fri, 6 Nov 2026 20:26:58 +0100
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -98,591 +63,213 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261106-xg6846b-bcmbca-xrdp-reset-v3-0-d6adeb71afc9@kernel.org> <20261106-xg6846b-bcmbca-xrdp-reset-v3-2-d6adeb71afc9@kernel.org>
-In-Reply-To: <20261106-xg6846b-bcmbca-xrdp-reset-v3-2-d6adeb71afc9@kernel.org>
-From: William Zhang <william.zhang@broadcom.com>
-Date: Fri, 6 Nov 2026 09:03:06 -0800
-X-Gm-Features: AclHuK9KamAO3QPKzJP168ypI7DJfpGe4hh3kd82BD64aNtSumXkCrA5JKntFqU
-Message-ID: <CAHi4H7E+064hC+Jk25gDz7qRgkDe=VHeLuHQ705A1h9Tei8etg@mail.gmail.com>
-Subject: Re: [PATCH v3 2/7] dt-bindings: soc: Describe the BCM6846 Processor
- Monitor Bus
-To: Linus Walleij <linusw@kernel.org>
-Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Anand Gore <anand.gore@broadcom.com>, Kursad Oney <kursad.oney@broadcom.com>, 
-	Florian Fainelli <florian.fainelli@broadcom.com>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
-	Guenter Roeck <linux@roeck-us.net>, Philipp Zabel <p.zabel@pengutronix.de>, 
-	Jonathan Corbet <corbet@lwn.net>, Randy Dunlap <rdunlap@infradead.org>, Ulf Hansson <ulfh@kernel.org>, 
-	Benjamin Larsson <benjamin.larsson@genexis.eu>, mfd@lists.linux.dev, 
-	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-clk@vger.kernel.org, linux-hwmon@vger.kernel.org, 
-	linux-pm@vger.kernel.org
-X-DetectorID-Processed: b00c1d49-9d2e-4205-b15f-d015386d3d5e
-Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
-	boundary="000000000000d9df52065f9e9685"
-
---000000000000d9df52065f9e9685
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] dt-bindings: mfd: nxp,bbnsm: Add NVMEM for GP
+ registers
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>,
+ Srinivas Kandagatla <srini@kernel.org>, Sascha Hauer
+ <s.hauer@pengutronix.de>, kernel@pengutronix.de,
+ Fabio Estevam <festevam@gmail.com>, Jacky Bai <ping.bai@nxp.com>,
+ mfd@lists.linux.dev, devicetree@vger.kernel.org, imx@lists.linux.dev,
+ linux-arm-kernel@lists.infradead.org
+References: <20261101200140.141642-1-wahrenst@gmx.net>
+ <20261101200140.141642-2-wahrenst@gmx.net>
+ <20261102-translucent-elated-pronghorn-cbb73b@quoll>
+Content-Language: en-US
+From: Stefan Wahren <wahrenst@gmx.net>
+In-Reply-To: <20261102-translucent-elated-pronghorn-cbb73b@quoll>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:cJE6pKHkWLzO6Sjmeg6XmVw/NckLVNjdcCsLHityR2WdCGlret+
+ 8vYNpiF7UZXrJGivEaDKM/A2I/tOkTBHMZsN6rf2Owd2V5zrOJ/D4MQmhZBd5vcQzGU5FlG
+ OwblKavFAGAiULkScrI2PcWznGZW3qV+dTBd3gGp1NLpJAYwAIKvAe3l97P1cwZpun2pBJ4
+ TWHE/PAqWlADvhPfMsfvg==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:pIktMsmAxqI=;YCllgzpffR5+l9NktUn1ygh8rB4
+ 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
+ A05gsBFzNZRZ8LCxqYUS6x3JUVw==
 
-On Fri, Nov 6, 2026 at 12:27=E2=80=AFAM Linus Walleij <linusw@kernel.org> w=
-rote:
+Am 02.11.26 um 08:28 schrieb Krzysztof Kozlowski:
+> On Sun, Nov 01, 2026 at 09:01:38PM +0100, Stefan Wahren wrote:
+>> +  nvmem:
+>> +    type: object
+>> +    $ref: /schemas/nvmem/nvmem.yaml#
+>> +
+>> +    properties:
+>> +      compatible:
+>> +        enum:
+>> +          - nxp,imx93-bbnsm-nvmem
+>> +
+>> +    required:
+>> +      - compatible
+>> +
+>> +    additionalProperties: false
+>> +
+>>     rtc:
+>>       type: object
+>>       $ref: /schemas/rtc/rtc.yaml#
+>> @@ -88,6 +102,12 @@ examples:
+>>           compatible =3D "nxp,imx93-bbnsm", "syscon", "simple-mfd";
+>>           reg =3D <0x44440000 0x10000>;
+>>  =20
+>> +        nvmem {
+>> +            compatible =3D "nxp,imx93-bbnsm-nvmem";
+>> +            #address-cells =3D <1>;
+>> +            #size-cells =3D <1>;
+> I don't think you tested your changes. address/size cells are not
+> allowed - see your binding.
 >
-> The third generation Power Management Controller (PMC3) accesses SoC
-> block control and reset registers through the Processor Monitor Bus
-Power Management Bus.   Need to update all the instances in this patch seri=
-es.
+> Anyway, empty node makes almost no sense, so fold the node into the
+> parent.
 
-> (PMB). Describe the BCM6846 PMC and PMB.
->
-> Describe the power controller child and all supported power domain IDs,
-> including the combined XRDP, Runner and WAN domain.
->
-> Signed-off-by: Linus Walleij <linusw@kernel.org>
-> ---
-> I considered even just using the PMB but the PMC has more stuff and
-> it seems natural to let it live in a simple-mfd node.
-> ---
->  .../bindings/clock/brcm,bcm6846-pmb-clock.yaml     | 39 ++++++++++
->  .../bindings/hwmon/brcm,bcm6846-pmb-pvtmon.yaml    | 42 ++++++++++
->  .../devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml  |  5 ++
->  .../bindings/power/brcm,bcm6846-pmb-power.yaml     | 44 +++++++++++
->  .../bindings/reset/brcm,bcm6846-pmb-reset.yaml     | 31 ++++++++
->  .../bindings/soc/bcm/brcm,bcm6846-pmb.yaml         | 90 ++++++++++++++++=
-++++++
->  MAINTAINERS                                        |  8 ++
->  include/dt-bindings/clock/brcm,bcm6846-pmb.h       | 42 ++++++++++
->  include/dt-bindings/power/brcm,bcm6846-pmb.h       | 12 +++
->  include/dt-bindings/reset/brcm,bcm6846-pmb.h       | 11 +++
->  10 files changed, 324 insertions(+)
->
-> diff --git a/Documentation/devicetree/bindings/clock/brcm,bcm6846-pmb-clo=
-ck.yaml b/Documentation/devicetree/bindings/clock/brcm,bcm6846-pmb-clock.ya=
-ml
-> new file mode 100644
-> index 000000000000..519606522c8b
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/clock/brcm,bcm6846-pmb-clock.yaml
-> @@ -0,0 +1,39 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/clock/brcm,bcm6846-pmb-clock.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Broadcom BCM6846 PMB clocks
-> +
-> +maintainers:
-> +  - Linus Walleij <linusw@kernel.org>
-> +
-> +description:
-> +  The Processor Monitor Bus (PMB) provides access to the RDP and BIU PLL
-> +  outputs, the Runner clock, the crystal output, the PVTMON acquisition
-> +  clock and the clock gates in block power-control zones. Clock indices
-> +  are defined in dt-bindings/clock/brcm,bcm6846-pmb.h.
-> +  The PLLs and crystal output use a 50 MHz reference clock.
-> +  Zone clocks require their associated blocks to be powered.
-> +
-> +properties:
-> +  compatible:
-> +    const: brcm,bcm6846-pmb-clock
-> +
-> +  clocks:
-> +    maxItems: 1
-> +
-> +  clock-names:
-> +    const: ref
-> +
-> +  '#clock-cells':
-> +    const: 1
-> +
-> +required:
-> +  - compatible
-> +  - clocks
-> +  - clock-names
-> +  - '#clock-cells'
-> +
-> +additionalProperties: false
-> diff --git a/Documentation/devicetree/bindings/hwmon/brcm,bcm6846-pmb-pvt=
-mon.yaml b/Documentation/devicetree/bindings/hwmon/brcm,bcm6846-pmb-pvtmon.=
-yaml
-> new file mode 100644
-> index 000000000000..9bf52cf097a3
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/hwmon/brcm,bcm6846-pmb-pvtmon.yam=
-l
-> @@ -0,0 +1,42 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/hwmon/brcm,bcm6846-pmb-pvtmon.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Broadcom BCM6846 PMB process, voltage and temperature monitor
-> +
-> +maintainers:
-> +  - Linus Walleij <linusw@kernel.org>
-> +
-> +description:
-> +  The process, voltage and temperature monitor (PVTMON) is a child of
-> +  the Processor Monitor Bus (PMB) controller and uses its indirect
-> +  register interface. It measures die temperature and seven voltages,
-> +  including a diagnostic test input.
-> +
-> +allOf:
-> +  - $ref: /schemas/thermal/thermal-sensor.yaml#
-> +
-> +properties:
-> +  compatible:
-> +    const: brcm,bcm6846-pmb-pvtmon
-> +
-> +  clocks:
-> +    maxItems: 1
-> +    description: PVTMON acquisition clock
-> +
-> +  resets:
-> +    maxItems: 1
-> +    description: PVTMON analog-acquisition reset
-> +
-> +  '#thermal-sensor-cells':
-> +    const: 0
-> +
-> +required:
-> +  - compatible
-> +  - clocks
-> +  - resets
-> +  - '#thermal-sensor-cells'
-> +
-> +additionalProperties: false
-> diff --git a/Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml =
-b/Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml
-> index d4c927cabb3f..77fbf92926ab 100644
-> --- a/Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml
-> +++ b/Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml
-> @@ -60,6 +60,11 @@ examples:
->              compatible =3D "brcm,bcm6846-pmb";
->              reg =3D <0x20100 0x200>;
->
-> +            pmb_power: power-controller {
-> +                compatible =3D "brcm,bcm6846-pmb-power";
-> +                #power-domain-cells =3D <1>;
-> +            };
-> +
->              pmb_clk: clock-controller {
->                  compatible =3D "brcm,bcm6846-pmb-clock";
->                  clocks =3D <&osc50m>;
-> diff --git a/Documentation/devicetree/bindings/power/brcm,bcm6846-pmb-pow=
-er.yaml b/Documentation/devicetree/bindings/power/brcm,bcm6846-pmb-power.ya=
-ml
-> new file mode 100644
-> index 000000000000..891eb0f347e6
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/power/brcm,bcm6846-pmb-power.yaml
-> @@ -0,0 +1,44 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/power/brcm,bcm6846-pmb-power.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Broadcom BCM6846 Processor Monitor Bus power controller
-> +
-> +maintainers:
-> +  - Linus Walleij <linusw@kernel.org>
-> +
-> +description: |
-> +  The power controller is a child of the Processor Monitor Bus (PMB)
-> +  controller and accesses BPCM power zones through the parent regmap.
-> +  A domain includes all power zones of a block. The XRDP domain groups
-> +  XRDP, its three Runner cores and WAN, matching the vendor power sequen=
-ce.
-> +
-> +  Domain IDs are defined in dt-bindings/power/brcm,bcm6846-pmb.h:
-> +    BCM6846_PD_PERIPH: peripheral block (bus 0, device 0, four zones)
-> +    BCM6846_PD_MEMC: memory controller (bus 1, device 8, one zone)
-> +    BCM6846_PD_USB20: USB 2.0 (bus 1, device 10, four zones)
-> +    BCM6846_PD_XRDP: XRDP (bus 1, device 12, three zones), Runner cores
-> +      (bus 1, devices 14, 15 and 16, one zone each) and WAN
-> +      (bus 1, device 11, three zones)
-> +    BCM6846_PD_PCIE0: PCIe 0 (bus 0, device 18, one zone)
-> +    BCM6846_PD_PCIE1: PCIe 1 (bus 0, device 19, one zone)
-> +
-> +  Peripheral and memory domains remain powered because they provide
-> +  resources required for system operation. CPU and PLL blocks use differ=
-ent
-> +  register layouts and are outside the scope of this provider.
-> +
-> +properties:
-> +  compatible:
-> +    const: brcm,bcm6846-pmb-power
-> +
-> +  '#power-domain-cells':
-> +    const: 1
-> +    description: Power domain ID from dt-bindings/power/brcm,bcm6846-pmb=
-.h
-> +
-> +required:
-> +  - compatible
-> +  - '#power-domain-cells'
-> +
-> +additionalProperties: false
-> diff --git a/Documentation/devicetree/bindings/reset/brcm,bcm6846-pmb-res=
-et.yaml b/Documentation/devicetree/bindings/reset/brcm,bcm6846-pmb-reset.ya=
-ml
-> new file mode 100644
-> index 000000000000..d2a85266e36a
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/reset/brcm,bcm6846-pmb-reset.yaml
-> @@ -0,0 +1,31 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/reset/brcm,bcm6846-pmb-reset.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Broadcom BCM6846 Processor Monitor Bus reset controller
-> +
-> +maintainers:
-> +  - Linus Walleij <linusw@kernel.org>
-> +
-> +description:
-> +  The reset controller is a child of the Processor Monitor Bus (PMB)
-> +  controller and uses its indirect register interface.
-> +
-> +  Each reset specifier identifies a logical reset group, which may span
-> +  several blocks that must be reset together.
-> +
-> +properties:
-> +  compatible:
-> +    const: brcm,bcm6846-pmb-reset
-> +
-> +  '#reset-cells':
-> +    const: 1
-> +    description: Reset group ID from dt-bindings/reset/brcm,bcm6846-pmb.=
-h
-> +
-> +required:
-> +  - compatible
-> +  - '#reset-cells'
-> +
-> +additionalProperties: false
-> diff --git a/Documentation/devicetree/bindings/soc/bcm/brcm,bcm6846-pmb.y=
-aml b/Documentation/devicetree/bindings/soc/bcm/brcm,bcm6846-pmb.yaml
-> new file mode 100644
-> index 000000000000..134a8a676dbd
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/soc/bcm/brcm,bcm6846-pmb.yaml
-> @@ -0,0 +1,90 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/soc/bcm/brcm,bcm6846-pmb.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Broadcom BCM6846 Processor Monitor Bus
-> +
-> +maintainers:
-> +  - Linus Walleij <linusw@kernel.org>
-> +
-> +description:
-> +  The Processor Monitor Bus (PMB) connects the third generation Power
-> +  Management Controller (PMC3) to the control registers of miscellaneous
-> +  independent hardware blocks.
-> +
-> +  The controller provides configuration, arbitration and four keyhole
-> +  interfaces for indirect register access.
-> +
-> +  Child nodes describe independent hardware blocks accessed over the PMB=
-.
-> +  These provide global resources and even resources for each other.
-> +
-> +properties:
-> +  compatible:
-> +    const: brcm,bcm6846-pmb
-> +
-> +  reg:
-> +    maxItems: 1
-> +    description: PMB configuration, keyhole and address mapping register=
-s
-> +
-> +  power-controller:
-> +    type: object
-> +    $ref: /schemas/power/brcm,bcm6846-pmb-power.yaml#
-> +
-> +  clock-controller:
-> +    type: object
-> +    $ref: /schemas/clock/brcm,bcm6846-pmb-clock.yaml#
-> +
-> +  reset-controller:
-> +    type: object
-> +    $ref: /schemas/reset/brcm,bcm6846-pmb-reset.yaml#
-> +
-> +  hwmon:
-> +    type: object
-> +    $ref: /schemas/hwmon/brcm,bcm6846-pmb-pvtmon.yaml#
-> +
-> +required:
-> +  - compatible
-> +  - reg
-> +  - power-controller
-> +  - clock-controller
-> +  - reset-controller
-> +  - hwmon
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/clock/brcm,bcm6846-pmb.h>
-> +    #include <dt-bindings/reset/brcm,bcm6846-pmb.h>
-> +
-> +    /* Processor Monitor Bus */
-> +    bus@ffb20100 {
-> +        compatible =3D "brcm,bcm6846-pmb";
-> +        reg =3D <0xffb20100 0x200>;
-> +
-> +        pmb_power: power-controller {
-> +            compatible =3D "brcm,bcm6846-pmb-power";
-> +            #power-domain-cells =3D <1>;
-> +        };
-> +
-> +        pmb_clk: clock-controller {
-> +            compatible =3D "brcm,bcm6846-pmb-clock";
-> +            clocks =3D <&osc50m>;
-> +            clock-names =3D "ref";
-> +            #clock-cells =3D <1>;
-> +        };
-> +
-> +        pmb_reset: reset-controller {
-> +            compatible =3D "brcm,bcm6846-pmb-reset";
-> +            #reset-cells =3D <1>;
-> +        };
-> +
-> +        hwmon {
-> +            compatible =3D "brcm,bcm6846-pmb-pvtmon";
-> +            clocks =3D <&pmb_clk BCM6846_CLK_PVTMON>;
-> +            resets =3D <&pmb_reset BCM6846_RESET_PVTMON>;
-> +            #thermal-sensor-cells =3D <0>;
-> +        };
-> +    };
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index f14f9910911c..e11fc5064dc5 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -5447,7 +5447,15 @@ N:       bcm[9]?6878
->  BROADCOM BCMBCA PMC3 PMB DRIVER
->  M:     Linus Walleij <linusw@kernel.org>
->  S:     Maintained
-> +F:     Documentation/devicetree/bindings/clock/brcm,bcm6846-pmb-clock.ya=
-ml
-> +F:     Documentation/devicetree/bindings/hwmon/brcm,bcm6846-pmb-pvtmon.y=
-aml
->  F:     Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml
-> +F:     Documentation/devicetree/bindings/power/brcm,bcm6846-pmb-power.ya=
-ml
-> +F:     Documentation/devicetree/bindings/reset/brcm,bcm6846-pmb-reset.ya=
-ml
-> +F:     Documentation/devicetree/bindings/soc/bcm/brcm,bcm6846-pmb.yaml
-> +F:     include/dt-bindings/clock/brcm,bcm6846-pmb.h
-> +F:     include/dt-bindings/power/brcm,bcm6846-pmb.h
-> +F:     include/dt-bindings/reset/brcm,bcm6846-pmb.h
->
->  BROADCOM BDC DRIVER
->  M:     Justin Chen <justin.chen@broadcom.com>
-> diff --git a/include/dt-bindings/clock/brcm,bcm6846-pmb.h b/include/dt-bi=
-ndings/clock/brcm,bcm6846-pmb.h
-> new file mode 100644
-> index 000000000000..548a18ed7959
-> --- /dev/null
-> +++ b/include/dt-bindings/clock/brcm,bcm6846-pmb.h
-> @@ -0,0 +1,42 @@
-> +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-> +#ifndef _DT_BINDINGS_CLOCK_BRCM_BCM6846_PMB_H
-> +#define _DT_BINDINGS_CLOCK_BRCM_BCM6846_PMB_H
-> +
-> +#define BCM6846_CLK_RDPPLL_CH0 0
-> +#define BCM6846_CLK_RDPPLL_CH1 1
-> +#define BCM6846_CLK_RDPPLL_CH2 2
-> +#define BCM6846_CLK_RDPPLL_CH3 3
-> +#define BCM6846_CLK_RDPPLL_CH4 4
-> +#define BCM6846_CLK_RDPPLL_CH5 5
-> +#define BCM6846_CLK_BIUPLL_CH0 6
-> +#define BCM6846_CLK_BIUPLL_CH1 7
-> +#define BCM6846_CLK_BIUPLL_CH2 8
-> +#define BCM6846_CLK_BIUPLL_CH3 9
-> +#define BCM6846_CLK_BIUPLL_CH4 10
-> +#define BCM6846_CLK_BIUPLL_CH5 11
-> +#define BCM6846_CLK_RUNNER     12
-> +#define BCM6846_CLK_XTAL_OUT   13
-> +#define BCM6846_CLK_PVTMON     14
-> +#define BCM6846_CLK_PERIPH_ZONE0       15
-> +#define BCM6846_CLK_PERIPH_ZONE1       16
-> +#define BCM6846_CLK_PERIPH_ZONE2       17
-> +#define BCM6846_CLK_PERIPH_ZONE3       18
-> +#define BCM6846_CLK_MEMC               19
-> +#define BCM6846_CLK_USB_ZONE0  20
-> +#define BCM6846_CLK_USB_ZONE1  21
-> +#define BCM6846_CLK_USB_ZONE2  22
-> +#define BCM6846_CLK_USB_ZONE3  23
-> +#define BCM6846_CLK_WAN_ZONE0  24
-> +#define BCM6846_CLK_WAN_ZONE1  25
-> +#define BCM6846_CLK_WAN_ZONE2  26
-> +#define BCM6846_CLK_XRDP_ZONE0 27
-> +#define BCM6846_CLK_XRDP_ZONE1 28
-> +#define BCM6846_CLK_XRDP_ZONE2 29
-> +#define BCM6846_CLK_RUNNER0    30
-> +#define BCM6846_CLK_RUNNER1    31
-> +#define BCM6846_CLK_RUNNER2    32
-> +#define BCM6846_CLK_PCIE0              33
-> +#define BCM6846_CLK_PCIE1              34
-> +#define BCM6846_CLK_BIU                35
-> +
-> +#endif
-> diff --git a/include/dt-bindings/power/brcm,bcm6846-pmb.h b/include/dt-bi=
-ndings/power/brcm,bcm6846-pmb.h
-> new file mode 100644
-> index 000000000000..abdd01c94bc5
-> --- /dev/null
-> +++ b/include/dt-bindings/power/brcm,bcm6846-pmb.h
-> @@ -0,0 +1,12 @@
-> +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-> +#ifndef _DT_BINDINGS_POWER_BCM6846_PMB_H
-> +#define _DT_BINDINGS_POWER_BCM6846_PMB_H
-> +
-> +#define BCM6846_PD_PERIPH      0
-> +#define BCM6846_PD_MEMC                1
-> +#define BCM6846_PD_USB20               2
-> +#define BCM6846_PD_XRDP                3
-> +#define BCM6846_PD_PCIE0               4
-> +#define BCM6846_PD_PCIE1               5
-> +
-> +#endif
-> diff --git a/include/dt-bindings/reset/brcm,bcm6846-pmb.h b/include/dt-bi=
-ndings/reset/brcm,bcm6846-pmb.h
-> new file mode 100644
-> index 000000000000..ce68adb10108
-> --- /dev/null
-> +++ b/include/dt-bindings/reset/brcm,bcm6846-pmb.h
-> @@ -0,0 +1,11 @@
-> +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-> +#ifndef _DT_BINDINGS_RESET_BRCM_BCM6846_PMB_H
-> +#define _DT_BINDINGS_RESET_BRCM_BCM6846_PMB_H
-> +
-> +/* XRDP packet engine and its three Runner cores. */
-> +#define BCM6846_RESET_XRDP     0
-> +
-> +/* Process, voltage and temperature monitor analog acquisition reset. */
-> +#define BCM6846_RESET_PVTMON   1
-> +
-> +#endif
->
-> --
-> 2.56.0
->
+Sorry, about that. Is this what you had in mind?
 
---000000000000d9df52065f9e9685
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+=2D-- a/Documentation/devicetree/bindings/mfd/nxp,bbnsm.yaml
++++ b/Documentation/devicetree/bindings/mfd/nxp,bbnsm.yaml
+@@ -20,6 +20,9 @@ description: |
+ =C2=A0 =C2=A0a PMIC or other voltage regulator device. both smart PMIC mo=
+de and
+ =C2=A0 =C2=A0Dumb PMIC mode supported.
 
-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
-PRi27wH/XHTDMdyL0Org+kxniXue6MSNJvcQwaLO/UQrmgTygBlVGa+Qg9ZFfS00xvuqeYH7tImO
-48WiXeu9rgn5KTH0IWP1+R74KIgxJQ+65la+caZvxwC9V3ik5p/LOGA2qS4GEjGuaYF8QKhRTR4h
-/QBSktqZLbzVxpjJXrqFTA2BLlYRp9hPhqNxbn46WuLufpMWhFtjUoQi/8fRRWRsMAY0o1J0f+kB
-6EI8FoxPTOpvuLRonqHIWMHk5YRnDdqJ3G5Oc8zmV+UCAwEAAaOCAd4wggHaMA4GA1UdDwEB/wQE
-AwIFoDAMBgNVHRMBAf8EAjAAMIGTBggrBgEFBQcBAQSBhjCBgzBGBggrBgEFBQcwAoY6aHR0cDov
-L3NlY3VyZS5nbG9iYWxzaWduLmNvbS9jYWNlcnQvZ3NnY2NyNnNtaW1lY2EyMDIzLmNydDA5Bggr
-BgEFBQcwAYYtaHR0cDovL29jc3AuZ2xvYmFsc2lnbi5jb20vZ3NnY2NyNnNtaW1lY2EyMDIzMGUG
-A1UdIAReMFwwCQYHZ4EMAQUDAzALBgkrBgEEAaAyASgwQgYKKwYBBAGgMgoDAjA0MDIGCCsGAQUF
-BwIBFiZodHRwczovL3d3dy5nbG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzBBBgNVHR8EOjA4MDag
-NKAyhjBodHRwOi8vY3JsLmdsb2JhbHNpZ24uY29tL2dzZ2NjcjZzbWltZWNhMjAyMy5jcmwwJQYD
-VR0RBB4wHIEad2lsbGlhbS56aGFuZ0Bicm9hZGNvbS5jb20wEwYDVR0lBAwwCgYIKwYBBQUHAwQw
-HwYDVR0jBBgwFoAUACk2nlx6ug+vLVAt26AjhRiwoJIwHQYDVR0OBBYEFHjI7pbQZurVKsSRE/a9
-7gUEyVCkMA0GCSqGSIb3DQEBCwUAA4ICAQCFA4fU1GnG8sY7kyUXp5tle+VeWveoWb272jPauU5R
-w+udkhVXmnR0Kg7RgkCD00PLTKHNRyegXXDMArs3N9NhO3s9eSp9KjDh+h3WuQWCJH3QBHLGW0qE
-fyV87wUtBIy/QsHwO4S8OlOZiXECR7V1EGIF6t3s0W+3UzgYeHL+Ttuhda+2wIVY0EbS0eNH9Vob
-4YG17VTBBe7hyobXFpd9d1JGENFzIWncPUshOE0Wv7KlkrRc6aBOpL4p5xO1pHi9h9w8utyHkMoV
-nefXixkn5YVHnuV/jbSF/IM4Mlqt0E+n/TRp2c0eR+1AauZKENV2syNBo4aMa0BkmikBjLSnDjt/
-TYQdwHNWdV495n71idvueWwTFUhUsnudYcnh42eZENopBOYjVu2WhsffyrNz0hsuR85LriqSuBbf
-drd9DMo3DgtfJ7hh4sEAhSw/x/Br86rfLBftZMU02htlnkOI9Tp1QuDsr9+MsqY6AjKeXAy67m7H
-TVAZ9uyO9N20yU0p7igESOWKR1ccL1TPA1jrSHK18Y75ot5199FNWeE/UKoDKSML39iPZho9XPh/
-/RlsfRFiVOPrI5Gwi4YfIfi0jjEWf310/CYEmA5jrp5gUQSdo/+FgfXLKDFiEHCf5b3B1l70r6bR
-WkDCNNacYJWZtSp87i6jmw+l5xx7OkEJ9DGCAlcwggJTAgEBMGIwUjELMAkGA1UEBhMCQkUxGTAX
-BgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gR0NDIFI2IFNNSU1F
-IENBIDIwMjMCDD2ooFIye/WiO3KgZTANBglghkgBZQMEAgEFAKCBxzAvBgkqhkiG9w0BCQQxIgQg
-BRebSBOrs+WPDt3JIYNTjfaIHomXCpQ20eXn61sLoTswGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEH
-ATAcBgkqhkiG9w0BCQUxDxcNMjYxMTA2MTcwMzIwWjBcBgkqhkiG9w0BCQ8xTzBNMAsGCWCGSAFl
-AwQBKjALBglghkgBZQMEARYwCwYJYIZIAWUDBAECMAoGCCqGSIb3DQMHMAsGCSqGSIb3DQEBBzAL
-BglghkgBZQMEAgEwDQYJKoZIhvcNAQEBBQAEggEApILCgNdJjmAE2kwULCh0+qwjcAo2UJaMSYGq
-xW3+2wpr/IrRIZcGndoGizLWbB4ioDTMZ0Eodd9PY9aAjSiY88DBg3NCXsjKs1qeYxNMMtpIOJ1R
-CYl5oQgcRVTrTZGhtoyOsObAdqRaFeZFZPHoLOOo35+sggHq63eIiug1Bg/UIzYmkDFJFNkc3fsu
-L2/ZBXPy02LeLMlRlVgKX4nPK9Y3+iojE+ON6jd19sIi2jVeFVCIXuZbAE7o0k2RSqBivHjZNpFT
-nhkwNNBxFy6e5Wdt01oRW8GU8otnckJTheBA76BPIwFmewF+M3pjkkVpybTozbHHfXxQnW0OtHz5
-zg==
---000000000000d9df52065f9e9685--
++allOf:
++=C2=A0 - $ref: /schemas/nvmem/nvmem.yaml
++
+ =C2=A0properties:
+ =C2=A0 =C2=A0compatible:
+ =C2=A0 =C2=A0 =C2=A0items:
+@@ -31,6 +34,9 @@ properties:
+ =C2=A0 =C2=A0reg:
+ =C2=A0 =C2=A0 =C2=A0maxItems: 1
+
++=C2=A0 nvmem-layout:
++=C2=A0 =C2=A0 $ref: /schemas/nvmem/layouts/nvmem-layout.yaml#
++
+ =C2=A0 =C2=A0rtc:
+ =C2=A0 =C2=A0 =C2=A0type: object
+ =C2=A0 =C2=A0 =C2=A0$ref: /schemas/rtc/rtc.yaml#
+@@ -69,7 +75,7 @@ properties:
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0- compatible
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0- interrupts
+
+-=C2=A0 =C2=A0 additionalProperties: false
++=C2=A0 =C2=A0 unevaluatedProperties: false
+
+ =C2=A0required:
+ =C2=A0 =C2=A0- compatible
+@@ -98,4 +104,14 @@ examples:
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0interrupts =3D <GIC_SPI 7=
+3 IRQ_TYPE_LEVEL_HIGH>;
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0linux,code =3D <KEY_POWER=
+>;
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0};
++
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 nvmem-layout {
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 compatible =3D "fixed-layout";
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 #address-cells =3D <1>;
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 #size-cells =3D <1>;
++
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 calib@4 {
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 reg =3D <0x4 0x04=
+>;
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 };
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 };
+ =C2=A0 =C2=A0 =C2=A0};
+
