@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793993793;
-	b=WMI2/cJQIF1BvzKyVAAPOqBfvBb9P0sJmB4rj84D2t/u0X485FNayGMy0XhQVC5wv8L/
-	 a9GspODyK8J+aQ2e1ob9amchSBGu07mlTnyA41e/u6UjGCHecuo4uDzP3a90yIwgpmFEW
-	 QU3Q3hzIus10jy3JIMuSk8/zGZ9MdhyJPDQVjdfGqXdnJLu3t3fS0DsDMscfl0ShRIBrV
-	 53Nhl7PFpC3wVaqsvtdVTefF95x2KVVXj9eqo+04mC1s0al/xO7OuzAqGuD39vfLRTCul
-	 mpngS4cZkQwQSZgQ/WzaCxzFqeOi8BRvOduW55krmXuxzuY1dE53Twz7RSRRsNJiuZQ==
+	t=1793993875;
+	b=xRngBpoBdgynUT9EhTmUCjIOKJAbQByLyHR3mTDfuTQpDadhJW9j2vkYOf6vUo/TXvRV
+	 hV0QEd7mplDWQaH2Atsugza3EaTqcyd56bnwJXR5jZl4y7YgNCaSXUMEbU8NizKxFvh3T
+	 viJwil8waQnaV+IHaUKUTU6+rYk89ujuwKZObrMw6HuZUSbsW1D3CS4SSN23jMv3j6lBH
+	 GgF0gt+ztyjZJaJCsVYjKwvnRV/PZlQfiel9fUl5RZfmTnEFf2p2c0Qg8RAMaj7PowUg7
+	 yZIaRvDD8w/uDhcOdC240FHiWP3rrGt3tVhF3b4pVkCbJ6eip+oEBDfMKHdx1QPQF/w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793993793;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793993875;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=n32JytrswhUCW2tCsyrLc/BqXOGMy3gM8ly6N3h9MTQ=;
-	b=kmzOHhmkag7KUS9f2j2wxW7s141ERioXgeTwF12/rYLTRLSeGBRiQV46q0wQH7+/Bd/P
-	 2TMyEeYTHLfa++ncbC7JQTvZFvJzePyP+4NlRWotIw8xKxMnfSjGZiDndFB1vAID5OYAP
-	 AMslhxHuiBqyWJ+/duvNEuh/2VpSJsM4OzpSmRZS/4UMlEGBA9PX1QJ+GQd4VUvdyu+h6
-	 1zSZ00w8R/2w0Z26Hz8CKTaEDGJ4QA309mOmYWEbO+jnPfgBBGGPxiovA7kBjBkaqJAzm
-	 5gABiZvT60tciMpD2E0g5oIkfEs5uWsajmw+14iOutE1eqiBa1txVdrOzPH9hdlgPVQ==
+	bh=2R22MKajcPJEkD9y1HwLYhYyiSqKBuv9S3d6jCcb6ho=;
+	b=KXqYIxwSfaqApCd0xyN0lEtMkFXCtFugdlaM8S3UdRss+rIR6QtWq2Gh4cfHm5ztyzMe
+	 vRD1ZZk4/ej0RZcfmiDGS42jfNshDtm/jmQnTtniEUtqwMDgrx7yqzuBpBEcpTXjnnMRE
+	 b5OaNMJwzz05llTCk6uCZMTkUrGlsFMk++0t4e9i0GdChnMtCRad1DqsjasD0vX/mZI8A
+	 FwLABzWESI2mW+6Uj5FUIbPe5e9hA2eQe0ljDQ35IOK4Q/lsNZT4Ce5ZsPJXmGCx1lam6
+	 MxOFkb2iWYQ+83NDTZ1IRQ8vEYopfkVTF8EtWpY3zwNjwRlDsYF96T7qW8TyjLAKTJQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dzrE8koe;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Q0dNFp7c;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68FAE606D808
-	for <mfd@lists.linux.dev>; Fri,  6 Nov 2026 19:36:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB5B4606A326
+	for <mfd@lists.linux.dev>; Fri,  6 Nov 2026 19:37:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dzrE8koe
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D57C81F008A4;
-	Fri,  6 Nov 2026 19:36:32 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Q0dNFp7c
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 33FAB1F0089F;
+	Fri,  6 Nov 2026 19:37:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793993793;
-	bh=n32JytrswhUCW2tCsyrLc/BqXOGMy3gM8ly6N3h9MTQ=;
+	s=k20260515; t=1793993874;
+	bh=2R22MKajcPJEkD9y1HwLYhYyiSqKBuv9S3d6jCcb6ho=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=dzrE8koe/5OMZEcWB6qRMxaG5KQTrsb9anHqhmQDtfohbwVxzle//4uwrekfjz6ET
-	 BdrB/1ddnW394v9r/r+Hkdq6oZwBzdAW45KPGJuIjn0Tgom0OAhxR51n5G2vj8dY/C
-	 UDHg5LSZ067+QFAyGNI+LPvQnlEqR6NkJcUOt34N6hyfAaqV8ovGaUr1rgGcG2N8hY
-	 4R5bYoNkVg6URpKPfq432vOE3zAHriiMVzwmskJ5v4KX3aq6qYbYpgP3ztpKW2FoGZ
-	 wX4sshmBAg1c2+Czjd1wBvvjhw/N2H2QLHgTutcoyfodMuvfLFDYB2ceBzGJfiUL94
-	 JndYMPrWmhacg==
-Message-ID: <sashiko-outbox-202156@kernel.org>
+	b=Q0dNFp7cRVcN8ePojYcaq9Rou7++qpwTg8E3UTsFB5jGfkb6Hcg66cQ680J5S2Pvr
+	 8VoRbDa3FEWN7hoHkHC7aX1Zi1A0JNv0I0THjYQMkTun6D2+FzvdwFknWCj/HJs58R
+	 ZMPHZCae/Fk10JPpewlzxo45KRa9lmaKWss15dTc9J17eyYKJijReSlKUM5QbNO20e
+	 WK5kE5UVpCLwQfP0meHeSVyVntjY3wmgBo5RN5O0iBWlEEKcUst1cj07kr1NTFAraO
+	 RPFGnHwoP02ALlLe4ZAW7EVBqzUQTujpudxtJ+4BUWB/tXwfGmRXpKjblYrx5IHQ4I
+	 zMFderU9KthTw==
+Message-ID: <sashiko-outbox-202157@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v1 3/3] mfd: cros_ec: load cros_ec_pwrmon on supported
- ECs
+Subject: Re: [PATCH v1 1/3] platform/chrome: cros_ec: fix alignment of
+ ec_params_pwrmon
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Daniel Balint" <dbalint@google.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261106193129.43493-4-dbalint@google.com>
+In-Reply-To: <20261106193129.43493-2-dbalint@google.com>
 References: <20261106193129.43493-1-dbalint@google.com>
- <20261106193129.43493-4-dbalint@google.com>
+ <20261106193129.43493-2-dbalint@google.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Fri, 06 Nov 2026 19:36:32 +0000
+Date: Fri, 06 Nov 2026 19:37:53 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,25 +61,18 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-Thank you for your contribution! Sashiko AI review found 1 potential
-issue to consider:
-- [Low] mfd: cros_ec: lowercase description in commit subject
---
+> Sync EC_CMD_PWRMON structure padding with ChromeOS EC firmware by adding
+> explicit reserved padding to struct ec_params_pwrmon (2-byte union
+> alignment) and struct pwrmon_dump_info (4-byte struct size alignment),
+> as __ec_align2 and __ec_align4 expand to __packed in Linux.
+>=20
+> Fixes: b57af7f8d194 ("platform/chrome: cros_ec: Sync host command header =
+with EC")
+> Signed-off-by: Daniel Balint <dbalint@google.com>
 
-commit 9d3435eb48d0511f2f3d3ec653ce62f525f2879e
-Author: Daniel Balint <dbalint@google.com>
-
-mfd: cros_ec: load cros_ec_pwrmon on supported ECs
-
-This commit registers the cros-ec-pwrmon MFD cell when the ChromeOS EC
-advertises EC_FEATURE_PWRMON.
-
-> mfd: cros_ec: load cros_ec_pwrmon on supported ECs
-
-[Severity: Low]
-This isn't a bug, but MFD commit subjects capitalize the description after
-the prefix ("mfd: cros_ec: Load cros_ec_pwrmon on supported ECs").
+Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261106193129.4349=
-3-1-dbalint@google.com?part=3D3
+3-1-dbalint@google.com?part=3D1
+
