@@ -1,56 +1,84 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=193.142.43.55
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793994575;
-	b=APFR7aJBrwjPev/Wbt7LC4jNADfEuols1XNxyP+0LBF99v8HuV4IBV5aW17jWvk1J1EX
-	 B/IZc9smAO3hVRUVpeLmT8aJgxwa6hVEJpupRvbPfyUa8287JGHJPFeoWPe8LZtOE5VoS
-	 rrHuhiD8OtQHK+r/osl084Xm4/u/onTsVlVy+q7tEPQfF0Br3w28oXJ18PAwuDXjDwR1x
-	 Dymm8RgfTNa8IW3kDULh2f5TS9KwiySwBxqNoLOCFUP83tORrqg2QekXgfsx4lyjKT+iu
-	 PikYOm9y0jlQofwoopwZwzT+8G8lm5lz8YO2vDxnIllplCjBFODPmzNpibCU3sTCVWw==
+	t=1794001870;
+	b=oJyLYR0hWYTu8DOwAgksl3mYMHAdGf+KytKiV7P0TceVBTXWtBIHXaA+2qg6v+oVJiqe
+	 a/+HhWrPW+3S4dsnMGThMJS0/QKwT44/T3CMiCAAeDbNXAu7nThxCKZgxDfjUOXSdGobP
+	 DCG3IWNpl0ToL9WswdbqF/B/Z5LICmFfqo06b5g44ndHPwHUiwYRBRR+lKASlhR5lrWh5
+	 iedqN5GDp7VK6EBlTU16HjHngrSBUxxMBjDFtVJhCIzvhP8aEZ72vWn3AI30G33udXnAo
+	 hfb0IIdnAN/0NoP/o9orGZaK5+dXrfyF+ltyuvm4uCIFQlUI6sA2iV51UCVMw7Knsmw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793994575;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=tfylxQmuoohqjIDfrP9qUqJIWnHnjk3uwihdvP+tAzQ=;
-	b=3Q7wlNMaw1kT931WCL2OIfP0YnTuN3rvrpULgr0RXWb+lP7Nm44C3tVgYH055tAmgoLO
-	 qZt1wfsWLJTECkYlb8ijCXTuQ6PkFay6ZxVvaN8fc1jU+qttbP2merGJWEHYebKglUJHS
-	 RtI/fyP5dyTCG6VnvVilmEAoc6t0XYH9oHF+ldm0WRdCGmiszMrUP6ZGnr19DIlkMJ9fw
-	 4J1+fOtQGkjO6qWAH9NJ3/JWbc76jag520DgU9K3Cz4DrXmiPtgmkGPbRZSaYaqS5L7zB
-	 +gItjFXMfD3N4LSiR1lkq5/c1kW0mCjPWwrvIX7LqYLJK0MaP4W6jW1pWhQBR9XMfYQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794001870;
+	h=DMARC-Filter:Message-ID:DKIM-Signature:DKIM-Signature:Subject:From:
+	 To:Cc:Date:In-Reply-To:References:Organization:Content-Type:
+	 Content-Transfer-Encoding:MIME-Version;
+	bh=Hrybu1qjS55wOR2ZvJDKFOTX4UO4y9/yg/EAiu9mOeQ=;
+	b=dSmgUCxXIw6RUx6drteLVgOL6shEeNgFQtpuhh+a2r0RD7B26ENy127mJ8mydZ2wWNa1
+	 YPLyj+E8ZLT+jp60ha3SJWy7lUmmrzNwHIn7i9hHBA9Wc+r4a5vTHI3kwDP3AchP5x2zg
+	 j32B0rWQpZ+yUqJaBKd1NrW8oMXYHJaIJmtQTxBcNcb1tGWgtwpI5hinwomhzXfbWed2f
+	 0RIFeqHFOWBkurD63V4rf7vFAuh1Ma//kE6Fb/B4hghdYjRa3RImcd+xbrvPO0d2+aNk1
+	 a7q7Lb8RZwVO6Hf1qirx7N8E/EdqUeqGFFfm6Bq2aE+jNQWn/jANVbO/iWvfW1Df/Bg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="hugG3h/m";
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=linutronix.de;
+	spf=pass smtp.mailfrom=linutronix.de;
+	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=Qr+zythi;
+	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=ed25519-sha256 header.s=2020e header.b=57L2AJeo;
+	arc=none smtp.remote-ip=193.142.43.55
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A622606A32D
-	for <mfd@lists.linux.dev>; Fri,  6 Nov 2026 19:49:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7712A606A32E
+	for <mfd@lists.linux.dev>; Fri,  6 Nov 2026 21:51:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7712A606A32E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hugG3h/m
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C9551F008AB;
-	Fri,  6 Nov 2026 19:49:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793994575;
-	bh=tfylxQmuoohqjIDfrP9qUqJIWnHnjk3uwihdvP+tAzQ=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=hugG3h/mZgs7++YxMJbHZSlofi8porX/8HFOEj1588MnxasBWBx771XnCtHwUq/gW
-	 C2IbUrveBLKisbSi4hboZk9L183AAb/3HAKx43ufPUsgMvpKVO43NMnvSAjirrVLFV
-	 2kSReB10csm69mJFRp51rGvd76KDig2ZVicmfD2FjH/QQ36fg104R+4aBA1xTkD88J
-	 Jc10nddQY0N7ZEEBWIwMH8ndbgXOB2bfUMzM0u7HKoKKobttjYd1vGXdFombQOG1pI
-	 DX7GGxJ/6p3/ty+reir/pJMTjO6MkOAiVm+RG7l4YhDldhTFN5UnYotPTEtLmmXbr8
-	 dJM+t/3GIK/ig==
-Message-ID: <sashiko-outbox-202175@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v1 2/3] iio: adc: add cros_ec_pwrmon driver
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Daniel Balint" <dbalint@google.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261106193129.43493-3-dbalint@google.com>
-References: <20261106193129.43493-1-dbalint@google.com>
- <20261106193129.43493-3-dbalint@google.com>
-Content-Type: text/plain; charset=utf-8
+	dkim=pass (2048-bit key, unprotected) header.d=linutronix.de header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=Qr+zythi;
+	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=ed25519-sha256 header.s=2020e header.b=57L2AJeo
+Message-ID: <f5c7c9901aca84f0b814e5b6c153db84af826dd7.camel@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020; t=1794001867;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Hrybu1qjS55wOR2ZvJDKFOTX4UO4y9/yg/EAiu9mOeQ=;
+	b=Qr+zythi7fd/WCMR/wC1lIwE26rtLXt2OGzMpWM7UzIMevSXxu0wb7MdigNzhn5jlurEQP
+	eKImHUsS0sH9Yoz3/1yMKgzB+uT0Fa3tsUp040h6x8bGtwwk/MJZL3d2I2n94v9Y+0tn50
+	XxfbSlqtzfCpltoqdh6xJWCUHQmKS3jqCH15dLCL8geld7+0GF9Cv2XtA/whES2lhOtFa0
+	Rdez2AbnhPofdvz2K5MM+uDPfsv+7vZ0xpxU89RTJkJ8wtClYlAuWI/vOWTh/ylrgxcTDC
+	2wwn60Jbhr282GJjbcWc+Bd5ISTMmn/dmZpANyjXbVuW7i71W86opPwMAH2qRA==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020e; t=1794001867;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Hrybu1qjS55wOR2ZvJDKFOTX4UO4y9/yg/EAiu9mOeQ=;
+	b=57L2AJeoNrxbbDcFsBAzZ/DFjdkvyDKP3GnGuqadUE36FX+Fv2BzCEN4iw/VSR8EzIzB2O
+	K3q3DWu42nW1QqDQ==
+Subject: Re: [PATCH net-next v4 4/8] dt-bindings: mfd: Add SoC-e SWIP parent
+From: Vasilij Strassheim <v.strassheim@linutronix.de>
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+  Conor Dooley <conor+dt@kernel.org>, Andrew Lunn <andrew@lunn.ch>, Vladimir
+ Oltean <olteanv@gmail.com>,  "David S. Miller" <davem@davemloft.net>, Jakub
+ Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman
+ <horms@kernel.org>, Russell King <linux@armlinux.org.uk>, Andrew Lunn
+ <andrew+netdev@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>, Eric
+ Dumazet <edumazet@kernel.org>, Lee Jones <lee@kernel.org>,
+ devicetree@vger.kernel.org,  linux-kernel@vger.kernel.org,
+ netdev@vger.kernel.org, mfd@lists.linux.dev,  Martin Kaistra
+ <martin.kaistra@linutronix.de>, Benedikt Spranger <b.spranger@linutronix.de>
+Date: Fri, 06 Nov 2026 22:51:04 +0100
+In-Reply-To: <20261106-judicious-penguin-of-enhancement-b28c8b@quoll>
+References: 
+	<20261105-devel-vstrassheim-soce-dsa-ml-v4-0-02f3cde2afa1@linutronix.de>
+	 <20261105-devel-vstrassheim-soce-dsa-ml-v4-4-02f3cde2afa1@linutronix.de>
+	 <20261106-judicious-penguin-of-enhancement-b28c8b@quoll>
+Organization: Linutronix GmbH
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Date: Fri, 06 Nov 2026 19:49:34 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,163 +87,132 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
 
-Thank you for your contribution! Sashiko AI review found 3 potential
-issues to consider:
-- [Medium] iio: adc: cros_ec_pwrmon: non-standard sysfs table ABI in
-  energy_value_show()
-- [Medium] iio: adc: cros_ec_pwrmon: premature wakeup in
-  cros_ec_pwrmon_notify()
-- [Medium] iio: adc: cros_ec_pwrmon: energy loss and time skew in
-  energy_value_show()
---
+On Fri, 2026-11-06 at 12:13 +0100, Krzysztof Kozlowski wrote:
+> On Thu, Nov 05, 2026 at 03:16:48PM +0100, Vasilij Strassheim wrote:
+> > Add a binding for the SoC-e SWIP multifunction FPGA IP core.
+> >=20
+> > Describe the shared MMIO address space and address translation for
+> > the required Ethernet switch child and the optional integrated MDIO
+> > controller and MMIO-controlled MDIO multiplexer.
+> >=20
+> > Signed-off-by: Vasilij Strassheim <v.strassheim@linutronix.de>
+> > ---
+> >  .../devicetree/bindings/mfd/soce,swip.yaml         | 137 +++++++++++++=
+++++++++
+> >  1 file changed, 137 insertions(+)
+> >=20
+> > diff --git a/Documentation/devicetree/bindings/mfd/soce,swip.yaml b/Doc=
+umentation/devicetree/bindings/mfd/soce,swip.yaml
+> > new file mode 100644
+> > index 000000000000..625be299e262
+> > --- /dev/null
+> > +++ b/Documentation/devicetree/bindings/mfd/soce,swip.yaml
+> > @@ -0,0 +1,137 @@
+> > +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> > +%YAML 1.2
+> > +---
+> > +$id: http://devicetree.org/schemas/mfd/soce,swip.yaml#
+> > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > +
+> > +title: SoC-e SWIP multifunction Ethernet switch FPGA IP core
+> > +
+> > +maintainers:
+> > +  - Vasilij Strassheim <v.strassheim@linutronix.de>
+> > +
+> > +description:
+> > +  SoC-e Switch IP (SWIP) cores integrate Ethernet switching logic, an
+> > +  MDIO controller, and an MDIO bus multiplexer in one memory-mapped de=
+vice.
+> > +  The MDIO bus multiplexer is wired to the integrated MDIO controller.
+> > +
+> > +properties:
+> > +  compatible:
+> > +    const: soce,swip
+> > +
+> > +  reg:
+> > +    maxItems: 1
+> > +
+> > +  '#address-cells':
+> > +    const: 1
+> > +
+> > +  '#size-cells':
+> > +    const: 1
+> > +
+> > +  ranges: true
+> > +
+> > +  mdio@204:
+> > +    $ref: /schemas/net/soce,swip-mdio.yaml#
+> > +    unevaluatedProperties: false
+> > +
+> > +  mdio-mux@202:
+> > +    $ref: /schemas/net/mdio-mux-mmioreg.yaml#
+> > +    unevaluatedProperties: false
+> > +
+> > +  ethernet-switch:
+>=20
+> Why are you mixing children with and without bus addresses? This is
+> discouraged and shows that device is not correctly represented, e.g. if
+> the ethernet-switch does not have resources, then THIS device is the
+> ethernet switch.
+>=20
 
-commit 9eba526765275d37885c463963dacce7dc7badae
-Author: Daniel Balint <dbalint@google.com>
+There is no hardware reason for leaving the switch child unaddressed.
+Just an error that occurred while converting the binding to the MFD
+model.
+I will describe the switch function as an ethernet-switch@0 child node
+with a reg property for it's register resources, like the ocelot MFD
+binding.
 
-iio: adc: add cros_ec_pwrmon driver
+> > +    $ref: /schemas/net/dsa/soce,swip-switch.yaml#
+> > +    unevaluatedProperties: false
+> > +
+> > +required:
+> > +  - compatible
+> > +  - reg
+> > +  - '#address-cells'
+> > +  - '#size-cells'
+> > +  - ranges
+> > +  - ethernet-switch
+> > +
+> > +dependentRequired:
+> > +  mdio-mux@202:
+> > +    - mdio@204
+> > +
+> > +additionalProperties: false
+> > +
+> > +examples:
+> > +  - |
+> > +    ethernet-switch@80020000 {
+> > +        compatible =3D "soce,swip";
+> > +        reg =3D <0x80020000 0x10000>;
+> > +        #address-cells =3D <1>;
+> > +        #size-cells =3D <1>;
+> > +        ranges =3D <0x0 0x80020000 0x10000>;
+> > +
+> > +        mdio_parent: mdio@204 {
+> > +            compatible =3D "soce,swip-mdio";
+> > +            reg =3D <0x204 0xc>, <0x200 0x2>;
+> > +            reg-names =3D "data", "control";
+> > +            #address-cells =3D <1>;
+> > +            #size-cells =3D <0>;
+> > +        };
+> > +
+> > +        mdio-mux@202 {
+>=20
+> Nodes are ordered by unit address.
 
-This commit adds the ChromeOS EC On-Device Power Monitoring (ODPM) driver
-to read onboard power-monitoring ADCs via EC_CMD_PWRMON host commands and
-EC_MKBP_EVENT_PWRMON events, exposing accumulated per-rail energy through
-an energy_value sysfs attribute.
+I will fix that.
+Sashiko mentioned scripts/dtc/dt-check-style to find this. I wasn't
+aware of this before and will use it more often in the future
+additionally to dt_binding_check.
 
-> diff --git a/drivers/iio/adc/cros_ec_pwrmon.c b/drivers/iio/adc/cros_ec_p=
-wrmon.c
-> new file mode 100644
-> index 0000000000000..795b5f2b2a2ce
-> --- /dev/null
-> +++ b/drivers/iio/adc/cros_ec_pwrmon.c
+>=20
+> Best regards,
+> Krzysztof
+>=20
 
-[ ... ]
+Thanks,
+Vasilij
 
-> +static int cros_ec_pwrmon_notify(struct notifier_block *nb,
-> +				 unsigned long queued_during_suspend,
-> +				 void *data)
-> +{
-> +	struct cros_ec_pwrmon_state *st =3D
-> +		container_of(nb, struct cros_ec_pwrmon_state, notifier);
-> +	struct cros_ec_device *ec_dev =3D st->ec;
-> +	s64 val;
-> +	u8 ch;
-> +
-> +	if (ec_dev->event_data.event_type !=3D EC_MKBP_EVENT_PWRMON)
-> +		return NOTIFY_DONE;
-> +
-> +	ch =3D ec_dev->event_data.data.pwrmon_data.channel_id;
-> +	val =3D get_unaligned_le64(&ec_dev->event_data.data.pwrmon_data.value);
-> +
-> +	scoped_guard(spinlock, &st->event_lock) {
-> +		if (!st->collecting)
-> +			return NOTIFY_OK;
-> +
-> +		if (ch < st->num_channels) {
-> +			st->results[ch].value =3D val;
-> +			st->results[ch].valid =3D true;
-> +		}
-> +
-> +		WRITE_ONCE(st->results_received, st->results_received + 1);
-> +	}
-
-[Severity: Medium]
-Can cros_ec_pwrmon_notify() wake wait_event_timeout() in energy_value_show()
-before all valid channels have reported?
-
-st->results_received is incremented unconditionally even when
-ch >=3D st->num_channels (which happens if the EC has more than
-PWRMON_MAX_CHANNELS channels after cros_ec_pwrmon_probe() clamps
-st->num_channels) or when st->results[ch].valid is already true.  In
-addition, energy_value_show() sets st->collecting =3D true before sending
-EC_PWRMON_LATCH, so a late MKBP event from a previous timed-out latch will
-also increment st->results_received and cause wait_event_timeout() to finish
-early while some channels in st->results[] are still invalid.
-
-Only incrementing st->results_received when ch < st->num_channels and
-!st->results[ch].valid would ensure each counted event corresponds to a
-distinct valid channel.
-
-> +
-> +	wake_up(&st->wq);
-> +
-> +	return NOTIFY_OK;
-> +}
-> +
-> +/*
-> + * Expose ODPM results in the form of accumulated energy
-> + * through the energy_value sysfs node.
-> + * Format requirement:
-> + * t=3D<Measurement timestamp, ms>
-> + * CH<N>(T=3D<Duration, ms>)[<Schematic name>], <Accumulated Energy, uWs>
-> + */
-> +static ssize_t energy_value_show(struct device *dev,
-> +				 struct device_attribute *attr,
-> +				 char *buf)
-> +{
-> +	struct iio_dev *indio_dev =3D dev_to_iio_dev(dev);
-> +	struct cros_ec_pwrmon_state *st =3D iio_priv(indio_dev);
-> +	struct ec_params_pwrmon *params;
-> +	u64 current_time_ms;
-> +	s64 delta_uws;
-> +	u32 duration_ms;
-
-[ ... ]
-
-> +	/* Timestamp of snapshot taken. */
-> +	current_time_ms =3D ktime_to_ms(ktime_get_boottime());
-> +	len +=3D sysfs_emit_at(buf, len, "t=3D%llu\n", current_time_ms);
-> +
-> +	duration_ms =3D current_time_ms - st->last_time_ms;
-> +
-> +	for (i =3D 0; i < st->num_channels; i++) {
-> +		if (!st->results[i].valid) {
-> +			dev_warn(dev, "Missing data for channel %d\n", i);
-> +			continue;
-> +		}
-> +
-> +		delta_uws =3D div_s64(st->results[i].value * duration_ms,
-> +				    MSEC_PER_SEC);
-> +		if (delta_uws > 0)
-> +			st->accumulated_energy[i] +=3D delta_uws;
-> +
-> +		len +=3D sysfs_emit_at(buf, len, "CH%d(T=3D%u)[%s], %llu\n",
-> +				     i, duration_ms, st->channel_names[i],
-> +				     st->accumulated_energy[i]);
-> +	}
-> +
-> +	st->last_time_ms =3D current_time_ms;
-
-[Severity: Medium]
-Does advancing a single shared st->last_time_ms unconditionally at the end
-of energy_value_show() permanently drop accumulated energy for any channel
-whose MKBP event was missed?  When !st->results[i].valid is taken, that
-channel is skipped, but st->last_time_ms is still updated to
-current_time_ms, so the next read only integrates that channel from the
-failed read's timestamp rather than the last time it was accumulated.
-
-Also, sampling current_time_ms after wait_event_timeout() rather than when
-EC_PWRMON_LATCH completes folds the MKBP delivery delay (up to 1000 ms)
-into duration_ms.  In addition, duration_ms is a u32, which truncates the
-64-bit difference current_time_ms - st->last_time_ms if more than ~49.7 days
-elapse between reads, and st->results[i].value * duration_ms can overflow
-s64 before div_s64().
-
-> +
-> +	return len;
-> +}
-> +
-> +static IIO_DEVICE_ATTR(energy_value, 0444, energy_value_show, NULL, 0);
-
-[Severity: Medium]
-Should this driver expose standard IIO channels (such as IIO_ENERGY with
-in_energyY_raw or in_energyY_input and in_energyY_label) instead of
-formatting a multi-line text table into a custom energy_value sysfs
-attribute on a channel-less iio_dev?
-
-Beyond violating the sysfs one-value-per-file rule and standard IIO ABI,
-each formatted channel line can be up to 74 bytes when channel_names[i] is
-31 bytes, so with up to PWRMON_MAX_CHANNELS (64) channels the output can
-reach ~4750 bytes and be silently truncated at PAGE_SIZE by sysfs_emit_at().
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261106193129.4349=
-3-1-dbalint@google.com?part=3D2
