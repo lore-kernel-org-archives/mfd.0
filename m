@@ -1,58 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.84.56
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793959110;
-	b=ZalwGcAB2/FdSA3vfcwq6mcUfLYou/H554/pC/Y7NPBZPPpXgR8A3vBkKqWeIjhk/gw5
-	 UNNP5isSxdu64gCEdJUmFX8ZjgsNR0aI61Uh1iDfLidj1gx1OQXrmFMC348zaJIlLD8a8
-	 cLPNFnwM6Cm1p9URMGaT4Sm0ZXMqOyHekdnYDUuIWBjOTEqvLRmNFOcPcSKLQD6nJmcUc
-	 lFLjMFkzLGzQYGr2EqkSK+g+9LP0y/ADKE9PYTLpq3jy+zXodrbYZ4AKH0UoWlgPQ8bPN
-	 Ee1hbY/Ss/L7XlPNssb9MRzHO2PhL6VDxp1ne++xxMuUxhp8S53zaOM859Ejq0DqFPA==
+	t=1793963634;
+	b=GG/VcVAkCd/sYB5wyJagtksnRw88N6pF951lJCxikAOHr4QuD7YmV3ydX3qDICH7Zetx
+	 AHA2lhC0EWc7UdRkcm6qM5eo/CpxazRtmjljgv0nW3+51F/OQ5qVVVPDwUPHoQXvGiAnh
+	 vEcEiVMZXpl1kHqiyx7SsGqSBCzMa88wAbAO3Q6JSTR+GiMAKoUSM/x2cKNrY+Aw0+7lR
+	 66NZDTO5YLIc4EBYuD38SaUnVscOEKTJaZsqrklpkyBCayUm2kH6Jp+EpY/L3mup0We0u
+	 dZtDTsU8LU4hZiBbJsXsEOaStf8p35iqEpXRQ5QRAz0EYBgyhIN3dwYSRA/ESukh8Vw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793959110;
-	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Last-TLS-Session-Version;
-	bh=kbFOWcR5A6GDWO1RwMhPHFn30qJ8DBxtRSmC21gCtx4=;
-	b=KVDytRTN0J9U373RK8DCz0k9J3NhG86lxffy+Ln0NlM+viqv/4Sy+z9J04OZBvUqIyNE
-	 Pc+Qy6qwGLz3ORjjTEv7lG1Ps+vpk0vgEsv9yahZxOBFEpa73wrZEoQHvbNwUBH+XtNXT
-	 7RSp72qhrm86aHp5l/aHnk5V56YLPQ413SOqKVYZZZduwSA0dz6QbTVDRA6Uzpkkx/YnP
-	 X0+ngOiip1oV7QV//bUpv155B1Y2I8t2OR9YmYxcmp4wzZDb43WrwkrQNS9lxkvShxk3q
-	 xJGW1fhQrARGbvTQgGHllrGW/Iv0AKdTHLc4dlttaYq6vb/udtovSdLBHlUS6BhpRcw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793963634;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=FPW9YYdTNv+IQvXzFfrnGgMOfUMAXGequJy/ZFKNWxE=;
+	b=CRAJFWmNyLh/h0p+M1lItfqK0VYVoA6ivliFXGm6Gborz8E0yqMy0MRv2HVkayE2N+3D
+	 6PaM8bzxX0UPHwxaPClvdZM7a+hvxb8LxWhR/8kB3wSjQsOByGtrZ2uwbK2Izlw2ULtsE
+	 cJp0Jnwy61fFaXF5z5vC59djRQHwWNIXc47ADYSrZM77I/Bte2dO9ZcUPSDxmP3n3AC3+
+	 hK91rjcbmH28i1FdYf5P+oj4TVnSIkuOzMZ5CoEuds1NE9EYOh7N+3/+gu3xmGm2SmA0d
+	 mBRDTb2P9QwRZvgTQwG/8uyPmGXeHgEhLaGc89LzYNbTzloDgiqmWuylr5E+vkFKBLA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=bootlin.com;
-	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=tcvCobbY;
-	arc=none smtp.remote-ip=185.246.84.56
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UCty0Lx5;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0EC0F606A32C
-	for <mfd@lists.linux.dev>; Fri,  6 Nov 2026 09:58:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0EC0F606A32C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A144C606A32E;
+	Fri,  6 Nov 2026 11:13:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=tcvCobbY
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id 504171A1355;
-	Fri,  6 Nov 2026 09:58:26 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 1B4EA5FFBC;
-	Fri,  6 Nov 2026 09:58:26 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 2BA12103291F9;
-	Fri,  6 Nov 2026 10:58:17 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1793959104; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:content-language:in-reply-to:references;
-	bh=kbFOWcR5A6GDWO1RwMhPHFn30qJ8DBxtRSmC21gCtx4=;
-	b=tcvCobbYjIy6MNOP2TZqIe7RrPmlVaebdIin+t8AfwE/41bMrqrla3DBS9z9LQQQESELE1
-	dkoOfHDwF+Q1ZnOPqvI6/n5Lvzwh8s3rdV9KSfSzczS6mwwjM+pVQt2VA0pzESp2teTxdm
-	KE3imiAZSUXihBW8LJ4UmGJlcSe6FX2989eLUTfqo+PaUzx0mi2aj7kcTQJy6TBLiBcpav
-	nP9xslvjHOkOh6Xq0WxtWUCMkvLq9Fz8LAmv2ESPxceLVSSIP980DIjZazGdaedDOucMZa
-	1PUTFIr6QnqCp+nXdvFdL6c0UzT/Ku8sYE7A5sTYD8FelifqE4hnBIJ6TFByiw==
-Message-ID: <1e12523f-a294-4f98-93d9-4ea3479d4456@bootlin.com>
-Date: Fri, 6 Nov 2026 10:58:17 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UCty0Lx5
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3DD841F008A2;
+	Fri,  6 Nov 2026 11:13:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793963634;
+	bh=FPW9YYdTNv+IQvXzFfrnGgMOfUMAXGequJy/ZFKNWxE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=UCty0Lx5o5olONYrBwCIaVsiO8Ee6vuN1ogVF+XlJL+KPZCCZn4xmkabhgc4v8Zl7
+	 jDjm9CxxzUioazAvPpEF2K44ed+PcGdnlV1eSp2BxKI/Dc4ZYxEDLtB+L48jhP7TT6
+	 UWvdHfh9K0EKsxwkTey1TvB0V2KC+mBxuvjIkMaurbMIaUfDPys2k0YnY9NzgiabVg
+	 OCHV9OLrQHsGRWTIrD3cd54YbnYq91A2hy8fs7XyOzd05SDHvN3oiWX17UUUiBMfb9
+	 lPEvbP+eVBz2wnB9iVwm6jD4A644OgmNpq8zu9rT4HTp6NcpkLt5CeW3oKxi488A+m
+	 KOupkyN+7YPMg==
+Date: Fri, 6 Nov 2026 12:13:50 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Vasilij Strassheim <v.strassheim@linutronix.de>
+Cc: Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Andrew Lunn <andrew@lunn.ch>, 
+	Vladimir Oltean <olteanv@gmail.com>, "David S. Miller" <davem@davemloft.net>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
+	Russell King <linux@armlinux.org.uk>, Andrew Lunn <andrew+netdev@lunn.ch>, 
+	Heiner Kallweit <hkallweit1@gmail.com>, Eric Dumazet <edumazet@kernel.org>, Lee Jones <lee@kernel.org>, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, netdev@vger.kernel.org, 
+	mfd@lists.linux.dev, Martin Kaistra <martin.kaistra@linutronix.de>, 
+	Benedikt Spranger <b.spranger@linutronix.de>
+Subject: Re: [PATCH net-next v4 4/8] dt-bindings: mfd: Add SoC-e SWIP parent
+Message-ID: <20261106-judicious-penguin-of-enhancement-b28c8b@quoll>
+References: <20261105-devel-vstrassheim-soce-dsa-ml-v4-0-02f3cde2afa1@linutronix.de>
+ <20261105-devel-vstrassheim-soce-dsa-ml-v4-4-02f3cde2afa1@linutronix.de>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -62,52 +64,112 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] mfd: Use named initializers for acpi_device_id
-To: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>,
- Lee Jones <lee@kernel.org>, Chen-Yu Tsai <wens@kernel.org>,
- David Rhodes <david.rhodes@cirrus.com>,
- Richard Fitzgerald <rf@opensource.cirrus.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Mika Westerberg <mika.westerberg@linux.intel.com>,
- Zha Qipeng <qipeng.zha@intel.com>, Qunqin Zhao <zhaoqunqin@loongson.cn>,
- Andy Shevchenko <andy@kernel.org>
-Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
- linux-sound@vger.kernel.org, patches@opensource.cirrus.com,
- linux-crypto@vger.kernel.org, Charles Keepax <ckeepax@opensource.cirrus.com>
-References: <20261104-acpi-mfd-v2-0-64b9dee3baaf@thegoodpenguin.co.uk>
- <20261104-acpi-mfd-v2-2-64b9dee3baaf@thegoodpenguin.co.uk>
-Content-Language: en-US
-From: Thomas Richard <thomas.richard@bootlin.com>
-In-Reply-To: <20261104-acpi-mfd-v2-2-64b9dee3baaf@thegoodpenguin.co.uk>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261105-devel-vstrassheim-soce-dsa-ml-v4-4-02f3cde2afa1@linutronix.de>
 
-On 11/4/26 5:09 PM, Pawel Zalewski wrote:
-> Use a designated initializer for the acpi_device_id fields which makes the
-> code more readable and consistent with how lists are initialized in the
-> rest of the kernel code base. Also drop explicitly setting fields to 0
-> where it is redundant.
+On Thu, Nov 05, 2026 at 03:16:48PM +0100, Vasilij Strassheim wrote:
+> Add a binding for the SoC-e SWIP multifunction FPGA IP core.
 > 
-> Unify the list terminator to have a single space between the brackets and
-> no trailing comma.
+> Describe the shared MMIO address space and address translation for
+> the required Ethernet switch child and the optional integrated MDIO
+> controller and MMIO-controlled MDIO multiplexer.
 > 
-> Reviewed-by: Charles Keepax <ckeepax@opensource.cirrus.com>
-> Signed-off-by: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+> Signed-off-by: Vasilij Strassheim <v.strassheim@linutronix.de>
 > ---
->  drivers/mfd/axp20x-i2c.c              | 2 +-
->  drivers/mfd/cs42l43-i2c.c             | 8 ++++----
->  drivers/mfd/intel_pmc_bxt.c           | 2 +-
->  drivers/mfd/intel_soc_pmic_bxtwc.c    | 2 +-
->  drivers/mfd/intel_soc_pmic_chtdc_ti.c | 4 ++--
->  drivers/mfd/intel_soc_pmic_chtwc.c    | 2 +-
->  drivers/mfd/intel_soc_pmic_crc.c      | 4 ++--
->  drivers/mfd/intel_soc_pmic_mrfld.c    | 4 ++--
->  drivers/mfd/kempld-core.c             | 6 +++---
->  drivers/mfd/loongson-se.c             | 2 +-
->  drivers/mfd/upboard-fpga.c            | 6 +++---
-Acked-by: Thomas Richard <thomas.richard@bootlin.com> # upboard-fpga.c
+>  .../devicetree/bindings/mfd/soce,swip.yaml         | 137 +++++++++++++++++++++
+>  1 file changed, 137 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/mfd/soce,swip.yaml b/Documentation/devicetree/bindings/mfd/soce,swip.yaml
+> new file mode 100644
+> index 000000000000..625be299e262
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/mfd/soce,swip.yaml
+> @@ -0,0 +1,137 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/mfd/soce,swip.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: SoC-e SWIP multifunction Ethernet switch FPGA IP core
+> +
+> +maintainers:
+> +  - Vasilij Strassheim <v.strassheim@linutronix.de>
+> +
+> +description:
+> +  SoC-e Switch IP (SWIP) cores integrate Ethernet switching logic, an
+> +  MDIO controller, and an MDIO bus multiplexer in one memory-mapped device.
+> +  The MDIO bus multiplexer is wired to the integrated MDIO controller.
+> +
+> +properties:
+> +  compatible:
+> +    const: soce,swip
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  '#address-cells':
+> +    const: 1
+> +
+> +  '#size-cells':
+> +    const: 1
+> +
+> +  ranges: true
+> +
+> +  mdio@204:
+> +    $ref: /schemas/net/soce,swip-mdio.yaml#
+> +    unevaluatedProperties: false
+> +
+> +  mdio-mux@202:
+> +    $ref: /schemas/net/mdio-mux-mmioreg.yaml#
+> +    unevaluatedProperties: false
+> +
+> +  ethernet-switch:
 
-Best Regards,
-Thomas
+Why are you mixing children with and without bus addresses? This is
+discouraged and shows that device is not correctly represented, e.g. if
+the ethernet-switch does not have resources, then THIS device is the
+ethernet switch.
+
+> +    $ref: /schemas/net/dsa/soce,swip-switch.yaml#
+> +    unevaluatedProperties: false
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - '#address-cells'
+> +  - '#size-cells'
+> +  - ranges
+> +  - ethernet-switch
+> +
+> +dependentRequired:
+> +  mdio-mux@202:
+> +    - mdio@204
+> +
+> +additionalProperties: false
+> +
+> +examples:
+> +  - |
+> +    ethernet-switch@80020000 {
+> +        compatible = "soce,swip";
+> +        reg = <0x80020000 0x10000>;
+> +        #address-cells = <1>;
+> +        #size-cells = <1>;
+> +        ranges = <0x0 0x80020000 0x10000>;
+> +
+> +        mdio_parent: mdio@204 {
+> +            compatible = "soce,swip-mdio";
+> +            reg = <0x204 0xc>, <0x200 0x2>;
+> +            reg-names = "data", "control";
+> +            #address-cells = <1>;
+> +            #size-cells = <0>;
+> +        };
+> +
+> +        mdio-mux@202 {
+
+Nodes are ordered by unit address.
+
+Best regards,
+Krzysztof
+
