@@ -1,72 +1,75 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.198
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.197
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793993527;
-	b=v0QWFP/IbJYCoG7Uj9ez+D9GhlpO9hX2Ya0paBkAm8B/yavjUy7NCwPf7+WE5IvcPGPW
-	 imjxxO1aEJycvGGaI9MxaDf/uwmo4A/de3RI9ggQUrdeNRLdsp8FCWlLr2i8FY/1iCwe0
-	 CHtFOOxZjNQNUd5Aqc0t7ev7sjamyIoMNwlmmj993+DQlRQUgkovHuxshQCV8zfOKL3P3
-	 AVO7rOAKR+9pJJXEmUdE2iFer2Nk9TxF0pPqurziL0WUTYP/I+TaV2ow7kD6raRJT9IlK
-	 Q2w7OH+qPRJSKqhZ5irt71VlR4KIBRqKfrgiltuW6RnxMW0865JF5/Tn456LCvyzA3Q==
+	t=1793993575;
+	b=rpFX6TrxSCYRmJlFwU+hav+FTOvpVZO/mEbYmsTHCzB5T1SI2KwkBytEGZDJKTeDL21e
+	 sWjSgqg0sLNyrTou7hfuIvPajG6sqFhwmdUouVQwcYsmeXHsY8vCmsy0QkATnav5ad1c1
+	 UabfdRlEOYzcDs4BbhHkDotnQlAjKMUE03DYhTzk9GajPpHU8FlJuciYFf21JE+Bif1K8
+	 sudLHMZ4GYsSWVq7h3e+ibz6FmOamXT79JyKJOaBZDu+YKzj6X8LSkj2qR5rVR/0vYpuz
+	 uDhQBO9m5BUyKzd2u0GCpg/QKGlpFpZA4i8ETfWQ3Mh2S8SOtgxm8gYCN687TFWYFww==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793993527;
+	a=rsa-sha256; c=relaxed/relaxed; t=1793993575;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Received:Date:Mime-Version:
-	 X-Mailer:Message-ID:Subject:From:To:Cc:Content-Type;
-	bh=Iw0r9KyM9yE8+UHLOBvRU3eF9rfoOEr06pAaRlmDbAI=;
-	b=kXg6YHyBeV/bkYf/DSzgerYcyh8deBvnGa4bajbSOh35knqt4LgeuATloy4RyCi9CxjK
-	 8QbDPQZxFQObCZGqHwim8jIjNufOlM2bDW5sCXpUcSqEqt4osQafIy2v4n1vp0190UtEl
-	 r44Hijc3SocRqOODcxGHP1+5T0MRsWNxEhMNkQuNQxvuSOpLe+Ex/lnUymIP+qxwE0NZ1
-	 Lw6q7U3DChn7s/DEsKYhSmB6qqL1JzoWa5mmAEvXWkpJEH2z4xK1nmCu9tW78xP7tUsDR
-	 wkBVMATliCZIYMH3BSWmyTRyngzL0TlonY6QqHOrFLxw9AJ0Scfxcad4MpLl30dv7mA==
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Received:Date:In-Reply-To:
+	 Mime-Version:References:X-Mailer:Message-ID:Subject:From:To:Cc:
+	 Content-Type;
+	bh=/r3iKwOujJ0k9iRfRMb2nXgYVKkbMoaxokk4Fx5YuMk=;
+	b=j2P531AI6mCkLcY3j5v33mdRJqC5zgREggTiL7aQqCx024dLQaiHq44+dRhCAR+S+rlX
+	 uSZ/ycynWPq1bYyzVNacjFWo3MF+ZgwaxCCPJK5lpJHWDJXIgKFqCVGVE1zK65BRiwpus
+	 vbgOp0Ko+gLnGlmjt7BY1qIbM9b+U9OcK1G0gm1IiCkj1E08xBj6naBrRlfHcQBGSOdW5
+	 DSQmjPolytsXxdjnyEuhyIeW/50Jwvbn2O4sk5CEFmzCqIbtkg6RsR3S5jJ4t16RqWP+N
+	 unUI+O/Xs6tLogb/ASFH4sSWkjv5aht3FLHDA7PjBRWB+MlnBknCx3+TgKd5B/HVf5Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=google.com;
 	spf=pass smtp.mailfrom=flex--dbalint.bounces.google.com;
-	dkim=pass header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=A2trcZs9;
-	arc=none smtp.remote-ip=209.85.208.198
-Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com [209.85.208.198])
+	dkim=pass header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=THN2tRZT;
+	arc=none smtp.remote-ip=209.85.208.197
+Received: from mail-lj1-f197.google.com (mail-lj1-f197.google.com [209.85.208.197])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE760606A32C
-	for <mfd@lists.linux.dev>; Fri,  6 Nov 2026 19:32:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CE760606A32C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE320606A326
+	for <mfd@lists.linux.dev>; Fri,  6 Nov 2026 19:32:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CE320606A326
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--dbalint.bounces.google.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=A2trcZs9
-Received: by mail-lj1-f198.google.com with SMTP id 38308e7fff4ca-3ab357a21adso5355041fa.3
-        for <mfd@lists.linux.dev>; Fri, 06 Nov 2026 11:32:06 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=THN2tRZT
+Received: by mail-lj1-f197.google.com with SMTP id 38308e7fff4ca-3ab3061668eso4764171fa.1
+        for <mfd@lists.linux.dev>; Fri, 06 Nov 2026 11:32:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20260707; t=1793993525; x=1794598325; darn=lists.linux.dev;
-        h=content-type:cc:to:from:subject:message-id:mime-version:date:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Iw0r9KyM9yE8+UHLOBvRU3eF9rfoOEr06pAaRlmDbAI=;
-        b=A2trcZs9Pl261P8hk1rdZPojDfxc2BFPx2dyFo05fhOsKn+e5LSvmc9xbgyhJi0bE2
-         poGA3kCGxvQax2JyUA/9s+dh9F4WAj/CbFkRHZE4JP8+SC1Hoyc2fy8s3ZxB8uDnmnMi
-         iTZRt+yZZDr0WkYNHTGkz48eia7y8Npwem2uzFEA9WsPwsVrbRAJJh3h3qtU6FGd1uzG
-         H672JawNRbHqcX9FE53qYqNV1RzuEfMIH3D9RlbIkfvuY7dt+0kn87MzUFK0EIPPn3vi
-         0RidQyBIEkssAUXEMmuIydQ65pgHZ+vB76iRy+9ef7+V6eNklre5Ql8IFVtza7fXkK3i
-         Jbjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793993525; x=1794598325;
-        h=content-type:cc:to:from:subject:message-id:mime-version:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=google.com; s=20260707; t=1793993573; x=1794598373; darn=lists.linux.dev;
+        h=content-type:cc:to:from:subject:message-id:references:mime-version
+         :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Iw0r9KyM9yE8+UHLOBvRU3eF9rfoOEr06pAaRlmDbAI=;
-        b=d3kl6r8Qa8RQrkI/Q0FYcc02NvlkAK3ZV1hlqoK+3eGlYYTb3rPSH/7Rb1W7x+QcGH
-         aY1ZHqoKNdhs8sPpRemlTrlyFjsLX3OsJKMW/CDh+9VrcK2bKCkbbEIlhnQcatT2bphC
-         n1y04WVDG5ZopIGMHGmc8WIjWYrm3LJq6eKNFapQHtsWpw6QrlJt2WIU1aQi882kUU39
-         Z1nPJQKbNqFKdAEp+Is/e17B3KdXyaGeAFDUOkqTAYct8GazoIudY9VJpTZ/B+XSl7BM
-         SADY6Z1wTvAwKpnSTRwyjzzwq+qJNm/Wb0AVMK24f/viPOKgeOGzuI5zQ6I1jDPh8xAz
-         AT5w==
-X-Forwarded-Encrypted: i=1; AL+hErFz9rqdz32w50oEtAFA/hC2YPY4ZxoUTIRz4ZCeQwn31grFjg4O+u1uddT7Q4xgGNdglZQ=@lists.linux.dev
-X-Gm-Message-State: APuU4Z9IjCQ7nxh3YpAeX6FWwqLl2XVkOu5zqK8X6kDRQRix/68WQzhI
-	fN3pKzj964zngWPFwiY+FrpvoWkeCb1DW4dPL0fN+YLVQuxBNJ7sEWC4JRX+7PIIiBLqUCoInuw
-	4BC4s94HDSg==
-X-Received: from ljgi21.prod.google.com ([2002:a2e:8095:0:b0:3ac:f040:c4e9])
- (user=dbalint job=prod-delivery.src-stubby-dispatcher) by 2002:a05:651c:31d1:b0:3a9:7e4d:7fc5
- with SMTP id 38308e7fff4ca-3acf3b2f8cemr7731911fa.18.1793993524757; Fri, 06
- Nov 2026 11:32:04 -0800 (PST)
-Date: Fri,  6 Nov 2026 19:31:14 +0000
+        bh=/r3iKwOujJ0k9iRfRMb2nXgYVKkbMoaxokk4Fx5YuMk=;
+        b=THN2tRZTRoNzis+7yyZnuSRk3D+sW+hCeJXyNrFFP5hsON68D1ul3A4MuSEehYfgMe
+         E2Td9xKeWzYNiZIX3NGIG49DehMfcH+Nsvty4dxY3dOIE7zy1pchtyQBJS1gWKD/mbL0
+         JxdEOcYwlYC5xCUtCyZfrFPekMv5AK3H0ih2B8yKUdMEcdWx2IOWPrW3tcjLpv3J8oAg
+         q9VainBzGpmZjqh302iFEG86UsuLa5csKXIuaHomL5JEl4yA3qVEoiBEw3RNnXdT5oS3
+         Z7o8wkV9KKK5uVvTwemRdznWcz5eLIybzigj2vHlWHL0IfvEYq18Fy4Y83uY9pfZdiBo
+         CkMA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793993573; x=1794598373;
+        h=content-type:cc:to:from:subject:message-id:references:mime-version
+         :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=/r3iKwOujJ0k9iRfRMb2nXgYVKkbMoaxokk4Fx5YuMk=;
+        b=QTn2qPYPXsN8Q7DF5dbBK1H3sml7uH2Rw/CfVj9gBDRo+kLv0nTh8TU0x5jGgZVulX
+         uw/LSI9LFum2gckpI6hOMYtj4YjpCUUQ1G7M+Ua5nyJXSFDhCpoh2ruk1jBoDRCf4a81
+         93Rcvz7UylhTeQl61F5JC7qXI0LbV0Szk81i03zPPdmYAezJHDDA2aBVFvBOCwYpMKOZ
+         6xxdL7qy/1myqVJBcZdGQ7WBKrW0Trf7L2FQXIykN9ZNQ8N0wAqqVnBFFl1EI2XCqz8a
+         wsWCUc+JuxcNio/0GS+FL4wWGxwoH2L0UKuYlmRJNLxy0lPTst0kmjwuzeZL5qyYqoaq
+         V7bw==
+X-Forwarded-Encrypted: i=1; AL+hErEtG1qrIrKPaw5OL91dLY2PqtoTUek3R4RG91SOdi6VHb8TaMfRmc4bYl9znkmB5u1Hg3o=@lists.linux.dev
+X-Gm-Message-State: APuU4Z8hSvCujq3iCO+6lRBHeKashVHMu5fKMN0c5iAG5y99gvSsgZhW
+	cuUjAHQkabDojzJ+T8mINBvJOdcthKg8LF5u/5wo2qP5CmTHeOQYncJW77fNAE13oi++9cdbGXl
+	JDCPcvlXL4g==
+X-Received: from ljou21.prod.google.com ([2002:a2e:b815:0:b0:3ac:e012:5784])
+ (user=dbalint job=prod-delivery.src-stubby-dispatcher) by 2002:a2e:a80a:0:b0:3a9:8762:d77
+ with SMTP id 38308e7fff4ca-3ace3028f4dmr14685591fa.6.1793993573005; Fri, 06
+ Nov 2026 11:32:53 -0800 (PST)
+Date: Fri,  6 Nov 2026 19:31:15 +0000
+In-Reply-To: <20261106193129.43493-1-dbalint@google.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -76,9 +79,10 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 Mime-Version: 1.0
+References: <20261106193129.43493-1-dbalint@google.com>
 X-Mailer: git-send-email 2.56.0.455.g6c5a503b38-goog
-Message-ID: <20261106193129.43493-1-dbalint@google.com>
-Subject: [PATCH v1 0/3] Introduce cros_ec power monitoring
+Message-ID: <20261106193129.43493-2-dbalint@google.com>
+Subject: [PATCH v1 1/3] platform/chrome: cros_ec: fix alignment of ec_params_pwrmon
 From: Daniel Balint <dbalint@google.com>
 To: Jonathan Cameron <jic23@kernel.org>, Benson Leung <bleung@chromium.org>, Lee Jones <lee@kernel.org>, 
 	Tzung-Bi Shih <tzungbi@kernel.org>
@@ -87,36 +91,37 @@ Cc: linux-iio@vger.kernel.org, chrome-platform@lists.linux.dev,
 	Daniel Balint <dbalint@google.com>
 Content-Type: text/plain; charset="UTF-8"
 
-This series adds the ChromeOS EC On-Device Power Monitoring 
-(cros_ec_pwrmon) driver to read onboard power-monitoring ADCs,
-such as PAC194x, wired through the embedded controller (EC).
+Sync EC_CMD_PWRMON structure padding with ChromeOS EC firmware by adding
+explicit reserved padding to struct ec_params_pwrmon (2-byte union
+alignment) and struct pwrmon_dump_info (4-byte struct size alignment),
+as __ec_align2 and __ec_align4 expand to __packed in Linux.
 
-Several ChromeOS platforms are equipped with onboard ADCs that are
-connected to the EC via I2C bus. The driver interfaces with the EC
-via the existing EC_CMD_PWRMON host command API (and EC_MKBP_EVENT_PWRMON
-events) to manage ADC accumulation and expose accumulated per-rail energy
-through an IIO sysfs attribute.
+Fixes: b57af7f8d194 ("platform/chrome: cros_ec: Sync host command header with EC")
+Signed-off-by: Daniel Balint <dbalint@google.com>
+---
+ include/linux/platform_data/cros_ec_commands.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-The driver is only loaded when the underlying hardware feature is present.
-The series also fixes alignment padding in EC_CMD_PWRMON definitions.
-
-Daniel Balint (3):
-  platform/chrome: cros_ec: fix alignment of ec_params_pwrmon
-  iio: adc: add cros_ec_pwrmon driver
-  mfd: cros_ec: load cros_ec_pwrmon on supported ECs
-
- .../ABI/testing/sysfs-bus-iio-cros-ec         |  13 +
- MAINTAINERS                                   |   7 +
- drivers/iio/adc/Kconfig                       |  11 +
- drivers/iio/adc/Makefile                      |   1 +
- drivers/iio/adc/cros_ec_pwrmon.c              | 333 ++++++++++++++++++
- drivers/mfd/cros_ec_dev.c                     |   9 +
- .../linux/platform_data/cros_ec_commands.h    |   2 +
- 7 files changed, 376 insertions(+)
- create mode 100644 drivers/iio/adc/cros_ec_pwrmon.c
-
-
-base-commit: 6628e7d4c6b25c8d18f1345e3a20d21829aae7e4
+diff --git a/include/linux/platform_data/cros_ec_commands.h b/include/linux/platform_data/cros_ec_commands.h
+index a7bd69d83522..6d74371c7074 100644
+--- a/include/linux/platform_data/cros_ec_commands.h
++++ b/include/linux/platform_data/cros_ec_commands.h
+@@ -6635,6 +6635,7 @@ enum ec_pwrmon_cmd {
+ 
+ struct ec_params_pwrmon {
+ 	uint8_t cmd;
++	uint8_t reserved;
+ 	union {
+ 		uint16_t set_rate;
+ 		uint8_t channel_id;
+@@ -6651,6 +6652,7 @@ struct ec_params_pwrmon {
+ struct pwrmon_dump_info {
+ 	uint8_t channel_id;
+ 	char channel_name[32];
++	uint8_t reserved[3];
+ } __ec_align4;
+ 
+ struct ec_response_pwrmon {
 -- 
 2.56.0.455.g6c5a503b38-goog
 
