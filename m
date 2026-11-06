@@ -1,55 +1,89 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.176
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1793919993;
-	b=wmATwWoHpT6N3y+eRxawZC0Kt1HBxRSaZSvmNTJRPtp4Plzv7xuJIKh5822ckkXre+KV
-	 xC8ALip9EPVK4bYxMwIBjzo/CgqjWoDwhUI90mQUSPICbL6UOy1TPpmivmYy76vjIJ+6V
-	 XOUWNIKipSZcNs+4JNccxRO8K7JkpOPgmkx+WgFiTcnaCLqimLCw9CB09cA3k7VEpVHth
-	 XeqVRaGKeqwl2AmgdMEo2glfy2Wam0n4QBZftWw44ef1kvsPAHjzSVvQJ0FjjAuVzfh44
-	 gzFvRrxCcuQsk4c5Fn5qGI8LVMOULuwcLpqLPGhf2qmWIZMQguRo9nNr7o363K07+fg==
+	t=1793943580;
+	b=0xNTgkpOtsZTMH0Q363b8BZPPzXFmkOeiE385x8QLdDdGc1Utq9mQCMNuNSltmxI32vx
+	 5BZUr48pFe5KKowZGJQFt5lyWgNRDDp2CPl1fihPrGqCI5/ruJVZ8BOrdDEj6HKKH10BS
+	 1UaN/UuefJok+R/RB9rhKs5898iKIo0hage65djP5yR6a/Z8lkRecv7vSVnHih3nT9V62
+	 xWqLI/+lTn4Y4pE5u0yEaJw0x79DdGS5XAiTWtlbjl5QfwEuzO7bhwZR6CfmGadagc2lV
+	 mN7Y9YJ69QJE4OPQD1/Y9xFImnnreLBgWLaan0KcLk+XdRzy94qqJF+5ilWgpc9L7zA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1793919993;
-	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
-	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
-	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=YaBcuTS2/J1mzNJ1LILtsklT83XrE9jGAVFB2V2Mc28=;
-	b=0eDKKiUwLTxi66JKlz+2VuWBD+FZOSj0iERy2xjCs4rAxnoJrR1400PGc1FxifPRrDj8
-	 3CcHRA8PZcvKCYPzAPrgTVxOuAqPQBdnfkderJApwB6Z5wmshtHD5jc7Nh/69rDCs+8Vc
-	 ykZZpVzCwEA9jdgyvRvN0I1uQCdb31GEO/ZaSiHRGLnKnci3QJsJBOm5HDrnKCXJcW+/O
-	 l3JigQFKZkMCFRu3aHuCmopHJz2MdVCyiQIk/w/rIDoFsy48yCo4mKyRwdMSlFHpw5w/W
-	 HlhRZ4hLq0Sml0ePFbXPyXTA8a/HQpWRcQGI/DeQzZXAqy9P9BZcAlezXkZWdDLmg3Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1793943580;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer;
+	bh=auWTB7UYaiNGOrSlerkFN1JgXbcgJ8fBYjKO/2KEZoI=;
+	b=O4rKe+7QUvaExMuiOHxzqzGYxvKRTGqK9wir1WglA6Tkglg7MfuZJ+xMMgCZDxJBKa/i
+	 xiRNQ87XG+hsJlIzDR39TAwgTXZhK36OhU9mqYhSIbKyt3RyvYjui511eGhhneYZwOOv8
+	 M//ZYAdd+4dXzidm9zR/chJmaqpemiQ4aj7WIlF5WSew+cisCupzebs4mmPbaMx/ToYZA
+	 VPdNZGdbRM0dIR59essO/aH/uynPN7y4nsS5kw/HJDiwU+9/SggmIsM9qDY/4OcwArJS9
+	 V/Ls5BOwangmmAHWqk5UGnU+wAzXnrwSwH4lbXawRAznXyf1wluTnsAnGKeX9EvtuLw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YfCU20bl;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=uw1oAiUh;
+	arc=none smtp.remote-ip=74.125.82.176
+Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D94C606A329
-	for <mfd@lists.linux.dev>; Thu,  5 Nov 2026 23:06:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1DCBA606A330
+	for <mfd@lists.linux.dev>; Fri,  6 Nov 2026 05:39:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1DCBA606A330
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YfCU20bl
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B4151F008A6
-	for <mfd@lists.linux.dev>; Thu,  5 Nov 2026 23:06:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1793919993;
-	bh=YaBcuTS2/J1mzNJ1LILtsklT83XrE9jGAVFB2V2Mc28=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=YfCU20bl5BO8wiSlNqEOUlaPEOjSEKdEZ1tP0SQeC+sbSm8Ylz2A1J83L573TwGJj
-	 LRYptvU5PS1s7p/S6vUmxHEC9jOz8zU9563xmG8dDB7Kq4PrSzY+aKwvPaeXADd7xT
-	 ytS9Hh08EYRFfPsRu6Tt7NLI137BqSqFSx9hSQVq6cHyV8xdTDK21jPBCR2/IquQWQ
-	 JbxDbaTwHWnmcDr/Tw3W7JSEieJIFbr9m4JV8+k41O8TPbUVNCS33PnKEbuTZm2gOl
-	 O5kuf4FmNB4pUYdjvsKOTXBO89ukTb26mXnqfzrlrGm8vv9daUIlIVQikqiN9a4gsK
-	 yZduW67QlWtQg==
-Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-5bff8fc7cf2so55791e87.3
-        for <mfd@lists.linux.dev>; Thu, 05 Nov 2026 15:06:33 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AKwUvBymBTnYxi1Ph/nOm95SrB0aXTZU7exBUUMUn8VgIrNthdLsh5tg3bIVqNlrYoVQS8nDsT8=@lists.linux.dev
-X-Gm-Message-State: APuU4Z/0QIk1lQqC5Wwe4MhHIbnX0pIfsbAN0RvxwURqzEsHc+sfL5kl
-	nPhpwqZ88L3iDGKuIvMm4egPATmQn2tL+MmoDixQDEHkk77Ei0IMrFe/jqaZHwmWg6/giJt0zbf
-	l93XY68i64lvX+n18UPTH6f6HYsc1Xb8=
-X-Received: by 2002:a05:6512:12d6:b0:5bf:d072:fa3f with SMTP id
- 2adb3069b0e04-5c003aedaf5mr130898e87.54.1793919991966; Thu, 05 Nov 2026
- 15:06:31 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=uw1oAiUh
+Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-36a0f27c9f4so478145eec.1
+        for <mfd@lists.linux.dev>; Thu, 05 Nov 2026 21:39:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1793943579; x=1794548379; darn=lists.linux.dev;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=auWTB7UYaiNGOrSlerkFN1JgXbcgJ8fBYjKO/2KEZoI=;
+        b=uw1oAiUhx9bF4YiqiOLyY5zUkPGmubahRG+Qsh+eQ8PLpbFVzpZ38paI5ytj99shm6
+         ExZdnuYiAHNUW9lCBKS1kxeyDL/aShH7I1B5aiP/2eMLZrvPZqxqTUYY/HFXYLptFAo8
+         YKeaSlIOJct393Gp3tQvO4PdRRcZirEsDRzX+1BwhjNWMovnKDv6F7XobwFw5lNgHfiI
+         /q5uVS/frA3IsHcjybZvmIG/D8NIRaAf/pgXFeg2PhQtZsyureKV4meBT/ODugttzYvV
+         eLE8fvsdgdndtrEJwzPFF/m5tpnRPTKcJF+nZkcZLG9Yn47bsQKuKjFBzNP5BSiGkz7T
+         lerQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793943579; x=1794548379;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=auWTB7UYaiNGOrSlerkFN1JgXbcgJ8fBYjKO/2KEZoI=;
+        b=WzDr3Ga4eiAYoa/IsTSZje/71HrBKCbn+S0zce4nQlq3zHumcEaIjyJisZPCIiIwsz
+         B+NpLawreF+6+pq3VX54owWaNFjcuczxqo0S2sdZLkEGYtQU9heK0JjMHh7CvzggSDwv
+         eMP4jjssFlAJ2m43nJKq+AhVXc6zvfvNHE/irO8Ji+QX9nSvW8J2JPg1toV/tyU3L9M+
+         UAOTR0cPGLuFN0VHj09yQBBJzOPvKVT/sFl/FB0VgcN8PEpEuyXPkXWEPxC6WZKXqrnz
+         oZHLo/2Sx9fFqgCRESQw5CWPi7kWQqwvs8Qhe9pZli40Kn7pScIqTU6os1WmLWstc7xf
+         2B4g==
+X-Forwarded-Encrypted: i=1; AL+hErGlsiMeeTC33zocbVHIPJVYNWMgNUJHPise7wsydohaMcXFenFfGyU4IfqtPCt3faC/W0g=@lists.linux.dev
+X-Gm-Message-State: APuU4Z8GBXw6j4LNToXzahOpIRg0oDvuckxG5sjB0BaY1o761g56lbtV
+	+L9xS7BbHdWdf7VpaanT94MsjC5av6mTn6TWARLW0kJEXP4d5TKh3pL+
+X-Gm-Gg: AYBFou101BmVONlCe1FAHdXoN5ZLHB6JNRqDQwKXyz3pQMG0u4vBo/nmc9S5gvzJa8Y
+	W+n/raamMNEd/uOucNtsDhlfPCFvdQqdjp5cE/3HDZVD1NmIDUBKtZAIQLJFhXa10aURILNmxpt
+	dkSPux1mlbxG9icMbmL7pV/r/D2OI4iFcIpHkUCSWwRDQdXGERFC2AhF1CpiTvgWOO+k3nSRjdG
+	s1faDdQov2tt7JE8pflQmuR+YSbLj9/p1GSkTA0RN8cdNC/Y4emCyJIUzSJTpE0k17LMy2Yx0vW
+	hzKci+qPe4mr9cO5XCN7F+BPpDb0ymPUVZlfnf0pDZHzldEwW7co5LhKdsh/RL8GoBFDLTp1/Sn
+	EUcl/Raa0gbwi6ewHzVGuYETmqFbVSACQQJHamA3LkJ1yPf1ywtSp7uTelaiB7UP2zYRjBtaY0a
+	484VfnJeCZy2OXkZ6aMt+AqA775iUo062ZKDUyJli9QXj1fw1io6cYg7sNfyv6nE0uT5OZq+5Ag
+	LKRposjTOokSUdbT0vIpT1RefBHwWgOCzAGwyjaK6FXtiEoFUOkvXKHbj/03p0JbFxamzVd+2s3
+	jdKWZuXe3dmojH67PtfWoSRweoeSSP/XBzEyFFzeDpMUiYJUOJSu7cMtiHtggPnPWtmxmOpVkko
+	DmXaCAfvJBaOrYY6b+g==
+X-Received: by 2002:a05:7300:ea91:b0:36d:2704:6adf with SMTP id 5a478bee46e88-3700d01f2c8mr152037eec.11.1793943578782;
+        Thu, 05 Nov 2026 21:39:38 -0800 (PST)
+Received: from dtor-ws.sjc.corp.google.com ([2a00:79e0:2ebe:8:64e:8358:c9cb:c17b])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-36fa651e6b1sm6126445eec.3.2026.11.05.21.39.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 Nov 2026 21:39:38 -0800 (PST)
+From: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+Subject: [PATCH 0/4] ASoC: arizona: switch to generic device properties and
+ clean up
+Date: Thu, 05 Nov 2026 21:39:31 -0800
+Message-Id: <20261105-arizona-asoc-v1-0-25ec7338446e@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,109 +93,59 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261101-xg6846b-bcmbca-xrdp-reset-v2-0-455fe9eed5ee@kernel.org>
- <20261101-xg6846b-bcmbca-xrdp-reset-v2-5-455fe9eed5ee@kernel.org> <179383086680.620422.9240673673295480953.b4-review@b4>
-In-Reply-To: <179383086680.620422.9240673673295480953.b4-review@b4>
-From: Linus Walleij <linusw@kernel.org>
-Date: Fri, 6 Nov 2026 00:06:20 +0100
-X-Gmail-Original-Message-ID: <CAD++jLnKQof8mO1KNRvZxE6Tin65w8jdSaZT5OqV_O7pwVD_8g@mail.gmail.com>
-X-Gm-Features: AclHuK9TCTCv47BMRDRzDvAaOOJPAOA3SDISY1H9ALtJZ7Baq-LrE9h49u9eXP8
-Message-ID: <CAD++jLnKQof8mO1KNRvZxE6Tin65w8jdSaZT5OqV_O7pwVD_8g@mail.gmail.com>
-Subject: Re: [PATCH v2 5/7] clk: bcm: Add BCMBCA PMB clocks
-To: Brian Masney <masneyb@kernel.org>
-Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	William Zhang <william.zhang@broadcom.com>, Anand Gore <anand.gore@broadcom.com>, 
-	Kursad Oney <kursad.oney@broadcom.com>, Florian Fainelli <florian.fainelli@broadcom.com>, 
-	=?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
-	Guenter Roeck <linux@roeck-us.net>, Philipp Zabel <p.zabel@pengutronix.de>, 
-	Jonathan Corbet <corbet@lwn.net>, Randy Dunlap <rdunlap@infradead.org>, 
-	Benjamin Larsson <benjamin.larsson@genexis.eu>, mfd@lists.linux.dev, 
-	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-clk@vger.kernel.org, linux-hwmon@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABNo7WoC/yXMMQ7CMAxA0atUnhspCYKIXqVisIMBMyRVTKuKq
+ HcnpeMb/q+gXIQVhq5C4UVUcmpwfQfxhenJRu7N4K2/OGfPBot8c0KDmqOJeCXCgCeiAC2ZCj9
+ k/e/G22Gd6c3xsz9g235l6/MLcAAAAA==
+X-Change-ID: 20261105-arizona-asoc-ca9bba7a3bb7
+To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
+ Charles Keepax <ckeepax@opensource.cirrus.com>, 
+ Richard Fitzgerald <rf@opensource.cirrus.com>, 
+ David Rhodes <david.rhodes@cirrus.com>, Lee Jones <lee@kernel.org>
+Cc: patches@opensource.cirrus.com, linux-sound@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, mfd@lists.linux.dev
+X-Mailer: b4 0.17-dev-e56a4
 
-Hi Brian,
+This series converts Arizona ASoC drivers to generic device properties
+and cleans up dead code and formatting issues:
 
-thanks for reviewing!
+- Convert audio platform data parsing from OF-only APIs to generic
+  device property helpers and drop CONFIG_OF guards across the codec
+  drivers.
+- Parse device properties unconditionally in the jack detection and codec
+  drivers even when platform data is supplied, preserving existing
+  channel settings and boolean flags when properties are absent.
+- Drop unused hpdet_acc_id and hpdet_acc_id_line fields from struct
+  arizona_pdata along with the unreachable HPDET accessory ID logic in
+  the jack detection driver.
+- Clean up coding style and argument alignment in arizona-jack.c.
 
-On Wed, Nov 4, 2026 at 11:21=E2=80=AFPM Brian Masney <masneyb@kernel.org> w=
-rote:
+Signed-off-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+---
+Dmitry Torokhov (4):
+      ASoC: arizona: convert audio pdata parsing to generic device properties
+      ASoC: arizona: always parse device properties regardless of platform data
+      ASoC: arizona: drop unused HPDET accessory ID support
+      ASoC: arizona: clean up coding style and formatting
 
-> > +static int bcmbca_pmb_clock_prepare(struct clk_hw *hw)
-> > +{
-> > +     struct bcmbca_pmb_clock *clock =3D to_pmb_clock(hw);
-> > +     const struct bcmbca_pmb_clock_desc *desc =3D clock->desc;
-> > +     unsigned int shift =3D (desc->channel % 2) * 16;
-> > +     unsigned int reg =3D BCMBCA_PMB_REG(desc->bus, desc->device, desc=
-->reg);
-> > +     u32 value;
-> > +     int ret;
-> > +
-> > +     switch (desc->type) {
-> > +     case PMB_PLL_CHANNEL: {
-> > +             unsigned int regs[] =3D {
-> > +                     BCMBCA_PMB_REG(desc->bus, desc->device, desc->pll=
-->status),
-> > +                     BCMBCA_PMB_REG(desc->bus, desc->device,
-> > +                                    desc->pll->ch01 + desc->channel / =
-2),
-> > +             };
-> > +             u32 values[ARRAY_SIZE(regs)];
-> > +
-> > +             ret =3D regmap_multi_reg_read(clock->regmap, regs, values=
-, ARRAY_SIZE(regs));
-> > +             if (ret)
-> > +                     return ret;
-> > +             /* Firmware owns PLL power and reset. */
-> > +             if (!(values[0] & PLL_LOCK))
-> > +                     return -EAGAIN;
->
-> Should this be -EPROBE_DEFER instead?
+ include/linux/mfd/arizona/pdata.h |  21 ++--
+ sound/soc/codecs/arizona-jack.c   | 225 +++++---------------------------------
+ sound/soc/codecs/arizona.c        | 121 ++++++++++----------
+ sound/soc/codecs/arizona.h        |   8 +-
+ sound/soc/codecs/cs47l24.c        |   8 +-
+ sound/soc/codecs/wm5102.c         |   8 +-
+ sound/soc/codecs/wm5110.c         |   8 +-
+ sound/soc/codecs/wm8997.c         |   8 +-
+ sound/soc/codecs/wm8998.c         |   8 +-
+ 9 files changed, 99 insertions(+), 316 deletions(-)
+---
+base-commit: ddfe51b0a0f5dc9e415cc2c8ad8db17532dd426b
+change-id: 20261105-arizona-asoc-ca9bba7a3bb7
 
-Not here since it is a .prepare() callback which is called at runtime,
-it would be weird to get this return code from preparing a clock?
+Thanks.
 
-> > +static int bcmbca_pmb_clock_probe(struct platform_device *pdev)
-> > +{
-> > +     struct device *dev =3D &pdev->dev;
-> > +     struct regmap *regmap =3D dev_get_regmap(dev->parent, NULL);
-> > +     struct clk_hw_onecell_data *data;
-> > +     struct bcmbca_pmb_clock *clocks;
-> > +     struct clk *ref;
-> > +     unsigned int i;
-> > +     int ret;
-> > +
-> > +     if (!regmap)
-> > +             return -ENODEV;
-> > +
-> > +     ref =3D devm_clk_get(dev, "ref");
->
-> This is never used. Is this to defer probe until the ref exists?
+-- 
+Dmitry
 
-Yep.
-
-> > +     for (i =3D 0; i < data->num; i++) {
-> > +             const struct bcmbca_pmb_clock_desc *desc =3D &bcm6846_clo=
-cks[i];
-> > +             struct clk_parent_data parent =3D {};
-> > +             struct clk_init_data init =3D {
-> > +                     .ops =3D &bcmbca_pmb_clock_ops,
-> > +                     .flags =3D CLK_GET_RATE_NOCACHE | CLK_IGNORE_UNUS=
-ED,
->
-> The CLK_IGNORE_UNUSED has no effect since there's no disable /
-> disable_unused ops.
->
-> Also why CLK_GET_RATE_NOCACHE on all clocks?
-
-The latter is only needed on PLL outputs as they need to read
-the state of some hardware dividers. I'll restrict it to those.
-
-I fixed the rest!
-
-Yours,
-Linus Walleij
