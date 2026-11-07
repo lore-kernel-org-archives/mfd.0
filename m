@@ -1,53 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=183.62.165.209
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=160.30.148.35
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794038869;
-	b=m8+PtZC5IrQbNNX/DkK1lVPV5qnTQ+bB2k4jaf0YzOgbFm4vysqvVTHDjthST8W7bf+B
-	 ejR7fcEbvP8XBYy0l7AOd0IcqbdQM4kk2fc+q98GJGXuIezqVec2S5occGwxJ+IDWaBM/
-	 +KBNSiCybLspT97ktURRuk34SHXPpN4l1KuxS9VLdGE2DdUeJ8RQmY8BY2dUvX0XJ8iEF
-	 5GQMUBgTOi8bv6hXB7C6AJe30Qxn3Lyv2GKVa2d95i+5K6h/abVBueuBWSXG4F/RKGVOo
-	 yvRPNCG9Hmh4Ne14sGsKirnWWrBqpj0pJyd94eywaGyGkhZV2RZC/okQVsoBwEwuC6g==
+	t=1794038871;
+	b=Vo4o1zpOM/Nyz+NCvWC1CAUXr5VaTVrHI9c517vysJnVuHMTYnpoOWwlpg691p7xqe3U
+	 73VdpxPIodb3lHaDNJH/0q/LDa4NlOwfRlXLzbWNEF141OWuZp7KWQajFnEVIgBv4eZf+
+	 4DSQtSXVpi9XD9ZhRMU4WW7WxJuHS2hyyP6sd2QDeVLM14ATbHET7jBNdHaybHZceGd/l
+	 OTSd4KgmH/hGZzmoa/XNlqzWl1sCC7kbwlDH7O5RYqnqgUTRd5jnVz96M+c8lQEbnxQtD
+	 qR40mVgC3LgAPFuNyJ2PBeOkkAYc02WKLM1wraZ8VImOgAS1YZQNJhyzPZ0OOUPotiw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794038869;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794038871;
 	h=DMARC-Filter:Received:Received:Received:X-Zmail-TransId:X-Mailer:
-	 Message-ID:Date:Mime-Version:From:To:Cc:Subject:Content-Type:X-MAIL:
-	 X-TLS:X-ENVELOPE-SENDER:X-SOURCE-IP:X-CLEAN:
-	 X-Fangmail-Anti-Spam-Filtered:X-Fangmail-MID-QID;
-	bh=IU7XIeW+27oTxAoZZ5Rerjf37bEsa2qLvPurBR6fe48=;
-	b=ySsHUrsDOyzKNmm1H1+hJ/tYm9EPmbPlBfl4s5hzjC8I1PVDWd3Xv+OiU4aVP3pZpdV1
-	 7ukdHh0KSeoPhrBTjnvzeBRvFB0U+mMPHjcYcEkYGp6dt1wbe5pFbRq03hzVQ9UipWljq
-	 B8hbhhYNrQnBlh71DSUyra0G1G+nN4SoY1nlkhZW2cUeZzEtTcA4Xuwi0KUI9pRnBP1sS
-	 EcPPOmYjc2oXLuZKj/jgIxox/KUunbd3LK1Tu/g43EoCZ3ice2shOCwMIiLAuzLE7UHXi
-	 Dvy3dJde5kthsZq6Jz2Bk1uAz4ickyq97cDsyw/v1XObGF/6IbPertx9HkKSavSUPwA==
+	 Message-ID:In-Reply-To:References:Date:Mime-Version:From:To:Cc:
+	 Subject:Content-Type:X-MAIL:X-TLS:X-ENVELOPE-SENDER:X-SOURCE-IP:
+	 X-CLEAN:X-Fangmail-Anti-Spam-Filtered:X-Fangmail-MID-QID;
+	bh=a5rrNqAvPt8A3MZOoF9G+4MCDobAm8r2YjaZ5wARAwg=;
+	b=nYFpc05x6svrHIaqZ90tnFKmchyUiY66SYDa0cteBKWbGqbOHh1Wal8V3joTL6K7ansW
+	 oNJ99CgKYOvq+o9tpz2xNJY/Rd5L9Nfr5+2A/EFHSEUSiOZ1F2w74oDcnjribsezApmrI
+	 hnSu/RLxDgnmMKgmCGmmNOfaiDf+7u0rUvXS2Ays2n4gui2xIQYc6J8xbctdLU8l+yFG5
+	 4X2tRPzofDWdKDm+Jmz5SJ5yuyy4BMvNXTpcwHMtPpnNV8+yaA7VYegM/p0vcT8Rg0m5r
+	 yOkuRQzGSudZ8l2HK3hzJ/ccA8YkmBiDvSTDV6HUQCpu7VGgs+A+MDJDsGUsd9HABWg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=zte.com.cn;
 	spf=pass smtp.mailfrom=zte.com.cn;
-	arc=none smtp.remote-ip=183.62.165.209
-Received: from mxct.zte.com.cn (mxct.zte.com.cn [183.62.165.209])
+	arc=none smtp.remote-ip=160.30.148.35
+Received: from mxhk.zte.com.cn (mxhk.zte.com.cn [160.30.148.35])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB756606A326
-	for <mfd@lists.linux.dev>; Sat,  7 Nov 2026 08:07:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EB756606A326
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2C82606A331
+	for <mfd@lists.linux.dev>; Sat,  7 Nov 2026 08:07:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B2C82606A331
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zte.com.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zte.com.cn
 Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mxct.zte.com.cn (FangMail) with ESMTPS id 4jM7vD0Sq5z57HRy;
-	Sat, 07 Nov 2026 16:07:36 +0800 (CST)
+	by mxhk.zte.com.cn (FangMail) with ESMTPS id 4jM7vS6BHdz8Xrr9;
+	Sat, 07 Nov 2026 16:07:48 +0800 (CST)
 Received: from xaxapp05.zte.com.cn ([10.99.98.109])
-	by mse-fl2.zte.com.cn with SMTP id 6A787Zp6096399;
-	Sat, 7 Nov 2026 16:07:35 +0800 (+08)
+	by mse-fl2.zte.com.cn with SMTP id 6A787gCB096477;
+	Sat, 7 Nov 2026 16:07:42 +0800 (+08)
 	(envelope-from shao.mingyin@zte.com.cn)
-Received: from mapi (xaxapp05[null])
+Received: from mapi (xaxapp02[null])
 	by mapi (Zmail) with MAPI id mid32;
-	Sat, 7 Nov 2026 16:07:37 +0800 (CST)
-X-Zmail-TransId: 2afc6aeedc492ba-7fe6b
+	Sat, 7 Nov 2026 16:07:44 +0800 (CST)
+X-Zmail-TransId: 2afa6aeedc50a1c-925bb
 X-Mailer: Zmail v1.0
-Message-ID: <202611071607376342uPiYA9rHRC7ZI9Ix-8xh@zte.com.cn>
-Date: Sat, 7 Nov 2026 16:07:37 +0800 (CST)
+Message-ID: <20261107160744422AQlKKm8Uu2w31Z1_EGsT8@zte.com.cn>
+In-Reply-To: <202611071607376342uPiYA9rHRC7ZI9Ix-8xh@zte.com.cn>
+References: 202611071607376342uPiYA9rHRC7ZI9Ix-8xh@zte.com.cn
+Date: Sat, 7 Nov 2026 16:07:44 +0800 (CST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -62,58 +64,58 @@ To: <lee@kernel.org>, <mfd@lists.linux.dev>
 Cc: <tony@atomide.com>, <linux-omap@vger.kernel.org>, <tharvey@gateworks.com>,
         <support.opensource@diasemi.com>, <patches@opensource.cirrus.com>,
         <linux-kernel@vger.kernel.org>
-Subject: =?UTF-8?B?W1BBVENIIDAvNV0gbWZkOiBGaXggYW4gb3V0LW9mLWJvdW5kcyBJUlEgbWFwIGFuZCBlcnJvci1wYXRoIGJ1Z3M=?=
+Subject: =?UTF-8?B?W1BBVENIIDIvNV0gbWZkOiB0d2w2MDMwLWlycTogRG9uJ3Qgd3JpdGUgZ2FyYmFnZSB0byBpbnRlcnJ1cHQgbWFzayBvbiByZWFkIGZhaWx1cmU=?=
 Content-Type: text/plain;
 	charset="UTF-8"
-X-MAIL:mse-fl2.zte.com.cn 6A787Zp6096399
+X-MAIL:mse-fl2.zte.com.cn 6A787gCB096477
 X-TLS: YES
 X-ENVELOPE-SENDER: shao.mingyin@zte.com.cn
-X-SOURCE-IP: 10.5.228.133 unknown Sat, 07 Nov 2026 16:07:36 +0800
+X-SOURCE-IP: 10.5.228.133 unknown Sat, 07 Nov 2026 16:07:48 +0800
 X-CLEAN: YES
 X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6AEEDC48.000/4jM7vD0Sq5z57HRy
+X-Fangmail-MID-QID: 6AEEDC54.000/4jM7vS6BHdz8Xrr9
 
-Five independent fixes in the MFD core address an out-of-bounds IRQ-map
-lookup, an uninitialized interrupt-mask write, an IRQ leak on a failed
-probe, a missing IRQ-wake teardown on removal, and two unchecked
-firmware CRC reads.  Each patch touches a different driver; they are
-grouped only because they go through the same MFD tree.  Every patch is
-independent and can be applied and reviewed on its own, and taking a
-subset is fine.
+From: Shao Mingyin <shao.mingyin@zte.com.cn>
 
-The series is ordered by severity:
+twl6030_interrupt_unmask() and twl6030_interrupt_mask() ignore the return
+value of the twl_i2c_read_u8() that fetches the current mask value.  When
+the read fails, "unmask_value"/"mask_value" hold uninitialized stack data
+which is then masked/unmasked and written back to the INT_MSK_A/B/C
+registers, corrupting the interrupt mask configuration of the whole PMIC.
 
-  1/5 mfd: tps65219: Fix out-of-bounds access in tps65214 IRQ map
-  2/5 mfd: twl6030-irq: Don't write garbage to interrupt mask on read failure
-  3/5 mfd: arizona: Free info IRQs on probe failure
-  4/5 mfd: da9052: Disable IRQ wake on device removal
-  5/5 mfd: gateworks-gsc: Check firmware CRC reads for errors
+Bail out with the read error before touching the value or writing it back.
 
-1/5 adds the missing reserved-bit placeholder so that a power-button
-interrupt no longer indexes past tps65214_sub_irq_offsets[].  2/5
-returns the I2C read error instead of writing uninitialized stack data
-to the PMIC interrupt mask.  3/5 frees the three informational IRQs
-before arizona_irq_exit() tears down their domain.  4/5 tracks whether
-enable_irq_wake() succeeded and disables it on the probe failure and
-removal paths.  5/5 checks the two GSC_FW_CRC reads and fails the probe
-instead of printing a stale CRC.
-
-No dependencies; all five apply directly on next-20261030.
-
-Shao Mingyin (5):
-  mfd: tps65219: Fix out-of-bounds access in tps65214 IRQ map
-  mfd: twl6030-irq: Don't write garbage to interrupt mask on read failure
-  mfd: arizona: Free info IRQs on probe failure
-  mfd: da9052: Disable IRQ wake on device removal
-  mfd: gateworks-gsc: Check firmware CRC reads for errors
-
- drivers/mfd/arizona-core.c        |  3 +++
- drivers/mfd/da9052-irq.c          | 11 ++++++++++-
- drivers/mfd/gateworks-gsc.c       |  6 ++++--
- drivers/mfd/tps65219.c            |  1 +
- drivers/mfd/twl6030-irq.c         | 10 ++++++----
- include/linux/mfd/da9052/da9052.h |  2 ++
- 6 files changed, 26 insertions(+), 7 deletions(-)
-
+Fixes: e8deb28ca8e2 ("mfd: Add support for twl6030 irq framework")
+Signed-off-by: Shao Mingyin <shao.mingyin@zte.com.cn>
 ---
-base-commit: 7649ba73f9e7e1e04d0b46213e39c79ae09dd55c
+diff --git a/drivers/mfd/twl6030-irq.c b/drivers/mfd/twl6030-irq.c
+index 0ca00f618d4d..1333c4e9cdd7 100644
+--- a/drivers/mfd/twl6030-irq.c
++++ b/drivers/mfd/twl6030-irq.c
+@@ -235,10 +235,11 @@ int twl6030_interrupt_unmask(u8 bit_mask, u8 offset)
+ 
+ 	ret = twl_i2c_read_u8(TWL_MODULE_PIH, &unmask_value,
+ 			REG_INT_STS_A + offset);
++	if (ret)
++		return ret;
+ 	unmask_value &= (~(bit_mask));
+-	ret |= twl_i2c_write_u8(TWL_MODULE_PIH, unmask_value,
++	return twl_i2c_write_u8(TWL_MODULE_PIH, unmask_value,
+ 			REG_INT_STS_A + offset); /* unmask INT_MSK_A/B/C */
+-	return ret;
+ }
+ EXPORT_SYMBOL(twl6030_interrupt_unmask);
+ 
+@@ -249,10 +250,11 @@ int twl6030_interrupt_mask(u8 bit_mask, u8 offset)
+ 
+ 	ret = twl_i2c_read_u8(TWL_MODULE_PIH, &mask_value,
+ 			REG_INT_STS_A + offset);
++	if (ret)
++		return ret;
+ 	mask_value |= (bit_mask);
+-	ret |= twl_i2c_write_u8(TWL_MODULE_PIH, mask_value,
++	return twl_i2c_write_u8(TWL_MODULE_PIH, mask_value,
+ 			REG_INT_STS_A + offset); /* mask INT_MSK_A/B/C */
+-	return ret;
+ }
+ EXPORT_SYMBOL(twl6030_interrupt_mask);
