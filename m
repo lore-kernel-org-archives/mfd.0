@@ -1,56 +1,41 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=114.242.206.163
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794030293;
-	b=Dx9QElnbtevopsezdWirJYaoV+yl4iEFF+5DEycGf4MVVaN0AM7IAXjKvMNKsDxrYdy8
-	 GIAZKzVuwb71yQw8qvdG/C9Cddjb2Mi3mRBR2Nf52LF71o91g5cGefBw4P7Ln15x1TJTO
-	 NDxpiPtERm2PBBMKkBWSEZ2s3DCnvU6DEEOMb3oSGkXvW4YOQeFprVQw+YlGDvFJj4fNa
-	 wi51W4VIuYUmc8Ok3MYBi8kWcmVhtjOnkVHuqTZ+iMI80fXlYHGSV2aBWVK8BH1Al66U2
-	 tXUI1vSY7Dbh/F/+933dEL8kxZPRtci1rs0AuPu8F6oQONYFIKnHp6YlaJgQqJWwItA==
+	t=1794031277;
+	b=gBXYvDeA/lwDRuqmvT1HffMjoXUFZDTbJX2CfRLJQIWnAC4uTs8wWg70JQ5UiSd9uZmO
+	 zU7M4Xf0hb8GXklXbtvtQ1HvprErlsDe5tp/rSw/bKqOynO941p05ntF2E2+ZXf20kzW+
+	 DnoC0lSlIpKAavteQZZYatWPK4mB4eK0DP80kocV5z2GprFBkYvIjeiYSPDId8mWpDLte
+	 S/aU1lRr22cPnpxgJsFVIPnSAPLv9qWzJgvocsYvxRTPZ2qHanv3gKN2SJu2vt5rpkrle
+	 dlOLNgrw11lpXFVtvAJLb+mXlvFr5DgIJFSAK8uYlEPYpS5KchEldVDzOgSJSM2GhjA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794030293;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=xJX4Na1cyDCpImINIHbohdLaAUbpe+SHEiUcBVTDjp8=;
-	b=YzHsVuBUk0AlnC2wuyvcRUsKFNE9HmLobj/wSaD45BTYR5MG8M0uzQFz/BDF3bfSgQia
-	 nO9M4XGu8UC15fvO3VQdvhlCkLgUfAB+68XgHCpbOOHMdl0JOdUGPu7Ea9HKwORYYcIwC
-	 bDywqE16ILavWf2ydaMgAtLEU+SYnyVDcqHyqlMu7hpd7CfKlSBjkEc4wGPiHcs+gbZ22
-	 0HUTZtafSpI2F5N2YWn3Pyb6aKlQdBx+DlU6yxVSmuuWTgMl2avLczRS1ztfNfyY452bR
-	 vTr/+a2qDRHQZczfRvVOnFqtML291On3MJrsgf2DZ0/og1wquTQqbGlBKViY71pSzZw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794031277;
+	h=DMARC-Filter:Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-CM-TRANSID:X-CM-SenderInfo:
+	 X-Coremail-Antispam;
+	bh=VApiiAu4y4jzk0oNRwNpWoUyNlZ1jI1NbfuSJXJZy6I=;
+	b=CzeIOVBwMmCPxoxAqkzEZPAHduYYO+4YVDTTObEJ0Uk/fRJfe0i0DIlyJt9SxBJM0Cqj
+	 I5FhJZUwwpDdlOyRd41JjCWx/cT54/hcd8QhSnzEuUSea2xMMWgpjs83QWV6TYIa2euDD
+	 /okEaogJp29S3jZl79bYZq+bE73jShUbeyep7tIPaknDGfVdEed+vqqWyV+zv+7M0GB2c
+	 wItkYQ6G0ugfa3ZfTy7ZKAi4wy6lnCfsaorehtVL7Zj4ygDaXpzk8ZvrSIbUbUnTmId6u
+	 U+H0vUZCs2ZgjQ1uZvZ3OiqWjPhhG003okrU0HhYpm5WL6SBIMxIFZDu7Xrz1CCARqQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WAPXq0XX;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4655606A326
-	for <mfd@lists.linux.dev>; Sat,  7 Nov 2026 05:44:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WAPXq0XX
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 11C7B1F0089F;
-	Sat,  7 Nov 2026 05:44:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794030292;
-	bh=xJX4Na1cyDCpImINIHbohdLaAUbpe+SHEiUcBVTDjp8=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=WAPXq0XXb4hqyQxl1LxS9yybnDWlZ8w8laW5JI08XsKUPCS8ixxG1aJO2xfi2ftYW
-	 NrmXX/EbQYAtMXpBpFeuaL7NQ01saysUnJ0NDlRxT9nnTzJ7SCJ3IDxnwMV0QW830j
-	 29yHLLctrfyaQcj5aMLnlDg383QQSdHW7LGNF/+wfcCGEkvSZUCLAJPhgkjqyYAkQm
-	 ZV2pag0kLcR7QDTSjShyr57n8Ghey1eznfeYXUKVs2hg2vxIiKrjVOURvkOY1DRjrL
-	 2CJp3m3IuQXAt1vP+UKnOzv/CbL3CoOs3gJahDqdAH87fOP+h8iXf4gHnWjFcclHVm
-	 1gl8VYSeGocig==
-Message-ID: <sashiko-outbox-202631@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH] mfd: ls2kbmc: cancel the reset work before the driver
- data is freed
-Reply-To: sashiko-reviews@lists.linux.dev
-To: hyunjungg <hj351016@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261107053218.3326443-1-hj351016@gmail.com>
-References: <20261107053218.3326443-1-hj351016@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Sat, 07 Nov 2026 05:44:51 +0000
+	dmarc=none header.from=loongson.cn;
+	spf=pass smtp.mailfrom=loongson.cn;
+	arc=none smtp.remote-ip=114.242.206.163
+Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F11F606A326
+	for <mfd@lists.linux.dev>; Sat,  7 Nov 2026 06:01:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3F11F606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
+Received: from loongson.cn (unknown [223.64.69.17])
+	by gateway (Coremail) with SMTP id _____8DxD9Okvu5qgVQdAA--.19353S3;
+	Sat, 07 Nov 2026 14:01:08 +0800 (CST)
+Received: from [127.0.0.1] (unknown [223.64.69.17])
+	by front1 (Coremail) with SMTP id qMiowJCxNs2fvu5q3uQyAA--.24809S2;
+	Sat, 07 Nov 2026 14:01:04 +0800 (CST)
+Message-ID: <8ffdb96e-c082-42b6-b895-2badc12285ca@loongson.cn>
+Date: Sat, 7 Nov 2026 14:01:02 +0800
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,82 +44,100 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mfd: ls2kbmc: cancel the reset work before the driver
+ data is freed
+To: hyunjungg <hj351016@gmail.com>, Chong Qiao <qiaochong@loongson.cn>,
+ Lee Jones <lee@kernel.org>
+Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org, stable@vger.kernel.org
+References: <20261107053218.3326443-1-hj351016@gmail.com>
+From: Binbin Zhou <zhoubinbin@loongson.cn>
+In-Reply-To: <20261107053218.3326443-1-hj351016@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-CM-TRANSID:qMiowJCxNs2fvu5q3uQyAA--.24809S2
+X-CM-SenderInfo: p2kr3uplqex0o6or00hjvr0hdfq/1tbiAgEECGrulv0ArQAAsN
+X-Coremail-Antispam: 1Uk129KBj93XoW7ZrWfWryUWw17CFWkXry8CrX_yoW8Kw45pF
+	Z8KFWYyrWDJr1Uta4DWr1I9FyYgr4rCr1xK348tw17W34aqr1qvr40vF90qF98CrWkGFWY
+	grWSq34v9a45ZFXCm3ZEXasCq-sJn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7ZEXa
+	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+	0xBIdaVrnRJUUUyCb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_
+	Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx1l5I
+	8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AK
+	xVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41l42xK82IYc2Ij64vIr4
+	1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK
+	67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI
+	8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAv
+	wI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14
+	v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x07UE-erUUUUU=
 
-Thank you for your contribution! Sashiko AI review found 1 potential
-issue to consider:
-- [Low] mfd: ls2kbmc: uncapitalized commit subject description after
-  prefix
-It also noticed 1 related pre-existing issue this patch does not
-introduce:
-- [Critical] mfd: ls2kbmc: premature acpi_unregister_gsi() in
-  ls2k_bmc_init() [1]
---
+Hi:
 
-commit 9b65d53fe564989b2108b75ef86d6d68901a6034
-Author: Hyunjung Ko <hj351016@gmail.com>
-
-mfd: ls2kbmc: cancel the reset work before the driver data is freed
-
-This commit replaces INIT_WORK() with devm_work_autocancel() in
-ls2k_bmc_init() so that bmc_reset_work is cancelled before devres frees
-ddata on driver unbind.
-
-> mfd: ls2kbmc: cancel the reset work before the driver data is freed
-
-[Severity: Low]
-This isn't a bug, but MFD commit subjects capitalize the description after
-the prefix (i.e. "mfd: ls2kbmc: Cancel the reset work...").
-
+On 2026/11/7 13:32, hyunjungg wrote:
+> From: Hyunjung Ko <hj351016@gmail.com>
+> 
+> ls2k_bmc_init() INIT_WORK()s ddata->bmc_reset_work (ls2k_bmc_events_fn)
+> and requests two device-managed interrupts (ls2k_bmc_interrupt) that
+> schedule_work(&ddata->bmc_reset_work).  The work handler dereferences
+> ddata via container_of().
+> 
+> ddata is devm_kzalloc()'d, so devres frees it when the device is
+> unbound.  Nothing cancels bmc_reset_work: free_irq() (run by devres)
+> only waits for the interrupt handler to finish, not for a work item it
+> has already queued.  If a BMC reset interrupt fires shortly before
+> unbind, the queued ls2k_bmc_events_fn() can run after ddata has been
+> freed -> use-after-free.
+> 
+> Register the work for device-managed cancellation with
+> devm_work_autocancel(), before the devm_request_irq() calls that arm
+> it, so devres (LIFO) frees the interrupts first, then cancels the work,
+> and only then frees ddata.
+> 
+> Found by code review; not reproduced (needs Loongson-2K BMC hardware and
+> a reset interrupt racing driver unbind).
+> 
+> Fixes: d952bba3fbb5 ("mfd: ls2kbmc: Add Loongson-2K BMC reset function support")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Hyunjung Ko <hj351016@gmail.com>
+> ---
+>   drivers/mfd/ls2k-bmc-core.c | 6 +++++-
+>   1 file changed, 5 insertions(+), 1 deletion(-)
+> 
 > diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-> index 408056bfb2fe7..c44291e7c1c21 100644
+> index 408056b..c44291e 100644
 > --- a/drivers/mfd/ls2k-bmc-core.c
 > +++ b/drivers/mfd/ls2k-bmc-core.c
-
-[ ... ]
-
-> @@ -371,7 +372,10 @@ static int ls2k_bmc_init(struct ls2k_bmc_ddata *ddat=
-a)
-> =20
->  	ls2k_bmc_save_pci_data(pdev, ddata);
-> =20
+> @@ -12,6 +12,7 @@
+>   #include <linux/aperture.h>
+>   #include <linux/bitfield.h>
+>   #include <linux/delay.h>
+> +#include <linux/devm-helpers.h>
+>   #include <linux/errno.h>
+>   #include <linux/init.h>
+>   #include <linux/iopoll.h>
+> @@ -371,7 +372,10 @@ static int ls2k_bmc_init(struct ls2k_bmc_ddata *ddata)
+>   
+>   	ls2k_bmc_save_pci_data(pdev, ddata);
+>   
 > -	INIT_WORK(&ddata->bmc_reset_work, ls2k_bmc_events_fn);
-> +	ret =3D devm_work_autocancel(ddata->dev, &ddata->bmc_reset_work,
+> +	ret = devm_work_autocancel(ddata->dev, &ddata->bmc_reset_work,
 > +				   ls2k_bmc_events_fn);
 > +	if (ret)
 > +		return ret;
-> =20
->  	ret =3D devm_request_irq(&pdev->dev, pdev->irq, ls2k_bmc_interrupt,
->  			       IRQF_SHARED | IRQF_TRIGGER_FALLING, "ls2kbmc pcie", ddata);
 
-[Severity: Critical]
-This problem wasn't introduced by this patch, but in ls2k_bmc_init()
-[1], does calling acpi_unregister_gsi(LS2K_BMC_RESET_GPIO_GSI) right
-after devm_request_irq() tear down the active GPIO IRQ mapping?
 
-drivers/mfd/ls2k-bmc-core.c:ls2k_bmc_init() {
-    ...
-	gpio_irq =3D acpi_register_gsi(NULL, LS2K_BMC_RESET_GPIO_GSI, ACPI_EDGE_SE=
-NSITIVE,
-				     ACPI_ACTIVE_LOW);
-	if (gpio_irq < 0)
-		return gpio_irq;
+Lee had already fixed this issue:
 
-	ret =3D devm_request_irq(ddata->dev, gpio_irq, ls2k_bmc_interrupt,
-			       IRQF_SHARED | IRQF_TRIGGER_FALLING, "ls2kbmc gpio", ddata);
-	if (ret)
-		dev_err(ddata->dev, "Failed to request LS2KBMC GPIO IRQ %d.\n", gpio_irq);
+https://lore.kernel.org/all/20261027093306.2812695-4-lee@kernel.org/
+>   
+>   	ret = devm_request_irq(&pdev->dev, pdev->irq, ls2k_bmc_interrupt,
+>   			       IRQF_SHARED | IRQF_TRIGGER_FALLING, "ls2kbmc pcie", ddata);
 
-	acpi_unregister_gsi(LS2K_BMC_RESET_GPIO_GSI);
-	return ret;
-}
+-- 
+Thanks.
+Binbin
 
-Unregistering the GSI unconditionally leaves the GPIO watchdog interrupt
-non-functional and disposes of the IRQ descriptor while devres still tracks
-it, causing a use-after-free when devm_free_irq() runs on unbind or a later
-probe failure.
-
-[1] https://sashiko.dev/#/bug/linux-cab8bfb6-4077-46f3-a173-ac2e2042cf66
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261107053218.3326=
-443-1-hj351016@gmail.com?part=3D1
