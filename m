@@ -1,84 +1,94 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=193.142.43.55
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=170.10.133.124
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794001870;
-	b=oJyLYR0hWYTu8DOwAgksl3mYMHAdGf+KytKiV7P0TceVBTXWtBIHXaA+2qg6v+oVJiqe
-	 a/+HhWrPW+3S4dsnMGThMJS0/QKwT44/T3CMiCAAeDbNXAu7nThxCKZgxDfjUOXSdGobP
-	 DCG3IWNpl0ToL9WswdbqF/B/Z5LICmFfqo06b5g44ndHPwHUiwYRBRR+lKASlhR5lrWh5
-	 iedqN5GDp7VK6EBlTU16HjHngrSBUxxMBjDFtVJhCIzvhP8aEZ72vWn3AI30G33udXnAo
-	 hfb0IIdnAN/0NoP/o9orGZaK5+dXrfyF+ltyuvm4uCIFQlUI6sA2iV51UCVMw7Knsmw==
+	t=1794010869;
+	b=Iz6Bdc+5KbgdVpxcbDHU5wt1gaBQlrSBG7JL663pjeLFN8vCYsp9byXQrddXHF55jFbL
+	 tVBSMEA35wfQ2UgSOEd0XbG9DRwGBD2m1dYp/AlUNksuYksq4YRXBgGCvaV9ggQvxn4Ks
+	 TocvtYisl898iLSFc5f4RpBLEpXETVDWJmRsx7bIwo4b21dBRHpzGcwd5vqv/d51s/5Nd
+	 hMMGPfXhIwxh3SZLy6QIgk8WiInEULXWB3CK+LLZ+M91sTX2Rzdv4E2A7r4ATv6mi4iT/
+	 U5K+hF4fwIvwsB6nLYJdDlk9LZt9VWjCptlwiTOuS57yNJwTNEWyNPC+wC8abWOUK2A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794001870;
-	h=DMARC-Filter:Message-ID:DKIM-Signature:DKIM-Signature:Subject:From:
-	 To:Cc:Date:In-Reply-To:References:Organization:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version;
-	bh=Hrybu1qjS55wOR2ZvJDKFOTX4UO4y9/yg/EAiu9mOeQ=;
-	b=dSmgUCxXIw6RUx6drteLVgOL6shEeNgFQtpuhh+a2r0RD7B26ENy127mJ8mydZ2wWNa1
-	 YPLyj+E8ZLT+jp60ha3SJWy7lUmmrzNwHIn7i9hHBA9Wc+r4a5vTHI3kwDP3AchP5x2zg
-	 j32B0rWQpZ+yUqJaBKd1NrW8oMXYHJaIJmtQTxBcNcb1tGWgtwpI5hinwomhzXfbWed2f
-	 0RIFeqHFOWBkurD63V4rf7vFAuh1Ma//kE6Fb/B4hghdYjRa3RImcd+xbrvPO0d2+aNk1
-	 a7q7Lb8RZwVO6Hf1qirx7N8E/EdqUeqGFFfm6Bq2aE+jNQWn/jANVbO/iWvfW1Df/Bg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794010869;
+	h=DMARC-Filter:DKIM-Signature:Received:X-MC-Unique:
+	 X-Mimecast-MFC-AGG-ID:Received:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 X-Received:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+	 X-Developer-Key:X-Mimecast-Spam-Score:X-Mimecast-MFC-PROC-ID:
+	 X-Mimecast-Originator:Content-Type:Content-Transfer-Encoding;
+	bh=mCDjXsuCFVkOFXp7EHhySvdFShTVmWA+RDsqn87rEII=;
+	b=Pz4qkMKBI2BOKuX8cgwrcDfswhOj8CdZf/K6UBYBSSl/+Gh4mKSUfRKx3Cq4YzqKN9qp
+	 XFKACEYdrUryVFZQD0FJWe9CF4iF3r3iqVTlf54U3PkolJgWbQEvFDKWt8e8E+XNR3xHJ
+	 2k8lDohbKC+m31owHuJo33mvoJ1ISjBhuxU0SnYMxI4+DSRCQglW0UthGcXXMZzS6q/1V
+	 pm/6yjxXwHiqbRy/EHiSHiSGjZTXfLfgmxPsyL6YmyXGf0W5STfHOeBjhFLkpHMJqAfd4
+	 hupCfADTE+xWikyk8NJZkUemVlwwyoCzZwYWyir1TkaTL5XpKNFjxHifRMoLv7Y3BFg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linutronix.de;
-	spf=pass smtp.mailfrom=linutronix.de;
-	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=Qr+zythi;
-	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=ed25519-sha256 header.s=2020e header.b=57L2AJeo;
-	arc=none smtp.remote-ip=193.142.43.55
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+	dmarc=pass header.from=redhat.com;
+	spf=pass smtp.mailfrom=redhat.com;
+	dkim=pass header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Jf9GISnB;
+	arc=none smtp.remote-ip=170.10.133.124
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7712A606A32E
-	for <mfd@lists.linux.dev>; Fri,  6 Nov 2026 21:51:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7712A606A32E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A939606A330
+	for <mfd@lists.linux.dev>; Sat,  7 Nov 2026 00:21:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9A939606A330
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linutronix.de header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=Qr+zythi;
-	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=ed25519-sha256 header.s=2020e header.b=57L2AJeo
-Message-ID: <f5c7c9901aca84f0b814e5b6c153db84af826dd7.camel@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1794001867;
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Jf9GISnB
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1794010867;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Hrybu1qjS55wOR2ZvJDKFOTX4UO4y9/yg/EAiu9mOeQ=;
-	b=Qr+zythi7fd/WCMR/wC1lIwE26rtLXt2OGzMpWM7UzIMevSXxu0wb7MdigNzhn5jlurEQP
-	eKImHUsS0sH9Yoz3/1yMKgzB+uT0Fa3tsUp040h6x8bGtwwk/MJZL3d2I2n94v9Y+0tn50
-	XxfbSlqtzfCpltoqdh6xJWCUHQmKS3jqCH15dLCL8geld7+0GF9Cv2XtA/whES2lhOtFa0
-	Rdez2AbnhPofdvz2K5MM+uDPfsv+7vZ0xpxU89RTJkJ8wtClYlAuWI/vOWTh/ylrgxcTDC
-	2wwn60Jbhr282GJjbcWc+Bd5ISTMmn/dmZpANyjXbVuW7i71W86opPwMAH2qRA==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1794001867;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Hrybu1qjS55wOR2ZvJDKFOTX4UO4y9/yg/EAiu9mOeQ=;
-	b=57L2AJeoNrxbbDcFsBAzZ/DFjdkvyDKP3GnGuqadUE36FX+Fv2BzCEN4iw/VSR8EzIzB2O
-	K3q3DWu42nW1QqDQ==
-Subject: Re: [PATCH net-next v4 4/8] dt-bindings: mfd: Add SoC-e SWIP parent
-From: Vasilij Strassheim <v.strassheim@linutronix.de>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-  Conor Dooley <conor+dt@kernel.org>, Andrew Lunn <andrew@lunn.ch>, Vladimir
- Oltean <olteanv@gmail.com>,  "David S. Miller" <davem@davemloft.net>, Jakub
- Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman
- <horms@kernel.org>, Russell King <linux@armlinux.org.uk>, Andrew Lunn
- <andrew+netdev@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>, Eric
- Dumazet <edumazet@kernel.org>, Lee Jones <lee@kernel.org>,
- devicetree@vger.kernel.org,  linux-kernel@vger.kernel.org,
- netdev@vger.kernel.org, mfd@lists.linux.dev,  Martin Kaistra
- <martin.kaistra@linutronix.de>, Benedikt Spranger <b.spranger@linutronix.de>
-Date: Fri, 06 Nov 2026 22:51:04 +0100
-In-Reply-To: <20261106-judicious-penguin-of-enhancement-b28c8b@quoll>
-References: 
-	<20261105-devel-vstrassheim-soce-dsa-ml-v4-0-02f3cde2afa1@linutronix.de>
-	 <20261105-devel-vstrassheim-soce-dsa-ml-v4-4-02f3cde2afa1@linutronix.de>
-	 <20261106-judicious-penguin-of-enhancement-b28c8b@quoll>
-Organization: Linutronix GmbH
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=mCDjXsuCFVkOFXp7EHhySvdFShTVmWA+RDsqn87rEII=;
+	b=Jf9GISnBZ0wONKY2iaOs9SlIUDHitNSluS1ZaHWFlZL6MhuIR1isPyj1WkPkMoNRgW4vik
+	rPWWiZ5COuCOQY8G7jejZGByOsfI6D6S00cpk+h/JGp0nGowQpaOSMWZA0DpMTXC88bwKm
+	MSWuRJHegoeoF7da4bEJCXv257TrgVQ=
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-280-sNAXJQlTNSmiyXm0bhbbHw-1; Fri, 06 Nov 2026 19:21:04 -0500
+X-MC-Unique: sNAXJQlTNSmiyXm0bhbbHw-1
+X-Mimecast-MFC-AGG-ID: sNAXJQlTNSmiyXm0bhbbHw_1794010863
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-53661e036a2so23751901cf.1
+        for <mfd@lists.linux.dev>; Fri, 06 Nov 2026 16:21:04 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794010863; x=1794615663;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=mCDjXsuCFVkOFXp7EHhySvdFShTVmWA+RDsqn87rEII=;
+        b=l0d6SvpiX2CufgHNZUkPob24tyYQCBhNJIhMaxNgyjI92tOgP6KO2TGkQ/sZvR8aH2
+         fUYt48V8bna+9qSAgFZqgiEpxs50HC7oj2OdvJAAlMBU7QFzC4mIIr57hd4hMu9wII2W
+         Uf6m/be0ZqURb/irJf8biMkXRTtPTmqnKUcn1/GJMdhMR6Rc8nWcmixGzJ/9n7dJsYcg
+         UtMNM1RQ/MNwRyJdKH8y7tRWn4R0go/zWvlT1cmEZowUtOz3oidMLu3WrZji++vjWFgB
+         SeIaLE4bpeIse47ATAs2MhQriFos34DkuK3Ev6UJT6bX4TddBzYZ8XAVZEveHmaMibS/
+         cWag==
+X-Forwarded-Encrypted: i=1; AKwUvBxnSePIDUOMMWF1ZyGRSKPwlRVyyMO9VWv18hrQx8wiFUnlYHzYgXdEgXxh3SLzk1VtwKU=@lists.linux.dev
+X-Gm-Message-State: APuU4Z9TD3CmRcki3LSO3Vj6LcCCqiJrnYRBGNpRFuv7+RAoTCgIVa2R
+	bcM3NUkTaVj87YqxWGV+06ya/vaCKqAofsNeuQr/YL2bt6HyocILamUAHW0WShQIRuKAVKi66s/
+	gJT8zIxT5RLjdii+z0MDUjOlh0Chk3+OmJg0HPQSC/RxgDeVzuBUf34blK8HN3g==
+X-Gm-Gg: AYBFou09BS7RKIgu87rTxs8+SiASJZ3EFgxkpfzFaDMWshRNHYZspWMQy978DmpkD7+
+	DVHqf/g/VOb8nXEwbUmPFcniHEOFt9GJHM763dTE0l31RqNUDXZvEzeHBvhiLQg/l9xgVNliouz
+	30xgMRxpTS92v2RURKUttTBnACOVPGBrMvExH561yxIAB7nmObfSIOSr1ky6xjctU/pysjK9yqn
+	No5LeNMYU6RtjIZBcc3rZKPZm1fmAmPoRkQ2HQHOE9x74Z014WcN2gXvdRWy8xsXVux1dclr8dX
+	CIunflTSE33aQNqH+uFX9YmFbhv1cs4Qz06WQ1Er0+rp8ZNggGyGuJ3trmMGxIGf+TAKpdarFY1
+	+brEHrY7YGy5r0lP19obh4NtcjQN57AG6BJzieLbwoN+LSHVFjstUUnp2bQhVkVkLqvvmxi9mP3
+	cilWv8qTl8FnS6nWQS
+X-Received: by 2002:a05:622a:608b:b0:535:1761:107b with SMTP id d75a77b69052e-54e13d76489mr67614941cf.31.1794010863451;
+        Fri, 06 Nov 2026 16:21:03 -0800 (PST)
+X-Received: by 2002:a05:622a:608b:b0:535:1761:107b with SMTP id d75a77b69052e-54e13d76489mr67614571cf.31.1794010863025;
+        Fri, 06 Nov 2026 16:21:03 -0800 (PST)
+Received: from bmasney-x1.rmtuswv.csb ([69.43.42.202])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-54e2683624esm32445291cf.18.2026.11.06.16.21.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 06 Nov 2026 16:21:01 -0800 (PST)
+From: Brian Masney <bmasney@redhat.com>
+Subject: [PATCH 0/2] mfd: convert to subsys_platform_driver()
+Date: Fri, 06 Nov 2026 19:20:49 -0500
+Message-Id: <20261106-mfd-subsys-v1-0-1c3e755d37a6@redhat.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -88,131 +98,47 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMywqAIBCF4VeJWSekkUSvEi1Sx5qgC05FEb17V
+ ssPzvkvYAyEDFVyQcCdmOYpQqYJ2L6dOhTkokFlSkuZaTF6J3gzfLLQubOFMaXyZQ7xsAT0dHy
+ xuvkdlwPa9S3AfT9JAH4AbgAAAA==
+X-Change-ID: 20261106-mfd-subsys-63dc5bb82f83
+To: Lee Jones <lee@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, mfd@lists.linux.dev, 
+ linux-kernel@vger.kernel.org, Brian Masney <bmasney@redhat.com>
+X-Mailer: b4 0.17-dev-d96cb
+X-Developer-Signature: v=1; a=openpgp-sha256; l=724; i=bmasney@redhat.com;
+ s=20250903; h=from:subject:message-id;
+ bh=AYswpvPVCUryj51+P1LGK9/UjRYirXKlC5LdoCoqFdc=;
+ b=owGbwMvMwCW2/dJd9di6A+2Mp9WSGLLe5T17sENr9/zCym3LGN5WLlp6y9u3MOdpuJuDUla+R
+ uwfkzsMHaUsDGJcDLJiiixLco0KIlJX2d67o8kCM4eVCWQIAxenAEwkLZvhr1SeuZtycTJX6sKm
+ lG6bnLoAB87Ld5vNeONt7c5fSK3qYGR4o1l8I25S3JrGvlru9bYuL94f3HnyzxUZh4K7DK9nsfo
+ wAgA=
+X-Developer-Key: i=bmasney@redhat.com; a=openpgp;
+ fpr=A46D32705865AA3DDEDC2904B7D2DD275D7EC087
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: sRO3Xx58n86ChlFkrmECJlZUnpCpJ5wsoCkARW-XjgM_1794010863
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
 
-On Fri, 2026-11-06 at 12:13 +0100, Krzysztof Kozlowski wrote:
-> On Thu, Nov 05, 2026 at 03:16:48PM +0100, Vasilij Strassheim wrote:
-> > Add a binding for the SoC-e SWIP multifunction FPGA IP core.
-> >=20
-> > Describe the shared MMIO address space and address translation for
-> > the required Ethernet switch child and the optional integrated MDIO
-> > controller and MMIO-controlled MDIO multiplexer.
-> >=20
-> > Signed-off-by: Vasilij Strassheim <v.strassheim@linutronix.de>
-> > ---
-> >  .../devicetree/bindings/mfd/soce,swip.yaml         | 137 +++++++++++++=
-++++++++
-> >  1 file changed, 137 insertions(+)
-> >=20
-> > diff --git a/Documentation/devicetree/bindings/mfd/soce,swip.yaml b/Doc=
-umentation/devicetree/bindings/mfd/soce,swip.yaml
-> > new file mode 100644
-> > index 000000000000..625be299e262
-> > --- /dev/null
-> > +++ b/Documentation/devicetree/bindings/mfd/soce,swip.yaml
-> > @@ -0,0 +1,137 @@
-> > +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> > +%YAML 1.2
-> > +---
-> > +$id: http://devicetree.org/schemas/mfd/soce,swip.yaml#
-> > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > +
-> > +title: SoC-e SWIP multifunction Ethernet switch FPGA IP core
-> > +
-> > +maintainers:
-> > +  - Vasilij Strassheim <v.strassheim@linutronix.de>
-> > +
-> > +description:
-> > +  SoC-e Switch IP (SWIP) cores integrate Ethernet switching logic, an
-> > +  MDIO controller, and an MDIO bus multiplexer in one memory-mapped de=
-vice.
-> > +  The MDIO bus multiplexer is wired to the integrated MDIO controller.
-> > +
-> > +properties:
-> > +  compatible:
-> > +    const: soce,swip
-> > +
-> > +  reg:
-> > +    maxItems: 1
-> > +
-> > +  '#address-cells':
-> > +    const: 1
-> > +
-> > +  '#size-cells':
-> > +    const: 1
-> > +
-> > +  ranges: true
-> > +
-> > +  mdio@204:
-> > +    $ref: /schemas/net/soce,swip-mdio.yaml#
-> > +    unevaluatedProperties: false
-> > +
-> > +  mdio-mux@202:
-> > +    $ref: /schemas/net/mdio-mux-mmioreg.yaml#
-> > +    unevaluatedProperties: false
-> > +
-> > +  ethernet-switch:
->=20
-> Why are you mixing children with and without bus addresses? This is
-> discouraged and shows that device is not correctly represented, e.g. if
-> the ethernet-switch does not have resources, then THIS device is the
-> ethernet switch.
->=20
+Reduce boilerplate code in these drivers and convert them over to use
+the macro subsys_platform_driver().
 
-There is no hardware reason for leaving the switch child unaddressed.
-Just an error that occurred while converting the binding to the MFD
-model.
-I will describe the switch function as an ethernet-switch@0 child node
-with a reg property for it's register resources, like the ocelot MFD
-binding.
+Signed-off-by: Brian Masney <bmasney@redhat.com>
+---
+Brian Masney (2):
+      mfd: qcom-pm8xxx: convert to subsys_platform_driver()
+      mfd: tps65911-comparator: convert to subsys_platform_driver()
 
-> > +    $ref: /schemas/net/dsa/soce,swip-switch.yaml#
-> > +    unevaluatedProperties: false
-> > +
-> > +required:
-> > +  - compatible
-> > +  - reg
-> > +  - '#address-cells'
-> > +  - '#size-cells'
-> > +  - ranges
-> > +  - ethernet-switch
-> > +
-> > +dependentRequired:
-> > +  mdio-mux@202:
-> > +    - mdio@204
-> > +
-> > +additionalProperties: false
-> > +
-> > +examples:
-> > +  - |
-> > +    ethernet-switch@80020000 {
-> > +        compatible =3D "soce,swip";
-> > +        reg =3D <0x80020000 0x10000>;
-> > +        #address-cells =3D <1>;
-> > +        #size-cells =3D <1>;
-> > +        ranges =3D <0x0 0x80020000 0x10000>;
-> > +
-> > +        mdio_parent: mdio@204 {
-> > +            compatible =3D "soce,swip-mdio";
-> > +            reg =3D <0x204 0xc>, <0x200 0x2>;
-> > +            reg-names =3D "data", "control";
-> > +            #address-cells =3D <1>;
-> > +            #size-cells =3D <0>;
-> > +        };
-> > +
-> > +        mdio-mux@202 {
->=20
-> Nodes are ordered by unit address.
+ drivers/mfd/qcom-pm8xxx.c         | 12 +-----------
+ drivers/mfd/tps65911-comparator.c | 12 +-----------
+ 2 files changed, 2 insertions(+), 22 deletions(-)
+---
+base-commit: ddfe51b0a0f5dc9e415cc2c8ad8db17532dd426b
+base-tree: git://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
+change-id: 20261106-mfd-subsys-63dc5bb82f83
 
-I will fix that.
-Sashiko mentioned scripts/dtc/dt-check-style to find this. I wasn't
-aware of this before and will use it more often in the future
-additionally to dt_binding_check.
-
->=20
-> Best regards,
-> Krzysztof
->=20
-
-Thanks,
-Vasilij
+Best regards,
+--  
+Brian Masney <bmasney@redhat.com>
 
