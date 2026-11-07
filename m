@@ -1,23 +1,23 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=160.30.148.35
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794039687;
-	b=JDVpESaAIeFFEZC8giTLKSDK2BQppl+VhjitG/EvMDRfPAg+Y3Fn9pgglXRDekFNfXiM
-	 q0XEb1gI37pmjoflzQix/N9FKdaxw8OwYbKX7wmsC3xJX/oWjhcrjP4tjx+MyEFSeOE2p
-	 8GRr3VfUnPueBUGQbufbbiPi5XkqX7SgOG9ZL5QOT6asLq8C0lL3oyKQfGK3MzP9/mkAr
-	 ytL3MdmRMAvYTTV+j2xiZIB7i8gAWINlK2dc5xoC4LVF4ZVEGdWl37rM29mxUwaZQE/Cr
-	 CcQ4zrvPkeDZlcK1Y6d8O6n2qdbpLFFJBFvAv6mV0Ujf2iFcxlS6nc+Tp/YqCm+5LwQ==
+	t=1794039690;
+	b=yXkPnYT16xR6mJT9mboBHeBmACwYmzjFmiruNgowf8Zo/lJNRtaYfeUoTOA3Cu3fi68p
+	 /570eCZI76BCysCEnB+VvoXkDvVID9/h93x0Vm6QIF/qUyYvd3EWvRav6/DL3ElPVx3XN
+	 FhDNFcLUWpX+3L8yNByRJ/VYG8M8YlEAfWHkPlrnUtjINhGxaVPtSVc54wFHHhLCYCj4x
+	 SIuGx1GTeJTw934EA097ADnLxF5a6VzfObWDp7AHnDTvaxDqDFJ5e4uAOjrmEDT7Ncjn1
+	 lZvMpkwoCbDlZ1KSieHrQstlVifHxEMJjTXgRGPyFSzdiGyRYtgOlbxsCYWR5cV9wcQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794039687;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794039690;
 	h=DMARC-Filter:Received:Received:Received:X-Zmail-TransId:X-Mailer:
 	 Message-ID:In-Reply-To:References:Date:Mime-Version:From:To:Cc:
 	 Subject:Content-Type:X-MAIL:X-TLS:X-ENVELOPE-SENDER:X-SOURCE-IP:
 	 X-CLEAN:X-Fangmail-Anti-Spam-Filtered:X-Fangmail-MID-QID;
-	bh=Wn3OypTVFQ8KIckSKHmhgectqFgnEYMzQS8CtZVgYp8=;
-	b=XnIvHtSbwrnzPMBPYFpWXFBGAmHKTBaHVwIE0Sa5p+tNDPWF7TEqfCePR+pYJh6hr/v/
-	 z5ZcxIo8ratmh3I92mkyZKFZF8WKOmdiRrCLKSsZONimp56wguHWasR3vicHre7kEAcyM
-	 FVt6vYYlayxves4oEF8r+PJvHezq36Ylyf0MENhDx8yarVVGGcfhglR5Uz3+ZEYgYE5vC
-	 xIuwybf2mtTs326uKctwfLNx0njMf7YxSOdvzQ5zUJ0P3q3NuPkpCxbLsGIO88dSOvMGm
-	 7ECxd+yn26M4cbPquInS18/CiE4k/BU1BL1RTTz7Ck+X4Q1AHF4r3VA/74aT/F592TQ==
+	bh=yH0ZKpXbB2is/wqyLZtzhG3eciAgBymgipiDGXHEbto=;
+	b=nNN0EMY6pPfogdc6DIixhEwemLTyUI8IY44aVGdkL3itBrt30h+Cy31OuRQurwTkAziz
+	 QvElg3UtPhpZPyanUvp2Kzu+UD8JCuFvztXpqi6jTm0EefTC5ZAAXAR9oD7muDfKCBRc5
+	 7JcB4X0SdFmoOLo9EYx0P937gwmbKS1+dGBPZy8hfeQ4UYasqK+L8H5qrGbiPFPIHxV2B
+	 rPK3W2Zxs/Xl1lk6kZ8rhHmXy7ihsGFZdfszn0efoiPPv0Ivjj18el7++Ogu/D6Tu988o
+	 86xtrFMAN9tmyhd8BzHNcPubp0jyezK51HJzAcCEOPwbJ+QxJsfD4vpnZGfTJfxqT9Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=zte.com.cn;
 	spf=pass smtp.mailfrom=zte.com.cn;
@@ -26,30 +26,30 @@ Received: from mxhk.zte.com.cn (mxhk.zte.com.cn [160.30.148.35])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25A69606A33B
-	for <mfd@lists.linux.dev>; Sat,  7 Nov 2026 08:21:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 25A69606A33B
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 37614606A333
+	for <mfd@lists.linux.dev>; Sat,  7 Nov 2026 08:21:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 37614606A333
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zte.com.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zte.com.cn
-Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
+Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mxhk.zte.com.cn (FangMail) with ESMTPS id 4jM8C84T8vz8XrrZ;
-	Sat, 07 Nov 2026 16:21:24 +0800 (CST)
-Received: from xaxapp05.zte.com.cn ([10.99.98.109])
-	by mse-fl2.zte.com.cn with SMTP id 6A78LJH9003100;
-	Sat, 7 Nov 2026 16:21:19 +0800 (+08)
+	by mxhk.zte.com.cn (FangMail) with ESMTPS id 4jM8CC6SBtz8Xrrb;
+	Sat, 07 Nov 2026 16:21:27 +0800 (CST)
+Received: from xaxapp04.zte.com.cn ([10.99.98.157])
+	by mse-fl1.zte.com.cn with SMTP id 6A78LKdM029834;
+	Sat, 7 Nov 2026 16:21:20 +0800 (+08)
 	(envelope-from shao.mingyin@zte.com.cn)
-Received: from mapi (xaxapp02[null])
+Received: from mapi (xaxapp05[null])
 	by mapi (Zmail) with MAPI id mid32;
-	Sat, 7 Nov 2026 16:21:21 +0800 (CST)
-X-Zmail-TransId: 2afa6aeedf810f4-a2c82
+	Sat, 7 Nov 2026 16:21:22 +0800 (CST)
+X-Zmail-TransId: 2afc6aeedf82c12-907b3
 X-Mailer: Zmail v1.0
-Message-ID: <20261107162121178QffEnlezkInAnSMsrwQzA@zte.com.cn>
+Message-ID: <20261107162122461AuQ94DzIh_R4gD8FWdVlC@zte.com.cn>
 In-Reply-To: <202611071621143491uRwluLhxYsUHx2V3qhm_@zte.com.cn>
 References: 202611071621143491uRwluLhxYsUHx2V3qhm_@zte.com.cn
-Date: Sat, 7 Nov 2026 16:21:21 +0800 (CST)
+Date: Sat, 7 Nov 2026 16:21:22 +0800 (CST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -64,66 +64,47 @@ To: <lee@kernel.org>, <mfd@lists.linux.dev>
 Cc: <tony@atomide.com>, <linux-omap@vger.kernel.org>, <tharvey@gateworks.com>,
         <support.opensource@diasemi.com>, <patches@opensource.cirrus.com>,
         <linux-kernel@vger.kernel.org>
-Subject: =?UTF-8?B?W1BBVENIIFJFU0VORCAyLzVdIG1mZDogdHdsNjAzMC1pcnE6IERvbid0IHdyaXRlIGdhcmJhZ2UgdG8gaW50ZXJydXB0IG1hc2sgb24gcmVhZCBmYWlsdXJl?=
+Subject: =?UTF-8?B?W1BBVENIIFJFU0VORCAzLzVdIG1mZDogYXJpem9uYTogRnJlZSBpbmZvIElSUXMgb24gcHJvYmUgZmFpbHVyZQ==?=
 Content-Type: text/plain;
 	charset="UTF-8"
-X-MAIL:mse-fl2.zte.com.cn 6A78LJH9003100
+X-MAIL:mse-fl1.zte.com.cn 6A78LKdM029834
 X-TLS: YES
 X-ENVELOPE-SENDER: shao.mingyin@zte.com.cn
-X-SOURCE-IP: 10.5.228.133 unknown Sat, 07 Nov 2026 16:21:24 +0800
+X-SOURCE-IP: 10.5.228.132 unknown Sat, 07 Nov 2026 16:21:27 +0800
 X-CLEAN: YES
 X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6AEEDF84.000/4jM8C84T8vz8XrrZ
+X-Fangmail-MID-QID: 6AEEDF87.000/4jM8CC6SBtz8Xrrb
 
 From: Shao Mingyin <shao.mingyin@zte.com.cn>
 
-twl6030_interrupt_unmask() and twl6030_interrupt_mask() ignore the return
-value of the twl_i2c_read_u8() that fetches the current mask value.  When
-the read fails, "unmask_value"/"mask_value" hold uninitialized stack data
-which is then masked/unmasked and written back to the INT_MSK_A/B/C
-registers, corrupting the interrupt mask configuration of the whole PMIC.
+arizona_dev_init() registers three informational IRQs (CLKGEN error,
+Overclocked and Underclocked) with arizona_request_irq() before adding
+the sub-devices.  If mfd_add_devices() fails the error path only calls
+arizona_irq_exit(), which frees the CTRLIF_ERR/BOOT_DONE IRQs and the
+IRQ chip/domain but leaves these three requested IRQs behind; they are
+freed only in arizona_dev_exit() on the normal removal path.
 
-Bail out with the read error before touching the value or writing it back.
+As a result the three threaded IRQ handlers stay registered and
+irq_dispose_mapping()/irq_domain_remove() in arizona_irq_exit() act on
+virtual IRQs that are still in use.  Free them in the probe failure path
+too, in the same order as arizona_dev_exit().
 
-Fixes: e8deb28ca8e2 ("mfd: Add support for twl6030 irq framework")
+Fixes: 3cc729869475 ("mfd: arizona: Core driver")
 Signed-off-by: Shao Mingyin <shao.mingyin@zte.com.cn>
 ---
----
-Resend: the first copy of this patch lost its final empty context
-line in transit; the diff below is unchanged.
-diff --git a/drivers/mfd/twl6030-irq.c b/drivers/mfd/twl6030-irq.c
-index 0ca00f618d4d..1333c4e9cdd7 100644
---- a/drivers/mfd/twl6030-irq.c
-+++ b/drivers/mfd/twl6030-irq.c
-@@ -235,10 +235,11 @@ int twl6030_interrupt_unmask(u8 bit_mask, u8 offset)
+diff --git a/drivers/mfd/arizona-core.c b/drivers/mfd/arizona-core.c
+index 91975536d14d..37cba7047d76 100644
+--- a/drivers/mfd/arizona-core.c
++++ b/drivers/mfd/arizona-core.c
+@@ -1373,6 +1373,9 @@ int arizona_dev_init(struct arizona *arizona)
+ 	return 0;
  
- 	ret = twl_i2c_read_u8(TWL_MODULE_PIH, &unmask_value,
- 			REG_INT_STS_A + offset);
-+	if (ret)
-+		return ret;
- 	unmask_value &= (~(bit_mask));
--	ret |= twl_i2c_write_u8(TWL_MODULE_PIH, unmask_value,
-+	return twl_i2c_write_u8(TWL_MODULE_PIH, unmask_value,
- 			REG_INT_STS_A + offset); /* unmask INT_MSK_A/B/C */
--	return ret;
- }
- EXPORT_SYMBOL(twl6030_interrupt_unmask);
- 
-@@ -249,10 +250,11 @@ int twl6030_interrupt_mask(u8 bit_mask, u8 offset)
- 
- 	ret = twl_i2c_read_u8(TWL_MODULE_PIH, &mask_value,
- 			REG_INT_STS_A + offset);
-+	if (ret)
-+		return ret;
- 	mask_value |= (bit_mask);
--	ret |= twl_i2c_write_u8(TWL_MODULE_PIH, mask_value,
-+	return twl_i2c_write_u8(TWL_MODULE_PIH, mask_value,
- 			REG_INT_STS_A + offset); /* mask INT_MSK_A/B/C */
--	return ret;
- }
- EXPORT_SYMBOL(twl6030_interrupt_mask);
- 
--- 
-2.47.0
+ err_irq:
++	arizona_free_irq(arizona, ARIZONA_IRQ_UNDERCLOCKED, arizona);
++	arizona_free_irq(arizona, ARIZONA_IRQ_OVERCLOCKED, arizona);
++	arizona_free_irq(arizona, ARIZONA_IRQ_CLKGEN_ERR, arizona);
+ 	arizona_irq_exit(arizona);
+ err_pm:
+ 	pm_runtime_disable(arizona->dev);
 -- 
 2.47.0
