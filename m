@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794011392;
-	b=WqSizqC4vtlBhj9wWo+/2/OsgjANbjy+MWfaywNWgJqcRWdTCpp6POEBNgeFplTdahPr
-	 W/Tbl42Asg8G95ToMIoU/e05/f2SvKcJFpUt3ncL0adzl6Kpz7vyb0w6UvNWqPX18TbGR
-	 UBIw3FU6Ddo7snW2RTeIdn9l4wh2c9gtcE7uMPTm9UWaEMkqlsbj4rH5wB2ABzITYtj/U
-	 DqJpeXhr4CREdIIwEG65pbTS9zvbcEyvYGj75/lMfl4mqSKS0w3qZaadsesKmIxszpP00
-	 hCWYCasWEZG3MhoPGNAiUSyvtYRXwgbKUl/3H7jC0S7I7uRlqFIA83f1cSK0/xy64Gg==
+	t=1794013444;
+	b=RdO3O1NUuMI8gHX7lf4LmHkA+svH5hjRu8ubjt3b4PXXQ/Qx6KIfqtgFMNlFuC7L/QLj
+	 N2KsM1qgd9ovrHy2GbvMTjxAeVa9j3ItlynHQ+Es45Mv6f8jGoMMmx6MDPuec9ryWJ5Zi
+	 d8B/Gv4a8pOCixec9x+KawGChDU9x5k934V179fYVYyPHGLSnQDywin10ZQaTxV99+meK
+	 ziUWBEgfEUhISdjaGDRreddF1ZcXOBWwYq/e454tdfkjq5KcXhrv51ShLyNAMc3bEYnbC
+	 JRwlBZhJ7sCRq5rJzr6DIJjr2/xeRCCiw6/2WgPMTWSEoM34N5ojjdbpbWal/4UBH2g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794011392;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=MOYfojQag0AD3liByfDdoXC5Vj68PGV2RqvdVKMZ+nE=;
-	b=UI8WT5bHy9u2MbDWCqsVtJ0Y2Yazv7MkI0YJgd1DKqN2c9N3mpdXlU7hTeepGDUH6kk8
-	 9L5bSYu3ngv1pWYBMDWhiZNkUdLzaHTDdFAqzGLB5sOs2xNj5Z/6+3tc7MckjBjlPCx7b
-	 PRuR80mcQAVu4OmisxLodMXEzl1jo1psfEcqBGOq/NKqCxUa9FJKH87xtSpBwCxTlRO2P
-	 M+3sUeqvGQPCNX4bzVXsR216UgLk254jcJ9iBrC+WC9XXjdEEL2I275foGdWduEaju3eU
-	 ZNjvZnNMPFsjcNm+XDAdRe+ILOOBWVHyGqsHDKh9o7E6wJb7GkcUUnnQ8F+0ceuk7Pg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794013444;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=xSABotSf9eGOgeEhuxBGujWoU+JvUjNA0CDmsTEXxtU=;
+	b=P9P/Zjn74zXkSKAs1VGFzLxWvmTw0gnZPLzVWMujm9aGjKjXjzItgwRtheSjr7AjKnXV
+	 Rt+9PngqBMNCMptllgHZ8O3t6ttqEuKGcyJHDyb5ZdjSDJaPLOC11KRjCaetXOAouu3+U
+	 eRaak/0o/vh9uXwkE6zsRm4Z2b01t5PALm4GL/hMjUs9+tLuBQ3USn+eV80hAiiwNx/P+
+	 foYL7bYrmDxGO8/Mv3I1Z+6CNnp/t4SledsSXRU+3RLC6l0au79GjNahVSkfVVYPd2UoG
+	 S+oWWO5FkTKUBRxwO0tnCJPr1CA1329Mc4kdi1wUKOk/ioiLrQNXXQb22lhz6FdcVyg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=S86HYceF;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=D+O6wpVV;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08CE5606A32E
-	for <mfd@lists.linux.dev>; Sat,  7 Nov 2026 00:29:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29060606A32C;
+	Sat,  7 Nov 2026 01:04:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=S86HYceF
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 645431F0089F;
-	Sat,  7 Nov 2026 00:29:51 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=D+O6wpVV
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD8BA1F0089F;
+	Sat,  7 Nov 2026 01:04:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794011391;
-	bh=MOYfojQag0AD3liByfDdoXC5Vj68PGV2RqvdVKMZ+nE=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=S86HYceF/q+hIDTvr+XlqYS1k/8frvCmbLlf2h/XZPo1IKuqDZpAaAJYZRUIvJYeM
-	 9K8U8kbz3i1vMXWf4HdTzimm8JUWi9zn1rR9/DAh40YA9vXIfiyotfSVCTu0mVQd/0
-	 Sf9Ct5fIVUW+KnlTD4BOqS/RVV6UccQC4bqA9jv/4WreUnXdurd6mhd4y5XDozhAeD
-	 oMZRBfxw2TwKhgkNItceydy7d2eqI2FcfmVwJhetSPkTH1fwZRc1mltwAsD1WN5M6X
-	 gYAPPWIo5jvmmT97zWuquvxilchUMbSIG9MY1ewroiJBGL6QsURYHRR1ZHEW5nly7N
-	 6OThneR2qfS6A==
-Message-ID: <sashiko-outbox-202425@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 2/2] mfd: tps65911-comparator: convert to
- subsys_platform_driver()
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Brian Masney" <bmasney@redhat.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261106-mfd-subsys-v1-2-1c3e755d37a6@redhat.com>
-References: <20261106-mfd-subsys-v1-0-1c3e755d37a6@redhat.com>
- <20261106-mfd-subsys-v1-2-1c3e755d37a6@redhat.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Sat, 07 Nov 2026 00:29:50 +0000
+	s=k20260515; t=1794013444;
+	bh=xSABotSf9eGOgeEhuxBGujWoU+JvUjNA0CDmsTEXxtU=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=D+O6wpVVaOdJbSDeaxoUlfP5e4LIp8EX2r1a4AiOfVbbqES4lFOtisPle0bK9E7ot
+	 FqODWb5EP5bFV1oIlqhZihY8yqIrDxbvS5SrS/JTlyHZMiOWHsH2r63Yra/Fobo2W1
+	 zkyJf08uDJjjxp1yuanTwgJFXpjsjJRRkXTWNu+EGgHuyOMK4ISJ0mdhE3eDs7xqd2
+	 uXvdTfNyeD4jQecULRCAR4sccSr4pAqNXLq7X8zKllD0dsBFKTTEaBHqWuMnCFqRQT
+	 aeq1Y9IQua00/+xGriU8eHYjBZprKvIXznnZfiUzcTtCTHh+OxVqBnIcAikhXmlh9P
+	 f0AaT7SNWGs8A==
+Date: Sat, 7 Nov 2026 01:03:56 +0000
+From: Jonathan Cameron <jic23@kernel.org>
+To: Daniel Balint <dbalint@google.com>
+Cc: Benson Leung <bleung@chromium.org>, Lee Jones <lee@kernel.org>, Tzung-Bi
+ Shih <tzungbi@kernel.org>, linux-iio@vger.kernel.org,
+ chrome-platform@lists.linux.dev, mfd@lists.linux.dev,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v1 0/3] Introduce cros_ec power monitoring
+Message-ID: <20261107010356.39d9eddf@jic23-hlaptop>
+In-Reply-To: <20261106193129.43493-1-dbalint@google.com>
+References: <20261106193129.43493-1-dbalint@google.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,30 +60,57 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Thank you for your contribution! Sashiko AI review found 1 potential
-issue to consider:
-- [Low] mfd: tps65911-comparator: uncapitalized commit subject
-  description
---
+On Fri,  6 Nov 2026 19:31:14 +0000
+Daniel Balint <dbalint@google.com> wrote:
 
-commit 9db162a3501f36e6be987d9956c4bd3a1341e487
-Author: Brian Masney <bmasney@redhat.com>
+> This series adds the ChromeOS EC On-Device Power Monitoring 
+> (cros_ec_pwrmon) driver to read onboard power-monitoring ADCs,
+> such as PAC194x, wired through the embedded controller (EC).
+> 
+> Several ChromeOS platforms are equipped with onboard ADCs that are
+> connected to the EC via I2C bus. The driver interfaces with the EC
+> via the existing EC_CMD_PWRMON host command API (and EC_MKBP_EVENT_PWRMON
+> events) to manage ADC accumulation and expose accumulated per-rail energy
+> through an IIO sysfs attribute.
+> 
+> The driver is only loaded when the underlying hardware feature is present.
+> The series also fixes alignment padding in EC_CMD_PWRMON definitions.
 
-mfd: tps65911-comparator: convert to subsys_platform_driver()
+Hi Daniel
 
-This commit replaces the manual subsys_initcall() and module_exit()
-registration functions in the tps65911-comparator driver with the
-subsys_platform_driver() macro.
+I'm not necessarily against this but when adding monitoring components
+to IIO the usual question is why not hwmon?  What features are not
+well supported by that framework?
 
-> mfd: tps65911-comparator: convert to subsys_platform_driver()
+Note historically I suspect we accepted one or two drives into IIO that
+would have fitted better there so precedence isn't a strong argument.
 
-[Severity: Low]
-This isn't a bug, but MFD commit subjects capitalize the description after
-the prefix, such as:
+Convention for these somewhat borderline case is +CC hmwon maintainer
+and list as well as IIO with that explanation in the cover letter.
+That avoids any last minute surprises!
 
-  mfd: tps65911-comparator: Convert to subsys_platform_driver()
+Jonathan
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261106-mfd-subsys=
--v1-0-1c3e755d37a6@redhat.com?part=3D2
+> 
+> Daniel Balint (3):
+>   platform/chrome: cros_ec: fix alignment of ec_params_pwrmon
+>   iio: adc: add cros_ec_pwrmon driver
+>   mfd: cros_ec: load cros_ec_pwrmon on supported ECs
+> 
+>  .../ABI/testing/sysfs-bus-iio-cros-ec         |  13 +
+>  MAINTAINERS                                   |   7 +
+>  drivers/iio/adc/Kconfig                       |  11 +
+>  drivers/iio/adc/Makefile                      |   1 +
+>  drivers/iio/adc/cros_ec_pwrmon.c              | 333 ++++++++++++++++++
+>  drivers/mfd/cros_ec_dev.c                     |   9 +
+>  .../linux/platform_data/cros_ec_commands.h    |   2 +
+>  7 files changed, 376 insertions(+)
+>  create mode 100644 drivers/iio/adc/cros_ec_pwrmon.c
+> 
+> 
+> base-commit: 6628e7d4c6b25c8d18f1345e3a20d21829aae7e4
+
