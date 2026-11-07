@@ -1,55 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=160.30.148.34
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794039695;
-	b=SIxCP8ELbTlPKiiTXF1KdmNb6XDivX20cHPp+a1U9fzlnQAFefs+4EbMOh2NvVQ9IHmq
-	 olD3Tv4bnTI19lEP9e25Yfe70h38Z3FSermEYK9zN/FOGLVoun9GP9899vyVN976Vh3+Q
-	 2ON1UpOdMkOcYOtu0uh0uHQBcb98V9I9ivJoG/jsaTsOOY+d08ZCvIf5wYJoXzSghgvb9
-	 MtmPVLRRXIy0SY74+I78wWMMCh2nDUm4xiWZQqTyAP/PgMTfqscghfddKR10J13V36GNV
-	 UNfxpFESw1HHgTD2zLgT/v7KlmIu6xKHmJ1pfk9to3sgc8SI55qlSLyfqucrbXrPacg==
+	t=1794039893;
+	b=nCwL5gP0iVAGqdHcSvnicdgbLMioO1e4N0Vj1aCbZqgErJr3XjUin5QyQU29nHsd7XlZ
+	 2xzADxu9aJqBWRt+SBjUBje84JRdbZB3VrRpD9Ngo0wc4Td3JlkJq7B0ssHm5Gl2nfVzq
+	 DGZLpqutDbpAN0msf3mvCO8CR1D6d4+6scEuifw/tYAYCkIrOmfKmNKIFB+hUIQWv36tf
+	 vu2cgAeqq+y0TGCBBhnbfhBwIBNNrWEhcNhNNs5MQYgQTBBmsGkF0utD2ExUXt04wEMmb
+	 rGpP2FgWifqFUkwUa51gjl7c8QAVhrUpRQ0rPIKDoAI+8/pLGHkwsm5Qev1a9eqp3zQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794039695;
-	h=DMARC-Filter:Received:Received:Received:X-Zmail-TransId:X-Mailer:
-	 Message-ID:In-Reply-To:References:Date:Mime-Version:From:To:Cc:
-	 Subject:Content-Type:X-MAIL:X-TLS:X-ENVELOPE-SENDER:X-SOURCE-IP:
-	 X-CLEAN:X-Fangmail-Anti-Spam-Filtered:X-Fangmail-MID-QID;
-	bh=Da7EkwAu6eWzKaaPHtEuhjwDATbEpwvSZ1bs0M9ZsKM=;
-	b=141o0+TiDnRhvlHsI//zpnOkM+WobEgM108gkFfbGuGSPgFriRYVI3s1pTnhKdBpKRgb
-	 mfoSs1D5O5KM+GWHvLIebzShYyf9xAbtdA5+ejhkKj6j0c+2gSCeG+x2G/XdetwH3AiLQ
-	 +mN0uhYELBDPbOUavgYKVxeBh9aJZY0rjQn0sX8PvLL3SSCs6XzsETI1i2Bpf/vCoPpGj
-	 Uur7KwLaxu8uGhihztfkSuarOelGM/PoNekxvmdB8sPfyVwaYvEn22X5Yu8wwVFWNckgm
-	 j162iHPyxaSedeJeODpXpiGLY55Qh8Afnc+XzEg6iGQ1vVXNb2yMwQf++w1q/T5k5tg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794039893;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=5FoTTMGy5MrfLGz88a4ccQzyTLDC4lZPlqqMefB0Ids=;
+	b=Mvx3rma3YIbDCgGGupsV548rn7lkShbv/cM3CKNc1cGp/f74PbzFKeKXotR/y8iQGWSY
+	 QZq6G3TyMPOUBPbafw8s+wf6YAdDtAu77JXzJYimQYFifyZe7NIY7ev+Hy5734XhKE5hg
+	 1JBoVfrUepxSyh8wLBszX49lI4h5NqQinl5Kaq4qipcYOOmQd5Gjjd+y3s8TQczhxP1OV
+	 a081wGWvefpcc09STm6voZy00p4JJGEdNzy5L8R6LP+Hav18pVjBAGSCne3dDfA21kJ68
+	 oj1S7wfYFreweljxnEyNw9KQk5Zv5H6K6QegFIC5Mey2p77e3jtXmhseM5eBRd+4nIw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=zte.com.cn;
-	spf=pass smtp.mailfrom=zte.com.cn;
-	arc=none smtp.remote-ip=160.30.148.34
-Received: from mxhk.zte.com.cn (mxhk.zte.com.cn [160.30.148.34])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WfIx3SED;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5175606A326
-	for <mfd@lists.linux.dev>; Sat,  7 Nov 2026 08:21:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A5175606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zte.com.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zte.com.cn
-Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mxhk.zte.com.cn (FangMail) with ESMTPS id 4jM8CD2YLGz5B12l;
-	Sat, 07 Nov 2026 16:21:28 +0800 (CST)
-Received: from xaxapp05.zte.com.cn ([10.99.98.109])
-	by mse-fl1.zte.com.cn with SMTP id 6A78LLVV029911;
-	Sat, 7 Nov 2026 16:21:21 +0800 (+08)
-	(envelope-from shao.mingyin@zte.com.cn)
-Received: from mapi (xaxapp02[null])
-	by mapi (Zmail) with MAPI id mid32;
-	Sat, 7 Nov 2026 16:21:23 +0800 (CST)
-X-Zmail-TransId: 2afa6aeedf831c1-a2d4f
-X-Mailer: Zmail v1.0
-Message-ID: <20261107162123768WcPgulYo-5-EuCbXTrwwH@zte.com.cn>
-In-Reply-To: <202611071621143491uRwluLhxYsUHx2V3qhm_@zte.com.cn>
-References: 202611071621143491uRwluLhxYsUHx2V3qhm_@zte.com.cn
-Date: Sat, 7 Nov 2026 16:21:23 +0800 (CST)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AC34606A326
+	for <mfd@lists.linux.dev>; Sat,  7 Nov 2026 08:24:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WfIx3SED
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 945721F0089F;
+	Sat,  7 Nov 2026 08:24:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794039892;
+	bh=5FoTTMGy5MrfLGz88a4ccQzyTLDC4lZPlqqMefB0Ids=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=WfIx3SEDzJahxDasa0/CQoZ6EVMKCdDFp9hFwWYKqHbhpyLIzQO6RX8I/nOtmycVH
+	 0wJ8D6TeHF6D2DypxzfX0RwqYdUE0L0ALwMmJfxskL05ED7Gg9b9PGsSjO3cLgMAXN
+	 5VjeqDl8XPlJ+Op7C98UKIYJPdkp4fE4xa0ky4qaDut+N1uiXF80IktpR0qed5b2Cr
+	 wnzerny3zrVUVPnC7l9p/PuklcYYvXD9Mm/6vMZxp8m5K3UmDuIyMMylvCqWNqV1sq
+	 oNgFl+hYjvbq7MMAcj2qIsAuc9QTvxtM2jowkXf4OLLvFNjmLNS0YIFW+7Ci9Nyl0l
+	 M+XxwnEgffB+Q==
+Message-ID: <sashiko-outbox-202738@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH RESEND 3/5] mfd: arizona: Free info IRQs on probe
+ failure
+Reply-To: sashiko-reviews@lists.linux.dev
+To: shao.mingyin@zte.com.cn, mfd@lists.linux.dev
+Cc: lee@kernel.org
+In-Reply-To: <20261107162122461AuQ94DzIh_R4gD8FWdVlC@zte.com.cn>
+References: <202611071621143491uRwluLhxYsUHx2V3qhm_@zte.com.cn>
+ <20261107162122461AuQ94DzIh_R4gD8FWdVlC@zte.com.cn>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Sat, 07 Nov 2026 08:24:52 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -58,87 +60,27 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-Mime-Version: 1.0
-From: <shao.mingyin@zte.com.cn>
-To: <lee@kernel.org>, <mfd@lists.linux.dev>
-Cc: <tony@atomide.com>, <linux-omap@vger.kernel.org>, <tharvey@gateworks.com>,
-        <support.opensource@diasemi.com>, <patches@opensource.cirrus.com>,
-        <linux-kernel@vger.kernel.org>
-Subject: =?UTF-8?B?W1BBVENIIFJFU0VORCA0LzVdIG1mZDogZGE5MDUyOiBEaXNhYmxlIElSUSB3YWtlIG9uIGRldmljZSByZW1vdmFs?=
-Content-Type: text/plain;
-	charset="UTF-8"
-X-MAIL:mse-fl1.zte.com.cn 6A78LLVV029911
-X-TLS: YES
-X-ENVELOPE-SENDER: shao.mingyin@zte.com.cn
-X-SOURCE-IP: 10.5.228.132 unknown Sat, 07 Nov 2026 16:21:28 +0800
-X-CLEAN: YES
-X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6AEEDF88.000/4jM8CD2YLGz5B12l
 
-From: Shao Mingyin <shao.mingyin@zte.com.cn>
+> From: Shao Mingyin <shao.mingyin@zte.com.cn>
+>=20
+> arizona_dev_init() registers three informational IRQs (CLKGEN error,
+> Overclocked and Underclocked) with arizona_request_irq() before adding
+> the sub-devices.  If mfd_add_devices() fails the error path only calls
+> arizona_irq_exit(), which frees the CTRLIF_ERR/BOOT_DONE IRQs and the
+> IRQ chip/domain but leaves these three requested IRQs behind; they are
+> freed only in arizona_dev_exit() on the normal removal path.
+>=20
+> As a result the three threaded IRQ handlers stay registered and
+> irq_dispose_mapping()/irq_domain_remove() in arizona_irq_exit() act on
+> virtual IRQs that are still in use.  Free them in the probe failure path
+> too, in the same order as arizona_dev_exit().
+>=20
+> Fixes: 3cc729869475 ("mfd: arizona: Core driver")
+> Signed-off-by: Shao Mingyin <shao.mingyin@zte.com.cn>
 
-da9052_irq_init() calls enable_irq_wake() on the chip IRQ but neither the
-error path (when requesting the ADC_EOM IRQ fails) nor da9052_irq_exit()
-(the removal path reached from da9052_i2c_remove()/da9052_spi_remove())
-ever calls disable_irq_wake().  The wakeup configuration is therefore left
-behind when the device is unbound; the IRQ line keeps being treated as a
-wakeup source and, should the descriptor be reused by another device later,
-the stale wake setting persists.
+Sashiko has reviewed this patch and found no issues.
 
-Track whether the wake source was successfully enabled and disable it
-symmetrically on both the probe failure path and in da9052_irq_exit().
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/202611071621143491u=
+RwluLhxYsUHx2V3qhm_@zte.com.cn?part=3D3
 
-Fixes: ed05be56643e ("mfd: da9052: Register ability of device to cause a wake-up interrupt")
-Signed-off-by: Shao Mingyin <shao.mingyin@zte.com.cn>
----
-diff --git a/drivers/mfd/da9052-irq.c b/drivers/mfd/da9052-irq.c
-index abbdbf0337e2..da5bac424efc 100644
---- a/drivers/mfd/da9052-irq.c
-+++ b/drivers/mfd/da9052-irq.c
-@@ -259,7 +259,8 @@ int da9052_irq_init(struct da9052 *da9052)
- 		goto regmap_err;
- 	}
- 
--	enable_irq_wake(da9052->chip_irq);
-+	if (!enable_irq_wake(da9052->chip_irq))
-+		da9052->irq_wake_enabled = true;
- 
- 	ret = da9052_request_irq(da9052, DA9052_IRQ_ADC_EOM, "adc-irq",
- 			    da9052_auxadc_irq, da9052);
-@@ -272,6 +273,10 @@ int da9052_irq_init(struct da9052 *da9052)
- 	return 0;
- 
- request_irq_err:
-+	if (da9052->irq_wake_enabled) {
-+		disable_irq_wake(da9052->chip_irq);
-+		da9052->irq_wake_enabled = false;
-+	}
- 	regmap_del_irq_chip(da9052->chip_irq, da9052->irq_data);
- regmap_err:
- 	return ret;
-@@ -281,6 +286,10 @@ int da9052_irq_init(struct da9052 *da9052)
- int da9052_irq_exit(struct da9052 *da9052)
- {
- 	da9052_free_irq(da9052, DA9052_IRQ_ADC_EOM, da9052);
-+	if (da9052->irq_wake_enabled) {
-+		disable_irq_wake(da9052->chip_irq);
-+		da9052->irq_wake_enabled = false;
-+	}
- 	regmap_del_irq_chip(da9052->chip_irq, da9052->irq_data);
- 
- 	return 0;
-diff --git a/include/linux/mfd/da9052/da9052.h b/include/linux/mfd/da9052/da9052.h
-index 9cb2fc2938ce..d7dd36891539 100644
---- a/include/linux/mfd/da9052/da9052.h
-+++ b/include/linux/mfd/da9052/da9052.h
-@@ -93,6 +93,8 @@ struct da9052 {
- 
- 	int chip_irq;
- 
-+	bool irq_wake_enabled;
-+
- 	int fault_log;
- 
- 	/* SOC I/O transfer related fixes for DA9052/53 */
--- 
-2.47.0
