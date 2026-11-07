@@ -1,41 +1,53 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=114.242.206.163
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=183.62.165.209
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794031277;
-	b=gBXYvDeA/lwDRuqmvT1HffMjoXUFZDTbJX2CfRLJQIWnAC4uTs8wWg70JQ5UiSd9uZmO
-	 zU7M4Xf0hb8GXklXbtvtQ1HvprErlsDe5tp/rSw/bKqOynO941p05ntF2E2+ZXf20kzW+
-	 DnoC0lSlIpKAavteQZZYatWPK4mB4eK0DP80kocV5z2GprFBkYvIjeiYSPDId8mWpDLte
-	 S/aU1lRr22cPnpxgJsFVIPnSAPLv9qWzJgvocsYvxRTPZ2qHanv3gKN2SJu2vt5rpkrle
-	 dlOLNgrw11lpXFVtvAJLb+mXlvFr5DgIJFSAK8uYlEPYpS5KchEldVDzOgSJSM2GhjA==
+	t=1794038869;
+	b=m8+PtZC5IrQbNNX/DkK1lVPV5qnTQ+bB2k4jaf0YzOgbFm4vysqvVTHDjthST8W7bf+B
+	 ejR7fcEbvP8XBYy0l7AOd0IcqbdQM4kk2fc+q98GJGXuIezqVec2S5occGwxJ+IDWaBM/
+	 +KBNSiCybLspT97ktURRuk34SHXPpN4l1KuxS9VLdGE2DdUeJ8RQmY8BY2dUvX0XJ8iEF
+	 5GQMUBgTOi8bv6hXB7C6AJe30Qxn3Lyv2GKVa2d95i+5K6h/abVBueuBWSXG4F/RKGVOo
+	 yvRPNCG9Hmh4Ne14sGsKirnWWrBqpj0pJyd94eywaGyGkhZV2RZC/okQVsoBwEwuC6g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794031277;
-	h=DMARC-Filter:Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-CM-TRANSID:X-CM-SenderInfo:
-	 X-Coremail-Antispam;
-	bh=VApiiAu4y4jzk0oNRwNpWoUyNlZ1jI1NbfuSJXJZy6I=;
-	b=CzeIOVBwMmCPxoxAqkzEZPAHduYYO+4YVDTTObEJ0Uk/fRJfe0i0DIlyJt9SxBJM0Cqj
-	 I5FhJZUwwpDdlOyRd41JjCWx/cT54/hcd8QhSnzEuUSea2xMMWgpjs83QWV6TYIa2euDD
-	 /okEaogJp29S3jZl79bYZq+bE73jShUbeyep7tIPaknDGfVdEed+vqqWyV+zv+7M0GB2c
-	 wItkYQ6G0ugfa3ZfTy7ZKAi4wy6lnCfsaorehtVL7Zj4ygDaXpzk8ZvrSIbUbUnTmId6u
-	 U+H0vUZCs2ZgjQ1uZvZ3OiqWjPhhG003okrU0HhYpm5WL6SBIMxIFZDu7Xrz1CCARqQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794038869;
+	h=DMARC-Filter:Received:Received:Received:X-Zmail-TransId:X-Mailer:
+	 Message-ID:Date:Mime-Version:From:To:Cc:Subject:Content-Type:X-MAIL:
+	 X-TLS:X-ENVELOPE-SENDER:X-SOURCE-IP:X-CLEAN:
+	 X-Fangmail-Anti-Spam-Filtered:X-Fangmail-MID-QID;
+	bh=IU7XIeW+27oTxAoZZ5Rerjf37bEsa2qLvPurBR6fe48=;
+	b=ySsHUrsDOyzKNmm1H1+hJ/tYm9EPmbPlBfl4s5hzjC8I1PVDWd3Xv+OiU4aVP3pZpdV1
+	 7ukdHh0KSeoPhrBTjnvzeBRvFB0U+mMPHjcYcEkYGp6dt1wbe5pFbRq03hzVQ9UipWljq
+	 B8hbhhYNrQnBlh71DSUyra0G1G+nN4SoY1nlkhZW2cUeZzEtTcA4Xuwi0KUI9pRnBP1sS
+	 EcPPOmYjc2oXLuZKj/jgIxox/KUunbd3LK1Tu/g43EoCZ3ice2shOCwMIiLAuzLE7UHXi
+	 Dvy3dJde5kthsZq6Jz2Bk1uAz4ickyq97cDsyw/v1XObGF/6IbPertx9HkKSavSUPwA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=loongson.cn;
-	spf=pass smtp.mailfrom=loongson.cn;
-	arc=none smtp.remote-ip=114.242.206.163
-Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3F11F606A326
-	for <mfd@lists.linux.dev>; Sat,  7 Nov 2026 06:01:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3F11F606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=loongson.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=loongson.cn
-Received: from loongson.cn (unknown [223.64.69.17])
-	by gateway (Coremail) with SMTP id _____8DxD9Okvu5qgVQdAA--.19353S3;
-	Sat, 07 Nov 2026 14:01:08 +0800 (CST)
-Received: from [127.0.0.1] (unknown [223.64.69.17])
-	by front1 (Coremail) with SMTP id qMiowJCxNs2fvu5q3uQyAA--.24809S2;
-	Sat, 07 Nov 2026 14:01:04 +0800 (CST)
-Message-ID: <8ffdb96e-c082-42b6-b895-2badc12285ca@loongson.cn>
-Date: Sat, 7 Nov 2026 14:01:02 +0800
+	dmarc=pass header.from=zte.com.cn;
+	spf=pass smtp.mailfrom=zte.com.cn;
+	arc=none smtp.remote-ip=183.62.165.209
+Received: from mxct.zte.com.cn (mxct.zte.com.cn [183.62.165.209])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB756606A326
+	for <mfd@lists.linux.dev>; Sat,  7 Nov 2026 08:07:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EB756606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zte.com.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zte.com.cn
+Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mxct.zte.com.cn (FangMail) with ESMTPS id 4jM7vD0Sq5z57HRy;
+	Sat, 07 Nov 2026 16:07:36 +0800 (CST)
+Received: from xaxapp05.zte.com.cn ([10.99.98.109])
+	by mse-fl2.zte.com.cn with SMTP id 6A787Zp6096399;
+	Sat, 7 Nov 2026 16:07:35 +0800 (+08)
+	(envelope-from shao.mingyin@zte.com.cn)
+Received: from mapi (xaxapp05[null])
+	by mapi (Zmail) with MAPI id mid32;
+	Sat, 7 Nov 2026 16:07:37 +0800 (CST)
+X-Zmail-TransId: 2afc6aeedc492ba-7fe6b
+X-Mailer: Zmail v1.0
+Message-ID: <202611071607376342uPiYA9rHRC7ZI9Ix-8xh@zte.com.cn>
+Date: Sat, 7 Nov 2026 16:07:37 +0800 (CST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -44,100 +56,64 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mfd: ls2kbmc: cancel the reset work before the driver
- data is freed
-To: hyunjungg <hj351016@gmail.com>, Chong Qiao <qiaochong@loongson.cn>,
- Lee Jones <lee@kernel.org>
-Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org, stable@vger.kernel.org
-References: <20261107053218.3326443-1-hj351016@gmail.com>
-From: Binbin Zhou <zhoubinbin@loongson.cn>
-In-Reply-To: <20261107053218.3326443-1-hj351016@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-CM-TRANSID:qMiowJCxNs2fvu5q3uQyAA--.24809S2
-X-CM-SenderInfo: p2kr3uplqex0o6or00hjvr0hdfq/1tbiAgEECGrulv0ArQAAsN
-X-Coremail-Antispam: 1Uk129KBj93XoW7ZrWfWryUWw17CFWkXry8CrX_yoW8Kw45pF
-	Z8KFWYyrWDJr1Uta4DWr1I9FyYgr4rCr1xK348tw17W34aqr1qvr40vF90qF98CrWkGFWY
-	grWSq34v9a45ZFXCm3ZEXasCq-sJn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7ZEXa
-	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
-	0xBIdaVrnRJUUUyCb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
-	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
-	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
-	0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_
-	Gr0_Gr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx1l5I
-	8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AK
-	xVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41l42xK82IYc2Ij64vIr4
-	1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK
-	67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI
-	8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAv
-	wI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14
-	v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x07UE-erUUUUU=
+Mime-Version: 1.0
+From: <shao.mingyin@zte.com.cn>
+To: <lee@kernel.org>, <mfd@lists.linux.dev>
+Cc: <tony@atomide.com>, <linux-omap@vger.kernel.org>, <tharvey@gateworks.com>,
+        <support.opensource@diasemi.com>, <patches@opensource.cirrus.com>,
+        <linux-kernel@vger.kernel.org>
+Subject: =?UTF-8?B?W1BBVENIIDAvNV0gbWZkOiBGaXggYW4gb3V0LW9mLWJvdW5kcyBJUlEgbWFwIGFuZCBlcnJvci1wYXRoIGJ1Z3M=?=
+Content-Type: text/plain;
+	charset="UTF-8"
+X-MAIL:mse-fl2.zte.com.cn 6A787Zp6096399
+X-TLS: YES
+X-ENVELOPE-SENDER: shao.mingyin@zte.com.cn
+X-SOURCE-IP: 10.5.228.133 unknown Sat, 07 Nov 2026 16:07:36 +0800
+X-CLEAN: YES
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-MID-QID: 6AEEDC48.000/4jM7vD0Sq5z57HRy
 
-Hi:
+Five independent fixes in the MFD core address an out-of-bounds IRQ-map
+lookup, an uninitialized interrupt-mask write, an IRQ leak on a failed
+probe, a missing IRQ-wake teardown on removal, and two unchecked
+firmware CRC reads.  Each patch touches a different driver; they are
+grouped only because they go through the same MFD tree.  Every patch is
+independent and can be applied and reviewed on its own, and taking a
+subset is fine.
 
-On 2026/11/7 13:32, hyunjungg wrote:
-> From: Hyunjung Ko <hj351016@gmail.com>
-> 
-> ls2k_bmc_init() INIT_WORK()s ddata->bmc_reset_work (ls2k_bmc_events_fn)
-> and requests two device-managed interrupts (ls2k_bmc_interrupt) that
-> schedule_work(&ddata->bmc_reset_work).  The work handler dereferences
-> ddata via container_of().
-> 
-> ddata is devm_kzalloc()'d, so devres frees it when the device is
-> unbound.  Nothing cancels bmc_reset_work: free_irq() (run by devres)
-> only waits for the interrupt handler to finish, not for a work item it
-> has already queued.  If a BMC reset interrupt fires shortly before
-> unbind, the queued ls2k_bmc_events_fn() can run after ddata has been
-> freed -> use-after-free.
-> 
-> Register the work for device-managed cancellation with
-> devm_work_autocancel(), before the devm_request_irq() calls that arm
-> it, so devres (LIFO) frees the interrupts first, then cancels the work,
-> and only then frees ddata.
-> 
-> Found by code review; not reproduced (needs Loongson-2K BMC hardware and
-> a reset interrupt racing driver unbind).
-> 
-> Fixes: d952bba3fbb5 ("mfd: ls2kbmc: Add Loongson-2K BMC reset function support")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Hyunjung Ko <hj351016@gmail.com>
-> ---
->   drivers/mfd/ls2k-bmc-core.c | 6 +++++-
->   1 file changed, 5 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/mfd/ls2k-bmc-core.c b/drivers/mfd/ls2k-bmc-core.c
-> index 408056b..c44291e 100644
-> --- a/drivers/mfd/ls2k-bmc-core.c
-> +++ b/drivers/mfd/ls2k-bmc-core.c
-> @@ -12,6 +12,7 @@
->   #include <linux/aperture.h>
->   #include <linux/bitfield.h>
->   #include <linux/delay.h>
-> +#include <linux/devm-helpers.h>
->   #include <linux/errno.h>
->   #include <linux/init.h>
->   #include <linux/iopoll.h>
-> @@ -371,7 +372,10 @@ static int ls2k_bmc_init(struct ls2k_bmc_ddata *ddata)
->   
->   	ls2k_bmc_save_pci_data(pdev, ddata);
->   
-> -	INIT_WORK(&ddata->bmc_reset_work, ls2k_bmc_events_fn);
-> +	ret = devm_work_autocancel(ddata->dev, &ddata->bmc_reset_work,
-> +				   ls2k_bmc_events_fn);
-> +	if (ret)
-> +		return ret;
+The series is ordered by severity:
 
+  1/5 mfd: tps65219: Fix out-of-bounds access in tps65214 IRQ map
+  2/5 mfd: twl6030-irq: Don't write garbage to interrupt mask on read failure
+  3/5 mfd: arizona: Free info IRQs on probe failure
+  4/5 mfd: da9052: Disable IRQ wake on device removal
+  5/5 mfd: gateworks-gsc: Check firmware CRC reads for errors
 
-Lee had already fixed this issue:
+1/5 adds the missing reserved-bit placeholder so that a power-button
+interrupt no longer indexes past tps65214_sub_irq_offsets[].  2/5
+returns the I2C read error instead of writing uninitialized stack data
+to the PMIC interrupt mask.  3/5 frees the three informational IRQs
+before arizona_irq_exit() tears down their domain.  4/5 tracks whether
+enable_irq_wake() succeeded and disables it on the probe failure and
+removal paths.  5/5 checks the two GSC_FW_CRC reads and fails the probe
+instead of printing a stale CRC.
 
-https://lore.kernel.org/all/20261027093306.2812695-4-lee@kernel.org/
->   
->   	ret = devm_request_irq(&pdev->dev, pdev->irq, ls2k_bmc_interrupt,
->   			       IRQF_SHARED | IRQF_TRIGGER_FALLING, "ls2kbmc pcie", ddata);
+No dependencies; all five apply directly on next-20261030.
 
--- 
-Thanks.
-Binbin
+Shao Mingyin (5):
+  mfd: tps65219: Fix out-of-bounds access in tps65214 IRQ map
+  mfd: twl6030-irq: Don't write garbage to interrupt mask on read failure
+  mfd: arizona: Free info IRQs on probe failure
+  mfd: da9052: Disable IRQ wake on device removal
+  mfd: gateworks-gsc: Check firmware CRC reads for errors
 
+ drivers/mfd/arizona-core.c        |  3 +++
+ drivers/mfd/da9052-irq.c          | 11 ++++++++++-
+ drivers/mfd/gateworks-gsc.c       |  6 ++++--
+ drivers/mfd/tps65219.c            |  1 +
+ drivers/mfd/twl6030-irq.c         | 10 ++++++----
+ include/linux/mfd/da9052/da9052.h |  2 ++
+ 6 files changed, 26 insertions(+), 7 deletions(-)
+
+---
+base-commit: 7649ba73f9e7e1e04d0b46213e39c79ae09dd55c
