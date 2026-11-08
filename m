@@ -1,55 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=160.30.148.35
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794122726;
-	b=yJ4RgQSM0dMU90IhQMaa1EFQNFs6vEmja+CXKECkTLzOi/FYYPO5lJh7FVJQn4wd0KKY
-	 3xADPEg7DAmXBUvFlZ1lo769Sja5h51r7FEfqRRmWXxbXgZ7R7MH/TIYkI1aXyCh1pqzF
-	 mwflZ/dlBlH2CxKU+lYKDKBG42r8qY7mV12ZVp9PcvcyUOAhgq7/K3DBTBnevCcTohviV
-	 y1sCOPEXJQFu/d9qKrBAUSy/8FlUOGiOQxV3Pcxena9mSS1D9xVXVb8R56HmFk5KwCrGQ
-	 Te5P2pSRPOAZOV0U4vHXdA4zeHZTRzwSjjKhYtbmNdvN12wbmuZJ6bG95MWsDimQGfQ==
+	t=1794122741;
+	b=FkrVGkahaEVhu1zFZJ7JgKQUeS3hr/6ZUjmkcwZ5WpxKCc5DKPGA+S3eMj1ztDmTsYMT
+	 pMm0UABLXszwI/ZdQHlBCT9f9VkmcmiTm0gPR2OM8Un8XKGjk2/ntDfQ8F37uY5LDGpYK
+	 Kssd+wkoQuHd8OLKJsk5Y77yRDZWqCyQRPlFxTFSP3BPd/OFZvDxBSSoRmDlMXhxZjdqM
+	 XqalLMj2fylwoAYf71iZn8CrgaDRxpgzde0Su75nv6pyjHKWGjIWKi6TK6to/GUYYKpb3
+	 5BemGW+7SYAAORgawQ16IIloB7lEs1PYNVU4nLnGWdH/t381RdCUpbS565iIXyqcRfQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794122726;
-	h=DMARC-Filter:Received:Received:Received:X-Zmail-TransId:X-Mailer:
-	 Message-ID:In-Reply-To:References:Date:Mime-Version:From:To:Cc:
-	 Subject:Content-Type:X-MAIL:X-TLS:X-ENVELOPE-SENDER:X-SOURCE-IP:
-	 X-CLEAN:X-Fangmail-Anti-Spam-Filtered:X-Fangmail-MID-QID;
-	bh=m0xhrrawWvDQ0eIaAW3TtlXFt5eAGgWv8xs+n28MT5I=;
-	b=DIR9mmJKi2LqyU6YkBGRQTRqFyz2MTOc4lsrLOdiV3P4DF+/fGlx9siPdTkJBKlOQVe+
-	 +po2M8AI5jf+SG31wjxbod/uq9171aWqm8o31S+UFoluQ6PPibX7hunmWbY9xkbWR2bzj
-	 rk9XecvfwqmAWbRraQPjKUPYQoLTa5GzjVmwtiw5WXW/6CJGgBXz8rzEAxBqm0FpE7dJO
-	 CIaZ++2myaflfk0Ee1qv3TweoxYVqOyeqBAz8jvJWJZSIKNTnFomPTvptRWJgskmLV9iV
-	 oqrjHkb1HE3jeapx/mtO+Oc+CnlZ/ozEN2q6d18usUr8sufpyZRqWOUyJJUm4Qu72jA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794122741;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=POsH2thDCd0sILLI+CeCCzD9Swd8Tfw2O0iZBkEkjkY=;
+	b=GJEsOxYJbUttFyYluAyb1CLJtKHS4cLRHtOjmHpd77aPZh/PSu8XP/3ZqwoLKaCea+pe
+	 NfZLeqWqzuQ+/51g27n3afE07IMiVHirlDLW65Go7ZLYCF7dXsJEvbUmvdyJP2xAelkm1
+	 Z3cuBxnQJtpZu4ERIz0xYHCIXxh/cX5WuZZ9P0bRzIUF2V1Ld8EA6U6oTm697ZQYBfL0v
+	 IbogWxjMQip2HPac0HSmf3McDO8KiHAPhAIJ2pxVY4A4+j11HLAQxSMic7RNfsXiWAfuh
+	 Gy+7ViI7eQLKsVchxG7J4f9oh5xitERVFzFHSvmpgcekGZ8gAzxAj0lz9H+bN7ItBTA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=zte.com.cn;
-	spf=pass smtp.mailfrom=zte.com.cn;
-	arc=none smtp.remote-ip=160.30.148.35
-Received: from mxhk.zte.com.cn (mxhk.zte.com.cn [160.30.148.35])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jDZZ1CnE;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C15C6606D80E
-	for <mfd@lists.linux.dev>; Sun,  8 Nov 2026 07:25:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C15C6606D80E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zte.com.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zte.com.cn
-Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by mxhk.zte.com.cn (FangMail) with ESMTPS id 4jMkw36Fl5z8Xrnw;
-	Sun, 08 Nov 2026 15:25:23 +0800 (CST)
-Received: from xaxapp05.zte.com.cn ([10.99.98.109])
-	by mse-fl1.zte.com.cn with SMTP id 6A87PI8t078862;
-	Sun, 8 Nov 2026 15:25:18 +0800 (+08)
-	(envelope-from shao.mingyin@zte.com.cn)
-Received: from mapi (xaxapp02[null])
-	by mapi (Zmail) with MAPI id mid32;
-	Sun, 8 Nov 2026 15:25:19 +0800 (CST)
-X-Zmail-TransId: 2afa6af023dfa07-6e0cf
-X-Mailer: Zmail v1.0
-Message-ID: <20261108152519529TBI2L87EqbkTqOeCVnNWe@zte.com.cn>
-In-Reply-To: <sashiko-outbox-203614@kernel.org>
-References: 20261108151125513PyebyF3QC3r_DTxS9ZMf6@zte.com.cn,sashiko-outbox-203614@kernel.org
-Date: Sun, 8 Nov 2026 15:25:19 +0800 (CST)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 136FE606A337
+	for <mfd@lists.linux.dev>; Sun,  8 Nov 2026 07:25:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jDZZ1CnE
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B54851F008A4;
+	Sun,  8 Nov 2026 07:25:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794122740;
+	bh=POsH2thDCd0sILLI+CeCCzD9Swd8Tfw2O0iZBkEkjkY=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=jDZZ1CnE2f7/qLx7ve26vbbcORIkAmMLGsHpB5nk/rS+6LjPL0z7Jp5/iiZZz8X9R
+	 +kfAFeiPSUWjWcvsHPccFrdDpt6iPLBiFh3lTmRZPHleaSELNtxZQwAn5clBiXdtFp
+	 l7qY7rGE9B3gF3u3oSn6VgmgUWwv8+WdV6t3LUlo/GVjTvRF4cWbfGQft7y7CTE0D3
+	 Ll6TkWBtjXhFhv+aPacF6/IYbNmh1zEe5kMBqjwDKA0Rd5hP54JfnDnb2+D/b8BK63
+	 O6nXVxKFS5rgNT8odENXJ2RnXu1ZItKIFiNAW0SEc/0IAd5zMs/DErT7651vEFyHl7
+	 1ywea5SiulkHg==
+Message-ID: <sashiko-outbox-203618@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH 1/2] mfd: gateworks-gsc: Propagate I2C write errors
+Reply-To: sashiko-reviews@lists.linux.dev
+To: shao.mingyin@zte.com.cn, mfd@lists.linux.dev
+Cc: lee@kernel.org
+In-Reply-To: <20261108151848195Kkf_f5Vk8ogj7VbdDltdH@zte.com.cn>
+References: <20261108151842879F_ON2AUBnuh5imOx8oZ1w@zte.com.cn>
+ <20261108151848195Kkf_f5Vk8ogj7VbdDltdH@zte.com.cn>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Sun, 08 Nov 2026 07:25:40 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -58,47 +59,22 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-Mime-Version: 1.0
-From: <shao.mingyin@zte.com.cn>
-To: <mfd@lists.linux.dev>
-Cc: <lee@kernel.org>, <sashiko-bot@kernel.org>
-Subject: =?UTF-8?B?UmU6IFtQQVRDSCB2Ml0gbWZkOiBnYXRld29ya3MtZ3NjOiBQcm9wYWdhdGUgSTJDIHJlYWQgZXJyb3Jz?=
-Content-Type: text/plain;
-	charset="UTF-8"
-X-MAIL:mse-fl1.zte.com.cn 6A87PI8t078862
-X-TLS: YES
-X-ENVELOPE-SENDER: shao.mingyin@zte.com.cn
-X-SOURCE-IP: 10.5.228.132 unknown Sun, 08 Nov 2026 15:25:23 +0800
-X-CLEAN: YES
-X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6AF023E3.000/4jMkw36Fl5z8Xrnw
 
-> This isn't a bug, but the commit message refers to the two GSC_FW_CRC
-> checks in gsc_probe() as "added by the previous version" (v1 of the
-> patch on the mailing list).  Since v2 replaces v1 and adds those
-> GSC_FW_CRC error checks in this commit itself, could the commit message
-> be updated to state that this patch adds the GSC_FW_CRC checks as well
-> as propagating errors from gsc_read()?
+> From: Shao Mingyin <shao.mingyin@zte.com.cn>
+>=20
+> gsc_write() retries the I2C transfer but then returns 0 unconditionally,
+> so regmap_write() and regmap_bulk_write() never report an error even when
+> all attempts failed.  Callers such as gsc_powerdown() check the return
+> value, but those checks can never trigger.
+>=20
+> Return the result of the last transfer.
+>=20
+> Fixes: d85234994b2f ("mfd: Add Gateworks System Controller core driver")
+> Signed-off-by: Shao Mingyin <shao.mingyin@zte.com.cn>
 
-Agreed, and thanks for catching it.  The sentence only makes sense with
-v1 at hand; in v2 the gsc_read() fix and the two GSC_FW_CRC checks are
-both part of this commit.  The second paragraph's "the existing FW_VER
-check and the two CRC checks" has the same problem, since the CRC checks
-are new here.
+Sashiko has reviewed this patch and found no issues.
 
-The code is unchanged, so I would rather not post a v3 just to reword
-the message while the review is still open.  If the patch needs another
-revision, the commit message will read:
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261108151842879F_=
+ON2AUBnuh5imOx8oZ1w@zte.com.cn?part=3D1
 
-  gsc_read() retries the I2C transfer but then stores "ret & 0xff" in
-  *val and returns 0 even when the transfer failed.  regmap_read()
-  therefore never reports an error, so the FW_VER check in gsc_probe()
-  and the two GSC_FW_CRC checks that this patch adds are dead code, and
-  on a failed read the firmware revision is built from the low byte of
-  the negative errno.
-
-  Return the error from gsc_read() before touching *val, so regmap_read()
-  and its callers see the failure; the FW_VER check and the two CRC
-  checks then work as intended.
-
-If a fresh revision is preferred now, I'll repost with the wording fixed.
