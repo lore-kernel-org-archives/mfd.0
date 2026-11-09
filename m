@@ -1,75 +1,76 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.9
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.11
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794260353;
-	b=HEu0XnPTUuM6KzqlFG5LKg6Es4U469DF2O9MQrKDSSGHor7KVAgQaGRv5lMzuu/0WKvP
-	 IBxeEYqml1Rn6zAgJqjcVKhIoXCGfRSDK8bT2YaPJ8REQF7EFTtTNs9nH4S6n8zrpqqS7
-	 K4ugsQp64kTECkiPMLI4m5LSIrllQUPQKx9Pr9+nWWqMmPkA5FuwUDIvQ+N/sLOAImZXj
-	 +YvRjDxYl6NlOCM6QKD8YVlsXzKZHbs1wcjq4tLjkd38RhlIaODry2Ih2yd/ceC469wSV
-	 PMzHrZmI/+XbOSzuZRKa5k6Nds6U2+ZI6nkhqhyeo97uJAFlSQG6Q/PF1EGDyxkJ8Vw==
+	t=1794260426;
+	b=ZxWzvGOxCKasnDtbgCQZhpv8MG4lvCI/OMGyZMZE/ovGuGGatYcXH0ScQ/Woy1j8ASrn
+	 pEO3uxADRl8p/Psunbsv5GJcr5d7whg0+MghDcLJfTyQVs2AAIGXOFjeB7MDYTNMtnFvq
+	 elKzIRaU4EGD+0THm0SFt2eheYc/lvPdrCR0mlUb5POBKJbXu+oy/+eHnr/VK96e90Bnu
+	 HMDYjYTXuvtXCzlws1b4lii7G+s+5HRjNy9v1c5qg4SeH/ogKgObgY6gNHoyB1kvQU9bG
+	 7/erLmYJWTHmQ7kdRLmrN/gi78NXe/nangKOwQEWaJ8f8yyHB5o4ooSrB/llv/F/Olg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794260353;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794260426;
 	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
 	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
 	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
 	 Subject:Message-ID:References:MIME-Version:Content-Type:
 	 Content-Disposition:In-Reply-To:Organization;
-	bh=FEOSlh0slL9lzfjDFsxhcuq5DZBLDQNDE3K8Ix3LK58=;
-	b=PwQTHKMZdMcc57sEkiRwO56lJlI2NIV64OhpSzhMCSF+i5lu+C7s5v4JMonQ5lOcoGeH
-	 UvzTSMEk9ZcXqDu+zH42nitO5Wks9M25W1go3wJTNOM8pZh9bB3qPJ05zV2IHaf5zbcxW
-	 aGBckvtCzGkBSfkZZgWW1l9/2XhXGGhDq//9cK1WlHaWhE/EIKBBMWxwS0QiAY5mC4LJk
-	 bvt3uI+GxI9/L+1zjAa1vi66JkdWYcXq0EU3ghbyU4XR1fQqmz31/IYE7xGl7yo51QbdD
-	 leTPQ+Y0KKvTgNbatAP/BO8FeylzpWuQfOpohHfdNE+cQjlisxuaW/ayBhJdukrNKFA==
+	bh=kbXpWsGA6wjP0sgcEePfgquKyUEPpPh/l8eqP/BlFbU=;
+	b=3JWIqFTl+G/YPhYD8cROEG7Qo3wm1knyDWS08CrQi/AnEIsjp6DC17TOgCJkGj/y0OlB
+	 qN9Umk1Un67KmSiKIptYisNIIeDJWSXwgW4RIPmRnh/BAFGvwkD3ED/XtyvCplgj/V2q+
+	 YtIFxgJPZlNumX9O1wOXgm94bVb0joye7tg/OvQ7l5+vXczKJxZCc62727STUWyNXNqXp
+	 j8VV+9L2oMr6nXbV9rD/ZBnL56g7mrLQiNmN7iuToRnA7EnRN3G7A8zgwu3TsLcAnzyV7
+	 kxBZM8N0RfY8+oaA2NG5jsFVMzLE2H4YAoSBeIxsdYEn2uV6Xjfc3mpVuueQKfBU3XA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=linux.intel.com;
 	spf=pass smtp.mailfrom=linux.intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=kDjVbURZ;
-	arc=none smtp.remote-ip=198.175.65.9
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=b7Gc1CB4;
+	arc=none smtp.remote-ip=198.175.65.11
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.11])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBCE9606A335
-	for <mfd@lists.linux.dev>; Mon,  9 Nov 2026 21:39:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BBCE9606A335
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 424B8606A31C
+	for <mfd@lists.linux.dev>; Mon,  9 Nov 2026 21:40:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 424B8606A31C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=kDjVbURZ
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=b7Gc1CB4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1794260352; x=1825796352;
+  t=1794260425; x=1825796425;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=n59xh4ThW8wY2o8B+J5hT31WyrWmamzID8/o7Mebbvs=;
-  b=kDjVbURZ7w3kVz/HpGyhct6m3nLaKQBtWE2A/0n4L39vc2zljKnbEE8I
-   effO2DhM+Q0l10uE96UlTXAfp6RDMr7dm2i4rHCAgOdey53aYq6KDUFy7
-   kGRcFBGZQvalg2/teRdUa/TfpXilHCDjmCQiCmQMzqN+H3NtJh4G+QOhz
-   3BJfOqcEZUr5S0aotVOFV00nsPplDJ070joih00zutIQHi/OwJ+NAUuHC
-   FU5b+f0k3hV4EmRZVv96yueu68DGI6Tt16YOtuoNcj8n+fPYT8MngyfmW
-   A+HxOdc0WoZMRMERGqISv6xPWsr+6FMwJvcZKmWPKIv6SY0OJZe6p57eA
-   g==;
-X-CSE-ConnectionGUID: RwCvqRaqS4upnBfv0L19Ww==
-X-CSE-MsgGUID: hMuCGxthRLK6R5lRNSUC2A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11961"; a="2894824"
+  bh=5NVSwZOPfn0jj1MPptSgjkG5ckE1/OJgvnBjUPbvvjQ=;
+  b=b7Gc1CB41EaIKUg/0YAxvkZvKWjVsyN4jPjyI3y/pB7BjZ5F5d8HJnrh
+   95wA2dkFt24iAdKKKi5Im3DYNbWoXTY7VMU+6BLJqgTmi92w5y8pOiI1L
+   PcmG6hge2GJHZaOdZx12LLzilDaC4HWKypMOuRgVfTGz6ZYVvLgnA6K3N
+   sAMV8RLPwIQO3/Xh9MqqMUWmc7bL5qjAmVt9nPbVxAW0uiUJmtmKyV4Wg
+   SjGDXJ7r+goxD22SmlAkk5OZyTuFs516SfdymtuvSkiIyPrrzZovCcPrL
+   hnXLtwGZo4xkpDlqqHY5BVlcPQgixlpYj3o0XYm8AjC8fmAz0DGoBI58x
+   Q==;
+X-CSE-ConnectionGUID: xWLQax2eQDmdYq5Ah5E4WA==
+X-CSE-MsgGUID: 2Llneh7CQG6E/+XzUr777w==
+X-IronPort-AV: E=McAfee;i="6800,10657,11961"; a="2883928"
 X-IronPort-AV: E=Sophos;i="6.27,204,1787036400"; 
-   d="scan'208";a="2894824"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Nov 2026 13:39:12 -0800
-X-CSE-ConnectionGUID: nzHce1zPR0u3KmM12VuC0A==
-X-CSE-MsgGUID: H2KvwVYXQSuuFI+wFKmkOw==
+   d="scan'208";a="2883928"
+Received: from orviesa002.jf.intel.com ([10.64.159.142])
+  by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Nov 2026 13:40:25 -0800
+X-CSE-ConnectionGUID: MSujhSu6TWWx9FrasFgZjQ==
+X-CSE-MsgGUID: ElzKqfZjQLmrvIcNW8Q4dg==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.27,204,1787036400"; 
-   d="scan'208";a="7841553"
+   d="scan'208";a="7989377"
 Received: from amilburn-desk.amilburn-desk (HELO localhost) ([10.245.244.144])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Nov 2026 13:39:11 -0800
-Date: Mon, 9 Nov 2026 23:39:08 +0200
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Nov 2026 13:40:23 -0800
+Date: Mon, 9 Nov 2026 23:40:21 +0200
 From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 To: raoxu <raoxu@uniontech.com>
 Cc: lee@kernel.org, mika.westerberg@linux.intel.com, mfd@lists.linux.dev,
 	linux-kernel@vger.kernel.org, stable@vger.kernel.org
 Subject: Re: [PATCH] mfd: intel-lpss: Clamp latency tolerance to the register
  value mask
-Message-ID: <avI9fDRmwFyIfTDv@ashevche-desk.local>
+Message-ID: <avI9xV5PbYvKdFe1@ashevche-desk.local>
 References: <82545EC5E5ABC9F0+20261109094242.3783672-1-raoxu@uniontech.com>
+ <avI9fDRmwFyIfTDv@ashevche-desk.local>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -81,52 +82,59 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <82545EC5E5ABC9F0+20261109094242.3783672-1-raoxu@uniontech.com>
+In-Reply-To: <avI9fDRmwFyIfTDv@ashevche-desk.local>
 Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
  krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On Mon, Nov 09, 2026 at 05:42:42PM +0800, raoxu wrote:
+On Mon, Nov 09, 2026 at 11:39:12PM +0200, Andy Shevchenko wrote:
+> On Mon, Nov 09, 2026 at 05:42:42PM +0800, raoxu wrote:
+> > 
+> > The PM QoS latency tolerance interface accepts non-negative s32 values,
+> > but the LPSS active and idle LTR registers have only a ten-bit value
+> > field. intel_lpss_ltr_set() selects the larger scale for requests above
+> > 1023 us and ORs val >> 5 into the register without limiting its width.
+> > 
+> > For a request of 32768 us, the shifted value is 1024 and the latency
+> > value field becomes zero. A request of 100000 us leaves only 53 in the
+> > value field. Still larger requests can set bits outside both the value
+> > and scale fields. Thus a relaxed latency request can produce a much
+> > stricter tolerance and unnecessarily restrict power saving.
+> > 
+> > Clamp the shifted value to LPSS_PRIV_LTR_VALUE_MASK before combining it
+> > with LPSS_PRIV_LTR_SCALE_32US. This saturates oversized requests instead
+> > of wrapping the field, matching the Intel LTR handling in sdhci-pci.
+> > Negative values and PM_QOS_LATENCY_ANY retain their existing handling.
 > 
-> The PM QoS latency tolerance interface accepts non-negative s32 values,
-> but the LPSS active and idle LTR registers have only a ten-bit value
-> field. intel_lpss_ltr_set() selects the larger scale for requests above
-> 1023 us and ORs val >> 5 into the register without limiting its width.
+> Shouldn't we rather forbid to apply wrong values?
 > 
-> For a request of 32768 us, the shifted value is 1024 and the latency
-> value field becomes zero. A request of 100000 us leaves only 53 in the
-> value field. Still larger requests can set bits outside both the value
-> and scale fields. Thus a relaxed latency request can produce a much
-> stricter tolerance and unnecessarily restrict power saving.
+> > The supplied fix was reviewed and this commit message prepared with
+> > OpenCode AI assistance.
 > 
-> Clamp the shifted value to LPSS_PRIV_LTR_VALUE_MASK before combining it
-> with LPSS_PRIV_LTR_SCALE_32US. This saturates oversized requests instead
-> of wrapping the field, matching the Intel LTR handling in sdhci-pci.
-> Negative values and PM_QOS_LATENCY_ANY retain their existing handling.
-
-Shouldn't we rather forbid to apply wrong values?
-
-> The supplied fix was reviewed and this commit message prepared with
-> OpenCode AI assistance.
-
-This paragraph should go after '---' line below.
-
-> Fixes: 4b45efe85263 ("mfd: Add support for Intel Sunrisepoint LPSS devices")
-> Signed-off-by: Xu Rao <raoxu@uniontech.com>
-> Cc: stable@vger.kernel.org
-> ---
+> This paragraph should go after '---' line below.
 
 ...
 
->  		if (val > LPSS_PRIV_LTR_VALUE_MASK)
-> -			ltr |= LPSS_PRIV_LTR_SCALE_32US | val >> 5;
-> +			ltr |= LPSS_PRIV_LTR_SCALE_32US |
-> +			       min_t(u32, val >> 5, LPSS_PRIV_LTR_VALUE_MASK);
+> > Fixes: 4b45efe85263 ("mfd: Add support for Intel Sunrisepoint LPSS devices")
+> > Signed-off-by: Xu Rao <raoxu@uniontech.com>
+> > Cc: stable@vger.kernel.org
 
-No min_t() in a new code. You mentioned clamping, use clamp(),
-it's exactly for that.
+Ah, and it's not a fix, it's just improving user experience. The interface even
+not a sysfs one IIRC.
 
->  		else
->  			ltr |= LPSS_PRIV_LTR_SCALE_1US | val;
+> > ---
+
+...
+
+> >  		if (val > LPSS_PRIV_LTR_VALUE_MASK)
+> > -			ltr |= LPSS_PRIV_LTR_SCALE_32US | val >> 5;
+> > +			ltr |= LPSS_PRIV_LTR_SCALE_32US |
+> > +			       min_t(u32, val >> 5, LPSS_PRIV_LTR_VALUE_MASK);
+> 
+> No min_t() in a new code. You mentioned clamping, use clamp(),
+> it's exactly for that.
+> 
+> >  		else
+> >  			ltr |= LPSS_PRIV_LTR_SCALE_1US | val;
 
 -- 
 With Best Regards,
