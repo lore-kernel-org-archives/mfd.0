@@ -1,69 +1,78 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.8
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794338482;
-	b=cw+jYCPruWiszXt21PiiYJLuZhi4lBdFN/DR+J0zr4m6rVia6yRYJ2rbk9guauK4qCvO
-	 26NtY3NS8F6KXMvinOMf0zTXtDeE+v8d+bu3+FhAag9dWkAIrYBFnTD+5gSb463AybHxp
-	 OmWKLAx1i8JUsxCkLOyhsdPJTZ2EjnzVUqAwss93q8HixpHbatc2aN99TN50493pisicR
-	 AvkptwRRJFp3RrYJVB3xygXtde2caukPg+Yy/BTWAd71NRXFVg0GF9pqOMYevIivE9xDY
-	 dda9tWZ5XUr6HbDyFwSNt1OBJ6t5RaVlwSaA2D3J49fyumzfvons3UIV8BRihYBoNIw==
+	t=1794344563;
+	b=iuvsKsUhZWG/OCR/U9Ocrs4CxJer/W94Olk5c2RuqkgiAHTNxxyHRIyOzpIHxusyCJaL
+	 8bDyLyX6m6NBqw8thAxIQn4lEcNYamfRx+2eMFRlB0ts1QRBb2ZrXcaSyrJMjtHwjAbPj
+	 VT+Ipj00tp8EOP29xtxAqeZbZVsKiUTTLDWpqYx+JMQVjR47Q60Upwl2r7MgHWneFjEEY
+	 EibrSn+0KpCGa+iIRIyip36y0H9l9rrm6NS4dWSuKtqtKTHsU3EXE4ipFmE1kQsY6x45x
+	 TYOevwjX5YSlwPNcWBdapvJBeimoSX+XfLmPPp88RG7kbMoROK1KPlocj6cJlY/FjyQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794338482;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=ipzqKLT3bXDi2K7TgqyUFEqF9jz2ws5uKIrfihQAYNk=;
-	b=N/zkhXHf+CL/gC6NjBuG9FJcoq7oRmvtJPHYV2JJFKtAOk2Qu3BEGo9mdUW4oujt94xg
-	 ofnMbgIX2Js2aw/4a81PllrWNADzJomhmWNFId7F/6tkfJHKc5GO2x+BMaETyFWX9+pJ8
-	 48DfbTppwxSFQ2fjvW/rF+ba9oDZA8/sYjUYb1jRaCjPtVOFg5qSnFB7YT1+bfrZJ7U7x
-	 oKCZBSQ8IR808rznNQiULkFg6Q+iQal3OcLYYb9kmHGDjDhKWWPwNFViF7nqO3rYeVd7R
-	 eeQgd7iMjpu5Q8r2DIVKz5Gv0/2U8dipqxKKy7k+LvT34+JM10K0wmOzz1UXaXs2Gzg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794344563;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:Organization;
+	bh=hpKPnv6LQCf20/ZkdM8jFTGSWfWUSzTRAK+io33NZfg=;
+	b=tV/0EbQ8C4IFkfmbHd3A8oQfnn9w42oKgHsSM31jDSFnt3S+EO/EMUgN00OA6GNFkr4K
+	 ayHb+2MUurKe0m6rObMcid3b6aVu1MXry4f4C2Uiq2lz7kXDJbTzCku1YpdJ6CRg/L/6A
+	 HFEHDl6coQ7lQqJzr41BEBCTuL3aXgHZn2QZ1LepdySHeuF+RuVsXsOLSbUsLmRRPD9J3
+	 TW+pMubXjfdqco+aHe2258FyhDxxxG3fUMwbPAYlTwUmy89joD851KM2D+Y3OLnCSaPw3
+	 O6v7qoCSgXIbSlJVGaQxi2/zvXt2WqiCIQQEgbTv7ILXAukCWw/aBj18ccjKkI39RTQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=O4asWOrs;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=intel.com;
+	spf=pass smtp.mailfrom=intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=WzGIh2AN;
+	arc=none smtp.remote-ip=192.198.163.8
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C8D4606A321;
-	Tue, 10 Nov 2026 19:21:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5AB14606A325;
+	Tue, 10 Nov 2026 21:02:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5AB14606A325
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=O4asWOrs
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BFE2B1F0089F;
-	Tue, 10 Nov 2026 19:21:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794338482;
-	bh=ipzqKLT3bXDi2K7TgqyUFEqF9jz2ws5uKIrfihQAYNk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=O4asWOrs71kDKItINGDb69h2cMmmBPIkNpLScXxYL4gTaOpKcEQ/NOh7yWfQs2rPE
-	 Cxe7qVk8qEbQ7lfNgVKV0XvK8C2+I4BCEBvN9XW0Sl/LAOlEF/oIi8MKfj0sMWKqpr
-	 SSHU+stYcG0oZsMYltgD/62bMY/tBDvLFNbG8TGi6IhCItvCezXvbNdrR4fEuWB+d/
-	 6Sar5gZwF0wUpqSFHhyEeh338JDAGrGYyQbaGfMw2to73AnPqYLdaabSI7+fkv5BO2
-	 DGYTmgRTV7qehodBAIrxZUdBR+zXvRfVUSozs52LLuK00P+l8utTtqSaIsRBEMowYu
-	 CLPhjgoKZWF6A==
-Date: Tue, 10 Nov 2026 13:21:18 -0600
-From: Rob Herring <robh@kernel.org>
-To: Vasilij Strassheim <v.strassheim@linutronix.de>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Andrew Lunn <andrew@lunn.ch>,
-	Vladimir Oltean <olteanv@gmail.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Simon Horman <horms@kernel.org>,
-	Russell King <linux@armlinux.org.uk>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	Heiner Kallweit <hkallweit1@gmail.com>,
-	Eric Dumazet <edumazet@kernel.org>, Lee Jones <lee@kernel.org>,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	netdev@vger.kernel.org, mfd@lists.linux.dev,
-	Martin Kaistra <martin.kaistra@linutronix.de>,
-	Benedikt Spranger <b.spranger@linutronix.de>
-Subject: Re: [PATCH net-next v4 4/8] dt-bindings: mfd: Add SoC-e SWIP parent
-Message-ID: <20261110192118.GA1412882-robh@kernel.org>
-References: <20261105-devel-vstrassheim-soce-dsa-ml-v4-0-02f3cde2afa1@linutronix.de>
- <20261105-devel-vstrassheim-soce-dsa-ml-v4-4-02f3cde2afa1@linutronix.de>
- <20261106-judicious-penguin-of-enhancement-b28c8b@quoll>
- <f5c7c9901aca84f0b814e5b6c153db84af826dd7.camel@linutronix.de>
- <cc35b2127b04772f05948ac51c8faa5ef07da0b0.camel@linutronix.de>
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=WzGIh2AN
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1794344563; x=1825880563;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=63+0yrmJwzlPZjE6WYIeaX8J9iDrfSQT6kKOvmN1rCI=;
+  b=WzGIh2ANPuLt0Scv5LqbZRwbLXECnYcWyrAJ9DwOEhtbN8hsNjRJi1p1
+   q4MfIHetFght8zssiF4mC7KNEYJGr+Jk2FyJmttf7k6i9woMX5Kczvn3L
+   4b32OjU+nY5NbB3rK9LygiURAXK9omk9rSObxw4Oy/saA95HZ/12ZbVg3
+   7BuJfEtTgjOsVLLsmfzEcba8e7b87/cHpR+jxOSbyfK4MU4f7qLWat0Mu
+   GDEAgmAVq6denWVVRfi1ZCWno5wNCqemmN8B4IWC6hkwfYaNENhCjRwxR
+   hXngC1zUKVmPIrgD5xuN3u1HQ4MqUg5jS7tRtYTiOzDhw1D9wqkgCEyam
+   Q==;
+X-CSE-ConnectionGUID: eEE0Ia2iQ3CTaF9AiBS5zg==
+X-CSE-MsgGUID: 4djkMdHuSG+hSizQUVfIEA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11962"; a="2996547"
+X-IronPort-AV: E=Sophos;i="6.27,206,1787036400"; 
+   d="scan'208";a="2996547"
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Nov 2026 13:02:42 -0800
+X-CSE-ConnectionGUID: CU/3jIPSSwCRObP1Fv88Wg==
+X-CSE-MsgGUID: hOiKvxcgTryr9vIsbA7O6A==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,206,1787036400"; 
+   d="scan'208";a="8578905"
+Received: from hrotuna-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.245.78])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Nov 2026 13:02:38 -0800
+Date: Tue, 10 Nov 2026 23:02:36 +0200
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: lee@kernel.org, maz@kernel.org, andy@kernel.org, jic23@kernel.org,
+	dmitry.torokhov@gmail.com, linux-input@vger.kernel.org,
+	mfd@lists.linux.dev, linux-iio@vger.kernel.org, robh@kernel.org,
+	krzk+dt@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org,
+	imx@lists.linux.dev, stable@vger.kernel.org
+Subject: Re: [PATCH v2 2/2] mfd: mxs-lradc: Pass parent IRQs to child drivers
+Message-ID: <avOGbAYDCQyuzd6Q@ashevche-desk.local>
+References: <20261110141934.42490-1-festevam@gmail.com>
+ <20261110141934.42490-2-festevam@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -75,100 +84,67 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <cc35b2127b04772f05948ac51c8faa5ef07da0b0.camel@linutronix.de>
+In-Reply-To: <20261110141934.42490-2-festevam@gmail.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On Tue, Nov 10, 2026 at 05:10:15PM +0100, Vasilij Strassheim wrote:
-> On Fri, 2026-11-06 at 22:51 +0100, Vasilij Strassheim wrote:
-> > On Fri, 2026-11-06 at 12:13 +0100, Krzysztof Kozlowski wrote:
-> > > On Thu, Nov 05, 2026 at 03:16:48PM +0100, Vasilij Strassheim wrote:
-> > > > Add a binding for the SoC-e SWIP multifunction FPGA IP core.
-> > > > 
-> > > > Describe the shared MMIO address space and address translation for
-> > > > the required Ethernet switch child and the optional integrated MDIO
-> > > > controller and MMIO-controlled MDIO multiplexer.
-> > > > 
-> > > > Signed-off-by: Vasilij Strassheim <v.strassheim@linutronix.de>
-> > > > ---
-> > > >  .../devicetree/bindings/mfd/soce,swip.yaml         | 137 +++++++++++++++++++++
-> > > >  1 file changed, 137 insertions(+)
-> > > > 
-> > > > diff --git a/Documentation/devicetree/bindings/mfd/soce,swip.yaml b/Documentation/devicetree/bindings/mfd/soce,swip.yaml
-> > > > new file mode 100644
-> > > > index 000000000000..625be299e262
-> > > > --- /dev/null
-> > > > +++ b/Documentation/devicetree/bindings/mfd/soce,swip.yaml
-> > > > @@ -0,0 +1,137 @@
-> > > > +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> > > > +%YAML 1.2
-> > > > +---
-> > > > +$id: http://devicetree.org/schemas/mfd/soce,swip.yaml#
-> > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > > +
-> > > > +title: SoC-e SWIP multifunction Ethernet switch FPGA IP core
-> > > > +
-> > > > +maintainers:
-> > > > +  - Vasilij Strassheim <v.strassheim@linutronix.de>
-> > > > +
-> > > > +description:
-> > > > +  SoC-e Switch IP (SWIP) cores integrate Ethernet switching logic, an
-> > > > +  MDIO controller, and an MDIO bus multiplexer in one memory-mapped device.
-> > > > +  The MDIO bus multiplexer is wired to the integrated MDIO controller.
-> > > > +
-> > > > +properties:
-> > > > +  compatible:
-> > > > +    const: soce,swip
-> > > > +
-> > > > +  reg:
-> > > > +    maxItems: 1
-> > > > +
-> > > > +  '#address-cells':
-> > > > +    const: 1
-> > > > +
-> > > > +  '#size-cells':
-> > > > +    const: 1
-> > > > +
-> > > > +  ranges: true
-> > > > +
-> > > > +  mdio@204:
-> > > > +    $ref: /schemas/net/soce,swip-mdio.yaml#
-> > > > +    unevaluatedProperties: false
-> > > > +
-> > > > +  mdio-mux@202:
-> > > > +    $ref: /schemas/net/mdio-mux-mmioreg.yaml#
-> > > > +    unevaluatedProperties: false
-
-Given the MDIO bus and mux registers are adjacent, I don't know that 
-putting the mux into its own node and driver really buys you anything. 
-Can't your MDIO driver handle the muxing directly? mdio-mux-mmioreg was 
-created for when you have mux registers in some completely unrelated 
-block.
-
-> > > > +
-> > > > +  ethernet-switch:
-> > > 
-> > > Why are you mixing children with and without bus addresses? This is
-> > > discouraged and shows that device is not correctly represented, e.g. if
-> > > the ethernet-switch does not have resources, then THIS device is the
-> > > ethernet switch.
-> > > 
-> > 
-> > There is no hardware reason for leaving the switch child unaddressed.
-> > Just an error that occurred while converting the binding to the MFD
-> > model.
-> > I will describe the switch function as an ethernet-switch@0 child node
-> > with a reg property for it's register resources, like the ocelot MFD
-> > binding.
+On Tue, Nov 10, 2026 at 11:19:34AM -0300, Fabio Estevam wrote:
+> The MFD driver stores raw DT interrupt indices in IRQ resources but
+> registers its child devices without an IRQ domain or IRQ base. The child
+> drivers consequently receive the indices as if they were mapped Linux
+> IRQ numbers. IRQ index 0 triggers the platform_get_irq_byname() warning:
 > 
-> It looks like I need a different name for the MFD parent to avoid a
-> naming collision with the ethernet-switch@0 child. I checked other
-> bindings but could not find a suitable example.
+>   0 is an invalid IRQ number
 > 
-> I would appreciate any suggestions for a suitable name for the parent
-> node representing the FPGA IP core. It mainly acts as a container for
-> its child devices. I am considering "bus", "ip-core" or "shell".
+> The children then try to recover the indices from their resources and
+> map them against the parent OF node. Besides duplicating IRQ names in
+> the parent and children, this relies on invalid platform IRQ resources
+> and fails when IRQ 0 is rejected.
+> 
+> Resolve the interrupts with platform_get_irq() in the MFD parent and
+> store the mapped IRQs in the shared LRADC data. Drop the child IRQ
+> resources and duplicated name arrays, and have both child drivers
+> request the mapped IRQs directly. Use the MFD memory base support to
+> translate a single relative memory resource shared by both cells.
+> 
+> Tested on an i.MX28 EVK. The mxs-lradc-ts driver probes successfully,
+> touch events are reported, and the touch-detect and LRADC channel 7
+> interrupt counters increase as expected.
+> 
+> Cc: stable@vger.kernel.org
+> Suggested-by: Lee Jones <lee@kernel.org>
+> Closes: https://lore.kernel.org/linux-input/CAOMZO5CgTzo6GuXptD4mFTN=UsJJqpkixDW1Q64gqZGrij8+uQ@mail.gmail.com/
 
-Krzysztof's point was combine the child and parent nodes into the 
-parent. This is not really an MFD. Almost every ethernet MAC has an MDIO 
-controller in it and none of those bindings are MFDs.
+He-he, this rings a bell! I have still a copy of the mbox of this thread
+locally to maybe (likely never) look into that. So, I am so glad to see this
+being eventually addressed!
 
-Rob
+> Fixes: a85a6c86c25b ("driver core: platform: Clarify that IRQ 0 is invalid")
+> Signed-off-by: Fabio Estevam <festevam@gmail.com>
+
+...
+
+>  	struct device_node *node = dev->parent->of_node;
+>  	struct mxs_lradc *lradc = dev_get_drvdata(dev->parent);
+>  	struct mxs_lradc_ts *ts;
+> -	int ret, irq, virq, i;
+> +	int ret, i;
+>  	u32 ts_wires = 0, adapt;
+
+Can we, while at it, kinda follow the reversed xmas tree order here?
+
+...
+
+> -	lradc->soc = (kernel_ulong_t)device_get_match_data(&pdev->dev);
+> +	data = device_get_match_data(dev);
+
+Is this driver affected by driver_override case? If so, this has to be checked
+against NULL and return -ENODATA.
+
+> +	lradc->soc = data->soc;
+
+-- 
+With Best Regards,
+Andy Shevchenko
+
+
