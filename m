@@ -1,47 +1,102 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.173
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794313533;
-	b=myf9LpHz78mn06VUM9GfX++RTHklBJALeY+7/sTq/6p4lS3Q957p9hoLDycQUr9tc2m9
-	 LbVFytoxvhVvSfKTEdui8X7bjSh/TrEAqXzGeve6OB4L5R8SAGi8ghyYZJfFuL/PxuT0F
-	 5gv3+LgPKA2zibZ4ckqt4Ehjv9diNc4Uxm+UhMMidZHibgP5ilTOIPQESCtdW6+27q3kE
-	 7VEpRQBeA7+DzZj/ThtSgpJZhWv2TR0Gj7fH3I9NLBchdi/W1yin8YUmrRMqOSWnb9Xc4
-	 RWedDtYIf/NzkwtLwaFoNk6+u5bgvstQOQuk7qg1oAl4Y9ZP5faZ3ByoiW7OJjcsKBQ==
+	t=1794320434;
+	b=j8syIe2xMl67fgUXWbtr2XBvV/esj9aSOb/+jcnhP2INsQpG2J1XwhVMCtyH9kS9gZiE
+	 DUunUffFK+5OnohSu0To52tZTOA4m5IBQG8p/5BmXA8/KqBDYEhwyvhTcgNu5g4HDW/f8
+	 6HiMUODO2HEa2DEMFO8Q23GZIXuJtVV6ZF0UpwOw4RZIYFn4yICF2uK9hPNsE/YycyXv6
+	 iqMKmdt74v+BIcxNp/hZ490XkhL+zF0lqf0P0c9qxZmgOrHxIGzAIoXoi3yYFupzkjB6t
+	 tLkMXsHbouRPZewipeykPKyJu+0LzH+koO/Mq39izHsYvTq/h7rOuj7jWmr7ToPg8hg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794313533;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:From:
-	 Subject:To:Cc:References:Content-Language:In-Reply-To:Content-Type:
+	a=rsa-sha256; c=relaxed/relaxed; t=1794320434;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=o8vOqPjQp+qIgT4SjBM1vuuP9NkLzsqzq4almCwh0ns=;
-	b=oFQ1RvRXS406PJsCj+QZ3nmxN4FQMJSwNxDmPp6y0MI4P1A5rNsJpOXT7zMx1yhYn1aW
-	 Ci3fTwyfSCCcjN+Ib0ST0u4abDM9kFBhWClJP9SipalzSk5A4awWWuN7lSY3tKe0M7lR0
-	 lCmQCCHc1ZiijrSbRRx8ph3E/tCsQd9NTnKuIuqMZ/rJifKpCus2ssalM55pkKz2k5pfZ
-	 uZFaEt4ZE3VcWZP/K76qrRY1b5QDNC90wsSWaMCo4F5Tr5q+ymQQ+aI6waPkb+wOeHxaJ
-	 Hte7eSR3a3y/++xAGCiYdTr2mYxDhyRQh6JRw8xK3vw6YIGSfCDJG2cCI2AJVW/+29A==
+	bh=pjjNjXW/DLhm8uTgpvdp1RvacwHSWzmRlnWHV9BPT4E=;
+	b=pHpb3bB3voaHodov/Is36Zo4+adMq4Lv3mdlBLwcrPUr6GiN7qiXa3M7znUc7tfZVLSq
+	 K5Pm0d9EQY3BtK0ZhGYwYpXps/Q8CKO9pH8otV84gvcF1/1j+uIuDzS6uWhRw0sJDGLDZ
+	 U43GwukjP4X/56Fsv694Y019JmRDWHVoFzf11Y6pQd6OhlW2IJUv/H42eXegcjoNt73Ls
+	 xHbuUrikIXVpevWOLd0qV3dRhq7WZAC0Slu0iIRlH+q0cc4cH2TGUS3ZSPEvEGehCCsLc
+	 gBtVW0W5zm8ArtjJiAma8zQmtvW6YA2x0U58SHwz0yuNMZRZTLfd1moU5qAU64HeZqg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Gr5nohgX;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=b4MQQpab;
+	arc=none smtp.remote-ip=209.85.128.173
+Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF9AC606A32A;
-	Tue, 10 Nov 2026 12:25:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B808606A32E
+	for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 14:20:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3B808606A32E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Gr5nohgX
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D2A651F008A2;
-	Tue, 10 Nov 2026 12:25:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794313532;
-	bh=o8vOqPjQp+qIgT4SjBM1vuuP9NkLzsqzq4almCwh0ns=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To;
-	b=Gr5nohgXHm1YYyj6tvLEZ2lSM8AwTngl7Y9YhcAEKBH+Qk95txebAZ9NtKzrDhbMu
-	 /kcVhI4wBuCa61a001FzAROnBPqNtiO/ytzlzOWo7XJ5chQlrrTZ0jAur7hkGa2Dea
-	 9e8VcncC+5ovHWHZPm9Udas/YhDeQJz+/Hw/DgiFOKQphYC3tCbIwtuUfnQDwnkr0A
-	 NlkNf0d03csKo9TcHJmIS39u4zkv/CzH2xeQIMrUlC8N+o3OuHRReJJo3cYKVKlsnW
-	 Ok7Bxat5Tx0PnCcbiQSm1rkYigOOsx53IhuLC4CVONUmhMnelBCuvRRROviPHPq5B4
-	 hzmGl2iyPjB0A==
-Message-ID: <69a3552e-1fca-49e9-a9c0-66963319d2a9@kernel.org>
-Date: Tue, 10 Nov 2026 13:25:23 +0100
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=b4MQQpab
+Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-8b349d21fd1so15316647b3.2
+        for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 06:20:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794320433; x=1794925233; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=pjjNjXW/DLhm8uTgpvdp1RvacwHSWzmRlnWHV9BPT4E=;
+        b=b4MQQpabUKKdGQXLDA7uzDi1TYVdR7fE8sefQ13yq6p0bh7dx7HPIkfwpmQaMUTFXS
+         /rDtPFWgWxvoPocs62TD4zVUB1wW2uDOGnViz8VG19XsSI2MtgyJJwHoSw8PKSGHGRGv
+         Cb+0VJD7kwgoEp5ZefrXOQX6aG8Ttnm62fRxt4CEFH3oP1pvjNoFC+k/edFucactK1o7
+         aYKle+ODlO2roaDkH9haNO5pszdEdM52n2erYqh95JEoZP/Qtmk0ZSzBel3hVfkKlE+W
+         owv0WfI+KMk19hSE25eJBRiuJvdwAPMWwvX4jGeVSL5Ti+uZaPKVGY6DOs7VJHQeJZdj
+         JhJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794320433; x=1794925233;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=pjjNjXW/DLhm8uTgpvdp1RvacwHSWzmRlnWHV9BPT4E=;
+        b=DjZXAJ4QTDbwE3dcphTQvEwuOG1yiWP9HRG6caWo8OZsxFBFx8FkpbCyz8rRuPMmd3
+         HoF2XiNLBsV/LYbnjIG0/lK4lH9ZSFSTFHukJSBkIX17fFDW2NgTp77wMUC+F60ZweXq
+         EOs7krcEBmDP+4jgMQz5lKYc2pxktYpzFO4l+Cy4In4hAu0m9gsekVrJc6bB5gjnbdNz
+         pyXBRJH/rbUPmyblM0ScITqOxV0CzIMyxzGtMgHBTWHoIhZiQeS55rEAxQvaYaYrjIDe
+         5tZEUZAbDFc+2Ob9wweetUtzQee+KQshz6beK9Pk8jKdqpkaC0A/RI+hUbT6f8dVwueL
+         xQXw==
+X-Forwarded-Encrypted: i=1; AL+hErH8dY50RhtHphDq9iJAbRCXNqW3NFbJnkSQ+Bz46T8NLbFZnfpoLIwqloeY7U3OuutjqVY=@lists.linux.dev
+X-Gm-Message-State: APuU4Z9PZnRcU6FRvvxEab18fqIIOfnrxggwvB2JybbUEwEAicIt4eBY
+	KAoZL8NTzWaioS7ZJcc7lqYGrlgntHcIiOVd3PsqRd/OuZzErw6rm0ft
+X-Gm-Gg: AYBFou3T/A+H1RK4xRVVk1yDqWeraEsplfTJXW52aqszNjYxmRsYt9184vEWcMikuRt
+	vzoVwluT38fTwylRuOMQPMGdehjxhAdEI3geD04CdT2zUJMOP0b3eB5XQ2q3qk1lWfzFbIw8p6Y
+	yOZATLzCEo7NLFfQvAULPKIULn/xOc6zrPggJp+msocMLoZPzuulOrCz7rkFro1YYOxU2BstAyh
+	wDpDB9aCvzfDG+5zICJJWZsDEsG0ZFmAnecw7MGSxft94DJLZo0KiPrnmpWvgKjDSezgMwHncQO
+	TN8dzYkXOxCgbpNUa8xba3CHYO7xNXQlbpNU+lc2iY5ZDeEBWN1wuPDMkoZb+OwMMg5HeJX9nu+
+	QLklBYpWetbhlk05YiYC4CvblmUjELajwkuZmxsZZOv+BJU+9m5nFAGkQ0TRTq+zhZsaZpdF/0M
+	xKgukQYDP4akDzecRcsUmismQ3rCPh1UGdfzaG04zArAmJjBRpUlpKBwVVFJsSLsk+gqxjUx2k9
+	kH7RlX8tMj0wy+e3riN4esB7UF9Jpmeg7EPJXJFZYheeN50kgny98bLVCeXmN4cV8ObWuhFVn6v
+	urp5LyZ/QZEPL2a6ieoag9hqZUU6tPCAmAdgGj9kMNO1eCzt2VHVXbqavj+vLXtc3y1DvpizOrj
+	zm1atbR1J6HSI0Q7LrchbRFU=
+X-Received: by 2002:a05:690c:c4e5:b0:8b0:4f12:d28a with SMTP id 00721157ae682-8b392c0b62dmr12596647b3.65.1794320432935;
+        Tue, 10 Nov 2026 06:20:32 -0800 (PST)
+Received: from fabio-X870-EAGLE-WIFI7.tail2bb604.ts.net ([2804:1b3:a802:b7f6:2185:e89b:b285:6098])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67c589a229csm1863712d50.5.2026.11.10.06.20.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 10 Nov 2026 06:20:32 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: lee@kernel.org
+Cc: maz@kernel.org,
+	andy@kernel.org,
+	jic23@kernel.org,
+	dmitry.torokhov@gmail.com,
+	linux-input@vger.kernel.org,
+	mfd@lists.linux.dev,
+	linux-iio@vger.kernel.org,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	devicetree@vger.kernel.org,
+	imx@lists.linux.dev,
+	Fabio Estevam <festevam@gmail.com>
+Subject: [PATCH v2 1/2] dt-bindings: mfd: mxs-lradc: Fix interrupt order
+Date: Tue, 10 Nov 2026 11:19:33 -0300
+Message-ID: <20261110141934.42490-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.43.0
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -51,89 +106,73 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Hans Verkuil <hverkuil+cisco@kernel.org>
-Subject: Re: [PATCH 03/14] mfd: remove unused si476x driver
-To: Arnd Bergmann <arnd@kernel.org>, Lee Jones <lee@kernel.org>,
- mfd@lists.linux.dev
-Cc: linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- Arnd Bergmann <arnd@arndb.de>, Daniel Thompson <danielt@kernel.org>,
- Jingoo Han <jingoohan1@gmail.com>, Mauro Carvalho Chehab
- <mchehab@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
- Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Guenter Roeck <linux@roeck-us.net>,
- Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>,
- Jonathan Cameron <jic23@kernel.org>,
- Dmitry Torokhov <dmitry.torokhov@gmail.com>, Pavel Machek
- <pavel@kernel.org>, Michael Hennerich <michael.hennerich@analog.com>,
- Support Opensource <support.opensource@diasemi.com>,
- Sebastian Reichel <sre@kernel.org>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>,
- Helge Deller <deller@gmx.de>, dri-devel@lists.freedesktop.org,
- linux-doc@vger.kernel.org, linux-media@vger.kernel.org,
- devicetree@vger.kernel.org, linux-hwmon@vger.kernel.org,
- patches@opensource.cirrus.com, linux-watchdog@vger.kernel.org,
- linux-gpio@vger.kernel.org, linux-iio@vger.kernel.org,
- linux-input@vger.kernel.org, linux-leds@vger.kernel.org,
- linux-pm@vger.kernel.org, linux-rtc@vger.kernel.org,
- linux-fbdev@vger.kernel.org, linux-sound@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, llvm@lists.linux.dev
-References: <20260909132153.1596191-1-arnd@kernel.org>
- <20260909132153.1596191-4-arnd@kernel.org>
-Content-Language: en-US, nl
-In-Reply-To: <20260909132153.1596191-4-arnd@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 09/09/2026 15:21, Arnd Bergmann wrote:
-> From: Arnd Bergmann <arnd@arndb.de>
-> 
-> The si476x driver was added in linux-3.9 without devicetree
-> support, and has always failed the probe function in the
-> absence of a si476x_platform_data definition.
-> 
-> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+The interrupt descriptions added during the conversion to YAML do not
+match the ICOLL source numbers used by the existing DTS files.
 
-For drivers/media/radio, include/media/drv-intf/si476x.h,
-Documentation/admin-guide/media and include/uapi/linux/v4l2-controls.h:
+For i.MX23, Table 5-1 of the reference manual maps source 36 to touch
+detection and sources 37 through 44 to channels 0 through 7. imx23.dtsi
+lists these sources in that order.
 
-Acked-by: Hans Verkuil <hverkuil+cisco@kernel.org>
+For i.MX28, Table 5-1 maps source 10 to touch detection, sources 14 and
+15 to the threshold interrupts, sources 16 through 23 to channels 0
+through 7, and sources 24 and 25 to buttons 0 and 1. imx28.dtsi also
+lists these sources in that order.
 
-Regards,
+Reorder the schema descriptions to match the hardware documentation and
+the existing DT ABI.
 
-	Hans
+Fixes: 009528b5aa13 ("dt-bindings: mfd: convert mxs-lradc bindings to json-schema")
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+---
+Changes since v1:
+- Newly introduced.
 
-> ---
->  .../admin-guide/media/radio-cardlist.rst      |    1 -
->  Documentation/admin-guide/media/si476x.rst    |  160 --
->  .../admin-guide/media/v4l-drivers.rst         |    1 -
->  drivers/media/radio/Kconfig                   |   17 -
->  drivers/media/radio/Makefile                  |    1 -
->  drivers/media/radio/radio-si476x.c            | 1523 ----------------
->  drivers/mfd/Kconfig                           |   13 -
->  drivers/mfd/Makefile                          |    3 -
->  drivers/mfd/si476x-cmd.c                      | 1543 -----------------
->  drivers/mfd/si476x-i2c.c                      |  861 ---------
->  drivers/mfd/si476x-prop.c                     |  233 ---
->  include/linux/mfd/si476x-core.h               |  532 ------
->  include/linux/mfd/si476x-platform.h           |  256 ---
->  include/linux/mfd/si476x-reports.h            |  154 --
->  include/media/drv-intf/si476x.h               |   28 -
->  include/uapi/linux/v4l2-controls.h            |    4 +-
->  sound/soc/codecs/Kconfig                      |    5 -
->  sound/soc/codecs/Makefile                     |    2 -
->  sound/soc/codecs/si476x.c                     |  263 ---
->  sound/soc/fsl/fsl-asoc-card.c                 |    8 -
->  20 files changed, 2 insertions(+), 5606 deletions(-)
->  delete mode 100644 Documentation/admin-guide/media/si476x.rst
->  delete mode 100644 drivers/media/radio/radio-si476x.c
->  delete mode 100644 drivers/mfd/si476x-cmd.c
->  delete mode 100644 drivers/mfd/si476x-i2c.c
->  delete mode 100644 drivers/mfd/si476x-prop.c
->  delete mode 100644 include/linux/mfd/si476x-core.h
->  delete mode 100644 include/linux/mfd/si476x-platform.h
->  delete mode 100644 include/linux/mfd/si476x-reports.h
->  delete mode 100644 include/media/drv-intf/si476x.h
->  delete mode 100644 sound/soc/codecs/si476x.c
-> 
+ Documentation/devicetree/bindings/mfd/mxs-lradc.yaml | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/Documentation/devicetree/bindings/mfd/mxs-lradc.yaml b/Documentation/devicetree/bindings/mfd/mxs-lradc.yaml
+index 782b2f4005a0..755029880677 100644
+--- a/Documentation/devicetree/bindings/mfd/mxs-lradc.yaml
++++ b/Documentation/devicetree/bindings/mfd/mxs-lradc.yaml
+@@ -87,13 +87,13 @@ then:
+   properties:
+     interrupts:
+       items:
++        - description: touchscreen
+         - description: channel 0
+         - description: channel 1
+         - description: channel 2
+         - description: channel 3
+         - description: channel 4
+         - description: channel 5
+-        - description: touchscreen
+         - description: channel 6
+         - description: channel 7
+     fsl,lradc-touchscreen-wires:
+@@ -102,6 +102,7 @@ else:
+   properties:
+     interrupts:
+       items:
++        - description: touchscreen
+         - description: threshold 0
+         - description: threshold 1
+         - description: channel 0
+@@ -110,11 +111,10 @@ else:
+         - description: channel 3
+         - description: channel 4
+         - description: channel 5
+-        - description: button 0
+-        - description: button 1
+-        - description: touchscreen
+         - description: channel 6
+         - description: channel 7
++        - description: button 0
++        - description: button 1
+ 
+ additionalProperties: false
+ 
+-- 
+2.43.0
+
