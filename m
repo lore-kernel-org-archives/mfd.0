@@ -1,91 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=52.103.1.10
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.208.54
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794260492;
-	b=cWBxH489E2KrDPFm5TuerBlGxEpJy7GwQHGbg7sHArtj1BBUiDVOT5RpBdD4Dux/B80u
-	 20fJaDgTMJ9NBnBlqcQw94XRZRDCrqPaXYVtGRX33g1uyGbpwO5bpVunTXSiqI2pX1bHV
-	 hckGt7PN3oB6o9XQxigZUnbJVD2gz88Xte71vV4dblrzSSY0jT0P5GPCIWqquTKQZfSEc
-	 5hPx+y4CxnBtDC/Z7aGZeo4o0wvIvjtKGeXsRsIPkXfcGftOL2ImzCFNr6zN5g6XZmdY6
-	 U747YNecH8vb2ThDZuEkiT87S4eMheUTtal6R42puC/ZsHJJd0U+y9rLXQ2B3872avg==
+	t=1794277973;
+	b=ZKxtJzREMVbTHTx3wMyxThzYl/z2viGbr80Iihq6XQgAxOcsJmY9nYbAFdeLcCw4j7pm
+	 3t4a5r1ts5bNuC1B0sSccFP72Kh5QFDP6N+Sv9ULM+sfazFyPMvYSTxxwfTd94JNHVDpF
+	 SPIQX7YeEc5mrWq3zw68xVmufwwKdDaLBTUlFEUisckUyCsDt2CI9SfKh9Mxk3LfRFixg
+	 6dhvoh9SQJrvUHoTwbytLZe0rZWsVfXofHF82Q571N1CmJHBcjXzD5oHZFH4XWQ3JGhOc
+	 XmDgiaqU8LhbjFCOachJ5nT3KLuRZwUHG8IP5AxHLfNNNxxSSWNR2u0VLTeRjpzHspw==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794260492;
-	h=DMARC-Filter:DKIM-Signature:Received:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:Content-Type:Content-Disposition:
-	 In-Reply-To:X-ClientProxiedBy:X-Microsoft-Original-Message-ID:
-	 MIME-Version:X-MS-Exchange-MessageSentRepresentingType:
-	 X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:
-	 X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
-	bh=edA9r5GtZc1qRrZdiEsmsjx/nFvHA9eHOxb9J8WzxgM=;
-	b=k753T4+lJLEgZaG6oysWor1fUZbbIDM6D8a6oOzP18FWTZQqfiDowH/n/V9c8rMzyiVI
-	 OxK0ZXw0JOJQMNc56n2PQibcOM9WtKgoe4xEQkE2eZlQH/8TlJy5KWPOlpBLeu0Tio9Fq
-	 MV1xMUGIPamJveOtsm1rZ8bHdPTPnRmePmi1dewCj+HYmZpmclbDyMkO2OqNiTe6ghzYp
-	 moxcT+67a1LTnu3/Qxenj7JEJofguWFt+OVaT4EQCcbJ0rNcOcCLeMMunaHQ18z+HxR7E
-	 tBUe1KiXVqt4aEi1CHruOUHVbZf0u7eomXPLkKmg7iz+Z53T580lrYvUf+Ypf8jKqbQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794277973;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 MIME-Version:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type;
+	bh=+UEXnv8sO59biXTVUGJWsxHSY+X/qyvekpO21DXG97s=;
+	b=gsLXrsh/Mm0gAf37Rkx0njPdXo/1dFMUkUyGjaF4h35clLVbfDKZRvPQ9m52pzPFAsvG
+	 kLab7obcRY28aeV4WIp3Cm6eQWD7uvCrRSbdfOEZyTZ9E1eQTfzH4ga6ozvb3t1wlpQvC
+	 b9qn4x24bu2WE2z+Mv6TRqaM2yEAXwzSLM1oCmXmtHHho4Rq5I3LTx9POLoA1Tlx7kLBs
+	 VmCKa+gspmpU3jFlGebPGbC48RmUpocARWE0fYam+/nnDZbPXVkr0Hv8zR2dh29L+X8P/
+	 gEynLXREwrDa15ciZSt+t3YetekHj7LQ6AIN5hQBDBG3pfUwh6eLg2lpfYnJ28N5Buw==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=hotmail.com;
-	spf=pass smtp.mailfrom=hotmail.com;
-	dkim=pass header.d=hotmail.com header.i=@hotmail.com header.a=rsa-sha256 header.s=selector1 header.b=nwUyxUU2;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=52.103.1.10
-Received: from BL2PR02CU003.outbound.protection.outlook.com (mail-eastusazolkn19011010.outbound.protection.outlook.com [52.103.1.10])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=RinYJ2xq;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.208.54
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6883F606A321
-	for <mfd@lists.linux.dev>; Mon,  9 Nov 2026 21:41:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6883F606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=hotmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=hotmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FFC3606A32A
+	for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 02:32:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5FFC3606A32A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=hotmail.com header.i=@hotmail.com header.a=rsa-sha256 header.s=selector1 header.b=nwUyxUU2
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CgByJDc4+xmuAHUhaMxPV/gINqKleI79wSLKTGCAbkCEoxCAlOaUmoTAP3kzkQMiRtKsdzimJLAN6ysUlXmMNjWwDzs/AMzveB48YqUnWOhLdOFKwNGuQV+RJxGLfqFfUA5U53t1hXXx1sZJKjPxE23YD0e3hErFWLFcELiQlrgzwxTsjqWn1nIe0NbnB8SBgbe/GGunXFLcX1lr+BWlNpYyYE4fIfpNUVvSHKuAmAGEYxGcjRncHi+lkHsfbCAN4uj2b/oplKFDN6Fu+btpHYQcyR3I66qincqt+r9Rfh6amq6EXQPEoQiknc6JFpQpRruIf3BLbqNs2IoNLEzQnA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=edA9r5GtZc1qRrZdiEsmsjx/nFvHA9eHOxb9J8WzxgM=;
- b=o4yNV03o4JiVntX43/mbTY9xFtCjPPSUABufddwNNPt4nZyxeMp6EHKJQFFOG9pI0X1e2ck4ilcwEW5s3IH8XXOM8TOIhdjaqXKZuewuKHW9CY7H+6J2I+T2UhVlBwXPn05og31k2MabpVNrfWDnSaLiQoOW49pPzlcHBkGaBtmmRll4o1DZf/i5NV1zg34mPjsMmTSv9hQ7SVIdLcpc3slqNuJox1Wi3g5exuOL/FVzVtdLZ6UCOkPUamwi/zP9b7Z5BvBFj0XhzPJIeddFqo5Pl9VJiQ1VLkInYi1eiAi0xYVHw/KUauOmic9+JaaQIZ37hDyzqoB2H08w0D54IA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=edA9r5GtZc1qRrZdiEsmsjx/nFvHA9eHOxb9J8WzxgM=;
- b=nwUyxUU2YXkC06+uY5XzEl2fRbJyeoLQcOVrf94ckjBG+Z6aYq3hiKXTFMN5z70mRuWjbK4dmX9nLhY68XkrK68Rz/1xpkVJHc0Sbx1YW+a+ObAo2yAzY/d0oYspycR4iVg7jXOajjZ8T/w0Cs/o3ztSp800s6SM1hyQGmmzCy/9A9Rfg3WylnFS1nb2yVcJNAUXlfsFAUPzNu1LbrDZyUR74Y4PNY+WxvM6ukCGv70/4qSt9ZXA1dnTdo95xSGT9daDBLllSOoO9zCuJyRBFmBrJnRzHFpi0mDZjDyODsS/u7coaqDqQUbQbxNEORrRPxUvhN8gPzlqQbYG4lB+5w==
-Received: from PH0PR19MB997338.namprd19.prod.outlook.com
- (2603:10b6:510:3b1::18) by IA1PR19MB8867.namprd19.prod.outlook.com
- (2603:10b6:208:598::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.9; Mon, 9 Nov 2026
- 21:41:30 +0000
-Received: from PH0PR19MB997338.namprd19.prod.outlook.com
- ([fe80::fd22:ee23:3e25:3172]) by PH0PR19MB997338.namprd19.prod.outlook.com
- ([fe80::fd22:ee23:3e25:3172%4]) with mapi id 15.21.0592.012; Mon, 9 Nov 2026
- 21:41:28 +0000
-Date: Mon, 9 Nov 2026 15:41:24 -0600
-From: Chris Morgan <macromorgan@hotmail.com>
-To: Chris Morgan <macroalpha82@gmail.com>
-Cc: linux-rockchip@lists.infradead.org, mfd@lists.linux.dev,
-	linux-pm@vger.kernel.org, maccraft123mc@gmail.com, heiko@sntech.de,
-	lee@kernel.org, sre@kernel.org
-Subject: Re: [PATCH V3 0/7] Fix Incorrect State of Charge for RK817
-Message-ID:
- <PH0PR19MB9973381C1FDF341BA0DDB422E5A5732@PH0PR19MB997338.namprd19.prod.outlook.com>
-References: <20261109145833.1363319-1-macroalpha82@gmail.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261109145833.1363319-1-macroalpha82@gmail.com>
-X-ClientProxiedBy: MN0PR04CA0017.namprd04.prod.outlook.com
- (2603:10b6:208:52d::10) To PH0PR19MB997338.namprd19.prod.outlook.com
- (2603:10b6:510:3b1::18)
-X-Microsoft-Original-Message-ID: <avI-BPUekgrVXFGV@wintermute.localhost.fail>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=RinYJ2xq
+Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-6b6e7a05225so2080178a12.0
+        for <mfd@lists.linux.dev>; Mon, 09 Nov 2026 18:32:53 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1794277972; cv=none;
+        d=google.com; s=arc-20260327;
+        b=H26MVPDwYp/40IqlniPky0VC/3bfK0xuJwOXxj/HaSu8HtSPZxTmwJSfQs/0OV9Gjk
+         LO2IWz/Cj7UEWyNNZtvjCA2nnOfMK3S1bYZeTH2Pn1X+m3WDsGq4uWSRUjSSIfvR1j7D
+         Lo0h8k5B6AfRO2y7/BKihD6aIdzUIWhkBYwFkA45lsAzD7KHEw9X6zKuwpU26RepcOus
+         QL3/qUxDK23wAtZ9RKG4zYETE6/oyiKgUYhLC8pvZ8M+EZCTm4Vwp76rLifRTEAQWCyp
+         ngniaouZDsMOSBW/Sql+ihjoxE3eKiqdScze3z7C0kOvKQWzVs1ohVshCCJvscxOqzgh
+         ccEw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=+UEXnv8sO59biXTVUGJWsxHSY+X/qyvekpO21DXG97s=;
+        fh=hPin4gYrlaR6VU7Eg4AStrjzkyKXYAJcvsu8MLkUYdQ=;
+        b=RUyyTDUj28qNaSDt9QIXveMXAQpBdalV6TW6COfdORUUq/XqRZEepYnzgnCXh/Tzid
+         svxbvOytuQNUqonRg4fREckzem5v0VJYVzBELAoB0TrPGFRE6yFY92QNy6hIH4Q/KRiN
+         2aXyktvMLimzG6JomTOTn9lPmu3bgIFmMWmlPCdUiARIJ7V1fy6X3j5PefPiPo9YBrO/
+         0swSuOnffUozyhIzwNM12Df6ZqkboH1BINZAdMAtongALm5XHj9eHEefmxzq+9LBc2eX
+         tSuJzwbRsOXl2+tCpIsEGoil+TdDLNXUKsSSrl2bY/qiry2b5gW5f+JNu9gw5WOAFapM
+         Roxg==;
+        darn=lists.linux.dev
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794277972; x=1794882772; darn=lists.linux.dev;
+        h=content-type:cc:to:subject:message-id:date:from:mime-version:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=+UEXnv8sO59biXTVUGJWsxHSY+X/qyvekpO21DXG97s=;
+        b=RinYJ2xqo6R+z2KzL69Nc07wr9o1LvLWPH0n1//+wtSM4Y2l+g7h/NNaQmRRDmDsuo
+         KFAEcJdZxHpLcpgP7vz/HhqMypNF/S3wPJb844LC28Bz3ZkjbiRYa2McfE51zyO8OhUC
+         huD/OemwzF1SW4mvmr2GCCOHunPwnS0AcBIy77Gq6/t/bvI8FQMDQ/4Pd6xk7pK8DH9w
+         jPXZVJvuGgfgNLtUAMTdjSlFcXgqYLE+0N+OC68AsS5fojM+YfP2gyu+6+Gn8K3YvA0M
+         IicfCBFkj6aDq/pD2m9N3fUJNh8Uw03LKau4h3m//VrcRLn+zT2+tQ1K/ZBuB3DXjAIK
+         f8Rg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794277972; x=1794882772;
+        h=content-type:cc:to:subject:message-id:date:from:mime-version
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=+UEXnv8sO59biXTVUGJWsxHSY+X/qyvekpO21DXG97s=;
+        b=hTZgucfq3vZsSSaNW4vxRUJzpAglIjIRdf+XJsvTkZtuUpWPW6BWZ9LbcCn2ZxgWb2
+         0Y8lchDI8zJJ7SvvvBYdiMa+kLk11w2xzcq3a2flfGg8+1lEXsz9nPlB22Ma/L9UFiZR
+         O1NdIcIftlvF7H3giCUKqGio/ByGSYHg9WEvOvWgJZxv8JLuFIFdkK+4OIcpXBVQHErr
+         9AM+cb1xfDSZxiU76i8u+xcb5utVOtOFouSWY47aJWRffVBVphQuBgMIxlr/vyRrT9fc
+         rPxeq6/ZZRBEQpfbX6GdT2UKgWjvkltfXR/4K7C4I+V8/1Ar1+N0ACa2VvgApzFMT3Gg
+         iZmw==
+X-Forwarded-Encrypted: i=1; AL+hErFCD4uxFOHvcxttaVT/CDHSGWfjSVDIRvuFeA3CbLUVneAJqauYHQZgfzYVPvvGcveq0GQ=@lists.linux.dev
+X-Gm-Message-State: APuU4Z9Y0RIMVabpgdJgUkH1RfhSinPO/pZEjxUFk52bpsb+5LhGeaqw
+	aPiI88CPsvmVlKo4uNo5/QjTqtOoYQ3+lRXzgMdSJs/6OuusXcjxTG7/akGmVGalZ/YBp/RoASp
+	mfWCTni2jk30vtxTuWzgPznRthKQkTw==
+X-Gm-Gg: AYBFou3tgG+fK82vhf/sypPsIy1bi3yedszASXO2x/H0V0GcYMvGg0+KuV6NramI7Tg
+	a1DM4eqndp1aQHrRAVf7xMczgRpKhwJd77aSAMlB24J7bLHUhLGCxAX7+HEdlAFWiLZe4va4S8J
+	ul6EFWjsKxe/Y5QbMh5CFFj4HvXE+RaA40oSh39TqtLzGtvmoMRAKzXu/v4PxsyhlAshH0U4ahi
+	IHH0YY0NF72rON1zFzoOmWiKwopJPPAQE1Jt/yQi9E0BBUid1r34tECc9AhFyxx3cEiHtWzhzVT
+	QOC4E5gb7AC9naSdM5JzJ54VLkyUmjbRAbZvAupUxHEbvMmYap2vurmK4X7/6isjT7hxQYCA6TT
+	ljQg7A3BPJfnB/lkgQBbnHEdB/ZibIi+WAGuyYWvxxXP9Z2UdYRRsjN5VG2LwmLzoIJoozYXQIm
+	oQL3i7+QES+lGfxFLY9gqYGy+KF248QsG8IF2K3z7speBh
+X-Received: by 2002:a05:6402:a507:10b0:6b1:8818:1090 with SMTP id
+ 4fb4d7f45d1cf-6b7568dc1e7mr684976a12.22.1794277971764; Mon, 09 Nov 2026
+ 18:32:51 -0800 (PST)
+Received: from 77377267392 named unknown by gmailapi.google.com with HTTPREST;
+ Tue, 10 Nov 2026 02:32:49 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -95,156 +104,40 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH0PR19MB997338:EE_|IA1PR19MB8867:EE_
-X-MS-Office365-Filtering-Correlation-Id: b1d26885-be67-4343-836d-08df3eaa35d3
-X-Microsoft-Antispam:
-	BCL:0;ARA:14566002|16041099003|6090799003|37011999003|25010399006|15080799012|5072599009|23021999003|24021099003|25031999004|8060799015|4140399003|19110799012|10092599007|12121999013|55001999006|440099028|3412199025|53005399003|40105399003;
-X-Microsoft-Antispam-Message-Info:
-	=?us-ascii?Q?bgJHW4P2tq2hcTswHlDDq96YH466oYZyfGnJ98UlBBhe1IFo7t51eSzz0NBX?=
- =?us-ascii?Q?aVJ8VfQJejS09TIPpoWKwslne33wkpRnXyeINduMPfUY0rUqLviEMx1+clYI?=
- =?us-ascii?Q?pzmTe0zmajYhxqF2qR9knt0i1YTyYjNbLqZdBrU+iB2l2OfxUhDf1FJ3Mrv7?=
- =?us-ascii?Q?HPxvKm2KJRLalNFAeZawf+xiXbZyiFj0UnY36s4fP+GRnGir8pW6ztFkvBV6?=
- =?us-ascii?Q?Z3FndCzmw4P0uj8XxGhhuIY32HcCqBBF0JICsSDRIlT81xAxI9JIwjzazEK9?=
- =?us-ascii?Q?c3NmCTdBtQ9vwS8v4ASZ/0dkY6Jpr1mZwAFknZq504QJuDsQ9/9oS2BtWtuT?=
- =?us-ascii?Q?r+do83Itg67nkkWnEiBbRGhjizSqN4yx1hxyu/IBr860YMtAcNuRRg/06GKU?=
- =?us-ascii?Q?wTvVHm03V9Rsx9n/lYhcusAkVVVaIgZy83wSd21WvaoRfZXRnm00Y7ZdGFs7?=
- =?us-ascii?Q?Ihg8mQ6Bco+yrbbbpd+2EifBMYpD/7YyCd5OdNMVS7FeC4o/MBXNjzGMFIRA?=
- =?us-ascii?Q?Vmc+KL8b08LxxRNkcPx0lW63tehHvj3XGD2g5d+u9GU9lR8/jmCCModNNTzy?=
- =?us-ascii?Q?bI9MkCG5LqfGZhIqQz7ojNc++KqP0BArzIyv9BPrTbM0TJz7+WUZVRDUOSf1?=
- =?us-ascii?Q?Z+cySVqUhmyNCe1jTHaqSpg3AEoSwMhK773GOTTE0bP3EXBnekw7iJNgVWqZ?=
- =?us-ascii?Q?mNyT+48eRGFBMSzaQXSbDqQlX5o/hH0gupQ1wJV+1FxKPMh7vn7G0l3SZAHj?=
- =?us-ascii?Q?pOwuKqPmtHzp9YO6nZ4FOfo5immCyQ1nOTZdbNUIuQ+/NRGrQhz3ZYNgB/gS?=
- =?us-ascii?Q?23O6rbWIL1Fq6kJXl5Hy1G/nOmUxk7RFJ143kOsy6RBnx9+tsSkZ2lT9bGPQ?=
- =?us-ascii?Q?wMDyg6hKGl2ZZFz2BiY7Z0xhq05+9K+tjO6uxYY45lCcHWuIRk+XdfefAcn6?=
- =?us-ascii?Q?4WXY7QQpzkXHXwB1pSAGboJJ1KtQkeobheMVrZj7sfHClnHM3pYE8rtK6Q48?=
- =?us-ascii?Q?EqqXuYJytM7e5eaAD7qwOv9Lu6KNwD1HYjE0sRHJ2nEo/yBEnANRPA9FO+Cj?=
- =?us-ascii?Q?Oc3TWx9EjYiPjVxOwsoK5Tkfl/2/rCe0pZ4HbIHLiRP2H+5f9jl+ADSMkBPO?=
- =?us-ascii?Q?o8D6h7VHTYwBUFt6ynYDsImegpeoDJy+kg=3D=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?lPAjmxDTPiyFR0XLJvqxNETtNckOCjZlQ9dZq1vKWP0M4wPt2LL4AwSRxzbQ?=
- =?us-ascii?Q?MQ9XwtVyVyuAoA7zsjdmOskikXa1s9KF4NHfCYuCUCpI+nMz2FWXYclqsOCT?=
- =?us-ascii?Q?0z0F3DrCp8jdzrgsrqBiLPzgW3lE7Wryt8YJqenegDlGYWKdXEth8hUhmiQy?=
- =?us-ascii?Q?NpAe2yXKbcPWSp87wOMA3HmH1xTDOgp0RffJ1AOXF7/uLaSLipk8YC6wrqjb?=
- =?us-ascii?Q?bcv5XJFqe4cmY6btwiSQItD6YbYihTGuJoXOntsvLCH66QUg3dAzJGVezV7p?=
- =?us-ascii?Q?+HLvaoijzWoVMmTHLBv6XP6kzoWyfdY/ZkJ/+x5xfo2uYmh6mTjTZuSXHg7/?=
- =?us-ascii?Q?fDJ0w6taSFHcR5+U2vKtlM839oFWH1tludws8V/cPonRIZhkmmel6BKjP2re?=
- =?us-ascii?Q?NZoA5RPGwT0I1OS93aVQZvemypajKVbg0LoqKmXqIonfOBkehC8HvDzlo006?=
- =?us-ascii?Q?R+Kf5BZ1T0Q7bvFBMRV1SVgh3rta053WYH6N3JjtLwswfzKJ6YPS57IG1teB?=
- =?us-ascii?Q?u/Hi5OdgNYeT3m470/IRsO2UPnmQjuK6c/uIu52trdFLx3sCe41sdagG+tPR?=
- =?us-ascii?Q?vloEgyqHpNmGw1+L1jtfJVveX2gAbcC82XJkg+82eHjeHK5fHpxy/MTCvb0r?=
- =?us-ascii?Q?vw4+awrWDz1OIQlQIi2fRmjx5exjs4k3fbtKRsemOx8ZnjRYE7hZ0GUygww7?=
- =?us-ascii?Q?pP0Nvp3LW4yZlHtyovqL/uOUqf1YNtXY0fYbAIaWUp3cOikW/K8+On34yQIh?=
- =?us-ascii?Q?NtHGVfDlYXEijfHK6mNlLeA3u/GnWiuD953VEOUZVta8fE/DmmzE0L2NKo1C?=
- =?us-ascii?Q?S5gSe50nPnR00Emxg40hteApZXO3vVqsAo3RYk1r4j+ocYAPGFKM0aDoI2SM?=
- =?us-ascii?Q?jTxkDrSpJg6qWKT51EITdWIr4n7HTMM+xia3jzJBaIXnCFFUmhFZnCpRkgXY?=
- =?us-ascii?Q?dvcHO26cIqH2/a/iPE8j55kEXw5qnTe7sJ5hXSTt/XAmoaweeagPNUZBix8N?=
- =?us-ascii?Q?F+g5qvZCY5QrwUEn/r86RVjkjMUFsaf4L50RnhNcxIHrYsYPvTo/p7mYBPoK?=
- =?us-ascii?Q?B94dJhcXUfSzm0dCjeOmvNC1pYwh+zqJNMeXHJTaZdJ3CXmh9id7fiKzCD2z?=
- =?us-ascii?Q?Y3MRv9S1ChgSlMdcNTKVV3dmf4mU5tfNGkkPWs4WlvrKuym5/wlaHPfUCpVl?=
- =?us-ascii?Q?UaSUO4Aq+L9Bo5/vvXdJPQrdcnOlcKTVGbU+aEoLN4jE7YP6btrDRXHk08z6?=
- =?us-ascii?Q?dsoVblBthE+5DvY4jKcK3hnFOHeSCGtkYf/o/8sfA1TTXjfAJQ9XaMF2zsBL?=
- =?us-ascii?Q?JXfkS6f6makY8MdZ6/Dz8zWr1L4007Qhd8bJHlgOStMOhtgGgaF0ZhkqFxj/?=
- =?us-ascii?Q?bBhx/jMyL8GqzufaPPk9olZEqoDV?=
-X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-990eb.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: b1d26885-be67-4343-836d-08df3eaa35d3
-X-MS-Exchange-CrossTenant-AuthSource: PH0PR19MB997338.namprd19.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Nov 2026 21:41:28.1826
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
-	00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR19MB8867
+From: Myeonghun Pak <mhun512@gmail.com>
+Date: Tue, 10 Nov 2026 02:32:49 +0000
+X-Gm-Features: AclHuK8AIkgNRXamUPSojUGsIPAwgEr26dHrd-qWTZA7kFbE804fLktH5iFVef4
+Message-ID: <CAGEsz8Gb=4JS4OAFKppe=LW6JYa2ssJ8APdJJX2Ou_BhzEvZxg@mail.gmail.com>
+Subject: [PATCH v2 0/2] mfd: wm831x: Fix IRQ mapping and cleanup
+To: Lee Jones <lee@kernel.org>, Dmitry Torokhov <dmitry.torokhov@gmail.com>
+Cc: Sebastian Reichel <sre@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, 
+	Charles Keepax <ckeepax@opensource.cirrus.com>, Ijae Kim <ae878000@gmail.com>, 
+	patches@opensource.cirrus.com, mfd@lists.linux.dev, 
+	linux-input@vger.kernel.org, linux-pm@vger.kernel.org, 
+	linux-rtc@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Nov 09, 2026 at 08:58:26AM -0600, Chris Morgan wrote:
-> From: Chris Morgan <macromorgan@hotmail.com>
-> 
-> Users of the popular firmware RockNIX had identified a few bugs with
-> accurately displaying the correct state of charge for RK817 battery
-> devices. With the help of one user analyzing the code with Claude
-> they were able to identify a few potential bugs along with potential
-> solutions which I was then able to verify. These bugs are as follows:
-> 
-> 1) Incorrectly clamping a value with a max of 10000 instead of 100000.
-> This bug caused the state of charge to sometimes read as 10% instead
-> of 100% as it should have.
-> 
-> 2) Using the boot_voltage value to calibrate the battery in scenarios
-> where it could not be trusted. The boot_voltage register populates
-> immediately at power-on, and the driver would check if this value
-> was older than 30 minutes before using it. Unfortunately when combined
-> with the default behavior of the bootloader to turn the device off
-> when plugged in (requiring a user to explicitly power the device on)
-> the boot_voltage and boot_timer values were wrong. The boot voltage
-> would not account for any voltage added while the device was off,
-> and the boot_counter that tracks the time the device was off would
-> be reset. To fix this we changed the behavior to (outside of first-boot
-> scenarios) use a value saved to NVRAM, the value from the coulomb
-> counter directly, and an OCV lookup from the live battery voltage,
-> and then using those values provide an initial "guess" of the state
-> of charge and recalibrate with the OCV voltage once it is available.
-> 
-> Included in this series is another fix that would cause the battery
-> to drain while the system was shut down. This patch replicates the
-> Rockchip BSP driver to clear a shutdown register. Unlike the BSP there
-> is no behavior to bypass this since no boards have yet been observed
-> using the SYS_CAN_SD bypass on the BSP kernel.
-> 
-> Lastly, it has come to my attention that I misspelled "coulomb"
-> throughout the driver, I have included a patch to fix that.
-> 
-> Changes Since V2:
->  - Added a patch to correct the spelling of "coulomb".
->  - Split off creating a new coulomb counter function into another
->    patch.
->  - Split off exposing the boot voltage and OCV values into another
->    patch.
->  - The code should be identical for series v3 as it was for series v2,
->    all that changed was the spelling of coulomb and splitting one patch
->    into 3. I'm keeping the ack from v2 since the code has not changed.
-> 
-> Changes Since V1:
->  - Dropped the sleep fixes, as I would like to test them a bit more
->    extensively first.
->  - Dropped the devicetree parameter, as since no boards have *yet*
->    needed to alter the default behavior there's no need for it.
->  - Changed the behavior of how we select the initial SOC and made
->    it its own function to ease in code readibility. This new method
->    was tested with various boot scenarios. The average error was less
->    than 5%, and in a worst case scenario where the device was
->    discharged to 0%, then left to charge at the bootloader the device
->    over-reported its state of charge by about 10%. When this occurred
->    the device reported its SOC as 100% but that it was charging, which
->    was corrected by the new OCV logic that kicked in once charging
->    completed.
->  - Scrapped the more complicated sleep fix in favor of simply telling
->    the battery to recalibrate at full after suspend, in case of a
->    counting anomaly.
-> 
-> Chris Morgan (7):
->   power: supply: rk817-charger: correct spelling of coulomb
->   power: supply: rk817-charger: Fix NVRAM SoC value
->   power: supply: rk817-charger: simplify re-initializing coulomb counter
->   power: supply: rk817-charger: Resolve boot state of charge from
->     coulomb counter
->   power: supply: rk817-charger: Expose boot voltage and OCV values
->   power: supply: rk817-charger: Clear SYS_CAN_SD reg by default
->   power: supply: rk817-charger: Clear full charge cal on resume
-> 
->  drivers/power/supply/rk817_charger.c | 329 ++++++++++++++++++++-------
->  include/linux/mfd/rk808.h            |   3 +
->  2 files changed, 247 insertions(+), 85 deletions(-)
-> 
-> -- 
-> 2.53.0
-> 
+Hi Lee and Dmitry,
 
-Sashiko bot reports a few bugs that are worth fixing; I'll make the
-changes and resubmit.
+This series fixes WM831x IRQ resource mismatches and follows Dmitry's
+request for managed onkey IRQ/work cleanup and MFD-provided mapped IRQs.
+The provider and consumers are converted together to keep their IRQ
+resources consistent.
 
-Thank you,
-Chris
+Changes since v1:
+- Use managed IRQ/work cleanup instead of storing the onkey IRQ.
+- Move IRQ mapping into MFD and update all platform consumers.
+- Reject failed mappings and unwind consumers before removing the domain.
+- Retain polling for release detection; the chip only interrupts on assertion.
+- Drop the previous Reviewed-by tag because the implementation changed
+  substantially.
+
+Compile-tested with LLVM, W=1 (arm64), for all 11 changed C objects.
+No hardware testing.
+
+Previous discussion:
+https://lore.kernel.org/r/atJycIEnUZKVdTjW@google.com
+
+Thanks,
+Myeonghun
