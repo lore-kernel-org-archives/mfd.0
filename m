@@ -1,85 +1,110 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=193.142.43.55
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=103.168.172.142
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794327019;
-	b=ix4U8hyzZ1uYe070IvNYLFKCfKH9PJZ3N/qdHcGyM2FQHL6zFj1dyck80nw0R3mb8rD+
-	 Jto5en1VlSmfpv0mFrKCC6XuwjN/tDRXk2nsN26ueDwgVhdrTE9S+KkugmFxBhL9Gfd5x
-	 Tv8AwWZaHFWPs2StzSM3ZK3Lk9OFyesFblj4Ws+3gljFifdHVuqOqkUGrX6grLxGW0mSC
-	 ninqbX8XFwbldVimO9vkqDgC0a1sh0qNDC1Z6u45RXBJ0dGKkdyx6fWgpa3vwipRLXDRF
-	 41lKyfgO5CmZTOe/JVqakkU45TrkGUaUeW9c5rkhSFJ2UeMvkSU6Uo9jnLwaBVKKhOg==
+	t=1794327191;
+	b=PBRfj7GyBMxl8th49cC2FLbJQrtCCkjNsUfdohAFCyKFE+D43P6zGfDonLgHvRLNXmbL
+	 p+xXmtIKlPFeNIXvcZSwzYe1ZyLzX5sAL6VheveVu5l9nUidqcJZYRTNQWHJzET912Fp3
+	 pywOXnc89fEHVqsyCIl8V83RIS3YVWD3BZ+3a2DwqQe/ScrKqt2u0tIWLo3PYPTJ598H9
+	 jj4yJ8wjVPC2ZUv6CFlOmsApdepM757T/mLco1/BPE0hZsTWQYUMtgAHNVb4M0lijbwsc
+	 HPdjFLCf0MrLZ8uxweUmFn1qAq+ccGWTGNKaJUDgXQ4QY5ECOkrBWJJHEQ7x0H48naQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794327019;
-	h=DMARC-Filter:Message-ID:DKIM-Signature:DKIM-Signature:Subject:From:
-	 To:Cc:Date:In-Reply-To:References:Organization:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version;
-	bh=FRuAqnYyFGI3EP5jhxTkn/d3PhY5cH92FYdb7x+TtB8=;
-	b=lginM0s9bditqXKGGbvFv1Gtq9fH9UqiaN5ZqgxA6T4zudHDTdNzLEhcFHFggd8tKOgJ
-	 1o1+BkpSt59WRpfelyBXfekcHmf2lMRha8k7EzDuIV1bn482fT5NPVZlmHkzuXHDeWaaS
-	 WSeIaAGW/SGLvtDnVeQPu3s9NEvUDPmj6zSLo/WE4zCH5HdujdTCAK7ZKNnkA+OPASozV
-	 pKgl8fJq3DrPT3VoRAO2N9lsMuTM4facw3DxJ/7X/jNOymnWscZKkxAM0vapHCQDzMVay
-	 FgejvmD5MOxbHeD/YJdJhHgA+o7TwajYEeCf3V7OusxqlwdXFj4eXnu9fiCWG2r4Omw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794327191;
+	h=DMARC-Filter:Received:Received:DKIM-Signature:DKIM-Signature:
+	 X-DKIM2-Info:DKIM2-Signature:X-DKIM2-Info:Message-Instance:
+	 X-ME-Sender:X-ME-Proxy-Cause:X-ME-Proxy:Feedback-ID:Received:X-Mailer:
+	 MIME-Version:X-ThreadId:Date:From:To:Cc:Message-Id:In-Reply-To:
+	 References:Subject:Content-Type:Content-Transfer-Encoding;
+	bh=4stWdQp7BpJLS0676322fsmeG4ymFjAT9IbMRkPmpp0=;
+	b=KhjWYe+hiQZEcThEHpjiP2VXfYF+lW+cbCi4bRtI/vsAij/bVCo2Uf4ZGAQ8tC666aR0
+	 z8MJyfwQEjkPayfLB6vvEDcmSAfRkVwpFsGkv3LkT2BLF5Y6/woVruyldriuzim1mel7N
+	 4dU35LQVVZw31dlVgvmWAonoK3wbtbXsaJU13YkTawHDGO/UzRLF5PZkZNaTQuX2FDFtP
+	 v3cNatLflChGU24RY3cSgZc8iG1+sVT/2tpi4kJ+earFkNcNFGep5AIkPV1SPCriPZb3O
+	 NHKvDbnqfaijk0zyMERtgURKAlwLXTuDoQItLPxMjKvbY83hgs1UErB6oL/+blsGaSA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linutronix.de;
-	spf=pass smtp.mailfrom=linutronix.de;
-	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=DcKWCGdo;
-	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=ed25519-sha256 header.s=2020e header.b=mf2+VrQB;
-	arc=none smtp.remote-ip=193.142.43.55
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+	dmarc=pass header.from=arndb.de;
+	spf=pass smtp.mailfrom=arndb.de;
+	dkim=pass header.d=arndb.de header.i=@arndb.de header.a=rsa-sha256 header.s=fm2 header.b=asQC+qHD;
+	dkim=pass header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm3 header.b=pjDZKFBW;
+	arc=none smtp.remote-ip=103.168.172.142
+Received: from flow-a7-smtp.messagingengine.com (flow-a7-smtp.messagingengine.com [103.168.172.142])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9EBC60A3819
-	for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 16:10:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C9EBC60A3819
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1460606A326
+	for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 16:13:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E1460606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arndb.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arndb.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=DcKWCGdo;
-	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=ed25519-sha256 header.s=2020e header.b=mf2+VrQB
-Message-ID: <cc35b2127b04772f05948ac51c8faa5ef07da0b0.camel@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1794327016;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=FRuAqnYyFGI3EP5jhxTkn/d3PhY5cH92FYdb7x+TtB8=;
-	b=DcKWCGdoLsr5BypGSISy+81kuWGKqGX7oDJRmI88rB9xcHk3G2T1QSetSuTvCMysdAIIUW
-	s3oV6gZX0mluQvH8+U6jrSepGWnLx6a4vgHJ7NUPD2xfZvXVvP9S8c8cHpqndIvt87nNrB
-	/bZCvpSrTfSu5mW7JYKzihkMoZrlwf7lRaJs1bcUUFeDjOF5W6Ys23rRnCKPWQsjTi4iCp
-	qqNd+vPmcD6kt+LQVbZMFXwBwMEJNUez7PRzn+dyfKue7B+9TNSdKxFWhIfAeEeL4yFRyS
-	HmVS0n98Mpp2FOGnPJAv7egbI+FepAYa27pSizTX8RsAkpUcoKtGN9ILkZlWRg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1794327016;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=FRuAqnYyFGI3EP5jhxTkn/d3PhY5cH92FYdb7x+TtB8=;
-	b=mf2+VrQBVLH2r3NQRUxdCKuIej6hKePUGi7N6mN0ogRC2orCIZ38tqM1XNF+uqyZWQFS/C
-	47ioVG+ovAxlh+Dw==
-Subject: Re: [PATCH net-next v4 4/8] dt-bindings: mfd: Add SoC-e SWIP parent
-From: Vasilij Strassheim <v.strassheim@linutronix.de>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-  Conor Dooley <conor+dt@kernel.org>, Andrew Lunn <andrew@lunn.ch>, Vladimir
- Oltean <olteanv@gmail.com>,  "David S. Miller" <davem@davemloft.net>, Jakub
- Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman
- <horms@kernel.org>, Russell King <linux@armlinux.org.uk>, Andrew Lunn
- <andrew+netdev@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>, Eric
- Dumazet <edumazet@kernel.org>, Lee Jones <lee@kernel.org>,
- devicetree@vger.kernel.org,  linux-kernel@vger.kernel.org,
- netdev@vger.kernel.org, mfd@lists.linux.dev,  Martin Kaistra
- <martin.kaistra@linutronix.de>, Benedikt Spranger <b.spranger@linutronix.de>
-Date: Tue, 10 Nov 2026 17:10:15 +0100
-In-Reply-To: <f5c7c9901aca84f0b814e5b6c153db84af826dd7.camel@linutronix.de>
-References: 
-	<20261105-devel-vstrassheim-soce-dsa-ml-v4-0-02f3cde2afa1@linutronix.de>
-	 <20261105-devel-vstrassheim-soce-dsa-ml-v4-4-02f3cde2afa1@linutronix.de>
-	 <20261106-judicious-penguin-of-enhancement-b28c8b@quoll>
-	 <f5c7c9901aca84f0b814e5b6c153db84af826dd7.camel@linutronix.de>
-Organization: Linutronix GmbH
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+	dkim=pass (2048-bit key, unprotected) header.d=arndb.de header.i=@arndb.de header.a=rsa-sha256 header.s=fm2 header.b=asQC+qHD;
+	dkim=pass (2048-bit key, unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm3 header.b=pjDZKFBW
+Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
+	by mailflow.phl.internal (Postfix) with ESMTP id E76DD13813D7
+	for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 11:13:09 -0500 (EST)
+Received: from ams-imap-03 ([10.64.2.23])
+  by ams-compute-02.internal (MEProxy); Tue, 10 Nov 2026 11:13:10 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm2; t=1794327177;
+	 x=1794334377; bh=4stWdQp7BpJLS0676322fsmeG4ymFjAT9IbMRkPmpp0=; b=
+	asQC+qHDAv/I83EYngLJ0bkBe+uuEnPcLg0jrc2OX9kVtaPYAd/md3quox9jqmy4
+	S/jELTpXjA2k1IxJWtdK3HZW4IriVAHis0xufJR256BBPAzbfZ5QsGw2eqYq1k/I
+	S4qzaUtb3Ob4GAV2mxThnKp0r/zG0TfcXAK+eUmyQOHhHqtyGONG7gkgzRBQG2d0
+	/gzJT11LHsGNvLKSZnn9JL3iytYjrT3V7KZt2FZsHfjjQeZHywjaesrjJhD0e7vN
+	Y6/iN3Jg7w8xS8OVdYMBSUZOfxDnVhVfPJGqKe/oSxsAZXPn7y2e4GOOItdMLZ2R
+	LLVckhHoSzC+MGE1iJu5eg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1794327177; x=
+	1794334377; bh=4stWdQp7BpJLS0676322fsmeG4ymFjAT9IbMRkPmpp0=; b=p
+	jDZKFBWlX484yfO06iZThedU7MnSaqyMkXKHKaXomC5/xVavgZU65SsCjokZJWML
+	GjeTj8Lq4+LWeI1CWzzxuQj2m4isbVa0ssa9g7eZhXilCypVINe5kxTBiobUF6uZ
+	Gtle0jaTmJtlAyGlrtNmbTTDPt9uAjbADo1dgbyzsDA47ykOoKjYt1o87LKBSqHb
+	mP2YIbspjWDiF2EJOgZRHTKT7VhzsY0TtBEN2nWcPAnRSw5Q7HRlPmorpTONvfpP
+	auvP37j94bGeH1y2GQ4LwX12DjFEZi+3xGQave3kINRA2PBRPI5FXxcFzbhhhvXR
+	Tsc8Y3Jb1FgwsS6Y0dcjg==
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
+	repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
+	action=sign d=arndb.de a=rsa-sha256;
+DKIM2-Signature: i=1; m=1; t=1794327177; d=arndb.de;
+	mf=PGFybmRAYXJuZGIuZGU+; rt=PG1mZEBsaXN0cy5saW51eC5kZXY+;
+	s=fm2:rsa-sha256:H4jdOovBdQmNjsZuabGZK2jDDbqLSjeGVhvPg3TMe5Gevdc
+	08fYsHtrXTr//103vtcull8pt7Ecann7C0f3tQql3uqJtnmJCkKdspe1BUN3a17S
+	VSXT1mXEVtLUTyNLjqT0bg7/FvwrGL1rpSFvje0e1la/kjQ74aNa9iylo6q4qMFo
+	PCQ0LfDXwen1zLO7PsKGJm/m9V6VP1XNZAnDGYVgr6ELMT1IK1yJbCPRhpHjUJOb
+	E3I4Zaaq51DCIdyyglaA42f+/cYRRthr9flYj8PSDs3u2I5LXMK8ZdLIQeXbyVUf
+	Lg7locqQzsrTWwKfX6fcuasFePy7ciw5o581DZg==;
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
+	repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
+	action=mi-m=1; hc=12;
+	hn=cc,content-transfer-encoding,content-type,date,feedback-id,
+	from,in-reply-to,message-id,mime-version,references,subject,to;
+Message-Instance: m=1; h=sha256:NY+qH6VFe1gb9eaYka4u3Pju9dQg6z2rB5jHAxzea+M=:YUoKa4y1cAE3r8AhMFawDzVW7orX9AEZ4cmB97mmTGA=;
+X-ME-Sender: <xms:gELzat-KhdG49YOXD28knxP-wmxhvouurLuqg65ijoK_1PztTiM67w>
+    <xme:gELzashOw3MORHNRaj5VZYoHPjgRatChT2__Hps4-a7QS4ExIju8qL8_9B3SiDtB2
+    sGKQug7JFF_lfIFqrxv09JzfzrzZWKrRlvdLjWPWqavJafwb6XI9q0tBA>
+X-ME-Proxy-Cause: dmFkZTEwJqmeu88i0D1P4NSr1o0RdeyL0ncQrpwlZpsRiyH4mGhKK76jqiY9/AURvmAyKQ
+    Xh2LjT8fovpOgpIQnvH5QYWZs5UCg8lDhPsbwXo4GfEZeWp/aOvfLOYPWjqnmAFI1BwG/q
+    XyZG43p0HoLIgnysLFo6MzsLlgysOWgB08DJdha5yxDuEjeXR7MU6VvvNb4tgDJLpz9WaL
+    DOmlUn0Mje4CQssJm+pxYVCWPCE7uxZNBjliBSIc14Pa1+Q+euFKNdLxxVitjY9vJ+1g1T
+    +rig9iVkFuoti3t+qEcHMM2vh4+G+ag1IzrG3We9+FcQnC6cOfB1bItA6vAPi6A+u1KULf
+    wxoJ36bIqa+kM9OWApvgKo4MId3H8RRe0FCkMwp8Cj2i2hPzQqFijO+zALFklT7XBp4yQ4
+    D0Bsmvzif3sMMCJY2OSk1bwCPIIRPEFuJI4Mi/vpw7sfUa+jfrhN159tiieQQE7aztSV43
+    DlSawBFw+hJYm5oAPkD2NlBoL/gRh3vgmwf+Y/GbihlHM/o3EcsWCertLTOcD6iStWXR7G
+    LAS2aVSdVtxoGSiZj2/kYUSfLhEBFCn05KpxcrFYCW/FmzT2YT72YPVx3p0wR8sMiJ3lAW
+    x+8+3z8XttowLJjfinG9ew4R0xJsilSkEkmhmN5AqofFDl0uTCDo7P0ixMQQ
+X-ME-Proxy: <xmx:hkLzak2BPEyGi10FxxkrY3byRVHSjq_0wLclV2jUuSmkyRE3xcj4fw>
+    <xmx:hkLzakkySXPgYGwh_r1Ql-VHDAdYXcQ3p0tjVOV29OCOWQo8MbFMmw>
+    <xmx:hkLzavloJp1yUj6WriMMnPneQ8pVgU9Ew-sH84r-kdZ-OdXPheHDYw>
+    <xmx:hkLzarPnZB-B1EOixQtLefzjQeDp3wnHNrTbJ3SPpTKyjOvpO-EsFA>
+    <xmx:iULzajThipr-UxTyuQQEJ7jWDCsE73KlfzXTf41eZRpd8Rpi4a2MNCT2>
+Feedback-ID: i56a14606:Fastmail
+Received: by mailuser.ams.internal (Postfix, from userid 501)
+	id AC32432A0097; Tue, 10 Nov 2026 11:12:48 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -89,128 +114,97 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
+X-ThreadId: AK-jVwBtQCQR
+Date: Tue, 10 Nov 2026 17:12:28 +0100
+From: "Arnd Bergmann" <arnd@arndb.de>
+To: =?UTF-8?Q?Nuno_S=C3=A1?= <nuno.sa@analog.com>,
+ "Jonathan Cameron" <jic23@kernel.org>
+Cc: "Svyatoslav Ryhel" <clamor95@gmail.com>,
+ "Arnd Bergmann" <arnd@kernel.org>,
+ "Alexandre Belloni" <alexandre.belloni@bootlin.com>,
+ "Bartosz Golaszewski" <brgl@kernel.org>, "Mark Brown" <broonie@kernel.org>,
+ "Conor Dooley" <conor+dt@kernel.org>, "Daniel Thompson" <danielt@kernel.org>,
+ "Helge Deller" <deller@gmx.de>, devicetree@vger.kernel.org,
+ "Dmitry Torokhov" <dmitry.torokhov@gmail.com>,
+ dri-devel@lists.freedesktop.org, "Jingoo Han" <jingoohan1@gmail.com>,
+ "Krzysztof Kozlowski" <krzk+dt@kernel.org>, "Lee Jones" <lee@kernel.org>,
+ "Liam Girdwood" <lgirdwood@gmail.com>, "Linus Walleij" <linusw@kernel.org>,
+ linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+ linux-fbdev@vger.kernel.org,
+ "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
+ linux-hwmon@vger.kernel.org, linux-iio@vger.kernel.org,
+ linux-input@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-leds@vger.kernel.org, linux-media@vger.kernel.org,
+ linux-pm@vger.kernel.org, linux-rtc@vger.kernel.org,
+ linux-sound@vger.kernel.org, linux-watchdog@vger.kernel.org,
+ "Guenter Roeck" <linux@roeck-us.net>, linuxppc-dev@lists.ozlabs.org,
+ llvm@lists.linux.dev, "Mauro Carvalho Chehab" <mchehab@kernel.org>,
+ mfd@lists.linux.dev, "Michael Hennerich" <michael.hennerich@analog.com>,
+ patches@opensource.cirrus.com, "Pavel Machek" <pavel@kernel.org>,
+ "Rob Herring" <robh@kernel.org>, "Sebastian Reichel" <sre@kernel.org>,
+ "Support Opensource" <support.opensource@diasemi.com>
+Message-Id: <991009b6-e62b-46bd-9a0b-43c3b7a6d10a@app.fastmail.com>
+In-Reply-To: <avM5EnC9yujUZcCO@nsa>
+References: 
+ <CAPVz0n0ryOns2sCJE_jFana9MVzwEj1QZuPEa8FNhGbHXnMB+A@mail.gmail.com>
+ <11652e5e-053e-45b0-98a0-0c1cb2aeedc4@app.fastmail.com>
+ <20260912232047.19c4cb10@jic23-hlaptop> <avM5EnC9yujUZcCO@nsa>
+Subject: Re: [PATCH 08/14] mfd: remove unused aat2870 driver
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2026-11-06 at 22:51 +0100, Vasilij Strassheim wrote:
-> On Fri, 2026-11-06 at 12:13 +0100, Krzysztof Kozlowski wrote:
-> > On Thu, Nov 05, 2026 at 03:16:48PM +0100, Vasilij Strassheim wrote:
-> > > Add a binding for the SoC-e SWIP multifunction FPGA IP core.
-> > >=20
-> > > Describe the shared MMIO address space and address translation for
-> > > the required Ethernet switch child and the optional integrated MDIO
-> > > controller and MMIO-controlled MDIO multiplexer.
-> > >=20
-> > > Signed-off-by: Vasilij Strassheim <v.strassheim@linutronix.de>
-> > > ---
-> > >  .../devicetree/bindings/mfd/soce,swip.yaml         | 137 +++++++++++=
-++++++++++
-> > >  1 file changed, 137 insertions(+)
-> > >=20
-> > > diff --git a/Documentation/devicetree/bindings/mfd/soce,swip.yaml b/D=
-ocumentation/devicetree/bindings/mfd/soce,swip.yaml
-> > > new file mode 100644
-> > > index 000000000000..625be299e262
-> > > --- /dev/null
-> > > +++ b/Documentation/devicetree/bindings/mfd/soce,swip.yaml
-> > > @@ -0,0 +1,137 @@
-> > > +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> > > +%YAML 1.2
-> > > +---
-> > > +$id: http://devicetree.org/schemas/mfd/soce,swip.yaml#
-> > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > +
-> > > +title: SoC-e SWIP multifunction Ethernet switch FPGA IP core
-> > > +
-> > > +maintainers:
-> > > +  - Vasilij Strassheim <v.strassheim@linutronix.de>
-> > > +
-> > > +description:
-> > > +  SoC-e Switch IP (SWIP) cores integrate Ethernet switching logic, a=
-n
-> > > +  MDIO controller, and an MDIO bus multiplexer in one memory-mapped =
-device.
-> > > +  The MDIO bus multiplexer is wired to the integrated MDIO controlle=
-r.
-> > > +
-> > > +properties:
-> > > +  compatible:
-> > > +    const: soce,swip
-> > > +
-> > > +  reg:
-> > > +    maxItems: 1
-> > > +
-> > > +  '#address-cells':
-> > > +    const: 1
-> > > +
-> > > +  '#size-cells':
-> > > +    const: 1
-> > > +
-> > > +  ranges: true
-> > > +
-> > > +  mdio@204:
-> > > +    $ref: /schemas/net/soce,swip-mdio.yaml#
-> > > +    unevaluatedProperties: false
-> > > +
-> > > +  mdio-mux@202:
-> > > +    $ref: /schemas/net/mdio-mux-mmioreg.yaml#
-> > > +    unevaluatedProperties: false
-> > > +
-> > > +  ethernet-switch:
-> >=20
-> > Why are you mixing children with and without bus addresses? This is
-> > discouraged and shows that device is not correctly represented, e.g. if
-> > the ethernet-switch does not have resources, then THIS device is the
-> > ethernet switch.
-> >=20
->=20
-> There is no hardware reason for leaving the switch child unaddressed.
-> Just an error that occurred while converting the binding to the MFD
-> model.
-> I will describe the switch function as an ethernet-switch@0 child node
-> with a reg property for it's register resources, like the ocelot MFD
-> binding.
+On Tue, Nov 10, 2026, at 16:39, Nuno S=C3=A1 wrote:
+> On Sat, Sep 12, 2026 at 11:20:47PM +0100, Jonathan Cameron wrote:
+>> On Thu, 10 Sep 2026 20:14:15 +0200 "Arnd Bergmann" <arnd@arndb.de> wr=
+ote:
 
-It looks like I need a different name for the MFD parent to avoid a
-naming collision with the ethernet-switch@0 child. I checked other
-bindings but could not find a suitable example.
+>> > drivers/iio/adc/ad7793.c
+>> Maybe. Analog devices ack needed.
+>>=20
+>> Production part but this one indeed fails to probe.  Analog
+>> folk, do you want to fix this one up?
+>
+> Given it's production we should fix. Looking at platdata seems to nice=
+ly
+> fir in DT. Issue is that I don't have HW with me to test. So I'll maybe
+> just remove platdata and assume some defaults.
 
-I would appreciate any suggestions for a suitable name for the parent
-node representing the FPGA IP core. It mainly acts as a container for
-its child devices. I am considering "bus", "ip-core" or "shell".
+Sounds good. I already dropped my removal patch for this one.
 
-> > > +    $ref: /schemas/net/dsa/soce,swip-switch.yaml#
-> > > +    unevaluatedProperties: false
-> > > +
-> > > +required:
-> > > +  - compatible
-> > > +  - reg
-> > > +  - '#address-cells'
-> > > +  - '#size-cells'
-> > > +  - ranges
-> > > +  - ethernet-switch
-> > > +
-> > > +dependentRequired:
-> > > +  mdio-mux@202:
-> > > +    - mdio@204
-> > > +
-> > > +additionalProperties: false
-> > > +
-> > > +examples:
-> > > +  - |
-> > > +    ethernet-switch@80020000 {
-> > > +        compatible =3D "soce,swip";
-> > > +        reg =3D <0x80020000 0x10000>;
-> > > +        #address-cells =3D <1>;
-> > > +        #size-cells =3D <1>;
-> > > +        ranges =3D <0x0 0x80020000 0x10000>;
-> > > +
-> > > +        mdio_parent: mdio@204 {
-> > > +            compatible =3D "soce,swip-mdio";
-> > > +            reg =3D <0x204 0xc>, <0x200 0x2>;
-> > > +            reg-names =3D "data", "control";
-> > > +            #address-cells =3D <1>;
-> > > +            #size-cells =3D <0>;
-> > > +        };
-> > > +
-> > > +        mdio-mux@202 {
->=20
+>> > drivers/iio/frequency/ad9523.c
+>> Maybe. Analog Devices ack needed.
+>>=20
+>
+> Hmm we definitely use this one and we have OF support out of tree with
+> likely some DT abuse of what can be in DT or not. Not sure if I have
+> some HW around but we'll need to fix it.
+>
+> In general for ADI parts, I think we can drop the ones that are not
+> recommended for new designs. All the others I tempted to say we should
+> keep. Naturally we need to fix all the drivers that do not compile
+> without platdata. And for the ones with defaults we can also just remo=
+ve
+> platdata and use the plain defaults.
 
+Ok, I'll leave it alone as well now.
+
+I currently still have patches to remove adp8860/8870 (backlight), ad7877
+(touchscreen), ad714x (touch) and adxl34x (input, not the iio one), which
+are currently unusable with DT but are all listed as in production.
+
+I assume you want to fix all of these and keep them in the kernel,
+but possibly still remove the adxl34x and only keep the IIO driver for
+that part?
+
+I also have patches to remove platform_data probing from ad5761, adf4350,
+ad5791, ad5421 and ad5504, these all have DT support.
+
+See=20
+https://git.kernel.org/pub/scm/linux/kernel/git/arnd/playground.git/log/=
+?h=3Dboard-remove-7.4
+for the updated series. I hope to slowly get through that. Let
+me know if you want me to skip any more of those patches.
+
+Thanks,
+
+    Arnd
