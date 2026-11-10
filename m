@@ -1,48 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794304721;
-	b=nL+6kiFH/DZoFZDp3BSAP7anGOL2UZ0DYr2M7KaN6D3dH75mdKZRty+4J9jyZlHZWeQk
-	 GdUkSn1I6MOzL0oi2cnwIi1sxjoqCLrGj+ry2XpMHn3EsU0etS5Ng/fowsTy/FOhdgtYB
-	 7Q1Yl5FCEvPRRf8MCY3NzmEqUWqyK1baJspyvQlxsbhse5VB1W3f/CeV3fhjhHKh+LFdJ
-	 97u2TGEIQpxfkjCp3R/9Rd5+NlPL4jJZsuDaUFKI88687/ZYcZySSzHeDMSi8ln3RdCeb
-	 ghqwrexQf8+5cxGhuLh+1Ux6rGGbrIRtaofz2uOdO+nf/KW3HouODLfISTv7JdlRBog==
+	t=1794305703;
+	b=W1vksmtSWmJSYg06V339aPacOxuI9t9SigSrtbe+f/ztFCCy9n69CJsMy8PRwU3dPJwr
+	 V1ULqPFVH3ocgM3hPJUIhJMmZJmm+3ioAjzMxkq+aI9SVoispHpXtSDKprQurLob4XLHa
+	 jkbABcqSQOjXIzyxMwTojR6vF09MyO0xNxBZr8MyXRq8baGLGjIf7gS5j0++DKriNagc4
+	 Je4sp2NSVpvCsuz1Y29gcV/cg6T4eK7Nwa/4ydEtqxSjUKPIA46TA0RgkQWt96K73A11a
+	 m1h4dlXXQUhU+LwvV1737kJa5opif+B9HueqUGtZLpQgqicYCBrdZUzFMwJbciVpOyQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794304721;
-	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer;
-	bh=BtCXTNp14PYk+4PGgK4D0wqEtct66E189W2rGQXtMiU=;
-	b=XatMjqTHKNUOcdyuig3ssUOce4oKRWk2FWZHHvmXNCxZ16D0xLMa0mu6R/SrJYAwdqd+
-	 qHHUiN4Eytx3a50XT6bTRZ4CJE2dxLdrdLkq1D80Gs9PRUWuWUQU2e/P6nunQeM4pnYL0
-	 ezsk2/Y2p0WJr++lIQbluFrf/TyBD03lJMFGA1U1DOmcGWpyBIb6WkqkmhaHr+ubcCM04
-	 53R2cvZo++0Zks6yC1vvDh5/c7tTq0wohnCd5h+8g4sN9yXP3GhHBtabMOi43VNUKsddr
-	 7PV1rQsKNIi7/NZ3ScxVgV4TXCGUyplZTbAvI8NNDrq+7dtJ9335ruEJ+/4L5lDFc3w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794305703;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=asRHrek4HN66qx8Ol4qbZ51l3zyJ5i5rEucufcz17Ak=;
+	b=BH2iphIEgwEEbDZ2qca+JPobN6Ydop9u2CFBNCLbZJLdx5rOL6TKtFTw8xPmwHf/yira
+	 dsMuZU59aG3kfAfW/xGUdIopCmU+MCL0fsXYvySKpQL6e0kXcqCiXTia/D1H2t3X8nyNK
+	 3RvD8xD1Hy3XSOQHK+XhIH+2n0ldynm9gA+E0IqALZRXBYg9hDZp7Zubv7/1DradFYHds
+	 zi7MLOdDEyuYu+YpFrNoev6PfgMDnUg7dlVe3+PzPxT8VgIdL6fXa2IjoVj6PF2LWHOTJ
+	 Ldx6lbGQpFRZSMdXTwsNzqzJ9zsF+ut6toLVvybw/nq407RhZCdN7WpR9cDhsQo4P+w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=abFDBMyA;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=j4NYXmfV;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6952B60A2628;
-	Tue, 10 Nov 2026 09:58:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCABE606A339
+	for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 10:15:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=abFDBMyA
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 630B91F00904;
-	Tue, 10 Nov 2026 09:58:39 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=j4NYXmfV
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 47EFC1F0089F;
+	Tue, 10 Nov 2026 10:15:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794304721;
-	bh=BtCXTNp14PYk+4PGgK4D0wqEtct66E189W2rGQXtMiU=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=abFDBMyA162eessmwSFXRUWaXgx/2Z823540axp6iUW9d3/0Dc0xt69d5GmYKml5s
-	 Cv5X+OMDn+12LzDFDVHkhV2zx+m8Gnlpj9iWNZ1T13PGTzBes+Fxp5q7ljDF4qM7TB
-	 mBDLSVq/QnSVG/ebdWGeSStGb+qeHlBL1HIrWPSmBAcw5AcQtUqgWY+86vPITniWVy
-	 2gDzosr6aG9/Ut1zBZ+O5c4Qd3PVJei1BuzhtDtbExjofQgbLx2cD39JeM4/ZIY/to
-	 QJvO5WwfjS5nWAzreR5EqVG6fGWEMs5N9x7Gi5pug4UrTMrM2NWCKx3+Y4wjQ3q+yy
-	 bmCQ3Q930Ql5g==
-From: Linus Walleij <linusw@kernel.org>
-Date: Tue, 10 Nov 2026 10:58:34 +0100
-Subject: [PATCH 2/2] dt-bindings: pinctrl: nomadik: Convert to DT schema
+	s=k20260515; t=1794305702;
+	bh=asRHrek4HN66qx8Ol4qbZ51l3zyJ5i5rEucufcz17Ak=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=j4NYXmfVksX5yO0eL8M7meKzON4hGMjbVGyuxt1WStsDNfa5r2H2aofOjRgHMYha9
+	 B+2Fc2NtdepPUIUBeBIEc4GAppI/Mf5D8FGfJByw4/vRAxdRM7eBBKypWAYc9Kzi3a
+	 xfJ7an8qazf5ySYqx2eIQ/bFZ4YbLllzhotnvPssrH5hI7Kvb9s1d70F+3lDBJZ1KX
+	 Q4EGOjCAP27OcYTJxOGWt7H+0ne4p5+NXGPlkwSq6JPaAqnBG90flSHyPWLQBmNZqy
+	 zov65wYs6m8SC69ToMs7E+1eC0tVx80XTzu33SptN0Ld67U2nGUgGaQxDz/s1AOcwT
+	 3YatuWl+aON3g==
+Message-ID: <sashiko-outbox-206846@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH 1/2] dt-bindings: pinctrl: abx500: Convert to DT schema
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Linus Walleij" <linusw@kernel.org>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20261110-ux500-pinctrl-bindings-v1-1-a9f0e9d12d19@kernel.org>
+References: <20261110-ux500-pinctrl-bindings-v1-0-a9f0e9d12d19@kernel.org>
+ <20261110-ux500-pinctrl-bindings-v1-1-a9f0e9d12d19@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Tue, 10 Nov 2026 10:15:01 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -51,304 +59,17 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261110-ux500-pinctrl-bindings-v1-2-a9f0e9d12d19@kernel.org>
-References: <20261110-ux500-pinctrl-bindings-v1-0-a9f0e9d12d19@kernel.org>
-In-Reply-To: <20261110-ux500-pinctrl-bindings-v1-0-a9f0e9d12d19@kernel.org>
-To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Linus Walleij <linusw@kernel.org>
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
- linux-gpio@vger.kernel.org
-X-Mailer: b4 0.16.0
 
-Describe the Nomadik and DB8500 pin controllers, GPIO bank references
-and nested pin configurations in DT schema. Preserve the existing
-ste,config references and numeric configuration encodings. This adds
-validation for the pin groups in the Ux500 board trees.
+> Describe the ABx500 GPIO and pin controller in DT schema, including
+> the nested mux and configuration groups used by existing boards.
+> Reference this schema from the AB8500 MFD instead of rejecting all
+> pin configuration children. Found with CHECK_DTBS=3D1.
+>=20
+> Signed-off-by: Linus Walleij <linusw@kernel.org>
 
-Signed-off-by: Linus Walleij <linusw@kernel.org>
----
- .../devicetree/bindings/pinctrl/ste,nomadik.txt    | 148 ---------------------
- .../bindings/pinctrl/stericsson,nomadik.yaml       | 113 ++++++++++++++++
- 2 files changed, 113 insertions(+), 148 deletions(-)
+Sashiko has reviewed this patch and found no issues.
 
-diff --git a/Documentation/devicetree/bindings/pinctrl/ste,nomadik.txt b/Documentation/devicetree/bindings/pinctrl/ste,nomadik.txt
-deleted file mode 100644
-index 2213802435e0..000000000000
---- a/Documentation/devicetree/bindings/pinctrl/ste,nomadik.txt
-+++ /dev/null
-@@ -1,148 +0,0 @@
--ST Ericsson Nomadik pinmux controller
--
--Required properties:
--- compatible: "stericsson,db8500-pinctrl", "stericsson,db8540-pinctrl",
--              "stericsson,stn8815-pinctrl"
--- nomadik-gpio-chips: array of phandles to the corresponding GPIO chips
--              (these have the register ranges used by the pin controller).
--- prcm: phandle to the PRCMU managing the back end of this pin controller
--
--Please refer to pinctrl-bindings.txt in this directory for details of the
--common pinctrl bindings used by client devices, including the meaning of the
--phrase "pin configuration node".
--
--ST Ericsson's pin configuration nodes act as a container for an arbitrary number of
--subnodes. Each of these subnodes represents some desired configuration for a
--pin, a group, or a list of pins or groups. This configuration can include the
--mux function to select on those pin(s)/group(s), and various pin configuration
--parameters, such as input, output, pull up, pull down...
--
--The name of each subnode is not important; all subnodes should be enumerated
--and processed purely based on their content. The subnodes use the generic
--pin multiplexing node layout from the standard pin control bindings
--(see pinctrl-bindings.txt):
--
--Required pin multiplexing subnode properties:
--- function: A string containing the name of the function to mux to the
--  pin or group.
--- groups : An array of strings. Each string contains the name of a pin
--  group that will be combined with the function to form a multiplexing
--  set-up.
--
--Required pin configuration subnode properties:
--- pins: A string array describing the pins affected by the configuration
--  in the node.
--- ste,config: Handle of pin configuration node
--  (e.g. ste,config = <&slpm_in_wkup_pdis>)
--
--- ste,input : <0/1/2>
--	0: input with no pull
--	1: input with pull up,
--	2: input with pull down,
--
--- ste,output: <0/1/2>
--	0: output low,
--	1: output high,
--	2: output (value is not specified).
--
--- ste,sleep: <0/1>
--	0: sleep mode disable,
--	1: sleep mode enable.
--
--- ste,sleep-input: <0/1/2/3>
--	0: sleep input with no pull,
--	1: sleep input with pull up,
--	2: sleep input with pull down.
--	3: sleep input and keep last input configuration (no pull, pull up or pull down).
--
--- ste,sleep-output: <0/1/2>
--	0: sleep output low,
--	1: sleep output high,
--	2: sleep output (value is not specified).
--
--- ste,sleep-gpio: <0/1>
--	0: disable sleep gpio mode,
--	1: enable sleep gpio mode.
--
--- ste,sleep-wakeup: <0/1>
--	0: wake-up detection enabled,
--	1: wake-up detection disabled.
--
--- ste,sleep-pull-disable: <0/1>
--	0: GPIO pull-up or pull-down resistor is enabled, when pin is an input,
--	1: GPIO pull-up and pull-down resistor are disabled.
--
--Example board file extract:
--
--	pinctrl@80157000 {
--		compatible = "stericsson,db8500-pinctrl";
--		nomadik-gpio-chips = <&gpio0>, <&gpio1>, <&gpio2>, <&gpio3>;
--		prcm = <&prcmu>;
--
--		pinctrl-names = "default";
--
--		slpm_in_wkup_pdis: slpm_in_wkup_pdis {
--			ste,sleep = <1>;
--			ste,sleep-input = <3>;
--			ste,sleep-wakeup = <1>;
--			ste,sleep-pull-disable = <0>;
--		};
--
--		slpm_out_hi_wkup_pdis: slpm_out_hi_wkup_pdis {
--			ste,sleep = <1>;
--			ste,sleep-output = <1>;
--			ste,sleep-wakeup = <1>;
--			ste,sleep-pull-disable = <0>;
--		};
--
--		slpm_out_wkup_pdis: slpm_out_wkup_pdis {
--			ste,sleep = <1>;
--			ste,sleep-output = <2>;
--			ste,sleep-wakeup = <1>;
--			ste,sleep-pull-disable = <0>;
--		};
--
--		uart0 {
--			uart0_default_mux: uart0_mux {
--				u0_default_mux {
--					function = "u0";
--					pins = "u0_a_1";
--				};
--			};
--			uart0_default_mode: uart0_default {
--				uart0_default_cfg1 {
--					pins = "GPIO0", "GPIO2";
--					ste,input = <1>;
--				};
--
--				uart0_default_cfg2 {
--					pins = "GPIO1", "GPIO3";
--					ste,output = <1>;
--				};
--			};
--			uart0_sleep_mode: uart0_sleep {
--				uart0_sleep_cfg1 {
--					pins = "GPIO0", "GPIO2";
--					ste,config = <&slpm_in_wkup_pdis>;
--				};
--				uart0_sleep_cfg2 {
--					pins = "GPIO1";
--					ste,config = <&slpm_out_hi_wkup_pdis>;
--				};
--				uart0_sleep_cfg3 {
--					pins = "GPIO3";
--					ste,config = <&slpm_out_wkup_pdis>;
--				};
--			};
--		};
--	};
--
--	uart@80120000 {
--		compatible = "arm,pl011", "arm,primecell";
--		reg = <0x80120000 0x1000>;
--		interrupts = <0 11 0x4>;
--
--		pinctrl-names = "default","sleep";
--		pinctrl-0 = <&uart0_default_mux>, <&uart0_default_mode>;
--		pinctrl-1 = <&uart0_sleep_mode>;
--	};
-diff --git a/Documentation/devicetree/bindings/pinctrl/stericsson,nomadik.yaml b/Documentation/devicetree/bindings/pinctrl/stericsson,nomadik.yaml
-new file mode 100644
-index 000000000000..48b2b5773946
---- /dev/null
-+++ b/Documentation/devicetree/bindings/pinctrl/stericsson,nomadik.yaml
-@@ -0,0 +1,113 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/pinctrl/stericsson,nomadik.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: ST-Ericsson Nomadik pin controller
-+
-+maintainers:
-+  - Linus Walleij <linusw@kernel.org>
-+
-+properties:
-+  compatible:
-+    enum:
-+      - stericsson,db8500-pinctrl
-+      - stericsson,stn8815-pinctrl
-+
-+  nomadik-gpio-chips:
-+    description: GPIO banks providing the pin control registers.
-+    $ref: /schemas/types.yaml#/definitions/phandle-array
-+    minItems: 1
-+    maxItems: 9
-+    items:
-+      maxItems: 1
-+
-+  prcm:
-+    description: PRCMU controlling the alternate pin functions.
-+    $ref: /schemas/types.yaml#/definitions/phandle
-+
-+patternProperties:
-+  '^(?!phandle$|compatible$|nomadik-gpio-chips$|prcm$|pinctrl-[0-9]+$|pinctrl-names$)[a-zA-Z0-9_-]+$':
-+    $ref: '#/$defs/config-node'
-+
-+required:
-+  - compatible
-+  - nomadik-gpio-chips
-+
-+additionalProperties: false
-+
-+$defs:
-+  config-node:
-+    type: object
-+    properties:
-+      function:
-+        $ref: /schemas/types.yaml#/definitions/string
-+      groups:
-+        $ref: /schemas/types.yaml#/definitions/string-array
-+      pins:
-+        $ref: /schemas/types.yaml#/definitions/string-array
-+      ste,config:
-+        description: Shared pin configuration to apply.
-+        $ref: /schemas/types.yaml#/definitions/phandle
-+      ste,input:
-+        description: Input pull configuration.
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+        maximum: 2
-+      ste,output:
-+        description: Output value.
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+        maximum: 2
-+      ste,gpio:
-+        description: GPIO mode enable.
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+        maximum: 1
-+      ste,sleep:
-+        description: Sleep mode enable.
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+        maximum: 1
-+      ste,sleep-input:
-+        description: Sleep input pull configuration.
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+        maximum: 3
-+      ste,sleep-output:
-+        description: Sleep output value.
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+        maximum: 2
-+      ste,sleep-gpio:
-+        description: Sleep GPIO mode enable.
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+        maximum: 1
-+      ste,sleep-wakeup:
-+        description: Sleep wakeup disable.
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+        maximum: 1
-+      ste,sleep-pull-disable:
-+        description: Sleep pull resistor disable.
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+        maximum: 1
-+    patternProperties:
-+      '^(?!phandle$|pins$|groups$|function$)[a-zA-Z0-9_-]+$':
-+        $ref: '#/$defs/config-node'
-+    additionalProperties: false
-+
-+examples:
-+  - |
-+    pinctrl {
-+        compatible = "stericsson,db8500-pinctrl";
-+        nomadik-gpio-chips = <&gpio0>, <&gpio1>;
-+        prcm = <&prcmu>;
-+
-+        uart0 {
-+            uart0-default {
-+                mux {
-+                    function = "u0";
-+                    groups = "u0_a_1";
-+                };
-+                config {
-+                    pins = "GPIO0_AJ5";
-+                    ste,input = <1>;
-+                };
-+            };
-+        };
-+    };
-
--- 
-2.56.0
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261110-ux500-pinc=
+trl-bindings-v1-0-a9f0e9d12d19@kernel.org?part=3D1
 
