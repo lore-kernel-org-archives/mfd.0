@@ -1,56 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
 	t=1794348060;
-	b=iRTez/WmLYUky2niixKerjxATdpPYCxorJEbfHDy2nm8NOcDD2/mY7KeT0dnafjuxdDe
-	 yL1ApHPgLqn6srClfqzNnqskH31lXTrLQ243YNWzRgaYxP3cdsWqm5B7uycuQO6PuOfqw
-	 ++0bXYZGeFZRqEh2t9iztLRMTmrLV72jHq6df49Ge3iY+N3PFfy732AZ+E6ETNXSPIknk
-	 pYn2OJdTyWyNkoNc+vBAfFcHuglIrx1pMBsDfZX02RS9rNi8K3XQojK39M3hQ97HI5+pu
-	 bfTEQ9V1XMagDEmmGv9alFKuR6Fj44T5FScep1c7YrLUQfdeRzlfPTxDQXznM6HdnOQ==
+	b=2RCetXHYvh9B6/AEOJtnIbUqqh8djDz2NaRK+s3BjrnZkTZRo3K6sygq/NcIpjTlGFT4
+	 w92ZIIkXeoSaFrIVQjwJzzBfQhYOwOAuLN0ADlATR4xrHdjudMdmLtAFYjT/8oYuFRaD5
+	 KBmhIW/oqD/tBsIKtWXcATpR48FX/kqwPfRXSauVQjbnBCG9GFmpdcQDBScdm14zZB8Z4
+	 mEHsICobdp1IKO4ggIFi//gmAZR0D1gpnj5/4WHuD+xXEk+xnJdNnCXXc+THrxd7XGvJ/
+	 BFG0TxrFQsX4mwohHqQoDoGaAF79Ee+hmQjBZLksDiJt/ITyUIJoXTeDzWLONvIAESA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	a=rsa-sha256; c=relaxed/relaxed; t=1794348060;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=Uuqhgr7vCL4+GSuSn/nVZyXzUdgmAyUG5JOUd4d8Yq4=;
-	b=wVAkLSb5QU0HZ9fmFQl6udvdJXeJOT2Zd+BzkACY3YMf1exppuHkJWo5vpaTTkFbX3xy
-	 RdG5/kL/1wLkSN9ibS9Q2t4D4T0cXHGYuce92g3Es5asb4L2ZjiW2tyJK/AiXVPK8jlRA
-	 iAe/yiiIaEFlk2yZ76pV99rYmasLCgJU1HeMx2ST7Ru9eaO7R6SQq50gpK6pLs978lp+d
-	 h84G+3ueSnRz7HfX82YIZWGxWWK9m3qyKOZUtVb+L9LxYTna5jAiGuluheFJuGmUSfkcG
-	 1ZNrB72+/gNzrOzt/YEMPHQ+3KRb5jG3gGMiFZ2ZJNAcZ6v6Vsisxu6De0yZAFbAq+Q==
+	bh=PoLMubCZCQ7+wjlHLUWkMz5LYHziQ5q0fvUSn3GW3Ko=;
+	b=kpiM4UBSIo7ocOjfb/IGd5B2s4f3+zKZmS8tu+cD3yzIIADSJg5DB8c/EkXnqw15YY+W
+	 2CPdps/N0bZYPGFUZJRFN0uaSV8hhYebSKTUoLheDEbpk+uVfPZJQH8Ano+KyHDwxgbiO
+	 jvAKRaBx6w1Es39mDDUzeGxfAF3x2Wc0EfNfNc+F90IFFQfPkiuHHBEdi7EkwIPT/y2Q3
+	 3XjBLuqv/KSYZUe3ClTiC2XgD17btCbGNVvGzAOJn1EhMxYGfofstDAxbIJ2iuejroVtm
+	 kMwIx2LuV2UqfdIrvp5MBNsJ2HHDr36LiCwn7WZFsHM0B8EAgZvvaTMqa8O9tGW3CDg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CWuAC1uH;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BqFob1Xd;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC60D606A338
-	for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 22:00:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 345CE60A260A
+	for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 22:01:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CWuAC1uH
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1BE711F008A2;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BqFob1Xd
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C59051F008BD;
 	Tue, 10 Nov 2026 22:00:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794348059;
-	bh=Uuqhgr7vCL4+GSuSn/nVZyXzUdgmAyUG5JOUd4d8Yq4=;
+	s=k20260515; t=1794348060;
+	bh=PoLMubCZCQ7+wjlHLUWkMz5LYHziQ5q0fvUSn3GW3Ko=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=CWuAC1uHczR67r4YkSoA9dsuuW4prG7DeZVdtGG++GKLggYsv96LVOw4+4MFdXc9n
-	 j4SawYDCX2GlUyY2wWhGs8HH5IcVkYWrn+FQfPx/l6lPwaja20bpKi2rgRpzhCcHWD
-	 oAdduuJwgddPQwkNwmoFeUcld0oReyledyOQnUwdV1Z58Djo71Nc+YvT5KI1q5Cyvx
-	 tCRjesfFenik1xmXqBrPqKRJlpxxss/NSipk0pTkvPIhLGsJ1U9PQcrtx2X1TVZw7E
-	 7XLyeoQkHohkcNOMFgvddudGbZoXILss656soIiNigfbD8v9YuwKzhZ7cAMN6GeE32
-	 ycnamX6hO/V4A==
-Message-ID: <sashiko-outbox-207803@kernel.org>
+	b=BqFob1Xdg1K7+ukKiNGKp5C8jC2X/qn5CTxDESvkVrKvcTRPYSfnxzoGyFF2kET0c
+	 2MJ9w/zNUEqTwRJTPf+ORQSNGHP/a+NyDftrYsbeNAwwxdZz72hg6ZRTCAabmzg0Za
+	 raIJIP5qmU1fYg9IharpO9/2s1F9d3NZyPsfcvYCQpFGYAp30OX+OC1T4wR1AcpNbN
+	 EdG4no1GgNFYkyOQopCsG1T2UNN2xeaxlfzyWvAtnke6LKVAxAe98Fymwo+gDQVbOL
+	 d/bRQMsFcqA7tVa8qqD9vnX5ngPOcknOm3VpOLuzMS4bBK7THVN6M13T3jo94V0m4b
+	 2IfBBJerkD/Lw==
+Message-ID: <sashiko-outbox-207804@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v4 18/20] mfd: Unify style of i2c_device_id arrays
+Subject: Re: [PATCH v4 04/20] mfd: lp87565: Explicitly set driver data for
+ the generic dt compatible
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?VXdlIEtsZWluZS1Lw7ZuaWcgKFRoZSBDYXBhYmxlIEh1Yik=?= <u.kleine-koenig@baylibre.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <9d0e23458e847372a4ba9a4f582d36f0ff5b0edb.1794347059.git.u.kleine-koenig@baylibre.com>
+In-Reply-To: <8f0bc82073121d4c2af24ef495873f486cd53631.1794347059.git.u.kleine-koenig@baylibre.com>
 References: <cover.1794347059.git.u.kleine-koenig@baylibre.com>
- <9d0e23458e847372a4ba9a4f582d36f0ff5b0edb.1794347059.git.u.kleine-koenig@baylibre.com>
+ <8f0bc82073121d4c2af24ef495873f486cd53631.1794347059.git.u.kleine-koenig@baylibre.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 10 Nov 2026 22:00:58 +0000
+Date: Tue, 10 Nov 2026 22:00:59 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,20 +61,9 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> Most of these arrays already mostly match the most used and
-> generally recommended coding style. That is:
+> The driver relies on .data being (void *)LP87565_DEVICE_TYPE_UNKNOWN
+> (i.e. NULL) for the generic device tree compatible. Make this explicit.
 >=20
->  - no comma after the list terminator;
->  - a comma after an initializer if (and only if) the closing } is not
->    directly following;
->  - no explicit zeros in the list terminator;
->  - a space after an opening { and before a closing }, a single space in
->    the list terminator;
->=20
-> Adapt the few offenders accordingly and also use tabs for indention for
-> two drivers.
->=20
-> Reviewed-by: Charles Keepax <ckeepax@opensource.cirrus.com>
 > Reviewed-by: Linus Walleij <linusw@kernel.org>
 > Signed-off-by: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@b=
 aylibre.com>
@@ -82,5 +72,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/cover.1794347059.gi=
-t.u.kleine-koenig@baylibre.com?part=3D18
+t.u.kleine-koenig@baylibre.com?part=3D4
 
