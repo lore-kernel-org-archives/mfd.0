@@ -1,56 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794332778;
-	b=X0H54Ar9/BqUFC+rptgndZ0F6kIYxgRUvaA5l6MaT4DBR+iTCXDS38Tuk/koFzs//IRS
-	 bFcw2r3xixU1nxgA1W8xekA6XPDVbRIaLRDElRlQeazg4m0qaiAFCyTrpdJ6S0q69xIVF
-	 dNMqk8xXdVvYyMqoPeI9lRhi6OgvxuxgUMNo9YBVnSvZK45prVvfUkYL+xRC5hk3zGBNM
-	 Iy9ZMkP6UzYaf5Ss1wOvts5FNsj3eY9i3fVhglCejgUdYCvxhKC9Tt06TOkqIlV4xH7zx
-	 Qia6JD3VUjCyciuFrvaIjnGkqjQ0ggTcVi+mIDqCRe1+JXrvtyzWyK3w3kEM+h66xVA==
+	t=1794332894;
+	b=EfaDMmcQ+t3Wiih+MYd8NwmA33EA4akohHVkoFuvjsunJx8DRfLYuN2zyI2YAGzDC/te
+	 5+TRt8uFD4qQUf52aXZ0NrfptiBZbr9KB3ttQjSKApDIAYgLVJMwPT2abHEe/3on/vAzv
+	 bkluGyRsTdHLVhjZxTPThN/QZ2PzTSN/fFDu4U2/2bc7mLzNBM6iGOvEs4cQ00zc+kTFV
+	 +/KHfUlArI8X67Mnr1/VNh4g8oag2qOc/azlQQK2afJvjJMP6E7xK/f39GE/Zo8q/9YxW
+	 6wKz7+iR/0i1dnYJxBAzX8dQtl6evnKbJi2CEgXszOI/ie2/TX9MrIyXK9pzfwUY3vw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794332778;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794332894;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=SUTnH9EevMI8JYNSVJmHllTqvc20/H5fZdrtmj6eTLY=;
-	b=ce0Mt4mlBdud3TVF9QZGU57kd7C7d5STtdNkLeAC8BdHuPJAMz0xhQv8HrN08f02KWzH
-	 kfRFcPiNY1JU0PGzmW5oqaG82nVsJaMlOR5RDz02fvu0zzYE9o5RH//ngzuHdLu5Uqx7X
-	 vwcBXhI3QJvvRqF2rGVlCOANqMXAtI6giSlDXX/OKza9e79iW+cW009q9leMkb845O5AS
-	 wMQebY4ZCNDiMyx20bPxjwlKmcEqRYS1nHLQmaOpBGeM9eSv1ytPj2xP1wCkLnvX59Rzd
-	 03ddV+i5hHrdLiwIx705JmYgwKh6cm2FJIrP0j8i2tKchakoedwRFqzqZUBtl8SDqSg==
+	bh=FPZTkb0rWR3SMwTT3nEayW4LjsP6H81pFe0ZBQISOUQ=;
+	b=okpoqSoeBumg7exPCpcc8Ln9WqKDLuTBaW182yGN5sdRM4ovZftoGyGgfNkG1ZN60CP4
+	 PXuvG1I1DkBShH9PTZ+QXoV4vTrROFw55ywG34cAJa5X+oXe5Jl3D+At8dWBgH40J2RaX
+	 aI23MDkvzYiN+ejA2yIj64BTqSgBS6ZXazZKnlEnQkR3uyGDSI7Yj8gADuWBKTTSFDJMs
+	 C9JyvF8FDuCh0ErAGBSj02hQsaaeTKCqOYOL+tfRx1NpNBnkL2liG5y/jYZE7NkLrtKtH
+	 /P+Va6LnMk6pcSQUeGF2AvHzmJMplJ1qYTk2HAheRmHvzNia1T5VezUo8udg7rBW19Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=OPAlEoDv;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QndiostQ;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49822606A333
-	for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 17:46:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E40D606A31C
+	for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 17:48:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=OPAlEoDv
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ECEDE1F008A2;
-	Tue, 10 Nov 2026 17:46:17 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QndiostQ
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA1221F008A5;
+	Tue, 10 Nov 2026 17:48:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794332778;
-	bh=SUTnH9EevMI8JYNSVJmHllTqvc20/H5fZdrtmj6eTLY=;
+	s=k20260515; t=1794332894;
+	bh=FPZTkb0rWR3SMwTT3nEayW4LjsP6H81pFe0ZBQISOUQ=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=OPAlEoDvV+GC5GDy8Llr9KO9LAzP7nwph8pger7HhuBHXGkSHNX6aeWWFuih2+96+
-	 DL9JooFrsuPWqU3r87fMlhRp1Y7LOcPJy2pl95OyNkhsyhYboQ+Y44hmFyW7eXGTYN
-	 znM4iCiAVhwe+BC7fNj0zx/EhSDZ1+5+EgM1w0roRG7q73Rvla8ydgBPGipZExyfgR
-	 CL1OjxO9bWpri+H5bI2EK2Pb1EsDAZBnxZkymLJhr+5bQVpNkYclZGsTWnZvAUjH7n
-	 UVbHKgF02juyENJIBTSz7aIdwaEwkBhDhD5VIRQQXnTGtln5yGWParN6gQq5XLcMjo
-	 UuAmPsXLOJ+nw==
-Message-ID: <sashiko-outbox-207508@kernel.org>
+	b=QndiostQWKBRa24EmSHv31KNkyjv0NTpX3k8oHhnplxQbpsOm8NNkW/TJJ/Ph1FPa
+	 6bH9kRmwKJoM6mCSdK7we3uIRyVRgzzijU3mlY39604Q0rEFDFrlkusSNGrem8pOAv
+	 E5tE/rdnEG6UECDqS877Ov5aUsLXyvRbSHZpgdcxVB+WnDYxajOIMmonj5ppXipTLb
+	 QO+F0Uf6hgFZvfuXMsKmeVMLDL5xCwfC3/pDgGyElAwnoWhnrbW2u6NZl8PB2kEYva
+	 S8lhn12KnIx60cSJljdG0CgRpYo++qEtzp39xVXtXiOi3/u/cNV3Rw4LVroWNB7/ZQ
+	 EaRxTIRmSpvkA==
+Message-ID: <sashiko-outbox-207516@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 2/7] pinctrl: airoha: add per pin mode field mux
+Subject: Re: [PATCH 3/7] pinctrl: airoha: make the chip SCU optional
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "John Crispin" <john@phrozen.org>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261110173941.301478-3-john@phrozen.org>
+In-Reply-To: <20261110173941.301478-4-john@phrozen.org>
 References: <20261110173941.301478-1-john@phrozen.org>
- <20261110173941.301478-3-john@phrozen.org>
+ <20261110173941.301478-4-john@phrozen.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Tue, 10 Nov 2026 17:46:17 +0000
+Date: Tue, 10 Nov 2026 17:48:12 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,22 +60,12 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> Newer Airoha SoCs select the function of a pin through a mode field in
-> a dedicated IOMUX block instead of through function specific bits in
-> the chip SCU. The AN7589 has a 4 bit field per pin, eight pins per 32
-> bit register. A group can then need one register write per pin, and
-> the two entry regmap[] of a function group cannot carry that.
+> A SoC that muxes every pin through the IOMUX block and describes no
+> pin configuration has no use for the chip SCU. Skip the lookup when
+> the match data names no chip SCU compatible, instead of handing a
+> NULL compatible to syscon_regmap_lookup_by_compatible().
 >=20
-> Let a function group supply a pin_modes[] array, parallel to the pins
-> of the group. When it is set, set_mux writes each mode into the IOMUX
-> regmap and then applies the regmap[] entries of the group, so a group
-> can combine its pin modes with a register write in the GPIO block.
->=20
-> A SoC with an IOMUX describes it in its match data with struct
-> airoha_pinctrl_iomux, which holds the width of the mode field. Probe
-> then takes the regmap from the airoha,iomux phandle.
->=20
-> No functional change for the existing SoCs.
+> No functional change for the existing SoCs, which all name one.
 >=20
 > Signed-off-by: John Crispin <john@phrozen.org>
 
@@ -83,5 +73,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261110173941.3014=
-78-1-john@phrozen.org?part=3D2
+78-1-john@phrozen.org?part=3D3
 
