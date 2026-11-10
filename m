@@ -1,83 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.51
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.47
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794347748;
-	b=B0qQoxvVL3E5Pd0OnOFKV2zUyKGy/v3OtiGRuGg+vtUXzRMx5iVo9uPXuVaYnWSJ+1J5
-	 Deyt1nL5aVdn4LxseskoBM17FgDB4W9wczwHEyc/5tIF6ieLw6Kh4wSHviSg37YKRvhWj
-	 C9SaE17J62HKwFJ/8+Hm3bIH+orJhowo+v9OfGLIe2lw4QG/CdndMQivUr1OHFVoXXVXZ
-	 qa36uIMVC8f/DphjjMWcltTNSTzFLiFdPtMpx462O39TfHS+72B327WhQh+AqE62qQM+W
-	 LfD8c/pQZI1J3ZW5+tI7imibmmDBkr5DD98jgnLZINU3Ezv2KZR6B/Nh8KWwSt29Akg==
+	t=1794347749;
+	b=xCNIYiXHFLFLo0mcDNMh96FD0FN5BQNEjyzHxv63hdnZrFYGiJaLgFQAnwFpMpZNFcQF
+	 CXpnEAAWy5ChzeGhcNGaR5fSyCPrNN6Lm5baLtNh9DWhOewi2w01ISHCGfuoui4nhkNaG
+	 BRZvjHFnZooK+0NAF/JSUcXdQzi5ouG44VsHsuENFosGc39YkLTF525afxwFUjpazYDK/
+	 6VNYNMBUX97EAqg2/qThea/tOQo3AeG4B2MYgPbk0MJ3LSxGwRKV8PGXBio8J0KOL73uk
+	 vYWiSJCydSsC37qzQf0I1SkWeTeI0q9VdZlfNvhCtSAljRT8tBVdNVQLiti0O7SQ+Iw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794347748;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794347749;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:Content-Type:
-	 X-Developer-Signature:X-Developer-Key:Content-Transfer-Encoding;
-	bh=3345ZdTcCQuGdtmZiQjZoFFUO3mxUE5t23pzXVkSu9U=;
-	b=VQxooOYtVaiUljpio+Xjzexm+k4TbiZXgi+pEpjhwk5LL0MDckLdjZa+x/EitH/U81JI
-	 lroFz1wM2p8ohgVr1XVW+DmIWjB6iscgydDCWFX0VGKSz6k7LTrH/Lw+c45jpgKkNSIGq
-	 QSCRsgs90Rctm5Ipd91Lde2fHVbFQ6cj6SvXA+jF9H3G+1gVGTijE9VPz+mu5vJ/LmuO2
-	 9VdTUz2VgHEk6N+55kg1f/bTWVjBV1flDZCBDrB63KzzwYyvTdtEAnaNnsMiO3qPi0M2K
-	 ZN0+sBSU22lg0Y4GldObN9zvQOUVYnPSgJSRaGawgyydCjO6+ooitiy0slTROvCb4vw==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Type:X-Developer-Signature:X-Developer-Key:
+	 Content-Transfer-Encoding;
+	bh=7+a66nuJAxZv2NLoN6sl/H/HIeT9eO6TiCDIQQ0skPA=;
+	b=oQ9ESlm0dx16e2qO/IGYzD1g+/Hrztcj3pvyKtlOEm//j9N7v78W65h63IFGk7Q+B1Z9
+	 D/y4Bt6Z3mp6bUT5s5b9IUDN2u7SjDRQyJBKNIIr52cEr0MHcxV1yA3a1WzardaqnexLp
+	 ICt45tW3lc4ca8JxjkW5yD7+xKQ1R/MvfCySil4Jd4mJGybxWMpV6Jl6QXi9hAMCGFqPE
+	 4s9STiQbtiuOxzQfHvuN7vRsrkmj4EzzfOHPtEKanV1qMUbXQJsVeW7AbF3mxakRzvkM+
+	 myd4BLT6sSG8adaX1FSOQC+GxIe0YlhlKBnmaq8D/4mjzrWs19kn2bf6Ey8iLcANUlQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=baylibre.com;
 	spf=pass smtp.mailfrom=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=PLZ5EnbR;
-	arc=none smtp.remote-ip=209.85.128.51
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=BoEYTqwC;
+	arc=none smtp.remote-ip=209.85.221.47
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14F38606A32A
-	for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 21:55:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 14F38606A32A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 004E760A2600
+	for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 21:55:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 004E760A2600
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=PLZ5EnbR
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4a1b07c3c5fso24954385e9.1
-        for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 13:55:46 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=BoEYTqwC
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-490c3ae81d3so1699618f8f.2
+        for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 13:55:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1794347745; x=1794952545; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=3345ZdTcCQuGdtmZiQjZoFFUO3mxUE5t23pzXVkSu9U=;
-        b=PLZ5EnbRG4gNapZh3Q//igpEb3uhsLGIFnytTgxPOd0yNXXFR4a2+VDS/uO3Op0dq9
-         g+kbJBKC0cjHs9mE36D1saLcM6STXs4fiqqMjWbf51+dTBSlP0fMv2vxVYjf6H0rw5ta
-         JTDThNQdLwqDW/eySBXCE27iwUTrn76YII0UCmDeaMM/FbnaQfm6IMfrBzO3e1iJWC+l
-         4Jdboh+wZIDDJNwqgrhSRgfqXbfSCKy8VCtzWFDRMju35n5bARzof7UDcw3vfDJNOe/9
-         IST4GEv19A50Dsaty1gwP2r83JFzE7r6Zp7AqAn3ZNBsmXALahSEb2wCjHdBo/BtXfQ0
-         N1pg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794347745; x=1794952545;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+        d=baylibre.com; s=google; t=1794347747; x=1794952547; darn=lists.linux.dev;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=3345ZdTcCQuGdtmZiQjZoFFUO3mxUE5t23pzXVkSu9U=;
-        b=SMeR3+Gxg0gLEZj/+tG5nHePFNrQKpoQLvDFWjpxkbTMma6mPeAMV4vOmjNfvg7Via
-         xNasdYM3uWc1jNz2TvcJKzKPhAhpZCHX3AMSmAGt4IPOCGxp4DHY8OCsk7N3JmHFazb8
-         gM641Xxw5c8DIwYPnZ0CUaR2aNhl8pBq0WC1t1dVLfupQYJ5jgCBbPKIbOydBhPrQjx4
-         lQPLWlzxKOy/x4bxvV2V8Ldwhiwpmj4Vw3qeQanf/Mitoao+RjyBXST6FEv8nhmJEIU0
-         tApmEdnsacgG4HsyaJ420auERFAxU2M+igwHu3VUY3Utm41Nq4OjiYZPk5wrAfIZMiW0
-         CkQQ==
-X-Forwarded-Encrypted: i=1; AL+hErHJkqSmsfuqKQFlkJCjh14MldroJOLkcrK08fONYY+QqRuYkiOTFEZyz1JIsCe3BVzAEps=@lists.linux.dev
-X-Gm-Message-State: APuU4Z+iwyBzyo0GUt0vFhn/ThCNcV1ykj7RiL/Uz7wNUKKbahZNZJ8z
-	LOjuwFlm8lwF10/PHMGf0/omBzBZnoplfIWegmxY5Lea6q2IVZVRiBY3AJGEdCG+Bfg=
-X-Gm-Gg: AYBFou1qP/hkFa/9miOUqMmP+4B3OlgiDseK6n4QDJ8+JVNofPDZbPo4BtscXmh6hK4
-	1PtuKOYCMjrUuURmTzuLCkigoAf4JuBbb27KePM1pVsy1dpDx1tKuai46I0VC8c4eXzVxPLCZSm
-	STAg4qwiqkzYwbaluW0xOWJvF0NG85gbOc4Bkv1+eKtCrR31fqhyiMAUESXnZnEAsoVMzvHvcuI
-	A7d+QmyfLYflZXR6SE5diGaSaIlFH59LiKM2O2cGAUrLm1FAW1ILtkadhCYkJME+5BtbDptV3tF
-	LDf6E+9PjLxRnXXcO8hVG5wMLQMOCPQ+IS1mim2Fr32upbh4qh8rWoOzZQlE8MadT2r2NxLdirq
-	O6QoTKWooUXYTCKJZ4SFu3ayJlNtIRiyvPP1GijPn8czeZULNoKLlSBpKWi9KAGburhP2sKZQP8
-	vyj73Xx+jvRaf4InVNQ5GuD9W9BJfvb3nFPSmgg7bJcieCcfGYAqkg/l2Tj0RdP7qBfZW8EkN0L
-	fRhFcDwyhctxl33GUqZtJ4jtfjy6VK0SqUaMHrUEJDZ2AkNCB+AsReRxeMgOLsV2S/NE1ZfYAcy
-	T7vRzH6HbhK15etqpc8k/lup8XlFL7avQQ==
-X-Received: by 2002:a05:600c:6089:b0:4a2:1612:637a with SMTP id 5b1f17b1804b1-4ba09376ccfmr6522835e9.16.1794347745017;
-        Tue, 10 Nov 2026 13:55:45 -0800 (PST)
+        bh=7+a66nuJAxZv2NLoN6sl/H/HIeT9eO6TiCDIQQ0skPA=;
+        b=BoEYTqwCELVijard8O8pabvj3N9oycv6CglpC/9NO8IP029vQUFMms8slRTAkSxg0F
+         2iYLx8/44tTW0YkLcW8eQ8f8Px8dCZlxkgahOtrE83DhVhji8wWqVhCHsL12TiKuVZhW
+         WmEaQW5H4/ajfuXZgDoqspoAo+eb4d7/UpHnQ359Y3u6YWt+yFBOFCzFrU+i0o4g85o8
+         BhXtX9oBJovs/kcMGfM5WDY4fKrTj8nOQF1zMHQIexVf25iswfxHrf+c2igonRc2BEEt
+         SZd1dEn/1vwRQODPBnrd6zUelNDAt6ma84KPfsfGK3UcVSt+0CPZ6XHTjBTS3PPg22kI
+         aeTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794347747; x=1794952547;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=7+a66nuJAxZv2NLoN6sl/H/HIeT9eO6TiCDIQQ0skPA=;
+        b=nkIDOKt/Qu4U88ArSvOp+h+rPlhlK/TfhVahX6fKTcqnnXjz+C2nNpe7PAt6KbbHhR
+         6W7DNrtZ3mbUxeUDhezXF3q1wfQ0Xy0QokzOp4bARNr1AjC2EOJdlcvnfIQStqOg5mui
+         PELRDl+t60tOCIhBwg1FC0qWHrRKliZSmjeG0gUBds7E3d+bl2LeC3oYU4kHKx340bLz
+         oL1cWj10zIZWLfW7W2EjPz33+ZIhzqtcrevy8F/W10qiP6+dHVQ5qYmX27HgVgjBzfiK
+         y099LvLM9/8N1dVLN/qE96asGMzLRE+40mYOxkjwFEVdwQ86g0sqQkkfnvGjx+acqD7C
+         Y11Q==
+X-Forwarded-Encrypted: i=1; AL+hErGl+f/ZSSEK6iKy1WvBUrV1mJsro9fOf6c62/zJq4f1cB9K2qlwFq6jfLkpq9LcKDIKjZ4=@lists.linux.dev
+X-Gm-Message-State: APuU4Z/Ge36ddZQ2TGpvapca5MUSlaVhAZPj1hLFsUc5nPWr2RJ6CUDV
+	K1cY0zZtmnXyFmxYsLnyKtV+v03v0tKqUQNWyGHnHN5T9+CndzqQ7WamkC/wxT1826g=
+X-Gm-Gg: AYBFou0Ch+PIEJ0VgOQrdoPGVVNy4SgfS8DSGH2Ei5G8VM64dL7ZMWHATiVNMcVLfAj
+	vGsF6USWsLJ2xX8mNk2U0/xbge7hPDTXrXMVbJbD/zvFHedJixPtJvR9tlktNdEmAd2f/jkZ9j7
+	HjJXPKztuhQk/yp9saInEunRy5NizBka18OZCkzYAtTyCHkVYosEHV+bo8Sa8+vdGtsje5MU90E
+	BZhExzSXiADtKRIBEzTob3FhVmXhrYL/MlnXqXusQtJ6GuOa2vlXIvtalEMd062PouEpcvi2X3N
+	x3jbzr5/p4JKNQj79M7NW3HV/V2j/rzYToPsOkJ0ZChzd0G/NFaUcacUI4POzzXIkrdzgcQaZoG
+	ubIQ5hCb18/64mGPEX2Zh5KvW8v8gAK28UvNJw7RdbguHWqsWnvQnjD4tNbWbT1RP8M3HkYhOaY
+	HoDHMzhfvufNaaoljWv0leW2ZSsLYxJlggZdxvlBrcuk2D7+tycD9bFRmhSx/eouUmptg4Y3PoR
+	rk9B19vS7DPf2H7nwwLFl9cfw32TS0tgh2E7z0cwtccY01JtjFLDoWnIow/8CwOdA8N4EW4AyhN
+	/hJbeRsFe0cRJ5jNQXWEG48XbQ/b/RVriA==
+X-Received: by 2002:a05:6000:22c4:b0:488:823d:5086 with SMTP id ffacd0b85a97d-499c096bfd5mr530611f8f.0.1794347747383;
+        Tue, 10 Nov 2026 13:55:47 -0800 (PST)
 Received: from localhost ([2a02:8071:56d1:2de0:1d24:d58d:2b65:c291])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4ba09517bc7sm5065775e9.3.2026.11.10.13.55.42
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-49835d2c05dsm7160201f8f.25.2026.11.10.13.55.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Nov 2026 13:55:43 -0800 (PST)
+        Tue, 10 Nov 2026 13:55:46 -0800 (PST)
 From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>
 To: Lee Jones <lee@kernel.org>
 Cc: Florian Fainelli <florian.fainelli@broadcom.com>,
@@ -88,93 +90,13 @@ Cc: Florian Fainelli <florian.fainelli@broadcom.com>,
 	linux-rpi-kernel@lists.infradead.org,
 	linux-arm-kernel@lists.infradead.org,
 	linux-kernel@vger.kernel.org,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	linux-mediatek@lists.infradead.org,
-	Qunqin Zhao <zhaoqunqin@loongson.cn>,
-	linux-crypto@vger.kernel.org,
-	Benson Leung <bleung@chromium.org>,
-	Guenter Roeck <groeck@chromium.org>,
-	chrome-platform@lists.linux.dev,
-	David Rhodes <david.rhodes@cirrus.com>,
-	Richard Fitzgerald <rf@opensource.cirrus.com>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Mika Westerberg <mika.westerberg@linux.intel.com>,
-	Zha Qipeng <qipeng.zha@intel.com>,
-	Thomas Richard <thomas.richard@bootlin.com>,
-	linux-sound@vger.kernel.org,
-	patches@opensource.cirrus.com,
-	Xu Yilun <yilun.xu@intel.com>,
-	Tom Rix <trix@redhat.com>,
-	Michael Hennerich <michael.hennerich@analog.com>,
-	Chen-Yu Tsai <wens@kernel.org>,
-	Marek Vasut <marek.vasut+renesas@gmail.com>,
-	James Ogletree <jogletre@opensource.cirrus.com>,
-	Fred Treven <fred.treven@cirrus.com>,
-	Ben Bright <ben.bright@cirrus.com>,
-	Support Opensource <support.opensource@diasemi.com>,
-	Andy Shevchenko <andy@kernel.org>,
-	Charles Keepax <ckeepax@opensource.cirrus.com>,
-	Chanwoo Choi <cw00.choi@samsung.com>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	=?utf-8?q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>,
-	Aaro Koskinen <aaro.koskinen@iki.fi>,
-	Andreas Kemnade <andreas@kemnade.info>,
-	Kevin Hilman <khilman@baylibre.com>,
-	Roger Quadros <rogerq@kernel.org>,
-	Tony Lindgren <tony@atomide.com>,
-	Andreas Werner <andreas.werner@men.de>,
-	Samuel Kayode <samkay014@gmail.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	linux-renesas-soc@vger.kernel.org,
-	linux-omap@vger.kernel.org,
-	imx@lists.linux.dev,
-	linux-stm32@st-md-mailman.stormreply.com,
-	Linus Walleij <linusw@kernel.org>,
-	linux@ew.tq-group.com,
-	Nicolas Ferre <nicolas.ferre@microchip.com>,
-	Alexandre Belloni <alexandre.belloni@bootlin.com>,
-	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
-	Peter Griffin <peter.griffin@linaro.org>,
-	Alim Akhtar <alim.akhtar@samsung.com>,
-	Tim Harvey <tharvey@gateworks.com>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Sven Peter <sven@kernel.org>,
-	Janne Grunau <j@jannau.net>,
-	Neal Gompa <neal@gompa.dev>,
-	Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>,
-	Luca Ceresoli <luca.ceresoli@bootlin.com>,
-	Saravanan Sekar <sravanhome@gmail.com>,
-	Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	=?utf-8?q?Jonathan_Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>,
-	Matti Vaittinen <mazziesaccount@gmail.com>,
-	Orson Zhai <orsonzhai@gmail.com>,
-	Baolin Wang <baolin.wang@linux.alibaba.com>,
-	Chunyan Zhang <zhang.lyra@gmail.com>,
-	Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Samuel Holland <samuel@sholland.org>,
-	Liviu Dudau <liviu.dudau@arm.com>,
-	Sudeep Holla <sudeep.holla@kernel.org>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	Geert Uytterhoeven <geert+renesas@glider.be>,
-	Magnus Damm <magnus.damm@gmail.com>,
-	Heiko Stuebner <heiko@sntech.de>,
-	linux-samsung-soc@vger.kernel.org,
-	linux-amlogic@lists.infradead.org,
-	asahi@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org,
-	linux-sunxi@lists.linux.dev,
-	linux-rockchip@lists.infradead.org,
-	Peter Tyser <ptyser@xes-inc.com>
-Subject: [PATCH v4 00/20] mfd: Use named initializers for arrays of *_device_data
-Date: Tue, 10 Nov 2026 22:54:25 +0100
-Message-ID: <cover.1794347059.git.u.kleine-koenig@baylibre.com>
+	Linus Walleij <linusw@kernel.org>
+Subject: [PATCH v4 01/20] mfd: bcm2835-pm: Remove member of struct bcm2835_pm that is only used locally
+Date: Tue, 10 Nov 2026 22:54:26 +0100
+Message-ID:  <6b2500112538be613480d472090e5ff6d86339bd.1794347059.git.u.kleine-koenig@baylibre.com>
 X-Mailer: git-send-email 2.56.0.rc1
+In-Reply-To: <cover.1794347059.git.u.kleine-koenig@baylibre.com>
+References: <cover.1794347059.git.u.kleine-koenig@baylibre.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -185,217 +107,86 @@ List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9750; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=nD5jT2yhNB7skZ7+gOkejPp/Wep1AkKN4ZTmIkt/V1M=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBq85KSYpZBXE6fsJl5QLOE/ydM/argSy8UX4DhB Rza76iDzVyJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCavOSkgAKCRCPgPtYfRL+ TuNaCAC78WLpLILW6ABKU7KqzJvFY0LrLydKcc+7mVF5DZGE1H9PiVhV+zCn2RH8/TcPXnVUltJ RGb5tfzAK7cpAKTzjGKcxlZ0SDmvVwrJ1+vQoLx/g3Gt4Ib9L6ZZpBk2Bn7K0o3nWT+0S4ng8bx I1X3dRIgIBs2RhbOzYC96WmCWPWkk7nLmF2mKbjJOh8h4WCjEFtVNt6GQYWomV6FeHtO1WgdIaI LU5D20ltbHXzEMOxuqnsltnkD/MJeGdpKx+Y3e7PizV3ko3MvxrjboMjxkEAgpOCrs0aaDVkEch DULuZ/BeLolvyvOZtfbWNuvOsCnlAnHDeGoIcb4lQRCmL2Vg
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2398; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=BVhRr6erYdr3wFkjbzEJs89tzl+sRAbty1vb11mdCc8=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBq85KVWt+3x735zZE7d3XsVM+Ir1QvYkRsw/GQV AkuwK9+YrKJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCavOSlQAKCRCPgPtYfRL+ TsCYB/wKlHgDWs9WbgfoPzex63S+2tugmXVK7KqaQrfxk+uogoRgx22NJCTuQEza5JqZNvFsSs0 twOEXeOfgMREGY4+lHrUyYjk7kC0P4zIhVYdO835/BF9lK1Pdc3PMKVkwdnujeRur1xT5BCwfdk mtghQTqpD6Cb0GDwB/4n4QwirZZGZAsccX6I3WrkOuvibweAhGBy96Vf8U0e1WKnNl37Ou2m4/K Zbl5MJiV13Dvajw2inFrhe0wwMSC0kpa4ImetQsXmxRV00fR8NnvYNncgOZxckNxwfu39q7tXB4 pk2tgDKioZu9PFekQy7YjE0QtRZvqBa1SoD/LDTV411HWeNo
 X-Developer-Key: i=u.kleine-koenig@baylibre.com; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
 Content-Transfer-Encoding: 8bit
 
-Hello,
+struct bcm2835_pm::soc is only used in bcm2835_pm_probe() and thus can be
+replaced by a local variable.
 
-the objective for this series is to prepare mfd for changing
-of_device_id and the others to make driver_data a union, see
-https://lore.kernel.org/all/cover.1780048925.git.u.kleine-koenig@baylibre.com/
-for the idea behind it.
+With that change enum bcm2835_soc is only used in the mfd core driver and
+so the definition can move there.
 
-Changes since v3
-(https://lore.kernel.org/cover.1783615311.git.u.kleine-koenig@baylibre.com):
+Reviewed-by: Linus Walleij <linusw@kernel.org>
+Signed-off-by: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
+---
+ drivers/mfd/bcm2835-pm.c       | 11 +++++++++--
+ include/linux/mfd/bcm2835-pm.h |  7 -------
+ 2 files changed, 9 insertions(+), 9 deletions(-)
 
- - Rebase to v7.4-rc1
- - add various R-b tags
- - Fix a bug in patch 3 found by sashiko where I accidentally deleted a
-   * in sizeof(*pdata).
- - Drop patches about spi_device_id that were sent separately initially
-   and applied in the meantime
-
-These patches are a pain to track and forward port and they are mostly
-orthogonal, so I'm happy about a partial application of this series if
-only some patches are considered ready.
-
-Best regards
-Uwe
-
-Uwe Kleine-König (The Capable Hub) (20):
-  mfd: bcm2835-pm: Remove member of struct bcm2835_pm that is only used
-    locally
-  mfd: bcm2835-pm: Drop unused header
-  mfd: kempld: Simplify device abstraction
-  mfd: lp87565: Explicitly set driver data for the generic dt compatible
-  mfd: mt6360: Drop irrelevant __maybe_unused
-  mfd: rt4831: Drop irrelevant __maybe_unused
-  mfd: loongson-se: Drop unused assignment of acpi_device_id driver data
-  mfd: Drop unused assignment of i2c_device_id driver data
-  mfd: Drop unused assignment of platform_device_id driver data
-  mfd: Use named initializers for acpi_device_id arrays
-  mfd: intel-m10-bmc-pmci: Use named initializers for dfl_device_id
-    array
-  mfd: Use named initializers for arrays of i2c_device_id
-  mfd: twl6030: Use named initializers for of_device_id
-  mfd: Use PCI_DEVICE* macros to initialize pci_device_id arrays
-  mfd: Use named initializers for platform_device_id array
-  mfd: Unify style of acpi_device_id arrays
-  mfd: Unify style of dmi_system_id arrays
-  mfd: Unify style of i2c_device_id arrays
-  mfd: Unify style of of_device_id arrays
-  mfd: Unify style of pci_device_id arrays
-
- drivers/mfd/88pm800.c                 |  4 +-
- drivers/mfd/88pm805.c                 |  4 +-
- drivers/mfd/88pm860x-core.c           |  8 ++--
- drivers/mfd/aat2870-core.c            |  2 +-
- drivers/mfd/ab8500-core.c             |  8 ++--
- drivers/mfd/ab8500-sysctrl.c          |  4 +-
- drivers/mfd/ac100.c                   |  2 +-
- drivers/mfd/act8945a.c                |  8 ++--
- drivers/mfd/adp5520.c                 |  4 +-
- drivers/mfd/altera-a10sr.c            |  2 +-
- drivers/mfd/altera-sysmgr.c           |  2 +-
- drivers/mfd/arizona-i2c.c             | 14 +++---
- drivers/mfd/arizona-spi.c             |  2 +-
- drivers/mfd/as3711.c                  |  8 ++--
- drivers/mfd/as3722.c                  |  8 ++--
- drivers/mfd/atmel-hlcdc.c             |  2 +-
- drivers/mfd/atmel-smc.c               |  2 +-
- drivers/mfd/axp20x-i2c.c              | 26 +++++-----
- drivers/mfd/axp20x-rsb.c              |  2 +-
- drivers/mfd/bcm2835-pm.c              | 15 ++++--
- drivers/mfd/bcm590xx.c                |  4 +-
- drivers/mfd/bd9571mwv.c               |  6 +--
- drivers/mfd/bq257xx.c                 |  8 ++--
- drivers/mfd/cgbc-core.c               |  2 +-
- drivers/mfd/cros_ec_dev.c             |  2 +-
- drivers/mfd/cs40l50-i2c.c             |  6 +--
- drivers/mfd/cs40l50-spi.c             |  2 +-
- drivers/mfd/cs42l43-i2c.c             | 10 ++--
- drivers/mfd/cs5535-mfd.c              |  2 +-
- drivers/mfd/da903x.c                  |  6 +--
- drivers/mfd/da9052-i2c.c              | 12 ++---
- drivers/mfd/da9055-i2c.c              |  4 +-
- drivers/mfd/da9062-core.c             |  4 +-
- drivers/mfd/da9063-i2c.c              | 11 +++--
- drivers/mfd/da9150-core.c             |  4 +-
- drivers/mfd/db8500-prcmu.c            |  4 +-
- drivers/mfd/exynos-lpass.c            |  2 +-
- drivers/mfd/gateworks-gsc.c           |  2 +-
- drivers/mfd/hi6421-pmic-core.c        |  6 +--
- drivers/mfd/hi655x-pmic.c             |  4 +-
- drivers/mfd/intel-lpss-acpi.c         | 58 +++++++++++------------
- drivers/mfd/intel-m10-bmc-pmci.c      |  2 +-
- drivers/mfd/intel_pmc_bxt.c           |  2 +-
- drivers/mfd/intel_quark_i2c_gpio.c    |  6 +--
- drivers/mfd/intel_soc_pmic_bxtwc.c    |  2 +-
- drivers/mfd/intel_soc_pmic_chtdc_ti.c |  4 +-
- drivers/mfd/intel_soc_pmic_chtwc.c    |  2 +-
- drivers/mfd/intel_soc_pmic_crc.c      |  6 +--
- drivers/mfd/intel_soc_pmic_mrfld.c    |  4 +-
- drivers/mfd/ioc3.c                    |  4 +-
- drivers/mfd/janz-cmodio.c             | 14 +++---
- drivers/mfd/kempld-core.c             | 68 +++++++--------------------
- drivers/mfd/khadas-mcu.c              |  2 +-
- drivers/mfd/lm3533-core.c             |  2 +-
- drivers/mfd/lochnagar-i2c.c           |  2 +-
- drivers/mfd/loongson-se.c             |  2 +-
- drivers/mfd/lp3943.c                  |  4 +-
- drivers/mfd/lp873x.c                  |  8 ++--
- drivers/mfd/lp87565.c                 |  9 ++--
- drivers/mfd/lp8788.c                  |  2 +-
- drivers/mfd/lpc_ich.c                 |  2 +-
- drivers/mfd/macsmc.c                  |  2 +-
- drivers/mfd/madera-core.c             |  2 +-
- drivers/mfd/madera-i2c.c              | 18 +++----
- drivers/mfd/max14577.c                |  6 +--
- drivers/mfd/max7360.c                 |  2 +-
- drivers/mfd/max77541.c                |  4 +-
- drivers/mfd/max77620.c                |  8 ++--
- drivers/mfd/max77686.c                |  2 +-
- drivers/mfd/max77693.c                |  4 +-
- drivers/mfd/max77714.c                |  2 +-
- drivers/mfd/max77759.c                |  4 +-
- drivers/mfd/max77843.c                |  8 ++--
- drivers/mfd/max8907.c                 |  6 +--
- drivers/mfd/max8925-i2c.c             |  6 +--
- drivers/mfd/max8997.c                 |  6 +--
- drivers/mfd/max8998.c                 |  6 +--
- drivers/mfd/mc13xxx-spi.c             |  6 +--
- drivers/mfd/menelaus.c                |  2 +-
- drivers/mfd/menf21bmc.c               |  2 +-
- drivers/mfd/mp2629.c                  |  2 +-
- drivers/mfd/mt6360-core.c             |  6 +--
- drivers/mfd/mt6370.c                  |  2 +-
- drivers/mfd/mt6397-core.c             |  4 +-
- drivers/mfd/mxs-lradc.c               |  4 +-
- drivers/mfd/ntxec.c                   |  4 +-
- drivers/mfd/omap-usb-host.c           |  4 +-
- drivers/mfd/palmas.c                  |  8 ++--
- drivers/mfd/pf1550.c                  |  2 +-
- drivers/mfd/qcom-pm8008.c             |  4 +-
- drivers/mfd/qcom-pm8xxx.c             |  6 +--
- drivers/mfd/rave-sp.c                 |  4 +-
- drivers/mfd/rc5t583.c                 |  4 +-
- drivers/mfd/rdc321x-southbridge.c     |  2 +-
- drivers/mfd/retu-mfd.c                |  4 +-
- drivers/mfd/rk8xx-i2c.c               |  2 +-
- drivers/mfd/rk8xx-spi.c               |  2 +-
- drivers/mfd/rohm-bd71828.c            |  4 +-
- drivers/mfd/rohm-bd9576.c             |  6 +--
- drivers/mfd/rsmu_i2c.c                | 18 +++----
- drivers/mfd/rsmu_spi.c                |  2 +-
- drivers/mfd/rt4831.c                  |  6 +--
- drivers/mfd/rt5033.c                  |  4 +-
- drivers/mfd/rt5120.c                  |  2 +-
- drivers/mfd/rz-mtu3.c                 |  2 +-
- drivers/mfd/sec-acpm.c                |  6 +--
- drivers/mfd/sec-i2c.c                 | 22 ++++-----
- drivers/mfd/si476x-i2c.c              |  8 ++--
- drivers/mfd/simple-mfd-i2c.c          |  2 +-
- drivers/mfd/sky81452.c                |  4 +-
- drivers/mfd/sm501.c                   |  4 +-
- drivers/mfd/smpro-core.c              |  2 +-
- drivers/mfd/sprd-sc27xx-spi.c         |  2 +-
- drivers/mfd/ssbi.c                    |  2 +-
- drivers/mfd/stm32-lptimer.c           |  4 +-
- drivers/mfd/stm32-timers.c            |  4 +-
- drivers/mfd/stmfx.c                   |  4 +-
- drivers/mfd/stmpe-i2c.c               | 34 +++++++-------
- drivers/mfd/stmpe-spi.c               | 14 +++---
- drivers/mfd/stpmic1.c                 |  4 +-
- drivers/mfd/stw481x.c                 |  8 ++--
- drivers/mfd/sun6i-prcm.c              |  2 +-
- drivers/mfd/tc3589x.c                 | 14 +++---
- drivers/mfd/ti-lmu.c                  | 10 ++--
- drivers/mfd/timberdale.c              |  2 +-
- drivers/mfd/tps6105x.c                |  6 +--
- drivers/mfd/tps65010.c                | 10 ++--
- drivers/mfd/tps6507x.c                |  6 +--
- drivers/mfd/tps65086.c                |  4 +-
- drivers/mfd/tps65090.c                |  6 +--
- drivers/mfd/tps65217.c                |  6 +--
- drivers/mfd/tps65218.c                |  8 ++--
- drivers/mfd/tps65219.c                |  8 ++--
- drivers/mfd/tps6586x.c                |  6 +--
- drivers/mfd/tps65910.c                | 12 ++---
- drivers/mfd/tps65912-i2c.c            |  4 +-
- drivers/mfd/tps65912-spi.c            |  2 +-
- drivers/mfd/tps6594-i2c.c             | 12 ++---
- drivers/mfd/tps6594-spi.c             | 12 ++---
- drivers/mfd/tqmx86.c                  |  2 +-
- drivers/mfd/twl-core.c                | 22 ++++-----
- drivers/mfd/twl4030-audio.c           |  4 +-
- drivers/mfd/twl4030-power.c           |  2 +-
- drivers/mfd/twl6030-irq.c             |  6 +--
- drivers/mfd/twl6040.c                 |  4 +-
- drivers/mfd/upboard-fpga.c            |  6 +--
- drivers/mfd/vexpress-sysreg.c         |  4 +-
- drivers/mfd/vx855.c                   |  2 +-
- drivers/mfd/wm831x-core.c             |  2 +-
- drivers/mfd/wm831x-i2c.c              | 14 +++---
- drivers/mfd/wm8350-i2c.c              |  6 +--
- drivers/mfd/wm8400-core.c             |  4 +-
- drivers/mfd/wm8994-core.c             |  8 ++--
- include/linux/mfd/bcm2835-pm.h        |  9 ----
- include/linux/mfd/kempld.h            | 12 -----
- 155 files changed, 478 insertions(+), 520 deletions(-)
-
-
-base-commit: 6628e7d4c6b25c8d18f1345e3a20d21829aae7e4
+diff --git a/drivers/mfd/bcm2835-pm.c b/drivers/mfd/bcm2835-pm.c
+index 9e8e3dcf4bce..87de35075419 100644
+--- a/drivers/mfd/bcm2835-pm.c
++++ b/drivers/mfd/bcm2835-pm.c
+@@ -69,10 +69,17 @@ static int bcm2835_pm_get_pdata(struct platform_device *pdev,
+ 	return 0;
+ }
+ 
++enum bcm2835_soc {
++	BCM2835_PM_SOC_BCM2835,
++	BCM2835_PM_SOC_BCM2711,
++	BCM2835_PM_SOC_BCM2712,
++};
++
+ static int bcm2835_pm_probe(struct platform_device *pdev)
+ {
+ 	struct device *dev = &pdev->dev;
+ 	struct bcm2835_pm *pm;
++	enum bcm2835_soc soc;
+ 	int ret;
+ 
+ 	pm = devm_kzalloc(dev, sizeof(*pm), GFP_KERNEL);
+@@ -81,7 +88,7 @@ static int bcm2835_pm_probe(struct platform_device *pdev)
+ 	platform_set_drvdata(pdev, pm);
+ 
+ 	pm->dev = dev;
+-	pm->soc = (uintptr_t)device_get_match_data(dev);
++	soc = (uintptr_t)device_get_match_data(dev);
+ 
+ 	ret = bcm2835_pm_get_pdata(pdev, pm);
+ 	if (ret)
+@@ -98,7 +105,7 @@ static int bcm2835_pm_probe(struct platform_device *pdev)
+ 	 * bcm2835-pm binding as the key for whether we can reference
+ 	 * the full PM register range and support power domains.
+ 	 */
+-	if (pm->asb || pm->soc == BCM2835_PM_SOC_BCM2712)
++	if (pm->asb || soc == BCM2835_PM_SOC_BCM2712)
+ 		return devm_mfd_add_devices(dev, -1, bcm2835_power_devs,
+ 					    ARRAY_SIZE(bcm2835_power_devs),
+ 					    NULL, 0, NULL);
+diff --git a/include/linux/mfd/bcm2835-pm.h b/include/linux/mfd/bcm2835-pm.h
+index d2e17ab1dbfc..f70a810c55f7 100644
+--- a/include/linux/mfd/bcm2835-pm.h
++++ b/include/linux/mfd/bcm2835-pm.h
+@@ -5,18 +5,11 @@
+ 
+ #include <linux/regmap.h>
+ 
+-enum bcm2835_soc {
+-	BCM2835_PM_SOC_BCM2835,
+-	BCM2835_PM_SOC_BCM2711,
+-	BCM2835_PM_SOC_BCM2712,
+-};
+-
+ struct bcm2835_pm {
+ 	struct device *dev;
+ 	void __iomem *base;
+ 	void __iomem *asb;
+ 	void __iomem *rpivid_asb;
+-	enum bcm2835_soc soc;
+ };
+ 
+ #endif /* BCM2835_MFD_PM_H */
 -- 
 2.56.0.rc1
 
