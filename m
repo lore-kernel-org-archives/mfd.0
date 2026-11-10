@@ -1,92 +1,95 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.42
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.51
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794347765;
-	b=ZlLnyCbgYfGj+Hhr6cHHjEY/gQPcm2B/63Pu/EwTePO2eCwslvs1L4B93tYx5kwBbPv0
-	 eoeoZhaERKSM2PYbgnca8zZQ4TkO7eXa427eYm8nwFP1xz+oNM90KY83O7O+1gMM6lklb
-	 E0cBAC7ynClTuEzGwcDo/a6I8lpRqYo8x4NguikeYK59KhLagBuh6Z+gOAhD3oQyGeE13
-	 5mWShnm/f6CmmCp4N6FSVzGfn3onqGt+ZgHDWItLaDNDOse/t81yBDZpjDrwN6vR1SeYT
-	 vukIV+XTFMSwJRRKMTO2onlVuYyTDmSOwL21N6thgQn4KcfkfTBBn43X+ZQPocgRLLg==
+	t=1794347767;
+	b=AXudxtIytTiXr9QGbr9GTL8Ug4UIEmZhzJLW40CvdSOmykDMVRbZNRNCj5UbmPMocDJY
+	 GFERuw+jLfXH6JYGP/T5YGQjOu/Ogk0HzVtHwvjd8MZMwonu4MuSn4Qy9bannMbcq35VG
+	 R8hk0x5UUireS/Ri4wxyCf5WmJddl1DhlBMHtuX9uFBHGmz2QDmqb/IPEIGwfBOvUCkrB
+	 2uCstBA4A5Tz8ZGxJIiN9OZ/LMYyT98ljBjHUaO8lqR/cn3yXUy8btzlVfz1z2wOJxKNK
+	 I8VOQoKXjeKEBIE5qOnVnOBv6c7VmOmY3gA1r9WHTHcdJx7jwzXDe95vKlhT29p/J4Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794347765;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794347767;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Type:X-Developer-Signature:X-Developer-Key:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Type:X-Developer-Signature:X-Developer-Key:
 	 Content-Transfer-Encoding;
-	bh=rNrlcAZuLJeyRw/m2w/thfDaF1eAkic6L8d3Qp11YvQ=;
-	b=0H6elK0girudC2AHdUuIJeaQs5j6Nh84kfcrmd9Skn318pblVdFSsL5erRaW1NEQs+p2
-	 r1g3DCfJlDhZZjhuZbIGcxVCsfj1ZP1LOwY2rkdH4NdQ3F6sLADOkIWIyr3EnMlBGZbVV
-	 MNUcNwrmnRX+ONkpSptfxPgJ51xQ/VegA6UYW4dGgGFtz28QKbfkGnoEPE9tXNzlopdVx
-	 TzQn5AUk7glA+KMVa/dz+IjSIDxtW74bwDKSSIQviijD8bN99TyCOihLNCIptdLWmKiAi
-	 DkENYZGVQnRsJB81yvXQk9UH+sY65WTxmz/BDoKvd5m6XPrWSFWQG8EHXb2h5rVa8eg==
+	bh=27advilcz2wP6UN5M54Q2ZsQBSdNoHnIxCKVWfLF+lY=;
+	b=BXRbX68Hi/zFQosLgzsszEW5CwCFn4Roa9kn4lJEdFAl+ggI8bN/qoZWEU343lBaZYZo
+	 JdxXukeOUVe5tIIUI9cGwZacGQLgr5I1mRBS4V3f0JGhoJHqNUhXGVWVhYXOiO0QRY73v
+	 hmtc/b3+ul7L3gBPeP4In+QVe5WUxmSH1VCOuIQSORVtid4FlX3jO5AL1boxiZl3pGY5U
+	 QgLS1bhuDwfXF4Z43RjNEphCQ5EYb8+yiDr74mGW2YH7+p4euucgRbC7J/5nQxzwGHsfH
+	 8DldPOYvbZMNLH/8i/FGbIPvAiH0eSjr7Uhieyroi9Jobc7HJOcs25Zqj/6r5YoFybA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=baylibre.com;
 	spf=pass smtp.mailfrom=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=NHmHTBBi;
-	arc=none smtp.remote-ip=209.85.128.42
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=ARjWvTNX;
+	arc=none smtp.remote-ip=209.85.128.51
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BA7560A380E
-	for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 21:56:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7BA7560A380E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F0A960A3814
+	for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 21:56:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1F0A960A3814
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=NHmHTBBi
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4a35a60499eso20216145e9.0
-        for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 13:56:05 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=ARjWvTNX
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4a35d5d4a20so31011655e9.2
+        for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 13:56:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1794347764; x=1794952564; darn=lists.linux.dev;
+        d=baylibre.com; s=google; t=1794347765; x=1794952565; darn=lists.linux.dev;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=rNrlcAZuLJeyRw/m2w/thfDaF1eAkic6L8d3Qp11YvQ=;
-        b=NHmHTBBieuPZV6WeQPnEqOHid/Q+uDZ3debfzfKwEjhDxvlPuxa9eQgYL+o/7PyMBc
-         aWgOGWF2p6btHZB45tQtIaXRQDptJhxvBcndo1mDGiHj5yYrdZs5zjFoODhm4cbX6mUg
-         /8yRPB2lelh989PjZPtY9cRv8E6NWmflmpxRpHO0jSCV+IBp8sOfcbMQE7KlWsUfII9F
-         5BtCOtT1WLT1RbmjEgfP8zDvenT2NRwAZ3eEZIFx85uEa84y7SQCGyPgd+GnKyv2hVh7
-         TfDXAzRNZgDCu95aznrgrTP19cdjm4msnnLUsTSV7JyWFPAI9MXCSB1e0toybSkWhMqT
-         aYWA==
+        bh=27advilcz2wP6UN5M54Q2ZsQBSdNoHnIxCKVWfLF+lY=;
+        b=ARjWvTNXC2XkuXlfsPvG/cnqGkiTbimkqDF2UFtR8Z7XiN5VnBqOOGfk1PbnKOrykj
+         7+1NycpxRYX1PU9mhBEcUwXGRhKkG/S+cz1X8AjkmXKuM8wXtn0MjmJXeFkgda7bCLdk
+         oRsqu00TTWlq8aofklgzlq/VyI1ITN1HsGshSOOQqOI3Mrnrzfw9TgFmRKMcADKmYb9i
+         H6JdDI/4n5LrAFsiEMS7wFlw55CKsnZ3brl4BzdG4p4AYioaa7GlnG6tR260hUhBY0Il
+         RUjZ2IYoGvEVpa7N0G7szT7r8jH2L6PS3+pmA+zG7p/jMWnaqi1T115PkE7LbvJIW1be
+         fSRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794347764; x=1794952564;
+        d=1e100.net; s=20260707; t=1794347765; x=1794952565;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=rNrlcAZuLJeyRw/m2w/thfDaF1eAkic6L8d3Qp11YvQ=;
-        b=sm4xY8cmqEKQh25AHBVi7arM1HSjhZVNiqfexRh/0N1GqaVfp4pt2dX3RYYmvr7MZk
-         bK/6NrTCdHt+kdSzLUnzJv8jU0ZutnD/0MqV2qJffNjXTKU/vjQDcGh3aXKzffjS+Y/N
-         xh3agXRrEtPdm8kp6JxfUAHcX9UkUhO78WKnf+ZUhTuenyZFlafX51beFcW0/jLYivtv
-         PBzOkZMRQMhnCpEXgqJpQ+yyEWlV0koRJhVlQsY/BDd3ZzCsMHIcv8hbKcvjb5/qYERG
-         8ezWmItnGXIn0WymuVOsoQIGnFlDqJcSGsOKupUq5FM89JUotjNZNdP9HS3RHnuyi9fB
-         DJ9A==
-X-Gm-Message-State: APuU4Z+aOGQWhE7JDV4Nl1n/aO+DoXW5XtIqeZITH1ZazMN80Kzruzw1
-	Eyj1AhR+tXHDQpm347iNaYKAv3dXiJnN5GA9RMTmws5v4UUpRhtBkOQhuU9wrqzcAgk=
-X-Gm-Gg: AYBFou1YXTzy3N87xxCEpsJvJcxgb0BQN60d1TNGGS9WEDMnDc08u4MufP90kOch5xd
-	50aMuVpLPJLv7hpKeQ/sdb8BznBl6vI4kFiFQBTyFsKgs8r3PaPFmkQUo2r+JecKmqV4aipncd/
-	gC2B1H7VRY2Wh2I7RlDYKtLKAyi9QsoSEbCiXx04CQxtfai8euUhBpKR8L9jA3s4Nt9zHF+Bfgu
-	UXRaZQ7dTfaaQnQ6irsgTEJGNJFAV5A5MMfk+fIc3sJGfuzfXBs+EwEQXTJu2uXbL/Zj8H/c1L3
-	pD7DpEARJEvdY59p1T8SVzou+0rXM9UHErBOH7TEDymbbxQJR+SH7aEKFrlwIPPeUgOvZ6EQSn/
-	LeGD9TzUbmbczIQIJuuJKH6O1K9Iospx+RwHh2zZaN16nafhnkDnobOopU70PDzvZYE7POd2lzp
-	9ZiaoMNSwYL0lmUA4SYrsbx+axk7wKvfRt7exF+axIoq3S15upKkWPgRRyludfGJw0/1sy3PStr
-	Hx0cLRRwlxlWd11MptRsM+9WMari9V+0gjptp+K70OOBF2X0ZznARyS1vaMQ4PC1stdsBqEiqXa
-	J50geCGMOyDu7CAz2F52JdMGiOmuoxuu8s4=
-X-Received: by 2002:a05:600c:6096:b0:4af:79ee:f660 with SMTP id 5b1f17b1804b1-4ba093a9ef5mr6309465e9.31.1794347763914;
-        Tue, 10 Nov 2026 13:56:03 -0800 (PST)
+        bh=27advilcz2wP6UN5M54Q2ZsQBSdNoHnIxCKVWfLF+lY=;
+        b=lcC6SfbdxSOsdbDwnyDKfgjgTn++13ecVRUw/dTqstfBmfGRg9FxC7lu8IyBEWoxwg
+         dzeBLkIanD1pjx7vZIy86kukRvFWLai61mkpPDWhg3uy3ylG26/ja/GwOotd2hoXdiES
+         CI/FCKBe5DtOosGFs0k4UwtAQOCUf/fEqdd6hzMv9EFDIFZ0GpGJtxdjysn17vu4talI
+         vOalSsLpWhb1ZEMxGizLzx/MvRatOF3lWRrKSGaUT8OhDKbnKIdjY2EjW4C/k24ds4pM
+         5eELJiuJYbRGgOXIvC9cyN92XmFjVMusWTSENFKI8fnbUFGVKTFwFBhrxZZ0cjwhWbS3
+         VwuA==
+X-Forwarded-Encrypted: i=1; AL+hErEoMK+9KOhWCQw+s4AYO9bw/IufnXjeWEgwwQnk6wLnM5oQIEQuRrphz6KM5wtVjjC/PiU=@lists.linux.dev
+X-Gm-Message-State: APuU4Z+kcNOIFibAS0/ZoEmVu6dr/gaaV0k9ejYqFcmIlnnQ2j3cc4TO
+	lalTVwpeSb/W0tAxmyUse4BkzRiZiSU8XcI7lc33/CmeX3hOwd4l2lzycTw2GqFJBaE=
+X-Gm-Gg: AYBFou39+xFHfmfIbdekCDlui845W9pRHr6pf581eJ11+LasitwBzsaXEmK3e94hx89
+	AJcDgNdJHdPGGF0dSei7Qb5PmHOPq0j4P/UJfbNc1s4rKF9c5/F8cWZ/b5tmlJz3/VQKeD+FqeU
+	L8CkHqdH7mmKZ+2FwiHfKxiUPsD1H564gOnFxQRgr083Wt7JmGmYbAzMIHH7M5bGWXrkgrVaQ1f
+	WB9S9UgFxUyOrtRyrWXPnDNkV5Fl+eWa/3pS1YNC5bRZ5O5hxAhZQB7FP1ETV5hB/a6NErf+K3n
+	DrqpK3eXmckVmZXViiXeUB+D0JKQDP17/Igq58lxzl0asWIbTYEEhyjdBL03M1nSmaP9TRf0jlJ
+	wofCZ7/t6NI5YWRL1XMs36R+T3aZf6oeK+M9wmZRWkcqy7T3TIgBi/w1HOQNUXL2o8N8lLL0d/Z
+	ITbW4fJ9mtk1X/BaCVhmcN85wKviqPJ3yvmNoOq9dCnwjmld0IAyCm87L1UoDzqEylK9MXQ62PC
+	ylDP8dr91lmaEzoZ/q44oY/QjEeB5Zp6EeYM+Z0crhavWTroEQ0MLX5HxBvMe5g8PE8p96VV0c/
+	PQZJjenH0haGs/doYwc187Krz0mleIbAeb0=
+X-Received: by 2002:a05:600c:3554:b0:4a4:4d57:8487 with SMTP id 5b1f17b1804b1-4ba0936c8admr6184475e9.5.1794347765628;
+        Tue, 10 Nov 2026 13:56:05 -0800 (PST)
 Received: from localhost ([2a02:8071:56d1:2de0:1d24:d58d:2b65:c291])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4ba0951bf2asm4967525e9.4.2026.11.10.13.56.00
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4ba0204e22csm84491605e9.12.2026.11.10.13.56.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Nov 2026 13:56:02 -0800 (PST)
+        Tue, 10 Nov 2026 13:56:05 -0800 (PST)
 From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>
 To: Lee Jones <lee@kernel.org>
-Cc: mfd@lists.linux.dev,
+Cc: Qunqin Zhao <zhaoqunqin@loongson.cn>,
+	linux-crypto@vger.kernel.org,
+	mfd@lists.linux.dev,
 	linux-kernel@vger.kernel.org,
 	Linus Walleij <linusw@kernel.org>
-Subject: [PATCH v4 06/20] mfd: rt4831: Drop irrelevant __maybe_unused
-Date: Tue, 10 Nov 2026 22:54:31 +0100
-Message-ID:  <a87d5107217847874288e449d6deaceed75fb4c1.1794347059.git.u.kleine-koenig@baylibre.com>
+Subject: [PATCH v4 07/20] mfd: loongson-se: Drop unused assignment of acpi_device_id driver data
+Date: Tue, 10 Nov 2026 22:54:32 +0100
+Message-ID:  <98b0f85e2b1c5330958be64c2bca859cb0e16628.1794347059.git.u.kleine-koenig@baylibre.com>
 X-Mailer: git-send-email 2.56.0.rc1
 In-Reply-To: <cover.1794347059.git.u.kleine-koenig@baylibre.com>
 References: <cover.1794347059.git.u.kleine-koenig@baylibre.com>
@@ -100,34 +103,36 @@ List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1006; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=9gNbvGYoAa+q3gGPdNzcQyQQ+ahD4wUVvnLMfUL00rM=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBq85KnbfKH19dsaJgm3Q2fWsEOjjujGv9qotm9h uHzLrvMsIaJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCavOSpwAKCRCPgPtYfRL+ TgrnB/9uf0GcQv03G9aE54U5xgrTkWSuRx/DGGy6n2RRbA0flhoUH580i8rzX8oAcCn1poArm/n XNe24MiCSmBI5G1zW3dseDAVjovrtJYZ1pwxxDpf1XASzz8dNHyyqQvW9Frt0IwjA7YjIyAUhoU 7ke1MumJ+dPMg4pP2tPcA1Fr7Q5FTZ77W3s0Ft+hFjL/DDHcXtI7q/kJ20b7R+9lHKYKYhftrIJ JMps4s5vYjZQ1qfb36nQdBl+ChwiIh6egKU+hf3ni0eUG/VtX11mlV6GvB6fW94gsQRP1YnutEG //2FMzZZBEgvo5q3Ll+22G6MYN/JuPOQtPgSNFt39fPmztil
+X-Developer-Signature: v=1; a=openpgp-sha256; l=919; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=WctLszqVF045tp6nwF22xHoE9K0taY4KKqQ1CbqyIGQ=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBq85KqD2/HtYab3u2BGN1KZ9z27I7+Z4HOPLlbB ODCx1BiL/eJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCavOSqgAKCRCPgPtYfRL+ TiY1CACST/5p5AX3YvgpdzTMs32H9OuTz+rye6bieanuEfNXqUb1EI11zexHwkp+qT8zOamGcvM UDrCpZmkkj9EodEchekm3zO5dkHT1gMDhyrcvERhGxUYi0FqNpFA1rXdxmFMemjJBeUhyeNm8IT bkMepOvkdEf2vGnBUXUtwDEDIUGR+f1G1yjugjUJ49rE+J+7bYx2JBHqoUrpfgkf5i3QYO1UxEQ JfKv8wUEmKRXHDt7f58nUBylOhN5iaKnqqQOh9NUOSM8cdDtyPEkd8IxXfTWADHNgRd62Sxg56j EC0zVyRXbt8dARWu/o7h0USm2c2tpI6gd2TT2aGuFdbmgAVm
 X-Developer-Key: i=u.kleine-koenig@baylibre.com; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
 Content-Transfer-Encoding: 8bit
 
-Since commit 5ab23c7923a1 ("modpost: Create modalias for builtin
-modules") MODULE_DEVICE_TABLE() is enough to reference a device id array
-even if the driver is built-in. So rt4831_of_match[] is always used and the
-__maybe_unused marker serves no purpose and can be dropped.
+The driver explicitly set the .driver_data member of struct
+acpi_device_id to zero without relying on that value. Drop this unused
+assignment.
+
+This patch doesn't modify the compiled array, only its representation in
+source form benefits.
 
 Reviewed-by: Linus Walleij <linusw@kernel.org>
 Signed-off-by: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
 ---
- drivers/mfd/rt4831.c | 2 +-
+ drivers/mfd/loongson-se.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/mfd/rt4831.c b/drivers/mfd/rt4831.c
-index 1ab8870e4ebf..2b3f84b81c65 100644
---- a/drivers/mfd/rt4831.c
-+++ b/drivers/mfd/rt4831.c
-@@ -98,7 +98,7 @@ static void rt4831_remove(struct i2c_client *client)
- 		dev_warn(&client->dev, "Failed to disable outputs (%pe)\n", ERR_PTR(ret));
+diff --git a/drivers/mfd/loongson-se.c b/drivers/mfd/loongson-se.c
+index 3902ba377d69..4c668e2d2241 100644
+--- a/drivers/mfd/loongson-se.c
++++ b/drivers/mfd/loongson-se.c
+@@ -233,7 +233,7 @@ static int loongson_se_probe(struct platform_device *pdev)
  }
  
--static const struct of_device_id __maybe_unused rt4831_of_match[] = {
-+static const struct of_device_id rt4831_of_match[] = {
- 	{ .compatible = "richtek,rt4831", },
- 	{}
+ static const struct acpi_device_id loongson_se_acpi_match[] = {
+-	{ "LOON0011", 0 },
++	{ "LOON0011" },
+ 	{ }
  };
+ MODULE_DEVICE_TABLE(acpi, loongson_se_acpi_match);
 -- 
 2.56.0.rc1
 
