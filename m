@@ -1,84 +1,84 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.47
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.42
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794415062;
-	b=KRsjIWGTXrujP/OCQ/e2wp8nI7HtlLVGSEx6koAa4B0R6G0oIzgCcZsJyasOB76Gdo3O
-	 iiGZlvO7H8p4Yx3RJmDxnRm6T017KAqqG5272KRLBmp2XDDVyNcsoCnAi4g6lBYvskiG3
-	 yD2wwe16W4IYRLzp9J9BZJbEggraOECSMwdNqsyA2tOsDxYMnvlwBm/yZSe89Zrj3x2w/
-	 Mx9dIRAsyZJkVbS5ylUndiaaXhlT+hjLo93mZwHlbCfpbyjk88H+U6bldetn/IAifpaCS
-	 zmxr/glk/QpD4vEXv7uLdIqMgPsQUWy8Kl1AEwfiYFQVGTIG8lZF2rVNw8xdeS5yDiQ==
+	t=1794415064;
+	b=YG4yZ6SWrP9Og/A+pe3g3vNTIU3NCYu6HBTC33VWRqWfG7jTbmpSOw/gBu94BLbVuCdJ
+	 6weu53mfzzVapS8uga0OI9M+Js/aVp4Xxcq/q/qNqRU0lMtE7MQr0qXJPT85OAr/mDP/d
+	 CI3mAYfNs3dcPq/KNy9yZZlEIIPUKougiz7sjr9/u0+nG2YdOG6ZS/VuQ81OQXcBDTncv
+	 dcDNLHEbNn5fN3/o6JmOtVLBu9n7x+RZHp7hEWqirH2BTeC1rLISPl+9JvpQqdl5vjupn
+	 RHeIwXT+eq0XH8VzDpcUV4e3T+1pTn//ggqzoqZvuERWMh+FhxR83Mamjn0d6MzSUMg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794415062;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794415064;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=urN55C0hSRid+Cb4EhN5hFHoQJs+a/cKjFFO3dJMiqc=;
-	b=RYTCQuWkVuQVorkpirfcURsiU7CjGlhbz/8Tjd45dUdvqVGAS8xYMnjilTrrgGFxoVI4
-	 JsdGv2JrgFXxUiFCQ7ep/uB2nf5UoJGiA/Exg6sy+KtIshpRSD3QbKnt31nPh/sYj9ALn
-	 MxfY++zQ58qjNBcl+ulpEPVVuaqGXwlCzGSXpHjGoDJz66O+gyjU8BTLWcLmCtnHCyMK3
-	 4q5lgNSKZR2ZzIoszmqxDykUHoPoDA26yWYrz9EIp2qTK7yiUEqeIaEsL4CPQoDctUfr7
-	 ayYvB3tjeemg3gaFenK8onPfS227mzVvZCFNbOB0eOEcaAw6PRa15/YEJ0wjha1L0CQ==
+	bh=mCjNParZzdOX77K6kaHe/ftOL71cep5honadbqy1WaI=;
+	b=2/JxdnKCilAMwN9768qZQPLrV9VN8bG0A/l4waEaK9VmT++bG2CMusnT/TJksomMy1I+
+	 LTa8AxPT/XFApFpkVhNNb+AR7aK30rkHrib7khToynRl5qTxdMb5rSZm11J6x1eV0U5gT
+	 Ur6yiEabIbfQsl5v9EETmHZlTW0jdHcivzkFKVoSd2Rv56xEoLme0mkZ7b7mkQunQxFYI
+	 rjodVm1Vo7TIP4MDoqK1P5fzHn1m4Y+5ghO4LdgOfVLLO2C3IWBeLIVJ+ZIVPgJIp/apI
+	 053aBbeun2d2LNZHS0KMP3BfUJtbse6FBCwmfJpcyUqaOsmGpVxWmA+KTHVk/c8XldA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=EgSg823B;
-	arc=none smtp.remote-ip=209.85.128.47
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=SzWOSbcY;
+	arc=none smtp.remote-ip=209.85.128.42
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D234606A893
-	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 16:37:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0D234606A893
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E647606A8A3
+	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 16:37:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7E647606A8A3
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=EgSg823B
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4b467581b98so31020725e9.0
-        for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 08:37:41 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=SzWOSbcY
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4a4d7ae1ae9so31221505e9.1
+        for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 08:37:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794415060; x=1795019860; darn=lists.linux.dev;
+        d=gmail.com; s=20260707; t=1794415062; x=1795019862; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=urN55C0hSRid+Cb4EhN5hFHoQJs+a/cKjFFO3dJMiqc=;
-        b=EgSg823B6y321vXVa1apPZf1kO59QGTw9pFz7S3dfOQc5MHd1oFEFDm9r7RM/O+x3d
-         UgQgT7zgPVoGKRzqvKE6RLGgkIZFY+LY0BstDLpA5xgNs2HR/82H6z/CxtpqP15EHR0v
-         EnKlcKcdUIaPe1bbHGk83rhowfQaaCw7vwdbxy2Q0vjRjt1ffJ6XqLFKe0MSvxGYOWX1
-         DPGkes6MAEKwPFYD7UriaQBfd+9FGvR/94OBIir79lqjBRp2UWX6YO9OWdx6Cpi2FbMW
-         57g0c6CrGOkbuT5zIBv1fc0m0Kvwl3+xrUcBE8CMdPry18MBx04/KKmL1ura6WjSEdgO
-         UnvA==
+        bh=mCjNParZzdOX77K6kaHe/ftOL71cep5honadbqy1WaI=;
+        b=SzWOSbcYCpfbml8+IbFkNX9aOBnSCSt31Sn0iy5LfCLQgpMTa00ru/ms1wCV/O5UVB
+         2/3MwicoCQmQuQy+037weAcuzwJuNSj1NlD1n+lz5WRBBHSK/zCwrNlBz0pB1rlt9AC0
+         IGUQNrt2pV/GHsb9Tm8UZMX1IbJQKNZ302bdPjvOyU5rd9nusha2nljNxppeBwImZdaL
+         sZUNu4+8X8tCA+x8tPPPbPTnJbPesYiRmdr2uXdksW3+MI801v5OcfRpvKAL7X6tBnON
+         wGKwFUUKdNntJ7vMBhxBPRDJpKK1tWY2c3tjHlDQfE2X0dM1EuJ+yXSbsn311XuHxaWN
+         FqPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794415060; x=1795019860;
+        d=1e100.net; s=20260707; t=1794415062; x=1795019862;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=urN55C0hSRid+Cb4EhN5hFHoQJs+a/cKjFFO3dJMiqc=;
-        b=a84Ld3Mf3lsj6h7f1XebTMrZ2WGeQysfsPjFCTIPaBm6qVXiTE6Ppf8Covgi2T0/qN
-         0NszB/s0OfEu2FZ/XNUxIqSr9t0OCkhTLywYuwY98qjhBt6jo2S7dROOvu7hydeRT+tc
-         Ab5SASKioRPE/57tIwgnRNUpSDF3x8tslZpb97QrfhShjgaglAHAN6RqINATx0NF3Rzc
-         IYNH7fxTNV0KgDO/P2fcg6wbs4GZzdC5i4z7pyxh2zuEtCXIhAjEHO3zMwDIRJGJCQOz
-         I424U26w0zQfKlaoPCG7Icgiop9cd8ZxvdNggrZRdnpSxLeFT2OgOtDpr3agKkQBN3+H
-         N0EA==
-X-Forwarded-Encrypted: i=1; AL+hErGpblCMLRAF2tUCyeChQFUSduOGfj3WMDZEWcvlC8KImGUOVnmiU//JJE7PO4a5yWaVlvI=@lists.linux.dev
-X-Gm-Message-State: APuU4Z8SZ9QIWt1RexGeL7LnmpS7bZOBahVIe9d3qNYVLR4XisWJSdIv
-	umh16l/k9B6itK8WE+htMzZSTd/LBReAyz84SLeOY0mDRE0ssJ90aUl5
-X-Gm-Gg: AYBFou33dHsshsofhicmsW/E2UULQ+Fs2We18VCceCWJLDPT0t5lLs9CBZfxz8RktSI
-	cxxCZ/E1DVxgunWONj7KhysIrpTEXD1sG3DPTr1gnYoLSi17l6L/E3D2VoLEA8G79XST4AFMFaq
-	S9b+ZnaE9XBxsOUh2gAemmaY2ss2F7q1dNOKmfWXPs0oIfMKP3LYbV/N8LUikZ7152DzDTQiE0M
-	yN98hGqJtsxsApU+1hdikigMBOkndFX9U32rzFXK7d7mFJig37oIeSHVIIWl/MljSV3+M+TA4Ij
-	IVA8psQT2mxMwYlFovSSsMdsmQMyiWDpa98KGyr7I8R3srtHJiLk6Yd947gYDri8VaP5KiwThX8
-	oXj9mgKpHRvCj8fPLo+4YcNRjgOLMGjfGTm7shHsVczRkCiK9Z4kDPEkEU/7MYcvvPw7ES1EXuX
-	yY5LCnq6c4M8nrPD5QFxI0WYB16popTAUzjXMyonjrAFtxb4HiSc8rAYUt4x87iMHHE6s6BF8t5
-	Q++c7lszL5ouatKxPeEoH/YiXtNNacq+sqnkqO3XJsW/mHP75ekexuykC8Cp8GendO0+fuvrElj
-	HKal1eZAj89MtOxWJQWw1167ETVX5WI7ASR/ULLe0TPFwpR7ItxrJy03hsewBMfR1YlqTrr2u1W
-	/WpQYxBuX7s8l
-X-Received: by 2002:a05:600c:3e1a:b0:4a1:ddca:8b66 with SMTP id 5b1f17b1804b1-4ba093b967fmr58000185e9.31.1794415060185;
-        Wed, 11 Nov 2026 08:37:40 -0800 (PST)
+        bh=mCjNParZzdOX77K6kaHe/ftOL71cep5honadbqy1WaI=;
+        b=iMY3263RidAdUg6wHUkA71dkrmgu3MU5vWaGmIIpVhOxI6pgRnqK1Rg4YXKNLEqyPu
+         RUNINDp19hFF7ve6rVmTsReWZGzyH0FHfRiHNk3uwR2zRBgjw/72p707drfLXlz6rxim
+         X5sy/xBTUtdMWnKuBjwvNMo4Kr/YP+exL32+P78RAbmLK7WSTdEgFU1W9+/ReMmss4bf
+         fwWTSc8i3d4Yup6UB9yRl3KLbezd9zVPYvHXRWfcf9/Yb5N2bWOBxj/02XvgkvBeQzcP
+         j2fJWn5YeOSigVhEv4doBcQlDs/og2INqX9UIFXG4pbG28AQEzQYdYTHTVIEnu0gd8Zq
+         srdw==
+X-Forwarded-Encrypted: i=1; AL+hErFFsKukfYw8/5195MsOnVk4zdwQOndF5fPnOF1Pfv1dF77tIBUTpTcXzknYYcYAMWJ2eS4=@lists.linux.dev
+X-Gm-Message-State: APuU4Z9vyG1aEOPN+ywPS4+EJ0Beydhp2xKipKN0GlbwxvnoH74ceX9H
+	98QzvuqnlDyKoy2GBeFwZHPrey6nxsTqZgyQv0LrasZgY7KwI9Ce2JNg
+X-Gm-Gg: AYBFou2RzbHdwOdFmJn97/Aj1di3gd9somHgQEsKUHWxbeqpfDq0tY0u9buy7BhSTmm
+	Xqfpp/u4Uw4mQkNl7VsrXjdCLgii5yc6g5Tfwvw9l8KuETPA17TNxl5hMDHvxjOVqK1NK03T4H1
+	SNHnL49CE5kCyTJ7NfBMuTPur6CnEWh3vfmtXWCX5xJ8O7lKPGS5fPW6YJ1tmhxdFVddXFXrG9R
+	kgrfKThexCGo8fPg5K4yPqEhY9Tev7iTBlbGTwByp1mqADINfpY7MI4yxX06hUWvX5AYKrqZfNN
+	/qZVkzTLB5zfizRFIHpN213tM6/RgoSNIw0ZqQXMGmk5rykXDdvN+sGocS+XdnN2QdR0Z4u8GkD
+	BlP5aTsxGWHeAhMHmFqEgHH/xSa0swXaTCpUQQj5y03Yuwi+ZalKiqM56HkQ/L8CbTwbhxmXlaB
+	Nlim8bdhx8ppjtxIvVCbZ2zbkl5U1jkCK1igfYfEwQlm1nawjn5b8XyodskAckB9mLJHrBF/Dzg
+	4ARlCHVPrgdEIWuEsnjoS7zyPuqWT1YPdI9xYxsGn0TVfw2ah2KN4ahz4ALS761Zt3YSX15qhma
+	1cTZmc3ZcgOgY356gCh85/LHhvVtMoj6M/ZJQZavCL8dUJysNIqrmBh+pYXNB4tShwnd5tcZZ6F
+	PDRwa80v4/q4h
+X-Received: by 2002:a05:600c:3b93:b0:4a2:883:4adb with SMTP id 5b1f17b1804b1-4ba0936efb2mr57598825e9.22.1794415061433;
+        Wed, 11 Nov 2026 08:37:41 -0800 (PST)
 Received: from gmail.com ([2a01:e11:1403:8620:6e81:13fe:ca06:8db8])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb4e28c882sm91135e9.6.2026.11.11.08.37.39
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4983f7801bbsm11950615f8f.5.2026.11.11.08.37.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 08:37:39 -0800 (PST)
+        Wed, 11 Nov 2026 08:37:40 -0800 (PST)
 From: Paolo Pisati <p.pisati@gmail.com>
 To: Geert Uytterhoeven <geert@linux-m68k.org>,
 	Damien Le Moal <dlemoal@kernel.org>,
@@ -88,9 +88,9 @@ Cc: linux-m68k@lists.linux-m68k.org,
 	linux-kernel@vger.kernel.org,
 	Lee Jones <lee@kernel.org>,
 	mfd@lists.linux.dev
-Subject: [PATCH v1 3/7] m68k: defconfig: enable WARP_MFD
-Date: Wed, 11 Nov 2026 17:37:30 +0100
-Message-ID: <20261111163735.227286-4-p.pisati@gmail.com>
+Subject: [PATCH v1 4/7] zorro: warp mfd: add the dual-port RAM command channel and expose the board identity
+Date: Wed, 11 Nov 2026 17:37:31 +0100
+Message-ID: <20261111163735.227286-5-p.pisati@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261111163735.227286-1-p.pisati@gmail.com>
 References: <20261111163735.227286-1-p.pisati@gmail.com>
@@ -105,39 +105,509 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Enable the CS-Lab Warp multifunction driver in the Amiga and multi
-defconfigs, which pata_cswarp now depends on.
+The ARM co-processor is reached through a dual-port RAM window and an
+interrupt control register: the 68k writes a command frame, rings the
+ARM, and the ARM acknowledges and then answers in the same buffer,
+raising a flag for each on the shared IRQ_AMIGA_PORTS line.
+
+The protocol header describes only what the driver uses: the control
+bits, GetDiag and its reply frame, laid out as the 68k sees it, with
+static_assert()s pinning the offsets - the firmware decides them, not
+the compiler.
+
+Use it for the first attributes: boardname, hwver and fmwver, read from
+a fresh diagnostic frame on every access.
 
 Signed-off-by: Paolo Pisati <p.pisati@gmail.com>
 ---
- arch/m68k/configs/amiga_defconfig | 1 +
- arch/m68k/configs/multi_defconfig | 1 +
- 2 files changed, 2 insertions(+)
+ .../ABI/testing/sysfs-driver-warp-mfd         |  16 ++
+ MAINTAINERS                                   |   1 +
+ drivers/zorro/warp-mfd.c                      | 259 +++++++++++++++++-
+ drivers/zorro/warp-mfd.h                      | 120 +++++++-
+ 4 files changed, 392 insertions(+), 4 deletions(-)
+ create mode 100644 Documentation/ABI/testing/sysfs-driver-warp-mfd
 
-diff --git a/arch/m68k/configs/amiga_defconfig b/arch/m68k/configs/amiga_defconfig
-index e2d474e8cb8f..75d91d502545 100644
---- a/arch/m68k/configs/amiga_defconfig
-+++ b/arch/m68k/configs/amiga_defconfig
-@@ -20,6 +20,7 @@ CONFIG_AMIGA=y
- CONFIG_ZORRO=y
- CONFIG_AMIGA_PCMCIA=y
- CONFIG_ZORRO_NAMES=y
-+CONFIG_WARP_MFD=y
- CONFIG_HEARTBEAT=y
- CONFIG_PROC_HARDWARE=y
- CONFIG_AMIGA_BUILTIN_SERIAL=y
-diff --git a/arch/m68k/configs/multi_defconfig b/arch/m68k/configs/multi_defconfig
-index 1bbd2aa653c0..120dc68d492c 100644
---- a/arch/m68k/configs/multi_defconfig
-+++ b/arch/m68k/configs/multi_defconfig
-@@ -31,6 +31,7 @@ CONFIG_ZORRO=y
- CONFIG_AMIGA_PCMCIA=y
- CONFIG_ATARI_ROM_ISA=y
- CONFIG_ZORRO_NAMES=y
-+CONFIG_WARP_MFD=y
- CONFIG_HEARTBEAT=y
- CONFIG_PROC_HARDWARE=y
- CONFIG_NATFEAT=y
+diff --git a/Documentation/ABI/testing/sysfs-driver-warp-mfd b/Documentation/ABI/testing/sysfs-driver-warp-mfd
+new file mode 100644
+index 000000000000..8996d1961b96
+--- /dev/null
++++ b/Documentation/ABI/testing/sysfs-driver-warp-mfd
+@@ -0,0 +1,16 @@
++What:		/sys/bus/zorro/devices/zorro<N>/boardname
++Date:		November 2026
++KernelVersion:	7.5
++Contact:	Paolo Pisati <p.pisati@gmail.com>
++Description:
++		(RO) Name of the CS-Lab Warp board, as reported by its ARM
++		co-processor.
++
++What:		/sys/bus/zorro/devices/zorro<N>/fmwver
++What:		/sys/bus/zorro/devices/zorro<N>/hwver
++Date:		November 2026
++KernelVersion:	7.5
++Contact:	Paolo Pisati <p.pisati@gmail.com>
++Description:
++		(RO) Firmware and hardware version, as four hexadecimal digits:
++		an fmwver of 2027 is firmware release 20.27.
+diff --git a/MAINTAINERS b/MAINTAINERS
+index cfabc4609c9d..7b5e01300418 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -7177,6 +7177,7 @@ CS-LAB WARP MULTIFUNCTION DRIVER
+ M:	Paolo Pisati <p.pisati@gmail.com>
+ L:	linux-m68k@lists.linux-m68k.org
+ S:	Maintained
++F:	Documentation/ABI/testing/sysfs-driver-warp-mfd
+ F:	drivers/zorro/warp-mfd.c
+ F:	drivers/zorro/warp-mfd.h
+ 
+diff --git a/drivers/zorro/warp-mfd.c b/drivers/zorro/warp-mfd.c
+index 94af7c9d0ea5..61866f678b61 100644
+--- a/drivers/zorro/warp-mfd.c
++++ b/drivers/zorro/warp-mfd.c
+@@ -9,22 +9,50 @@
+  * and the IDE interface and RTG display controller, which the 68k drives
+  * directly.
+  *
+- * This driver claims the Zorro device and hands the IDE window to pata_cswarp
+- * as an mfd cell.
++ * This driver claims the Zorro device, talks to the co-processor over the
++ * dual-port RAM to expose the board's configuration and telemetry in sysfs,
++ * and hands the IDE window to pata_cswarp as an mfd cell.
+  */
+ 
+ #include <linux/array_size.h>
++#include <linux/completion.h>
+ #include <linux/device.h>
+ #include <linux/init.h>
++#include <linux/interrupt.h>
++#include <linux/io.h>
+ #include <linux/ioport.h>
++#include <linux/jiffies.h>
+ #include <linux/module.h>
++#include <linux/mutex.h>
++#include <linux/slab.h>
++#include <linux/sysfs.h>
++#include <linux/types.h>
+ 
+ #include <linux/zorro.h>
++#include <asm/amigaints.h>
+ 
+ #include <linux/mfd/core.h>
+ 
+ #include "warp-mfd.h"
+ 
++/**
++ * struct warp_mfd - per-board state
++ * @dev:    the zorro device we hang off
++ * @dpram:  mapped dual-port RAM, shared with the ARM co-processor
++ * @reg_cr: mapped dual-port interrupt control register
++ * @recv:   completed when the ARM acknowledges a message
++ * @reply:  completed when the ARM has a reply waiting in @dpram
++ * @lock:   serialises use of @dpram, which is one shared buffer
++ */
++struct warp_mfd {
++	struct device		*dev;
++	void __iomem		*dpram;
++	void __iomem		*reg_cr;
++	struct completion	recv;
++	struct completion	reply;
++	struct mutex		lock;	/* serialises @dpram */
++};
++
+ static const struct mfd_cell warp_mfd_cells[] = {
+ 	{
+ 		.name		= "warp-pata",
+@@ -36,13 +64,235 @@ static const struct mfd_cell warp_mfd_cells[] = {
+ 	}
+ };
+ 
++static irqreturn_t warp_irq(int irq, void *data)
++{
++	struct warp_mfd *warp = data;
++	u32 cr = z_readl(warp->reg_cr);
++	irqreturn_t ret = IRQ_NONE;
++
++	/*
++	 * More than one of these can be latched by the time we run - the ARM
++	 * acknowledges and answers a GetDiag in quick succession - so test
++	 * them all. Returning after the first would leave the others set and
++	 * their waiter asleep until it times out.
++	 */
++	if (cr & DPREG_CR_MR_ARM) {
++		z_writel(DPREG_CR_CLR | DPREG_CR_MR_ARM, warp->reg_cr);
++		/* the ARM has taken the message out of the dual-port RAM */
++		complete(&warp->recv);
++		ret = IRQ_HANDLED;
++	}
++
++	if (cr & DPREG_CR_MP_68K) {
++		z_writel(DPREG_CR_CLR | DPREG_CR_MP_68K, warp->reg_cr);
++		/* the ARM has left a reply in the dual-port RAM */
++		complete(&warp->reply);
++		ret = IRQ_HANDLED;
++	}
++
++	if (cr & DPREG_CR_IF_ETHRX) {
++		z_writel(DPREG_CR_CLR | DPREG_CR_IF_ETHRX, warp->reg_cr);
++		/*
++		 * Acknowledged only. There is no network driver behind this
++		 * yet; the ARM stops re-raising it once the flag is cleared.
++		 */
++		ret = IRQ_HANDLED;
++	}
++
++	return ret;
++}
++
++/*
++ * The AmigaOS library waits on SIGBREAKF_CTRL_C alongside the ARM's signal,
++ * so a user can always break out of a stalled exchange. We have no such
++ * escape from inside a sysfs store, so bound the wait instead - and stay
++ * interruptible, which is the part of that behaviour worth keeping.
++ */
++#define WARP_MSG_TIMEOUT	msecs_to_jiffies(2000)
++
++/* send a message to the ARM coprocessor, optionally waiting for a reply */
++static int warp_send_msg(struct warp_mfd *warp, bool wait_reply)
++{
++	struct completion *done = wait_reply ? &warp->reply : &warp->recv;
++	long ret;
++
++	/* a previous exchange may have timed out and completed late */
++	reinit_completion(done);
++
++	/* enable 68k & ARM interrupts */
++	z_writel(DPREG_CR_SET | DPREG_CR_IE_68K | DPREG_CR_IE_ARM, warp->reg_cr);
++
++	/* send irq to ARM */
++	z_writel(DPREG_CR_SET | DPREG_CR_MP_ARM, warp->reg_cr);
++
++	/* wait for a reply, or just wait for a receiver ack */
++	ret = wait_for_completion_interruptible_timeout(done,
++							WARP_MSG_TIMEOUT);
++
++	/* disable ARM & 68k interrupts */
++	z_writel(DPREG_CR_CLR | DPREG_CR_IE_68K | DPREG_CR_IE_ARM, warp->reg_cr);
++
++	if (ret < 0)
++		return ret;
++	if (!ret) {
++		dev_err(warp->dev, "no answer from the ARM co-processor\n");
++		return -ETIMEDOUT;
++	}
++	return 0;
++}
++
++/*
++ * Submit one command frame and, when @rpl is given, collect the answer.
++ */
++static int warp_exec_cmd(struct warp_mfd *warp, const union warp_cmd *cmd,
++			 union warp_reply *rpl)
++{
++	int ret;
++
++	ret = mutex_lock_interruptible(&warp->lock);
++	if (ret)
++		return ret;
++
++	z_memcpy_toio(warp->dpram, cmd, sizeof(*cmd));
++	ret = warp_send_msg(warp, rpl);
++	if (!ret && rpl)
++		z_memcpy_fromio(rpl, warp->dpram, sizeof(*rpl));
++
++	mutex_unlock(&warp->lock);
++	return ret;
++}
++
++static int warp_get_status(struct warp_mfd *warp, union warp_reply *rpl)
++{
++	union warp_cmd *cmd;
++	int ret;
++
++	cmd = kzalloc_obj(*cmd);
++	if (!cmd)
++		return -ENOMEM;
++	cmd->hdr.cmd = WARP_CMD_GET_DIAG;
++	ret = warp_exec_cmd(warp, cmd, rpl);
++	kfree(cmd);
++	if (ret)
++		return ret;
++
++	/*
++	 * The dual-port RAM still holds the last frame written to it. If the
++	 * board answered something else - or did not answer and we picked up
++	 * a stale completion - the bytes look like a perfectly good reading.
++	 * The vendor library checks this on every command; so do we.
++	 */
++	if (rpl->hdr.rpl != WARP_RPL_DIAG) {
++		dev_err(warp->dev, "unexpected reply %u, wanted a diag frame\n",
++			rpl->hdr.rpl);
++		return -EIO;
++	}
++	return 0;
++}
++
++#define warp_config_uint_attr(name, field, format_string)		\
++static ssize_t name##_show(struct device *dev,				\
++			   struct device_attribute *attr, char *buf)	\
++{									\
++	int ret;							\
++	struct warp_mfd *warp = dev_get_drvdata(dev);			\
++	union warp_reply *rpl;						\
++									\
++	rpl = kmalloc_obj(*rpl);					\
++	if (!rpl)							\
++		return -ENOMEM;						\
++	ret = warp_get_status(warp, rpl);				\
++	if (ret)							\
++		goto out;						\
++	ret = sysfs_emit(buf, format_string "\n", rpl->diag.field);	\
++out:									\
++	kfree(rpl);							\
++	return ret;							\
++}									\
++static DEVICE_ATTR_RO(name)
++
++#define warp_config_string_attr(name, field)				\
++static ssize_t name##_show(struct device *dev,				\
++			   struct device_attribute *attr, char *buf)	\
++{									\
++	int ret;							\
++	struct warp_mfd *warp = dev_get_drvdata(dev);			\
++	union warp_reply *rpl;						\
++									\
++	rpl = kmalloc_obj(*rpl);					\
++	if (!rpl)							\
++		return -ENOMEM;						\
++	ret = warp_get_status(warp, rpl);				\
++	if (ret)							\
++		goto out;						\
++	ret = sysfs_emit(buf, "%.*s\n", (int)sizeof(rpl->diag.field),	\
++			 rpl->diag.field);				\
++out:									\
++	kfree(rpl);							\
++	return ret;							\
++}									\
++static DEVICE_ATTR_RO(name)
++
++warp_config_string_attr(boardname, board_name);
++warp_config_uint_attr(fmwver, fmw_ver, "%04X");
++warp_config_uint_attr(hwver, hw_ver, "%04X");
++
++static struct attribute *warp_attrs[] = {
++	/* RO attr */
++	&dev_attr_boardname.attr,
++	&dev_attr_fmwver.attr,
++	&dev_attr_hwver.attr,
++	NULL
++};
++
++ATTRIBUTE_GROUPS(warp);
++
+ static int warp_mfd_probe(struct zorro_dev *z,
+ 			  const struct zorro_device_id *ent)
+ {
++	unsigned long base = z->resource.start;
++	struct warp_mfd *warp;
+ 	int error;
+ 
+ 	dev_info(&z->dev, "Warp at %pR\n", &z->resource);
+ 
++	warp = devm_kzalloc(&z->dev, sizeof(*warp), GFP_KERNEL);
++	if (!warp)
++		return -ENOMEM;
++	warp->dev = &z->dev;
++	mutex_init(&warp->lock);
++	init_completion(&warp->recv);
++	init_completion(&warp->reply);
++	zorro_set_drvdata(z, warp);
++
++	if (!devm_request_mem_region(&z->dev, base + WARP_OFFSET_DPREG_CR,
++				     sizeof(u32), "warp-mfd")) {
++		dev_err(&z->dev, "cannot reserve the interrupt control register\n");
++		return -EBUSY;
++	}
++
++	if (!devm_request_mem_region(&z->dev, base + WARP_OFFSET_DPRAM,
++				     WARP_DPRAM_SIZE, "warp-mfd")) {
++		dev_err(&z->dev, "cannot reserve the dual-port RAM window\n");
++		return -EBUSY;
++	}
++
++	warp->dpram = devm_ioremap(&z->dev, base + WARP_OFFSET_DPRAM,
++				   WARP_DPRAM_SIZE);
++	warp->reg_cr = devm_ioremap(&z->dev, base + WARP_OFFSET_DPREG_CR,
++				    sizeof(u32));
++	if (!warp->dpram || !warp->reg_cr) {
++		dev_err(&z->dev, "cannot map the dual-port RAM window\n");
++		return -ENOMEM;
++	}
++
++	error = devm_request_irq(&z->dev, IRQ_AMIGA_PORTS, warp_irq,
++				 IRQF_SHARED, "warp-mfd", warp);
++	if (error) {
++		dev_err(&z->dev, "cannot request irq %u\n", IRQ_AMIGA_PORTS);
++		return error;
++	}
++
+ 	error = mfd_add_devices(&z->dev, z->dev.id, warp_mfd_cells,
+ 				ARRAY_SIZE(warp_mfd_cells), &z->resource,
+ 				0, NULL);
+@@ -68,7 +318,10 @@ static struct zorro_driver warp_mfd_driver = {
+ 	.name		= "warp-mfd",
+ 	.id_table	= warp_mfd_ids,
+ 	.probe		= warp_mfd_probe,
+-	.remove		= warp_mfd_remove
++	.remove		= warp_mfd_remove,
++	.driver		= {
++		.dev_groups	= warp_groups,
++	},
+ };
+ 
+ static int __init warp_mfd_init(void)
+diff --git a/drivers/zorro/warp-mfd.h b/drivers/zorro/warp-mfd.h
+index 3f44f2b57c76..366848545ea4 100644
+--- a/drivers/zorro/warp-mfd.h
++++ b/drivers/zorro/warp-mfd.h
+@@ -1,13 +1,34 @@
+ /* SPDX-License-Identifier: GPL-2.0 */
+ /*
+- * CS-Lab Warp - board window layout
++ * CS-Lab Warp - 68k <-> ARM dual-port RAM protocol
+  *
+  * Copyright 2026 Paolo Pisati <p.pisati@gmail.com>
++ *
++ * The Warp boards pair the 68k with an ARM co-processor. The two talk
++ * through a dual-port RAM window and a shared interrupt control register,
++ * both of which sit at fixed offsets inside the board's Zorro space.
++ *
++ * This describes only the small part of that interface this driver uses:
++ * the control register bits, the handful of commands behind the sysfs
++ * attributes, and the diagnostic reply. The board firmware implements many
++ * more commands - see the vendor sources for the full protocol.
++ *
++ * Multi-byte fields are laid out as the 68k sees them, and the wire format
++ * assumes 2-byte alignment for 32-bit members. That is what m68k gcc does
++ * by default, so no packing attribute is needed here - but it does mean the
++ * kernel must not be built with -malign-int, which would push every 32-bit
++ * member to a 4-byte boundary and desynchronise the layout from the board.
++ * The static_assert()s at the end of this file catch that.
+  */
+ 
+ #ifndef _WARP_MFD_H
+ #define _WARP_MFD_H
+ 
++#include <linux/bits.h>
++#include <linux/build_bug.h>
++#include <linux/stddef.h>
++#include <linux/types.h>
++
+ /* Offsets from the start of the board's Zorro window. */
+ #define WARP_OFFSET_DPREG_CR	0x1000	/* dual-port interrupt control reg */
+ #define WARP_OFFSET_DPRAM	0x2000	/* dual-port RAM */
+@@ -16,4 +37,101 @@
+ #define WARP_DPRAM_SIZE		0x2000
+ #define WARP_ATA_SIZE		0x1800
+ 
++/*
++ * Interrupt control register. Writes are read-modify-write requests rather
++ * than plain stores: OR in DPREG_CR_SET to set the named bits, or write them
++ * with DPREG_CR_CLR to clear them. Reads return the raw bit state.
++ */
++#define DPREG_CR_SET		0x80000000	/* set the bits in this word */
++#define DPREG_CR_CLR		0x00000000	/* clear the bits in this word */
++#define DPREG_CR_IE_ARM		BIT(0)		/* ARM irq enable */
++#define DPREG_CR_IE_68K		BIT(1)		/* 68k irq enable */
++#define DPREG_CR_MP_ARM		BIT(2)		/* message pending (ARM) */
++#define DPREG_CR_MP_68K		BIT(3)		/* message pending (68k) */
++#define DPREG_CR_MR_ARM		BIT(4)		/* message received (ARM) */
++#define DPREG_CR_MR_68K		BIT(5)		/* message received (68k) */
++#define DPREG_CR_IE_ETHRX	BIT(6)		/* ethernet rx irq enable */
++#define DPREG_CR_IF_ETHRX	BIT(9)		/* ethernet rx irq flag */
++
++#define WARP_BOARDNAME_LEN	32
++#define WARP_WIFI_SSID_LEN	128
++#define WARP_WIFI_PASS_LEN	128
++
++/* Command opcodes. Only the ones this driver issues are listed. */
++enum warp_cmd_id {
++	WARP_CMD_GET_DIAG	= 6,
++};
++
++/* Reply opcodes, as reported in struct warp_rpl_hdr::rpl. */
++enum warp_rpl_id {
++	WARP_RPL_NOP		= 0,
++	WARP_RPL_DIAG		= 1,
++};
++
++struct warp_cmd_hdr {
++	u32	cmd;			/* enum warp_cmd_id */
++};
++
++union warp_cmd {
++	struct warp_cmd_hdr		hdr;
++};
++
++struct warp_rpl_hdr {
++	u32	rpl;
++};
++
++/*
++ * Reply to WARP_CMD_GET_DIAG. Fields this driver does not expose are kept
++ * so the ones after them land at the right offset.
++ *
++ * turbo_level and tz_corr_secs are reported by the firmware but no longer
++ * maintained by it; treat their contents as stale.
++ */
++struct warp_diag {
++	struct warp_rpl_hdr	hdr;
++	u32			vcc5v;			/* binary32 */
++	u32			vbatt;			/* binary32 */
++	u32			t60_ntc;		/* binary32 */
++	u32			t60_internal;		/* binary32 */
++	u32			t_arm;			/* binary32 */
++	u32			hw_ver;
++	u32			fmw_ver;
++	u32			turbo_level;		/* obsolete, stale */
++	u32			fan_percent;
++	char			board_name[WARP_BOARDNAME_LEN] __nonstring;
++	u32			kickstart_nr;
++	u32			usb_dev_status[2];
++	char			wifi_ssid[WARP_WIFI_SSID_LEN] __nonstring;
++	char			wifi_pass[WARP_WIFI_PASS_LEN] __nonstring;
++	u32			native_ide_enabled;
++	s32			temp_reg_cpu;
++	s32			temp_reg_min_pwm;
++	u8			ide_ior_as;
++	u8			ide_ior_ng;
++	u8			ide_iow_as;
++	u8			ide_iow_ng;
++	u8			ide_ack_as;
++	s32			tz_corr_secs;		/* obsolete */
++	u8			board_type;
++	u32			wifi_state;
++	u32			cpu_freq_mhz;		/* binary32 */
++	u32			cpu_clk_phase_shift_deg; /* binary32 */
++};
++
++union warp_reply {
++	struct warp_rpl_hdr	hdr;
++	struct warp_diag	diag;
++};
++
++/*
++ * The board decides these offsets, not the compiler. If a toolchain change
++ * moves them, every field past the first mismatch decodes as garbage, so
++ * fail the build instead.
++ */
++static_assert(offsetof(struct warp_diag, board_name) == 40);
++static_assert(offsetof(struct warp_diag, wifi_ssid) == 84);
++static_assert(offsetof(struct warp_diag, wifi_pass) == 212);
++static_assert(offsetof(struct warp_diag, wifi_state) == 364);
++static_assert(sizeof(struct warp_diag) == 376);
++
+ #endif /* _WARP_MFD_H */
 -- 
 2.43.0
 
