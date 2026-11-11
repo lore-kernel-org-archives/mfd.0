@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794432042;
-	b=XhnQUxxEYeOLZ6IwXRIjWZoEmlz0Ri+nwWp4H/WQkMG84dKNwsLY98RbvvgsEArJc7ZL
-	 aOyx0cn1dpa6yeDPCZr3qtjTmn8ogBJq8ShPPvmRcqZTF8NZqCI5vx/CSAVyg6yyIitM8
-	 Q6qCc4K7bAapKupT/hkz5ZtwoeA8UFLYSlAiZgjK6WmuHrEi91Bn4P2FI2xKO0rWlax9u
-	 PK25E0dphQCmrnJV4bZfiOWC1Qt8ugvPOhpnej6dFp3/u4PqFNc8uMvwOFueRpUDi8l5l
-	 KrFpB7OA+wZhcpey51jftypbLyJgnDEjK4rHKM3h2+hIk+xMbsNDqg5wF0RwRRDYp0Q==
+	t=1794432053;
+	b=B6GwAQLBXHYdv8RXdR/13bSuiNPSjk6u4A0+rQ8iGulqv2Or/3CBfU9ZL5w9gSjUzuUT
+	 ArlkDlA+r0KrUze0jIutlLsy0lWYiaXX4SYlosMxTZKdWRrXcSRyZihmUNlpfS/FbUl3S
+	 LiP8ychQsxMfHqTXQsYTJTgA1ufwE4TM89myzAZTYRJ1GXWXlyDgMS9qBNpqc1FdJJVdG
+	 FhGgFyNSarIAAmN0sxNFHYuBYYBjvxf8DkknuDYGU6ldjHDWoKmeop4OeWt50IyNy1PXe
+	 u9S3mSN3bMMa1r24AAVIvk7VG4YZqYxtAfn7TWcNS4hwpylJCIMjOcKjWuPYY16DvLg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794432042;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794432053;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=rwkwlOBwVS8z4G9GjSK5oW8nZZc9ccEpxttpeaHCRdA=;
-	b=K3G+gCsL+GZSKYMeHiXwj5+W+Tq8NK4L/nLOH+5m6g9wPs1uFDuEscA3yihy5V9FoF4r
-	 sSJExrzBQHzqbiEs+p1qKuidbpVl8A6m/YwIjZBB9uJspngVQmf4zy+teYVfJgxx5ktVn
-	 GRJllvhEUwS5DjaMLR6VvJ9AlLQMOeZ5KxZwFoHw844E5wZ8cvr8awPDv6HEGad/ZRy0b
-	 KMjvZC281wk4Ld05hMdpnfecmBwJbn4l5hU36dYRgPiE0wNFXfvPSPVnBDzLxR0O0YkNY
-	 nCLxr7/aQBO+g0tPNuCemEE0yxz5HlY3ATC353iWrsgxHxzR4qVDdd0aq1izzZk+xxw==
+	bh=bfkWFTCeiK5o6U+Er4BsXh9p4xWRw1CL+hOFqwBQky0=;
+	b=nh0gyJrSTPrW6sme0jCb2UkFoTPtLPFwJC4LNwB5vOi+NIjYNBHWh+zCfZ7Zny467131
+	 AiErTkjatSfR5rOMqYQTJYmp4JClD/JZLJCk6HFw4Jv+K1YIca8tljy2G6DWwpNlk3YuH
+	 53OTy/c24F8dkEeKgjHnOfeMbUlHXcGo8pL2+wSitIU5MEXxR8YKbajeApqPUHstnxDwM
+	 qqDH6vjtlEY50rKKCZ3Bx0s2XEQzaC6+3p9IW7+e12uq/3fzsP9O13kwU4WnZRrabjLv9
+	 CTrgtMHCTKdjGDMT3wd2M5m+Fkg4M8y4U3oarM/0NglHCrznao14Fvrh88OH6ek16RA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lPHVAd9Y;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Zgc1ig52;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71188606A326
-	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 21:20:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46D8B606A321
+	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 21:20:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lPHVAd9Y
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E36951F00A05;
-	Wed, 11 Nov 2026 21:20:41 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Zgc1ig52
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A9E9E1F00A05;
+	Wed, 11 Nov 2026 21:20:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794432042;
-	bh=rwkwlOBwVS8z4G9GjSK5oW8nZZc9ccEpxttpeaHCRdA=;
+	s=k20260515; t=1794432052;
+	bh=bfkWFTCeiK5o6U+Er4BsXh9p4xWRw1CL+hOFqwBQky0=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=lPHVAd9YmU7b9ub2hL5hoHQfyWfSMQURGZkdJK9Mr4gkjJ/k9fHRnubQJWRGYtXBX
-	 GQ2uniPy5/4ei+APuWf/IeIh7cQOAlxiYMhUekRDvqJ3szILl0JZvUwqrNOKUPuECi
-	 OofK5PY6UrmZXa68q01lWOYTosRCwFcV6F/Lq1QmLEs5SMLAZACC8TeZI3GnT/6dbF
-	 0Mnvlj7qINcKJ0zodrtlSZDphctf9Dm6gFVKTUAQwMn/Z3mFPZRTmo8GsuwsktqY0m
-	 0zBmrXZnrKVg6MWKDw3JmOA0fRfZSuw91LtsksDOZeglzUSDFx0hple+XpoWjuj5tU
-	 ov8EtPYFeRPCw==
-Message-ID: <sashiko-outbox-209696@kernel.org>
+	b=Zgc1ig529SnYrPRoIxGUhsoB/r6OB/8tFuMB8aAfwwJAUsww7DML+Pr/WxMb7ePkl
+	 +d4t1muBFpK0i0Doh9gvehLpRBAzQRQF6tAPyytuPKxdg/e7IZaAvUW1oIxguXftUY
+	 w4AgccOy2xoSdBLT0z++hQdQXpN/43Evdqli+oK6rLy84F42uY79bYGoMa8lYIX0uK
+	 6ixpLD/+66sTbXBiZ7+GbAYHZUoqdwLPo9KXObUOQzfcrh5kqj9sCqvPJ9K26TJmhx
+	 tDi76ox6rKhYDIGonfdw1xFqJeObyTyjKrMfuhV4PP82W5qgg+a8mAxliuHp9GsRzN
+	 44tmo8tgtRCOA==
+Message-ID: <sashiko-outbox-209697@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH V4 3/7] power: supply: rk817-charger: simplify
- re-initializing coulomb counter
+Subject: Re: [PATCH V4 2/7] power: supply: rk817-charger: Fix NVRAM SoC
+ value
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Chris Morgan" <macroalpha82@gmail.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261111205627.56652-4-macroalpha82@gmail.com>
+In-Reply-To: <20261111205627.56652-3-macroalpha82@gmail.com>
 References: <20261111205627.56652-1-macroalpha82@gmail.com>
- <20261111205627.56652-4-macroalpha82@gmail.com>
+ <20261111205627.56652-3-macroalpha82@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 11 Nov 2026 21:20:41 +0000
+Date: Wed, 11 Nov 2026 21:20:52 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -63,14 +63,18 @@ Precedence: list
 
 > From: Chris Morgan <macromorgan@hotmail.com>
 >=20
-> There are multiple places we re-initialize the coulomb counter. Create
-> a function to do this to make the code easier to read.
+> The NVRAM value is stored as a value between 0 (0%) and 100000 (100%),
+> but the bounds checking checks and truncates with a max of 10000,
+> causing a value of 100% to get read as 10%.
 >=20
+> Fixes: 11cb8da0189b ("power: supply: Add charger driver for Rockchip RK81=
+7")
+> Suggested-by: Jacob Cook <jacobmcook1984@gmail.com>
 > Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
 
 Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111205627.5665=
-2-1-macroalpha82@gmail.com?part=3D3
+2-1-macroalpha82@gmail.com?part=3D2
 
