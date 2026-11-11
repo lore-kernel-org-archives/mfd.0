@@ -1,48 +1,49 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794437004;
-	b=Y/P4JSz3T12DzfRFgcap0nlUjD/nA75zIwowb6QJDnnD3wL72Akf9XWahcJzGrESbLr1
-	 81xRxFPOelC9IDj0LQrNOW/aM/TVVUQL6pN0sDyZbISmVM8vTIPnODHY7eEOAA8mkzDVq
-	 fWjvuB1CHo9GjuLnCEgaI3ez3dKm7XzYzKe0j4gQi0vZEXYmO50TL0pRnOIzeA6SN+esf
-	 xW4zBcjlkPyMtV2DILORVgnp77N7e613fZ2MLL8T03KhHCHswIpsKwduVgBDCqule5/Wn
-	 2nZ3SYII/IJkHd8YbaSq0Ma/0s4LIPL8MsG9hzHkXctFypLT5/jFNM1R3wCIaHh3RnA==
+	t=1794437006;
+	b=UzwZUFNdIfxFYTcnAlG7TX/iMN/rNh6Ddo4jV7cNBLoANg6fgkVDEdC6vAiRu+BcdITa
+	 ap8UPSOqwt+n+N+r+kwLbO9+viJzTdHVvj9NE67KjBbA/G+3btOQa3eI5IkgDwBpU7gpz
+	 KBa2yZ4sXZYRZTSWcfIKfQ7M9bnV5BldkKd/xAnMh57L1e3ywUl9w8w5E8XuSg1JATA+B
+	 u/5oNGFKUQNghgROAva650h6D0RrhgXkAe3dsrQXljvjdu78LkxgZb/AWJ0uoG/F7tWLX
+	 BQgWOdSME0vLRUhJTDGOuU5drb3ZN+PwUzjdxN+3caFDg9vATgVaclSNBr7iRpciYww==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794437004;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794437006;
 	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
 	 X-Mailer;
-	bh=UeJIGxY5ErXXyutQODurGJuOPaEIwFDPftosdrDquo4=;
-	b=Acnv+pIRy4y7QovSwmCjV/p2xQsN22nRk/wbWS0IbFA9QZWrVg9vLBLLyRolENfsrGvX
-	 DyNM9GF1B13KjttmAeWHxbHTvf7J5OsO6GOPnUdEK9NicEhknzOvSihN8FfBTf7IAeuZp
-	 wGZSaMefDoHzhIgFor0DgWpf0Pj8ZURMvN/6lrxw/fvNQkggDi+37SKZdQUsvz+ZrdlX7
-	 bgB7OVTqikVd69Jy/ZNOLS+uNeJK8S0hzCpHlYowNLu0nx0em5vKkLBg1iJs6UstMkg8Q
-	 3l7yHRhFmfN0DrcdAkXkJ7GT2cy1q5iS7NAN7qr5kEuzkm+POTdGyP0S1hGeea0U4lA==
+	bh=cX/Tp5audNOVGhUTi+88u7YfX7Lqy3DYIOIRzLRbeyY=;
+	b=bVvVV+EU9fd9LQDReuk8RNwdKrUqEbAToG9UFYaWVd8qzuhZvucXASqJzN7O+nXYeZdK
+	 OWR5o3kdMhe/6oFhjynqijQEDD6CVbay0jwRNnvCgvMkHj3eo24U+dp6OnK/QB210Dn6N
+	 95jFD0WxNotn+3Rp24GlML0I2QsWSl0Pw728gLYB4fKNOAFGYenXOz68IZHdRJJeI7KPE
+	 qTlQnnYLJG6G4qN1PuwRUiBty1SWPq23TQ8Sym8Wokwlp3/PBwK8INsvkAaJyVo5GsTiY
+	 mvYP2/zS23k3nxWbqdpDFAZOO+yEL1b9BW9/pXTbq694+iGCOxof4Kj/628nnB7pf9A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UFJg7ifo;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=buUpJwfg;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6764A606A8B0;
-	Wed, 11 Nov 2026 22:43:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E16CA60A6F74;
+	Wed, 11 Nov 2026 22:43:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UFJg7ifo
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C6F21F00A06;
-	Wed, 11 Nov 2026 22:43:23 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=buUpJwfg
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3D25E1F00A06;
+	Wed, 11 Nov 2026 22:43:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794437004;
-	bh=UeJIGxY5ErXXyutQODurGJuOPaEIwFDPftosdrDquo4=;
+	s=k20260515; t=1794437005;
+	bh=cX/Tp5audNOVGhUTi+88u7YfX7Lqy3DYIOIRzLRbeyY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=UFJg7ifoWir3FpRhZXf10gK6sJsDWAE5nZot4uimGei2FVwGbQi09RGw73Va4/wCy
-	 76nLG8BPhPOXoMU7zmhaHOUQazwjcZVOU5QoonImdFlRDiLwxFx/Ih7akKV/yk90Oo
-	 q3wE/bPd/7UyGjGI/wWgQVOhQYncjO9kbsr57XEJ3BWbbVa+0rSrlsqpC7RxMh6XCy
-	 3Np5yTsPSd6D2cnFlwGMrui98dLeTo3QhZTbh9ALkBBptdn0OIdagl65R10xWXrr2o
-	 K4bOjoYrXRd9j9/lRn2ISKR2BOGK/ldbg2RuHCUndP9CdDu+lODBrzhbpYLBxJI1yd
-	 voJgfnzH4qCHg==
+	b=buUpJwfgTYkO2rE+o86IT2/I+go5KxcIEK5OFkI5mIqdAWhG0kDrMe8TzKEWNWQAQ
+	 Sb9qv+WZH0H9h1N0aGnNZMYa/pXxFL00OWoytbDOe9uieJr1wXS5Dmoyi1l399+KJf
+	 XTfzvvmuoLASW+nOPknvvpTg/l0fTb8nHEBji1tRn+//ZPoiddA7aWEjtO3CjHvPOW
+	 jMDY8xvAXX8Ub3WvMZXdAvaOv05kHT/Mkea61tHwBDpTt7S4DkHdVWa9xpTdSEOmW0
+	 Uus4porQjBSWgoZoM5ODpN2S1WHLKIr3OH4eGoGcHX7JE/6WNNNWVL7m1rHEfr+pcu
+	 4cfBdWCQooe5Q==
 From: "Rob Herring (Arm)" <robh@kernel.org>
-Date: Wed, 11 Nov 2026 16:43:04 -0600
-Subject: [PATCH 7/9] arm64: dts: marvell: Drop unused USB 'phy-names'
+Date: Wed, 11 Nov 2026 16:43:05 -0600
+Subject: [PATCH 8/9] arm64: dts: marvell: cn9131-cf-solidwan: Drop
+ st,m41t80 reset-gpios
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -54,7 +55,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261111-dtbs-marvell-v1-7-938788aff3ae@kernel.org>
+Message-Id: <20261111-dtbs-marvell-v1-8-938788aff3ae@kernel.org>
 References: <20261111-dtbs-marvell-v1-0-938788aff3ae@kernel.org>
 In-Reply-To: <20261111-dtbs-marvell-v1-0-938788aff3ae@kernel.org>
 To: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
@@ -65,53 +66,26 @@ Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org
 X-Mailer: b4 0.16-dev
 
-'phy-names' is not valid without a corresponding 'phys' property, so
-drop them when 'phys' is not present.
+The part has no reset line nor does the Linux driver handle the property,
+so drop it.
 
 Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 ---
- arch/arm64/boot/dts/marvell/cn9130-crb-A.dts          | 2 --
- arch/arm64/boot/dts/marvell/cn9131-db-comexpress.dtsi | 4 ++--
- 2 files changed, 2 insertions(+), 4 deletions(-)
+ arch/arm64/boot/dts/marvell/cn9131-cf-solidwan.dts | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/arch/arm64/boot/dts/marvell/cn9130-crb-A.dts b/arch/arm64/boot/dts/marvell/cn9130-crb-A.dts
-index a7b6dfba8af5..5823b25e5faf 100644
---- a/arch/arm64/boot/dts/marvell/cn9130-crb-A.dts
-+++ b/arch/arm64/boot/dts/marvell/cn9130-crb-A.dts
-@@ -28,11 +28,9 @@ &cp0_comphy2 0
- &cp0_usb3_0 {
- 	status = "okay";
- 	usb-phy = <&cp0_usb3_0_phy0>;
--	phy-names = "usb";
+diff --git a/arch/arm64/boot/dts/marvell/cn9131-cf-solidwan.dts b/arch/arm64/boot/dts/marvell/cn9131-cf-solidwan.dts
+index b6aeba7d0a61..0b079e1428bf 100644
+--- a/arch/arm64/boot/dts/marvell/cn9131-cf-solidwan.dts
++++ b/arch/arm64/boot/dts/marvell/cn9131-cf-solidwan.dts
+@@ -252,7 +252,6 @@ carrier_rtc: rtc@68 {
+ 		pinctrl-names = "default";
+ 		interrupt-parent = <&cp1_gpio1>;
+ 		interrupts = <12 IRQ_TYPE_EDGE_FALLING>;
+-		reset-gpios = <&cp1_gpio1 13 GPIO_ACTIVE_LOW>;
+ 	};
  };
  
- &cp0_usb3_1 {
- 	status = "okay";
- 	usb-phy = <&cp0_usb3_0_phy1>;
--	phy-names = "usb";
- };
-diff --git a/arch/arm64/boot/dts/marvell/cn9131-db-comexpress.dtsi b/arch/arm64/boot/dts/marvell/cn9131-db-comexpress.dtsi
-index 71c225221617..a68c958fbb30 100644
---- a/arch/arm64/boot/dts/marvell/cn9131-db-comexpress.dtsi
-+++ b/arch/arm64/boot/dts/marvell/cn9131-db-comexpress.dtsi
-@@ -89,15 +89,15 @@ &cp0_spi1 {
- &cp0_usb3_0 {
- 	status = "okay";
- 	usb-phy = <&cp0_usb3_0_phy0>;
--	phy-names = "usb";
- 	/delete-property/ phys;
-+	/delete-property/ phy-names;
- };
- 
- &cp0_usb3_1 {
- 	status = "okay";
- 	usb-phy = <&cp0_usb3_0_phy1>;
--	phy-names = "usb";
- 	/delete-property/ phys;
-+	/delete-property/ phy-names;
- };
- 
- &cp1_usb3_1 {
 
 -- 
 2.53.0
