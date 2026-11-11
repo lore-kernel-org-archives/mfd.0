@@ -1,49 +1,49 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
 	t=1794437006;
-	b=UzwZUFNdIfxFYTcnAlG7TX/iMN/rNh6Ddo4jV7cNBLoANg6fgkVDEdC6vAiRu+BcdITa
-	 ap8UPSOqwt+n+N+r+kwLbO9+viJzTdHVvj9NE67KjBbA/G+3btOQa3eI5IkgDwBpU7gpz
-	 KBa2yZ4sXZYRZTSWcfIKfQ7M9bnV5BldkKd/xAnMh57L1e3ywUl9w8w5E8XuSg1JATA+B
-	 u/5oNGFKUQNghgROAva650h6D0RrhgXkAe3dsrQXljvjdu78LkxgZb/AWJ0uoG/F7tWLX
-	 BQgWOdSME0vLRUhJTDGOuU5drb3ZN+PwUzjdxN+3caFDg9vATgVaclSNBr7iRpciYww==
+	b=yNxgyCeYvTE5H6jMRa24LXMtPHWkyCylyIO5lBLdqXxAGQ8e/5gUvks4UYSkolJMa3ld
+	 /p1RCOIC7vPN04ftiGgg/4f563SxdTqc6bjdV+GRiTd0oiBfYGuU62VAOcAiDSCvGoyE3
+	 diBVYDLb/73SeOOZaufH4RX1FWbHlyMaxbYTHr8Pa3WO0hoOKiOGAqKwR82xLKZMZiaWb
+	 GU314NXeGExx1lECyqkg7+PC79BwB3EuNmycJUPbM0M+h/sY+9BsjlPUCSeOSCqrAOhT+
+	 icTVK2cFiiisECw4yvythOD8Om0e0zOkAUFMT2Kdqc66lzKhPqjOerpzGZLlDTni04g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	a=rsa-sha256; c=relaxed/relaxed; t=1794437006;
 	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
 	 X-Mailer;
-	bh=cX/Tp5audNOVGhUTi+88u7YfX7Lqy3DYIOIRzLRbeyY=;
-	b=bVvVV+EU9fd9LQDReuk8RNwdKrUqEbAToG9UFYaWVd8qzuhZvucXASqJzN7O+nXYeZdK
-	 OWR5o3kdMhe/6oFhjynqijQEDD6CVbay0jwRNnvCgvMkHj3eo24U+dp6OnK/QB210Dn6N
-	 95jFD0WxNotn+3Rp24GlML0I2QsWSl0Pw728gLYB4fKNOAFGYenXOz68IZHdRJJeI7KPE
-	 qTlQnnYLJG6G4qN1PuwRUiBty1SWPq23TQ8Sym8Wokwlp3/PBwK8INsvkAaJyVo5GsTiY
-	 mvYP2/zS23k3nxWbqdpDFAZOO+yEL1b9BW9/pXTbq694+iGCOxof4Kj/628nnB7pf9A==
+	bh=Mvm2B4aA/p4I2wK+YBoHM5JvjypAI+iz8BH1ZFQP+gk=;
+	b=uPT+BovL9XFGYukaTPCKYKcHrpVRS9JlVqDSb57btqBfMYkeUpELRV0MUdIvYyrfxxSY
+	 qNbY+q5ERIADJkD97hhT00CqvLT6ZzlYSKHGv45XhtCvvMD/uHyQMLLa5f6xIkgC8DVnF
+	 W+1DCKqiKpB2rMBjTlNPtZUlEctdiXSomJvICy8YMIYzywzukS1GLQHRzSjht9Kga/T3x
+	 WyE87RJIVlsqSmkse2Ypv8maFs9AYgHmrRzvhExxycQLWBjfOmnZGRcXreT9nsJh8iMrL
+	 8lxZDXbfJXIyj15Zdw/Liex2GxVMAZOw76+SEVRrKnWhghosxkPLfk005StXfO0LbcQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=buUpJwfg;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QxbFGovA;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E16CA60A6F74;
-	Wed, 11 Nov 2026 22:43:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5125606AED2;
+	Wed, 11 Nov 2026 22:43:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=buUpJwfg
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3D25E1F00A06;
-	Wed, 11 Nov 2026 22:43:25 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QxbFGovA
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 805641F00A07;
+	Wed, 11 Nov 2026 22:43:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794437005;
-	bh=cX/Tp5audNOVGhUTi+88u7YfX7Lqy3DYIOIRzLRbeyY=;
+	s=k20260515; t=1794437006;
+	bh=Mvm2B4aA/p4I2wK+YBoHM5JvjypAI+iz8BH1ZFQP+gk=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=buUpJwfgTYkO2rE+o86IT2/I+go5KxcIEK5OFkI5mIqdAWhG0kDrMe8TzKEWNWQAQ
-	 Sb9qv+WZH0H9h1N0aGnNZMYa/pXxFL00OWoytbDOe9uieJr1wXS5Dmoyi1l399+KJf
-	 XTfzvvmuoLASW+nOPknvvpTg/l0fTb8nHEBji1tRn+//ZPoiddA7aWEjtO3CjHvPOW
-	 jMDY8xvAXX8Ub3WvMZXdAvaOv05kHT/Mkea61tHwBDpTt7S4DkHdVWa9xpTdSEOmW0
-	 Uus4porQjBSWgoZoM5ODpN2S1WHLKIr3OH4eGoGcHX7JE/6WNNNWVL7m1rHEfr+pcu
-	 4cfBdWCQooe5Q==
+	b=QxbFGovAddVgfQIBYt3i06TYTqIA+xDMdvDo8WJTWnPzCj1V4h+CSL0XpUJgV/eWr
+	 GfkNoQ1VjRK3K1z08+/VGIADIV995Dot4RllhCoST85lE3ybquJnyXzhN7ij7Kd3OR
+	 uQPtuUVs29t3UvaGQTXRr09PTbQv3dD0v8ftRYKVEsYw7c1329rjSjIqcneF50ujj6
+	 aqOWBfZPdR0hPbbidIWsV3/H8lYGESybD1PYDa7owc+vk5nyF7eH76z4gUhC/3+riD
+	 V6jBpwKYA9i3pzdB8uoAU4XK5dI/9vehG16fFIgKo1qSp/GChpSRvWsD2cybIUMTxN
+	 BfzOpUXnW55mA==
 From: "Rob Herring (Arm)" <robh@kernel.org>
-Date: Wed, 11 Nov 2026 16:43:05 -0600
-Subject: [PATCH 8/9] arm64: dts: marvell: cn9131-cf-solidwan: Drop
- st,m41t80 reset-gpios
+Date: Wed, 11 Nov 2026 16:43:06 -0600
+Subject: [PATCH 9/9] arm64: dts: marvell: armada-3720-gl-mv1000: Add switch
+ fixed-link
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -55,7 +55,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261111-dtbs-marvell-v1-8-938788aff3ae@kernel.org>
+Message-Id: <20261111-dtbs-marvell-v1-9-938788aff3ae@kernel.org>
 References: <20261111-dtbs-marvell-v1-0-938788aff3ae@kernel.org>
 In-Reply-To: <20261111-dtbs-marvell-v1-0-938788aff3ae@kernel.org>
 To: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
@@ -66,26 +66,33 @@ Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org
 X-Mailer: b4 0.16-dev
 
-The part has no reset line nor does the Linux driver handle the property,
-so drop it.
+As the switch port 0 has an 'ethernet' phandle, 'phy-mode' and one of
+'fixed-link', 'phy-handle' or 'managed' are required by the DSA schema.
+The expressobin has appears to have a similar configuration, so copy it
+and use 'fixed-link'.
 
 Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 ---
- arch/arm64/boot/dts/marvell/cn9131-cf-solidwan.dts | 1 -
- 1 file changed, 1 deletion(-)
+ arch/arm64/boot/dts/marvell/armada-3720-gl-mv1000.dts | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/marvell/cn9131-cf-solidwan.dts b/arch/arm64/boot/dts/marvell/cn9131-cf-solidwan.dts
-index b6aeba7d0a61..0b079e1428bf 100644
---- a/arch/arm64/boot/dts/marvell/cn9131-cf-solidwan.dts
-+++ b/arch/arm64/boot/dts/marvell/cn9131-cf-solidwan.dts
-@@ -252,7 +252,6 @@ carrier_rtc: rtc@68 {
- 		pinctrl-names = "default";
- 		interrupt-parent = <&cp1_gpio1>;
- 		interrupts = <12 IRQ_TYPE_EDGE_FALLING>;
--		reset-gpios = <&cp1_gpio1 13 GPIO_ACTIVE_LOW>;
- 	};
- };
+diff --git a/arch/arm64/boot/dts/marvell/armada-3720-gl-mv1000.dts b/arch/arm64/boot/dts/marvell/armada-3720-gl-mv1000.dts
+index a881a3326dba..93af902f4f6f 100644
+--- a/arch/arm64/boot/dts/marvell/armada-3720-gl-mv1000.dts
++++ b/arch/arm64/boot/dts/marvell/armada-3720-gl-mv1000.dts
+@@ -161,6 +161,12 @@ ethernet-port@0 {
+ 				reg = <0>;
+ 				label = "cpu";
+ 				ethernet = <&eth0>;
++				phy-mode = "rgmii-id";
++
++				fixed-link {
++					speed = <1000>;
++					full-duplex;
++				};
+ 			};
  
+ 			ethernet-port@1 {
 
 -- 
 2.53.0
