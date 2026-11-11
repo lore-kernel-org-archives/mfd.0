@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794428703;
-	b=29OOLwk0YKNKWC5UTKLrJGNRwiEnW9L6o9rCE8bAVSAgxicD22MnMYvo6sgfCy79IHic
-	 Zht/Rqeg6z4HANrpTcwSzjK1/4orC3BJOkMJMe1sGozKeglg2E+AZbD7B9+mV2BN8QxKZ
-	 8sDN53RiHohPMBl+snHZcnzpMj4vZRqDnmaW+4qN0tbIF0wG5jJxiCWrfrLoKxs2P68rx
-	 wK4lpg2eYYVjaezvMTgfRrFm/2Xbza7h9whzJ1VNRYDysl4yIu7kCG6bUUTwpfvpYkNzj
-	 W/jlYMADMaPUfIBdzlsmhML/Fk9eTZU5Hd+AwR9XzCvMLviMDzpE0mHwwq4OMQyp8cg==
+	t=1794428935;
+	b=wQd3U3OIO7iQSilfszlCTi1oyEWRcJo2vUb4A2ryoP2FbC/NPGKXSJBZaJnarM/KMrWf
+	 ibRznFOiq8hVwYR33V6V8udwVr0FyHr0Azivykfzk1S3seksiXpzF3I6i8XU++gwuiPmb
+	 1iK1ezUFb6l/6vxcQLhVbW/TnvvauJjecaYAgrvOaGvM8ZuAu6YR/ixKcz8k7pVG4VdYE
+	 O/y22Y8UrshmnC9VCG07IsXyy1LSiNNK3FRg9oYgUg4i5Ez6K6QpjH+MuKcVl0OOQmRYv
+	 wHpZ+CLHxdvS+W4PggjB5zj1vTOk6iAZVf9P+n9xOdZPZJIPCXP4/nsDINjsINhR8iQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794428703;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794428935;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=s0Tp2ls7xq6BVAB/ut4XeXT+lq7nvDHuQn3tDvJLBLw=;
-	b=Zf8gjmicRpp3NnRTSK8MLCMNU2kIaJiZA79SJzKXDG3IeREekxL96KJu8cdY4HN1hZHQ
-	 x3pSEd+jOxi/eXT1J+WRBLyrynyzE5VaFA/br79gO+XiLlswLo8nch4C+bhFjX3Ce0BuU
-	 jAkCc/tUCxc6WyC2GrGE3HuJ8HSJ5N9M7TSg0O+o7DRNcK3lPF4Z7pPmnZtXItKS/M1NK
-	 Itb+DY/Jj1NO5oYSeNputl2wxBkUyejfSmA/sX+6X5KxriZwijF5sfnjIj9uz6Rmyxi/s
-	 878o64z2F6FylP8GZ1UTCDvYvnpiqBhwXSrTpNLZdlD7v9Ug2M45dqULCCw0G4LjtHQ==
+	bh=klaKuL1LMOufzcWMnZcm2ybwpbokrsN8hGs+uyM4atE=;
+	b=Xsjih10I/0eIA22nVPzUqEXoc5R2Y4r9B+6FwyGacJ9FsB5u+Fi0C4YVVqMnDYfuBFnP
+	 jPABc1v2nJLTTF7YTbNUdbOh/m1AsxkYvkZ73bP6NpbfIRmYfHg+2ExLQETs7fQufPkW+
+	 /Q8V7Hzi5QrJUqE31rliyn1XB/Fv7IMb3bMpqHvdoATDB19dbHnJ3tGM3nXIOiZn6BAmw
+	 OzYvty3KO8IUaSH34qcLngCfv3Zz1fJuaZBFbYoQeCNsermOb2blwQ9ILg5jLY8whT0sj
+	 io1yvfxlrRFs4+2BStFTmDbF4AqIQtNF4vN4JpCpXo4LjwWVkz6AtmK6VQjWnAWkPPA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VyFOE2Eq;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mtw+Vzn4;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B48C606A321;
-	Wed, 11 Nov 2026 20:25:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D21DA606A31C
+	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 20:28:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VyFOE2Eq
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6C4801F00A05;
-	Wed, 11 Nov 2026 20:25:02 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mtw+Vzn4
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 498261F00A05;
+	Wed, 11 Nov 2026 20:28:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794428702;
-	bh=s0Tp2ls7xq6BVAB/ut4XeXT+lq7nvDHuQn3tDvJLBLw=;
+	s=k20260515; t=1794428935;
+	bh=klaKuL1LMOufzcWMnZcm2ybwpbokrsN8hGs+uyM4atE=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=VyFOE2EqCFE0eSO60szeYdYKN+M4f8jSerMvkjzzgnFJJ0YCnr+eRzI+y6rreP09I
-	 yEgbVR+IVa9FuxeUjRFznYksUu3bHpStS4Da0L/E/uFpTwCgYSy4oqMdLuIH61583P
-	 9hYsni/whT54SrXAOfnL4h8syZLDXbM9IostP7j8BfNcnP+gK4sFJUjkWbJdLWYrzi
-	 fKAka1TVumFIEdRWWRVqXsMXqyX+ji1dTp7QgJyu5OS75POQ+AoqMXjipRizrQoagQ
-	 hxTWmZNtVNllWQ3a0CWbGvkZRisyLkwXtWukfIucn9RSFDjyzXZ3Bt5uNt3ti6WT0E
-	 9lLGizAOWYwlA==
-Message-ID: <sashiko-outbox-209650@kernel.org>
+	b=mtw+Vzn4q6kbPGlnfHL+yYpGwthKT0nBOA3/IOJRdAuMuzJ5XbKdeJniNsr7dZMLL
+	 TQfZgOlqwzsFZhJR4ln2houH45mtFkpNccirLd0FgIvG9f8D+L/ZxJqpwReKanmpWw
+	 aSkwmIXarCi1nAdVuOI6KSLhpLA6KsKfWhJvUX0UqzSn/6zSAZrBZ23CNOvv8gZ9oh
+	 EwxjEAP6k889XD/YalAXxSimeByBjVneXVg7AAAvIdGjPKc38TEflZ7LqL4/I3A3B8
+	 JJpD3QDn1EF5Db8eF9CVQV1LbGIG3Dol10ghc+3wT0dsfq3zfsqcsKxRN36BNt9meX
+	 KZBmb1IdZMKlg==
+Message-ID: <sashiko-outbox-209666@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 06/12] arm64: dts: hisilicon: hi3798cv200: pinctrl node
- fixes
+Subject: Re: [PATCH 12/12] arm64: dts: hisilicon: Remove unsupported SBSA
+ UART "reg-io-width"
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?Um9iIEhlcnJpbmcgKEFybSk=?= <robh@kernel.org>
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, conor+dt@kernel.org, lee@kernel.org
-In-Reply-To: <20261111-dtbs-hisi-v1-6-6c9f5f80716c@kernel.org>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20261111-dtbs-hisi-v1-12-6c9f5f80716c@kernel.org>
 References: <20261111-dtbs-hisi-v1-0-6c9f5f80716c@kernel.org>
- <20261111-dtbs-hisi-v1-6-6c9f5f80716c@kernel.org>
+ <20261111-dtbs-hisi-v1-12-6c9f5f80716c@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 11 Nov 2026 20:25:02 +0000
+Date: Wed, 11 Nov 2026 20:28:54 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,31 +61,14 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-Thank you for your contribution! Sashiko AI review found 1 potential
-issue to consider:
-- [Low] arm64: dts: hisilicon: missing Fixes trailer for commit
-  bb61c53601b4
---
-
-commit c07dedfc429c6da43eece5f84e24871058585f28
-Author: Rob Herring (Arm) <robh@kernel.org>
-
-> arm64: dts: hisilicon: hi3798cv200: pinctrl node fixes
->
-> Rename the Poplar pinconf node to pinctrl and correct the gpio9
-> gpio-ranges tuple.
->
+> The SBSA UART driver uses 4 byte access width by default and
+> "reg-io-width" is not supported in the binding, so drop it.
+>=20
 > Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 
-[Severity: Low]
-Both the pinconf@8a21000 node name and the malformed second tuple in gpio9
-gpio-ranges were introduced by commit bb61c53601b4 ("arm64: dts: hi3798cv20=
-0:
-enable emmc support for poplar board").  Should this include a Fixes tag?
-
-  Fixes: bb61c53601b4 ("arm64: dts: hi3798cv200: enable emmc support for po=
-plar board")
+Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111-dtbs-hisi-=
-v1-0-6c9f5f80716c@kernel.org?part=3D6
+v1-0-6c9f5f80716c@kernel.org?part=3D12
+
