@@ -1,57 +1,49 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794432634;
-	b=nlrf77tJajLI8WUU1J3KbAQAb0u6z1Asg0NVVjt6V8ilT/Noqpde+RhoMsGllO0M+miA
-	 YrBArts1EucXZx2i1cgsQ7drz8SIIuTbX1zfmYfnnKn7AA/+PZdWiQ/tiC9hjmUu3R0z9
-	 LTB6jlkz7KOZbLIzSNEqC20dMT14Gq7IiQg2uSrT4mLZFi8HRDHzAB23M8uN5FnGp+Vkk
-	 z/vrMNwE69UmmCywJorvRtjMYROkQqu8Y088GvGfoMXMBbFwk3v7krA8hmQ535EthvIaM
-	 jXHr1nI9wamCT7q8LuOuJUjKypX/Do22BZ1cpCGXdalWOH7310sgZ/Y6ranLWPu6SLg==
+	t=1794436994;
+	b=NKSn03UGAsDaOk0IsUiN5anwBdisJtI1AkyiCu+B+TwXrnjQOGD5kzbpf4PVkyTBm1KI
+	 4xHCVDXrKY3gb4mlVEcQ3deNro7a287jtGu7TAvS5rrNnrD30JD4qqHQMyybMxuhpdB1z
+	 opbyi9V6I8/llNiOopB0rhS7X2WKuELkclkR5yNVpjb4e2+DsTqrXakkNhW6S44AzMvJz
+	 YNosqzqquyru1XfjPPRpdZWOGItoHuIGwm/e+eDx8HCJt/ejVKpNSpQhzcXtjHsirCjjd
+	 jCTX4tWpKu+pV/j22kQBZBGebL/Wp4m41r+mdeFp/o3fIQEXuYYH0PTNQ8MJlms3keQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794432634;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=VYhwwI8UH/HBry1AR/WihjL2nwO+kadUIsVeLyqq7Q0=;
-	b=Dl5C5KILbagOpJn6oeAQ0BZ9K6TbTh5ql5y8n1Lb2qF8o4uj5JLgIYuE7dcKi8+b+zF5
-	 H9PE/71NibFG5fjBEukMYkeXCS6I8l2AZ8zjgCZL4PqX/1xQyPjRT/kcSrGEv9Yx3y4vX
-	 w4BeTwC1p/cn14phTvODcnamoJFwnqvc3wuj2oaaObVtJrrB0fdmGDp2zGfJxAaRc+Lyu
-	 rcbQ4qPILFrmoO0DENImgEXWOxOKkHxihXsn77vDE+vDHNuG280z9gGbIYSPMTKHzVo8M
-	 JXn5+JREZL6kmR8cL8g1v6rGfJAYUaS1/REvUBpFNWLCvkJ4CRCogXN55ZPJYzIf4ow==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794436994;
+	h=Received:DKIM-Signature:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer;
+	bh=jSZ/tjih5hHmj7xJU8RhvBRDAwsZICp5Fjl1qfyATP8=;
+	b=v+7Ze2TadWizL/YPw7Hn3DpPnUF8pObg5c7JWWyVxw8knW3tgz9kz3qgjlie97W2MtQl
+	 MIn1y9wMcjOnyIEkCdGzTXYDmi4e+VjYjKim1YlBNiiS++mvrOSdf55AQkb2NLck4ugAF
+	 +VEgD6CbFMQGP9OAswmrBIdhjAST7UfyYko+6bYgEGoP5gJYGuXDHNgUpOj89KD98vGaS
+	 iJYc7RMU+83neXmMD8jcUal9bK6tmdfw1LIBNSjUkO46PCaZ9FbuksIktHfy3g1S+LkaO
+	 NqapLjEU2w+R+DpAVPAx6oXIer7R2n4jlrmEMVq4eIShXGcU2MIFaqd4QDB8PpIceTA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TTcjdIgd;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bZGMYYR6;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02D02606A31C
-	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 21:30:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E17660A380B;
+	Wed, 11 Nov 2026 22:43:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TTcjdIgd
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 03AB71F00A05;
-	Wed, 11 Nov 2026 21:30:32 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bZGMYYR6
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BC2171F00A0B;
+	Wed, 11 Nov 2026 22:43:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794432633;
-	bh=VYhwwI8UH/HBry1AR/WihjL2nwO+kadUIsVeLyqq7Q0=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=TTcjdIgdFJWe+pkxRdYrOSVI+qspPpoReeHzcn4QHdFVWRdQHRxYl+OSCkeUoABWW
-	 X/5xpmemlN3N03jXn9ze+Kkx9R/YkWkwR9W0TJBDyBvMqp2PvoMyGVJat0F7RJ1GXX
-	 n+mjL+9O4mInuZYDHLJ7WOYri1lpDTyylY06gtYId9DVP1XkObjWZd8AQI1BagVV6h
-	 zU/9roqcxe+JPVh7ncv6JD+UUBsMDdYseRu7cdu2yai1THfz7OXXO5pXUhUNAM1FWI
-	 AbdHNz2FE5nNAvtYMPHxR/tqzP5fAv7YMpmejxBqJdvnd6kuCRID4LKHak82RcDEYR
-	 P8Jw/kNvVdsPw==
-Message-ID: <sashiko-outbox-209710@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH V4 4/7] power: supply: rk817-charger: Resolve boot state
- of charge from coulomb counter
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Chris Morgan" <macroalpha82@gmail.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261111205627.56652-5-macroalpha82@gmail.com>
-References: <20261111205627.56652-1-macroalpha82@gmail.com>
- <20261111205627.56652-5-macroalpha82@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 11 Nov 2026 21:30:32 +0000
+	s=k20260515; t=1794436994;
+	bh=jSZ/tjih5hHmj7xJU8RhvBRDAwsZICp5Fjl1qfyATP8=;
+	h=From:Subject:Date:To:Cc;
+	b=bZGMYYR6ICYIXG4sVGzvCmAJ5cf5CEYiNJmVWUbh4xI8+btF/uN9c9JhFnthl2C4V
+	 3UqQ3Wu+mqH75H9MYds+ChKVCtS3cjq7sZZJFQXU5rRSGXXyNVi8MBMvuKmlX35A+k
+	 CZ+F6CSdrYI8oD4nt2qpq0cF85XF+MhhMVC6bUecncyDqnxlpaSMszUCrIBWi9V8k1
+	 RbAlGYR5sNs93EFpeQ7KQ8e9pRGlsk8oawIAEWxDanjEHKmxyuS6Ex/bzBzakRPuSM
+	 8R/XOCXy8d4iidubanz56TNblhz+JkH1okxRHjPwPdElBsaFlEVlWg7o8LsppRomk2
+	 iTckEI2ouBJeg==
+From: "Rob Herring (Arm)" <robh@kernel.org>
+Subject: [PATCH 0/9] arm64: dts: marvell: DT warning fixes
+Date: Wed, 11 Nov 2026 16:42:57 -0600
+Message-Id: <20261111-dtbs-marvell-v1-0-938788aff3ae@kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,33 +52,60 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMyw5AMBCF4VeRWWuiJYhXEYtqByNu6ZRIxLsrz
+ u5bnP8CRkfIUEUXODyIaV0CZByBGfTSoyAbDCpRuQwT1rcsZu0OnCaRalTSlNpkhYVw2Rx2dH6
+ 5uvnNezui8W8D7vsBwqAgHHAAAAA=
+X-Change-ID: 20261111-dtbs-marvell-3ae21c8ac47d
+To: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Andrew Lunn <andrew@lunn.ch>, 
+ Gregory Clement <gregory.clement@bootlin.com>, 
+ Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org
+X-Mailer: b4 0.16-dev
 
-> From: Chris Morgan <macromorgan@hotmail.com>
->=20
-> The boot state of charge comes from PWRON_VOL when OFF_CNT reads three
-> or more and from the coulomb counter otherwise, and both fail in the
-> field.
->=20
-> PWRON_VOL is sampled at the power-on instant. A power-on caused by
-> plugging in a charger samples under charge current: on an RG353M it
-> read above the pack's maximum design voltage while the pack was at
-> 74%. An RG DS was seen holding 2.63V in the register while running.
-> Either becomes a wrong percentage on every boot that reaches it.
->=20
-> A negative counter was clamped to zero and reported as 0%.
->=20
-> The counter itself keeps counting while the system is off: the same
-> [ ... ]
->=20
-> Fixes: 11cb8da0189b ("power: supply: Add charger driver for Rockchip RK81=
-7")
-> Co-developed-by: Jacob Cook <jacobmcook1984@gmail.com>
-> Signed-off-by: Jacob Cook <jacobmcook1984@gmail.com>
-> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+Another batch of DT schema warning fixes for Marvell platforms. This
+fixes most of the remaining warnings on Marvell platforms.
 
-Sashiko has reviewed this patch and found no issues.
+It's best if the whole series is taken together.
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111205627.5665=
-2-1-macroalpha82@gmail.com?part=3D4
+Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
+---
+Rob Herring (Arm) (9):
+      dt-bindings: mfd: Add Marvell AP806/CP110 system controller schema
+      arm64: dts: marvell: Add AP806/CP110 syscon compatibles
+      arm64: dts: marvell: Drop unused USB connector PHY supplies
+      arm64: dts: marvell: Drop SPI max frequency
+      arm64: dts: marvell: Fix node names
+      arm64: dts: marvell: Fix w25q32 compatible strings
+      arm64: dts: marvell: Drop unused USB 'phy-names'
+      arm64: dts: marvell: cn9131-cf-solidwan: Drop st,m41t80 reset-gpios
+      arm64: dts: marvell: armada-3720-gl-mv1000: Add switch fixed-link
+
+ .../mfd/marvell,ap806-cp110-system-controller.yaml | 59 ++++++++++++++++++++++
+ arch/arm64/boot/dts/marvell/ac5-98dx25xx.dtsi      |  2 +-
+ .../boot/dts/marvell/armada-3720-gl-mv1000.dts     |  6 +++
+ .../boot/dts/marvell/armada-3720-turris-mox.dts    |  1 -
+ arch/arm64/boot/dts/marvell/armada-7040-db.dts     |  2 -
+ .../dts/marvell/armada-8040-clearfog-gt-8k.dts     |  5 +-
+ arch/arm64/boot/dts/marvell/armada-8040-db.dts     |  1 -
+ arch/arm64/boot/dts/marvell/armada-8040-mcbin.dtsi |  3 +-
+ .../boot/dts/marvell/armada-8040-puzzle-m801.dts   | 11 ++--
+ arch/arm64/boot/dts/marvell/armada-ap80x.dtsi      |  6 ++-
+ arch/arm64/boot/dts/marvell/armada-cp11x.dtsi      |  6 ++-
+ arch/arm64/boot/dts/marvell/cn9130-crb-A.dts       |  2 -
+ arch/arm64/boot/dts/marvell/cn9130-sr-som.dtsi     |  2 -
+ arch/arm64/boot/dts/marvell/cn9131-cf-solidwan.dts |  1 -
+ .../boot/dts/marvell/cn9131-db-comexpress.dtsi     |  4 +-
+ 15 files changed, 84 insertions(+), 27 deletions(-)
+---
+base-commit: aaa2f954c21b205a0bcd0961e5b2be4e82e58455
+change-id: 20261111-dtbs-marvell-3ae21c8ac47d
+
+Best regards,
+--  
+Rob Herring (Arm) <robh@kernel.org>
 
