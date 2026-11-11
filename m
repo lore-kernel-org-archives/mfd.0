@@ -1,86 +1,97 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.19
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.45
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794386758;
-	b=mJfoQWpEr3K3hgtbU1jvEohi4G3iH9bri+MF90H1LQDqDHT7QkuxzKlmEkbMZm0ESnqV
-	 jvcHiie3m1AX1TR2aFjG0zDfNAz5S5M+5OJnZyHp50+D71MBRXhZHqZ+LJm7TOqnEclth
-	 3rgNUoZIjp0U4E19KXe68yP3y9AGADHCxBkcX/+7XuwnkWffO4kKLStAfUR25M4FV/UXJ
-	 jtTU86LNA8AMdnLmqWT9uV2NHYBNl11VMaAFNfjFh7KFFeiSuxMhqpOxzuCWDi+f4XW1/
-	 2HkMeBo3rhL2h6wx/em8R0duFQXrFzmoMxzJfOXYfqP9+/rF+dA/xi3cGWJCtGHhldQ==
+	t=1794389421;
+	b=yIEwsYH0UOdf5oP9M6PJyi+SOdjRj6AXKuYS45xEGTrNjDW+ZnI90Wd5xqA0Etog3Fd0
+	 o+lKwxOTyiiCVbwjY5KyW2yUZciLuIbHmpuRuuQv4IN0XU31eJR6kidfL2kyxEfOjdKi+
+	 CKJ3R6UyoI06Yrr+iagPFMKrdfQwnteIh57d5sdm9dEy5Srw/sqHvZ7wJhmw0ydhnB0FC
+	 +4QsH2t7qO4QEfbYZGTFMmaU7kjP/CJ03Qcf2wd4y9xMLhK80ccUTxwb68G1GfqQmPXGN
+	 NLL7il65RnTDgab+mzEr36jOlu+jwcJ1uDdoIrAAFHpSQ0GerFjp4pUeZob5gUDu6ZQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794386758;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:Content-Transfer-Encoding:In-Reply-To:
-	 Organization;
-	bh=kncqX4lw1YZwjRHTnWDSvhtRyCgunphnrbNs5+1f+kU=;
-	b=oanLqvvz5wQW0EJPHRGFhbSCSwJF/goEdT7+99WXJxIqzGqiEYxhGmlxfBn530izZAtf
-	 KX8A2rKVyZZYuaH9J3HteumZGCKLXu4vjAACEQqYqINwTbojjWz7qvWV2RSsjZo9H22AT
-	 JxDLOEyVuElc5M5+nci0A7ttBuLRHRyzkvIdjfa8sqa1s2ZxJ9S+Rn7y+ovX5Xvbon6Th
-	 OwxcYW9ga9T7DJiQXM/rQf/q6FiM5eaPrMlZIIssF8RsOR/DA82iYQCohV8CJ40G234eR
-	 d3+8ygiddeoyO0KBnuodc4JoDEUDdw8p2T1dFv/AF4xO2fPjqdV2ULCoKZpYGfzWHYQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794389421;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To;
+	bh=8+ptz4g6/LlfBCXyV/bHsOFX7dT+x2twzdeYM1zeVdE=;
+	b=E17BRGWyW28+CizMmMtQrRGhvvitrjSKGmLKBrCS3Oe7PJL44W/j7xbQ43JGqnlo3uDG
+	 v9S1cWUce6m11UZClCghqyxBcCAEqOiB2F/SOSr6e0gZQdbSTKxIhmpYghkzrZIaDyGwG
+	 sF9n+z0gRZYSh15nK8y1DSNDyPIY4KLjm3CQuU50GvSRv1qeljqNNHIBEKBbkIxs+QwOr
+	 XMrXvmXVa+S7Owuzrz0IFp0AiyBD5QTJHjcgHPZCeNebZk3dxKwGvWsOXtYYIasiztUaH
+	 FRMYEiePcz8f5OM0aN2wclOqYsGKHOoPeAJ8S3oM5dosdbSmXItzLEdAHOZMtUD1YQw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linux.intel.com;
-	spf=pass smtp.mailfrom=linux.intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=APXoZQdi;
-	arc=none smtp.remote-ip=192.198.163.19
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.19])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=baylibre.com;
+	spf=pass smtp.mailfrom=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=ZhtK1G+f;
+	arc=none smtp.remote-ip=209.85.221.45
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4059C606A320
-	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 08:45:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4059C606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F035860A260A
+	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 09:30:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F035860A260A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=APXoZQdi
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1794386758; x=1825922758;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=WNu/MWKjEWQu9WGprrc9CixlEoX3UeLS/7xFqiNwO6Q=;
-  b=APXoZQdicxD+Y1huqUvh58RugUL88W7af38kAg5rFALSscIQ1p0HZdbH
-   vqwRVuBat3sjyU2RV60nMGFLp5lXIADtdY65IlY/keCrfoJn11UawRo9b
-   xxIgWQEiI3ulHZcG+zefZ1hamVoJ9egPqijCWMnwZki43QT8p7ZF2kU84
-   CtdhT0Sd087MKmAQweEFeEJBHOZYz6ReWg3PeMyJy2jh8ev5KPnCAfvAg
-   fEBvkjl6zq60tzEP5FNVLNCykcc9X0QuVBLD2wfXdgn1Sdk9WuVZ/2br+
-   3iRWBf5zy74JobsU7vLD3RyjgOwrBaAcKX8pqImoDT0rNBM2/wKPkG23m
-   A==;
-X-CSE-ConnectionGUID: TiomvjcWQL60kLYntnMDyw==
-X-CSE-MsgGUID: RyZ0qcDPS0GwlYn4sd+WNg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11962"; a="3253974"
-X-IronPort-AV: E=Sophos;i="6.27,207,1787036400"; 
-   d="scan'208";a="3253974"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
-  by fmvoesa113.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2026 00:45:57 -0800
-X-CSE-ConnectionGUID: bUxqKsr9T7u440+wBy8DEQ==
-X-CSE-MsgGUID: jZDWUL46SBCKWU1u1b0onA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,207,1787036400"; 
-   d="scan'208";a="8702945"
-Received: from pgcooper-mobl3.ger.corp.intel.com (HELO localhost) ([10.245.245.142])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2026 00:45:50 -0800
-Date: Wed, 11 Nov 2026 10:45:47 +0200
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Uwe =?iso-8859-1?Q?Kleine-K=F6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>
-Cc: Lee Jones <lee@kernel.org>, David Rhodes <david.rhodes@cirrus.com>,
-	Richard Fitzgerald <rf@opensource.cirrus.com>,
-	Mika Westerberg <mika.westerberg@linux.intel.com>,
-	Zha Qipeng <qipeng.zha@intel.com>,
-	Qunqin Zhao <zhaoqunqin@loongson.cn>,
-	Thomas Richard <thomas.richard@bootlin.com>,
-	linux-sound@vger.kernel.org, patches@opensource.cirrus.com,
-	mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
-	linux-crypto@vger.kernel.org,
-	Charles Keepax <ckeepax@opensource.cirrus.com>,
-	Linus Walleij <linusw@kernel.org>
-Subject: Re: [PATCH v4 10/20] mfd: Use named initializers for acpi_device_id
- arrays
-Message-ID: <avQrO4etMgpOhvwF@ashevche-desk.local>
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=ZhtK1G+f
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-498f5fa5103so769032f8f.2
+        for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 01:30:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1794389418; x=1794994218; darn=lists.linux.dev;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=8+ptz4g6/LlfBCXyV/bHsOFX7dT+x2twzdeYM1zeVdE=;
+        b=ZhtK1G+fye9zLyQGU35jPNsl2LmZwZfjcINZ6ZirBJky0Pes+oaPVMace+3MKrVnIT
+         e7iV72uqNTz4A9SrFvmwLMzb+RTqDgfhKV7laQNwMFA622NhUgHTgzPyOLtfcrC4rxvO
+         /bekBqSfrNdrjFPFOai13/4xL0283AblsezE42AvFHilEczAguT+/jP745kM8zPf6KNG
+         c/iKmdyucvARXvGNQDbv5YRXN6t5PDxWrqX1rpRrKTeoQ3ii4Ut/ibwo6N3T0gaKWn2c
+         K8IOgmoNpd4JVihAdU/N0LnKvo76xrv47As4GpMs3idRrTFXrRDmV2C+7TWYR2bnWofP
+         6yEQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794389418; x=1794994218;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=8+ptz4g6/LlfBCXyV/bHsOFX7dT+x2twzdeYM1zeVdE=;
+        b=KBtNruzZg0LNsjrOutjWDfl6jqUOOAwKTb7PUpJsjDjf3z385NdN7aRPvH3oUeJd6/
+         zmZFCTRc+cE2f2biFrhJyIhwxDqoManjM+7DN/1rUUiCNsGL0IGK2ty3ogjbqTE9HqrF
+         HzuyLQfwGWDKPGZypJI8QtdRYzRjpacZeR2BtZwTauwAR/P/Q8dc0LCVsvNq8swBqW2v
+         pPQyOCFNm4lVgPYxNl6trh0/K7eRyKcQNMDvf7iRHwyux2nEUax8SCNUbbI+LflpaJSu
+         GQBTPZVj35StqXW8pziGZaIXiYwCuBu8gsdVOJakxhE0a6KV8M99/AHHBlvZ/HjAC/QY
+         8Inw==
+X-Forwarded-Encrypted: i=1; AL+hErEElCEvZyVlManoC1q2EwdVXf6WwQSv+8kKUEeZOdSpw3bSNTD2wNRNVqHGhyUUUuHSGr4=@lists.linux.dev
+X-Gm-Message-State: APuU4Z8BWUGcZV1poCex+9hkJFWg68XqP+pfwgUi/sszgYl00B61gZzL
+	/QPuwBWk3+QTfRZMHtu+UxHaEHhjmaoifmUA/qpzn/q2Vu9Uhll698HrJQun+elhyZM=
+X-Gm-Gg: AYBFou1D56vawfbkSQixDlU2yUnUW+H54Ptou7oMjWgEXO63rae7N1P6Ix8nlKpwcZh
+	vurcmemelrMn9OBagVp80+Jc6HbAvkHg1GdHl04tpDkYN5yjHeayPQYpyIiDb4BuNoNNxtz5Pno
+	vMbPJja++dnT1yiDC2YGinnxUX7tkvui62kSKT73eeqKfqVIYygHEVaEK7Krsa0Yx+L/PZuJCqb
+	2ib+SbCutl21psR4Wr1v6XtiPOOHs8iNbNJPFjsHh3e/aOfBS0h+w5CNG8OClDZZq/YHElC6TEk
+	ytOTzSufdT8P0UXasZNEEGsZi1TTMnx+ax1qJgpI2gcvsov8rYbPDTRPFKAqZBKtosN3n01j8YU
+	emPmv/2PQTaeplo+YeLMQ8sctKNM7rrokbefJkZm/mwrfGHOfm4TdJv9ic1luzr61TDzWsDcc2V
+	xLUgmYzu3VAbbPJ+LdffZTcDgrsGCyuJNEKpcOhhru7qeGsKGhsBLrSykfnFrA9nFTfRYuV1Esv
+	jtwyuSpOJw/8BWuHLog0QpV1PTSR3IOrF33VGcADVOzCcCQbse4WWkpBCPo02oq087SBUwQ/JDl
+	22R0AmOJfU32T5NN8gY6jQLM9qeRKrmoC7NeZDO555KOqN5J3shiVwmJXM2SpOlKE7BYnhu3SpW
+	yQz1W2sm9nJFbvg==
+X-Received: by 2002:a05:600c:34d0:b0:4a5:87b3:ddc1 with SMTP id 5b1f17b1804b1-4ba0938a143mr31163075e9.13.1794389417741;
+        Wed, 11 Nov 2026 01:30:17 -0800 (PST)
+Received: from localhost (p200300f65f19a90460510dd506fc51af.dip0.t-ipconnect.de. [2003:f6:5f19:a904:6051:dd5:6fc:51af])
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4ba0204e22csm118293045e9.12.2026.11.11.01.30.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 11 Nov 2026 01:30:16 -0800 (PST)
+Date: Wed, 11 Nov 2026 10:30:14 +0100
+From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>
+To: Lee Jones <lee@kernel.org>
+Cc: Florian Fainelli <florian.fainelli@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, mfd@lists.linux.dev, linux-rpi-kernel@lists.infradead.org, 
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, Linus Walleij <linusw@kernel.org>, 
+	Stanimir Varbanov <svarbanov@suse.de>
+Subject: Re: [PATCH v4 01/20] mfd: bcm2835-pm: Remove member of struct
+ bcm2835_pm that is only used locally
+Message-ID: <avQzDfZ_p4zx6kzm@monoceros>
 References: <cover.1794347059.git.u.kleine-koenig@baylibre.com>
- <39fc883cf1c7077bce8f16719cca59060a395b02.1794347059.git.u.kleine-koenig@baylibre.com>
+ <6b2500112538be613480d472090e5ff6d86339bd.1794347059.git.u.kleine-koenig@baylibre.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -90,31 +101,74 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="u2nb6egeav4wcudh"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <39fc883cf1c7077bce8f16719cca59060a395b02.1794347059.git.u.kleine-koenig@baylibre.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
-
-On Tue, Nov 10, 2026 at 10:54:35PM +0100, Uwe Kleine-König (The Capable Hub) wrote:
-> While being less compact, using named initializers allows to more easily
-> see which members of the structs are assigned which value without having
-> to lookup the declaration of the struct. And it's also more robust
-> against changes to the struct definition.
-> 
-> The mentioned robustness is relevant for a planned change to struct
-> acpi_device_id that replaces .driver_data by an anonymous union.
-> 
-> This patch doesn't modify the compiled arrays, only their representation
-> in source form benefits.
-
-I don't know who is the first, you, guys, collaborate together and come up with
-a solution, but I have reviewed already this
-https://lore.kernel.org/lkml/20261104-acpi-mfd-v2-0-64b9dee3baaf@thegoodpenguin.co.uk/
-
--- 
-With Best Regards,
-Andy Shevchenko
+In-Reply-To: <6b2500112538be613480d472090e5ff6d86339bd.1794347059.git.u.kleine-koenig@baylibre.com>
 
 
+--u2nb6egeav4wcudh
+Content-Type: text/plain; protected-headers=v1; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v4 01/20] mfd: bcm2835-pm: Remove member of struct
+ bcm2835_pm that is only used locally
+MIME-Version: 1.0
+
+[dropping Ray Jui and Scott Branden from Cc:; their addresses don't
+exist any more, adding Stanimir instead]
+
+Hello,
+
+On Tue, Nov 10, 2026 at 10:54:26PM +0100, Uwe Kleine-K=F6nig (The Capable H=
+ub) wrote:
+> struct bcm2835_pm::soc is only used in bcm2835_pm_probe() and thus can be
+> replaced by a local variable.
+>=20
+> With that change enum bcm2835_soc is only used in the mfd core driver and
+> so the definition can move there.
+>=20
+> Reviewed-by: Linus Walleij <linusw@kernel.org>
+> Signed-off-by: Uwe Kleine-K=F6nig (The Capable Hub) <u.kleine-koenig@bayl=
+ibre.com>
+
+While going through my list of open patches I noticed that I got a
+review comment about this patch in v2 by Stanimir Varbanov[1]. He said
+in July:
+
+> The original idea was to re-use bcm2835_pm::soc field in bcm2835-power.c
+> pmdomain driver where we implicitly decide which DOMAIN_GRAFX_V3D
+> register to use (see commit d4aa5960025a "pmdomain: bcm: bcm2835-power:
+> Prepare to support BCM2712"). So, instead of !power->asb the intention
+> is to use bcm2835_pm::soc =3D=3D BCM2835_PM_SOC_BCM2712.
+>=20
+> Please drop this patch from the series. I'll post a patch soon.
+
+As of next-20261110 drivers/mfd/bcm2835-pm.c is still the only user of
+enum bcm2835_soc and
+https://lore.kernel.org/all/?q=3Ddfn%3Adrivers%2Fpmdomain%2Fbcm%2Fbcm2835-p=
+ower.c+soc+d%3A2026-07-10..
+suggests that "soon" didn't happen yet. I think it's ok to assume this
+request has expired.
+
+Best regards
+Uwe
+
+[1] https://lore.kernel.org/b3d228fd-6138-4195-b63c-65b28691e18b@suse.de
+
+--u2nb6egeav4wcudh
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmr0NaQACgkQj4D7WH0S
+/k5zEAf+L6c0cqcA+uxO/ogoK7h3f6yigs9+UEtO1Ai54fBtuS/s+FLlwa7NwJ8K
+g3g9rUTaGYGRPYFd/E24kwuUH+EL0qhh3KSyBBUIVd+9Pi4ReYtuYOXnHKC7GugT
+oEmwQNUnxlHponzyxasPadyxdICI6hQp7IisvXeU2qYe4VYkjc/LUH+uyv8Qa+1T
+pXv5ACDnKaGHmnHpvdu57iiYQHlWuEmaPdI/M4yCT2sydfsr/fje7ZLtfyk+OB/e
+vxOa7DDoeqzYQ/Hgyw/6+Hzwyq/UW07mTh4KBRfe7k9XGdFTB1Zouh6/dLY3v/Dv
+uD6Fv9YMwpZbKUrn3e8+CRvUwarNcw==
+=qqdY
+-----END PGP SIGNATURE-----
+
+--u2nb6egeav4wcudh--
