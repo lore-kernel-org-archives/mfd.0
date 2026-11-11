@@ -1,49 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794426043;
-	b=k2Up7Q2mJJi53F/TbadMwjLoeS0NYLQkruBLgU2U+xWYcsHNY2KAYxcE9h1mqRTAh2iV
-	 L2nc5qF4BLPepPY11kzMmjQP5udj+NBN5yYYr4HvX5LvqVI7dHcviqczDOLxo+IGal52d
-	 FPItTOX2rkk6FqttDH+InkZv1DU89eMFWCxQoGeA3AGUKN0qSJG1JZRd5DiTAICqmPETv
-	 hAtJGk2d6nNbVFCArh5kPlh9EWs+7OPRS5fvHTjbgSnWWh5ybdAmFTAhradkb8uVDHS84
-	 4yYZZ9TW8O9vpPCdd+GRCqzqtdbnf96jRgfqaH8lX7AY4yFbWwXBh0VGPcLeC6wIzsw==
+	t=1794428465;
+	b=l4Z81rOaadJvPyHDpL/3x3EYfjc/9zOBpUxaXrgZE/iWvMbEHOyInYBD6N33dLDYZrez
+	 OPrdOSP/AGoTLXOJUKkuHUl0TFoEywJ3pY/RcXfqbbH02geW9el1pXTpePPj6l268fiA/
+	 m9jQy6gH6oLWPrGkA04/dcypEvi90gMX5XWmQBBXaxhRWFquGg3+vJknBVsDdDv2vPklC
+	 uWBPc+Ot83PqoiFh3n2jAawvQ/0yCR0VmbyO4CCnh1+jqe1949hR3lZ0S3uHDgLEP3dWx
+	 e+twrR7Iv1do0dF9DB218rd3DNnd+PZzzfQH7S0pzMxnxpkRCdd/A75LIIZzJkA1Xbg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794426043;
-	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer;
-	bh=GIh0JgBeSlgzNMT54G+6N1qhYosRWFevhHzDYuWLq+Y=;
-	b=j+1y4amGqCZjX+JTnDxGV49bpU5g+3rOwTzG4BS5dyIuhLYSW8LoDnp8xnKTXXmeEwDO
-	 8XO8G+tebbfZW45vg8sPSGt9EBAkv2weVp9eFNuP7fjM5Fe0k6QaRFpGRJ5k/E7cK27Rj
-	 CzaQZf30TXQ/a49VtgQ8qO9DrBbB6GIUu8bftzB+KQOntbVB1NMzgeoJ6DOjU2Wd6k7ZI
-	 /TuZJRARr0XP5kNSXosi/4FABKDdN+EM0fPwXCIb24zcf4g+Qx1vGByupK3zQ7h4pC7ez
-	 jm9917rraGRllO82A1/htyAVRcpO13bv1skfRJB7w7YP8tlSx++IvVYtTmdUI4AFqMg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794428465;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=dlOnV5eucMYFGkrEFbrHj7aS4Mymbb6BbNE+p5nppn8=;
+	b=IrkgSoiMiYTjt52misj5hIGBsD3xioe+hjR+vudhlgO2/yVOHf68qOWQ4aOt1bMDAvzz
+	 z5ewSpd1foJQMl3EV5t3wwwdPSEoFIQGvzC+Zr2INPuvi0KNM1+Wo0E4QrhiVv6emJWIb
+	 NbCO0WHP9Sev8Rq+dix/NVQ0Rh5QAfROB1OXKyHci3ToVVtb++FUN9c5/kL+x7zhbtEqH
+	 FqTLlpEBZa7dkxyDFVZL/NButR7lVipZL7g+2CLRtH/kTlp7fwZIISDCemPqhNXJwE4Zo
+	 XZwB21hmFFTkUntfhKjehQ6GX+sTfDg5/6EbgP5L3Yej3DOrDLYsuQXxDecvCOCZD3A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZB1H5uiv;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bFu+zW+j;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB6F5606A88D;
-	Wed, 11 Nov 2026 19:40:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29988606A31C
+	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 20:21:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZB1H5uiv
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2BFB11F00A06;
-	Wed, 11 Nov 2026 19:40:43 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bFu+zW+j
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 81DC51F00A06;
+	Wed, 11 Nov 2026 20:21:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794426043;
-	bh=GIh0JgBeSlgzNMT54G+6N1qhYosRWFevhHzDYuWLq+Y=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=ZB1H5uivISFZvnC5aAhyn0BXJrVaJOHcCYkp5UO1ymN1cND3jr7ycm4hvlITjeqvk
-	 vGKd9MIejYLLoumonQJOp+R58kXZQ0LYmer+uGkN67ECRBWlI6mOrGUX+9D96Hn3Wy
-	 eOtjWKVonyVCBXOK7XMxs7A95HletKgXTVRN9lICgD/hKTJsBvFzOYS53fEcGG55id
-	 H/qGN0VIJEp+Tye1H0VXHsRAV7GxLoVHI5Mk28KexVGW+nPB8qti2EEbyuwnf23AXQ
-	 gQpdSbkPh54LgeZvTkc7/zstodfF5JQRAqbF34hIVdrqCpzgSwEpwojtsQpCIeLZLe
-	 AnYrpIHLrWN8A==
-From: "Rob Herring (Arm)" <robh@kernel.org>
-Date: Wed, 11 Nov 2026 13:40:22 -0600
-Subject: [PATCH 12/12] arm64: dts: hisilicon: Remove unsupported SBSA UART
- "reg-io-width"
+	s=k20260515; t=1794428464;
+	bh=dlOnV5eucMYFGkrEFbrHj7aS4Mymbb6BbNE+p5nppn8=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=bFu+zW+jfj0wh8+RWFzSYsTynQOENIqBjy+/Kpd2AU3MwjR/6bW80+7FBkbp1HWF2
+	 H6xa43gzKViYqvWqiIChsy8mumhWUwWBBJk7joWuzT5py9nhhQgQUQkVIktwVl3T1S
+	 IldxgiPPODkFYn264VO140dxQLET1v1uNY2qr4rWD2sHKgI88cY5KBMWA4T4xnDHHK
+	 sc/yVXyO9bJBbKLO7wk6NtswdsrbTfkt6hUW4LU8S15GKAGd1++JAtUFf9sTdfdx9M
+	 idsggG9XrnNjoOYSVSzIguSoPkMomOuQBOd8z6VWIaCdWMpUmqzEBjyodeidS6q24J
+	 iv6AQ5QOqHQGA==
+Message-ID: <sashiko-outbox-209635@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH 01/12] dt-bindings: mfd: syscon: Add HiSilicon register
+ bank compatibles
+Reply-To: sashiko-reviews@lists.linux.dev
+To: =?utf-8?b?Um9iIEhlcnJpbmcgKEFybSk=?= <robh@kernel.org>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20261111-dtbs-hisi-v1-1-6c9f5f80716c@kernel.org>
+References: <20261111-dtbs-hisi-v1-0-6c9f5f80716c@kernel.org>
+ <20261111-dtbs-hisi-v1-1-6c9f5f80716c@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Wed, 11 Nov 2026 20:21:04 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -52,40 +60,17 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261111-dtbs-hisi-v1-12-6c9f5f80716c@kernel.org>
-References: <20261111-dtbs-hisi-v1-0-6c9f5f80716c@kernel.org>
-In-Reply-To: <20261111-dtbs-hisi-v1-0-6c9f5f80716c@kernel.org>
-To: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Guodong Xu <guodong.xu@linux.dev>, 
- Wei Xu <xuwei5@hisilicon.com>
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org
-X-Mailer: b4 0.16-dev
 
-The SBSA UART driver uses 4 byte access width by default and
-"reg-io-width" is not supported in the binding, so drop it.
+> Several HiSilicon syscon blocks are missing specific compatibles. Add
+> compatibles for the Hi6220 media NOC ADE, HIP06/HIP07 SerDes control,
+> and HIP07 DSA CPLD register banks accessed through syscon references.
+> The names are based on the label names in the .dts files.
+>=20
+> Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 
-Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
----
- arch/arm64/boot/dts/hisilicon/hip07.dtsi | 1 -
- 1 file changed, 1 deletion(-)
+Sashiko has reviewed this patch and found no issues.
 
-diff --git a/arch/arm64/boot/dts/hisilicon/hip07.dtsi b/arch/arm64/boot/dts/hisilicon/hip07.dtsi
-index b815c1fff6ea..08c8a57e5471 100644
---- a/arch/arm64/boot/dts/hisilicon/hip07.dtsi
-+++ b/arch/arm64/boot/dts/hisilicon/hip07.dtsi
-@@ -1196,7 +1196,6 @@ uart0: serial@602b0000 {
- 			interrupt-parent = <&mbigen_uart>;
- 			interrupts = <807 4>;
- 			current-speed = <115200>;
--			reg-io-width = <4>;
- 			status = "disabled";
- 		};
- 
-
--- 
-2.53.0
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111-dtbs-hisi-=
+v1-0-6c9f5f80716c@kernel.org?part=3D1
 
