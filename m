@@ -1,77 +1,45 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.7
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794399177;
-	b=QQBF2jUDG5ir4MPrLHNkTE9UVvzZa6Ygp/ew0Z6j+/mXTi+g/Q23mR9L5L0aq3SE+rJ0
-	 mGa69QtO+Dgewlal3E9Y0wqqDSLpmeuFEICQKp7FPv7lnR+9kcWYpRqVfm0QFpPoCWy4z
-	 t78jwFkAtmdTLd3W9o+m2fyd4ZRalJWkyue5GxHGa5byMlszV1aThGn3E6FSR0VWosAR6
-	 0ux73fsrkw5XTB6P8Ws2rhZDHVpbDLvR6mc3Wwu7Kxqdj5i/W9LCRewpDrMUkmJSnYIlG
-	 vCaEc2k//QpxCLWs2OABbdhsLZtq5Fd0ifemaQjpzaHQt+MGM8Zu7AaftAZULk9zeYg==
+	t=1794409378;
+	b=xNEAsBE7sFccyqq0j39B2ejCAuD6GwthbRUuLQ2HlwqTa+WqklvPezMZUfHEe1B04X54
+	 js6+jVbi/9LddZucpa/WFBU3MKwhvUzKO6atyJ7SkuIdU2mKD4+NW+UHYUrSHiO92Z7ry
+	 O7qHWEuADCfbdGrmjp1Rzu/HYXlmkwl4GPbWdHX/BXe1NBiYyELej+hxmcwyESPTibQ8i
+	 8gY5BQBdglX5v8fhGPREfmzoA2L2RoaUa9sKy8I6B8U2WqKuIqCQ/0uU2oCYwQRvcNuNY
+	 B14Tx6zjxjA7KhkIxAu26oJb59njhxXXGYN3wVzURNh/jfCaCgnyu/+3OS1PKInxhaw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794399177;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:From:To:Cc:
-	 Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=kt+qGRZuMNV8Gjj810OSEd0K8uYaToZpX1WjOsPC2lY=;
-	b=Hot5A73AjK9ihZs3kAts8J6KfzreiVAykOuk7kuG+zwlkJOGANmfCeb5bR33WGNM1Va7
-	 2eQ2Yv6mdRHThiLfe8ude9pPT9JqHDwgvdgW/ijIPkvv0dzLCZk0371iB6oB0V5zdVLWL
-	 K5z3mg0LrrRIcYWOeoI4JrKK0bpg0tJGrMcr3J+jlsN6bj49xdEuN0Wwe1USFS3O0LVzV
-	 tnDkGKy/whFDsgMcHYXZC2HUFHM1Qn68aOWVFI0lAtvkGLouERApc+w5d8hcr4ZgmA6vs
-	 JtDcCCggkPhJRDHalOXd33iDW5RYYf0w81RkyrnsYULQ0+Td/zY+OdJFvLJ0AOvyTGA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794409378;
+	h=Received:DKIM-Signature:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
+	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=FRcBhabHXlXN3+3qsTP94sWa+mz5l5/zMggPUVQZkYM=;
+	b=v+dWb+Xbqn0yCIearZUO6eTkeYDvShg8hB29Mv8NH7LLN2Ab+seMEw4CD0r+DHRqeqim
+	 agId8KwxWWjWmuuwQt5ozaABIcbLannqy7bOB41NGg+HfbVrK9A9iUCX8QVTXCcy8gRwH
+	 UcRbBzXpnOthISNmgq1K3oVQcYmR1cyXKyo3AWZqDpOYsOHRXCZkbkJZBd6IISxqcX6//
+	 fbdLDAS52KTYsxKzAFwwPiT4vKG2w6Z7uY3IDUDDaNnXDSR3jnBIOd8JU2DEbPt/xDmqC
+	 lUIBoLBA0OR8blMOpkEwxBCktUvFbyMd7z5JPuZVLPPVli0BEjKGDJ9O4+cBjXNyBvg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linux.intel.com;
-	spf=pass smtp.mailfrom=linux.intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=S+ohilu0;
-	arc=none smtp.remote-ip=192.198.163.7
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eDyyc7G3;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D75B5606A880
-	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 12:12:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D75B5606A880
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0CDF606A326;
+	Wed, 11 Nov 2026 15:02:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=S+ohilu0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1794399171; x=1825935171;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=VM3xgno0sTvOvRdM17P7nqjZGLF98rSWqjNHx2oRQqw=;
-  b=S+ohilu0RqVWYZnX7BzQEOA4kDbwjuK8TsXv+j/y32Zo9HhHtA88fBCv
-   ai0B0phiysScK0enM3PsNdnBukpdzm+qOzM+qNeUORYnEcknKK+RiC1/t
-   3hdiQcZSTYst/0sF6Ue8FGYfIsSZnA6xmaiLbP/WYJzGvEeCDelh7NyrA
-   ZXF5VxMxEdAu/XYqFfaSKQx/vB9QD9IErXJsSGvFRYNwQAVIV6HeRYJg/
-   opYvfRBE+V/qeiT8e0BFVnl8Mcf8DWVLl089IG/uW9XiZxkYXsc8rhlAU
-   TknoAtvTbYr1OPAZI8cWU/WFDc2U5uOhjJjrEs9NoMS8uzL0SwjdqqKKt
-   Q==;
-X-CSE-ConnectionGUID: G1TyTK5VQRaiOVYJbVhqPQ==
-X-CSE-MsgGUID: mktyPijkSzWrgNtfcyE8Mg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11962"; a="3040818"
-X-IronPort-AV: E=Sophos;i="6.27,207,1787036400"; 
-   d="scan'208";a="3040818"
-Received: from orviesa005.jf.intel.com ([10.64.159.145])
-  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2026 04:12:50 -0800
-X-CSE-ConnectionGUID: hTxaJ46nT5KMO8aN6VQ2Dg==
-X-CSE-MsgGUID: VlVRqoU8T5W808a2d8Qr/g==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,207,1787036400"; 
-   d="scan'208";a="8268629"
-Received: from black.igk.intel.com ([10.91.253.5])
-  by orviesa005.jf.intel.com with ESMTP; 11 Nov 2026 04:12:49 -0800
-Received: by black.igk.intel.com (Postfix, from userid 1001)
-	id AF72299; Wed, 11 Nov 2026 13:12:47 +0100 (CET)
-From: Mika Westerberg <mika.westerberg@linux.intel.com>
-To: Lee Jones <lee@kernel.org>
-Cc: Mika Westerberg <mika.westerberg@linux.intel.com>,
-	mfd@lists.linux.dev,
-	Zha Qipeng <qipeng.zha@intel.com>
-Subject: [PATCH] MAINTAINERS: Remove me as maintainer of Intel Broxton PMC driver
-Date: Wed, 11 Nov 2026 13:12:47 +0100
-Message-ID: <20261111121247.1292584-1-mika.westerberg@linux.intel.com>
-X-Mailer: git-send-email 2.50.1
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eDyyc7G3
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 014581F00A05;
+	Wed, 11 Nov 2026 15:02:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794409377;
+	bh=FRcBhabHXlXN3+3qsTP94sWa+mz5l5/zMggPUVQZkYM=;
+	h=Subject:From:To:Cc:In-Reply-To:References:Date;
+	b=eDyyc7G3DVgPheoG/E+ZniuTjb6V2zLYDbABv0csXEY7KXJdSkn8vtPVMZHDF0msk
+	 l4z6tjF10g+xasn1hUsN6h6ffHHnLy0NWfvyHPHaQe6B/XFYh0dXrxFh1UerfKHiaM
+	 fFdFlLduHUOTdQB7LabyxzUxoywT3k4DbZBocdwjgxgHElWcSpyqKjpQP4p/J8eVHX
+	 J5z0mZi4eA9NkSQIuy5jktSHBwRN9/m+rSY3h9v/xyFw2Ocp9/1sA3Z1kIh7KZmEab
+	 nYmRdYdc2Knyfa938GKO8WUK55MaqhGjmZ2IO3WxLgaOL0o45ueKRS+Wis6i4c8a51
+	 pxbrkZaIWqLOA==
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -81,28 +49,446 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v3 6/7] clk: bcm: Add BCMBCA PMB clocks
+From: Brian Masney <masneyb@kernel.org>
+To: Linus Walleij <linusw@kernel.org>
+Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ William Zhang <william.zhang@broadcom.com>, 
+ Anand Gore <anand.gore@broadcom.com>, 
+ Kursad Oney <kursad.oney@broadcom.com>, 
+ Florian Fainelli <florian.fainelli@broadcom.com>, 
+ =?utf-8?q?Rafa=C5=82_Mi=C5=82ecki?= <rafal@milecki.pl>, 
+ Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+ Jerome Brunet <jbrunet+clk@baylibre.com>, 
+ Guenter Roeck <linux@roeck-us.net>, Philipp Zabel <p.zabel@pengutronix.de>, 
+ Jonathan Corbet <corbet@lwn.net>, Randy Dunlap <rdunlap@infradead.org>, 
+ Ulf Hansson <ulfh@kernel.org>, 
+ Benjamin Larsson <benjamin.larsson@genexis.eu>, mfd@lists.linux.dev, 
+ devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ linux-clk@vger.kernel.org, linux-hwmon@vger.kernel.org, 
+ linux-pm@vger.kernel.org, Brian Masney <masneyb@kernel.org>
+In-Reply-To: <20261106-xg6846b-bcmbca-xrdp-reset-v3-6-d6adeb71afc9@kernel.org>
+References: <20261106-xg6846b-bcmbca-xrdp-reset-v3-0-d6adeb71afc9@kernel.org>
+ <20261106-xg6846b-bcmbca-xrdp-reset-v3-6-d6adeb71afc9@kernel.org>
+Date: Wed, 11 Nov 2026 10:02:45 -0500
+Message-Id: <179440936574.1126566.13988760065429157595.b4-review@b4>
+X-Mailer: b4 0.17-dev-7ca47
+X-Developer-Signature: v=1; a=openpgp-sha256; l=14777; i=masneyb@kernel.org;
+ s=20250903; h=from:subject:message-id;
+ bh=8RvZJtgt3HJDJf7m/0jQVYKVqrAVv8tq2uwdRBvlKus=;
+ b=owGbwMvMwCW2/dJd9di6A+2Mp9WSGLK+NE/r3nXr/0Eth7M1e8V8rKdExfLXnqmK3v+rmbUo/
+ qUxu4teRykLgxgXg6yYIsuSXKOCiNRVtvfuaLLAzGFlAhnCwMUpABPZ8JHhfy5T8rJjsy49Nvx2
+ oO511wVlj4WRaZ+M/H5c+FQnPjO+OJXhv8vrxDssy/fK+E52+ePAxWfKpJus7LSlVeh5aeF9Hu2
+ pDAA=
+X-Developer-Key: i=masneyb@kernel.org; a=openpgp;
+ fpr=A46D32705865AA3DDEDC2904B7D2DD275D7EC087
 
-My @linux.intel.com address will bounce soon so remove me as maintainer
-of this driver.
+Hi Linus,
 
-Signed-off-by: Mika Westerberg <mika.westerberg@linux.intel.com>
----
- MAINTAINERS | 1 -
- 1 file changed, 1 deletion(-)
+> Add a BCM6846 clock provider for the Processor Monitor Bus (PMB) MFD
+> cell. Expose six outputs from each of the RDP and BIU PLLs, the Runner
+> clock divided from RDP PLL channel 1, the crystal output, PVTMON and
+> block-zone clock gates.
+> 
+> PVTMON and zone clocks provide gate control only.
+> 
+> Signed-off-by: Linus Walleij <linusw@kernel.org>
+> ---
+>  MAINTAINERS                      |   1 +
+>  drivers/clk/bcm/Kconfig          |  11 ++
+>  drivers/clk/bcm/Makefile         |   1 +
+>  drivers/clk/bcm/clk-bcmbca-pmb.c | 388 +++++++++++++++++++++++++++++++++++++++
+>  4 files changed, 401 insertions(+)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 1b7247b8c717..2a280ca7d162 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -5453,6 +5453,7 @@ F:	Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml
+>  F:	Documentation/devicetree/bindings/power/brcm,bcm6846-pmb-power.yaml
+>  F:	Documentation/devicetree/bindings/reset/brcm,bcm6846-pmb-reset.yaml
+>  F:	Documentation/devicetree/bindings/soc/bcm/brcm,bcm6846-pmb.yaml
+> +F:	drivers/clk/bcm/clk-bcmbca-pmb.c
+>  F:	drivers/mfd/bcmbca_pmc3_pmb.c
+>  F:	drivers/pmdomain/bcm/bcmbca-pmb.c
+>  F:	drivers/reset/reset-bcmbca-pmb.c
+> diff --git a/drivers/clk/bcm/Kconfig b/drivers/clk/bcm/Kconfig
+> index a972d763eb77..db17eadde7aa 100644
+> --- a/drivers/clk/bcm/Kconfig
+> +++ b/drivers/clk/bcm/Kconfig
+> @@ -1,5 +1,16 @@
+>  # SPDX-License-Identifier: GPL-2.0-only
+>  
+> +config CLK_BCMBCA_PMB
+> +	tristate "Broadcom BCMBCA PMB clocks"
+> +	depends on MFD_BCMBCA_PMB
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 222b7fc2c3aa..b5f7aafddd22 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -13314,7 +13314,6 @@ S:	Orphan
- F:	drivers/platform/x86/intel/int1092/
- 
- INTEL BROXTON PMC DRIVER
--M:	Mika Westerberg <mika.westerberg@linux.intel.com>
- M:	Zha Qipeng <qipeng.zha@intel.com>
- S:	Maintained
- F:	drivers/mfd/intel_pmc_bxt.c
+Just a note for myself: MFD_BCMBCA_PMB already has || COMPILE_TEST, so
+this is fine.
+
+> +	select REGMAP
+> +	default MFD_BCMBCA_PMB
+> +	help
+> +	  Provide BCM6846 PLL output, Runner, crystal, PVTMON and block-zone
+> +	  clocks through the Processor Monitor Bus.
+> +
+> +	  The module will be called clk-bcmbca-pmb.
+> +
+>  config CLK_BCM2711_DVP
+>  	tristate "Broadcom BCM2711 DVP support"
+>  	depends on ARCH_BCM2835 ||COMPILE_TEST
+> diff --git a/drivers/clk/bcm/Makefile b/drivers/clk/bcm/Makefile
+> index d0b6f4b1fb08..7123eefff138 100644
+> --- a/drivers/clk/bcm/Makefile
+> +++ b/drivers/clk/bcm/Makefile
+> @@ -1,4 +1,5 @@
+>  # SPDX-License-Identifier: GPL-2.0
+> +obj-$(CONFIG_CLK_BCMBCA_PMB)	+= clk-bcmbca-pmb.o
+>  obj-$(CONFIG_CLK_BCM_63XX)	+= clk-bcm63xx.o
+>  obj-$(CONFIG_CLK_BCM_63XX_GATE)	+= clk-bcm63xx-gate.o
+>  obj-$(CONFIG_CLK_BCM63268_TIMER) += clk-bcm63268-timer.o
+> diff --git a/drivers/clk/bcm/clk-bcmbca-pmb.c b/drivers/clk/bcm/clk-bcmbca-pmb.c
+> new file mode 100644
+> index 000000000000..70552a23c3ef
+> --- /dev/null
+> +++ b/drivers/clk/bcm/clk-bcmbca-pmb.c
+> @@ -0,0 +1,388 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Broadcom BCM6846 Processor Monitor Bus (PMB) clocks.
+> + *
+> + * PMB transactions sleep, so gating uses the prepare callbacks. Firmware
+> + * also uses these clocks: leave prepared clocks running and retain PLL
+> + * rates.
+> + */
+> +
+> +#include <linux/bitfield.h>
+> +#include <linux/clk.h>
+> +#include <linux/clk-provider.h>
+> +#include <linux/math64.h>
+> +#include <linux/mfd/bcmbca-pmb.h>
+> +#include <linux/module.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/regmap.h>
+> +
+> +#include <dt-bindings/clock/brcm,bcm6846-pmb.h>
+> +
+> +/* PMB register offsets are in 32-bit words. */
+> +#define PLL_CHANNEL_DISABLE	BIT(8)
+> +#define PLL_CHANNEL_HOLD		BIT(9)
+> +#define PLL_MDIV_OVERRIDE		BIT(15)
+> +#define PLL_LOCK			BIT(31)
+> +#define PLL_NDIV_INT		GENMASK(9, 0)
+> +#define PLL_NDIV_FRAC		GENMASK(31, 12)
+> +#define PLL_PDIV			GENMASK(3, 0)
+> +
+> +#define XTAL_CONTROL		14
+> +#define XTAL_DRIVER_POWER_DOWN	BIT(17)
+> +
+> +#define PVTMON_CONFIG		17
+> +#define PVTMON_CLOCK_ENABLE	BIT(2)
+> +#define PVTMON_CLOCK_DIVIDER	GENMASK(12, 8)
+> +
+> +#define ZONE_CLOCK_ENABLE	BIT(0)
+> +#define ZONE_MANUAL_CONTROL	BIT(7)
+> +#define ZONE_POWER_DOWN_REQUEST	BIT(9)
+> +#define ZONE_POWER_ON		BIT(26)
+> +
+> +enum bcmbca_pmb_clock_type {
+> +	PMB_PLL_CHANNEL,
+> +	PMB_RUNNER,
+> +	PMB_XTAL,
+> +	PMB_PVTMON,
+> +	PMB_ZONE,
+> +};
+> +
+> +struct bcmbca_pmb_pll_layout {
+> +	u16 ch01;
+
+It looks like ch01 is used for more than channel 1. Should this be named
+ch_ctrl instead?
+
+> +	u16 status;
+> +	u16 ndiv;
+> +	u16 pdiv;
+> +	u16 ch25;
+> +};
+> +
+> +struct bcmbca_pmb_clock_desc {
+> +	const char *name;
+> +	enum bcmbca_pmb_clock_type type;
+> +	u8 bus;
+> +	u8 device;
+> +	u8 channel;
+> +	u16 reg;
+> +	const struct bcmbca_pmb_pll_layout *pll;
+> +};
+> +
+> +struct bcmbca_pmb_clock {
+> +	struct clk_hw hw;
+> +	struct device *dev;
+> +	struct regmap *regmap;
+> +	const struct bcmbca_pmb_clock_desc *desc;
+> +};
+> +
+> +#define to_pmb_clock(_hw) container_of(_hw, struct bcmbca_pmb_clock, hw)
+> +
+> +static int bcmbca_pmb_clock_prepare(struct clk_hw *hw)
+> +{
+> +	struct bcmbca_pmb_clock *clock = to_pmb_clock(hw);
+> +	const struct bcmbca_pmb_clock_desc *desc = clock->desc;
+> +	unsigned int shift = (desc->channel % 2) * 16;
+> +	unsigned int reg = BCMBCA_PMB_REG(desc->bus, desc->device, desc->reg);
+> +	u32 value;
+> +	int ret;
+> +
+> +	switch (desc->type) {
+> +	case PMB_PLL_CHANNEL: {
+> +		unsigned int regs[] = {
+> +			BCMBCA_PMB_REG(desc->bus, desc->device, desc->pll->status),
+> +			BCMBCA_PMB_REG(desc->bus, desc->device,
+> +				       desc->pll->ch01 + desc->channel / 2),
+> +		};
+> +		u32 values[ARRAY_SIZE(regs)];
+> +
+> +		ret = regmap_multi_reg_read(clock->regmap, regs, values, ARRAY_SIZE(regs));
+> +		if (ret)
+> +			return ret;
+> +		/* Firmware owns PLL power and reset. */
+> +		if (!(values[0] & PLL_LOCK))
+> +			return -EAGAIN;
+> +		/* A held output may be undergoing a firmware rate transition. */
+> +		if (values[1] & (PLL_CHANNEL_HOLD << shift))
+> +			return -EBUSY;
+> +		return regmap_update_bits(clock->regmap, regs[1],
+> +					  PLL_CHANNEL_DISABLE << shift, 0);
+> +	}
+> +	case PMB_XTAL:
+> +		return regmap_update_bits(clock->regmap, reg, XTAL_DRIVER_POWER_DOWN, 0);
+> +	case PMB_PVTMON:
+> +		ret = regmap_read(clock->regmap, reg, &value);
+> +		if (ret)
+> +			return ret;
+> +		/* Preserve the divider when firmware already enabled acquisition. */
+> +		if (value & PVTMON_CLOCK_ENABLE)
+> +			return 0;
+> +		return regmap_update_bits(clock->regmap, reg,
+> +					  PVTMON_CLOCK_ENABLE | PVTMON_CLOCK_DIVIDER,
+> +					  PVTMON_CLOCK_ENABLE |
+> +					  FIELD_PREP(PVTMON_CLOCK_DIVIDER, 5));
+> +	case PMB_ZONE:
+> +		ret = regmap_read(clock->regmap, reg, &value);
+> +		if (ret)
+> +			return ret;
+> +		/* Power and isolation belong to the power-domain sequencer. */
+> +		if (!(value & ZONE_POWER_ON) || value & ZONE_POWER_DOWN_REQUEST)
+> +			return -EHOSTDOWN;
+> +		if (!(value & ZONE_MANUAL_CONTROL))
+> +			return 0;
+> +		return regmap_update_bits(clock->regmap, reg, ZONE_CLOCK_ENABLE,
+> +					  ZONE_CLOCK_ENABLE);
+> +	case PMB_RUNNER:
+> +		return 0;
+> +	}
+> +
+> +	return -EINVAL;
+> +}
+> +
+> +static int bcmbca_pmb_clock_is_prepared(struct clk_hw *hw)
+> +{
+> +	struct bcmbca_pmb_clock *clock = to_pmb_clock(hw);
+> +	const struct bcmbca_pmb_clock_desc *desc = clock->desc;
+> +	unsigned int shift = (desc->channel % 2) * 16;
+> +	u32 value;
+> +	int ret;
+> +
+> +	if (desc->type == PMB_PLL_CHANNEL) {
+> +		unsigned int regs[] = {
+> +			BCMBCA_PMB_REG(desc->bus, desc->device, desc->pll->status),
+> +			BCMBCA_PMB_REG(desc->bus, desc->device,
+> +				       desc->pll->ch01 + desc->channel / 2),
+> +		};
+> +		u32 values[ARRAY_SIZE(regs)];
+> +
+> +		ret = regmap_multi_reg_read(clock->regmap, regs, values, ARRAY_SIZE(regs));
+> +		if (ret || !(values[0] & PLL_LOCK))
+> +			return 0;
+> +		return !(values[1] & ((PLL_CHANNEL_DISABLE | PLL_CHANNEL_HOLD) << shift));
+> +	}
+> +
+> +	ret = regmap_read(clock->regmap,
+> +			  BCMBCA_PMB_REG(desc->bus, desc->device, desc->reg), &value);
+> +	if (ret)
+> +		return 0;
+> +
+> +	switch (desc->type) {
+> +	case PMB_XTAL:
+> +		return !(value & XTAL_DRIVER_POWER_DOWN);
+> +	case PMB_PVTMON:
+> +		return !!(value & PVTMON_CLOCK_ENABLE);
+> +	case PMB_ZONE:
+> +		return (value & ZONE_POWER_ON) && !(value & ZONE_POWER_DOWN_REQUEST) &&
+> +		       (!(value & ZONE_MANUAL_CONTROL) || (value & ZONE_CLOCK_ENABLE));
+> +	default:
+> +		return 0;
+> +	}
+> +}
+> +
+> +static unsigned long bcmbca_pmb_clock_recalc_rate(struct clk_hw *hw,
+> +						  unsigned long parent_rate)
+> +{
+> +	struct bcmbca_pmb_clock *clock = to_pmb_clock(hw);
+> +	const struct bcmbca_pmb_clock_desc *desc = clock->desc;
+> +	unsigned int regs[4], count = 3;
+> +	u32 values[4], ndiv, pdiv, channel, mdiv;
+> +	unsigned int shift = (desc->channel % 2) * 16;
+> +	u64 multiplier, rate;
+> +	int ret;
+> +
+> +	if (desc->type == PMB_XTAL)
+> +		return parent_rate;
+> +	/* The parent rates of these clocks are unknown. */
+> +	if (desc->type != PMB_PLL_CHANNEL)
+> +		return 0;
+> +
+> +	regs[0] = BCMBCA_PMB_REG(desc->bus, desc->device, desc->pll->ndiv);
+> +	regs[1] = BCMBCA_PMB_REG(desc->bus, desc->device, desc->pll->pdiv);
+> +	regs[2] = BCMBCA_PMB_REG(desc->bus, desc->device,
+> +				 desc->pll->ch01 + desc->channel / 2);
+> +	if (desc->channel >= 2)
+> +		regs[count++] = BCMBCA_PMB_REG(desc->bus, desc->device, desc->pll->ch25);
+> +
+> +	ret = regmap_multi_reg_read(clock->regmap, regs, values, count);
+> +	if (ret) {
+> +		dev_err_ratelimited(clock->dev, "cannot read %s rate: %d\n", desc->name, ret);
+> +		return 0;
+> +	}
+> +	ndiv = values[0];
+> +	pdiv = values[1];
+> +	channel = values[2];
+> +	if (channel & (PLL_MDIV_OVERRIDE << shift))
+> +		mdiv = (channel >> shift) & 0xff;
+> +	else if (desc->channel < 2)
+> +		mdiv = (pdiv >> (16 + desc->channel * 8)) & 0xff;
+> +	else
+> +		mdiv = (values[3] >> ((desc->channel - 2) * 8)) & 0xff;
+> +
+> +	pdiv = FIELD_GET(PLL_PDIV, pdiv);
+> +	/* No rate can be determined from a zero divider. */
+> +	if (!pdiv || !mdiv)
+> +		return 0;
+> +	multiplier = ((u64)FIELD_GET(PLL_NDIV_INT, ndiv) << 20) |
+> +		     FIELD_GET(PLL_NDIV_FRAC, ndiv);
+> +	rate = div64_u64((u64)parent_rate * multiplier,
+> +			 ((u64)pdiv * mdiv) << 20);
+> +
+> +	return rate > ULONG_MAX ? 0 : rate;
+> +}
+> +
+> +static const struct clk_ops bcmbca_pmb_clock_ops = {
+> +	.prepare = bcmbca_pmb_clock_prepare,
+> +	.is_prepared = bcmbca_pmb_clock_is_prepared,
+> +	.recalc_rate = bcmbca_pmb_clock_recalc_rate,
+> +	/* No unprepare: these clocks can remain in use by PMC firmware. */
+> +};
+> +
+> +static const struct bcmbca_pmb_pll_layout bcm6846_rdppll = {
+> +	.ch01 = 16,
+> +	.status = 19,
+> +	.ndiv = 21,
+> +	.pdiv = 22,
+> +	.ch25 = 23,
+> +};
+> +
+> +/* The BIU PLL uses the classic BPCM register layout. */
+> +static const struct bcmbca_pmb_pll_layout bcm6846_biupll = {
+> +	.ch01 = 11,
+> +	.status = 15,
+> +	.ndiv = 17,
+> +	.pdiv = 18,
+> +	.ch25 = 19,
+> +};
+> +
+> +#define PMB_PLL(_id, _name, _device, _channel, _pll) \
+> +	[_id] = { .name = _name, .type = PMB_PLL_CHANNEL, .bus = 1, \
+> +		  .device = _device, .channel = _channel, \
+> +		  .pll = _pll }
+> +#define PMB_GATE(_id, _name, _type, _bus, _device, _reg) \
+> +	[_id] = { .name = _name, .type = _type, .bus = _bus, \
+> +		  .device = _device, .reg = _reg }
+> +#define PMB_ZONE_CLK(_id, _name, _bus, _device, _zone) \
+> +	PMB_GATE(_id, _name, PMB_ZONE, _bus, _device, 32 + (_zone) * 8)
+> +
+> +static const struct bcmbca_pmb_clock_desc bcm6846_clocks[] = {
+> +	PMB_PLL(BCM6846_CLK_RDPPLL_CH0, "rdppll-ch0", 3, 0, &bcm6846_rdppll),
+> +	PMB_PLL(BCM6846_CLK_RDPPLL_CH1, "rdppll-ch1", 3, 1, &bcm6846_rdppll),
+> +	PMB_PLL(BCM6846_CLK_RDPPLL_CH2, "rdppll-ch2", 3, 2, &bcm6846_rdppll),
+> +	PMB_PLL(BCM6846_CLK_RDPPLL_CH3, "rdppll-ch3", 3, 3, &bcm6846_rdppll),
+> +	PMB_PLL(BCM6846_CLK_RDPPLL_CH4, "rdppll-ch4", 3, 4, &bcm6846_rdppll),
+> +	PMB_PLL(BCM6846_CLK_RDPPLL_CH5, "rdppll-ch5", 3, 5, &bcm6846_rdppll),
+> +	PMB_PLL(BCM6846_CLK_BIUPLL_CH0, "biupll-ch0", 38, 0, &bcm6846_biupll),
+> +	PMB_PLL(BCM6846_CLK_BIUPLL_CH1, "biupll-ch1", 38, 1, &bcm6846_biupll),
+> +	PMB_PLL(BCM6846_CLK_BIUPLL_CH2, "biupll-ch2", 38, 2, &bcm6846_biupll),
+> +	PMB_PLL(BCM6846_CLK_BIUPLL_CH3, "biupll-ch3", 38, 3, &bcm6846_biupll),
+> +	PMB_PLL(BCM6846_CLK_BIUPLL_CH4, "biupll-ch4", 38, 4, &bcm6846_biupll),
+> +	PMB_PLL(BCM6846_CLK_BIUPLL_CH5, "biupll-ch5", 38, 5, &bcm6846_biupll),
+> +	[BCM6846_CLK_RUNNER] = { .name = "runner", .type = PMB_RUNNER },
+> +	PMB_GATE(BCM6846_CLK_XTAL_OUT, "xtal-out", PMB_XTAL, 1, 1, XTAL_CONTROL),
+> +	PMB_GATE(BCM6846_CLK_PVTMON, "pvtmon", PMB_PVTMON, 1, 6, PVTMON_CONFIG),
+> +	PMB_ZONE_CLK(BCM6846_CLK_PERIPH_ZONE0, "periph-zone0", 0, 0, 0),
+> +	PMB_ZONE_CLK(BCM6846_CLK_PERIPH_ZONE1, "periph-zone1", 0, 0, 1),
+> +	PMB_ZONE_CLK(BCM6846_CLK_PERIPH_ZONE2, "periph-zone2", 0, 0, 2),
+> +	PMB_ZONE_CLK(BCM6846_CLK_PERIPH_ZONE3, "periph-zone3", 0, 0, 3),
+> +	PMB_ZONE_CLK(BCM6846_CLK_MEMC, "memc", 1, 8, 0),
+> +	PMB_ZONE_CLK(BCM6846_CLK_USB_ZONE0, "usb-zone0", 1, 10, 0),
+> +	PMB_ZONE_CLK(BCM6846_CLK_USB_ZONE1, "usb-zone1", 1, 10, 1),
+> +	PMB_ZONE_CLK(BCM6846_CLK_USB_ZONE2, "usb-zone2", 1, 10, 2),
+> +	PMB_ZONE_CLK(BCM6846_CLK_USB_ZONE3, "usb-zone3", 1, 10, 3),
+> +	PMB_ZONE_CLK(BCM6846_CLK_WAN_ZONE0, "wan-zone0", 1, 11, 0),
+> +	PMB_ZONE_CLK(BCM6846_CLK_WAN_ZONE1, "wan-zone1", 1, 11, 1),
+> +	PMB_ZONE_CLK(BCM6846_CLK_WAN_ZONE2, "wan-zone2", 1, 11, 2),
+> +	PMB_ZONE_CLK(BCM6846_CLK_XRDP_ZONE0, "xrdp-zone0", 1, 12, 0),
+> +	PMB_ZONE_CLK(BCM6846_CLK_XRDP_ZONE1, "xrdp-zone1", 1, 12, 1),
+> +	PMB_ZONE_CLK(BCM6846_CLK_XRDP_ZONE2, "xrdp-zone2", 1, 12, 2),
+> +	PMB_ZONE_CLK(BCM6846_CLK_RUNNER0, "runner0", 1, 14, 0),
+> +	PMB_ZONE_CLK(BCM6846_CLK_RUNNER1, "runner1", 1, 15, 0),
+> +	PMB_ZONE_CLK(BCM6846_CLK_RUNNER2, "runner2", 1, 16, 0),
+> +	PMB_ZONE_CLK(BCM6846_CLK_PCIE0, "pcie0", 0, 18, 0),
+> +	PMB_ZONE_CLK(BCM6846_CLK_PCIE1, "pcie1", 0, 19, 0),
+> +	/* BIU uses the classic BPCM layout, with its zone at word 16. */
+> +	PMB_GATE(BCM6846_CLK_BIU, "biu", PMB_ZONE, 1, 39, 16),
+> +};
+> +
+> +static int bcmbca_pmb_clock_probe(struct platform_device *pdev)
+> +{
+> +	struct device *dev = &pdev->dev;
+> +	struct regmap *regmap = dev_get_regmap(dev->parent, NULL);
+> +	struct clk_hw_onecell_data *data;
+> +	struct bcmbca_pmb_clock *clocks;
+> +	struct clk *ref;
+> +	unsigned int i;
+> +	int ret;
+> +
+> +	if (!regmap)
+> +		return -ENODEV;
+> +
+> +	ref = devm_clk_get(dev, "ref");
+
+I like how the ref is now used below in this version. In the previous
+version you had below:
+
+    parent.fw_name = "ref";
+
+If we drop the devm_clk_get() here, and go back to using fw_name, then
+when the parent is not registered yet these clocks will be registered
+as orphans until the parent is available. Is there a problem with that?
+
+Brian
+
 -- 
-2.50.1
-
+Brian Masney <masneyb@kernel.org>
