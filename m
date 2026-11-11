@@ -1,56 +1,49 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794420287;
-	b=0P2VLIE99k7GZqj44/T1Yk32QGf5l1HOkW/9VgG/o/d7L7Zc7L+v0jkkPVpKLdTbKr1D
-	 Vf702UnOyu6IScN3RURr2tM6Rs2N2eB2vtEktkMU6HgVUfZOVOkuaJvDyH43rs+zOOyn0
-	 zRsVsy84C9ev/mJ84eQcvuudAOiHIw43fMgL/2Ug39vntnzhf8L14xUeyvG9/qdWbLL5/
-	 +G1Qg2MGNT9dtvbgJG8a/JIXK3KAIvWDUeEPmlP5yvFezxuiXJmMx+0Fr454Tw/ygsSwO
-	 LQFsNSk/f6MUpTjmp8JYdJOXtSiP2VbUhPSOpSiYwtwuZpXBzsajIAZ/RvdagrNXAbg==
+	t=1794426026;
+	b=NXND9kAA4W82d0puZS0RejiNIxb0RKPOQxpj47SOphYsLNHQYxqN8dfETXyY88Oeytx0
+	 OSlNnX8v/rRKIw1BDP+O0+WtI3ada+8lcahKnq1/d4mE+CLmVkaKo5hCbX/0+bK8FAcP7
+	 O7scbzIjj8lWptexM4MmYuYxfR5GYOH/6BzZJpkTSPJNegbqLj97Kk/BFvs0aOEW9GS5+
+	 MOS6mh2JnBTUnPpcbtRpiBIz9CNdlHsmCVmC8cUC5qEOSymMN9U8e5Up5x2FswyFF0Lc0
+	 pT8bpfpi8blN8JUhGVivRXcxhl40p72UI9e0wAf0xNfxSV1Vdgnjp2Pj2CSIYY1k9dw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794420287;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To;
-	bh=oOG3LYk9vtgL9dcZ1ZryVaj5bJKrx63IWhlTOwABRsI=;
-	b=XRutFBsrWLb9sA8EqPUyMlMXAgFTNKWDq7llWNt/Mt9Z1rXdYS74fKOwC2GFlgwqjj+Z
-	 WKtEKrBQnG0WNXHnU79w5X+KjPIVeg8iCvRRREx+T2x+USRqRqZkFMy3VDPqkPFi3v7/E
-	 mzM+KCTQjRdC0f0t3h+z7nB9i3znyHa4o07PAiGSg2srEWMMp8juGi0mzOVIkaaUo0LGO
-	 uvmPdJRYZFPDuBvTe/0H0vlLQuTaXz5v+Yl4ruqGTh3i/lRHi0QG3X1VZgNj8Hp92zxy3
-	 +v3KXWeM2FyLCUzKc6OILnwBBl2wEVKuXJ8IPhXUeHIFuTfgzHGxD0n8yrwuc/ECkUg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794426026;
+	h=Received:DKIM-Signature:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer;
+	bh=mtRwj7jd0DiYu19HtXx15Rst1HSYAjuntUvy+oixF2Y=;
+	b=OAm381vs2Mln8RPjGCFyGCBbwNmq1SCbdYG+ywquXSsy1lOmvOthDio626bq8EEc9csq
+	 pxxMFLlUDPUNZiimfqAlHBzGVnvWiotUvK4VLGvOGBJTvKRVIvtrQnzuLYaRY0JeP6Bnn
+	 8wacH0u+pqeRvfVEtSdcgbhoYmMpGSIfNDxgd726vzpzjQQxxp9zPnHtZkEwmw7hBj/j6
+	 7o3BjWfu+bkpQvqtamfpWSM2RFyh2A6c04eD+sFjrRZ3Ehsoeaf4ebhp8+mrld5vEJA7i
+	 sqdGSPNP4LgjEeyTTYpaQ+QduxZCkb65kuXrdQrvAv8uxuAcy7AF1ql78xmmENHlvyw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BVWme5c8;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BqVq9XjE;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E1B2606A31C;
-	Wed, 11 Nov 2026 18:04:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B74E3606A882;
+	Wed, 11 Nov 2026 19:40:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BVWme5c8
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 818F51F00A05;
-	Wed, 11 Nov 2026 18:04:45 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BqVq9XjE
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C2521F00A07;
+	Wed, 11 Nov 2026 19:40:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794420286;
-	bh=oOG3LYk9vtgL9dcZ1ZryVaj5bJKrx63IWhlTOwABRsI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=BVWme5c8j0wUINyJzlKMDwvaevI0nZziEzAPeor13Pn4GZ31y5dJ4xA0EfUfse4sX
-	 Mh78P28sz14DHVHwxpdbRqJ4isoVassr8IrUZZ2wINBRnXbMVEPe/zQOGgZCNBcD1k
-	 QJHZ0Uz0JEXuUzfNpmOW1r2TfG+8wi9eFQ3lKlArOtCksGpqlxlf3mcDfMnrBR4K36
-	 qjSE/qtDHNdC3fJoRuQTeQKYkc+5qX2LVj4IvxfX0iF6QGPte/lwRxM1Z/tR3RFHi2
-	 +s8h3GPUvE3vWCwqrnhqmtUdlLxamKzdOfz+P0/IqwIn9uiY8LgUoqEVmkSimZys40
-	 e24CC4fRmBH/g==
-Date: Wed, 11 Nov 2026 18:04:42 +0000
-From: Lee Jones <lee@kernel.org>
-To: sashiko-reviews@lists.linux.dev
-Cc: Paolo Pisati <p.pisati@gmail.com>, linux-ide@vger.kernel.org,
-	mfd@lists.linux.dev, dlemoal@kernel.org, cassel@kernel.org
-Subject: Re: [PATCH v1 1/7] zorro: warp mfd: add the CS-Lab Warp
- multifunction parent
-Message-ID: <20261111180442.GE6323@joneslee-macbookpro.roam.internal>
-References: <20261111163735.227286-1-p.pisati@gmail.com>
- <20261111163735.227286-2-p.pisati@gmail.com>
- <sashiko-outbox-209365@kernel.org>
+	s=k20260515; t=1794426026;
+	bh=mtRwj7jd0DiYu19HtXx15Rst1HSYAjuntUvy+oixF2Y=;
+	h=From:Subject:Date:To:Cc;
+	b=BqVq9XjEZAeRNFCn6lDZ9U7Kgds5B/T6I7Hdy4ZZgjxg4O94d9AMoNZrr/qs4P4pr
+	 j9ZjVl5LEn3pAd+nckA4vYQx3yvwXx2NPUBHdpj0T50p6sz5AV8vLc3/ZluhLrUvxl
+	 ysxMQYdPlvhoUq5Qbycpmyww9wlIAwsHED4PGgfDx8+KEUVhG3q/5Bo6dOb1xfYi2T
+	 w5PT2e5+hUEPxwPllKXYed7wDYUurw6HHuM7UoWlTgaAcrCwW0tEl0yRG67dyk6aZu
+	 VLmEDgSsG5xP77a63JTS4E84T4PEm2nvHGOnInttTngNG8lHBVX6vUFJkNqNlaH34i
+	 Apx/xuJ5ozQ6A==
+From: "Rob Herring (Arm)" <robh@kernel.org>
+Subject: [PATCH 00/12] arm64: dts: hisilicon: DT warning fixes
+Date: Wed, 11 Nov 2026 13:40:10 -0600
+Message-Id: <20261111-dtbs-hisi-v1-0-6c9f5f80716c@kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,157 +53,62 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <sashiko-outbox-209365@kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWMyw5AMBAAf0X2rIk2HuFXxKHaxTogXUQi/XeLu
+ U0ymRsYAyFDk9wQ8CSmdRHRaQJussuIirw4mMyUWlB+71lN0qm6MNqgzbyucpB+CzjQ9b3a7nc
+ ++hnd/g4gxgcaFcYRbQAAAA==
+X-Change-ID: 20261111-dtbs-hisi-95212ea0d174
+To: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Guodong Xu <guodong.xu@linux.dev>, 
+ Wei Xu <xuwei5@hisilicon.com>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org
+X-Mailer: b4 0.16-dev
 
-On Wed, 11 Nov 2026, sashiko-bot@kernel.org wrote:
+Another batch of DT schema warning fixes for HiSilicon platforms. This 
+fixes most of the remaining warnings on HiSilicon platforms.
 
-> Thank you for your contribution! Sashiko AI review found 4 potential
-> issues to consider:
-> - [Low] mfd: warp_mfd_probe() places new MFD core driver in
->   drivers/zorro/
-> - [Low] mfd: warp_mfd_driver hard-codes mfd in names and uses wrong
->   subject prefix
-> - [Low] mfd: warp_mfd_cells registers only a single child cell and
->   Kconfig mismatches code
-> - [Low] mfd: warp_mfd_probe() passes z->dev.id instead of
->   PLATFORM_DEVID_AUTO
+It's best if the whole series is taken together.
 
-All of these are hard blockers.
+Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
+---
+Rob Herring (Arm) (12):
+      dt-bindings: mfd: syscon: Add HiSilicon register bank compatibles
+      dt-bindings: mfd: Add HiSilicon reboot mode syscon schema
+      arm64: dts: hisilicon: Add specific syscon compatibles
+      arm64: dts: hisilicon: Describe ADV7533 supplies
+      arm64: dts: hisilicon: Drop HiKey DSI endpoint unit-address
+      arm64: dts: hisilicon: hi3798cv200: pinctrl node fixes
+      arm64: dts: hisilicon: hip05: Rename the HIP05 NOR flash node
+      arm64: dts: hisilicon: Move non-MMIO nodes out of simple-bus nodes
+      arm64: dts: hisilicon: Correct DMA node names
+      arm64: dts: hisilicon: hi6220: Correct I2S channel ordering
+      arm64: dts: hisilicon: Remove obsolete HiKey970 PMIC GPIO property
+      arm64: dts: hisilicon: Remove unsupported SBSA UART "reg-io-width"
 
-Why are you adding a whole new subsystem for your device?
+ .../bindings/mfd/hisilicon,hi6220-reboot-mode.yaml |  34 +++++
+ Documentation/devicetree/bindings/mfd/syscon.yaml  |   4 +
+ .../arm64/boot/dts/hisilicon/hi3660-coresight.dtsi | 138 ++++++++++-----------
+ arch/arm64/boot/dts/hisilicon/hi3660-hikey960.dts  |  17 ++-
+ arch/arm64/boot/dts/hisilicon/hi3660.dtsi          | 119 +++++++++---------
+ arch/arm64/boot/dts/hisilicon/hi3670.dtsi          |  26 ++--
+ arch/arm64/boot/dts/hisilicon/hi3798cv200.dtsi     |   4 +-
+ .../arm64/boot/dts/hisilicon/hi6220-coresight.dtsi |  69 +++++------
+ arch/arm64/boot/dts/hisilicon/hi6220-hikey.dts     |  11 +-
+ arch/arm64/boot/dts/hisilicon/hi6220.dtsi          | 118 +++++++++---------
+ .../arm64/boot/dts/hisilicon/hikey960-pinctrl.dtsi |  10 +-
+ .../arm64/boot/dts/hisilicon/hikey970-pinctrl.dtsi |   8 +-
+ arch/arm64/boot/dts/hisilicon/hikey970-pmic.dtsi   |   1 -
+ arch/arm64/boot/dts/hisilicon/hip05-d02.dts        |   2 +-
+ arch/arm64/boot/dts/hisilicon/hip06.dtsi           |   2 +-
+ arch/arm64/boot/dts/hisilicon/hip07.dtsi           |   5 +-
+ 16 files changed, 310 insertions(+), 258 deletions(-)
+---
+base-commit: aaa2f954c21b205a0bcd0961e5b2be4e82e58455
+change-id: 20261111-dtbs-hisi-95212ea0d174
 
-This clearly lives in drivers/mfd.
+Best regards,
+--  
+Rob Herring (Arm) <robh@kernel.org>
 
-> --
-> 
-> commit 9af1a8469b32d3686430ab985b8dd9f3f752e76e
-> Author: Paolo Pisati <p.pisati@gmail.com>
-> 
-> zorro: warp mfd: add the CS-Lab Warp multifunction parent
-> 
-> This commit adds a Zorro parent driver for the CS-Lab Warp 1260 board that
-> registers the on-board IDE window as an mfd cell for pata_cswarp.
-> 
-> > diff --git a/drivers/zorro/Kconfig b/drivers/zorro/Kconfig
-> > index 41475ad46e45f..c9ab9fb4b9ee7 100644
-> > --- a/drivers/zorro/Kconfig
-> > +++ b/drivers/zorro/Kconfig
-> > @@ -17,3 +17,33 @@ config ZORRO_NAMES
-> >  
-> >  	  When in doubt, say Y.
-> >  
-> > +# Zorro multifunction drivers
-> > +
-> > +config WARP_MFD
-> > +	tristate "CS-Lab Warp multifunction driver"
-> > +	depends on ZORRO
-> > +	select MFD_CORE
-> [ ... ]
-> > +	  This driver hands the IDE window to pata_cswarp - which needs
-> > +	  idemode=native set in Warp Configuration to be of any use - and
-> > +	  exposes the configuration and telemetry reachable over the dual-port
-> > +	  RAM in sysfs: voltages, temperatures, fan, firmware version and
-> > +	  Kickstart slot. Nothing else on the list has a driver yet.
-> [ ... ]
-> > diff --git a/drivers/zorro/Makefile b/drivers/zorro/Makefile
-> > index 91ba82e633e76..6fe7cc1822dc1 100644
-> > --- a/drivers/zorro/Makefile
-> > +++ b/drivers/zorro/Makefile
-> > @@ -7,6 +7,8 @@ obj-$(CONFIG_ZORRO)	+= zorro.o zorro-driver.o zorro-sysfs.o
-> >  obj-$(CONFIG_PROC_FS)	+= proc.o
-> >  obj-$(CONFIG_ZORRO_NAMES) +=  names.o
-> >  
-> > +obj-$(CONFIG_WARP_MFD) += warp-mfd.o
-> 
-> [Severity: Low]
-> Should this driver and its local header live under drivers/mfd/ instead of
-> drivers/zorro/?  Per the mfd subsystem guidelines, new core mfd drivers
-> that call mfd_add_devices() or devm_mfd_add_devices(), along with headers
-> shared only between the parent and its children, belong in drivers/mfd/.
-> 
-> > diff --git a/drivers/zorro/warp-mfd.c b/drivers/zorro/warp-mfd.c
-> > new file mode 100644
-> > index 0000000000000..94af7c9d0ea5e
-> > --- /dev/null
-> > +++ b/drivers/zorro/warp-mfd.c
-> [ ... ]
-> > +static const struct mfd_cell warp_mfd_cells[] = {
-> > +	{
-> > +		.name		= "warp-pata",
-> > +		.num_resources  = 1,
-> > +		.resources	= (const struct resource []) {
-> > +			DEFINE_RES_MEM_NAMED(WARP_OFFSET_ATA, WARP_ATA_SIZE,
-> > +					     "pata"),
-> > +		}
-> > +	}
-> > +};
-> 
-> [Severity: Low]
-> Is an mfd driver appropriate when warp_mfd_cells[] only registers a single
-> child device?  The mfd subsystem guidelines require mfd to be used only for
-> devices registering multiple children across different subsystems.
-> 
-> In addition, the Kconfig help text states that this driver exposes
-> dual-port RAM configuration and telemetry in sysfs (voltages, temperatures,
-> fan, firmware version, and Kickstart slot), none of which is present in
-> this commit, and drivers/zorro/warp-mfd.h defines dual-port RAM offsets and
-> sizes that have no users here.  Even later in the series, telemetry is
-> added as custom sysfs attributes on the parent Zorro device rather than as
-> a child device in the appropriate subsystem such as hwmon.
-> 
-> > +static int warp_mfd_probe(struct zorro_dev *z,
-> > +			  const struct zorro_device_id *ent)
-> > +{
-> > +	int error;
-> > +
-> > +	dev_info(&z->dev, "Warp at %pR\n", &z->resource);
-> > +
-> > +	error = mfd_add_devices(&z->dev, z->dev.id, warp_mfd_cells,
-> > +				ARRAY_SIZE(warp_mfd_cells), &z->resource,
-> > +				0, NULL);
-> > +	if (error) {
-> > +		dev_err(&z->dev, "mfd_add_devices() failed %d\n", error);
-> > +		return error;
-> > +	}
-> > +	return 0;
-> > +}
-> > +
-> > +static void warp_mfd_remove(struct zorro_dev *z)
-> > +{
-> > +	mfd_remove_devices(&z->dev);
-> > +}
-> 
-> [Severity: Low]
-> This isn't a bug, but mfd guidelines prefer automatic platform device IDs
-> over passing z->dev.id to mfd_add_devices() when subdevices do not require
-> explicit numbering.  Using devm_mfd_add_devices() would also drop
-> warp_mfd_remove() and keep child teardown ordered with devres resources
-> added later in the series.
-> 
-> Similarly, warp_mfd_cells[] could use the standard mfd cell resource helper
-> macro instead of open-coding .num_resources and a compound literal, and
-> warp_mfd_init() / warp_mfd_exit() could use module_driver().
-> 
-> [ ... ]
-> 
-> > +static struct zorro_driver warp_mfd_driver = {
-> > +	.name		= "warp-mfd",
-> > +	.id_table	= warp_mfd_ids,
-> > +	.probe		= warp_mfd_probe,
-> > +	.remove		= warp_mfd_remove
-> > +};
-> 
-> [Severity: Low]
-> This isn't a bug, but mfd subsystem conventions avoid hard-coding "mfd" in
-> driver, symbol, Kconfig, and file names (such as "warp-mfd",
-> warp_mfd_driver, and warp-mfd.c), and expect commit subjects in the form
-> "mfd: <driver>: <Capitalized description>".
-> 
-> -- 
-> Sashiko AI review · https://sashiko.dev/#/patchset/20261111163735.227286-1-p.pisati@gmail.com?part=1
-
--- 
-Lee Jones
