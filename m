@@ -1,54 +1,77 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.7
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794398829;
-	b=3wQn1FaJaA0Ll6tcmWZgOlIGRdP7xaMZBcdj40yTuxccvA1wkKQXrV9mx2naSlfeAGM9
-	 82moyKA1NWQ42ViqDNj2/CYSdTIp9Kx23RjluYwKT/7HLipu19SbxeInFu3U89Go6JCA0
-	 8rycY780WeIJDAjLRX6lzhTLgW821bYJKMHYnIABpRPO1W5SxqEZAdisbxvkZtbyfXyOH
-	 CnpWrbz78FRR441Exm1R6fTX6HA06uK38puHjGRTTdKGj5zQxcPKF05xNAKKFPOkFabF3
-	 QWh8RoPQ3f/LOysKdtlzSvDSfNbv9kmI9rH3WVcJhiYWS25cnkEmvVX/G2trSGktDYQ==
+	t=1794399177;
+	b=QQBF2jUDG5ir4MPrLHNkTE9UVvzZa6Ygp/ew0Z6j+/mXTi+g/Q23mR9L5L0aq3SE+rJ0
+	 mGa69QtO+Dgewlal3E9Y0wqqDSLpmeuFEICQKp7FPv7lnR+9kcWYpRqVfm0QFpPoCWy4z
+	 t78jwFkAtmdTLd3W9o+m2fyd4ZRalJWkyue5GxHGa5byMlszV1aThGn3E6FSR0VWosAR6
+	 0ux73fsrkw5XTB6P8Ws2rhZDHVpbDLvR6mc3Wwu7Kxqdj5i/W9LCRewpDrMUkmJSnYIlG
+	 vCaEc2k//QpxCLWs2OABbdhsLZtq5Fd0ifemaQjpzaHQt+MGM8Zu7AaftAZULk9zeYg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794398829;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=5fUNPrhOKvJLMYas2fRW7JSnSgbzO0rAbfRdjqJkRIg=;
-	b=DQjmIXnNTfSJM6O/20v+wKJyCKrG4N4JfTUyyqCLeq1UM1o8HwiPfqsg4i0ZN+s4VKH1
-	 GoN90eo83aOtpl10orX4vzYh462V8zzB+xLzyGbfjos3CIFd49D8Y6reW+obUMvyB0ZTg
-	 JIU+kJ89ZKawV89/zwRafQbt/6zjCiLOQMH0vRnZo4baqrm8tI/eDHsvq2VIM/g4A3Uxq
-	 AmEG52OCqrGWnX/Z5hGPOb/53jXS0PrTTG3eaXrgqFrOokzxbhQZGftO474bnC7SwOnIm
-	 WoC+Fl/Qa4eCIIoi0nqkjDTJqaarxNEFLHAL03HsbUV6vT3yhf/AnjGhlsqtws/QXgg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794399177;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:From:To:Cc:
+	 Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=kt+qGRZuMNV8Gjj810OSEd0K8uYaToZpX1WjOsPC2lY=;
+	b=Hot5A73AjK9ihZs3kAts8J6KfzreiVAykOuk7kuG+zwlkJOGANmfCeb5bR33WGNM1Va7
+	 2eQ2Yv6mdRHThiLfe8ude9pPT9JqHDwgvdgW/ijIPkvv0dzLCZk0371iB6oB0V5zdVLWL
+	 K5z3mg0LrrRIcYWOeoI4JrKK0bpg0tJGrMcr3J+jlsN6bj49xdEuN0Wwe1USFS3O0LVzV
+	 tnDkGKy/whFDsgMcHYXZC2HUFHM1Qn68aOWVFI0lAtvkGLouERApc+w5d8hcr4ZgmA6vs
+	 JtDcCCggkPhJRDHalOXd33iDW5RYYf0w81RkyrnsYULQ0+Td/zY+OdJFvLJ0AOvyTGA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YzjYbcow;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=linux.intel.com;
+	spf=pass smtp.mailfrom=linux.intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=S+ohilu0;
+	arc=none smtp.remote-ip=192.198.163.7
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23447606A321;
-	Wed, 11 Nov 2026 12:07:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D75B5606A880
+	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 12:12:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D75B5606A880
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YzjYbcow
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B48751F00A06;
-	Wed, 11 Nov 2026 12:07:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794398828;
-	bh=5fUNPrhOKvJLMYas2fRW7JSnSgbzO0rAbfRdjqJkRIg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=YzjYbcowNnBxk4Pnp+DdrgXvzLjtsn6j+DUYyM9C5J1uy0DCtPcgOzTYtdCP4qyP0
-	 Cm+0h8p/iF3r4inmBkczdy/y6/WzLlScbYaWurBkx/FUS9fYMRZ3YFRLA8zQ1M+fGD
-	 vqZhCY1OvRmPUV+9+/DD25aF33GYfWyJyYMLnrt2AH9OjRBKqAxacqorwCrvHfjSrT
-	 iZ/JmMGp7Miphz9cbR/PYdmyJweY2m1PW7J0rVwcScdFvi/kTP/6pXMZvOTEE/4bcZ
-	 gR2L07BZLp4xU9HMHi4LYrfLcPhSocMm7FHw7PeppX7HtCcqKQjp5PKuK+duMR9BMV
-	 yui17QjDUPz+Q==
-Date: Wed, 11 Nov 2026 13:07:05 +0100
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: lee@kernel.org, maz@kernel.org, andy@kernel.org, jic23@kernel.org, 
-	dmitry.torokhov@gmail.com, linux-input@vger.kernel.org, mfd@lists.linux.dev, 
-	linux-iio@vger.kernel.org, robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, 
-	devicetree@vger.kernel.org, imx@lists.linux.dev
-Subject: Re: [PATCH v2 1/2] dt-bindings: mfd: mxs-lradc: Fix interrupt order
-Message-ID: <20261111-noisy-antique-potoo-2b2dc0@quoll>
-References: <20261110141934.42490-1-festevam@gmail.com>
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=S+ohilu0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1794399171; x=1825935171;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=VM3xgno0sTvOvRdM17P7nqjZGLF98rSWqjNHx2oRQqw=;
+  b=S+ohilu0RqVWYZnX7BzQEOA4kDbwjuK8TsXv+j/y32Zo9HhHtA88fBCv
+   ai0B0phiysScK0enM3PsNdnBukpdzm+qOzM+qNeUORYnEcknKK+RiC1/t
+   3hdiQcZSTYst/0sF6Ue8FGYfIsSZnA6xmaiLbP/WYJzGvEeCDelh7NyrA
+   ZXF5VxMxEdAu/XYqFfaSKQx/vB9QD9IErXJsSGvFRYNwQAVIV6HeRYJg/
+   opYvfRBE+V/qeiT8e0BFVnl8Mcf8DWVLl089IG/uW9XiZxkYXsc8rhlAU
+   TknoAtvTbYr1OPAZI8cWU/WFDc2U5uOhjJjrEs9NoMS8uzL0SwjdqqKKt
+   Q==;
+X-CSE-ConnectionGUID: G1TyTK5VQRaiOVYJbVhqPQ==
+X-CSE-MsgGUID: mktyPijkSzWrgNtfcyE8Mg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11962"; a="3040818"
+X-IronPort-AV: E=Sophos;i="6.27,207,1787036400"; 
+   d="scan'208";a="3040818"
+Received: from orviesa005.jf.intel.com ([10.64.159.145])
+  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Nov 2026 04:12:50 -0800
+X-CSE-ConnectionGUID: hTxaJ46nT5KMO8aN6VQ2Dg==
+X-CSE-MsgGUID: VlVRqoU8T5W808a2d8Qr/g==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,207,1787036400"; 
+   d="scan'208";a="8268629"
+Received: from black.igk.intel.com ([10.91.253.5])
+  by orviesa005.jf.intel.com with ESMTP; 11 Nov 2026 04:12:49 -0800
+Received: by black.igk.intel.com (Postfix, from userid 1001)
+	id AF72299; Wed, 11 Nov 2026 13:12:47 +0100 (CET)
+From: Mika Westerberg <mika.westerberg@linux.intel.com>
+To: Lee Jones <lee@kernel.org>
+Cc: Mika Westerberg <mika.westerberg@linux.intel.com>,
+	mfd@lists.linux.dev,
+	Zha Qipeng <qipeng.zha@intel.com>
+Subject: [PATCH] MAINTAINERS: Remove me as maintainer of Intel Broxton PMC driver
+Date: Wed, 11 Nov 2026 13:12:47 +0100
+Message-ID: <20261111121247.1292584-1-mika.westerberg@linux.intel.com>
+X-Mailer: git-send-email 2.50.1
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -58,31 +81,28 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20261110141934.42490-1-festevam@gmail.com>
+Content-Transfer-Encoding: 8bit
 
-On Tue, Nov 10, 2026 at 11:19:33AM -0300, Fabio Estevam wrote:
-> The interrupt descriptions added during the conversion to YAML do not
-> match the ICOLL source numbers used by the existing DTS files.
-> 
-> For i.MX23, Table 5-1 of the reference manual maps source 36 to touch
-> detection and sources 37 through 44 to channels 0 through 7. imx23.dtsi
-> lists these sources in that order.
-> 
-> For i.MX28, Table 5-1 maps source 10 to touch detection, sources 14 and
-> 15 to the threshold interrupts, sources 16 through 23 to channels 0
-> through 7, and sources 24 and 25 to buttons 0 and 1. imx28.dtsi also
-> lists these sources in that order.
-> 
-> Reorder the schema descriptions to match the hardware documentation and
-> the existing DT ABI.
-> 
-> Fixes: 009528b5aa13 ("dt-bindings: mfd: convert mxs-lradc bindings to json-schema")
-> Signed-off-by: Fabio Estevam <festevam@gmail.com>
+My @linux.intel.com address will bounce soon so remove me as maintainer
+of this driver.
 
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Signed-off-by: Mika Westerberg <mika.westerberg@linux.intel.com>
+---
+ MAINTAINERS | 1 -
+ 1 file changed, 1 deletion(-)
 
-Best regards,
-Krzysztof
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 222b7fc2c3aa..b5f7aafddd22 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -13314,7 +13314,6 @@ S:	Orphan
+ F:	drivers/platform/x86/intel/int1092/
+ 
+ INTEL BROXTON PMC DRIVER
+-M:	Mika Westerberg <mika.westerberg@linux.intel.com>
+ M:	Zha Qipeng <qipeng.zha@intel.com>
+ S:	Maintained
+ F:	drivers/mfd/intel_pmc_bxt.c
+-- 
+2.50.1
 
