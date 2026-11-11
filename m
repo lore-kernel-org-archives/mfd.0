@@ -1,57 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.70.43.102
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794354151;
-	b=uVxv2VJjQzPYGEnQZIvRkSwcKCQ7IrEztg7QpaspIi4iNNHGgnYGFAaSiQENMONoBP7z
-	 vvHV8E8iAvuORbYKfygcmvWreAm6IFpG/Foqz99X5djOp5ntNtqklXbtk/woa0w4QjZwz
-	 NoAPrUBKuP3xri2moNoJe3UyQH6ZhMd3OdmwEGzNJtf5LwW8+guBMhJfHkaU6WgFfEBQG
-	 5pLf0eEZhwPXa7LVKPHgJglDsaYu++gTTDM+rnpOPo4XiL3QYwDaMIbR+4qvBdiBMEofm
-	 Yy0KsCLtD6JCsy/FOHvlKoTHFUwDxb+GX9q/5nqKRt/gdaO+NxHZkLTmzdhnXCE5T1w==
+	t=1794363354;
+	b=xp4WdIEctHX4WpokHQ4UmdMTE9iOqNqOcnE+K0LljRorq7ueD/XYSe18OsbVHY9SIoY4
+	 8FLcCowFaK3i70GL1dLwJWXH3YAw7IP0zpjLPl6h3tzapYD9JXcGV6j76ljqFGUmXO8I6
+	 UDkqSCqbnx9+yRFBZX/AWAmWRJiWoVzfyNcOTNHybK/RfBIVeRJTPbJN5TCyC9KSSeG3r
+	 gmsWAFVOsg2NNxHisf2sQ/QTznRGHBe8sD7AJU5LstJaAfAx1Cla40HFt/ugeAIZ0U14o
+	 XgpyjPV/91beu3aMsUi9SVB82z5R6iaAGZ35hWJ9akyD1xhxWAzj3WGFs4cMpsC9I3A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794354151;
-	h=DMARC-Filter:DKIM-Signature:Date:To:From:Cc:Subject:Message-ID:
-	 Feedback-ID:X-Pm-Message-ID:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=CsUP7uvted68zB+90tj7YUthWbvQdljORHl/K8ISItY=;
-	b=zTJMGXXYsPzsX/YHKfb1IsBXvc6SwVTKF0QE0sKIsOKesKcHlpZjy3y+2lPZAL+vqsLu
-	 iYX0P+fcVrUz3TPtdVXBywB+IJm9YJ5zU+rnL114Ls4X47gtnyONc3NH0AYlZFgdwmkzZ
-	 nkiCSfgu9AyqYb6ghrPHfnqPwXv0l1efuItXSeAjF9JQDECqGYFd07aHzLc9bRUtEQMTo
-	 EBv9F29xe2NrgIu+NXKh3RNMtwlvnmkyREiOQmNuroSynFf0DJYD3BtmA3zmHxX2SY/U6
-	 ZNiIVrgFfRZh1PuVpd5oHDXfFWZ6Ko4JmCPBxTZ6zjnmjXeLSWbRSy3NjnboOrvh0NA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794363354;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
+	 Reply-To:From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:
+	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=lAhgMwbCGkquv8DnXUEthq+pkw17wZ1l1EuClqj5Zd0=;
+	b=n7B1JViB2z1US/ROLa8S4fIxPKRNvXK7O2E4yX1dPSjXcwhCFajlkzNRWoY8iOl9ZB/k
+	 Di3qLv7fX0J3KXC8IWvLHK7fZc8P1Yu401rcTk8TGyxr10URlVzmUyXG5TjkJB6mIq4x8
+	 +MJxAPhlWSo60TXlNIB0OH31ZmYbFEgKw/ljx4+DrXd1XJjOG/y0z5q6kYIIgp67woGvn
+	 nFANswFC4mAy/oZAXlTfFW5ilM1NYX5wLslBypP4xcrp1nYBYR+jVR4eqmZvE2kJixQai
+	 P2esOnAjJRP0DeXHiA8fg5EMdOS2EtIrE0EtzUyOQtNiXh4X4DLD4pH7y4eLdgqcjgQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=protonmail.ch;
-	spf=pass smtp.mailfrom=protonmail.ch;
-	dkim=pass header.d=protonmail.ch header.i=@protonmail.ch header.a=rsa-sha256 header.s=protonmail3 header.b=NAxcib4x;
-	arc=none smtp.remote-ip=185.70.43.102
-Received: from mail-43102.protonmail.ch (mail-43102.protonmail.ch [185.70.43.102])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Wj8MNaCB;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A807C606A320
-	for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 23:42:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A807C606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=protonmail.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=protonmail.ch
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86795606A33A
+	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 02:15:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=protonmail.ch header.i=@protonmail.ch header.a=rsa-sha256 header.s=protonmail3 header.b=NAxcib4x
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.ch;
-	s=protonmail3; t=1794354148; x=1794613348;
-	bh=CsUP7uvted68zB+90tj7YUthWbvQdljORHl/K8ISItY=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=NAxcib4xPHjyl4LCjL0Kc/O+zU6j9SE0tP7NP3Ac28mazEbo4HdkOYj+YZB7qFJ8E
-	 ipTi+947Arq+aNsLlToJwJ+VulJIiQqjb2Yd00j5vUf2U87v0TjmB/jibY27o3Pr0U
-	 z5m0F3oCZgLx1ih+Ey8c3lkmWEHrXkXgMhsq61+Vrg1Bh2KpaNg6F+xrB/5z8GrwJs
-	 UmybeO7ll4pQib02YBQjqMCC6QZf3okOSJn41VY8WYl+pLsaqSz0FCUA86GpGWlJ/l
-	 IG+LWeKxq38J92xytrAdKHW9tl7zEafEnKg5dJvOGvlvWfw4/RhWz2jd6RHeLVt0Je
-	 iP8nW3cnnlMFg==
-Date: Tue, 10 Nov 2026 23:42:21 +0000
-To: Lee Jones <lee@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Yassine Oudjana <y.oudjana@protonmail.com>
-From: Ben Grisdale <bengris32@protonmail.ch>
-Cc: Ben Grisdale <bengris32@protonmail.ch>, mfd@lists.linux.dev, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org
-Subject: Re: [PATCH v2] mfd: mt6397: Use PMIC specific interrupt count for domain creation
-Message-ID: <738177eZDQjVkBbNjeXNQVKLv3V-twRGcbGlGk02RsZtm53MbHqt7pcsoigp-ZV9xh_ehAVHa4ZZEvXLXFbrOw==@protonmail.internalid>
-Feedback-ID: 27291966:user:proton
-X-Pm-Message-ID: c730cca830f1d3a8b357a1e7430262ae4c743f50
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Wj8MNaCB
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 647881F00A10
+	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 02:15:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794363354;
+	bh=lAhgMwbCGkquv8DnXUEthq+pkw17wZ1l1EuClqj5Zd0=;
+	h=References:In-Reply-To:Reply-To:From:Date:Subject:To:Cc;
+	b=Wj8MNaCBwCApL0nTzYAS6EYvG7ywnTpsSyVO1RVP4BFQVcTKVD/xFPa9uKjVihy4l
+	 i8TrDB9BxnQmoT7ICSmt+i/6FWJHckwiddrOW7Mh3JjG7GzuGAqoJYRpPeuVNw4WWq
+	 WVx2DE5obNSxISliSnIOu+FCfuSZQuvlgZahdlCburPIokjd/kp7AOkkNgYq0RSqxh
+	 sDONNoLJVcigvR6CjUKTeY86U6444zeeCCqPsVglY8cq+ZR4zOv7IKu4rGSAZwHmst
+	 T3dHgqqICzdzoli+qk/lZ8dlQGGm9ir1G43jJYmWkRuvxt1BJySHsytUXBGdRzr5pE
+	 VzSzwLr7YvJNg==
+Received: by mail-lj1-f172.google.com with SMTP id 38308e7fff4ca-3ace304021eso23729131fa.2
+        for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 18:15:54 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AL+hErG1hG3i1dhm0vjnt8b733I+0zvHP4xqEyhPMaOanhHxm7dl3xM2puMArarR6Jip2vpZZeE=@lists.linux.dev
+X-Gm-Message-State: APuU4Z8UCZivuetF8RyGvgGgt/x/NX6WMxpL2liavz22m+tVFYUb8cVa
+	s02rlro4WZobu3tA3R1/hiAjfX20ObogI5O9XhB9dxnZaS4mnMdhgrQj4XKkM8Ot/iXmG7/eswu
+	HaPV/SeD4bvyaJTnWoXn9BwU7pQ0VF1s=
+X-Received: by 2002:a2e:be8d:0:b0:3ac:429f:6d93 with SMTP id
+ 38308e7fff4ca-3ae126c230bmr1415561fa.29.1794363351836; Tue, 10 Nov 2026
+ 18:15:51 -0800 (PST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,19 +59,98 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+References: <cover.1794347059.git.u.kleine-koenig@baylibre.com> <2cd7c4695edff6b711f8c77ae468d295bb910cdb.1794347059.git.u.kleine-koenig@baylibre.com>
+In-Reply-To: <2cd7c4695edff6b711f8c77ae468d295bb910cdb.1794347059.git.u.kleine-koenig@baylibre.com>
+Reply-To: wens@kernel.org
+From: Chen-Yu Tsai <wens@kernel.org>
+Date: Wed, 11 Nov 2026 11:15:39 +0900
+X-Gmail-Original-Message-ID: <CAGb2v67xpAbsmez2qt7pypW5T8czE93PtU2QjcSPuQ4a7c7qoA@mail.gmail.com>
+X-Gm-Features: AclHuK-PEU8_Ju7uMZ7QoR2Wn0i8AsTrMLtFibJe7hATAjuodc-7gCHep5Ph93s
+Message-ID: <CAGb2v67xpAbsmez2qt7pypW5T8czE93PtU2QjcSPuQ4a7c7qoA@mail.gmail.com>
+Subject: Re: [PATCH v4 19/20] mfd: Unify style of of_device_id arrays
+To: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>
+Cc: Lee Jones <lee@kernel.org>, Linus Walleij <linusw@kernel.org>, 
+	Nicolas Ferre <nicolas.ferre@microchip.com>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, Claudiu Beznea <claudiu.beznea@tuxon.dev>, 
+	Florian Fainelli <florian.fainelli@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Ray Jui <rjui@broadcom.com>, 
+	Scott Branden <sbranden@broadcom.com>, Marek Vasut <marek.vasut+renesas@gmail.com>, 
+	James Ogletree <jogletre@opensource.cirrus.com>, Fred Treven <fred.treven@cirrus.com>, 
+	Ben Bright <ben.bright@cirrus.com>, David Rhodes <david.rhodes@cirrus.com>, 
+	Richard Fitzgerald <rf@opensource.cirrus.com>, 
+	Support Opensource <support.opensource@diasemi.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
+	Peter Griffin <peter.griffin@linaro.org>, Alim Akhtar <alim.akhtar@samsung.com>, 
+	Tim Harvey <tharvey@gateworks.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+	Charles Keepax <ckeepax@opensource.cirrus.com>, Sven Peter <sven@kernel.org>, 
+	Janne Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>, Chanwoo Choi <cw00.choi@samsung.com>, 
+	Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>, 
+	Luca Ceresoli <luca.ceresoli@bootlin.com>, =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>, 
+	Saravanan Sekar <sravanhome@gmail.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, =?UTF-8?Q?Jonathan_Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>, 
+	Aaro Koskinen <aaro.koskinen@iki.fi>, Andreas Kemnade <andreas@kemnade.info>, 
+	Kevin Hilman <khilman@baylibre.com>, Roger Quadros <rogerq@kernel.org>, 
+	Tony Lindgren <tony@atomide.com>, Matti Vaittinen <mazziesaccount@gmail.com>, 
+	Orson Zhai <orsonzhai@gmail.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
+	Chunyan Zhang <zhang.lyra@gmail.com>, Fabrice Gasnier <fabrice.gasnier@foss.st.com>, 
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
+	Jernej Skrabec <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>, 
+	Liviu Dudau <liviu.dudau@arm.com>, Sudeep Holla <sudeep.holla@kernel.org>, 
+	Lorenzo Pieralisi <lpieralisi@kernel.org>, Geert Uytterhoeven <geert+renesas@glider.be>, 
+	Magnus Damm <magnus.damm@gmail.com>, Heiko Stuebner <heiko@sntech.de>, mfd@lists.linux.dev, 
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	patches@opensource.cirrus.com, linux-rpi-kernel@lists.infradead.org, 
+	linux-renesas-soc@vger.kernel.org, linux-sound@vger.kernel.org, 
+	linux-samsung-soc@vger.kernel.org, linux-amlogic@lists.infradead.org, 
+	asahi@lists.linux.dev, linux-mediatek@lists.infradead.org, 
+	imx@lists.linux.dev, linux-omap@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, 
+	linux-sunxi@lists.linux.dev, linux-rockchip@lists.infradead.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi folks,
+On Wed, Nov 11, 2026 at 6:56=E2=80=AFAM Uwe Kleine-K=C3=B6nig (The Capable =
+Hub)
+<u.kleine-koenig@baylibre.com> wrote:
+>
+> These arrays already mostly match the most used and generally
+> recommended coding style. That is:
+>
+>  - no comma after the list terminator;
+>  - a comma after an initializer if (and only if) the closing } is not
+>    directly following;
+>  - no explicit zeros in the list terminator;
+>  - a space after an opening { and before a closing }, a single space in
+>    the list terminator;
+>
+> Adapt the offenders accordingly.
+>
+> Reviewed-by: Andr=C3=A9 Draszik <andre.draszik@linaro.org> # for Maxim MA=
+X77759
+> Reviewed-by: Charles Keepax <ckeepax@opensource.cirrus.com>
+> Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be> # renesas
+> Reviewed-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com> # =
+max7360
+> Reviewed-by: Linus Walleij <linusw@kernel.org>
+> Signed-off-by: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@b=
+aylibre.com>
+> ---
+>  drivers/mfd/88pm860x-core.c    |  4 ++--
+>  drivers/mfd/ab8500-sysctrl.c   |  4 ++--
+>  drivers/mfd/ac100.c            |  2 +-
+>  drivers/mfd/act8945a.c         |  4 ++--
+>  drivers/mfd/altera-a10sr.c     |  2 +-
+>  drivers/mfd/altera-sysmgr.c    |  2 +-
+>  drivers/mfd/arizona-i2c.c      |  2 +-
+>  drivers/mfd/arizona-spi.c      |  2 +-
+>  drivers/mfd/as3711.c           |  4 ++--
+>  drivers/mfd/as3722.c           |  4 ++--
+>  drivers/mfd/atmel-hlcdc.c      |  2 +-
+>  drivers/mfd/atmel-smc.c        |  2 +-
 
-Please ignore this V2, it was CC'd to the lists by mistake whilst I was
-testing my mail setup.
-It is identical to the patch in V1, which is still current:
-https://lore.kernel.org/all/20261110-mt6397-irq-num-fix-v1-1-81d17454194e@p=
-rotonmail.ch
 
-Apologies for any inconvenience or noise caused.
+>  drivers/mfd/axp20x-i2c.c       |  2 +-
+>  drivers/mfd/axp20x-rsb.c       |  2 +-
 
-Best regards,
-Ben Grisdale
-
+Acked-by: Chen-Yu Tsai <wens@kernel.org> # axp20x
