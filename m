@@ -1,49 +1,48 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794426030;
-	b=gUHn070gM7mNGH1liThgFZV27zx9OO2lmX3f3n/fyEnFlYh8RWmg/bPn6nh64tOUQJyZ
-	 WMjtwf2w09YJ4dhwaDqgeajDNAKYRDpSIWTF/+bEPiGF6Qqz/0M09tCx5bDHnDspJa+9+
-	 E7SMEapx2s63BpDDapn2Q8Ft0xcqkPdmZfkVNNiinTfqU4atd6h12NC/EvKxfs3bl3Cj+
-	 gQbCg+y/qyflEPn4aUCMXRfxM3GqtCxmSWNHNx6P3Uj6jSw70ueq79os23nB+f+ZU/cXs
-	 FKlaJ4OAz1qXrTnnX6w5ajdtg39S2ZDL/TcvuNUAicfq0SGb0/7giw1UXxAmGpdKK4g==
+	t=1794426031;
+	b=DtZeFTljUXn1Q6i0qJsZJDL19EJLQbevo6+bGgfzkj8zxLN+ddYNj1B/Hb6ovu+haLfv
+	 jjhxd4YHz4FTVv0/qQQKyu0cx6YFqWdPDj9sOLCAE4E3q0O/qLvJktV8+oO8yJHd9AyHg
+	 GgJ87riqiRCU9Zq5qiUapNhwFtcNpbvsS1jYM2FQmUiqKDKxq2xvDOaUauRVY3eFoymqp
+	 TE4Qbug4veXmX3tjMFC+HRagzLhrgp4F6SAAwzN47xcfR7mjwxvq/KFuzQTiptPUhbAaO
+	 c+XlYiqiSOl39HGdJvzDbJRC1oWDnrbntyifsG9OiiHyuf7dgNYiQeyNJMX6a1Bhc+w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794426030;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794426031;
 	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
 	 X-Mailer;
-	bh=Gg8Z3g5whr4qOTZSmsNEegQVriNO3ujPVFMlRk++Be4=;
-	b=Rz4SZRa4S1+DAfCujA8oPzfrSuhSuoDDN4ZLFjduVoIc1yqYrVzrOUJQinBFjYejhnCC
-	 6GautuV+EQyci/h2zzMsQVy7WkI0CH6uiVWAukT8tVnkaym9XgBrglo6AMJ/R48cEgSIg
-	 X0X4LcbRtwdxqOaboY0fubndv97jkh9X4P3qPGcWae+COXax0j3XeHknyUv7a+gD78PIR
-	 UXDZPyojiwOXR2bsBMV9omTMDCMU/Odfl/BQtpN0bobI/42n39YN85Pla7Yba8itSRIPP
-	 uutoya/sbGp+rmpTQX++8IQpZUGBto3Ym1NZjpOhf1wPtxyOcyT811ORcA1tNa4H2Kw==
+	bh=xfIMJABMJNp7QfwugcM4fcD/xpFndn0xBvRbdTIn/Sc=;
+	b=kSuFkd6DOHYLqvcrxeCwyHf5+0zd0SxPpU1kvMnYsFQlS8G/zGDFIz4C9z8xby6XmVwo
+	 7MZWNx0Lc3UY4iffdvJGqLMPgXgwR6PrQyEMeaRwE+k1+Z5b3VHvvCOLP8xQRxnr1zKMr
+	 OuRtEPk2lBFUU/FZtV7NEVRxtYh9NKAtnotl+JtBkwv14CdSrx8nswhpjqXStdSci+rT0
+	 UzqAaOqZVYzy4G/EhvNkC4hzKOS/Ht63SH9lLPF4opprn1nOs5qABGO37BENlkjqG9mCc
+	 vZeB7pPLrKwlbsoeBCFIgizFOB3Q+iZtLuOjEnDs0mXymc0ayk5SFWB+8GvaCw8nRAg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=boxGcIGU;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eqKj3Ioi;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 683BB60A2618;
-	Wed, 11 Nov 2026 19:40:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 772FB606A8AB;
+	Wed, 11 Nov 2026 19:40:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=boxGcIGU
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C44581F00A09;
-	Wed, 11 Nov 2026 19:40:29 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eqKj3Ioi
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1062B1F00A10;
+	Wed, 11 Nov 2026 19:40:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794426030;
-	bh=Gg8Z3g5whr4qOTZSmsNEegQVriNO3ujPVFMlRk++Be4=;
+	s=k20260515; t=1794426031;
+	bh=xfIMJABMJNp7QfwugcM4fcD/xpFndn0xBvRbdTIn/Sc=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=boxGcIGUIxsxUMoseU1zCR37pL1tKnYZIr9z2mFRKP/yDB58+klYq9Leqk5mw3whx
-	 j2/6f31VFgGLAk55mWala/nHSvr7cjg085glh8tRjndGcXLfbT7DzfDODeEg/270Rz
-	 q+PqvxuZAX5CAT9cXQURWxmIMQQqABN1235df8vLtmLN1MlnzcvuwOq+JTmU6FYIs5
-	 N3m0JId1q8S8DHh54z+GqtT6ifGDEN2lpokE6Jtn4Vb+yCaeK28UOAcJFXTzaGQ2H/
-	 nEMeglx93zjXHbqsO8OnF/e6t4d6Nd9N5nYA4jnOsEMR+RQfgowsFknqQJ/qe/cGT6
-	 /FsKIiDH4aslQ==
+	b=eqKj3IoihIJtj+pHl6B8puHU40wNPYe2V2gaPVH3AOkaOMoeTzbdkSeUT6encYtG0
+	 wiH/FgZU5F+65y/CYibJDFk07vfQJQu4/AcxJP1YjJFR55Fdt70JVgpIUmNm74xV8H
+	 QaUaJOG58G7MZEqxd+7Slv4Dn+/GvJQevPD+UPxoaK+9gnS47bormzdOPbSEeCnjUA
+	 NMsZi2MF1KjfiC3qCxj9jH5D/Q9H/BrCq8ey89ko8aZ0ww42h6uWYqbi60xF8JhxXP
+	 oF1+9qJF1Bp6VGyCnZoCNSeDt1IyAuuSbJZHBAfyTwOatY5gJ//LfRO8IvktPd4Xy0
+	 pG5tpebrYJASQ==
 From: "Rob Herring (Arm)" <robh@kernel.org>
-Date: Wed, 11 Nov 2026 13:40:13 -0600
-Subject: [PATCH 03/12] arm64: dts: hisilicon: Add specific syscon
- compatibles
+Date: Wed, 11 Nov 2026 13:40:14 -0600
+Subject: [PATCH 04/12] arm64: dts: hisilicon: Describe ADV7533 supplies
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -55,7 +54,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261111-dtbs-hisi-v1-3-6c9f5f80716c@kernel.org>
+Message-Id: <20261111-dtbs-hisi-v1-4-6c9f5f80716c@kernel.org>
 References: <20261111-dtbs-hisi-v1-0-6c9f5f80716c@kernel.org>
 In-Reply-To: <20261111-dtbs-hisi-v1-0-6c9f5f80716c@kernel.org>
 To: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
@@ -65,94 +64,66 @@ Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org
 X-Mailer: b4 0.16-dev
 
-Add specific compatibles for HiSilicon syscon nodes HiKey reboot mode,
-Hi6220 media NOC ADE, HIP06/HIP07 SerDes, and DSA CPLD syscon.
+Add the ADV7533 power supply phandles for HiKey and HiKey960. Both
+boards have a dedicated HDMI 1.8-V supply. HiKey has a 1.2-V PMIC rail,
+while the ADV7533 on HiKey960 uses its HDMI 1.8-V supply for V1P2.
+Describe the respective 3.3-V rails as well.
 
 Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 ---
- arch/arm64/boot/dts/hisilicon/hi3660-hikey960.dts | 3 ++-
- arch/arm64/boot/dts/hisilicon/hi6220-hikey.dts    | 3 ++-
- arch/arm64/boot/dts/hisilicon/hi6220.dtsi         | 2 +-
- arch/arm64/boot/dts/hisilicon/hip06.dtsi          | 2 +-
- arch/arm64/boot/dts/hisilicon/hip07.dtsi          | 4 ++--
- 5 files changed, 8 insertions(+), 6 deletions(-)
+ arch/arm64/boot/dts/hisilicon/hi3660-hikey960.dts | 14 ++++++++++++++
+ arch/arm64/boot/dts/hisilicon/hi6220-hikey.dts    |  6 ++++++
+ 2 files changed, 20 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/hisilicon/hi3660-hikey960.dts b/arch/arm64/boot/dts/hisilicon/hi3660-hikey960.dts
-index 27fb08d348c9..acecd2dfeeba 100644
+index acecd2dfeeba..1b0ba3dd2cde 100644
 --- a/arch/arm64/boot/dts/hisilicon/hi3660-hikey960.dts
 +++ b/arch/arm64/boot/dts/hisilicon/hi3660-hikey960.dts
-@@ -56,7 +56,8 @@ ramoops@32000000 {
+@@ -192,6 +192,14 @@ wlan_en: wlan-en-1-8v {
+ 		enable-active-high;
  	};
  
- 	reboot-mode-syscon@32100000 {
--		compatible = "syscon", "simple-mfd";
-+		compatible = "hisilicon,hi3660-reboot-mode",
-+			     "syscon", "simple-mfd";
- 		reg = <0x0 0x32100000 0x0 0x00001000>;
- 
- 		reboot-mode {
++	fixed_3v3: regulator-3v3 {
++		compatible = "regulator-fixed";
++		regulator-name = "fixed-3.3V";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		regulator-always-on;
++	};
++
+ 	firmware {
+ 		optee {
+ 			compatible = "linaro,optee-tz";
+@@ -571,6 +579,12 @@ adv7533: adv7533@39 {
+ 		status = "okay";
+ 		compatible = "adi,adv7533";
+ 		reg = <0x39>;
++		avdd-supply = <&ldo3>;
++		dvdd-supply = <&ldo3>;
++		pvdd-supply = <&ldo3>;
++		a2vdd-supply = <&ldo3>;
++		v3p3-supply = <&fixed_3v3>;
++		v1p2-supply = <&ldo3>;
+ 		adi,dsi-lanes = <4>;
+ 		ports {
+ 			#address-cells = <1>;
 diff --git a/arch/arm64/boot/dts/hisilicon/hi6220-hikey.dts b/arch/arm64/boot/dts/hisilicon/hi6220-hikey.dts
-index 2d304efe081d..229116477f1d 100644
+index 229116477f1d..5f31569cf494 100644
 --- a/arch/arm64/boot/dts/hisilicon/hi6220-hikey.dts
 +++ b/arch/arm64/boot/dts/hisilicon/hi6220-hikey.dts
-@@ -69,7 +69,8 @@ linux,cma {
- 	};
- 
- 	reboot-mode-syscon@5f01000 {
--		compatible = "syscon", "simple-mfd";
-+		compatible = "hisilicon,hi6220-reboot-mode",
-+			     "syscon", "simple-mfd";
- 		reg = <0x0 0x05f01000 0x0 0x00001000>;
- 
- 		reboot-mode {
-diff --git a/arch/arm64/boot/dts/hisilicon/hi6220.dtsi b/arch/arm64/boot/dts/hisilicon/hi6220.dtsi
-index 61eaa7f8c1c9..21eb268b5731 100644
---- a/arch/arm64/boot/dts/hisilicon/hi6220.dtsi
-+++ b/arch/arm64/boot/dts/hisilicon/hi6220.dtsi
-@@ -294,7 +294,7 @@ acpu_sctrl: acpu_sctrl@f6504000 {
- 		};
- 
- 		medianoc_ade: medianoc_ade@f4520000 {
--			compatible = "syscon";
-+			compatible = "hisilicon,hi6220-medianoc-ade", "syscon";
- 			reg = <0x0 0xf4520000 0x0 0x4000>;
- 		};
- 
-diff --git a/arch/arm64/boot/dts/hisilicon/hip06.dtsi b/arch/arm64/boot/dts/hisilicon/hip06.dtsi
-index 3d7285e6700e..823cd314dd32 100644
---- a/arch/arm64/boot/dts/hisilicon/hip06.dtsi
-+++ b/arch/arm64/boot/dts/hisilicon/hip06.dtsi
-@@ -450,7 +450,7 @@ pcie_subctl: pcie_subctl@a0000000 {
- 		};
- 
- 		serdes_ctrl: sds_ctrl@c2200000 {
--			compatible = "syscon";
-+			compatible = "hisilicon,hip06-serdes-ctrl", "syscon";
- 			reg = <0 0xc2200000 0x0 0x80000>;
- 		};
- 
-diff --git a/arch/arm64/boot/dts/hisilicon/hip07.dtsi b/arch/arm64/boot/dts/hisilicon/hip07.dtsi
-index d175e242ee96..b815c1fff6ea 100644
---- a/arch/arm64/boot/dts/hisilicon/hip07.dtsi
-+++ b/arch/arm64/boot/dts/hisilicon/hip07.dtsi
-@@ -1229,7 +1229,7 @@ dsa_subctrl: dsa_subctrl@c0000000 {
- 		};
- 
- 		dsa_cpld: dsa_cpld@78000010 {
--			compatible = "syscon";
-+			compatible = "hisilicon,hip07-dsa-cpld", "syscon";
- 			reg = <0x0 0x78000010 0x0 0x100>;
- 			reg-io-width = <2>;
- 		};
-@@ -1240,7 +1240,7 @@ pcie_subctl: pcie_subctl@a0000000 {
- 		};
- 
- 		serdes_ctrl: sds_ctrl@c2200000 {
--			compatible = "syscon";
-+			compatible = "hisilicon,hip07-serdes-ctrl", "syscon";
- 			reg = <0 0xc2200000 0x0 0x80000>;
- 		};
- 
+@@ -505,6 +505,12 @@ &i2c2 {
+ 	adv7533: adv7533@39 {
+ 		compatible = "adi,adv7533";
+ 		reg = <0x39>;
++		avdd-supply = <&ldo15>;
++		dvdd-supply = <&ldo15>;
++		pvdd-supply = <&ldo15>;
++		a2vdd-supply = <&ldo15>;
++		v3p3-supply = <&reg_vdd_3v3>;
++		v1p2-supply = <&ldo22>;
+ 		interrupt-parent = <&gpio1>;
+ 		interrupts = <1 2>;
+ 		pd-gpios = <&gpio0 4 0>;
 
 -- 
 2.53.0
