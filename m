@@ -1,48 +1,49 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794426040;
-	b=JDr0bwtbXkLzCeGGhWhHhhMJSc6906IOhjWR0gyJfoTZa+4MaX5ewlNJgunlGuainSHt
-	 meSIwD8iFG95wEt2MwY7CUK7Ai0rIH/aWcDYoJsu66Oz/WhxUIRLYhYl1lSFRyzCuEABi
-	 FB5DOuQfQUA1VbGGfyzh9qLy1mIwt6I7ZVhMiUp7n7CMoQYQnx4iSrA7MeRsuX7W9BHkj
-	 rAxgzZRIHi7HmMR/NV2lQ/xc86WzsuFZJ7Jeq8LLlYE5zZ1dKqNzgnwFrNNScSfeubC0D
-	 w2ile4uuN1uHpnq0kEydXsc1ltLH8AgeERtRpSPz9evrebnyuSIjJI2b+bHSE/q7/NA==
+	t=1794426041;
+	b=awqI8I+C1OskfpLLhVM22djQh61kv2Ehrcu2l0Qa4eBFaNE8rv5+Mx0z9f2OIbKTH6HT
+	 K+Gwp1i+qM8lt0jLrparsUzp9UYxZgN4LUNhBpuiFQvow3tUkSUBF7KpGVRLZE2Jb4uHj
+	 xFnXCLwgww9Y5EdrgyBeUqahOx7lrjNoInAmx/H0R+Tuu9a7b7Frb+Fal1pOwxxBJbXYe
+	 Q2VNC8HLt/1I1wGIx5LpPhfHubk3t21S7E7VPsZFLKZd3nNnrCgSjYCo0kTQHxaj3QQKM
+	 4Hfg1ShlkgemfXBoqhR7qbAqHHFKIxYyRbZBRYJVyo0UXXpOFDf1Dc3POTeaoRSMAcg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794426040;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794426041;
 	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
 	 X-Mailer;
-	bh=sV07NUFdFEUChvvq9JQ9jX1g0Au9Mf6nya4n4B1WSVc=;
-	b=qTRIr3L9jUebExfcGqa6klqtwe4mtJZcWJpZ3l/am80V8qiaaqM18NgkReIjx56BAIMk
-	 gRW7FfZ4WzwaNYgimh34XIA0NdtN44K+7D3mZb15nKy8j+RmAQVUjE3EWs/IstwdLq5Mk
-	 o5WF0OV7k3frFR1rXFrzQ7JoK94l1gmo8iMZs6LtycbDLPKVszwMo3Idh30Y+iR7dCQzy
-	 oXFyQFjSXmAivBvrwSgYvhO+tiKuGviNYZy2ST2WKl89EHGo+gccmWf/fdxe5ndfn7EEZ
-	 /r1LoRKUfK2FG+U/N3gWZwCdGlpNUbahcVY0UZ8HAGkgSH6H7BSmrLJA8BcCiLIaMYw==
+	bh=1zueIy4IpFVqmygoDdLCHo8BpwK2BqtoOiBnrgfJRao=;
+	b=WmKQDkxW3UWKZ3IaSghhLEsdrMM/UL1Rpi0bQm0aXDxdQ20I4VEuJmeXWwtblus9WWRD
+	 LfKWYSTiwL5S9UdiPWOhl3YEDy5QHKT1Ecyp8ZdeGgo/FRYyCul94ES8nUTh3PmNEZWF2
+	 m2MORRR7SgyjBl9wXvrQPktpDFysvLYve7UCKyKEBs64iD/alVqkZAa2hxJ5j7owFLS4/
+	 eRGfbr0xJwK7RJDSOEaYKsc2BCuP/gIGtdC29u5bRcSgZ4XaWhxm8F3BF/Xozg4U0DajB
+	 0tKTUBp7L9nUTnKcBv/azxQPi+Ha+c6A8wkmijUEaosLZ1Xab0OCpom6mXBXZD8QMiw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YCdrMZ2Q;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kKZ0Ghey;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1AE456070089;
-	Wed, 11 Nov 2026 19:40:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 692856070099;
+	Wed, 11 Nov 2026 19:40:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YCdrMZ2Q
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B27131F00A09;
-	Wed, 11 Nov 2026 19:40:39 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kKZ0Ghey
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D1CD41F00A11;
+	Wed, 11 Nov 2026 19:40:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794426039;
-	bh=sV07NUFdFEUChvvq9JQ9jX1g0Au9Mf6nya4n4B1WSVc=;
+	s=k20260515; t=1794426041;
+	bh=1zueIy4IpFVqmygoDdLCHo8BpwK2BqtoOiBnrgfJRao=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=YCdrMZ2QaFEWHIRTYRS7dOIqS0gpVDXWzdVAOqCK0VxhwakcpPGjMPhqCtenzSbUP
-	 bHaZXFCm6sIHZwi9dQjnq7sGY3mdfIZeE4y3MeR2lyABkRL8GmTYuJsN2FvyYSFbsX
-	 XUNIPGyTKxRKuVYWY1Za5tN24Z2V7s9p5NGPhGGnN9lbBp4LbaSP6LoViiUHdOJa0A
-	 IKE6KJV+IiDxoI1aO1Iu1LxlNNdyvTIEkVhwZiammZTkqtfGNgg04lAWcqVSZsZC5w
-	 +T4/eg0c5I6ZAt3TzL5Cq6LcVkQfVcAzKM61QKDoO1fks73wsaboosb6dNi5WLlzPi
-	 /7/Elo92r7llQ==
+	b=kKZ0Ghey3qJBAYXsVpyFj0ax/Cz2c2Y+3xFiVLwuAfjcolArrDGse7L5u40UTQIML
+	 a4/DFOhm9FY/Rmp0BcFl0TUIc42JHgw5c1ea+jDu9WGY4Mi6U8opvI7qW7fvJaWq8X
+	 HwNuUfmvLOv368Kz9cazcToFOdQ4B2olYz9YRx4MsdIPDZSUiEhNu9+XcyZVPAswI3
+	 q7XMdjbg9289b8Tq6mMXO454YbjdiQ/9alFHkkqX3Q4j9U3LoqVdP4fiMgQAMW7qH/
+	 1P+uAdsBA0hnY7+D8IFEhZQf5dovBG361JsVFzzbCzXOUcSH9wH3BzgN76uk/1NtSX
+	 MDkFRKVfGuCfg==
 From: "Rob Herring (Arm)" <robh@kernel.org>
-Date: Wed, 11 Nov 2026 13:40:19 -0600
-Subject: [PATCH 09/12] arm64: dts: hisilicon: Correct DMA node names
+Date: Wed, 11 Nov 2026 13:40:20 -0600
+Subject: [PATCH 10/12] arm64: dts: hisilicon: hi6220: Correct I2S channel
+ ordering
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -54,7 +55,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261111-dtbs-hisi-v1-9-6c9f5f80716c@kernel.org>
+Message-Id: <20261111-dtbs-hisi-v1-10-6c9f5f80716c@kernel.org>
 References: <20261111-dtbs-hisi-v1-0-6c9f5f80716c@kernel.org>
 In-Reply-To: <20261111-dtbs-hisi-v1-0-6c9f5f80716c@kernel.org>
 To: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
@@ -64,40 +65,29 @@ Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org
 X-Mailer: b4 0.16-dev
 
-Use the dma-controller node name required by the K3 DMA binding.
+List the Hi6220 I2S transmit channel before receive, preserving the
+channel-to-name association while matching the binding order.
 
 Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 ---
- arch/arm64/boot/dts/hisilicon/hi3660.dtsi | 2 +-
- arch/arm64/boot/dts/hisilicon/hi6220.dtsi | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ arch/arm64/boot/dts/hisilicon/hi6220.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/hisilicon/hi3660.dtsi b/arch/arm64/boot/dts/hisilicon/hi3660.dtsi
-index 9f0b5d5b97cb..f9c1f7718b82 100644
---- a/arch/arm64/boot/dts/hisilicon/hi3660.dtsi
-+++ b/arch/arm64/boot/dts/hisilicon/hi3660.dtsi
-@@ -604,7 +604,7 @@ uart6: serial@fff32000 {
- 			status = "disabled";
- 		};
- 
--		dma0: dma@fdf30000 {
-+		dma0: dma-controller@fdf30000 {
- 			compatible = "hisilicon,k3-dma-1.0";
- 			reg = <0x0 0xfdf30000 0x0 0x1000>;
- 			#dma-cells = <1>;
 diff --git a/arch/arm64/boot/dts/hisilicon/hi6220.dtsi b/arch/arm64/boot/dts/hisilicon/hi6220.dtsi
-index 8bb74b4274a9..1cf552d02ecd 100644
+index 1cf552d02ecd..2d65d9b501ce 100644
 --- a/arch/arm64/boot/dts/hisilicon/hi6220.dtsi
 +++ b/arch/arm64/boot/dts/hisilicon/hi6220.dtsi
-@@ -412,7 +412,7 @@ uart4: serial@f7114000 {
- 			status = "disabled";
+@@ -906,8 +906,8 @@ i2s0: i2s@f7118000 {
+ 			clocks = <&sys_ctrl HI6220_DACODEC_PCLK>,
+ 				 <&sys_ctrl HI6220_BBPPLL0_DIV>;
+ 			clock-names = "dacodec", "i2s-base";
+-			dmas = <&dma0 15 &dma0 14>;
+-			dma-names = "rx", "tx";
++			dmas = <&dma0 14>, <&dma0 15>;
++			dma-names = "tx", "rx";
+ 			hisilicon,sysctrl-syscon = <&sys_ctrl>;
+ 			#sound-dai-cells = <1>;
  		};
- 
--		dma0: dma@f7370000 {
-+		dma0: dma-controller@f7370000 {
- 			compatible = "hisilicon,k3-dma-1.0";
- 			reg = <0x0 0xf7370000 0x0 0x1000>;
- 			#dma-cells = <1>;
 
 -- 
 2.53.0
