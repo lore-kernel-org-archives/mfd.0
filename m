@@ -1,56 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794417092;
-	b=G+IHrtihAxKmcby6/28jZpaffsL6lm9/EoJtqIe7PhJNUqe07DZQ6PmdkBprHjhlcYq9
-	 /X61iocDdJPfT3xAWRVDFW9emSwCYAx7AGNS19LPmzP/HllKl8sx3idn12epXeTOgYCVF
-	 3W8CCcAIbBAbLSmkpj68TOx7auKJZhgpUCj8hVGOZd5QyeReGZWIH3bssfKwdUZmO9MlE
-	 t8gBTPYOgS4zkN84CLGwckkOHkfa5iR729dR/K0BdTCH+1hA5P16l+maAk3gc90WayXqG
-	 zPjeFasuCrPL1mgjQijQ2BlhiFxfpFQ1xROD8XYwAWmvSTSUW+gRFtyihs4Tb7kwfWQ==
+	t=1794417133;
+	b=OcKJgyUI9k94E1iqDmsdhS8OWrgzngZqwimpaDk8yHAp6QMd2hnSfdLCrbXNVzzH48Ie
+	 xqonAOgWcs1cG7Niai9CtES/ceAo/hZHruSET7R35SafXYt4Mqzsdv15UQw6inEWI6wn8
+	 dkK+T0WysriJUbjewz2k9hax9umcd4tXj0kkXbdHT5pAsDNYTMLe5goe8+KAdAqy8Movc
+	 sdpRnASXi4tqigUu7XICeiSW5HQW9XC6sTe8teOAqV5ySOICtsxllIvIgU3xlouQ/pnKB
+	 vSGA97MYgOB9B9P5mD7aWNPG8DJkbSCk21PplZLDjnsOoecEMEVtSL0oB+ogiYZ2TGg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794417092;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794417133;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=DBhNq8ZmtjHpQJ2XfrsVqBc4b/Sk+/5pAcnsSqUV7mE=;
-	b=a3vNQH3aT5HzN1HJ7/YvSYkSIC7JKsIL8Trh13pINk8V0Q5t+b2d/VeQ5i9ka5DaoGHl
-	 rYzO9H8AQqImOUV89t2pUaCPihJiRmj/WjSNDZ2lBqES8wp9B2OmX3XvFbgG+0RCfcKgM
-	 gdvu+FqxKdaSiTXhu5URlT/fc+JMdWpLg8kL2BLSLrhVmblxfHjrhOWwcvjxguwA/mi6h
-	 igAvGUlyzhvvwklhVtrURFu3zjYpPwAEEDKdF4rqS680Y4747JvqQ9Rm9x3EYKpg3nPwe
-	 6B3KdkEWEXhc/MxDnFE2GLUVwvx/qNOsv98WnDoZQFWu4p/B9mHDPk6gHe2dIvCYM3w==
+	bh=A1dy58a3XbHUqT+nSKlUJY3AkEj6GkN+EA2AAQ+FlU4=;
+	b=vFBaD/x4UmFoUzasG7dBWq9LHsMGoLB2JNsn6uLqTtDm5iEN/gWvK9U70cIlc6PpuoxI
+	 YImYGkuVFjr1nUqb/I+D3GYtgPP9fal9xd2k+5Hf/E7PbIevTF/vAxTZEySBRiWEk5OLJ
+	 hzV8LnPmZZyQ/Uw/4pTd8OzeR1yXDDCB3GAQBkcdG23v3fHvSK2NTZD2zzcY1Hmon1Qtt
+	 Zpf+CQR1z/MSDL295u+eZ/RRQ2B2BosJNijGAfa7NWb/sjA5fBcyz5xBQrlmz7VEwWhi4
+	 PU4hQ0Pk0zz+GvwRa94cQT1VlBvbGGrgUTljoSD09sjo0wKeFKEZYA64R8iBmJOMC1w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=T4zfgEs6;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fIDBmOMi;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF51A606A31C
-	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 17:11:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55246606A31C;
+	Wed, 11 Nov 2026 17:12:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=T4zfgEs6
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23A451F00A05;
-	Wed, 11 Nov 2026 17:11:32 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fIDBmOMi
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3EBB1F00A05;
+	Wed, 11 Nov 2026 17:12:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794417092;
-	bh=DBhNq8ZmtjHpQJ2XfrsVqBc4b/Sk+/5pAcnsSqUV7mE=;
+	s=k20260515; t=1794417133;
+	bh=A1dy58a3XbHUqT+nSKlUJY3AkEj6GkN+EA2AAQ+FlU4=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=T4zfgEs6Z1eVBJul9WfRjoaKVKJQYkSpwn7vVh4WJDW50KnUnRaDofgeZSgUhyGJS
-	 a8jLauzQBW83EyJx4V8EWlC0iH5Rhrhs2BpDHILZ4scC9J7UARZq+uJ78UK4J2fkXv
-	 SWaQRr7s8kQV8y2kKmXs/PxW9PfTFqqeGKv2yODTLaTFD5MbUkmM5RpE4ht8v9mPxY
-	 EYLmReiRdzQTHWyZqXEhsDO+SfRNtF/Wg3ZIgxYxA5hT40TBDrp3WEbRjIkvWIs1EI
-	 VYD8IVbIKkwZewDRvQWmTvmXBpxt/MQfCh1ZCdTO69hsilujgzAxctBXnJODVO/NXQ
-	 wO1UzRnkm8CgA==
-Message-ID: <sashiko-outbox-209382@kernel.org>
+	b=fIDBmOMijgne+xy+ZDEPlStGsAFKtLX42VZV4p//zIVKFWV+tfidL0JF3bdVxzXec
+	 YbsvOVYmj5YXuMZxhfc2tehN5caBqY0BnlPK7fUp+bNdJDpi++/JI+IPtOfcdTJxk6
+	 wGlNuDltisB855Ea4YfqKaODi6coTnHhYm6it1kAtwhZpEk9lBLB1EqAq8nibicGtl
+	 PnHbwvWKxSONWPGYkWjHWg9iy+c/XkqCAKtlowp3ffTvit5lSHv8H9Qx4fK1KIXZ2c
+	 rHxzbYuhZNTDup+QcxzkyLLyRKsf46zVzFEUTHE6sAleJNPvUqUMWZboycP9vl/vSB
+	 jpqH/SXNZATUw==
+Message-ID: <sashiko-outbox-209383@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v4 2/7] regulator: pm8008: Add PM8010 support
+Subject: Re: [PATCH v1 2/7] ata: pata_cswarp: bind to the Warp mfd cell
+ instead of the Zorro device
 Reply-To: sashiko-reviews@lists.linux.dev
-To: "Jishnu Prakash" <jishnu.prakash@oss.qualcomm.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261111-pm8010_i2c_support-v4-2-4549cab1c8e4@oss.qualcomm.com>
-References: <20261111-pm8010_i2c_support-v4-0-4549cab1c8e4@oss.qualcomm.com>
- <20261111-pm8010_i2c_support-v4-2-4549cab1c8e4@oss.qualcomm.com>
+To: "Paolo Pisati" <p.pisati@gmail.com>
+Cc: linux-ide@vger.kernel.org, mfd@lists.linux.dev, dlemoal@kernel.org, cassel@kernel.org, lee@kernel.org
+In-Reply-To: <20261111163735.227286-3-p.pisati@gmail.com>
+References: <20261111163735.227286-1-p.pisati@gmail.com>
+ <20261111163735.227286-3-p.pisati@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 11 Nov 2026 17:11:31 +0000
+Date: Wed, 11 Nov 2026 17:12:12 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,32 +61,74 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
->=20
-> PM8010 is effectively the next generation of PM8008.
->=20
-> Like PM8008, PM8010 also has 7 LDOs under it which are used to power
-> camera sensors. The PM8010 LDO are of different types from the PM8008
-> ones and have different voltage dropout values. PM8010 LDOs do not have
-> a voltage step rate configuration register.
->=20
-> Add the necessary changes to support PM8010 LDOs.
->=20
-> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> Co-developed-by: Dhruvin Rajpura <drajpura@qti.qualcomm.com>
-> Signed-off-by: Dhruvin Rajpura <drajpura@qti.qualcomm.com>
-> Tested-by: Oleg Keri <okerixx@gmail.com> # Lenovo Yoga Slim 7x Gen 11 (Gl=
-ymur)
-> Tested-by: Burke Cates <burke.cates@gmail.com> # ASUS Zenbook A16 (UX3607=
-OA)
-> Tested-by: Christian Cortner <ccortner@gmail.com> # Asus Zenbook A16 (UX3=
-607OA)
-> Co-developed-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-> Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+Thank you for your contribution! Sashiko AI review found 1 potential
+issue to consider:
+- [Low] ata: pata_cswarp: duplicate ata_platform_remove_one() and
+  module_platform_driver()
+--
 
-Sashiko has reviewed this patch and found no issues.
+commit 0358845c5d4b9568f67a2b55aedc3acc1ebbdef0
+Author: Paolo Pisati <p.pisati@gmail.com>
+
+ata: pata_cswarp: bind to the Warp mfd cell instead of the Zorro device
+
+This commit converts pata_cswarp from a Zorro driver into a platform driver
+that binds to the "warp-pata" MFD cell provided by warp-mfd.
+
+> diff --git a/drivers/ata/pata_cswarp.c b/drivers/ata/pata_cswarp.c
+> index 58fe6d0012dc5..41b4c93052cfd 100644
+> --- a/drivers/ata/pata_cswarp.c
+> +++ b/drivers/ata/pata_cswarp.c
+
+[ ... ]
+
+> @@ -145,34 +135,29 @@ static int pata_cswarp_probe(struct zorro_dev *z,
+>  			  IRQF_SHARED, &pata_cswarp_sht);
+>  }
+> =20
+> -static void pata_cswarp_remove(struct zorro_dev *z)
+> +static void pata_cswarp_remove(struct platform_device *pdev)
+>  {
+> -	struct ata_host *host =3D dev_get_drvdata(&z->dev);
+> +	struct ata_host *host =3D dev_get_drvdata(&pdev->dev);
+> =20
+>  	ata_host_detach(host);
+>  }
+> =20
+> -static const struct zorro_device_id pata_cswarp_zorro_tbl[] =3D {
+> -	{ .id =3D ZORRO_PROD_CSLAB_WARP_1260 },
+> -	{ }
+> -};
+> -MODULE_DEVICE_TABLE(zorro, pata_cswarp_zorro_tbl);
+> -
+> -static struct zorro_driver pata_cswarp_driver =3D {
+> -	.name           =3D "pata_cswarp",
+> -	.id_table       =3D pata_cswarp_zorro_tbl,
+> +static struct platform_driver pata_cswarp_driver =3D {
+> +	.driver =3D {
+> +		.name	=3D "warp-pata",
+> +	},
+>  	.probe          =3D pata_cswarp_probe,
+>  	.remove         =3D pata_cswarp_remove,
+>  };
+> =20
+>  static int __init pata_cswarp_init(void)
+>  {
+> -	return zorro_register_driver(&pata_cswarp_driver);
+> +	return platform_driver_register(&pata_cswarp_driver);
+>  }
+> =20
+>  static void __exit pata_cswarp_unregister(void)
+>  {
+> -	zorro_unregister_driver(&pata_cswarp_driver);
+> +	platform_driver_unregister(&pata_cswarp_driver);
+>  }
+
+[Severity: Low]
+Now that pata_cswarp is a platform_driver, could pata_cswarp_remove() be
+replaced with libata's ata_platform_remove_one(), and pata_cswarp_init() /
+pata_cswarp_unregister() with module_platform_driver(pata_cswarp_driver)?
 
 --=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111-pm8010_i2c=
-_support-v4-0-4549cab1c8e4@oss.qualcomm.com?part=3D2
-
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111163735.2272=
+86-1-p.pisati@gmail.com?part=3D2
