@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794428557;
-	b=oH3UpNAeDQLvd/Dh1FXEZ/huST1fccy1Q5AF8J2WFdBYDEm6OY6H7MulRJMnfveSx/xu
-	 jOgAMRhYufnq9Mgkh0A/vbzHUI+YAIVXRxYcKDWZxnqaUI+sp0YuEpcglLC+9bhuk5cCc
-	 4YGj3Tz90uxWwB2neYmzRDpQm/7ALGp/oUGasHYR0viLAI7fsd3Lc5F9y4r1aU45FpZQq
-	 x9yCd82ODwvd28LEAjQaZ8ZtVE6umMu13rXki+o2FeH2eF+qOXJMiNJwtRZXP0/paIHND
-	 xirRW1y2HZTohX+uP3yJXdyrUg1jx6qoREpVTCS2Ypg0hrRALdWodWOGX1OLLprIKLw==
+	t=1794428578;
+	b=ALlmVepXd82Ls5nHfbe1qiPheRqn/X7AhA43AaV6/j19svz0+6ibjBv6+jZFO0u8v676
+	 H4i4pFBoUVrX+uEL0vd+uG1/6k4W9YR2Q3oTaGDJ6gZZN0Xipj/fkL3wXnTwD4ZL1G15t
+	 qHxAW/N+Jsg5W+CPt3OY0U681aHzj1bRIV/5KRJLwH3Zu2baVGKaK/WV8x3Lo1u6Gxt+v
+	 MEADI1Ho5E2QCPoL8tM3qbEljXbaCXIcvsIpIUtNL65vGbOaXqQe8O7cueetZqmDPDLWO
+	 twpuqvM8AZcLcr452rjw0CoMm8q88TwudOIEwf14GoXANBJRT9ZGlTlRpNN8mJweJFw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794428557;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794428578;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=2EfZJF4OnYOe0Wq5LImMhsoOyFlI7Bde1ZwWA7GgQ7A=;
-	b=zQl6f9ImoXFD8Iqcx5r7chOIBpbwCPnK6zDkvwKOX/i2K6k3zPWovHNZ9v8DCQ0uAerN
-	 IZ74nJ0M6DwHqUoFHhibx58OeLYAWP4PM8dlNPfc6eKKiSJLJWsD9/G+XmTer4rJgoQuX
-	 KPUn8pwiFSXX1J3Quu95RV3IEYp3xmGzjmRu/4LHru6u2gSZeIKCfQ2ek/Qf7iHoIj1Ag
-	 WLpg7l8TMZ1vItoUgW6+iy/JyoLJgNbtAXuzGlVqlRNrpJ/1TJpqS1KnSHX7CTWLoOPY5
-	 Wboj1ZGjKCC56FLIc1QkeowR8XN9SqyfXd0AyVS6vN2ZjuDkLzBw5fF80I2G0rdaiZQ==
+	bh=4jbDueM5m308by8S2jO5TTXikNSDs+2dtmttejgS8Qg=;
+	b=CxY7CO8j6pkmBVqRchvCdySNLQP93zMQeTIpGioDh++pSVxb3rJk02g6NJ2/BqaSaEmq
+	 k7QlZcrInvf+9S67CHz46MwTSQ1NOmKb7AN3t2QEKNT1M2CABzYuFlGM/oSrYQKpDgT/C
+	 hf9kQifan0CbsdOTkZj4kUUV1sv2EF1piBHSlmxFLh5N1jH+Tmhn8wzT9a7kfUWndhvGh
+	 pSeAdlkx+92owpQLa1N942wWRF6z6milYQRzxmcg8E9vT1SeRD5/zR/8SONzk+dYb/9pO
+	 Vxj9eYBGVQhtTT8bHokh/pcQJHGSvDmXVSPdck55vtLQ0qeU97rztGksOxwO498yzQA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=OIDDbTe1;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AiZzQJQO;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E877606A321
-	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 20:22:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09C77606A31C
+	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 20:22:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=OIDDbTe1
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C97851F00A05;
-	Wed, 11 Nov 2026 20:22:36 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AiZzQJQO
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A4D551F00A05;
+	Wed, 11 Nov 2026 20:22:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794428557;
-	bh=2EfZJF4OnYOe0Wq5LImMhsoOyFlI7Bde1ZwWA7GgQ7A=;
+	s=k20260515; t=1794428577;
+	bh=4jbDueM5m308by8S2jO5TTXikNSDs+2dtmttejgS8Qg=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=OIDDbTe1ZA6q1ee/0iLIZYWgp74l4SlAKVk2ofr7DF8Ky8roLVuzDoXON49CuVfQi
-	 zfdknY914iZkOwJ+czB2ZL0hwSQv1/dId7x5nDfjZEzTHfsDM0cNFj0Z8Q25biQGYh
-	 zL1KAb8fobxRifN1aQmXdKqiIlVGwdHRLru8GQlXDt6WiDpn+2J/753lTjBWOaDL4X
-	 FfhhrBSdt5GbdU+Jpmol12CQfyHR+o+xU9ThSGOZatLTaj+v/qg60BALjlaH12ZayW
-	 AA8j+L+RiplZhgTGnAeocJpWjdilhpgKKKfkeEcEtWzvRuaAujgOgIjvcgby7Nth1m
-	 CnN2lQfym09kw==
-Message-ID: <sashiko-outbox-209645@kernel.org>
+	b=AiZzQJQO3Bk6tbFUj22DlhlaLYajFuoN5PJ6p+ujuPb3MuwCBWC5k5zY3zu/qaHhA
+	 VtrMASUQpCwxkRjpuocYAv3F0F2Xd2dwQFvuDXjzGhHlUB2TcVYBP55Gu0DK4qxvmA
+	 UxeKf+Ude2PcTbqB9QIVITszvRIRJdAjNGMswhjEaaWOhvThRNVX4m6HsdbTCCpn7a
+	 g3X/X0NXj43HFC3r9L4DY0zBtr2vmzL2ThD64/njNW6uyxD6PgfAkEfdj2VBz6Pdg6
+	 T6h5+f0utDI9o8LI3QolqKfrhNmkoDPKAtSBhy3hPFB7oD8Qfyx3EqcXi8MFb/a95Y
+	 HDowXviktPqhQ==
+Message-ID: <sashiko-outbox-209646@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 03/12] arm64: dts: hisilicon: Add specific syscon
- compatibles
+Subject: Re: [PATCH 08/12] arm64: dts: hisilicon: Move non-MMIO nodes out of
+ simple-bus nodes
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?Um9iIEhlcnJpbmcgKEFybSk=?= <robh@kernel.org>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261111-dtbs-hisi-v1-3-6c9f5f80716c@kernel.org>
+In-Reply-To: <20261111-dtbs-hisi-v1-8-6c9f5f80716c@kernel.org>
 References: <20261111-dtbs-hisi-v1-0-6c9f5f80716c@kernel.org>
- <20261111-dtbs-hisi-v1-3-6c9f5f80716c@kernel.org>
+ <20261111-dtbs-hisi-v1-8-6c9f5f80716c@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 11 Nov 2026 20:22:36 +0000
+Date: Wed, 11 Nov 2026 20:22:57 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,8 +61,14 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> Add specific compatibles for HiSilicon syscon nodes HiKey reboot mode,
-> Hi6220 media NOC ADE, HIP06/HIP07 SerDes, and DSA CPLD syscon.
+> Move non-MMIO provider nodes out of the soc simple-bus nodes.
+> This includes HiKey GPIO range helpers, Hi3660 and Hi3670
+> reset controllers, Hi3660 and Hi6220 thermal zones, Hi6220
+> stub clock and USB PHY providers, and static CoreSight funnel
+> and replicator graph helpers.
+>=20
+> These nodes do not have register ranges of their own, so they
+> don't belong under an MMIO "simple-bus".
 >=20
 > Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 
@@ -70,5 +76,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111-dtbs-hisi-=
-v1-0-6c9f5f80716c@kernel.org?part=3D3
+v1-0-6c9f5f80716c@kernel.org?part=3D8
 
