@@ -1,84 +1,84 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.49
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.54
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794415065;
-	b=kPJP6ZcGdlfg/nX6vme/0PbBGrXkDGMeKEMLtzwKIKBvmS2fYAoh7Tfl7Dr94uthKoc6
-	 8wbChuFkjKl+ZenNY0o3OpbgegbcaGBAGAPs/LxwkyJhA5Xa4J35tWvUbhVKSyb+EfVrd
-	 p2SX6gk90aNU6FsdjfMoaDKRr2w+O4nTKfKMTRHZVSq/63SyjUCsUTppMK/XtF+GnW2Dz
-	 jdyewtcTbHe1SLp522lYRZ+EJLT0LWCyBJhhXi1J2H5JuegeLyQNuvCTw2w4XbcLvAUKf
-	 YdaWtu9xyWgh4A+OMOqRrzyavtcMsVh7AD11aLMISWXl91yN0vN0woGlBTkFof5VIqg==
+	t=1794415066;
+	b=z8f6SLzSGbz4oV0ImnhVK8SVWJQ3+aU+zqRaxbwde5EYVK/NXw97I7ALoew93iuXneX8
+	 tAZslw6MZhHY01CaAMi4gaN7+FXze/PoNTAuns4wkRO4Qz5CMQmbn2jf1chi1/vyIJZoP
+	 fYeAzwB93cHgaGTps3ayVkwmSTFiDya0rY9SW5Zo1L6UPLg3I11llYf/HPBXllBRdkOra
+	 KhjX1El993Ds+Yvjq6wRp8aPr92DYHhtvd40zDWDxcv9QDzpLe1+fAAQipgplrmzc/u5q
+	 3oE+7FXbbgiohDyMdx3BV1DX1ofOdZrXWG0rniwOL7MAR+USZq8jEXlO3v/9iLE1XWg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794415065;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794415066;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=O4LCoxfztIxiO4Ve6PdwkUlzn+vvBZo5he0KpnyIOes=;
-	b=wLCgPXfrLBHCgHdiOL7aEnpsq6oDRbcEdzH2vD+2IhEKGO5uQXCp+x9xkx5nSsGW/qb/
-	 y3JOO+qtvyfkJ4BkrbLghMlypFCoW+QncWLSA2qvGGE2J+8kkq0lVI7y2vvzV7TqN67c+
-	 UZ24xW+xbAQLFQDUXO4eniIvCchqsOTTQZG7h7V4W8A+DKNlcWePX/TDfCkyh8Fj6t5u2
-	 lxyw2oeJTrRM71OXl5Fji6Iqm2d699iNbnx1mRZHcGh6+vwZT6h/mpMmJExs14CDSIoMj
-	 eAh+WBR1VHtmPnWukMltIKmCswIBvMq53ThJ13t6P8WnXLjh+lM4epHzdRYGxChqjDA==
+	bh=gbBLkzczqje5q5Cdgiw240astKZC/MyEc22DQrkWanU=;
+	b=v6UCUR9+3m50mRV5dbDq/KmvfYsNnJJVWDxTlqyMxw6xsr2MwWIxszy5l0SA8tMBeK2S
+	 JsBQRkYwSYKvdWwWNKCPS4/J/yCT0Y/w0ClLXy7oVnYH/+jC6xeJpj1jR4WDEbhAzobZv
+	 55gYnOXtSOD6hy+0XG+OLiO3xKZgasZzIoR0UVOLIGskH2r9sQOU7AyO393hq3N03HLyr
+	 GJ/9ldqs/dngUQ15B0Xnl8Rda94lLARLxSINEGoaYaqrsb/Q/tfkBDgWEKoMfomw4uUx5
+	 ++69oiV8+dLXy/PruVjBr6SevnzOuYmU66W/bbpBb/+RHbnj7utyL1+JyIOr9pcuYJg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=P6rqKYCS;
-	arc=none smtp.remote-ip=209.85.221.49
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="H7xMEtf/";
+	arc=none smtp.remote-ip=209.85.128.54
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8593E606A8B4
-	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 16:37:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8593E606A8B4
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4390606A8B0
+	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 16:37:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B4390606A8B0
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=P6rqKYCS
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-48dee593f18so2572785f8f.3
-        for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 08:37:44 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=H7xMEtf/
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4a207b02a2cso23274845e9.1
+        for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 08:37:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794415063; x=1795019863; darn=lists.linux.dev;
+        d=gmail.com; s=20260707; t=1794415064; x=1795019864; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=O4LCoxfztIxiO4Ve6PdwkUlzn+vvBZo5he0KpnyIOes=;
-        b=P6rqKYCS+naeLXxbey7pWTowHIlmV5FWXwZ2gPBMLj8LaWsSYE7+aYDkTNm4U/UF20
-         8s27oTPl1HFfsetYf+VK25iCCl90Dm5oULAC/NeJAraerasX32R1eEjcmhk45fPJvqK4
-         IF+PtjTsE9aMzFL8BO8a1i+TeMvonSw6N/3xC3yAyOvzwHOWje3gpYhOhzlQDrctSHDw
-         6Z6hSiq2xnT1jGSD1erTcl5XtwqAWlD0MSrlX8U9/nc2vo4byK1h30iZXszFj37Fi9kJ
-         jIQfD/oqj+zb3zt5krWfmm7OqxsF7dOuQCjB/91jFIq/vnbO5A72zrPihj7Dv6etS2x8
-         OxsA==
+        bh=gbBLkzczqje5q5Cdgiw240astKZC/MyEc22DQrkWanU=;
+        b=H7xMEtf/D9x9vVGyFDFBNaHS7/cFxaBI26neV9mr0dpGLPRET/qVCI0XziS7VxlQs7
+         2tR+9FxmPt5X88VO/TsKPTDuX9QhuwuAXryZFh5i62k9lXmRnj2DyPT2t0uVO+PSsYZx
+         VDFetd7xnj2xWbeo/YJ/tAjvt0u9AQ15Jl826jTWtnyExkPqBU0dwY0x3X5rtnZVNNe4
+         /jAsfo8MeoxZmU7wgy+AAuU/fQGBos6MVB98uy2umht4XjhwJanWo+uCKU9aIkHYRpQi
+         EBKavGDcXcjqCuTE0fy4IQwrLcYSGkC9ZLFQ6kJkhdFX1X2UhIsS1ihHZLpv7TNA2KN2
+         FQ7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794415063; x=1795019863;
+        d=1e100.net; s=20260707; t=1794415064; x=1795019864;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=O4LCoxfztIxiO4Ve6PdwkUlzn+vvBZo5he0KpnyIOes=;
-        b=pgwVVEvne5fTdWaO8sgxN7e/QanKghUlAFi5fGhT+l5SPFST/5GgloG1MRte2Rf1ay
-         GHPEkUJ0EYSDRmJS80CTEiIURAAw3yKSc8seU0k7MisZlOFlBsToVHpDOxA8PHpTzLqa
-         LnO6q1gy63bYQURkLj9RltlG+sfamaDSudKatqfnZ3yoP+QPJ6yF1u/Z0Zl477vyi3EV
-         QyU8eYfeOshUJsOLNVE2kPY9QI5ym61dyULA1mNkRHfpBRQSD+BQCELWOFwECxl4q5u3
-         taOihl9wLV/VLukEQFyNi9IQj4OKI/pB/ZhWxWmE6Q5mln0xjX3KXmvXfXReCzzUQfbe
-         8/VA==
-X-Forwarded-Encrypted: i=1; AL+hErHO9jbXteRKnEir2KUnHht+ZMK2xStl5FMmOi9f4dXGnI84aMogSZOQbC7YNP7P8YL1RIY=@lists.linux.dev
-X-Gm-Message-State: APuU4Z8eLU8oTmeFmXXN4oEmFCY8aCQuIp/8U72ieI0omzOfLmbk2f4m
-	3CdcPt72I/u5OfkgvmHLoznTUp4YZho1rxuRj1Z8Mv+xX3rGg0B1xRCE
-X-Gm-Gg: AYBFou2oeTRw6ewxWS0+JpiERUwFXYUqHxZEBC3xzKosbuqHzfdAsnzj83eECrkChUY
-	S/Ro1lNWPqqClDrz8WPNXao6gLIbkSR22XsqwTUhAZq23qFUAyf+juQs8N2YEJAZm6xsuV2sReY
-	40MM2/CK6BDpdTqSUm1PsAQ9cruhpx4aFb3RJ0L7NGf0+sNRM/tzdPOPKm3A0yVnu8upEXGPdNI
-	fXZzZbQsoMNGuyYfBbqTYKr6uWG9iXIHkD0Ta5NM4gqAXC99ry9cnhqD+30lXwzvNVSiEVY4hiF
-	38rxzVMd3D0lSrkVKm4h0rPu9ep6UYNamTjFzyLlKqFOXYdlaLqbQ+I/Ns19qXbFUoJrh0cMyA6
-	CDgo59sQjgri4RinLI/Nb6p+zXs/2v42JiQ+w8JqbXTI18sBVAP1zqXdlPWdjZH31Yb+GI8hGtn
-	Lzc+Q3NKeOE0KrAwPXv5WGpi3hHPX56/C//nSfLSDwkelFtwpPxvPwtsRXRpqu0a6SWBxy0YXVA
-	t7Qgwn4k0WXNjtOIr3+m3qDGntNel8lKJbHVJO4GY03zdDi2fZyd2Fmhn1HVoagC4xwDTZdQeJi
-	na2QO5W9NjNoXLNkdExm9h7JnkBQ38Kg/Wv6M4B+AmbKUempxFTzPPKPvONrbUPC+jkiSOMtOl2
-	MT+R9y4EjVLuhwbmZOBGjkl+1TR9qvuf7McU=
-X-Received: by 2002:a05:6000:2213:b0:493:c7aa:7cef with SMTP id ffacd0b85a97d-499ca844595mr4406823f8f.52.1794415062584;
-        Wed, 11 Nov 2026 08:37:42 -0800 (PST)
+        bh=gbBLkzczqje5q5Cdgiw240astKZC/MyEc22DQrkWanU=;
+        b=mc+LM10KYYsj4kbVtZRezV0IqetJGeJCAYasQn+fSBhhrDSxErqITMYieJOqP5FnQb
+         Fz+xIFfHe/huSpvmPRwj/+NrVR0JjG9kqopU2ZN3Anf8QDR+dMJEADdLAq8CbaETZCXd
+         ZkOg2xzRmuTAbFKSlDw++chmCD1yK1Ag0prdGMgvypxfZV8HnM7X89iZmUF5GWzJDXEM
+         VCnFmHDMe8BjOKbQdM2c1HXIGDvnzvvnnX/hqhoiH7AJywMoZlz3Wmcavgd6C5SvG2xH
+         j/UI158sKEuGcn6UJvy/295ZdioSht1445r8qK8r11cThwpcP3MrxOoayFS4y0gS7zM2
+         qiLA==
+X-Forwarded-Encrypted: i=1; AL+hErHF8d6DsjSLFXHTIfabjZUbgtOeo7qzJuNzHPXwKrSVrMHSbmGOZOFUj9HtvqrbcMVQ20I=@lists.linux.dev
+X-Gm-Message-State: APuU4Z8vXQob0XR3pPQjTWUYrLy/mrxOSmAbDsDLbgL22HY+pu9WfZ5M
+	udLhBrD8E8XruSO6wNP/sFG+wE40oxGtUt7QY9sEcU8M0qF/dnj/B6xW
+X-Gm-Gg: AYBFou1RYSCxgCCLYsQ9wC05+ZCYvYadumfgZUebNCilNfuv/50UQQGAWCk9bTgWTYi
+	v2/pOvR9Rl+oKNvZfv6ahbWFXEyJr2Js2mCOCib3yDVELVTpqWK28vS8Zq0P2ODgEly5OX+muMV
+	PvqljexXUviplNOwVIEcPhV/nwlRmxHfdF4dPrxMav3LEmDKS6EnazJ3r7OEaSuedlG5bZoqnXT
+	I/J9o9ECAMUL40XNKaZEy1IXaYRvicxcEz7Cv5VAEnMi/aJtSjuqjj6wTyaNNOpTZxZJ4rAEKHX
+	2cEZ+cZv4p8zrQ3Xp4u16vwlITMA3QinT//PEEXSrlfuhXdH9RdJROxkcxwnF9PNol3TLV0SRVT
+	VPlSyMGk33dPZR0hD5XCe3to4y9iGnuY7mPrue7GveA8fW7aT47vjhu9rZhW7GeAZ+ePx39v5Le
+	yDppGETOpGbZccfSs0leUiICw8FTu7/kl4tPAVwUk7EOqBEI8B2lrjHSLViCQnIINBI+HoCR570
+	Wdxx7qHdBUEtvfgAivLCeLmJus08oVPYijf2A9+CT8xk7oIgOYeZqKZ+jz3Ro6i+aXpoCnCz42W
+	BYIB/OuK9wsAUklngZmlJ81tSc9AxLVLU8v5M0sJgfmEBW+7ngqvfstRr7IEiF0nCduYAAbUj9F
+	yIGhVsd06vYdH
+X-Received: by 2002:a05:600c:468c:b0:4a4:fc8c:cfd9 with SMTP id 5b1f17b1804b1-4ba0939b3eamr53551675e9.25.1794415063769;
+        Wed, 11 Nov 2026 08:37:43 -0800 (PST)
 Received: from gmail.com ([2a01:e11:1403:8620:6e81:13fe:ca06:8db8])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4983600bc9asm11050119f8f.29.2026.11.11.08.37.41
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4ba08e35e44sm64559995e9.1.2026.11.11.08.37.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Nov 2026 08:37:42 -0800 (PST)
+        Wed, 11 Nov 2026 08:37:43 -0800 (PST)
 From: Paolo Pisati <p.pisati@gmail.com>
 To: Geert Uytterhoeven <geert@linux-m68k.org>,
 	Damien Le Moal <dlemoal@kernel.org>,
@@ -88,9 +88,9 @@ Cc: linux-m68k@lists.linux-m68k.org,
 	linux-kernel@vger.kernel.org,
 	Lee Jones <lee@kernel.org>,
 	mfd@lists.linux.dev
-Subject: [PATCH v1 5/7] zorro: warp mfd: expose the voltage and temperature sensors
-Date: Wed, 11 Nov 2026 17:37:32 +0100
-Message-ID: <20261111163735.227286-6-p.pisati@gmail.com>
+Subject: [PATCH v1 6/7] zorro: warp mfd: expose the fan duty cycle
+Date: Wed, 11 Nov 2026 17:37:33 +0100
+Message-ID: <20261111163735.227286-7-p.pisati@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261111163735.227286-1-p.pisati@gmail.com>
 References: <20261111163735.227286-1-p.pisati@gmail.com>
@@ -105,178 +105,50 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The diagnostic frame carries the 5 V rail, the backup battery and three
-temperatures - the 68060, its NTC and the ARM - as IEEE-754 binary32.
-
-Decode the bit pattern with integer arithmetic into milli-units.
+The diagnostic frame also reports the fan drive as a percentage.
+Expose it as fanspeedpercent.
 
 Signed-off-by: Paolo Pisati <p.pisati@gmail.com>
 ---
- .../ABI/testing/sysfs-driver-warp-mfd         | 19 +++++
- drivers/zorro/warp-mfd.c                      | 80 +++++++++++++++++++
- drivers/zorro/warp-mfd.h                      |  4 +
- 3 files changed, 103 insertions(+)
+ Documentation/ABI/testing/sysfs-driver-warp-mfd | 7 +++++++
+ drivers/zorro/warp-mfd.c                        | 2 ++
+ 2 files changed, 9 insertions(+)
 
 diff --git a/Documentation/ABI/testing/sysfs-driver-warp-mfd b/Documentation/ABI/testing/sysfs-driver-warp-mfd
-index 8996d1961b96..fec712b8b9b0 100644
+index fec712b8b9b0..a8213affb153 100644
 --- a/Documentation/ABI/testing/sysfs-driver-warp-mfd
 +++ b/Documentation/ABI/testing/sysfs-driver-warp-mfd
-@@ -14,3 +14,22 @@ Contact:	Paolo Pisati <p.pisati@gmail.com>
+@@ -33,3 +33,10 @@ Contact:	Paolo Pisati <p.pisati@gmail.com>
  Description:
- 		(RO) Firmware and hardware version, as four hexadecimal digits:
- 		an fmwver of 2027 is firmware release 20.27.
+ 		(RO) Voltages in volts, with two decimals: vbatt is the backup
+ 		battery, vcc5v the 5 V rail.
 +
-+What:		/sys/bus/zorro/devices/zorro<N>/t60int
-+What:		/sys/bus/zorro/devices/zorro<N>/t60ext
-+What:		/sys/bus/zorro/devices/zorro<N>/tarm
++What:		/sys/bus/zorro/devices/zorro<N>/fanspeedpercent
 +Date:		November 2026
 +KernelVersion:	7.5
 +Contact:	Paolo Pisati <p.pisati@gmail.com>
 +Description:
-+		(RO) Temperatures in degrees Celsius, with one decimal: t60int
-+		is the 68060, t60ext its NTC, tarm the ARM co-processor.
-+
-+What:		/sys/bus/zorro/devices/zorro<N>/vbatt
-+What:		/sys/bus/zorro/devices/zorro<N>/vcc5v
-+Date:		November 2026
-+KernelVersion:	7.5
-+Contact:	Paolo Pisati <p.pisati@gmail.com>
-+Description:
-+		(RO) Voltages in volts, with two decimals: vbatt is the backup
-+		battery, vcc5v the 5 V rail.
++		(RO) Fan drive, as a percentage.
 diff --git a/drivers/zorro/warp-mfd.c b/drivers/zorro/warp-mfd.c
-index 61866f678b61..d407c786d44b 100644
+index d407c786d44b..a438faeaa232 100644
 --- a/drivers/zorro/warp-mfd.c
 +++ b/drivers/zorro/warp-mfd.c
-@@ -15,6 +15,7 @@
-  */
+@@ -303,6 +303,7 @@ out:									\
+ static DEVICE_ATTR_RO(name)
  
- #include <linux/array_size.h>
-+#include <linux/bits.h>
- #include <linux/completion.h>
- #include <linux/device.h>
- #include <linux/init.h>
-@@ -22,6 +23,7 @@
- #include <linux/io.h>
- #include <linux/ioport.h>
- #include <linux/jiffies.h>
-+#include <linux/limits.h>
- #include <linux/module.h>
- #include <linux/mutex.h>
- #include <linux/slab.h>
-@@ -190,6 +192,73 @@ static int warp_get_status(struct warp_mfd *warp, union warp_reply *rpl)
- 	return 0;
- }
- 
-+/*
-+ * The board reports its sensors as IEEE-754 binary32: decode the
-+ * bit pattern by hand and carry the result as milli-units.
-+ */
-+static int warp_f32_to_milli(u32 bits)
-+{
-+	int exp = (bits >> 23) & 0xff;
-+	u32 frac = bits & GENMASK(22, 0);
-+	int shift = exp - 127 - 23;
-+	s64 v;
-+
-+	/*
-+	 * inf, NaN, zero and subnormals all round to nothing useful here, and
-+	 * so does anything of 2^23 or more: that is already past what an int
-+	 * holds in milli-units, let alone what a sensor reports.
-+	 */
-+	if (exp == 0xff || exp == 0 || shift >= 0)
-+		return 0;
-+	if (shift <= -63)		/* smaller than a milli-unit */
-+		return 0;
-+
-+	v = ((s64)(frac | BIT(23)) * 1000) >> -shift;
-+	if (v > INT_MAX)		/* a shift of -1 or -2 can still overflow */
-+		return 0;
-+
-+	return (bits & BIT(31)) ? -(int)v : (int)v;
-+}
-+
-+/* Render milli-units with @dec decimal places, rounded, as WarpDiag shows them. */
-+static int warp_print_milli(char *buf, int milli, unsigned int dec)
-+{
-+	unsigned int scale = (dec == 1) ? 100 : 10;
-+	unsigned int units = (dec == 1) ? 10 : 100;
-+	const char *sign = "";
-+	unsigned int v;
-+
-+	if (milli < 0) {
-+		sign = "-";
-+		milli = -milli;
-+	}
-+	v = ((unsigned int)milli + scale / 2) / scale;
-+
-+	return sysfs_emit(buf, "%s%u.%0*u\n", sign, v / units, dec, v % units);
-+}
-+
-+#define warp_config_sensor_attr(name, field, dec)			\
-+static ssize_t name##_show(struct device *dev,				\
-+			   struct device_attribute *attr, char *buf)	\
-+{									\
-+	int ret;							\
-+	struct warp_mfd *warp = dev_get_drvdata(dev);			\
-+	union warp_reply *rpl;						\
-+									\
-+	rpl = kmalloc_obj(*rpl);					\
-+	if (!rpl)							\
-+		return -ENOMEM;						\
-+	ret = warp_get_status(warp, rpl);				\
-+	if (ret)							\
-+		goto out;						\
-+	ret = warp_print_milli(buf,					\
-+			       warp_f32_to_milli(rpl->diag.field), dec);\
-+out:									\
-+	kfree(rpl);							\
-+	return ret;							\
-+}									\
-+static DEVICE_ATTR_RO(name)
-+
- #define warp_config_uint_attr(name, field, format_string)		\
- static ssize_t name##_show(struct device *dev,				\
- 			   struct device_attribute *attr, char *buf)	\
-@@ -236,12 +305,23 @@ static DEVICE_ATTR_RO(name)
  warp_config_string_attr(boardname, board_name);
++warp_config_uint_attr(fanspeedpercent, fan_percent, "%u");
  warp_config_uint_attr(fmwver, fmw_ver, "%04X");
  warp_config_uint_attr(hwver, hw_ver, "%04X");
-+/* board sensors: volts to 2 decimals, temperatures to 1, as WarpDiag shows them */
-+warp_config_sensor_attr(t60int, t60_internal, 1);
-+warp_config_sensor_attr(t60ext, t60_ntc, 1);
-+warp_config_sensor_attr(tarm, t_arm, 1);
-+warp_config_sensor_attr(vbatt, vbatt, 2);
-+warp_config_sensor_attr(vcc5v, vcc5v, 2);
- 
+ /* board sensors: volts to 2 decimals, temperatures to 1, as WarpDiag shows them */
+@@ -315,6 +316,7 @@ warp_config_sensor_attr(vcc5v, vcc5v, 2);
  static struct attribute *warp_attrs[] = {
  	/* RO attr */
  	&dev_attr_boardname.attr,
++	&dev_attr_fanspeedpercent.attr,
  	&dev_attr_fmwver.attr,
  	&dev_attr_hwver.attr,
-+	&dev_attr_t60int.attr,
-+	&dev_attr_t60ext.attr,
-+	&dev_attr_tarm.attr,
-+	&dev_attr_vbatt.attr,
-+	&dev_attr_vcc5v.attr,
- 	NULL
- };
- 
-diff --git a/drivers/zorro/warp-mfd.h b/drivers/zorro/warp-mfd.h
-index 366848545ea4..4fa09fa972d4 100644
---- a/drivers/zorro/warp-mfd.h
-+++ b/drivers/zorro/warp-mfd.h
-@@ -84,6 +84,10 @@ struct warp_rpl_hdr {
-  * Reply to WARP_CMD_GET_DIAG. Fields this driver does not expose are kept
-  * so the ones after them land at the right offset.
-  *
-+ * The board reports its sensors as IEEE-754 binary32. They are kept as raw
-+ * bit patterns because the kernel cannot use the FPU; warp_f32_to_milli()
-+ * decodes them with integer arithmetic.
-+ *
-  * turbo_level and tz_corr_secs are reported by the firmware but no longer
-  * maintained by it; treat their contents as stale.
-  */
+ 	&dev_attr_t60int.attr,
 -- 
 2.43.0
 
