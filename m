@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794428935;
-	b=wQd3U3OIO7iQSilfszlCTi1oyEWRcJo2vUb4A2ryoP2FbC/NPGKXSJBZaJnarM/KMrWf
-	 ibRznFOiq8hVwYR33V6V8udwVr0FyHr0Azivykfzk1S3seksiXpzF3I6i8XU++gwuiPmb
-	 1iK1ezUFb6l/6vxcQLhVbW/TnvvauJjecaYAgrvOaGvM8ZuAu6YR/ixKcz8k7pVG4VdYE
-	 O/y22Y8UrshmnC9VCG07IsXyy1LSiNNK3FRg9oYgUg4i5Ez6K6QpjH+MuKcVl0OOQmRYv
-	 wHpZ+CLHxdvS+W4PggjB5zj1vTOk6iAZVf9P+n9xOdZPZJIPCXP4/nsDINjsINhR8iQ==
+	t=1794429144;
+	b=y1EeB26g2GUbNnXnQGqeW16QaOn+0tpaLuFCDpw51KuESP4aBFI9jtkxg153eEGe6mFR
+	 Of05q28XWafGG4e9iA4jGwKJGktFby0KFnDL66Wu9WDM5YKdQO0o0fLa6ZGCc35mKRpyY
+	 aAD4IvYmB6i9ptSsBnmJz94JKSBL7wt8IENvxfTfSZhkiva851LYYkJwp20fCD+0WIKmW
+	 kGMnec/v9COnjhSKxUFaLuV+4ls5Tdz+KeVR32AqQDJiUjmNCNblmzFY+8XteezZgkggj
+	 KTlOpslY7ORbjuc5KF10iyTYaAQiRJhftiDG+it3A6zHHlj1mtNoV0PJODHjUbyHeEA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794428935;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794429144;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=klaKuL1LMOufzcWMnZcm2ybwpbokrsN8hGs+uyM4atE=;
-	b=Xsjih10I/0eIA22nVPzUqEXoc5R2Y4r9B+6FwyGacJ9FsB5u+Fi0C4YVVqMnDYfuBFnP
-	 jPABc1v2nJLTTF7YTbNUdbOh/m1AsxkYvkZ73bP6NpbfIRmYfHg+2ExLQETs7fQufPkW+
-	 /Q8V7Hzi5QrJUqE31rliyn1XB/Fv7IMb3bMpqHvdoATDB19dbHnJ3tGM3nXIOiZn6BAmw
-	 OzYvty3KO8IUaSH34qcLngCfv3Zz1fJuaZBFbYoQeCNsermOb2blwQ9ILg5jLY8whT0sj
-	 io1yvfxlrRFs4+2BStFTmDbF4AqIQtNF4vN4JpCpXo4LjwWVkz6AtmK6VQjWnAWkPPA==
+	bh=1UAUW0BJXze7Lcn557Me7iFrvKj0hHN+9lrL8f4li+E=;
+	b=cni6gStKHfGCf40P+iCqJ9ERcARBhqcA5w4JBClA4XW19fmszLlguqfO6Od2Dgf8SG4b
+	 4I6O7mRBUVa/T+c2dnruEFnDQ3x/JrYcJ5Rq4GKwwUQ8Ktg5BKclSSyqxhoZWb5PRZ5lC
+	 qx3RJAkh+G7/1gbmA+BogFDItXawY0YjXmhIoejksHoz7mmSp7/4GZf7ttlFw6O1owI7o
+	 +S8+jYAiCgbgi/FkPNmr4mZEFyfOOCw3rLAVEKGGiI4bep0mQvdcvBgydvl5GN8Vp9woF
+	 XiXTxnJlKZepGPRF9rv+k8tYCF820JaU0xIIf5DZ9Qz8gkGTrfEy7C4FEjnPLQfm/XQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mtw+Vzn4;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GVsrsxV6;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D21DA606A31C
-	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 20:28:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C69DE60A3809;
+	Wed, 11 Nov 2026 20:32:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mtw+Vzn4
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 498261F00A05;
-	Wed, 11 Nov 2026 20:28:55 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GVsrsxV6
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0C9DA1F00A05;
+	Wed, 11 Nov 2026 20:32:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794428935;
-	bh=klaKuL1LMOufzcWMnZcm2ybwpbokrsN8hGs+uyM4atE=;
+	s=k20260515; t=1794429144;
+	bh=1UAUW0BJXze7Lcn557Me7iFrvKj0hHN+9lrL8f4li+E=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=mtw+Vzn4q6kbPGlnfHL+yYpGwthKT0nBOA3/IOJRdAuMuzJ5XbKdeJniNsr7dZMLL
-	 TQfZgOlqwzsFZhJR4ln2houH45mtFkpNccirLd0FgIvG9f8D+L/ZxJqpwReKanmpWw
-	 aSkwmIXarCi1nAdVuOI6KSLhpLA6KsKfWhJvUX0UqzSn/6zSAZrBZ23CNOvv8gZ9oh
-	 EwxjEAP6k889XD/YalAXxSimeByBjVneXVg7AAAvIdGjPKc38TEflZ7LqL4/I3A3B8
-	 JJpD3QDn1EF5Db8eF9CVQV1LbGIG3Dol10ghc+3wT0dsfq3zfsqcsKxRN36BNt9meX
-	 KZBmb1IdZMKlg==
-Message-ID: <sashiko-outbox-209666@kernel.org>
+	b=GVsrsxV6kAsUZTOD7QjM9kpoHabFQocdm67knNeiiHnGSA8EI0QzIMK8PHmWwZfpZ
+	 EltiSWa+3J8L8ouH+DrT/n7iismZSTBf60IivVwgAsror9XAHHRbCwq9Yh0g1kKxA1
+	 isAFVdKgCck+L4ooa4BYfO94k1NypJaYPcE0vX/KI2LnzI6AzwL6KJBxGhCpB8abwH
+	 oHRYa4Bqt5p5PNRnZ5eMxjM4b+bvScK0hdKEO/6gDR5Q3w2b4UMGqYY10UWk4H2aIl
+	 JoS9gfN4Etx/5hNjSdG7APnTkM9V+PfxV3M62PegP7FgvpEPS3KKu+z/rMHyMammxN
+	 Rbl/kDJckKipQ==
+Message-ID: <sashiko-outbox-209668@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 12/12] arm64: dts: hisilicon: Remove unsupported SBSA
- UART "reg-io-width"
+Subject: Re: [PATCH 11/12] arm64: dts: hisilicon: Remove obsolete HiKey970
+ PMIC GPIO property
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?Um9iIEhlcnJpbmcgKEFybSk=?= <robh@kernel.org>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261111-dtbs-hisi-v1-12-6c9f5f80716c@kernel.org>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, conor+dt@kernel.org, lee@kernel.org
+In-Reply-To: <20261111-dtbs-hisi-v1-11-6c9f5f80716c@kernel.org>
 References: <20261111-dtbs-hisi-v1-0-6c9f5f80716c@kernel.org>
- <20261111-dtbs-hisi-v1-12-6c9f5f80716c@kernel.org>
+ <20261111-dtbs-hisi-v1-11-6c9f5f80716c@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 11 Nov 2026 20:28:54 +0000
+Date: Wed, 11 Nov 2026 20:32:23 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,14 +61,43 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> The SBSA UART driver uses 4 byte access width by default and
-> "reg-io-width" is not supported in the binding, so drop it.
->=20
-> Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
+Thank you for your contribution! Sashiko AI review found 1 potential
+issue to consider:
+- [Medium] arm64: dts: hisilicon: pmic@0 drops gpios without adding
+  interrupts
+--
 
-Sashiko has reviewed this patch and found no issues.
+commit 7f4bb8b7b2bebe372f2351a8615fe76fad7f61e6
+Author: Rob Herring (Arm) <robh@kernel.org>
+
+arm64: dts: hisilicon: Remove obsolete HiKey970 PMIC GPIO property
+
+This commit removes the gpios property from the pmic@0 node in the HiKey970
+PMIC device tree.
+
+> diff --git a/arch/arm64/boot/dts/hisilicon/hikey970-pmic.dtsi b/arch/arm6=
+4/boot/dts/hisilicon/hikey970-pmic.dtsi
+> index 299c4ab630e85..12f1f972ffde6 100644
+> --- a/arch/arm64/boot/dts/hisilicon/hikey970-pmic.dtsi
+> +++ b/arch/arm64/boot/dts/hisilicon/hikey970-pmic.dtsi
+> @@ -21,7 +21,6 @@ pmic: pmic@0 {
+> =20
+>  			#interrupt-cells =3D <2>;
+>  			interrupt-controller;
+> -			gpios =3D <&gpio28 0 0>;
+
+[Severity: Medium]
+Should this replace gpios with interrupt-parent =3D <&gpio28>; and
+interrupts =3D <0 0>; instead of just dropping it?
+
+Neither hikey970-pmic.dtsi nor hi3670-hikey970.dts defines interrupt-parent
+or interrupts on pmic@0, so removing gpios without adding them drops the
+GPIO28 line 0 interrupt connection altogether and leaves
+hi6421v600_irq_probe() failing in platform_get_irq() with -ENXIO, matching
+how f81d99218257 ("staging: hi6421-spmi-pmic: rename GPIO IRQ OF node")
+updated Documentation/devicetree/bindings/mfd/hisilicon,hi6421-spmi-pmic.ya=
+ml.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111-dtbs-hisi-=
-v1-0-6c9f5f80716c@kernel.org?part=3D12
-
+v1-0-6c9f5f80716c@kernel.org?part=3D11
