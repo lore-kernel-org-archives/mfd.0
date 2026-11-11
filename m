@@ -1,56 +1,66 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794395499;
-	b=OKVTrgQunHSJlo8yF6VBfI5RiP7oOvUv9ld98jYpwEuc0JMW6+4dvWdbO7R2/K7ts9dS
-	 1Pgf/7UfuRlpiJjz6NHaLIYAWE/bB7cClFF1cXVlRJWNFglNL8FX6TIoFVEFwhJmUBBLO
-	 uX/FWr9kyHnLrnpDkpRlFWzouSw28sN6IHnC1Z+Dz/EpRfIcvmmdQqIJw8TW2EAGq9Wcp
-	 qSD6MK4Q1M2nf4nQ5wmxp7cGsfAetvKYiQZXJ6p1jDjDLIUjoV4Hwe1Fh1I7mDHTou/KF
-	 bM1/qHixLFDVpq8HII3Ympo9/Ggq3zYO582PjewyvIg/QrdF75N9GzuwdVGOzyqKZ+w==
+	t=1794396131;
+	b=kOYJByP5Fug18XZqtQ9Sm8mDJAokDYIkvOXAeHocODNvvTnlSWBKaSDXjxrZJUENrMQz
+	 cwY1JWD0HIpm39ae0ehs+kBLg3iYmDDnujhmBp8NerbthygAGNRyjmXy8mQVANa1eGvNq
+	 yRAOcUBVnYP4qn9Dz+y/miqGv9psA7wLlC1saS4RSo+PYJelFpLmzToKy/VmF7thC2Z8N
+	 XUrCisEYo8tdkq7yTCmJll82XWImoYtLSFB0yC2IMP92igYeVR6BdOalNsn5RCKDot/bv
+	 Mt6u0sRXGOPuR1Jh1MOAzBtn1zgvKJhofBsBoOXqBNbpfUIUkoAcCDUd/jSJSXl915A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794395499;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=VWlIFnl/R7N4MuBCwI627lUj+HA5ZNpPpu+Lx6I35RE=;
-	b=EovOM/a/79yWAknIriZ2sDHXg6IjibE0N4lOl6PWPFfhVjmHmCeP70CMkBq+dkWG2IVb
-	 nuFRABUye7lMcWjR8ja6V6nqbKCo0TrmluJyWuXIIvlUku9MPNL5yrVoS8wh2GKWbV1zk
-	 cKf46WU4/u3c6MmhTWD8uiGHMqW78z5DDRPvsFpnLkgod2ufNnEJ9yelGZylMx1G0ePRV
-	 60higC7oK7bBajQ5BD25qqy1/s9d+ZlKPdbzgg66wHpfTm6ybPIqvHR1wpxxv9WvhvNIi
-	 qwL3wZi9xKXtmyVhbQKRB/OlL87eLcdy9kUsgqKvhqPvYfXNNqrB2i+FVbM8uSB83Gw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794396131;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=q3uvYkOZjdrvPs2HRdExTdIgvGA4FrRTNjbjAdqeYns=;
+	b=NmoDj7BjrWdXr1Um9QUVwXn+CVLaNe85wF0zGK/poFzT8iZkdrbD9WSUGwvV6IE/DA/Z
+	 ZXobxm/P6RrmBFph0uSHtksl4c+txed8J62/GFdOGMTGSPzCmJA7hkLOn5iplQg8gb1x4
+	 AmRECBSL9rcRwSzvHe+I7up4dzpnY5Ne6Wchr5oUFipam6YIY486FwUtWuWBQKkunaAtj
+	 FtSJthwW0FCiFAGAThp1iQFOV5XoULwmop+7eLBRN7cH97reXv8o2Zbrp2RSAYw6+Ij1U
+	 b+11fTokLrLV71qbmqHqy8YM/393khI8QeGdiYiWJFjYSCtfAZGabtfH7Cs8FZpHh5Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IV6St29e;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=l5iahbXV;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14F45606A882;
-	Wed, 11 Nov 2026 11:11:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9DEE4606A324;
+	Wed, 11 Nov 2026 11:22:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IV6St29e
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A0D111F00A0B;
-	Wed, 11 Nov 2026 11:11:38 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=l5iahbXV
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BF76F1F00A05;
+	Wed, 11 Nov 2026 11:22:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794395498;
-	bh=VWlIFnl/R7N4MuBCwI627lUj+HA5ZNpPpu+Lx6I35RE=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=IV6St29eWg2cWn/+M6K96XAu8kkMVS+pYfnN0lqCWYkLonF1jfxBNPHl1Tf3cZjqm
-	 1O96z/N9tuf0se9fbpoyBBSIJhESzFcTFyjW4jnq9wGGE4qB1vsU7Oubem54icQjIp
-	 /4I0uUDmc9RjoBkda/RdC5361zg8jRy3f8PAK2vZmK5mWCBF81hGNZl4SGn5zyowJP
-	 v8nEpFLodfwQvMaYyumi1ul0kef3Fst5K66Dsb3HpKmtAuXzkfhc1owXHSTKsl7WSW
-	 6/Bn97n1CAm48jz7rmKTmJy1X8ToyZOCg5oUVnDnHBkpryl2DQSI7yOhOUrvzT2fkK
-	 ELWBbmH5OBnUQ==
-Message-ID: <sashiko-outbox-208857@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v4 6/7] clk: bcm: Add BCMBCA PMB clocks
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Linus Walleij" <linusw@kernel.org>
-Cc: mfd@lists.linux.dev, linux-hwmon@vger.kernel.org, lee@kernel.org
-In-Reply-To: <20261111-xg6846b-bcmbca-xrdp-reset-v4-6-17035a5e8ad2@kernel.org>
-References: <20261111-xg6846b-bcmbca-xrdp-reset-v4-0-17035a5e8ad2@kernel.org>
- <20261111-xg6846b-bcmbca-xrdp-reset-v4-6-17035a5e8ad2@kernel.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 11 Nov 2026 11:11:38 +0000
+	s=k20260515; t=1794396131;
+	bh=q3uvYkOZjdrvPs2HRdExTdIgvGA4FrRTNjbjAdqeYns=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=l5iahbXVODhXP5BYaVz3lVdaFKAxPbIAV3hq96sXjhxKI9HOoR2/3E6F8yc6p2lnn
+	 WYOV4BO44d1ftIV1pYZaZ3P7x+X/K2hOfbck3hrxOLF7+DjUwkP1dkVZwOTp5bdgG/
+	 0sA2Mynj4aVVQBX02rcqTENjrjW6h1cFMupMrd/VGuNMR4fGbbJcQi3AXAHtjHVf1/
+	 R1xIHOd1CRUUf0iqhEH6Io8GPTn2iXxZ6MYFs44afGFgnuAJUfVFUAkbbw8wWdoxMh
+	 HWHJFOAMcvVoy7TPU9c2M72++kukupwo9oRI6P9ZjxkO/HHrCoWN2dajaitGrzKiKw
+	 BW28RKsWw6/CQ==
+Date: Wed, 11 Nov 2026 12:22:08 +0100
+From: Lorenzo Bianconi <lorenzo@kernel.org>
+To: John Crispin <john@phrozen.org>
+Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Ahmed Naseef <naseefkm@gmail.com>,
+	Benjamin Larsson <benjamin.larsson@genexis.eu>,
+	Christian Marangi <ansuelsmth@gmail.com>,
+	devicetree@vger.kernel.org, lei.dong@airoha.com,
+	Linqi.zhang@airoha.com, linux-gpio@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-mediatek@lists.infradead.org,
+	mfd@lists.linux.dev,
+	Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+	Rajeev.kumar@airoha.com, upstream@airoha.com, Weifeng.xu@airoha.com,
+	zhengping.zhang@airoha.com
+Subject: Re: [PATCH 1/7] pinctrl: airoha: make gpio register layout per SoC
+Message-ID: <avRP4MTHKRkP00oh@lore-desk>
+References: <20261110173941.301478-1-john@phrozen.org>
+ <20261110173941.301478-2-john@phrozen.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,19 +69,234 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="WqyvA75ADRGpy4XY"
+Content-Disposition: inline
+In-Reply-To: <20261110173941.301478-2-john@phrozen.org>
 
-> Add a BCM6846 clock provider for the Power Management Bus (PMB) MFD
-> cell. Expose six outputs from each of the RDP and BIU PLLs, the Runner
-> clock divided from RDP PLL channel 1, the crystal output, PVTMON and
-> block-zone clock gates.
+--WqyvA75ADRGpy4XY
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+> The GPIO register layout is fixed to 64 pins in two 32 pin banks and
+> four 16 pin direction banks. Every SoC uses the single static
+> airoha_gpiochip_regs and the compile time AIROHA_NUM_PINS.
 >=20
-> PVTMON and zone clocks provide gate control only.
+> Move the layout into the match data. The gpiochip register table
+> carries its own pin count, and the five existing SoCs point at the
+> shared 64 pin table.
 >=20
-> Signed-off-by: Linus Walleij <linusw@kernel.org>
+> No functional change for the existing SoCs.
+>=20
+> Signed-off-by: John Crispin <john@phrozen.org>
 
-Sashiko has reviewed this patch and found no issues.
+Acked-by: Lorenzo Bianconi <lorenzo@kernel.org>
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111-xg6846b-bc=
-mbca-xrdp-reset-v4-0-17035a5e8ad2@kernel.org?part=3D6
+> ---
+>  drivers/pinctrl/airoha/airoha-common.h  |  6 +++++-
+>  drivers/pinctrl/airoha/pinctrl-airoha.c | 14 ++++++++------
+>  drivers/pinctrl/airoha/pinctrl-an7563.c |  1 +
+>  drivers/pinctrl/airoha/pinctrl-an7581.c |  1 +
+>  drivers/pinctrl/airoha/pinctrl-an7583.c |  1 +
+>  drivers/pinctrl/airoha/pinctrl-en7523.c |  1 +
+>  drivers/pinctrl/airoha/pinctrl-en7528.c |  1 +
+>  7 files changed, 18 insertions(+), 7 deletions(-)
+>=20
+> diff --git a/drivers/pinctrl/airoha/airoha-common.h b/drivers/pinctrl/air=
+oha/airoha-common.h
+> index 16f7abcdfb83..850e733db15a 100644
+> --- a/drivers/pinctrl/airoha/airoha-common.h
+> +++ b/drivers/pinctrl/airoha/airoha-common.h
+> @@ -89,6 +89,7 @@ struct airoha_pinctrl_conf {
+>  };
+> =20
+>  struct airoha_gpiochip_regs {
+> +	unsigned int ngpio;
+>  	/* gpio */
+>  	const u32 *data;
+>  	const u32 *dir;
+> @@ -99,6 +100,8 @@ struct airoha_gpiochip_regs {
+>  	const u32 *edge;
+>  };
+> =20
+> +extern const struct airoha_gpiochip_regs airoha_gpiochip_regs_64;
+> +
+>  struct airoha_pinctrl_confs_info {
+>  	const struct airoha_pinctrl_conf *confs;
+>  	unsigned int num_confs;
+> @@ -126,7 +129,7 @@ struct airoha_pinctrl {
+>  	struct regmap *regmap;
+> =20
+>  	struct gpio_chip gpiochip;
+> -	struct airoha_gpiochip_regs *gpio_regs;
+> +	const struct airoha_gpiochip_regs *gpio_regs;
+>  	unsigned int num_irq_pins;
+>  };
+> =20
+> @@ -134,6 +137,7 @@ struct airoha_pinctrl_match_data {
+>  	const char *chip_scu_compatible;
+>  	const char *pinctrl_name;
+>  	struct module *pinctrl_owner;
+> +	const struct airoha_gpiochip_regs *gpio_regs;
+>  	const struct pinctrl_pin_desc *pins;
+>  	const unsigned int num_pins;
+>  	const struct pingroup *grps;
+> diff --git a/drivers/pinctrl/airoha/pinctrl-airoha.c b/drivers/pinctrl/ai=
+roha/pinctrl-airoha.c
+> index 52a768c859b7..b50108826d8d 100644
+> --- a/drivers/pinctrl/airoha/pinctrl-airoha.c
+> +++ b/drivers/pinctrl/airoha/pinctrl-airoha.c
+> @@ -94,7 +94,8 @@ static const u32 irq_edge_regs[] =3D {
+>  	REG_GPIO_INT_EDGE3
+>  };
+> =20
+> -static struct airoha_gpiochip_regs airoha_gpiochip_regs =3D {
+> +const struct airoha_gpiochip_regs airoha_gpiochip_regs_64 =3D {
+> +	.ngpio =3D AIROHA_NUM_PINS,
+>  	.data =3D gpio_data_regs,
+>  	.dir =3D gpio_dir_regs,
+>  	.out =3D gpio_out_regs,
+> @@ -102,6 +103,7 @@ static struct airoha_gpiochip_regs airoha_gpiochip_re=
+gs =3D {
+>  	.level =3D irq_level_regs,
+>  	.edge =3D irq_edge_regs,
+>  };
+> +EXPORT_SYMBOL_GPL(airoha_gpiochip_regs_64);
+> =20
+>  static int airoha_convert_pin_to_reg_offset(struct pinctrl_dev *pctrl_de=
+v,
+>  					    struct pinctrl_gpio_range *range,
+> @@ -207,7 +209,7 @@ static void airoha_irq_unmask(struct irq_data *data)
+>  {
+>  	struct gpio_chip *gc =3D irq_data_get_irq_chip_data(data);
+>  	struct airoha_pinctrl *pinctrl =3D gpiochip_get_data(gc);
+> -	struct airoha_gpiochip_regs *gpio_regs =3D pinctrl->gpio_regs;
+> +	const struct airoha_gpiochip_regs *gpio_regs =3D pinctrl->gpio_regs;
+>  	u8 offset =3D data->hwirq % AIROHA_REG_GPIOCTRL_NUM_PIN;
+>  	u8 index =3D data->hwirq / AIROHA_REG_GPIOCTRL_NUM_PIN;
+>  	u32 mask =3D GENMASK(2 * offset + 1, 2 * offset);
+> @@ -244,7 +246,7 @@ static void airoha_irq_mask(struct irq_data *data)
+>  {
+>  	struct gpio_chip *gc =3D irq_data_get_irq_chip_data(data);
+>  	struct airoha_pinctrl *pinctrl =3D gpiochip_get_data(gc);
+> -	struct airoha_gpiochip_regs *gpio_regs =3D pinctrl->gpio_regs;
+> +	const struct airoha_gpiochip_regs *gpio_regs =3D pinctrl->gpio_regs;
+>  	u8 offset =3D data->hwirq % AIROHA_REG_GPIOCTRL_NUM_PIN;
+>  	u8 index =3D data->hwirq / AIROHA_REG_GPIOCTRL_NUM_PIN;
+>  	u32 mask =3D GENMASK(2 * offset + 1, 2 * offset);
+> @@ -261,7 +263,7 @@ static void airoha_irq_ack(struct irq_data *data)
+>  {
+>  	struct gpio_chip *gc =3D irq_data_get_irq_chip_data(data);
+>  	struct airoha_pinctrl *pinctrl =3D gpiochip_get_data(gc);
+> -	struct airoha_gpiochip_regs *gpio_regs =3D pinctrl->gpio_regs;
+> +	const struct airoha_gpiochip_regs *gpio_regs =3D pinctrl->gpio_regs;
+>  	u8 offset =3D data->hwirq % AIROHA_PIN_BANK_SIZE;
+>  	u8 index =3D data->hwirq / AIROHA_PIN_BANK_SIZE;
+> =20
+> @@ -379,7 +381,7 @@ static int airoha_pinctrl_add_gpiochip(struct airoha_=
+pinctrl *pinctrl,
+>  	gc->set =3D airoha_gpio_set;
+>  	gc->get =3D airoha_gpio_get;
+>  	gc->base =3D -1;
+> -	gc->ngpio =3D AIROHA_NUM_PINS;
+> +	gc->ngpio =3D pinctrl->gpio_regs->ngpio;
+> =20
+>  	girq->default_type =3D IRQ_TYPE_NONE;
+>  	girq->handler =3D handle_bad_irq;
+> @@ -831,7 +833,7 @@ int airoha_pinctrl_probe(struct platform_device *pdev)
+>  	pinctrl->desc.pins =3D data->pins;
+>  	pinctrl->desc.npins =3D data->num_pins;
+> =20
+> -	pinctrl->gpio_regs =3D &airoha_gpiochip_regs;
+> +	pinctrl->gpio_regs =3D data->gpio_regs;
+> =20
+>  	err =3D devm_pinctrl_register_and_init(dev, &pinctrl->desc,
+>  					     pinctrl, &pinctrl->ctrl);
+> diff --git a/drivers/pinctrl/airoha/pinctrl-an7563.c b/drivers/pinctrl/ai=
+roha/pinctrl-an7563.c
+> index f011c6c9ccce..6a2a307807e3 100644
+> --- a/drivers/pinctrl/airoha/pinctrl-an7563.c
+> +++ b/drivers/pinctrl/airoha/pinctrl-an7563.c
+> @@ -1063,6 +1063,7 @@ static const struct airoha_pinctrl_match_data pinct=
+rl_match_data =3D {
+>  	.chip_scu_compatible =3D "airoha,en7581-chip-scu",
+>  	.pinctrl_name =3D KBUILD_MODNAME,
+>  	.pinctrl_owner =3D THIS_MODULE,
+> +	.gpio_regs =3D &airoha_gpiochip_regs_64,
+>  	.pins =3D pinctrl_pins,
+>  	.num_pins =3D ARRAY_SIZE(pinctrl_pins),
+>  	.grps =3D pinctrl_groups,
+> diff --git a/drivers/pinctrl/airoha/pinctrl-an7581.c b/drivers/pinctrl/ai=
+roha/pinctrl-an7581.c
+> index bfb777594811..6bec1d44b8a0 100644
+> --- a/drivers/pinctrl/airoha/pinctrl-an7581.c
+> +++ b/drivers/pinctrl/airoha/pinctrl-an7581.c
+> @@ -1435,6 +1435,7 @@ static const struct airoha_pinctrl_match_data pinct=
+rl_match_data =3D {
+>  	.chip_scu_compatible =3D "airoha,en7581-chip-scu",
+>  	.pinctrl_name =3D KBUILD_MODNAME,
+>  	.pinctrl_owner =3D THIS_MODULE,
+> +	.gpio_regs =3D &airoha_gpiochip_regs_64,
+>  	.pins =3D pinctrl_pins,
+>  	.num_pins =3D ARRAY_SIZE(pinctrl_pins),
+>  	.grps =3D pinctrl_groups,
+> diff --git a/drivers/pinctrl/airoha/pinctrl-an7583.c b/drivers/pinctrl/ai=
+roha/pinctrl-an7583.c
+> index 1cd0f442ddc1..2689bbd9ebba 100644
+> --- a/drivers/pinctrl/airoha/pinctrl-an7583.c
+> +++ b/drivers/pinctrl/airoha/pinctrl-an7583.c
+> @@ -1465,6 +1465,7 @@ static const struct airoha_pinctrl_match_data pinct=
+rl_match_data =3D {
+>  	.chip_scu_compatible =3D "airoha,en7581-chip-scu",
+>  	.pinctrl_name =3D KBUILD_MODNAME,
+>  	.pinctrl_owner =3D THIS_MODULE,
+> +	.gpio_regs =3D &airoha_gpiochip_regs_64,
+>  	.pins =3D pinctrl_pins,
+>  	.num_pins =3D ARRAY_SIZE(pinctrl_pins),
+>  	.grps =3D pinctrl_groups,
+> diff --git a/drivers/pinctrl/airoha/pinctrl-en7523.c b/drivers/pinctrl/ai=
+roha/pinctrl-en7523.c
+> index b0c5e60f0aeb..1589acef683f 100644
+> --- a/drivers/pinctrl/airoha/pinctrl-en7523.c
+> +++ b/drivers/pinctrl/airoha/pinctrl-en7523.c
+> @@ -1107,6 +1107,7 @@ static const struct airoha_pinctrl_match_data pinct=
+rl_match_data =3D {
+>  	.chip_scu_compatible =3D "airoha,en7523-chip-scu",
+>  	.pinctrl_name =3D KBUILD_MODNAME,
+>  	.pinctrl_owner =3D THIS_MODULE,
+> +	.gpio_regs =3D &airoha_gpiochip_regs_64,
+>  	.pins =3D pinctrl_pins,
+>  	.num_pins =3D ARRAY_SIZE(pinctrl_pins),
+>  	.grps =3D pinctrl_groups,
+> diff --git a/drivers/pinctrl/airoha/pinctrl-en7528.c b/drivers/pinctrl/ai=
+roha/pinctrl-en7528.c
+> index f6c8f834421f..9854e9530219 100644
+> --- a/drivers/pinctrl/airoha/pinctrl-en7528.c
+> +++ b/drivers/pinctrl/airoha/pinctrl-en7528.c
+> @@ -1155,6 +1155,7 @@ static const struct airoha_pinctrl_match_data pinct=
+rl_match_data =3D {
+>  	.chip_scu_compatible =3D "econet,en7528-chip-scu",
+>  	.pinctrl_name =3D KBUILD_MODNAME,
+>  	.pinctrl_owner =3D THIS_MODULE,
+> +	.gpio_regs =3D &airoha_gpiochip_regs_64,
+>  	.pins =3D pinctrl_pins,
+>  	.num_pins =3D ARRAY_SIZE(pinctrl_pins),
+>  	.grps =3D pinctrl_groups,
+> --=20
+> 2.34.1
+>=20
 
+--WqyvA75ADRGpy4XY
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTquNwa3Txd3rGGn7Y6cBh0uS2trAUCavRP4AAKCRA6cBh0uS2t
+rDPBAPwN08fBuOv0LvZ5GSpm3nNQBDO/6ajcZnEG7ZqY1ifYrAEAz42H7L6jUwuY
+Lj4bMSvEqOwOxZTxPFWF6i03FlMFWwE=
+=7ilg
+-----END PGP SIGNATURE-----
+
+--WqyvA75ADRGpy4XY--
