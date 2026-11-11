@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794418609;
-	b=EbiFEZmk/pQzixQu8UpJJJIg83roaFnFSh2yibeUI33kWdsBUyFzV9NS2VLjxhkf9Ljp
-	 2KWaXRsnsmSSKa8qe+x3fguXa4tHjv2B/sRuHRQGF3tf/RN08/9ydbCDhem6W7FDyT2Kx
-	 cL3lfguIJOP4MLoPiBPsEmSebgTTWmbwxcoNi9ep/SSSK1OpkotHEY7kTgZtnJjqML8d+
-	 tWfR3g/VZd439WRIJPIWX0ijbH/Wy/m06vq6Fk06boibQpjpH/AATlHf2ZzCSbXQoe9g8
-	 BLQZ4eTBDA0srrtbmP1T5iqwma5Y1I/odSyO/gbFIMrHnyQ80CLbhfi2NCmlYBOrEZA==
+	t=1794419267;
+	b=cjLQxGr+arASDEFVMwM5NAJW9Y4MaTU+3oqzoZe6acAaZiolp3jae0L6n5i3Eyxxx7F2
+	 WIhZf3ExCKO8fsDf0bcrXqV3XuZg8LvC3rKVgA4vsdJTyFUZvLoCM1MqB1WmYH3EzS6Ag
+	 EaVHyfDN1kACTwyWtBxYTz0wPSNDqPyGI0llS9Qns4b6JgwUv2isAYh7WeWTdNU3hveJ9
+	 6XrocGkH5goYUNXvV4SXTgxegDePUEhvx/4IP8sdwW/wm9GdpeK7tBa9KiXqZ29Ot941z
+	 8ZacuaDb+C0asVeJKG5Ya1zJgM8bu9GxRArTP7OtWSyv1KIa8+/MIHajygU3WIE9i0w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794418609;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794419267;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=vN8Uwz7K/RJgoFMcc7W5icB0xZp27mmbAKXy27PjhPU=;
-	b=b/j25WZzvg96SP6myfTZJzT8dqFI9EoSJA8zBXUQ0Igopv3yscIvQJ9AotJScf4SIaO5
-	 sbawJ1h8kvLp2iUytGQvGBohWcnO4+i4eJaMaq9MDYcPINNxmOKLUiwa5K+pFk5ed37dA
-	 AwzbXdJokcOjG57RBDCKHrPrUYBIblF7B4iOBmrBHt5UQoT6CedTQdBipGpPcFaBOydrW
-	 zB+dkXqjnQ3hxWgjJsP2yAMGpr9iLFyuhApfZlkvqJaGsoZwYOA6tSnKyY4fvSunkep/m
-	 RR3PDX10GJCHRFNSfBNf2wqoixv0Tce2uhv5ZZS6ZJYhFWVrgjut9pEuLvybXmDifdg==
+	bh=YEF+3XQuh6CioDWZgE6K4DJfsOU1qsu3awZ/trTV0mI=;
+	b=aoRk+54OI3SHcSJgWepQsSaslgiEAjNpEzZ1j0eNYVNgXuRTyEsu7AL0x/O0u+An9Xjw
+	 sU4UU7nRhUCH3yu6zpG4tYvY3aWJvtU6So9SiEIjz6bPXTVgLK8bw+tefZEbvdotiWe5Y
+	 DmVTfcVhUD8sq/Dax9MpnlVw3BNgG9qzL8Fpe4jjiIYO9OxRsL84kcYT42GBo493xqkQ9
+	 JtHSHi22JquA37n5nGzZ8P41JIwrYbSgHVyb88AkIalNdJ7n7g2wW9Uggx9u6e363ig/0
+	 ffTF3CVb3lkytuV0fEDc/pfZWNBYtv/qTlyGa3bwNZXSMSEQtBSWSXFeZ4HP2IMfaqA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=omi76W6o;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fb+mq6sc;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3ACF4606A321;
-	Wed, 11 Nov 2026 17:36:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD533606A326;
+	Wed, 11 Nov 2026 17:47:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=omi76W6o
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7982A1F00A05;
-	Wed, 11 Nov 2026 17:36:48 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fb+mq6sc
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE05B1F00A05;
+	Wed, 11 Nov 2026 17:47:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794418608;
-	bh=vN8Uwz7K/RJgoFMcc7W5icB0xZp27mmbAKXy27PjhPU=;
+	s=k20260515; t=1794419267;
+	bh=YEF+3XQuh6CioDWZgE6K4DJfsOU1qsu3awZ/trTV0mI=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=omi76W6ooFQ7eKanXp7NVqdAOi+kQSz6QzCh45P65o87gpbD8O5nEyIHNaTfIX6Ts
-	 2dtExH59k3wncSReYkhRCZJ2pju8Qhk+NDHUk588UWCCUUstqRevMrQbistyOdcy0K
-	 brgE8LSruefYGEMPRkjOGj2DVV5SDde/LQlb9bGC9cmeKaw9Urj3oIYRv4byZxlAV3
-	 KLhu8+LAB2Hgg8jynheJwdImafEWrYTjWcSTYHYIuVGZHRSMojsJi1vL9rX22jfCay
-	 5GjJgk/Kapt37GAukvf+iLSG2DzTbALllcZQ3g+oYkdTG6SkGzIvaIg9HeBwnmRCaS
-	 dk09qf1n6Sa5g==
-Message-ID: <sashiko-outbox-209423@kernel.org>
+	b=fb+mq6scb293KyuROgecG+KC6M+VW9ykL+OzGdG2SRJZ2DLWh7VwccGnSUJlhVbbA
+	 KnrDeoh/tohDYX1x81R8Zv5O0CWcjpn5RYQpwUEog8z1J9d6HdGCE/84SDB8wZhx9P
+	 e5L8gxyC+knuKu8UmJt42w0GU36DdDQ/luddipAZN7QOF5CxhHgrwwU77HadUyBesC
+	 Ot5oidnr0CZ5KvVq08PbAteUR3fOOZE6j79ShiKdOmhXgq6vHmptt5QcRztzJ9dgoX
+	 quGeVypwkQRxDg/N4jSJX/1ZGnv90NrxPn9FThIMRNCRXtJUcCX2jodSD6rvnZ4Crx
+	 cYl20L1WKc/wA==
+Message-ID: <sashiko-outbox-209438@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 1/2] mfd: cs42l43: Add load detection register needed
- for cs42l43b
+Subject: Re: [PATCH 2/2] ASoC: cs42l43: Update load detect procedure for
+ cs42l43b
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Charles Keepax" <ckeepax@opensource.cirrus.com>
 Cc: linux-sound@vger.kernel.org, mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261111171032.1491717-2-ckeepax@opensource.cirrus.com>
+In-Reply-To: <20261111171032.1491717-3-ckeepax@opensource.cirrus.com>
 References: <20261111171032.1491717-1-ckeepax@opensource.cirrus.com>
- <20261111171032.1491717-2-ckeepax@opensource.cirrus.com>
+ <20261111171032.1491717-3-ckeepax@opensource.cirrus.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 11 Nov 2026 17:36:48 +0000
+Date: Wed, 11 Nov 2026 17:47:46 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,42 +61,168 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-Thank you for your contribution! Sashiko AI review found 1 potential
-issue to consider:
-- [Medium] mfd: cs42l43: missing CS42L43B_LOAD_DET_SEL in
-  cs42l43_readable_register()
+Thank you for your contribution! Sashiko AI review found 2 potential
+issues to consider:
+- [Medium] ASoC: cs42l43: cs42l43_run_type_detect() treats invalid
+  status as headset
+- [Medium] ASoC: cs42l43: CS42L43B_LOAD_DET_SEL cached due to unread
+  regmap_write()
 --
 
-commit 86bb228eefe713b198f8b6a31cc740c008b39cd7
+commit 2f8a25cd3cc97db982b37853fb39365ad8d29795
 Author: Charles Keepax <ckeepax@opensource.cirrus.com>
 
-mfd: cs42l43: Add load detection register needed for cs42l43b
+ASoC: cs42l43: Update load detect procedure for cs42l43b
 
-This commit defines the CS42L43B_LOAD_DET_SEL register and marks it as
-precious in cs42l43_precious_register().
+This commit updates the headphone load detection procedure to pass the
+detected jack type into load detection and configure CS42L43B_LOAD_DET_SEL
+on newer chip variants.
 
-> diff --git a/drivers/mfd/cs42l43.c b/drivers/mfd/cs42l43.c
-> index a83b62064dae6..4e5d82c355ee3 100644
-> --- a/drivers/mfd/cs42l43.c
-> +++ b/drivers/mfd/cs42l43.c
-> @@ -425,6 +425,7 @@ bool cs42l43_precious_register(struct device *dev, un=
-signed int reg)
->  	case CS42L43_RX_DATA:
->  	case CS42L43_DECIM_INT ... CS42L43_HPOUT_INT:
->  	case CS42L43_MCU_SW_REV ... CS42L43_MCU_RAM_MAX:
-> +	case CS42L43B_LOAD_DET_SEL:
->  		return true;
+> diff --git a/sound/soc/codecs/cs42l43-jack.c b/sound/soc/codecs/cs42l43-j=
+ack.c
+> index a2555dd9229e3..b3f89c712ed93 100644
+> --- a/sound/soc/codecs/cs42l43-jack.c
+> +++ b/sound/soc/codecs/cs42l43-jack.c
+
+[ ... ]
+
+> @@ -526,14 +533,36 @@ static void cs42l43_start_load_detect(struct cs42l4=
+3_codec *priv, bool mic)
+>  			dev_err(priv->dev, "Load detect HP power down timed out\n");
+>  	}
+> =20
+> -	if (mic)
+> -		regmap_multi_reg_write_bypassed(cs42l43->regmap,
+> -						cs42l43_4pole_patch,
+> -						ARRAY_SIZE(cs42l43_4pole_patch));
+> -	else
+> -		regmap_multi_reg_write_bypassed(cs42l43->regmap,
+> -						cs42l43_3pole_patch,
+> -						ARRAY_SIZE(cs42l43_3pole_patch));
+> +	switch (cs42l43->variant_id) {
+> +	case CS42L43_DEVID_VAL:
+> +		switch (type) {
+> +		case CS42L43_TYPE_3POLE:
+> +		case CS42L43_TYPE_OPEN:
+> +			patch =3D cs42l43_3pole_patch;
+> +			size =3D ARRAY_SIZE(cs42l43_3pole_patch);
+> +			break;
+> +		default:
+> +			patch =3D cs42l43_4pole_patch;
+> +			size =3D ARRAY_SIZE(cs42l43_4pole_patch);
+> +			break;
+> +		}
+> +		break;
+> +	default:
+> +		patch =3D cs42l43_4pole_patch;
+> +		size =3D ARRAY_SIZE(cs42l43_4pole_patch);
+> +
+> +		switch (type) {
+> +		case CS42L43_TYPE_OMTP:
+> +			regmap_write(cs42l43->regmap, CS42L43B_LOAD_DET_SEL, 0x89);
+> +			break;
+> +		default:
+> +			regmap_write(cs42l43->regmap, CS42L43B_LOAD_DET_SEL, 0x98);
+> +			break;
+> +		}
+> +		break;
+> +	}
 
 [Severity: Medium]
-Should CS42L43B_LOAD_DET_SEL also be added to cs42l43_readable_register()?
+Does writing CS42L43B_LOAD_DET_SEL via regmap_write() here and in
+cs42l43_stop_load_detect() cache the register in REGCACHE_MAPLE and cause
+every subsequent regcache_sync() in cs42l43_runtime_resume() to re-write
+it to hardware?
 
-regmap_precious() and regmap_volatile() return false before invoking
-cs42l43_precious_register() or cs42l43_volatile_register() when
-cs42l43_readable_register() returns false.  As a result, writes to
-CS42L43B_LOAD_DET_SEL during headphone load detection are treated as
-non-volatile, cached in the maple tree regcache, and replayed to hardware on
-every runtime PM resume during regcache_sync().
+Commit "mfd: cs42l43: Add load detection register needed for cs42l43b"
+added CS42L43B_LOAD_DET_SEL to cs42l43_precious_register() (which
+cs42l43_volatile_register() also consults), but did not add it to
+cs42l43_readable_register().  Because regmap_volatile() returns false for
+non-readable registers when format_write is NULL, regmap treats
+CS42L43B_LOAD_DET_SEL as cacheable, and with no entry in
+cs42l43_reg_default[] it is synced back on every resume unless it is marked
+readable or written with cache bypass.
+
+[ ... ]
+
+> @@ -629,23 +666,25 @@ static int cs42l43_run_load_detect(struct cs42l43_c=
+odec *priv, bool mic)
+>  	if (!cs42l43_jack_present(priv))
+>  		return -ENODEV;
+> =20
+> -	if (mic) {
+> +	switch (type) {
+> +	case CS42L43_TYPE_3POLE:
+> +	case CS42L43_TYPE_OPEN:
+> +		switch (val & CS42L43_AMP3_RES_DET_MASK) {
+> +		case 0x0: // < 22 Ohm impedance
+> +		case 0x1: // < 150 Ohm impedance
+> +		case 0x2: // < 1000 Ohm impedance
+> +			return CS42L43_JACK_HEADPHONE;
+> +		case 0x3: // > 1000 Ohm impedance
+> +			return CS42L43_JACK_LINEOUT;
+> +		default:
+> +			return -EINVAL;
+> +		}
+> +	default:
+>  		cs42l43_start_hs_bias(priv, false);
+>  		cs42l43_start_button_detect(priv);
+> =20
+>  		return CS42L43_JACK_HEADSET;
+>  	}
+> -
+> -	switch (val & CS42L43_AMP3_RES_DET_MASK) {
+> -	case 0x0: // < 22 Ohm impedance
+> -	case 0x1: // < 150 Ohm impedance
+> -	case 0x2: // < 1000 Ohm impedance
+> -		return CS42L43_JACK_HEADPHONE;
+> -	case 0x3: // > 1000 Ohm impedance
+> -		return CS42L43_JACK_LINEOUT;
+> -	default:
+> -		return -EINVAL;
+> -	}
+>  }
+> =20
+>  static int cs42l43_run_type_detect(struct cs42l43_codec *priv)
+> @@ -686,18 +725,12 @@ static int cs42l43_run_type_detect(struct cs42l43_c=
+odec *priv)
+>  	if (!cs42l43_jack_present(priv))
+>  		return -ENODEV;
+> =20
+> -	switch (type & CS42L43_HSDET_TYPE_STS_MASK) {
+> -	case 0x0: // CTIA
+> -	case 0x1: // OMTP
+> -	case 0x4:
+> -		return cs42l43_run_load_detect(priv, true);
+> -	case 0x2: // 3-pole
+> -		return cs42l43_run_load_detect(priv, false);
+> -	case 0x3: // Open-circuit
+> +	type &=3D CS42L43_HSDET_TYPE_STS_MASK;
+> +
+> +	if (type =3D=3D CS42L43_TYPE_OPEN)
+>  		return CS42L43_JACK_EXTENSION;
+> -	default:
+> -		return -EINVAL;
+> -	}
+> +	else
+> +		return cs42l43_run_load_detect(priv, type);
+>  }
+
+[Severity: Medium]
+Does replacing the switch in cs42l43_run_type_detect() cause invalid
+CS42L43_HS_STAT values (0x5..0x7) to be misclassified as a 4-pole headset
+instead of returning -EINVAL?
+
+In cs42l43_run_type_detect(), type is initialized to 0xff and
+regmap_read(cs42l43->regmap, CS42L43_HS_STAT, &type) is not checked for
+errors; if that read fails or hardware reports 0x5..0x7, type &
+CS42L43_HSDET_TYPE_STS_MASK is passed to cs42l43_run_load_detect(), which
+now hits the default branch, enables headset bias and button detection,
+and reports CS42L43_JACK_HEADSET.  In addition, the CS42L43_TYPE_OPEN
+cases in cs42l43_start_load_detect() and cs42l43_run_load_detect() are
+unreachable because cs42l43_run_type_detect() returns
+CS42L43_JACK_EXTENSION when type =3D=3D CS42L43_TYPE_OPEN.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111171032.1491=
-717-1-ckeepax@opensource.cirrus.com?part=3D1
+717-1-ckeepax@opensource.cirrus.com?part=3D2
