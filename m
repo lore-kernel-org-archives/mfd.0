@@ -1,56 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794428531;
-	b=oCONuwfMSA8vXXx5XTrDqVdRISxi1JLdy3L5aM1bZx2dDsj2s9BJvj1vlaUQj2KPlaSB
-	 M0PXOjASOJToAqHGralNjBhfzb23LR3q/MaaM5pA40Qj7uInB4LzbxGiOqXN4dgwgeM42
-	 aa+msSQj9XFoWoknNInkWpzcjd2jhMiVEinruEiNWSRvZidJGQXblTfl5cLyCjX49rsTY
-	 MBl5Yg22SPIojw4bF8ESJ+E8rx8UVNoYf1OdN+eBnk28EXdpySKjrAkyCzHeANl0UpD71
-	 Wd2r4H8IK3dMqGS5/0KjbeEYcx5lqE/t5N55dYoHTlfxXeQmwbHj2eepet/EC7VQJ+g==
+	t=1794428557;
+	b=oH3UpNAeDQLvd/Dh1FXEZ/huST1fccy1Q5AF8J2WFdBYDEm6OY6H7MulRJMnfveSx/xu
+	 jOgAMRhYufnq9Mgkh0A/vbzHUI+YAIVXRxYcKDWZxnqaUI+sp0YuEpcglLC+9bhuk5cCc
+	 4YGj3Tz90uxWwB2neYmzRDpQm/7ALGp/oUGasHYR0viLAI7fsd3Lc5F9y4r1aU45FpZQq
+	 x9yCd82ODwvd28LEAjQaZ8ZtVE6umMu13rXki+o2FeH2eF+qOXJMiNJwtRZXP0/paIHND
+	 xirRW1y2HZTohX+uP3yJXdyrUg1jx6qoREpVTCS2Ypg0hrRALdWodWOGX1OLLprIKLw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794428531;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794428557;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=j/qc8/0NGxSvBUg7a83kYeEn/sg+dGgotuFViXGSFXg=;
-	b=qZn1neMV6Loy2YbbEJJYc+cRik1Fa5Nk6EczwGdSi03Yyt8Zbt+akLM9FBrwW9qjnTm/
-	 oLecA1JrrbrNxUw9eN+Y+0S8u9GQFVoIbFrJnj1UNJEEomTq0/eO3HqjvwdL7m52xQcCx
-	 y3W+Oo9qV+2xJTsWH14h2Jwvk0fW5k5N4vj1mordCkM4JrwpS/pJvD/I8MiqLrmW3JfDl
-	 wrpHENL2iKXj2/RhBxpRXTEQ++xYLOzh7b/g1kFT/aem4SoqQg0wPDVTfGZAVDK5Qbzvv
-	 nBbu74HVsKbGqI+XcSS6BoaH53S5taMyzKIWRP+SBQwTDUJm9F0FFg9Fl76E5BUGYZQ==
+	bh=2EfZJF4OnYOe0Wq5LImMhsoOyFlI7Bde1ZwWA7GgQ7A=;
+	b=zQl6f9ImoXFD8Iqcx5r7chOIBpbwCPnK6zDkvwKOX/i2K6k3zPWovHNZ9v8DCQ0uAerN
+	 IZ74nJ0M6DwHqUoFHhibx58OeLYAWP4PM8dlNPfc6eKKiSJLJWsD9/G+XmTer4rJgoQuX
+	 KPUn8pwiFSXX1J3Quu95RV3IEYp3xmGzjmRu/4LHru6u2gSZeIKCfQ2ek/Qf7iHoIj1Ag
+	 WLpg7l8TMZ1vItoUgW6+iy/JyoLJgNbtAXuzGlVqlRNrpJ/1TJpqS1KnSHX7CTWLoOPY5
+	 Wboj1ZGjKCC56FLIc1QkeowR8XN9SqyfXd0AyVS6vN2ZjuDkLzBw5fF80I2G0rdaiZQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Zub73WrG;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=OIDDbTe1;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03839606A324
-	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 20:22:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E877606A321
+	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 20:22:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Zub73WrG
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C2FA1F00A05;
-	Wed, 11 Nov 2026 20:22:10 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=OIDDbTe1
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C97851F00A05;
+	Wed, 11 Nov 2026 20:22:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794428530;
-	bh=j/qc8/0NGxSvBUg7a83kYeEn/sg+dGgotuFViXGSFXg=;
+	s=k20260515; t=1794428557;
+	bh=2EfZJF4OnYOe0Wq5LImMhsoOyFlI7Bde1ZwWA7GgQ7A=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Zub73WrGG6L10eM4OrOJMpf1W+AtsihTKHsdpQ9o5CQg54BTDwNSF48/B4Y4YqyDb
-	 zAkrEEtx2YWVqFLIQDjiEOHV/Tx/rPUXNIT+jdKD+eW67N61P/RZ7ZXhMerjh/WHf6
-	 hOmesVKWYG9f3gafm/lMPmoE43qLu/0GoMJ3pluLWll3mNDxhnH9Ayb7/iITogsXbr
-	 Chbs7o5hz/Ji9prrQCsga66ICxPa6xXSa6xmc8H5W21xa2kq6sbZDmxEAyhvVj8ycd
-	 CzPWwFt3YyzusDDWql/N0uqJ99Sh5BGlN9btkcu4dMFkOf4TL3EFUTS8FsmKJej3i2
-	 cLVaDe7zaTifw==
-Message-ID: <sashiko-outbox-209643@kernel.org>
+	b=OIDDbTe1ZA6q1ee/0iLIZYWgp74l4SlAKVk2ofr7DF8Ky8roLVuzDoXON49CuVfQi
+	 zfdknY914iZkOwJ+czB2ZL0hwSQv1/dId7x5nDfjZEzTHfsDM0cNFj0Z8Q25biQGYh
+	 zL1KAb8fobxRifN1aQmXdKqiIlVGwdHRLru8GQlXDt6WiDpn+2J/753lTjBWOaDL4X
+	 FfhhrBSdt5GbdU+Jpmol12CQfyHR+o+xU9ThSGOZatLTaj+v/qg60BALjlaH12ZayW
+	 AA8j+L+RiplZhgTGnAeocJpWjdilhpgKKKfkeEcEtWzvRuaAujgOgIjvcgby7Nth1m
+	 CnN2lQfym09kw==
+Message-ID: <sashiko-outbox-209645@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 04/12] arm64: dts: hisilicon: Describe ADV7533 supplies
+Subject: Re: [PATCH 03/12] arm64: dts: hisilicon: Add specific syscon
+ compatibles
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?Um9iIEhlcnJpbmcgKEFybSk=?= <robh@kernel.org>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261111-dtbs-hisi-v1-4-6c9f5f80716c@kernel.org>
+In-Reply-To: <20261111-dtbs-hisi-v1-3-6c9f5f80716c@kernel.org>
 References: <20261111-dtbs-hisi-v1-0-6c9f5f80716c@kernel.org>
- <20261111-dtbs-hisi-v1-4-6c9f5f80716c@kernel.org>
+ <20261111-dtbs-hisi-v1-3-6c9f5f80716c@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 11 Nov 2026 20:22:10 +0000
+Date: Wed, 11 Nov 2026 20:22:36 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,10 +61,8 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> Add the ADV7533 power supply phandles for HiKey and HiKey960. Both
-> boards have a dedicated HDMI 1.8-V supply. HiKey has a 1.2-V PMIC rail,
-> while the ADV7533 on HiKey960 uses its HDMI 1.8-V supply for V1P2.
-> Describe the respective 3.3-V rails as well.
+> Add specific compatibles for HiSilicon syscon nodes HiKey reboot mode,
+> Hi6220 media NOC ADE, HIP06/HIP07 SerDes, and DSA CPLD syscon.
 >=20
 > Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 
@@ -71,5 +70,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111-dtbs-hisi-=
-v1-0-6c9f5f80716c@kernel.org?part=3D4
+v1-0-6c9f5f80716c@kernel.org?part=3D3
 
