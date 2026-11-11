@@ -1,57 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794418032;
-	b=X5Wu8KnjQ8Ew3tHbxzyfVzRDC+cA/X7yJ+vXh0VJxMVQCL7tSgI0X6B+cae9Tj1NsY4X
-	 TGmfnRI+HFWOu5wp/7KFPDzZYKYnptDNZUwbH4NvMCUaPEtN9jr0sUN7/o/gi7k4RiY2S
-	 umKHmAggvdUh3JaTaSA3NLNUvyH6KtzSzgbLYqctwVDwjwFUJ2navlnPwteCDczbZu8T5
-	 TpbBIkT75/jJU67qCBKa4WMUPkz26JuwDh2x2x/saJ1DeqR7vzkg96+C7fyXm7dKm2A0F
-	 WjcWfioUWWvJk2WNDgwVSgNZGimT2k6tFixnp5GFlFWqqTQk6CbsJDnv8bObhdV0L1g==
+	t=1794418167;
+	b=4Qp84ITKuBUPDFu+Rd+DCc2E88P/MeTNY9eUriDViJWGQkA67NIeHFTLN004z1yMPJDz
+	 Wxhp6uMoKgbPsFN17xKTxKEz13RvAolildQ7h4cxX6S6jjjUYN4hHkCra2Nai1pFivQbw
+	 Ij6JTvPvlhk9wTvWkfHkRQ35UMbxQTwCQKtM9vvpnjH1uxf1fYF0d8O7qdM3zLbKlruiR
+	 C1oa1zh4omclv0qyAbouFSr7iycmeQbFVJvX2Cwi/vXxGJKKL7eY78N0Lyuuz3jc7WRGG
+	 lTJdt8sQReKonfc+IAxXrQ2W5dk31uZ5M/SxOOBn90YfOxliwKfxjoMx7uHBeVKhE4g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794418032;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794418167;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=UKmyAuMTCizaLamIF0zsPX5yZvtJBo0ZBS30tDHT+fI=;
-	b=DVMSPJS/98CpVmtMf2xLPcPxCegC+7SD9CU2h1KZmhK/EfORsQcO606HCezs5xKYiM9z
-	 /u5qsmhEsNZvLmdoaYKLlP2435G5zT+WL51F4FRDZAN2PzN69K+sBpglZ4u2RCA2c7pYB
-	 GrYAnyxwVziFA/47tpKGy1pPJXl27u6/woSr+xyb1BjBZw8kLzP5IqdFmd+Vi2hy5exbe
-	 ES3Z4yMEn9ozYaPFujcV81QPZKjKpBtTkO6Uiii1EtSNyIquk7+AR2SSlyJttjL+tdAY4
-	 Sw9frVi7ObfCsTXg6fKqeojcBcfPLeJfi0BeAbUeFF2f6q33wCS9l+8nEKp+fwC28qQ==
+	bh=R0fg1yydiYv91hCUtc7Y3Il5Hh1cfNfAargDXzau1xY=;
+	b=AeU73T+aJAS5fibMap2R0aCvLYgDrPtB9Xk5Bg9I96x0CK0jAl4ZQLx4mImztrRcZZtO
+	 nUE1evzbWQH360oq6QEMc415dlLxsIlMtQ4WkfoRTKOE7rViTRTfEz+U+j7WVA+G0a76/
+	 N6usf/eBEENka7Pma27HawoWLoPFoGBRbGlcpLN3+bgjxe4zqaBYsajQ3xRXZh80+Evh6
+	 /12jFVX+RpYgDI6NB3bzPjLabLexhO0m449CZ1nQx6GY9Cc2odjsczbLdiQjtjIVFU80j
+	 SFUT96F4CtZRynGPeTtnej2KElMo5h1d4o2YnQuOgXfhYve54tu1iYAo+DdaOrruG+w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CqAWvx10;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CokPsro2;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0BAB2606A31C
-	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 17:27:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD5A9606A321
+	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 17:29:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CqAWvx10
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B3071F00A05;
-	Wed, 11 Nov 2026 17:27:11 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CokPsro2
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66B871F00A05;
+	Wed, 11 Nov 2026 17:29:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794418031;
-	bh=UKmyAuMTCizaLamIF0zsPX5yZvtJBo0ZBS30tDHT+fI=;
+	s=k20260515; t=1794418167;
+	bh=R0fg1yydiYv91hCUtc7Y3Il5Hh1cfNfAargDXzau1xY=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=CqAWvx10eVF25W3mj2Fyp+QtKSIDeb4CT+yLtChYrNZ8d/27XLJYcDXy6wm4r/nzZ
-	 tHaSinaw8e3MbwPdy00D6KEjhzcTJAFFZj//pgey11DuBB0dnDTEPQ6LJEhPRtwJJN
-	 dmqfKXOqEQ/tEILEkb4Yly3F9o+c+Hf+Vk7OYgC9R6MLjorelOszXR41XjbCzaZk0/
-	 +SqEdOsxU5Exc0bkdskY36qfwO313y07j//p2rNzQanH/twZYr+2cYN7m4bX0GSx1u
-	 FZ4AdUzbXlLNc4iM3MEs9wvjFmhoxELFNagcgBiEG3t13FyYY52TDtf+bOBOvRjmg7
-	 Atr4AKK9u55MQ==
-Message-ID: <sashiko-outbox-209410@kernel.org>
+	b=CokPsro2okVLQFmJyIAG4+3ZujH1vjgIidcGz15RcBpa/d5hMfwFrlEFdB7X2iT5O
+	 OKFk0r9JI5dsbPj9wwLkpN7FPz50kVCPuE7wyVo3PbXgwTHiWaoJJXpkeoPgOKAJAT
+	 hks9WhOGytI+UC69bN0chdVOHQmTdwcuq8n0JqyOtkczCOz/YcT+IJcO8Ur3xr2zSv
+	 MwbcrkEzKATQb0Sga4nCBBfryHtQYCtuizx7dp36vafUE/sYOGcPf/BBikPjNjC4+X
+	 vyRZZW9YiqUBK5TX8rySwdNNqo0jIu40QRrGGnjpeZK35+W9SBQWXHDtMU5EBO/XBa
+	 ghJRbWRB99H0A==
+Message-ID: <sashiko-outbox-209411@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v1 5/7] zorro: warp mfd: expose the voltage and
- temperature sensors
+Subject: Re: [PATCH v1 6/7] zorro: warp mfd: expose the fan duty cycle
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Paolo Pisati" <p.pisati@gmail.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261111163735.227286-6-p.pisati@gmail.com>
+In-Reply-To: <20261111163735.227286-7-p.pisati@gmail.com>
 References: <20261111163735.227286-1-p.pisati@gmail.com>
- <20261111163735.227286-6-p.pisati@gmail.com>
+ <20261111163735.227286-7-p.pisati@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 11 Nov 2026 17:27:11 +0000
+Date: Wed, 11 Nov 2026 17:29:26 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,10 +60,8 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> The diagnostic frame carries the 5 V rail, the backup battery and three
-> temperatures - the 68060, its NTC and the ARM - as IEEE-754 binary32.
->=20
-> Decode the bit pattern with integer arithmetic into milli-units.
+> The diagnostic frame also reports the fan drive as a percentage.
+> Expose it as fanspeedpercent.
 >=20
 > Signed-off-by: Paolo Pisati <p.pisati@gmail.com>
 
@@ -72,5 +69,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111163735.2272=
-86-1-p.pisati@gmail.com?part=3D5
+86-1-p.pisati@gmail.com?part=3D6
 
