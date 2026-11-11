@@ -1,97 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.128.182
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1794364251;
-	b=HD99BOZFcNi5wH7yt+G5LpvYwHrraDg44GwhFairOKJZBarV9hFJI0Cq3/uw3GaDwVYD
-	 /5B+H9xu+UZlvbpEDvkPHR5nokqtlB2IEjvQEJO+YMG2Qup8BtMg1AJvzm/GJuC9WESEk
-	 yWzBWlNm4sT7S3kO/InQrayBZc7ch8WLI4ZtM5y4oSwD7YZtxvtFm/wq/ml7+2xalmyev
-	 7As+4VHogdvarMpnsBZwHaT/KSeYJEpxDjADZg1wNIxBGGPicaJNPyEqbGXAiOO/O7EQ3
-	 3mG8m2lFYf1mhgq7w0gFbWvMggETzpyU7a3b0RRQXlBAL4UOwC6bWRSekgxkOMq+ztg==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794364251;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:MIME-Version:References:
-	 In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=t8BFlEAmJEj8HGxMKTsLsaY7aesl7fSNxoZ8biKmTbE=;
-	b=5UiEWgGQN+yd2SuoHqZfSGzrpzoKAtaMCLrC9XeNwjt4jJQXXnJRRNB/Z8qy4mx4JmAF
-	 B56p6xj7M6RCQ+e7l2+4E5anHtiRrp6BqMeCIOJ8eOXpvv7kHB60HCzawl6hLomsWw8KE
-	 WhsrqOwk/PnTYkek0YL3JY8Er1J0Hup6eHf7w4Pc5oElAUC3Zg+N2XJwZDHJ5IabRSLl9
-	 sB7p+zlg8jx6uE5ogSv+oe0kXjZYKCWlCLq86meLXzlVQpmbDosrDcDLKziP4db2ihRT/
-	 IQyAdn6QHgYD9r2jkqMVoTXzGCh4C4yeLDQJwzxAPd4kOOmuGiCNvWM1BCl9fyxGaaw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=chromium.org;
-	spf=pass smtp.mailfrom=chromium.org;
-	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=jbe8+gmh;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.128.182
-Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.171.202.116
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1794376499;
+	b=MmM+yqXAm5PLMVbeFuM2ED1I8ZK8+HvI18SDQsfLBZF12IEMVh4dXOTGhij9nHXZoSfG
+	 ajw8uJAjl5iR84CZaWombsAAbTACdBaNpFrg2cIVyTfsHY8DUsnxBooMqRDJ3Q9HfBZ1A
+	 zzjnlH50z0chWN+7SeGe2FJn4eGTLf1mQ1jn/28VFGq/wrzzLc0owrQ3xytN4eIdeb2J0
+	 sn4sNgfrsfypq24Qkb50HpT4JSdIOuuU3GP5ZVI0ANnZc8GffA0V4qu8duWVME50N2Izf
+	 Qq26s3Eg11tpSQNG+27MvrFKXBrDzdXV+dFOMyUlcBWHgDXvNBNq/g2Jt6DiEaVyH+Q==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794376499;
+	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:Mime-Version:
+	 Content-Transfer-Encoding:Content-Type:Date:Message-Id:Cc:To:From:
+	 Subject:X-Mailer:References:In-Reply-To:X-Last-TLS-Session-Version;
+	bh=pfbacooIO8f3wisdaRiyyaGqgo+54PzHGy2pQaUsY+c=;
+	b=3Pe5rEoeX8z3Qy+h95J+i7Gd4HYobfgS5oLuN83BoE8Ob2AE+rGfCWVGtmYD/qu6G3Su
+	 XDe1PGn1LJAOja95yQVJF1ksszri2INE2BQij++/AJfhQkuRZQtfZ/GWP5f92CqyvqfyI
+	 xkSTJckRmeVqd0N+vCePscYS61bOXQElbOYsX/5TAvOqyJuLz9udWH/2spr12ZkrtFP2o
+	 AK55lCZjSiH7IBM26db0s+/yeNdCHJex3xdGrFffS4zwunmQWkleUa+S2RDd1pNulTfFd
+	 La4xQuQQXHiQneplqRdey0x7SnXKl36JK3dx9zn5QwDmFZnf1JHK+hR94caPcSjwANg==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=bootlin.com;
+	spf=pass smtp.mailfrom=bootlin.com;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=yNbP9gNq;
+	arc=none smtp.remote-ip=185.171.202.116
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BDEA606A31C
-	for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 02:30:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3BDEA606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13A66606A320;
+	Wed, 11 Nov 2026 05:54:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 13A66606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=jbe8+gmh
-Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-8b360828905so27912737b3.2
-        for <mfd@lists.linux.dev>; Tue, 10 Nov 2026 18:30:51 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1794364250; cv=none;
-        d=google.com; s=arc-20260327;
-        b=DS0QrBS1RkYlwTHGvzaDr6BqN1znO25uhu+6HLuTnNdtz3DnYe0zsdIHHLTooplES4
-         pkE5YZV+UM0MwowIs8Yq7JdadWizjGT0f49LBd2OnO4+KJIy9QpaLkX+B7W5PjgmZGvJ
-         R5oVYLMFNNgS23r5LKAC4RUkYeZ2Yfa17CHRIwYGePstxBfNkNZL1IOqWcCOF5+NqlKZ
-         jmq2Uph7wBDA5PY2XLxk+fFpvbKgvLYfhoJtwGLcJfrbipWmUUSMuuNc59XCXGZroy9n
-         BOnJWhKyZ+pgsnuXlR4lO59yH2U0XO2T7SwypRPkf54W/o86jMR5n19WzZENkE3kwj6A
-         WFww==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=t8BFlEAmJEj8HGxMKTsLsaY7aesl7fSNxoZ8biKmTbE=;
-        fh=UBGQfSb+xEAsKFaRsrkr+0JQWls8+YX12p6g00woimM=;
-        b=ZDifcFeF24ZzvZmQhCEavP81NQx+ln7A6QqpgW42zZh0fQq97zh53gO3EjMMbrjfBm
-         92E+mYD76I3UKFXTYPcIMmTO109gQzekDPZTYxAWHJOC4KDWUZeDS82kV0vBYVJrYPjR
-         lg8sCCafvP0/9od5PNDgHHMxSiXCUVKZBENBIoCX3juPBi4HufubUjPIzBJRFUtLbyal
-         /Wk3ic1oL5WUOIHbPBEER58PgR/S8ScLqScXVsW74VAffG7SxjBzCX1Pl/mqNrUuSuBl
-         H1WD3vhEz1igkskaFepo39tfjzYDdIs9tBMCAAHfCBOmc47ULDycVkjS7OMj4v+yM0XR
-         zIrA==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1794364250; x=1794969050; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=t8BFlEAmJEj8HGxMKTsLsaY7aesl7fSNxoZ8biKmTbE=;
-        b=jbe8+gmh6EjXHOK4Ishr6edMVSbSe3pQOwmJSkeeC4N7M7oGPw+T5ZToeec6JpT9a7
-         12p9MGrzOfwwmf9dTgGfsFCKV1lNJAOfeaSsS0UITIbXzUtXewZUwsxv5RQ3/nLhDYpy
-         M1g54hdzpzgsuQa4CX6tbEAEpkovAz+51yzI8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794364250; x=1794969050;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=t8BFlEAmJEj8HGxMKTsLsaY7aesl7fSNxoZ8biKmTbE=;
-        b=zB9TpsplJkxR7PstnrQ7zoBuQ3CRxYlPmgMuldunskSeWHFmz73/d3UsFU6C69LLb4
-         PFc/t35wj6HH2sh98eM5FvwzxuF/NL/nTMxaeY1lRqFuyp5hXBgFHeH9r/Xqw9FOGeXz
-         fO6oG7MbF/lisKWYCYHzpHE2GSQpIlKfz+Z2zoExVj9sZud5MFsYzwARKqvP00P679Xf
-         1l918mEgj17BR7m4KFXt6V7dgzUZ+JaoyMwcFTFl+chvOu39wlcnsfiuo4O8F8E5pT38
-         p9Vhxw5rqgjNcOvFJaFnsHi/eJioHnNJewJLL1FriRvzmNXPerzQrIzsGBxamzd5Z2Nd
-         gXCQ==
-X-Gm-Message-State: APuU4Z8ru8mk0KfvmY3hm99R2oAk4/3kG90K9o0biN2UTFd/h0cneSvf
-	Vyd31/OFh9HsjHng0zKDkT+C5cufzLukr1dB6ldByfgZ6n+kwhAdC0eGS2+uJwSJKnnuqxYZX1Y
-	Xj1agq92ycn5KlcVfTg3+hWmQYjPtLgj3YKnHOzkZ
-X-Gm-Gg: AYBFou1aifV3fLiViM4snKOrkDMfkYxZVGN1Bi6qCmV8MZJy1sd3NzUrF+vuOzPzDMs
-	sxckQzt9YNvEwf5Pjvg9Le5wxRf2eABNR1NjLZf5Sv4/fuMyI3P+6/FZspa4jrFiKFZGKp0t42g
-	BAIdn5IHlCW+DjmaHJnWhreNVgmlExWtUh9jopTO17TQ/qP31LbTxeH8jb4oS6uhrofiIJiaanT
-	L9En1t/uw1CEwXy+FeuQn9eQyF8ArFnanEvOATFLKiPXdr9VCK00FeSB1Tgg95eMXZZcrif6Ogj
-	ywdIk4sU1qEFbv1XT6L6h8YRKXZPyDhN3GgyC9pHEl1rKAXIE8LUxxfAU5eisoC6oRciyfztXOI
-	Xl6ywrL4Z1QU1WGmBMVtU7XrhOEX0lvRKlfi4v1d7pJ0D9lUtqcbpQ9id8MeYJ2krqLjP9AoX9j
-	3k4DkKH5NtGAch
-X-Received: by 2002:a05:690c:fd0:b0:8b0:cdf4:94a2 with SMTP id
- 00721157ae682-8b3a81ab7e0mr7261967b3.84.1794364250231; Tue, 10 Nov 2026
- 18:30:50 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=yNbP9gNq
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 8523CC79A8F;
+	Wed, 11 Nov 2026 05:54:56 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id B7121601AD;
+	Wed, 11 Nov 2026 05:54:54 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id CA75111BC0758;
+	Wed, 11 Nov 2026 06:54:26 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1794376491; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:in-reply-to:references;
+	bh=pfbacooIO8f3wisdaRiyyaGqgo+54PzHGy2pQaUsY+c=;
+	b=yNbP9gNqUTcBluDPTUGVBT9Sv+/GUwXc/OVvJz1InwCOkT3SDXmol6kIyZj6kX3Yq1NzGH
+	m+7vDJygTh4Aeo6ekK8CD2u9W7d6Fobhkef2pBoshtjxbvwZhaFK264cj/tLT7fgNV6x78
+	ZUPWtjg+/hKGnEpqW3ry2LwfenlL1Vnpfsx+Duk2T3/ZhtgEL63TIp90jEpCcqg3mwkQte
+	XvhXHpQreSW8ZhjjAEgEfPu3744zKJ6yYUnEtxerbgkrN+nhLUAP2VnK8ZqLwE40Hqa9Gw
+	2IyI3JXe2VizQhauO617rdUjCPI8djrehwuV7EPN2sl1qfiuh+n75Opl2PpZow==
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -100,38 +58,96 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-References: <20261110-mt6397-irq-num-fix-v2-1-9d5853a00437@protonmail.ch>
-In-Reply-To: <20261110-mt6397-irq-num-fix-v2-1-9d5853a00437@protonmail.ch>
-From: Chen-Yu Tsai <wenst@chromium.org>
-Date: Wed, 11 Nov 2026 11:30:39 +0900
-X-Gm-Features: AclHuK9ModA0hBuzgJ5zuMaqQJM9UHprenTTXYDmDO2P6KUA8OGeZIXeF99lf3k
-Message-ID: <CAGXv+5FgXESTgZ4hNyPP1Cdd4BfnV8dVTNpitKKpNAuWY-gYMQ@mail.gmail.com>
-Subject: Re: [PATCH v2] mfd: mt6397: Use PMIC specific interrupt count for
- domain creation
-To: Ben Grisdale <bengris32@protonmail.ch>
-Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org
-Content-Type: text/plain; charset="UTF-8"
+Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Wed, 11 Nov 2026 06:54:25 +0100
+Message-Id: <DMS5DC411M21.387583J8N08R0@bootlin.com>
+Cc: "Linus Walleij" <linusw@kernel.org>, "Nicolas Ferre"
+ <nicolas.ferre@microchip.com>, "Alexandre Belloni"
+ <alexandre.belloni@bootlin.com>, "Claudiu Beznea"
+ <claudiu.beznea@tuxon.dev>, "Chen-Yu Tsai" <wens@kernel.org>, "Florian
+ Fainelli" <florian.fainelli@broadcom.com>, "Broadcom internal kernel review
+ list" <bcm-kernel-feedback-list@broadcom.com>, "Ray Jui"
+ <rjui@broadcom.com>, "Scott Branden" <sbranden@broadcom.com>, "Marek Vasut"
+ <marek.vasut+renesas@gmail.com>, "James Ogletree"
+ <jogletre@opensource.cirrus.com>, "Fred Treven" <fred.treven@cirrus.com>,
+ "Ben Bright" <ben.bright@cirrus.com>, "David Rhodes"
+ <david.rhodes@cirrus.com>, "Richard Fitzgerald" <rf@opensource.cirrus.com>,
+ "Support Opensource" <support.opensource@diasemi.com>, "Krzysztof
+ Kozlowski" <krzk@kernel.org>, "Peter Griffin" <peter.griffin@linaro.org>,
+ "Alim Akhtar" <alim.akhtar@samsung.com>, "Tim Harvey"
+ <tharvey@gateworks.com>, "Neil Armstrong" <neil.armstrong@linaro.org>,
+ "Charles Keepax" <ckeepax@opensource.cirrus.com>, "Sven Peter"
+ <sven@kernel.org>, "Janne Grunau" <j@jannau.net>, "Neal Gompa"
+ <neal@gompa.dev>, "Chanwoo Choi" <cw00.choi@samsung.com>, "Mathieu
+ Dubois-Briand" <mathieu.dubois-briand@bootlin.com>, "Luca Ceresoli"
+ <luca.ceresoli@bootlin.com>, =?utf-8?q?Andr=C3=A9_Draszik?=
+ <andre.draszik@linaro.org>, "Saravanan Sekar" <sravanhome@gmail.com>,
+ "Matthias Brugger" <matthias.bgg@gmail.com>, "AngeloGioacchino Del Regno"
+ <angelogioacchino.delregno@collabora.com>, "Frank Li" <Frank.Li@nxp.com>,
+ "Sascha Hauer" <s.hauer@pengutronix.de>, "Pengutronix Kernel Team"
+ <kernel@pengutronix.de>, "Fabio Estevam" <festevam@gmail.com>,
+ =?utf-8?q?Jonathan_Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>, "Aaro
+ Koskinen" <aaro.koskinen@iki.fi>, "Andreas Kemnade" <andreas@kemnade.info>,
+ "Kevin Hilman" <khilman@baylibre.com>, "Roger Quadros" <rogerq@kernel.org>,
+ "Tony Lindgren" <tony@atomide.com>, "Matti Vaittinen"
+ <mazziesaccount@gmail.com>, "Orson Zhai" <orsonzhai@gmail.com>, "Baolin
+ Wang" <baolin.wang@linux.alibaba.com>, "Chunyan Zhang"
+ <zhang.lyra@gmail.com>, "Fabrice Gasnier" <fabrice.gasnier@foss.st.com>,
+ "Maxime Coquelin" <mcoquelin.stm32@gmail.com>, "Alexandre Torgue"
+ <alexandre.torgue@foss.st.com>, "Jernej Skrabec"
+ <jernej.skrabec@gmail.com>, "Samuel Holland" <samuel@sholland.org>, "Liviu
+ Dudau" <liviu.dudau@arm.com>, "Sudeep Holla" <sudeep.holla@kernel.org>,
+ "Lorenzo Pieralisi" <lpieralisi@kernel.org>, "Geert Uytterhoeven"
+ <geert+renesas@glider.be>, "Magnus Damm" <magnus.damm@gmail.com>, "Heiko
+ Stuebner" <heiko@sntech.de>, <mfd@lists.linux.dev>,
+ <linux-kernel@vger.kernel.org>, <linux-arm-kernel@lists.infradead.org>,
+ <patches@opensource.cirrus.com>, <linux-rpi-kernel@lists.infradead.org>,
+ <linux-renesas-soc@vger.kernel.org>, <linux-sound@vger.kernel.org>,
+ <linux-samsung-soc@vger.kernel.org>, <linux-amlogic@lists.infradead.org>,
+ <asahi@lists.linux.dev>, <linux-mediatek@lists.infradead.org>,
+ <imx@lists.linux.dev>, <linux-omap@vger.kernel.org>,
+ <linux-arm-msm@vger.kernel.org>,
+ <linux-stm32@st-md-mailman.stormreply.com>, <linux-sunxi@lists.linux.dev>,
+ <linux-rockchip@lists.infradead.org>
+To: =?utf-8?b?VXdlIEtsZWluZS1Lw7ZuaWcgKFRoZSBDYXBhYmxlIEh1Yik=?=
+ <u.kleine-koenig@baylibre.com>, "Lee Jones" <lee@kernel.org>
+From: "Luca Ceresoli" <luca.ceresoli@bootlin.com>
+Subject: Re: [PATCH v4 19/20] mfd: Unify style of of_device_id arrays
+X-Mailer: aerc 0.22.0
+References: <cover.1794347059.git.u.kleine-koenig@baylibre.com>
+ <2cd7c4695edff6b711f8c77ae468d295bb910cdb.1794347059.git.u.kleine-koenig@baylibre.com>
+In-Reply-To: <2cd7c4695edff6b711f8c77ae468d295bb910cdb.1794347059.git.u.kleine-koenig@baylibre.com>
+X-Last-TLS-Session-Version: TLSv1.3
 
-On Wed, Nov 11, 2026 at 7:51=E2=80=AFAM Ben Grisdale <bengris32@protonmail.=
-ch> wrote:
+On Tue Nov 10, 2026 at 10:54 PM CET, Uwe Kleine-K=C3=B6nig (The Capable Hub=
+) wrote:
+> These arrays already mostly match the most used and generally
+> recommended coding style. That is:
 >
-> mt6397_irq_init() currently creates its IRQ domain with a fixed number
-> of interrupts (MT6397_IRQ_NR). However, not every PMIC supported by this
-> driver has the same number of interrupts as the MT6397. The MT6328 has
-> 47 interrupts, so its interrupts above MT6397_IRQ_NR (32) are currently
-> unusable.
+>  - no comma after the list terminator;
+>  - a comma after an initializer if (and only if) the closing } is not
+>    directly following;
+>  - no explicit zeros in the list terminator;
+>  - a space after an opening { and before a closing }, a single space in
+>    the list terminator;
 >
-> Correct this by passing the PMIC's actual interrupt count to
-> irq_domain_create_linear() based on the chip ID. Define the missing
-> interrupt count for MT6328, as the other supported PMICs already have
-> it defined.
+> Adapt the offenders accordingly.
 >
-> Fixes: 6e31bb8d3a63 ("mfd: mt6397: Add initial support for MT6328")
-> Signed-off-by: Ben Grisdale <bengris32@protonmail.ch>
+> Reviewed-by: Andr=C3=A9 Draszik <andre.draszik@linaro.org> # for Maxim MA=
+X77759
+> Reviewed-by: Charles Keepax <ckeepax@opensource.cirrus.com>
+> Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be> # renesas
+> Reviewed-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com> # =
+max7360
+> Reviewed-by: Linus Walleij <linusw@kernel.org>
+> Signed-off-by: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@b=
+aylibre.com>
 
-Changes make sense to me, and it also seems to fix MT6332.
+Reviewed-by: Luca Ceresoli <luca.ceresoli@bootlin.com> # max*
 
-Reviewed-by: Chen-Yu Tsai <wenst@chromium.org>
+--
+Luca Ceresoli, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
