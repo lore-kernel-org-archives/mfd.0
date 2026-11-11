@@ -1,70 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794417343;
-	b=W7YczGavkjOxBZAzvFWIH2JE2ZeesP2dS0udoFB+3jfoEOEca7kczTHrVn0sqYcgpBt1
-	 fIA2mP4tQKgvSV+pQUhm8r8uuSaHvQLpyPHKbloqvtO3icVN7HWnSa8WBjFxIrzMkJPD+
-	 sNtvu5n0Gk6+/hYpme0zJHsa/x4XWaFM9gciXX6Rb9lFXp34eS2MAsWPeqyrivZlyyIO+
-	 4kwABFofYClSo4rCIcssE1dNbjpnjFSvRI1b7lW3lHfaSTJOO8BBkDXNZbdKhShz35fd3
-	 QgqlSzhE99x+Ws4ZdKwqGFjoOhajIJVzsX6GdDdNyIV26ZK9J2K/qYBsiCY2YIpyCMQ==
+	t=1794417803;
+	b=KsLsivVgqFaX99pd4COKVL+mE8oQIR2BbuD3rgnmMZ0fIjevmR3atPWNP3g8RTuXi9O5
+	 KQKCGBkgOgaTYERLblFQEOiCT0u2UmcruNnpxveFQ3BCjigkLwJTl49+Limwf74hHx1kj
+	 eV9Iq8GyEk9j4N3tkcJHI/ucjMOsTm+bP85ijPccmloK/99MZI8y0P2rJ6BB9u17w87ih
+	 aGA8FO7NRPokwaQonpwCP6cpOD0GeBGwFwVYiJOIvLwwwdXf1O3s8W7fk7bXuRPJCjBk7
+	 mq522lJY7bPlzIB1zCqBVuOXSX6V4M0kN9RDyt3atvxkf1+eIVz58K7WyqesDul3McA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794417343;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=w8vNoC9Nxsw0YxO6Po42QLoQ5/fTPMksdeWkGWXJRYg=;
-	b=QHcv/swl4Qg1GIavMNkvHwwmT4slDFl3UfOw0sqpbcCbjptT3k5Ed7zbBjT0PMY6jcwc
-	 +ap1QfUkx2PAvJ15KuLlHy0Hf1kdmx0lVtRqZwfQyaZcN2flc/X+Gem5tLIxqXEbiKB6p
-	 dN6oqolkD65pEkPZ1u4AZ9L7I38VMdBoG9sXGkzyzblp6tHbY/Wjvy4xcU970w+fwGTY7
-	 eAYpKQnLK2pO8cFAmpyiugdaCQItPcURdk4/ZnKludTAll0SGQo5SOB+pYLGYoIafYWjw
-	 dad9vnAFupWI3LS9NJSvmCESVtxRVHFhZRukMn+ZLc/SaaXSE2Whu96lniuJUXE4C9A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794417803;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=kin+dSe0W0jSKNitImm3jJVSmpxuH2Z/fCP9V4M5omo=;
+	b=hFfGVm8xiaHDzRdq7kfCRgCcnXagpCr7QXxbMDLtD8Ga8M/KIcKnymMSmzIWTPwVkx5K
+	 2oI5yN9I+x1WK1bMnMSBb8F5ymUc/LkvaqIKcWzIZ9G3V4iQhoRQip4USTJFyXPHVJDj1
+	 2gCPMBrA3/hEOW2ByoeOEdWtSjcO6WCkzsjz5Di6Wz+h12nB2b2wIyy0mcw/XPJ+BfJ6q
+	 B9wuDp2dCvWqNwqDjJrzpvqfiouilO3LHbl1GpyhDSpG7gKzzZIKYulTYKHyqRknnBLoa
+	 +RI1BrAxkpVOsVlix4U9YJYEcg8Adrbh1MRAhZNTimsZ2gH+7Wcb5/CmQOEnk2pmgEA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YBbd5mtS;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Y64oJUi8;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C58E606A321;
-	Wed, 11 Nov 2026 17:15:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 223C5606A31C;
+	Wed, 11 Nov 2026 17:23:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YBbd5mtS
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 88D0A1F00A05;
-	Wed, 11 Nov 2026 17:15:42 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Y64oJUi8
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 505D81F00A05;
+	Wed, 11 Nov 2026 17:23:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794417342;
-	bh=w8vNoC9Nxsw0YxO6Po42QLoQ5/fTPMksdeWkGWXJRYg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=YBbd5mtSUp/RiEVHPeFjrL7da0RxMdI9MfB0nbzxVOv7RTGdcgZpyua3TNCwi5Dib
-	 +Z3PbFFN4/4ztEmPqd/4p47SQA6+h066iQzBEDxlRtmsZXKhNPjIg+PKpCtC+zyy69
-	 8QHRCtTfXQb7GL16zBWUvAn+uI9nQVFSW1bpEa3iQH2DH8wPRt8B1Nuib5QYhWcp7V
-	 Y3a4aaXC4HILFVFU0N6GrG1s6+RHSBGsbq3iEH4jrcgB1X2aHe27spSiqRsbxDvQRr
-	 v1/0iHch+2nhANOHGJRXmRg67o58Ue8nhnfIDI7lBoa1IE6GIAuxtjDbzTl9agaycG
-	 K6p3Sb+ZkDSvw==
-Date: Wed, 11 Nov 2026 11:15:40 -0600
-From: Rob Herring <robh@kernel.org>
-To: Linus Walleij <linusw@kernel.org>
-Cc: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	William Zhang <william.zhang@broadcom.com>,
-	Anand Gore <anand.gore@broadcom.com>,
-	Kursad Oney <kursad.oney@broadcom.com>,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	=?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Randy Dunlap <rdunlap@infradead.org>, Ulf Hansson <ulfh@kernel.org>,
-	Benjamin Larsson <benjamin.larsson@genexis.eu>, mfd@lists.linux.dev,
-	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-clk@vger.kernel.org, linux-hwmon@vger.kernel.org,
-	linux-pm@vger.kernel.org
-Subject: Re: [PATCH v4 2/7] dt-bindings: mfd: Describe the BCM6846 PMC complex
-Message-ID: <20261111171540.GA3718375-robh@kernel.org>
-References: <20261111-xg6846b-bcmbca-xrdp-reset-v4-0-17035a5e8ad2@kernel.org>
- <20261111-xg6846b-bcmbca-xrdp-reset-v4-2-17035a5e8ad2@kernel.org>
+	s=k20260515; t=1794417802;
+	bh=kin+dSe0W0jSKNitImm3jJVSmpxuH2Z/fCP9V4M5omo=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=Y64oJUi88YZNdO7h7lkE3kaS2adY+4eISbYqqYd75/pjnIPPrHRZ21js+SAUBRp1U
+	 uY8g8A+uPE6tGqIxPGSS4ID14PfZZqF+lEQJ+KYcCMbYSq5mM4OhAXoKkGZwfyzov3
+	 LE9h/QxH42qBX6CTpFDcOa1PJayXBVHtnb8vGhWn/5mgZRCr/GaaUHiP5/YoBTsM3O
+	 wPhiX+x2VkmqZRkK5x0uftx/94H5GDnTiLDITx1A0DEjwsJ5SvyVoN/ZQyDz2v4Owj
+	 ML97bweYJzsjzxLLFEAErAGm8dkKGiGJRSiDegjTPwatjSyp/21GSy8t35TscSfD1w
+	 NwAW1E0IJX3pQ==
+Message-ID: <sashiko-outbox-209405@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v1 4/7] zorro: warp mfd: add the dual-port RAM command
+ channel and expose the board identity
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Paolo Pisati" <p.pisati@gmail.com>
+Cc: linux-ide@vger.kernel.org, mfd@lists.linux.dev, dlemoal@kernel.org, cassel@kernel.org, lee@kernel.org
+In-Reply-To: <20261111163735.227286-5-p.pisati@gmail.com>
+References: <20261111163735.227286-1-p.pisati@gmail.com>
+ <20261111163735.227286-5-p.pisati@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Wed, 11 Nov 2026 17:23:21 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -73,91 +60,72 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261111-xg6846b-bcmbca-xrdp-reset-v4-2-17035a5e8ad2@kernel.org>
 
-On Wed, Nov 11, 2026 at 12:00:43PM +0100, Linus Walleij wrote:
-> The third generation Power Management Controller (PMC3) has
-> different subdevices.
-> 
-> Identify the parent with the BCM6846-specific "brcm,bcm6846-pmc"
-> compatible.
-> 
-> Describe the complex as a simple-mfd with a PMB bus child owning its
-> register resource. Include the PMB power, clock and reset controllers and
-> PVTMON, with its acquisition clock and reset resources.
-> 
-> Signed-off-by: Linus Walleij <linusw@kernel.org>
-> ---
->  .../devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml  | 87 ++++++++++++++++++++++
->  MAINTAINERS                                        |  1 +
->  2 files changed, 88 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml b/Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml
-> new file mode 100644
-> index 000000000000..6082e30d37ec
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/mfd/brcm,bcm6846-pmc.yaml
-> @@ -0,0 +1,87 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/mfd/brcm,bcm6846-pmc.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Broadcom BCM6846 Power Management Controller
-> +
-> +maintainers:
-> +  - Linus Walleij <linusw@kernel.org>
-> +
-> +description:
-> +  The third generation Power Management Controller (PMC3) contains several
-> +  register banks. This binding describes the Power Management Bus (PMB)
-> +  interface within Procmon. The PMB child owns its register bank. The parent
-> +  provides address translation and does not own a register bank.
-> +
-> +properties:
-> +  compatible:
-> +    items:
-> +      - const: brcm,bcm6846-pmc
-> +      - const: simple-mfd
-> +
-> +  ranges:
-> +    maxItems: 1
-> +
-> +  "#address-cells":
-> +    const: 1
-> +
-> +  "#size-cells":
-> +    const: 1
-> +
-> +patternProperties:
-> +  '^bus@[0-9a-f]+$':
-> +    $ref: /schemas/soc/bcm/brcm,bcm6846-pmb.yaml#
-> +    description: PMB configuration, keyhole and address mapping registers
+Thank you for your contribution! Sashiko AI review found 1 potential
+issue to consider:
+- [Medium] zorro: warp-mfd: stale reg_cr irq flags not cleared in
+  warp_send_msg()
+--
 
-This causes the bus node to be validated twice (once here and once when 
-applied by compatible). And then because the pmb schema does the same 
-thing with its child nodes, those will be validated 3 times. Twice I can 
-live with, 3 times not so much. The fix for all this is either merge the 
-schemas to 1 file or do:
+commit 4b5b6213bfa8c6be415c4e81b0b8ac501eb8e890
+Author: Paolo Pisati <p.pisati@gmail.com>
 
-'^bus@[0-9a-f]+$':
-  type: object
-  additionalProperties: true
-  properties:
-    compatible:
-      contains:
-        const: brcm,bcm6846-pmb
+zorro: warp mfd: add the dual-port RAM command channel and expose the board=
+ identity
 
-  required:
-    - compatible
+This commit adds the dual-port RAM command channel and interrupt handling
+to communicate with the ARM co-processor, exposing boardname, fmwver, and
+hwver in sysfs.
 
-That ensures the node contains enough to apply the child schema. 
+> diff --git a/drivers/zorro/warp-mfd.c b/drivers/zorro/warp-mfd.c
+> index 94af7c9d0ea5e..61866f678b613 100644
+> --- a/drivers/zorro/warp-mfd.c
+> +++ b/drivers/zorro/warp-mfd.c
 
-Since there's 3 levels here, you could also do some combination of both.
+[ ... ]
 
-Rob
+> +/* send a message to the ARM coprocessor, optionally waiting for a reply=
+ */
+> +static int warp_send_msg(struct warp_mfd *warp, bool wait_reply)
+> +{
+> +	struct completion *done =3D wait_reply ? &warp->reply : &warp->recv;
+> +	long ret;
+> +
+> +	/* a previous exchange may have timed out and completed late */
+> +	reinit_completion(done);
+> +
+> +	/* enable 68k & ARM interrupts */
+> +	z_writel(DPREG_CR_SET | DPREG_CR_IE_68K | DPREG_CR_IE_ARM, warp->reg_cr=
+);
+> +
+> +	/* send irq to ARM */
+> +	z_writel(DPREG_CR_SET | DPREG_CR_MP_ARM, warp->reg_cr);
+> +
+> +	/* wait for a reply, or just wait for a receiver ack */
+> +	ret =3D wait_for_completion_interruptible_timeout(done,
+> +							WARP_MSG_TIMEOUT);
+> +
+> +	/* disable ARM & 68k interrupts */
+> +	z_writel(DPREG_CR_CLR | DPREG_CR_IE_68K | DPREG_CR_IE_ARM, warp->reg_cr=
+);
 
+[Severity: Medium]
+Can an interrupted or timed-out wait leave DPREG_CR_MR_ARM and
+DPREG_CR_MP_68K latched in warp->reg_cr?
+
+When wait_for_completion_interruptible_timeout() returns early (such as on
+a signal during a sysfs read), warp_send_msg() clears DPREG_CR_IE_68K
+while the ARM is still processing the command.  When the ARM finishes, its
+status flags stay latched in warp->reg_cr because the interrupt is
+disabled.  On the next command, enabling DPREG_CR_IE_68K after
+reinit_completion(done) immediately triggers warp_irq() from the stale
+flags before the ARM processes the new request, so warp_exec_cmd() reads
+back the command opcode still in warp->dpram and warp_get_status() fails
+with -EIO.
+
+Clearing DPREG_CR_MR_ARM and DPREG_CR_MP_68K before reinit_completion()
+and enabling DPREG_CR_IE_68K would avoid completing on a stale flag.
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111163735.2272=
+86-1-p.pisati@gmail.com?part=3D4
