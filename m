@@ -1,56 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794442298;
-	b=1JLfr2i9G9E4M5r31cXcLCX2KHHXEfUi4l7T1cyReG90t0dBC7z5s/SSBk3W8YuSvon1
-	 f0XNeSB7bP36SZscJzX8Aw/tr0Nj41dwb5I8fmalWfSOde+bZDJkutnTv8D8bqMU8gPpd
-	 IQAyxq35MCIXxnvNuvxEppLPFnPs/x5N/v24XG2BsVJSTGp7PJHhiuWooN4tz7z9ghvo6
-	 LZw3k62uBmdphefyvSwAfuYl5VpfM8CdqELE+/S2VFOF9qzljGDy4YFjjaYqIgDNPCD4v
-	 n4OWgQvVXmjG0MjJoHq44ebO+SCjYfZKH043TRhrmoHKsRQshLXETwNkElzxqwSvvug==
+	t=1794442304;
+	b=j4NehQG4sjpsHaJTr1d24X0GMxOKlCH/crrgUbL8QfhspkG19ZownzxscEF4M2CL48/m
+	 8H90VSjTBJ1eO+5RNCmPf1dXbDF1lH560inqi5Axkqwu5KcK8FRgvPeqMGbHDo281YvUr
+	 ZQyUPd1PaY1Zy/vai4HJszCuG3z5LoY81NcTpBWki8bHsR2Yl3xjoEsE9fPIBbYOcIyas
+	 HpBzHzf3x9oJxRluwGNKpCuUAQX5N69XzPrjwG/qzG+E527afSuDmG3ZMLOsle4K3emNh
+	 FIAvOAEecC+zQwkY+h5vMJr66cp49JAxz9HlbIin8MhFRQpVfPvSDdr6ZDoDXtX7YIQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794442298;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794442304;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=eaMVWyg88TTJTbJx6okDLxpyTQxjW4R9AX5COxGE+fw=;
-	b=PGlRtYAFh0Qv9+Pv+hM64y2qygHNzbtOTe6YnloM21jnAplyAC5EF9ySoztuJkXjzCPh
-	 1QltrxpsJySKVccpCbFJxcZAp0+UvXIzkgXfyNpi6OOfgien3W0Dhu6Hu3Ywp67vFa//e
-	 abxk1qOx42ppHoAm2aVfWh5cgYx5NMT+j8OvI5Me4glfUDytsPFw+97WSPPCYbwwb7O/E
-	 Ss5MperbC14fRSqpLE42J1owd7iP0DecjwkiBcECIcI//UcUNQ918ZCRmcLwy+T22iFHV
-	 jvhp9+kPIZfXdSibbcd0i/NHzY4i9rHv3eip4dr2dxk78vR5IIUgrK/0KVh7E0REKkg==
+	bh=kX5vIXldifpvMxecdI0iMyVawWDf0aOSMiz+IghnPxs=;
+	b=eVTf07KmIUXh8jaEOiESkwnRJ/KFPKrEX2FMU/l5kFWMdHZ1mJPhTuyz/atMYFIYNzp+
+	 ColQ236OapyhIbjpEozye9mt+fGh5qTwt/tMOsJD36JcYCSo8gY92OtBhjeZlJLGBvP78
+	 fJJKIkNtSC9urgndZSggemxGxoJ63UanUN5WvgRExroqVcuICAsQ4EO0gxS6EawlFsAPv
+	 ba8kaLZCEa9xIziWH3j868qGwZB9qFoLLqXUrFpY8kudoovuIjUrHQimF3MUq0/gdxiy3
+	 ookARzagUoVyJPVsBfpjSP6zPFfg10Qu/QIuc/37heJuKUmBDdgtfcF81JC4s13a70w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VFCqJ2vE;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=luxsk1rX;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6109B606A321
-	for <mfd@lists.linux.dev>; Thu, 12 Nov 2026 00:11:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00C4E606A31C
+	for <mfd@lists.linux.dev>; Thu, 12 Nov 2026 00:11:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VFCqJ2vE
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B12E31F00A05;
-	Thu, 12 Nov 2026 00:11:37 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=luxsk1rX
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73DEF1F00A05;
+	Thu, 12 Nov 2026 00:11:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794442297;
-	bh=eaMVWyg88TTJTbJx6okDLxpyTQxjW4R9AX5COxGE+fw=;
+	s=k20260515; t=1794442303;
+	bh=kX5vIXldifpvMxecdI0iMyVawWDf0aOSMiz+IghnPxs=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=VFCqJ2vEUHG/tyW0m6/Lu07gQGHxyWg+od80dSyjiMyLGNQouxM28A5nntcRMhGFg
-	 AIbq7iNcE00o6BJpts8bVCLMUVt0bpLg/MKfVtCiXgXXTMzZYvcmr0pQfhUXcYTkt6
-	 2iHPmuNC87tofRIv4mUZan13tTe/BN5wq+lSnL4SdaOo3k+OiBuTpnnoVy+MeSXfEY
-	 67gCXU+qU6zbV4ccCJEOSMm4opAegZJAdtDyBKygZb9gYrSzicgGRKSdppVSX/Mfsx
-	 F7Cj9J4F42/N1n7hzeK79d+s0jrG3qMA7IBQtUzQtvJT+C/nFez1kJFicDvik+tmex
-	 IQfn/+aCTDvxg==
-Message-ID: <sashiko-outbox-209886@kernel.org>
+	b=luxsk1rXUM9AC3ULOXoMF1bOnQV7qcfndbJgH7VWSH6SaSnZtr8jV5rEKl48rr/26
+	 SJIgaehLLugrT3AUPA2MPc7frv6pVWkSs96JTFLO4lgh9XmnQFo9/7GGHmePqB9arB
+	 du3yzPchAoa1D0NsmgmPlJOgCkwSUmPdCfNOTfheV1Ynzty89MH5l1eHSVWWFZrXgr
+	 wLI7exSSE396B9YOFDddiA9u6uzyQTf7sQPBikmlf4FoOfADgy9qDOzIJYeo9elZO7
+	 R67Brn/7fDcK6IwIc7e663mLqy3E77rXKnWHYMdVTFOmgkJ7wA9Rj3LZcWcBeZW4Y/
+	 7z9HVpeMxckyg==
+Message-ID: <sashiko-outbox-209887@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 7/9] arm64: dts: marvell: Drop unused USB 'phy-names'
+Subject: Re: [PATCH 4/9] arm64: dts: marvell: Drop SPI max frequency
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?Um9iIEhlcnJpbmcgKEFybSk=?= <robh@kernel.org>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261111-dtbs-marvell-v1-7-938788aff3ae@kernel.org>
+In-Reply-To: <20261111-dtbs-marvell-v1-4-938788aff3ae@kernel.org>
 References: <20261111-dtbs-marvell-v1-0-938788aff3ae@kernel.org>
- <20261111-dtbs-marvell-v1-7-938788aff3ae@kernel.org>
+ <20261111-dtbs-marvell-v1-4-938788aff3ae@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 12 Nov 2026 00:11:37 +0000
+Date: Thu, 12 Nov 2026 00:11:43 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,8 +60,10 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> 'phy-names' is not valid without a corresponding 'phys' property, so
-> drop them when 'phys' is not present.
+> Remove spi-max-frequency from the CP0 SPI controller node on the
+> CN9130 SolidRun SOM. The property belongs on SPI devices, and the
+> flash child already has its own maximum frequency. Plus, pretty
+> sure 1.8GHz is not a possible SPI bus frequency.
 >=20
 > Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 
@@ -69,5 +71,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111-dtbs-marve=
-ll-v1-0-938788aff3ae@kernel.org?part=3D7
+ll-v1-0-938788aff3ae@kernel.org?part=3D4
 
