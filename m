@@ -1,57 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.178
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794442919;
-	b=tHsK4UHkZugB+LRuKUegDYUGcMOUzGHgzGAIU6IoJsSnV8Sj0XDdR6lrq93JI4pNoktL
-	 0EzViODJiWt7DMVZYMsoa05txwPe4FW/3N4x0vTazCxWFOWJmT2kLs0W+qboqrH+4eKQD
-	 9Q9DiI9f/92Dlvp+/Vg8Wj2zdEts5G6EAr82ytJ49T1SJgCQHwFObtDXy6pxXzyLhrWXx
-	 W92RoEabwFmP92vtFYh9e/1wsJJVPM7+BiXuKbKS7YG57gF7E08pPccwngANbYn7FAuP5
-	 nHLB2l1jvSktDgjXcV3amlrr25MX9Y13C1aiv0QmRzXDCBZduZKHOrfPmdzEE/KYH/g==
+	t=1794443119;
+	b=EZOpqUa0pDyr+M47M55fm5ldjR5cvb+8HgkBIDbk5oc9EnQolZOMpSJUmgrD5HrKRdNd
+	 FBkqfisWqykZ2DfHG9YM4LZiCFUjSOFNevL1RvAB7+dpAHkVD6KriMhuz6UFL5GEvw4+s
+	 BM8gNq9Tf6QDxbKTtCsStRXUkD/7PvVPdW8sgs84o4Fe5jYmpxpWVWxLz633BlpaMQhq2
+	 M4l5LlDOyq3QfCC7eUUO3fmRaPUzW7rByQ641jCiGFB/E59sv4WCt9LrvMsD0pokZ9P05
+	 4wDMGgokWZcMwu7f7/J6iWyi/IEobHOZny/E60X6mXpQ49g2C1QjZDwRavD/GFU3Tjg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794442919;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=sZD3EHm+3DOKD8jQC14IYZ0SJMf6df6lTLxnFFd+rAU=;
-	b=3H8Uvwz/NGzjtX9rJer3geotm4jsp9Kk6kzn8tgDFSqlD/5+FJ9PM3koUlU4gxSn0k5i
-	 7pjH2ACcOOwtByDuzs83eQNYo1WUesnihUTJoAZXQoNYmr++S///a2K3IBAkBIciksObB
-	 4pxgGJ8AhSWW3oR7DGGTPPyV9w8SCAL3m/cWgIRZLXB3JiQ1daBPt4CQLc1N8OlyB3u8p
-	 khd8fFHYRXpMCAn3mpnPBvu+lurSiXXwwbN2QeBK2i6N5Yq5gITe3LCtK4RYZPDuwUAZD
-	 FTwdbBgpXN/huuLa3LPC1pzLPRiCFWdm4uqSSo6tQE49QzdpKxuoBLVgMXhuqbOLo4Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794443119;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To;
+	bh=WmDxcQotq3NgeobvzOlqzwVczvRUhsveENxWAqE5LCM=;
+	b=SE6hrPwEE1eLBUi2y7VTvrDyiJ84DmiWRTc1V+atm0YH1ppTy+3sx5kQQOgun35Ip+ja
+	 DLo6ItC+HaSPvcCrfU00JGENndA84rLpmyzD2tFc7n7LhTThQ0upce1mYbFAjLwUc2ZN7
+	 41nkBQYiJ+mWSJQn2A8NUEibkZXDB2NmvLfY7u5V64RNM2XfSy1Z5jWQ32YM/+BVY2mwC
+	 gPMww2Jki/ZSSurBQnsL+vAkPFo+2F/vhwt536vNXMoYmMoz2XqCvMCpK/iJD2rgd8afb
+	 mirxdaqL2KIkJuqkgAFZnkNb72gsLlqj9emhfmSJ1Hs2NWBwjR9Ct0mCidPXeDe8yWg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Tscnn3mb;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=O7ZFMl5j;
+	arc=none smtp.remote-ip=74.125.82.178
+Received: from mail-dy1-f178.google.com (mail-dy1-f178.google.com [74.125.82.178])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 703B3606A31C;
-	Thu, 12 Nov 2026 00:21:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A7A8606A31C
+	for <mfd@lists.linux.dev>; Thu, 12 Nov 2026 00:25:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5A7A8606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Tscnn3mb
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B1D111F00A05;
-	Thu, 12 Nov 2026 00:21:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794442919;
-	bh=sZD3EHm+3DOKD8jQC14IYZ0SJMf6df6lTLxnFFd+rAU=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Tscnn3mb/UC5YQDS83SSLAZYNLzcSBWi72mRAcGmI8WbEY6TAIKw5MeoiTcFJAxSu
-	 35Zt+24yvkY1YzJORmrbgSCgwcEIeoP4HKx/OVmFaEcgN0HrUnwWpr5RmXebTPILe7
-	 7HbrF5MsSF2m2mslJx54sRp2tpbLcIBIKlXCf1gZyekW7mHpN71GEcL5BHxtappHKc
-	 4YX4jICY7bVD4RMSBUVrDmyGOt8uZHvMX8oWMammiu93ohzEKQD5xXMj4iotajDQXv
-	 a7bCV/Cn1phRd9MMtVY//EFYIEyBrz5Nwdt5wfc4mCK5f65ET/bBKg5gXHV7+gMSLt
-	 JzthvprRbJ4ig==
-Message-ID: <sashiko-outbox-209906@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 1/9] dt-bindings: mfd: Add Marvell AP806/CP110 system
- controller schema
-Reply-To: sashiko-reviews@lists.linux.dev
-To: =?utf-8?b?Um9iIEhlcnJpbmcgKEFybSk=?= <robh@kernel.org>
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, conor+dt@kernel.org, lee@kernel.org
-In-Reply-To: <20261111-dtbs-marvell-v1-1-938788aff3ae@kernel.org>
-References: <20261111-dtbs-marvell-v1-0-938788aff3ae@kernel.org>
- <20261111-dtbs-marvell-v1-1-938788aff3ae@kernel.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 12 Nov 2026 00:21:58 +0000
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=O7ZFMl5j
+Received: by mail-dy1-f178.google.com with SMTP id 5a478bee46e88-37071c0f42aso6358080eec.0
+        for <mfd@lists.linux.dev>; Wed, 11 Nov 2026 16:25:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794443117; x=1795047917; darn=lists.linux.dev;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=WmDxcQotq3NgeobvzOlqzwVczvRUhsveENxWAqE5LCM=;
+        b=O7ZFMl5j4fvFHcJfMbYgOMmhksN4IobfOdAwZOtB990g+noS0Ut0g7zoZzaHVMLE7f
+         0vCXeULktImSFWeXaiCm2oHUOpo4+Uc5ntshXsA+Ce0F6yd56+oR21v8uCiDR/XrTNLM
+         uKZx9nm6B2dRZjM3u4r4ICE1Z8i3M6ECEmQYVxxJNqBPRQI1kmUiT412CGO4YAtwMJqg
+         g1eOYazRosV8XDC1GqkfRpaUSJ1iWd0UCpLpnlA8b1Zz1JMdDEzV64GJKLdMO8EG01DZ
+         Kk1ibH6A9k5E3oyUUmqfJWa44pXUC8oZlwHseZ555Rof0kI+VpAFbPQ9nes0bfIWS4fW
+         ofkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794443117; x=1795047917;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=WmDxcQotq3NgeobvzOlqzwVczvRUhsveENxWAqE5LCM=;
+        b=IRnixNgbVqliS8lgP5MOBvVwMN1Fqf+ADbAgsUPmKGfQVOJnGziejuXUPNuMYei5yJ
+         AtNmKGojnpAoaXKSqMGS37aGONPaNXV/rIeCOlGKfJFmwTMKb4yYvdj7qg6QIyZ/Se9Y
+         3BJmdtoYbMc+q13cQZzTZ+YXTYW0kwbhyqfVa70VF0SBaP6uZZK8J5UI/tcuWiDZpoXo
+         UKPesXWmZLpn2SH7u80paxCMJdWM5kwi8s2UVnirQlYGZjYhDUjp5erKjR95TfE1K5Bo
+         jHVJawk8FHWjdUh2UvrXanVFvnf16Ny0vN6it8XWAtsw5XUSeY9lQ+QHUeMcekT9Orv+
+         KTBw==
+X-Forwarded-Encrypted: i=1; AL+hErGpCeIxHdnI68qBNwOsvQEb6PWLqqoNhs4LnLtp8MFlVCFKrMdbc2d47N5EFmcv6CLH0ic=@lists.linux.dev
+X-Gm-Message-State: APuU4Z8KgUVfu/ThTnPVtjxFKUFjggeCn9bGGON/DC6EL7+M9CFOrWnQ
+	BOkEdP8qqdQlE5s6TlfisMWJ6xzieinwvtHjKzi+J52HVF8Y7EJEgLgh
+X-Gm-Gg: AYBFou0FPBchU4ZXIV5HKnODdaqiw+sq98Gruz1dKWkFep5q1veQqRIgEc7qIFI1GWP
+	Yydf99yV8VAhQEE6gLBNXxsu90WzdEswG3WIyTZofPABVZiVB3e8ffUD19Iwfw+/gsAVHqUzfHI
+	FnLMXVXDbREf4tJKZdVcP8lkkNGfd4X8KZx4GGu6k0aOvAkLaHqmrq0uq9CLjyyffXSCRu6gxc/
+	cttqtI87tnBvZUZ0o/l9tKm4CHOV10FlcekTxDEiza04BB6HaWX6e+OdfKP0Y05+QYxmPu7Vhd8
+	Bl8p3W7afzfHMJt2UBpEevO9yCH3E3V6b0coxXUn1eLvyRb3/4Cwn81wr+gmV3mWpDQG6OoTXo0
+	gh2FXs35iz55owgxFkzDsVLDZZRrwsQIps6s3CLpnIEtDVMkMNfR78mmzjiYMLbXvHY2JeUhfHw
+	f78lrP4ASZBmyzM31FDCQ3wQ6JwaxCsVkOuA+hoJxIkX99H/ZUgWHlTkmRHpi9jedzSnBo2E1Vp
+	jSNxsfzpmL1MVJL6k/IKsqG867vfP+pxYLiK6P9udz3p8Ly2uZHr98FM9Y74OUgif1gN9j2URyo
+	lzHauWCHvUVog1ED4+IuwrIczk4EiBp2R7GrrjBfgIpc9aTJIhWnUMSI7US66eD45R6pJw==
+X-Received: by 2002:a05:7301:d807:b0:378:2e89:3958 with SMTP id 5a478bee46e88-3782e893b15mr345363eec.19.1794443117438;
+        Wed, 11 Nov 2026 16:25:17 -0800 (PST)
+Received: from google.com ([2a00:79e0:2ebe:8:182d:659:ffce:39a4])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3766146551asm12082193eec.1.2026.11.11.16.25.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 11 Nov 2026 16:25:15 -0800 (PST)
+Date: Wed, 11 Nov 2026 16:25:11 -0800
+From: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+To: Jakob Unterwurzacher <jakobunt@gmail.com>, 
+	"Rafael J. Wysocki" <rafael@kernel.org>, Tony Lindgren <tony@atomide.com>
+Cc: Joseph Chen <chenjh@rock-chips.com>, Lee Jones <lee@kernel.org>, 
+	Sebastian Reichel <sebastian.reichel@collabora.com>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Heiko Stuebner <heiko@sntech.de>, linux-arm-kernel@lists.infradead.org, 
+	linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, linux-input@vger.kernel.org, 
+	mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+	Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
+Subject: Re: [PATCH 1/4] Input: rk805-pwrkey - enable the wakeup interrupt
+ during system suspend
+Message-ID: <avUGEQhSKlko0Fm9@google.com>
+References: <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-0-cb12621c1fb4@cherry.de>
+ <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-1-cb12621c1fb4@cherry.de>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,75 +103,124 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-1-cb12621c1fb4@cherry.de>
 
-Thank you for your contribution! Sashiko AI review found 1 potential
-issue to consider:
-- [Medium] dt-bindings: mfd: marvell,ap806-system-controller collides
-  with legacy driver
---
+Hi Jakob,
 
-commit 4cddea2359377a9e6ae88c719cab7c7efc9634bf
-Author: Rob Herring (Arm) <robh@kernel.org>
+On Thu, Oct 29, 2026 at 11:06:23AM +0100, Jakob Unterwurzacher wrote:
+> From: Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
+> 
+> The driver marks the device as wakeup capable, but never enables the
+> power key interrupt as a wakeup interrupt. As a consequence, the PMIC
+> interrupt line is masked during system suspend and the power key cannot
+> wake up the system, e.g. from suspend-to-ram on RK3588 with an RK806.
+> 
+> Enable the interrupt as wakeup interrupt in the suspend callback if the
+> device may wake up the system, and disable it again on resume.
+> 
+> This is done in the regular suspend phase on purpose, rather than with
+> dev_pm_set_wake_irq(), which arms the wakeup in the noirq phase: there,
+> enabling it updates the PMIC's interrupt registers through regmap-irq,
+> which fails when the PMIC is connected via SPI:
+> 
+>   spi_master spi2: Failed to power device: -13
+>   rk8xx-spi spi2.0: Failed to sync masks in 7a
 
-dt-bindings: mfd: Add Marvell AP806/CP110 system controller schema
+Sounds like this needs to be solved in PM core rather than hacked around
+in individual driver? Let's CC Tony and Rafael.
 
-This commit adds a dedicated Device Tree binding schema for the Marvell
-AP806 and CP110 system controllers and their child devices.
-
-> diff --git a/Documentation/devicetree/bindings/mfd/marvell,ap806-cp110-sy=
-stem-controller.yaml b/Documentation/devicetree/bindings/mfd/marvell,ap806-=
-cp110-system-controller.yaml
-> new file mode 100644
-> index 0000000000000..4c43986c2c0a3
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/mfd/marvell,ap806-cp110-system-co=
-ntroller.yaml
-> @@ -0,0 +1,59 @@
-> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/mfd/marvell,ap806-cp110-system-contro=
-ller.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> 
+> Fixes: 5a35b85c2d92 ("Input: add power key driver for Rockchip RK805 PMIC")
+> ---
+>  drivers/input/misc/rk805-pwrkey.c | 42 ++++++++++++++++++++++++++++++++++++++-
+>  1 file changed, 41 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/input/misc/rk805-pwrkey.c b/drivers/input/misc/rk805-pwrkey.c
+> index 76873aa005b41..9b64ec7463c62 100644
+> --- a/drivers/input/misc/rk805-pwrkey.c
+> +++ b/drivers/input/misc/rk805-pwrkey.c
+> @@ -15,6 +15,10 @@
+>  #include <linux/module.h>
+>  #include <linux/platform_device.h>
+>  
+> +struct rk805_pwrkey {
+> +	int irq;
+> +};
 > +
-> +title: Marvell AP806 and CP110 system controller
+>  static irqreturn_t pwrkey_fall_irq(int irq, void *_pwr)
+>  {
+>  	struct input_dev *pwr = _pwr;
+> @@ -37,10 +41,15 @@ static irqreturn_t pwrkey_rise_irq(int irq, void *_pwr)
+>  
+>  static int rk805_pwrkey_probe(struct platform_device *pdev)
+>  {
+> +	struct rk805_pwrkey *priv;
+>  	struct input_dev *pwr;
+>  	int fall_irq, rise_irq;
+>  	int err;
+>  
+> +	priv = devm_kzalloc(&pdev->dev, sizeof(*priv), GFP_KERNEL);
+> +	if (!priv)
+> +		return -ENOMEM;
 > +
-> +maintainers:
-> +  - Andrew Lunn <andrew@lunn.ch>
-> +  - Gregory Clement <gregory.clement@bootlin.com>
-> +  - Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>
+>  	pwr = devm_input_allocate_device(&pdev->dev);
+>  	if (!pwr) {
+>  		dev_err(&pdev->dev, "Can't allocate power button\n");
+> @@ -84,16 +93,47 @@ static int rk805_pwrkey_probe(struct platform_device *pdev)
+>  		return err;
+>  	}
+>  
+> -	platform_set_drvdata(pdev, pwr);
+> +	priv->irq = fall_irq;
+> +	platform_set_drvdata(pdev, priv);
+>  	device_init_wakeup(&pdev->dev, true);
+>  
+>  	return 0;
+>  }
+>  
+> +/*
+> + * Arm the wakeup in the regular suspend phase rather than with
+> + * dev_pm_set_wake_irq(), which does it in the noirq phase: enabling the
+> + * wakeup updates the PMIC's interrupt registers, which is no longer
+> + * possible once the bus to the PMIC (e.g. SPI on RK806) is suspended.
+> + */
+> +static int rk805_pwrkey_suspend(struct device *dev)
+> +{
+> +	struct rk805_pwrkey *priv = dev_get_drvdata(dev);
 > +
-> +properties:
-> +  compatible:
-> +    items:
-> +      - enum:
-> +          - marvell,ap806-system-controller
-> +          - marvell,cp110-system-controller
-> +      - const: syscon
-> +      - const: simple-mfd
+> +	if (device_may_wakeup(dev))
+> +		enable_irq_wake(priv->irq);
+> +
+> +	return 0;
+> +}
+> +
+> +static int rk805_pwrkey_resume(struct device *dev)
+> +{
+> +	struct rk805_pwrkey *priv = dev_get_drvdata(dev);
+> +
+> +	if (device_may_wakeup(dev))
+> +		disable_irq_wake(priv->irq);
+> +
+> +	return 0;
+> +}
+> +
+> +static DEFINE_SIMPLE_DEV_PM_OPS(rk805_pwrkey_pm_ops, rk805_pwrkey_suspend,
+> +				rk805_pwrkey_resume);
+> +
+>  static struct platform_driver rk805_pwrkey_driver = {
+>  	.probe	= rk805_pwrkey_probe,
+>  	.driver	= {
+>  		.name = "rk805-pwrkey",
+> +		.pm = pm_sleep_ptr(&rk805_pwrkey_pm_ops),
+>  	},
+>  };
+>  module_platform_driver(rk805_pwrkey_driver);
+> 
 
-[Severity: Medium]
-Does requiring marvell,ap806-system-controller on the parent simple-mfd
-node cause a collision with the built-in legacy clock driver?
+Thanks.
 
-Unlike CP110, where cp110_syscon_legacy_of_match matches
-marvell,cp110-system-controller0, ap806_syscon_legacy_of_match matches
-marvell,ap806-system-controller:
-
-drivers/clk/mvebu/ap806-system-controller.c:
-static const struct of_device_id ap806_syscon_legacy_of_match[] =3D {
-	{ .compatible =3D "marvell,ap806-system-controller", },
-	{ }
-};
-
-When a device tree conforms to this schema, ap806_syscon_legacy_driver
-binds to the parent MFD platform_device at boot.
-ap806_syscon_legacy_probe() then logs three false FW_WARN messages about a
-legacy binding, performs an unintended regmap_read() of AP806_SAR_REG
-(0x400) in ap806_syscon_common_probe(), and fails probe with -EINVAL and
-"compatible not supported" because the parent node is not compatible with
-marvell,ap806-clock or marvell,ap807-clock.
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111-dtbs-marve=
-ll-v1-0-938788aff3ae@kernel.org?part=3D1
+-- 
+Dmitry
