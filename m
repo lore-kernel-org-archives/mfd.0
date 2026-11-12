@@ -1,61 +1,72 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794484183;
-	b=kz55Hp9aszLHoYcUGVnr+MBg2iFX9aQBzSaJRfobBJGPUOvNUIRVJU/usFTmOqUnlB8P
-	 qVDWchA07hi3m6fdxJPj7NYk7e4yr3oSvW7YvzV5Lj6m2+4hDULHep6vLhZgQMsArxPNt
-	 6xsjOC3hzPMNOKupJgjh/loReKO8DoZaKJOPat9/hh85zYzMduYPHMWm1d+fRnIvWRyXa
-	 k60SOaCpndIqV5zMmuoawfQv7qpftHuTwF0KiO2PQEvEOmqqu/LxLC8LVRkNevk9peghL
-	 E9RcWnT2J/QlrrxJliAgQLe+qxobsFcL8XepPjvBZP6CYJEmS4xCWBlnw79H0Ad3fQw==
+	t=1794484368;
+	b=FWhOcBH8gA/qLGc2/VtFjZs2Cl3FwseaT7iEMWGaz6JTH30fh5l8VFWecFKTGRBv7YkB
+	 WJZemZNCl/rZhf5bx2/4ZQ9LKxesJRJNL4bAqGx2XWUTux1GGUd7OE5bEXcwzwhflypL/
+	 48Q1W8D5sSBuVdWrVnmE9AHdiJCqCkPSXZerAJqOmcIO/23MpZz+xsjItCt5R4x/WH+5k
+	 APm4kKREwDfysgAN2u0Buf6sJC6pe6Eqs6JlnJ+B+GmCa2dg7d2LoNvANgmiMeZzi03DE
+	 RezU2J31VMQCFK7FiN13aDcA5podQ77joERcbzP20Qqjhs10fRwBWjJp2I6b0Ph8ovA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794484183;
-	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=kH63A4Q8NhJGmF9dCXy668pUMjIxPVBUhCn9NoDFJ2o=;
-	b=3yAVdRUn6crF/TPWsqYPNIeR4OM8B+Cl9TOnXDZ0Pe7/2BEnQxevavMPcGeGIpaYGub5
-	 hrvv7AEGsMHCh2UC1oE0R9jTPoMDXjBVIDd4KluCdykUcFINReIzdFLaNiScJjMvTsccs
-	 Kj0t9u0d6uLQVaKvImNuc5tPS6gAdmgH+NvbVhkvcgQ9Z8U//q5d4yoIyAnERqD+GM47R
-	 s5z34Liu/AYtl8tgDA5WOC4qlLbV4zPiGScyk0gjouj7vdCJyJjaywwWD4V2i4QSHhpPt
-	 ImymF0omiISF6MZylQP6TGpC7lzx4keFNys7CMQmPVKchwxp3kXzUTQgV+NK7TpBm+Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794484368;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=ab65Y+/YS/ftn0XtRf+D21POuuZDeeWSaeiwjaGmWKM=;
+	b=Dk1YwI5CFPnQpABSCxNcrJ9903L85NBkNO+r2arbu9XBA1zlNh0GLcZ1utBxpAyIFlPu
+	 PrV7J7Oi+VGFzAgvPmBSbnqjzXEKKRKmkJeSYSuOKydUtAPEkjheaChb78+ZgaVR+ynPv
+	 TpiCkKq9tIbZwd4Jqwp7LEnH/mU1yoOB96M/pwbgXqJQHu7EhxbvsGPTLHTc1lIe5nzRD
+	 vfKJdMMdR9njaMvVSGltAvi8ywoppnGrqYJwv1avFhLcw84fnB4bGayI6tXEI6WW+6aDe
+	 WlbUYfZpfIogeuvXjg+wS+wmbgUaL302sADJnmGd3FHVXFkRAwKZUWPfCLSqJN20bsQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NQ3K80Qo;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JciomXZa;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D02F606A31C;
-	Thu, 12 Nov 2026 11:49:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06967606A321;
+	Thu, 12 Nov 2026 11:52:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NQ3K80Qo
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0E76A1F00A0C;
-	Thu, 12 Nov 2026 11:49:39 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JciomXZa
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDF661F00A05;
+	Thu, 12 Nov 2026 11:52:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794484182;
-	bh=kH63A4Q8NhJGmF9dCXy668pUMjIxPVBUhCn9NoDFJ2o=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=NQ3K80Qo2q3BL07IZpeFRUivMoPaMOVcJYxjzGx0tcJcgm4EeEH9gcDfaqOxphkNG
-	 4+MxAWdn6B9irz24jPAXNdMZgvvfY9Mri6qErqmu3AGnL7j0gh0X/HkWISiJ77x/NM
-	 wcdmBa/hLp3GhTX76C1yEdSp4g2h3EBgYXqBfaElrfMw0iZAAW3E4dGW0KXI772XJE
-	 7QIGZfetbzPSgYuMCtQOp+9MDnU+GWsMwJ0I8ybv8J5YBXFpy+E1Rq638+Mbf4pleY
-	 e5c2eixsB8gfI7s3Prz/9CAG4EPzNONXb9s7DHQGbPIv6muRUVHMWCIVnE55pwwora
-	 OyznJ7ojj6RUg==
-From: Mark Brown <broonie@kernel.org>
-To: Liam Girdwood <lgirdwood@gmail.com>, Guenter Roeck <linux@roeck-us.net>, 
- Lee Jones <lee@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
- Sascha Hauer <s.hauer@pengutronix.de>, Pablo Mazzini <pmazzini@gmail.com>
-Cc: Alistair Francis <alistair@alistair23.me>, 
- Andreas Kemnade <andreas@kemnade.info>, 
- Pengutronix Kernel Team <kernel@pengutronix.de>, 
- Fabio Estevam <festevam@gmail.com>, linux-hwmon@vger.kernel.org, 
- mfd@lists.linux.dev, imx@lists.linux.dev, 
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org
-In-Reply-To: <20261108093602.329554-1-pmazzini@gmail.com>
-References: <20261108093602.329554-1-pmazzini@gmail.com>
-Subject: Re: (subset) [PATCH v3 0/5] sy7636a: power the panel only during
- updates
-Message-Id: <179441948592.393238.163548015139580869.b4-ty@b4>
-Date: Wed, 11 Nov 2026 17:51:25 +0000
+	s=k20260515; t=1794484367;
+	bh=ab65Y+/YS/ftn0XtRf+D21POuuZDeeWSaeiwjaGmWKM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=JciomXZaUjqGr0rn+i52tzTnVMKf61Ev/r6LPScfy3/DHjKOGHeScELqCPIMBBPlE
+	 ctID8uzarSzJ+lo7upBGVmq2V8xtl5tnfs/cB+SqHYLHbajDMl3JXyuXoq6iIMGLaS
+	 P/y1+WblHvuQml3Bi8eNhvWXoq1nttW3GnSWLFokZJcUeOM6yIoklaaYb3p4yq09r+
+	 kwLPkSBfkFsF+Tiucs3ZfCvR/I4CEgOuCSjcFU0Xwm5gWwbn/fGHeHGO2k6DhfnfU7
+	 DuXsXuV9XgADgIxMopbBrjiRn2Fm6wsL5HTd3PVU2pQnTVkJerK9EXIz1ZTrThwqaH
+	 di4aUgCf/gR1w==
+Date: Thu, 12 Nov 2026 12:52:44 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Stanislav Aleksandrov <lightofmysoul@gmail.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Robert Marko <robimarko@gmail.com>, Guru Das Srinagesh <linux@gurudas.dev>, 
+	Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>, Lee Jones <lee@kernel.org>, 
+	Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, 
+	"Joerg Roedel (AMD)" <joro@8bytes.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Wesley Cheng <wesley.cheng@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Alim Akhtar <alim.akhtar@samsung.com>, Bart Van Assche <bvanassche@acm.org>, 
+	Bean Huo <beanhuo@micron.com>, Stanley Jhu <stanleyjhu@google.com>, 
+	Herbert Xu <herbert@gondor.apana.org.au>, "David S. Miller" <davem@davemloft.net>, 
+	"Rafael J. Wysocki" <rafael@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, 
+	Amit Kucheria <amitk@kernel.org>, Thara Gopinath <thara.gopinath@gmail.com>, 
+	Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
+	Lukasz Luba <lukasz.luba@arm.com>, Georgi Djakov <djakov@kernel.org>, 
+	Sibi Sankar <sibi.sankar@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, mfd@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
+	iommu@lists.linux.dev, linux-usb@vger.kernel.org, linux-phy@lists.infradead.org, 
+	linux-scsi@vger.kernel.org, linux-crypto@vger.kernel.org, linux-pm@vger.kernel.org
+Subject: Re: [PATCH 02/17] dt-bindings: firmware: qcom,scm: Document Halliday
+ SCM
+Message-ID: <20261112-fabulous-nautilus-of-joviality-dd8d5a@quoll>
+References: <20261109-halliday-dts-v1-0-289114ab8197@gmail.com>
+ <20261109-halliday-dts-v1-2-289114ab8197@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -65,57 +76,20 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1560; i=broonie@kernel.org;
- h=from:subject:message-id; bh=tAX4JPP5kVuvXSOIYyzrfdqHyXORq/eq+6a96LBatXo=;
- b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLK+Lr/kpG5TctlIuGON9dnug+cdZdn2r5yv8u8uD+u/P
- UIVCpJ1HaUsDGJcDLJiiixxWdwv60ter+E7uLANZg4rE8gQBi5OAZhI1xOGf7oO+4suV7VltqyV
- WM/wbt7dvlchVRr7TXWOrDzf4PaGT56R4WiCdLdg4W51W4b/Ejt/xk/af+lqgsDUPVtnzNuZXNL
- LwwUA
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261109-halliday-dts-v1-2-289114ab8197@gmail.com>
 
-On Sun, 08 Nov 2026 09:35:57 +0000, Pablo Mazzini wrote:
-> sy7636a: power the panel only during updates
+On Mon, Nov 09, 2026 at 12:33:14AM +0000, Stanislav Aleksandrov wrote:
+> Document the SCM on the Qualcomm Halliday SoC.
 > 
-> The SY7636A hwmon driver keeps VCOM on from probe, so a display driver
-> can not power the panel only during updates.
-> 
-> Read the temperature only while the rails are on instead, and bind the
-> regulator to the I2C device directly, with the hwmon driver as its
-> auxiliary driver.
-> 
-> [...]
+> Signed-off-by: Stanislav Aleksandrov <lightofmysoul@gmail.com>
+> ---
+>  Documentation/devicetree/bindings/firmware/qcom,scm.yaml | 2 ++
+>  1 file changed, 2 insertions(+)
 
-Applied to
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/regulator.git for-7.5
-
-Thanks!
-
-[1/5] regulator: sy7636a: don't wait for power good if already on
-      https://git.kernel.org/broonie/regulator/c/7d9a62b7e554
-[3/5] regulator: sy7636a: bind to the I2C device directly
-      https://git.kernel.org/broonie/regulator/c/5f828ac25ef9
-
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
-
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
-
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
-
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-Thanks,
-Mark
+Best regards,
+Krzysztof
 
