@@ -1,57 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794442799;
-	b=OKpfuUyjfjTYOhpjgVWnmxsHrPZ/Xs4MPkURKtEB2EyPm48gRiGL2zSVsx5y9h6X8odY
-	 S5YTSduP2vXPDl0TvsfcCmunqmn56qNlpGW/mYTewb4rNTNdQLxuDpCNoks63nOS2u55R
-	 T9gow8KGhO5Kfaf9NB/qyl0L5NYrHBH8M4w47REq06BDbx3UwKxcdpexSfz14V946rMg/
-	 rvjDumK7meR3KiORwXD10PeT390NlUDtqfkomtTQYvIKxWL5otfqxFeuGxQ4sjiQ0dPEA
-	 VHpKmjJWSOzjtZqqU0J42btyzMuxnwIZAPP/JFvdMgrbJPXD9JOZBXnRfmR/40Z/Jiw==
+	t=1794442902;
+	b=16tYd8MhvNdvIy3ujBoBCqHAVg7J4CqHc8nXrbgqrn+pSH6ABdvr4hbz423uEABGFmWJ
+	 dq3yR8Q83TMvwipI7+Ipc/QvKrdYmIrDhprOf7C+nk6oKkiQOh1Qj74hncWgUDvkUtKk9
+	 Lak8TeoKcrR5074h2whaTITFm6juGLj86T3ENdZRpU54t+xE4RfSscbrQcltbYCEPAdEL
+	 JprgAuBTk6wPe7dwefThRUHamcAMy3dsFjSA3yT58xYhfO0yIFT9g8HK9NBOmM6Kc0r5i
+	 uzL5ZgKBtOvTNcM0WM/JYXM5T5G8K5ttz7aHEG8x1aLGkPPs7QEGTo/Uio0wAjvrlnA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794442799;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794442902;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=JPC9UF56affPFNHhe1UsqnSmIneSTHafu2VK2hnsmCQ=;
-	b=nJqAwdbivD+0et8Tfr5JVVuBLMdNAdPqq/o17RdY3hFCykdQPk3Kn7qPrR8JV7o144w3
-	 FFWai8VuGYOfjvbwsAAZm7VxET5Dwg2moT8Fp5TcdIoNmE7NcuNUB3LTCmJMog+0Aydo4
-	 vGVEAAzeOqPalt343fcaBMqy1b+mUGZ5QM57KJV4g752ANAfdsUsUWD6/+g8+Wi+o6YXs
-	 caOgEWzdbpWk3b7Y4BtaIDz9MyrmpNBpymAiUog78UL0izuwoaRp4xVE+WoA6klteL6Aj
-	 PXNN2736J5tj/+oVxmQPZvGIAp8fQWIhxpztfnOjdZIQGmL8LTlfSlbGyE9/Ym3hgUw==
+	bh=r7n1S0z5i+ZOhqZ0BvbIFW5HdF+vnPfxYuSwdsHG6po=;
+	b=gUUsHpJ1a9+boyckNotbQP0EX5I35Wc5t3gfGczQOvIQqQhUnFLC4B9FswXtad5lFRBN
+	 QRnF8uc78E1CPwS0jMWy0k0WhixwStD0erSUeyF0J82nNw4m/E0Qbt3Z3U4mDhX8hi/Ll
+	 LvRj6zRhl/ccR4QZ8pOspA8qZ2nBtuCOGa5pcRn/vXQfR4suoRyx05g/J4PfUaBqOu6mY
+	 56ZBtA9Q+vhFsci3xXzhTG4IyS0fadble8abr9wn8MIjeTvgeNze6FNdK+UinzvMa/ody
+	 Lm8obm7B5Ulqcbpy+Kg3tM7ObMt5Y7FNhKxCklsWH50m3ydxrMrxwCG2ZdS5EJyRtAw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BckSTyvu;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="SjrDu/OE";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4029F606A321;
-	Thu, 12 Nov 2026 00:19:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94C38606A324;
+	Thu, 12 Nov 2026 00:21:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BckSTyvu
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8835F1F00A05;
-	Thu, 12 Nov 2026 00:19:58 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=SjrDu/OE
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2CCD71F00A05;
+	Thu, 12 Nov 2026 00:21:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794442798;
-	bh=JPC9UF56affPFNHhe1UsqnSmIneSTHafu2VK2hnsmCQ=;
+	s=k20260515; t=1794442902;
+	bh=r7n1S0z5i+ZOhqZ0BvbIFW5HdF+vnPfxYuSwdsHG6po=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=BckSTyvuCBXECqo/fNZlShtLKfVwWsjm4FEi5e4FAbl6ZmnsntLJ6g38lLU1kWZJ9
-	 LfjooJZjoWhKC0vcMOXfx7xfHzk1JQKwvAXzq+VbFwL/gFiLW+droshhHAMXl3PzcH
-	 gOqkuvNJelqnuHzTIft9QTFJsyLu5HZpNW9k8TGfly/Wy/OQ2/8IabKmQrGQ2yXxdb
-	 dx83yfCjMVDY6jnjvb2y49p7Nts5wjYoDs4L3eIFOylzN+OQ9WdvpX1f2UnH2VYDiF
-	 SvMoqvxSkXSGNPiVEJxhc1UAT8B3topEBTPcUrNlBJM1IVItN8xQBnzMSM9mvvMSwY
-	 boKhf7h+IiWDg==
-Message-ID: <sashiko-outbox-209900@kernel.org>
+	b=SjrDu/OEbQwFO+96boEurWz0V6HGyWkM5yGM3Kh49zwN7O/TuUlq7K6hrqNzhRrRy
+	 iswYyrl6/8BMVtxDUxICyhsUzE+40S3pHN5y7NNhMwqJHfw37ssDz55jjQnrzSzA/D
+	 Qd7XtApPqjlM1XsXIxCRqqp1w4T9SN3ynYptgk0+7vyO4EOg2tkwKMpSx8eqvpng/G
+	 hG7Cm1ErynQ0rYTXehK3nbmXj4vXuIAS04ZTJ2lNWENZK85RzJDWhfH7PQW+MYrBW1
+	 ASsbf3w11KwPJXG5BOaVcinLgVTF7uAOMEY9A22Ig2XeHhDMPnAHR6xVsuqkwu8dMj
+	 0jH59ZT+Xp66g==
+Message-ID: <sashiko-outbox-209904@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 3/9] arm64: dts: marvell: Drop unused USB connector PHY
- supplies
+Subject: Re: [PATCH 5/9] arm64: dts: marvell: Fix node names
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?Um9iIEhlcnJpbmcgKEFybSk=?= <robh@kernel.org>
 Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, conor+dt@kernel.org, lee@kernel.org
-In-Reply-To: <20261111-dtbs-marvell-v1-3-938788aff3ae@kernel.org>
+In-Reply-To: <20261111-dtbs-marvell-v1-5-938788aff3ae@kernel.org>
 References: <20261111-dtbs-marvell-v1-0-938788aff3ae@kernel.org>
- <20261111-dtbs-marvell-v1-3-938788aff3ae@kernel.org>
+ <20261111-dtbs-marvell-v1-5-938788aff3ae@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 12 Nov 2026 00:19:58 +0000
+Date: Thu, 12 Nov 2026 00:21:41 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -63,137 +62,48 @@ Precedence: list
 
 Thank you for your contribution! Sashiko AI review found 1 potential
 issue to consider:
-- [High] arm64: dts: marvell: broken USB VBUS power after dropping
-  phy-supply
+- [Low] arm64: dts: marvell: ac5: dma-bus@0 unit-address mismatches
+  ranges parent addr
 --
 
-commit 79bdb6a1206b7da32a160f289517e10fea0f4702
+commit d32f1cd6738013623bd9cd4b37c287a2b69edbf8
 Author: Rob Herring (Arm) <robh@kernel.org>
 
-arm64: dts: marvell: Drop unused USB connector PHY supplies
+arm64: dts: marvell: Fix node names
 
-This commit removes the phy-supply properties from the usb-a-connector child
-nodes of the Marvell COMPHY lane nodes across six Armada 3720, 7040, and 80=
-40
-device trees.
+This commit updates node names across several Marvell device tree files to
+use standard naming conventions.
 
-> diff --git a/arch/arm64/boot/dts/marvell/armada-3720-turris-mox.dts b/arc=
-h/arm64/boot/dts/marvell/armada-3720-turris-mox.dts
-> index bd00e7df87c67..1ef4689d5f18e 100644
-> --- a/arch/arm64/boot/dts/marvell/armada-3720-turris-mox.dts
-> +++ b/arch/arm64/boot/dts/marvell/armada-3720-turris-mox.dts
-> @@ -284,7 +284,6 @@ &usb2 {
->  &comphy2 {
->  	connector {
->  		compatible =3D "usb-a-connector";
-> -		phy-supply =3D <&exp_usb3_vbus>;
->  	};
->  };
-> =20
-> diff --git a/arch/arm64/boot/dts/marvell/armada-7040-db.dts b/arch/arm64/=
-boot/dts/marvell/armada-7040-db.dts
-> index 3add6506ff20e..f5a53fad66e67 100644
-> --- a/arch/arm64/boot/dts/marvell/armada-7040-db.dts
-> +++ b/arch/arm64/boot/dts/marvell/armada-7040-db.dts
-> @@ -224,7 +224,6 @@ &cp0_utmi {
->  &cp0_comphy1 {
->  	cp0_usbh0_con: connector {
->  		compatible =3D "usb-a-connector";
-> -		phy-supply =3D <&cp0_reg_usb3_0_vbus>;
->  	};
->  };
-> =20
-> @@ -238,7 +237,6 @@ &cp0_usb3_0 {
->  &cp0_comphy4 {
->  	cp0_usbh1_con: connector {
->  		compatible =3D "usb-a-connector";
-> -		phy-supply =3D <&cp0_reg_usb3_1_vbus>;
->  	};
->  };
-> =20
-> diff --git a/arch/arm64/boot/dts/marvell/armada-8040-clearfog-gt-8k.dts b=
-/arch/arm64/boot/dts/marvell/armada-8040-clearfog-gt-8k.dts
-> index 90ae93274a160..4efa2a1dbda7c 100644
-> --- a/arch/arm64/boot/dts/marvell/armada-8040-clearfog-gt-8k.dts
-> +++ b/arch/arm64/boot/dts/marvell/armada-8040-clearfog-gt-8k.dts
-> @@ -599,7 +599,6 @@ flash@0 {
->  &cp1_comphy2 {
->  	cp1_usbh0_con: connector {
->  		compatible =3D "usb-a-connector";
-> -		phy-supply =3D <&v_5v0_usb3_hst_vbus>;
->  	};
->  };
-> =20
-> diff --git a/arch/arm64/boot/dts/marvell/armada-8040-db.dts b/arch/arm64/=
-boot/dts/marvell/armada-8040-db.dts
-> index c7102f74d4d54..89e6f35f310dd 100644
-> --- a/arch/arm64/boot/dts/marvell/armada-8040-db.dts
-> +++ b/arch/arm64/boot/dts/marvell/armada-8040-db.dts
-> @@ -170,7 +170,6 @@ &cp0_usb3_0 {
->  &cp0_comphy4 {
->  	cp0_usbh1_con: connector {
->  		compatible =3D "usb-a-connector";
-> -		phy-supply =3D <&cp0_reg_usb3_1_vbus>;
->  	};
->  };
-> =20
-> diff --git a/arch/arm64/boot/dts/marvell/armada-8040-mcbin.dtsi b/arch/ar=
-m64/boot/dts/marvell/armada-8040-mcbin.dtsi
-> index f2d278d171eb1..006293931c782 100644
-> --- a/arch/arm64/boot/dts/marvell/armada-8040-mcbin.dtsi
-> +++ b/arch/arm64/boot/dts/marvell/armada-8040-mcbin.dtsi
-> @@ -370,7 +370,6 @@ flash@0 {
->  &cp1_comphy2 {
->  	cp1_usbh0_con: connector {
->  		compatible =3D "usb-a-connector";
-> -		phy-supply =3D <&v_5v0_usb3_hst_vbus>;
->  	};
->  };
-> =20
-> diff --git a/arch/arm64/boot/dts/marvell/armada-8040-puzzle-m801.dts b/ar=
-ch/arm64/boot/dts/marvell/armada-8040-puzzle-m801.dts
-> index def25d51c4bf9..06a861f83ad87 100644
-> --- a/arch/arm64/boot/dts/marvell/armada-8040-puzzle-m801.dts
-> +++ b/arch/arm64/boot/dts/marvell/armada-8040-puzzle-m801.dts
-> @@ -491,7 +491,6 @@ &cp1_uart0 {
->  &cp1_comphy2 {
->  	cp1_usbh0_con: connector {
->  		compatible =3D "usb-a-connector";
-> -		phy-supply =3D <&v_5v0_usb3_hst_vbus>;
->  	};
->  };
+> diff --git a/arch/arm64/boot/dts/marvell/ac5-98dx25xx.dtsi b/arch/arm64/b=
+oot/dts/marvell/ac5-98dx25xx.dtsi
+> index 4878773883c95..814b8a2e8ea93 100644
+> --- a/arch/arm64/boot/dts/marvell/ac5-98dx25xx.dtsi
+> +++ b/arch/arm64/boot/dts/marvell/ac5-98dx25xx.dtsi
+> @@ -231,7 +231,7 @@ sdhci: mmc@805c0000 {
+>  		 * Dedicated section for devices behind 32bit controllers so we
+>  		 * can configure specific DMA mapping for them
+>  		 */
+> -		behind-32bit-controller@7f000000 {
+> +		dma-bus@0 {
+>  			compatible =3D "simple-bus";
+>  			#address-cells =3D <0x2>;
+>  			#size-cells =3D <0x2>;
 
-[Severity: High]
-Does dropping phy-supply here without moving the supply to the parent COMPHY
-lane node (or vbus-supply on the connector) leave the USB3 VBUS regulators
-disabled on these boards?
+[Severity: Low]
+Should this node be named dma-bus@7f000000 instead of dma-bus@0?
 
-When mvebu_comphy_probe() and mvebu_a3700_comphy_probe() create a PHY for
-each lane node, phy_create() calls regulator_get_optional(&phy->dev, "phy").
-In of_get_regulator(), if phy-supply is not present on the lane node itself,
-it falls back to searching child nodes:
+This node has no reg property and defines:
 
-drivers/regulator/of_regulator.c:of_get_regulator() {
-	...
-	snprintf(prop_name, 64, "%s-supply", supply);
-	regnode =3D of_parse_phandle(node, prop_name, 0);
-	if (regnode)
-		return regnode;
+  ranges =3D <0x0 0x0 0x0 0x7f000000 0x0 0x1000000>;
 
-	regnode =3D of_get_child_regulator(dev->of_node, prop_name);
-	if (regnode)
-		return regnode;
-	...
-}
+In check_simple_bus_reg(), dtc skips the 2-cell child address (0x0 0x0) and
+matches the unit-address against the parent /soc bus address (0x0 0x7f00000=
+0),
+so building DTBs with W=3D1 warns:
 
-Because of_get_child_regulator() finds phy-supply in the connector child
-node, phy_power_on() currently enables these VBUS regulators when the xHCI
-roothub powers on its PHYs. Removing phy-supply without moving it to the
-parent lane node leaves cp0_reg_usb3_0_vbus, cp0_reg_usb3_1_vbus, and
-v_5v0_usb3_hst_vbus (which are GPIO-controlled regulators without
-regulator-always-on) with no consumer, so 5V VBUS power to the USB3 host
-ports is never turned on.
+  Warning (simple_bus_reg): /soc/dma-bus@0: simple-bus unit address format =
+error, expected "7f000000"
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111-dtbs-marve=
-ll-v1-0-938788aff3ae@kernel.org?part=3D3
+ll-v1-0-938788aff3ae@kernel.org?part=3D5
