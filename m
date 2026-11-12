@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794515375;
-	b=NDVHrf6DYtjLjOIb7si3t+wy034lDL5zNiIiEuk6/AaaDGOo4nITCzTEwGFuKV4+WVuV
-	 fqzH6GZ0/AbGmJeceHjxvQZ0ErGkCx7+I7WGE/EZqG9TCzZx7HiZooo4rmlkpek2HyDBq
-	 e5Mh0saRSvS0nEV/3JXUm1580htLevZMz56W9a4FWughDFv5Zl4qcxy7yHwmsJt1U/B5E
-	 UvyNVQ7M8Jqr1j5AC9vfYEbEEbBU/BN+tCnpxrfonCt6or01OfNFcGiFY9aenceJPUmi2
-	 vhOl1YOUqNju3Ov5cd3EN1PvmORehvHyJ+y2q7YbrC7pF6PWEFa0becyB5eNeYOzNjw==
+	t=1794515456;
+	b=dSaPZuneyQuWvBRz+NAZJC1FUK4Ob6+2txbfOo39PKRkuztoxZHTvi8zqs9LEdXB8VN5
+	 itiJzywJjDxGsHyCvJASH/OSGp10FS4UDaE5FPoLikcCmylf5Sz8sa21m07TRQmaNsiaJ
+	 jVA4KAeN/fLz8p37opapLnO42y8WGa0/QO5ewCQGsbi8tfWar0DVtk9hXEihcT49Tsndt
+	 s8ReRRS0wUVDGfWKzqLPsozPGt/MA+OKYPVvxVsL4C0/4X9vrt3bO9is8kNkzF+r4RlGL
+	 m2ZjAyPyQJcu6361hoaXqXHtV/sTTwdv/qc2TxmxqEU4+QK3IeWigeY4ONJuPyrC8mw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794515375;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794515456;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=wVv+1zaFblC+QwYL8lNmgNi7aNM7OlkPdvxsqqA3DOQ=;
-	b=JxHPpEDAc7h0jcLLm9QLcZpAReSNjpCCj77YV+Q85Am+CVduUSbLa8j1th952mEa5pRT
-	 TjOg50z8iPIxjIJwBVeH2S7/SPWYJ7Tr8KdaFMhUxhTzhbFNfjlvVB9SmVWHa19poDJFL
-	 7cSK9LdyTtWF/dP/T5Wd6+3AzBm/MXvtgUDlVnsDSZbuWFWHBl121kDgku7hZjFxGbkG6
-	 DPdCzTilB8XmKZGGircc5XaFB4leXVVUOQe0ZP3bUW/bZ8kpYqIGJdEADKbz7L+Nvcq6p
-	 mXqpCPPhWwYoPlsvlEjzdAVgg5mHp5qFGGDQp1F25uQ6J6CLJjYZC/ovMRMjTzl7H5w==
+	bh=b6AnnrGlfC8Em4pZFgyYpEDXi7oWX8N0dCzmnOEUgSs=;
+	b=30Rxx4w0mknEeECtrtF51iQTN0XdtKGAP6FqcQMr2iQ2ghWavDHBBt9HHFvLEM4Ql0Nw
+	 AoB6XIJNXOT2xCwpQ9gl6EigK+nYYfy053CRgrNdG+wDOt3f8aDf5Ctmt5oDuV5sk+9+A
+	 kx82GzcB8bIREEnZl8vLsM6pf/MMcZHIkjqug0cceMcBbeM+epru+5olttLuhiejYD1Ja
+	 MB7Q6sKJNp3ZTDCT4T93yAI/3zizAcdKdpM8ID0GRNisRknWikCY7J7trcSdu3OfiZ0J7
+	 gNGwac9rIDW3QiQEimg6/X0PNWRWwWD9udNMEYmccny78F5s8PD6LNMKXpWJnP4NYiw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="KRM0Oo/O";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kqWLSi3U;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1AEE7606A31C
-	for <mfd@lists.linux.dev>; Thu, 12 Nov 2026 20:29:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A59F606A31C
+	for <mfd@lists.linux.dev>; Thu, 12 Nov 2026 20:30:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=KRM0Oo/O
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C46C11F000C4;
-	Thu, 12 Nov 2026 20:29:34 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kqWLSi3U
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EC8CA1F000C4;
+	Thu, 12 Nov 2026 20:30:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794515375;
-	bh=wVv+1zaFblC+QwYL8lNmgNi7aNM7OlkPdvxsqqA3DOQ=;
+	s=k20260515; t=1794515456;
+	bh=b6AnnrGlfC8Em4pZFgyYpEDXi7oWX8N0dCzmnOEUgSs=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=KRM0Oo/OIDbu96F8eHgYOAcNEE8/svBjw8ki3J+0Zf0X46WR/hhsIm2bl7UT1TPAF
-	 paEYzKwqlJXdADfZjlAwnKFrDZGZc4zzooGORpzWJLIGdCUb7g6U28ohM53vQfZ05t
-	 /QY+LCZwn75bdjb6S4ICCbMftrZ2VmgCifCZgz0FxEtAOYuBOuU6JBXr3OeKrUKF8G
-	 bSks73J6sc2Y8SjbfCaceIBhsJRx0qZP7CWAZ+FWjhtU3oeKSbJgBBL5Hu7gWtE2YN
-	 E5LLxIExJB/kuaguRp4SFUOCO5n1lvQ0zhgfGYUdDJypdDS6YZ/kJHzG2wFFkXOmKm
-	 8Q4iSiRQ8EqeQ==
-Message-ID: <sashiko-outbox-211793@kernel.org>
+	b=kqWLSi3UjdqGxjcnBr5P3XrYy+t8mEo+ct5XFKTOw8pkJ3VWtTB588FeKVpCy9bmy
+	 O0StrnwcQxNtT6ID4O8oS4WeH0hJxdbA8kLHtyt4E+0Rf8Oq4/w6QsP4pOwpfWPsEo
+	 1m8U9EzMCRCEHZO9FWJYdSQvCXRO3KM8SQmq0eP+JDW6bLHHX2zudjjOozlCRQyBbE
+	 7nGu6iXmOsyc7wP3xKFNwpReKxN0DSTTfheF48NutLC39co+AreyPc+kEVBAx6dNPq
+	 uGbAVSMMmz0c4e9Kq9s9/fwBjiZOlTjrqQcsM9tUAMbq2/OprjOW/q0AoTYczW/Rse
+	 nShS8Y1GDO66A==
+Message-ID: <sashiko-outbox-211794@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 1/2] dt-bindings: mfd: syscon: Add MSM8996 SAW3
- registers
+Subject: Re: [PATCH 2/2] arm64: dts: qcom: Add MSM8996 SAW3 syscon
+ compatible
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?Um9iIEhlcnJpbmcgKEFybSk=?= <robh@kernel.org>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261112-dtbs-qcom-v1-1-1978370c7cad@kernel.org>
+In-Reply-To: <20261112-dtbs-qcom-v1-2-1978370c7cad@kernel.org>
 References: <20261112-dtbs-qcom-v1-0-1978370c7cad@kernel.org>
- <20261112-dtbs-qcom-v1-1-1978370c7cad@kernel.org>
+ <20261112-dtbs-qcom-v1-2-1978370c7cad@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 12 Nov 2026 20:29:34 +0000
+Date: Thu, 12 Nov 2026 20:30:55 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,9 +61,8 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> Add a compatible for the MSM8996 SAW3 register bank referenced
-> through qcom,saw-reg properties. The name is based on the label in .dts
-> files.
+> 'syscon' nodes are required to have specific compatibles. Add
+> "qcom,msm8996-saw3" compatible to the MSM8996 SAW3 syscon block.
 >=20
 > Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 
@@ -71,5 +70,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261112-dtbs-qcom-=
-v1-0-1978370c7cad@kernel.org?part=3D1
+v1-0-1978370c7cad@kernel.org?part=3D2
 
