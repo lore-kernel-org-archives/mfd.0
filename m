@@ -1,56 +1,49 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794510413;
-	b=P3YKRUz0AG68pbj55dzfY6p6u7sf6GXgfp5bXbm/1n5evzujiRJUFm6pJNk3NViNvhUn
-	 h4bEMUrnvwqshweIpc1cmR4tVPb6gEuZaay8K7NqKSYSgykThttmLx8fTawhCq/S3X3YG
-	 NA5qICcIARh3uO6K/TAkcHsFNUXHoq8zgf2e6T8sVFY790WbhB13uxG13S67/3To6YFrY
-	 G646pWLxgCFH0Qg6I8V6NgHJGCbsYEQY81XNieBQVuSB/RkjMoy/1yFgoLWQr2VhGgRnc
-	 IOnPPbBli/TdZiUg8eaNdu3VoAmYVOFIiawC+UrdB3ClWAiy44POo48Duq1jRU9YC3g==
+	t=1794515210;
+	b=5jMkm4kFSIw46ZogAnuzp1QpeHM9TAjLCq9t9zQhwci15rUUtgkQWiRUff/K18/A5SOQ
+	 xWk4IlL7FVaFCXDk50ivdwBqCPENhNvZqwdoOzskUVKBcdSJnSMenGgbvYkFr5Q7C9WE8
+	 fppKbVUKrHtUVyQ9D/EFST4zWOJ97+4cxzhbJhgq9BfOTH2kYQTkWrd7pRy4ERbOQ5GCi
+	 folvbtN5lcSbiqgWvFCprXsriCIPtwJDPbd/EfJZixFFCspdKtLiel6+1L82RhAfuSv+b
+	 YHl+0cipdE7xG3E7HG8rXAI/Lt6SK6Y+G6Xzwdxix+E2u8L425UFanxhvdYPS2iOD2g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794510413;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=+1RJTC2M1o7t86bhm9cq6wavppB7odkgwBBUNlKm5tc=;
-	b=wKcp6aaBwW3WDnhGLvWfIbXDZtTOd0F+cqN7h2R+gy2svcVx2QbFJq2yxxZcqNs5tUTa
-	 ftfqhm6w64pJJjpwtKLOR4y27TI4E3D2ameXy5UnqIEdb8sKSJLYKmaabzFJeFrctOius
-	 3h+BYVM8d9APjwx6//iyr8oJYsPWAm3PjGSQBykm9Dnv1BdfvPvXoe9g1U1Euq7HLvp7h
-	 lW5ts+IJeDdyZvmFxrbV940SRi475rzT6WqSKL/wvFffmsnrU8RPP2bs0nxIaQOqriuiH
-	 rMpEMDomHXA2ADubnG7Khpmzwv6Y6tYF13iVrYYEBZcLlKSS3+kKadxg+tcntS+mNJg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794515210;
+	h=Received:DKIM-Signature:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer;
+	bh=i8o5XpAdxW8YK+91ZogRFhYoz3DDkqo9xO8qQk//tAA=;
+	b=Ho90L4QEWIbVqMs7XqpSqDnijaP8PkGlJfRdpXqcRmqbNGzVv/zO2GIaTekKrxakXzPz
+	 CaY2+C/NuvHm+3w6hRhhHGwv3dfvChpwffoTQ/TSGpR01k1dyHoGjLPmqbZeuzRptlZK1
+	 0QagrxcYJwhf4MVxpiUYo3hQUeZXV+fGbErJgiW+uI4AjiWUPlfQU2Ara3OfX4RJ6YQEE
+	 uNKkxUxvi6QiJ2xNcP7aXoRJfoUXdgLtWdWi/H2yOzIy62/6f31QcF6qWLFZKwflZ8wjN
+	 bjJMZrA0fupNYSF5rijezuGsU4zms3o8jzd4rc206EVzcUxfRCcYpexqnNZGlAchoqw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZXcqTdTr;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gtefShIE;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 249FD606A31C
-	for <mfd@lists.linux.dev>; Thu, 12 Nov 2026 19:06:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB78B606A31C;
+	Thu, 12 Nov 2026 20:26:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZXcqTdTr
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A87581F000C4;
-	Thu, 12 Nov 2026 19:06:52 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gtefShIE
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 879451F000C4;
+	Thu, 12 Nov 2026 20:26:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794510412;
-	bh=+1RJTC2M1o7t86bhm9cq6wavppB7odkgwBBUNlKm5tc=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=ZXcqTdTriBfAyiT0FYZJ+5iHmS6mlBgLAU9B9rNYXK5fhnczwVPt9S1Kr9KmTMtYo
-	 JxwmPM7FpjByx5oR/nIquFzzn4FP/ILR1h/nTq29kwYFTFg4xI/fGkpTIXv0AVHDSj
-	 bTKWiOhmzbRl/Hg2MuF2t11PWpX6OVGUpBBKkvGhxuvU1f7yJ+bGHOkCJMubOiwwz9
-	 gOWFJgclf2kZkHGS261Br4/bBbwfVFgJISS2WFLsXUkBB5o4Ov0nveHdMMUrtfMCXv
-	 uFXgfVYG5LHMJHpxTYa1aj2CEq/v9PaAjBdGCZCApOT/yHf5BVdbdq3Gkws7oOjEvY
-	 BTqr5hpvpOItw==
-Message-ID: <sashiko-outbox-211740@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 7/7] pinctrl: airoha: add support of an7589 SoC
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "John Crispin" <john@phrozen.org>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261112185941.1316112-8-john@phrozen.org>
-References: <20261112185941.1316112-1-john@phrozen.org>
- <20261112185941.1316112-8-john@phrozen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 12 Nov 2026 19:06:52 +0000
+	s=k20260515; t=1794515210;
+	bh=i8o5XpAdxW8YK+91ZogRFhYoz3DDkqo9xO8qQk//tAA=;
+	h=From:Subject:Date:To:Cc;
+	b=gtefShIEfOc9BWQ5+hBbq8zu7RKfK14o7pH0CVoDPx7i3B82P+z+LNXdK4BVGle1I
+	 F+Bhe3b60ipWwnO1HtmZBeZhwCGsmkTRNVF/EoCHWs+/u17U41gh6GRJiQQVvUweHZ
+	 QI5Hx0aAvRw2RzxrZiNqZmQxeoeQn0YcS82U1n0WvlgSQPqfjisGwvk4kg+dwOxkk3
+	 /AHhJ+EIORKkT3tribxYapNYBzidEZynQdrCm+Jc2whdJBuYQfxICAmp0XVZlXY+kN
+	 T9MEvXb28SE8pK7v7n/2ng9Y3FMWSciOMHi5jcC2iTvhTokLirRUnnLYFhT9RCQ6Cn
+	 TfV63A+5ofaiw==
+From: "Rob Herring (Arm)" <robh@kernel.org>
+Subject: [PATCH 0/2] arm64: dts: qcom: Add MSM8996 SAW3 compatible
+Date: Thu, 12 Nov 2026 14:26:38 -0600
+Message-Id: <20261112-dtbs-qcom-v1-0-1978370c7cad@kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,23 +52,42 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQ5AMBBA4avIrDVpKyxcRSx0TBmJvw4iEXdXL
+ L/k5V0gFJgEyuSCQAcLz1OESRPAvpk6UtxGg9W2MMZY1W5O1IrzqHJvs1x7jY4QYr8E8nx+r6r
+ +LbsbCLd3APf9AGqydGZtAAAA
+X-Change-ID: 20261112-dtbs-qcom-5f2350f0cbec
+To: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
+X-Mailer: b4 0.16-dev
 
-> Add pin controller support for the Airoha AN7589. Its GPIO block is
-> the EN7581 one with a third bank, giving 74 GPIOs. Pin functions are
-> selected through a separate IOMUX block holding a 4 bit mode per pin,
-> where mode 0 is GPIO.
->=20
-> As on the EN7581, the pwm function is available on GPIO0 to GPIO15
-> through the GPIO flash mode register.
->=20
-> Unlike on the other SoCs, the pull and drive registers of the AN7589
-> are not known, so no pull or drive configuration is provided.
->=20
-> Signed-off-by: John Crispin <john@phrozen.org>
+'syscon' nodes are required to have specific compatibles, but the 
+MSM8996 SAW3 nodes are lacking one. This series adds one.
 
-Sashiko has reviewed this patch and found no issues.
+The binding should be applied with the dts changes to avoid new 
+warnings.
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261112185941.1316=
-112-1-john@phrozen.org?part=3D7
+Rob
+
+Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
+---
+Rob Herring (Arm) (2):
+      dt-bindings: mfd: syscon: Add MSM8996 SAW3 registers
+      arm64: dts: qcom: Add MSM8996 SAW3 syscon compatible
+
+ Documentation/devicetree/bindings/mfd/syscon.yaml | 1 +
+ arch/arm64/boot/dts/qcom/msm8996.dtsi             | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+---
+base-commit: 6d582d78fad9d828e575ca0cdcff8ea47a77220b
+change-id: 20261112-dtbs-qcom-5f2350f0cbec
+
+Best regards,
+--  
+Rob Herring (Arm) <robh@kernel.org>
 
