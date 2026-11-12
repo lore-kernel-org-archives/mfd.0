@@ -1,56 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794442304;
-	b=j4NehQG4sjpsHaJTr1d24X0GMxOKlCH/crrgUbL8QfhspkG19ZownzxscEF4M2CL48/m
-	 8H90VSjTBJ1eO+5RNCmPf1dXbDF1lH560inqi5Axkqwu5KcK8FRgvPeqMGbHDo281YvUr
-	 ZQyUPd1PaY1Zy/vai4HJszCuG3z5LoY81NcTpBWki8bHsR2Yl3xjoEsE9fPIBbYOcIyas
-	 HpBzHzf3x9oJxRluwGNKpCuUAQX5N69XzPrjwG/qzG+E527afSuDmG3ZMLOsle4K3emNh
-	 FIAvOAEecC+zQwkY+h5vMJr66cp49JAxz9HlbIin8MhFRQpVfPvSDdr6ZDoDXtX7YIQ==
+	t=1794442639;
+	b=VdGlFlQ1hhVOwhlWE7/lzYCywfMJmnIEhIOd4HnSEOwhBmgY58LZktRtPu+VsCGC2N7m
+	 r4YqaUfOjW9Z9pa3NWnmpO1B/gVzSVnM8g07djVACEFBD4NBY4l6rEQ59MQbpCmq5fEwD
+	 B3je67QglPHQHT42YQKDZipxgBfsim0+ThUr3ktAa1ia5sMIRNgsHFyddCYLEaLOWD7yk
+	 5Ki5n/OJpZSq9sbnjlEaJTKTEpnKKFMYwMkLpp3JrDEQDfhfnlSv3w5JXJXHkdNqLq75N
+	 jGEXkOZi0NJX9XWkgMDgHGRgRdglyN4gkejKhjV5OzhDK1TZxyjx06H4pb3aF6xSJBA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794442304;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794442639;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=kX5vIXldifpvMxecdI0iMyVawWDf0aOSMiz+IghnPxs=;
-	b=eVTf07KmIUXh8jaEOiESkwnRJ/KFPKrEX2FMU/l5kFWMdHZ1mJPhTuyz/atMYFIYNzp+
-	 ColQ236OapyhIbjpEozye9mt+fGh5qTwt/tMOsJD36JcYCSo8gY92OtBhjeZlJLGBvP78
-	 fJJKIkNtSC9urgndZSggemxGxoJ63UanUN5WvgRExroqVcuICAsQ4EO0gxS6EawlFsAPv
-	 ba8kaLZCEa9xIziWH3j868qGwZB9qFoLLqXUrFpY8kudoovuIjUrHQimF3MUq0/gdxiy3
-	 ookARzagUoVyJPVsBfpjSP6zPFfg10Qu/QIuc/37heJuKUmBDdgtfcF81JC4s13a70w==
+	bh=CP0CUGEzZ1ZsnE+QQjzjTiciGHDCNBTaBkgV2aIGgtY=;
+	b=FiEFE/STfjNvWMH9lu1bUGM4anMV9nQj8Go0dxD/qCI1A3LfHLHI2AEUyfz9ntkQWQFS
+	 DJeUSolV4vNbEIp+x1wKnoxrm5z1yD5AvqS2POdcX3ULq3TU2HFOCl2jXE3V8U0bn1v4K
+	 vphcoaWGRVL05LdFDuFgCQNJbtmRvcsDiVBLYTflBjna5CJDzZokqcdD63fNXyEBHdFDq
+	 GsKtVZXz34UPw+vS1300v0m1BBJlnpZ0BmHJO2EvAi8QS4LVh+nR+dCRCZSXEfDaXwjZ6
+	 C6OijtOgbOh1vt30ZOgiCzEh9NTQ1ks23nl3X790bhKad7wj5YOYlrkjJGtn9rNf7NQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=luxsk1rX;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XToggzbJ;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00C4E606A31C
-	for <mfd@lists.linux.dev>; Thu, 12 Nov 2026 00:11:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D9711606A326;
+	Thu, 12 Nov 2026 00:17:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=luxsk1rX
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73DEF1F00A05;
-	Thu, 12 Nov 2026 00:11:43 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XToggzbJ
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3CD691F00A05;
+	Thu, 12 Nov 2026 00:17:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794442303;
-	bh=kX5vIXldifpvMxecdI0iMyVawWDf0aOSMiz+IghnPxs=;
+	s=k20260515; t=1794442639;
+	bh=CP0CUGEzZ1ZsnE+QQjzjTiciGHDCNBTaBkgV2aIGgtY=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=luxsk1rXUM9AC3ULOXoMF1bOnQV7qcfndbJgH7VWSH6SaSnZtr8jV5rEKl48rr/26
-	 SJIgaehLLugrT3AUPA2MPc7frv6pVWkSs96JTFLO4lgh9XmnQFo9/7GGHmePqB9arB
-	 du3yzPchAoa1D0NsmgmPlJOgCkwSUmPdCfNOTfheV1Ynzty89MH5l1eHSVWWFZrXgr
-	 wLI7exSSE396B9YOFDddiA9u6uzyQTf7sQPBikmlf4FoOfADgy9qDOzIJYeo9elZO7
-	 R67Brn/7fDcK6IwIc7e663mLqy3E77rXKnWHYMdVTFOmgkJ7wA9Rj3LZcWcBeZW4Y/
-	 7z9HVpeMxckyg==
-Message-ID: <sashiko-outbox-209887@kernel.org>
+	b=XToggzbJ+srPT3wGOKXOuGx/F8u1mVhSsrSydRbXoF6VrFkhHZxp3lKPVz6dN3jfw
+	 BOqXNgggCyA2xHreigzOch6SWoqd9bbxnduj+g6/xq+MBvm9T7O2S0ZnD9Fp83k1dc
+	 gQpPz9BBxmCe5L1oKd5ygodpQ4psbi6ZcZulja7z1wabKn8SN1RiDCZDQkuGbJZRY4
+	 bTvLOONeTAMB6VAw2JhCRuDynj9H2d15uBpfJHX3/QHINBXN5SThZ/wcaDuGH75ERR
+	 dHIbWqY5nY/4YvhGh8CQPwXfh63pjl5kyNmXjVXMlpBnKZ/TIYYXFt4JYxF8yu/Q42
+	 3rFGiKlovsCCw==
+Message-ID: <sashiko-outbox-209895@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 4/9] arm64: dts: marvell: Drop SPI max frequency
+Subject: Re: [PATCH 9/9] arm64: dts: marvell: armada-3720-gl-mv1000: Add
+ switch fixed-link
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?Um9iIEhlcnJpbmcgKEFybSk=?= <robh@kernel.org>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261111-dtbs-marvell-v1-4-938788aff3ae@kernel.org>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, conor+dt@kernel.org, lee@kernel.org
+In-Reply-To: <20261111-dtbs-marvell-v1-9-938788aff3ae@kernel.org>
 References: <20261111-dtbs-marvell-v1-0-938788aff3ae@kernel.org>
- <20261111-dtbs-marvell-v1-4-938788aff3ae@kernel.org>
+ <20261111-dtbs-marvell-v1-9-938788aff3ae@kernel.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 12 Nov 2026 00:11:43 +0000
+Date: Thu, 12 Nov 2026 00:17:18 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,16 +61,31 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> Remove spi-max-frequency from the CP0 SPI controller node on the
-> CN9130 SolidRun SOM. The property belongs on SPI devices, and the
-> flash child already has its own maximum frequency. Plus, pretty
-> sure 1.8GHz is not a possible SPI bus frequency.
->=20
+Thank you for your contribution! Sashiko AI review found 1 potential
+issue to consider:
+- [Low] arm64: dts: marvell: missing Fixes trailer for gl-mv1000
+  fixed-link fix
+--
+
+commit a68eb6dc3b861d90e5a107b8b38a297faa592448
+Author: Rob Herring (Arm) <robh@kernel.org>
+
+> arm64: dts: marvell: armada-3720-gl-mv1000: Add switch fixed-link
+>
+> As the switch port 0 has an 'ethernet' phandle, 'phy-mode' and one of
+> 'fixed-link', 'phy-handle' or 'managed' are required by the DSA schema.
+> The expressobin has appears to have a similar configuration, so copy it
+> and use 'fixed-link'.
+>
 > Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 
-Sashiko has reviewed this patch and found no issues.
+[Severity: Low]
+Without phy-mode and fixed-link on CPU port 0, dsa_shared_port_validate_of()
+fails validation and skips phylink registration for the switch CPU port.
+Should this include a Fixes tag for the commit that added the board DTS:
+
+  Fixes: 6d5a6740f6df ("arm64: dts: marvell: add DTS for GL.iNet GL-MV1000")
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261111-dtbs-marve=
-ll-v1-0-938788aff3ae@kernel.org?part=3D4
-
+ll-v1-0-938788aff3ae@kernel.org?part=3D9
