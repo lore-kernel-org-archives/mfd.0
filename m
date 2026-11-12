@@ -1,57 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794488183;
-	b=MYHIaPvx9YDLp1XTD7M4pHxrrk5qsUL3XqDHTmNahJ5EJSrCW4oi9EU9sGOe3r7qBQ3v
-	 JIlukFSjn2I6hv7n//gWBZkPgNkQt5mq1wCGkD9DrZs1e0//PSwJlOZ3iIA6cWo8zqyKt
-	 6DxYlmC00dPppSXHPnG37m2y2TkFQmxSk+JqyCBdngHQ6FbOgOATgjVSeNbYrneeVKKSM
-	 iJM7m6iuMI8K2s63S2otCBLxD7Dvj+RXprApasOdWv7THcjkbY98mx5lAuLEhUFwpZt7R
-	 sC5svcMcJiLtewj8x0gTePDsz3EpusFmTrTxYDoOzijlO6TLxWPWzn7nRRJlgXH75Wg==
+	t=1794488834;
+	b=LzzFVn7ke6jiNjbevuynZAkSI7izmOOSmGYf9pZSkjbzjO0Aq+rWRjxnkGXLwPAPIDB0
+	 HLK11w2Io+JrOpBxQ+sWDxgYGa8/iaexm0HcQvqP99h6R1YSQQD+5xsS3zszc9T5IKKc7
+	 EOJa6AK09gX/lVKGK75/FJZXFCG05Tlf7PcImz+Wy3EO0wswjaYIJQZ6jAnf29mlb4+oy
+	 Tmec3GK9ZcdsDHt1gnVR6qc7d7YmDziHQnNZ+oCttmgUd96EEMB6/NQ/hndkQxg+r8fxw
+	 m88njdH9jDPn4Jra8/hAv45eaDT9vKkDMktdecVQFQZpiAwWHvJrq8xyqBwIA9JLJ6A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794488183;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794488834;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=r7yyic0ssd9BOT+OJ8UcxW2Pq7XNCgARbsSkcrQ+aKY=;
-	b=AhNhMvIjKxTCgRNnOjljxJjmutcMGpnoNrHq2Kcm92hyiCPHtnSUkpG8TxSNuUpKMXEC
-	 SELpzOsQdFIjFvFMPecRNRlEKb+AttBBW36r+gu5tEpSkt2IEizE+L+UvCVVEuXpHcOCb
-	 +Hl3I13pLHn94dAn01UMe//dMoJApqtvMdGCfXX4bTEsc16oN9Q1rjLeY57I5e5cuu6kj
-	 9xgkPwn4PUjzs/H2eObbTPcX7I7q4LCJXVor3mgcsnpdqPD5SeHaDpDJFCNrm/VB7FmWJ
-	 uUX+rfVqLJJZr+4Ld7PcK0lqGlNjgHBFpf9zMsTsoojIy60tfbWNPkntbnJp6usApOA==
+	bh=IO8mblBXP1RWSPo9tFYz5CS4BOTa6XyJvVMZkiXIqsg=;
+	b=PdwWC+9KyvdoArL/qc+F+RfngVG/M6PyWxVLRD7bVFcFaxqzkqBy9WqgzQMxyllPQfnB
+	 arsmJwLMA8BXjzivcxUhfZ8Lv5HNSPAvYny+bf8F7vzr4t4IGBGW/TVvkNYoIGNYheUJi
+	 3VGK9x2ol5xerKey8qUNKPp2lJIjzbxYQM5Y9QyskRHuxNXdI02mT7x4vZusOrVnJN9pg
+	 wwLiHc0IyfJBh9GHtp2VQOBLvKqO+ERo4QofZ49XEl0GZAt/QY39VkaoNeWGc9kmQ8j6O
+	 h6iVK+kLCyWqKI8zTyyudcErcnpcgSxttceD5JrC8n67UCfm3GAmTiQnyb4wm35jXEA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VT9m84Uj;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bqnwkytp;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6DB67606A33E
-	for <mfd@lists.linux.dev>; Thu, 12 Nov 2026 12:56:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14F77606A327
+	for <mfd@lists.linux.dev>; Thu, 12 Nov 2026 13:07:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VT9m84Uj
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B24BE1F00A05;
-	Thu, 12 Nov 2026 12:56:22 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bqnwkytp
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8CCD11F00A06;
+	Thu, 12 Nov 2026 13:07:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794488183;
-	bh=r7yyic0ssd9BOT+OJ8UcxW2Pq7XNCgARbsSkcrQ+aKY=;
+	s=k20260515; t=1794488833;
+	bh=IO8mblBXP1RWSPo9tFYz5CS4BOTa6XyJvVMZkiXIqsg=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=VT9m84UjGxroYhSj0zHqdI7LdbaiWN3e/jmVbSxQBZPdvkhbzSVq9OQDbzI9Wm17R
-	 Ibx5d/yPj1MfsLoIbbK3V0vWBJ1Wj8MZYair8HsYAGaolx4nYBR6oXEUSBQtEf8ulY
-	 PfiK0XDWR/rx0mWEiTOVUBuDNnAOpquGi6dlV3Hd1WySbsMIo1sK+dl5h3H1nyYKN5
-	 pi3+81W63wtvsTmHao1ilBWvH7MHyA9J4NEIZpyLs8X9Ro0YlT4P9HBiWOJW0UmIb2
-	 N6DvOB9BSwETps9ysWJpXOsLJWPqqjDp08BZPixSHJwp8teIrFuRGbavpeb+c7wmGH
-	 L35v5IlNpTYjQ==
-Message-ID: <sashiko-outbox-211123@kernel.org>
+	b=bqnwkytpmBP4Pk73TCfPwytXlOzYLwiiheUj7SfviAJKgbR/bkl2S7mXapSMAIZYb
+	 dS4/kWBcrfwkxLRvSEvWoHP4CRMQOcJOpOId00yeEcnEyQS82JwtMZDXLGGa2flKbe
+	 3/YdpYrfy9mWkeH+ZVDITqxA6DemQhgJR1LT+5wQpttySBv82jp50kguqJVWefha5a
+	 xl/LQv5dE0I36Kv9L7x4lsXIffj6D3dXIAW2nnhO11mgAjycktpIgL1Rkhe3rzVpEq
+	 Bb5+t/LeyQOs4ralXk91lVvuGhqg0Sq+d5DhdK4MPNe6TUjYR2l6e1XFGIfAj2UaOf
+	 jUxcTzSDw/PaQ==
+Message-ID: <sashiko-outbox-211140@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v21 2/4] regulator: p3h2x4x: Add driver for on-die
- regulators in NXP P3H2x4x i3c hub
+Subject: Re: [PATCH v21 4/4] i3c: hub: p3h2x4x: Add SMBus slave mode support
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Lakshay Piplani" <lakshay.piplani@nxp.com>, linux-i3c@lists.infradead.org, mfd@lists.linux.dev
 Cc: Frank.Li@kernel.org, "Alexandre Belloni" <alexandre.belloni@bootlin.com>, lee@kernel.org
-In-Reply-To: <20261112124437.3367252-3-lakshay.piplani@nxp.com>
+In-Reply-To: <20261112124437.3367252-5-lakshay.piplani@nxp.com>
 References: <20261112124437.3367252-1-lakshay.piplani@nxp.com>
- <20261112124437.3367252-3-lakshay.piplani@nxp.com>
+ <20261112124437.3367252-5-lakshay.piplani@nxp.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 12 Nov 2026 12:56:22 +0000
+Date: Thu, 12 Nov 2026 13:07:13 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,64 +60,161 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-Thank you for your contribution! Sashiko AI review found 1 potential
-issue to consider:
-- [Medium] regulator: p3h2x4x: OF node leak in p3h2x4x_regulator_probe()
+Thank you for your contribution! Sashiko AI review found 3 potential
+issues to consider:
+- [Medium] i3c: hub: p3h2x4x: empty rx buffer not rejected in
+  p3h2x4x_read_smbus_agent_rx_buf()
+- [Medium] i3c: hub: p3h2x4x: stale rx flags not cleared in
+  p3h2x4x_tp_i2c_reg_slave()
+- [Low] i3c: hub: p3h2x4x: missing I2C_CLIENT_TEN check in
+  p3h2x4x_tp_i2c_reg_slave()
 --
 
-commit 0c22fd7becea5c3dad0894cb83a63e3d27c04c45
-Author: Aman Kumar Pandey <aman.kumarpandey@nxp.com>
+commit c82ca6aaf774f0de048a84b1a2c414e57c266eef
+Author: Lakshay Piplani <lakshay.piplani@nxp.com>
 
-regulator: p3h2x4x: Add driver for on-die regulators in NXP P3H2x4x i3c hub
+i3c: hub: p3h2x4x: Add SMBus slave mode support
 
-This commit adds a regulator driver for the four on-die LDOs in the NXP
-P3H2x4x I3C hub family, registered as a child of the MFD device.
+This commit adds SMBus slave mode support for the P3H2x4x hub target ports,
+handling receive events via I3C IBI and forwarding received payloads to
+registered I2C slave clients.
 
-> diff --git a/drivers/regulator/p3h2840_i3c_hub_regulator.c b/drivers/regu=
-lator/p3h2840_i3c_hub_regulator.c
-> new file mode 100644
-> index 0000000000000..244f2a4f70f38
-> --- /dev/null
-> +++ b/drivers/regulator/p3h2840_i3c_hub_regulator.c
+> diff --git a/drivers/i3c/hub/p3h2840_i3c_hub_smbus.c b/drivers/i3c/hub/p3=
+h2840_i3c_hub_smbus.c
+> index 247d0f4883b7c..02b50d1eb938d 100644
+> --- a/drivers/i3c/hub/p3h2840_i3c_hub_smbus.c
+> +++ b/drivers/i3c/hub/p3h2840_i3c_hub_smbus.c
+> @@ -3,6 +3,7 @@
+>   * Copyright 2025-2026 NXP
+>   * This P3H2X4X driver file contain functions for SMBus/I2C virtual Bus =
+creation and read/write.
+>   */
+> +#include <linux/i3c/device.h>
+>  #include <linux/mfd/p3h2840.h>
+>  #include <linux/regmap.h>
+> =20
+> @@ -15,6 +16,171 @@ enum p3h2x4x_smbus_desc_idx {
+>  	P3H2X4X_DESC_READ_LEN,
+>  };
+> =20
+> +#if IS_ENABLED(CONFIG_I2C_SLAVE)
+> +static void p3h2x4x_read_smbus_agent_rx_buf(struct i3c_device *i3cdev, e=
+num p3h2x4x_rcv_buf rfbuf,
+> +					    enum p3h2x4x_tp tp)
+> +{
+> +	struct p3h2x4x *p3h2x4x =3D i3cdev_get_drvdata(i3cdev);
+> +	struct p3h2x4x_i3c_hub_dev *p3h2x4x_i3c_hub;
+> +	u8 target_buffer_page, flag_clear, temp =3D 0, i, addr;
+> +	u32 packet_len, slave_address;
+> +	struct i2c_client *client;
+> +	u8 *slave_rx_buffer;
+> +	int ret;
+> +
+> +	if (!p3h2x4x || !p3h2x4x->i3c_hub_priv)
+> +		return;
+> +
+> +	p3h2x4x_i3c_hub =3D p3h2x4x->i3c_hub_priv;
+> +	slave_rx_buffer =3D p3h2x4x_i3c_hub->slave_rx_buffer;
+> +
+> +	switch (rfbuf) {
+> +	case RCV_BUF_0:
+> +		target_buffer_page =3D P3H2X4X_TARGET_BUFF_0_PAGE;
+> +		flag_clear =3D P3H2X4X_TARGET_BUF_0_RECEIVE;
+> +		break;
+> +	case RCV_BUF_1:
+> +		target_buffer_page =3D P3H2X4X_TARGET_BUFF_1_PAGE;
+> +		flag_clear =3D P3H2X4X_TARGET_BUF_1_RECEIVE;
+> +		break;
+> +	default:
+> +		return;
+> +	}
+> +
+> +	target_buffer_page +=3D P3H2X4X_NO_PAGE_PER_TP * tp;
+> +
+> +	ret =3D regmap_write(p3h2x4x_i3c_hub->regmap, P3H2X4X_PAGE_PTR, target_=
+buffer_page);
+> +	if (ret)
+> +		goto ibi_err;
+> +
+> +	/* read buffer length */
+> +	ret =3D regmap_read(p3h2x4x_i3c_hub->regmap, P3H2X4X_TARGET_BUFF_LENGTH=
+, &packet_len);
+> +	if (ret)
+> +		goto ibi_err;
+> +
+> +	if (packet_len)
+> +		packet_len =3D packet_len - 1;
+
+[Severity: Medium]
+Should p3h2x4x_read_smbus_agent_rx_buf() jump to ibi_err when packet_len is
+0?
+
+P3H2X4X_TARGET_BUFF_LENGTH includes the 1-byte target address, so a valid
+zero-payload transfer has length 1 before decrementing.  When
+P3H2X4X_TARGET_BUFF_LENGTH reads as 0 (for example, on an aborted transfer
+or empty buffer), falling through with packet_len =3D=3D 0 reads a stale
+P3H2X4X_TARGET_BUFF_ADDRESS from a prior transaction and delivers spurious
+I2C_SLAVE_WRITE_REQUESTED and I2C_SLAVE_STOP events to the slave client.
 
 [ ... ]
 
-> +static int p3h2x4x_regulator_probe(struct platform_device *pdev)
+> +#if IS_ENABLED(CONFIG_I2C_SLAVE)
+> +static int p3h2x4x_tp_i2c_reg_slave(struct i2c_client *slave)
 > +{
-> +	struct p3h2x4x *p3h2x4x =3D dev_get_drvdata(pdev->dev.parent);
-> +	struct p3h2x4x_regulator_dev *p3h2x4x_regulator;
-> +	struct regulator_config rcfg =3D { };
-> +	struct device *dev =3D &pdev->dev;
-> +	struct regulator_dev *rdev;
-> +	int i;
+> +	struct tp_bus *bus =3D i2c_get_adapdata(slave->adapter);
+> +	struct p3h2x4x_i3c_hub_dev *hub =3D bus->p3h2x4x_i3c_hub;
+> +	struct p3h2x4x *p3h2x4x =3D dev_get_drvdata(hub->dev->parent);
+> +	int relock_ret =3D 0;
+> +	int ret =3D 0;
 > +
-> +	p3h2x4x_regulator =3D devm_kzalloc(dev, sizeof(*p3h2x4x_regulator), GFP=
-_KERNEL);
-> +	if (!p3h2x4x_regulator)
-> +		return -ENOMEM;
+> +	guard(mutex)(&hub->etx_mutex);
 > +
-> +	p3h2x4x_regulator->p3h2x4x =3D p3h2x4x;
-> +	p3h2x4x_regulator->regmap =3D p3h2x4x->regmap;
+> +	if (!hub->i3cdev || !hub->ibi_ready)
+> +		return -EOPNOTSUPP;
 > +
-> +	platform_set_drvdata(pdev, p3h2x4x_regulator);
+> +	if (bus->tp_smbus_client)
+> +		return -EBUSY;
+
+[Severity: Low]
+Should p3h2x4x_tp_i2c_reg_slave() reject 10-bit addressed clients
+(slave->flags & I2C_CLIENT_TEN) with -EAFNOSUPPORT?
+
+i2c_slave_register() skips 7-bit address validation when I2C_CLIENT_TEN is
+set and delegates the check to reg_slave().  Without it, registration
+succeeds and p3h2x4x_read_smbus_agent_rx_buf() truncates client->addr to its
+low 7 bits when matching against P3H2X4X_TARGET_BUFF_ADDRESS.
+
 > +
-> +	device_set_of_node_from_dev(dev, dev->parent);
+> +	scoped_guard(mutex, &p3h2x4x->protected_reg_lock) {
+> +		/* Unlock access to protected registers */
+> +		ret =3D regmap_write(hub->regmap, P3H2X4X_DEV_REG_PROTECTION_CODE,
+> +				   P3H2X4X_REGISTERS_UNLOCK_CODE);
+> +		if (ret)
+> +			break;
+> +
+> +		ret =3D regmap_set_bits(hub->regmap,
+> +				      P3H2X4X_TP_SMBUS_AGNT_IBI_CONFIG,
+> +				      bus->tp_mask);
+> +
+> +		/* Lock access to protected registers */
+> +		relock_ret =3D regmap_write(hub->regmap,
+> +					  P3H2X4X_DEV_REG_PROTECTION_CODE,
+> +					  P3H2X4X_REGISTERS_LOCK_CODE);
+> +	}
 
 [Severity: Medium]
-Does calling device_set_of_node_from_dev() here leak a reference on
-dev->parent->of_node when pdev is unregistered?
+Does p3h2x4x_tp_i2c_reg_slave() need to clear BUF_RECEIVED_FLAG_MASK in
+P3H2X4X_TP0_SMBUS_AGNT_STS + bus->tp_port before enabling the port IBI?
 
-The MFD cell for p3h2x4x-regulator does not set of_compatible or swnode, so
-mfd_add_device() allocates pdev with dev.fwnode set to NULL.
-device_set_of_node_from_dev() takes a reference on dev->parent->of_node and
-assigns dev->of_node without updating dev->fwnode, whereas
-platform_device_release() drops the firmware node reference via
-fwnode_handle_put(pa->pdev.dev.fwnode).
-
-Using platform_device_set_of_node_from_dev(pdev, dev->parent) sets both
-dev.of_node and dev.fwnode so platform_device_release() balances the
-reference.
+p3h2x4x_configure_tp() enables P3H2X4X_TP_SMBUS_AGNT_EN at probe time, and
+p3h2x4x_tp_i2c_unreg_slave() only masks the port bit in
+P3H2X4X_TP_SMBUS_AGNT_IBI_CONFIG.  Any SMBus write arriving on the port
+while no slave is registered fills the target buffers and sets the receive
+and overflow status flags without triggering p3h2x4x_ibi_handler().  Leaving
+those flags set across registration either delivers stale payloads to the
+new slave client or leaves both target buffers permanently occupied if an
+IBI requires a fresh status transition.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261112124437.3367=
-252-1-lakshay.piplani@nxp.com?part=3D2
+252-1-lakshay.piplani@nxp.com?part=3D4
