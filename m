@@ -1,58 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.85.4
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794597013;
-	b=Tjiw2zGHYBAkog+HUibY3dlDXHaNkPJUZG+y2uL1IYZnTiOJsoSSxpv9mIPaJZ2X4dly
-	 FBnQRcenf7chwI4fOrQIhhqvBpJ8SXj/cuMPOCPeCHihkzBj6kIixDGBD3UXJrFN+Gq4z
-	 sDGRD7XLhndNdl4TWYjgxuaulXlS+Fz25MSZqXcwHJPjiIkrhvaMRMxFaLZKICr1Io+IC
-	 CaaRC64Zx0MmaRsGRlD0Dywpi3AOS+fU5emKSmWCMP4w6HgUc594t69VwE+D5JjSIWq1T
-	 8Ygz+mkHhyj0re73fwh2IsnaDxDynHdbAatYmuvuYnFP+TEulc1EjCeZkLBEcZgX7iQ==
+	t=1794598234;
+	b=Jxi9RuAsIGnwcN6/WWeXgqW3oH0fRVwPmkc6iXnDuL5yzOGhmDeRbQsKBY3YgUUY8R8g
+	 xNMmh1DBOIGhVWmBgG44aBdfAp0rpi/FuAGgW9zt5PRnfDkqr7lyvxz6V/n5IuIks4KJn
+	 sL+Ubt5s3PYJrmdmcT6lH+MJnEJJgigklIfcp3LVZPpZ4y7VrwNqW9A3IihZZjHqAQQio
+	 8DoGDzFeiaw4YYfbZutdVXMUwgWGwJzOGv1Ghi8SXw1ugJpO4mnPq/NnvffScqb8gu8H1
+	 wC5/36onlFivDwlkhobwDw0swJJF3P63YUeZt7cRe0KDMFRcd0qs1mUAaT+oZNUf9zQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794597013;
-	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Last-TLS-Session-Version;
-	bh=lDonEJwEkOKFs6QGhbZZt9eZVrZuIkbPCbngSkG5pl0=;
-	b=noLDVjWvzbvdUUcu9ahMQTFYPHdPcTDxAJFngMdP/yZv8I48S9bH7z4fnKtwynipJb63
-	 rc3WqbVwZ1Dk3Uoao3hgPyMMEiQ/Lz1Yzfb5mQ+xkDywkNygKPxHPzi1GavNlUBOG4eOi
-	 ZRQTKl5t5mfgRsH0uEuy2JQztnsmeshTV9whR6Pa6JhRASarF8DyqF4iEdUUcoMFL6Ipt
-	 d5EX8Gy8+77hx6Nx65+bmEnYWNso3cVSIjongspF7VmpiANPRDnhGmr5kdlwT82KKPVRA
-	 cTyssnzTPHL9HX/Ws773Oi/agWGSQkH4EOynv6cmkKy4W9J/sMdNbjhMLeQFKeyjDMA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794598234;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-AI-Review-Draft;
+	bh=5czRHff+aktsKZ6lzb+WbE0mUTG272hnVZ/DWb+/MmM=;
+	b=GIV7gjEowMtM2xuHIQ0gb4rV6PjyLmRUXM/eXTQePUW0kDCcKwOGkPc4I6NQuK2ToJCa
+	 Uz8JTO8CNZLZoqHJaDJIlKZFK2cBBh+jQqYMxZyDhDhR5aKb7x1rUoVrmqG8h8Deu8j3t
+	 WgoXiKqz4qQ2UVb/4YbIjBf/zG24YAJjfdF0zzKZBc0J0a/Z4OCbnNHVKHTqAOcJrba+g
+	 KJfo1Ajr4Nq3O8bmDB/N54V4M+D+Lwx+5HwxTXYitCQacZ18Bktr8Sf/9oPa0Ta1iZBaY
+	 GH38gWxo40/CZNn3QUsQAUorO4aWyw1G/P4Ir+zNrn1S9rtVDjgJVcB8qyoZW1EcK1A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=bootlin.com;
-	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=xmodXLO2;
-	arc=none smtp.remote-ip=185.246.85.4
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bNv3d4aO;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1448606F308
-	for <mfd@lists.linux.dev>; Fri, 13 Nov 2026 19:10:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B1448606F308
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08E3C606A333;
+	Fri, 13 Nov 2026 19:30:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=xmodXLO2
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 31F9D4E415B0;
-	Fri, 13 Nov 2026 19:10:10 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id D4B6A60015;
-	Fri, 13 Nov 2026 19:10:09 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 9743F11BC1337;
-	Fri, 13 Nov 2026 20:09:40 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1794597006; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:content-language:in-reply-to:references;
-	bh=lDonEJwEkOKFs6QGhbZZt9eZVrZuIkbPCbngSkG5pl0=;
-	b=xmodXLO2E58u1qr7RtCp7N55lifIjz083Q4ZqmD4bvN0+1FcYz30INKc9CBCQaf1S7VQ4s
-	2A5kMuGZyrkNgS6FsT6hkOawcP2myuJ87tdxo3tAgFoxHdbwH44B/SMWt/U/hQFmynn7be
-	aKv7Fi/VYerRGYAi58OJb26ZP8FrzywVBo0FvAHDd0vu3/5QKOihXY4NgWsYsJ7hsFWBy7
-	9lclfV0FVvnodTcnN/0Fr3FMMQvsrzrLQRhMmiYETpnrT07mxl8C8hUxF1a8B/r3YPIx3r
-	ttPPtYYc9JwZEjkaplukiacncIVtEd3DfYfroPVa1dCLT6ZTKlaoUJr/gHGg7Q==
-Message-ID: <1b038a37-1e97-4540-ba31-5b9288595788@bootlin.com>
-Date: Fri, 13 Nov 2026 20:09:39 +0100
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bNv3d4aO
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F1CBD1F000C4;
+	Fri, 13 Nov 2026 19:30:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794598233;
+	bh=5czRHff+aktsKZ6lzb+WbE0mUTG272hnVZ/DWb+/MmM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=bNv3d4aODpkDmeWQI3BCBzpd1odQTaMrx2LEcQ9mK2idzy29UBP4w7R5H8GvNpSqf
+	 TNzkoFtDp4Ow0XDPoX7a5O85VvPvqwyvBj8R6jph+vAQU9aBRN7rew59pkxJkrnJwf
+	 1argNAkKAZQ5sc705eTHG1+3mZR2EhGZ1wXqoDRujprBlOx5M0vaoP04y1LpqFcqW4
+	 JLoo4cIkhIGhCNeFIXWsTCgSIyCA6Ub8+hWlxkUuI5p31anihoLkbeMxkNYe+zVrXW
+	 0AcKgnXbQi0gtg9MThSSsQIowq/bJL2Odnn9haGIedUxLaw+f0WRLCcLV4sm9lOP5I
+	 jMVUHwe++GTWg==
+Date: Fri, 13 Nov 2026 19:30:29 +0000
+From: Lee Jones <lee@kernel.org>
+To: Charles Keepax <ckeepax@opensource.cirrus.com>
+Cc: vkoul@kernel.org, yung-chuan.liao@linux.intel.com,
+	pierre-louis.bossart@linux.dev, linux-sound@vger.kernel.org,
+	mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
+	patches@opensource.cirrus.com
+Subject: Re: [PATCH v2 RESEND 2/2] mfd: cs42l43: Move to core detach helper
+Message-ID: <179370028929.793788.4070701675472724398@kernel.org>
+References: <20261102164157.4010002-1-ckeepax@opensource.cirrus.com>
+ <20261102164157.4010002-3-ckeepax@opensource.cirrus.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -62,86 +60,105 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/27] mfd: Assorted resource lifetime, teardown, and
- error-handling fixes
-To: Lee Jones <lee@kernel.org>
-Cc: Matthias Brugger <matthias.bgg@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-mediatek@lists.infradead.org, Aaro Koskinen <aaro.koskinen@iki.fi>,
- Andi Shyti <andi.shyti@kernel.org>, Andreas Kemnade <andreas@kemnade.info>,
- Andy Shevchenko <andy@kernel.org>, AnilKumar Ch <anilkumar@ti.com>,
- Arnd Bergmann <arnd@arndb.de>, Binbin Zhou <zhoubinbin@loongson.cn>,
- Brent Casavant <bcasavan@sgi.com>, Chong Qiao <qiaochong@loongson.cn>,
- Corey Minyard <corey@minyard.net>, David Lechner <dlechner@baylibre.com>,
- Dmitry Torokhov <dmitry.torokhov@gmail.com>, Felipe Balbi <balbi@ti.com>,
- Gyungoh Yoo <jack.yoo@maxim-ic.com>,
- Heikki Krogerus <heikki.krogerus@linux.intel.com>,
- Hsin-Hsiung Wang <hsin-hsiung.wang@mediatek.com>,
- Huacai Chen <chenhuacai@kernel.org>,
- Jarkko Nikula <jarkko.nikula@linux.intel.com>,
- Jonathan Cameron <jic23@kernel.org>, Joshua Kinard <linux@kumba.dev>,
- Kai Svahn <kai.svahn@nokia.com>, Kevin Hilman <khilman@baylibre.com>,
- Kumar Sanghvi <kumar.sanghvi@stericsson.com>,
- Linus Walleij <linusw@kernel.org>, linux-crypto@vger.kernel.org,
- linux-i2c@vger.kernel.org, linux-iio@vger.kernel.org,
- linux-input@vger.kernel.org, linux-omap@vger.kernel.org,
- Mattias Nilsson <mattias.i.nilsson@stericsson.com>,
- Mattias Wallin <mattias.wallin@stericsson.com>,
- Matti Vaittinen <mazziesaccount@gmail.com>, mfd@lists.linux.dev,
- Mika Westerberg <mika.westerberg@linux.intel.com>,
- Milo Kim <woogyom.kim@gmail.com>, Ming Yu <tmyu0@nuvoton.com>,
- =?UTF-8?Q?Nuno_S=C3=A1?= <nuno.sa@analog.com>,
- Pantelis Antoniou <panto@antoniou-consulting.com>, Pat Gefre <pfg@sgi.com>,
- Paul Burton <paulburton@kernel.org>, Peter Ujfalusi <peter.ujfalusi@ti.com>,
- Qunqin Zhao <zhaoqunqin@loongson.cn>,
- Rabin Vincent <rabin.vincent@stericsson.com>, Rachna Patil <rachna@ti.com>,
- Roger Quadros <rogerq@kernel.org>, Samuel Ortiz <sameo@linux.intel.com>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
- Shi Hao <i.shihao.999@gmail.com>,
- Srinidhi Kasagar <srinidhi.kasagar@stericsson.com>,
- Stanislaw Skowronek <skylark@unaligned.org>,
- Stephen Warren <swarren@nvidia.com>, Sundar Iyer
- <sundar.iyer@stericsson.com>, syed khasim <x0khasim@ti.com>,
- Thomas Bogendoerfer <tbogendoerfer@suse.de>, Tony Lindgren
- <tony@atomide.com>, Yinggang Gu <guyinggang@loongson.cn>
-References: <20261027093306.2812695-1-lee@kernel.org>
- <179458365250.76424.12505088783548230611.b4-ty@b4>
- <5a68f043-7c9a-44ef-b297-2821886bdcfe@bootlin.com>
- <20261113185908.GI6323@joneslee-macbookpro.roam.internal>
-Content-Language: en-US
-From: Thomas Richard <thomas.richard@bootlin.com>
-In-Reply-To: <20261113185908.GI6323@joneslee-macbookpro.roam.internal>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261102164157.4010002-3-ckeepax@opensource.cirrus.com>
+X-AI-Review-Draft: <20261102164157.4010002-3-ckeepax@opensource.cirrus.com>
 
-On 11/13/26 7:59 PM, Lee Jones wrote:
-> On Fri, 13 Nov 2026, Thomas Richard wrote:
-> 
->> Hi Lee,
->>
->> On 11/13/26 4:27 PM, Lee Jones wrote:
->>> [26/27] i2c: cgbc: Propagate hardware errors when polling read status
->>>         (no commit info)
->>
->> I noticed you did not applied this patch. It conflicts with my ongoing
->> series "Congatec Board Controller: Add storage devices support". For the
->> V5 I rebased it on top of Krzysztof's series that you applied and this
->> series.
->>
->> I don't know what is your plan for this patch. Will you apply it? Should
->> I pick it into my series, or should we have to deal with I2C tree?
->> Please let me know.
-> 
-> I didn't merge it because it's not mine to take.
-> 
-> I can either take it with an Ack or happy for anyone else to take it.
+On Mon, 02 Nov 2026, Charles Keepax wrote:
 
-I will add it into my series, it already has a mix of MFD and I2C
-patches. So I'll handle the conflict.
+> Now the core has a helper to signal a device will detach from
+> the SoundWire bus, there is no need for the cs42l43 driver code
+> to separately track that. Switch to using the new core helper.
+>
+> Reviewed-by: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
+> Signed-off-by: Charles Keepax <ckeepax@opensource.cirrus.com>
+> ---
+>  drivers/mfd/cs42l43-sdw.c   |  2 --
+>  drivers/mfd/cs42l43.c       | 15 +--------------
+>  include/linux/mfd/cs42l43.h |  1 -
+>  3 files changed, 1 insertion(+), 17 deletions(-)
+>
+> diff --git a/drivers/mfd/cs42l43-sdw.c b/drivers/mfd/cs42l43-sdw.c
+> index 22e4c1fe92984..7e4a23aa22556 100644
+> --- a/drivers/mfd/cs42l43-sdw.c
+> +++ b/drivers/mfd/cs42l43-sdw.c
+> @@ -102,8 +102,6 @@ static int cs42l43_sdw_update_status(struct sdw_slave *sdw, enum sdw_slave_statu
+>  		break;
+>  	case SDW_SLAVE_UNATTACHED:
+>  		dev_dbg(cs42l43->dev, "Device detach\n");
+> -
+> -		complete(&cs42l43->device_detach);
+>  		break;
+>  	default:
+>  		break;
+> diff --git a/drivers/mfd/cs42l43.c b/drivers/mfd/cs42l43.c
+> index a83b62064dae6..341722e4c5276 100644
+> --- a/drivers/mfd/cs42l43.c
+> +++ b/drivers/mfd/cs42l43.c
+> @@ -30,7 +30,6 @@
+>  #define CS42L43_RESET_DELAY_MS			20
+>
+>  #define CS42L43_SDW_ATTACH_TIMEOUT_MS		5000
+> -#define CS42L43_SDW_DETACH_TIMEOUT_MS		100
+>
+>  #define CS42L43_MCU_BOOT_STAGE1			1
+>  #define CS42L43_MCU_BOOT_STAGE2			2
+> @@ -555,7 +554,7 @@ static int cs42l43_soft_reset(struct cs42l43 *cs42l43)
+>  		{ CS42L43_SFT_RESET, CS42L43_SFT_RESET_VAL },
+>  	};
+>
+> -	reinit_completion(&cs42l43->device_detach);
+> +	sdw_slave_signal_unattach(cs42l43->sdw);
 
-Best Regards,
-Thomas
+Isn't 'cs42l43->sdw' NULL when the device is connected via I2C?
+
+Also, doesn't the comment in cs42l43_soft_reset() still claim that this
+function waits for the device to detach from the bus?
+
+>  	/*
+>  	 * Apply cache only because the soft reset will cause the device to
+> @@ -566,17 +565,6 @@ static int cs42l43_soft_reset(struct cs42l43 *cs42l43)
+>
+>  	msleep(CS42L43_RESET_DELAY_MS);
+>
+> -	if (cs42l43->sdw) {
+> -		unsigned long timeout = msecs_to_jiffies(CS42L43_SDW_DETACH_TIMEOUT_MS);
+> -		unsigned long time;
+> -
+> -		time = wait_for_completion_timeout(&cs42l43->device_detach, timeout);
+> -		if (!time) {
+> -			dev_err(cs42l43->dev, "Timed out waiting for device detach\n");
+> -			return -ETIMEDOUT;
+> -		}
+> -	}
+> -
+>  	return -EAGAIN;
+>  }
+>
+> @@ -1125,7 +1113,6 @@ int cs42l43_dev_probe(struct cs42l43 *cs42l43)
+>  	dev_set_drvdata(cs42l43->dev, cs42l43);
+>
+>  	mutex_init(&cs42l43->pll_lock);
+> -	init_completion(&cs42l43->device_detach);
+>  	init_completion(&cs42l43->firmware_download);
+>  	INIT_WORK(&cs42l43->boot_work, cs42l43_boot_work);
+>
+> diff --git a/include/linux/mfd/cs42l43.h b/include/linux/mfd/cs42l43.h
+> index 8e993fb535e68..798dc55149662 100644
+> --- a/include/linux/mfd/cs42l43.h
+> +++ b/include/linux/mfd/cs42l43.h
+> @@ -86,7 +86,6 @@ struct cs42l43 {
+>  	struct regmap_irq_chip_data *irq_data;
+>
+>  	struct work_struct boot_work;
+> -	struct completion device_detach;
+>  	struct completion firmware_download;
+>  	int firmware_error;
+>
+> -- 
+> 2.47.3
+>
+
+-- 
+Lee Jones
