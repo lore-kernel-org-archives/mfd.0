@@ -1,78 +1,59 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.17
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794572013;
-	b=bCTgPVeFHLmznnwYE1a/TsCSiRhpgbREd1HMCgqZhH6kMLqwRZQgQp1RPZ5a1z9OdLTL
-	 cF+UUEx75KWM3gMbXWFDfscpDEJmOvUWI34N7NKDMuw5BKdSe/gntbvFiG2521JUeuDGj
-	 vWcJ3yQ5Gm9PY3/3FHAR/6dfCXSXIG3vlE3xmp5/mxsBdWcds6cU3RDbSC/iQTOrQymL0
-	 csuwq4Me09NCjpdr90FownZckexgp1evz4oWNJyAlpxtSv2pQFW58cKF0B+gl2otzCKz1
-	 M41NVdu6m1GtzZcesiUQVXxJSU05YExWlDYaft86DB3DB5S5UmLrDeFrsdcjCRMdVhQ==
+	t=1794575363;
+	b=unS/i+R8nF3dK4vXru4418Tfv1prbh8BW8blAk+eyYjrxa1rau4RU+dCQ3PHhafxbpcR
+	 tOTCeyqGRKqDEO0RL1Wka7TIy+NNO/FJ2+xZBzmlT+Vt6fdVTt++yhV1ODf/+PwUVqkbw
+	 eFWsQrGVe+t3FD6aAD1f7sgSzQt/C9PKAzeqQL1yuAOrpHJtPga5wN+9uNgBllClNpiM5
+	 wQA9T0V/rMRI/nP9EuO8nuKbMlJkwq4ViHr2QKbKdvcMwdwIYRD7PFof9oAG0to+Fg5y1
+	 UcpTwFs479/YfJPG5hzDO4GlTqj/vrHiDTgCGQlFhctQ7oiYTT3jORRehsw8ZJrlhzg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794572013;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:Organization;
-	bh=1iUZT/JRKjiRUq3S3wXoQz2Mr1XA+Ebv5deNzL+Hfx0=;
-	b=qZ+2mlYfmodm2ZV3PxHQn4S8/TLWhmfgUYWvEEn4mrDg5KVW/wztHepIjn7j94TBI1eV
-	 DOocTyN/aUUBQqcMqrK3qvpP2OOAyZ4HxfnMQ9H/iv1ZUDs1L3TK/LKT7ED9sbvZot2UD
-	 ILtYmky+0ye6uR34LBhq2Ur5m0xBgwtPvzbhuIH6mmaqYaIRwRK/XSAhWkt2TnPx7i9ub
-	 pB6HOy1tbNkRWPQSpjJgpsIyc2g75q7hCOHZtbvTIcEpN1HktG1legedMmihUFquFPGmT
-	 ne3iIQwyx6V2NoGjXzKQNsHDmYq3CCZEGqAceP5DgYnUnigjziKcf3tjILIhygdEK0g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794575363;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-AI-Review-Draft;
+	bh=Y7h+yCRAr82VOkhpTfQVqsVcVOgFIcVy2auuIa6V7sE=;
+	b=JAsyxgXBHG+/YxMi7guOGMUYPDuPY48aBjNO5fvQsVqVwS+G7TixauM118oU4dHq/mdu
+	 sE3Pxxizyg995c56r/qhjwvcCOWHEaq32a9fRZUmEUkY4hLvnwyNLt9Lhtav/4QvMY49X
+	 kyD9MUJOTUYAFDCr38bIq73F4krZCJFU+oY/NnC/qhU5rXaAC4Dt27xu/Wt3RlkIbllfd
+	 OxoWCwxAziyKGTeu6Vh9GoycjWaS6qr6PHkXgxCqoNhzVbTd72lpAxTdd+BSglJP3vbqy
+	 M2lwwNhSpS9iyvrdkFbPZl8p+A92ZYjK2qHk9Zw0bQ0jr1xidXFNT//+Uiru9utH9ag==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=Fuo0fjLv;
-	arc=none smtp.remote-ip=198.175.65.17
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iBtH531r;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A269606A321;
-	Fri, 13 Nov 2026 12:13:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5A269606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67BC8606A330;
+	Fri, 13 Nov 2026 13:09:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=Fuo0fjLv
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1794572012; x=1826108012;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=rHH8i6Jaj4wG/QVHWjBNd4UsOpx6pzu7l9kaAO5hq6U=;
-  b=Fuo0fjLvrze0KqzVK+2WW5qq3YrJg3MdGtNA39cv01DroWDEJIVZUlKg
-   Mas+DEnMhGP+u4Ztz9wGv0+kdrq6Twrtf8QnLEaKpz8U9ZmU+Lrr7NPpn
-   iCR/36fV9rgnJ4qAeUT++pIX1YkkvYUtcMunBIf1FSxxgfjOv7iPikg8D
-   CmSLawqPsfg6JsrlPhwmSMfBwD4FTIba/TSb92BmwhuMh3HfuW5c9sdKi
-   Om9xhJYSrbe1qVU8mhiX+IWWRvT4H5GDHj8gTN3d6vVd4sS3mrJW8noL8
-   OHfNDRb1yO3GVh3HJ8sMu27T2EER0vlFi6xvzCnEftHFeItXH3wGQMXNv
-   A==;
-X-CSE-ConnectionGUID: inbhH+dSSfGS8QRytkdKRg==
-X-CSE-MsgGUID: vXYzVLV0QoCraREsQSjGNA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11964"; a="3385784"
-X-IronPort-AV: E=Sophos;i="6.27,211,1787036400"; 
-   d="scan'208";a="3385784"
-Received: from fmviesa004.fm.intel.com ([10.60.135.144])
-  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Nov 2026 04:13:31 -0800
-X-CSE-ConnectionGUID: TtlvUlykT4SNAU2R1Isc5g==
-X-CSE-MsgGUID: iB+z62UDSbW0eDhITPJ7GA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,211,1787036400"; 
-   d="scan'208";a="8834698"
-Received: from ettammin-mobl3.ger.corp.intel.com (HELO localhost) ([10.245.244.148])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Nov 2026 04:13:28 -0800
-Date: Fri, 13 Nov 2026 14:13:26 +0200
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: lee@kernel.org, maz@kernel.org, andy@kernel.org, jic23@kernel.org,
-	dmitry.torokhov@gmail.com, linux-input@vger.kernel.org,
-	mfd@lists.linux.dev, linux-iio@vger.kernel.org, robh@kernel.org,
-	krzk+dt@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org,
-	imx@lists.linux.dev, stable@vger.kernel.org
-Subject: Re: [PATCH v3 2/2] mfd: mxs-lradc: Pass parent IRQs to child drivers
-Message-ID: <avb-5lw3JHpfmIlz@ashevche-desk.local>
-References: <20261113013212.470981-1-festevam@gmail.com>
- <20261113013212.470981-2-festevam@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iBtH531r
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 06B9B1F000C5;
+	Fri, 13 Nov 2026 13:09:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794575363;
+	bh=Y7h+yCRAr82VOkhpTfQVqsVcVOgFIcVy2auuIa6V7sE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=iBtH531rFbnt6bjGnqahjuymVPXkgFvztTPbCkaNxBvHpaM8d8uBKuMW6knCP1ZNo
+	 4qzH/GX0s8KsZ7FV7hhT8h4lnRlR6FgSITFflLhUclyLSYQS03Lr81Tx7Btkv5hBeu
+	 bx//Q2A4WpmPFgbrxy9FO7vpdizBKoF4ONjW/DwgPznue6vAo8K5NMYYG3MR7+tY2j
+	 VqBHGYnu57rlbSnonnjRlHcIv15VcklN0gk8th78Sf8EH1cDWWroEdj6BpTXtqmvo7
+	 bbM3mJ5bWYZnVdsmuaUoTzDtnNjsiDKMqCicuv2Gza5MdqtUCGP+WbaxKPGpnc6nWg
+	 hXNUbRMyvYrjw==
+Date: Fri, 13 Nov 2026 13:09:18 +0000
+From: Lee Jones <lee@kernel.org>
+To: Guangshuo Li <liguangshuo@mail.sdu.edu.cn>
+Cc: stable@vger.kernel.org, Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>,
+	linux-omap@vger.kernel.org, mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 3/6] mfd: palmas: Fix potential IRQ action leaks on
+ removal
+Message-ID: <179370041880.793788.14407997006744050474@kernel.org>
+References: <cover.1793377422.mfd.git.liguangshuo@mail.sdu.edu.cn>
+ <fe4ee2ff4b3ad6675a46a169d6de6410db32b652.1793377422.git.liguangshuo@mail.sdu.edu.cn>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -84,40 +65,50 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261113013212.470981-2-festevam@gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+In-Reply-To: <fe4ee2ff4b3ad6675a46a169d6de6410db32b652.1793377422.git.liguangshuo@mail.sdu.edu.cn>
+X-AI-Review-Draft: <fe4ee2ff4b3ad6675a46a169d6de6410db32b652.1793377422.git.liguangshuo@mail.sdu.edu.cn>
 
-On Thu, Nov 12, 2026 at 10:32:12PM -0300, Fabio Estevam wrote:
-> The MFD driver stores raw DT interrupt indices in IRQ resources but
-> registers its child devices without an IRQ domain or IRQ base. The child
-> drivers consequently receive the indices as if they were mapped Linux
-> IRQ numbers. IRQ index 0 triggers the platform_get_irq_byname() warning:
-> 
->   0 is an invalid IRQ number
-> 
-> The children then try to recover the indices from their resources and
-> map them against the parent OF node. Besides duplicating IRQ names in
-> the parent and children, this relies on invalid platform IRQ resources
-> and fails when IRQ 0 is rejected.
-> 
-> Resolve the interrupts with platform_get_irq() in the MFD parent and
-> store the mapped IRQs in the shared LRADC data. Drop the child IRQ
-> resources and duplicated name arrays, and have both child drivers
-> request the mapped IRQs directly. Use the MFD memory base support to
-> translate a single relative memory resource shared by both cells.
-> 
-> Tested on an i.MX28 EVK. The mxs-lradc-ts driver probes successfully,
-> touch events are reported, and the touch-detect and LRADC channel 7
-> interrupt counters increase as expected.
+On Sat, 31 Oct 2026, Guangshuo Li wrote:
 
-Reviewed-by: Andy Shevchenko <andriy.shevchenko@intel.com>
+> The remove callback deletes the IRQ chip before managed OF children
+> are removed. Their later free_irq() calls cannot find the disposed IRQ
+> descriptors, potentially leaking interrupt actions. Depopulate the
+> children before deleting the IRQ chip and auxiliary I2C clients.
+>
+> This issue was found by our static analysis tool under development.
+>
+> Fixes: 124e9deb1c40 ("mfd: palmas: Use devm_of_platform_populate()")
+> Cc: stable@vger.kernel.org
+> Assisted-by: OpenAI:gpt-6-astra
+> Signed-off-by: Guangshuo Li <liguangshuo@mail.sdu.edu.cn>
+> ---
+> Build-tested the changed object with x86_64 defconfig plus COMPILE_TEST
+> and the driver dependencies (W=1).
+> No runtime or fault-injection testing was performed.
+>
+>  drivers/mfd/palmas.c | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/drivers/mfd/palmas.c b/drivers/mfd/palmas.c
+> index 7fc886f4f80e..8a0b7b1e89d7 100644
+> --- a/drivers/mfd/palmas.c
+> +++ b/drivers/mfd/palmas.c
+> @@ -677,6 +677,9 @@ static void palmas_i2c_remove(struct i2c_client *i2c)
+>  	struct palmas *palmas = i2c_get_clientdata(i2c);
+>  	int i;
+>
+> +	if (i2c->dev.of_node)
+> +		devm_of_platform_depopulate(&i2c->dev);
 
-Thanks for fixing this, I hope it will be applied sooner than later to reduce
-the number of weird cases in the kernel.
+I think it would be nice to devm_* regmap_add_irq_chip() instead.
+
+If you also convert the auxiliary I2C clients and 'pm_power_off'
+teardown to devm, you could drop palmas_i2c_remove() altogether.
+
+> +
+>  	regmap_del_irq_chip(palmas->irq, palmas->irq_data);
+>
+>  	for (i = 1; i < PALMAS_NUM_CLIENTS; i++) {
 
 -- 
-With Best Regards,
-Andy Shevchenko
-
-
+Lee Jones
