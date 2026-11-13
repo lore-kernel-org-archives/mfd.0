@@ -1,62 +1,103 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.222.45
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794522853;
-	b=YBy6MZsojiK1fs92ZXp2WRG3Yg29GLTD0+AAh65KA+3TeK8eQnMRLUZzF3KpfK8ujIk/
-	 fGljo3li4+1yEtYub4jhLLTF4dtSxGYsg2NZeEyIe1gOaRRRU6JcnQnghU42TNKTlFzne
-	 IUR9efHSjHVnc1I51Rui5uuATs+Ygr/VIHm//wjR+sSBrAkfgX4hmzJ0ScnJOIFK0zI9s
-	 lV/74hSTpuZ1jOSk6O7mKrDVTJZi6gA2B9l6C54ONTHh4OP3w05HRg2/fd0Yc5WE5W/bs
-	 lfcY9EPnfz5WlHjcb3y0OCwusqxt9+pyqL4WPkTNqU6z7neUKWwdpiStWyaRHEncY8w==
+	t=1794533542;
+	b=iEgGvj2Hnn/RVLdx7s35aAi7E0RjSl4BDQm+RTJVhIt1GSugar2jm9/dkoTzryW8v3F7
+	 v8Jg2jLUH/aIHoL6y6j/es+VojEBGCR0I1M7JIBy1IxVvR364j8I7jqi0brr/I3wjCXkO
+	 ZmplbIeV2LJIXsC1bQlyspqg7MOecTUp5UaV7IZRTmLhHuhbNZLnG+zeSyVzdUfrFxsHU
+	 xQGQ2KCwh6Vqb0O5Q8gf1CC97H35xNP/Gfebn9lOfTXtukraEPMIuEbpGk80xjUc7hQQb
+	 ZGMaXr2SZ1yaP5b80giPgasxcXLQBLwbcmEi9zz7PUHZj95ogt0gjFC1oR5Bu1E3XdA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794522853;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=RZmkQsegMJj7uMwYkqEnAyJP3f797VptXlgVvu0XiXk=;
-	b=09e5s+spKLw6WwQDCE+53gisPaO8ByBnnOj5SuxnQd+DPHaDqt4ACrN4uQsXCu7eFKLC
-	 dEUEAS03hOsWZtJYhcg/Duo7uLZwgLxK383gjT8CJXmeKHsiHB0zvs4FS6qcU8Hz1N5jW
-	 pLoZhb6v00BUONVxDT6e+njbJA4Q2tF9v5AfxX9mg2mYb/Y0meayzfUJ2DioQQ/k22Ftw
-	 ysGDdNQyaD7c553PPtEwJ5A2vwX1r6k5Yy/ixnJ/ifVezwIYIjqa4sk4UoO3XbJIYlIjY
-	 wSssmuURPFKUsDqqKjR2GvSflVVdjeJdjivu/JwFC2Q13r0D9vFxnkf8LosEQCxkfuQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794533542;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=9HVV9rxTa8NDtE3CvH1N7rbiUfOat50MeJpUNT5hdrA=;
+	b=eMpLFPA3F+gCeXgQKHlCyC/JTxFO8II2cod042DNXEpR4nXLlCSvcmKs0bvQd3XdA3aX
+	 4OLpZbZ4ZUymbqBP8PNqaRS0JlMaYXIhvS/3SW6JhQ0VRyRgzS9kRMQ8xts1zqcgPVHup
+	 XPL25rIuu7FAvPTTeVhdHSXAUMr2ivvsb5+VKBqloqf0S6NquhLkcI0fTRS2haTOtQOPx
+	 DgD+hpQuzcUO6/4YJsNvYOvNeTOgKjJK8q/G8LrV6HGDHDOwo2GeHc6lDhSw+IGx8wNJO
+	 rBA6pfHvddzBIPHslhkY3DVYgsMiIEr6Xmwb4bN4h5pg1qOAVo4OA34w6FqR31CvRkg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZM+kP8bg;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="HTm/xoqG";
+	arc=none smtp.remote-ip=209.85.222.45
+Received: from mail-ua1-f45.google.com (mail-ua1-f45.google.com [209.85.222.45])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4536606A32D;
-	Thu, 12 Nov 2026 22:34:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6ED1D606A323
+	for <mfd@lists.linux.dev>; Fri, 13 Nov 2026 01:32:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6ED1D606A323
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ZM+kP8bg
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 71D0D1F000C9;
-	Thu, 12 Nov 2026 22:34:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794522853;
-	bh=RZmkQsegMJj7uMwYkqEnAyJP3f797VptXlgVvu0XiXk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=ZM+kP8bg96LTcgRrl2O4tGJEin6FVZ7fV8cdLYYi9RGQjd1Ol44XopCDh7O3rYhgi
-	 eYdIxmx6rQwupBV1dD3kXO1s/5tTfFLoR2gAWrjHekiffpv6X21tT/8ec1RLo9NVWX
-	 hLgMaP/hzxEc+rRtp+hb8fq2/XYBeW/qDDvuWxVwzohPvW8MSB3PUelUcffzzwhMb/
-	 sygPytE9j/V3kEq95ft3hExbLSJDXdN2UL+exfS7DXxiVBhhudY0xwEXQQYY+bu/WA
-	 4CkKrv4Ae+GkOmdnhcQAaOTu7xtpRl5rK07scbQvWKp9484/kLciakm28D7Bx4Cmhm
-	 Rsz/ThonRFqVw==
-Date: Thu, 12 Nov 2026 16:34:11 -0600
-From: "Rob Herring (Arm)" <robh@kernel.org>
-To: Yaozhong Li <yaozhonguwl@gmail.com>
-Cc: linux-kernel@vger.kernel.org, Joseph Chen <chenjh@rock-chips.com>,
-	linux-arm-kernel@lists.infradead.org,
-	Conor Dooley <conor+dt@kernel.org>,
-	Chris Zhong <zyw@rock-chips.com>,
-	linux-rockchip@lists.infradead.org,
-	Heiko Stuebner <heiko@sntech.de>, mfd@lists.linux.dev,
-	Lee Jones <lee@kernel.org>, devicetree@vger.kernel.org,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Zhang Qing <zhangqing@rock-chips.com>,
-	Sebastian Reichel <sebastian.reichel@collabora.com>
-Subject: Re: [PATCH v6 1/3] dt-bindings: mfd: rk8xx: add board level power
- hold GPIOs
-Message-ID: <179452285047.1753442.18416322410277903479.robh@kernel.org>
-References: <20261101154053.3874-1-yaozhonguwl@gmail.com>
- <20261101154053.3874-2-yaozhonguwl@gmail.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=HTm/xoqG
+Received: by mail-ua1-f45.google.com with SMTP id a1e0cc1a2514c-9908c849564so134883241.3
+        for <mfd@lists.linux.dev>; Thu, 12 Nov 2026 17:32:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1794533541; x=1795138341; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=9HVV9rxTa8NDtE3CvH1N7rbiUfOat50MeJpUNT5hdrA=;
+        b=HTm/xoqGjB2dGsJPkfztnyJ5OTvo9YYNP4N2s5uIS93qvBxWfZr6hGC8NUMOEuc8WS
+         0bH0DIz7CD4Lf9ey25GK1b0sYWCYfDyHJqHdpulyhUINndIIg8LAI9qnRenL5guIBQx/
+         DX7nHW0s9xn+pBk6kdg2I6DaVahV2n51BK8fPxFlubry2yRBHDfN5tlerLuE4ztLvkHZ
+         +MUCkHUxaSH5t1UN2Buz2B6KRebm1kmAMVLQYcq2vbQF0xxDFZKw9XZbzTWsYRQniUbp
+         mwxhDxK9dK0AU/rpQRvmZmPrt/E0/m/vTbCDo1Dfxei75ovpQVcPKs980H6zyPkCtqbC
+         3+AA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794533541; x=1795138341;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=9HVV9rxTa8NDtE3CvH1N7rbiUfOat50MeJpUNT5hdrA=;
+        b=GTDNej9uSlVNIGRmwS/tkZS3y1CieBgSYpKUhdcyRCmAudRZYpitOat5VKH9WUsiBg
+         Ehv/jbsh8ASS8xFbakU3kFzZHE9MGuW+fOAsNdMiVGetFsgEny7MDoFOcryCRL+pXgef
+         GzeBaJzE5iwNlelj8sVHCkY3RHyMpeJqYjDSCGKYygNF5Drk+HmdH1DT4L5N8O5eIqoI
+         bhHxgt3Qx0vZuMeFtD/W+4AiJTMGJZavW+NhhBUyXQHfkLs3lo9pHXRbyvwNyaK5yJxw
+         ntda0+TMvPtvGA4/5WVjvzeJ90q0XQS0OrA5df8ZIZfw/9e64gAJf0I27oCG0NmCjyp3
+         pUUQ==
+X-Forwarded-Encrypted: i=1; AL+hErHcbLXZZIpNnTm4sPY4/of06Qv22kDVITxohs8PR8CBjRsh86ePk3ubMBjCGpG5+pva42Y=@lists.linux.dev
+X-Gm-Message-State: APuU4Z+JEI6THHtWA1fPKYlf+uFJuGIveNvr8Z3gHCOSLUt4sgY5lAfw
+	YLtXk6QMU/XjJ32Nu4yCHuHgY9J4KjSo5Vbs5QOc2Metg0vfhARKkiyh
+X-Gm-Gg: AYBFou0hP+aFVq61AD9iFgKZ/BpDlLDzD3JDsKUrEDh1SiOI9qL6BShogdZ1Wm/nUzU
+	VyduX5ToRd9WY/z94Z2ryLnJtrINz4q+r0OYvsbkqqPrJUSuTF2z4eg+Ej/sBqngk0ZqprQzm1W
+	WVcLDH8WVq0s7KZ4aZ7tP9+bEQuugQxCddEmyY/jLWLzJP9s/mma5pPnBgs2rmx13VKoAmkpsL1
+	8pXfgpT2V8KtfookOiZynUK9nov6Vn+QmwarDMGxSAJdgR0A4eoRWJdyaLDHqMbk+R2ctgHGun3
+	KP6FZp5c8Y/TQOT+0lpU7ECMqqda6eg8mSJGkhXg69MUXjxqDIYsCYPJnzI+3R65V1anVF10hQk
+	OANMSgwEG6dpq1MMYUqeJFrmGSM81KHPjsunSEge5p8GxRF5C0XVKX2ttEMua+Zru35D/49Wo+Q
+	seG8A96rnNFHA0L4BEgvNz9OP+NSVcvh8tWukHT9wxrD686+OAmrAi4Y7VvAEFIIUbK95BxzlHR
+	hTslDvFHlRZd/SY5qI0bFUbJKO6Z5ClWjs+W5DXuVJ1MOvgdSGR50zRY1ZfUk8hRT1pt5ULAgVW
+	S1BtnARtoEJfEZOfirGQdNBvDWUxViS8L0sBZHbaAyIt4HTWmqvVMdFBeQ5SW1+Ck6PX4XJArsb
+	XGrT0dqfk4KmDmFlw4VY1jA==
+X-Received: by 2002:a05:6102:a4b:b0:7cc:1192:563c with SMTP id ada2fe7eead31-7d64d770298mr297767137.25.1794533541329;
+        Thu, 12 Nov 2026 17:32:21 -0800 (PST)
+Received: from fabio-X870-EAGLE-WIFI7.tail2bb604.ts.net ([2804:1b3:a803:1afe:4b16:e82:1dda:bfc3])
+        by smtp.gmail.com with ESMTPSA id ada2fe7eead31-7d64be7e2e9sm796166137.0.2026.11.12.17.32.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 12 Nov 2026 17:32:20 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: lee@kernel.org
+Cc: maz@kernel.org,
+	andy@kernel.org,
+	jic23@kernel.org,
+	dmitry.torokhov@gmail.com,
+	linux-input@vger.kernel.org,
+	mfd@lists.linux.dev,
+	linux-iio@vger.kernel.org,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	devicetree@vger.kernel.org,
+	imx@lists.linux.dev,
+	Fabio Estevam <festevam@gmail.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: [PATCH v3 1/2] dt-bindings: mfd: mxs-lradc: Fix interrupt order
+Date: Thu, 12 Nov 2026 22:32:11 -0300
+Message-ID: <20261113013212.470981-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.43.0
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -66,50 +107,74 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261101154053.3874-2-yaozhonguwl@gmail.com>
+Content-Transfer-Encoding: 8bit
 
+The interrupt descriptions added during the conversion to YAML do not
+match the ICOLL source numbers used by the existing DTS files.
 
-On Sun, 01 Nov 2026 23:40:50 +0800, Yaozhong Li wrote:
-> Some boards route "power hold" lines from the SoC into the board's power
-> circuitry. Those lines have to be held asserted while the system is
-> running and released before the PMIC shutdown request is written,
-> otherwise the rails can drop and come back up instead of staying off.
-> 
-> Add power-hold-gpios to describe those lines and power-hold-delay-ms for
-> the settle time. The driver reads them for every RK8xx variant that is
-> the system power controller, so define them once, in a schema shared by
-> the seven RK8xx bindings, and reference it from each. The bindings
-> switch to unevaluatedProperties: false so that the shared properties are
-> allowed, except rk817, which keeps additionalProperties: false and lists
-> the two properties: it also references dai-common, of which it only
-> allows a subset.
-> 
-> The array is bounded at two entries. Firefly's vendor kernel handles
-> exactly two such lines, pmic,hold-gpio and pmic,stby-gpio, and its board
-> files use one or both of them, with an RK808 and with an RK818.
-> 
-> The lines are released from the PMIC's power-off path, so they are only
-> meaningful when the PMIC is the system power controller. Require that.
-> A board adding these lines is expected to switch to the generic
-> system-power-controller property at the same time, so the deprecated
-> rockchip,system-power-controller spelling is not accepted here.
-> 
-> Assisted-by: LLM
-> Signed-off-by: Yaozhong Li <yaozhonguwl@gmail.com>
-> ---
->  .../bindings/mfd/rockchip,rk801.yaml          |  5 ++-
->  .../bindings/mfd/rockchip,rk805.yaml          |  3 +-
->  .../bindings/mfd/rockchip,rk806.yaml          |  1 +
->  .../bindings/mfd/rockchip,rk808.yaml          |  5 ++-
->  .../bindings/mfd/rockchip,rk816.yaml          |  5 ++-
->  .../bindings/mfd/rockchip,rk817.yaml          |  4 ++
->  .../bindings/mfd/rockchip,rk818.yaml          |  5 ++-
->  .../mfd/rockchip,rk8xx-power-hold.yaml        | 42 +++++++++++++++++++
->  8 files changed, 65 insertions(+), 5 deletions(-)
->  create mode 100644 Documentation/devicetree/bindings/mfd/rockchip,rk8xx-power-hold.yaml
-> 
+For i.MX23, Table 5-1 of the reference manual maps source 36 to touch
+detection and sources 37 through 44 to channels 0 through 7. imx23.dtsi
+lists these sources in that order.
 
-Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
+For i.MX28, Table 5-1 maps source 10 to touch detection, sources 14 and
+15 to the threshold interrupts, sources 16 through 23 to channels 0
+through 7, and sources 24 and 25 to buttons 0 and 1. imx28.dtsi also
+lists these sources in that order.
+
+Reorder the schema descriptions to match the hardware documentation and
+the existing DT ABI.
+
+Fixes: 009528b5aa13 ("dt-bindings: mfd: convert mxs-lradc bindings to json-schema")
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+---
+Changes since v2:
+- None. Only collected Krzysztof's tag.
+
+ Documentation/devicetree/bindings/mfd/mxs-lradc.yaml | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/Documentation/devicetree/bindings/mfd/mxs-lradc.yaml b/Documentation/devicetree/bindings/mfd/mxs-lradc.yaml
+index 782b2f4005a0..755029880677 100644
+--- a/Documentation/devicetree/bindings/mfd/mxs-lradc.yaml
++++ b/Documentation/devicetree/bindings/mfd/mxs-lradc.yaml
+@@ -87,13 +87,13 @@ then:
+   properties:
+     interrupts:
+       items:
++        - description: touchscreen
+         - description: channel 0
+         - description: channel 1
+         - description: channel 2
+         - description: channel 3
+         - description: channel 4
+         - description: channel 5
+-        - description: touchscreen
+         - description: channel 6
+         - description: channel 7
+     fsl,lradc-touchscreen-wires:
+@@ -102,6 +102,7 @@ else:
+   properties:
+     interrupts:
+       items:
++        - description: touchscreen
+         - description: threshold 0
+         - description: threshold 1
+         - description: channel 0
+@@ -110,11 +111,10 @@ else:
+         - description: channel 3
+         - description: channel 4
+         - description: channel 5
+-        - description: button 0
+-        - description: button 1
+-        - description: touchscreen
+         - description: channel 6
+         - description: channel 7
++        - description: button 0
++        - description: button 1
+ 
+ additionalProperties: false
+ 
+-- 
+2.43.0
 
