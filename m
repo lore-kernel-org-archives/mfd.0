@@ -1,60 +1,75 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.54.127.67
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794621893;
-	b=WcVqFxVS+NceoFDK4Qdo04e5f9cZuGg17ewmLfdsK4apgMMOFKuYSW9k3GLr50pNvpdw
-	 PaQvZfCfl7dsNuplfwv6EDqR3hW8sCq6Cl6lbTkl2gMl61IXtC1ESww84An7XJ6KsiIsK
-	 BOvlXCDK30pxdo2VqbB9ZU209n6HmdhQuyjilezR+sTArxfGN/RY8hJSx8EPLMLUEBPM0
-	 zj1rPrJf6ARmvIntf2F3uuHbpE5HvmVxpomT7JZhFrp61V89q/GkD5sA+Rk0pY8UTS1RV
-	 +7kLRKZUwtXfo9yYDaoslYkqfkuQuLF1DEqWQbELcukaBL/84xIQPWrXAHdH0A2Z/DA==
+	t=1794626737;
+	b=5tE19kWerFiwx3Fg4OWPfgIr24v7p/EzmxBSFSSpFEx/l24yNgPxfzQifCDbPpcBmpGV
+	 oR4KbsU3ZxRbQJkvQFk1Qxi0pc5bzEA8550B+CdSDLPOh7lPI3CAcWMHLh5ByRKTuVQe+
+	 yHW0AJQNW6hBsqsG3i+QAN+iMIu0tE3K5zF4q3ZplxJ97glZsNUxBRuW1C6kS02sURdpl
+	 Ow2fftDmhEJm884EoUMFhzOueuWm/90NXwaLkmK20U893Ed8/eN8F3ZYRLeWoOrr52LBC
+	 XaGkpG+4aOupWABwiNdfPlM92KBNvb4P9F/MMsBNZQZ2FDvO0xw6DkUZfCuNMv/Zc3w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794621893;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=c3TMKQvGudvZgsPILw4nmz5grw8WhZuLvbEH6M2mYGQ=;
-	b=GulsV7vxXVaq0uWVEGixWyYcQHuSgBXhOIIBLuINJacMhjcYMQJ0jFKP/FFJR74UEpHQ
-	 UMH3BAPXOfXbNvRG7zDqdYuhWzOTkdD27LhXbiQaoM0nzDA09kdXKift5Y7i37BYyja3c
-	 XxzLgiGy8c/FktCfqIFP2Q9/diKHs6peRrPdgp62RpS91973scKC29UKRStQvYoW0uiQH
-	 qC76dKISEcxc/XntPcaOm7mfly7E8TYrrUml2mLtopYAikmfG+awZwDGsPwZdlfxVK5h2
-	 HSSqV82YhZHf4NJKCjiYgpi2OvgsA2GKDJ6E2DixBS2hQukZLkMIhfBsXSbwTUGFZXw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794626737;
+	h=DMARC-Filter:Received:DKIM-Signature:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Envelope-From;
+	bh=oyAxY85GFEZYnIl3FuV7SY+GGs/c3oBnxtIqltqNgug=;
+	b=zLkIaoyab022tAW0MmeiEUdAkFuOfKPIQ3FTPJ4jKWHrIpBvkyK7oL8I2wbShgnRlu2h
+	 hgbgj1TUsTyNbTzl4wpzQsTG4gVMU0/HA0hNFVnX61OWDIK10e3oEjpLmaVC390VDktAN
+	 +SCil4ee9DEY7eoRmu/2WBHsL+ZAY3E4bRPPuLAJ3ia6HrfXwByDHzKK9s3US72N+Ijzf
+	 KacYbpiDSEkGC455v8ExmIuqewakiT8FzZ4RLGH/EaNRfwuw/3ZNa1AlK9TyfNcNgkK5p
+	 2geTg1DnwTyGtgrS9eOmaSN8gpY15Or/4RTHzd2z1hWIlq1kj4vzrr21BugPfFaoDnw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dunwn7t6;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=chrispinetinega.com;
+	spf=pass smtp.mailfrom=chrispinetinega.com;
+	dkim=pass header.d=chrispinetinega.com header.i=@chrispinetinega.com header.a=rsa-sha256 header.s=default header.b=CAn1GsUi;
+	arc=none smtp.remote-ip=198.54.127.67
+Received: from out-zbxj-a67.jellyfish.systems (out-zbxj-a67.jellyfish.systems [198.54.127.67])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1547B606A331;
-	Sat, 14 Nov 2026 02:04:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D796A606A331
+	for <mfd@lists.linux.dev>; Sat, 14 Nov 2026 03:25:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D796A606A331
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chrispinetinega.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chrispinetinega.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dunwn7t6
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E00941F000C4;
-	Sat, 14 Nov 2026 02:04:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794621892;
-	bh=c3TMKQvGudvZgsPILw4nmz5grw8WhZuLvbEH6M2mYGQ=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=dunwn7t6OF5BWqY7ESWPFycpyqyP3T4yNXkPQgI5zCq85NoZuGdkl8K+OQLpGxuhj
-	 aZfyQ79ujvGmg9XYCmqWqZaQGfYNLFp7ruAlDNqV5Cm84fRiv5Zj5BB6jzXZ7+d0uI
-	 E5CFDFO/nY3T2vMUt2LkZzsiR/qMv7L3XrbwhTppxrYcIOsJ51a42VEvNPt6M6b1iS
-	 zgHMQ8RmmYwmwXYf8pCs/68KriYAqBdX6VrBWHV53KWxWIBbyrJAKitQ2fHtAXhS2f
-	 Tjc5ss42PvCwwAS82P9ZNhUaTuE2XZ3zC6zjf+Z9hQ73oOOWa9PNQIMftV9LkSwYsm
-	 prwrUht0iB9gQ==
-Date: Sat, 14 Nov 2026 02:04:47 +0000
-From: Jonathan Cameron <jic23@kernel.org>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: lee@kernel.org, maz@kernel.org, andy@kernel.org,
- dmitry.torokhov@gmail.com, linux-input@vger.kernel.org,
- mfd@lists.linux.dev, linux-iio@vger.kernel.org, robh@kernel.org,
- krzk+dt@kernel.org, conor+dt@kernel.org, devicetree@vger.kernel.org,
- imx@lists.linux.dev, stable@vger.kernel.org
-Subject: Re: [PATCH v3 2/2] mfd: mxs-lradc: Pass parent IRQs to child
- drivers
-Message-ID: <20261114020447.7a0b71d5@jic23-hlaptop>
-In-Reply-To: <20261113013212.470981-2-festevam@gmail.com>
-References: <20261113013212.470981-1-festevam@gmail.com>
-	<20261113013212.470981-2-festevam@gmail.com>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
+	dkim=pass (2048-bit key) header.d=chrispinetinega.com header.i=@chrispinetinega.com header.a=rsa-sha256 header.s=default header.b=CAn1GsUi
+Received: from mail.privateemail.com (unknown [62.8.90.37])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mail.privateemail.com (Postfix) with ESMTPSA id 4jRKJH5dDlzyNc;
+	Sat, 14 Nov 2026 03:25:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chrispinetinega.com;
+	s=default; t=1794626726;
+	bh=oyAxY85GFEZYnIl3FuV7SY+GGs/c3oBnxtIqltqNgug=;
+	h=From:To:Cc:Subject:Date:From;
+	b=CAn1GsUirKL6+dqPmQs2DDDkuZtVTJlE95li865Nv4fHZ2ZNUMdEfAjT5W3XhBckg
+	 j0rF58kSQF6mUzGYdghtHabY4bsU4hWjtrlsaWic1GRJaVlc/Mp+tPhEwtEfRGXrqm
+	 BNPTQS+P03qmLohFi6ODkQ4Ag2IY9wTh0DYBhNpHmLnYZmMJXWhUbxgjwcPcoOf+vh
+	 6I6ybprVC7Zodz9M9oAZuBZ/sYFCJHuL/VVBlWDC8YZ3VHaLgfKkHaUkv0Z7VK4l1T
+	 N3mHu5C/L/BpmlB+m1ENc19futqHtdGRd2zP5nWIdZgrGePuIGEbvnMbWBMjyL+ViW
+	 iRJMDlxqNSkeA==
+From: Chrispine Tinega <dev@chrispinetinega.com>
+To: Lee Jones <lee@kernel.org>
+Cc: Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Roger Quadros <rogerq@kernel.org>,
+	Tony Lindgren <tony@atomide.com>,
+	Jerome Neanne <jerome.neanne@baylibre.com>,
+	linux-kernel@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-omap@vger.kernel.org,
+	mfd@lists.linux.dev
+Subject: [PATCH 0/3] mfd: tps65219: Let a board run past the warm threshold
+Date: Sat, 14 Nov 2026 06:24:53 +0300
+Message-ID: <20261114032457.3434248-1-dev@chrispinetinega.com>
+X-Mailer: git-send-email 2.53.0
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -64,101 +79,40 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Envelope-From: dev@chrispinetinega.com
 
-On Thu, 12 Nov 2026 22:32:12 -0300
-Fabio Estevam <festevam@gmail.com> wrote:
+The TPS65219 has four die temperature sensors, each with a warm and a
+hot threshold. With a sensor's warm warning unmasked, the PMIC sequences
+all its outputs down at the warm threshold, 110 to 130 C. With all four
+masked, it only reports the warning and powers off at the hot threshold,
+130 to 150 C. The masks come from NVM, so a board that wants the second
+behaviour has to set them on every boot.
 
-> The MFD driver stores raw DT interrupt indices in IRQ resources but
-> registers its child devices without an IRQ domain or IRQ base. The child
-> drivers consequently receive the indices as if they were mapped Linux
-> IRQ numbers. IRQ index 0 triggers the platform_get_irq_byname() warning:
-> 
->   0 is an invalid IRQ number
-> 
-> The children then try to recover the indices from their resources and
-> map them against the parent OF node. Besides duplicating IRQ names in
-> the parent and children, this relies on invalid platform IRQ resources
-> and fails when IRQ 0 is rejected.
-> 
-> Resolve the interrupts with platform_get_irq() in the MFD parent and
-> store the mapped IRQs in the shared LRADC data. Drop the child IRQ
-> resources and duplicated name arrays, and have both child drivers
-> request the mapped IRQs directly. Use the MFD memory base support to
-> translate a single relative memory resource shared by both cells.
-> 
-> Tested on an i.MX28 EVK. The mxs-lradc-ts driver probes successfully,
-> touch events are reported, and the touch-detect and LRADC channel 7
-> interrupt counters increase as expected.
-> 
-> Cc: stable@vger.kernel.org
-> Suggested-by: Lee Jones <lee@kernel.org>
-> Closes: https://lore.kernel.org/linux-input/CAOMZO5CgTzo6GuXptD4mFTN=UsJJqpkixDW1Q64gqZGrij8+uQ@mail.gmail.com/
-> Fixes: a85a6c86c25b ("driver core: platform: Clarify that IRQ 0 is invalid")
-> Signed-off-by: Fabio Estevam <festevam@gmail.com>
-For this change
-Acked-by: Jonathan Cameron <jonathan.cameron@oss.qualcomm.com>
-With assumption it'll go through mfd.
+The BLIIoT ARMxy BL350, an AM6254 industrial controller rated to 85 C
+ambient, ships a vendor kernel that does this from a devicetree flag.
+This series adds a binding for it and the driver code, and corrects the
+MASK_EFFECT macro on the way: it named bits 2:1 of MASK_CONFIG, which
+are warm masks, instead of bits 6:5. Nothing used it yet.
 
-However, one of those, whilst you are here comments below....
+The property is limited to the TPS65219. I have not checked the
+MASK_CONFIG layout of the TPS65214 and TPS65215.
 
-> diff --git a/drivers/mfd/mxs-lradc.c b/drivers/mfd/mxs-lradc.c
-> index 30a66e268169..d16dfea89207 100644
-> --- a/drivers/mfd/mxs-lradc.c
-> +++ b/drivers/mfd/mxs-lradc.c
+This series is build-tested for arm64 with W=1, and dt_binding_check
+passes. It has not run on a board in this form. On a BL350, the
+vendor's equivalent code sets the same four bits, and the PMIC reads
+MASK_CONFIG = 0xef.
 
->  static int mxs_lradc_probe(struct platform_device *pdev)
->  {
->  	struct device *dev = &pdev->dev;
->  	struct device_node *node = dev->of_node;
-> +	const struct mxs_lradc_soc_data *data;
->  	struct mxs_lradc *lradc;
-> -	struct mfd_cell *cells = NULL;
->  	struct resource *res;
-> +	unsigned int num_cells;
->  	int ret = 0;
->  	u32 ts_wires = 0;
->  
-> @@ -137,7 +161,11 @@ static int mxs_lradc_probe(struct platform_device *pdev)
->  	if (!lradc)
->  		return -ENOMEM;
->  
-> -	lradc->soc = (kernel_ulong_t)device_get_match_data(&pdev->dev);
-> +	data = device_get_match_data(dev);
-> +	if (!data)
-> +		return -ENODATA;
-> +
-> +	lradc->soc = data->soc;
->  
->  	lradc->clk = devm_clk_get(&pdev->dev, NULL);
+Chrispine Tinega (3):
+  mfd: tps65219: Correct the MASK_EFFECT field of MASK_CONFIG
+  regulator: dt-bindings: ti,tps65219: Add ti,no-warm-shutdown
+  mfd: tps65219: Keep running past the warm threshold when asked
 
-This is what would need changing to fix potential ordering issues with devm / non devm
-mixing.
+ .../bindings/regulator/ti,tps65219.yaml           | 11 +++++++++++
+ drivers/mfd/tps65219.c                            | 15 +++++++++++++++
+ include/linux/mfd/tps65219.h                      |  8 ++++++--
+ 3 files changed, 32 insertions(+), 2 deletions(-)
 
->  	if (IS_ERR(lradc->clk)) {
-> @@ -187,38 +215,15 @@ static int mxs_lradc_probe(struct platform_device *pdev)
-
->  
-> -	ret = devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_NONE,
-> -				   &cells[TSC_CELL], 1, NULL, 0, NULL);
-> +	num_cells = lradc->touchscreen_wire ? ARRAY_SIZE(mxs_lradc_cells) : 1;
-> +	ret = devm_mfd_add_devices(dev, PLATFORM_DEVID_NONE,
-> +				   mxs_lradc_cells, num_cells, res, 0, NULL);
->  	if (ret) {
-> -		dev_err(&pdev->dev,
-> -			"Failed to add the touchscreen subdevice\n");
-> +		dev_err(dev, "Failed to add subdevices\n");
-
-Not related to what you are changing here, but a devm call with a goto that
-follows it is usually an alarm bell...
-
-Can we fix that with a change to devm_clk_get_enabled()?
-
-Jonathan
-
-
->  		goto err_clk;
->  	}
-
+-- 
+2.53.0
 
