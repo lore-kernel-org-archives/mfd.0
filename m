@@ -1,99 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.45
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794762714;
-	b=uB1OuioNs4iqudoIv1a1NeVXA6f+SXSWkk+LnBxv27InDhJvotIWXL982Y3IlxosJeoK
-	 cJfBPx0nDY6mf/uZ+2pCn/OLeZwbYXErcTqKg6N4buxzVxcnhLDTDiKLI9qz0EktbJjaN
-	 x1Q7hBkuk6bhyxEssU38OA+BcUrVmWkXPi1jJGViDWguzgPAh8iqIHf1rnnRjngIXSLVj
-	 t2GV3012bAuA3o91yBGJs2ZvoGBdGBqhgN3wptLsz7I3prVtz7DksZqXjv4JbBNcXZx7o
-	 uAZ8sYzNzMdnJDP4wm1Qnv2ihPRZjoZVB45pbfSgfa3etasE9eBR6fi2FNv9k8oGoTw==
+	t=1794763239;
+	b=H00TvZfZ2aAj6ST2ABVe/0auRAutUGUAaG/u2E6sdj4W6CdURld3s3oj/MR4nmy5qnt/
+	 MOMGrACVGa2CdOW2x2uYQ2pXqZ5UiJaE3HZWlgyoPEEeNdwH5AxZCOqXaEKImt0Bsd9+Q
+	 w/TyYH+t3o55bpdnvqQIFXAqrMWcMS6HfDXo64OgFGH+RFdAXs0bgvNHAk4nt6eyb0Gp/
+	 ktxlPZOjcHyuPBTtUDL64PO7+YFTXxoreB7BFGpb092Xdk013Eevltd9NqG9wesJtNUOd
+	 xxBlWRPscmPuGtGj8knU6Gj4ier+uI8In/p+hXQeTOG1DgdV5rhoVjGHylWpTicx57Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794762714;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=mZe5nxMVVSQwhBrOC2mg7Pyqnc/0mg16GtD+fLJnRoY=;
-	b=HTTR3blDN7Hx0fWd0alyo/Xf4x/TAAwentQKhvuNJNmQRS7NxiJi2T9yQFix3xNmZJYm
-	 z7LZJdvv77Lz6ZJ8s/3Yx4qB+Yw92BPfqk9q554S8Bex51+pp8cZCefe/wqrHOi76q9vJ
-	 oqsrFvD3iE7xEefCOI0yGFvcvVzzU+qlkOUVoyCUmPHAr2D5mKOQoreKPD3/EzWP9jzIV
-	 mFZEeuRjxzR8wCNLKc/6NlvoNJNWrAcP5AnL2QW2FrvV6XSRGiA1wr7Uux4HPSfQhzAl/
-	 n4atVP6u7T1S+TVtW9D7IeaFFw/QOvhWMdUE3LrXibb4yq9ivoBBSWgb0/fH0UwITTA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794763239;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=lUYSmdDAIz85Bf40o5kep+KTrVo3dL2FPwB709EoZ5w=;
+	b=S7G9TTtswoc24p/PShmGWwJ1OdS57ZTKQDDrXbmIHdjzDatzrmFcbc3QqWPMPDe+gLVq
+	 eO4cRtji1T31/6n5O6tHdS0FBjs82E5IP10LpkTfSjNPZ5tYF7R2VCxMPuSnDmYoaS0Fj
+	 /e4o3AMmEVNDC7/Td/kV7JRSUiQY8FMQVsV8fpj1zBWPwYiC1ypvLGjvkuQZ7uv0ex7Su
+	 klui0lK9y2lH2P/G6xWcIA3MtbsyPbaxhUWO1Y6caBaAqL1E2ibfMWLEJcCx/9OWqxu5A
+	 4KhfK/aDVy60GtokckTEQLO4PaGunFec7ghdfzoDgg75XO5qNj5EthEQzQ5/OcN43JA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mgcrea.io;
-	spf=pass smtp.mailfrom=mg-crea.com;
-	dkim=pass header.d=mgcrea.io header.i=@mgcrea.io header.a=rsa-sha256 header.s=google header.b=Wt55wUio;
-	arc=none smtp.remote-ip=209.85.128.45
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FffA8WCa;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 027F9606A32E
-	for <mfd@lists.linux.dev>; Sun, 15 Nov 2026 17:11:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 027F9606A32E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=mgcrea.io
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mg-crea.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BDC4606A31D;
+	Sun, 15 Nov 2026 17:20:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=mgcrea.io header.i=@mgcrea.io header.a=rsa-sha256 header.s=google header.b=Wt55wUio
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4a3517554f7so30523965e9.2
-        for <mfd@lists.linux.dev>; Sun, 15 Nov 2026 09:11:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mgcrea.io; s=google; t=1794762712; x=1795367512; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=mZe5nxMVVSQwhBrOC2mg7Pyqnc/0mg16GtD+fLJnRoY=;
-        b=Wt55wUioekpCG75qYVD5I80p196Lnsao6EUYLiPbD5V7qiV7ERZz2ZIRwquzrkRstx
-         rqWeTRiFjJTuFsd+cyUVvI0b/GiBVzCoUn+Y7ARtiVHkw1bXMvwNpJkSH1DYSldgOnhG
-         EvLsmJfqcIBLOWygZbK1fTNC2+XLnwzCfW99+gAma325NaZ1V04T0UIHmfLNLfsCVlNN
-         hA3gFB6zDqDGeFDKVLFybHgP+STegEIedQk6gBYVUqAkymIk403yQHH5lffye5hDGKcp
-         PY2mi11U8ea65Lq+7t46SWeIgg9nPRytut93nE1WpSoSw18/I348FXhg8KR5C3TpnpEy
-         2vbQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794762712; x=1795367512;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=mZe5nxMVVSQwhBrOC2mg7Pyqnc/0mg16GtD+fLJnRoY=;
-        b=KozttiRdoXJQ2lYcQvgBbE80LBo3D0rGvAX7Q7+qruTeGezNiSun+dgy+0zkbGQG4A
-         EtZYIsNDbpJDmHQZ+4oz+nThHLUnAS3QBn692IKs6SewtAr71GGry37gNvd+mSHW9Dhf
-         LLQ5PPGvKoS53Op8BfTdtC47Yw965tu+y33Ll+kWUAXbsV89WiAso9vU9jy68phqMlVE
-         gO8L5WknLJ8SbPHjFs10ShkNtzkVC8Jmnd+bOW39oGJqFzNIGZ8DsRwiIzn8IgAdSrel
-         0QvBjCe5Zjxu08BK474mgiNorg08LyB+gMYNtbstJscEQj5HSYJ2UrJjRkYRIJJxQcph
-         UxTg==
-X-Forwarded-Encrypted: i=1; AL+hErEkwmP85XojuMOBPBpXJG+BVJu9h5/rRwfUhgvjcoFfpj1yoSWsAEd7+dH5ki1u3NRlQM4=@lists.linux.dev
-X-Gm-Message-State: APuU4Z/LbaLRw3MgJ2dgIeEYoPDj087PQnqdlnk+x20cx/S9J2SSmunb
-	bOOYcvylzpxjdRPwm1bQA/8k64rWuKlmsyHplWtpa+Y/juojYrB/Z6+bxK3FwYureYw=
-X-Gm-Gg: AYBFou1+s3a6U4CctDVM/5+JLVSOd+gTTN2QZ2OWMpiMSfiGp23XaQV9OpW8Hxl8t/n
-	b+NbOoWLvKy2dfjk9IACANCzZxygbvstdc8DC1nCk3kzkzXjUnDv0atiif/VmG2lY1MO0zKOQhj
-	Oi6pPhXRVTRYjyB5AazuBFMN041ZHVPOcZru/dnKaaxBGL68m3aLiDrRlxYOmdbwmH0BHZk9A9I
-	04b0aYIytSeqOrqZthc3Wgrcz6sMKZ+NjAFrQHR1Tt5LempBqZywJIMzAmWtmkxwvRSD3iJnwWW
-	qFBupBb1EH+v8LN8ExQumtfTDTqcrorYCH0/z0Nu8B/wVVvjO8cAn1Keuvl6BSqpf8jtRhgOzhg
-	vO4TO3ZT8VC8OOtNKobw4iGs3Qq3QMiBq3IZAWfzLG3Rehdvn4BGTQOT5VLn7StD7hLCQ9AXSV/
-	utUkRgY1490BXtNIQA1mA4THJeNi4lpEiFHoh1Qif/uTl8RCgWeCEvui8JdEWVKpVY1NAGexGWy
-	fgbqhDKQuW7IbDgjUQIKpGyYWwYo9Kx4q10YJiLlAmw/KIRxvQWPZG4c+tpvND4w5rQxtYfVZcT
-	7tHmhlSkcvADg6SqWpPexLF3YhQRNeAYbM58RKkkhSxQuigaEKso0coEzJPwIQ==
-X-Received: by 2002:a05:600c:6097:b0:4bb:6626:5a25 with SMTP id 5b1f17b1804b1-4bb66265d0bmr83499815e9.20.1794762712411;
-        Sun, 15 Nov 2026 09:11:52 -0800 (PST)
-Received: from localhost.localdomain ([2a01:e0a:9d2:5a71:b9ad:41d3:c29c:11b4])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb55ac0e1esm205418705e9.3.2026.11.15.09.11.51
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Sun, 15 Nov 2026 09:11:52 -0800 (PST)
-From: Olivier Louvignes <olivier@mgcrea.io>
-To: Lee Jones <lee@kernel.org>,
-	Chen-Yu Tsai <wens@kernel.org>
-Cc: Olivier Louvignes <olivier@mgcrea.io>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	mfd@lists.linux.dev,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 1/7] dt-bindings: mfd: x-powers,axp152: Add the AXP2101
-Date: Sun, 15 Nov 2026 18:11:44 +0100
-Message-ID: <20261115171150.64431-2-olivier@mgcrea.io>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20261115171150.64431-1-olivier@mgcrea.io>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FffA8WCa
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 74C3B1F000C4;
+	Sun, 15 Nov 2026 17:20:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794763238;
+	bh=lUYSmdDAIz85Bf40o5kep+KTrVo3dL2FPwB709EoZ5w=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=FffA8WCaViqM8DYYZc36i00+SItzpfE+ZZuxTYs74UGHPmwHN6lli0D+xCus48eEe
+	 WognC1WKsaHJySNbLDg2ct9FX0q/F3l3OCu5hidwkEmd8ehJQdEBcEVzOWui+r8pZ2
+	 JaQTcxRT5kuwwRcFnycQGct49aNMddUq/bjUr6WN+8T1gU54jmqAKVwwrBhrOCb0Kh
+	 EuDXeSKOXXFXL3KvHeKJ2ZwDtd/pdasFIUUMi7IkbQdbIHky824XJGVfipyITJf3Uy
+	 t3PHmtmMMZu727LXx8Ebfj89f7YrM1IqiSJChaWddnmzTto4mryWC1FgEzDBxLIkj+
+	 o0QskSWe29p9A==
+Message-ID: <sashiko-outbox-215676@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v2 1/7] dt-bindings: mfd: x-powers,axp152: Add the
+ AXP2101
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Olivier Louvignes" <olivier@mgcrea.io>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, lee@kernel.org
+In-Reply-To: <20261115171150.64431-2-olivier@mgcrea.io>
 References: <20261115171150.64431-1-olivier@mgcrea.io>
+ <20261115171150.64431-2-olivier@mgcrea.io>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Sun, 15 Nov 2026 17:20:38 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -102,46 +60,87 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 
-The AXP2101's interrupt line is optional, as for the AXP313A and the
-AXP15060: the driver then registers only the regulators. It has no DCDC
-frequency setting.
+Thank you for your contribution! Sashiko AI review found 2 potential
+issues to consider:
+- [Low] dt-bindings: mfd: x-powers,axp152: x-powers,dcdc-freq: false at
+  wrong level
+- [Low] dt-bindings: mfd: x-powers,axp152: unwieldy per-compatible
+  conditionals
+--
 
-Signed-off-by: Olivier Louvignes <olivier@mgcrea.io>
----
- Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml | 3 +++
- 1 file changed, 3 insertions(+)
+commit 520d0c5b7e3c77d62056e2ccbc2df67bc5ef33a7
+Author: Olivier Louvignes <olivier@mgcrea.io>
 
-diff --git a/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml b/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
-index 45f015d63df1..024de5553d6b 100644
---- a/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
-+++ b/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
-@@ -69,6 +69,7 @@ allOf:
-             contains:
-               enum:
-                 - x-powers,axp15060
-+                - x-powers,axp2101
-                 - x-powers,axp305
-                 - x-powers,axp313a
-                 - x-powers,axp323
-@@ -85,6 +86,7 @@ allOf:
-               - x-powers,axp313a
-               - x-powers,axp323
-               - x-powers,axp15060
-+              - x-powers,axp2101
-               - x-powers,axp717
- 
-     then:
-@@ -108,6 +110,7 @@ properties:
-           - x-powers,axp806
-           - x-powers,axp809
-           - x-powers,axp813
-+          - x-powers,axp2101
-           - x-powers,axp15060
-       - items:
-           - const: x-powers,axp228
--- 
-2.39.5
+dt-bindings: mfd: x-powers,axp152: Add the AXP2101
 
+This commit adds the x-powers,axp2101 compatible string to the X-Powers AXP
+PMIC binding with optional interrupts and no DCDC frequency setting.
+
+> diff --git a/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml b=
+/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
+> index 45f015d63df16..024de5553d6b7 100644
+> --- a/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
+> +++ b/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
+> @@ -69,6 +69,7 @@ allOf:
+>              contains:
+>                enum:
+>                  - x-powers,axp15060
+> +                - x-powers,axp2101
+>                  - x-powers,axp305
+>                  - x-powers,axp313a
+>                  - x-powers,axp323
+> @@ -85,6 +86,7 @@ allOf:
+>                - x-powers,axp313a
+>                - x-powers,axp323
+>                - x-powers,axp15060
+> +              - x-powers,axp2101
+>                - x-powers,axp717
+> =20
+>      then:
+
+[Severity: Low]
+Does adding x-powers,axp2101 to this allOf rule actually forbid
+x-powers,dcdc-freq under the regulators child node?
+
+x-powers,dcdc-freq is defined and parsed under properties -> regulators ->
+properties, whereas the then clause of this block sets x-powers,dcdc-freq:
+false at the top-level PMIC node:
+
+Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml:allOf:
+    then:
+      properties:
+        x-powers,dcdc-freq: false
+
+Because the first allOf entry's else branch defines x-powers,dcdc-freq under
+properties -> regulators -> properties with a 1800 to 4050 kHz range, schema
+validation still permits x-powers,dcdc-freq inside the regulators node for
+x-powers,axp2101. Nesting x-powers,dcdc-freq: false under properties ->
+regulators -> properties in this then block would disallow it as intended.
+
+> @@ -108,6 +110,7 @@ properties:
+>            - x-powers,axp806
+>            - x-powers,axp809
+>            - x-powers,axp813
+> +          - x-powers,axp2101
+>            - x-powers,axp15060
+>        - items:
+>            - const: x-powers,axp228
+
+[Severity: Low]
+This isn't a bug, but x-powers,axp152.yaml already aggregates nearly twenty
+PMIC variants with five per-compatible if-then blocks in allOf. Rather than
+extending these conditional lists further (and inserting x-powers,axp2101 o=
+ut
+of numerical order after x-powers,axp813), would it be cleaner to split new
+variants into a separate binding schema document?
+
+Also, the commit message explains the optional interrupt line in terms of
+Linux driver behavior ("the driver then registers only the regulators") and
+gives no background on the AXP2101 hardware. Describing the PMIC and why the
+interrupt line may be omitted in hardware or board wiring would make the
+binding description clearer.
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261115171150.6443=
+1-1-olivier@mgcrea.io?part=3D1
