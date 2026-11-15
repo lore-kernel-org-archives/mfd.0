@@ -1,136 +1,104 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.50
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.50
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794691849;
-	b=QH1TaMOVRwhinUyzgMJWoGQUE9B4z0UosbGjCSdxUdTOSkWdk+ePSxHrtQKTXLddLgcC
-	 XIHnRanpe9MJgg2hb1i+90/bXUCNCS+VoRT36PkrNAzI1E7ZQSAr+7iQ9+NPy9MGZ8Vqi
-	 o0zVZ45q1pLmXI8quc+ZrCV/vQ8J9eayKLEhud3TsJu5SzcHB1Qfc/OYfl7npJgXHCNiO
-	 A/z8Bclfea6792oJgEfFIEm7gbxJBs0NgUtgwlIv1GDJx+CvFRRJiXT6BcE4YQLCm995W
-	 2+6zMC3/WrunJQdwA57P17PeThp6qFg1snPh3sc7yu4cfuBvunUbF4DyiBOcrxFCuAw==
+	t=1794733119;
+	b=Cu+AAP0e2+bMO1+zK9QvRpTwuMXGVgDP3qJJHpMJc1Pt7/wO1bo2jd4ECBLxDDj9wEvE
+	 MwnmTJsWJE9dqyY0FmIOJ3sCFlW6YdojQnUk8gx1tI2o5qPi+99qnXPzhSm6xTMDkW+D5
+	 clxJAAYvyKbRYp856Rwd0bEBPIhshIBoDHyiKh9ncncvbm9i2RuJ/MpISMX4vLATUuoBy
+	 N2tkXZLkQjkidnpsZg3W1bplLv6vi71AAUZmrQYpZbJ2bAzN+iwCRXSYWF2K3lpDztA+/
+	 vI4rYRLmDY4BDMrUeyuYDlr2rvARtrq+eFQiompFjKzGUm/cFVHe3u5IuJ11ncJ6OQA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794691849;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794733119;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=vju4Tmf9HxWLCGDozxlRYY/dKPR1MEju5ORsVHds9AY=;
-	b=aaEuOcnuAolCcXlF4Zy5lbz2/hJUP1oqrjJqEWA2bkCdizO0jtEXVoKwPmhZUvO7PRzu
-	 NoRm3U7CLtbmhrToV/qZwBqzy95Z58czyJU/94sVYkrd1WJpXtIoHRrfgXk8MQPBnc068
-	 DpSQOILU1Ku5Ck2DRzSqVePR/lwQImi/PzXxGiMdj1RRktxri0igB/QMD6VqqPZ15SaIn
-	 jbCBYygRbAKERMoHMxFbaN+p4GOY3gt+3w5R4xMe171IuUuVa+58zkAyuuodBODXa9r+R
-	 4iOS9IjvLgTLS2mCS/IKKWs1iggk7WYHnv9qm4jzRZy2PTqXn5gjLdqxeXPphAkTsMw==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=BfQ1qFkKsmGaWDuAf4U5BrZ/SIHnw5d+W2dmVSm0AgU=;
+	b=xY+B6cpyabRNIBI2AH4qRFGIyD/abv/9cERWXMfF53t66+QYiOX/vTII7CWdJ40CnJhV
+	 yad53rtaQJbOUI82WZsIgKoNKVux1FnIppfkG6ZbKHUws3aN00jX3EssOrvZmMYpvjXSO
+	 TYBeZ9IBzJzOxjD6vCMsxu378AiIdKzTydb6BJHBK9R+lGrhE5+dtMUkqGmAuIAtTaS3R
+	 CC3/VbmwN7ZWuE14WlzOg2qqeRL/KNL792JzwKHtohOIXsTOvJcPLuRxiMLbahAd99FQm
+	 s5lHDkbyeHeBywwL38Etv36zGO2mmbuqEIZpHXuwgc/D6BqgXjQzxGqS/Ib8xt0pnCw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Oe4whgMm;
-	arc=none smtp.remote-ip=209.85.128.50
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="E6TT2/mz";
+	arc=none smtp.remote-ip=209.85.218.50
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7684606A332
-	for <mfd@lists.linux.dev>; Sat, 14 Nov 2026 21:30:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C7684606A332
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 552AE606A31A
+	for <mfd@lists.linux.dev>; Sun, 15 Nov 2026 08:58:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 552AE606A31A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Oe4whgMm
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4bb55cda775so9545665e9.0
-        for <mfd@lists.linux.dev>; Sat, 14 Nov 2026 13:30:48 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=E6TT2/mz
+Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-c4d581da0aaso307655366b.2
+        for <mfd@lists.linux.dev>; Sun, 15 Nov 2026 00:58:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794691847; x=1795296647; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=vju4Tmf9HxWLCGDozxlRYY/dKPR1MEju5ORsVHds9AY=;
-        b=Oe4whgMmIY7AJRUl/ZLStdHdfHu1DWj1T8uzBmd5CjeOcdGHkga3g03aJIkfbFQwIw
-         j3b78I69Po3AdHpiDlhrTj4RfJJ9Tn+sn0jc404/3yUgZWa+XzwViJMT6apDaadBH5fC
-         fMCmJ6VR04Rji3X3qYT/UiIvVfDu5p2HMuHILU2wQ9RShXcOIyv+7EtirVRcgRy0Y/zJ
-         XxsXMZa9VvN2NH4i6Pf3zKqBCo3d0t67qlPWBE+RbzLophuBUeL412RwkM/IOs/QMUdJ
-         JATTvon2p6IXdslRWSOiR89aDvr7035up083oZuw0EBEpYZYb0f7RoMzjmiTGIoJa1f/
-         csWA==
+        d=gmail.com; s=20260707; t=1794733117; x=1795337917; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=BfQ1qFkKsmGaWDuAf4U5BrZ/SIHnw5d+W2dmVSm0AgU=;
+        b=E6TT2/mzwFr9BLrDf7PgQb8qZSstkExZtPHfph39lqTmXtZjbSWxdarlrhVRUJ2idu
+         7UG/pfltuuv4+hrCvmnvSifBrNrgWigVYIaAaoYspY/VQ13V3AoAwYLWMd//1YTjn9lR
+         U9nuwg4JStcqTzgTvlDzCqocqQtZgHjYPz1ffxZBiZ7sjm0GR4NKxjNwiK0JTm/hCG2L
+         GGkL7+7Q22DDQjqFaJLe9A2VKeXaXYe/ZD7+i/dterYUZRaoRrvHI4ol42PQ++b+84xm
+         Zqu3WJLDO63t7MvlHOf9f7l82JIrfFyri0ylhYpJWA8nqd1dQAHXWARp/+h9gOXUc8EH
+         npDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794691847; x=1795296647;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=vju4Tmf9HxWLCGDozxlRYY/dKPR1MEju5ORsVHds9AY=;
-        b=0NHK5D+mNygI03eAjHg1mrr15uqEbyXwTS6uuN58VumOU92S2oTpBDpF6IrHjIwUdM
-         tbkW6z2RiYpIieyq/fPi+BaOuyiMhsNMrG2y33eCidLh0nF1mEh/7+OTdwXJQxzVz/qA
-         GzXZYHuZ2g3ncAAMxOxtwTw5S7VNQLkFIMTp41eFzbJMrxG9C5WEgsQP17b48P2yasRa
-         V4rIOD1RqkpjLKJpOZriI8+cLD4BvR3udcROhShKhW9JGvebwNJTCzYIfTd9OJGbZ/RB
-         nJAHXP04YfTWvEZgDxQUap01eKohyQ9quxP7XqpeyJf9TLHg3Qu6CFpW4i1Ez9DuYi/z
-         oQ/w==
-X-Forwarded-Encrypted: i=1; AL+hErFaJ3XI0AG3/+yFgrev9CBblET8kz+MzLv/w1vKgCS2mQrcLzhoE+WuKToSZm8T/RZXzLw=@lists.linux.dev
-X-Gm-Message-State: APuU4Z/Lfc9svQk68nA98wp3niVmeImKE3280HgGIZwWpExJHvpu4knx
-	AX2O4S/m/Mf3Ii10geBmi2CM/3ba3cfjevbXPxd/5uHQhXokYoG0i7zl
-X-Gm-Gg: AYBFou1GBxqVFgCm0qYrWCeyogOLk9BT9aMKq3uVF0PmOiYDhN2u4zx4VnphxP+yIXF
-	p0qTRHF/GWOngdcF2XnOLRkCg9Yfg+izLt1la/HcI5bF/rfyBngM2oBdxEwboYqog7o1vFPw1mI
-	RqMS12IBpWX6Q3MJiMR9nr5Qt7xmdO2Aq8mHltFlepNQu5tHC8XB7C1yWnbkyRlnQho4B3j8CFN
-	n+ys9ew9iJZgpnDzEAgDNVy4dmWjWeE/wLVYOLSOCND4FsCaK37m0agOFHaqpEYsQNjV6Ft3tHw
-	TL2wZDXVgZamnidxLvvpjqCZPjqPWMtFFKywgu02IA6T/uBRPTQ7A0dl9L9vu8O19ZxU2VUWywK
-	RhiooyFmwc1itkyrGip5QLXmLgiPODX6+lXOtWrflMIHrhIz7cbvSKyn0U74LjDD1djr5J1Xn7w
-	ivAMHfV2YXaCaXApmk5iduVbFR2MtA1Wn4lA3Bx+/sKy6btBNj95lwhc9qy7Fh+WFg8jaOeg6Uh
-	uH+w1GjhKo+AyNEEmrQCDv/urkwcnW85vfz9MmX291QslgYMKSPUqSWGJ/uQQCtGAO0gA89W9Uv
-	XXltaMPMqUKivrwvKmhEvGonCBo=
-X-Received: by 2002:a05:600c:2784:b0:4a1:d49e:9ce with SMTP id 5b1f17b1804b1-4bb4e2918b1mr187322445e9.2.1794691847097;
-        Sat, 14 Nov 2026 13:30:47 -0800 (PST)
-Received: from flare5 ([212.58.121.92])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-49c603f4e2esm12803478f8f.36.2026.11.14.13.30.40
+        d=1e100.net; s=20260707; t=1794733117; x=1795337917;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=BfQ1qFkKsmGaWDuAf4U5BrZ/SIHnw5d+W2dmVSm0AgU=;
+        b=O4zwLzRrcAQmPDTZWy35GJTFWS4j9yGEV1k5WYyIgnlrFRO878qqyg1/yNk4Vu8xqw
+         BECepqamTWPHcwTcnnhPeMo6xIM0NAQAgQtGcyGT5oDewcBtx+uaPz+bU4nzsK9E0x6H
+         WM/h9HKumiFKOO1aKyxQAXXKIdSiaBoBQu68TiQyyu0omEMuqwOT3kJeOnRqMvNuKyq8
+         ABQ9CkB4+tfGv1phP8bGvD3Cg3XoAIbGwgsdeuIEW6qL7zidrA7o3ZjJIRwvUqnZVUfR
+         t1ot2skUCS0SpmVd3+MA8Ww/EGl6TAvv7kbQzNCbbKqN5XcLcCUSAokmFRd9W3RN9rid
+         UEBA==
+X-Forwarded-Encrypted: i=1; AL+hErFMJgAP/oGBXnQWKEmDVf4g9QTdTcCQgXhi7SCiHmJCdGJK2TJq0KN7TKHn9YFKsgbs3pI=@lists.linux.dev
+X-Gm-Message-State: APuU4Z91193atWMYnuOa9o1DAYE6nD+oW6mryUn2tVeWuVJdHrE9mzKY
+	9a0ux7CDQ58oN1pxfmfQVN4L2gMVHLwgAoA9JAu4iIsvc1ZOJugAHnrX
+X-Gm-Gg: AYBFou0lpRfP4v2ttqbQI2VBqsYd01VMJcdxbDPpE+BEW9R17cGxvWxqyWGlBtaa1jK
+	puIN57rVgxFhUnOvAMoIVb1va/N8Ff35ULK5gJczMcN+6636UosBtwP0xRdTWAbDxztVnp4CVCW
+	zlpV6HgstjFjTJD8msI5lOqyb/hv7flfmxPfasNmDzk4O1ODm8IN1ulji2CQ8h+CbaRl39qOR+w
+	eL+CbFbmiyoZYVq0cd+ybvJYN63t/xJC9SG04JgyjpvgG/wp4iHBs/ApYgY+p9kwW2w0rfu+f1J
+	FRkUCF2VSvNh11ZMDn09W2GwHxxXetB3VHSThlFV4dS0YZnMRSV9QCArGWp8f1wVw0eiCEzTUzN
+	EwRsuleiPxnpP9KDfu9Lc+/i8ryf1L1tDyTzxgwC83vCl9t4ralBBzeRCrWCkAfCvZ+h2LHZQeM
+	Z1XKTD06tDS4kUcfKOn/IytZC6UXr2HUu9p9i6qIbU5YC66T4OJPPwWChRCu10ajbdWbwUVBGTw
+	+m8ep44xBEA3aQALPfsxzSWHTrOywNjYutgvEMhW7kp9rzVv9F91ttgBN8WSFKIaG2vXAVjqhTR
+	h0hfsjbMEB960TmqBfzeCCkkJFpCGw78UHrmlosHo+K/HecaTi7LGLzE8bnJxeTY8pdXFtNm8Lx
+	wB/1UrGfbOg==
+X-Received: by 2002:a17:907:3ccc:b0:c49:a235:8e0c with SMTP id a640c23a62f3a-c509637e31dmr585009166b.22.1794733116617;
+        Sun, 15 Nov 2026 00:58:36 -0800 (PST)
+Received: from xeon ([188.163.112.62])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c5095a5c4b7sm287613266b.1.2026.11.15.00.58.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Nov 2026 13:30:46 -0800 (PST)
-From: Stanislav Aleksandrov <lightofmysoul@gmail.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
+        Sun, 15 Nov 2026 00:58:35 -0800 (PST)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Lee Jones <lee@kernel.org>,
+	Pavel Machek <pavel@kernel.org>,
+	Griffin Kroah-Hartman <griffin@kroah.com>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Robert Marko <robimarko@gmail.com>,
-	Guru Das Srinagesh <linux@gurudas.dev>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Radu Rendec <radu@rendec.net>,
-	Lee Jones <lee@kernel.org>,
-	Will Deacon <will@kernel.org>,
-	Robin Murphy <robin.murphy@arm.com>,
-	"Joerg Roedel (AMD)" <joro@8bytes.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Wesley Cheng <wesley.cheng@oss.qualcomm.com>,
-	Vinod Koul <vkoul@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Alim Akhtar <alim.akhtar@samsung.com>,
-	Bart Van Assche <bvanassche@acm.org>,
-	Bean Huo <beanhuo@micron.com>,
-	Stanley Jhu <stanleyjhu@google.com>,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	"David S. Miller" <davem@davemloft.net>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Viresh Kumar <viresh.kumar@linaro.org>,
-	Amit Kucheria <amitk@kernel.org>,
-	Thara Gopinath <thara.gopinath@gmail.com>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Zhang Rui <rui.zhang@intel.com>,
-	Lukasz Luba <lukasz.luba@arm.com>,
-	Georgi Djakov <djakov@kernel.org>,
-	Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Daniel Thompson <danielt@kernel.org>,
+	Jingoo Han <jingoohan1@gmail.com>,
+	Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: linux-leds@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	mfd@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org,
-	iommu@lists.linux.dev,
-	linux-usb@vger.kernel.org,
-	linux-phy@lists.infradead.org,
-	linux-scsi@vger.kernel.org,
-	linux-crypto@vger.kernel.org,
-	linux-pm@vger.kernel.org
-Subject: Re: [PATCH 16/17] arm64: dts: qcom: Add initial Halliday dtsi
-Date: Sat, 14 Nov 2026 21:30:28 +0000
-Message-ID: <20261114213028.1933448-1-lightofmysoul@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <0cac5090-a135-4a6c-8221-846b34ed5513@oss.qualcomm.com>
-References: <20261109-halliday-dts-v1-0-289114ab8197@gmail.com> <20261109-halliday-dts-v1-16-289114ab8197@gmail.com> <0cac5090-a135-4a6c-8221-846b34ed5513@oss.qualcomm.com>
+	dri-devel@lists.freedesktop.org
+Subject: [PATCH v7 0/4] mfd: aat2870: Convert to use OF bindings
+Date: Sun, 15 Nov 2026 10:58:21 +0200
+Message-ID: <20261115085826.89641-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.53.0
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -142,21 +110,56 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-On 13/11/2026 13:10, Konrad Dybcio wrote:
-> Please add the other idle states (D4 and E3) from the downstream
-> devicetree and match the order of properties (psci-suspend param)
-> to glymur.dtsi
+Document Skyworks AAT2870 into schema, convert existing driver to
+use OF bindings and remove platform data, add support for
+in-supplies.
 
-Thanks for the review. D4 and E3 are already there, as cluster_sleep_0
-(0x41000044) and cluster_sleep_1 (0x4100c344) in domain-idle-states,
-just above idle-states. In v2 I'll move that node below idle-states and
-order the properties like glymur.dtsi.
+---
+Changes in v2:
+- fixed led-max-microamp scaling
+- fixed max_brightness parsing
+- fixed regulator init_data and of_node passing
+- of_platform_populate > devm_of_platform_populate
 
-> Please use '0x0' for zeroes in reg values
+Changes in v3:
+- removed max-brightness property
+- switched from dedicated max_brightness property to dynamically
+  calculating brightness steps
+- update regulator registration to use mostly core regulator framework
 
-> Let's break up such long lists into one-a-line
+Changes in v4:
+- set max_brightness form aat2870_bl->max_current instead pdata->max_current
+- switch gpiod_set_value() > gpiod_set_value_cansleep()
+- constify aat2870_regulators
+- max_current in bl switched from int to u32
 
-I'll fix both in v2.
+Changes in v5:
+- drop max_current from aat2870_bl_driver_data entirely
+- remove legacy gpio and mfd core headers
+- headers in aat2870 sorted alphabetically
 
-Best regards,
-Stanislav
+Changes in v6:
+- led current set to default matching driver behavior
+- max_current initialized with same default value as pre conversion
+
+Changes in v7:
+- rebased to be applicable on top of devm_kzalloc_obj conversion
+---
+
+Svyatoslav Ryhel (4):
+  dt-bindings: leds: Document Skyworks AAT2870
+  backlight: aat2870: Derive brightness steps from max current
+  mfd: aat2870: Convert to use OF bindings
+  mfd: aat2870: Add support for VIN and IN-LDO power supplies
+
+ .../bindings/leds/skyworks,aat2870.yaml       | 124 ++++++++++++++
+ drivers/mfd/aat2870-core.c                    | 133 ++++-----------
+ drivers/regulator/aat2870-regulator.c         | 160 ++++++++----------
+ drivers/video/backlight/aat2870_bl.c          |  78 ++++-----
+ include/linux/mfd/aat2870.h                   |  95 +----------
+ 5 files changed, 264 insertions(+), 326 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/leds/skyworks,aat2870.yaml
+
+-- 
+2.53.0
+
