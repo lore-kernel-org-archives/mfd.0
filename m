@@ -1,84 +1,84 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.54
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.53
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794733321;
-	b=OgN+bDDGxdvHDOKXTwMgS7Nn2pFdF02kZwpSjABFYMeDmv3b+0fF4MlRmoEFgF2rNJsT
-	 aLKEjbmlrIGdKetpmwWsop7VhhRfdRfeVy+JYVmuPYITj9No7SuUup1EoaHPqNOfnxMJB
-	 KHwjqXWekHg757jtDvDh1iWUNLEY3raLM0lD7V8u1tzW8qDLUiYKqb49lKmjEPqw9NVcy
-	 UmPc66SMlratzTkkaQ8/3I5kybS+qgl7ckmOq3GJusstkeaSvax+viBsEJIGDqQqGL8N7
-	 Zh6Ul9kNmjjJZB+hxous3rz7Oz9r7kn+PU62/Xupidb2u6niiUnTbSEP4w7dIuJRfMg==
+	t=1794733323;
+	b=ParEI+2Eu5RkNbl+5somtzMFluTH97fscIyHo2ANkS6bd37ywJ0jPSaskQO72lFP6pgv
+	 2VZ1akYH6V5skH822UOCu3Gj2+AjQsjy38zC7tHh76Kxx4eirDZ5Lvq6RZKQ9Jhe9uste
+	 orG9n9bVZE5Ix76T4WMzsMbO/4NT00VOy9caT+le4pDPtqkGP6iu7v0YtiNHzZCLxnL0n
+	 cZqGNCUlaPelHrXlraQuR9RIoSzCEb5w3ejhUsZXsvDks2Rqt4srdNjJr3STqnhHR1iJo
+	 oZYLGLs2ZJWV1p3p52gZgzFtWgYUxj7rHO10Qz6JkdrLCBo+LDeWo8pg9ysQdH9EFcg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794733321;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794733323;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=ZUURgUr8dXxqKz+c2MEq98G6BmE0uIQKXrceD/LihTE=;
-	b=BkjTtAcF2tYuDFdQeUFfBXg77t6qnPpGO78Zpcy65VoqAmf0wdjESS1lg+B5ikEcKm15
-	 7r+7rT63e5bhqRmM8WCKLttZEVwgMh09rCO1DmQgbDiIOgkm9T4rfYqCOWaV/swV8iMMl
-	 HdzJcqt8YBFUnGqvPPXcj2WJDBJN3VtdOhiSLEpHCVTWmSkZUIWI0irnkpEC9DlwxWMpr
-	 Nok88h6k9qB0wnb33pcOCmLK4kM+whTzFlpbVhzkkPuNmabpq2WBigdzdk089IKfZk5Io
-	 63/U7H5gYhNkoixKU3AzGp6nfjnRfu7nn/9cByFT+Ey9mG79ctVIgRYnjhfzBhtVARw==
+	bh=yQmqf4Ja1Z8wMFml1jwizSQhW4WDwS/UNz1lWjL8MPQ=;
+	b=HLdkQGkXNbTjjd5CamnfPo45HA9eZ9DTUeplAVoCr4zyY+iy47GE2QKcjlYhviuIQgsN
+	 bK3k4NeBMEvbTf+rjc8nVKP9nQ4f8U4PlS10NkMS7Si0+nQ1xhdldvw8wRl/S0Swf2bUY
+	 c8N70JOngox9SeWlz8e4hJzQharwrSFkfsJ4zY3Zh3sb9a5o+g2zWrbrbBHfKOImi1C7v
+	 g1iU5L9+uk3Rik90nHrlPINRSDLBnMF1me6uZgg+JSMtwnbGsDV6zqK0kBS/F/B2cYlaE
+	 l4F+f7pnyxgBOMEnAoBEv/zfGkthJnWECP9xzNEdDcxjj/ZW9tpVlK4mJvFPscPmTWA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=unmFzcO5;
-	arc=none smtp.remote-ip=209.85.208.54
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Vp5GH8bU;
+	arc=none smtp.remote-ip=209.85.218.53
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C681F606A88E
-	for <mfd@lists.linux.dev>; Sun, 15 Nov 2026 09:02:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C681F606A88E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC1F6606A33F
+	for <mfd@lists.linux.dev>; Sun, 15 Nov 2026 09:02:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BC1F6606A33F
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=unmFzcO5
-Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-6b5973a4b4cso3506341a12.2
-        for <mfd@lists.linux.dev>; Sun, 15 Nov 2026 01:02:00 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Vp5GH8bU
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-c247f6687dcso471731666b.2
+        for <mfd@lists.linux.dev>; Sun, 15 Nov 2026 01:02:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794733319; x=1795338119; darn=lists.linux.dev;
+        d=gmail.com; s=20260707; t=1794733321; x=1795338121; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ZUURgUr8dXxqKz+c2MEq98G6BmE0uIQKXrceD/LihTE=;
-        b=unmFzcO5p0AodVOJsrNP917IIPPuRi+6IdiPCfwcYnOxf8D2zeZftJ8xeX/UPCJivJ
-         qYBuoR8fukbp9nAxxVRRTqfzLlrZJ9cR2ItldYxvH8ZcVCTq/0skkVaNE6DqTfxzvPaM
-         pmawc40TcPlFxd91NH96zKnnkPALfzcT+ecn/dnblK84IsItCIVwPSahDCuXiGKLJ1gI
-         dBHJnS6me5idhMuMpMZg0o6AfjkgE8JAOWI2e3E485okwgNGLry1szxb9TmXceIl0eN1
-         CEa49/XcExzLyupuIdrbn3qS42L96jG1KpsYm97AZcIOU8r7A9YkkY+RGSyvV8LCv/5D
-         nSAw==
+        bh=yQmqf4Ja1Z8wMFml1jwizSQhW4WDwS/UNz1lWjL8MPQ=;
+        b=Vp5GH8bUQdpVzJqWFVYdMLffgXgCJfLgESuO2ELsfqbEPXww1lv/Ki2ZgqTpr3Mm1y
+         wvZfGX0L+OyevvTqX9Z8P/b51hY+AzZUtMjx7rIDiosdWn3UwXK4Teyc7ObXt4zs5+5n
+         m9HtNdf4Vw61dpp4gILrYEfc8MUAB2VVf/hE9kP0zQMEoqHAxEw6cm2Aj0x45Zsm8wTP
+         cO48ZwjbWyk84gjcpnxlghfISAz5qrJsT+AM+GGiHvHZV3TYOXOQDXhvNMTdVb5DSCK0
+         41STtRacdM/1zB2HB7VVeZuPFhcJrp0AfzCcFcA+VxNFroV/ze2eRjpYw+7GEjQDgqCp
+         wsrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794733319; x=1795338119;
+        d=1e100.net; s=20260707; t=1794733321; x=1795338121;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ZUURgUr8dXxqKz+c2MEq98G6BmE0uIQKXrceD/LihTE=;
-        b=r1GfoIHg+miF90/1mTYCFSdRy8tbyMNdirpl5/C5RZsQsmOuQ+R/iXwuYb4XGykSqs
-         4A6IhL+3Lu+fiZpqOAZPkiMhbrPZf5Kpf/1e8+UmdrpFbmqjtcjUY+/zrx45v0uYEYH2
-         VHny9xDiax8kMQvu0HcmJcUJ2I6rRkCWdYEZi0DH9NmBIBKeZulpGGQkWhVfEYpVHI9l
-         ywkMdIItV2IOOCJmc3c/FNCqdPfwyWWTVZVoYTIg9NzRIkF+XhdS7G3N+7m68eCqJxwC
-         0AMx1RFaNuwNgpDWcDjHnVQ8qsB9tXF2Z4h+OF38noFo7oRoWuTILWXPzwXjMx84EcVU
-         krwA==
-X-Forwarded-Encrypted: i=1; AL+hErHD4TodTXu6RtYB0pEM3IPhF0ByvHXVwswHxSfRMAqnegxmrAL8WSL9YHtq05eX3m3dSXs=@lists.linux.dev
-X-Gm-Message-State: APuU4Z+PyP/0VjMuG3vI7tR3t3TAl4oGW7j/pOLAAe87vcBbo3hCkAqs
-	fU4Rs804Ts134mcX2W+hia5InQ61lsxn6/GdXjim0fUeahLq//Qt077X
-X-Gm-Gg: AYBFou1WciFluacypAsqHZpbjNl/5IzR23PIbCTb5kWJO+5DC8ckFMGOIXsnymUKgZe
-	IoPf1mz5hz3+VX2MVkFIN184HckI/ER0kPOisKOTMESuq2yLZBmEeI1eir+vpdqCI0lYNbAYMcK
-	NscPz978sP56d3hcSfO3Dod0WOJAafk1JvZpHQfJokEmQC/r/qi+ervZkHke3av5M8n/4uJyl94
-	WZ4lRF53DA09gMXFxKl8t83iMAj/j/m0+Vu3+x/rYoULxgduHdjtQf1O/HNaI4n73F/fRDEQ2es
-	us/NStgJ1C2SMSMGdLXitD02YxwCw6qBghUQRH1i1tnty0ofCB15PFhtcAmCa4UVIS2B6q+JtBn
-	eoU1vDcPMOMn/UFkWI5TO1FYJfg7aC6MJ3INyHcjaxD+au7w74ho/pG9pUvrJGNsSlvHBJ+3uLs
-	wfk5JoCb0QjboI2SXc2W8jpUTaopPFykkhgj3TN5jQFoRg7oYfp4FxRCbdd7A7Ub+BYHCCFU1HA
-	aFxIrEY83hhFZMrw3DsT1qKeFX2NieRxY6KJtbDT+/DKxZGELcNraz0REmNqhb9adliqBCsdPM2
-	OltKF+wIt5fTmnz00Uer0wig+fZR1qZC57kG5EbrjY0AjoJm2QfJj3mZvmLj/SpqQxb5DgV0WBe
-	zt78Kh1poRA==
-X-Received: by 2002:a17:907:3d4b:b0:c29:4915:83cb with SMTP id a640c23a62f3a-c50963b2f7bmr651176666b.39.1794733319040;
-        Sun, 15 Nov 2026 01:01:59 -0800 (PST)
+        bh=yQmqf4Ja1Z8wMFml1jwizSQhW4WDwS/UNz1lWjL8MPQ=;
+        b=16xb8RTiqUB2rI6w1xsGsqRHGFWM9Rw7vFeCM1BlY5BP36BJGf7baMIq6hXstW6oH1
+         TCJaArSeNBFPR04p4k2Cfa70wtThaXyrpf60VMZJzMYIPrtU9lgjF5fTfR2hXrrlI2a7
+         YRqWZ1XoYl6GN0Y6Vn4qBWp3+bqws0bni/L522OlqKVgYcqCpv3AzCL+9ZHFNnJ06q0P
+         wbkhJrVcVn70ogpUFW+IcK/b/jP2xclKriq9yri/os1UT+g84HUcb7wD23vY+wtz4hkW
+         W4NTczauEqhpOzxn49jg6hwE3kFhYr5tqQC8sXDi/2S5D1OV8PpXlIcng5Yq1vMyJw96
+         hxHQ==
+X-Forwarded-Encrypted: i=1; AL+hErEaHIQW9Ez/blOZNxeITOo988atTFSmPg5K20mPyul0GKBVnjYaRiGXPZz/Q4/xO5VYESw=@lists.linux.dev
+X-Gm-Message-State: APuU4Z8UyS/vZpOTg0n2+eXtT7Q/s+yrohazKPgr0I03Yxi5tLxOwwg3
+	+UYR9/PnwBB7nLBJPJ2eA9L2TBCguevuLytG7TJAP1+FiAmedEUQq1eP6LpAJg==
+X-Gm-Gg: AYBFou3tUEvQGc1xf0J5IOtf4rHKdifLpWrIi2OSBeN86SuG6vmlsyBnXF3PvwN9W0T
+	yXAZ0XEJnpNQ3+DbHZoOSJOghJRjG3JzGfhPKa2kv8ci5/K/d90NpI8SbsCQe2PmLWobW14FS6B
+	zaPpEXCd3b7pntDEZpiwQ2LOpkd6kDPq6Vgctc351/tX89GZTLIhmIMAxVIYsAzRVEW4b39QmNt
+	joiSmEbwHiBeFm9WZuhzNTWpE9JSUmzMeG0wRkwZh+v4YJ4q29np3zgiFj9iK/xSbHWf2uP/MLh
+	JZlk3C8Hk6TTX3eukoUAmsNMzvJLc2b6YucpwTmT6ymS6fEXkDetpQXZSvdBcu1dWkXiRAcAepI
+	Z8xCTzbWe8boOfzdWM19bADrsuMI8FJQewGbzohZHA1fQC2AhtaNpESSIetCsmuqMJvmIiH1r1k
+	25WSrfmrzhrGiXthZmZ0PQs8AkQS5Cr1OU96G4k4WNvsz/NTZLNA8COsK0jCajQDpvJHGpbx8Fz
+	VVgWHX9k1AvkSaZxADgVIAa+vw2sgqlM3xHbiHHvwb3nib1NL8frZzdQ4b17kVwULnzaoWWiV2c
+	FeysXDDcmbRzecuctYSxGSPGi71+mCTW3wOr6fsfXqgM2BUxLjo1WBuiDXfvEp2Op/UMdHregh8
+	N4Ju9p4+SUg==
+X-Received: by 2002:a17:907:3e9e:b0:c40:4848:f7fa with SMTP id a640c23a62f3a-c50965421ebmr588354466b.44.1794733320589;
+        Sun, 15 Nov 2026 01:02:00 -0800 (PST)
 Received: from xeon ([188.163.112.62])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c5095b8651bsm291440966b.78.2026.11.15.01.01.56
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c5095b8651bsm291440966b.78.2026.11.15.01.01.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Nov 2026 01:01:57 -0800 (PST)
+        Sun, 15 Nov 2026 01:01:59 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Liam Girdwood <lgirdwood@gmail.com>,
 	Mark Brown <broonie@kernel.org>,
@@ -90,9 +90,9 @@ To: Liam Girdwood <lgirdwood@gmail.com>,
 Cc: linux-kernel@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	mfd@lists.linux.dev
-Subject: [PATCH v5 2/5] mfd: max8907: Remove platform_data based probing
-Date: Sun, 15 Nov 2026 11:01:44 +0200
-Message-ID: <20261115090147.95337-3-clamor95@gmail.com>
+Subject: [PATCH v5 3/5] mfd: max8907: Switch to resource-managed versions of helpers
+Date: Sun, 15 Nov 2026 11:01:45 +0200
+Message-ID: <20261115090147.95337-4-clamor95@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261115090147.95337-1-clamor95@gmail.com>
 References: <20261115090147.95337-1-clamor95@gmail.com>
@@ -107,90 +107,178 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-There are no in-tree users of this driver, but it supports devicetree
-based probing, which means external dtb files may exist that work with
-this.
-
-Remove the unused legacy code and make this a DT-only driver.
+Switch to resource-managed versions of regmap_add_irq_chip() and
+i2c_new_dummy_device(). This involves probe refactoring in order to
+remove jumps and allows to drop the .remove callback.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/mfd/max8907.c                 |  8 +-------
- drivers/regulator/max8907-regulator.c | 11 +++++------
- include/linux/mfd/max8907.h           |  5 -----
- 3 files changed, 6 insertions(+), 18 deletions(-)
+ drivers/mfd/max8907.c | 127 ++++++++++++++----------------------------
+ 1 file changed, 43 insertions(+), 84 deletions(-)
 
 diff --git a/drivers/mfd/max8907.c b/drivers/mfd/max8907.c
-index ba06a49c9c60c..d5d40d2c7c425 100644
+index d5d40d2c7c425..f6d7a4ce9712f 100644
 --- a/drivers/mfd/max8907.c
 +++ b/drivers/mfd/max8907.c
-@@ -184,13 +184,7 @@ static int max8907_i2c_probe(struct i2c_client *i2c)
+@@ -182,73 +182,60 @@ static void max8907_power_off(void)
+ 
+ static int max8907_i2c_probe(struct i2c_client *i2c)
  {
++	struct device *dev = &i2c->dev;
  	struct max8907 *max8907;
  	int ret;
--	struct max8907_platform_data *pdata = dev_get_platdata(&i2c->dev);
--	bool pm_off = false;
--
--	if (pdata)
--		pm_off = pdata->pm_off;
--	else if (i2c->dev.of_node)
--		pm_off = of_property_read_bool(i2c->dev.of_node,
-+	bool pm_off = of_property_read_bool(i2c->dev.of_node,
+-	bool pm_off = of_property_read_bool(i2c->dev.of_node,
++	bool pm_off = of_property_read_bool(dev->of_node,
  					"maxim,system-power-controller");
  
- 	max8907 = devm_kzalloc_obj(&i2c->dev, struct max8907);
-diff --git a/drivers/regulator/max8907-regulator.c b/drivers/regulator/max8907-regulator.c
-index a9f014eae4d61..5677c59ef5b8e 100644
---- a/drivers/regulator/max8907-regulator.c
-+++ b/drivers/regulator/max8907-regulator.c
-@@ -274,7 +274,6 @@ static inline struct device_node *match_of_node(int index)
- static int max8907_regulator_probe(struct platform_device *pdev)
- {
- 	struct max8907 *max8907 = dev_get_drvdata(pdev->dev.parent);
--	struct max8907_platform_data *pdata = dev_get_platdata(max8907->dev);
- 	int ret;
- 	struct max8907_regulator *pmic;
- 	unsigned int val;
-@@ -312,10 +311,9 @@ static int max8907_regulator_probe(struct platform_device *pdev)
- 		struct regulator_dev *rdev;
+-	max8907 = devm_kzalloc_obj(&i2c->dev, struct max8907);
+-	if (!max8907) {
+-		ret = -ENOMEM;
+-		goto err_alloc_drvdata;
+-	}
++	max8907 = devm_kzalloc_obj(dev, struct max8907);
++	if (!max8907)
++		return -ENOMEM;
  
- 		config.dev = pdev->dev.parent;
--		if (pdata)
--			idata = pdata->init_data[i];
--		else
--			idata = match_init_data(i);
+-	max8907->dev = &i2c->dev;
++	max8907->dev = dev;
+ 	max8907->i2c_gen = i2c;
+ 	i2c_set_clientdata(i2c, max8907);
 +
-+		idata = match_init_data(i);
-+
- 		config.init_data = idata;
- 		config.driver_data = pmic;
- 		config.regmap = max8907->regmap_gen;
-@@ -331,7 +329,8 @@ static int max8907_regulator_probe(struct platform_device *pdev)
- 		case MAX8907_BBAT:
- 		case MAX8907_SDBY:
- 		case MAX8907_VRTC:
--			idata->supply_regulator = mbatt_rail_name;
-+			if (idata)
-+				idata->supply_regulator = mbatt_rail_name;
- 			break;
- 		}
+ 	max8907->regmap_gen = devm_regmap_init_i2c(i2c,
+-						&max8907_regmap_gen_config);
+-	if (IS_ERR(max8907->regmap_gen)) {
+-		ret = PTR_ERR(max8907->regmap_gen);
+-		dev_err(&i2c->dev, "gen regmap init failed: %d\n", ret);
+-		goto err_regmap_gen;
+-	}
++						   &max8907_regmap_gen_config);
++	if (IS_ERR(max8907->regmap_gen))
++		return dev_err_probe(dev, PTR_ERR(max8907->regmap_gen),
++				     "GEN regmap init failed\n");
  
-diff --git a/include/linux/mfd/max8907.h b/include/linux/mfd/max8907.h
-index 4be3c2370e2a4..e222250f0cc1e 100644
---- a/include/linux/mfd/max8907.h
-+++ b/include/linux/mfd/max8907.h
-@@ -227,11 +227,6 @@ enum {
- 	MAX8907_IRQ_RTC_ALARM0,
+-	max8907->i2c_rtc = i2c_new_dummy_device(i2c->adapter, MAX8907_RTC_I2C_ADDR);
+-	if (IS_ERR(max8907->i2c_rtc)) {
+-		ret = PTR_ERR(max8907->i2c_rtc);
+-		goto err_dummy_rtc;
+-	}
+-	i2c_set_clientdata(max8907->i2c_rtc, max8907);
+-	max8907->regmap_rtc = devm_regmap_init_i2c(max8907->i2c_rtc,
+-						&max8907_regmap_rtc_config);
+-	if (IS_ERR(max8907->regmap_rtc)) {
+-		ret = PTR_ERR(max8907->regmap_rtc);
+-		dev_err(&i2c->dev, "rtc regmap init failed: %d\n", ret);
+-		goto err_regmap_rtc;
+-	}
++	max8907->i2c_rtc = devm_i2c_new_dummy_device(dev, i2c->adapter, MAX8907_RTC_I2C_ADDR);
++	if (IS_ERR(max8907->i2c_rtc))
++		return PTR_ERR(max8907->i2c_rtc);
+ 
+-	ret = regmap_add_irq_chip(max8907->regmap_gen, max8907->i2c_gen->irq,
+-				  IRQF_ONESHOT | IRQF_SHARED,
+-				  -1, &max8907_chg_irq_chip,
+-				  &max8907->irqc_chg);
+-	if (ret != 0) {
+-		dev_err(&i2c->dev, "failed to add chg irq chip: %d\n", ret);
+-		goto err_irqc_chg;
+-	}
+-	ret = regmap_add_irq_chip(max8907->regmap_gen, max8907->i2c_gen->irq,
+-				  IRQF_ONESHOT | IRQF_SHARED, -1,
+-				  &max8907_on_off_irq_chip,
+-				  &max8907->irqc_on_off);
+-	if (ret != 0) {
+-		dev_err(&i2c->dev, "failed to add on off irq chip: %d\n", ret);
+-		goto err_irqc_on_off;
+-	}
+-	ret = regmap_add_irq_chip(max8907->regmap_rtc, max8907->i2c_gen->irq,
+-				  IRQF_ONESHOT | IRQF_SHARED, -1,
+-				  &max8907_rtc_irq_chip,
+-				  &max8907->irqc_rtc);
+-	if (ret != 0) {
+-		dev_err(&i2c->dev, "failed to add rtc irq chip: %d\n", ret);
+-		goto err_irqc_rtc;
+-	}
++	i2c_set_clientdata(max8907->i2c_rtc, max8907);
+ 
+-	ret = mfd_add_devices(max8907->dev, -1, max8907_cells,
+-			      ARRAY_SIZE(max8907_cells), NULL, 0, NULL);
+-	if (ret != 0) {
+-		dev_err(&i2c->dev, "failed to add MFD devices %d\n", ret);
+-		goto err_add_devices;
+-	}
++	max8907->regmap_rtc = devm_regmap_init_i2c(max8907->i2c_rtc,
++						   &max8907_regmap_rtc_config);
++	if (IS_ERR(max8907->regmap_rtc))
++		return dev_err_probe(dev, PTR_ERR(max8907->regmap_rtc),
++				     "RTC regmap init failed\n");
++
++	ret = devm_regmap_add_irq_chip(dev, max8907->regmap_gen, max8907->i2c_gen->irq,
++				       IRQF_ONESHOT | IRQF_SHARED, -1, &max8907_chg_irq_chip,
++				       &max8907->irqc_chg);
++	if (ret)
++		return dev_err_probe(dev, ret, "Failed to add chg irq chip\n");
++
++	ret = devm_regmap_add_irq_chip(dev, max8907->regmap_gen, max8907->i2c_gen->irq,
++				       IRQF_ONESHOT | IRQF_SHARED, -1, &max8907_on_off_irq_chip,
++				       &max8907->irqc_on_off);
++	if (ret)
++		return dev_err_probe(dev, ret, "Failed to add on off irq chip\n");
++
++	ret = devm_regmap_add_irq_chip(dev, max8907->regmap_rtc, max8907->i2c_gen->irq,
++				       IRQF_ONESHOT | IRQF_SHARED, -1, &max8907_rtc_irq_chip,
++				       &max8907->irqc_rtc);
++	if (ret)
++		return dev_err_probe(dev, ret, "Failed to add rtc irq chip\n");
++
++	ret = devm_mfd_add_devices(dev, -1, max8907_cells, ARRAY_SIZE(max8907_cells),
++				   NULL, 0, NULL);
++	if (ret)
++		return dev_err_probe(dev, ret, "Failed to add MFD devices\n");
+ 
+ 	if (pm_off && !pm_power_off) {
+ 		max8907_pm_off = max8907;
+@@ -256,33 +243,6 @@ static int max8907_i2c_probe(struct i2c_client *i2c)
+ 	}
+ 
+ 	return 0;
+-
+-err_add_devices:
+-	regmap_del_irq_chip(max8907->i2c_gen->irq, max8907->irqc_rtc);
+-err_irqc_rtc:
+-	regmap_del_irq_chip(max8907->i2c_gen->irq, max8907->irqc_on_off);
+-err_irqc_on_off:
+-	regmap_del_irq_chip(max8907->i2c_gen->irq, max8907->irqc_chg);
+-err_irqc_chg:
+-err_regmap_rtc:
+-	i2c_unregister_device(max8907->i2c_rtc);
+-err_dummy_rtc:
+-err_regmap_gen:
+-err_alloc_drvdata:
+-	return ret;
+-}
+-
+-static void max8907_i2c_remove(struct i2c_client *i2c)
+-{
+-	struct max8907 *max8907 = i2c_get_clientdata(i2c);
+-
+-	mfd_remove_devices(max8907->dev);
+-
+-	regmap_del_irq_chip(max8907->i2c_gen->irq, max8907->irqc_rtc);
+-	regmap_del_irq_chip(max8907->i2c_gen->irq, max8907->irqc_on_off);
+-	regmap_del_irq_chip(max8907->i2c_gen->irq, max8907->irqc_chg);
+-
+-	i2c_unregister_device(max8907->i2c_rtc);
+ }
+ 
+ #ifdef CONFIG_OF
+@@ -305,7 +265,6 @@ static struct i2c_driver max8907_i2c_driver = {
+ 		.of_match_table = of_match_ptr(max8907_of_match),
+ 	},
+ 	.probe = max8907_i2c_probe,
+-	.remove = max8907_i2c_remove,
+ 	.id_table = max8907_i2c_id,
  };
  
--struct max8907_platform_data {
--	struct regulator_init_data *init_data[MAX8907_NUM_REGULATORS];
--	bool pm_off;
--};
--
- struct regmap_irq_chips_data;
- 
- struct max8907 {
 -- 
 2.53.0
 
