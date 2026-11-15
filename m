@@ -1,84 +1,84 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.47
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.52
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794733536;
-	b=1+yfit2QEbviBwjVnD4pKwFk42dfJTG70Zix8Jou30othDe8RIi4UC+rd8XkfYH1i/pr
-	 OAeNU4Uzve6Qiz31ZctjByqVyp5I99JUUs8+43D4rnb5VqSAktySA464M3UhR2mLxm2IZ
-	 Gjm7AfBo2mJkBvY+UyK3a7eMW7MuNQ9fTy+367dm9+Ok5CF+LHt4nPkCtDy05DpzSDoRj
-	 PIwGAZhWuiagkW9frrmb4gddx+gjsV1sjz1lx8y0/bsGGCePF1myYnLku06IiYtDiDK40
-	 68EtXuNGbda5PavX4jC7gadmxke1NrQOXKJ+uEah77ol6Cqp6qGlXCMuSIkwpWuADpA==
+	t=1794733538;
+	b=F9mf/xhiRXJprX/O7c/IHL+0mR+1sDS2eR8edNr47b57XxjkhrsQ5bd/1+tnV8cSX1Do
+	 w1vPMuui9m9MSsgBQ/DQmlCqcqaFAp1szFlI2uFEDIlkQhNMwSFj/FALN35nEu4RFhqoc
+	 Rc5ta/KSVDsyBcpjUhm8x2RldYVzgZKImSx2+vh5yVqciTRaYdbI44YIq8nsUCUWSiZ4M
+	 xwCAJgBvADYqYO7AJPxD64D6tvM8gkFl6ZfrtwojIAIeVRbetBX3Ec+mOVjp6sTHi56cg
+	 wINLdJyJ4Ivf574dkvm3mSMaj57/363Hk8znqlDC4RMJW8Dr9H5PKBIyYfa4UczoZtw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794733536;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794733538;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=OXs965iTfMNugiuDlC2HCgJXfc/BaB4gTTxdzfucgUU=;
-	b=niij6G6NlFydjkEJtU4/zEouxMvAbMa1lBErGVz1natGHbDjJnbO6yNxEitg2tunf7sV
-	 7C/wQtfQWTe63WanquxsQ3nepayHMKDPUi4Kx7Ql9kmJpXa7mc67PjBs/RZrVKtBjcwL8
-	 43yTn9GBNSmYpDKidyr3RJCyggKNuu2CYObzhLkOzpUbZSzTxFPDEpdVtoaC5ypZVY6sy
-	 GHzzuRW5YiPjRA6R3qmoHFoYM77s+bgHJLrrplXuUoRc2D3RSr0PXT3zDJD/+tFDXiT4x
-	 t62JYU404sGYrJGiGTCqnfnqT73iBxlxNBqnRMwsl0HknrUE1uUN1zNv16dsodFwxTw==
+	bh=3VGERR6jVyCku7AFWTdZ88nDE2sfH6pB8YTCSrSJIH0=;
+	b=O4Ez/MIzINJ9FCMB14NQCYQxsPfSh7YkZrjciizDrtNl/PXM17TDL2QZE5+CXyWWOWx2
+	 WOQ/8VvgshzpcI83cTZEQhbHBMSqLjZizO14hLBgmBpA0wNArN2BFxV/4lOJbDV5gx/pm
+	 PsrkCLUVjXYK9jhmf9IedOFuy1ENfEN/p/bm5q55UoqXaOA2wVKK6sr/75DybF2GWgaak
+	 5teV6MgklkCjXUSVhjY8Oqc5N5DQkw0u4DunCVw0x+UTS8dBqTO/yAB5NTwskuR+E5ugZ
+	 ydnv2BngvdFSrM36rmY8+EsZmgtzKPYY9NQrhFegeBUbmL3ZCQG4AJtEvecesliO7zw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=gwyU8HYj;
-	arc=none smtp.remote-ip=209.85.218.47
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Vcw1fA1u;
+	arc=none smtp.remote-ip=209.85.218.52
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDD60606A88F
-	for <mfd@lists.linux.dev>; Sun, 15 Nov 2026 09:05:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EDD60606A88F
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B94C5606A8A8
+	for <mfd@lists.linux.dev>; Sun, 15 Nov 2026 09:05:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B94C5606A8A8
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=gwyU8HYj
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-c4682977f9aso386449766b.1
-        for <mfd@lists.linux.dev>; Sun, 15 Nov 2026 01:05:35 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Vcw1fA1u
+Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-c4d473cfff6so343106566b.0
+        for <mfd@lists.linux.dev>; Sun, 15 Nov 2026 01:05:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794733534; x=1795338334; darn=lists.linux.dev;
+        d=gmail.com; s=20260707; t=1794733536; x=1795338336; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=OXs965iTfMNugiuDlC2HCgJXfc/BaB4gTTxdzfucgUU=;
-        b=gwyU8HYjD0Ug9vFxF7rSNsywrBEteNfEW0vTnepHof88StMSAmIGdnXo1BGq5wtMjA
-         73Or51ljoM3o5UtSwczAVfVuH8kXpS3gJzBTiEU++kv98eGfF7CZoNOvw7g/R/xKNrYa
-         x3DSciIm8I222nRg6uBX+OkjQUXtbURrz/64UmEaXeTOArni+my8kLjgu+IbsR+mMzAJ
-         TNxMOorOosY7avqvqd+O2lmHznrDe1uaQ9iij+5L0CM+ASqF90lDhJcHk2LH0fYN4Eij
-         SRgsHhbSXZmTDHnwzWuu4CyA+UUGHORdSgr0k5keCCufoWw20t2PAGRj9sHF8iWcJpwZ
-         vPnw==
+        bh=3VGERR6jVyCku7AFWTdZ88nDE2sfH6pB8YTCSrSJIH0=;
+        b=Vcw1fA1unfGxqCV4IcqOJ6A9cAF1ipm6IF2WRrKdUMcgs/P0vy+Gs0EiRiwGT5siCm
+         bz8CqHlb3IRNCLWSPmvkVmzKNfnpf0kXKi5WYVttiwc9HYo2KKvvm5UAeQYDFhPmYIM0
+         +yIMvXNOBcr86VQCqT2m3FUmiiZu6uk5BBwoI1bdBWFptMII91NajUMmlpGxFPpC9kVg
+         EKPIuPjIvkyVlTwvJA+nso/xTjjHdA4ERNJe/BPyDZ0uD0luCksa/CDKtkKjOEw486YE
+         wLLamXCfFrIEP2t2qXwT2H0wTuDCD1k2SpagaMoGCwR3lhV+iDz1rL1bxUBTxj4bTtz+
+         7ipw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794733534; x=1795338334;
+        d=1e100.net; s=20260707; t=1794733536; x=1795338336;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=OXs965iTfMNugiuDlC2HCgJXfc/BaB4gTTxdzfucgUU=;
-        b=QcHoRnPmT3UimAnw9vNLN98t5YMEj/dHOrLZuluFjy1slhvVz6NTlcy8N8slBtNSPd
-         iPDr7ijTpgQvTyeYlZEKKvHL6IvgujjYXKX78BkDD66BjiACr9eASQpkX1GwS6QWuDBe
-         EfrXomOPJjka8efJwpEQo92xq548vCCtg1AykC2wmnH3fJJO4We4ulNwOUCqZxODkcdz
-         lxKQY4ytLZ6S7hyXDrnsZPZIm6mpp/CulKqLHeGDq0966LA/yKaSCFrXPW5NPRma+/IJ
-         uhENBngob9Ibb+H1kHKjSM2PC83Vyz1lGP6ev1HqQA8SV6Kn8hQRQxsKmdbt/NiYOohR
-         B/NQ==
-X-Forwarded-Encrypted: i=1; AL+hErGzRQJzvLxeSI/vpyT36qUPXehLEiggSEEmlh31Wo1uPbSthCDwlnQNOIpguFQpaqCk9SM=@lists.linux.dev
-X-Gm-Message-State: APuU4Z/Y6f3Q7giVDWsgF5jZB8iGlLfnK4G9FtFf9aOx3oAgnA+zBvoJ
-	NA9ESGWWnuDXP7b/BhX5WvJ+WN3MNlv7xvscmh+/vLH1C5gF5nt7s5fp
-X-Gm-Gg: AYBFou3D11MBu5zqwkcy8QKXXFKOmHifX0AVgbbUVnJYRMnG9gBCdmykzluj0ol7rm2
-	Gi7H/eIb1VUMAJ/FFEEP6CjtLEpxyz3iJyoQnoIcNCuW4NEW5wbRVn5niUZ75S2cyhXWbj+Fxnh
-	l+zPMX1xRl0XcVWrx0Z84eHcEbQ1xmD3Mu2m2bioeMOrHeYyCzNYcvID3Q2RwLmM58qMNwEkvYe
-	Wtoa0NP7esa1ktV/d/p6sqaw2Iey74Rjpphr2hy6yBDRuOCKwIiB4sDDpGNfg89k/9uyjRm3KWX
-	WtwDTzQKRDsaNmcsdVZy3WXvnl2Bttye2huDS+5iAd0+5Rgw2Sl4knhbr0G1YTDGhoPxKaxE94c
-	InrvQuthT69t1i+acmiGkbZixWnmGdqr0IZ5Edetw9v1jnH0R/j5b/k8qwy+iO27Q/HawFU/nnk
-	wcjkLqOIlD1O6awIJSdbDQC1fYYnJncuJvlUzj/nvvZjdPK8+ctxg229s2Ei/bualuLMVQ8F0/L
-	iVKKIsmcY+A2pTBv+f2GowqjhryoCJcqUYpFvHJVbdLpf1cnGzozzbx2Y/8/tFH91awo0OEGt3U
-	0N0AU9qg2qc4ZB0JN7wfF14tovAQ/8kxcEH00PjTZNr6bFdOs8el5mJkwEvittf0xqtQSrYU4Dc
-	YwPF/mdnsNQ==
-X-Received: by 2002:a17:907:6d07:b0:c4c:b4fe:ca01 with SMTP id a640c23a62f3a-c509642cc7bmr553111866b.37.1794733534433;
-        Sun, 15 Nov 2026 01:05:34 -0800 (PST)
+        bh=3VGERR6jVyCku7AFWTdZ88nDE2sfH6pB8YTCSrSJIH0=;
+        b=y7lef0DrdlMsDybqBU06SWIqDnGUQ76BQlfsEuaGhawj7I5h6iJlaMkNLtxJsm+gYj
+         VZ2Rsany8s8GI4saLQ7C87cNx6AZKGMLEOrUH/lKvTPxHB8sjCxqMlM2R+Zn2TUzjKhd
+         bv5bXuuIqpjjtpfveRZJ79l8mhOfBW5zvoiRkHLrSL8ocFm9u1NDrbJENR/4v3Ego8hD
+         TsiaKrdI6iwZeOA32S3HsTuO64x1PKJHZKiBUP1u7idXUTd1Y0+7sas1UPftSzQJjiQf
+         7aprkMyuVAmBcvWdepmBXb4iF4c2e+z18jl1kGVLGsknWcHBYjLNuTTnWm4SB18+lhMy
+         T6Mg==
+X-Forwarded-Encrypted: i=1; AL+hErEa0ioLGDhswjIgWlpHabXQkkHNbAb8xf+s6j5UuA/OtHnjWzsxYHFVeoIG/eInz/ptWTk=@lists.linux.dev
+X-Gm-Message-State: APuU4Z+yDGgE3JlaHXPuXsp8gl/cKngdVIc/Y5fL5WwiS+K8Qxn7fdTY
+	R2D9wn8uh1dkTjdKjjMEvHlP84cHVW0jZq/GjZWNRHYiO1+M/eyiLh7i
+X-Gm-Gg: AYBFou2xFUjNSRAomfNbZGXfFIvA4gYVRlVRYiZCsHNmbOErbbEuD/GKB11qLsxTFSj
+	miNAIMVg1v3u/wuJ+/rNUlgaFa7D7ksN4LAhnH2g/+6aRtyZHhv1RusT0kg9oMCV2TPXcxI4o5B
+	DN+g3ZVOtYw/EQsjWRHFVAqtSiuhV8K9tGhMT0EZIsA+5uyKTmsAHUD/3kfm57/jHbKXjUcXmN3
+	CNLXhRCXJ3nvhytfDqVnME0Dz+tJfSpgILBiyvzBy4ZGB1gDVfbmYycLigHajH+HEdQ37mHUzgy
+	CQHOypG3/7CtDsFI8rBJlbrduc61AkwRFjAqmIjmc7I7tcf0tBRi0bTYnoUVLZZCAvq/nX9Bt9H
+	fHAGIsLm6hsZPabj/v1y8yZwIjgCS8jHsaIosguf4oTM0PDeyxPYdFDX18VBAlB0tkhrcUDN3ih
+	438aF7XEFNB/SRnUktIZqrUGExKdD+xsx5j3YnKRfOMUSm/Gjg2eHozXEAeDgNcrnxmVeKSLQGf
+	44U82y0A8+3NkJh1mSB+nxVb+OdGvbeF9kX6cphs1FD6iL6Q/hptY4Eub1gE9Sv1Uyn3fMcVYur
+	C9mBiMD2Rh1Zr5Ph1kzECQwz3yfN4RylpfwOG/fVqIRV9fgIeHFsMDjEN2M/RMGn+1LREWvCLhb
+	U3/I1OQ2+Qw==
+X-Received: by 2002:a17:907:6d02:b0:c46:9ca9:f524 with SMTP id a640c23a62f3a-c50963b6917mr589522666b.32.1794733536111;
+        Sun, 15 Nov 2026 01:05:36 -0800 (PST)
 Received: from xeon ([188.163.112.62])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c5095a5c4b7sm288103466b.1.2026.11.15.01.05.32
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c5095a5c4b7sm288103466b.1.2026.11.15.01.05.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 15 Nov 2026 01:05:33 -0800 (PST)
+        Sun, 15 Nov 2026 01:05:35 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Liam Girdwood <lgirdwood@gmail.com>,
 	Mark Brown <broonie@kernel.org>,
@@ -93,9 +93,9 @@ Cc: linux-kernel@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-leds@vger.kernel.org,
 	mfd@lists.linux.dev
-Subject: [PATCH v6 2/3] leds: Add driver for MAX8907 LED cell
-Date: Sun, 15 Nov 2026 11:05:19 +0200
-Message-ID: <20261115090520.102216-3-clamor95@gmail.com>
+Subject: [PATCH v6 3/3] mfd: max8907: Add LED cell
+Date: Sun, 15 Nov 2026 11:05:20 +0200
+Message-ID: <20261115090520.102216-4-clamor95@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261115090520.102216-1-clamor95@gmail.com>
 References: <20261115090520.102216-1-clamor95@gmail.com>
@@ -110,169 +110,25 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add a small driver to control the LED cell provided by the MAX8907 PMIC.
-The LED node is a child of the PMIC node.
+Add the LED cell name to the list of MAX8907 cells.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/leds/Kconfig        | 10 ++++
- drivers/leds/Makefile       |  1 +
- drivers/leds/leds-max8907.c | 99 +++++++++++++++++++++++++++++++++++++
- include/linux/mfd/max8907.h |  2 +-
- 4 files changed, 111 insertions(+), 1 deletion(-)
- create mode 100644 drivers/leds/leds-max8907.c
+ drivers/mfd/max8907.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/leds/Kconfig b/drivers/leds/Kconfig
-index 788e689fe875c..d4e0f514bd667 100644
---- a/drivers/leds/Kconfig
-+++ b/drivers/leds/Kconfig
-@@ -813,6 +813,16 @@ config LEDS_MAX77705
- 	help
- 	  LED driver for MAX77705 PMIC from Maxim Integrated.
+diff --git a/drivers/mfd/max8907.c b/drivers/mfd/max8907.c
+index b57c497334ea6..f492ade8e4cf1 100644
+--- a/drivers/mfd/max8907.c
++++ b/drivers/mfd/max8907.c
+@@ -20,6 +20,7 @@
+ #include <linux/slab.h>
  
-+config LEDS_MAX8907
-+	tristate "LED support for MAX8907 PMIC"
-+	depends on LEDS_CLASS && MFD_MAX8907
-+	help
-+	  This option enables support for on-chip LED drivers on
-+	  MAXIM MAX8907 PMIC.
-+
-+	  To compile this driver as a module, choose M here: the module
-+	  will be called leds-max8907.
-+
- config LEDS_MAX8997
- 	tristate "LED support for MAX8997 PMIC"
- 	depends on LEDS_CLASS && MFD_MAX8997
-diff --git a/drivers/leds/Makefile b/drivers/leds/Makefile
-index 3da746279bb81..24efda3fbaa44 100644
---- a/drivers/leds/Makefile
-+++ b/drivers/leds/Makefile
-@@ -67,6 +67,7 @@ obj-$(CONFIG_LEDS_LTC3220)		+= leds-ltc3220.o
- obj-$(CONFIG_LEDS_MAX5970)		+= leds-max5970.o
- obj-$(CONFIG_LEDS_MAX77650)		+= leds-max77650.o
- obj-$(CONFIG_LEDS_MAX77705)		+= leds-max77705.o
-+obj-$(CONFIG_LEDS_MAX8907)		+= leds-max8907.o
- obj-$(CONFIG_LEDS_MAX8997)		+= leds-max8997.o
- obj-$(CONFIG_LEDS_MC13783)		+= leds-mc13783.o
- obj-$(CONFIG_LEDS_MENF21BMC)		+= leds-menf21bmc.o
-diff --git a/drivers/leds/leds-max8907.c b/drivers/leds/leds-max8907.c
-new file mode 100644
-index 0000000000000..46c60fde4ee39
---- /dev/null
-+++ b/drivers/leds/leds-max8907.c
-@@ -0,0 +1,99 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+
-+#include <linux/cleanup.h>
-+#include <linux/err.h>
-+#include <linux/leds.h>
-+#include <linux/mfd/max8907.h>
-+#include <linux/module.h>
-+#include <linux/of.h>
-+#include <linux/platform_device.h>
-+#include <linux/property.h>
-+#include <linux/regmap.h>
-+
-+#define MAX8907_REG_WLED_MODE_ON	BIT(0)
-+
-+struct max8907_led_data {
-+	struct regmap *regmap;
-+	struct led_classdev cdev;
-+};
-+
-+static enum led_brightness max8907_led_get_brightness(struct led_classdev *cdev)
-+{
-+	struct max8907_led_data *ddata = container_of(cdev, struct max8907_led_data, cdev);
-+	unsigned int brightness_lvl;
-+	int ret;
-+
-+	ret = regmap_read(ddata->regmap, MAX8907_REG_WLED_MODE_CNTL, &brightness_lvl);
-+	if (ret || !(brightness_lvl & MAX8907_REG_WLED_MODE_ON))
-+		return LED_OFF;
-+
-+	ret = regmap_read(ddata->regmap, MAX8907_REG_WLED_CNTL, &brightness_lvl);
-+	if (ret)
-+		return LED_OFF;
-+
-+	return brightness_lvl;
-+}
-+
-+static int max8907_led_set_brightness(struct led_classdev *cdev,
-+				      enum led_brightness brightness)
-+{
-+	struct max8907_led_data *ddata = container_of(cdev, struct max8907_led_data, cdev);
-+	int brightness_lvl, ret;
-+
-+	brightness_lvl = clamp(brightness, LED_OFF, LED_FULL);
-+
-+	if (brightness_lvl) {
-+		ret = regmap_write(ddata->regmap, MAX8907_REG_WLED_CNTL, brightness_lvl);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return regmap_update_bits(ddata->regmap, MAX8907_REG_WLED_MODE_CNTL,
-+				  MAX8907_REG_WLED_MODE_ON,
-+				  brightness_lvl ? MAX8907_REG_WLED_MODE_ON : 0);
-+}
-+
-+static int max8907_led_probe(struct platform_device *pdev)
-+{
-+	struct device *dev = &pdev->dev;
-+	struct device_node *led_np __free(device_node) =
-+		of_get_available_child_by_name(dev_of_node(dev->parent), "led");
-+	struct max8907 *max8907 = dev_get_drvdata(dev->parent);
-+	struct led_init_data init_data = { };
-+	struct max8907_led_data *ddata;
-+
-+	if (!led_np)
-+		return -ENODEV;
-+
-+	ddata = devm_kzalloc_obj(dev, struct max8907_led_data);
-+	if (!ddata)
-+		return -ENOMEM;
-+
-+	ddata->regmap = max8907->regmap_gen;
-+
-+	init_data.fwnode = of_fwnode_handle(led_np);
-+	init_data.devicename = "max8907";
-+	init_data.default_label = ":wled";
-+
-+	ddata->cdev.brightness = LED_OFF;
-+	ddata->cdev.flags = LED_CORE_SUSPENDRESUME;
-+	ddata->cdev.max_brightness = LED_FULL;
-+
-+	ddata->cdev.brightness_get = max8907_led_get_brightness;
-+	ddata->cdev.brightness_set_blocking = max8907_led_set_brightness;
-+
-+	return devm_led_classdev_register_ext(dev, &ddata->cdev, &init_data);
-+}
-+
-+static struct platform_driver max8907_led_driver = {
-+	.driver = {
-+		.name = "max8907-leds",
-+	},
-+	.probe = max8907_led_probe,
-+};
-+module_platform_driver(max8907_led_driver);
-+
-+MODULE_ALIAS("platform:max8907-leds");
-+MODULE_AUTHOR("Svyatoslav Ryhel <clamor95@gmail.com>");
-+MODULE_DESCRIPTION("MAX8907 LED driver");
-+MODULE_LICENSE("GPL");
-diff --git a/include/linux/mfd/max8907.h b/include/linux/mfd/max8907.h
-index 025874e5f8808..9865ae52877fd 100644
---- a/include/linux/mfd/max8907.h
-+++ b/include/linux/mfd/max8907.h
-@@ -112,7 +112,7 @@
- #define MAX8907_REG_CHG_IRQ2_MASK	0x81
- #define MAX8907_REG_CHG_STAT		0x82
- #define MAX8907_REG_WLED_MODE_CNTL	0x84
--#define MAX8907_REG_ILED_CNTL		0x84
-+#define MAX8907_REG_WLED_CNTL		0x85
- #define MAX8907_REG_II1RR		0x8E
- #define MAX8907_REG_II2RR		0x8F
- #define MAX8907_REG_LDOCTL20		0x9C
+ static const struct mfd_cell max8907_cells[] = {
++	{ .name = "max8907-leds", },
+ 	{ .name = "max8907-regulator", },
+ 	{ .name = "max8907-rtc", },
+ };
 -- 
 2.53.0
 
