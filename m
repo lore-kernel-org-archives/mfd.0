@@ -1,56 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794851671;
-	b=TqHTCO5e9MyTxQmk8E2jXXX2Q2A3zHtbd5ymf7rc2Lrq2N/jMZvwAh8JOEC62gEKcPEf
-	 0JVM4p2S1GIWo9xeJBsI14vFpd5c30cgeC4ScUKcLxflBPCPOQViP/SEkFMCIEfm67nby
-	 Qmm7Jm3WHASvmRXGMC2V1Tk2uyUiD7/tWpPLFlHETFGaxSPPfKUlq3z9okNrC1lAZ/oA9
-	 EG5HhTsv1MAypb5DSgYJPuRlpCDnPjga9Pupt8njDxYfxuqTKZcQgTzNp9xQoJ02xAeNd
-	 3sy4FStkDAEOe0Wd5BijLncVnNjYEYjEK0OKfc1Kuji6eL2ySri/NjgRzwqmoM/gwIA==
+	t=1794851877;
+	b=cPS0Tx+7hQoWsTFsh50tzVwAtlGn9dS223oEjJK+lVC5mTkbLU4/FUywypYeHX862MWr
+	 XagLEGjnUrjrGbI8wXW5j225B6whFVchsNY9X6FM127MEwu/wC0JwhFHWPl5NuuR8IdtS
+	 wQI4lzqYWzMgUB/iiE9O9j1lcg7Yp5MJU/HbNW8LkDOlMGtiDXNdfbMLiaTC0szPwYwuW
+	 iqB1z9xngZsq/MuYHhbDer95636hN0aXjhlW1rsyzKOlU4acDKg/dhyH8gzODRs/icQ/j
+	 rKtC3qTIOQG8SbMHbGK4dmk1KQVUr/2O8Y1aJF7EP6oVt6zEDhy2LKstACMo//5cWhA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794851671;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794851877;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=IB3dM9ENcSdR9Mr56rlLqk0cKHWj3c9r/E0uhKyKXa8=;
-	b=3sUbT+wd/Nol3OCqS/VqHeKgxAT5IiZtgauoK5LizkdSKmVaQGctKeagkwaagCYnzU/D
-	 GvDcONFLomFvj8TBPqXgJM0hT1H04sq7U94KKn3sEn5ZCYqqVIzg6XfenQWXox+t//YdU
-	 XOeaYemVdpxBkgA0XJWgVZypD+FIyGCmSWBDNOgvEEganQMOr5J+9Aw9b8QWNY9Z/4RS7
-	 Rf2wcG6QCvU9Iktwl0ilmu3dW7rALbLm/CU4L0kV9vnXeDosB06mviDyIDk/BmQDKiKvI
-	 8IaI62a5i39qgOz3d0YssymwiWZsfONhWjT3AlRvpHTlFErhJnVV5z28RFOQ748cx2g==
+	bh=wVxHU/efKpeR8LJlpROMpz6wzM9PBni2SjDPvFjwuXk=;
+	b=aeCa+XF3BjpmWTol3FvLzq4pNy6Tdr3ZBgRlU2OP3+y3BJIcaDFYquACBKv7Q0Cc/KJb
+	 GUwDf6tZn9N6gCKuydXp2rOJgzrYDh6J/jWAghr8eVoaTDYtOpUH9rcD5N5QslhlZkp8o
+	 HDsA0IJ9TB8BZA3il9DPhVyont4KGmkJ71jMfuxuz7hcPDkl1U3l8VS1FbATNvkoRpnxN
+	 O+aaHdeVJX+ddo63vANI26dcMcHLBkqGMsmDpV3f+xm0PMorTb4ZvejcIVYQIGGZsm9qv
+	 dBr2tS0zCs7j2vsP/8t4T52YUl5VhbpDx6sEpzGNB8lyJtDloWBdYTsinko2UUP9+BQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=L9KC4hwE;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Jf4PPoTI;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F527606A33E
-	for <mfd@lists.linux.dev>; Mon, 16 Nov 2026 17:54:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4C82606A322
+	for <mfd@lists.linux.dev>; Mon, 16 Nov 2026 17:57:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=L9KC4hwE
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 35AB91F000CA;
-	Mon, 16 Nov 2026 17:54:31 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Jf4PPoTI
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E0591F000C4;
+	Mon, 16 Nov 2026 17:57:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794851671;
-	bh=IB3dM9ENcSdR9Mr56rlLqk0cKHWj3c9r/E0uhKyKXa8=;
+	s=k20260515; t=1794851877;
+	bh=wVxHU/efKpeR8LJlpROMpz6wzM9PBni2SjDPvFjwuXk=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=L9KC4hwEN16l2dfyidwFTrWOh6y+CTvkdFM1WelLe2dh86YSVhV6JLKKWjY+ekkQP
-	 CRK3lQa0vofc3KRN17DhCD3WrBGYjGaTejjEEh/Fcr3HlC4ITwA4n2ert15WsEdrDD
-	 DCRQHxE6ftSTKJyrKZRc25eKBEmsKFJ0bXfYfJDZJZkiZkWnyMfBaLl9Br8uTkVTHb
-	 FVXLCv5FAOPvnnmlBIAuPgwu+N4POjUOCTC/BcUoRw+VAD1vPWbDFsldUCGeTkb330
-	 0q+J+dVtCnUg9rIGBnTw+DWMs1VPA4meILfyJzxRsETI4vdnkgt3sdzVdBt+1zxqK1
-	 x7bNsAbaZ7nlQ==
-Message-ID: <sashiko-outbox-217456@kernel.org>
+	b=Jf4PPoTI1n61yeYpqVrJkUnPSRbWgyAJTrnOLxQ2J5KdsgDc1hGHQanP0RQwaaQ/o
+	 y7go4IueodwiDdIpc/jAaAmEgN8x7M8dxqx1fq5w9ZZSKyRyLhQ0yhIazD7qnV5ZO/
+	 5rDk2NNV4COXGQBwNxms2234CkFGre81m5s+0LHj2nMPl1XDtqA+J9ETc4VRvZJ53C
+	 GXt0LIBGKwPUcDKGX0D0RVgP+D7/JSHEWDmy9wHy/R3C2NCvCAWSMxP6tDuSotCDf4
+	 HB3a49Et/09d7ZUQx5GKK1s+M7TqSyvR84Xyx3LBTMPY77HfTPGduY3yaR0gRCya1Q
+	 /5UwYZ9mt1iyQ==
+Message-ID: <sashiko-outbox-217469@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 2/9] pinctrl: airoha: add per pin mode field mux
+Subject: Re: [PATCH v3 1/9] pinctrl: airoha: make gpio register layout per
+ SoC
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "John Crispin" <john@phrozen.org>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261116174854.342912-3-john@phrozen.org>
+In-Reply-To: <20261116174854.342912-2-john@phrozen.org>
 References: <20261116174854.342912-1-john@phrozen.org>
- <20261116174854.342912-3-john@phrozen.org>
+ <20261116174854.342912-2-john@phrozen.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Mon, 16 Nov 2026 17:54:30 +0000
+Date: Mon, 16 Nov 2026 17:57:56 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,20 +61,13 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> Newer Airoha SoCs select the function of a pin through a mode field in
-> a dedicated IOMUX block instead of through function specific bits in
-> the chip SCU. The AN7589 has a 4 bit field per pin, eight pins per 32
-> bit register. A group can then need one register write per pin, and
-> the two entry regmap[] of a function group cannot carry that.
+> The GPIO register layout is fixed to 64 pins in two 32 pin banks and
+> four 16 pin direction banks. Every SoC uses the single static
+> airoha_gpiochip_regs and the compile time AIROHA_NUM_PINS.
 >=20
-> Let a function group supply a pin_modes[] array, parallel to the pins
-> of the group. When it is set, set_mux writes each mode into the IOMUX
-> regmap and then applies the regmap[] entries of the group, so a group
-> can combine its pin modes with a register write in the GPIO block.
->=20
-> A SoC with an IOMUX describes it in its match data with struct
-> airoha_pinctrl_iomux, which holds the width of the mode field. Probe
-> then takes the regmap from the airoha,iomux phandle.
+> Move the layout into the match data. The gpiochip register table
+> carries its own pin count, and the five existing SoCs point at the
+> shared 64 pin table.
 >=20
 > No functional change for the existing SoCs.
 >=20
@@ -83,5 +77,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261116174854.3429=
-12-1-john@phrozen.org?part=3D2
+12-1-john@phrozen.org?part=3D1
 
