@@ -1,57 +1,78 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.177.127.196
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794855500;
-	b=VEpWFlHJl4fqNZwVUaM9aZ2zNB3X71hCVP746HB2MfDyqdVkeLEfmnV2t9LvrJ//DRtK
-	 +ECcaOGm3AIliwD9zI482ATy1IkXgzZd4bu8uN/8B1n8Ih4c2IP4khfsPG7Lz135Eskmk
-	 aVmzMnGNPE3HWEDWu48W5m/AoSnj09TYjKD7mNwaBitAbenXT0nDDqrjdhg9pFtpoOio7
-	 dquukqTXWYdXj0Q5lZ8WmevDZRSAzKdb22oM4bKclApSCAVLRs0RXS4MDXvTMqO5VKNZt
-	 juQNmLYJbmlkIN2fHPhbYk0O0m2goZhykW3pr7g97QkIq6GdJ2Aj8rbuxSYVV8W+ESw==
+	t=1794855523;
+	b=s3Xwv46eiEIdoO3tMNMyf5nXyWgE0AjhG8djzJVmihVWFl4AJj3Ra0RmYsr0KV74G/K+
+	 wvAZ8Ma76J3EurR8Ip21UcQjSDgDmjtR0cEKd9AFSw1OZFkbkeXtuiJ6eMn4485SFhW7k
+	 2ZqwW2qaga8AW+XWjYrTHwBGxP/CD6S7tN8HrLOh02PuGlhI9+ofO70SVFgsA0XyLgP+t
+	 lnEk66zkuzuKcgbXNr/rRflX52nD9/BIQse0MOaAqRvsMxEm2/vVe0WZANEzsJK2L3nMP
+	 i8IYnrMK/83pL5PhTO2IbhVvk+lPOGZSE+f+cYa4+Vcr5eJQEWOYQUxHlEm+9G3hswg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794855500;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=KZcp7830tfXgUweBJsST6qZnS+mTu2SQdypKjpTqh/s=;
-	b=lnuMytIhpOgANNM30xEybCBOTqcj+EuJm6fiNG0d5l+eBx9j5kJorvBJvn5KUAc2GbaH
-	 GVFuGPp8aYLv7u4Xhmz9WRL2mZXTNNntbXFn5VdwizL54V3H6vYYJxLI90USKIutbOc6G
-	 XlsELSVjF/dzBjNBBNHJVdNoCG6DEK+Z/LrDmzlynkM7VrGca9j7BzJym6CreoplvTQp4
-	 Q3wgP8F7mq/0AqlBPTPZEnlzUmIu1KZTWNlkvSGEHjOVZ7CUdMcyF/iRfdGjUair4n9Rz
-	 CfZVbPgc/lqsQBECS3CipqxdgwTSrsdFPzu5Y8P8bItL/ulYLqnId9P7EjR49ECuHug==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794855523;
+	h=DMARC-Filter:Received:DKIM-Signature:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-Envelope-From;
+	bh=l+N/4HUfPOWC38r91cfsEtOz5CFqQ9BB3OfTC82ziTA=;
+	b=OvPP7VaNMh4hh2jcRISg6u8myUoCKJrm6FzmpyaPpwDAOYpAiKg5iBytIuHeYixCazr2
+	 4nUZvvZPEgEq0B/QAJal7o5buUu7KGhC/I5kTDJExVTyeayvxqViSSfn4hnPYniPxOZfq
+	 0UUAxyyuX8UOf2t6/tRy7ht07OrKS/qvf9e7b1C3ohP33pstawsBrYDI3Yg/AooCIvCgI
+	 xLWFXmGOH1Djb0wlk3heSqrWCLH/zXexu8nngS2H6oPcTZHnyMK6kupRX9FB9zmZuAHVe
+	 fnb14okgggJ3MKOIwrLR2XlYQOUcBlXJTyJJNDjynGF2h85m3Wyk5sas+oJdfUQ/bjQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Jy2MdkzJ;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=chrispinetinega.com;
+	spf=pass smtp.mailfrom=chrispinetinega.com;
+	dkim=pass header.d=chrispinetinega.com header.i=@chrispinetinega.com header.a=rsa-sha256 header.s=default header.b=ktZIO4Tp;
+	arc=none smtp.remote-ip=198.177.127.196
+Received: from out-utut-a196.jellyfish.systems (out-utut-a196.jellyfish.systems [198.177.127.196])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98520606A332;
-	Mon, 16 Nov 2026 18:58:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C4B4606A886
+	for <mfd@lists.linux.dev>; Mon, 16 Nov 2026 18:58:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2C4B4606A886
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chrispinetinega.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chrispinetinega.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Jy2MdkzJ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ECDA61F000C4;
-	Mon, 16 Nov 2026 18:58:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794855500;
-	bh=KZcp7830tfXgUweBJsST6qZnS+mTu2SQdypKjpTqh/s=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Jy2MdkzJSGp0DfmuH1ZFjKeFW6QIyCvUBolC8kwJoTGN4G68U8hHfu/vSb36G+90G
-	 K+/Qb+R1Wp7sAcH/F2opwQNDzyzKO9kYVZmQvPW4RqPE2H3ZRsbu+rZwIL16LoaaQt
-	 BlEufKDnaRHMeF5muoDLBaAgtfAuvDCvRLmA/4t4NE3cMWfspf9tknvR/V0f3isy+f
-	 eLbF7TkMqyVvpDS9D7O0ata9GJmU8PRK2jtUglqoRsGdxq9hSK7ovZE8WhiUvoavQL
-	 HvLysxK3ouXgn018Q65diiAOtv3x9y+FoJxpmsbUeokxR7ZvypY/5WEr4xx4aI8Ixx
-	 ZJgbd9er/P+Ww==
-Message-ID: <sashiko-outbox-217519@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 2/2] rtc: mt6397: provide the 32 kHz output as a
- clock
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Ryan Brue" <ryanbrue.dev@gmail.com>
-Cc: mfd@lists.linux.dev, linux-rtc@vger.kernel.org, "Alexandre Belloni" <alexandre.belloni@bootlin.com>, lee@kernel.org
-In-Reply-To: <20261116-rbrue-suez-upstreaming-mt6397-rtc-32k-v3-2-179145eb7e89@gmail.com>
-References: <20261116-rbrue-suez-upstreaming-mt6397-rtc-32k-v3-0-179145eb7e89@gmail.com>
- <20261116-rbrue-suez-upstreaming-mt6397-rtc-32k-v3-2-179145eb7e89@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 16 Nov 2026 18:58:19 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=chrispinetinega.com header.i=@chrispinetinega.com header.a=rsa-sha256 header.s=default header.b=ktZIO4Tp
+Received: from mail.privateemail.com (unknown [62.8.90.37])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mail.privateemail.com (Postfix) with ESMTPSA id 4jSxw34vBWz8sWN;
+	Mon, 16 Nov 2026 18:58:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chrispinetinega.com;
+	s=default; t=1794855515;
+	bh=l+N/4HUfPOWC38r91cfsEtOz5CFqQ9BB3OfTC82ziTA=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=ktZIO4TpvTtsMbzbH69XQ+vUxXXS+iPiAxqnov81NKsqON9oyQMbG9chM5QwTiYQC
+	 M4yfTnuVSI0UhgfcEzQ/xMTOWeywlBHUScDCN21nXVv9VtcaDPxhC8zcpiYED69yHq
+	 x3a5zjl2nTNTOJkZZqgZHRq8SQNC3Lah/w3bbjAG1BDwmnXT6qmlADn+EcnofZOJ3P
+	 ItgEpL2Ih0dj9fPlYZmQpjanKwP1fNyqJQC4owLroHMMWVoRyDivv2yfoyJvG2nIjf
+	 0qJbXbAfSN4E+6bbbadbEC5WisPoc71jlCIcpmR9T+nw2ddHtTqQT1Bw+DmhGNKweu
+	 EdKQfKin2QDDg==
+From: Chrispine Tinega <dev@chrispinetinega.com>
+To: Lee Jones <lee@kernel.org>
+Cc: lgirdwood@gmail.com,
+	broonie@kernel.org,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	aaro.koskinen@iki.fi,
+	andreas@kemnade.info,
+	khilman@baylibre.com,
+	rogerq@kernel.org,
+	tony@atomide.com,
+	jerome.neanne@baylibre.com,
+	linux-kernel@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-omap@vger.kernel.org,
+	mfd@lists.linux.dev,
+	Chrispine Tinega <dev@chrispinetinega.com>
+Subject: [PATCH v2 1/3] mfd: tps65219: Correct the MASK_EFFECT field of MASK_CONFIG
+Date: Mon, 16 Nov 2026 21:58:09 +0300
+Message-ID: <20261116185811.1907811-2-dev@chrispinetinega.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261116185811.1907811-1-dev@chrispinetinega.com>
+References: <20261116185811.1907811-1-dev@chrispinetinega.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,20 +81,36 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Envelope-From: dev@chrispinetinega.com
 
-> The RTC's 32 kHz output is gated by RTC_CON.F32KOB, which the vendor
-> kernel clears before it powers the Wi-Fi/Bluetooth combo chip. Mainline
-> never touches it, so on a board whose bootloader leaves it set, such a
-> chip has no sleep clock and does not come up.
->=20
-> Register the output as a clock when the RTC node has #clock-cells, so
-> the chip's power sequence can enable it.
->=20
-> Signed-off-by: Ryan Brue <ryanbrue.dev@gmail.com>
+MASK_EFFECT is bits 6:5 of MASK_CONFIG (0x25), per table 7-46 of the
+TPS65219 datasheet (SLVSGA0D). Bits 2:1 are the warm masks of sensors 1
+and 2. Nothing uses the macro yet, so nothing has written the wrong bits.
 
-Sashiko has reviewed this patch and found no issues.
+Fixes: 74c17a0a49a6 ("mfd: tps65219: Add driver for TI TPS65219 PMIC")
+Signed-off-by: Chrispine Tinega <dev@chrispinetinega.com>
+---
+Changes in v2:
+- Add the Fixes: tag. (Sashiko)
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261116-rbrue-suez=
--upstreaming-mt6397-rtc-32k-v3-0-179145eb7e89@gmail.com?part=3D2
+ include/linux/mfd/tps65219.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/linux/mfd/tps65219.h b/include/linux/mfd/tps65219.h
+index 3abf93719..5a6be84e2 100644
+--- a/include/linux/mfd/tps65219.h
++++ b/include/linux/mfd/tps65219.h
+@@ -198,7 +198,7 @@ enum pmic_id {
+ /* MASK Config */
+ // SENSOR_N_WARM_MASK already defined in Thermal
+ #define TPS65219_REG_MASK_INT_FOR_RV_MASK		BIT(4)
+-#define TPS65219_REG_MASK_EFFECT_MASK			GENMASK(2, 1)
++#define TPS65219_REG_MASK_EFFECT_MASK			GENMASK(6, 5)
+ #define TPS65219_REG_MASK_INT_FOR_PB_MASK		BIT(7)
+ /* UnderVoltage - Short to GND - OverCurrent*/
+ /* LDO3-4: only for TPS65219*/
+-- 
+2.53.0
 
