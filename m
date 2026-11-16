@@ -1,60 +1,102 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=117.135.210.4
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794822823;
-	b=YlyRKoSt6aDlRh8lKPBaKeV+ytjLdIqI8Qp+hwsBRYqgGMwsZDegXesEvBhtqsVw7ZHP
-	 il6ZYq5gHGcfopu5NUqxfIoPTtpivK+qckpVvLq3eCcu4LhAZ9+UMAmPvCm+oDcMR3hhH
-	 T8JENtK9EJZaLylU+of17wDlclf02IjI9a36YCH0YokjcjUBi+bYzlvfTFx9AX6QAWNXr
-	 JOxNU/iy8711U1QiGHu8taNTsgvLWsmCdYR9uhfgjncVySlWYlqvaQvu8gpQ0L3LUA8H8
-	 zdaV7xhdc6Fe4c6sVWq4laLZ2A4hsT+3U0xn983lygnj4XIHEPtZ4ZezZ6O4euptQ4w==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794822823;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding:
-	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
-	bh=thQ5tIrrwD7SqIdDlbUJwnmSGJ/4IF6F6XNTPstz/Ko=;
-	b=mR2WRAqV6YNbqBfPfGwTDjpy9Z3TNA4OpWg/G5M0XOOP/NZCWqwc0LvKVmFFl79kKo15
-	 zg5v8+BoLXKHZ85zwowqexvfOUYtBzHTX4XM8lioy+S68g6p1attMprrujknxqzTOMFoo
-	 SSQ+KsiqUxBWfeBBUSb6BBQY4IvT+qlJr38QZBzawwzdy8seCTwg/0VsxRwi1WfiB/FLI
-	 VZah5Cma39KsBIn5qEPk0c+ad/xtz8nlHNOUU3gJWYPqgOBo0i4ONkjgH5+DIU7qAZP+e
-	 FBbLHM+hm4I2nFK97uY3Ik5Gzrve2FL6/CVXeTzJBfqDAd9q9oTlMDk4kgrZv0/oNeQ==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=163.com;
-	spf=pass smtp.mailfrom=163.com;
-	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=RFqcgEaR;
-	arc=none smtp.remote-ip=117.135.210.4
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=185.203.200.13
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1794823035;
+	b=i8NcANpp1d3QN46+dGL9ZsF0LwhgI+IDIR9mHCFQwMEvSnsjqzeBEF3HkIxH6gaoO5Bo
+	 I0dBXEpwUFKNJH/Us9CpyqXsB8cXnQZ0U+mJnSLdmkgSzMjmBrF6oJPMcGs0Zdb8xIHpu
+	 nk/6Zfj0cSyBivDe3CMvCbtDwqV2IUsanfkZatGbsNZh8yvqud2DsBls2k3h1H9NQ3Fzn
+	 CR0gmN2dQtYbC9yNBb72JCK6xwzXjJnYcSCZ+eDpECZk1WbTkS9jC7JRoKdeZq3tAP2E5
+	 lBA6ZAV+KGNyp3M2WcQvUhHpsKVa1rRNcCn7G6QhIAiXnHiDLF11fGgZ/4AShmIfd3Q==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794823035;
+	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Subject:From:To:Cc:
+	 Date:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:
+	 User-Agent:MIME-Version;
+	bh=BKwH/iPsGpBgdjotukbv47/XMRavn61B5PvO9PeiRxY=;
+	b=gCR9WwdasKrbtRO5BIj6GpOcCItNcA5NkJpXDUXMwYjsOAV+D0Lq+rk94esUagnuv1Ok
+	 hOsOfJPlDquZ4lZcgR5l6Tfo7DgKwGqufvmVcwpRwpRkjqSX1tgxE8R0vKn3Lyniz7xbM
+	 1arhT99jeveAxMI0THVFwgUMHR/dOvR193Oiy4bBhFC+tj3GQGdAJ7YqTDG8Yo0wN1GKn
+	 wUzhE90yI1U/5k9WgTGksHQZzvOcsV3CqgcMze7FOdMob+3R1vfqCYOhsPjXRc4zdIiJ5
+	 qHlzizYKyFiSOsCXuw/+wJnSG/YzqiMCFg52UQbe6AtOWPxbcibiaRxVNFMxQsE3nEA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=none header.from=pengutronix.de;
+	spf=pass smtp.mailfrom=pengutronix.de;
+	dkim=pass header.d=pengutronix.de header.i=@pengutronix.de header.a=rsa-sha256 header.s=20260414 header.b=e77DMDMx;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=185.203.200.13
+Received: from mx1.white.stw.pengutronix.de (mx1.white.stw.pengutronix.de [185.203.200.13])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92659606A31C;
-	Mon, 16 Nov 2026 09:53:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 92659606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9485A606A32F
+	for <mfd@lists.linux.dev>; Mon, 16 Nov 2026 09:57:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9485A606A32F
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=RFqcgEaR
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=th
-	Q5tIrrwD7SqIdDlbUJwnmSGJ/4IF6F6XNTPstz/Ko=; b=RFqcgEaRkSibPW+DBu
-	JvUhIPEM5y4bCxqOiIkyZ/eE8LPdLcK8VFIQ9OtZ4VboFLYHJZFiNVO5+nl/S6hr
-	brJkpZilItrYMQRcbUtlRO3LL6qThIIB5PY+27qpBl0gV9ZmvDSHJZdFW7TuSRxu
-	DqVE/DQ4osfO4mrRXCY8xcwbk=
-Received: from localhost.localdomain (unknown [])
-	by gzga-smtp-mtada-g0-2 (Coremail) with SMTP id _____wBXMyCS0vpqu8TwHw--.57709S2;
-	Mon, 16 Nov 2026 17:53:23 +0800 (CST)
-From: Qunqin Zhao <zhaoqunqin@163.com>
-To: lee@kernel.org
-Cc: chenhuacai@kernel.org,
-	linux-kernel@vger.kernel.org,
-	loongarch@lists.linux.dev,
-	linux-crypto@vger.kernel.org,
-	mfd@lists.linux.dev,
-	Qunqin Zhao <zhaoqunqin@loongson.cn>,
-	Huacai Chen <chenhuacai@loongson.cn>
-Subject: [PATCH v10] mfd: loongson-se: Add multi-node support
-Date: Mon, 16 Nov 2026 17:53:07 +0800
-Message-Id: <20261116095307.21990-1-zhaoqunqin@163.com>
-X-Mailer: git-send-email 2.20.1
+	dkim=pass (2048-bit key) header.d=pengutronix.de header.i=@pengutronix.de header.a=rsa-sha256 header.s=20260414 header.b=e77DMDMx
+Received: from [IPv6:2a0a:edc0:0:900:1d::4e] (lupine.office.stw.pengutronix.de [IPv6:2a0a:edc0:0:900:1d::4e])
+	(Authenticated sender: pza@pengutronix.de)
+	by mx1.white.stw.pengutronix.de (Postfix) with ESMTPSA id C930720059B;
+	Mon, 16 Nov 2026 10:57:12 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pengutronix.de;
+	s=20260414; t=1794823032;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=BKwH/iPsGpBgdjotukbv47/XMRavn61B5PvO9PeiRxY=;
+	b=e77DMDMxYre+lT0XsCkBPm6hniRa/0AKlIuy3d+048vtiK7EOeN76xZGEXQV1xWz/LsEpd
+	+Oq4JRLLrMpOXGo9Kay5U6gtFdYh4/MbSoL+uT/R8dBcQ4omhoWI04Uc0rxHrfxjgOvsGA
+	MYDII28WbWKFPbgqpsmtF+ruObzviCmsJmyHManqwfsZbjxqzQZfsz+Qdxbixn+C6tgpsE
+	nm/tY+hGooOvQV9Ib0TrB57BdQdMafeqeBr2DxEBZpX+iMMPSpWlg/z4HoaZuSGWvn4RBZ
+	p1yO8mUBhURyaMmuXUo6rOj66b1oYq/kYCo1tEehZQXBugBW/JsE4l1S2QuOEQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=pengutronix.de;
+	s=20260414; t=1794823032;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=BKwH/iPsGpBgdjotukbv47/XMRavn61B5PvO9PeiRxY=;
+	b=ZUruFCBkOh5XjH83QYSicDz/2wzBRnfd7CBdbuBGh03CddG9P4OMOam+bFujPXK1aUv/59
+	0qcxKSIq1rSWr3KEms3Mhvx5F9K8lq96lnovSKWJVzgTbFbvcQeP0y6FiqUTjTU42wPdiu
+	iozyjJ2zUgyfNfHgloQgH5DW1Y95yKdJy6HLNVkt060faWQoAx3iNj7AxWq9a+sU9Xut8i
+	blQsULChDYFSfe52iuHM6GpfpZ83vhV9aNXf0LfzJk9NpT6NWGYuj9R8Qy5DO3JATSNVuM
+	yHHPgoifue+MhG14SkNOV921ONcYGIaha7D/2uFgiUlIpz1wZY6SsUyR1bgUvg==
+ARC-Seal: i=1; s=20260414; d=pengutronix.de; t=1794823032; a=rsa-sha256;
+	cv=none;
+	b=Sh4oh/QqUDxHSdEQodkdsbc4tb0Wo9LbXyM4Wgk32fnwZiAha1ikyFBqAhePPO9lDvN1kC
+	AOUR2KKCfaS4lsd70Ss/g0NuEymuJlBuyeXaULg4S0IJCGSHa78xqRO+CrsL12FR6I4NzZ
+	EYehOABDF594URR48QRRv6TIMkziWwjvHIBd+ldUqBwB2Md6ArbxNdImPEiwYp+aXi9tjT
+	T8rIieD4Tkv56eOyd1gIeRmTykg26BzV4P5Ha2NzN5PRpTynmMLcrLymGO1i9JWzWdOtJq
+	w4fZrI9USOQqyUBYy4JAkWVdC/pV+DeujrCMA99faBOZ2MWFX6KXaAwiW2ilLQ==
+ARC-Authentication-Results: i=1;
+	ORIGINATING;
+	auth=pass smtp.auth=pza@pengutronix.de smtp.mailfrom=p.zabel@pengutronix.de
+Message-ID: <2bf193a0353fe74cd2d2faf48528e40df00d36bc.camel@pengutronix.de>
+Subject: Re: [PATCH v4 5/7] reset: Add BCMBCA block resets through the PMB
+From: Philipp Zabel <p.zabel@pengutronix.de>
+To: Linus Walleij <linusw@kernel.org>, Lee Jones <lee@kernel.org>, Rob
+ Herring	 <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor
+ Dooley	 <conor+dt@kernel.org>, William Zhang <william.zhang@broadcom.com>,
+ Anand Gore	 <anand.gore@broadcom.com>, Kursad Oney
+ <kursad.oney@broadcom.com>, Florian Fainelli
+ <florian.fainelli@broadcom.com>, =?UTF-8?Q?Rafa=C5=82_Mi=C5=82ecki?=
+ <rafal@milecki.pl>,  Broadcom internal kernel review list	
+ <bcm-kernel-feedback-list@broadcom.com>, Stephen Boyd <sboyd@kernel.org>, 
+ Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet
+ <jbrunet+clk@baylibre.com>, Guenter Roeck	 <linux@roeck-us.net>, Jonathan
+ Corbet <corbet@lwn.net>, Randy Dunlap	 <rdunlap@infradead.org>, Ulf Hansson
+ <ulfh@kernel.org>, Benjamin Larsson	 <benjamin.larsson@genexis.eu>
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, linux-clk@vger.kernel.org, 
+	linux-hwmon@vger.kernel.org, linux-pm@vger.kernel.org
+Date: Mon, 16 Nov 2026 10:57:12 +0100
+In-Reply-To: <20261111-xg6846b-bcmbca-xrdp-reset-v4-5-17035a5e8ad2@kernel.org>
+References: 
+	<20261111-xg6846b-bcmbca-xrdp-reset-v4-0-17035a5e8ad2@kernel.org>
+	 <20261111-xg6846b-bcmbca-xrdp-reset-v4-5-17035a5e8ad2@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.56.2-0+deb13u1 
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -64,73 +106,23 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_____wBXMyCS0vpqu8TwHw--.57709S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7Kr45Jr4DZFWUJFW5Jw45GFg_yoW8tw1kpa
-	98Wa90yr4jkr1F9wn8ZayvkFy3Z3yft3y3C39rJw47A3s8twn5ury3JFyjgr1fCFWrJa1U
-	XrWFkF48uFW8uF7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UpOJrUUUUU=
-X-CM-SenderInfo: 52kd01pxqtx0i6rwjhhfrp/xtbC7RMycWr60pN89gAA3m
 
-From: Qunqin Zhao <zhaoqunqin@loongson.cn>
+On Mi, 2026-11-11 at 12:00 +0100, Linus Walleij wrote:
+> Implement the BCM6846 XRDP reset group through the shared PMB regmap.
+> Assert all blocks before releasing any of them, preserving the vendor
+> reset masks and ordering. Provide the independent PVTMON acquisition
+> reset as well. Serialize complete sequences and hold blocks in reset
+> on failure.
+>=20
+> Consumers must enable their power domains before triggering a reset
+> pulse (i.e. the cycle of asserting/deasserting reset).
+>=20
+> Suppress bind attributes: it's not good to be able to unbind the
+> reset driver for the SoC manually.
+>=20
+> Signed-off-by: Linus Walleij <linusw@kernel.org>
 
-On the Loongson platform, each node is equipped with a security engine
-device. However, due to a hardware flaw, only the device on node 0 can
-trigger interrupts. Therefore, interrupts from other nodes are forwarded
-by node 0. We need to check in the interrupt handler of node 0 whether
-this interrupt is intended for other nodes, this can be accomplished via
-shared interrupt handling.
+Reviewed-by: Philipp Zabel <p.zabel@pengutronix.de>
 
-Signed-off-by: Qunqin Zhao <zhaoqunqin@loongson.cn>
-Reviewed-by: Huacai Chen <chenhuacai@loongson.cn>
----
-v10: Rebase onto latest for-mfd-next
-v9: Keep checks immediately after allocation calls
-v6-v8: no changes
-v5: Clear pending interrupts with S2LINT_CL before requesting IRQs,
-    and move S2LINT_EN to after all interrupt handlers are registered.
-v4: Safely handling shared interrupt handler returns.
-v3: Using shared interrupts (IRQF_SHARED) instead of manually
-    iterating through all devices to check for interrupts.
-
- drivers/mfd/loongson-se.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/mfd/loongson-se.c b/drivers/mfd/loongson-se.c
-index 23af05d38..0c6274aa0 100644
---- a/drivers/mfd/loongson-se.c
-+++ b/drivers/mfd/loongson-se.c
-@@ -152,6 +152,10 @@ static irqreturn_t se_irq_handler(int irq, void *dev_id)
- 	spin_lock(&se->dev_lock);
- 
- 	int_status = readl(se->base + SE_S2LINT_STAT);
-+	if (int_status == 0) {
-+		spin_unlock(&se->dev_lock);
-+		return IRQ_NONE;
-+	}
- 
- 	/* For controller */
- 	if (int_status & SE_INT_CONTROLLER) {
-@@ -278,7 +282,7 @@ static int loongson_se_probe(struct platform_device *pdev)
- 		if (irq < 0)
- 			return irq;
- 
--		err = devm_request_irq(dev, irq, se_irq_handler, 0, "loongson-se", se);
-+		err = devm_request_irq(dev, irq, se_irq_handler, IRQF_SHARED, "loongson-se", se);
- 		if (err)
- 			return dev_err_probe(dev, err, "Failed to request IRQ: %d\n", irq);
- 	}
-@@ -293,7 +297,7 @@ static int loongson_se_probe(struct platform_device *pdev)
- 	if (err)
- 		return err;
- 
--	return devm_mfd_add_devices(dev, PLATFORM_DEVID_NONE, engines,
-+	return devm_mfd_add_devices(dev, PLATFORM_DEVID_AUTO, engines,
- 				    ARRAY_SIZE(engines), NULL, 0, NULL);
- }
- 
-
-base-commit: c92739a23a80f5f0a7c6f3c10aa792102d252ac4
--- 
-2.47.2
-
+regards
+Philipp
