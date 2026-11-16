@@ -1,56 +1,69 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794851957;
-	b=AZ59M8o3+3zwL1+CtmSQqj5/redJRG3M8Jb8Dr7nR13NGeXO59u/G4WQq88TmAHsnlLB
-	 DaGdwCkDl5GZEcDEEVZr5N2BAxcBHkWTf89xKhd13Or2k2PoZFRLAIGZgbkD00OIQkvV8
-	 fdkmZpjD+2fc6wTIcjlHBkrdl9DOYOVznZswdTmX0UUiF9PKarnHvIPcfVC1+0pJq85Nv
-	 Oum9mPEjSynTyYssJ7PRD15MjlObtpFPEuwdM0Bw6ueUwZLUay72Kj4e3UxE62GU0N4z+
-	 rGyNDMH+qU6CXHilfl2HU49dm3pj2F3suOFgNdmMz8UqcMi4bsxyONLcLkfYu0IGPgg==
+	t=1794852966;
+	b=lE/8/KXsHRmwVhskCMddowrfPyiVi5AScTM0VNTFWG9LP74ExIn002epZ6nWCvWeG1P2
+	 k/tS1p+D8Io7WfTmDqRT587CDkWwBTn5aumB4fYSBrwSopzu+33NMkeqOzP110ZI6Q79H
+	 7qk6qPMe35H1iAoiYuE7UJDXXJ1NmrVmNBfqIxgoeExnjPQULlPgF/v5giI9CHOmW3JXW
+	 5ViAfYE5Mvl7FvAr0YlaHz5r4SSCDRU9V+ZMbh4q+SO3mdV2u8bGGvwluOv8KUIBsn3+I
+	 7AMmCggNbEzBcfwgFLzUNgpTcg22+K1Ii/Uc8fuxYf21JbYqBa1HcFCwf7iJbRLy3Zg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794851957;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=xC488XZU6wRgf5UXlmryWfnuD62lmaRWUADMj/rppBs=;
-	b=g9U45GFUP0DGYxyLLh7MNWxmXVI8ZAKeE0K1CSFzzOi6be9wKf7IB5AB33PTRfl4AsQe
-	 Isbgc9n3gJRxY7g7/S58QJY54lCSxjeNwlF+L8WgH5JCdydiZMLqVBNDg7X6kEK7CGId9
-	 Ma12PFcleot/3OQlrlwkw/MUfp79Jec7D6TmXEAFTQDtwBx/4fSLgW9NQ0nKDJWV7uNtD
-	 nsF8nN7heB1TcmfJEpC13VqeIDO/uH52XQwfi2Uj4I/DYSX2hLRV8E5bMqiAoBPJiJyRM
-	 /qicKSgls42P312XbinPzXDy/AyVlIRsSRjo/KciGbRlrtOAcMt96Aj9i8zNCq3pwBg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794852966;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=Pv6Z2msONZOMn5X5XcAinXRtg1l0bwQ6c+ZoL0wLzd8=;
+	b=YZBWQr34smuALVLV5DiKTvyFDeHHwE7yNxVqpAkQirmXomh+fdzX9621sACqwZscvuDU
+	 IM0w4ovUQOOz36ZFUaWHaFIg5mZ7z+GD2GD+xMTWlWqduERqf8sAISFYHZNXsvvWJ8hnl
+	 WrkzPbdr81cf+LdIVLBgXTNsJOc0kBlrBrR4EccMf28bEAAoTOR8nsEvNZVVCEUagZ3C4
+	 IpqSk0GcccVnNq1UuG3AFr1bMPmLPZ5gxegNBFB2Ahe9kDIuciluP1RvE9YBcTnOWjwzL
+	 X4zG2OGrLeWqbTmfh/Q8O+ls+aTrus9ez2KaSrMkdwEeuMPBv+pssOzvFFa3FEmlmqw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mVExs8nG;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=V5ovi0ah;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0D5F606A338
-	for <mfd@lists.linux.dev>; Mon, 16 Nov 2026 17:59:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B198606A335;
+	Mon, 16 Nov 2026 18:16:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mVExs8nG
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1DB441F000C4;
-	Mon, 16 Nov 2026 17:59:17 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=V5ovi0ah
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B6CA01F000C4;
+	Mon, 16 Nov 2026 18:16:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794851957;
-	bh=xC488XZU6wRgf5UXlmryWfnuD62lmaRWUADMj/rppBs=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=mVExs8nGb/Bup8IjVDrWg46R/bYWYxa+wvXPTAWcwwWP8vXzlFmC2MhfgGyIRJtYO
-	 4Ju6Q2n1dhlStZpj0IRMa53BCc9IMAHKKgNu5uVnsG+/519Ke3iLV/8l6MZwJ8TVQT
-	 203CIkN/80xXAXahBSCVl6rGeUxRD1LRwjwMm0kN+DypzeeBoKgssgtYdiDqFNj+kr
-	 iYU+N6x/5JVXPM4RjGAU4857uX3b89bMZB9txhgn0t3wg68fxxvBlvTltpLgiSKJJA
-	 trSwhqyrS/LFZONE+brHuw2elP7LZLO2GK+pndN9L7VfH5eRdtgKMOYD9a0KqeINwk
-	 p0F9HiEal6zYQ==
-Message-ID: <sashiko-outbox-217472@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 9/9] pinctrl: airoha: add support of an7589 SoC
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "John Crispin" <john@phrozen.org>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261116174854.342912-10-john@phrozen.org>
-References: <20261116174854.342912-1-john@phrozen.org>
- <20261116174854.342912-10-john@phrozen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 16 Nov 2026 17:59:16 +0000
+	s=k20260515; t=1794852965;
+	bh=Pv6Z2msONZOMn5X5XcAinXRtg1l0bwQ6c+ZoL0wLzd8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=V5ovi0ahBoGhG3oLNCEMv0ZweRhbmg263fiz5Z3OEaOEe1EmkWwElr4NjaV0pBusZ
+	 U+67Z1pdlYuquNsjEp0NPddWduHHqKo+LKkPrpsT2q7gHKgpvpIvuEkDDf1/Qay2RB
+	 AI8/0Kj6NWQ08mCT8nfZX/qhbwcvRwIaVQWavWv4KxVlOo28ErPhEbHkzh/Z9b6jJi
+	 KD7qK09dM/wMxPYpOkFlNsSfsr6eq07XSEHf7AhNj3J6NX4eMhDoGASxEqAt2Q/PCH
+	 ECfBizh/XSlQuSbazX7YpvTKulAspE/JWhpc8rQiYbtQ1XCzQLvrhl6hTvTdLdKLjg
+	 tSR2LkGrA3UsQ==
+Date: Mon, 16 Nov 2026 18:15:59 +0000
+From: Conor Dooley <conor@kernel.org>
+To: John Crispin <john@phrozen.org>
+Cc: Lorenzo Bianconi <lorenzo@kernel.org>, Lee Jones <lee@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Ahmed Naseef <naseefkm@gmail.com>,
+	Benjamin Larsson <benjamin.larsson@genexis.eu>,
+	Christian Marangi <ansuelsmth@gmail.com>,
+	devicetree@vger.kernel.org, lei.dong@airoha.com,
+	Linqi.zhang@airoha.com, linux-gpio@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-mediatek@lists.infradead.org,
+	mfd@lists.linux.dev,
+	Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+	Rajeev.kumar@airoha.com, upstream@airoha.com, Weifeng.xu@airoha.com,
+	zhengping.zhang@airoha.com
+Subject: Re: [PATCH v2 5/7] dt-bindings: pinctrl: airoha: add AN7589
+Message-ID: <20261116-resolved-riot-c6a310bb2d8c@spud>
+References: <20261112185941.1316112-1-john@phrozen.org>
+ <20261112185941.1316112-6-john@phrozen.org>
+ <20261113-fame-smock-6ea3b8fadcd0@spud>
+ <b94ed5e4-cb80-4e05-9964-bb08a61aa1fd@phrozen.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,24 +72,126 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="1NzTVWXoeJIha+mg"
+Content-Disposition: inline
+In-Reply-To: <b94ed5e4-cb80-4e05-9964-bb08a61aa1fd@phrozen.org>
 
-> Add pin controller support for the Airoha AN7589. Its GPIO block is
-> the EN7581 one with a third bank, giving 74 GPIOs. Pin functions are
-> selected through a separate IOMUX block holding a 4 bit mode per pin,
-> where mode 0 is GPIO.
+--1NzTVWXoeJIha+mg
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Nov 16, 2026 at 06:47:27PM +0100, John Crispin wrote:
+> On Fri, Nov 13, 2026 at 05:40:42PM +0000, Conor Dooley wrote:
+> > As Lee requested, please split this out. Two patches, maybe even three.
 >=20
-> As on the EN7581, the pwm function is available on GPIO0 to GPIO15
-> through the GPIO flash mode register.
+> Agreed. v3 splits it into three patches.
 >=20
-> Unlike on the other SoCs, the pull and drive registers of the AN7589
-> are not known, so no pull or drive configuration is provided.
+> > Do we even need a child node here? If all this node does is
+> > gpio/pinctrl, why can the driver not bind directly to this node?
+> >
+> > What else does it do that warrants being a syscon?
 >=20
-> Reviewed-by: Lorenzo Bianconi <lorenzo@kernel.org>
-> Signed-off-by: John Crispin <john@phrozen.org>
+> The block also holds the PWM controller. Its registers interleave with
+> the GPIO ones. The PWM series adds it as a second child, as on the
+> EN7581. That series has a depency on this one so I have not posted it yet.
+>=20
+> > Otherwise, there should only be one. uart1 and uart2 should have
+> > different nodes.
+>=20
+> Agreed. v3 sets maxItems to 1. Only pcm_spi and pcie keep more, as
+> their groups carry different signals of one device.
+>=20
+> > So here, maxItems should be 1 for similar reasons.
+>=20
+> Agreed, v3 does this for i2c too.
+>=20
+> > I'm also curious about why this goes up to 74. None of the functions
+> > have 74 pins, surely?
+>=20
+> A conf node can set the same config on any set of pins. 74 is all the
+> pins. The EN7581 binding does the same with 58.
 
-Sashiko has reviewed this patch and found no issues.
+A difference in philosophy I guess - I would be grouping the pins in the
+config node by user. So that there would be something like
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261116174854.3429=
-12-1-john@phrozen.org?part=3D9
+spi1-stuff {
+	spi1-function {
+		function =3D spi
+		group =3D spi1
+	}
 
+	spi1-config1 {
+		pins =3D 1, 2
+		config1
+		config2
+	}
+
+	spi2-config2 {
+		pins =3D 3
+		config1
+	}
+}
+
+spi {
+	pinctrl-0 =3D spi1-function, spi-config1, spi-config2
+}
+
+or
+
+spi {
+	pinctrl-0 =3D spi1-stuff
+}
+
+IMO, having config nodes covering more than one "feature" doesn't really
+make sense, as you'd end up with something like:
+
+spi1-function {
+	function =3D spi
+	group =3D spi1
+}
+
+all-config1-config2 {
+	pins =3D 1, 2, 4, 5
+	config1
+	config2
+}
+
+all-config1 {
+	pins =3D 3
+	config1
+}
+
+which kinda falls apart I think when a node can request a setting for
+pins that are not part of it (in this case, that's pins 4 and 5)
+
+spi {
+	pinctrl-0 =3D spi1-function, all-config1, all-config1-config2
+}
+
+So my opinion is that the max number of items should be the size of the
+largest peripheral.
+
+What's the largest actual user on the 7581?
+	=09
+>=20
+> v3 will follow shortly.
+>=20
+>         John
+>=20
+>=20
+
+--1NzTVWXoeJIha+mg
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCavtIXwAKCRB4tDGHoIJi
+0oxXAP9igIK0RsOLK/pxL71ixgfrLAYNjRe+ecNILh7URWV9CwEAvJFQWB0vwtGw
+/lVvbbCWDcLaRjkTti8imdts7RQIMA8=
+=DA3U
+-----END PGP SIGNATURE-----
+
+--1NzTVWXoeJIha+mg--
