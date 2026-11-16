@@ -1,56 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794851576;
-	b=S2kQ9o1sn4lqBs7sgU/T4QczY9amKtXNYGFs6yBcskZd8t+vrhJSvz8ijVN3CPBcti22
-	 IsoiuHd+tmGQYPtW+qhRC8iyNNEHZWQB4aYL6tS5P5S+hfWdJuV5I4+hGj5XdgHoSHGvj
-	 HfeYTmUSZdrMGz9rvn3jqwsESrpKcb/vWvjRJZN59T2NpeJCS3zLV6hbsQNkVwCFuPp6Q
-	 Ofw+Y71PNWGdGjQRdAdASrvr0P3Yb5HWUDb6beOUvoKSry3MQK7vGvw/S+biv4G/NDgvV
-	 iU4JSCGPQqc90YO/1dNHJan9zt8bDsDxl+QKd/EcZ8WdbHjw+INCHPwt6yBmrDeSGAw==
+	t=1794851581;
+	b=Mv7gbosH262+/ywQzuYkBwlmJezotIK1K546UswH1SjBz8ScEiWy5AQZ/hJ5dzLEO6hQ
+	 PLUJ1QbCNX5Os79/Ps4pxv+ez3nP/bEPTtfHp8tbf7kFZur4nUgV6tQsw/NVEFvbOsbVj
+	 6zAnI/KmQft1+vO90TyyIpJOvy3ypqnES/Hl6oUauUK6BiCOA6UBrsJKvNDGGL+tx0Nqi
+	 vEEwIWOFfqf6FZEPZmNTPu7ZtldknIFyoVsnf4q5nzwtevJqY0mN35pKpgNRe+j1Ddapj
+	 IphBslbCQHKIL2NujYMHWQB3KOpujoXDLPb/5ZCNV3slRlSbooInkCMukKqvfnYShHQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794851576;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794851581;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=J+OLIuXnsLyS3d6jQW6jBFaer9Fd1AxrcU2BvuKBhW4=;
-	b=Q6vEneXSKpoWc8zJFRfc0ahzXACT+v1DxBYQv9WDuIARFm45Qp2xgi2eyOvCVzVuEPAZ
-	 s8J8reZH2THTqgWvHXksjK6O+Fn1mcrp/pCDegZWkbY9gTR6bKf7pGMR2trkl9j/vOz6Q
-	 gpWE6Oopu+6YioTh31LRnDNcUo5ifQoF/18xI4n7PI6EurZ22SpvuDmHMU0H7utM+9dWi
-	 mWjC5j8zeMt8UpKe4fuEJGxdPXbaisXBxmfn/EPIA+TSkd+SsSnU9cBZOjUDJ6mKb/yUv
-	 XGNtz5H7q4jNTNzAh7JEPCbM498geV6qobHTNJzTlXOqDDeFCQZZGsXaJHBIxCjUB0A==
+	bh=8SMbGL4aQrVc4c6XXmj+HmRDpI4SZo+C6XARik1/9bA=;
+	b=0nDigy0QbsfYVl7Tz2ctra3qwHd/qeg/dcnfQRSpxV+6KtFMONfoT2xEs7NjnGIO3ylC
+	 z1ur8Xu1vz7T8Cu5ZnEDOMyf9tvn/aWpyfZpnqV3zZoH15opnwiyHCYsj6qskR4YdNl4g
+	 AmmhN5HruKIV2cJsvrDrCevL4j7zRhlpX8Zg1Xyt7JhtkdiojquS1ndGAlhuAVoJISqmZ
+	 gBO2cnbljmzWJZsCIknczWS67rYI0o1we9EXihEzPUiwDO0IMVQwOniaiGoYHw0m1ExoK
+	 Nk/yzR0fAKYBwx/jRIwVa9IF2HAMCz+aRBolo8cadky8+FLEC/YhLcEHHuIKtg4ol+g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Hr4bEhFB;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="X4/jAMWr";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDC23606A884
-	for <mfd@lists.linux.dev>; Mon, 16 Nov 2026 17:52:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCB91606A88A
+	for <mfd@lists.linux.dev>; Mon, 16 Nov 2026 17:53:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Hr4bEhFB
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E8B71F000C4;
-	Mon, 16 Nov 2026 17:52:55 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=X4/jAMWr
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1BFA51F000C4;
+	Mon, 16 Nov 2026 17:53:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794851575;
-	bh=J+OLIuXnsLyS3d6jQW6jBFaer9Fd1AxrcU2BvuKBhW4=;
+	s=k20260515; t=1794851581;
+	bh=8SMbGL4aQrVc4c6XXmj+HmRDpI4SZo+C6XARik1/9bA=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Hr4bEhFBMM/h2RJt9Z6fTaoqLFDVHsJ2WsaM7N9426Th3LnzKKuUjm9HU5tJiUtwC
-	 0imjSmQWZ/ScxWq7y9gU62kyPYdTnxBrb9VVL0bTDwXDQJ89D/wXATW4mh9wDEb38Y
-	 wkw6/W9qWpBFEFl/7SGvIzxSzs2ClilHaFCNx4P4jbwAI/d/DfXrv5SE89QSocTD41
-	 HMEbATp6+dIhexYxijuyoCEQkC2DHHYMCREgi7KglRDvgaSwUfArpSGE0P762/nfbG
-	 BnF9IXFexX4WGUL/S+3AjTqsvimw8yHpMPpXXYNdQIGfn+G8NEIhaVa12UzYN/F9A+
-	 d1dI+S7m9yApw==
-Message-ID: <sashiko-outbox-217449@kernel.org>
+	b=X4/jAMWrsxrquPxHtu4+3ZaZJvV3dDZ8kWTaKnzH5UGmVVL6u3uer6s08vaOQEuL8
+	 +k1kqxKZ1JEYiWYWfym5h/XnztikLm1NQFy4UlpDhaeFZeTDtmDFPjSPDJmaSNMJ2H
+	 hMZwb12lTbV7qsBkl7Ar+s7RRisfnPblu+nmdBFYnETzrs7p7SMjCBrw6djhaWSDcI
+	 zFUIal8szyCgXRdyM/gpQKyU8ZB76P3SIVXR56HBZUzgbzWBVhVUSctIHdVmGbwul4
+	 AGMX3oODrtOGjhh9CawQ/YUoxuHt2mOn6N/xwa/Qff8b9HBUTy13RTOct0N8i2SmHo
+	 XlPa6V2Xq1zHg==
+Message-ID: <sashiko-outbox-217450@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 6/9] dt-bindings: pinctrl: airoha: add AN7589
+Subject: Re: [PATCH v3 7/9] dt-bindings: mfd: airoha: add AN7589 GPIO system
+ controller
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "John Crispin" <john@phrozen.org>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261116174854.342912-7-john@phrozen.org>
+In-Reply-To: <20261116174854.342912-8-john@phrozen.org>
 References: <20261116174854.342912-1-john@phrozen.org>
- <20261116174854.342912-7-john@phrozen.org>
+ <20261116174854.342912-8-john@phrozen.org>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Mon, 16 Nov 2026 17:52:55 +0000
+Date: Mon, 16 Nov 2026 17:53:00 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,23 +61,9 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> Document the AN7589 pin controller. It lives under the GPIO system
-> controller and selects functions through a separate IOMUX syscon,
-> referenced by the airoha,iomux phandle. Every pin is a GPIO in mode 0.
->=20
-> The AN7589 has no chip SCU dependency and the vendor SDK carries no pull
-> or drive registers for it. Groups follow the SDK naming without its _grp
-> suffix. As in the other Airoha pin controller bindings, a function names
-> a block type, such as uart or i2c, and the group selects the instance. A
-> node selects one group, except for pcm_spi and pcie, whose groups carry
-> different signals of one device. The PON groups keep the working mode
-> only: the SDK encodes the driver reset sequence as extra pinctrl states,
-> which belongs in the consumer driver.
->=20
-> The pwm function routes a PWM channel to one of GPIO0 to GPIO15, with
-> one group per pin. The pin also needs its GPIO output enabled, so conf
-> nodes allow the GPIO direction and output level. Pull and drive
-> properties are not allowed, as no registers for them are known.
+> Document the AN7589 GPIO system controller. It is a syscon with the
+> pin controller as its child node. The block also holds the PWM
+> controller, which a later series adds as a second child.
 >=20
 > Signed-off-by: John Crispin <john@phrozen.org>
 
@@ -84,5 +71,5 @@ Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261116174854.3429=
-12-1-john@phrozen.org?part=3D6
+12-1-john@phrozen.org?part=3D7
 
