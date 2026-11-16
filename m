@@ -1,58 +1,43 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.85.4
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=46.4.11.11
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794848215;
-	b=qY53Imx96VP3+TEikDwUFaeeCAhkeJ7dJ7iQZxzVYbtsM6Q9YjCI08FP1AGjTLv2oKOW
-	 MAd1AZMnbNzFP6vel87dgQNVKFVW4QbydrwbOu8i2QYcb0lHnoZgTYB+llTH/vagzf1LG
-	 9PfmYVoN5J0jYCsmYHTUp6XjXQQqXl7Oi2K/rrDnP13T1zI5VgATTvG5XITB9B7cM+SUX
-	 fZpiv8Cr4uxGKo+txGeJ4iXnlHoELTDflSCYs7O23//xXyXA0YTD+RnOK+NVfRrfLsAaR
-	 nT3pylKajZOG6hBO3vuRdtqfQdOs5us7CcJEc/9+TGxUtoRCZnt4ugxcCnL7iHFVIEw==
+	t=1794851261;
+	b=MAAROYE8AJiRdYvryT3bqQOvDOG8Nl52auQ4pBemSr/5ZPuXKLPE9TY/Lo3hr5gL373M
+	 STLlBJQxIoL0DxIUCd+eQKYJiWD1QunCpApubvNCRLtk5FLrqUBC8HTW32xt1H8CaU9aX
+	 Atwx98kmMDLq7d+nXrFDenFfcj2fhXhPya17e2KcABfcc45FPtHzfDww07GkWqR51eYiN
+	 qJOoN52PnaHGG3CiZID62hBeWjEL4/5rasMUbermDGzNHL8hFzgrz46KFZsjpG6yffrKC
+	 hetsB1y2qKf8D8t/TzKnHiBfnNFQh/AceSBSivcA2eS9/RZfBy//To0/Ko3C692gccw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794848215;
-	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Last-TLS-Session-Version;
-	bh=fXvmHmrqaT7uwzqw5wKHAzK4b6YmdKrUYQojmN7r3o8=;
-	b=MHR8UBQr4fjrcNE7uVdjA3hMVvmMaswsqwMPoCiWhM7AYtElXqr4+nwW1l6nBQt2KMTD
-	 l1O8UVfjpYz5imY5lecgkjc7v/KTrAMSEsxV9l4TwCfb9YKcl2a54m1uI/HWBoH5xoH3s
-	 PmCiqPowp2f3CYXX7HjxVx8Svo+U154xhvPul5AxN1btLvY8a1p429aEELRCkEdzlM8u8
-	 WIPSR+PSMj+BEVGkxpNI0OovRiwshqBirMw8rs4u93Iy/6He7SyRKI3zXFF6g+ij4n1j9
-	 pSIqiQgUSr1e5KlsQ/G7piPx61ZqxsLGwMSxSYCIpsoyr6nTHA7T7pCLfyFuuZx8t4w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794851261;
+	h=DMARC-Filter:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=I5eMNskrWfHY+Ao3oKQAyIDWEN4eHpIvs0Mcs5jAu0E=;
+	b=fX4zZMl8eRXlYTjOj6xVvV9+7Kx6vdq4nVat24ARl0Pf28ZZrmoNh5rFukXbljo9HhN+
+	 jF8YXCOVYmTjF/1MGeC3qc5ZRsSHICGwoS8Qn4ZbBWjG60ljZeEypzIaBcvJL5eybJXKf
+	 Pl6aikWb1ZLllJNHQqSccm90EEnkKow7bQ49G8K4rq6pm2Tzs0s7lzU/MbVO5elR8wq54
+	 KJTFI2edUl3IbFSSAsJYbLUYLmX71AX0dt7PKl5o9xzo9/h5r8vRUP8SII08Yh4rlPF9i
+	 7zhegy2c1YDRSG8nrgNVzJexnWThPjIYZCT6TrhI/pa2DAQtz9EkScbda93eREMnSvg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=bootlin.com;
-	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=Xw2hAZec;
-	arc=none smtp.remote-ip=185.246.85.4
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+	dmarc=none header.from=phrozen.org;
+	spf=pass smtp.mailfrom=phrozen.org;
+	arc=none smtp.remote-ip=46.4.11.11
+Received: from nbd.name (nbd.name [46.4.11.11])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12D01606A88D
-	for <mfd@lists.linux.dev>; Mon, 16 Nov 2026 16:56:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 12D01606A88D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=Xw2hAZec
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-03.galae.net (Postfix) with ESMTPS id 6BD7A4E4145B;
-	Mon, 16 Nov 2026 16:56:52 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 3A33E6023F;
-	Mon, 16 Nov 2026 16:56:52 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 1284711BC0F3C;
-	Mon, 16 Nov 2026 17:56:45 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1794848207; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:content-language:in-reply-to:references;
-	bh=fXvmHmrqaT7uwzqw5wKHAzK4b6YmdKrUYQojmN7r3o8=;
-	b=Xw2hAZecCTKO4IlSFWSosdZdqjUdxv6ytb39vF5n6H49JkwYw6OCqbScYgJ3Xx2kTiCuz7
-	2MXGQIB/XmuwpFj9j0rrTk2TAD5qpLeZyPWySPvWFOaYi4TnQ/K14Tiwq3b6tiRwQQbNGL
-	L1mBMZwOSQa+ANxkQiGvICuDkJk4DVCmmvgRZfZuIuZreh12C1YBXpFKeb1KjBYTyoIU9I
-	hxr48CWoLnIHXei8q3tJ47nCtaMferfzBuDEBU3BpWR+NtQJe32gGrz9g9x2mN9/Br8yBl
-	xceWNO670TkbXJ1B5Fih80OouheC+pe0XFKKzPG7TVCkz4MHWIj5ZV5p+dTXqA==
-Message-ID: <728be2c9-731e-407d-bc14-513591aefbbf@bootlin.com>
-Date: Mon, 16 Nov 2026 17:56:45 +0100
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06C92606A334;
+	Mon, 16 Nov 2026 17:47:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 06C92606A334
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=phrozen.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=phrozen.org
+Received: from [2a04:4540:1403:e6fc:39d9:16d5:775d:5525]
+	by ds12 with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.96)
+	(envelope-from <john@phrozen.org>)
+	id 1xT0ng-004GYh-1s;
+	Mon, 16 Nov 2026 18:47:28 +0100
+Message-ID: <b94ed5e4-cb80-4e05-9964-bb08a61aa1fd@phrozen.org>
+Date: Mon, 16 Nov 2026 18:47:27 +0100
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -63,33 +48,60 @@ List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 4/9] i2c: cgbc: Use plateform data to get bus ID and
- adapter name
-To: Lee Jones <lee@kernel.org>
-Cc: Andi Shyti <andi.shyti@kernel.org>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Werner Gartner <Werner.Gartner@congatec.com>, mfd@lists.linux.dev,
- linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org
-References: <20261103-cgbc-i2c-storage-devices-support-v5-0-ac11f23fae51@bootlin.com>
- <20261103-cgbc-i2c-storage-devices-support-v5-4-ac11f23fae51@bootlin.com>
- <78cf973d-3434-4f81-82be-a22f4abcfe0c@bootlin.com>
- <20261116154932.GA97865@joneslee-macbookpro.roam.internal>
-Content-Language: en-US
-From: Thomas Richard <thomas.richard@bootlin.com>
-In-Reply-To: <20261116154932.GA97865@joneslee-macbookpro.roam.internal>
+Subject: Re: [PATCH v2 5/7] dt-bindings: pinctrl: airoha: add AN7589
+To: Conor Dooley <conor@kernel.org>
+Cc: Lorenzo Bianconi <lorenzo@kernel.org>, Lee Jones <lee@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Linus Walleij <linusw@kernel.org>,
+ Bartosz Golaszewski <brgl@kernel.org>, Ahmed Naseef <naseefkm@gmail.com>,
+ Benjamin Larsson <benjamin.larsson@genexis.eu>,
+ Christian Marangi <ansuelsmth@gmail.com>, devicetree@vger.kernel.org,
+ lei.dong@airoha.com, Linqi.zhang@airoha.com, linux-gpio@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-mediatek@lists.infradead.org,
+ mfd@lists.linux.dev, Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Rajeev.kumar@airoha.com, upstream@airoha.com, Weifeng.xu@airoha.com,
+ zhengping.zhang@airoha.com
+References: <20261112185941.1316112-1-john@phrozen.org>
+ <20261112185941.1316112-6-john@phrozen.org>
+ <20261113-fame-smock-6ea3b8fadcd0@spud>
+Content-Language: en-GB
+From: John Crispin <john@phrozen.org>
+In-Reply-To: <20261113-fame-smock-6ea3b8fadcd0@spud>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
 
->> I was ready to send you the v6 (with your I2C patch) based on mfd-next,
->> but I noticed an issue with this line. In v7.4-rc2 devm_kzalloc() has
->> been replaced by devm_kzalloc_obj() (commit
->> 4dd10fbbeb9c33709edc89916e19c03c780a0751). I guess this will conflict
->> during the merge. So I don't know how to proceed. Please let me know
->> what to do.
-> 
-> Rebase your set onto v7.4-rc2 or -next.
-Ack, I'll rebase onto v7.4-rc2 as there is no tag for today on linux-next.
+On Fri, Nov 13, 2026 at 05:40:42PM +0000, Conor Dooley wrote:
+> As Lee requested, please split this out. Two patches, maybe even three.
 
-Best Regards,
-Thomas
+Agreed. v3 splits it into three patches.
+
+> Do we even need a child node here? If all this node does is
+> gpio/pinctrl, why can the driver not bind directly to this node?
+>
+> What else does it do that warrants being a syscon?
+
+The block also holds the PWM controller. Its registers interleave with
+the GPIO ones. The PWM series adds it as a second child, as on the
+EN7581. That series has a depency on this one so I have not posted it yet.
+
+> Otherwise, there should only be one. uart1 and uart2 should have
+> different nodes.
+
+Agreed. v3 sets maxItems to 1. Only pcm_spi and pcie keep more, as
+their groups carry different signals of one device.
+
+> So here, maxItems should be 1 for similar reasons.
+
+Agreed, v3 does this for i2c too.
+
+> I'm also curious about why this goes up to 74. None of the functions
+> have 74 pins, surely?
+
+A conf node can set the same config on any set of pins. 74 is all the
+pins. The EN7581 binding does the same with 58.
+
+v3 will follow shortly.
+
+        John
+
+
