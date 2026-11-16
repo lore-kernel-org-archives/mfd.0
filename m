@@ -1,57 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794870258;
-	b=GTJXrrZO0vEzowjj+lcHoQXdMnvRFEDmKkkwD34OpbRXI1Q3qAflgJ+QpRvGmK7vEq5k
-	 W2lS56qZ1fCBfhPb65ZWP/uRVs+LmNiUnipL+3LvfaMptYWx4oJDh6i3Lo4Z6x8jiNXNh
-	 N61OuJamOqg4xWHQnPM6FcPshPLf9/ujlYQF/aqxepkGPa3iYNNjVmDoBs4FbQBjoZ479
-	 x6evH6ifZ6EG7eQcAH9kNEZj/rG1ycNl0QZqMSr5wvvyW8Pxs+pmDY844w+2GdU2cZMjD
-	 m0sX+cJNdIYbbaKFYH3id0LSfyhxwNiv7W/Abq1qHoT7T9TC50cLlsENeO7fVVXqwxw==
+	t=1794872623;
+	b=Ugw0cc7vsJgNKHZVv5YcLrH9Qt/vSMGa3Pjk4pV3jVJYROHzJ+M2v/7nSPDSqFUC0LRL
+	 X2chox77+0dHnvN/aIHNYewrIMfrx68rSISxATKZChJETudjRY0Zowp5BOunhbexz0obF
+	 Zd8n2c57iYSYVOyd2aUQNk/OdR/jD5elBV0Z+1zbMV1GB8s4HLE2wzlvV3JWDHs2p3smb
+	 Z7mlEAGHMPe7YOb1TizHTapHyEXU+B/2AXJy6PsLvxIS79RqEEl01EooLMxdaBKer07CB
+	 s6L7o9fDD2ncQSJx3/fHbc/YvFw4CpEmVMflPMO1stMBuuKO1D+wUju6Gp2mlOPgGwg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794870258;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=S0acPnlP0iV4l14pkqFont0JxRMUVVKJeDeW8DxDcNc=;
-	b=stYoUpYC96m3c4euSfzxfqT0ikr6FF+jxnKSba5oEsT/acB5h0FVp87LaSrlRvq86g8n
-	 ky313DZ9/antdktpazMXIXJr2+GVYmr/uIEB6dc9RkLwemUR7dZX4XCgnWYL+fIERGhkM
-	 r5CzOgwPRIdZbCF5xcgUHnkfGlfyRkP1MMo7MRhXjnvbl2L+jjSpITkvL56HODNuT3wGw
-	 7qAI10z3TeglzoQuSP/nRHHSZo6y75iQMQP8GVm2nF7XUsc541pnUK1ZrFkHfmX9eahDI
-	 P5YetOGTYUL4PJ5Akjz54FZs3N+eI+lEo0ZvqiN413ilwM0s/sluUsapzcYEP4rLb8Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794872623;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=tE566DE9NL2ilRzS1obPqo6X//TjT5jTgHN8mNvDPfI=;
+	b=r6sIEPw8HkVnrrGWbEnPjPvS0mw6KM7rHq8efI/eQze3+nwNkbA01emGxGN5mJkbL4cS
+	 rT5kixwrv8kwrFVFrfHf/k3++DTSaM4eimAaKQUF/390lsLHP/0NYhDm9rbjE/ryAcznr
+	 Bw5q8Eu6wriS8g6vASOs/dz3o/pVXGq/YZGmr5P1MItapmWs5G6jGoTkdZkMZltLCa1+7
+	 hp4oHkAifHNSRSYCn613IukuGHIhizcGtBtFN1pGmPGTvOO6KkurRNwBxfoHdRjalNdlE
+	 a6SRC9N2Hcu6BZCKQqDGkF1OgHBgUZTvLbugG6IBaFKriWFS24IyExJRHHlBo+/821A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TFWGzYyx;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eqrb+u8R;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0FC73606A323;
-	Mon, 16 Nov 2026 23:04:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 901B0606A32C
+	for <mfd@lists.linux.dev>; Mon, 16 Nov 2026 23:43:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TFWGzYyx
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 574741F000C5;
-	Mon, 16 Nov 2026 23:04:17 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eqrb+u8R
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 680731F000CD
+	for <mfd@lists.linux.dev>; Mon, 16 Nov 2026 23:43:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794870257;
-	bh=S0acPnlP0iV4l14pkqFont0JxRMUVVKJeDeW8DxDcNc=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=TFWGzYyxvGEgfi/6lnZ/VLb1khT131zO9GI+vShC6DPINblSIjN4nb6UN/1TjKxvn
-	 E8OXYzShUMq4u6eGOktjoGvTIvV594e56+lDVjrCRMLWODC7rawt90CsbcIf7Deoua
-	 1uz5m0VZ7QfG2BTcgbfho5oD3NZoL1ZqTgWS04Xg4Rn+pDAmvKk9QDp/ep8GC9uiH7
-	 lIG3oazl0jiAx3RqbdMiQ8xJ+TMTso93EDWhDj9/P9id8yJr5lIScCYFLJ7WCGxcoM
-	 JHPtYnKPWd+AmgYc+wo/k+WB8ANju9KA31t9elBF1ldXB5NXRaimyEc7XdF8T2A4Yk
-	 QoGylNVtuYwWA==
-Message-ID: <sashiko-outbox-217846@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v4 3/4] mfd: mxs-lradc: Pass parent IRQs to child
- drivers
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Fabio Estevam" <festevam@gmail.com>
-Cc: linux-input@vger.kernel.org, mfd@lists.linux.dev, devicetree@vger.kernel.org, imx@lists.linux.dev, robh@kernel.org, conor+dt@kernel.org, Frank.Li@kernel.org, dmitry.torokhov@gmail.com, lee@kernel.org
-In-Reply-To: <20261116224803.61154-3-festevam@gmail.com>
-References: <20261116224803.61154-1-festevam@gmail.com>
- <20261116224803.61154-3-festevam@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 16 Nov 2026 23:04:16 +0000
+	s=k20260515; t=1794872623;
+	bh=tE566DE9NL2ilRzS1obPqo6X//TjT5jTgHN8mNvDPfI=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=eqrb+u8R2mS56LFGL+Cm5IYMMCqz4vxyGTiDfq5C+hwS4Ji93k/va2STXI8l5AY/d
+	 IcGT8FaIj9mV8mPdZAdP9a5re9B2DkM54Ot7+mVdC3m5xGt53/m0olioKd2LIIPdDS
+	 SEC/gh/8COtAbm/2iEikhVadaOuGod/abpf6WvYaHe0REL0UaDnUEhuB8kJBqeSn86
+	 b4U+Ohj0exE8NGGaI9FTe5RcVCsV0oOuusb4wrObn9vycHVZ31OMh2IDBuMal9dBpl
+	 mko3DcG3vVVtO+lyjNLaFG4Ve3UIjv8zIx5G3GQt3xM2g/ya/dvZFu181rVwl32+3E
+	 RbvI+4z4NcCvw==
+Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-5c1479be604so150861e87.1
+        for <mfd@lists.linux.dev>; Mon, 16 Nov 2026 15:43:43 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AL+hErFIdsPwNh08ef969doqxrV7FVl2KjaFsFvY/JxPbJJBkeorAgRMhTVZwMmux2ktWEtGJ+s=@lists.linux.dev
+X-Gm-Message-State: APuU4Z8z+K3ukgaAUrpkzPU7Y4cRViYRZ5xpfhKipdjkikW1zIYlhWED
+	LFcnvvgRKQTuseD7wGG2nVsVnveCaO+3TRwXgXZC44wfQgwoZlnTOgom51d08SRnlwfJMNps9WG
+	MIXBN5m4fUHd7JFgw2KEzXAxvhkjfafQ=
+X-Received: by 2002:a05:6512:2385:b0:5c1:4a64:ca0f with SMTP id
+ 2adb3069b0e04-5c170795cc7mr4062399e87.31.1794872621897; Mon, 16 Nov 2026
+ 15:43:41 -0800 (PST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,36 +58,61 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+References: <20261111-xg6846b-bcmbca-xrdp-reset-v4-0-17035a5e8ad2@kernel.org> <CAPx+jO9GW7e0ai2o4Ycc4BKBywTaP=7NiWk68=c2kqcD_VrgRQ@mail.gmail.com>
+In-Reply-To: <CAPx+jO9GW7e0ai2o4Ycc4BKBywTaP=7NiWk68=c2kqcD_VrgRQ@mail.gmail.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Tue, 17 Nov 2026 00:43:28 +0100
+X-Gmail-Original-Message-ID: <CAD++jL=rqD1G5vR1onTRXJ64n6O2CoiQWFO7Y6Qpctzd8wjrFg@mail.gmail.com>
+X-Gm-Features: Aa3M54ruCJqK0lxxieASqF1PArkor0hKv2Ilo3qPfjVfiTQ9FllSEn7zR_xIKUE
+Message-ID: <CAD++jL=rqD1G5vR1onTRXJ64n6O2CoiQWFO7Y6Qpctzd8wjrFg@mail.gmail.com>
+Subject: Re: [PATCH v4 0/7] BCMBCA PMB power, clock, reset and hardware
+ monitoring support
+To: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
+Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	William Zhang <william.zhang@broadcom.com>, Anand Gore <anand.gore@broadcom.com>, 
+	Kursad Oney <kursad.oney@broadcom.com>, Florian Fainelli <florian.fainelli@broadcom.com>, 
+	=?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Stephen Boyd <sboyd@kernel.org>, 
+	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
+	Guenter Roeck <linux@roeck-us.net>, Philipp Zabel <p.zabel@pengutronix.de>, 
+	Jonathan Corbet <corbet@lwn.net>, Randy Dunlap <rdunlap@infradead.org>, Ulf Hansson <ulfh@kernel.org>, 
+	Benjamin Larsson <benjamin.larsson@genexis.eu>, mfd@lists.linux.dev, 
+	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-clk@vger.kernel.org, linux-hwmon@vger.kernel.org, 
+	linux-pm@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thank you for your contribution! Sashiko AI review found 1 potential
-issue to consider:
-- [Low] mfd: mxs-lradc: commit message mismatches MMIO mapping in
-  mxs_lradc_probe()
---
+On Sat, Nov 14, 2026 at 12:25=E2=80=AFPM Ulf Hansson
+<ulf.hansson@oss.qualcomm.com> wrote:
 
-commit 7eada64ceb6fbaa203e6af701a0c04cb0afc5c33
-Author: Fabio Estevam <festevam@gmail.com>
+> > Through an MFD immutable branch once everyone ACKs the subdrivers,
+> > it will take time I guess. Queue the bindings and drivers in MFD.
+>
+>  I assume you are referring to patch1, 2 and 3?
 
-mfd: mxs-lradc: Pass parent IRQs to child drivers
+tt will be 1 and 2 in the next iteration after feedback from Rob H
+but yes.
 
-This commit resolves LRADC interrupts and maps the MMIO region in the MFD
-parent driver, sharing them with the ADC and touchscreen child drivers via
-struct mxs_lradc instead of passing child platform resources.
+> In regards to the power domain driver (patch4) at quick review it
+> looks good to me.
 
-> Resolve the interrupts with platform_get_irq() in the MFD parent and
-> store the mapped IRQs in the shared LRADC data. Drop the child IRQ
-> resources and duplicated name arrays, and have both child drivers
-> request the mapped IRQs directly. Use the MFD memory base support to
-> translate a single relative memory resource shared by both cells.
+Can I record this as Acked-by?
 
-[Severity: Low]
-Does the last sentence of this paragraph still match the code?
+> If Lee decides to host an immutable branch, just let me know so I call
+> pull it in to apply patch4.
 
-mxs_lradc_probe() maps the MMIO region once into lradc->base via
-devm_platform_ioremap_resource() and passes NULL for mem_base to
-devm_mfd_add_devices(), while both child drivers use lradc->base directly
-without any IORESOURCE_MEM resources in mxs_lradc_cells[].
+I think the usual way is to apply the lot to MFD on a branch and then
+you can pull in that to get all of the changes lock stock and barrel.
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261116224803.6115=
-4-1-festevam@gmail.com?part=3D3
+But I'm open to Lee just queueing the MFD core and bindings
+(patches 1+2) and then offer that as pull request to other subsystems
+so they pull that in and apply each one patch on top, it's a bit
+elegant like that.
+
+Lee, what works best for you?
+
+Yours,
+Linus Walleij
