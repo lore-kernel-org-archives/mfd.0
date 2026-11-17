@@ -1,83 +1,59 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.19
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.171.202.116
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794899706;
-	b=yJ+r+qiAXrpbqpak6xojix6Rpteu9lbORvclLiFQpMg1IuWRPbrXTyKwQVzdHhS6s1/R
-	 v7SY/q91W+QbBXuwqBGKwOw2qn70iOsbzWlA3LBONvCdB7vpigAlG8RMCkYPY/6iehBYN
-	 HiTxLN0VXAGtKXgAuk9WarY/uC4sXDkDwaYwrptmLP2e+MQZHIOSlB6jDvryYDJhOScOu
-	 K6m1LqBGzzXOpiJnPh1J6OCTMj8SxrwJmQTRJU77uG9dv6mhcIbfLH39r/Z7pvAS2Stg2
-	 30+HtbvLOwhBmI9jdqRCnayoAy2Ml7lj3j8ZIqsm2+HPFzU8C9aTCJDaUIx3DSpLubw==
+	t=1794908875;
+	b=mJLhYdks8ptJVWAqOYMhvOujmwLxCqEVnAzt15vSGsOTS1kTn3PYy+5P0At82TFVF3ns
+	 juo727c5+RWOVX+u1oDXZMR4dTXpzNmwSckBn/Mu32qHtRpcZpdkYra3fZ/LdcgvPtKrr
+	 0OGt6kVpLmj74c9J8ixI79OvZ7MBnB5ziVshK76/OazzV00Cw8iD+qzHf+OS5o0JTgCGh
+	 TFW2ict2tTNom3pekftQnuEfHhkUGrSDqsJLCvZjOuJbm7BDl3RWveQsP/hlZ/oL0LEqO
+	 HQcWdopPWdC91d7QrDvC/+muvsdJ2udWDvyVXkpvEhRbsSQSOQuX8HqV+nr+VcgUmXg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794899706;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
-	 Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:Organization;
-	bh=FTbJEAhqZIW4NLhm9jKEdLqW9ExXzaFWa84qqGKJy7c=;
-	b=sdPqYrobIlugm56UaURl0uE8kzEEec8Tgd+6TRLsaJl8zG6nfCSeJTf77qzDPxMq+HMJ
-	 Jz3Ic7kk6/U9Q30/fDHUx3CRad6hOA1Fx5O06QODA9hxqnFVGj6YCYko1WJTUQ/OursCb
-	 lPyyNIt4vNM8tAfRjZwLNOFV8eDmFC7FZWYtuft2dY7O0C6MQp1sBQji1Xwg4h0XAmrVp
-	 P6r83cSCQhaKQ8R0TwpMRmzAGG6abDEC8JH+ycKVwz0b+uMaUDfqZvF8tCEmTRUhWFrtB
-	 TzDnF3o3OpiSzyjBBy0hhYJvmTqAAm/dwQCbm10pwSVQ1PGB+cyB28/CBw5EYPq1Gtg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794908875;
+	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:From:Subject:
+	 Date:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Last-TLS-Session-Version;
+	bh=8vbPJqTbumBhqNcCMW5mlvCQlbvHbLgn8cK4HAuHvjk=;
+	b=ndd4sRX6Gnqlb2/UScTmfBk+9q1/19yoFn6Zdz6/kdr0EEU7W98+AXGJpkgprHDoMegp
+	 quBAIO3jKsLIL8L1Imeb6XBl0JhKqPTcoN1h1h1gRaeFvMJM9r6dtIjyJXxZQsbOwXODh
+	 5+p+XAQTO76rzTG5OXk+9+sTh3uyJYluSv2sEi+UqEl6GZFXHpn4jG4goAosh1/44p1aZ
+	 zxHKTikDDXNWQqbCepEmbeXqYRVhSYyYoIApc9iKD5Q4S2L2Utuf14SJyaj9Uk8wOz6fN
+	 jqUX0rSLUyzwmxmmkPPVQZ4uc3OokVYMwWQprKhW6RO+O1SYz25YqPkXpfvXsk6C85w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=APx97lIS;
-	arc=none smtp.remote-ip=198.175.65.19
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=bootlin.com;
+	spf=pass smtp.mailfrom=bootlin.com;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=1XoXPsti;
+	arc=none smtp.remote-ip=185.171.202.116
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E4EB606A32F
-	for <mfd@lists.linux.dev>; Tue, 17 Nov 2026 07:15:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1E4EB606A32F
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3EA5606A323
+	for <mfd@lists.linux.dev>; Tue, 17 Nov 2026 09:47:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A3EA5606A323
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=APx97lIS
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1794899705; x=1826435705;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=fZqhVkjqwdNlur7QBA2RZUDCkBynb9PS3UgexHcsD0s=;
-  b=APx97lIS/2i7RVYV77HyxH3aaQOQ5NTammwBy2NE3x0gUA67RGxtW2R1
-   l3DtJDt2hqyLpX6mqif8g+Rxo/TylUTD1Rhn3UtxLqaUvBQKpAs2lx5Ke
-   EALyy2T5I2F2EgEhMaqAlDBZ9DoRlvKSoBqnjWZ+994H85SIjZbGJ4GnS
-   mC/qZdMIzEp1Dtpgmmqx04RNaF/Pn1NjnK0v1QbknNhFo0cWAB5qVWZya
-   b/GfQe7okPkeNHYqUqD/ACXwSOMMmwH9G9m/wyjWDXt1dy+Rjmjl2se2+
-   yK1M5iZGqEaZiO6k8n6NvQi2x9hQs+aEPSDxnpGh9lGR6odfBLUol1WNj
-   A==;
-X-CSE-ConnectionGUID: yvmJjgzFTVOgSxcR/IwuXA==
-X-CSE-MsgGUID: 9igI3JFJSWOUjvXM8FEM+w==
-X-IronPort-AV: E=McAfee;i="6800,10657,11968"; a="3699547"
-X-IronPort-AV: E=Sophos;i="6.27,218,1787036400"; 
-   d="scan'208";a="3699547"
-Received: from fmviesa005.fm.intel.com ([10.60.135.145])
-  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Nov 2026 23:15:04 -0800
-X-CSE-ConnectionGUID: TMQ8AhdWQNibrVZIKm7Mng==
-X-CSE-MsgGUID: 9HT4e7rSTR+dUf2/DaWitQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,218,1787036400"; 
-   d="scan'208";a="9809880"
-Received: from ettammin-mobl3.ger.corp.intel.com (HELO localhost) ([10.245.245.254])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Nov 2026 23:15:00 -0800
-Date: Tue, 17 Nov 2026 09:14:57 +0200
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
-	Andy Shevchenko <andy@kernel.org>, Lee Jones <lee@kernel.org>,
-	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-iio@vger.kernel.org, mfd@lists.linux.dev
-Subject: Re: [PATCH v2 3/4] iio: adc: Add support for MAX8907 ADC cell
-Message-ID: <avv-8RT_btJ6dTzi@ashevche-desk.local>
-References: <20261115091120.108684-1-clamor95@gmail.com>
- <20261115091120.108684-4-clamor95@gmail.com>
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=1XoXPsti
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 50197C4EDB9;
+	Tue, 17 Nov 2026 09:47:57 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id F2D665FC81;
+	Tue, 17 Nov 2026 09:47:52 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 6C30C11BC02EE;
+	Tue, 17 Nov 2026 10:47:50 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1794908872; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding; bh=8vbPJqTbumBhqNcCMW5mlvCQlbvHbLgn8cK4HAuHvjk=;
+	b=1XoXPstiMASE/2Ht/XAH8uj7y+0eHm/trDe6kLhxppdWsouVBe3USv/55J9g2f+5k2frgY
+	b+4ckrimuue2cXzlmcdjPraqb6AD5i0FIF3JdTZpC3mD6WWeA2ouYw8U1G6Bp3+2Ghyu40
+	5enPjzGTC9JezGf+W1U/IODJNASuuCVKiJHa8rZw2SJXrEMtohruayXrjrEDzFmiyuKFOG
+	yV4e9sbhH2d3k1tponcV2XPY7Gh/unYdHQZmmIpEPJo2OAb+UH6HNcw1E993YuyS/2Wh7S
+	3lYMjZT3PwxKQAmMb1zT4O75wDjk9mV89XO87DZEuX2bkzYF5b8oTQdV/OLbpg==
+From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
+Subject: [PATCH v6 00/10] Congatec Board Controller: Add storage devices
+ support
+Date: Tue, 17 Nov 2026 10:47:40 +0100
+Message-Id: <20261117-cgbc-i2c-storage-devices-support-v6-0-bb070ad3e9aa@bootlin.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -87,111 +63,97 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261115091120.108684-4-clamor95@gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43Oy07DMBAF0F+pvMZoxo88WPEfqAvbGbeWIA52G
+ hVV+XecViKgLMjyzmjOnRvLlAJl9nK4sURTyCH2JVRPB+bOpj8RD13JTICooMaau5N1PAjH8xi
+ TKfuuXDnKPF+GIaaRW0lUOzJSCmCFGRL5cL1XvB0fOdHnpTSN6/AcFu7r/saEy/TR2ID6v3FCD
+ txTJxuNUNXoXm2M43von138YAs/iV8k4g5SFFKSN23bEJDXW1KuZLuLlIXUrbJaeus0mS2pfkg
+ EEDtIVUiyShB47Lxut6ReSQS5g9SFNA7RC+kNafxLzvP8DY3eRXgzAgAA
+X-Change-ID: 20260717-cgbc-i2c-storage-devices-support-b3ee7cea3320
+To: Lee Jones <lee@kernel.org>, Andi Shyti <andi.shyti@kernel.org>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Werner Gartner <Werner.Gartner@congatec.com>, mfd@lists.linux.dev, 
+ linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org, 
+ "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>, 
+ stable@vger.kernel.org, Sashiko <sashiko-bot@kernel.org>
+X-Mailer: b4 0.16.0
+X-Last-TLS-Session-Version: TLSv1.3
 
-On Sun, Nov 15, 2026 at 11:11:19AM +0200, Svyatoslav Ryhel wrote:
-> The MAX8907 PMIC has a dedicated ADC cell, which provides 8 ADC channels
-> with information about different parts of the power system, including the
-> battery, charger/plug, jack and thermal readings.
+This is the 6th iteration. As discussed with Lee [1] I just picked his I2C
+patch [2] (to handle the conflict) and rebased the series on top of
+next-20261116.
 
-...
+[1] https://lore.kernel.org/all/c9d26395-93f8-4e63-9cd0-586ce913931b@bootlin.com/
+[2] https://lore.kernel.org/all/20261027093306.2812695-27-lee@kernel.org/
 
-> +config MAX8907_ADC
-> +	tristate "Maxim MAX8907 ADC driver"
+Best Regards,
+Thomas
 
-Make MODULE_DESCRIPTION() to use the same text.
+Signed-off-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
+---
+Changes in v6:
+- rebased on top of next-20261116.
+- add Lee's I2C patch (PATCH 2).
+- Link to v5: https://patch.msgid.link/20261103-cgbc-i2c-storage-devices-support-v5-0-ac11f23fae51@bootlin.com
 
-> +	depends on MFD_MAX8907
-> +	help
-> +	  Say yes here to build support for 8 channel 12-bit ADC
-> +	  interface found in the Maxim MAX8907 PMIC.
-> +
-> +	  To compile this driver as a module, choose M here:
-> +	  the module will be called max8907-adc.
+Changes in v5:
+- mfd: fix error message in case we fail to get session handle.
+- fix I2C bus names earlier in the series.
+- Link to v4: https://patch.msgid.link/20261002-cgbc-i2c-storage-devices-support-v4-0-eb42e0f1df59@bootlin.com
 
-...
+Changes in v4:
+- Fix struct cgbc_i2c_platform_data comment (kernel-doc warning)
+- Move struct cgbc_i2c_platform_data from linux/platform_data/i2c-cgbc.h to
+  linux/mfd/cgbc.h
+- Use MFD_CELL_NAME macros.
+- Link to v3: https://patch.msgid.link/20260911-cgbc-i2c-storage-devices-support-v3-0-594b53fbc5ea@bootlin.com
 
-IWYU, please. + bits.h, types.h, et cetera.
+Changes in v3:
+- rebased on v7.3-rc2
+- use PLATFORM_DEVID_AUTO for child devices
+- move I2C bus and I2C device definition in the MFD driver
+- Link to v2: https://patch.msgid.link/20260811-cgbc-i2c-storage-devices-support-v2-0-3efa998e0ef5@bootlin.com
 
-> +#include <linux/iio/iio.h>
-> +#include <linux/module.h>
+Changes in v2:
+- i2c: fix typo in CGBC BIOS EEPROM label.
+- mfd: make cgbc_devs const
+- Link to v1: https://patch.msgid.link/20260804-cgbc-i2c-storage-devices-support-v1-0-fed38510671c@bootlin.com
 
-> +#include <linux/mfd/max8907.h>
+To: Thomas Richard <thomas.richard@bootlin.com>
+To: Lee Jones <lee@kernel.org>
+To: Andi Shyti <andi.shyti@kernel.org>
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+Cc: Werner Gartner <Werner.Gartner@congatec.com>
+Cc: mfd@lists.linux.dev
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-i2c@vger.kernel.org
 
-It's better to move to a separate group, as this is related to the certain HW.
-But since it's a single header I'm not too picky about it.
+---
+Lee Jones (1):
+      i2c: cgbc: Propagate hardware errors when polling read status
 
-> +#include <linux/platform_device.h>
-> +#include <linux/property.h>
-> +#include <linux/regmap.h>
+Thomas Richard (congatec GmbH) (9):
+      mfd: cgbc: Fix use of negative error code as valid session handle
+      i2c: cgbc: Use real I2C bus names
+      mfd: cgbc: Add I2C platform data
+      i2c: cgbc: Use plateform data to get bus ID and adapter name
+      mfd: cgbc: Use PLATFORM_DEVID_AUTO for child device registration
+      i2c: cgbc: Add support for fixed frequency buses
+      mfd: cgbc: Add virtual I2C bus support
+      mfd: cgbc: Add virtual storage devices on the virtual I2C bus
+      i2c: cgbc: Register known I2C devices on the bus
 
-Should be also a group for asm/byteorder.h.
+ drivers/i2c/busses/i2c-cgbc.c | 135 ++++++++++++++++--------------
+ drivers/mfd/cgbc-core.c       | 187 +++++++++++++++++++++++++++++++++++++++---
+ include/linux/mfd/cgbc.h      |  16 ++++
+ 3 files changed, 265 insertions(+), 73 deletions(-)
+---
+base-commit: 749a4de370409464cf8501ec5b2451df45c84eb4
+change-id: 20260717-cgbc-i2c-storage-devices-support-b3ee7cea3320
 
-> +#define MAX8907_TO_REG(n)			((n) & 0xff)
-> +#define MAX8907_TO_MEASURE(n)			(((n) >> 8) & 0xff)
-
-...
-
-> +enum {
-> +	TDIE, THM, ISNS, VMBATT, VBBATT, VCHG, AUX2, AUX1
-
-Leave trailing comma, but what is this? Is it HW related or pure Linux
-abstraction? In other words, is the order strict? Looking at the code
-below I think you have to initialise all of them to make the order strict.
-
-> +};
-
-...
-
-> +static const u32 max8907_default_ref[] = {
-> +	[TDIE] = 4096,
-> +	[THM] = 4096,
-> +	[ISNS] = 4096,
-> +	[VMBATT] = 8192,
-> +	[VBBATT] = 8192,
-> +	[VCHG] = 8192,
-> +	[AUX2] = 2500,
-> +	[AUX1] 4096,
-
-Funny thing, actually we used to have an interesting case in the kernel,
-id est 113ec87b0f26 ("pinctrl: npcm8xx: Fix incorrect struct npcm8xx_pincfg
-assignment").
-
-> +};
-
-...
-
-> +static int max8907_adc_init(struct regmap *regmap)
-> +{
-> +	u32 value;
-> +	int ret;
-> +
-> +	/* Enable internal voltage reference. Exact purpose of bits is not known. */
-> +	ret = regmap_update_bits(regmap, MAX8907_REG_TSC_CNFG1, GENMASK(1, 0), BIT(1));
-> +	if (ret)
-> +		return ret;
-> +
-> +	/* Check for internal reference IRQ */
-> +	ret = regmap_read_poll_timeout(regmap, MAX8907_REG_TSC_STA_INT, value,
-> +				       !(value & MAX8907_MASK_NREF_OK), 0, 1000);
-
-0? This makes it a tough loop. Needs a comment why.
-
-> +	if (ret)
-> +		return ret;
-> +
-> +	return regmap_update_bits(regmap, MAX8907_REG_ADC_SCHED,
-> +				  MAX8907_ADC_SCHED_AUTOSCH_ENABLE |
-> +				  MAX8907_ADC_SCHED_AUTOSCH_TIME,
-> +				  MAX8907_ADC_SCHED_AUTOSCH_ENABLE);
-> +}
-
--- 
-With Best Regards,
-Andy Shevchenko
-
+Best regards,
+--  
+Best Regards,
+Thomas Richard
 
