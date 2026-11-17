@@ -1,116 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.214.181
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=159.226.251.81
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794876103;
-	b=xO1o6fYTLS6zMxBM/GP4BD1dGZQ7mlRBDWD9vQISa1Lngc2c7S7NVbUgPnl2uoQgz/dL
-	 XGXKVXwaLItQ4MyzQDo1hxolXShSHh7QfjUd4DLzGCzvVRiVfK3zbLxtJw9NMvJIA9g5Y
-	 yypDPDhewb2AAlt0Cy2n9tfDQ9vxK0oRTpUYEPg/Zel3aJq4JccRGyHXKQ8+laN+3nTsb
-	 tiMzPxIgmuicMTlYvZfjgDnmHYjiOw4JlAhNlLa7qXGBpeAHlVYgKVXimp0wNMIMrMNhQ
-	 N02w/6dAvKWu+clhLRApmALdN9dTOAx5qEq0jOwSvP0w9hOLyUkXr4lo2EEKhQqN85w==
+	t=1794893106;
+	b=wipxhwiAqvPbhH5yo+JNNWi9d0XlLPKwMNhDBm9kpTL3D+OHwt+kxVp38HMCVKkvx6xO
+	 TFNLpvErDbAiGDntEdroaetaTAsEhbNkOF15AGQycD7OHD78NQdxD/QH2afhcuwquB0Qh
+	 g4RVlsi34ahtgqeYKtuDkCiBGvzGNAnJ2P6hsd0eNlmFQB6IX0o7Li8vL3r2bTQzwfKCL
+	 KNFRepMyJs/5xBvlauv4aRLutfWHTRLfcLZXXb5XXM1ywy10O+kZAIWoBLsX2to0OEWV4
+	 Kpd5Wup71G3xK7oVYalQCNcuZUwsjNycwZzQYs0aOLOB48aj99nv+puTUw2MIgCc6JA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794876103;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=JJxaAqU/N4mLE/X/C5f40TDVe8Y+8SNJEnAV6SKgDMo=;
-	b=oyVDZovTIgTPv3rpbrEXErsl5/MlV5yR7wJyigQ8IswsKJT8WsQm4NOytkmaDKfpugXE
-	 CrfM/lwoTacvFWdMFbI7r/Pr15dGbjuBrXVSnz5y/B1A1t6RmwglPynenvvbQ6ZFZ+8UM
-	 xGy5nZALPqKhuk7CUVOtrMpVnx56PA0Y6sGeV5LLjOZs9BKO8Ia8LeJtjfxp4XvdkuYaX
-	 ByTFc8ADhF9TBG1+U8ZHTKz+rYS/WrI1E09d4PXdwVMM6HCCrUcGxxKaDnqgwiJyGkSIH
-	 6EQ6n+3rxp6RzeidoyNF812ujJIJkxdyO4/vRPSGtx2zzsJggip17gtfookPiFg95Bw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794893106;
+	h=DMARC-Filter:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding:X-CM-TRANSID:
+	 X-Coremail-Antispam:X-Originating-IP:X-CM-SenderInfo;
+	bh=nAadltG0h6zZ5nCZobB19wYmsPU5qo4DEUWE6Fwn1Xs=;
+	b=jR4PSiFV1S/ZTsZF33/3Dr4VhqM5ahZ95Ymn5lRYc9Y1XBYAsoeEy8KbGvkAx7H+lrqE
+	 ORTKgBqp/sbGtCGi3uY8OB46EFg8SbyefM5hBFoIfyqDrhV6MgMU975CEGDLMFcDsEFO9
+	 GrfODZ+OvUBP4e7viWuzd35lQMliERIKCSzfaOk7Y9/FNjLPjGc3do4AjrPZFPVvP/qdh
+	 CN6oh6lTUGOa6aTTs2TneJaDEbVOIneFL+Rx8fo3nDDUqLDHj71Q9+svt0sykbzkjUZxP
+	 XnFHzI1N17mqDPlyh39KRsTTLTZGkxxUyk9TPqUN4uqioUSCR3Ow1K+Kx0GIQZNO35A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=jclark.com;
-	spf=pass smtp.mailfrom=jclark.com;
-	dkim=pass header.d=jclark-com.20260707.gappssmtp.com header.i=@jclark-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=Ilkwz5wN;
-	arc=none smtp.remote-ip=209.85.214.181
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=none header.from=iscas.ac.cn;
+	spf=pass smtp.mailfrom=iscas.ac.cn;
+	arc=none smtp.remote-ip=159.226.251.81
+Received: from cstnet.cn (smtp81.cstnet.cn [159.226.251.81])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1ECC606A31C
-	for <mfd@lists.linux.dev>; Tue, 17 Nov 2026 00:41:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A1ECC606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=jclark.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=jclark.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=jclark-com.20260707.gappssmtp.com header.i=@jclark-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=Ilkwz5wN
-Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-2efc5a60bd6so5728965ad.3
-        for <mfd@lists.linux.dev>; Mon, 16 Nov 2026 16:41:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=jclark-com.20260707.gappssmtp.com; s=20260707; t=1794876102; x=1795480902; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=JJxaAqU/N4mLE/X/C5f40TDVe8Y+8SNJEnAV6SKgDMo=;
-        b=Ilkwz5wNBMDXaMnBSoIxD5YJOaKPqXhiYtYy+UQbNXmXaSrj3HRBywBNB2YA7E6X8D
-         L+FFoKJBREt47lJjtJ6K8OHUn10ipzdLNA0XWT+3f/0YV9GX0tUTatXyD5NrJVV19Mg8
-         CtOYDYaTvpBGQ8vDPtQrRylSPaX2yPQK4++66Der6iQNksAm9CcVkhuxGczioPgW7453
-         08DMow7Z+Lf/0wvcoDXou11/TAB9toV23gYqgQIR9z/mWOWB0/NHuJPMOwaFmEWWNQOz
-         pS6FJEmsxydq5KZuW3JrjT9Wi9Xqs0A/0fZMnjDW/IXTTS2f6/YcGq+MiBxYCkUPs73N
-         kJUQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794876102; x=1795480902;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=JJxaAqU/N4mLE/X/C5f40TDVe8Y+8SNJEnAV6SKgDMo=;
-        b=r7T1FrSJKO51LchUaRn9X89IULCsrhv1zzk2llTtps70TNaONU9jKSxPUGjqbO4Du/
-         WngmEzgGNEv9OnnU4v7keLm172dIoWsHakzGpPDp+VRZON555gAmwJq5fWdQ0R44tqyS
-         q+b4vXO9oLK/iLSRSguoy0Zpt8onSaJ5zZ4H9zxsSnZNCYwCJXPcr+SoTkVxeovTbJlQ
-         iDt3TxDUZQ253aPYgA/W7xP9fbrT7tkr9kansIi3D1AOMBVzkjsN/wfkGcAq3MNi0LgT
-         AnIUtvhCjU1gh1ntOpEuahF0KjYpx3sA7/iw1uaMgbyLadpLjK8xi9g+COVm6VvqQhk6
-         2ufw==
-X-Forwarded-Encrypted: i=1; AL+hErF+BZj3gr43cAN1v2op2Nw2ixAzCf44zh5ZTmq4lW24zO6CkdjNebWmk8gaAawZJ/8q3h8=@lists.linux.dev
-X-Gm-Message-State: APuU4Z9Qkgw7elbz0zMTFXEH9caS0CQAhDiyVSPrVIBy0Dybis8kaLeJ
-	INz7e1xyOaTMgpWCnS5QEk/rQSj0eXtLvTDaT7lfdwnAkSamjeVBjpTWT+vkypar6w==
-X-Gm-Gg: AZFdTZfD0aw7OH4wVnEltqApaffzKxeHlDiSB0Snuwfdjg1eu9Xb4PZM2DmF478/0vo
-	WdJfpjCRF9tQuF0FJeZl8JQzOKz/uDHEhaaau+/GlETjsKQCHmftYnouR4+CTWsF/hVXh8kEOfr
-	sgo8I9ymT68FFLv/wzLlhf6W6rjJdxWoNtQKkF2g8b1wuETxq+b3eTZJ40ikZuTWddaMFQ+e3yb
-	npOvgX5QmIzq1E+Cjo8myLQ+bHJr1if9rzX60CSXHTR1n+AjCjofY+m9ZCVCzLuFfn4Q3dxrVjb
-	q6ZsQ4j7j3CybDDPiL0LpfsY9qR73QGy0oQTDk5Li0RjSZEPYG3SB6Zs4Iu+t/3SwaIEP0JaAs/
-	8gKkJLUKdW8j3gjcFHoLfG5JkKWvjdG96QCrthUaCOu9m24K96fuirSh54qvMoAgIOvu4XssJKC
-	bE+NnEl4IG5gffpt1X+bIMG2kpvwAsZlbDtwpIS/JnvD+MM5GOkdTc2fhjp+DyzUx/zKC3z8dNu
-	9LCDNSgJChujmSovHAVJ/3sjHcFtQXMaxQjs1QYKBTLgiRIhwwtF5sF0YRmYmDirNJ8YvMAp2+b
-	qUsHXPFeALKEEUOH5PUTglPBywdkhRNijmN7owMEgr63rrPV/3p1o9q7H0JEraW7/PzL+pdBzND
-	UmwFSDj5R4PIFMe/u6A==
-X-Received: by 2002:a17:902:f687:b0:2ed:3c11:67e with SMTP id d9443c01a7336-2ee0dad0688mr134037395ad.24.1794876101909;
-        Mon, 16 Nov 2026 16:41:41 -0800 (PST)
-Received: from cantal.lan ([58.136.72.57])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2efd76d8f08sm5594825ad.4.2026.11.16.16.41.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 16 Nov 2026 16:41:41 -0800 (PST)
-From: James Clark <jjc@jclark.com>
-To: netdev-bot+sashiko@kernel.org
-Cc: andrew+netdev@lunn.ch,
-	davem@davemloft.net,
-	edumazet@kernel.org,
-	kuba@kernel.org,
-	pabeni@redhat.com,
-	richardcochran@gmail.com,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	lee@kernel.org,
-	s-vadapalli@ti.com,
-	rogerq@kernel.org,
-	bigeasy@linutronix.de,
-	martin.kaistra@linutronix.de,
-	vadim.fedorenko@linux.dev,
-	r-sharma3@ti.com,
-	robertcnelson@gmail.com,
-	nm@ti.com,
-	vigneshr@ti.com,
-	netdev@vger.kernel.org,
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EA49606A31C
+	for <mfd@lists.linux.dev>; Tue, 17 Nov 2026 05:25:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1EA49606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iscas.ac.cn
+Received: from edelgard.fodlan.icenowy.me (unknown [112.94.102.23])
+	by APP-03 (Coremail) with SMTP id rQCowACntpcp5ftqHrw1AQ--.11450S2;
+	Tue, 17 Nov 2026 13:24:58 +0800 (CST)
+From: Icenowy Zheng <zhengxingda@iscas.ac.cn>
+To: Lee Jones <lee@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Drew Fustini <fustini@kernel.org>,
+	Guo Ren <guoren@kernel.org>,
+	Fu Wei <wefu@redhat.com>
+Cc: mfd@lists.linux.dev,
 	devicetree@vger.kernel.org,
-	mfd@lists.linux.dev,
 	linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org
-Subject: Re: [PATCH net-next 3/3] net: ethernet: ti: am65-cpts: implement PTP_SYS_OFFSET_PRECISE
-Date: Tue, 17 Nov 2026 07:41:33 +0700
-Message-ID: <20261117004133.1594972-1-jjc@jclark.com>
+	linux-riscv@lists.infradead.org,
+	Icenowy Zheng <uwu@icenowy.me>,
+	Icenowy Zheng <zhengxingda@iscas.ac.cn>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: [PATCH v2] dt-bindings: mfd: syscon: add T-Head TH1520 compatibles
+Date: Tue, 17 Nov 2026 13:24:56 +0800
+Message-ID: <20261117052456.3747585-1-zhengxingda@iscas.ac.cn>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <179446830443.2199510.10552580927894870264@kernel.org>
-References: <fd826c118aec02c06bde92ff9c20f1958c214b3d.1794284248.git.jjc@jclark.com> <179446830443.2199510.10552580927894870264@kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -121,41 +62,58 @@ List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:rQCowACntpcp5ftqHrw1AQ--.11450S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrKrWUtFWxCw1DtF45uFy8Zrb_yoWkCFbEgF
+	4xJF4Yya1xAFWrtayvqFs7JF1fJw4ak3srAw18GF43J34SvFyjqFZ7J3yYkrW8uF4fuF17
+	CF97X3y7GanrKjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUIcSsGvfJTRUUUb3xFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+	6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+	A2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
+	Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
+	0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
+	jxv20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr
+	1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxa
+	n2IY04v7MxkF7I0En4kS14v26r1q6r43MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4
+	AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE
+	17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMI
+	IF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4l
+	IxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvf
+	C2KfnxnUUI43ZEXa7VU13ku3UUUUU==
+X-CM-SenderInfo: x2kh0wp0lqwv3d6l2u1dvotugofq/
 
-> [Severity: Medium]
-> Is it safe for this driver to own the EXPBIT_SEL field of GTC_CFG0_PUSHEVT?
->
-> The register belongs to the SoC-wide GTC, not to the CPTS.
-> am65_cpts_ptp_getcrosststamp() rewrites it on every PTP_SYS_OFFSET_PRECISE
-> request. The previous value is never saved or restored, on success or on
-> error.
-[ ... ]
-> Suppose one of those consumers expects a different exported bit.
+T-Head TH1520 has multiple system controllers for the "subsystems" on
+the chip.
 
-There is no other user in the tree currently. If in the future something
-else in the kernel wants to use it, then the solution would be a small
-driver to mediate this. If there is a user outside the kernel, I am not
-sure what you would have me do about it.
+Add them to the syscon binding.
 
-> [Severity: Medium]
-> Should val be checked here, to confirm that EXPBIT_SEL now reads back as
-> AM65_CPTS_GTC_PUSH_BIT?
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Signed-off-by: Icenowy Zheng <zhengxingda@iscas.ac.cn>
+---
+Changes in v2:
+- Added Krzysztof's ACK.
+- Sorted subsystem names.
 
-I agree this would be an improvement and I will do this in v2.
+ Documentation/devicetree/bindings/mfd/syscon.yaml | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-> [Severity: Medium]
-> Should a failed syscon lookup be fatal here? A bad index just below only
-> logs an error and leaves the feature disabled.
+diff --git a/Documentation/devicetree/bindings/mfd/syscon.yaml b/Documentation/devicetree/bindings/mfd/syscon.yaml
+index 80ff0e1caca22..35c4c7c2f467a 100644
+--- a/Documentation/devicetree/bindings/mfd/syscon.yaml
++++ b/Documentation/devicetree/bindings/mfd/syscon.yaml
+@@ -126,6 +126,13 @@ properties:
+               - st,spear1340-misc
+               - stericsson,nomadik-pmu
+               - starfive,jh7100-sysmain
++              - thead,th1520-syscon-ao
++              - thead,th1520-syscon-ap
++              - thead,th1520-syscon-dsp
++              - thead,th1520-syscon-misc
++              - thead,th1520-syscon-vi
++              - thead,th1520-syscon-vo
++              - thead,th1520-syscon-vp
+               - ti,am62-opp-efuse-table
+               - ti,am62-usb-phy-ctrl
+               - ti,am625-dss-oldi-io-ctrl
+-- 
+2.56.0
 
-A ti,gtc-push phandle that doesn't resolve to a syscon is a broken
-device tree, so failing the probe is right, and it lets -EPROBE_DEFER
-through.
-
-[ ... ]
-> With CONFIG_MFD_SYSCON=n, the syscon stub returns ERR_PTR(-ENOTSUPP). Any
-> DT with ti,gtc-push would then stop Ethernet from probing.
-
-MFD_SYSCON cannot be off here: TI_K3_AM65_CPTS depends on ARCH_K3,
-which selects TI_K3_SOCINFO, which selects MFD_SYSCON.
-
-James
