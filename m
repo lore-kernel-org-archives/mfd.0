@@ -1,84 +1,84 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.54
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.43
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794933713;
-	b=mUr4JIdL+hwrM7sIt8/l+/gjjB6yS/8BbcLzQzerpssnkZNxw1cFG+Mtgd5S4o6aey16
-	 ezMJvencyFFa6+SCXoKUKvZeb6vQXGwXXVxKd3m3w6VRN0h6mUmyHlWoHQvMu4/AI6xdq
-	 F665/8fDvuxaNYS8fUcPSq3+pHsfXBD5P02gmO/5c26vFyG0a6AdqAqfEI2srBB+erkBG
-	 OfjMIueyEB4Zks7fqATKEOTjxzYKiNV0YDvlPCXcM2s9c1N0sJ+APnJkofxIMIAGbeRuX
-	 tP0SvObI36YkCZnaKqA03/Fjr3FMdie4hta8JwEM+eXZir24RgA2NCXbnR1EJ4pBMJQ==
+	t=1794933714;
+	b=p7PdfufGDNmSn925RbhJa+wOhNHSFjtSt1vKPmYzMmiJbfZFpJ+2DV2h6pKSr0BLf0z7
+	 uYa/1tk/bRBfu6EUOQTeMnKF9orbFgzmwLQlkMKLgaTl6jVZpxNNKgEofj9wn+e54yJlQ
+	 B5QzBZzHlbd9gAyK7MKggU1GGotEi1ywblKwSEwOLIZ0NGo1CejJ+VAlQo4RZqTHvaOsK
+	 7kqJdAFTeea0QGrAliUt9QRHE0g3gG1Q/Bg3LlSGSS+7d/092U2vG+oQzwq1udq5YuJuJ
+	 1D7GlVmeKCKNRjjzBTA4yTavowi+qRM2mI+ovLC6FeYFxR2aeJPsOvzKYqeFOoTnmgA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794933713;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794933714;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=sGFrWQujhzJh9uPF6notnBiKMTrdwWirz/MP50Av2KE=;
-	b=n6xd0V30YX3UvNwoIpfz6oRGWi09wPPpldWmiLEODjy/mL/gO3uzsMGMbPwwAEp0MhCc
-	 UbIz0rZpcRPFqjDU1+g/XYumC/B25M84sl9harCLntglTP06WGcCLUt0C1CHPsJyAiVu/
-	 ruIA02nbk/J6yJ8Ozq67b34S2aPgm6+FEZZ5YGM2BtSW8c9QkYh3fxfGMO67kWU2lTNl4
-	 gFRTV7tUIIx3wQZo6sRUlV5DLoMTsBYtpapH1T4CzABZfS0S5Zp+V7So7aGwrRR2f3D9q
-	 HUfVaBurC68M6l7ApkfvIxofmAFVSsrNNTXcQx2mEdYe7vabxLi9HtVNSxSz9Xx/CNg==
+	bh=RZXcrD1S7/I6W/aF1UhtK1+p0qebXOrwfnsiC5xoqRI=;
+	b=0SlKcZSt5nfiGqD069aevLHp14BMW0Jk3aYOLwHjxDOlf24N2BWPmum9l49Nr5OEJyVF
+	 bI0bk8PQrmN0waGYtdvun7fHC6DBUxPTGZUrDV3FNvQrB9dVi7UkOG9CwZ08g1JT1j07w
+	 6e9uVu61UxxCvplMY6yVchtvnF53EOm5wJBU9BGWVoOcB+pZaldWDaMLjJ1kKDXENp1C+
+	 mal6oMP6GKk6tSACNJtVF0SXM+RWZNYZHH6VrTTl5H3kqzFQYrVmuseC01XEJka5rX1IL
+	 LnXy4Z5Lbw5h1RRLDUuzFVMmqEFcOreR0Zg0tVHtwvcpz/cV7Ge4nUUgDRqGZ/5MNTA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=BdzKBYKl;
-	arc=none smtp.remote-ip=209.85.128.54
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=co3Cg8QL;
+	arc=none smtp.remote-ip=209.85.128.43
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3253D606A33D
-	for <mfd@lists.linux.dev>; Tue, 17 Nov 2026 16:41:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3253D606A33D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7776C606A882
+	for <mfd@lists.linux.dev>; Tue, 17 Nov 2026 16:41:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7776C606A882
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=BdzKBYKl
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4ac95761c85so483395e9.2
-        for <mfd@lists.linux.dev>; Tue, 17 Nov 2026 08:41:53 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=co3Cg8QL
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4bb68c197c7so1055475e9.1
+        for <mfd@lists.linux.dev>; Tue, 17 Nov 2026 08:41:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1794933712; x=1795538512; darn=lists.linux.dev;
+        d=gmail.com; s=20260707; t=1794933713; x=1795538513; darn=lists.linux.dev;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=sGFrWQujhzJh9uPF6notnBiKMTrdwWirz/MP50Av2KE=;
-        b=BdzKBYKlGB57xOfnVy/Mhi6cGVYA43mLCXWLFCekjoKmB8HsUe0+2DZd3yQtYguYjz
-         hlnhTG4xDAVVr5mpm2OlVpN71TzQJLuSXyRb5anVBvKrTcfm7rs3JkVC4T+Gk7hglOkK
-         ah2osgpCqsJbt2v7XLKRrGm7O5q0EF+nydWRmi2CIEyqt0xARZR3c6VypVoTJL6ZCixj
-         v5+kuISPysCnnQWQ05W2PfG8/Vs2nwCfDD6naSqxD61C2ID8/cOk3Qb3YNWRS2feUhmL
-         G7mcenYjIaaIWai4bEojNwuCPz+J2w7QCFBxQClpIeXgDhIn0/UEyx9pHash8d+/RcDR
-         23pA==
+        bh=RZXcrD1S7/I6W/aF1UhtK1+p0qebXOrwfnsiC5xoqRI=;
+        b=co3Cg8QLb7d3jeRiL1c11Qsa2hdbuiH/DfedWpvfFe/lvgTYNiOiED1hBaWD2Fcaku
+         IhghnY32To9q7f7csmDnUW+qxYeYjODFeURd0FmeeKwc8Tm+3CYLXTIUknYiOYJrH0e5
+         QnI0Ao6ZOfSkhZp6q4+YCgb1TyTMldzPMZObKuBx8n4dCxOaxQzLSgRzLOJftS/Edif5
+         z1iPq1Um0aqu7jLN/kW5TvmPOGOuudqQE3srciR/rrV19/F4mDCTQ+xnO3drAsFzhUCm
+         GXHqtfNESOT1LAIa/jozoYkIthS26MbhMnUBovI5BlUjnq3Qtp3VKGOeep4+ka5+6FlR
+         z/aA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1794933712; x=1795538512;
+        d=1e100.net; s=20260707; t=1794933713; x=1795538513;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to:content-type;
-        bh=sGFrWQujhzJh9uPF6notnBiKMTrdwWirz/MP50Av2KE=;
-        b=dfRiIVCdd5lZYWYZfYn8trN+j8IQN3AHr5trGsGpvDooR33O8SlQPTItsMgyYy7efy
-         vRuql/E4lPqSIuoH35/1+YBLqtV139W6NnGI7sBfuuhk0H7C2oiATUv7JyMqcgaHgxTu
-         iIqtb/YUMLSXMPby3PJJYyKHGzh4+A5FUw1yup3lW1ruCWnjm2CMISyRgTrvy/M7oEYX
-         2oGy5iYZWkPEntWKZxMBNRbYH3TVv+qsv6Ul2P5/dBRKyB5i8J0hESravUNqnXmRmFg/
-         VB0jOBiNDrOKVliJh2CrZN6c4HEia5JMqjS9QA378cPIl+EWVWKeJ5/PWF6OrjCHQDux
-         ujNQ==
-X-Forwarded-Encrypted: i=1; AL+hErE2oR7tt8A5/EtMdFS4kusBl2F6O/pPLmJh/eDuY7lBHjkV+vZw86WkcThyIMjhs/h5ld8=@lists.linux.dev
-X-Gm-Message-State: APuU4Z+W7PAw4Xhn5td9SoIEeL16+nlkN84buXizm2ZCjTRNXAzWby56
-	HVic7ldVsvQoruLDPPuO0rxvFfYc9OXgbQqHLdzIqPA8OaagT++iiWsV
-X-Gm-Gg: AYBFou3tz37dHxQzI0ZQA8UWiblAOk8ozJqsqqSVB/M7076Ulfy4HKLYfqAi7cGSFPU
-	7R0WVfG0A8bH/mGoEEwxhcTt3GtOufvVI4AgEHfj4sW//auYip2A/BkXdVNGho6ZQqaSkdzlEEw
-	z2uJDi+HKWB2BFORIWYuoU7QYWo1pn4q8prbl16IR3BrGRf2XasssL4UwwjFA95up5t8kh8FeO6
-	OsH8DsIE7ifgbSYGD+81i1l+3tiub77GEcRh8oxQe+tbbnC9nwigQYHaULx2a28bKp02Uf3hEG2
-	12Tmn3fDaSzbePFc4R5lfj8hZz/2l0PCqeQTJddaZTiJC7qjDb7J2zDQ5zDqouP0Tqoq2oltTc+
-	Qz3J24puEsu7VPYo4QYRtUsFQoXL3jwq0h5IOq6Lfx4itmDZ25BmR4NTzkrCdFAsc8Mgc9f7auY
-	Y1P4CAhuEt42EGzvfbLH+1q2h+H7+LTmv9tF1XdEmMdK3KOK/fvt7H8uNdPdRrLDsFYTt/WbYIK
-	5NoEYbeLTk9P38TIqL/GcChokIaMbZZRgmXfwUAejPHnMCXBZhO+N9SSp1NKtYC/dybVSM+WIPz
-	Z1htxJaqUqci+UHPWn2enAOXoNaifn84YopKUowjYy+Ijj6D33IdlhFCgH7GHH77kPZsfkf8mRU
-	Kd0vH7UgdTsuiLPy+q7s+70DWRe/uGUW8nTwxDfb+sItMDJ7/wek+a1E=
-X-Received: by 2002:a05:600c:3509:b0:4a1:fc98:1cb1 with SMTP id 5b1f17b1804b1-4bb55c5f579mr313862835e9.2.1794933711523;
-        Tue, 17 Nov 2026 08:41:51 -0800 (PST)
+        bh=RZXcrD1S7/I6W/aF1UhtK1+p0qebXOrwfnsiC5xoqRI=;
+        b=lG+iVYW2LWPj2Y4Dqsznuq2s8iNnoGNH9y39/AT3GeNMYwwLBYcMnCsRQFg9wFxmoF
+         J4y+j1xMVYdgBRrhzdLxvtSux/Nltx8yMl8B99ih+r5z5isp7tTYjKRUJ5tjKJ0eCiBx
+         tmZxKlvq/mHRAlWxNMRAIhwmZDeYGL0WzWnN04YRw/jaMphhdGx9sG3rj6QqiZ4Clt6o
+         xocBAiJNLFmB7KkmQcHgfD1UfD9NVVxQwlCMsM56kSO6cdUDgUOqmcf5PN+rNMnrMsJ3
+         YpSwovOGiBG6Dw12JOdaDiH5qIjR8/ygJkVbQQ5lnB7M2glV2z9p1qlc7OZQafIrtZdg
+         8X2Q==
+X-Forwarded-Encrypted: i=1; AL+hErHOGrFPHyeTJF2pP3nVJv1ihnxGhs1j/Hd0z7wKI+ej39sNVGoahpdeJDcmD9ftTsHLo/o=@lists.linux.dev
+X-Gm-Message-State: APuU4Z9+ahYPmtdAkZiDsyEX3KMKFbzJ/lR/x3wyDTVCNeuHsk6CLr9y
+	sMuuc4G5/e0Kh1pAKHtdRLIRc8vdIEuZGFbwJUOrqZZaRLGnLWmlhmMD
+X-Gm-Gg: AYBFou0vzxWDaKbiQ4UfFZ7SqAyUw5I8hD6+kTFxZOgVooGA2avXgoIAa0ymRCLKOqG
+	HhTvHBp9UQDX3OQgJKz0Mk4Z6xyF/TTnXryqcHYvQkEft1YrNUrCnbiBk5JILrJ0WVZQEICNEgk
+	RZpmKLaJo9p12ji5JibJvXbvuAxhTuxI8kN3p2kqBul+9gv8dmK486H+jnAy2wCT9fhQOeXB2ND
+	JrbqiWkVLBBIlcy0EJGzKsWSPEyeibusWm4OgD2SvFlE2T65HndPAzipWNSjpHIQemw2CYe2a8z
+	MLzaQDvKNZLI2SdGWwdSmoD2ohOvSL5g0ghPFxiUpHAmwKybJvnMGymgdgYV9TKoO0bskcEF6L/
+	IXf5amYQ4aWRAMpOMkrVlhHRj5O+S9oQhlEtOwkh8P1lOsZMkXwlRG+YxQFKahjsZZfXifYNBeY
+	6h7CT2h4mA3moUu6W1Pgdqd5VrJVE85xxILwy4D/iipGSqiPTzdiSJCReB+j23hQOaUHdJxF/wS
+	pRnhpLnmS1uwlBKmCFMRzFcrGxVEFDIFwtt/C9j9jg3I5XUGsg1BCWQkEmXOmywxLFjTWl6gvow
+	AdlTXSoOSinI1VDyn74HMXsJOC62q9jd3fs+duUOb2P40znp0z+POwVxYKDQ9iUFKHM2GCGJrkR
+	ZXk7nbELBGIvPHyXIk0cIGdV+oO56kD+gFA==
+X-Received: by 2002:a05:600c:1988:b0:4a2:1a:a116 with SMTP id 5b1f17b1804b1-4bb5e2693b0mr281411975e9.0.1794933712865;
+        Tue, 17 Nov 2026 08:41:52 -0800 (PST)
 Received: from Ansuel-XPS24.localdomain (93-34-92-103.ip49.fastwebnet.it. [93.34.92.103])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4bb78430752sm82316475e9.12.2026.11.17.08.41.49
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4bb78430752sm82316475e9.12.2026.11.17.08.41.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Nov 2026 08:41:50 -0800 (PST)
+        Tue, 17 Nov 2026 08:41:52 -0800 (PST)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Lee Jones <lee@kernel.org>,
 	Rob Herring <robh@kernel.org>,
@@ -95,9 +95,9 @@ To: Lee Jones <lee@kernel.org>,
 	devicetree@vger.kernel.org,
 	netdev@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v3 1/4] dt-bindings: net: dsa: Document support for Airoha AN8855 DSA Switch
-Date: Tue, 17 Nov 2026 17:41:28 +0100
-Message-ID: <20261117164132.47167-2-ansuelsmth@gmail.com>
+Subject: [PATCH v3 2/4] dt-bindings: net: Document support for AN8855 Switch Internal PHY
+Date: Tue, 17 Nov 2026 17:41:29 +0100
+Message-ID: <20261117164132.47167-3-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261117164132.47167-1-ansuelsmth@gmail.com>
 References: <20261117164132.47167-1-ansuelsmth@gmail.com>
@@ -112,108 +112,109 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Document support for Airoha AN8855 5-port Gigabit Switch.
+Document support for AN8855 Switch Internal PHY.
 
-It does expose the 5 Internal PHYs on the MDIO bus and each port
-can access the Switch register space by configuring the PHY page.
+Airoha AN8855 is a 5-port Gigabit Switch that expose the Internal
+PHYs on the MDIO bus.
+
+Each PHY might need to be calibrated to correctly work with the
+use of the eFUSE provided by the Switch SoC. This can be enabled by
+defining in the PHY node the NVMEM cell properties.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
 ---
- .../net/dsa/airoha,an8855-switch.yaml         | 86 +++++++++++++++++++
- 1 file changed, 86 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/net/dsa/airoha,an8855-switch.yaml
+ .../bindings/net/airoha,an8855-phy.yaml       | 83 +++++++++++++++++++
+ 1 file changed, 83 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/net/airoha,an8855-phy.yaml
 
-diff --git a/Documentation/devicetree/bindings/net/dsa/airoha,an8855-switch.yaml b/Documentation/devicetree/bindings/net/dsa/airoha,an8855-switch.yaml
+diff --git a/Documentation/devicetree/bindings/net/airoha,an8855-phy.yaml b/Documentation/devicetree/bindings/net/airoha,an8855-phy.yaml
 new file mode 100644
-index 000000000000..5ad9b9e13983
+index 000000000000..d2f86116badf
 --- /dev/null
-+++ b/Documentation/devicetree/bindings/net/dsa/airoha,an8855-switch.yaml
-@@ -0,0 +1,86 @@
++++ b/Documentation/devicetree/bindings/net/airoha,an8855-phy.yaml
+@@ -0,0 +1,83 @@
 +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
 +%YAML 1.2
 +---
-+$id: http://devicetree.org/schemas/net/dsa/airoha,an8855-switch.yaml#
++$id: http://devicetree.org/schemas/net/airoha,an8855-phy.yaml#
 +$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
-+title: Airoha AN8855 Gigabit Switch
++title: Airoha AN8855 Switch Internal PHY
 +
 +maintainers:
 +  - Christian Marangi <ansuelsmth@gmail.com>
 +
 +description: >
-+  Airoha AN8855 is a 5-port Gigabit Switch.
++  Airoha AN8855 is a 5-port Gigabit Switch that expose the Internal
++  PHYs on the MDIO bus.
 +
-+  It does expose the 5 Internal PHYs on the MDIO bus and each port
-+  can access the Switch register space by configuring the PHY page.
++  Each PHY might need to be calibrated to correctly work with the
++  use of the eFUSE provided by the Switch SoC.
 +
-+$ref: dsa.yaml#/$defs/ethernet-ports
++allOf:
++  - $ref: ethernet-phy.yaml#
++
++select:
++  properties:
++    compatible:
++      contains:
++        enum:
++          - ethernet-phy-idc0ff.0410
++  required:
++    - compatible
 +
 +properties:
-+  compatible:
-+    const: airoha,an8855-switch
++  reg:
++    maxItems: 1
++
++  nvmem-cells:
++    items:
++      - description: phandle to SoC eFUSE tx_a
++      - description: phandle to SoC eFUSE tx_b
++      - description: phandle to SoC eFUSE tx_c
++      - description: phandle to SoC eFUSE tx_d
++
++  nvmem-cell-names:
++    items:
++      - const: tx_a
++      - const: tx_b
++      - const: tx_c
++      - const: tx_d
 +
 +required:
 +  - compatible
++  - reg
++
++dependentRequired:
++  nvmem-cells: [ nvmem-cell-names ]
 +
 +unevaluatedProperties: false
 +
 +examples:
 +  - |
-+    ethernet-switch {
-+        compatible = "airoha,an8855-switch";
++    mdio {
++        #address-cells = <1>;
++        #size-cells = <0>;
 +
-+        ports {
-+            #address-cells = <1>;
-+            #size-cells = <0>;
++        ethernet-phy@1 {
++            compatible = "ethernet-phy-idc0ff.0410",
++                         "ethernet-phy-ieee802.3-c45";
 +
-+            port@0 {
-+                reg = <0>;
-+                label = "lan1";
-+                phy-mode = "internal";
-+                phy-handle = <&internal_phy1>;
-+            };
++            reg = <1>;
++        };
 +
-+            port@1 {
-+                reg = <1>;
-+                label = "lan2";
-+                phy-mode = "internal";
-+                phy-handle = <&internal_phy2>;
-+            };
++        ethernet-phy@2 {
++            compatible = "ethernet-phy-idc0ff.0410",
++                         "ethernet-phy-ieee802.3-c45";
 +
-+            port@2 {
-+                reg = <2>;
-+                label = "lan3";
-+                phy-mode = "internal";
-+                phy-handle = <&internal_phy3>;
-+            };
++            reg = <2>;
 +
-+            port@3 {
-+                reg = <3>;
-+                label = "lan4";
-+                phy-mode = "internal";
-+                phy-handle = <&internal_phy4>;
-+            };
-+
-+            port@4 {
-+                reg = <4>;
-+                label = "wan";
-+                phy-mode = "internal";
-+                phy-handle = <&internal_phy5>;
-+            };
-+
-+            port@5 {
-+                reg = <5>;
-+                label = "cpu";
-+                ethernet = <&gmac0>;
-+                phy-mode = "2500base-x";
-+
-+                fixed-link {
-+                    speed = <2500>;
-+                    full-duplex;
-+                    pause;
-+                };
-+            };
++            nvmem-cells = <&shift_sel_port0_tx_a>,
++                          <&shift_sel_port0_tx_b>,
++                          <&shift_sel_port0_tx_c>,
++                          <&shift_sel_port0_tx_d>;
++            nvmem-cell-names = "tx_a", "tx_b", "tx_c", "tx_d";
 +        };
 +    };
 -- 
