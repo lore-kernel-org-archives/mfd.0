@@ -1,54 +1,116 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.214.181
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794874266;
-	b=YeIR927M3cCrBMMDXvEIUIWPjX/hHmQS2xXbDLAlbjO0bL8D7fd4A/p82VcBJ3ZIZoLT
-	 tfGIIlKJy4TA4fBp2ASvHT9FTM1Da58RYa6+FWDZeP+nsZ5G9kpqqjvdUmFuO6+YWLuC9
-	 gAVTVPxUkUL+p836tSRN2xAWqdTjDH8DAsHvTrIf64+3YkFDffsEzZHiaMA6emuvTnZGS
-	 qZt4t2eJYOLcey8dSQ/0ZEfiTcM3FG0dpsEpZ4XIh4BRxuz5E+PQtr9tOljFP0OtIVoak
-	 q5rb7TTHgR3FFAtCAuB1SwrYHM2qfICqKNwwEdO1qbPgLI4rQKTW6UnkqUV6YBtc4KQ==
+	t=1794876103;
+	b=xO1o6fYTLS6zMxBM/GP4BD1dGZQ7mlRBDWD9vQISa1Lngc2c7S7NVbUgPnl2uoQgz/dL
+	 XGXKVXwaLItQ4MyzQDo1hxolXShSHh7QfjUd4DLzGCzvVRiVfK3zbLxtJw9NMvJIA9g5Y
+	 yypDPDhewb2AAlt0Cy2n9tfDQ9vxK0oRTpUYEPg/Zel3aJq4JccRGyHXKQ8+laN+3nTsb
+	 tiMzPxIgmuicMTlYvZfjgDnmHYjiOw4JlAhNlLa7qXGBpeAHlVYgKVXimp0wNMIMrMNhQ
+	 N02w/6dAvKWu+clhLRApmALdN9dTOAx5qEq0jOwSvP0w9hOLyUkXr4lo2EEKhQqN85w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794874266;
-	h=Received:DKIM-Signature:Received:X-Gm-Message-State:X-Received:
-	 MIME-Version:References:In-Reply-To:From:Date:
-	 X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=YjKQ2PdbHkjHFZ+hN04dl+fGzrnZtXKbmZaR+wm1jOg=;
-	b=UHx2zvFHa59oYkSh/j/0BZM/64A1BOi7IpISJzXfX1X5yrbmv21QTtRFMFSGPYbDwfaT
-	 MPRj4ejCWL5j0a8XdsNUNfS6vAHyX5AwYEqZKKANd9WTInk2vEGB8jc85P0y4XnvX2vyS
-	 I4msijrw+mpcfYUxOuamLFtWCL7tH15eCaahQnpqeoZL66STpjuetiadxD9DPvdsq7LaQ
-	 nLxXSVMNZtR+rh2Q3xRspTcXCwmI/VrAFSZdB9TwvmRODh/JxJn4L8QmCwkeIiGABegkS
-	 qCCbMpPvDhGuvK6ImKlvU6Pbobo6lapopl6tUPM0mbiWViI1muQmLDep3tVP/ZvAelQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794876103;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=JJxaAqU/N4mLE/X/C5f40TDVe8Y+8SNJEnAV6SKgDMo=;
+	b=oyVDZovTIgTPv3rpbrEXErsl5/MlV5yR7wJyigQ8IswsKJT8WsQm4NOytkmaDKfpugXE
+	 CrfM/lwoTacvFWdMFbI7r/Pr15dGbjuBrXVSnz5y/B1A1t6RmwglPynenvvbQ6ZFZ+8UM
+	 xGy5nZALPqKhuk7CUVOtrMpVnx56PA0Y6sGeV5LLjOZs9BKO8Ia8LeJtjfxp4XvdkuYaX
+	 ByTFc8ADhF9TBG1+U8ZHTKz+rYS/WrI1E09d4PXdwVMM6HCCrUcGxxKaDnqgwiJyGkSIH
+	 6EQ6n+3rxp6RzeidoyNF812ujJIJkxdyO4/vRPSGtx2zzsJggip17gtfookPiFg95Bw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QZGxqJln;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=none header.from=jclark.com;
+	spf=pass smtp.mailfrom=jclark.com;
+	dkim=pass header.d=jclark-com.20260707.gappssmtp.com header.i=@jclark-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=Ilkwz5wN;
+	arc=none smtp.remote-ip=209.85.214.181
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35F44606A330
-	for <mfd@lists.linux.dev>; Tue, 17 Nov 2026 00:11:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1ECC606A31C
+	for <mfd@lists.linux.dev>; Tue, 17 Nov 2026 00:41:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A1ECC606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=jclark.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=jclark.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QZGxqJln
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D336C1F000C6
-	for <mfd@lists.linux.dev>; Tue, 17 Nov 2026 00:11:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794874265;
-	bh=YjKQ2PdbHkjHFZ+hN04dl+fGzrnZtXKbmZaR+wm1jOg=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=QZGxqJlnFAM93hsizrM154QuW/4jTifan+hgL0/vdwLtJ7Sa3Kt9qXsYyx0Dn9IcO
-	 KBYlZmf2GmhMlpygHXpgO3oYd433qlxTMOAA4/GDa2TkY6jS5OC+SJFz5xnjtoSoDD
-	 8fKTcIZPrHMnXKlUozahNvcnL/CRVq0OyM6qaSk0EHl+0Rcv2O7gE276rln/sjy82H
-	 8V7krPMh+GTWYREisb8jxAFtqyIWTyUXxn4nFKQs5GkClcVxR/rdfjKT+oON3aHd8M
-	 Y8RSZKVka5gmPed6iQ/XR3zK+9m7fwofxSbCd/gcr12TcdNXWzuEMAi5iE29rSSHZC
-	 O2CdyMDCf+Uvg==
-Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-5c10dc41270so4321476e87.2
-        for <mfd@lists.linux.dev>; Mon, 16 Nov 2026 16:11:05 -0800 (PST)
-X-Gm-Message-State: APuU4Z8rXnpi6WamwwpLTFJ39Pg87fWonK2jDxpuBGhasCDhkRIFUL3s
-	bx5cyxCuKZ9KVn52BBgDkHtPhjvhaHn/mdA22kcy1FKKwapkdN/CCyya2UUiB+UfTZawJIkYPzk
-	VE/k820j52jGjzjnw/Haxbhqy0XagJaU=
-X-Received: by 2002:a05:6512:230e:b0:5c1:4f2b:a2ba with SMTP id
- 2adb3069b0e04-5c1709f75b9mr4513682e87.34.1794874264502; Mon, 16 Nov 2026
- 16:11:04 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=jclark-com.20260707.gappssmtp.com header.i=@jclark-com.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=Ilkwz5wN
+Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-2efc5a60bd6so5728965ad.3
+        for <mfd@lists.linux.dev>; Mon, 16 Nov 2026 16:41:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=jclark-com.20260707.gappssmtp.com; s=20260707; t=1794876102; x=1795480902; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=JJxaAqU/N4mLE/X/C5f40TDVe8Y+8SNJEnAV6SKgDMo=;
+        b=Ilkwz5wNBMDXaMnBSoIxD5YJOaKPqXhiYtYy+UQbNXmXaSrj3HRBywBNB2YA7E6X8D
+         L+FFoKJBREt47lJjtJ6K8OHUn10ipzdLNA0XWT+3f/0YV9GX0tUTatXyD5NrJVV19Mg8
+         CtOYDYaTvpBGQ8vDPtQrRylSPaX2yPQK4++66Der6iQNksAm9CcVkhuxGczioPgW7453
+         08DMow7Z+Lf/0wvcoDXou11/TAB9toV23gYqgQIR9z/mWOWB0/NHuJPMOwaFmEWWNQOz
+         pS6FJEmsxydq5KZuW3JrjT9Wi9Xqs0A/0fZMnjDW/IXTTS2f6/YcGq+MiBxYCkUPs73N
+         kJUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1794876102; x=1795480902;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=JJxaAqU/N4mLE/X/C5f40TDVe8Y+8SNJEnAV6SKgDMo=;
+        b=r7T1FrSJKO51LchUaRn9X89IULCsrhv1zzk2llTtps70TNaONU9jKSxPUGjqbO4Du/
+         WngmEzgGNEv9OnnU4v7keLm172dIoWsHakzGpPDp+VRZON555gAmwJq5fWdQ0R44tqyS
+         q+b4vXO9oLK/iLSRSguoy0Zpt8onSaJ5zZ4H9zxsSnZNCYwCJXPcr+SoTkVxeovTbJlQ
+         iDt3TxDUZQ253aPYgA/W7xP9fbrT7tkr9kansIi3D1AOMBVzkjsN/wfkGcAq3MNi0LgT
+         AnIUtvhCjU1gh1ntOpEuahF0KjYpx3sA7/iw1uaMgbyLadpLjK8xi9g+COVm6VvqQhk6
+         2ufw==
+X-Forwarded-Encrypted: i=1; AL+hErF+BZj3gr43cAN1v2op2Nw2ixAzCf44zh5ZTmq4lW24zO6CkdjNebWmk8gaAawZJ/8q3h8=@lists.linux.dev
+X-Gm-Message-State: APuU4Z9Qkgw7elbz0zMTFXEH9caS0CQAhDiyVSPrVIBy0Dybis8kaLeJ
+	INz7e1xyOaTMgpWCnS5QEk/rQSj0eXtLvTDaT7lfdwnAkSamjeVBjpTWT+vkypar6w==
+X-Gm-Gg: AZFdTZfD0aw7OH4wVnEltqApaffzKxeHlDiSB0Snuwfdjg1eu9Xb4PZM2DmF478/0vo
+	WdJfpjCRF9tQuF0FJeZl8JQzOKz/uDHEhaaau+/GlETjsKQCHmftYnouR4+CTWsF/hVXh8kEOfr
+	sgo8I9ymT68FFLv/wzLlhf6W6rjJdxWoNtQKkF2g8b1wuETxq+b3eTZJ40ikZuTWddaMFQ+e3yb
+	npOvgX5QmIzq1E+Cjo8myLQ+bHJr1if9rzX60CSXHTR1n+AjCjofY+m9ZCVCzLuFfn4Q3dxrVjb
+	q6ZsQ4j7j3CybDDPiL0LpfsY9qR73QGy0oQTDk5Li0RjSZEPYG3SB6Zs4Iu+t/3SwaIEP0JaAs/
+	8gKkJLUKdW8j3gjcFHoLfG5JkKWvjdG96QCrthUaCOu9m24K96fuirSh54qvMoAgIOvu4XssJKC
+	bE+NnEl4IG5gffpt1X+bIMG2kpvwAsZlbDtwpIS/JnvD+MM5GOkdTc2fhjp+DyzUx/zKC3z8dNu
+	9LCDNSgJChujmSovHAVJ/3sjHcFtQXMaxQjs1QYKBTLgiRIhwwtF5sF0YRmYmDirNJ8YvMAp2+b
+	qUsHXPFeALKEEUOH5PUTglPBywdkhRNijmN7owMEgr63rrPV/3p1o9q7H0JEraW7/PzL+pdBzND
+	UmwFSDj5R4PIFMe/u6A==
+X-Received: by 2002:a17:902:f687:b0:2ed:3c11:67e with SMTP id d9443c01a7336-2ee0dad0688mr134037395ad.24.1794876101909;
+        Mon, 16 Nov 2026 16:41:41 -0800 (PST)
+Received: from cantal.lan ([58.136.72.57])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2efd76d8f08sm5594825ad.4.2026.11.16.16.41.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 16 Nov 2026 16:41:41 -0800 (PST)
+From: James Clark <jjc@jclark.com>
+To: netdev-bot+sashiko@kernel.org
+Cc: andrew+netdev@lunn.ch,
+	davem@davemloft.net,
+	edumazet@kernel.org,
+	kuba@kernel.org,
+	pabeni@redhat.com,
+	richardcochran@gmail.com,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	lee@kernel.org,
+	s-vadapalli@ti.com,
+	rogerq@kernel.org,
+	bigeasy@linutronix.de,
+	martin.kaistra@linutronix.de,
+	vadim.fedorenko@linux.dev,
+	r-sharma3@ti.com,
+	robertcnelson@gmail.com,
+	nm@ti.com,
+	vigneshr@ti.com,
+	netdev@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH net-next 3/3] net: ethernet: ti: am65-cpts: implement PTP_SYS_OFFSET_PRECISE
+Date: Tue, 17 Nov 2026 07:41:33 +0700
+Message-ID: <20261117004133.1594972-1-jjc@jclark.com>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <179446830443.2199510.10552580927894870264@kernel.org>
+References: <fd826c118aec02c06bde92ff9c20f1958c214b3d.1794284248.git.jjc@jclark.com> <179446830443.2199510.10552580927894870264@kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -58,34 +120,42 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261117-xg6846b-bcmbca-xrdp-reset-v5-0-f584e8b8e696@kernel.org>
- <20261117-xg6846b-bcmbca-xrdp-reset-v5-1-f584e8b8e696@kernel.org> <sashiko-outbox-217953@kernel.org>
-In-Reply-To: <sashiko-outbox-217953@kernel.org>
-From: Linus Walleij <linusw@kernel.org>
-Date: Tue, 17 Nov 2026 01:10:52 +0100
-X-Gmail-Original-Message-ID: <CAD++jLnNALhUhekMvUxes-+Wmq+g01Tck9NNvViy+ofFSL+N4A@mail.gmail.com>
-X-Gm-Features: Aa3M54rQwu5Yk_Bv4F8GS-3F1wpvPataOkYjkIAgSEJnOZCG3CWzAbrtg66X8GU
-Message-ID: <CAD++jLnNALhUhekMvUxes-+Wmq+g01Tck9NNvViy+ofFSL+N4A@mail.gmail.com>
-Subject: Re: [PATCH v5 1/6] dt-bindings: mfd: Describe the BCM6846 PMC complex
-To: sashiko-reviews@lists.linux.dev
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, linux-clk@vger.kernel.org, 
-	linux-hwmon@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, 
-	lee@kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Tue, Nov 17, 2026 at 12:57=E2=80=AFAM <sashiko-bot@kernel.org> wrote:
->
 > [Severity: Medium]
-> As reported by Philipp Zabel on RFC [1], why are power-controller,
-> clock-controller, reset-controller, and hwmon modeled as separate
-> address-less child nodes rather than putting the provider cell properties
-> directly on the brcm,bcm6846-pmb node?
+> Is it safe for this driver to own the EXPBIT_SEL field of GTC_CFG0_PUSHEVT?
+>
+> The register belongs to the SoC-wide GTC, not to the CPTS.
+> am65_cpts_ptp_getcrosststamp() rewrites it on every PTP_SYS_OFFSET_PRECISE
+> request. The previous value is never saved or restored, on success or on
+> error.
+[ ... ]
+> Suppose one of those consumers expects a different exported bit.
 
-Parroting Sashiko.
+There is no other user in the tree currently. If in the future something
+else in the kernel wants to use it, then the solution would be a small
+driver to mediate this. If there is a user outside the kernel, I am not
+sure what you would have me do about it.
 
-This question has already been answered in earlier iterations of
-the patch.
+> [Severity: Medium]
+> Should val be checked here, to confirm that EXPBIT_SEL now reads back as
+> AM65_CPTS_GTC_PUSH_BIT?
 
-Yours,
-Linus Walleij
+I agree this would be an improvement and I will do this in v2.
+
+> [Severity: Medium]
+> Should a failed syscon lookup be fatal here? A bad index just below only
+> logs an error and leaves the feature disabled.
+
+A ti,gtc-push phandle that doesn't resolve to a syscon is a broken
+device tree, so failing the probe is right, and it lets -EPROBE_DEFER
+through.
+
+[ ... ]
+> With CONFIG_MFD_SYSCON=n, the syscon stub returns ERR_PTR(-ENOTSUPP). Any
+> DT with ti,gtc-push would then stop Ethernet from probing.
+
+MFD_SYSCON cannot be off here: TI_K3_AM65_CPTS depends on ARCH_K3,
+which selects TI_K3_SOCINFO, which selects MFD_SYSCON.
+
+James
