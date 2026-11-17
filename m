@@ -1,56 +1,54 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794873529;
-	b=dwNgMxRJlY5KFFpk1oQlEDFbEuDZBffldW5ytLGIGgQoXwfFv8Dlh8E/QD44HoP5+MUq
-	 8PC76ZWMj4KrZARbW16JYZ890zFil2GEyw2pvoUC3d9IE4j9M9q1Hilg69C0hkQlha8St
-	 7/QHYeKj1zpmEG6T4qgiO4UVsZAJRbe4fvMblUU+b6cc9sGpGcg9qCY4a7hYmlV1+34lo
-	 Iaank3TCh+9opUZUgKZ0ZOy6pBuc+GzgYIShhnGAEwYnJt4F240zHSjeui+4M95NBo/p+
-	 ZuW5PPy7cZQbk7hgIf+B0tmM82zNEELzxJbVGtBEsOFKdD1D8qfdaRbnbzpEwk6UmzQ==
+	t=1794874266;
+	b=YeIR927M3cCrBMMDXvEIUIWPjX/hHmQS2xXbDLAlbjO0bL8D7fd4A/p82VcBJ3ZIZoLT
+	 tfGIIlKJy4TA4fBp2ASvHT9FTM1Da58RYa6+FWDZeP+nsZ5G9kpqqjvdUmFuO6+YWLuC9
+	 gAVTVPxUkUL+p836tSRN2xAWqdTjDH8DAsHvTrIf64+3YkFDffsEzZHiaMA6emuvTnZGS
+	 qZt4t2eJYOLcey8dSQ/0ZEfiTcM3FG0dpsEpZ4XIh4BRxuz5E+PQtr9tOljFP0OtIVoak
+	 q5rb7TTHgR3FFAtCAuB1SwrYHM2qfICqKNwwEdO1qbPgLI4rQKTW6UnkqUV6YBtc4KQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794873529;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=59RGq2kW1TgnByOviFdbYwV11+0Zal228LPJgwrNTww=;
-	b=gYbKdqbXb7j67/mCYAnxSRFYktbyTvRdjIxzDqZu/jEDwEKkcuuBcZ9VyUQZpytBUID3
-	 6TAo5H7Rl8y5dC6X3Ibe3GwkEhhDgHyyn4lW+n4NYB6uxgLuBjpznEIfGqJo45fzQKjhM
-	 l0ofd2mJfBeLXiYm+mHvRPqDkzRH2YNxma+9J6TfLUeZcgBx0E6Bmg2Bg9UlpeMzVPilb
-	 FS9BrExJxc3QACfJl86J+RVBfTymJ9JzSZgZTstXjcE3C5QFCRjbaF38smuwOTFMzSslz
-	 o7ZPgnoO47BPAgBBeeaAVhNu7QLLMEKpCyRse6jtg3XQ7CI1Qif9RL0/cXPxola9g3A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794874266;
+	h=Received:DKIM-Signature:Received:X-Gm-Message-State:X-Received:
+	 MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=YjKQ2PdbHkjHFZ+hN04dl+fGzrnZtXKbmZaR+wm1jOg=;
+	b=UHx2zvFHa59oYkSh/j/0BZM/64A1BOi7IpISJzXfX1X5yrbmv21QTtRFMFSGPYbDwfaT
+	 MPRj4ejCWL5j0a8XdsNUNfS6vAHyX5AwYEqZKKANd9WTInk2vEGB8jc85P0y4XnvX2vyS
+	 I4msijrw+mpcfYUxOuamLFtWCL7tH15eCaahQnpqeoZL66STpjuetiadxD9DPvdsq7LaQ
+	 nLxXSVMNZtR+rh2Q3xRspTcXCwmI/VrAFSZdB9TwvmRODh/JxJn4L8QmCwkeIiGABegkS
+	 qCCbMpPvDhGuvK6ImKlvU6Pbobo6lapopl6tUPM0mbiWViI1muQmLDep3tVP/ZvAelQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Uv3JNnKb;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QZGxqJln;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B450606A323;
-	Mon, 16 Nov 2026 23:58:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35F44606A330
+	for <mfd@lists.linux.dev>; Tue, 17 Nov 2026 00:11:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Uv3JNnKb
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5F581F000C4;
-	Mon, 16 Nov 2026 23:58:48 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QZGxqJln
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D336C1F000C6
+	for <mfd@lists.linux.dev>; Tue, 17 Nov 2026 00:11:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794873528;
-	bh=59RGq2kW1TgnByOviFdbYwV11+0Zal228LPJgwrNTww=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Uv3JNnKbMP0H/wvyrv8LKPCoPxdIzKM7ToX0KAo8XwgSDeE6kwnCopQj3le5+POyD
-	 4kiJHbXrcCycQMTml07E0wbsVOpPqxGNZw1dtBrGHfC+B2CBHvf7Dv2eyLAjUMtb1p
-	 wXsHbAIvJiZiM4Pl15IAx4M6Pk9vmWTmAiZQkLs2ZFzyVetPvhVJUFDNoRPGp6VzSb
-	 /Siq+sqKQ9TiAxmeyA920jPfMlcXymcoK3Uii/GjrFKslNJ+2/V0Nq9FdIBLdNAa6X
-	 66svIvaVPaa6Jr8gn5sXBOvsHb1GamBZeSUQApyNtHvf9JdhiunJpbTDH/heAOImA0
-	 /+gt2Q/a7yOMw==
-Message-ID: <sashiko-outbox-217957@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v5 6/6] hwmon: Add Broadcom PMB PVTMON monitoring
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Linus Walleij" <linusw@kernel.org>
-Cc: mfd@lists.linux.dev, linux-hwmon@vger.kernel.org, lee@kernel.org
-In-Reply-To: <20261117-xg6846b-bcmbca-xrdp-reset-v5-6-f584e8b8e696@kernel.org>
-References: <20261117-xg6846b-bcmbca-xrdp-reset-v5-0-f584e8b8e696@kernel.org>
- <20261117-xg6846b-bcmbca-xrdp-reset-v5-6-f584e8b8e696@kernel.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 16 Nov 2026 23:58:48 +0000
+	s=k20260515; t=1794874265;
+	bh=YjKQ2PdbHkjHFZ+hN04dl+fGzrnZtXKbmZaR+wm1jOg=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=QZGxqJlnFAM93hsizrM154QuW/4jTifan+hgL0/vdwLtJ7Sa3Kt9qXsYyx0Dn9IcO
+	 KBYlZmf2GmhMlpygHXpgO3oYd433qlxTMOAA4/GDa2TkY6jS5OC+SJFz5xnjtoSoDD
+	 8fKTcIZPrHMnXKlUozahNvcnL/CRVq0OyM6qaSk0EHl+0Rcv2O7gE276rln/sjy82H
+	 8V7krPMh+GTWYREisb8jxAFtqyIWTyUXxn4nFKQs5GkClcVxR/rdfjKT+oON3aHd8M
+	 Y8RSZKVka5gmPed6iQ/XR3zK+9m7fwofxSbCd/gcr12TcdNXWzuEMAi5iE29rSSHZC
+	 O2CdyMDCf+Uvg==
+Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-5c10dc41270so4321476e87.2
+        for <mfd@lists.linux.dev>; Mon, 16 Nov 2026 16:11:05 -0800 (PST)
+X-Gm-Message-State: APuU4Z8rXnpi6WamwwpLTFJ39Pg87fWonK2jDxpuBGhasCDhkRIFUL3s
+	bx5cyxCuKZ9KVn52BBgDkHtPhjvhaHn/mdA22kcy1FKKwapkdN/CCyya2UUiB+UfTZawJIkYPzk
+	VE/k820j52jGjzjnw/Haxbhqy0XagJaU=
+X-Received: by 2002:a05:6512:230e:b0:5c1:4f2b:a2ba with SMTP id
+ 2adb3069b0e04-5c1709f75b9mr4513682e87.34.1794874264502; Mon, 16 Nov 2026
+ 16:11:04 -0800 (PST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,23 +57,35 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+References: <20261117-xg6846b-bcmbca-xrdp-reset-v5-0-f584e8b8e696@kernel.org>
+ <20261117-xg6846b-bcmbca-xrdp-reset-v5-1-f584e8b8e696@kernel.org> <sashiko-outbox-217953@kernel.org>
+In-Reply-To: <sashiko-outbox-217953@kernel.org>
+From: Linus Walleij <linusw@kernel.org>
+Date: Tue, 17 Nov 2026 01:10:52 +0100
+X-Gmail-Original-Message-ID: <CAD++jLnNALhUhekMvUxes-+Wmq+g01Tck9NNvViy+ofFSL+N4A@mail.gmail.com>
+X-Gm-Features: Aa3M54rQwu5Yk_Bv4F8GS-3F1wpvPataOkYjkIAgSEJnOZCG3CWzAbrtg66X8GU
+Message-ID: <CAD++jLnNALhUhekMvUxes-+Wmq+g01Tck9NNvViy+ofFSL+N4A@mail.gmail.com>
+Subject: Re: [PATCH v5 1/6] dt-bindings: mfd: Describe the BCM6846 PMC complex
+To: sashiko-reviews@lists.linux.dev
+Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, linux-clk@vger.kernel.org, 
+	linux-hwmon@vger.kernel.org, robh@kernel.org, conor+dt@kernel.org, 
+	lee@kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> Expose the BCM6846 die temperature and seven voltage inputs through
-> hwmon using the shared Power Management Bus (PMB) regmap.
->=20
-> Register the temperature channel with the thermal framework so
-> existing zero-cell device-tree thermal sensor references work.
->=20
-> Poll for valid samples with a bounded timeout, releasing the PMB lock
-> between reads. Report temperature in millidegrees Celsius, including
-> negative values, and voltages in millivolts.
->=20
-> Acked-by: Guenter Roeck <linux@roeck-us.net>
-> Signed-off-by: Linus Walleij <linusw@kernel.org>
+On Tue, Nov 17, 2026 at 12:57=E2=80=AFAM <sashiko-bot@kernel.org> wrote:
+>
+> [Severity: Medium]
+> As reported by Philipp Zabel on RFC [1], why are power-controller,
+> clock-controller, reset-controller, and hwmon modeled as separate
+> address-less child nodes rather than putting the provider cell properties
+> directly on the brcm,bcm6846-pmb node?
 
-Sashiko has reviewed this patch and found no issues.
+Parroting Sashiko.
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261117-xg6846b-bc=
-mbca-xrdp-reset-v5-0-f584e8b8e696@kernel.org?part=3D6
+This question has already been answered in earlier iterations of
+the patch.
 
+Yours,
+Linus Walleij
