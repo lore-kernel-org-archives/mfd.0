@@ -1,59 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.84.56
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794908886;
-	b=VTQoBd0j020+K7ep6GCsib3c7Tpbm+PJZyuvJ9V97BJxjhyHGRv7lHXh9k0y2ClcaZpR
-	 PpyL9B1Fk05TRbSe7FnG26DFrJToawHsmTaHkltoZRmUXSwq5U1U1VKdNm/5x/8Zo2CXl
-	 GYuaCfm1q35MiE2SMIlDODcJ6qKu+YNktGXZX13vPyhZmNTT437knSrKh/SxyW/J7zYyU
-	 cJwp+Fbk6obuN/uSJLtcZifMPmJmxFspjONNDGqqGlpwjTJsWu6FBNisZmzGhImfKqVcN
-	 qd059A2zX38FAPhRm9YwRrhjBawws9dpQtjU/VBw+ztixixANR2OC1QG/+TLzI7Gggg==
+	t=1794909485;
+	b=Nw6F3sZ9tFiSaAHqpLV56/CmWK37S2ZAQf2y5WGmBVDMgxf8KGjjbuq7JE2pMLpqv+z5
+	 INUae2aHKRp5uuk8BMjYWdOnNen403vrQAlKIULjdTadPKl+9T5hkOAbQZRMbA6KVcWdW
+	 iOE50PJN118E/fn3MipJhyPGF24uS2C9FTHHYHYnU6gsITpZRi926GdNuPRXLOH6AG5R+
+	 RyOpvH/hbj58zqzS61ckbRfEhQ1f+xLC11CQjXg2tDyMe65ttinnPr5NIVUd4zc4iQAAW
+	 axc/B5bD1zwR9bS9OMMIOD3RIu51+waFqURBoSFc6V/hVrrk3aK+ElUPj4AHUBo1O3g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794908886;
-	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Last-TLS-Session-Version;
-	bh=RlVbir1e9PHS2ziu2NVnoqOT7r+Itp0ONcO+u7lofsM=;
-	b=OitglQKVOlvh2UhXd6AjiNRI380t5bcQPeQjJhbUhlaqZGVDEswch+9ecYFPueMROngT
-	 ZFwtu7Oc8wOadl+kdB2mLWdL6zto6vPMW675m83TS63GH+H+qejO+byzweSBMJtJ249I4
-	 yZbcOnsNxCJ5kGtyr/m7LZqNH78eQN30mNUi1NvzBc0W9MNr9fUkY118lumkF6ROlzYYM
-	 36xRq4ZeliLJhPoImv/mpSAM8C9bzzG5HrVZlIrWVe8NUdlVTUqbvYmQSFAK6kpS2eaau
-	 1jCX5ynOEk2hjk6qIaXnzRmuZkuuylNGJKqy4Wbm1tr0wdyK6Te3a9TwFDlM41mvvGQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794909485;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=rB0he+AGSs3aANJ8Uu5SXDc77J+uhV+tJRzDDa4NWZ0=;
+	b=f8FufGLe97nP5RyMGTkq9BUzobi+11pmVfYf3hujv8troqUHY17Nz4zIoldppIjC9pM0
+	 U4uREJLQusPZbWLTT+BCXRq90BJkEN0vsMhmHg5XZ9iuQ7TN0dyxcHmNnWXMN4pq4XvUo
+	 bKWHN9QyU4uHRCWcDtypyR7wsKNOKM2osm38psm6qNMdPhUgUXAwXqbCk7NMkOGvVi6sq
+	 J4YVrNK8MDfHFZqmImxzBNnpuPS5x3Wl3gFFIJ96/V5rcv6hzYVMi3xoyq7Nh4rYuJ+Q+
+	 snDsq+QC/mSPw1+JSBdLe8phKvtBKA1vlnU9R00VWMP6cj+lmFaS2mQ+onAPAgNQsXQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=bootlin.com;
-	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=IYxaGgir;
-	arc=none smtp.remote-ip=185.246.84.56
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="YhjBUzf/";
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DD0160A383F
-	for <mfd@lists.linux.dev>; Tue, 17 Nov 2026 09:48:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8DD0160A383F
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CA58606A31C
+	for <mfd@lists.linux.dev>; Tue, 17 Nov 2026 09:58:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=IYxaGgir
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id 72A511A158C;
-	Tue, 17 Nov 2026 09:48:04 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 3FE5B5FC81;
-	Tue, 17 Nov 2026 09:48:04 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id BD4E411BC09A1;
-	Tue, 17 Nov 2026 10:48:02 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1794908883; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=RlVbir1e9PHS2ziu2NVnoqOT7r+Itp0ONcO+u7lofsM=;
-	b=IYxaGgirwY53iWU/07WrWo2TsgaDCVpM2ualKG/ah742IG7aiVl52/sPIgI86Q4CjxZCxJ
-	FIosQwfCo0/qJS83ZoQEPOeK1ObazW28+5qYoBDrhi67HqRWLWBoAJH7+Wq49TEVjPyYPI
-	5aOWRCD/CaRA6EPG/bGpOKEkx9+11173Yq68RcYgyQUz8XnAO1enQbfGPYCaz9UJLPfTC6
-	Fnm6xXJZ6OCnNJoM1mCpAb+fJwz3JP/izVHWM0CZ6PGpM/+58zWx2ltD6WJlmCYt+eYIZw
-	IpxUn97LqoVpErJ1dlzV8MmNrfF1qnQ1oHU6SHBaLdbyYYWzTtWQF24ICirZDg==
-From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
-Date: Tue, 17 Nov 2026 10:47:50 +0100
-Subject: [PATCH v6 10/10] i2c: cgbc: Register known I2C devices on the bus
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YhjBUzf/
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 101AC1F000C6;
+	Tue, 17 Nov 2026 09:58:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794909485;
+	bh=rB0he+AGSs3aANJ8Uu5SXDc77J+uhV+tJRzDDa4NWZ0=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=YhjBUzf/nydvzw+ahZ0QM6rgYWbQOW7xdAlu7QWihfoPVKnKYOgWd/xZACaEha2+X
+	 oH2NxTKPzFj+FNjJ0AW0HnoLIOKI98QrWwOHwk20DqoefIIZKWA/D2GycfgAsK4fSt
+	 F/KjHDQUui2ysT9B4kWI94BSG1cbFf9DrXbHYiRLsNxDeRDQPUCRbx8v7Li2Roqhlz
+	 YOhM/KBa/H1uTn3mKR2cFfjyUM9voVFAcV26BU19CZq8b3K9z8S1zBZbgVZuA3IhG4
+	 JMFtmtri2qAHN5PUn2Ko/qW1GkNGcVy/uXFmyDByUMBu+g2wWV1MyCkDT8w3CiFRaa
+	 bYfHh5USFG6cA==
+Message-ID: <sashiko-outbox-218554@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v6 02/10] i2c: cgbc: Propagate hardware errors when
+ polling read status
+Reply-To: sashiko-reviews@lists.linux.dev
+To: =?utf-8?b?VGhvbWFzIFJpY2hhcmQgKGNvbmdhdGVjIEdtYkgp?= <thomas.richard@bootlin.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20261117-cgbc-i2c-storage-devices-support-v6-2-bb070ad3e9aa@bootlin.com>
+References: <20261117-cgbc-i2c-storage-devices-support-v6-0-bb070ad3e9aa@bootlin.com>
+ <20261117-cgbc-i2c-storage-devices-support-v6-2-bb070ad3e9aa@bootlin.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Tue, 17 Nov 2026 09:58:04 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -62,58 +60,34 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261117-cgbc-i2c-storage-devices-support-v6-10-bb070ad3e9aa@bootlin.com>
-References: <20261117-cgbc-i2c-storage-devices-support-v6-0-bb070ad3e9aa@bootlin.com>
-In-Reply-To: <20261117-cgbc-i2c-storage-devices-support-v6-0-bb070ad3e9aa@bootlin.com>
-To: Lee Jones <lee@kernel.org>, Andi Shyti <andi.shyti@kernel.org>
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Werner Gartner <Werner.Gartner@congatec.com>, mfd@lists.linux.dev, 
- linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org, 
- "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
-X-Mailer: b4 0.16.0
-X-Last-TLS-Session-Version: TLSv1.3
 
-Register any I2C devices defined for the bus at probe time.
+> From: Lee Jones <lee@kernel.org>
+>=20
+> In cgbc_i2c_xfer_msg(), read_poll_timeout() uses the same ret variable
+> to store the polled return value of cgbc_i2c_get_status() and the
+> timeout result of the macro itself.  When cgbc_i2c_get_status() returns
+> a negative error code (such as -EIO on an I2C NACK), the loop condition
+> ret !=3D CGBC_I2C_STAT_BUSY evaluates to true and read_poll_timeout()
+> overwrites ret with 0.  The driver then issues CGBC_I2C_CMD_DATA, which
+> completes with CGBC_STATUS_CMD_READY without populating msg->buf,
+> leaving uninitialised heap memory in the caller's read buffer.
+>=20
+> Store the polled status in a separate variable, verify that it equals
+> CGBC_I2C_STAT_DAT, and check that CGBC_I2C_CMD_DATA returns the expected
+> number of bytes.
+>=20
+> Fixes: 6894f640b8f3 ("i2c: Congatec Board Controller i2c bus driver")
+> Closes: https://sashiko.dev/#/bug/linux-66cbf4b1-a219-4012-969d-236417bf4=
+19a
+> Cc: stable@vger.kernel.org
+> Reviewed-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
+> Tested-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
+> Signed-off-by: Lee Jones <lee@kernel.org>
+> Signed-off-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
 
-Signed-off-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
----
- drivers/i2c/busses/i2c-cgbc.c | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+Sashiko has reviewed this patch and found no issues.
 
-diff --git a/drivers/i2c/busses/i2c-cgbc.c b/drivers/i2c/busses/i2c-cgbc.c
-index c523ffdc22f2..13ec160ad092 100644
---- a/drivers/i2c/busses/i2c-cgbc.c
-+++ b/drivers/i2c/busses/i2c-cgbc.c
-@@ -356,7 +356,7 @@ static int cgbc_i2c_probe(struct platform_device *pdev)
- 	struct cgbc_device_data *cgbc = dev_get_drvdata(dev->parent);
- 	struct cgbc_i2c_platform_data *pdata;
- 	struct cgbc_i2c_data *i2c;
--	int ret;
-+	int ret, i;
- 
- 	i2c = devm_kzalloc_obj(dev, *i2c);
- 	if (!i2c)
-@@ -385,7 +385,15 @@ static int cgbc_i2c_probe(struct platform_device *pdev)
- 	if (ret)
- 		return dev_err_probe(i2c->dev, ret, "Failed to get I2C bus frequency");
- 
--	return i2c_add_numbered_adapter(&i2c->adap);
-+	ret = i2c_add_numbered_adapter(&i2c->adap);
-+	if (ret)
-+		return ret;
-+
-+	/* Add known devices to the bus */
-+	for (i = 0; i < pdata->nb_devices; i++)
-+		i2c_new_client_device(&i2c->adap, pdata->devices + i);
-+
-+	return 0;
- }
- 
- static void cgbc_i2c_remove(struct platform_device *pdev)
-
--- 
-2.53.0
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261117-cgbc-i2c-s=
+torage-devices-support-v6-0-bb070ad3e9aa@bootlin.com?part=3D2
 
