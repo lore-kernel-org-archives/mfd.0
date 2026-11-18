@@ -1,67 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795025830;
-	b=l9H6eHxP0YuY8OOzcsMSyEjN/qZFTVTX4EZfZI0HMWB27Whf0mIVHUwqM8rARaEmwW3p
-	 73Y0SpaLUHJpVvUqh6PObmLcfC25QoHIB+8sc14FFov5uxHeRMiVCFYqwHLgeeOy3nP5P
-	 d634OXGczfK+V8ZV7BDel2KX5scIBCUCsTfUAjGijFvaBR0ruSn+579dWxyQ2rClly3Z3
-	 JJO62VHTt7KMD7pY391CqrsczDX3ZFJT+o0GNo/qDVXzUOG8w0Z6N69FdNmCFns16x5S+
-	 eAL8wHdxQ4huu4q0VEnr6TblaAKe3klKQrhuJZxrtK2xds6B+4u9i5YxRiBFOZUtKYQ==
+	t=1795026164;
+	b=5rnAS9yJgcjjTyXFqzp+ASiJCJcSdJ3MDGTp4KLwTVjde9JN48rnqVgphk+Zq+yNarTP
+	 7WZdF7S5w6jSSIutUwpy44WEYZIOZqnmMdBg+/K97L1LBCLJqSy9PF/xxHgdTRmYNLZdw
+	 wuLuRVi/2s8BnMzlBqxIKDIQAc54NQCdkpkhWajbg/S7UeEh7GTxu6F7w8jSyuIjucJM1
+	 +riWt0yQuwxqad/ViIG0A2UNmEvm90c9rZJkXM3EGCoDqib76GgHpGG+ewQVyTwnrTbPO
+	 o5w/IWUjzfrirjjwYn02lciqyqH2ju1bU3gN8F0On0sJMw0n6btOUlS5GE4Fr1shzMg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795025830;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795026164;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=43NE97/+suR2lvMlOlQq/OVozCS12mum69E+yjyBLwU=;
-	b=N5vM4n41nYQ9ztR9cntYd0CakmXz623sDQtInVgmds93ZVi3u0WPHDrzd3SSOfKDrXPz
-	 N1nxnyW0gPryUq+7PbLAe0tAS23XcrB0wxCSH5q2KkADiQyCeQGZb7qEDFB9vwlju0ViZ
-	 zKD/MUCsaET8b2xH6E0umsUXW7K0bqY9OpDb9n4WAzEIl0Q+iwCVHmWYvLU0dpQ4JMKfT
-	 gRclPEFqUPixNpBqV56tFdeJFV+BO33ZcKzzzSh5PjBYFDJmGaW9pS97+MbeyEMppGcK7
-	 eOmN0ix9WwQyMRwl9C6IAScZrdfRC3oX9N+pFPktgF0aDuLf0OZF2fonxXTNlMbnBFQ==
+	bh=J7vdS07rOVMmeJWGjnXjAQm2E14T2hLPt/YVGYzgVb0=;
+	b=0bFi3aZglDRxhD9iieDLqSzMVbYhO6G/Mg0eFe8GxV4MCQsFTsAWNjGHpggNyRYrEYrU
+	 wht3ZYWPiROJi3ey6vPc3g+jBgYWNQHWmq7jq51gtLGdGv500JYKd7AsOr1JUZTMXT/VA
+	 xw+pb/nm+fzEw+YU/iBbdRADkW3H2FodnVY0QYFUdSULpJBXruDI+yqPeUQz81XJtGX0A
+	 48I/1NDlbfi+ocky/7RjsXf9001OwDqPglmud0cZwrPP5Crk0vW6OHiRymlq2o98XThdl
+	 +pEzIOQ1+kuGYJ3BL4MlLa3Z/ylaDWmIIxmfygjKlyZln5dT8+5T+fK/48tHkJzC0gQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ESzuzTBO;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=a4mBjuEL;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5C28606A32C;
-	Wed, 18 Nov 2026 18:17:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C729560A260F;
+	Wed, 18 Nov 2026 18:22:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ESzuzTBO
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A8931F000C6;
-	Wed, 18 Nov 2026 18:17:05 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=a4mBjuEL
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 067AD1F000C7;
+	Wed, 18 Nov 2026 18:22:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795025829;
-	bh=43NE97/+suR2lvMlOlQq/OVozCS12mum69E+yjyBLwU=;
+	s=k20260515; t=1795026164;
+	bh=J7vdS07rOVMmeJWGjnXjAQm2E14T2hLPt/YVGYzgVb0=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=ESzuzTBOdkG4ZukOFhNH6zujywousEuGxMY42b71Y6toogP16WegXnUnOOwAu2xZM
-	 94LZk5i9vZhTnQXMXusP42QNdAlAe9KShFKOVk+B+6bhewI2T+RxcPnL/YG8kc0AXz
-	 2CM5e3dLzcfJeAeLi4ajfCEs0OgeRZdhvp0phDi97Jad8vI5sdxu2UG2Veh0u6eDEi
-	 EixE7c/90DvlK3vM7prJB2HR0cHe/IPJOWqcXbDCf5E3++orBQyflIVHoTC3fDAJD5
-	 Qx4f8tr5ICkQEvJf4wnJbU21ZSvJhLcYj8DtScqMT/nkgLgm7ZWIzbis6+ubU2ux/A
-	 MzFijBjpm1v4Q==
-Date: Wed, 18 Nov 2026 18:17:03 +0000
-From: Conor Dooley <conor@kernel.org>
-To: John Crispin <john@phrozen.org>
-Cc: Lorenzo Bianconi <lorenzo@kernel.org>, Lee Jones <lee@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Ahmed Naseef <naseefkm@gmail.com>,
-	Benjamin Larsson <benjamin.larsson@genexis.eu>,
-	Christian Marangi <ansuelsmth@gmail.com>,
-	devicetree@vger.kernel.org, lei.dong@airoha.com,
-	Linqi.zhang@airoha.com, linux-gpio@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-mediatek@lists.infradead.org,
-	mfd@lists.linux.dev,
-	Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
-	Rajeev.kumar@airoha.com, upstream@airoha.com, Weifeng.xu@airoha.com,
-	zhengping.zhang@airoha.com
-Subject: Re: [PATCH v3 6/9] dt-bindings: pinctrl: airoha: add AN7589
-Message-ID: <20261118-refried-storm-d43378dd6a28@spud>
-References: <20261116174854.342912-1-john@phrozen.org>
- <20261116174854.342912-7-john@phrozen.org>
+	b=a4mBjuELonYMPG9I5byBU1DzNzPQHFF5s+YO86vHPZ/HdbbVV0pM2ml5FPunkPYIv
+	 uWX3v3le9n6SyLOl6pW85XNAaIrRaNClXzxNiiZ6QMpDiBsND7EkOVuEd2FZu/Mdh4
+	 WrQ24gKgbj5kki/2qSNBGoXrLqXkSbewHc9nXGSSQkbmqO1HnpJ8VSzeJq8D4DM4ql
+	 6U35wEKQoj/mF8JDF+8TwZzoWd+fAzAlHmrFyGr/R4AXywRVc88JPkjGFTKlOT68aX
+	 Ys53b+NNHOU40kWEfRNgUNVoVIvhRdtl/LafwIwQpTWKVGgTvaEaBnbqoWsBpOGGrg
+	 VUAc5+a58sEsA==
+Date: Wed, 18 Nov 2026 18:22:40 +0000
+From: Lee Jones <lee@kernel.org>
+To: shao.mingyin@zte.com.cn
+Cc: mfd@lists.linux.dev, tony@atomide.com, linux-omap@vger.kernel.org,
+	tharvey@gateworks.com, support.opensource@diasemi.com,
+	patches@opensource.cirrus.com, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 5/5] mfd: gateworks-gsc: Check firmware CRC reads for
+ errors
+Message-ID: <20261118182240.GH98456@joneslee-macbookpro.roam.internal>
+References: <202611071607376342uPiYA9rHRC7ZI9Ix-8xh@zte.com.cn>
+ <20261107160748370uUkky_wRKP7vtnKU1uRKZ@zte.com.cn>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -71,59 +59,52 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="Nod0t4s8ldmFfdkU"
-Content-Disposition: inline
-In-Reply-To: <20261116174854.342912-7-john@phrozen.org>
-
---Nod0t4s8ldmFfdkU
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20261107160748370uUkky_wRKP7vtnKU1uRKZ@zte.com.cn>
 
-On Mon, Nov 16, 2026 at 06:48:51PM +0100, John Crispin wrote:
-> Document the AN7589 pin controller. It lives under the GPIO system
-> controller and selects functions through a separate IOMUX syscon,
-> referenced by the airoha,iomux phandle. Every pin is a GPIO in mode 0.
->=20
-> The AN7589 has no chip SCU dependency and the vendor SDK carries no pull
-> or drive registers for it. Groups follow the SDK naming without its _grp
-> suffix. As in the other Airoha pin controller bindings, a function names
-> a block type, such as uart or i2c, and the group selects the instance. A
-> node selects one group, except for pcm_spi and pcie, whose groups carry
-> different signals of one device. The PON groups keep the working mode
-> only: the SDK encodes the driver reset sequence as extra pinctrl states,
-> which belongs in the consumer driver.
->=20
-> The pwm function routes a PWM channel to one of GPIO0 to GPIO15, with
-> one group per pin. The pin also needs its GPIO output enabled, so conf
-> nodes allow the GPIO direction and output level. Pull and drive
-> properties are not allowed, as no registers for them are known.
->=20
-> Signed-off-by: John Crispin <john@phrozen.org>
+On Sat, 07 Nov 2026, shao.mingyin@zte.com.cn wrote:
+
+> From: Shao Mingyin <shao.mingyin@zte.com.cn>
+> 
+> gsc_probe() checks the return value of the GSC_FW_VER regmap_read() but
+> the two reads of GSC_FW_CRC just below it are not checked.  On an I2C
+> error regmap_read() leaves "reg" holding the value of the previous
+> successful read (the firmware version, or the CRC low byte), so
+> gsc->fwcrc ends up with a wrong value that is later printed as the
+> firmware revision, and the error is silently ignored.
+> 
+> Check both CRC reads and fail the probe with -EIO, matching the handling
+> of the version read above.
+> 
+> Fixes: d85234994b2f ("mfd: Add Gateworks System Controller core driver")
+> Signed-off-by: Shao Mingyin <shao.mingyin@zte.com.cn>
 > ---
-> Changes in v3:
-> - Move the IOMUX syscon compatible and the GPIO system controller to
->   patches of their own (Lee, Conor).
-> - Allow one group per node, except for pcm_spi and pcie, whose groups
->   carry different signals of one device (Conor).
-> - Fix the uart5 example, which listed uart5 and uart5_full together.
+> diff --git a/drivers/mfd/gateworks-gsc.c b/drivers/mfd/gateworks-gsc.c
+> index a3301502ce6a..1d697e82ea29 100644
+> --- a/drivers/mfd/gateworks-gsc.c
+> +++ b/drivers/mfd/gateworks-gsc.c
+> @@ -219,9 +219,11 @@ static int gsc_probe(struct i2c_client *client)
+>  		return -EIO;
+>  	gsc->fwver = reg;
+>  
+> -	regmap_read(gsc->regmap, GSC_FW_CRC, &reg);
+> +	if (regmap_read(gsc->regmap, GSC_FW_CRC, &reg))
+> +		return -EIO;
 
-As discussed elsewhere,=20
-pw-bot: changes-requested
+Again, I'd rather you didn't put functions in if() statements.
 
-Thanks,
-Conor.
+But worse, you're hiding the real error and forcing -EIO.
 
---Nod0t4s8ldmFfdkU
-Content-Type: application/pgp-signature; name=signature.asc
+Better to propagate the error instead.
 
------BEGIN PGP SIGNATURE-----
+>  	gsc->fwcrc = reg;
+> -	regmap_read(gsc->regmap, GSC_FW_CRC + 1, &reg);
+> +	if (regmap_read(gsc->regmap, GSC_FW_CRC + 1, &reg))
+> +		return -EIO;
+>  	gsc->fwcrc |= reg << 8;
+>  
+>  	gsc->i2c_hwmon = devm_i2c_new_dummy_device(dev, client->adapter,
 
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCav3rnwAKCRB4tDGHoIJi
-0mgMAQCtXqMjFyJDkPv8x2z7GuoGiMd4YO4oxN1j6Y64gK6v7wD/ctkEr5B5wNU4
-UN8LKSfygbDfpSW3r7urO7YQwtw7bAQ=
-=apU9
------END PGP SIGNATURE-----
-
---Nod0t4s8ldmFfdkU--
+-- 
+Lee Jones
