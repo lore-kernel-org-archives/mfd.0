@@ -1,67 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795015434;
-	b=AxGom84yK/umtKyI2Ycd+PxJTelBB+8j2GQ9ATgUibOB2j46MS4509uR1PoNhUTEWE+r
-	 hHUwtESGaFEV/rkPWEVGUm4BNLgTpwFPHATRCr4ghWPC9r/h+MloNSoldDWNRaet9I+jw
-	 aIpR5Eqi/LEumMvaI9aTQx/1UUogOXFjl0CdxOmjKXjBHkfG9cFhr2qaB+6ctSJv6X3CK
-	 zsVkKELOa9FXNK6EaTcsfttrGYpiQwBM9/DGXZB6fCM7qau0Zju1K5O75rZY32WuqLoyE
-	 gXVFMoAiLTE+tn0kncB9tNIpvWt5P5mGFq6x9nZLJ3ciyoL/BwL4WwMkKOq2VmNcsqw==
+	t=1795020129;
+	b=hGed4H48X33SWsuWIYm4IOHxt/yt+WGPB4T3dBDCPU7rPuziNX22K3diVDSL09tiVOfN
+	 FHQiEYVA0Fv187zAxendeezSdVz8vx6LQhgicDIvOXHFsCuzjog3yv4t+nTvDezOLVxxQ
+	 qDsfmbJfvUzollREOvEaWi1YKae2F7hLZjBSR3ZRIp7UwIusbIY7PVOlDt+gyY0WK8qlV
+	 Y6d+D4cINCTSQYpBb96QqvyZOnJtaL3bzuGG3x5hVbi8FYs/1LHfZV2itfVhB1DT08doI
+	 yuFQNS1L04oHyVksPhzAXmkceqHgH5nls/9Y8W8GjefGVsNc1e2ofpAnlzfsIu0E1Wg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795015434;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=oKUUXTVJS/LFVlMihYz3ZWqF9UHg5n3wCBX0shTUj3s=;
-	b=3zMwLeL6b4WyZcZnAi8S4+BS6G4t7jGk4KsJU4o2dnIa3CNdsXgOJVPWfAWDmmwRBwfC
-	 iurJvVQQeYQDd0AwQ/2HiD1gcAnpz/nQ1+bNlbuvx06eNzLWI9uYLvbbp7ztp2c13obKQ
-	 ELYWFF0RHqm2ablo5mCvD73grSIjIYu52pmQScmN9ikarwCNkK048r999jO13HADlcfes
-	 oxcW9VyVV6V/NvXYPmmaCxnIT41kWpRlTk+bTHmAlCri3scZc8dP/SekfAvjFBdGAsoZo
-	 Nh0iO8l3sbfhLy6JkzgtNThbhHuLRoIXYvi2tk0F9KYF62r2gXfdcK+pSSOzOYSPB+g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795020129;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=vxYtualHeO3gv4GebykBTwP0zlbQllse11HjT8de1eA=;
+	b=JT9ymqduh1Fkcxdo7QgWbylh7X2gyd2bGN6uNCUeJcAKPG8H2u5A7NECBLJDKb3fM1Vu
+	 5/xO2JtLM5cZNuSXvKK3zY0wLpshS5VfMzHrntmVeThq0H7CeyzhEJQxo6acq+pSyzc9L
+	 VJlGJk3117ahyWs7E3vt4lNsciIbobmifr5ksqTfBZ5nHoHblKSFxLMkjNHhmzNGRH4/P
+	 HrV329diYrtjK0L/gZ+1KykjqpqYSXaqBJjc8crfWyw3iyVFNSiEA37aObl6p4+2JJjHd
+	 GKbpEx6CkdRWODTP+lVsGkYwsanHT4vR8N0oYTpOhCOpKDnLjdLg/VMgtRLJnZe+jKg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UwezS82B;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=g9TJC0bT;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4BC94606A331;
-	Wed, 18 Nov 2026 15:23:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEEF9606A33B
+	for <mfd@lists.linux.dev>; Wed, 18 Nov 2026 16:42:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UwezS82B
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 474E81F000C4;
-	Wed, 18 Nov 2026 15:23:49 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=g9TJC0bT
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64DE91F000C5;
+	Wed, 18 Nov 2026 16:42:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795015434;
-	bh=oKUUXTVJS/LFVlMihYz3ZWqF9UHg5n3wCBX0shTUj3s=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=UwezS82BdpUqMBy6fK1UgkbsZuFIzeYBAHayDD/gHgjNKwteAV2kDw6lP/s8WB/NS
-	 uFYMT3oyayM+8iacAsp3s09qOWnYngmh2Or5c2BtPU2iAPrb2Kq5YjwOv6X0LUlIG5
-	 QD2BI7vedjejC0Kcb1nFhR1YuVhV8YJ4hIPKCj2Bhgz0zR4YGP2iNdVB46kZ/B8naV
-	 gt66QUhOjmUbeK3Hqij0aZlR+oZWjXPajS9gXG8CUx808RdK0K6BmeSNbBTp9WmtWN
-	 ujAQqkV2RVk2jF/Ir/CFHuarhIT7ypMfUzRRpHQWdiw7mULKhlA67SBziSrWogtWO1
-	 s003oniKbOejw==
-Date: Wed, 18 Nov 2026 15:23:46 +0000
-From: Lee Jones <lee@kernel.org>
-To: Luca Leonardo Scorcia <l.scorcia@gmail.com>
-Cc: linux-mediatek@lists.infradead.org,
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Sen Chu <sen.chu@mediatek.com>,
-	Sean Wang <sean.wang@mediatek.com>,
-	Macpaul Lin <macpaul.lin@mediatek.com>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>, Linus Walleij <linusw@kernel.org>,
-	Val Packett <val@packett.cool>, Fabien Parent <parent.f@gmail.com>,
-	Akari Tsuyukusa <akkun11.open@gmail.com>,
-	Chen Zhong <chen.zhong@mediatek.com>, linux-input@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-pm@vger.kernel.org, mfd@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, linux-gpio@vger.kernel.org
-Subject: Re: [PATCH v12 0/8] Add support for MT6392 PMIC
-Message-ID: <20261118152346.GC98456@joneslee-macbookpro.roam.internal>
-References: <20261105194426.1113050-1-l.scorcia@gmail.com>
+	s=k20260515; t=1795020128;
+	bh=vxYtualHeO3gv4GebykBTwP0zlbQllse11HjT8de1eA=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=g9TJC0bTpciXnrSqIW/3zblwo728ojt2iDMPDtbmo4cWepippQGWZy/rkoNDDq5gO
+	 rha0nNf3ilw0w7L/Selj6REINIYtuGadTz3E+uGg6jyPn045wHqG4PaJ7Ormbe9v+9
+	 XRvEzXxjIwUkDrPA8cU3veyhS4Vc3gOIr3pNSKUVKcPvjDvo9T2DOraKXx6k0vC8XQ
+	 y0LIXfRUKZNApgV7GDd8pFmKPwGlmihrAPZN1Vz0+woBKeX65EEvB/da4x9iKiViRZ
+	 +0Lmek5PDLK5BGnF1LbptXSviFT6HEPh4c1rRqqMFuDwL6bPTpgyzxpWsmPYASDBbc
+	 U8TpvVkbzGG0w==
+Message-ID: <sashiko-outbox-221530@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v3 1/4] dt-bindings: net: dsa: Document support for
+ Airoha AN8855 DSA Switch
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Christian Marangi" <ansuelsmth@gmail.com>, mfd@lists.linux.dev
+Cc: lee@kernel.org
+In-Reply-To: <20261117164132.47167-2-ansuelsmth@gmail.com>
+References: <20261117164132.47167-1-ansuelsmth@gmail.com>
+ <20261117164132.47167-2-ansuelsmth@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Wed, 18 Nov 2026 16:42:07 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -70,49 +60,17 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261105194426.1113050-1-l.scorcia@gmail.com>
 
-On Thu, 05 Nov 2026, Luca Leonardo Scorcia wrote:
+> Document support for Airoha AN8855 5-port Gigabit Switch.
+>=20
+> It does expose the 5 Internal PHYs on the MDIO bus and each port
+> can access the Switch register space by configuring the PHY page.
+>=20
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 
-> The MediaTek MT6392 PMIC is usually found on devices powered by
-> the MT8516/MT8167 SoC and is yet another MT6323/MT6397 variant.
+Sashiko has reviewed this patch and found no issues.
 
-[...]
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261117164132.4716=
+7-1-ansuelsmth@gmail.com?part=3D1
 
->  .../bindings/input/mediatek,pmic-keys.yaml    |   1 +
->  .../bindings/mfd/mediatek,mt6397.yaml         |   6 +
->  .../regulator/mediatek,mt6392-regulator.yaml  | 112 +++
->  arch/arm64/boot/dts/mediatek/mt6392.dtsi      | 145 ++++
->  .../boot/dts/mediatek/pumpkin-common.dtsi     |  82 ++
->  drivers/input/keyboard/mtk-pmic-keys.c        |  18 +
->  drivers/mfd/mt6397-core.c                     |  97 ++-
->  drivers/mfd/mt6397-irq.c                      |   8 +
->  drivers/pinctrl/mediatek/pinctrl-mt6397.c     |  37 +-
->  drivers/pinctrl/mediatek/pinctrl-mtk-mt6392.h |  64 ++
->  drivers/regulator/Kconfig                     |   9 +
->  drivers/regulator/Makefile                    |   1 +
->  drivers/regulator/mt6392-regulator.c          | 764 ++++++++++++++++++
->  .../regulator/mediatek,mt6392-regulator.h     |  23 +
->  include/linux/mfd/mt6392/core.h               |  43 +
->  include/linux/mfd/mt6392/registers.h          | 488 +++++++++++
->  include/linux/mfd/mt6397/core.h               |   1 +
->  include/linux/regulator/mt6392-regulator.h    |  42 +
->  18 files changed, 1913 insertions(+), 28 deletions(-)
->  create mode 100644 Documentation/devicetree/bindings/regulator/mediatek,mt6392-regulator.yaml
->  create mode 100644 arch/arm64/boot/dts/mediatek/mt6392.dtsi
->  create mode 100644 drivers/pinctrl/mediatek/pinctrl-mtk-mt6392.h
->  create mode 100644 drivers/regulator/mt6392-regulator.c
->  create mode 100644 include/dt-bindings/regulator/mediatek,mt6392-regulator.h
->  create mode 100644 include/linux/mfd/mt6392/core.h
->  create mode 100644 include/linux/mfd/mt6392/registers.h
->  create mode 100644 include/linux/regulator/mt6392-regulator.h
-
-MFD looks okay now.  How many more Acks do you need?
-
-NB: This patch-set looks split in two in my inbox?
-
--- 
-Lee Jones
