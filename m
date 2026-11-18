@@ -1,57 +1,65 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795020131;
-	b=bL6vM8uGFm7bpSwR2Afm8389oqvOHccUHcIjFTLlDIcXGmXp4k1uBR26JoKW+mX6Whwg
-	 leUttOyzR/lpNBOMkG3+D2dwmh+fHe8bbfcfoNfuGjWBUi9Ph+gEedGbl76HhQw8sC6uT
-	 lC0Jk6BCb1u+gkCoC33V1E6feNgl+rsxzvp4R8zY1kOhkiPyrZWYxt+utN9CwmmlaOCKE
-	 MrDydb5PDRorKWviynNXJDn04bW33nggylkITw2QQMEX4KD0MN3SoI0ODAN+OlfvTlKlx
-	 DyHIL1m1U+VaZVk0eThB9NSsjzssxg0HJj6rRL49Q6bVfYRjCrsTAQ59BA2eaekX2Mg==
+	t=1795021699;
+	b=YBaCcSzx/AV6jgYERdpToHHQU9ZewCrMltkuAG5NUU2oPtIO7w3Ied5SxeTxHA/e9HUE
+	 4VNcvhtaVsI4vukc3CUgGCaXqnKQlOPIMoPSXyHcgLvixgcQTFPvg++SjDBsoYZp5nRYq
+	 AWHrTtv/E2MOs92M53uL8p7nXF05pvasENFVjWIJNSXjscaAuLJhyDdkysVLZ7PFPaI4G
+	 FrnDizpQoXejZEk1q/2Eay/6i+hIgh7+Igvy3PsFv/qaU5dcvW0sJ8HYUWLla/EPWTGHK
+	 FaSJE2FzHd0Zr19E8uBybxqhvBIoqB+BlRHaT8bjUaWhZ7qfavSLxir93Y7W4fIdHNg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795020131;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=c1CNlt6Whg7o1xncC8HDcboi8I71F7hTNlFT6RnLs3I=;
-	b=sPAke2Q+/O5vPsiJ+PkoBQx8kJ2jvBKGb9sA+e4jleYHUMT/sZUeR4iszEGBJU7eUhpa
-	 2fIoGDmYQXxaVL0zeHP3vWvmha5JXrSHOnsDundiVBkSlgGYBf651IiHiiUfqh7nLCzef
-	 Kmsfz69pFg1cz/KI6LWdxGIPkiyg++/+Pi/rqLmybQp1sccftgFACzyCHfP753kqFcLoW
-	 STQeCjRCOjD3ThsZ79+PquKfIJUdXx8JCOK5ywtfhtP2AspKjxx798MwJbs/Z8nSGTBrn
-	 hEFBHKoBWiowhQplPFUriTrkuF08q69+NzjNut1vGnbyJtodTBmZWKgW4NB3sFJIa4A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795021699;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer;
+	bh=7azEG4KUAyB1sP7mjOcSqRsl7y5AO0uY6cBUlzfxq4A=;
+	b=3Y2XwZ8SzBIE4yqIAJCOxiba2Yw+Af5d34dNERSNOY9RKQ4Vlgiht5X6BQWJowv2fG9p
+	 fcAu/8hve/IVp4hsFW6HEeu1xNfB4VheFC2VB+4iiwvWnkaEWUAE0m12rPMLKiVBp0UN+
+	 SYlj3/rTKge+aJtsMEc1aTOVcDN/x434mFfePRt/pehzjv3q6cgMFyTa7ec/KFIgSim00
+	 bLl5/xe1wzqNatmTKHEqO62ABM2gRIMIL4Dhnr3+kzbbZ/yz1vOhDyuQh3WouEslBG6FZ
+	 hWek6w+pv/pBnoLKZGaGozhV837yq5uyh8SnU6ZpbTqw4C5i5S7EHMW/wcMvs1349Cg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lcQDYF+C;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YzLiQr3N;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B18D606A32C;
-	Wed, 18 Nov 2026 16:42:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8710F606A32C;
+	Wed, 18 Nov 2026 17:08:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lcQDYF+C
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 891B01F000C4;
-	Wed, 18 Nov 2026 16:42:10 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YzLiQr3N
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A1E581F000C5;
+	Wed, 18 Nov 2026 17:08:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795020130;
-	bh=c1CNlt6Whg7o1xncC8HDcboi8I71F7hTNlFT6RnLs3I=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=lcQDYF+C7NO73ETGRmv9aWnsB4FMtVxgphZSDseeByividYDyYQCC0sZzUGaWgDPI
-	 98pz1znmJAcQNJLrGUQLAPJJrQDPyDoZ4mc+p2V1qI5EEvA1ORqWVK3rdpvJz1+1Sq
-	 dzlbwqfHZnLBeMBv3QWZZkFpjymKTsDduPcQpIQlVINJ+Cdfcvywq+5WBqeZnZ63ww
-	 oXS+9r0YMaifxpagwBE03HvPWueKt9LsSfngL2A+ssKbo8M9WIc6PgdWybtBO/9Lpl
-	 DX0TRXpAOaTVZCHgrrxF2lTTCqHnbUkJIlDUledXLeDJpGeEbD4okRYYnXLZjTPA9/
-	 NTlmkRHaKm3Yw==
-Message-ID: <sashiko-outbox-221533@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 4/4] mfd: an8855: Add support for Airoha AN8855
- Switch
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Christian Marangi" <ansuelsmth@gmail.com>, mfd@lists.linux.dev, devicetree@vger.kernel.org
-Cc: robh@kernel.org, conor+dt@kernel.org, lee@kernel.org
-In-Reply-To: <20261117164132.47167-5-ansuelsmth@gmail.com>
-References: <20261117164132.47167-1-ansuelsmth@gmail.com>
- <20261117164132.47167-5-ansuelsmth@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Wed, 18 Nov 2026 16:42:10 +0000
+	s=k20260515; t=1795021699;
+	bh=7azEG4KUAyB1sP7mjOcSqRsl7y5AO0uY6cBUlzfxq4A=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=YzLiQr3NKs/FdPe9YkBNn2yrMmEl9lA5sDBWfGqQMcxfR6LfC+/HlARUMsQJIDrgs
+	 H3V7T79tpzQIsSIN2b6f/vv1mG/nljpt8jsRLbAIMm6UpwNTKEm+hzpjQ8BhwYap16
+	 NZfycQvYCHab7ml7xb2uddCkBMvwtiU5nz+WBBV1rtjNWHTmJH15I56BB5FdwRqeiT
+	 qeG4CYMKTOiT1LqbbT/kJ3PrWKZOVuInsvmM90fEca75W2JQG8aWA9L49m66Rn+o53
+	 GEe9DwZhjgpaM2EoYR3G7ex01IJ588P3T0e6y32/QhcMfZrrdPxE3JN4eBUWCoWnst
+	 X4DAspsvFtxBw==
+From: Lee Jones <lee@kernel.org>
+To: Lee Jones <lee@kernel.org>, Chen-Yu Tsai <wens@kernel.org>, 
+ David Rhodes <david.rhodes@cirrus.com>, 
+ Richard Fitzgerald <rf@opensource.cirrus.com>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+ Mika Westerberg <mika.westerberg@linux.intel.com>, 
+ Zha Qipeng <qipeng.zha@intel.com>, Qunqin Zhao <zhaoqunqin@loongson.cn>, 
+ Thomas Richard <thomas.richard@bootlin.com>, 
+ Andy Shevchenko <andy@kernel.org>, 
+ Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+Cc: mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
+ linux-sound@vger.kernel.org, patches@opensource.cirrus.com, 
+ linux-crypto@vger.kernel.org, 
+ Charles Keepax <ckeepax@opensource.cirrus.com>
+In-Reply-To: <20261104-acpi-mfd-v2-0-64b9dee3baaf@thegoodpenguin.co.uk>
+References: <20261104-acpi-mfd-v2-0-64b9dee3baaf@thegoodpenguin.co.uk>
+Subject: Re: [PATCH v2 0/2] mfd: use designated initializers for
+ acpi_device_id
+Message-Id: <179502169643.55369.12852293397895853310.b4-ty@b4>
+Date: Wed, 18 Nov 2026 17:08:16 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,192 +68,31 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
 
-Thank you for your contribution! Sashiko AI review found 4 potential
-issues to consider:
-- [High] mfd: an8855: missing reset-gpios handling in an8855_probe()
-- [Medium] mfd: an8855: missing PHY_MAX_ADDR check in
-  an8855_phy_bus_register()
-- [Medium] mfd: an8855: PHY registration before efuse MFD cell in
-  an8855_probe()
-- [Low] mfd: an8855: cleanup helper and goto mixing in
-  an8855_mdio_register()
+On Wed, 04 Nov 2026 16:09:29 +0000, Pawel Zalewski wrote:
+> This series is converting lists that contain the acpi_device_id struct,
+> which is defined in the include/linux/device-id/acpi.h to make use of named
+> initializers (which they do not use currently). This work is part of the on
+> going effort in the kernel associated with device-ids [1]
+> 
+> The plan is to convert acpi_device_id::driver_data to have an anonymous
+> union, similarly to what was introduced for PCI and I2C device ID tables.
+> The goal is to increase type-safety (most of the existing casts are gone),
+> to improve readability and to make use intent a bit more clear:
+> 
+> [...]
+
+Applied, thanks!
+
+[1/2] mfd: intel-lpss-acpi: Use named initializers for acpi_device_id
+      commit: 88e9107ee8adf111b7b8e13b009eb78db9044140
+[2/2] mfd: Use named initializers for acpi_device_id
+      commit: 9f3af17b87120ec1aa6bf0fa8121e3bfef687cb3
+
 --
+Lee Jones [李琼斯]
 
-commit b4187acae4b9834706a08e5702a986758362581b
-Author: Christian Marangi <ansuelsmth@gmail.com>
-
-mfd: an8855: Add support for Airoha AN8855 Switch
-
-This commit adds the core MFD driver for the Airoha AN8855 switch,
-providing regmap access over MDIO, virtual MDIO buses for the internal
-PHYs, and MFD cells for the efuse NVMEM provider and DSA switch.
-
-> diff --git a/drivers/mfd/airoha-an8855.c b/drivers/mfd/airoha-an8855.c
-> new file mode 100644
-> index 0000000000000..908b2676e35a6
-> --- /dev/null
-> +++ b/drivers/mfd/airoha-an8855.c
-
-[ ... ]
-
-> +static int an8855_phy_bus_register(struct device *dev, struct an8855 *dd=
-ata,
-> +				   struct fwnode_handle *phy_np,
-> +				   struct an8855_phy_bus *phy_bus_info)
-> +{
-> +	struct mdio_regmap_config mrc =3D { };
-> +	struct an8855_phy *phy_ddata;
-> +	struct regmap *regmap;
-> +	u32 addr, phy_offset;
-> +	struct mii_bus *bus;
-> +	int ret;
-> +
-> +	ret =3D fwnode_property_read_u32(phy_np, "reg", &addr);
-> +	if (ret)
-> +		return ret;
-> +
-> +	phy_offset =3D addr - ddata->switch_addr;
-> +	if (phy_offset >=3D AN8855_MAX_PHY_PORT)
-> +		return -EINVAL;
-
-[Severity: Medium]
-Can addr exceed PHY_MAX_ADDR - 1 here when ddata->switch_addr is 28..31?
-
-If a child PHY node specifies reg >=3D 32 while addr - ddata->switch_addr is
-still less than AN8855_MAX_PHY_PORT (5), an8855_probe() passes addr to
-fwnode_mdiobus_register_phy() -> fwnode_mdiobus_phy_device_register() ->
-phy_device_register() -> mdiobus_register_device(), which indexes
-mdio->irq[addr] and mdiodev->bus->mdio_map[addr] (both sized PHY_MAX_ADDR =
-=3D
-32) out of bounds and shifts 1 << addr.
-
-[ ... ]
-
-> +static int an8855_mdio_register(struct device *dev, struct an8855 *ddata,
-> +				struct an8855_phy_bus *phy_bus_infos)
-> +{
-> +	struct fwnode_handle *mdio_np __free(fwnode_handle) =3D NULL;
-> +	int phy =3D 0;
-> +	int ret =3D 0;
-> +
-> +	mdio_np =3D fwnode_get_named_child_node(dev_fwnode(dev), "mdio");
-> +	if (!mdio_np)
-> +		return -ENODEV;
-> +
-> +	fwnode_for_each_available_child_node_scoped(mdio_np, phy_np) {
-> +		if (phy >=3D AN8855_MAX_PHY_PORT) {
-> +			ret =3D -EINVAL;
-> +			goto exit;
-> +		}
-> +
-> +		ret =3D an8855_phy_bus_register(dev, ddata, phy_np,
-> +					      &phy_bus_infos[phy]);
-> +		if (ret)
-> +			goto exit;
-> +
-> +		phy++;
-> +	}
-> +
-> +exit:
-> +	if (ret) {
-> +		while (phy--)
-> +			fwnode_handle_put(phy_bus_infos[phy].node);
-> +
-> +		return ret;
-> +	}
-> +
-> +	return phy;
-> +}
-
-[Severity: Low]
-This isn't a bug, but an8855_mdio_register() mixes scope-based cleanup
-helpers (__free(fwnode_handle) and
-fwnode_for_each_available_child_node_scoped()) with goto error handling,
-and declares mdio_np =3D NULL at the top of the function instead of defining
-and initializing it in one statement.
-
-> +
-> +static int an8855_probe(struct mdio_device *mdiodev)
-> +{
-
-[ ... ]
-
-> +	/* Reset PHY page for switch address */
-> +	mutex_lock_nested(&ddata->bus->mdio_lock, MDIO_MUTEX_NESTED);
-> +	ret =3D an8855_mii_set_page(ddata, ddata->switch_addr,
-> +				  AN8855_PHY_PAGE_STANDARD);
-> +	mutex_unlock(&ddata->bus->mdio_lock);
-> +	if (ret)
-> +		goto err_put_fwnodes;
-> +
-> +	ret =3D an8855_read_switch_id(dev, regmap);
-> +	if (ret)
-> +		goto err_put_fwnodes;
-> +
-> +	/* Release global PHY power down */
-> +	ret =3D regmap_write(regmap, AN8855_RG_GPHY_AFE_PWD, 0x0);
-> +	if (ret)
-> +		goto err_put_fwnodes;
-
-[Severity: High]
-Should an8855_probe() acquire and deassert reset-gpios before accessing the
-switch over MDIO?
-
-The airoha,an8855 binding places reset-gpios on this MFD node, and the MDIO
-core only handles reset-gpios for PHY devices:
-
-drivers/net/phy/mdio_device.c:mdiobus_register_device() {
-    ...
-	if (mdiodev->flags & MDIO_DEVICE_FLAG_PHY) {
-		err =3D mdio_device_register_reset(mdiodev);
-		if (err)
-			return err;
-
-		/* Assert the reset signal */
-		mdio_device_reset(mdiodev, 1);
-	}
-    ...
-}
-
-On boards where reset-gpios is asserted at boot, an8855_mii_set_page() or
-an8855_read_switch_id() will read 0xffff while the SoC is held in reset and
-fail probe with -ENODEV.  Conversely, if a child driver resets the chip
-later during devm_mfd_add_devices(), it will wipe out the
-AN8855_RG_GPHY_AFE_PWD write and internal PHY state configured here.
-Also, <linux/gpio/consumer.h> and AN8855_HWTRAP at the top of the file are
-currently unused.
-
-> +
-> +	/* Register PHYs */
-> +	for (phy =3D 0; phy < num_phys; phy++) {
-> +		ret =3D fwnode_mdiobus_register_phy(phy_bus_infos[phy].bus,
-> +						  phy_bus_infos[phy].node,
-> +						  phy_bus_infos[phy].addr);
-> +		fwnode_handle_put(phy_bus_infos[phy].node);
-> +		phy_bus_infos[phy].node =3D NULL;
-> +
-> +		if (ret)
-> +			goto err_put_fwnodes;
-> +	}
-> +
-> +	return devm_mfd_add_devices(dev, PLATFORM_DEVID_AUTO, an8855_cells,
-> +				    ARRAY_SIZE(an8855_cells), NULL, 0,
-> +				    NULL);
-
-[Severity: Medium]
-Does registering the internal PHYs before an8855-efuse cause them to defer
-probe and risk binding to genphy_driver?
-
-The internal ethernet-phy nodes consume nvmem-cells from an8855-efuse, so
-fw_devlink defers each PHY probe during fwnode_mdiobus_register_phy()
-because an8855-efuse has not been registered yet.  When
-devm_mfd_add_devices() then registers an8855-efuse and immediately probes
-an8855-switch in the same loop, an8855-switch can call phy_attach_direct()
-before deferred_probe_work runs on the workqueue; phy_attach_direct() sees
-!d->driver on the deferred PHY and binds genphy_driver instead of the
-AN8855 PHY driver.
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261117164132.4716=
-7-1-ansuelsmth@gmail.com?part=3D4
