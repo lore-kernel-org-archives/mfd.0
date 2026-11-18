@@ -1,57 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794990516;
-	b=sOlOCFsCcFxPu4XbYu6MjuxprQWsc674QIScdniFmm8biL/5n3x/0LyE4QvDe6GGeaUg
-	 MDhLdKSTC68SwRYABnWK4xEWb/eaZO3QRA86PFEb7ntKEiiN4ytxWen2wGI3mfARA+K2O
-	 HJPKhwFnkc5LU6QcAqehV/hLha5fDC4VKjDYspxGO7pzgwWP9rMwb6T4/7Ft27JAlr6sa
-	 JbeCXqakQLpABEsVTQqZ57diaZy7Iqvd7WYBSaChedxrPSTRH6P1EKq825BYuRPTCB7MT
-	 QuW/xN9mnxfCOtILQScTMPg3CBCvtaLOmRocaB5W2A0NUxceI1XoTS4BHBNY+d1Z5Pg==
+	t=1794990605;
+	b=36yKnI7NkgV/jk3jqujdrqGhioUrNteNFpZsMflsauNz6Yks3i40w049BS+z5+hg9sno
+	 uoqCOd2NcerKlcu3O2YSqG39ORj3kllOlgMM4acIXzo0BYBi89YaHfXtpRB1+YPPoX0Su
+	 JfM67LnOpMaIjwODOKcolO0ItR0Wh07WtlBFVscDObJ/W+RfOyaVHRP6MMnaiU0j5SeIO
+	 sYB0LEUm+O6ExXXpRsmroBj4EvQRrq8yYPyVsyOroLVyMfkRlxOcNvqRI/kc7tJuP4Of7
+	 BCUJfGLeZYY9k/1WLFxi6aBrRzMpHSLKR26xpA8rzytaRcRONP8Exw7AwAxqZNK7/gQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794990516;
+	a=rsa-sha256; c=relaxed/relaxed; t=1794990605;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=pKASYStZ4/OuPjOxYn5ItXsdrYFLUeoUrNTKnox4rd4=;
-	b=meG0GC7kqQbLDekHcsSkXR77E3AnJkRHRe+7iWkNILULBaobtKIx00RtsicgQZc/4+h/
-	 HVDYj0QYddmmoeAFrFsGVwkFhWlZsstnA7pyt4wkhS4BQuWoVWc/FvDETh0AKEYrwRd0A
-	 zmPXjtDMATH47EFUYiE98pL/yVy9/tn/kM7bBsamZg5ky+iu8inCWZ+fkju8v/nhizCIP
-	 A2zk8NXIzG6fduhVhArnMDpUCESpDVCdTfaY3cDtPyfDwmD7I8ZfsQVYPLmKQxPaePR11
-	 Q1tO1TlwM/zs8vs3EBYJrNENH5u7pFBqqupR4OU9PlgHiU6L5uRWyG1H2zdn6dhPdFw==
+	bh=xsK/lFZXQB+cgLHcUDjn/39UGhtxIc66esdx9zu/djg=;
+	b=hMzlKfH61MYM0+gH8b6PLX7fq3+48OealRybDjb3vMH4lSfI6F65pAqL6bKUrVUrIODw
+	 5kdmuGHIMOKsKwNoTdgc6nedQO6h5OGasd/SSWIO1Plvo17dRCBcDR/nj9sSoB5qztdtn
+	 WheIS3z0r8K0MQd7ZQNOZywm3TrQy4OlHUhlU/WpATImRFMWeASqdmwcY0s+dvb07GunM
+	 /hdx120Il63RulBSj1OmrYepNb7PKKGx1UYkgBwJ9DfI37U5mRkqAz2wGUsXf/OqDhPRc
+	 GBU+flxof085xdl6q8hMapvuVuVbeUDfAk+JYWGmpqnfp+2ByKWk4ui6bg2d7ukcfeQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WUYzPj22;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cuwUS+P4;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A351606A31C
-	for <mfd@lists.linux.dev>; Wed, 18 Nov 2026 08:28:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36C44606A885
+	for <mfd@lists.linux.dev>; Wed, 18 Nov 2026 08:30:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WUYzPj22
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0E18C1F000C4;
-	Wed, 18 Nov 2026 08:28:36 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cuwUS+P4
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3D021F000C4;
+	Wed, 18 Nov 2026 08:30:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1794990516;
-	bh=pKASYStZ4/OuPjOxYn5ItXsdrYFLUeoUrNTKnox4rd4=;
+	s=k20260515; t=1794990605;
+	bh=xsK/lFZXQB+cgLHcUDjn/39UGhtxIc66esdx9zu/djg=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=WUYzPj22K1imr/5acw2CrsxNLgRey66AZDzpb/MdVHQJaXD7eYPRoJHZA1HhfhXmO
-	 GMp8N6mCkBym3LZ5RhMQkKmJv65y4JKC3IKAW2e3acPlYd7I0ni6G9EtuqYgs/x/nC
-	 nZ534e9nCipxHaAWFOYvUH5EuqW/7HLcWQ/i4B3BaB1cBZcS+YnZu9lhELDG19rBgw
-	 h/yeHnNWsE823TKJd7qJqVoZa6GFL9/pwtg5hyub+mBuBLRlhwh6/fVyessSlQDYxb
-	 27y7lP/kxFfaa+HtMAlL3hSDE+3t+HV0Zw281eYQ7H+iYq0MQIf/ae5EVsvnz5u9H9
-	 cFsVFpgk8AuLQ==
-Message-ID: <sashiko-outbox-220447@kernel.org>
+	b=cuwUS+P4O7d/B8XFSxJmEOdliZoE+Qf3vjLce+Dpq/p2vZTDkU5zSmmzbHKuwjG0i
+	 /sK2SYTMZxVRSc8mrTDdU2Jt5qDynlej7pviTtRXnbTq26lnuOCjTI3JfgvZFa3N/4
+	 /hHcWxGDjhCR1/1+CxFaMa1KfRFTJgRDMO51GD6Pe6NHDUi5FLzzGQT1CzGeRDobrG
+	 fAjq2ydjvTT1WzvhfG2/OUD2PKFQ6/QK4ainsaakJyKEjuMXHLUV/Ngyg+M9W6Cdz0
+	 wEkKW8ue8JCP3uJ5xAjGR4U1Gc+bnAMLqi70HjwAd4epAaTbTxAo7U8Fmn1YFyN41s
+	 1KQwk6JKGoqEA==
+Message-ID: <sashiko-outbox-220450@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v10 03/13] mfd: nct6694: Ignore interrupts without a
- mapping
+Subject: Re: [PATCH v10 09/13] mfd: nct6694: Rename driver to nct6694-usb
 Reply-To: sashiko-reviews@lists.linux.dev
 To: a0282524688@gmail.com
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261118081625.2399247-4-a0282524688@gmail.com>
+In-Reply-To: <20261118081625.2399247-10-a0282524688@gmail.com>
 References: <20261118081625.2399247-1-a0282524688@gmail.com>
- <20261118081625.2399247-4-a0282524688@gmail.com>
+ <20261118081625.2399247-10-a0282524688@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Wed, 18 Nov 2026 08:28:35 +0000
+Date: Wed, 18 Nov 2026 08:30:04 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -63,20 +62,17 @@ Precedence: list
 
 > From: Ming Yu <a0282524688@gmail.com>
 >=20
-> The return value of irq_find_mapping() is passed straight to
-> generic_handle_irq_safe(). If the device reports a hardware interrupt
-> that has no mapping, irq_find_mapping() returns 0 and the handler of
-> the system's IRQ 0 is invoked instead.
+> Rename nct6694.c to nct6694-usb.c to reflect that it implements the
+> USB transport, in preparation for the core and HIF transport added in
+> later patches. The module is renamed to nct6694-usb accordingly.
 >=20
-> Use generic_handle_domain_irq_safe(), which ignores unmapped hardware
-> interrupts.
+> No functional change.
 >=20
-> Fixes: 51dad33ede63 ("mfd: Add core driver for Nuvoton NCT6694")
 > Signed-off-by: Ming Yu <a0282524688@gmail.com>
 
 Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261118081625.2399=
-247-1-a0282524688@gmail.com?part=3D3
+247-1-a0282524688@gmail.com?part=3D9
 
