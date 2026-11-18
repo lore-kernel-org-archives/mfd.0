@@ -1,71 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=111.22.67.139
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1794983428;
-	b=DYFutPRNFk+3e06sVyriIUz8dNKctsVl8H96CTVsrrI/TPIfqEPXFzijMxV3YRg+9c8E
-	 EoZleiPJ3gTu+VZurTZKMcKkrGvlCRfQGfsMG1DU4Fxyel88nnsognEZmejGPHndxyHRK
-	 QSE1VzdnJNZ1UQoR3YFx+EFLx9KygT605kMnsRs7dZQSsgLyvaXsi4KdhpIclG07q/f8g
-	 yWMtiEO9MEwjHe7zzZTGpsNd2ai/we7vGnqpd47FP/MWIsdVkV5BOP6nHsM1zNfssSgfW
-	 UAs5dV4+GsT2RJxQmc48FhTOBWcBdas9UDYngkVzgg95oNlfuo+boxBIUwEQzbIWJ3Q==
+	t=1794983620;
+	b=0Zl57UC3YbNNxoZj23P2CWzYATSeuLTNa2tbMqUuCOhrItKRx4Vqk3MOudvoc1J8JMEb
+	 AZcNysi1yWbBt49TFNwlWbRm60vawBApR6TuSGHmYU36LHzCUfNs2teJHnZ80nYBahpie
+	 lUXPFUyqogvNNSdiKYni1sajTktU5o0YtLYht8+GduhTVrwyP3Bfr+4GSjfJ13r7AFuuk
+	 U/Qqw2l/JL3c7zQyWOoCoseaINZ8rpkQbyeimiQTThqwCaxjQ69olZTaZOAP57gv0zdHA
+	 k63vTq8Nq2M88MrOw64DZ4vRuzdABrbNpKaWP6hV3w28+V4Ab3SbdozoZSSDSCgPj5w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1794983428;
-	h=DMARC-Filter:DKIM-Signature:X-RM-TagInfo:X-RM-SPAM-FLAG:Received:
-	 X-RM-TRANSID:X-RM-TagInfo:X-RM-SPAM-FLAG:Received:X-RM-TRANSID:From:
-	 To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=FkwpcJ9P5gfK4/EiFWTNomZOIkrMoDrhvqK6V1J/veQ=;
-	b=PDxM59czPc7z69qCerLWp7L4dyHKMN2Q5daUBZJukG3ZSVwFd0EagZRo9E0lHgydZX7V
-	 LUj6Ck19pHDufhstOF2cM09Lle3f3RtzLv4ChYD7OUsHMiXwb3lP0TAQRA2a/WxF7o46H
-	 09VNNne4s+n35OsPMaSbTse9WHBr6HsYfC4q/uWfvXqxYq+/BkTd7UOICYr+ya9iNUUQC
-	 cfFntTWDHJj6Xhp+dbSf8NIAuwj+ITjFQ2U5rpADZn4GJIHfn+gkHtxR2FN0Wl8fmlN9g
-	 QmT12pkmg1Ts+yPCVOFne2wKGYWmhOvcT++BBnLYUwpfDfRWdxWG0l5cRIylYxUa7uw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1794983620;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=og6MkvXhBV5/zMaDx0kxs9K9xRcWdE426MFuj606Y0Q=;
+	b=jAl18m6n0/qYHkPcgsxCLcP8jUaH3SXe47fJAwKYcRQVqkjGrJVXI64CQOhYyJs3RfYv
+	 VQogBgEPYNI1KSeH/h7s3AgTqIOa0ADLSD3A4lYkvrgc1aEt4DKdT82fgM8RexHBAtNbT
+	 aGG6cfSrJKYi2QyU9XGkGdra6A2GRhKVQGgADKPPXfVDE2BbQWtvfvEyRjOMhYQONVrH+
+	 O9ssydj4h8NYzGR/JgWZOqp50oozCSKweMNX1C3hA0BnOxrN912CIGOA0ja7ziC/ueoth
+	 AI8JHu00lS0ODUAgvzszVhbWUORVBuEvHyUsmPuEJ5fhCjovNfx0LcpwbSwyOMPG5sw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=cmss.chinamobile.com;
-	spf=pass smtp.mailfrom=cmss.chinamobile.com;
-	dkim=pass header.d=cmss.chinamobile.com header.i=@cmss.chinamobile.com header.a=rsa-sha256 header.s=default header.b=aLJ3y8wR;
-	arc=none smtp.remote-ip=111.22.67.139
-Received: from cmccmta6.chinamobile.com (cmccmta6.chinamobile.com [111.22.67.139])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 427EE606A325;
-	Wed, 18 Nov 2026 06:30:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 427EE606A325
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cmss.chinamobile.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cmss.chinamobile.com
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=b72r5Tld;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38B5A606A32C
+	for <mfd@lists.linux.dev>; Wed, 18 Nov 2026 06:33:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=cmss.chinamobile.com header.i=@cmss.chinamobile.com header.a=rsa-sha256 header.s=default header.b=aLJ3y8wR
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=cmss.chinamobile.com; s=default; l=0;
-	h=from:subject:message-id:to:cc:mime-version;
-	bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
-	b=aLJ3y8wR+0x5/NOCKPz7MR9gtxyGrXRJiG5k9fp1QkdZH/BjD9fBmZMTOlRiCXIkhMyzr6v8eEf+A
-	 1cuB0uHhGs+w87dt+zuReDb7arX6ddod6vGmOoPxFjbDQodoJrPu4AqLs5cBLD+e0o95UtBVAtllkB
-	 4td16ONCXo+72XJ4=
-X-RM-TagInfo: emlType=0                                       
-X-RM-SPAM-FLAG:00000000
-Received:from spf.mail.chinamobile.com (unknown[10.188.0.87])
-	by rmmx-syy-dmz-app01-12001 (RichMail) with SMTP id 2ee16afd4601d6e-ec77f;
-	Wed, 18 Nov 2026 14:30:25 +0800 (CST)
-X-RM-TRANSID:2ee16afd4601d6e-ec77f
-X-RM-TagInfo: emlType=0                                       
-X-RM-SPAM-FLAG:00000000
-Received:from DESKTOP-3K8GUTQ (unknown[223.108.79.97])
-	by rmsmtp-syy-appsvr01-12001 (RichMail) with SMTP id 2ee16afd4600c3a-cc2e3;
-	Wed, 18 Nov 2026 14:30:25 +0800 (CST)
-X-RM-TRANSID:2ee16afd4600c3a-cc2e3
-From: Xiangwu Lai <laixiangwu@cmss.chinamobile.com>
-To: bleung@chromium.org
-Cc: Xiangwu Lai <laixiangwu@cmss.chinamobile.com>,
-	lee@kernel.org,
-	tzungbi@kernel.org,
-	groeck@chromium.org,
-	jthies@google.com,
-	chrome-platform@lists.linux.dev,
-	mfd@lists.linux.dev,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] mfd: cros_ec: Drop OF node reference in ec_device_probe()
-Date: Wed, 18 Nov 2026 14:30:23 +0800
-Message-ID: <20261118063023.723-1-laixiangwu@cmss.chinamobile.com>
-X-Mailer: git-send-email 2.50.1.windows.1
-In-Reply-To: <av0gBCp63QZ2F8gy@google.com>
-References: <av0gBCp63QZ2F8gy@google.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=b72r5Tld
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9669F1F000C8;
+	Wed, 18 Nov 2026 06:33:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1794983619;
+	bh=og6MkvXhBV5/zMaDx0kxs9K9xRcWdE426MFuj606Y0Q=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=b72r5TldRJbolTSgh9O5taWshTKm0pbL1hsX8uN13S5UxSRL58pnFcB7XAUsMB0Sp
+	 NXFOqevKB67G3pm6PDojQgntA+UrpSegdB/fo4TbdumKIELSLs5nqc6T+aKEjBDrz7
+	 3ZJY7aeYsnf2HGSytWUI2ZW9ja9PpQ7tDg4F+Q/FpAbqqFOWVSho4FKjyE1e8RACNI
+	 kzEJWR3B/9w0vV06eHznKBRDi3FL2IKDEQhsZ/vjX08AGb65meYPcQrhMF7h3sKm1s
+	 aB8Q59BQ72vxVxFoZJumVWSdHHU/DTjY6xlc61J2xIO7cu1kr+XmRxjV/29dza8AGg
+	 PVcnpDrNMyO/A==
+Message-ID: <sashiko-outbox-220255@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v2] mfd: cros_ec: Drop OF node reference in
+ ec_device_probe()
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Xiangwu Lai" <laixiangwu@cmss.chinamobile.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20261118062949.1250-1-laixiangwu@cmss.chinamobile.com>
+References: <20261118062949.1250-1-laixiangwu@cmss.chinamobile.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Wed, 18 Nov 2026 06:33:39 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -74,29 +59,27 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 
-Hi Benson,
+> ec_device_probe() calls of_find_compatible_node() only to check
+> whether a "google,cros-ec-ucsi" node exists in the device tree, but
+> the reference held by the returned node is never dropped.
+>=20
+> Scope the lookup to the UCSI block and mark the node pointer with
+> __free(device_node), so that the reference is released automatically
+> when the block is left.  Keeping the lookup inside the block also
+> preserves the short-circuit evaluation of the original condition:
+> the device tree is only walked when the EC_FEATURE_USB_PD,
+> EC_FEATURE_UCSI_PPM and ACPI checks already passed, instead of on
+> every probe of every cros_ec device.
+>=20
+> Fixes: 17f95281839d ("mfd: cros_ec: Don't add cros_ec_ucsi if it is defin=
+ed in OF or ACPI")
+> Suggested-by: Benson Leung <bleung@chromium.org>
+> Signed-off-by: Xiangwu Lai <laixiangwu@cmss.chinamobile.com>
 
-Thanks a lot for the review! You are right on all three points:
+Sashiko has reviewed this patch and found no issues.
 
-- moving the of_find_compatible_node() call out of the condition broke
-  the short-circuit evaluation and made every probe (including the
-  secondary MCUs) walk the whole device tree for "google,cros-ec-ucsi";
-- testing !np after of_node_put() evaluated the pointer after its
-  reference had already been dropped;
-- and the extra declaration was redundant, given the existing
-  "struct device_node *node" in ec_device_probe().
-
-I have sent v2 scoping the lookup to the UCSI block with
-__free(device_node) exactly as you suggested, which keeps the
-short-circuit evaluation and releases the reference automatically:
-
-  [PATCH v2] mfd: cros_ec: Drop OF node reference in ec_device_probe()
-  https://lore.kernel.org/r/20261118062949.1250-1-laixiangwu@cmss.chinamobile.com
-
-Best regards,
-Xiangwu Lai
-
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261118062949.1250=
+-1-laixiangwu@cmss.chinamobile.com?part=3D1
 
