@@ -1,59 +1,81 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795110066;
-	b=Q3ierON38tvvYvu5jhJS9eMW+H+8vnd6jJeO0ZmTN59T5dNq+dtaiMAXyAtO3eQrBR1E
-	 Y0qW0NEPpuuetYorqvrBHbkxIWLtiPLt7jHMvFr5/bRpkJ+swmD4wMlB1irB95kT5eF1Y
-	 /Kmufk6D3+uZgautEGq5n50xnFEORISWJqwsv2I9HGQP9XEo5lfxsUeuODpXmtJ02nHaT
-	 K+uPUsuvANneuGkyduNBsdBYWdVubZRflhHuBium4sCKGjxVB9xObrh8ML/OrJLBsv+xx
-	 yvQR0Q/jsS9B/OF3N3zbTgWg9hvsTSWr8gQRV92VgfqqIiBS22ZcOb0cUBsCTeHFexA==
+	t=1795112450;
+	b=wIk/fRQzMAh7NHkaeoCiOia2aM7uR3FxR7zXifMeut/cLC9ExHzDqjgpxhCSKDmUnTC4
+	 ZuEWNBppQcoxQIkUVi3vK8j+XFSgHofmsyrhZLhU4pZzgWx035iR0oSN5HtXAI1z0cwkF
+	 nLl1l9gr6jg/wgOVV46OoebxBsag3UyBhVrLoUtc/fr3WrsYpeoabf1BBQ4e9vwK27IpS
+	 qf5u7eT+Rjan5he2nxDIX9xuLAMvnLJDA+0LZ70ay7R0ZTldMBQWlm/bWfyEGfXWdr7tO
+	 +C6N6RA4QxbuMljEvIi0pOvt+30XARC/70kYeFhOfjDj95mWmsL4bIoQsEgjh+xz4vw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795110066;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795112450;
 	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
 	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 X-Mailer;
-	bh=3VTybhTqKJAZ/JbIkL/pP1pBqKL4V+l0hnFbRL9gv40=;
-	b=KBHJiVwFb3uDxazX3jbLfwblCRuORrJwCy+2aBDHy/Bbe+d62Jl+Z3Wb9hC80BQXvFCC
-	 ftq88omQJRVM7Rir7Cp/xRoyqk+3StZIC69vex3wI+jo47W4Xm33ifaAXlYLlkcO3/5AG
-	 LmWagXVkQVztuM+nbXsFTjbT3woy7kASjQjmuxF2hsI6PkxlDFuKpnzMz8uNfToJ64RFt
-	 kf0Urd9oUDjpHTbyzNgJJkTNK82aVjq/WkeHp9dCE8Kw6x3qczOVg1WXcC82uPcoA5p8C
-	 zLmEyLLfR925eBHRLmOQFCl0IF0Y4HiUwnxGadVUFCuaHBiBRR+NcjWQ+NIdDxaldEA==
+	bh=5cY+QOFSRab+vw7Ar5Uc+Mh1ld4eiD0jvPyComZKkI8=;
+	b=MvCGHQeSVJeruMRl0a27+xVHcKTpNwtpxb7U+IAugbJqU2xMORWeZcZ+00XwvUKb/I6n
+	 KvhkbrKVemkwkJ+27LiniKf0vinp9mtOk45CmuZvERsK354OWiqgEAdJKyVSfP4Nu52aP
+	 dZblhoHdgcoR7u8qREJxVz1rVYZzaqYk5GfKuCMtBFKzKNeSRqC7E4oK0fgRWTWEs89UG
+	 Y5zJKG78ctaC0TuSKSIQhHvRkg2lgk8xFwdNTBfK3QFrPkyNSoAnt08EFYwvIJG3RD3un
+	 l5e5mgE2SL2LTQeLzRVPM/0HH860l4fLJnCEY2wpLi93/JLduiwphEH3cOb4PUkFdGw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TfdmdYmQ;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mFVkDPWN;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13269606A320;
-	Thu, 19 Nov 2026 17:41:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE7E5606A325;
+	Thu, 19 Nov 2026 18:20:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TfdmdYmQ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A0B3C1F000C4;
-	Thu, 19 Nov 2026 17:41:03 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mFVkDPWN
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B0EC1F000C5;
+	Thu, 19 Nov 2026 18:20:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795110065;
-	bh=3VTybhTqKJAZ/JbIkL/pP1pBqKL4V+l0hnFbRL9gv40=;
+	s=k20260515; t=1795112449;
+	bh=5cY+QOFSRab+vw7Ar5Uc+Mh1ld4eiD0jvPyComZKkI8=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=TfdmdYmQS+qILgO5gTXBo2Qngno5vhyr+SgEOhdjYJN6HMwP/fF+LBN8U/nfpJlMe
-	 rlkIyXifWTW4bW3n5J5KHhCsqx6eNrU4T5A7IMGf9wxbMfZh2+XmcLInWvZmHCpNtL
-	 os2fqO9lA1y/MYnAM9/j/HJB9Xv7aPjBxJRPRKkK442SsKGl4jeNxhDbH5IBF+eBOP
-	 MRVgDpluMZnTDA6VwKfJbdbWrLWScJ1THF11nWwJQjKk7xNCX7YjiC2/q/ZCcJxv8a
-	 XdGPXWlIWtpsCvRkrBqOaxctkZqPOlkbg4ligJykmWsOUlCWbc9Jxg+Q5iyVNKZ14X
-	 ScUUmI5nlerUQ==
+	b=mFVkDPWNUUaI/lD8LZupI2Dv6P1hrK9IDKEmnqQP3hRcjIokrajVdotKHQAyu0NV/
+	 LRn7QDpEIl7PkujuQRr3JBOYQ+mJ0JJKhFd3EksrdvpLpq/b5w75RdtGldsmRSuWuG
+	 Ej9e2CQPJJ3vc6ty6KfikChr+J+4TieOCN5RUxlTysnTo90F+i3dQL/yhRCP6r9QKI
+	 ZUEOfNqI0qQI7nJ3efrl+mVFZSuYADsTl8cPGElqU4t+ZqtyImk+pdJ6b3Tve3I3qk
+	 6SUHTGBRqWjRzEw9B/SNFUNcnVx4t7sMsIkZvT0Ltu1LVrPnQ/gifStw7uYoI+dALN
+	 894KwzJuU9EZw==
 From: Lee Jones <lee@kernel.org>
-To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>, 
- Lee Jones <lee@kernel.org>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
- Alexandre Torgue <alexandre.torgue@foss.st.com>, mfd@lists.linux.dev, 
- linux-stm32@st-md-mailman.stormreply.com, 
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, 
- Frank.Li@oss.nxp.com
-Cc: imx@lists.linux.dev, vkoul@kernel.org, Frank Li <Frank.Li@nxp.com>
-In-Reply-To: <20261113175712.4189110-1-Frank.Li@oss.nxp.com>
-References: <20261113175712.4189110-1-Frank.Li@oss.nxp.com>
-Subject: Re: (subset) [PATCH v2 1/1] mfd: stm32-timers: Use
- dmaengine_desc_set_callback()
-Message-Id: <179511006340.87394.11961349474529132483.b4-ty@b4>
-Date: Thu, 19 Nov 2026 17:41:03 +0000
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Robert Marko <robimarko@gmail.com>, 
+ Guru Das Srinagesh <linux@gurudas.dev>, Thomas Gleixner <tglx@kernel.org>, 
+ Radu Rendec <radu@rendec.net>, Lee Jones <lee@kernel.org>, 
+ Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, 
+ "Joerg Roedel (AMD)" <joro@8bytes.org>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Wesley Cheng <wesley.cheng@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Manivannan Sadhasivam <mani@kernel.org>, 
+ Alim Akhtar <alim.akhtar@samsung.com>, Bart Van Assche <bvanassche@acm.org>, 
+ Bean Huo <beanhuo@micron.com>, Stanley Jhu <stanleyjhu@google.com>, 
+ Herbert Xu <herbert@gondor.apana.org.au>, 
+ "David S. Miller" <davem@davemloft.net>, 
+ "Rafael J. Wysocki" <rafael@kernel.org>, 
+ Viresh Kumar <viresh.kumar@linaro.org>, Amit Kucheria <amitk@kernel.org>, 
+ Thara Gopinath <thara.gopinath@gmail.com>, 
+ Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
+ Lukasz Luba <lukasz.luba@arm.com>, Georgi Djakov <djakov@kernel.org>, 
+ Sibi Sankar <sibi.sankar@oss.qualcomm.com>, 
+ Stanislav Aleksandrov <lightofmysoul@gmail.com>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, mfd@lists.linux.dev, 
+ linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev, 
+ linux-usb@vger.kernel.org, linux-phy@lists.infradead.org, 
+ linux-scsi@vger.kernel.org, linux-crypto@vger.kernel.org, 
+ linux-pm@vger.kernel.org
+In-Reply-To: <20261109-halliday-dts-v1-5-289114ab8197@gmail.com>
+References: <20261109-halliday-dts-v1-5-289114ab8197@gmail.com>
+Subject: Re: (subset) [PATCH 05/17] dt-bindings: mfd: qcom,tcsr: Add
+ Halliday TCSR
+Message-Id: <179511244123.91992.13336083093444200069.b4-ty@b4>
+Date: Thu, 19 Nov 2026 18:20:41 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -67,20 +89,13 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-Mailer: b4 0.16-dev-ad80c
 
-On Fri, 13 Nov 2026 12:57:12 -0500, Frank.Li@oss.nxp.com wrote:
-> Replace open-coded assignments to callback and callback_param fields
-> of struct dma_async_tx_descriptor with a call to the
-> dmaengine_desc_set_callback() helper.
-> 
-> No functional change intended. Prepare make to struct
-> dma_async_tx_descriptor private to the DMA engine.
-> 
-> [...]
+On Mon, 09 Nov 2026 00:33:17 +0000, Stanislav Aleksandrov wrote:
+> Document the TCSR block on the Qualcomm Halliday SoC.
 
 Applied, thanks!
 
-[1/1] mfd: stm32-timers: Use dmaengine_desc_set_callback()
-      commit: 20288e5e843ec16a9dfd9e6449f2f635dfc654ed
+[05/17] dt-bindings: mfd: qcom,tcsr: Add Halliday TCSR
+        commit: 51a1764ff434dff86994f7e03125033deebda6e3
 
 --
 Lee Jones [李琼斯]
