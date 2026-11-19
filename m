@@ -1,59 +1,62 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795116807;
-	b=xNxz1kdAVsZQXK123b//L9EuZISbxslRCJ2QN0HJXD4kG6aQVsc4XLdjI6AsVKCS/dol
-	 T++a8Bni9WZCHEXMmpgJH6T/HACOnuOg4U3LaFbwSRDBG5QLa7bXNkDZtLLH/I9ZTFFIy
-	 3rTmJM96ZSdqYefPf11KWs/5lckzK+KTQg6DzgJYH4lCqbWvamaFuKLhMwJ4hy8z0jXkq
-	 hv9IcG36nRtB676zZvV3pnuF94VqdPnc8V4B4Mx1tl7cn2x8CW9F1S2mA9i+GLK84xvZq
-	 bD6swIKxmSJQJe0HEbFTJ1N6i4JKgmIXDgIaVMx1qIEFJb/diBAt3fIss3uqO/xSfnQ==
+	t=1795117784;
+	b=VUZpEJjhYhttiQ8pqDwfPj7wYGFGHuHr+B/aWLNqXMbflayxAVOt1rVF8Itbvh4em9CY
+	 lFAncHaKT+ukvu7AsqwZx2oqs9qx5UZS92z6ErScgWufTgzaWlXT0XxwgC9EgcwJW8yuH
+	 iq/WCEKdQ4VRXisRf0kHJztyKWEK4B6zLsrIBOxjc0fsBOdyf0yNRLkAvb/G0qPU4gvD8
+	 VaV2QrsSH66JGW8nh7t2vq1fpM1nwZt9TrYE+pOMoSdv8L86Zs/mEvvapN6iD7WFSmYXY
+	 Nu26JF5YFIgAPYlLNdTa3vt7cAJMcB0jPPPD52je02awbm/vCHC8qThb5FtACEr47FA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795116807;
-	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=PWJMTYSDW6iAsrTqVmB1Qlvs30ErsSN50koeWjTGSHw=;
-	b=2dL6uiamvg2Z9MRW6hTIX6KGzEFi/6QPc4qPPHLDxzcEOXf4edHRQqeiPTwS3QSlpDfC
-	 cP1QWToBVb9KF60S0liwJKuJPvz/90v+8b6i3HXPcSIsSRYDHzNJSX5P6/zCuQUXTwI0w
-	 leg8L5hvjrjoAjQD2LgmeezICNmqZO1IxW2Lk3aPZr2hV/TCfPwqgYDXet+V7NNFuaT6f
-	 wAPsy/VhdIQf6mMCyHFiVN2pqrmRaF5ik03RuB3EVCaDKAmQ3HImQd6O4/IkS1ckU4tFX
-	 9UT8RVzdHLHqKYN2blNpXRBN3I5jKZrqEre5oC0yDhN1i+f9zIC1XihyCoZx5KJORqQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795117784;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding;
+	bh=gDsAJvJzkxTjWKsQDYc43r0mxoSvKQLIjsKVDf45Mok=;
+	b=rnpsssy9gmdpCuSWrTydbmkrqg93P/xtwtNRF+VoGUBM+L5FmLHJ8R+GXOrp0XawpGLw
+	 rYav4xKfEVikjvcBnK5tnFlNJHcLUT716RekyJCxuLnt43BM5njvq9E+p/cJEEvYZ+X5H
+	 SlgvH//0lctDHMImAChYEiCj+tPRN3hJTauf39TtDPVN/XLimNw8Z6jm/feZmB3iaZc9A
+	 3M5hbY3PFbrEFCFn/I6VY6UmfXYwKSYEWHzTeMOrk0qp7GVWeRbulG/MdcHyJ6JyY41rX
+	 0RH5jX/MxlowAC255GhMBXajwbTycmXuRUjOGY3VPZNszcbc0NV7Wy/bWPnbrIydyKg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jMbOZnZA;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=igbIo64e;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6352F606A324;
-	Thu, 19 Nov 2026 19:33:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9403460A2611;
+	Thu, 19 Nov 2026 19:49:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jMbOZnZA
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 13C531F000C6;
-	Thu, 19 Nov 2026 19:33:24 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=igbIo64e
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0B4581F000C5;
+	Thu, 19 Nov 2026 19:49:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795116807;
-	bh=PWJMTYSDW6iAsrTqVmB1Qlvs30ErsSN50koeWjTGSHw=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=jMbOZnZA8j4robSgY6UyfOJcpZdRYUZ3spw9ZtNR6lt3NqIPu7/4myaHxXzZ9Hvss
-	 uVJFX8XXVocA4XEn1+0TuAoQJJPRFBQNGIrWHYEwqCWEMhyWPGle9UTNwmXDmyOEtQ
-	 9JSwE0tk2mO/sYdAPWhDras1nnNN7jdFQqH6t+RR7C5XI7SJlYvbDDoYuJkA25K4kk
-	 5GaRj6XWg7cQ+c/aQ7tNv/8YyohIH9AtXsxSgSdjdD/mzeUq5vQNjXjhxfUN7MgkM4
-	 4QONZxAhnJ6Yb/P7yqnl1a0NAAK6jObYhIk4z/kFlbxH9eUNkuqHcj/OOzpxkmDlxD
-	 f+LRLD1/Q7mZw==
-From: Mark Brown <broonie@kernel.org>
-To: Baolin Wang <baolin.wang@linux.alibaba.com>, 
- Orson Zhai <orsonzhai@gmail.com>, Lee Jones <lee@kernel.org>, 
- Weibin Liu <liuwb@xiaopeng.com>
-Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
- linux-spi@vger.kernel.org, Chunyan Zhang <zhang.lyra@gmail.com>, 
- mfd@lists.linux.dev, Guanglei Zhu <zhugl3@xiaopeng.com>, 
- Sashiko <sashiko-bot@kernel.org>
-In-Reply-To: <20261026153253.689525-1-liuwb@xiaopeng.com>
-References: <20261026153253.689525-1-liuwb@xiaopeng.com>
-Subject: Re: (subset) [PATCH v3 0/2] mfd/spi: sprd: fix ADI transfer length
- handling
-Message-Id: <179510519992.116416.10027054295285849555.b4-ty@b4>
-Date: Thu, 19 Nov 2026 16:19:59 +0000
+	s=k20260515; t=1795117784;
+	bh=gDsAJvJzkxTjWKsQDYc43r0mxoSvKQLIjsKVDf45Mok=;
+	h=From:To:Cc:Subject:Date;
+	b=igbIo64eiJnIUIW03oOk9cKCyhCAZ9rcJJMK3o1KRYPZc4X1aSSzlR+jKoRglV1VR
+	 UdaM1gWRSVgeBl7JYYEPAZ+8BKKuGNhA0FzB2h8nVGkZSrxGso+2XKRJrxsnGjhkEL
+	 PknXTOklzuUUbM9yVY31+LPwZKiT/Qgp0BZFFeUjWLG5s39k1Vs9x1J19OL3D3jo3A
+	 kxa1YtYEDD3JUXLgjzZ6c93HmwwPhHMzgLNLL86frD+UEdS/QQV9SY33muNMyiGGIM
+	 A+imCOcZcX7++H+H164IEPMm62NtKfQ5dKGuCxOLbawAhQljzfARxTCxb30hwGgx8M
+	 iCMjYgcGKP5+Q==
+From: Lee Jones <lee@kernel.org>
+To: lee@kernel.org
+Cc: linux-kernel@vger.kernel.org,
+	Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	Kai Svahn <kai.svahn@nokia.com>,
+	Kevin Hilman <khilman@baylibre.com>,
+	linux-omap@vger.kernel.org,
+	mfd@lists.linux.dev,
+	Peter Ujfalusi <peter.ujfalusi@ti.com>,
+	Roger Quadros <rogerq@kernel.org>,
+	Samuel Ortiz <sameo@linux.intel.com>,
+	syed khasim <x0khasim@ti.com>,
+	Tony Lindgren <tony@atomide.com>
+Subject: [PATCH v3 0/2] mfd: twl-core: Fix dangling twl_priv on teardown and probe failure
+Date: Thu, 19 Nov 2026 19:49:28 +0000
+Message-ID: <20261119194939.2436337-1-lee@kernel.org>
+X-Mailer: git-send-email 2.56.1.750.gf70dc682cf-goog
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -63,54 +66,44 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1324; i=broonie@kernel.org;
- h=from:subject:message-id; bh=iDO03AS99K8NiTkPwHwoUiyjlCJKa8PanZB+Y4CFVDM=;
- b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLL++zNvVJnZu8Fg6lvRC7XTLpbfEPe7/Vji/dl3Sq+Cx
- SU7hc/ydZSyMIhxMciKKbLEZXG/rC95vYbv4MI2mDmsTCBDGLg4BWAiK/MZGa5XhM/+cut3VqSQ
- L39a5RrmU2FMRyKu/D+ww2G/7I7UhIcM/wtrWF4fn6r25dq+2UZWm78+v9Z5zPP9VNmLty+qlxu
- K8XMCAA==
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Mon, 26 Oct 2026 23:32:51 +0800, Weibin Liu wrote:
-> mfd/spi: sprd: fix ADI transfer length handling
-> 
-> Thanks to Sashiko for reviewing v2.
-> 
-> v3 only rate-limits the two new invalid-length error messages in
-> patch 2. The exact transfer length checks and the SC27xx caller fix
-> are unchanged.
-> 
-> [...]
+These issues were reported by Sashiko.
 
-Applied to
+Patch 1 is the minimal, Stable-suitable fix from v2 (13/27), which was
+skipped when the rest of that series was applied due to a collision with
+"mfd: twl-core: Unregister the auxiliary platform device on unbind".
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/spi.git for-7.5
+Patch 2 is the follow-up suggested by Andreas, converting the manual
+twl_priv reset to a devres action.
 
-Thanks!
+v2 => v3:
+ - Rebased patch 1 onto for-mfd-next
+ - Sent the previously standalone devres follow-up as patch 2
 
-[2/2] spi: sprd-adi: enforce the exact transfer length
-      https://git.kernel.org/broonie/spi/c/ac867057db66
+v2 (patch 1): https://lore.kernel.org/all/20261027093306.2812695-14-lee@kernel.org/
+v1 (patch 2): https://lore.kernel.org/all/20261105110332.1874728-1-lee@kernel.org/
 
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
+Cc: Aaro Koskinen <aaro.koskinen@iki.fi>
+Cc: Andreas Kemnade <andreas@kemnade.info>
+Cc: Kai Svahn <kai.svahn@nokia.com>
+Cc: Kevin Hilman <khilman@baylibre.com>
+Cc: linux-omap@vger.kernel.org
+Cc: mfd@lists.linux.dev
+Cc: Peter Ujfalusi <peter.ujfalusi@ti.com>
+Cc: Roger Quadros <rogerq@kernel.org>
+Cc: Samuel Ortiz <sameo@linux.intel.com>
+Cc: syed khasim <x0khasim@ti.com>
+Cc: Tony Lindgren <tony@atomide.com>
 
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
+Lee Jones (2):
+  mfd: twl-core: Clear twl_priv pointer on teardown and probe failure
+  mfd: twl-core: Reset twl_priv using devm_add_action_or_reset()
 
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
+ drivers/mfd/twl-core.c | 20 +++++++++++++++++---
+ 1 file changed, 17 insertions(+), 3 deletions(-)
 
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-Thanks,
-Mark
+-- 
+2.56.1.750.gf70dc682cf-goog
 
