@@ -1,58 +1,59 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.84.56
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795115495;
-	b=Oo7mqqQlZqCu7kQTVJQmWDc+Cj0oOHIzR50x3PEM/RdCuVq7VO65m351+3nVuHUg6M4j
-	 VzwI7ytz1+rl/QP9QBLtYLIe1mwMgF99eCzZ3ssuIjLaYOdwDW4wzTtolw9vTBU856jSw
-	 mLRgMTdKPsIzCVRlphUOCg5pe7A++07yHAKfqnTjBNBPyrW2zWkTy3Rt5fEbr62+n9a47
-	 NhAIpIHj5bgAg5pKBMQYUUA40hWQlG5TIZh/hCMxAjPEAzHOVBTXUEaBbS/nowFRPbIRu
-	 wFZqd1HRl0FcmuTfXyy9ty7rLqMk3uJAVqk/1zaybT2+oLYxqu258uHkzKR/bRN6nSg==
+	t=1795115773;
+	b=oQMoLQgFu1HYlIGzLmo/0rw7DXBLW3IAw8QsL69lVIm/226fjb6ASLfeMmpc86vz0EgM
+	 sC5L/2YesJMz6YY23qubY2IAUiwPpvJUFjhQt3VlwoXllIcSeN6jtlvwhPh8rvHIt1SNx
+	 Kthh8qROIl7M3GwxGp5uKu4t0+tk1VfalzCf+Mglm9Pemvjnqm9jRqZuuePXPq9kvWFKf
+	 ibLuswbM6PXANxHe47iFPZxGuhv9s2+6UGfkgYdA52IPly2qZOCL/mjGY8ybqmTjQ+4Gl
+	 tD9B/Y7EVVWFZzm2ZQhlWojAtWyLHCqoKZrqcwtghAE86edqP5i3r3gdvFw3+JkEofA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795115495;
-	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Last-TLS-Session-Version;
-	bh=mf4aLKAJISSzznRXGqPfLHizFprMDNg73CHAl3V4K3I=;
-	b=biPVZ2861kLYTRUC4uT+DK1Gc0UwBGt77h/4AWralMBwRmKrDTUdkAvgexD6zNavZQqM
-	 NoT1uzqP2x8a6WejtGy2nO6DoyXJOpU5mjH94GDNaG+BRzmnk80xGNdljmaI0eGPOyAso
-	 7iB7dZrTxsHLjr+Xc9mLXtx5zZR+OcP7Ig4qGrh2E+IKES2kg2b58AV4cJR6K1gCC0hzX
-	 O0/V3nYVPc3GXkz7ZvgpyZacdQuty64G0+f2U5WjvgzoOOqbk5/d1rxyp2fdLol8OOoG/
-	 /tKuvSuimsklP5TTWSthIWEQg3jWVkV14jo9VPZ5EDFhxEEugzqsUfo8cF8X9PbuNmQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795115773;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=+YptLFOK/EBAxVUJQntkNmJVGlHLd+Rimgm9hn2ud24=;
+	b=DeTtrN8raG/F+HRqS+/Li5rQXaRT6ZVH6fdbF43tw+1rcPq4yxw6eS+QnC3UpQabpn+A
+	 e+8UGzqtzGHTQoYyQ+iCtyGF27/BDROqOx00DzmWYQTrxx2iPj2d39dryDQfOCSAHt2wk
+	 +NlNIY+KGP/apvYs88CPJ+kQDbcw3YhxJUjc/PMoIyhqASZsRE19PZOrunEGEQu8BPKEN
+	 05JZS8OK8ZjNDoo/1hN07UWqfcfsETH/KHKuJjwmgwgK2Fm4eEk2vZTz46ViFwXPrEiEp
+	 F23ImEhrkCHNmXNtychHydCJz98yJkYAQUsQvamOP3kS4+3miacR30C1UABLPdLOSqQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=bootlin.com;
-	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b="bPb/eZNE";
-	arc=none smtp.remote-ip=185.246.84.56
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fFyZ+0Gf;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E9C6D606A33C
-	for <mfd@lists.linux.dev>; Thu, 19 Nov 2026 19:11:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E9C6D606A33C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 754C4606A325;
+	Thu, 19 Nov 2026 19:16:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=bPb/eZNE
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id 6AF731A1721;
-	Thu, 19 Nov 2026 19:11:31 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 3A2EF6035B;
-	Thu, 19 Nov 2026 19:11:31 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id DD13A11BC03AB;
-	Thu, 19 Nov 2026 20:11:24 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1795115486; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:content-language:in-reply-to:references;
-	bh=mf4aLKAJISSzznRXGqPfLHizFprMDNg73CHAl3V4K3I=;
-	b=bPb/eZNE+7iL42rsbu37kZ8sagGOTIHbBjZKMPDrr+DxMnAwiW16QqbSJQqywH5bBkKcN8
-	Y4aodr1k4knjh05a85WoHhOsevt1VVxBMhF70VOPtfeKM7XLhPsM7LJxY8S6ThK2njBOu4
-	ao+ebxbKXyzYfEbqC0IMGqkmk502oT4PUBmRDl7owS3snlAWrDo6HDipyp/74blDW7DO2X
-	RGIVdTY4zKUGTWD/3Icf8xM2eaBR/Tkfzrk3K1/5CJRPeVcSK21GlK5kqyrubdqGr2B1o6
-	SeEYPwcqH6rEP62lIU4DPvfkVtKGzUOC5fcyOfixTcy73tjrcm0uI4CGzU5JeA==
-Message-ID: <70053889-0a00-412f-a4bf-4fa4119563b0@bootlin.com>
-Date: Thu, 19 Nov 2026 20:11:23 +0100
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fFyZ+0Gf
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CA5F11F000C5;
+	Thu, 19 Nov 2026 19:16:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795115773;
+	bh=+YptLFOK/EBAxVUJQntkNmJVGlHLd+Rimgm9hn2ud24=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=fFyZ+0Gfk6xbAOKNndUs+ptaS8i8DhdiJ5Fu7nIzVLIYMD5nzK9YZOrGWIJXwmG/u
+	 yJlalwvLh6kKBO5E2YqTASKMYqqPTQ4WYqaS0ztNB5eRUucp6w+l+rnR8qmoW4y1lc
+	 Lua33bLSUieVq1KSp54d5xc+Zj1elEX28TgSLJgCJk79UUSsQGi1S7xW37OMrfJT8F
+	 RpKd8mNlEuydD0XGtTsUa/4yYO4ZTzrJlE7gyq61Pk7ojktodGTet+o+bJl/k+8fBz
+	 Bxy2su0W88pajyqVLCkLGkGG5vthDyX8LB5cy3SPOv/KffphLWYXNg0iwkH3Rl/ezF
+	 yvIGXbpU385Ww==
+Date: Thu, 19 Nov 2026 19:16:07 +0000
+From: Lee Jones <lee@kernel.org>
+To: Jerome Brunet <jbrunet@baylibre.com>, broonie@kernel.org
+Cc: Andre Przywara <andre.przywara@arm.com>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Chen-Yu Tsai <wens@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>, Hans de Goede <hansg@kernel.org>,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	mfd@lists.linux.dev, linux-sunxi@lists.linux.dev,
+	Sashiko <sashiko-bot@kernel.org>,
+	Conor Dooley <conor.dooley@microchip.com>
+Subject: Re: [PATCH v8 0/5] regulator: Add X-Powers AXP318W PMIC support
+Message-ID: <20261119191607.GC70182@joneslee-macbookpro.roam.internal>
+References: <20260910-axp318-regulator-v8-0-e906a61a7f3d@baylibre.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -62,37 +63,16 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 00/10] Congatec Board Controller: Add storage devices
- support
-To: Lee Jones <lee@kernel.org>
-Cc: Andi Shyti <andi.shyti@kernel.org>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Werner Gartner <Werner.Gartner@congatec.com>, mfd@lists.linux.dev,
- linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org,
- stable@vger.kernel.org, Sashiko <sashiko-bot@kernel.org>
-References: <20261117-cgbc-i2c-storage-devices-support-v6-0-bb070ad3e9aa@bootlin.com>
- <20261119190350.GB70182@joneslee-macbookpro.roam.internal>
-Content-Language: en-US
-From: Thomas Richard <thomas.richard@bootlin.com>
-In-Reply-To: <20261119190350.GB70182@joneslee-macbookpro.roam.internal>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260910-axp318-regulator-v8-0-e906a61a7f3d@baylibre.com>
 
-On 11/19/26 8:03 PM, Lee Jones wrote:
-> On Tue, 17 Nov 2026, Thomas Richard (congatec GmbH) wrote:
-> 
->> This is the 6th iteration. As discussed with Lee [1] I just picked his I2C
->> patch [2] (to handle the conflict) and rebased the series on top of
->> next-20261116.
->>
->> [1] https://lore.kernel.org/all/c9d26395-93f8-4e63-9cd0-586ce913931b@bootlin.com/
->> [2] https://lore.kernel.org/all/20261027093306.2812695-27-lee@kernel.org/
-> 
-> I assume this all needs to go in at once?
+> This patch series adds support for the X-Powers AXP318W PMIC, which is
+> used recently on new boards with Allwinner SoCs (the A733).
 
-Yes please.
+Okay, this looks good enough.
 
-Best Regards,
-Thomas
+Mark, do you need a PR?
+
+-- 
+Lee Jones
