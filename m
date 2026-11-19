@@ -1,81 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795112450;
-	b=wIk/fRQzMAh7NHkaeoCiOia2aM7uR3FxR7zXifMeut/cLC9ExHzDqjgpxhCSKDmUnTC4
-	 ZuEWNBppQcoxQIkUVi3vK8j+XFSgHofmsyrhZLhU4pZzgWx035iR0oSN5HtXAI1z0cwkF
-	 nLl1l9gr6jg/wgOVV46OoebxBsag3UyBhVrLoUtc/fr3WrsYpeoabf1BBQ4e9vwK27IpS
-	 qf5u7eT+Rjan5he2nxDIX9xuLAMvnLJDA+0LZ70ay7R0ZTldMBQWlm/bWfyEGfXWdr7tO
-	 +C6N6RA4QxbuMljEvIi0pOvt+30XARC/70kYeFhOfjDj95mWmsL4bIoQsEgjh+xz4vw==
+	t=1795113136;
+	b=2ShTGw4Ey+JAaUJB5r76U3RjZx9JsV4NpR4vT3WowTupXubqORmeBhreGIHy21frhiRh
+	 fQw0W2ZU/dEyNy22BuWYeLR708JBBBR/LCzsR0vcfLLwncDig768lht7YcY2j025ioUFa
+	 WvqZ4DjsxsumPTUSEUZp4yjTjN/Ov91DOESmWtG4JBdN9TS0N47yfKpQAGVtn45Hi+O49
+	 SV1NvB/kVYtiW6ses6sjBAsXfmpDISHxdQmWhQEjv7mfsV83RmQtdfqml5aR9jnHvItFn
+	 orVrWI7PrwV3LApTSHlEN7vj8+b4Te1EG1Aj6LNlc8L3VOXc9jYpbffXbiT2h/2r4wg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795112450;
-	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer;
-	bh=5cY+QOFSRab+vw7Ar5Uc+Mh1ld4eiD0jvPyComZKkI8=;
-	b=MvCGHQeSVJeruMRl0a27+xVHcKTpNwtpxb7U+IAugbJqU2xMORWeZcZ+00XwvUKb/I6n
-	 KvhkbrKVemkwkJ+27LiniKf0vinp9mtOk45CmuZvERsK354OWiqgEAdJKyVSfP4Nu52aP
-	 dZblhoHdgcoR7u8qREJxVz1rVYZzaqYk5GfKuCMtBFKzKNeSRqC7E4oK0fgRWTWEs89UG
-	 Y5zJKG78ctaC0TuSKSIQhHvRkg2lgk8xFwdNTBfK3QFrPkyNSoAnt08EFYwvIJG3RD3un
-	 l5e5mgE2SL2LTQeLzRVPM/0HH860l4fLJnCEY2wpLi93/JLduiwphEH3cOb4PUkFdGw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795113136;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=nipKs9262eBvG32JnGTpMVA/4l3aCvA/z8Tcif1DkJo=;
+	b=kBDTxVyTVDsi13zbTWYOUs3PeeeeqD6Yt8EkB5LAaaFSISwhlSYfLz0drZmQNn6N4HP0
+	 Q4IXG0mvsWPtpInh+fgixdMx7y5QQaoavo4Jq+fVuWFdalpdOq0mQvoXHlAxBMiQhwmMM
+	 +fSsphu2zoY+atZsxewC6Fbgbt4+dUyWJTyNAbpu7XxGcG6fW6xR+XIPkpGlIkaG+ZeOj
+	 sZn5OyUlGf0ZjxRWjEfvAi9B2XN7j1XmVRzxJSrxqO6kUXf9VQjMbZxOz/xBbK0T186BS
+	 Pt4k0NlBi+kuGKgzALreYfCf2xQVmCShXLiP7zBCK8s5z8ivM2YQZygrOg4Jukjt2XQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mFVkDPWN;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HSZoY4YF;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE7E5606A325;
-	Thu, 19 Nov 2026 18:20:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D553606A337;
+	Thu, 19 Nov 2026 18:32:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mFVkDPWN
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B0EC1F000C5;
-	Thu, 19 Nov 2026 18:20:41 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HSZoY4YF
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8FC391F000C4;
+	Thu, 19 Nov 2026 18:32:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795112449;
-	bh=5cY+QOFSRab+vw7Ar5Uc+Mh1ld4eiD0jvPyComZKkI8=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=mFVkDPWNUUaI/lD8LZupI2Dv6P1hrK9IDKEmnqQP3hRcjIokrajVdotKHQAyu0NV/
-	 LRn7QDpEIl7PkujuQRr3JBOYQ+mJ0JJKhFd3EksrdvpLpq/b5w75RdtGldsmRSuWuG
-	 Ej9e2CQPJJ3vc6ty6KfikChr+J+4TieOCN5RUxlTysnTo90F+i3dQL/yhRCP6r9QKI
-	 ZUEOfNqI0qQI7nJ3efrl+mVFZSuYADsTl8cPGElqU4t+ZqtyImk+pdJ6b3Tve3I3qk
-	 6SUHTGBRqWjRzEw9B/SNFUNcnVx4t7sMsIkZvT0Ltu1LVrPnQ/gifStw7uYoI+dALN
-	 894KwzJuU9EZw==
+	s=k20260515; t=1795113136;
+	bh=nipKs9262eBvG32JnGTpMVA/4l3aCvA/z8Tcif1DkJo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=HSZoY4YFIuCsD2jdmflXQCq7bRcjBHTvlunBUrddKB7lLQd23EAXl0EgNNwn+k/H3
+	 UiU0eRZISfV+puwehu1aZslzbU+TduTaUa1r7RVQYCo2BF1uHQyaYrYgY/1pkvOflx
+	 ZReFdIxTLMT9acw2+FoPtli6l8Soqys0uzkdhegcEuN+o3SsJa1tEFk0JBxvBqgT5e
+	 skYVFPv/cChV6wBwc0ywt00Zc4lY8hduwNdmjp+YT9/V7Wagx/UhBvRtBvUCuu2Sm4
+	 Oe2D2A+ESOcd4THn1STChrn0xOq5xDmgezmWEkYKhKALolruLVMiTlELJUvpoTQqlv
+	 HYXdU5vG/kgxA==
+Date: Thu, 19 Nov 2026 18:32:11 +0000
 From: Lee Jones <lee@kernel.org>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Robert Marko <robimarko@gmail.com>, 
- Guru Das Srinagesh <linux@gurudas.dev>, Thomas Gleixner <tglx@kernel.org>, 
- Radu Rendec <radu@rendec.net>, Lee Jones <lee@kernel.org>, 
- Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, 
- "Joerg Roedel (AMD)" <joro@8bytes.org>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Wesley Cheng <wesley.cheng@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Manivannan Sadhasivam <mani@kernel.org>, 
- Alim Akhtar <alim.akhtar@samsung.com>, Bart Van Assche <bvanassche@acm.org>, 
- Bean Huo <beanhuo@micron.com>, Stanley Jhu <stanleyjhu@google.com>, 
- Herbert Xu <herbert@gondor.apana.org.au>, 
- "David S. Miller" <davem@davemloft.net>, 
- "Rafael J. Wysocki" <rafael@kernel.org>, 
- Viresh Kumar <viresh.kumar@linaro.org>, Amit Kucheria <amitk@kernel.org>, 
- Thara Gopinath <thara.gopinath@gmail.com>, 
- Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
- Lukasz Luba <lukasz.luba@arm.com>, Georgi Djakov <djakov@kernel.org>, 
- Sibi Sankar <sibi.sankar@oss.qualcomm.com>, 
- Stanislav Aleksandrov <lightofmysoul@gmail.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, mfd@lists.linux.dev, 
- linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev, 
- linux-usb@vger.kernel.org, linux-phy@lists.infradead.org, 
- linux-scsi@vger.kernel.org, linux-crypto@vger.kernel.org, 
- linux-pm@vger.kernel.org
-In-Reply-To: <20261109-halliday-dts-v1-5-289114ab8197@gmail.com>
-References: <20261109-halliday-dts-v1-5-289114ab8197@gmail.com>
-Subject: Re: (subset) [PATCH 05/17] dt-bindings: mfd: qcom,tcsr: Add
- Halliday TCSR
-Message-Id: <179511244123.91992.13336083093444200069.b4-ty@b4>
-Date: Thu, 19 Nov 2026 18:20:41 +0000
+To: Mark Brown <broonie@kernel.org>
+Cc: Charles Keepax <ckeepax@opensource.cirrus.com>, lgirdwood@gmail.com,
+	linux-sound@vger.kernel.org, linux-kernel@vger.kernel.org,
+	mfd@lists.linux.dev, patches@opensource.cirrus.com
+Subject: Re: (subset) [PATCH v2 1/2] mfd: cs42l43: Add load detection
+ register needed for cs42l43b
+Message-ID: <20261119183211.GA70182@joneslee-macbookpro.roam.internal>
+References: <20261112141650.1931348-2-ckeepax@opensource.cirrus.com>
+ <179510674408.77674.4732953853855712916.b4-ty@b4>
+ <22f5f813-79b1-41f0-849c-263224c651c9@sirena.org.uk>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -85,18 +60,29 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.16-dev-ad80c
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <22f5f813-79b1-41f0-849c-263224c651c9@sirena.org.uk>
 
-On Mon, 09 Nov 2026 00:33:17 +0000, Stanislav Aleksandrov wrote:
-> Document the TCSR block on the Qualcomm Halliday SoC.
+On Thu, 19 Nov 2026, Mark Brown wrote:
 
-Applied, thanks!
+> On Thu, Nov 19, 2026 at 04:45:44PM +0000, Lee Jones wrote:
+> > On Thu, 12 Nov 2026 14:16:49 +0000, Charles Keepax wrote:
+> > > The headphone load detection procedure on cs42l43b is slightly different
+> > > and require a register that wasn't used on previous versions of the
+> > > chip. Add that register into the driver.
+> > 
+> > Applied, thanks!
+> > 
+> > [1/2] mfd: cs42l43: Add load detection register needed for cs42l43b
+> >       commit: cc29c6e45db7b4306efc7a76e7a64d549229d4ac
+> 
+> Can I get a tag for this please, I need the register definitions it adds
+> to build patch 2?
 
-[05/17] dt-bindings: mfd: qcom,tcsr: Add Halliday TCSR
-        commit: 51a1764ff434dff86994f7e03125033deebda6e3
+Sure.  Building now.
 
---
-Lee Jones [李琼斯]
+Note to self: ib-mfd-asoc-7.5
 
+-- 
+Lee Jones
