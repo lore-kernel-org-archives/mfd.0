@@ -1,22 +1,22 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=92.121.34.13
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
 	t=1795082112;
-	b=w42+3W+9eiKpsgz94TJq+cva2834rWAoN34+XcCscC/Ra+k7F+do5SzM5ZJCShlCP2ta
-	 UAsZMSiUcCBs283eNNRP8cWIgw09G9JvRx/jZe4dK0rvc026qGTMIKs/ACHcO5ydS3Z+f
-	 Uq2YNk9czb2/SRpM7r/h97QotDRIebIT7Os+hKnjR6nqsvE3UbbVVn5QIHsufu1t8ZyFV
-	 yAqYGezMFOSiWx1CVrzVXwFEeb58sXAaZB7ZGn0tu6qbA9bHhwBIfHUAJWsN34X7zQMlB
-	 Bzpiy9lfDMlAAmWrFBMu4fujFBKrfxdSjE4dUL/k7z6sQPhiopJ+gAwyejtaw3UdHIA==
+	b=c0LeMlfjUn1PCQTmpCNPdXCQtVPIk0xPCAuE0x90IQ8s7vXGT0PB9yQ4slo2urpRW1D5
+	 +S/h0iUH2l8Uw84+thZ8tA9OoGD/1pD47BE1Zc9+HxvIUMBR2q2Gnu/I59tdRvHrJYPkt
+	 e69cI67KIt7HaZcQhEcC7pX0yl/9Agsof3Boh9smZLLgXbdcHK4/DdlWytb9i2QRNuXLx
+	 AoV9guE7cnRGrAj/akh3ua5zZdFbxG2NEjr2k6nlzVxruIn4ESToZn4uuIs42RM6SBGkI
+	 BSQf5adkME44pkVekV4uCiDrRxcpJI+fHVcoXFyBRdYvOmlbSIZi1yVEN6S0xwisE8Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	a=rsa-sha256; c=relaxed/relaxed; t=1795082112;
 	h=DMARC-Filter:Received:Received:Received:From:To:Cc:Subject:Date:
 	 Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding:X-Virus-Scanned;
-	bh=HDFfJMYjA/4PDkZED5h1rnMl4E/X0Rt7XsAkxCIQK1c=;
-	b=raiIG8pBp8bxnYIzTYezC298TJik0MBuze1OJPqWpLazGhzjVRxQBIDy1UbLRi7EBKBl
-	 3IxDOTWuduAqMbaDL+bboitehE5LZvJnfrg2PyJ+iqDWBnsGY29LJ2J/B2CRGI/6oU6Ly
-	 pywpSmVxP9m84cd6OfM0GGYiAtHO8kWURcBYZexGsuhfM1cmn9RbiliRSuBnQRnSDoDff
-	 Rs9H3tlNx1kdBHe0ZVxLxFNsf3EtPFlc6yzJ49gXLB0zRhyOnRB8fY+GAU/ZzeV1h8S9E
-	 mEs+L8KHIr+6GkkhHSJSOI7bSVW+owQbjgJTstB0i70QvHBu778K05ADtWxKzuL3urA==
+	bh=wYNzV+Ts3x6qs75ShYXKB13OuZkDZMRoQuAF7cVVpDw=;
+	b=ORJiUVGkQKbUaCSn/OlTj9KzZODUiEFIk2tJ2GuM9QE7AWwzX9tpoueU/J31bvzTxugh
+	 MqqQz4l5UgEULg0R5R5EEj+Y5iOdQnTNkA1wHySLlaUNYBqoaiMhP4zaGWx/816MGSgfm
+	 OimSs56yOxhzs6QT7r6n4HbG/dCw08j7LVsAMEcKQxg1+RsXTXocjeoCi1d61MAgrIywx
+	 UK+HnQoI1t2QT5SnxxfSpLMcJy4lareiiOITFlgDgrHnK5l3I7NpyZ74psRI8iwBOvWZQ
+	 6K/yDX3K81Pq9or+9AYQUIG6BcS4KLuLn+3nzKt/q7zB1tZolQ+cfKE/dWBgEklSGFA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=nxp.com;
 	spf=pass smtp.mailfrom=nxp.com;
@@ -24,20 +24,20 @@ ARC-Authentication-Results: i=1; smtp.subspace.kernel.org;
 Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5AAB4606A337
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A802360A2600
 	for <mfd@lists.linux.dev>; Thu, 19 Nov 2026 09:55:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5AAB4606A337
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A802360A2600
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxp.com
 Received: from inva020.nxp.com (localhost [127.0.0.1])
-	by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id F3EAA1A004C;
-	Thu, 19 Nov 2026 10:55:03 +0100 (CET)
+	by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 54F721A003F;
+	Thu, 19 Nov 2026 10:55:10 +0100 (CET)
 Received: from aprdc01srsp001v.ap-rdc01.nxp.com (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
-	by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id BE37A1A003D;
-	Thu, 19 Nov 2026 10:55:03 +0100 (CET)
+	by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id E9FEF1A0003;
+	Thu, 19 Nov 2026 10:55:09 +0100 (CET)
 Received: from lsv03900.swis.in-blr01.nxp.com (lsv03900.swis.in-blr01.nxp.com [10.12.177.15])
-	by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id 0E5431800068;
-	Thu, 19 Nov 2026 17:55:00 +0800 (+08)
+	by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id 3A10F1800068;
+	Thu, 19 Nov 2026 17:55:07 +0800 (+08)
 From: Lakshay Piplani <lakshay.piplani@nxp.com>
 To: linux-kernel@vger.kernel.org,
 	linux-i3c@lists.infradead.org,
@@ -51,9 +51,9 @@ Cc: vikash.bansal@nxp.com,
 	priyanka.jain@nxp.com,
 	aman.kumarpandey@nxp.com,
 	Lakshay Piplani <lakshay.piplani@nxp.com>
-Subject: [PATCH v22 1/5] i3c: hub: Mark downstream DT addresses as desired on parent bus
-Date: Thu, 19 Nov 2026 15:24:45 +0530
-Message-Id: <20261119095449.555593-2-lakshay.piplani@nxp.com>
+Subject: [PATCH v22 3/5] regulator: p3h2x4x: Add driver for on-die regulators in NXP P3H2x4x i3c hub
+Date: Thu, 19 Nov 2026 15:24:47 +0530
+Message-Id: <20261119095449.555593-4-lakshay.piplani@nxp.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20261119095449.555593-1-lakshay.piplani@nxp.com>
 References: <20261119095449.555593-1-lakshay.piplani@nxp.com>
@@ -69,126 +69,442 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-I3C devices behind hub target ports share the parent controller's
-dynamic address space. Their assigned dynamic addresses from Device
-Tree must be preserved so that parent DAA does not allocate the same
-addresses to other devices.
+From: Aman Kumar Pandey <aman.kumarpandey@nxp.com>
 
-Previously, the hub reserved these addresses by marking the parent
-bus slots as I3C_ADDR_SLOT_I3C_DEV, even though the downstream devices
-were not attached to the parent bus. This could cause address
-reconciliation to incorrectly treat these slots as occupied by
-orphaned I3C devices.
+The NXP P3H2x4x family integrates on-die regulators alongside I3C hub
+functionality. This driver registers the regulators using the MFD
+framework and exposes them via the regulator subsystem.
 
-Introduce i3c_bus_set_addr_slot_desired() to mark an address as
-desired without changing its current slot status.
-
-Use this helper when processing downstream I3C devices described in
-Device Tree. This allows parent DAA to avoid the desired addresses
-while keeping the slots free until the corresponding devices are
-actually attached.
-
-Keep the desired address markings for the lifetime of the parent bus,
-as they represent the fixed Device Tree topology.
-
+Signed-off-by: Aman Kumar Pandey <aman.kumarpandey@nxp.com>
+Signed-off-by: Vikash Bansal <vikash.bansal@nxp.com>
 Signed-off-by: Lakshay Piplani <lakshay.piplani@nxp.com>
+Reviewed-by: Frank Li <Frank.Li@nxp.com>
+Reviewed-by: Mark Brown <broonie@kernel.org>
 
 ---
 Changes in v22:
- - Add a generic I3C core fix for downstream DT-assigned address handling
-   on the parent bus.
- - Introduce i3c_bus_set_addr_slot_desired() to set
-   I3C_ADDR_SLOT_EXT_DESIRED without changing slot occupancy.
- - Avoid treating downstream addresses as orphaned parent-bus devices
-   during DAA reconciliation.
- - Preserve downstream address preferences across parent DAA.
----
----
- drivers/i3c/hub.c          | 18 +++++++++++-------
- drivers/i3c/master.c       | 20 ++++++++++++++++++++
- include/linux/i3c/master.h |  2 ++
- 3 files changed, 33 insertions(+), 7 deletions(-)
+ - Replace device_set_of_node_from_dev() with
+   platform_device_set_of_node_from_dev() so the inherited OF
+   node reference is released when the platform device is
+   unregistered.
 
-diff --git a/drivers/i3c/hub.c b/drivers/i3c/hub.c
-index 539028768084..95eec5b0cada 100644
---- a/drivers/i3c/hub.c
-+++ b/drivers/i3c/hub.c
-@@ -763,10 +763,15 @@ EXPORT_SYMBOL_GPL(i3c_hub_init);
-  * @hubc: I3C hub controller for a target-port virtual bus.
-  * @node: Target-port bus Device Tree node.
-  *
-- * Reserve parent bus address slots for the assigned dynamic address of each
-- * downstream I3C device described in the Device Tree, so that parent DAA does
-- * not hand the same address to another device. Downstream devices behind hub
-- * target ports share the parent controller's dynamic address space.
-+ * Mark the assigned dynamic address of each downstream I3C device described in
-+ * the Device Tree as desired on the parent bus, so that parent DAA avoids
-+ * handing the same address to another device while it is still free.
-+ * Downstream devices behind hub target ports share the parent controller's
-+ * dynamic address space.
-+ *
-+ * A desired address is only a preference: the slot stays free, so the parent
-+ * does not report it as occupied and address reconciliation does not mistake
-+ * it for an orphaned device that has to be probed.
-  *
-  * The reservations describe a fixed Device Tree topology and are kept for the
-  * lifetime of the parent bus; they are not released when a target port is
-@@ -816,9 +821,8 @@ int i3c_hub_reserve_parent_addrslots_from_dt(struct i3c_hub_controller *hubc,
- 		status = i3c_bus_get_addr_slot_status(&parent->bus,
- 						      assigned_addr);
- 		if (status == I3C_ADDR_SLOT_FREE)
--			i3c_bus_set_addr_slot_status(&parent->bus,
--						     assigned_addr,
--						     I3C_ADDR_SLOT_I3C_DEV);
-+			i3c_bus_set_addr_slot_desired(&parent->bus,
-+						      assigned_addr);
- 		i3c_bus_maintenance_unlock(&parent->bus);
- 	}
- 	return 0;
-diff --git a/drivers/i3c/master.c b/drivers/i3c/master.c
-index 9928c5dffb5b..146edbc279a3 100644
---- a/drivers/i3c/master.c
-+++ b/drivers/i3c/master.c
-@@ -448,6 +448,26 @@ void i3c_bus_set_addr_slot_status(struct i3c_bus *bus, u16 addr,
- }
- EXPORT_SYMBOL_GPL(i3c_bus_set_addr_slot_status);
+Changes in v21:
+ - Rebased onto v7.4-rc2; no functional changes
+
+Changes in v20:
+ - No change
+
+Changes in v19:
+ - No change
+
+Changes in v18:
+ - Rebased onto v7.3-rc1; no intended driver behaviour changes
+
+Changes in v17:
+ - Add .enable_time = 5000 through P3H2X4X_LDO_ENABLE_TIME_US to all four
+   LDO descriptors, so the regulator core applies the post-enable
+   settling delay
+
+Changes in v16:
+ - Mark the p3h2x4x_regulators[] descriptor array as const
+ - Keep the standard MFD dev_get_drvdata(pdev->dev.parent) parent-context
+   access and the shared include/linux/mfd/ header (used only by the parent
+   and its children)
+
+Changes in v15:
+ - No change
+
+Changes in v14:
+ - Use the shared MFD protected_reg_lock instead of a regulator-private mutex
+   to serialize protected register access across P3H2X4X child drivers
+ - Rework protected register handling into explicit unprotect/protect helpers
+   and restore the original protection state after each regulator operation
+ - Ensure protected registers are restored even if enable, disable or
+   set_voltage_sel fails
+
+Changes in v13:
+ - Serialize register unlock/modify/lock sequences using a device-level mutex to
+   avoid races between regulators.
+ - Ensure proper module auto-loading by adding platform device ID table.
+ - Improve error handling in register guard paths to avoid operating on locked hub.
+
+Changes in v12:
+ - No change
+
+Changes in v11:
+ - No change, added Reviewed-By tag
+
+Changes in v10:
+ - No change
+
+Changes in v9:
+ - No change
+
+Changes in v8:
+ - No change
+
+Changes in v7:
+ - No change, added Reviewed-By tag
+
+Changes in v6:
+ - Use DEFINE_LOCK_GUARD_1 for reg lock/unlock
+
+Changes in v5:
+ - Updated dev_err_probe() for regmap_init failure.
+ - Updated module description
+
+Changes in v4:
+ - Split the driver into three separate patches (mfd, regulator and I3C hub)
+ - Introduced driver for on-die regulators in NXP P3H2x4x I3C hub
+---
+---
+ MAINTAINERS                                   |   1 +
+ drivers/regulator/Kconfig                     |  10 +
+ drivers/regulator/Makefile                    |   1 +
+ drivers/regulator/p3h2840_i3c_hub_regulator.c | 289 ++++++++++++++++++
+ 4 files changed, 301 insertions(+)
+ create mode 100644 drivers/regulator/p3h2840_i3c_hub_regulator.c
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 15f339ff3854..fe7e66e0f106 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -20333,6 +20333,7 @@ L:	linux-i3c@lists.infradead.org
+ S:	Maintained
+ F:	Documentation/devicetree/bindings/i3c/nxp,p3h2840.yaml
+ F:	drivers/mfd/p3h2840.c
++F:	drivers/regulator/p3h2840_i3c_hub_regulator.c
+ F:	include/linux/mfd/p3h2840.h
  
-+/**
-+ * i3c_bus_set_addr_slot_desired() - Mark an I3C address as desired
-+ * @bus: I3C bus.
-+ * @addr: I3C address preferred by a device.
-+ *
-+ * Record that a device would like @addr without claiming that a device
-+ * already uses it. Dynamic address assignment then avoids @addr while it
-+ * is still free, but address reconciliation does not treat it as an
-+ * orphaned device.
-+ *
-+ * The caller must hold the bus maintenance lock.
+ NXP PF5300/PF5301/PF5302 PMIC REGULATOR DEVICE DRIVER
+diff --git a/drivers/regulator/Kconfig b/drivers/regulator/Kconfig
+index 83a76b78e58c..44ec57bef101 100644
+--- a/drivers/regulator/Kconfig
++++ b/drivers/regulator/Kconfig
+@@ -1039,6 +1039,16 @@ config REGULATOR_NEX10000UB
+ 	  This driver supports the NEX10000UB single inductor - dual output
+ 	  power supply specifically designed for display panels.
+ 
++config REGULATOR_P3H2X4X
++	tristate "NXP P3H2X4X regulator support"
++	depends on MFD_P3H2X4X
++	help
++	  This driver provides support for the voltage regulators of the
++	  P3H244x/P3H284x multi-function I3C Hub device.
++
++	  Say M here if you want to include support for this regulator as
++	  a module. The module will be named "p3h2840_i3c_hub_regulator".
++
+ config REGULATOR_PALMAS
+ 	tristate "TI Palmas PMIC Regulators"
+ 	depends on MFD_PALMAS
+diff --git a/drivers/regulator/Makefile b/drivers/regulator/Makefile
+index 6aabcc54382a..b6f62dc69978 100644
+--- a/drivers/regulator/Makefile
++++ b/drivers/regulator/Makefile
+@@ -130,6 +130,7 @@ obj-$(CONFIG_REGULATOR_QCOM_RPMH) += qcom-rpmh-regulator.o
+ obj-$(CONFIG_REGULATOR_QCOM_SMD_RPM) += qcom_smd-regulator.o
+ obj-$(CONFIG_REGULATOR_QCOM_SPMI) += qcom_spmi-regulator.o
+ obj-$(CONFIG_REGULATOR_QCOM_USB_VBUS) += qcom_usb_vbus-regulator.o
++obj-$(CONFIG_REGULATOR_P3H2X4X) += p3h2840_i3c_hub_regulator.o
+ obj-$(CONFIG_REGULATOR_PALMAS) += palmas-regulator.o
+ obj-$(CONFIG_REGULATOR_PCA9450) += pca9450-regulator.o
+ obj-$(CONFIG_REGULATOR_PF0900) += pf0900-regulator.o
+diff --git a/drivers/regulator/p3h2840_i3c_hub_regulator.c b/drivers/regulator/p3h2840_i3c_hub_regulator.c
+new file mode 100644
+index 000000000000..111bf1c522c6
+--- /dev/null
++++ b/drivers/regulator/p3h2840_i3c_hub_regulator.c
+@@ -0,0 +1,289 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright 2025-2026 NXP
++ * NXP P3H2X4X regulator driver file contain functions for enable/disable regulator
++ * and voltage set/get.
 + */
-+void i3c_bus_set_addr_slot_desired(struct i3c_bus *bus, u16 addr)
++#include <linux/bitfield.h>
++#include <linux/cleanup.h>
++#include <linux/mfd/p3h2840.h>
++#include <linux/of.h>
++#include <linux/platform_device.h>
++#include <linux/regmap.h>
++#include <linux/regulator/driver.h>
++
++#define P3H2X4X_LDO_AND_PULLUP_CONF				0x19
++#define P3H2X4X_LDO_ENABLE_DISABLE_MASK				GENMASK(3, 0)
++#define P3H2X4X_CP0_EN_LDO				        BIT(0)
++#define P3H2X4X_CP1_EN_LDO				        BIT(1)
++#define P3H2X4X_TP0145_EN_LDO					BIT(2)
++#define P3H2X4X_TP2367_EN_LDO					BIT(3)
++
++#define P3H2X4X_NET_OPER_MODE_CONF				0x15
++#define P3H2X4X_VCCIO_LDO_CONF					0x16
++#define P3H2X4X_CP0_VCCIO_LDO_VOLTAGE_MASK			GENMASK(1, 0)
++#define P3H2X4X_CP0_VCCIO_LDO_VOLTAGE(x)	\
++		FIELD_PREP(P3H2X4X_CP0_VCCIO_LDO_VOLTAGE_MASK, x)
++#define P3H2X4X_CP1_VCCIO_LDO_VOLTAGE_MASK			GENMASK(3, 2)
++#define P3H2X4X_CP1_VCCIO_LDO_VOLTAGE(x)	\
++		FIELD_PREP(P3H2X4X_CP1_VCCIO_LDO_VOLTAGE_MASK, x)
++#define P3H2X4X_TP0145_VCCIO_LDO_VOLTAGE_MASK			GENMASK(5, 4)
++#define P3H2X4X_TP0145_VCCIO_LDO_VOLTAGE(x)	\
++		FIELD_PREP(P3H2X4X_TP0145_VCCIO_LDO_VOLTAGE_MASK, x)
++#define P3H2X4X_TP2367_VCCIO_LDO_VOLTAGE_MASK			GENMASK(7, 6)
++#define P3H2X4X_TP2367_VCCIO_LDO_VOLTAGE(x)	\
++		FIELD_PREP(P3H2X4X_TP2367_VCCIO_LDO_VOLTAGE_MASK, x)
++#define P3H2X4X_LDO_COUNT					4
++#define P3H2X4X_LDO_ENABLE_TIME_US				5000
++
++struct p3h2x4x_regulator_dev {
++	struct regulator_dev *rp3h2x4x_dev[P3H2X4X_LDO_COUNT];
++	struct p3h2x4x *p3h2x4x;
++	struct regmap *regmap;
++};
++
++struct p3h2x4x_reg_state {
++	unsigned int orig;
++	bool restore;
++};
++
++static void p3h2x4x_reg_guard_enter(struct regulator_dev *rdev)
 +{
-+	/* Narrow mask: set the desired flag without touching the status. */
-+	i3c_bus_set_addr_slot_status_mask(bus, addr, I3C_ADDR_SLOT_EXT_DESIRED,
-+					  I3C_ADDR_SLOT_EXT_DESIRED);
++	struct p3h2x4x_regulator_dev *priv = rdev_get_drvdata(rdev);
++
++	mutex_lock(&priv->p3h2x4x->protected_reg_lock);
 +}
-+EXPORT_SYMBOL_GPL(i3c_bus_set_addr_slot_desired);
 +
- static bool i3c_bus_dev_addr_is_avail(struct i3c_bus *bus, u8 addr)
- {
- 	enum i3c_addr_slot_status status;
-diff --git a/include/linux/i3c/master.h b/include/linux/i3c/master.h
-index d58070a72a49..6c90ccb41e49 100644
---- a/include/linux/i3c/master.h
-+++ b/include/linux/i3c/master.h
-@@ -793,6 +793,8 @@ i3c_bus_get_addr_slot_status(struct i3c_bus *bus, u16 addr);
- void i3c_bus_set_addr_slot_status(struct i3c_bus *bus, u16 addr,
- 				  enum i3c_addr_slot_status status);
- 
-+void i3c_bus_set_addr_slot_desired(struct i3c_bus *bus, u16 addr);
++static void p3h2x4x_reg_guard_exit(struct regulator_dev *rdev)
++{
++	struct p3h2x4x_regulator_dev *priv = rdev_get_drvdata(rdev);
 +
- void i3c_bus_maintenance_lock(struct i3c_bus *bus);
- void i3c_bus_maintenance_unlock(struct i3c_bus *bus);
- #endif /* I3C_MASTER_H */
++	mutex_unlock(&priv->p3h2x4x->protected_reg_lock);
++}
++
++DEFINE_LOCK_GUARD_1(p3h2x4x_reg, struct regulator_dev,
++		    p3h2x4x_reg_guard_enter(_T->lock),
++		    p3h2x4x_reg_guard_exit(_T->lock));
++
++static int p3h2x4x_reg_unprotect(struct regulator_dev *rdev,
++				 struct p3h2x4x_reg_state *state)
++{
++	int ret;
++
++	state->restore = false;
++
++	ret = regmap_read(rdev->regmap, P3H2X4X_DEV_REG_PROTECTION_CODE,
++			  &state->orig);
++	if (ret)
++		return ret;
++
++	if (state->orig == P3H2X4X_REGISTERS_UNLOCK_CODE)
++		return 0;
++
++	ret = regmap_write(rdev->regmap, P3H2X4X_DEV_REG_PROTECTION_CODE,
++			   P3H2X4X_REGISTERS_UNLOCK_CODE);
++	if (ret)
++		return ret;
++
++	state->restore = true;
++
++	return 0;
++}
++
++static int p3h2x4x_reg_protect(struct regulator_dev *rdev,
++			       struct p3h2x4x_reg_state *state)
++{
++	if (!state->restore)
++		return 0;
++
++	return regmap_write(rdev->regmap, P3H2X4X_DEV_REG_PROTECTION_CODE,
++			    state->orig);
++}
++
++static int p3h2x4x_regulator_enable(struct regulator_dev *rdev)
++{
++	struct p3h2x4x_reg_state state;
++	int ret, ret2;
++
++	guard(p3h2x4x_reg)(rdev);
++
++	ret = p3h2x4x_reg_unprotect(rdev, &state);
++	if (ret)
++		return ret;
++
++	ret = regulator_enable_regmap(rdev);
++	ret2 = p3h2x4x_reg_protect(rdev, &state);
++
++	return ret ? ret : ret2;
++}
++
++static int p3h2x4x_regulator_disable(struct regulator_dev *rdev)
++{
++	struct p3h2x4x_reg_state state;
++	int ret, ret2;
++
++	guard(p3h2x4x_reg)(rdev);
++
++	ret = p3h2x4x_reg_unprotect(rdev, &state);
++	if (ret)
++		return ret;
++
++	ret = regulator_disable_regmap(rdev);
++	ret2 = p3h2x4x_reg_protect(rdev, &state);
++
++	return ret ? ret : ret2;
++}
++
++static int p3h2x4x_regulator_set_voltage_sel(struct regulator_dev *rdev,
++					     unsigned int sel)
++{
++	struct p3h2x4x_reg_state state;
++	int ret, ret2;
++
++	guard(p3h2x4x_reg)(rdev);
++
++	ret = p3h2x4x_reg_unprotect(rdev, &state);
++	if (ret)
++		return ret;
++
++	ret = regulator_set_voltage_sel_regmap(rdev, sel);
++	ret2 = p3h2x4x_reg_protect(rdev, &state);
++
++	return ret ? ret : ret2;
++}
++
++static const struct regulator_ops p3h2x4x_ldo_ops = {
++	.list_voltage = regulator_list_voltage_table,
++	.map_voltage = regulator_map_voltage_iterate,
++	.set_voltage_sel = p3h2x4x_regulator_set_voltage_sel,
++	.get_voltage_sel = regulator_get_voltage_sel_regmap,
++	.enable = p3h2x4x_regulator_enable,
++	.disable = p3h2x4x_regulator_disable,
++	.is_enabled = regulator_is_enabled_regmap,
++};
++
++static const unsigned int p3h2x4x_voltage_table[] = {
++	1000000,
++	1100000,
++	1200000,
++	1800000,
++};
++
++static const struct regulator_desc p3h2x4x_regulators[] = {
++	{
++		.name = "ldo-cp0",
++		.of_match = of_match_ptr("ldo-cp0"),
++		.regulators_node = of_match_ptr("regulators"),
++		.volt_table = p3h2x4x_voltage_table,
++		.n_voltages = ARRAY_SIZE(p3h2x4x_voltage_table),
++		.ops = &p3h2x4x_ldo_ops,
++		.type = REGULATOR_VOLTAGE,
++		.owner = THIS_MODULE,
++		.enable_reg = P3H2X4X_LDO_AND_PULLUP_CONF,
++		.enable_mask = P3H2X4X_CP0_EN_LDO,
++		.enable_time = P3H2X4X_LDO_ENABLE_TIME_US,
++		.vsel_reg = P3H2X4X_VCCIO_LDO_CONF,
++		.vsel_mask = P3H2X4X_CP0_VCCIO_LDO_VOLTAGE_MASK,
++	},
++	{
++		.name = "ldo-cp1",
++		.of_match = of_match_ptr("ldo-cp1"),
++		.regulators_node = of_match_ptr("regulators"),
++		.volt_table = p3h2x4x_voltage_table,
++		.n_voltages = ARRAY_SIZE(p3h2x4x_voltage_table),
++		.ops = &p3h2x4x_ldo_ops,
++		.type = REGULATOR_VOLTAGE,
++		.owner = THIS_MODULE,
++		.enable_reg = P3H2X4X_LDO_AND_PULLUP_CONF,
++		.enable_mask = P3H2X4X_CP1_EN_LDO,
++		.enable_time = P3H2X4X_LDO_ENABLE_TIME_US,
++		.vsel_reg = P3H2X4X_VCCIO_LDO_CONF,
++		.vsel_mask = P3H2X4X_CP1_VCCIO_LDO_VOLTAGE_MASK,
++	},
++	{
++		.name = "ldo-tpg0",
++		.of_match = of_match_ptr("ldo-tpg0"),
++		.regulators_node = of_match_ptr("regulators"),
++		.volt_table = p3h2x4x_voltage_table,
++		.n_voltages = ARRAY_SIZE(p3h2x4x_voltage_table),
++		.ops = &p3h2x4x_ldo_ops,
++		.type = REGULATOR_VOLTAGE,
++		.owner = THIS_MODULE,
++		.enable_reg = P3H2X4X_LDO_AND_PULLUP_CONF,
++		.enable_mask = P3H2X4X_TP0145_EN_LDO,
++		.enable_time = P3H2X4X_LDO_ENABLE_TIME_US,
++		.vsel_reg = P3H2X4X_VCCIO_LDO_CONF,
++		.vsel_mask = P3H2X4X_TP0145_VCCIO_LDO_VOLTAGE_MASK,
++	},
++	{
++		.name = "ldo-tpg1",
++		.of_match = of_match_ptr("ldo-tpg1"),
++		.regulators_node = of_match_ptr("regulators"),
++		.volt_table = p3h2x4x_voltage_table,
++		.n_voltages = ARRAY_SIZE(p3h2x4x_voltage_table),
++		.ops = &p3h2x4x_ldo_ops,
++		.type = REGULATOR_VOLTAGE,
++		.owner = THIS_MODULE,
++		.enable_reg = P3H2X4X_LDO_AND_PULLUP_CONF,
++		.enable_mask = P3H2X4X_TP2367_EN_LDO,
++		.enable_time = P3H2X4X_LDO_ENABLE_TIME_US,
++		.vsel_reg = P3H2X4X_VCCIO_LDO_CONF,
++		.vsel_mask = P3H2X4X_TP2367_VCCIO_LDO_VOLTAGE_MASK,
++	},
++};
++
++static int p3h2x4x_regulator_probe(struct platform_device *pdev)
++{
++	struct p3h2x4x *p3h2x4x = dev_get_drvdata(pdev->dev.parent);
++	struct p3h2x4x_regulator_dev *p3h2x4x_regulator;
++	struct regulator_config rcfg = { };
++	struct device *dev = &pdev->dev;
++	struct regulator_dev *rdev;
++	int i;
++
++	p3h2x4x_regulator = devm_kzalloc(dev, sizeof(*p3h2x4x_regulator), GFP_KERNEL);
++	if (!p3h2x4x_regulator)
++		return -ENOMEM;
++
++	p3h2x4x_regulator->p3h2x4x = p3h2x4x;
++	p3h2x4x_regulator->regmap = p3h2x4x->regmap;
++
++	platform_set_drvdata(pdev, p3h2x4x_regulator);
++
++	platform_device_set_of_node_from_dev(pdev, dev->parent);
++
++	rcfg.dev = dev;
++	rcfg.regmap = p3h2x4x_regulator->regmap;
++	rcfg.driver_data = p3h2x4x_regulator;
++
++	for (i = 0; i < ARRAY_SIZE(p3h2x4x_regulators); i++) {
++		rdev = devm_regulator_register(&pdev->dev, &p3h2x4x_regulators[i], &rcfg);
++		if (IS_ERR(rdev))
++			return dev_err_probe(dev, PTR_ERR(rdev), "Failed to register %s\n",
++					     p3h2x4x_regulators[i].name);
++		p3h2x4x_regulator->rp3h2x4x_dev[i] = rdev;
++	}
++	return 0;
++}
++
++static const struct platform_device_id p3h2x4x_regulator_id[] = {
++	{ .name = "p3h2x4x-regulator" },
++	{ }
++};
++MODULE_DEVICE_TABLE(platform, p3h2x4x_regulator_id);
++
++static struct platform_driver p3h2x4x_regulator_driver = {
++	.driver = {
++		.name = "p3h2x4x-regulator",
++		.probe_type = PROBE_PREFER_ASYNCHRONOUS,
++	},
++	.probe = p3h2x4x_regulator_probe,
++	.id_table = p3h2x4x_regulator_id,
++};
++module_platform_driver(p3h2x4x_regulator_driver);
++
++MODULE_AUTHOR("Aman Kumar Pandey <aman.kumarpandey@nxp.com>");
++MODULE_AUTHOR("Vikash Bansal <vikash.bansal@nxp.com>");
++MODULE_AUTHOR("Lakshay Piplani <lakshay.piplani@nxp.com>");
++MODULE_DESCRIPTION("NXP P3H2X4X I3C HUB Regulator driver");
++MODULE_LICENSE("GPL");
 -- 
 2.25.1
 
