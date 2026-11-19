@@ -1,56 +1,81 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.20
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795118251;
-	b=w0u39uokGCGHg29Kpnw8X2vQsmQDulMuHOuaxmfascPK0mUmxT8U3RzpdZZ411kf4usG
-	 Bvfdg5ys09v3aZwfE7kCCCi4jAbhiGRpC0HKOkPjw4zg9nvEXO4qL7On4UeZVUJIuMSS3
-	 fR+Qn3kbUFUqqAme86HksKzkwrPuI0P8iDamvcyibYOHl8YcXWKlZgOFA96+A6VZl9t51
-	 va8ROjhrvKzhkuy3+ns4p9djclkMDWAZ4GdiNh0YD4Ah+IR8r/NdRKLGdIaxK/Dvy4kgX
-	 NZsnVHEgw8/vcWqNsbvQAvbqcZCfl830JCbdvsbV+KcBaPMOci4URlFVSguC6VnCp5Q==
+	t=1795121633;
+	b=5KlxoVAFg3wdvQfdA65K3cW3RAlK194HXVB2FYxMBiO84nzoBtD616GkEfERGxL8/wQ1
+	 EgeQ8I/T1X8JgkSA4DVE5/hiAQr3LRUVYrNxN4yrMiqF//eKk3nMTjI0aQUm31YGN6N+J
+	 yoqAVss+Xg1GDu1OR0TLA7CvxuADBOf4G88NlyUsSesuFvOUOWhwR+gJzf1fAtUEG+F04
+	 ZCZPDyDPLtxmpHhNT92qgamTnQco8t9t0tSkgvhrOGGI2MzU9XA5/L9x0MYIRGi0+P9kE
+	 8UfvhqenJJAYCl38SWWT+RwpVlvNbRnvvxeRX+4+kmWoThBxBa8yzta+zfHCEaPe04Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795118251;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=VbD77C66nYCHFlbT6QlAxVkfxaAFAodZP7Phn6s+1sg=;
-	b=r7xzhreJsGc2b650c75ua4xUywG1A9aAxvpFL+/1jHZr3MDh7qVG+hNy7p3eX1PVgxoS
-	 dD8d+4o3U3SehRHDH6DaTtE0a0e3HQ6/D4SIb3vUpKKmRcHLMUlQXr7oIybuzDodRK7a3
-	 QC6CHz7tiASNNqb/k2hYuh1A/etf+Hv1SuST4axeSkEYty53qYplZ2jzlY5sEONbgm/P+
-	 ZsqfShJRTduJxO1L+1jQyjZsQMEH8p37cR0cC9gv/UoqsrVR8f95Ds7jvnOlsZABgSlFc
-	 AtpxzqoKPHUJ8gzNarpfSD6XDmU21A+gMuec8vth05UFf/v/VSazVJz1nnxCBWj9h0g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795121633;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:Organization;
+	bh=/zyFtue2Pu27Krmvp0xJdBDSYvJgKl9E6IP3y2DGTns=;
+	b=AYZl5mVz6tyYCj8tOAN8j83PDeOE3JKqs15vGnPFcExQKM+2Zq3iy38OykGnWIvGDA3i
+	 XORS+XnY0ufFh4ZA0573ugWg4LPezSGh4p5/IEstY1Ro19T7xUadkTJDFG/pjn8M7diXF
+	 1oV/P9lbCApfj+S3n34sRMBDB4ssNr0gCAeUuZB/xYOOu064YuJLNPSHoSu25k7PI1L6l
+	 U4Nbez/xIYkYudAxc3ncgC2e2xoSjUcVCQsOx/aI16YwBn0n9Ui87H5j1tQMhi3zHjEHw
+	 NGU5WX93DMt5i3XGThehfp4sd4fMBykuvS5XGH7Po9kBUu5kGoPLUy3XdUY7KHv5Ayw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Sly4z5uG;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=intel.com;
+	spf=pass smtp.mailfrom=intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=ICYjvFQN;
+	arc=none smtp.remote-ip=198.175.65.20
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.20])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1277D606A320
-	for <mfd@lists.linux.dev>; Thu, 19 Nov 2026 19:57:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33796606A901;
+	Thu, 19 Nov 2026 20:53:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 33796606A901
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Sly4z5uG
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7A0D01F000C7;
-	Thu, 19 Nov 2026 19:57:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795118250;
-	bh=VbD77C66nYCHFlbT6QlAxVkfxaAFAodZP7Phn6s+1sg=;
-	h=From:Subject:Reply-To:To:In-Reply-To:References:Date;
-	b=Sly4z5uGv4rfryGSpmkATKAjxw32LoWrkaR48f1mjFx+KHD5Q1tnqRn8cM1wf6BEh
-	 msDn6mCgdnSnexAtJZB30o9OCI12VIr5lfpN9BWQaCmsuQG5/6PnTvWokvcpg+DSGP
-	 67GeQOZHBSYaitoQdiRaQ+4P8nTvVYq1kngMGNReSDq/REfGdDDBPZLzPAwPACrfsE
-	 pWEmRGVGk+98GS2AfafkKObNnRWUfAXcWpn6qYkZ3Y/PrIgm0Va+W8OUdlHBrSm00V
-	 M3Hj7GCAuYvauVknlIgYxZalRXHTO/CBtrfWcWLb5i/H4exyb6pgAgln1cc+NWYX+E
-	 OmVHfj3Lrg2Hg==
-Message-ID: <sashiko-outbox-223994@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v3 1/2] mfd: twl-core: Clear twl_priv pointer on
- teardown and probe failure
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Lee Jones" <lee@kernel.org>, mfd@lists.linux.dev
-In-Reply-To: <20261119194939.2436337-2-lee@kernel.org>
-References: <20261119194939.2436337-1-lee@kernel.org>
- <20261119194939.2436337-2-lee@kernel.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 19 Nov 2026 19:57:30 +0000
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=ICYjvFQN
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1795121633; x=1826657633;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=hxtu6n6hjdoIS8OVHUKESNiwIThZujrt8bph7b+Fd9s=;
+  b=ICYjvFQNmGXLKT8lJzORh2ddjFYCo9FP4DQi6xU3/yJUAA/EVDMMwtnW
+   Z3/qGtN6wfv3hNHInCrrHBmZeBxwAtlvuf+8f6gz+X4HCtTiOKzpuVEfh
+   MmNVbUecTZS2dUj41oFJTL9H7XC2ItuUq1b5EAit17eO29kmAi4LQ/qz/
+   LyS82lTZ+XLfHSzYb6N387rBG8eHTySMRX3ZVI+l2mCOyDE8wvhpeLgJn
+   5+sKf+hr7thOFFFEYADMmchY7Vdqx2MX2K9KIabNiAhCp9lEJsB+zrwco
+   rkffzx4V4xW4Oy91L5VF2oDyJwuVsjH8LrZcxCp1q2ftOUFYujfRSSBbL
+   A==;
+X-CSE-ConnectionGUID: 5Po2nrPjQBSNI2rivwI4XQ==
+X-CSE-MsgGUID: uknPEPSwTOqIFk6fWppdhg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11971"; a="4030861"
+X-IronPort-AV: E=Sophos;i="6.27,221,1787036400"; 
+   d="scan'208";a="4030861"
+Received: from fmviesa013.fm.intel.com ([10.60.135.153])
+  by orvoesa112.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Nov 2026 12:53:53 -0800
+X-CSE-ConnectionGUID: hWs8F2miRDaxOkKoxt/sNQ==
+X-CSE-MsgGUID: XLcUR0atQcuadVeix+2yww==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,221,1787036400"; 
+   d="scan'208";a="12511975"
+Received: from klitkey1-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.61])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Nov 2026 12:53:49 -0800
+Date: Thu, 19 Nov 2026 22:53:46 +0200
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Frank Li <Frank.li@oss.nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>, lee@kernel.org, maz@kernel.org,
+	andy@kernel.org, jic23@kernel.org, dmitry.torokhov@gmail.com,
+	linux-input@vger.kernel.org, mfd@lists.linux.dev,
+	linux-iio@vger.kernel.org, robh@kernel.org, krzk+dt@kernel.org,
+	conor+dt@kernel.org, crofts@kernel.org, devicetree@vger.kernel.org,
+	imx@lists.linux.dev,
+	Jonathan Cameron <jonathan.cameron@oss.qualcomm.com>
+Subject: Re: [PATCH v5 4/4] mfd: mxs-lradc: Convert to devm_clk_get_enabled()
+Message-ID: <av9h2jvAwBPXdNmX@ashevche-desk.local>
+References: <20261119134041.16611-1-festevam@gmail.com>
+ <20261119134041.16611-4-festevam@gmail.com>
+ <av8gvfhOJ_2PdEMr@SMW015318>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,32 +84,40 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <av8gvfhOJ_2PdEMr@SMW015318>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-> twl_probe() allocates the file-scope twl_priv state with devm_kzalloc()
-> and checks for a non-NULL twl_priv at entry to reject multiple device
-> instances.  However, twl_remove() and the early error paths in
-> twl_probe() never reset twl_priv to NULL, a failure when adding MFD
-> child devices bypasses twl_remove() by jumping to out instead of fail,
-> and twl_remove() tears down the IRQ domain and dummy I2C clients before
-> child devices are unregistered.  After devres frees the underlying
-> memory on probe failure or unbind, twl_priv remains a dangling pointer,
-> causing subsequent exported API calls to dereference freed memory and
-> blocking future probe attempts with -EBUSY.
->=20
-> Unregister DT-populated and MFD child devices at the start of
-> twl_remove(), ensure mfd_add_devices() failures unwind via fail, and
-> reset twl_priv to NULL in twl_remove() and on probe error exit.
->=20
-> Fixes: 80a97ccd33be ("mfd: twl-core: Collect global variables behind one =
-private structure (global)")
-> Closes: https://sashiko.dev/#/bug/linux-73e82f84-94de-4d08-82a4-f22d42a1d=
-edf
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Lee Jones <lee@kernel.org>
+On Thu, Nov 19, 2026 at 10:15:57AM -0600, Frank Li wrote:
+> On Thu, Nov 19, 2026 at 10:40:41AM -0300, Fabio Estevam wrote:
 
-Sashiko has reviewed this patch and found no issues.
+...
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261119194939.2436=
-337-1-lee@kernel.org?part=3D1
+> >  			dev_err(&pdev->dev,
+> >  				"Unsupported number of touchscreen wires (%d)\n"
+> >  				, ts_wires);
+> > -			ret = -EINVAL;
+> > -			goto err_clk;
+> > +			return -EINVAL;
+
+^^^
+
+> >  	if (ret) {
+> >  		dev_err(dev, "Failed to add subdevices\n");
+> > -		goto err_clk;
+> > +		return ret;
+> 
+> If need respin, return dev_err_probe()
+
+And above and who knows how many more. That's why I haven't commented on this,
+if ever we do this, it most likely should be a separate change for the whole
+driver.
+
+-- 
+With Best Regards,
+Andy Shevchenko
+
 
