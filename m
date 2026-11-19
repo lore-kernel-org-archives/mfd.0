@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795095833;
-	b=tb/ZQhec06Pbpse/3nFKoH5YQzmMaFNDZ+GyJFZkBOYSAIY+hP6Zs/BaBQy0kDvtiSZM
-	 NpBf/B9erDMitb6vwgFv3GmGeLUEWtXY27PNisj6BCAdi/eqiHdq1S5N4Kruq1Ih7ViuB
-	 kQkndP1dCFBrqY9ZhSRxlYjI6wdvGEUZaGXxjdvF+e8JzL6j4DDxJo8FktY9SdCjsbjUF
-	 iFyk9hp41Fipkn8L0UiA6zEG6F/VpZyYwcyPL/SW9VknuqbWiyuKzts3MPegbn+icySrS
-	 Wwn60UcEe4DLG6uTBJZYAM7sSnkZL1dBY0NbCAFXjiw2Jvzby7w/nyqfibQCLIhDhUA==
+	t=1795095854;
+	b=t32sg1iAr7g+WyU6oCDFds3tERrDncRH3YQYVJVJCtpgL9XZOOBR+6pooa3ocCmHl03r
+	 DSiDtSg73Lvj+EQJ2iTTTL8WVqutkf/ema6bXhEttAh4xjrIV8tGeGYYkVvj+39++h1KF
+	 BTCxCA3rfbP46xseI1b2m1sbhUK+afzB8y4odJxiV2H9RJJOqIE9E07TxDkFUbciuYdFE
+	 umQ5PBhVDnd+uuI/D2uUpCYjD++mJ/hg9ueIlIChzZvrtLb0j5ElFwJqe140NTh8W34Mo
+	 5vMxGGZSr65NOo6NK6TswjPyj1OdbK7lFKniMb6/mtyYwSLqwcJR3CewdfBv9S/xvrA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795095833;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795095854;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=hLLONxzGKfrCz1Gwylx7RzmqDPdA8NDXhL5dEKexxSI=;
-	b=KCVH+4zoRxcNb9w7o+FpX5+T0gl0PoP2/MB/licfjJvvkD0z58o/5t3C+12s9suIJ431
-	 R4tAFN+zMxzof4x8prrZv/eMKvulTS++vjRgD/WiyHjiTztdtPyBUW2rq9N8VubWtABNG
-	 DlEaWPhH/s8xLqXzBVePNfPlHiMjpfDQlhR7cDSTcgVoWKi9WxVha0ul4lZR7/yb7frZV
-	 7TlokUyAkOg9OHp5vqFMFSfvsw0OXzdP03vNnRMyIOzTcEwy3kB9A45mJ/Ta/nAuWV+Bt
-	 wWUHxuEPK8ZhM+PiSKWZtuIpP0KOHC1VqVG2QnldVn5fE+EJMjJG2YUtXT19UpEskPg==
+	bh=EkQ083xnw/zdCw32RxfVQydEGMLyOU0/LGBPpE1A6+s=;
+	b=VirKG04Kgyq6SdsR2PhhjGQomQHYgoYFu0wd3vHJfGxLjqVXXOYVD1lR/5aowk97C3tE
+	 JwmD7HGP03l3Fy7O+99eqlrrZgh9yLyY6Cr4EgpPVv3wpOonhkLQ0sgXdpD4Z4XAAihtM
+	 LcfqKnqAdK4IHSytEudgxr3VKlHncBmJsWF9zjloncqyyV4IOXzf5Mv8qIxT71appm1hl
+	 c4W7Z2WCSffyTn+TCqjMt/3ffk3kfCTBEo1A0yp+8m/CvmejucQuq1XRx9QsuPLN7CaGo
+	 NdH+Hg49fZaaYjvzrkdkIXRSenE+OTh3Xp3LpQXPauEOz3qSQMxcuGF9R6h8t51iqcQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=clw7kqd1;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NyClNSuI;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 186F5606A320
-	for <mfd@lists.linux.dev>; Thu, 19 Nov 2026 13:43:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0AC2606A320
+	for <mfd@lists.linux.dev>; Thu, 19 Nov 2026 13:44:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=clw7kqd1
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B5D451F000C6;
-	Thu, 19 Nov 2026 13:43:52 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NyClNSuI
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A39F1F000C5;
+	Thu, 19 Nov 2026 13:44:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795095832;
-	bh=hLLONxzGKfrCz1Gwylx7RzmqDPdA8NDXhL5dEKexxSI=;
+	s=k20260515; t=1795095854;
+	bh=EkQ083xnw/zdCw32RxfVQydEGMLyOU0/LGBPpE1A6+s=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=clw7kqd1bm0NPmKGjAGM9dnhLbYatMAZBf24fE8XaQDY2+AP6GqjVc5mjEs+gsuTl
-	 fGYwPdQrw4aQNr96sVLMKRN5DKlYTtfi1SIeB99+/kzqVLZqVbw7Duv//ziicJjlHt
-	 X2fyoJxUKC2tJmQ/QCPfjhcPQs84c27gNWWzdEn9jtwQijYcSnlfkkl0xs5S1PrTC4
-	 24ULdgptizXX2uf3/+9MUl9I7YrQS6ZFTkxjusamT2IefYdA7+ulJxbDHIpUKM/qJ3
-	 r/C+LnLDa8M6cYBTYzIUSrfSsw/C7jL+0ZwmLanySbmKrm2X0QU7C8A83J4jDjWlVw
-	 9yDRPN0Z6OBHA==
-Message-ID: <sashiko-outbox-223196@kernel.org>
+	b=NyClNSuIeHAPe/+ivBqlpysyOl+KjxvzZqqJR2LHrmCGdMgwJ4v/vmgs+VgtqcLyp
+	 TIBy/YwrDFNmgwiIhUuAbGLcfCSb8dWY1sLtL8CXuYM4xYcFLkfJndFAsZP8shws+V
+	 sZYCbnsHi4qdci53I1J4BfYw4Vvg+RgT50Q2pJ2N07gPnWB6DsYIt0OlHYc2sowuzR
+	 jlAXsNmT7hZBQQ20jXIp8jLjUTe1tzUN0I12J43ksG+DSy9ijhekqLNxCtde9tusC5
+	 jccbgIgLLJIxhEXKS3Pltmk0kvVpqtA7vDsyuf0VbqFvLz/3IZ2o5kLxJU354Cmgx0
+	 37YDUFue2XRUg==
+Message-ID: <sashiko-outbox-223197@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v5 2/4] iio: adc: mxs-lradc: Fix trigger use-after-free
- on removal
+Subject: Re: [PATCH v5 4/4] mfd: mxs-lradc: Convert to
+ devm_clk_get_enabled()
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Fabio Estevam" <festevam@gmail.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261119134041.16611-2-festevam@gmail.com>
+In-Reply-To: <20261119134041.16611-4-festevam@gmail.com>
 References: <20261119134041.16611-1-festevam@gmail.com>
- <20261119134041.16611-2-festevam@gmail.com>
+ <20261119134041.16611-4-festevam@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Thu, 19 Nov 2026 13:43:52 +0000
+Date: Thu, 19 Nov 2026 13:44:13 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -61,34 +61,21 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-> The LRADC trigger is devm-allocated against the IIO device, but it is
-> manually unregistered after iio_device_unregister(). The latter deletes
-> the IIO device and releases its managed resources, freeing the trigger
-> before mxs_lradc_adc_trigger_remove() accesses it.
+> The LRADC clock is acquired with a managed helper but enabled and
+> disabled manually.
 >=20
-> Since commit 699fb50d9903 ("drivers: base: Free devm resources when
-> unregistering a device"), device_del() releases managed resources.
-> Consequently, iio_device_unregister() drops the trigger's allocation
-> reference before the driver unregisters it.
+> Acquire the LRADC clock with devm_clk_get_enabled() instead of a bare
+> devm_clk_get() followed by a manual clk_prepare_enable(), so it is
+> prepared/enabled for the device lifetime and released on unbind.
 >=20
-> On an i.MX28 EVK with KASAN enabled, unbinding the LRADC parent with:
+> This conversion makes the code simpler.
 >=20
->   echo 80050000.lradc > /sys/bus/platform/drivers/mxs-lradc/unbind
->=20
-> reports a slab-use-after-free in device_release_driver_internal().
->=20
-> Allocate the managed trigger against the platform device instead. This
-> matches the trigger device's parent and keeps the allocation alive until
-> the platform driver's remove callback has unregistered the trigger.
->=20
-> Cc: stable@vger.kernel.org
-> Fixes: 699fb50d9903 ("drivers: base: Free devm resources when unregisteri=
-ng a device")
+> Suggested-by: Jonathan Cameron <jonathan.cameron@oss.qualcomm.com>
 > Signed-off-by: Fabio Estevam <festevam@gmail.com>
 
 Sashiko has reviewed this patch and found no issues.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261119134041.1661=
-1-1-festevam@gmail.com?part=3D2
+1-1-festevam@gmail.com?part=3D4
 
