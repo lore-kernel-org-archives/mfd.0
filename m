@@ -1,71 +1,51 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=44.202.169.35
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=206.189.79.184
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795042832;
-	b=QtPEO+XTYTlvW/Fx3RINDogQzyXl1uC4NZS2T7/jXlDJUQdWfruBOla2N++gv98QNg1u
-	 dprwGLpf4rxQsf8LDbU0baTU7H6zZ+d3it+BwjButxwwwlnmL5e7o2ZDZwpMyyVjSUvKI
-	 5Vw5nak8R33C06RHUYjtZbJ3jl+KEbMDEgapOdks1t2tXXNfjRnTylb27dcTXjc4NyJsK
-	 ngtAqK3XjFDKY9JjfHtXZsqa1IyhJpglPA78bz41U7zuLti+XjsDlwiAPivn5IP/0/wo3
-	 U3RR8WaDgZL0qNHtxock2gx7cXoPjn2WQT+3P4T/4Ljp6BFIMs2enMeUJaeW8pZQFkA==
+	t=1795076110;
+	b=A2bF+npkEGhzMpp4TAqicn7ketTyufTWJ9AQKgPHlLwEUbysOsrorC2ZSSW09AXZvj1A
+	 K4A6xGcE+10fF2emTZbn20/0oBB8F5GsPCDZCnoKipDBBXjw+DPd8Vr9jUdkW/UdtrZMD
+	 Q9dapXm8/3Ls0UlvM9wTYgRxVOK4PHG8EeMXIYsuGxfOCVq+vWZh+Rgh/DekEYlrECHKJ
+	 KR3SRgLMVFiUPCPUet4JfqqzN75nILy/LjreFpOfzKrwVpyJymtybyOoyIlZ4arVeOJzi
+	 BPIDM7ryDXm2W4pWg+xwGop81JlWaQ2X2m33FCzdU7th2ezHi6PMoYFvaIqtWNLtM9g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795042832;
-	h=DMARC-Filter:Received:Received:X-Authority-Analysis:DKIM-Signature:
-	 Received:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
-	 References:Content-Language:From:Autocrypt:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-AntiAbuse:X-AntiAbuse:X-AntiAbuse:
-	 X-AntiAbuse:X-AntiAbuse:X-BWhitelist:X-Source-IP:X-Source-L:X-Exim-ID:
-	 X-Source:X-Source-Args:X-Source-Dir:X-Source-Sender:X-Source-Auth:
-	 X-Email-Count:X-Org:X-Source-Cap:X-Local-Domain:X-CMAE-Envelope;
-	bh=LcGUIxJ0hhWwJBANgRsmsDcWNEnQenUxD/N5yM1KEfM=;
-	b=TgiNuh4yjl6TpnDwDKxL60sAum+c+Cqk/G1F7bJfsCodbtRlBmzQyIQYH2B3aDSBvWTF
-	 Qsd3tUuXfDeLDB/iSCsabwd7OBBJ6c4OVPBT9nu0UlDU3K2Amu/yuc1ZeoSoECoux63To
-	 EA0jcyucgc0kFNO5YZLQYWEbGKiOD07cOGZZUEBRsb8cTXAyP9DAg4c0Vsdx7QKN2FdXV
-	 qibhn13rhcqVKWB/BCMqUeuuLi+PscdrJ3KXff6IJ8Gtw70J4m4EZa3fCN8kk80/cRgjy
-	 apTYttjUQEMZgJjHgdBqr8hLJeTYem4QdzhQR0iqeUYOdmGwx41eC0ZNc8v3C3GaOsA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795076110;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
+	bh=YyReaC6xJTCbGjqg41g4uWdaugUUeN3IKRBOb+F7ocU=;
+	b=XnuDYo5DqHjb2Z1vzcPOBOOkZpMyq5SnfQZgeMAANiB/tXF+9uJaamVPoF5LXZcFt9ye
+	 ubuPT9RUexqh5PFVIpUPgPeByOSaB0+W96Fg7bJ2BdY7+wAHFqjkLkhVgRHcU7XDP0zf3
+	 P9umZYelkAEi2iFKtJnBVTKajYkpIyjK4Qf74S0abpHl3TYGam4mZH2jf3iEMMXXD1iSM
+	 KtLyd7rLWi2Tp7uAevE+ECS91GyD9NwCrJ4SeKd8FUN52/jf6VSEzbcP5o9ZdmaSWBU4u
+	 Hc5BkpIwEKBpiwbVM+dKgtfPf+gsaadmBzseDw8vGChdwzCuhJCyLDcU2L/E07/qheQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=roeck-us.net;
-	spf=fail smtp.mailfrom=roeck-us.net;
-	dkim=pass header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=l6IhFjxb;
-	arc=none smtp.remote-ip=44.202.169.35
-Received: from omta036.useast.a.cloudfilter.net (omta036.useast.a.cloudfilter.net [44.202.169.35])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A04FB606A31C
-	for <mfd@lists.linux.dev>; Wed, 18 Nov 2026 23:00:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A04FB606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=roeck-us.net
+	dmarc=pass header.from=mail.zgclab.edu.cn;
+	spf=pass smtp.mailfrom=mail.zgclab.edu.cn;
+	dkim=pass header.d=mail.zgclab.edu.cn header.i=@mail.zgclab.edu.cn header.a=rsa-sha256 header.s=dkim header.b=TfzCtLYN;
+	arc=none smtp.remote-ip=206.189.79.184
+Received: from zg8tmja2lje4os43os4xodqa.icoremail.net (zg8tmja2lje4os43os4xodqa.icoremail.net [206.189.79.184])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7FA6B60A381F
+	for <mfd@lists.linux.dev>; Thu, 19 Nov 2026 08:15:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7FA6B60A381F
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.zgclab.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.zgclab.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=l6IhFjxb
-Received: from eig-obgw-5007b.ext.cloudfilter.net ([10.0.29.167])
-	by cmsmtp with ESMTPS
-	id TncbxapfA4vCDTodcxbzH7; Wed, 18 Nov 2026 23:00:24 +0000
-Received: from 162-215-252-36.unifiedlayer.com ([208.91.199.152])
-	by cmsmtp with ESMTPS
-	id TodaxE2J7xqjjTodaxtFbW; Wed, 18 Nov 2026 23:00:22 +0000
-X-Authority-Analysis: v=2.4 cv=bZxrUPPB c=1 sm=1 tr=0 ts=6afe2e08
- a=QNED+QcLUkoL9qulTODnwA==:117 a=2cfIYNtKkjgZNaOwnGXpGw==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=M0FbrtG7MMAA:10 a=VwQbUJbxAAAA:8
- a=xtVSApEC_Af63HCmTx8A:9 a=QEXdDO2ut3YA:10 a=KPbNTLLc3YvdawN95zVk:22
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=roeck-us.net; s=default; h=Content-Transfer-Encoding:Content-Type:
-	In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
-	:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-	List-Unsubscribe:List-Unsubscribe-Post:List-Subscribe:List-Post:List-Owner:
-	List-Archive; bh=LcGUIxJ0hhWwJBANgRsmsDcWNEnQenUxD/N5yM1KEfM=; b=l6IhFjxbqkEW
-	usFNckm0PuJnx6D3jE0/a1aY5IAo3PpzAvw7KShZLOUfkRVno4Lni0blwvnt2OO7ftyK3HXUlZyuc
-	FCidRVfOk7o6kjfOjwiYcotvDdE429VCmEL1oVAgikzmoyIzmCvclGTecIERMcjwl8hC9ysLfZRQj
-	sY9kTAWaL/FqMHkQ/O9rx2pb6NL9MKudoaN+0dXrVXbtPEg4xQI09v2QkzTbTRcmJ0udV1FIkgkWf
-	C28L7rPX28FTx2KsmB91ZxZC0R47/YXJ1M81axuYYM3Sl40ZAIf3e/vwztlRWiP9XqcO2+x15dQDM
-	othLraxL6uzql8OB3/hqEQ==;
-Received: from 108-223-40-66.lightspeed.sntcca.sbcglobal.net ([108.223.40.66]:36386)
-	by bh-25.webhostbox.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.100.1)
-	(envelope-from <linux@roeck-us.net>)
-	id 1xToda-000000049Xm-00es;
-	Thu, 19 Nov 2026 04:30:22 +0530
-Message-ID: <11a821f4-aef6-425a-8626-1d8641e9f83d@roeck-us.net>
-Date: Wed, 18 Nov 2026 15:00:20 -0800
+	dkim=pass (1024-bit key) header.d=mail.zgclab.edu.cn header.i=@mail.zgclab.edu.cn header.a=rsa-sha256 header.s=dkim header.b=TfzCtLYN
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=mail.zgclab.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
+	bh=YyReaC6xJTCbGjqg41g4uWdaugUUeN3IKRBOb+F7ocU=; b=TfzCtLYN53dfs
+	6YqgYSPWFMkC35ufvS1qi60C7K1+KUbRyIuipb+RAlam9MhVYMmdyLeFQ9bomS4D
+	hoEgwQaT6DGYEjacjTPvBXq9calxBA+Wo78K3QHXyNymvTG5hGVyEjfA36JOeuJM
+	qCopfbwzk6Q4lQfX0Ski5lf7vd2HG4=
+Received: from 08.eml (unknown [58.206.202.11])
+	by web3 (Coremail) with SMTP id ygQGZQCHKYwFsP5qE1LEAA--.1414S2;
+	Thu, 19 Nov 2026 16:15:01 +0800 (CST)
+From: Wang Haoran <wanghr2026@mail.zgclab.edu.cn>
+To: lee@kernel.org
+Cc: mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com, mfd@lists.linux.dev, linux-stm32@st-md-mailman.stormreply.com, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, wanghr2026@mail.zgclab.edu.cn
+Subject: [PATCH] mfd: stmpe: Disable regulators on probe failure
+Date: Thu, 19 Nov 2026 16:15:00 +0800
+Message-ID: <1795076100902-8-fa247961@mail.zgclab.edu.cn>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -75,129 +55,117 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 0/3] Introduce cros_ec power monitoring
-To: Daniel Balint <dbalint@google.com>, Jonathan Cameron <jic23@kernel.org>
-Cc: linux-hwmon@vger.kernel.org, Benson Leung <bleung@chromium.org>,
- Lee Jones <lee@kernel.org>, Tzung-Bi Shih <tzungbi@kernel.org>,
- linux-iio@vger.kernel.org, chrome-platform@lists.linux.dev,
- mfd@lists.linux.dev, linux-kernel@vger.kernel.org
-References: <20261106193129.43493-1-dbalint@google.com>
- <20261107010356.39d9eddf@jic23-hlaptop>
- <20261118204532.257423-1-dbalint@google.com>
-Content-Language: en-US
-From: Guenter Roeck <linux@roeck-us.net>
-Autocrypt: addr=linux@roeck-us.net; keydata=
- xsFNBE6H1WcBEACu6jIcw5kZ5dGeJ7E7B2uweQR/4FGxH10/H1O1+ApmcQ9i87XdZQiB9cpN
- RYHA7RCEK2dh6dDccykQk3bC90xXMPg+O3R+C/SkwcnUak1UZaeK/SwQbq/t0tkMzYDRxfJ7
- nyFiKxUehbNF3r9qlJgPqONwX5vJy4/GvDHdddSCxV41P/ejsZ8PykxyJs98UWhF54tGRWFl
- 7i1xvaDB9lN5WTLRKSO7wICuLiSz5WZHXMkyF4d+/O5ll7yz/o/JxK5vO/sduYDIlFTvBZDh
- gzaEtNf5tQjsjG4io8E0Yq0ViobLkS2RTNZT8ICq/Jmvl0SpbHRvYwa2DhNsK0YjHFQBB0FX
- IdhdUEzNefcNcYvqigJpdICoP2e4yJSyflHFO4dr0OrdnGLe1Zi/8Xo/2+M1dSSEt196rXaC
- kwu2KgIgmkRBb3cp2vIBBIIowU8W3qC1+w+RdMUrZxKGWJ3juwcgveJlzMpMZNyM1jobSXZ0
- VHGMNJ3MwXlrEFPXaYJgibcg6brM6wGfX/LBvc/haWw4yO24lT5eitm4UBdIy9pKkKmHHh7s
- jfZJkB5fWKVdoCv/omy6UyH6ykLOPFugl+hVL2Prf8xrXuZe1CMS7ID9Lc8FaL1ROIN/W8Vk
- BIsJMaWOhks//7d92Uf3EArDlDShwR2+D+AMon8NULuLBHiEUQARAQABzTJHdWVudGVyIFJv
- ZWNrIChMaW51eCBhY2NvdW50KSA8bGludXhAcm9lY2stdXMubmV0PsLBgQQTAQIAKwIbAwYL
- CQgHAwIGFQgCCQoLBBYCAwECHgECF4ACGQEFAmgrMyQFCSbODQkACgkQyx8mb86fmYGcWRAA
- oRwrk7V8fULqnGGpBIjp7pvR187Yzx+lhMGUHuM5H56TFEqeVwCMLWB2x1YRolYbY4MEFlQg
- VUFcfeW0OknSr1s6wtrtQm0gdkolM8OcCL9ptTHOg1mmXa4YpW8QJiL0AVtbpE9BroeWGl9v
- 2TGILPm9mVp+GmMQgkNeCS7Jonq5f5pDUGumAMguWzMFEg+Imt9wr2YA7aGen7KPSqJeQPpj
- onPKhu7O/KJKkuC50ylxizHzmGx+IUSmOZxN950pZUFvVZH9CwhAAl+NYUtcF5ry/uSYG2U7
- DCvpzqOryJRemKN63qt1bjF6cltsXwxjKOw6CvdjJYA3n6xCWLuJ6yk6CAy1Ukh545NhgBAs
- rGGVkl6TUBi0ixL3EF3RWLa9IMDcHN32r7OBhw6vbul8HqyTFZWY2ksTvlTl+qG3zV6AJuzT
- WdXmbcKN+TdhO5XlxVlbZoCm7ViBj1+PvIFQZCnLAhqSd/DJlhaq8fFXx1dCUPgQDcD+wo65
- qulV/NijfU8bzFfEPgYP/3LP+BSAyFs33y/mdP8kbMxSCjnLEhimQMrSSo/To1Gxp5C97fw5
- 3m1CaMILGKCmfI1B8iA8zd8ib7t1Rg0qCwcAnvsM36SkrID32GfFbv873bNskJCHAISK3Xkz
- qo7IYZmjk/IJGbsiGzxUhvicwkgKE9r7a1rOwU0ETofVZwEQALlLbQeBDTDbwQYrj0gbx3bq
- 7kpKABxN2MqeuqGr02DpS9883d/t7ontxasXoEz2GTioevvRmllJlPQERVxM8gQoNg22twF7
- pB/zsrIjxkE9heE4wYfN1AyzT+AxgYN6f8hVQ7Nrc9XgZZe+8IkuW/Nf64KzNJXnSH4u6nJM
- J2+Dt274YoFcXR1nG76Q259mKwzbCukKbd6piL+VsT/qBrLhZe9Ivbjq5WMdkQKnP7gYKCAi
- pNVJC4enWfivZsYupMd9qn7Uv/oCZDYoBTdMSBUblaLMwlcjnPpOYK5rfHvC4opxl+P/Vzyz
- 6WC2TLkPtKvYvXmdsI6rnEI4Uucg0Au/Ulg7aqqKhzGPIbVaL+U0Wk82nz6hz+WP2ggTrY1w
- ZlPlRt8WM9w6WfLf2j+PuGklj37m+KvaOEfLsF1v464dSpy1tQVHhhp8LFTxh/6RWkRIR2uF
- I4v3Xu/k5D0LhaZHpQ4C+xKsQxpTGuYh2tnRaRL14YMW1dlI3HfeB2gj7Yc8XdHh9vkpPyuT
- nY/ZsFbnvBtiw7GchKKri2gDhRb2QNNDyBnQn5mRFw7CyuFclAksOdV/sdpQnYlYcRQWOUGY
- HhQ5eqTRZjm9z+qQe/T0HQpmiPTqQcIaG/edgKVTUjITfA7AJMKLQHgp04Vylb+G6jocnQQX
- JqvvP09whbqrABEBAAHCwWUEGAECAA8CGwwFAmgrMyQFCSbODQkACgkQyx8mb86fmYHlgg/9
- H5JeDmB4jsreE9Bn621wZk7NMzxy9STxiVKSh8Mq4pb+IDu1RU2iLyetCY1TiJlcxnE362kj
- njrfAdqyPteHM+LU59NtEbGwrfcXdQoh4XdMuPA5ADetPLma3YiRa3VsVkLwpnR7ilgwQw6u
- dycEaOxQ7LUXCs0JaGVVP25Z2hMkHBwx6BlW6EZLNgzGI2rswSZ7SKcsBd1IRHVf0miwIFYy
- j/UEfAFNW+tbtKPNn3xZTLs3quQN7GdYLh+J0XxITpBZaFOpwEKV+VS36pSLnNl0T5wm0E/y
- scPJ0OVY7ly5Vm1nnoH4licaU5Y1nSkFR/j2douI5P7Cj687WuNMC6CcFd6j72kRfxklOqXw
- zvy+2NEcXyziiLXp84130yxAKXfluax9sZhhrhKT6VrD45S6N3HxJpXQ/RY/EX35neH2/F7B
- RgSloce2+zWfpELyS1qRkCUTt1tlGV2p+y2BPfXzrHn2vxvbhEn1QpQ6t+85FKN8YEhJEygJ
- F0WaMvQMNrk9UAUziVcUkLU52NS9SXqpVg8vgrO0JKx97IXFPcNh0DWsSj/0Y8HO/RDkGXYn
- FDMj7fZSPKyPQPmEHg+W/KzxSSfdgWIHF2QaQ0b2q1wOSec4Rti52ohmNSY+KNIW/zODhugJ
- np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
-In-Reply-To: <20261118204532.257423-1-dbalint@google.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - bh-25.webhostbox.net
-X-AntiAbuse: Original Domain - lists.linux.dev
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - roeck-us.net
-X-BWhitelist: no
-X-Source-IP: 108.223.40.66
-X-Source-L: No
-X-Exim-ID: 1xToda-000000049Xm-00es
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Source-Sender: 108-223-40-66.lightspeed.sntcca.sbcglobal.net [108.223.40.66]:36386
-X-Source-Auth: guenter@roeck-us.net
-X-Email-Count: 2
-X-Org: HG=direseller_whb_net_legacy;ORG=directi;
-X-Source-Cap: cm9lY2s7YWN0aXZzdG07YmgtMjUud2ViaG9zdGJveC5uZXQ=
-X-Local-Domain: yes
-X-CMAE-Envelope: MS4xfPGPWw/Tb/nOu+nor0uN8qjpTjvs11JkOk2MyBl3F6eTr0aNIseZA2nNe62rOZj5I5GdaL4uLbei0LYAh1j07tLmvc7FbliqQGFlLOiuowM3Scjcgo4y
- eI1Zu41eLc15hIp/Gx0PUCUcTHBL1M1oBp/EVAOcu33LGplFY5rGBca9x5UIhLMFPiOfcy42p5J/ddA7Cyj0MAw37oXQuGYNT1w=
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:ygQGZQCHKYwFsP5qE1LEAA--.1414S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxZw13AFy7Gw48Zr17uw15Jwb_yoW5uFWkpF
+	WDXrZYkrs5WFW0kws8Ar1xZas3KrW7ZrZ7CrykW3yrZws8uFy7JFZ2kr1FvFn5XrykJ3W2
+	yFZFvry0kF12qFJanT9S1TB71UUUUjUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUPE14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+	1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+	6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r
+	4UJVWxJr1ln4kS14v26r1Y6r17M2vYz4IE04k24VAvwVAKI4IrM2AIxVAIcxkEcVAq07x2
+	0xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r126r1DMc
+	Ij6I8E87Iv67AKxVWxJVW8Jr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4x0
+	x7Aq67IIx4CEVc8vx2IErcIFxwCY1x0262kKe7AKxVWUtVW8ZwCY02Avz4vE14v_GFyl42
+	xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l4IxYO2xFxVAFwI0_Jrv_JF1l
+	x2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14
+	v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IY
+	x2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z2
+	80aVAFwI0_Cr0_Gr1UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa73
+	UjIFyTuYvjfU5FApDUUUU
+X-CM-SenderInfo: pzdqwxbusqjlo62juzldeovvfxof0/1tbiAgIQD2r+rloDYAAFsZ
 
-On 11/18/26 12:45, Daniel Balint wrote:
-> On Sat, 7 Nov 2026 01:03:56 +0000
-> Jonathan Cameron <jic23@kernel.org> wrote:
-> 
->> Hi Daniel
->>
->> I'm not necessarily against this but when adding monitoring components
->> to IIO the usual question is why not hwmon?  What features are not
->> well supported by that framework?
->>
->> Note historically I suspect we accepted one or two drives into IIO that
->> would have fitted better there so precedence isn't a strong argument.
->>
->> Convention for these somewhat borderline case is +CC hmwon maintainer
->> and list as well as IIO with that explanation in the cover letter.
->> That avoids any last minute surprises!
-> 
-> Hi Jonathan,
-> 
-> Thanks for taking a look!
-> The main reason for choosing IIO over hwmon is that for On-Device Power
-> Monitoring, userspace needs an atomic, untorn snapshot across all rails
-> (up to 64) over the same integration window, triggered on demand from
-> userspace and read out in a single buffer read rather than repeated
-> per-channel sysfs reads.
-> 
-> Reflecting that requirement, EC_PWRMON_LATCH on the EC is a global,
-> stateful command: a single latch simultaneously snapshots all onboard
-> power accumulators and resets their accumulation window on the EC, so
-> individual channels cannot be latched independently. As far as I know,
-> hwmon only exposes independent per-channel sysfs attributes with no
-> multi-channel buffer or on-demand trigger ABI, whereas IIO's triggered
-> buffer interface is well suited for this kind of pattern.
-> 
-> CC'ing hwmon maintainer and list to keep me honest.
-> 
+stmpe_probe() enables the VCC and VIO regulators early in probe, but they
+are only ever disabled by stmpe_remove() on the successful unbind path.
+Every failure return in between leaves both rails enabled, and a later
+-EPROBE_DEFER retry enables them again, so the enable counts grow on each
+failed probe and _regulator_put() warns on each leaked enable.
 
-You could accomplish that the same way many hwmon drivers are doing it:
-Read all attributes in one go from the hardware, then cache it for a period
-of time.
+Register a devm action right after the enables that disables any regulator
+still enabled when the probe fails or the device is unbound, mirroring what
+stmpe_remove() already does.
 
-Having said that, my experience is that people wanting to implement IIO
-drivers instead of hardware monitoring drivers keep finding reasons,
-so I won't object to an IIO implementation.
+Signed-off-by: Wang Haoran <wanghr2026@mail.zgclab.edu.cn>
+Fixes: 9c9e321455fb ("mfd: stmpe: add optional regulators")
+---
 
-Guenter
+diff --git a/drivers/mfd/stmpe.c b/drivers/mfd/stmpe.c
+index fd51ba74275c..9475a257acdb 100644
+--- a/drivers/mfd/stmpe.c
++++ b/drivers/mfd/stmpe.c
+@@ -1363,6 +1363,16 @@ static void stmpe_of_probe(struct stmpe_platform_data *pdata,
+ }
+ 
+ /* Called from client specific probe routines */
++static void stmpe_disable_regulators(void *data)
++{
++	struct stmpe *stmpe = data;
++
++	if (!IS_ERR(stmpe->vio) && regulator_is_enabled(stmpe->vio))
++		regulator_disable(stmpe->vio);
++	if (!IS_ERR(stmpe->vcc) && regulator_is_enabled(stmpe->vcc))
++		regulator_disable(stmpe->vcc);
++}
++
+ int stmpe_probe(struct stmpe_client_info *ci, enum stmpe_partnum partnum)
+ {
+ 	struct stmpe_platform_data *pdata;
+@@ -1417,6 +1427,11 @@ int stmpe_probe(struct stmpe_client_info *ci, enum stmpe_partnum partnum)
+ 		if (ret)
+ 			dev_warn(ci->dev, "failed to enable VIO supply\n");
+ 	}
++
++	ret = devm_add_action_or_reset(ci->dev, stmpe_disable_regulators, stmpe);
++	if (ret)
++		return ret;
++
+ 	dev_set_drvdata(stmpe->dev, stmpe);
+ 
+ 	if (ci->init)
+
+---
+
+PoC reproduction (7.4.0-rc2, arm64 QEMU virt, unmodified kernel):
+
+Device tree injection, spliced into the QEMU virt machine DT:
+
+    reg_vcc: regulator-0 { compatible = "regulator-fixed";
+        regulator-name = "stmpe-vcc"; regulator-min-microvolt = <3300000>;
+        regulator-max-microvolt = <3300000>; };
+
+    reg_vio: regulator-1 { compatible = "regulator-fixed";
+        regulator-name = "stmpe-vio"; regulator-min-microvolt = <1800000>;
+        regulator-max-microvolt = <1800000>; };
+
+    i2c@0 { compatible = "i2c-gpio";
+        sda-gpios = <&gpio0 0 0>; scl-gpios = <&gpio0 1 0>;
+        i2c-gpio,delay-us = <2>; #address-cells = <1>; #size-cells = <0>;
+        stmpe811@41 { compatible = "st,stmpe811"; reg = <0x41>;
+            vcc-supply = <&reg_vcc>; vio-supply = <&reg_vio>; }; };
+
+The stmpe811 node has no interrupts property, so the probe enables both
+rails and then returns -ENODEV on the no-irq check.
+
+Trigger:
+
+    modprobe i2c-gpio
+    modprobe stmpe-i2c
+
+Result:
+
+    stmpe-i2c 0-0041: stmpe811 configured in no-irq mode by platform data
+    stmpe-i2c 0-0041: stmpe811 does not support no-irq mode!
+    WARNING: drivers/regulator/core.c:2678 at _regulator_put
+    WARNING: drivers/regulator/core.c:2678 at _regulator_put
+
+Two warnings, one per leaked rail, and the regulator use counts go from
+1 to 2 after the failed probe.
+
+Note: the PoC was generated with AI assistance and the vulnerability was
+found by static analysis. The device tree is trusted input (a bad DT
+requires root or physical access), so this is not a security fix, but it
+prevents a potential resource leak or system failure on a failed probe or
+an old or malformed DT.
 
