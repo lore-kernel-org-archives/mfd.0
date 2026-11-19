@@ -1,56 +1,85 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795106894;
-	b=rQ7xEGQJPxyU+TJDIvzT9HTusuCD6Q0wIXEe3SvntevZbBInpgS0Ga89vZc+qCZwk/mf
-	 JsBmMNMTJmB/FWiO15LbvhuB/lznsgf7v3fpiUoUj0GFwIkCjrlsp1h6b1H6ROU+4wRH7
-	 iRtN8fgHVnroelLmCIJY1XOEQlwZhJxZyrbTjwTRy3+WC9twI0nQihzqPgRPPb41pRLuO
-	 ijAboU5rlzeTNA6WgiceDDDMAqAXQPnll4dk5kW2CTi5ACKRUI5LfjfHFn1LhjNOQzp9b
-	 yFc8CVIB0/ThtIbjmUEAs5Q4BfxTV3ccdxRpioQ76LwjobkOKKLz7Z3ueHCV4t7yRjA==
+	t=1795106920;
+	b=pS1opmsLoFaujEUDNGTyMn6iVzfb3cqSVgTCpk4h/tccctc1NhCRx+Wk+E44CeatfmFd
+	 7PMBO5OtJZKxrzg8heygMr+B76DRuZLEEvZSFGfEqr5So/0H/q6GyXLvx8e/07ucYm4tO
+	 uLx0gXjRWso872rAY1Et7N2Vd8i9s54drmSlzJ1YTgFzXT9EeGSF6ALrP7IMhH/yI3YJD
+	 rfIBs8oXDJRBPJlvClBoym4W85+yS6KuTayxOom3/3yNGn7V/xmTVpnjpGhrLne1f70N/
+	 3YdRPMt+i1IT+jOq4DTvz+1DyiDSqMd1Fu9OV4qd1n1CHIm7tGQOLnnAMp4UHanINOQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795106894;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-Cookie;
-	bh=6MTeeMjiKvPYEiHar5SJs3Of2rVy0Wpc92pv1HGMRUE=;
-	b=G1vlgjRFLF42RH9rcn0xpx29ANReW8HXx4S0WdSMAn8lkeqsxLSgTC9JCZCoootaackG
-	 7gXxPA9aTrvJtuixVG6xpkbcb8X3lS9OcQn8fB6IP6pZDpm0GSMklHJtE0zEOSB12j7iO
-	 64mTyum5sOpfxfIZhKsjg/kKGMe9pzHB1YZXT6DgvzUqA8rx4DZK1mlnkaXxhso0/SzaA
-	 lEgQ1wdhKz7UyAKZglPsQ5mehwOaEXTfGt+Uh1pc4qg+eIOgLfViG9FgOjexoJc5yIiqr
-	 0EYuoh2dLMnWyp2AagiHu9rYwJLeLLzuFc5eyOzwkMBt4B8pF9fiXBqJAOruFWok9bg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795106920;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer;
+	bh=8HXa68Qw9U8seRwWAPXNB/ewGGSCzzxtMHD1FScJ9Vo=;
+	b=PofsEpGhEyxi0Xsm43IzCuu+v3Jxjt9/EMls+HEs5OqkCcvZ2nJx5NnQl/Kr6a5elEFY
+	 9gO/iwUbVxDOIyUxnNiOU8oj+idWIT4uFnJbE0bAlkY12emGwj9PBAC09HYh4ogkNzot0
+	 eDS+hx3efGpq+WGSHI++WMAyJA/nAkctPR8xyuxfSoMTazW6NDj8JH1SAHNFiZYu/y6Oh
+	 uD/p5j3emF+KLZNK6aLdyML0ZeYLFvedem9AKWP2Pdc/ICYrp21+uQMWAVAbWz8lPAt/t
+	 yQRvfNQ+lz5oqULq5bG4GVtHVWIcQAHtl+T9L4Jwywmestn5/MVA9qQvNTxjhOUQPiw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GfPzmix5;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hOGW4L7i;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 784E9606A33C;
-	Thu, 19 Nov 2026 16:48:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59FBF606A320;
+	Thu, 19 Nov 2026 16:48:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GfPzmix5
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BD7091F000C8;
-	Thu, 19 Nov 2026 16:48:12 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hOGW4L7i
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E4DBF1F000C7;
+	Thu, 19 Nov 2026 16:48:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795106894;
-	bh=6MTeeMjiKvPYEiHar5SJs3Of2rVy0Wpc92pv1HGMRUE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=GfPzmix5+ZgeKSMhUaEBQy6CtEhNStpxk/1x6t29PxiN8M9q+VEv7T/EUB2yRLc3Q
-	 n2ND0wF6dAS2OMxYfGrV+PMEGeKBTr12J8mwzwSWJpiIgSeIUPo8Fv+zCy77EupFCC
-	 m07y4CD5eCpUQGRRCRGO0pW24a7bP/gk//TD2AsRlmoomCzxd2FHlfsvABwFnGyFRC
-	 pG+t4a2zYPtJbsVe9QB39FjMQnyupIT0RbG/ouHMF5g2QafoIPETTRLESDHQVl7jR5
-	 vWgJfWlVb0GSNaJNy5NjaiC81y8YIntG/s5/YhJu5do2+yRAzUgLOnZ2eEcZL9zMTn
-	 JS/6r/8TGb0dQ==
-Date: Thu, 19 Nov 2026 16:48:10 +0000
-From: Mark Brown <broonie@kernel.org>
-To: Lee Jones <lee@kernel.org>
-Cc: Charles Keepax <ckeepax@opensource.cirrus.com>, lgirdwood@gmail.com,
-	linux-sound@vger.kernel.org, linux-kernel@vger.kernel.org,
-	mfd@lists.linux.dev, patches@opensource.cirrus.com
-Subject: Re: (subset) [PATCH v2 1/2] mfd: cs42l43: Add load detection
- register needed for cs42l43b
-Message-ID: <22f5f813-79b1-41f0-849c-263224c651c9@sirena.org.uk>
-References: <20261112141650.1931348-2-ckeepax@opensource.cirrus.com>
- <179510674408.77674.4732953853855712916.b4-ty@b4>
+	s=k20260515; t=1795106920;
+	bh=8HXa68Qw9U8seRwWAPXNB/ewGGSCzzxtMHD1FScJ9Vo=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=hOGW4L7iXcp23kZoYzOxl244lck6jnSGkO3u/foitA0/9XQXVU0S6YWNWJy74lRWJ
+	 IZnpmAUyFvq0Kth/zdeWp/9lb+Xft6SlOmA00sPRSsX+vj6M3eUb15cntpHPNHu3I+
+	 sqWeySL6onzxSn+OubDpygDV8ycIfwI6hjP5vEYboR6jH/XruUjQGwrpadH3FLRBcO
+	 gWUmEu1Z6nHSwlR1k0HTIr5MQngxOUnS0sAJofHnQaqKOuTNDvPfkoLQ1H0G6fh82g
+	 xkyXaRVVzeEs5ghlRSE6AjISFFFCihwgbiuQnBWawAOyXcTAmDsRfoRAXwvKbSihVw
+	 K/J2K3KG5X2vQ==
+From: Lee Jones <lee@kernel.org>
+To: Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+ Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Heiko Stuebner <heiko@sntech.de>, 
+ Philipp Zabel <p.zabel@pengutronix.de>, 
+ Elaine Zhang <zhangqing@rock-chips.com>, Lee Jones <lee@kernel.org>, 
+ Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
+ Richard Cochran <richardcochran@gmail.com>, Ulf Hansson <ulfh@kernel.org>, 
+ Andi Shyti <andi.shyti@kernel.org>, 
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Jiri Slaby <jirislaby@kernel.org>, Jisheng Zhang <jszhang@kernel.org>, 
+ Andrew Lunn <andrew+netdev@lunn.ch>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ David Wu <david.wu@rock-chips.com>, "Rafael J. Wysocki" <rafael@kernel.org>, 
+ Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
+ Lukasz Luba <lukasz.luba@arm.com>, 
+ Maxime Chevallier <maxime.chevallier@bootlin.com>, 
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+ Alexandre Torgue <alexandre.torgue@foss.st.com>, 
+ Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Manivannan Sadhasivam <mani@kernel.org>, 
+ Thinh Nguyen <Thinh.Nguyen@synopsys.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Shawn Lin <shawn.lin@rock-chips.com>, Cunhao Lu <1579567540@qq.com>
+Cc: linux-clk@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, 
+ linux-kernel@vger.kernel.org, mfd@lists.linux.dev, 
+ linux-gpio@vger.kernel.org, netdev@vger.kernel.org, 
+ linux-pm@vger.kernel.org, linux-i2c@vger.kernel.org, 
+ linux-serial@vger.kernel.org, linux-mmc@vger.kernel.org, 
+ linux-stm32@st-md-mailman.stormreply.com, linux-phy@lists.infradead.org, 
+ linux-usb@vger.kernel.org
+In-Reply-To: <20261022-add-board-ok3572-c-v1-4-0b0fd85a31ee@qq.com>
+References: <20261022-add-board-ok3572-c-v1-4-0b0fd85a31ee@qq.com>
+Subject: Re: (subset) [PATCH 04/27] dt-bindings: mfd: syscon: Add RK3572
+ QoS register compatible
+Message-Id: <179510691068.78262.17485799721461490431.b4-ty@b4>
+Date: Thu, 19 Nov 2026 16:48:30 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,45 +89,18 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="kdJNOwK6aSR4xlgG"
-Content-Disposition: inline
-In-Reply-To: <179510674408.77674.4732953853855712916.b4-ty@b4>
-X-Cookie: I'm into SOFTWARE!
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
 
+On Thu, 22 Oct 2026 00:11:01 +0800, Cunhao Lu wrote:
+> Add rockchip,rk3572-qos to the syscon compatible list.
 
---kdJNOwK6aSR4xlgG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Applied, thanks!
 
-On Thu, Nov 19, 2026 at 04:45:44PM +0000, Lee Jones wrote:
-> On Thu, 12 Nov 2026 14:16:49 +0000, Charles Keepax wrote:
-> > The headphone load detection procedure on cs42l43b is slightly different
-> > and require a register that wasn't used on previous versions of the
-> > chip. Add that register into the driver.
->=20
-> Applied, thanks!
->=20
-> [1/2] mfd: cs42l43: Add load detection register needed for cs42l43b
->       commit: cc29c6e45db7b4306efc7a76e7a64d549229d4ac
+[04/27] dt-bindings: mfd: syscon: Add RK3572 QoS register compatible
+        commit: 9776fbb47d6c9d0928c66734ed565d870d8fdfe9
 
-Can I get a tag for this please, I need the register definitions it adds
-to build patch 2?
+--
+Lee Jones [李琼斯]
 
---kdJNOwK6aSR4xlgG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmr/KEkACgkQJNaLcl1U
-h9C49wf/R6Ww/DGkch3RfMGR3hcVhhzRqx2ng64kjDWw+E551DEO7XxFcAWExoO0
-VP61yVOOLa+81gnAbWmNQlbz2509qa69dxiKllQoRLU6v/Fwab8su1rGdHKoOBrc
-jzdAQOM6xtrkQhEDVF+Or/VrtVmAjDTd7pS3T2rcu4N7j25b0/M3ZmrsoiwQesf/
-hYgD2Gq6fyl/98YTTW3FLWJPl2kwrKidwSTopXqwNcxbvVABKmaVBcWYrEZv+XaR
-1KCAIz73rGE/KDYVS3goJRNq+dyC3OENtnBsUggLg9L3CZ+DfNQHCV3BkczTrqoI
-u59Rku4wYWNolCET94kcOVobMRH3ww==
-=pkNo
------END PGP SIGNATURE-----
-
---kdJNOwK6aSR4xlgG--
