@@ -1,53 +1,146 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795079285;
-	b=t37TyrIBGtOewVqHnJQoljzk2QQeauCiqS/2OHFp97vpL2GALS2z/PkiS6Cx3iri+Mq8
-	 +kwSXkjXRpKgt2hu6qQbK8tlwjhYRtmYr1eEPaL2wUK6BbSGWZsy4XqSqj+uujEMBQa4I
-	 CeEO/W3S/FNHrznYSWJj9Gvq7Ijqp1wsMqKYFsMByo1LhoZFbWNOC7Whi4gOh4Jj03BG+
-	 /mVCljGjC3dFzH33ZwEUqkgtLRiFD+b916c+yPzop7I9kRtPi6YXxAM3lXw3JMHyQRZwo
-	 ywiDkF0oZveILBkdAohzG8zUHaObo1oXwAjpajVTolIX3m5RJfZk46I20zOpGT7pRFA==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795079285;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To;
-	bh=O9R7egJCPlZLZP73GLSxT/6A7uKiquUS5zEC8ZPt3xA=;
-	b=TTPR4AUtPweSQH+rAechUUpLKVSiM72ur8OR3gwih9DRBoxHubmkN7akA7jN0ZnPzsUG
-	 HvQPwyZfmmORdQqF2zngjpKoKE9UyOjSrpVTjVXCuDt0MgFula3aX3yTuGElhhIGBu2lj
-	 noA+lv7whQNNOEW/pdyVe484GekEijWI772H4sC6UT2ZrZS04pq7KhDJii+LOwi3xEbEv
-	 koGJ6JCDTPsUe2c3ssMPMgpm7Lflntt8/V0/Y+lGC37IlsA9o3PfffAUIhICm1WYooXHK
-	 C1RCKr/xbB1A5LS8cocucNUyow+6E/GQcn44NqSrKcZmdZC370rRWXyjCiPNVeFFxHw==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oWdcA0f0;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.69.39
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795079577;
+	b=l2xAZpV85fl9n6c5z/sbYa7XbG2eegZ4+FPhGlt8BqUQ3IvRI0PyXNxFzbkfPiBbjYNR
+	 teBN0aw4GV0Su5Cx3+RI/mEuaA4HVi+mJFMrNmODxW35RcOGoAKuz1iGLA9cSPMicmwZ9
+	 57RXeZySxM0ZxxMIsBDHKk2hM9Oigk9H/M/c9rfLOa13btmYULyRE9m8c38OEYu0NOwXc
+	 gvEQCsJFhsBJvK8YEkLzunvBdwWfo3cNlItfuWScQGAtn57nz/i00QROsvGIZIAxJteSt
+	 CI3HQy6aoqaQBu7mNXRXIyWBNhvgYX37bqEdnx/V44nY41g0ek5u5nrFVU/g0XOYZ6w==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795079577;
+	h=DMARC-Filter:DKIM-Signature:Received:Received:Message-ID:Date:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
+	 In-Reply-To:Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:
+	 MIME-Version:X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
+	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
+	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
+	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+	bh=8D1gNUSDy7c0U+03wfTJBNTnsYDSvEUXFPfEdtJXXHc=;
+	b=1/WSuARbBKDxT6/NWSp9l15elSgyovPSG2GsLJBuDDadfw5qsT3FyCTU7I8REmOxsbmb
+	 BeKMfUXYu6DAUanj94xrghGQg9n9LtexX9xOaV/e7v6QszJdNL49QlJWUhR7KpjnM3GWU
+	 QYGITUzAJCCkZNgIrsZowTnijqzAS7SL/39y0+fK/a5muSqiqWjd2GfkDHf+bZnEbtTOe
+	 J/glHLjS/eLN0uR+sA0JivLoU06M33L/K7cOKlENBtTbIhB7TBa8U7XW2cm6seTfxvMwN
+	 CAuEZInaXWYqoChoOhuQiRK1lojeY2TkKn9f6RQ/PMd0Q+Lt/nz1CqsyZ5YJ9G7h2xg==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=cherry.de;
+	spf=pass smtp.mailfrom=cherry.de;
+	dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=jfFaPc3p;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.69.39
+Received: from AM0PR83CU005.outbound.protection.outlook.com (mail-westeuropeazon11010039.outbound.protection.outlook.com [52.101.69.39])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1C29606A320;
-	Thu, 19 Nov 2026 09:08:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1ADA606A326
+	for <mfd@lists.linux.dev>; Thu, 19 Nov 2026 09:12:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E1ADA606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cherry.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oWdcA0f0
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3BCD11F000C4;
-	Thu, 19 Nov 2026 09:08:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795079285;
-	bh=O9R7egJCPlZLZP73GLSxT/6A7uKiquUS5zEC8ZPt3xA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=oWdcA0f0pLO1l15XvAygqm6EZn0GKHryD664ghnP18cFakbX7k6edMCrDZHumecb5
-	 BRx2MKrpHujVK6qvk3CGcGXyr0RojYMzamIRdGhyBPMcN80Rt+Qnnff9p2ybqKOeDo
-	 g4R1r7VuYUfPm6wW2r7bYH7WI/PBNBoswE9R0tGak4bRsES1YDkNQEGcsTzrKxQJ2b
-	 soB/v3b40AplwbcUHqZoW4dueLsUO+kTu8g5wu2TBB/1pd1eK0UWRtH0Kwt+lxH3Ut
-	 p3trHGiWhlEwMjSVSodmq6g4m9m7DwX6zi42ko2XGZJkYl7lEL8yiWCDMFrpboQxhw
-	 IT88AORPBJejA==
-Date: Thu, 19 Nov 2026 09:08:01 +0000
-From: Lee Jones <lee@kernel.org>
-To: sashiko-reviews@lists.linux.dev
-Cc: Wang Haoran <wanghr2026@mail.zgclab.edu.cn>, mfd@lists.linux.dev
-Subject: Re: [PATCH] mfd: stmpe: Disable regulators on probe failure
-Message-ID: <20261119090801.GL98456@joneslee-macbookpro.roam.internal>
-References: <1795076100902-8-fa247961@mail.zgclab.edu.cn>
- <sashiko-outbox-222667@kernel.org>
+	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=jfFaPc3p
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=bVpGYDv+5ierkXdqrx/yVDhsUZXn0zE6KiRw5E2BoveWaeMeXRrdDcq3vSADClsUgCIQ/pKQneI3pXu/4ud8q8JrRrwxI70lNhW5i7hA2JTIL1UdG4+JPmVBMeGL2HUUEhLL8yD5rw8Pci/3VF/aejAJQfFo6FbzCZ2yPc/l6NQFUEevXkH+3WoGlcVmYUZOoqbCYNvVmboYrhPGvzWw9EPhCzsNizStzs1jV0Tj6F+PByxl2cmxvNVyJVmPB4S9+kBoobEPq6OS3mfpaCjmSG8oTfmEiDlwPbHfMDL7Li5/yJv+6W4LKhsaDCusvdxyGiSDuHyWe2+Q8QHLECjQ0w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8D1gNUSDy7c0U+03wfTJBNTnsYDSvEUXFPfEdtJXXHc=;
+ b=Pevfqz29yBUCRBoU+4E5oxpeQzmHtrP38ittjlqPl745C/kytSKhy7C9JxjfudLNH4YiKohEImDIqyCwESR09X/LWH7smjcQwMa6kGFgcaw8cA8zkJHcjd0NZz1cKIvC6ZDd+bEPNlaAEbuH1EhlDPIuVGHDsfHQlJufcIDaDf0ZFO8mSLCkNz4+nQwhfNuCzyDCUCF6oew5t0552bOYHJtT7Kejdb3M5Ozlc0ut4r+y+EHdkhFT2EAbkphAZ7vHihWcsaKRFqV6fjZ7Dl3zJ4bn3y1n/o6N/1P3pkkt3tkzW/ivy+EjjdyNADS8oIIjuw7doZnsXH4r+u6rd703eA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8D1gNUSDy7c0U+03wfTJBNTnsYDSvEUXFPfEdtJXXHc=;
+ b=jfFaPc3p1tfaOmyWVZyGqyBFVuhovMiaM4Ghp3YJkTyQx6hSWcodgG29C8ra+XnGxwfyY2Fo0HI89wQ0Ylni711ewJHirk4TiNMEx89awkzwOSXGs1qj1OwG1jbX3D1rXVEQKx3k4aKn9PmUyQ03TmUa78HM1ud8Lz5PHd5l82k=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12016.eurprd04.prod.outlook.com (2603:10a6:150:335::6)
+ by DU2PR04MB8919.eurprd04.prod.outlook.com (2603:10a6:10:2e2::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.14; Thu, 19 Nov
+ 2026 09:12:51 +0000
+Received: from GVXPR04MB12016.eurprd04.prod.outlook.com
+ ([fe80::f2d4:9db8:9a4e:b0bd]) by GVXPR04MB12016.eurprd04.prod.outlook.com
+ ([fe80::f2d4:9db8:9a4e:b0bd%4]) with mapi id 15.21.0639.010; Thu, 19 Nov 2026
+ 09:12:51 +0000
+Message-ID: <af94a18e-cb7e-4319-95e3-0df120f730dd@cherry.de>
+Date: Thu, 19 Nov 2026 10:12:49 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/4] Suspend-to-RAM fixes for RK3588 + SPI-connected RK806
+ PMIC, enable PMIC sleep on RK3588 Tiger
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Jakob Unterwurzacher <jakobunt@gmail.com>,
+ Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+ Joseph Chen <chenjh@rock-chips.com>, Lee Jones <lee@kernel.org>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Heiko Stuebner <heiko@sntech.de>
+Cc: linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org,
+ linux-kernel@vger.kernel.org, linux-input@vger.kernel.org,
+ mfd@lists.linux.dev, devicetree@vger.kernel.org
+References: <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-0-cb12621c1fb4@cherry.de>
+ <a220ebd0-a28d-44cc-9a80-62382018348c@cherry.de>
+Content-Language: en-US
+From: Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
+Autocrypt: addr=jakob.unterwurzacher@cherry.de; keydata=
+ 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
+ ldPHIqbIwpfecQ==
+In-Reply-To: <a220ebd0-a28d-44cc-9a80-62382018348c@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR04CA0093.eurprd04.prod.outlook.com
+ (2603:10a6:803:64::28) To GVXPR04MB12016.eurprd04.prod.outlook.com
+ (2603:10a6:150:335::6)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -57,133 +150,182 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <sashiko-outbox-222667@kernel.org>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12016:EE_|DU2PR04MB8919:EE_
+X-MS-Office365-Filtering-Correlation-Id: 39ab31c7-0474-4bee-9f7a-08df461d496c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|7416014|366016|23010399003|1800799024|11063799006|4143699003|921020|56012099006|22082099003|18002099003|10067099003|261009223027099003|261102123227099003|261028144727099003|261021135927099003|261021133027099003|261021121427099003|261022115727099003|261021123027099003|261026121527099003|261022075727099003|261026140227099003|261021130227099003|261022105027099003|261022113327099003|261026130827099003|261026135527099003|4133799003;
+X-Microsoft-Antispam-Message-Info:
+	bs7TWLY+TpYAiyoXsT4+xl0ma2kDgE3WAJUDNvrAdngCChNEdV8+w69Mfb9ob6ZmNZFoFVbvitCvkTKAtep032lr0B1S/koOm6fIlu+9d3D8lyUYATbeq2TLn2uBwuztkSvbE+ji9+XxqCp/KCs/d+Uf3BScsV5UphLjBXNaFJafmRQxZPFLQCX/4fexXJIzWabcGufcWEchvJKz3pWXCa4/PJdEJ1FMP1evpTC7MbI0uqiT4wm1qWJRliG/14VIcVWCFSeLVMynPrSF79rfD+/p0ZME6Hxr3DR2n0uJkpZSoIDXNBGwwcv7cjYzIQyfgpipXb/EQdZTkm9Gxp7GW/zF4Hnp1rKHTu4r+JNh1xjqlwA9JWqPenU1VJ4NEsRNPgkwvKcWFMLkOo3V2haaHdHt9XQX1PEkkDiIEueUbrPjzDKOu/Lor7u4Iza2LkAdLTSYdTH9fbzNS91sUE+kaphxsZyzAXXsgdYVSHLnQSEnPPfDholnSHnZ/N9d8n36OQurTJa2HBtb1EyCuGoQhFcTvnq1aCbRHSAyAivqyRJF80O0MPrjElXzZJ1qUE8dpX/xWCjRAZwLB6THLH5mvwvt8LrNGnesQL9q6T2uQBbK9GtRcAnua/0g6FaDa3KvuD4b87GjE8lqy00+vzI1Eke8re+h3pZb6pbWWkCyWx8=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GVXPR04MB12016.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(23010399003)(1800799024)(11063799006)(4143699003)(921020)(56012099006)(22082099003)(18002099003)(10067099003)(261009223027099003)(261102123227099003)(261028144727099003)(261021135927099003)(261021133027099003)(261021121427099003)(261022115727099003)(261021123027099003)(261026121527099003)(261022075727099003)(261026140227099003)(261021130227099003)(261022105027099003)(261022113327099003)(261026130827099003)(261026135527099003)(4133799003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?bmwwR0JFNG5kcG5ralErdVEybXIwdnJ6Q1pQVHFQMUdQSURpb2pxWktycVdG?=
+ =?utf-8?B?L3BxS2lBYTUrcEhRdWFoQkYxQS9mSmxTbGk1RHl1RnlWbkhnS0puSWVPTG10?=
+ =?utf-8?B?eTErY3U4alZ1WUFaZTNnSkRLQm5QTkdEdXZoRHk3NzJhSkxMTHltOEVKN2xY?=
+ =?utf-8?B?QnBud3BwRzF0RmFac3BSclVqcnplbmVLdS90VXRPUmZYdENsWURjOTJHSjdm?=
+ =?utf-8?B?RDdSVXF4bS92eVNSaFhBYitscSt2OEZYQXFZTytjdG9jdE1MUHNpZ0dOQ0ND?=
+ =?utf-8?B?eUhwMHJSdEc1endRV1lrODlTL2dpM1JDaFJEcGYrUFB1d21oTzNzYTBBTEdz?=
+ =?utf-8?B?d2Y1dWVtRkNQdzJPbGRLWlJGVTlVRU95Vlg3cDVrSlVrOTlHVDAyV1NpZlhw?=
+ =?utf-8?B?eTNtczhtK0JLU0p6bVI4dFAxaVA3c1B4UXVpWDlMZ09uSy9uZG1iWkEwMW9Y?=
+ =?utf-8?B?Wm5keWdmaTR4LzhlODcwR3JXL1dnYzZaQmdnVHRSbDJVSTZoZDE1Vk5tMmdI?=
+ =?utf-8?B?cnlPNUxHUGRjUHQzMzYrTi8yUmZja1ZySWdSOUxZZDhtWklJWGhyTGpibmdU?=
+ =?utf-8?B?RGJMSHZPRlZ6UDRHVnpHTEtZR3phTkh6WHNVNmtNNXlZQTU4U3BCcURVaFNC?=
+ =?utf-8?B?MGFwRWJNaGNYQmNjS1c2RDR1L3IvVHlMcDhsMXJNNHJwSWFUU3l2Rzh3UXFn?=
+ =?utf-8?B?MVVUV2xXR0RKN1RNWWd2Yk1lUjVMVHpBY29jL0NuSHk4YnpXTVdMYzZIaVlZ?=
+ =?utf-8?B?RTY0YXdOb1RXWVArYkkrVU5TQXRIdTBJd04rbStUa1FOTFJwQ04rTDVja01r?=
+ =?utf-8?B?bGp0dFpzUG9pVXVZaE80RzR4d2tOVHpzQmg2MHhnMjhlRFJzYi9CWmN0Y08v?=
+ =?utf-8?B?VEFOTFRBeHJwc3ZVV1BNNzBqUjc0RnZaaW9vejM5K1JLOGMyUER4bGxrdkI1?=
+ =?utf-8?B?MDJpTjRZdm55YngzbksvbWNaeXRLZW50VkxHdVM1cVU2SEkzVTZHVFMrWHlP?=
+ =?utf-8?B?dkhXS3NMMFlpZmRjSlpLeCtBOENjSzRzenNXK2d4enJ3VVJIMWNwQzc5eXZD?=
+ =?utf-8?B?VkkrTTNuUEpaeDhzM3FLejVMcDdRQzFpbkZub2J4aFFoUEZpRitTSDBlU2M3?=
+ =?utf-8?B?WjNFUTlpeGNOZWFTekxoQW9XU0NXZWFiVWJhVTdSQVBRV2JYaWV4S3ExUVVS?=
+ =?utf-8?B?SDdOZGQvUkpBaUxDbmo0WEdkZEx4Y0ZJSEx4dTk3UU11SFVuSlYrYlNQWHFP?=
+ =?utf-8?B?b0xOVzJSK2VZUlJlTUlUaEltZ0xTREM1aEFPUjhzZUtMa0t2MWozVm44WDJp?=
+ =?utf-8?B?R25LVkliZHZqa241WXNoRUdGMGlXUzF1a0JoUEpZcjV6Y29qeXZoMzU5cmYr?=
+ =?utf-8?B?bTcxUWRTVTRaQnpLdUcrVWhacmpaOTJESlZBTER4VGE1QnRzSytYVHpmbFgv?=
+ =?utf-8?B?VEFsRi9QWEsvZ0pRMVNiTk4wbzhaOTU3UFlIQ3oyZjJIandFdnp2YlY5ajFH?=
+ =?utf-8?B?QXVKMGJlZStpWEg0SDZzZ1MyWXVob1ZQcXp2aEJlT1dGR0hvRjVOWWdqQ1Nl?=
+ =?utf-8?B?QTNvaUdkN29xaHQrYjBqZitwWXZqVlpQZmxCU0hSTjlFL0d4M2kvYURZaldU?=
+ =?utf-8?B?Qm5kRllEVXQxL05wQlJHN05oUEZ1QTJkcS8rY0VBbTNMZHBRT0QraWUvVTlB?=
+ =?utf-8?B?NDAzUTJYY1lGTlZ5SDlpeFNDTUdmUjlUb2NMMGgyelpIKzdmWjZLblpCY05H?=
+ =?utf-8?B?c3UvTTB4TVRqdnJwWjdnaUR6Wnd2WXZ3L3lVZXVvTWYwQWtVeldQL0VpbzNP?=
+ =?utf-8?B?Ym9UL2FENUVxYjNtTzJSSzFOSEpEU3hlRmladFRyekEzUXZZZjRQZDNYMVUy?=
+ =?utf-8?B?MnA5RytaOUtEZ3RMZ3AzWDFOYm9JeVJMUzA1NkgyYmViOE9OU2ZXcStPOGln?=
+ =?utf-8?B?Q09OR1RQRjlWaldxVTJLRzRpRU9XZ1Z5M05mOWFvQ2MrK0h1VWtwcno2Qk95?=
+ =?utf-8?B?d1VUdEVTbEtUUFhtcG1rblZ6U2NadzNDbWtWb3FJN2VaZHBnbjhLZ3NvL3gr?=
+ =?utf-8?B?OGIrZDUxeDRyMlIyWXZTRjA5NGpXWWJEZjduanZoRDlhcWdxbHNDMllBaEJa?=
+ =?utf-8?B?dUR2SkZXTGFveUVhT3BDY1Y4NDNiR1p2OW1xd3J5RFdleVZGSVl0NEZIOXNV?=
+ =?utf-8?B?aTNBMjNXV3JFWUJ3Zjk3YlBvSUhvR0lnd3B6dkJ2L0tZNXdMblZGNEUxdGhD?=
+ =?utf-8?B?QWNxNUZ1TGRmc1pxMnpmNVpSeDV2WSt5ZVppMzBZeW9rKzdhOFhTbU5ta2Nv?=
+ =?utf-8?B?L3c4c3dwWHY5QUdwNWxremFFRHQ0NVBoT1loVWFwdGdEQmx2bTVjVkN5bU8x?=
+ =?utf-8?Q?p9gfaVgHDQv/i7c8=3D?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 39ab31c7-0474-4bee-9f7a-08df461d496c
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12016.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2026 09:12:51.1371
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: cP6Ok+cF6MfCKDHA3SA5Ltx+atJvKwo2WeC+rIrQqMyEKbypBxmjK+01rIMFSxhUeDKaEIBktae7G7AV4DqjuQGOyzVvyHfNIW2bfih2gmM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8919
 
-On Thu, 19 Nov 2026, sashiko-bot@kernel.org wrote:
+Hi Quentin, thanks for looking at this!
 
-> Thank you for your contribution! Sashiko AI review found 3 potential
-> issues to consider:
-> - [Medium] mfd: stmpe: double regulator_disable() on unbind with
->   stmpe_remove()
-> - [Medium] mfd: stmpe: unbalanced regulator_disable() when
->   regulator_enable() fails
-> - [Low] mfd: stmpe: misplaced comment above stmpe_disable_regulators()
-> It also noticed 1 related pre-existing issue this patch does not
-> introduce:
-> - [Critical] mfd: stmpe: use-after-free and virq leak in stmpe_remove()
->   [1]
-> --
+On 10/29/26 20:31, Quentin Schulz wrote:
+> Hi Jakob,
+> 
+> On 10/29/26 11:06 AM, Jakob Unterwurzacher wrote:
+>> This series, together with a few out-of-tree patches (see below), makes
+>> suspend-to-RAM on RK3588-Tiger work, down to a power consumption of
+>> about 0.4 W. Patches 1-3 apply to all boards with an RK806 PMIC
+>> connected via SPI, which includes most RK3588 boards.
+>>
+>> Patch 1 ("Input: rk805-pwrkey - enable the wakeup interrupt during 
+>> system suspend")
+>> arms the power key interrupt as a wakeup source, so that the
+>> power key can wake up the system. This is done in the regular suspend
+>> phase, because the SPI bus to the PMIC can no longer be used in the
+>> noirq phase.
+>>
+>> Patch 2 ("mfd: rk8xx-core: keep the PMIC interrupt disabled during 
+>> system suspend")
+>> keeps the PMIC interrupt disabled across system suspend, so that its
+>> handler does not run before the bus to the PMIC has resumed.
+>>
+>> Patch 3 ("mfd: rk8xx-spi: add system sleep PM ops")
+>> hooks up the existing rk8xx suspend/resume callbacks for the SPI
+>> variant, which so far lacked them.
+>>
+>> Patch 4 ("arm64: dts: rockchip: put the PMIC into sleep mode in 
+>> suspend on RK3588 Tiger")
+>> configures the RK806 PWRCTRL1 pin on RK3588 Tiger for its sleep
+>> function, so that the regulator suspend states take effect. This lowers
+>> the module's power consumption in suspend-to-RAM from 1.09 W to 0.43 W.
+>>
+>> The patches do not depend on each other and can be applied through
+>> their respective trees.
+>>
+> 
+> Then have them in separate series. Series should be as small as 
+> possible, down to a single commit if possible.
 
-Please review, explain or fix the Sashiko review(s).
 
-If this is a set, this request includes the other patches too.
+I'll split it into tree (1, 2+3, 4).
 
-> commit bf0f4e286fa2ad07c0c3a3f5f83cd68ff2fe5396
-> Author: Wang Haoran <wanghr2026@mail.zgclab.edu.cn>
-> 
-> mfd: stmpe: Disable regulators on probe failure
-> 
-> This commit registers a devm action in stmpe_probe() to disable the vcc and
-> vio regulators when probing fails or the device is unbound.
-> 
-> > diff --git a/drivers/mfd/stmpe.c b/drivers/mfd/stmpe.c
-> > index 879124de912d8..f0924556d5c2f 100644
-> > --- a/drivers/mfd/stmpe.c
-> > +++ b/drivers/mfd/stmpe.c
-> > @@ -1363,6 +1363,16 @@ static void stmpe_of_probe(struct stmpe_platform_data *pdata,
-> >  }
-> >  
-> >  /* Called from client specific probe routines */
-> > +static void stmpe_disable_regulators(void *data)
-> 
-> [Severity: Low]
-> This isn't a bug, but inserting stmpe_disable_regulators() here separates the
-> "Called from client specific probe routines" comment from stmpe_probe().
-> 
-> > +{
-> > +	struct stmpe *stmpe = data;
-> > +
-> > +	if (!IS_ERR(stmpe->vio) && regulator_is_enabled(stmpe->vio))
-> > +		regulator_disable(stmpe->vio);
-> > +	if (!IS_ERR(stmpe->vcc) && regulator_is_enabled(stmpe->vcc))
-> > +		regulator_disable(stmpe->vcc);
-> > +}
-> 
-> [Severity: Medium]
-> Can this disable stmpe->vio and stmpe->vcc a second time on unbind?
-> 
-> stmpe_remove() still runs before devres release and disables both supplies:
-> 
-> drivers/mfd/stmpe.c:stmpe_remove() {
-> 	...
-> 	if (!IS_ERR(stmpe->vio) && regulator_is_enabled(stmpe->vio))
-> 		regulator_disable(stmpe->vio);
-> 	if (!IS_ERR(stmpe->vcc) && regulator_is_enabled(stmpe->vcc))
-> 		regulator_disable(stmpe->vcc);
-> }
-> 
-> regulator_is_enabled() queries the underlying regulator_dev state rather than
-> this consumer handle's enable_count.  If either rail stays on after
-> stmpe_remove() (for example, an always-on regulator, a shared rail, or a fixed
-> regulator without an enable GPIO), stmpe_disable_regulators() calls
-> regulator_disable() again with enable_count == 0 and triggers the unbalanced
-> disable WARN in _regulator_disable().
-> 
-> >  
-> >  int stmpe_probe(struct stmpe_client_info *ci, enum stmpe_partnum partnum)
-> >  {
-> >  	struct stmpe_platform_data *pdata;
-> > @@ -1417,6 +1427,11 @@ int stmpe_probe(struct stmpe_client_info *ci, enum stmpe_partnum partnum)
-> >  		if (ret)
-> >  			dev_warn(ci->dev, "failed to enable VIO supply\n");
-> >  	}
-> > +
-> > +	ret = devm_add_action_or_reset(ci->dev, stmpe_disable_regulators, stmpe);
-> > +	if (ret)
-> > +		return ret;
-> 
-> [Severity: Medium]
-> Can stmpe_disable_regulators() also call regulator_disable() on a supply whose
-> regulator_enable() failed?
-> 
-> When regulator_enable() fails for stmpe->vcc or stmpe->vio in stmpe_probe(),
-> it only logs dev_warn() and leaves a valid regulator pointer with
-> enable_count == 0.  If regulator_is_enabled() returns non-zero during error
-> unwind or unbind (for example, when another consumer keeps the rail enabled or
-> ops->is_enabled() returns a negative error code), stmpe_disable_regulators()
-> calls regulator_disable() on the unenabled handle and triggers a WARN in
-> _regulator_disable().
-> 
-> [Severity: Critical]
-> This problem wasn't introduced by this patch, but stmpe_remove() [1]
-> removes stmpe->domain and disables the regulators while stmpe->irq is still
-> active, and leaks the child virtual IRQs mapped on stmpe->domain.
-> 
-> stmpe_probe() requests stmpe->irq via devm_request_threaded_irq(), so
-> stmpe_irq() remains enabled until devres release runs after stmpe_remove()
-> returns:
-> 
-> CPU0                              CPU1
-> stmpe_remove()
->   mfd_remove_devices(stmpe->dev)
->   irq_domain_remove(stmpe->domain)
->                                   stmpe_irq()
->                                     irq_find_mapping(stmpe->domain, ...)
->                                       <-- use-after-free
-> 
-> In addition, mfd_add_device() creates virtual IRQ mappings on stmpe->domain via
-> irq_create_mapping(), but neither mfd_remove_devices() nor stmpe_remove()
-> calls irq_dispose_mapping() before irq_domain_remove().  That leaks the
-> allocated irq_desc entries in sparse_irqs with dangling irq_data->domain and
-> irq_data->chip_data pointers to the freed irq_domain and struct stmpe.
-> 
-> [1] https://sashiko.dev/#/bug/linux-aaf90163-a755-407e-aec5-73a7ef05da1e
-> 
-> -- 
-> Sashiko AI review · https://sashiko.dev/#/patchset/1795076100902-8-fa247961@mail.zgclab.edu.cn?part=1
 
--- 
-Lee Jones
+>> 1) Upstream TF-A does not complete suspend-to-RAM on this board yet, 
+>> so the
+>> tests used Rockchip's BL31 (rkbin v1.47), configured through a small
+>> out-of-tree driver. The plan is to get suspend working in TF-A instead.
+>>
+> 
+> I'm guessing you(r LLM) meant upstream TF-A here? Or what is it that you 
+> mean?
+
+Yes, both my LLM and me meant upstream TF-A.
+
+>> 2) The inno-usb2 PHY has to be resumed when its 480 MHz clock is enabled,
+>> otherwise EHCI/OHCI resume hangs. This is addressed by Sebastian
+>> Reichel's inno-usb2 series [1].
+>>
+> 
+> Having access to your downstream branch, you have a patch generated by 
+> your LLM and not Sebastian's patch series. Either use what Sebastian 
+> posted, or be more careful in your choice of words as I read the above 
+> as implying you used his series.
+
+I have now pulled in Sebastian's patch series instead and posted a 
+Tested-By ( 
+https://lore.kernel.org/lkml/ae532396-557b-4a0b-b13c-920a971962b8@cherry.de/ 
+).
+
+>> Known issues
+>> ------------
+>>
+>> PCIe devices do not survive resume; this depends on system PM
+>> support in pcie-dw-rockchip [2].
+>>
+>> [2] https://eur02.safelinks.protection.outlook.com/? 
+>> url=https%3A%2F%2Flore.kernel.org%2Fr%2F20260316-rockchip-pcie-system- 
+>> suspend- 
+>> v5-0-5bb5ad37d643%40collabora.com&data=05%7C02%7Cjakob.unterwurzacher%40cherry.de%7C464ac9f060054aad6eb808df35f33f19%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C639288990982194241%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=cg2d38YMtjlOG4gFsyy7LYI%2FWi4RFRUuHL8QjVL0DJg%3D&reserved=0
+>>
+> 
+> There already is a v6 from almost two months ago. Did you actually test 
+> with the v5 or are you just hinting at what could be helping resume PCIe 
+> devices?
+> 
+> I'm sure Sebastian would be happy to receive a nice Tested-by tag if you 
+> did indeed test that.
+
+I was just hinting.
+
+It was merged in the meantime ( 
+https://lore.kernel.org/linux-pci/179407115382.87267.12160393716568806842.b4-ty@b4/ 
+) and I have now also pulled it into my local tree. It solves the problem.
+
+> All your patches are missing the Signed-off-by, required to signify 
+> DCO[1]. LLMs are forbidden to add it, so I guess you missed that when 
+> reviewing the patches before sending. Please triple check that you agree 
+> to all criteria listed in the documentation before adding the SoB to 
+> patches generated by LLMs[2].
+Well, that's embarrassing.
+
+"b4 prep --check" came back clean, so I assumed that b4 adds the 
+Signed-off-by.
+
+But, as it turns out, "b4 prep --check" does not actually work.
+I have reported this as 
+https://lore.kernel.org/all/a37b228f-0d12-4c26-b29b-51ad59bc6d1a@cherry.de/ 
+.
+
+Thanks for the links, I have triple-checked.
+
+Best regards,
+Jakob
