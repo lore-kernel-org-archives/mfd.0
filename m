@@ -1,78 +1,90 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795106998;
-	b=NlJ9X5uK1CnfbAyIEwW6fENNBAItB2c9B9zyIKN6EGNLqAnjknZ0ioGXvs+ko+EiOQXM
-	 Hu83Loo1xRfTini3cOHCSmGDzPifneOV1ALf3Rlg6fYr9Wxa+OcNUVQ9SoQR4kdccPQqx
-	 KzQhboZh2Kv1UuccBlvuF+bVWPRthh8SyEV6AehKyUDkBfhptCJEJwz0JR3qs1umFESNY
-	 3rDePhpIymFc+6mC8VTu9PlEdVGBnSQdykYbmR9WSM4QEEPGbFTLZpU6Q1OjHrb+N+7uP
-	 r7kXYWaH6YhJzuzj0vSZ3nerzT8KSFQjWMGVTXEuO4rEW8zpwv0wcYfEHtRUvy782Rg==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795106998;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=mAqiKgS+wwdvfgXgvcuSoH83FNvbFLBFfGQ6xTqp5ow=;
-	b=KqqFzsKdW0HNCI/XpkOBTYLlZdMrZ/WK93DAT5pm24LLwib9DDf3wfNrHB7M/dwkfSuf
-	 HXuyhYBILTNM0NrumBYHxtfT+eiN8HjseqML2KgtuWFYCpW7haCJEcC4Wzpli5gzoxvsY
-	 8QdiLUm4H6Sj+mqRahucYWaHqdcthohWP5XTmChK0mdenpyNPn2pWdlDuUoBJzPWqvp2H
-	 3kFomycT1J8StTcS/Xnml8IH4/dnDiwk6QhN9DtVPV7KkvWK6mASBPT60RU0z9ZgTG5wa
-	 DGvJCf3c4DulMdmKapRChyzvHuIAzPhVLoRSwEp3OZpEJeeNYuOCUla79ZUorW11/gg==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mhwhXNHd;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=35.89.44.39
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795107115;
+	b=MZsBdISxAFUN+NZjSX+bDi1tQdlV/+dKwF7tyVzc3Dx25scNf9fONM3WDEOn2BgseGdU
+	 uERLFLVaooC35NDr3eVSkRymw5f2Rj5Yx5+8W8wI+2DnJHOg9sLEt7JoqauRIwVFze0yE
+	 Fz/fa8CSzh/p4sYhgOy/gYnCQMLg7tMWecx/hpBtdVc06bcJSizOwWmKUWkhhY0VTn5yz
+	 8c9cBGadpGeUiiCM85B+ZCJwxCq/2ZK9tvrRz4CocOO+dpdtryLxQfHjjI27YQhO5x67A
+	 E9dLK37PvI/OfaKVhw8Xc279e1gTMR1jJGtKhjNcpgsv0jKjmowXBw/M53xRpv9L4yQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795107115;
+	h=DMARC-Filter:Received:Received:X-Authority-Analysis:DKIM-Signature:
+	 Received:Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To:X-AntiAbuse:X-AntiAbuse:
+	 X-AntiAbuse:X-AntiAbuse:X-AntiAbuse:X-BWhitelist:X-Source-IP:
+	 X-Source-L:X-Exim-ID:X-Source:X-Source-Args:X-Source-Dir:
+	 X-Source-Sender:X-Source-Auth:X-Email-Count:X-Org:X-Source-Cap:
+	 X-Local-Domain:X-CMAE-Envelope;
+	bh=VyuLjUWlndm/ZBOLKhEN/lw43++AjMQwOBflJ5LOk6s=;
+	b=wTZZLPdSxdPt324I4bQZkitPrFi28QbJs9kMi4nbzYQeedcgtgkiIN1oq6uR1RPIMfYj
+	 ac8Wb4WivbaEQXkDU7nrHKlz5soQcJGHE3N+4RpiKBq3rdTna02yiWZvgOJdVF26t9vgX
+	 NrphsvnvKCvzkzL85Ti2Fy6MUWeuM1kEOuPdvSitOpuifLd8itV+xUm3vIrx71ysOkc94
+	 Fuy4BlpZVxXK7pHjeApBLBEXAfRZL9f4b3p0xXgKHOrIkABlec+DbTMk/P2BmDMoun9xO
+	 sYyYUR20/VQ5jIMOYsOVewJMhcmmegoT8RPTSC/1YUVQXBeAHWcsHLpCi+pU9569V/w==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=none header.from=roeck-us.net;
+	spf=fail smtp.mailfrom=roeck-us.net;
+	dkim=pass header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=TpqgAi2t;
+	arc=none smtp.remote-ip=35.89.44.39
+Received: from omta40.uswest2.a.cloudfilter.net (omta40.uswest2.a.cloudfilter.net [35.89.44.39])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BE90606A33F;
-	Thu, 19 Nov 2026 16:49:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8743606A335
+	for <mfd@lists.linux.dev>; Thu, 19 Nov 2026 16:51:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D8743606A335
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=roeck-us.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mhwhXNHd
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795106998;
-	b=eDqxqAtRqDVW8gwrSnOK423WiWrzjSXDlXGJK6D9E/GTW1fDfijdLhBKmof7+YJUHlB4
-	 xXmFsTl++KdhrHXExyl10V98gg/1Bclww4/tioTWnl5DesXl1/8lxX0j0+dsl65UBnZks
-	 i/1t6OCGV45/Ysna/3Dv3yssbGGQUdE4ZNExiiNusdAIBXo5/imTQMNBXverH+SQ3AL8o
-	 t0x030OEYI20whv2sK1BXEKCTqKjFtxMwQlwN6ArIvsTqJt9QRUGfOAfa+n4IoAe/kq7K
-	 K58TtNZ/oEmEaDNy25GWcYOP8eDH0b87odh+kDekUZc9iQ6H5x3YZjkVq7pusvFG6qw==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795106998;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=mAqiKgS+wwdvfgXgvcuSoH83FNvbFLBFfGQ6xTqp5ow=;
-	b=xu3pk8C/EIvj93driW32R/rKvxw8UbAMRSpW6ojdTeCNTNFe+uvZ7QEM7QwBoIA9n5KF
-	 ul79pHWjWnX+z2caM8xqd18aFPvXuYJKdCAfIN8vAom/xlaCSS4soSlbxfoOzvGEzuYso
-	 T5iXluN/d73yhepxldc8669TNK8iEJ1NCYHYk8HgZ45xNEXeLaSjUqVaKCLHL9jy2UrUt
-	 17zJ79JywglhpfjZX492zwzagLGMjITeuH0GLwHbvp6FXTOSWhhnkGbZfxE39G+0GqvrE
-	 IHNKtUfHLL0NORWZpV2bySdLjvUh7CukseowwLTXY5V1QIdTjIXDx/0jtdGUeE1Mwkw==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 79A401F000C7;
-	Thu, 19 Nov 2026 16:49:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795106997;
-	bh=mAqiKgS+wwdvfgXgvcuSoH83FNvbFLBFfGQ6xTqp5ow=;
-	h=From:Date:Subject:To:Cc:Reply-To;
-	b=mhwhXNHd28S4hqgXDUZ8sqZXHziiHxz97dozbCZ8WlPS5/hVl4tOHnprVoEAmM0h5
-	 lncj1xXm5IUgYPLCDLbeDSKrimMTjUa1bbeFkhDCHCHfoXi/q261ccKufEaX7MFajw
-	 Kj+k6vrdBFMA9ma5BFZXM4nrJhjNI1LdTqAk+miQgYiNtBh2nzMKzL6fbMI1jUujRj
-	 DraGoaurYnDtW93PWDFP+0NoJUS/BCX+5ouA+FDRuGUAUudJw5pEnPZ3g/3codVRc/
-	 Fr7mg0n16AsFsxhhipQGaFKdjOtehsvZTHtnietZw98rdniiUSL2YfYXDEaYaZgGe3
-	 S5DsLAoCLKtTA==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id CB21E4B35E;
-	Thu, 19 Nov 2026 16:49:56 +0000 (UTC)
-From: Arun Iyengar via B4 Relay <devnull+aiyengar1990.gmail.com@kernel.org>
-Date: Thu, 19 Nov 2026 16:49:56 +0000
-Subject: [PATCH] mfd: syscon: Put the clock after regmap_exit()
+	dkim=pass (2048-bit key) header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=TpqgAi2t
+Received: from eig-obgw-5003b.ext.cloudfilter.net ([10.0.29.155])
+	by cmsmtp with ESMTPS
+	id TqVOx04nXyb4YU5MYxOg1z; Thu, 19 Nov 2026 16:51:54 +0000
+Received: from 162-215-252-36.unifiedlayer.com ([208.91.199.152])
+	by cmsmtp with ESMTPS
+	id U5MXxbKhjSgq1U5MYxlFgm; Thu, 19 Nov 2026 16:51:54 +0000
+X-Authority-Analysis: v=2.4 cv=c8KrQQ9l c=1 sm=1 tr=0 ts=6aff292a
+ a=QNED+QcLUkoL9qulTODnwA==:117 a=2cfIYNtKkjgZNaOwnGXpGw==:17
+ a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=M0FbrtG7MMAA:10 a=pGLkceISAAAA:8
+ a=VwQbUJbxAAAA:8 a=_jlGtV7tAAAA:8 a=IvRCNjoTNcy513YpXOgA:9 a=CjuIK1q_8ugA:10
+ a=nlm17XC03S6CtCLSeiRr:22 a=KPbNTLLc3YvdawN95zVk:22
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=roeck-us.net; s=default; h=In-Reply-To:Content-Type:MIME-Version:References
+	:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding
+	:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Unsubscribe-Post:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=VyuLjUWlndm/ZBOLKhEN/lw43++AjMQwOBflJ5LOk6s=; b=TpqgAi2tfvQr8FgT+aFEOK34fc
+	3BysAvJ3YX/SX8uqux912onyChgt5l0XwEoTIgfdY/1lBqm7IMEn6J/8+aGDb33+H/lB0s39d8TnS
+	B/mahwJPkIOGTLThSks0Cv7GF3nMMo6zlRDfPMzlIeFRp9S3LTTVWZufQrV0ZuSjvXLVk22NZBLiK
+	yUFAn+/tHSSCR2K7Qwjn6LLS07jB3IqxBZT+nL1igRkeT+1J9R9vZmtSKE6ONG5T/SUrA+Iy9o6GO
+	5YMPBYf8w1IaGxuiT/Nu5jdGrHh0xkEPD6ST9rtP5aNBQ4Dz6xwFiqbxswfmDbLD7C/DiRRdR6cpi
+	qSo3ZOzQ==;
+Received: from 108-223-40-66.lightspeed.sntcca.sbcglobal.net ([108.223.40.66]:56426 helo=server.roeck-us.net)
+	by bh-25.webhostbox.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.100.1)
+	(envelope-from <linux@roeck-us.net>)
+	id 1xU5MU-00000003LGz-3x54;
+	Thu, 19 Nov 2026 22:21:51 +0530
+Date: Thu, 19 Nov 2026 08:51:49 -0800
+From: Guenter Roeck <linux@roeck-us.net>
+To: a0282524688@gmail.com
+Cc: lee@kernel.org, Ming Yu <tmyu0@nuvoton.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Andi Shyti <andi.shyti@kernel.org>,
+	Marc Kleine-Budde <mkl@pengutronix.de>,
+	Vincent Mailhol <mailhol@kernel.org>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Wim Van Sebroeck <wim@linux-watchdog.org>,
+	linux-kernel@vger.kernel.org, linux-gpio@vger.kernel.org,
+	linux-hwmon@vger.kernel.org, linux-i2c@vger.kernel.org,
+	linux-can@vger.kernel.org, linux-rtc@vger.kernel.org,
+	linux-watchdog@vger.kernel.org, mfd@lists.linux.dev
+Subject: Re: [PATCH v10 06/13] mfd: nct6694: Move module type macros to
+ shared header
+Message-ID: <670e71a1-6f47-4d27-ae6d-10c24c66e34c@roeck-us.net>
+References: <20261118081625.2399247-1-a0282524688@gmail.com>
+ <20261118081625.2399247-7-a0282524688@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -82,100 +94,77 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261119-syscon-clk-uaf-v1-1-dc4a4c1be353@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMwQqDMAyA4VeRnA2YQgfuVcRD7ZIt26jSqGyI7
- 77qjt/h/zcwzsoG12qDzKuajqmA6griI6Q7o96KwTXuQkQt2tfimDC+X7gEQS/ifMuNBPJQoim
- z6Occdv3ftgxPjvNxgX3/AasTtmlyAAAA
-X-Change-ID: 20261119-syscon-clk-uaf-5ff259e0fa15
-To: Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>
-Cc: Fabrice Gasnier <fabrice.gasnier@foss.st.com>, 
- Jeremy Kerr <jk@codeconstruct.com.au>, mfd@lists.linux.dev, 
- linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
- Arun Iyengar <aiyengar1990@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795106996; l=2258;
- i=aiyengar1990@gmail.com; s=20261110; h=from:subject:message-id;
- bh=Xle/0X0eA0Wa8LPqfRsJuOjguZ9Uh3tFLZYrD/TPVc0=;
- b=CSfb7vPXlkbnKosHL34ELamSXGEOplysb5QTiVCvPbHPMuJkNOoLYHgzqU5XwlnEDa9kflzrR
- tEPKbFI7j9vBF0OOASG/uy9G7lt0p7E2xUVIEsYLHbr2QX63JuvTAI5
-X-Developer-Key: i=aiyengar1990@gmail.com; a=ed25519;
- pk=zXpRgUTrhaFe6jLyPqbBy3ccfkj04w0g2690Wv3mg+0=
-X-Endpoint-Received: by B4 Relay for aiyengar1990@gmail.com/20261110 with
- auth_id=1480
-X-Original-From: Arun Iyengar <aiyengar1990@gmail.com>
-Reply-To: aiyengar1990@gmail.com
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261118081625.2399247-7-a0282524688@gmail.com>
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - bh-25.webhostbox.net
+X-AntiAbuse: Original Domain - lists.linux.dev
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - roeck-us.net
+X-BWhitelist: no
+X-Source-IP: 108.223.40.66
+X-Source-L: No
+X-Exim-ID: 1xU5MU-00000003LGz-3x54
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: 108-223-40-66.lightspeed.sntcca.sbcglobal.net (server.roeck-us.net) [108.223.40.66]:56426
+X-Source-Auth: guenter@roeck-us.net
+X-Email-Count: 6
+X-Org: HG=direseller_whb_net_legacy;ORG=directi;
+X-Source-Cap: cm9lY2s7YWN0aXZzdG07YmgtMjUud2ViaG9zdGJveC5uZXQ=
+X-Local-Domain: yes
+X-CMAE-Envelope: MS4xfJ+wfrD3cyhvbKEhMu2ZKI8+OQva4OCZmnwMY54wa+h7ArmLwrh4n7CkmY6LoAVRbrPUuY2qtN1PLTZh0qljJtes60UpVJnGA7Pf55Zg49SdtYoehleb
+ ggTJ8iJvU9plWRflglL7DRDVS980NRoPLBOQ6gthn49HcRl9oCdbNhSwHP74cLJa++7rSZj+RXZUHLPn2Hwr/SV2feGn5W2B/fs=
 
-From: Arun Iyengar <aiyengar1990@gmail.com>
+On Wed, Nov 18, 2026 at 04:16:17PM +0800, a0282524688@gmail.com wrote:
+> From: Ming Yu <a0282524688@gmail.com>
+> 
+> Each sub-device driver defines the module type used by its own
+> commands. The upcoming HIF transport also needs to recognise
+> NCT6694_RPT_MOD, as report accesses are served from a separate
+> register space rather than through the command mailbox.
+> 
+> Move all module types into the shared header so that the transports
+> and the sub-device drivers use a single set of definitions.
+> 
+> No functional change.
+> 
+> Reviewed-by: Andi Shyti <andi.shyti@kernel.org>
+> Signed-off-by: Ming Yu <a0282524688@gmail.com>
+> ---
+> Changes in v10:
+> - None.
+> 
+> Changes in v9:
+> - Added Andi's Reviewed-by.
+> 
+> Changes in v8:
+> - Reworded the commit message to explain why the transport needs the
+>   module types.
+> 
+> Changes in v7:
+> - None.
+> 
+> Changes in v6:
+> - None.
+> 
+> Changes in v5:
+> - Split from the monolithic v4 patch to follow the single logical change
+>   principle.
+> 
+>  drivers/gpio/gpio-nct6694.c         |  7 -------
+>  drivers/hwmon/nct6694-hwmon.c       | 21 ---------------------
+>  drivers/i2c/busses/i2c-nct6694.c    |  7 -------
+>  drivers/net/can/usb/nct6694_canfd.c |  6 ------
+>  drivers/rtc/rtc-nct6694.c           |  7 -------
+>  drivers/watchdog/nct6694_wdt.c      |  7 -------
+>  include/linux/mfd/nct6694.h         |  9 +++++++++
+>  7 files changed, 9 insertions(+), 55 deletions(-)
 
-On the error path, of_syscon_register() puts the clock before
-regmap_exit(), which then unprepares the freed clock. This happens
-when the reset lookup fails, e.g. with -EPROBE_DEFER.
+For hwmon and watchdog:
 
-Put the clock after regmap_exit().
+Acked-by: Guenter Roeck <linux@roeck-us.net>
 
-Fixes: a00406b71c5f ("mfd: syscon: Add optional clock support")
-Fixes: 7d1e3bd94828 ("mfd: syscon: Allow reset control for syscon devices")
-Cc: stable@vger.kernel.org
-Reported-by: Sashiko <sashiko-bot@kernel.org>
-Closes: https://lore.kernel.org/r/179493691305.3136.16311404541139130213@kernel.org
-Signed-off-by: Arun Iyengar <aiyengar1990@gmail.com>
----
-A related regmap patch ("regmap: mmio: Don't attach the clock if
-clk_prepare() fails") is sent separately; neither depends on the other.
-
-Tested on an Orange Pi 5 (RK3588S), 7.3 with KASAN, together with the
-regmap patch: with a forced reset lookup failure, a use-after-free in
-clk_unprepare() is reported without the two patches and nothing with both.
-
-Developed with Claude (Anthropic), which wrote the code and the commit
-message. I reviewed every change.
----
- drivers/mfd/syscon.c | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
-
-diff --git a/drivers/mfd/syscon.c b/drivers/mfd/syscon.c
-index 21a7fcdd2737..3ff4e024542b 100644
---- a/drivers/mfd/syscon.c
-+++ b/drivers/mfd/syscon.c
-@@ -132,13 +132,13 @@ static struct syscon *of_syscon_register(struct device_node *np, bool check_res)
- 		} else {
- 			ret = regmap_mmio_attach_clk(regmap, clk);
- 			if (ret)
--				goto err_attach_clk;
-+				goto err_clk;
- 		}
- 
- 		reset = of_reset_control_get_optional_exclusive(np, NULL);
- 		if (IS_ERR(reset)) {
- 			ret = PTR_ERR(reset);
--			goto err_attach_clk;
-+			goto err_clk;
- 		}
- 
- 		ret = reset_control_deassert(reset);
-@@ -155,11 +155,10 @@ static struct syscon *of_syscon_register(struct device_node *np, bool check_res)
- 
- err_reset:
- 	reset_control_put(reset);
--err_attach_clk:
--	if (!IS_ERR(clk))
--		clk_put(clk);
- err_clk:
- 	regmap_exit(regmap);
-+	if (!IS_ERR(clk))
-+		clk_put(clk);
- err_regmap:
- 	iounmap(base);
- 	return ERR_PTR(ret);
-
----
-base-commit: e5bcc8e02e570e3eee46d4cebefd552cc7c9e843
-change-id: 20261119-syscon-clk-uaf-5ff259e0fa15
-
-Best regards,
---  
-Arun Iyengar <aiyengar1990@gmail.com>
-
-
+Guenter
