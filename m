@@ -1,75 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.72
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795165906;
-	b=gE12wt+iD7YGNLKztC4jlNkFFaV8YWYYiMu/VlTv43bNdM9ANZEOPTvEJC0TXzVPDJKa
-	 EcgUS38oc303VyvzblDBzVAhVgtnxZPjmkxI89HoAwn38dWRdc1E5Jg75gAA+Ox9JBXZs
-	 1Ra7nnxu6djzBA4NqkAQKs5KeChP2UZcrMQSUwA01xmXMLhGjoOzS3mlHgNN5za66hG+z
-	 QtmY2fpMd0c2zpSZ4/OJAFtfGsIrDb6yEcqd7OiezNNNiQm0KXxdXqzQloQKumg2adjSs
-	 IcrAOIcAxUqbmdm3eI2HtrQ62Gfh/rSeoVy7Qm1JW2+eur1JlRFtCmYK+qP42SAyM+w==
+	t=1795177123;
+	b=Ee/s8r1kHC4qlEmuTn4bV8txa2VtdPHt7r5CUxBGhoicPTJPkyh4ir1OPj1e9aiWMPJT
+	 VnGLhNxrkAL6Ht+QSZXV9hLOqEErysx9aHexy8lhoWmPD/ZnjBGqrI3dGgP52YA1s6dVI
+	 ZTATvx6FRD7qzL8WphY6VZGOdd3IRlM9elu52ipQnohQV2juEzqdKVXWEfnS2kHpwyvGa
+	 NmQW+cY7ekIhC6qXRUzGN0PzZudRWC9Dm/srUA9cTeNK5vYbPvqjXRjKUmv9oQmdtOVgI
+	 PU9QzNNXJngvI3gE6XJ3b43R96DZsUKGKnYJpc/P1FVn3nT9QClaIHzbGMHeL7EU85g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795165906;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Received:Date:In-Reply-To:
-	 Mime-Version:References:X-Mailer:Message-ID:Subject:From:To:Cc:
-	 Content-Type;
-	bh=gApvMPkXNFvtfKmjlnFC4/zpO78lpC90tfwmIXaql00=;
-	b=f0vcOTwGbIszAKk6vQvFd9AXit+B/KZH+Q/6S7RWaLxKKPoFnF1PxuoOZcEwRa1so345
-	 Cr0Y/ZDL3an7XaUVPazWf71G+uONj1UrGINi4Fi71476p2QvS6eheM03VMv0wc2luwUvx
-	 xhdhsHwqdAwHduNm2hsSiDbNqwDt1QM20GBFeoV1k7HzST6wcJM08Vi0xnKm+P/K5eBo7
-	 PLccP9a9XDQHIgGsxzUPINw2eouls2U+NT75TEGigiPXdy33v2GlQ4q0xUAU0dDbeJeQ6
-	 HEPOUo/pgkE0SJcrOUSxRc36LQo5vgjyWMx0Bslp6mZClX/C+zbTPVZciyGGV4pPesA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795177123;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=IodcqX00+pisBgADKvsigFNy5B6EW1o+HPTOgHq72TY=;
+	b=epF7yyp0fmqCk/hxbycjU2kot4+t6J4GEH5VE2zhqayFVWUuGLWvXA3YzjQVnpoHvhah
+	 0K0NJb53/6x8WNyqee2sWNrwKJzZZCf11xCs/7lZ7h3u4kziokdPh7xaU+o1sMeEkRsQ5
+	 dN8+PpPnUG4up94jUHJA4eQNNsErQvOfgUzngGKh+WYs7OOSBLlN+gS8Ed0ZrsqUyOadX
+	 h2AYUgpMznIDDpmn4k5wAns1RBO7Xg7VK3ol48Y4gQO7OzFWlAYu+p+fdY7Yu8pfq4gRf
+	 9mOZXBm/Mu41BqzMFm5DBVej2NRmJio6OmD5CWXFqLoQmRehbSx0Fk0RBvHC5j3WsgQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=google.com;
-	spf=pass smtp.mailfrom=flex--dbalint.bounces.google.com;
-	dkim=pass header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=ZcLZsZmx;
-	arc=none smtp.remote-ip=209.85.167.72
-Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com [209.85.167.72])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kr2WQgTh;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94FD8606A32A
-	for <mfd@lists.linux.dev>; Fri, 20 Nov 2026 09:11:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 94FD8606A32A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=flex--dbalint.bounces.google.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0C2C606A320;
+	Fri, 20 Nov 2026 12:18:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=ZcLZsZmx
-Received: by mail-lf1-f72.google.com with SMTP id 2adb3069b0e04-5c1ab3fe822so245606e87.1
-        for <mfd@lists.linux.dev>; Fri, 20 Nov 2026 01:11:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20260707; t=1795165905; x=1795770705; darn=lists.linux.dev;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=gApvMPkXNFvtfKmjlnFC4/zpO78lpC90tfwmIXaql00=;
-        b=ZcLZsZmxiXwM2dmaHilYHfzhUoFN1uzk+rc2vkI96x+8iAScROPHTBIL6mKHpRZqc8
-         Q8DB5Nu6RWh/8zkJKwt+BPW89eYnon/MwCnn2gL+rQUbmMWpNLTRf2hrnGy24rOIhRbo
-         oDWTm3LEDW1chuKxKz8J0cO8UQ91J+ZA3Vrf0lmKuipDPyVtteSLOZC0v+EBxUQGFbEG
-         8h2EPkwo/e9e+782b+y+2x+lfABTI+ObD0dkTlBtTUyjjbpgWUWcQHl99RRgVhfLGqyn
-         tATmsMuEmp48LbugGITxMtz+lNB7ApQLlG8R68Ns0QBdrqrOTXqFYGP+o7cgae7gOiNy
-         lj+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795165905; x=1795770705;
-        h=content-type:cc:to:from:subject:message-id:references:mime-version
-         :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=gApvMPkXNFvtfKmjlnFC4/zpO78lpC90tfwmIXaql00=;
-        b=X23EB5VV2lGNWmhsqzCNZyTo7QMbicSN9WtfeRn4k2bXEua5DYTdEKPJkLN3o/wR8n
-         95Oxt4g/CPew8c1CG00e08xZsZWkpQum9azk7WB8mF6l6WkUmhdG8EOtzY/lnjCde3C8
-         KWfujJaIw82aOaoay6hnV1l0Ui08vSuePGlx2nD0ZnXvwHgshscRViXD+tpcquhbFsnq
-         N0YQRCOiHy+K4dLUuPtm6h+vLIDJoxf/ibv2C7KWyrVSjvFta6nMfK7k5stRWacYnnxq
-         GdK6BQ1kRkvsWz/XPXnrx+75ctiv3cpSDOh1lqBpYO81cbpxQK3omFrBNo/fx7AlJKYQ
-         pa4A==
-X-Forwarded-Encrypted: i=1; AL+hErETlQeIfZkSg5o093GriN3LFl3+IkEIWx1cmJca+tArekfC0hobLvvPicFetWhWXX+Qbqo=@lists.linux.dev
-X-Gm-Message-State: APuU4Z+junA8UV1vPlZGGaJmhRZkZay3Zth1/0C26fMsRT1p/8aqO3SX
-	6oFj6kEbKWFxal8VYCHehxSrp67YpiWdBnTQ2Z14R/OhkWjm9hHAn5CuWsRUv2CGp+/ePJmLt7o
-	Z84Lk/Uzo1w==
-X-Received: from lfbo17.prod.google.com ([2002:a05:6512:511:b0:5c1:a87c:20b3])
- (user=dbalint job=prod-delivery.src-stubby-dispatcher) by 2002:a05:6512:3052:b0:5c1:5b06:27c0
- with SMTP id 2adb3069b0e04-5c1bc6f69dcmr588593e87.3.1795165904574; Fri, 20
- Nov 2026 01:11:44 -0800 (PST)
-Date: Fri, 20 Nov 2026 09:10:22 +0000
-In-Reply-To: <20261118220033.70425495@jic23-hlaptop>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kr2WQgTh
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D171D1F000CA;
+	Fri, 20 Nov 2026 12:18:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795177122;
+	bh=IodcqX00+pisBgADKvsigFNy5B6EW1o+HPTOgHq72TY=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=kr2WQgThDY9Wz4Df3Ueza8lR8P1YXXzjW5t7pRQicJcEXEt8cZ9BZuin1zrIRmQJs
+	 KSwMuhbwuFrf2hhxrDw6MJWg7xV+K+F/quJmukkXQqW+x1T9Y7hpFSaDS7dVzevwF9
+	 LUfU2lIfrdRBgiwhiiTquJeBFXlobDx9p/jJrQ8JHEEXFnmFWL5Z8f1s8+NY6QhfLn
+	 RNWvvU7CUG01x3H41IwTeepYq7J7SWOh4ovHL7f9Tb4TxGkoGVStUIWSuJg78qSVwi
+	 81guYFZcpUKazZroGyAyPs1At9c1kdWysemvwwVoFjUU/17QnMltqBmpdiYSTdI3Ad
+	 OxTxOdPYf77Gg==
+From: Mark Brown <broonie@kernel.org>
+To: lee@kernel.org, Charles Keepax <ckeepax@opensource.cirrus.com>
+Cc: lgirdwood@gmail.com, linux-sound@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, mfd@lists.linux.dev, 
+ patches@opensource.cirrus.com
+In-Reply-To: <20261112141650.1931348-1-ckeepax@opensource.cirrus.com>
+References: <20261112141650.1931348-1-ckeepax@opensource.cirrus.com>
+Subject: Re: (subset) [PATCH v2 0/2] Update cs42l43b load detection
+ procedure
+Message-Id: <179512617389.116416.4465022447490094558.b4-ty@b4>
+Date: Thu, 19 Nov 2026 22:09:33 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -78,93 +59,56 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-Mime-Version: 1.0
-References: <20261106193129.43493-1-dbalint@google.com> <20261107010356.39d9eddf@jic23-hlaptop>
- <20261118204532.257423-1-dbalint@google.com> <11a821f4-aef6-425a-8626-1d8641e9f83d@roeck-us.net>
- <20261118220033.70425495@jic23-hlaptop>
-X-Mailer: git-send-email 2.56.1.750.gf70dc682cf-goog
-Message-ID: <20261120091022.1459658-1-dbalint@google.com>
-Subject: Re: [PATCH v1 0/3] Introduce cros_ec power monitoring
-From: Daniel Balint <dbalint@google.com>
-To: Jonathan Cameron <jic23@kernel.org>, Guenter Roeck <linux@roeck-us.net>
-Cc: Daniel Balint <dbalint@google.com>, linux-hwmon@vger.kernel.org, 
-	Benson Leung <bleung@chromium.org>, Lee Jones <lee@kernel.org>, Tzung-Bi Shih <tzungbi@kernel.org>, 
-	linux-iio@vger.kernel.org, chrome-platform@lists.linux.dev, 
-	mfd@lists.linux.dev, linux-kernel@vger.kernel.org, mwojtas@google.com
-Content-Type: text/plain; charset="UTF-8"
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1390; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=BotcgHxqj5Qxs0TGlbneURXoPE1M570lq/RdtgfZyZM=;
+ b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLIZrOZfbd+WZTTbxOyYXabKRt/XP4Mc9edvyDOc9mVJZ
+ ETmMfu3HaUsDGJcDLJiiixxWdwv60ter+E7uLANZg4rE8gQBi5OAZiISTYjw4KZ9j2CK238j7Us
+ WLzS4cpXVy6L6kSLmo197Ufq/E5d3sTwP/PPm9oltktNMrYoTXrHcrnRK0VQy2lOzXkdVTajJ2K
+ tHAA=
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-On Wed, 18 Nov 2026 22:00:33 +0000
-Jonathan Cameron <jic23@kernel.org> wrote:
-
-> Do you need that coherent snapshot to get to userspace in one go? 
+On Thu, 12 Nov 2026 14:16:48 +0000, Charles Keepax wrote:
+> Update cs42l43b load detection procedure
 > 
-> For accumulator channels the way they are normally done to sysfs
-> style reads is to snapshot on each read, update an internal store
-> of accumulation since enable then provide whichever one was requested.
-> That way no data is lost - but you don't get an aligned snapshot.
-> So it depends on what maths you are going to do with them, whether
-> it can be done in kernel and if not how much interchannel skid
-> matters.
+> Some updates are required to ensure proper accuracy on the cs42l43b
+> headphone load detection. Add the required extra register to the regmap
+> in the MFD and then update the procedure in ASoC.
 > 
-> So tell us more on why you need that coherent snapshot to userspace.
+> Changes since v1:
+>  - Make LOAD_DET_SEL readable
+> 
+> [...]
 
-Sure, I can provide more context. Usecases are broad, but an example
-would be that we calculate per-rail drain contributions over short 
-time windows for comparative analysis between device states (device state 
-transitions like screen on/off trigger snapshot), or for debugging and
-power profiling purposes we correlate fine-grained ODPM data frames
-(~1s intervals) with other timestamped system diagnostics in our tracing
-tools (e.g. perform per-process-per-rail energy attribution), so math
-happens server side, and the relative energy deltas between channels
-within a frame are just as important to us as their absolute values.
-In general, data from a single channel makes sense in the context of
-other channels, there wouldn't be a client that requests only one
-channel.
+Applied to
 
-At higher userspace sampling frequencies, e.g. ~1s trigger intervals,
-which can happen in both abovementioned cases, interchannel skid becomes
-an issue if we read individually.
-Because the latching and data delivery (up to 64 MKBP events)
-roundtrip between EC and kernel takes non-trivial bus time that's in the
-~10 ms range, latching per sysfs read across 64 files spreads channels
-across a hundreds of ms long interval, which would compromise coherency
-and render the data minimally useful. It would also make the EC
-unnecessarily busy with redundant work, so latching per channel read
-isn't really an option.
-But to Guenter's point, this could be solved by driver-side caching.
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.5
 
+Thanks!
 
-On Wed, 18 Nov 2026 15:00:20 -0800
-Guenter Roeck <linux@roeck-us.net> wrote:
+[2/2] ASoC: cs42l43: Update load detect procedure for cs42l43b
+      https://git.kernel.org/broonie/sound/c/1305c408e5d6
 
-> You could accomplish that the same way many hwmon drivers are doing it:
-> Read all attributes in one go from the hardware, then cache it for a period
-> of time.
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
 
-I should have mentioned the importance of timekeeping earlier. As we're
-correlating the snapshots with other diagnostic time-series data,
-userspace needs to know when accumulators were latched as accurately as
-possible.
-In contrast to IIO, in hwmon:
-(1) There is no timestamp ABI to propagate latch times, so userspace has
-    to rely on its own timestamp when initiating a read.
-(2) There is no trigger ABI to force a fresh latch on demand (e.g. on a
-    device state transition), so a userspace timestamp only marks the
-    start of a sysfs read sweep rather than the actual hardware latch.
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
 
-So, unless I missed something, with a timeout-based cache in hwmon, a
-reader has no visibility into whether it's hitting newly latched or
-cached data or when the cache was actually latched (skewing time-series
-alignment) or whether the cache has expired mid-sweep across 64 sysfs
-reads.
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
 
-We could probably tune a short enough cache timeout where time skew
-would be negligible and mid-sweep expiries would still be infrequent,
-then it's a trade-off between accuracy and more mid-sweep expirations
-(more EC roundtrips). It could work, although we still would do 64
-sysfs reads instead of 1 on each trigger.
-So I guess it's not a must to send the coherent snapshot in one go, and
-I cannot provide any data to claim that hwmon would be a suboptimal
-solution to IIO, but our technical judgement is that IIO's explicit
-trigger, latch timestamp and single buffer read is a cleaner fit for
-power monitoring via the ChromeOS EC.
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
+
+Thanks,
+Mark
+
