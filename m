@@ -1,146 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.69.39
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795079577;
-	b=l2xAZpV85fl9n6c5z/sbYa7XbG2eegZ4+FPhGlt8BqUQ3IvRI0PyXNxFzbkfPiBbjYNR
-	 teBN0aw4GV0Su5Cx3+RI/mEuaA4HVi+mJFMrNmODxW35RcOGoAKuz1iGLA9cSPMicmwZ9
-	 57RXeZySxM0ZxxMIsBDHKk2hM9Oigk9H/M/c9rfLOa13btmYULyRE9m8c38OEYu0NOwXc
-	 gvEQCsJFhsBJvK8YEkLzunvBdwWfo3cNlItfuWScQGAtn57nz/i00QROsvGIZIAxJteSt
-	 CI3HQy6aoqaQBu7mNXRXIyWBNhvgYX37bqEdnx/V44nY41g0ek5u5nrFVU/g0XOYZ6w==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795079577;
-	h=DMARC-Filter:DKIM-Signature:Received:Received:Message-ID:Date:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
-	 In-Reply-To:Content-Type:Content-Transfer-Encoding:X-ClientProxiedBy:
-	 MIME-Version:X-MS-PublicTrafficType:X-MS-TrafficTypeDiagnostic:
-	 X-MS-Office365-Filtering-Correlation-Id:X-MS-Exchange-SenderADCheck:
-	 X-MS-Exchange-AntiSpam-Relay:X-Microsoft-Antispam:
-	 X-Microsoft-Antispam-Message-Info:X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
-	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
-	 X-MS-Exchange-CrossTenant-UserPrincipalName:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
-	bh=8D1gNUSDy7c0U+03wfTJBNTnsYDSvEUXFPfEdtJXXHc=;
-	b=1/WSuARbBKDxT6/NWSp9l15elSgyovPSG2GsLJBuDDadfw5qsT3FyCTU7I8REmOxsbmb
-	 BeKMfUXYu6DAUanj94xrghGQg9n9LtexX9xOaV/e7v6QszJdNL49QlJWUhR7KpjnM3GWU
-	 QYGITUzAJCCkZNgIrsZowTnijqzAS7SL/39y0+fK/a5muSqiqWjd2GfkDHf+bZnEbtTOe
-	 J/glHLjS/eLN0uR+sA0JivLoU06M33L/K7cOKlENBtTbIhB7TBa8U7XW2cm6seTfxvMwN
-	 CAuEZInaXWYqoChoOhuQiRK1lojeY2TkKn9f6RQ/PMd0Q+Lt/nz1CqsyZ5YJ9G7h2xg==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=cherry.de;
-	spf=pass smtp.mailfrom=cherry.de;
-	dkim=pass header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=jfFaPc3p;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.69.39
-Received: from AM0PR83CU005.outbound.protection.outlook.com (mail-westeuropeazon11010039.outbound.protection.outlook.com [52.101.69.39])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=92.121.34.21
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795082107;
+	b=xHD49X1T+QN89GS0TtO3j5vxsiAmK3Rb6g8JpeD2Q3ckARmbPMDZAmy+13f6QqMvncuN
+	 OGlpHE/BJD5rr0LglL3qzmKuyPPOxvOQyz8jQ0D5QhMzxZBF45ejtrKOIbIerCOxDMda2
+	 BI6qRaU49biWHEFm3fscE3rEFHWyYX6983JHddkOcG3DfzfRxiJtQXmAxPOu93bRohngb
+	 GLIs63P34WeAMm5cp8D2wEodafg/gp9Tsl+5JigHRUaCy0BwKlxNhcde7iPFX1qE7WB56
+	 50T2oWD2EYVENjiXOeDkURTA7aDdAgHA6GVHslR/j8oIkOgemHztc5Sa7RIL4jIw0bQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795082107;
+	h=DMARC-Filter:Received:Received:Received:From:To:Cc:Subject:Date:
+	 Message-Id:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Virus-Scanned;
+	bh=JLN20K6L7rdaMdVFmfH9qQYDec2EB2BAQiiGJc5kVtM=;
+	b=pLLohsiU/O8Ol8OGbX9MtPOQhzgTm9qMiyz2s4atXr/3TiFZbiM+ogXpp7IvKkoBzE6C
+	 J+hzYGYCPleAKBW2CU0gjrnHCkfS+e87gyIOI7k//aO7sVomtJbQ6Q/gRCFgWYeuhwAOi
+	 C6ELmfkU+67RHud5Bc/v+9SpzSN+AU2YAgr+58uFc34i/skVp6KdQU7TjnT9saP0ubmUX
+	 PxZFVOagS7GsPstxBejRbUZEIxhgmArbAOd99gnUWMxu25GY2kIcCzNQxb8p+hLaNIY1W
+	 fksOH/0Oopzfnze7TU0WeWkUnbb0RhLj+MX0JYDN569vcifS0yGkvlw1uasKY6WsMWg==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=nxp.com;
+	spf=pass smtp.mailfrom=nxp.com;
+	arc=none smtp.remote-ip=92.121.34.21
+Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1ADA606A326
-	for <mfd@lists.linux.dev>; Thu, 19 Nov 2026 09:12:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E1ADA606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cherry.de
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=cherry.de header.i=@cherry.de header.a=rsa-sha256 header.s=selector1 header.b=jfFaPc3p
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bVpGYDv+5ierkXdqrx/yVDhsUZXn0zE6KiRw5E2BoveWaeMeXRrdDcq3vSADClsUgCIQ/pKQneI3pXu/4ud8q8JrRrwxI70lNhW5i7hA2JTIL1UdG4+JPmVBMeGL2HUUEhLL8yD5rw8Pci/3VF/aejAJQfFo6FbzCZ2yPc/l6NQFUEevXkH+3WoGlcVmYUZOoqbCYNvVmboYrhPGvzWw9EPhCzsNizStzs1jV0Tj6F+PByxl2cmxvNVyJVmPB4S9+kBoobEPq6OS3mfpaCjmSG8oTfmEiDlwPbHfMDL7Li5/yJv+6W4LKhsaDCusvdxyGiSDuHyWe2+Q8QHLECjQ0w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8D1gNUSDy7c0U+03wfTJBNTnsYDSvEUXFPfEdtJXXHc=;
- b=Pevfqz29yBUCRBoU+4E5oxpeQzmHtrP38ittjlqPl745C/kytSKhy7C9JxjfudLNH4YiKohEImDIqyCwESR09X/LWH7smjcQwMa6kGFgcaw8cA8zkJHcjd0NZz1cKIvC6ZDd+bEPNlaAEbuH1EhlDPIuVGHDsfHQlJufcIDaDf0ZFO8mSLCkNz4+nQwhfNuCzyDCUCF6oew5t0552bOYHJtT7Kejdb3M5Ozlc0ut4r+y+EHdkhFT2EAbkphAZ7vHihWcsaKRFqV6fjZ7Dl3zJ4bn3y1n/o6N/1P3pkkt3tkzW/ivy+EjjdyNADS8oIIjuw7doZnsXH4r+u6rd703eA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8D1gNUSDy7c0U+03wfTJBNTnsYDSvEUXFPfEdtJXXHc=;
- b=jfFaPc3p1tfaOmyWVZyGqyBFVuhovMiaM4Ghp3YJkTyQx6hSWcodgG29C8ra+XnGxwfyY2Fo0HI89wQ0Ylni711ewJHirk4TiNMEx89awkzwOSXGs1qj1OwG1jbX3D1rXVEQKx3k4aKn9PmUyQ03TmUa78HM1ud8Lz5PHd5l82k=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from GVXPR04MB12016.eurprd04.prod.outlook.com (2603:10a6:150:335::6)
- by DU2PR04MB8919.eurprd04.prod.outlook.com (2603:10a6:10:2e2::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.14; Thu, 19 Nov
- 2026 09:12:51 +0000
-Received: from GVXPR04MB12016.eurprd04.prod.outlook.com
- ([fe80::f2d4:9db8:9a4e:b0bd]) by GVXPR04MB12016.eurprd04.prod.outlook.com
- ([fe80::f2d4:9db8:9a4e:b0bd%4]) with mapi id 15.21.0639.010; Thu, 19 Nov 2026
- 09:12:51 +0000
-Message-ID: <af94a18e-cb7e-4319-95e3-0df120f730dd@cherry.de>
-Date: Thu, 19 Nov 2026 10:12:49 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/4] Suspend-to-RAM fixes for RK3588 + SPI-connected RK806
- PMIC, enable PMIC sleep on RK3588 Tiger
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- Jakob Unterwurzacher <jakobunt@gmail.com>,
- Dmitry Torokhov <dmitry.torokhov@gmail.com>,
- Joseph Chen <chenjh@rock-chips.com>, Lee Jones <lee@kernel.org>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Heiko Stuebner <heiko@sntech.de>
-Cc: linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org,
- linux-kernel@vger.kernel.org, linux-input@vger.kernel.org,
- mfd@lists.linux.dev, devicetree@vger.kernel.org
-References: <20261029-dev-tiger-v7-4-pre-20261028-tiger-suspend-b4-v1-0-cb12621c1fb4@cherry.de>
- <a220ebd0-a28d-44cc-9a80-62382018348c@cherry.de>
-Content-Language: en-US
-From: Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
-Autocrypt: addr=jakob.unterwurzacher@cherry.de; keydata=
- xsFNBGc3BCgBEAC7ESXITuPmEEIF9RbBIbTnAYYL+If5BsTIQOKEf85bFrpTFZlucb9eTj70
- 16vjYpu0MmK6FrsQxy8DItqLCpj7SEA42eIxonEa6z/TiR59m0Pl8QIs9uCmvYar2R+fjJml
- S9deXjW1nRwbEmAdCeKrwQHOVo7zJEwBdZEs6WEW4m06bFUoKFNyzkptiX56ZEBkXFv0pX5l
- QdkvLrG7Q7ni03ITAGFYhZzd2+0OToCk1bekTclCH8z3J7+llJ5uqnqD7slLj4f18KcDccbI
- K5jNiaJuC6eptmyM1IBqdPE3LatqIM8mnyxESi23BUlZG3CYDQw7Tek2lrcQHJYdvg9GxdH0
- fVthc6BVFGUHhpXhCgQoDO8B3F8hYxjHHagcb3QK2WYFXGxnJgqt/WdZYjJc9mDbm6lFNHXY
- LAk3WMZTbr4R7X0TF2AQXbzFQAiASc9AgS9054Z0ZJ7zw2SNfoBlauKOvKB9e3VVsPn80E84
- 7vX+fesfRIRPhcN/NW9SzkRQ1E/UDHCuOxjVC3BB+GRstdaa9ddAr+Mr2vs6Sb3cLiWlktSj
- Rt7MkSZQiqW+nHL/KsrXEXUzmMLWOmwA+nUAtT4v1bKN+1vIuLVE7U3Tj9NpjKSmytZU1n/S
- MTtsV3BL2DrnpWP3lUXhDrm6BaWSn70zLAEUR4ZyFY3s5pBrEQARAQABzTVKYWtvYiBVbnRl
- cnd1cnphY2hlciA8amFrb2IudW50ZXJ3dXJ6YWNoZXJAY2hlcnJ5LmRlPsLBjQQTAQgANxYh
- BPsABvFrRquZtSSG8AzrBxn7gjdgBQJnNwQpBQkSzAMAAhsDBAsJCAcFFQgJCgsFFgIDAQAA
- CgkQDOsHGfuCN2B1Bg//XYgn65/UNyz+L/A89r2AHPa2OZFU+SgVbadR1dmtakeq5Ac10+Vg
- Wb7tCK6Bu+Ww6jFsstJbaF2O+bqWrHjF8tQWwnC4RzAKWmj1E5NzEQOXrrUSdWY0Mk6zULss
- yeFVUiC0NNPIVY++2cgSStWI3I20Q87FfanDAWOIOg7y91EX5LGCk/3uEs+VrJfciUhJJD+4
- 8nomVLw1j7n7go5WFzXzUHJu3/FKTzmVYBoth79PJbnSsZQ+909jkeOhcx/68eDFAK0aBiLP
- /RbDuEdryUd7eNNFpVREoVsmwmqDbw3yANzqj/dQR6mZ94tYVW6tam4huZzRGhxwXz+kTA2o
- bl1OsDzrOo2ipBRxz0dSUiyvAdGoJI7JbNBOcZaYlWvt2Pp5Hmvd7CrxGiwrd5sa1vbhmBHD
- 9KJc4S3MsVE1DofHufysOw8WnIKXPXRUCZzZHXqVZTFLKNIaWaTjHhiLg6ft4SAsSA+ol4qd
- rUBDx/6mKNK35lXdI6rd2qa+Wo2bbiD89avz/99E8NPhwpn/GtlOTQyF49tH93HCaGbRpZbL
- 3xq/XBRzJekgZmA+Z8cU+xngwgh405nGJPI9Smz8NK/N1Cx6JRHcBQWXkiYGL9bLs2SExT0g
- K1R+WnBncns864tuQevlWpytRf131589FRwO1dZSn3fUqLPzziXXIqnOwU0EZzcEKgEQALVP
- 6gO9fqbnBUYtuEc66ftSwIkBqpHOGyS8Je6zp+qUPeQb+J6L3XD+ZaKiC+81L/qAl7oBo/aG
- 3Lk1oZlxZ7qdihnSDQiCQktt5xge0GFbO2Nac0n8dzdF6HJzwJ8as+HYbQKMX/bXxfgvo56M
- xb3jkVRa+uJX/e+XmVcYPmvjmMVH/i33+gu9JUcRZWPanJdrhUhGywtPAixVbcODsc3FChSc
- 6Y9g8/9xIonxB7Ohy5nUZG7heuuSMi7rd8iXFa2gPBoT6csZRaQBdLeUJsqM8RF8FvzarI8e
- J1XRNyPUGLTpTleN9iprO19Q7byZd82dEfBGvAplgoGbGKF6TwcRzUAiIKRfcGJ2H08q6p4j
- IBtL+5bXEzlw7V1DQZltzi98iVJ6oPNknh69tRfURas7DDepZstgwm37sgo0weSdGGiYE21t
- LxcfuVzz3LYTU8/3GzNvH6AjcXVVv2VFe21qxSwYvFSulhDlGVIx25s6bXNi3kbg28JI3X4q
- SfVN8oppeVH5lcTZNpz7KkQEydwUgxt/GB6BDl6U9ZjFvEEng+TO3FotA43SZv6nJL475aQY
- /kkDUyy9xfRMGtcOXiubkjOGcYcfXcWPn/3hFlVP/FHY8Oi+GDUZmX5xsNMpZydYOip14Y36
- asc5iLeSLRu4/8q3s3gsf9xCJZs0yNUxABEBAAHCwXwEGAEIACYWIQT7AAbxa0armbUkhvAM
- 6wcZ+4I3YAUCZzcELAUJEswDAAIbDAAKCRAM6wcZ+4I3YKwgD/4n+2JzfjRBsOI/dNfrT74w
- ZR2gjhmyFpXKJ7GFy0h0jNrDss4UBYUaTAcMZJHtwAWn7WVcGllIAGCI+69evjCe9Fg9ea/S
- eUNQbdoxLwAv/lndjZeHUU5D/I9qjchW7rSh/ZeTLIRKFfguXUvKtChSjV2S/iY5y+vsoU8B
- WmZ62OqcgtEizoIQeQuCRCq5xvgPekcAc/+HIjVKHMzNbNi6y6PnGko0fUNFa7/6pS1BzW6/
- bUkHMYXzYt2Z3NtAox1CuQK8KO/Rv6h/IvNb+o1J3ZuWpCyjwsx1q+41Yzy1HK/9D04/bbt5
- IUSlWhdkz9t/mRGQtK4XTUz83Bu0Y+zArzIOIXypkGnkpRLS1nVmowumG5lwmfQLdJbWW4Dq
- eVwpb0a9+vC6Q8OFOAS+uhftmsnehqB5nqyrERRqTbyDuz1Bz0Yah1QYeF8M7Qa6NQjLaSve
- I4frzL9q2n94RBljhqaSdnj7TCaOtz0LCOVyMTgjT6U4foGDX14J/xr/BhxgdxytUGr4/bAw
- RyK39bJA0evt6QTYaxo1iT90ObYm6Kn46EjTKhWb5oVmBqXmjZ03FtJyruQzow74TC+xCDtg
- eQ0RnOuvOTRMcgg7OZxf6XegwBLNiyB95xCDP/zqz1ngVF8DJ7zhzTTfzSB0BSiYTQL7avs6
- ldPHIqbIwpfecQ==
-In-Reply-To: <a220ebd0-a28d-44cc-9a80-62382018348c@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR04CA0093.eurprd04.prod.outlook.com
- (2603:10a6:803:64::28) To GVXPR04MB12016.eurprd04.prod.outlook.com
- (2603:10a6:150:335::6)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 778C6606A325
+	for <mfd@lists.linux.dev>; Thu, 19 Nov 2026 09:55:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 778C6606A325
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxp.com
+Received: from inva021.nxp.com (localhost [127.0.0.1])
+	by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 6418620000B;
+	Thu, 19 Nov 2026 10:54:59 +0100 (CET)
+Received: from aprdc01srsp001v.ap-rdc01.nxp.com (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
+	by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 2F77E200003;
+	Thu, 19 Nov 2026 10:54:59 +0100 (CET)
+Received: from lsv03900.swis.in-blr01.nxp.com (lsv03900.swis.in-blr01.nxp.com [10.12.177.15])
+	by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id 79914180006C;
+	Thu, 19 Nov 2026 17:54:56 +0800 (+08)
+From: Lakshay Piplani <lakshay.piplani@nxp.com>
+To: linux-kernel@vger.kernel.org,
+	linux-i3c@lists.infradead.org,
+	alexandre.belloni@bootlin.com,
+	broonie@kernel.org,
+	mfd@lists.linux.dev,
+	lee@kernel.org,
+	Frank.Li@nxp.com,
+	lgirdwood@gmail.com
+Cc: vikash.bansal@nxp.com,
+	priyanka.jain@nxp.com,
+	aman.kumarpandey@nxp.com,
+	Lakshay Piplani <lakshay.piplani@nxp.com>
+Subject: [PATCH v22 0/5] Add support for NXP P3H2x4x I3C hub driver
+Date: Thu, 19 Nov 2026 15:24:44 +0530
+Message-Id: <20261119095449.555593-1-lakshay.piplani@nxp.com>
+X-Mailer: git-send-email 2.25.1
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -150,182 +64,145 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12016:EE_|DU2PR04MB8919:EE_
-X-MS-Office365-Filtering-Correlation-Id: 39ab31c7-0474-4bee-9f7a-08df461d496c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|366016|23010399003|1800799024|11063799006|4143699003|921020|56012099006|22082099003|18002099003|10067099003|261009223027099003|261102123227099003|261028144727099003|261021135927099003|261021133027099003|261021121427099003|261022115727099003|261021123027099003|261026121527099003|261022075727099003|261026140227099003|261021130227099003|261022105027099003|261022113327099003|261026130827099003|261026135527099003|4133799003;
-X-Microsoft-Antispam-Message-Info:
-	bs7TWLY+TpYAiyoXsT4+xl0ma2kDgE3WAJUDNvrAdngCChNEdV8+w69Mfb9ob6ZmNZFoFVbvitCvkTKAtep032lr0B1S/koOm6fIlu+9d3D8lyUYATbeq2TLn2uBwuztkSvbE+ji9+XxqCp/KCs/d+Uf3BScsV5UphLjBXNaFJafmRQxZPFLQCX/4fexXJIzWabcGufcWEchvJKz3pWXCa4/PJdEJ1FMP1evpTC7MbI0uqiT4wm1qWJRliG/14VIcVWCFSeLVMynPrSF79rfD+/p0ZME6Hxr3DR2n0uJkpZSoIDXNBGwwcv7cjYzIQyfgpipXb/EQdZTkm9Gxp7GW/zF4Hnp1rKHTu4r+JNh1xjqlwA9JWqPenU1VJ4NEsRNPgkwvKcWFMLkOo3V2haaHdHt9XQX1PEkkDiIEueUbrPjzDKOu/Lor7u4Iza2LkAdLTSYdTH9fbzNS91sUE+kaphxsZyzAXXsgdYVSHLnQSEnPPfDholnSHnZ/N9d8n36OQurTJa2HBtb1EyCuGoQhFcTvnq1aCbRHSAyAivqyRJF80O0MPrjElXzZJ1qUE8dpX/xWCjRAZwLB6THLH5mvwvt8LrNGnesQL9q6T2uQBbK9GtRcAnua/0g6FaDa3KvuD4b87GjE8lqy00+vzI1Eke8re+h3pZb6pbWWkCyWx8=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GVXPR04MB12016.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(23010399003)(1800799024)(11063799006)(4143699003)(921020)(56012099006)(22082099003)(18002099003)(10067099003)(261009223027099003)(261102123227099003)(261028144727099003)(261021135927099003)(261021133027099003)(261021121427099003)(261022115727099003)(261021123027099003)(261026121527099003)(261022075727099003)(261026140227099003)(261021130227099003)(261022105027099003)(261022113327099003)(261026130827099003)(261026135527099003)(4133799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?bmwwR0JFNG5kcG5ralErdVEybXIwdnJ6Q1pQVHFQMUdQSURpb2pxWktycVdG?=
- =?utf-8?B?L3BxS2lBYTUrcEhRdWFoQkYxQS9mSmxTbGk1RHl1RnlWbkhnS0puSWVPTG10?=
- =?utf-8?B?eTErY3U4alZ1WUFaZTNnSkRLQm5QTkdEdXZoRHk3NzJhSkxMTHltOEVKN2xY?=
- =?utf-8?B?QnBud3BwRzF0RmFac3BSclVqcnplbmVLdS90VXRPUmZYdENsWURjOTJHSjdm?=
- =?utf-8?B?RDdSVXF4bS92eVNSaFhBYitscSt2OEZYQXFZTytjdG9jdE1MUHNpZ0dOQ0ND?=
- =?utf-8?B?eUhwMHJSdEc1endRV1lrODlTL2dpM1JDaFJEcGYrUFB1d21oTzNzYTBBTEdz?=
- =?utf-8?B?d2Y1dWVtRkNQdzJPbGRLWlJGVTlVRU95Vlg3cDVrSlVrOTlHVDAyV1NpZlhw?=
- =?utf-8?B?eTNtczhtK0JLU0p6bVI4dFAxaVA3c1B4UXVpWDlMZ09uSy9uZG1iWkEwMW9Y?=
- =?utf-8?B?Wm5keWdmaTR4LzhlODcwR3JXL1dnYzZaQmdnVHRSbDJVSTZoZDE1Vk5tMmdI?=
- =?utf-8?B?cnlPNUxHUGRjUHQzMzYrTi8yUmZja1ZySWdSOUxZZDhtWklJWGhyTGpibmdU?=
- =?utf-8?B?RGJMSHZPRlZ6UDRHVnpHTEtZR3phTkh6WHNVNmtNNXlZQTU4U3BCcURVaFNC?=
- =?utf-8?B?MGFwRWJNaGNYQmNjS1c2RDR1L3IvVHlMcDhsMXJNNHJwSWFUU3l2Rzh3UXFn?=
- =?utf-8?B?MVVUV2xXR0RKN1RNWWd2Yk1lUjVMVHpBY29jL0NuSHk4YnpXTVdMYzZIaVlZ?=
- =?utf-8?B?RTY0YXdOb1RXWVArYkkrVU5TQXRIdTBJd04rbStUa1FOTFJwQ04rTDVja01r?=
- =?utf-8?B?bGp0dFpzUG9pVXVZaE80RzR4d2tOVHpzQmg2MHhnMjhlRFJzYi9CWmN0Y08v?=
- =?utf-8?B?VEFOTFRBeHJwc3ZVV1BNNzBqUjc0RnZaaW9vejM5K1JLOGMyUER4bGxrdkI1?=
- =?utf-8?B?MDJpTjRZdm55YngzbksvbWNaeXRLZW50VkxHdVM1cVU2SEkzVTZHVFMrWHlP?=
- =?utf-8?B?dkhXS3NMMFlpZmRjSlpLeCtBOENjSzRzenNXK2d4enJ3VVJIMWNwQzc5eXZD?=
- =?utf-8?B?VkkrTTNuUEpaeDhzM3FLejVMcDdRQzFpbkZub2J4aFFoUEZpRitTSDBlU2M3?=
- =?utf-8?B?WjNFUTlpeGNOZWFTekxoQW9XU0NXZWFiVWJhVTdSQVBRV2JYaWV4S3ExUVVS?=
- =?utf-8?B?SDdOZGQvUkpBaUxDbmo0WEdkZEx4Y0ZJSEx4dTk3UU11SFVuSlYrYlNQWHFP?=
- =?utf-8?B?b0xOVzJSK2VZUlJlTUlUaEltZ0xTREM1aEFPUjhzZUtMa0t2MWozVm44WDJp?=
- =?utf-8?B?R25LVkliZHZqa241WXNoRUdGMGlXUzF1a0JoUEpZcjV6Y29qeXZoMzU5cmYr?=
- =?utf-8?B?bTcxUWRTVTRaQnpLdUcrVWhacmpaOTJESlZBTER4VGE1QnRzSytYVHpmbFgv?=
- =?utf-8?B?VEFsRi9QWEsvZ0pRMVNiTk4wbzhaOTU3UFlIQ3oyZjJIandFdnp2YlY5ajFH?=
- =?utf-8?B?QXVKMGJlZStpWEg0SDZzZ1MyWXVob1ZQcXp2aEJlT1dGR0hvRjVOWWdqQ1Nl?=
- =?utf-8?B?QTNvaUdkN29xaHQrYjBqZitwWXZqVlpQZmxCU0hSTjlFL0d4M2kvYURZaldU?=
- =?utf-8?B?Qm5kRllEVXQxL05wQlJHN05oUEZ1QTJkcS8rY0VBbTNMZHBRT0QraWUvVTlB?=
- =?utf-8?B?NDAzUTJYY1lGTlZ5SDlpeFNDTUdmUjlUb2NMMGgyelpIKzdmWjZLblpCY05H?=
- =?utf-8?B?c3UvTTB4TVRqdnJwWjdnaUR6Wnd2WXZ3L3lVZXVvTWYwQWtVeldQL0VpbzNP?=
- =?utf-8?B?Ym9UL2FENUVxYjNtTzJSSzFOSEpEU3hlRmladFRyekEzUXZZZjRQZDNYMVUy?=
- =?utf-8?B?MnA5RytaOUtEZ3RMZ3AzWDFOYm9JeVJMUzA1NkgyYmViOE9OU2ZXcStPOGln?=
- =?utf-8?B?Q09OR1RQRjlWaldxVTJLRzRpRU9XZ1Z5M05mOWFvQ2MrK0h1VWtwcno2Qk95?=
- =?utf-8?B?d1VUdEVTbEtUUFhtcG1rblZ6U2NadzNDbWtWb3FJN2VaZHBnbjhLZ3NvL3gr?=
- =?utf-8?B?OGIrZDUxeDRyMlIyWXZTRjA5NGpXWWJEZjduanZoRDlhcWdxbHNDMllBaEJa?=
- =?utf-8?B?dUR2SkZXTGFveUVhT3BDY1Y4NDNiR1p2OW1xd3J5RFdleVZGSVl0NEZIOXNV?=
- =?utf-8?B?aTNBMjNXV3JFWUJ3Zjk3YlBvSUhvR0lnd3B6dkJ2L0tZNXdMblZGNEUxdGhD?=
- =?utf-8?B?QWNxNUZ1TGRmc1pxMnpmNVpSeDV2WSt5ZVppMzBZeW9rKzdhOFhTbU5ta2Nv?=
- =?utf-8?B?L3c4c3dwWHY5QUdwNWxremFFRHQ0NVBoT1loVWFwdGdEQmx2bTVjVkN5bU8x?=
- =?utf-8?Q?p9gfaVgHDQv/i7c8=3D?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 39ab31c7-0474-4bee-9f7a-08df461d496c
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12016.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2026 09:12:51.1371
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cP6Ok+cF6MfCKDHA3SA5Ltx+atJvKwo2WeC+rIrQqMyEKbypBxmjK+01rIMFSxhUeDKaEIBktae7G7AV4DqjuQGOyzVvyHfNIW2bfih2gmM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8919
+Content-Transfer-Encoding: 8bit
+X-Virus-Scanned: ClamAV using ClamSMTP
 
-Hi Quentin, thanks for looking at this!
+This series adds the MFD parent, regulator and hub drivers for NXP's
+four-port and eight-port P3H2x4x I3C hubs. With an I3C host, the hub
+driver exposes I3C ports as virtual controllers. SMBus ports appear
+as I2C adapters with either an I2C or an I3C host.
 
-On 10/29/26 20:31, Quentin Schulz wrote:
-> Hi Jakob,
-> 
-> On 10/29/26 11:06 AM, Jakob Unterwurzacher wrote:
->> This series, together with a few out-of-tree patches (see below), makes
->> suspend-to-RAM on RK3588-Tiger work, down to a power consumption of
->> about 0.4 W. Patches 1-3 apply to all boards with an RK806 PMIC
->> connected via SPI, which includes most RK3588 boards.
->>
->> Patch 1 ("Input: rk805-pwrkey - enable the wakeup interrupt during 
->> system suspend")
->> arms the power key interrupt as a wakeup source, so that the
->> power key can wake up the system. This is done in the regular suspend
->> phase, because the SPI bus to the PMIC can no longer be used in the
->> noirq phase.
->>
->> Patch 2 ("mfd: rk8xx-core: keep the PMIC interrupt disabled during 
->> system suspend")
->> keeps the PMIC interrupt disabled across system suspend, so that its
->> handler does not run before the bus to the PMIC has resumed.
->>
->> Patch 3 ("mfd: rk8xx-spi: add system sleep PM ops")
->> hooks up the existing rk8xx suspend/resume callbacks for the SPI
->> variant, which so far lacked them.
->>
->> Patch 4 ("arm64: dts: rockchip: put the PMIC into sleep mode in 
->> suspend on RK3588 Tiger")
->> configures the RK806 PWRCTRL1 pin on RK3588 Tiger for its sleep
->> function, so that the regulator suspend states take effect. This lowers
->> the module's power consumption in suspend-to-RAM from 1.09 W to 0.43 W.
->>
->> The patches do not depend on each other and can be applied through
->> their respective trees.
->>
-> 
-> Then have them in separate series. Series should be as small as 
-> possible, down to a single commit if possible.
+The I3C core helpers, DT binding and generic hub support from v20
+(patches 1-3 and 6) are already in mainline. This revision adds a
+generic I3C address-slot fix and addresses the Sashiko findings and
+review feedback reported against v21. The series is rebased onto
+v7.4-rc3.
 
+The earlier v20 Sashiko reports concerning the location of p3h2840.h
+in the MFD and regulator patches appear to be false positives.
 
-I'll split it into tree (1, 2+3, 4).
+Changes in v22:
 
+Sashiko fixes and review feedback
 
->> 1) Upstream TF-A does not complete suspend-to-RAM on this board yet, 
->> so the
->> tests used Rockchip's BL31 (rkbin v1.47), configured through a small
->> out-of-tree driver. The plan is to get suspend working in TF-A instead.
->>
-> 
-> I'm guessing you(r LLM) meant upstream TF-A here? Or what is it that you 
-> mean?
+- Factor the common I2C and I3C MFD probe initialization into a shared
+  helper, leaving transport-specific validation and regmap setup in
+  the respective probe functions.
+- Replace the generic I2C device ID "nxp-i3c-hub" with "p3h2x4x".
+- Use platform_device_set_of_node_from_dev() in the regulator driver
+  to avoid leaking the inherited Device Tree node reference.
+- Initialize TP_NET_CON_CONF to a known disconnected state during
+  probe, preventing stale routing state from connecting unintended
+  target ports.
+- Mark downstream DT-assigned addresses as I3C_ADDR_SLOT_EXT_DESIRED
+  instead of I3C_ADDR_SLOT_I3C_DEV on the parent bus. This prevents
+  DAA reconciliation from treating downstream devices as orphaned
+  parent-bus devices and probing them again.
+- Connect each I3C target port before registering its virtual
+  controller, rather than connecting all ports after registration.
+  Keep the ports connected to prevent downstream device probes
+  and IBI operations from accessing disconnected targets.
+- Advertise supported SMBus emulation operations and reject
+  I2C_M_RECV_LEN, avoiding unsupported variable-length block reads.
+- Add combined write-then-read adapter quirks and reject transfers
+  exceeding the shared controller-agent payload capacity.
+- Reject empty SMBus receive buffers before reading their address
+  or delivering slave callbacks.
+- Clear pending SMBus receive and overflow flags before enabling
+  the slave IBI, without clearing the controller transaction-finish
+  flag.
+- Reject unsupported 10-bit I2C slave address registration.
 
-Yes, both my LLM and me meant upstream TF-A.
+Additional changes
 
->> 2) The inno-usb2 PHY has to be resumed when its 480 MHz clock is enabled,
->> otherwise EHCI/OHCI resume hangs. This is addressed by Sebastian
->> Reichel's inno-usb2 series [1].
->>
-> 
-> Having access to your downstream branch, you have a patch generated by 
-> your LLM and not Sebastian's patch series. Either use what Sebastian 
-> posted, or be more careful in your choice of words as I read the above 
-> as implying you used his series.
+- Add managed cleanup to disconnect I3C target ports after virtual
+  controller teardown.
+- Keep port routing updates serialized under the hub routing mutex,
+  marking ports permanently connected only after successful writes.
+- Document SETDASA/ENTDAA handling and the shared parent dynamic
+  address space.
 
-I have now pulled in Sebastian's patch series instead and posted a 
-Tested-By ( 
-https://lore.kernel.org/lkml/ae532396-557b-4a0b-b13c-920a971962b8@cherry.de/ 
-).
+Changes in v21:
 
->> Known issues
->> ------------
->>
->> PCIe devices do not survive resume; this depends on system PM
->> support in pcie-dw-rockchip [2].
->>
->> [2] https://eur02.safelinks.protection.outlook.com/? 
->> url=https%3A%2F%2Flore.kernel.org%2Fr%2F20260316-rockchip-pcie-system- 
->> suspend- 
->> v5-0-5bb5ad37d643%40collabora.com&data=05%7C02%7Cjakob.unterwurzacher%40cherry.de%7C464ac9f060054aad6eb808df35f33f19%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C639288990982194241%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=cg2d38YMtjlOG4gFsyy7LYI%2FWi4RFRUuHL8QjVL0DJg%3D&reserved=0
->>
-> 
-> There already is a v6 from almost two months ago. Did you actually test 
-> with the v5 or are you just hinting at what could be helping resume PCIe 
-> devices?
-> 
-> I'm sure Sebastian would be happy to receive a nice Tested-by tag if you 
-> did indeed test that.
+Sashiko fixes
 
-I was just hinting.
+- Keep I3C routing callbacks active during virtual controller
+  registration. Serialize routing updates under the hub mutex and
+  mark ports permanently connected only after successful routing.
+- Filter both DT parsing passes to "i3c" and "smbus" target-port
+  nodes, preventing unrelated child nodes from claiming ports.
+- Process pending SMBus receive buffers independently and clear
+  only the overflow flag after servicing them, preserving new
+  buffer-refill events.
 
-It was merged in the meantime ( 
-https://lore.kernel.org/linux-pci/179407115382.87267.12160393716568806842.b4-ty@b4/ 
-) and I have now also pulled it into my local tree. It solves the problem.
+Additional fixes
 
-> All your patches are missing the Signed-off-by, required to signify 
-> DCO[1]. LLMs are forbidden to add it, so I guess you missed that when 
-> reviewing the patches before sending. Please triple check that you agree 
-> to all criteria listed in the documentation before adding the SoB to 
-> patches generated by LLMs[2].
-Well, that's embarrassing.
+- Reject duplicate target-port indices in Device Tree.
+- Reserve DT-assigned addresses for all I3C target ports before
+  the first virtual controller starts DAA.
+- Clear only the SMBus controller transaction-finish flag before
+  starting a transfer, preserving pending RX and overflow flags.
+- Initialize optional IBI support without holding the routing
+  mutex, avoiding an error path that could leave it locked.
 
-"b4 prep --check" came back clean, so I assumed that b4 adds the 
-Signed-off-by.
+Previous posting (v21)
+https://lore.kernel.org/linux-i3c/20261112124437.3367252-1-lakshay.piplani@nxp.com/
 
-But, as it turns out, "b4 prep --check" does not actually work.
-I have reported this as 
-https://lore.kernel.org/all/a37b228f-0d12-4c26-b29b-51ad59bc6d1a@cherry.de/ 
-.
+Previously merged upstream patches from v20
 
-Thanks for the links, I have triple-checked.
+[1/8] I3C core hub support
+https://git.kernel.org/i3c/c/9d60a0eafae1
 
-Best regards,
-Jakob
+[2/8] I3C controller-only operations
+https://git.kernel.org/i3c/c/8d0008260c32
+
+[3/8] NXP P3H2x4x Device Tree binding
+https://git.kernel.org/i3c/c/58c018414635
+
+[6/8] Generic I3C hub support
+https://git.kernel.org/i3c/c/b0cfe49a2e3b
+
+Aman Kumar Pandey (3):
+  mfd: p3h2x4x: Add driver for NXP P3H2x4x i3c hub and on-die regulator
+  regulator: p3h2x4x: Add driver for on-die regulators in NXP P3H2x4x
+    i3c hub
+  i3c: hub: p3h2x4x: Add support for NXP P3H2x4x I3C hub functionality
+
+Lakshay Piplani (2):
+  i3c: hub: Mark downstream DT addresses as desired on parent bus
+  i3c: hub: p3h2x4x: Add SMBus slave mode support
+
+ MAINTAINERS                                   |   6 +
+ drivers/i3c/Kconfig                           |   1 +
+ drivers/i3c/Makefile                          |   1 +
+ drivers/i3c/hub.c                             |  18 +-
+ drivers/i3c/hub/Kconfig                       |  11 +
+ drivers/i3c/hub/Makefile                      |   4 +
+ drivers/i3c/hub/p3h2840_i3c_hub.h             | 358 +++++++++
+ drivers/i3c/hub/p3h2840_i3c_hub_common.c      | 437 +++++++++++
+ drivers/i3c/hub/p3h2840_i3c_hub_i3c.c         | 247 +++++++
+ drivers/i3c/hub/p3h2840_i3c_hub_smbus.c       | 685 ++++++++++++++++++
+ drivers/i3c/master.c                          |  20 +
+ drivers/mfd/Kconfig                           |  13 +
+ drivers/mfd/Makefile                          |   1 +
+ drivers/mfd/p3h2840.c                         | 156 ++++
+ drivers/regulator/Kconfig                     |  10 +
+ drivers/regulator/Makefile                    |   1 +
+ drivers/regulator/p3h2840_i3c_hub_regulator.c | 289 ++++++++
+ include/linux/i3c/device.h                    |   2 +
+ include/linux/i3c/master.h                    |   2 +
+ include/linux/mfd/p3h2840.h                   |  41 ++
+ 20 files changed, 2296 insertions(+), 7 deletions(-)
+ create mode 100644 drivers/i3c/hub/Kconfig
+ create mode 100644 drivers/i3c/hub/Makefile
+ create mode 100644 drivers/i3c/hub/p3h2840_i3c_hub.h
+ create mode 100644 drivers/i3c/hub/p3h2840_i3c_hub_common.c
+ create mode 100644 drivers/i3c/hub/p3h2840_i3c_hub_i3c.c
+ create mode 100644 drivers/i3c/hub/p3h2840_i3c_hub_smbus.c
+ create mode 100644 drivers/mfd/p3h2840.c
+ create mode 100644 drivers/regulator/p3h2840_i3c_hub_regulator.c
+ create mode 100644 include/linux/mfd/p3h2840.h
+
+-- 
+2.25.1
+
