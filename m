@@ -1,100 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.remote-ip=209.85.160.177
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=fail;
-	t=1795153035;
-	b=Kgx1IPkfZronuTJDO/Y3xkg1eVPlY7jbcSp8qbtOzRt9An1tRQcD15DOVWt8WiVETk8J
-	 GCOqL/qUuKmNd1GoI8jmgcIw8SWsv814VOpqOzHLxUUvdrnzk+lj/9ls0Ttd6zbbcJ6G6
-	 dst1kC9vCjvDCdw4Wcj43Jc4UtWBonasDUMVjERdrHsRhxyD1kV5VnNbcU+IcKmWdcomW
-	 YRMRc7SkIUifkRudEGJ95hWvEhJ7kQISIUvaI1OefgTQ+N0VxneMVzyvUJ62yqpnyn/CE
-	 OX9loS07AXUygLVKjlLS2QDR/5v4za/R2G+kTbtJcD40t8Amw0hw65ioxIbTbCFbmhw==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795153035;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
-	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=B/0atRX3itSILPoLTT2jiynyQu/IGk6Wpmy+FZVV2so=;
-	b=rNErwFbBiviLlDqsFS4V3rid3BdOyGeKhMIWiQ69ClWNT/8MFJzqYbfhJIkIFTrFv7dN
-	 1srBdh82z9MVqt83Af8dVl6PpP5wJU5Ugh1E/n+h4uZKQCHsab/BQCFFNXJwfyB/xt2+z
-	 VEnWCoWrXB2O+Qt2HPGsilAihNwsmxGk/M7vYgFbT1imztg5DKwfvrof8VJ/+nPTNEtXm
-	 cc/jRzIaEoWMOxG9tMpwDcDO8rPY47xsN3i6drtCbQsbbOlVAqmOkdBcd5UtzMb6DzYVK
-	 v3TkUDL9UaJ4T/4nfXPoFNksFoPDu24V1S1iWXlJLEX3OQXzEZOjfbrjKD28WthfTVA==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ao6peS9q;
-	arc=fail smtp.remote-ip=209.85.160.177
-Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com [209.85.160.177])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.171.202.116
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795159455;
+	b=t2xbTwgHrWzrB3exH2VXCnEQa6ovzp7fJshcapvhFJ1N6HFRMjOc4NxdLHgq9Fj0Xmlj
+	 rMdy0461Yav6dZpOTulldJ+GT00zJQ2VFvxx0lznNJ8cv2MLqGhcKJPHSrDfAEYXG3CWr
+	 c3qO+eaJ/Vm2Nxej1fyZwiJ4kKvOOsjxpGJpsaNdxH5WHwWGFqaAQxmsEJUIomKT3lAX/
+	 Ky61m4njfsMzFNUbrAlmQ3rOGL+7U29z+VNfqJqJQtqf9w3+XbKv1RLni/54JG5fPMBwW
+	 xw7RTWK5qVJsqm77XQI7i0xpDYdE0tpD9EnKe/dPmK7SOV64TcQyR32e1c5F3ADSFQQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795159455;
+	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:From:Subject:
+	 Date:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Last-TLS-Session-Version;
+	bh=vCkduuwTwhdRZPFHnESFbOpUc/C7mFXMs6TuK3gtbA4=;
+	b=oTMbyfIorYJbCdJ0Yt0e/LLf5w0RfiaSlzOU8tKr0/txs0Os6h9Ci1dg2lw1Jf/rbGjx
+	 dF5DZyIHl+dqIeBorjQcfoahhBBkb7CKpBjnPf1Hq+6XxTtRpS67jcVPA+nVKcJWCTaiz
+	 fZYgeVi/ao3+MuHZVOPxjokpGkOG8lVYzSotlyYHGNxndGUzKBq6GlXNz1S0qohWEyAkA
+	 MXpupEGfWCRNLHdPHvuJOK2YY0CxYCMFlINg3mgykVbrB41ooEoOcgaoO5lWQF25Tem3b
+	 5hKs6BAo79jn2oyFrAh7CEhwO1d9tzk5bdN2odt5rPTZeBsB/UVPP/QEFnFP7c+6jXA==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=bootlin.com;
+	spf=pass smtp.mailfrom=bootlin.com;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=towOuZq7;
+	arc=none smtp.remote-ip=185.171.202.116
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32CC5606A320
-	for <mfd@lists.linux.dev>; Fri, 20 Nov 2026 05:37:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 32CC5606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFA60606A320;
+	Fri, 20 Nov 2026 07:24:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CFA60606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ao6peS9q
-Received: by mail-qt1-f177.google.com with SMTP id d75a77b69052e-55ade1de0b4so6492541cf.3
-        for <mfd@lists.linux.dev>; Thu, 19 Nov 2026 21:37:14 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1795153034; cv=none;
-        d=google.com; s=arc-20260327;
-        b=bYZr4AA3/3LZ5G4Ssy9HrSuMDpTRoGLxnXJLltm6kKWoX7oP7whwhnSaRmi2KsODO9
-         hDfRUSQeu+vAmu4A7WTKxs1zpZ6xw9L+KAMc/tmwDCFMog6tADq/gg17onR6gWUkyNrE
-         pSqMaAn1Ox0yzPr5EyH1D33ODfcutAK/8elfgPL6hvzmGZUgirIX0Vo+3fNce0NfNLoM
-         Bm/8U7ZBB6Gj7c5Pz2lSnrDQHIF3bWqiecFpb2hqKsPf0z7dl7V5hbZmOO00hYy+mmYF
-         OnnTsJXQtOeiAwBDVk3SxfdHWtTFP8xYPlTsF3VIZRSi8nGmkeZUPnt+Tjj5DPMH3JpR
-         82Ng==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=B/0atRX3itSILPoLTT2jiynyQu/IGk6Wpmy+FZVV2so=;
-        fh=WIzNQJOvHMCW5pVQKVfY1PEzEMg9jNQFjQ6Wn92qo+M=;
-        b=UScqYjSWmamwlD7Rf71tbpU0NIUdO8a7XgOZR5IlOUuzUgoOLzxKyXZ+JEVAUwWIEN
-         2NbUGRMTeEDVD+5hj2UrsXIO2mH4sTXdXdXd+cR0QUaVIss4YwCEHIJLktvYg/nsaSf5
-         Heq4UFfjLtoAQJtYQmVJvZcZg0F7/XYPDYryaIHFOEgWE5Ba51mlnFXSkoZ1ZzEPBDoa
-         Kx3uoTfdnGN7cT31huUnotdpfh06UjVM2s1FTrKPoAn84Ayh9nxn5efu1Wz9EwpxbBsm
-         EdrhKs5JkBJxAOL1hwrK4rJsj1mUriMcTzIkoj9v1h5qolehr1LTdx8EjtOq8xq1Iaoz
-         fypA==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795153034; x=1795757834; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=B/0atRX3itSILPoLTT2jiynyQu/IGk6Wpmy+FZVV2so=;
-        b=ao6peS9qfMEHzwqzmb/MsFN/9oW/JXdrvp2finU/3+fa2nCsNNzlebRfLKS+NY9RRm
-         sS6SPlLU7Yrlk+McQfxUBqUBmoyxmMbplSmHJNeBhM4a9xGn+DWvaSlC/G72l6wvHGMl
-         lyF6VoBW5A2r8yunVqKN3iu2e3ZVuXh4X7erJjr96/JgcwzYV6yAEYx/Ikl2uzWUYMf3
-         pbTSbskXmMuG5zKMi6NDjE8rmeHKd94A+9VahhMuHDyCRdJKvRIXK2OGOTbKJVWlHyqQ
-         g/xJH1neZQXO4cjTqfDTUWfhLqIjx5wllO8zXd3nDe6acf638knZn5EIIvwG3Gsgzbhq
-         O9IA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795153034; x=1795757834;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=B/0atRX3itSILPoLTT2jiynyQu/IGk6Wpmy+FZVV2so=;
-        b=uXC3XZ9bGq1MSiJwk0C1CGZ4TsEUi8c6oLiFhjg+smskqzanPOCKWmzNP/iCR3dj1m
-         3yegl8TL2sSR0MA5V+8kM5eaxzQgQBsMt8zqfv3UCHCef+PftyJBAL+HSTIVBsD36t5K
-         5+kmas5jOOtzT4JBjfvckFXeUxmlZ2u2lJ6sDahWo2C6O97PGyPeXkhi2FMmkV5rPXcp
-         YlnttUrxP+sjILiEKfkQb/owT+YqjbsDQkHqmeZKrSmGc5Ns2/PWW2yv4cYcj6JXNNYw
-         kRfxErMvGjv1ErAe5qIl9lJdR7kRfrGJnQDnv3iDcuZ2YAJxBDFhmXQb813Z9sXMNR91
-         ns5g==
-X-Forwarded-Encrypted: i=1; AL+hErEYRMBARIfFEuPyDnS0CIZ/zcC3XoAvtBaogWJKHg91QCuOo9bSHpffLHc2nG4KPI3m0M0=@lists.linux.dev
-X-Gm-Message-State: APuU4Z9uaNViVA6JyGJCYiAaf4DQZvyQZexIWUUjbZ+MFM4IsmCMYAGJ
-	+RW98CcN6P07BkERLHzoUaVN5EtcQsYZaV+90G6DtxuRB/ClKcoDGXC3j7UM49ZKm9OCCQxtE4b
-	c+jSFKVySXU07aHn40BHgWxWo6FCgZsM=
-X-Gm-Gg: AYBFou2fq6WpzMQAWwyT44ozsU0G10DCrP7BoyxEw92HQNUhLPw0GvHI7CXxxsk9yI4
-	U0iOzSkL8V41otxxGqvW8RUpVkh7BcSVv/qAF+jhvy0mfSKgy9C+tM5mttAZOHSPQIAe3oB4z6S
-	5VtNilYWDpGiHeFOfGbNSwmO6XP2ODt4UBhyz+TVF7ocRyuJSI4HkbRU4FZPeO3vs4B3xSpb5Bk
-	WjK7mSuxL7UCULb9+KpLREGW6iKwMjjatUAkfRUZ4gQYrTMhBWjs3c8fAeQSfs5R18KLfPYJlFO
-	VEK1etfGMd2YJLZn1ij5mLVQecIJ+jGzUHVUHZKzdTl9SIJT1Spf5UH96Y4ONbekO//iwnA2I0A
-	i6P2tbIdA0q4l2BqRTM8pGUado0A3I6tM3XvCB9Q=
-X-Received: by 2002:a05:622a:228b:b0:55d:2caf:ae7c with SMTP id
- d75a77b69052e-55d76a6e947mr36676041cf.19.1795153033968; Thu, 19 Nov 2026
- 21:37:13 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=towOuZq7
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-04.galae.net (Postfix) with ESMTPS id 6A558C2F4CB;
+	Fri, 20 Nov 2026 07:24:16 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id A7E206017D;
+	Fri, 20 Nov 2026 07:24:10 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id EFD5C11BC10F1;
+	Fri, 20 Nov 2026 08:23:59 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1795159448; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding; bh=vCkduuwTwhdRZPFHnESFbOpUc/C7mFXMs6TuK3gtbA4=;
+	b=towOuZq7KtmvM/Q5f4+wBK6Ap2w3YihaT2IF64czyeetprLfLrifLCIHG61hzQG9JRcF3n
+	DqNqSbhRmyaA41r/KS0ivKFBnjZLwB/Mti284NMMxujNUWt28azre3dJxJ/7zy7OmBHbBz
+	zH2hrbP8RROp6/n9lZAWMaOQWBkj2XEx9MlX+NCVLW8GsgJ44UUStx4QaGLRTvBFNThTO/
+	FDimLuVfBvq+rTknmEpY5S0vtwm2GP8CssMqNMc9mx/l12lrUiVX+Bc5d6o2eVAG1XOyhc
+	Namz9s4cMG1w4IdY2ncPhpyakgfYOtOPCx/az7KUm4jt2tm9bfd7ULqTsCo0+A==
+From: "Thomas Perrot (Schneider Electric)" <thomas.perrot@bootlin.com>
+Subject: [PATCH v10 0/5] Add support for AAEON SRG-IMX8P MCU
+Date: Fri, 20 Nov 2026 08:23:52 +0100
+Message-Id: <20261120-dev-b4-aaeon-mcu-driver-v10-0-a756687e7997@bootlin.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -104,78 +62,225 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261118081625.2399247-1-a0282524688@gmail.com>
- <20261118081625.2399247-6-a0282524688@gmail.com> <20261119101233.Z-LmZvya@linutronix.de>
-In-Reply-To: <20261119101233.Z-LmZvya@linutronix.de>
-From: Ming Yu <a0282524688@gmail.com>
-Date: Fri, 20 Nov 2026 13:37:02 +0800
-X-Gm-Features: Aa3M54rJzQMDbjIWqoH0okOv_GH6h7gkNtMRDZ7Tenmh0mHV2sFIdcgXND8rGn4
-Message-ID: <CAOoeyxXMPyG+PWiW5X5NHiH5WMaktCDPjH5-069MwjD-TC=amw@mail.gmail.com>
-Subject: Re: [PATCH v10 05/13] mfd: nct6694: Drop the unused IRQ enable mask
-To: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-Cc: lee@kernel.org, Ming Yu <tmyu0@nuvoton.com>, 
-	Clark Williams <clrkwllms@kernel.org>, Steven Rostedt <rostedt@goodmis.org>, linux-kernel@vger.kernel.org, 
-	mfd@lists.linux.dev, linux-rt-devel@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4XS207DMAwG4FeZek2QnVMTrngPxEWcA4sELWpHB
+ Zr27rgTUKbScWlL+Wzl97EZ81Dz2Nztjs2QpzrWvuMC4WbXxH3onrKoiRuNBGlQIoqUJ0FahJD
+ 7TrzEN5GGOuVBZMjOZyo6FGr49euQS30/0w+PXO/reOiHj/OkCefu/+aEAoTxVAJSiKqoe+r7w
+ 3PtbmP/Mg/5EuR1wVKyhqLLBeWFMO81ye9dLKBU25JkyRcdAaiQibSW1CJJuCIpliCg10pCa0N
+ cS3qRlNTbkmaJ/xsQU9Gt12vJLJIGty2ZWUreUdIOrXVryS6SVbAtWZaStWRKpCQLrKV2kVpot
+ 6WWpRhsND5wgu0f2blfkrpyR27OLhDwjUIqMqwl/yMhSL8teZaKJ5sgRmTsUjqdTp+alBrpUwM
+ AAA==
+X-Change-ID: 20251211-dev-b4-aaeon-mcu-driver-e0e89ebf4afb
+To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Linus Walleij <linusw@kernel.org>, 
+ Bartosz Golaszewski <brgl@kernel.org>, Shawn Guo <shawnguo@kernel.org>, 
+ Sascha Hauer <s.hauer@pengutronix.de>, 
+ Pengutronix Kernel Team <kernel@pengutronix.de>, 
+ Fabio Estevam <festevam@gmail.com>, 
+ =?utf-8?q?J=C3=A9r=C3=A9mie_Dautheribes?= <jeremie.dautheribes@bootlin.com>, 
+ Wim Van Sebroeck <wim@linux-watchdog.org>, 
+ Guenter Roeck <linux@roeck-us.net>, Lee Jones <lee@kernel.org>, 
+ Frank Li <Frank.Li@nxp.com>, Jonathan Corbet <corbet@lwn.net>, 
+ Shuah Khan <skhan@linuxfoundation.org>, 
+ Randy Dunlap <rdunlap@infradead.org>
+Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-gpio@vger.kernel.org, imx@lists.linux.dev, 
+ linux-arm-kernel@lists.infradead.org, linux-watchdog@vger.kernel.org, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>, mfd@lists.linux.dev, 
+ linux-doc@vger.kernel.org, 
+ "Thomas Perrot (Schneider Electric)" <thomas.perrot@bootlin.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Conor Dooley <conor.dooley@microchip.com>, 
+ Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Last-TLS-Session-Version: TLSv1.3
 
-Dear Sebastian,
+This patch series introduces support for the AAEON SRG-IMX8P embedded
+controller (MCU). The MCU is connected via I2C and provides GPIO and
+watchdog functionality for the SRG-IMX8P board.
 
-Thank you for the review.
+The series includes:
+- Device tree binding for the MFD driver
+- MFD driver that serves as the core driver for the MCU
+- GPIO driver implementing the GPIO functionality
+- Watchdog driver for system monitoring
+- MAINTAINERS entry for the new drivers
 
-Sebastian Andrzej Siewior <bigeasy@linutronix.de> =E6=96=BC 2026=E5=B9=B411=
-=E6=9C=8819=E6=97=A5=E9=80=B1=E5=9B=9B =E4=B8=8B=E5=8D=886:12=E5=AF=AB=E9=
-=81=93=EF=BC=9A
->
-> On 2026-11-18 16:16:16 [+0800], a0282524688@gmail.com wrote:
-> > From: Ming Yu <a0282524688@gmail.com>
-> >
-> > The .irq_enable and .irq_disable callbacks only update the irq_enable
-> > bitmask under irq_lock, which is a spinlock_t. Nothing ever reads that
-> > bitmask, so the callbacks do not mask anything. They also take irq_lock
-> > while the IRQ core holds desc->lock, a raw spinlock. On PREEMPT_RT this
-> > is an invalid wait context.
-> >
-> > Remove both callbacks, along with irq_enable and irq_lock, and keep
-> > IRQCHIP_SKIP_SET_WAKE. Without .irq_disable, the IRQ core falls back to
-> > lazy disable, and handle_simple_irq() keeps a disabled interrupt pendin=
-g
-> > instead of calling its handler. The behaviour is therefore unchanged.
-> >
-> > Fixes: 51dad33ede63 ("mfd: Add core driver for Nuvoton NCT6694")
-> > Signed-off-by: Ming Yu <a0282524688@gmail.com>
->
-> This sort of makes sense. But how does this work? If the interrupt keeps
-> coming the irq-core will just suppress it?
+The drivers follow the standard Linux kernel subsystem patterns, with
+the MFD driver registering the sub-devices (GPIO and watchdog) which
+are then handled by their respective subsystem drivers.
 
-Yes, that is my understanding. The NCT6694 does not provide an interrupt
-mask that the host can program. The firmware reports a 32-bit status
-word, through the interrupt URB on USB and through shared memory on HIF,
-and the transport handles every report and dispatches each set bit.
+Signed-off-by: Thomas Perrot (Schneider Electric) <thomas.perrot@bootlin.com>
+---
+Changes in v10:
+- dt-bindings: send the AAEON vendor prefix patch again as patch 1; v9
+  omitted it, leaving the "aaeon" compatible vendor undocumented
+- mfd: reject reads whose register or value size is not the 2-byte
+  address and 1-byte value of a MCU command, as writes already do
+- mfd: replace the opcode shift and the watchdog status argument with
+  named macros, and name the register, value and command lengths
+- mfd: embed the two I2C transfer buffers, aligned to ARCH_DMA_MINALIGN,
+  in struct aaeon_mcu instead of allocating them separately
+- mfd: move the Kconfig entry, which sat between ABX500_CORE and
+  AB8500_CORE and broke the menuconfig submenu of the latter
+- mfd: include linux/module.h
+- dt-bindings: define timeout-sec in the binding (maxItems and
+  description) instead of a bare "true"; watchdog.yaml cannot be
+  referenced from an embedded-controller node
+- gpio: return 0 or 1 from .get() instead of the raw MCU byte, which
+  gpiolib warns about
+- gpio: use the shared read opcode instead of a duplicate define, and
+  build the GPIO register addresses in a helper using MAX_GPOS
+- watchdog: use the shared watchdog register macros
+- watchdog: document the timeout parameter in watchdog-parameters.rst
+- watchdog: trim the Kconfig help and add the module name line, as the
+  other MFD-child watchdog drivers do
+- watchdog: document that the suspend callback stops the MCU watchdog even
+  with nowayout set, and say so in the commit message
+- Link to v9: https://lore.kernel.org/r/20261029-dev-b4-aaeon-mcu-driver-v9-0-f9b6d0cc180d@bootlin.com
 
-While a child interrupt is disabled, handle_simple_irq() only marks it
-pending and does not call the handler. When the interrupt is enabled
-again, check_irq_resend() replays it. The parent should not be flooded:
-on USB it is the URB completion, and on HIF the handler clears the
-status on every interrupt.
+Changes in v9:
+- mfd: hold the I2C segment lock across the MCU command write and the
+  response read, so no other transfer on the same I2C segment can land
+  in between; the STOP between the two is kept
+- mfd: read the response through the driver's DMA-safe buffer instead of
+  flagging the regmap caller's buffer as I2C_M_DMA_SAFE; reject writes
+  that are not a single 3-byte command
+- mfd: add .readable_reg so only the GPIO input and watchdog status
+  registers can be read; any other address is a command that a read
+  (e.g. through the regmap debugfs registers file) would execute
+- mfd: drop "Multi-Function Device (MFD)" from the commit message and
+  document the bus locking and the readable registers
+- dt-bindings: document the timeout-sec property read by the watchdog
+  driver and reword the watchdog description accordingly
+- gpio: move GPIO_AAEON_MCU to the "MFD GPIO expanders" Kconfig menu
+- watchdog: set min_timeout to the 25 second hardware heartbeat, as
+  shorter timeouts cannot be honoured
+- watchdog: honour CONFIG_WATCHDOG_NOWAYOUT with watchdog_set_nowayout()
+- watchdog: fix the timeout comment and commit message (timeout module
+  parameter, not a "watchdog_timeout" boot parameter); align the defines
+  with tabs
+- MAINTAINERS: keep the F: entries sorted
+- Link to v8: https://lore.kernel.org/r/20260731-dev-b4-aaeon-mcu-driver-v8-0-9ab00e80df2a@bootlin.com
 
-This is also how the driver behaved before this patch, because the
-callbacks only updated a bitmask that was never read.
+Changes in v8:
+- mfd: add .use_single_read = true to regmap config; the MCU produces exactly
+  one response byte per command and a bulk read passing val_size > 1 to the
+  bus callback would be incorrect
+- watchdog: call watchdog_stop_ping_on_suspend() in probe so the kthread ping
+  worker is cancelled before platform devices are suspended, preventing I2C
+  transfers on a suspended bus
+- watchdog: check watchdog_hw_running() alongside watchdog_active() in the
+  suspend/resume callbacks so watchdog is stopped before sleep and restarted
+  on wake, preventing a spurious MCU reset if suspend exceeds the 25-second
+  hardware timeout
+- Link to v7: https://lore.kernel.org/r/20260707-dev-b4-aaeon-mcu-driver-v7-0-ca6c59abd672@bootlin.com
 
-> If that is your whole business why not use dummy_irq_chip?
+Changes in v7:
+- mfd: fix select REGMAP Kconfig entry indented with spaces instead of a tab
+- mfd: use devm_kcalloc() instead of devm_kzalloc() for the cmd buffer allocation
+- mfd: add .use_single_write = true to the regmap config to prevent regcache sync
+or debugfs from issuing multi-register writes that would overflow the fixed 3-byte
+cmd buffer
+- watchdog: remove max_timeout; it is documented as irrelevant when
+max_hw_heartbeat_ms is set and is silently ignored by the watchdog core
+- watchdog: pass dev->parent to watchdog_init_timeout() so that the timeout-sec
+DT property is correctly read from the MCU I2C node; the MFD child platform device
+has no of_node of its own
+- watchdog: add suspend/resume PM hooks to stop the watchdog before entering sleep
+and restart it on resume, preventing spurious resets if suspend lasts longer than
+the 25-second hardware heartbeat
+- Link to v6: https://lore.kernel.org/r/20260630-dev-b4-aaeon-mcu-driver-v6-0-d66b5fcbd2f0@bootlin.com
 
-Thank you for the suggestion. I am looking into it now. As far as I can
-see, dummy_irq_chip only provides no-op callbacks and also sets
-IRQCHIP_SKIP_SET_WAKE, so the behaviour should stay the same. It would
-also let me drop the irq_set_chip_data() calls, since nothing reads the
-chip data after this change. The only visible difference I found is the
-chip name shown in /proc/interrupts.
+Changes in v6:
+- mfd: rename local variable to ddata in probe
+- mfd: fix driver name from "aaeon_mcu" to "aaeon-mcu"
+- mfd: set I2C_M_DMA_SAFE on all i2c_msg flags so the host driver
+  skips bounce-buffering the heap-allocated DMA-safe buffers
+- mfd: drop COMPILE_TEST
+- gpio: replace __set/__clear/__assign_bit with atomic set_bit/
+  clear_bit/assign_bit to fix potential races on shared bitmaps
+- gpio: write output value before switching pin to output mode to
+  avoid a potential glitch on direction_output
+- gpio: add MODULE_ALIAS("platform:aaeon-mcu-gpio")
+- watchdog: add WDIOF_SETTIMEOUT and watchdog_init_timeout() so the
+  software timeout is configurable via ioctl, DT timeout-sec or
+  the watchdog_timeout boot parameter
+- watchdog: add watchdog_stop_on_reboot() to prevent a spurious
+  reset from the external MCU during system shutdown
+- watchdog: add MODULE_ALIAS("platform:aaeon-mcu-wdt")
+- Link to v5: https://lore.kernel.org/r/20260408-dev-b4-aaeon-mcu-driver-v5-0-ad98bd481668@bootlin.com
 
-If you agree, I would like to switch to dummy_irq_chip in v11. Since
-this changes the patch, I will not keep your Reviewed-by unless you are
-fine with it.
+Changes in v5:
+- mfd: use heap-allocated DMA-safe buffers for I2C transfers, replacing
+  stack-allocated buffers in the regmap bus callbacks
+- mfd: switch from REGCACHE_NONE to REGCACHE_MAPLE; add volatile_reg
+  callback marking GPIO input read registers (opcode 0x72) as volatile;
+  add max_register
+- mfd: use PLATFORM_DEVID_AUTO instead of PLATFORM_DEVID_NONE
+- mfd: use MFD_CELL_BASIC() macro for cell definitions
+- mfd: use dev_err_probe() for regmap initialization error
+- Link to v4: https://lore.kernel.org/r/20260324-dev-b4-aaeon-mcu-driver-v4-0-afb011df4794@bootlin.com
 
-Please let me know if I missed anything.
+Changes in v4:
+- mfd: switch to a custom regmap bus; remove aaeon_mcu_i2c_xfer() and the aaeon_mcu_dev struct
+- mfd: locking delegated to regmap's built-in mutex; drop explicit mutex
+- mfd: remove firmware version reading at probe time
+- gpio, watchdog: use regmap_read()/regmap_write() via dev_get_regmap()
+- include: replace aaeon_mcu_i2c_xfer() declaration with AAEON_MCU_REG() macro
+- dt-bindings: remove unused label from example node
+- Link to v3: https://lore.kernel.org/r/20260203-dev-b4-aaeon-mcu-driver-v3-0-0a19432076ac@bootlin.com
+
+Changes in v3:
+- Renamed SRG-IMX8PL to SRG-IMX8P
+- dt-bindings: add gpio-controller properties as required
+- mfd: move struct aaeon_mcu_dev from header to .c file (private)
+- mfd: use guard(mutex) and devm_mutex_init() for cleanup
+- mfd: firmware version log changed to dev_dbg()
+- mfd: add select MFD_CORE to Kconfig
+- Kconfig: add || COMPILE_TEST to all three drivers
+- watchdog: add comments explaining hardware timeout and WDOG_HW_RUNNING
+- watchdog: remove unused platform_set_drvdata()
+- watchdog: add a function to query the status
+- Link to v2: https://lore.kernel.org/r/20260123-dev-b4-aaeon-mcu-driver-v2-0-9f4c00bfb5cb@bootlin.com
+
+Changes in v2:
+- Fold GPIO and watchdog bindings into MFD binding
+- Drop OF_GPIO dependency in GPIO Kconfig
+- Use __set_bit/__clear_bit/__assign_bit instead of atomic variants
+- Various driver cleanups and improvements
+- Link to v1: https://lore.kernel.org/r/20251212-dev-b4-aaeon-mcu-driver-v1-0-6bd65bc8ef12@bootlin.com
+
+---
+Thomas Perrot (Schneider Electric) (5):
+      dt-bindings: vendor-prefixes: Add AAEON vendor prefix
+      dt-bindings: mfd: Add AAEON embedded controller
+      mfd: aaeon: Add SRG-IMX8P MCU driver
+      gpio: aaeon: Add GPIO driver for SRG-IMX8P MCU
+      watchdog: aaeon: Add watchdog driver for SRG-IMX8P MCU
+
+ .../bindings/mfd/aaeon,srg-imx8p-mcu.yaml          |  73 +++++++
+ .../devicetree/bindings/vendor-prefixes.yaml       |   2 +
+ Documentation/watchdog/watchdog-parameters.rst     |   8 +
+ MAINTAINERS                                        |  10 +
+ drivers/gpio/Kconfig                               |   9 +
+ drivers/gpio/Makefile                              |   1 +
+ drivers/gpio/gpio-aaeon-mcu.c                      | 235 +++++++++++++++++++++
+ drivers/mfd/Kconfig                                |  11 +
+ drivers/mfd/Makefile                               |   1 +
+ drivers/mfd/aaeon-mcu.c                            | 227 ++++++++++++++++++++
+ drivers/watchdog/Kconfig                           |  11 +
+ drivers/watchdog/Makefile                          |   1 +
+ drivers/watchdog/aaeon_mcu_wdt.c                   | 174 +++++++++++++++
+ include/linux/mfd/aaeon-mcu.h                      |  46 ++++
+ 14 files changed, 809 insertions(+)
+---
+base-commit: aebb7274476403040d582c61478df8f4a7bf9cd3
+change-id: 20251211-dev-b4-aaeon-mcu-driver-e0e89ebf4afb
 
 Best regards,
-Ming
+-- 
+Thomas Perrot (Schneider Electric) <thomas.perrot@bootlin.com>
+
