@@ -1,57 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795203506;
-	b=Mie6U8njKpDOEvp71bZVrCufVCA/Zq0RoCus0GZsQMQGogrVEjcVPJ10OdXnJkfb79aj
-	 VZjUUAkS2FrVnAqXNJ1YQN5J/zmZq3hshBpPwJ95IIiob7vzTk/vQNEjAndkediUHocL+
-	 zC0COcoU52qn9W/ds6qP4U8Dx6Odr/SX4YNMQNOT7cMLvhyQP8ez3iThZkyRzu+svOqo1
-	 k8FrQaQCtXVj1/AJdHhBgyUuznb3lTp/fT2TocJ4VCvrmKNa15Nyo0PoVUcKwXDDqBx//
-	 5m1l2iGfqWOqtnRs9sOKxm8JA5bgTkHhR5CY06VNnRurgRIIMe36Y8EpihIon22cJZg==
+	t=1795204060;
+	b=ikKzVyz1qrJLswCvJ+SOQYIvK6ShT/IkPidb9j4CYdzRl7Ph/GqR+bpjEZS4XdQupvNE
+	 6EvHbViiJngdKN50YeRimZnqwuceZpG6YJNXD1KXBrh9L7jy0zL7T1GHgDGbE2nPejGOw
+	 fLlIkcQjqi/g0zBUUvEZ6uw/KbfZAC05KEysFfWkj9nj0vviQ/OemMjnuNrIhoqcGxQSM
+	 bAFhsPy5kM+N73xnC+nnWW3w/GfyVkfr54Qq//NxfFsltRJ9eolw19B3m2kypnQT7uvqS
+	 W/uRbC1b0/ho87wUVKtSwAr48N4EwSUqHUnpeCC/ycFtVOJKtgztdXiRNiZwVgMNpXw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795203506;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795204060;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=BNd/cbS+QEmMiqM4U/E620YfNOWBNBsrFLbzL2Qo/4g=;
-	b=lvvMsZAJiBgiqNdQ1+1G9JkYDYV4kVGEnNfiG9S6cEZdXzq38RHGgjdkYZnfn1tVOLaP
-	 WA2pFWiWrAi0UpBU5och15TkqmiYwpkqVf8VcMD8rqP6mp2MJKiGAEfZvSacPlexmMm7V
-	 eNfC1G32L85cNgSOYFW3E2SXc57cOBNX3mY1nK3LxBto4vHPPt/FYgV137AIlrFcrbklG
-	 xHXzxIEyDtYs9yvFQXAoVDpsfRmxidATg6jn4iy6M5RQi8mJ+em29KOjFN/9cURFRWQsH
-	 pl95ecGPUuxgxTh4YN3jiomlWhQNseMe4i80mOncH/B4+n2Kxt+Xff67sYVBggSETxw==
+	bh=BPU+sIJxFAGZqhFhvfwbfXA2aJ5mB1U1Q3bQoAW0xC8=;
+	b=LWYkPRUs3Qn7fWUIazm9DWn8KipcNFeEH3JV9bKkVNW8kYUGhMNk+GyKB4NCeUU6nWOu
+	 QhYcUKOwVNF8kcdLYPC7nw9QX5emPtM09ZODF+ZVc5e5mWPIsy8DGqQKTf9d776TKOiJS
+	 rIGswir6PmH2xwyBZiRDCcDQnhkyIJlaphZXrZN0ZpqeJGH2DDsco+VDV1GK52CjBFUKV
+	 fzdCV9jkEKSV4AMS2phphGWbsQ//NN0jKUtg46OND/lZDqH289wHPEGexN7TxYRuFGMOc
+	 /bMVOdAJQHsAOUbJxsoEl1Vq13BK5df3euPpzH0f5FgViGuJYoFsQEZrLZfZPIsEtOg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QlXmtIOy;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FF6CawEa;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5081C606A6E4;
-	Fri, 20 Nov 2026 19:38:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D7A560A2607;
+	Fri, 20 Nov 2026 19:47:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QlXmtIOy
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 09B2C1F000C4;
-	Fri, 20 Nov 2026 19:38:24 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FF6CawEa
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 33AB61F000C4;
+	Fri, 20 Nov 2026 19:47:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795203505;
-	bh=BNd/cbS+QEmMiqM4U/E620YfNOWBNBsrFLbzL2Qo/4g=;
+	s=k20260515; t=1795204059;
+	bh=BPU+sIJxFAGZqhFhvfwbfXA2aJ5mB1U1Q3bQoAW0xC8=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=QlXmtIOy/kW1txFTmB2O/gpGBMpnjkv7ItDSFqvRdvNWy+q5/GcmUPFsT5l5AK+gq
-	 TgtFF07bbeoSEZ1wGhXrh3y3rytQEmFEkgkPurO9eTgKBfgODn4ygo1zCq3mjXHqqe
-	 YTxtFOu3FpVYlHiq6cDUXTys2krBLNJyy2FM0O7z8N7loBnQTAyNmpXzD7P+MK4XPJ
-	 9J7S0c+KrOGuei7OsInbvBTMNhSLETpjcYQaRWyv+VqE2h36go8CjxfeUG+e70tXt9
-	 EMnyyLyzvUFUTyB93IBN3wCEP1O92ytWVIOkHyOpkNKM74WgIs6s9xzHEstLNxlOEJ
-	 uRzQjDh3YfO6w==
-Message-ID: <sashiko-outbox-225934@kernel.org>
+	b=FF6CawEacrPS6jI3JqI+4HAB4E/Kfeqa1WzsAbPiHFRqxXwlH7IMa+eV3xQ0p6SsT
+	 /e1qVv4Z5uUwINIp6cpc7R3iJLH8gKXm+zj0UAXjXwSPFldMi+PoeqAstWbV4c1gXM
+	 C8GX1Sx8lgWoe5YsEgedjGaCMcnGRVdWC6kftpfpxdM9y7AgUfPAtP4dF2Kak4TLnl
+	 5CIL4WglNDmgZGnZtj8+7DCzIfIRenN2o6gu0gCbpeAJEK7BC2s8Rn3ZBLCle77jUp
+	 jb5pCsy8oIc36nCQU4k+ygT0g1rZxuIa1C29Z03+pPC0YTM03Uv+DFruIEmKL1fGlJ
+	 47VDpH+l5371Q==
+Message-ID: <sashiko-outbox-225958@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH 1/6] dt-bindings: soc: zte: Document zx297520v3 socsys
- controller
+Subject: Re: [PATCH 4/6] phy: zte: Add a zx29 USB PHY driver.
 Reply-To: sashiko-reviews@lists.linux.dev
 To: =?utf-8?b?U3RlZmFuIETDtnNpbmdlcg==?= <stefandoesinger@gmail.com>
 Cc: devicetree@vger.kernel.org, mfd@lists.linux.dev, linux-phy@lists.infradead.org, robh@kernel.org, conor+dt@kernel.org, vkoul@kernel.org, neil.armstrong@linaro.org, olteanv@gmail.com, lee@kernel.org
-In-Reply-To: <20261120-zx29usb-v1-1-b0433258e51b@gmail.com>
+In-Reply-To: <20261120-zx29usb-v1-4-b0433258e51b@gmail.com>
 References: <20261120-zx29usb-v1-0-b0433258e51b@gmail.com>
- <20261120-zx29usb-v1-1-b0433258e51b@gmail.com>
+ <20261120-zx29usb-v1-4-b0433258e51b@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Fri, 20 Nov 2026 19:38:24 +0000
+Date: Fri, 20 Nov 2026 19:47:38 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -63,37 +62,43 @@ Precedence: list
 
 Thank you for your contribution! Sashiko AI review found 1 potential
 issue to consider:
-- [Low] dt-bindings: soc: zte: missing MAINTAINERS entry for power
-  binding header
+- [Medium] phy: zte: OF node refcount leak in phy_zx29_probe() via wrong
+  helper
 --
 
-commit 4865a5ea2f1de7886db40030f6e9d98eb90cad89
+commit 15ae50d59e0e993615e70ce4fb99a2131fc91c46
 Author: Stefan D=C3=B6singer <stefandoesinger@gmail.com>
 
-dt-bindings: soc: zte: Document zx297520v3 socsys controller
+phy: zte: Add a zx29 USB PHY driver.
 
-This commit adds the Device Tree binding schema, power domain header, and
-Ethernet PHY reset constant for the ZTE zx297520v3 socsys miscellaneous
-system controller.
+This commit adds a PHY driver for the ZTE zx29 USB and HSIC PHYs to
+handle reset sequencing and ready status polling in the topcrm syscon.
 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 9b6a2da28aa5a..ab8797b8d0a5a 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -4033,6 +4033,7 @@ F:	Documentation/devicetree/bindings/arm/zte.yaml
->  F:	Documentation/devicetree/bindings/clock/zte,zx297520v3-lspcrm.yaml
->  F:	Documentation/devicetree/bindings/clock/zte,zx297520v3-matrixcrm.yaml
->  F:	Documentation/devicetree/bindings/clock/zte,zx297520v3-topcrm.yaml
-> +F:	Documentation/devicetree/bindings/soc/zte/zte,zx297520v3-socsys.yaml
->  F:	arch/arm/boot/dts/zte/
->  F:	arch/arm/mach-zte/
->  F:	drivers/clk/zte/
+> diff --git a/drivers/phy/phy-zx29-usb.c b/drivers/phy/phy-zx29-usb.c
+> new file mode 100644
+> index 0000000000000..8dfbcb468c263
+> --- /dev/null
+> +++ b/drivers/phy/phy-zx29-usb.c
+[ ... ]
+> +static int phy_zx29_probe(struct platform_device *pdev)
+> +{
+> +	struct phy_provider *phy_provider;
+> +	struct device *dev =3D &pdev->dev;
+> +	struct phy_zx29_drv_priv *priv;
+> +	unsigned int i;
+> +
+> +	device_set_of_node_from_dev(dev, dev->parent);
 
-[Severity: Low]
-Should this section also list the new
-include/dt-bindings/power/zte,zx297520v3-socsys.h header added in this
-patch alongside the existing include/dt-bindings/* entries?
+[Severity: Medium]
+Should this call platform_device_set_of_node_from_dev(pdev, dev->parent)
+instead of device_set_of_node_from_dev()?
+
+device_set_of_node_from_dev() takes a reference on dev->parent->of_node
+and sets dev->of_node, but leaves pdev->dev.fwnode NULL.  When the
+platform device is released, platform_device_release() drops
+pa->pdev.dev.fwnode rather than dev->of_node, leaking the OF node
+reference.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261120-zx29usb-v1=
--0-b0433258e51b@gmail.com?part=3D1
+-0-b0433258e51b@gmail.com?part=3D4
