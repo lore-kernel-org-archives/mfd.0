@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795272804;
-	b=h7dp2laLUe7+H5Kiuo6eD153EGp87lQOTmKuvVRA5+o13ErycN2ZPxq9mIAkTkKrZX2V
-	 +3wXsEgNLhIxl0qhEhHjnLJWPE7NWqd7cTf3T+9ZrB12ZqgzB6jpJB4mcfkB8HZ9/TBHN
-	 /i7qpkYCE6oasG4Uxigec9CILnEJ/IFFK3d0SKbGiHmEXbnAbqC3F7HUkuuOQY5KNjKnp
-	 RTmzU9et4Dt902D+PGiuuoU1F2wV8tFuuvd2tkZ7mV2dQ+bHg4cs9MOEmKp+gnEL2OQOk
-	 MKGiYStsnacxTIm8zbKvFPgLpswMplJv4L+eV53mUARV7viWMBuB/jq4fsznIADcr+Q==
+	t=1795272805;
+	b=u4D34ZgH6djEHlNYMTNemf7mf8eFutEzfjg1jPvubzzMSIpDrU6gJI9fzh08njdIHboO
+	 7a9tpFqKc6kMU9C+quS1x+i3iBvPm4yxQ19dltpMtApNxx/ExCeRKIm5iakHT+Vh0e6YH
+	 k5X6eCNHrKXTmltJ/qNWxvdDmv8LnBltB1+v8/DxlgOQvNqrYgZweqkB3RPFv8IPI4ZTR
+	 CAsoypk8kiP0NeOfkw+bgRnH2HTafMm4p6RolAZmw2H/Dm03p2tXvl6DtL2k8UkwU4/Xc
+	 cIl88J/JZIVZlhCV7JeOGzNiyPBlsCrbt/RVQq0pC5bf3Eiu8+vv3YllkQ21c2QV80A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795272804;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795272805;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=XzYskYCDVCZWe4ZMqduiJUHlapP9vP/WS3GN+hiPxNQ=;
-	b=4FFfZcsne9xvEINrOtYNaLO2rpPX28zTWfkLx5FxslQXIhA6OXX1nAVExGHCFD7cIxG2
-	 r1DZj0iziortzMGHWCdKMiP8usADDgg13iIncvspuzRA+y+KajGGNJdy12zMjVCJZNaVi
-	 1dFMWkd7DnK5vj+czfLJv301//VLkevlb4v2blG1tkDxo6N3HS2pq55qR7H7qKXy2JtBs
-	 ebXxNF7j4YwOCoy/mY+JzyFjR2Z79bXLY+w45qI5W/pDtJB3frr6sQrtvWvnGfzP1UPq7
-	 AK5zbfpnA1bY7wwKKcWdiQv10ib2grX7p1PT9PX7eFV0knjMD3MztfASKrXEf/o9NIQ==
+	bh=t8YKsvSsRYdpEtvMqIFjw9Tbp35P4YugTmyFetEXrHs=;
+	b=Jnk5h/S87uKv8QKT1wKzPAdg4LmY5S7PDzkofpC5usOJLXgaXLUCB5GdnghmEcKkjPTG
+	 DsEQfrdBzdx3cEMQj1OQXnMs54XSnZqoHQ6lhVxLDFrCkEm/PX35jj+XhpaVqo8JIXz8N
+	 MiVfPLPcHpopgdg8EBrLtx+B5pdoF99mkkemrGtcYC3hhZIB0/PK/aL4uXbkXyo1+2fA+
+	 sN0DMUovIeYPd1ifY9a56HGgxJrlNiT9MR2ERi1b4yRO59SG8qT4VESa5gxbvPcXW9mGg
+	 aqKSoP9cltaNPN19WrvYaePkMIOha72xx/HdTacpl5oIrmcQxfF4F+uiLmusUz82ZCg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Pkw+Fubr;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=nMsSya1j;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9FB78606A320;
-	Sat, 21 Nov 2026 14:53:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33969606A332;
+	Sat, 21 Nov 2026 14:53:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Pkw+Fubr
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC2101F000C4;
-	Sat, 21 Nov 2026 14:53:23 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=nMsSya1j
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F9681F000C0;
+	Sat, 21 Nov 2026 14:53:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
 	s=k20260515; t=1795272804;
-	bh=XzYskYCDVCZWe4ZMqduiJUHlapP9vP/WS3GN+hiPxNQ=;
+	bh=t8YKsvSsRYdpEtvMqIFjw9Tbp35P4YugTmyFetEXrHs=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=Pkw+FubrEuWKlNMojIGVY1XI7Q5ZjR5pM6Hf0UpNOpIsuQTnNztPOsrW+IcnJ38rN
-	 wKHmFw8eEhDeA8dFlIYCoeKwJfZJ8inHMktg+GMmFyNZvA28RgeCFjoyKJxMixB6n1
-	 1cvm6gUT4bj+HE5cm9TvVBCSis/wdATtapI+gAcNabnG4HXNDxZJUa9oadunQHnAhy
-	 1f7eIWp2i3yGLzh3WSUhi+AYTDhzz1vyq/hYp6ErAbNKmo/uVzpY4fOMD8rFMYslvN
-	 z0QSXKpk5ft8k44uUeMh/0CaRX3xfDB6CYDCt8WDHNvyiR3R0DxWsKlTXG7/EgSA2B
-	 /wN7JrZrWtxDg==
-Message-ID: <sashiko-outbox-227106@kernel.org>
+	b=nMsSya1jjGSjOyrEAOyqkwH99yKMzdsDdtk8G3q0nm6OPla2mpBfJOWr80OPpCU2G
+	 UHFHuYFFOELEFL24xt7hVQ5oxWBkw44QpMIbF+Z8VuEUd70p2oTrAg12RGr19TaKtF
+	 RHg9+XEjvnuaJa9aYLejfMdt0cI+gUHtj/ro1B8U+qIewCt3xUD4isbR5pNkt3F6J9
+	 PhO8G41O6+cYwdebakjGQaqu1iyn9DIepoDMe058npQRC5rWPKADboTyrP22zL7rkI
+	 yd8vGHG6LmsafbXcLvPK9Wd9hLgAgSJuYPXbxwBomIjno65Krb9a22p/kwcv76LZ/t
+	 E2zPuY+f/tMlA==
+Message-ID: <sashiko-outbox-227107@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH net-next v5 2/9] dt-bindings: net: Add SoC-e SWIP MDIO
- controller
+Subject: Re: [PATCH net-next v5 3/9] dt-bindings: net: dsa: Add SoC-e SWIP
+ switch function
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Vasilij Strassheim" <v.strassheim@linutronix.de>
 Cc: devicetree@vger.kernel.org, mfd@lists.linux.dev, robh@kernel.org, conor+dt@kernel.org, lee@kernel.org
-In-Reply-To: <20261120-devel-vstrassheim-soce-dsa-ml-v5-2-5de9225715e6@linutronix.de>
+In-Reply-To: <20261120-devel-vstrassheim-soce-dsa-ml-v5-3-5de9225715e6@linutronix.de>
 References: <20261120-devel-vstrassheim-soce-dsa-ml-v5-0-5de9225715e6@linutronix.de>
- <20261120-devel-vstrassheim-soce-dsa-ml-v5-2-5de9225715e6@linutronix.de>
+ <20261120-devel-vstrassheim-soce-dsa-ml-v5-3-5de9225715e6@linutronix.de>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Sat, 21 Nov 2026 14:53:23 +0000
+Date: Sat, 21 Nov 2026 14:53:24 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -63,92 +63,62 @@ Precedence: list
 
 Thank you for your contribution! Sashiko AI review found 1 potential
 issue to consider:
-- [Medium] dt-bindings: net: soce,swip-mdio splits contiguous register
-  block and 32-bit control register
+- [Low] dt-bindings: net: dsa: soce,swip-switch: port@ nodes bypass port
+  constraints
 --
 
-commit 9edcf12a958c9e727ec0bdb9d997f3a5d2655e08
+commit 9b06527d85dea0f657bab899811b3c6f614a7cac
 Author: Vasilij Strassheim <v.strassheim@linutronix.de>
 
-dt-bindings: net: Add SoC-e SWIP MDIO controller
+dt-bindings: net: dsa: Add SoC-e SWIP switch function
 
-This commit adds a Device Tree binding schema for the MDIO controller
-integrated into SoC-e SWIP Ethernet switch IP cores.
+This commit adds a Devicetree binding schema for the Ethernet switch
+function integrated into SoC-e SWIP FPGA cores.
 
-> diff --git a/Documentation/devicetree/bindings/net/soce,swip-mdio.yaml b/=
-Documentation/devicetree/bindings/net/soce,swip-mdio.yaml
+> diff --git a/Documentation/devicetree/bindings/net/dsa/soce,swip-switch.y=
+aml b/Documentation/devicetree/bindings/net/dsa/soce,swip-switch.yaml
 > new file mode 100644
-> index 0000000000000..7a0b8bd3ab71b
+> index 0000000000000..55232c0f3675e
 > --- /dev/null
-> +++ b/Documentation/devicetree/bindings/net/soce,swip-mdio.yaml
-> @@ -0,0 +1,47 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/net/soce,swip-mdio.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +++ b/Documentation/devicetree/bindings/net/dsa/soce,swip-switch.yaml
+> @@ -0,0 +1,101 @@
+[ ... ]
+> +$ref: dsa.yaml#/$defs/ethernet-ports
+[ ... ]
+> +  ethernet-ports:
+> +    type: object
+> +    patternProperties:
+> +      '^ethernet-port@[0-9a-f]+$':
+> +        type: object
 > +
-> +title: SoC-e SWIP FPGA MDIO controller
+> +        properties:
+> +          reg:
+> +            maximum: 30
+> +            description: Switch port index, from 0 through 30.
 > +
-> +maintainers:
-> +  - Vasilij Strassheim <v.strassheim@linutronix.de>
+> +          phy-mode:
+> +            enum:
+> +              - mii
+> +              - gmii
+> +              - rmii
+> +              - rgmii
+> +              - rgmii-id
+> +              - rgmii-rxid
+> +              - rgmii-txid
 > +
-> +description:
-> +  MDIO controller integrated into the SoC-e Switch IP (SWIP) FPGA core.
-> +  External MDIO buses are selected through a sibling MMIO MDIO mux.
-> +
-> +$ref: mdio.yaml#
-> +
-> +properties:
-> +  compatible:
-> +    const: soce,swip-mdio
-> +
-> +  reg:
-> +    items:
-> +      - description: MDIO parameter, write data, and read data registers
-> +      - description: Lower 16-bit half of the MDIO transaction control r=
-egister
-> +
-> +  reg-names:
-> +    items:
-> +      - const: data
-> +      - const: control
-> +
-> +required:
-> +  - compatible
-> +  - reg
-> +  - reg-names
-> +
-> +unevaluatedProperties: false
-> +
-> +examples:
-> +  - |
-> +    mdio@204 {
-> +        compatible =3D "soce,swip-mdio";
-> +        reg =3D <0x204 0xc>, <0x200 0x2>;
-> +        reg-names =3D "data", "control";
-> +        #address-cells =3D <1>;
-> +        #size-cells =3D <0>;
-> +    };
+> +        required:
+> +          - reg
+> +          - phy-mode
 
-[Severity: Medium]
-As reported by Andrew Lunn on v3 [1], should this binding describe the
-controller's contiguous 16-byte register block at <0x200 0x10> instead of
-splitting it into out-of-order sub-ranges (<0x204 0xc> and <0x200 0x2>) and
-slicing the 32-bit control register at 0x200 across two DT nodes?
+[Severity: Low]
+Should this pattern be ^(ethernet-)?port@[0-9a-f]+$?
 
-In hardware, the 32-bit control register at 0x200 holds both the MDIO
-transaction control bits and the external bus selector bits, followed by the
-three data registers at 0x204..0x20f.  Partitioning that single 32-bit
-register into 16-bit halves so a sibling mdio-mux-mmioreg node can claim
-<0x202 0x2> encodes Linux driver details, little-endian byte offsets, 16-bit
-MMIO access assumptions, and an artificial mdio@204 unit address into the DT
-binding ABI.  Describing reg =3D <0x200 0x10> on mdio@200 and modeling the
-integrated bus mux directly in the controller binding would match the
-hardware layout.
-
-[1] https://lore.kernel.org/r/e5aa5cd8-e805-47d3-a105-07bf1b9eb9b8@lunn.ch
+dsa.yaml#/$defs/ethernet-ports matches both port@<n> and
+ethernet-port@<n> child nodes and evaluates them against dsa-port.yaml#,
+so a port@<n> child node under ethernet-ports will pass
+unevaluatedProperties: false while bypassing the reg maximum and
+phy-mode constraints defined here.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261120-devel-vstr=
-assheim-soce-dsa-ml-v5-0-5de9225715e6@linutronix.de?part=3D2
+assheim-soce-dsa-ml-v5-0-5de9225715e6@linutronix.de?part=3D3
