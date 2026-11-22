@@ -1,51 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=46.101.248.176
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795347353;
-	b=TO66V9gyBgiJLmsYTeHu2Idzjc24cdJI4LFhaT22ACPZX4Dt20NHYiHpLMBmKeRUzdx3
-	 4aswvr53xZDHtVuvuWcm2ROg3MNlfL5HihrCL2v4L6uWJv5ESNBpjyLC8e8sfUiotpozV
-	 PCdDHpUv45Ga0rwQ862H66d8Qpit6SMqM1RxHsqs8XxOPoyquQQocb/dmKwqJEpuQYDBZ
-	 Zhdon8niiXaNNpcqQPi9kViNvhzYLSpUuxvdjXssVqZMyvo9scvBUoXYZxXNQ1l87SAiD
-	 OrO63r/DSyZ9Lk0tUR9RsaJ7Q6sNOtcTUf3tXseV6HvHJFBRH+/1NPqgXQOjIpV6s2w==
+	t=1795347821;
+	b=XzZNWj9NQSof3BNBWiWuT/AuskUKGdKEYAJeJBhEufMCKqKMGQ2jKQ8ij/4jvoICbsSd
+	 dB0/rg03/VO7mOwpW2nOXNretOok/b0xZO3ldKInPMCEo/4O63IwMEXXioyB8Ymh4T7ia
+	 Cvv/rWoMIjKBEvDj9K21MhmTFolf6sD7b3WJO4FkZGLnJfK0UR5ZpQ3X4O3i2V2JIvdCy
+	 VvWMu65rpKi6GJbTtnnttnZoQ2NTewd2+5t10kqO6rLbHmZtb4+a/3clR3Y5uPg1bh4yn
+	 Gee4ySbM5Z5Q15Pcp2CTNFyrtb+3U0g3UJdlLYTsqMYpifWqX1fGHVqXFADtTBYvSCA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795347353;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
-	bh=KhH3/ntoyorUoRnbCabrr5P7SSAKGYQSV0N3Qci+I/k=;
-	b=Iw9oghrZccebOwZ/DrFsziN1vbA6/iq58vNbw070Lpc09z3fkKo3MKk/AkWCjVUcplj8
-	 IEi1vFW1dqZM2jJRgRClDxQYsYB5plvmMArYjnj/w8c69N+tWmHKS9CBPtcgV7P5N+ABS
-	 ajJ2C5QGMjqloHavBxARc67HJrd3ghu5OSw3tybjKhrJICeZ7Y1ddCge5y07smU/qXdFP
-	 4/Ewf9RJqAo8fFCes0x7kkhQbd/8giobu0I5DzglyGSh+kOBNTnaMj07A0nkNM7ONQOf/
-	 oCreYfY+w1z8I7kepl0hkKnuZXimLLBfeteCDn0IAcCw22na1LioYZCUSpjb/w6ZcNA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795347821;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=MsLuA1DGhFpQ+I60qwuzjZIo+eNGuqgYrm6Zk2UNo2g=;
+	b=m3lUGyoxD1owxGBYSD+2+7o2jBTjtOK/WyY5n4P6CpCk3Qh2NF6+UusLcGKWJ0pIXb5X
+	 +0Wn0+iwbnDjlkB+GsSrUvwVNq2iSHkDt5VlAfQsw4xVMje+X74u71NziV0Hv6P+OwrXQ
+	 r78tI0EBhQ+ztRXNHPF6IEJ/vVIQ/wyxSU6ba/S88GoVvdBJQbGzBUTVeuePHx60iTpG9
+	 dL3xfVkLL813x0xJTO7r0tEtZk3FEhM7a8FBEf3zL+5lafI8RsYlFomqb0rLtWwOBN0YC
+	 QgJJL09+rHRzIMA1sKHODYe3rYWfHSR0+UPm1hedUaBdufZaLCIvA7Z9lSXZq36/hpw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.zgclab.edu.cn;
-	spf=pass smtp.mailfrom=mail.zgclab.edu.cn;
-	dkim=pass header.d=mail.zgclab.edu.cn header.i=@mail.zgclab.edu.cn header.a=rsa-sha256 header.s=dkim header.b=g62POGcG;
-	arc=none smtp.remote-ip=46.101.248.176
-Received: from zg8tndyumtaxlji0oc4xnzya.icoremail.net (zg8tndyumtaxlji0oc4xnzya.icoremail.net [46.101.248.176])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 00FD5606A320
-	for <mfd@lists.linux.dev>; Sun, 22 Nov 2026 11:35:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 00FD5606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.zgclab.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.zgclab.edu.cn
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gu46lNPC;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB94C606A320
+	for <mfd@lists.linux.dev>; Sun, 22 Nov 2026 11:43:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=mail.zgclab.edu.cn header.i=@mail.zgclab.edu.cn header.a=rsa-sha256 header.s=dkim header.b=g62POGcG
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.zgclab.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
-	bh=KhH3/ntoyorUoRnbCabrr5P7SSAKGYQSV0N3Qci+I/k=; b=g62POGcGOfhGN
-	Hf3KQvZxTxe1WhEuupyeUHzQ/reQBRdgqWayQ9Nz1mUT9EMsVgc8kFs7OFK6rMWp
-	xYFdbTZ5h6nw7aq1eMFE9ZwXrybMeiwYRYsZoqLZdUc1rvv36fwUsMIvn6Da6Y+c
-	lBGl0wy4Kg7jUQlqdxva1I8ib2gl90=
-Received: from stmpe_v2_send.eml (unknown [58.206.202.11])
-	by web1 (Coremail) with SMTP id yAQGZQDXRjeM0wJr_JCqAg--.53142S2;
-	Sun, 22 Nov 2026 19:35:40 +0800 (CST)
-From: Haoran Wang <wanghr2026@mail.zgclab.edu.cn>
-To: Lee Jones <lee@kernel.org>
-Cc: Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, mfd@lists.linux.dev, linux-stm32@st-md-mailman.stormreply.com, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v2] mfd: stmpe: Disable regulators on probe failure
-Date: Sun, 22 Nov 2026 19:35:30 +0800
-Message-ID: <179534733065.15652.3659794654405986240@mail.zgclab.edu.cn>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gu46lNPC
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4C32C1F000C0;
+	Sun, 22 Nov 2026 11:43:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795347821;
+	bh=MsLuA1DGhFpQ+I60qwuzjZIo+eNGuqgYrm6Zk2UNo2g=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=gu46lNPCsOkYS6wibdIAbOm7OamKREKgjbSgrhRVDLjAHGDUvx59DKKmYtCWX9g7i
+	 A36JvX2n4+PGgac3TmHNp/PzXsZj0keVbAZD8xCR3zPypqR5Ak5BpsbUjOQJdfCzDx
+	 9iMXIJHjvv+gklMeUVfxYgD+GpvHoKmnYGkPC6ttzrq6bOxbQXaHeh6gJZa4he/rLN
+	 H34rvUGCo7D04t936WuxYGKgFvhjiAfEsxg24zidbAMr2ju7Gqmv4bh2EdjRQsmPeX
+	 chOYmPaAjsyilX2PUdeXgx/Ya2O2vxHdRDRdmvw5OTLY3u1us/QPOtEEj76wZlh1js
+	 LijQGuRfGrRgA==
+Message-ID: <sashiko-outbox-227908@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v2] mfd: stmpe: Disable regulators on probe failure
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Haoran Wang" <wanghr2026@mail.zgclab.edu.cn>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <179534733065.15652.3659794654405986240@mail.zgclab.edu.cn>
+References: <179534733065.15652.3659794654405986240@mail.zgclab.edu.cn>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Sun, 22 Nov 2026 11:43:40 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -54,112 +58,41 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:yAQGZQDXRjeM0wJr_JCqAg--.53142S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxGw1rGF1kGFyDZr47Zw4kCrg_yoW5Ww1kpF
-	WDXFyFkr4UWFW09r4DAr47Xrn3WrW8trWxGrykW343Xr1jvF9FqFykCr1Yv3Z5Xrn7JanI
-	yF9rXr18uF17XFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUU9Fb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVW8JVWxJwA2z4x0Y4vEx4
-	A2jsIEc7CjxVAFwI0_Gr0_Gr1UM2vYz4IE04k24VAvwVAKI4IrM2AIxVAIcxkEcVAq07x2
-	0xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18Mc
-	Ij6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc7Cj
-	xVAaw2AFwI0_JF0_Jw1lc2xSY4AK67AK6r4kMxAIw28IcxkI7VAKI48JMxC20s026xCaFV
-	Cjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWl
-	x4CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r
-	1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_
-	JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcS
-	sGvfC2KfnxnUUI43ZEXa7IU5GztUUUUUU==
-X-CM-SenderInfo: pzdqwxbusqjlo62juzldeovvfxof0/1tbiAQYTD2sCG5iHcQAAsH
 
-The VCC and VIO supplies are enabled in stmpe_probe() but were never
-disabled if probing failed later, leaking the enabled regulators.
+Thank you for your contribution! Sashiko AI review found 1 potential
+issue to consider:
+- [Low] mfd: stmpe: missing kernel-doc entries for vcc_enabled and
+  vio_enabled
+--
 
-Register a devm action to disable the supplies, and track whether each
-supply was enabled in dedicated flags instead of consulting
-regulator_is_enabled(), which reports the hardware state rather than
-whether this consumer enabled it.  Drop the manual regulator_disable()
-calls from stmpe_remove() so the supplies are disabled exactly once via
-the devres action.
+commit c925d035bc9603ef171daf8a11f3677bd18f43b1
+Author: Haoran Wang <wanghr2026@mail.zgclab.edu.cn>
 
-Fixes: 9c9e321455fb ("mfd: stmpe: add optional regulators")
-Signed-off-by: Haoran Wang <wanghr2026@mail.zgclab.edu.cn>
----
- drivers/mfd/stmpe.c       | 24 +++++++++++++++++++-----
- include/linux/mfd/stmpe.h |  2 ++
- 2 files changed, 21 insertions(+), 5 deletions(-)
+mfd: stmpe: Disable regulators on probe failure
 
-diff --git a/drivers/mfd/stmpe.c b/drivers/mfd/stmpe.c
-index fd51ba74275c..fb30b8a4fbac 100644
---- a/drivers/mfd/stmpe.c
-+++ b/drivers/mfd/stmpe.c
-@@ -1362,6 +1362,16 @@ static void stmpe_of_probe(struct stmpe_platform_data *pdata,
- 	}
- }
- 
-+static void stmpe_disable_regulators(void *data)
-+{
-+	struct stmpe *stmpe = data;
-+
-+	if (stmpe->vio_enabled)
-+		regulator_disable(stmpe->vio);
-+	if (stmpe->vcc_enabled)
-+		regulator_disable(stmpe->vcc);
-+}
-+
- /* Called from client specific probe routines */
- int stmpe_probe(struct stmpe_client_info *ci, enum stmpe_partnum partnum)
- {
-@@ -1410,13 +1420,22 @@ int stmpe_probe(struct stmpe_client_info *ci, enum stmpe_partnum partnum)
- 		ret = regulator_enable(stmpe->vcc);
- 		if (ret)
- 			dev_warn(ci->dev, "failed to enable VCC supply\n");
-+		else
-+			stmpe->vcc_enabled = true;
- 	}
- 	stmpe->vio = devm_regulator_get_optional(ci->dev, "vio");
- 	if (!IS_ERR(stmpe->vio)) {
- 		ret = regulator_enable(stmpe->vio);
- 		if (ret)
- 			dev_warn(ci->dev, "failed to enable VIO supply\n");
-+		else
-+			stmpe->vio_enabled = true;
- 	}
-+
-+	ret = devm_add_action_or_reset(ci->dev, stmpe_disable_regulators, stmpe);
-+	if (ret)
-+		return ret;
-+
- 	dev_set_drvdata(stmpe->dev, stmpe);
- 
- 	if (ci->init)
-@@ -1489,11 +1508,6 @@ void stmpe_remove(struct stmpe *stmpe)
- 	if (stmpe->domain)
- 		irq_domain_remove(stmpe->domain);
- 
--	if (!IS_ERR(stmpe->vio) && regulator_is_enabled(stmpe->vio))
--		regulator_disable(stmpe->vio);
--	if (!IS_ERR(stmpe->vcc) && regulator_is_enabled(stmpe->vcc))
--		regulator_disable(stmpe->vcc);
--
- 	__stmpe_disable(stmpe, STMPE_BLOCK_ADC);
- 
- 	mfd_remove_devices(stmpe->dev);
-diff --git a/include/linux/mfd/stmpe.h b/include/linux/mfd/stmpe.h
-index 87e29d561e22..eec5fc795014 100644
---- a/include/linux/mfd/stmpe.h
-+++ b/include/linux/mfd/stmpe.h
-@@ -122,6 +122,8 @@ struct stmpe_platform_data;
- struct stmpe {
- 	struct regulator *vcc;
- 	struct regulator *vio;
-+	bool vcc_enabled;
-+	bool vio_enabled;
- 	struct mutex lock;
- 	struct mutex irq_lock;
- 	struct device *dev;
+This commit registers a devres action to disable the VCC and VIO
+regulators on probe failure or device removal, tracking whether each
+supply was enabled via new boolean flags on struct stmpe.
 
+> diff --git a/include/linux/mfd/stmpe.h b/include/linux/mfd/stmpe.h
+> index 87e29d561e223..eec5fc7950145 100644
+> --- a/include/linux/mfd/stmpe.h
+> +++ b/include/linux/mfd/stmpe.h
+> @@ -122,6 +122,8 @@ struct stmpe_platform_data;
+>  struct stmpe {
+>  	struct regulator *vcc;
+>  	struct regulator *vio;
+> +	bool vcc_enabled;
+> +	bool vio_enabled;
+>  	struct mutex lock;
+>  	struct mutex irq_lock;
+>  	struct device *dev;
+
+[Severity: Low]
+struct stmpe has a kernel-doc comment block above it, so adding
+vcc_enabled and vio_enabled without @vcc_enabled and @vio_enabled entries
+triggers kernel-doc warnings under W=3D1 builds.
+
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/179534733065.15652.=
+3659794654405986240@mail.zgclab.edu.cn?part=3D1
