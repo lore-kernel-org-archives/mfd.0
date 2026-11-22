@@ -1,55 +1,60 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795347821;
-	b=XzZNWj9NQSof3BNBWiWuT/AuskUKGdKEYAJeJBhEufMCKqKMGQ2jKQ8ij/4jvoICbsSd
-	 dB0/rg03/VO7mOwpW2nOXNretOok/b0xZO3ldKInPMCEo/4O63IwMEXXioyB8Ymh4T7ia
-	 Cvv/rWoMIjKBEvDj9K21MhmTFolf6sD7b3WJO4FkZGLnJfK0UR5ZpQ3X4O3i2V2JIvdCy
-	 VvWMu65rpKi6GJbTtnnttnZoQ2NTewd2+5t10kqO6rLbHmZtb4+a/3clR3Y5uPg1bh4yn
-	 Gee4ySbM5Z5Q15Pcp2CTNFyrtb+3U0g3UJdlLYTsqMYpifWqX1fGHVqXFADtTBYvSCA==
+	t=1795355800;
+	b=P7n/rmTzYvVgdxeQoK23s2ijINki51R65bBgsuEQ1WSOLqvX31CwU1STx6RUXrCdbO0w
+	 UDtyPtpHIMds5ucQsNrn5grnXJjxg/y4bvgxYk4vNItJEUaT/BTqej/Y12AQPwk9AC7bp
+	 RkPuPbF5h4V1+qjXQsGXtv16IcbeMihGetw1+1PfWHjQ8CYDByWhb1BYd8Pa9KagxJ+CE
+	 krVAiGkeG4SL2mvT0lOXKBNPnkQO/051XXqfgplttOSoI+9w/NO1DRvufOp1YakxvX1fX
+	 lrBmme/jNoy/BDT924CJLQn7tJ5Bvl/SqLXBdR4X5HVChs6xchnU7ZkT8s6q2wCG4HA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795347821;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=MsLuA1DGhFpQ+I60qwuzjZIo+eNGuqgYrm6Zk2UNo2g=;
-	b=m3lUGyoxD1owxGBYSD+2+7o2jBTjtOK/WyY5n4P6CpCk3Qh2NF6+UusLcGKWJ0pIXb5X
-	 +0Wn0+iwbnDjlkB+GsSrUvwVNq2iSHkDt5VlAfQsw4xVMje+X74u71NziV0Hv6P+OwrXQ
-	 r78tI0EBhQ+ztRXNHPF6IEJ/vVIQ/wyxSU6ba/S88GoVvdBJQbGzBUTVeuePHx60iTpG9
-	 dL3xfVkLL813x0xJTO7r0tEtZk3FEhM7a8FBEf3zL+5lafI8RsYlFomqb0rLtWwOBN0YC
-	 QgJJL09+rHRzIMA1sKHODYe3rYWfHSR0+UPm1hedUaBdufZaLCIvA7Z9lSXZq36/hpw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795355800;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=G/WdTtQSROSLrn837YYgbig1TKg++uOCFXqqP6VdarQ=;
+	b=t/ziZ+98+ywzTO731E6mWF7+65zaERP35D3BF4CJRitTU48B6BhkbyvpC0fDNQbd6VYN
+	 JaNiR0zdfLU17VhZcKUWiuhlgRQacmDdzaIdWGmTa+UT3TtA3rPU+PJCjjVXvjZBW5T0+
+	 +Q0CAsFVT9Ct0QZuDG3zdXu6iwHELfHEwiEFUG1dc2IKD7DuF3AxZUQdDnDxvSjVAiUWP
+	 PyVx8y5KODYIv/SFU4AHq+69KZ6TRRfJ4nsx5a/db31RKh1Ey0oCMB0Nna/q/gP6XGNbG
+	 cCgvEhVhdbE2TCmzD7rFgwXHlRwMHL5NM/XgPjXHYmfDpba0t9hd0x/4fDkE/VHnjyw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gu46lNPC;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IlGhsWEl;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB94C606A320
-	for <mfd@lists.linux.dev>; Sun, 22 Nov 2026 11:43:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8606B606A320;
+	Sun, 22 Nov 2026 13:56:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gu46lNPC
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4C32C1F000C0;
-	Sun, 22 Nov 2026 11:43:41 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IlGhsWEl
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 076461F000CA;
+	Sun, 22 Nov 2026 13:56:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795347821;
-	bh=MsLuA1DGhFpQ+I60qwuzjZIo+eNGuqgYrm6Zk2UNo2g=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=gu46lNPCsOkYS6wibdIAbOm7OamKREKgjbSgrhRVDLjAHGDUvx59DKKmYtCWX9g7i
-	 A36JvX2n4+PGgac3TmHNp/PzXsZj0keVbAZD8xCR3zPypqR5Ak5BpsbUjOQJdfCzDx
-	 9iMXIJHjvv+gklMeUVfxYgD+GpvHoKmnYGkPC6ttzrq6bOxbQXaHeh6gJZa4he/rLN
-	 H34rvUGCo7D04t936WuxYGKgFvhjiAfEsxg24zidbAMr2ju7Gqmv4bh2EdjRQsmPeX
-	 chOYmPaAjsyilX2PUdeXgx/Ya2O2vxHdRDRdmvw5OTLY3u1us/QPOtEEj76wZlh1js
-	 LijQGuRfGrRgA==
-Message-ID: <sashiko-outbox-227908@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2] mfd: stmpe: Disable regulators on probe failure
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Haoran Wang" <wanghr2026@mail.zgclab.edu.cn>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <179534733065.15652.3659794654405986240@mail.zgclab.edu.cn>
-References: <179534733065.15652.3659794654405986240@mail.zgclab.edu.cn>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Sun, 22 Nov 2026 11:43:40 +0000
+	s=k20260515; t=1795355800;
+	bh=G/WdTtQSROSLrn837YYgbig1TKg++uOCFXqqP6VdarQ=;
+	h=From:To:Cc:Subject:Date;
+	b=IlGhsWElHygfBdeLG5MLbBSkQtgOwo+WW7E16kw0T0xmhhwLu2kEBfc5vq6oUN4X3
+	 jIXxZKcYmlZOY9emTDgmhicMuAh57z7PTfbPUK1/hvyHIAcVwgbr8oCvqm50ixS5Zp
+	 8JoTY9g5BsN6/bqs40/nkxeA9hVbj8CMDDkO6NYCz0X86i3lIv80B4v6sHnL7u/YeF
+	 KbpZJiEeHtOUZRNFp2tAfY7gmxOK9qdiO1rtUHa4ryeimSVB75qTWWfyZGNRiOkELs
+	 5JSpFNlxD1o6/bY5X4C1tfRcYStpSdwunKUsdIpkkFpfExVl+3ODYkzuq17lp6KmTE
+	 bW16nP7vCVoNg==
+From: Geert Uytterhoeven <geert@kernel.org>
+To: =?UTF-8?q?Micha=C5=82=20Miros=C5=82aw?= <mirq-linux@rere.qmqm.pl>,
+	Svyatoslav Ryhel <clamor95@gmail.com>,
+	Ion Agorria <ion@agorria.com>,
+	Lee Jones <lee@kernel.org>,
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+	Sebastian Reichel <sre@kernel.org>
+Cc: mfd@lists.linux.dev,
+	linux-input@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	linux-tegra@vger.kernel.org,
+	Geert Uytterhoeven <geert+renesas@glider.be>
+Subject: [PATCH v2 0/4] Improve MFD_ASUS_TRANSFORMER_EC dependencies
+Date: Sun, 22 Nov 2026 14:56:29 +0100
+Message-ID: <cover.1795355432.git.geert+renesas@glider.be>
+X-Mailer: git-send-email 2.43.0
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -58,41 +63,53 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-Thank you for your contribution! Sashiko AI review found 1 potential
-issue to consider:
-- [Low] mfd: stmpe: missing kernel-doc entries for vcc_enabled and
-  vio_enabled
+From: Geert Uytterhoeven <geert+renesas@glider.be>
+
+	Hi all,
+
+This patch series improves dependencies for the MFD_ASUS_TRANSFORMER_EC
+MFD driver and its various subdrivers:
+  - The first patch adds a missing dependency for the MFD driver,
+  - The other patches enable compile-testing for the input, serio, and
+    battery subdrivers.
+
+Note that compile-testing cannot be enabled for the LED and charger
+subdrivers, as they have a hard dependency on the MFD driver.
+
+Changes compared to v1[1]:
+  - s/is only found/is currently only found/,
+  - Add missing dependencies on I2C.
+
+Thanks for your comments!
+
+[1] https://lore.kernel.org/cover.1795095742.git.geert+renesas@glider.be
+
+Geert Uytterhoeven (4):
+  mfd: MFD_ASUS_TRANSFORMER_EC should depend on ARCH_TEGRA
+  input: keyboard: Enable compile-testing for
+    KEYBOARD_ASUS_TRANSFORMER_EC
+  input: serio: Enable compile-testing for SERIO_ASUS_TRANSFORMER_EC
+  power: supply: Enable compile-testing for BATTERY_ASUS_TRANSFORMER_EC
+
+ drivers/input/keyboard/Kconfig | 3 ++-
+ drivers/input/serio/Kconfig    | 3 ++-
+ drivers/mfd/Kconfig            | 1 +
+ drivers/power/supply/Kconfig   | 3 ++-
+ 4 files changed, 7 insertions(+), 3 deletions(-)
+
+-- 
+2.43.0
+
+Gr{oetje,eeting}s,
+
+						Geert
+
 --
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
 
-commit c925d035bc9603ef171daf8a11f3677bd18f43b1
-Author: Haoran Wang <wanghr2026@mail.zgclab.edu.cn>
-
-mfd: stmpe: Disable regulators on probe failure
-
-This commit registers a devres action to disable the VCC and VIO
-regulators on probe failure or device removal, tracking whether each
-supply was enabled via new boolean flags on struct stmpe.
-
-> diff --git a/include/linux/mfd/stmpe.h b/include/linux/mfd/stmpe.h
-> index 87e29d561e223..eec5fc7950145 100644
-> --- a/include/linux/mfd/stmpe.h
-> +++ b/include/linux/mfd/stmpe.h
-> @@ -122,6 +122,8 @@ struct stmpe_platform_data;
->  struct stmpe {
->  	struct regulator *vcc;
->  	struct regulator *vio;
-> +	bool vcc_enabled;
-> +	bool vio_enabled;
->  	struct mutex lock;
->  	struct mutex irq_lock;
->  	struct device *dev;
-
-[Severity: Low]
-struct stmpe has a kernel-doc comment block above it, so adding
-vcc_enabled and vio_enabled without @vcc_enabled and @vio_enabled entries
-triggers kernel-doc warnings under W=3D1 builds.
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/179534733065.15652.=
-3659794654405986240@mail.zgclab.edu.cn?part=3D1
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+							    -- Linus Torvalds
