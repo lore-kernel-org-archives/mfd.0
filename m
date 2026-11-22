@@ -1,55 +1,61 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795356115;
-	b=LARt188I0joKxZqWTXRM58Sq3LqkBdB+jqpYtOWPfu4WUSok1VTAjqEjboZXu+09YI2R
-	 3kWEwE2dCZ9nU5+7wfoVYtQoUHUcAhxBNTFGxwtnAqAYx29kcZd2ZMLGQ5hIuLuS9DrfU
-	 HGlN+fW5lAmX3o6R6FWC3HhGZcvjafLL+Fr9seHaKXhbzjiYaEJbCPUDx3hqMtyCLEWCA
-	 gcWy4spgB1nXKk+f/1oGeM9IsnaqHez9w6xJmGfJNNU+a+pPBSL7UnEMqP6CE5mSKzjXO
-	 UMalS2se2zLIg4vqHMLnT1h/yl2Nb38I1U0tseJlqtQ6j0SdJ/HGOmz40kMRD3Nq+oQ==
+	t=1795359266;
+	b=VdUZ+utTSDRyMkM5O6tuhW5lcCliDOfDknc2YrnggqmzU65jyKTIkysMHUXiZ3GI2ETZ
+	 H+55QoD6gNgoRenlR3Shio5/zxhB/VY/yxiLefbcmISnY0bpOx9z19jIBTdFSbxOExy9H
+	 0ZOtJO8MmQ5PZjC8R8uulxPX+/4Zl2faublp7fh2NTAzl3lBYkpI/XgHAMAU0BoC8Dh5X
+	 Td6j676/rvLuLdHaqrvimpzkY04ZSdDSJBrqYyfprM8OUi1D7OBWuyN3GwrVCw8M321E7
+	 T8Xw3MGcq8udGZbZBElbonlPe9OjP7wpNWo70Csx/P9drQxBXLC+8cNufjaNZtboEwg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795356115;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=yT1U5WtelrrqDFwJwgmCSWKz5xiMPbjJ/jls0PJNzqc=;
-	b=R7XeWS/aazoyLbktNAOEYY4RmGZVzljboRnzXcysPKjoHWxxDyOZF11ligQKOnHJSsOb
-	 dSBAPY4lsCSwJm+qsXuDIv1hCL3Kl2KgWp0mGBlSZ8ufpgCSUMaapPy+qxazI0snqgWbA
-	 vG19+FD6hCeeikvPjumkRFM0lEoJGCre7gd7QwA9FVmtRtH+Yldeb+UUHuqu8kdAjeoCQ
-	 IHcSSZePjlUmgMCs2FerZmJ3LxmYaeNOwzWiSopnLXMmBEQCFSGvS1mZbMURDaQsWlC/L
-	 Am5xkPBzov31gOh4xi0MP7iv1zPwtzmxX9JPFs7VkOaLgFqJSir7pw7TFFw3nmwdi5w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795359266;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=iN/nddxdvRMLU2SkW9x6MGgEnBY1rvCW4Vq0IU091oo=;
+	b=BKzCrcpsy8nb59VbFmSXMpK8ieN+AfBwUVcDO20wuxSZnVXi/JFbdTsTfVbf6SIf33Cp
+	 oqEt4H63EiwxtBtyJ8jxhjDd/XdMiAPeTBHJq6BQDZ7k634l2fNrvX5RF6YgG5ROawNGC
+	 hhoqDGQpbuxx+2Sf3qlxuKmS7r3ub6iYuYRW0S/+jtdXrbW4BUA//YE5OZZQAd6xwMfe5
+	 k85BIzTFYt26ikm3YxRoe1u9lSJwXvM3z7umNP5zOxCZF/357954NsukHBIhsJLzW7b+n
+	 S92qPb/ai8CantnDeIvqjxIrF5LOWt0HRa/LN8qLYptD/oARbRlDMbX9W9uq71u2z/Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EunwfxVZ;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="BREg/BeO";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A878E606A320
-	for <mfd@lists.linux.dev>; Sun, 22 Nov 2026 14:01:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9DAF4606A331;
+	Sun, 22 Nov 2026 14:54:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EunwfxVZ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08CE41F000C0;
-	Sun, 22 Nov 2026 14:01:54 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=BREg/BeO
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C782F1F000D4;
+	Sun, 22 Nov 2026 14:54:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795356115;
-	bh=yT1U5WtelrrqDFwJwgmCSWKz5xiMPbjJ/jls0PJNzqc=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=EunwfxVZpHFEybY+mXWv1xtjPQXu2L4xVDdXx8vrmTD5ry7Z2NGVvo13dNDRataTW
-	 oC1OIJ/9TdrELLlNbVvSm0PAKllG5xDzucrMG/HpifTLuoX/xkpcwNPfp/zp9eDHT7
-	 lrGe0gillBq+S38+s1s9KQZTlTGkizuIIRucgjiCeiPf6CO0uXvdy8Ea7hLpdaG2QO
-	 VCpgShgyCuEM/8rLgbzXqOAFhiFoWiOv7h3zReP9jkyr65xJjBv+s1jWYhteIaiqMU
-	 qYTAVGW8E8zy0y6cyeevKTFLeWmdk3RXUSJQoyb1RC/G1nOM7umsjjn8coQLQzpn8u
-	 VIRNE/SXEubGw==
-Message-ID: <sashiko-outbox-228003@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 0/4] Improve MFD_ASUS_TRANSFORMER_EC dependencies
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Geert Uytterhoeven" <geert@kernel.org>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <cover.1795355432.git.geert+renesas@glider.be>
-References: <cover.1795355432.git.geert+renesas@glider.be>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Sun, 22 Nov 2026 14:01:54 +0000
+	s=k20260515; t=1795359265;
+	bh=iN/nddxdvRMLU2SkW9x6MGgEnBY1rvCW4Vq0IU091oo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=BREg/BeOBdwAJd7clok41drHWisly6ktafnWOSBCuiCCVtqMUhOgRXOEwR38UJAy6
+	 SX87epgJP2Eu3/QVf2oEeuJUxQeSoQPUGn+HKOjdaNa9OUPeHjnXQ0YHo60hQ40qld
+	 ZGvJcJACjFveYKOAsDYfsen3bCwOmfHTdhQZRIpnjsYR7/Hns1+932ozb3NSbNCzht
+	 WtVJ+0jfMxOtPFSTy876LCur3vTSDwZ68zPuQsT6RzZjKwlLt7HL3liB8bAbSFFHRe
+	 y1WnG2go3Kv9NPitpZ0YjStNAfPnQ4BP+uk3xqaqzSHqgETH7uoHTR+e7FcaMSc5H4
+	 i9dZCAoLIo6jQ==
+Date: Sun, 22 Nov 2026 15:54:22 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Vasilij Strassheim <v.strassheim@linutronix.de>
+Cc: Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Andrew Lunn <andrew@lunn.ch>, 
+	Vladimir Oltean <olteanv@gmail.com>, "David S. Miller" <davem@davemloft.net>, 
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
+	Russell King <linux@armlinux.org.uk>, Andrew Lunn <andrew+netdev@lunn.ch>, 
+	Heiner Kallweit <hkallweit1@gmail.com>, Eric Dumazet <edumazet@kernel.org>, Lee Jones <lee@kernel.org>, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, netdev@vger.kernel.org, 
+	mfd@lists.linux.dev, Martin Kaistra <martin.kaistra@linutronix.de>, 
+	Benedikt Spranger <b.spranger@linutronix.de>
+Subject: Re: [PATCH net-next v5 3/9] dt-bindings: net: dsa: Add SoC-e SWIP
+ switch function
+Message-ID: <20261122-camouflaged-pretty-camel-79f370@quoll>
+References: <20261120-devel-vstrassheim-soce-dsa-ml-v5-0-5de9225715e6@linutronix.de>
+ <20261120-devel-vstrassheim-soce-dsa-ml-v5-3-5de9225715e6@linutronix.de>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -58,9 +64,47 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261120-devel-vstrassheim-soce-dsa-ml-v5-3-5de9225715e6@linutronix.de>
 
-Sashiko has reviewed this 4-patch series and found no issues.
+On Fri, Nov 20, 2026 at 03:52:20PM +0100, Vasilij Strassheim wrote:
+> +$ref: dsa.yaml#/$defs/ethernet-ports
+> +
+> +properties:
+> +  compatible:
+> +    const: soce,swip-switch-00-04-0c-10
+> +    description:
+> +      This compatible identifies the register layout; its suffix gives
+> +      the offsets of the core version and feature identification
+> +      registers (0x00, 0x04, 0x0c, and 0x10). Port counts and optional
+> +      features depend on the FPGA synthesis configuration and are
+> +      detected at runtime using this register layout.
+> +
+> +  reg:
+> +    description:
+> +      Register window of the IP core. Switch register blocks are located at
+> +      offsets defined by the compatible. The MDIO controller and bus
+> +      multiplexer occupy separate subregions described by sibling nodes.
+> +    maxItems: 1
+> +
+> +  ethernet-ports:
+> +    type: object
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/cover.1795355432.gi=
-t.geert+renesas@glider.be
+I guess this should follow:
+https://lore.kernel.org/r/20261120002549.1908299-7-prabhakar.mahadev-lad.rj@bp.renesas.com/
+
+so: additionalProperties: true
+
+> +    patternProperties:
+> +      '^ethernet-port@[0-9a-f]+$':
+
+and:
+'^ethernet-port@':
+
+> +        type: object
+
+Best regards,
+Krzysztof
+
