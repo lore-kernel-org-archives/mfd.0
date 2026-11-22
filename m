@@ -1,55 +1,62 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795373504;
-	b=KCbqWsb3koZTqbz1cxK8g9Oqt6D5qj2kJX2LcOkGEWVwGnZnOpkzOVPJeuE2vEikqzqq
-	 KQFSaDba0cp087+NvrABVRgG1G7+Gp+g5OQ8a7+WskU+RxrsXQKnO7wGcuszhp56YiWE6
-	 k+wlI7RUdi5wYTWDDjJurbPbCtX3S4qzAsMu8WpWp9cWcLg8IFbg1ksfkjTCG2M1+YzTY
-	 Lj631FVuS+z74f9Z1SnC5WF0puBSbLl2ZV4ZcAeyuGivB+20lVPHaO+IC+CV9Pynn27TM
-	 646PeTRmKlsKKQxB2jPcu+7jXHAdcJ4bEIMLjSzB6XTdZVdcRRrPB1eUNCICAHg5mUA==
+	t=1795378119;
+	b=lIXLfVVGwAK0MVjlwFAbVZ7rIQ14c93QsfSzRO1mV3K/4Ue9tsPbfpCKclLCVPUlQEqZ
+	 RCCcxsEwH30g//53bCG6b/n5QiRYEeOugRLxpf45VnKPnSghsFIg7zQUTuq3V0etLp7Q+
+	 rUVOA2ftsjo8UVZBaeo6ZntWEFtJUruidXhUB/b8kfexty4EqH7drFenLLzX7NIWNP1q/
+	 p39irgZ11/71q+VAT1vwpgc4ZEGCkBHst1/sCygxLyCO+rdw21F+uElvMkq/CFUdWVK2d
+	 XLS+FzXUBQHpod6s5XsHxvRjaMs2Ws+ZBskEA6TbgCosuRLCoIXF7ZPHix+Jdt6xneg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795373504;
-	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
-	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
-	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=IFxEKJMtZIkQGZKfSYRvowzKuK7BCrlRO/z3l0BUM3Q=;
-	b=o43DxAUWDSVwXjk7XS3e60/dd885OZGz91K6thqnDw2trB6DFUcRTRnmtA2Yf+xxwkMT
-	 lYpMmC0iJr2BP/7rvpHhN1hGjfO0oXS8Aj+baOF6KVw3sllYZgaFtci0RtVF7/1dPVrcC
-	 6HyQdpAaM/+xZin1EhVXBh3ESpgWAA/w/kVsmmCrQ2Xub/fJOLsgmTczy1fZQBhePilrm
-	 /k8/GH5ytyfca6EqHK5P8PR00ygoKehKi0nUDWMTH6zxd2VtOVwyMRAjbk2W4q95E3u++
-	 UefDWVpHW9xmq9W5fz2q8Dzh0XNxztP3xgMYdV4nm43SFy7T0K1u9/gRtM+4s6icb1A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795378119;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=o628r7NNNZmfZVtOQgedEE33LYjye1BrJmgudl0h28Y=;
+	b=f3YP89pdO0ilkf4/8P/kmqvyUjRVUFr/0/Ep9kSMg7rHDPPBTRaRnbUzSGtoLn5TMou2
+	 yBe9pvjdlJxYU3lkM/lCcE6nB+QcqjN+O5nZS628SQjeqUxyEwDiVmVjYB8lNymJ4wueW
+	 qPujV6QxPVi4oQHI9DnC2Z6L1iHgxrt90mdj/Ut5RmOrk2TYs2h9CE6Q/rr6AYEB+KA+k
+	 vFXKdkuiVV+9FJToyWPu+Ygvo8E85BsLF7k+BFBfyhHQONPaQXaop+FKiza4ULTCBgmyZ
+	 vVqeLBy0Wt1xJWkwRA0p/Htyvv+vX3mqy5tS7KxDr5EoJYLJ09PxIt6aB55SlEM4lwQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=P4Bh+w3u;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NEcSJnNr;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8447A606A330
-	for <mfd@lists.linux.dev>; Sun, 22 Nov 2026 18:51:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 71F3D606A31A;
+	Sun, 22 Nov 2026 20:08:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=P4Bh+w3u
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 192B91F000EF
-	for <mfd@lists.linux.dev>; Sun, 22 Nov 2026 18:51:44 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NEcSJnNr
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A6AA41F000C6;
+	Sun, 22 Nov 2026 20:08:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795373504;
-	bh=IFxEKJMtZIkQGZKfSYRvowzKuK7BCrlRO/z3l0BUM3Q=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=P4Bh+w3u3ol1/38SJqbi7YQPNIQLnKht8tYqK1cfs1csG8iQYxpq+W8AYSILWV6Oh
-	 ymhYWmDyxJ0t6cEKdMuYvQ01nncHAXKblQrtMpLlhuaWr2Z/aEK3GT+mB9IKo0g26q
-	 vi4X/D+9E7Eon/wbX3bz/TlZKLWmnOuxNQu5YzorVCj3XEuYI7jQVo0b4Fq8gknUuj
-	 +J4m+UTs0rFzS2m+KvN0mLgJr5t8Pd7pu0iWTRdsnUe1ox60LZAjFuzMh4JCQIesas
-	 NHsKm6mUgzcq7su3jZVBGHrPncMDJFCYqBY6IP20xP7aSuNzDF8cvmYSlAPGTgnUNm
-	 y859TQRKxitrw==
-Received: by mail-lf1-f50.google.com with SMTP id 2adb3069b0e04-5bfa65c8617so1554875e87.0
-        for <mfd@lists.linux.dev>; Sun, 22 Nov 2026 10:51:44 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AL+hErEBD39IRQcx9mhohnE8uF0le4gXbVw7sPbLApfX5u4leN3Wo40t0LbvZVXnYm7Op4UiFlE=@lists.linux.dev
-X-Gm-Message-State: APuU4Z9ZHX4qB7NGv9nSuHSbU91cT9ETrZVDgIHbjZsy5FRSq+RpOTUG
-	533qAdJg/IlJGwc6qKKthNp8r1yOaR91nrUNSwgBYlVFDmc2+YdHtCxHKHGFiCS/Hj/vormyRT/
-	228z77ieb8tt5B1D3mUNX+6k00Pa00XE=
-X-Received: by 2002:a05:6512:b14:b0:5c1:c4b4:a3e5 with SMTP id
- 2adb3069b0e04-5c1c4b4a448mr1963937e87.27.1795373502781; Sun, 22 Nov 2026
- 10:51:42 -0800 (PST)
+	s=k20260515; t=1795378118;
+	bh=o628r7NNNZmfZVtOQgedEE33LYjye1BrJmgudl0h28Y=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=NEcSJnNrBzNk0NVobLQaW8brRxhjnpIX5C1lIz7HZEA9ytGBdxXkPpJsk1aaHqRuh
+	 GsdJfEOiav51HQXNObRtdFjE8aaYIXtsuVE3PDBBR5l7BYzmdAV/Mp2FSVbKdLf/Vh
+	 AFq75XBuUIDCHLKy8gdiwaaMa0b/QNW+DSFhxwFNkr65uPR2g8hrNK2Ob/HJmrj648
+	 FQ6qcyKzIAXAzk0dEd66mLdgxbM1Jo3V5fLwOsM4xLuwvaKnqxs7piOKqt4MjBHGq9
+	 2pWWMU2kNW1SiQCZnQhQJHTGAx0+ldUi3gwnyVwuKSduBcV6gthL740aFlTpExci75
+	 xT3aM9m4bffuw==
+Date: Sun, 22 Nov 2026 20:08:34 +0000
+From: Jonathan Cameron <jic23@kernel.org>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, David Lechner <dlechner@baylibre.com>,
+ Nuno =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, Andy Shevchenko
+ <andy@kernel.org>, Lee Jones <lee@kernel.org>,
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-iio@vger.kernel.org, mfd@lists.linux.dev
+Subject: Re: [PATCH v2 1/4] regulator: dt-bindings: maxim,max8907: Document
+ io-channel-cells property
+Message-ID: <20261122200834.4be768cc@jic23-hlaptop>
+In-Reply-To: <20261115091120.108684-2-clamor95@gmail.com>
+References: <20261115091120.108684-1-clamor95@gmail.com>
+	<20261115091120.108684-2-clamor95@gmail.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -59,59 +66,39 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261117-xg6846b-bcmbca-xrdp-reset-v5-0-f584e8b8e696@kernel.org>
- <20261117-xg6846b-bcmbca-xrdp-reset-v5-2-f584e8b8e696@kernel.org> <179510274338.63755.13074299296013371295@kernel.org>
-In-Reply-To: <179510274338.63755.13074299296013371295@kernel.org>
-From: Linus Walleij <linusw@kernel.org>
-Date: Sun, 22 Nov 2026 19:51:29 +0100
-X-Gmail-Original-Message-ID: <CAD++jLkOUTrjAgnV=giaKx7JBnw2hKJt+-Fc1nyiucbZLLz5=A@mail.gmail.com>
-X-Gm-Features: Aa3M54oi40sU1I-FOZgHO1ergrn0hI-8Xi2jBLE3eOccsrb0FB_MO_lAfbrL4AE
-Message-ID: <CAD++jLkOUTrjAgnV=giaKx7JBnw2hKJt+-Fc1nyiucbZLLz5=A@mail.gmail.com>
-Subject: Re: [PATCH v5 2/6] mfd: bcmbca-pmb: Add a shared BCMBCA PMC3 PMB transport
-To: Lee Jones <lee@kernel.org>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, William Zhang <william.zhang@broadcom.com>, 
-	Anand Gore <anand.gore@broadcom.com>, Kursad Oney <kursad.oney@broadcom.com>, 
-	Florian Fainelli <florian.fainelli@broadcom.com>, Rafal Milecki <rafal@milecki.pl>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
-	Guenter Roeck <linux@roeck-us.net>, Philipp Zabel <p.zabel@pengutronix.de>, 
-	Jonathan Corbet <corbet@lwn.net>, Randy Dunlap <rdunlap@infradead.org>, Ulf Hansson <ulfh@kernel.org>, 
-	Benjamin Larsson <benjamin.larsson@genexis.eu>, mfd@lists.linux.dev, 
-	devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-clk@vger.kernel.org, linux-hwmon@vger.kernel.org, 
-	linux-pm@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Thu, Nov 19, 2026 at 7:49=E2=80=AFPM Lee Jones <lee@kernel.org> wrote:
+On Sun, 15 Nov 2026 11:11:17 +0200
+Svyatoslav Ryhel <clamor95@gmail.com> wrote:
 
-> Some inline review comments, but the chewy stuff is at the bottom.
->
-> --- checkpatch.pl (2 issues) ---
-> Line 51: WARNING: please write a help paragraph that fully describes the =
-config symbol with at least 4 lines
-> Line 374: WARNING: DT compatible string "brcm,bcm6846-pmb" appears un-doc=
-umented -- check ./Documentation/devicetree/bindings/
-> ----------------------------------
->
-> ?
+> The Maxim MAX8907 has a built-in 8-channel ADC. It does not require any
+> Device Tree-based configuration and is folded into the main PMIC
+> node. Document the io-channel-cells property in PMIC's node to be able to
+> request channel data in the Device Tree using the phandle of the PMIC.
+> 
+> Acked-by: Mark Brown <broonie@kernel.org>
+> Acked-by: Conor Dooley <conor.dooley@microchip.com>
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+Reviewed-by: Jonathan Cameron <jonathan.cameron@oss.qualcomm.com>
 
-I don't get it either. The compatible is right there in the DT binding
-patch 1/6...
+(as this will all I think go through MFD in the end).
+> ---
+>  Documentation/devicetree/bindings/regulator/maxim,max8907.yaml | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/regulator/maxim,max8907.yaml b/Documentation/devicetree/bindings/regulator/maxim,max8907.yaml
+> index ee1a305d1c210..ccdeb9ba21e26 100644
+> --- a/Documentation/devicetree/bindings/regulator/maxim,max8907.yaml
+> +++ b/Documentation/devicetree/bindings/regulator/maxim,max8907.yaml
+> @@ -27,6 +27,9 @@ properties:
+>  
+>    system-power-controller: true
+>  
+> +  "#io-channel-cells":
+> +    const: 1
+> +
+>    mbatt-supply:
+>      description:
+>        The input supply for MBATT, BBAT, SDBY, VRTC.
 
-+    properties:
-+      compatible:
-+        const: brcm,bcm6846-pmb
-
-So ... was it checked on a branch withour patch 1/6?
-
-The rest of the comments are completely reasonable, especially I
-should know very well to use MFD_CELL and guarded mutexes.
-
-Iterating and fixing.
-
-Maybe the next version will look more appetizing!
-
-Yours,
-Linus Walleij
