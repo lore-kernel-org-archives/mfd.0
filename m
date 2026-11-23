@@ -1,84 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=193.142.43.55
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.13
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795456792;
-	b=wpKHDaJ/oa3hZpQXvkIlv3qlXhfw7P7+5xuYykxNvgJPMW3cFHwlEUA7jGJtjUt3yjXg
-	 wIRQnL3Tc+R2TUvh38KIA01rMScanyw2YX7oCXEZvZT+fNi6SkmM/Wo/dGmKJwOPDg0GG
-	 A1eSM6IMfb9h2m9NmG+1RVrWCSutU1lxdg9KMoKieJ3Y/1ly3iqz/ETm1EIatHSQITdZk
-	 s+IQ5D5/huhoIlmZdR0chbCy4ECZb85SDBIJJ3OCv8FNmnt/EVYRlQ5JzS/0biGDqOcEf
-	 Sf02GuTijWf7lYh8NUFwlz7gCxAJJPrE/CbuotdARsR4MCWTRK/GztpWr9g8IDfKSHA==
+	t=1795460051;
+	b=XHf/16IC+GMKgYT8r9SRQvvm7w0PodE472RjAuUvtELVGGzUlvU3YfINdDl+MYXRMo5T
+	 5HTZXTnbdPnVeQCUoMv3lqg/4ZChotRDbUPbEOjHI+iQyHTsEpaa+oHQeutsZIpBDG1Rg
+	 T1/ALLZbpG3epV1i7mXWMqheBW6maJQRCcntZS4YzgCVl6gynk0JLg1rUkB4Q6QB+adG+
+	 F6qvvAkujMStsd4svVbYG8waxtITHXB6SLPuEZD1l2q0ZewdNB/II/s6x95vQE14mUpym
+	 5zvfkKVvq1Z3EBViDaMoQil7tlVHjMAewho7cFWLI6KChMGVqdzXEAEd4M8BqM0q/oA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795456792;
-	h=DMARC-Filter:Message-ID:DKIM-Signature:DKIM-Signature:Subject:From:
-	 To:Cc:Date:In-Reply-To:References:Organization:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version;
-	bh=FfRowKDIqJJ06TaZd/p2W/N3uwv5mRb2fjX+HqmFftQ=;
-	b=lv3dAp612I72RmPesrOeO9wBPf6H8qj769Pz6hMYBLmpPZZ+Ch4XiR3qw1m5oFz8PUsi
-	 n+2dibWz79J42H8h9hdmXreU7OdTSA3g5lKAYBEd53A2dLDW/es/mI3DDGjhR/v+ZoXMG
-	 LiABp7gPxVFE02RHQg0CtSrImkqRfwDP5//XV0uZOMSVMn5oyfqro1fzF9tLFrYCDPjLd
-	 J5y2vf9HeO4j/Iu45ROfuHAH3lQp+3He0A/tuvcBYtZYd3eRKMdbUoKsrrKGs9OlEvkPQ
-	 yQxzuVjSSRLx9ZVl1zqxTeQoIGkidxM+778bO0EKbZvTcVNiTdZhQ7o70YH9FZOCq2w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795460051;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:Organization;
+	bh=n8eQg2VWTFkHRh6nWKvn0g7mBpUZuTIVj5vM3Ba8/NA=;
+	b=5WoTk9UpBbBwd28AVUlbFkNYZ6r7vQNDnBAUlnt/nC+azPhnuYzmseeXNHBcuIuzFY5Z
+	 ZxBgj874QuZBZi3roSEs2Kd4yYyLDKEzd4TIwqnjx4nZbCxUsQJCIDPWbElrcrHCsnkxj
+	 sMLGRbom2KAhMXy9Qw9DBID/ANaGoLVjKhS49qszh79O44CyN5NbEIFOLlKWbOS8Z2+6B
+	 sMhFB9RpGnRaaXs2tcXnnpKGdxi/k7lA/fTgn/lFnMFVnfrl8kheD1XvayODgmZEIt5gR
+	 0JgNd2Txf6XTp3BESCzccXZqSoaaPksHasAfeS5dvV4vMPb16MN7NZq20S00Tpi6Gtw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linutronix.de;
-	spf=pass smtp.mailfrom=linutronix.de;
-	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=qdNnJWs2;
-	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=ed25519-sha256 header.s=2020e header.b=H9brzsHb;
-	arc=none smtp.remote-ip=193.142.43.55
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=intel.com;
+	spf=pass smtp.mailfrom=intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=l4QQaynp;
+	arc=none smtp.remote-ip=192.198.163.13
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 242AA606A31A
-	for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 17:59:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 242AA606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 961DB606A32A
+	for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 18:54:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 961DB606A32A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=qdNnJWs2;
-	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=ed25519-sha256 header.s=2020e header.b=H9brzsHb
-Message-ID: <4d56bd92d27429c3ac2cbcefac74c0327b3b3af8.camel@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1795456789;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=FfRowKDIqJJ06TaZd/p2W/N3uwv5mRb2fjX+HqmFftQ=;
-	b=qdNnJWs2gBgEno4xTlLe1uC8g2lqMnVCLCvKovXdlAuEYoc+cskX1LjfmvxpH3E3DqJkBz
-	QWeKfftzs63qkZLnAPtsumz+Gr7+LBeR2/CjOeIokqxV9ZG11RJV1/W9adZXeDFAe/DUxj
-	P8BhHS0v7bOXrn2ufXI4RNCDPO6NJFAXVnNylfT4MVSE93pdbQQVl5eyFXRoEn8wPU2L4Q
-	W3V/Cbv0EQMzjlj9r67OzAN2B1LBckNCLrPCZTMmJhuGJWwrTtyQyPrVoKcIa8aNKioGht
-	V198+DE1P2FqZSARJqMTxdtLWwopGsQ59jp3noTngzd2+RQN3XzAUYcZDLxqMg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1795456789;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=FfRowKDIqJJ06TaZd/p2W/N3uwv5mRb2fjX+HqmFftQ=;
-	b=H9brzsHb1FdVP4AXC4/J+YYXSesAezfa+fCCy/79GGG2FjVP1ko/3/QaOfqmG8iM0mXWWB
-	GYT7PwK0nivO+5AA==
-Subject: Re: [PATCH net-next v5 4/9] dt-bindings: mfd: Add SoC-e SWIP parent
-From: Vasilij Strassheim <v.strassheim@linutronix.de>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-  Conor Dooley <conor+dt@kernel.org>, Andrew Lunn <andrew@lunn.ch>, Vladimir
- Oltean <olteanv@gmail.com>,  "David S. Miller" <davem@davemloft.net>, Jakub
- Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman
- <horms@kernel.org>, Russell King <linux@armlinux.org.uk>, Andrew Lunn
- <andrew+netdev@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>, Eric
- Dumazet <edumazet@kernel.org>, Lee Jones <lee@kernel.org>,
- devicetree@vger.kernel.org,  linux-kernel@vger.kernel.org,
- netdev@vger.kernel.org, mfd@lists.linux.dev,  Martin Kaistra
- <martin.kaistra@linutronix.de>, Benedikt Spranger <b.spranger@linutronix.de>
-Date: Mon, 23 Nov 2026 18:59:48 +0100
-In-Reply-To: <20261121-lurking-bulky-crab-b9619f@quoll>
-References: 
-	<20261120-devel-vstrassheim-soce-dsa-ml-v5-0-5de9225715e6@linutronix.de>
-	 <20261120-devel-vstrassheim-soce-dsa-ml-v5-4-5de9225715e6@linutronix.de>
-	 <20261121-lurking-bulky-crab-b9619f@quoll>
-Organization: Linutronix GmbH
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=l4QQaynp
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1795460051; x=1826996051;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=AqLoSY+uMHaQijDdZjXL3V2+Q61y+Y4AyaStKFNQjIQ=;
+  b=l4QQaynpElxci8Q/JnGLIJN4bWIecfB0w7xfgyfqtBPI0JXitBEHFxUx
+   zTWT6cNA6AHwhnrhYp1CNA94O0V/RK4XSM+2qdQ7sXtwOfQ0akpV95/yT
+   uGWyIAakBPu0Q5YzmySH53D2XuckGTmeJstOrfua8Ya2inuMQcWh0F2ep
+   PMHS2j4SFiUzIMhuUyFjN1tE3+YlqX2UEQIpxw4ZhW+tWZ7L52442XgrK
+   UGMjGC1KmcDK20GeUPBJ76T4cYYdz5kJZs6NLXkAaCkmTIakviqsiHXQv
+   pka9sJ9TmPq/fF6ntnfvz07/xODfE2tIosodyQ8Rv8ke2/kgV/SsfSwvN
+   g==;
+X-CSE-ConnectionGUID: ORKdUGWRR/e6RemYrwW4uw==
+X-CSE-MsgGUID: kOhjRbdxRC6FJwXztOjDSA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11975"; a="4257309"
+X-IronPort-AV: E=Sophos;i="6.27,229,1787036400"; 
+   d="scan'208";a="4257309"
+Received: from fmviesa002.fm.intel.com ([10.60.135.142])
+  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Nov 2026 10:54:10 -0800
+X-CSE-ConnectionGUID: XKzp2d0yTnKmegeO65Prmg==
+X-CSE-MsgGUID: 5cslLiyvRKm5/g9Euq76bQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,229,1787036400"; 
+   d="scan'208";a="11576350"
+Received: from pgcooper-mobl3.ger.corp.intel.com (HELO localhost) ([10.245.244.204])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Nov 2026 10:54:06 -0800
+Date: Mon, 23 Nov 2026 20:54:04 +0200
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	Andy Shevchenko <andy@kernel.org>, Lee Jones <lee@kernel.org>,
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-iio@vger.kernel.org, mfd@lists.linux.dev
+Subject: Re: [PATCH v3 2/4] mfd: max8907: Add ADC client support
+Message-ID: <awSLzG6IxXjKLBCx@ashevche-desk.local>
+References: <20261123150725.212836-1-clamor95@gmail.com>
+ <20261123150725.212836-3-clamor95@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -88,47 +87,32 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261123150725.212836-3-clamor95@gmail.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On Sat, 2026-11-21 at 11:19 +0100, Krzysztof Kozlowski wrote:
-> On Fri, Nov 20, 2026 at 03:52:21PM +0100, Vasilij Strassheim wrote:
-> > +examples:
-> > +  - |
-> > +    ip-core@80020000 {
-> > +        compatible =3D "soce,swip";
-> > +        reg =3D <0x80020000 0x10000>;
-> > +        ranges =3D <0x0 0x80020000 0x10000>;
-> > +        #address-cells =3D <1>;
-> > +        #size-cells =3D <1>;
-> > +
-> > +        ethernet-switch@0 {
-> > +            compatible =3D "soce,swip-switch-00-04-0c-10";
-> > +            reg =3D <0x0 0x10000>;
->=20
-> You have conflicting address spaces - this covers all other children -
-> which suggests this is artificial split of device nodes. Basically
-> comments from last version are valid. If some split of device nodes
-> makes your driver easier, it might be fine, but only under the
-> constraint of proper hardware representation. It's not proper hardware
-> representation anymore.
+On Mon, Nov 23, 2026 at 05:07:23PM +0200, Svyatoslav Ryhel wrote:
+> The Maxim MAX8907 has an 8-channel ADC at a fixed location. Add client
+> support for it along with its regmap and interrupts.
 
-Yes, there is a conflicting address space here. I used the full IP-core
-range for the switch child as a shortcut, because the switch registers
-are interleaved with register areas belonging to other child functions.
+...
 
-However, that does not properly represent the hardware. Sorry for that.
+> +static const struct regmap_irq max8907_adc_irqs[] = {
+> +	{ .reg_offset = 0, .mask = BIT(0), },
+> +	{ .reg_offset = 0, .mask = BIT(1), },
 
-I will describe the individual register regions for switch in the next
-version:
+When {} on the same line, the inner trailing comma is not needed (if we ever
+need to extend this we would need to change a line anyway, so there is no
+benefit of having a trailing comma).
 
-    reg =3D <0x0 0x50>, <0xb00 0x1200>,
-          <0x3000 0x14>, <0x3200 0x400>;
-    reg-names =3D "global", "switch", "ports", "statistics";
+If it's just this, no need to resend. Just a hint for the future.
 
->=20
-> Best regards,
-> Krzysztof
->=20
-Many Thanks!
-Vasilij
+> +};
+
+-- 
+With Best Regards,
+Andy Shevchenko
 
 
