@@ -1,97 +1,69 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.171
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=111.22.67.137
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795400923;
-	b=vgUBVpB4bwiGZL6gREsgl5rklE4FHaozY0fhcqlwNn3VbS77zWB5KS2fGUeNSmfjfQtt
-	 RUklHi0DUOG5ZsZfFLEBfptS8XVn/GY868JC8Lei/G1/cWl1tL7IgWyqqU5AX78oF/PQ5
-	 fLSUPQBALIGES7zdcu+Aln+2O7eAodzoJqvgntLNKYRYAS4wkEe/vHbO+WqiwdWi6N5yu
-	 HxmrpKKTKHzmKX10ioOFGffFjhFOzvRu91Oi4dmVpce4sDTIG8jNH87njP0p24enADblK
-	 S6zNl/zm8xLgiGoB/fdsHM7G2rBWBUs/4kCfVu77r1U0pzH8snleqVTc3KXqKbjhyTg==
+	t=1795402225;
+	b=veNqDNjaMqiARXRNZ1ek+USRV1TqDg6mMDpvpPlwHPGQ7h5EZ3poJ9+5Xds/K9buRUt2
+	 /hAs/bH1weEkjJIy1sho0CW8WRMwcfxZgSDBKbUdz3yYjHWyNixsLSNBY9+/la5jNFAt1
+	 TUwcp/HyHGqKk4GL3UdAmy9G5C4ON4TRL9ANHT5s01Tnx1ybYj1xZmPzQSkxt7bYYhmaq
+	 Zj7BocnMR52vXsc9h28DT3kHtHDZ3DIuQeGxzq1B3WEGh75qrnfiwnpnqH7Piiv6e+Ave
+	 okSymvDFh2aw2zkL2w93+lrIlj8eMC8nwPHPeip0GeUkJaAl2BRviUq7/vQ/h5sssfg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795400923;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To;
-	bh=ZicVV9Z+dbEcvbsxd5GYeloidM7KPsn1mE2hWsjYDlc=;
-	b=m9Baly9Hu60ZHNUNY8riHTQIu8IU6K8Q1s6I0tytg0d06RQtiKefzA1k34baxMRocYvF
-	 fZsmipul4p0uJFD85uFm4VNVvjXTx05mgmIZwGOmILrBUaj3Y2Etg1lNrqUm6h8oKuhCo
-	 +eahqF6pZVVgLm4kLeG68UuOdk7hBw2YtFlImPqncbJG1Xi8i3oj62K+ty1qnmdZ+36uD
-	 0vTzmkyb03fdoe12ubpV0K6zaRh9ZaZd8YottsU3y5wB+pid1Z/IDt/0SK+E5E24LMJp7
-	 YwFW0hGLD7EsILjDXMnPZT9Cewk//rkbp2yDsWkwrrGiAdPCOR+EzYimfO0nt4n9YMA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795402225;
+	h=DMARC-Filter:DKIM-Signature:X-RM-TagInfo:X-RM-SPAM-FLAG:Received:
+	 X-RM-TRANSID:X-RM-TagInfo:X-RM-SPAM-FLAG:Received:X-RM-TRANSID:From:
+	 To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=PGUSO64aDmeiomTwHSqW1O+T0fU2bJipEwmEC3CjH5M=;
+	b=jLRnH7FEFhMsSbN8Qbr2etzgYlmayf51QCDWPPMg23kQH8PDFDkPmqpaxqPbdPd+qCOL
+	 qgwzYromZ9sm9FWAQqNdAPX0ZY1PtCmGW4XS8y9Jh+zYIqBYb+Da4CUtaABhg9pVKPtpp
+	 GSUOQpUzpadbp9QU7txzwUyUFtIrE2c4PTx3mH7ptvZ979bisrvjQP4BcqNMhq5lb75UA
+	 /w39ENovF/81n+I+l4T1x1wFPFBo6Fd+s5hY6xZU7d+wSkRpqxyODRMsqt5sEJQXSj2+2
+	 VtVbKyQ8bqRZgY5UM7gWBKZKMd9TYYM2JRu2UWb1WIBIrYwvHHVBpNor6RYCWBvnRIA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=TtZb5XBb;
-	arc=none smtp.remote-ip=74.125.82.171
-Received: from mail-dy1-f171.google.com (mail-dy1-f171.google.com [74.125.82.171])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0FC7A606A320
-	for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 02:28:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0FC7A606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	dmarc=pass header.from=cmss.chinamobile.com;
+	spf=pass smtp.mailfrom=cmss.chinamobile.com;
+	dkim=pass header.d=cmss.chinamobile.com header.i=@cmss.chinamobile.com header.a=rsa-sha256 header.s=default header.b=EzasSOUt;
+	arc=none smtp.remote-ip=111.22.67.137
+Received: from cmccmta4.chinamobile.com (cmccmta4.chinamobile.com [111.22.67.137])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id D4F1D606A31A;
+	Mon, 23 Nov 2026 02:50:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D4F1D606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=cmss.chinamobile.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=cmss.chinamobile.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=TtZb5XBb
-Received: by mail-dy1-f171.google.com with SMTP id 5a478bee46e88-3866a784546so3455076eec.0
-        for <mfd@lists.linux.dev>; Sun, 22 Nov 2026 18:28:42 -0800 (PST)
+	dkim=pass (1024-bit key) header.d=cmss.chinamobile.com header.i=@cmss.chinamobile.com header.a=rsa-sha256 header.s=default header.b=EzasSOUt
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795400922; x=1796005722; darn=lists.linux.dev;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=ZicVV9Z+dbEcvbsxd5GYeloidM7KPsn1mE2hWsjYDlc=;
-        b=TtZb5XBbbYzUKjHf/pu5z5WizdJg5JGYCmcFcMbhGlbdhbcXulH6oCXqHSbIK51IAo
-         jmOrPwdbCL5R67PdnNw9obo7oodSf8eMGvRsGz+SHqIquTZaPTyLmB3qTMefT/QB8kem
-         hEwNiFnQ5oZQRcVLwXGhve720M5Hw3lBFlO8DFyGuXtogfSfD15Hxj4OW+vs7Wijd/zk
-         kSqAXfrhkV4v0sTKU6LRfoqucqaX0cTxVY/XK8Dq9zkTxyi4LURFpibqK3qI+496pmT7
-         ahRQ73uUPwH0i/NcbotikoDN6uGPz/lUnyLTImSiMTrOgoYJeNZJoGRGXPHNzBHORPNc
-         y1Ig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795400922; x=1796005722;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ZicVV9Z+dbEcvbsxd5GYeloidM7KPsn1mE2hWsjYDlc=;
-        b=q2p0bizKfrvqBrSakpTCdYaZAMjp6xnvLO4YbxlJij/1L7UXek8LMdMNwVw/2xghoG
-         xOEvPOcccyvo7Ri1j99rpgSFyLIrGty1HV5jsS1++a6CEEPyTzXbS1MWE+zrgAzYbx95
-         sT4vZY5wqOK+3qRRe8uKPKyhMO0c8sc/OVYQaUtHDE8Ox6I8og9zjDIJZxm31QTnlGZF
-         pt5ByrB2Tag7HnEEVnr5rNTSLZ5Vy/qIAp+K6VmfUb66oBp4rNddmVGbVEYXz0GTDrOp
-         urrc2YURryLLo56xCZ3kGK9rncjROD08jaZyU4gcn+pOs7tHVQfnMPY+JsT8QHIRNlbf
-         8KxQ==
-X-Forwarded-Encrypted: i=1; AL+hErEd92mSd6PeE/OwYcU9wmzRVcVEPeD3tMhqWa7sbPVz0c5rx+U25eqIF5eEbTEUK1AP3Yw=@lists.linux.dev
-X-Gm-Message-State: APuU4Z8fG2CESEHnnYUJeEzkDDmhAQfCKjhKeCI3G4z7lC/98OrvUV+F
-	nOfIxY9RmuJbmd6ZHvWfVTtRdpBYe/7dZ6cVvM8d6KS+3mqaJm9mic1F
-X-Gm-Gg: AZFdTZcWFCx25z81rnso2fglbQm8Bb/tyKTWAwkaEF0Gaymf7tWq5jDa1vf4HM65YXJ
-	5pv99/niNcikkz17v4iCQXVP5HGMSC050+NZEbS5dh2G+nZvffCe8rfeLUaUDQc+flLoJAsDhCF
-	r2eFB3q1qbNRIUmCowRO7xmiLRzr0PYM+EofnD+mCfwZHO3uu5OoZLfmI8P51fgJVS1j/mkCUbQ
-	NQDl2CucLoO8YDdVvVZ6xKyTFWaAow4mcCa5l7PEBCEE9EhUBcJdPkPJiSskvFk+SWJs9Ko7+Fk
-	dhG+kJUhZCQrfGkgxL9IPok1K9pC2pfCi+U5Sr6gOAfpaQygcSGI4fgTLqpGem5e1+EBB1GjRLs
-	PBpeb2+R3WX9PEvQKDT0KYJDEbb9TJk0yyNOUOR04OZ7UuHBE01vYCu+are2jG+YMqkeBVCm/7u
-	KyzmktQ4OQPRfMwWzHj+QATdhojg2JXCrE37JlSmbx2tLbkJfqKAzN6MvdrlejbcTkHL9+Bmjjy
-	hgX3T4/L+53tlhp5e6MQ4LmL/ytGJWuGCxz3NzgGxbucjDW593HMsVOKvEsnMLzHU6JOvdGo5jZ
-	p4oe8ahHaDsktyjQNJ4L8LmbEnzCsIBEe5W1nT+5MFA/+4zSpC2pbMWY74oae1iX7AX/Dt0=
-X-Received: by 2002:a05:7300:50c4:b0:386:121c:c275 with SMTP id 5a478bee46e88-386121cc3c8mr9558886eec.10.1795400922103;
-        Sun, 22 Nov 2026 18:28:42 -0800 (PST)
-Received: from google.com ([2a00:79e0:2ebe:8:f002:4621:aeeb:e0e7])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385672ce402sm28632639eec.16.2026.11.22.18.28.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Nov 2026 18:28:41 -0800 (PST)
-Date: Sun, 22 Nov 2026 18:28:38 -0800
-From: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-To: Geert Uytterhoeven <geert@kernel.org>
-Cc: =?utf-8?B?TWljaGHFgiBNaXJvc8WCYXc=?= <mirq-linux@rere.qmqm.pl>, 
-	Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, Lee Jones <lee@kernel.org>, 
-	Sebastian Reichel <sre@kernel.org>, mfd@lists.linux.dev, linux-input@vger.kernel.org, 
-	linux-pm@vger.kernel.org, linux-tegra@vger.kernel.org, 
-	Geert Uytterhoeven <geert+renesas@glider.be>
-Subject: Re: [PATCH v2 3/4] input: serio: Enable compile-testing for
- SERIO_ASUS_TRANSFORMER_EC
-Message-ID: <awOk0yzFfiGt1kro@google.com>
-References: <cover.1795355432.git.geert+renesas@glider.be>
- <234c01e4ac98bf72e3e2bbfa7b4fba635530ab8c.1795355432.git.geert+renesas@glider.be>
+	d=cmss.chinamobile.com; s=default; l=0;
+	h=from:subject:message-id:to:cc:mime-version;
+	bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+	b=EzasSOUt0qH4hDp9s9jqGeqmEXarED731bZ0ZO5vZjnWmTgpJjeS0lvti0YFtY9mxKN0ivMiYwVqF
+	 h+DYiSxSKWt7IlSr1Qh0Ydkgxld39lFbQX4zqs8vFdDm75Rz12TRXuWBtUPJ/+zO+cOdj+6wTzxhd/
+	 HRWsrhUWGdIAdm30=
+X-RM-TagInfo: emlType=0                                       
+X-RM-SPAM-FLAG:00000000
+Received:from spf.mail.chinamobile.com (unknown[10.188.0.87])
+	by rmmx-syy-dmz-app04-12004 (RichMail) with SMTP id 2ee46b03a9ed907-d800e;
+	Mon, 23 Nov 2026 10:50:22 +0800 (CST)
+X-RM-TRANSID:2ee46b03a9ed907-d800e
+X-RM-TagInfo: emlType=0                                       
+X-RM-SPAM-FLAG:00000000
+Received:from DESKTOP-3K8GUTQ (unknown[223.108.79.98])
+	by rmsmtp-syy-appsvr05-12005 (RichMail) with SMTP id 2ee56b03a9ebdf3-83b5a;
+	Mon, 23 Nov 2026 10:50:21 +0800 (CST)
+X-RM-TRANSID:2ee56b03a9ebdf3-83b5a
+From: Xiangwu Lai <laixiangwu@cmss.chinamobile.com>
+To: bleung@chromium.org,
+	lee@kernel.org,
+	tzungbi@kernel.org
+Cc: groeck@chromium.org,
+	jthies@google.com,
+	chrome-platform@lists.linux.dev,
+	mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	Xiangwu Lai <laixiangwu@cmss.chinamobile.com>
+Subject: [PATCH v3] mfd: cros_ec: Drop OF node reference in ec_device_probe()
+Date: Mon, 23 Nov 2026 10:50:22 +0800
+Message-ID: <20261123025022.1761-1-laixiangwu@cmss.chinamobile.com>
+X-Mailer: git-send-email 2.50.1.windows.1
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -101,19 +73,81 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <234c01e4ac98bf72e3e2bbfa7b4fba635530ab8c.1795355432.git.geert+renesas@glider.be>
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, Nov 22, 2026 at 02:56:32PM +0100, Geert Uytterhoeven wrote:
-> From: Geert Uytterhoeven <geert+renesas@glider.be>
-> 
-> The Asus Transformer's Dock keyboard and touchpad controller driver
-> builds fine when MFD_ASUS_TRANSFORMER_EC is not enabled.
-> 
-> Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
+ec_device_probe() calls of_find_compatible_node() only to check=0D
+whether a "google,cros-ec-ucsi" node exists in the device tree, but=0D
+the reference held by the returned node is never dropped.=0D
+=0D
+Scope the lookup to the UCSI block and mark the node pointer with=0D
+__free(device_node), so that the reference is released automatically=0D
+when the block is left.  Keeping the lookup inside the block also=0D
+preserves the short-circuit evaluation of the original condition:=0D
+the device tree is only walked when the EC_FEATURE_USB_PD,=0D
+EC_FEATURE_UCSI_PPM and ACPI checks already passed, instead of on=0D
+every probe of every cros_ec device.=0D
+=0D
+Fixes: 17f95281839d ("mfd: cros_ec: Don't add cros_ec_ucsi if it is defined=
+ in OF or ACPI")=0D
+Suggested-by: Benson Leung <bleung@chromium.org>=0D
+Reviewed-by: Benson Leung <bleung@chromium.org>=0D
+Signed-off-by: Xiangwu Lai <laixiangwu@cmss.chinamobile.com>=0D
+---=0D
+=0D
+Changes in v3:=0D
+- Add the missing <linux/cleanup.h> include for __free() and fix the=0D
+  continuation alignment of the mfd_add_hotplug_devices() call, as=0D
+  pointed out by Tzung-Bi Shih.  No functional change.=0D
+=0D
+Link: https://lore.kernel.org/r/20261118062949.1250-1-laixiangwu@cmss.china=
+mobile.com=0D
+=0D
+ drivers/mfd/cros_ec_dev.c | 21 ++++++++++++++-------=0D
+ 1 file changed, 14 insertions(+), 7 deletions(-)=0D
+=0D
+diff --git a/drivers/mfd/cros_ec_dev.c b/drivers/mfd/cros_ec_dev.c=0D
+index 529a23b80..cd1ce833a 100644=0D
+--- a/drivers/mfd/cros_ec_dev.c=0D
++++ b/drivers/mfd/cros_ec_dev.c=0D
+@@ -6,6 +6,7 @@=0D
+  */=0D
+ =0D
+ #include <linux/acpi.h>=0D
++#include <linux/cleanup.h>=0D
+ #include <linux/dmi.h>=0D
+ #include <linux/kconfig.h>=0D
+ #include <linux/mfd/core.h>=0D
+@@ -271,14 +272,20 @@ static int ec_device_probe(struct platform_device *pd=
+ev)=0D
+ 	 */=0D
+ 	if (cros_ec_check_features(ec, EC_FEATURE_USB_PD) &&=0D
+ 	    cros_ec_check_features(ec, EC_FEATURE_UCSI_PPM) &&=0D
+-	    !acpi_dev_found("GOOG0021") &&=0D
+-	    !of_find_compatible_node(NULL, NULL, "google,cros-ec-ucsi")) {=0D
+-		retval =3D mfd_add_hotplug_devices(ec->dev,=0D
+-						 cros_ec_ucsi_cells,=0D
+-						 ARRAY_SIZE(cros_ec_ucsi_cells));=0D
++	    !acpi_dev_found("GOOG0021")) {=0D
++		struct device_node *np __free(device_node) =3D=0D
++			of_find_compatible_node(NULL, NULL, "google,cros-ec-ucsi");=0D
+ =0D
+-		if (retval)=0D
+-			dev_warn(ec->dev, "failed to add cros_ec_ucsi: %d\n", retval);=0D
++		if (!np) {=0D
++			retval =3D mfd_add_hotplug_devices(ec->dev,=0D
++							 cros_ec_ucsi_cells,=0D
++							 ARRAY_SIZE(cros_ec_ucsi_cells));=0D
++=0D
++			if (retval)=0D
++				dev_warn(ec->dev,=0D
++					 "failed to add cros_ec_ucsi: %d\n",=0D
++					 retval);=0D
++		}=0D
+ 	}=0D
+ =0D
+ 	/*=0D
+-- =0D
+2.50.1.windows.1=0D
+=0D
 
-Applied, thank you.
 
--- 
-Dmitry
