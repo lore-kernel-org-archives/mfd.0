@@ -1,96 +1,104 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.43
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.45
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795432751;
-	b=iJwF7l2ikCy7SbkcDDc61R/YPd3lzf0+6d/y7erNfTQZ4x6uoHG/UqtZWffZ7h6S3GUL
-	 3fjFcqiVK4iWMFbjuFuSKBDiOGQYo+t72CmHTUlk8OdKy4EI7PuHg92p7uypE/NSIxRe4
-	 TmJVixfhC/vcIa/mbT7xFgyjlpU5tStfPsBx7ypmmZuJIJfxC62xhFqaLdUt7RRqmZJli
-	 DVWZJbYg84dAUxEFf9t+H8kkZHn9dcj5GF0NT4tIYq4qjkOFWNegA2K76hJSVK64UCq2v
-	 MZiEYOWMXDTq6mTFjM77oaGFvl8RkMmr+Ij7Ya/9zD3+Zhy8/yV4GIwWeqSvqtLbWyg==
+	t=1795432754;
+	b=XTm/wQZRltvehBwZJA0Vgo/xlLYZhE1BhZgk5kP/tjQS0sCP7YsFJ7+ooVzfaSWnuteZ
+	 Gs4ElLmeAHY440LRb65DiRYcBxAAVjM65eQeuN4q+rSn6+KhXCsLgchup4KggsHCbP1Fr
+	 IQDSDenpNkEd8UnScp/bbz/TKd3sZPFeLS44e0OHFUxIqGlpHkVmFB5bkvOr0l7CdRA5J
+	 0uEXVJToQbXXrGUw4d2eZhHsFKskAWSGXkaj8sssxMEhwyT85xFXbVJwT//99CCNI9sfx
+	 n/gPxObVqHiwzt/ZwPK98ud06FKFezI7Q+FaAhG3JbqlI+652ldlfbWhXAlhSPcw0PA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795432751;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795432754;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Type:X-Developer-Signature:X-Developer-Key:
 	 Content-Transfer-Encoding;
-	bh=lOE6R7Xl/jlA0aq5T5u3Q2xfUb5jKoEz/z16W6dysFM=;
-	b=175wEq8gmKPfbkX93z/aA+fBI6xAcVFREudNRso4KXwxyLn+X/L36pEdtAdutmUkR+a2
-	 nnC1uMwW7CHN6+5qY6WhYbzEXihFkl86NV8AClW0Ur0Kn0Frv1zLytr9IdTex1QD1e9Bg
-	 iRWCPxR/4Ban93MlRHXqIFrnHzszjC3f2q+vJ0xgnzaAR2rQqYzljSPFZdinZXE2TpCaY
-	 xokIB1mrMHs5Dn/u6jZmcuiIWAaGhQ3htzs0KrdFfglzuBRszxRNn/PozRLDHxl/5A1VR
-	 u6I0KMW22hZjzIiNWGsIyZwgLncIE9B8kId+cDUhJbInx5Y5+/ZVdYmdvAt+sqN/pNQ==
+	bh=M9BurEdxaULfUy86Tcm7upcSP8lXl15O4kiGDMc4hME=;
+	b=ueyicGBXw42M/4+0fjUsLTyaVWBnsWEWqUAQ0vgXj9UHzIS7SoX+FpAU8vzBkdK4bmv7
+	 jDRNYZsj3Vm5bVD25bhN1LuySQxa25NYtA7vKcoqh01TRbfCoWUgui9KjrOa6Tu/yPQTd
+	 yWwBgVbmZVrprYNwBh0AvkYE/d80R131yTt7rx6z8nCkk3PeCao2Kr5mG5AuK4mX27xRy
+	 UFHjipafMsI0YYnz1b0JRQpAAb1GSCrjU8xZftR1tKS+RgwAklXdF7+9lk0mz/8ais3dc
+	 dNyqajnnBxIqFrf+X1q0gd7GU36Ro8FyPX+KXEm1VlLLJ4+u2dKPM+UlqPSRAG0Aw0g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=baylibre.com;
 	spf=pass smtp.mailfrom=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=gLdopmRt;
-	arc=none smtp.remote-ip=209.85.221.43
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=mYLQ1kdS;
+	arc=none smtp.remote-ip=209.85.128.45
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C04B960A2615
-	for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 11:19:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C04B960A2615
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5F4160A3806
+	for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 11:19:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A5F4160A3806
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=gLdopmRt
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-4a358881793so1564932f8f.0
-        for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 03:19:10 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=mYLQ1kdS
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4a2000d5fb1so17258265e9.1
+        for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 03:19:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1795432749; x=1796037549; darn=lists.linux.dev;
+        d=baylibre.com; s=google; t=1795432752; x=1796037552; darn=lists.linux.dev;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=lOE6R7Xl/jlA0aq5T5u3Q2xfUb5jKoEz/z16W6dysFM=;
-        b=gLdopmRtO/6zDNs+MQniSMkL9DlxV0rkVS6OoefI915IFvtlCOOGkC8BBI+NzPk5FJ
-         gzIIB8PuUfvn6OV0qReNqNpbjyOSEs7KDFliVwD1zZw/2cKGSG4WSCpl7GC2M+IPPLtX
-         lFPrghhExw33K1sxqgtUyf7muI9zKVqbDwQYu6kjgMWzYa2fEuk4IWhgV+sxL2k6MRnp
-         GuI32JK3US9/pk2GCKnIKO06F4/nyFaMCeu/p1m7AITzdfL0Hn8TP9QDG1P+0hoheN33
-         cUuSf+N4OmdJm9MLiqe4NjQuHUHMYpUzCLPvyp3T4O9B1qtOgvqd37ohStrGprIMxnD7
-         fH/Q==
+        bh=M9BurEdxaULfUy86Tcm7upcSP8lXl15O4kiGDMc4hME=;
+        b=mYLQ1kdSLw4Z+KEtRI70fo8gzdeTR2dqwv6KLrdCyeBjosFIVNrpQX4pTEXQUGcUh0
+         OUghTOD1bTI1AJS59PXoSdDOguzLo9KP63JwDHcwhLtZ48INMx9uv88WvcVruECYSxDt
+         7dBZGKQb7vF8VoZ3XQsJVL/C104gkqqV9Iny63IQdk3uecqUFXWErpn+99gw1K1YSMOi
+         mbveIq/Wj1c/kcBvFQLFCVea//mS5LT6UuEXxEMLQRaNM50nhfDPqnQcs5wtLkLhrGDf
+         x1dybilMk80uZA2I1HMQM4SylIS/De2dpAX08/9eNFfWAWwLIofA/I5La/p+CS5CbJcK
+         TUUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795432749; x=1796037549;
+        d=1e100.net; s=20260707; t=1795432752; x=1796037552;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=lOE6R7Xl/jlA0aq5T5u3Q2xfUb5jKoEz/z16W6dysFM=;
-        b=HGFrFJcfYT1gQbt6cuh5Vad8iLwMeRMFQcVIbZgZmsvZ5O3pyr2rnPa1HScnlJITtM
-         /iam77+Z7z0snwO/FnvjG0K7SSkepGhc1VY2zNYdM61yAPgUVwrBpGC5+aM9aggYXLk2
-         /0T/CMN3nL2A1BZk8hCT6MaF/+pGReshUTDJbC3lFyWFnAM+yG+KgT4+rcfjjhlDUOpN
-         Kx5AQyP9AOUaOZoH8EWJLHrcc5Ky3dZ6X/btkNnllqDzqkPujwH1qRkZbE8SCSa1ueh+
-         UV54/jgCIsj/1rRJDk5GUfymU4lrQl1LFrAcYs0DEEqpEFTmoGbfrmxxBYbj78f1zOA7
-         DVmQ==
-X-Forwarded-Encrypted: i=1; AL+hErFg0h1g/NH/aH5lApQM6kuXXiTE4ZXux354OHi6bj0degW2gP/pxtlzIcTWalHl2gvbltg=@lists.linux.dev
-X-Gm-Message-State: APuU4Z/BOdqewDVWmgD+Gv2CfP6E20KOS/bURDK9JKFpvQmfSHLCrv0S
-	vUIK8Vsw0DxZ9ylJfbM7sT9G5SGobimvL/guz6hZBG3YqG08slXgj9WjgrNgaGQ0vyQ=
-X-Gm-Gg: AZFdTZeHd1HdCtIoeS1a4s9N3w0tSHTrhFz3TLlwTH4VagdAyHZguZvq/PZ/tuej4cB
-	+Ms7tfX/fKkVbFx+lXwayRW1att84Dval3G/ELBcqIWgQZRuoL+fOcC3Stoy41hdwyMvlTGF1Sc
-	FQM4QMHpqXp6/Vh8X+Fma2Ymi8oJcPt9CHmYL0lu4Kf5dV5AX0rhhtmjk8ksi2EIcv1IEAfp4a4
-	f1Kno5X9MOtk2MZSlk29JPrwW9jtUvHgrb+MwoEHD6FZoCIQvEl91zg4sSWiKELqeUPflGYMnRV
-	qbJkX0p3jFdZwwgQrWg2Q4rp2++w3ZHpAWtA9KZPlRGWUA2eNOvMSrqq0e5s2RRG5Ot++4FPREm
-	SVTsiy3DY9hIMeS2y6YFohCYtAxGqH58rRzj+rRd6gvfeCzmfEQEo0MrFY7R3TG3MreZDMpFHvD
-	4NRFWxJij2cozoZADs0Z7aHgl3TYWeGTNEZmBmnaPB7B0jiSw4D5fYy9pxtr2icnIu1l3oc4RBR
-	XgwY5IXeCosGskHQQhkYKslQyNGcdPk5A3fRkfZrKOYAZBaVS/q03Q/+2S9JHdYYRSbfSqMmSzh
-	jcffh0dzeLySx6G6BCbn72hVC0EcoBVjXWczl/nHPCU0kYcnAdNwdCI5LztBhWp54g5TfFCohws
-	kFEts1A5BqK3hroCItQ==
-X-Received: by 2002:a05:6000:4a0e:b0:48b:db7:86a7 with SMTP id ffacd0b85a97d-4abb7787c05mr21163192f8f.50.1795432749041;
-        Mon, 23 Nov 2026 03:19:09 -0800 (PST)
+        bh=M9BurEdxaULfUy86Tcm7upcSP8lXl15O4kiGDMc4hME=;
+        b=xMfkUBN+R/156h53/ZjDVHYHPrntdt5xDUTzDqDQQV75vK70hndslTH8St7LuwSTdB
+         P5LERUi76nx5RYeRC9Ragr2ZX4gFXc8NiPkBoYELnDsLUkQOXwBsITsXFyC9BpMBWJEU
+         DKGYV7JsTr1xcOkuQ24pQA+dTjW/NZOqKxSMFfhe3EnJkTxp5/BvYas1O6BzGNRN5Grg
+         hiyeahQSGD+3HeCza2Ex7kPn32iXvm1atjmoVemaMq+QVBDGtNzI+PR0OIAs5utLrNDh
+         ZRPXFenSdagZP4lNcL01cK5QfZV/aBuxRoL3Oh5U8EMfWEqST3DPdG1g5tTar4rw8OEB
+         39uw==
+X-Forwarded-Encrypted: i=1; AL+hErEttj/dHznZXTqi9XcVtrMwcsmQwqMH4rSds9e5PXaVPIiaXG33xslxnwEDOmrCKvEHgUQ=@lists.linux.dev
+X-Gm-Message-State: APuU4Z9s22xJJ4G+gHJu6nSI524QwwAitd5akdyme0UKcjYMRJCPEXU9
+	BkxMW2vq3xZaxgumWFMpvso9ZKyewWyq3iHQcaiPppKxZyDjthBGKLYBWK6YsLEnfDd1LYs6LqM
+	JmC2H
+X-Gm-Gg: AZFdTZfpy1Oj5MDi2APeiAQXk6TgFxmzt5QmirVyk9JOXne/GBOAh5iNxMOpD1pc6zl
+	tZT/xHafDlyOzb5ujvSZktAJ528E1LSit0z9t2OvuiRRIiJtzeFyuXaQn6gC0TD0OvlP/H9PNCX
+	O1xPhB3lUQqZ7b9udLOlcOdOyChRDA7ICGpLu8en7fyujhcdJ3AB8TT7QWQS+9mV+VzAZA5BLkb
+	A+eVvf6jwXQmv1sm3inJ0cXZOYW4aKubGDgWqbSGDRcnZU+VUeR8fUv7Dco8F4GQ9Tj5cmJsBdl
+	nXvmullbTY+fhpJnh0atszPNs70G7jTxRgYOlRt4uZIhMBWaW94zAWWqwKWm7/M+DYZ2zMRqgS3
+	j/qgz1qkBbofgHR66mpYxP9uPrqA/OBruba/vQ/7tQ+rMkmz/xuLEqZdHZFti6DJ4uc6MfJgCIP
+	8YnBNy2xutig/VwNTaAMDJ4Fhu3rVj5MmkKajIf4ERs8fZABAgcAh8/aHnNeGkGidjDBMxifFOs
+	2Qp3wNrFjNlWuBk1KEc0JjqjZWpjQ2yRyBLa4UbrvfNT61khzVBZ88TevlKiEotDw8M4CrlldoP
+	TnfYem2alyEGpPzLx4HBoLDvojBH3OkDrMvykufJzy9NU292r85GHiJPuVBnhrqHtnNsWgKKMVQ
+	+HOpp0Kjj/rY8cmiG
+X-Received: by 2002:a05:600c:4e8e:b0:4ba:59fa:510e with SMTP id 5b1f17b1804b1-4bb8893014dmr230811345e9.23.1795432751939;
+        Mon, 23 Nov 2026 03:19:11 -0800 (PST)
 Received: from localhost (p200300f65f19a90438645cebc2ee104e.dip0.t-ipconnect.de. [2003:f6:5f19:a904:3864:5ceb:c2ee:104e])
-        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-4ab6b10b2c9sm22480961f8f.31.2026.11.23.03.19.08
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4bb906cdcc1sm160681095e9.2.2026.11.23.03.19.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Nov 2026 03:19:08 -0800 (PST)
+        Mon, 23 Nov 2026 03:19:10 -0800 (PST)
 From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
 To: Lee Jones <lee@kernel.org>
 Cc: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>,
 	Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>,
+	Benson Leung <bleung@chromium.org>,
+	Guenter Roeck <groeck@chromium.org>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
 	mfd@lists.linux.dev,
+	chrome-platform@lists.linux.dev,
 	linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-mediatek@lists.infradead.org,
 	Linus Walleij <linusw@kernel.org>
-Subject: [PATCH v5 07/17] mfd: Drop unused assignment of i2c_device_id driver data
-Date: Mon, 23 Nov 2026 12:18:05 +0100
-Message-ID:  <51e03a317097dd87a1afd7591032659611dae693.1795431460.git.u.kleine-koenig@baylibre.com>
+Subject: [PATCH v5 08/17] mfd: Drop unused assignment of platform_device_id driver data
+Date: Mon, 23 Nov 2026 12:18:06 +0100
+Message-ID:  <6d088972de962cd3b8a22926800e36defd268d97.1795431460.git.u.kleine-koenig@baylibre.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <cover.1795431460.git.u.kleine-koenig@baylibre.com>
 References: <cover.1795431460.git.u.kleine-koenig@baylibre.com>
@@ -104,15 +112,15 @@ List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1269; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=BOZAeiaAw4Eaud+KaCugllOmpmTVVDFpxRVJslTRZps=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBrBCD4XyeVWvp8XdlcWO/uEO3cdf31L4fMMm1Wd nFDQVp25+WJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCawQg+AAKCRCPgPtYfRL+ TjfRCACV7ttZXwTw5e/+aK/ttVncaxXZPGCgFmRhxQRxOXavYhzNdvaOeqyVj3btMFnfEHBQNVo Nrv6kPRaHwYzXG6Hc9opdJBXN19lnfpRlDjM6TGhSqmHQFupvV3lHVaBhbnO3xX3BoO6J5Re+pW Kp7aERCGgp3ccAeev3T0N5+vWdwWX6tNxkh2NtJxFRkV+ixOr9htYHfWPy3Sd/xjR2NZlTtRjA+ uCseWDWEMv5Pc1YEYyhYPd26kZUBIz7RNUdJ3YDPWPB55sSRQT/ItCyNXS7e3bzsQWyrcoEsn4L xqxJwIAfY/JR/gHrhfUuEr+JjDXO4YOzvEjenLpPmkq4U2pc
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1406; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=OvFq0jqcix+nwy/hTUrsl7qFm0ROsXuuz2q1RVingjQ=; b=kA0DAAoBj4D7WH0S/k4ByyZiAGsEIPvISAODgKyfpgbjFnyiCAHcQ7IbFHzgEvRZzaz3yy47u YkBMwQAAQoAHRYhBD+BrGk6eh5Zia3+04+A+1h9Ev5OBQJrBCD7AAoJEI+A+1h9Ev5OguoH/1w9 aQiu905LCob4dh8+UJ0quimfHVX9xW7+i57G0S8G2aVJctqf2euVKBSoxeeSo8zEke4pt4akQS6 fJ51B0cHc8thdTMyKEvvqix6mrX+xyKcVQqmq9lHk/m6n71IDFR+XBKvle9oQJaeZnQGiry1mC5 9hKGlxP9dWv4btXVIModwmGhL+nQLu27g8zlS4yCW3JbqOHO2j9R3gWD6EBfus+x4M1eQaAv6Zo x5vYa6z7z7lbQ5+suCKrVLirWylLU7XYuzMFyPb5zxB6Sf+qTBKk9cJNzgsawDWKCbigX8sw4iU BQpqVjVQ84v/zNG4tyEpOu3AkqJKnJGD/7SiVm4=
 X-Developer-Key: i=u.kleine-koenig@baylibre.com; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
 Content-Transfer-Encoding: 8bit
 
 From: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
 
 The drivers explicitly set the .driver_data member of struct
-i2c_device_id to zero without relying on that value. Drop these
-unused assignments.
+platform_device_id to zero without relying on that value. Drop these
+unused assignments
 
 This patch doesn't modify the compiled arrays, only their representation
 in source form benefits.
@@ -120,36 +128,36 @@ in source form benefits.
 Reviewed-by: Linus Walleij <linusw@kernel.org>
 Signed-off-by: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
 ---
- drivers/mfd/as3711.c  | 2 +-
- drivers/mfd/rc5t583.c | 2 +-
+ drivers/mfd/cros_ec_dev.c | 2 +-
+ drivers/mfd/mt6397-core.c | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/mfd/as3711.c b/drivers/mfd/as3711.c
-index b123195d911c..9513dc4ee0cd 100644
---- a/drivers/mfd/as3711.c
-+++ b/drivers/mfd/as3711.c
-@@ -191,7 +191,7 @@ static int as3711_i2c_probe(struct i2c_client *client)
+diff --git a/drivers/mfd/cros_ec_dev.c b/drivers/mfd/cros_ec_dev.c
+index 529a23b804f7..96aac158fd8b 100644
+--- a/drivers/mfd/cros_ec_dev.c
++++ b/drivers/mfd/cros_ec_dev.c
+@@ -379,7 +379,7 @@ static void ec_device_remove(struct platform_device *pdev)
  }
  
- static const struct i2c_device_id as3711_i2c_id[] = {
--	{.name = "as3711", .driver_data = 0},
-+	{ .name = "as3711" },
- 	{}
+ static const struct platform_device_id cros_ec_id[] = {
+-	{ DRV_NAME, 0 },
++	{ DRV_NAME },
+ 	{ /* sentinel */ }
  };
+ MODULE_DEVICE_TABLE(platform, cros_ec_id);
+diff --git a/drivers/mfd/mt6397-core.c b/drivers/mfd/mt6397-core.c
+index e2f6315f7da8..816ddfe1584a 100644
+--- a/drivers/mfd/mt6397-core.c
++++ b/drivers/mfd/mt6397-core.c
+@@ -327,7 +327,7 @@ static const struct of_device_id mt6397_of_match[] = {
+ MODULE_DEVICE_TABLE(of, mt6397_of_match);
  
-diff --git a/drivers/mfd/rc5t583.c b/drivers/mfd/rc5t583.c
-index 431ee5deec00..96553e5a8279 100644
---- a/drivers/mfd/rc5t583.c
-+++ b/drivers/mfd/rc5t583.c
-@@ -280,7 +280,7 @@ static int rc5t583_i2c_probe(struct i2c_client *i2c)
- }
- 
- static const struct i2c_device_id rc5t583_i2c_id[] = {
--	{.name = "rc5t583", .driver_data = 0},
-+	{ .name = "rc5t583" },
- 	{}
+ static const struct platform_device_id mt6397_id[] = {
+-	{ "mt6397", 0 },
++	{ "mt6397" },
+ 	{ },
  };
- 
+ MODULE_DEVICE_TABLE(platform, mt6397_id);
 -- 
 2.47.3
 
