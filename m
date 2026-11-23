@@ -1,101 +1,104 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.82.180
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795461883;
-	b=mt/3UBN3yRiuAf6Kg6uyAIyuPYeODgZjbpFqBwIUDZyz8hQpG61RdMOwWgpqrkpMksY1
-	 n74e6P1CCwNyjcx7cT2a3L/pu3hvIcXpWj0LdoFlHhcc9TMQVG8AZJieftEptkCkfhdMp
-	 hfoHnCEFlOnBXFCYc1cxLsESTSohjFJ18J2K8aXuKjhMro4IAW/4vkFDS2YULp8pbMR5e
-	 L8ht3a0CZKUEvGRx4kcNs2bHGGewxTC3h2c+YVhBlb7zM0KliyqzuXsbkowOmtJe08Gcq
-	 FcAvkfngom039gmWrBGA9jZOP08VBlFAtQUzPhNQUvfPU8ErgILxBDJOTrW9/tj4QzQ==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795461883;
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.45
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795463536;
+	b=mpDzzsBErtTQZayc/PMg5awc0K4N5e8HIfrzYbGnhhvYykOMcVbrCE94UIlRAXMfgAcJ
+	 p5wanXqfmwkejtHvBV3JlINiFP+ZdHxKZVSlzws2eAG4H2DAJf9JNIngmV7SwopHkQMWt
+	 teXUdJ8KfgaeNzUrjdj9LpDWLGTxcK4zXLX/7YYgjFsGzAj4mxAevjeNN/AycQL7KLiT3
+	 1opO47q7gX+pzzmpax31o5xEmGHClUh0dgliffTetJ2N4C+PJ4oIdp+APPXeDRrzIoFTa
+	 gEbY53k4VWus1YgxcKg1Q0tZSqVScea414ucA5LfE4iaf139lpkd5f5L0fzImkqYLlg==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795463536;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
-	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=mu3NpxL0VDL/oCB28gOtk5lf+/OEsMsSKxF2nMbAOns=;
-	b=D3q9Fo6BF+9sSmRUt2Wv07MFSzrCqd0Uo3vLw0KDvgpKXPxVni/FCxeEG2eedrHxjfYz
-	 pN+JWdM8i6gNFs2kPr2VnRbPv7GlAwK3GaouSErsSLFcxUZSzeFdV8w9tI9dY4lKLESPr
-	 31E01YabMsoLw1GNuXqjxH3jPyMXzGtVOpEkm3EfRnWE3VAgq0vh5DxnZg7DnI1pdsODs
-	 MgW24fJg2+aWo7a//zjFCP5JJXGFdLpbrTybQGIb0JF+t603PVqWiC/imPIvXTw7NQzP3
-	 D90SRJxMh+ZyF916Et39sAs1nPN2vzqGqQgzJW1evyuHWZqahP1uuTZJhdTV5N7IpTw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Date:Message-ID:From:To:Cc:Subject:In-Reply-To:References:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Content-Disposition;
+	bh=3RshK4Oj6YgNlZUOTXg8txJjkOgNgpHYtx0HE0E152o=;
+	b=I+eqZ4owowcgDb8t0U5vSf1FxunG/Ip/6suw6EHKXIf2n7v7YeGB72K3+/HFBt4LTKDy
+	 jGOiOka8UNdg4LaXPKGeJ6B2VcaU/pM1k9xKzjCZ1KRPlVo1AxFWEeHe4/VsRx6ga2Hvc
+	 AL4IPfqcaOfOjMJ5cYlZZx+VNWIOHmqnaK47mKNRoTvzZoDcACu8JdjsqdJQoLsFPRvjo
+	 IBWQZ7JaSknAzbjXSm2AiILkxwTrxNcPbvHlO8B6jIzMKcXhV8s3c34JmKzZVmuMtANKJ
+	 s1FATtk40+AvnFy4hnF26H9T2ZQ/hbTQwnMyKqhtLRK6fiqxysJtgSMzI7BdVKnxqsQ==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ULDOeiLB;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.82.180
-Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=fjyLydcX;
+	arc=none smtp.remote-ip=74.125.82.45
+Received: from mail-dl1-f45.google.com (mail-dl1-f45.google.com [74.125.82.45])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6DCF606A31F
-	for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 19:24:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C6DCF606A31F
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50741606A689
+	for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 19:52:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 50741606A689
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ULDOeiLB
-Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-385d8a00598so5126576eec.1
-        for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 11:24:42 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1795461882; cv=none;
-        d=google.com; s=arc-20260327;
-        b=OVs8qxeN5T0WGu1qkBatF1FRxOnqRf7WZ2jTOHzaMnAahwX8afmmARR8ZLjzgbhOwX
-         HqhZPzZyBWtb+fRI4z4muBOY8kj3Dx/ceQQvgmPx0G7zPujao/Jk7efmaHIm6Z2yg4e+
-         /PJME/4eY42Ac0udcRpQwK0kWqKrdLvkxt8iSI8B4FIXU33ooxkv5TFP17WIDnFMMMG0
-         GVy+PsshPHBDYtdSeddCr3sWSSj1p2Msba6ZMkFg6hQcqZnEGOq6d83c2Py9mrDhGHdI
-         2pFFMvLYZhnW+wyf85CHlnkw3MJAYeQIUHfowkdDharqyULK0euaK9LeW38pKe757krx
-         gY6g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=mu3NpxL0VDL/oCB28gOtk5lf+/OEsMsSKxF2nMbAOns=;
-        fh=ZG3u1vktU1BzWlWJWhDON9mOQvHaG+dn68A0MdESpTQ=;
-        b=ABXCsCvURPfgn/2BztROFmZcJoPZsDmfmLIDLKqADhFqFTmFY7NcQiEqFfGtBEGOx/
-         fCd8+MMqyjKhXdDx+7W3oLmg68BgKGzpcuFr5up0Tf2GMWl+SayJdHI85LVa4lmx0qGo
-         taObnsHbdichjLt+58uS+1h1e6yRrdPgqoF7nxVWD5oKStlFv6WxYn7i8XU5v58j/qKo
-         D5QZ8wc66E+r6e/85WTET2vDgDMCHEgLEnZPgM79jH71qDl1Lql70WzeaQH5zehWNSVZ
-         5CIRqm6NStlla8AU7uJHlNA8CBKpAAHYJSCwPF445Ot4fkn/SwgZAtEjwOtiwe2Lz+Hv
-         n5Ug==;
-        darn=lists.linux.dev
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=fjyLydcX
+Received: by mail-dl1-f45.google.com with SMTP id a92af1059eb24-15dd124bbe7so2847617c88.1
+        for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 11:52:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795461882; x=1796066682; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=mu3NpxL0VDL/oCB28gOtk5lf+/OEsMsSKxF2nMbAOns=;
-        b=ULDOeiLBPnN5tsJ/UQ6damAu6GwK9BGmpP8snU8bIDEP1HbZ8IWNnArLnDaNJ/Mf9d
-         jmBix18TWifgeLn+JO49EArdtP8mTN8sz5slkCo809qLosjhjWXdgAh7co2qjmhhv12H
-         jPJeKfYiFzfRFPTLq9k/EnlTg8KrDYu3yNqMWRfYiufQsjv6Qz+BuHiEqbQyvnAqJUsq
-         Ggql5UXCwiy0w0z18VPA1DZZK16NIQ6zrENZgsrTguZzt85AZrIFyf+LxAdbh5naHvk+
-         AyPQfhq3+67jpJwGj43+tI/Tt+NAs4Kii8OlscKQkH32l1mOVer10lRZAb0PgZSyMQXn
-         c6hQ==
+        d=gmail.com; s=20260707; t=1795463535; x=1796068335; darn=lists.linux.dev;
+        h=content-disposition:content-transfer-encoding:content-type
+         :mime-version:references:in-reply-to:subject:cc:to:from:message-id
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=3RshK4Oj6YgNlZUOTXg8txJjkOgNgpHYtx0HE0E152o=;
+        b=fjyLydcXJY1NEu4XWezj2b6XJQ4UgNl3HxX7rRayh6zRpuyN9TBJKBRy2KCVSz8JcU
+         Va0k3tEO2cNH0594zJ8hY0UQHUtOausvhbK7t+pFRIJvLmQP7GZUMeWTb1UsJRL/zSft
+         5aAvgZ/JzSgafe+mK9T8ekdYw9o6EIZwrgmQM3awZUjlEOPcu9aHdH3v8bVhi/Tm5aTW
+         5a+E0zO0+WKD4P6vi9Ap77wY3t5i5vikC7xz6lGLHIRYmAdXfYm1xPDIq//tptn8Dpnf
+         vp/cD+gH92k6Zb5yRqBPxXILfzjoG+ad/+e+MTtbb+5RpSDMPTokGGWXaUiXjT4INeUD
+         h0uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795461882; x=1796066682;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=mu3NpxL0VDL/oCB28gOtk5lf+/OEsMsSKxF2nMbAOns=;
-        b=lusZ9Suw82TbUyc29nnDhFA+6pPEMayf06JUbh1VmC2vIhL8m9be+JyXMTyrfdlPIH
-         HeoCfbVyroU1NhViCddilWpFuIPR/xG/HG//JC+FLsrPgCYcCkKcPd1LCBM/gG+gihNr
-         FTebNi11UCW5odOu28D7i9tP04HDh+ATuT4g5SHpW9ICOVKaAs6oKoT7SvH8/Ejb1G2T
-         wcLMoKgnP/pnW554lbP25dSXODw3txOAZXpvWhEWl5Q7/7nxbbGO9oXk24s0Y4WHDLqP
-         0iKfh3B1C49Sfig7KQvcENF8+xjHX6j9lPDh1zNSq9NN+COAcH+ix4nkwcNgeBCAUDz3
-         JV5A==
-X-Forwarded-Encrypted: i=1; AL+hErEjAvXNK63Agal/YP3yN1ln9ivf3JEWZ3ol9+9NMf0w5bNjp8SDedfHw4Yds+9H3/U7z+E=@lists.linux.dev
-X-Gm-Message-State: APuU4Z9yFS9gcDRoPiE28lCSgTiZ2iA3PlpN4U3k0hbdqp8pzZrvqP7m
-	fcFUw32OxnAWxGooGY5NtLUMsUzOybFcSmpMXJf8I7SDRpxaBQantZRxLrb/ORnF+F7/V53xJiV
-	HrPTTTtbylm5LrRwHuiUVFqukH1frT60=
-X-Gm-Gg: AZFdTZdmVdeNSiP3H0wxZQwp54/2jJTvvbGbTYayeD08GwQzi+eIjUpAAZf+HTRVYOX
-	y7TSFKh/2Jj1dgubmeur/VGPk9tAYbQLs6GlZBn+9yjNATupnm0AIMEMgOEvXtL7heWK6zxo+gN
-	Km4/PmmWwmHO0rJ843R9XHV6qdOwV7HqfUacs72GwLKoP8HEIOINR2c5nc2ICDoUbSMzc9F/Lb8
-	l2/TjMUWJWROHnuqo7ge5YK2bTSiOSoM+ByoOj7XTlafOsvCIkclWNcdQRBrOQLHntmsFwkKTnQ
-	r+1CJ5dzASvnbrEqisl6aQ4DnvYP/OnrxnFpGAVagrZla6UBazL+bOJ/4A4D+8NCY2q7a6Adl0N
-	6op0fdeo/2yg7Avtr7CawVUh8/x3+lsFLxWIoyxuMa49FJvGiUEIIgmbzflTDHhY0evv2v/Getu
-	5xdH638aySnCDnmLEj12PuRZQ7AAjVjQ==
-X-Received: by 2002:a05:693c:8641:20b0:383:50b7:1d78 with SMTP id
- 5a478bee46e88-38571223ee7mr14067601eec.40.1795461881820; Mon, 23 Nov 2026
- 11:24:41 -0800 (PST)
+        d=1e100.net; s=20260707; t=1795463535; x=1796068335;
+        h=content-disposition:content-transfer-encoding:content-type
+         :mime-version:references:in-reply-to:subject:cc:to:from:message-id
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=3RshK4Oj6YgNlZUOTXg8txJjkOgNgpHYtx0HE0E152o=;
+        b=ahbaO/PSWwnLRlWsYq05n/q3JvN5XRrKFixdljZJ1hiiNBaRXYEoV3WJRBgd5MadyY
+         XjoRhN+AKFXki0y77npDKv4N151bboKh8ekb99+WOQLOE7tT6ZyjwOykQVCq1Ap9/0/K
+         gdrRrR3L0XUxupqGHYaIcnTSQOfqRDQo4R6vUSE65+4Kd21/e6AmhRVtTb8fmLm1yWWs
+         DRChW1j0+1wozeuLOit2BbN5ax81coSQUgGH7mevTBUDLh1RJbx+xtioMMnM7RIjNiOZ
+         cZqWw/sMr/DkfjuN7RUyZQFRs2am15UmZ7JrjQWtPkHbCDB+L1FG4rXLqVDpETd5R9A8
+         rusg==
+X-Forwarded-Encrypted: i=1; AL+hErGmShF2Iu/aQHhWpOsdlAIJdbACpoEqdm1lVbRiTYy3Htkef/zdlhClKABsD5fg9d5RHcE=@lists.linux.dev
+X-Gm-Message-State: APuU4Z+In7zEruwO/3IB0IUbE9Zwr9fq2LXZQtA4Gek78p4rpHBJwqo+
+	UiDuVzgsr6/oSu8jT5QQ6Nlqn1HCqOSzq9B+Q04MsAYFx3Ukd0xt1mL7
+X-Gm-Gg: AZFdTZcOFTxD2uBgHdgKDG4BSg9fWxC9+mk+AqNg6RrjGA8j6o09Im+DODZwPYqvDwm
+	CWWrklkSbmEWvGSKyJa74fySecLx6GqFJdpr4uSeDJ/OBmlBkoDgYDUkYY8oluhzNXbN+cWQUCh
+	SntB+4dQLLLt4YvlnKFjrJL/U8vdZMgQG/RIUV5mvjjh4Ft3yweo8944S2igext94TUfGOw2/OP
+	EHYwM6B/ns/dMwEmoqIOpFMO4gcXm6VYll/tx5grKtlCYQ+SO3JwbOO9yHNti6MZUfyCcZSMGub
+	Wqp3g1SQk+/Y/wfe0+enZtddTSVmD1w/zPCMCqH9Ha3xR8HcDPorNcfWnwP3Lj+4lf3KfObdgoE
+	oTcGLFUKGzSXgApyThcizp98O0+XbsEg62aUHRdzNG3nC/psKFQPAOdlJ/XLiyRwo46bZlHUGDJ
+	P2/Y0ah46L71aWugoDhAqhZ7zsxQh8B/1QRCcOswRStKUBp54BQVsRJibRCW4g6guHUyZgoxYt1
+	+8gjDjV6qmO8neoGlc3UJgJgo0/9Qzdo2hzw0JtHgp+E0kOiVBQ/yN5b2CGRtgswi8lIKN6kQG+
+	qHo7+v3K6nTFiEHkkINDkEb11EvtAAKNot0UuI3fWpy8k85ijdSb037ilQM1if92XN8nHIxuT23
+	7JCiWDpBqzNUeQo8=
+X-Received: by 2002:a05:7022:5f08:b0:144:c112:5f24 with SMTP id a92af1059eb24-1b5568f9e24mr12609285c88.25.1795463535268;
+        Mon, 23 Nov 2026 11:52:15 -0800 (PST)
+Received: from localhost ([2a00:79e0:2ebe:8:4121:d698:201c:9274])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5567ffa8csm34957036c88.7.2026.11.23.11.52.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 23 Nov 2026 11:52:14 -0800 (PST)
+Date: Mon, 23 Nov 2026 11:52:13 -0800
+Message-ID: <dfdf0c3f2c02672514077465784ae1e6@gmail.com>
+From: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+To: Mark Brown <broonie@kernel.org>
+Cc: Liam Girdwood <lgirdwood@gmail.com>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	Charles Keepax <ckeepax@opensource.cirrus.com>,
+	Richard Fitzgerald <rf@opensource.cirrus.com>,
+	David Rhodes <david.rhodes@cirrus.com>,
+	Lee Jones <lee@kernel.org>,
+	patches@opensource.cirrus.com,
+	linux-sound@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	mfd@lists.linux.dev
+Subject: Re: [PATCH 2/4] ASoC: arizona: always parse device properties regardless of platform data
+In-Reply-To: <179414246010.3630016.7821414370886873553.b4-review@b4>
+References: <20261105-arizona-asoc-v1-0-25ec7338446e@gmail.com> <20261105-arizona-asoc-v1-2-25ec7338446e@gmail.com> <179414246010.3630016.7821414370886873553.b4-review@b4>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -105,187 +108,42 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261123150725.212836-1-clamor95@gmail.com> <20261123150725.212836-4-clamor95@gmail.com>
- <awSNc2piI26LgyAU@ashevche-desk.local>
-In-Reply-To: <awSNc2piI26LgyAU@ashevche-desk.local>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Mon, 23 Nov 2026 21:24:30 +0200
-X-Gm-Features: Aa3M54p9p3fpa_qpWITuz1CQVJO7lvIEsLxGf_QiAXXT24x-6L6prR2LGWA5Z2I
-Message-ID: <CAPVz0n2yBtFh-TJ13cH8WXtiyzR3tOrbhACyq8MThi_6+7DOYg@mail.gmail.com>
-Subject: Re: [PATCH v3 3/4] iio: adc: Add support for MAX8907 ADC cell
-To: Andy Shevchenko <andriy.shevchenko@intel.com>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>, 
-	=?UTF-8?B?TnVubyBTw6E=?= <nuno.sa@analog.com>, 
-	Andy Shevchenko <andy@kernel.org>, Lee Jones <lee@kernel.org>, linux-kernel@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-iio@vger.kernel.org, mfd@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-=D0=BF=D0=BD, 23 =D0=BB=D0=B8=D1=81=D1=82. 2026=E2=80=AF=D1=80. =D0=BE 21:0=
-1 Andy Shevchenko <andriy.shevchenko@intel.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> On Mon, Nov 23, 2026 at 05:07:24PM +0200, Svyatoslav Ryhel wrote:
-> > The MAX8907 PMIC has a dedicated ADC cell, which provides 8 ADC channel=
-s
-> > with information about different parts of the power system, including t=
-he
-> > battery, charger/plug, jack and thermal readings.
->
-> ...
->
-> > +#define MAX8907_CHAN(_type, _idname, _datasheet_name) {              \
-> > +     .type =3D (_type),                                        \
-> > +     .address =3D MAX8907_REG_##_idname##_MSB |                \
-> > +                MAX8907_REG_##_idname##_MEASURE << 8,        \
-> > +     .indexed =3D 1,                                           \
-> > +     .channel =3D (_idname),                                   \
-> > +     .info_mask_separate =3D BIT(IIO_CHAN_INFO_RAW) |          \
-> > +                           BIT(IIO_CHAN_INFO_SCALE),         \
-> > +     .scan_index =3D (_idname),                                \
->
-> Using () means that you expect an expression as a possible input. In such
-> a case the macro is buggy as it will evaluate it twice for _idname. The
-> simple solution is to drop these parentheses and expect that this macro
-> won't ever be used with the expressions in the parameters.
->
+Hi Mark,
 
-You have a point but current state should not cause issues as well.
+On Sun, Nov 08, 2026 at 12:54:20PM +0000, Mark Brown wrote:
+> > @@ -1184,7 +1184,7 @@ static int arizona_extcon_device_get_pdata(struct device *dev,
+> >  					   struct arizona *arizona)
+> >  {
+> >  	struct arizona_pdata *pdata = &arizona->pdata;
+> > -	unsigned int val = ARIZONA_ACCDET_MODE_HPL;
+> > +	unsigned int val = pdata->hpdet_channel ?: ARIZONA_ACCDET_MODE_HPL;
+>
+> This changes the default from ARIZONA_ACCDET_MODE_MIC to
+> ARIZONA_ACCDET_MODE_HPL, and might be clearer if written using a normal
+> logic statement.
 
-> > +     .scan_type =3D {                                          \
-> > +             .format =3D IIO_SCAN_FORMAT_UNSIGNED_INT,         \
-> > +             .realbits =3D 12,                                 \
-> > +             .storagebits =3D 16,                              \
-> > +             .endianness =3D IIO_CPU,                          \
-> > +     },                                                      \
-> > +     .datasheet_name =3D (_datasheet_name),                    \
-> > +}
->
-> ...
->
-> > +static int max8907_adc_read(struct iio_dev *indio_dev,
-> > +                         struct iio_chan_spec const *chan,
-> > +                         int *val, int *val2, long mask)
-> > +{
-> > +     struct regmap **regmap =3D iio_priv(indio_dev);
->
-> Then logically better to go further and have
->
->         struct regmap *map =3D *regmap;
->
+ARIZONA_ACCDET_MODE_MIC (0) is not actually a valid headphone detection
+channel: hpdet_channel is only programmed before starting ARIZONA_HP_POLL
+to measure headphone impedance on HPL or HPR, and the switch right below
+(as well as the DT binding) rejects 0 and falls back to HPL.
 
-This is matter of taste, I was inspired by MAX77541 ADC which uses
-exactly this approach.
+Before commit 9e86b2ad4c11 ("extcon: arizona: Add support for select
+accessory detect mode when headphone detection"), ARIZONA_ACCDET_MODE_HPL
+was hardcoded for all boards; that commit only initialized the default in
+the OF path, leaving platform-data boards that omit hpdet_channel (such
+as crag6410) with 0 by accident.
 
-> > +     __be16 data;
-> > +     int ret;
-> > +
-> > +     switch (mask) {
-> > +     case IIO_CHAN_INFO_RAW:
-> > +             ret =3D regmap_write(*regmap, MAX8907_TO_MEASURE(chan->ad=
-dress), 0);
-> > +             if (ret)
-> > +                     return ret;
-> > +
-> > +             ret =3D regmap_bulk_read(*regmap, MAX8907_TO_REG(chan->ad=
-dress), &data, sizeof(data));
->
-> This is a bit too long.
->
+Fair point on the ternary though. I will rewrite this in v2 using a plain
+if check (only validating "wlf,hpdet-channel" when the property is
+present, and defaulting unset pdata->hpdet_channel to
+ARIZONA_ACCDET_MODE_HPL in arizona_jack_codec_dev_probe(), matching
+pdata->micd_timeout) and note the default behavior in the commit message.
 
-101 char, yeah 1 char too long, though maybe it is not wort resending
-for a single char too long?
+Thanks.
 
->                 ret =3D regmap_bulk_read(map, MAX8907_TO_REG(chan->addres=
-s),
->                                        &data, sizeof(data));
->
-> > +             if (ret)
-> > +                     return ret;
-> > +
-> > +             *val =3D be16_to_cpu(data) >> 4;
-> > +
-> > +             return IIO_VAL_INT;
-> > +
-> > +     case IIO_CHAN_INFO_SCALE:
-> > +             *val =3D max8907_default_ref[chan->channel];
-> > +             *val2 =3D chan->scan_type.realbits;
-> > +
-> > +             return IIO_VAL_FRACTIONAL_LOG2;
-> > +
-> > +     default:
-> > +             return -EINVAL;
-> > +     }
-> > +}
->
-> ...
->
-> > +static int max8907_adc_init(struct regmap *regmap)
->
-> Why not name it 'map'?
->
-
-Because regmap is more explicit and is used consistently across the driver.
-
-> > +{
-> > +     u32 value;
-> > +     int ret;
-> > +
-> > +     /* Enable internal voltage reference. Exact purpose of bits is no=
-t known. */
-> > +     ret =3D regmap_update_bits(regmap, MAX8907_REG_TSC_CNFG1, GENMASK=
-(1, 0), BIT(1));
->
->         ret =3D regmap_update_bits(map, MAX8907_REG_TSC_CNFG1, GENMASK(1,=
- 0), BIT(1));
->
-
-which map? bitmap? statemap? or maybe geographical map?
-
-> > +     if (ret)
-> > +             return ret;
-> > +
-> > +     /* Check for internal reference IRQ */
->
-> Please, make style of one-line comments consistent ("all or none" are wit=
-h or
-> without period, same for the first letter =E2=80=94 capital or small).
->
-
-First comment has 2 sentences, that is why it has periods. Second only
-one, so it does not need period.  "same for the first letter =E2=80=94 capi=
-tal
-or small" - have you even checked the patch?
-
-
-> > +     ret =3D regmap_read_poll_timeout(regmap, MAX8907_REG_TSC_STA_INT,=
- value,
-> > +                                    !(value & MAX8907_MASK_NREF_OK), 1=
-0, 1000);
->
->         ret =3D regmap_read_poll_timeout(map, MAX8907_REG_TSC_STA_INT, va=
-lue,
->                                        !(value & MAX8907_MASK_NREF_OK),
->                                        10, 1 * USEC_PER_MSEC);
->
-
-hmm, replace 1000 (4 chars, pretty readable) with USEC_PER_MSEC (12
-chars and twice wrapped line and needs tinkering or looking into
-units.h), I don't think so.
-
-> > +     if (ret)
-> > +             return ret;
-> > +
-> > +     return regmap_update_bits(regmap, MAX8907_REG_ADC_SCHED,
-> > +                               MAX8907_ADC_SCHED_AUTOSCH_ENABLE |
-> > +                               MAX8907_ADC_SCHED_AUTOSCH_TIME,
-> > +                               MAX8907_ADC_SCHED_AUTOSCH_ENABLE);
-> > +}
->
-> --
-> With Best Regards,
-> Andy Shevchenko
->
-
-I would like to hear what Jonathan has to say.
+-- 
+Dmitry
