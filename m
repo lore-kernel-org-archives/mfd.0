@@ -1,71 +1,72 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=68.232.154.123
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795440343;
-	b=tsCMkNFQXxE1CgDyIX5hEN0lwCtwPulpY720hB+HVQrb18Dd0P232d776w3jwOEs1T4P
-	 eeiJ6AS6llN45Fjol88WKWq9gOTEO9QhyZgmGR8sXPCLqxve0GgFVzTpH1SPOsFpUA4m5
-	 nqphl9fnoWEhrYr/lgZqG1uH+KqyL7aRjejtRrBsrWAaHjnZYtOLc8jBkJe9nhgeXDX/C
-	 VffZq2FJirU0f3X0A5XrQHXk8Te9fJUbpNH5aeQdPd/uaqNiMUdzCMrbSXcqcpcbRw0bv
-	 nfIdspjvzARspvLnzmZPi5eRpRDiRAlGfYD9pwm6w3HAsOjHJiux7Yc6qSufREZ36/Q==
+	t=1795440345;
+	b=TFMKWbfqxY8s2BHGd1aDb61PpiOoY1h0VyQef7ZfKxwkB7/wP7iA1R5iisrPgBdRHZO1
+	 DWt+cWhiBuhjy6AruyIM0EyaYtiWaN1a7Pv8Qz/4kiD8tSrx+vCJlRiAlJYbeil98ENCY
+	 0l6dgOgXY2PjOxVd+ibVHPEeTrP2FdKDz+oF292yedQAHOdrlFWe4/imcF4uxYmO7wm9Q
+	 c4eSCyUNjPxPWmdqysPULiDhOKMiBiWBifmPL3oQZJSviAWIezwegayTvAcr/cmiDnpf7
+	 QxkuEJJYV2OvmqnLj8d1R9ZLshYRR3Ug4049ajIkGj88yQsMiOeXPNir2wXnxA4wbjw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795440343;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795440345;
 	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
 	 X-IronPort-AV:X-Amp-Result:Received:Received:Received:From:Date:
 	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-ID:References:In-Reply-To:To:CC:X-Mailer;
-	bh=g1I/14I95gydn2dsr7fK8aodqhToZt2zSccNpHE68WI=;
-	b=Rqfhkissq8LY86Mqkg9eaW9mPPl36hZiEdpsQyzcPIHtaGqSc3ss5ctlTAZ/RsmjlFkt
-	 RKvD6ZGAUP/9OAiPr3o/qItwf7ArS5ib0ybshsK0xYUYMWI9vqrin9x2Skx6CaXa3K5C0
-	 IYqjprfEG5ZTKG2zYAHIknyHKdkkoRgXQBGYEfzCAMh3obQq326zzhRpNzukCx6Uo8lBi
-	 yvco//FASQ0JcoZnfrDzqV1RPxa6fB4c2JOZZvFPnXVgn0XqeCo5HQF71+0bsUcPSqrI/
-	 k+HrAdS/LkxbkVA077G+9BvPwWUlWUNLlMiE4FpuLIgeycoWESzo2N3fas+BGs9Z9PA==
+	bh=URu20HOx1V3fAUrNtBnQmt6dwNehMVtt7uCyxpQHTs8=;
+	b=kfoIGvuLY6aAHpQL/y2yu1dZOGFSqkJVZrOKkAUob2nkT0O3xw1lDtsLaicydJ12YLcj
+	 iBoLh/TknsaRSrUEtJr8Zr/Aw7zqRBJ+St0afOG4K3YPS1h1W4+LVVHmZea0mmgLCqzL6
+	 uvQj2K9yc+aZytPzMVIJ8ggZckM+RuC78HRowpHEET429KtLjnfVyNNtQInBi3Bjj66Do
+	 W175Nx1vbbF+qCphFYCSXh5jnIdoCXJYXces3sKZ5IPsBAzSLX5C1x3F1BOYLf44K7mQN
+	 IuA/vmS+MaGV6ri2C3x/+ynxejaIcKAf9FAyNOjNkasQMJSITow8ibW2QO6W/P86lEw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=microchip.com;
 	spf=pass smtp.mailfrom=microchip.com;
-	dkim=pass header.d=microchip.com header.i=@microchip.com header.a=rsa-sha256 header.s=mchp header.b=0Ten48jQ;
+	dkim=pass header.d=microchip.com header.i=@microchip.com header.a=rsa-sha256 header.s=mchp header.b=FrJFc6zm;
 	arc=none smtp.remote-ip=68.232.154.123
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com [68.232.154.123])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1DFE0606A6AC
-	for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 13:25:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1DFE0606A6AC
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4461E606A699
+	for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 13:25:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4461E606A699
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=microchip.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.a=rsa-sha256 header.s=mchp header.b=0Ten48jQ
+	dkim=pass (2048-bit key) header.d=microchip.com header.i=@microchip.com header.a=rsa-sha256 header.s=mchp header.b=FrJFc6zm
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
-  t=1795440343; x=1826976343;
+  t=1795440345; x=1826976345;
   h=from:date:subject:mime-version:content-transfer-encoding:
    message-id:references:in-reply-to:to:cc;
-  bh=e+8Xhx4BQbDDQ9GDqlEHqdz/O/IgLi3PflDvtChL4jM=;
-  b=0Ten48jQaGNr//W2J1pFTwTD+YyTQe8YjQxOfStZ0WiBG4SbcrgfwfN3
-   t1MKVwonm1BVSXt76dopT2IS8bG9npFSVo5NZn6vWrWfiiP9DHLb2iGns
-   PZ4k8MHMoy5IWJRu/70eLD8pdC3YAbVc3TxxuiZqUG05ahmBHufi8dRiv
-   cEPrfdYt/Ort6tXKyBn+QQ8P08cltE9ZTd2XICs+sZu9tMT9uHkq/2eUB
-   r/vpAm8V9khxwGD3FYrrCmqf+bmwDgIjyyYrhGjrt7lGOLCqgLm5dj8pN
-   kUGopt6QCxP/k5tbu8VtIs/lA8f+yEuFRIDDOLSMqExM35ETvIinYdELp
-   Q==;
-X-CSE-ConnectionGUID: EbIM8jCTQWia35G3SwVEmQ==
-X-CSE-MsgGUID: wikBMBMFRyCsuNeXIcE4nA==
+  bh=1pCgMcYWlFbwmXsksCggSw+46t6101lOBZsvJTMzEqg=;
+  b=FrJFc6zmfccsAwm6Z0/zuCzKxSFhKjIlQCwHRMHEtT0YtErSm0FSXPQa
+   6sunLyGAw4opCFv7mhUnAMgdSVVzyVSJtB8ZhX5GGZSNfR6S+T40f5+yp
+   v+4NU9AvTJUGvzMUB7AC/yark3MArekyCmb61kgHkTFcn//gE+49x5Umq
+   +89MVfd0QgMnutnJcnvFl+9Ticb+yHu6mK/r6WtJlf/Haw1HjuTHdhX1X
+   1kHTYpEsC6YtOvnOdsu2EKKEZx0hrENa1sfKnzdTCyLznxhhjWueYMfdO
+   kVJKR6w5EWEtyVBieG1YkYAXZeAxRHHN6HUsJPMQ/S/o2WET9CAsiojJw
+   g==;
+X-CSE-ConnectionGUID: T6AumBlzTmK0NbiqQp75MA==
+X-CSE-MsgGUID: YaDYm93xRu25eqKQpwNSHA==
 X-IronPort-AV: E=Sophos;i="6.27,227,1787036400"; 
-   d="scan'208";a="67154003"
+   d="scan'208";a="67154010"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
-  by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Nov 2026 06:25:42 -0700
-Received: from chn-vm-ex03.mchp-main.com (10.10.87.152) by
- chn-vm-ex3.mchp-main.com (10.10.87.32) with Microsoft SMTP Server
+  by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256; 23 Nov 2026 06:25:45 -0700
+Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
+ chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.2.2562.57; Mon, 23 Nov 2026 06:25:42 -0700
+ 15.1.2507.58; Mon, 23 Nov 2026 06:25:44 -0700
 Received: from [127.0.0.1] (10.10.85.11) by chn-vm-ex03.mchp-main.com
  (10.10.85.151) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.58 via Frontend
- Transport; Mon, 23 Nov 2026 06:25:39 -0700
+ Transport; Mon, 23 Nov 2026 06:25:42 -0700
 From: =?utf-8?q?Jens_Emil_Schulz_=C3=98stergaard?=
 	<jensemil.schulzostergaard@microchip.com>
-Date: Mon, 23 Nov 2026 14:25:05 +0100
-Subject: [PATCH 1/4] mfd: ocelot: Select the chip through match data
+Date: Mon, 23 Nov 2026 14:25:06 +0100
+Subject: [PATCH 2/4] dt-bindings: mfd: Add the Microchip LAN9645x switch
+ family
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -77,7 +78,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-ID: <20261123-mfd-ocelot-add-lan9645x-support-v1-1-567d811fe1de@microchip.com>
+Message-ID: <20261123-mfd-ocelot-add-lan9645x-support-v1-2-567d811fe1de@microchip.com>
 References: <20261123-mfd-ocelot-add-lan9645x-support-v1-0-567d811fe1de@microchip.com>
 In-Reply-To: <20261123-mfd-ocelot-add-lan9645x-support-v1-0-567d811fe1de@microchip.com>
 To: Colin Foster <colin.foster@in-advantage.com>, Lee Jones <lee@kernel.org>,
@@ -90,320 +91,176 @@ CC: <mfd@lists.linux.dev>, <linux-kernel@vger.kernel.org>,
 	<jensemil.schulzostergaard@microchip.com>
 X-Mailer: b4 0.15-dev
 
-The SPI interface bootstrap, the chip reset and the child devices are
-hardcoded for the VSC7512. Describe the serial interface configuration
-target, its registers, the IF_CFGSTAT readback check and the padding
-byte calculation in SPI match data, and select the soft reset register
-and the child devices in the core by the chip it names. This prepares
-for adding the LAN9645x switch family.
+The LAN9645x switch is controlled externally over SPI the same way as
+the VSC7512 described by mscc,ocelot.yaml, but the two families share
+no child devices. Add a schema of its own for the LAN9645x.
 
-The VSC7512 soft reset defines get a VSC7512 prefix.
-
-The probe now fails for a device bound without match data, otherwise
-there is no functional change.
+The microchip,lan96455s compatible, the smallest SKU of the family, is
+the fallback of the compatibles of the other SKUs, as in the switch
+binding. The children are the microchip,lan96455f-pinctrl pin
+controller, microchip,lan966x-miim MDIO buses and the switch.
 
 Signed-off-by: Jens Emil Schulz Østergaard <jensemil.schulzostergaard@microchip.com>
 ---
- drivers/mfd/ocelot-core.c | 48 +++++++++++++++++++++++------
- drivers/mfd/ocelot-spi.c  | 77 +++++++++++++++++++++++++++++++++--------------
- drivers/mfd/ocelot.h      |  6 ++++
- 3 files changed, 100 insertions(+), 31 deletions(-)
+The $ref in this binding is to net/dsa/microchip,lan96455s-switch.yaml,
+and the MAINTAINERS entry extended here is MICROCHIP LAN9645X ETHERNET
+SWITCH DRIVER, both added by the LAN9645x DSA series in net-next and
+expected in v7.5-rc1.
+---
+ .../bindings/mfd/microchip,lan96455s.yaml          | 132 +++++++++++++++++++++
+ MAINTAINERS                                        |   1 +
+ 2 files changed, 133 insertions(+)
 
-diff --git a/drivers/mfd/ocelot-core.c b/drivers/mfd/ocelot-core.c
-index 41aff2708854..2f53122fb964 100644
---- a/drivers/mfd/ocelot-core.c
-+++ b/drivers/mfd/ocelot-core.c
-@@ -28,9 +28,9 @@
- 
- #include "ocelot.h"
- 
--#define REG_GCB_SOFT_RST		0x0008
-+#define VSC7512_GCB_SOFT_RST		0x0008
- 
--#define BIT_SOFT_CHIP_RST		BIT(0)
-+#define VSC7512_SOFT_CHIP_RST		BIT(0)
- 
- #define VSC7512_MIIM0_RES_START		0x7107009c
- #define VSC7512_MIIM1_RES_START		0x710700c0
-@@ -84,11 +84,23 @@
- #define VSC7512_GCB_RST_SLEEP_US	100
- #define VSC7512_GCB_RST_TIMEOUT_US	100000
- 
-+struct ocelot_soft_rst {
-+	unsigned int reg;
-+	u32 mask;
-+};
+diff --git a/Documentation/devicetree/bindings/mfd/microchip,lan96455s.yaml b/Documentation/devicetree/bindings/mfd/microchip,lan96455s.yaml
+new file mode 100644
+index 000000000000..82f7c6290004
+--- /dev/null
++++ b/Documentation/devicetree/bindings/mfd/microchip,lan96455s.yaml
+@@ -0,0 +1,132 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/mfd/microchip,lan96455s.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
-+static const struct ocelot_soft_rst ocelot_soft_rst[] = {
-+	[OCELOT_CHIP_VSC7512] = {
-+		.reg = VSC7512_GCB_SOFT_RST,
-+		.mask = VSC7512_SOFT_CHIP_RST,
-+	},
-+};
++title: Microchip LAN9645x Externally-Controlled Ethernet Switch
 +
- static int ocelot_gcb_chip_rst_status(struct ocelot_ddata *ddata)
- {
- 	int val, err;
- 
--	err = regmap_read(ddata->gcb_regmap, REG_GCB_SOFT_RST, &val);
-+	err = regmap_read(ddata->gcb_regmap, ocelot_soft_rst[ddata->chip].reg, &val);
- 	if (err)
- 		return err;
- 
-@@ -98,15 +110,18 @@ static int ocelot_gcb_chip_rst_status(struct ocelot_ddata *ddata)
- int ocelot_chip_reset(struct device *dev)
- {
- 	struct ocelot_ddata *ddata = dev_get_drvdata(dev);
-+	const struct ocelot_soft_rst *rst;
- 	int ret, val;
- 
-+	rst = &ocelot_soft_rst[ddata->chip];
++maintainers:
++  - Jens Emil Schulz Østergaard <jensemil.schulzostergaard@microchip.com>
 +
- 	/*
- 	 * Reset the entire chip here to put it into a completely known state.
- 	 * Other drivers may want to reset their own subsystems. The register
- 	 * self-clears, so one write is all that is needed and wait for it to
- 	 * clear.
- 	 */
--	ret = regmap_write(ddata->gcb_regmap, REG_GCB_SOFT_RST, BIT_SOFT_CHIP_RST);
-+	ret = regmap_write(ddata->gcb_regmap, rst->reg, rst->mask);
- 	if (ret)
- 		return ret;
- 
-@@ -197,6 +212,18 @@ static const struct mfd_cell vsc7512_devs[] = {
- 	},
- };
- 
-+struct ocelot_cells {
-+	const struct mfd_cell *cells;
-+	unsigned int num_cells;
-+};
++description: |
++  The LAN9645x is a family of ethernet switch chips without an internal CPU.
++  The chips are controlled externally over SPI. Besides the switch, they
++  contain a pin controller and MDIO controllers.
 +
-+static const struct ocelot_cells ocelot_cells[] = {
-+	[OCELOT_CHIP_VSC7512] = {
-+		.cells = vsc7512_devs,
-+		.num_cells = ARRAY_SIZE(vsc7512_devs),
-+	},
-+};
++properties:
++  compatible:
++    oneOf:
++      - const: microchip,lan96455s
++      - items:
++          - enum:
++              - microchip,lan96455f
++              - microchip,lan96457f
++              - microchip,lan96459f
++              - microchip,lan96457s
++              - microchip,lan96459s
++          - const: microchip,lan96455s
 +
- static void ocelot_core_try_add_regmap(struct device *dev,
- 				       const struct resource *res)
- {
-@@ -217,14 +244,17 @@ static void ocelot_core_try_add_regmaps(struct device *dev,
- 
- int ocelot_core_init(struct device *dev)
- {
--	int i, ndevs;
-+	struct ocelot_ddata *ddata = dev_get_drvdata(dev);
-+	const struct ocelot_cells *c;
-+	int i;
- 
--	ndevs = ARRAY_SIZE(vsc7512_devs);
-+	c = &ocelot_cells[ddata->chip];
- 
--	for (i = 0; i < ndevs; i++)
--		ocelot_core_try_add_regmaps(dev, &vsc7512_devs[i]);
-+	for (i = 0; i < c->num_cells; i++)
-+		ocelot_core_try_add_regmaps(dev, &c->cells[i]);
- 
--	return devm_mfd_add_devices(dev, PLATFORM_DEVID_AUTO, vsc7512_devs, ndevs, NULL, 0, NULL);
-+	return devm_mfd_add_devices(dev, PLATFORM_DEVID_AUTO, c->cells, c->num_cells,
-+				    NULL, 0, NULL);
- }
- EXPORT_SYMBOL_NS(ocelot_core_init, "MFD_OCELOT");
- 
-diff --git a/drivers/mfd/ocelot-spi.c b/drivers/mfd/ocelot-spi.c
-index 52bde8d4daf3..e803d0363e62 100644
---- a/drivers/mfd/ocelot-spi.c
-+++ b/drivers/mfd/ocelot-spi.c
-@@ -50,7 +50,42 @@ static const struct resource vsc7512_gcb_resource =
- 			     VSC7512_CHIP_REGS_RES_SIZE,
- 			     "devcpu_gcb_chip_regs");
- 
--static int ocelot_spi_initialize(struct device *dev)
-+struct ocelot_spi_data {
-+	enum ocelot_chip chip;
-+	const struct resource *cpuorg_res;
-+	unsigned int if_ctrl;
-+	unsigned int if_cfgstat;
-+	u32 if_cfgstat_si;
-+	const struct resource *gcb_res;
-+	int (*padding_bytes)(u32 max_speed_hz);
-+};
++  reg:
++    maxItems: 1
 +
-+static int vsc7512_spi_padding_bytes(u32 max_speed_hz)
-+{
-+	if (max_speed_hz <= 500000)
-+		return 0;
++  "#address-cells":
++    const: 1
 +
-+	/*
-+	 * Calculation taken from the manual for IF_CFGSTAT:IF_CFG. Register
-+	 * access time is 1us, so we need to configure and send out enough
-+	 * padding bytes between the read request and data transmission that
-+	 * lasts at least 1 microsecond.
-+	 */
-+	return 1 + (max_speed_hz / HZ_PER_MHZ + 2) / 8;
-+}
++  "#size-cells":
++    const: 1
 +
-+static const struct ocelot_spi_data vsc7512_spi_data = {
-+	.chip = OCELOT_CHIP_VSC7512,
-+	.cpuorg_res = &vsc7512_dev_cpuorg_resource,
-+	.if_ctrl = REG_DEV_CPUORG_IF_CTRL,
-+	.if_cfgstat = REG_DEV_CPUORG_IF_CFGSTAT,
-+	.if_cfgstat_si = CFGSTAT_IF_NUM_SI,
-+	.gcb_res = &vsc7512_gcb_resource,
-+	.padding_bytes = vsc7512_spi_padding_bytes,
-+};
++patternProperties:
++  "^pinctrl@[0-9a-f]+$":
++    type: object
++    $ref: /schemas/pinctrl/mscc,ocelot-pinctrl.yaml
++    properties:
++      compatible:
++        contains:
++          const: microchip,lan96455f-pinctrl
 +
-+static int ocelot_spi_initialize(struct device *dev,
-+				 const struct ocelot_spi_data *data)
- {
- 	struct ocelot_ddata *ddata = dev_get_drvdata(dev);
- 	u32 val, check;
-@@ -80,7 +115,7 @@ static int ocelot_spi_initialize(struct device *dev)
- 	 * | 22222233 | 11112222 |   111111 |          |
- 	 * | 45678901 | 67890123 | 89012345 | 01234567 |
- 	 */
--	err = regmap_write(ddata->cpuorg_regmap, REG_DEV_CPUORG_IF_CTRL, val);
-+	err = regmap_write(ddata->cpuorg_regmap, data->if_ctrl, val);
- 	if (err)
- 		return err;
- 
-@@ -90,7 +125,7 @@ static int ocelot_spi_initialize(struct device *dev)
- 	 * first payload bit is shifted out too quickly, the read will fail.
- 	 */
- 	val = ddata->spi_padding_bytes;
--	err = regmap_write(ddata->cpuorg_regmap, REG_DEV_CPUORG_IF_CFGSTAT, val);
-+	err = regmap_write(ddata->cpuorg_regmap, data->if_cfgstat, val);
- 	if (err)
- 		return err;
- 
-@@ -109,9 +144,9 @@ static int ocelot_spi_initialize(struct device *dev)
- 	 * the registers are being accessed. Since we're accessing them via the
- 	 * serial interface, it must return IF_NUM_SI.
- 	 */
--	check = val | CFGSTAT_IF_NUM_SI;
-+	check = val | data->if_cfgstat_si;
- 
--	err = regmap_read(ddata->cpuorg_regmap, REG_DEV_CPUORG_IF_CFGSTAT, &val);
-+	err = regmap_read(ddata->cpuorg_regmap, data->if_cfgstat, &val);
- 	if (err)
- 		return err;
- 
-@@ -196,28 +231,26 @@ EXPORT_SYMBOL_NS(ocelot_spi_init_regmap, "MFD_OCELOT_SPI");
- 
- static int ocelot_spi_probe(struct spi_device *spi)
- {
-+	const struct ocelot_spi_data *data;
- 	struct device *dev = &spi->dev;
- 	struct ocelot_ddata *ddata;
- 	struct regmap *r;
- 	int err;
- 
-+	data = spi_get_device_match_data(spi);
-+	if (!data)
-+		return -ENODEV;
++  "^mdio@[0-9a-f]+$":
++    type: object
++    $ref: /schemas/net/mscc,miim.yaml
++    properties:
++      compatible:
++        const: microchip,lan966x-miim
 +
- 	ddata = devm_kzalloc_obj(dev, *ddata);
- 	if (!ddata)
- 		return -ENOMEM;
- 
-+	ddata->chip = data->chip;
++  "^ethernet-switch@[0-9a-f]+$":
++    type: object
++    $ref: /schemas/net/dsa/microchip,lan96455s-switch.yaml
++    unevaluatedProperties: false
 +
- 	spi_set_drvdata(spi, ddata);
- 
--	if (spi->max_speed_hz <= 500000) {
--		ddata->spi_padding_bytes = 0;
--	} else {
--		/*
--		 * Calculation taken from the manual for IF_CFGSTAT:IF_CFG.
--		 * Register access time is 1us, so we need to configure and send
--		 * out enough padding bytes between the read request and data
--		 * transmission that lasts at least 1 microsecond.
--		 */
--		ddata->spi_padding_bytes = 1 + (spi->max_speed_hz / HZ_PER_MHZ + 2) / 8;
--
-+	ddata->spi_padding_bytes = data->padding_bytes(spi->max_speed_hz);
-+	if (ddata->spi_padding_bytes) {
- 		ddata->dummy_buf = devm_kzalloc(dev, ddata->spi_padding_bytes, GFP_KERNEL);
- 		if (!ddata->dummy_buf)
- 			return -ENOMEM;
-@@ -229,13 +262,13 @@ static int ocelot_spi_probe(struct spi_device *spi)
- 	if (err)
- 		return dev_err_probe(&spi->dev, err, "Error performing SPI setup\n");
- 
--	r = ocelot_spi_init_regmap(dev, &vsc7512_dev_cpuorg_resource);
-+	r = ocelot_spi_init_regmap(dev, data->cpuorg_res);
- 	if (IS_ERR(r))
- 		return PTR_ERR(r);
- 
- 	ddata->cpuorg_regmap = r;
- 
--	r = ocelot_spi_init_regmap(dev, &vsc7512_gcb_resource);
-+	r = ocelot_spi_init_regmap(dev, data->gcb_res);
- 	if (IS_ERR(r))
- 		return PTR_ERR(r);
- 
-@@ -246,7 +279,7 @@ static int ocelot_spi_probe(struct spi_device *spi)
- 	 * This must be done before calling init, and after a chip reset is
- 	 * performed.
- 	 */
--	err = ocelot_spi_initialize(dev);
-+	err = ocelot_spi_initialize(dev, data);
- 	if (err)
- 		return dev_err_probe(dev, err, "Error initializing SPI bus\n");
- 
-@@ -258,7 +291,7 @@ static int ocelot_spi_probe(struct spi_device *spi)
- 	 * A chip reset will clear the SPI configuration, so it needs to be done
- 	 * again before we can access any registers.
- 	 */
--	err = ocelot_spi_initialize(dev);
-+	err = ocelot_spi_initialize(dev, data);
- 	if (err)
- 		return dev_err_probe(dev, err, "Error initializing SPI bus after reset\n");
- 
-@@ -270,13 +303,13 @@ static int ocelot_spi_probe(struct spi_device *spi)
- }
- 
- static const struct spi_device_id ocelot_spi_ids[] = {
--	{ .name = "vsc7512" },
-+	{ .name = "vsc7512", .driver_data = (kernel_ulong_t)&vsc7512_spi_data },
- 	{ }
- };
- MODULE_DEVICE_TABLE(spi, ocelot_spi_ids);
- 
- static const struct of_device_id ocelot_spi_of_match[] = {
--	{ .compatible = "mscc,vsc7512" },
-+	{ .compatible = "mscc,vsc7512", .data = &vsc7512_spi_data },
- 	{ }
- };
- MODULE_DEVICE_TABLE(of, ocelot_spi_of_match);
-diff --git a/drivers/mfd/ocelot.h b/drivers/mfd/ocelot.h
-index b8bc2f1486e2..92b5b893ff9b 100644
---- a/drivers/mfd/ocelot.h
-+++ b/drivers/mfd/ocelot.h
-@@ -10,8 +10,13 @@ struct device;
- struct regmap;
- struct resource;
- 
-+enum ocelot_chip {
-+	OCELOT_CHIP_VSC7512,
-+};
++required:
++  - compatible
++  - reg
++  - "#address-cells"
++  - "#size-cells"
 +
- /**
-  * struct ocelot_ddata - Private data for an external Ocelot chip
-+ * @chip:		Chip family member.
-  * @gcb_regmap:		General Configuration Block regmap. Used for
-  *			operations like chip reset.
-  * @cpuorg_regmap:	CPU Device Origin Block regmap. Used for operations
-@@ -24,6 +29,7 @@ struct resource;
-  *			data of a SPI read operation.
-  */
- struct ocelot_ddata {
-+	enum ocelot_chip chip;
- 	struct regmap *gcb_regmap;
- 	struct regmap *cpuorg_regmap;
- 	int spi_padding_bytes;
++allOf:
++  - $ref: /schemas/spi/spi-peripheral-props.yaml#
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    spi {
++        #address-cells = <1>;
++        #size-cells = <0>;
++
++        soc@0 {
++            compatible = "microchip,lan96455s";
++            reg = <0>;
++            #address-cells = <1>;
++            #size-cells = <1>;
++            spi-max-frequency = <28000000>;
++
++            ethernet-switch@4000 {
++                compatible = "microchip,lan96455s-switch";
++                reg = <0x4000 0x244>, <0x8000 0x4c>, <0xc000 0x1f0>,
++                      <0x10000 0x134>, <0x14000 0x2c8>, <0x18000 0x1910>,
++                      <0x1c000 0x468>, <0x20000 0x1480>, <0x24000 0x468>,
++                      <0x28000 0x468>, <0x2c000 0x12d4>, <0x30000 0xe4>,
++                      <0x38000 0xb8>, <0x3c000 0xb8>, <0x40000 0xb8>,
++                      <0x44000 0xb8>, <0x48000 0xb8>, <0x4c000 0xb8>,
++                      <0x50000 0xb8>, <0x54000 0xb8>, <0x58000 0xb8>,
++                      <0x100000 0xa000>, <0x120000 0x1998>, <0x140000 0x7468>;
++                reg-names = "gcb", "qs", "ptp", "chip_top", "tas", "rew", "vcap0",
++                            "mep", "vcap1", "vcap2", "sys", "hsio", "dev0", "dev1",
++                            "dev2", "dev3", "dev4", "dev5", "dev6", "dev7", "dev8",
++                            "qsys", "afi", "ana";
++
++                ethernet-ports {
++                    #address-cells = <1>;
++                    #size-cells = <0>;
++
++                    ethernet-port@0 {
++                        reg = <0>;
++                        phy-handle = <&cuphy0>;
++                        phy-mode = "gmii";
++                    };
++                };
++            };
++
++            gpio_lan9645x: pinctrl@4028 {
++                compatible = "microchip,lan96455f-pinctrl";
++                reg = <0x4028 0x68>;
++                #gpio-cells = <2>;
++                gpio-controller;
++                gpio-ranges = <&gpio_lan9645x 0 0 51>;
++            };
++
++            mdio@40bc {
++                compatible = "microchip,lan966x-miim";
++                reg = <0x40bc 0x24>;
++                #address-cells = <1>;
++                #size-cells = <0>;
++
++                cuphy0: ethernet-phy@1 {
++                    reg = <1>;
++                };
++            };
++        };
++    };
++
++...
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 97308edec53d..b254f8c92b0d 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -18331,6 +18331,7 @@ M:	Jens Emil Schulz Østergaard <jensemil.schulzostergaard@microchip.com>
+ M:	UNGLinuxDriver@microchip.com
+ L:	netdev@vger.kernel.org
+ S:	Maintained
++F:	Documentation/devicetree/bindings/mfd/microchip,lan96455s.yaml
+ F:	Documentation/devicetree/bindings/net/dsa/microchip,lan96455s-switch.yaml
+ F:	drivers/net/dsa/microchip/lan9645x/*
+ F:	include/linux/dsa/lan9645x.h
 
 -- 
 2.52.0
