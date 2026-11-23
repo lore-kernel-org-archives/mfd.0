@@ -1,89 +1,98 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.182
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.41
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795443991;
-	b=HccFzpXBQF/bG0w9Wy7iJFcXtKaBIuGNHp4fzuG9kteKgrt61hXcBNxdAGOBzJUvaxun
-	 +tkTWX5eG5cquCcso3VxLFMUfz7cYCRH2HXgunYeFehUm5hOQuLiyKlqNMtOebEJv+uVo
-	 JjZNYHoDwIQbhPGlxNgjZZYkhnWq6LEYbmxvPO0zix0z6j1/cKGB77oxpgLc/PCQdh/Eh
-	 5kkd+VEuKJZygtyRfHz11fakKcTGlzjr/xa135gxZpJFmiBgX0b4nTysLatKhmZwB7yJO
-	 Wq4+QIJ0G8tzjQ5R+AIDtiwe8tkdEqURExDhtZfT5nKhJisjegyXYDF9CUyFqfu4Fsg==
+	t=1795446165;
+	b=kECgAw1cng+rjZ/pw0oMKVC4+GFVKIdkMYY52QqWuPXO8tBxr0ET6OZspOvalr4HZbNR
+	 NLQC6pciJVK3ZnIwnl1mC18rLUP7vn1+zWT3/8ujjs7QMxecuxVhcua4EwdP0i/m2uVjb
+	 GFPhtHr1muAkK3n/WbwlBvm9AoGPaB9vsL1N6fztrFYffiWgsdZDFlHz4LG++IJLzr9iO
+	 29cVeT+c24H7thLrMQp9a1zC5B49m7jYV66SzdZyFkRelz3MwYWLf8g8IKQjBrQOxvBhL
+	 gLUjkeo8JV6MUp4r6FZXMvC79LLc7KDCRWMLUZou+hvg7n1x0LzeQJjDivLKuoY+BBA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795443991;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795446165;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=MpBy4DQUeAY3YB4hP8JJP2A0Pzqf+41bgmSv+sbuZU8=;
-	b=M7UKxTaG0ejZ3IyZnFucxni8v21n7r8UeyDyJOHktc/1MYigYN3lIZaXnMkOgIa15Ma5
-	 BOweM7nJBIY/CqbTSropCZtUEd22KzPI7PXGRjmyVUp2LbtvhEKWxD95z4hOqT8yRyXr0
-	 vQYJBLWEnNnNb9xukl/PPDTHYcFkkRMaXFLfx1cs5q5tFVQWGaKCEWNt9BEcTsg4FIZTU
-	 uIRlIWdhRySoP+7PuQDPOmSVNKIuhTBVNOgLG7d0dApKvdu/nLU7rfAYNMiJgOOQN/vAK
-	 rFE/8/HA9D8TNXbW9JobuCZtTtUxggXrO6dawFtY38Ixn0+JycdUjuppdj5JM3/ePeA==
+	bh=MfZsZ4QikXFqFqBCPSrLqvcJjVdMXTA7lYQIKPsnGiA=;
+	b=ki/CJerExm+vrfpnwKjea9mQuDgPkud/wDbIk4LL0KRN5NLABgZ5SAoQlw+89q9upmeQ
+	 PIxSrE8J2YR9eIaybNhj0G0sz0EWYpjzKFUjmt4LxkQ+iStRA8+ySHx7YAjd5ZgqS7g5i
+	 Xy0H9wsosld6RfeV+FY5cvc4y2x5xwGFYyVcRPR2OzIcj01jrxzosWfECrYwCd7cHpm9V
+	 1mwE+uKLeDRGmfTfZby4v3fXhT2MMCuLBZXvMYgifvgvgd1iErHCZisnv7PPmKBKvjyTA
+	 bWdO3oycfidbjKTUdcPAI+aP9hc8rwkjPjSscqaDOzrJgskKSBufC05b6Xk9SI6rqyw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qFZYB39J;
-	arc=none smtp.remote-ip=209.85.208.182
-Received: from mail-lj1-f182.google.com (mail-lj1-f182.google.com [209.85.208.182])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=sD6cCRdc;
+	arc=none smtp.remote-ip=209.85.218.41
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F22D606A31E
-	for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 14:26:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2F22D606A31E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F766606A31A
+	for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 15:02:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2F766606A31A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qFZYB39J
-Received: by mail-lj1-f182.google.com with SMTP id 38308e7fff4ca-3ae854fd0f5so23522231fa.3
-        for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 06:26:30 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=sD6cCRdc
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-c513a854320so560427866b.0
+        for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 07:02:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795443988; x=1796048788; darn=lists.linux.dev;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=MpBy4DQUeAY3YB4hP8JJP2A0Pzqf+41bgmSv+sbuZU8=;
-        b=qFZYB39JOxl3PRFP/x3IhXtjnOHBjd9TAksIg1AwS3Ljodv8z5QfXQxyDEPsHjcUC3
-         TT9jr/6Ma5C8vzrA+gxK4woC/6JtuYzoPtdmIBTEIIG5/sBkv5RbQB4uJWjFM/kpwgOg
-         UBM0vYLXME4ryz2liB3XxnqKUYPo/SXR0p2ddYC8icI4Gm45w2p9anfqvFD2UeUWIqsa
-         pclWcxLUxNheZurhxS818bMvMmC9c2CIFNRgysgykjl5Oy9yurkE5K6oCjsuAAzpSKKE
-         3EjPW397+btEK8jbYtmZVvHIjWCUXxH59Y3bGrUb9nyDmtTS/lSQj65w8CZCHSP3wxDl
-         DZaw==
+        d=gmail.com; s=20260707; t=1795446162; x=1796050962; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=MfZsZ4QikXFqFqBCPSrLqvcJjVdMXTA7lYQIKPsnGiA=;
+        b=sD6cCRdc6Pc9VajaAUXj0CceZUHSK3Ym/Ftb41vyxDDZkWi1f8oTXVGxUmwle1OxCR
+         V65ZeeSn+LDxHgI1AdNQ383PkmyfqxImvnd35cfx95MeQNFRXdboIzQVJyco5j9rhjgg
+         kjDCrqjItNqV8TKAIlW2hRdH+cSXGFN9608FwOgYaWR6kDImBjY3AvM82uqRrpLff/y1
+         YkO3U+AcQPst4uG/VxfeB0UrBNZSKhvnzpBNywFfSsMFwKWCnh2/RqMTWvkOcJ1QJ5Lz
+         zYLoeIcKBLL2R0b9O85fJQDlXRQVTEurGIA3A23ahJftJRv+WAn+eAxbQHAX/RiwZwsE
+         L3GQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795443988; x=1796048788;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1795446162; x=1796050962;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=MpBy4DQUeAY3YB4hP8JJP2A0Pzqf+41bgmSv+sbuZU8=;
-        b=F2nvtLI7ljjJYgi+vlHA8tRjJIu0GbzUHVyRa46Apn+tEkc0sKjW5nItrlX1Kjt65B
-         rPljrbMyDgwsjLWTKmu2WgHYa/YaGVNXeNXeB3XFtFDbEqR64WUmYnuNgVBbNj4KVh01
-         87wGrA9Llw9AAkZZmXxMPCqgXRzqY2KNIJgmk0qeP+/nwf5nCK6+el9IJOrOzVtVC45z
-         fcIUSoShgr12TnmgBtbgL4VOV98eu9z4gA4yBf/8zkpFZLc4THfyra4yaUxN895HyLXm
-         i5qtsu5dSJQQKdMw+rPVeZnB3Jffm4yXJr1YtqwkV95LvjFxTg51QeNesADeMMRknqGb
-         4G/w==
-X-Forwarded-Encrypted: i=1; AL+hErGy6IL5qkXs4vDtbaRRAJhsF4suCiWRGUqPLxIgfzeGH0IWkIX7iCIStpKamkhXRa/Eyx0=@lists.linux.dev
-X-Gm-Message-State: APuU4Z+aqWtB/aSp9KLQGmWErYNunqUf5+U7XZxF1DSQ0iokCkoAzzFi
-	hLUNIrtGT2h11+eNJ7P/W5QD0BkXF1tW5OqE6HZcaTpv9TgUJJg6U1um
-X-Gm-Gg: AZFdTZd3onn1dH9iLSjkjpwZHNdZaQhlQ0lg5dkbZfbNur88i5g2i3sSg216V4Lp6A8
-	NGs8I4L8tevce6u0mlFecOopnvCELdQw1yxWYbvBHcN/B6CQ/v7MileMqq2ws3dUgLcQjY5NrZN
-	vYs2PQQruspdEftjveTHd4D6Fmms4BEiLoReA6tRl0Ri1GOvEujKaywL5qEjoI2V2EL6SWS5ryB
-	e+GsW+SIpebHiJ+lehQBRcW4zpzfTb2JOp7lGtXCJ/hx3B/xXLpOIyGMvMYJh97PFa2nfWvhnoT
-	ShHXo8aYPqFG5lFrXldef80S4D/YcVbH/x2AubmkjaeJNPeVqyr9al8AA36CPZaeU0MuzdUv+UF
-	eBiKaHuSSVsQ5atIHprmQlrI7XgY3HiHzAelYdodsDhie0N6r2gAfXugYVIY75i8QcFelWhE+LV
-	LBFbAbvhMxqkvLbRw3e6wG3tTobCF5kv54PRRnlfGoiK6YIwokOfANeQgdaKPedVX1x6kmJUWIF
-	hd7Hs6fN5AeLj99USqayxRpz8nnKu0AQYYdhKEKyXGKQWBA1j4Z1RgJGjIKn0H9P4i4ZVUtY30B
-	7ZkYj3X+ovot5CUIRG4CD/t/NdtAik0690kkUdbAZn/l40mgMwlJaDdSlRUyHuXCQ0ACsE1p1X9
-	vxqfJLJ+nUw==
-X-Received: by 2002:a2e:ab0a:0:b0:3ac:e4b6:b93d with SMTP id 38308e7fff4ca-3ae7f9a072fmr31420641fa.8.1795443988058;
-        Mon, 23 Nov 2026 06:26:28 -0800 (PST)
-Received: from ?IPV6:2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703? ([2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3ae80536529sm33679491fa.27.2026.11.23.06.26.25
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 23 Nov 2026 06:26:27 -0800 (PST)
-Message-ID: <bc178673-54dd-4811-acdf-cb6327ec2417@gmail.com>
-Date: Mon, 23 Nov 2026 16:26:25 +0200
+        bh=MfZsZ4QikXFqFqBCPSrLqvcJjVdMXTA7lYQIKPsnGiA=;
+        b=N6WxhTL4u0bTS3DdbGHsW0MHOTySZpJpytrB3wkRZACh5C/NU3n6WzJvXkGgqFI1hr
+         lFo9egwaK1nIrzP9JxnoJyyErwZkNXvy+zI0C0hX40rPXOhkqlqIpWpdnn656qYmmmdx
+         ya4TVQLY21YhZ4+Am7VkDROgAejOjCCl6DT3eLE/Oax7mtPJWKR7x8/i4Z/eh1nNDhZ7
+         DHJwGWkI47e+5E+P2oduZb9WlxcgPoyokM48BxhA2RxZZnMWILaOT8B/kucy8iF9OEdh
+         E6FmW4sIbNWqgk4AY+gj+xWoD05AKTeskl69pBcRg1yrDCloHUvmp4SwIpe79+wtg7K/
+         Xykw==
+X-Forwarded-Encrypted: i=1; AL+hErEIcXFhj+X77i2tzZ7RW03LHqekOHazKAilB1MeDJSiaz146JS8OXwLAClzoyu9gFlwjnY=@lists.linux.dev
+X-Gm-Message-State: APuU4Z/0dcoZ3Q0xCj6N2XmjrqWB4eHt2ULR0Gpm5OoQOYOyUhdNDvo9
+	/0gI26IoJI71EqNqwtPhWAEZcFdllGnvePmx2lsyF3dJAxbi7kryfoNV
+X-Gm-Gg: AZFdTZc9eJ+B+WEm0C1NK+U6KqCGoqGKP5gk1ihi3WtByYRO6CudVDFUPhW6YPgyuyr
+	LRzrPPWxQ5Vs+aVdScoWANoUIlcgcRLheHjcbR5BtOoRgg2AdzgyGoi2wbv/5zSBqh7OvRirCka
+	QTiXOOunddwrAGxXw5ACC5hU0Hu2UDyIR1DeuwnLSVrnTMuqCvUSmZ5d2ZCZ/sFhpA4n6AFYfnU
+	W6oLppVP0zaYg0zWB/x/cqy4YIAYvx6VbX5KbPFKSmGqj6nfKYu74XHaptQz95suY6AMr9Ba/N2
+	2dAoOg8UmrlzSAuCWIdTfINqydZFQJiCVgZP9QloaS5GsBhUI90geTu452rq5inJWV4giGYOjJG
+	9yqa8/4C7wSjPvB1zEtNgEoQK5TcGf+L/PLDwKkRMKR0K51k8Ccjqn1SEVdOLTKK6tBJcgEk5vi
+	zYc5wGROOONf4ZLGpnEWnmX9imXeF61Z5ovEn2NS6mdoxJA8xikogneq51y47JuZuejQIxraQir
+	GUPTWu+x7/hrzicDK9QoleK8DzHkQLhvJjkgA0Drg/BUK+heMte5oPvRocctZqQ2Zunyez6RTF3
+	0gmv1Y0gtcd6SJa/pi66zNlMWx6uc4kQkMCBVli572JhNjUwNaVUZGUziYyTw3MIJVHq1ytRzSG
+	iAlM+XYKgFQ==
+X-Received: by 2002:a17:907:f447:b0:c51:3b74:9d07 with SMTP id a640c23a62f3a-c513b74a25fmr971881966b.18.1795446162362;
+        Mon, 23 Nov 2026 07:02:42 -0800 (PST)
+Received: from xeon ([188.163.112.54])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c513acfe3b0sm418484866b.8.2026.11.23.07.02.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 23 Nov 2026 07:02:41 -0800 (PST)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Lee Jones <lee@kernel.org>,
+	Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: linux-kernel@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	mfd@lists.linux.dev
+Subject: [PATCH v6 0/5] mfd: max8907: Schema, pdata and poweroff
+Date: Mon, 23 Nov 2026 17:02:19 +0200
+Message-ID: <20261123150224.199601-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.53.0
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -93,99 +102,50 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 16/17] mfd: Unify style of of_device_id arrays
-To: =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>,
- Lee Jones <lee@kernel.org>
-Cc: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>,
- Linus Walleij <linusw@kernel.org>,
- Nicolas Ferre <nicolas.ferre@microchip.com>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>,
- Claudiu Beznea <claudiu.beznea@tuxon.dev>, Chen-Yu Tsai <wens@kernel.org>,
- Florian Fainelli <florian.fainelli@broadcom.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>,
- Marek Vasut <marek.vasut+renesas@gmail.com>,
- James Ogletree <jogletre@opensource.cirrus.com>,
- Fred Treven <fred.treven@cirrus.com>, Ben Bright <ben.bright@cirrus.com>,
- David Rhodes <david.rhodes@cirrus.com>,
- Richard Fitzgerald <rf@opensource.cirrus.com>,
- Support Opensource <support.opensource@diasemi.com>,
- Krzysztof Kozlowski <krzk@kernel.org>,
- Peter Griffin <peter.griffin@linaro.org>,
- Alim Akhtar <alim.akhtar@samsung.com>, Tim Harvey <tharvey@gateworks.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Charles Keepax <ckeepax@opensource.cirrus.com>, Sven Peter
- <sven@kernel.org>, Janne Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>,
- Chanwoo Choi <cw00.choi@samsung.com>,
- Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>,
- Luca Ceresoli <luca.ceresoli@bootlin.com>,
- =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>,
- Saravanan Sekar <sravanhome@gmail.com>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>,
- =?UTF-8?Q?Jonathan_Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>,
- Aaro Koskinen <aaro.koskinen@iki.fi>, Andreas Kemnade
- <andreas@kemnade.info>, Kevin Hilman <khilman@baylibre.com>,
- Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>,
- Orson Zhai <orsonzhai@gmail.com>, Baolin Wang
- <baolin.wang@linux.alibaba.com>, Chunyan Zhang <zhang.lyra@gmail.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
- Maxime Coquelin <mcoquelin.stm32@gmail.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>, Liviu Dudau <liviu.dudau@arm.com>,
- Sudeep Holla <sudeep.holla@kernel.org>,
- Lorenzo Pieralisi <lpieralisi@kernel.org>,
- Geert Uytterhoeven <geert+renesas@glider.be>,
- Magnus Damm <magnus.damm@gmail.com>, Heiko Stuebner <heiko@sntech.de>,
- mfd@lists.linux.dev, linux-kernel@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, patches@opensource.cirrus.com,
- linux-rpi-kernel@lists.infradead.org, linux-renesas-soc@vger.kernel.org,
- linux-sound@vger.kernel.org, linux-samsung-soc@vger.kernel.org,
- linux-amlogic@lists.infradead.org, asahi@lists.linux.dev,
- linux-mediatek@lists.infradead.org, imx@lists.linux.dev,
- linux-omap@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-stm32@st-md-mailman.stormreply.com, linux-sunxi@lists.linux.dev,
- linux-rockchip@lists.infradead.org
-References: <cover.1795431460.git.u.kleine-koenig@baylibre.com>
- <b69bcdcc394e46e0eb60947f23923e6241d24ff4.1795431460.git.u.kleine-koenig@baylibre.com>
-Content-Language: en-US, en-AU, en-GB, en-BW
-From: Matti Vaittinen <mazziesaccount@gmail.com>
-In-Reply-To: <b69bcdcc394e46e0eb60947f23923e6241d24ff4.1795431460.git.u.kleine-koenig@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 23/11/2026 13:18, Uwe Kleine-König wrote:
-> From: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
-> 
-> These arrays already mostly match the most used and generally
-> recommended coding style. That is:
-> 
->   - no comma after the list terminator;
->   - a comma after an initializer if (and only if) the closing } is not
->     directly following;
->   - no explicit zeros in the list terminator;
->   - a space after an opening { and before a closing }, a single space in
->     the list terminator;
-> 
-> Adapt the offenders accordingly.
-> 
-> Reviewed-by: André Draszik <andre.draszik@linaro.org> # for Maxim MAX77759
-> Reviewed-by: Charles Keepax <ckeepax@opensource.cirrus.com>
-> Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be> # renesas
-> Reviewed-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com> # max7360
-> Reviewed-by: Linus Walleij <linusw@kernel.org>
-> Signed-off-by: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
+Convert existing txt documentation file to DF schema. Remove
+platform data use. Switch to device managed poweroff handler.
+Add restsrt handler.
 
-Reviewed-by: Matti Vaittinen <mazziesaccountw@gmail.com> # rohm
+---
+Changes in v2:
+- fixed max8907_power_off return
+
+Changes in v3:
+- added idata check in max8907_regulator_probe() for BBAT/SDBY/VRTC
+- added conversion to devm_ helpers commit
+- switch to devm_register_power_off_handler() and
+  of_device_is_system_power_controller()
+
+Changes in v4:
+- dropped in-supply type definitions in schema
+
+Changes in v5:
+- rebased to be applicable on top of devm_kzalloc_obj conversion
+- added restart handler
+
+Changes in v6:
+- rebased on top of latest next
+- resolved conflict with Lee commit
+---
+
+Svyatoslav Ryhel (5):
+  regulator: dt-bindings: maxim,max8907: Convert to DT schema
+  mfd: max8907: Remove platform_data based probing
+  mfd: max8907: Switch to resource-managed versions of helpers
+  mfd: max8907: Convert to use device managed poweroff handler
+  mfd: max8907: Add restart handler
+
+ .../devicetree/bindings/regulator/max8907.txt |  69 -----
+ .../bindings/regulator/maxim,max8907.yaml     | 283 ++++++++++++++++++
+ drivers/mfd/max8907.c                         | 168 ++++-------
+ drivers/regulator/max8907-regulator.c         |   8 +-
+ include/linux/mfd/max8907.h                   |   6 +-
+ 5 files changed, 349 insertions(+), 185 deletions(-)
+ delete mode 100644 Documentation/devicetree/bindings/regulator/max8907.txt
+ create mode 100644 Documentation/devicetree/bindings/regulator/maxim,max8907.yaml
 
 -- 
-Matti Vaittinen
-Linux kernel developer at ROHM Semiconductor
-Oulu Finland
+2.53.0
 
-~~ When things go utterly wrong vim users can always type :help! ~~
