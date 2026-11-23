@@ -1,104 +1,86 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.45
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.7
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795463536;
-	b=mpDzzsBErtTQZayc/PMg5awc0K4N5e8HIfrzYbGnhhvYykOMcVbrCE94UIlRAXMfgAcJ
-	 p5wanXqfmwkejtHvBV3JlINiFP+ZdHxKZVSlzws2eAG4H2DAJf9JNIngmV7SwopHkQMWt
-	 teXUdJ8KfgaeNzUrjdj9LpDWLGTxcK4zXLX/7YYgjFsGzAj4mxAevjeNN/AycQL7KLiT3
-	 1opO47q7gX+pzzmpax31o5xEmGHClUh0dgliffTetJ2N4C+PJ4oIdp+APPXeDRrzIoFTa
-	 gEbY53k4VWus1YgxcKg1Q0tZSqVScea414ucA5LfE4iaf139lpkd5f5L0fzImkqYLlg==
+	t=1795463693;
+	b=VFUcOWNbqicxTgb6RmG55PZ4v/RLkFqhms7BT0pSNXBKxz0qbvx6oLtwEfp03BLkDRwX
+	 uXGiM9j79k0QfBNZwG8czq/XM9pLBleq4+JrJwGdduHbx7Ft0+zod/K3iLHT0nSBnqYQZ
+	 yasNtHqtFK0nB9pOphQAee1HF6L5sB+HxLh5eTLcF3xsZeqO1tceDztw52jeEDNAEbbcc
+	 MhSLmhtzLuh5DN+LR03GR5zOCq4jZqhW5FX9fShv8Q+qoLhXku08YQvEu6Ua53RhbwXFY
+	 9M+nlnGoOYdyeuS4AEkke728TwUkqDUhMvzIuRlCcIgamkIEsr2pKoHGko2sHeBbHjA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795463536;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Date:Message-ID:From:To:Cc:Subject:In-Reply-To:References:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Content-Disposition;
-	bh=3RshK4Oj6YgNlZUOTXg8txJjkOgNgpHYtx0HE0E152o=;
-	b=I+eqZ4owowcgDb8t0U5vSf1FxunG/Ip/6suw6EHKXIf2n7v7YeGB72K3+/HFBt4LTKDy
-	 jGOiOka8UNdg4LaXPKGeJ6B2VcaU/pM1k9xKzjCZ1KRPlVo1AxFWEeHe4/VsRx6ga2Hvc
-	 AL4IPfqcaOfOjMJ5cYlZZx+VNWIOHmqnaK47mKNRoTvzZoDcACu8JdjsqdJQoLsFPRvjo
-	 IBWQZ7JaSknAzbjXSm2AiILkxwTrxNcPbvHlO8B6jIzMKcXhV8s3c34JmKzZVmuMtANKJ
-	 s1FATtk40+AvnFy4hnF26H9T2ZQ/hbTQwnMyKqhtLRK6fiqxysJtgSMzI7BdVKnxqsQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795463693;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Date:From:To:Cc:
+	 Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:Content-Transfer-Encoding:In-Reply-To:
+	 Organization;
+	bh=g1rj9K1ufUbqZ3+8WDd2PDC8BQGGeQNY2GgcRNsqjYE=;
+	b=H1TAysHXe/6ACnr+Eyd/IceRvtJXyZ4vXlgH80m1X8IvgCBA5fLz6nHMjsc/elgGTQcd
+	 QWfQYGg+EFTTNFdhMBO/EjS3N2Rn2ruhhcAET6sqToQHwGJ7kv8lGZv65GU/dV3GmgrW/
+	 fswYSt1iRTHtJ/XMeCoKa2Q35W9u/cVdpbiDuZo5ws/OZreB9hQE9fVjCNRVWXGxldUme
+	 ml8/nt06AXz7O+5QCnV/Zwr1xblY8sssIU8Bwil3Jz7oivSBFoCdRqZuA2f2L+n4f0fK8
+	 DjhBn8gb5IYVvuzLDo0ZmCG24XKmXs3f+xJLq8HK6X+I8Z3PzB4J0NdncRpM5fHRWGQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=fjyLydcX;
-	arc=none smtp.remote-ip=74.125.82.45
-Received: from mail-dl1-f45.google.com (mail-dl1-f45.google.com [74.125.82.45])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=intel.com;
+	spf=pass smtp.mailfrom=intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b="JK7/mi4I";
+	arc=none smtp.remote-ip=192.198.163.7
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50741606A689
-	for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 19:52:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 50741606A689
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 865D9606A31A
+	for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 19:54:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 865D9606A31A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=fjyLydcX
-Received: by mail-dl1-f45.google.com with SMTP id a92af1059eb24-15dd124bbe7so2847617c88.1
-        for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 11:52:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795463535; x=1796068335; darn=lists.linux.dev;
-        h=content-disposition:content-transfer-encoding:content-type
-         :mime-version:references:in-reply-to:subject:cc:to:from:message-id
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=3RshK4Oj6YgNlZUOTXg8txJjkOgNgpHYtx0HE0E152o=;
-        b=fjyLydcXJY1NEu4XWezj2b6XJQ4UgNl3HxX7rRayh6zRpuyN9TBJKBRy2KCVSz8JcU
-         Va0k3tEO2cNH0594zJ8hY0UQHUtOausvhbK7t+pFRIJvLmQP7GZUMeWTb1UsJRL/zSft
-         5aAvgZ/JzSgafe+mK9T8ekdYw9o6EIZwrgmQM3awZUjlEOPcu9aHdH3v8bVhi/Tm5aTW
-         5a+E0zO0+WKD4P6vi9Ap77wY3t5i5vikC7xz6lGLHIRYmAdXfYm1xPDIq//tptn8Dpnf
-         vp/cD+gH92k6Zb5yRqBPxXILfzjoG+ad/+e+MTtbb+5RpSDMPTokGGWXaUiXjT4INeUD
-         h0uw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795463535; x=1796068335;
-        h=content-disposition:content-transfer-encoding:content-type
-         :mime-version:references:in-reply-to:subject:cc:to:from:message-id
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=3RshK4Oj6YgNlZUOTXg8txJjkOgNgpHYtx0HE0E152o=;
-        b=ahbaO/PSWwnLRlWsYq05n/q3JvN5XRrKFixdljZJ1hiiNBaRXYEoV3WJRBgd5MadyY
-         XjoRhN+AKFXki0y77npDKv4N151bboKh8ekb99+WOQLOE7tT6ZyjwOykQVCq1Ap9/0/K
-         gdrRrR3L0XUxupqGHYaIcnTSQOfqRDQo4R6vUSE65+4Kd21/e6AmhRVtTb8fmLm1yWWs
-         DRChW1j0+1wozeuLOit2BbN5ax81coSQUgGH7mevTBUDLh1RJbx+xtioMMnM7RIjNiOZ
-         cZqWw/sMr/DkfjuN7RUyZQFRs2am15UmZ7JrjQWtPkHbCDB+L1FG4rXLqVDpETd5R9A8
-         rusg==
-X-Forwarded-Encrypted: i=1; AL+hErGmShF2Iu/aQHhWpOsdlAIJdbACpoEqdm1lVbRiTYy3Htkef/zdlhClKABsD5fg9d5RHcE=@lists.linux.dev
-X-Gm-Message-State: APuU4Z+In7zEruwO/3IB0IUbE9Zwr9fq2LXZQtA4Gek78p4rpHBJwqo+
-	UiDuVzgsr6/oSu8jT5QQ6Nlqn1HCqOSzq9B+Q04MsAYFx3Ukd0xt1mL7
-X-Gm-Gg: AZFdTZcOFTxD2uBgHdgKDG4BSg9fWxC9+mk+AqNg6RrjGA8j6o09Im+DODZwPYqvDwm
-	CWWrklkSbmEWvGSKyJa74fySecLx6GqFJdpr4uSeDJ/OBmlBkoDgYDUkYY8oluhzNXbN+cWQUCh
-	SntB+4dQLLLt4YvlnKFjrJL/U8vdZMgQG/RIUV5mvjjh4Ft3yweo8944S2igext94TUfGOw2/OP
-	EHYwM6B/ns/dMwEmoqIOpFMO4gcXm6VYll/tx5grKtlCYQ+SO3JwbOO9yHNti6MZUfyCcZSMGub
-	Wqp3g1SQk+/Y/wfe0+enZtddTSVmD1w/zPCMCqH9Ha3xR8HcDPorNcfWnwP3Lj+4lf3KfObdgoE
-	oTcGLFUKGzSXgApyThcizp98O0+XbsEg62aUHRdzNG3nC/psKFQPAOdlJ/XLiyRwo46bZlHUGDJ
-	P2/Y0ah46L71aWugoDhAqhZ7zsxQh8B/1QRCcOswRStKUBp54BQVsRJibRCW4g6guHUyZgoxYt1
-	+8gjDjV6qmO8neoGlc3UJgJgo0/9Qzdo2hzw0JtHgp+E0kOiVBQ/yN5b2CGRtgswi8lIKN6kQG+
-	qHo7+v3K6nTFiEHkkINDkEb11EvtAAKNot0UuI3fWpy8k85ijdSb037ilQM1if92XN8nHIxuT23
-	7JCiWDpBqzNUeQo8=
-X-Received: by 2002:a05:7022:5f08:b0:144:c112:5f24 with SMTP id a92af1059eb24-1b5568f9e24mr12609285c88.25.1795463535268;
-        Mon, 23 Nov 2026 11:52:15 -0800 (PST)
-Received: from localhost ([2a00:79e0:2ebe:8:4121:d698:201c:9274])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5567ffa8csm34957036c88.7.2026.11.23.11.52.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Nov 2026 11:52:14 -0800 (PST)
-Date: Mon, 23 Nov 2026 11:52:13 -0800
-Message-ID: <dfdf0c3f2c02672514077465784ae1e6@gmail.com>
-From: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-To: Mark Brown <broonie@kernel.org>
-Cc: Liam Girdwood <lgirdwood@gmail.com>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	Charles Keepax <ckeepax@opensource.cirrus.com>,
-	Richard Fitzgerald <rf@opensource.cirrus.com>,
-	David Rhodes <david.rhodes@cirrus.com>,
-	Lee Jones <lee@kernel.org>,
-	patches@opensource.cirrus.com,
-	linux-sound@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	mfd@lists.linux.dev
-Subject: Re: [PATCH 2/4] ASoC: arizona: always parse device properties regardless of platform data
-In-Reply-To: <179414246010.3630016.7821414370886873553.b4-review@b4>
-References: <20261105-arizona-asoc-v1-0-25ec7338446e@gmail.com> <20261105-arizona-asoc-v1-2-25ec7338446e@gmail.com> <179414246010.3630016.7821414370886873553.b4-review@b4>
+	dkim=pass (2048-bit key, unprotected) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=JK7/mi4I
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1795463693; x=1826999693;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=hJ0ZM2NdatffL7YZHnsJQmee+2FJa+oE3AW+dkQdS/c=;
+  b=JK7/mi4Ivsw0hw1mLhT4BOxixPIGPNKNnz4z7IgwFzadWrprql5jb6ca
+   gqgMGv041wyqgcbtO40Ii3rt/v4lC7o8GOxjv4xFKnYLyCIyoXAIn/y37
+   bqr+9Nugx9mvUUScoWELCulR2bKtbXBAQu0yc13SxYkNOzCNuCGgxEGpf
+   YD1QxStjTO6u4n6XVEOmwfRFiuAzjhdl3jWeEjgVmHdo96dWOU6t7Syfe
+   s7GAE8mTVshmzPUMLzzdaE9tZW6RrnDqRvL4jwcD9UAVFrLlm8DSuAemC
+   bztqwYDDz7iMcV6cZlAl1L5KvORTiPUMNV45Qg5uE8Jqw0zWAImL678by
+   w==;
+X-CSE-ConnectionGUID: hqXNqV9STGa1QA7dwDk3mw==
+X-CSE-MsgGUID: q+xXGE8dSt+lsTZj/wdlNA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11975"; a="4126995"
+X-IronPort-AV: E=Sophos;i="6.27,229,1787036400"; 
+   d="scan'208";a="4126995"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Nov 2026 11:54:52 -0800
+X-CSE-ConnectionGUID: i1f/k3zJTZukNtVuCbIc0g==
+X-CSE-MsgGUID: jsiAp24fSkOALl6yvnT1MQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,229,1787036400"; 
+   d="scan'208";a="11719541"
+Received: from pgcooper-mobl3.ger.corp.intel.com (HELO localhost) ([10.245.244.204])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Nov 2026 11:54:48 -0800
+Date: Mon, 23 Nov 2026 21:54:46 +0200
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	Andy Shevchenko <andy@kernel.org>, Lee Jones <lee@kernel.org>,
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-iio@vger.kernel.org, mfd@lists.linux.dev
+Subject: Re: [PATCH v3 3/4] iio: adc: Add support for MAX8907 ADC cell
+Message-ID: <awSaBqLabqZ68ak9@ashevche-desk.local>
+References: <20261123150725.212836-1-clamor95@gmail.com>
+ <20261123150725.212836-4-clamor95@gmail.com>
+ <awSNc2piI26LgyAU@ashevche-desk.local>
+ <CAPVz0n2yBtFh-TJ13cH8WXtiyzR3tOrbhACyq8MThi_6+7DOYg@mail.gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -108,42 +90,149 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAPVz0n2yBtFh-TJ13cH8WXtiyzR3tOrbhACyq8MThi_6+7DOYg@mail.gmail.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-Hi Mark,
+On Mon, Nov 23, 2026 at 09:24:30PM +0200, Svyatoslav Ryhel wrote:
+> пн, 23 лист. 2026 р. о 21:01 Andy Shevchenko <andriy.shevchenko@intel.com> пише:
+> > On Mon, Nov 23, 2026 at 05:07:24PM +0200, Svyatoslav Ryhel wrote:
 
-On Sun, Nov 08, 2026 at 12:54:20PM +0000, Mark Brown wrote:
-> > @@ -1184,7 +1184,7 @@ static int arizona_extcon_device_get_pdata(struct device *dev,
-> >  					   struct arizona *arizona)
-> >  {
-> >  	struct arizona_pdata *pdata = &arizona->pdata;
-> > -	unsigned int val = ARIZONA_ACCDET_MODE_HPL;
-> > +	unsigned int val = pdata->hpdet_channel ?: ARIZONA_ACCDET_MODE_HPL;
->
-> This changes the default from ARIZONA_ACCDET_MODE_MIC to
-> ARIZONA_ACCDET_MODE_HPL, and might be clearer if written using a normal
-> logic statement.
+...
 
-ARIZONA_ACCDET_MODE_MIC (0) is not actually a valid headphone detection
-channel: hpdet_channel is only programmed before starting ARIZONA_HP_POLL
-to measure headphone impedance on HPL or HPR, and the switch right below
-(as well as the DT binding) rejects 0 and falls back to HPL.
+> > > +#define MAX8907_CHAN(_type, _idname, _datasheet_name) {              \
+> > > +     .type = (_type),                                        \
+> > > +     .address = MAX8907_REG_##_idname##_MSB |                \
+> > > +                MAX8907_REG_##_idname##_MEASURE << 8,        \
+> > > +     .indexed = 1,                                           \
+> > > +     .channel = (_idname),                                   \
+> > > +     .info_mask_separate = BIT(IIO_CHAN_INFO_RAW) |          \
+> > > +                           BIT(IIO_CHAN_INFO_SCALE),         \
+> > > +     .scan_index = (_idname),                                \
+> >
+> > Using () means that you expect an expression as a possible input. In such
+> > a case the macro is buggy as it will evaluate it twice for _idname. The
+> > simple solution is to drop these parentheses and expect that this macro
+> > won't ever be used with the expressions in the parameters.
 
-Before commit 9e86b2ad4c11 ("extcon: arizona: Add support for select
-accessory detect mode when headphone detection"), ARIZONA_ACCDET_MODE_HPL
-was hardcoded for all boards; that commit only initialized the default in
-the OF path, leaving platform-data boards that omit hpdet_channel (such
-as crag6410) with 0 by accident.
+> You have a point but current state should not cause issues as well.
 
-Fair point on the ternary though. I will rewrite this in v2 using a plain
-if check (only validating "wlf,hpdet-channel" when the property is
-present, and defaulting unset pdata->hpdet_channel to
-ARIZONA_ACCDET_MODE_HPL in arizona_jack_codec_dev_probe(), matching
-pdata->micd_timeout) and note the default behavior in the commit message.
+I know, but I saw Sashiko's complain somewhere else on a similar situation.
+It might or might not complain, better to be prepared.
 
-Thanks.
+> > > +     .scan_type = {                                          \
+> > > +             .format = IIO_SCAN_FORMAT_UNSIGNED_INT,         \
+> > > +             .realbits = 12,                                 \
+> > > +             .storagebits = 16,                              \
+> > > +             .endianness = IIO_CPU,                          \
+> > > +     },                                                      \
+> > > +     .datasheet_name = (_datasheet_name),                    \
+> > > +}
+
+...
+
+> > > +     struct regmap **regmap = iio_priv(indio_dev);
+> >
+> > Then logically better to go further and have
+> >
+> >         struct regmap *map = *regmap;
+> 
+> This is matter of taste, I was inspired by MAX77541 ADC which uses
+> exactly this approach.
+
+Not really, however it's very unlikely to happen IRL. When you dereference
+something the compiler is in its right to do it as many times as you used in
+the code. Hence theoretically (in this driver) somebody might replace the
+pointer and two consequent regmap calls will get different regmap.
+
+...
+
+> > > +             ret = regmap_bulk_read(*regmap, MAX8907_TO_REG(chan->address), &data, sizeof(data));
+> >
+> > This is a bit too long.
+> 
+> 101 char, yeah 1 char too long, though maybe it is not wort resending
+> for a single char too long?
+
+IIO is tending to follow documentation in majority of the drivers and cases
+which is 80 limit.
+
+> >                 ret = regmap_bulk_read(map, MAX8907_TO_REG(chan->address),
+> >                                        &data, sizeof(data));
+
+...
+
+> > > +static int max8907_adc_init(struct regmap *regmap)
+> >
+> > Why not name it 'map'?
+> 
+> Because regmap is more explicit and is used consistently across the driver.
+
+And messes with the data type name :-)
+
+...
+
+> >         ret = regmap_update_bits(map, MAX8907_REG_TSC_CNFG1, GENMASK(1, 0), BIT(1));
+> 
+> which map? bitmap? statemap? or maybe geographical map?
+
+Read the name of the call. This is really silly question here.
+
+> > > +     if (ret)
+> > > +             return ret;
+
+...
+
+> > > +     /* Check for internal reference IRQ */
+> >
+> > Please, make style of one-line comments consistent ("all or none" are with or
+> > without period, same for the first letter — capital or small).
+> 
+> First comment has 2 sentences, that is why it has periods. Second only
+> one, so it does not need period.  "same for the first letter — capital
+> or small" - have you even checked the patch?
+
+Then make the style equal. Two sentences can be written differently.
+
+And please, stop being rude. Yes, I read the patch, The second part is
+unrelated, I am sorry for mentioning it.
+
+...
+
+> > > +     ret = regmap_read_poll_timeout(regmap, MAX8907_REG_TSC_STA_INT, value,
+> > > +                                    !(value & MAX8907_MASK_NREF_OK), 10, 1000);
+> >
+> >         ret = regmap_read_poll_timeout(map, MAX8907_REG_TSC_STA_INT, value,
+> >                                        !(value & MAX8907_MASK_NREF_OK),
+> >                                        10, 1 * USEC_PER_MSEC);
+> >
+> 
+> hmm, replace 1000 (4 chars, pretty readable) with USEC_PER_MSEC (12
+> chars and twice wrapped line and needs tinkering or looking into
+> units.h), I don't think so.
+
+Because the point is missed? We have tons of much longer multipliers that kill
+two birds with one stone:
+- avoiding possible typos when many 0:s are in them (one can be missed or too many)
+- hinting reader of the units of the used values without even looking into the docs
+- (and reading 1...MSEC is quite natural, without counting 0:s and thinking how
+   many of them and what 1000 microseconds, after spending time on the
+   documentation, means in practice)
+
+Please, use multipliers where it's makes code better to understand for
+unprepared reader.
+
+...
+
+> I would like to hear what Jonathan has to say.
+
+OK.
 
 -- 
-Dmitry
+With Best Regards,
+Andy Shevchenko
+
+
