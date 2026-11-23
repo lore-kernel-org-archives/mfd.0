@@ -1,11 +1,11 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.47
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.53
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
 	t=1795432760;
-	b=G37hjSl95KqQ5jTbHAxCGAOBo6cwo4jlKLmYOJep0vvx2wWlciXQSVDWjXsERV6Logw1
-	 4bVNe8SYYkZ+MQeVPkh1SUD3JLnklwkoP+p79nGdoea4gbLwmRah+PtfECZWIS0fiY6Xh
-	 5TE3Uirw6j3AOBqRmLcdH4PCrH9wLHTj7f0TxnNLC113VqwkdobDiLRMP9oZzfSZoFKOz
-	 cgORZLltYJzfijGdvi/KyTwrpX/Lg31wF35E8Aj8KviR5Raol+kkTVWcLlhv2ZViESZXv
-	 CZMu37OctAMACz6sLx2/UE6klObqfMxTqEpecenYAZgedwRsA7GmHx2p8FPy4269/+w==
+	b=Ry4g/E9Eyix/OyA3bFDCWM4hf0ECC60/b6UqFC4MyiVGj51X1AoKdozCoLyLF/cQ3AFp
+	 65a7mxGjUsyaByxDb4NLU9CRLuJ/rHSiUGUe/8kJQ1OeT+SI6Ai0B/wYsrExFaIAFcXjK
+	 Eq6MxPs07Nbc/g1Vruon87JATWpNHc3JAz53/EnbGz3+SHHcg6EiJ9zLUaCNRTXyi+4l/
+	 GLHF670CS7RqEHCzn+epC23XKJd5Kg/Du8erFG2D55qOt6ANlT3kG/tNg/4V04yp6wHPr
+	 cYu7k53VCwFzKpPxia4HDb+LO4+Ea/j3j0ZBjcWS2XzP7fFh9p/ChxD1wh34wAQOgCQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	a=rsa-sha256; c=relaxed/relaxed; t=1795432760;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
@@ -13,90 +13,84 @@ ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Type:X-Developer-Signature:X-Developer-Key:
 	 Content-Transfer-Encoding;
-	bh=ucAmEFsa7p0L3cxR4mHPR4770B2XlVZhSoV9n7aBPo0=;
-	b=lErREL27tJpw7PR19Pd2Xh9lfcuPAINzjVBUB3DlXZ1PEoA0Ld3Wo0BoVHzL99/N42hk
-	 y0oCxSxg8w7wmc15KJusbMENfQeamJEC4vioHH/4QBkLMGk6Zv0lqefZbwmu6J3nnqWqu
-	 2cDOuHAUh8nz87dwsRuq7ViQTS/T4II+Jyhq1bJzp2n0TKJBOAHJwAK8EoSRQbFsDSA7G
-	 nZmg/Fd0BkZl0/JskzZeIjjVXwd9ueS3ZlE1vlbpc8HzJkl8fTYZXiCjqt/4aXeXWd2Yz
-	 /TGjvgo+lCMeih37hdpUxqRYa1rT0T9OppAHuveSScgRWzgQHIOqbLf299JvGyKDroA==
+	bh=J+ac4e8fXiZIKOXTSBDTqVlqshkMfShyWtCswJZ3w/0=;
+	b=dvy8RiGAX+aQmZpLGfLfDZnaaLiGHBhs3ii1ggD10rLBqKT0EqGeAiGaLgi2gTflmTYF
+	 BNviS8uX6drBG9TRNSl8To8S/LXYvfH/MBczRHGBKaQKpclw8skC6E1tcDLwRlRleXCzf
+	 6iLfalNRy66xmM528y6woKSZY4t7QuVUhDcQzS3FH98E6vAK7JnpVEdrlLHfdxcv7xNIu
+	 6hzeipRKAJkbnKGi7MTtOL6wuCikTRU4wicLCdgd/c69lB4G43lqlby5Z7RS5W38oFnPf
+	 fa+2ZaoxePq4PDgoGSxN7HgWnCDZfbTN5CKnwgv5fPeONKBBbSRzr04HLNMw2W8HDLA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=baylibre.com;
 	spf=pass smtp.mailfrom=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=SOhXlrd1;
-	arc=none smtp.remote-ip=209.85.128.47
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=ikB3k6oc;
+	arc=none smtp.remote-ip=209.85.128.53
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E1B1960A3822
-	for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 11:19:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E1B1960A3822
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 873AE60A260C
+	for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 11:19:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 873AE60A260C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=SOhXlrd1
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4bb6886d30aso30551175e9.3
-        for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 03:19:18 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=ikB3k6oc
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4a35d5d4a20so30446595e9.2
+        for <mfd@lists.linux.dev>; Mon, 23 Nov 2026 03:19:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1795432757; x=1796037557; darn=lists.linux.dev;
+        d=baylibre.com; s=google; t=1795432759; x=1796037559; darn=lists.linux.dev;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=ucAmEFsa7p0L3cxR4mHPR4770B2XlVZhSoV9n7aBPo0=;
-        b=SOhXlrd1JmZBpEmvgOOslbeD1/xzzsytTG5c8iM1L+XNqJmNCqNGSG11LjFbHu4gQ0
-         DRjbP5PfOiSqIdSxd6oVcfEfNshurx3GoQeZXAzhvlUyXqsFjguuKqUyVeyFiUn0Hz0E
-         wwn07gSnW5dcQJjIRnGzfeFE3hWpC5Y4k8OFD/nucHEelsTD/Z0myttL756YRjDICSwa
-         cW7mFJtHYsPzPketatg0mkZee74MHHsw1taC/0RJcsrARUgVfCnJXt50xJET2qX8jfZ8
-         sP5XGRSvUREHZCOD3SIYAMCtnb7abM03lBZbLwE+U47UMF4XjSpxhqUcEnmY6oKT3xnI
-         dL9w==
+        bh=J+ac4e8fXiZIKOXTSBDTqVlqshkMfShyWtCswJZ3w/0=;
+        b=ikB3k6ockq0/1ZJpKgDsPNkBTH8cXsbmHJOJ/8uqwXv5sTouyCS2MCzfZI889UiSXD
+         wUaa9fWWly9peckA3fWpVQTxcm72rX05LMwINxj6P+jEanHaWLl/euonCv0Zz7Ew6FwQ
+         nPeoFd0RphKh3aPMbJqNxRalQYK06Fx1j7Hk9rEbkx9HFWBHijbU6Kna9gLYeffKXWgM
+         sb9ln+cW8O6m5AEGMU/7C3r8gmiKdVHsyJNidGX96wyRAI56j4h/jfj73UkccIkYStTH
+         RWa3/qH4ogaHGenT6D0JE/5Uf4E4StZkSJkpkzFGpm2CVjsOaKv4bIdjRHlX4y90Cegl
+         c0bQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795432757; x=1796037557;
+        d=1e100.net; s=20260707; t=1795432759; x=1796037559;
         h=content-transfer-encoding:content-type:mime-version:references
          :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ucAmEFsa7p0L3cxR4mHPR4770B2XlVZhSoV9n7aBPo0=;
-        b=FRtFAXLDYjCPGKnozfmmBBsWxYDv4Ie6WKhwSCbOEf6hSqVJDjOKClCJzS/UBS2vDi
-         rS589muqqzFYuUBjdOAiK0nXKLhnf5g+qp7v1b/vDamFz50t8ivG2NCvajIwT+Pi1uPz
-         N02GR1rR+wDis0/12oo3HD9rEKy95wX5+CQJpaaMXa3juSMY3vcoDZ/jh97BEl7U0jLj
-         k606OIaY383yxkqUKAqXVmW5SzcfNcI9RSX3DkF6HGyzYJipNPFJQDncAF/tIVGIgQ0y
-         +OIKMtk1poY6JV/4mGw8HC2Cla+dMIxui7e7fpT2cUI4a2SljZdz0Uet0U28OCCnIRBN
-         QSVg==
-X-Forwarded-Encrypted: i=1; AL+hErEg7QHFW3MGClocGouLXP3XrEtYunSH9i7LvluIfGuoceQTPsfEQbkCmr0e7Ep6lbsdVRY=@lists.linux.dev
-X-Gm-Message-State: APuU4Z/NSXERjSgw9eG8lh41O76LKJeQL6C2hQ8mEVkkhyF7A0C7ZS3M
-	F7Ja9ZUv9EjB53z1a4/K6wMFwpjHF7BbVoD4TaSnlOBwVkxWUQU6vVQ0brL6hy6d29k=
-X-Gm-Gg: AZFdTZfywb21HZgkp+kl9v+bkFLXptQiKMQ0rRJGVIoKMUSEKt+G2CAkPyA5kd+tyZr
-	RbSpuU/MFiI5hUpvSIuPumiZqXjRjwsoLXVk3bF6ZNDGAvCXLR9/gap6229Vc++ANmK95kmTbgU
-	7kDzkHYu2mfpsrM32NxYu5MfULkdiL0nPc2bYO4YKOEF7urVl41TdVmfKYFggMO/8Sm6ZJ/u+M2
-	1cssyDaO5Dl8XfQOiupWQhdUiSPVvcywnt9Wayf2BXLiDC5pWD4mWsCsBfDHBqFQHwH9OFbuYiN
-	IL9BrFYKEyIgJ2U9E9vlrhk6jTXcxnt3Cf7oczdlPFiozToHdeMBF5WZ2aL/+08B4fEQ6448UED
-	yoLQaTNPikUc90StY9f2CztBCp1h/GAtHD50+5T5sOuP9FpWMmTOIJz+1XVaEgCq9AKyDrzn+AO
-	icvqvM9QmVa5XUMO5FnhBTvowHZhETombqcT1d/hUBhQ4oXvAOcL6gbQcQHCZ+rTPsM7dCzoNjx
-	KMRbE5qSXh7B19epzB0Rw7cQnJYzEpiHeMEtgPWu5WEwe6wI6//HVwNxkOKVjbcqxo9gEPz+Tqy
-	v/vwLWE+jHXwXAPJSH1F8c0hsPnW+9l67ZonbTmvY2w6t32z+Eb/ovlmSCiiiBVKO8CevdMagos
-	t5lNZLnE9fyO7zjIa
-X-Received: by 2002:a05:600c:310f:b0:4b5:d95c:2378 with SMTP id 5b1f17b1804b1-4bb8881f9b7mr246892845e9.34.1795432757202;
-        Mon, 23 Nov 2026 03:19:17 -0800 (PST)
+        bh=J+ac4e8fXiZIKOXTSBDTqVlqshkMfShyWtCswJZ3w/0=;
+        b=FD189cRR0P5BKh053tlTrwTckhQYL0LfWs+HaHEjhF11cS3wYzCERukFI30ktcRlUh
+         RnMB8CHJ5Dw9CLZYRphx0801WffROdE36bL9bdTEH/9f4yUAHgcd4YYdhPeIFaI4gGAy
+         orDSQfL+IfB7a4v5TJAejwx7o9EEwvTd09oWZqyWtYElY8HM3netYrXzOw3eCfB0pk45
+         znzKfb/bqGYv3dcQE8sp8Dg0Dxfw+Zgt9KJDt4DkBE0Ogs0fnoLm8vpd07Mts7+G37y1
+         1rzEUn1QK7WLs8tKGeMVxlZWwyN+oMJEIcYYv0Oms2tN+0TePXq3KHPOfrERDHgnGr9f
+         vZ6g==
+X-Forwarded-Encrypted: i=1; AL+hErFaWiOJbT+uJZ+avzHmTNJAgcP0kbFRY/CTzXzZLsI4f8MiFwXtAPRVR8QNOQqBDHN8R1I=@lists.linux.dev
+X-Gm-Message-State: APuU4Z8CQCK64u6PXghILhXuapPpxqlCv9lDgX7LZzfDFTOcvPbPFOrk
+	up16kLAQCegKXu2BH6yqTt1/D1p5bgWVQRMjssi37BXtCZpvxm0sZ37foTAB/2DScwk=
+X-Gm-Gg: AZFdTZdFwlYkNG8ws2AYRqkUAkfJ3oHqGzP1raUQtg6AFr8VR9A/J18sr58czNQF9/5
+	zSvj18QC8yWCUJ7StUIcbPA28LzuQFhmmUb2OIX7cMCSE/6Zuw/BTtgLiTEqOESQA4moGpRQzf4
+	P3Vc9HvdnFfzilpWbtY2x+AtEej4oU5s8glRHdxv/IqlgPJCRGqvMZzMIlftx4NOuEil9veSdiX
+	8PWPlwp32Fb36FV5ouarmEqDXhQFuIb5DbKQxz+Z/BdC26LX8vfDaNuHP74/6uOukMiAGWXMO0g
+	qOTUk9PzPPc6pgZCwY0nti9e/MKkyfaOKFbtRbHhiDHwL8WiaoOgd55/i9GOOnARbBSSRi7QH/C
+	FCqRHraQ8sBfSn/B9NpdgApRSralr296AU0kul0Zz/y+nkZOcVDwhb805UfB+RHEDAAZVn9JgTr
+	cOLLxLXHCB0VJG0J0Q9+JdMCScPG2UallK5Oq5ceZAxs+Rp1CJW2k4WXBcmUDbvaHMB5qz9ATEp
+	25wuPydlAdQGR9nk0WEPKVzT10Nl2P3v53wdIJmWKpZj5DPl5ooDzwO1okekeZhSg1IKZsPpIt5
+	t6603TROdihaQV1Jm5bjO7mjP8zqvGR+obCvo+BIT/7BENZDp9t9nrhICUM40RR5UFmpbrjlKlx
+	kzvzsUs0nuv37EFvr
+X-Received: by 2002:a05:600c:6219:b0:4a1:d087:f6ab with SMTP id 5b1f17b1804b1-4bb8880badfmr218980625e9.18.1795432759010;
+        Mon, 23 Nov 2026 03:19:19 -0800 (PST)
 Received: from localhost (p200300f65f19a90438645cebc2ee104e.dip0.t-ipconnect.de. [2003:f6:5f19:a904:3864:5ceb:c2ee:104e])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4bb884c3063sm351330435e9.15.2026.11.23.03.19.16
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4bb8538b3a7sm392572185e9.3.2026.11.23.03.19.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Nov 2026 03:19:16 -0800 (PST)
+        Mon, 23 Nov 2026 03:19:18 -0800 (PST)
 From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
 To: Lee Jones <lee@kernel.org>
 Cc: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>,
 	Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>,
-	Aaro Koskinen <aaro.koskinen@iki.fi>,
-	Andreas Kemnade <andreas@kemnade.info>,
-	Kevin Hilman <khilman@baylibre.com>,
-	Roger Quadros <rogerq@kernel.org>,
-	Tony Lindgren <tony@atomide.com>,
-	linux-omap@vger.kernel.org,
 	mfd@lists.linux.dev,
 	linux-kernel@vger.kernel.org,
 	Linus Walleij <linusw@kernel.org>
-Subject: [PATCH v5 11/17] mfd: twl6030: Use named initializers for of_device_id
-Date: Mon, 23 Nov 2026 12:18:09 +0100
-Message-ID:  <67c8b42a7ade79452f9540899b8da762a800e367.1795431460.git.u.kleine-koenig@baylibre.com>
+Subject: [PATCH v5 12/17] mfd: Use PCI_DEVICE* macros to initialize pci_device_id arrays
+Date: Mon, 23 Nov 2026 12:18:10 +0100
+Message-ID:  <7806c77d2c777eb52ed9f77673161d73220ae996.1795431460.git.u.kleine-koenig@baylibre.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <cover.1795431460.git.u.kleine-koenig@baylibre.com>
 References: <cover.1795431460.git.u.kleine-koenig@baylibre.com>
@@ -110,43 +104,58 @@ List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1282; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=8Rq3Ynt64dgZs5N07nH6EhswZsw6cyYyIHyFU+QK58Q=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBrBCEDW59riR4bnjjOXgbHT5J/IbMCHUOG8L7Nd pUlUuniZ1qJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCawQhAwAKCRCPgPtYfRL+ Thi3B/9akDOZt1NDJUslN18OIZRU85umTflGQUMuziVJVnfi0U1eOfWubs112TDxqavas4twt5B E0TgY3QqfV3QjMkVr/X4Mwha7b9/XlTQ2r41qVnLL06aYVcyKEHoq3sKqLb7v+uvARtQpKcG0jL 6CNXRPMqPUJPtUfRb5MwV77797F6V2oteqp4++uDN8mBdIilWH3Qhb84fudPNtDXxSyousRRcVy NLIT0Cuhcs+UAeQ0GrBMRAfwIgDRZVVjYCWPo6nEhj3NFgdDx8JGcjY2/u3BdNCRLxGH6Zt6oCn LFFz88zz/f999p4xynkktV3yk1Jqp7Znc26Xz37lQ2JPMY1N
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2334; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=DqHc8cG25xY/Lzd1sVscX5JVymXLlLJWRvcHUkSIYIM=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBrBCEF7/lyc5lYuiFfMbU4eDXgBUseUJLfkDmm/ vOvcdmTQ3yJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCawQhBQAKCRCPgPtYfRL+ Tg2XB/4z1XPxNo8oxJrqHU1Kc0kRNCOJLctkwNTP27gqiZi1dpswf7+6qRYZye0e2HSH6L8q+Nk RPvhSVReBrF6P8GYVXMqAYMYYk4jMlPrngXFdpZax4287pjYhbMd7hch2imGDN5rGYVSsS+XFNm jWiB7yfhkFnfOZ753Tb0QQp8IbnIfMUwUOoRC5wchv88MUqC/b9JEcbUhCOOfE8cXeT4YcDro/R 4qKnjxZx3DvzxO+EgXpMm1A7/KeOCdTEsJ4jZzqarA2afWJ0lzHJHOqhparwLPxnS4Q7H/sbDQq fNw8T8cVwnZOvq6kl70YxMnSzGXU2c9EGsX0rSTJvoyvekax
 X-Developer-Key: i=u.kleine-koenig@baylibre.com; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
 Content-Transfer-Encoding: 8bit
 
 From: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
 
-For .compatible a named initializer was already used, unify by also
-doing that for the .data member.
-
-This is easier readable for a human and more robust against changes to
-the struct definition. This robustness is relevant for a planned change
-to struct of_device_id that replaces .driver_data by an anonymous union.
-
-This patch doesn't modify the compiled array, only its representation
-in source form benefits.
+pci_device_id entries are usually initialized using these PCI_DEVICE*
+macros. Adapt to this more usual style.
 
 Reviewed-by: Linus Walleij <linusw@kernel.org>
 Signed-off-by: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
 ---
- drivers/mfd/twl6030-irq.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/mfd/ioc3.c        |  2 +-
+ drivers/mfd/janz-cmodio.c | 12 ++++++------
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/mfd/twl6030-irq.c b/drivers/mfd/twl6030-irq.c
-index 502b1542186b..c1d3ef007601 100644
---- a/drivers/mfd/twl6030-irq.c
-+++ b/drivers/mfd/twl6030-irq.c
-@@ -283,8 +283,8 @@ static const struct irq_domain_ops twl6030_irq_domain_ops = {
- };
+diff --git a/drivers/mfd/ioc3.c b/drivers/mfd/ioc3.c
+index a86b4e6b8f77..34e4db8c2226 100644
+--- a/drivers/mfd/ioc3.c
++++ b/drivers/mfd/ioc3.c
+@@ -661,7 +661,7 @@ static void ioc3_mfd_remove(struct pci_dev *pdev)
+ }
  
- static const struct of_device_id twl6030_of_match[] __maybe_unused = {
--	{.compatible = "ti,twl6030", &twl6030_interrupt_mapping},
--	{.compatible = "ti,twl6032", &twl6032_interrupt_mapping},
-+	{ .compatible = "ti,twl6030", .data = &twl6030_interrupt_mapping },
-+	{ .compatible = "ti,twl6032", .data = &twl6032_interrupt_mapping },
- 	{ },
+ static struct pci_device_id ioc3_mfd_id_table[] = {
+-	{ PCI_VENDOR_ID_SGI, PCI_DEVICE_ID_SGI_IOC3, PCI_ANY_ID, PCI_ANY_ID },
++	{ PCI_DEVICE(PCI_VENDOR_ID_SGI, PCI_DEVICE_ID_SGI_IOC3) },
+ 	{ 0, },
  };
+ MODULE_DEVICE_TABLE(pci, ioc3_mfd_id_table);
+diff --git a/drivers/mfd/janz-cmodio.c b/drivers/mfd/janz-cmodio.c
+index 036773b3c4ee..a0cf86460a23 100644
+--- a/drivers/mfd/janz-cmodio.c
++++ b/drivers/mfd/janz-cmodio.c
+@@ -259,12 +259,12 @@ static void cmodio_pci_remove(struct pci_dev *dev)
  
+ /* The list of devices that this module will support */
+ static const struct pci_device_id cmodio_pci_ids[] = {
+-	{ PCI_VENDOR_ID_PLX, PCI_DEVICE_ID_PLX_9030, PCI_VENDOR_ID_JANZ, 0x0101 },
+-	{ PCI_VENDOR_ID_PLX, PCI_DEVICE_ID_PLX_9050, PCI_VENDOR_ID_JANZ, 0x0100 },
+-	{ PCI_VENDOR_ID_PLX, PCI_DEVICE_ID_PLX_9030, PCI_VENDOR_ID_JANZ, 0x0201 },
+-	{ PCI_VENDOR_ID_PLX, PCI_DEVICE_ID_PLX_9030, PCI_VENDOR_ID_JANZ, 0x0202 },
+-	{ PCI_VENDOR_ID_PLX, PCI_DEVICE_ID_PLX_9050, PCI_VENDOR_ID_JANZ, 0x0201 },
+-	{ PCI_VENDOR_ID_PLX, PCI_DEVICE_ID_PLX_9050, PCI_VENDOR_ID_JANZ, 0x0202 },
++	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_PLX, PCI_DEVICE_ID_PLX_9030, PCI_VENDOR_ID_JANZ, 0x0101) },
++	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_PLX, PCI_DEVICE_ID_PLX_9050, PCI_VENDOR_ID_JANZ, 0x0100) },
++	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_PLX, PCI_DEVICE_ID_PLX_9030, PCI_VENDOR_ID_JANZ, 0x0201) },
++	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_PLX, PCI_DEVICE_ID_PLX_9030, PCI_VENDOR_ID_JANZ, 0x0202) },
++	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_PLX, PCI_DEVICE_ID_PLX_9050, PCI_VENDOR_ID_JANZ, 0x0201) },
++	{ PCI_DEVICE_SUB(PCI_VENDOR_ID_PLX, PCI_DEVICE_ID_PLX_9050, PCI_VENDOR_ID_JANZ, 0x0202) },
+ 	{ 0, }
+ };
+ MODULE_DEVICE_TABLE(pci, cmodio_pci_ids);
 -- 
 2.47.3
 
