@@ -1,48 +1,48 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795553260;
-	b=YxxkVEPv62zrhiYI8WT5eYk5/nt3Fh2Z0QcS0E/VNSfp9Fk4IpQ/1CdQtIaCo05kLxVU
-	 3clOZTxIaKbmynJngxM+sqnFKvTTLe1DLbkqk4V9zIWSV7LoRZNGC4b1Eg4RVJpW0gHhi
-	 tH+MwgUBsdTGbSE1OJoHTJULDgYzAKU1Eeq2LNIM0SdhML6kgi4sv8RZAInwrmlG09T58
-	 QvfJ+hOb6KdWMJpzXoi5htqT1JCsCtKImKn0MFfc9Q/QzP6JFjIs70WGNwfpEO+E53Ypt
-	 5a+Oy+mPsJDG1LhhaeA8yGHbZxZ+CK1MBiD0BR89VS1kgxQbYKmL5/X/sWXWI3rUPGw==
+	t=1795553264;
+	b=2ANLP9Fev+BqRq2fo2B1Zxi5f/rq62HKaZxHuBEK8LjFKOAimaakUcagKCxhXGzCDJoh
+	 4Xxmp/e0ouJ3kIReUzhhhLm0DX6XztScI/qGdqcvfRgwLtGHZT3vegHLRPWgvHpb6fS+Z
+	 MbkihNY/zgOuj4PKf9FIpuWskqC1+H5x8o1hbup0Q4DNCzjH/ZA7cFAOORNphlHegroBq
+	 mJ3ludR7MeS52pHN11+tyGB3U7Aj3lEadEpzdOFr4VO1Mxxnp895yodXAloOWvWDlymcu
+	 PA7s2lJJprbBcN6lnsg41PEMRj2NdA7BWQ8vZTAnxaa8Z/suAp894K6UgDkqolT9X1g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795553260;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795553264;
 	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
 	 X-Mailer;
-	bh=CuMg05a98HcJAkKkDl2QaTqHQIdMFGxRksNhla9SB8E=;
-	b=bb1Yl3ulm4gwG9gISy4++zEqJtiZ+OSR6vezcaM8NbcobaS+KLfiRoKibTVhsOJ2z47A
-	 72DmY4vSZ1iGdJPpw3hgFJNarw7oeoOdX3nbJs6vmwOf2pA0oPQjzytI51UZ7GxscL5Rl
-	 Tq17iLaeRthwNacARfGaI9bAey5w+60ztNvZgLp/Svk75FJqqJdFzOlm6Fgnv4R0bD8/B
-	 59M/mxbDT/f9G/9aQPKMqwjgzP3wxcVvLqmfkh1YtQZFtLjtyFqj1fz4pL5o9w4jyBNrk
-	 Lj8Kn8TSvhBEXA/TZuOC/i2ZRGSkvkmrzLe7iBEqF0hOwwK/JnFVj9ej9ICcYsi0GzQ==
+	bh=UeJIGxY5ErXXyutQODurGJuOPaEIwFDPftosdrDquo4=;
+	b=wwlWCajZAXqIP32sI8eEcND7OsETATvPCImJR6mtghw+iHOmXPj5inkcuLx2RLDMeXgt
+	 VRkXYZblygqKmUQ51FVkb8n3jpHlDeWTaUBszIWFikm/Ixj693EhIcWeRUta2aVFtqLtM
+	 6hzCv+gXz8iKBf4aD/2EOoAXP/lRkAxePJgPp9hq9vx85FrAx9g2AXGdv4xn7jJy4uAd/
+	 Is0hq6wzmLgLou7eVorsaMd41vROlKOILK1iVuIDL9bPRL8UXWZzhglpWj2TDbRrs1L0c
+	 O2eqFdlZJxIGuLPs8vhqKtIRsyvVgWP93JogyjviAwcAKdzimYG52Gj/O1ktFj1Eh+w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lNU3gMqO;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="WEe0daB/";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D3799606A33A;
-	Tue, 24 Nov 2026 20:47:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17CDA606A32A;
+	Tue, 24 Nov 2026 20:47:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=lNU3gMqO
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4A6811F00A3C;
-	Tue, 24 Nov 2026 20:47:40 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WEe0daB/
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3B6131F00A01;
+	Tue, 24 Nov 2026 20:47:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795553260;
-	bh=CuMg05a98HcJAkKkDl2QaTqHQIdMFGxRksNhla9SB8E=;
+	s=k20260515; t=1795553263;
+	bh=UeJIGxY5ErXXyutQODurGJuOPaEIwFDPftosdrDquo4=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=lNU3gMqObQuk8TM7A8W9Rc8yaIsKKJ+Z0Y/yfFvghzBJOAZRaOUh8uHwPJ9r3XLg6
-	 rr1PFpcnWihTp1M7xLILD2BYHW15tw4u7wUdN5WrZlhhvb9YgOwpIdA/s3PH2LWMk9
-	 IDR3b1EgM9POYUf090Z15syvEzGfzdJ2eZS5Vju5lSXc9sE8QPZOXMAF5efr114mO7
-	 WsrxkBf88BImcfdDfsEr/XsiIy+KA8KS32LZDAhjYxnD7Z25HKdchcTgPovribQ5Cn
-	 wYNOiyrDqfxVw3Ln5boLERtUU8P8j447gBr1fHo3Dbnewv0+XLubMTgYrIiIbxiuuQ
-	 JjaMJGv+gwyXg==
+	b=WEe0daB/3R0JiuxIoukVFaaAG3VnTRm7a6RbKcBhGEhdVnEBpKNkO9LywNKHqD/o4
+	 1r/4ZgSBkV1j/dZrXFJta4FaE5k7RlMFIKYBpeVfQ/igglg2yCB657bl2CVk1587C8
+	 SlTaUBwJWnYU1D4lbXCRW26QHLSHaj5yRhzTaMqwfm6sPhSvQIL97N38ESu+I7hSti
+	 fT6RZZbmSDKGrMSTOhbhezci98chYgn2I+KjATqKFoFZAGXE11csN+AXAyxh7MzuPh
+	 6/137YMV95lkT6tfbPit4hscIBXcofMO/t0fvw0s9mr0PWtToKN0TGtr2/qioVOfFh
+	 7qien2kXb2VEA==
 From: "Rob Herring (Arm)" <robh@kernel.org>
-Date: Tue, 24 Nov 2026 14:46:38 -0600
-Subject: [PATCH v2 5/9] arm64: dts: marvell: Fix w25q32 compatible strings
+Date: Tue, 24 Nov 2026 14:46:39 -0600
+Subject: [PATCH v2 6/9] arm64: dts: marvell: Drop unused USB 'phy-names'
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -54,7 +54,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261124-dtbs-marvell-v2-5-663009a769da@kernel.org>
+Message-Id: <20261124-dtbs-marvell-v2-6-663009a769da@kernel.org>
 References: <20261124-dtbs-marvell-v2-0-663009a769da@kernel.org>
 In-Reply-To: <20261124-dtbs-marvell-v2-0-663009a769da@kernel.org>
 To: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
@@ -65,41 +65,53 @@ Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org
 X-Mailer: b4 0.16-dev
 
-The w25q32 SPI NOR Flash is a Winbond, not ST, part and is missing the
-"jedec,spi-nor" fallback.
+'phy-names' is not valid without a corresponding 'phys' property, so
+drop them when 'phys' is not present.
 
 Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 ---
- arch/arm64/boot/dts/marvell/armada-8040-clearfog-gt-8k.dts | 2 +-
- arch/arm64/boot/dts/marvell/armada-8040-mcbin.dtsi         | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ arch/arm64/boot/dts/marvell/cn9130-crb-A.dts          | 2 --
+ arch/arm64/boot/dts/marvell/cn9131-db-comexpress.dtsi | 4 ++--
+ 2 files changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/marvell/armada-8040-clearfog-gt-8k.dts b/arch/arm64/boot/dts/marvell/armada-8040-clearfog-gt-8k.dts
-index f9695b25da79..ee3cb89ead0b 100644
---- a/arch/arm64/boot/dts/marvell/armada-8040-clearfog-gt-8k.dts
-+++ b/arch/arm64/boot/dts/marvell/armada-8040-clearfog-gt-8k.dts
-@@ -590,7 +590,7 @@ &cp1_spi1 {
+diff --git a/arch/arm64/boot/dts/marvell/cn9130-crb-A.dts b/arch/arm64/boot/dts/marvell/cn9130-crb-A.dts
+index a7b6dfba8af5..5823b25e5faf 100644
+--- a/arch/arm64/boot/dts/marvell/cn9130-crb-A.dts
++++ b/arch/arm64/boot/dts/marvell/cn9130-crb-A.dts
+@@ -28,11 +28,9 @@ &cp0_comphy2 0
+ &cp0_usb3_0 {
  	status = "okay";
+ 	usb-phy = <&cp0_usb3_0_phy0>;
+-	phy-names = "usb";
+ };
  
- 	flash@0 {
--		compatible = "st,w25q32";
-+		compatible = "winbond,w25q32", "jedec,spi-nor";
- 		spi-max-frequency = <50000000>;
- 		reg = <0>;
- 	};
-diff --git a/arch/arm64/boot/dts/marvell/armada-8040-mcbin.dtsi b/arch/arm64/boot/dts/marvell/armada-8040-mcbin.dtsi
-index f2d278d171eb..1c36763178a9 100644
---- a/arch/arm64/boot/dts/marvell/armada-8040-mcbin.dtsi
-+++ b/arch/arm64/boot/dts/marvell/armada-8040-mcbin.dtsi
-@@ -361,7 +361,7 @@ &cp1_spi1 {
+ &cp0_usb3_1 {
  	status = "okay";
+ 	usb-phy = <&cp0_usb3_0_phy1>;
+-	phy-names = "usb";
+ };
+diff --git a/arch/arm64/boot/dts/marvell/cn9131-db-comexpress.dtsi b/arch/arm64/boot/dts/marvell/cn9131-db-comexpress.dtsi
+index 71c225221617..a68c958fbb30 100644
+--- a/arch/arm64/boot/dts/marvell/cn9131-db-comexpress.dtsi
++++ b/arch/arm64/boot/dts/marvell/cn9131-db-comexpress.dtsi
+@@ -89,15 +89,15 @@ &cp0_spi1 {
+ &cp0_usb3_0 {
+ 	status = "okay";
+ 	usb-phy = <&cp0_usb3_0_phy0>;
+-	phy-names = "usb";
+ 	/delete-property/ phys;
++	/delete-property/ phy-names;
+ };
  
- 	flash@0 {
--		compatible = "st,w25q32";
-+		compatible = "winbond,w25q32", "jedec,spi-nor";
- 		spi-max-frequency = <50000000>;
- 		reg = <0>;
- 	};
+ &cp0_usb3_1 {
+ 	status = "okay";
+ 	usb-phy = <&cp0_usb3_0_phy1>;
+-	phy-names = "usb";
+ 	/delete-property/ phys;
++	/delete-property/ phy-names;
+ };
+ 
+ &cp1_usb3_1 {
 
 -- 
 2.53.0
