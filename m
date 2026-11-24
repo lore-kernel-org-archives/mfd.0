@@ -1,130 +1,72 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=67.231.152.168
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795530826;
-	b=ASYXFylV8nxyNpJMCF1jcFNNeLkG3MdSk++qGWjpowpfF8jTZOQIDc+X6MbXadJ81WuP
-	 DwZg3M4v6JuLs32vNmhjmR6KV7YCOunVdmbyU/vcylww8Ff3zQ1Q3Y1CCoW+p6rWU63wP
-	 7DSnrXEHFHZQLhVd4BiQux4N72rrKnmkuq/OFY4fCN0ZY0gs9yfEJ7gJUqtxrz7dyGZvL
-	 jbnlznDq4hzQqDDo4iJyVKZ4SWyguf/apCouPBMbYUOxv0GMZhG8qbb6xChFR8XWu8QDf
-	 WwWrOtwg8Zfrl91OX1VFjAyr0KZtTiKn+Dtsf9BABsQ03T2hQQKU8YwB6yA2xggEDqA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795530826;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:DKIM-Signature:
-	 Received:Received:X-MS-Exchange-Authentication-Results:Received-SPF:
-	 Received:Received:Received:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-EOPAttributedMessage:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
-	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
-	 X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
-	 X-OriginatorOrg:X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-Id:
-	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
-	 X-MS-Exchange-CrossTenant-AuthAs:X-MS-Exchange-CrossTenant-AuthSource:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Reason;
-	bh=W5o9QHjgM82gDML4ykQpSiEq5u8PDmt5dOat9Dcv+zU=;
-	b=xHTwMMC4diap6DX1NLgI61nonuIeklRBGfDWmORIRSa09PmFQAMupdwEt0KXVB/n7FEq
-	 EAOBfVWxH3rNZpNoD2Neq58m81Kdpp8Du1M43xDHOeAr4X4vxLlOudA6ij4U7t47lMeqo
-	 6wsj4yS6bP1p+zBFjA8qXLwYNj6nMLPpJgssk8brJbv7rnbrClnecHSwMRgdpOUwWD1J/
-	 d/N3rLvBqHJvqBjZFGvg6a4g4pq0wX/Gl2rLAy/+dHG8UoEdvRKoHGWINhUnekk6rBsIo
-	 y+tGEQ4T1PdViqHjr6eKLFDjB0zVX6g/QCVpyZNr7QzdWbIPk5cmzegXCYD834sGrdw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=opensource.cirrus.com;
-	spf=pass smtp.mailfrom=opensource.cirrus.com;
-	dkim=pass header.d=cirrus.com header.i=@cirrus.com header.a=rsa-sha256 header.s=PODMain02222019 header.b=D4s21Y7c;
-	dkim=pass header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-cirrus4-onmicrosoft-com header.b=t9WDypN5;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=67.231.152.168
-Received: from mx0b-001ae601.pphosted.com (mx0b-001ae601.pphosted.com [67.231.152.168])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=44.202.169.35
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795532890;
+	b=FFouTACBydt3nPSs8XTGO7uuvTV3Rjt/keMthIkvOKsKpy3G6eYZO67eR1CMFoVqrQ5y
+	 b8ou1F77BkSUcdl+fNRmoub4JOSPwQ1YiggIPOANHu6WuuSI8YKtUyjqj1Gzo7dwgzAj2
+	 CTgUZTUvoNp0PrfWgQAWLzJzvcRFvxXaLmhs+HB2Wqf2YwrGiNm4sQq1WJJeKbCBxtOmJ
+	 zB55Lb/77W7hP4Cq50GR6GOKQJM/NtquNoawaaJOfh+IfcGQ7MiDXo7V9a71KpbuVJMcB
+	 /IzMoGM+tyCp2wKpIjgznxlPqgk1kPkGNcK2mF54ZXB6lnvd2UcVI46iHZLtuJmE+8A==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795532890;
+	h=DMARC-Filter:Received:Received:X-Authority-Analysis:DKIM-Signature:
+	 Received:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+	 References:Content-Language:From:Autocrypt:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-AntiAbuse:X-AntiAbuse:X-AntiAbuse:
+	 X-AntiAbuse:X-AntiAbuse:X-BWhitelist:X-Source-IP:X-Source-L:X-Exim-ID:
+	 X-Source:X-Source-Args:X-Source-Dir:X-Source-Sender:X-Source-Auth:
+	 X-Email-Count:X-Org:X-Source-Cap:X-Local-Domain:X-CMAE-Envelope;
+	bh=G7Hg0gt668orwU2HO5Iwx97Bb7gVHA6V0wHbzGAHiEU=;
+	b=YsbjYM1xfrJr9LX/+bs4ecYFtsfUeqgNvJrYnhQ9YFJ++UuQDkVB8Qkj0xRFan8yyAe/
+	 inZeINNteB8AJ66RzCDLtO/OpppE8PqQ2jMxSlF4beZKEqZk47UKyv+g1p8PltthC5QSH
+	 DYrB1SMEC2qRD9DYq42y5YXxnhf4NJzhrFDAaUpX3LUD0yRPfckXMJMEFcr/Jtu6KTee0
+	 sfIWOQEXWCkA6YEurDEc/kqvxtKFJSaQrxh1snYq3z3wksmDWlZcgUdkDJB6HHvMeMRVs
+	 Iap5Al70+Lrh37nDM1ME2jIDTNfOJwHV2rPLRzrb18Bs3Rfswsc9USyUOYZlYcjWgZg==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=none header.from=roeck-us.net;
+	spf=fail smtp.mailfrom=roeck-us.net;
+	dkim=pass header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=YrkMIerM;
+	arc=none smtp.remote-ip=44.202.169.35
+Received: from omta036.useast.a.cloudfilter.net (omta036.useast.a.cloudfilter.net [44.202.169.35])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BAD0A606A31E
-	for <mfd@lists.linux.dev>; Tue, 24 Nov 2026 14:33:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BAD0A606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=opensource.cirrus.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30F60606A321
+	for <mfd@lists.linux.dev>; Tue, 24 Nov 2026 15:08:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 30F60606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=roeck-us.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.a=rsa-sha256 header.s=PODMain02222019 header.b=D4s21Y7c;
-	dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-cirrus4-onmicrosoft-com header.b=t9WDypN5
-Received: from pps.filterd (m0077474.ppops.net [127.0.0.1])
-	by mx0b-001ae601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AODcFdB2042123;
-	Tue, 24 Nov 2026 08:33:37 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
-	:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=PODMain02222019; bh=W5o9QHjgM82gDML4yk
-	QpSiEq5u8PDmt5dOat9Dcv+zU=; b=D4s21Y7cqJ+sqwxnRvDtDTQ7GMj3t5tR8X
-	ROUm27NNlWTBbMrqHTPa7oXtHavYYubsOkmP++uWHrpKFGl2eLbCtzACEXczIkR/
-	U1DsLDLh7CbA4Fcupa1AXX3oHVDONDvu/0K81dsg2mCGuX7NOVo0+vn6u9jvfFDw
-	/RGgDi/vR5zgeFbJiPxEbeVuk+QU0z5nmjbiVKZ2vQkcfpOwBjFtbJ0pupsxS2Lb
-	4xOWOztH5G9zm5qjE1OB04OFct1ybwseJuu13MJBDiQU9kW3nN01EP3zGdnRzz+1
-	j2Ivrfp2nCRah6cw1NYTfM9l3ElcgLCpj8mynpQdH5MWdrJxj+JA==
-Received: from co1pr03cu002.outbound.protection.outlook.com (mail-westus2azon11020117.outbound.protection.outlook.com [52.101.46.117])
-	by mx0b-001ae601.pphosted.com (PPS) with ESMTPS id 4j519j8ueg-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Tue, 24 Nov 2026 08:33:35 -0600 (CST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lGP+e4uiB8RgqHOojVPHY8PucOvOoY9BjBHDize17ThPQ8uxMD3EYH24UK4vyNiY6vKVIDobaSNJIZ7Nu3+GcgUqgn3Uva3XNJmHNT4xhStqJoA21/SfcuLbHRva0sPjHxCCKqkwYz4xoQgvaEoqYiRVef8C2L7tFmxsCMQ13SWKol6/vIxZ7CYQoT2wyyP415ZMIb/mHSJRvo8Nb+DZx/Sfn2HboaETdKe7bkpofgYlmuMNoGiVda4ezHhZwoVBZc3Jcqen85a8iCvDyWwZSzjk3hf5TOjNLNNjg8gUHmKh8FkFbT1W83O9sQFO2pciQxCncBZGXPIvJXB7BW7EPg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W5o9QHjgM82gDML4ykQpSiEq5u8PDmt5dOat9Dcv+zU=;
- b=KCHndp+5yXC5X8spilDkd6h/7rgr3675Kxwvd/rFCCatDOHFVgWwuq2+BThf4llJVro5kVc7IexS23d2+hZLQ36M10DdxKA58F0wTVt4I+Ytov1KyMXH2B0FvotbUlBwvzPRSUOQ0l56vecqaJF+f6iqK/IQmScGyn0F+5ZeK2HGpW/z83e0kwnirgdGfbhe0Ir4Ho8v0cNzNh0SMfFt/h3hfKQnrL0lFmbiKwHBoT5nDxs3s49czjOE+Jp1mmOuzR75IOE6yaJUJ8JLmGTIY6oJRyG0agbYgyCFG9XLP3RPVjxWZkN9REBNTfADuW/B1YL+N9TKdCqM1LPgCMRiag==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 84.19.233.75) smtp.rcpttodomain=cirrus.com
- smtp.mailfrom=opensource.cirrus.com; dmarc=fail (p=reject sp=reject pct=100)
- action=oreject header.from=opensource.cirrus.com; dkim=none (message not
- signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cirrus4.onmicrosoft.com; s=selector2-cirrus4-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=W5o9QHjgM82gDML4ykQpSiEq5u8PDmt5dOat9Dcv+zU=;
- b=t9WDypN5kjG7/5o04gVK7s0F4csa7qqPEn+2lGLq2FNa3LF7u3SzBFNlZDqyQUlma8NkbJDXgyjh2HZbP9tYnRxUXV1TOLVXrWPLKuEgjWLG9ZJhpBGPMHBaXf1szUL0lGMlIGB4F0URQa7BNL95txsgZkkej/+7xpc6dfmAa80=
-Received: from DS1PR06CA0008.namprd06.prod.outlook.com (2603:10b6:8:458::6) by
- MW3PR19MB4203.namprd19.prod.outlook.com (2603:10b6:303:40::20) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.662.4; Tue, 24 Nov 2026 14:31:21 +0000
-Received: from EA8PEPF0000000A.namprd05.prod.outlook.com
- (2603:10b6:8:458:cafe::99) by DS1PR06CA0008.outlook.office365.com
- (2603:10b6:8:458::6) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.615.14 via Frontend Transport; Tue,
- 24 Nov 2026 14:31:21 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=softfail (sender
- IP is 84.19.233.75) smtp.mailfrom=opensource.cirrus.com; dkim=none (message
- not signed) header.d=none;dmarc=fail action=oreject
- header.from=opensource.cirrus.com;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- opensource.cirrus.com discourages use of 84.19.233.75 as permitted sender)
-Received: from edirelay1.ad.cirrus.com (84.19.233.75) by
- EA8PEPF0000000A.mail.protection.outlook.com (10.167.249.233) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.662.3
- via Frontend Transport; Tue, 24 Nov 2026 14:31:20 +0000
-Received: from ediswmail9.ad.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
-	by edirelay1.ad.cirrus.com (Postfix) with ESMTPS id 4302F406540;
-	Tue, 24 Nov 2026 14:31:18 +0000 (UTC)
-Received: from opensource.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
-	by ediswmail9.ad.cirrus.com (Postfix) with ESMTPSA id 2A6B3822542;
-	Tue, 24 Nov 2026 14:31:18 +0000 (UTC)
-Date: Tue, 24 Nov 2026 14:31:17 +0000
-From: Charles Keepax <ckeepax@opensource.cirrus.com>
-To: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-        Richard Fitzgerald <rf@opensource.cirrus.com>,
-        David Rhodes <david.rhodes@cirrus.com>, Lee Jones <lee@kernel.org>,
-        patches@opensource.cirrus.com, linux-sound@vger.kernel.org,
-        linux-kernel@vger.kernel.org, mfd@lists.linux.dev
-Subject: Re: [PATCH v2 4/4] ASoC: arizona: clean up coding style and
- formatting
-Message-ID: <awWftY45HMlo6lqj@opensource.cirrus.com>
-References: <20261123-arizona-asoc-v2-0-6323d3c0961a@gmail.com>
- <20261123-arizona-asoc-v2-4-6323d3c0961a@gmail.com>
+	dkim=pass (2048-bit key) header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=YrkMIerM
+Received: from eig-obgw-6001b.ext.cloudfilter.net ([10.0.30.143])
+	by cmsmtp with ESMTPS
+	id Vb8vxxOlw4vCDVs7txKpyW; Tue, 24 Nov 2026 15:08:09 +0000
+Received: from 162-215-252-36.unifiedlayer.com ([208.91.199.152])
+	by cmsmtp with ESMTPS
+	id Vs7YxHSIYdRrRVs7YxqCVD; Tue, 24 Nov 2026 15:07:48 +0000
+X-Authority-Analysis: v=2.4 cv=LOhmQIW9 c=1 sm=1 tr=0 ts=6b05a858
+ a=QNED+QcLUkoL9qulTODnwA==:117 a=2cfIYNtKkjgZNaOwnGXpGw==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=M0FbrtG7MMAA:10 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=BOHXnwOiB0Zir2JbBRsA:9 a=QEXdDO2ut3YA:10
+ a=KPbNTLLc3YvdawN95zVk:22
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=roeck-us.net; s=default; h=Content-Transfer-Encoding:Content-Type:
+	In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
+	:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+	List-Unsubscribe:List-Unsubscribe-Post:List-Subscribe:List-Post:List-Owner:
+	List-Archive; bh=G7Hg0gt668orwU2HO5Iwx97Bb7gVHA6V0wHbzGAHiEU=; b=YrkMIerM6e9D
+	UE1bgvvfVEvE/eVN1bC+wKms0MJUP/hyKmAHWcrs4jjTYmzPLi876wk1L7hoO0BzpF76cxUjzfYFM
+	2PcIdBx3ClJoaqnsZgpKHQGR/FlRLc4a+nkMvaHtGGIUX5jqBj/DUUMc4SJUYBSq3mp7qD1RcxwkU
+	6ROOU40JGNpsM5KgvpimqjRjCfO5P44OL5S5s068CHW9jwCIDxNtMkjjtlzP0phdhLPw2Vvvw0wG2
+	dR8lSErO+u33+aOKXhymS1S8OtxpHfRfT3W0cZvpKEDffBDTwZjxwGb5ilFX2cYT4ZiYGZ2g9HaFE
+	wf57MHsXKCB6qEGZB/O2qg==;
+Received: from 108-223-40-66.lightspeed.sntcca.sbcglobal.net ([108.223.40.66]:41580)
+	by bh-25.webhostbox.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.100.1)
+	(envelope-from <linux@roeck-us.net>)
+	id 1xVs7Y-00000001Ab4-02SJ;
+	Tue, 24 Nov 2026 20:37:48 +0530
+Message-ID: <8046641a-3e9d-434b-b0db-58190257b38a@roeck-us.net>
+Date: Tue, 24 Nov 2026 07:07:46 -0800
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -134,66 +76,281 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261123-arizona-asoc-v2-4-6323d3c0961a@gmail.com>
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: EA8PEPF0000000A:EE_|MW3PR19MB4203:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8987ee7e-16bc-4901-5220-08df4a379ba9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|36860700016|376014|61400799027|23010399003|16102099003|18002099003|22082099003|4143699003|56012099006|11063799006|261028144727099003|261026140227099003|261022075727099003|261022105027099003|10067099003;
-X-Microsoft-Antispam-Message-Info:
-	5CS7f66pzLdrddNRbu8Ha2rC08BaCZVnyWcj4dScHlNDAj1/CitU7cCxpbibYHvNGON7CBX+tPjfm58ONiQUVhqVBLe82U/UL7tNHOttPMwv7peLfN7TnMRelNUfwgll9gdonKiVirOT3aAYYJ9QtRrnfMpVMGj/XTpeQt7lmfxDhdKo1/96g/yH98TQWtSVEwDAAMOYt2XH6ORH36sfXvYgahkzyc61NkxI+AFxF66xTaw8w5ZDtcoISno6vrmStV6XesvnlHPzA2uefhCazJyHJZd/NQeq0MecCtl3n5x11X4c9gvu9duUByuaf2CBUPCx+qshL1NlcKo5l7LqB1XmnbUXF0QBDrgN5pXDb0daZ5iSbaZvRo1g0tl/wbPjoepDsTP0r7NgyWVIP3JWZp5BeXeCFc4vlWsTQ73KyzfwNEojJ+E8X84MW9/lyg+0dXHxdz+f9VkcWYt10/P6yfBEgqqA2qMSxcZMcL8qzI6OmcgsMbCPJHjky86APiEqYlXuIwnqgPi0iAgdBJnuD7mxi0WzeaeLvH/Do7LN5g/FcikRt/oxbgbophf1vFKgw3nLxOqncAT/ZTamYXhjvFDv8635YZ73Gg2iTvaDZTMeDpSVvhH/NyNQbv3fvjxfuLqFKSrC+ZRqw1REnPBk0n2xg0QjWUHkNBYRV1EN1DQy/GciXgS9HryFIvz036pR
-X-Forefront-Antispam-Report:
-	CIP:84.19.233.75;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:edirelay1.ad.cirrus.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(376014)(61400799027)(23010399003)(16102099003)(18002099003)(22082099003)(4143699003)(56012099006)(11063799006)(261028144727099003)(261026140227099003)(261022075727099003)(261022105027099003)(10067099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	DzHWA7mbnDlX3omFY9l0lGKM1iwHNCxeF6e9gU5qTf3aJLRyz/6oOiAOo4kT0CGsDl+IdmE95Q1xUd/P1OlyUR0MxnXWF1GawTGaPccIRd8syuK+elskPFyYrVKC1rX5tLWO2Fg3BI7BA2cq+I/zQ8tOacWQXTTg1xx2YYHrMrnyXxPQ7eJQpFYjhCn3gvZERX1/6/BMx3aujKCRABomS8yc1x2RWnqgTBUkwxRBk5Q0OBVnMNblpSceC8OXqvm9pPK1cqm610PcVkd6aFVqqTs3i7RVw8yrA26dHYRMhOIwfvEqpS3VqkxWlopF6gipHAcNpJEo3q9KLvpAFLytS3LqHB7zWZmUNi0zvMAKyRgsXDt4u9LWRbL5YzYhBiyJcjzB1E1dy+gWGDB3GHiVYpcezSaczhDVhn4kjBwVKYqSY/z3K6/C7kgPAKgp9GIv
-X-Exchange-RoutingPolicyChecked:
-	XtnhilnGXeNprEHD5hoxNnV3hDCI1LP2k+YLbNoBHcAO47ycM4uiBlSlJa1Ii8CaqhUhicdGbCLDn62U+SXg5lktzXM8hZi1JIfh04Jd/iHeaSBu4T6d7fvt8ThFLABOBdbBskoHPSevQs8EnSV8JHIf0Lr7FcvsI7wZYqHJT4vrCh9FpaU4gYIG9BYUcXkNlw6kJEpuL1jQqzb07+9wTxw05HAzrPp4Q53Gv0ZGSK5y3mmFZcpQUAfTVDIDt5JBT66TGSRnjaGaNkAg/RAG0fzUwpNwNF9ee7XFx+YZ9I2EpiZQpaM/FLqgCKonfqTVJdX99Y5gfiKl4SVYM9k/eQ==
-X-OriginatorOrg: opensource.cirrus.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2026 14:31:20.1856
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8987ee7e-16bc-4901-5220-08df4a379ba9
-X-MS-Exchange-CrossTenant-Id: bec09025-e5bc-40d1-a355-8e955c307de8
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bec09025-e5bc-40d1-a355-8e955c307de8;Ip=[84.19.233.75];Helo=[edirelay1.ad.cirrus.com]
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-EA8PEPF0000000A.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR19MB4203
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI0MDA1NiBTYWx0ZWRfX9Sp8aofIqVek
- 7tV9kPjG1Hyv/2FCfNbAKfnkll/hKNIm6ts/aQzlPLCMv2XVdmc613yrs07B3XCH1KP0rucWYpg
- q1COlIKLDzDWbnswgySafraDPNHy1W28Whyn5UegGN6x7cmFF0CuXTQbS7WiE2HKnfnoAdOaVfl
- ZEczf8HCRqddWwdGUkA0+WHlcF1LLRXKZEkaZOqjNwQKljZ5X/x3w/Z75DExG/bnZ+2WytYjkiE
- /B+3/W6hk11cqrG06A0UiqjuL/u0e1rDyl+WMngr9DmYNJsiLIcG6Gxclzvmr1p8lxNiO3ahJLB
- BZkXLgQTlizP01tNpaP+6Mqi6oZrZjnarZaAYQArsJdR9Hx+oR3LAWIYh1fxcAOncTref/TpU4f
- 0t9728M6Ro9A5ONtbkfUw0ZmaxgelKZP5ZZuJl6XVn6c4guN7Ax67++4YlHh5KMl7gXK6htfw6h
- RBAovD7TmNx5t81pbWg==
-X-Proofpoint-GUID: MXl8fvWLmrUreA1wWUdz_3kGpnKdFfRp
-X-Proofpoint-ORIG-GUID: MXl8fvWLmrUreA1wWUdz_3kGpnKdFfRp
-X-Authority-Analysis: v=2.4 cv=Xf0cX455 c=1 sm=1 tr=0 ts=6b05a03f cx=c_pps
- a=RrdOQlmmxp+bQeXV/0G7LQ==:117 a=h1hSm8JtM9GN1ddwPAif2w==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
- a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=s63m1ICgrNkA:10 a=RWc_ulEos4gA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=iX4cTi3TZMoOKdANLEfx:22 a=KfkQE9S9VqCBgivYGm0O:22
- a=pGLkceISAAAA:8 a=w1d2syhTAAAA:8 a=Olr2uEvYh5VNySX1iqYA:9 a=CjuIK1q_8ugA:10
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI0MDA1NiBTYWx0ZWRfXzENMrkrFuQr9
- Gz2dLEh0JLVAEwy4//LnK6TqMhETGigz2wcgpdLwXOh2cA3dVq9M9QSyKMrOGLmLn329L5f66Ay
- F30xmIkSK+TcUA983mfXiCF279AotaE=
-X-Proofpoint-Spam-Reason: safe
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 02/12] hwmon: Add Qualcomm PMIC BCL driver
+To: sashiko-reviews@lists.linux.dev,
+ Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
+Cc: linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
+ mfd@lists.linux.dev, robh@kernel.org, conor+dt@kernel.org, lee@kernel.org
+References: <20261124-qcom-bcl-hwmon-v5-0-747d5383d538@oss.qualcomm.com>
+ <20261124-qcom-bcl-hwmon-v5-2-747d5383d538@oss.qualcomm.com>
+ <sashiko-outbox-230063@kernel.org>
+Content-Language: en-US
+From: Guenter Roeck <linux@roeck-us.net>
+Autocrypt: addr=linux@roeck-us.net; keydata=
+ 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
+ np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
+In-Reply-To: <sashiko-outbox-230063@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - bh-25.webhostbox.net
+X-AntiAbuse: Original Domain - lists.linux.dev
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - roeck-us.net
+X-BWhitelist: no
+X-Source-IP: 108.223.40.66
+X-Source-L: No
+X-Exim-ID: 1xVs7Y-00000001Ab4-02SJ
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: 108-223-40-66.lightspeed.sntcca.sbcglobal.net [108.223.40.66]:41580
+X-Source-Auth: guenter@roeck-us.net
+X-Email-Count: 4
+X-Org: HG=direseller_whb_net_legacy;ORG=directi;
+X-Source-Cap: cm9lY2s7YWN0aXZzdG07YmgtMjUud2ViaG9zdGJveC5uZXQ=
+X-Local-Domain: yes
+X-CMAE-Envelope: MS4xfIvqFDGam8TxN+aPBXA0IbDZN2vPqdv0mvuGIQCzDerEOg48JIEFUc7BQrbyXH2p2HiGZhvD51ArwtB4fUerx8SpsOdoNHfzHHO5DctWiw9ieWS+Ij8b
+ VNVA2kjiRwIpePX5jn0nNg29rUyQukH/Zi1DRbQyEPKCgmNPsaTNYkEQJtgUowN5yyRbZ33R5JeWiQAAoAXh3EEUUN/0uZpNUVQ=
 
-On Mon, Nov 23, 2026 at 03:00:57PM -0800, Dmitry Torokhov wrote:
-> Clean up minor coding style issues in the Arizona jack detection
-> driver, removing redundant parentheses and fixing argument continuation
-> alignment.
+On 11/23/26 13:11, sashiko-bot@kernel.org wrote:
+> Thank you for your contribution! Sashiko AI review found 5 potential
+> issues to consider:
+> - [Medium] hwmon: qcom-bcl: infinite poll loop in
+>    bcl_alarm_enable_poll() on reassertion
+> - [Medium] hwmon: qcom-bcl: max_mu exceeds 6-bit L1/L2 field in
+>    bcl_thresh_write()
+> - [Medium] hwmon: qcom-bcl: unlocked enable_irq_wake() race in
+>    bcl_alarm_irq_init()
+> - [Low] hwmon: qcom-bcl: 32-bit jiffies wraparound in
+>    bcl_curr_input_read() cache
+> - [Low] hwmon: qcom-bcl: redundant private mutex bcl->lock duplicating
+>    hwmon_lock()
+> --
 > 
-> Signed-off-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-> ---
+> commit ad4e95352ce7aa5ad76440eaf33e8bd9c53a0538
+> Author: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
+> 
+> hwmon: Add Qualcomm PMIC BCL driver
+> 
+> This commit adds a hwmon driver for the Qualcomm SPMI PMIC Battery Current
+> Limiting (BCL) peripheral to monitor battery voltage and current and report
+> threshold alarms.
+> 
+>> diff --git a/drivers/hwmon/qcom-bcl-hwmon.c b/drivers/hwmon/qcom-bcl-hwmon.c
+>> new file mode 100644
+>> index 0000000000000..a5a3a59484571
+>> --- /dev/null
+>> +++ b/drivers/hwmon/qcom-bcl-hwmon.c
+> 
+> [ ... ]
+> 
+>> +struct bcl_device {
+>> +	struct device		*dev;
+>> +	struct regmap		*regmap;
+>> +	u32			base;
+>> +	struct regmap_field	*fields[F_MAX_FIELDS];
+>> +	struct bcl_alarm_data	bcl_alarms[BCL_LIMIT_ALARM_MAX];
+>> +	/* Protects hardware register access and device state */
+>> +	struct mutex		lock;
+> 
+> [Severity: Low]
+> This isn't a bug, but the hwmon core already serializes .read and .write
+> callbacks under the hwmon device lock, and regmap serializes individual
+> register accesses.  Could this use hwmon_lock() and hwmon_unlock() instead
+> of a driver-private mutex?
+> 
 
-Reviewed-by: Charles Keepax <ckeepax@opensource.cirrus.com>
+Please use the subsystem lock.
+
+>> +	u32			last_in_input;
+>> +	s32			last_curr_input;
+>> +	unsigned long		last_in_updated;
+>> +	unsigned long		last_curr_updated;
+> 
+> [ ... ]
+> 
+>> +static const struct reg_field bcl_smb2360_reg_fields[] = {
+>> +	[F_V_MAJOR]	= REG_FIELD(REVISION2, 0, 7),
+>> +	[F_V_MINOR]	= REG_FIELD(REVISION1, 0, 7),
+>> +	[F_CTL_EN]	= REG_FIELD(EN_CTL1, 7, 7),
+>> +	[F_LVL0_ALARM]	= REG_FIELD(STATUS, 0, 0),
+>> +	[F_LVL1_ALARM]	= REG_FIELD(STATUS, 1, 1),
+>> +	[F_LVL2_ALARM]	= REG_FIELD(STATUS, 2, 2),
+>> +	[F_IN_L0_THR]	= REG_FIELD(VADC_L0_THR, 0, 7),
+>> +	[F_IN_L1_THR]	= REG_FIELD(VCMP_L1_THR, 0, 5),
+>> +	[F_IN_L2_THR]	= REG_FIELD(VCMP_L2_THR, 0, 5),
+>> +	[F_IN_INPUT]	= REG_FIELD(VADC_DATA1, 0, 7),
+>> +	[F_CURR_H0_THR]	= REG_FIELD(IADC_H0_THR, 0, 7),
+>> +	[F_CURR_H1_THR]	= REG_FIELD(IADC_H1_THR_GEN3, 0, 7),
+>> +	[F_CURR_INPUT]	= REG_FIELD(IADC_DATA1, 0, 7),
+>> +};
+>> +
+>> +static const struct reg_field bcl_smb2370_reg_fields[] = {
+>> +	[F_V_MAJOR]	= REG_FIELD(REVISION2, 0, 7),
+>> +	[F_V_MINOR]	= REG_FIELD(REVISION1, 0, 7),
+>> +	[F_CTL_EN]	= REG_FIELD(EN_CTL1, 7, 7),
+>> +	[F_LVL0_ALARM]	= REG_FIELD(STATUS, 0, 0),
+>> +	[F_LVL1_ALARM]	= REG_FIELD(STATUS, 1, 1),
+>> +	[F_LVL2_ALARM]	= REG_FIELD(STATUS, 2, 2),
+>> +	[F_IN_L0_THR]	= REG_FIELD(VADC_L0_THR, 0, 7),
+>> +	[F_IN_L1_THR]	= REG_FIELD(VCMP_L1_THR, 0, 5),
+>> +	[F_IN_L2_THR]	= REG_FIELD(VCMP_L2_THR, 0, 5),
+> 
+> [ ... ]
+> 
+>> +/* Register 0x2a50 mapping: 0 -> 2S, 1 -> 3S */
+>> +static const struct bcl_desc smb2360_data = {
+>> +	.reg_fields = bcl_smb2360_reg_fields,
+>> +	.num_reg_fields = F_CURR_INPUT + 1,
+>> +	.data_field_bits_size = 8,
+>> +	.thresh_field_bits_size = 8,
+>> +	.battery_config_field = REG_FIELD(0x2a50, 0, 1),
+>> +	.features = BCL_IN_MON | BCL_IN_INPUT | BCL_CURR_MON,
+>> +	.channel_cfg[BCL_BATT_2S][CHANNEL_IN] = {
+>> +		.base_mu = 4500,
+>> +		.max_mu = 8400,
+>> +		.step_mu = 50,
+>> +		.default_scale_nu = 432918,
+>> +		.thresh_type = {THRESH_TYPE_ADC, THRESH_TYPE_INDEX, THRESH_TYPE_INDEX},
+>> +	},
+>> +	.channel_cfg[BCL_BATT_2S][CHANNEL_CURR] = {
+>> +		.max_mu = 17575,
+>> +		.default_scale_nu = 540679,
+>> +		.thresh_type = {THRESH_TYPE_ADC, THRESH_TYPE_ADC},
+>> +	},
+>> +	.channel_cfg[BCL_BATT_3S][CHANNEL_IN] = {
+>> +		.base_mu = 6750,
+>> +		.max_mu = 12600,
+>> +		.step_mu = 75,
+>> +		.default_scale_nu = 648790,
+>> +		.thresh_type = {THRESH_TYPE_ADC, THRESH_TYPE_INDEX, THRESH_TYPE_INDEX},
+>> +	},
+> 
+> [ ... ]
+> 
+>> +static int bcl_thresh_write(struct bcl_device *bcl, long value, enum bcl_limit_alarm lvl,
+>> +			    enum bcl_channel channel)
+>> +{
+>> +	const struct bcl_desc *desc = bcl->desc;
+>> +	const struct bcl_channel_cfg *cfg = &desc->channel_cfg[bcl->batt_config][channel];
+>> +	enum bcl_fields base_field = channel == CHANNEL_IN ? F_IN_L0_THR : F_CURR_H0_THR;
+>> +	struct regmap_field *field;
+>> +	long thresh = clamp_val(value, cfg->base_mu, cfg->max_mu);
+>> +	u32 raw_val;
+>> +	int ret;
+>> +
+>> +	if (WARN_ON(channel == CHANNEL_CURR && lvl >= BCL_LIMIT_ALARM_LVL2))
+>> +		return -EINVAL;
+>> +
+
+The above should not be needed. In general, I am not in favor of unnecessary
+checks against programming errors, much less associated warning tracebacks.
+The above should be covered by the is-Visible function. If not, that is a bug
+which needs to be fixed, not carried into production code. Same for everywhere
+else where similar checks are made.
+
+To clarify: I am not going to accept this driver with all the WARN_ON() spread
+through it. That suggest that you don't trust your code, which in turn means
+that I don't trust it either.
+
+>> +	field = bcl->fields[base_field + lvl];
+>> +
+>> +	if (cfg->thresh_type[lvl] == THRESH_TYPE_ADC)
+>> +		raw_val = bcl_convert_milliunit_to_raw(bcl, thresh, channel,
+>> +						       desc->thresh_field_bits_size);
+>> +	else
+>> +		raw_val = bcl_convert_milliunit_to_index(bcl, thresh, channel);
+>> +
+>> +	ret = bcl_validate_threshold_fits(bcl, &desc->reg_fields[base_field + lvl],
+>> +					  raw_val, thresh, channel == CHANNEL_IN ? "mV" : "mA");
+>> +	if (ret)
+>> +		return ret;
+> 
+> [Severity: Medium]
+> As reported by Daniel Lezcano on v4 [1], can bcl_thresh_write() reject
+> valid clamped thresholds on SMB2360 and SMB2370?
+> 
+> For both chips, F_IN_L1_THR and F_IN_L2_THR are 6-bit fields (max index
+> 63, which corresponds to 7650 mV on 2S and 11475 mV on 3S), whereas
+> channel_cfg sets max_mu to 8400 mV on 2S and 12600 mV on 3S (index 78).
+> Writing a value >= 7675 mV on 2S or >= 11513 mV on 3S to in0_lcrit or
+> in0_lemergency clamps to at most index 78, causing
+> bcl_validate_threshold_fits() to log a dev_err() and fail with -EINVAL
+> instead of clamping to the hardware limit.
+> 
+
+Hardware monitoring drivers are expected to clamp limits, not to reject
+out-of-range values.
+
+> [ ... ]
+> 
+>> +static int bcl_curr_input_read(struct bcl_device *bcl, long *out)
+>> +{
+>> +	int ret;
+>> +	u32 raw_val = 0;
+>> +	s32 signed_val;
+>> +	const struct bcl_desc *desc = bcl->desc;
+>> +
+>> +	/* Return cached value if read too soon after last update */
+>> +	if (bcl->last_curr_updated &&
+>> +	    time_before(jiffies, bcl->last_curr_updated + HZ)) {
+>> +		*out = bcl->last_curr_input;
+>> +		return 0;
+>> +	}
+> 
+> [Severity: Low]
+> On 32-bit platforms, can time_before(jiffies, bcl->last_curr_updated + HZ)
+> wrap around if curr1_input (or in0_input in bcl_in_input_read()) is not
+> read for more than LONG_MAX jiffies (~24.8 days at HZ=1000)?  During the
+> following ~24.8 days, time_before() evaluates to true and returns the
+> stale cached reading without updating last_curr_updated.  Using u64
+> timestamps with get_jiffies_64() and time_before64() would avoid the wrap.
+> 
+
+Either don't cache, or use 64-bit time functions.
 
 Thanks,
-Charles
+Guenter
+
