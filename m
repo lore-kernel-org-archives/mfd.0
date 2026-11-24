@@ -1,72 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=44.202.169.35
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795532890;
-	b=FFouTACBydt3nPSs8XTGO7uuvTV3Rjt/keMthIkvOKsKpy3G6eYZO67eR1CMFoVqrQ5y
-	 b8ou1F77BkSUcdl+fNRmoub4JOSPwQ1YiggIPOANHu6WuuSI8YKtUyjqj1Gzo7dwgzAj2
-	 CTgUZTUvoNp0PrfWgQAWLzJzvcRFvxXaLmhs+HB2Wqf2YwrGiNm4sQq1WJJeKbCBxtOmJ
-	 zB55Lb/77W7hP4Cq50GR6GOKQJM/NtquNoawaaJOfh+IfcGQ7MiDXo7V9a71KpbuVJMcB
-	 /IzMoGM+tyCp2wKpIjgznxlPqgk1kPkGNcK2mF54ZXB6lnvd2UcVI46iHZLtuJmE+8A==
+	t=1795541615;
+	b=afk5AwbQeoBVp9mhnF+0aqruoCFCsjzJ4DKm7AYRh8KzxK4olFPhXKZUtnKsJSp8nnIi
+	 zdD8hu/nB5JEEAa+ppVRJHt3yqgwWALT31QrX6l2K2H2R1qq3j0Nqw+TN5GgE5ZxNnyL6
+	 KvFyGdVZghqW+qVmcBOTGvTMRwjgpoPLAfCNuFQD36Qb71wJ6aa0byJHlGSy765tC1y7t
+	 Ei7kN3f/+BQ2hiu46cNkZP3Hvp8E0YIRXgvxF2G9Z+TvtoGnwo8mTMVAZuLzIj86Gff7R
+	 75tZqRjOHjiWocm0tqfHE2Zvp+i7uskO1iobcEUqtDxP/UtlxnjM3mcIOWwb8KzXLPg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795532890;
-	h=DMARC-Filter:Received:Received:X-Authority-Analysis:DKIM-Signature:
-	 Received:Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
-	 References:Content-Language:From:Autocrypt:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-AntiAbuse:X-AntiAbuse:X-AntiAbuse:
-	 X-AntiAbuse:X-AntiAbuse:X-BWhitelist:X-Source-IP:X-Source-L:X-Exim-ID:
-	 X-Source:X-Source-Args:X-Source-Dir:X-Source-Sender:X-Source-Auth:
-	 X-Email-Count:X-Org:X-Source-Cap:X-Local-Domain:X-CMAE-Envelope;
-	bh=G7Hg0gt668orwU2HO5Iwx97Bb7gVHA6V0wHbzGAHiEU=;
-	b=YsbjYM1xfrJr9LX/+bs4ecYFtsfUeqgNvJrYnhQ9YFJ++UuQDkVB8Qkj0xRFan8yyAe/
-	 inZeINNteB8AJ66RzCDLtO/OpppE8PqQ2jMxSlF4beZKEqZk47UKyv+g1p8PltthC5QSH
-	 DYrB1SMEC2qRD9DYq42y5YXxnhf4NJzhrFDAaUpX3LUD0yRPfckXMJMEFcr/Jtu6KTee0
-	 sfIWOQEXWCkA6YEurDEc/kqvxtKFJSaQrxh1snYq3z3wksmDWlZcgUdkDJB6HHvMeMRVs
-	 Iap5Al70+Lrh37nDM1ME2jIDTNfOJwHV2rPLRzrb18Bs3Rfswsc9USyUOYZlYcjWgZg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795541615;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=pEuF4UXdvuOAlixC85PRtyQwE7CW1r+JuVMVWrFv2yA=;
+	b=s38G7kAN3bnj9Dditu7HfrUXhmqIs9HLSASYY99Rf56duUTZQ8mJcl0zLiZ6BiURYs3g
+	 UIgoN6OUiLDsfg9/pLSW2XebGIrkVXMg9KpDZU5C6h+I+7wi42gN/B52bsz9LpKTgnYv9
+	 JhKfcYUp2Jadhp8w3cJLLJPsKJRsCNwaY5gOxEmGS4XpcOhzm2pZVJ9OdSEAWnigW0T44
+	 A8pKRL6f6QGwpaz9XWuFmU80jfW9pSIPciJ1KgSH3Y/r6qwJQ4Fa+0XmWqr3mPaNZqUbS
+	 anXfUIHvtQcM+6mUWJXJbW0aKG0RTjODm8n24vLyLMr0OcBIlaMHPBJBhXDEyisEjIQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=none header.from=roeck-us.net;
-	spf=fail smtp.mailfrom=roeck-us.net;
-	dkim=pass header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=YrkMIerM;
-	arc=none smtp.remote-ip=44.202.169.35
-Received: from omta036.useast.a.cloudfilter.net (omta036.useast.a.cloudfilter.net [44.202.169.35])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AGBBiw76;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30F60606A321
-	for <mfd@lists.linux.dev>; Tue, 24 Nov 2026 15:08:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 30F60606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=roeck-us.net
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A036606A688;
+	Tue, 24 Nov 2026 17:33:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=roeck-us.net header.i=@roeck-us.net header.a=rsa-sha256 header.s=default header.b=YrkMIerM
-Received: from eig-obgw-6001b.ext.cloudfilter.net ([10.0.30.143])
-	by cmsmtp with ESMTPS
-	id Vb8vxxOlw4vCDVs7txKpyW; Tue, 24 Nov 2026 15:08:09 +0000
-Received: from 162-215-252-36.unifiedlayer.com ([208.91.199.152])
-	by cmsmtp with ESMTPS
-	id Vs7YxHSIYdRrRVs7YxqCVD; Tue, 24 Nov 2026 15:07:48 +0000
-X-Authority-Analysis: v=2.4 cv=LOhmQIW9 c=1 sm=1 tr=0 ts=6b05a858
- a=QNED+QcLUkoL9qulTODnwA==:117 a=2cfIYNtKkjgZNaOwnGXpGw==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=M0FbrtG7MMAA:10 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=BOHXnwOiB0Zir2JbBRsA:9 a=QEXdDO2ut3YA:10
- a=KPbNTLLc3YvdawN95zVk:22
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=roeck-us.net; s=default; h=Content-Transfer-Encoding:Content-Type:
-	In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
-	:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-	List-Unsubscribe:List-Unsubscribe-Post:List-Subscribe:List-Post:List-Owner:
-	List-Archive; bh=G7Hg0gt668orwU2HO5Iwx97Bb7gVHA6V0wHbzGAHiEU=; b=YrkMIerM6e9D
-	UE1bgvvfVEvE/eVN1bC+wKms0MJUP/hyKmAHWcrs4jjTYmzPLi876wk1L7hoO0BzpF76cxUjzfYFM
-	2PcIdBx3ClJoaqnsZgpKHQGR/FlRLc4a+nkMvaHtGGIUX5jqBj/DUUMc4SJUYBSq3mp7qD1RcxwkU
-	6ROOU40JGNpsM5KgvpimqjRjCfO5P44OL5S5s068CHW9jwCIDxNtMkjjtlzP0phdhLPw2Vvvw0wG2
-	dR8lSErO+u33+aOKXhymS1S8OtxpHfRfT3W0cZvpKEDffBDTwZjxwGb5ilFX2cYT4ZiYGZ2g9HaFE
-	wf57MHsXKCB6qEGZB/O2qg==;
-Received: from 108-223-40-66.lightspeed.sntcca.sbcglobal.net ([108.223.40.66]:41580)
-	by bh-25.webhostbox.net with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.100.1)
-	(envelope-from <linux@roeck-us.net>)
-	id 1xVs7Y-00000001Ab4-02SJ;
-	Tue, 24 Nov 2026 20:37:48 +0530
-Message-ID: <8046641a-3e9d-434b-b0db-58190257b38a@roeck-us.net>
-Date: Tue, 24 Nov 2026 07:07:46 -0800
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AGBBiw76
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4B3CE1F00A3E;
+	Tue, 24 Nov 2026 17:33:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795541614;
+	bh=pEuF4UXdvuOAlixC85PRtyQwE7CW1r+JuVMVWrFv2yA=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=AGBBiw76bODRsuyoba/o6wZYt7FGGBiCRpBG9PdHYHwkXomfNiRqJudM9UdN73Bog
+	 wN6wbpmo5iPTJAu4t555S0VpxjpP3Y3rNzKpsMSRoyEym+0vrnGaCr+EMI/lJLh+M2
+	 jw9SJWUeiP2Ml+Zpp468oybRSFmZ3UDR+2vUMgIM8gj4vhLF1aZRwZi4iwlZJVDzsr
+	 eD1OhsTqpNg9x9iIpBfz8Ms2y3shT6dRc0I5/e7As5yPhyRHsZDyMudrfdD/F1DxNB
+	 EjPZP6dPzqIDF5WS6puIfwyGTaUBbO6yh1SYMk+MZiwW2wn1w49zeDizcFti7tJ3qq
+	 vyzPzhQHAb9dw==
+From: Mark Brown <broonie@kernel.org>
+To: Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
+ Takashi Iwai <tiwai@suse.com>, 
+ Charles Keepax <ckeepax@opensource.cirrus.com>, 
+ Richard Fitzgerald <rf@opensource.cirrus.com>, 
+ David Rhodes <david.rhodes@cirrus.com>, Lee Jones <lee@kernel.org>, 
+ Dmitry Torokhov <dmitry.torokhov@gmail.com>
+Cc: patches@opensource.cirrus.com, linux-sound@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20261123-arizona-asoc-v2-0-6323d3c0961a@gmail.com>
+References: <20261123-arizona-asoc-v2-0-6323d3c0961a@gmail.com>
+Subject: Re: [PATCH v2 0/4] ASoC: arizona: switch to generic device
+ properties and clean up
+Message-Id: <179553350367.264265.622212709195339744.b4-ty@b4>
+Date: Tue, 24 Nov 2026 15:18:23 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -76,281 +64,68 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 02/12] hwmon: Add Qualcomm PMIC BCL driver
-To: sashiko-reviews@lists.linux.dev,
- Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
-Cc: linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
- mfd@lists.linux.dev, robh@kernel.org, conor+dt@kernel.org, lee@kernel.org
-References: <20261124-qcom-bcl-hwmon-v5-0-747d5383d538@oss.qualcomm.com>
- <20261124-qcom-bcl-hwmon-v5-2-747d5383d538@oss.qualcomm.com>
- <sashiko-outbox-230063@kernel.org>
-Content-Language: en-US
-From: Guenter Roeck <linux@roeck-us.net>
-Autocrypt: addr=linux@roeck-us.net; keydata=
- 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
- np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
-In-Reply-To: <sashiko-outbox-230063@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - bh-25.webhostbox.net
-X-AntiAbuse: Original Domain - lists.linux.dev
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - roeck-us.net
-X-BWhitelist: no
-X-Source-IP: 108.223.40.66
-X-Source-L: No
-X-Exim-ID: 1xVs7Y-00000001Ab4-02SJ
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Source-Sender: 108-223-40-66.lightspeed.sntcca.sbcglobal.net [108.223.40.66]:41580
-X-Source-Auth: guenter@roeck-us.net
-X-Email-Count: 4
-X-Org: HG=direseller_whb_net_legacy;ORG=directi;
-X-Source-Cap: cm9lY2s7YWN0aXZzdG07YmgtMjUud2ViaG9zdGJveC5uZXQ=
-X-Local-Domain: yes
-X-CMAE-Envelope: MS4xfIvqFDGam8TxN+aPBXA0IbDZN2vPqdv0mvuGIQCzDerEOg48JIEFUc7BQrbyXH2p2HiGZhvD51ArwtB4fUerx8SpsOdoNHfzHHO5DctWiw9ieWS+Ij8b
- VNVA2kjiRwIpePX5jn0nNg29rUyQukH/Zi1DRbQyEPKCgmNPsaTNYkEQJtgUowN5yyRbZ33R5JeWiQAAoAXh3EEUUN/0uZpNUVQ=
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2295; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=AAwwm4kVkDk6Y8/0C98PPgTZBZCFethq14/7w3Cowyc=;
+ b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLJZT2Xt/ZXHvCJOjbHubv99n/SaVd0HVE8xGFQERL2Z3
+ ipa8Vmxo5SFQYyLQVZMkSUui/tlfcnrNXwHF7bBzGFlAhnCwMUpABPZ9ZCR4WHN56+LquXKz96X
+ vchqdMNS7lLtn0krG6oanBdPWrVr1mlGhm0yMXKbejiPHnct+WQ/3U6s8J3zHqY8G56GWd/sOVI
+ 6OAA=
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-On 11/23/26 13:11, sashiko-bot@kernel.org wrote:
-> Thank you for your contribution! Sashiko AI review found 5 potential
-> issues to consider:
-> - [Medium] hwmon: qcom-bcl: infinite poll loop in
->    bcl_alarm_enable_poll() on reassertion
-> - [Medium] hwmon: qcom-bcl: max_mu exceeds 6-bit L1/L2 field in
->    bcl_thresh_write()
-> - [Medium] hwmon: qcom-bcl: unlocked enable_irq_wake() race in
->    bcl_alarm_irq_init()
-> - [Low] hwmon: qcom-bcl: 32-bit jiffies wraparound in
->    bcl_curr_input_read() cache
-> - [Low] hwmon: qcom-bcl: redundant private mutex bcl->lock duplicating
->    hwmon_lock()
-> --
+On Mon, 23 Nov 2026 15:00:53 -0800, Dmitry Torokhov wrote:
+> ASoC: arizona: switch to generic device properties and clean up
 > 
-> commit ad4e95352ce7aa5ad76440eaf33e8bd9c53a0538
-> Author: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
+> This series converts Arizona ASoC drivers to generic device properties
+> and cleans up dead code and formatting issues:
 > 
-> hwmon: Add Qualcomm PMIC BCL driver
+> - Convert audio platform data parsing from OF-only APIs to generic
+>   device property helpers and drop CONFIG_OF guards across the codec
+>   drivers.
+> - Parse device properties unconditionally in the jack detection and codec
+>   drivers even when platform data is supplied, preserving existing
+>   channel settings and boolean flags when properties are absent.
+> - Drop unused hpdet_acc_id and hpdet_acc_id_line fields from struct
+>   arizona_pdata along with the unreachable HPDET accessory ID logic in
+>   the jack detection driver.
+> - Clean up coding style and argument alignment in arizona-jack.c.
 > 
-> This commit adds a hwmon driver for the Qualcomm SPMI PMIC Battery Current
-> Limiting (BCL) peripheral to monitor battery voltage and current and report
-> threshold alarms.
-> 
->> diff --git a/drivers/hwmon/qcom-bcl-hwmon.c b/drivers/hwmon/qcom-bcl-hwmon.c
->> new file mode 100644
->> index 0000000000000..a5a3a59484571
->> --- /dev/null
->> +++ b/drivers/hwmon/qcom-bcl-hwmon.c
-> 
-> [ ... ]
-> 
->> +struct bcl_device {
->> +	struct device		*dev;
->> +	struct regmap		*regmap;
->> +	u32			base;
->> +	struct regmap_field	*fields[F_MAX_FIELDS];
->> +	struct bcl_alarm_data	bcl_alarms[BCL_LIMIT_ALARM_MAX];
->> +	/* Protects hardware register access and device state */
->> +	struct mutex		lock;
-> 
-> [Severity: Low]
-> This isn't a bug, but the hwmon core already serializes .read and .write
-> callbacks under the hwmon device lock, and regmap serializes individual
-> register accesses.  Could this use hwmon_lock() and hwmon_unlock() instead
-> of a driver-private mutex?
-> 
+> [...]
 
-Please use the subsystem lock.
+Applied to
 
->> +	u32			last_in_input;
->> +	s32			last_curr_input;
->> +	unsigned long		last_in_updated;
->> +	unsigned long		last_curr_updated;
-> 
-> [ ... ]
-> 
->> +static const struct reg_field bcl_smb2360_reg_fields[] = {
->> +	[F_V_MAJOR]	= REG_FIELD(REVISION2, 0, 7),
->> +	[F_V_MINOR]	= REG_FIELD(REVISION1, 0, 7),
->> +	[F_CTL_EN]	= REG_FIELD(EN_CTL1, 7, 7),
->> +	[F_LVL0_ALARM]	= REG_FIELD(STATUS, 0, 0),
->> +	[F_LVL1_ALARM]	= REG_FIELD(STATUS, 1, 1),
->> +	[F_LVL2_ALARM]	= REG_FIELD(STATUS, 2, 2),
->> +	[F_IN_L0_THR]	= REG_FIELD(VADC_L0_THR, 0, 7),
->> +	[F_IN_L1_THR]	= REG_FIELD(VCMP_L1_THR, 0, 5),
->> +	[F_IN_L2_THR]	= REG_FIELD(VCMP_L2_THR, 0, 5),
->> +	[F_IN_INPUT]	= REG_FIELD(VADC_DATA1, 0, 7),
->> +	[F_CURR_H0_THR]	= REG_FIELD(IADC_H0_THR, 0, 7),
->> +	[F_CURR_H1_THR]	= REG_FIELD(IADC_H1_THR_GEN3, 0, 7),
->> +	[F_CURR_INPUT]	= REG_FIELD(IADC_DATA1, 0, 7),
->> +};
->> +
->> +static const struct reg_field bcl_smb2370_reg_fields[] = {
->> +	[F_V_MAJOR]	= REG_FIELD(REVISION2, 0, 7),
->> +	[F_V_MINOR]	= REG_FIELD(REVISION1, 0, 7),
->> +	[F_CTL_EN]	= REG_FIELD(EN_CTL1, 7, 7),
->> +	[F_LVL0_ALARM]	= REG_FIELD(STATUS, 0, 0),
->> +	[F_LVL1_ALARM]	= REG_FIELD(STATUS, 1, 1),
->> +	[F_LVL2_ALARM]	= REG_FIELD(STATUS, 2, 2),
->> +	[F_IN_L0_THR]	= REG_FIELD(VADC_L0_THR, 0, 7),
->> +	[F_IN_L1_THR]	= REG_FIELD(VCMP_L1_THR, 0, 5),
->> +	[F_IN_L2_THR]	= REG_FIELD(VCMP_L2_THR, 0, 5),
-> 
-> [ ... ]
-> 
->> +/* Register 0x2a50 mapping: 0 -> 2S, 1 -> 3S */
->> +static const struct bcl_desc smb2360_data = {
->> +	.reg_fields = bcl_smb2360_reg_fields,
->> +	.num_reg_fields = F_CURR_INPUT + 1,
->> +	.data_field_bits_size = 8,
->> +	.thresh_field_bits_size = 8,
->> +	.battery_config_field = REG_FIELD(0x2a50, 0, 1),
->> +	.features = BCL_IN_MON | BCL_IN_INPUT | BCL_CURR_MON,
->> +	.channel_cfg[BCL_BATT_2S][CHANNEL_IN] = {
->> +		.base_mu = 4500,
->> +		.max_mu = 8400,
->> +		.step_mu = 50,
->> +		.default_scale_nu = 432918,
->> +		.thresh_type = {THRESH_TYPE_ADC, THRESH_TYPE_INDEX, THRESH_TYPE_INDEX},
->> +	},
->> +	.channel_cfg[BCL_BATT_2S][CHANNEL_CURR] = {
->> +		.max_mu = 17575,
->> +		.default_scale_nu = 540679,
->> +		.thresh_type = {THRESH_TYPE_ADC, THRESH_TYPE_ADC},
->> +	},
->> +	.channel_cfg[BCL_BATT_3S][CHANNEL_IN] = {
->> +		.base_mu = 6750,
->> +		.max_mu = 12600,
->> +		.step_mu = 75,
->> +		.default_scale_nu = 648790,
->> +		.thresh_type = {THRESH_TYPE_ADC, THRESH_TYPE_INDEX, THRESH_TYPE_INDEX},
->> +	},
-> 
-> [ ... ]
-> 
->> +static int bcl_thresh_write(struct bcl_device *bcl, long value, enum bcl_limit_alarm lvl,
->> +			    enum bcl_channel channel)
->> +{
->> +	const struct bcl_desc *desc = bcl->desc;
->> +	const struct bcl_channel_cfg *cfg = &desc->channel_cfg[bcl->batt_config][channel];
->> +	enum bcl_fields base_field = channel == CHANNEL_IN ? F_IN_L0_THR : F_CURR_H0_THR;
->> +	struct regmap_field *field;
->> +	long thresh = clamp_val(value, cfg->base_mu, cfg->max_mu);
->> +	u32 raw_val;
->> +	int ret;
->> +
->> +	if (WARN_ON(channel == CHANNEL_CURR && lvl >= BCL_LIMIT_ALARM_LVL2))
->> +		return -EINVAL;
->> +
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.5
 
-The above should not be needed. In general, I am not in favor of unnecessary
-checks against programming errors, much less associated warning tracebacks.
-The above should be covered by the is-Visible function. If not, that is a bug
-which needs to be fixed, not carried into production code. Same for everywhere
-else where similar checks are made.
+Thanks!
 
-To clarify: I am not going to accept this driver with all the WARN_ON() spread
-through it. That suggest that you don't trust your code, which in turn means
-that I don't trust it either.
+[1/4] ASoC: arizona: convert audio pdata parsing to generic device properties
+      https://git.kernel.org/broonie/sound/c/e479ed6b6ccf
+[2/4] ASoC: arizona: always parse device properties regardless of platform data
+      https://git.kernel.org/broonie/sound/c/53136aa2d64d
+[3/4] ASoC: arizona: drop unused HPDET accessory ID support
+      https://git.kernel.org/broonie/sound/c/a516c1f40ea4
+[4/4] ASoC: arizona: clean up coding style and formatting
+      https://git.kernel.org/broonie/sound/c/ce694590177a
 
->> +	field = bcl->fields[base_field + lvl];
->> +
->> +	if (cfg->thresh_type[lvl] == THRESH_TYPE_ADC)
->> +		raw_val = bcl_convert_milliunit_to_raw(bcl, thresh, channel,
->> +						       desc->thresh_field_bits_size);
->> +	else
->> +		raw_val = bcl_convert_milliunit_to_index(bcl, thresh, channel);
->> +
->> +	ret = bcl_validate_threshold_fits(bcl, &desc->reg_fields[base_field + lvl],
->> +					  raw_val, thresh, channel == CHANNEL_IN ? "mV" : "mA");
->> +	if (ret)
->> +		return ret;
-> 
-> [Severity: Medium]
-> As reported by Daniel Lezcano on v4 [1], can bcl_thresh_write() reject
-> valid clamped thresholds on SMB2360 and SMB2370?
-> 
-> For both chips, F_IN_L1_THR and F_IN_L2_THR are 6-bit fields (max index
-> 63, which corresponds to 7650 mV on 2S and 11475 mV on 3S), whereas
-> channel_cfg sets max_mu to 8400 mV on 2S and 12600 mV on 3S (index 78).
-> Writing a value >= 7675 mV on 2S or >= 11513 mV on 3S to in0_lcrit or
-> in0_lemergency clamps to at most index 78, causing
-> bcl_validate_threshold_fits() to log a dev_err() and fail with -EINVAL
-> instead of clamping to the hardware limit.
-> 
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
 
-Hardware monitoring drivers are expected to clamp limits, not to reject
-out-of-range values.
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
 
-> [ ... ]
-> 
->> +static int bcl_curr_input_read(struct bcl_device *bcl, long *out)
->> +{
->> +	int ret;
->> +	u32 raw_val = 0;
->> +	s32 signed_val;
->> +	const struct bcl_desc *desc = bcl->desc;
->> +
->> +	/* Return cached value if read too soon after last update */
->> +	if (bcl->last_curr_updated &&
->> +	    time_before(jiffies, bcl->last_curr_updated + HZ)) {
->> +		*out = bcl->last_curr_input;
->> +		return 0;
->> +	}
-> 
-> [Severity: Low]
-> On 32-bit platforms, can time_before(jiffies, bcl->last_curr_updated + HZ)
-> wrap around if curr1_input (or in0_input in bcl_in_input_read()) is not
-> read for more than LONG_MAX jiffies (~24.8 days at HZ=1000)?  During the
-> following ~24.8 days, time_before() evaluates to true and returns the
-> stale cached reading without updating last_curr_updated.  Using u64
-> timestamps with get_jiffies_64() and time_before64() would avoid the wrap.
-> 
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
 
-Either don't cache, or use 64-bit time functions.
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
 
 Thanks,
-Guenter
+Mark
 
