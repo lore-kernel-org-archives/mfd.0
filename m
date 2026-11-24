@@ -1,131 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=67.231.149.25
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795527803;
-	b=f3+0rYaNtkg0OWtBfuQs+JwlsHp6hX9O5t/4sMM4GUPes/6JGlyMkz4AfNfY9s0pBDm2
-	 so8WKTMAB4XQAZ5OpDYz3tG4QE+2Qh7lYbC5AbGu3mOMpCAR0UwzzkcEiVORx7PHrUHEO
-	 WjXT+XVaUQobZv35SC3JoK7op/SKNVjO5xk+GOduSnFqUtwM+Y3rMHxxvzddXoQWQsoz1
-	 ig86KPToK/jNGzr9SVeJl/mjR/vdpHIZHHhhMTw3cP3QD1fnjJSaf4iJRTqJkbrgk4wBc
-	 ofUvyDcV1ibpzWgsXLKrIEmilkSazxMj5w+A4h0ujVKUWyrjXfD8qaBRGq+Et9kNnnQ==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795527803;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:DKIM-Signature:
-	 Received:Received:X-MS-Exchange-Authentication-Results:Received-SPF:
-	 Received:Received:Received:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
-	 X-EOPAttributedMessage:X-MS-PublicTrafficType:
-	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
-	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
-	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
-	 X-Forefront-Antispam-Report:
-	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
-	 X-MS-Exchange-AntiSpam-MessageData-0:X-Exchange-RoutingPolicyChecked:
-	 X-OriginatorOrg:X-MS-Exchange-CrossTenant-OriginalArrivalTime:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-Id:
-	 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp:
-	 X-MS-Exchange-CrossTenant-AuthAs:X-MS-Exchange-CrossTenant-AuthSource:
-	 X-MS-Exchange-CrossTenant-FromEntityHeader:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Reason;
-	bh=VVTz56kJiputM/p9mlDmTGS0AL4iYx/30HwU9mcmpRU=;
-	b=TSu9/n9GS1VVSy7QSAKeyxrrzfhSIdwzfRy23GMW057imE7REiIOvwivHsZ1RQIBZQMa
-	 hKV/MVAnScXN6uVeUrsCQKxSV32QVPtOrnwsUwvBV/zl7NPmRViUU1MI2DjAl5YV7EJq5
-	 aE6UgvO+VoNin9SOXhC4HBieNb8jrzDFWIRSoxzZP2/4+64s4zZLQXFHgc+eGLQ6bzu7j
-	 TNR5Crc3l3mgxx9FIfXb4xMCw+f7AzyHZ6RbxgKPXPmfYPrNtsVpkyWDlrlN0oyEx8VwV
-	 qRhi0w3rZKoILFl9NeKcLfv4mPVWczg04nJhUjLjVkZDvZvLubf2VnjCv+Co5p90bTg==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=opensource.cirrus.com;
-	spf=pass smtp.mailfrom=opensource.cirrus.com;
-	dkim=pass header.d=cirrus.com header.i=@cirrus.com header.a=rsa-sha256 header.s=PODMain02222019 header.b="LgyPNlH/";
-	dkim=pass header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-cirrus4-onmicrosoft-com header.b=Pj7oj8q0;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=67.231.149.25
-Received: from mx0b-001ae601.pphosted.com (mx0a-001ae601.pphosted.com [67.231.149.25])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=101.71.155.101
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795528728;
+	b=PIETw5GGz73zaKzHVmwJq1OT/14DYNRujAvXk6gWzBGubanED9hXHzRL2w2Jb3xNn1ar
+	 AWuUCvDVXi3Xha2aQyHXqglkJyv4cR22yWwJTZdAYHpUoBy5d5JnkQGy4RUnXWLD4xBzS
+	 JwugKM3TpviWxKg1gQAkKgMAUM57/kIJmjNIAHJfa3wYvgm0l5jsqrkTlEMViL8T0Ot6D
+	 ihRSfcFE6dxHOsM0dFmh+MUE4FiweAtZfiggeOeqnimIkoc/jXueklFAcckPVJiRPyEec
+	 boAD6oTm2B/wXjG4S6AdH9mcUv+k6WUfV73ijocJq8+bIuCAnEzsIMuK+2I2pGyXb2w==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795528728;
+	h=DMARC-Filter:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-HM-Tid:
+	 X-HM-MType:X-HM-Spam-Status:DKIM-Signature;
+	bh=xyKoEJ5FjRS+4OPkOgOKrVMWDVJZ2fDT0agRmE2qKng=;
+	b=IqJ6aNhYGmN0DJDBivtJsEsUM9mXPaxeqK06WIC0AhvR3RZw0Fr2S+xOWpwWvF1C00r8
+	 osbElnWfvMGMMwsKLcah4F+gqXLicVw1UaIgEiJRrnkFsjWPrZCYSduW/ONL44dRNCvQH
+	 zcosYNLxDgyPgLGeF4cvoRHlpWooxf8ECvRy+8+0z8EwZo3i6q88+GImYNYkggX8OghCX
+	 B9oFULO4/glqGdFQk3JRxdq9ZOievPjT5UMg/rw6xFbDuUjuwkpkPz7bpU3fE+8JV4H6V
+	 R3ey1LAN6/bdjlqfRWg4MeYx6itR9Er2j5ON8HuREYwK/mBKKifxOGk/vLXEmYVvt4A==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=mail.sdu.edu.cn;
+	spf=pass smtp.mailfrom=mail.sdu.edu.cn;
+	dkim=pass header.d=mail.sdu.edu.cn header.i=@mail.sdu.edu.cn header.a=rsa-sha256 header.s=default header.b=PGd1cMaw;
+	arc=none smtp.remote-ip=101.71.155.101
+Received: from mail-m155101.qiye.163.com (mail-m155101.qiye.163.com [101.71.155.101])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E897C606A31E
-	for <mfd@lists.linux.dev>; Tue, 24 Nov 2026 13:43:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E897C606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=opensource.cirrus.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC108606A685
+	for <mfd@lists.linux.dev>; Tue, 24 Nov 2026 13:58:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EC108606A685
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=mail.sdu.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.sdu.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=cirrus.com header.i=@cirrus.com header.a=rsa-sha256 header.s=PODMain02222019 header.b=LgyPNlH/;
-	dkim=pass (1024-bit key, unprotected) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-cirrus4-onmicrosoft-com header.b=Pj7oj8q0
-Received: from pps.filterd (m0077473.ppops.net [127.0.0.1])
-	by mx0a-001ae601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AOD5YJv3736947;
-	Tue, 24 Nov 2026 07:42:57 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
-	:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=PODMain02222019; bh=VVTz56kJiputM/p9ml
-	DmTGS0AL4iYx/30HwU9mcmpRU=; b=LgyPNlH/FAsAgJSEKB4/NWoA0aNhCib7Dt
-	UbkAtmVNXShlmN6fHAEbKTa82YvJ4b8arPbX8N4qciMbtLd7kmFJn4WrRcRzngij
-	EYArqdZY01V2/MRPxRkAk6RAah4W5a0T4XkgKKVJjNOftAGuK6TFbq2BP9vrzq3U
-	7qt0XRzyZJklKlBrz7tlowCoA/c1J0pUisvSOnHDtDWmYM9gWjRhs0Ow0MEHb9i+
-	y7IKjsFIpuLQgqm6/iwpezvNjQOwd1gd3tNjlJVfakYy6Jo+yg43xuMX2wvQYqW/
-	XhwMsEyEsCaicwxbR3c95pPjcq1qurRFVZpp9/Tf+zGpkJL5P/kw==
-Received: from sn4pr0501cu005.outbound.protection.outlook.com (mail-southcentralusazon11021090.outbound.protection.outlook.com [40.93.194.90])
-	by mx0a-001ae601.pphosted.com (PPS) with ESMTPS id 4j51880p69-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Tue, 24 Nov 2026 07:42:57 -0600 (CST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VvJ6AyiBVPzdqOhgUyc0+nWLycLYTMLezeGrWgAwkmqAzdZ02oWNJE+DXpvCVCuCr5JoPqv3j0JL4xCWDp0H92piWxLRF5jryaWr1wVIytnTcZ2wYBGk65TRzyrKiOL2Jlmf/zuhbXE9vPEmad/4lwgZciTYGTx/1ijvQKj7vjg1uuxoxawpXoJzfyny7tEb64gI4s79soMulbizWSCEq5JCs2Ng+O5rmvq/2V4jQdthjMQrRR/fYVZKnI2svv3ScAq6RUCmYeZiugLMkME8r87gZtUaymucyr8utO5ZTcVRw6txPZ9S7zzPXG2JiZMJsm4ZJNL7cDyEcbVPSlIWrQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VVTz56kJiputM/p9mlDmTGS0AL4iYx/30HwU9mcmpRU=;
- b=MAodaiprkTYyTcfDZRhassLbX2oECKgKz35l7aomtXV9SwxC8/7wHod5UIJ6F78VPZqsb9tHua+DskqQM+mpYjs/Iip58w5Ffxycx5StDw1z2Dria7AwuBrjtDPk6SwxyXYAfOsLozqpAf3twIVkMr3QOUO70gBUzYEvvW1zfPIYy79eM599wURTuWP9g6a/cDbXgl0r3hz0DADGaaZGvoFhHEoUOPREOzsHZYKjpM/P0ofMH9/V0kZIlddv5mlnnlIwIVaWEDiJDT3WI95trL/bZLKEwc1rF8iJQJD2oKbumyPdyfTBMYxNDYbK50u9LWgjKgz7aY2CQVPo+X5iog==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 84.19.233.75) smtp.rcpttodomain=cirrus.com
- smtp.mailfrom=opensource.cirrus.com; dmarc=fail (p=reject sp=reject pct=100)
- action=oreject header.from=opensource.cirrus.com; dkim=none (message not
- signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cirrus4.onmicrosoft.com; s=selector2-cirrus4-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VVTz56kJiputM/p9mlDmTGS0AL4iYx/30HwU9mcmpRU=;
- b=Pj7oj8q0DzRB3fPmUL+04+a6ogL/BrckBGPD765UcBSZyizpBYxwEh1dwpAetaq9Xu/onfgeSCBO9MlrjSMYWeEAZeou9aWE4F+Chnc2R2me8X6iy81cabGuvUbjF64RH7bdtX27A/gI6MswDYsAfS0Ema1JlgXk+wkqULcZeRs=
-Received: from CH2PR14CA0008.namprd14.prod.outlook.com (2603:10b6:610:60::18)
- by PH8PR19MB7166.namprd19.prod.outlook.com (2603:10b6:510:216::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.639.13; Tue, 24 Nov
- 2026 13:42:53 +0000
-Received: from DM3PEPF000265BD.namprd04.prod.outlook.com
- (2603:10b6:610:60:cafe::49) by CH2PR14CA0008.outlook.office365.com
- (2603:10b6:610:60::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.639.14 via Frontend Transport; Tue,
- 24 Nov 2026 13:42:52 +0000
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=softfail (sender
- IP is 84.19.233.75) smtp.mailfrom=opensource.cirrus.com; dkim=none (message
- not signed) header.d=none;dmarc=fail action=oreject
- header.from=opensource.cirrus.com;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- opensource.cirrus.com discourages use of 84.19.233.75 as permitted sender)
-Received: from edirelay1.ad.cirrus.com (84.19.233.75) by
- DM3PEPF000265BD.mail.protection.outlook.com (10.167.23.250) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.662.3
- via Frontend Transport; Tue, 24 Nov 2026 13:42:51 +0000
-Received: from ediswmail9.ad.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
-	by edirelay1.ad.cirrus.com (Postfix) with ESMTPS id B3ECD406550;
-	Tue, 24 Nov 2026 13:42:50 +0000 (UTC)
-Received: from opensource.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
-	by ediswmail9.ad.cirrus.com (Postfix) with ESMTPSA id 98706822542;
-	Tue, 24 Nov 2026 13:42:50 +0000 (UTC)
-Date: Tue, 24 Nov 2026 13:42:49 +0000
-From: Charles Keepax <ckeepax@opensource.cirrus.com>
-To: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-        Richard Fitzgerald <rf@opensource.cirrus.com>,
-        David Rhodes <david.rhodes@cirrus.com>, Lee Jones <lee@kernel.org>,
-        patches@opensource.cirrus.com, linux-sound@vger.kernel.org,
-        linux-kernel@vger.kernel.org, mfd@lists.linux.dev
-Subject: Re: [PATCH v2 1/4] ASoC: arizona: convert audio pdata parsing to
- generic device properties
-Message-ID: <awWUWZNGQdkHanR2@opensource.cirrus.com>
-References: <20261123-arizona-asoc-v2-0-6323d3c0961a@gmail.com>
- <20261123-arizona-asoc-v2-1-6323d3c0961a@gmail.com>
+	dkim=pass (1024-bit key) header.d=mail.sdu.edu.cn header.i=@mail.sdu.edu.cn header.a=rsa-sha256 header.s=default header.b=PGd1cMaw
+Received: from lgs.. (unknown [101.76.249.61])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 55d4cdb9d;
+	Tue, 24 Nov 2026 21:58:38 +0800 (GMT+08:00)
+From: Guangshuo Li <liguangshuo@mail.sdu.edu.cn>
+To: Lee Jones <lee@kernel.org>
+Cc: Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Roger Quadros <rogerq@kernel.org>,
+	Tony Lindgren <tony@atomide.com>,
+	linux-omap@vger.kernel.org,
+	mfd@lists.linux.dev,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: [PATCH v2] mfd: palmas: Fix potential IRQ action leaks on removal
+Date: Tue, 24 Nov 2026 21:58:36 +0800
+Message-ID: <20261124135836.2275740-1-liguangshuo@mail.sdu.edu.cn>
+X-Mailer: git-send-email 2.43.0
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -135,74 +60,207 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261123-arizona-asoc-v2-1-6323d3c0961a@gmail.com>
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM3PEPF000265BD:EE_|PH8PR19MB7166:EE_
-X-MS-Office365-Filtering-Correlation-Id: df915bfa-ca4d-48b6-98b7-08df4a30d62b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|82310400026|61400799027|36860700016|23010399003|18002099003|16102099003|22082099003|6133799003|3023799007|10067099003|261026130827099003|56012099006|4143699003|261102123227099003|11063799006|261026121527099003|261026140227099003|261021130227099003|261021123027099003|261021121427099003|261028144727099003|261022113327099003|261021135927099003|261022075727099003|261022105027099003|261022115727099003;
-X-Microsoft-Antispam-Message-Info:
-	QSgFMA2LDH/OOSHTMfVhIHTKjDtg2euX+PtCuI7mroqyxvb3z8mdBu2tObFWLp9ExYIcoW5KnPLlZb0ZHryZ2meD+PBEuy5fcW7esgAa6pduE5ccPV5jhFHAhT0KOI0NVUwsmSrNKGYPHbKseQlDsQBkfz6iyPRr1aXN04nsLWUKwYILhgXuJjh7Vk0NxCvZn6QcntLbCfr/giSQVfNy+dM6IdWASoOFeogaexaewosBu+ihn7QDsQz1igbbqu92a1aivkt3gP+yBof1xJ92M6h/Coj10ZrPD5Tkbul56zY/XW+50Sf+r/vhQujZbJbjUgDzB1uLf9K8s3yOUkQRWH/5PobROTfMeDdSgo7T1W8P1+hJE7hsEUDR9Vj7hQFhDnMy5fzB583Qh78AX0la/955R4nR7i+TVj9SVn3RrQWbWG0UUtzqqD/2zoCNE3vcLpa6inq27aqnu6IMgYj7Y1VtXn+0dRGcZfKIAY3oE0ZyBniE6rf/H+bYlJdU6Huq2O7byk11tfjpgh04nOqADNY1aaHORyyJyoG9r1YicClkDwhJ9OEEi8hRsSiFPtptqRE43RIeqgz3RF3xFugwj8IBqdg8ereBRMsQ60/lJpFdKavhBrpzcN2nQAq5ADZAF2Xk3mmcyxJYziuiIYPXRQSo6RKP38nk1j2lqp4JBag9bB2kQSgE6gR8CoiwzXBvCOmH8XE7nRFTz3WVqaOuUw==
-X-Forefront-Antispam-Report:
-	CIP:84.19.233.75;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:edirelay1.ad.cirrus.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(61400799027)(36860700016)(23010399003)(18002099003)(16102099003)(22082099003)(6133799003)(3023799007)(10067099003)(261026130827099003)(56012099006)(4143699003)(261102123227099003)(11063799006)(261026121527099003)(261026140227099003)(261021130227099003)(261021123027099003)(261021121427099003)(261028144727099003)(261022113327099003)(261021135927099003)(261022075727099003)(261022105027099003)(261022115727099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	dqGXWZUmn3Pk6fB8uxTmhGlXvwP6RyAAzNjC52hPSZErdh91GBC/fWnhtefqevsbh6IPmscan5cRblSsRu6R00NpWjoGfzwfkFZWPMd3Z56uoVdBbFKC3JY+eBnLoFqwQqbtZrjk5qerT0luxc0/KjdzwNx0y2SLakJ4ZEATRQpIgwEkCCbAsHH0Gws8HD4dWxW27o6ZQB9svGqICOLBm1sOBe8aYFbOIYgRP0KlKMoG5v1t5S/DxniKl4KdeltQEypHRdu6gSPkpTcky9QAeXUVMVa1mrpxDdRftocxex4kyIgtNcBDq8zNfhAZnEWJrc+BBYXaFURmuIyMnGwM2JF4D2k/3MsfK1cHPPM88Ur4boWL5zof9FsJElR+eIbYBewUXo3ex4LFi0PJVXc0oHHZM3P0BvrGWRlbN3LTtG0JRk0ILMxyp4oZYBpxl4oG
-X-Exchange-RoutingPolicyChecked:
-	Xh+VFLBPyquRZQr6nbOAEfvgPv5WOgcB274a+XekhHw22lTCJAoaaVmtQwSDVyYJEWx+kQPaOTPAUeM5jw3tWIVcV1dXSWqtnfpUBFhBYVO+yhINZXHWDZUE2/tXid1g4cntJAV7TDZrsF3YSrZrVfxj7OvuZMquLtg5CK4DbbvOnuBPhk/dtZ0zcVGLDXHzT35mnR0IfXIXGXdeldiLC8g3hPeIHZjvB+mT6ljL6ybJdGc0BhMkd46PJ93ssfE/4YQGBXft2+TrRpkuQaIiks5eexCMEATayFfh//66gcjbbrSipjEgUlw7pshp6M5OUNPYdT9P6D6dBDfZWo2DHw==
-X-OriginatorOrg: opensource.cirrus.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Nov 2026 13:42:51.9228
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: df915bfa-ca4d-48b6-98b7-08df4a30d62b
-X-MS-Exchange-CrossTenant-Id: bec09025-e5bc-40d1-a355-8e955c307de8
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bec09025-e5bc-40d1-a355-8e955c307de8;Ip=[84.19.233.75];Helo=[edirelay1.ad.cirrus.com]
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-DM3PEPF000265BD.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR19MB7166
-X-Proofpoint-ORIG-GUID: jRyuvqLT3mhm1wlUV2rDrmseiczcUJk2
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI0MDA1MyBTYWx0ZWRfX6w+2lZmx7kF8
- WaZfuwbLs8W4Wjpzbs/sc+vSFW/bDDHAcQJM106NNYXBl0klXYXfbNEd0YTAjhstTFD6m7YlqbY
- irPEgO+ryKhA14n+kbph4rzyL6usJkE9YEEUUmJygeiDZi12rjC5uC6Ng9yYH73NwYoP9x0CWpM
- o35HVKBtMERTkQsSZmm1rffYIXss7hR14AzXq/dkQh+WFVf1TOMwQ0rungzAtKOz2reKQk2G48l
- m8ae0YeQgMaaHxi+RsMNr/p0Tm1n3t4HssjqgosrKgtdhjhRX5mfcd4t+epp2ulOnVBpcpbWUQW
- 9l9E+gMyalXWGL4DgQz4lXcleHeDl65h3L68eZvO3bdcnIo1yaNysloYKUNsRQ5QD4QyPewmUYX
- aIqMa4O8WfV8+Bz7UQgxQL0MRbCaD9pJ3lZhasrwEO00qxBiBoxpfd9ZTf8ja02ur6UPYPAoXxz
- DjnmnNUnbaLjMgUGURg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI0MDA1MyBTYWx0ZWRfX7KBXgj0OP4nX
- iDW7Xd8xHX2XP0MHyyv0Ynw8Vl1uZBIl78tsl2xJUMMizOo9EQOLsPVn5cGpMU647aWsUwEaGVY
- NyRMlu9rMwISnIgEiNpq0QCeT3hp88c=
-X-Proofpoint-GUID: jRyuvqLT3mhm1wlUV2rDrmseiczcUJk2
-X-Authority-Analysis: v=2.4 cv=BuEIUoX5 c=1 sm=1 tr=0 ts=6b059461 cx=c_pps
- a=1SMuVRNdJx3IktO2ty4UNg==:117 a=h1hSm8JtM9GN1ddwPAif2w==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
- a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=s63m1ICgrNkA:10 a=RWc_ulEos4gA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=iX4cTi3TZMoOKdANLEfx:22 a=Dj2-6B8FqX4mGL0U3gbX:22
- a=pGLkceISAAAA:8 a=w1d2syhTAAAA:8 a=qvRqzaMWwMpBHLIkv58A:9 a=CjuIK1q_8ugA:10
-X-Proofpoint-Spam-Reason: safe
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-HM-Tid: 0aa20dd9f85003a1kunm03365dc23424a0
+X-HM-MType: 10
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkaTR9PVh8eQx9MGk9MQkpOTlYeHw
+	5VEwETFhoSFyQUDg9ZV1kYEgtZQVlKS0pVTE1VSU9CVU1KWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0
+	NMVUpLS1VLWQY+
+DKIM-Signature: a=rsa-sha256;
+	b=PGd1cMawoZKsYb1f8JOOvPrGsuoUmw7ompaf472pTRs1ui73niardRRuwKnJJvNZjoh8ZvcN3rpV897sok8USV+nToGwNU92cdikbMx4Dy+ZSqpe3HEs19+bpnUVOodpypMNm+fvLm+EDm1s23RcjZ1lyYxz3Glu1TPPk+I/onE=; c=relaxed/relaxed; s=default; d=mail.sdu.edu.cn; v=1;
+	bh=xyKoEJ5FjRS+4OPkOgOKrVMWDVJZ2fDT0agRmE2qKng=;
+	h=date:mime-version:subject:message-id:from;
 
-On Mon, Nov 23, 2026 at 03:00:54PM -0800, Dmitry Torokhov wrote:
-> Switch audio platform data parsing in the shared Arizona ASoC helper
-> from OF-only property APIs to generic device property APIs so audio
-> parameters can be provided via software nodes or ACPI in addition to
-> Device Tree.
-> 
-> Align the audio configuration array types in struct arizona_pdata with
-> generic property types so properties can be read directly into platform
-> data, using boolean storage for out-mono flags and bounded array reads
-> that preserve unspecified trailing elements. Drop the CONFIG_OF guards
-> and obsolete error checks around the audio property parsing calls in all
-> Arizona codec drivers.
-> 
-> Signed-off-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-> ---
+The remove callback deletes the IRQ chip before managed OF children
+are removed. Their later free_irq() calls cannot find the disposed IRQ
+descriptors, potentially leaking interrupt actions.
 
-Reviewed-by: Charles Keepax <ckeepax@opensource.cirrus.com>
+Use managed registration for the IRQ chip and auxiliary I2C clients so
+the children are removed first. Manage the power-off handler cleanup
+as well and drop the remove callback and explicit error unwinding.
 
-Thanks,
-Charles
+This issue was found by our static analysis tool under development.
+
+Fixes: 124e9deb1c40 ("mfd: palmas: Use devm_of_platform_populate()")
+Cc: stable@vger.kernel.org
+Signed-off-by: Guangshuo Li <liguangshuo@mail.sdu.edu.cn>
+---
+Changes in v2:
+  - Use managed IRQ-chip and auxiliary I2C-client registration.
+    Manage the power-off cleanup as well and remove the remove callback.
+
+ drivers/mfd/palmas.c | 74 +++++++++++++++++---------------------------
+ 1 file changed, 28 insertions(+), 46 deletions(-)
+
+diff --git a/drivers/mfd/palmas.c b/drivers/mfd/palmas.c
+index 00332bd4f1c6..14ca8c05f35b 100644
+--- a/drivers/mfd/palmas.c
++++ b/drivers/mfd/palmas.c
+@@ -463,6 +463,14 @@ static void palmas_power_off(void)
+ 				__func__, ret);
+ }
+ 
++static void palmas_clear_power_off(void *data)
++{
++	if (palmas_dev == data) {
++		pm_power_off = NULL;
++		palmas_dev = NULL;
++	}
++}
++
+ struct palmas_driver_data {
+ 	unsigned int features;
+ 	const struct regmap_irq_chip *irq_chip;
+@@ -520,14 +528,14 @@ static int palmas_i2c_probe(struct i2c_client *i2c)
+ 		if (i == 0)
+ 			palmas->i2c_clients[i] = i2c;
+ 		else {
+-			palmas->i2c_clients[i] =
+-					i2c_new_dummy_device(i2c->adapter,
+-							i2c->addr + i);
++			palmas->i2c_clients[i] = devm_i2c_new_dummy_device(&i2c->dev,
++									   i2c->adapter,
++									   i2c->addr + i);
+ 			if (IS_ERR(palmas->i2c_clients[i])) {
+ 				dev_err(palmas->dev,
+ 					"can't attach client %d\n", i);
+ 				ret = PTR_ERR(palmas->i2c_clients[i]);
+-				goto err_i2c;
++				return ret;
+ 			}
+ 			palmas->i2c_clients[i]->dev.of_node = of_node_get(node);
+ 		}
+@@ -538,7 +546,7 @@ static int palmas_i2c_probe(struct i2c_client *i2c)
+ 			dev_err(palmas->dev,
+ 				"Failed to allocate regmap %d, err: %d\n",
+ 				i, ret);
+-			goto err_i2c;
++			return ret;
+ 		}
+ 	}
+ 
+@@ -557,7 +565,7 @@ static int palmas_i2c_probe(struct i2c_client *i2c)
+ 			reg);
+ 	if (ret < 0) {
+ 		dev_err(palmas->dev, "POLARITY_CTRL update failed: %d\n", ret);
+-		goto err_i2c;
++		return ret;
+ 	}
+ 
+ 	/* Change IRQ into clear on read mode for efficiency */
+@@ -567,11 +575,11 @@ static int palmas_i2c_probe(struct i2c_client *i2c)
+ 
+ 	regmap_write(palmas->regmap[slave], addr, reg);
+ 
+-	ret = regmap_add_irq_chip(palmas->regmap[slave], palmas->irq,
+-				  IRQF_ONESHOT | pdata->irq_flags, 0,
+-				  driver_data->irq_chip, &palmas->irq_data);
++	ret = devm_regmap_add_irq_chip(&i2c->dev, palmas->regmap[slave],
++				       palmas->irq, IRQF_ONESHOT | pdata->irq_flags,
++				       0, driver_data->irq_chip, &palmas->irq_data);
+ 	if (ret < 0)
+-		goto err_i2c;
++		return ret;
+ 
+ no_irq:
+ 	slave = PALMAS_BASE_TO_SLAVE(PALMAS_PU_PD_OD_BASE);
+@@ -582,11 +590,11 @@ static int palmas_i2c_probe(struct i2c_client *i2c)
+ 		reg = pdata->pad1;
+ 		ret = regmap_write(palmas->regmap[slave], addr, reg);
+ 		if (ret)
+-			goto err_irq;
++			return ret;
+ 	} else {
+ 		ret = regmap_read(palmas->regmap[slave], addr, &reg);
+ 		if (ret)
+-			goto err_irq;
++			return ret;
+ 	}
+ 
+ 	if (!(reg & PALMAS_PRIMARY_SECONDARY_PAD1_GPIO_0))
+@@ -617,11 +625,11 @@ static int palmas_i2c_probe(struct i2c_client *i2c)
+ 		reg = pdata->pad2;
+ 		ret = regmap_write(palmas->regmap[slave], addr, reg);
+ 		if (ret)
+-			goto err_irq;
++			return ret;
+ 	} else {
+ 		ret = regmap_read(palmas->regmap[slave], addr, &reg);
+ 		if (ret)
+-			goto err_irq;
++			return ret;
+ 	}
+ 
+ 	if (!(reg & PALMAS_PRIMARY_SECONDARY_PAD2_GPIO_4))
+@@ -644,7 +652,7 @@ static int palmas_i2c_probe(struct i2c_client *i2c)
+ 
+ 	ret = regmap_write(palmas->regmap[slave], addr, reg);
+ 	if (ret)
+-		goto err_irq;
++		return ret;
+ 
+ 	/*
+ 	 * If we are probing with DT do this the DT way and return here
+@@ -652,42 +660,17 @@ static int palmas_i2c_probe(struct i2c_client *i2c)
+ 	 */
+ 	if (node) {
+ 		ret = devm_of_platform_populate(&i2c->dev);
+-		if (ret < 0) {
+-			goto err_irq;
+-		} else if (pdata->pm_off && !pm_power_off) {
++		if (ret < 0)
++			return ret;
++		if (pdata->pm_off && !pm_power_off) {
+ 			palmas_dev = palmas;
+ 			pm_power_off = palmas_power_off;
++			ret = devm_add_action_or_reset(&i2c->dev,
++						       palmas_clear_power_off, palmas);
+ 		}
+ 	}
+ 
+ 	return ret;
+-
+-err_irq:
+-	regmap_del_irq_chip(palmas->irq, palmas->irq_data);
+-err_i2c:
+-	for (i = 1; i < PALMAS_NUM_CLIENTS; i++) {
+-		if (palmas->i2c_clients[i])
+-			i2c_unregister_device(palmas->i2c_clients[i]);
+-	}
+-	return ret;
+-}
+-
+-static void palmas_i2c_remove(struct i2c_client *i2c)
+-{
+-	struct palmas *palmas = i2c_get_clientdata(i2c);
+-	int i;
+-
+-	regmap_del_irq_chip(palmas->irq, palmas->irq_data);
+-
+-	for (i = 1; i < PALMAS_NUM_CLIENTS; i++) {
+-		if (palmas->i2c_clients[i])
+-			i2c_unregister_device(palmas->i2c_clients[i]);
+-	}
+-
+-	if (palmas == palmas_dev) {
+-		pm_power_off = NULL;
+-		palmas_dev = NULL;
+-	}
+ }
+ 
+ static const struct of_device_id of_palmas_match_tbl[] = {
+@@ -713,7 +696,6 @@ static struct i2c_driver palmas_i2c_driver = {
+ 		   .of_match_table = of_palmas_match_tbl,
+ 	},
+ 	.probe = palmas_i2c_probe,
+-	.remove = palmas_i2c_remove,
+ 	.id_table = palmas_i2c_id,
+ };
+ 
+
+base-commit: b6a9fa34ce4187cb69d3c588a4bbffc31ce5db8f
+-- 
+2.43.0
+
