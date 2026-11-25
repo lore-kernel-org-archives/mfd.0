@@ -1,77 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=193.142.43.55
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795622821;
-	b=e9k/NrgQhB6Clv5aRqVMNxFaDfTQFyhRKVpsGHY/LJtB4SHknKThxTQYG1+YEqOj0lVR
-	 2v1eBVY5o7w6HbCybOVoIBIZZ01QKcBm/ONccPfe/xc/EaMh2mNQzca8asKO3ZrvTpeFb
-	 tSe4oYUbzB/1G9lmp0ZlVc1om2wwCIlHHD3yxrIUe0lB0HVw/INncAm59+HmeEvL7tYbR
-	 K+NLgnL7jNBoi7ojzsI2EtBiQ1on68s4mlV8dGr7RTmAQEDoWHHmuG8uOaHtrOCVMxCf0
-	 DIFoFU6C8QZsoBZ0820l5MYFJBniZJQrrbO6d8A6zwUWzzxUNyMKttXmlp25WnBMMvA==
+	t=1795631328;
+	b=CZmByF+OpjTYfs3b9+ap2KbPLUmrDRd6RwV0dQeT8jvKag6ibK87piqj13ECSBOTaaXV
+	 oYYPIOAe5dXLNBle1iKRf8oayaZmA5Cm7iG7PlB721KGEPYiZ98i6dCI5DqPTCKFZ3N4/
+	 Ga9d5pZcAiKxeETFyYiSW60jJNLFRnCsW/jWe2E/It5EBZNCVT/4b/GEZip6PxB0BS3R4
+	 sLHZGeKtWLzfo4Iv+jz5uARCbsILjuzdvKOGr3/h4rTPdZJXEOvFsSwCRy63hqyKUWSA4
+	 PawQPuHbce/MYfvRrQcLwv7oN719+2FCJ7CIdUpU/uv2RlodZTMt6xGOO7Q9IHyzgCA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795622821;
-	h=DMARC-Filter:Message-ID:DKIM-Signature:DKIM-Signature:Subject:From:
-	 To:Cc:Date:In-Reply-To:References:Disposition-Notification-To:
-	 Organization:Content-Type:Content-Transfer-Encoding:MIME-Version;
-	bh=S3FuZwbrAhjaM6kTBlafii6bM4GnE5BBZTC//slK6X0=;
-	b=enQmnZvhFNFUdh3xXzcLvgVIG1Lpq5SnyvuExPFeCUSOdQP3o0nZKrUhjL47W8RVpkMM
-	 Z4n/0xkELSNtomeDqX3XVt2OXCS1I2B4y9oSKMamzUrAbSTV0X+avJs+fqlXKPP/iJy0N
-	 SWaMybUwAGBeZJvWNDpyU0j/xVk990N2fsPsW5X4VppR/GOnaYguE5N8VRrLp4OvKmbO5
-	 dhqeJGBGADtceENHs0rgio6X7ul+u0fnz++Z8xnsFLjqDf996FZzFqhQxUn2iZmD0Tmro
-	 Ibh+pQQr9cy/TFYqkriQrB+K9/lyrtF0+keiKmGbuv2GAKN/YFJ/CQhJHH6+BiWptAw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795631328;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=s89ULcfJlcdzCl5MhVyPCLu49hljGSQBZ02EqlEm4lQ=;
+	b=Q3pjzCMyulqieQXzlzTK2BzrZlQHlyrfpLWdLI9MTP/4DKye/3SUArfp0jiNTEi0eKDz
+	 exioLVgD1Rl+kRupfitJZxYe1vBabLCkgiT3ykYg9VeCDZrXukjW15x8YhQZHwhHAHkMg
+	 gq4kz4WKXN0Ma64hWAIMp3hyOJwrbHCGBXVAStFzUiltacZnurG6zuXTcXbTtBeior+hS
+	 +QJaD8gVx/0NAQRTMiJp812sZUkWrYXGVL3e/GAOYhX0zrh7ccb6Vz8hr/2kH/79dfZu2
+	 2bwe67ioJMyN1DR35DjpAFBRAMLr3bQNAvflpqxvA2RHiOcrJKsPrPqq0RNW7CS/E1w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linutronix.de;
-	spf=pass smtp.mailfrom=linutronix.de;
-	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=ppI+mJfi;
-	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=ed25519-sha256 header.s=2020e header.b=kI7IykWa;
-	arc=none smtp.remote-ip=193.142.43.55
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Z09Id4Z8;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6B1E606A681;
-	Wed, 25 Nov 2026 16:06:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A6B1E606A681
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linutronix.de
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F785606A32A
+	for <mfd@lists.linux.dev>; Wed, 25 Nov 2026 18:28:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=ppI+mJfi;
-	dkim=pass header.d=linutronix.de header.i=@linutronix.de header.a=ed25519-sha256 header.s=2020e header.b=kI7IykWa
-Message-ID: <bd31f8cd5121429a3b181ba70ffd53475aec8704.camel@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1795622813;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=S3FuZwbrAhjaM6kTBlafii6bM4GnE5BBZTC//slK6X0=;
-	b=ppI+mJfiNu64lB4cP9r+efKp90B6RxvjvO1EYM2GYO0XNKA7U4fuZH9+bdhujgZewVnKML
-	epcRVSZwW8Cdn7NUW9lcwfaOIssIN+xJOGJ8rq1ZBi2y/311PMwAxaTuJ+oHdIQxNjvjsR
-	0MzVEv+feRxWpAlRE4FgEWjj7uVwqmb6WekA2M/8re6hO3HIfrqt6nqANGUc1IjmBbBEjd
-	shz24YD5tIt3+1tHW1Y1z+UIa/INyEi0DJ353aP5q8kJh3rExQhFjDgLWYDI3sbBGSsJLA
-	clT34JhJxOFBR/bpf9e+L/bActooeqdlNiD9wy57A3vx4+OgZ1HeVg0PDe6/3w==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1795622813;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=S3FuZwbrAhjaM6kTBlafii6bM4GnE5BBZTC//slK6X0=;
-	b=kI7IykWaiatQvtUYlHM+qgl3ONjmikyiQQiOdaoshgxC4hg2CF3o731Q9pqk8WCy2oVo7e
-	tHgmexuzGmJ3pfDw==
-Subject: Re: [PATCH net-next v5 5/9] net: dsa: Add tag handling for SoC-e
- switches
-From: Vasilij Strassheim <v.strassheim@linutronix.de>
-To: sashiko-reviews@lists.linux.dev
-Cc: devicetree@vger.kernel.org, mfd@lists.linux.dev, robh@kernel.org, 
-	conor+dt@kernel.org, lee@kernel.org, netdev@vger.kernel.org
-Date: Wed, 25 Nov 2026 17:06:51 +0100
-In-Reply-To: <sashiko-outbox-227109@kernel.org>
-References: 
-	<20261120-devel-vstrassheim-soce-dsa-ml-v5-0-5de9225715e6@linutronix.de>
-	 <20261120-devel-vstrassheim-soce-dsa-ml-v5-5-5de9225715e6@linutronix.de>
-	 <sashiko-outbox-227109@kernel.org>
-Organization: Linutronix GmbH
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Z09Id4Z8
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 098061F000EF
+	for <mfd@lists.linux.dev>; Wed, 25 Nov 2026 18:28:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795631328;
+	bh=s89ULcfJlcdzCl5MhVyPCLu49hljGSQBZ02EqlEm4lQ=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=Z09Id4Z8vbGXWMkS1WR7gKdR39oEkIz1JoFK6v2fcJ3HDWZQEH5Wg2j4BlMbe5Tiw
+	 Op07GQ7ZOBQPpPQ33dWnYZbQlClfUZwMO0/aaeAbFHLbf2VuNc/CGRuOxL1ldqWzpj
+	 99zYPOLVb2nNRTZejieDWlitrmHVwPhj8LRvDufiId/Sh/nJe7+/4//2GKErIvO2YK
+	 MEfTnlSx07Bzs1TEaYccXsWLnUbFHIHvis66TU2ZakXfOkROUwV11u3zZPDyeqv6U9
+	 dqbIX3OHFGaCGCsAYinLTu5QObKclEib2rFg46AGmWpBgO5YmZfUL2Q7K9SxTy1YxL
+	 TFYxMI+cYPOQw==
+Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-5bfbc67991cso4178976e87.0
+        for <mfd@lists.linux.dev>; Wed, 25 Nov 2026 10:28:47 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AL+hErGVWQIYhgmiiW6HX2Z5y0IwOlp+yy4rfsQ8M3n22e82nM2Q6NYV851uIgA8jxB5s5cnedc=@lists.linux.dev
+X-Gm-Message-State: APuU4Z/oMO6FBLG0PblocElAvd3uAGc3zGpjWUcI6WX6YbBOqOPs9hkL
+	i6TGsrCqFkkrka2jQH0S/xzEJHKvrYrS+69o7rBbWj0Kbh6pMnz46Dj3D+elm3UIVkE4PfmfqQv
+	J7K31kd9IGanPo5Q33G7r+rEjJV3YGgk=
+X-Received: by 2002:a05:6512:a85:b0:5b7:f75a:ea68 with SMTP id
+ 2adb3069b0e04-5c1bc7df486mr4990618e87.35.1795631326771; Wed, 25 Nov 2026
+ 10:28:46 -0800 (PST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -81,57 +59,43 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
+References: <20261124094059.3882014-1-john@phrozen.org>
+In-Reply-To: <20261124094059.3882014-1-john@phrozen.org>
+From: Linus Walleij <linusw@kernel.org>
+Date: Wed, 25 Nov 2026 19:28:33 +0100
+X-Gmail-Original-Message-ID: <CAD++jLm7b_Q8aN5E7zjEU8CPknKYy0ui_LE+jPYJji-YzAWxJw@mail.gmail.com>
+X-Gm-Features: Aa3M54q4ONvPZcrPiz4EM8PUlUrVb5r4XA_5oO6TkamikfKXWeoyqqveph49Ceg
+Message-ID: <CAD++jLm7b_Q8aN5E7zjEU8CPknKYy0ui_LE+jPYJji-YzAWxJw@mail.gmail.com>
+Subject: Re: [PATCH v4 0/9] pinctrl: airoha: add AN7589 support
+To: John Crispin <john@phrozen.org>
+Cc: Lorenzo Bianconi <lorenzo@kernel.org>, Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Ahmed Naseef <naseefkm@gmail.com>, 
+	Benjamin Larsson <benjamin.larsson@genexis.eu>, Christian Marangi <ansuelsmth@gmail.com>, 
+	devicetree@vger.kernel.org, lei.dong@airoha.com, Linqi.zhang@airoha.com, 
+	linux-gpio@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-mediatek@lists.infradead.org, mfd@lists.linux.dev, 
+	Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, Rajeev.kumar@airoha.com, 
+	upstream@airoha.com, Weifeng.xu@airoha.com, zhengping.zhang@airoha.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, 2026-11-21 at 14:53 +0000, sashiko-bot@kernel.org wrote:
-> Thank you for your contribution! Sashiko AI review found 1 potential
-> issue to consider:
-> - [Medium] net: dsa: broken flow dissection in sdsa due to inflated
->   needed_headroom
-> --
->=20
-> commit ff03e408d05d4a91db8a81df7f6cead0f9e1dc6f
-> Author: Vasilij Strassheim <v.strassheim@linutronix.de>
->=20
-> net: dsa: Add tag handling for SoC-e switches
->=20
-> This commit adds a DSA tag driver for SoC-e switches using the 8-byte
-> EtherType SDSA header.
->=20
-> > diff --git a/net/dsa/tag_sdsa.c b/net/dsa/tag_sdsa.c
-> > new file mode 100644
-> > index 0000000000000..c5a9f61edf405
-> > --- /dev/null
-> > +++ b/net/dsa/tag_sdsa.c
-> [ ... ]
-> > +static const struct dsa_device_ops sdsa_netdev_ops =3D {
-> > +	.name =3D SDSA_NAME,
-> > +	.proto =3D DSA_TAG_PROTO_SDSA,
-> > +	.xmit =3D sdsa_xmit,
-> > +	.rcv =3D sdsa_rcv,
-> > +	/* Include room for an accelerated non-802.1Q tag pushed in-band. */
-> > +	.needed_headroom =3D SDSA_HLEN + VLAN_HLEN,
-> > +};
->=20
-> [Severity: Medium]
-> Does setting .needed_headroom to SDSA_HLEN + VLAN_HLEN without a
-> .flow_dissect callback break flow dissection on the conduit?
->=20
-> When ops->flow_dissect is NULL, __skb_flow_dissect() falls back to
-> dsa_tag_generic_flow_dissect(), which uses ops->needed_headroom as the RX
-> tag length:
->=20
-> include/net/dsa.h:dsa_tag_generic_flow_dissect() {
-> 	const struct dsa_device_ops *ops =3D skb->dev->dsa_ptr->tag_ops;
-> 	int tag_len =3D ops->needed_headroom;
->=20
-> 	*offset =3D tag_len;
-> 	*proto =3D ((__be16 *)skb->data)[(tag_len / 2) - 1];
-> }
->=20
-> Because received frames only carry an 8-byte SDSA header (SDSA_HLEN),
-> dsa_tag_generic_flow_dissect() reads the encapsulated EtherType 4 bytes
-> past its actual offset and advances nhoff by 12 bytes instead of 8.
->=20
+On Tue, Nov 24, 2026 at 10:41=E2=80=AFAM John Crispin <john@phrozen.org> wr=
+ote:
 
-Yes, there is a problem. I will fix that with an SDSA-specific
-.flow_dissect() callback
+> Patch 5 adds the IOMUX to the syscon compatibles. Patch 6 adds the
+> binding for the pin controller. Patch 7 adds the binding for the GPIO
+> system controller it sits under, which also holds the PWM controller.
+> Patch 8 moves the GPIO register offsets to the common header, so the
+> AN7589 data can describe its own register table, with no functional
+> change. Patch 9 adds the AN7589 pin data.
+(...)
+> - Split the bindings in three: the syscon compatible (patch 5), the
+>   pin controller (patch 6) and the GPIO system controller (patch 7)
+>   (Lee, Conor).
+
+Once Lee merges patch 5 with the syscon bindings I can merge
+the rest to the pinctrl tree.
+
+Yours,
+Linus Walleij
