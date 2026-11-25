@@ -1,45 +1,45 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795591230;
-	b=G9AIFnvkiQEdSNg33w9+FWuC9aiYI9ovayo+ekEF2JAlWNPPQVSRJ1TMIXe5nNrM6d1A
-	 h8EqEBgGD5zUhXs9JW7aP37RGSyK4LzSCQHkbOP2mZsQBNMoJriwh0XndH2VHiq05SBe6
-	 SZl1GH9qvuZWlu65aN8ZEdPITB+UYABUFdC5OxaqKD99U6bg1UW+jfwLy5Awh/LSJ2OSc
-	 mtxWfWr6xATCzJo1pgotvQOAr0PtMx3qnfIEBYN7MITYreIwoj3R8HP2tQa13MC3SfdIi
-	 n0gXm/WTJ5LQ1luGwmgJlZQ0GYRmrjV8HKeL6QsmEuEIKPHYRqd1oRx9SgvexRpocRQ==
+	t=1795591303;
+	b=L0rqCSfnF4fjPiKkRZnlkYjvmPhOZzIT4O7iyU+b956rOOYtObRM35fVR9ucFAm40fUT
+	 Ho9c988uhBDj2f0u0ES9gQ3KDc4NGAjESoJpm9IiCYBcJzY2XMM2YV7OHXa/PJ6Aqy46V
+	 rserZCtQe4WDwloPl8/me1BnwFJNzTdcv09NXDI8FPXHCBECxbhdnalYEscPqm97co06D
+	 iPmWRD0FoG7QJFdMMCbJ+OxSH5Yc8p0LvxwwPq4xXalnufmSYcvdY7RI4ahZugUt48NX8
+	 6IIAsbtUsOJF1glqANnHyFbKqmFUt6ClBeYGE8y52VuinJbIRTK/rmcvjzASUM+jV3w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795591230;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795591303;
 	h=Received:DKIM-Signature:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
 	 Date:Message-Id:X-Mailer;
-	bh=L05En4/xKFVGe3YwLYxtCb15h7QwemjDiV1X8U2nthE=;
-	b=HJbuf0f3Luto23jSK3T6xlkg13mF6BB5Vz9rAUrmgnhZ1gp/WC9uE33PCOF+olZjFfq6
-	 4JtoyLAaqyO6P8nV1exy0JAd669wZ4H6IHATXF/12VPoGmK+Pttul7arCUht8QDA3SaFo
-	 7nutZQ3l0xDU/m9VGHI+gphqheg81AhWlLaDPjQwwfaeKAMLD4jA+aI3c+ONMCJMqNjM8
-	 ECpnK5Be0b2xbyJcIg+LaUT+7PW58gMQsL2OdMVaRum4OUbGsDvh81Dop/ustou50QcWT
-	 GLreRfbLhNCWI3L43VY4MXmea806vDnjH7roW374rCi6FUysBlT8YkfFYfMweFmkPig==
+	bh=y7iu/ep1a65WrbASb13lQq8sxkeDKAqMwd/fkbVhul8=;
+	b=ki0vqvb+qzcEujUpxvjqrmtM7+tvTmPgOpr1c3gwO0IncPYthm2ZjjK7JD6dV1xTusjL
+	 4p8D9EzlaMLpAwK7CldIRgQPmzcgpUsAnkvVOw+0NZQLduNsvaON3wtigRdZWls1q4ng7
+	 FhePWh89/JKlg0Bx5DnJnhK2WrS5wNFqQ11AJeNvL1vKMFj3uyBURkt6rC8XunISmYlv8
+	 idVu0CbkbcUd19DYsqOAArt7Yx9w9Il5vN7HlQWaa6PWOmCimyzzHHCJMXBdYw0wsYySJ
+	 JICuBF+DcM0vI1O3O+GfJfPrk4pBAx0A3mh89pOiAoiSrcICFKfTMDzQYoHaiUjZ9Yw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CI7KwRD6;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IzQSEVcc;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ACE96606A323;
-	Wed, 25 Nov 2026 07:20:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C795606A326;
+	Wed, 25 Nov 2026 07:21:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CI7KwRD6
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 850C01F000C0;
-	Wed, 25 Nov 2026 07:20:29 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IzQSEVcc
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 008541F00AE3;
+	Wed, 25 Nov 2026 07:21:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795591230;
-	bh=L05En4/xKFVGe3YwLYxtCb15h7QwemjDiV1X8U2nthE=;
+	s=k20260515; t=1795591302;
+	bh=y7iu/ep1a65WrbASb13lQq8sxkeDKAqMwd/fkbVhul8=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=CI7KwRD6/npgdogDA9soGnOx7aANCu/YHtpit9WlZvZg6ZNb5WZ91xuGXsP7htK9g
-	 AxNgBw6ZxZd2f6JTLRrLXyyVsLDB2JfUyK36sJdxvwYfems3TDhQd04jFCNZHUrli+
-	 l9j3qtu5KNZ+lerE4srjbX7HELfzHhrXTwjDtie0f7LzJhHXJcf8ZhmnytnfsAeBt8
-	 Ya9P518uE9M3mZKCYl9KJzZwloz+9LV+RQrwPgXWYdEYLkvFo/XXGHbWsDXoz74ntk
-	 11l/Lw54Z67R5RWw+J/uPKkCX/Xq3kJj1uph9H+K3yqDaBXtcDYx3Agm//IrDrHZ3N
-	 5N2FqPYzw3twQ==
+	b=IzQSEVccBTFtOV5CVdMu6avznbK1ZNELFKlz7DtIEp+wcnTEb2K7tJHe8Gc2vHx8z
+	 k81yz59N58s17BAOkeZ7KAF0m3Cn6XnI1sDSYX5hrG7MTqNzUOcuwQCFKOGlFl6YU6
+	 Sij9E7Pq5berwcQp6wz+JDBM3zq6rMsUSolOQlQDdsP/4Bb8+TRx4OARNPuZcA81NI
+	 80uNEGN8/K7ljiT9An6fRTvPvawLEiSP3PGqvSJEGJgVPIusF+YJTiinwQBD10tzH5
+	 j6QOHbikVuUZeeT9iwGFgISRFL215mjAvEOI1GKBZaaW8cLaJekdMuSJROvsEq0Jk5
+	 oCHO1+DAzNXsw==
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -51,8 +51,8 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v2 1/9] dt-bindings: mfd: Add Marvell AP806/CP110
- system controller schema
+Subject: Re: [PATCH v2 2/9] arm64: dts: marvell: Add AP806/CP110 syscon
+ compatibles
 From: Krzysztof Kozlowski <krzk@kernel.org>
 To: "Rob Herring (Arm)" <robh@kernel.org>
 Cc: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
@@ -62,25 +62,25 @@ Cc: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
  mfd@lists.linux.dev, devicetree@vger.kernel.org, 
  linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
  Krzysztof Kozlowski <krzk@kernel.org>
-In-Reply-To: <20261124-dtbs-marvell-v2-1-663009a769da@kernel.org>
+In-Reply-To: <20261124-dtbs-marvell-v2-2-663009a769da@kernel.org>
 References: <20261124-dtbs-marvell-v2-0-663009a769da@kernel.org>
- <20261124-dtbs-marvell-v2-1-663009a769da@kernel.org>
-Date: Wed, 25 Nov 2026 08:20:26 +0100
-Message-Id: <179559122613.9063.9445094754243687783.b4-reply@b4>
+ <20261124-dtbs-marvell-v2-2-663009a769da@kernel.org>
+Date: Wed, 25 Nov 2026 08:21:39 +0100
+Message-Id: <179559129960.9063.13932232293411846925.b4-reply@b4>
 X-Mailer: b4 0.17-dev
 
 On 2026-11-24 14:46 -0600, Rob Herring (Arm) wrote:
-> The Marvell AP806 and CP110 lack specific compatibles. Add a dedicated
-> schema for the Marvell AP806 and CP110 system controllers and their
-> child devices.
+> Add specific compatibles for the AP806 and CP110 system-controller
+> syscon blocks that host pinctrl, GPIO, clock and thermal child nodes.
 > 
 > Signed-off-by: Rob Herring (Arm) <robh@kernel.org>
 > ---
 > v2:
 >  - Update compatibles to avoid old legacy ones
 > ---
->  .../mfd/marvell,ap806-cp110-system-controller.yaml | 59 ++++++++++++++++++++++
->  1 file changed, 59 insertions(+)
+>  arch/arm64/boot/dts/marvell/armada-ap80x.dtsi | 6 ++++--
+>  arch/arm64/boot/dts/marvell/armada-cp11x.dtsi | 6 ++++--
+>  2 files changed, 8 insertions(+), 4 deletions(-)
 
 Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
