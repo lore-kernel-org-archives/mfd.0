@@ -1,57 +1,63 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795691892;
-	b=SaQWrnMlrLK7MdsIGaLkj7b8dAWGnxYFiOyoNpqv4/sOXkTquwILrMRx/GyP/XGx44Ab
-	 WTeCRjS+7Ebyq4ytNmPodx13tplm2j1q4Cqf/oInB1Lb/SkbBXhDPkj6newPW1XyVE/UB
-	 SdyfGhpTBrI6GiRimWTZhlRlF7dzFxO7nB4lqCr4Ii3EpajNrk2+ncXcjdLB6YKR6w+1T
-	 n+u5gAmjFrfRGsUo5Ud9ZbAOeuhE+3wtTeif7KdD0vVAlVMMD0b7beagQASoyueWNMQ58
-	 YRJLa1yrJqL3lifwsny2kCZnDR1k1jxaulchTnOSi//FvsTKglBTH5YiUJF2KgS8FuA==
+	t=1795693666;
+	b=4KZ4ibW2dfaS9TCuuL37Oz+vgSDTsSkgBTpW8lUoZ5lZNSALE4DSw5lfDIQpXI91uIO5
+	 1YgodpeAtQPusGolFISHz72uuR/R1sLCeDoEV7awLAVICIIpisaUYdMQgs90aQtG8r0Pn
+	 LeBEv3DyvGFA/2ND1BsaGhdn3a0OOXDtSAYuNhg0OMYdqOPuVjwRtHaFT0ASvEb8G25o4
+	 lXs5mNbF4GNKvHCTs76D4zqGnT+cDn5NoS8m9u2YHyQq7Qj6T+L8zmsmw5i90/t7bcMdl
+	 wB7cLT3FVxNp+V0CoWQBWF5q1eVq1Lj+VNiDZHx+bPxvGXIlfyaTNE5eJkldW0GHt4g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795691892;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=RHBB9PLTid0nZY8Jd/DOldagdbWGdc3nPHv+Fxe/n2I=;
-	b=IZ84LVpwjr47V1vO0K9xOrLQWiUkVAmJxxSTuOAvCID+8fJem+E6h14wwYzhvO6tE3mN
-	 iZFBV61w0T7e9i4l0OGZpH3+EDabDIv0ZMLrD3U7Nw/PBmsnb4iiZ4sL3flQKh4C2lXwC
-	 nPbC4dS6hDWcT5oBkSsm4adTNCGpmjHZPghXSnaT5AWlyookG7DAsAmkVC5kjn1M44ZkA
-	 BTtz+fsVm5KrCFZxCWVDp9bQxfQvAzUkTXikBQ+utrqn45hG6dU8QUTJ6iWjBiOlngpie
-	 ZZX87qjJ0n8PZoRLhpRMGDl3Gz1VS4+bltlMNwCZtCKOgQG5Zh1G5gpi8ZI69S3J1gw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795693666;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=/IuU2RbLnTfHjvDJt5vubfcTTRydUn5VtyQNhV9yHwc=;
+	b=CG6uEfvQCkfTEEgSLNq/+e0bTeEVA299twSkx779GBlx39TJtbehszwKRnOsTfegHpnV
+	 qtNJm0qrkrn2MFh/9cX2g8JivrmHfnRL3rBGnqryLWpW7eJ6FKBvwdGrz4RH1HF8Sn0f0
+	 pCQnIb9D8axxM62pDWpHwcvYlvMlOSgDAJDp7YysdtCA/eMdTv5dgjnvNIMwj7IXSgjRv
+	 Xt4sQpXMXvU63nG9gwQL+/rtcg1qvH8VdcdykkuVx+qRcxJTlVNw7bEiNlsRC8/gM6CTu
+	 gTPFHEjid6clWCH/uyP75RtAir5SmXy26pFJ+6y959wpcR03zO5FlK97Nu3lgqHldig==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WXLxw9QM;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iIUMq1HY;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 943AA606A321;
-	Thu, 26 Nov 2026 11:18:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BEE01606A31C;
+	Thu, 26 Nov 2026 11:47:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=WXLxw9QM
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 505C91F000D3;
-	Thu, 26 Nov 2026 11:18:11 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iIUMq1HY
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BF3451F000C4;
+	Thu, 26 Nov 2026 11:47:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795691891;
-	bh=RHBB9PLTid0nZY8Jd/DOldagdbWGdc3nPHv+Fxe/n2I=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=WXLxw9QMi9rbwlrkOmBA8tNlBlaQAH9N5E6Gj4FD1ADr/DW5vqW6DlHwsl6EkDyG7
-	 yk2q1VVuKIf7RYviGe6Nr8EKdSp/gDChdgOii8SzMwHMe9gjToKf8eImWXxd4nOXL1
-	 J0h/fyhXxMDn4p/Ts23roJ2zOCNym5ynSccT4g1kE7/0RO8fxX2abyufOrQwxCodct
-	 2y19RisjF/x331koMjTd0Xo1/IqLCTgfrtw2fAuUKhpPCz+7V/BlolSFkGGQXQEiyB
-	 WTZjveSxiTI1tIS1ynNtZkoeVQ5hXAhiT7Frkn1Z/vbOC+U9W2yyQSpbvwAnGkiEqD
-	 38uUsxplb8muQ==
-Message-ID: <sashiko-outbox-235359@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2 2/2] power: supply: qcom_smbx: Add PM4125 SMBLite
- charger support
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Raj Aryan" <raj.aryan@oss.qualcomm.com>
-Cc: devicetree@vger.kernel.org, mfd@lists.linux.dev, robh@kernel.org, conor+dt@kernel.org, lee@kernel.org
-In-Reply-To: <20261126-smblite-charger-for-pm4125-v2-2-20656509518b@oss.qualcomm.com>
-References: <20261126-smblite-charger-for-pm4125-v2-0-20656509518b@oss.qualcomm.com>
- <20261126-smblite-charger-for-pm4125-v2-2-20656509518b@oss.qualcomm.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 26 Nov 2026 11:18:10 +0000
+	s=k20260515; t=1795693666;
+	bh=/IuU2RbLnTfHjvDJt5vubfcTTRydUn5VtyQNhV9yHwc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=iIUMq1HYFh7Ug+mB4SJbihaa468j1yKHlqow/OXuId2iW3hUoQ2wS83jcwCECrfMw
+	 aVsKkwOcboYfRqoeZR7t4qibEbQhD6PhDjo1i2ANpiL9ue3xFu4jGuVPlVHtht464s
+	 HviepUDvEoPYIvURjU3c1+56+9baH91+auYwn4QgztxPsXgEC+shL5TcygPFbznh3u
+	 lqCadeeNN9heBa0goOw/UyHKbmT3gs5XbIryL1sYJyTNGSXUBf9tVqBIvYpw+tTabL
+	 KjJtNGVgNLjqBQMiV7dTNXNPjezHpVzX5rcpxFqmY+GyzVOojmTzxAadPnxrPK01JC
+	 Tl5ohrORWvSBQ==
+Date: Thu, 26 Nov 2026 11:47:28 +0000
+From: Lee Jones <lee@kernel.org>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Pavel Machek <pavel@kernel.org>,
+	Griffin Kroah-Hartman <griffin@kroah.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Daniel Thompson <danielt@kernel.org>,
+	Jingoo Han <jingoohan1@gmail.com>, linux-leds@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	mfd@lists.linux.dev, dri-devel@lists.freedesktop.org
+Subject: Re: [PATCH v7 4/4] mfd: aat2870: Add support for VIN and IN-LDO
+ power supplies
+Message-ID: <20261126114728.GG38590@joneslee-macbookpro.roam.internal>
+References: <20261115085826.89641-1-clamor95@gmail.com>
+ <20261115085826.89641-5-clamor95@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,171 +66,69 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261115085826.89641-5-clamor95@gmail.com>
 
-Thank you for your contribution! Sashiko AI review found 3 potential
-issues to consider:
-- [Medium] power: supply: qcom_smbx: wrong CHARGE_TYPE mapping in
-  smb_get_property()
-- [Medium] power: supply: qcom_smbx: watchdog left armed on fail/unbind
-  and bad rollback
-- [Low] power: supply: qcom_smbx: write-only fields and unused includes
-  in smb_probe()
---
+On Sun, 15 Nov 2026, Svyatoslav Ryhel wrote:
 
-commit 2afb04355c7bbe435f2e20cc7c837c7b9cdd0e1c
-Author: Raj Aryan <raj.aryan@oss.qualcomm.com>
+> The AAT2870 supports a dedicated main power supply input alongside parent
+> power supply for its internal regulators.
+> 
+> Add support for retrieving and managing these supply regulators
+> (vin-supply and in-ldo-supply) using the regulator framework to ensure
+> proper power supply dependencies and power-up sequencing.
+> 
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> ---
+>  drivers/mfd/aat2870-core.c            | 5 +++++
+>  drivers/regulator/aat2870-regulator.c | 1 +
 
-power: supply: qcom_smbx: Add PM4125 SMBLite charger support
+Is this a build dep?
 
-This commit extends the qcom_smbx charger driver to support the SMBLite
-charger IP found in the PM4125 PMIC alongside the existing SMB2 support.
+Would something that was working before, break?
 
-> diff --git a/drivers/power/supply/qcom_smbx.c b/drivers/power/supply/qcom=
-_smbx.c
-> index c6188c915703a..d23e5ec858586 100644
-> --- a/drivers/power/supply/qcom_smbx.c
-> +++ b/drivers/power/supply/qcom_smbx.c
-
-[ ... ]
-
-> @@ -680,6 +997,30 @@ static int smb_get_property(struct power_supply *psy,
->  		return smb_get_prop_health(chip, &val->intval);
->  	case POWER_SUPPLY_PROP_USB_TYPE:
->  		return smb_apsd_get_charger_type(chip, &val->intval);
-> +	case POWER_SUPPLY_PROP_CHARGE_TYPE: {
-> +		int status, rc;
+>  2 files changed, 6 insertions(+)
+> 
+> diff --git a/drivers/mfd/aat2870-core.c b/drivers/mfd/aat2870-core.c
+> index f5409dd91efb3..9017960ee73b1 100644
+> --- a/drivers/mfd/aat2870-core.c
+> +++ b/drivers/mfd/aat2870-core.c
+> @@ -14,6 +14,7 @@
+>  #include <linux/kernel.h>
+>  #include <linux/mfd/aat2870.h>
+>  #include <linux/of_platform.h>
+> +#include <linux/regulator/consumer.h>
+>  #include <linux/regulator/machine.h>
+>  #include <linux/slab.h>
+>  #include <linux/uaccess.h>
+> @@ -307,6 +308,10 @@ static int aat2870_i2c_probe(struct i2c_client *client)
+>  
+>  	aat2870->reg_cache = aat2870_regs;
+>  
+> +	ret = devm_regulator_get_enable(&client->dev, "vin");
+> +	if (ret)
+> +		return dev_err_probe(&client->dev, ret, "Failed to enable regulator\n");
 > +
-> +		if (chip->type !=3D SMBLITE)
-> +			return -EOPNOTSUPP;
-> +
-> +		rc =3D smb_get_prop_status(chip, &status);
-> +		if (rc < 0)
-> +			return rc;
-> +
-> +		switch (status) {
-> +		case POWER_SUPPLY_STATUS_FULL:
-> +			val->intval =3D POWER_SUPPLY_CHARGE_TYPE_NONE;
-> +			break;
-> +		case POWER_SUPPLY_STATUS_CHARGING:
-> +			val->intval =3D POWER_SUPPLY_CHARGE_TYPE_STANDARD;
-> +			break;
-> +		default:
-> +			val->intval =3D POWER_SUPPLY_CHARGE_TYPE_UNKNOWN;
-> +			break;
-> +		}
-> +
-> +		return 0;
-> +	}
->  	default:
->  		dev_err(chip->dev, "invalid property: %d\n", psp);
->  		return -EINVAL;
+>  	aat2870->en_pin = devm_gpiod_get_optional(&client->dev, "enable",
+>  						  GPIOD_OUT_HIGH);
+>  	if (IS_ERR(aat2870->en_pin))
+> diff --git a/drivers/regulator/aat2870-regulator.c b/drivers/regulator/aat2870-regulator.c
+> index 73b6d06858cff..896f39e345379 100644
+> --- a/drivers/regulator/aat2870-regulator.c
+> +++ b/drivers/regulator/aat2870-regulator.c
+> @@ -105,6 +105,7 @@ static const unsigned int aat2870_ldo_voltages[] = {
+>  #define AAT2870_LDO(ids, match, vsel, vmask) {		\
+>  	.name = #ids,					\
+>  	.of_match = (match),				\
+> +	.supply_name = "in-ldo",			\
+>  	.id = AAT2870_ID_##ids,				\
+>  	.n_voltages = ARRAY_SIZE(aat2870_ldo_voltages),	\
+>  	.volt_table = aat2870_ldo_voltages,		\
+> -- 
+> 2.53.0
+> 
 
-[Severity: Medium]
-Should POWER_SUPPLY_PROP_CHARGE_TYPE inspect the hardware charge phase in
-SMBLITE_BATTERY_CHARGER_STATUS_1 directly instead of deriving the value
-from smb_get_prop_status()?
-
-When USB is unplugged or charging is inhibited, paused, disabled, or
-stopped due to battery overvoltage, smb_get_prop_status() returns
-POWER_SUPPLY_STATUS_DISCHARGING or POWER_SUPPLY_STATUS_NOT_CHARGING, which
-falls into the default case here and reports
-POWER_SUPPLY_CHARGE_TYPE_UNKNOWN instead of POWER_SUPPLY_CHARGE_TYPE_NONE.
-Because smb_get_prop_status() also folds SMBLITE_TRICKLE_CHARGE,
-SMBLITE_PRE_CHARGE, SMBLITE_FULLON_CHARGE, and SMBLITE_TAPER_CHARGE into
-POWER_SUPPLY_STATUS_CHARGING, this never reports
-POWER_SUPPLY_CHARGE_TYPE_TRICKLE or POWER_SUPPLY_CHARGE_TYPE_FAST.
-
-[ ... ]
-
-> @@ -904,37 +1464,216 @@ static const struct smb_init_register smb_init_se=
-q[] =3D {
-> +	/*
-> +	 * Enable watchdog: WDOG_TIMER_EN_ON_PLUGIN + BARK_WDOG_INT_EN
-> +	 * + BITE_WDOG_DISABLE_CHARGING (misc_base + 0x58)
-> +	 * Matches downstream WD_CFG_REG enable sequence.
-> +	 */
-> +	{ .addr =3D SMBLITE_MISC_BASE + SMBLITE_WD_CFG,
-> +	  .mask =3D SMBLITE_WDOG_TIMER_EN_BIT | SMBLITE_WDOG_TIMER_EN_ON_PLUGIN=
-_BIT |
-> +		  SMBLITE_BARK_WDOG_INT_EN_BIT |
-> +		  SMBLITE_BITE_WDOG_DISABLE_CHARGING_CFG_BIT,
-> +	  .val =3D SMBLITE_WDOG_TIMER_EN_ON_PLUGIN_BIT |
-> +		  SMBLITE_BARK_WDOG_INT_EN_BIT |
-> +		  SMBLITE_BITE_WDOG_DISABLE_CHARGING_CFG_BIT },
-
-[ ... ]
-
-> -static void smb_restore_charge_enable(void *data)
-> +static void smb_restore_charge_state(void *data)
->  {
->  	struct smb_chip *chip =3D data;
-> +	u16 reg;
-> +	u8 charge_enable;
->  	int rc;
-> =20
-> -	rc =3D regmap_update_bits(chip->regmap,
-> -				chip->base + CHARGING_ENABLE_CMD,
-> +	if (chip->type =3D=3D SMBLITE)
-> +		reg =3D SMBLITE_CHGR_BASE + SMBLITE_CHARGING_ENABLE_CMD;
-> +	else
-> +		reg =3D chip->base + CHARGING_ENABLE_CMD;
-> +
-> +	/* Keep SMBLite charging disabled if probe fails partway through setup.=
- */
-> +	charge_enable =3D chip->type =3D=3D SMBLITE ? 0 : chip->initial_charge_=
-enable;
-> +	rc =3D regmap_update_bits(chip->regmap, reg,
->  				CHARGING_ENABLE_CMD_BIT,
-> -				chip->initial_charge_enable);
-> +				charge_enable);
-> +	if (rc < 0)
-> +		dev_err(chip->dev, "Couldn't set probe-failure charging state: %d\n",
-> +			rc);
-> +}
-
-[Severity: Medium]
-Does enabling SMBLITE_WD_CFG in smblite_init_seq leave the hardware
-watchdog armed when smb_probe() fails after smb_init_hw() or when the
-driver is later unbound?
-
-Once SMBLITE_WDOG_TIMER_EN_ON_PLUGIN_BIT and
-SMBLITE_BITE_WDOG_DISABLE_CHARGING_CFG_BIT are set, the hardware expects
-smb_handle_wdog_bark() to pet SMBLITE_BARK_BITE_WDOG_PET every 16 seconds;
-if probe fails or the driver is detached, no handler services the bark IRQ
-and the bite timer disables charging in hardware 24 seconds after USB is
-plugged in.  In addition, smb_probe() saves chip->initial_charge_enable
-for SMBLite before disabling charging for setup, but
-smb_restore_charge_state() ignores it and unconditionally writes 0 on
-probe failure or deferral.
-
-[ ... ]
-
-> @@ -973,45 +1713,89 @@ static int smb_probe(struct platform_device *pdev)
->  	chip->dev =3D &pdev->dev;
-> -	chip->name =3D pdev->name;
-> +
-> +	pmic_name =3D device_get_match_data(&pdev->dev);
-> +	if (!pmic_name)
-> +		return -EINVAL;
-> +	chip->name =3D pmic_name;
-> +
-> +	if (strcmp(pmic_name, "pm4125") =3D=3D 0) {
-> +		chip->type        =3D SMBLITE;
-> +		chip->icl_step_ua =3D SMBLITE_ICL_STEP_UA;
-> +		chip->icl_max_ua  =3D SMBLITE_ICL_MAX_UA;
-> +		/* Use the charger peripheral as the base for SMBLite accesses. */
-> +		chip->base =3D SMBLITE_CHGR_BASE;
-> +	} else {
-
-[Severity: Low]
-This isn't a bug, but several additions in this patch appear to be unused:
-chip->base is assigned SMBLITE_CHGR_BASE here without reading the DT reg
-property even though all SMBLite accesses use the SMBLITE_*_BASE constants
-directly, chip->charge_status and chip->ldo_mode are written but never
-read to drive any behaviour, smblite_init_hw_specific() is a redundant
-wrapper around smblite_detect_ldo_mode(), and linux/regulator/consumer.h
-is included without any regulator consumer calls.
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261126-smblite-ch=
-arger-for-pm4125-v2-0-20656509518b@oss.qualcomm.com?part=3D2
+-- 
+Lee Jones
