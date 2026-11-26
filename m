@@ -1,60 +1,58 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795696181;
-	b=nmPnuKO7qAs3IgHahplL9Okong1d9bfJASm8Fw8Y2dUtT4Q9xXUyseEGgLP4AawF/p55
-	 9lMWcj41xcZ6JIXL/7y8f0+qd8NITk3aMGC4WqhSWKEwWJcHLU+PaIGCkWxYs0gAvzKtE
-	 3v+5/TjN+RJpHCzZVKvVEpseabrMRBWc6nbFMQ9s9L5pqQ+qHUXiQf4hxup7wASHxf/SB
-	 Yi0aKTTxnL20TnnMA+A02VFeBSCYAZ4JuSV9UEYaDt63mdXuFH6z2qzuZrU9F3/w/618M
-	 GwHWWu+RqdJnt9GgpoC6ZAotOCqY4MF/gGuDIrrrdLwHZ1I1i9Hf6kffjYvRAzMSDHA==
+	t=1795696280;
+	b=sELRVfVXV9Zo6B2ASxHUrj8MKjLzGNdsGGS8ficfxfgTk6rqzXFkDkD39oStsJfZShtY
+	 CdimVXaNr+q2oLJEAeQSEOBfdwf72a9rurHDnXvJ4QAUdZnZuLVWrBua7O6dQ7hKgbwKU
+	 DGIN6HtgF6R0ljEAjDpA8ZZWwD7LX3STcE1wjkj+IiBcglCTnagJIaxF/oGRKF3mVyYXq
+	 7X5MVwhLekTO4DeJU7igriu9Q6YhTtCSAeXeQ5jl/hEWuqWp/lRGEv4VXHliXf0aKor1w
+	 8/O7yxpXVS09Bt3qbvw6AqE1/wVhk95/JOpmWSOWS9AU8vkaORO+daR1DS9MNhIkTsA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795696181;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=So4eG3NZg6gqKTehNkqA2oEDhNGd2SAeUdpsG9ueM0c=;
-	b=1weAGJmO7FQBDMSNFmM1iPyw7m44vqJL1O0X0EnQcmF8ptaeBdUjswwWMcP14ekvelQ6
-	 DCEGo6fTzykre/VPOW+razCYAGXp4yG6r0rffdX9M9oysNUwr0oGT+oYqtc4nIqUUgsSY
-	 C3fVClhUGvaXqm70slg7w2xm27KJ5zbHfDh2+qp2ZBU8UShh0WxqSwUR7b1Ky98bmQpqo
-	 LTGF/iCGkTqVDI3EhRudWIrWMp/HKjkf6kN3vEEQKdgj9DLFFGHjRtNzzq8S+yBeVvvz4
-	 VYnXjf8rYXeg9vRk87kQyq3M9cXlygGR2z3aFFOZdYXYDH9Ax50EE0HyfO53MnNgJig==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795696280;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer;
+	bh=yJb+KOZ/zmj8Fns3CIInNWprV2HZ5qGNxwyn1s60ypk=;
+	b=kXHypryhBApI7Z9Yxe0ZVKE5vWiJiTNoKswSyXG4Bv6idoG4Yr6RjAaYJyipJTQ/zT4Q
+	 JAqvorOw2FOdUwcQ8+qiIk2nHuq/YiypmJ8atavd7FhifcG6ZzvuDELbJy0CKIPVuVBpL
+	 M3Czk+DwKwEuy9aWr9UgXsWcnZ7CwONsRE5/rpSST5PrnUCK3oVS+p6d9mTtWBDa/+7rT
+	 Od2w46vX90jv7HDd61QTQNYKYYmAkZgQATctKNwoG+Xs54jMW0R0jIZA4PuUgwGWyWum4
+	 XgyEtK0Ji18/D+U6a01Ux5xZ3yfBzPbdFoBriDvtOfyVcoCjCKi+ktkpDnfGYKJNh0g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bkhjxWOq;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iD84DYiZ;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25CF7606A31C;
-	Thu, 26 Nov 2026 12:29:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6762C606A31E;
+	Thu, 26 Nov 2026 12:31:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bkhjxWOq
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CE7D11F000C4;
-	Thu, 26 Nov 2026 12:29:38 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iD84DYiZ
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8A1841F000D1;
+	Thu, 26 Nov 2026 12:31:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795696181;
-	bh=So4eG3NZg6gqKTehNkqA2oEDhNGd2SAeUdpsG9ueM0c=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=bkhjxWOqMsluBMbefoWAyoT+tMJ32G5jKbr1SBPs/eM2PskeLpin53gzYLZ+u3VMh
-	 FzAYqaHjLX+yoem1frirRpCEAe7jiFfOr5p3HORajpCe1OM8gsc/yZSPutA3zkFXGI
-	 ARdZtJibgnjT+qhCCLskln+mkZHPiMHw2frl6zp2pSpezewK2NR4wy3PBjYyi0E5KJ
-	 oMGUYginU6x62HNuCDPtZHxTcezcEFYoJ2oRTukwoiChcnGbnYlLI/PuQi9aVhaFhv
-	 rJLnWxxggU04m68xIX5ZhZ7+EM/jtuQuWLBazHCHrdRcIPN/hA7roOHtkCy2hRvr7R
-	 Qx+hBbcd11X9w==
-Date: Thu, 26 Nov 2026 12:29:36 +0000
+	s=k20260515; t=1795696279;
+	bh=yJb+KOZ/zmj8Fns3CIInNWprV2HZ5qGNxwyn1s60ypk=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=iD84DYiZPJ0ePeZorujH99dMO8XU5aGcfZj+7CQ/CgjHi1eEJw6XPSU+Xwa532voB
+	 ryhhmAajnU0grcT43/DCyzVCCPo0kpGlFtJm6RngdUK7rhecTWGx6nuz1XKY618uSN
+	 KxTeVY6OgyZL2zQDQnkAo0ZoEvvqu/OHIijrjaOpIaYB+lN4p4UL+lrSMaC2WUIJVh
+	 BKj1nG5qsSSwIybyL9lkb3Ra1NTo2ANyCCvV55kNI8VEDrao98CxL8c+47IvaSIVQd
+	 c45pQ1H14G2ZnCJzwtywVgYwqfcIs4gLmNIWjyXE+4HQqcaRd7aVE1xNpVDVK/ZjRx
+	 4F3kQQNvLP/og==
 From: Lee Jones <lee@kernel.org>
-To: Mark Brown <broonie@kernel.org>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>,
-	Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Pavel Machek <pavel@kernel.org>,
-	Griffin Kroah-Hartman <griffin@kroah.com>,
-	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-leds@vger.kernel.org, mfd@lists.linux.dev
-Subject: Re: [PATCH v6 1/3] regulator: dt-bindings: maxim,max8907: Document
- LED support
-Message-ID: <20261126122936.GH38590@joneslee-macbookpro.roam.internal>
-References: <20261115090520.102216-1-clamor95@gmail.com>
- <20261115090520.102216-2-clamor95@gmail.com>
- <0670d537-0f9a-43dd-9d48-90272f04f1e2@sirena.org.uk>
+To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>, 
+ Pavel Machek <pavel@kernel.org>, Griffin Kroah-Hartman <griffin@kroah.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-leds@vger.kernel.org, mfd@lists.linux.dev
+In-Reply-To: <20261115090520.102216-4-clamor95@gmail.com>
+References: <20261115090520.102216-4-clamor95@gmail.com>
+Subject: Re: (subset) [PATCH v6 3/3] mfd: max8907: Add LED cell
+Message-Id: <179569627733.65215.7739958510211892846.b4-ty@b4>
+Date: Thu, 26 Nov 2026 12:31:17 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -64,18 +62,18 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <0670d537-0f9a-43dd-9d48-90272f04f1e2@sirena.org.uk>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.16-dev-ad80c
 
-On Sun, 15 Nov 2026, Mark Brown wrote:
+On Sun, 15 Nov 2026 11:05:20 +0200, Svyatoslav Ryhel wrote:
+> Add the LED cell name to the list of MAX8907 cells.
 
-> On Sun, Nov 15, 2026 at 11:05:18AM +0200, Svyatoslav Ryhel wrote:
-> > The Maxim MAX8907 PMIC supports a single LED; document it.
-> 
-> Acked-by: Mark Brown <broonie@kernel.org>
+Applied, thanks!
 
-You should just apply this, I think.
+[3/3] mfd: max8907: Add LED cell
+      commit: dc71f64fc283661d77d6a9a4bf38af94b4daeb5a
 
--- 
-Lee Jones
+--
+Lee Jones [李琼斯]
+
