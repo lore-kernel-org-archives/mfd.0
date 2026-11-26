@@ -1,101 +1,123 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.82.178
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795695590;
-	b=S1MFtIc6eBJkvxInLcZK0yQSa5gIXlQMLC122UuHJb1jRukv5ppalypXf+qoB+D2A4nJ
-	 /gOWLOn0GtZM7roHL2weTjBFcmtbYDFh+OrjEYDVO5kFMfj84bAV09Z8iX71A73HkEaU5
-	 LhWpocVQmbV3F25FLJmSf54m+m6oStK0Sb+MbqLZ0EeuFA/USr5valHthQJw06/3bAyzd
-	 4qc6zU2J235WoLVeYxPaA2fg8Ra1IpwY3JPOIx71JK+66uXP5d14iCEpegN4dqK9BWPhW
-	 1UjGvTO/tlG+Kp8g4DHEUQyr+TbXlIG7TpqeUdkIE4IlMQDvHC2A2mkzGuPR5tRvukQ==
+	t=1795695993;
+	b=2lNDX1DjDXuHP89qajGCak6bro1CAUIVLP9/8RojyTPHTcczDkovKEdZPM4M1PGyEjwn
+	 hcQsAGZIWPixV6hPeSl+V9C7ZH7cy69JoBg20FjcHlKg2F5JA4m2GCH0zW580zxpJTn6C
+	 mqRLU5XByUHXS69lcIwxFlBedDSLEda2MrXmBrRAS+2IihFXtx+NVZYgPa+wAN5B1rTNW
+	 /YXQ+0t8ZV1H+HP/NHKlROi0mkeksIXSS/oZlcN0+aP2G9UMeMPFS76LtvRynQ107Y78u
+	 zFbTTyZzAc1uoyBUuKpS/ssVl5l8dYouUJtEE0WY4EhQX6I/L9g5EshZZyzJqCJ2d0w==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795695590;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
-	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
-	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=ZYEewzeGbNDfeOmY59g+Qph2DiYQKE8Yfta5ll+tJaY=;
-	b=DjBZiddgrUlI0MlJUbEvKoju1pw3m/ju9WO/m26fj6XW8b/CT+TVVz1a9dStHhwvE+v8
-	 LAbwI7cBI9YP2P7O+B0JG4vJr+QJNvcBlG8aStGJHvsuJyQ3BfOqaSf04iQUzhl8n3AuV
-	 WnF6A3dE21+fpORToHWAIe4DOvSk6JuxEj3N9ReP6g83NAvJYD5uyE1Ms1yBz0s+F7OVn
-	 1pqOpyrqw4XFnbrRvYuahXZmYGCPjhuVWQwookp9GQvyp/enTsRZpSyAbGxLCOVyUfLUg
-	 OPDyDB0a6Q8gxiJCDitWzd7+c5W+shvgMqd9MRJQDaa1P1cuXoEUbuyy12I5iy8N6jA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795695993;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
+	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
+	 Cc:Content-Type:Content-Transfer-Encoding:X-Authority-Analysis:
+	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=FDf27xnjIY0MGgU9QPmFgOgG3Aq3X7unXOSGnQEZ3Zw=;
+	b=fl7x4M9A9DoXle+UoN9pyH/3HYi74wNBQN0mI8FYgpmzbawninYXhfWEXAHEj6Tv8Icv
+	 iSpSMCBq2aWLax5x9S4ygn0CZFQSam3WxP8duyx6KXrndWTwB8NSPcFvGELU8iqnPui4Y
+	 GQT4RCqHQvuPo0CFupBWVglzWixJ6CaSMMoaBIYfTKqbsa21TztXI3z+zIfsMLrKV3iCc
+	 w6Dfs7AsW6uZGCUAmY4ogEZ7hbT3LFeVroKmEDDkxm0GJqkFHs/odYfypNckuuVrLyRee
+	 I8KWttuoHFZb/CWd7s314WexizL8TAUT4sBU8oxtdgThvmOrjeLWcqm/MY39yP3wWaA==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=MvdGY52t;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=74.125.82.178
-Received: from mail-dy1-f178.google.com (mail-dy1-f178.google.com [74.125.82.178])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=V5kd7NJz;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XA4dRLWV;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06394606A31C
-	for <mfd@lists.linux.dev>; Thu, 26 Nov 2026 12:19:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 06394606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C321606A323
+	for <mfd@lists.linux.dev>; Thu, 26 Nov 2026 12:26:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5C321606A323
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=MvdGY52t
-Received: by mail-dy1-f178.google.com with SMTP id 5a478bee46e88-38190551625so13508138eec.1
-        for <mfd@lists.linux.dev>; Thu, 26 Nov 2026 04:19:49 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1795695589; cv=none;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=V5kd7NJz;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XA4dRLWV
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQBVMqH3177348
+	for <mfd@lists.linux.dev>; Thu, 26 Nov 2026 12:26:32 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	FDf27xnjIY0MGgU9QPmFgOgG3Aq3X7unXOSGnQEZ3Zw=; b=V5kd7NJzOdG1BKDx
+	I5/IfSAIdzSsX2fnwQfRC8Ib6pN0PhViZABr3i8j+TcXy2/+4RuObh7mTfOUhyBG
+	lpUcGwqLuHO6d1ShDhOgyP3m1JOqUkcsIyKwckbHs5JsWkzmwIaoAuS5fukPfORQ
+	w1QHpcgzG2F9OJzhtLyY0Fo6IYUyGolDMPM9ratJxnB/4aiLTx+vieyBzrm+iZl+
+	Um8lBMbrSAUrJcXlqBT8dFm7EvfP13qLnlz5lJsmEFHC5xK25A53GmprtuxoziDA
+	Ayopt8q9+tqRTSMPhN08ghhqxJ4nbGuYPxHLR1WxPoIA+gzzdxAq4iBhkiTgGX9r
+	qJ1DPQ==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j662sb3rb-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <mfd@lists.linux.dev>; Thu, 26 Nov 2026 12:26:32 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-3b4162e1605so6465227a91.0
+        for <mfd@lists.linux.dev>; Thu, 26 Nov 2026 04:26:32 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1795695992; cv=none;
         d=google.com; s=arc-20260327;
-        b=KlodOMP6zW08JQWjXcZ0C0Cb3BivV09rVj2XCnSzqVtLwnVpGBguoQIoAP2LhogtDa
-         MXgQGNrgjOo9RNd0BFqwxdtJ/AuU1Fg4tYzxIErm3GiX+WJ9cx0vpx9UX0QyLLcu1WD/
-         T4BYha3o9tNLQVUrDpbek24ddLhpw6ykOO7ssGOkNaVpQr+pFjs+MHegvj332EY4JmlB
-         yA/+Jqm9KbWLouuQxGZCZnRBmRpiETupt4Q1Vosd89JlovhJszKs+DxHU5Dwwn0cR84K
-         ELY1aOokQEteFam9O/4UIhin3yfRlIj+oXVaiTU683VBdKIqrQRoxtCPKHWFRO2K950F
-         vobA==
+        b=Y7st1sIbjp7fXp+49b4SnP+k1ZW65nXD0Z9UoyFULBwGB3cMqFGNzGjjajHY9dS838
+         gmXY1b4BlIUZi8YhZ4ShOiiQnC1OJtfmcwWg5QhY06BD8iWnq+OWfTwS4DUf3b1B7I1Y
+         +rADaJ9VUVfLLicQQWxB+4mMjXJ8qHF6fQrqxXKGV9TQI72QU6OhNvpXEG41PX41kEi9
+         /wRjkLruBou90v/1AAon2UWZtJSkdd5/qrI4L7lSTuAZZ3YlnaBo/VSL+bXj344MCrHh
+         pPc7HSsvCQpv+/2AFyOFjLr/6Jwa6q3YG46w7hc/tSKLOoK8xBjpFlqUZwjeGZDsDqPx
+         FWWA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=ZYEewzeGbNDfeOmY59g+Qph2DiYQKE8Yfta5ll+tJaY=;
-        fh=EI/YwgxVESgAKhxw6dR45ijjWaoe37GHcS+1/5cZKxE=;
-        b=PBFdQLllgkTtsrfEU2IZ3BPrU+1EpAZ3uqNhoPnJIeHgmawGKuabLy5ENCLBXN92zO
-         zsRIxCV2zzgL/oL4mRzMkIvI/fBru3NFHb83mJUcVscqMHUKZeYgc7BCf8J9ASnqJ1Gm
-         Z04j2C6wBMa6BTPgb2UI/9hfnPQrRsy2T/g0NHwnPMWNIxi5NcJyl87ljVykSg/UuqWQ
-         SlxERwfZDutil3ZAzlH9uXWaDswiE/f8d51fABUQiXEnMVxBpQmfx0P4bxYZ6JZ4OsKk
-         LkgTZ0A5V+MbIkDdK+suTSfZS7Q5yL/1thdB2u+ocqk34EO/A2BuWW14pU/GZfublTrX
-         6t1g==;
+        bh=FDf27xnjIY0MGgU9QPmFgOgG3Aq3X7unXOSGnQEZ3Zw=;
+        fh=QvWEh/KBDe0JMtmx41m/QSUfTPve5DHaYzqakt9fp38=;
+        b=Ba8TQibxjSXSIMWlwu0ahcXcYuycnZPxtdC1uT3NLGTyheYaMlzdQngHTWfPvx+7Vb
+         pNrhpUfk2y6U91vcQfys6XK1ul6mJqiGYy5koIzvkQS4qj3r+ltaBdYXd4OAcA5t1pxN
+         nKZvQktOd0eEBtZjElzkPwm7nTxESfHXXAwSFuk8+UxMFQhXrF3ks82207rE9buT2q4j
+         FypGvKJ0DUyUqJhzrdoIg5oWsqMnfumxCxaRUqt0CxpJ1TmHI99uAvtUCNPwU1M58lV9
+         RqUiXCluROLJbujdOVvV7ezsLXyhPOplUfkKnQB9OFM8EnCZjvwwVqL2GB7uDuZTGC1Y
+         q8ZQ==;
         darn=lists.linux.dev
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795695589; x=1796300389; darn=lists.linux.dev;
+        d=oss.qualcomm.com; s=google; t=1795695992; x=1796300792; darn=lists.linux.dev;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=ZYEewzeGbNDfeOmY59g+Qph2DiYQKE8Yfta5ll+tJaY=;
-        b=MvdGY52tVsCFfGAYI0BKz3JnUEXFC/9dBQnSfMVtPPBg1FVJf+cVpSbOw83KBMX8SW
-         GGt6TOBIZKyHMVnyqg1cEGbPJV/sn0S/87PSGaeFsOckXCJeruGWNrgo6YifbtE4kCza
-         dTrpc/XxI1YlN5oEWpb+YVfLf63QKGP7KvoClWG+5ON+qEMM6qXd7ElDc5IKCnfCxdfq
-         mjCVS7bAKR7034WdfYEnNFVcbbVwdL+PDLjvtYVmMVNyUXRBfHksN+0LhdmuNRro6lf5
-         hsRYh5ymncWO4OUsMC0hbcR8lL/e6e6PlsTVuPLaTDk1ho3bTXHBMxDAb8d/p33jyvEf
-         KQ1g==
+        bh=FDf27xnjIY0MGgU9QPmFgOgG3Aq3X7unXOSGnQEZ3Zw=;
+        b=XA4dRLWVjdmGrqYE0ieaC5j3aDgB60ZyIwvdKczmlzLdE1Q6UWSnOw2hrKYJ+O8/Dl
+         HnRARV/HcoodRatEiNb1f6/qy7ZUd06yWYcVFlBbJQfIUmubbrfeVhB7kfx43JS+mhOq
+         hsC/thxvdZvAzgcVDLCkREcnqLwFQAmbb2ne1AN04qe8lkxj2kuH+En3mSD3D8+lp88n
+         EOYGVPgGq0+3ksVT2H+oCzlnNFJKgwDQWNLIHkVJBSZY4DJW6yVqg4kRiEGEO0ybps8x
+         WqQ5rpmiOCAEUokNx+S1knhOost73SefyOgctyf7lQdXD0TtQ+qnEyuWszJYEAlVgKGu
+         E09g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795695589; x=1796300389;
+        d=1e100.net; s=20260707; t=1795695992; x=1796300792;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ZYEewzeGbNDfeOmY59g+Qph2DiYQKE8Yfta5ll+tJaY=;
-        b=p7fOPqvsZ0mHEISvDJtxumtksfmZCpUttSSaRSnc9qqRzaXZ+uMsZzIC7mmN+YigyY
-         YG0Gbuq2Dd6X0+qCkatrz2hvdW2logrB+ojQk05Q2cePhMLEL+KuLHCqZXjI3dRvWCat
-         1k9bV4lPwGgvYJ0Mh4EKTn+Gs9B58qSWoGXSLQdkVy8F76izvCElqZ3d/oShgDt5G/zH
-         iUD+gMed7/zWCjZ8mK3KXakETWQ5Y++Wgn62I5FQKn9JinCoOHHKJ7JxyTrYeENS0Wpt
-         V/MjETN2gDAhYja0cOPr4JIRkACOnLZmZsdVCUK/cMrFpvmWV6+LThG5J0wxI+53f88x
-         2QMQ==
-X-Forwarded-Encrypted: i=1; AL+hErF+OhQMyhR9H76CuTefjKNNGbAiQYFZsIJu8TAI+31ZXI+3ROekaMc5Ki0j8xpYOdu1jq8=@lists.linux.dev
-X-Gm-Message-State: APuU4Z+XTZ5c/UFXh+7Lt4JbN/W4+YYITBZot1SAjDD/I8z29YnSEivz
-	UTL/tppNZY4F54Rzs8BM9E6CS4iFUAU+sAdYGYMI35V0bDOQDu8ax6M+Fxxxu5pSa4z1Vvq7Lkf
-	p3o6pnzIplI/NZ4lUFtuBuhWjk+YESP0=
-X-Gm-Gg: AZFdTZe7NLD738yU1WvJM7MnNl72kqikrgMCdYdRawEQG2CLtebcEyVZZGWG8HepM7p
-	WX4wXsHFYFBAVXJOLzVFk/1PeVKAJg0WstVe3VYrodG/K/rOD1d8tSmb8A4jy7TklPF7UoVjA8r
-	Pay2IHBRuQKPzQQf+F3cmLnHmKmXaWsLk6nFb9SDRu0UKjQ9FADKUU1Wl1Cirs2SSDP7STjb1JK
-	LYSlsu7vUG2P7faw8iVKLJpynsJ282oCddR+qPYpQICjQyH77MiRdOrXi3pLsdESeITGoGogtHt
-	ywcSG6rHUKF2VtB3ldIK2XyUranVyb7HKkrEmInNpnw6XmDmopsd/mHiSGJ1IQhjzBPnpj7RPVT
-	A7VxINPFqeyM8gxGXoYiM/L701my6Me8XYIzyD0czA0ob7R3AuaYEjpl2rX4TO4BbeV4h53yNAr
-	n7T2ajZCDaW0B2yx98Qa+26Jgy+/fupw==
-X-Received: by 2002:a05:693c:895b:10b0:385:cf42:9b98 with SMTP id
- 5a478bee46e88-385cf429dcfmr20910606eec.34.1795695589053; Thu, 26 Nov 2026
- 04:19:49 -0800 (PST)
+        bh=FDf27xnjIY0MGgU9QPmFgOgG3Aq3X7unXOSGnQEZ3Zw=;
+        b=Lt4NOZQ4/I8tBuk111KAALmxflj4Dx8LE3YIpINPwBzWEFzlm2SxiDLekhph9rzDSJ
+         OqCYR/Ds006kwawQOY3RkfyKAcof114qLFREDpedtVsMM/3/qR5QT89wbuYDoVWMA9Is
+         LYLCoviYnqfg/ifloyEVsXBxcbbpyp5AhKdcrNpxj0KBeJxFb6KIij44Z8yI9N6ix5um
+         8TMPHCQhnsJF1ONeTfVryCbTxYU0uQrB+0nACxryGHjKpa79JozDaUXprXmSfjU70Dbu
+         y43I512guW/9gMXxwIznx8jc1l3rW6euj5/cV7j4sYHJpPa8bGewhzKVC5SyjCCO50AQ
+         i15g==
+X-Forwarded-Encrypted: i=1; AL+hErGbWuTuT+AV/nMh+vaC3ZmaOWn5/pbWDXeE20aJbMcu41Dw214msEzC/Z6FyKzv8ZmDwW8=@lists.linux.dev
+X-Gm-Message-State: APuU4Z87iOFZs8plo1F1mIsFngmF4lrY8q/8m7ZzZ5C2yW+9zYQ96Klv
+	G54v5z2ZZVH4J/Cl43YaaU4eBsNePDb5H4w8DNpCinjm09pih/vnkApRDTS7fu5R3EIvUql/+lR
+	F7ALkq53GiBUisXZHuxF9gAoX6Ltp79vuahj8eE66B+10WjoTMGA/tuShII/CVOsNHAyc0uMhYs
+	tAPx8c4172jJWHlD/9t9FugNH5mdgpgw==
+X-Gm-Gg: AZFdTZfJslkqvjx0iXvIPFfeCPam13kYeKH5XXYqjzk5a27HslBUkvPGPleXQvlZOW8
+	4+OqViHHAF6BtkKh0YTG4e+Vw3bv99RVmqGkwsqIIbi+yfxL9p7AS5mlDaw7TeP2iXM3dTx1Nb0
+	KU/+vGkMkdigaVMfnI8csUtazGujQNGdMyWZhaf+uvgdlUQZILrQhqsUr95g==
+X-Received: by 2002:a17:90b:2d8a:b0:3a4:6f38:f2a2 with SMTP id 98e67ed59e1d1-3b41c92ce58mr20258217a91.25.1795695991783;
+        Thu, 26 Nov 2026 04:26:31 -0800 (PST)
+X-Received: by 2002:a17:90b:2d8a:b0:3a4:6f38:f2a2 with SMTP id
+ 98e67ed59e1d1-3b41c92ce58mr20258182a91.25.1795695991298; Thu, 26 Nov 2026
+ 04:26:31 -0800 (PST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -105,50 +127,199 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-References: <20261115085826.89641-1-clamor95@gmail.com> <20261115085826.89641-5-clamor95@gmail.com>
- <20261126114728.GG38590@joneslee-macbookpro.roam.internal>
-In-Reply-To: <20261126114728.GG38590@joneslee-macbookpro.roam.internal>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Thu, 26 Nov 2026 14:19:37 +0200
-X-Gm-Features: Aa3M54o45-8oLpV7u0fds3mVX__iIW7iqATGNdrlwb2jFlsQvtadJWGIKMAZpQU
-Message-ID: <CAPVz0n138PXP88++q4QXiao-7=nzade=e_jAdfKK0_xsEyPtFg@mail.gmail.com>
-Subject: Re: [PATCH v7 4/4] mfd: aat2870: Add support for VIN and IN-LDO power supplies
-To: Lee Jones <lee@kernel.org>
-Cc: Pavel Machek <pavel@kernel.org>, Griffin Kroah-Hartman <griffin@kroah.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Daniel Thompson <danielt@kernel.org>, Jingoo Han <jingoohan1@gmail.com>, linux-leds@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, mfd@lists.linux.dev, 
-	dri-devel@lists.freedesktop.org
+References: <20261120-zx29usb-v1-0-b0433258e51b@gmail.com> <20261120-zx29usb-v1-3-b0433258e51b@gmail.com>
+In-Reply-To: <20261120-zx29usb-v1-3-b0433258e51b@gmail.com>
+From: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 13:26:20 +0100
+X-Gm-Features: Aa3M54oSOwHoQYSn0V3AtuTR48SOSoC8DE5fzBMGlfQpwJvg-qreLFgHRZWsWfc
+Message-ID: <CAPx+jO_zuvcNnBWqUKJHJ246xEDb=FbN6FYKcrN+p6ERmjg2tQ@mail.gmail.com>
+Subject: Re: [PATCH 3/6] pmdomain: zte: Add a zx297520v3 power domain driver
+To: =?UTF-8?Q?Stefan_D=C3=B6singer?= <stefandoesinger@gmail.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Philipp Zabel <p.zabel@pengutronix.de>, Lee Jones <lee@kernel.org>,
+        Ulf Hansson <ulfh@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Agustin Santiago Isasmendi <isasmendi.agus@gmail.com>,
+        Navid Ghahremani <ghahramani.navid@gmail.com>,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, mfd@lists.linux.dev,
+        linux-pm@vger.kernel.org, linux-phy@lists.infradead.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Authority-Analysis: v=2.4 cv=B54sQ+tM c=1 sm=1 tr=0 ts=6b082578 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=yOCtJkima9RkubShWh1s:22 a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8
+ a=kvRnqJp7QHj-O9gkUQ0A:9 a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-GUID: em-gVXgFGLmbtZdfvXd3Tagw2sbHVd4F
+X-Proofpoint-ORIG-GUID: em-gVXgFGLmbtZdfvXd3Tagw2sbHVd4F
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA0OCBTYWx0ZWRfXwraFE6s+DxfG
+ RFJSLk1Mdx6QGc+2ofawvnsEarkQ0RU7HaFC4ibeGE43FNn+PTYwlXJ+rojEGGYxwxijijvCfaf
+ DWShuBEsdZdYow3nS/T4KbOrqA2pBJUslcvuzOJ3JrRTD7ZStjz4Qj2t7+dYd2Bgeo+/kpwWisn
+ K2haR4eaQAR1W3wUlbg4WN8cNnslN7VAwrfyKQ7oAbwefTqfOEVrV+rrzGX8Daf70b5qvPzsgqf
+ jcqPBxoUsT9ocApBftK5pc74uy8GlfBxhtXtgpHJAtE13saBzUXrVZHUDJ1NWDlLbEUDmqvqPqH
+ QEPoyGYWhPly6Q18PFtRD3RaNwrWJCvhzZHUaXL52KvPwGOd3v8IhjRjA1GU7rLsQjEE91ngzeC
+ 5e1xXPMQ72YX3yNNX/fdySwEWaT318mMKpWMv/mxXMHGWCrCLslTtpBI8hPd64jPIB41qNBOvtJ
+ n3Cw26YGUy/IijTyHCA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA0OCBTYWx0ZWRfX/Yuin6+JBTlS
+ SXnGVk0s88FegyXH4h7z0oEM+CxxeOLEDN7YLaJ7QqgHfHdPXIUZGoAqmC7c3W+9F5CY2nsZAPy
+ pq296obBuB/aeydUkQSqwReq0G23d7c=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-26_03,2026-11-26_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ phishscore=0 clxscore=1011 malwarescore=0 adultscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260048
 
-=D1=87=D1=82, 26 =D0=BB=D0=B8=D1=81=D1=82. 2026=E2=80=AF=D1=80. =D0=BE 13:4=
-7 Lee Jones <lee@kernel.org> =D0=BF=D0=B8=D1=88=D0=B5:
+On Fri, Nov 20, 2026 at 8:21=E2=80=AFPM Stefan D=C3=B6singer
+<stefandoesinger@gmail.com> wrote:
 >
-> On Sun, 15 Nov 2026, Svyatoslav Ryhel wrote:
+> This controller has bits for USB, HSIC, EDCP (a cryptographic engine)
+> and GSM. Not all of them work the way one might expect (see comments in
+> the code), but they are there and can be set.
 >
-> > The AAT2870 supports a dedicated main power supply input alongside pare=
-nt
-> > power supply for its internal regulators.
-> >
-> > Add support for retrieving and managing these supply regulators
-> > (vin-supply and in-ldo-supply) using the regulator framework to ensure
-> > proper power supply dependencies and power-up sequencing.
-> >
-> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > ---
-> >  drivers/mfd/aat2870-core.c            | 5 +++++
-> >  drivers/regulator/aat2870-regulator.c | 1 +
+> Signed-off-by: Stefan D=C3=B6singer <stefandoesinger@gmail.com>
 >
-> Is this a build dep?
+> ---
 >
+> For now this driver can only enable and disable the USB controller. I
+> expect more LTE related power switches will be added later, but I don't
+> want to commit to how I expose GSM and EDCP in the bindings just yet.
+> ---
+>  MAINTAINERS                                 |   1 +
+>  drivers/pmdomain/Kconfig                    |   1 +
+>  drivers/pmdomain/Makefile                   |   1 +
+>  drivers/pmdomain/zte/Kconfig                |  15 ++
+>  drivers/pmdomain/zte/Makefile               |   2 +
+>  drivers/pmdomain/zte/zx297520v3-pm-domain.c | 286 ++++++++++++++++++++++=
+++++++
+>  6 files changed, 306 insertions(+)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index ab8797b8d0a5..e394e0044f1f 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -4038,6 +4038,7 @@ F:        arch/arm/boot/dts/zte/
+>  F:     arch/arm/mach-zte/
+>  F:     drivers/clk/zte/
+>  F:     drivers/mfd/zte-zx297520v3-crm.c
+> +F:     drivers/pmdomain/zte/
+>  F:     include/dt-bindings/clock/zte,zx297520v3-clk.h
+>  F:     include/dt-bindings/phy/zte,zx297520v3-topcrm.h
+>  F:     include/dt-bindings/reset/zte,zx297520v3-reset.h
+> diff --git a/drivers/pmdomain/Kconfig b/drivers/pmdomain/Kconfig
+> index 5341dff669be..d5050c22f064 100644
+> --- a/drivers/pmdomain/Kconfig
+> +++ b/drivers/pmdomain/Kconfig
+> @@ -21,5 +21,6 @@ source "drivers/pmdomain/tegra/Kconfig"
+>  source "drivers/pmdomain/thead/Kconfig"
+>  source "drivers/pmdomain/ti/Kconfig"
+>  source "drivers/pmdomain/xilinx/Kconfig"
+> +source "drivers/pmdomain/zte/Kconfig"
+>
+>  endmenu
+> diff --git a/drivers/pmdomain/Makefile b/drivers/pmdomain/Makefile
+> index d7aee13ae571..cc3cc7b3d1c2 100644
+> --- a/drivers/pmdomain/Makefile
+> +++ b/drivers/pmdomain/Makefile
+> @@ -19,4 +19,5 @@ obj-y                                 +=3D tegra/
+>  obj-y                                  +=3D thead/
+>  obj-y                                  +=3D ti/
+>  obj-y                                  +=3D xilinx/
+> +obj-y                                  +=3D zte/
+>  obj-y                                  +=3D core.o governor.o
+> diff --git a/drivers/pmdomain/zte/Kconfig b/drivers/pmdomain/zte/Kconfig
+> new file mode 100644
+> index 000000000000..cc329d085e5a
+> --- /dev/null
+> +++ b/drivers/pmdomain/zte/Kconfig
+> @@ -0,0 +1,15 @@
+> +# SPDX-License-Identifier: GPL-2.0-only
+> +
+> +config ZTE_ZX297520V3_PM_DOMAIN
+> +       tristate "ZTE zx297520v3 pm domain"
+> +       depends on HAS_IOMEM
+> +       depends on PM
+> +       depends on MFD_ZTE_ZX297520V3_CRM || COMPILE_TEST
+> +       default SOC_ZX297520V3
+> +       select PM_GENERIC_DOMAINS
+> +       select MFD_SYSCON
+> +       help
+> +         Say y to enable the power domain driver for ZTE zx297520v3 boar=
+ds.
+> +         This driver is necessary to enable the USB hardware found on th=
+is
+> +         board. Say y or m if you are building a kernel for a zx297520v3=
+ based
+> +         device and plan to use its USB capabilities.
+> diff --git a/drivers/pmdomain/zte/Makefile b/drivers/pmdomain/zte/Makefil=
+e
+> new file mode 100644
+> index 000000000000..8a4185f48ff3
+> --- /dev/null
+> +++ b/drivers/pmdomain/zte/Makefile
+> @@ -0,0 +1,2 @@
+> +# SPDX-License-Identifier: GPL-2.0-only
+> +obj-$(CONFIG_ZTE_ZX297520V3_PM_DOMAIN) +=3D zx297520v3-pm-domain.o
+> diff --git a/drivers/pmdomain/zte/zx297520v3-pm-domain.c b/drivers/pmdoma=
+in/zte/zx297520v3-pm-domain.c
+> new file mode 100644
+> index 000000000000..3df4cd5f1b22
+> --- /dev/null
+> +++ b/drivers/pmdomain/zte/zx297520v3-pm-domain.c
+> @@ -0,0 +1,286 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (C) 2026 Stefan D=C3=B6singer
+> + *
+> + * This driver controls power domain registers found on the ZTE zx297520=
+v3 board. The USB and GSM
+> + * controllers are controlled from here.
+> + */
+> +
+> +#include <linux/delay.h>
+> +#include <linux/mfd/syscon.h>
+> +#include <linux/module.h>
+> +#include <linux/of.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/pm_domain.h>
+> +#include <linux/regmap.h>
+> +
 
-More a logical link, I can break it but it still will be part of this patch=
- set.
+[...]
 
-> Would something that was working before, break?
->
+> +
+> +static int zx29_pd_attach_dev(struct generic_pm_domain *domain, struct d=
+evice *dev)
+> +{
+> +       /* The DT link to the consumer targets the (MFD) parent, which do=
+esn't prevent unbinding the
+> +        * this driver or removing the module. Either would leave the con=
+sumer with a dangling
+> +        * reference.
+> +        */
+> +       if (!device_link_add(dev, &domain->dev, DL_FLAG_AUTOREMOVE_CONSUM=
+ER))
+> +               return -ENOMEM;
 
-Other way, it was broken (aat2870 may have a dedicated supply) and now
-it is fixed.
+This doesn't belong in this particular driver, but rather in the genpd
+core. In fact, we have a proposed patch [1] that is being discussed;
+but the bigger question is if we need genpd provider drivers to be
+removable at all.
+
+What is your use case for this?
+
+[...]
+
+Otherwise this looks good to me!
+
+Kind regards
+Uffe
+
+[1]
+https://lore.kernel.org/all/20261112-01-pm-device-link-v1-1-8932e0862378@ke=
+rnel.org/
