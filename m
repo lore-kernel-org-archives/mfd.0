@@ -1,56 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795697997;
-	b=YbSoy86Kg6iyQK9Iw+Mq6qtAWfKHkhsdg7LFrEu0qyaDYsxPXWRZle0lJg4EUe+LRcJG
-	 cB5sIDx79uXOzpe2oHyb1knAKWxVzFl0lYhQ0RleSgXmZWzBBTaHsgTJ5kds9f9iNK77I
-	 epGvj0/Lw/H3bOgMGqmAcz7l3us1KmqD7v837gdaJ45h7IQPhxoXqHRcryf19CBK9eMeb
-	 /GOJwcqUMUSidgPja1bvyvnXQaQAAKoCRIb0VNk042+JSlzWY+BXjMsSyyz8sOUDZlDMt
-	 B2mlNXugHaD5IAzRvk6hqJ+d+tIMy59FmD8yEDmTp4KT9DiwSSe3ewU7BI240llABuQ==
+	t=1795698097;
+	b=FmJb7MAo146LIpgqTCS93ZJAN6ugs1eV1DuqagOkpjfThUIkWpZ56KCy+Hts0kMg8a/1
+	 N/bWZojT0E0ACUhKNKRNo5n4LZq+3E6XPrspI22rqfZMRC5IS91TqXpP2oaFaE4mXXGfP
+	 zgaa2VrRgCUhuJSwsYjCNBgg1iWGL78BW0M4gEyX6C8zEqnKUOwBzbSXEIRLA3OOoHDPH
+	 j2gKEUJ+3RLXl+Ymz1bHjUDnJNuLtSt/op0LMLkrSq6+ISeXg5PviiL5hve43lCyQA2zW
+	 rVlOF8BRSYewnslu5sXz5j53El3r/sy20IXHnSQL14ST0hOAcEJSD9R4bVKYBVKXOnA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795697997;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795698097;
 	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
 	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 X-Mailer;
-	bh=8UAW2bnPQY5CEkCAKoQY6aTjM1SqiXcvoTAgeEUIs6Y=;
-	b=2FJAk/AiEe/WTnwvAGRXHb0f+7YuAO71oMkIpe4hHt5Zi5cEMnYNnOseyNv/T+24UP4U
-	 NtChtqxRXq8enAmb16c9oXS9+9eTWZJYx/9o4csnL1J+g2OUfjcAodSGjE6pSDYjzHhnt
-	 5WpO1kVKZhNt04ZSACZg6wPivYyjrUeMF46bpUsX6wGEugddCIHa1nmAhy5WlJUYIzbeB
-	 sleBnWu3aWa6pUxfcvvHjuKhhuf1sxjjNms9Hhwb3uFquJxlHRMJpgoju9IBHJb7/0f2u
-	 VirgC1yYMdMrHEpBOqQJD3PJtKipCwADL/b6yuULMP86IQ1mSoLSejS58f9fkc8KcJA==
+	bh=bmT8vzP/apjUMpvBWqPywMdM2CvA0VW1Sq9cgVbAE4U=;
+	b=DPgR+c6V37Pt84yBMA26eXMDn948/+5yRcAmRcXL3Vu/3fBw0z/CI1/9fqstB79aObus
+	 AOyQOyyWsTOXxKyoZxpbx/72QiXiqxbzCZarkBGgQpVPKzq/E9QLW6GZO7H4VDhLnOXSS
+	 9Ec8i/jGau0CyKJ2whMQktPFxtm5h4Bit+oF2XlMhosGep4du5nxRsFIkn1jWt/ZLj3tD
+	 lRZIkCTOeD8iDw43K/u8Ji3j3zNpyqSD1RTyV+BkwmpC5XAyA2PbsYInphjR89OqGWuQC
+	 6R1XfFk5L+lpW78JIH+Lpekay+tlowO6uZdXoY0yz4ovBeQnZ68IezgHDqhVwAmS7jg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XVwsLcF4;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GvQSlj0R;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7203606A321;
-	Thu, 26 Nov 2026 12:59:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 820E4606A32C;
+	Thu, 26 Nov 2026 13:01:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XVwsLcF4
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD6611F000C0;
-	Thu, 26 Nov 2026 12:59:55 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GvQSlj0R
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2FA801F000CA;
+	Thu, 26 Nov 2026 13:01:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795697997;
-	bh=8UAW2bnPQY5CEkCAKoQY6aTjM1SqiXcvoTAgeEUIs6Y=;
+	s=k20260515; t=1795698096;
+	bh=bmT8vzP/apjUMpvBWqPywMdM2CvA0VW1Sq9cgVbAE4U=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=XVwsLcF4pFvZhe0qU8nHWGH0bZDZoYgt9cNp/k6zaYDPeJG1myh0wm+pRyIim1yIR
-	 V8E+kl2dO6NLQz7w2onrx/Dj6e5qi686EBZpy1rVIor5LGJ1Gl7Ns9Cht2efPSmEZZ
-	 dIF2bFy2VUF8rNzfU3Hrovx77D1qGK3EcektNhiDUBfZCgytqsdlr5S8J8D/SPsgDF
-	 CemvpIERdp4jnDSa+nxqU71T/M/oIYrH4fbrlir9uoYwCUawdwX1ImmMrdzWaswU0h
-	 1EK6F1BV4386UR4HdfpdOEO+TH3vOpK0TTTH+AZdZBim2YO179yjrd/HDcNU5jWFU6
-	 bOs7g69PtOWdA==
+	b=GvQSlj0RXbT9VMThJVGbUz80WP944GPGJxQo5irDgytjl09pNQ3GYWQH276C4RhIh
+	 PmqggQioLmNCe07E5lNLj/ZgVrcgcqxnuNveVB0yR+EnhBGbu16+r1N4c6xvAt1+WA
+	 1FZmdjKSP/99PNvoe0d26c/ApXANdMTgvCSnUH1GXKXDH4jsgNwf/7L8I7kzkxZfu3
+	 Of6TiwdBk1k3yVsd6i+2PX2ieth2qGUOlsY5DnOY7R3H1i85MK3wooCZC/43lWBM3k
+	 eDeju2/NzeEuDoMY675OxPWTXmlvqg2AoyCrLr3XBzS3prj/KuJcELdwCfmWMwUeap
+	 WggD5u4TFKmZA==
 From: Lee Jones <lee@kernel.org>
-To: lee@kernel.org, Qunqin Zhao <zhaoqunqin@163.com>
-Cc: chenhuacai@kernel.org, linux-kernel@vger.kernel.org, 
- loongarch@lists.linux.dev, linux-crypto@vger.kernel.org, 
- mfd@lists.linux.dev, Qunqin Zhao <zhaoqunqin@loongson.cn>, 
- Huacai Chen <chenhuacai@kernel.org>
-In-Reply-To: <20261116095307.21990-1-zhaoqunqin@163.com>
-References: <20261116095307.21990-1-zhaoqunqin@163.com>
-Subject: Re: (subset) [PATCH v10] mfd: loongson-se: Add multi-node support
-Message-Id: <179569799566.72332.6714066319506489934.b4-ty@b4>
-Date: Thu, 26 Nov 2026 12:59:55 +0000
+To: lee@kernel.org, vkoul@kernel.org, 
+ Charles Keepax <ckeepax@opensource.cirrus.com>
+Cc: yung-chuan.liao@linux.intel.com, pierre-louis.bossart@linux.dev, 
+ linux-sound@vger.kernel.org, mfd@lists.linux.dev, 
+ linux-kernel@vger.kernel.org, patches@opensource.cirrus.com
+In-Reply-To: <20261116110913.3555209-3-ckeepax@opensource.cirrus.com>
+References: <20261116110913.3555209-3-ckeepax@opensource.cirrus.com>
+Subject: Re: (subset) [PATCH v3 2/2] mfd: cs42l43: Move to core detach
+ helper
+Message-Id: <179569809495.72708.5920909967925778004.b4-ty@b4>
+Date: Thu, 26 Nov 2026 13:01:34 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -64,20 +65,15 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-Mailer: b4 0.16-dev-ad80c
 
-On Mon, 16 Nov 2026 17:53:07 +0800, Qunqin Zhao wrote:
-> On the Loongson platform, each node is equipped with a security engine
-> device. However, due to a hardware flaw, only the device on node 0 can
-> trigger interrupts. Therefore, interrupts from other nodes are forwarded
-> by node 0. We need to check in the interrupt handler of node 0 whether
-> this interrupt is intended for other nodes, this can be accomplished via
-> shared interrupt handling.
-> 
-> [...]
+On Mon, 16 Nov 2026 11:09:13 +0000, Charles Keepax wrote:
+> Now the core has a helper to signal a device will detach from
+> the SoundWire bus, there is no need for the cs42l43 driver code
+> to separately track that. Switch to using the new core helper.
 
 Applied, thanks!
 
-[1/1] mfd: loongson-se: Add multi-node support
-      commit: 5a8fc2b762fdd22698dc10449a960a892e43192e
+[2/2] mfd: cs42l43: Move to core detach helper
+      commit: 54b3632c8ec08735d3f6235d80005aa0b648c7dd
 
 --
 Lee Jones [李琼斯]
