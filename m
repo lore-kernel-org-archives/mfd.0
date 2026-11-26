@@ -1,61 +1,59 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795700982;
-	b=Li3LtM0MfX3fmnV9/KIeN9+d4lKD5B3EaAC2R/JmMoBkKW2laMv2FAbWHcACTxhZ/4lG
-	 LqKTfrbtO2fbXudo2g8FY/jOZmjqSTe8ULYxrB+3uYntV3NuLF3HMEjj/bbO8VRVHLPZt
-	 MIRCq7rCqEzPrZYEda5ZQPhOeH7TMnkjL6oryX3jR5YPiTXmNSIlWIO9PZFpRVDt7t0ri
-	 ryr71EgX36VULkillQULJzEu0Kfe300uj8Uk68bog8WhYwq0PlWzBP/+ytAz2Wp5WLjku
-	 uh/t17hF4a035fN916+bOBxP6qc+xBM6q2dlEaTpqgd+lCapzk2zNcKluP+WC8mrWzg==
+	t=1795702246;
+	b=w5Z8B8dfYNUhZZW8aVqqSdYwNA7LjjDWFhHXk9pb16V0p1r6Ody3yU8nehjPtp4ONBXv
+	 x6gjrmrMRIed1T3Ec2nofdAC78Z5JAM4sWVNkhgDgXRhMtTG+smQQo2f/wrDivMysmkbS
+	 V4Ezb+LkbJpLnZaIjN2w9Pm/B89jGSM0W0Oz02JwOvObD/6mqE3nPH52u+ffj5Sb3v8hM
+	 30OaUbVS9ptE60LzUjzD+FAGAOEEBVp/dRhkSVsRN5UFiPU+kqkOVLax7fcbhdpmV6qzV
+	 ME04p9B7QkfZeWmWW4bqoEABPxZopTm3oi8YUKOR2uoNYk++eKuoJi2zAB8WAeHoTVg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795700982;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795702246;
 	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
 	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 X-Mailer;
-	bh=aXLXQaTVxzvHfzZ5Xw8BhaYQpUv8mWSspk4W8GeUq/Q=;
-	b=m//XYbyckWALi5MJdKruBZdvwQKzqokuiUl2+5o8xVUymzSywAEBboe6Ro9YIYx6b3dp
-	 0//fu6uLqcfLBdoA/QH1RCZ281UpKqX1VmN7BKke9NRg8uHwk7zzHmrckRKVSv+vmvN+h
-	 kh/0g8fDfAEdzB+CN/tD2msj//pS+UMaNOrHF2mPQd59hgyuIKnoyZzS8STM/2GJkI0KI
-	 xgeMFFToZrAkcW8/nITvW4Q7plT/i3ZhK5pdFFe8dk9lARrfkhgkGVR4TkKV7O7SUPkFe
-	 m7lOXclEJyBSxc+w0mmftPR9ldKgoohIUNboK+mg8PSrKrzxU9z2fjPPOHFbCqum00A==
+	bh=53osGf62Yx2AtbGkUSFklmgXAMpmkR0XvQtxDAlzep4=;
+	b=X+4e2+lmDTuJFJHh0oTjl7B5MAQqOwNVlkXdZDbBBsLZ7n2vxuf36YLYibuioMRGTlVg
+	 R6Ve1iafTFSuF2EEvARIPQwWfslX6ApW0pqI38Pjqdw7Qg6L2pzVlBeOspgpV2UbHSlIG
+	 bZDU195ucg4409+ww8fS94S59H2N2NXj+wEXaX2l2KdFN65BjbuDSnwafCmClwj0rvVof
+	 uaedmGOwJs0YKTV7TPMG8gc9b9oOxkyc/HoMmhSWcSaHhMD7iyB220p2eoce1xK3T+ZGI
+	 FA5M7E+J6R0yVnXUnAms8cnmQqT9ydU5sMj2HQy0J4KCyToLTQe6CLY0czZxILNqowA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XJ2YKlIv;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AVdZdzsa;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E3D6606A31C;
-	Thu, 26 Nov 2026 13:49:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A93E9606A31C;
+	Thu, 26 Nov 2026 14:10:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XJ2YKlIv
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 542181F000E6;
-	Thu, 26 Nov 2026 13:49:33 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AVdZdzsa
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 36D331F000F4;
+	Thu, 26 Nov 2026 14:10:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795700981;
-	bh=aXLXQaTVxzvHfzZ5Xw8BhaYQpUv8mWSspk4W8GeUq/Q=;
+	s=k20260515; t=1795702246;
+	bh=53osGf62Yx2AtbGkUSFklmgXAMpmkR0XvQtxDAlzep4=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=XJ2YKlIvFRz4Ehyv0qJvJsMvxnTVXauatKJFQKD9pPsOJd3A3JPqry7THZMpEufoQ
-	 6QdmtRNCTFLOlEDkm4tKKGxQ87H7jMiMjlTwk3IidUJ9u6WAU0t8qWBuIKeVItASr4
-	 C59v+waqbxcuCZoExbO+wF4oOgYQKO9LsPgRNZ5A6zqmN9stC2nrwGnQNsxiL1/trb
-	 OgDC9BKiDRK7IBBcseATmGk4Om6NN11Z3ML3jDovTiv7CWmsSgFy0vWRR/tajbHu08
-	 XPgOofJG8bxqnXcF/xtmS6rninRGv4WqOlkvRnZ3w1WYWqNQnRDZUlwR1rpT+0ia8/
-	 NcP/jgaTHW10w==
+	b=AVdZdzsaFeEvu96jQc0qQww/nJssQLemMk7aj21xQMv1MMosx1Oy0r+DxrRj4b1b4
+	 Xvs+YpQl04YJWyvDMB90yhyHx1KTgw4NSYS4q8vtaNPTmpUJQazoLOvS0eOUPfS/59
+	 1bHI2vmk4vjwunItMdd4wAsu+JRjMTxyqPOnQiRN9Q5fQWstpAqV1HcKIPMcuJIuZP
+	 oIJ6JELUVtmWnGrCj1UDRN/QHvy8Nh2OhGajgzHlfNFZwzqa6+rBc++JiNHcdTnDK8
+	 hbzQxYSO5U7aJnndK+AqiKyy0AduhnQSsHDUUTezfWyjR+GLTspteI9/+Wu5YCz7JF
+	 sr9Vec+f3DpgQ==
 From: Lee Jones <lee@kernel.org>
-To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Drew Fustini <fustini@kernel.org>, 
- Guo Ren <guoren@kernel.org>, Fu Wei <wefu@redhat.com>, 
- Icenowy Zheng <zhengxingda@iscas.ac.cn>
+To: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ "Rob Herring (Arm)" <robh@kernel.org>
 Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org, 
- Icenowy Zheng <uwu@icenowy.me>, 
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
  Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-In-Reply-To: <20261117052456.3747585-1-zhengxingda@iscas.ac.cn>
-References: <20261117052456.3747585-1-zhengxingda@iscas.ac.cn>
-Subject: Re: (subset) [PATCH v2] dt-bindings: mfd: syscon: add T-Head
- TH1520 compatibles
-Message-Id: <179570097389.79319.5412421374255035653.b4-ty@b4>
-Date: Thu, 26 Nov 2026 13:49:33 +0000
+In-Reply-To: <20261117-dtbs-qcom-v2-1-c0697a0bf016@kernel.org>
+References: <20261117-dtbs-qcom-v2-1-c0697a0bf016@kernel.org>
+Subject: Re: (subset) [PATCH v2 1/2] dt-bindings: mfd: syscon: Add MSM8996
+ SAW3 registers
+Message-Id: <179570224397.82366.8009907041644853561.b4-ty@b4>
+Date: Thu, 26 Nov 2026 14:10:43 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -69,16 +67,15 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-Mailer: b4 0.16-dev-ad80c
 
-On Tue, 17 Nov 2026 13:24:56 +0800, Icenowy Zheng wrote:
-> T-Head TH1520 has multiple system controllers for the "subsystems" on
-> the chip.
-> 
-> Add them to the syscon binding.
+On Tue, 17 Nov 2026 11:10:42 -0600, Rob Herring (Arm) wrote:
+> Add a compatible for the MSM8996 SAW3 register bank referenced
+> through qcom,saw-reg properties. The name is based on the label in .dts
+> files.
 
 Applied, thanks!
 
-[1/1] dt-bindings: mfd: syscon: add T-Head TH1520 compatibles
-      commit: 3f3be04cc3401a6d0913e7d4504109f4b3635daf
+[1/2] dt-bindings: mfd: syscon: Add MSM8996 SAW3 registers
+      commit: b081c7a7044412fd7e41e88a520d790b349eae1b
 
 --
 Lee Jones [李琼斯]
