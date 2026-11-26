@@ -1,45 +1,45 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795723125;
-	b=JEbIKx5RTNbt/TpSMcrsN3I1mbOBdGMG3Fi7u3m3S3NbHT/TdK2D57SgJEL8Ti/fWefs
-	 ymJ0UD7R6nwf0d9Bp8MVuNRrbtIqljFUBWqREIHKyrHfegBwcb07VnQo4YoSJ3KAvZ2yK
-	 3VUvbHeJU8Zllw7haDzxfnfUmm+6Sd/tZCFyiE4llKhErEo2lbqL3K0ZctKko5MkIZVud
-	 7O9WgK5MA3Dv6LnITuTfEUG7f4UzRj8Gkqzw+tnyqWn4JCkNAK1fjKbPoPdBin+9DEz/s
-	 PzDuLdSZpc0gNEiJGnwK59uGX9jqL0xUlTRRXGOWmI6JudpVcaXy4wL1WXB2pLiHFMg==
+	t=1795723129;
+	b=sMiv1exlryXGtqWn0Pbg9GxR99lqrV8Dkvd/l9cR5nLC/gh4qxX9kjV9ACHo8MN8+ASP
+	 WtQaRUdn5FRU5sNOzqA94xNTAALGMAE70M62tLowt39GP78XoFfSQ4n6npYirQ0Pt2pqo
+	 q1bGHnHUsI08KACLNR5P07E0bPt0Apw+srqTQIUD40xCWlibT/nnXr9m6Hpnb6k8P9XZc
+	 ni5N1x1lGyUNcmOJ6bAqBs93GXxbs86UKUhWtm3UwbzSTEOylTNcU5ZG73OL5InyP7TF1
+	 ztOxOxTFRcIDmN4JuubuHrXWoS2OuMgUH1O5z9R7+tWBIytU5VN4dJphEGaE2EdePiQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795723125;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795723129;
 	h=Received:DKIM-Signature:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
 	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=i/6gOHnqlueNYB5fu/W27Tex6Z8oas7OOH4bMJKkmDY=;
-	b=gLNhOHrV/rExupvzyc63Bbg8OGelqFBQ6wrj+nYyB2UHtrJCsy3JipfcZINu7dVFVQCj
-	 /xdvLlBcWflE9peJvF3zEwiU1e/QdtkmWZrOEgiyaScOWci/9716HKz5w6MM21Jfnzlpy
-	 U6/E83pMaMEXBxKaj87yyAMvhwqfGNdnG+058nGP66UJcOEGqBrj4yNJrO/aVDxVppwS3
-	 hy2my456HiUktBqvBBi3zKDw8h4M9RVXD/gQq9oMP9GYaSRIPc2v0bGW60TSEc/RAucCW
-	 fS08monINVh7gglAYeJm3zjDcmSyz+T9gwTI+Spw9iLlwzcg7rsqBVELIsfFdBIFgiQ==
+	bh=fHn9LbOFwMcpwbie2YpZCXPK9JITnfo4j7miLCdlUuI=;
+	b=2unZaiqOolx36wY6POdeObD/cJ/pLpst9KEGNP8RAl1EdT3wWMZHyBbX7Sy43M5gYki1
+	 MLR2cBE0FYKEEMl01isYJY9xowTHlfBXZXoLuBUEMt8TNLsnynNxHISB69XXLCFwnzjv1
+	 g6CMHkNikHgjoN8DqR5q6z5Q0emzzh1rfMECS41M2bvqKcLYfpX6+f5gYMJUa6AHh5Rw/
+	 nU6raHiL4KR3Bv2pBGpkLuBWYHwp7IX2T7DmOumJNgCxxvj9svuzIXg33K6FT+yY2KEBK
+	 lKWwsh5MvyHeK2BcLkFf/7Zl8MpbOymn5L7016Lemg7xET6IpKbBakS2xy3leTmavZw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=e08ooBS8;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CByQdzNh;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5608C606A31C;
-	Thu, 26 Nov 2026 19:58:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 572C3606A31E;
+	Thu, 26 Nov 2026 19:58:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=e08ooBS8
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 24FCD1F000C0;
-	Thu, 26 Nov 2026 19:58:40 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CByQdzNh
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 51C4A1F000C4;
+	Thu, 26 Nov 2026 19:58:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795723124;
-	bh=i/6gOHnqlueNYB5fu/W27Tex6Z8oas7OOH4bMJKkmDY=;
+	s=k20260515; t=1795723128;
+	bh=fHn9LbOFwMcpwbie2YpZCXPK9JITnfo4j7miLCdlUuI=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=e08ooBS8xaLj2qlUqy1VgttZ9+3sXHgEY61IgBTokwiT3QL2PkTCC0gheP8ss7woP
-	 vUG6218m3kfSY+sChYWTmsYs24V5fsq2sXMVL/wfdIY8Frf1LD5ONEj3UAD4lI+io6
-	 Ejylf8nzTuYsE2HOnpofewi+O7saJwKcvbtEKnja2iedJBC21oXmYhMO4Kjwn1uTCt
-	 8rOwDJ916OyQX7dPfsDLK9jHTtS+eqm4MW6n15SitYgwxojesCLzjBA2qSGkV18pY/
-	 07+6/XoDhvd9EZ/6j1ydEc/pvj7JsAzXEQmmreyBu50OltzozTTXBmwJYtNlG4orKb
-	 Io/xo/pVJ19Wg==
+	b=CByQdzNhLEq2Inv1gxpj7hUO60PEBm9Vq0q8HrmOuRS0VvKdFpsM+ZEPu7AzHObge
+	 qEPU/pCTNZmY1N8xCgH43AdP+pI1na8wCvWzhGqqeFGlw+m5Wii6+/LnXhNubjau4p
+	 pTZJe5SoYr8n9B2nuns9n45BMiClyE/615e7P3q+bfJKmlQG6uqnm+Eav42aTuILJD
+	 qT74Q5KuUSp/1tRKuUSA63pjbmF4c7tAM3m2OmcxX8t2bWF0l8NtgSogx1ATJhMtTb
+	 Yhzk+pBVmqmeK12pt0jjkQz+thGtSLta+YSjsQxhKgqcrKpJWw8EQvItHe1tZn4xaX
+	 cR6I+/+ywBn2w==
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -51,7 +51,8 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v5 2/7] regulator: pm8008: Add PM8010 support
+Subject: Re: [PATCH v5 3/7] regulator: pm8008: Add mode voting support for
+ PM8010
 From: Mark Brown <broonie@kernel.org>
 To: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
 Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
@@ -65,39 +66,35 @@ Cc: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
  Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>, 
  Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>, Oleg Keri <okerixx@gmail.com>, 
  Burke Cates <burke.cates@gmail.com>, Christian Cortner <ccortner@gmail.com>
-In-Reply-To: <20261116-pm8010_i2c_support-v5-2-5626ba17c0fb@oss.qualcomm.com>
+In-Reply-To: <20261116-pm8010_i2c_support-v5-3-5626ba17c0fb@oss.qualcomm.com>
 References: <20261116-pm8010_i2c_support-v5-0-5626ba17c0fb@oss.qualcomm.com>
- <20261116-pm8010_i2c_support-v5-2-5626ba17c0fb@oss.qualcomm.com>
+ <20261116-pm8010_i2c_support-v5-3-5626ba17c0fb@oss.qualcomm.com>
 Date: Thu, 26 Nov 2026 19:58:38 +0000
-Message-Id: <179572311831.838304.7206356885620187961.b4-review@b4>
+Message-Id: <179572311835.838304.3101127250585330182.b4-review@b4>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=824; i=broonie@kernel.org;
- h=from:subject:message-id; bh=bM9lYKxU3MNpvhFuKEB+4OieQVeqDPG/3wBR9qLLGsA=;
- b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLI5+vN19uWuCmec1J0/kfnsUm+Bd4qht0++PnkwmHc+6
- 9U/TNZrO0pZGMS4GGTFFFnisrhf1pe8XsN3cGEbzBxWJpAhDFycAjCR5kUMv5g2S2ge3V6YkHrG
- JrYpYNGiB/pXObh/PGleXJHbalaupcbwT11Qtn/3lckGzz5ltXDofuN93TRN4cedWo+PbWotkuZ
- e7AA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=637; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=ryj3DRMsuFieRXLEq4qm/wVztM2HM9StE1IE4w6O9xI=;
+ b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLI5+vPzo624FsyK//rvuav06T1fjp6fui287HE0x5rVl
+ alMYgcbO0pZGMS4GGTFFFnisrhf1pe8XsN3cGEbzBxWJpAhDFycAjARXz1Ghg7ZFwvYeITrzMwa
+ XriuutOio5wWJrBa1zNYd1G+T5KMDMP/PJHVPtl8MXEq1vefy4l6zA+edOL4VzE/qzKDss/NXIz
+ 8AA==
 X-Developer-Key: i=broonie@kernel.org; a=openpgp;
  fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-> PM8010 is effectively the next generation of PM8008.
-> 
-> Like PM8008, PM8010 also has 7 LDOs under it which are used to power
-> camera sensors. The PM8010 LDO are of different types from the PM8008
-> ones and have different voltage dropout values. PM8010 LDOs do not have
-> a voltage step rate configuration register.
-> 
-> Add the necessary changes to support PM8010 LDOs.
+> Implement set_mode/get_mode/get_optimum_mode support for PM8010 LDOs
+> using the mode control and status registers to allow clients to vote
+> for LDO modes. Mode voting is supported for L1 and L2 alone of PM8010
+> LDOs and not supported for any of the PM8008 LDOs.
 
-> @@ -145,18 +190,21 @@ static int pm8008_regulator_probe(struct platform_device *pdev)
->  		desc->owner = THIS_MODULE;
->  
->  		desc->linear_ranges = data->voltage_range;
-> -		desc->n_linear_ranges = 1;
-> -		desc->uV_step = desc->linear_ranges[0].step;
+> +static unsigned int pm8010_regulator_of_map_mode(unsigned int mode)
+> +{
+> +	switch (mode) {
+> +	case REGULATOR_MODE_NORMAL:
+> +	case REGULATOR_MODE_IDLE:
+> +		return mode;
 
-I'm not seeing this uV_step configuration replaced anywere, don't we
-need it for PM8008 which still uses regulator_get_linear_step()?
+These values would need documenting in the binding (or use the existing
+HPM and LPM values and map them, LPM at least looks appropriate).
 
 -- 
 Mark Brown <broonie@kernel.org>
