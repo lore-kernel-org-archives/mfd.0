@@ -1,59 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.85.4
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795702246;
-	b=w5Z8B8dfYNUhZZW8aVqqSdYwNA7LjjDWFhHXk9pb16V0p1r6Ody3yU8nehjPtp4ONBXv
-	 x6gjrmrMRIed1T3Ec2nofdAC78Z5JAM4sWVNkhgDgXRhMtTG+smQQo2f/wrDivMysmkbS
-	 V4Ezb+LkbJpLnZaIjN2w9Pm/B89jGSM0W0Oz02JwOvObD/6mqE3nPH52u+ffj5Sb3v8hM
-	 30OaUbVS9ptE60LzUjzD+FAGAOEEBVp/dRhkSVsRN5UFiPU+kqkOVLax7fcbhdpmV6qzV
-	 ME04p9B7QkfZeWmWW4bqoEABPxZopTm3oi8YUKOR2uoNYk++eKuoJi2zAB8WAeHoTVg==
+	t=1795702924;
+	b=ZfmIzP2BUWxuAlnfDQ76pYg6Cq60U1CGEcTPaud/n/m8HZvtghx0FSUOHtLJ+Lc8DMxM
+	 agvVAr3mcX/tz4bNR84vkBMTSYdJXcI60aDj3XneLw3KItxBL7hgM+00erwPDvdxvyrW1
+	 Y2/juR3kVJ70pZ3TXsY3Q3ozqJUc6ISQwdcxCzaOCZ1eHm9auJaOEnQTdp139/y2TdktD
+	 YlJI+wBBQpb/GLBznXUROAsm6EU2oDiPwW/aVBWv4uO6XpqY3TR9BXftqoMUByJM+6oqg
+	 RcBWF+uS9HwqUWju/QqM1F6fjQ+5h8Tnz9/lqR5OctEsmBf+lieWnp1gOWO9CwCFKVQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795702246;
-	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer;
-	bh=53osGf62Yx2AtbGkUSFklmgXAMpmkR0XvQtxDAlzep4=;
-	b=X+4e2+lmDTuJFJHh0oTjl7B5MAQqOwNVlkXdZDbBBsLZ7n2vxuf36YLYibuioMRGTlVg
-	 R6Ve1iafTFSuF2EEvARIPQwWfslX6ApW0pqI38Pjqdw7Qg6L2pzVlBeOspgpV2UbHSlIG
-	 bZDU195ucg4409+ww8fS94S59H2N2NXj+wEXaX2l2KdFN65BjbuDSnwafCmClwj0rvVof
-	 uaedmGOwJs0YKTV7TPMG8gc9b9oOxkyc/HoMmhSWcSaHhMD7iyB220p2eoce1xK3T+ZGI
-	 FA5M7E+J6R0yVnXUnAms8cnmQqT9ydU5sMj2HQy0J4KCyToLTQe6CLY0czZxILNqowA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795702924;
+	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Last-TLS-Session-Version;
+	bh=OvVAZTz69zThPSa7hVXEpLXSovgpYtvS4X1sc02ssSE=;
+	b=u976YQr1DWq8vb4y4pw1Ss2XugwekOuw84wwIhG10eB61OrKdThpO20y4XMZTIC3gsPd
+	 gHXzivb598Nzasn1OsHENIKso15Mg4iC9NhEJosQq92HswXToBdGwTaqbdogzS2kaHZGG
+	 HcPCKxOVt9CVopo+7kse/igpZ+omKqSQq8QdVEIEjXbncWZpLUC6N8Dkzml1EhUC96xD9
+	 JjDkc7OGjIWBUc92jxLpa3AJq/n1YLHdYHwybwAUVYgyXlFL+Ix7ck5vj0njVK2R66PmU
+	 c+gyXC0ndkYUiZL8wb5CDFeBjiY5uUrYf2C/flYiTpi8oit7wtT8DKKGtwRiGGVE1Ww==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AVdZdzsa;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=bootlin.com;
+	spf=pass smtp.mailfrom=bootlin.com;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=aoiNvRcF;
+	arc=none smtp.remote-ip=185.246.85.4
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A93E9606A31C;
-	Thu, 26 Nov 2026 14:10:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9360606A33C
+	for <mfd@lists.linux.dev>; Thu, 26 Nov 2026 14:22:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B9360606A33C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AVdZdzsa
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 36D331F000F4;
-	Thu, 26 Nov 2026 14:10:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795702246;
-	bh=53osGf62Yx2AtbGkUSFklmgXAMpmkR0XvQtxDAlzep4=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=AVdZdzsaFeEvu96jQc0qQww/nJssQLemMk7aj21xQMv1MMosx1Oy0r+DxrRj4b1b4
-	 Xvs+YpQl04YJWyvDMB90yhyHx1KTgw4NSYS4q8vtaNPTmpUJQazoLOvS0eOUPfS/59
-	 1bHI2vmk4vjwunItMdd4wAsu+JRjMTxyqPOnQiRN9Q5fQWstpAqV1HcKIPMcuJIuZP
-	 oIJ6JELUVtmWnGrCj1UDRN/QHvy8Nh2OhGajgzHlfNFZwzqa6+rBc++JiNHcdTnDK8
-	 hbzQxYSO5U7aJnndK+AqiKyy0AduhnQSsHDUUTezfWyjR+GLTspteI9/+Wu5YCz7JF
-	 sr9Vec+f3DpgQ==
-From: Lee Jones <lee@kernel.org>
-To: Lee Jones <lee@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- "Rob Herring (Arm)" <robh@kernel.org>
-Cc: mfd@lists.linux.dev, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-In-Reply-To: <20261117-dtbs-qcom-v2-1-c0697a0bf016@kernel.org>
-References: <20261117-dtbs-qcom-v2-1-c0697a0bf016@kernel.org>
-Subject: Re: (subset) [PATCH v2 1/2] dt-bindings: mfd: syscon: Add MSM8996
- SAW3 registers
-Message-Id: <179570224397.82366.8009907041644853561.b4-ty@b4>
-Date: Thu, 26 Nov 2026 14:10:43 +0000
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=aoiNvRcF
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 3CEC14E417A5;
+	Thu, 26 Nov 2026 14:22:02 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 12490604ED;
+	Thu, 26 Nov 2026 14:22:02 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id E40EE11E68014;
+	Thu, 26 Nov 2026 15:21:52 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1795702917; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:content-language:in-reply-to:references;
+	bh=OvVAZTz69zThPSa7hVXEpLXSovgpYtvS4X1sc02ssSE=;
+	b=aoiNvRcF7GPO1yOrbbUy+hL+m8rUvoytuvmFiBT5vnJYRMObC6UfTH103FpcKeZR1yVX7k
+	95I57pM030VNwcOYTIv0fXoLgoMK8CzmqBQyOrFDhqfBkDCMQxy5w9H0oGM23ITRIZ4y0e
+	K9cckRyHdEX4xPC4iVInYC01liObmgSJALbXyN+HgM59fDbakqFs/NRcfKEZbmaMkYqLho
+	hYz4dPbVQTsHFmMUCRGaZn5u8hFDNy6+f9PeZY5UGIBW/clPHiQ1HcZ2wnenJeTIPzMbi4
+	dLSTpFpP29mZclQ0zhx6YLTpMIWMhlvpi9fWSFFO6u9ZCg/JZ2NwuF69ekBw/Q==
+Message-ID: <79b852d7-13b6-4535-915f-21c992e2ae67@bootlin.com>
+Date: Thu, 26 Nov 2026 15:21:50 +0100
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -63,20 +62,41 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.16-dev-ad80c
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 03/10] i2c: cgbc: Use real I2C bus names
+To: Andi Shyti <andi.shyti@kernel.org>
+Cc: Lee Jones <lee@kernel.org>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Werner Gartner <Werner.Gartner@congatec.com>, mfd@lists.linux.dev,
+ linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org,
+ stable@vger.kernel.org
+References: <20261117-cgbc-i2c-storage-devices-support-v6-0-bb070ad3e9aa@bootlin.com>
+ <20261117-cgbc-i2c-storage-devices-support-v6-3-bb070ad3e9aa@bootlin.com>
+ <awg2_PLCeNgio_bp@zenone.zhora.eu>
+Content-Language: en-US
+From: Thomas Richard <thomas.richard@bootlin.com>
+In-Reply-To: <awg2_PLCeNgio_bp@zenone.zhora.eu>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 
-On Tue, 17 Nov 2026 11:10:42 -0600, Rob Herring (Arm) wrote:
-> Add a compatible for the MSM8996 SAW3 register bank referenced
-> through qcom,saw-reg properties. The name is based on the label in .dts
-> files.
+On 11/26/26 2:41 PM, Andi Shyti wrote:
+> Hi Thomas,
+> 
+> On Tue, Nov 17, 2026 at 10:47:43AM +0100, Thomas Richard (congatec GmbH) wrote:
+>> The adapter names described the expected purpose of the buses ("General
+>> Purpose I2C adapter", "Power Management I2C adapter") on conga-sa7 board
+>> rather than their actual names on the Board Controller.
+>>
+>> Rename them to the real bus names "cgbc-i2c0" and "cgbc-ddc0", matching
+>> the naming used by Congatec.
+>>
+>> Cc: stable@vger.kernel.org
+>> Fixes: 6894f640b8f3 ("i2c: Congatec Board Controller i2c bus driver")
+>> Signed-off-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
+> 
+> BTW, do we really need the Fixes tag here and the Cc stable?
+Not really, I can remove them.
 
-Applied, thanks!
-
-[1/2] dt-bindings: mfd: syscon: Add MSM8996 SAW3 registers
-      commit: b081c7a7044412fd7e41e88a520d790b349eae1b
-
---
-Lee Jones [李琼斯]
-
+Best Regards,
+Thomas
