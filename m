@@ -1,56 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795798579;
-	b=CMApl9rYzh8z2obqPpCep3FIiukp4CWJgYwqGFDfnHw+Yp4EZE6tpAVr1iLlKvDwSVNf
-	 JRebZZq02PSql5cQ5uIYoCWrXv+wlqHIol5DYzAMsUk5pEOl7TjSukqfhJNjxqNlEiFVQ
-	 kK1nHEd7rswOxFLq+LGGWbKLTY2zOwQ7nElj0q4vTQA/jxKUIUZpNMi6ELaSwWC+r3gVb
-	 DOo4BrQacZNQMrM95SxFSwH5kMGy6SHUqA5BmDBuzImitUH6JBvE48NSRsQ3aboBU7RZP
-	 RYVC/8Q5VEMYg85bAZRimhFEKfiRY4s83sF/dAYzTMNFLd0a3tpg3QbrYMiRMWHacOw==
+	t=1795798580;
+	b=WFW5Tjxeuv7rs3okj0vLeiVgnQE4qsiiCMT331RP6A1JHbKTCbRnO3M57Dm4MvVZcsR2
+	 FITEwMXKuIwCImjDxTRZOoPMnTXOOK2ZWcY5pYbhmtD9JoeOh4eBN1mdZASuNzkpZ6p+S
+	 1r7yIoxUzCmFjflhG/D3kXNwaMrcV8eopl523/frvUU3beCxLCxMjw4I81mAJGAquyCq5
+	 PlMinuYGccLmjGAW6onyIH1+RTPVJhWhevwLhNiv9kvTNQzaRTgHF7/biOneS9qMcr6Aq
+	 bTQJdTfIehBe1cyt+oHocKmvi/1VnpFL2/nXnEMMPvHfvSbbWSP2BieaMFQLKy36JrA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795798579;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795798580;
 	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
 	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=1pQgpxaWYbPnarEfBpaSEryrLbP7GILPym45C5mOhxc=;
-	b=RruVkJrMY4yVvc+BErJNIeS75lbdQY8IzfxzKF65HFFI6RkkgqgdFya9yPhJgIwh1K9b
-	 g+jjYr6u8PiLgsPsVqZmfMBzOu9wXJwxGXcMaC9HVaiP0QIdaOBNyft1k2nAJBD5xxSj1
-	 m3uOZZgyxFR0LS3pSk/yddAcDFQL7xz2XOOCk8LgSS3aucqyxqtjgvOY+0K7/coXHR5qa
-	 qTTWO423EamEr++wc8fXb0wRRsoL6YKWBmKQ2YUiNxpTs7NL0Vxq5cJHAiws8cOEWXjvx
-	 X1q5jhJTJN5Y35lG7V3DzqGH3lAiRw1D3DgzeuWmdYjeNn4brWpEONkVpkCVGPge+Lw==
+	bh=bkvd9a9OYWpaXi//Gy2hWuV1Bq/JvifHEQiZbb11oOY=;
+	b=qqnbYup0lgePMO6Jskcq9JHlTXccIu9I47l2tb2Xj+VtK00a/0ettl+i54A8tqYItOdC
+	 ePiETDgwrHh9DMoft29m+t39qw6oIQJQByjwGLs1cv/vtIejKZ/iYwd7TezqWVnjSIy3L
+	 YUzKWATPBx8fJ8OlXF8ehjkQzfyjaapjmOkiJWyR6obW5S/YRR6MfTanSlaf6ICQCSIxS
+	 jIRxMkdNFqZ15yrM0ZD44AxItwFe+2tYQFPxNyCtTYJgeWaGpSxV21FJ2aan1buT971Et
+	 ZoqvCiWwXKBUVEB8TDA9jzuLEt29Q2bL1NwXd8tCSTqj8WKxbjTNvfIGifo/c02BYJw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=i9rhTEPT;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ToWHDrqb;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB53F606A31C
-	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 16:56:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FBBB606A31C
+	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 16:56:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=i9rhTEPT
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8E8671F00897;
-	Fri, 27 Nov 2026 16:56:18 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ToWHDrqb
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C37C61F0089B;
+	Fri, 27 Nov 2026 16:56:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795798578;
-	bh=1pQgpxaWYbPnarEfBpaSEryrLbP7GILPym45C5mOhxc=;
+	s=k20260515; t=1795798579;
+	bh=bkvd9a9OYWpaXi//Gy2hWuV1Bq/JvifHEQiZbb11oOY=;
 	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=i9rhTEPTZKzooFmNUecFusXiIgpx/CtqoqKMpnsfQafQfn8BAAN4A4x4FVLuo+iQe
-	 TWZohKFpdG5zo9D+vq3VGD+0A1FLvdWxEvjq4kxPau1y7zfRWOJJaZYOzjogxiUHYG
-	 PDF+rBVXOd+h4nXMsjfAf6sBTCgdnw0ruLAD+bRbIgrklxv4NOLZmqpwHY4SdW+Ik/
-	 TEr9Hy9aLacd0g5+3BmAayKWJkSaclfvcWYXOcx8rydafJ4pSv/n4H4Cuu0AWUd8Ar
-	 3ucSRnjGzK2Ht+P7NiYn2LrDf48jkVedDY91Pz6Ifdt+xFDvJ3y+mqk2w1EeKnrKGY
-	 OpQBLLiBeoPVQ==
-Message-ID: <sashiko-outbox-237950@kernel.org>
+	b=ToWHDrqbV2c8IVpIon7vFPWPoaGJ6XH3uxAI9oM4By1cbmG63P6+B0PlkwwgiYaIZ
+	 wxh3cRWnECqZlPXTGb3uzEEW6cdwEjlaNtnQBPZbVX+Uv+xNtcK5EQXa31FxMpDhYn
+	 0Z/VM5GwBgJiXBheMyJO9w7f0CHxHpodLh+2WJppGkU2zkepGqOKOwGXa7VIyMoSEy
+	 wcWz7cUVX4OSTuxXPbc2KOaP2nJcA/nIJvBZzFXKAFI+0AjnZ1YFL/QrGglTGU+Cr5
+	 EnibWRguk53lAzrHrukA4y/1UmwSgj7/ARhxtEp3APCjcP13XJdpAGisy1p9Y2+ZZ5
+	 oyTyUGilV2rMA==
+Message-ID: <sashiko-outbox-237951@kernel.org>
 From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v1 5/6] mfd: max8907: Add ADC client support
+Subject: Re: [PATCH v1 0/6] mfd: max8907: for Lee
 Reply-To: sashiko-reviews@lists.linux.dev
 To: "Svyatoslav Ryhel" <clamor95@gmail.com>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261127164044.285910-6-clamor95@gmail.com>
+In-Reply-To: <20261127164044.285910-1-clamor95@gmail.com>
 References: <20261127164044.285910-1-clamor95@gmail.com>
- <20261127164044.285910-6-clamor95@gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Date: Fri, 27 Nov 2026 16:56:18 +0000
+Date: Fri, 27 Nov 2026 16:56:19 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -60,71 +59,19 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 
-Thank you for your contribution! Sashiko AI review found 1 potential
-issue to consider:
-- [Medium] mfd: max8907: missing TSC result registers in
-  max8907_adc_is_volatile_reg()
---
+Sashiko has finished reviewing this 6-patch series:
 
-commit 95f9130d9b22203166a62ce2610b261784729ba5
-Author: Svyatoslav Ryhel <clamor95@gmail.com>
+- Patches 2, 3, and 6: no issues found.
+- Patch 1 ("mfd: max8907: Remove platform_data based probing"): 1
+  related pre-existing bug noted
+- Patch 4 ("mfd: max8907: Add restart handler"): 1 related pre-existing
+  bug noted
+- Patch 5 ("mfd: max8907: Add ADC client support"): 1 potential issue (1
+  Medium)
 
-mfd: max8907: Add ADC client support
-
-This commit adds I2C dummy client, regmap, and interrupt controller support
-for the MAX8907 ADC and touchscreen controller.
-
-> diff --git a/drivers/mfd/max8907.c b/drivers/mfd/max8907.c
-> index b511c57026188..103294c76b97d 100644
-> --- a/drivers/mfd/max8907.c
-> +++ b/drivers/mfd/max8907.c
-> @@ -113,6 +113,48 @@ static const struct regmap_config max8907_regmap_rtc=
-_config =3D {
->  	.cache_type =3D REGCACHE_MAPLE,
->  };
-> =20
-> +static bool max8907_adc_is_volatile_reg(struct device *dev, unsigned int=
- reg)
-> +{
-> +	switch (reg) {
-> +	case MAX8907_REG_TSC_STA_INT:
-> +	case MAX8907_REG_AUX1_MSB ... MAX8907_REG_TDIE_LSB:
-> +		return true;
-> +	default:
-> +		return false;
-> +	}
-> +}
-> +
-> +static bool max8907_adc_is_precious_reg(struct device *dev, unsigned int=
- reg)
-> +{
-> +	switch (reg) {
-> +	case MAX8907_REG_TSC_STA_INT:
-> +		return true;
-> +	default:
-> +		return false;
-> +	}
-> +}
-> +
-> +static bool max8907_adc_is_writeable_reg(struct device *dev, unsigned in=
-t reg)
-> +{
-> +	switch (reg) {
-> +	case MAX8907_REG_TSC_STA_INT:
-> +	case MAX8907_REG_AUX1_MSB ... MAX8907_REG_TDIE_LSB:
-> +		return false;
-> +	default:
-> +		return true;
-> +	}
-> +}
-
-[Severity: Medium]
-Should the touchscreen conversion result registers (MAX8907_REG_X_MSB ...
-MAX8907_REG_Z2_LSB) also be marked volatile in max8907_adc_is_volatile_reg()
-and non-writeable in max8907_adc_is_writeable_reg()?  With REGCACHE_MAPLE
-enabled, reading any of those result registers caches the first sample and
-returns stale values on subsequent reads instead of querying the hardware.
+Detailed reviews have been sent as separate replies to patches 1, 4, and
+5.
 
 --=20
 Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261127164044.2859=
-10-1-clamor95@gmail.com?part=3D5
+10-1-clamor95@gmail.com
