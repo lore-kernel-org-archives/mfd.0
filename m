@@ -1,55 +1,54 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795808978;
-	b=073rchY7KQnYMh2++dMrrGyuHQKUjmNlJlTFIAhUyb11Itf7np8DMRq6+klQ/UNCqxh1
-	 lCY/znCC/pPtp7s9u2/VdR8cvy4tCnphF+lSOs6u/ILEN1upwKfSmP9UwFF2wAY4gI323
-	 1r+UyAOgxJM/FgC28lRIiFse7eC9Dw6kKOKCCAOHIt6jS7HbiwLz6aVq/1jd+Xheis4Fp
-	 245e9Rmjbzta0WuAicCfatfnv/cktnKvAwkyzz0mwdzd1uVvCC/VuxtS+hA5jU83T7QQR
-	 1O/RQCOpq0B5zcsS0AwgU8yjHPy1Ns6P902c1pGLpSWbTSJjvs/kWPyR1LUNEnfRnSg==
+	t=1795821484;
+	b=LLARo0uuRBrOhhBPl70C8nZW5zZ0XVM5kJWIzFT3THRcbEXRpUdnMDx9rGo4041cH1AW
+	 xFHcqAMRIfYbqDCRNL8J/+l0nHPBux73DE4KJ1XTUvoqL2Pngda3RtFPmBz+85FpLAAq4
+	 PfAkPPLOZpLj/AMcvpLHndEb9EDpR9rgxAHf7n8Ityj4NZK9u28+C40mgw1xeXtMQaGfX
+	 rlE3sghD8OO5qNGqpyDrFwL/rXjGAhXzaL/ygfUnMDmsfdlLhROx4H2hxdby2ejVOxPwM
+	 w6ho+1A2unfZ5PxkKyb0IrxxE0YVdl5PnsPL0m+Mlo0YIq85HMPGnMTVp+tuURikqAw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795808978;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=H5hKXU/pl5SECHpQwbKsxoZ4iZ+myLDKafmSiX3vuQ8=;
-	b=3hcT4pAs/QAxumCrs5+ZxBxm79jXYj4/GlDtK5Kx7ilv1eSWYBbHIDxPfP+pUTmuDsWa
-	 bply4ByGb3jAB52CGkVOpHNLmvvrukOtGao2V84wdvaynpkXOVONmRsV2zdgbJXTchtf+
-	 /LzjriS4Pa9/AvlfpKzMY9INnP/dlbhkYmtNUqXTMJUfF0AwcWKHBm6Xrfk9V39aFTxWi
-	 iBz2E5nhQIvHx+780kG3JFDZX9hPs1Y+nShbmT7DZmC8POphtVw+DFhhYBh8RDe6NpzT2
-	 4FWDLYtS799tuWTKIb/9uzXgt8XhUS08yOdJsNc1wTVxjhadxCsZa7jQFABQV0HYlsw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795821484;
+	h=Received:DKIM-Signature:Received:X-Gm-Message-State:X-Received:
+	 MIME-Version:References:In-Reply-To:From:Date:
+	 X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:Subject:To:Cc:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=eabEoBGJDSwhGvIgsim2UeI86MybMnUjWj14/d7+JVc=;
+	b=AujONuJ8dWEv+Y4gOWKoPA1W9xCbGiU5OxBV6NvDVj68SDyxv2UGmozqePyt9r/x0TAh
+	 XlpXKc5iYrbkWJr8bor4YiE+9OqlsLSumqarvOiufd9rO7tQyRrG/f4+wbOk4XgZOaflt
+	 /lxGUPb88gQCcckJY7zjAjqMqmeVmmbpgZpNQnJuGfmcN7ImsjZukbfMACsAd1TWs5lEu
+	 5O1rQ8dD7yAnOui8wgJXuVPIMwGC2M3ol3q5FOnXom1FESFhwqdZ+CgA0PeNvWUvFYzYG
+	 lLNyOSaVdxTzxP7QieaiJ5kenDXrY4hYEE9hOqaKGBZL/UTh+O/95iiZzouGs6yjK8w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gcA9J7u7;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=KRyTNDgn;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB8E6606A31F
-	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 19:49:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F58A606A31C
+	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 23:18:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gcA9J7u7
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 891611F00897;
-	Fri, 27 Nov 2026 19:49:38 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=KRyTNDgn
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BC53F1F00899
+	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 23:18:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795808978;
-	bh=H5hKXU/pl5SECHpQwbKsxoZ4iZ+myLDKafmSiX3vuQ8=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=gcA9J7u7RfHQnHmPgux1WS2uzvpY/s/BAORp7JGhb3Xb4g3Yhj+ns1QLltPqYf0Vo
-	 rA9/9o6PJfP5r8ZkflkCayapnxYpqNUgYv9jhEqseOXsWmugmpiNi6HD+O6oA+Xmqd
-	 bIDivDphsgNExA5Cklr92tImI2tWAlP8dYlHAvzlxYU16dchTAcnreHvPgHxU9vO5v
-	 2J2sPdXSLFJMdlnKvI4zhLc56Z7mMWsdipK/tajh/uFShgUTt8iLURtS7PgWhYtPkM
-	 RZpNf+OLwwehJ5SamgWPFtHX+hhmOBJ4Irirv95q9nEVdR3xi/ejQ6JpCe48HY0F7f
-	 I7CTgkglrz0YA==
-Message-ID: <sashiko-outbox-238182@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v2] mfd/regulator: db8500-prcmu: Remove EPOD regulators
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Linus Walleij" <linusw@kernel.org>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261127-ux500-epod-regulator-removal-v2-1-0ccab0f430fd@kernel.org>
-References: <20261127-ux500-epod-regulator-removal-v2-1-0ccab0f430fd@kernel.org>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Fri, 27 Nov 2026 19:49:38 +0000
+	s=k20260515; t=1795821483;
+	bh=eabEoBGJDSwhGvIgsim2UeI86MybMnUjWj14/d7+JVc=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=KRyTNDgnnLzoYCVib0tpSi9JRaV0vG+WZITWhACgUucw1ANVkdlZ6p5pGzKOuKVcQ
+	 +iZspdNuJMymcXD/RKhuFDKw3lr5LNLNM1ew0Nzd4nWD8b7koH99/PLsTL6NsiQ6di
+	 764DSXjmit3SuoamdH/yZMgV0DkiLYVB88blou2zrZ0fOZAQOI9ARf89LnlXNnFcpN
+	 +is1gWUSWdGDVSZzUBmJuEFDb2PnqRLRCMG/nM2bQHxAv6FHaucR49sonVbXTfoR1d
+	 VWZw1okafRQtAnncHhxeudtVScaXmYEhmPKFRRenndZaHCu8TUFM2TOPAMvUyJfnGH
+	 xdy//LkGDx/Yw==
+Received: by mail-lj1-f182.google.com with SMTP id 38308e7fff4ca-3adfc004920so82014841fa.3
+        for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 15:18:03 -0800 (PST)
+X-Gm-Message-State: APuU4Z9kE9zSZ51MilAS8LNWryAGj9acLKiJKoCWi1NEBzBIGH6hXqcr
+	mzxZUjDNmzpAWzrY7AzkC1bSokNgumgMHB+pCBHjQDA0B5VpNdNIZkuphKbuMLPiiYej/ZFegAE
+	1g70zd61/km7HPJWzmFdrW5WIkCVY5ps=
+X-Received: by 2002:a05:6512:224a:b0:5bf:a287:dabd with SMTP id
+ 2adb3069b0e04-5c1bc801218mr8138929e87.36.1795821482508; Fri, 27 Nov 2026
+ 15:18:02 -0800 (PST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -58,45 +57,29 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+References: <20261127-ux500-epod-regulator-removal-v2-1-0ccab0f430fd@kernel.org>
+ <sashiko-outbox-238182@kernel.org>
+In-Reply-To: <sashiko-outbox-238182@kernel.org>
+From: Linus Walleij <linusw@kernel.org>
+Date: Sat, 28 Nov 2026 00:17:50 +0100
+X-Gmail-Original-Message-ID: <CAD++jLn81eSQh4gY8uBAjNb444kkDAryX+x93N-d1wPwUTF==A@mail.gmail.com>
+X-Gm-Features: Aa3M54phLSeyUjOaYYvA7cw1C0sDgusnQ4QWWjrnwPyY15KVPZUSYJpMyXZbE60
+Message-ID: <CAD++jLn81eSQh4gY8uBAjNb444kkDAryX+x93N-d1wPwUTF==A@mail.gmail.com>
+Subject: Re: [PATCH v2] mfd/regulator: db8500-prcmu: Remove EPOD regulators
+To: sashiko-reviews@lists.linux.dev
+Cc: mfd@lists.linux.dev, lee@kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thank you for your contribution! Sashiko AI review found 1 potential
-issue to consider:
-- [Low] mfd/regulator: db8500-prcmu: dangling select
-  REGULATOR_DB8500_PRCMU
---
+On Fri, Nov 27, 2026 at 8:49=E2=80=AFPM <sashiko-bot@kernel.org> wrote:
 
-commit 7f1c7130aab1be1bfd74edd6c57fc9f35b75d19d
-Author: Linus Walleij <linusw@kernel.org>
+> [Severity: Low]
+> Does removing REGULATOR_DB8500_PRCMU leave a dangling select in
+> arch/arm/mach-ux500/Kconfig?  ARCH_U8500 still has
+> "select REGULATOR_DB8500_PRCMU".
 
-mfd/regulator: db8500-prcmu: Remove EPOD regulators
+I will fix it up separately.
 
-This commit removes the obsolete DB8500 PRCMU regulator drivers, their
-build hooks, and the db8500-prcmu-regulators MFD cell.
-
-> diff --git a/drivers/regulator/Kconfig b/drivers/regulator/Kconfig
-> index 83a76b78e58cc..5de063ef7abe6 100644
-> --- a/drivers/regulator/Kconfig
-> +++ b/drivers/regulator/Kconfig
-> @@ -408,17 +408,6 @@ config REGULATOR_DA9211
->  	  step down converter 12A or 16A DC-DC Buck controlled through an I2C
->  	  interface.
-> =20
-> -config REGULATOR_DBX500_PRCMU
-> -	bool
-> -
-> -config REGULATOR_DB8500_PRCMU
-> -	bool "ST-Ericsson DB8500 Voltage Domain Regulators"
-> -	depends on MFD_DB8500_PRCMU
-> -	select REGULATOR_DBX500_PRCMU
-> -	help
-> -	  This driver supports the voltage domain regulators controlled by the
-> -	  DB8500 PRCMU
-
-[Severity: Low]
-Does removing REGULATOR_DB8500_PRCMU leave a dangling select in
-arch/arm/mach-ux500/Kconfig?  ARCH_U8500 still has
-"select REGULATOR_DB8500_PRCMU".
-
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261127-ux500-epod=
--regulator-removal-v2-1-0ccab0f430fd@kernel.org?part=3D1
+Yours,
+Linus Walleij
