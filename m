@@ -1,60 +1,59 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.84.56
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.85.4
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795802315;
-	b=25EkxUz/RCGlY9mb7brm/KCNtZejRPgegW5AKDFPGtbaS0vlWP7QxKuuWRe7rc5NQnTY
-	 WbP2WVRC+06/YcWB/fD3a8mhPUASs321tAap0xJu4WMjY3El+YzIDk2iwAa9FXAeroolh
-	 I4CX0t9vUdDH/cue/ffokAjXiyMxvQT742Z3pqWVD6q3dwzwc3zfE+tVQ3DubOz7yr471
-	 DQ9kceqcBXFdcdz9V8SQc4l0TUWLFR01QgpfLhyqYwWziaV142Z3zKFfATPd7K3NRmNg0
-	 WiSCZAlEO8nNRJjP5HrIscDSFDnxfpkLC7dBRf5BJqsGK+at875zuR1przawjTfFwDQ==
+	t=1795802317;
+	b=jfEPFyBcvqI7c95weffb0lE3wUKbQHcGcaoZkBesRNoWCP/PXWovFNeuZ3wareaXXUno
+	 eEgnHKB1suEo+StRl5MpQYoVsg/+TvgpHsbW0gE9HDxnnlKFMc/5zydv5duwe3OG4WXf5
+	 efZC854yq99l3q4tyQfyKLm40wjhPtioNNFxsIDNuQdrA6+rHEXPLb8RR5+QvxW6Yd3Vy
+	 qt8aeGplzJrhjh6NjmuIHqvQiZWujHNotZmtfEtsETrEEvMqrjgdRKumfSO/S0ccXsojo
+	 xPC4eU9K7Mu983D9j24wCrVbpfKNZWc8a1LI5DBFxi7watLQVxz13yl4imlYadk9lrA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795802315;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795802317;
 	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:From:Date:
 	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Last-TLS-Session-Version;
-	bh=n5uv/PXdXh3MTK+O8CMlRVhg7sEyPpcJ0VyqXAlR2Lw=;
-	b=c7IOEtAgpfzbhrHNApf0M+YO9CQmGtVng1R4F8MUs4fQhetGITiMQTSb9f/fFUoXj6jA
-	 dKTfj8GHf+YkZ9uCWuhwnHAJMilwkBSZ7rZD7YZpH2egMin3sKGemnTTNsu7kPIKGuhcY
-	 UKRBS+HJFfZ5VYNkiwtiqqkYb6akaTppfh3dv0r/OECW7YIlbv6QQzF3fQr8t7TJxzLFa
-	 P6N/qvvCH8ea9Qs3UHmrOt4vXQZwLKhzjLZUoq/l5pqdT1AD+R9umwMLkEqSec4Uw6opq
-	 jUsZ7MeBJ4Ijpgdg2W04w4ReWdgUStwd47+MVhTZBKGwwtl4vR02nEcV1eV/Zkmwp/w==
+	bh=KUcfyyvRjt6f6+XIUtGpur5XSwIQA21KPfNG4y+9nvg=;
+	b=p8uMhRjameGheE/3rabrFhmly+ZvrpuBhaCUGmRm5opy3T2WvNns4KQU1mOnes3eM2af
+	 PnOSnPjx3fE42pOmxl6UpPa7/i+UiuN5VgpEgzTK1kbPewuBCRKKOtzh9XknIpkS2DF9e
+	 7BLFip9A7DMumlm1R3/9Tv1xvs9e6WE1ti6uyQGd+9/XzV5qiEK3ohv7CcqIXyqE9YfUi
+	 +ImaGyZahXka7F1aHDCI42wa3A1yljS3vqxake7JVH9UX9uRVKL5fhtGJzcVCEu53P8WY
+	 1ihMmigeiP8D0xhNLjCPxhZOV6+wxCZ4gRwiwlx0aQo4TnaceYcwc+ubNtSHrh747GA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=bootlin.com;
 	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=quKCtIAv;
-	arc=none smtp.remote-ip=185.246.84.56
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b="OTpcG/Ks";
+	arc=none smtp.remote-ip=185.246.85.4
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3A76606A32F
-	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 17:58:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C3A76606A32F
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D762606A33C
+	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 17:58:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9D762606A33C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=quKCtIAv
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=OTpcG/Ks
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-02.galae.net (Postfix) with ESMTPS id 6A6051A1841
-	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 17:58:33 +0000 (UTC)
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 5634E4E417CC;
+	Fri, 27 Nov 2026 17:58:35 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 39DC66049C;
-	Fri, 27 Nov 2026 17:58:33 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id D2C42104395A7;
-	Fri, 27 Nov 2026 18:58:31 +0100 (CET)
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 266046049C;
+	Fri, 27 Nov 2026 17:58:35 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id D14B0104395A3;
+	Fri, 27 Nov 2026 18:58:33 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1795802312; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	t=1795802314; h=from:subject:date:message-id:to:cc:mime-version:content-type:
 	 content-transfer-encoding:in-reply-to:references;
-	bh=n5uv/PXdXh3MTK+O8CMlRVhg7sEyPpcJ0VyqXAlR2Lw=;
-	b=quKCtIAvB6Mjb0mOkQzmbZvX2m2t8WT/uh3Ntp/jscUXZsFWCVdWM8sClPMPTYNSag3ZhS
-	Xn0VP9JQk/cBB8bpzaU2lnXVNS61nnsJOy9yVQps+69tJ5yGnwyYpPxzGmJUYapInISGxZ
-	2UzuVa78w35S8yv6ZecnPLRxi54DDQRsctn1GvbtQDn8EUnJ0EumTA2FOYFp4H75MoNciO
-	TeF9Tfm1wHMICwqqh3un1kny/92ccv4NfDG+B7mjE596QLULe7rDcXUPmIaqpC4/fGEs7p
-	PuUAzim8rmT84FNK4kA9GZ4HKwHeuWOp592P8XwiTE7BqID+BigpBoMI87vpLw==
+	bh=KUcfyyvRjt6f6+XIUtGpur5XSwIQA21KPfNG4y+9nvg=;
+	b=OTpcG/Kscj+VVDcsJEmrAhiAUEwesgA+Cnwmq71XP+On6NJSiDtZpA75GkpCWQ9DV/PW+c
+	DdAj/Ebkp6iGfFi0+hT/s/yFnRWdm9hNk6mzkCqO+UxqGZ+fPNXfXbcHNxG8UG8dJXGGVC
+	ThI8Q9FbEZSwnZjFl5qkBD7X7lyODdbkZ5f3M1edyW8Ooyd8NgOvld7GMKR1pdkuWYCaKq
+	f++pOYYiGQcDEovI2JMBDBSwklVOCf3U0TCQKrEXQvM97NW3Gu0f//XDiCkskFuHim7iFG
+	DCaYbn0Fn/oL949Ou7Zl24Cyc701xTsldc/U1d7RKzhAmMDslQsntH0IWM5VmQ==
 From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
-Date: Fri, 27 Nov 2026 18:57:49 +0100
-Subject: [PATCH v7 05/11] i2c: cgbc: Use plateform data to get bus ID and
- adapter name
+Date: Fri, 27 Nov 2026 18:57:51 +0100
+Subject: [PATCH v7 07/11] i2c: cgbc: Add support for fixed frequency buses
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -66,7 +65,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261127-cgbc-i2c-storage-devices-support-v7-5-d0e70fc57879@bootlin.com>
+Message-Id: <20261127-cgbc-i2c-storage-devices-support-v7-7-d0e70fc57879@bootlin.com>
 References: <20261127-cgbc-i2c-storage-devices-support-v7-0-d0e70fc57879@bootlin.com>
 In-Reply-To: <20261127-cgbc-i2c-storage-devices-support-v7-0-d0e70fc57879@bootlin.com>
 To: Lee Jones <lee@kernel.org>, Andi Shyti <andi.shyti@kernel.org>
@@ -77,185 +76,106 @@ Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
 X-Mailer: b4 0.16.0
 X-Last-TLS-Session-Version: TLSv1.3
 
-Obtain the bus ID (from the BC point of view) and adapter name from
-platform data. This allows the specific definitions to be removed, leaving
-only a generic adapter definition.
+Some I2C buses run at a fixed frequency. Add a fixed_freq flag to struct
+cgbc_i2c_platform_data to identify them. But the frequency is still needed
+to compute read_maxtime_us, so split cgbc_i2c_set_frequency() into two
+functions:
+- cgbc_i2c_set_frequency(): sets the bus frequency (skipped for
+  fixed-frequency buses).
+- cgbc_i2c_get_frequency(): reads the bus frequency and computes
+  read_maxtime_us.
 
 Signed-off-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
 ---
- drivers/i2c/busses/i2c-cgbc.c | 68 ++++++++++++++++---------------------------
- 1 file changed, 25 insertions(+), 43 deletions(-)
+ drivers/i2c/busses/i2c-cgbc.c | 38 +++++++++++++++++++++++++++-----------
+ include/linux/mfd/cgbc.h      |  2 ++
+ 2 files changed, 29 insertions(+), 11 deletions(-)
 
 diff --git a/drivers/i2c/busses/i2c-cgbc.c b/drivers/i2c/busses/i2c-cgbc.c
-index baf02bfe090c..50483bdc6730 100644
+index 50483bdc6730..85cbe709bcde 100644
 --- a/drivers/i2c/busses/i2c-cgbc.c
 +++ b/drivers/i2c/busses/i2c-cgbc.c
-@@ -12,9 +12,6 @@
- #include <linux/module.h>
- #include <linux/platform_device.h>
- 
--#define CGBC_I2C_PRIMARY_BUS_ID	0
--#define CGBC_I2C_PM_BUS_ID	4
--
- #define CGBC_I2C_CMD_START	0x40
- #define CGBC_I2C_CMD_STAT	0x48
- #define CGBC_I2C_CMD_DATA	0x50
-@@ -60,11 +57,6 @@ enum cgbc_i2c_state {
- 	CGBC_I2C_STATE_ERROR,
- };
- 
--struct i2c_algo_cgbc_data {
--	u8		bus_id;
--	unsigned long	read_maxtime_us;
--};
--
- struct cgbc_i2c_data {
- 	struct device		*dev;
- 	struct cgbc_device_data *cgbc;
-@@ -73,6 +65,8 @@ struct cgbc_i2c_data {
- 	int			nmsgs;
- 	int			pos;
- 	enum cgbc_i2c_state	state;
-+	u8			bus_id;
-+	unsigned long		read_maxtime_us;
- };
- 
- struct cgbc_i2c_transfer {
-@@ -115,10 +109,9 @@ static unsigned int cgbc_i2c_reg_to_freq(u8 reg)
- 
- static int cgbc_i2c_get_status(struct i2c_adapter *adap)
- {
--	struct i2c_algo_cgbc_data *algo_data = adap->algo_data;
- 	struct cgbc_i2c_data *i2c = i2c_get_adapdata(adap);
- 	struct cgbc_device_data *cgbc = i2c->cgbc;
--	u8 cmd = CGBC_I2C_CMD_STAT | algo_data->bus_id;
-+	u8 cmd = CGBC_I2C_CMD_STAT | i2c->bus_id;
- 	u8 status;
- 	int ret;
- 
-@@ -132,7 +125,6 @@ static int cgbc_i2c_get_status(struct i2c_adapter *adap)
- static int cgbc_i2c_set_frequency(struct i2c_adapter *adap,
- 				  unsigned int bus_frequency)
- {
--	struct i2c_algo_cgbc_data *algo_data = adap->algo_data;
+@@ -128,7 +128,6 @@ static int cgbc_i2c_set_frequency(struct i2c_adapter *adap,
  	struct cgbc_i2c_data *i2c = i2c_get_adapdata(adap);
  	struct cgbc_device_data *cgbc = i2c->cgbc;
  	u8 cmd[2], data;
-@@ -144,7 +136,7 @@ static int cgbc_i2c_set_frequency(struct i2c_adapter *adap,
- 		bus_frequency = I2C_MAX_STANDARD_MODE_FREQ;
- 	}
+-	int ret;
  
--	cmd[0] = CGBC_I2C_CMD_SPEED | algo_data->bus_id;
-+	cmd[0] = CGBC_I2C_CMD_SPEED | i2c->bus_id;
+ 	if (bus_frequency > CGBC_I2C_FREQ_MAX_HZ ||
+ 	    bus_frequency < CGBC_I2C_FREQ_MIN_HZ) {
+@@ -139,18 +138,29 @@ static int cgbc_i2c_set_frequency(struct i2c_adapter *adap,
+ 	cmd[0] = CGBC_I2C_CMD_SPEED | i2c->bus_id;
  	cmd[1] = cgbc_i2c_freq_to_reg(bus_frequency);
  
+-	ret = cgbc_command(cgbc, &cmd, sizeof(cmd), &data, 1, NULL);
+-	if (ret)
+-		return dev_err_probe(i2c->dev, ret,
+-				     "Failed to initialize I2C bus %s",
+-				     adap->name);
++	return cgbc_command(cgbc, &cmd, sizeof(cmd), &data, 1, NULL);
++}
+ 
+-	cmd[1] = 0x00;
++static int cgbc_i2c_get_frequency(struct i2c_adapter *adap)
++{
++	struct cgbc_i2c_data *i2c = i2c_get_adapdata(adap);
++	struct cgbc_device_data *cgbc = i2c->cgbc;
++	u8 cmd[2] = { CGBC_I2C_CMD_SPEED | i2c->bus_id };
++	unsigned int bus_frequency;
++	u8 data = 0;
++	int ret;
+ 
  	ret = cgbc_command(cgbc, &cmd, sizeof(cmd), &data, 1, NULL);
-@@ -170,7 +162,7 @@ static int cgbc_i2c_set_frequency(struct i2c_adapter *adap,
- 	 * can be read by a command is CGBC_I2C_READ_MAX_LEN.
- 	 * Therefore, calculate the max time to properly size the timeout.
- 	 */
--	algo_data->read_maxtime_us = (BITS_PER_BYTE + 1) * CGBC_I2C_READ_MAX_LEN
-+	i2c->read_maxtime_us = (BITS_PER_BYTE + 1) * CGBC_I2C_READ_MAX_LEN
- 		* USEC_PER_SEC / bus_frequency;
- 
- 	return 0;
-@@ -200,7 +192,6 @@ static unsigned int cgbc_i2c_xfer_to_cmd(struct cgbc_i2c_transfer xfer, u8 *cmd)
- 
- static int cgbc_i2c_xfer_msg(struct i2c_adapter *adap)
- {
--	struct i2c_algo_cgbc_data *algo_data = adap->algo_data;
- 	struct cgbc_i2c_data *i2c = i2c_get_adapdata(adap);
- 	struct cgbc_device_data *cgbc = i2c->cgbc;
- 	struct i2c_msg *msg = i2c->msg;
-@@ -210,7 +201,7 @@ static int cgbc_i2c_xfer_msg(struct i2c_adapter *adap)
- 	u8 cmd_data, data_len;
- 
- 	struct cgbc_i2c_transfer xfer = {
--		.bus_id = algo_data->bus_id,
-+		.bus_id = i2c->bus_id,
- 		.addr = i2c_8bit_addr_from_msg(msg),
- 	};
- 
-@@ -268,7 +259,7 @@ static int cgbc_i2c_xfer_msg(struct i2c_adapter *adap)
- 
- 		ret = read_poll_timeout(cgbc_i2c_get_status, status,
- 					status != CGBC_I2C_STAT_BUSY, 0,
--					2 * algo_data->read_maxtime_us, false, adap);
-+					2 * i2c->read_maxtime_us, false, adap);
- 		if (ret)
- 			goto err;
- 
-@@ -282,7 +273,7 @@ static int cgbc_i2c_xfer_msg(struct i2c_adapter *adap)
- 			goto err;
- 		}
- 
--		cmd_data = CGBC_I2C_CMD_DATA | algo_data->bus_id;
-+		cmd_data = CGBC_I2C_CMD_DATA | i2c->bus_id;
- 		ret = cgbc_command(cgbc, &cmd_data, sizeof(cmd_data),
- 				   msg->buf + i2c->pos, len, &data_len);
- 		if (ret)
-@@ -350,44 +341,35 @@ static const struct i2c_algorithm cgbc_i2c_algorithm = {
- 	.functionality = cgbc_i2c_func,
- };
- 
--static struct i2c_algo_cgbc_data cgbc_i2c_algo_data[] = {
--	{ .bus_id = CGBC_I2C_PRIMARY_BUS_ID },
--	{ .bus_id = CGBC_I2C_PM_BUS_ID },
--};
--
--static const struct i2c_adapter cgbc_i2c_adapter[] = {
--	{
--		.owner		= THIS_MODULE,
--		.name		= "cgbc-i2c0",
--		.class		= I2C_CLASS_DEPRECATED,
--		.algo		= &cgbc_i2c_algorithm,
--		.algo_data	= &cgbc_i2c_algo_data[0],
--		.nr		= -1,
--	},
--	{
--		.owner		= THIS_MODULE,
--		.name		= "cgbc-ddc0",
--		.class		= I2C_CLASS_DEPRECATED,
--		.algo		= &cgbc_i2c_algorithm,
--		.algo_data	= &cgbc_i2c_algo_data[1],
--		.nr		= -1,
--	},
-+static const struct i2c_adapter cgbc_i2c_adapter = {
-+	.owner		= THIS_MODULE,
-+	.class		= I2C_CLASS_DEPRECATED,
-+	.algo		= &cgbc_i2c_algorithm,
-+	.nr		= -1,
- };
- 
- static int cgbc_i2c_probe(struct platform_device *pdev)
- {
--	struct cgbc_device_data *cgbc = dev_get_drvdata(pdev->dev.parent);
-+	struct device *dev = &pdev->dev;
-+	struct cgbc_device_data *cgbc = dev_get_drvdata(dev->parent);
-+	struct cgbc_i2c_platform_data *pdata;
- 	struct cgbc_i2c_data *i2c;
- 	int ret;
- 
--	i2c = devm_kzalloc_obj(&pdev->dev, *i2c);
-+	i2c = devm_kzalloc_obj(dev, *i2c);
- 	if (!i2c)
- 		return -ENOMEM;
- 
-+	pdata = dev_get_platdata(dev);
-+	if (!pdata)
-+		return dev_err_probe(dev, -ENODEV, "missing platform_data\n");
+ 	if (ret)
+-		return dev_err_probe(i2c->dev, ret,
+-				     "Failed to get I2C bus frequency");
++		return ret;
 +
- 	i2c->cgbc = cgbc;
--	i2c->dev = &pdev->dev;
--	i2c->adap = cgbc_i2c_adapter[pdev->id];
-+	i2c->dev = dev;
-+	i2c->adap = cgbc_i2c_adapter;
- 	i2c->adap.dev.parent = i2c->dev;
-+	i2c->bus_id = pdata->cgbc_bus_id;
-+	strscpy(i2c->adap.name, pdata->name, sizeof(i2c->adap.name));
++	/*
++	 * The BC should never return a zero value; if it does, the resulting bus
++	 * frequency is 0 Hz, causing a division by zero when computing
++	 * read_maxtime_us.
++	 */
++	if (!data)
++		return -EIO;
+ 
+ 	bus_frequency = cgbc_i2c_reg_to_freq(data);
+ 
+@@ -373,9 +383,15 @@ static int cgbc_i2c_probe(struct platform_device *pdev)
  	i2c_set_adapdata(&i2c->adap, i2c);
  	platform_set_drvdata(pdev, i2c);
  
+-	ret = cgbc_i2c_set_frequency(&i2c->adap, I2C_MAX_STANDARD_MODE_FREQ);
++	if (!pdata->fixed_freq) {
++		ret = cgbc_i2c_set_frequency(&i2c->adap, I2C_MAX_STANDARD_MODE_FREQ);
++		if (ret)
++			return dev_err_probe(dev, ret, "Failed to set I2C bus frequency");
++	}
++
++	ret = cgbc_i2c_get_frequency(&i2c->adap);
+ 	if (ret)
+-		return ret;
++		return dev_err_probe(i2c->dev, ret, "Failed to get I2C bus frequency");
+ 
+ 	return i2c_add_numbered_adapter(&i2c->adap);
+ }
+diff --git a/include/linux/mfd/cgbc.h b/include/linux/mfd/cgbc.h
+index 4b6e41b9ca4a..63fdf16fec95 100644
+--- a/include/linux/mfd/cgbc.h
++++ b/include/linux/mfd/cgbc.h
+@@ -45,10 +45,12 @@ int cgbc_command(struct cgbc_device_data *cgbc, void *cmd, unsigned int cmd_size
+  * struct cgbc_i2c_platform_data - Platform data of the CGBC I2C driver
+  * @name:		I2C adapter name
+  * @cgbc_bus_id:	I2C bus ID (from Board Controller point of view)
++ * @fixed_freq:		I2C bus has a fixed frequency
+  */
+ struct cgbc_i2c_platform_data {
+ 	const char *name;
+ 	int cgbc_bus_id;
++	bool fixed_freq;
+ };
+ 
+ #endif /*_LINUX_MFD_CGBC_H_*/
 
 -- 
 2.53.0
