@@ -1,61 +1,53 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795771640;
-	b=ipbvr5P+oFl1PW8lr2zk8TExafn8j2lBsvQcWbKBfd0nHAg86epMpQjkwAKdaUSG2b8V
-	 CzCEneqb0O59mzTrdjgOvulUHoat/WpbYjP/MXAspwRTVlGnhTgAgCRMVSzLKNk0kbyjm
-	 XD0Vcbg9dD464Jf6AujPtQln07lsuRYc9bmBmcv4V6zGoJN9PmIx+li9dVWo/MUGz80jK
-	 xpXzpGei74DCmu5atAxRawJ8YpeyFkLjQPHzvn2hv9YSREau4Zb//NJVxcuokqWN/rIUP
-	 oTJenR24VJTTsqVe1KxS3nFn5lM+e36rOqhK93mRuLBteJUen5Ryz/6TdF0vqAUUjxA==
+	t=1795772881;
+	b=WW3QTPA5m3AdMblZWUDrVDg3F7m7ICDUj8Jj3qjF0om4FJ/klsNm7xr7AENvSXGOH+5l
+	 9tdKnA597/ZosC9HMCVJuWB9E2g1YZhhtQWbdPl8HJ2aQox0LPWwvb38xv1qaW02uJpM7
+	 KkPhnuicDERXjq5XkvKoO4pLXORx6qaWFozLUJCeovUspqdigzWM09/Zv8gbZFFTZpFC8
+	 PmaOT1sArRqDQvI9xAjMhmrySlh0O+78r9OoW9DQwgFg5kIrn8SCZjkT+m0c+wQMvfKJe
+	 BR4EqbTxwyKcEYN9pQ3RS0Qg0X8DmBdbz5fXc1SVTyxq+FWexPVelye8l/jXNhF8Vbg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795771640;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795772881;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=/+gz4x7osdn1mRAdAKNMycVXNMms0/yOgYXMjpmRseY=;
-	b=CclrBG0NmdQIuzuSyuzDeec0sBnl+cNdWiP728CgUZ7auBNWLtYeO+PE/dS/aUnl35Nh
-	 dJKYVkqZ0g8pp5HoG0GYv1nDrjRfzVcPb6rfTW/PlMtyjG2Kwz889sNP267fk0iUHAS92
-	 8PZn9g7nfYZ8mrlDbEQxzUzfJKO1A+N96TMhM1mQbc1esUb2cBn4JFsO/dKHhQ07ZmP38
-	 njDNH+vBckF9lZEOqoU22HqHKIz9QIXw90PAx5adUMV1BpOMEpxZSrrpSCO81LsV9bi+v
-	 yv1OdEi7nAH03lNe8D7iwYu6eDR6sgmIq2RgdnRAGDBSstT0BNTTjYDGsvMU6jIaMPw==
+	bh=UVjAewNoGwOkppiEbs+Ibor4Yut2pWAD/XmpYyTmPM4=;
+	b=2q57/vxclYI7rDyE48t9ZiqxLZZdaxmtDyXnIWVOxbDuhe26fHyH3mpWf4FIt21wGAVs
+	 ChkFc1K+FbrqCVVaj7HmVnP8+RZf3+q+0Xl68DHmVzdZMkDkwASEnWMQ0cdqjTy/5QN8Q
+	 65PLnimlTh8pceBT3ePk6MvzI4+CTGjHL3FMowXZ5Du0O97/ltNHf6/OfLxTJf3YvxDsB
+	 UU3RBdL5/xUcuyqmvEpC5XCJFFnRk9EbwVfekBlZ4mqvxFFFVkj5HtxvyFxF4XK2egQOB
+	 RHgNb+wqA0hvM8VJnH3qoqeBk4XXPrdXhgIEr3avSY6SyDG36kTXNUjew3gVjIQCRfA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fUmPOHjf;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AkfCcEV6;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC360606A32D;
-	Fri, 27 Nov 2026 09:27:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F22D8606A323;
+	Fri, 27 Nov 2026 09:48:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fUmPOHjf
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E0D41F00A22;
-	Fri, 27 Nov 2026 09:27:17 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AkfCcEV6
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B86CA1F0089A;
+	Fri, 27 Nov 2026 09:47:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795771640;
-	bh=/+gz4x7osdn1mRAdAKNMycVXNMms0/yOgYXMjpmRseY=;
+	s=k20260515; t=1795772880;
+	bh=UVjAewNoGwOkppiEbs+Ibor4Yut2pWAD/XmpYyTmPM4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=fUmPOHjf4n4111pVeYVvWxiXrY6ZWntXMlJCMQowL9ba2LG5Z5PhYzT5DLkEJEXi2
-	 Z+SIZ+8ZhPkdUz8VlWAyueHqlRVN/1PsmbZ9/HJd2AnMq+tt8+WCbdnldDkKSssMsJ
-	 hMHCDKn6ykBdh9jG3Jl3m0Ewjq5pHcl/UJnM/LhLx5hXrE4+mTDBQYLukVvQUXoKCt
-	 1rHT2PUaILVBSE0c5LOjStzmRIP6e+NuAmTmi9ftDqADkprB78netEOpvDqQbOHkDS
-	 VYAWKZxvTDlPnQfFNNET841idRnxXDsVdYJVj6p5+Rj0ir9P1LsguJbrjYQ+W9dJZE
-	 cXlMIlmMmmVnA==
-Date: Fri, 27 Nov 2026 09:27:15 +0000
+	b=AkfCcEV6cL2DVhEal3gTid8+YIWmjJ6PhTbja6ykIHWLJn8tqKxNPevYbdY9HN15A
+	 +qrvVsbzIp0usu3dX9fHLDdz8g6fBSUEe2h710kdzXupMoUEetf/Xb2BinIi3NE+Jn
+	 MOLBbNsn6Del/cmII73bjJXPf+OrHV/C/W4As4gRMbGsMa9cOjLueGsUMkTnfAeajW
+	 3CqUJqg5R+b9+w2juBZ0vVWDsfhCdVpRkYgyY5wv3gOFETARb6Rj4xKZydjJdq8Ct+
+	 jtfvYk8jNY90EDn2OPRB9TEhpIZbUaEntDxNtPGx3yLEqp01PLaSGmBE3e6rpuGB1Y
+	 GLcwitdKsc58g==
+Date: Fri, 27 Nov 2026 09:47:56 +0000
 From: Lee Jones <lee@kernel.org>
-To: Jerome Brunet <jbrunet@baylibre.com>
-Cc: Andre Przywara <andre.przywara@arm.com>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Chen-Yu Tsai <wens@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>, Hans de Goede <hansg@kernel.org>,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	mfd@lists.linux.dev, linux-sunxi@lists.linux.dev,
-	Sashiko <sashiko-bot@kernel.org>,
-	Conor Dooley <conor.dooley@microchip.com>
-Subject: Re: [PATCH v8 0/5] regulator: Add X-Powers AXP318W PMIC support
-Message-ID: <20261127092715.GP38590@joneslee-macbookpro.roam.internal>
-References: <20260910-axp318-regulator-v8-0-e906a61a7f3d@baylibre.com>
- <20261127084820.GN38590@joneslee-macbookpro.roam.internal>
- <1jzeuu1vey.fsf@starbuckisacylon.baylibre.com>
+To: Linus Walleij <linusw@kernel.org>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, mfd@lists.linux.dev,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] dt-bindings: mfd: ab8500: Describe the ULP PLL supply
+Message-ID: <20261127094756.GS38590@joneslee-macbookpro.roam.internal>
+References: <20261120-ux500-mfd-ulp-pll-supply-binding-v1-1-2740b61bd839@kernel.org>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -67,26 +59,20 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <1jzeuu1vey.fsf@starbuckisacylon.baylibre.com>
+In-Reply-To: <20261120-ux500-mfd-ulp-pll-supply-binding-v1-1-2740b61bd839@kernel.org>
 
-On Fri, 27 Nov 2026, Jerome Brunet wrote:
+On Fri, 20 Nov 2026, Linus Walleij wrote:
 
-> On ven. 27 nov. 2026 at 08:48, Lee Jones <lee@kernel.org> wrote:
+> VintCore12 supplies the internal ULP clock PLL on the AB8500.
+> Require the supply on its clock controller so the PLL can be powered
+> while in use. The AB8505 does not have this dependency.
 > 
-> > On Thu, 10 Sep 2026, Jerome Brunet wrote:
-> >
-> >> This patch series adds support for the X-Powers AXP318W PMIC, which is
-> >> used recently on new boards with Allwinner SoCs (the A733).
-> >
-> > Doesn't apply.  Please rebase onto v7.4-rc1 and submit a [RESEND].
-> 
-> No worries.
-> 
-> In this cycle, series based on -rc1 and devm_kzalloc() in them tend to
-> conflict in next. This series would be impacted too. I can rebase on -rc2
-> if you'd prefer to avoid this. Just tell which you prefer.
+> Signed-off-by: Linus Walleij <linusw@kernel.org>
+> ---
+>  .../devicetree/bindings/mfd/stericsson,ab8500.yaml    | 19 +++++++++++++++++++
+>  1 file changed, 19 insertions(+)
 
-Yes please.
+Needs a DT Ack.
 
 -- 
 Lee Jones
