@@ -1,59 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.171.202.116
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795802321;
-	b=uZu0sQMBVyLexoABVHAy4By8BpuPMoLI5sndsgBUhJksICj8QR3ph6nFlnKeHwnzxHPr
-	 3DcxklMOS0OzvzqHer2zR96I1wevDYn4uMDseDC94a39ucaVd6FBNZDHmaNENkxeqaVOK
-	 fIlob8U7HSLpnJOZRpaQHK7psdA6dlwqwdOTveMLqnHIBjSXKyCsuvjesLLQQu19fq+NM
-	 9FAa3mb7/XZfG4X0H3ksGC0VvH/T4DvQLxiilkOaItwST7cF2nrSB94NS6hbiCiZmgZ9c
-	 gbgTsWP5JVtbv7IICz7LdWRqLoKJhnZ2e5cP1FYHo3yJ0WJylHDaQKnFJuIFCrMMe/g==
+	t=1795802721;
+	b=nDYdW7Z7jjjCvnKWPmBIMWe9GOhzS3Xbft/ROQIRMcLtRlk6JQYzF6BxotHeWZNRWg9O
+	 +9sUfX7Vm2vPTInVzyQVJP4ETiELNGYS8/Q3+xwzMUxAyTUO16/f81fW1RxmoUXfyKLaw
+	 ljMwJYBR58+JSwLnjvp7ATg8GYJIOCZ8Arr9d6URnEiWGZQt3PlvNLJZJs+UKqCyw62Ba
+	 XrZvTCDicfUESx3c77XWHGnZ76b8a/W9MR4YorxjUKj9S+2T02MbHE1OE0g+dMT+sLtpj
+	 al06wf4QVV/SFNJZh8eIh6rIKZsEIoA2zKj5yuDlog7M797MFDJc1tyT4RGJvABIoIQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795802321;
-	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Last-TLS-Session-Version;
-	bh=Zr6KbrylqSaWIVwB1seor5jsbMQ4jm8G48aqXN7Veuo=;
-	b=wSjhX9086jL9bMrFpn/h9+P8g6T6H4sIH9X/gKgUB7C6sK09PSh5LVUNUA/Iitk708xt
-	 RoFWbUvPqGMx0eeL4/ccZtuglxto9hksC1CUhcy09mamBw39/Ol82su87FJCMQle/7Tl0
-	 e425emG5szexhE/objyEHE1P/f76IfZI1HrR5hEOjZoIMX/gebqoHi84FADUuhsMjV8r7
-	 HwQwNetH5qaxrFcHSBspRDABBTGmdyYkYB0/Wfa65ZpDXLCBrR1jO4zHScClanN4DUkZ6
-	 TlfpDYLUOwixzHwdA6fNEFH2PzLzSGdhkBKm3fbt8q20MeDJ0WLmyCQ0xWS6C/BETFw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795802721;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=phhd/npU1lhHPxPB7FouqLAJZQihBFGXoRy7gzmW9RA=;
+	b=25k8P1HeMLAZbKu3DXFMZpg14WtkpYl8ZBEbY2Z6ORPfP0QUxO6nndX2Hrwx8FQEC1SN
+	 jaU9GFVK7Bu9qn3wLbOrTjIoq2H6A9AGlkos3PYG3Aoxr713d0Td1cXFloumFrqZoD5t2
+	 QJGtlP53Zf4tMjCnJbXx2BXCCiVQUI6/Vw8cGat2uxkl/0dvPJzrhOs6J7iJlt986KMFL
+	 yHaM2ua7Ip5rZxWMBN12X2vQAFPUDtmnAmWktPQnPbmPf0/WbNoKrudXahe+du8lJOUWj
+	 aY3VCAiP4eT+wGaFkIA0j8QmtNz8ewZE+lzqW9TRj5lc0mura6WfQ4kAwu46dbuW/Rg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=bootlin.com;
-	spf=pass smtp.mailfrom=bootlin.com;
-	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=rgTntw0g;
-	arc=none smtp.remote-ip=185.171.202.116
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dd54I323;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E702B606A68F
-	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 17:58:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E702B606A68F
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0ACF2606A321
+	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 18:05:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=rgTntw0g
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 3BE35C2AC4F;
-	Fri, 27 Nov 2026 17:58:48 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 62E9D6049C;
-	Fri, 27 Nov 2026 17:58:39 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 78BA3104395A3;
-	Fri, 27 Nov 2026 18:58:37 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1795802318; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=Zr6KbrylqSaWIVwB1seor5jsbMQ4jm8G48aqXN7Veuo=;
-	b=rgTntw0gM5an+kJXkvwx5VIyvwfGRWTpyetEA0xTAkpNvJyZoJy3DduztA4qRQ9gfztPlz
-	lbfxkPn3MQd0ejSRHlZ+p1e1uyXh6uALWtIO7oimZIsWOtt2GdZKGWSMJ+lvWDLZVhrjI3
-	Iw/QtdhJJAqS24D6i7Um27sq6gNaHtfJB4xxnS0wF15R3r9v5u6RNbjOa3+MiTaarG9um3
-	M+LpQZNk4ZAKrHsg4j13H8uqgx1dNrwWqcEEwEFwQ+BeG9GvYxmHGQPQHM1JcVW7Gw637T
-	UY7RacWfkxaAeQLuR0/ai9MA2Cazc6hjx4wGGyEirUVw9hgLzWY/HrSwPomdrQ==
-From: "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>
-Date: Fri, 27 Nov 2026 18:57:55 +0100
-Subject: [PATCH v7 11/11] i2c: cgbc: Fetch the status of a write transfer
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dd54I323
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7185F1F00899;
+	Fri, 27 Nov 2026 18:05:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795802720;
+	bh=phhd/npU1lhHPxPB7FouqLAJZQihBFGXoRy7gzmW9RA=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=dd54I323nmard164RtH6WR54jIhEOIzuJ9XAwPeIJLv+usC06RJYLXzJ0fuFcRSwt
+	 Bchir6SF2H1m9Lg0BJ5yeInydSOnUeWxaRbMMPn7XpdamuxwHRbt/WDqxOzs1q8O25
+	 OpzUnn5fOjKNRtaNb0ZosKgd9FhlS3C3/LDleL24qOzQ3ympI+SY/5h49PhDqQvVtA
+	 BANMNZwUpTVqwqft9QWPZiZ8gOE9drrbya+ED9exG7RqaLhXiNN/Bg+m4YEfvhqK4h
+	 gGf+fIyK9rb8u7gDkpTFwhYSB3CgPrtRZx7HDV2rPToqGjJ3GVBzzhV4iuA1LRx/1U
+	 yYYWqmavm8QUw==
+Message-ID: <sashiko-outbox-238034@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v7 07/11] i2c: cgbc: Add support for fixed frequency
+ buses
+Reply-To: sashiko-reviews@lists.linux.dev
+To: =?utf-8?b?VGhvbWFzIFJpY2hhcmQgKGNvbmdhdGVjIEdtYkgp?= <thomas.richard@bootlin.com>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20261127-cgbc-i2c-storage-devices-support-v7-7-d0e70fc57879@bootlin.com>
+References: <20261127-cgbc-i2c-storage-devices-support-v7-0-d0e70fc57879@bootlin.com>
+ <20261127-cgbc-i2c-storage-devices-support-v7-7-d0e70fc57879@bootlin.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Fri, 27 Nov 2026 18:05:20 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -62,90 +60,89 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261127-cgbc-i2c-storage-devices-support-v7-11-d0e70fc57879@bootlin.com>
-References: <20261127-cgbc-i2c-storage-devices-support-v7-0-d0e70fc57879@bootlin.com>
-In-Reply-To: <20261127-cgbc-i2c-storage-devices-support-v7-0-d0e70fc57879@bootlin.com>
-To: Lee Jones <lee@kernel.org>, Andi Shyti <andi.shyti@kernel.org>
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Werner Gartner <Werner.Gartner@congatec.com>, mfd@lists.linux.dev, 
- linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org, 
- "Thomas Richard (congatec GmbH)" <thomas.richard@bootlin.com>, 
- Markus Haberlander <markus.haberlander@rosenberger.com>, 
- stable@vger.kernel.org
-X-Mailer: b4 0.16.0
-X-Last-TLS-Session-Version: TLSv1.3
 
-From: Markus Haberlander <markus.haberlander@rosenberger.com>
+Thank you for your contribution! Sashiko AI review found 1 potential
+issue to consider:
+- [Low] i2c: cgbc: division by zero in cgbc_i2c_get_frequency() on zero
+  freq field
+--
 
-A write transfer sends the I2C command to the board controller and
-returns without reading the controller's I2C status, while a read polls
-the status until the controller is no longer busy. The status of a write
-is therefore never fetched:
+commit d95d796e831a81afb0ee29f103c5479fbfc45e3b
+Author: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
 
-- the write reports success before the bus transfer has finished, and
-  an error such as a NAK is only reported by the next transfer;
-- the controller keeps the status of the last write pending. On a
-  conga-PA7 (BIOS PA70R026, board controller CGBCP032), a board reset
-  with a write status pending does not power the board up again: after
-  a reboot that follows a write on the general purpose bus, the board
-  stays off until it is power cycled.
+i2c: cgbc: Add support for fixed frequency buses
 
-Read the status after a write as well, as the read path does: poll until
-the controller is no longer busy, return the error it reports, and treat
-any state other than idle as an error.
+This commit adds a fixed_freq flag to struct cgbc_i2c_platform_data and
+splits cgbc_i2c_set_frequency() into cgbc_i2c_set_frequency() and
+cgbc_i2c_get_frequency() so fixed-frequency buses can compute
+read_maxtime_us without setting the bus speed.
 
-Tested on a conga-PA7 with v6.18.64 and "i2c: cgbc: Propagate hardware
-errors when polling read status": without this patch, a write to an
-absent address returns success, the next read fails, and a reboot after
-a write does not come back. With it, the write itself fails, the next
-transfer succeeds, and 14 reboots, each right after an acknowledged or a
-NAKed write, all came back.
+> diff --git a/drivers/i2c/busses/i2c-cgbc.c b/drivers/i2c/busses/i2c-cgbc.c
+> index 50483bdc67307..85cbe709bcde9 100644
+> --- a/drivers/i2c/busses/i2c-cgbc.c
+> +++ b/drivers/i2c/busses/i2c-cgbc.c
+> @@ -128,7 +128,6 @@ static int cgbc_i2c_set_frequency(struct i2c_adapter =
+*adap,
+>  	struct cgbc_i2c_data *i2c =3D i2c_get_adapdata(adap);
+>  	struct cgbc_device_data *cgbc =3D i2c->cgbc;
+>  	u8 cmd[2], data;
+> -	int ret;
+> =20
+>  	if (bus_frequency > CGBC_I2C_FREQ_MAX_HZ ||
+>  	    bus_frequency < CGBC_I2C_FREQ_MIN_HZ) {
+> @@ -139,18 +138,29 @@ static int cgbc_i2c_set_frequency(struct i2c_adapte=
+r *adap,
+>  	cmd[0] =3D CGBC_I2C_CMD_SPEED | i2c->bus_id;
+>  	cmd[1] =3D cgbc_i2c_freq_to_reg(bus_frequency);
+> =20
+> -	ret =3D cgbc_command(cgbc, &cmd, sizeof(cmd), &data, 1, NULL);
+> -	if (ret)
+> -		return dev_err_probe(i2c->dev, ret,
+> -				     "Failed to initialize I2C bus %s",
+> -				     adap->name);
+> +	return cgbc_command(cgbc, &cmd, sizeof(cmd), &data, 1, NULL);
+> +}
+> =20
+> -	cmd[1] =3D 0x00;
+> +static int cgbc_i2c_get_frequency(struct i2c_adapter *adap)
+> +{
+> +	struct cgbc_i2c_data *i2c =3D i2c_get_adapdata(adap);
+> +	struct cgbc_device_data *cgbc =3D i2c->cgbc;
+> +	u8 cmd[2] =3D { CGBC_I2C_CMD_SPEED | i2c->bus_id };
+> +	unsigned int bus_frequency;
+> +	u8 data =3D 0;
+> +	int ret;
+> =20
+>  	ret =3D cgbc_command(cgbc, &cmd, sizeof(cmd), &data, 1, NULL);
+>  	if (ret)
+> -		return dev_err_probe(i2c->dev, ret,
+> -				     "Failed to get I2C bus frequency");
+> +		return ret;
+> +
+> +	/*
+> +	 * The BC should never return a zero value; if it does, the resulting b=
+us
+> +	 * frequency is 0 Hz, causing a division by zero when computing
+> +	 * read_maxtime_us.
+> +	 */
+> +	if (!data)
+> +		return -EIO;
+> =20
+>  	bus_frequency =3D cgbc_i2c_reg_to_freq(data);
 
-The patch and this changelog were drafted with the help of Claude
-Opus 5.5 and reviewed and tested by me.
+[Severity: Low]
+As reported by Andi Shyti on v6 [1], can cgbc_i2c_get_frequency() still
+divide by zero when computing i2c->read_maxtime_us if data has non-zero
+unit bits in CGBC_I2C_FREQ_UNIT_MASK (0x40, 0x80, or 0xC0) and a zero
+frequency field in CGBC_I2C_FREQ_VALUE_MASK?
 
-Fixes: 6894f640b8f3 ("i2c: Congatec Board Controller i2c bus driver")
-Cc: stable@vger.kernel.org
-Signed-off-by: Markus Haberlander <markus.haberlander@rosenberger.com>
-Reviewed-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
-Tested-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
-[Thomas: Use USEC_PER_SEC]
-Signed-off-by: Thomas Richard (congatec GmbH) <thomas.richard@bootlin.com>
----
- drivers/i2c/busses/i2c-cgbc.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+cgbc_i2c_reg_to_freq() masks off the upper unit bits and multiplies only
+data & CGBC_I2C_FREQ_VALUE_MASK, so checking !bus_frequency after
+cgbc_i2c_reg_to_freq() (or checking !(data & CGBC_I2C_FREQ_VALUE_MASK))
+would catch all encodings that evaluate to 0 Hz.
 
-diff --git a/drivers/i2c/busses/i2c-cgbc.c b/drivers/i2c/busses/i2c-cgbc.c
-index 5105b920e919..852fcb9e21fa 100644
---- a/drivers/i2c/busses/i2c-cgbc.c
-+++ b/drivers/i2c/busses/i2c-cgbc.c
-@@ -255,6 +255,22 @@ static int cgbc_i2c_xfer_msg(struct i2c_adapter *adap)
- 		ret = cgbc_command(cgbc, &cmd, cmd_len, NULL, 0, NULL);
- 		if (ret)
- 			goto err;
-+
-+		ret = read_poll_timeout(cgbc_i2c_get_status, status,
-+					status != CGBC_I2C_STAT_BUSY, 0,
-+					USEC_PER_SEC, false, adap);
-+		if (ret)
-+			goto err;
-+
-+		if (status < 0) {
-+			ret = status;
-+			goto err;
-+		}
-+
-+		if (status != CGBC_I2C_STAT_IDL) {
-+			ret = -EIO;
-+			goto err;
-+		}
- 	} else if (i2c->state == CGBC_I2C_STATE_READ) {
- 		xfer.write = 0;
- 		xfer.read = len;
+[1] https://lore.kernel.org/r/awhXXeFy-9vuqseH@zenone.zhora.eu
 
--- 
-2.53.0
-
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261127-cgbc-i2c-s=
+torage-devices-support-v7-0-d0e70fc57879@bootlin.com?part=3D7
