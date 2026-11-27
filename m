@@ -1,97 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.49
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795808505;
-	b=Ahuk3bcNC/PARWHpBtJ1R55OQF/OBP5ya9IfC0hQ1h7j7S/gkVi8EfnzBAP6v2hTevap
-	 ICEOJRPDfOoBxap448Kh6p+Sh6iq8z7X+s9jetF1y/dWEYpMF5qCPnHC7QPwAHmFtJhXC
-	 iUDBgzAHdjED6LTunqiHTSvvLMvzQTBp94SIGC16f+JnQJ1c2PF/m/u400Lw+YFQymzkq
-	 RL0N5BCAQS7YcynWYvp4QKjv9qDe6WtHFTHKJLdzIU/mSw+ZG+3BFDomy/wtlqgy2LVy9
-	 n8BL5vbBY9+XN8ipmPEhB6vCWvWaObRFyOB/UwFvQQ0bkikZGMbp7WDM6Qf9Tu4xiCw==
+	t=1795808978;
+	b=073rchY7KQnYMh2++dMrrGyuHQKUjmNlJlTFIAhUyb11Itf7np8DMRq6+klQ/UNCqxh1
+	 lCY/znCC/pPtp7s9u2/VdR8cvy4tCnphF+lSOs6u/ILEN1upwKfSmP9UwFF2wAY4gI323
+	 1r+UyAOgxJM/FgC28lRIiFse7eC9Dw6kKOKCCAOHIt6jS7HbiwLz6aVq/1jd+Xheis4Fp
+	 245e9Rmjbzta0WuAicCfatfnv/cktnKvAwkyzz0mwdzd1uVvCC/VuxtS+hA5jU83T7QQR
+	 1O/RQCOpq0B5zcsS0AwgU8yjHPy1Ns6P902c1pGLpSWbTSJjvs/kWPyR1LUNEnfRnSg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795808505;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Subject:
-	 From:To:Cc:Date:In-Reply-To:References:Content-Type:
-	 Content-Transfer-Encoding:User-Agent:MIME-Version;
-	bh=6NlbtvLkK0tgXcaycQQR/bKkLqj97Yphah1S3Bta7cY=;
-	b=iI42kHn8o20vbZ9aNdRNqmD0f5wBLg3NXqJimT46Guv0pKMMiGzLwKf/f+etHCLRSkfh
-	 3TO92ZgfOemEyevr4CMkX05Epv1qdDRkorTA1u9pT63UGk25rakcyut8mw3ZSDaIo8E/G
-	 C9zZJz/mZB2dS3O5/BYNmAPBIgbcSEvriFfLQOrpjt+44ItQvZIlytyF8u9VYZva9XJIe
-	 GD4YBUoRQKTs70FYDvWpGGc1H+grf51ddAaWKNeKtS1+R4ZGHXEYFoLZamYYTTh2hVLS1
-	 oSJ1/Ueu125n4EchYFpwJFiLowtNrZCy/cm0gUdtoPWaAmQg7UJKzea1gD3E6TE79Hw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795808978;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=H5hKXU/pl5SECHpQwbKsxoZ4iZ+myLDKafmSiX3vuQ8=;
+	b=3hcT4pAs/QAxumCrs5+ZxBxm79jXYj4/GlDtK5Kx7ilv1eSWYBbHIDxPfP+pUTmuDsWa
+	 bply4ByGb3jAB52CGkVOpHNLmvvrukOtGao2V84wdvaynpkXOVONmRsV2zdgbJXTchtf+
+	 /LzjriS4Pa9/AvlfpKzMY9INnP/dlbhkYmtNUqXTMJUfF0AwcWKHBm6Xrfk9V39aFTxWi
+	 iBz2E5nhQIvHx+780kG3JFDZX9hPs1Y+nShbmT7DZmC8POphtVw+DFhhYBh8RDe6NpzT2
+	 4FWDLYtS799tuWTKIb/9uzXgt8XhUS08yOdJsNc1wTVxjhadxCsZa7jQFABQV0HYlsw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=wfHy3Lfl;
-	arc=none smtp.remote-ip=209.85.128.49
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gcA9J7u7;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69103606A31E
-	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 19:41:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 69103606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB8E6606A31F
+	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 19:49:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=wfHy3Lfl
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4a5177d78c7so86026105e9.2
-        for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 11:41:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1795808504; x=1796413304; darn=lists.linux.dev;
-        h=mime-version:user-agent:content-transfer-encoding:content-type
-         :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=6NlbtvLkK0tgXcaycQQR/bKkLqj97Yphah1S3Bta7cY=;
-        b=wfHy3LflWfbA+3j2hUr129CB0u9fsmKnDLoZzLHNfgtIRF1krJlD4PHNKQEFxMYcFa
-         Qa2iQFkAdxt5vCIUcRqzGaz1HyeO3/X42fELHv6ev4JdQ1hAQ+4oKFdQdECTpsnL3YlU
-         SVKX+/To8oytAaE0sXGVG/aH7p2XIINJjkYoEloBi6KbKIS/EjgYyigFMo+p/T5/zpcg
-         yYKt+0aQG5LZRFlGg5sQ5xj7BEzflFQKGeCc7zLN7YtVLNvRO4wY/AZ+xPbrJ2ikG7o/
-         zGOJ0JuG4F+z8ucXFSIOW3wL9QaDasr2yJEq7V8zvYvekKdjb3d2fx/aWgkVnvyTBzsS
-         1/1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795808504; x=1796413304;
-        h=mime-version:user-agent:content-transfer-encoding:content-type
-         :references:in-reply-to:date:cc:to:from:subject:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=6NlbtvLkK0tgXcaycQQR/bKkLqj97Yphah1S3Bta7cY=;
-        b=uCzWS7dz8+nHSJNatc2F7e0OwnIOtLMONFSXrqLrcapWvzVQXpFF3cNOkE4wBvXNyY
-         HiVL5qw4NHGjCWFl4tGt2TPFE/dkqxhEXG+mS+QFtbY5m8njcAxqB/HYXTJU90TNcUf8
-         ZucsryWxwwz4Kl7ww6T7v0Pl7gH0MY4fLWp/hqNlnrLuGujFeMzMj/8etoDqwQ1LuyRT
-         JrY5IY9qu0r9sqvINDjckrY+qNhA86UQ3XrMbD2v61EbTeT2SszEXS+8g63yOkdpi/8C
-         z1ObtuYHVGiwSC91qz9hEQCgqoiJ0N3ZhuTYyXRBfs8DjYYmRQFNce2RdWjsJJ1HptUh
-         HCPg==
-X-Gm-Message-State: APuU4Z9UJVxXV5aitBCA8XaObupav1k7JaIEZYv8KtNdco/43Q5CeILI
-	1SejX5uXW/B3P/zg2Avgfr4YoJc4cYmQR+GQ5DInLlOJa7bU8j3Qu4aC805AfrNc7z3r7aygakL
-	nECSWWgVNkg==
-X-Gm-Gg: AZFdTZdFJpHOxJ59mDCdKbehkVUURdtmk6J8BNIgdVQTsKAtBS0iYtwFXuVUX/GbzUO
-	1Cpu1cqHoPLn3duva5533W/AiDQDRtOoFoaNi099mAmenSfUYR7OCw6iOygiIQLKPx+9tRixW2q
-	Ou8YYXGAcc7JZtJ+LXwjPOUHBWg3WcaZmv2WtTeMsS8ODLOqvDtrEMAl6PxPeghuuxQDR30x1/5
-	zYgUAHWghDv/7tpOFrVXkZHkOiTGj1gBOdJCjqU2GYYvpQypZnctx4u6HJ1tJ4DXTkwxV8x8sEs
-	nE+eC1Y7q9Rqvt6O5+n3sKvIxK8ovBRBhblKa7j15ciMCoS62aRv0lOyyRd3x6VnLZInOJUPbGc
-	OTltEC7CV3L742sPnV1sJgKy7gJvMyCCuzdPYe7h+p/fxL7L5W1amV+we8ZSLt93NEpMsjqSLbB
-	K+BKYc5EzvTAUQJRzP4IHMKHQsjyTlKm/1g8GKgDNQjPhJscZy7rxNBCr/9fECrvtPW4LGeoDKQ
-	6PZfHlEAIYgFbd45/Q+NDBUVzSS9hgbCh775S3r+He1YOqwhvbSmRnZZ6iiaxmpB+0fIJMN6jER
-	hiDvb2+2aFclaWG8ltYYSeFYd6uRtKa+Kg==
-X-Received: by 2002:a05:600c:1d8c:b0:4a1:c5eb:b445 with SMTP id 5b1f17b1804b1-4bb88820436mr532823045e9.35.1795808503757;
-        Fri, 27 Nov 2026 11:41:43 -0800 (PST)
-Received: from draszik.lan ([109.255.181.4])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bbb39dd4e7sm77524985e9.0.2026.11.27.11.41.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Nov 2026 11:41:43 -0800 (PST)
-Message-ID: <d92561fd6eaea337c6bc3502bcd3df0bc30d0e60.camel@linaro.org>
-Subject: Re: [PATCH 6/6] power: supply: max77759: follow the supplier from DT
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>
-To: sashiko-reviews@lists.linux.dev
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gcA9J7u7
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 891611F00897;
+	Fri, 27 Nov 2026 19:49:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795808978;
+	bh=H5hKXU/pl5SECHpQwbKsxoZ4iZ+myLDKafmSiX3vuQ8=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=gcA9J7u7RfHQnHmPgux1WS2uzvpY/s/BAORp7JGhb3Xb4g3Yhj+ns1QLltPqYf0Vo
+	 rA9/9o6PJfP5r8ZkflkCayapnxYpqNUgYv9jhEqseOXsWmugmpiNi6HD+O6oA+Xmqd
+	 bIDivDphsgNExA5Cklr92tImI2tWAlP8dYlHAvzlxYU16dchTAcnreHvPgHxU9vO5v
+	 2J2sPdXSLFJMdlnKvI4zhLc56Z7mMWsdipK/tajh/uFShgUTt8iLURtS7PgWhYtPkM
+	 RZpNf+OLwwehJ5SamgWPFtHX+hhmOBJ4Irirv95q9nEVdR3xi/ejQ6JpCe48HY0F7f
+	 I7CTgkglrz0YA==
+Message-ID: <sashiko-outbox-238182@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH v2] mfd/regulator: db8500-prcmu: Remove EPOD regulators
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Linus Walleij" <linusw@kernel.org>
 Cc: mfd@lists.linux.dev, lee@kernel.org
-Date: Fri, 27 Nov 2026 19:42:00 +0000
-In-Reply-To: <sashiko-outbox-238159@kernel.org>
-References: <20261127-max77759-charger-fixes-v1-0-b364a0862d72@linaro.org>
-	 <20261127-max77759-charger-fixes-v1-6-b364a0862d72@linaro.org>
-	 <sashiko-outbox-238159@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <20261127-ux500-epod-regulator-removal-v2-1-0ccab0f430fd@kernel.org>
+References: <20261127-ux500-epod-regulator-removal-v2-1-0ccab0f430fd@kernel.org>
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2-9+build1 
+Date: Fri, 27 Nov 2026 19:49:38 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -100,75 +58,45 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
 
-Hi,
+Thank you for your contribution! Sashiko AI review found 1 potential
+issue to consider:
+- [Low] mfd/regulator: db8500-prcmu: dangling select
+  REGULATOR_DB8500_PRCMU
+--
 
-On Fri, 2026-11-27 at 19:30 +0000, sashiko-bot@kernel.org wrote:
->=20
->=20
->=20
-> [Severity: Medium]
-> Does calling max77759_charger_external_power_changed() directly from
-> probe and from power_supply_external_power_changed() trigger a lockdep
-> warning between chg->sync_lock and &psy->epc_sem?
->=20
+commit 7f1c7130aab1be1bfd74edd6c57fc9f35b75d19d
+Author: Linus Walleij <linusw@kernel.org>
 
-[...]
+mfd/regulator: db8500-prcmu: Remove EPOD regulators
 
-> CPU0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 CPU1
-> ----=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ----
-> lock(&chg->sync_lock)
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 down_read(&psy->epc_sem=
-)
-> down_read(&psy->epc_sem)
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 lock(&chg->sync_lock)
->=20
-> =C2=A0*** DEADLOCK ***
->=20
-> CPU0: max77759_charger_probe() ->
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 max77759_charger_external_power_changed() =
-->
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 power_supply_get_property_from_supplier() =
-->
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 power_supply_get_property()
-> CPU1: power_supply_changed_work() ->
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 power_supply_external_power_changed() ->
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 max77759_charger_external_power_changed()
->=20
-> In addition, even without the unlocked call in probe, calling
-> power_supply_get_property() on the supplier inside
-> .external_power_changed nests down_read(&supplier_psy->epc_sem) inside
-> down_read(&chg->psy->epc_sem), which lockdep rejects as recursive
-> same-class locking because down_read() is not annotated with
-> down_read_nested().
+This commit removes the obsolete DB8500 PRCMU regulator drivers, their
+build hooks, and the db8500-prcmu-regulators MFD cell.
 
-Both lockdep warnings are caused by the shared &psy->epc_sem lockdep
-class in the unpatched base tree, not by a real deadlock: the two
-semaphores belong to different power_supply instances (the charger
-consumer and its supplier), so the actual lock order is acyclic:
+> diff --git a/drivers/regulator/Kconfig b/drivers/regulator/Kconfig
+> index 83a76b78e58cc..5de063ef7abe6 100644
+> --- a/drivers/regulator/Kconfig
+> +++ b/drivers/regulator/Kconfig
+> @@ -408,17 +408,6 @@ config REGULATOR_DA9211
+>  	  step down converter 12A or 16A DC-DC Buck controlled through an I2C
+>  	  interface.
+> =20
+> -config REGULATOR_DBX500_PRCMU
+> -	bool
+> -
+> -config REGULATOR_DB8500_PRCMU
+> -	bool "ST-Ericsson DB8500 Voltage Domain Regulators"
+> -	depends on MFD_DB8500_PRCMU
+> -	select REGULATOR_DBX500_PRCMU
+> -	help
+> -	  This driver supports the voltage domain regulators controlled by the
+> -	  DB8500 PRCMU
 
-  [chg->psy->epc_sem] -> chg->sync_lock -> supplier_psy->epc_sem
+[Severity: Low]
+Does removing REGULATOR_DB8500_PRCMU leave a dangling select in
+arch/arm/mach-ux500/Kconfig?  ARCH_U8500 still has
+"select REGULATOR_DB8500_PRCMU".
 
-As noted in the cover letter, this patch depends on:
-
-  power: supply: core: give each supply's epc_sem its own lockdep class
-  https://lore.kernel.org/r/20261125-power-supply-epc-lockdep-key-v1-1-c8a4=
-1b8a4470@gmail.com
-
-With that prerequisite applied, consumer and supplier supplies have
-separate lockdep classes for epc_sem and neither the AB-BA nor the
-recursive-locking warning triggers (verified on Pixel 6 with
-CONFIG_PROVE_LOCKING=3Dy across boot, supplier unload/reload, and
-charger module reload).
-
-Cheers,
-Andre'
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261127-ux500-epod=
+-regulator-removal-v2-1-0ccab0f430fd@kernel.org?part=3D1
