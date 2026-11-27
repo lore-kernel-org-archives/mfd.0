@@ -1,55 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.246.85.4
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795776186;
-	b=Nx6CuZZUxuYwJwjmAwvQXBOmuADsea42uC2+UUmVqv3vzDEiiBMdPXLKHWS9mPZQ1OwC
-	 8TsZTNKzYDvKwXgeKdi8Zip53mqNIRk/euihERdDRhyRCwOs7wR+xDgq2UCrMmLskieFv
-	 2yia8kC8NfEAMkDiMHnxNSc8bU1GYOZ2zZRG83jA1LGXlXem/gTsPoZBDdJWaON2p4Lkb
-	 GFHOwgKJkVVZNZ9HGRGcWHdogly+rr0itgYHQswVCVAA9RPhrQJ3x8HYjLZFXMuLCcOui
-	 LfAb+Fjj5xG/5HZfPQUDGHjQgSQNu36idwmPSuLrMa5py9F1NlZc8lgViIopiFRdWNQ==
+	t=1795777499;
+	b=Ue5UgC/yP5A/OXBTcVSnCbxJ/6LA8IXkOJ+T86yLLA3tc1XURPKp0d/mNENh10H6LbMP
+	 0lGe4haRL/4jBfOoq1HtjLran+t0a2QWEbKR+E7skj3ppTiGSPQmEr216NnMRQIfGu9gD
+	 WwgS1NEEe0QajIU6Dv/5Ju0pol4KEdUsN77GoeIRqAzRgt/JmsKqXDJaRsFOEOe3UepWt
+	 /RnR1YUlx/aL6gHLeMmBtlJ9HYRIc8HF/uuOiN9fIJOgz7rsQ9R9wyYjWlFbMRlnAnkNz
+	 4O1PnZx0mYf+ZUxxt921PY0EYLglpEGLgPE9VXrvRALn+pSRMwKnScvaZzrH9nKHaPg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795776186;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=T04P97Rs2F8+DPa8ZfvpK44yWCCSVtNxx8bBrONDQfk=;
-	b=Hq9vsw8swNMyjjClbulNFOcQByeFRpJj6vVnCHsrr5c3UGqGS8me1YYJgfyCpw5s4T+v
-	 YLv8PLJLWf5wsAVboPicFBITfWfPblIcTcnfstUtmMyMMVupojO3oy3WoUWjNFnOY4J1l
-	 WEt0P3eLgTDo8/IgTVWpShCbN7Tv6IiATaD2lzJQNOpfIRqPAURwL3CQgiTztetHDL2o8
-	 ARbgOPf4/fbSUeqLrDn91wct9vNpxsUnU0+mslVOmlNK5/R/XVGm0ma7gxQoruUtUajp1
-	 a3YyjdWdvqJj/orMkuGYk1SOHWTWwvaWYtlZe+kKDk8ahfEWOEUX3RERyz12YnRM0Fw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795777499;
+	h=DMARC-Filter:Received:Received:Received:DKIM-Signature:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Last-TLS-Session-Version;
+	bh=ER8jZocxPLPmILHQgyoN9JTV0B3dXhV6CyXeBPGIICQ=;
+	b=vCvcOacJMh6akziFcD5dr103TlZfEeGqNouimH+1jpxQ1djcokjTamd1p2foe+JLCQdt
+	 etGRdjQopgkVtRirNRVeOm5ev5G18KP5p6CzmeJUEILBTERtDVN7wnlZ8Y0DrmljXG0Vi
+	 waVO2BMaSFvO6aDTI8IiufMDs+HUoBNwKPrn5hMs01/2MbLnOqn/buteL5K8uRu5hcI64
+	 wlpD7OXOQGuypEPZArZAm+0AwnUctlm+EuAgwDQ0sxCbcvFOmPa+i4lkn26PIAsQ/B6gq
+	 n5eegG9RZQMd1juRUsKejyXJIjE1rp8V88h+Jbj/+ffbkgMvbW2cfiyG+RVThBLYR2w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=OxdVi9OP;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=bootlin.com;
+	spf=pass smtp.mailfrom=bootlin.com;
+	dkim=pass header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=w1wiWbX3;
+	arc=none smtp.remote-ip=185.246.85.4
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 561BF606A31C
-	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 10:43:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B15E7606A31F
+	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 11:04:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B15E7606A31F
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=OxdVi9OP
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D0E281F00899;
-	Fri, 27 Nov 2026 10:43:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795776186;
-	bh=T04P97Rs2F8+DPa8ZfvpK44yWCCSVtNxx8bBrONDQfk=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=OxdVi9OPalJ2CZoG2Kl222CbK3IKvRYo3WbPotSJUYuisrKUf2J3QetO+9Vii9Ch8
-	 yZX1U5ygBJWtkGDmHs3ECSlOEjZaCz/i6bDo7s71dWFrBPp/ym8aRnLmRw1efdqSQe
-	 qlC2tuTM9EEiRpV7jKRYcaztloppU/l0ZbmJfDLftgkuqzhuvZjgez2LB7W3H+rHfA
-	 MfKN1mZEJZWeR0OhRIjXoxaYxrEKH6h2aqq+I/qjuaCjUSD/7/OMy50Ro6f/pLYDDd
-	 DsesakDxgxwWyC4Fl/SvT6Nk2Y52ln7IX+PYFaIFGZtgZH31O9B3WnVpj8E1BLZiAp
-	 2mXrkhJMcGRzQ==
-Message-ID: <sashiko-outbox-237163@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v9 0/5] regulator: Add X-Powers AXP318W PMIC support
-Reply-To: sashiko-reviews@lists.linux.dev
-To: "Jerome Brunet" <jbrunet@baylibre.com>
-Cc: mfd@lists.linux.dev, lee@kernel.org
-In-Reply-To: <20261127-axp318-regulator-v9-0-986b68f3c4a0@baylibre.com>
-References: <20261127-axp318-regulator-v9-0-986b68f3c4a0@baylibre.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Fri, 27 Nov 2026 10:43:05 +0000
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.a=rsa-sha256 header.s=dkim header.b=w1wiWbX3
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 5B4514E417C1;
+	Fri, 27 Nov 2026 11:04:57 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id 285C46049C;
+	Fri, 27 Nov 2026 11:04:57 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id D76CF11E69318;
+	Fri, 27 Nov 2026 12:04:54 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1795777496; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 content-transfer-encoding:content-language:in-reply-to:references;
+	bh=ER8jZocxPLPmILHQgyoN9JTV0B3dXhV6CyXeBPGIICQ=;
+	b=w1wiWbX32tVw8kVzORE+NyhFnc9+sPl6VK1ZAnUJAAVJsuHcZthfxIjEhb3bmLTh7FDam7
+	RKcH5N/wVN1JAYOLPPohourLcH4EfACdnOG7OOMnup35NtnCxME9ijH4UXATFCZw5izwXD
+	kLmzg6TpvIEHE1UgsPQIHhEEgPnEpPb88MIYWDkAJBbSIHrW6+yZwIEpUO6SRl/irvOUu1
+	K/7KqrW5/2MY1ZCimY77RBPExVh1crhKIKTr58OGqMByHz/fP3WXwzSTzzOlRQ+luESnbL
+	sg5i/qp3WWL6pM2NynT0bW16jBs8cNjuONX3QlzVDJnfmlTHi/3iLtWEOrHhvg==
+Message-ID: <67f6aa99-c625-437a-bae8-ea7a1637afe1@bootlin.com>
+Date: Fri, 27 Nov 2026 12:04:53 +0100
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -58,9 +61,60 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] i2c: cgbc: Fetch the status of a write transfer
+To: "Haberlander, Markus" <Markus.Haberlander@rosenberger.com>,
+ Andi Shyti <andi.shyti@kernel.org>
+Cc: Lee Jones <lee@kernel.org>, "mfd@lists.linux.dev" <mfd@lists.linux.dev>,
+ "linux-i2c@vger.kernel.org" <linux-i2c@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "stable@vger.kernel.org" <stable@vger.kernel.org>
+References: <20261123-cgbc-i2c-write-status-v1-1-5b0fa0322b57@rosenberger.com>
+ <179568834099.302193.16315749597111506309.b4-review@b4>
+ <awgwO98qx3zX4MaY@zenone.zhora.eu>
+ <b0d32861-c123-4f4f-8bac-aa0e7e48c719@bootlin.com>
+ <FR4P281MB4840894892BD79C05D844CEC84412@FR4P281MB4840.DEUP281.PROD.OUTLOOK.COM>
+Content-Language: en-US
+From: Thomas Richard <thomas.richard@bootlin.com>
+In-Reply-To: <FR4P281MB4840894892BD79C05D844CEC84412@FR4P281MB4840.DEUP281.PROD.OUTLOOK.COM>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 
-Sashiko has reviewed this 5-patch series and found no issues.
+On 11/27/26 10:20 AM, Haberlander, Markus wrote:
+> Hi Thomas, Andi,
+> 
+> On 11/26/26 9:18 PM, Thomas Richard wrote:
+>> If I'm not mistaken, USEC_PER_SEC is only used if master_xfer returns
+>> -EGAIN (arbitration loss), else __i2c_transfer() directly returns so no
+>> 1s timeout. And we never return -EAGAIN.
+>>
+>> So why should we wait 1s?
+> 
+> Thanks for looking into this! I think Andi means the one-second loop in
+> cgbc_i2c_xfer(). Before my patch, when the controller was still busy
+> with a write, the next call returned -EBUSY and that loop simply tried
+> again, for up to a second.
+> 
+> My patch now waits only 2 * read_maxtime_us for a write to finish. That
+> is enough for the transfer itself. But if a device stretches the clock,
+> the controller might stay busy for longer, and the write would fail
+> where it used to succeed. That's why USEC_PER_SEC sounds like the safer
+> choice to me. I'm happy with either, though - you know this hardware
+> much better than I do.
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261127-axp318-reg=
-ulator-v9-0-986b68f3c4a0@baylibre.com
+Ah yes clock stretching, makes sense. So it is also valid for read
+operation. So we could drop read_maxtime_us. But it's an other story, I
+want my series to be merged, I'll send a patch later.
+
+Markus I'll add your patch in my series, and make the USEC_PER_SEC
+modification. Thanks for your contribution.
+
+Best Regards,
+Thomas Richard
+
+
+
+
+
