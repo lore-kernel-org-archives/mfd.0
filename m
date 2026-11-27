@@ -1,75 +1,61 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795771602;
-	b=bF0fX4Ldoi13vE619Kjv5GSbrXV06A7gv75k0OJ8HZo8ovgNFHphiXAPFmHfEj9fZdWt
-	 lJ3VUh2halu+99MOZ48juZVbGj3e+gnT6IgrZ/gaPFvFGv7ZSC2qZJQoy4hNZuTdCbvad
-	 sLDb434LHulMfDKlx5es7ytFzFMi4YiYkfc71kBJmO3mGt+zPsEvbSz744m/q5lSzjYIo
-	 mOOHedcWBIUsqdvNgXp7rAJpfPmV+6qyO8Hl5LR2dNwds7fk2oRL6FvFsJSTax5/eydwY
-	 mHaY2BhseTGLwq8O036vaAey5yysRF9dqNbvaYBrjKdpQFU7NQfRRmt0wAXlidlc3PA==
+	t=1795771640;
+	b=ipbvr5P+oFl1PW8lr2zk8TExafn8j2lBsvQcWbKBfd0nHAg86epMpQjkwAKdaUSG2b8V
+	 CzCEneqb0O59mzTrdjgOvulUHoat/WpbYjP/MXAspwRTVlGnhTgAgCRMVSzLKNk0kbyjm
+	 XD0Vcbg9dD464Jf6AujPtQln07lsuRYc9bmBmcv4V6zGoJN9PmIx+li9dVWo/MUGz80jK
+	 xpXzpGei74DCmu5atAxRawJ8YpeyFkLjQPHzvn2hv9YSREau4Zb//NJVxcuokqWN/rIUP
+	 oTJenR24VJTTsqVe1KxS3nFn5lM+e36rOqhK93mRuLBteJUen5Ryz/6TdF0vqAUUjxA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795771602;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795771640;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=UZ8b6FSjjztFRZRInOS21srAOCub1vYlaQEc7H442+0=;
-	b=0AbcHeHF4fXliilna4uoGaX79LEVTD9ch8N6aa8uMKCVhSMVQlyCGJsGkYAXiQDAv7nw
-	 Lxu7OKa5zWEVvY0fdwXEJJgqMGdk9DTkH4L7Qukj+GKGAdHf8RsvvwiEv5Mbuf0oPXyQu
-	 kGWCrm5wZzK47qBU+asLMJVM41NtoEOawX3ojo03lLr9KbFUMu5z4U6f31RBd81jcSINx
-	 nlHoK6PnG+lKaNYsHvgoJkJvMOHc75paHViCqwfT6++uwpKbrU57ChUFGZyn+aZclllYV
-	 AwYRhLsiGMCU17H6ZRfCOyUTQUkVT0+M4AtVkCzEj3HCcK9494ezBIBlj2vZ7+NNWqw==
+	bh=/+gz4x7osdn1mRAdAKNMycVXNMms0/yOgYXMjpmRseY=;
+	b=CclrBG0NmdQIuzuSyuzDeec0sBnl+cNdWiP728CgUZ7auBNWLtYeO+PE/dS/aUnl35Nh
+	 dJKYVkqZ0g8pp5HoG0GYv1nDrjRfzVcPb6rfTW/PlMtyjG2Kwz889sNP267fk0iUHAS92
+	 8PZn9g7nfYZ8mrlDbEQxzUzfJKO1A+N96TMhM1mQbc1esUb2cBn4JFsO/dKHhQ07ZmP38
+	 njDNH+vBckF9lZEOqoU22HqHKIz9QIXw90PAx5adUMV1BpOMEpxZSrrpSCO81LsV9bi+v
+	 yv1OdEi7nAH03lNe8D7iwYu6eDR6sgmIq2RgdnRAGDBSstT0BNTTjYDGsvMU6jIaMPw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bC+k17hM;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fUmPOHjf;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A886606A682;
-	Fri, 27 Nov 2026 09:26:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC360606A32D;
+	Fri, 27 Nov 2026 09:27:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bC+k17hM
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3DD311F0089B;
-	Fri, 27 Nov 2026 09:26:37 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=fUmPOHjf
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E0D41F00A22;
+	Fri, 27 Nov 2026 09:27:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795771602;
-	bh=UZ8b6FSjjztFRZRInOS21srAOCub1vYlaQEc7H442+0=;
+	s=k20260515; t=1795771640;
+	bh=/+gz4x7osdn1mRAdAKNMycVXNMms0/yOgYXMjpmRseY=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=bC+k17hMNjb1w1yolYbFgLSObI4G3G8VzkJiFWCKUKHDd6vAK/ElmmbDSU00uKI3i
-	 ETMnHH3o1JOr3W+PUMHeS/SX0iruS9euKG0+FjkSCnkh4d2sHThvCM/3JQGBMviXfx
-	 H5E+ImunTnB3ra+u1Ovjc4ramAYUUYxJ8Xf4mP4U6Y/ccpNELf77y28/SYo43gz6qM
-	 EeNl0BePh/cL18Du2oX0g9Zt8G0o5kSdgiP6LRiaPcazNpLRwGFDFpH2MHnhF9/XpG
-	 3+TAqP3Z0FR0u7unSCR4gXmtQ38uQciY6Z0H1hDEIbzfFd4PSgYZix/wHGpqVRMOa1
-	 37n9mz3eTI8fQ==
-Date: Fri, 27 Nov 2026 09:26:34 +0000
+	b=fUmPOHjf4n4111pVeYVvWxiXrY6ZWntXMlJCMQowL9ba2LG5Z5PhYzT5DLkEJEXi2
+	 Z+SIZ+8ZhPkdUz8VlWAyueHqlRVN/1PsmbZ9/HJd2AnMq+tt8+WCbdnldDkKSssMsJ
+	 hMHCDKn6ykBdh9jG3Jl3m0Ewjq5pHcl/UJnM/LhLx5hXrE4+mTDBQYLukVvQUXoKCt
+	 1rHT2PUaILVBSE0c5LOjStzmRIP6e+NuAmTmi9ftDqADkprB78netEOpvDqQbOHkDS
+	 VYAWKZxvTDlPnQfFNNET841idRnxXDsVdYJVj6p5+Rj0ir9P1LsguJbrjYQ+W9dJZE
+	 cXlMIlmMmmVnA==
+Date: Fri, 27 Nov 2026 09:27:15 +0000
 From: Lee Jones <lee@kernel.org>
-To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Shawn Guo <shawnguo@kernel.org>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	=?iso-8859-1?Q?J=E9r=E9mie?= Dautheribes <jeremie.dautheribes@bootlin.com>,
-	Wim Van Sebroeck <wim@linux-watchdog.org>,
-	Guenter Roeck <linux@roeck-us.net>, Frank Li <Frank.Li@nxp.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Randy Dunlap <rdunlap@infradead.org>,
-	"Thomas Perrot (Schneider Electric)" <thomas.perrot@bootlin.com>
-Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-gpio@vger.kernel.org, imx@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org,
-	linux-watchdog@vger.kernel.org,
-	Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
-	Miquel Raynal <miquel.raynal@bootlin.com>, mfd@lists.linux.dev,
-	linux-doc@vger.kernel.org,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-	Conor Dooley <conor.dooley@microchip.com>,
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Subject: Re: [PATCH v10 0/5] Add support for AAEON SRG-IMX8P MCU
-Message-ID: <20261127092634.GO38590@joneslee-macbookpro.roam.internal>
-References: <20261120-dev-b4-aaeon-mcu-driver-v10-0-a756687e7997@bootlin.com>
- <179577149953.44397.11685484329530619531.b4-ty@b4>
+To: Jerome Brunet <jbrunet@baylibre.com>
+Cc: Andre Przywara <andre.przywara@arm.com>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Chen-Yu Tsai <wens@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>, Hans de Goede <hansg@kernel.org>,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	mfd@lists.linux.dev, linux-sunxi@lists.linux.dev,
+	Sashiko <sashiko-bot@kernel.org>,
+	Conor Dooley <conor.dooley@microchip.com>
+Subject: Re: [PATCH v8 0/5] regulator: Add X-Powers AXP318W PMIC support
+Message-ID: <20261127092715.GP38590@joneslee-macbookpro.roam.internal>
+References: <20260910-axp318-regulator-v8-0-e906a61a7f3d@baylibre.com>
+ <20261127084820.GN38590@joneslee-macbookpro.roam.internal>
+ <1jzeuu1vey.fsf@starbuckisacylon.baylibre.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -81,40 +67,26 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <179577149953.44397.11685484329530619531.b4-ty@b4>
+In-Reply-To: <1jzeuu1vey.fsf@starbuckisacylon.baylibre.com>
 
-On Fri, 27 Nov 2026, Lee Jones wrote:
+On Fri, 27 Nov 2026, Jerome Brunet wrote:
 
-> On Fri, 20 Nov 2026 08:23:52 +0100, Thomas Perrot (Schneider Electric) wrote:
-> > This patch series introduces support for the AAEON SRG-IMX8P embedded
-> > controller (MCU). The MCU is connected via I2C and provides GPIO and
-> > watchdog functionality for the SRG-IMX8P board.
-> > 
-> > The series includes:
-> > - Device tree binding for the MFD driver
-> > - MFD driver that serves as the core driver for the MCU
-> > - GPIO driver implementing the GPIO functionality
-> > - Watchdog driver for system monitoring
-> > - MAINTAINERS entry for the new drivers
-> > 
-> > [...]
+> On ven. 27 nov. 2026 at 08:48, Lee Jones <lee@kernel.org> wrote:
 > 
-> Applied, thanks!
+> > On Thu, 10 Sep 2026, Jerome Brunet wrote:
+> >
+> >> This patch series adds support for the X-Powers AXP318W PMIC, which is
+> >> used recently on new boards with Allwinner SoCs (the A733).
+> >
+> > Doesn't apply.  Please rebase onto v7.4-rc1 and submit a [RESEND].
 > 
-> [1/5] dt-bindings: vendor-prefixes: Add AAEON vendor prefix
->       commit: 8754d4912daa776faa2525f5e6277a18d40fd939
-> [2/5] dt-bindings: mfd: Add AAEON embedded controller
->       commit: 62eb7223813ba41684a22494de046e240f20240a
-> [3/5] mfd: aaeon: Add SRG-IMX8P MCU driver
->       commit: 001731afc45c1d8b2724346cd806c02064032ed5
-> [4/5] gpio: aaeon: Add GPIO driver for SRG-IMX8P MCU
->       commit: 10237675f88d8b90eb958ab123f2cdd2c61705d4
-> [5/5] watchdog: aaeon: Add watchdog driver for SRG-IMX8P MCU
->       commit: 7f99cacfe2793d19acdea392b46592b0c605845c
+> No worries.
+> 
+> In this cycle, series based on -rc1 and devm_kzalloc() in them tend to
+> conflict in next. This series would be impacted too. I can rebase on -rc2
+> if you'd prefer to avoid this. Just tell which you prefer.
 
-Pull-request to follow after build testing.
-
-Note to self: ib-mfd-gpio-watchdog-7.5
+Yes please.
 
 -- 
 Lee Jones
