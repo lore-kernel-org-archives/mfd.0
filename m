@@ -1,69 +1,66 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=183.62.165.209
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795753066;
-	b=YHmN2x9En00wV/+/n1BGKdsspMqm+raH9aOpgYLTeppX0g7sD4ABnEIPquep2wFup3Gg
-	 PIs2OXhOWVCY+m90kFZwifhl36uocjZa8WwWA8DhnBLRb0vDGkbtmUwGhysRQ5DeTybQa
-	 lwfjxDyhVP8lhoIb7Lan4mvZU2lon7lIeSuctc29YXvIk2NAlcV9rwoTXiBn7TIrpMe/K
-	 RmTzZeXe0GkKf2v+XuS+U5CRAVVG+l3lsTyr7B45pJM6mJw3tS1dirqGNNMJg4UKXrlRe
-	 3HsonglJBfXm0zP5SYqWHsmGy+DoSxCVTVZKRHoe2NtLB8i/PQCe3JcnSImJNd1RavA==
+	t=1795753068;
+	b=jV5u6LV4+BO6ZVxj1NzCennRX3rRXBfNbQfBfMx7KiVY5gXClXHkmFUB1+Ant65xSk5K
+	 QhEcdKZaPivwI75i8K0stN2WvHkJhWR6HeShImLlDvsfys8TAVniQl8W6eZJ7DTe/ugft
+	 nyij0BDtYD7iaJmgSy3Q62Y4qq2VCIyIOfPaXe9U8ypHBfhgKIeYLIDswaTWG3TS/s37x
+	 a/QlwaDVhASt4bsJ+LNF1Zg+2ext5R8zUMJmIWAFS0NAB29KsbQLEqgBWPfgEJ5Z5Z2Gr
+	 XP8ybvEO7rgolHTxfLV5eiPgT1QxwgouVm2yzMeZVXb5te4ZCw7vBbdQhSPvmqaHjOA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795753066;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795753068;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 X-Zmail-TransId:X-Mailer:Message-ID:In-Reply-To:References:Date:
-	 Mime-Version:From:To:Cc:Subject:Content-Type:X-MAIL:X-TLS:
-	 X-ENVELOPE-SENDER:X-SOURCE-IP:X-CLEAN:X-Fangmail-Anti-Spam-Filtered:
-	 X-Fangmail-MID-QID;
-	bh=rlzBBtRZb4snnzHgtrUJH42CZc19gfsTRjkXfZVsTdE=;
-	b=QuOAmAR+6BBWPGogPJr5ci5QGzojsBUNrKQXr+Ag2xum2k6AExiLJgTR++mhRfk476uR
-	 jDrDOY/TRhnjgSrBqmzdi1DQMq6zwPTgaOgVvKVSFgPFs2rR/Wq9Cqx01Dn+N1zS/hKEz
-	 VXnu0nWoi94Qb8IpqTlUbH4tSM6SqGsYzuc2s3Br7HzCdy0H3cLMmJIkLEQqV7fucQ5rb
-	 2NYjQsR67zhCvhcp2UXqgb8rbMHYWR5OBAiAKJhbmJczZThjXbFzT0ywG4L2GHyk0VF+5
-	 C3AYzt/niAIXYbU7tQL7BeA88xFyx4VV1m22r3u8Ve7ACUoUvMPbdr18ntL1/w2Ly5g==
+	 X-Zmail-TransId:X-Mailer:Message-ID:Date:Mime-Version:From:To:Cc:
+	 Subject:Content-Type:X-MAIL:X-TLS:X-ENVELOPE-SENDER:X-SOURCE-IP:
+	 X-CLEAN:X-Fangmail-Anti-Spam-Filtered:X-Fangmail-MID-QID;
+	bh=o1kw6hnU8gQ+J8Jm4JcnrMKncUQkJVbhKvexy/6C0B0=;
+	b=BxLn0k4QUiT2Kxki8+/BmkFseyPuSaak8WCX5AlYTQukH860/wk8dSTMRjOhZhBZzS4I
+	 tNJO5CQwTwWty5yGtOR+f+qWaxL5DTD3mn2PZ9WXESwHJOswPsKOY/WLjkRQqBlH1tlHu
+	 WgVq6WBbYNDHDidcfO+mOEWt+KIA0aTC8CQ4jjlXryLxo02xk7gPom8eHM6RZgaXSkq4Q
+	 ELls8t+dJ6hVMoPnDyUkZd2mzaVVgZbLiQtKuV/MC1f/TiYfuuXnXWQuIjV1r//QPK4oW
+	 p47fD0ykDW0YhAnBapZHCuTCXQJudi6BEuusXoOd3SJGXC3I14zcT3fqXq4xxokKuSQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=zte.com.cn;
 	spf=pass smtp.mailfrom=zte.com.cn;
-	dkim=pass header.d=zte.com.cn header.i=@zte.com.cn header.a=rsa-sha256 header.s=z202610 header.b=Gpj4IXEX;
+	dkim=pass header.d=zte.com.cn header.i=@zte.com.cn header.a=rsa-sha256 header.s=z202610 header.b=Uibfcc5W;
 	arc=none smtp.remote-ip=183.62.165.209
 Received: from mxct.zte.com.cn (mxct.zte.com.cn [183.62.165.209])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5414A606A31C
-	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 04:17:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5414A606A31C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE9FC606A323
+	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 04:17:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DE9FC606A323
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zte.com.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zte.com.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=zte.com.cn header.i=@zte.com.cn header.a=rsa-sha256 header.s=z202610 header.b=Gpj4IXEX
-Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
+	dkim=pass (2048-bit key) header.d=zte.com.cn header.i=@zte.com.cn header.a=rsa-sha256 header.s=z202610 header.b=Uibfcc5W
+Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mxct.zte.com.cn (FangMail) with ESMTPS id 4jbKrj0v4Vz5B7RP;
-	Fri, 27 Nov 2026 12:17:41 +0800 (CST)
+	by mxct.zte.com.cn (FangMail) with ESMTPS id 4jbKrm0cH2z5B7RQ;
+	Fri, 27 Nov 2026 12:17:44 +0800 (CST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=zte.com.cn;
-	s=z202610; t=1795753061;
-	bh=GsW4TxwTKSwhax6rfFYysLiUD78WAH1pjckpYaz5lHc=;
-	h=In-Reply-To:References:Date:From:To:Cc:Subject;
-	b=Gpj4IXEXAYRImuunaahftsogfFFFm+iNnK6VSOKW7NgqV/CUsdruSpXQ0eqGdHihO
-	 00cQxzYoFjISIax8GEELXdU26mG4DH7I/5MjySjUnsypZZvSYi03MjW8T0uL2VGFzy
-	 CFLaSPl66+9HES5OOVhVGobOVo5w00OVhGKnTiiHLs+O9ZpplPWuYiMJmIOnkoMX4q
-	 kzAk8I5X4BJHAGCanCtq8X+d8AvFV9mqG0cPuO5U2+io6Tp3Jzt5TURbbDFdfZprFp
-	 XcufUFI9yIg6Feg1qCatLNNFiv5vMo5Bdlh+m89nM/rOPX/7VihOtlQhbo/ujKtpWx
-	 8M6f5IcYPQ3gw==
-Received: from xaxapp01.zte.com.cn ([10.88.99.176])
-	by mse-fl2.zte.com.cn with SMTP id 6AR4HdhI048953;
-	Fri, 27 Nov 2026 12:17:39 +0800 (+08)
+	s=z202610; t=1795753064;
+	bh=7dWTAERmtLKdh6e3ZWD2pXBqw1DVo/eGxb4pzPC0wfk=;
+	h=Date:From:To:Cc:Subject;
+	b=Uibfcc5W5TJ/MOjPrYc4hG7NlhX/VYR+u8H6Jq+qhSfvydH9XotsnKTQ4Dwh3PAKv
+	 2FwIvIMNqjvaG/U7sT9XNUunZ9D+0hcldgWPgH27A+FAuSgwqLtgT0jsD2Q99nQMVE
+	 SpEGYYya/X0vlEpVCOzoviz6zgZ505xMHsOSLcuel2UEdYXchNloA/ic4JRMZibwux
+	 d/wKJvB3k2hG0j6iF0PDjvUsiaUDpG+OWGsPaUQJJj5pZ/NiuZGCIX7OANxoQ28f6e
+	 PDDYjTaTHEBC1oAG/zpEGaQ5FCAyot0hc2RCk4p+UtBYEfi0nz5Zx/pZnG0ZDSe04c
+	 z7wWPquf7WR6Q==
+Received: from xaxapp05.zte.com.cn ([10.99.98.109])
+	by mse-fl1.zte.com.cn with SMTP id 6AR4HWeE090838;
+	Fri, 27 Nov 2026 12:17:33 +0800 (+08)
 	(envelope-from shao.mingyin@zte.com.cn)
 Received: from mapi (xaxapp01[null])
 	by mapi (Zmail) with MAPI id mid32;
-	Fri, 27 Nov 2026 12:17:41 +0800 (CST)
-X-Zmail-TransId: 2af96b090465ac1-0c3da
+	Fri, 27 Nov 2026 12:17:34 +0800 (CST)
+X-Zmail-TransId: 2af96b09045e879-0c192
 X-Mailer: Zmail v1.0
-Message-ID: <20261127121741073W2BoV0DVn2BMW3wTrqImO@zte.com.cn>
-In-Reply-To: <20261127121734430rp7P_HaHukJyZYs7OMQjx@zte.com.cn>
-References: 20261127121734430rp7P_HaHukJyZYs7OMQjx@zte.com.cn
-Date: Fri, 27 Nov 2026 12:17:41 +0800 (CST)
+Message-ID: <20261127121734430rp7P_HaHukJyZYs7OMQjx@zte.com.cn>
+Date: Fri, 27 Nov 2026 12:17:34 +0800 (CST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -78,86 +75,43 @@ To: <lee@kernel.org>, <mfd@lists.linux.dev>
 Cc: <tony@atomide.com>, <linux-omap@vger.kernel.org>,
         <support.opensource@diasemi.com>, <patches@opensource.cirrus.com>,
         <ckeepax@opensource.cirrus.com>, <linux-kernel@vger.kernel.org>
-Subject: =?UTF-8?B?W1BBVENIIHYyIDMvM10gbWZkOiBkYTkwNTI6IEJhbGFuY2UgdGhlIHBhcmVudCBJUlEgd2FrZSByZWZlcmVuY2U=?=
+Subject: =?UTF-8?B?W1BBVENIIHYyIDAvM10gbWZkOiBGaXggYW4gb3V0LW9mLWJvdW5kcyBJUlEgbWFwIGFuZCBlcnJvci1wYXRoIGJ1Z3M=?=
 Content-Type: text/plain;
 	charset="UTF-8"
-X-MAIL:mse-fl2.zte.com.cn 6AR4HdhI048953
+X-MAIL:mse-fl1.zte.com.cn 6AR4HWeE090838
 X-TLS: YES
 X-ENVELOPE-SENDER: shao.mingyin@zte.com.cn
-X-SOURCE-IP: 10.5.228.133 unknown Fri, 27 Nov 2026 12:17:41 +0800
+X-SOURCE-IP: 10.5.228.132 unknown Fri, 27 Nov 2026 12:17:44 +0800
 X-CLEAN: YES
 X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6B090465.000/4jbKrj0v4Vz5B7RP
+X-Fangmail-MID-QID: 6B090468.000/4jbKrm0cH2z5B7RQ
 
-da9052_irq_init() enables wake on the chip IRQ before requesting ADC_EOM.
-The error path and da9052_irq_exit() leave a successful wake enable
-unbalanced, so the IRQ retains its wake reference after probe failure
-or device removal.
+This is the second revision of three fixes from the [PATCH 0/5] mfd
+series posted on November 7, following Lee's review on November 18.
+The 2/5 twl6030 change was not commented on and is not resent; the 5/5
+gateworks-gsc change has its own history and is posted separately as v4.
 
-Enable wake after requesting ADC_EOM, and record whether the enable
-succeeded. Drop that reference before tearing down the parent IRQ
-chip. The device can still probe when wake is unavailable.
+Shao Mingyin (3):
+  mfd: tps65219: Fix the TPS65214 main IRQ bit mapping
+  mfd: arizona: Free only registered diagnostic IRQs
+  mfd: da9052: Balance the parent IRQ wake reference
 
-Fixes: ed05be56643e ("mfd: da9052: Register ability of device to cause a wake-up interrupt")
-Signed-off-by: Shao Mingyin <shao.mingyin@zte.com.cn>
----
+ drivers/mfd/arizona-core.c        | 49 ++++++++++++++++++++++++++++++++-------
+ drivers/mfd/da9052-irq.c          |  7 ++++--
+ drivers/mfd/tps65219.c            | 14 +++++++------
+ include/linux/mfd/arizona/core.h  |  1 +
+ include/linux/mfd/da9052/da9052.h |  1 +
+ 5 files changed, 54 insertions(+), 18 deletions(-)
+
 Changes in v2:
-- Enable wake after requesting ADC_EOM and keep the conditional
-  disable for irqchips that reject wake enable.
+- 1/3: specify every table entry by its hardware bit index instead of
+  adding a placeholder entry for the reserved bit (Lee).
+- 2/3: free only the diagnostic IRQs whose request succeeded, so probe
+  rollback cannot free a virq that has no action.  Charles is asked for
+  another look, as his earlier tag covered the unconditional free.
+- 3/3: request ADC_EOM before enabling wake, and keep the conditional
+  disable because an unbalanced wake disable warns (Lee).
 
-Previous version: https://lore.kernel.org/all/20261107162123768WcPgulYo-5-EuCbXTrwwH@zte.com.cn/
-
-Build-tested on Linux-next next-20261118 with GCC 13.3.0 for x86_64.
-
- drivers/mfd/da9052-irq.c          | 7 +++++--
- include/linux/mfd/da9052/da9052.h | 1 +
- 2 files changed, 6 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/mfd/da9052-irq.c b/drivers/mfd/da9052-irq.c
-index abbdbf0337e2..0fbf274a8fd2 100644
---- a/drivers/mfd/da9052-irq.c
-+++ b/drivers/mfd/da9052-irq.c
-@@ -259,8 +259,6 @@ int da9052_irq_init(struct da9052 *da9052)
- 		goto regmap_err;
- 	}
- 
--	enable_irq_wake(da9052->chip_irq);
--
- 	ret = da9052_request_irq(da9052, DA9052_IRQ_ADC_EOM, "adc-irq",
- 			    da9052_auxadc_irq, da9052);
- 
-@@ -269,6 +267,9 @@ int da9052_irq_init(struct da9052 *da9052)
- 		goto request_irq_err;
- 	}
- 
-+	ret = enable_irq_wake(da9052->chip_irq);
-+	da9052->irq_wake_enabled = !ret;
-+
- 	return 0;
- 
- request_irq_err:
-@@ -281,6 +282,8 @@ int da9052_irq_init(struct da9052 *da9052)
- int da9052_irq_exit(struct da9052 *da9052)
- {
- 	da9052_free_irq(da9052, DA9052_IRQ_ADC_EOM, da9052);
-+	if (da9052->irq_wake_enabled)
-+		disable_irq_wake(da9052->chip_irq);
- 	regmap_del_irq_chip(da9052->chip_irq, da9052->irq_data);
- 
- 	return 0;
-diff --git a/include/linux/mfd/da9052/da9052.h b/include/linux/mfd/da9052/da9052.h
-index 9cb2fc2938ce..ba155de6bf24 100644
---- a/include/linux/mfd/da9052/da9052.h
-+++ b/include/linux/mfd/da9052/da9052.h
-@@ -92,6 +92,7 @@ struct da9052 {
- 	u8 chip_id;
- 
- 	int chip_irq;
-+	bool irq_wake_enabled;
- 
- 	int fault_log;
- 
+v1: https://lore.kernel.org/all/202611071607376342uPiYA9rHRC7ZI9Ix-8xh@zte.com.cn/
 
 base-commit: e8017d29067fd1310a65c3494ce1a1b492adbac6
--- 
-2.43.0
