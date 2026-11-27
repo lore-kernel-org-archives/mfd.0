@@ -1,55 +1,69 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=160.30.148.34
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795752020;
-	b=n8VrMx4DkrzBukOk0FhsSXZkTRJ8nFTsfEdaru/6QdYx1cc7u+H6eGoA4Y2txULRnidl
-	 jBBHAxKWYp+zZMo5e6KI183QcH54vaPC0Gb7BuqEpJI3c1se20oOBkDYJJkGxZ6bnteMy
-	 s5vTYAx/5bh6OHnYTNqp4EClKxMDJ3Uzocta9m1WR3KNIsKT+QcW88x0wsGmamEGcV5fP
-	 Iff/PQ1QnX2ZZFOTOUvFRzkHBXkz4soqam9Yi+sDcNtJuDTZW43e/1xIIwdjNyVHQUx8u
-	 uVSaAissPDA68R5WJ7PNEho+fFEh4I9LHHBBdoeOqLF+77LJKSuhSZqCySpaRkPIx8g==
+	t=1795753013;
+	b=2RJkY1U6rtY/eCbfe/sFYJnxRvINM1PHQQyPPZrMYQZnCpfEmXCW1/iX+q24OhCYdKT6
+	 unykv2GXDbbVBEGLoUYQaFs4N5UtRJJcYS6xQruDrpZDTiDuqZADuKvFmUuc3jTufZ388
+	 cPhe1y+yBFo+pN8T5bS+8p91USYcUN7Xhq0ETWQ9kYalOhwHXMntIxAWeZtJd9OQSaZQ7
+	 8I+k/FnPZrVUOMVY1X9ApV1xphj4CXO6BpAfWHy7PnBsyD2Bb/NSOK/gpPAKI9s9p+lUx
+	 zHvd6cq+i77PN+rE2Bma4Ei5e9czcYnoMClmhtu9ZthEq68w5yn51LuCtvilQSpN+XQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795752020;
-	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
-	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
-	bh=gr7Hz++tDiStjPaoVXiYk/6tcC1sczwYodYZLOuz0LA=;
-	b=TM6TZBCO0qxKYIeKD2xS+03evqVqVLXCpKgJZLzGuA4vdIY4+SFFF8On3qL2ZXmTTkmX
-	 rv6zF/RiGyLzDm5REwU3QaJ1OAc7oG8GZsLPY4epPqx1311Pgd9HuNKkoZnPWahI9dUZB
-	 95u2WezCSW2D7X2R7So0eguRzCumzt+3LxpkwevHGq7qGIPYxHWaSuOJkuXrQ2Yoe/mYM
-	 pDUFjGKZBpIx+KuHm+gHGp+DGr2HlSaFh4Ncs+boK70jx/RJNWla8TRlp4Dd4+AGAUhK4
-	 DqLKtFlmoCmfwCfCsBAC2+YhSq6C0+3qluzrNiI9vQQgqgV3Y2vm7lEQPBuDok1XYaw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795753013;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 X-Zmail-TransId:X-Mailer:Message-ID:In-Reply-To:References:Date:
+	 Mime-Version:From:To:Cc:Subject:Content-Type:X-MAIL:X-TLS:
+	 X-ENVELOPE-SENDER:X-SOURCE-IP:X-CLEAN:X-Fangmail-Anti-Spam-Filtered:
+	 X-Fangmail-MID-QID;
+	bh=Tn5AlZp4PbwQpF51ff+Tfn5KuY+NWZUr3Vs73pw+2lU=;
+	b=1WYZXOJLfFs7NDTNFO/weVjOpzIOwWNbmPlQjikCU9KJ1UZO8Y3cMS6jeZrg/QvyP1wc
+	 Woi97QqY35j8nVBpfQWi/B9OO/IiTd3WhclTvc1zofBlXZ29NL4ZLphQwAPeNir74pv/V
+	 BVIu6jdFzUn5Yb5mV3mFMXluJhuDUg9zQK5ug9bjoEqbjnCH0kB+TjC/8PHU9dKLp/Jdi
+	 ARtk8NwzwBnFfoDQ8CHSuio+3rbaMuQc2zB8M8CSM3mAAXS2AZnK1XiuZe3T12rBJEhLD
+	 V87Q+7gpuOagtQRzEFf1rIGa+Ia+OqsgIrmtpliT+UHlALkEp5hy5x6DKa87CC8z2LQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ojUE9hzi;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=zte.com.cn;
+	spf=pass smtp.mailfrom=zte.com.cn;
+	dkim=pass header.d=zte.com.cn header.i=@zte.com.cn header.a=rsa-sha256 header.s=z202610 header.b=bytlcDWN;
+	arc=none smtp.remote-ip=160.30.148.34
+Received: from mxhk.zte.com.cn (mxhk.zte.com.cn [160.30.148.34])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B479606A321
-	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 04:00:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B7AA606A338
+	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 04:16:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5B7AA606A338
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zte.com.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zte.com.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ojUE9hzi
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BC8621F000C1;
-	Fri, 27 Nov 2026 04:00:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795752019;
-	bh=gr7Hz++tDiStjPaoVXiYk/6tcC1sczwYodYZLOuz0LA=;
-	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
-	b=ojUE9hziTRjXHQpIFyQ/+6o7ieOga8GDn1H9+WEpdaOIABtOm8akAj6IZuoyN5IvH
-	 aHsr32aXc/ddZarVpFjMaMTaLHFWbyhzJSRzEKweYgw/hNnTO+2bhz4v0IaRkOWjkq
-	 JWmelWFczq4dSEOtUvTLHDVBqFwcZg1CNEswYD4hBdCCV04+mnsD/+yS2OFzNCGOrx
-	 0pnp4lPiXEWIhVmrnFGRZnp3A0it0e0c4dF1yON0JMpQudY4NdbUoWTGGi+Ucb/SUW
-	 Mkwx/JAdE2XFTHHnTqknOwd2YrSBj3CQ0d+FmTSlMYP+6b2m/h3Q+Q5iWkjj1D+9bN
-	 lgp1/zdfzYIig==
-Message-ID: <sashiko-outbox-236570@kernel.org>
-From: sashiko-bot@kernel.org
-Subject: Re: [PATCH v4] mfd: gateworks-gsc: Propagate I2C read errors
-Reply-To: sashiko-reviews@lists.linux.dev
-To: shao.mingyin@zte.com.cn, mfd@lists.linux.dev
-Cc: lee@kernel.org
-In-Reply-To: <20261127115402117TMtE2xcPXch0CpM9te7-L@zte.com.cn>
-References: <20261127115402117TMtE2xcPXch0CpM9te7-L@zte.com.cn>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Date: Fri, 27 Nov 2026 04:00:19 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=zte.com.cn header.i=@zte.com.cn header.a=rsa-sha256 header.s=z202610 header.b=bytlcDWN
+Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mxhk.zte.com.cn (FangMail) with ESMTPS id 4jbKqk47kTz4yjjG;
+	Fri, 27 Nov 2026 12:16:50 +0800 (CST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=zte.com.cn;
+	s=z202610; t=1795753010;
+	bh=Tn5AlZp4PbwQpF51ff+Tfn5KuY+NWZUr3Vs73pw+2lU=;
+	h=In-Reply-To:References:Date:From:To:Cc:Subject;
+	b=bytlcDWNiVzSw1uoXLuaFFeNTwuAeJtpewm1xwcWS7OQtY3yaDf27t8KN2Pmwu3jd
+	 SM1Y93OR3C3WZyr0NtxcfTvUNrHMNcQCVPHh3Fz5mtyfvfBT1CZ0OsJmIa8WBdNa5Y
+	 DvMUSl6YPHCIDHG9ObuApk0of5vV+WI33/31vxrZVn+YEBCAw1ETMMw7ttQwvoRRd2
+	 CxbndtpGTXuxXiHkTlRAxUv8CALKMJgRYJtuV7+HP2QKjJDDP7mvAjSPUQWN4vzhRQ
+	 4rTz/SwJX1k1JAE42I/xIe+3R+TMH7qjoos4aXbU0Qa4/BWA33jEZcx963yydHaiQx
+	 uqL+qZOePZKLg==
+Received: from xaxapp02.zte.com.cn ([10.88.97.241])
+	by mse-fl1.zte.com.cn with SMTP id 6AR4Gfk7090025;
+	Fri, 27 Nov 2026 12:16:41 +0800 (+08)
+	(envelope-from shao.mingyin@zte.com.cn)
+Received: from mapi (xaxapp02[null])
+	by mapi (Zmail) with MAPI id mid32;
+	Fri, 27 Nov 2026 12:16:42 +0800 (CST)
+X-Zmail-TransId: 2afa6b09042a974-da2be
+X-Mailer: Zmail v1.0
+Message-ID: <202611271216428215iKcoBY8ZqGeX3UOjPGid@zte.com.cn>
+In-Reply-To: <179442121138.44545.365837636476170108@kernel.org>
+References: 20261107160747079LomNfOJeeu6knwkNqJYTx@zte.com.cn,179442121138.44545.365837636476170108@kernel.org
+Date: Fri, 27 Nov 2026 12:16:42 +0800 (CST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -58,21 +72,35 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
+Mime-Version: 1.0
+From: <shao.mingyin@zte.com.cn>
+To: <lee@kernel.org>
+Cc: <mfd@lists.linux.dev>, <tony@atomide.com>, <linux-omap@vger.kernel.org>,
+        <tharvey@gateworks.com>, <support.opensource@diasemi.com>,
+        <patches@opensource.cirrus.com>, <linux-kernel@vger.kernel.org>
+Subject: =?UTF-8?B?UmU6IFtQQVRDSCA0LzVdIG1mZDogZGE5MDUyOiBEaXNhYmxlIElSUSB3YWtlIG9uIGRldmljZSByZW1vdmFs?=
+Content-Type: text/plain;
+	charset="UTF-8"
+X-MAIL:mse-fl1.zte.com.cn 6AR4Gfk7090025
+X-TLS: YES
+X-ENVELOPE-SENDER: shao.mingyin@zte.com.cn
+X-SOURCE-IP: 10.5.228.132 unknown Fri, 27 Nov 2026 12:16:50 +0800
+X-CLEAN: YES
+X-Fangmail-Anti-Spam-Filtered: true
+X-Fangmail-MID-QID: 6B090432.000/4jbKqk47kTz4yjjG
 
-> gsc_read() retries the SMBus read, but reports success and returns the
-> low byte of a negative errno if it ultimately fails. The MFD probe can
-> record an incorrect firmware version or CRC, and the hwmon driver can
-> convert the error byte into a sensor reading.
->=20
-> Return the error from gsc_read() before writing the output value. Have
-> gsc_probe() check the version and both CRC reads and return the original
-> error before registering the IRQ and child devices.
->=20
-> Fixes: d85234994b2f ("mfd: Add Gateworks System Controller core driver")
-> Signed-off-by: Shao Mingyin <shao.mingyin@zte.com.cn>
+Hi Lee,
 
-Sashiko has reviewed this patch and found no issues.
+> Can't this be called after da9052_request_irq()?
 
---=20
-Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261127115402117TM=
-tE2xcPXch0CpM9te7-L@zte.com.cn?part=3D1
+Yes. In v2, the driver requests ADC_EOM first. It then calls
+enable_irq_wake() in a separate statement and records whether the
+parent IRQ accepted it. This removes wake cleanup from the ADC IRQ
+failure branch.
+
+disable_irq_wake() needs a matching successful enable. irq_set_irq_wake()
+warns if the wake depth is already zero, so exit checks the recorded
+result before dropping the reference.
+
+Thanks,
+Shao
