@@ -1,69 +1,69 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=160.30.148.34
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=160.30.148.35
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795753069;
-	b=WUu/ILQIug6hyxq3DJR7008efp2dAJShSN0MizOFuFxN5pc2eVi1rDKg1+pozyd7+ZLu
-	 pEvuW7xGsoEVWli/LF6kvF+hIV5J9UVxuuyR/QBSX/v22xclXMNdBFuM7NhB1jVKG12yh
-	 nJ/hgk3d1LyeAK5BAbF/otctv+DYvLsanNFS869pTidCOPkOJGzAAvdvmVQJxU8UR8DAd
-	 syrzUTQ+hBpTPpdLlcCP8D7AX0RrO3EnrpOmHEdMYiaeW6XATzGmrIgS00MVT5TwPJfmy
-	 G9YZ1QMpM0qRGPW5xLpe89VzIj+7Z5Vmn2JHN0b+jFA5U8JEfCYrJIEeAVGXelY3+Pg==
+	t=1795753070;
+	b=MqDbuuoditAamy8j2SnmaVp3PkkFhGFG6OQ4iXhAvy3nI3gj1usL4dRnL8iCA3tDrU8l
+	 rMm1RQKZAcRZXLW56H7AzMvlVdqijXxzYuWd3eilYTJXFYLhgLkzMfQBhCbTTWA5nfrEu
+	 SEN638kTglX9uO+a3QbwpfSs12hxlNVVDc0kgQmKQ6ll+ueL7v/UXxz+yehBS4jLSjzLd
+	 1K5ej9P2iZLvxxjxHgMLcuLV/Kj0jnjJNuLKZWzL+L/njk8Sa2MjoQ7gq+jlbSyRBDFfa
+	 3FL8b2654BcwdZeojtXTW/Pt8OkQ71B6GDhb5KoVk7N/xRrYVTDfbZIp5QgNMg+gkbA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795753069;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795753070;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 X-Zmail-TransId:X-Mailer:Message-ID:In-Reply-To:References:Date:
 	 Mime-Version:From:To:Cc:Subject:Content-Type:X-MAIL:X-TLS:
 	 X-ENVELOPE-SENDER:X-SOURCE-IP:X-CLEAN:X-Fangmail-Anti-Spam-Filtered:
 	 X-Fangmail-MID-QID;
-	bh=m2dfFTLyJDnuut/kSgGNburJKYEkRooFBwozoeDUcTg=;
-	b=ivtFvzThumY5+Vfo6biibByco1PLnjOR+ny02CvbW5dLNC64z0Tgkb59tjt38xn2IFOW
-	 cbxUZS3MWDqtZJmTcyWs3h/7/zSZxdn66qnRNaNroDyrKhyPuk48AhUUgm24Cuu4YT2y6
-	 ceJ9Ep3GO403n56hDBV0ILSQ78dSyUU4fnnj+7O1bSCQg+MCxr9a0FneIU1oRXXuNPsxB
-	 phpVAbjCNmP8VZKVi9bs+sht20L2/l8l1TjASKm2DnCKKCGg43940GgD9izo5eQb0NB+y
-	 588GvVYRV7o9Q3xGgBUu4O44IrUG/6LoZFQL9mLslV6F9S27MHBQewkD1OTLXQFVBRg==
+	bh=rPJ3lWJj+tovApgLVThNQ8lLu9fMR7Gm1SEZN5ItOqM=;
+	b=WIa3QcRdcB8rEI6aUk0KenXNkGmXUz3fi4mQtbYN2rOi+WXpzEmClpBzJmjRNvZV3rVX
+	 8sPfDqwcgdpmTA29Fc7LehcMOWLp/yQZVlcTDcKuF6TKMwtHrhdJnzd70TKyMomdMGs5U
+	 Msmn5ZERaRce9eIL75qafAyrw8PhIh1OZg1rZpMu0DVUMOJ1qCOQE1IU5uHNaady0MfSX
+	 zqC48db2VrUOdUGXgyMZt0sI3aFhj9rctfAu3yve7iMJqWnNcndC1gKEdeKQGmCYWcvjs
+	 bJ7S0hoJ10dEEByJ6J1jRJ2yYRINZn2OVqp/RLH3ySZ1XmIgtElc2u44DIst/+dXJVQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=zte.com.cn;
 	spf=pass smtp.mailfrom=zte.com.cn;
-	dkim=pass header.d=zte.com.cn header.i=@zte.com.cn header.a=rsa-sha256 header.s=z202610 header.b="oS/bzFpP";
-	arc=none smtp.remote-ip=160.30.148.34
-Received: from mxhk.zte.com.cn (mxhk.zte.com.cn [160.30.148.34])
+	dkim=pass header.d=zte.com.cn header.i=@zte.com.cn header.a=rsa-sha256 header.s=z202610 header.b=Q9wh2CtD;
+	arc=none smtp.remote-ip=160.30.148.35
+Received: from mxhk.zte.com.cn (mxhk.zte.com.cn [160.30.148.35])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF0F0606A32F
-	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 04:17:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BF0F0606A32F
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98479606A337
+	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 04:17:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 98479606A337
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=zte.com.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zte.com.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=zte.com.cn header.i=@zte.com.cn header.a=rsa-sha256 header.s=z202610 header.b=oS/bzFpP
-Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
+	dkim=pass (2048-bit key) header.d=zte.com.cn header.i=@zte.com.cn header.a=rsa-sha256 header.s=z202610 header.b=Q9wh2CtD
+Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mxhk.zte.com.cn (FangMail) with ESMTPS id 4jbKrq2cRKz4yjjB;
-	Fri, 27 Nov 2026 12:17:47 +0800 (CST)
+	by mxhk.zte.com.cn (FangMail) with ESMTPS id 4jbKrk4mDkz8XrrM;
+	Fri, 27 Nov 2026 12:17:42 +0800 (CST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=zte.com.cn;
-	s=z202610; t=1795753067;
-	bh=08f/pkkFDOG0F17eQvtO+Ri+d2aRnQL9K1pmC5PEQdM=;
+	s=z202610; t=1795753062;
+	bh=sGnRkQHi4fUwx4lC1vSiANCwS/aXw+QyMv/B3B6IAgY=;
 	h=In-Reply-To:References:Date:From:To:Cc:Subject;
-	b=oS/bzFpPKIl3JunA1hxMLAalr/0tpzfA0q6IuO6dE1ROcrd1gcH/o5shGuZtBDKNI
-	 F/gc9KuEw7ED3ux4VmvMIlNayyIQu9G1pZGzgYegtEePS/MqlqLwr3qaW/RsSGWy6p
-	 M7VyhDKbJRhzBY8CYBZgt7Fb5zT3F6ASW0VcpSzj1mHuiYjRZZI4bCRGdcDSubfP2w
-	 qNpAqrc9DATtyeC9lPV7siV01Os/CpAkP5dYbROgSlN2tpEBIZOZgu52VBTX2LUdJO
-	 m67D9Xv4SiM5D6M2eplUSIbAUx/Ha/c5sjLpDJzyNDwQFYhy82hmGIqskXhSC3INHW
-	 UmDtQlFs1axDA==
-Received: from xaxapp02.zte.com.cn ([10.88.97.241])
-	by mse-fl1.zte.com.cn with SMTP id 6AR4HbL9090958;
-	Fri, 27 Nov 2026 12:17:37 +0800 (+08)
+	b=Q9wh2CtDEtb2acSySDSGKs2O7M+5f9JQBNYbDCl+YdYpgPyY+mt1L0503/Ns0eO3l
+	 3gMUyXHKT5For4lH2hiBbGcww3f7Y7V//9FUr2ApyFyTBCNlOud6QnyJCeFcn3ewGT
+	 BAJK/6Nfj78yyD7EPbFblx1HLwoeHTusGBW20aFQBfocWInD6Oxw/MpCru2Bo05BPc
+	 61Fx/nMbv0oDgS/luziZjSPWCRq7CQ+Qx6RnBu9rJUIYeFRI1ifclWA4fYed49ztHj
+	 mRbaw0lfG+YZcDkNw30l+BpI2FPK1g/sIwr4CNuUwAzNKNCiKbH5chDIQwqrlJkyBP
+	 tNjUiUfgHbQuw==
+Received: from xaxapp01.zte.com.cn ([10.88.99.176])
+	by mse-fl2.zte.com.cn with SMTP id 6AR4HZmx048874;
+	Fri, 27 Nov 2026 12:17:35 +0800 (+08)
 	(envelope-from shao.mingyin@zte.com.cn)
-Received: from mapi (xaxapp04[null])
+Received: from mapi (xaxapp01[null])
 	by mapi (Zmail) with MAPI id mid32;
-	Fri, 27 Nov 2026 12:17:38 +0800 (CST)
-X-Zmail-TransId: 2afb6b090462276-08b92
+	Fri, 27 Nov 2026 12:17:36 +0800 (CST)
+X-Zmail-TransId: 2af96b090460954-0c26d
 X-Mailer: Zmail v1.0
-Message-ID: <20261127121738923LHjBUaCxdDRPGTYPDZBDV@zte.com.cn>
+Message-ID: <202611271217367487h3LD_GuX64e0UExSRdAR@zte.com.cn>
 In-Reply-To: <20261127121734430rp7P_HaHukJyZYs7OMQjx@zte.com.cn>
 References: 20261127121734430rp7P_HaHukJyZYs7OMQjx@zte.com.cn
-Date: Fri, 27 Nov 2026 12:17:38 +0800 (CST)
+Date: Fri, 27 Nov 2026 12:17:36 +0800 (CST)
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -78,134 +78,63 @@ To: <lee@kernel.org>, <mfd@lists.linux.dev>
 Cc: <tony@atomide.com>, <linux-omap@vger.kernel.org>,
         <support.opensource@diasemi.com>, <patches@opensource.cirrus.com>,
         <ckeepax@opensource.cirrus.com>, <linux-kernel@vger.kernel.org>
-Subject: =?UTF-8?B?W1BBVENIIHYyIDIvM10gbWZkOiBhcml6b25hOiBGcmVlIG9ubHkgcmVnaXN0ZXJlZCBkaWFnbm9zdGljIElSUXM=?=
+Subject: =?UTF-8?B?W1BBVENIIHYyIDEvM10gbWZkOiB0cHM2NTIxOTogRml4IHRoZSBUUFM2NTIxNCBtYWluIElSUSBiaXQgbWFwcGluZw==?=
 Content-Type: text/plain;
 	charset="UTF-8"
-X-MAIL:mse-fl1.zte.com.cn 6AR4HbL9090958
+X-MAIL:mse-fl2.zte.com.cn 6AR4HZmx048874
 X-TLS: YES
 X-ENVELOPE-SENDER: shao.mingyin@zte.com.cn
-X-SOURCE-IP: 10.5.228.132 unknown Fri, 27 Nov 2026 12:17:47 +0800
+X-SOURCE-IP: 10.5.228.133 unknown Fri, 27 Nov 2026 12:17:42 +0800
 X-CLEAN: YES
 X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6B09046B.000/4jbKrq2cRKz4yjjB
+X-Fangmail-MID-QID: 6B090466.000/4jbKrk4mDkz8XrrM
 
-arizona_dev_init() requests three diagnostic IRQs before adding MFD
-children. If adding the children fails after any of those requests
-succeed, the probe error path tears down the IRQ mappings while the
-diagnostic IRQ actions are still registered.
+The TPS65214 sub-IRQ table has seven entries because INT_SOURCE bit 6
+is reserved. Regmap IRQ indexes the table by bit number, so the power
+button status on bit 7 accesses the table past its end.
 
-Record which requests succeed and free those IRQs before IRQ teardown
-on probe failure and on removal. Diagnostic IRQs remain optional, and
-a failed request never leads to a call to free its action.
+Initialize each entry at its hardware bit index. Bit 6 is implicitly
+zero-initialized, so regmap IRQ skips it without reading a status
+register.
 
-Fixes: 3cc729869475 ("mfd: arizona: Core driver")
+Fixes: 7947219ab1a2 ("mfd: tps65219: Add support for TI TPS65214 PMIC")
 Signed-off-by: Shao Mingyin <shao.mingyin@zte.com.cn>
 ---
 Changes in v2:
-- Record successful IRQ requests and share cleanup between probe
-  failure and removal.
+- Use designated initializers for the hardware bit indices.
 
-Previous version: https://lore.kernel.org/all/20261107162122461AuQ94DzIh_R4gD8FWdVlC@zte.com.cn/
+Previous version: https://lore.kernel.org/all/20261107162119836VR3jHjgaOF-Np7Cmm0nl3@zte.com.cn/
 
 Build-tested on Linux-next next-20261118 with GCC 13.3.0 for x86_64.
 
- drivers/mfd/arizona-core.c       | 49 ++++++++++++++++++++++++++------
- include/linux/mfd/arizona/core.h |  1 +
- 2 files changed, 41 insertions(+), 9 deletions(-)
+ drivers/mfd/tps65219.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/mfd/arizona-core.c b/drivers/mfd/arizona-core.c
-index 91975536d14d..8e5b8a75e773 100644
---- a/drivers/mfd/arizona-core.c
-+++ b/drivers/mfd/arizona-core.c
-@@ -231,6 +231,43 @@ static irqreturn_t arizona_overclocked(int irq, void *data)
- 	return IRQ_HANDLED;
- }
+diff --git a/drivers/mfd/tps65219.c b/drivers/mfd/tps65219.c
+index 69cf52a595d6..f65fda6acc74 100644
+--- a/drivers/mfd/tps65219.c
++++ b/drivers/mfd/tps65219.c
+@@ -262,13 +262,13 @@ static const struct regmap_irq_sub_irq_map tps65215_sub_irq_offsets[] = {
+ };
  
-+static const struct {
-+	int irq;
-+	char *name;
-+	irq_handler_t handler;
-+} arizona_info_irqs[] = {
-+	{ ARIZONA_IRQ_CLKGEN_ERR, "CLKGEN error", arizona_clkgen_err },
-+	{ ARIZONA_IRQ_OVERCLOCKED, "Overclocked", arizona_overclocked },
-+	{ ARIZONA_IRQ_UNDERCLOCKED, "Underclocked", arizona_underclocked },
-+};
-+
-+static void arizona_request_info_irqs(struct arizona *arizona)
-+{
-+	unsigned int i;
-+	int ret;
-+
-+	for (i = 0; i < ARRAY_SIZE(arizona_info_irqs); i++) {
-+		ret = arizona_request_irq(arizona, arizona_info_irqs[i].irq,
-+					  arizona_info_irqs[i].name,
-+					  arizona_info_irqs[i].handler,
-+					  arizona);
-+		if (!ret)
-+			arizona->info_irq_mask |= BIT(i);
-+	}
-+}
-+
-+static void arizona_free_info_irqs(struct arizona *arizona)
-+{
-+	int i;
-+
-+	for (i = ARRAY_SIZE(arizona_info_irqs) - 1; i >= 0; i--)
-+		if (arizona->info_irq_mask & BIT(i))
-+			arizona_free_irq(arizona, arizona_info_irqs[i].irq,
-+					 arizona);
-+
-+	arizona->info_irq_mask = 0;
-+}
-+
- #define ARIZONA_REG_POLL_DELAY_US 7500
+ static const struct regmap_irq_sub_irq_map tps65214_sub_irq_offsets[] = {
+-	REGMAP_IRQ_MAIN_REG_OFFSET(tps65214_bit0_offsets),
+-	REGMAP_IRQ_MAIN_REG_OFFSET(tps65214_bit1_offsets),
+-	REGMAP_IRQ_MAIN_REG_OFFSET(tps65214_bit2_offsets),
+-	REGMAP_IRQ_MAIN_REG_OFFSET(tps65214_bit3_offsets),
+-	REGMAP_IRQ_MAIN_REG_OFFSET(tps65214_bit4_offsets),
+-	REGMAP_IRQ_MAIN_REG_OFFSET(tps65214_bit5_offsets),
+-	REGMAP_IRQ_MAIN_REG_OFFSET(tps65214_bit7_offsets),
++	[0] = REGMAP_IRQ_MAIN_REG_OFFSET(tps65214_bit0_offsets),
++	[1] = REGMAP_IRQ_MAIN_REG_OFFSET(tps65214_bit1_offsets),
++	[2] = REGMAP_IRQ_MAIN_REG_OFFSET(tps65214_bit2_offsets),
++	[3] = REGMAP_IRQ_MAIN_REG_OFFSET(tps65214_bit3_offsets),
++	[4] = REGMAP_IRQ_MAIN_REG_OFFSET(tps65214_bit4_offsets),
++	[5] = REGMAP_IRQ_MAIN_REG_OFFSET(tps65214_bit5_offsets),
++	[7] = REGMAP_IRQ_MAIN_REG_OFFSET(tps65214_bit7_offsets),
+ };
  
- static inline bool arizona_poll_reg_delay(ktime_t timeout)
-@@ -1355,12 +1392,7 @@ int arizona_dev_init(struct arizona *arizona)
- 	pm_runtime_set_autosuspend_delay(arizona->dev, 100);
- 	pm_runtime_use_autosuspend(arizona->dev);
- 
--	arizona_request_irq(arizona, ARIZONA_IRQ_CLKGEN_ERR, "CLKGEN error",
--			    arizona_clkgen_err, arizona);
--	arizona_request_irq(arizona, ARIZONA_IRQ_OVERCLOCKED, "Overclocked",
--			    arizona_overclocked, arizona);
--	arizona_request_irq(arizona, ARIZONA_IRQ_UNDERCLOCKED, "Underclocked",
--			    arizona_underclocked, arizona);
-+	arizona_request_info_irqs(arizona);
- 
- 	ret = mfd_add_devices(arizona->dev, PLATFORM_DEVID_NONE,
- 			      subdevs, n_subdevs, NULL, 0, NULL);
-@@ -1373,6 +1405,7 @@ int arizona_dev_init(struct arizona *arizona)
- 	return 0;
- 
- err_irq:
-+	arizona_free_info_irqs(arizona);
- 	arizona_irq_exit(arizona);
- err_pm:
- 	pm_runtime_disable(arizona->dev);
-@@ -1417,9 +1450,7 @@ int arizona_dev_exit(struct arizona *arizona)
- 	}
- 
- 	mfd_remove_devices(arizona->dev);
--	arizona_free_irq(arizona, ARIZONA_IRQ_UNDERCLOCKED, arizona);
--	arizona_free_irq(arizona, ARIZONA_IRQ_OVERCLOCKED, arizona);
--	arizona_free_irq(arizona, ARIZONA_IRQ_CLKGEN_ERR, arizona);
-+	arizona_free_info_irqs(arizona);
- 	arizona_irq_exit(arizona);
- 	arizona_enable_reset(arizona);
- 
-diff --git a/include/linux/mfd/arizona/core.h b/include/linux/mfd/arizona/core.h
-index 6d6f96b2b29f..3a9881a1c0c9 100644
---- a/include/linux/mfd/arizona/core.h
-+++ b/include/linux/mfd/arizona/core.h
-@@ -136,6 +136,7 @@ struct arizona {
- 	struct irq_domain *virq;
- 	struct regmap_irq_chip_data *aod_irq_chip;
- 	struct regmap_irq_chip_data *irq_chip;
-+	unsigned int info_irq_mask;
- 
- 	bool hpdet_clamp;
- 	unsigned int hp_ena;
+ #define TPS65219_REGMAP_IRQ_REG(int_name, register_position) \
 
 base-commit: e8017d29067fd1310a65c3494ce1a1b492adbac6
 -- 
