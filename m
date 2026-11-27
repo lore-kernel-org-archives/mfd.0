@@ -1,83 +1,84 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.41
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.54
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795797674;
-	b=b7PlFmPEYAfSZQBf3R1btgzLNO0TgjQYzTnSxriTkxeE1YhqhNp/plTsx+f68b1OArpZ
-	 2nRs4/tTKYOldTVdTkMEEP1Z7jMRKwJovl//PVz6pqz1Iqt+qwCz59DaA5ZrJxpFyobS5
-	 N1nuLn84MFMM4Hr7Kc9vbKimw+Ti6gmexLckMrRd3WUxeYXdlNx96J/rlx0oBN7C6QivZ
-	 /m2h4pk5VfXJ7cCAVz46gMR7bjXWjlNlBtO/F6HkRY7Hi+aJ08uuukCGPA6FD1E81mLgb
-	 Ik8jXj1l3iZqu3L3a1UazYgQ7oYvYQzlI6UH4/tXpotK/2XOjIlly3uOSNE1S6u1nUQ==
+	t=1795797676;
+	b=xnsepPfItNIKAjYMlw6UdYcnBpRz79+3iEnicpIJMPHVGvg6XyVgUeRA58YPMCM3WGYs
+	 MUHLJANZ9Aw5cWxtmIIDAdxyPKe8eYzNP1Aauznll6RoCgm5xHrDR1OURQPBhxOmYE7pS
+	 MDhV4krbU0csAaxMfmvqEMIlF2vR/giiyL9YTimSC2npSLTBFD8XiTXU2yFCEjknuUGFj
+	 ruNUVGAP9jzHvBjFGaWYFiuXnRwIBUnvajwhnndXTfjBO7nF6y7HyNwjqocv9he/nsPhi
+	 nSMIN1jSVkKJ1CR38t4ILUim8QFEzObZJOr4QaJeoFdv7oi/vuHrJHlGy3g7ZIQoUFQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795797674;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795797676;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=E+7zW6UhfI3gqV3DdfYb2mC8T84sI8f66dxP7719aj8=;
-	b=XR/yhRWef1IrRivhfCGKFN49LIBYtNBelGamg08YlkKO/Bcux5HkUjnBW7evLwJxZLS2
-	 j4GO45q+1C5J6BPPH3vZm/dfWc+hUDNcrgz84juyW3Nyu7QjLKAg/8LE6pXmgXxgq8KMk
-	 VKGmWVlK+7nW587OipaZrD/gSyditOH8vDjjUYpZRDgghjZcVC6+aQXkdNrhBUNHcYUxQ
-	 LCpSD1BtpwJoMqdF6jqkY3mM+fzbUGgEtZT+/nTyRwrvLgRbfvz8OfgnLtD4zXFS6QmCY
-	 8G0tkTwTwX4LYUtrivgNowDni0GBPC2/Jre2P+2Uu7atbrSm07ovs4N7XPcXpZG27gw==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=xh8JlClPQjIKYSMwaXks/N+gTEcs+PhZFyDS0fpX7rw=;
+	b=Guhk5fYzn+6ShPnfKQYgnJy4UoIuwUTuMe5f5ieYecTJ+NJ8wsLeQ/DzfMYIOZC0ZO3R
+	 6IZbdjpZUB//nDGPP+8fRVhhM47trRqWL0sJlLSxxsfGnBqW3yz0UUcqefkgx31nw/7tX
+	 qcregbiFyph0sgMBgVI/8oQP9lYy/0RDLdDmEtHmX3W4c/3+C10zP+jI4Ezp1TDvGD87W
+	 8kgzgNvWr3dfFlyfTshkUKsIrDE9TQylfAL5K7ni7N7AoI8sgpZz+TBKpRkf/L3r7ZV0C
+	 qDhRKgCwQiNvhp7AQT2CLOtAQFJeZqlW+fLpA5CGnKD2LzLuK0zhQ9xP+/9kQJjU+fw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qiRIue+N;
-	arc=none smtp.remote-ip=209.85.218.41
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DHpiJXjW;
+	arc=none smtp.remote-ip=209.85.218.54
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A202D606A339
-	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 16:41:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A202D606A339
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA4FC606A330
+	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 16:41:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CA4FC606A330
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qiRIue+N
-Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-c4322d310e7so405501066b.0
-        for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 08:41:04 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DHpiJXjW
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-c50ac25cdd4so1046822066b.1
+        for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 08:41:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795797663; x=1796402463; darn=lists.linux.dev;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=E+7zW6UhfI3gqV3DdfYb2mC8T84sI8f66dxP7719aj8=;
-        b=qiRIue+NCm0v1OfuTPA8S2E5F21T7NjckQvwNi7LKQdNwsDhh8ZOiIzc43fRYJFxth
-         bIr4FdgQi0Zqn27J8daeDBOTcLHqMGOxsDMj/O/lAVYOOeUt2V9CJgwai6oYq16XGP2r
-         1lM11bZe+QWfB+U99dr94k8jjIs+P2BvIqvglbBub9D50dSS3k/ZZFsCihi0I7rSmClE
-         0WV2Din1edTbosV3sPff5HeoLEB8KROnOGk9L/R4dn4u5d3K/9lQvQVoH+suKFN48IR+
-         kA8KaPZqIP4MPl8XwbBGPLjX5nvzwv3Cj4QtwRew4eD66Wy3i1gSiHJEOzsGPrxTA34v
-         rbUQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795797663; x=1796402463;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1795797669; x=1796402469; darn=lists.linux.dev;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=E+7zW6UhfI3gqV3DdfYb2mC8T84sI8f66dxP7719aj8=;
-        b=WXmW1qzF0jGbHq4A/m+1A613Bj9MCwghej3NhLJOS+5gneKPE0tXSBLCT9T9Fj3J7Z
-         mJxPH5hy+Y3DA6NUfr0J+/bDy+yuCY9XaBSCnAuzBUe9STOK7Si69WiT/EmkUwuOyyZh
-         +EjSADjmRD8ES7ntY5CBzYYyckQr5dcAYk7aJElWMUExE91SH30API9uetiEKdjf2l3k
-         XRYK4aEGMgHaU+N731/BybM3vhkEnLWF2zx1RgLpOIudGkHGsmR0zbpQeHcjsHU40sjL
-         m3rfgdvRi9K5VM7fGFNwQjRkoAkS4blVKrxx5SkVnGx1/Hv4BIZn+zoCm7kBiffU4m1q
-         PfRA==
-X-Forwarded-Encrypted: i=1; AL+hErFf+ZdRHLtxJHfGLS3Ewjd2GE9h/XJRtEPvc2qbOcUydTQFGehlb6kv9BhxjUFdX12874M=@lists.linux.dev
-X-Gm-Message-State: APuU4Z9Keh3rqO3Vm/vF4YUvIBosX2tVP5eT6nL1pjm78DENnaOPh4Qh
-	t5B86T2ICQaRAfwuCe8mxuTRSsidnpuCZK+aTFL4Owvg5Dqidpz/Ptgd4ALVOg==
-X-Gm-Gg: AZFdTZc7nDXTx77KM3s7vEBk6pRCv9R9w+d9OqmL6IBWbKMcWcGlb00F2P12gizOj5r
-	hrvq5k4GLJeI6F+/OhBUl/XKBw+APCyQxFfEomljVpYpoVCx9JLKbtmVvx73jJ/3lVoWhvdUfqe
-	dzb8t+6X2wsYSOTEDMlzwmKwvMvcycFgDij2Xbu8t3bH08iU+FiLPyGwUqIE2AKlz75pIsswLDi
-	V6VWq8wtZjS7y9hItBKhL8GqGLLZg2cD7QbuyfFLDB/P8a8mQHC+lEhcxbsoQDm2YLoJIgP9TNj
-	IrN5Oq2kRZtubxKepKFQuS5+RqQaHwg4kf794VBDLqXsbEFwlmwzivygAfHC8zd++V0vK0IdO7q
-	Rg4ap0fRTMbl/Ef9LAwkNXXe5wZVg4QrQB9252V386v3qnzqPzqUq7/m4ceey0aPWjpY4c9B+qM
-	1pET0dyQfI85zX/uCkvYUpbItbt5c5lyyZDLdj2D1ymnY+jU8nJazTMjsqQyweIprNiu6LItrFb
-	IMYbZLUNVfdFuIQvvXiIVpnwZNakpOEfm1PzObLGOnj//MPdf0Aggo1YTspglLR1ImjAh9REMR3
-	QAittVnVGi/wXMwHZSkC9GbiD7Q3P/i8FpouiNtCqvsT4ukO+vl0y0b7lK1M7X+EQhzwywob+2t
-	wBl56fnxpGqhFUn0g2TGA3qJCaio6ivc=
-X-Received: by 2002:a17:906:d263:b0:c2e:4fa2:f3f7 with SMTP id a640c23a62f3a-c513aacbdc7mr1986868866b.22.1795797662955;
-        Fri, 27 Nov 2026 08:41:02 -0800 (PST)
+        bh=xh8JlClPQjIKYSMwaXks/N+gTEcs+PhZFyDS0fpX7rw=;
+        b=DHpiJXjWc2VvUZ+kTST+87LNAX1RA+Jj0O7EDxLFrShsa7yBlQWpAxoM+6HbXEnwZ9
+         aRRZSVKU/ZcM0Zu6kVV6x8osOnwXT4j+4u4jI1N2HfjZijrRu3vJUdqkju6M6mrZYKvj
+         xPgUPomWIx1ccqHgw2zN+Tzk3OzO4My7zmuOmR38M3Jeu067GNBcGfqNnT9y07oFhDp+
+         wG4sQLfgzZfFsIiXWy8dBaaotqlRwYyTW5dn16dU/50vO3rmGFNCZWikb/vahK65wQTN
+         VDIMp3xExdZaV3ul8LkxkOohLOpRpon6ukikLyeejWHDRABYPpzW1a+pAJCADzCeHl7L
+         aC7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795797669; x=1796402469;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=xh8JlClPQjIKYSMwaXks/N+gTEcs+PhZFyDS0fpX7rw=;
+        b=goXIzrO8qW3J8EnDUL/HfXOeUNKta2r7VbxLhkjbpJIgeCBboL7huk62jPcJt0wU3X
+         mR5RyRLNAqodbl2GH8pfG5X+JoKDuhIHeS41zwgXEkJaP07W4bd636d6KBxhTdb5sbDw
+         YkCu9tueOG167JiDBv8JJ4hWHHcmWKPCmmsyYiXIprDhBOwNZcTfUaZC1PCbvog/lKM7
+         y8CzQm6iDSjvVlIaDr+i+UKr29/KZbXEt1S/9QXSqcaKI+S6ITtAuQpryNJ/fsk7xZPg
+         4FkNeqoEfMRQaqXqu5TIm3Z+R1gNx3vhTVHLANDndWvm5hOPWg28u5cJGIC4gepTTNfK
+         QyyA==
+X-Forwarded-Encrypted: i=1; AL+hErEHV7ovY4KbpxW2bE1/iIx5jMqDB1aD+XkLZnrXm0/CDzcw4U905hTe0sEmeN0QkFiAMXI=@lists.linux.dev
+X-Gm-Message-State: APuU4Z/unMZTy696hyG4ClMXUNsbq8zGSZZPGxOn7HpZux8YiMJz3z4S
+	rDfe5CKAgRUu2oVV+dBtMKKcpn32lXaGTYZiw30BZdLvkrNRxPzAxt14nNuq8Q==
+X-Gm-Gg: AZFdTZc41fzhAtSXOKDUm7oQiejIzKHeX6gatGeaEcdWdPLKigfCayWbjWTl3XwiHnF
+	JfCyh/RrlXDRSi6ZtpVe6PbyrT1FM4Eg2VHC/zH+PVGv5Yc/XUKNI63+CsAmXIA4lnrUOD1I3T/
+	fTcqiNbpDBoKYwPBytVgDg2qqSpeLyQPDWjniTS14ypYaXNroA4C9kWLrbzIwneg8SmfAHx3DtO
+	163s3jpEhL+/8bITQcUlbLOggWw/5JhnAnbwGVQ5PUmKxCWd5ykWa9SeOoaOWPmEjIm8t3UkcjU
+	389AkaKXyX5JAAt3I60/HXkfRcMN8KUCvidhNsad088H6ycS81RxCgqlxVZe6H6WBg4k6rIP9Dr
+	fnr5BMqMp65+GvpVz+x6No74NvpFXgSyI4YU3UzOPlCJgWc/Lm+bShKpW/FP7pBJODD5KZ/5+Is
+	Uf3R2HesW05Q/ufgyaI19UruI3wCjLttT5KTgHg00kDPUfjKLEPd51BBFIkznSxc5nuPmeu2oAn
+	xnKczNdL4cAJqBlrVwJZ/jYkXVrkrKvYxaoI3eFSX6xvXQd7TeJUrIGZmLR/dobhIPU+z2LgJFc
+	zkJN2QeFOwiZ08XXeYM7hp/RwqBms7X1DLxrwTRyRjq78mAb0nR2rfSUu01CHBsXyVHM8/SBqRU
+	5UDf4c9FyAw==
+X-Received: by 2002:a17:906:6954:b0:c25:504a:1e25 with SMTP id a640c23a62f3a-c513a5ebc65mr1653532766b.13.1795797669130;
+        Fri, 27 Nov 2026 08:41:09 -0800 (PST)
 Received: from xeon ([188.163.112.54])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c513ae66674sm885397966b.15.2026.11.27.08.41.01
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c513ae66674sm885397966b.15.2026.11.27.08.41.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Nov 2026 08:41:02 -0800 (PST)
+        Fri, 27 Nov 2026 08:41:08 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Lee Jones <lee@kernel.org>,
 	Liam Girdwood <lgirdwood@gmail.com>,
@@ -85,10 +86,12 @@ To: Lee Jones <lee@kernel.org>,
 	Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: linux-kernel@vger.kernel.org,
 	mfd@lists.linux.dev
-Subject: [PATCH v1 0/6] mfd: max8907: for Lee
-Date: Fri, 27 Nov 2026 18:40:38 +0200
-Message-ID: <20261127164044.285910-1-clamor95@gmail.com>
+Subject: [PATCH v1 6/6] mfd: max8907: Add ADC cell
+Date: Fri, 27 Nov 2026 18:40:44 +0200
+Message-ID: <20261127164044.285910-7-clamor95@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261127164044.285910-1-clamor95@gmail.com>
+References: <20261127164044.285910-1-clamor95@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -100,22 +103,25 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-These are all MFD related patches collected from my MAX8907 related
-patchsets.
+Add the ADC cell name to the list of MAX8907 cells.
 
-Svyatoslav Ryhel (6):
-  mfd: max8907: Remove platform_data based probing
-  mfd: max8907: Switch to resource-managed versions of helpers
-  mfd: max8907: Convert to use device managed poweroff handler
-  mfd: max8907: Add restart handler
-  mfd: max8907: Add ADC client support
-  mfd: max8907: Add ADC cell
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+---
+ drivers/mfd/max8907.c | 1 +
+ 1 file changed, 1 insertion(+)
 
- drivers/mfd/max8907.c                 | 243 +++++++++++++++-----------
- drivers/regulator/max8907-regulator.c |   8 +-
- include/linux/mfd/max8907.h           |  57 +++++-
- 3 files changed, 193 insertions(+), 115 deletions(-)
-
+diff --git a/drivers/mfd/max8907.c b/drivers/mfd/max8907.c
+index 103294c76b97d..ac7b41ad400ed 100644
+--- a/drivers/mfd/max8907.c
++++ b/drivers/mfd/max8907.c
+@@ -20,6 +20,7 @@
+ #include <linux/slab.h>
+ 
+ static const struct mfd_cell max8907_cells[] = {
++	{ .name = "max8907-adc", },
+ 	{ .name = "max8907-leds", },
+ 	{ .name = "max8907-regulator", },
+ 	{ .name = "max8907-rtc", },
 -- 
 2.53.0
 
