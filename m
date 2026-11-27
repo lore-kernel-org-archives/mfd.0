@@ -1,88 +1,88 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.44
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795775872;
-	b=qeZLf4K7wYL+X4kzhbuj9U1ItgAfF/FyU0feJbA6/2ex6IsVjWqBRtNJsl56Dgl4VWaw
-	 uWv36yyhSuw5gdZXM5xixStCFx0i8t0P3L8PwZvMNr5uL4yMmz2iFU3EuOZErYIwtwrmX
-	 gwbmGG0Lt3+xy5XK+yfOyS1aVqYmqgDqEUR1dmoB9lafhmJBLOr8vZIP+FGoImIEQkesG
-	 hPSymmk1qcYFHep6wzOMVxnCLw0zeCgtzN383FJON8OOUEQh4RKPxiwdW0xAcr603pBsu
-	 ra4H7x5V1KwaJ62eckAkDO8OXrwqVuD6PUdZUWz+rGiFqfk6BF33fpu7DyZn5aSVI2Q==
+	t=1795775873;
+	b=0BLSGH0YAMt6H0zVe+A4vagKch5JWXsBcIM5chhNixrefKXonlP4tafWbKfuL6lqMjJn
+	 I8UWI4pr27iksillxtGcEwVdY6q7nEUmhz+6Pqci96u0qlKeAXeY5uw6ReZxxI6BgUNeU
+	 kD24wep7NaIftIHTQ8X+PtDwZvV8ljhEiQFjM26pZjeEyWmL8HIKqq46nypHZXfnkpg2c
+	 swCymzm9lJyYY3B098wfbkut/bcJXmamPCLJdemU5cBhojofXrsGqRsew4R/2N3dczB8l
+	 4SUTrHX1D3IU42gUOYkAdtHCXLUoz+r2UKD5lBnlMOeFzW6tI3ndG4h/lHDCg0BKw1w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795775872;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795775873;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key;
-	bh=WCcSULvlLrU2xkg1gi/cTVgyvaGO2KEpoODvKxtBE20=;
-	b=i+phGNJPiqUg84Umcbvne9piMiRnQDjoUwUZYwhApJryp/agMeoW7Qjf2nAjfe0ygIH+
-	 T7IYpqNY0EVfkWxY/pD3upVpLTvFxUfodfuaWvfiZwjk3xvuvR0AjvhZ1GgVTmtQeO1yy
-	 nsyR8yM8fpbIh+KTs8p6yn16rdsNYY++nND5Df7BlMwsl+zKpuoECIqDob+aC4h84DGi+
-	 xdpkBHMS6JnPUatZnGRG2GPXPp4kYROKuQ0pmVQj7m0DoG8npms7iw7GhnPcCklupucW7
-	 6thlzqWCHW/a38JVvkdDd3Jf0UsDq2CLQdqY0SPqTciGs7g3tNoWExT07C1w0HudxEw==
+	bh=dNdJC8F+FI98g8O8yjU0PBhO99fdyGD2hFZaDczCwSw=;
+	b=IluMOZMO7PaGj2I6RazBNGUyV3AShNe/K4YWxO3jkTyOGVzwYpbeAJGoH3/hc3nF4WwW
+	 oUPxuhh/s6Rz2/8noODNYhmJ6sGNvebg/hXa9NEuRM/pacwkBnYXy36TevyhJyaqUIHob
+	 dDvjYnWXlkaoqgCMI7ikQWdPOEzMpRgJf+sKx46qQoHQKTATCN3x7Q96QRhxSKQSybh3e
+	 x5akHBm3nGxXpLJ25tYjRpUDjzi0vvMuD8+o7zwa59xprzhN3rl4H1yMjzMW+35i1dyms
+	 JmvArF0JzEfc7eJ4XT2LwUScepUkwELFdWf+iPT4zWFyQxox0Breh6jS3fRxXWlbh/g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=baylibre.com;
 	spf=pass smtp.mailfrom=baylibre.com;
-	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=WuiA7wHu;
-	arc=none smtp.remote-ip=209.85.128.44
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=PDxOvfCj;
+	arc=none smtp.remote-ip=209.85.218.46
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C265606A33F
-	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 10:37:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1C265606A33F
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C25D606A329
+	for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 10:37:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5C25D606A329
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=WuiA7wHu
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4b467581b98so76461065e9.0
-        for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 02:37:51 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=PDxOvfCj
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-c50933bdf4bso1496130066b.1
+        for <mfd@lists.linux.dev>; Fri, 27 Nov 2026 02:37:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1795775870; x=1796380670; darn=lists.linux.dev;
+        d=baylibre.com; s=google; t=1795775872; x=1796380672; darn=lists.linux.dev;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=WCcSULvlLrU2xkg1gi/cTVgyvaGO2KEpoODvKxtBE20=;
-        b=WuiA7wHutY0z5+O/7Jai4FpScMga5ZG+e7V6AtrZbIKMIRERRvbnoQfKFLyTq7S0oZ
-         KmdyS/Yh+O+qRlKfWUGB69JJgLmLTqU5CXb2Vq/PhHppJfIPZjjgc8j3JCDLmIgoK407
-         FgWUXCFtQBIDSl6GsrwPfh/DLi9TC47v/Blejku3rCLEX8z1VVi0st/ipLDoJ0nYAW0s
-         WPpGfa2zIM5uSCgV4gSCtEGHz2720/gAuO6jL0WfMLx3lJfGqw15GjRFmN9EtFHwXxYg
-         eSvaTtbTcxvuEamxuO207xRmqpQXTfIViZnG+xh26cPxebVgxyrpgoGY6DqxbgT2qMvD
-         7t8g==
+        bh=dNdJC8F+FI98g8O8yjU0PBhO99fdyGD2hFZaDczCwSw=;
+        b=PDxOvfCju9Nk6rkPTrn8Jr7J8p2MKFmqCR1hobYconi0HlUDLdyboOJ7FfAkv9TxEO
+         1NnvqxwA7yCwJIaFZgfda3y6EgZXltJIkA23IZD4gSJh9e7p8Bxtt8y3qKOW5BEOdmbI
+         vG36s2RH/3pt3VMioAZyXL8oJT7cJSCZC1XJ0A3J8p6AcAG2f8XoFZkkdpMe/SEdEw9p
+         MXuTmSlaN3DrJdnprLQknpUKWXJlHWFy/iRHZjfUHTN3v1Eehp1ui8FjSeJcxvG5Oo0j
+         Dh3/3+gt1pcHPrvfrGqA2XMGHChj9/l8tueTcqsxb7hgn5g4lXkI2TjQunnSEXEPYrcC
+         09kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795775870; x=1796380670;
+        d=1e100.net; s=20260707; t=1795775872; x=1796380672;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=WCcSULvlLrU2xkg1gi/cTVgyvaGO2KEpoODvKxtBE20=;
-        b=OyBIoWdFKTL+EnXEiY9Xl2EcOYDb017FZwienlZNatokcb5QIOaiMu4trGOzmUmBsj
-         RYP7fK7EeKJvQ4Qif+tzjF01Hhev+t6uLqUyFd06IlSP5jmOkysVlTXIEYuqVroI3598
-         9gQKWcVHUmzymn5VIbd4nsp5zgmlf1nf31bC6DUZxicXvqdKi9v0WIyyHGJQMPIV+5mT
-         w4yYlyoFsm0UzkB7pyja8IUhJ4vDJCD7yIVtBvP2Q8wV6Wk/wY4lD+RcBNe2X7t+kNjX
-         Ms06pWkS+CeRoeV3vA4idRGb8/qc7wMyGQATshKvuJn7NB+w1+vBskcMZ8JuuKxDQfx6
-         BNnA==
-X-Forwarded-Encrypted: i=1; AL+hErHtFiJy3OrLloCxMyCg+UJDiJ+x8pBBlCuzHkXR/TKg4yA8n3AxNjBKSoN/V5Cs+izcMbw=@lists.linux.dev
-X-Gm-Message-State: APuU4Z+wTLthxcFs9XJeCuKOmUfAOhfYcV8CfFV02xpQMC3fBPpEHz+7
-	lEvFUpa2Xs15NDeuyGeYCwZ31RopiISKH+JH3uoRn3qgiMkso51dW9Tv9dQx6SiuioA=
-X-Gm-Gg: AZFdTZd1L6IXVR6pVRmd5WqbtoWKnoDpmLqQQ1+GSsZK7+6rO5vk+oqr88bmQcUnJPf
-	NQ7EdL+gmj003d1JaEBDppDExipyBoiJ17pFz0D8Ehu5Eu7SUQX50rvh7WAt3iYBlIVbjjBg+N1
-	96NbL6YJEfYe1Ztfe4uSpZ3gc6LqS//voRcvG+B6Wpoe7wP0WSGuQ3g8n+N9EY6fi0kc9OwvgUV
-	/+AVR4Lr09ip/9ctBilb/DGqZt5hc+WEY4O0+KglfVGULLkdTI8p7vCN5YPSCDLk7CBbFFPuJJt
-	zmPK10YpIOghUf6OUHFKA1vrPUO3aXQ9gsnmDzXZEJm4JQtwYxWmMPm6hj9/yKmA69bmBkN1a1p
-	zEm5J9flJ6HhWl7z+ycT+NcDSdAWmnI0K8b19S5RAtzoITe5vAGqhqeX6i6qtXPKmUGP85AbcN0
-	ypZGkxXJsrYqYB5zLzOazU4gKZGlIZIlC/ZprZtdHHEf21hqO6IkEZKbcwGbiXRzSj2MSEq+J7I
-	cAwdtJjuxKytvLk98Eh5f0FNKSXmWD+POYvsh0qQM7v+j9QsiwuLYzonKsRSNhv39lFtDvFFBoE
-	unXniX21Tv7+LAAEOjAY46osllcYbN4VhF3x2+8FWqRkBPBf
-X-Received: by 2002:a05:600c:154f:b0:4bb:6842:66ef with SMTP id 5b1f17b1804b1-4bb8893a963mr460358005e9.30.1795775870518;
-        Fri, 27 Nov 2026 02:37:50 -0800 (PST)
+        bh=dNdJC8F+FI98g8O8yjU0PBhO99fdyGD2hFZaDczCwSw=;
+        b=d0Hi7xo8AdDeYjbI9zAh+aJ66MSaMbZP4O0mrObJaSgFO6YGnFtgJ0h03IXr+Wc657
+         8eCMF08ZNf4QxwfdVhqkpQaUMHXiQhZvTJhKc4C6IJ1c5NRK+/R7hWLjkqPX3WzktWJb
+         sZaKHmAEI7Aau2byMBLUh9e/JU7Pu2zznkzpV8MEGwfZZd4WpECVV8frItQouLNDZN2c
+         9rl2uUDOhzPkQ/OlslKunS0zr6c73XhkMY7KAHy7QU0LUDhM/dzq+EgdyxPk6XB2Vm4y
+         3NPCWW8EN6BYYsDtEt8OoUhZliHg7Iy+JC4ivWRMDRD+TD1ZTMxP1wiYp7N2AFcmBbUF
+         zsMQ==
+X-Forwarded-Encrypted: i=1; AL+hErE/HJ/oE0+lZq4RobwBu5b+Nr9dAJZBt/I6IjFuYNkvCOmHbeOloZQPR/ywfq7O3u9kZ2g=@lists.linux.dev
+X-Gm-Message-State: APuU4Z9ArfPbmYpXhQHWpZUCnS1Ma5KdeEg3zgSaG6zMxs5S+IjrQBuv
+	D9fdBWBcErF2/rK0yUv/iuA20ZWI2ppRkLrIAdfmLcoJWcGQoPXAHDlHRe6RRh+FPVA=
+X-Gm-Gg: AZFdTZdj5T+7gPN5cCKiKyCbc0NZ4QMyljYXrTgb15kV+70Nx9eK7Ovc7bwp5CvVOg6
+	2xU5gcKgDSrWRh2uvQKHrzIMbbiANzVgZuCTzHiYEehnITOfJLz4EF1wnWwPAyrg0sClAVKBLBj
+	7V0YS2LBpd4Eyo5YDCKwX/TTOpQNjyBsYL8jXnV8iSczWDrJg62wA7zoxLmYEsrWEtpEZIGMVqo
+	05IDaAX5WoYrpHV+X0gmhBtk8QIfWyu+XphdVClLsSkauDTOWaWYDSNeMWG+vDSpuX1OyBda11x
+	nl/IXgUossuu4GlokRxlnsmgvuqJ1RsWtzpXQYfDcjnCj6Mq1gHOHynv7x1xAdhg6yE6i8+El++
+	n/Jnbq8LhCPH/B/YZC+Mlvla4n6y0k+pty3oKfXLyaGI17n1xxLptATm4Qfw8bB8csoNmYe5z18
+	WF/OsExwOAKx2P1+1FDrJFlvtcgvg4HGHRXE/TX9Pu8ACTs+7Ytd77u9xnlGmYo4mT1GOOaV5g4
+	CVXDFx2wwNNp06COS0q6xY5vVVC0jOLwfJjoRXTgA0KE7SqlWDqsMOgN8l8gGZGX/wMWFRhA9aQ
+	r1Dcmz+BY8KyQq4rw4XuWan66pinOoVWkvJtHc4TI7PWLC91qswLjtLUYehj5AXTy9mWWA==
+X-Received: by 2002:a17:907:6d0b:b0:c41:1781:a2af with SMTP id a640c23a62f3a-c51317e3353mr2141842866b.9.1795775871729;
+        Fri, 27 Nov 2026 02:37:51 -0800 (PST)
 Received: from localhost (82-67-6-57.subs.proxad.net. [82.67.6.57])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb88442995sm714014105e9.2.2026.11.27.02.37.49
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ad6403fdbbsm37268558f8f.15.2026.11.27.02.37.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Nov 2026 02:37:50 -0800 (PST)
+        Fri, 27 Nov 2026 02:37:51 -0800 (PST)
 From: Jerome Brunet <jbrunet@baylibre.com>
-Date: Fri, 27 Nov 2026 11:37:36 +0100
-Subject: [PATCH v9 2/5] mfd: axp20x-i2c: Fix i2c instantiation
+Date: Fri, 27 Nov 2026 11:37:37 +0100
+Subject: [PATCH v9 3/5] dt-bindings: mfd: x-powers,axp152: Document AXP318W
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -94,7 +94,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261127-axp318-regulator-v9-2-986b68f3c4a0@baylibre.com>
+Message-Id: <20261127-axp318-regulator-v9-3-986b68f3c4a0@baylibre.com>
 References: <20261127-axp318-regulator-v9-0-986b68f3c4a0@baylibre.com>
 In-Reply-To: <20261127-axp318-regulator-v9-0-986b68f3c4a0@baylibre.com>
 To: Andre Przywara <andre.przywara@arm.com>, Lee Jones <lee@kernel.org>, 
@@ -104,116 +104,135 @@ To: Andre Przywara <andre.przywara@arm.com>, Lee Jones <lee@kernel.org>,
  Hans de Goede <hansg@kernel.org>
 Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
  mfd@lists.linux.dev, linux-sunxi@lists.linux.dev, 
- Sashiko <sashiko-bot@kernel.org>, Jerome Brunet <jbrunet@baylibre.com>
+ Conor Dooley <conor.dooley@microchip.com>, 
+ Jerome Brunet <jbrunet@baylibre.com>
 X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3852; i=jbrunet@baylibre.com;
- h=from:subject:message-id; bh=avi9IFPWiAVWFQGWnKZC1/X7ESTAnJfLwhLIKQW4SsE=;
- b=owGbwMvMwCW2VtK+WnvWU3HG02pJDNmcsVVhMxhMbT/PLffc79DFJs35NFVq1YLVnuuebn1+5
- Hj3/ljHjlIWBjEuBlkxRZYa7mrxd5JaX2ZN17kNM4eVCWQIAxenAEzEuIKR4XRDS7tcT3j0nqUL
- DoZpf2VVFhBW+DM5+vAiscvnzfeeU2f4nzKj7Ne6+M/bj72e8KFGMt3Ssts64egR05+lu+8LXXd
- YywQA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3988; i=jbrunet@baylibre.com;
+ h=from:subject:message-id; bh=LBdBMXYah5b+O3yxBs9VZHzS2W2px3jjTuPIQfDgazg=;
+ b=owGbwMvMwCW2VtK+WnvWU3HG02pJDNmcsVWHGj+0rDxbI6v66P+Cg7NkLsvJ37oV+CC1v6Xxz
+ pOrc7Z+6ShlYRDjYpAVU2Sp4a4Wfyep9WXWdJ3bMHNYmUCGMHBxCsBEvDcxMnz72vG9/WJDlE2+
+ XXHWnIgJ0vtyy0x1Ip5aW/yJYuBTiGf4xcTLljotyK+GTYeL121OwduZa7Mkyo8mLm9Zu0vVW/8
+ zNwA=
 X-Developer-Key: i=jbrunet@baylibre.com; a=openpgp;
  fpr=F29F26CF27BAE1A9719AE6BDC3C92AAF3E60AED9
 
-Apparently this device never really supported i2c instantiation via
-sysfs, because the driver does not even look at the i2c device data,
-which are not set. It would only probe if the device matched through DT.
+From: Andre Przywara <andre.przywara@arm.com>
 
-Fix that for correctness, even-though it is probably useless.
-Add the missing AXP323 while at it.
+The X-Powers AXP318W is a PMIC used on some newer Allwinner devices.
+Among a large number of both DCDC and LDO regulators it features the usual
+ADC/IRQ/power key parts.
+Like other recent PMICs, it lacks the DC/DC converter PWM frequency control
+register, that rate is fixed here (1.5MHz on DCDC1, 3 MHz on the others).
 
-Reported-by: Sashiko <sashiko-bot@kernel.org>
-Closes: https://lore.kernel.org/r/20260717090209.2A09B1F000E9@smtp.kernel.org
-Fixes: 41751b033aaa ("mfd: axp20x-i2c: Add i2c-ids to fix module auto-loading")
-Acked-by: Chen-Yu Tsai <wens@kernel.org>
+Add the new compatible string, and add that to the list of PMICs without
+the PWM frequency property.
+Also add more input supply properties, for the split DCDC and ALDO
+supplies.
+The PMIC features *two* switched outputs, hanging of DCDC1, and the
+manual calls them swout1 and swout2, so follow suit here and add those
+names to the pattern for matching the node names.
+
+Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+Reviewed-by: Chen-Yu Tsai <wens@kernel.org>
+Acked-by: Conor Dooley <conor.dooley@microchip.com>
 Signed-off-by: Jerome Brunet <jbrunet@baylibre.com>
 ---
- drivers/mfd/axp20x-i2c.c   | 24 +++++++++++++-----------
- drivers/mfd/axp20x-rsb.c   |  1 +
- drivers/mfd/axp20x.c       |  1 -
- include/linux/mfd/axp20x.h |  3 +--
- 4 files changed, 15 insertions(+), 14 deletions(-)
+ .../devicetree/bindings/mfd/x-powers,axp152.yaml   | 29 +++++++++++++++++++++-
+ 1 file changed, 28 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/mfd/axp20x-i2c.c b/drivers/mfd/axp20x-i2c.c
-index 9ddc73b8af43..aac4fe03f7dd 100644
---- a/drivers/mfd/axp20x-i2c.c
-+++ b/drivers/mfd/axp20x-i2c.c
-@@ -35,6 +35,7 @@ static int axp20x_i2c_probe(struct i2c_client *i2c)
- 	axp20x->irq = i2c->irq;
- 	dev_set_drvdata(axp20x->dev, axp20x);
+diff --git a/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml b/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
+index 45f015d63df1..edca6b1e9f70 100644
+--- a/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
++++ b/Documentation/devicetree/bindings/mfd/x-powers,axp152.yaml
+@@ -70,6 +70,7 @@ allOf:
+               enum:
+                 - x-powers,axp15060
+                 - x-powers,axp305
++                - x-powers,axp318w
+                 - x-powers,axp313a
+                 - x-powers,axp323
  
-+	axp20x->variant = (kernel_ulong_t)i2c_get_match_data(i2c);
- 	ret = axp20x_match_device(axp20x);
- 	if (ret)
- 		return ret;
-@@ -76,17 +77,18 @@ MODULE_DEVICE_TABLE(of, axp20x_i2c_of_match);
- #endif
+@@ -83,6 +84,7 @@ allOf:
+           contains:
+             enum:
+               - x-powers,axp313a
++              - x-powers,axp318w
+               - x-powers,axp323
+               - x-powers,axp15060
+               - x-powers,axp717
+@@ -102,6 +104,7 @@ properties:
+           - x-powers,axp221
+           - x-powers,axp223
+           - x-powers,axp313a
++          - x-powers,axp318w
+           - x-powers,axp323
+           - x-powers,axp717
+           - x-powers,axp803
+@@ -156,10 +159,18 @@ properties:
+     description: >
+       DCDC1 power supply node, if present.
  
- static const struct i2c_device_id axp20x_i2c_id[] = {
--	{ "axp152" },
--	{ "axp192" },
--	{ "axp202" },
--	{ "axp209" },
--	{ "axp221" },
--	{ "axp223" },
--	{ "axp313a" },
--	{ "axp717" },
--	{ "axp803" },
--	{ "axp806" },
--	{ "axp15060" },
-+	{ .name = "axp152",	.driver_data = AXP152_ID },
-+	{ .name = "axp192",	.driver_data = AXP192_ID },
-+	{ .name = "axp202",	.driver_data = AXP202_ID },
-+	{ .name = "axp209",	.driver_data = AXP209_ID },
-+	{ .name = "axp221",	.driver_data = AXP221_ID },
-+	{ .name = "axp223",	.driver_data = AXP223_ID },
-+	{ .name = "axp313a",	.driver_data = AXP313A_ID },
-+	{ .name = "axp323",	.driver_data = AXP323_ID },
-+	{ .name = "axp717",	.driver_data = AXP717_ID },
-+	{ .name = "axp803",	.driver_data = AXP803_ID },
-+	{ .name = "axp806",	.driver_data = AXP806_ID },
-+	{ .name = "axp15060",	.driver_data = AXP15060_ID },
- 	{ }
- };
- MODULE_DEVICE_TABLE(i2c, axp20x_i2c_id);
-diff --git a/drivers/mfd/axp20x-rsb.c b/drivers/mfd/axp20x-rsb.c
-index dfc665f696bd..e48cae751fb1 100644
---- a/drivers/mfd/axp20x-rsb.c
-+++ b/drivers/mfd/axp20x-rsb.c
-@@ -35,6 +35,7 @@ static int axp20x_rsb_probe(struct sunxi_rsb_device *rdev)
- 	axp20x->irq = rdev->irq;
- 	dev_set_drvdata(&rdev->dev, axp20x);
++  vin19-supply:
++    description: >
++      Combined DCDC1/DCDC9 power supply node, if present.
++
+   vin2-supply:
+     description: >
+       DCDC2 power supply node, if present.
  
-+	axp20x->variant = (kernel_ulong_t)device_get_match_data(axp20x->dev);
- 	ret = axp20x_match_device(axp20x);
- 	if (ret)
- 		return ret;
-diff --git a/drivers/mfd/axp20x.c b/drivers/mfd/axp20x.c
-index 4d770e718716..de6946d4bb13 100644
---- a/drivers/mfd/axp20x.c
-+++ b/drivers/mfd/axp20x.c
-@@ -1267,7 +1267,6 @@ int axp20x_match_device(struct axp20x_dev *axp20x)
- 	const struct mfd_cell *cells_no_irq = NULL;
- 	int nr_cells_no_irq = 0;
++  vin23-supply:
++    description: >
++      Combined DCDC2/DCDC3 power supply node, if present.
++
+   vin3-supply:
+     description: >
+       DCDC3 power supply node, if present.
+@@ -168,6 +179,10 @@ properties:
+     description: >
+       DCDC4 power supply node, if present.
  
--	axp20x->variant = (long)device_get_match_data(dev);
- 	switch (axp20x->variant) {
- 	case AXP152_ID:
- 		axp20x->nr_cells = ARRAY_SIZE(axp152_cells);
-diff --git a/include/linux/mfd/axp20x.h b/include/linux/mfd/axp20x.h
-index b352661d99a1..1badb4868d17 100644
---- a/include/linux/mfd/axp20x.h
-+++ b/include/linux/mfd/axp20x.h
-@@ -997,8 +997,7 @@ static inline int axp20x_read_variable_width(struct regmap *regmap,
- /**
-  * axp20x_match_device(): Setup axp20x variant related fields
-  *
-- * @axp20x: axp20x device to setup (.dev field must be set)
-- * @dev: device associated with this axp20x device
-+ * @axp20x: axp20x device to setup (.dev and variant fields must be set)
-  *
-  * This lets the axp20x core configure the mfd cells and register maps
-  * for later use.
++  vin45-supply:
++    description: >
++      Combined DCDC4/DCDC5 power supply node, if present.
++
+   vin5-supply:
+     description: >
+       DCDC5 power supply node, if present.
+@@ -176,6 +191,10 @@ properties:
+     description: >
+       DCDC6 power supply node, if present.
+ 
++  vin678-supply:
++    description: >
++      Combined DCDC6/DCDC7/DCDC8 power supply node, if present.
++
+   vin7-supply:
+     description: >
+       DCDC7 power supply node, if present.
+@@ -220,6 +239,14 @@ properties:
+     description: >
+       ALDO* power supply node, if present.
+ 
++  aldo156in-supply:
++    description: >
++      ALDO* power supply node, if present.
++
++  aldo234in-supply:
++    description: >
++      ALDO* power supply node, if present.
++
+   bldoin-supply:
+     description: >
+       BLDO* power supply node, if present.
+@@ -277,7 +304,7 @@ properties:
+           Defines the work frequency of DC-DC in kHz.
+ 
+     patternProperties:
+-      "^(([a-f])?ldo[0-9]|dcdc[0-7a-e]|ldo(_|-)io(0|1)|(dc1)?sw|rtc(_|-)ldo|cpusldo|drivevbus|dc5ldo|boost)$":
++      "^(([a-f])?ldo[0-9]|dcdc[0-9a-e]|ldo(_|-)io(0|1)|(dc1)?sw|swout[1-2]|rtc(_|-)ldo|cpusldo|drivevbus|dc5ldo|boost)$":
+         $ref: /schemas/regulator/regulator.yaml#
+         type: object
+         unevaluatedProperties: false
 
 -- 
 2.53.0
