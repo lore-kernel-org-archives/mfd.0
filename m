@@ -1,49 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795822969;
-	b=yR6WGqCvWveP2TKiIHWgdkyb3NPBNs5lz7pvGVt600B/C+K9KjoqZN3r09rznkpHeDds
-	 D06R73FMygWNiNatoD3fV3JCh0IbEp2tbwUhyJUPQ97n+B88yjSVeSuflsg46WeI2fHqr
-	 /wqVZvLk0pznGANNq5PtC9adMLNoaLqh7RktbV2kGR4kqWNmN8ZDm8nP9b55TRofrfYcd
-	 iWOMjmGYvpqH61M+IOBVcp53sCCDoS3FofspMRJ1sMHyyWJKOcZ4O8dzJhq5MhrJa8AMM
-	 0XNYzPkoqpP1yuDunUqfxw72yG5KUoahkkAfl2uGtXMivJzWtZIuWUCmQphkc92xxXA==
+	t=1795824288;
+	b=FgByROCjvAUxh7WaeqOQFcrNjIgNPp2xhVoS7rVeGtWQPYd+zIIZgNC6Kbb5A9kD3FBF
+	 M5ptzDwmXOKY8q1tn/Jn9vICX7XHhcoRTjuO2lXy6/5r3EjinXOGrRshWVidNJUdEaABG
+	 BP2cRcSFOh1CXZN5GdZJGo98OtJaI0t0T36GYyu9eTKqIAri7MkalHmfQgIRHoA0tpr2O
+	 hRswSC6r1eyWjUuvcOiebCSinmqYTSC/EjleGVJwa/ULPVNBTD5+5e/jw8Xhq1rSVhbb2
+	 gJlweGA+Upi8A9HPvNwsJ8PaZ5Mz4m8ityBCJibHB0GwTdOB805O5SCmRRCFc44IsFg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795822969;
-	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer;
-	bh=K02zgxdGQWTbk3ueckkKkjJyj/QzbSgab6J/PqtEmnQ=;
-	b=2AFeBiLsCXosboF0HY/sPmubXgZMAFS+e7PHMZYNes3garzYcF7xvQeA8FgxE/eXM5q2
-	 6LnYMG9sOuomGYoFF2xggsAbruSuaVQ0aAvqy15IC7XlbNApTV6DuJz350LvcRbBmep01
-	 2Sk/zJQvYAhg+HnfnjynAUrHmNc+WCMY4i3oOPxQxmAwdguC8vvAixEUQN0cV5xu2Z//u
-	 S2NNbJNSl2RyS7ao/GyT0dgQi3v+59IMbwf2vLGxIBLYumkBDi9sUAH8MX/hPgYQdt2KT
-	 bAogeWxtNm2oYEBaK+dVqCSRlvE7zTlkdh28jwJNQULiSTmtI+tW3NunU+J0z1Zx7DA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795824288;
+	h=Received:DKIM-Signature:Message-ID:From:Subject:Reply-To:To:Cc:
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:Date;
+	bh=QjOihqWjKFTNdfd6kwnzonraDIJ71umA0NRL5K+HkaA=;
+	b=RmDKkztuNarGLvxlaRIX3zXsdZ/7vfRH6B093aG3jnbVRfZyIIXWOn6/S35b24hH2bRz
+	 juTxixoRwXNN0zHin2xrWPqh1b0WfywOTKYwW9VMcF82PReheNvb5yTN3mYy14OUOD+5Z
+	 IzMM1QE62Zexq7cvHniDzjruty6uRniewAAkpyfAVddTq9JgDK1wQJh+it5RoZJqhq+ui
+	 2uu4PBymEJiYy3Pof7AUJD2teEX4gmIO0rcpo44ZMxBTexR1+/DZyjAkJC/RHwjGDGI8q
+	 cnJ8bFxsAhtaU7THCubVFycg01vlFKFNOe0I2teWnlTGsutUghRRp1VuEZJti5yotwQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=k6Z4qrN1;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jZj8qCb1;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C040C606A31C;
-	Fri, 27 Nov 2026 23:42:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 601D8606A31C
+	for <mfd@lists.linux.dev>; Sat, 28 Nov 2026 00:04:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=k6Z4qrN1
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A2ACD1F008A0;
-	Fri, 27 Nov 2026 23:42:47 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jZj8qCb1
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C548F1F00893;
+	Sat, 28 Nov 2026 00:04:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795822969;
-	bh=K02zgxdGQWTbk3ueckkKkjJyj/QzbSgab6J/PqtEmnQ=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=k6Z4qrN1vtbaB79gvwpyv7wdR2AimXzGWshElx4T5MJW7+314fCN21twB2NYbdAN0
-	 kuTHSLwq8y7635ze6zOnW3lt1wwDWSqt/c8aF4BVj59ud2Lyo6uXvYW2woNhIbOHC+
-	 Owy/n2OFBEjJjVg8GRJPtTvwySlbjFKTzTXuaMO2V9XR5uhVo/aE1Hx2O0u/tIzshX
-	 iX+YNWriDlvbB5z1dk+ghQ1310uyDaUkuurYtsiJGktgW2MDjmiOd6m9VUzoGyTxOs
-	 051NATv5H6syDmR4JBV/+d8IqlKNzzsQunMe+zJ9Rvympg4KYc50FfAMvDeJAw2e/R
-	 mxY9g/XMvxgJQ==
-From: Linus Walleij <linusw@kernel.org>
-Date: Sat, 28 Nov 2026 00:42:34 +0100
-Subject: [PATCH 6/6] mfd: db8500-prcmu: Always submit an explicit APE OPP
- request
+	s=k20260515; t=1795824287;
+	bh=QjOihqWjKFTNdfd6kwnzonraDIJ71umA0NRL5K+HkaA=;
+	h=From:Subject:Reply-To:To:Cc:In-Reply-To:References:Date;
+	b=jZj8qCb1y41v0v7X8FdcE1RZiRW9y8Ro35n0M1dHAdbjHjRegC4MglTi0CgsvJiEt
+	 QhKdJPcgjarcYzfn1Tum7pXUMCfeocGkNXgx6qqFc2sVKx5i+jFoJQ1flEEcq6FfOo
+	 P6tgGrbvFTJ2MFWsPewoTWI/oem3lMGOgKMM5P1+0vvpMTg6bN9xMh/cevTltn9fyN
+	 aGA2wBSliCnSw0XYpNCvlC4/RL0on9vxrB3Y2xjIM20XGoW2+E494keqqr7taPbMbX
+	 hZvts2xViLCaOAoP+3/cQBHnTRqEFNS6bb1Pjm8aqAggugCQOKncvmZ4sEW1t//EbD
+	 2zVcWRWw7rzMg==
+Message-ID: <sashiko-outbox-238358@kernel.org>
+From: sashiko-bot@kernel.org
+Subject: Re: [PATCH 0/6] Move DB8500 PRCMU clock policy into the clock
+ subsystem
+Reply-To: sashiko-reviews@lists.linux.dev
+To: "Linus Walleij" <linusw@kernel.org>
+Cc: mfd@lists.linux.dev, lee@kernel.org
+In-Reply-To: <20261128-ux500-prcmu-clock-move-v1-0-77c49daad1d2@kernel.org>
+References: <20261128-ux500-prcmu-clock-move-v1-0-77c49daad1d2@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Date: Sat, 28 Nov 2026 00:04:47 +0000
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -52,88 +59,9 @@ List-Subscribe: <mailto:mfd+subscribe@lists.linux.dev>
 List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261128-ux500-prcmu-clock-move-v1-6-77c49daad1d2@kernel.org>
-References: <20261128-ux500-prcmu-clock-move-v1-0-77c49daad1d2@kernel.org>
-In-Reply-To: <20261128-ux500-prcmu-clock-move-v1-0-77c49daad1d2@kernel.org>
-To: Ulf Hansson <ulfh@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
- Brian Masney <bmasney+clk@redhat.com>, 
- Jerome Brunet <jbrunet+clk@baylibre.com>, Linus Walleij <linusw@kernel.org>, 
- Lee Jones <lee@kernel.org>
-Cc: linux-clk@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- mfd@lists.linux.dev
-X-Mailer: b4 0.16.0
 
-Do not infer the hardware state from a cache of previous Linux
-requests. With firmware starting in an unknown state, the old path
-could report success for a 50% request without sending it.
+Sashiko has reviewed this 6-patch series and found no issues.
 
-Accept the two supported firmware levels and always check the
-acknowledgment. The clock driver will decide when to request a
-transition.
-
-Signed-off-by: Linus Walleij <linusw@kernel.org>
----
- drivers/mfd/db8500-prcmu.c | 14 ++------------
- 1 file changed, 2 insertions(+), 12 deletions(-)
-
-diff --git a/drivers/mfd/db8500-prcmu.c b/drivers/mfd/db8500-prcmu.c
-index 98ab0dc3d145..080ab61d7a29 100644
---- a/drivers/mfd/db8500-prcmu.c
-+++ b/drivers/mfd/db8500-prcmu.c
-@@ -366,13 +366,11 @@ static struct {
-  * mb1_transfer - state needed for mailbox 1 communication.
-  * @lock:	The transaction lock.
-  * @work:	The transaction completion structure.
-- * @ape_opp:	The current APE OPP.
-  * @ack:	Reply ("acknowledge") data.
-  */
- static struct {
- 	struct mutex lock;
- 	struct completion work;
--	u8 ape_opp;
- 	struct {
- 		u8 header;
- 		u8 arm_opp;
-@@ -692,14 +690,11 @@ int db8500_prcmu_set_ape_opp(u8 opp)
- {
- 	int r = 0;
- 
--	if (opp == mb1_transfer.ape_opp)
--		return 0;
-+	if (opp != APE_50_OPP && opp != APE_100_OPP)
-+		return -EINVAL;
- 
- 	mutex_lock(&mb1_transfer.lock);
- 
--	if ((opp != APE_100_OPP) && (mb1_transfer.ape_opp != APE_100_OPP))
--		goto skip_message;
--
- 	while (readl(PRCM_MBOX_CPU_VAL) & MBOX_BIT(1))
- 		cpu_relax();
- 
-@@ -714,10 +709,6 @@ int db8500_prcmu_set_ape_opp(u8 opp)
- 		(mb1_transfer.ack.ape_opp != opp))
- 		r = -EIO;
- 
--skip_message:
--	if (!r)
--		mb1_transfer.ape_opp = opp;
--
- 	mutex_unlock(&mb1_transfer.lock);
- 
- 	return r;
-@@ -1760,7 +1751,6 @@ void __init db8500_prcmu_early_init(void)
- 	init_completion(&mb0_transfer.ac_wake_work);
- 	mutex_init(&mb1_transfer.lock);
- 	init_completion(&mb1_transfer.work);
--	mb1_transfer.ape_opp = APE_NO_CHANGE;
- 	mutex_init(&mb2_transfer.lock);
- 	init_completion(&mb2_transfer.work);
- 	spin_lock_init(&mb2_transfer.auto_pm_lock);
-
--- 
-2.56.1
-
+--=20
+Sashiko AI review =C2=B7 https://sashiko.dev/#/patchset/20261128-ux500-prcm=
+u-clock-move-v1-0-77c49daad1d2@kernel.org
