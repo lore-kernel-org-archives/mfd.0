@@ -1,75 +1,87 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=212.227.15.14
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.48
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795870116;
-	b=cB76jqCBG/kyNVDmUPduDAF9yEPJuc8hh1VGgZwRGLR1RMPVg40LNsjC4Vm25ZtjhI5j
-	 cex9N3HX6AOwPqO3SXXc+XTv02N2oig+sR6OgEQkJdC7jH3k9p8/S5APC+qorLS7MGkM0
-	 tllGIoNjPPFMbGGxLBGejrFbFOR06OtwBvIV3VgC/onwx96/1X6EBvHIYP8IVbFIwFR2z
-	 XgcPveuH6kOo7ffb12c5kJoEN9WiaNFj6Xdj+Q3Nh9/3V9n1Fwoja2qpqi7iJJf6TgfYr
-	 at7lWxqe5SYjc2dPTZTBsKACoDsAVxU9NWI+55oqazuzpMcNAKbw2v2mrkQurMPsL6g==
+	t=1795880121;
+	b=byCIb1P2Ojys8JwyWuBajaF8CGNA8RUx3BhwMUZhSS5s1ooWYEPy7aKsCc/Q2UStW4MZ
+	 wcjMQeMaGYy/ohkjBayrGdsJ3NUwrBxdPYQcLKFbb3mjxnt3KxQPcnCfCOl60LPtVR06u
+	 Rm2QulZu5IV265Qbk11uC+v/M/vrI/TmoOdA+w1CWABzaXhiBsnH3xr5hN2VRC/3KJsBw
+	 aQUZehbCBJbH5Bwau1eEe2a1gpWfJddIjdfCu3FxuvWZUjPSbCA3VzcXgOAygw0G8p3CU
+	 ++reafessj9AZoty0LRX2JvGbDarGVVlOPhuMUeiy5MK7CHHQKZEXaYwSoOPb0fxtZw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795870116;
-	h=DMARC-Filter:DKIM2-Signature:Message-Instance:DKIM-Signature:
-	 X-UI-Sender-Class:Received:Message-ID:Date:MIME-Version:User-Agent:To:
-	 Cc:References:Subject:Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Provags-ID:X-Spam-Flag:UI-OutboundReport;
-	bh=+yVTp7PIOgwv8sDMUFezhQ4qFltSlnuARHPkogeLbfM=;
-	b=D1rWE0wXr5ESfx0tiZb4DHHYhybPCIUHgyaXcgDJxzhBXIvRrH1yyPMno9Rn+3u2SUwp
-	 4i7hL0D2TtslmBkQXcm1AlfyVTP3akvbv1KPOvqWKYgv03RyQl6UB5wu2ZhHuMVv4WjhS
-	 q34DDHEbl9oWxyxZxkgO4DVJncEv8wiuyyQNX/J7GLLWf2ic5ZqsrbiHwTVkuJESooghV
-	 7Sox3tlcr7WU2bcY1c07bRR+OqcOufJ2ds+dk8gdjTfby45nK6Z5OINwzh0XNygBTPnlw
-	 kH2PnKG+Gpj+Z5TD25U6rsp6/n+1IICy0xcY4QKm7nyJebEtf+UuxOfA1UZ6b6YUvfQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795880121;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
+	 Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+	 X-Developer-Key;
+	bh=2gzKBHAENFoQ+wCxaZUD5NGLvIPO/pOAHR4djcvLRmA=;
+	b=4UrO9aBLN/UvJcwCJKCkOcp06qTBKQMO533hRs8y4a5Ffogb8TGwULNhr31y++AVu6fx
+	 FEU/TorpcyrGxyny2QaB4Bf4c2FpbiuBZv+16z28NXR228ZqXVhC1Dq9NAvrDP1T2ZUXz
+	 Q9uGpweUpZS9qxW5pzgx6JU54Ude+YpcB4cXyJ+92uf9FIMmebVzzkqeFRfGZ71bGV5sd
+	 KLffcyCR5nxhux1b7xhKk+XOyAGFiJIgbROy7Ofz4A8aNpGzCjnqULHJkgn3z7uIpS5Wr
+	 ZdmHGFVHQGb1KJcG38G4DT4WzfsTLj0VUg4YBHDxbw8zIaCiZKINiJ/Efzev7ewxPzw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=web.de;
-	spf=pass smtp.mailfrom=web.de;
-	dkim=pass header.d=web.de header.i=markus.elfring@web.de header.a=rsa-sha256 header.s=s29768273 header.b=kKH3UZIO;
-	arc=none smtp.remote-ip=212.227.15.14
-Received: from mout.web.de (mout.web.de [212.227.15.14])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=rw9X5xj6;
+	arc=none smtp.remote-ip=209.85.128.48
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91B4D606A31C
-	for <mfd@lists.linux.dev>; Sat, 28 Nov 2026 12:48:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 91B4D606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=web.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=web.de
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05EC0606A31F
+	for <mfd@lists.linux.dev>; Sat, 28 Nov 2026 15:35:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 05EC0606A31F
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=web.de header.i=markus.elfring@web.de header.a=rsa-sha256 header.s=s29768273 header.b=kKH3UZIO
-DKIM2-Signature:  i=1; m=1; t=1795870113;
- mf=PE1hcmt1cy5FbGZyaW5nQHdlYi5kZT4=;
- rt=PG1mZEBsaXN0cy5saW51eC5kZXY+;
- d=web.de;
- s=s29768273:rsa-sha256:iIGM2HedH6/zbLSB2Ojwqzsi25uc
-   zwwTQ0mEuDpUXpFHCMWw1h2gOt8IAVRLMvDwaFjpyg9W8qEpdllbmAWouoJz1FmoS5vDsZaG2eZ
-   fKuvq8AmySVu1jw9RjYIYRo3Cfgkkm37yZ1vcauG9AP2uO8TBONoG1iowsK82qvp2/xAfVogJJV
-   e8/4Phco0RNMlFfEhYf2REp2wi51IC70dK9YdlQn22uKVeOUjaCXIluIKPxHWNewEY1YOUP3fP5
-   meW7YPFeqPiZS7WIhgjSE5FZvOLDWVO7RTn1yGxJieTE0thm2aFZiVQdEZGDWvuKt2qFAdDWi/o
-   4FU/6NMqYwTMjA==;
-Message-Instance:  m=1;
- h=sha256:
-   +WdBp/Jpp0rsAOtS01Up6DLUCVlvkFczqzVk2Cl0OjY=:
-   +yVTp7PIOgwv8sDMUFezhQ4qFltSlnuARHPkogeLbfM=,
-  sha512:
-   bfbGO9Wgap+dbipPaxaYn1p/hBlE16uGMiNYEVcIeMtGZSN0ORkrQ6g6bN2IYQlvFyH8zgTrqxQOyux5s7DB+A==:
-   TEW20fDUQAULiT2zrkMMzQE46KyI8PK2rwQGheWax0bQaDReVZEC0fFiIuiy6n7ZvpJvz9yO5bjsKblvPQIqqg==;
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
-	s=s29768273; t=1795870090; x=1796474890; i=markus.elfring@web.de;
-	bh=+yVTp7PIOgwv8sDMUFezhQ4qFltSlnuARHPkogeLbfM=;
-	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:References:
-	 Subject:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:
-	 cc:content-transfer-encoding:content-type:date:from:message-id:
-	 mime-version:reply-to:subject:to;
-	b=kKH3UZIOONWghfLG2pLLObzFTYAYqXZ1xJcmemid7ET8HFcnL/HsfiUt5lZO1xPO
-	 2yTxzDSjBsFJLHpnardN1+15jXtbZ5YCQjriLgZ0vabpWbDB6L5EBJU51/r+jfxDr
-	 ar2ZPEPywfrJk4CMeQMExxyJEUXwex9uPF4oupCrRkN+FYxWi81oqXlDvx6GTaLBJ
-	 M3zVfUgmz+d3/q9Ox5JsQtYOXgpbJ8MX5tBxtwh/Vo3yik44XGrwTJXOdp+KhpVJF
-	 kKOtB+WOEVsyl+XABE4omVhst239JkJrHM7J7XG520Lpl2ku5BHBaJbg6XJ2LS1fU
-	 apJeyq0T26NrebwWTA==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from client.hidden.invalid by smtp.web.de (mrweb005
- [213.165.67.108]) with ESMTPSA (Nemesis) id 1MS17v-1xvAWo3IPj-00SQCV; Sat, 28
- Nov 2026 13:48:09 +0100
-Message-ID: <535add0f-1c79-4b88-ac03-115115f22e2f@web.de>
-Date: Sat, 28 Nov 2026 13:48:06 +0100
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=rw9X5xj6
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4bb6886d30aso85990845e9.3
+        for <mfd@lists.linux.dev>; Sat, 28 Nov 2026 07:35:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1795880119; x=1796484919; darn=lists.linux.dev;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=2gzKBHAENFoQ+wCxaZUD5NGLvIPO/pOAHR4djcvLRmA=;
+        b=rw9X5xj6VENHVL+G/c8AcukYFpcm/pNcu38f1S9nbEQFxBWFtNi7Rw6EtyUcrga6se
+         Kmcjy2fCArYcYEAYUoFisCDa8naGHLvk4VrYfy3wiRWUBF83thNFKLx3B59//eV56IzT
+         0kIwAwsFI9XgVI1Ws1c96MibmZr7OkELfkkc13bEBvy2oWJvGOd7LoZ2yOEtl+tHJUzd
+         7U3n5QRJ0y8bqERcAYqXEP4URvaIdcqRtKB3gBkAnf+0ZguLBo1yFo/NOezgtcULj6Kb
+         /hlnmi9rj+R2lm0dB1QbYWyGO2KCD+DjtcVGzDI7r7NsMFDLWkhFvPOyp8ZPxDvFxTNg
+         1TEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795880119; x=1796484919;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=2gzKBHAENFoQ+wCxaZUD5NGLvIPO/pOAHR4djcvLRmA=;
+        b=czGYc3sLsUs+o/5uq+ctoCORMUFTRRIRGQ638EAzYT6WN7TBj1SZwOBz0a/2oSVp10
+         89pVVMaq99xorXFYtsTjxo7HjKQZ2Js/Dcmfr0QoInZEtwQWsZdqnAyEJs8NnXSNMOO0
+         e15SKoTKWtuK0R0XWza+iPEGt+dYD8iOAKoGcGNWuXqQDlAWPevIWmsvhBevP+u88j4j
+         vb4Fb1ZYcwLqV8rBLEjG2jwSMXd7r/Mn3HTBRM50PdrSVbU0U/O4CLhE0m9i3Hqpgn3/
+         7jg/L1eyNXrmBprMGJfIVt5CKUzS8i8NsVSvtAMX2Ro7VLf2XmTIa5egxvC874I9euGV
+         CIYQ==
+X-Gm-Message-State: APuU4Z+ofBxddrBrc9o9eUtmVJD0fVaFMfW/QDXJ5nPdxXKfYGMwpFz8
+	sADYkJyRDOE31/Eebpby36UsP8KqQlzj2mJ2706b8+l87rbUIsmNUpy3
+X-Gm-Gg: AZFdTZdpqoZ9+XUevrS+auRcdvek4Tvngft6JDfLN71tM3D5/6/eySw8KJbATMwuWvK
+	GFl7HddG4ksp+Zc8z45WWZhbrf3PbLo6+bN1B/ahieY+Zt2Aes4VT5plBMSdH8nietwejWC1+pu
+	27xyQ5NCektrQ0q493PV7Y0VsRqoqiusBci3/HF3YRHE9o3ZP57B/lauOyCnr6rG3uClxhimNWA
+	AYTrcaoJQIKvFxN3mKIYkJF12HXQMpQNTdQOYwR3EEHiyuy9rLsbFHiPqOy9ZrDZKBRnvXP2FCQ
+	elDZfzUiH7KBJnoL55ZPyOWqYU+HgELo3VGr9WOiqBpV7yqJvQQRJKL9C23a3p0kVR1/+0gaAJY
+	bOalh47chzbdCrqOdoWOoA928pnjt96zNwMsYIhs05hwfkeQUhE+hPtabiZ4HJ8kAe8JeL3ldCf
+	3ZQDStVE1R/hfkbSsrPhzgZQoAUpxzGKToq7QATFkVyUt1OXPNlbPu+H0AeCZOBkWkUZrOKOf3S
+	crt8WI7rYB8HvPVdBw0V7wFZ5ktoIALbOmlt5b4SeJjQlRZpI6wris0WUrCX8NtIvvuScK0XbtQ
+	U8OkJmcDTyDITqP7JtivsRymrG9nDBX5dLdAh838
+X-Received: by 2002:a05:600c:4e02:b0:4a4:4d57:8462 with SMTP id 5b1f17b1804b1-4bb88812b1cmr556620835e9.24.1795880119211;
+        Sat, 28 Nov 2026 07:35:19 -0800 (PST)
+Received: from [192.168.0.15] ([2a02:a312:c59b:a180:251a:f25f:80fa:af1d])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb9067846esm561359015e9.4.2026.11.28.07.35.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 28 Nov 2026 07:35:18 -0800 (PST)
+From: Artur Kowalski <arturkow2000@gmail.com>
+Subject: [PATCH 0/4] ARM: tegra: Fix warm restarts on Tegra20
+Date: Sat, 28 Nov 2026 16:34:56 +0100
+Message-Id: <20261128-t20-soft-reset-v1-0-0db458c5996b@gmail.com>
 X-Mailing-List: mfd@lists.linux.dev
 List-Id: <mfd.lists.linux.dev>
 List-Post: <mailto:mfd@lists.linux.dev>
@@ -79,155 +91,87 @@ List-Unsubscribe: <mailto:mfd+unsubscribe@lists.linux.dev>
 List-Owner: <mailto:mfd+owner@lists.linux.dev>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Fabio Estevam <festevam@gmail.com>, mfd@lists.linux.dev,
- imx@lists.linux.dev, Lee Jones <lee@kernel.org>
-Cc: LKML <linux-kernel@vger.kernel.org>, kernel-janitors@vger.kernel.org,
- Andy Shevchenko <andy@kernel.org>,
- Christophe Jaillet <christophe.jaillet@wanadoo.fr>,
- Frank Li <Frank.Li@nxp.com>, Jonathan Cameron <jic23@kernel.org>,
- Jonathan Cameron <jonathan.cameron@oss.qualcomm.com>
-References: <20261127180709.315826-2-festevam@gmail.com>
-Subject: Re: [PATCH v6 2/2] mfd: mxs-lradc: Convert to devm_clk_get_enabled()
-Content-Language: en-GB, de-DE
-From: Markus Elfring <Markus.Elfring@web.de>
-In-Reply-To: <20261127180709.315826-2-festevam@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:bwtNmz8Uj2iqdZXGTxp2vMKdVBaaeKur2/uzSmerD9wg67O5Y0I
- i9sAEPyD3AjAB8pbOT24moqKg72lpgxNoht148rFnC9QEDAnYF6Ly2RlvjkW9OGZY+2V9aq
- IYtOcfWzz/OX+dttsMOexEYrUFDJbHBE8RfFPVxPcBT5jQyNz4h0dlhEXRD8o+o4QKGqZmh
- QDgIj8cstXqImgkYFjnRg==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:FbvURh1KJ1g=;ZPb6Lg6rdXxggeMmZNVFbNJehHx
- 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
- 8512kBXJHfGZXZar
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAA/yXMQQ6CMBAF0KtM/ppJ2oqE9CrGBdSpDAsgnWJMC
+ Hc36vJt3gGTomKIdKDIS03XBZF8Q0jTsDyF9YFICC503oeea3Bsa65cxKRyHlx/SW5sr9KiIWx
+ Fsr5/4e3+t+3jLKl+F5znB7VTWRZyAAAA
+X-Change-ID: 20261128-t20-soft-reset-fa083c0b45e4
+To: Lee Jones <lee@kernel.org>, Thierry Reding <thierry.reding@kernel.org>, 
+ Jonathan Hunter <jonathanh@nvidia.com>, Hans Verkuil <hverkuil@kernel.org>, 
+ Dmitry Osipenko <digetx@gmail.com>, 
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: mfd@lists.linux.dev, linux-tegra@vger.kernel.org, 
+ Thierry Reding <treding@nvidia.com>, linux-media@vger.kernel.org, 
+ clamor95@gmail.com, Artur Kowalski <arturkow2000@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2489;
+ i=arturkow2000@gmail.com; s=default; h=from:subject:message-id;
+ bh=dU0F1WkbTG8tFNzFBXxX/HgRAHkTJjQlSwyPPAIbYfM=;
+ b=owGbwMvMwCVmYeTc/TaVxZzxtFoSQzbXl/UBP2p+Kpy3rF/9YXNZ3e8iixmz5b98nOivaGb/b
+ 5JvR9jejlIWBjEuBlkxRRazh0JfeOZ5vd/wcmsnzBxWJpAhDFycAjCRD/aMDLs+LZzxss7hRKui
+ 3pyuTSq9LS3/3ynsOPfPWHdJtlVgwFpGhmt7Ty4T0W3/9cbL2pVdJNx1m9NZo10d5yd0PYhasMB
+ xIwMA
+X-Developer-Key: i=arturkow2000@gmail.com; a=openpgp;
+ fpr=F60710C8D69E03A01A2801CD87A47D20C2709637
 
-> The LRADC clock is acquired with a managed helper but enabled and
-> disabled manually.
->=20
-> Acquire the LRADC clock with devm_clk_get_enabled() instead of a bare
-> devm_clk_get() followed by a manual clk_prepare_enable(), so it is
-> prepared/enabled for the device lifetime and released on unbind.
->=20
-> This conversion makes the code simpler.
+On Tegra20 boards with a TPS6586x PMIC, every restart is a cold restart:
+the PMIC restart handler has a higher priority than the PMC one and
+power cycles the whole board, regardless of the configured reboot mode.
+That includes RAM, which makes pstore unreliable, and was the main
+motivation for this series. Testing has also shown that warm reboots
+are more reliable on my TF101: on cold reboots the board tends to just
+power off, which breaks automated kernel build/deploy/reboot loops,
+while with warm reboots (and the latest U-Boot) I haven't observed any
+boot issues.
 
-Is it still required to store the clock object within the data structure?
-https://elixir.bootlin.com/linux/v7.4-rc2/source/include/linux/mfd/mxs-lra=
-dc.h#L150-L164
+This series does three things:
+- it fixes warm reboots on boards with a TPS6586x,
+- it registers the PMC restart handler much earlier, so that kernel
+  panics that happen before the regulator driver is brought up are able
+  to reset the board,
+- it improves the old workaround for the boot ROM hanging on a warm
+  reset, which now also covers emergency restarts. Without it, boards
+  that don't have a PMIC restart handler, and therefore reset through
+  the PMC, hang if the restart was triggered by a panic.
 
-Would a local variable become sufficient after the proposed source code tr=
-ansformation?
-https://elixir.bootlin.com/linux/v7.4-rc2/source/drivers/mfd/mxs-lradc.c#L=
-126-L231
+Patches were created with help of Claude. I've tested them on ASUS
+TF101.
 
-Regards,
-Markus
+---
+Patch 4 is a cleanup of the old workaround, requires patch 3.
+
+To: Lee Jones <lee@kernel.org>
+To: Thierry Reding <thierry.reding@kernel.org>
+To: Jonathan Hunter <jonathanh@nvidia.com>
+To: Hans Verkuil <hverkuil@kernel.org>
+To: Dmitry Osipenko <digetx@gmail.com>
+To: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To: Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: mfd@lists.linux.dev
+Cc: linux-tegra@vger.kernel.org
+Cc: Thierry Reding <treding@nvidia.com>
+Cc: linux-media@vger.kernel.org
+Cc: clamor95@gmail.com
+Signed-off-by: Artur Kowalski <arturkow2000@gmail.com>
+
+---
+Artur Kowalski (4):
+      mfd: tps6586x: Leave warm and soft restarts to other handlers
+      soc/tegra: pmc: Register restart handler from early init on ARM
+      soc/tegra: pmc: Power up VDE partition before restarting Tegra20
+      media: tegra-vde: Drop warm restart workaround
+
+ drivers/media/platform/nvidia/tegra-vde/vde.c | 24 +------
+ drivers/mfd/tps6586x.c                        |  3 +
+ drivers/soc/tegra/pmc.c                       | 99 ++++++++++++++++++++++-----
+ 3 files changed, 86 insertions(+), 40 deletions(-)
+---
+base-commit: 8d7fe9885c62fc9a95bf55d9db244d9672a8aadc
+change-id: 20261128-t20-soft-reset-fa083c0b45e4
+
+Best regards,
+--  
+Artur Kowalski <arturkow2000@gmail.com>
+
